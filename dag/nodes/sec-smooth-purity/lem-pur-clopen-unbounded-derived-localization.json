@@ -1,0 +1,348 @@
+{
+ "id": "lem-pur-clopen-unbounded-derived-localization",
+ "kind": "statement",
+ "title": "Finite-clopen complex equivalence and unbounded derived localization",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a finite set, and $j_i:X_i\\hookrightarrow X$ pairwise disjoint open and closed subschemes covering $X$ [def-weil-open-immersion, def-weil-closed-immersion]. Work on their small pro-etale sites in the fixed universes [def-weil-pbc-proetale-site]. Let $R$ be a sheaf of commutative rings, $R_i=R|_{X_i}$, and let $r_i$, $G$ and $e_i$ be the restriction, sectionwise product gluing, and zero insertion functors of [lem-pur-clopen-ringed-module-gluing] on module sheaves [def-weil-sheaf-of-modules-category].\n\nUse unbounded cochain complexes, quasi-isomorphisms, cohomology and derived localizations $Q_R:\\mathrm{CoCh}(R)\\to D(R)$ and $Q_{R_i}$ as in [def-weil-abstract-derived-category]. Degreewise $r=(r_i)_i$ and $G$ are inverse equivalences on complexes and on homotopy categories. There are natural comparisons $H^m(r_iK)\\cong r_iH^m(K)$ and $H^m(e_iL)\\cong e_iH^m(L)$ for every integer $m$. A complex or chain map is acyclic or a quasi-isomorphism, respectively, if and only if all its restrictions have that property.\n\nDegreewise restriction and gluing induce inverse triangulated equivalences\n$$r_D:D(R)\\simeq\\prod_{i\\in I}D(R_i):G_D,$$\nwith localization comparisons $r_{D,i}Q_R\\cong Q_{R_i}r_i$ and $G_D(\\prod_iQ_{R_i})\\cong Q_RG$. The equivalence unit, counit and their triangle equations are the localizations of the specified module gluing unit and counit, applied degreewise. If $e_{D,i}$ is the localization of $e_i$, then naturally $r_{D,i}e_{D,i}\\cong1$, $r_{D,i}e_{D,j}\\cong0$ for $i\\ne j$, $\\bigoplus_i e_{D,i}r_{D,i}\\cong1$ and $G_D((K_i)_i)\\cong\\bigoplus_i e_{D,i}K_i$. Moreover $H^m(r_{D,i}K)\\cong r_iH^m(K)$ naturally on derived objects and morphisms; the $r_{D,i}$ jointly detect zero objects and isomorphisms.\n\nAn empty component has zero complex and derived categories, the latter equivalent to the category with one object and one arrow. The same holds for a zero coefficient sheaf. If $I=\\varnothing$, then $X=\\varnothing$ and the displayed equivalence is between zero categories.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, derived-lemma-right-derived-exact-functor; Tag 05RU, derived-definition-unbounded-derived-category. Agent finite-clopen localization argument: returned item steps 1-3 and the zero-category part of step 12."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Restriction preserves finite limits by comparison with precomposition of underlying presheaves, and finite colimits by the map/pullback module pushforward adjunction. Package the fully specified sectionwise gluing equivalence with its original unit and counit in FixedEquivalence, fixing the forward tuple functor. Construct insertion by coordinate zero insertion followed by this gluing functor. Its diagonal restriction is naturally the identity by the module counit; its off-diagonal restrictions are zero. Faithfulness of tuple restriction proves insertion additive; the exact-short-complex detector of lem-pur-clopen-ringed-module-gluing and these coordinate identities prove insertion exact. The package avoids repeatedly unfolding nested choice witnesses.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  },
+  {
+   "text": "Assemble a tuple of cochain complexes into a complex in the product module category, and apply gluing degreewise. Unassemble after degreewise tuple restriction. Naturality of the specified module unit and counit makes their degreewise maps chain maps; the module triangle equations in each degree give both complex triangle equations. A coordinate homotopy equivalence assembles into a homotopy equivalence, and additive gluing preserves it. Localize at homotopy equivalences using the finite product of homotopy quotient functors. The normalized-localized-equivalence helper descends the exact unit and counit via Localization.Adjunction, proves both normalization equations, and inherits both triangles.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  },
+  {
+   "text": "Use the existing exact-functor complex homology comparison for restrictions and insertions. For acyclicity, the short complex at each degree maps to the restricted short complex, so the module exactness detector applies degreewise. For quasi-isomorphisms, conjugate each homology map by its natural comparison and use full faithfulness of the module tuple equivalence to reflect isomorphisms. Thus complex gluing takes tuples of quasi-isomorphisms to quasi-isomorphisms, since its composite with restriction is naturally the identity.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  },
+  {
+   "text": "The finite product P of the component derived localizations is a localization at tuples of quasi-isomorphisms, including the empty product. Use the already defined exact-functor derived restrictions as the forward functor; their factorization isomorphisms assemble into the required comparison with P. Descend degreewise gluing along P using the quasi-isomorphism detection from the preceding step. This gives G_D and its exact localization comparison.",
+   "uses": [
+    "lem-sfb-product-localization",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  },
+  {
+   "text": "Apply normalized_localized_equivalence to these derived localization data. Its proof forms the source adjunction from the specified unit and counit, descends it with Localization.Adjunction, and descends the inverses of the unit and counit by Localization.liftNatIso. Localization.natTrans_ext identifies these isomorphisms with the adjunction maps, yielding precisely the two required normalization equations and both triangle equations. Thus the specified module normalization is preserved.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  },
+  {
+   "text": "Construct the componentwise product shift using ShiftMkCore and its coordinate zero/addition constraints. Give the product category its componentwise zero object and distinguished triangles. The pretriangulated axioms are coordinatewise, with objects and fillers chosen in each coordinate. Each evaluation functor commutes with shifts and preserves distinguished triangles. The tuple of the existing exact-functor derived restrictions is therefore triangulated. Its inverse inherits its coherent shift structure and preservation of distinguished triangles from the equivalence via Triangulated.Adjunction. Its counit compatibility gives the demanded shift normalization; the zero and addition constraints are exactly the componentwise ones. This avoids a separate mapping-cone computation for G_D.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category",
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  },
+  {
+   "text": "Use the adopted source library's proved mapDerivedCategoryHomologyFunctorIso for each restriction. It is natural on all derived morphisms and has the required orientation after inversion. This reuses the already established exact-functor cohomology descent rather than repeating its localization proof.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  },
+  {
+   "text": "The adopted derived-functor composition, natural-isomorphism and identity comparisons descend each diagonal module insertion identity. Off-diagonal derived composites are zero by isZero_mapDerivedCategory_obj because their module functors kill all objects. Compare these derived insertions to explicit coordinate insertions followed by G_D using the derived unit and their coordinate identities. In the functor category construct the coordinate-insertion bicone with identity vertex and prove its finite sum of projection-inclusion composites is the identity, including the empty sum. Whisker by the additive gluing equivalence and transport along the insertion comparisons. The total-identity criterion supplies the two claimed bilimit bicones with exactly the prescribed vertices, without a separate preservation-of-limits theorem.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-sfb-derived-localization-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  },
+  {
+   "text": "Full faithfulness of the derived tuple equivalence detects isomorphisms; faithfulness and coordinate identity-equals-zero detect zero objects. For an empty component, the module-gluing theorem gives a module category equivalent to PUnit, so every module is zero. For zero coefficient sheaves each module section is zero by Module.subsingleton. Every complex over a zero module category is zero degreewise, and every derived object is isomorphic to Q of such a complex by essential surjectivity. Hence the derived category has unique morphisms and is equivalent to PUnit. An empty partition gives X empty by the original covering clause; the product derived category is also zero by empty elimination. No nonempty-index or boundedness hypothesis is used.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 05RU (definition-unbounded-derived-category); explicit finite-product application"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-product-localization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-derived-localization-additive",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F and 05RU; Q8 complete Lean proof of steps 1-9. Uses the fully proved module-gluing equivalence, finite-product localization, normalized adjunction descent, componentwise product shifts and triangles, the adopted exact-derived-functor API, explicit total-identity bicones, and degreewise zero-category arguments. No sorry remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence between module sheaves on a finite clopen partition induces an equivalence of unbounded derived categories with componentwise homology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this constructs the induced functor between the derived categories o\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a finite product of complex categories at quasi-isomorphisms gives the product of the derived categories and preserves cone triangles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] {ι : Type u_2} (c : ComplexShape ι)\\n  [inst_1 : CategoryTheory.Preadditive C] [inst_2 : CategoryTheory.CategoryWithHomology C]\\n  [inst_3 : (HomologicalComplex.quasiIso C c).HasLocalization] [inst_4 : c.QFactorsThroughHomotopy C],\\n  ((Hom\", \"doc\": \"The composition of the quotient functor from the category of chain complexes to the homotopy category and the functor $ Q_h $ to the derived category forms a localization at quasi-isomorphisms. This e\"}\n  {\"name\": \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Qh.IsTriangulated\", \"doc\": \"The homotopy category of integer-indexed cochain complexes in a preadditive category is equipped with a triangulated structure. This means it has a shift functor parameterized by integers and a class \"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Qh.IsLocalization (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The functor $ Q_h $ from the homotopy category of integer-indexed chain complexes to the derived category is a localization with respect to quasi-isomorphisms. This means $ Q_h $ universally inverts q\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this constructs the induced functor between the derived categories o\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.Q\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      {c : ComplexShape ι} →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [inst_3 : (HomologicalComplex.quasiIso C c).HasL\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, CategoryTheory.Equivalence",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Localization'",
+   "date": "2026-10-22",
+   "verdict": "No match: query rejected by Loogle as shown; usable searches below supply the search evidence."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*derived|derived.*clopen|equivalence.*DerivedCategory|DerivedCategory.*equivalence",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"line\": \"237\", \"text\": \"can be promoted to an additive equivalence for any `[HasDerivedCategory C]` instance. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unbounded derived category of a finite product of abelian categories is the product of the derived categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"CategoryTheory.Abelian.has_finite_products\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : CategoryTheory.Abelian C],\\n  CategoryTheory.Limits.HasFiniteProducts C\", \"doc\": \"Every abelian category has finite products, meaning it contains a terminal object and the product of any two objects exists.\"}\n  {\"name\": \"CategoryTheory.Abelian.hasFiniteBiproducts\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \": HasFiniteBiproducts C\", \"doc\": \"Every finite family of objects in an abelian category admits a biproduct (a simultaneous product and coproduct).\"}\n  {\"name\": \"CategoryTheory.NonPreadditiveAbelian.has_finite_products\", \"module\": \"Mathlib.CategoryTheory.Abelian.NonPreadditive\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : CategoryTheory.NonPreadditiveAbelian C],\\n  CategoryTheory.Limits.HasFiniteProducts C\", \"doc\": \"Any non-preadditive abelian category $\\\\mathcal{C}$ has finite products, meaning it contains a terminal object and the product of any two objects exists.\"}\n  {\"name\": \"CategoryTheory.prod\", \"module\": \"Mathlib.CategoryTheory.Products.Basic\", \"type\": \": CategoryStruct.{max v₁ v₂} (C × D)\", \"doc\": \"The product of two categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ forms a category where: objects are pairs $(X, Y)$ with $X \\\\in \\\\mathcal{C}$ and $Y \\\\in \\\\mathcal{D}$; morphisms $(X, Y) \\\\to (X', Y')$ are p\"}\n  {\"name\": \"CategoryTheory.NonPreadditiveAbelian.has_finite_coproducts\", \"module\": \"Mathlib.CategoryTheory.Abelian.NonPreadditive\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : CategoryTheory.NonPreadditiveAbelian C],\\n  CategoryTheory.Limits.HasFiniteCoproducts C\", \"doc\": \"Every non-preadditive abelian category has finite coproducts.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddSubmonoid.IsLocalizationMap\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {N : Type u_2} [AddCommMonoid N] (S : AddSubmonoid M) (f : M → N) : Prop\", \"doc\": \"A predicate characterizing homomorphisms between additive monoids `M` and `N` that form a\\ncommutative triangle with the canonical map from `M` to its localization at `S` and\\nsome isomorphism between `\"}\n  {\"name\": \"Submonoid.IsLocalizationMap\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [CommMonoid M] {N : Type u_2} [CommMonoid N] (S : Submonoid M) (f : M → N) : Prop\", \"doc\": \"A predicate characterizing homomorphisms between monoids `M` and `N` that form a\\ncommutative triangle with the canonical map from `M` to its localization at `S` and\\nsome isomorphism between `N` and th\"}\n  {\"name\": \"AddSubmonoid.isLocalizationMap_top_nat_int\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" : ⊤.IsLocalizationMap Nat.cast\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.isLocalizationMap_id\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {G : Type u_2} [AddCommGroup G] (S : AddSubmonoid G) : S.IsLocalizationMap id\", \"doc\": \"\"}\n  {\"name\": \"Submonoid.isLocalizationMap_id\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {G : Type u_2} [CommGroup G] (S : Submonoid G) : S.IsLocalizationMap id\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.isLocalizationMap_nat_int\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" (S : AddSubmonoid ℕ) (hS : S ≠ ⊥) : S.IsLocalizationMap Nat.cast\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.isLocalizationMap\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {S : AddSubmonoid M} {N : Type u_2} [AddCommMonoid N] (self : S.LocalizationMap N) : S.IsLocalizationMap self.toFun\", \"doc\": \"\"}\n  {\"name\": \"Submonoid.LocalizationMap.isLocalizationMap\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [CommMonoid M] {S : Submonoid M} {N : Type u_2} [CommMonoid N] (self : S.LocalizationMap N) : S.IsLocalizationMap self.toFun\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.IsLocalizationMap.hasUniqueDiv\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {S : AddSubmonoid M} {N : Type u_2} [AddCommMonoid N] {F : Type u_4} [FunLike F M N] [AddHomClass F M N] {f : F} (hf : S.IsLocalizationMap ⇑f) [HasUniqueDiv M] : HasUniqueDiv N\", \"doc\": \"An additive monoid with a localization map of an additive monoid with unique\\ndivisibility has unique divisibility.\"}\n  {\"name\": \"Submonoid.IsLocalizationMap.hasUniqueRoots\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [CommMonoid M] {S : Submonoid M} {N : Type u_2} [CommMonoid N] {F : Type u_4} [FunLike F M N] [MulHomClass F M N] {f : F} (hf : S.IsLocalizationMap ⇑f) [HasUniqueRoots M] : HasUniqueRoots N\", \"doc\": \"A monoid with a localization map of a monoid with unique roots has unique roots.\"}\n  {\"name\": \"AddSubmonoid.isLocalizationMap_iff_bijective\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} {G : Type u_2} {F : Type u_3} [AddCommMonoid M] [AddCommGroup G] {S : AddSubmonoid G} [FunLike F G M] [AddHomClass F G M] {f : F} : S.IsLocalizationMap ⇑f ↔ Function.Bijective ⇑f\", \"doc\": \"\"}\n  {\"name\": \"Submonoid.isLocalizationMap_iff_bijective\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} {G : Type u_2} {F : Type u_3} [CommMonoid M] [CommGroup G] {S : Submonoid G} [FunLike F G M] [MulHomClass F G M] {f : F} : S.IsLocalizationMap ⇑f ↔ Function.Bijective ⇑f\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: general categorical or ordinary module tools only; the finite-clopen comparison with its specified normalization and unbounded assertions is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|mapHomologicalComplexUpToQuasiIso|IsLocalization",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"226\", \"text\": \"    (HomotopyCategory.Plus.quotient (InjectiveObject C)).IsLocalization\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"234\", \"text\": \"instance (L : Plus C ⥤ H) [L.IsLocalization (quasiIso C)] :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"235\", \"text\": \"    (quotient C ⋙ L).IsLocalization (CochainComplex.Plus.quasiIso C) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"236\", \"text\": \"  refine Functor.IsLocalization.comp _ _\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"299\", \"text\": \"      ((L C).functor ⋙ 𝟭 (Plus (InjectiveObject C))).IsLocalization\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"98\", \"text\": \"instance : (Q (C := C)).IsLocalization\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"132\", \"text\": \"instance : Qh.IsLocalization (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"136\", \"text\": \"instance : Qh.IsLocalization (HomotopyCategory.subcategoryAcyclic C).trW := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"16\", \"text\": \"`F.mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"36\", \"text\": \"noncomputable def mapDerivedCategory : DerivedCategory C₁ ⥤ DerivedCategory C₂ :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"37\", \"text\": \"  F.mapHomologicalComplexUpToQuasiIso (ComplexShape.up ℤ)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"39\", \"text\": \"/-- The functor `F.mapDerivedCategory` is induced\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"41\", \"text\": \"noncomputable def mapDerivedCategoryFactors :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"119\", \"text\": \"instance : Qh.IsLocalization (HomotopyCategory.Plus.subcategoryAcyclic C).trW :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"121\", \"text\": \"    (HomotopyCategory.subcategoryAcyclic C)).isLocalization_of_isLocalizedFullyFaithful\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"124\", \"text\": \"instance : Qh.IsLocalization (HomotopyCategory.Plus.quasiIso C) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"61\", \"text\": \"    dsimp% F.mapDerivedCategory.map (triangleOfSESδ hS) =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"62\", \"text\": \"    (F.mapDerivedCategoryFactors.hom.app S.X₃) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"64\", \"text\": \"        (F.mapDerivedCategoryFactors.inv.app S.X₁)⟦1⟧' ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"65\", \"text\": \"          (F.mapDerivedCategory.commShiftIso (1 : ℤ)).inv.app (Q.obj S.X₁) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"67\", \"text\": \"  rw [← cancel_epi (F.mapDerivedCategory.map\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: general categorical or ordinary module tools only; the finite-clopen comparison with its specified normalization and unbounded assertions is additional work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded derived category of sheaves of modules on a finite clopen partition is equivalent to the product of the derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondMod.LocallyConstant.functorIsoDiscrete\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ≅ LightCondensed.discrete (ModuleCat R)\", \"doc\": \"For any ring $ R $, there exists a natural isomorphism between the discrete (constant sheaf) functor and the locally constant module functor in the category of light condensed $ R $-modules. This isom\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ≅ Condensed.discrete (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is a natural isomorphism between the functor assigning to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and \"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"LightCondMod.LocallyConstant.functorIsoDiscreteComponents\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (M : ModuleCat R) → (LightCondensed.discrete (ModuleCat R)).obj M ≅ (LightCondMod.LocallyConstant.functor R).obj M\", \"doc\": \"For any ring $ R $ and left $ R $-module $ M $, the discrete (constant sheaf) functor applied to $ M $ is isomorphic to the locally constant module functor applied to $ M $ in the category of light co\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functorIso\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [inst : CompHausLike.HasExplicitFiniteCoproducts P] →\\n    [inst_1 : CompHausLike.HasExplicitPullbacks P] →\\n      (hs :\\n          ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n            CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n \", \"doc\": \"For any type $X$, there is a natural isomorphism between the presheaf assigning locally constant functions $S \\to X$ on compact Hausdorff-like spaces and the sheaf of continuous maps to the discrete to\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functorIsoDiscreteComponents\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (M : ModuleCat R) → (Condensed.discrete (ModuleCat R)).obj M ≅ (CondensedMod.LocallyConstant.functor R).obj M\", \"doc\": \"For any ring $ R $ and $ R $-module $ M $, the discrete condensed module associated with $ M $ is isomorphic to the condensed module of locally constant functions from the discrete space to $ M $. Thi\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: generic exact-functor and product-category ingredients only; the finite-clopen equivalence and its specified gluing normalization are assembled in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences of abelian categories lift degreewise to complexes homotopy categories and triangulated derived equivalences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"The functor from the homotopy category to the derived category satisfies the lifting condition with respect to quasi-isomorphisms, ensuring compatibility between the homotopy category functor composit\"}\n  {\"name\": \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Qh.IsTriangulated\", \"doc\": \"The homotopy category of integer-indexed cochain complexes in a preadditive category is equipped with a triangulated structure. This means it has a shift functor parameterized by integers and a class \"}\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"Given an additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories is triangulated. This means it commu\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] [inst_4 : CategoryTheory.Preadditive D]\\n  [inst_5 : CategoryTheory.Limits.H\", \"doc\": \"Given an additive functor $ G : C \\to D $ between preadditive categories $ C $ and $ D $, the induced functor between their homotopy categories of integer-indexed cochain complexes is triangulated. Thi\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, there exists a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For any additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories commutes with the integer-parameteriz\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: generic exact-functor and product-category ingredients only; the finite-clopen equivalence and its specified gluing normalization are assembled in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"The functor `DerivedCategory C₁ ⥤ DerivedCategory C₂` induced\\nby an exact functor `F : C₁ ⥤ C₂` between abelian categories.\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryIdIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" (C₁ : Type u_1) [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : (CategoryTheory.Functor.id C₁).mapDerivedCategory ≅ CategoryTheory.Functor.id (DerivedCategory C₁)\", \"doc\": \"The functor `DerivedCategory C₁ ⥤ DerivedCategory C₁` induced by the identity\\nfunctor of `C₁` identifies to the identity functor of the derived category.\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"`DerivedCategory.singleFunctor` commutes with `F` and `F.mapDerivedCategory`.\"}\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {F : CategoryTheory.Functor C₁ C₂} [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.Localization.Lifting DerivedCategory.Q (HomologicalComplex.quasiIso C₁ (ComplexShape.up ℤ)) DerivedCategory.Q (CategoryTheory.Functor.id C₁).mapDerivedCategory\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.NatTrans.mapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {F : CategoryTheory.Functor C₁ C₂} [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"A natural transformation between exact functors between abelian categories\\ninduces a natural transformation between the corresponding induced functors\\non the derived categories.\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.NatTrans.CommShift (CategoryTheory.Functor.mapDerivedCategoryIdIso C₁).hom ℤ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryCompIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {C₃ : Type u_3} [CategoryTheory.Category.{v_3, u_3} C₃] [CategoryTheory.Abelian C₃]\", \"doc\": \"If `F` and `G` are exact functors between abelian categories, the composition\\nof the induced functors on the derived category identifies to the functor\\ninduced by `F ⋙ G`.\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: generic exact-functor and product-category ingredients only; the finite-clopen equivalence and its specified gluing normalization are assembled in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Dd]erived|[Dd]erived.*clopen",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: generic exact-functor and product-category ingredients only; the finite-clopen equivalence and its specified gluing normalization are assembled in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category of a finite product of abelian categories is equivalent to the product of their derived categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.Abelian.has_finite_products\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : CategoryTheory.Abelian C],\\n  CategoryTheory.Limits.HasFiniteProducts C\", \"doc\": \"Every abelian category has finite products, meaning it contains a terminal object and the product of any two objects exists.\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"CategoryTheory.Equivalence.prod\", \"module\": \"Mathlib.CategoryTheory.Products.Basic\", \"type\": \"(E₁ : A ≌ B) (E₂ : C ≌ D) : A × C ≌ B × D\", \"doc\": \"Given categorical equivalences $\\\\mathcal{E}_1: \\\\mathcal{A} \\\\simeq \\\\mathcal{B}$ and $\\\\mathcal{E}_2: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, their product equivalence $\\\\mathcal{E}_1 \\\\times \\\\mathcal{E}_2$ is th\"}\n  {\"name\": \"CategoryTheory.Abelian.hasFiniteBiproducts\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \": HasFiniteBiproducts C\", \"doc\": \"Every finite family of objects in an abelian category admits a biproduct (a simultaneous product and coproduct).\"}\n  {\"name\": \"CategoryTheory.Equivalence.pi\", \"module\": \"Mathlib.CategoryTheory.Pi.Basic\", \"type\": \"(E : ∀ i, C i ≌ D i) : (∀ i, C i) ≌ (∀ i, D i)\", \"doc\": \"Given a family of categorical equivalences $\\\\{C_i \\\\simeq D_i\\\\}_{i \\\\in I}$, this constructs an equivalence between the product categories $\\\\prod_{i \\\\in I} C_i$ and $\\\\prod_{i \\\\in I} D_i$ by taking compo\"}\n  {\"name\": \"CategoryTheory.Equivalence.prod_functor\", \"module\": \"Mathlib.CategoryTheory.Products.Basic\", \"type\": \"∀ {A : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} B]\\n  {C : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} C] {D : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D] (E₁ : A ≌ B) (E₂ : C ≌ D),\\n  (E₁.prod E₂).functor = E₁.f\", \"doc\": \"For any categorical equivalences $\\\\mathcal{E}_1: \\\\mathcal{A} \\\\simeq \\\\mathcal{B}$ and $\\\\mathcal{E}_2: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, the functor component of their product equivalence $\\\\mathcal{E}_1 \"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: generic exact-functor and product-category ingredients only; the finite-clopen equivalence and its specified gluing normalization are assembled in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-product-derived-tensor-calculus",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, via finite-clopen derived decomposition: finite-clopen localization argument: returned item steps 1-3 and the zero-category part of step 12.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-unbounded-derived-localization",
+  "worker": "stage1",
+  "summary": "Proved every complex, homotopy, unbounded localization, normalization, triangulated, cohomology, finite-sum and zero-category clause. Reused existing generic Mathlib leaves and the exact module-gluing node; no new nodes and no statement change. Checked project Lean and both semantic search phrasings; no complete attachment or item-level Mathlib match.",
+  "blueprint": "The final invertibility assertion of def-pur-section-invariant, through finite-clopen derived decomposition and its finite-product tensor calculus: supplies the complex and unbounded derived equivalence, with the originally specified gluing comparisons. Current main-20261015 def-pur-section-invariant has the same section-invariant role.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-40c21a968",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-40c21a968 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged against live and side-live, where the item is still unsplit, and I read all nine steps. I checked every cited statement: the module-gluing node, the abstract derived category, the exact-functor cohomology and factorization leaves, IsLocalization.pi, the localization universal property with clauses 1-3, preservation of limits by equivalences, and additivity and essential surjectivity of Q. I also read Stacks derived.tex 015F (l.5884, 'Details omitted') and 05RU. Every step is correct for unbounded complexes, for arbitrary and zero ring sheaves, for empty components and for I empty. The descent of the unit, counit and triangle identities and the cone signs in step 6 are correct. No new nodes; no duplicate among the DAG's clopen nodes; no cycle (110-node closure); no SGA; the only off-unit citations are Mathlib leaves. One fix in step 6: the product category ∏D(R_i) was given its componentwise shifts and distinguished triangles without saying why that structure is triangulated. Mathlib has no Pi-pretriangulated instance and the DAG has no node for it. I added the elementary verification (TR1-TR4 hold coordinatewise; the existence parts are chosen in the finitely many coordinates) and cited def-weil-triangulated-category in uses and proof_deps. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-pur-clopen-unbounded-derived-localization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenUnboundedDerivedLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.clopen_unbounded_derived_localization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.Modules",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.sheafify",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.locallyBijective",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.hasDerived",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.restriction",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.restrictionAdditive",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.restriction_exact",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.restrictionLimits",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.restrictionColimits",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.complexRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.derivedRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.Components",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.gluing",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.moduleUnit",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.moduleCounit",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.insertion",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.insertion_additive",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.insertion_exact",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.insertionLimits",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.insertionColimits",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.Complexes",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.ComplexComponents",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.complexFamily",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.componentDegree",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.homotopyFamily",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.componentQuotient",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.Derived",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.DerivedComponents",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.componentLocalization",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.derivedFamily",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.derivedInsertion",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.componentShift",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.LocalizationStatement",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.clopen_unbounded_derived_localization",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.CoordinateSums.coordinateTransport",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.CoordinateSums.coordinateInsertion",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.FixedEquivalence",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.FixedEquivalence.inverse",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.FixedEquivalence.unitIso",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.FixedEquivalence.counitIso",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.FixedEquivalence.functor_unitIso_comp",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.FixedEquivalence.ofExists",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.recordedEquivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenUnboundedDerivedLocalization.lean",
+  "statement": "theorem clopen_unbounded_derived_localization : LocalizationStatement.{t, u, v, w} X I Y j hd hc R hcomm",
+  "branch": "newtargets-dag",
+  "by": "Q8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44417fa19",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read node (only lean field differs from side-live; status split, S1 PASS by Q45), full module, report (Worker report + Second reading present), all 7 stmt_deps and the side-live gluing theorem (fully proved, sigma clause fixes G sections/scalars/restrictions/unit/counit, so Classical.choose of G, eta, eps, e is not hollow; insertion index .2x10 .1 = the exists-e clause checked). Hypotheses match the gluing interface, no extra assumptions or universe equalities; HasDerivedCategory.standard. Every clause checked: complex and homotopy inverse equivalences with degreewise unit/counit normalization and triangles; natural H^m comparisons for r_i and e_i; acyclic/qis detection; derived r_D = actual mapDerivedCategory tuple with factor normalization, unit/counit localized and triangles (free comparison isos identify an existential inverse, package unique up to unique iso, not the conjugate tautology); r_D IsTriangulated, gluingShift pinned via the counit plus zero/add coherence, distinguished tuples go to distinguished triangles; insertion isos, bicone sums (empty-safe); derived cohomology; isZero/isIso detection; empty component, zero ring and empty I cases. Sorry'd helpers (restriction_exact, insertion_additive/exact) are true. Docstrings carry 015F/05RU and the blueprint id; statement verbatim; Prop/standard instances only; no namespace clash. Advisory: Mathlib decls from proof_dep-only nodes (mapDerivedCategory, distTriang); parent tensor-calculus module helpers to be re-cited on restatement. No recompile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9baf5",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261024T190732-L-43719",
+  "kind": "interface",
+  "note": "independent cc review: delivered ProEtaleClopenUnboundedDerivedLocalization.lean, node json and 2 change records vs live clone and clopen_ringed_module_gluing spec; LocalizationStatement unchanged; axioms clean; 4 direct importers compiled against the delivered olean (all exit 0)"
+ }
+}

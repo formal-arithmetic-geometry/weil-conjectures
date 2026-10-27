@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-condensed-bounded-stratum-base-change",
+ "kind": "statement",
+ "title": "Bounded exact stratum base change for arbitrary condensed coefficients",
+ "statement": "Let Λ be any commutative condensed ring, with pulled-back coefficient rings on the small pro-etale sites of schemes [sk-def-sfb-module-pushforward-pullback]. Use the exact termwise module functors and actual exchange mates [lem-sfb-condensed-stratum-base-change-calculus]. Both the open immersion and its base change are assumed quasi-compact. Let $h:T'\\to T$, let $j:U\\hookrightarrow T$ be open with closed complement $i:Z\\hookrightarrow T$, and form their fibre products $j':U'\\hookrightarrow T'$ and $i':Z'\\hookrightarrow T'$, with projections $h_U:U'\\to U$ and $h_Z:Z'\\to Z$ [def-pc-fibre-product, def-weil-open-immersion, def-weil-closed-immersion]. For every $N\\in D^b(U,R_U)$ the map\n$$\\beta_N:j'_!h_U^*N\\longrightarrow h^*j_!N$$\nadjoint to $h_U^*N\\cong j'^*h^*j_!N$, using the open adjunction unit and pullback composition, is an isomorphism. For every $N\\in D^b(Z,R_Z)$ the map\n$$\\gamma_N:h^*i_*N\\longrightarrow i'_*h_Z^*N$$\nis an isomorphism; it is the closed adjunction unit followed by $i'^*h^*i_*N\\cong h_Z^*N$. Under the canonical identifications, $j'^*\\beta_N$ and $i'^*\\gamma_N$ are identities, while $i'^*\\beta_N$ and $j'^*\\gamma_N$ are the maps between zero objects.\n\n Both sides are bounded, both actual open units and closed counits are invertible, and the natural isomorphisms have exactly the specified mate as their hom after whiskering by the full bounded inclusion. No constructibility or derived-completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09BN and 09AH; blueprint latest det-lem-int-tensor-pullback.proof.md, Local models"
+ },
+ "stmt_deps": [
+  "lem-sfb-condensed-stratum-base-change-calculus",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Apply the exact unbounded calculus to obtain closed exactness and invertible actual open and closed mates. Restrict them by whiskering with the full bounded inclusion.",
+   "uses": [
+    "lem-sfb-condensed-stratum-base-change-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact-functor homology preserves both cohomological bounds. Supply the actual unit and counit transpose equations from the unbounded calculus. The mixed restrictions are zero by support vanishing and square transport; maps with zero source are uniquely zero.",
+   "uses": [
+    "lem-sfb-condensed-stratum-base-change-calculus",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-stratum-base-change-calculus",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Existing complete stratum proof organized in a separate compilation unit by E1, 2026-10-26; exact homology avoids the total-derived vanishing wrapper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Efficient localization of exact functor adjunctions to derived categories and base change mates",
+   "results": "Adjunction.derived, derivedη_fac_app, derivedε_fac_app; no complete stratum package. Reuse existing exact derived APIs.",
+   "date": "2026-10-26",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoWhiskerLeft_hom\"",
+   "results": "CategoryTheory.Functor.isoWhiskerLeft_hom; structural identity used in composite cancellation.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoWhiskerLeft_hom|isoWhiskerRight_hom; isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint",
+   "results": "Whiskering.lean and existing WeilConjectures module support API; use these for exact mixed vanishing rather than total-derived wrappers.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralBoundedStratumBaseChange",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-bounded-stratum-base-change",
+   "place": "Exact unbounded calculus and bounded restriction of the existing complete proof; performance repair after whole-file optimization still exceeded 60 seconds.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedBoundedStratumBaseChange",
+  "file": "lean/Sheaf/Paper/CondensedBoundedStratumBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.bounded_open_closed_base_change",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.bounded_open_closed_base_change"
+  ],
+  "statement": "theorem bounded_open_closed_base_change\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {U Z T Up Zp Tp : Scheme.{u}}\n    {h : Tp ⟶ T} {j : U ⟶ T} {i : Z ⟶ T}\n    {hU : Up ⟶ U} {jp : Up ⟶ Tp} {hZ : Zp ⟶ Z} {ip : Zp ⟶ Tp}\n    [IsOpenImmersion j] [IsClosedImmersion i] [QuasiCompact j]\n    [IsOpenImmersion jp] [IsClosedImmersion ip] [QuasiCompact jp]\n    (hcomp : Set.range j = (Set.range i)ᶜ)\n    (sqU : IsPullback hU jp j h) (sqZ : IsPullback hZ ip i h) :\n    Exists fun [_hi : PreservesFiniteColimits (CondensedRing.lowerStar Λ i)] ↦\n    Exists fun [_hip : PreservesFiniteColimits (CondensedRing.lowerStar Λ\n            ip)] ↦\n      (∃ beta : DerivedCategory.Bounded.ι ⋙ ((pullback Λ hU) ⋙\n            (openExtension Λ jp)) ≅\n          DerivedCategory.Bounded.ι ⋙ ((openExtension Λ j) ⋙\n            (pullback Λ h)),\n        beta.hom = Functor.whiskerLeft DerivedCategory.Bounded.ι (openMate\n            Λ\n            sqU.toCommSq)) ∧\n      (∃ gamma : DerivedCategory.Bounded.ι ⋙ ((closedDirectImage Λ\n            i) ⋙\n            (pullback Λ h)) ≅\n          DerivedCategory.Bounded.ι ⋙ ((pullback Λ hZ) ⋙\n            (closedDirectImage Λ ip)),\n        gamma.hom = Functor.whiskerLeft DerivedCategory.Bounded.ι (closedMate\n            Λ\n            sqZ.toCommSq)) ∧\n      (∀ N : DerivedCategory.Bounded\n          (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n            (condensedRingObj Λ U)),\n        DerivedCategory.TStructure.t.bounded\n            (((pullback Λ hU) ⋙\n            (openExtension Λ jp)).obj N.obj) ∧\n        DerivedCategory.TStructure.t.bounded\n            (((openExtension Λ j)\n            ⋙ (pullback Λ h)).obj N.obj) ∧\n        IsIso ((openAdjunction Λ jp).unit.app ((pullback\n            Λ hU).obj\n            N.obj)) ∧\n        IsIso ((openAdjunction Λ j).unit.app N.obj) ∧\n        (openAdjunction Λ jp).unit.app\n            ((pullback Λ hU).obj N.obj) ≫\n            (pullback Λ jp).map\n            ((openMate\n            Λ sqU.toCommSq).app N.obj) =\n          (pullback Λ hU).map\n            ((openAdjunction Λ j).unit.app N.obj) ≫\n            (pullbackSquare Λ sqU.toCommSq).hom.app\n            ((openExtension Λ j).obj N.obj) ∧\n        IsZero ((pullback Λ ip).obj\n          (((pullback Λ hU) ⋙\n            (openExtension Λ jp)).obj N.obj)) ∧\n        IsZero ((pullback Λ ip).obj\n          (((openExtension Λ j) ⋙\n            (pullback Λ h)).obj N.obj)) ∧\n        (pullback Λ ip).map\n            ((openMate\n            Λ\n            sqU.toCommSq).app N.obj) = 0) ∧\n      (∀ N : DerivedCategory.Bounded\n          (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n            (condensedRingObj Λ Z)),\n        DerivedCategory.TStructure.t.bounded\n            (((closedDirectImage Λ i) ⋙\n            (pullback Λ h)).obj N.obj) ∧\n        DerivedCategory.TStructure.t.bounded\n            (((pullback Λ hZ) ⋙\n            (closedDirectImage Λ ip)).obj N.obj) ∧\n        IsIso ((closedAdjunction Λ i).counit.app N.obj) ∧\n        IsIso ((closedAdjunction Λ ip).counit.app ((pullback\n            Λ hZ).obj N.obj)) ∧\n        (pullback Λ ip).map\n            ((closedMate\n            Λ sqZ.toCommSq).app N.obj) ≫\n            (closedAdjunction Λ ip).counit.app ((pullback\n            Λ hZ).obj N.obj) =\n          (pullbackSquare Λ sqZ.toCommSq).inv.app\n            ((closedDirectImage Λ i).obj N.obj) ≫\n            (pullback Λ hZ).map\n            ((closedAdjunction Λ i).counit.app N.obj) ∧\n        IsZero ((pullback Λ jp).obj\n          (((closedDirectImage Λ i) ⋙\n            (pullback Λ h)).obj N.obj)) ∧\n        IsZero ((pullback Λ jp).obj\n          (((pullback Λ hZ) ⋙\n            (closedDirectImage Λ ip)).obj N.obj)) ∧\n        (pullback Λ jp).map\n            ((closedMate\n            Λ sqZ.toCommSq).app N.obj) = 0)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbb0c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261026T154342-L-1646958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbb0c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261026T154342-L-1646958",
+  "kind": "interface",
+  "note": "independent cc review: delivered item vs quarantine archive (theorem signatures byte-identical, 8 defs verbatim in the new calculus module and publicly re-exported); new node lean.statements vs Lean; item node proof_deps vs proof; 0 importers"
+ }
+}

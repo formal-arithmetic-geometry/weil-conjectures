@@ -1,0 +1,688 @@
+{
+ "id": "lem-sf-native-weil-scalar-frobenius-counit",
+ "kind": "statement",
+ "title": "Scalar realization of compact support and its invariant Frobenius counit",
+ "statement": "Fix a finite field $k_0$, its algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. For a separated finite-type $k_0$-scheme $T_0$ put $T=T_0\\times_{k_0}k$ and let $g_T$ be geometric Galois Frobenius [def-weil-frobenius-detailed]. Let $R_T$ on the small pro-etale site be the sheaf of continuous $\\Omega$-valued functions taking values locally in a finite extension of $\\mathbf Q_\\ell$ [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Put $\\mathcal A_T=\\operatorname{Mod}(R_T)$ [def-weil-sheaf-of-modules-category], $P_T=g_T^*$, $\\mathcal B_T=\\mathcal A_T^{P_T}$, whose objects are $(M,\\theta:P_TM\\xrightarrow{\\sim}M)$ and arrows intertwine $\\theta$ [def-weil-endofunctor-fixed-pair-category]. Write $U_T$ for the forgetful functor and also its termwise derived functor on ordinary derived categories [def-weil-abstract-derived-category]. Write $\\mathcal C_T\\subset D(\\mathcal A_T)$ for objects with bounded cohomology admitting a finite locally closed stratification with pro-etale locally finite free restrictions, and $\\mathcal W(T_0)=U_T^{-1}(\\mathcal C_T)\\subset D(\\mathcal B_T)$, with full subcategory morphisms. These are the actual native categories of [def-sf-native-weil-derived-framework]. Let $f_0:X_0\\to Y_0$ be separated of finite type between separated finite-type $k_0$-schemes, with geometric fiber $f:X\\to Y$. Choose the native compactification $f_0=p_0j_0$ and its geometric fiber $f=pj$ [def-compact-support-direct-image-detailed].\n\nLet $\\rho_T$ be the scalar-unit-normalized equivalence from the common finite coefficient-field category to $\\mathcal C_T$ in [lem-sf-adic-qbar-constructible-realization]. Use the common-stage functors $F_f=Rf_!$, $G_f=Rf^!$ [def-weil-integral-rational-qbar-compact-support, def-weil-exceptional-inverse-image]. Put $F^c=Rp_*j_!$ on module derived categories. The specified scalar-extension comparison is a natural isomorphism\n$$\\alpha:\\rho_YF_f\\xrightarrow{\\sim}F^c\\rho_X.$$\nFor a finite-stage representative $(E,K_E)$ its component is the composite of $a_{f,E,K}$ in [lem-pur-compact-support-condensed-realization] with that lemma's $E\\to\\Omega$ projection comparison. These components identify on every common-stage arrow, with the identity, extension and shift cocycles and the finite-extension balanced scalar multiplications of $\\rho$. They respect the geometric Frobenius reindexing comparisons. The functor $F^c$ preserves the stated bounded constructible categories.\n\nTransport the common-stage constructible adjunction $F_f\\dashv G_f$ of [lem-sf-constructible-exceptional-adjunction-coefficients] (at $\\Lambda=\\Omega$) through $\\rho$: write $F=\\rho_YF_f\\rho_X^{-1}=F^c|_{\\mathcal C_X}$ using $\\alpha$, and $G=\\rho_XG_f\\rho_Y^{-1}$, with unit $\\eta$ and counit $\\epsilon$. Both preserve bounded constructible objects. Let $P=P_X$, $Q=P_Y$ on these ordinary categories and let $a:QF\\xrightarrow{\\sim}FP$ be the comparison of the actual open/proper functor, transported through $\\alpha$. Its inverse-reindexing comparison is the square for $P^{-1},Q^{-1}$. The mate [def-weil-pbc-adjunction-mate] $b:PG\\to GQ$ of $a^{-1}:FP\\to QF$ is invertible and satisfies\n$$\\epsilon_{QL}F(b_L)=Q(\\epsilon_L)a_{GL}^{-1}.$$\nFor every $L^{\\mathrm W}\\in\\mathcal W(Y_0)$ put $N=G(U_YL^{\\mathrm W})$ and $v=G(\\theta_{L^{\\mathrm W}})b_{U_YL^{\\mathrm W}}:PN\\xrightarrow{\\sim}N$. Then the ordinary counit satisfies the explicit invariance identity\n$$\\epsilon_{U_YL^{\\mathrm W}}F(v)a_N=\\theta_{L^{\\mathrm W}}Q(\\epsilon_{U_YL^{\\mathrm W}}).$$\nThis uses the ordinary constructible adjunction and the normalized scalar comparison only; no right adjoint on an unrestricted ambient category is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Old proof Steps 3–4: common-stage scalar normalization, constructible adjunction and the explicit invariant mate counit. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-sf-native-weil-derived-framework",
+  "def-compact-support-direct-image-detailed",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-pur-compact-support-condensed-realization",
+  "def-weil-pbc-adjunction-mate",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-sf-native-weil-scalar-counit-categories",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-frobenius-square-exchange",
+  "def-sf-native-weil-scalar-counit-data"
+ ],
+ "proof": [
+  {
+   "text": "The finite-span and finite-subextension coefficient sheaves agree: a finite-dimensional $\\mathbf Q_\\ell$-span of algebraic elements lies in the field generated by a basis, a finite extension; the converse is immediate. Use [lem-sf-finite-span-module-derived-comparison] for the resulting coefficient isomorphism and its precomposition actions. It identifies the internal-module and sectionwise-module proper derived images, including their adjunctions. The open comparison is [lem-sfb-internal-module-operations-transport]: both open extensions are the sheafification of the same extension-by-zero presheaf. Exactness of that extension [lem-pur-site-restriction-module-adjunction-exact] means that applying it termwise is its derived functor. Therefore the $P_\\Omega^c=Rp_{*,\\Omega}j_{!,\\Omega}$ occurring in the condensed realization is exactly the functor $F^c$ in the assertion under these specified comparisons, also on morphisms.",
+   "uses": [
+    "lem-sf-finite-span-module-derived-comparison",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; identify the actual coefficient ring and proper/open module functor."
+   }
+  },
+  {
+   "text": "For a finite-stage representative $(E,K_E)$ choose its integral object representative $K$, with valuation ring $R$, uniformizer $t$ and reductions $A_n=R/t^n$. By [lem-weil-compact-support-reduction-tower-functor] the actual strict tower $\\mathcal T_f^c(K)$ has the levels $\\operatorname{Res}_nRp_{*,n}j_!K_n$ and the quotient/restriction transition maps specified in [def-weil-integral-rational-qbar-compact-support]. Thus the integral $F_fK$ is exactly $P_RK=R\\lim\\mathcal T_f^c(K)$, and $F_f(E,K_E)=(E,(P_RK)[1/t])$. The identification is of the strict diagram and its functor, not an inference from equal derived evaluations.",
+   "uses": [
+    "lem-weil-compact-support-reduction-tower-functor",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; identify common-stage compact support with the specified strict reduction-tower construction."
+   }
+  },
+  {
+   "text": "We check the domain needed for the factor-normalization statement below. The integral representative $K$ of Step 2 is an object of $D^b_c(X,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed]; for a separated finite-type $k$-scheme these are exactly the objects of the complete integral category $\\mathcal I_X(R)$ of [def-weil-pbc-bounded-constructible-complete], with the same completed coefficient sheaf and reductions [lem-pur-rational-lattice-adic-domain], so $K$ is an admissible input of the realization and normalization lemmas. $X,Z,Y$ are separated finite-type $k$-schemes, where $Z$ is the chosen compactification. They are noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied over $\\operatorname{Spec}k$ (a field has only the ideals $0,k$), and have finite dimension by [lem-kun-dimension-finite-type]. Apply [lem-cbc-integral-compact-support-uniform-restriction] first to the open $j$ with compactification $(j,1_Z)$ and then to proper $p$ with $(1_Z,p)$. It puts $j_{!,B}K$ and $P_R^0K=Rp_{*,B}j_{!,B}K$ in the complete uniform integral categories, including their compatible etale-origin witnesses. $P_RK$ belongs to the same category by [lem-pur-compact-support-condensed-realization]. Apply [lem-pur-integral-reduction-uniform-tor] on each of $X,Z,Y$ to the finite list of these objects occurring there. Taking the minimum of their lower bounds and maximum of their upper bounds gives common finite cohomological and Tor bounds. Reindexing carries their local models and witnesses to the same relabeled models. These verify all input and intermediate hypotheses of the normalization lemma; they are not an assumption that ordinary ringed proper image equals strict-tower proper image.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-cbc-integral-compact-support-uniform-restriction",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-integral-reduction-uniform-tor",
+    "lem-pur-rational-lattice-adic-domain",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; verify complete integral, etale-origin and uniform amplitude domains of the specified factor comparisons."
+   }
+  },
+  {
+   "text": "Use [lem-zl-compact-support-realization-factor-normalization], whose hypotheses were checked in Step 3. Write $r_W\\dashv L_W$ for reduction and total limit, $V=S_pJ_j$ for the semilinear-system proper/open functor, and $u$ for the reduction/limit unit. It specifies a system map $b_K:r_Y(P_R^0K)\\to V(r_XK)$, obtained from the proper coefficient counit mate followed by the unit-normalized open scalar map, and fixes\n$$q_K=L_Y(b_K)u_{P_R^0K}:P_R^0K\\xrightarrow{\\sim}P_RK.$$\nWith $J_W$ the continuous $E$-coefficient realization, its exact factor formulas are\n$$a_{f,E,K}=Rp_{*,E}(\\delta_j^J)\\,\\chi_p^J\\,J_Y(q_K^{-1}[1/t]),\\qquad\n\\xi_{f,E,D}=Rp_{*,D}(\\delta_j^{E,D})\\,\\pi_p^{E,D}.$$\nHere $D=\\Omega$ or a finite extension, $\\chi_p^J$ is the counit-compatible direct-image comparison of $J$, and $\\pi_p^{E,D}$ is the transpose of the specified pullback/tensor balancing followed by the extended proper counit. These are the actual specified comparisons, including the integral coordinate change $q_K^{-1}$.",
+   "uses": [
+    "lem-zl-compact-support-realization-factor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; expand every factor of the specified scalar comparison, including its integral coordinate change."
+   }
+  },
+  {
+   "text": "Put $T_W=\\Omega_W^c\\otimes^L_{E_W^c}-$ and identify $\\rho_W(E,K_E)=T_WJ_WK_E$ using [lem-sf-adic-qbar-constructible-realization]. Define the finite-stage component\n$$\\alpha_{(E,K_E)}=\\xi_{f,E,\\Omega,J_XK_E}\\,T_Y(a_{f,E,K}).$$\nIts factors are isomorphisms by [lem-pur-compact-support-condensed-realization]. That statement also supplies naturality on rational morphisms, the mixed finite-extension compatibility with $a$, and identity, extension-tower and shift coherences. For a common-stage arrow choose a common finite field $H$ as in [def-weil-algebraically-closed-coefficients]; over $H$ the naturality square for this composite commutes. A different representative becomes the same arrow over a further common field, so the mixed square makes the components and their naturality independent of the representative. Balanced tensor multiplication is exactly the scalar comparison of $\\rho$. Consequently the identity, extension and shift equations descend as equalities of natural transformations. This constructs $\\alpha:\\rho_YF_f\\simeq F^c\\rho_X$, using the functor identifications of Steps 1--2.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-pur-compact-support-condensed-realization",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; descend the specified components and all scalar cocycles on common-stage morphisms."
+   }
+  },
+  {
+   "text": "Fix the Frobenius square of the chosen $k_0$-compactification. Its three geometric Frobenii are scheme isomorphisms and the proper and open squares commute and are Cartesian [lem-weil-frobenius-square-cartesian]. Write $H_W=g_W^{-1}$ on completed modules and $H_W^\\bullet$ on coefficient systems. The specified completed pullbacks identify with $H_W$ by [lem-pur-isomorphism-completed-reduction-reindexing]. Use the comparisons\n$$t_W:r_WH_W\\xrightarrow{\\sim}H_W^\\bullet r_W,\\qquad\n\\lambda_W:H_WL_W\\xrightarrow{\\sim}L_WH_W^\\bullet.$$\nBy [lem-pod-reindexing-completion-unit-tensor] they preserve the actual reduction/limit units and counits, quotient arrows and total-limit projections. In particular\n$$L_W(t_{W,M})u_{H_WM}=\\lambda_{W,r_WM}H_W(u_M).$$\nAll maps in this equation are whole-system comparisons before taking any evaluated reduction.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "lem-pur-isomorphism-completed-reduction-reindexing",
+    "lem-pod-reindexing-completion-unit-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; fix semilinear reindexing and its actual reduction/limit adjunction normalization."
+   }
+  },
+  {
+   "text": "We also need reindexing of the finite-field realization $J$, separately from $\\rho$. Its definition in [lem-weil-pbc-condensed-e-realization] is derived coefficient extension $E_W^c\\otimes^L_{B_W}-$ after rationalization. On a flat-term K-flat representative, reindexing preserves this tensor: the coefficient identifications carry a relabeled $x\\otimes c$ to the same $x\\otimes c$. [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies the canonical derived balancing and preservation of such representatives. Together with the specified completed pullback identification in Step 6 this gives $J_WH_W\\simeq H_{W,E}J_W$ on raw rationalizations, even though $g_W$ is not $k$-linear. The same calculation gives $T_WH_{W,E}\\simeq H_{W,\\Omega}T_W$. For a composite coefficient/pullback square both routes send $(x\\otimes c)\\otimes d$ to the relabeled $x\\otimes cd$; associativity and the coefficient unit give identity and composition equations. Their composite for $T_WJ_W$ is exactly $b_{g_W}$ of [lem-sf-adic-realization-isomorphism-normalization], which fixes the same quotient cocones and balanced tensor maps. This verifies the left-hand faces of the mate cubes at $E$ and $\\Omega$, rather than obtaining the $E$ comparison from an assertion only about $\\rho$.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-adic-realization-isomorphism-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; construct and normalize finite-field and algebraically closed scalar pullback comparisons along semilinear isomorphisms."
+   }
+  },
+  {
+   "text": "The proper coefficient comparisons commute with these reindexings by taking their specified transposes. For a coefficient extension $S_A^D$, the proper map $S_YRp_{*,A}\\to Rp_{*,D}S_Z$ is adjunct to $S_Z(\\varepsilon_{p,A})\\mu$, with $\\mu$ the pullback/tensor balancing [lem-pur-ringed-coefficient-projection-cocycle]. Reindexing that transpose and using Step 7 gives the identical balanced pullback map followed by the reindexed counit. The geometric square comparison itself has transpose the reindexed proper counit: at completed coefficients and on towers this is [lem-pur-isomorphism-completed-reduction-reindexing]. At the other coefficient rings it follows directly from the site equivalence of [lem-weil-proetale-isomorphism-inverse-image]: both underived direct images evaluate a sheaf on $Z\\times_YV$, with the same coefficient action; the exact equivalence and its inverse preserve injectives, so the identity derives with its counit. Pasting these faces and applying the mate bijection gives equality of the two proper coefficient routes [lem-weil-pbc-mate-pasting]. The same argument applies to $\\chi_p^J$, since [lem-weil-pbc-condensed-e-realization] identifies its actual adjunction counits and its pullback comparison is the balanced one in Step 7. It also applies to $\\pi_p^{E,\\Omega}$ by Step 4's transpose formula. No identification with the different common-stage comparison $b_p:\\rho_YRp_*\\to Rp_{*,B}\\rho_Z$ is used.",
+   "uses": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-isomorphism-completed-reduction-reindexing",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-condensed-e-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; proper coefficient/reindexing mate cubes at completed, finite-field and algebraically closed coefficients."
+   }
+  },
+  {
+   "text": "For open extension, [lem-sf-open-tensor-normalization] characterizes the inverse of each scalar or geometric open comparison as the open-adjunction transpose of the open unit. Under the coefficient and reindexing comparisons of Step 7, restricting either route to the open gives the identity on the same balanced tensor. Thus their adjuncts coincide, proving the open coefficient/reindexing squares for $\\delta_j^J$ and $\\delta_j^{E,D}$. The statement applies also to ringed diagram sites with arbitrary strict coefficient transitions. Applying the same reasoning there proves the open-system square. This argument uses the unit normalization, not merely existence of an open comparison isomorphism.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; open factors commute with reindexing by their specified unit transposes."
+   }
+  },
+  {
+   "text": "Apply Steps 8--9 to the ring-system map $\\Delta B\\to(A_n)_n$ defining $b_K$. The simultaneous operations and adjunctions exist on the derived category of systems by [lem-coef-semilinear-derived-sections]; the coefficient projection identities of [lem-pur-ringed-coefficient-projection-cocycle] hold there before evaluation. Write $c^0:H_YP_R^0\\simeq P_R^0H_X$ for the ordinary completed proper/open reindexing, and $e:H_Y^\\bullet V\\simeq VH_X^\\bullet$ for the system mate followed by open exchange. The factor definition of $b_K$ in [lem-zl-compact-support-realization-factor-normalization] and the two commuting factor squares give the typed system equation\n$$e_{r_XK}\\,H_Y^\\bullet(b_K)\\,t_{Y,P_R^0K}\n=V(t_{X,K})\\,b_{H_XK}\\,r_Y(c^0_K).$$\nIts source is $r_YH_YP_R^0K$ and target $VH_X^\\bullet r_XK$. This is obtained by pasting actual derived-system mate transformations, rather than deduced from their individual evaluations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-zl-compact-support-realization-factor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; establish the reduction-projection Frobenius equation on entire semilinear systems."
+   }
+  },
+  {
+   "text": "Now retain the $q_K$ factor. Under $P_R=L_YVr_X$ set\n$$c^R_K=(L_YV(t_{X,K}))^{-1}L_Y(e_{r_XK})\\lambda_{Y,Vr_XK}:H_YP_RK\\to P_RH_XK.$$\nThis is the specified integral compact-support Frobenius exchange: [def-weil-frobenius-square-exchange] defines it by these operation comparisons and the whole system map $e$, and [lem-weil-frobenius-system-exchange-inverse] gives its inverse as the total limit of the inverse system exchange with the inverse operation comparisons. Using $q_K=L_Y(b_K)u$, naturality of $\\lambda$, the unit identity of Step 6 and the equation of Step 10 yields\n$$\\begin{aligned}\nc^R_KH_Y(q_K)\n&=(L_YVt_X)^{-1}L_Y(e\\,H_Y^\\bullet b_K)\\lambda H_Y(u_{P_R^0K})\\\\\n&=(L_YVt_X)^{-1}L_Y(e\\,H_Y^\\bullet b_K\\,t_Y)u_{H_YP_R^0K}\\\\\n&=L_Y(b_{H_XK})L_Yr_Y(c^0_K)u_{H_YP_R^0K}\\\\\n&=q_{H_XK}c^0_K.\n\\end{aligned}$$\nThe last equality is naturality of the actual unit of $r_Y\\dashv L_Y$ [lem-coef-derived-system-evaluation-calculus]. Thus $q$ and $q^{-1}$ intertwine the specified strict-tower exchange and the ordinary completed proper/open comparison. Rationalizing this identity is legitimate on the integral representatives. No equality of integral morphisms is inferred from equality of reductions.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "lem-weil-frobenius-system-exchange-inverse",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; prove equivariance of the integral coordinate change by the full reduction/limit unit calculation."
+   }
+  },
+  {
+   "text": "Paste Step 11 with the proper and open squares of Steps 8--9 in the exact factor formulas of Step 4. This proves reindexing compatibility of $a_{f,E,K}$ and $\\xi_{f,E,\\Omega}$, hence of their composite $\\alpha$. To spell out its type, let $P_s,Q_s$ be common-stage Frobenius pullbacks, and $e^s:Q_sF_f\\simeq F_fP_s$ be the specified exchange of [def-weil-frobenius-square-exchange]. Its integral representative is exactly the exchange in Step 11, and its common-stage image is the ordered reindexing exchange by [lem-pur-weil-semilinear-exchange-reindexing]. Put $d_X= b_{g_X}:\\rho_XP_s\\simeq P\\rho_X$ and $d_Y=b_{g_Y}:\\rho_YQ_s\\simeq Q\\rho_Y$ from [lem-sf-adic-realization-isomorphism-normalization], and let $a^c:QF^c\\simeq F^cP$ be the actual module proper/open comparison. The pasted equality is\n$$a^c_{\\rho_XK}\\,Q(\\alpha_K)\\,d_{Y,F_fK}\n=F^c(d_{X,K})\\,\\alpha_{P_sK}\\,\\rho_Y(e^s_K).$$\nBoth sides go from $\\rho_YQ_sF_fK$ to $F^cP\\rho_XK$. Step 5 descends this equation on every common-stage arrow. This explicitly compares both specified exchanges, not just the objects they act on.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "lem-pur-weil-semilinear-exchange-reindexing",
+    "lem-sf-adic-realization-isomorphism-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; state and prove the fully typed Frobenius square for the specified alpha."
+   }
+  },
+  {
+   "text": "By [lem-sf-adic-qbar-constructible-realization], every $M\\in\\mathcal C_X$ is isomorphic to some $\\rho_XK$. Then $F^cM\\simeq F^c\\rho_XK\\simeq\\rho_YF_fK$ is in $\\mathcal C_Y$, by the bounded constructible output of [lem-pur-compact-support-condensed-realization]. Thus $F^c$ preserves the entire stated subcategory. The inverse geometric isomorphisms give inverses to $P,Q$; they preserve boundedness and locally finite free strata by relabeling the same strata. The identity and composition laws in [lem-sf-adic-realization-isomorphism-normalization] and [lem-pur-weil-semilinear-exchange-reindexing] identify the comparison for the inverse reindexing with the square for $P^{-1},Q^{-1}$. The comparison transported using $\\alpha$ in Step 12 is precisely $a^c$ restricted to these ordinary constructible categories.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; preservation and inverse-reindexing compatibility on the ordinary constructible categories."
+   }
+  },
+  {
+   "text": "At $\\Omega$, $D^b_{ctf}=D^b_c$ by the field-stage definition in [def-weil-finite-tor-amplitude]. Hence [lem-sf-constructible-exceptional-adjunction-coefficients] applies to the entire common-stage categories used by $\\rho$. Choose quasi-inverses $s_T$ to $\\rho_T$. Full faithfulness, $\\alpha$ and that adjunction give the natural Hom bijections\n$$\\operatorname{Hom}_{\\mathcal C_Y}(F^cM,L)\n\\cong\\operatorname{Hom}(F_fs_XM,s_YL)\n\\cong\\operatorname{Hom}(s_XM,G_fs_YL)\n\\cong\\operatorname{Hom}_{\\mathcal C_X}(M,\\rho_XG_fs_YL).$$\nApply [lem-weil-pbc-adjunction-of-natural-bijection]: the images of identity arrows define $\\eta,\\epsilon$ with both triangle identities. This is the stipulated transported adjunction with $F=F^c|_{\\mathcal C_X}$ and $G=\\rho_XG_fs_Y$. Its functors preserve bounded constructible objects by that coefficient-adjunction statement and the realization equivalences. Only these constructible Hom sets were used.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; transport the given constructible adjunction through rho, with its actual unit and counit."
+   }
+  },
+  {
+   "text": "For $a^{-1}:FP\\xrightarrow{\\sim}QF$, [def-weil-pbc-adjunction-mate] gives\n$$b_L:PG L\\xrightarrow{\\eta_{PGL}}GFPG L\\xrightarrow{G(a^{-1}_{GL})}GQFG L\\xrightarrow{GQ(\\epsilon_L)}GQL.$$\nApply [lem-weil-mate-iso-along-equivalences] with $L=L'=F$, $R=R'=G$, source-side functor $P$, target-side functor $Q$, and square $a^{-1}$. Step 13 makes $P$ an equivalence and $Q$ fully faithful on these exact ordinary constructible categories, so $b$ is invertible. This checks the side-functor hypotheses required for invertibility of a mate.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; invertibility of the Frobenius mate on the transported constructible adjunction."
+   }
+  },
+  {
+   "text": "Apply [lem-amb-mate-unit-counit] to the same two adjunctions and the square $a^{-1}$. Its counit identity reads\n$$\\epsilon_{QL}F(b_L)=Q(\\epsilon_L)a^{-1}_{GL},$$\nwith both sides $FPGL\\to QL$. The counit is the one transported in Step 14, because that is the adjunction used when taking the mate.",
+   "uses": [
+    "lem-amb-mate-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; the explicit counit transpose formula, including the direction of the inverse square."
+   }
+  },
+  {
+   "text": "Let $L^{\\mathrm W}\\in\\mathcal W(Y_0)$ and $L=U_YL^{\\mathrm W}$. Represent it by a complex of fixed pairs from [def-sf-native-weil-derived-framework]. Its termwise structure maps commute with the differential, giving an invertible chain map $Q(U_YL^\\bullet)\\to U_YL^\\bullet$. Exact termwise forgetting descends to ordinary derived categories by [lem-sf-weil-frobenius-action-resolutions], so this is the specified $\\theta:QL\\simeq L$, natural under quasi-isomorphisms. Put $N=GL$ and $v=G(\\theta)b_L:PN\\simeq N$. Its factors are invertible. Counit naturality for $\\theta:QL\\to L$ and Step 16 give\n$$\\begin{aligned}\n\\epsilon_LF(v)a_N\n&=\\epsilon_LFG(\\theta)F(b_L)a_{GL}\\\\\n&=\\theta\\epsilon_{QL}F(b_L)a_{GL}\\\\\n&=\\theta Q(\\epsilon_L)a^{-1}_{GL}a_{GL}\n=\\theta Q(\\epsilon_L).\n\\end{aligned}$$\nBoth sides are $QFGL\\to L$. This uses a structure map on the underlying derived object of an actual complex of fixed pairs, without identifying its derived category with fixed pairs in an ordinary derived category.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-weil-frobenius-action-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final paragraph; calculate the invariant counit for the actual native Weil derived input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-amb-mate-unit-counit",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-kun-dimension-finite-type",
+  "lem-pod-reindexing-completion-unit-tensor",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-integral-reduction-uniform-tor",
+  "lem-pur-isomorphism-completed-reduction-reindexing",
+  "lem-pur-rational-lattice-adic-domain",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-weil-semilinear-exchange-reindexing",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-adic-realization-isomorphism-normalization",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-finite-span-module-derived-comparison",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-frobenius-system-exchange-inverse",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-zl-compact-support-realization-factor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final paragraph, scalar tensor/counit comparisons and exceptional-adjunction assertion; expanded by the specified integral factor and whole-system Frobenius calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension realization of constructible compact support with Frobenius mate on exceptional adjoint and invariant counit",
+   "results": {
+    "t": "2026-10-22T07:05:59Z",
+    "tool": "leanfinder",
+    "query": "Scalar extension realization of constructible compact support with Frobenius mate on exceptional adjoint and invariant counit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteSolidCounit",
+     "Condensed.profiniteSolidification",
+     "ModuleCat.ExtendRestrictScalarsAdj.unit",
+     "CategoryTheory.ExponentiableMorphism.coev_ev",
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+     "ModuleCat.ExtendRestrictScalarsAdj.counit",
+     "LightCondensed.ihomPoints_symm_comp",
+     "CondensedMod.LocallyConstant.adjunction"
+    ],
+    "digest": "b4b8ec3568605eb4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": {
+    "t": "2026-10-22T07:07:13Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "CategoryTheory.Equivalence.toAdjunction",
+     "CategoryTheory.Equivalence.toAdjunction'",
+     "CategoryTheory.Equivalence.trans_toAdjunction",
+     "CategoryTheory.Adjunction.toEquivalence",
+     "CategoryTheory.Equivalence.transportSheafificationAdjunction",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv"
+    ],
+    "digest": "e0228ac4463035e1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*[Cc]ounit|[Cc]ounit.*Frobenius|compactSupport.*realiz",
+   "results": {
+    "t": "2026-10-22T07:11:24Z",
+    "tool": "grep",
+    "query": "Frobenius.*[Cc]ounit|[Cc]ounit.*Frobenius|compactSupport.*realiz",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common finite coefficient field realization preserves compact support adjunction and the Frobenius mate counit",
+   "results": {
+    "t": "2026-10-22T07:11:24Z",
+    "tool": "leansearch",
+    "query": "Common finite coefficient field realization preserves compact support adjunction and the Frobenius mate counit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FiniteField.frobeniusAlgEquiv",
+     "Pi.counit_coe_dFinsupp",
+     "CompHausLike.LocallyConstant.counit_app_val",
+     "ModuleCat.RestrictionCoextensionAdj.counit'",
+     "FiniteField.coe_frobeniusAlgHom",
+     "FiniteField.frobeniusAlgHom",
+     "CompHausLike.LocallyConstant.counit",
+     "CompHausLike.LocallyConstant.counitApp"
+    ],
+    "digest": "819d06a6fddd0e3c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar realization of constructible compact support through finite coefficient fields with geometric Frobenius invariant adjunction counit",
+   "results": {
+    "t": "2026-10-24T03:48:14Z",
+    "tool": "leanfinder",
+    "query": "Scalar realization of constructible compact support through finite coefficient fields with geometric Frobenius invariant adjunction counit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompHausLike.LocallyConstant.adjunction_counit",
+     "Condensed.profiniteSolidCounit",
+     "PrimeSpectrum.BasicConstructibleSetData.g",
+     "CompHausLike.LocallyConstant.counit",
+     "CompHausLike.LocallyConstant.incl_of_counitAppApp",
+     "CompHausLike.LocallyConstant.counitAppApp",
+     "ChevalleyThm.chevalley_polynomialC",
+     "ChevalleyThm.chevalley_mvPolynomialC"
+    ],
+    "digest": "658f74e41ba626c7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern generic adjunctions, condensed counits, finite-field automorphisms or intermediate-field scalar extension, not the specified constructible adic compact-support realization with its Frobenius and exceptional counit clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": {
+    "t": "2026-10-24T03:48:56Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "CategoryTheory.Equivalence.toAdjunction",
+     "CategoryTheory.Equivalence.toAdjunction'",
+     "CategoryTheory.Equivalence.trans_toAdjunction",
+     "CategoryTheory.Adjunction.toEquivalence",
+     "CategoryTheory.Equivalence.transportSheafificationAdjunction",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv"
+    ],
+    "digest": "e0228ac4463035e1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern generic adjunctions, condensed counits, finite-field automorphisms or intermediate-field scalar extension, not the specified constructible adic compact-support realization with its Frobenius and exceptional counit clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*[Cc]ounit|[Cc]ounit.*Frobenius|compactSupport.*realiz",
+   "results": {
+    "t": "2026-10-24T03:49:22Z",
+    "tool": "grep",
+    "query": "Frobenius.*[Cc]ounit|[Cc]ounit.*Frobenius|compactSupport.*realiz",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern generic adjunctions, condensed counits, finite-field automorphisms or intermediate-field scalar extension, not the specified constructible adic compact-support realization with its Frobenius and exceptional counit clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension from finite adic fields intertwines constructible compact support and geometric Frobenius pullback",
+   "results": {
+    "t": "2026-10-24T03:49:22Z",
+    "tool": "leansearch",
+    "query": "Scalar extension from finite adic fields intertwines constructible compact support and geometric Frobenius pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicComplex.instIsScalarTowerPadicPadicAlgCl",
+     "IntermediateField.extendScalars",
+     "IntermediateField.extendScalars.congr_simp",
+     "IntermediateField.extendScalars.orderIso",
+     "FiniteField.Extension.frob",
+     "Subfield.extendScalars.congr_simp",
+     "IntermediateField.extendScalars.orderIso_apply",
+     "Subfield.coe_extendScalars"
+    ],
+    "digest": "d10e4e2e1b2e131a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern generic adjunctions, condensed counits, finite-field automorphisms or intermediate-field scalar extension, not the specified constructible adic compact-support realization with its Frobenius and exceptional counit clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism intertwining a left adjoint with autoequivalences has an invertible right mate and an equivariant counit",
+   "results": {
+    "t": "2026-10-24T03:50:08Z",
+    "tool": "leanfinder",
+    "query": "Natural isomorphism intertwining a left adjoint with autoequivalences has an invertible right mate and an equivariant counit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.mateEquiv_apply",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_symm_apply",
+     "CategoryTheory.conjugateEquiv_counit_symm"
+    ],
+    "digest": "e3e8f463253711eb"
+   },
+   "date": "2026-10-24",
+   "verdict": "partial match: generic mate/counit identities, including CategoryTheory.mateEquiv_counit in Mathlib/CategoryTheory/Adjunction/Mates.lean:123--125, are already represented by lem-amb-mate-unit-counit; no whole-item specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-exceptional-forgetful",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Old proof Steps 3–4: common-stage scalar normalization, constructible adjunction and the explicit invariant mate counit. Supplied provenance: exceptional-adjunction final sentence of cor-coef-verdier-weil-equivariance.proof.md; blueprint_refs ancestor is None.",
+   "via": [
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-native-weil-scalar-frobenius-counit",
+  "worker": "stage1",
+  "summary": "Split into 17 steps, using existing nodes only. Identified actual module and strict-tower compact supports, descended specified scalar components, verified the normalization domain, calculated Frobenius compatibility of the full q_c integral coordinate change before total limit, typed the alpha Frobenius square, and transported the constructible adjunction and calculated its mate counit. Statement and statement dependencies unchanged.",
+  "blueprint": "blueprint_refs ancestor is None, so the existing null ancestor and via chain are retained. Latest cor-coef-verdier-weil-equivariance.proof.md final paragraph is the supplied ancestor place: Steps 1--13 expand its scalar tensor/counit assertion, and Steps 14--17 expand its exceptional-adjunction assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-compact-support-realization-factor-normalization",
+    "why": "Only the specified coefficient-realization factor formulas q, a and xi are used, with their full domain checked; it asserts no trace or Frobenius conclusion and does not use an assumption leaf. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-sf-finite-span-module-derived-comparison",
+    "why": "Generic equivalence of coefficient/module presentations with the actual derived adjunction, not a biduality argument. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic module encoding and normalized open adjunction comparison. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact open extension on a localized ringed site. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic noetherian finite-type geometry needed to check an existing tool domain. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finiteness of Krull dimension needed for that same domain. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-cbc-integral-compact-support-uniform-restriction",
+    "why": "Generic preservation of the completed uniform integral category by the separately derived proper/open word. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-pur-compact-support-condensed-realization",
+    "why": "Specified compact-support coefficient comparison and coherence; no claim about right adjoints. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-pur-integral-reduction-uniform-tor",
+    "why": "Uniform integral reduction bounds used only to check the existing factor-normalization hypotheses. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-pod-reindexing-completion-unit-tensor",
+    "why": "Generic scheme-isomorphism comparison preserving the actual reduction/limit adjunction unit and counit. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Finite-field scalar realization and its normalized pullback/proper adjunction, with no exchange-invertibility assertion. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical balancing on K-flat representatives used in the finite-field scalar/reindexing square. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Generic counit-mate formulas and coherence for coefficient projections, also on ringed system sites. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Exact site reindexing equivalence for an underlying-scheme isomorphism. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic categorical pasting of mate transformations. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Generic adjunction construction from natural Hom bijections. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Generic invertibility of the mate with an equivalence and a fully faithful side functor. No step of the inherited biduality unit supplies this generic tool; its use does not replace that unit's geometric route."
+   },
+   {
+    "node": "lem-pur-rational-lattice-adic-domain",
+    "why": "Identification of the derived-complete integral category with the complete integral category on separated finite-type k-schemes, used only to place the integral representative in the factor-normalization domain (Step 3); generic coefficient fact, no biduality step."
+   },
+   {
+    "node": "lem-pur-isomorphism-completed-reduction-reindexing",
+    "why": "Generic reindexing of completed modules, strict towers and proper direct-image mates along an underlying-scheme isomorphism (Steps 6, 8); no node of the biduality unit gives it."
+   },
+   {
+    "node": "lem-pur-weil-semilinear-exchange-reindexing",
+    "why": "Identifies the compactification exchange along an isomorphism with site reindexing and its identity/composition laws (Steps 12, 13); generic exchange normalization, not a biduality argument."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "why": "The constructible adjunction F_f -| G_f at Omega that the statement itself names (Step 14); used as stated."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Unit normalization of open-extension comparisons, also on ringed diagram sites (Step 9); generic open-adjunction tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-compact-support-realization-factor-normalization",
+  "lem-sf-finite-span-module-derived-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-integral-reduction-uniform-tor",
+  "lem-pod-reindexing-completion-unit-tensor",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-pur-rational-lattice-adic-domain",
+  "lem-pur-isomorphism-completed-reduction-reindexing",
+  "lem-pur-weil-semilinear-exchange-reindexing",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-d541410d1",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-d541410d1 (reviewer sub-agent of L); spot-checked: Read in full: the item's 17 steps, all 35 cited statements, the source (main-20261015 cor-coef-verdier-weil-equivariance.proof.md, final paragraph; the proof is agent-written and marked so) and the 11 earlier deliveries. Each earlier RETURN point is now handled: q_c in Steps 4, 10 and 11 (I re-derived the calculation c^R H(q) = q_{HK} c^0); F_f = P_R via the tower functor in Step 2; Step 8 keeps π/χ separate from b_p; Step 12 types the Frobenius square ρ_Y Q_s F_f K → F^c P ρ_X K; Step 7 does the semilinear J/T reindexing without a k-linearity hypothesis; Step 3 checks the domain. I verified the mate, counit and invariance identities (Steps 15-17), including types and orientation, and tested f=id, j or p = id, X empty, P=Q=id and E=F. Statement and stmt_deps are unchanged from live, the item is still unsplit live, there are no new nodes and no SGA source. FIX, two repairable faults. (1) C1/C4 in Step 3: K comes from D^b_c(X,O_E) of def-weil-derived-complete-integral-detailed, but lem-zl, lem-cbc and lem-pur need the category def-weil-pbc-bounded-constructible-complete, and nothing identified the two. I added that identification, citing lem-pur-rational-lattice-adic-domain plus the two definitions; it is already in the item's closure, so batch-5 reach does not change. (2) Four off-unit statements were cited without being declared: lem-pur-isomorphism-completed-reduction-reindexing, lem-pur-weil-semilinear-exchange-reindexing, lem-sf-constructible-exceptional-adjunction-coefficients and lem-sf-open-tensor-normalization. I declared them in split_report.tool_uses together with the added lattice node, and accept all of them as generic tools. Batch-5: every flagged citation ends at generic material, not at a statement either assumption gives. The endpoints are the derived exact-square composition lemma, the Mathlib iterated-mates leaf, normalization of completed pullback along an isomorphism, the def-pd section-module definition and exactness of geometric inverse image. lem-pod-reindexing-completion-unit-tensor is generic coefficient reindexing. All are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeWeilScalarFrobeniusCounit",
+  "declaration": "WeilConjectures.NativeWeilScalar.scalar_frobenius_counit",
+  "declarations": [
+   "WeilConjectures.NativeWeilScalar.scalar_frobenius_counit"
+  ],
+  "file": "lean/Sheaf/Paper/NativeWeilScalarFrobeniusCounit.lean",
+  "statement": "theorem scalar_frobenius_counit (P : ConstructibleExceptionalCoefficients.CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := FrobeniusExchange.fiberMap D f₀)) [G : LocallyFiniteAdicCompactSupport.NativeGeometry.{u} l] : ∃ A : CounitData l D R f₀ c₀ S.leftSystem.functor S.rightSystem.functor O.adjunction G, Nonempty (ScalarNormalization l D hl R f₀ c₀ S O P A) ∧ Nonempty (FrobeniusNormalization l D hl R f₀ c₀ S O G A)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The only postponed proof is the named main theorem. Conclusion records fix the scalar comparison by its actual integral proper/open mate, transport the adjunction with the fixed forward realization, and state both explicit counit equations. Repair of 54763e88a6e8: ScalarNormalization uses the normalized presentation bridge and the section comparison through it; no equality of arbitrary coefficient functors or their q is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a55a163f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery after the 54763e88 RETURN (H3). The categories and theorem modules are byte-identical to 54763e88; only ScalarNormalization changed in substance. stage_normalized is gone; a bridge iso S.leftSystem.functor ≅ stage.system.functor takes its place, and bridge_normalized fixes its component at every ⟨E,K⟩ to inclusion.map of P.ring.rationalLeft.inv. functor_obj is rfl, leftStages makes Φ the literal sfCompactSupportFiniteFunctor and StageAction.finite makes the stage functor P's operation, so the clause is satisfiable for any valid P. sections composes J(bridge) ≫ nativeAlpha. On integral inputs the inverse rationalLeft cancels the forward one in IntegralNormalization and operationTransport.inv cancels .hom, leaving the node's a_{f,E,K} then the Ω projection. Bridge naturality across field transitions is a true proof obligation: both β families are normalized to the canonical integral scalar comparison. common_normalization holds: leftStages is literally rationalLeft, the compact branch of modelRationalFunctor is the same functor, IsUnit proofs are irrelevant, and commonPull objects are commonStagePullbackObject. Both new nodes now cite def-sf-adic-realization-isomorphism-data, the existing:true owner of Family. Against live the item differs only in lean and the added stmt_deps; lean.statement is verbatim. The only sorry is the main theorem; docstrings and the 17 proof steps are present. Advisory: the data module compiles in 52.1 s of the 60 s limit; the Q27 second reading is a self-review. No compile run (no changes)."
+ }
+}

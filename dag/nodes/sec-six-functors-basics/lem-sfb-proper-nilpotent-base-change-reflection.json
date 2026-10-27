@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-proper-nilpotent-base-change-reflection",
+ "kind": "statement",
+ "title": "Properness is reflected by nilpotent base change",
+ "statement": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal with $I^N=0$ for some integer $N\\geq1$, and let $f:Y\\to\\operatorname{Spec}A$ be any morphism of schemes [def-pc-scheme, def-weil-affine-spectrum]. Put $Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ [def-pc-fibre-product], with projection $f_0:Y_0\\to\\operatorname{Spec}(A/I)$. Then $f$ is proper if and only if $f_0$ is proper [def-weil-proper-morphism]. No flatness, finite-type, or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, part (7); Spec(A/I) is a finite order thickening of Spec(A), and the source square is cartesian by construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}A$, $S_0=\\operatorname{Spec}(A/I)$, $i:S_0\\to S$ and $j:Y_0\\to Y$. If $f$ is proper, its base change $f_0$ is proper by clause (1) of [lem-pc-proper-base-change].",
+   "uses": [
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, proof of (7), using (2) and Tag 09ZV, lemma-thicken-property-morphisms, parts (3), (4), (6)."
+   }
+  },
+  {
+   "text": "Apply clauses (1) and (2) of [lem-weil-pbc-quotient-base-change-closed-immersion-ideal] with $K=I$, first to $X=S$ with identity structure map, then to $X=Y$ with structure map $f$. Thus $i,j$ are closed immersions with ideals $I\\mathcal O_S$ and $I\\mathcal O_Y$, and $(I\\mathcal O_S)^N=I^N\\mathcal O_S=0$, $(I\\mathcal O_Y)^N=I^N\\mathcal O_Y=0$. Taking $n=N-1\\geq0$ gives finite order thickenings by [def-sbc-first-order-thickening]. Indeed on each affine chart every element of the defining ideal is nilpotent, so the ideal lies in every prime; the closed immersions are surjective. By [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism] both are homeomorphisms and remain surjective homeomorphisms after every scheme base change. The pullback projections give $fj=if_0$.",
+   "uses": [
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, proof of (7), using (2) and Tag 09ZV, lemma-thicken-property-morphisms, parts (3), (4), (6)."
+   }
+  },
+  {
+   "text": "Assume now $f_0$ proper. By [def-weil-proper-morphism] and [def-weil-finite-type-morphism], $f_0$ is separated, universally closed, quasi-compact and locally of finite type. The square defining $Y_0$ is cartesian and $i$ is a finite order thickening. Apply [lem-weil-pbc-thickening-lft-cartesian] to this square: $f$ is locally of finite type. This is precisely where nilpotence, rather than just equality of underlying spaces, is needed.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-thickening-lft-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, proof of (7), using (2) and Tag 09ZV, lemma-thicken-property-morphisms, parts (3), (4), (6)."
+   }
+  },
+  {
+   "text": "To reflect separatedness, regard $Y_0,Y,S_0,S$ as their representable algebraic spaces over $S$ using [def-trf-scheme-algebraic-space]. This does not change the diagonals: on each test scheme, their fibre products have the same universal property [def-pc-fibre-product]. A scheme closed immersion gives a closed immersion of these spaces, since every scheme test is a base change and [lem-weil-pbc-closed-immersion-base-change] applies; the converse follows by testing with the target scheme itself. The topology computed from the identity scheme atlas is the original topology. Consequently $i,j$ are thickenings of algebraic spaces, and the separatedness of $f_0$ is exactly separatedness in [lem-sfb-space-thickening-topological-properties]. In that clause substitute $(X,X\\prime,Y,Y\\prime)=(Y_0,Y,S_0,S)$, $(i,j)=(j,i)$ and $(f,f\\prime)=(f_0,f)$, with base scheme $B=S$. Its commutativity hypothesis is exactly $fj=if_0$, so it gives separatedness of $f$; testing its diagonal with $Y\\times_S Y$ gives the required scheme closed immersion. Only the separatedness clause is used; no assertion identifying scheme and algebraic-space universal closedness is needed.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-thickening-topological-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, proof of (7), using (2) and Tag 09ZV, lemma-thicken-property-morphisms, parts (3), (4), (6)."
+   }
+  },
+  {
+   "text": "Quasi-compactness can be read directly on the homeomorphisms $i,j$. If $U\\subseteq S$ is an affine open, $i^{-1}(U)$ is a quasi-compact open of $S_0$, and $j$ identifies $f_0^{-1}(i^{-1}(U))$ homeomorphically with $f^{-1}(U)$. By [def-weil-finite-type-morphism], a finite affine open cover of $i^{-1}(U)$ has quasi-compact inverse images under $f_0$; their finite union is $f_0^{-1}(i^{-1}(U))$, hence quasi-compact. Its homeomorphic image $f^{-1}(U)$ is therefore quasi-compact. Thus $f$ is quasi-compact. For universal closedness take any scheme $T\\to S$, and put $T_0=T\\times_S S_0$. By [def-pc-fibre-product], $(Y\\times_S T)\\times_T T_0\\cong Y_0\\times_{S_0}T_0$. The maps $T_0\\to T$ and $Y_0\\times_{S_0}T_0\\to Y\\times_S T$ are base changes of $i$, hence homeomorphisms by [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism]. For a closed subset $C\\subseteq |Y\\times_S T|$, take its inverse image $C_0$ under this homeomorphism. Since $f_0$ is universally closed [def-weil-proper-morphism], its base change to $T_0$ sends $C_0$ to a closed subset of $T_0$. Write $p:Y\\times_S T\\to T$, $p_0:Y_0\\times_{S_0}T_0\\to T_0$ for the projections and $h:T_0\\to T$ for the homeomorphism. Then $p(C)=h(p_0(C_0))$: commutativity gives the inclusion from right to left, and surjectivity of the upper homeomorphism lifts each point of $C$ to $C_0$, giving the reverse inclusion. This set is closed because $h$ is a homeomorphism. This proves universal closedness of $f$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, proof of (7), using (2) and Tag 09ZV, lemma-thicken-property-morphisms, parts (3), (4), (6)."
+   }
+  },
+  {
+   "text": "We have obtained local finite type, quasi-compactness, separatedness and universal closedness of $f$. The first two give finite type by [def-weil-finite-type-morphism], and these properties give properness by [def-weil-proper-morphism]. Together with step 1 this proves both implications. No step assumed flatness or Noetherianity, nor finite type of $f$ in advance.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, proof of (7), using (2) and Tag 09ZV, lemma-thicken-property-morphisms, parts (3), (4), (6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-thickening-lft-cartesian",
+  "def-trf-scheme-algebraic-space",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-thickening-topological-properties"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, proof of (7), using (2) and Tag 09ZV, lemma-thicken-property-morphisms, parts (3), (4), (6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is proper if and only if its base change along a nilpotent closed immersion of the base is proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stability of properness under base change supplies only the forward implication, not reflection from a nilpotent quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness is invariant under finite order thickenings in a cartesian square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsCompact.cthickening\", \"module\": \"Mathlib/Topology/MetricSpace/Thickening\", \"type\": \"∀ {α : Type u_2} [inst : PseudoMetricSpace α] [ProperSpace α] {s : Set α},\\n  IsCompact s → ∀ {r : ℝ}, IsCompact (Metric.cthickening r s)\", \"doc\": \"In a proper pseudo-metric space $\\\\alpha$, if $s \\\\subseteq \\\\alpha$ is compact and $r \\\\geq 0$, then the $\\\\delta$-thickening of $s$ (the set of points $x \\\\in \\\\alpha$ with $\\\\inf_{y \\\\in s} \\\\text{edist}(x, \"}\n  {\"name\": \"prod_properSpace\", \"module\": \"Mathlib/Topology/MetricSpace/ProperSpace\", \"type\": \"∀ {α : Type u_3} {β : Type u_4} [inst : PseudoMetricSpace α] [inst_1 : PseudoMetricSpace β] [ProperSpace α]\\n  [ProperSpace β], ProperSpace (α × β)\", \"doc\": \"If $ \\\\alpha $ and $ \\\\beta $ are proper pseudo-metric spaces, then their Cartesian product $ \\\\alpha \\\\times \\\\beta $, equipped with the maximum metric $ d((x_1, y_1), (x_2, y_2)) = \\\\max(d_\\\\alpha(x_1, x_2\"}\n  {\"name\": \"isProperMap_nndist\", \"module\": \"Mathlib/Topology/MetricSpace/ProperSpace/Lemmas\", \"type\": \"∀ {α : Type u_1} [inst : PseudoMetricSpace α] [ProperSpace α] (x : α), IsProperMap (nndist x)\", \"doc\": \"For any element $x$ in a pseudo-metric space $\\\\alpha$, the non-negative distance function $d(x, \\\\cdot) : \\\\alpha \\\\to \\\\mathbb{R}_{\\\\geq 0}$ is a proper map, meaning the preimage of every compact subset o\"}\n  {\"name\": \"Metric.IsCover.of_subset_cthickening\", \"module\": \"Mathlib/Topology/MetricSpace/Cover\", \"type\": \"∀ {X : Type u_1} [inst : PseudoMetricSpace X] {ε : NNReal} {s N : Set X} [ProperSpace X],\\n  IsClosed N → s ⊆ Metric.cthickening (↑ε) N → Metric.IsCover ε s N\", \"doc\": \"In a proper pseudo-metric space $X$, if $N$ is a closed set and $s$ is a subset of the $\\\\delta$-thickening of $N$ (where $\\\\delta = \\\\varepsilon$), then $N$ $\\\\varepsilon$-covers $s$. Formally, for all $\"}\n  {\"name\": \"isProperMap_dist\", \"module\": \"Mathlib/Topology/MetricSpace/ProperSpace/Lemmas\", \"type\": \"∀ {α : Type u_1} [inst : PseudoMetricSpace α] [ProperSpace α] (x : α), IsProperMap (dist x)\", \"doc\": \"For any fixed point $x$ in a proper pseudo-metric space $\\\\alpha$, the function $y \\\\mapsto d(x, y)$ is a proper map. This means that for every compact subset $K \\\\subseteq \\\\mathbb{R}$, the preimage of $\"}\n  {\"name\": \"Metric.IsCover.subset_cthickening\", \"module\": \"Mathlib/Topology/MetricSpace/Cover\", \"type\": \"∀ {X : Type u_1} [inst : PseudoMetricSpace X] {ε : NNReal} {s N : Set X} [ProperSpace X],\\n  IsClosed N → Metric.IsCover ε s N → s ⊆ Metric.cthickening (↑ε) N\", \"doc\": \"In a proper pseudo-metric space, if a closed set $N$ ε-covers a set $s$ (i.e., every point in $s$ is within ε distance of some point in $N$), then $s$ is contained within the ε-thickening of $N$, defi\"}\n  {\"name\": \"Metric.isCover_iff_subset_cthickening\", \"module\": \"Mathlib/Topology/MetricSpace/Cover\", \"type\": \"∀ {X : Type u_1} [inst : PseudoMetricSpace X] {ε : NNReal} {s N : Set X} [ProperSpace X],\\n  IsClosed N → (Metric.IsCover ε s N ↔ s ⊆ Metric.cthickening (↑ε) N)\", \"doc\": \"For a closed set $ N $ in a pseudo-metric space, the set $ N $ ε-covers $ s $ if and only if $ s $ is a subset of the ε-thickening of $ N $. Here, an ε-cover means every point in $ s $ is within ε-dis\"}\n  {\"name\": \"IsCompact.exists_isCompact_cthickening\", \"module\": \"Mathlib/Topology/MetricSpace/Thickening\", \"type\": \"∀ {α : Type u} [inst : PseudoEMetricSpace α] {s : Set α} [LocallyCompactSpace α],\\n  IsCompact s → ∃ δ, 0 < δ ∧ IsCompact (Metric.cthickening δ s)\", \"doc\": \"In a locally compact space $\\\\alpha$, every compact set $s$ admits a positive real number $\\\\delta$ such that the $\\\\delta$-thickening of $s$ is compact.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stability of properness under base change supplies only the forward implication, not reflection from a nilpotent quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsProperStar\", \"module\": \"Mathlib.Algebra.Star.Basic\", \"type\": \" (R : Type u) [Mul R] [Zero R] [Star R] : Prop\", \"doc\": \"A *proper star* is when `star x * x = 0` implies `x = 0`.\"}\n  {\"name\": \"IsProperStar.eq_zero_of_star_mul_self_eq_zero\", \"module\": \"Mathlib.Algebra.Star.Basic\", \"type\": \" {R : Type u} {inst✝ : Mul R} {inst✝¹ : Zero R} {inst✝² : Star R} [self : IsProperStar R] {x : R} : star x * x = 0 → x = 0\", \"doc\": \"\"}\n  {\"name\": \"IsProperStar.mk\", \"module\": \"Mathlib.Algebra.Star.Basic\", \"type\": \" {R : Type u} [Mul R] [Zero R] [Star R] (eq_zero_of_star_mul_self_eq_zero : ∀ {x : R}, star x * x = 0 → x = 0) : IsProperStar R\", \"doc\": \"\"}\n  {\"name\": \"instIsProperStarOfNoZeroDivisors\", \"module\": \"Mathlib.Algebra.Star.Basic\", \"type\": \" {R : Type u} [NonUnitalNonAssocSemiring R] [NoZeroDivisors R] [StarRing R] : IsProperStar R\", \"doc\": \"\"}\n  {\"name\": \"instIsProperStarForall\", \"module\": \"Mathlib.Algebra.Star.Basic\", \"type\": \" {ι : Type u_1} {S : ι → Type u_2} [(i : ι) → MulZeroClass (S i)] [(i : ι) → Star (S i)] [∀ (i : ι), IsProperStar (S i)] : IsProperStar ((i : ι) → S i)\", \"doc\": \"\"}\n  {\"name\": \"instIsProperStarProd\", \"module\": \"Mathlib.Algebra.Star.Basic\", \"type\": \" {R : Type u} {S : Type u_1} [MulZeroClass R] [Star R] [IsProperStar R] [MulZeroClass S] [Star S] [IsProperStar S] : IsProperStar (R × S)\", \"doc\": \"\"}\n  {\"name\": \"instIsProperStarMulOpposite\", \"module\": \"Mathlib.Algebra.Star.Basic\", \"type\": \" {R : Type u} [NonUnitalNonAssocSemiring R] [StarAddMonoid R] [IsProperStar R] : IsProperStar Rᵐᵒᵖ\", \"doc\": \"\"}\n  {\"name\": \"IsProperMap\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] (f : X → Y) : Prop\", \"doc\": \"A map `f : X → Y` between two topological spaces is said to be **proper** if it is continuous\\nand, for all `ℱ : Filter X`, any cluster point of `map f ℱ` is the image by `f` of a cluster point\\nof `ℱ`.\"}\n  {\"name\": \"isProperMap_id\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} [TopologicalSpace X] : IsProperMap id\", \"doc\": \"The identity is proper.\"}\n  {\"name\": \"isProperMap_const\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] [h : CompactSpace X] [T1Space Y] (y : Y) : IsProperMap fun x => y\", \"doc\": \"\"}\n  {\"name\": \"IsHomeomorph.isProperMap\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (hf : IsHomeomorph f) : IsProperMap f\", \"doc\": \"\"}\n  {\"name\": \"IsProperMap.continuous\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (h : IsProperMap f) : Continuous f\", \"doc\": \"By definition, a proper map is continuous.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stability of properness under base change supplies only the forward implication, not reflection from a nilpotent quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "isProper.*(thick|nilpot|reduction)|proper.*thick|thick.*proper",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Topology/MetricSpace/Thickening.lean\", \"line\": \"583\", \"text\": \"theorem cthickening_eq_biUnion_closedBall {α : Type*} [PseudoMetricSpace α] [ProperSpace α]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Constructions/BorelSpace/Metric.lean\", \"line\": \"189\", \"text\": \"/-- Given a compact set in a proper space, the measure of its `r`-closed thickenings converges to\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stability of properness under base change supplies only the forward implication, not reflection from a nilpotent quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness of a scheme morphism is reflected by nilpotent base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \"(hP : RingHom.IsStableUnderBaseChange Q) : P.IsStableUnderBaseChange\", \"doc\": \"If a ring homomorphism property $ Q $ is stable under base change, then the corresponding scheme morphism property $ P $, defined via ring homomorphisms between commutative rings, is also stable under\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stability of properness under base change supplies only the forward implication, not reflection from a nilpotent quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is proper if it is separated, universally closed and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stability of properness under base change supplies only the forward implication, not reflection from a nilpotent quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpot|thicken|reduction",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"189\", \"text\": \"With `X ⟶ Y` formally unramified and `Z' ⟶ Z` an infinitesimal thickening, there exists at most\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"193\", \"text\": \"protected lemma hom_ext {Z' Z : Scheme} (i : Z' ⟶ Z) (hi : IsNilpotent i.ker) [IsClosedImmersion i]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"301\", \"text\": \"/-- A section over a compact open of a scheme is nilpotent if and only if its associated\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"303\", \"text\": \"lemma Scheme.isNilpotent_iff_basicOpen_eq_bot_of_isCompact {X : Scheme.{u}}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"305\", \"text\": \"    IsNilpotent f ↔ X.basicOpen f = ⊥ := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"306\", \"text\": \"  refine ⟨X.basicOpen_eq_bot_of_isNilpotent U f, fun hf ↦ ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"317\", \"text\": \"/-- A global section of a quasi-compact scheme is nilpotent if and only if its associated\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stability of properness under base change supplies only the forward implication, not reflection from a nilpotent quotient",
+   "subdirectory": "AlgebraicGeometry/Morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-22T06:27:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"e59b1eb4bdd8a07b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only proper base-change stability, component definitions, composition or finite-morphism results; none reflects properness from a nilpotent base change"
+  },
+  {
+   "tool": "grep",
+   "query": "(proper|isProper).*(nilpot|thicken|reduction)|(nilpot|thicken|reduction).*(proper|isProper)",
+   "results": "{\"t\": \"2026-10-22T06:27:30Z\", \"tool\": \"grep\", \"query\": \"(proper|isProper).*(nilpot|thicken|reduction)|(nilpot|thicken|reduction).*(proper|isProper)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only proper base-change stability, component definitions, composition or finite-morphism results; none reflects properness from a nilpotent base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness of a scheme morphism is reflected by nilpotent base change",
+   "results": "{\"t\": \"2026-10-22T06:27:31Z\", \"tool\": \"leansearch\", \"query\": \"Properness of a scheme morphism is reflected by nilpotent base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"c3f10a80a62cc7df\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only proper base-change stability, component definitions, composition or finite-morphism results; none reflects properness from a nilpotent base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is proper if its base change by a nilpotent closed immersion is proper",
+   "results": "{\"t\": \"2026-10-22T06:27:40Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of schemes is proper if its base change by a nilpotent closed immersion is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.IsProper.of_comp\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\"], \"digest\": \"46ba9b032902602f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only proper base-change stability, component definitions, composition or finite-morphism results; none reflects properness from a nilpotent base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness descends through finite order thickenings of the base scheme",
+   "results": "{\"t\": \"2026-10-22T06:27:40Z\", \"tool\": \"leanfinder\", \"query\": \"Properness descends through finite order thickenings of the base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.comp_iff\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsProper.of_comp\", \"AlgebraicGeometry.IsProper.instCompScheme\"], \"digest\": \"1741e25b460dc6af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only proper base-change stability, component definitions, composition or finite-morphism results; none reflects properness from a nilpotent base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-curve-formal-lifting",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Properness of every level of the formal-lifting input: nilpotent deformation of the proper special fibre, before algebraization in Stacks 0E7Y.",
+   "via": [
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-nilpotent-base-change-reflection",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Six steps following Stacks 09ZW(7): proper base change; nilpotent quotient thickenings; local finite-type reflection; separatedness via the existing more general algebraic-space thickening lemma, with the representable scheme specialization explained; explicit topological arguments for quasi-compactness and universal closedness; assembly. No new nodes; no Lean attachment or Mathlib match. Repair of the refused side-completion landing: rebased against the current unsplit DAG item; all cited statements re-read and quotations checked; step 5 now explicitly expands the finite-affine-cover quasi-compactness argument and cites its definition. Renewed repair against the return at 5be2a6c6126: current protected item fields agree, all 17 current citation quotations match, and step 2 now explicitly invokes both quotient-ideal clauses, computes the two ideal powers, and checks finite-order indexing and surjectivity affine-locally. Repair of the current return at 32e31ea2cc2: all current cited statements and the unchanged protected fields rechecked; step 4 now explicitly records the four-object, two-immersion and two-morphism substitution into the algebraic-space separatedness lemma, including its base scheme and commutativity hypothesis. Repair of the return at ef20ce7b34d: resumed dry run passed on current base; all current dependency statements and 17 verbatim quotations re-read and verified. Step 5 now names the projections and writes the closed-image equality with both inclusions, making transport across the homeomorphisms explicit. No statement, source, dependency or route changes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Properness of every level of the formal-lifting input: nilpotent deformation of the proper special fibre, before algebraization in Stacks 0E7Y.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic proper base-change stability, used only for the forward implication. No node of this unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "why": "Generic quotient base-change ideal calculation, identifying the nilpotent defining ideals of both thickenings. No node of this unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Generic universal homeomorphism property of thickenings, used for the underlying spaces after arbitrary scheme base change. No node of this unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-thickening-lft-cartesian",
+    "why": "Generic local finite-type reflection from 09ZW(2), the exact finite-type ingredient used in 09ZW(7). No node of this unit supplies this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-weil-pbc-thickening-lft-cartesian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-334fff5a3",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-334fff5a3 (reviewer sub-agent of L); spot-checked: This is the fifth head of this item; a494, 5be2, 32e3 and ef20 all PASSed and each landing was then refused because the side completion was never promoted. In clones/live and clones/side-live the item is still unsplit with an empty proof, and I found no repair or re-split note. There are no new nodes. Compared with the ef20ce7b34d9 snapshot, only step 5 and split_report changed; the statement, stmt_deps, proof_deps, source, tool_uses and steps 1-4 and 6 are byte-identical. The new step 5 writes out p(C)=h(p0(C0)). Since p∘q=h∘p0, the right side lies in p(C); since q is a surjective base change of i, q(C0)=C, so the sets are equal; and the set is closed because p0 is closed and h is a homeomorphism. The change is correct. The earlier dagsnap has been cleaned, so I re-read all 11 cited statements in full. Every use matches: proper base change (1), quotient-ideal (1),(2) with n=N-1, the universal-homeomorphism node, lft-cartesian 09ZW(2) with its exact hypotheses, and the 09ZY space lemma with (X,X',Y,Y')=(Y0,Y,S0,S), whose hypothesis f'i=jf becomes f∘j=i∘f0. The statement is Stacks more-morphisms.tex:335, Tag 09ZW(7), and is not weakened. rg -L for 09ZW/09ZV over dag/nodes found no node stating part (7). The cases N=1, I=0, A=0, empty Y and non-finitely-generated I are all fine. No SGA source is used. Batch-5 check: def-trf-scheme-algebraic-space (a scheme regarded as a representable algebraic space) and def-trf-algebraic-space (reached through the 09ZY space lemma) are general definitions, not steps of the proof of the trace formula or of Poincare duality, so both are accepted. The four generic scheme tool_uses are accepted. No changes. Maintainer note: this is another re-push caused by the promotion refusal; the landing needs to promote this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperNilpotentBaseChangeReflection",
+  "declaration": "AlgebraicGeometry.isProper_iff_of_nilpotent_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperNilpotentBaseChangeReflection.lean",
+  "statement": "theorem isProper_iff_of_nilpotent_quotient {A : Type u} [CommRing A] (I : Ideal A) (N : ℕ) (hN : 1 ≤ N) (hI : I ^ N = ⊥) {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of A)) : IsProper f ↔ IsProper (pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e1ef1e1a",
+  "group": "NA",
+  "result": "pass",
+  "note": "isProper_iff_of_nilpotent_quotient matches node clause by clause: CommRing A, Ideal I, 1≤N, I^N=⊥, any f : Y ⟶ Spec A, f₀ = pullback.snd f (Spec.map (ofHom (Ideal.Quotient.mk I))), IsProper f ↔ IsProper f₀; no extra hypotheses; Mathlib IsProper (lft) ≡ node finite-type definition via UniversallyClosed⇒QuasiCompact; edge cases I=0, N=1, A=0, empty Y, non-FG I, non-finite-type f covered; lean.statement verbatim; node copy differs only in lean; stmt_deps are existing Mathlib records used exactly; plain proof-dep imports exist in side-live, no cycle; no duplicate in WeilConjectures/Sheaf/Mathlib; docstrings carry Tag 09ZW(7), blueprint id and the six proof steps; sorry only; report sections present. Not recompiled per instructions; no fixes."
+ }
+}

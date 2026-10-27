@@ -1,0 +1,140 @@
+{
+ "id": "lem-pod-integral-pullback-counit-projection",
+ "kind": "statement",
+ "title": "Finite projection of the normalized coherent pullback counit",
+ "statement": "For a scheme map f:X→Y, source and target coefficient derived system calculi S,T, a normalized Roos model rho on X and normalized integral pullback realization M, every good representative P of K and positive coefficient level n+1 satisfy: evaluating T.reduction(M.realization_K) followed by the coherent counit, and then the specified finite inverse-image evaluation and S reduction evaluation, is the scalar adjoint of the actual Roos pullback projection, transported through the finite pullback model and the universal reduction comparison. This is an equality of maps and asserts neither invertibility nor existence of a coherent system isomorphism.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pod-finite-system-pullback-coherence",
+  "lem-pur-integral-operations-preserve-constructible"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, projection calculation for derived inverse limits; Tag 099N(5) in proetale.tex; finite normalization part of lem-pod-integral-pullback-system-comparison."
+ },
+ "proof": [
+  {
+   "text": "Choose a whole-system coherent strict quotient presentation C,d,kappa of P using coherentPrimitiveReductionPresentation. Apply M.normalization to obtain q and the equality of realization with the defining strict Roos comparison.",
+   "uses": [
+    "lem-trf-coherent-primitive-reduction-presentation",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that the normalized comparison rho commutes with every actual Roos projection. On K-injective towers this is the limit-tuple equation of integralComparisonLimitToRoos and the normalization of coefficientConstantTowerProjection. Naturality along a K-injective quasi-isomorphism gives the equation for every tower. Exact restriction/evaluation factorization then gives bridge_projection for coefficient-system complexes. Also prove strict Roos-map projection naturality from its first-coordinate formula.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use integralPullbackStrictFiniteComponent for q. Naturality of finite inverse-image evaluation and the presentation reduction equation cancel d and kappa against the universal coefficientFiniteReductionModel. Combine this finite-component equality with bridge_projection, Roos-map projection naturality and M.normalization to obtain hproj at Q(P).",
+   "uses": [
+    "lem-pod-integral-pullback-strict-finite-component",
+    "lem-pod-finite-system-pullback-coherence",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove evaluated_counit_adjunct from naturality of T.reductionEvaluation, the finite adjunction Hom bijection and T.counit_projection. Apply its injectivity to the claimed finite-map equality. Naturality of M.realization, the actual sequence projection, finite inverse-image evaluation and S.reductionEvaluation transports hproj from Q(P) to K. Cancel e.inv with e.hom. Unfold integralPullbackFiniteComparison, whose defining adjunct is exactly the remaining Roos projection composite.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-integral-operations-preserve-constructible",
+    "def-trf-integral-comparison-realization-models",
+    "lem-pod-finite-system-pullback-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": "Q1 stage 3, 2026-10-27: use the existing coherent primitive presentation, prove normalized Roos projections and evaluated counit adjuncts, combine the strict finite-component calculation with naturality, and transport to arbitrary K. Only the strictly smaller ordinary-generator/finite-component calculation remains as a named statement.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived complete reduction inverse limit fully faithful",
+   "results": "Generic full-faithfulness and reflective adjunction lemmas; no completed-coefficient application.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing specialized calculus, not a duplicate derived category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": "Adjunction.fullyFaithfulLOfIsIsoUnit, Functor.fullyFaithfulCancelRight.",
+   "date": "2026-10-19",
+   "verdict": "Generic tools do not identify the Roos unit/projections."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceDerived|fullyFaithful|integralPullbackComposition in lean/Sheaf, lean/WeilConjectures and Mathlib/CategoryTheory",
+   "results": "Existing coefficient evaluation calculus supplies the reduction/limit adjunction. FiniteSystemPullbackCoherence supplies finite system associativity.",
+   "date": "2026-10-19",
+   "verdict": "Use those declarations; no existing normalized bridge located."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackSystemComparison",
+  "date": "2026-10-25",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-integral-pullback-system-comparison",
+   "place": "Finite counit/projection identification in its proof",
+   "via": [
+    "lem-pod-integral-pullback-system-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackCounitProjection",
+  "file": "lean/Sheaf/Paper/IntegralPullbackCounitProjection.lean",
+  "declaration": "WeilConjectures.integralPullbackCounitProjection",
+  "statement": "theorem integralPullbackCounitProjection {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (S : CoefficientDerivedSystemCalculus l E Y)\n    (T : CoefficientDerivedSystemCalculus l E X)\n    (ρ : IntegralComparisonRoosModel l E X)\n    (M : IntegralComparisonPullbackModel l E f S ρ)\n    (K : DerivedCategory (scalarReductionSource l E Y))\n    (P : (integralOperationsGoodComplex l E Y).FullSubcategory)\n    (e : DerivedCategory.Q.obj P.obj ≅ K) (n : ℕ) :\n    (T.reductionEvaluation n).inv.app ((integralDerivedPullback l E f).obj K) ≫\n      (finiteSystemDerivedEvaluation (integralSystemRings l E)\n        (integralSystemTransition l E) X n).map\n        (T.reduction.map (M.realization.hom.app K) ≫\n          T.adjunction.counit.app\n            ((integralComparisonDerivedSequencePullback l E f).obj (S.reduction.obj K))) ≫\n      (finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)\n        (integralSystemTransition l E) f n).hom.app (S.reduction.obj K) ≫\n      (proEtaleConstantRingDerivedPullback\n        (Padic.coefficientExtensionRing l E (n + 1)) f).map\n        ((S.reductionEvaluation n).hom.app K) =\n    integralPullbackFiniteComparison l E f K P e n ≫\n      DerivedCategory.Q.map\n        ((NatIso.mapHomologicalComplex (integralFinitePullbackModel l E f n)\n          (ComplexShape.up ℤ)).hom.app\n            ((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj)) ≫\n      (proEtaleConstantRingPullback\n        (Padic.coefficientExtensionRing l E (n + 1)) f).mapDerivedCategoryFactors.inv.app\n          ((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj) ≫\n      (proEtaleConstantRingDerivedPullback\n        (Padic.coefficientExtensionRing l E (n + 1)) f).map\n        ((coefficientFiniteReductionModel l E Y P.obj P.property.1 n).inv ≫\n          (scalarReductionDerivedExtension l E Y n).map e.hom)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-25"
+ },
+ "proof_deps": [
+  "lem-trf-coherent-primitive-reduction-presentation",
+  "def-trf-integral-comparison-realization-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-pod-integral-pullback-strict-finite-component",
+  "lem-pod-finite-system-pullback-coherence",
+  "lem-pur-integral-operations-preserve-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T201544-L-2576286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T034726-L-3679328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-completed-module-tensor-transport",
+ "kind": "statement",
+ "title": "Ordinary module tensor comparison for completed coefficient and site transport",
+ "statement": "Let X be a scheme and d an adic coefficient datum. Let F be inverse restriction along the completed coefficient-ring comparison followed by the canonical change of site [def-weil-pbc-completed-cech-site-transport, def-weil-pbc-intrinsic-completion]. For the standard sheaf tensor [def-pur-sheaf-tensor-product], there is a natural isomorphism tau from F(M tensor K) to F(M) tensor F(K), natural in the two module sheaves M,K. At K equal to the regular module, F of the inverse right unitor followed by tau equals the inverse right unitor of F(M), followed by tensoring with the transported regular-module section 1 (completedCechCoefficientUnit). No complexes, totalization, Koszul powers, or coefficient-presentation round trips occur in this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, section-tensor-product, the displayed change-of-rings formula, lemma-sheafification-tensor and lemma-tensor-product-pullback; Tag 03DA for inverse coefficient restriction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-cech-site-transport",
+  "def-weil-pbc-intrinsic-completion",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing normalized lax monoidal pushforward theorem to restriction along the inverse completed coefficient-ring comparison and to reindexing along the inverse completed-site equivalence. Both unit maps send the section 1 to 1.",
+   "uses": [
+    "def-weil-pbc-completed-cech-site-transport",
+    "def-weil-pbc-intrinsic-completion",
+    "def-pur-sheaf-tensor-product",
+    "lem-pd-ringed-direct-image-pairing-lax"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For either pushforward, the existing semilinear-calculus private helpers identify its tensor map with the composite of tensor/sheafification comparison, the sectionwise balanced-tensor isomorphism, continuous-cocontinuous sheafification comparison, and inverse tensor/sheafification comparison. They agree on local pure tensors, so binary tensor extensionality identifies them. All four factors are isomorphisms. The site functor is cocontinuous because it is an equivalence and its topology is the induced topology.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus",
+    "lem-pd-ringed-direct-image-pairing-lax",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-completed-cech-site-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two lax structures. Their tensorators are invertible, giving the required curried bifunctor isomorphism by inverse naturality. Evaluate the composite unit on 1 to identify it with completedCechCoefficientUnit. Cancel the invertible tensorator in the lax right-unit coherence equation to obtain the required normalization. No new intermediate statement is left unproved.",
+   "uses": [
+    "lem-pd-ringed-direct-image-pairing-lax",
+    "def-weil-pbc-completed-cech-site-transport"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-cech-site-transport",
+  "def-weil-pbc-intrinsic-completion",
+  "def-pur-sheaf-tensor-product",
+  "lem-pd-ringed-direct-image-pairing-lax",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B5",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA and 03EK: balanced tensors, tensor sheafification and invariance under a ringed-site equivalence. Reuses the proved normalized lax pushforward theorem and generic presheaf/sheafification helpers of SemilinearDerivedCalculus; the final normalization is categorical right-unit coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence of module sheaves along an isomorphism of rings and an equivalence of sites commutes with tensor products of cochain complexes",
+   "results": "8 hits: SheafOfModules.pushforwardCongr, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.pullbackObjFreeIso, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pushforwardNatIso, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.pushforwardCongr_symm.",
+   "date": "2026-10-26",
+   "verdict": "No ordinary tensor comparison for this composite site and coefficient equivalence. The total-complex comparison exists in the adopted WeilConjectures source and is used directly in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*Monoidal|restrictScalars.*Monoidal",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/PushforwardZeroMonoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/PushforwardZeroMonoidal.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean.",
+   "date": "2026-10-26",
+   "verdict": "No ordinary tensor comparison for this composite site and coefficient equivalence. The total-complex comparison exists in the adopted WeilConjectures source and is used directly in the parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorComparison\"",
+   "results": "0 hits: .",
+   "date": "2026-10-26",
+   "verdict": "No ordinary tensor comparison for this composite site and coefficient equivalence. The total-complex comparison exists in the adopted WeilConjectures source and is used directly in the parent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of sheaves of modules commutes with equivalence of ringed sites and restriction along an isomorphism of sheaves of rings",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.sheafificationCompPullback, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, IsBaseChange.tensorEquiv, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, IsLocalization.algebraTensorEquiv, SheafOfModules.pullbackObjFreeIso.",
+   "date": "2026-10-26",
+   "verdict": "No ordinary tensor comparison for this composite site and coefficient equivalence. The total-complex comparison exists in the adopted WeilConjectures source and is used directly in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedTensorTransport",
+  "date": "2026-10-26",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Modules on Sites, Tags 03DA and 03EK, balanced tensors and sheafification; Tag 0A0E, proof of lemma-derived-completion-koszul: tensor with E after the finite coefficient comparison.",
+   "via": [
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-completed-cech-tensor-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedModuleTensorTransport",
+  "file": "lean/Sheaf/Paper/WeilCompletedModuleTensorTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedCechModuleTensorTransport",
+  "statement": "theorem completedCechModuleTensorTransport (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) : letI := SheafOfModules.isMonoidal_W_independentCoefficients (adicDatumRing X (intrinsicPresentationDatum d)) letI := SheafOfModules.monoidalCategory (adicDatumRing X (intrinsicPresentationDatum d)) letI := SheafOfModules.monoidalCategory (completedCechRing X d) let F := intrinsicPresentationModulesBack X d ⋙ (completedCechModulesEquiv X d).functor ∃ τ : (Functor.postcompose₂.obj F).obj (curriedTensor _) ≅ (((Functor.whiskeringLeft₂ _).obj F).obj F).obj (curriedTensor _), ∀ M : adicDatumModules X (intrinsicPresentationDatum d), F.map (ρ_ M).inv ≫ (τ.hom.app M).app (𝟙_ _) = (ρ_ (F.obj M)).inv ≫ F.obj M ◁ completedCechCoefficientUnit X d",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T201940-L-2657199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T000954-L-4152467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

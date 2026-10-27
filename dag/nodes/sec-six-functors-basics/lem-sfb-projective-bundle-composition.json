@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-projective-bundle-composition",
+ "kind": "statement",
+ "title": "Composition of projective-bundle morphisms over a qcqs base",
+ "statement": "Let $f:A\\to B$ and $g:B\\to C$ be morphisms of schemes [def-pc-scheme]. Suppose $C$ is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-pbc-scheme-conventions]. If $f$ and $g$ are projective in the projective-bundle sense [def-trf-projective-bundle-morphism], then $g\\circ f:A\\to C$ is projective in the same sense.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4P (lemma-composition-projective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-trf-projective-bundle-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For each of $f:A\\to B$ and $g:B\\to C$, apply [lem-trf-projective-bundle-proper] to its assumed projective-bundle factorization, obtaining properness. Apply [lem-sfb-projective-bundle-relative-ample] separately to these same two morphisms. It supplies finite type of each map and invertible modules $L$ on $A$ and $M$ on $B$ that are respectively $f$-ample and $g$-ample. These are precisely the finite-type and relative-ampleness conditions used in the next step. Neither application requires quasi-compactness or quasi-separatedness of $B$.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "lem-sfb-projective-bundle-relative-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4P (lemma-composition-projective), first sentence; projective implies quasi-projective by 07RL (lemma-projective-quasi-projective), and proper by 01WC (lemma-locally-projective-proper)."
+   }
+  },
+  {
+   "text": "Set $h=g\\circ f:A\\to C$. The properness of $f$ and $g$ from Step 1 gives properness of $h$ by [lem-weil-pbc-proper-composition]. For relative ampleness apply [lem-sfb-quasiprojective-qc-composition] with $X=A$, $Y=B$, $S=C$ and the modules $L,M$ of Step 1: both maps are of finite type, their respective relative-ampleness hypotheses hold, and the final base $C$ is quasi-compact by the item hypothesis. The conclusion gives finite type of $h$ and an invertible module $N$ on $A$ that is $h$-relatively ample. No quasi-separatedness of $B$ or global finite-projective-space embedding is used.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "lem-sfb-quasiprojective-qc-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4P (lemma-composition-projective), second sentence; proper composition 01W3 (lemma-composition-proper) and quasi-projective composition 0C4M (lemma-composition-quasi-projective)."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-proper-relative-ample-projective-bundle] for $h:A\\to C$ and $N$. Step 2 supplies properness of $h$ and relative ampleness of the invertible module $N$. The item assumes exactly the remaining hypotheses, namely that $C$ is quasi-compact and quasi-separated. Consequently $A$ embeds as a closed subscheme of a projective bundle associated to a finite-type quasi-coherent module on $C$. This is projectivity in the stipulated projective-bundle sense and proves the conclusion.",
+   "uses": [
+    "lem-sfb-proper-relative-ample-projective-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4P (lemma-composition-projective), last sentence; implication (1) of 0BCL (lemma-projective-is-quasi-projective-proper), from proper and quasi-projective to projective."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-bundle-relative-ample",
+  "lem-sfb-proper-relative-ample-projective-bundle",
+  "lem-sfb-quasiprojective-qc-composition",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4P (lemma-composition-projective), proof; inputs 07RL, 01WC, 01W3, 0C4M, 0BCL(1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The composition of projective morphisms of schemes is projective when the target is quasi compact and quasi separated",
+   "results": "OK 8 hits: AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.quasiCompact_comp, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.IsProper.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: returned closed-immersion, properness and quasi-compactness composition do not provide a projective-bundle embedding of the composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned closed-immersion, properness and quasi-compactness composition do not provide a projective-bundle embedding of the composite"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|[Pp]rojective.*[Bb]undle",
+   "results": "OK 25 hits: Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean, Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean, Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean, Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean, Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/LeftResolution.lean, Mathlib/Algebra/Category/ModuleCat/Projective.lean, Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned closed-immersion, properness and quasi-compactness composition do not provide a projective-bundle embedding of the composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms which embed into Proj of a finite type quasi coherent module are closed under composition over a quasi compact quasi separated base",
+   "results": "OK 8 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.IsClosedImmersion.comp, AlgebraicGeometry.IsPreimmersion.comp, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: returned closed-immersion, properness and quasi-compactness composition do not provide a projective-bundle embedding of the composite"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|[Pp]rojective.*[Bb]undle|[Pp]rojective.*[Mm]orphism",
+   "results": "OK 2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean; source subdirectory AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: returned closed-immersion, properness and quasi-compactness composition do not provide a projective-bundle embedding of the composite"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|ProjectiveBundle|projective.*compos",
+   "results": "OK 0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: properness composition is only an input; projectivization of vector spaces and absolute Proj do not state projective-bundle projectivity of a composite of schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projectivizations of finite type quasi coherent modules give projective morphisms stable under composition over a qcqs base",
+   "results": "OK 8 hits: Projectivization.map_comp, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderComposition, AlgebraicGeometry.universallyClosed_isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: properness composition is only an input; projectivization of vector spaces and absolute Proj do not state projective-bundle projectivity of a composite of schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: properness composition is only an input; projectivization of vector spaces and absolute Proj do not state projective-bundle projectivity of a composite of schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of projective morphisms defined using finite type quasi coherent projective bundles over a quasi compact quasi separated scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.awayι_toSpecZero_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: properness composition is only an input; projectivization of vector spaces and absolute Proj do not state projective-bundle projectivity of a composite of schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasi[Pp]rojective|[Rr]elatively[Aa]mple|[Pp]rojective.*[Mm]orphism",
+   "results": "OK 2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: properness composition is only an input; projectivization of vector spaces and absolute Proj do not state projective-bundle projectivity of a composite of schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper and quasi projective morphisms over a quasi compact quasi separated base are projective and projective morphisms compose",
+   "results": "OK 8 hits: AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.quasiSeparated_isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: properness composition is only an input; projectivization of vector spaces and absolute Proj do not state projective-bundle projectivity of a composite of schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19).",
+   "via": [
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-bundle-composition",
+  "worker": "stage1",
+  "summary": "Q28 repair: removed all three dropped per proof dependencies and rewrote all three steps from Stacks 0C4P. Created statement-only sfb inputs for 07RL, 0C4M and the proper-plus-relative-ample implication of 0BCL(1), as explicitly requested in the return; each was searched by four logged Mathlib queries with no match. Retained only the live generic projective-bundle properness input and the existing proper-composition Mathlib leaf. The statement, unit route, provenance and all previous searches are preserved. The dropped exact duplicate and its proof are not inputs.",
+  "blueprint": "Below the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route, projectivity of composed modification towers in lem-sfb-equivariant-nodal-smooth-pair-resolution. Steps 1--3 follow Stacks 0C4P with new live sfb statements for its three ampleness inputs. The inherited nearest-blueprint field is null (blueprint_refs ancestor returns None); new nodes preserve that ancestry and add the item to via. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic scheme-theoretic projective-bundle properness, Stacks 01WC, outside the trace-formula and duality arguments; explicitly permitted in the return. No node of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-6a2a6621d",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-6a2a6621d (reviewer sub-agent of L); spot-checked: This re-delivery repairs the earlier C1/C4 RETURN (87d2c902). None of the item's or the new nodes' dependencies are on route-pivot-dropped.txt. The item itself and its citer chain are live, and there is no re-split note. Against clones/side-live, the item's statement, stmt_deps, source and blueprint are identical. The three new statement-only sfb nodes copy Stacks morphisms.tex exactly, with relative ampleness (01VH) spelled out inline: lem-sfb-projective-bundle-relative-ample = 07RL (line 10686, no base hypothesis), lem-sfb-quasiprojective-qc-composition = 0C4M (line 9755, S quasi-compact only, proof via lemma-ample-composition at line 8888), and lem-sfb-proper-relative-ample-projective-bundle = 0BCL(1) (line 10777, S qcqs, proper with a relatively ample module implies projective). Item steps 1-3 follow 0C4P (lines 10806-10821) sentence by sentence. Step 1 uses 01WC properness plus 07RL. Step 2 uses Mathlib proper composition plus 0C4M with C quasi-compact. Step 3 uses 0BCL(1) with C qcqs. Every hypothesis is discharged and nothing is assumed of B. The projective-bundle convention of def-trf-projective-bundle-morphism equals Stacks 01W8. Edge cases checked: E=0 (empty schemes), identity maps, empty S. Each new node is smaller than the parent and does not restate it. The only DAG duplicates are the dropped lem-per copies; live trf ampleness lemmas (very-ample power, canonical Proj criterion, to-H-projective, fibrewise dim-1) are different statements. Batch 5: lem-trf-projective-bundle-proper is generic 01WC. Its 146-node closure has only four trf projective-bundle geometry nodes and no trace-formula or Poincaré node, theorem or assumption, so it is accepted as a tool use. def-trf-projective-bundle-morphism is a general definition already in the base item's stmt_deps, so it is accepted. No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleComposition",
+  "declaration": "AlgebraicGeometry.projectiveBundle_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleComposition.lean",
+  "statement": "theorem projectiveBundle_comp {A B C : Scheme.{u}} [CompactSpace C] [QuasiSeparatedSpace C] (f : A ⟶ B) (g : B ⟶ C) (hf : IsProjectiveBundle f) (hg : IsProjectiveBundle g) : IsProjectiveBundle (f ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df89c8371",
+  "group": "N6",
+  "result": "pass",
+  "note": "Theorem projectiveBundle_comp {A B C : Scheme.{u}} [CompactSpace C] [QuasiSeparatedSpace C] (f g) (hf hg : IsProjectiveBundle) : IsProjectiveBundle (f ≫ g) matches the node and Stacks 0C4P (morphisms.tex 10805-10821) clause by clause; IsProjectiveBundle is the recorded def-trf-projective-bundle-morphism declaration (01W8(1)); qcqs only on C, nothing on B, single arbitrary universe; node differs from side-live only in its lean record; lean.statement verbatim; docstrings carry the source place, blueprint tag and the 3-step proof; proof-only import ProjectiveBundleProper exists live; no definitions; no duplicate in Sheaf/WeilConjectures/Mathlib; edge cases (empty schemes, E=0, identities) fine. No changes, no compile run."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

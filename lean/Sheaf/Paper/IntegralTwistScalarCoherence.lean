@@ -21,21 +21,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.Paper.PbcCoefficientTwists
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
-import Sheaf.Paper.PurTwistSheafLocallyFree
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
-import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.IntegralTwistAmbientCoherence
+import Sheaf.Paper.IntegralTwistCommonScalarModel
+import Sheaf.Paper.CompletedLineTensorCoherence
 
 /-! # Coherence of integral twisting and scalar extension
 
@@ -48,6 +36,7 @@ and `lem-weil-scalar-extension-composition`, integral associativity paragraph
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
@@ -245,6 +234,138 @@ theorem integral_twist_scalar_coherence (m : ℤ) :
         ((sfRationalConstructibleLocalization l G S).map
           ((sfIntegralScalarComp l E F ι S
             (l + 1) (ne_of_lt (Nat.lt_succ_self l)) G κ).hom.app C.obj)) := by
-  sorry
+  classical
+  let d := CompletedLineTensor.associatorData l E S F ι G κ
+  have hd := (CompletedLineTensor.associatorData_existsUnique l E S F ι G κ).exists.choose_spec
+  have hcomp :
+      ∀ C : sfIntegralConstructibleCategory l E S,
+        (completedDerivedScalarExtension l F G κ S).map
+            ((completedScalarComparison l E F ι S).app C.obj) ≫
+          (completedScalarComparison l F G κ S).app
+            ((integralScalarExtensionOfUniverses l E F ι S).obj C.obj) ≫
+          ((sfIntegralScalarComp l E F ι S
+            (l + 1) (ne_of_lt (Nat.lt_succ_self l)) G κ).hom.app C).hom =
+        d.derived.hom.app C.obj ≫ (completedScalarComparison l E G (κ.comp ι) S).app C.obj := by
+    intro C
+    have hc := eq_of_heq
+      ((CompletedLineTensor.canonical_restriction l E F ι G κ S
+        (l + 1) (ne_of_lt (Nat.lt_succ_self l))).1 C)
+    rw [hc]
+    change _ ≫ _ ≫ (CompletedLineTensor.associator l E S F ι G κ C.obj
+      (CompletedLineTensor.intrinsic_complete l E S C)).hom = _
+    dsimp only [CompletedLineTensor.associator, Iso.trans_hom, Iso.symm_hom,
+      Iso.app_hom, Iso.app_inv, Functor.mapIso_hom, CompletedLineTensor.chi,
+      asIso_hom]
+    change (completedDerivedScalarExtension l F G κ S).map
+        ((CompletedLineTensor.chi l E S F ι C.obj
+          (CompletedLineTensor.intrinsic_complete l E S C)).hom) ≫
+      (CompletedLineTensor.chi l F S G κ _
+        (CompletedLineTensor.extension_complete l E S F ι C.obj
+          (CompletedLineTensor.intrinsic_complete l E S C))).hom ≫
+      (CompletedLineTensor.chi l F S G κ _
+        (CompletedLineTensor.extension_complete l E S F ι C.obj
+          (CompletedLineTensor.intrinsic_complete l E S C))).inv ≫
+      (completedDerivedScalarExtension l F G κ S).map
+        ((CompletedLineTensor.chi l E S F ι C.obj
+          (CompletedLineTensor.intrinsic_complete l E S C)).inv) ≫ _ = _
+    simp only [Iso.hom_inv_id_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
+    change (completedDerivedScalarExtension l F G κ S).map
+        (𝟙 ((completedDerivedScalarExtension l E F ι S).obj C.obj)) ≫
+      d.derived.hom.app C.obj ≫ (completedScalarComparison l E G (κ.comp ι) S).app C.obj =
+        d.derived.hom.app C.obj ≫ (completedScalarComparison l E G (κ.comp ι) S).app C.obj
+    rw [(completedDerivedScalarExtension l F G κ S).map_id, Category.id_comp]
+  refine ⟨⟨d.derived, ?_, hcomp⟩, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro P
+    refine ⟨(CompletedLineTensor.scalarAssociatorComplex l E S F ι G κ d.sheaf).app
+      P.obj, ?_, hd.2 P⟩
+    intro i U b c x
+    exact hd.1 (P.obj.X i) U b c x
+  · intro C
+    have ha := (integral_twist_ambient_coherence l E S F G ι κ m C
+      (integralTwistCoherenceObject l E S m C).property).1
+    have hc := (CompletedLineTensor.canonical_restriction l E F ι G κ S
+      (l + 1) (ne_of_lt (Nat.lt_succ_self l))).1
+    have hcW := eq_of_heq (hc (integralTwistCoherenceObject l E S m C))
+    dsimp only [integralTwistCoherenceObject] at hcW
+    rw [← eq_of_heq (hc C), ← hcW] at ha
+    exact ha
+  · intro C P e
+    obtain ⟨a, ha, hmodel⟩ := integral_twist_common_scalar_model l E S F G ι κ m C P e
+    refine ⟨a, ha, hmodel.trans ?_⟩
+    have hβ := (integral_twist_derived_scalar l E G (κ.comp ι) S m).choose_spec
+      |>.choose_spec.2.1 C
+    change (completedScalarComparison l E G (κ.comp ι) S).app
+        ((integralSheafTwist l E S m).mapDerivedCategory.obj C.obj) ≫
+      (integralTwistCompletedBeta l E G (κ.comp ι) S m).hom.app C =
+        (integralTwistOrdinaryBeta l E G (κ.comp ι) S m).hom.app C ≫
+          (integralSheafTwist l G S m).mapDerivedCategory.map
+            ((completedScalarComparison l E G (κ.comp ι) S).app C.obj) at hβ
+    have hc := hcomp (integralTwistCoherenceObject l E S m C)
+    rw [← hβ]
+    simpa only [d, integralTwistCoherenceObject, Category.assoc] using
+      (congrArg (fun f ↦ f ≫
+        (integralTwistCompletedBeta l E G (κ.comp ι) S m).hom.app C) hc).symm
+  · intro P hP
+    have hc := eq_of_heq
+      ((CompletedLineTensor.canonical_restriction l E E (AlgHom.id (Padic l) E)
+        E (AlgHom.id (Padic l) E) S (l + 1) (ne_of_lt (Nat.lt_succ_self l))).2.1
+        ⟨DerivedCategory.Q.obj P.obj, hP⟩)
+    rw [hc]
+    change (CompletedLineTensor.chi l E S E (AlgHom.id (Padic l) E)
+      (DerivedCategory.Q.obj P.obj)
+      (CompletedLineTensor.intrinsic_complete l E S ⟨DerivedCategory.Q.obj P.obj, hP⟩)).hom ≫
+      (CompletedLineTensor.chi l E S E (AlgHom.id (Padic l) E)
+        (DerivedCategory.Q.obj P.obj)
+        (CompletedLineTensor.intrinsic_complete l E S 
+          ⟨DerivedCategory.Q.obj P.obj, hP⟩)).inv ≫ _ = _
+    rw [Iso.hom_inv_id_assoc]
+    exact (CompletedLineTensor.ordinaryUnit_existsUnique l E S).exists.choose_spec P
+  · intro C
+    have ha := (integral_twist_ambient_coherence l E S F G ι κ m C
+      (integralTwistCoherenceObject l E S m C).property).2
+    have hu := (CompletedLineTensor.canonical_restriction l E E
+      (AlgHom.id (Padic l) E) E (AlgHom.id (Padic l) E) S
+      (l + 1) (ne_of_lt (Nat.lt_succ_self l))).2.1
+    have huW := eq_of_heq (hu (integralTwistCoherenceObject l E S m C))
+    dsimp only [integralTwistCoherenceObject] at huW
+    rw [← eq_of_heq (hu C), ← huW] at ha
+    exact ha
+  · intro C
+    apply (sfIntegralConstructible l F S).ι.map_injective
+    have hc := eq_of_heq
+      ((CompletedLineTensor.canonical_restriction l E E (AlgHom.id (Padic l) E)
+        F ι S (l + 1) (ne_of_lt (Nat.lt_succ_self l))).1 C)
+    have hu := eq_of_heq
+      ((CompletedLineTensor.canonical_restriction l E E (AlgHom.id (Padic l) E)
+        F ι S (l + 1) (ne_of_lt (Nat.lt_succ_self l))).2.1 C)
+    simp only [ObjectProperty.ι_map]
+    change ((sfIntegralScalarComp l E E (AlgHom.id (Padic l) E) S
+      (l + 1) (ne_of_lt (Nat.lt_succ_self l)) F ι).hom.app C).hom =
+      (integralScalarExtensionOfUniverses l E F ι S).map
+        ((sfIntegralScalarUnit l E S (l + 1)
+          (ne_of_lt (Nat.lt_succ_self l))).hom.app C).hom
+    rw [hc, hu]
+    exact (CompletedLineTensor.scalar_coherence l E S F ι F (AlgHom.id (Padic l) F)).1
+      C.obj (CompletedLineTensor.intrinsic_complete l E S C)
+  · intro C
+    apply (sfIntegralConstructible l F S).ι.map_injective
+    have hc := eq_of_heq
+      ((CompletedLineTensor.canonical_restriction l E F ι
+        F (AlgHom.id (Padic l) F) S (l + 1) (ne_of_lt (Nat.lt_succ_self l))).1 C)
+    have hu := eq_of_heq
+      ((CompletedLineTensor.canonical_restriction l F F (AlgHom.id (Padic l) F)
+        F (AlgHom.id (Padic l) F) S (l + 1) (ne_of_lt (Nat.lt_succ_self l))).2.1
+        ((sfConstructibleIntegralScalarExtension
+          (l + 1) l (ne_of_lt (Nat.lt_succ_self l)) E F ι S).obj C))
+    simp only [ObjectProperty.ι_map]
+    change ((sfIntegralScalarComp l E F ι S (l + 1)
+      (ne_of_lt (Nat.lt_succ_self l)) F (AlgHom.id (Padic l) F)).hom.app C).hom =
+      ((sfIntegralScalarUnit l F S
+      (l + 1) (ne_of_lt (Nat.lt_succ_self l))).hom.app _).hom
+    rw [hc, hu]
+    exact (CompletedLineTensor.scalar_coherence l E S F ι F (AlgHom.id (Padic l) F)).2.1
+      C.obj (CompletedLineTensor.intrinsic_complete l E S C)
+  · exact (sfRationalScalarComp_existsUnique l E F ι S
+      (l + 1) (ne_of_lt (Nat.lt_succ_self l)) G κ).exists.choose_spec
 
 end WeilConjectures

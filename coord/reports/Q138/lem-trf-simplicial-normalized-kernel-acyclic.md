@@ -1,0 +1,38 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-trace-formula/lem-trf-simplicial-normalized-kernel-acyclic.json: split the item in three steps, preserving its statement and statement dependencies. No new nodes and no new Mathlib leaves.
+- citations.json: four verbatim statement quotations covering every step/node citation.
+- searches.jsonl: the search command's own six logged searches; their actual queries and results were appended to the item's existing Mathlib search history.
+
+Attachments: none. Searched the live lean/WeilConjectures library for the exact blueprint id and normalized-kernel/acyclic terminology. The hits concern unrelated graded exact couples and affine tensor kernels. No project declaration states this item, so there is no ATTACH claim.
+
+WANTED: none.
+
+The imported item was statement-only. Its statement is correct; no hypothesis or conclusion was altered. Its two conclusions require separate ingredients: a degreewise short exact sequence and its cohomology exact sequence, followed by normalization. The item is not itself a one-line Mathlib specialization. The second Mathlib grep found ShortComplex.ShortExact.acyclic_X₁ in Mathlib/Algebra/Homology/HomologySequenceLemmas.lean:232, which proves the first conclusion after constructing the short exact sequence, but says nothing about the positive-face normalized complex. Existing DAG Mathlib leaves provide both the long exact sequence and precisely the required normalized-complex convention. Creating another kernel-acyclic node or normalized-acyclic node would restate clauses of this item unnecessarily.
+
+Nothing remains unfinished in this one-level split. No Lean was written and no compiler, Lake, or build tool was run. All writes are confined to the assigned sandbox.
+
+## Blueprint and searches
+
+Read dag/chapters/sec-trace-formula.json and dag/units/sk-i-curve-zero.json, together with the current literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md. This item is a supporting simplicial lemma along the ancestry already recorded in blueprint.from; it does not replace a geometric step of the unit. Its exact source is Stacks 08P1, second and last proof paragraphs. The existing from.place was already specified and is preserved. The ancestor command identified lem-trf-local-term-locality. Whole-blueprint searches for normaliz, simplicial abelian, and long exact sequence of cochain produced no blueprint node stating this item (the broad normalization search produced unrelated geometry/weights statements). same_as remains empty.
+
+Mathlib was searched only using the required msearch.py command: LeanFinder twice, LeanSearch, Loogle, and grep twice. Read the returned names/types and inspected Mathlib/Algebra/Homology/QuasiIso.lean:73-88, HomologySequenceLemmas.lean:215-241, AlgebraicTopology/DoldKan/HomotopyEquivalence.lean:72-99 and MooreComplex.lean:64-92. The exactness/quasi-isomorphism equivalences assume an already exact source or target. The normalized homotopy equivalence gives a comparison but does not itself prove the kernel is acyclic. No service failure is reported as absence. The interrupted second LeanFinder completed: its six-entry searches.jsonl record was checked before proceeding; it was not repeated.
+
+## Not duplicates
+
+No new node was created. Reused lem-weil-pbc-complex-ses-homology-long-exact (Mathlib leaf, Stacks 0117) and lem-cbc-normalized-alternating-homotopy-equivalence (Mathlib leaf) instead of duplicating them. Searched the DAG by tags 0117, 019C and 08P1, by normalized/long-exact titles, and inspected the candidate statements. Both reused lemmas are generic tools in other units and already Mathlib leaves, so their use does not change the unit route.
+
+## Review by Q138
+
+I read Stacks simplicial.tex at lemma-qis-simplicial-abelian-groups (Tag 08P1), including both the replacement of X by Ker(f) and the final use of normalization. I also read homology.tex at lemma-long-exact-sequence-cochain (Tag 0117) and simplicial.tex at lemma-quasi-isomorphism (Tag 019C), checking the tag-to-label mapping. Stacks uses its normalization convention; I checked the existing positive-face comparison leaf's full statement and the actual Mathlib MooreComplex objX/objD definitions, which use kernels of d_1 through d_n and differential d_0. This avoids silently identifying the opposite-face normalization with the convention in the item. There are no new-node sources to review.
+
+For Step 1 I read def-weil-pbc-simplicial-object in full. Its statement says a simplicial morphism commutes with every operator, exactly what is needed for the displayed equation showing that each operator preserves Ker(f). All identities therefore restrict. The short exact sequence uses the actual kernels and the assumed surjectivity in every degree; positive degrees are all zero and the degree-zero outgoing differential is zero. This is a direct argument from the definitions, not an appeal to an uncited exactness theorem.
+
+For Step 2 I read the full statement of lem-weil-pbc-complex-ses-homology-long-exact. It applies to integer cochain complexes in any abelian category and requires short exactness in each degree, which Step 1 supplies in Ab. Its conclusion includes the exact five-term segment used here. I checked both adjacent hypotheses: surjectivity of H^{r-1}(s(f)) kills the connecting map, and injectivity of H^r(s(f)) kills the image of the kernel inclusion. Exactness then forces the kernel cohomology group to vanish. This works for every integer, including r=0; it does not assume an augmentation or bounded-below complex. I did not cite a definition node for a long-exact-sequence theorem.
+
+For Step 3 I read lem-cbc-normalized-alternating-homotopy-equivalence and def-weil-abstract-derived-category in full. The former states that the actual inclusion j has a chain-map inverse up to homotopy, with the homotopy equation; the latter explicitly defines cohomology as cycles modulo boundaries. Reindexing C_m=s(K)^{-m} uses identical groups and differentials, not a derived/per-degree comparison theorem created in place of a derived isomorphism. For a normalized cycle z, acyclicity supplies dt=jz. Choosing the homotopy sign so that 1-pj=partial h+h partial, the displayed formula partial(pt+h z)=z proves the needed normalized boundary directly. Thus no additional homotopy-invariance lemma is hidden. The reverse inclusion uses partial squared equal to zero from the cited chain-complex statement.
+
+I tested the zero map 0 to 0 and identity maps (zero kernels), and checked the endpoint m=0 separately: every z in K_0 is a cycle, the formula supplies an element of N(K)_1 mapping to z, and no face from degree zero to degree minus one is used. For a constant nonzero kernel the quasi-isomorphism hypothesis fails already at H^0, so that familiar non-acyclic example is excluded. Arbitrary unbounded simplicial degrees cause no finite-sum issue, since each alternating differential is finite.
+
+Against delivery-errors B-E, all objects and notions in the unchanged statement are introduced and its definition dependencies are correct; no new unsplit node contains a proof. All non-elementary inputs are the statements of cited existing nodes, and citations.json quotes them verbatim. The two mathematical arguments have not been moved to new nodes restating the item. There is no induction, transport claim, or hidden comparison lemma. Every proof step is below 2000 characters. The conclusions and hypotheses were not weakened, no source error was found, and the only convention adjustment is supplied explicitly by the existing normalized comparison leaf. The mechanical server dry run is the next verification step.

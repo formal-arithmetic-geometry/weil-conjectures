@@ -8,6 +8,7 @@ public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
+import Sheaf.AlgebraicGeometry.AffinePresentationSectionColimit
 
 /-! # The essential image of the comparison inverse image
 
@@ -22,9 +23,42 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+attribute [local instance] uliftCategory
+
+private theorem relativeContinuity_of_classical (X : Scheme.{u})
+    (F : Sheaf (ProEt.topology X) (Type (u + 1)))
+    (hF : AlgebraicGeometry.ProEtale.IsClassical F) :
+    Functor.PreservesRelativeFilteredColimits.{u} (AffineEtale.toAffineProEt X)
+      ((AffineProEt.toProEt X).op ⋙ F.obj) := by
+  constructor
+  intro I _ _ K c hc
+  let e := ULiftHomULiftCategory.equiv.{u + 1, u + 1, u, u} I
+  let c' := (AffineProEt.toProEt X).mapCone c
+  have hcOver : IsLimit ((ProEt.forget X).mapCone c') :=
+    isLimitOfReflects (Over.forget X)
+      (((AffineProEt.isLimitMapConeToSchemeOfIsLimit c hc).ofIsoLimit
+        (Functor.mapConeMapCone c).symm).ofIsoLimit (Functor.mapConeMapCone c').symm)
+  let P : AlgebraicGeometry.ProEtale.AffinePresentation X
+      (ULiftHom.{u + 1} (ULift.{u + 1} I)) :=
+    { diagram := e.inverse ⋙ (K ⋙ AffineEtale.toAffineProEt X) ⋙ AffineProEt.toProEt X
+      affine := fun i ↦ inferInstanceAs
+        (IsAffine ((AffineEtale.toAffineProEt X).obj (K.obj (e.inverse.obj i))).left)
+      etale := fun i ↦ inferInstanceAs
+        (Etale ((AffineEtale.toAffineProEt X).obj (K.obj (e.inverse.obj i))).hom)
+      cone := c'.whisker e.inverse
+      affineVertex := inferInstanceAs (IsAffine c.pt.left)
+      isLimit := hcOver.whiskerEquivalence e.symm }
+  have : IsIso (AlgebraicGeometry.ProEtale.continuityMap P F.obj) :=
+    (CategoryTheory.isIso_iff_bijective _).mpr (hF P)
+  have hIso : IsIso ((colimit.isColimit _).desc
+      (AlgebraicGeometry.ProEtale.sectionCocone P F.obj)) := by exact this
+  have h : IsColimit (AlgebraicGeometry.ProEtale.sectionCocone P F.obj) :=
+    IsColimit.ofPointIso (colimit.isColimit _)
+  exact ⟨by exact h.whiskerEquivalence e.op⟩
 
 /-- A pro-étale sheaf of sets is classical exactly when it comes from the étale site,
 and exactly when the comparison counit is invertible.
@@ -59,6 +93,29 @@ theorem proEtaleClassicalSheavesImage (X : Scheme.{u})
       AlgebraicGeometry.ProEtale.IsClassical G) ∧
       (AlgebraicGeometry.ProEtale.IsClassical G ↔
         IsIso ((proEtaleSiteComparison X).counit.app G)) := by
-  sorry
+  let L := Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
+    (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)
+  have hL (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+      AlgebraicGeometry.ProEtale.IsClassical (L.obj F) := by
+    intro I _ _ P
+    obtain ⟨h⟩ := AlgebraicGeometry.ProEtale.affinePresentation_sectionCocone_isColimit
+      (L.obj F) (proEtaleComparisonSets_continuous X F) P
+    have : IsIso (AlgebraicGeometry.ProEtale.continuityMap P (L.obj F).obj) := by
+      change IsIso (((colimit.isColimit _).coconePointUniqueUpToIso h).hom)
+      infer_instance
+    exact (CategoryTheory.isIso_iff_bijective _).mp inferInstance
+  have hCounit (hG : AlgebraicGeometry.ProEtale.IsClassical G) :
+      IsIso ((proEtaleSiteComparison X).counit.app G) :=
+    proEtaleComparisonCounitSets_isIso_of_continuous X G
+      (relativeContinuity_of_classical X G hG)
+  have hImage (h : IsIso ((proEtaleSiteComparison X).counit.app G)) :
+      ∃ F : Sheaf X.smallEtaleTopology (Type (u + 1)), Nonempty (G ≅ L.obj F) := by
+    exact ⟨_, ⟨(asIso ((proEtaleSiteComparison X).counit.app G)).symm⟩⟩
+  have hClassical (h : ∃ F : Sheaf X.smallEtaleTopology (Type (u + 1)),
+      Nonempty (G ≅ L.obj F)) : AlgebraicGeometry.ProEtale.IsClassical G := by
+    obtain ⟨F, ⟨e⟩⟩ := h
+    exact (AlgebraicGeometry.ProEtale.isClassical_iso_iff e).mpr (hL F)
+  exact ⟨⟨hClassical, fun h ↦ hImage (hCounit h)⟩,
+    ⟨hCounit, fun h ↦ hClassical (hImage h)⟩⟩
 
 end AlgebraicGeometry.Scheme

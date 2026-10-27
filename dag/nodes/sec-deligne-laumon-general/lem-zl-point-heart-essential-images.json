@@ -1,0 +1,196 @@
+{
+ "id": "lem-zl-point-heart-essential-images",
+ "kind": "statement",
+ "title": "PointHeartFiniteStageEquivalences",
+ "statement": "Fix D, l different from the characteristic, and an algebraic closure Omega of Q_l. For every finite coefficient subfield A of Omega, the specified rational point-heart functor H^0 Fib_A is full, faithful, additive, and essentially surjective onto finite-dimensional A-vector spaces. The specified common-stage point-heart functor H^0 Fib_Omega has the same three functor properties and is essentially surjective onto finite-dimensional Omega-vector spaces. No exactness properties are included in this lemma. All specified functors and structures are those of [def-zl-point-heart-finite-stage-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero input; steps 1, 2, 3, 5, 6 of lem-zl-point-heart-finite-stage"
+ },
+ "stmt_deps": [
+  "def-zl-point-heart-finite-stage-data"
+ ],
+ "proof": [
+  {
+   "text": "First work at a finite coefficient field $E$. The source standard halves are the isomorphism closures of the integral halves. Sections on $s_{\\mathrm{proet}}$ are exact and satisfy $H^r\\Gamma(s,K)=\\Gamma(s,\\mathcal H^rK)$. Rationalization of module complexes is exact: tensoring with $E=\\mathcal O_E[1/\\varpi_E]$ is module localization (the identification sends $x\\otimes a/\\varpi_E^n$ to $ax/\\varpi_E^n$), and localization preserves exact sequences. Thus the specified $\\operatorname{Fib}_{s,E}(K)=\\Gamma(s,K)\\otimes_{\\mathcal O_E}E$ preserves both standard halves. The standard module truncations preserve bounded finite-dimensional cohomology, so restrict to $D^b_{\\mathrm{fd}}(E)$. Both categories consequently have bounded standard t-structures. The specified fibre functor is an exact equivalence by the point-fibre theorem.",
+   "uses": [
+    "def-weil-constructible-standard-tstructure",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-finite-coefficient-point",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-truncations",
+    "def-weil-point-fd-complexes",
+    "prop-constructible-truncations",
+    "lem-weil-point-fibre-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations; source standard pairs and specified sections functor as cited"
+   }
+  },
+  {
+   "text": "Apply the t-exact truncation-comparison theorem to this exact functor: $\\operatorname{Fib}_{s,E}\\tau^{\\le m}\\cong\\tau^{\\le m}\\operatorname{Fib}_{s,E}$ and likewise for $\\tau^{\\ge m}$, preserving their canonical maps. It also reflects the halves. Indeed, if its value on $K$ is in degree $\\le0$, the value on $\\tau^{\\ge1}K$ is zero; full faithfulness reflects zero objects, since $\\operatorname{id}_X=0$ whenever its image is zero. Hence $\\tau^{\\ge1}K=0$, which is the source degree-$\\le0$ criterion. Use $\\tau^{\\le-1}$ for the other half. For any target heart object choose a preimage under the derived equivalence; these two arguments put that preimage in the source heart. Restricting the full-faithfulness bijections therefore gives an equivalence of these two hearts.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "def-weil-constructible-heart",
+    "lem-weil-point-fibre-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.3–1.3.6, canonical truncations and their universal properties; reflection argument written here"
+   }
+  },
+  {
+   "text": "On the standard heart inside $D^b_{\\mathrm{fd}}(E)$, degree-zero cohomology is an equivalence with finite-dimensional $E$-vector spaces. Explicitly, for a representing complex $C$ concentrated in cohomology degree zero, the canonical maps $C\\leftarrow\\tau^{\\le0}C\\to H^0(C)[0]$ are quasi-isomorphisms: the first retains all nonzero cohomology, and the second is the cycles-to-cohomology projection in degree zero. Their natural roof supplies the canonical identification. The degree-zero embedding is fully faithful by the cited derived-single theorem, and $H^0(V[0])=V$. This proves both full faithfulness and essential surjectivity of $\\omega_E=H^0\\operatorname{Fib}_{s,E}$, with precisely the canonical truncation identification, rather than a chosen splitting of a complex.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-point-fd-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts (2); Tag 08J5, remark-truncation-distinguished-triangle; Tag 0118 for the explicit truncations"
+   }
+  },
+  {
+   "text": "Every object $X=(E,K)$ of $\\Sh_c(s,\\Omega)$ has an actual finite-stage heart model. Put $M=\\tau_E^{\\ge0}\\tau_E^{\\le0}K$. It lies in $\\Sh_c(s,E)$. Constructible truncations and their canonical maps are computed at finite stages, so $(E,M)$ represents $\\mathcal H^0(X)$. Since $X$ is in the heart, the two canonical truncation maps identify $\\mathcal H^0(X)$ with $X$; write $e:(E,M)\\xrightarrow{\\sim}X$ for the resulting isomorphism. This uses the heart condition only in the common-stage category; it does not assert that the original integral or rational representative $K$ was already in the heart. Subsequent extension of $M$ remains in the heart because the truncations commute with finite scalar extension.",
+   "uses": [
+    "prop-constructible-truncations",
+    "def-weil-constructible-heart",
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.3–1.3.4; stagewise truncation formulas of prop-constructible-truncations"
+   }
+  },
+  {
+   "text": "We now check the $\\Omega$ equivalence directly, without identifying the raw common-stage category with an idempotent completion. Replace two heart objects by finite-stage heart models from step 5, over fields $E,E'$. At a common $L\\supset E,E'$, step 3 identifies their Hom group with the linear maps between the corresponding finite-dimensional $L$-fibres, and step 4 identifies the transition maps with scalar extension. The Hom definition is the directed colimit of exactly these groups. In bases over $E$ and $E'$, an $\\Omega$-linear map is a finite matrix; its finitely many entries lie together in a finite $L\\subset\\Omega$, by the union and compositum assertions for finite subextensions. A matrix over $L$ becoming zero over $\\Omega$ already has every entry zero. Hence this Hom-colimit maps bijectively to the $\\Omega$-linear Hom group. Every finite-dimensional $\\Omega$-space is isomorphic to $\\Omega^d$; the finite equivalence at $\\mathbf Q_\\ell$ realizes $\\mathbf Q_\\ell^d$. This proves essential surjectivity too. By definition of common-stage cohomology its value is $H^0\\operatorname{Fib}_{s,\\Omega}$, with the scalar comparison of step 4.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-directed-colimit-abelian-groups",
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-vector-space-scalar-extension",
+    "def-weil-coefficient-cohomology-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero argument; common-stage matrix argument supplied here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-coefficient-cohomology-modules",
+  "def-weil-constructible-heart",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-point-fd-complexes",
+  "def-weil-vector-space-scalar-extension",
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-proetale-sections-exact",
+  "prop-constructible-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7; explicit argument inherited from the reviewed parent plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A full faithful additive functor whose image is exactly finite dimensional modules is exact",
+   "results": "exactFunctor and exactFunctor_iff, leftExactFunctor, and general functor categories; no result for the specified point-heart realization",
+   "date": "2026-10-25",
+   "verdict": "General exactness tools apply after identifying the essential image; the specified point and Weil descent claims are absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t exact equivalence induces an exact equivalence on hearts and finite diagrams descend along filtered coefficient extensions",
+   "results": "Functor.exact_tfae, Abelian.Ext.mapExactFunctor, Functor.map_distinguished_exact, and preservesFiniteLimits/Colimits_tfae",
+   "date": "2026-10-25",
+   "verdict": "Useful general exactness infrastructure, but no direct specified point-heart or finite-stage Weil descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "point.*[Hh]eart|pointRationalFibreScalarIso; FGModuleCat finite limits, colimits, and Abelian; shortExact_map_iff",
+   "results": "PointHeartFiniteStage has the assigned theorem only; CoefficientCohomologyModules supplies changeStage; FGModuleCat.Abelian and CategoryTheory.Abelian.ShortExact supply exactness infrastructure. Local rg and msearch both used.",
+   "date": "2026-10-25",
+   "verdict": "Reuse FGModuleCat universal-property infrastructure and the existing changeStage theorem; no duplicate of the split point claims found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointHeartFiniteStage",
+  "date": "2026-10-25",
+  "group": "R7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 7, dimension-zero point-heart and finite-stage argument",
+   "via": [
+    "lem-zl-point-weil-heart-flag",
+    "lem-zl-point-heart-finite-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointHeartFiniteStageEquivalences",
+  "file": "lean/Sheaf/Paper/PointHeartFiniteStageEquivalences.lean",
+  "declaration": "WeilConjectures.zl_point_heart_essential_images",
+  "declarations": [
+   "WeilConjectures.zl_point_heart_essential_images"
+  ],
+  "statement": "theorem zl_point_heart_essential_images : (∀ A : Padic.FiniteCoefficientFields l Ω, (zlPointHeartOmega D l hl A.val).Full ∧ (zlPointHeartOmega D l hl A.val).Faithful ∧ (zlPointHeartOmega D l hl A.val).Additive ∧ (∀ V : ModuleCat.{u} A.val, FiniteDimensional A.val V → ∃ X, Nonempty ((zlPointHeartOmega D l hl A.val).obj X ≅ V))) ∧ (zlPointCommonHeartOmega D l hl Ω).Full ∧ (zlPointCommonHeartOmega D l hl Ω).Faithful ∧ (zlPointCommonHeartOmega D l hl Ω).Additive ∧ (∀ V : ModuleCat.{u} Ω, FiniteDimensional Ω V → ∃ X, Nonempty ((zlPointCommonHeartOmega D l hl Ω).obj X ≅ V))",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3ce6d",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T123659-L-1889419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3ce6d",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T123659-L-1889419",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem and 20 relocated defs (type/value hashes published vs sandbox, rfl equality of the changed zlPointWeilStageOmega body) against base 6c5fa6c0be3; 4 sorried split statements against the item's conjuncts and the ZlPointFiniteStageWitness fields; #print axioms in a full sandbox compile"
+ }
+}

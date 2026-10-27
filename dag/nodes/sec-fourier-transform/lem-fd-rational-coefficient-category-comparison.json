@@ -30,72 +30,52 @@
  ],
  "proof": [
   {
-   "text": "Apply the integral-identity/raw-rationalization lemma for every allowed $T$ and finite $E$. Its equivalences fix exactly the common integral objects, reductions and pure-tensor morphisms required here, and are exact in both directions. Thus they give the prescribed $I_{T,E}$ and $J_{T,E}$, with no added retracts.",
+   "text": "For every allowed scheme T and finite field E, take the normalized FdRationalStageComparison supplied by fdIntegralIdentityRationalEquivalence. All choices occur inside the existential theorem proof, not in a definition.",
    "uses": [
     "lem-fd-integral-identity-rational-equivalence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "old proof steps 1–2: common integral identity and exact raw rationalization"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the completion-inverse coherence lemma to these identity equivalences. It gives $j_{T,L/E}=\\chi_{L/E}^{-1}[1/\\varpi_L]$, with the specified chain-map lift, shifts, units and scalar cocycle. The equivalences of the preceding step satisfy its identity-on-tensors hypotheses, so these are the requested scalar comparisons rather than unspecified isomorphisms.",
+   "text": "Apply fdCompletionInverseScalarCoherence to this family of finite-stage equivalences. Retain its stage-system morphism, finite functor and shift pins, ordinary scalar transport, ambient and restricted integral scalar isomorphisms, localization equation and chi normalization. These fields form FdFiniteCoefficientComparison; its scalar shift field is the hom half of the supplied hom/inverse compatibility.",
    "uses": [
     "lem-fd-completion-inverse-scalar-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "old proof steps 3–4: completion-inverse scalar comparison and cocycle"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the whole-tower integral pullback lemma simultaneously to the identity equivalences and completion inverses just chosen. It gives the finite comparisons from the identity of the entire reduction tower, their normalized ambient lifts, and the integral unit, composition and mixed scalar equations. Its hypotheses hold at every scheme isomorphism because both source and target are allowed schemes. Fix the supplied simultaneous whole-diagram realization data.",
-   "uses": [
-    "lem-fd-whole-tower-integral-pullback-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "old proof steps 7–8: identity on entire quotient towers and normalized integral coherence"
-   }
-  },
-  {
-   "text": "Apply common-stage comparison descent to the finite equivalences and scalar cocycle from steps 1–2. It gives the exact $\\Omega$-linear $J_T$ and precisely the displayed conjugation formula on Hom colimits, preserving finite inclusions, shifts and common-stage triangles. Apply its transformation assertion to the finite pullback comparisons of step 3: their mixed square is its hypothesis. The resulting $b_h$ retains all finite identity/composition/scalar equations. Together with their fixed integral lifts these are the coefficient and simultaneous pullback data of the statement.",
+   "text": "Apply fdNormalizedCommonStageDescent to each finite coefficient datum. It supplies FdCoefficientComparison with the same finite and integral fields and all common-stage equivalence, shift, exactness and scalar properties. Choose these simultaneously over the allowed schemes.",
    "uses": [
     "lem-fd-common-stage-comparison-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "old proof steps 5–6 and 9: common-stage Hom descent, exactness, and pullback transformation descent"
-   }
+   "elementary": false
   },
   {
-   "text": "For a separated finite-type $X_0/k_0$, apply the geometric-fibre/fixed-pair lemma to this simultaneous datum. It verifies the three scheme hypotheses on $X$, applies the comparisons to the scheme automorphism $g_X$ without imposing $k$-linearity, and identifies the finite and common-stage Weil pairs by $(K,\\theta)\\mapsto(JK,J(\\theta)b_K^{-1})$, with arrow map $J$. Its intertwining and finite-inclusion assertions give the final clause.",
+   "text": "Apply wholeTowerIntegralPullbackComparison to these coefficient data. Build FdCoefficientComparisonSystem directly from its realization, realization_coherent and pullback fields. Its unit, composition and scalar_realization fields are precisely the three conjuncts of FdComparisonSchemeCoherence, by reduction of the constructed record.",
+   "uses": [
+    "lem-fd-whole-tower-integral-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply frobeniusFixedPairComparison to this system and each separated finite-type X0. Install the supplied noetherian, finite-dimension and invertibility proofs. Retain its common Weil-pair equivalence and functor HEq, and choose its finite equivalences with their supplied functor HEqs. These are exactly the fields of FdFrobeniusComparison.",
    "uses": [
     "lem-fd-frobenius-fixed-pair-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-    "place": "old proof steps 10–11: geometric-fibre hypotheses and fixed-pair transport"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-fd-integral-identity-rational-equivalence",
   "lem-fd-completion-inverse-scalar-coherence",
-  "lem-fd-whole-tower-integral-pullback-comparison",
   "lem-fd-common-stage-comparison-descent",
+  "lem-fd-whole-tower-integral-pullback-comparison",
   "lem-fd-frobenius-fixed-pair-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
-  "place": "Final sentence; assembly of five extracted comparison lemmas"
+  "place": "Final sentence; Lean assembly of the five existing comparison lemmas, C2, 2026-10-22"
  },
  "mathlib_searches": [
   {
@@ -196,22 +176,7 @@
   "blueprint": "Final sentence of def-fd-trace-function. New arguments realize respectively old steps 1–2, 3–4, 7–8, 5–6/9, and 10–11, below the unchanged trace unit.",
   "tool_uses": []
  },
- "tool_uses": [
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-linear-scalar-localization-triangulated",
-  "prop-weil-pbc-scalar-extension",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-scalar-extension-composition",
-  "lem-trf-integral-pullback-comparison-realization",
-  "lem-weil-derived-limit-roos-complex",
-  "lem-weil-proetale-countable-products-exact",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-pc-kflat-resolution",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-kun-dimension-finite-type"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -244,5 +209,26 @@
   "result": "pass",
   "note": "Read all four delivered modules, node JSONs and the key dependency declarations (IntegralPullbackComparisonRealization, DerivedPullbackTensorHom, IntegralOperationsScalarComparisons, IntegralStratifiedPerfectCharacterization, SfWeilSheafComplex, StageSystem, IsoAlgebra.mapOfNatIso). Clause-by-clause: hypotheses exact (stalk-invertibility = PBC interface; residue Invertible derived); J_{T,E} pinned by integral_identity/objects/tensors, exact both ways; beta pinned to chi via integral_scalar_lift/chi/ordinary.completion with direction PBC->SF so j=beta^{-1}; cocycle=family.coh, shifts; pair functor = family.functor, exact, Omega-linear, no Karoubi; pullback pinned by whole-tower FdPullbackChain + normalization, mixed square, pair_components; FdComparisonSchemeCoherence fixes unit/composition/scalar to lem-trf and PBC canonical isos; Frobenius pairs via IsoAlgebra.mapOfNatIso for separated finite-type X0. Verified in Lean that the HEq-related types coincide (Stage = sfRational over pbcFiniteField by rfl; sfCommonStageWeilComplex and sfWeilComplex equal the IsoAlgebra types by congr). nt_compile --json on all four files: clean, 21.4/23.4/7.2/4.7 s; sorry only in the final theorem (axioms checked). lean.statement verbatim for all four nodes; docstrings/source/blueprint present; report sections present. Remarks only: simultaneous realization coherence for all E<=L is the item's own obligation; scheme coherence is stated integrally, and the rational/common-stage versions follow from the pins."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261022T142949-L-905791",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

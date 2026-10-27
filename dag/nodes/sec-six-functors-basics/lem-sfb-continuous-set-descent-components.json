@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-continuous-set-descent-components",
+ "kind": "statement",
+ "title": "Descent, component factorization and discrete comparison for continuous set functions",
+ "statement": "Use compatible universes [def-weil-size-convention]. Let $D$ be any topological space and $X$ a scheme [def-pc-scheme]. On compact Hausdorff totally disconnected spaces with finite jointly surjective coverings, $S\\mapsto C(S,D)$ is a sheaf of sets. The continuous-function presheaf $F_{D,X}(U)=C(|U|,D)$ with restriction by precomposition [def-sfb-continuous-set-presheaf] is a sheaf on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. If $D$ is totally disconnected and $U$ is a quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated [def-weil-quasi-separated-morphism] scheme over $X$, the connected-component quotient $q_U:|U|\\to\\pi_0(|U|)$ has profinite target, and precomposition is a bijection $C(\\pi_0(|U|),D)\\xrightarrow{\\sim}C(|U|,D)$, natural in $U$ and continuous maps of $D$. Here $\\pi_0$ has the quotient topology. If $D$ is discrete, the map from the constant presheaf with value $D$ to $F_{D,X}$, sending $d$ to the constant function $d$, is locally surjective and locally injective: sections lift on an open covering and two constants with equal images are equal on a covering. Its sheafification is an isomorphism from the associated constant set sheaf [def-weil-pbc-constant-sheaf] to $F_{D,X}$. This includes $D=\\varnothing$ and the empty scheme.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Lemma 4.2.12, p.30; HRS Example 3.1, p.6; former item steps 1, 2 and 9."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-continuous-set-presheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For a finite jointly surjective family $S_i\\to S$ of profinite spaces put $S\\prime=\\coprod_i S_i$ and $q:S\\prime\\to S$. A finite disjoint union is compact: restrict an open cover to each summand, take a finite subcover there, and unite these finitely many finite subcovers. The cited compact-to-Hausdorff theorem therefore makes $q$ a quotient map. A compatible family $f_i:S_i\\to D$ defines a continuous $f\\prime:S\\prime\\to D$ by its summand restrictions. Compatibility on $S_i\\times_S S_j$ says $f_i(x)=f_j(y)$ whenever $x,y$ have the same image in $S$. Thus $f\\prime$ is constant on every fibre of $q$, and defines a unique set map $f:S\\to D$. For each open $O\\subseteq D$, $q^{-1}(f^{-1}(O))=(f\\prime)^{-1}(O)$ is open. The quotient criterion makes $f^{-1}(O)$ open, so $f$ is continuous and glues the family. Surjectivity of $q$ gives uniqueness. If the family is empty, joint surjectivity forces $S=\\varnothing$ and there is exactly one map $S\\to D$, as required. No separation condition on $D$ was used. In Lean this is the existing Mathlib construction continuousSetProfiniteSheaf, whose property is the required sheaf condition; TopCat.toSheafCompHausLike proves it by quotient descent.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.2(1), proof, first sentence (continuous surjections of profinite sets are quotient maps); expanded finite-family argument"
+   }
+  },
+  {
+   "text": "The fpqc sheaf of sets of the cited theorem has sections $C(|U|,D)$ and precisely the precomposition restrictions of $F_{D,X}$. Every covering in $X_{\\mathrm{proet}}$ is an fpqc covering by its site definition. A matching family on such a cover, including its agreement on the scheme fibre products over $U$, therefore has a unique continuous-map section over $U$ by fpqc descent. This section is a section of $F_{D,X}$ itself. This proves the sheaf condition on the generating coverings, hence on their generated Grothendieck topology. Apply Mathlib isSheaf_fpqcTopology_continuousMapPresheaf, Presheaf.IsSheaf.of_le with Scheme.proetaleTopology_le_fpqcTopology, and the continuous forgetful functor op_comp_isSheaf_of_isSheaf.",
+   "uses": [
+    "lem-sfb-set-continuous-functions-fpqc-sheaf",
+    "def-sfb-continuous-set-presheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, first assertion and first paragraph of proof; use its fpqc strengthening already recorded in the DAG"
+   }
+  },
+  {
+   "text": "If $U$ is quasi-compact and quasi-separated, its underlying space is spectral by the cited scheme theorem. Apply the spectral-component theorem to $|U|$: its quotient $\\pi_0(|U|)$ by connected components, with the quotient topology, is compact, Hausdorff and totally disconnected. This is the claimed profinite target. This step does not require any hypothesis on $D$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-pe-spectral-components-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12 and the paragraph immediately following its proof; Stacks Tags 094L and 0906"
+   }
+  },
+  {
+   "text": "Assume $D$ totally disconnected. A continuous image of a connected component $K$ of $|U|$ is connected: a separation of the image would pull back to two disjoint nonempty relatively open subsets covering $K$. By total disconnectedness this image has at most one point. Every $f\\in C(|U|,D)$ is therefore constant on each component and defines a unique set map $\\bar f:\\pi_0(|U|)\\to D$ with $\\bar f q_U=f$. It is continuous directly from the quotient topology: for open $O\\subseteq D$, $q_U^{-1}(\\bar f^{-1}(O))=f^{-1}(O)$ is open. Conversely $g\\mapsto gq_U$ is continuous precomposition; the two operations are inverse because $q_U$ is surjective. For $a:V\\to U$, the same connected-image argument defines $\\pi_0(a)$ and $q_U|a|=\\pi_0(a)q_V$; its continuity follows by the same quotient criterion. Thus $(gq_U)|a|=(g\\pi_0(a))q_V$. For continuous $b:D\\to D\\prime$ between totally disconnected targets, $b(gq_U)=(bg)q_U$. These equalities prove the two stated naturalities. On empty $U$ both function sets are singletons. Lean uses the inverse of continuousMapPresheafEquivOfTotallyDisconnectedSpace for the bijection, Continuous.connectedComponentsMap_mk for scheme naturality, and reflexivity for coefficient naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, second paragraph of proof; quotient-topology and naturality details expanded"
+   }
+  },
+  {
+   "text": "For each point x of a site object U and continuous section s to a discrete space D, let W_x be the open fibre of s through x. Its inclusion into U is an open immersion, hence etale and weakly etale by the Mathlib instances. Composition with U to X is weakly etale by Mathlib WeaklyEtale.comp, so W_x is a site object. The family indexed by points of U is jointly surjective: x is the image of the point x in W_x. Mathlib Scheme.ofArrows_mem_precoverage_iff makes the underlying family a Zariski precover. Scheme.zariskiPrecoverage_le_propQCPrecoverage makes it a weakly-etale quasi-compact precover. By Scheme.ProEt.precoverage, Presieve.map_ofArrows, and Precoverage.generate_mem_toGrothendieck, it generates a covering sieve on the small pro-etale site. This uses the existing Mathlib open-cover admissibility theorem instead of the stronger project etale/ind-etale comparison packages. When U is empty the family is empty, still jointly surjective, and gives the empty covering.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-proetale-site",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, discrete-target conclusion; open-cover admissibility expanded"
+   }
+  },
+  {
+   "text": "Let $D$ be discrete and let $P$ be the constant set presheaf with value $D$. The functions $\\eta_U(d)(u)=d$ define a presheaf map $\\eta:P\\to F_{D,X}$, since precomposition preserves constants. For $f\\in C(|U|,D)$, each fibre $W_d=f^{-1}(\\{d\\})$ is open. The nonempty fibres cover $U$, and on $W_d$ the section $f$ is the image of $d\\in P(W_d)$. Step 5 makes this an allowed covering. If $D=\\varnothing$, a section $f$ exists only when $U=\\varnothing$; the empty covering gives local surjectivity there without choosing an element of $D$. If $\\eta_U(d)=\\eta_U(e)$ and $U$ is nonempty, evaluation at any point of $U$ gives $d=e$, so the identity covering witnesses local injectivity. On empty $U$, the empty covering witnesses local injectivity, even for unequal $d,e$. Thus $\\eta$ is locally surjective and locally injective, with no exception for empty $D$ or $U$. The Lean family is indexed by points x of U, with value s(x), rather than by all elements of D; its universe is therefore u even when D has universe u+1. For local injectivity Mathlib Scheme.ProEt.bot_mem_topology supplies the empty covering.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-sfb-continuous-set-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, last assertion; fibre-open-cover and empty-case details expanded"
+   }
+  },
+  {
+   "text": "Use the small-skeleton and compatible-universe convention of the site. Apply the cited set-presheaf local-bijection criterion to $\\eta$ from step 6: its sheafification $P^\\#\\to F_{D,X}^\\#$ is an isomorphism. By step 2 the target presheaf is already a sheaf, so its sheafification is canonically itself (the universal property gives mutually inverse maps). By the definition of the constant set sheaf, $P^\\#$ is the associated constant sheaf $\\underline D$. The resulting isomorphism $\\underline D\\xrightarrow{\\sim}F_{D,X}$ is the one induced by the constant functions $d\\mapsto\\eta(d)$. In Lean W_of_isLocallyBijective and W_iff show that presheafToSheaf.map of the constant-section map is invertible. Adjunction.homEquiv_counit identifies continuousSetConstantMap with this map followed by the invertible sheafification counit.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, last assertion, completed using the set-valued sheafification criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "lem-sfb-set-continuous-functions-fpqc-sheaf",
+  "def-sfb-continuous-set-presheaf",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-pe-spectral-components-profinite",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "lem-cbc-set-presheaf-sheafification-local-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, p.30, and Lemma 4.3.2(1), p.31; discrete and quotient details expanded; D3 Lean proof uses Mathlib quotient sheaves, fpqc descent, component equivalence, Zariski-precoverage inclusion, and local-bijection localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous maps from schemes to any topological space form a pro etale sheaf; discrete targets give the constant sheaf and totally disconnected targets factor through connected components",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forget, Condensed.isSheafProfinite, AlgebraicGeometry.Scheme.smallEtaleTopology, Condensed.lanSheafProfinite, LightCondensed, Condensed.ofSheafForgetProfinite; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: fpqc sheafhood and component factorization are present, but the discrete constant-set comparison on the small pro-etale site is not"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification of the constant set presheaf on the pro etale site is the sheaf of continuous maps to a discrete space including the empty space",
+   "results": "OK: 8 hits; LightCondensed.discrete_obj, Condensed.discrete_obj, LightCondensed.discrete_map, LightCondensed.discrete, Condensed.discrete_map, LightCondensed.underlying_obj, CategoryTheory.Sheaf.IsConstant, LightCondensed.IsDiscrete; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: fpqc sheafhood and component factorization are present, but the discrete constant-set comparison on the small pro-etale site is not"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousMapPresheaf\"",
+   "results": "OK: 10 hits; AlgebraicGeometry.continuousMapPresheaf, AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheaf, AlgebraicGeometry.isSheaf_zariskiTopology_continuousMapPresheaf, AlgebraicGeometry.continuousMapPresheafAb, AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheafAb, AlgebraicGeometry.continuousMapPresheaf_obj, AlgebraicGeometry.continuousMapPresheafEquivOfTotallyDisconnectedSpace, AlgebraicGeometry.continuousMapPresheafIsoUlift; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: fpqc sheafhood and component factorization are present, but the discrete constant-set comparison on the small pro-etale site is not"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapPresheaf|constantSheaf.*[Cc]ontinuous|[Cc]ontinuous.*constantSheaf",
+   "results": "OK: 7 hits; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: fpqc sheafhood and component factorization are present, but the discrete constant-set comparison on the small pro-etale site is not"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous map set sheaves on profinite sets and pro etale schemes, constant sheaves for discrete targets",
+   "results": "OK: 8 hits; LightCondSet.discrete, CompHausLike.LocallyConstant.functorToPresheavesIso, LightCondensed.IsDiscrete, Condensed.lanSheafProfinite, LightCondensed.discrete, Condensed.discrete, Condensed.locallyConstantPresheaf, CompHausLike.LocallyConstant.functorIso; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: fpqc sheafhood and component factorization are present, but the discrete constant-set comparison on the small pro-etale site is not"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous maps to a topological space form a sheaf on profinite spaces and the small pro etale site; connected components and constant sheaves for discrete targets",
+   "results": "{\"t\": \"2026-10-22T06:58:32Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous maps to a topological space form a sheaf on profinite spaces and the small pro etale site; connected components and constant sheaves for discrete targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.isSheafProfinite\", \"Condensed.lanSheafProfinite\", \"Condensed.ofSheafForgetProfinite\", \"CondensedSet.ofSheafProfinite\", \"Condensed.ofSheafProfinite\", \"LightCondSet.ofSheafLightProfinite\", \"LightCondensed.ofSheafLightProfinite_val\", \"LightCondensed.locallyConstantPresheaf\"], \"digest\": \"d0fcd6d2454f7962\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: the fpqc and component-factorization clauses occur in AlgebraicGeometry/Sites/ConstantSheaf, but no returned declaration gives the arbitrary discrete set comparison on the small pro-etale site, including empty targets"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapPresheaf|constantSheafIsoContinuousSheaf",
+   "results": "{\"t\": \"2026-10-22T06:59:00Z\", \"tool\": \"grep\", \"query\": \"continuousMapPresheaf|constantSheafIsoContinuousSheaf\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"c892d6c5f153daf3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: the fpqc and component-factorization clauses occur in AlgebraicGeometry/Sites/ConstantSheaf, but no returned declaration gives the arbitrary discrete set comparison on the small pro-etale site, including empty targets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous maps to a discrete space form the constant sheaf on the pro etale site of a scheme",
+   "results": "{\"t\": \"2026-10-22T06:59:01Z\", \"tool\": \"leansearch\", \"query\": \"Continuous maps to a discrete space form the constant sheaf on the pro etale site of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheaf\", \"CategoryTheory.Sheaf.IsConstant.mk\", \"CompHausLike.LocallyConstant.locallyConstantIsoContinuousMap\", \"CompHausLike.LocallyConstant.functorIso\", \"LightCondSet.discrete\", \"CompHausLike.LocallyConstant.functorToPresheavesIso\", \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"CompHausLike.LocallyConstant.locallyConstantIsoContinuousMap_inv_apply\"], \"digest\": \"345ee21cfd07581c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: the fpqc and component-factorization clauses occur in AlgebraicGeometry/Sites/ConstantSheaf, but no returned declaration gives the arbitrary discrete set comparison on the small pro-etale site, including empty targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousMapPresheaf\"",
+   "results": "{\"t\": \"2026-10-22T06:59:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"continuousMapPresheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.continuousMapPresheaf\", \"AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheaf\", \"AlgebraicGeometry.isSheaf_zariskiTopology_continuousMapPresheaf\", \"AlgebraicGeometry.continuousMapPresheafAb\", \"AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheafAb\", \"AlgebraicGeometry.continuousMapPresheaf_obj\", \"AlgebraicGeometry.continuousMapPresheafEquivOfTotallyDisconnectedSpace\", \"AlgebraicGeometry.continuousMapPresheafIsoUlift\"], \"digest\": \"46eacaf702bb3ee5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: the fpqc and component-factorization clauses occur in AlgebraicGeometry/Sites/ConstantSheaf, but no returned declaration gives the arbitrary discrete set comparison on the small pro-etale site, including empty targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a constant set presheaf on a scheme pro etale site equals continuous functions to the discrete set including empty sets",
+   "results": "{\"t\": \"2026-10-22T06:59:59Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of a constant set presheaf on a scheme pro etale site equals continuous functions to the discrete set including empty sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.discrete_obj\", \"Condensed.discrete_obj\", \"LightCondensed.discrete_map\", \"LightProfinite.hasSheafify_type\", \"LightCondensed.discrete\", \"CategoryTheory.constantSheaf\", \"CategoryTheory.Sheaf.isConstant_of_forget\", \"CategoryTheory.Sheaf.isConstant_iff_forget\"], \"digest\": \"033ff41b9719964b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: the fpqc and component-factorization clauses occur in AlgebraicGeometry/Sites/ConstantSheaf, but no returned declaration gives the arbitrary discrete set comparison on the small pro-etale site, including empty targets"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-totally-disconnected-coefficient-realization",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), continuous coefficient realization before monodromy and finite-model arguments; Hemo--Richarz--Scholbach Example 3.1, first two paragraphs, and Bhatt--Scholze Lemma 4.2.12. Bhatt--Scholze Lemma 4.2.12, p.30; HRS Example 3.1, p.6; former item steps 1, 2 and 9.",
+   "via": [
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-continuous-set-descent-components",
+  "worker": "stage1",
+  "summary": "Preserved all clauses and hypotheses. Reused existing fpqc descent, spectral-component, quotient-map and set-valued local-bijection nodes. Wrote explicit finite-cover descent, quotient factorization and naturality, fibre-open local lifts and empty-object cases. No new nodes and no Lean work.",
+  "blueprint": "Serves det-thm-sf-ctf-stability-direct-images proof paragraph (3), continuous coefficient realization before monodromy; current main-20261015 file is sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. Steps 1-4 supply descent and components; steps 5-7 supply the discrete comparison. The imported ancestry resolver reports None, retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-spectral-components-profinite",
+    "why": "General topology input giving profiniteness of the component quotient used in Bhatt--Scholze Lemma 4.2.12; no monodromy or six-functor argument replaces it."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Clause (1) is the general etale-implies-weakly-etale fact used only to admit fibre-open covers."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Only weakly etale composition is used to regard opens of a site object as site objects; a generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-spectral-components-profinite"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NH-0a17dacb9",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-0a17dacb9 (reviewer sub-agent of L); spot-checked: I read all of lem-sfb-continuous-set-descent-components; it is a statement-only node NV created on 2026-10-22 when it re-split the totally-disconnected realization node. It is still unsplit with no proof in both live and side-live, has no repair note and is not on the dropped list. Compared with live, only proof, proof_deps, proof_origin, status and split_report changed, and 5 searches were appended. The source matches Bhatt–Scholze Lemma 4.2.12 (p.30, the three clauses with the same hypotheses) and HRS Example 3.1 (p.6). No SGA is cited. Steps: (1) the finite profinite cover gives a quotient map by the compact-Hausdorff Mathlib leaf, and there are no separation assumptions on D. (2) The pro-étale coverings are fpqc coverings by the site definition, and the fpqc sheaf leaf is Mathlib isSheaf_fpqcTopology_continuousMapPresheaf. (3) qcqs gives a spectral space, so π0 is profinite. (4) The factorization through π0 and both naturalities are elementary and correct. (5) Open covers are admissible: open immersions are étale, hence weakly étale, weakly étale maps compose, and the finite-affine condition is checked. (6) For discrete D the open fibres give local surjectivity and evaluation at a point gives local injectivity; the empty U and D=∅ cases go through empty coverings. (7) The set-valued local-bijection leaf applies and the target is already a sheaf. I tested D=∅, U=∅, one-point D, infinite discrete D, non-Hausdorff D in clauses 1–2, and Spec of a DVR. No duplicate node exists. Advisory only: step 4 could cite lem-sfb-component-quotient-clopen-naturality for π0(a). I accept the tool uses lem-pe-spectral-components-profinite, det-pe-morphisms-etale-comparison (1) and lem-weil-pbc-ind-etale-stability (weakly étale composition). blueprint.from.node=null is inherited from the node's creation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousSetDescentComponents",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousSet_descent_components",
+  "file": "lean/Sheaf/Paper/ContinuousSetDescentComponents.lean",
+  "statement": "theorem continuousSet_descent_components (X : Scheme.{u}) (D : Type (u + 1)) [TopologicalSpace D] : Presheaf.IsSheaf (coherentTopology Profinite.{u}) (ContinuousMap.yonedaPresheaf (CompHausLike.compHausLikeToTop (fun T ↦ TotallyDisconnectedSpace T)) D) ∧ Presheaf.IsSheaf (Scheme.ProEt.topology X) (continuousSetPresheaf X D) ∧ (∀ (U : Over X), CompactSpace U.left → QuasiSeparated (toSpecZ U.left) → CompactSpace (ConnectedComponents U.left) ∧ T2Space (ConnectedComponents U.left) ∧ TotallyDisconnectedSpace (ConnectedComponents U.left) ∧ (∀ (_ : TotallyDisconnectedSpace D), Function.Bijective (fun g : C(ConnectedComponents U.left, D) ↦ g.comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩) ∧ (∀ (V : Over X), CompactSpace V.left → QuasiSeparated (toSpecZ V.left) → ∀ (a : V ⟶ U) (g : C(ConnectedComponents U.left, D)), (g.comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩).comp a.left.base.hom = (g.comp ⟨a.left.base.hom.continuous.connectedComponentsMap, a.left.base.hom.continuous.connectedComponentsMap_continuous⟩).comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩) ∧ (∀ (E : Type (u + 1)) [TopologicalSpace E] [TotallyDisconnectedSpace E] (b : C(D, E)) (g : C(ConnectedComponents U.left, D)), b.comp (g.comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩) = (b.comp g).comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩))) ∧ (∀ (_ : DiscreteTopology D), (∀ (U : X.ProEt) (s : C(U.left, D)) (x : U.left), ∃ (W : U.left.Opens) (d : D), x ∈ W ∧ ∀ y : W, s y = d) ∧ Presheaf.IsLocallySurjective (Scheme.ProEt.topology X) (continuousSetConstantPresheafMap X D) ∧ Presheaf.IsLocallyInjective (Scheme.ProEt.topology X) (continuousSetConstantPresheafMap X D) ∧ IsIso (continuousSetConstantMap X D))",
+  "branch": "sheaf-dag",
+  "by": "Q128",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c4b2a337",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: profinite descent (coherentTopology Profinite on raw yonedaPresheaf), pro-étale sheaf on the recorded continuousSetPresheaf, qcqs U : Over X with π0 compact/T2/totally disconnected, precomposition bijection under TotallyDisconnectedSpace D only, naturality in U via connectedComponentsMap and in b : C(D,E), discrete D: open-neighbourhood lift + IsLocallySurjective/IsLocallyInjective + IsIso of the canonical continuousSetConstantMap. No T2/Nonempty added; D=∅, U=∅, empty cover, non-Hausdorff D OK. Only the lean field changed; statement verbatim; dep record unchanged; no defs, sorry only; docstrings carry source, blueprint tag and 7 steps; proof-dep modules imported. No Mathlib/project duplicate of the package. Advisories: continuousSet{Sheaf,ConstantPresheafMap,ConstantMap} are plain defs of the parent theorem node (which proof-depends on the item) → extend def-sfb-continuous-set-presheaf declarations; stage-3 import cycle with the parent module (parent's isSheaf/_discrete repeat clauses here); report's second reading is the worker's own self-reread. No recompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143028-L-929163",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

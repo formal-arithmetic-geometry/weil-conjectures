@@ -27,9 +27,25 @@
   "lem-weil-pbc-condensed-flat-coefficient-calculus",
   "lem-sf-integral-compactification-system-realization",
   "lem-sf-integral-compactification-comparison-bridge",
-  "lem-pur-compact-support-condensed-realization"
+  "lem-pur-compact-support-condensed-realization",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-realization-data",
+  "def-pur-condensed-compact-support-projection",
+  "def-sfb-derived-open-lower-shriek-id",
+  "def-zl-integral-generator-admissibility-inverse",
+  "def-zl-compact-support-small-site-morphism",
+  "def-zl-compact-support-model-open-extension",
+  "def-pur-completed-coefficient-presentation-transport"
  ],
  "proof": [
+  {
+   "text": "Use the unchanged completed support coordinates, section encodings, and three auxiliary normalization/restriction assertions, now defined in CompactSupportRealizationCoordinates and publicly re-exported by this module. This is a compile-time module separation, not a replacement argument or an added obligation.",
+   "uses": [
+    "lem-zl-compact-support-realization-coordinates-setup"
+   ],
+   "elementary": false
+  },
   {
    "text": "Write $D=j_{!,B}K$ and $N=S_gJ_jr_XK$. All complete inputs and intermediate bounds are supplied by the hypotheses. The coefficient identifications for $B_T$ and $(A_n)_T$ commute with quotient maps by [lem-weil-pbc-profinite-coefficient-inverse-image]. Apply [prop-weil-pbc-direct-image-limits] to $g$ and $D$: the proper factor of $b$ is its specified diagram-site projection mate. Its evaluations are isomorphisms, since $D$ is complete. The coefficient hypotheses hold: $R$ is a Noetherian DVR and $A_n$ is finite by [def-weil-l-adic-coefficient-extension], and $[R\\xrightarrow{t^n}R]$ resolves $A_n$ by finite free modules. The second factor is the strict open reduction isomorphism $r_j:r_ZD\\to J_jr_XK$ of [lem-sf-integral-open-reduction-comparison]. Thus $b=S_g(r_j)r_g$ is a system map and is invertible, using detection of isomorphisms in [lem-coef-semilinear-derived-sections]. The strict-tower definition [lem-weil-compact-support-reduction-tower-functor] identifies $\\mathcal L_YN=P_RK$ with its prescribed transitions and maps. Finally [lem-weil-pbc-constant-completion-equivalence] identifies the actual quotient-tower unit with the completion unit; it is invertible on $P_R^0K$, which is complete by hypothesis. Therefore $q=\\mathcal L(b)u_{P_R^0K}$ is invertible.",
    "uses": [
@@ -155,9 +171,21 @@
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
     "place": "Agent edge-case and naturality checks for the specified composites"
    }
+  },
+  {
+   "text": "Partial Lean proof, D8: the finite-field characteristic follows from charP_of_card_eq_prime_pow, transport along the injective algebra map, and ringChar.eq; its prime and distinct-prime Fact wrappers follow by rewriting. Ordinary restriction is a composite of additive exact functors. Exact inverse image makes the field direct image preserve K-injectives. A proved abstract paste calculation expands condensedProjection as its prescribed proper/open composite. The iterated mate correspondence identifies derivedPushHom with the geometric mate of derivedPullIso inverse, and mateEquiv_counit gives its precise transpose formula. The existing section-normalized ordinaryPushId gives the identity unitor and sectionwise uniqueness. Finally apply the recorded Realizations.coherence field and cancel comparison.inv followed by comparison.hom to prove structural_conjugacy. The unproved declarations retain the preceding construction plan.",
+   "uses": [
+    "def-pur-compact-support-realization-identity",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pur-compact-support-realization-identity",
+  "def-weil-finite-field-fiber",
   "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-condensed-e-module-category",
   "lem-coef-derived-system-evaluation-calculus",
@@ -178,13 +206,14 @@
   "lem-weil-pbc-constant-completion-equivalence",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-zl-compact-support-realization-coordinates-setup",
   "prop-weil-pbc-direct-image-limits",
   "prop-weil-pbc-qbar-condensed-two-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-  "place": "Explicit normalization of the proper/open coefficient word using the cited system adjunction and comparison statements; Bhatt–Scholze provides the coefficient context only."
+  "place": "Explicit normalization of the proper/open coefficient word using the cited system adjunction and comparison statements; Bhatt–Scholze provides the coefficient context only. D8 partial Lean proof: characteristic, exact restriction, field K-injectives, coefficient paste and proper transpose, structural conjugacy and section-normalized identity unitor; the remaining holes retain the original plan. J1: separated the original self-contained coordinate prefix into CompactSupportRealizationCoordinates after profiling and local elaboration optimization still left this importer over 60 seconds in delivery. All declaration signatures, proofs, definition bodies and exported attributes are unchanged."
  },
  "mathlib_searches": [
   {
@@ -392,5 +421,67 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-9de5d7325 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item is split into 9 steps, there are no new nodes and the statement is unchanged. I read all 22 cited statements and the full statement and proof of lem-pur-compact-support-condensed-realization. Bhatt–Scholze Def 6.7.6, Lemma 6.7.14, Prop 6.8.14(2) and Rem 6.8.15 give context only; the node correctly marks the proof as agent-written, and no SGA source is used. Step 2 recomputes correctly: L(r_g)u=d_g^{-1}, so q=L S_g(r_j)d_g^{-1}, and e r(q)=b by the triangle identities. Step 3 gives L(τ)q_B=q_Cτ_int, with whiskering taken from lem-sf-integral-compactification-system-realization. In Step 4 the bridge formula and Q_{g,f} type-check and give q_h^{-1}L(β)Q=β_int. Steps 5, 6 and 8 match the defining composites in the parent's construction Steps 3–5, 6 and 13. Step 7's Ω argument checks out: the input is bounded below, the presentation, continuity (g proper hence qcqs) and ring-change lemmas apply, and the schemes are noetherian. The edge cases hold: j=id gives q^{-1}=d_g; g=j=id gives q=u_K; zero input or empty X gives zero; F=E gives the identity. One note for the maintainer, not a delivery fault: the parent's statement only asserts that a exists, and its defining composite is in its proof Step 5. The item's own reviewed statement records that composite, so unfolding it is forced; the parent's statement should carry the composite. Mechanical batch-5 check: lem-sf-generator-reduction-coherence and lem-sf-integral-open-reduction-comparison reach sec-trace-formula only through the definitions def-trf-integral-comparison-realization-models and def-trf-integral-comparison-sequence-systems, plus generic filtered-derived and adic-algebra lemmas (lem-trf-filtered-*, lem-pod-*). None of these is the trace formula, Poincaré duality or a step of their proofs, so both citations stand. I accept all 20 declared tool_uses as black-box coefficient-calculus lemmas. Nothing was changed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportRealizationFactorNormalization",
+  "declaration": "WeilConjectures.CompactSupportFactorNormalization.realization_factor_normalization",
+  "declarations": [
+   "WeilConjectures.CompactSupportFactorNormalization.factorization",
+   "WeilConjectures.CompactSupportFactorNormalization.parentCoordinates",
+   "WeilConjectures.CompactSupportFactorNormalization.parentFactorization",
+   "WeilConjectures.CompactSupportFactorNormalization.realization_factor_normalization",
+   "WeilConjectures.CompactSupportFactorNormalization.coefficient_factorization",
+   "WeilConjectures.CompactSupportFactorNormalization.coefficient_proper_transpose",
+   "WeilConjectures.CompactSupportFactorNormalization.coefficient_open_unit",
+   "WeilConjectures.CompactSupportFactorNormalization.coefficient_proper_isIso",
+   "WeilConjectures.CompactSupportFactorNormalization.integral_naturality",
+   "WeilConjectures.CompactSupportFactorNormalization.single_realization",
+   "WeilConjectures.CompactSupportFactorNormalization.structural_conjugacy",
+   "WeilConjectures.CompactSupportFactorNormalization.ordinaryPushIdentity_existsUnique",
+   "WeilConjectures.CompactSupportFactorNormalization.integralPullIdentity",
+   "WeilConjectures.CompactSupportFactorNormalization.integralOpenIdentity",
+   "WeilConjectures.CompactSupportFactorNormalization.realization_identity_open",
+   "WeilConjectures.CompactSupportFactorNormalization.coefficient_identity_open",
+   "WeilConjectures.CompactSupportFactorNormalization.factorization_naturality",
+   "WeilConjectures.CompactSupportFactorNormalization.completed_bridge",
+   "WeilConjectures.CompactSupportFactorNormalization.normalizedFamilyAt",
+   "WeilConjectures.CompactSupportFactorNormalization.IsFactorNormalized"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportRealizationFactorNormalization.lean",
+  "statement": "theorem realization_factor_normalization (D₀ : FiniteFieldDatum.{u}) [Fact (l ≠ D₀.p)] : ∃ C : CompactSupportCondensedRealization.ComparisonFamily l D₀.k, IsFactorNormalized l D₀ C",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned immutable head 1042dcac4cf4: cite new existing-declaration definition nodes for GeneratorReduction.Admissible, SystemAdmissible, inverseOrZero and the sfCbc small-site/open-extension helpers; cite def-pur-completed-coefficient-presentation-transport for purCoefficientModel. The generator-coherence theorem remains a proof dependency only. completed_bridge writes the valuation ring as Padic.coefficientExtensionIntegers, definitionally the same coefficient ring. The accepted ComparisonFamily factor normalization and all mathematical clauses are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9656ab4de",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after the 1042dcac H2 RETURN. Lean diff: only owner imports and constantRing→Padic.coefficientExtensionIntegers (abbrev, defeq); main signature verbatim. stmt_deps drop theorem lem-sf-generator-reduction-coherence (kept in proof_deps) and add existing:true def owners def-zl-integral-generator-admissibility-inverse (Admissible/SystemAdmissible/inverseOrZero), def-zl-compact-support-small-site-morphism (sfCbcSite..sfCbcMorphism), def-zl-compact-support-model-open-extension (sfCbcModelRing/Modules/OpenExtension/ModelExtension), plus def-pur-completed-coefficient-presentation-transport (purCoefficientModel). New node statements match the side-live Lean bodies; signatures verbatim; all their stmt_deps exist; sources exist. Mathematics unchanged and re-checked: single ComparisonFamily normalization, q=L(b)u, both equalities, identity open, naturality, edge cases, universe u. Advisory: inverseOrZero already owned by def-sf-comparison-inverse-or-zero (Q07, on base) and def-sf-inverse-or-zero (Q58), so the new node is a third owner (no Lean dup; not fixable by S2 FIX); upstream unpinned sfCbcMorphism.algebra choice; empty Second reading section. No compile (nothing changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a8b2f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T021332-L-2758276",
+  "kind": "interface",
+  "note": "independent cc review: Setup+item and Coordinates+FactorNormalization declaration chunks vs published originals (identical except 4 closed proofs); 14 direct importers + unadapted CondensedOpenCounitUnits/Realization compiled against sandbox build of the delivery (all OK); node declaration lists, deps and #print axioms"
+ }
 }

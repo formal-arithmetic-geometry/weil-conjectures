@@ -1,0 +1,251 @@
+{
+ "id": "lem-coef-integral-mapping-limit-projections",
+ "kind": "statement",
+ "title": "Integral mapping-limit comparison and its actual projections",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. On the small pro-etale site of a scheme $W$ put $B_{n,W}=(A_n)_W$ and $R_W=\\lim_nB_{n,W}$ [def-weil-completed-integral-coefficients]. Use ordinary derived categories of module sheaves and the Roos-complete constructible category $D^b_c(W,R)$, whose finite reductions are constructible with a common bounded cohomological support [def-weil-derived-complete-integral-detailed, def-weil-derived-complete]. Write $P_n=P\\otimes^L_{R_W}B_{n,W}$ [def-weil-integral-derived-reduction]. Use the strict semilinear coefficient-system category $\\mathscr S_W$, the adjunction $\\mathcal R_W\\dashv\\mathcal L_W$, its actual unit $u$ and counit $e$, and the mapping systems $\\mathcal H_W$ of [lem-coef-derived-system-evaluation-calculus]; here $\\mathcal R_WP=(P_n)_n$ with its coherent quotient maps and $\\mathcal L_W=R\\lim\\operatorname{Res}$.\n\nLet $W$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties] and $P,Q\\in D^b_c(W,R)$. Write $R\\operatorname{Hom}_{W,R}(P,Q)=R\\Gamma(W_{\\mathrm{proet}},R\\mathcal Hom_{R_W}(P,Q))$ for the global derived mapping complex [def-pur-derived-internal-hom, lem-pur-rhom-global-sections]. Set $N=\\mathcal R_WQ$, and let $\\gamma$ be the specified enriched reduction/limit adjunction of the system calculus. The composite\n$$\\lambda_{P,Q}=\\gamma_{P,N}\\circ R\\operatorname{Hom}_{W,R}(P,u_Q):R\\operatorname{Hom}_{W,R}(P,Q)\\xrightarrow{\\sim}R\\lim\\mathcal H_W(\\mathcal R_WP,\\mathcal R_WQ)$$\nis a natural isomorphism in $D(\\operatorname{Ab})$, compatible with shifts and composition of mapping complexes. Its composite with each actual mapping-limit projection is the map induced by $Q\\to\\operatorname{Res}_nQ_n$, followed by the derived scalar-extension/restriction adjunction [lem-weil-derived-scalar-extension-restriction-adjunction]. On degree-zero Hom this sends $h:P\\to Q$ to\n$$e_{\\mathcal R_WQ,n}\\circ(u_Q)_n\\circ h_n=h_n.$$\nFor every integer $r$ the corresponding map on shifted Hom sends $h:P\\to Q[r]$ to $h_n:P_n\\to Q_n[r]$. Thus the projections are reduction of the actual integral morphisms. Only the first input is extended in the scalar adjunction and the second is restricted; the assertion contains no tensor/base-change assertion for an integral internal Hom.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, first and last isomorphisms of the displayed mapping-complex calculation: reconstruction of the second input and the actual finite projections; returned step 4."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-scheme-morphism-properties",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-coef-reduction-limit-shift-data",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-derived-complete-integral-detailed], $Q$ is derived complete in the stated Roos sense. Apply [lem-pur-normalized-actual-reconstruction-maps] on $W$: $N=\\mathcal R_WQ$ is normalized and the actual unit $u_Q:Q\\to\\mathcal L_WN$ is invertible. Its hypotheses hold since $\\ell\\ne p$ is invertible on a $k$-scheme. This uses the theorem about the actual unit, not uniqueness of a lift of the finite reduction maps. In Lean the intrinsic completeness predicate of the constructible category is first identified with legacy Roos completeness by lem-sf-derived-complete-legacy-comparison. An auxiliary universe-zero finite field of characteristic different from l supplies only the erased bookkeeping datum of IntegralOnSlice.IsComplete. The actual characteristic of the given base field proves l invertible on X by the map on global sections.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, first and last isomorphisms of the displayed mapping-complex calculation: reconstruction of the second input and the actual finite projections; returned step 4."
+   }
+  },
+  {
+   "text": "Apply the specified $\\gamma_{P,N}$ of [lem-coef-derived-system-evaluation-calculus] to the normalized $N$ from step 1. Functoriality of derived Hom sends $u_Q$ and its inverse to inverse maps. Thus $\\gamma_{P,N}\\circ R\\operatorname{Hom}(P,u_Q)$ is precisely the asserted isomorphism $\\lambda_{P,Q}$ in $D(\\operatorname{Ab})$. Naturality follows from naturality of $u$ and $\\gamma$. For a composable pair with middle object $Q$ and target $T$, the equation $u_Tg=(\\mathcal L_W\\mathcal R_Wg)u_Q$ and the calculus's composition and unit compatibilities identify composition after $\\lambda$ with composition of the reduced mapping systems; these are identities of mapping complexes, before taking finite projections. For the internal composition clause, rewrite RHom(P,u_Q) followed by the enriched adjunct as the adjoint of beta(P,Q); tensoring these adjoints and composing with the lax counit mate is the adjunct of tensoring their original maps. The calculus beta composition equation then proves the square.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, first and last isomorphisms of the displayed mapping-complex calculation: reconstruction of the second input and the actual finite projections; returned step 4."
+   }
+  },
+  {
+   "text": "The calculus's projection formula says the $n$th projection after $\\gamma$ is $(\\pi_n)_*$ followed by scalar adjunction. Precomposing with $R\\operatorname{Hom}(P,u_Q)$ replaces $\\pi_n$ by $\\pi_nu_Q$, which is the actual reduction unit $Q\\to\\operatorname{Res}_nQ_n$ by the same cited statement. On degree-zero Hom its formula gives $e_{N,n}(u_Q)_nh_n$. Evaluate the adjunction triangle identity $e_{\\mathcal R_WQ}\\,\\mathcal R_W(u_Q)=1_{\\mathcal R_WQ}$ at $n$ to obtain $e_{N,n}(u_Q)_nh_n=h_n$. This computes the specified projections without identifying maps into a derived limit by their projections. Naturality of the fixed coefficientHomZeroEquiv interprets this equality on H-zero, for arbitrary ambient P,Q. This stronger ambient formula directly handles shifted Hom without requiring Q[r] to carry a constructible-category structure.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-hom-zero-cycle-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, first and last isomorphisms of the displayed mapping-complex calculation: reconstruction of the second input and the actual finite projections; returned step 4."
+   }
+  },
+  {
+   "text": "Apply lem-coef-enriched-global-shift to the underlying ambient P and Q. Its comparison, source shift and target shift are definitionally the three unchanged mapping-limit maps of this module, so it proves exactly the mapping-complex shift clause. The all-integer shifted-Hom formula follows independently from the ambient H-zero calculation of step 3. The separate shift lemma contains no isomorphism, projection, H-zero, triangle or composition assertion. No finite projection detection is used.",
+   "uses": [
+    "lem-coef-enriched-global-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, first and last isomorphisms of the displayed mapping-complex calculation: reconstruction of the second input and the actual finite projections; returned step 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-hom-zero-cycle-class",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-enriched-global-shift",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-sf-derived-complete-legacy-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "J3 Lean assembly of actual unit, gamma, projection, H-zero and enriched composition identities; Tags 08J9, 08JC, 0941. Hom-complex shift bookkeeping isolated as lem-coef-enriched-global-shift; intrinsic/legacy completeness comparison explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global derived Hom between integral constructible complete sheaf complexes is the inverse limit of finite reduction mapping complexes and its projections are reduction of morphisms",
+   "results": "8 hits; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, localCohomology.diagram, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.Sheaf.H, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.Presentation.map_π_eq, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom inverse limit quotient coefficient systems complete second argument projection scalar extension adjunction",
+   "results": "8 hits; ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, PresheafOfModules.pullbackPushforwardAdjunction, ModuleCat.ExtendRestrictScalarsAdj.unit, PresheafOfModules.pullback. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedHom\", \"limit\"",
+   "results": "0 hits; . No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom.*[Ll]imit|[Ll]imit.*derivedHom|RHom|rhom",
+   "results": "25 hits; Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping complexes into an adically complete sheaf are reconstructed from finite coefficient mapping towers with canonical projection maps",
+   "results": "8 hits; AdicCompletion.transitionMap_comp_eval_apply, AdicCompletion.eval_comp_of, IsAdicComplete.of_comp_lift, AdicCompletion.transitionMap_comp_eval, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.map_val_apply, AdicCompletion.eval_lift, IsAdicComplete.of_lift. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom.*[Ll]imit|[Ll]imit.*derivedHom",
+   "results": "0 hits; . No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom.*[Ll]imit|[Ll]imit.*derivedHom|mappingLimit|derivedComplete",
+   "results": "0 hits: . Inspected the printed result types: ordinary condensed fully faithful functors, derived localization, sheaf cohomology and underived presentation maps do not state the varying-coefficient derived mapping comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom into a derived complete sheaf is reconstructed from mapping complexes at finite coefficient quotients",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategory, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, HasDerivedCategory.standard, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, DerivedCategory.instEssSurjHomotopyCategoryIntUpQh. Inspected the printed result types: ordinary condensed fully faithful functors, derived localization, sheaf cohomology and underived presentation maps do not state the varying-coefficient derived mapping comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Adjunction\"",
+   "results": "0 hits: . Inspected the printed result types: ordinary condensed fully faithful functors, derived localization, sheaf cohomology and underived presentation maps do not state the varying-coefficient derived mapping comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global derived Hom of complete sheaf complexes equals the derived inverse limit of finite quotient mapping complexes with projections given by reduction",
+   "results": "8 hits: CategoryTheory.Sheaf.H, SheafOfModules.Presentation.map_π_eq, localCohomology.diagram, CategoryTheory.Sheaf.cohomologyPresheafFunctor, Ext, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extMk_hom. Inspected the printed result types: ordinary condensed fully faithful functors, derived localization, sheaf cohomology and underived presentation maps do not state the varying-coefficient derived mapping comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction and derived inverse limit adjunction on quotient ring sheaves gives a fully faithful mapping comparison for derived complete complexes",
+   "results": "8 hits: CondensedMod.LocallyConstant.fullyFaithfulFunctor, lightProfiniteToLightCondSetFullyFaithful, LightCondMod.LocallyConstant.fullyFaithfulFunctor, LightCondSet.fullyFaithfulSequentialToLightCondSet, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondSet.LocallyConstant.functorFullyFaithful, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CondensedMod.LocallyConstant.instFullModuleCatFunctor. Inspected the printed result types: ordinary condensed fully faithful functors, derived localization, sheaf cohomology and underived presentation maps do not state the varying-coefficient derived mapping comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-coef-integral-exceptional-adjoint",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, first and last isomorphisms of the displayed mapping-complex calculation: reconstruction of the second input and the actual finite projections; returned step 4.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-integral-mapping-limit-projections",
+  "worker": "stage1",
+  "summary": "Retained the statement and assembled its specified mapping isomorphism from the actual reconstruction unit and enriched reduction/limit adjunction. Computed projections by the triangle identity, including shifted Hom; no Hom/tensor base-change or finite-projection detection argument. No new nodes.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the first and last mapping-complex comparisons and their actual finite reductions.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "Generic complete/normalized coefficient equivalence supplies invertibility of the actual unit for the Roos-complete category; the enriched system calculus explicitly does not assert this invertibility."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic ringed-site degree-zero global derived Hom identification interprets the projection computation as a formula on derived-category morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-7c80815bc",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-7c80815bc (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. This is a first split with no new nodes. There is no repair note, the live node is still unsplit, and the statement and stmt_deps are byte-identical to it. proof_deps equals the union of the step uses, and the closure has no cycle. Source: main-20261015 prop-coef-integral-exceptional-adjoint proof, paragraph 2; the item is the first and last isomorphism of the displayed mapping-complex chain, and the parent uses lambda in its steps 2 and 4. Step 1: D^b_c objects are Roos-complete (def-weil-derived-complete-integral-detailed). lem-pur-normalized-actual-reconstruction-maps then gives N=R_W Q normalized and the actual unit u_Q invertible, with l invertible on a k-scheme. Step 2: the calculus gamma_{P,N} for normalized N, together with RHom(P,u_Q), gives the natural iso. Composition follows from u_T g=(LRg)u_Q and the triangle identity. Step 3: the calculus projection formula and pi_n u_Q = the actual reduction give e_{N,n}(u_Q)_n h_n, and the level-n triangle identity turns this into h_n. Step 4: the shifted Roos triangle and lem-pur-rhom-global-sections give h:P->Q[r] |-> h_n. Advisory: lambda's own compatibility with [r] rests on standard Hom-complex bookkeeping rather than an explicit clause of the calculus; the parent does not use it. Tool uses accepted: the reconstruction lemma (no node of this unit gives unit invertibility) and rhom-global-sections (already in route via sk-def-sf-operations). Duplicate search over dag/nodes found no node stating the item. Edge cases: P=0; W=Spec k with P=Q=R-hat; torsion Q=A_1, where the Tor_1 tower has zero transitions and Rlim recovers A_1; h=1; negative r. No SGA; no files changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralMappingLimitProjections",
+  "declaration": "WeilConjectures.integralMappingLimitProjections",
+  "declarations": [
+   "WeilConjectures.integralMappingLimitProjection",
+   "WeilConjectures.integralMappingLimitHom",
+   "WeilConjectures.integralMappingLimitInternal",
+   "WeilConjectures.integralMappingLimitTensor",
+   "WeilConjectures.IntegralMappingLimitAssertions",
+   "WeilConjectures.integralMappingLimitProjections"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralMappingLimitProjections.lean",
+  "statement": "theorem integralMappingLimitProjections (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) [X.Over (Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] (S : CoefficientDerivedSystemCalculus l E X) (C : CoefficientDerivedSystemCoherence l E X S) (sh : PurReductionLimitShiftData l E X S) : IntegralMappingLimitAssertions l E X S C sh",
+  "branch": "sheaf-dag",
+  "by": "Q138",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The actual lambda is a defined unit/gamma composite. Its mapping-limit projection and H-zero map are defined from the recorded actual projections; the assertion records isomorphism, two-variable naturality, scalar-adjunction projection, evaluated triangle, all integer shifted Hom, normalized mapping-complex shifts and enriched composition. Two already-landed statement dependencies expose the canonical normalized shift comparisons. No statement correction or new notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-929ce8ed1",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Re-delivery after H2/§5 RETURN of 48b560d7987f. The item Lean module is byte-identical (sha256 194b6447); the only item change is stmt_deps lem-pur-reduction-limit-shift-adjunction -> new def-coef-reduction-limit-shift-data. The new node is existing:true on the unchanged Sheaf.Paper.PurReductionLimitShiftAdjunction and owns PurReductionLimitShiftData plus purCoefficientLimitModel/ShiftedResolution/RoosProductShift/PurCoefficientRoosTriangle. Its statement verbatim matches the file up to `where`; its TeX faithfully lists the structure's clauses (1)-(6) with no inhabitation; stmt_deps = the 6 cited ids, all present; §5 fields complete; id not taken in live and no other owner. Mechanical finding: lem-weil-pbc-ringed-internal-hom-exact-restriction is genuine, because the shift clause uses homCommShift = (rightShift_existsUnique J R).exists.choose (l.1945), an object constructed by the theorem -> PASS on that point. All clauses (iso, naturality, projection, H0 h↦h_n, triangle, all-integer shifted Hom, shift square, enriched composition) and hypotheses match the node; sorry only; docstrings OK. Edge cases n=0, r∈ℤ, zero objects, empty scheme hold. No compile (no file changed). Advisories: triangle clause follows directly from the triangle identity; owned decls' docstrings still name the theorem node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5e4b5",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261024T214907-L-728139",
+  "kind": "interface",
+  "note": "independent cc review: the three moved defs against the published item module (byte-identical, public re-import); the new sorry statement against the item's shift clause and the PurReductionLimitShiftData fields; item node proof/proof_deps/lean against the Lean proof"
+ }
+}

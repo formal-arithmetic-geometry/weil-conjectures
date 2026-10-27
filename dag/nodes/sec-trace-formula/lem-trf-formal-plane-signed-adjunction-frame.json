@@ -1,0 +1,274 @@
+{
+ "id": "lem-trf-formal-plane-signed-adjunction-frame",
+ "kind": "statement",
+ "title": "Signed completed adjunction frame of a formal plane equation",
+ "statement": "Let $k$ be an algebraically closed field, $S$ a reduced finite-type $k$-algebra [def-weil-pbc-finite-type-algebra], pure of dimension $1$ [def-weil-pure-dimension] and a local complete intersection over $k$ [def-weil-pbc-complete-intersection-over-field]. Let $\\mathfrak m$ be a maximal ideal with residue field $k$, $A=S_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime], $R=\\widehat A$ its maximal-ideal-adic completion [def-weil-pbc-adic-completion], and $K_A$ the stalk of the adjunction line of [lem-trf-flat-lci-canonical-adjunction]. Fix a complete local $k$-algebra isomorphism $R\\cong T/(f)$, where $T=k[[x,y]]$ [def-weil-pbc-multivariate-power-series], $0\\ne f\\in(x,y)$, and $T/(f)$ is reduced. Let $J=(f)\\subset T$ and $\\bar f$ denote the class of $f$ in $J/J^2$. Duals mean $\\operatorname{Hom}_R(-,R)$, and exterior powers are [def-weil-pbc-exterior-algebra]; all scalar extensions use [def-weil-module-base-change].\n\nThe element $\\bar f$ is a basis of $J/J^2$, and there is a canonical comparison\n$$\\Phi:K_A\\otimes_A R\\xrightarrow{\\sim}(J/J^2)^\\vee\\otimes_R\\bigwedge^2_R(R\\,\\mathrm dx\\oplus R\\,\\mathrm dy).$$\nThere is a unique $R$-basis element $\\eta$ of $K_A\\otimes_A R$ with $\\Phi(\\eta)=-\\bar f^\\vee\\otimes(\\mathrm dx\\wedge\\mathrm dy)$.\n\nFor every field $L$ and $k$-algebra map $\\theta:R\\to L$ whose restriction to $A$ factors through a generic point in its smooth one-dimensional locus, put $M_L=\\Omega^1_{A/k}\\otimes_A L$, where Kähler differentials are [def-weil-pbc-kahler-differentials]. Let $\\widehat{\\mathrm d}_A:R\\to\\Omega^1_{A/k}\\otimes_A R$ be the unique continuous extension of the universal derivation, with extension and continuity as in [def-trf-completed-differential-extension]. Put $e_x=\\widehat{\\mathrm d}_A(x)\\otimes1$, $e_y=\\widehat{\\mathrm d}_A(y)\\otimes1$ in $M_L$, and put $a=\\theta(f_x)$, $b=\\theta(f_y)$, with the termwise formal partial derivatives of [def-trf-formal-power-series-partial-derivative]. If $(a,b)\\ne(0,0)$, the sequence\n$$0\\longrightarrow L\\xrightarrow{1\\mapsto(a,b)}L^2\\xrightarrow{(u,v)\\mapsto u e_x+v e_y}M_L\\longrightarrow0$$\nis exact. Under the determinant convention that sends $v\\in M_L$ to $\\bar f^\\vee\\otimes((a\\,\\mathrm dx+b\\,\\mathrm dy)\\wedge\\widetilde v)$, its values at $e_x,e_y$ are respectively $b\\Phi(\\eta)$ and $-a\\Phi(\\eta)$. The algebraic generic smooth-locus identification $\\gamma_L:K_A\\otimes_A L\\xrightarrow{\\sim}M_L$ satisfies\n$$\\gamma_L(\\eta\\otimes1)=e_x/b\\quad(b\\ne0),\\qquad\\gamma_L(\\eta\\otimes1)=-e_y/a\\quad(a\\ne0).$$\nBoth fractions are nonzero whenever defined. No inverse of $f_x$ or $f_y$ in $R$ is assumed.\n\nThe comparisons $\\Phi$ respect changes of algebraic local presentation and continuous changes between plane power-series presentations as above inducing the identity of $R$, and their identifications compose for any three presentations. For every such presentation the generic comparison above is the same algebraic smooth-locus map $\\gamma_L$.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Z (lemma-fundamental-class-lci), with the preceding lemma-determinant wedge formula. Agent-formulated formal-completion and inverse-frame refinement; the tag itself does not assert this completion theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-module-base-change",
+  "def-weil-pbc-kahler-differentials",
+  "def-trf-completed-differential-extension",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-sfb-flat-lci-adjunction-system",
+  "def-trf-completed-conormal-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "The one-element sequence $(f)$ is regular: in $k[[x,y]]$ the lowest nonzero total-degree homogeneous parts of two nonzero series multiply to a nonzero polynomial over the field $k$, so multiplication by $f\\ne0$ is injective; and $f\\in(x,y)$ makes $T/(f)\\ne0$. In particular $\\bar f$ generates $J/J^2$ freely: if $hf\\in(f^2)$ then $hf=uf^2$ for some $u$, whence cancellation gives $h=uf$. Thus $R\\to J/J^2$, $\\bar h\\mapsto hf\\bmod f^2$, is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E9Y (lemma-determinant), relation-first wedge formula, and 0E9Z (lemma-fundamental-class-lci); agent specialization of the existing completed comparison."
+   }
+  },
+  {
+   "text": "Use an algebraic local chart defining $K_A$ in [lem-trf-flat-lci-canonical-adjunction], with ambient dimension $m$ and regular-sequence length $m-1$. Its localization is a polynomial-local presentation at a $k$-rational maximal ideal, since the point has residue $k$. The field $k$ is perfect (in positive characteristic $t^p-a$ has a root for every $a\\in k$). Apply [lem-trf-completed-conormal-determinant-comparison] with $d=1,n=2,c=1,g_1=f$. The remaining hypotheses are exactly reducedness, finite type, pure dimension, lci, rational residue field and reduced completion from the statement. This gives $\\Phi$ and its normalized generic comparison. The exterior line has basis $w=\\bar f^\\vee\\otimes(\\mathrm dx\\wedge\\mathrm dy)$. Define $\\eta=\\Phi^{-1}(-w)$; it is a basis, and injectivity of $\\Phi$ proves uniqueness.",
+   "uses": [
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-completed-conormal-determinant-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E9Y (lemma-determinant), relation-first wedge formula, and 0E9Z (lemma-fundamental-class-lci); agent specialization of the existing completed comparison."
+   }
+  },
+  {
+   "text": "The finite separable residue extension in [lem-trf-completion-kahler-differential-comparison] is here $k/k$, with the given coefficient section. Its assertion (i) supplies exactly the unique continuous derivation used in the statement. For any allowed $\\theta:R\\to L$, the generic normalization in [lem-trf-completed-conormal-determinant-comparison] gives the short exact formal conormal sequence with $M=M_L$ and coordinate images $e_x,e_y$. Its relation column is $(a,b)$ because $g_1=f$. This is the asserted sequence after identifying $L\\bar f$ with $L$ by Step 1. In particular it holds under the stated nonzero-column hypothesis; no tensor-exactness assertion for an arbitrary nonflat map is being used.",
+   "uses": [
+    "lem-trf-completion-kahler-differential-comparison",
+    "lem-trf-completed-conormal-determinant-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E9Y (lemma-determinant), relation-first wedge formula, and 0E9Z (lemma-fundamental-class-lci); agent specialization of the existing completed comparison."
+   }
+  },
+  {
+   "text": "Write $w_L=w\\otimes1$ and $\\delta:M_L\\to\\lambda_T\\otimes_R L$ for the determinant comparison supplied in Step 2. Its displayed relation-first formula gives $\\delta(e_x)=\\bar f^\\vee\\otimes((a\\,\\mathrm dx+b\\,\\mathrm dy)\\wedge\\mathrm dx)=-bw_L=b\\Phi_L(\\eta_L)$ and $\\delta(e_y)=aw_L=-a\\Phi_L(\\eta_L)$. This formula is independent of a lift, since adding a multiple of $(a,b)$ adds the wedge of that vector with itself, which is zero. Thus it is exactly the determinant convention in the item.",
+   "uses": [
+    "lem-trf-completed-conormal-determinant-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E9Y (lemma-determinant), relation-first wedge formula, and 0E9Z (lemma-fundamental-class-lci); agent specialization of the existing completed comparison."
+   }
+  },
+  {
+   "text": "By the normalization identity $\\gamma_L=\\delta^{-1}\\Phi_L$ in [lem-trf-completed-conormal-determinant-comparison], Step 4 gives $\\delta(e_x/b)=\\Phi_L(\\eta_L)$ when $b\\ne0$ and $\\delta(-e_y/a)=\\Phi_L(\\eta_L)$ when $a\\ne0$. Apply $\\delta^{-1}$ to obtain the two formulas. The image of the basis $\\eta_L$ under the isomorphism $\\gamma_L$ is nonzero, proving both nonvanishing assertions. Where both denominators are nonzero the two fractions agree because $ae_x+be_y=0$. All divisions take place in $L$.",
+   "uses": [
+    "lem-trf-completed-conormal-determinant-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E9Y (lemma-determinant), relation-first wedge formula, and 0E9Z (lemma-fundamental-class-lci); agent specialization of the existing completed comparison."
+   }
+  },
+  {
+   "text": "The algebraic and continuous formal presentation compatibilities and threefold composition law are part of [lem-trf-completed-conormal-determinant-comparison]. Apply them to the plane presentations. For each presentation its normalization identity is $\\delta_T^{-1}\\Phi_{T,L}=\\gamma_L$ with the same algebraic smooth-locus identification; therefore the generic comparison proved above is that map for every presentation. This claims naturality of the comparisons, without asserting that the coordinate-dependent frames are identical.",
+   "uses": [
+    "lem-trf-completed-conormal-determinant-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E9Y (lemma-determinant), relation-first wedge formula, and 0E9Z (lemma-fundamental-class-lci); agent specialization of the existing completed comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-regular-sequence",
+  "lem-trf-completed-conormal-determinant-comparison",
+  "lem-trf-completion-kahler-differential-comparison",
+  "lem-trf-flat-lci-canonical-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E9Y (lemma-determinant), relation-first wedge formula, and 0E9Z (lemma-fundamental-class-lci); agent specialization of the existing completed comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "adjunction.*differential|conormal.*determinant|poincare.*residue|dualizing.*(plane|hypersurface)",
+   "results": "{\"t\": \"2026-10-22T06:14:24Z\", \"tool\": \"grep\", \"query\": \"adjunction.*differential|conormal.*determinant|poincare.*residue|dualizing.*(plane|hypersurface)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/Extension/Presentation/Core.lean:324,330,337 and Smooth/StandardSmoothCotangent.lean:218: polynomial Jacobian inverse and smooth cotangent bases, with neither the completed adjunction line nor its normalized signed frame. Affine Weierstrass point ideals and Weierstrass division also do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical adjunction generator for a formal plane hypersurface computed by the conormal determinant and inverse Jacobian partial derivative",
+   "results": "{\"t\": \"2026-10-22T06:14:24Z\", \"tool\": \"leansearch\", \"query\": \"Canonical adjunction generator for a formal plane hypersurface computed by the conormal determinant and inverse Jacobian partial derivative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"WeierstrassCurve.Jacobian.polynomialX\", \"Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs.congr_simp\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs\"], \"digest\": \"1a1f9d3e900f95df\"}; Read Mathlib/RingTheory/Extension/Presentation/Core.lean:324,330,337 and Smooth/StandardSmoothCotangent.lean:218: polynomial Jacobian inverse and smooth cotangent bases, with neither the completed adjunction line nor its normalized signed frame. Affine Weierstrass point ideals and Weierstrass division also do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"determinant\"",
+   "results": "{\"t\": \"2026-10-22T06:14:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"determinant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/Extension/Presentation/Core.lean:324,330,337 and Smooth/StandardSmoothCotangent.lean:218: polynomial Jacobian inverse and smooth cotangent bases, with neither the completed adjunction line nor its normalized signed frame. Affine Weierstrass point ideals and Weierstrass division also do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed adjunction line of a plane local complete intersection has a signed determinant frame mapping to dx over f_y or minus dy over f_x on its smooth generic fibre",
+   "results": "{\"t\": \"2026-10-22T06:14:34Z\", \"tool\": \"leanfinder\", \"query\": \"Completed adjunction line of a plane local complete intersection has a signed determinant frame mapping to dx over f_y or minus dy over f_x on its smooth generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl_apply\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"StandardEtalePresentation.toSubmersivePresentation_jacobian\", \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\"], \"digest\": \"2fde0227981b9c6d\"}; Read Mathlib/RingTheory/Extension/Presentation/Core.lean:324,330,337 and Smooth/StandardSmoothCotangent.lean:218: polynomial Jacobian inverse and smooth cotangent bases, with neither the completed adjunction line nor its normalized signed frame. Affine Weierstrass point ideals and Weierstrass division also do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare residue differential dx divided by partial f partial y from the canonical module of a completed plane curve singularity",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"leanfinder\", \"query\": \"Poincare residue differential dx divided by partial f partial y from the canonical module of a completed plane curve singularity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassMod\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"WeierstrassCurve.Affine.CoordinateRing.YClass\", \"WeierstrassCurve.Affine.FunctionField\", \"Algebra.Generators.cMulXSubOneCotangent_eq\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\"], \"digest\": \"a2c6148b610a3bda\"}; Read Mathlib/RingTheory/Extension/Presentation/Core.lean:324,330,337 and Smooth/StandardSmoothCotangent.lean:218: polynomial Jacobian inverse and smooth cotangent bases, with neither the completed adjunction line nor its normalized signed frame. Affine Weierstrass point ideals and Weierstrass division also do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "invJacobianOfHasCoeffs|basisKaehlerOfIsCompl_apply|cotangentComplexAux_apply",
+   "results": "{\"t\": \"2026-10-22T06:16:18Z\", \"tool\": \"grep\", \"query\": \"invJacobianOfHasCoeffs|basisKaehlerOfIsCompl_apply|cotangentComplexAux_apply\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Extension/Presentation/Core.lean\", \"Mathlib/RingTheory/Extension/Presentation/Core.lean\", \"Mathlib/RingTheory/Extension/Presentation/Core.lean\"], \"digest\": \"cec34f2d6c5b83e4\"}; Read Mathlib/RingTheory/Extension/Presentation/Core.lean:324,330,337 and Smooth/StandardSmoothCotangent.lean:218: polynomial Jacobian inverse and smooth cotangent bases, with neither the completed adjunction line nor its normalized signed frame. Affine Weierstrass point ideals and Weierstrass division also do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed adjunction frame of a completed plane curve hypersurface and inverse Jacobian differential dx divided by f_y",
+   "results": "{\"t\": \"2026-10-23T09:33:01Z\", \"tool\": \"leanfinder\", \"query\": \"Signed adjunction frame of a completed plane curve hypersurface and inverse Jacobian differential dx divided by f_y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.toJacobian\", \"WeierstrassCurve.Jacobian.toAffine\", \"WeierstrassCurve.Jacobian.polynomialZ\", \"WeierstrassCurve.Affine.CoordinateRing.YClass\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"WeierstrassCurve.Jacobian.eval_polynomialY_of_Z_ne_zero\", \"WeierstrassCurve.Jacobian.eval_polynomialX_of_Z_ne_zero\"], \"digest\": \"3e65548931ef9479\"}; Read Ideal/Cotangent.lean:44-55 (quotient only), Extension/Presentation/Submersive.lean:90-154 (polynomial Jacobian), Smooth/StandardSmoothCotangent.lean:58,218 (polynomial cotangent map and smooth basis), and EllipticCurve/Jacobian/Basic.lean, Affine/Point.lean (Weierstrass coordinate models). None states the completed adjunction comparison or signed frame.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction.*differential|conormal.*determinant|poincare.*residue|dualizing.*(plane|hypersurface)",
+   "results": "{\"t\": \"2026-10-23T09:33:52Z\", \"tool\": \"grep\", \"query\": \"adjunction.*differential|conormal.*determinant|poincare.*residue|dualizing.*(plane|hypersurface)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Ideal/Cotangent.lean:44-55 (quotient only), Extension/Presentation/Submersive.lean:90-154 (polynomial Jacobian), Smooth/StandardSmoothCotangent.lean:58,218 (polynomial cotangent map and smooth basis), and EllipticCurve/Jacobian/Basic.lean, Affine/Point.lean (Weierstrass coordinate models). None states the completed adjunction comparison or signed frame.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"determinant\"",
+   "results": "{\"t\": \"2026-10-23T09:33:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"determinant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Ideal/Cotangent.lean:44-55 (quotient only), Extension/Presentation/Submersive.lean:90-154 (polynomial Jacobian), Smooth/StandardSmoothCotangent.lean:58,218 (polynomial cotangent map and smooth basis), and EllipticCurve/Jacobian/Basic.lean, Affine/Point.lean (Weierstrass coordinate models). None states the completed adjunction comparison or signed frame.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical module of a plane hypersurface curve as the determinant of the conormal sequence with residue differential dx over partial f partial y",
+   "results": "{\"t\": \"2026-10-23T09:34:21Z\", \"tool\": \"leansearch\", \"query\": \"Canonical module of a plane hypersurface curve as the determinant of the conormal sequence with residue differential dx over partial f partial y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"IsLocalRing.instIsScalarTowerResidueFieldCotangentSpace\", \"Ideal.instModuleQuotientCotangent\", \"Ideal.Cotangent\", \"Ideal.instInhabitedCotangent\", \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Ideal.toCotangent\", \"Algebra.PreSubmersivePresentation.jacobian\"], \"digest\": \"55085369e622584a\"}; Read Ideal/Cotangent.lean:44-55 (quotient only), Extension/Presentation/Submersive.lean:90-154 (polynomial Jacobian), Smooth/StandardSmoothCotangent.lean:58,218 (polynomial cotangent map and smooth basis), and EllipticCurve/Jacobian/Basic.lean, Affine/Point.lean (Weierstrass coordinate models). None states the completed adjunction comparison or signed frame.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The determinant line of a local complete intersection cotangent complex is invariant under power series completion and presentation changes",
+   "results": "{\"t\": \"2026-10-23T09:34:31Z\", \"tool\": \"leanfinder\", \"query\": \"The determinant line of a local complete intersection cotangent complex is invariant under power series completion and presentation changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"Algebra.Generators.CotangentSpace.compEquiv\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.Generators.cotangentCompAwaySec_apply\"], \"digest\": \"465d95ac8d612297\"}; Read Ideal/Cotangent.lean:44-55 (quotient only), Extension/Presentation/Submersive.lean:90-154 (polynomial Jacobian), Smooth/StandardSmoothCotangent.lean:58,218 (polynomial cotangent map and smooth basis), and EllipticCurve/Jacobian/Basic.lean, Affine/Point.lean (Weierstrass coordinate models). None states the completed adjunction comparison or signed frame.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplexAux_apply|basisKaehlerOfIsCompl_apply|jacobian_eq_det_aevalDifferential",
+   "results": "{\"t\": \"2026-10-23T09:42:26Z\", \"tool\": \"grep\", \"query\": \"cotangentComplexAux_apply|basisKaehlerOfIsCompl_apply|jacobian_eq_det_aevalDifferential\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\"], \"digest\": \"f273d7d8535823d5\"}; Read Ideal/Cotangent.lean:44-55 (quotient only), Extension/Presentation/Submersive.lean:90-154 (polynomial Jacobian), Smooth/StandardSmoothCotangent.lean:58,218 (polynomial cotangent map and smooth basis), and EllipticCurve/Jacobian/Basic.lean, Affine/Point.lean (Weierstrass coordinate models). None states the completed adjunction comparison or signed frame.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-plane-adjunction-lattice",
+  "date": "2026-10-22",
+  "group": "Q150"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Extraction from the returned formal-plane proof: old steps 1--2: regular plane presentation, completed determinant comparison and explicit signed generic inverse; prior to branch parametrization.",
+   "via": [
+    "lem-trf-formal-plane-adjunction-lattice",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-plane-signed-adjunction-frame",
+  "worker": "stage1",
+  "summary": "Reused the general completed conormal determinant comparison and the existing continuous-derivation existence theorem. Wrote the regular-element cancellation, negative-frame construction and two signed wedge computations explicitly. No new nodes; statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Extraction from the returned formal-plane proof: old steps 1--2: regular plane presentation, completed determinant comparison and explicit signed generic inverse; prior to branch parametrization. Steps 1--6 specialize the already split completion comparison to the signed plane frame; latest blueprint locality proof is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-a318f380d",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-a318f380d (reviewer sub-agent of L); spot-checked: Clean shape: one commit with only the item and the report, 0 new nodes, statement unchanged; the item had no proof on the base, so no re-split note applies. Read the item and, in full, the cited statements of lem-trf-completed-conormal-determinant-comparison, lem-trf-flat-lci-canonical-adjunction, lem-trf-completion-kahler-differential-comparison, the continuous-extension predicate def (existence correctly cited from the theorem, C4 ok), the regular-sequence def and the partial-derivative def. Step 1: lowest homogeneous parts show k[[x,y]] is a domain, so f is regular and J/J^2 is free on f-bar, all elementary. Step 2: every hypothesis of the comparison node checked (alg. closed hence perfect; reduced/finite type/pure dim/lci/rational point; R reduced; T->R is a local surjection, hence continuous; kernel (f) regular; n-c=1=d; algebraic presentation from the localized adjunction chart). lambda_T matches the item's line, eta=Phi^{-1}(-w) exists and is unique. Step 3: comparison (i) with F=k gives d-hat; the comparison node's short exact sequence has relation column (a,b) and uses no flatness. Step 4 checked by hand: delta(e_x)=-b w=b Phi(eta) and delta(e_y)=a w=-a Phi(eta); independent of the lift because the exterior algebra is alternating (holds in char 2). Step 5: gamma=delta^{-1}Phi_L gives e_x/b and -e_y/a, nonzero, and they agree via a e_x+b e_y=0. Step 6: the node's compatibility and composition clauses, with gamma_A the same for every presentation; the frame itself is not claimed invariant. Small cases f=x, y, xy, x^p-y^{p+1} all consistent; f=x^2 is excluded by reducedness. The item is not a duplicate: it is the signed plane specialization with eta and the inverse fractions, which its parent lem-trf-formal-plane-adjunction-lattice uses. All cited theorems are in unit sk-i-curve-zero; no SGA, no tool_uses. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FormalPlaneSignedAdjunctionFrame",
+  "declaration": "AlgebraicGeometry.exists_formalPlaneSignedAdjunctionFrame",
+  "declarations": [
+   "AlgebraicGeometry.FormalPlaneEquation",
+   "AlgebraicGeometry.FormalPlaneEquation.presentation",
+   "AlgebraicGeometry.formalPlaneDeterminantModule",
+   "AlgebraicGeometry.formalPlaneComparison",
+   "AlgebraicGeometry.formalPlaneDualSection",
+   "AlgebraicGeometry.IsFormalPlaneDualGenerator",
+   "AlgebraicGeometry.formalPlaneOrientation",
+   "AlgebraicGeometry.formalPlaneCoordinate",
+   "AlgebraicGeometry.formalPlanePartial",
+   "AlgebraicGeometry.formalPlaneGenericSource",
+   "AlgebraicGeometry.exists_formalPlaneSignedAdjunctionFrame"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FormalPlaneSignedAdjunctionFrame.lean",
+  "statement": "theorem exists_formalPlaneSignedAdjunctionFrame {k S : Type u} [Field k] [IsAlgClosed k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S] [_root_.IsReduced S] [∀ X : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (hpure : (Spec (CommRingCat.of S)).IsPureDimension 1) (hlci : Algebra.IsLocalCompleteIntersection k S) (p : Ideal S) [p.IsMaximal] (hresidue : Nonempty ((S ⧸ p) ≃ₐ[k] k)) [_root_.IsReduced (Algebra.LocalCompletion (Localization.AtPrime p))] (J : FlatLCIAdjunctionSystem (Spec.map (CommRingCat.ofHom (algebraMap k S))) 1) (hJ : J.IsNormalized) : ∃ C : CompletedConormalDeterminantComparison (A := Localization.AtPrime p) J, (∀ D : Derivation k (Algebra.LocalCompletion (Localization.AtPrime p)) (Algebra.CompletedDifferentials k (Localization.AtPrime p)), Algebra.IsCompletedDifferentialExtension k (Localization.AtPrime p) D → D = C.derivation) ∧ ∀ P : FormalPlaneEquation k (Algebra.LocalCompletion (Localization.AtPrime p)) ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (Algebra.LocalCompletion (Localization.AtPrime p)))), ∃ h : RingTheory.Sequence.IsRegular (MvPowerSeries (Fin 2) k) (List.ofFn (fun _ : Fin 1 ↦ P.equation)), (∃ q : (P.presentation h).extension.ker, q.val = P.equation ∧ (C.formal (P.presentation h)).basis (0 : Fin 1) = Algebra.Extension.Cotangent.mk q) ∧ ∃ α : formalPlaneDualSection P h, IsFormalPlaneDualGenerator C P h α ∧ ∃ B : Module.Basis (Fin 1) (Algebra.LocalCompletion (Localization.AtPrime p)) (completedConormalSource (A := Localization.AtPrime p) J), formalPlaneComparison C P h (B 0) = -formalPlaneOrientation C P h α ∧ (∀ η : completedConormalSource (A := Localization.AtPrime p) J, formalPlaneComparison C P h η = -formalPlaneOrientation C P h α → η = B 0) ∧ ∀ (L : Type u) [Field L] [Algebra (Localization.AtPrime p) L] [Algebra S L] [Algebra (Algebra.LocalCompletion (Localization.AtPrime p)) L] [IsScalarTower S (Localization.AtPrime p) L] [IsScalarTower (Localization.AtPrime p) (Algebra.LocalCompletion (Localization.AtPrime p)) L] [IsScalarTower S (Algebra.LocalCompletion (Localization.AtPrime p)) L], IsCompletedConormalGeneric (k := k) (S := S) (A := Localization.AtPrime p) (L := L) → ∃ γ : (L ⊗[S] completedConormalAdjunctionSections J) ≃ₗ[L] L ⊗[Localization.AtPrime p] KaehlerDifferential k (Localization.AtPrime p), IsCompletedConormalSmoothComparison J (fun s ↦ (exteriorPower.oneEquiv L _).symm (γ ((1 : L) ⊗ₜ[S] s))) ∧ ∀ (_hab : formalPlanePartial (L := L) P 0 ≠ 0 ∨ formalPlanePartial (L := L) P 1 ≠ 0), Function.Injective ((P.presentation h).genericJacobian (L := L)) ∧ Function.Exact ((P.presentation h).genericJacobian (L := L)) ((C.formal (P.presentation h)).genericAugmentation (L := L)) ∧ Function.Surjective ((C.formal (P.presentation h)).genericAugmentation (L := L)) ∧ ∃ δ : (L ⊗[Localization.AtPrime p] KaehlerDifferential k (Localization.AtPrime p)) ≃ₗ[L] L ⊗[Algebra.LocalCompletion (Localization.AtPrime p)] formalPlaneDeterminantModule C P h, IsCompletedConormalGenericDeterminant (C.formal (P.presentation h)) ((exteriorPower.oneEquiv L _).trans δ) ∧ (∀ t : completedConormalSource (A := Localization.AtPrime p) J, δ (γ (formalPlaneGenericSource J t)) = (1 : L) ⊗ₜ[Algebra.LocalCompletion (Localization.AtPrime p)] formalPlaneComparison C P h t) ∧ δ (formalPlaneCoordinate (L := L) C.derivation P 0) = formalPlanePartial (L := L) P 1 • ((1 : L) ⊗ₜ[Algebra.LocalCompletion (Localization.AtPrime p)] formalPlaneComparison C P h (B 0)) ∧ δ (formalPlaneCoordinate (L := L) C.derivation P 1) = -formalPlanePartial (L := L) P 0 • ((1 : L) ⊗ₜ[Algebra.LocalCompletion (Localization.AtPrime p)] formalPlaneComparison C P h (B 0)) ∧ (formalPlanePartial (L := L) P 1 ≠ 0 → γ (formalPlaneGenericSource J (B 0)) = (formalPlanePartial (L := L) P 1)⁻¹ • formalPlaneCoordinate (L := L) C.derivation P 0 ∧ (formalPlanePartial (L := L) P 1)⁻¹ • formalPlaneCoordinate (L := L) C.derivation P 0 ≠ 0) ∧ (formalPlanePartial (L := L) P 0 ≠ 0 → γ (formalPlaneGenericSource J (B 0)) = -(formalPlanePartial (L := L) P 0)⁻¹ • formalPlaneCoordinate (L := L) C.derivation P 1 ∧ -(formalPlanePartial (L := L) P 0)⁻¹ • formalPlaneCoordinate (L := L) C.derivation P 1 ≠ 0)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 2b32bdcd9e04 (H2): statement dependencies cite the definition-only owners def-trf-completed-conormal-comparison-data and def-sfb-flat-lci-adjunction-system. The completed-conormal existence theorem remains a proof dependency only; its conclusion is not a statement dependency. The Lean signature and every mathematical clause are unchanged. The formal determinant uses the existing affine equivalence, not a free replacement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf5ecef6e",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 2b32. Lean module byte-identical to 2b32, whose mathematics was fully accepted. Item stmt_deps now cite def-sfb-flat-lci-adjunction-system (landed owner of FlatLCIAdjunctionSystem/IsNormalized) and the new def-trf-completed-conormal-comparison-data instead of the theorem node; nothing lost against live, no theorem added; statement/proof/proof_deps unchanged; lean.statement verbatim. New def node: existing:true on the unchanged module Sheaf.TraceFormula.CompletedConormalDeterminantComparison; 31 declarations = all module decls except exists_completedConormalDeterminantComparison and cover every name the item uses; structure signature verbatim; text matches the presentations, models, generic, smooth-comparison and determinant predicates and the comparison fields, with no existence asserted; bracket citations = stmt_deps, all exist on live; no cycle. Other statement notions (LocalCompletion, CompletedDifferentials, pderiv, IsPureDimension, IsLocalCompleteIntersection) owned by def nodes in the closure. Report sections present. Advisory: owner-module docstrings still tag the old theorem node as blueprint."
+ }
+}

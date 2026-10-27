@@ -1,0 +1,146 @@
+{
+ "id": "lem-sp-tower-p1-finite-adjunction-assembly",
+ "kind": "statement",
+ "title": "Finite adjunction assembly from reflected single-level triangles",
+ "statement": "Fix a prime $\\ell$, finite $E/\\mathbf Q_\\ell$, an arbitrary scheme $S$ with $\\ell$ invertible, a projective-line presentation $p$ and map data $d$ [def-sp-tower-p1-adjunction-data], and the canonical etale-origin comparisons $h$ [lem-sp-tower-p1-etale-origin-comparisons]. Assume both triangle identities for the specified tower unit $\\eta$ and counit $\\varepsilon$ on all of $\\mathscr C^+$. At each positive exponent $n+1$ there are FiniteMaps $f_m$ with the recorded tensor/pullback comparison, and an adjunction between its finite restricted functors. The image of every tower $\\eta_M$ under evaluation, followed by $f_m$'s right-functor comparison and finite inverse image of pushEvaluation, is exactly its finite unit at $M_{n+1}$. Its finite counit at $K_{n+1}$ is exactly finite direct image of the inverse right comparison, followed by inverse pushEvaluation and the evaluation of $\\varepsilon_K$. No tower adjunction is part of the conclusion.",
+ "stmt_deps": [
+  "def-sp-tower-p1-adjunction-data",
+  "lem-sp-tower-p1-etale-origin-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+ },
+ "proof": [
+  {
+   "text": "Use the singleton realization and feed the assumed tower triangles to the single-level triangle theorem. Full faithfulness of bounded-below site comparison gives the two finite ordinary etale triangle identities for all bounded-below inputs.",
+   "uses": [
+    "lem-sp-tower-p1-single-level-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  },
+  {
+   "text": "Use the retained canonical level comparison words to transport the finite diagonal and trace natural transformations to the full etale-origin domains. Exact inverse image, the rank-one twist and proper bounded-below direct image preserve these domains. The composite tensorEvaluation and pullEvaluation defines FiniteMaps.comparison and has exactly comparison_eq.",
+   "uses": [
+    "lem-sp-tower-p1-etale-origin-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  },
+  {
+   "text": "Construct the finite adjunction from its natural unit and counit and the transported triangles. The formula comparison equations and naturality give the two displayed finite evaluation equations, including the specified pushEvaluation maps, for any retained etale antecedent.",
+   "uses": [
+    "lem-sp-tower-p1-etale-origin-comparisons",
+    "lem-sp-tower-p1-single-level-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-p1-single-level-triangles",
+  "lem-sp-tower-p1-etale-origin-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport an adjunction through a fully faithful functor with compatible unit and counit",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful and map_restrictFullyFaithful_unit_app; no theorem for the recorded tower/finite comparison words.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction restriction is available, but the project-specific comparison equations and domains still need proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical trace from a projective line splitting is preserved by base change and inverse exchange",
+   "results": "LinearMap.trace_baseChange; Algebra.normalizedTrace_trans and related field trace results.",
+   "date": "2026-10-25",
+   "verdict": "No match for sheaf-derived projective-line splitting traces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit, mkOfUnitCounit_unit, mkOfUnitCounit_counit.",
+   "date": "2026-10-25",
+   "verdict": "Generic assembly only, not the geometric identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*base.*change|RespectsIso|restrict.*adjunction",
+   "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; ObjectProperty/InheritedFromHom.lean; ring and linear algebra trace results. Project search found the five already stated P1 dependencies, none of the exact interface bridges.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate bridge found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerP1Adjunction",
+  "date": "2026-10-25",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Reduction of the triangle identities; Levels; standing-setting restriction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1FiniteAdjunctionAssembly",
+  "file": "lean/Sheaf/Paper/TowerP1FiniteAdjunctionAssembly.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1_finite_adjunction_assembly",
+  "statement": "theorem towerP1_finite_adjunction_assembly (p : Presentation l E S hS) (d : Maps l E p)\n    (h : EtaleOriginComparisons l E p d)\n    (ht : (∀ M : C l E p.classes.base (ProjectiveLine S),\n      (p.F l E).map (eta l E d M) ≫ epsilon l E d ((left l E d).obj M) =\n        𝟙 ((p.F l E).obj M.obj)) ∧\n      (∀ K : C l E p.classes.base S,\n        eta l E d ((rightRestricted l E d).obj K) ≫ (p.G l E).map (epsilon l E d K) =\n          𝟙 ((p.G l E).obj K.obj))) (n : ℕ) :\n    ∃ (fm : FiniteMaps l E p n) (adj : finiteLeft l E fm ⊣ finiteRight l E fm),\n      (∀ M : C l E p.classes.base (ProjectiveLine S),\n        (SpTowerShriek.Ev l E (ProjectiveLine S) n).map (eta l E d M) ≫\n          fm.comparison.hom.app ((p.F l E).obj M.obj) ≫\n            (finiteG l E p n).map\n              (((p.operations.geometry (ProjectiveLine S ↘ S)).pushEvaluation n).hom.app M.obj) =\n          (finiteDomain l E (ProjectiveLine S) n).ι.map\n            (adj.unit.app ((evaluation l E p.classes.base (ProjectiveLine S) n).obj M))) ∧\n      (∀ K : C l E p.classes.base S,\n        (finiteF l E S n).map (fm.comparison.inv.app K.obj) ≫\n          ((p.operations.geometry (ProjectiveLine S ↘ S)).pushEvaluation n).inv.app\n            ((p.G l E).obj K.obj) ≫ (SpTowerShriek.Ev l E S n).map (epsilon l E d K) =\n          (finiteDomain l E S n).ι.map\n            (adj.counit.app ((evaluation l E p.classes.base S n).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a6ed",
+  "group": "F9",
+  "result": "fix",
+  "landing": "20261025T202024-L-2664705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a6ed",
+  "group": "F9",
+  "result": "fix",
+  "landing": "20261025T202024-L-2664705",
+  "kind": "interface",
+  "note": "independent cc review: SmoothPurityTowerP1Data vs the old item body (verbatim apart from explicit pullback arguments in Presentation.exchange); item proof vs ComparisonsWithLine, KernelScalarNormalization, TriangleFactorization and the new nodes; 43-module sandbox build (all 7 direct importers OK); #print axioms"
+ }
+}

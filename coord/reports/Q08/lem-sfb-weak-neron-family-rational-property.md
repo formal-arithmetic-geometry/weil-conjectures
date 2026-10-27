@@ -1,0 +1,90 @@
+# Q08 stage-1 delivery: lem-sfb-weak-neron-family-rational-property
+
+1. Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-weak-neron-family-rational-property.json: statement, split into 17 steps; no change to the mathematical statement; removed the unused group-scheme statement dependency.
+- dag/nodes/sec-six-functors-basics/lem-sfb-generic-smooth-model-smoothening.json: new statement-only node, unsplit, no Mathlib match. This is the general smoothening input, not a weak-family existence or rational-mapping clause of the item.
+- citations.json: verbatim statement quotations for every step/node citation.
+- searches.jsonl: the original, unedited msearch log, nine searches. write_split.py is a sandbox-only construction aid, not a repository file.
+
+2. Attachments
+
+None. Searched the live project under lean/WeilConjectures by the exact blueprint tag and by Neron, Néron, smoothening and bounded/unramified terminology. There is no project declaration proving all clauses. In particular, a Mathlib rational-map definition is not an attachment and ordinary dense-open rational maps do not supply this item's fibrewise density.
+
+3. Missing local literature
+
+WANTED: Bosch–Lütkebohmert–Raynaud, Néron Models, 1.1 Proposition 7 (printed pp.10–11), 3.1 Theorem 3 and Corollary 4 (pp.61–62), 3.5 Definition 1, Theorem 2, Proposition 3, Corollary 4 (pp.74–75), and 4.3 opening paragraph (p.104), for lem-sfb-weak-neron-family-rational-property and lem-sfb-generic-smooth-model-smoothening.
+
+The local literature directory has no BLR PDF. I read the primary book scan in the browser, https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf , PDF pp.17, 67–68, 80–81, 110. I did not download it or write literature files. As the local document is missing and the coordinate-gluing and limit details are supplied here, the item's proof_origin is agent. The new node cites the precise book result and records the missing local copy.
+
+4. Defects checked and repaired
+
+The imported statement is faithful to the book's finite weak-family version. I found no statement dispute and did not add hypotheses. The proof needed actual arguments, especially separated models with entire generic fibre, the graph's local DVR comparison, and descent from the strict henselization of the new local trait. I removed def-sc-group-scheme because neither the statement nor this proof assumes a group.
+
+The coordinate-integrality citation was corrected to lem-sc-dvr-nonnegative-valuation-in-ring: a statement merely giving valuations of elements already in a DVR would not imply membership. The strict-henselization DVR and maximal-ideal statements now establish that pi is also its uniformizer. I added the existing directed-cofinal reindexing statement to avoid silently applying a directed-set limit theorem to an arbitrary cofiltered category. I also cited affine separatedness explicitly and made the DVR domination argument and generic-density argument explicit.
+
+The source's bounded-model construction can use nonseparated glued models. Here the finite-family construction instead glues one affine model at a time to X; the mixed product is over E and its diagonal piece is the graph of U_a -> X, which is closed because X/E is separated. Thus each Y_a satisfies the new separated smoothening lemma without assuming separatedness of a model glued from all bounded charts at once.
+
+5. Unfinished work
+
+No unfinished part of this split. The new general smoothening theorem is intentionally statement-only and remains for a later stage-1 worker. No Lean files were written, no compiler or build invoked, and no repository/launcher files edited. There are no Mathlib leaves in this delivery.
+
+## Blueprint and duplicate searches
+
+I read the current latest blueprint's ctf-stability unit and the chapter/unit records. This item lies on the existing BLR supporting branch of lem-sfb-bounded-group-translation-model, not a new purity route. blueprint_refs.py ancestor returns no imported blueprint ancestor (node null); I retained that value and the existing via chain, and prepended the item for the new node. The supporting BLR places are specified in from.place. Whole-DAG searches and blueprint_refs.py searches for weak Néron, weak Neron, smoothening, smoothening process, unramified points and smooth model found no equivalent general model-smoothening statement. The same_as lists remain empty. No SGA source is used.
+
+I read every Mathlib search result. The item's semantic hits concern Weierstrass good/minimal reduction and ordinary Scheme.RationalMap constructors, not finite weak families or fibrewise-dense domains. Both spellings/meanings were tried. For the new node the two LeanFinder phrasings and LeanSearch return local standard-smooth presentations, smooth loci, and definitions of smoothness; I also read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, including Smooth.exists_isStandardSmooth. Its hypothesis is an already smooth morphism, and it gives local affine presentations; it does not modify a generically smooth model or preserve its strict-henselian sections. Loogle and the Mathlib grep have no matching smoothening/Neron/blowup theorem. All exact queries and their actual results are retained in searches.jsonl and mathlib_searches; no service was unavailable. The AlgebraicGeometry subdirectory restriction of the new grep is recorded in its results log.
+
+## Not duplicates
+
+lem-sfb-generic-smooth-model-smoothening vs lem-sfb-weak-neron-family-rational-property: the new statement takes an arbitrary separated finite-type model Y with smooth generic fibre and modifies it, with a bijection on all unramified sections; it has no boundedness, family, rational map, or smooth-local-trait base-change assertion. It is the independent BLR 3.1/4 input used to construct the family's members, not a restatement of any clause.
+
+lem-sfb-generic-smooth-model-smoothening vs lem-sfb-lft-closed-subgroup-group-smoothening: the existing node is a group-compatible smoothening of a flat closed subgroup inside a smooth group over a Dedekind base. The new node concerns arbitrary finite-type separated schemes over a DVR, with neither a group operation nor an ambient smooth group; the old statement cannot be applied to the models constructed here.
+
+The new source is BLR 3.1/4, with no Stacks tag that collides with another node's source. General group dilatation/defect-drop nodes were considered but cannot supply smoothening of the arbitrary Y_a used here.
+
+## Review by Q08
+
+I read BLR 3.1/3–4 for the new node. The modification is by blowups with centers on the special fibre; its generic fibre is unchanged, and taking the smooth locus retains all Rsh-sections. Blowups of a separated model, and an open in them, remain separated. This gives exactly the node's smooth finite-type Ysm, its morphism to Y, the generic isomorphism and the section bijection, over an arbitrary DVR. Neither excellence nor a group structure occurs in the source's hypotheses. The node is not proved in this delivery.
+
+For the item I read BLR 1.1/7, 3.5/1–4 and the beginning of 4.3, comparing each clause: boundedness gives a finite family, components can be refined, Proposition 3 gives the weak rational property, Corollary 4 works over A=O_Z,xi, and boundedness conversely follows from finitely many affine integral charts. I checked that the proof treats an arbitrary weak family after the existence construction, not just its specially constructed family.
+
+I opened and read the statement of every cited node. citations.json quotes each of them verbatim, rather than quoting only a title or a definition in place of a theorem. Here is my step-by-step mathematical check.
+
+1. The DVR definition gives a Noetherian domain. lem-weil-pbc-dvr-unit-times-uniformizer-power gives the displayed denominator calculation, and lem-weil-pbc-principal-localization-open-immersion then gives the generic open. The finite-type/noetherian and finite-components statements apply because Spec R is Noetherian. No quasi-compactness is inferred from local finite type alone.
+
+2. The nonnegative-valuation membership node applies to Rsh only after lem-sc-strict-henselization-dvr makes it a DVR and the maximal-ideal clause of lem-weil-pbc-strict-henselization-triples identifies pi as its uniformizer. Zero is handled separately. Restricting an evaluation map to the explicitly generated A_a proves extension and respects every relation; this is not an appeal to an unstated boundedness-to-model lemma.
+
+3. The two-open gluing data are actual identified generic opens and satisfy the cocycle condition. The two gluing statements give the scheme and its R-map. lem-weil-pbc-affine-morphism-permanence supplies separatedness of the affine piece. The separated-base-change and section-closed-immersion statements give exactly the mixed graph's closedness. The closed-immersion definition is local on the product target, so the four product opens prove separatedness. The finite affine cover argument proves finite type; E=R[1/pi] is itself finite type over R.
+
+4. The new node requires separated finite type Y_a with smooth generic fibre, all established in Step 3 and the item's hypothesis. Its section bijection is precisely what lifts each C_a. A nonempty set of generic points gives a nonempty indexed family with at least one special-fibre section.
+
+5. Clause (2), not the properness clause, of lem-pc-proper-base-change gives smooth special fibres. lem-trf-smooth-geometrically-normal gives normality; the normal/noetherian-components statement gives disjoint open-and-closed integral components, including the allowed empty case. The noetherian-open statement gives quasi-compactness of the refined opens, while smooth-restrict supplies smoothness. Separatedness restricts by the diagonal test of Step 3. A local-spectrum section factors through an open containing its closed-point image, so the refinement preserves all sections and loses none when empty special fibres are discarded.
+
+6. The statement of lem-sfb-smooth-trait-local-rational-spreading explicitly asserts that these A_xi are DVRs independently of its later extension hypothesis; I use only that clause, not its rational-spreading conclusion. Smooth geometrically reduced fibres, minimal-prime reduced localization being a field, affine stalk localization, and the fibre-stalk quotient prove A/pi A is a field. Smooth-flat, the definition of flat at a stalk, and the flat-module torsion-free theorem prove pi is nonzero. The strict-henselization DVR and triples statements give both the new DVR and its unchanged maximal-ideal generator. In particular the fields used later really are obtained by inverting pi. The dependency closure has no path back to this item.
+
+7. The graph is a section of a separated base change, so the section theorem gives a closed graph. Scheme-image-qc-kernel applies: the graph-to-ambient map is quasi-compact, since the ambient is Noetherian. The finite-type composition/base-change statement gives the projection's finite type after the closed immersion (a quotient of a finite-type affine algebra is finite type). Scheme-image-flat-base-change is applied to the generic open localization, which is flat, and yields the actual graph as generic fibre. Chevalley requires quasi-compact, locally finite presentation, and quasi-compact quasi-separated target; these follow from finite type over Noetherian schemes and pqf-lem-lft-fp-locnoeth. Thus it really gives constructible C_i.
+
+8. Strict-henselization-functoriality clause (1) supplies the henselian ring and the separable residue closure, not just a notation. The affine smoothness equivalence supplies the smooth algebra in the henselian lifting lemma, with A=Rsh and I its maximal ideal. Dense-separable-points gives density on Z_k before any residue-field extension. Each residue field embeds in the chosen separable closure. The pair of sections factors through the scheme-theoretic graph closure because its ideal evaluates to zero in the fraction field of the DVR, hence in the ring. This checks the scheme structure as well as membership of the closed-point image.
+
+9. No new lemma is hidden in this step: a finite union of proper closed subsets cannot cover an irreducible space; writing a constructible set as a finite union of locally closed sets then proves it contains the generic point when dense. This is on Z_k, so geometric irreducibility is not assumed.
+
+10. The affine smoothness statement and regular-ring smooth ascent apply to the regular DVR R. rem-pc-regular-normal supplies both regular implies normal and the finite disjoint integral-component decomposition for a Noetherian scheme. The component containing xi is integral; smooth flatness and flat-module torsion-freeness keep pi nonzero, so its generic open is nonempty and dense. The reduced-scheme-image statement makes the closure of its integral graph reduced; its underlying closure is irreducible, hence integral. Generic graph isomorphism now identifies the two fraction fields. In particular B really is a local overring of A inside one field, not an arbitrary dominating algebra.
+
+11. Unit-times-uniformizer-power applied to numerator and denominator gives the negative-power expression for an element outside A. Locality forces its inverse into m_B, contradicting invertibility. This proves B=A explicitly. The finite-type stalk-isomorphism neighbourhood statement requires a reduced target with finitely many components, satisfied by the integral Noetherian Z0. Its conclusion is an open immersion, giving the required inverse over its image, and the generic graph fixes the restriction of f_U.
+
+12. Scheme-morphism-gluing applies because agreement is established on U_E, the actual overlap. The glued domain contains the entire generic fibre and the generic point of the irreducible special fibre, so it is base-dense in exactly the sense of the statement. This is stronger than an unspecified ordinary rational map.
+
+13. The etale-local-ring-triples statement gives the initial restriction to a fixed affine chart, cofilteredness, and identification with the triples colimit. Strict-henselization-triples identifies that colimit with the local ring's strict henselization; the strict-limit definition supplies the affine inverse limit and its compatible marked-point maps. The displayed ring-map universal property proves localization commutes with this colimit, identifying its generic limit with Spec Q.
+
+14. The affine-limit criterion needs a small nonempty directed set, not just cofiltered neighbourhoods. The fixed-affine finite-presentation algebras and marked embeddings form a small skeleton; the etale-local-ring-triples statement gives cofilteredness. lem-weil-pbc-filtered-category-directed-cofinal, applied to its opposite, gives precisely one directed reindexing preserving the ring colimit and scheme limit. Over the Noetherian field E, pqf-lem-lft-fp-locnoeth gives X/E locally of finite presentation, so the criterion descends the point to W_E. Etale-smooth-zero-dimensional-fibres and smooth-composition give smoothness of W/T and make w a generic point of its special fibre, by the generalization argument written in the step. W is affine etale over a fixed affine Noetherian chart, hence finite type over that chart and over R.
+
+15. This step assembles earlier proved steps, with no new non-elementary input. The Step-5 refinement leaves the component through w; a local spectrum maps into every open containing its closed-point image. Applying the already proved rational property produces an open containing w. The resulting section pairs with Spec Ash -> Spec A to restore the original specified L-structure. It never assumes that the original Q-point descends to Esh or Rsh.
+
+16. Again I use only the smoothness clause of lem-pc-proper-base-change. lem-pod-separated-finite-type-base-change supplies exactly the other two properties, for the arbitrary base change R -> A. Together with Step 15 and the generic fibre-product identification, these are every clause of being a weak family over A.
+
+17. The converse is an explicit coordinate argument from definitions. Finite type over an affine trait gives a finite affine cover by finitely generated algebras. A section whose closed point lies in one chart factors through it, giving integral coordinates and bound zero. Those generic charts cover X when the family is nonempty. I included the empty-family/empty-point case separately, so no nonexistent affine cover is asserted there.
+
+Edge cases tested: X=A1_E has unbounded Esh-points and is not spuriously assigned a finite weak family by the construction; X=Spec E has the expected Spec R model. Empty strict-henselian point sets are allowed in the converse, while nonemptiness is used only in the forward existence assertion. Models with empty special fibre contribute no sections. A smooth special fibre can be disconnected; Step 5 refines its finitely many disjoint components. Irreducibility in the mapping assertion is over k and need not survive ksep. Z may have components lying entirely over E; the argument uses the clopen integral component containing xi and glues back on all of Z_E. For Z_k empty the local-trait assertion is vacuous. No completeness, excellence, properness, connectedness, or group assumption was introduced.
+
+I checked delivery-errors B–E against the files and the open source. The new node is neither elementary nor a duplicate nor an item clause. All other two/three-line deductions remain explicit steps. Every non-elementary imported fact has a cited statement which actually gives it, with its hypotheses checked above. There is no per-degree replacement of a derived assertion, coefficient change, route substitution, or SGA citation. All steps are under 2000 characters; none conceals an unrecorded general comparison lemma. Off-unit generic tools are declared in split_report.tool_uses. The server review_split check passed before the last citation tightening; the full dry run is the final validation.

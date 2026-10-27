@@ -1,0 +1,353 @@
+{
+ "id": "lem-pod-weil-constant-cohomology-range",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-every-iterate-trace",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: constant-sheaf clause (prop-cohomological-finiteness): vanishing of $H^i(X\\otimes\\bar k,\\overline{\\mathbf Q}_\\ell)$ outside $[0,2d]$ for $X$ smooth of pure dimension $d$ (sk-lem-finite)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomology of the constant Weil sheaf on a smooth scheme vanishes outside [0, 2d]",
+ "statement": "Let $k_0$ be a finite field, let $k=\\overline{k_0}$ be an algebraic closure [def-weil-finite-field-fiber], let $\\ell$ be a prime different from $\\operatorname{char}(k_0)$, and fix $\\overline{\\mathbf Q}_\\ell$ (Lean `PadicAlgCl ℓ`). Let $d\\in\\mathbf N$ and let $X$ be a $k_0$-scheme whose structure morphism is quasi-compact, quasi-separated, locally of finite type, and smooth of relative dimension $d$ [def-weil-finite-type-morphism, def-weil-quasi-separated-morphism, def-sbc-smooth-morphisms]. Put $\\bar X=X\\times_{k_0}k$ and $a:\\bar X\\to s=\\operatorname{Spec}k$. Let $\\mathcal A_{\\bar X}$ be the continuous constant adic coefficient sheaf with its canonical Weil structure [def-weil-constant-weil-structure], the underlying sheaf of `WeilSheaf.adicConstant k₀ ℓ X`. Ordinary cohomology here means\n$$H^i(\\bar X,\\overline{\\mathbf Q}_\\ell)=\\Gamma\\bigl(s,\\mathcal H^i(Ra_*\\mathcal A_{\\bar X})\\bigr),$$\nwhere $Ra_*$ is the ordinary total right derived functor [def-sfb-right-derived-functor] of the direct image on modules over the continuous coefficient sheaves, and $\\mathcal H^i$ is derived cohomology [def-weil-derived-cohomology-sheaves]. This is the underlying vector space of `((WeilSheaf.adicConstant k₀ ℓ X).cohomology i)`; the Weil structure is forgotten when taking the underlying vector space [def-weil-weil-sheaf-complex]. Then\n$$H^i(\\bar X,\\overline{\\mathbf Q}_\\ell)=0\\qquad(i<0\\ \\text{or}\\ i>2d).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/_section.md",
+  "place": "sk-lem-finite: constant-sheaf clause (prop-cohomological-finiteness): vanishing of $H^i(X\\otimes\\bar k,\\overline{\\mathbf Q}_\\ell)$ outside $[0,2d]$ for $X$ smooth of pure dimension $d$; Lean: upstream file lean/WeilConjectures/WeilSheaf/PoincareDuality.lean, declaration AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant (module WeilConjectures.WeilSheaf.PoincareDuality, lines 101-107, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-constant-weil-structure",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-weil-sheaf-complex",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "The structure morphism of $X$ is of finite type, since it is locally of finite type and quasi-compact. Its base change $a$ is of finite type by [lem-sfb-finite-type-composition-base-change]. It is quasi-separated: the diagonal of $a$ is the base change of the quasi-compact diagonal of $X/k_0$, so [lem-pc-quasi-compact-base-change] applies, with the definition [def-weil-quasi-separated-morphism]. Thus $a$ has all three finiteness hypotheses required by the adic-bound lemma. If $\\bar X$ is empty, its coefficient sheaf and all cohomology vanish, and we are done. In what follows assume $\\bar X$ nonempty.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-quasi-separated-morphism",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T4, lemma-base-change-finite-type; quasi-separatedness via the base change of the diagonal and Tag 01K5"
+   }
+  },
+  {
+   "text": "The definition [def-sbc-smooth-morphisms] gives $\\dim_xX=d$ for every $x\\in X$, since the fibre over the unique point of $\\operatorname{Spec}k_0$ is $X$. Hence $\\dim X\\le d$: for any chain of irreducible closed subsets choose a point of its smallest member and an open neighbourhood of dimension $d$ as in [def-kun-dimension]; intersection with that open preserves every strict inclusion, since a proper closed subset of an irreducible space contains no nonempty open subset. Cover $X$ by finitely many affine opens $\\operatorname{Spec}B_j$. Each $B_j$ is a finite-type $k_0$-algebra and each affine open has dimension at most $d$. By [lem-weil-pbc-dimension-preserved-field-extension], each base-changed affine $\\operatorname{Spec}(k\\otimes_{k_0}B_j)$ has the same dimension, at most $d$. These affines cover $\\bar X$. The same chain-intersection argument, taking an affine containing a point of the smallest member, gives $e=\\dim\\bar X\\le d$. Since $\\bar X$ is nonempty, $e$ is a nonnegative integer.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-kun-dimension",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-dimension-preserved-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3, lemma-dimension-preserved-field-extension; smooth relative dimension as in morphisms.tex Tag 02G2"
+   }
+  },
+  {
+   "text": "The algebraically closed field $k$ is separably closed, so [lem-kun-03qu-sep-closed] gives $\\operatorname{cd}_{\\rm tor}(k)\\le0$ in the sense of [def-sc-etale-torsion-cd]. Apply [thm-sc-finite-type-torsion-cd] to $\\bar X/k$, of dimension $e$, to obtain vanishing above $2e$, hence above $2d$, for every torsion abelian etale sheaf on $\\bar X$. In particular, for every finite commutative ring $\\Lambda$, the underlying abelian sheaf of any etale $\\Lambda$-module sheaf $F$ is torsion: its sections are killed by the additive exponent of $\\Lambda$. By [lem-sbc-higher-direct-image-forget-comparison], forgetting coefficients identifies the higher direct images with the abelian ones. By [lem-weil-pbc-geometric-point-pullback-stalk](1), evaluation at $s$ is an exact equivalence, hence detects zero. Applying this exact functor to the direct-image resolution identifies its cohomology with the global cohomology on $\\bar X$: termwise, $\\Gamma(s,a_*I)=\\Gamma(\\bar X,I)$. Thus the abelian higher direct image along $a$ vanishes exactly when its global cohomology vanishes. Consequently $R^qa_{\\rm et,*}F=0$ for all $q>2d$ and all such $\\Lambda,F$. This checks the bound for every finite ring, including rings of residue characteristic $\\operatorname{char}k$.",
+   "uses": [
+    "lem-kun-03qu-sep-closed",
+    "def-sc-etale-torsion-cd",
+    "thm-sc-finite-type-torsion-cd",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-geometric-point-pullback-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
+    "place": "Statement and proof; combine with lem-kun-03qu-sep-closed, vanishing on a separably closed point"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-comparison-direct-image] to $a$, which is quasi-compact and quasi-separated by Step 1, and to $F[0]$, which is bounded below. It gives the derived isomorphism $\\nu_s^*Ra_{\\rm et,*}F\\cong Ra_{\\rm proet,*}\\nu_{\\bar X}^*F$. The comparison inverse image is exact (as specified in [lem-weil-pbc-comparison-direct-image-canonical-mate]); applying its degreewise exact functor to an injective model preserves zero cohomology in each degree. Thus the pro-etale object on the right has no cohomology above $2d$, for every finite commutative $\\Lambda$ and every $F$. This is precisely the finite-coefficient premise of [lem-pod-adic-unit-direct-image-finite-bound].",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-pod-adic-unit-direct-image-finite-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Statement: derived comparison for qcqs morphisms, with bounded-below input"
+   }
+  },
+  {
+   "text": "Apply [lem-pod-adic-unit-direct-image-finite-bound] with $Y=s$, the identity $Y\\to\\operatorname{Spec}k$, $f=a$ and $b=2d$. The characteristic of $k$ equals that of $k_0$, so $\\ell\\ne\\operatorname{char}k$; $a$ is locally of finite type, quasi-compact and quasi-separated by Step 1, and Step 4 supplies the entire finite-ring premise. The lemma gives $\\mathcal H^i(Ra_*\\mathcal A_{\\bar X})=0$ for $i>2d$, for the actual continuous constant adic unit. By [def-weil-constant-weil-structure], forgetting the canonical Weil structure gives precisely this coefficient unit. Taking sections of the zero cohomology sheaf gives the zero vector space, so the displayed definition of ordinary cohomology proves the upper vanishing bound. No compact-support or properness comparison is used.",
+   "uses": [
+    "lem-pod-adic-unit-direct-image-finite-bound",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/_section.md",
+    "place": "sk-lem-finite, finite-level bound and coefficient-stage passage; existing adic-unit finite-bound interface"
+   }
+  },
+  {
+   "text": "For $i<0$, the coefficient unit is a sheaf placed in degree zero. Use small site representatives [def-weil-size-convention]. The coefficient-module categories on source and target are Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian] and have enough injectives by [lem-sp-grothendieck-enough-injectives]. The module direct image, a right adjoint given on sections by restriction, is additive and left exact. Compute its right derived direct image by a nonnegative injective resolution $\\mathcal A_{\\bar X}\\to I^\\bullet$: applying the additive direct-image functor termwise still gives a complex with zero terms in negative degrees. Its kernel modulo image is therefore zero there, so $\\mathcal H^i(Ra_*\\mathcal A_{\\bar X})=0$, and its sections vanish. The resolution is K-injective and computes the total right derived functor by [lem-sp-kinjective-computes](2), so the elementary termwise calculation is legitimate [def-sp-injective-resolutions, def-sfb-right-derived-functor]; the coefficient sheaf and its degree-zero placement are [def-weil-constant-weil-structure]. Together with Step 5 this proves both clauses.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sfb-right-derived-functor",
+    "def-weil-constant-weil-structure",
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/_section.md",
+    "place": "sk-lem-finite, constant-sheaf specialization in degree zero; elementary negative-degree resolution calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-quasi-separated-morphism",
+  "lem-pc-quasi-compact-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-kun-dimension",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-kun-03qu-sep-closed",
+  "def-sc-etale-torsion-cd",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-pod-adic-unit-direct-image-finite-bound",
+  "def-weil-constant-weil-structure",
+  "def-sp-injective-resolutions",
+  "def-sfb-right-derived-functor",
+  "def-weil-size-convention",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sp-kinjective-computes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/_section.md",
+  "place": "Constant-sheaf specialization of the finite-coefficient bound and coefficient-stage passage; ordinary qcqs formulation of live PoincareDuality.lean:101-107"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of smooth variety vanishes above twice the dimension; Frobenius of base change to finite extension is power of Frobenius",
+   "results": "FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic(_iterate) (Mathlib.FieldTheory.Finite.*): field-level Frobenius only, no étale cohomology",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizingComplex\" (name substring)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'cohomologicalDimension|cohomological dimension ; geometricFrobenius|Frobenius.*base change ; WeilSheaf|WeilComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology of the constant l-adic sheaf on a smooth finite type scheme vanishes outside zero to twice its dimension",
+   "results": "Hits: Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.smoothLocus_eq_compl_support_inter. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "EllAdicCohomology|cohomologicalDimension|adicConstant",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; searched AlgebraicGeometry. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of a smooth variety with l-adic constant coefficients is zero above twice the dimension",
+   "results": "Hits: CochainComplex.isZero_of_isStrictlyGE, DerivedCategory.isZero_of_isLE, Algebra.FormallySmooth.subsingleton_h1Cotangent, CochainComplex.isZero_of_isGE, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, CochainComplex.isStrictlyGE_iff, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.isSmoothOfRelativeDimension_comp. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.EllAdicCohomology",
+   "results": "Hits: AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform upper bound for derived global sections of a constant ell adic sheaf from finite torsion cohomological dimension",
+   "results": "Hits: localCohomology, localCohomology.ofSelfLERadical, localCohomology.diagram, localCohomology.ofDiagram, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, localCohomology.isoSelfLERadical, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSmoothOfRelativeDimension|dimension.*smooth|smooth.*dimension",
+   "results": "Hits: 26, 29, 129, 132, 135; searched AlgebraicGeometry/Morphisms/Smooth.lean. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a quasi compact smooth scheme of relative dimension d over a field has geometric fiber topological Krull dimension at most d after extending the field",
+   "results": "Hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.relativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension, topologicalKrullDim",
+   "results": "Hits: . Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SmoothOfRelativeDimension|smooth.*[dD]im|[dD]im.*smooth",
+   "results": "Hits: ; searched AlgebraicGeometry/Dimension. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[iI]sGE|[iI]sGE.*rightDerived|rightDerived.*[iI]sLeftTExact",
+   "results": "Hits: ; searched Algebra/Homology. Read the relevant ElladicCohomology and Smooth source; definitions, empty-scheme vanishing and general homology results do not give the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant",
+     "module": "WeilConjectures.WeilSheaf.PoincareDuality",
+     "lines": [
+      97,
+      107
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.PoincareDuality",
+  "file": "lean/WeilConjectures/WeilSheaf/PoincareDuality.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant"
+  ],
+  "statement": "theorem subsingleton_cohomology_adicConstant (d : ℕ)\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ}\n    (hi : i < 0 ∨ 2 * d < i) :\n    Subsingleton ((adicConstant k₀ l X).cohomology i).carrier :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-weil-constant-cohomology-range",
+  "worker": "stage1",
+  "summary": "Q14 direct delivery. Six steps, no new nodes: geometric dimension via affine field extension; all-finite-ring torsion bound; qcqs site comparison; existing constant-adic finite-bound transfer; negative-degree resolution. Made the ordinary cohomology formula explicit to repair the separated-only scope of the inherited definition citation, retaining precisely the live qcqs hypotheses and conclusion. All cited statements read, citations recorded verbatim.",
+  "blueprint": "The node serves prop-every-iterate-trace through the sk-lem-finite constant-sheaf clause. Steps 1-3 verify the geometry and finite-level bound in the unit proof; Steps 4-5 implement its coefficient-stage passage for ordinary direct image; Step 6 specializes degree-zero input. The stronger all-torsion bound supplies the existing adic lemma’s every-finite-ring premise.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "General affine dimension invariance under field extension, used to check the geometric dimension hypothesis; no node of this unit states it."
+   },
+   {
+    "node": "lem-kun-03qu-sep-closed",
+    "why": "Generic vanishing on a separably closed point establishes the field torsion bound; no node of this unit supplies it."
+   },
+   {
+    "node": "thm-sc-finite-type-torsion-cd",
+    "why": "General finite-type torsion cohomological dimension bound supplies the finite-ring premise required by the existing adic-bound lemma, including characteristic-primary coefficients."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "General module-to-abelian higher-direct-image comparison allows the torsion bound to apply to arbitrary finite-ring module sheaves."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic qcqs etale/pro-etale derived direct-image comparison transports the finite bound; the unit has no replacement comparison."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Supplies exactness of the derived site comparison explicitly, needed to transport cohomological bounds through the preceding derived isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic exact global-sections equivalence on an algebraically closed etale point converts cohomology vanishing to sheaf vanishing; the unit has no all-module statement of this fact."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site Grothendieck theorem verifies the actual coefficient-module categories needed for the negative-degree resolution calculation."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic resolution theorem certifies that the nonnegative injective resolution computes the total derived direct image in every degree."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-kun-03qu-sep-closed",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-kinjective-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-c331c3990",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-c331c3990 (reviewer sub-agent of L); spot-checked: The six steps are mathematically correct and I read all of them. Two citations were missing from the statement (B3), and I added both in fixes/dag/nodes/sec-poincare-duality/lem-pod-weil-constant-cohomology-range.json: [def-weil-finite-field-fiber] for k0, k̄ and X̄ (already a stmt_dep, never cited in the text), and [def-sfb-right-derived-functor] for Ra_*, which I also added to stmt_deps. The statement change is justified. def-weil-ordinary-compact-cohomology requires a separated finite-type scheme, but the item is qcqs. The explicit Γ(s,𝓗^i(Ra_*𝒜)) is exactly the Lean definition: Cohomology.lean:58 and 94-113, where cohomologyFrobeniusModule is the globalSections of homologySheaf. All hypotheses and both vanishing clauses are kept, so nothing is weakened. Step checks: Step 1, base change of finite type, quasi-separatedness through the base-changed diagonal, and the empty case. Step 2, dim_x X = d from def-sbc-smooth-morphisms, then the chain argument (no separatedness used) and dimension preservation for affine field extension, giving dim X̄ ≤ d. Step 3, 03QU gives cd_tor(k̄) = 0, thm-sc-finite-type-torsion-cd covers all torsion sheaves including p-torsion, then the forget comparison and the exact Γ(s,-) give R^q a_*F = 0 for q > 2d and every finite ring Λ. That is needed because the existing adic lemma's premise ranges over every finite ring and every sheaf, which fin4 (constructible only) and lem-sf-etale-direct-image-vanishing (prime to p only) do not cover. Step 4, qcqs étale/pro-étale comparison with exact ν^*. Step 5, adic lemma with Y=s, s=id, b=2d. Step 6, negative degrees through an injective resolution that is K-injective. Batch-5 check: lem-pod-adic-unit-direct-image-finite-bound is a cohomological-dimension passage from finite level to adic coefficients (R lim plus flat scalar extension; from prop-cohomological-finiteness Steps 5-7). Neither nt-assume-poincare-duality nor nt-assume-trace-formula gives it, and upstream PoincareDuality.lean lists it as an ingredient separate from the trace-cup perfectness. The closure grows only by that lemma, def-sf-uniform-direct-image-vanishing and lem-sfb-finite-type-composition-base-change, with nothing from the trace-formula or Poincaré-duality proofs, so I accept it. I accept the 9 declared tool uses as generic. Other checks: the item is not dropped, there is no repair note, it is still unsplit in side-live, and no SGA source is used. Edge cases checked: empty X, d=0, A^1, the line with doubled origin, p-torsion coefficients.; 1 file(s) fixed by the reviewer"
+ }
+}

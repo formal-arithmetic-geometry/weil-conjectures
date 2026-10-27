@@ -73,7 +73,73 @@
   "lemma-nagata-noetherian-inverse-system-affine"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.nonempty_noetherianApproximation"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.nonempty_noetherianApproximation",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+     "lines": [
+      2146,
+      2165
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Every quasi-compact quasi-separated scheme $S$ admits a Noetherian\napproximation in the sense of [def-nagata-noetherian-inverse-system]:\n$S$ is the limit of a cofiltered system of schemes of finite type over\n$\\mathbf Z$ with affine transition morphisms.",
+  "proof": [
+   {
+    "text": "By quasi-compactness, $S=V_1\\cup\\dots\\cup V_n$ for finitely many affine\nopens $V_k$. We show by induction on $m$ that the open\n$S_{\\leq m}=V_1\\cup\\dots\\cup V_m$ admits a Noetherian approximation; the\ncase $m=n$ is the claim. The empty open is affine, and affine schemes\nadmit Noetherian approximations by\n[lemma-nagata-noetherian-inverse-system-affine]. For the induction step\n(Stacks, Tag 07RN) put $X=S_{\\leq m+1}$, $U=S_{\\leq m}$ and $V=V_{m+1}$,\nso that $X=U\\cup V$ is quasi-separated, $U$ is quasi-compact with a\nNoetherian approximation $U=\\varprojlim_{i}U_i$, and $V$ is affine.",
+    "uses": [
+     "lemma-nagata-noetherian-inverse-system-affine"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Descending the overlap.* By quasi-separatedness $W=U\\cap V$ is\nquasi-compact. By [pqf-lem-limit-qc-open-descends] there are an index\n$i_0$ and a quasi-compact open $W_{i_0}\\subseteq U_{i_0}$ with preimage\n$W$; for $j\\geq i_0$ let $W_j\\subseteq U_j$ be its preimage, so that\n$W=\\varprojlim_{j\\geq i_0}W_j$ and each $W_j$ is quasi-compact and\nNoetherian. Since $W$ is a quasi-compact open of the affine $V$, choose\n$b_1,\\dots,b_n\\in\\Gamma(V,\\mathcal O)$ with\n$W=\\bigcup_l D(b_l)$.",
+    "uses": [
+     "pqf-lem-limit-qc-open-descends"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Stages.* A stage $T$ consists of an index $j\\geq i_0$, sections\n$r_l\\in\\Gamma(W_j,\\mathcal O)$ restricting to $b_l|_W$ whose basic opens\n$D(r_l)$ are affine and cover $W_j$, and a finitely generated\n$\\mathbf Z$-subalgebra $A_T$ of the fibre product\n$\\Gamma(V,\\mathcal O)\\times_{\\Gamma(W,\\mathcal O)}\\Gamma(W_j,\\mathcal O)$\ncontaining the pairs $(b_l,r_l)$ and such that every section over\n$D(r_l)$ is, up to a power of $r_l$, the restriction of the second\ncomponent of an element of $A_T$. A morphism of stages is a morphism of\nindices compatible with the $r_l$ and the algebras. The last condition\nmakes $\\Gamma(D(r_l),\\mathcal O)$ the localization of $A_T$ at\n$(b_l,r_l)$, so the second projection induces an open immersion\n$W_j\\to\\operatorname{Spec}A_T$ onto $\\bigcup_l D(b_l,r_l)$ (Stacks,\nTags 01Z7, 01Z9). The stages form a cofiltered category, and the functor\n$T\\mapsto j$ to the indices $j\\geq i_0$ is initial: lifts $r_l$ exist at\nsome index because $W=\\varprojlim W_j$, two lifts agree further down,\nand the generation condition is achieved by adjoining finitely many\nelements, the sections over the affine $D(r_l)$ of the Noetherian $W_j$\nbeing a finitely generated $\\mathbf Z$-algebra.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The extended system.* To a stage $T$ attach the scheme $X_T$ obtained by\ngluing $U_j$ and $\\operatorname{Spec}A_T$ along the open $W_j$. It is\ncovered by two schemes of finite type over $\\mathbf Z$, hence is of finite\ntype over $\\mathbf Z$, and the transition morphisms are affine, since they\nrestrict to the affine morphisms $U_{j'}\\to U_j$ and\n$\\operatorname{Spec}A_{T'}\\to\\operatorname{Spec}A_T$ over the two charts.\nThe projection $U\\to U_j$ and the morphism\n$V\\to\\operatorname{Spec}\\Gamma(V,\\mathcal O)\\to\\operatorname{Spec}A_T$\ngiven by the first projection agree on $W$, so they glue to compatible\nmorphisms $X\\to X_T$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The limit property.* A cone over a cofiltered system of schemes is a limit\ncone as soon as its restrictions over the members of an open cover of one\nstage, and over their pairwise intersections, are limit cones. Fix a stage\n$T_0$ and use the cover of $X_{T_0}$ by $U_{j_0}$ and\n$\\operatorname{Spec}A_{T_0}$. Over $U_{j_0}$ and over $W_{j_0}$ the system\nrestricts to the systems $U_j$ and $W_j$, whose limits are $U$ and $W$\n(by initiality the limits may be computed over the stages). Over\n$\\operatorname{Spec}A_{T_0}$ it restricts to the system\n$\\operatorname{Spec}A_T$: every element of $\\Gamma(V,\\mathcal O)$ is the\nfirst component of an element of some $A_T$ (lift its restriction to $W$\nto some $W_j$), and two elements of $A_T$ with the same first component\nbecome equal at a later stage (their second components agree on $W$, hence\non some $W_j$). So $\\Gamma(V,\\mathcal O)$ is the filtered colimit of the\n$A_T$, and since $\\operatorname{Spec}$ takes filtered colimits of rings\nto limits, $V=\\operatorname{Spec}\\Gamma(V,\\mathcal O)$ is the limit of the\n$\\operatorname{Spec}A_T$. Hence $X=\\varprojlim_T X_T$ is a Noetherian\napproximation of $X$, which completes the induction.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

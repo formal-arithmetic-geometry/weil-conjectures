@@ -23,143 +23,54 @@
  ],
  "proof": [
   {
-   "text": "The field $k$ is Noetherian: its only ideals are $(0)$ and $(1)$ [def-weil-pbc-noetherian-ring]. Its spectrum is a one-point affine scheme [def-weil-affine-spectrum], hence quasi-compact and locally Noetherian [pqf-def-locnoeth]. Properness gives that $C\\to\\operatorname{Spec}k$ is of finite type [def-weil-proper-morphism], so [lem-weil-pbc-finite-type-over-noetherian] makes $C$ Noetherian. The module $\\mathcal O_C$ is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth]. Fix $\\mathcal L$. On every open trivializing $\\mathcal L$, the tensor $\\mathcal L\\otimes\\mathcal H$ is isomorphic to $\\mathcal H$ by $a\\otimes h\\mapsto ah$ [def-sc-invertible-module, def-pur-sheaf-tensor-product]. Thus it is coherent whenever $\\mathcal H$ is coherent [pqf-def-coherent]. A finite local generating set for $\\mathcal H$ gives a finite generating set of $\\mathcal H_\\xi$ by taking germs [def-weil-pbc-module-stalk]; since $\\mathcal O_{C,\\xi}=\\kappa(\\xi)$ is a field, its dimension $r(\\mathcal H)$ is finite. Set $D(\\mathcal H)=\\chi(C,\\mathcal L\\otimes\\mathcal H)-\\chi(C,\\mathcal H)-r(\\mathcal H)\\deg_k\\mathcal L$, and let $\\mathcal P(\\mathcal H)$ mean $D(\\mathcal H)=0$. For the zero module its tensor, stalk and cohomology groups are zero, so $\\mathcal P(0)$ holds [def-pc-euler-characteristic].",
+   "text": "Fix $\\mathcal L$ and put $r(\\mathcal H)=\\dim_{\\kappa(\\xi)}\\mathcal H_\\xi$ and $D(\\mathcal H)=\\chi(C,\\mathcal L\\otimes\\mathcal H)-\\chi(C,\\mathcal H)-r(\\mathcal H)\\deg_k\\mathcal L$. By [lem-trf-curve-euler-defect-additivity], $C$ is Noetherian, these tensors are coherent, all generic ranks are finite, $D(0)=0$, and $D$ is additive on coherent short exact sequences. Thus the property $\\mathcal P(\\mathcal H):D(\\mathcal H)=0$ holds for zero and satisfies two out of three: if two of the integers in $D(\\mathcal H_2)=D(\\mathcal H_1)+D(\\mathcal H_3)$ vanish, the third does. An isomorphism of coherent modules induces inverse maps on their generic stalks, tensors and cohomology groups; their dimensions, Euler characteristics and hence $D$ agree. Thus $\\mathcal P$ is invariant under isomorphism.",
    "uses": [
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-affine-spectrum",
-    "pqf-def-locnoeth",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "pqf-lem-coherent-ft-locnoeth",
-    "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product",
-    "pqf-def-coherent",
-    "def-weil-pbc-module-stalk",
-    "def-pc-euler-characteristic"
+    "lem-trf-curve-euler-defect-additivity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYV, lemma-degree-on-proper-curve, proof: define the property P; Noetherian and coherence hypotheses made explicit using 01T6 and 01XZ."
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (1) and zero-object preliminary."
    }
   },
   {
-   "text": "Consider a short exact sequence $0\\to\\mathcal H_1\\to\\mathcal H_2\\to\\mathcal H_3\\to0$ of coherent modules. The invertible module $\\mathcal L$ is finite locally free of rank one [def-sc-invertible-module]. By [lem-sc-ext-tensor-exact], tensoring this sequence on the left with $\\mathcal L$ gives a short exact sequence. Its terms are coherent by Step 1. Apply the first assertion of [lem-pc-euler-additive] to both sequences to obtain $\\chi(C,\\mathcal H_2)=\\chi(C,\\mathcal H_1)+\\chi(C,\\mathcal H_3)$ and $\\chi(C,\\mathcal L\\otimes\\mathcal H_2)=\\chi(C,\\mathcal L\\otimes\\mathcal H_1)+\\chi(C,\\mathcal L\\otimes\\mathcal H_3)$.",
+   "text": "Let $i:Z\\hookrightarrow C$ be an integral closed subscheme with generic point $z$. By [lem-trf-curve-integral-closed-tests], either $Z=C$ over $C$, or $Z=\\operatorname{Spec}\\kappa(z)$ over $C$ for a closed $z\\ne\\xi$. In the first case that same lemma supplies the coherent witness $\\mathcal G=\\mathcal O_C$, with support $C$, generic stalk killed by $\\mathfrak m_\\xi$, and residue-field dimension one. Its tensor Euler difference is $\\deg_k\\mathcal L$, so $D(\\mathcal G)=\\deg_k\\mathcal L-1\\deg_k\\mathcal L=0$.",
    "uses": [
-    "def-sc-invertible-module",
-    "lem-sc-ext-tensor-exact",
-    "lem-pc-euler-additive"
+    "lem-trf-curve-integral-closed-tests"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYV, proof of condition (1); Tag 08AA, lemma-euler-characteristic-additive."
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (2), integral closed subscheme dichotomy and Z=X."
    }
   },
   {
-   "text": "Taking stalks at $\\xi$ in the sequence of Step 2 gives a short exact sequence of finite-dimensional $\\kappa(\\xi)$-vector spaces by [lem-weil-pbc-module-stalk-exact], including the injectivity and surjectivity assertions. A basis of $(\\mathcal H_1)_\\xi$, mapped into $(\\mathcal H_2)_\\xi$, together with arbitrary lifts of a basis of $(\\mathcal H_3)_\\xi$, is a basis of $(\\mathcal H_2)_\\xi$: subtract the lifted image to prove spanning, and apply the quotient map to prove independence. Counting these basis elements [def-weil-vector-space-dimension] gives $r(\\mathcal H_2)=r(\\mathcal H_1)+r(\\mathcal H_3)$. Substitution in Step 2 yields $D(\\mathcal H_2)=D(\\mathcal H_1)+D(\\mathcal H_3)$. Consequently if any two of these three integers vanish then the third vanishes. This verifies the two-out-of-three condition for $\\mathcal P$.",
+   "text": "In the closed-point case let $j:\\operatorname{Spec}\\kappa(z)\\hookrightarrow C$ be the canonical residue-field inclusion. By Step 2 its image is the underlying closed subset of $Z$. Apply [lem-trf-curve-closed-point-twist-witness] to $j$: the witness $\\mathcal G=j_*\\mathcal O_{\\operatorname{Spec}\\kappa(z)}$ is coherent with support $\\{z\\}=|Z|$, and $\\mathcal G_z$ is killed by $\\mathfrak m_z$ and has residue-field dimension one. The lemma also gives $\\mathcal G_\\xi=0$ and $\\chi(C,\\mathcal L\\otimes\\mathcal G)=\\chi(C,\\mathcal G)$. Hence $D(\\mathcal G)=0-0\\deg_k\\mathcal L=0$. These are the four witness conditions for the underlying closed subset $|Z|$.",
    "uses": [
-    "lem-weil-pbc-module-stalk-exact",
-    "def-weil-vector-space-dimension"
+    "lem-trf-curve-closed-point-twist-witness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYV, proof of condition (1): additivity of generic rank; Modules 01AG for exact stalks."
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (2), reduced closed point."
    }
   },
   {
-   "text": "Let $i:Z\\hookrightarrow C$ be an integral closed subscheme, and $z$ its generic point. Its underlying set is an irreducible closed subset [def-pc-integral-scheme, def-weil-closed-immersion]. If $z\\ne\\xi$, this subset is proper. It cannot contain a point $y\\ne z$: because $z$ is generic, $\\overline{\\{y\\}}\\subsetneq Z\\subsetneq C$ would be a chain of irreducible closed subsets of length two, contradicting $\\dim C=1$ [def-kun-topological-krull-dimension]. Thus $Z$ is the closed singleton $\\{z\\}$. If $z=\\xi$, the image of $Z$ is all of $C$. On an affine open $\\operatorname{Spec}A$ of the integral scheme $C$, the closed subscheme is $\\operatorname{Spec}(A/I)$ [def-weil-closed-immersion], and its image contains the generic prime $(0)$, so $I\\subseteq(0)$ and $I=0$. These local descriptions identify $i$ with the identity of $C$. In the singleton case, take an affine neighbourhood $\\operatorname{Spec}A$ of $z$. The integral quotient $A/I$ has only one prime ideal, so that ideal is $(0)$ and is maximal; hence $A/I$ is a field. The corresponding ideal of $A$ is the maximal ideal of $z$, so $Z=\\operatorname{Spec}\\kappa(z)$, with its reduced closed-point structure [def-weil-residue-field].",
-   "uses": [
-    "def-pc-integral-scheme",
-    "def-weil-closed-immersion",
-    "def-kun-topological-krull-dimension",
-    "def-weil-residue-field"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYV, proof of condition (2): Z is X or a closed point; affine quotient and dimension-chain details."
-   }
-  },
-  {
-   "text": "For $Z=C$, choose $\\mathcal G=\\mathcal O_C$. It is coherent by Step 1, its support is $C$ because every local ring is nonzero, and its generic stalk is the one-dimensional field $\\kappa(\\xi)$. The maximal ideal of that field is zero, so it annihilates the generic stalk [def-weil-residue-field, def-pc-integral-scheme]. Finally $\\mathcal L\\otimes\\mathcal O_C\\cong\\mathcal L$ by $l\\otimes a\\mapsto al$, with inverse $l\\mapsto l\\otimes1$ [def-pur-sheaf-tensor-product], and $\\deg_k\\mathcal L=\\chi(C,\\mathcal L)-\\chi(C,\\mathcal O_C)$ [def-pc-degree-line-bundle]. Thus $D(\\mathcal O_C)=0$. This supplies all four required properties of the witness for $Z=C$.",
-   "uses": [
-    "def-weil-residue-field",
-    "def-pc-integral-scheme",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-degree-line-bundle"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYV, proof of condition (2), case Z=X; Tag 0AYR, definition-degree-invertible-sheaf."
-   }
-  },
-  {
-   "text": "For $Z=\\operatorname{Spec}\\kappa(z)$ at a closed point $z\\ne\\xi$, choose $\\mathcal G=i_*\\mathcal O_Z$. Both $C$ and the one-point field scheme $Z$ are locally Noetherian, and $\\mathcal O_Z$ is coherent by [pqf-lem-coherent-ft-locnoeth]. Clause (1) of [lem-weil-pbc-closed-immersion-coherent-equivalence] therefore makes $\\mathcal G$ coherent and identifies its support with $\\{z\\}$. By [lem-weil-pbc-closed-pushforward-stalks], its stalk at $z$ is $\\kappa(z)$, with $\\mathcal O_{C,z}$-action through the residue map [def-weil-residue-field]; this stalk is killed by $\\mathfrak m_z$ and has dimension one over $\\kappa(z)$. The same stalk lemma gives $\\mathcal G_\\xi=0$, because $\\xi\\notin\\{z\\}$, so $r(\\mathcal G)=0$. All the support and generic-stalk requirements of the closed-point witness are now verified.",
-   "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "def-weil-residue-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYV, proof of condition (2), closed-point witness i_*O_Z; coherent 087T and sheaves 00AE."
-   }
-  },
-  {
-   "text": "The support $\\{z\\}$ in Step 6 has dimension zero [def-kun-topological-krull-dimension]. Apply the last clause of [lem-pc-chi-zero-dim-support] on the proper scheme $C$ to the coherent module $\\mathcal G$ and the invertible module $\\mathcal L$. It gives $\\chi(C,\\mathcal G\\otimes\\mathcal L)=\\chi(C,\\mathcal G)$. The balanced maps $g\\otimes l\\mapsto l\\otimes g$ and $l\\otimes g\\mapsto g\\otimes l$ give inverse sheaf isomorphisms [def-pur-sheaf-tensor-product]. Cohomology sends inverse maps to inverse maps, so their Euler characteristics agree [def-pc-euler-characteristic]. Thus $\\chi(C,\\mathcal L\\otimes\\mathcal G)=\\chi(C,\\mathcal G)$; together with $r(\\mathcal G)=0$ this is $D(\\mathcal G)=0$.",
-   "uses": [
-    "def-kun-topological-krull-dimension",
-    "lem-pc-chi-zero-dim-support",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-euler-characteristic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYV, proof of condition (2), closed-point calculation; Tag 0AYT, lemma-chi-tensor-finite, clause (5) with n=1."
-   }
-  },
-  {
-   "text": "Apply [lem-pc-coherent-property-devissage] on the Noetherian scheme $C$ to the property $\\mathcal P$ of Step 1. Its condition (0) was checked there; its two-out-of-three condition (1) was checked in Steps 2 and 3; and Step 4 lists every integral closed subscheme, for which Steps 5 through 7 supply a coherent witness with the required support, annihilated generic stalk of residue-field dimension one, and property $\\mathcal P$. The theorem gives $D(\\mathcal F)=0$ for the given coherent module $\\mathcal F$. Expanding this equality gives $\\chi(C,\\mathcal L\\otimes\\mathcal F)=r\\deg_k\\mathcal L+\\chi(C,\\mathcal F)$, including $r=0$.",
+   "text": "Apply [lem-pc-coherent-property-devissage] with $X=C$ and $\\mathcal P(\\mathcal H)$ defined by $D(\\mathcal H)=0$. Step 1 supplies Noetherianity and conditions (0) and (1). For each integral closed $Z$ with generic point $z$, Steps 2-3 supply a coherent $\\mathcal G$ satisfying (2)(a) $\\operatorname{Supp}(\\mathcal G)=Z$, (b) $\\mathfrak m_z\\mathcal G_z=0$, (c) $\\dim_{\\kappa(z)}\\mathcal G_z=1$, and (d) $D(\\mathcal G)=0$. Here $z=\\xi$ for $Z=C$, while for a closed point $z\\ne\\xi$ the dimension-one stalk is at $z$ and its rank at $\\xi$ is zero. The cited theorem therefore gives $D(\\mathcal F)=0$. Rearranging yields $\\chi(C,\\mathcal L\\otimes\\mathcal F)=r\\deg_k\\mathcal L+\\chi(C,\\mathcal F)$, including $r=0$.",
    "uses": [
     "lem-pc-coherent-property-devissage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYV, final application of Cohomology of Schemes Tag 01YI, lemma-property."
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, final application of coherent-lemma-property (01YI)."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-affine-spectrum",
-  "pqf-def-locnoeth",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "pqf-lem-coherent-ft-locnoeth",
-  "def-sc-invertible-module",
-  "def-pur-sheaf-tensor-product",
-  "pqf-def-coherent",
-  "def-weil-pbc-module-stalk",
-  "def-pc-euler-characteristic",
-  "lem-sc-ext-tensor-exact",
-  "lem-pc-euler-additive",
-  "lem-weil-pbc-module-stalk-exact",
-  "def-weil-vector-space-dimension",
-  "def-pc-integral-scheme",
-  "def-weil-closed-immersion",
-  "def-kun-topological-krull-dimension",
-  "def-weil-residue-field",
-  "def-pc-degree-line-bundle",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "lem-pc-chi-zero-dim-support",
+  "lem-trf-curve-euler-defect-additivity",
+  "lem-trf-curve-integral-closed-tests",
+  "lem-trf-curve-closed-point-twist-witness",
   "lem-pc-coherent-property-devissage"
  ],
  "proof_origin": {
@@ -272,27 +183,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-curve-euler-tensor-generic-rank",
-  "worker": "Q73",
-  "summary": "Realize Stacks 0AYV with n=1 by the existing coherent-property devissage theorem. Explicitly verify zero, tensor and generic-rank additivity, classification of integral closed subschemes, and the structure-sheaf and closed-point witnesses. Reuse existing tensor exactness, coherent closed pushforward, stalk and zero-support lemmas; no new nodes or statement changes.",
-  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the integral-curve Euler-characteristic calculation in the proof of Stacks 0AYX (via 0AYV). The steps realize the 0AYV generic-rank calculation in this supporting degree argument: condition (1) in steps 2-3, condition (2) in steps 4-7 and devissage in step 8.",
+  "worker": "Q143",
+  "summary": "Repair the 2026-10-22 re-split return by exposing three independent statement-only work items: defect well-definedness/additivity (old steps 1-3), integral closed-subscheme classification and generic witness (4-5), and the closed-point coherent twist witness (6-7). Preserve the item statement and the 0AYV/01YI devissage route. All original arguments and their citations are retained verbatim in the report, grouped by their new work item; the parent is a short four-step assembly. Rebased against the current live DAG after the side-completion promotion return; reread the current dependencies and added explicit non-duplication comparisons for the newly present rank-one pullback Euler node. The statement and four-step assembly remain valid unchanged. On the resumed live-base repair, the final assembly now spells out the current devissage statement's conditions (0), (1), and (2)(a)-(d), keeping its witness point z distinct from the curve generic point xi. The retained three children and their executed search records are unchanged. In the latest promotion repair, step 3 now chooses the canonical residue-field inclusion explicitly and verifies its support equals the closed subset required by the current devissage statement; the current item was compared field by field with the retained returned version and all cited statements reread. For the 2026-10-23 promotion repair, the required initial current-base dry run passed at de4957a809b. Reopened every current dependency statement and all retained citation quotes; the read-clone parent still equals returned-node.json outside the approved re-split fields. Step 1 now spells out the elementary isomorphism invariance of D, and step 3 uses support as the underlying closed subset. All three child statements, original proof paragraphs and executed search records are retained.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the integral-curve Euler-characteristic calculation in the proof of Stacks 0AYX (via 0AYV). The steps realize the 0AYV generic-rank calculation in this supporting degree argument: condition (1) in steps 2-3, condition (2) in steps 4-7 and devissage in step 8. Re-split: the three new nodes carry respectively old steps 1-3, 4-5 and 6-7; the parent retains the final 01YI assembly.",
   "tool_uses": [
    {
-    "node": "lem-sc-ext-tensor-exact",
-    "why": "General exactness of tensoring by a finite locally free sheaf, needed for the explicit short exact sequence calculation of 0AYV; this trace-formula unit has no replacement statement."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "why": "Use only clause (1), coherence and support of closed pushforward, to construct the closed-point witness; this generic scheme-module tool is absent from the trace-formula unit."
-   },
-   {
-    "node": "lem-pc-chi-zero-dim-support",
-    "why": "The rank-one zero-dimensional-support calculation is exactly the 0AYT input cited in the 0AYV source proof, not a replacement proof route for a trace-formula unit step."
-   },
-   {
     "node": "lem-pc-coherent-property-devissage",
-    "why": "The generic coherent-property devissage theorem is the explicit 01YI input of the 0AYV proof; no trace-formula-unit node states this general tool."
+    "why": "The general coherent-property devissage theorem is the explicit 01YI input of 0AYV; the trace-formula unit has no replacement for it."
    }
   ]
  },
@@ -303,12 +202,12 @@
   "lem-pc-coherent-property-devissage"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q73-7e0d93e3c",
-  "group": "Q73",
+  "reviewer": "NT-cc-Q143-dd12a0f29",
+  "group": "Q143",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-7e0d93e3c (reviewer sub-agent of L); spot-checked: I read the whole item, each of its 8 steps and every node it cites. The delivery adds no new nodes, and the statement and stmt_deps are unchanged. Sources: Stacks varieties.tex 9669ff (0AYV, lemma-degree-on-proper-curve) and coherent.tex 3270ff (01YI, lemma-property). The item is 0AYV with n=1 for an integral proper curve of dimension 1, and it follows the source's proof: devissage via 01YI with witnesses O_C (Z=C) and i_*O_Z (closed points, via 0AYT and r=0). Hypotheses checked where they are used: C is Noetherian by finite type over Spec k; both sides are additive, by lem-sc-ext-tensor-exact, the first clause of lem-pc-euler-additive and stalk exactness (clauses 1 and 5) for the generic rank; the classification of integral closed subschemes uses dim C = 1, uniqueness of generic points, and the fact that a domain with one prime is a field; the closed-point witness gets coherence and support {z} from clause (1) of the closed-immersion coherent equivalence, and its stalk is κ(z) acted on through the residue map, zero at ξ, by the closed-pushforward stalk lemma; the twist of the point sheaf comes from clause 3 of lem-pc-chi-zero-dim-support with an explicit swap of tensor factors; all of devissage conditions (0), (1) and (2)(a)-(d) are supplied. Small cases: F=0, F=O_C, O(e) on P^1, point sheaves with residue field extensions, a nodal cubic. The dependency closure has no cycle and no trf nodes. Not a duplicate: degree-weighted-irreducible-components and generic-rank-leading-degree (the latter needs an ample module) are different statements. I accept all four declared tool_uses (tensor exactness, closed-immersion coherent equivalence clause (1), chi-zero-dim-support, coherent-property devissage) as generic scheme-module tools; they are the inputs named in the 0AYV proof. One minor advisory: Step 1 cites pqf-def-coherent for coherence of the twist, where the cleaner reason is the locality of qc+finite type through 01XZ, which is already in that step's uses. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-dd12a0f29 (reviewer sub-agent of L); spot-checked: PASS with no fixes; the background scan that just finished is the earlier one, which was invalid and not used. Fifth push of the same re-split; heads fdc57c07, a8566193, f8679c37 and 671d52e0 passed and were refused at landing for side-completion promotion. Not superseded: clones/live and side-live still hold the old 8-step split dated 2026-10-19, none of the 3 new ids exists there, and the re-split repair note is still released. Diff against 671d52e0, field by field: the three new nodes are identical in every field. In the item, the statement, stmt_deps, proof_deps and step uses are unchanged. Changes: step 1 adds a correct, unneeded remark that D is invariant under isomorphism; step 3's last sentence is reworded to say support equals the closed subset |Z|, which is what devissage (2)(a) asks; one summary sentence. I reread lem-pc-coherent-property-devissage in full: Noetherian X plus conditions (0), (1) and (2)(a)-(d), all supplied by steps 1-3. Source: Stacks varieties.tex lines 9669-9693 (0AYV) with n=1; the route is 01YI devissage, rank and χ additivity, the O_X witness from the degree definition 0AYR, and the point witness from 0AYT with r=0. The item is not weakened. Mapping: old steps 1-3 go to A (defect additivity), 4-5 to B (integral closed tests), 6-7 to C (closed-point twist witness), and 8 to parent step 4. The parent has 4 steps and 2666 characters; no argument was dropped and no child restates the item. Duplicate check: the previous snapshot's DAG copy has been deleted, so I ran targeted searches over the current snapshot; they found only this delivery's own nodes, plus intersection-number and Hilbert-bound nodes that are not duplicates. Batch-5 flag: the three newly cited sec-trace-formula nodes are this item's own statement-only children, carrying the trf prefix only because of the item's chapter. They state elementary coherent Euler-characteristic and rank facts on curves (Stacks 0AYV, 01YI, 0AYT). Neither the trace-formula nor the Poincare-duality assumption gives them, they are not steps of either proof, and their closure reaches neither. Accepted. Tool use: step 4 cites lem-pc-coherent-property-devissage, outside the unit; accepted as the 01YI input that 0AYV names."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.CurveEulerTensorGenericRank",
@@ -329,5 +228,16 @@
   "result": "pass",
   "note": "Re-delivery of ed903570217a (RETURN H13). The pqf-def-coherent overwrite is dropped: the snapshot record equals the live Q25 record. The Lean module is byte-identical. The item node differs only by the added lean.note naming RingedSpace.IsCoherent (01BV). The report corrects the tensor-instance name. Independent re-check against Stacks 0AYV n=1: field/integral/proper/topological-dim-1/invertible L/coherent F (IsCoherent = finite type + finite-type kernels, exactly the node's clause)/generic point/finrank over the generic local ring with the canonical germ action (FlatPullbackStalk)/eulerChar and degree records/conclusion all match. No extra hypotheses; lean.statement verbatim; sorry only; docstrings carry the source, blueprint id and 8 steps. nt_compile --json clean in 3.3 s; probes confirm the definitions. Advisory: the second reading is still the author's self-check. Maintainer note: the live pqf-def-coherent record is weaker than 01BV."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,133 @@
+{
+ "id": "lem-zl-constant-extension-sheet-geometry",
+ "kind": "lemma",
+ "title": "Clopen geometric coordinates of constant-extension cyclic sheets",
+ "statement": "For the finite-field datum D, m$\\ge$1, and separated finite-type k_0-scheme X_0 of [def-weil-finite-field-fiber], the actual cyclic maps of [def-zl-constant-extension-cyclic-sheet] admit the geometric package of [def-zl-constant-extension-sheet-heart-data]: the specified tensor splitting with m embeddings, disjoint clopen opens covering Y, coordinate isomorphisms factoring these maps, and the exact successor, return and new-model Frobenius identities. Equivalently, Nonempty (ZlSheetGeometry D m hm X_0). This assertion contains no coefficient or Weil-category clause.",
+ "stmt_deps": [
+  "def-zl-constant-extension-sheet-heart-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-zl-constant-extension-sheet-tensor-splitting] for the tensor clause. The distinguished sheet j composed with the geometric projection p is the canonical fibre isomorphism of [def-dl-a1-constant-extension-data]. The projection p is the base change of the finite separable field extension, hence etale by [lem-weil-pbc-finite-separable-extension-etale] and separated. The diagonal criterion for etale morphisms implies that j is an open immersion because j followed by p is an isomorphism; separatedness similarly makes it a closed immersion. The cyclic sheets of [def-zl-constant-extension-cyclic-sheet] are composites of j with isomorphisms, hence are open and closed immersions. Take their actual open ranges and use IsOpenImmersion.isoOfRangeEq to construct coordinate isomorphisms with the stated factorization. Their ranges are closed by the closed-immersion property; [lem-zl-constant-extension-cyclic-sheet-partition] gives pairwise disjointness and the cover.",
+   "uses": [
+    "lem-zl-constant-extension-sheet-tensor-splitting",
+    "lem-zl-constant-extension-cyclic-sheet-partition",
+    "def-dl-a1-constant-extension-data",
+    "def-zl-constant-extension-cyclic-sheet",
+    "lem-sfb-finite-field-galois-frobenius",
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Successor is the power-successor identity for the Frobenius automorphism in [def-weil-frobenius-detailed]. At the final index i+1=m. The already proved constantExtensionSheet_return and constantExtensionFiber_return in the module of [def-dl-a1-constant-extension-data] give respectively F followed by j = j followed by H^m and F followed by e = e followed by g^m. Cancel e to obtain e^-1 followed by F = g^m followed by e^-1 and compose with j to get the prescribed return. Induction identifies localPositivePower g n with g^(n+1). The new-model Frobenius clause is exactly constantExtensionFiber_return. These identities and the preceding coordinates assemble every field of ZlSheetGeometry.",
+   "uses": [
+    "def-dl-a1-constant-extension-data",
+    "def-weil-frobenius-detailed",
+    "def-zl-constant-extension-cyclic-sheet"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-constant-extension-sheet-tensor-splitting",
+  "lem-zl-constant-extension-cyclic-sheet-partition",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-cyclic-sheet",
+  "lem-sfb-finite-field-galois-frobenius",
+  "def-weil-frobenius-detailed",
+  "lem-weil-pbc-finite-separable-extension-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), p. 150, and paragraph after (1.1.10), p. 152.",
+  "note": "B4: tensor evaluation by Dedekind independence; immersion and return proofs complete; only the point-partition step is split off."
+ },
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7) and paragraph after (1.1.10), pp.150–152; geometric splitting, coefficient enhancement and transition-arrow coordinates (returned steps 1–2 and coordinate part of step 3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of a finite field splits after base change to an algebraic closure as a disjoint union of clopen components permuted cyclically by Frobenius",
+   "results": "FiniteField Frobenius definitions, cyclicity and bijective_frobeniusAlgEquivOfAlgebraic_pow; none gives the actual geometric sheet package.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsOpenImmersion, CategoryTheory.Limits.IsColimit",
+   "results": "No hits; unknown unqualified identifier IsOpenImmersion.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*(clopen|coproduct)|constantExtension.*Sheet",
+   "results": "No Mathlib hits. Project search found constantExtensionCyclicSheets but it omits the specified tensor splitting, clopen coordinate data and successor/return normalization package.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric sheets of finite constant field extension",
+   "results": "FiniteField.Extension construction, finite-dimensionality and cardinality; none states geometric cyclic sheets.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionSheetHeartCoordinates",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Stage-3 proof part 1; original steps 1–2",
+   "via": [
+    "lem-zl-constant-extension-weil-heart-equivalence",
+    "lem-zl-constant-extension-sheet-heart-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantExtensionSheetGeometry",
+  "file": "lean/Sheaf/Paper/ConstantExtensionSheetGeometry.lean",
+  "declaration": "WeilConjectures.constantExtensionSheetGeometry",
+  "statement": "theorem constantExtensionSheetGeometry : Nonempty (ZlSheetGeometry D m hm X₀)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7ff04",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122459-L-1775850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T000943-L-4150729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

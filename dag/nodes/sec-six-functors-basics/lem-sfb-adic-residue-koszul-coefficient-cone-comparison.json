@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+ "kind": "statement",
+ "title": "Finite exact realization of normalized coefficient Koszul cones",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring, J an ideal, U an object of the small pro-etale site, r a natural number, a:Fin r -> A with span(a)=J, and R the completed coefficient ring sheaf restricted to U [def-sfb-adic-residue-quotient-tensor-tower]. Supply algebraic Koszul augmentations epsilonA_n to A/J^(n+1)[0], exterior diagonal transitions tA_nm with entries a_i^(m-n), quotient transitions qA_nm normalized after the quotient map, and their strict commuting squares, as in [lem-weil-pbc-noetherian-koszul-augmentation-pro-zero]. Let epsilon be any normalized coefficient augmentation of [lem-sfb-adic-residue-koszul-coefficient-augmentation]. There is an additive exact functor E from A-modules to R-module sheaves and, at each n, an isomorphism from the termwise E-image of the algebraic augmentation cone to the n-th actual strict coefficient augmentation cone. For every n<=m this isomorphism intertwines E of the cone map of the supplied strict algebraic square with the actual strict coefficient cone transition. There is no tensoring by an arbitrary complex, pro-zero assertion, or derived-limit assertion.",
+ "stmt_deps": [
+  "lem-sfb-adic-residue-koszul-coefficient-augmentation",
+  "def-sfb-adic-residue-quotient-tensor-tower",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "proof of lemma-naive-completion (099M), finite coefficient realization; more-algebra.tex, lemma-sequence-Koszul-complexes; algebraization.tex, lemma-derived-completion-koszul (0A0E)."
+ },
+ "proof": [
+  {
+   "text": "Obtain exact coefficient realization E, regular-module normalization c and quotient isomorphisms q from the scalar/quotient realization lemma. Apply the independent finite exterior scalar realization lemma to this E and c, obtaining levelwise Koszul isomorphisms eK with transition and empty-coordinate compatibility.",
+   "uses": [
+    "lem-sfb-adic-residue-exact-coefficient-realization",
+    "lem-sfb-exterior-koszul-scalar-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend each algebraic quotient single complex to integer degrees, use the standard extendSingleIso and singleMapHomologicalComplex comparisons, and then q to obtain eQ. Compute its degree-zero component. Precompose the augmentation comparison with c and the invertible empty exterior coordinate; the supplied algebraic augmentation formula and the two unit normalizations prove equality. Maps into a degree-zero single complex are determined by that component.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The algebraic augmentations are degreewise epimorphisms: degree zero is a quotient projection composed with the exterior zero equivalence, and all other target degrees vanish. Extension preserves this property; exact E preserves the epimorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply additiveConeFamilyComparison with the supplied strict algebraic squares, the augmentation comparison, eK transition compatibility and the proved realized epimorphisms. Its complete generic proof derives quotient-transition compatibility by epimorphism cancellation and supplies the required strict cone comparisons and naturality.",
+   "uses": [
+    "lem-sfb-additive-cone-family-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-residue-exact-coefficient-realization",
+  "lem-sfb-exterior-koszul-scalar-realization",
+  "lem-sfb-additive-cone-family-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Finite scalar realization and finite Koszul coordinates, followed by proved degree-zero augmentation identification, epimorphism cancellation and strict cone naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact constant sheaf realization of Koszul complex exterior powers identifies normalized augmentation mapping cones with ringed Koszul dual tower",
+   "results": "8 hits: cotangent-complex exactness, alternating constant complexes, and representation resolutions.",
+   "verdict": "No match for the finite ringed coefficient comparison.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"Sheaf\"",
+   "results": "0 hits.",
+   "verdict": "No existing Mathlib finite coefficient comparison.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*pro.?zero|[Kk]oszul.*augmentation",
+   "results": "0 Mathlib hits. Project search finds the proved algebraic pro-zero theorem and the proved generic transport theorem, but finite exterior-to-ringed comparisons use a different scheme/site/coefficient presentation.",
+   "verdict": "Use the existing algebraic and transport results; retain only the finite comparison on the actual completed slice as a new obligation.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueKoszulTensorConeProZero",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-residue-koszul-tensor-cone-pro-zero",
+   "place": "Finite coefficient comparison, before tensoring and before transport of derived zero maps."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueKoszulCoefficientConeComparison",
+  "file": "lean/Sheaf/Paper/AdicResidueKoszulCoefficientConeComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_koszul_coefficient_cone_comparison",
+  "statement": "theorem adicResidue_koszul_coefficient_cone_comparison\n    (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = J)\n    (εA : ∀ n : ℕ, ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)) ⟶\n      (ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj\n        (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))))\n    (tA : ∀ n m : ℕ, n ≤ m →\n      (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶\n        ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))))\n    (qA : ∀ n m : ℕ, n ≤ m →\n      ((ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj\n          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1))) ⟶\n        (ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj\n          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))))\n    (hεA : ∀ n, (εA n).f 0 = ModuleCat.ofHom\n      (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ.comp\n        (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap))\n    (htA : ∀ n m h k, (tA n m h).f k = ModuleCat.ofHom\n      (exteriorPower.map k\n        (Finsupp.linearCombination A (fun i ↦ Finsupp.single i (a i ^ (m - n))))))\n    (hqA : ∀ n m h,\n      ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (m + 1)).mkQ ≫ (qA n m h).f 0 =\n        ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)\n    (hc : ∀ n m h,\n      HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat ≫\n        HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat =\n      HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat ≫\n        HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat) :\n    let R := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U\n    let b := fun i ↦ ringedKoszulSliceSection\n      (completed (coefficientProEtaleModelTopology.{u, v} X) A J)\n      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)\n        (a i)) U\n    ∀ (ε : ringedKoszulDualTower R r b ⟶ adicResidueQuotientCoefficientTower X J U)\n      (_hε : ∀ n : ℕ, ringedKoszulDualUnit R r b n ≫ ε.app (op n) =\n        adicResidueQuotientCoefficientUnit X J U n),\n    ∃ (E : ModuleCat.{max v (u + 1)} A ⥤ Mod R) (_hadd : E.Additive)\n      (_hlim : PreservesFiniteLimits E) (_hcolim : PreservesFiniteColimits E)\n      (e : ∀ n : ℕ,\n        (E.mapHomologicalComplex (.up ℤ)).obj\n          (HomologicalComplex.homotopyCofiber\n            (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)) ≅\n          (CochainComplex.mappingCone\n            ((HomologicalComplex.functorEquivalence\n              (Mod R) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.obj\n              (op n)),\n      ∀ (n m : ℕ) (h : n ≤ m),\n        (E.mapHomologicalComplex (.up ℤ)).map\n          (HomologicalComplex.homotopyCofiber.mapArrowHom\n            (HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat)\n            (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)\n            (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)\n            (Arrow.homMk\n              (HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat)\n              (HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)\n              (hc n m h))) ≫ (e n).hom =\n        (e m).hom ≫\n          (CochainComplex.mappingCone\n            ((HomologicalComplex.functorEquivalence\n              (Mod R) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map\n              (homOfLE h).op",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T111842-L-1753149",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3caba",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T135627-L-4051345",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical), node proof fields vs Lean proof, new sorry statements vs RingedKoszulSystem/QuotientTensorTower defs and flat_and_quotients, adapted ConeProZero vs published (proof-only), §3b importer compile"
+ }
+}

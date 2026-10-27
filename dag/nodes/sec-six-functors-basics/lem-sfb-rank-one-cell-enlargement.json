@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-rank-one-cell-enlargement",
+ "kind": "statement",
+ "title": "Rank-one enlargement of the open cell",
+ "statement": "Let $A$ be a nonzero commutative ring and $P=(G,T=D_A(M),\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ a pinned split realization [def-sfb-pinned-split-root-realization]. Use the root subgroups, Weyl elements $n_\\alpha$, ordered root-product subgroups $U_\\Psi$ and open cell $\\Omega=U^-TU^+$ of [lem-sfb-split-root-subgroup-weyl-calculus], with $U^\\pm=U_{\\pm\\Phi^+}$. For a simple root $\\alpha$ put $L_\\alpha=M\\cap\\mathbf Q\\alpha$, $S_\\alpha=D_A(M/L_\\alpha)\\subseteq T$, and let $K_\\alpha=Z_G(S_\\alpha)$ be the centralizer functor whose points commute with $S_\\alpha$ after every further algebra extension. Set $V_\\alpha^+=U_{\\Phi^+\\setminus\\{\\alpha\\}}$ and $V_\\alpha^-=U_{(-\\Phi^+)\\setminus\\{-\\alpha\\}}$. These root sets are closed in the sense of the root-calculus node. The functor $K_\\alpha$ is represented by a smooth affine reductive closed subgroup of $G$, contains $T,U_\\alpha,U_{-\\alpha}$ and $n_\\alpha$, and has precisely the roots $\\{\\alpha,-\\alpha\\}$ relative to $T$. Multiplication gives an open immersion\n$$j_\\alpha:V_\\alpha^-\\times_A K_\\alpha\\times_A V_\\alpha^+\\longrightarrow G.$$\nWriting $J_\\alpha$ for its image, one has the equality of open subschemes\n$$\\Omega=j_\\alpha\\bigl(V_\\alpha^-\\times_A(U_{-\\alpha}TU_\\alpha)\\times_A V_\\alpha^+\\bigr).$$\nHere $U_{-\\alpha}\\times_A T\\times_A U_\\alpha\\to K_\\alpha$ is itself an open immersion with the indicated image. All inclusions and open immersions commute with arbitrary base change. Empty $V_\\alpha^\\pm$ products mean the identity subgroup; if $\\Delta$ is empty the assertions indexed by $\\alpha$ are vacuous.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 4.1.7(4), printed p.113, and Theorem 5.1.13, printed pp.143--145: choose a cocharacter zero on the simple root and positive on the other simple roots; its centralizer is the rank-one Levi factor. This is geometry of the enlarged cell, with no target group or homomorphism data. Read online; archival literature copy WANTED. No Stacks tag states this root-group geometric assertion."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-split-root-subgroup-weyl-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\alpha=d\\alpha_0$ with $d>0$ and $\\alpha_0$ primitive in $M$. In coordinates on a basis of $M$, dividing the coordinates of $\\alpha$ by their greatest common divisor and using Bezout gives $L_\\alpha=\\mathbf Z\\alpha_0$. The group algebra quotient by $e_{\\alpha_0}-1$ is $A[M/\\mathbf Z\\alpha_0]$, so $S_\\alpha=\\ker\\chi_{\\alpha_0}$ as subgroup functors, exactly the torus of the rank-one-centralizer theorem. Apply that theorem (after choosing a basis of $M$) to obtain a smooth affine finitely presented reductive closed subgroup $K_\\alpha$ with connected geometric fibres and Lie module $\\operatorname{Lie}(T)\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}$, with precisely the roots $\\pm\\alpha$. The torus $T$ centralizes $S_\\alpha$. Since $\\pm\\alpha$ restrict trivially to $S_\\alpha$, the root-conjugation formula shows on every test algebra and every further extension that $U_{\\pm\\alpha}\\subseteq K_\\alpha$. The displayed word defining $n_\\alpha$ then puts $n_\\alpha$ in $K_\\alpha(A)$.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-relative-root-rank-one-centralizer",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.1.3, printed pp.108-109; Theorem 4.1.4, pp.110,116-118."
+   }
+  },
+  {
+   "text": "Extend the linearly independent set $\\Delta$ to a rational basis of $M\\otimes\\mathbf Q$. Give $\\alpha$ value zero, the other simple roots value one, and the supplementary basis vectors value zero. Clearing a positive common denominator on a lattice basis gives $\\lambda\\in M^\\vee$ with $\\langle\\alpha,\\lambda\\rangle=0$ and $\\langle\\beta,\\lambda\\rangle>0$ for $\\beta\\in\\Delta\\setminus\\{\\alpha\\}$. Every positive root other than $\\alpha$ has a positive coefficient at another simple root: otherwise reducedness makes it $\\alpha$. Thus the roots of positive, zero and negative $\\lambda$-weight are respectively $\\Phi^+\\setminus\\{\\alpha\\}$, $\\{\\pm\\alpha\\}$ and $(-\\Phi^+)\\setminus\\{-\\alpha\\}$. A nonempty sum of roots from the first set retains positive weight and nonnegative simple-root coefficients, so if it is a root it stays in that set; likewise for the last set. This proves the required closedness. Both sets are disjoint from their negatives.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.1.13 proof, printed pp.143-144, choice of an integral cocharacter; here choose the face corresponding to the simple root."
+   }
+  },
+  {
+   "text": "Use conjugation by the monomial cocharacter $\\lambda$ as the action $a$ in the dynamic-subgroup theorem. Write its subgroups as $Z_\\lambda,U_\\lambda,P_\\lambda,U_{-\\lambda}$. They are smooth affine finitely presented closed subgroups with connected geometric fibres. Their Lie modules, from the theorem and the weight computation in step 2, are $\\operatorname{Lie}(Z_\\lambda)=\\operatorname{Lie}(T)\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}$ and $\\operatorname{Lie}(U_{\\pm\\lambda})=\\bigoplus_{\\gamma\\in\\pm\\Phi^+\\setminus\\{\\pm\\alpha\\}}\\mathfrak g_\\gamma$. Since $\\lambda(\\alpha_0)=0$, the cocharacter factors through $S_\\alpha$, giving $K_\\alpha\\subseteq Z_\\lambda$. For $\\gamma$ of positive weight, the formula $\\lambda(t)\\exp_\\gamma(v)\\lambda(t)^{-1}=\\exp_\\gamma(t^{\\langle\\gamma,\\lambda\\rangle}v)$ extends over $t=0$ with value $1$; hence $U_\\gamma\\subseteq U_\\lambda$ on all test algebras. The negative-weight case uses $-\\lambda$. Ordered multiplication from the root-calculus theorem now gives closed subgroup inclusions $V_\\alpha^\\pm\\subseteq U_{\\pm\\lambda}$.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-relative-root-rank-one-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.7(1)-(4), printed pp.112-114; Theorem 5.1.13 proof, pp.143-144."
+   }
+  },
+  {
+   "text": "Check these three inclusions on a geometric fibre over an algebraically closed field. For $K_\\alpha\\subseteq Z_\\lambda$, take the smooth connected closed subgroups $T,U_\\alpha,U_{-\\alpha}$ of $Z_\\lambda$; for $V_\\alpha^\\pm\\subseteq U_{\\pm\\lambda}$ take its root subgroups. The field root-parametrization theorem ensures each root subgroup is smooth, connected, closed and has tangent space $\\mathfrak g_\\gamma$; the torus has the analogous properties. In each case their tangent spaces span the target tangent space by step 3. Apply the smooth-subgroup tangent-generation theorem, with its closed subgroup denoted there by $K$ equal to our $K_\\alpha$ or $V_\\alpha^\\pm$, to conclude equality as subgroup schemes on that fibre. The targets are smooth connected affine finite-type groups by the dynamic theorem, so all hypotheses are met, including an empty root family. The three inclusions are locally finitely presented: their affine source and target algebras are finitely presented over $A$, and a finite relative presentation is obtained by adjoining source generators and adding the finitely many equations identifying target generators with their images. Their sources are smooth over $A$ by the centralizer and root-calculus theorems. The geometric-fibre isomorphism criterion therefore gives $K_\\alpha=Z_\\lambda$ and $V_\\alpha^\\pm=U_{\\pm\\lambda}$ over $A$.",
+   "uses": [
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-relative-root-rank-one-centralizer",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-smooth-subgroup-tangent-generation",
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 5.1.13 proof, printed pp.143-144, equality of smooth closed subgroups via Lie algebras and geometric-fibre isomorphism test; the general tangent-generation input is Milne Corollary 10.17, printed p.191; geometric-fibre test: Stacks Tag 039E, lemma-morphism-between-flat."
+   }
+  },
+  {
+   "text": "The dynamic theorem identifies $Z_\\lambda\\times_A U_\\lambda$ with $P_\\lambda$ by $(z,u)\\mapsto zu$ and makes $U_{-\\lambda}\\times_A P_\\lambda\\to G$ an open immersion. Substitute the three subgroup equalities of step 4. The resulting composite is exactly $(v_-,k,v_+)\\mapsto v_-kv_+$, so it is the required open immersion $j_\\alpha$. Denote its open image by $J_\\alpha$.",
+   "uses": [
+    "lem-sfb-relative-dynamic-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.7(3)-(4), printed p.113."
+   }
+  },
+  {
+   "text": "The pair $(K_\\alpha,T)$ with roots $\\{\\pm\\alpha\\}$, inherited coroots and pinning generator $X_\\alpha$ is a pinned split realization: the centralizer theorem gives the root modules and reductivity, $T$ is fibrewise maximal since it was maximal in $G$, and the root-calculus theorem identifies its root exponentials and coroots with those of $G$. Apply its open-cell assertion to this rank-one realization. It gives an open immersion $U_{-\\alpha}\\times_A T\\times_A U_\\alpha\\to K_\\alpha$ with image $\\Omega_\\alpha=U_{-\\alpha}TU_\\alpha$. In the ordered product coordinates of $G$, enumerate the negative roots with $-\\alpha$ last and the positive roots with $\\alpha$ first. The root-calculus theorem then gives product isomorphisms $V_\\alpha^-\\times_A U_{-\\alpha}\\simeq U^-$ and $U_\\alpha\\times_A V_\\alpha^+\\simeq U^+$. Associativity identifies the restriction of $j_\\alpha$ to $V_\\alpha^-\\times_A\\Omega_\\alpha\\times_A V_\\alpha^+$, in these product coordinates, with the open-cell map $U^-\\times_A T\\times_A U^+\\to G$. Thus its image equals $\\Omega$ as an open subscheme, not merely on geometric points.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-relative-root-rank-one-centralizer",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4, printed p.110, and Theorem 5.1.13, printed pp.143-145, arbitrary ordering and open cell."
+   }
+  },
+  {
+   "text": "The rank-one centralizer and all its inclusions commute with arbitrary base change by the centralizer theorem, and root exponentials and ordered root products do so by the root-calculus theorem. The dynamic theorem gives the same property for its subgroups and maps. All maps just constructed are multiplication restrictions, so their base changes are the same restrictions for the base-changed objects. Open immersions remain open immersions after base change; their open images are the inverse-image open subschemes. Consequently $j_\\alpha$, its rank-one restriction, and the equality of open subschemes in step 6 commute with arbitrary base change. The zero target ring gives empty schemes and the same assertion trivially. If the complementary root sets are empty their products are the identity subgroup, as in the root-calculus statement; when $\\Delta$ is empty no $\\alpha$ is selected and all assertions are vacuous.",
+   "uses": [
+    "lem-sfb-relative-root-rank-one-centralizer",
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "The paragraph after Example 4.1.9, printed p.114; Theorem 4.1.4 base change, p.110; Stacks Tag 01JY, lemma-base-change-immersion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-relative-root-rank-one-centralizer",
+  "lem-sfb-split-root-subgroup-weyl-calculus",
+  "lem-sfb-relative-dynamic-subgroups",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-flat-geometric-fibre-open-criterion",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Explicit simple-root-face argument using Lemma 4.1.3, Theorem 4.1.7(3)-(4), and Theorem 5.1.13; online source read, archival local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rank.?one.*(cell|parabolic)|parabolic.*(Levi|open.*immersion)",
+   "results": "{\"t\": \"2026-10-24T12:32:39Z\", \"tool\": \"grep\", \"query\": \"rank.?one.*(cell|parabolic)|parabolic.*(Levi|open.*immersion)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rank one Levi factor and opposite unipotent radicals give an open cell in a split reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T12:32:40Z\", \"tool\": \"leansearch\", \"query\": \"Rank one Levi factor and opposite unipotent radicals give an open cell in a split reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.RelCWComplex.openCell\", \"OpenNormalSubgroup.noConfusionType\", \"AlgebraicGeometry.Scheme.Opens\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"OpenSubgroup.isOpen\", \"OpenSubgroup\", \"OpenNormalSubgroup\", \"OpenSubgroup.mk\"], \"digest\": \"af222a2aa5a09406\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"OpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T12:32:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"OpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simple root of a split reductive group scheme over any commutative ring multiplication of the other negative root groups the rank one torus centralizer and the other positive root groups is an open immersion",
+   "results": "{\"t\": \"2026-10-24T12:32:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a simple root of a split reductive group scheme over any commutative ring multiplication of the other negative root groups the rank one torus centralizer and the other positive root groups is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieAlgebra.rootSpaceProduct_def\", \"LieAlgebra.corootSpace\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\"], \"digest\": \"567ac27aea448971\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple root face of the big cell is obtained by replacing its opposite root factors and torus with the full reductive rank one centralizer",
+   "results": "{\"t\": \"2026-10-24T12:32:45Z\", \"tool\": \"leanfinder\", \"query\": \"A simple root face of the big cell is obtained by replacing its opposite root factors and torus with the full reductive rank one centralizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.u\", \"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"RootPairing.span_orbit_eq_top\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\"], \"digest\": \"e8978ffea91cb8f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "rank.?one.*(cell|levi)|cocharacter.*centralizer|centralizer.*cocharacter",
+   "results": "{\"t\": \"2026-10-24T13:29:36Z\", \"tool\": \"grep\", \"query\": \"rank.?one.*(cell|levi)|cocharacter.*centralizer|centralizer.*cocharacter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general scheme open immersions, open topological subgroups, or Lie algebra root spaces; none constructs a Levi cell in a reductive group scheme over an arbitrary ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Levi subgroup for a simple root and the complementary positive and negative root subgroups form an open subscheme of a split reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T13:29:36Z\", \"tool\": \"leansearch\", \"query\": \"The Levi subgroup for a simple root and the complementary positive and negative root subgroups form an open subscheme of a split reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"OpenSubgroup\", \"OpenSubgroup.instSubgroupClass\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk\", \"OpenSubgroup.hasCoeSubgroup\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Opens.toScheme\"], \"digest\": \"5c56991492776057\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general scheme open immersions, open topological subgroups, or Lie algebra root spaces; none constructs a Levi cell in a reductive group scheme over an arbitrary ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"OpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T13:29:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"OpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general scheme open immersions, open topological subgroups, or Lie algebra root spaces; none constructs a Levi cell in a reductive group scheme over an arbitrary ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simple root of a split reductive group scheme multiplication of the other negative root groups the rank one torus centralizer and other positive root groups is an open immersion",
+   "results": "{\"t\": \"2026-10-24T13:29:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a simple root of a split reductive group scheme multiplication of the other negative root groups the rank one torus centralizer and other positive root groups is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom\", \"LieAlgebra.rootSpaceProduct_def\", \"LieAlgebra.corootSpace\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\"], \"digest\": \"eaa16d1692e52b6b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general scheme open immersions, open topological subgroups, or Lie algebra root spaces; none constructs a Levi cell in a reductive group scheme over an arbitrary ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The opposite unipotent radicals and the fixed subgroup of a multiplicative group action on a smooth affine group scheme give an open immersion",
+   "results": "{\"t\": \"2026-10-24T13:29:40Z\", \"tool\": \"leanfinder\", \"query\": \"The opposite unipotent radicals and the fixed subgroup of a multiplicative group action on a smooth affine group scheme give an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom\", \"AlgebraicGeometry.Scheme.Opens.instIsOpenImmersionι\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\"], \"digest\": \"5cfcd72b1ad360fb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general scheme open immersions, open topological subgroups, or Lie algebra root spaces; none constructs a Levi cell in a reductive group scheme over an arbitrary ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weyl-cell-hom-gluing",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation. Supporting input: Theorem 6.2.4, printed pp.201--203, with identities (6.2.2)--(6.2.6) and the uniqueness paragraph immediately before them. This is the relation-level theorem, prior to Corollary 6.2.7. Supporting argument: Theorem 6.2.1 and its proof, printed pp.198–200, full-root/normalizer criterion; strengthened by requiring normalizer equivariance for every normalizer point rather than just simple representatives. Read Conrad online; local archival PDF WANTED. No Stacks tag states this reductive-group result. Supporting input for full-root extension: Theorem 6.2.1 proof, printed p.199, paragraph preceding Lemma 6.2.3: word-length induction across translates of the open cell, after the positive and negative unipotent maps are homomorphisms. Technical local formulation of the omitted induction; formulated by the agent. Supporting geometric input: Theorem 4.1.7(4), printed p.113, and Theorem 5.1.13, printed pp.143--145: choose a cocharacter zero on the simple root and positive on the other simple roots; its centralizer is the rank-one Levi factor. This is geometry of the enlarged cell, with no target group or homomorphism data.",
+   "via": [
+    "lem-sfb-weyl-cell-hom-gluing",
+    "lem-sfb-full-root-hom-extension",
+    "lem-sfb-pinned-root-relations-hom-criterion",
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-one-cell-enlargement",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing rank-one centralizer, dynamic-subgroup, tangent-generation and geometric-fibre criterion nodes; no new nodes and no statement change. Explicitly identifies all dynamic subgroups and regroups arbitrary-order root coordinates. Mathlib and project searches found no attachment or match.",
+  "blueprint": "The latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3), proper/open direct-image preservation, is the recorded upstream route. The existing from.place traces the integral split-group prerequisite down to this item. Here steps 1-5 realize the cocharacter-zero-on-alpha rank-one Levi enlargement and steps 6-7 its open-cell equality and arbitrary-base-change clauses. blueprint_refs ancestor returns None; its inherited node=null and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-70d2f746b",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-70d2f746b (reviewer sub-agent of L); spot-checked: I read the item and all 8 cited statements in full. There are no new nodes, and the statement and stmt_deps are unchanged. Conrad's Reductive group schemes is not in literature/ and was read online by the worker (WANTED, proof_origin agent); I checked against Thm 4.1.7 (the dynamic method) and the Thm 5.1.13 cocharacter argument. Step 1: S_α = ker χ_{α0} because M∩Qα = Zα_0, so the rank-one-centralizer hypotheses hold (𝔤_α free rank one, fibrewise maximal split T); U_{±α}⊆K_α follows from the conjugation formula with α(u)=1, and n_α∈K_α from its word. Step 2 (elementary): λ zero on α and positive on the other simple roots; reducedness gives the exact weight signs and the closedness of Φ⁺∖{α} and its negative. Step 3: the dynamic node applied to conjugation by λ gives Lie(Z_λ)=Lie T⊕𝔤_{±α} and Lie(U_{±λ}) as stated; K_α⊆Z_λ because λ factors through S_α, and U_γ⊆U_λ by the extendable orbit. Step 4: tangent generation on geometric fibres, using the calculus differential of exp_γ and the base-changed Lie identification, then the geometric-fibre isomorphism criterion (smooth sources, f.p. targets, f.p. map), with no Noetherian assumption. Step 5: Z×U≅P and the open immersion U_{−λ}×P→G give j_α. Step 6: (K_α,T,±α,X_α) is a pinned rank-one realization by the K⊆G clauses of the calculus node; regrouping the enumerations and associativity give Ω = j_α(V⁻×Ω_α×V⁺) as open subschemes. Step 7: base change via the node clauses and the Mathlib leaf 01JY. Small cases tested: SL_2/PGL_2 (nonprimitive α, K_α=G), a torus (vacuous), SL_3. No cycle (closure computed), no duplicate found by rg -L. Batch-5: all four flags reach only the generic trf nodes smooth-fpqc-base-descent, geometric-fibre-unramified-criterion and split-lattice-torus-projection, which are general scheme facts, not trace-formula or Poincaré content; accepted."
+ }
+}

@@ -1,0 +1,361 @@
+{
+ "id": "lem-sf-exceptional-reduction-transition-comparison",
+ "kind": "statement",
+ "title": "Counit-normalized exceptional reduction comparisons respect quotient transitions",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be separated of finite type over $k$, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. Use the small pro-etale sites and the coefficient categories $D^b_c(T,A_n)$ and $D^b_c(T,R)$ of [def-weil-derived-complete-integral-detailed], for $T=X,Z,U$.\nUse $B_T=\\varprojlim_n(A_n)_T$ and the ordinary completed-ring kernel right adjoint $J_R=Ri^!_0$ and finite kernel right adjoints $J_n=Ri^!_{0,n}$ [def-weil-completed-integral-coefficients, lem-sf-ringed-closed-kernel-adjoint]. Suppose their ambient supported triangles restrict to the integral and finite constructible categories, with canonical ordinary/completed operation comparisons. For every $K\\in D^b_c(X,R)$ put $K_m=T_{X,m}K$. Here $T_{T,n}L=L\\otimes^L_{B_T}(A_n)_T$ is reduction [def-weil-integral-derived-reduction, def-weil-derived-tensor]. The canonical direct-image and pullback reduction comparisons carry $T_{X,n}(\\eta_{j,K})$ to the finite open unit. There are natural isomorphisms\n$$\\alpha_{n,K}:T_{Z,n}J_RK\\xrightarrow{\\sim}J_nT_{X,n}K$$\nuniquely characterized by preservation of the exceptional counit, or equivalently by a map of supported triangles with identity middle and open components after the canonical comparisons. For $m\\ge n$ let $q_{mn}:K_m\\to\\operatorname{Res}_{m,n}K_n$ be the canonical quotient map. Define $t_{mn}:J_mK_m\\to\\operatorname{Res}_{m,n}J_nK_n$ as the $i_{*,m}\\dashv J_m$ transpose of $q_{mn}\\circ\\varepsilon_{m,K_m}$, followed by the canonical identification $J_m\\operatorname{Res}_{m,n}\\cong\\operatorname{Res}_{m,n}J_n$ coming from the scalar-extension/restriction adjunction and closed direct image. The isomorphisms $\\alpha_m,\\alpha_n$ intertwine the canonical reduction transition of $J_RK$ with this $t_{mn}$. For $r\\ge m\\ge n$, the composite of the two $t$ maps equals the direct $t_{rn}$ after restriction of scalars, and $t_{nn}=1$. No assertion that arbitrary bounded constructible $A_m$-complexes remain bounded after tensoring with $A_n$ is made. These equalities retain the $A_n$-actions; the comparison of quotient transitions may be made after restricting scalars to the single category with coefficients $A_m$. They are equalities of natural derived morphisms, not merely objectwise isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-completed-integral-coefficients",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-tensor",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-sf-derived-scalar-restriction-compositors",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Write $I_a=i_{*,a}$, $V_a=Rj_{*,a}j_a^*$ and $S_{T,mn}=\\operatorname{Res}_{m,n}$ on $T$; use $a=R$ for completed coefficients. The ringed open/closed calculus applies since $X$ is noetherian and the complementary open is quasi-compact. The ordinary/completed comparisons are those of [lem-sf-integral-ordinary-recollement-realization]. In particular they give the actual coefficient-linear isomorphisms $c_{n,P}:T_{X,n}I_RP\\cong I_nT_{Z,n}P$ and $v_{n,K}:T_{X,n}V_RK\\cong V_nK_n$, preserve quotient transitions, and identify $v_{n,K}T_{X,n}(\\eta_{j,K})=\\eta_{j,K_n}$. This proves the asserted open-unit equation, with its specified normalization. For finite coefficient extension $A_m\\to A_n$, denote extension by $L_{T,mn}$. The closed comparison $L_{X,mn}I_m\\cong I_nL_{Z,mn}$ is the supported-unit comparison of [lem-sfb-closed-supported-scalar-comparison]. Its hypotheses follow from [lem-weil-pbc-proetale-ringed-open-closed] and its exact derived descent [lem-sfb-exact-open-closed-unbounded-calculus]. The required inverse-image/scalar comparisons are the actual unit-preserving mates of [lem-sfb-kflat-scalar-comparison-normalization], applied to $i$ and $j$. These statements retain the target scalar actions. All these functors are used on their ambient derived categories; constructible restrictions and integral completeness are the hypotheses of the item.",
+   "uses": [
+    "lem-sf-integral-ordinary-recollement-realization",
+    "lem-sfb-closed-supported-scalar-comparison",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-exact-open-closed-unbounded-calculus",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7"
+   }
+  },
+  {
+   "text": "Define $\\alpha_{n,K}$ by the $I_n\\dashv J_n$ hom bijection as the transpose of\n$$T_{X,n}(\\varepsilon_{R,K})\\,c_{n,J_RK}^{-1}:I_nT_{Z,n}J_RK\\longrightarrow K_n.$$\nThus its defining equation is\n$$(*)\\qquad\\varepsilon_{n,K_n}\\,I_n(\\alpha_{n,K})=T_{X,n}(\\varepsilon_{R,K})\\,c_{n,J_RK}^{-1}.$$\nThe adjunctions and their actual counits are [lem-sf-ringed-closed-kernel-adjoint]; the transpose formula and its uniqueness are [def-weil-pbc-adjunction-mate]. This defines a natural transformation, because both the displayed morphism and the adjunction bijection are natural in $K$. In particular two candidates preserving the counit are equal as derived morphisms, before any scalar restriction.",
+   "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7"
+   }
+  },
+  {
+   "text": "Apply the exact functor $T_{X,n}$ of [lem-pur-derived-change-of-rings] to the assumed integral supported triangle. Using Step 1 it becomes a distinguished triangle with vertices $I_nT_{Z,n}J_RK$, $K_n$, $V_nK_n$. Its second arrow is the finite open unit. Rotate this triangle and the finite supported triangle once. The identity maps on $K_n$ and $V_nK_n$ commute with that arrow, so TR3 [def-weil-triangulated-category] completes them to a triangle morphism. After rotating back its first component is a map $a:I_nT_{Z,n}J_RK\\to I_nJ_nK_n$. Since $i^*I_n\\cong1$ [lem-sf-ringed-closed-kernel-adjoint], $I_n$ is fully faithful: applying $i^*$ gives the inverse on Hom sets. Write $a=I_n(b)$. The first square says that $b$ satisfies $(*)$, hence $b=\\alpha_{n,K}$. The other two components are identities, so [lem-sf-triangle-morphism-iso] makes $I_n(\\alpha_{n,K})$ invertible; applying $i^*$ makes $\\alpha_{n,K}$ invertible. Conversely any triangle morphism with those fixed middle and open components satisfies $(*)$, and therefore has this same first component. This proves the claimed equivalent characterization.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-weil-triangulated-category",
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7"
+   }
+  },
+  {
+   "text": "For $N\\in D(X,A_n)$ and $P\\in D(Z,A_m)$ the closed comparison of Step 1 and the scalar adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] give natural bijections\n$$\\operatorname{Hom}(P,J_mS_{X,mn}N)\\cong\\operatorname{Hom}(I_mP,S_{X,mn}N)\\cong\\operatorname{Hom}(L_{X,mn}I_mP,N)\\cong\\operatorname{Hom}(I_nL_{Z,mn}P,N)\\cong\\operatorname{Hom}(P,S_{Z,mn}J_nN).$$\nThe closed adjunctions here are [lem-sf-ringed-closed-kernel-adjoint]. Yoneda full faithfulness [lem-galois-yoneda-fully-faithful] therefore gives a natural isomorphism $d_{mn,N}:J_mS_{X,mn}N\\cong S_{Z,mn}J_nN$. Under the sectionwise identity $I_mS_{Z,mn}=S_{X,mn}I_n$, its normalization is\n$$(**)\\qquad S_{X,mn}(\\varepsilon_{n,N})\\,I_m(d_{mn,N})=\\varepsilon_{m,S_{X,mn}N}.$$\nIndeed the composite Hom bijection sends a map to postcomposition with the right side; the inverse scalar adjunction uses $x\\otimes b\\mapsto b\\,g(x)$, and the closed comparison has the specified closed-counit normalization. Thus no arbitrary right-adjoint identification is being used. These bijections also show that $h\\mapsto S_{X,mn}(\\varepsilon_{n,N})I_m(h)$ is a bijection from $\\operatorname{Hom}(P,S_{Z,mn}J_nN)$ to $\\operatorname{Hom}(I_mP,S_{X,mn}N)$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-galois-yoneda-fully-faithful",
+    "lem-sfb-closed-supported-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7"
+   }
+  },
+  {
+   "text": "By the closed adjunction, the transpose of $q_{mn}\\varepsilon_{m,K_m}$ is $J_m(q_{mn})$: this is the counit naturality equation. Consequently the map specified in the item is exactly\n$$t_{mn}=d_{mn,K_n}\\,J_m(q_{mn}).$$\nCombining counit naturality with $(**)$ gives its useful and unique characterization\n$$(***)\\qquad S_{X,mn}(\\varepsilon_{n,K_n})\\,I_m(t_{mn})=q_{mn}\\,\\varepsilon_{m,K_m}.$$\nUniqueness is the last Hom bijection of Step 4, with $P=J_mK_m$. Every operation is natural, hence so is $t_{mn}$. This is a calculation from the cited adjunction, not a further coefficient-change assertion.",
+   "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7"
+   }
+  },
+  {
+   "text": "Put $Q=J_RK$ and let $s_{mn}:T_{Z,m}Q\\to S_{Z,mn}T_{Z,n}Q$ be its actual quotient transition. We prove\n$$S_{Z,mn}(\\alpha_{n,K})s_{mn}=t_{mn}\\alpha_{m,K}$$\nin $D(Z,A_m)$. Apply the injective Hom correspondence of Step 4, with $P=T_{Z,m}Q$, to both sides. By $(*)$ the image of the left side is\n$$S_{X,mn}(T_{X,n}\\varepsilon_{R,K})\\,S_{X,mn}(c_{n,Q}^{-1})\\,I_m(s_{mn}).$$\nThe closed comparisons preserve actual quotient transitions [lem-sf-integral-ordinary-recollement-realization], so\n$$S_{X,mn}(c_{n,Q}^{-1})I_m(s_{mn})=q^{I_RQ}_{mn}c_{m,Q}^{-1}.$$\nNaturality of the quotient transition with respect to $\\varepsilon_{R,K}$ now makes the image equal to $q_{mn}T_{X,m}(\\varepsilon_{R,K})c_{m,Q}^{-1}$. By $(*)$ and $(***)$ this is the image of the right side. For completeness, transition naturality is the termwise tensor identity $(f\\otimes1)(1\\otimes q)=(1\\otimes q)(f\\otimes1)$ on K-flat computations: a derived morphism between K-flat complexes is a roof of chain maps through a K-flat complex, the termwise quotient maps commute with chain maps, and clause 2 of [lem-pur-derived-change-of-rings] makes the reductions and these $A_m$-linear quotient maps independent of the representatives in $D(-,A_m)$ itself; [lem-weil-integral-reduction-tower-well-defined] gives the same independence after restriction to $\\mathcal O_E$. Injectivity of the Hom bijection proves the desired equality with its $A_m$ action. No faithfulness of a derived scalar-restriction functor is used.",
+   "uses": [
+    "lem-sf-integral-ordinary-recollement-realization",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7"
+   }
+  },
+  {
+   "text": "All restrictions compose by the identity on underlying module complexes. The precise derived composition and equal-index normalization are [lem-sf-derived-coefficient-sequence-realization]. For $r\\ge m\\ge n$, compare $S_{Z,rm}(t_{mn})t_{rm}$ and $t_{rn}$ using the injective Hom correspondence of Step 4 for $(r,n)$ and $P=J_rK_r$. Applying $(***)$ first to $(m,n)$ and then to $(r,m)$ gives\n$$S_{X,rn}(\\varepsilon_{n,K_n})I_r\\bigl(S_{Z,rm}(t_{mn})t_{rm}\\bigr)=S_{X,rm}(q_{mn})q_{rm}\\varepsilon_{r,K_r}=q_{rn}\\varepsilon_{r,K_r}.$$\nThe middle equality is the identity of quotient maps $A_r\\to A_m\\to A_n=A_r\\to A_n$, applied termwise to a K-flat computation; it holds in $D(X,A_r)$ because clause 2 of [lem-pur-derived-change-of-rings] makes the $A_r$-, $A_m$- and $A_n$-reductions and the termwise quotient maps independent of the K-flat representative, and [lem-weil-integral-reduction-tower-well-defined] gives the same after restriction to $\\mathcal O_E$. Equation $(***)$ for $(r,n)$ gives the same image for $t_{rn}$, so the maps agree. At equal indices $q_{nn}=1$ and scalar restriction is the identity; $(***)$ then gives $t_{nn}=1$ by the same injectivity. These are equalities of natural transformations, since every preceding identity holds naturally in $K$. Only reductions of integral objects were tensor-computed; no boundedness claim for arbitrary $A_m$-complexes has entered.",
+   "uses": [
+    "lem-sf-derived-coefficient-sequence-realization",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-ordinary-recollement-realization",
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-sf-derived-coefficient-sequence-realization",
+  "lem-sfb-kflat-scalar-comparison-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral stage, fibre comparison and counit adjunction; explicit quotient-transition mate calculation using Stacks 07A6, 0D6E, 0145 and 014A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed exceptional right adjoint reduction modulo powers commutes with quotient transitions preserves counit supported triangles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor between pretriangulated categories (commuting with integer-parameterized shifts, preserving preadditive structure, and respecting zero \"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with integer-parameterized shift operations, if functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ form a t\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"In an adjunction between pretriangulated categories, if the right adjoint is a triangulated functor (i.e., commutes with the integer-parameterized shift operation, preserves the preadditive structure,\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.comp\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and triangulated adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $H \\\\dashv I$ between $\\\\mathcal{D}$ and $\\\\mat\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : C \\to D $ and $ G : D \\to C $ form an adjunction between pretriangulated categories $ C $ and $ D $, where both functors commute with integer-parameterized shift operations and the adjunction r\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"An adjunction between functors $ F: C \\\\to D $ and $ G: D \\\\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ \"}\n  {\"name\": \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"Given a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between pretriangulated categories commuting with integer shifts, if $ T_1, T_2 $ are triangles in $ \\\\mathcal{D} $ belonging to the essential image \"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b]\\n  [Y.IsStrictlyGE a] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X',\\n    ∃ (_ : X\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(reduction|quotient)|recollement.*scalar",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit normalized closed support adjoint coefficient reduction comparison quotient cocycle",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₁, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G)\\n  [inst_2 : ∀ (A : adj.toComonad.Coalgebra), CategoryTheory.Limits.HasEqualizer (G.map A.a) (adj.u\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, if every $ GF $-coalgebra admits an equalizer of $ G(A.\\\\alpha) $ and the unit $ \\\\eta_{G(A)} $, then \"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"[∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] (A : adj.toComonad.Coalgebra) :\\n  ((comparisonAdjunction adj).counit.app A).f =\\n    (adj.homEquiv _ A.A).symm (equalizer.ι (G.map A.a) (adj.unit.app (G.obj A.A)))\", \"doc\": \"For adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the counit component at a $ GF $-coalgebra $ A $ is given by applying the inverse of the adjunction's \"}\n  {\"name\": \"CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit\", \"module\": \"Mathlib.CategoryTheory.Monad.Monadicity\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₁, u₂} D]\\n  {G : CategoryTheory.Functor D C} {F : CategoryTheory.Functor C D} (adj : F ⊣ G)\\n  [inst_2 : ∀ (A : adj.toMonad.Algebra), CategoryTheory.Limits.HasCoequalizer (F.map A.a) (adj.cou\", \"doc\": \"The counit of the comparison adjunction between the left adjoint comparison functor $\\\\mathcal{D} \\\\to T\\\\text{-}\\\\mathbf{Alg}$ and the comparison functor $T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{D}$ is define\"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"[∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] (A : adj.toComonad.Coalgebra) :\\n  ((comparisonAdjunction adj).counit.app A).f = (beckEqualizer A).lift (counitFork A)\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ forming a comonad $ GF $, if every $ GF $-coalgebra admits an equalizer of $ G(A.\\\\alpha) $ and the un\"}\n  {\"name\": \"CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit_app\", \"module\": \"Mathlib.CategoryTheory.Monad.Monadicity\", \"type\": \"[∀ A : adj.toMonad.Algebra, HasCoequalizer (F.map A.a) (adj.counit.app (F.obj A.A))] (B : D) :\\n  (comparisonAdjunction adj).counit.app B = colimit.desc _ (counitCofork adj B)\", \"doc\": \"The counit of the comparison adjunction at an object $ B $ in $ \\\\mathcal{D} $ is equal to the universal morphism from the colimit of the counit cofork constructed for $ B $, specifically $ \\\\epsilon_B \"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G → (G.comp\", \"doc\": \"The counit of an adjunction between functors $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G: \\\\mathcal{D} \\\\to \\\\mathcal{C} $, which is a natural transformation from the composition $ G \\\\circ F $ to the iden\"}\n  {\"name\": \"CategoryTheory.Comonad.adj_counit\", \"module\": \"Mathlib.CategoryTheory.Monad.Algebra\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (G : CategoryTheory.Comonad C),\\n  G.adj.counit = { app := fun Y => G.ε.app Y, naturality := ⋯ }\", \"doc\": \"For any comonad $ G $ on a category $ \\\\mathcal{C} $, the counit of the adjunction between the cofree coalgebra functor $ \\\\mathcal{C} \\\\to \\\\text{Coalgebra}(G) $ and the forgetful functor $ \\\\text{Coalgeb\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorialityCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Limits\", \"type\": \": functorialityRightAdjoint adj K ⋙ Cocones.functoriality _ F ⟶ 𝟭 (Cocone (K ⋙ F))\", \"doc\": \"Given an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, this natural transformation arises from the counit $ \\\\epsilon : G \\\\circ F \\\\Rightarrow \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent reduction maps for a derived closed immersion shriek functor via orthogonal localization triangles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"Given a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between pretriangulated categories commuting with integer shifts, if $ T_1, T_2 $ are triangles in $ \\\\mathcal{D} $ belonging to the essential image \"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For any additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories commutes with the integer-parameteriz\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"Given two distinguished triangles $T_1$ and $T_2$ in a triangulated category $\\\\mathcal{D}$ that lie in the essential image of a shift-commuting functor $L$, and morphisms $a: T_1.X_1 \\\\to T_2.X_1$ and \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion exceptional right adjoint derived reduction quotient transitions counit compatibility",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G, F$ forming an adjunction $G \\\\dashv F$, with localizations $L_1, L_2$ respecting a morphism property $W_2$\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_1$ in category $\\\\mathcal{C}_1$, the composition of the derived unit transformation $\\\\eta'$ evaluated at $L_1(X_1)$ followed by $F'$ applied to $\\\\alpha_{X_1}$ equals the composition o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general adjunction, derived localization, or module-adic transition results; none supplies the pro-etale completed/finite counit comparison and its quotient-linear transition equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Adjunction.homEquiv",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) (Y : D) : (F.obj X ⟶ Y) ≃ (X ⟶ G.obj Y)\", \"doc\": \"The hom set equivalence associated to an adjunction.\"}\n  {\"name\": \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) {Y✝ : D} : (adj.corepresentableBy X).homEquiv = adj.homEquiv X Y✝\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (Y : D) {X✝ : C} : (adj.representableBy Y).homEquiv = (adj.homEquiv X✝ Y).symm\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_homEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) (Y : D) (f : F.obj X ⟶ Y) : (adj.homEquiv X Y) f = CategoryTheory.CategoryStruct.comp (adj.unit.app X) (G.map\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_unit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) (Y : D) (f : F.obj X ⟶ Y) : (adj.homEquiv X Y) f = CategoryTheory.CategoryStruct.comp (adj.unit.app X) (G.map\", \"doc\": \"**Alias** of `CategoryTheory.Adjunction.homEquiv_apply`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) (Y : D) (g : X ⟶ G.obj Y) : (adj.homEquiv X Y).symm g = CategoryTheory.CategoryStruct.comp (F.map g) (adj.cou\", \"doc\": \"**Alias** of `CategoryTheory.Adjunction.homEquiv_symm_apply`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_symm_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) (Y : D) (g : X ⟶ G.obj Y) : (adj.homEquiv X Y).symm g = CategoryTheory.CategoryStruct.comp (F.map g) (adj.cou\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) : (adj.homEquiv X (F.obj X)) (CategoryTheory.CategoryStruct.id (F.obj X)) = adj.unit.app X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_symm_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : D) : (adj.homEquiv (G.obj X) X).symm (CategoryTheory.CategoryStruct.id (G.obj X)) = adj.counit.app X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_symm_unit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (X : C) : (adj.homEquiv X (F.obj X)).symm (adj.unit.app X) = CategoryTheory.CategoryStruct.id (F.obj X)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv_naturality_left\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {X' X : C} {Y : D} (f : X' ⟶ X) (g : F.obj X ⟶ Y) : (adj.homEquiv X' Y) (CategoryTheory.CategoryStruct.comp (F.map f)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general adjunction, derived localization, or module-adic transition results; none supplies the pro-etale completed/finite counit comparison and its quotient-linear transition equations"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(reduction|quotient)|shriek.*scalar|recollement.*tensor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: only general adjunction, derived localization, or module-adic transition results; none supplies the pro-etale completed/finite counit comparison and its quotient-linear transition equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint of a fully faithful closed immersion commutes with reduction modulo uniformizer and quotient transition maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"(f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n) :\\n  transitionMap I N hmn ∘ₗ f.reduceModIdeal (I ^ n) = (f.reduceModIdeal (I ^ m) : _ →ₗ[R] _) ∘ₗ transitionMap I M hmn\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ between modules over a commutative ring $ R $, and for natural numbers $ m \\\\leq n $, the composition of the transition map $ M/I^nM \\\\to M/I^mM $ with the reduc\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \"(adj : L ⊣ R) (j : R ⋙ L ≅ 𝟭 D) : R.FullyFaithful\", \"doc\": \"Given an adjunction between functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ R : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, if the composition $ R \\\\circ L $ is isomorphic to the identity functor on $ \\\\mathcal{D\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"[IsIso h.counit] : R.FullyFaithful\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $L \\\\dashv R$ between functors $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $R : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, if the counit $\\\\epsilon : L \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {C' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{C}', \\\\mathcal{D}'$ with fully faithful functors $i_\\\\mathcal{C}: \\\\mathcal{C} \\\\to \\\\mathcal{C}'$ and $i_\\\\mathcal{D}: \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, an\"}\n  {\"name\": \"CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \"[R.Full] [R.Faithful] : IsIso (Adjunction.counit h)\", \"doc\": \"Given an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, if the right adjoint $ G $ is fully faithful, then the counit natural transformation $\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \"(X : D) :\\n  iD.map ((adj.restrictFullyFaithful hiC hiD comm1 comm2).counit.app X) =\\n    comm1.inv.app (R.obj X) ≫ L'.map (comm2.inv.app X) ≫ adj.counit.app (iD.obj X)\", \"doc\": \"For any object $X$ in category $\\\\mathcal{D}$, the counit of the restricted adjunction $L \\\\dashv R$ satisfies the equation: $i_\\\\mathcal{D}(\\\\varepsilon_L(X)) = \\\\eta_\\\\mathcal{C}^{-1}(R(X)) \\\\circ L'(\\\\eta_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": Spec.toLocallyRingedSpace.FullyFaithful\", \"doc\": \"The functor $\\\\operatorname{Spec}$ from the opposite category of commutative rings to locally ringed spaces is fully faithful, as established by the fact that the counit of the $\\\\Gamma$-$\\\\operatorname{\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general adjunction, derived localization, or module-adic transition results; none supplies the pro-etale completed/finite counit comparison and its quotient-linear transition equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recollement localization triangle closed support shriek commutes with derived extension of coefficients via counit mates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G, F$ forming an adjunction $G \\\\dashv F$, with localizations $L_1, L_2$ respecting a morphism property $W_2$\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_1$ in category $\\\\mathcal{C}_1$, the composition of the derived unit transformation $\\\\eta'$ evaluated at $L_1(X_1)$ followed by $F'$ applied to $\\\\alpha_{X_1}$ equals the composition o\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general adjunction, derived localization, or module-adic transition results; none supplies the pro-etale completed/finite counit comparison and its quotient-linear transition equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral stage: reduction of the counit and quotient-transition coherence; returned step 7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exceptional-reduction-transition-comparison",
+  "worker": "stage1",
+  "summary": "Retained the statement. Constructed alpha by its exceptional counit mate, proved it invertible by an actual finite-coefficient triangle morphism, derived the restriction comparison by a natural Hom chain, and checked transition and cocycle equalities by the injective exceptional Hom correspondence. Reused existing supporting nodes, with no new nodes.",
+  "blueprint": "prop-sf-localization-all-stages.proof.md Integral stage, the reductions F_n and Q_n and final exceptional adjunction/counit paragraph; expanded returned step 7 into specified comparison and quotient-map identities.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-closed-supported-scalar-comparison",
+    "why": "Generic closed scalar-extension isomorphism with target scalar action retained; the unit assumes operation comparisons but does not supply this arbitrary finite scalar Hom-chain tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic derived adjunction, closed scalar, triangle, or representability tool used exactly as stated; does not replace the supported-localization route."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic exact descent of the module open/closed identities, needed to check the hypotheses of the closed scalar comparison."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived adjunction, closed scalar, triangle, or representability tool used exactly as stated; does not replace the supported-localization route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic derived adjunction, closed scalar, triangle, or representability tool used exactly as stated; does not replace the supported-localization route."
+   },
+   {
+    "node": "lem-weil-integral-reduction-tower-well-defined",
+    "why": "Generic resolution independence and actual quotient-transition normalization for the integral tensor tower."
+   },
+   {
+    "node": "lem-sf-derived-coefficient-sequence-realization",
+    "why": "Generic composition of exact coefficient restrictions and the equal-index normalization for derived coefficient systems."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic inverse-image/scalar mate with its unit normalization, to verify the hypotheses of the closed scalar comparison; no replacement of the localization route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-sf-derived-coefficient-sequence-realization",
+  "lem-sfb-kflat-scalar-comparison-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-55a6f8f66",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-55a6f8f66 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is identical to the live unsplit node, there are no new nodes, and it has 7 steps. I checked them against the blueprint main-20261015 prop-sf-localization-all-stages.proof.md (Integral stage) and every cited statement. Steps 1-5 are correct: the reduction comparisons come from the recollement-realization node. The closed scalar comparison applies to (A_m)->(A_n) with no flatness needed, its hypotheses supplied by the ringed open/closed node, the unbounded calculus and the K-flat theta mates. I checked by hand that alpha is the counit transpose, its invertibility via TR3 plus the triangle-morphism lemma plus full faithfulness of I_n, the Hom-chain Yoneda d with normalization (**) (delta is the L-|S transpose of the identity I_m S_Z = S_X I_n), and t = d J_m(q) with (***). The Step 6 transition equality and the Step 7 cocycle and t_nn = 1 also check algebraically. Edge cases m=n, K=0, Z or U empty are consistent. Fault C4: steps 6 and 7 justified the A_m/A_r-linear naturality and composition of the quotient maps only by lem-weil-integral-reduction-tower-well-defined, whose clauses hold in D(Y,O_E) after Res_n, while the step explicitly avoids faithfulness of restriction of scalars. My fix adds lem-pur-derived-change-of-rings (clause 2, independence of the K-flat representative in D(O')) to both steps, with a sentence giving the roof/chain-level argument. proof_deps and the statement are unchanged. No duplicate: the only related nodes are the same-day siblings lem-sf-integral-ordinary-recollement-realization and lem-sf-finite-exceptional-site-normalization, which state different results. No SGA citation. The off-unit generic tools are accepted as declared. Batch-5 check: both flagged paths reach lem-pod-derived-exact-square-composition, which is generic derived pasting of exact squares, not part of the trace formula or Poincare duality, so I accepted them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfExceptionalReductionTransitions",
+  "declaration": "WeilConjectures.SfExceptionalReduction.exceptionalReductionTransitionComparison",
+  "declarations": [
+   "WeilConjectures.SfExceptionalReduction.quotient",
+   "WeilConjectures.SfExceptionalReduction.quotient_laws",
+   "WeilConjectures.SfExceptionalReduction.restrict",
+   "WeilConjectures.SfExceptionalReduction.reduce",
+   "WeilConjectures.SfExceptionalReduction.projectionComparison",
+   "WeilConjectures.SfExceptionalReduction.transition",
+   "WeilConjectures.SfExceptionalReduction.directReduction",
+   "WeilConjectures.SfExceptionalReduction.finiteImage",
+   "WeilConjectures.SfExceptionalReduction.finiteImageRestriction",
+   "WeilConjectures.SfExceptionalReduction.restrictionMate",
+   "WeilConjectures.SfExceptionalReduction.exceptionalTransition",
+   "WeilConjectures.SfExceptionalReduction.finitePull",
+   "WeilConjectures.SfExceptionalReduction.pullMate",
+   "WeilConjectures.SfExceptionalReduction.inclusion",
+   "WeilConjectures.SfExceptionalReduction.alpha",
+   "WeilConjectures.SfExceptionalReduction.restrictComp",
+   "WeilConjectures.SfExceptionalReduction.restrictId",
+   "WeilConjectures.SfExceptionalReduction.Presentation",
+   "WeilConjectures.SfExceptionalReduction.alphaOf",
+   "WeilConjectures.SfExceptionalReduction.openComponent",
+   "WeilConjectures.SfExceptionalReduction.closedComponent",
+   "WeilConjectures.SfExceptionalReduction.restrictionMate_isIso",
+   "WeilConjectures.SfExceptionalReduction.t",
+   "WeilConjectures.SfExceptionalReduction.reductionShift",
+   "WeilConjectures.SfExceptionalReduction.integralTriangle",
+   "WeilConjectures.SfExceptionalReduction.finiteTriangle",
+   "WeilConjectures.SfExceptionalReduction.reducedTriangle",
+   "WeilConjectures.SfExceptionalReduction.PreservesCounit",
+   "WeilConjectures.SfExceptionalReduction.ExtendsTriangles",
+   "WeilConjectures.SfExceptionalReduction.exceptionalReductionTransitionComparison"
+  ],
+  "file": "lean/Sheaf/Paper/SfExceptionalReductionTransitions.lean",
+  "statement": "theorem exceptionalReductionTransitionComparison (k : Type u) [Field k] (hl : IsUnit (l : k)) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsClosedImmersion i] [IsOpenImmersion j] (hij : IsCompl (Set.range i) (Set.range j)) : (∀ n : ℕ, IsIso (alphaOf S n)) ∧ (∀ (n : ℕ) (K : sfIntegralConstructibleCategory l E X), (reduce l E X n).map (S.aOpen.unit.app K.obj) ≫ openComponent S n K = (S.aFiniteOpen n).unit.app ((reduce l E X n).obj K.obj)) ∧ (∀ (n : ℕ) (K : sfIntegralConstructibleCategory l E X), PreservesCounit S n K ((alphaOf S n).app K) ∧ ∀ b : (reduce l E Z n).obj (S.JR.obj K.obj) ⟶ (S.Jn n).obj ((reduce l E X n).obj K.obj), (PreservesCounit S n K b ↔ b = (alphaOf S n).app K) ∧ (PreservesCounit S n K b ↔ ExtendsTriangles S n K b)) ∧ (∀ (m n : ℕ) (h : n ≤ m) (K : sfIntegralConstructibleCategory l E X), (alphaOf S m).app K ≫ (t S hij h).app K.obj = (transition l E Z h).app (S.JR.obj K.obj) ≫ (restrict l E Z h).map ((alphaOf S n).app K)) ∧ (∀ (r m n : ℕ) (h : m ≤ r) (g : n ≤ m) (K : sfIntegralConstructibleCategory l E X), (t S hij h).app K.obj ≫ (restrict l E Z h).map ((t S hij g).app K.obj) ≫ (restrictComp l E Z h g).hom.app ((S.Jn n).obj ((reduce l E X n).obj K.obj)) = (t S hij (g.trans h)).app K.obj) ∧ (∀ (n : ℕ) (K : sfIntegralConstructibleCategory l E X), (t S hij (le_refl n)).app K.obj ≫ (restrictId l E Z n).hom.app ((S.Jn n).obj ((reduce l E X n).obj K.obj)) = 𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "Q94",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The theorem uses the existing small-site completed and finite categories. Presentation bundles the assumed restrictions, supported triangles, and canonical comparisons; its exceptional and open adjunctions specify the kernel right adjoints and inverse image by their universal properties. Positive coefficient exponent is n+1. All maps are actual adjunction transposes; no arbitrary transition or derived tensor is postulated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aedbf62b9",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Item Lean byte-identical to 1a0d (sha 19ee00d3); re-read vs node: alpha IsIso NatTrans, open-unit square, counit uniqueness and triangle-morphism equivalence (TR3 with free distinguished boundaries and the triangulated CommShift witness), transition intertwining, cocycle, t_nn=1; edge cases n=0, m=n, r=m, Z/U empty, K=0 covered. Mechanical theorem-stmt_dep finding: finiteImageRestriction = .choose of proEtaleDerivedDirectImage_restrictScalars (pinned on K-injectives) and transition/directReduction use .choose of derivedScalarExtensionRestrictionAdjunction (unit pinned on K-flat): genuine theorem-constructed objects, PASS on that point. R1: def-sf-derived-scalar-restriction-compositors existing:true on the proved DerivedCoefficientSequenceRealization module, six defs exist, statement verbatim, stmt_deps exist live. R2': dep record = live plus the six intrinsic names appended (by Q50, reviewed_proof kept); fixed-scalar module = live plus one public import; no cycle; no double ownership; 12 current importers all within the worker's 13-importer probe. R3: adjunction theorem now cited. Advisory: unused base-era stmt_deps (incl. def-weil-derived-tensor) and an unused import (H9). No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T162444-L-454343",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.SfExceptionalReduction.exceptionalReductionTransitionComparison",
+   "WeilConjectures.SfExceptionalReduction.quotient_laws",
+   "WeilConjectures.SfExceptionalReduction.restrictionMate_isIso"
+  ],
+  "sorry_after": [
+   "WeilConjectures.SfExceptionalReduction.exceptionalReductionTransitionComparison",
+   "WeilConjectures.SfExceptionalReduction.restrictionMate_isIso"
+  ]
+ }
+}

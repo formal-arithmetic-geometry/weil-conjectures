@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-singleton-stack-flat-lfp-field-cover",
+ "kind": "statement",
+ "title": "Flat finitely presented field cover of a singleton stack",
+ "statement": "Let $S$ be a scheme and $\\mathcal Z$ an algebraic stack over $S$. Assume $\\mathcal Z$ admits a smooth surjective scheme atlas that is reduced and locally Noetherian [pqf-def-locnoeth], where reduced means that every local ring has no nonzero nilpotents. Assume $|\\mathcal Z|$ has exactly one point, with field-valued objects identified when they become isomorphic over a common field extension. There exist a field $K$ [def-weil-field] and a representable-by-algebraic-spaces surjective flat locally finitely presented morphism $a:\\operatorname{Spec}K\\to\\mathcal Z$ [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. No condition on the diagonal beyond representability, and no Noetherian condition on $S$, is assumed. An algebraic stack means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; stack, 2-fibre products and representability use [def-sfb-stable-pointed-moduli-groupoids], [def-trf-algebraic-space]. Properties of representable maps are tested after scheme base change on etale scheme charts. Surjectivity means that every field-valued target object lifts after a field extension. ",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 06MP (lemma-unique-point-better), (1) implies (2), with Tag 06MM (lemma-flat-cover-by-field)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "pqf-def-locnoeth",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonempty affine open $W=\\operatorname{Spec}R$ in the given atlas, small enough that $R$ is Noetherian. This is possible by the locally Noetherian hypothesis; $W\\to\\mathcal Z$ is smooth by source locality. The ring $R$ is nonzero and reduced, since the atlas is nonempty and reduced and sections of a reduced scheme are reduced. Choose a prime $\\mathfrak p$ minimal over the proper ideal $0$. The minimal-prime localization lemma makes $E=R_{\\mathfrak p}$ a field. For the point $\\eta\\in W$ corresponding to $\\mathfrak p$, the affine stalk identification gives $\\mathcal O_{W,\\eta}=E$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-pc-reduced-scheme",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 06MN (lemma-unique-point), (1) implies (2), and 06MP (lemma-unique-point-better), (1) implies (2); algebra.tex Tags 00E0(3) and 00EU; schemes.tex Tags 01J1 and 01HV(6)."
+   }
+  },
+  {
+   "text": "The canonical map $\\operatorname{Spec}E=\\operatorname{Spec}\\mathcal O_{W,\\eta}\\to W$ is flat by the spectrum-of-stalk lemma. Smoothness makes $W\\to\\mathcal Z$ flat, so their composite $b:\\operatorname{Spec}E\\to\\mathcal Z$ is flat. It is representable by algebraic spaces because its source is a scheme and the diagonal of $\\mathcal Z$ is representable. It is surjective in the required sense: any field-valued object of $\\mathcal Z$ and $b$ represent its unique point, so over a common field extension they become isomorphic; the extension of $b$ is the required lift.",
+   "uses": [
+    "lem-sbc-canonical-stalk-spectrum-flat",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06MN (lemma-unique-point), (1) implies (2); representability is algebraic.tex Tag 045G."
+   }
+  },
+  {
+   "text": "Choose a maximal ideal $\\mathfrak m$ of the nonzero ring $R$ and put $K=R/\\mathfrak m$, a field by the quotient-field lemma. Since $R$ is Noetherian, write $\\mathfrak m=(f_1,\\ldots,f_n)$. The map $R\\to K=R/(f_1,\\ldots,f_n)$ is finitely presented by the defining presentation with zero polynomial generators. Thus $\\operatorname{Spec}K\\to W$ is locally of finite presentation by the affine definition. Smoothness of $W\\to\\mathcal Z$ and composition give a locally finitely presented map $a:\\operatorname{Spec}K\\to\\mathcal Z$. Its scheme source makes it representable by algebraic spaces. The same common-field-extension argument as in step 2 makes $a$ surjective. We still have to prove its flatness; the closed point map to $W$ need not be flat.",
+   "uses": [
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-common-extension-fields-quotient-field",
+    "def-weil-pbc-noetherian-ring",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06MP (lemma-unique-point-better), (1) implies (2), closed-point construction; morphisms.tex Tag 01TP (definition-finite-presentation), applied directly to the finitely generated maximal ideal (the argument behind Tag 01TV)."
+   }
+  },
+  {
+   "text": "Form the algebraic space $T=\\operatorname{Spec}E\\times_{\\mathcal Z}\\operatorname{Spec}K$, with projections $p:T\\to\\operatorname{Spec}K$ and $q:T\\to\\operatorname{Spec}E$. The map $p$ is flat and surjective by base change of $b$. The map $q$ is flat: on an etale surjective scheme chart $U\\to T$, the scheme morphism $U\\to\\operatorname{Spec}E$ is flat by the cited field-base flatness lemma. The algebraic-space chart criterion therefore applies to $q$. Consequently $c=bq:T\\to\\mathcal Z$, which is 2-isomorphic to $ap$, is flat by composition.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-pc-flat-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06MM (lemma-flat-cover-by-field), fibre square and flatness over the field; flatness is tested on etale scheme charts (spaces-morphisms.tex Tags 03MJ and 03MM)."
+   }
+  },
+  {
+   "text": "We descend this flatness using schemes, without any quasi-compactness assertion about $p$. Fix any scheme $V\\to\\mathcal Z$ and an etale surjective scheme chart $Q\\to A_V=\\operatorname{Spec}K\\times_{\\mathcal Z}V$. Put $T_V=T\\times_{\\mathcal Z}V$ and $D=T\\times_{\\operatorname{Spec}K}Q$. The identity $D\\simeq T_V\\times_{A_V}Q$ makes $D\\to T_V$ etale. Choose an etale surjective scheme chart $P\\to D$. The scheme map $P\\to Q$ is flat and surjective: $D\\to Q$ is a base change of $p$, followed by the etale cover $P\\to D$. Also $P\\to V$ is flat: it factors through the etale maps $P\\to D\\to T_V$ and the flat base change $T_V\\to V$ of $c$. Apply scheme flat source descent to $P\\to Q\\to V$ to get $Q\\to V$ flat. The algebraic-space chart test gives $A_V\\to V$ flat. Since $V\\to\\mathcal Z$ was arbitrary, $a$ is flat by the stated convention for representable morphisms. Together with step 3 this proves every requested property.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-pc-flat-source-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06MM (lemma-flat-cover-by-field), final flat-permanence inference, expanded via etale scheme charts and the scheme source-descent lemma; spaces-morphisms.tex Tag 05VY (lemma-flat-permanence) with the structure sheaf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-reduced-scheme",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-common-extension-fields-quotient-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-pc-flat-field",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-pc-flat-source-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 06MP (lemma-unique-point-better), (1) implies (2), with the proofs of Tags 06MN (lemma-unique-point), (1) implies (2), and 06MM (lemma-flat-cover-by-field). The final source descent is expanded on scheme charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced locally Noetherian algebraic stack with one point admits a surjective flat locally finitely presented map from a field spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  CompactSpace ↥X ↔ ∃ R f, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A topological space $ X $ is compact if and only if there exists a commutative ring $ R $ and a surjective continuous map from the prime spectrum $ \\\\operatorname{Spec}(R) $ (endowed with the Zariski t\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instHasRingHomPropertySurjectiveOnStalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.SurjectiveOnStalks fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.SurjectiveOnStalks\", \"doc\": \"The property of being surjective on stalks for ring homomorphisms defines a morphism property in the category of schemes. Specifically, for any commutative rings $ R $ and $ S $, and a ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Singleton reduced Noetherian stack has an fppf field cover without etale atlas assumption",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Singleton reduced Noetherian stack has an fppf field cover without etale atlas assumption",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsLocallyNoetherian X → Sort u} →\\n    (t : AlgebraicGeometry.IsLocallyNoetherian X) →\\n      ((component_noetherian : ∀ (U : ↑X.affineOpens), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))) →\\n          motive ⋯) →\\n        motive t\", \"doc\": \"Given a scheme $X$ and a proof that it is locally Noetherian, this function allows reducing arguments to the case where every affine open subset $U \\\\subseteq X$ has an associated Noetherian ring $\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(𝒰 : Scheme.OpenCover X) : IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsLocallyNoetherian (𝒰.X i)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if every open subscheme in an open cover $\\\\mathcal{U}$ of $X$ is locally Noetherian, i.e., $X$ is locally Noetherian $\\\\iff \\\\forall i \\\\in \\\\mathcal{U}.I_0,\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(𝒰 : Scheme.OpenCover.{v, u} X) [∀ i, IsAffine (𝒰.X i)] :\\n  IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if, for every affine open cover $\\\\{U_i\\\\}$ of $X$, the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for each index $i$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|residualGerbe|flat.*field.*cover",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced locally Noetherian algebraic stack with one point admits a surjective flat locally finitely presented map from a field spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  CompactSpace ↥X ↔ ∃ R f, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A topological space $ X $ is compact if and only if there exists a commutative ring $ R $ and a surjective continuous map from the prime spectrum $ \\\\operatorname{Spec}(R) $ (endowed with the Zariski t\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instHasRingHomPropertySurjectiveOnStalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.SurjectiveOnStalks fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.SurjectiveOnStalks\", \"doc\": \"The property of being surjective on stalks for ring homomorphisms defines a morphism property in the category of schemes. Specifically, for any commutative rings $ R $ and $ S $, and a ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not a field cover of an algebraic stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Singleton reduced Noetherian stack has an fppf field cover without etale atlas assumption",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not a field cover of an algebraic stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not a field cover of an algebraic stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced locally Noetherian algebraic stack with one point has a flat finitely presented field cover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} [Subsingleton X] [IsReduced X] [JacobsonSpace Y] : IsFinite f ↔ LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{U : X.OpenCover} (i) [IsLocallyNoetherian X] : IsLocallyNoetherian (U.X i)\", \"doc\": \"If a scheme $ X $ is locally Noetherian, then each open subscheme in an open cover of $ X $ is also locally Noetherian.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not a field cover of an algebraic stack"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|residualGerbe|flat.*field.*cover",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not a field cover of an algebraic stack"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-singleton-field-cover",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Flat finitely presented field cover of a singleton stack.",
+   "via": [
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-singleton-stack-flat-lfp-field-cover",
+  "worker": "stage1",
+  "summary": "Read Stacks Tags 06MP, 06MN and 06MM and expanded their field-cover construction in five steps. The generic minimal-prime stalk supplies a flat field cover, while a closed affine point supplies finite presentation. The two are compared by a 2-fibre product; flatness descends on etale scheme charts using existing scheme source descent. No statement change or new node was necessary; the closed-point map is never assumed flat. Mathlib and project searches found no exact attachment for this stack assertion.",
+  "blueprint": "Supporting field-cover input in the inherited provenance: det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisites through the unramified-diagonal etale-atlas criterion. Steps 1--2 construct the initial flat field point; step 3 constructs a finitely presented field point; steps 4--5 transfer flatness. The latest unit/direct-image proof was read; its current text no longer spells out this historical alteration subroute.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-canonical-stalk-spectrum-flat",
+    "why": "Generic scheme tool: the canonical spectrum of a stalk is flat; the item unit has no statement of this generic fact."
+   },
+   {
+    "node": "lem-pc-flat-source-descent",
+    "why": "Generic scheme tool applied only to the scheme maps P to Q to V; it detects flatness through a flat surjective source cover without quasi-compactness."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product and etale-cover calculus for the scheme-chart argument; no unit-specific replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lem-pc-flat-source-descent",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-137bea43f",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-137bea43f (reviewer sub-agent of L); spot-checked: I read Stacks stacks-properties 06MM, 06MN and 06MP in full, along with Morphisms 02JZ/01TV. The five steps follow 06MP (1)=>(2) exactly. 06MN's generic-point flat field cover becomes the minimal prime of a reduced Noetherian affine W in the atlas, which gives E=R_p as a field and O_{W,eta}. A closed point K=R/(f_1..f_n) is lfp through the presentation with zero variables, and its flatness is not assumed. 06MM's flatness transfer is written out: T=Spec E x_Z Spec K, p is flat and surjective by base change, q is flat by lem-pc-flat-field plus the chart test, and c is flat. The descent is done on the charts P->Q->V with D=T_V x_{A_V} Q (I checked the identity) and lem-pc-flat-source-descent, which has no quasi-compactness condition. The chart test then gives A_V->V flat. Every cited statement says what its step takes from it. The statement is unchanged from live; the only stmt_deps change is the added def-pc-scheme. There are no new nodes and no cycle, uses equals proof_deps, there is no repair note, and the item is still unsplit in live and side-live. No duplicate exists: lem-sfb-smooth-cover-flat-lfp-descent needs a smooth cover, but p is only flat. There is no SGA. Batch-5 check: the flagged sfb nodes reach sec-trace-formula only through def-trf-algebraic-space, a definition, and lem-trf-space-fibre-products-etale-covers is generic algebraic-space calculus; neither is part of the trace formula or Poincare duality proofs. I accept the declared tool_uses: canonical-stalk-spectrum-flat, pc-flat-source-descent and trf-space-fibre-products. Edge cases checked: Spec k, a positive-dimensional atlas, a non-integral reduced atlas, non-reduced singletons (excluded by the hypothesis) and a non-Noetherian S."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingletonStackFlatLfpFieldCover",
+  "declaration": "CategoryTheory.exists_singleton_stack_flat_lfp_field_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingletonStackFlatLfpFieldCover.lean",
+  "statement": "theorem exists_singleton_stack_flat_lfp_field_cover {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hstack : IsModuliStack F) (hdiag : HasAlgebraicSpaceDiagonal F) (U : Over S) (atlas : BasedFunctor (discreteModuli (yoneda.obj U)) F) (hatlas : IsSmoothModuliAtlas F U atlas) (hreduced : ∀ x : U.left, _root_.IsReduced (U.left.presheaf.stalk x)) (hnoetherian : IsLocallyNoetherian U.left) (hsingleton : ∃ (K : Type u) (_ : Field K) (s : Spec (.of K) ⟶ S) (x : BasedFunctor (discreteModuli (yoneda.obj (Over.mk s))) F), ∀ (L : Type u) [Field L] (t : Spec (.of L) ⟶ S) (y : BasedFunctor (discreteModuli (yoneda.obj (Over.mk t))) F), ∃ (E : Type u) (_ : Field E) (e : Spec (.of E) ⟶ S) (i : Over.mk e ⟶ Over.mk s) (j : Over.mk e ⟶ Over.mk t), Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map i)).comp x) ((discreteModuliMap (yoneda.map j)).comp y))) : ∃ (K : Type u) (_ : Field K) (s : Spec (.of K) ⟶ S) (a : BasedFunctor (discreteModuli (yoneda.obj (Over.mk s))) F), IsRepresentableByAlgebraicSpaces a ∧ (∀ (L : Type u) [Field L] (t : Spec (.of L) ⟶ S) (y : BasedFunctor (discreteModuli (yoneda.obj (Over.mk t))) F), ∃ (E : Type u) (_ : Field E) (e : Spec (.of E) ⟶ S) (i : Over.mk e ⟶ Over.mk s) (j : Over.mk e ⟶ Over.mk t), Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map i)).comp a) ((discreteModuliMap (yoneda.map j)).comp y))) ∧ ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ ∀ (V : Over S) (b : yoneda.obj V ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b → Flat ((yoneda.preimage (b ≫ p)).left) ∧ LocallyOfFinitePresentation ((yoneda.preimage (b ≫ p)).left)",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81fac61b9",
+  "group": "O2",
+  "result": "pass",
+  "note": "Matched the Lean clause by clause against the node and Stacks 06MP(1)=>(2)/06MM. Hypotheses: IsModuliStack + HasAlgebraicSpaceDiagonal + a named IsSmoothModuliAtlas are exactly the unfolded IsAlgebraicModuliStack; the atlas is stalkwise reduced and IsLocallyNoetherian; hsingleton is 'exists x, every field point equals x over a common field extension' via a vertical ModuliTwoIso, which is the node's exactly-one-point convention. Conclusion: representable, surjective as a lift after a field extension, and Flat plus LocallyOfFinitePresentation on etale charts of the actual HasSpaceBaseChange projection, the same convention as the landed SpaceMapIsSmooth. No extra diagonal, base or quasi-compactness assumption; universes u/v/w are sound. The statement is verbatim in the file; the node differs from live only in its lean record and the used, landed stmt_dep def-sfb-algebraic-moduli-stack; the 9 dep records are identical to live; the item is not superseded. No defs, only sorry, docstrings carry source tags, blueprint id and the 5 proof steps, imports are fine. No compile, since no file was changed. Advisory: DmStackMorphismProperties' ModuliPoints/ModuliSpaceTest exist; the inline forms are equivalent and introduce no duplicate definition."
+ }
+}

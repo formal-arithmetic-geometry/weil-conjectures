@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-flat-curve-pullback-function-field",
+ "kind": "statement",
+ "title": "Integrality and function field of a generically finite pullback of a flat curve family",
+ "statement": "Let $k$ be a field, let $B,V,P$ be integral finite-type $k$-schemes, and let $v:V\\to B$ be flat, of finite type, and dominant. Suppose every geometric fibre of $v$ is reduced and its generic fibre is geometrically integral. Let $h:P\\to B$ be dominant with finite function-field extension $M/K$, where $K=k(B)$, $M=k(P)$ and $L=k(V)$. For the ordinary fibre product $W=V\\times_B P$, the scheme $W$ is reduced and integral, its generic fibre over $P$ is geometrically integral, and the canonical maps induce an identification\n$$k(W)=L\\otimes_K M.$$\nIn particular this tensor product is a field finite over $L$. No flatness of $h$ and no normalization or reduction of $W$ is required. The reducedness assertion uses reduced geometric fibres in the sense of pullbacks to algebraically closed fields; it also holds after pullback of $v$ to every field-valued point of $B$.\n\nThe notions use [def-weil-field], [def-pc-integral-scheme], [def-pc-reduced-scheme], [def-weil-finite-type-morphism], [def-weil-flat-morphism], [def-weil-geometric-fibre], [def-pc-geometrically-irreducible], [def-pc-fibre-product], [def-sc-function-field], [def-pc-field-extension] and [def-pc-field-tower]. Dominant means dense image.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Theorem 5.9 proof, printed p.617, ordinary fibre product in the final paragraph; agent-formulated integrality and function-field verification from old steps 6--7. Reducedness: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, lines 109--131. Local de Jong PDF WANTED.",
+  "url": "https://www.numdam.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre",
+  "def-pc-geometrically-irreducible",
+  "def-pc-fibre-product",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\eta_B,\\eta_P$ for the generic points. Dominance gives $h(\\eta_P)=\\eta_B$: the closure of the image of the generic point contains the entire image of $P$, hence is $B$. Thus the residue-field map is $K\\hookrightarrow M$. The universal property gives $W_M:=W\\times_P\\operatorname{Spec}M\\cong V_K\\times_{\\operatorname{Spec}K}\\operatorname{Spec}M$, with the stated projections. For every extension $E/M$, its further pullback is $(V_K)_E$, integral by geometric integrality of $V_K$. Consequently $W_M$ is geometrically integral over $M$, in particular nonempty and integral.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCM (lemma-flat-over-integral-integral-fibre), applied after pullback; fibre identification directly from the universal property"
+   }
+  },
+  {
+   "text": "The projection $q:W\\to P$ is flat by flat base change. Choose any nonempty affine open $U=\\operatorname{Spec}C\\subset W$ whose image lies in a nonempty affine open $\\operatorname{Spec}D\\subset P$. The affine flatness criterion makes $C$ a flat $D$-module; $D$ is a domain and $M=\\operatorname{Frac}D$. The torsion-freeness node says that multiplication by every nonzero $d\\in D$ is injective on $C$. Apply the localization node with base and algebra $D$, module $D$, denominators $D\\setminus\\{0\\}$ and other module $C$. Using $D\\otimes_D C=C$ and the swap $m\\otimes c\\mapsto c\\otimes m$, it identifies $C\\otimes_D M$ with $(D\\setminus\\{0\\})^{-1}C$: the kernel of $C\\to C\\otimes_D M$ consists of elements killed by such a $d$, hence is zero. Since $C\\ne0$, this localization is nonzero. By the affine fibre-product and open fibre-product nodes its spectrum is exactly the inverse image of $U$ in $W_M$. Thus every such $U$ meets the generic fibre, and its generic-fibre coordinate ring is a domain by step 1.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCM (lemma-flat-over-integral-integral-fibre), affine argument; Tags 01U9, 01U5, 0538, 00DK, 01I4 and 01JR for the cited inputs"
+   }
+  },
+  {
+   "text": "The charts of step 2 form an open basis of $W$. On each chart $C$ embeds in the domain $C\\otimes_D M$, so $C$ is itself a domain. Its local rings, being localizations of $C$, have no nonzero nilpotents, so $W$ is reduced. Every nonempty open of $W$ contains one of these charts and therefore has nonempty inverse image in $W_M$. The inverse images of two nonempty opens meet because $W_M$ is irreducible. Their intersection consequently has a point in $W$. Hence $W$ is irreducible; it is nonempty because $W_M$ is nonempty. The reduced-and-irreducible characterization in the integral-scheme definition now proves $W$ integral.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCM (lemma-flat-over-integral-integral-fibre), explicit gluing of its affine argument"
+   }
+  },
+  {
+   "text": "Choose nonempty affine opens $\\operatorname{Spec}A\\subset B$, $\\operatorname{Spec}R\\subset V$ and $\\operatorname{Spec}D\\subset P$ with the latter two mapping into the first. Dominance sends the generic points of $V$ and $P$ to that of $B$, so these charts contain the corresponding generic points. The affine function-field node identifies $K=\\operatorname{Frac}A$, $L=\\operatorname{Frac}R$ and $M=\\operatorname{Frac}D$. The ring $R_K=R\\otimes_A K=(A\\setminus\\{0\\})^{-1}R$ is the coordinate ring of an affine open of $V_K$. The injection $A\\to R$ induced by dominance makes every denominator nonzero in the domain $R$, so $R_K\\ne0$ and this open is nonempty. For every extension $E/K$ that open pulls back to a nonempty open of the integral scheme $(V_K)_E$: nonemptiness follows since the nonzero $K$-vector space $R_K$ remains nonzero after extension of scalars. Thus $\\operatorname{Spec}R_K$ is geometrically integral. Also $\\operatorname{Frac}R_K=L$: $R\\subset R_K\\subset L$, and fractions $r/s$ from $R$ already exhaust $L$. These identifications fix $K$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization); affine function fields as in Tag 01RV, and the generic-fibre chart in Tag 0BCM"
+   }
+  },
+  {
+   "text": "Apply the fraction-field geometric-integrality transfer node over $K$ to $X=\\operatorname{Spec}R_K$ and $Y=\\operatorname{Spec}L$. Both are integral affine schemes, their fraction fields are canonically $L$, and the equivalence fixes every base section by step 4. The cited conclusion makes $\\operatorname{Spec}L$ geometrically irreducible and geometrically reduced. For every field extension $F/K$, $L\\otimes_K F$ is nonzero: a $K$-basis of $L$ remains a basis after scalar extension. Its spectrum is therefore nonempty, reduced and irreducible, hence integral. Thus $\\operatorname{Spec}L$ is geometrically integral over $K$. In particular its pullback to $M$ is integral. The affine fibre-product formula identifies that pullback with $\\operatorname{Spec}E$, where $E=L\\otimes_K M$, so $E$ is a nonzero domain.",
+   "uses": [
+    "lem-sbc-field-fraction-ring-geometric-integrality",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0559 (lemma-geom-irreducible-generic-fibre), first proof: geometric integrality passes to the function field"
+   }
+  },
+  {
+   "text": "If $m_1,\\ldots,m_n$ is a $K$-basis of the finite extension $M/K$, then $1\\otimes m_1,\\ldots,1\\otimes m_n$ span $E$ over $L$: expand each right coefficient of a finite sum of pure tensors in that basis and move the $K$-coefficients to the left. Thus $E$ is finite-dimensional over $L$. Since step 5 proves it is a domain, the finite-dimensional-domain node makes $E$ a field, finite over $L$.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary finite spanning-set argument and the finite-dimensional-domain-is-field lemma (rank-nullity)"
+   }
+  },
+  {
+   "text": "The chosen charts give an open subscheme $\\operatorname{Spec}C\\subset W$, with $C=R\\otimes_A D$, by the affine and open fibre-product nodes. The canonical map $C\\to E$, $r\\otimes d\\mapsto r\\otimes d$, sends $1$ to $1$, so $C\\ne0$ and this open is nonempty. The localization-tensor node, first for $R\\to L$ and then, after swapping the factors by $l\\otimes d\\mapsto d\\otimes l$, for $D\\to M$, identifies the localization of $C$ at the images of $R\\setminus\\{0\\}$ and $D\\setminus\\{0\\}$ with $L\\otimes_A M$. These module identifications are ring identifications: the composite sends $(r\\otimes d)/((s\\otimes1)(1\\otimes t))$ to $(r/s)\\otimes(d/t)$; multiplication of such fractions and the unit are preserved, and distributivity handles sums. Finally $L\\otimes_A M\\cong L\\otimes_K M=E$. Indeed the two actions of $a\\in A$ coincide, so for $a\\ne0$ their inverses coincide as well; therefore the tensor relations over $A$ already impose the relations for every fraction in $K$. The maps in both directions send $l\\otimes m$ to $l\\otimes m$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization) and Tag 00D2 (lemma-tensor-with-bimodule); the extension of balancing to fractions is written out"
+   }
+  },
+  {
+   "text": "The maps $L\\to E$ and $M\\to E$ are injective, since they are unital maps from fields to the nonzero field $E$. Hence none of the denominators of step 7 is zero in $C$. As $C$ is a domain by step 3, its localization map $C\\to E$ is injective: a zero fraction means that some nonzero denominator annihilates its numerator. Since $E$ is a field and a localization of $C$, it is the fraction field of $C$: a localization fraction is a fraction of elements of $C$, and every nonzero element of $C$ is invertible in $E$. Apply the affine function-field node to the nonempty open $\\operatorname{Spec}C\\subset W$ to obtain $k(W)=\\operatorname{Frac}C\\cong E=L\\otimes_K M$. The injections $R\\to L\\to E$ and $D\\to M\\to E$ show that the generic point of this chart maps to the zero primes of $R$ and $D$. Hence both projections of $W$ are dominant and induce the claimed function-field maps. Every map used is induced by the two projections and sends $r\\otimes d$ to the product of the corresponding generic germs, so this is the claimed canonical identification.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV (lemma-integral-scheme-rational-functions), affine fraction-field characterization; elementary uniqueness of fraction fields"
+   }
+  },
+  {
+   "text": "It remains to check the assertion for arbitrary field-valued points. Given $\\operatorname{Spec}F\\to B$ with image $b$, the map factors through $\\operatorname{Spec}\\kappa(b)$ and gives a field extension $F/\\kappa(b)$. The hypothesis says that $V_b$ pulled back to an algebraic closure of $\\kappa(b)$ is reduced. The algebraic-closure test node therefore makes $V_b$ geometrically reduced over $\\kappa(b)$. Its extension to $F$, which by the fibre-product universal property is $V\\times_B\\operatorname{Spec}F$, is reduced. This includes empty fibres. Steps 1--8 used only flatness of $v$, dominance and the geometric generic-fibre hypothesis; none assumes flatness of $h$, or replaces the ordinary fibre product by its reduction or normalization.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "def-pc-fibre-product",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035X (lemma-geometrically-reduced), (2) iff (6), and Tag 020I (lemma-perfect-reduced) for characteristic zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "lem-sbc-field-fraction-ring-geometric-integrality",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "def-weil-geometric-fibre",
+  "lem-trf-geometric-reducedness-algebraic-closure-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BCM, lemma-flat-over-integral-integral-fibre; affine tensor/fraction-field assembly using Tags 00DK, 00D2, 01I4, 01JR, 01RV, 0559 and 035X. de Jong PDF is WANTED; no claim to have read it."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIntegral.*pullback|IsIntegral.*pullback|instIsReducedPullback",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+   "date": "2026-10-22",
+   "verdict": "No exact match: reduced-pullback instances give reducedness only; Integral.lean assumes geometrically integral ALL fibres. The generic-density and function-field tensor identification remain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral total space of flat geometrically reduced family over integral base with integral generic fibre",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.Flat",
+   "results": "4 hits: AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian, AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian, AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents",
+   "date": "2026-10-22",
+   "verdict": "No exact match: reduced-pullback instances give reducedness only; Integral.lean assumes geometrically integral ALL fibres. The generic-density and function-field tensor identification remain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat family with geometrically reduced fibres and geometrically integral generic fibre stays integral after a dominant generically finite integral base change, with function field the tensor product",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, RingHom.isIntegral_isStableUnderBaseChange, Algebra.isGeometricallyReduced_iff, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+   "date": "2026-10-22",
+   "verdict": "No exact match: reduced-pullback instances give reducedness only; Integral.lean assumes geometrically integral ALL fibres. The generic-density and function-field tensor identification remain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat algebra over domain injects into its generic fibre; integral generic fibre and reduced total space imply integral total space",
+   "results": "8 hits: TensorProduct.toIntegralClosure_injective_of_flat, Algebra.HasGoingDown.of_flat, Algebra.ZariskisMainProperty.of_isIntegral, Algebra.ZariskisMainProperty, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed, instFlatAtPrime, RingHom.Flat.ofLocalizationPrime",
+   "date": "2026-10-22",
+   "verdict": "No exact match: reduced-pullback instances give reducedness only; Integral.lean assumes geometrically integral ALL fibres. The generic-density and function-field tensor identification remain."
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral.*generic|generic.*isIntegral|integral.*genericFiber|genericFiber.*integral",
+   "results": "; 1 hits: Mathlib/AlgebraicGeometry/FunctionField.lean. No declaration states the item or its generic-fibre integrality assertion; integral-morphism search hits concern integral ring maps, a different property.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism over an integral scheme with integral generic fibre has integral total space",
+   "results": "; 8 hits: AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.IsIntegralHom.instSndScheme, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization. No declaration states the item or its generic-fibre integrality assertion; integral-morphism search hits concern integral ring maps, a different property.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat morphism of schemes with integral base and integral generic fibre has integral source",
+   "results": "; 8 hits: AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.Flat, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.IsIntegralHom.mk, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.flat_iff. No declaration states the item or its generic-fibre integrality assertion; integral-morphism search hits concern integral ring maps, a different property.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsIntegral",
+   "results": "; 4 hits: AlgebraicGeometry.Flat.instOfSubsingletonCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian, AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian, AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian_1. Candidates in Geometrically/Integral.lean:97-129 require every fibre geometrically integral, which is not assumed; no generic-fibre theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Function field of a geometrically integral scheme after a finite extension of the base field is the tensor product of function fields",
+   "results": "; 8 hits: AlgebraicGeometry.functionField_isScalarTower, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.stalkFunctionFieldAlgebra, functionField_iff, AlgebraicGeometry.functionField_isFractionRing_of_affine, AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme. FunctionField.lean candidates describe individual function fields and fraction rings, not the tensor identification after pullback.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|isPullback_Spec|isPullbackSpec|pullback.*[Tt]ensor|[Tt]ensor.*pullback",
+   "results": "; 25 hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean. pullbackSpecIso at Pullbacks.lean:726 gives only affine pullback coordinates; use existing node lem-weil-pbc-fibre-product-affine-spectra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-plurinodal-field-alteration",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X 2.2--2.3: X Lemma 2.2 proof, printed pp.149--150: the application of Vidal 2004b Proposition 4.4.3, before the successive applications of 4.4.4; retain the generic Galois/radicial condition (iii), equivalently geometric N-orbits over a dense open. No smoothness of the total T_i is asserted. Vidal primary article is WANTED locally.; extraction: Theorem 5.9 proof, printed p.617, ordinary fibre product in the final paragraph; agent-formulated integrality and function-field verification from old steps 6--7. Reducedness: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, lines 109--131. Local de Jong PDF WANTED.",
+   "via": [
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-curve-pullback-function-field",
+  "worker": "stage1",
+  "summary": "Repaired returned delivery 21fb8615194 against the current unsplit DAG item. Re-read all 15 cited statements and checked all 30 retained citation quotes against them. Preserved the statement, dependencies, nine-step affine proof route and logged searches; made localization-factor swaps, nonempty generic charts, the two geometric-integrality clauses, and dominance of both projections explicit. No new nodes.",
+  "blueprint": "Realizes the ordinary-pullback integrality and function-field subargument extracted from lem-sfb-equivariant-plurinodal-field-alteration, within det-thm-sf-ctf-stability-direct-images (3), alteration reduction of the quasi-compact open direct-image case. The inherited blueprint ancestor is null and its via chain is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-field-fraction-ring-geometric-integrality",
+    "why": "Generic algebraic-geometric tool: geometric integrality of Spec of the function field, applied to Spec R_K and Spec L. The present unit does not provide this fraction-field transfer theorem."
+   },
+   {
+    "node": "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "why": "Generic tool converting the hypothesis on algebraically closed geometric fibres to reducedness after every field extension. The present unit has no algebraic-closure test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-field-fraction-ring-geometric-integrality",
+  "lem-trf-geometric-reducedness-algebraic-closure-test"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-40c54d440",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-40c54d440 (reviewer sub-agent of L); spot-checked: No new nodes. The item statement is unchanged, and the 9-step proof globalizes Stacks 0BCM (divisors.tex l.1735). Flat base change, the affine criterion and torsion-freeness give C ↪ C⊗_D M = (D∖0)^{-1}C, which sits inside the integral generic fibre W_M = V_K×_K M; reduced plus irreducible then gives W integral. R_K is nonzero (A↪R), and lem-sbc-field-fraction-ring-geometric-integrality is applied with X=Spec R_K, Y=Spec L, e=id. Nonemptiness then makes Spec L geometrically integral, so E=L⊗_K M is a domain, finite over L by the basis argument and hence a field via the finite-dimensional-domain node. Localizing C=R⊗_A D gives L⊗_A M=L⊗_K M=Frac C=k(W), and both projections are dominant. The field-valued-point reducedness follows from the algebraic-closure test (035X). Every cited statement was checked against its use, including each specialization of the localization node. Flatness of h is never used. Edge cases tested: point bases, A^1 generic fibre, inseparable M/K, and a separable splitting counterexample when the generic hypothesis is dropped. The delta from 21fb, whose return was a landing refusal, only adds clarifications. Batch-5: lem-trf-flat-module-torsionfree-domain is a Mathlib leaf for general commutative algebra. lem-trf-geometric-reducedness-algebraic-closure-test has a 54-node closure that reaches no trace-formula, Poincaré-duality or nt-assume node, and it is a general Stacks 035X criterion. Neither is given by the assumptions or forms part of their proofs, so both are accepted. Both tool_uses are accepted. Duplicate search on 0BCM and generic-integrality wording found only applications. Maintainer note: the sentence 'The reducedness assertion uses reduced geometric fibres' is slightly misleading, since that hypothesis serves only the field-point clause; it is not false and was left unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatCurvePullbackFunctionField",
+  "declaration": "AlgebraicGeometry.flatCurvePullback_functionField",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatCurvePullbackFunctionField.lean",
+  "statement": "theorem flatCurvePullback_functionField {k : Type u} [Field k] {B V P : Scheme.{u}} [B.Over (Spec (.of k))] [V.Over (Spec (.of k))] [P.Over (Spec (.of k))] [IsIntegral B] [IsIntegral V] [IsIntegral P] [LocallyOfFiniteType (B ↘ Spec (.of k))] [QuasiCompact (B ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [LocallyOfFiniteType (P ↘ Spec (.of k))] [QuasiCompact (P ↘ Spec (.of k))] (v : V ⟶ B) [v.IsOver (Spec (.of k))] [Flat v] [LocallyOfFiniteType v] [QuasiCompact v] [IsDominant v] (hred : ∀ b : B, IsReduced (pullback v (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField b) (AlgebraicClosure (B.residueField b)))) ≫ B.fromSpecResidueField b))) (hgeneric : GeometricallyIntegral (v.fiberToSpecResidueField (genericPoint B))) (h : P ⟶ B) [h.IsOver (Spec (.of k))] [IsDominant h] (hfinite : (h.functionFieldMap h.apply_genericPoint_of_isDominant).hom.Finite) : IsReduced (pullback v h : Scheme.{u}) ∧ GeometricallyIntegral ((pullback.snd v h).fiberToSpecResidueField (genericPoint P)) ∧ (∀ (F : Type u) [Field F] (b : Spec (.of F) ⟶ B), IsReduced (pullback v b)) ∧ ∃ (_ : IsIntegral (pullback v h : Scheme.{u})) (hp : (pullback.fst v h) (genericPoint (pullback v h : Scheme.{u})) = genericPoint V) (hq : (pullback.snd v h) (genericPoint (pullback v h : Scheme.{u})) = genericPoint P), ∃ e : pushout (v.functionFieldMap v.apply_genericPoint_of_isDominant) (h.functionFieldMap h.apply_genericPoint_of_isDominant) ≅ (pullback v h : Scheme.{u}).functionField, pushout.inl (v.functionFieldMap v.apply_genericPoint_of_isDominant) (h.functionFieldMap h.apply_genericPoint_of_isDominant) ≫ e.hom = (pullback.fst v h).functionFieldMap hp ∧ pushout.inr (v.functionFieldMap v.apply_genericPoint_of_isDominant) (h.functionFieldMap h.apply_genericPoint_of_isDominant) ≫ e.hom = (pullback.snd v h).functionFieldMap hq ∧ IsField (pushout (v.functionFieldMap v.apply_genericPoint_of_isDominant) (h.functionFieldMap h.apply_genericPoint_of_isDominant) : CommRingCat.{u}) ∧ (pushout.inl (v.functionFieldMap v.apply_genericPoint_of_isDominant) (h.functionFieldMap h.apply_genericPoint_of_isDominant)).hom.Finite",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The tensor product is the canonical pushout of the two generic-stalk maps in CommRingCat, identified with the ordinary algebra tensor product by CommRingCat.pushoutCoconeIsColimit. The isomorphism commutes with both projections. IsField and RingHom.Finite express the final field/finite-extension clause without choosing a new Field instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb4fdf3b2",
+  "group": "N8",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; lean.statement verbatim in file; first stage-2 delivery; name new. Hypotheses match without strengthening: integral finite-type k-schemes; v flat/finite type/dominant; hred as the recorded geometric-fibre form; generic fibre GeometricallyIntegral; h dominant with RingHom.Finite generic stalk map; no flatness of h. Conclusions all present: ordinary pullback reduced and integral; generic fibre over P geometrically integral; field-point pullbacks reduced; projections send generic points to generic points; pushout(K→L,K→M)=L⊗_K M iso to k(W) commuting with both projection functionFieldMaps (canonical); IsField and inl finite. Statement true (Stacks 0BCM plus tensor field argument). Edge cases: empty fibres, M=K, inseparable M/K, any characteristic, single-universe field tests (standard). One sorry, no definitions; docstrings carry source, blueprint tag and 9 steps; report sections present; proof imports exist. No file changed, no compile; worker reports clean server compile. Advisory: functionFieldMap is used directly; def-sfb-dominant-function-field-map (dominantFunctionFieldAlgebra, same map) is not in stmt_deps, which an S2 fix cannot add; accepted precedent in landed siblings."
+ }
+}

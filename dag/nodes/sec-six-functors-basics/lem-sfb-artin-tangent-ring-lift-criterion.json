@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-artin-tangent-ring-lift-criterion",
+ "kind": "statement",
+ "title": "Tangent surjectivity and underlying ring lifts characterize versality",
+ "statement": "Let $R$ be a commutative Noetherian ring and $k$ a field of finite type over $R$ [def-weil-pbc-noetherian-ring], [def-weil-field], [def-weil-finite-type-morphism]. Use the category $\\mathcal C_{R,k}$ of Artinian local $R$-algebras with specified residue field $k$ and local maps inducing the identity on $k$ [def-sfb-artin-deformation-test-category]. Let $\\mathcal F$ be a predeformation category on $\\mathcal C_{R,k}$ satisfying (RS), as defined in [def-sfb-artin-deformation-test-category]. Let $C$ be a complete Noetherian local $R$-algebra with residue field $k$ and let $\\xi$ be a formal object on $C$ [def-sfb-artin-deformation-test-category]. Then $\\xi$ is versal if the following two conditions hold. First the map $\\operatorname{Hom}_{R,\\mathrm{loc}}(C,k[\\epsilon])\\to T\\mathcal F$, $a\\mapsto[\\xi_{k[\\epsilon],a}]$, is surjective. Second, whenever $B\\twoheadrightarrow A$ is a small extension, $a:C\\to A$ is a local $R$-map inducing the identity on $k$, $y\\in\\mathcal F(B)$ and $y|_A\\cong\\xi_A$ is a specified isomorphism, there is a local $R$-map $b:C\\to B$ lifting $a$ and inducing the identity on $k$; no isomorphism $y\\cong\\xi_B$ is assumed in this second condition. The conclusion supplies that isomorphism extending the specified one and applies to every surjection, as in the definition of versality.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06IU (lemma-versal-criterion), sufficient direction; (RS) implies both (S1) and (S2) by Tag 06J7 (lemma-RS-implies-S1-S2)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-deformation-test-category"
+ ],
+ "proof": [
+  {
+   "text": "It suffices to solve a small-extension lifting problem and then compose solutions. Indeed, [lem-sfb-artin-local-test-algebra] factors any surjection $B\\to A$ into finitely many small extensions followed by an isomorphism. Transport along that final isomorphism first; for nonzero kernel the lemma also permits taking the final isomorphism to be the identity. Starting at the given map $C\\to A$ and the given isomorphism, restrict $y$ to each intermediate quotient, and solve these problems successively. At each stage use the previously obtained isomorphism as the prescribed isomorphism for the next stage. The composite isomorphism at the end restricts to the originally specified one. For an isomorphism (zero small-extension factors), transport the given map and object along its inverse. Fix now a small extension $f:B\\twoheadrightarrow A$, a map $a:C\\to A$, and $\\alpha:y|_A\\cong\\xi_a$. Hypothesis two supplies a ring lift $b:C\\to B$. Put $y'=\\xi_b$ and $I=\\ker f$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-local-test-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IU (lemma-versal-criterion), sufficient direction; use the assumed (RS) equivalences directly in place of (S1), (S2), and Tag 06IT."
+   }
+  },
+  {
+   "text": "Form $P=B\\times_A B$, an object of the test category by [lem-sfb-artin-local-test-algebra], and write $p_1,p_2:P\\to B$. The pair $(y',y,\\alpha^{-1})$ with its specified identification over $A$ is an object of the fibre-product groupoid in the definition of (RS). Essential surjectivity of that equivalence gives $z\\in\\mathcal F(P)$ and isomorphisms $p_{1,*}z\\cong y'$, $p_{2,*}z\\cong y$ whose identification over $A$ is exactly $\\alpha$. This retains the prescribed identification, rather than merely giving equality of unmarked isomorphism classes.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-local-test-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IU (lemma-versal-criterion), sufficient direction; use the assumed (RS) equivalences directly in place of (S1), (S2), and Tag 06IT."
+   }
+  },
+  {
+   "text": "Define $g:P\\to k[I]$ by $g(u,v)=(\\bar u,v-u)$. It is an $R$-algebra map: $v-u\\in I$, $I^2=0$, and multiplication by any $u\\in B$ on $I$ is multiplication by $\\bar u$, since $\\mathfrak m_B I=0$. The map $(p_1,g):P\\to B\\times_k k[I]$ is an isomorphism, with inverse $(u,(\\bar u,t))\\mapsto(u,u+t)$. Put $\\theta=g_*z$. Choose a $k$-linear isomorphism $I\\cong k$ (the kernel of a small extension is one-dimensional). It identifies $k[I]$ with $k[\\epsilon]$ as $R$-algebras. Tangent surjectivity therefore gives a local residue-preserving $i:C\\to k[I]$ and an isomorphism $\\tau:\\xi_i\\cong\\theta$. The unique arrows in $\\mathcal F(k)$ ensure that this isomorphism respects the residue identifications.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IU (lemma-versal-criterion), sufficient direction; use the assumed (RS) equivalences directly in place of (S1), (S2), and Tag 06IT."
+   }
+  },
+  {
+   "text": "By [lem-sfb-artin-local-test-algebra], the maximal ideals of $B$ and $k[I]$ are nilpotent. As $b$ and $i$ are local, choose $n\\geq1$ such that both kill $\\mathfrak m_C^n$. Write $D=C/\\mathfrak m_C^n$, $h:D\\to B$ and $j:D\\to k[I]$ for their factorizations, and $x_1=\\xi_n$. Apply [lem-weil-pbc-noetherian-local-quotient-artinian-local] with $K=\\mathfrak m_C^n$ to see that $D$ is Artinian local; its residue field is $k$ since $\\mathfrak m_C^n\\subseteq\\mathfrak m_C$. Its formal-object value is $x_1$ by definition. Put $Q=D\\times_A B$, using $fh:D\\to A$. It is a test algebra. The map $q:Q\\to P$, $(u,v)\\mapsto(h(u),v)$, has first projection $h$ after $Q\\to D$. Apply (RS) to $D\\to B\\leftarrow P$ (the map $p_1:P\\to B$ is surjective). Since $D\\times_B P=Q$, the pair $(x_1,z)$ with the isomorphism $h_*x_1\\cong y'\\cong p_{1,*}z$ gives $w\\in\\mathcal F(Q)$ with compatible identifications $w|_D\\cong x_1$ and $q_*w\\cong z$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-local-test-algebra",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IU (lemma-versal-criterion), sufficient direction; use the assumed (RS) equivalences directly in place of (S1), (S2), and Tag 06IT."
+   }
+  },
+  {
+   "text": "Let $g_1=gq:Q\\to k[I]$, so $g_1(u,v)=(\\bar u,v-h(u))$. The same multiplication calculation gives an isomorphism $(\\operatorname{pr}_D,g_1):Q\\cong D\\times_k k[I]$, with inverse $(u,(\\bar u,t))\\mapsto(u,h(u)+t)$. The pair $(\\mathrm{id}_D,j)$ thus defines a local residue-preserving $R$-map $s:D\\to Q$, a section of $\\operatorname{pr}_D$, with $g_1s=j$. Under the (RS) equivalence for $D\\times_k k[I]$, the object $s_*x_1$ has components $(x_1,j_*x_1)$ and $w$ has components $(x_1,\\theta)$. Their component isomorphisms $\\mathrm{id}_{x_1}$ and $\\tau:j_*x_1\\cong\\theta$ form a morphism of triples, since $\\mathcal F(k)$ has a unique arrow between any two objects. Full faithfulness of (RS) gives an isomorphism $s_*x_1\\cong w$ whose component over $D$ is precisely that identity. Push this isomorphism to the second $B$ factor of $Q$. It identifies $\\xi_{b'}$ with $y$, where $b'=\\operatorname{pr}_B\\circ s\\circ(C\\to D)$. Since $f\\operatorname{pr}_B=fh\\operatorname{pr}_D$ and $\\operatorname{pr}_Ds=\\mathrm{id}$, $fb'=a$. Compatibility of $w$ with $z$, and the identity component over $D$, say that the resulting isomorphism $y\\cong\\xi_{b'}$ restricts to exactly $\\alpha$. This solves the small-extension problem; step 1 yields versality for every surjection.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IU (lemma-versal-criterion), sufficient direction; use the assumed (RS) equivalences directly in place of (S1), (S2), and Tag 06IT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-local-test-algebra",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06IU, sufficient direction: its two successive gluing squares and difference map, with the stronger assumed (RS) used directly to keep the prescribed identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Formal deformation object versal if tangent map surjective and compatible object small extensions admit underlying ring lift",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                {C : Type u_4} →\\n                  [inst_5 : CommRing C] →\\n  \", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔\\n    ∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.Extension.formallySmooth_iff_split_injection\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (P : Algebra.Extension R A)\\n  [Algebra.FormallySmooth R P.Ring], Algebra.FormallySmooth R A ↔ ∃ l, l ∘ₗ P.cotangentComplex = LinearMap.id\", \"doc\": \"An algebra extension $ A $ over a commutative ring $ R $ is formally smooth if and only if there exists an $ R $-linear map $ l $ such that the composition of $ l $ with the cotangent complex map $ \\\\k\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring algebras and weak-limit versal morphisms do not correct prescribed deformation isomorphisms from tangent surjectivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schlessinger versality criterion tangent surjection and underlying ring lifting across small extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"RingHom.FormallySmooth.toAlgebra\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} (hf : FormallySmooth f) : @Algebra.FormallySmooth R S _ _ f.toAlgebra\", \"doc\": \"If $ f : R \\\\to S $ is a formally smooth ring homomorphism between commutative semirings, then the algebra structure on $ S $ over $ R $ induced by $ f $ satisfies the formal smoothness lifting propert\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring algebras and weak-limit versal morphisms do not correct prescribed deformation isomorphisms from tangent surjectivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddOreLocalization.universalAddHom\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] {T : Type u_2} [AddMonoid T] (f : R →+ T) (fS : ↥S →+ AddUnits T) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) : AddOreLocalization S R →+ T\", \"doc\": \"The universal lift from a morphism `R →+ T`, which maps elements of `S` to\\nadditive-units of `T`, to a morphism `AddOreLocalization R S →+ T`.\"}\n  {\"name\": \"OreLocalization.universalMulHom\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_2} [Monoid T] (f : R →* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) : OreLocalization S R →* T\", \"doc\": \"The universal lift from a morphism `R →* T`, which maps elements of `S` to units of `T`,\\nto a morphism `R[S⁻¹] →* T`.\"}\n  {\"name\": \"AddOreLocalization.universalAddHom_commutes\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] {T : Type u_2} [AddMonoid T] (f : R →+ T) (fS : ↥S →+ AddUnits T) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} : (AddOreLocalization.universalAddHom f fS hf) (AddOreLocalization.numeratorHom r) = f r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalMulHom_commutes\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_2} [Monoid T] (f : R →* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} : (OreLocalization.universalMulHom f fS hf) (OreLocalization.numeratorHom r) = f r\", \"doc\": \"\"}\n  {\"name\": \"AddOreLocalization.universalAddHom_unique\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] {T : Type u_2} [AddMonoid T] (f : R →+ T) (fS : ↥S →+ AddUnits T) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) (φ : AddOreLocalization S R →+ T) (huniv : ∀ (r : R), φ (AddOreLocalization.numeratorHom r) = f r) : φ = AddOreLocal\", \"doc\": \"The universal morphism `universalAddHom` is unique.\"}\n  {\"name\": \"OreLocalization.universalMulHom_unique\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_2} [Monoid T] (f : R →* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) (φ : OreLocalization S R →* T) (huniv : ∀ (r : R), φ (OreLocalization.numeratorHom r) = f r) : φ = OreLocalization.universalMulHom f fS hf\", \"doc\": \"The universal morphism `universalMulHom` is unique.\"}\n  {\"name\": \"AddOreLocalization.universalAddHom_apply\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] {T : Type u_2} [AddMonoid T] (f : R →+ T) (fS : ↥S →+ AddUnits T) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} {s : ↥S} : (AddOreLocalization.universalAddHom f fS hf) (r -ₒ s) = ↑(-fS s) + f r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalMulHom_apply\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_2} [Monoid T] (f : R →* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} {s : ↥S} : (OreLocalization.universalMulHom f fS hf) (r /ₒ s) = ↑(fS s)⁻¹ * f r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalHom\", \"module\": \"Mathlib.RingTheory.OreLocalization.Ring\", \"type\": \" {R : Type u_1} [Semiring R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_3} [Semiring T] (f : R →+* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) : OreLocalization S R →+* T\", \"doc\": \"The universal lift from a ring homomorphism `f : R →+* T`, which maps elements in `S` to\\nunits of `T`, to a ring homomorphism `R[S⁻¹] →+* T`. This extends the construction on\\nmonoids.\"}\n  {\"name\": \"OreLocalization.universalHom_commutes\", \"module\": \"Mathlib.RingTheory.OreLocalization.Ring\", \"type\": \" {R : Type u_1} [Semiring R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_3} [Semiring T] (f : R →+* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} : (OreLocalization.universalHom f fS hf) (OreLocalization.numeratorHom r) = f r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalHom_unique\", \"module\": \"Mathlib.RingTheory.OreLocalization.Ring\", \"type\": \" {R : Type u_1} [Semiring R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_3} [Semiring T] (f : R →+* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) (φ : OreLocalization S R →+* T) (huniv : ∀ (r : R), φ (OreLocalization.numeratorHom r) = f r) : φ = OreLocalization.universalHom f fS \", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalHom_apply\", \"module\": \"Mathlib.RingTheory.OreLocalization.Ring\", \"type\": \" {R : Type u_1} [Semiring R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_3} [Semiring T] (f : R →+* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} {s : ↥S} : (OreLocalization.universalHom f fS hf) (r /ₒ s) = ↑(fS s)⁻¹ * f r\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring algebras and weak-limit versal morphisms do not correct prescribed deformation isomorphisms from tangent surjectivity"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b[Vv]ersal\\b|Schlessinger",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"15\", \"text\": \"weak limit satisfies the same \\\"versal property\\\" as a limit, without the uniqueness\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"194\", \"text\": \"/-- The versal morphism from any other cone to a weak limit cone. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"36\", \"text\": \"apply them to infinitesimal smooth (or versal) extensions later.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring algebras and weak-limit versal morphisms do not correct prescribed deformation isomorphisms from tangent surjectivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal object of a deformation groupoid is versal if its tangent map is surjective and all small extension diagrams admit an underlying ring lift",
+   "results": "8 hits; Algebra.FormallySmooth, Algebra.FormallySmooth.liftOfSurjective, RingHom.FormallyEtale, Algebra.FormallyEtale.instFormallySmooth, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.of_comp_surjective, Algebra.formallySmooth_iff, Algebra.Etale.formallyEtale; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring formal smoothness, cotangent presentations and weak limits do not state deformation-groupoid versality with a prescribed isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b[Vv]ersal\\b|Schlessinger|predeformation",
+   "results": "3 hits; Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean, Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring formal smoothness, cotangent presentations and weak limits do not state deformation-groupoid versality with a prescribed isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schlessinger versality criterion surjective tangent map and underlying algebra lifts",
+   "results": "8 hits; Algebra.FormallySmooth.iff_comp_surjective, Algebra.Presentation.differentials.surjective_hom₁, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.iff_injective_lTensor_residueField, KaehlerDifferential.map_surjective_of_surjective, Algebra.Generators.CotangentSpace.map_ofComp_surjective, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring formal smoothness, cotangent presentations and weak limits do not state deformation-groupoid versality with a prescribed isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\"",
+   "results": "12 hits; AddOreLocalization.universalAddHom, OreLocalization.universalMulHom, AddOreLocalization.universalAddHom_commutes, OreLocalization.universalMulHom_commutes, AddOreLocalization.universalAddHom_unique, OreLocalization.universalMulHom_unique, AddOreLocalization.universalAddHom_apply, OreLocalization.universalMulHom_apply; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring formal smoothness, cotangent presentations and weak limits do not state deformation-groupoid versality with a prescribed isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity on dual number deformation classes and existence of algebra lifts imply formal versality for a Rim Schlessinger groupoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                {C : Type u_4} →\\n                  [inst_5 : CommRing C] →\\n  \", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  (∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp) →\\n    Algebra.FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_split_surjection\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {P : Type u_2}\\n  [inst_3 : CommRing P] [inst_4 : Algebra R P] [Algebra.FormallySmooth R P] (f : P →ₐ[R] A),\\n  Function.Surjective ⇑f → (Algebra.FormallySmooth R A ↔ ∃ g, f.kerSquareLift.comp g = AlgHom.id R \", \"doc\": \"Let $ R $ be a commutative ring, and let $ f : P \\to A $ be a surjective $ R $-algebra homomorphism. The $ R $-algebra $ A $ is formally smooth if and only if there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {C : Type u_4} [inst_5 : CommRing C] [inst_6 : Algebra R C]\\n  [inst_7 : Algebra.FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Functio\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔\\n    ∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.FormallySmooth.comp_liftOfSurjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {C : Type u_4} [inst_5 : CommRing C] [inst_6 : Algebra R C]\\n  [inst_7 : Algebra.FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Functio\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $ that is formally smooth, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, the composition of t\"}\n  {\"name\": \"Algebra.FormallySmooth.comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"Given a formally smooth $ R $-algebra $ A $, a ring $ B $ with an ideal $ I $ satisfying $ I^2 = 0 $, the composition of the quotient map $ B \\to B/I $ with the algebra homomorphism $ A \\to B $ is surje\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no deformation-groupoid versality criterion; ring-algebra formal smoothness does not state the object and prescribed-isomorphism lifting assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|predeformation|deformation category|tangent.*versal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no deformation-groupoid versality criterion; ring-algebra formal smoothness does not state the object and prescribed-isomorphism lifting assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-rs-versal-formal-object",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06IU (lemma-versal-criterion), sufficient direction; (RS) implies both (S1) and (S2) by Tag 06J7 (lemma-RS-implies-S1-S2).",
+   "via": [
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-tangent-ring-lift-criterion",
+  "worker": "stage1",
+  "summary": "Checked Stacks 06IU and the (RS) definition, reused the existing Artinian-test algebra lemma, and wrote the two gluing squares and the difference-coordinate section explicitly. No new node or Mathlib leaf is needed: all non-elementary inputs are precisely the assumed (RS) equivalences and the cited test-algebra and Artinian quotient lemmas. Preserved the statement and all its hypotheses.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli prerequisite through the formal versal object in Tag 07XY; current latest blueprint direct-images proof (3) is the compactification assembly. This local split is the sufficient direction of Stacks 06IU and does not replace the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-667ae091a",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-667ae091a (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full. The delivery is one commit with the item and its report, and adds no new nodes. The statement and stmt_deps are unchanged. There is no repair note, so the re-split rule does not apply. Compared with the earlier head 0d5a, only step 1 changed, to follow the refreshed lem-sfb-artin-local-test-algebra: the factorization now ends in an isomorphism. Step 1 transports along that isomorphism first and treats n=0 separately, which is correct. Source: Stacks formal-defos.tex Tag 06IU l.3717-3826, the sufficient direction read in full, plus 06IT l.3045. The item's (RS) is stronger than the source's (S1)+(S2), so the statement is a specialization and is not weakened. The 06IT typo the worker reports is real: f_2=f_1∘h should read f_1=f_2∘h. The delivery does not depend on it. Step 2: (RS) on B→A←B with the triple (ξ_b, y, α^{-1}); the directions check. Step 3: I checked by hand that g(u,v)=(ū,v−u) is multiplicative (vv'−uu'=ū(v'−u')+ū'(v−u), using m_B I=0) and that (p_1,g) has the stated inverse; the step is elementary. Step 4: n exists because both rings are nilpotent and b, i are local. D=C/m^n is Artinian by the Mathlib leaf with K=m^n. D×_B P≅Q, and (RS) applies with p_1 surjective. Step 5: (pr_D,g_1) has the stated inverse. s=(id,j) is a ring map, and (id,τ) is a morphism of triples because F(k) has unique arrows. Full faithfulness gives σ with identity D-component. pr_B=p_2∘q gives ξ_{b'}≅y with fb'=a, and the restriction to A is α. Edge cases checked: the identity surjection, k[ε]→k, and TF=0. Advisory: the domain Hom_{R,loc}(C,k[ε]) must be read as residue-preserving maps, since ξ_a is only defined for test-category maps; this agrees with the source. Duplicate search over the statements and sources of all nodes for 06IU, 06IT and versal finds none. The only citer, rs-versal-formal-object step 7, uses exactly this direction. proof_deps equals the union of uses. There are no tool_uses and no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinTangentRingLiftCriterion",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.isVersal_of_tangent_surjective_of_ring_lifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinTangentRingLiftCriterion.lean",
+  "statement": "theorem isVersal_of_tangent_surjective_of_ring_lifts {R k : Type u} [CommRing R] [IsNoetherianRing R] [Field k] [Algebra R k] [Algebra.FiniteType R k] (F : CofibredGroupoids.{u, v, w} R k) (hpre : IsPredeformation F) (hRS : IsRimSchlessinger F) (C : CompleteLocalAlgebra R k) (ξ : FormalObject F C) (htangent : Function.Surjective (fun a : LocalMap C (squareZeroTest (R := R) (k := k) k) ↦ (Quotient.mk _ (evaluate ξ a) : tangentSet F))) (hring : ∀ (A B : TestCategory R k) (f : B ⟶ A), IsSmallExtension f → ∀ (a : LocalMap C A) (y : fibre F B) (_α : (push F f).obj y ≅ evaluate ξ a), ∃ b : LocalMap C B, (map f).comp b.hom = a.hom) : IsVersal ξ",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b76b56b1d",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Item lem-sfb-artin-tangent-ring-lift-criterion @b76b: one new module stating isVersal_of_tangent_surjective_of_ring_lifts with a sorry proof. The node differs from side-live only in its lean record, and lean.statement is verbatim the file text. Every clause matches the node and Stacks 06IU (sufficient direction): Noetherian R, field k of finite type, CofibredGroupoids with separate IsPredeformation and IsRimSchlessinger hypotheses, CompleteLocalAlgebra C, FormalObject ξ. Tangent surjectivity runs from LocalMap C (squareZeroTest k) into tangentSet. The ring-lift condition covers only small extensions, takes the specified α : f_*y ≅ ξ_a, and gives only ∃ b with a lift. The conclusion is the dep's IsVersal (all surjections, β extending α). (RS) is stronger than (S1)+(S2) per 06J7, so this is a specialization. Edge cases: isomorphisms, characteristic 2, C a field, universes. No duplicate in lean/Sheaf or WeilConjectures, and no hollow definitions. Docstrings carry 06IU/06J7, the blueprint id and all five proof steps. The KrullsHeightTheorem import is the recorded Mathlib file of a proof_dep. Report sections present. No compile was repeated (worker reports clean); no fixes."
+ }
+}

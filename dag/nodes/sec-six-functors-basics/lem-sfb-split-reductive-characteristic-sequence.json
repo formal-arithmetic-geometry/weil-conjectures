@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-split-reductive-characteristic-sequence",
+ "kind": "statement",
+ "title": "Natural characteristic Picard sequence for a split reductive group",
+ "statement": "Let $F$ be a field [def-weil-field] and $H$ a reductive $F$-group [def-sc-group-scheme]. A reductive group means a smooth affine group of finite type, geometrically connected, whose extension to an algebraic closure has no nontrivial smooth connected normal unipotent subgroup [def-sfb-reductive-torus-centralizer-terminology, def-sfb-solvable-group-structure]. A split maximal torus means a maximal torus isomorphic over the ground field to $\\mathbf G_m^r$ for an integer $r\\geq0$ [def-sfb-tori-multiplicative-type]. Assume $H$ has a split maximal torus $T$. A Borel subgroup is a smooth geometrically connected closed subgroup whose extension to an algebraic closure is maximal among smooth connected solvable closed subgroups, where solvable means having a finite normal series with commutative successive quotients [def-sfb-solvable-group-structure]. There exists a Borel subgroup $B\\supseteq T$ such that $B=U\\rtimes T$ for a split smooth connected unipotent group $U$; split here means admitting a finite series of smooth connected normal successive subgroups with quotients $\\mathbf G_a$ [def-sc-gm-ga]. For every such pair, write $r_B:B\\to T$ for the projection. The fppf sheaf quotient $Q=H/B$ is represented by a smooth projective geometrically integral $F$-scheme, and $f:H\\to Q$ is the quotient map. The fppf quotient means sheafification of $A\\mapsto H(A)/B(A)$ for faithfully flat finitely presented covers. Put $X_F^*(T)=\\operatorname{Hom}_{F\\text{-grp}}(T,\\mathbf G_m)$, with addition given by multiplication of characters. For every scheme $Y$, $\\operatorname{Pic}(Y)$ is the abelian group of isomorphism classes of invertible $\\mathcal O_Y$-modules, with tensor product as addition; invertible means locally free of rank one [def-sc-invertible-module]. Pullback means tensor inverse image [def-pc-module-pullback]. Define $c_F:X_F^*(T)\\to\\operatorname{Pic}(Q)$ by the associated line bundle $H\\times^B\\mathbf A^1$, with right action $(h,z)b=(hb,\\chi(r_B(b))^{-1}z)$. This is a homomorphism and $$X_F^*(T)\\xrightarrow{c_F}\\operatorname{Pic}(Q)\\xrightarrow{f^*}\\operatorname{Pic}(H)\\longrightarrow0$$ is exact: $f^*$ is surjective and $\\ker f^*=\\operatorname{im}c_F$. For every field extension $L/F$ [def-pc-field-extension], the scalar extended pair $T_L\\subseteq B_L\\subseteq H_L$ has the same properties, $Q_L=H_L/B_L$, and the scalar extension maps on characters and the pullbacks on Picard groups give a commutative diagram between these two exact sequences, in particular $p_Q^*c_F(\\chi)=c_L(\\chi_L)$ and $p_H^*f^*M=f_L^*p_Q^*M$. Here $p_Q:Q_L\\to Q$ and $p_H:H_L\\to H$ are the projections [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-solvable-group-structure",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sc-gm-ga",
+  "def-sfb-split-unipotent-series",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-associated-character-line-bundle",
+  "def-sfb-multiplicative-character-data",
+  "def-sfb-trivial-torus-coherent-data",
+  "def-sc-picard-group"
+ ],
+ "proof": [
+  {
+   "text": "Fix a splitting $T\\simeq\\mathbf G_m^r$ and an algebraic closure $\\bar F$. By [lem-sfb-maximal-torus-field-extension], $T_{\\bar F}$ is maximal in $H_{\\bar F}$. The adjoint action has finitely many weights: write its coaction as $c(v)=\\sum_a v_a\\otimes x^a$; comparing coefficients in coassociativity gives $c(v_a)=v_a\\otimes x^a$, and the counit gives $v=\\sum_a v_a$. A finite basis yields finitely many exponents and the direct sum of these weight spaces. Thus the set $\\Phi$ of nontrivial adjoint weights is the root set used in [lem-sfb-regular-cocharacter-borel-description]. All its characters are Laurent monomials $x_1^{a_1}\\cdots x_r^{a_r}$ with integral exponents, hence are already defined on $T$ over $F$. Indeed a character is a group-like Laurent polynomial: coefficient comparison in $c(xy)=c(x)c(y)$ leaves exactly one coefficient, equal to $1$. Choose integers $(b_i)$ with $\\sum_i a_i b_i\\ne0$ for every $\\alpha=(a_i)\\in\\Phi$: for $r>0$ use $(1,N,\\ldots,N^{r-1})$ and avoid the finitely many integer roots of these nonzero integer polynomials. For $r=0$, $\\Phi$ is empty and take $\\lambda=0$. This defines $\\lambda(t)=(t^{b_i})$ over $F$. The cited regular-cocharacter theorem says that $(P_\\lambda)_{\\bar F}$ is a Borel containing $T_{\\bar F}$.",
+   "uses": [
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 21.30, printed p.434; Proposition 21.29, pp.433-434; integral avoidance made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reductive-cocharacter-parabolic-geometry]. It gives $Z_\\lambda=T$ and $P_\\lambda=U_\\lambda\\rtimes T$ with $U_\\lambda$ split smooth connected unipotent. Step 1 identifies $(P_\\lambda)_{\\bar F}$ as a Borel, so $B=P_\\lambda$ is a Borel over $F$ with the source's geometric definition. This proves the required existence with its specified torus. In particular, no assumption that $F$ is perfect or algebraically closed has been introduced.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33 and Corollary 21.34, pp.265-266,435; geometric Borel definition in 17.66, p.375."
+   }
+  },
+  {
+   "text": "Fix any pair $T\\subseteq B$ in the statement. By the geometric definition of Borel, $B_{\\bar F}$ is a Borel of $H_{\\bar F}$ containing $T_{\\bar F}$. By [lem-sfb-regular-cocharacter-borel-description], it is $P_\\mu$ for a regular integral cocharacter $\\mu$ of $T_{\\bar F}$. The Laurent-coordinate description in step 1 defines the same $\\mu$ over $F$. The field-extension clause in [lem-sfb-reductive-cocharacter-parabolic-geometry] and injectivity on coordinate rings identify $B=P_\\mu$ over $F$: their defining ideals agree after faithfully flat tensor extension. By [lem-sfb-unipotent-to-multiplicative-trivial], $r_B$ kills $U_\\mu$ and is the identity on $T$, so on $B=U_\\mu\\rtimes T$ it equals $r_\\mu$ and its kernel is $U=U_\\mu$. That node now gives $Q=H/B$ smooth projective geometrically integral, $H$ geometrically integral, and $f$ a smooth surjective finite-presentation torsor with geometrically integral fibres. Since $B=U\\rtimes T$ is split solvable (append to the given additive series the inverse images of the coordinate subtori in $T$), [lem-sfb-split-solvable-torsors-and-variety] gives Zariski local sections of $f$ and $\\operatorname{Pic}(B_K)=0$ for every field $K/F$. Finally [lem-weil-pbc-smooth-scheme-over-field-regular] makes $H,Q$ regular; they are separated and of finite type, as required for generic-line descent below.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-solvable-torsors-and-variety",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.32 and Corollary 21.34, pp.434-435; Theorem 18.15 proof, final paragraph p.396; Proposition 16.55(c) and Corollary 16.56, p.344."
+   }
+  },
+  {
+   "text": "The torsor identity identifies its double overlap with $H\\times_F B$. On the trivial line put the descent action $(h,z)b=(hb,\\chi(r_B(b))^{-1}z)$. The character identity gives the cocycle on triple overlaps. The map $f$ is an fpqc cover (flat, surjective and quasi-compact), so [lem-pc-fpqc-descent] produces the invertible module $L_\\chi$ on $Q$ with this descent datum. Multiplication of line coordinates identifies $L_\\chi\\otimes L_\\psi$ with $L_{\\chi+\\psi}$: on overlaps the transition multipliers multiply. The zero character has multiplier $1$ and descends to $\\mathcal O_Q$. Thus $c_F$ is a homomorphism. Its pullback has the global frame $h\\mapsto[h,1]$, so $\\operatorname{im}c_F\\subseteq\\ker f^*$.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 18.c, printed p.390; Stacks descent.tex Tag 023T, proposition-fpqc-descent-quasi-coherent."
+   }
+  },
+  {
+   "text": "We need a product-unit identity over $F$, not just over an algebraically closed field. If $a:H\\times_F B\\to\\mathbf G_m$ is a unit, base change it to $\\bar F$. Both factors there are integral separated finite-type schemes by step 3. Apply the displayed normalized identity of [lem-sfb-rosenlicht-product-unit-factorization] at the rational points $(1,1)$. It gives $a(h,b)=a(h,1)a(1,b)a(1,1)^{-1}$ after extension to $\\bar F$. All four functions are defined over $F$. Their equality already holds in $F[H]\\otimes_FF[B]$: its map to its tensor product with $\\bar F$ is injective, as is seen by extending any nonzero vector to an $F$-basis. This proves the same identity over $F$ on every test algebra.",
+   "uses": [
+    "lem-sfb-rosenlicht-product-unit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 18.32, pp.395-396, using Remark 12.50 and Proposition 12.48, pp.246-247; rational-point scalar descent supplied explicitly."
+   }
+  },
+  {
+   "text": "Every character $\\eta:B\\to\\mathbf G_m$ is trivial on $U$ by [lem-sfb-unipotent-to-multiplicative-trivial]. In the product $B=U\\rtimes T$, write $b=ut$; then $\\eta(b)=\\eta(u)\\eta(t)=\\eta(t)$. Hence restriction and composition with $r_B$ give inverse isomorphisms $X_F^*(B)\\simeq X_F^*(T)$. In particular the same associated line construction for characters of $B$ is exactly $c_F$, with the sign convention in the question.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 18.c, p.390; Corollary 14.18(a), p.284."
+   }
+  },
+  {
+   "text": "Let $M$ be an invertible module on $Q$ for which $f^*M$ is trivial, and choose its global frame $s$. Over $H\\times_F B$, the frames $s(hb)$ and $s(h)$ are in the same pulled-back line, so $s(hb)=s(h)a(h,b)$ for a regular unit $a$, with $a(h,1)=1$. Step 5 gives $a(h,b)=a(1,b)$. Associativity applied twice to the frame gives $a(1,b_1b_2)=a(1,b_1)a(1,b_2)$ as an identity of regular functions, so $\\eta(b)=a(1,b)$ is a character. Step 6 writes it as $\\chi\\circ r_B$. Now $(h,z)\\mapsto s(h)z$ is invariant for $(h,z)b=(hb,\\eta(b)^{-1}z)$, since $s(hb)\\eta(b)^{-1}z=s(h)z$. Full faithfulness of [lem-pc-fpqc-descent] descends this map and its inverse to $L_\\chi\\simeq M$. This proves $\\ker f^*\\subseteq\\operatorname{im}c_F$, and step 4 gives the other inclusion.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 18.32, exactness at Pic(X), printed pp.395-396."
+   }
+  },
+  {
+   "text": "For an invertible module $N$ on $H$, let $K=F(Q)$ and $\\xi=\\operatorname{Spec}K$. A Zariski section of $f$ on a nonempty open of the integral scheme $Q$ identifies $H_\\xi$ with $B_K$. Thus $N|_{H_\\xi}$ is trivial by [lem-sfb-split-solvable-torsors-and-variety]. Apply [lem-sfb-smooth-generic-trivial-line-descent] to $f:H\\to Q$. Step 3 verifies both schemes regular integral separated finite type, and the morphism smooth surjective with nonempty geometrically integral fibres. The conclusion supplies an invertible module $M$ on $Q$ with $f^*M\\simeq N$. Therefore $f^*$ is surjective. Together with steps 4 and 7 this is exactly the asserted right-exact characteristic sequence.",
+   "uses": [
+    "lem-sfb-split-solvable-torsors-and-variety",
+    "lem-sfb-smooth-generic-trivial-line-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 18.32, omitted exactness at Pic(Y), and Corollary 16.56, pp.396,344; generic vertical-divisor form supplied by the cited node (Stacks Tags 00ON, 0AGA, 0AG0)."
+   }
+  },
+  {
+   "text": "Let $L/F$ be any field extension. With $\\mu$ as in step 3, [lem-sfb-reductive-cocharacter-parabolic-geometry] identifies $B_L=(P_\\mu)_L=P_{\\mu_L}$ and $Q_L=H_L/B_L$, with the pulled-back quotient projection. Define $r_{B_L}=(r_B)_L$; tensoring the given semidirect-product isomorphism makes it the projection $B_L=U_L\\rtimes T_L\\to T_L$. The torus $T_L$ is split by scalar extending $T\\simeq\\mathbf G_m^r$. Since $U=U_\\mu$ by step 3, the cocharacter-parabolic node identifies $U_L=U_{\\mu_L}$ and states that this group is split unipotent over $L$. By [lem-sfb-maximal-torus-field-extension], $T_L$ is maximal. Regularity of $\\mu$ is unchanged because its integer pairings are unchanged, so [lem-sfb-regular-cocharacter-borel-description] over an algebraic closure of $L$ makes $B_L$ a Borel. The cocharacter-parabolic node gives the quotient's geometric properties over $L$. Thus steps 4-8 apply over $L$, giving the second exact sequence.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.82, p.379; cocharacter functors of Theorem 13.33 and Corollary 21.34, pp.265-266,435; scalar extension of the quotient."
+   }
+  },
+  {
+   "text": "Finally take a Zariski cover $\\{V_i\\}$ of $Q$ with sections $\\sigma_i:V_i\\to H$. Write $\\sigma_j=\\sigma_i b_{ij}$ on overlaps; the group element $b_{ij}$ exists uniquely by the torsor identity. The relation $[\\sigma_j,z]=[\\sigma_i,\\chi(r_B(b_{ij}))z]$ shows that these are the transition factors of $L_\\chi$. After tensoring with $L$, the very same formulas with $(b_{ij})_L$ are the transition factors defining $L_{\\chi_L}$ over $Q_L$, because $r_{B_L}=(r_B)_L$. Thus [lem-pc-fpqc-descent], applied to this Zariski cover, identifies $p_Q^*L_\\chi\\simeq L_{\\chi_L}$. This proves $p_Q^*c_F(\\chi)=c_L(\\chi_L)$ with the specified sign. The quotient square satisfies $f\\circ p_H=p_Q\\circ f_L$. On local modules, tensor associativity sends $(m\\otimes a)\\otimes b$ to $m\\otimes ab$ and identifies pullback along a composite with successive tensor pullbacks. It therefore identifies $p_H^*f^*M$ and $f_L^*p_Q^*M$. Pullback also respects tensor product by the same map, so the vertical Picard maps are homomorphisms. Both squares of the claimed diagram now commute.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 18.c, p.390, associated-bundle definition; scalar-extension compatibility written out from its transition functions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "lem-sfb-split-solvable-torsors-and-variety",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-rosenlicht-product-unit-factorization",
+  "lem-sfb-smooth-generic-trivial-line-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 18.15, p.390, proof in section 18.f, pp.395-396; supporting Theorems 13.33,17.82,25.1 and Corollaries 21.30,21.34. Scalar-extension cocycles and ground-field descent are explicit expansions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "characteristic.*(Picard|Borel)|Picard.*(Borel|reductive)|flag.*Pic",
+   "results": "{\"t\": \"2026-10-24T03:10:13Z\", \"tool\": \"grep\", \"query\": \"characteristic.*(Picard|Borel)|Picard.*(Borel|reductive)|flag.*Pic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Submodule.mulExact_unitsToPic_mapAlgebra is exactness for units and invertible submodules of a ring extension, not the Borel torsor characteristic sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Picard group of a reductive group is the cokernel of the characteristic homomorphism to the flag variety Picard group",
+   "results": "{\"t\": \"2026-10-24T03:10:13Z\", \"tool\": \"leansearch\", \"query\": \"The Picard group of a reductive group is the cokernel of the characteristic homomorphism to the flag variety Picard group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic\", \"CommRing.Pic.mk\", \"Submodule.ker_unitsToPic\", \"CommRing.Pic.functor\", \"CommRing.relPic\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.mk_eq_self\"], \"digest\": \"af2e4ef6c5570394\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Submodule.mulExact_unitsToPic_mapAlgebra is exactness for units and invertible submodules of a ring extension, not the Borel torsor characteristic sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Exact\"",
+   "results": "{\"t\": \"2026-10-24T03:10:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"Exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Submodule.mulExact_unitsToPic_mapAlgebra\", \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"Path.Homotopic.Quotient.exact\"], \"digest\": \"1a4bb759bd979168\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Submodule.mulExact_unitsToPic_mapAlgebra is exactness for units and invertible submodules of a ring extension, not the Borel torsor characteristic sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact sequence from characters of a split maximal torus to Picard of flag variety to Picard of split reductive group",
+   "results": "{\"t\": \"2026-10-24T03:10:16Z\", \"tool\": \"leanfinder\", \"query\": \"Exact sequence from characters of a split maximal torus to Picard of flag variety to Picard of split reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.mulExact_unitsToPic_mapAlgebra\", \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"SnakeLemma.δ_aux\", \"groupCohomology.shortComplexH0_exact\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"SnakeLemma.exact_δ'_right\"], \"digest\": \"3f647525229f21e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Submodule.mulExact_unitsToPic_mapAlgebra is exactness for units and invertible submodules of a ring extension, not the Borel torsor characteristic sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "characteristic.*(Picard|Borel)|Picard.*(Borel|reductive)|flag.*Pic",
+   "results": "{\"t\": \"2026-10-24T03:37:59Z\", \"tool\": \"grep\", \"query\": \"characteristic.*(Picard|Borel)|Picard.*(Borel|reductive)|flag.*Pic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ring-extension units/invertible-submodule sequence in Mathlib/RingTheory/PicardGroup.lean:859 does not identify torus characters or the Picard groups of a Borel quotient and its group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Picard group of a split reductive group is the cokernel of the characteristic map from maximal torus characters",
+   "results": "{\"t\": \"2026-10-24T03:38:00Z\", \"tool\": \"leansearch\", \"query\": \"The Picard group of a split reductive group is the cokernel of the characteristic map from maximal torus characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic\", \"CommRing.Pic.mk\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"instCommGroupPic\", \"CommRing.Pic.functor\", \"CommRing.Pic.subsingleton_iff\", \"instSmallUnitsSkeletonModuleCat\", \"CommRing.Pic.instCoeSortType\"], \"digest\": \"f4939191666bdc7d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ring-extension units/invertible-submodule sequence in Mathlib/RingTheory/PicardGroup.lean:859 does not identify torus characters or the Picard groups of a Borel quotient and its group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Exact\"",
+   "results": "{\"t\": \"2026-10-24T03:38:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"Exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Submodule.mulExact_unitsToPic_mapAlgebra\", \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"Path.Homotopic.Quotient.exact\"], \"digest\": \"1a4bb759bd979168\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ring-extension units/invertible-submodule sequence in Mathlib/RingTheory/PicardGroup.lean:859 does not identify torus characters or the Picard groups of a Borel quotient and its group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact sequence from torus characters to Picard groups of a split reductive group and its flag variety",
+   "results": "{\"t\": \"2026-10-24T03:38:02Z\", \"tool\": \"leanfinder\", \"query\": \"Exact sequence from torus characters to Picard groups of a split reductive group and its flag variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.exact_map_δ\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"groupCohomology.shortComplexH0_exact\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"groupHomology.shortComplexH0_exact\"], \"digest\": \"b55f9767314d9f11\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ring-extension units/invertible-submodule sequence in Mathlib/RingTheory/PicardGroup.lean:859 does not identify torus characters or the Picard groups of a Borel quotient and its group."
+  },
+  {
+   "tool": "grep",
+   "query": "characteristic.*[Ll]ine|[Pp]icard.*[Tt]orsor|[Ff]lag.*[Ll]ine",
+   "results": "{\"t\": \"2026-10-24T03:40:06Z\", \"tool\": \"grep\", \"query\": \"characteristic.*[Ll]ine|[Pp]icard.*[Tt]orsor|[Ff]lag.*[Ll]ine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ring-extension units/invertible-submodule sequence in Mathlib/RingTheory/PicardGroup.lean:859 does not identify torus characters or the Picard groups of a Borel quotient and its group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles on a Borel flag variety pull back surjectively to line bundles on a connected split algebraic group",
+   "results": "{\"t\": \"2026-10-24T03:40:09Z\", \"tool\": \"leanfinder\", \"query\": \"Line bundles on a Borel flag variety pull back surjectively to line bundles on a connected split algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"surjective_cosetToCuspOrbit\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"CategoryTheory.PreGaloisCategory.AutGalois.π_surjective\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"CategoryTheory.PreGaloisCategory.evaluation_aut_surjective_of_isGalois\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\"], \"digest\": \"b7e603d8e567437e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ring-extension units/invertible-submodule sequence in Mathlib/RingTheory/PicardGroup.lean:859 does not identify torus characters or the Picard groups of a Borel quotient and its group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-group-picard-field-invariance",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118.",
+   "via": [
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-reductive-characteristic-sequence",
+  "worker": "stage1",
+  "summary": "Corrected arbitrary-field Borel terminology to Milne 17.66 (geometric maximality); the previous definition would include anisotropic real maximal tori. Proved the sequence over the stated arbitrary field using two new structural prerequisites on cocharacter parabolics and maximal-torus scalar extension. Reused the split-solvable, Rosenlicht, generic-line and fpqc descent nodes; wrote sign-sensitive cocycles and scalar extension explicitly. No target or unit statement is changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Realizes the characteristic-sequence prerequisite of the Picard field-invariance argument; latest direct-image proof (3) is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Effective, fully faithful descent of invertible modules is a generic scheme tool for the Borel torsor; no local group-theory node gives it."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Regularity of the smooth quotient and group is needed to apply the generic-line descent theorem; this is a generic smooth-scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-3ba624deb",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-3ba624deb (reviewer sub-agent of L); spot-checked: I read the 10-step split in full, both new unsplit statement-only nodes, every cited statement, and Milne 13.33, 17.60, 17.82, 18.14-18.15 (p.390) and 25.1 in the PDF. Steps 1-3: maximal-torus-field-extension, then a regular integral cocharacter chosen by avoiding finitely many integer hyperplanes, then regular-cocharacter-borel-description over F-bar. This gives B=P_lambda=U rtimes T with U split. For any Borel containing T, the cocharacter mu is defined over F because T is split, equality descends faithfully flat, and r_B=r_mu by unipotent-to-multiplicative-trivial. Steps 4 and 7: descent cocycle and sign checked, s(hb)eta(b)^-1 z = s(h)z, matching Milne's action. Step 5: Rosenlicht over F-bar descended by tensor injectivity. Step 8: the hypotheses of split-solvable Pic(B_K)=0 and of generic-line descent are verified (regular, integral, separated, finite type; fibres geometrically integral). Steps 9-10: base change and transition factors chi(r_B(b_ij)). New nodes are true and not duplicates: maximal-torus-field-extension is Milne 17.82, valid for any group variety; cocharacter-parabolic-geometry is 13.33 + 17.60 + 25.1 + the regular centralizer, and it is the only general-field cocharacter node in the DAG. The Borel definition change (now geometric, per Milne 17.66) is equivalent to the old one for B containing a split T, so it is not a weakening. The report's SO(2) counterexample does not apply because SO(2) does not contain T. The only citer, picard-field-invariance, works over an algebraically closed k and is unaffected. Batch-5 flags: lem-trf-smooth-fpqc-base-descent, fppf-covering-is-fpqc, flat-tensor-preserves-injection and flat-module-torsionfree-domain are generic Mathlib/Stacks algebra leaves, not parts of the trace formula or Poincare duality, so acceptable. No SGA source. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitReductiveCharacteristicSequence",
+  "declaration": "AlgebraicGeometry.SplitReductiveCharacteristic.split_reductive_characteristic_sequence",
+  "declarations": [
+   "AlgebraicGeometry.SplitReductiveCharacteristic.Pair",
+   "AlgebraicGeometry.SplitReductiveCharacteristic.QuotientGeometry",
+   "AlgebraicGeometry.SplitReductiveCharacteristic.Sequence",
+   "AlgebraicGeometry.SplitReductiveCharacteristic.split_reductive_characteristic_sequence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitReductiveCharacteristicSequence.lean",
+  "statement": "theorem split_reductive_characteristic_sequence {F : Type u} [Field F] (H T : Grp (Over (Spec (.of F)))) (iT : T ⟶ H) (hH : ReductiveTorusCentralizer.IsReductive H) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ n : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F n)) : (∃ (B : Grp (Over (Spec (.of F)))) (iB : B ⟶ H) (j : T ⟶ B) (r : B ⟶ T), Pair iT iB j r) ∧ ∀ (B : Grp (Over (Spec (.of F)))) (iB : B ⟶ H) (j : T ⟶ B) (r : B ⟶ T), Pair iT iB j r → ∃ (Q : Over (Spec (.of F))) (f : H.X ⟶ Q), QuotientGeometry iB Q f ∧ ∃ c : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) →+ Additive Q.left.Pic, Sequence iB r Q f c ∧ ∀ (L : Type u) [Field L] [Algebra F L], ReductiveTorusCentralizer.IsReductive ((MultiplicativeType.baseChange (K := L)).obj H) ∧ Pair ((MultiplicativeType.baseChange (K := L)).map iT) ((MultiplicativeType.baseChange (K := L)).map iB) ((MultiplicativeType.baseChange (K := L)).map j) ((MultiplicativeType.baseChange (K := L)).map r) ∧ ReductiveTorusCentralizer.IsMaximalTorus ((MultiplicativeType.baseChange (K := L)).map iT) ∧ (∃ n : ℕ, Nonempty ((MultiplicativeType.baseChange (K := L)).obj T ≅ MultiplicativeType.splitTorus L n)) ∧ QuotientGeometry ((MultiplicativeType.baseChange (K := L)).map iB) ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).obj Q) ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map f) ∧ ∃ (cL : Additive (((MultiplicativeType.baseChange (K := L)).obj T) ⟶ Grp.mk (StandardGroupSchemes.multiplicative L)) →+ Additive (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).obj Q).left.Pic)) (ext : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) →+ Additive (((MultiplicativeType.baseChange (K := L)).obj T) ⟶ Grp.mk (StandardGroupSchemes.multiplicative L))), Sequence ((MultiplicativeType.baseChange (K := L)).map iB) ((MultiplicativeType.baseChange (K := L)).map r) ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).obj Q) ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map f) cL ∧ (∀ χ, TrivialTorusCoherent.characterValue _ (ext χ) _ (𝟙 _) = (MultiplicativeType.scalarProjection T).appTop (TrivialTorusCoherent.characterValue T χ T.X (𝟙 _))) ∧ (∀ χ, cL (ext χ) = (Scheme.Pic.mapHom (pullback.fst Q.hom (Spec.map (CommRingCat.ofHom (algebraMap F L))))).toAdditive (c χ)) ∧ (∀ M : Additive Q.left.Pic, (Scheme.Pic.mapHom (MultiplicativeType.scalarProjection H)).toAdditive ((Scheme.Pic.mapHom f.left).toAdditive M) = (Scheme.Pic.mapHom ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map f).left).toAdditive ((Scheme.Pic.mapHom (pullback.fst Q.hom (Spec.map (CommRingCat.ofHom (algebraMap F L))))).toAdditive M))",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed085dd7a",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read item node, both delivered modules, new node def-sfb-split-unipotent-series and every cited dep declaration (IsBorelGroupScheme, IsReductive, IsMaximalTorus, baseChange/splitTorus, IsUnipotent/IsFppfQuotient, AssociatedCharacterLineBundle.Presentation, characterValue, scalarProjection, Scheme.Pic.mapHom). Clauses match Milne 18.15: geometric Borel tested over AlgebraicClosure F; B=U⋊T via actual multiplication iso, kernel pullback and j≫r=𝟙 with additive-only split series; Q,f pinned as fppf quotient (flat surj lfp + kernel-pair IsPullback); c pinned by Presentation with relation z₂=χ(r b)⁻¹z₁; Function.Exact + surjectivity; ∀ L/F extended reductive/Pair/maximal/split/QuotientGeometry on Over.pullback Q,f, Sequence for cL, ext pinned by Laurent coordinate, both squares via Pic.mapHom. No extra hypotheses; rank-0, H=T, any characteristic covered. lean.statement verbatim; added stmt_deps all used definitions; new node is not a duplicate (SplitSolvableLength allows G_m), non-hollow, sourced Milne 14.61. Advisory only: Pic pullback via Mathlib Modules.pullback rather than recorded tensorPullback (iso classes agree); L restricted to the same universe u per the baseChange interface. No files changed, no compile run."
+ }
+}

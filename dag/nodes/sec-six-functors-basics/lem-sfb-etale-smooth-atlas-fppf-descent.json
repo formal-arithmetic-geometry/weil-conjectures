@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-etale-smooth-atlas-fppf-descent",
+ "kind": "statement",
+ "title": "An etale stack with a representable diagonal and smooth atlas has fppf descent",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universe convention [def-weil-size-convention]. Let $\\mathcal X$ be a category fibred in groupoids on $S$-schemes: it has cartesian lifts along all base morphisms and groupoid fibres. Assume isomorphisms between objects form an etale sheaf and every etale descent datum for objects is effective. Suppose the diagonal is representable by algebraic spaces [def-trf-algebraic-space], meaning that each sheaf $\\operatorname{Isom}_T(a,b)$ for $a,b\\in\\mathcal X(T)$ is an algebraic space over $T$. Suppose there is an $S$-scheme $U$ and an object $x\\in\\mathcal X(U)$ such that the induced morphism $h_U\\to\\mathcal X$, with $h_U(T)=\\operatorname{Mor}_S(T,U)$ as a discrete groupoid, is representable by algebraic spaces, smooth and surjective. This means that for every $T$ and $y\\in\\mathcal X(T)$, the space $W=h_U\\times_{\\mathcal X}h_T$ exists, $W\\to T$ is smooth on etale scheme charts [def-sbc-smooth-morphisms], and its map on points is onto [lem-trf-space-fibre-products-etale-covers]. Then isomorphisms in $\\mathcal X$ form an fppf sheaf and every fppf descent datum for objects is effective [def-pc-fppf-site]. Thus $\\mathcal X$ is an algebraic stack, with the same representable diagonal and the same smooth surjective atlas $U$.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 076V (lemma-stacks-etale), including its proof identifying the etale quotient presentation with its fppf quotient."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-fppf-stackification"
+ ],
+ "proof": [
+  {
+   "text": "Let $R=h_U\\times_{\\mathcal X}h_U$, the algebraic space supplied by the atlas hypothesis with $T=U$. Explicitly $R(T)$ consists of $(u,v,\\alpha)$ with $u,v:T\\to U$ and $\\alpha:u^*x\\cong v^*x$. Its two projections to $U$ are smooth: one is exactly the atlas base change with $T=U$, and the other is identified with it by $(u,v,\\alpha)\\mapsto(v,u,\\alpha^{-1})$. Identity, inverse and composition are $(u,u,1)$, $(v,u,\\alpha^{-1})$ and $(u,w,\\beta\\alpha)$. The groupoid laws hold because they are the laws for isomorphisms in $\\mathcal X(T)$. Thus this is a smooth groupoid in algebraic spaces, with presheaf of groupoids $\\mathcal P(T)=(U(T),R(T))$ and fully faithful functor $\\mathcal P\\to\\mathcal X$ given by $u\\mapsto u^*x$. These natural operations are morphisms of algebraic spaces by [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack), explicit groupoid construction, as used for etale stacks in Tag 076V."
+   }
+  },
+  {
+   "text": "Form $\\mathcal E=a_{et}\\mathcal P$ and extend $\\mathcal P\\to\\mathcal X$ to $F:\\mathcal E\\to\\mathcal X$ by [lem-sfb-groupoid-stackification-local-description]. The map $F$ is fully faithful. Indeed, for objects of $\\mathcal P$ its map on isomorphism sheaves is the sheafification of a bijection. For arbitrary $a,b\\in\\mathcal E(T)$ choose a common etale covering on which both come from $\\mathcal P$, using the local-object assertion. On this covering and its pullbacks the map on isomorphisms is a bijection; unique gluing in the two isomorphism sheaves gives a bijection over $T$.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 076V (lemma-stacks-etale), first quotient presentation paragraph; stacks.tex Tags 02ZP and 0436."
+   }
+  },
+  {
+   "text": "For $y\\in\\mathcal X(T)$, its atlas pullback $W=h_T\\times_{\\mathcal X}h_U$ is smooth surjective over $T$ by assumption. Apply [lem-sfb-smooth-space-cover-etale-sections] to obtain an etale covering $T_i\\to T$ lifting to $W$. Such a lift is a map $u_i:T_i\\to U$ and an isomorphism $u_i^*x\\cong y|_{T_i}$. Hence $F$ is locally essentially surjective, so [lem-sfb-stack-fully-faithful-local-equivalence] gives $\\mathcal E\\simeq\\mathcal X$.",
+   "uses": [
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-sfb-stack-fully-faithful-local-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 076V (lemma-stacks-etale), claim and first equivalence; spaces-topologies.tex Tag 0CFV; stacks.tex Tag 046N."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-groupoid-fppf-quotient] to step 1 to form the fppf stack $\\mathcal Q=a_{fppf}\\mathcal P$; its atlas pullbacks are smooth surjective algebraic spaces. It is also an etale stack. In fact etale scheme maps are flat and locally of finite presentation by [def-weil-etale-morphism]. Thus every jointly surjective etale family is an fppf covering [def-pc-fppf-site], and the fppf sheaf and effective-descent conditions restrict to these families. The universal extension in [lem-sfb-groupoid-stackification-local-description] gives $G:\\mathcal E\\to\\mathcal Q$ extending $\\mathcal P\\to\\mathcal Q$.",
+   "uses": [
+    "lem-sfb-smooth-groupoid-fppf-quotient",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 076V (lemma-stacks-etale), second quotient paragraph; algebraic.tex Tag 04TK; topologies.tex Tag 021N (lemma-zariski-etale-smooth-syntomic-fppf)."
+   }
+  },
+  {
+   "text": "The isomorphism presheaf between $u,v\\in\\mathcal P(T)$ equals $\\operatorname{Isom}_T(u^*x,v^*x)$ by step 1. This is an algebraic space by the diagonal hypothesis, hence an fppf sheaf by [def-trf-algebraic-space], and also an etale sheaf by the covering inclusion in step 4. By [lem-sfb-groupoid-stackification-local-description], its maps to the isomorphism sheaves in both $\\mathcal E$ and $\\mathcal Q$ are bijections. Hence $G$ induces a bijection on these isomorphisms. Every pair of objects of $\\mathcal E$ comes etale locally from $\\mathcal P$; gluing in the isomorphism sheaves of the two etale stacks, exactly as in step 2, proves that $G$ is fully faithful.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 076V (lemma-stacks-etale), full faithfulness of the comparison; spaces-groupoids.tex Tag 044V (lemma-quotient-stack-morphisms)."
+   }
+  },
+  {
+   "text": "For $q\\in\\mathcal Q(T)$ its atlas pullback is smooth surjective by [lem-sfb-smooth-groupoid-fppf-quotient]. Apply [lem-sfb-smooth-space-cover-etale-sections] to it. The resulting lifts give objects $u_i\\in U(T_i)$ and isomorphisms from their images to $q|_{T_i}$. Thus $G$ is etale locally essentially surjective. By [lem-sfb-stack-fully-faithful-local-equivalence], $G$ is an equivalence over the common category of schemes. Together with step 3 this identifies $\\mathcal X$ with the fppf stack $\\mathcal Q$.",
+   "uses": [
+    "lem-sfb-smooth-groupoid-fppf-quotient",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-sfb-stack-fully-faithful-local-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 076V (lemma-stacks-etale), final paragraph; stacks.tex Tag 046N."
+   }
+  },
+  {
+   "text": "Choose the pullback-compatible equivalence $H:\\mathcal X\\simeq\\mathcal Q$ from steps 3 and 6, with inverse $K$ and unit $\\eta:1\\cong KH$. Full faithfulness identifies the two isomorphism presheaves, so the fppf sheaf condition transfers. Given an fppf descent datum $(x_i,\\alpha_{ij})$ in $\\mathcal X$, apply $H$ to its objects and arrows, using the pullback compatibilities. Its cocycle equations still hold. Effective descent in $\\mathcal Q$ gives $q\\in\\mathcal Q(T)$ with compatible isomorphisms $q|_{T_i}\\cong H(x_i)$. Applying $K$ and composing with $\\eta_{x_i}^{-1}$ gives isomorphisms $d_i:K(q)|_{T_i}\\cong x_i$. On each overlap, write the original transition as $\\alpha_{ij}:x_i\\to x_j$. The descended isomorphisms in $\\mathcal Q$ satisfy $\\beta_j=H(\\alpha_{ij})\\beta_i$. Applying $K$ and using naturality of $\\eta$ gives $d_j=\\alpha_{ij}d_i$, hence $d_jd_i^{-1}=\\alpha_{ij}$, exactly the original datum. Thus the original datum is effective in $\\mathcal X$. The diagonal and atlas conditions are unchanged scheme-test conditions, so the original $U$ is still a smooth surjective atlas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 076V (lemma-stacks-etale), opening paragraph and conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-sfb-smooth-groupoid-fppf-quotient",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-sfb-stack-fully-faithful-local-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 076V (lemma-stacks-etale), complete quotient comparison proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas is also a stack for the fppf topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: etale sites, scheme morphism descent and equivalence with descent data do not compare etale and fppf stacks with a smooth algebraic-space presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare etale and fppf definitions of algebraic stacks using a smooth presentation and descent of groupoid quotients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: etale sites, scheme morphism descent and equivalence with descent data do not compare etale and fppf stacks with a smooth algebraic-space presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"fppf\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: etale sites, scheme morphism descent and equivalence with descent data do not compare etale and fppf stacks with a smooth algebraic-space presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Ss]tack|[Ss]tack.*[Ff]ppf|[Aa]lgebraic[Ss]tack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: etale sites, scheme morphism descent and equivalence with descent data do not compare etale and fppf stacks with a smooth algebraic-space presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent plus a representable diagonal and smooth surjective atlas implies fppf descent for a fibered category in groupoids",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, if $\\\\mathcal{F}\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.hom_ext_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {ι : Type t} {S : C}\\n  {X : ι → C} {f : (i : ι) → X i ⟶ S} {D₁ D₂ : F.DescentData f} {φ φ' : D₁ ⟶ D₂}, φ = φ' ↔ ∀ (i : ι), φ.hom i = φ'.hom i\", \"doc\": \"In the category of descent data for a pseudofunctor $ F $, two morphisms between descent data objects are equal if and only if their components at each index $ i $ are equal in the category $ F(\\text{o\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"(M : F.obj (.mk (op S))) : F.DescentData f\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a family of morphisms $f_i: X_i \\\\to S$, this c\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.diag_iff\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \"{X : D} [HasPullbacks C] [PreservesLimitsOfShape WalkingCospan F] :\\n  F.relativelyRepresentable (Limits.diag X) ↔ ∀ ⦃a : C⦄ (g : F.obj a ⟶ X), F.relativelyRepresentable g\", \"doc\": \"For a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, if $ \\\\mathcal{C} $ has pullbacks and $ F $ preserves pullbacks, then $ F $ is relatively representable for the diagonal morphism $ \\\\Delta_X : X \\\\to X\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instDescendsAlongDiagonalOfRespectsIsoOfIsStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Descent\", \"type\": \"[HasPullbacks C] (P Q : MorphismProperty C) [P.DescendsAlong Q] [P.RespectsIso] [Q.IsStableUnderBaseChange] :\\n  DescendsAlong (diagonal P) Q\", \"doc\": \"In a category with pullbacks, if a morphism property $ P $ descends along another property $ Q $, respects isomorphisms, and $ Q $ is stable under base change, then the diagonal morphism property of $\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, (F.toDescentData fun f => f.obj.hom).IsEquivalence → F.IsStackFor R\", \"doc\": \"If the descent data functor associated to $ F $ is an equivalence of categories, then $ F $ satisfies the stack condition for the presieve $ R $ on $ S $.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \": F.IsStackFor (Presieve.ofArrows _ f) ↔ (F.toDescentData f).IsEquivalence\", \"doc\": \"A pseudofunctor $ F $ satisfies the stack condition for the presieve generated by a family of morphisms $ f_i: X_i \\to S $ if and only if the induced functor from $ F(\\text{op}(S)) $ to the category of \"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: etale sites, scheme morphism descent and equivalence with descent data do not compare etale and fppf stacks with a smooth algebraic-space presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-representable-diagonal-criterion",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective.",
+   "via": [
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "worker": "stage1",
+  "summary": "Follow Tag 076V: construct the atlas groupoid explicitly, identify its etale quotient with X, compare it with its smooth fppf quotient using unchanged isomorphism sheaves and etale local sections, and transfer descent. Four independent general supporting results are statement-only nodes. No statement change or Lean attachment. Repair of the 2026-10-22 return: compared the retained delivery with the current unsplit DAG record and re-read all dependencies; expanded the final transfer of descent to exhibit the gluing object and arrows, and distinguished the newly present formal-moduli definition from the general quotient theorem. Current-DAG repair 2026-10-23: the required initial dry run rebased successfully at cdbcc7e7f91; all retained citation quotations still match current statements. Made the final transition-arrow computation explicit as d_j = alpha_ij d_i, preserving the original proof route and hypotheses.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. The seven steps expand precisely this local supporting input through Tag 076V; the historical ancestor is null as reported by blueprint_refs.py.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-999835c61",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-999835c61 (reviewer sub-agent of L); spot-checked: This is the third delivery. The FIXes given to 6eed5f6f and 2d9643d2 were never merged, because both landings were refused at promotion. In clones/live and side-live the item is still unsplit and none of the 4 new ids exists, so nothing supersedes this delivery. Compared with 2d96, the 4 new nodes are byte-identical; in the item only step 7 (it now writes out d_j=alpha_ij d_i) and the split_report changed. Statement, source (criteria 076V) and stmt_deps equal the live record, so the target is not weakened. I re-read 076V (statement and whole proof), 02ZP(1,2)/0436, 046N, 0CFV/055V, 04TK/04WZ/04X0 and 04M9, and the cited statements: def-trf-algebraic-space (an fppf sheaf; morphisms are natural transformations), def-weil-etale-morphism (flat + lfp) and def-pc-fppf-site. Step checks: (1) R as triples; t is the atlas base change and s is identified with it by inversion; P->X is fully faithful. (2) E=a_et P->X is fully faithful because Isom_E is the sheafification of an étale sheaf, plus local gluing. (3) 0CFV sections plus the 046N node give E~X. (4) Étale coverings are fppf coverings, so Q=a_fppf P is an étale stack and the universal extension gives G. (5) Isom_P is an algebraic space, hence unchanged by both sheafifications, so G is fully faithful. (6) 04X0 atlas plus 0CFV plus 046N make G an equivalence. (7) The descent transfer is correct: beta_j=H(alpha_ij)beta_i and naturality of eta give d_j=alpha_ij d_i. No 076V argument is dropped and no new node restates the item. Small cases: R=U, V=T, empty T, nontrivial stabilisers. Duplicate search (rg -L over tags and keywords in the snapshot): the hits are Kerodon 02ZP, the affine-action/formal/PGL quotients and the fpqc-local-representatives node; none is a duplicate. No SGA, no cycle, no tool_uses needed. Batch-5 findings: the quotient and étale-section nodes cite def-trf-algebraic-space, which is the general definition of an algebraic space and not a step of the trace-formula or Poincaré-duality proofs; the item already has it as a stmt_dep. Accepted. FIX (B2, lost twice, re-applied): lem-sfb-smooth-groupoid-fppf-quotient now names i:P->Q and pi(u)=i(u), writes the atlas pullback as h_T x_{q,Q,pi} h_U, and gives R->h_U x_{pi,Q,pi} h_U as r|->(s(r),t(r),i(r)). The file is identical to the 2d96/6eed fix; only the statement differs from the current node, and steps 4-6 already use this reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSmoothAtlasFppfDescent",
+  "declaration": "CategoryTheory.isFppfModuliStack_of_etale_smooth_atlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSmoothAtlasFppfDescent.lean",
+  "statement": "theorem isFppfModuliStack_of_etale_smooth_atlas {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hstack : IsModuliStack F) (hdiag : HasAlgebraicSpaceDiagonal F) (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F) (hatlas : IsSmoothModuliAtlas F U a) : IsFppfModuliStack F",
+  "branch": "sheaf-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93c33e473",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Read the item node, all 9 stmt_dep records, Stacks 076V (criteria.tex 3291ff) and the live Lean of IsFibredInGroupoids, IsModuliStack, HasSpaceBaseChange, HasAlgebraicSpaceDiagonal, SpaceMapIsSurjective/IsSmooth, IsSmoothModuliAtlas, IsAlgebraicModuliStack and IsFppfModuliStack. Compared with live, only lean and 3 added stmt_deps (landed, same-unit definition nodes that own the predicates; no cycle) changed. Hypotheses: étale stack = IsModuliStack, diagonal = HasAlgebraicSpaceDiagonal, specified U and a with IsSmoothModuliAtlas; conclusion IsFppfModuliStack F (same encoding, fppf topology). The algebraic-stack clause equals the hypotheses in the project's étale convention, so omitting it is correct (no hollow conjunct). No stronger assumptions; universes u,v,w free; edge cases empty T/U, stabilisers, field-extension lifts OK. No duplicate theorem in the Sheaf/WeilConjectures trees or Mathlib. Single sorry, source/blueprint docstrings with the 7-step proof, verbatim statement, recorded imports; report sections present. No compile (no change). Advisory: Q15 ArtinRepresentableDiagonalCriterion keeps a local IsAlgebraicModuliStack copy."
+ }
+}

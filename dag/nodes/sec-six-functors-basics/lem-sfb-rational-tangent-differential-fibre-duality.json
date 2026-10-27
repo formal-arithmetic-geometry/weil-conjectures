@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-rational-tangent-differential-fibre-duality",
+ "kind": "statement",
+ "title": "Rational tangent space as the dual of the differential fibre",
+ "statement": "Let $K$ be a field [def-weil-field], let $f:X\\to\\operatorname{Spec}K$ be a scheme over $K$ [def-pc-scheme, def-weil-affine-spectrum], and let $x:\\operatorname{Spec}K\\to X$ be a $K$-rational point, so $f\\circ x=\\mathrm{id}$. Let $x_0$ be its underlying point and identify its residue field with $K$ by the structural map. Put $$M_x=\\Gamma(\\operatorname{Spec}K,x^*\\Omega^1_{X/K}),$$ using the relative differential sheaf [def-sc-relative-differential-sheaf] and ordinary module pullback [def-pc-module-pullback]. There is a canonical $K$-linear isomorphism $$T_{X/K,x_0}\\cong\\operatorname{Hom}_K(M_x,K),$$ where the tangent space is the dual-number tangent space of [def-sc-scheme-tangent-space], transported along the residue-field identification. This isomorphism sends the constant tangent vector $x\\circ p$, for $p:\\operatorname{Spec}(K[\\epsilon]/(\\epsilon^2))\\to\\operatorname{Spec}K$, to the zero functional. Here the dual-number ring is [def-sc-dual-numbers]. No finite-type or smoothness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2D, label lemma-tangent-space-cotangent-space: T_{X/S,x} = Hom_{O_{X,x}}(Omega_{X/S,x},kappa(x)); its preceding cotangent-fibre formula, specialized to S = Spec K and a K-rational point. The tensor-Hom adjunction identifies this Hom with the K-linear dual of x^*Omega."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{X,x_0}$, write $s:K\\to A$ for the structural map, and let $c:A\\to K$ be the residue map after the specified structural identification $\\kappa(x_0)=K$. Thus $cs=\\mathrm{id}_K$ and $\\ker(c)=\\mathfrak m$. By [lem-sfb-relative-differentials-stalk], $(\\Omega^1_{X/K})_{x_0}\\cong\\Omega_{A/K}$. Apply [lem-weil-pbc-module-stalk-pullback] to $x:\\operatorname{Spec}K\\to X$ and this module sheaf. The stalk map of $x$ is $c$: it is a local map to the field $K$, hence factors through $A/\\mathfrak m$, and its composite with $s$ is the identity. Since $\\operatorname{Spec}K$ has one point, the stalk of any sheaf there is its global sections (the only neighbourhood is the whole space). The pullback formula therefore gives a canonical $K$-linear isomorphism $b:M_x\\xrightarrow{\\sim}V$, where $V=\\Omega_{A/K}\\otimes_A K$. Explicitly, for a local section $u$ of $\\mathcal O_X$ near $x_0$, the global germ of $x^*(\\mathrm du)$ maps under $b$ to $\\mathrm d(u_{x_0})\\otimes1$: this follows from the universal-derivation compatibility of the first citation and the pullback-unit germ formula of the second. Every $a\\in A$ is represented by such a section, so this also specifies $b$ on the differential generators used below.",
+   "uses": [
+    "lem-sfb-relative-differentials-stalk",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2D, lemma-tangent-space-cotangent-space, and 0B2E, lemma-tangent-space-rational-point, at a K-rational point; tensor-fibre interpretation from sheaves.tex Tag 0098."
+   }
+  },
+  {
+   "text": "Consider $Y=\\operatorname{Spec}A$ and the morphism $i:\\operatorname{Spec}K\\to Y$ induced by $c$. It is a closed immersion by the affine quotient criterion in [def-weil-closed-immersion], since $cs=1$ makes $c$ surjective. Its image is the closed point $\\mathfrak m$. The identity of $\\operatorname{Spec}K$ is smooth by [def-sbc-smooth-morphisms]: it is finitely presented with zero generators and relations, and a lift over a first-order thickening is the given structural morphism. Apply [lem-pur-conormal-sequence-smooth-immersion] to $i$ over $K$. By [lem-weil-pbc-morphism-from-spec-local-ring](a), the local rings at these closed points are $A$ and $K$, with stalk map $c$. By [lem-sfb-relative-differentials-stalk], the two differential stalks in that sequence are $\\Omega_{A/K}$ and $\\Omega_{K/K}$. The latter is zero by [def-weil-pbc-kahler-differentials]: all its generators $\\mathrm da$ vanish since every $a\\in K$ comes from the base. Finally $Q\\otimes_K K\\cong Q$, by $u\\otimes a\\mapsto au$ with inverse $u\\mapsto u\\otimes1$. Thus the cited exact sequence reduces to $0\\to Q\\xrightarrow{\\alpha}V\\to0$, where $Q=\\mathfrak m/\\mathfrak m^2$ and $\\alpha([a])=\\mathrm da\\otimes1$. Exactness proves $\\alpha$ bijective, hence a canonical $K$-linear isomorphism. Set $h=\\alpha^{-1}b:M_x\\xrightarrow{\\sim}Q$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-smooth-morphisms",
+    "lem-pur-conormal-sequence-smooth-immersion",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-sfb-relative-differentials-stalk",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 06AA, lemma-differentials-relative-immersion-smooth, applied to Spec K -> Spec A; Tag 08TE identifies the differential stalks."
+   }
+  },
+  {
+   "text": "The rational-point hypothesis of [lem-sc-rational-point-tangent-derivation-identification] holds because the structural residue map $K\\to\\kappa(x_0)$ is the specified isomorphism. Its clause (c) gives a canonical $K$-linear isomorphism $E:T_{X/K,x_0}\\xrightarrow{\\sim}\\operatorname{Hom}_K(Q,K)$. Define $F(\\theta)=E(\\theta)\\circ h$. Precomposition by $h$ is a linear isomorphism: its inverse is $\\lambda\\mapsto\\lambda\\circ h^{-1}$, and the two composites are identities by $hh^{-1}=1$ and $h^{-1}h=1$. Thus $F$ is the required canonical $K$-linear isomorphism. For $a\\in\\mathfrak m$ the first-map formula of step 2 and clauses (a)-(c) of the cited tangent identification give $F(\\theta)(b^{-1}(\\mathrm da\\otimes1))=\\ell_\\theta([a])=D_\\theta(a)$, where $\\theta^\\sharp(a)=c(a)+D_\\theta(a)\\epsilon$. For arbitrary $a\\in A$, put $a_0=a-s(c(a))\\in\\mathfrak m$. The defining relations of differentials give $\\mathrm da=\\mathrm da_0$. Since $\\theta$ is a $K$-morphism, $\\theta^\\sharp(s(t))=t$ for $t\\in K$; additivity of its stalk map and uniqueness of dual-number coefficients give $D_\\theta(a)=D_\\theta(a_0)$. Hence the displayed pairing formula holds for every $a\\in A$. These differential tensors generate $V$ by the generator construction in step 2, so the construction is precisely the canonical differential/coefficient pairing, without a basis choice.",
+   "uses": [
+    "lem-sc-rational-point-tangent-derivation-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2D, lemma-tangent-space-cotangent-space, and 0B2E, lemma-tangent-space-rational-point, at a K-rational point; tensor-fibre interpretation from sheaves.tex Tag 0098."
+   }
+  },
+  {
+   "text": "Let $\\theta_0=x\\circ p$ be the constant tangent vector. Its stalk homomorphism, in the coordinates of [lem-sc-rational-point-tangent-derivation-identification](a), is the composite $A\\xrightarrow{c}K\\hookrightarrow K[\\epsilon]$: the first map is the stalk map identified in step 1, and $p$ is induced by the inclusion of constants. Consequently $\\theta_0^\\sharp(a)=c(a)+0\\epsilon$ for every $a\\in A$. Uniqueness of the epsilon coefficient in clause (a) gives $D_{\\theta_0}=0$, and clause (b) gives $E(\\theta_0)=\\ell_{\\theta_0}=0$. By the formula $F(\\theta)=E(\\theta)\\circ h$ in step 3, $F(\\theta_0)=0$, the zero functional. No finite-type, smoothness, or finite-dimensionality hypothesis was used; the computation also applies when the differential fibre is zero.",
+   "uses": [
+    "lem-sc-rational-point-tangent-derivation-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2D, lemma-tangent-space-cotangent-space, and 0B2E, lemma-tangent-space-rational-point, at a K-rational point; tensor-fibre interpretation from sheaves.tex Tag 0098."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-differentials-stalk",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "lem-pur-conormal-sequence-smooth-immersion",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-rational-point-tangent-derivation-identification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0B2D, lemma-tangent-space-cotangent-space, and 0B2E, lemma-tangent-space-rational-point, at a K-rational point; tensor-fibre interpretation from sheaves.tex Tag 0098."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The tangent space at a rational point of a scheme over a field is canonically the linear dual of the fibre of the sheaf of Kahler differentials",
+   "results": "8 hits; Algebra.Extension.cotangentComplex_mk, Algebra.Extension.toKaehler, KaehlerDifferential.endEquivDerivation', Algebra.Extension.CotangentSpace, Algebra.H1Cotangent, KaehlerDifferential.kerCotangentToTensor_toCotangent, KaehlerDifferential.quotientCotangentIdealRingEquiv, Algebra.Extension.CotangentSpace.map",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring universal property and Spec-local-ring equivalences are relevant ingredients, but the scheme tangent-to-differential-fibre comparison is not an exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.*[Kk]aehler|[Kk]aehler.*tangent|cotangentSpace|relativeDifferentials",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring universal property and Spec-local-ring equivalences are relevant ingredients, but the scheme tangent-to-differential-fibre comparison is not an exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent space at a rational point of a scheme over a field is canonically the linear dual of the fibre of the sheaf of Kahler differentials",
+   "results": "8 hits; KaehlerDifferential.D_apply, TangentSpace, KaehlerDifferential.endEquivDerivation', KaehlerDifferential.fromIdeal, instR, KaehlerDifferential.linearMapEquivDerivation, KaehlerDifferential.span_range_map_derivation_of_isLocalization, IsLocalRing.instModuleResidueFieldCotangentSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring universal property and Spec-local-ring equivalences are relevant ingredients, but the scheme tangent-to-differential-fibre comparison is not an exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TangentSpace\", \"KaehlerDifferential\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring universal property and Spec-local-ring equivalences are relevant ingredients, but the scheme tangent-to-differential-fibre comparison is not an exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a k rational point x of a scheme X, morphisms from Spec dual numbers to X reducing to x form the dual vector space of x pullback Omega X over k",
+   "results": "8 hits; AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.FormallyUnramified, Algebra.Extension.CotangentSpace.map, Algebra.Extension.H1Cotangent, Algebra.Extension.cotangentComplex_mk, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, KaehlerDifferential.endEquivDerivation', AlgebraicGeometry.SpecToEquivOfLocalRing",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring universal property and Spec-local-ring equivalences are relevant ingredients, but the scheme tangent-to-differential-fibre comparison is not an exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.*[Kk]aehler|[Kk]aehler.*tangent|relativeDifferentials",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring differential modules, algebra-extension conormal modules or manifold tangent spaces; no scheme dual-number tangent to differential-fibre theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent space at a rational point of a scheme over a field is the linear dual of the fibre of relative Kahler differentials",
+   "results": "8 hits; TangentSpace, KaehlerDifferential.D_apply, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Extension.CotangentSpace, KaehlerDifferential.endEquivDerivation', KaehlerDifferential.tensorKaehlerEquivBase, IsLocalRing.CotangentSpace, KaehlerDifferential.fromIdeal",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring differential modules, algebra-extension conormal modules or manifold tangent spaces; no scheme dual-number tangent to differential-fibre theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TangentSpace\", \"KaehlerDifferential\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring differential modules, algebra-extension conormal modules or manifold tangent spaces; no scheme dual-number tangent to differential-fibre theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tangent space at a rational point of a scheme over a field is the linear dual of the fibre of relative Kahler differentials",
+   "results": "8 hits; Algebra.Extension.toKaehler, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.CotangentSpace, Algebra.Extension.cotangentComplex, KaehlerDifferential.kerCotangentToTensor, Algebra.etaleLocus_eq_compl_support, Algebra.Extension.CotangentSpace.map",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring differential modules, algebra-extension conormal modules or manifold tangent spaces; no scheme dual-number tangent to differential-fibre theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dual number valued points reducing to a k rational point identify with the dual of its pullback cotangent sheaf",
+   "results": "8 hits; Algebra.Generators.cotangentCompLocalizationAwayEquiv, Algebra.Generators.cotangentCompAwaySec_apply, Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective, Algebra.Extension.tensorCotangentSpace, Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv, Algebra.Extension.Cotangent.map, Algebra.Extension.cotangentComplex, Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring differential modules, algebra-extension conormal modules or manifold tangent spaces; no scheme dual-number tangent to differential-fibre theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-scheme-identity-dual-unramified",
+  "date": "2026-10-22",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified group schemes detected by dual numbers at the identity. Supporting input: The tangent/differential comparison in moduli-curves.tex Tag 0E6G, first proof paragraph, citing varieties.tex Tag 0B2D.",
+   "via": [
+    "lem-sfb-group-scheme-identity-dual-unramified",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rational-tangent-differential-fibre-duality",
+  "worker": "stage1",
+  "summary": "Compared the arbitrary-scheme statement with Stacks Tags 0B2D/0B2E. Reused rational tangent/cotangent duality, the smooth-source conormal exact sequence, the local-spectrum germ isomorphism and module-pullback stalks; added only the statement-only general differential-stalk comparison. For the promotion return, retained the delivered version and actual search log, compared against the current unsplit live item, and re-read every current citation. The initial current-base dry run passed at 79431a8ea2e. Expanded step 3 from maximal-ideal generators to every local-ring element by subtracting its structural residue and computing the unchanged epsilon coefficient; step 4 computes the constant vector coefficient as zero. Statements, hypotheses, ancestry and proof route are unchanged. deliver.py rebuilds the repair on current sheaf-dag; live promotion is performed by the maintainer.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified group schemes detected by dual numbers at the identity. Supporting input: The tangent/differential comparison in moduli-curves.tex Tag 0E6G, first proof paragraph, citing varieties.tex Tag 0B2D. Steps 1-3 realize the tangent/differential comparison used at the rational identity in moduli-curves.tex Tag 0E6G; step 4 identifies the constant dual-number point with zero. Ancestor search returns None, as in the inherited blueprint.from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic ordinary module-pullback stalk formula, needed to interpret the differential fibre; the unit provides no substitute."
+   },
+   {
+    "node": "lem-sc-rational-point-tangent-derivation-identification",
+    "why": "Generic dual-number tangent/cotangent comparison at rational points, used as a tool in the local identity tangent criterion; it does not replace any constructibility or alteration step."
+   },
+   {
+    "node": "lem-pur-conormal-sequence-smooth-immersion",
+    "why": "Generic conormal sequence with smooth source, applied only to Spec K -> Spec of the local ring to identify m/m squared with the differential fibre; no smoothness of X is used."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-from-spec-local-ring",
+    "why": "Generic germ isomorphism at the closed point of a local spectrum, to read the conormal sequence on A and K."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sc-rational-point-tangent-derivation-identification",
+  "lem-pur-conormal-sequence-smooth-immersion",
+  "lem-weil-pbc-morphism-from-spec-local-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-fe2add37a",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-fe2add37a (reviewer sub-agent of L); spot-checked: This is the 5th delivery of the same split. The earlier deliveries e92f5794, afc187d0, 5c71b15b and f11cefb3 all PASSed and were sent back at landing by the promotion refusal. In clones/live and clones/side-live the item is still unsplit with an empty proof, so no other group has taken it over. There is no repair note for this item, so the re-split rules do not apply. I compared the node JSON with f11cefb3. The new node lem-sfb-relative-differentials-stalk is identical. The item statement, its 7 stmt_deps, source, ancestry, steps 1, 2 and 4, proof_deps and tool_uses are unchanged. Only step 3 and the split_report summary changed. Step 3 now extends the pairing formula from a in m to every a in A. It sets a_0 = a - s(c(a)), which lies in m. Then da = da_0 because d∘s = 0, and θ^♯(a) = c(a) + D(a_0)ε, so uniqueness of the ε-coefficient gives D_θ(a) = D_θ(a_0). This is correct. I re-read all four steps against the current cited statements. Step 1: the pullback-stalk formula with its unit-germ clause applies along x^♯ = c, which holds because the map is local into a field and cs = 1; on the one-point space Spec K the stalk is the global sections. Step 2: the conormal sequence (Stacks 06AA) needs only Z = Spec K smooth over K. Using the germ isomorphism (a) with R = A, S = K and I = m, and Ω_{K/K} = 0, it gives m/m² ≅ Ω_{A/K}⊗K with no Noetherian assumption. Step 3 uses clauses (a)-(c) of the rational tangent identification. Step 4: the constant vector x∘p has stalk map A→K→K[ε] with zero ε-coefficient, so its functional is zero. The new node is Stacks modules.tex 08TE (line 4904) applied to f^{-1}O_S→O_X. It is self-contained and statement-only. It holds for the identity, for inseparable field extensions and for non-Noetherian localizations. A fresh rg search found no duplicate; lem-trf-affine-chart-stalk-differentials assumes local finite presentation. Small cases for the item: Spec K, A¹ at 0, and K[t]/t² in characteristic 2. The 4 generic tool_uses are accepted. No SGA source is cited. No changes. Maintainer note: this is the promotion loop again; please promote the split at landing."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalTangentDifferentialFibreDuality",
+  "declaration": "AlgebraicGeometry.exists_rationalTangent_differentialFibre_linearEquiv",
+  "declarations": [
+   "AlgebraicGeometry.rationalTangentStructuralResidueMap",
+   "AlgebraicGeometry.rationalTangentDifferentialFibre",
+   "AlgebraicGeometry.exists_rationalTangent_differentialFibre_linearEquiv"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalTangentDifferentialFibreDuality.lean",
+  "statement": "theorem exists_rationalTangent_differentialFibre_linearEquiv (K : Type u) [Field K] (X : Scheme.{u}) (f : X ⟶ Spec (.of K)) (x : Spec (.of K) ⟶ X) (hx : x ≫ f = 𝟙 _) : letI : Module K (schemeTangentSpace K X f (x (IsLocalRing.closedPoint K))) := Module.compHom (schemeTangentSpace K X f (x (IsLocalRing.closedPoint K))) (rationalTangentStructuralResidueMap K X f (x (IsLocalRing.closedPoint K))) ∃ e : schemeTangentSpace K X f (x (IsLocalRing.closedPoint K)) ≃ₗ[K] (rationalTangentDifferentialFibre K X f x →ₗ[K] K), (∀ θ : schemeTangentSpace K X f (x (IsLocalRing.closedPoint K)), ∃ hθ : θ.val (IsLocalRing.closedPoint (DualNumber (X.residueField (x (IsLocalRing.closedPoint K))))) = x (IsLocalRing.closedPoint K), ∀ (U : X.Opens) (hU : x (IsLocalRing.closedPoint K) ∈ U) (a : Γ(X, U)) (m : rationalTangentDifferentialFibre K X f x), TopCat.Presheaf.germ ((Scheme.Modules.tensorPullback x).obj f.relativeDifferentials).presheaf ⊤ (IsLocalRing.closedPoint K) (Set.mem_univ _) m = TopCat.Presheaf.germ ((Scheme.Modules.tensorPullback x).obj f.relativeDifferentials).presheaf (x ⁻¹ᵁ U) (IsLocalRing.closedPoint K) hU (Scheme.Modules.tensorPullbackSection x f.relativeDifferentials U (f.relativeDifferentialsDerivation.d (X := op U) a)) → rationalTangentStructuralResidueMap K X f (x (IsLocalRing.closedPoint K)) (e θ m) = TrivSqZeroExt.snd ((eqToHom (congrArg (fun z : X ↦ X.presheaf.stalk z) hθ.symm) ≫ Scheme.stalkClosedPointTo θ.val).hom (X.presheaf.germ U (x (IsLocalRing.closedPoint K)) hU a))) ∧ (∃ θ₀ : schemeTangentSpace K X f (x (IsLocalRing.closedPoint K)), θ₀.val = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom (rationalTangentStructuralResidueMap K X f (x (IsLocalRing.closedPoint K))))) ≫ Spec.map (CommRingCat.ofHom (TrivSqZeroExt.inlHom K K)) ≫ x ∧ e θ₀ = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f1b049aa",
+  "group": "Q143",
+  "result": "fix",
+  "note": "Lean exact. T ≃ₗ[K] (Γ(Spec K, x^*Ω) →ₗ[K] K), with scalars restricted along the structural residue map r = toStalk≫stalkMap≫residue (same as the landed rational_tangent_cotangent_duality). e is fixed on every germ of tensorPullbackSection x Ω U (d a) by r(e θ m) = snd θ♯(a); these germs span the fibre, so e is unique. The constant vector θ₀ = Spec(mapRingHom r)≫Spec(inl)≫x is valid and e θ₀ = 0. No extra hypotheses; universe shared with def-sc-scheme-tangent-space. Edge cases: Spec K, zero fibre, non-affine X, infinite-dimensional fibre (full dual), characteristic 2. No duplicate (the cotangent m/m² nodes are distinct); helpers carry real data and docstrings. Node record differs from live only in lean, statement verbatim, proof sorry with 4-step docstring, proof-dep imports exist with no cycle. Only fault H11: the second reading was a dispatcher-wording self-check. FIX = fixes/<item>.report.md keeping the worker report verbatim plus an independent clause-by-clause second reading. No Lean changed, so no compile."
+ }
+}

@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-monotone-diagram-face-exceptions",
+ "kind": "statement",
+ "title": "Finite exceptional translations of monotone diagram regions on coordinate faces",
+ "statement": "Let $n\\ge1$. Identify $\\mathbf N^n$ with the exponent vectors of monomials $Y^\\alpha$ in $\\mathbf Z[Y_1,\\ldots,Y_n]$ [def-weil-pbc-mv-polynomial-ring]. Let $D\\subseteq\\mathbf N^n$ be closed under addition by $\\mathbf N^n$. Suppose that $\\alpha-\\alpha_p e_p+\\alpha_p e_t\\in D$ for every $\\alpha\\in D$ and $1\\le p<t\\le n$, where $e_j$ is the $j$th coordinate vector. Let $\\alpha_1,\\ldots,\\alpha_s$ be the finite list of coordinatewise minimal elements of $D$, ordered lexicographically by $(|\\alpha|,\\alpha_1,\\ldots,\\alpha_n)$, where $|\\alpha|=\\sum_j\\alpha_j$. Set\n$$\\Delta_i=\\{\\beta\\in\\mathbf N^n:\\alpha_i+\\beta\\notin\\bigcup_{h<i}(\\alpha_h+\\mathbf N^n)\\},\\qquad \\Delta_0=\\mathbf N^n\\setminus D,$$\nand $M=\\max(\\{1\\}\\cup\\{|\\alpha_i|:1\\le i\\le s\\})$. For $0\\le r<n$ put $F_r=\\{\\beta:\\beta_1=\\cdots=\\beta_r=0\\}$. For every $i=0,\\ldots,s$ the exceptional set\n$$E_{i,r}=\\{\\beta\\in\\Delta_i\\cap F_r:\\beta+e_{r+1}\\notin\\Delta_i\\}$$\nis contained in $\\{\\beta\\in F_r:\\beta_j<M\\text{ for every }j>r\\}$, and is therefore finite. The conventions include $D=\\varnothing$ (no vertices) and $D=\\mathbf N^n$ (the single vertex $0$).",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11 and 2.3.13, printed pp.93--94, for the parent route. Agent quantitative refinement of Bierstone--Milman, Invent. Math. 128 (1997), Lemma 8.2 and Remarks 8.4, pp.274--275: the disjoint vertex regions and the complementary monomials have finite exceptional translations on coordinate faces. Read online at https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf. No Stacks tag states this exponent-diagram combinatorial result; journal paper absent from repository literature."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof": [
+  {
+   "text": "Since $0\\le r<n$, $k=r+1$ satisfies $1\\le k\\le n$, and $j>r$ is equivalent to $j\\ge k$ for an integer coordinate index $j$. Put $U_q=\\bigcup_{h\\le q}(\\alpha_h+\\mathbf N^n)$. The assumed list enumerates exactly the coordinatewise minimal elements of $D$, in the strict ascending degree-lex order required by [lem-trf-monotone-vertex-prefix]. The hypotheses on $D$ are precisely its additive closure and whole-coordinate moves. Therefore $U_s=D$ and each $U_q$ has both closure properties, including $U_0=\\varnothing$. No existence of a finite vertex list is inferred: it is a hypothesis. By definition $M\\ge1$ and every listed generator has total degree at most $M$. In particular the earlier set used for vertex $i$ is the index prefix $U_{i-1}$, even when several vertices have the same degree.",
+   "uses": [
+    "lem-trf-monotone-vertex-prefix"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the quantitative exceptional-box refinement; ILO VIII 2.3.11--2.3.13 (printed pp.93--94) gives only the parent resolution route. Compare Bierstone--Milman 1997, section 8, pp.273--275 (read online; absent from repository literature)."
+   }
+  },
+  {
+   "text": "For $i\\ge1$ and $\\beta\\in E_{i,r}$, set $v=\\alpha_i+\\beta$. The definition of $\\Delta_i$ gives $\\beta\\in\\Delta_i\\iff v\\notin U_{i-1}$ and $\\beta+e_k\\notin\\Delta_i\\iff v+e_k\\in U_{i-1}$, since $\\alpha_i+(\\beta+e_k)=v+e_k$. Thus these are the boundary lemma's two membership hypotheses, on the translated vector $v$. Apply [lem-trf-monotone-boundary-box] with the finite family $A=\\{\\alpha_h:h<i\\}$. Its orthant union is $U_{i-1}$, monotone by Step 1; $M\\ge1$, $|a|\\le M$ for every $a\\in A$, and $1\\le k=r+1\\le n$. Its witness $a=\\alpha_h$ satisfies $a_k=v_k+1=\\alpha_{i,k}+\\beta_k+1$; its bound gives $v_j<M$ for $j\\ge k$. Nonnegativity gives $\\beta_j\\le v_j<M$, the bound for $j>r$. For $i=1$, $A=\\varnothing$ and $v+e_k\\in U_0$ is impossible.",
+   "uses": [
+    "lem-trf-monotone-boundary-box"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the quantitative exceptional-box refinement; ILO VIII 2.3.11--2.3.13 (printed pp.93--94) gives only the parent resolution route. Compare Bierstone--Milman 1997, section 8, pp.273--275 (read online; absent from repository literature)."
+   }
+  },
+  {
+   "text": "For $i=0$ and $\\beta\\in E_{0,r}$, the complementary-region definition gives $\\beta\\notin D$ and $\\beta+e_k\\in D$. Apply [lem-trf-monotone-boundary-box] to $v=\\beta$ and the finite family $A=\\{\\alpha_1,\\ldots,\\alpha_s\\}$. Its generated union equals $D$ by Step 1 and is monotone by hypothesis. Again $M\\ge1$, every generator has total degree at most $M$, and $1\\le k\\le n$. Thus $\\beta_j<M$ for every $j\\ge k$, equivalently every $j>r$. The empty-family case has $D=\\varnothing$ and admits no such entering vector.",
+   "uses": [
+    "lem-trf-monotone-boundary-box"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the quantitative exceptional-box refinement; ILO VIII 2.3.11--2.3.13 (printed pp.93--94) gives only the parent resolution route. Compare Bierstone--Milman 1997, section 8, pp.273--275 (read online; absent from repository literature)."
+   }
+  },
+  {
+   "text": "Every exceptional vector lies in $F_r$, so its first $r$ coordinates vanish. By Steps 2--3 its suffix $(\\beta_{r+1},\\ldots,\\beta_n)$ belongs to $\\{0,\\ldots,M-1\\}^{n-r}$. This suffix determines the vector uniquely since the omitted coordinates are zero. Conversely, extending any such suffix by $r$ zeros gives a vector in the containing box. The box thus has $M^{n-r}$ elements, proving the inclusion and finiteness. If $D=\\varnothing$, then $\\Delta_0=\\mathbf N^n$ and there are no exceptions. If $D=\\mathbf N^n$, the sole vertex is $0$, $\\Delta_1=\\mathbf N^n$ and $\\Delta_0=\\varnothing$, again giving none. When $n=1$ or $r=n-1$, $k=n$ and the boundary lemma bounds the sole surviving coordinate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the quantitative exceptional-box refinement; ILO VIII 2.3.11--2.3.13 (printed pp.93--94) gives only the parent resolution route. Compare Bierstone--Milman 1997, section 8, pp.273--275 (read online; absent from repository literature)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-monotone-vertex-prefix",
+  "lem-trf-monotone-boundary-box"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent coordinate proof of the quantitative exceptional-box refinement; ILO VIII 2.3.11--2.3.13 (printed pp.93--94) gives only the parent resolution route. Compare Bierstone--Milman 1997, section 8, pp.273--275 (read online; absent from repository literature)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "monotone.?diagram|Pommaret|Janet|initial.?exponent|coordinate.?face",
+   "results": "{\"t\": \"2026-10-22T04:37:26Z\", \"tool\": \"grep\", \"query\": \"monotone.?diagram|Pommaret|Janet|initial.?exponent|coordinate.?face\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; monomial ideal membership, monomial orders, finite antidiagonals and Nobeling good products do not bound the exceptional translations of the ordered disjoint vertex regions on coordinate faces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-monotone-diagram-face-exceptions: finite exceptional exponent sets for translation along coordinate faces in monotone monomial diagrams",
+   "results": "{\"t\": \"2026-10-22T04:37:27Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-monotone-diagram-face-exceptions: finite exceptional exponent sets for translation along coordinate faces in monotone monomial diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finset.diag_mono\", \"BoxIntegral.Box.monotone_face\", \"Finset.offDiag_mono\", \"Mathlib.Tactic.Translate.Config.dontTranslate\", \"MvPolynomial.degrees_monomial\", \"Set.offDiag_mono\", \"Finset.finsuppAntidiag_mono\", \"emultiplicity_lt_top\"], \"digest\": \"494c3f3b568d92e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; monomial ideal membership, monomial orders, finite antidiagonals and Nobeling good products do not bound the exceptional translations of the ordered disjoint vertex regions on coordinate faces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonomialOrder\", \"div\"",
+   "results": "{\"t\": \"2026-10-22T04:37:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonomialOrder\\\", \\\"div\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MonomialOrder.leadingCoeff_prod_of_mem_nonZeroDivisors\", \"MonomialOrder.leadingCoeff_mul_of_left_mem_nonZeroDivisors\", \"MonomialOrder.leadingCoeff_mul_of_right_mem_nonZeroDivisors\", \"MonomialOrder.degree_smul_of_mem_nonZeroDivisors\", \"MonomialOrder.degree_prod_of_mem_nonZeroDivisors\", \"MonomialOrder.leadingTerm_prod_of_mem_nonZeroDivisors\", \"MonomialOrder.leadingTerm_mul_of_left_mem_nonZeroDivisors\", \"MonomialOrder.leadingTerm_mul_of_right_mem_nonZeroDivisors\"], \"digest\": \"af49729361e51d6b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; monomial ideal membership, monomial orders, finite antidiagonals and Nobeling good products do not bound the exceptional translations of the ordered disjoint vertex regions on coordinate faces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monotone-diagram-face-exceptions: in a monotone monomial ideal, the disjoint vertex quotient supports and the complement on any coordinate face have only finitely many exceptions to multiplication by the first variable of that face",
+   "results": "{\"t\": \"2026-10-22T04:37:28Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-monotone-diagram-face-exceptions: in a monotone monomial ideal, the disjoint vertex quotient supports and the complement on any coordinate face have only finitely many exceptions to multiplication by the first variable of that face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.Products.isGood\", \"MvPolynomial.mem_ideal_span_monomial_image\", \"Profinite.NobelingProof.GoodProducts\", \"Profinite.NobelingProof.GoodProducts.finsuppSum_mem_span_eval\", \"Profinite.NobelingProof.one_sub_e_mem_of_false\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"MvPolynomial.disjoint_support_monomial\", \"ChevalleyThm.chevalley_mvPolynomialC\"], \"digest\": \"aece3a930bd1d6ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; monomial ideal membership, monomial orders, finite antidiagonals and Nobeling good products do not bound the exceptional translations of the ordered disjoint vertex regions on coordinate faces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monotone-diagram-face-exceptions: disjoint division regions of a Borel fixed monomial ideal become closed under translation in the first surviving coordinate outside a finite set",
+   "results": "{\"t\": \"2026-10-22T04:37:58Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-monotone-diagram-face-exceptions: disjoint division regions of a Borel fixed monomial ideal become closed under translation in the first surviving coordinate outside a finite set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.Products.isGood\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.one_sub_e_mem_of_false\", \"Profinite.NobelingProof.GoodProducts.spanFin\", \"Profinite.NobelingProof.GoodProducts.span\", \"Finset.pairwiseDisjoint_piAntidiag_map_addRightEmbedding\", \"NumberField.mixedEmbedding.disjoint_negAt_plusPart\"], \"digest\": \"8cc901da2f1e858e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; monomial ideal membership, monomial orders, finite antidiagonals and Nobeling good products do not bound the exceptional translations of the ordered disjoint vertex regions on coordinate faces"
+  },
+  {
+   "tool": "grep",
+   "query": "monotone.?diagram|exceptional.?translation|Pommaret|Janet|vertex.*region",
+   "results": "{\"t\": \"2026-10-22T04:53:13Z\", \"tool\": \"grep\", \"query\": \"monotone.?diagram|exceptional.?translation|Pommaret|Janet|vertex.*region\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division, leading terms, monomial-ideal membership, unrelated boxes and Nobeling products do not give finite translation exceptions for ordered vertex regions of a monotone diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite boundary of disjoint monomial division regions for a monotone ideal under adding a coordinate vector",
+   "results": "{\"t\": \"2026-10-22T04:53:13Z\", \"tool\": \"leansearch\", \"query\": \"Finite boundary of disjoint monomial division regions for a monotone ideal under adding a coordinate vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.divMonomial\", \"MvPolynomial.dvd_monomial_iff_exists\", \"MvPolynomial.dvd_monomial_mul_iff_exists\", \"MonomialOrder.div_single\", \"MonomialOrder.div\", \"MvPolynomial.divMonomial_add_modMonomial\", \"MvPolynomial.divMonomial_add_modMonomial_single\", \"MonomialOrder.div_set\"], \"digest\": \"14caf395c8d50275\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division, leading terms, monomial-ideal membership, unrelated boxes and Nobeling products do not give finite translation exceptions for ordered vertex regions of a monotone diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, MonomialOrder",
+   "results": "{\"t\": \"2026-10-22T04:53:14Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, MonomialOrder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MonomialOrder.Monic\", \"MonomialOrder.leadingCoeff\", \"MonomialOrder.leadingTerm\", \"MonomialOrder.degree\", \"MonomialOrder.withBotDegree\", \"MonomialOrder.monic_of_subsingleton\", \"MonomialOrder.Monic.of_subsingleton\", \"MonomialOrder.Monic.decidable\"], \"digest\": \"d370732f12dfcc76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division, leading terms, monomial-ideal membership, unrelated boxes and Nobeling products do not give finite translation exceptions for ordered vertex regions of a monotone diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an additive monotone subset of natural exponent vectors, ordered vertex division regions have finitely many exceptions to coordinate translation on faces",
+   "results": "{\"t\": \"2026-10-22T04:53:14Z\", \"tool\": \"leanfinder\", \"query\": \"For an additive monotone subset of natural exponent vectors, ordered vertex division regions have finitely many exceptions to coordinate translation on faces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BoxIntegral.unitPartition.admissibleIndex\", \"BoxIntegral.Box.face_mono\", \"BoxIntegral.Box.face\", \"Behrend.mem_box\", \"BoxIntegral.unitPartition.mem_admissibleIndex_of_mem_box\", \"Behrend.map_le_of_mem_box\", \"BoxIntegral.Box.face_lower\", \"BoxIntegral.BoxAdditiveMap.upperSubLower\"], \"digest\": \"fe15e9d446a63193\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division, leading terms, monomial-ideal membership, unrelated boxes and Nobeling products do not give finite translation exceptions for ordered vertex regions of a monotone diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|quasi.?stable|strongly.?stable|exceptional.*monomial|monomial.*boundary",
+   "results": "{\"t\": \"2026-10-22T04:53:34Z\", \"tool\": \"grep\", \"query\": \"Borel|quasi.?stable|strongly.?stable|exceptional.*monomial|monomial.*boundary\", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division, leading terms, monomial-ideal membership, unrelated boxes and Nobeling products do not give finite translation exceptions for ordered vertex regions of a monotone diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Borel monotone monomial ideal with degree lexicographic vertices, multiplying its disjoint quotient supports by the first remaining variable preserves them outside a bounded box",
+   "results": "{\"t\": \"2026-10-22T04:53:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a Borel monotone monomial ideal with degree lexicographic vertices, multiplying its disjoint quotient supports by the first remaining variable preserves them outside a bounded box\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.Products.isGood\", \"MvPolynomial.disjoint_support_monomial\", \"MonomialOrder.notMem_support_of_degree_lt\", \"MonomialOrder.div_set\", \"MvPolynomial.mem_ideal_span_monomial_image\", \"MonomialOrder.span_leadingTerm_sdiff_singleton_zero\", \"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"MvPolynomial.support_divMonomial\"], \"digest\": \"2b74d3a8340b0266\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division, leading terms, monomial-ideal membership, unrelated boxes and Nobeling products do not give finite translation exceptions for ordered vertex regions of a monotone diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-initial-diagram-stabilization",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical local-invariant input under lem-trf-local-term-locality, through ILO VIII 2.3.11--2.3.13 and the regular Hilbert--Samuel coefficient construction: BM 1997 section 8, Lemma 8.2 and Remarks 8.4, pp.274--275. This node makes precise the finite exceptional support sets needed for coordinate restriction in the proof of Theorem 8.1.",
+   "via": [
+    "lem-trf-initial-diagram-stabilization",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monotone-diagram-face-exceptions",
+  "worker": "stage1",
+  "summary": "Repair of returned head f6fd93f7bdb (2026-10-23 14:41 UTC): rebuilt from the current read-only DAG, preserving all fields except the retained proof, proof_deps and split_report. Reread both cited new lemma statements, both live definition statements and neighboring prefix/finite-basis/stabilization statements; no mathematical dependency changed. Step 1 now derives the boundary index range and identifies j>r with j>=k explicitly from 0<=r<n, covering r=0 and r=n-1 uniformly. The translated and complementary boundary applications retain all their hypothesis checks. Both statement-only nodes, original searches and citation quotations are retained. The landing return assigns live completion promotion to L.",
+  "blueprint": "Historical auxiliary input below lem-trf-local-term-locality through the recorded resolution/Hilbert--Samuel chain, serving the finite-support translation step of lem-trf-initial-diagram-stabilization (its Step 2), corresponding to BM section 8, Lemma 8.2 and Remarks 8.4. Steps 1--4 give the ordered vertex-region bound; Steps 5--6 give the complementary-region bound; Step 7 handles faces and finiteness. No change to the current main-20261015 contracting-correspondence unit statement or route is made. Re-split: vertex-prefix lemma carries domination and strict earlier-vertex comparison; boundary-box lemma carries the boundary witness and coordinate transfer; assembly handles regions, faces and finite boxes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-ae12f12e5",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-ae12f12e5 (reviewer sub-agent of L); spot-checked: I read the item, both new statement-only nodes (lem-trf-monotone-vertex-prefix, lem-trf-monotone-boundary-box) and both cited definitions (def-trf-supported-homogeneous-division, def-weil-pbc-mv-polynomial-ring) in full, and compared the assembly with the base's 7-step proof. Every old argument reappears in a new node or in an elementary assembly line. Old Step 1 (each element of D dominates a listed vertex) and Steps 3-4 (degree/lex comparison after moving a positive coordinate) are now the vertex-prefix lemma. Old Steps 2-3 and 5-6 (boundary witness a_k=v_k+1, then moving the k-coordinate to a later j when v_j>=M) are now the boundary-box lemma. Old Step 7 is item Step 4. The two nodes are of comparable size and neither restates an exceptional-set clause of the item. I checked the mathematics myself. The strict earlier-vertex comparison needs a_{h,p}>0, which is stated; the prefix closure handles the a_{h,p}=0 case directly and otherwise uses that moving a coordinate preserves the coordinatewise order. The boundary transfer needs the total-degree bound |a|<=M, which is assumed. Small case n=2, D generated by (1,0): vertices are (0,1),(1,0), and U_1 is closed under the move. Edge cases A empty, U=N^n, k=n, M=1, D empty, D=N^n and r=n-1 all hold. In assembly Step 2, beta in Delta_i iff v=alpha_i+beta is outside U_{i-1}, and beta+e_k outside Delta_i iff v+e_k is in U_{i-1}. U_{i-1} is an arbitrary index prefix whose monotonicity comes from the prefix lemma. lem-trf-monotone-prefix-essential-restriction covers only degree-cutoff prefixes, a partial overlap that is advisory only, not a duplicate. The source is ILO VIII 2.3.11-13 plus BM 1997 section 8, labelled as an agent refinement. No SGA is cited, the logged searches are actual, created.item and blueprint ancestry are correct, and there are no tool_uses. Compared with the previous head f6fd93f7bdb, the new nodes are identical and only one sentence of item Step 1 (the index range of k) changed. Live and side-live still carry the old 7 steps and the Q28 Lean theorem still ends in sorry, so no stage-3 proof has landed. Landing still requires L to promote the side completion to live."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonotoneDiagramFaceExceptions",
+  "declaration": "MonomialDiagram.faceExceptions_subset_box_and_finite",
+  "declarations": [
+   "MonomialDiagram.region",
+   "MonomialDiagram.vertexDegreeBound",
+   "MonomialDiagram.faceExceptions",
+   "MonomialDiagram.faceExceptions_subset_box_and_finite"
+  ],
+  "file": "lean/Sheaf/RingTheory/MonotoneDiagramFaceExceptions.lean",
+  "statement": "theorem faceExceptions_subset_box_and_finite {n s : ℕ} (hn : 1 ≤ n) (D : Set (Fin n →₀ ℕ)) (hD : IsMonotone D) (α : Fin s → Fin n →₀ ℕ) (hα : IsOrderedVertexFamily D α) (i : Option (Fin s)) (r : Fin n) : faceExceptions D α i r ⊆ {β | (∀ j : Fin n, j < r → β j = 0) ∧ ∀ j : Fin n, r ≤ j → β j < vertexDegreeBound α} ∧ (faceExceptions D α i r).Finite",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e314e53c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Item changes only lean plus an added landed stmt_dep def-trf-supported-homogeneous-division (allowed, brief-stage2 l.167); lean.statement appears verbatim in the file. Clause-by-clause: IsMonotone = additive closure plus whole-coordinate move p<t; IsOrderedVertexFamily = Minimal-range plus strict Finsupp.DegLex(<,<), checked in Mathlib as degree first then first differing coordinate smaller = node's ascending (|a|,a_1..a_n), same direction as proof Step 4; region none = complement of D, some i = quotientSupport = Delta_i; vertexDegreeBound = max 1 of degree sup (M=1 when there are no vertices); r : Fin n with zero-based face j<r, single r 1 = e_{r+1}, box r<=j -> beta j < M; Option (Fin s) covers i=0..s; both conclusions (box inclusion, finiteness) kept. No extra hypotheses or universes. Edge cases D empty/full, s=0, n=1, r=0, r=n-1 covered. All seven proof steps checked correct. Helper defs have real data, the theorem proof is the only sorry, docstrings give source and blueprint and carry all seven steps, no existing copy in side-live lean, lines <=100, no unbound variables, report has both sections. Advisory: Finset.Lattice.Fold import probably transitive. Not recompiled (no fix made)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

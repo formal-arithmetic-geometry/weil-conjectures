@@ -1,0 +1,257 @@
+{
+ "id": "lem-sf-concrete-projection-field-descent",
+ "kind": "statement",
+ "title": "Specified projection components under localization and coefficient-field towers",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$; put $A_n=R/(t^n)$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Use the operation datum [def-fix-six-functor-datum], not a datum assuming projection invertibility. Schemes are finite type over $k$ and their structure morphisms need not be separated. Use the small pro-etale coefficient categories and the specified compactification projection map [def-exchange-projection], with compact-support functors [def-weil-integral-rational-qbar-compact-support]. Let $f:X\\to Y$ be separated of finite type. For integral bounded constructible $K_0,L_0$ in [def-weil-derived-complete-integral-detailed] with $L_0$ finite Tor, let $Q$ be raw rationalization [def-weil-rationalization-karoubi]. Under the canonical operation comparisons the rational component at $QK_0,QL_0$ is precisely $Q(\\operatorname{PF}_{f,K_0,L_0})$. For every finite coefficient-field extension $E\\subset F$ inside a fixed $\\Omega=\\overline{\\mathbf Q}_\\ell$, the specified scalar-extension functors and their tensor, pullback and compact-support comparisons identify the extension of this very component with the component at $F$; they also identify the defining units, counits and open tensor maps. These identifications satisfy the identity and tower cocycles. Consequently, for two inputs represented over a common finite field, these components define one morphism in the common-stage category [def-weil-algebraically-closed-coefficients], independently of further enlargement. If the integral component is invertible, its rational inverse is $Q(\\operatorname{PF}^{-1})$, and any common-stage representative of its scalar extension has inverse represented by that extended inverse. The same comparisons carry naturality and any equality between the specified composites to the field stages. No finite reduction of a rational object without an integral representative is claimed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete repair of fix-prop-projection-formula, former proof step(s) 5, 6; Proof, repaired concrete step 6"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-fix-six-functor-datum",
+  "def-exchange-projection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-projection-tensor-coefficient-cocycles"
+ ],
+ "proof": [
+  {
+   "text": "Represent the source and target endpoint isomorphisms as components of the composites of the recorded natural comparisons. Private component-formula lemmas prove equality with the original ordered component formulas. Use the projection comparison field of SixFunctorExchangeComparison in the supplied operation datum. Postcompose its equation with the inverse of its final comparison, then cancel the source comparison. This gives transported = projectionComponent for any coefficient comparison, hence for rationalization, finite coefficient extension and common-stage inclusion. No invertibility hypothesis is used.",
+   "uses": [
+    "def-sf-operation-stages"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Composition and Cartesian products preserve the component identity and tower equations of ExchangeProjectionScalarCocycle. Prove this by naturality of the second comparison and functoriality of its operation. Apply these calculations to support times identity followed by tensor, and to identity times pullback followed by tensor and support. SixFunctorCommonStageCoherence supplies support and pullback equations and the equivalent scalar-cocycle representation of TensorCoherence supplies tensor equations. These give both endpoint cocycles, including identity inclusions.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-projection-tensor-coefficient-cocycles"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The analogous composition and product calculations for SixFunctorInclusionCoherence follow from functoriality and naturality of the second inclusion comparison. Apply them to the same endpoint factorizations, with the operation datum supplying pullback/support inclusion equations and TensorCoherence supplying tensor inclusion equations. This proves InclusionCoherence.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-projection-tensor-coefficient-cocycles"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uncurry the natural transformation stage.projection and transport its source and target by the recorded operation equalities. This gives naturality for arbitrary arrows in every supplied category, and naturality at the inclusion transition isomorphisms gives EnlargementLaw after replacing transported components by the first step. Transport inverse equations by functoriality and cancel adjacent endpoint isomorphisms. An equality is carried forward simply by substituting its two equal maps. Assemble the ten conjuncts.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-projection-tensor-coefficient-cocycles",
+  "def-fix-six-functor-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and common finite coefficient field paragraphs; component calculations from the supplied operation comparisons, group A2, 2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization and common finite coefficient field descent of the specified compactification projection transformation and its inverse",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A}\\n  (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp\\n      (Al\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, element $f$ of degree $f_\\\\deg$, and element $x$ divisible by $f$ with degree $x_\\\\deg$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(x)}) \\\\to \\\\ope\"}\n  {\"name\": \"HomogeneousLocalization.awayMap\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : CommRing A] →\\n        [inst_1 : SetLike σ A] →\\n          [inst_2 : AddSubgroupClass σ A] →\\n            [inst_3 : AddCommMonoid ι] →\\n              [inst_4 : DecidableEq ι] →\\n                (𝒜 : ι → σ) →\\n                  [inst_5 \", \"doc\": \"The ring homomorphism from the homogeneous localization of a graded algebra $\\\\mathcal{A}$ at the element $f$ to its homogeneous localization at the element $x$, constructed using the algebra map and i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι_toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm) (AlgebraicGeometry.Proj.toSp\", \"doc\": \"The composition of the inclusion morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)}) \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ with the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (x :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"For a homogeneous element $ f $ of positive degree in a graded ring $ \\\\mathcal{A} $, the composition of the continuous map from the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ to the prim\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (HomogeneousLocalization.awayMa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g$ where $f$ divides $g$, the composition of the ring homomorphism $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$ (induced by localization) follo\"}\n  {\"name\": \"Algebra.Generators.compLocalizationAwayAlgHom_X_inl\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"The algebra homomorphism constructed by composing polynomial evaluation and localization away from the element $ P.\\\\sigma(g) $ maps the generator $ X $ to the inverse of the image of $ P.\\\\sigma(g) $ i\"}\n  {\"name\": \"Algebra.Generators.toAlgHom_ofComp_localizationAway\", \"module\": \"Mathlib/RingTheory/Extension/Generators\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Generators R S ι) {T : Type u_7} [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T],\\n \", \"doc\": \"Given a commutative ring $R$, its localization $S$ at an element $g$, and an algebra $P$ with generators, the canonical $R$-algebra homomorphism induced by the generator mapping $P.\\\\sigma$ and localiz\"}\n  {\"name\": \"Localization.AtPrime.mapPiEvalRingHom_comp_algebraMap\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"∀ {ι : Type u_4} {R : ι → Type u_5} [inst : (i : ι) → CommSemiring (R i)] {i : ι} (I : Ideal (R i))\\n  [inst_1 : I.IsPrime],\\n  (Localization.AtPrime.mapPiEvalRingHom I).comp\\n      (algebraMap ((i : ι) → R i) (Localization.AtPrime (Ideal.comap (Pi.evalRingHom R i) I))) =\\n    (algebraMap (R i) (Localiz\", \"doc\": \"For an indexed family of commutative semirings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$ and a prime ideal $I \\\\subseteq R_i$, the composition of the localized evaluation homomorphism $\\\\text{mapPiEvalRingHom}(I)$ with t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationalization of completed integral counit projection mates and scalar extension tower cocycles",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \": (M ≃ₗ[R] N) ≃ M ≃ₗ[A] N\", \"doc\": \"For a commutative semiring $ R $, its localization $ A $ at a submonoid $ S $, and modules $ M,N $ over $ A $, the operations of extending scalars from $ R $ to $ A $ and restricting scalars back to $\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, and an $ S $-module $ Y $, this is the counit morphism of the adjunction between extending and restricting scalars. It provid\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          (ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f) ⟶ CategoryTheory.Functor.id (ModuleCat S)\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, this is the counit natural transformation of the adjunction between extending scalars from $ R $ \"}\n  {\"name\": \"CoalgCat.counit_def\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (X : CoalgCat R),\\n  CategoryTheory.ComonObj.counit = ModuleCat.ofHom CoalgebraStruct.counit\", \"doc\": \"For any commutative ring $ R $ and coalgebra $ X $ over $ R $, the counit morphism of the comonoid structure on $ X $ in the monoidal category of $ R $-modules coincides with the counit map $ \\\\epsilon\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S) (X : ModuleCat R),\\n  (ModuleCat.RestrictionCoextensionAdj.counit' f).app X =\\n    ModuleCat.ofHom { toFun := fun g => g.toFun 1, map_add' := ⋯, map_smul' := ⋯ }\", \"doc\": \"Let $R$ and $S$ be rings, and let $f: R \\\\to S$ be a ring homomorphism. The restriction of scalars functor $\\\\mathrm{Res}_f: \\\\mathrm{Mod}_S \\\\to \\\\mathrm{Mod}_R$ is left adjoint to the coextension of scal\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, \"map\"",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Localization'\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(localiz|scalar)|scalar.*projection",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"line\": \"176\", \"text\": \"/-- The projection from the product of localizations at primes to the product of\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/Pi.lean\", \"line\": \"75\", \"text\": \"the projection of `M` onto each factor. Then the canonical map from the localization of the direct\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Projection.lean\", \"line\": \"39\", \"text\": \"lemma isStarProjection_iff_quasispectrum_subset_and_isSelfAdjoint [Module ℝ A] [IsScalarTower ℝ A A]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization: hits concern primitive adjunctions, ordinary modules or unrelated projections, not this specified derived compact-support comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(localiz|scalar)|scalar.*projection",
+   "results": "3 hits: Mathlib/Analysis/CStarAlgebra/Projection.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Localization/Pi.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, monoidal closed functors or unrelated algebraic localizations, not the completed compact-support component and its common-stage descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationalization of completed integral counit projection mates and scalar extension tower cocycles",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit_app, LinearEquiv.extendScalarsOfIsLocalizationEquiv, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, CoalgCat.counit_def, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.RestrictionCoextensionAdj.counit'_app",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, monoidal closed functors or unrelated algebraic localizations, not the completed compact-support component and its common-stage descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.Adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, monoidal closed functors or unrelated algebraic localizations, not the completed compact-support component and its common-stage descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization and common finite coefficient field descent of the specified compactification projection transformation and its inverse",
+   "results": "8 hits: AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec, AlgebraicGeometry.Proj.awayι_toSpecZero, AlgebraicGeometry.Proj.SpecMap_awayMap_awayι, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.Proj.valuativeCriterion_existence_aux, AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, monoidal closed functors or unrelated algebraic localizations, not the completed compact-support component and its common-stage descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison functor preserving adjunction units counits and tensor products preserves the compact support projection formula natural transformation",
+   "results": "8 hits: CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_ev, CategoryTheory.expComparison, CategoryTheory.coev_expComparison, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CompHausLike.LocallyConstant.adjunction_unit, CompHausLike.LocallyConstant.adjunction_left_triangle",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, monoidal closed functors or unrelated algebraic localizations, not the completed compact-support component and its common-stage descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof: Proof, repaired concrete step 6; extracted former concrete step(s) 5, 6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-concrete-projection-field-descent",
+  "worker": "stage1",
+  "summary": "Q66 retained the statement and supplied comparison-data interpretation, checked the concrete completed proper/open normalizations and all field-stage operations on raw Hom modules, and assembled localization, scalar towers, common-stage descent and inverse equations from existing nodes. No new nodes and no projection invertibility assumption.",
+  "blueprint": "fix-prop-projection-formula proof paragraph thm-sf-pf-field: expands former concrete steps 5--6 into the specified-map localization, primitive coefficient comparisons and common-stage descent. Blueprint searches found no exact duplicate: thm-sf-pf-field also asserts invertibility and uses the stronger def-sf-datum.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-compactification-completed-realization",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-pur-scalar-extension-tower-coherence",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-pur-completed-open-tensor-system-realization",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-sf-pf-coefficient-realization-transport",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Generic coefficient/adjunction/completion comparison used with its stated hypotheses to identify the primitive proper/open maps; it does not replace the field-stage route, and this unit supplies no such primitive comparison lemma."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Supplies only the composition clause of the canonical completed-pullback scalar comparisons, needed for the arrow $Lj^*Lp^*\\cong Lf^*$ inside $\\gamma$; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-7609a649f",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-7609a649f (reviewer sub-agent of L); spot-checked: Read the item, its 10 steps and all 14 cited statements against the blueprint main-20261015. The source sentence is fix-prop-projection-formula.proof.md: 'thm-sf-pf-adic reconstructs the integral map, and thm-sf-pf-field transports it to the field stages'. The route is thm-sf-pf-field.proof.md: rationalization is exact and commutes with the operations and their units and counits; for Q̄_ℓ, use a finite-stage representative and descend through scalar extension. No new nodes, no repair note (not a re-split), statement unchanged, no SGA. Not a duplicate: thm-sf-pf-field asserts invertibility under def-sf-datum, and lem-sf-pf-coefficient-realization-transport is only the conditional generic tool. Hypotheses checked: the cone lemma and lem-fix-compactification-completed-realization (finite-type k-schemes, j quasi-compact, no finite-Tor condition on K); lem-weil-finite-free-completed-scalar-comparison (any scheme, χ an isomorphism); lem-pur-scalar-extension-tower-coherence (any morphism with ℓ invertible, ramified extensions allowed); lem-pur-ordinary-adjunction-scalar-compatibility (p separated finite type between finite-type k-schemes); lem-sf-open-tensor-normalization (arbitrary ring map with g=id, and the system version); lem-pur-completed-open-tensor-system-realization (γ^c unique, equal to L(γ_•)). Steps 2, 8, 9 and 10 are correctly elementary: Hom⊗E linearity, the colimit definition, inverses by functoriality. Edge cases checked: K or L zero, F=E, torsion K_0 that becomes 0 after Q, ramified extensions, a nonseparated base. FIX in step 7, whose transport lemma requires the comparisons to intertwine pullback-composition maps and to form one family. (a) γ ends with Lj*Lp*≅Lf*, but steps 4–6 give only coefficient identity and tower cocycles. The worker had removed prop-weil-pbc-scalar-extension ('comparisons respect identity morphisms, composition') to avoid its noetherian finite-dimensional hypothesis, which holds for finite-type k-schemes. Re-cited, with that hypothesis discharged. (b) The step-5 comparison a (prop-weil-pbc-scalar-extension via the ordinary-adjunction lemma) was never identified with lim κ of step 4. The step now says that a reduces modulo ϖ_F^m to κ on flat-term K-flat models, so a = lim κ. proof_deps updated; tool_uses entry added for prop-weil-pbc-scalar-extension (unit sk-thm-properbasechange); no cycle. The other off-unit tool uses are accepted as generic primitive comparisons.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConcreteProjectionFieldDescent",
+  "declaration": "WeilConjectures.ProjectionCoefficient.concreteProjectionFieldDescent",
+  "declarations": [
+   "WeilConjectures.ProjectionCoefficient.source",
+   "WeilConjectures.ProjectionCoefficient.target",
+   "WeilConjectures.ProjectionCoefficient.sourceIso",
+   "WeilConjectures.ProjectionCoefficient.targetIso",
+   "WeilConjectures.ProjectionCoefficient.transported",
+   "WeilConjectures.ProjectionCoefficient.transportedInverse",
+   "WeilConjectures.ProjectionCoefficient.InverseLaw",
+   "WeilConjectures.ProjectionCoefficient.Natural",
+   "WeilConjectures.ProjectionCoefficient.EqualityLaw",
+   "WeilConjectures.ProjectionCoefficient.endpoint",
+   "WeilConjectures.ProjectionCoefficient.endpointIso",
+   "WeilConjectures.ProjectionCoefficient.EndpointCocycles",
+   "WeilConjectures.ProjectionCoefficient.commonEndpoint",
+   "WeilConjectures.ProjectionCoefficient.inclusionEndpointIso",
+   "WeilConjectures.ProjectionCoefficient.InclusionCoherence",
+   "WeilConjectures.ProjectionCoefficient.EnlargementLaw",
+   "WeilConjectures.ProjectionCoefficient.concreteProjectionFieldDescent"
+  ],
+  "file": "lean/Sheaf/Paper/ConcreteProjectionFieldDescent.lean",
+  "statement": "theorem concreteProjectionFieldDescent {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n} (S : SixFunctorOperationDatum D C E n hn) (tensorCoherence : TensorCoherence S.closure) (Q : SixFunctorCompactifiedSquare D) [IsSeparated Q.f.hom.left] [LocallyOfFiniteType Q.f.hom.left] [QuasiCompact Q.f.hom.left] : (∀ (K : sfIntegralConstructibleCategory C.l E Q.X.obj.left) (N : sfIntegralConstructibleCategory C.l E Q.Y.obj.left), S.integralFiniteTorDomain Q.Y N → transported (S.higher.rationalExchangeComparison Q) K N = (S.higher.rationalExchange Q).projectionComponent ((sfRationalConstructibleLocalization C.l E Q.X.obj.left).obj K) ((sfRationalConstructibleLocalization C.l E Q.Y.obj.left).obj N)) ∧ (∀ (E₀ F : Padic.FiniteCoefficientFields C.l C.Qbar) (h : E₀ ≤ F) (K : Stage C.l C.Qbar Q.X.obj.left E₀) (N : Stage C.l C.Qbar Q.Y.obj.left E₀), transported (S.closure.coefficientExchangeComparison h Q) K N = ((S.closure.coefficientStages F).rationalExchange Q).projectionComponent (((stageSystem C.l C.Qbar Q.X.obj.left).T h).obj K) (((stageSystem C.l C.Qbar Q.Y.obj.left).T h).obj N)) ∧ EndpointCocycles S.closure Q ∧ InclusionCoherence S.closure Q ∧ EnlargementLaw S.closure Q ∧ (∀ (E₀ : Padic.FiniteCoefficientFields C.l C.Qbar) (K : Stage C.l C.Qbar Q.X.obj.left E₀) (N : Stage C.l C.Qbar Q.Y.obj.left E₀), transported (S.closure.commonStageExchangeComparison E₀ Q) K N = (S.closure.commonStageExchange Q).projectionComponent ((inclusion (l := C.l) (Ω := C.Qbar) (Y := Q.X.obj.left) E₀).obj K) ((inclusion (l := C.l) (Ω := C.Qbar) (Y := Q.Y.obj.left) E₀).obj N)) ∧ (∀ (K : sfIntegralConstructibleCategory C.l E Q.X.obj.left) (N : sfIntegralConstructibleCategory C.l E Q.Y.obj.left), S.integralFiniteTorDomain Q.Y N → InverseLaw (S.higher.rationalExchangeComparison Q) K N ∧ EqualityLaw (S.higher.rationalExchangeComparison Q) K N ∧ ∀ a : (target S.higher.integral S.higher.integralTensor Q).obj (K, N) ⟶ (source S.higher.integral S.higher.integralTensor Q).obj (K, N), (S.higher.integralExchange Q).projectionComponent K N ≫ a = 𝟙 _ → a ≫ (S.higher.integralExchange Q).projectionComponent K N = 𝟙 _ → (sfRationalConstructibleLocalization C.l E Q.Y.obj.left).map ((S.higher.integralExchange Q).projectionComponent K N) ≫ (sfRationalConstructibleLocalization C.l E Q.Y.obj.left).map a = 𝟙 _ ∧ (sfRationalConstructibleLocalization C.l E Q.Y.obj.left).map a ≫ (sfRationalConstructibleLocalization C.l E Q.Y.obj.left).map ((S.higher.integralExchange Q).projectionComponent K N) = 𝟙 _) ∧ Natural (S.higher.rationalExchange Q) ∧ Natural (S.closure.commonStageExchange Q) ∧ (∀ (E₀ F : Padic.FiniteCoefficientFields C.l C.Qbar) (h : E₀ ≤ F), Natural ((S.closure.coefficientStages E₀).rationalExchange Q) ∧ ∀ (K : Stage C.l C.Qbar Q.X.obj.left E₀) (N : Stage C.l C.Qbar Q.Y.obj.left E₀), InverseLaw (S.closure.coefficientExchangeComparison h Q) K N ∧ InverseLaw (S.closure.commonStageExchangeComparison E₀ Q) K N ∧ EqualityLaw (S.closure.coefficientExchangeComparison h Q) K N ∧ EqualityLaw (S.closure.commonStageExchangeComparison E₀ Q) K N)",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8db5b9ed9",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Re-delivery of d962 RETURN. def-fix-six-functor-datum record byte-identical to live; item node changes only lean + stmt_deps (adds new def node def-sf-projection-tensor-coefficient-cocycles); lean.statement verbatim for item and new node; single sorry. TensorCoherence (identity/tower/inclusion of the tensor comparisons only) is genuinely needed, since SixFunctorCommonStageCoherence covers direct/pull/support/exceptional but tensor is free per (h,Q). It encodes the 'specified' comparisons of the def-exchange-projection scalar-cocycle paragraph, so it is not an unintended assumption; directions match ExchangeProjectionScalarCocycle/SixFunctorInclusionCoherence; no duplicate found. Conjuncts 1/2/6, InverseLaw and EnlargementLaw follow from SixFunctorExchangeComparison.projection (sourceIso/targetIso directions checked). Edge cases: E0=F, repeated/ramified fields, zero/torsion objects, rational isos without integral lift, no separated structure maps, universes all u. No compile (no file changed); worker dry run OK. Advisory: TensorCoherence quantifies over all Q; could reuse ExchangeProjectionScalarCocycle; docstring source differs from node source; E vs closure stage E0 link absent in the parent datum (accepted at d962)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bf736",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261025T163526-L-690519",
+  "kind": "interface",
+  "note": "independent cc review: concreteProjectionFieldDescent proof + equivalent re-representations (TensorCoherence, EndpointCocycles, sourceIso/targetIso, target, endpoint) against live clone, def-exchange-projection ExchangeProjectionScalarCocycle and SixFunctorCommonStages fields; both files compiled together in /tmp (exit 0), axioms only upstream sorryAx"
+ }
+}

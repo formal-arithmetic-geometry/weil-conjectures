@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-space-conormal-flatness-criterion",
+ "kind": "statement",
+ "title": "Flatness of first-order thickenings from the conormal map",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $(f,f'):(X\\hookrightarrow X')\\to(Y\\hookrightarrow Y')$ be a commutative square of algebraic spaces over $S$ [def-trf-algebraic-space]. Suppose both horizontal closed immersions (closed immersions on etale scheme charts [def-weil-closed-immersion]) are first-order thickenings: their ideal sheaves $\\mathcal I_X$ and $\\mathcal I_Y$ have square zero and the immersions induce the same underlying topological spaces. Suppose $f:X\\to Y$ is flat, meaning flat on etale scheme charts [def-weil-flat-morphism]. On the small etale sites put $\\mathcal C_{X/X'}=\\mathcal I_X/\\mathcal I_X^2=\\mathcal I_X$ and $\\mathcal C_{Y/Y'}=\\mathcal I_Y/\\mathcal I_Y^2=\\mathcal I_Y$. The canonical map $f^*\\mathcal C_{Y/Y'}\\to\\mathcal C_{X/X'}$ sends $a\\otimes j$ to $\\widetilde a\\,f'^\\sharp(j)$ for any lift $\\widetilde a$ of $a$; this is independent of the lift since $\\mathcal I_X^2=0$. Here $f^*\\mathcal C_{Y/Y'}=\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal C_{Y/Y'}$ [def-pur-sheaf-tensor-product]. Then $f'$ is flat and the canonical morphism $X\\to X'\\times_{Y'}Y$ is an isomorphism if and only if $f^*\\mathcal C_{Y/Y'}\\to\\mathcal C_{X/X'}$ is an isomorphism. No finite-presentation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 06BH (lemma-deform)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-closed-immersion",
+  "def-sfb-space-square-zero-extension-data",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-universal-conormal",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Because $\\mathcal I_X^2=\\mathcal I_Y^2=0$, the quotient maps identify $\\mathcal C_{X/X\\prime}=\\mathcal I_X/0$ with $\\mathcal I_X$ and $\\mathcal C_{Y/Y\\prime}=\\mathcal I_Y/0$ with $\\mathcal I_Y$, as modules on the respective small etale sites of $X$ and $Y$ used in the statement. Under these identifications the conormal map is the ideal map: on a local pure tensor both send $a\\otimes j$ to $\\widetilde a f\\prime{}^\\sharp(j)$. Changing the lift by $t\\in\\mathcal I_X$ changes the answer by $t f\\prime{}^\\sharp(j)=0$, since $f\\prime{}^\\sharp(j)\\in\\mathcal I_X$. The identifications and their inverses respect restriction and scalar multiplication, so they identify the two maps as sheaf-module morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06BH (lemma-deform)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-square-zero-flatness-criterion] with $Z=X$, $Z\\prime=X\\prime$, $\\mathcal J_Z=\\mathcal I_X$, and $\\mathcal J_Y=\\mathcal I_Y$. Its first-order thickening and flatness hypotheses are exactly the hypotheses here; its conclusion says that the ideal map is an isomorphism if and only if $f\\prime$ is flat and the given square is Cartesian. Step 1 identifies that ideal map with the stated conormal map. The Cartesian condition is precisely that the canonical morphism $X\\to X\\prime\\times_{Y\\prime}Y$ be an isomorphism. This proves both directions, without a finite-presentation or Noetherian assumption.",
+   "uses": [
+    "lem-sfb-space-square-zero-flatness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06BH (lemma-deform)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-square-zero-flatness-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 06BH (lemma-deform): reuse of the existing equivalent square-zero-ideal criterion, with explicit quotient and map identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*[Nn]ilpotent|[Nn]ilpotent.*flat|[Ff]lat.*[Ss]quare[Zz]ero|[Cc]onormal",
+   "results": "[grep] OK 2 hit(s)\nLogged top results: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: Module.Flat tensor criteria and smoothness results are not the conormal criterion for arbitrary algebraic-space thickenings; passage to etale charts requires an argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Ideal.Quotient",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Ideal.Quotient'\nLogged top results: none",
+   "date": "2026-10-22",
+   "verdict": "Query rejected: loogle: unknown identifier 'Ideal.Quotient'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness criterion for first order thickenings by isomorphism of conormal modules",
+   "results": "[leansearch] OK 8 hit(s)\nLogged top results: Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.flat_of_isLocalized_span, Module.flat_of_isLocalized_maximal, RingHom.Flat.respectsIso, Module.FaithfullyFlat.of_linearEquiv, Module.flat_of_localized_span, Module.Flat.of_linearEquiv, Algebra.Smooth.flat",
+   "date": "2026-10-22",
+   "verdict": "No match: Module.Flat tensor criteria and smoothness results are not the conormal criterion for arbitrary algebraic-space thickenings; passage to etale charts requires an argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of square zero thickenings of algebraic spaces is flat and cartesian exactly when the canonical pullback map on conormal modules is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\nLogged top results: AlgebraicGeometry.FormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_split_injection, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instOfIsOpenImmersion, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-22",
+   "verdict": "No match: Module.Flat tensor criteria and smoothness results are not the conormal criterion for arbitrary algebraic-space thickenings; passage to etale charts requires an argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Quotient\"",
+   "results": "[loogle] OK 1 hit(s)\nLogged top results: AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+   "date": "2026-10-22",
+   "verdict": "No match: Module.Flat tensor criteria and smoothness results are not the conormal criterion for arbitrary algebraic-space thickenings; passage to etale charts requires an argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal criterion of flatness over a nilpotent ideal with flat quotient and injective ideal tensor multiplication map",
+   "results": "[leanfinder] OK 8 hit(s)\nLogged top results: Algebra.FormallySmooth.iff_injective_lTensor_residueField, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Module.Flat.iff_lTensor_injective, Module.Flat.tfae_equational_criterion, Module.Flat.iff_rTensor_injective, Module.Flat.iff_lTensor_injective', Module.Flat.iff_rTensor_injective'",
+   "date": "2026-10-22",
+   "verdict": "No match: Module.Flat tensor criteria and smoothness results are not the conormal criterion for arbitrary algebraic-space thickenings; passage to etale charts requires an argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, \"TensorProduct\"",
+   "sub": "",
+   "results": "OK 12 hits; ; declarations: Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, TensorProduct.LinearIndepOn.tmul_of_flat_left, TensorProduct.LinearIndepOn.tmul_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right, Module.Flat.instTensorProduct, Algebra.TensorProduct.includeRight_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme flatness, formally etale or smooth algebras, and general tensor criteria, not the algebraic-space square-zero conormal equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|[Ff]lat.*[Nn]ilpotent|[Nn]ilpotent.*[Ff]lat",
+   "sub": "AlgebraicGeometry",
+   "results": "OK 0 hits; ; declarations: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme flatness, formally etale or smooth algebras, and general tensor criteria, not the algebraic-space square-zero conormal equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness criterion for square zero extensions by an isomorphism of ideal modules",
+   "sub": "",
+   "results": "OK 8 hits; ; declarations: Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.flat_of_isLocalized_span, Module.flat_of_isLocalized_maximal, RingHom.Flat.respectsIso, Module.Flat.iff_lTensor_injective', Module.FaithfullyFlat.of_linearEquiv, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top, Module.Flat.of_linearEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme flatness, formally etale or smooth algebras, and general tensor criteria, not the algebraic-space square-zero conormal equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness and cartesianness of square zero thickenings of algebraic spaces detected by the conormal map",
+   "sub": "",
+   "results": "OK 8 hits; ; declarations: AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme flatness, formally etale or smooth algebras, and general tensor criteria, not the algebraic-space square-zero conormal equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An infinitesimal deformation of a flat morphism is flat and a base change exactly when the induced map of square zero ideals is invertible",
+   "sub": "",
+   "results": "OK 8 hits; ; declarations: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallyEtale.iff_comp_bijective, Algebra.FormallyEtale, RingHom.FormallyEtale, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme flatness, formally etale or smooth algebras, and general tensor criteria, not the algebraic-space square-zero conormal equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-space-split-deformation-ext",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tag 06BH (lemma-deform).",
+   "via": [
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-conormal-flatness-criterion",
+  "worker": "stage1",
+  "summary": "Reused the existing algebraic-space square-zero ideal criterion instead of creating a duplicate. Identified the conormal quotients and their canonical map explicitly, then specialized the existing theorem. Checked the source, all cited hypotheses, project Lean searches and Mathlib searches. No new nodes and no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tag 06BH (lemma-deform). The two steps discharge the Tag 06BH supporting input by identifying conormal modules with square-zero ideals and reusing the existing criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-54f1e835c",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-54f1e835c (reviewer sub-agent of L); spot-checked: PASS. I read Stacks Tag 06BH (spaces-more-morphisms.tex lemma-deform, l.3990), statement and proof. The item matches it hypothesis by hypothesis: first-order thickenings of algebraic spaces over a scheme S, f flat, and the equivalence 'f' flat and X=Y×_{Y'}X'' ⇔ 'f^*C_{Y/Y'}→C_{X/X'} iso'. No hypothesis is added and none dropped. The delivery has no new nodes and leaves the statement, stmt_deps, source and blueprint.from unchanged; the only change is the split. Step 1 (elementary): I²=0 gives C=I/0=I, and the conormal map equals the ideal map on local tensors. Lift independence holds because t·f'^♯(j)∈I_X²=0, using f'^♯(I_Y)⊆I_X from the commuting square. Step 2 cites lem-sfb-space-square-zero-flatness-criterion (Q07, 2026-10-22, live, unsplit, same unit sk-thm-sf-ctf-stability, same Tag 06BH). I read its full statement: same small étale sites, same tensor f^*J, same chart flatness, and the Cartesian clause 'via the given square'. 'Representable closed immersion' and 'closed immersion on étale charts' agree for algebraic spaces. With Z=X its conclusion is exactly the item. No cycle: the cited node has proof_deps [] and its only citer is proper-space-square-zero-effectivity, in the snapshot and in side-live; it is not in the dropped list. Edge cases checked: zero ideals; identity on k[ε]; X'=k[ε,δ]/(ε,δ)² (not flat, not surjective); X=X'=Spec k over k[ε] (kε→0, not flat). All agree with the statement. The source-proof typo U=V×_{V'}V' (should be V×_{V'}U') is confirmed; it does not affect the split. No SGA is cited, no tool_uses are needed, and the unit's realized duty does not apply. Minor: the report mentions a citations.json that is not in the commit. Maintainer note: the item and lem-sfb-space-square-zero-flatness-criterion are same-day duplicates (ND and Q07) and should be merged per stages/1-dag §2; the one-step reuse is the accepted interim form. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceConormalFlatnessCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_conormal_flatness_criterion",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.firstOrderConormalMap",
+   "AlgebraicGeometry.AlgebraicSpace.space_conormal_flatness_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceConormalFlatnessCriterion.lean",
+  "statement": "theorem space_conormal_flatness_criterion {S : Scheme.{u}} {X Y X' Y' : AlgebraicSpace S} (f : X ⟶ Y) (f' : X' ⟶ Y') (i : X ⟶ X') (j : Y ⟶ Y') (hi : IsSpaceFirstOrderThickening i) (hj : IsSpaceFirstOrderThickening j) (h : i ≫ f' = f ≫ j) (hf : MapIsFlat f) : (MapIsFlat f' ∧ IsIso (Limits.pullback.lift i.hom f.hom (congrArg (fun k ↦ k.hom) h))) ↔ IsIso (firstOrderConormalMap f f' i j hi hj h)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed first-order thickening, chart flatness, tensor pullback and conormal definitions. firstOrderConormalMap selects the uniquely normalized map from space_conormal_map. The Cartesian conclusion is IsIso of the actual canonical sheaf pullback lift. Existing landed notion owners are added to stmt_deps; no natural-language statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86269ed5b",
+  "group": "O1",
+  "result": "pass",
+  "note": "Clause-by-clause match with Stacks 06BH and the node: four algebraic spaces over S, the maps and the square i≫f'=f≫j; IsSpaceFirstOrderThickening (closed immersion with ker^2=⊥ on every scheme base change, not stronger); MapIsFlat for f and f' (all compatible étale charts); f^*C = moduleTensorPullback f of spaceConormal j; firstOrderConormalMap is the ∃!-pinned space_conormal_map (not hollow); Cartesian clause is IsIso of pullback.lift i.hom f.hom into pullback f'.hom j.hom (correct order); ↔ as in the node. No extra hypotheses or universe restrictions; edge cases (zero ideals, empty spaces, k[ε] examples) consistent. lean.statement verbatim; source and blueprint docstrings and proof steps present; only the item node changed versus side-live. Mechanical finding: lem-sfb-space-universal-conormal is needed for the object constructed by the theorem space_conormal_map (.exists.choose), so PASS on that point; maintainer note: spaceConormal and IsSpaceConormalMap are plain defs in a theorem module. lem-trf-space-fibre-products-etale-covers: no definitions taken from it; the node's fibre product of spaces equals the sheaf pullback only via fibreProduct_isAlgebraicSpace's conclusion, and the twin node cites it the same way, so PASS. The twin lem-sfb-space-square-zero-flatness-criterion has no Lean record, so no duplicate. No compile run (no file changed); the worker reports clean scompile."
+ }
+}

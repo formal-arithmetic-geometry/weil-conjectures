@@ -1,0 +1,256 @@
+{
+ "id": "lem-trf-rational-field-tensor-local-cm",
+ "kind": "statement",
+ "title": "Rational-field tensors are polynomial localizations with Cohen–Macaulay local rings",
+ "statement": "Let $k$ be a field [def-weil-field], let $F/k$ and $L/k$ be field extensions [def-pc-field-extension], and let $r\\geq0$ and $t_1,\\ldots,t_r\\in F$ be algebraically independent over $k$, with $F=k(t_1,\\ldots,t_r)$; here this notation means the smallest subfield containing $k$ and these elements, and algebraic independence means that evaluation $k[x_1,\\ldots,x_r]\\to F$, $x_i\\mapsto t_i$, is injective [def-weil-pbc-mv-polynomial-ring]. Put $P=L[x_1,\\ldots,x_r]$, let $W\\subset P$ be the image of $k[x_1,\\ldots,x_r]\\setminus\\{0\\}$ under coefficient inclusion, and put $A=F\\otimes_kL$ with the usual algebra tensor multiplication [def-weil-pbc-module-tensor-product]. There is an $L$-algebra isomorphism $W^{-1}P\\cong A$ [def-weil-pbc-module-localization] sending $l x^\\alpha/w$ to $(t^\\alpha/w(t))\\otimes l$. The ring $A$ is Noetherian [def-weil-pbc-noetherian-ring], and for every prime $\\mathfrak p\\subset A$ its localization $A_{\\mathfrak p}$ is a Noetherian local ring [def-weil-pbc-localization-at-prime] satisfying $\\operatorname{depth}(A_{\\mathfrak p})=\\dim A_{\\mathfrak p}$ [def-weil-pbc-depth; def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 045M (lemma-tensor-fields-CM), last two sentences of the proof: the rational-field tensor base is a localization of a polynomial ring and is Cohen–Macaulay."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=k[x_1,\\ldots,x_r]$ and $S=B\\setminus\\{0\\}$. Evaluation embeds $B$ into $F$. The subset $E=\\{f(t)/s(t):f\\in B,\\ s\\in S\\}$ is a subfield of $F$: addition and multiplication use common denominators, and a nonzero fraction has inverse $s(t)/f(t)$ since injectivity gives $f\\ne0$. It contains $k$ and every $t_i$, hence $E=F$ by the smallest-subfield hypothesis. The map $S^{-1}B\\to F$, $f/s\\mapsto f(t)/s(t)$, is therefore surjective and injective: equality of two images is precisely $(fs'-f's)(t)=0$, hence $fs'=f's$. It is a ring isomorphism. Coefficient inclusion $B\\to P$ is injective by equality of polynomial coefficients, so its image $W$ of $S$ is multiplicatively closed and excludes zero.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M (lemma-tensor-fields-CM), rational-field localization in the last two sentences of the proof; elementary fraction construction."
+   }
+  },
+  {
+   "text": "Identify $C=B\\otimes_k L$ with $P$ by $\\theta(f\\otimes l)=l f$, where $f$ on the right denotes coefficient inclusion. Its inverse sends $\\sum_\\alpha l_\\alpha x^\\alpha$ to $\\sum_\\alpha x^\\alpha\\otimes l_\\alpha$. The formula for $\\theta$ is bilinear over $k$; its inverse is additive. The composites are the identity on monomials with coefficients and on pure tensors, respectively, by $k$-balancing. These generate both modules. Products agree since $(x^\\alpha\\otimes l)(x^\\beta\\otimes m)=x^{\\alpha+\\beta}\\otimes lm$, and $1\\otimes l$ corresponds to the constant polynomial $l$. Thus this is an $L$-algebra isomorphism carrying the action of $s\\in S$ to multiplication by its coefficient image in $W$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M (lemma-tensor-fields-CM), identification with the polynomial localization, expanded using polynomial coefficients and tensor bilinearity."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] with its $R=k$, $A=B$, $T=S$, $M=B$, and $N=L$. Using step 1, it gives a bijective $B$-linear map $S^{-1}C\\to F\\otimes_k L$ with $(f\\otimes l)/s\\mapsto(f(t)/s(t))\\otimes l$. Under step 2, $S^{-1}C=W^{-1}P$: the fraction relations coincide because the $S$-action on $C$ is multiplication by the corresponding element of $W$. This bijection is multiplicative: on fraction generators the product of $(f\\otimes l)/s$ and $(g\\otimes m)/u$ is $(fg\\otimes lm)/(su)$, and their images multiply to $(f(t)g(t)/(s(t)u(t)))\\otimes lm$. Additivity extends this equality to arbitrary fractions, since each numerator is a finite sum of pure tensors. The unit and $L$-action are respected by $1/1\\mapsto1\\otimes1$ and $(1\\otimes l)/1\\mapsto1\\otimes l$. This proves the required $L$-algebra isomorphism and its asserted monomial-fraction formula.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization) and 00D2 (lemma-tensor-with-bimodule), applied to the rational-field tensor in Tag 045M."
+   }
+  },
+  {
+   "text": "The field $L$ is Noetherian: an ideal containing a nonzero $a$ contains $a^{-1}a=1$, so its only ideals are $(0)$ and $(1)$, both finitely generated. Its only prime ideal is $(0)$, and $L_{(0)}\\cong L$ via $a/b\\mapsto ab^{-1}$. There are no strict prime chains of positive length, so $\\dim L=0$. The empty regular sequence exists in its maximal ideal $(0)$, while every nonempty sequence in $(0)$ starts with zero, whose multiplication on the nonzero module $L$ is not injective. Hence $\\operatorname{depth}L=0$, and the same descriptions apply to $L_{(0)}$. Thus $L$ meets all the base-ring hypotheses of [lem-trf-polynomial-algebra-cm].",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M (lemma-tensor-fields-CM), field base case for its use of Tag 00ND; elementary verification of the hypotheses."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-polynomial-algebra-cm] to $R=L$ and $n=r$. It gives that $P$ is Noetherian and that $\\operatorname{depth}(P_{\\mathfrak q})=\\dim P_{\\mathfrak q}$ for every prime $\\mathfrak q\\subset P$. Apply [lem-weil-pbc-localization-noetherian] to $P$ and $W$; its conditions hold for the fraction construction $D=W^{-1}P$. Consequently $D$, and therefore its isomorphic ring $A$ from step 3, is Noetherian (an isomorphism carries generators of each inverse-image ideal to generators).",
+   "uses": [
+    "lem-trf-polynomial-algebra-cm",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ND (lemma-CM-polynomial-algebra) and Tag 00FN (lemma-Noetherian-permanence), as used in Tag 045M."
+   }
+  },
+  {
+   "text": "Identify $A$ with $D$ by step 3. Given a prime $\\mathfrak p\\subset D$, put $\\mathfrak q=\\{a\\in P:a/1\\in\\mathfrak p\\}$. This is prime by contraction, and $W\\cap\\mathfrak q=\\varnothing$ since the elements of $W$ become units. There are inverse ring maps $P_{\\mathfrak q}\\to D_{\\mathfrak p}$, $a/b\\mapsto(a/1)/(b/1)$, and $D_{\\mathfrak p}\\to P_{\\mathfrak q}$, $(a/w)/(b/v)\\mapsto av/(wb)$. Indeed $b/v\\notin\\mathfrak p$ implies $b\\notin\\mathfrak q$, so $wb\\notin\\mathfrak q$; changing representatives preserves each map by the cross-multiplication relation for fractions. Substitution gives the identity for both composites. The definition of prime localization makes $D_{\\mathfrak p}$ local, and [lem-weil-pbc-localization-noetherian] makes it Noetherian. The displayed isomorphism carries prime chains bijectively and carries regular sequences in maximal ideals bijectively: multiplication on each successive quotient is conjugated by the induced isomorphism, and nonzero quotients stay nonzero. Thus it preserves both dimension and depth, so step 5 gives $\\operatorname{depth}(A_{\\mathfrak p})=\\dim A_{\\mathfrak p}$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M (lemma-tensor-fields-CM), last sentence; the local-ring identification is checked on fractions, and Tag 00FN gives Noetherianity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-regular-sequence",
+  "lem-trf-polynomial-algebra-cm",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 045M, last two proof sentences, expanded using Tags 00DK, 00D2, 00ND and 00FN; elementary fraction and coefficient arguments written by Q57."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a field extension L over k the tensor product k(t1,...,tr) tensor over k L is a localization of a polynomial ring over L and all its prime localizations have depth equal to dimension",
+   "results": "{\"t\": \"2026-10-22T06:47:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a field extension L over k the tensor product k(t1,...,tr) tensor over k L is a localization of a polynomial ring over L and all its prime localizations have depth equal to dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.LinearDisjoint.isDomain\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"Algebra.TensorProduct.not_isField_of_transcendental\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\"], \"digest\": \"c2440123bc498963\"} Read hits: No complete match: localization and fraction-ring hits cover ingredients only; the prime-local depth equality is absent. MvPolynomial.isLocalization localizes coefficients, rather than asserting this whole rational-field tensor and local Cohen–Macaulay statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, IsLocalization",
+   "results": "{\"t\": \"2026-10-22T06:48:09Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPolynomial.isLocalization\", \"MvPolynomial.isLocalization_C_mk'\"], \"digest\": \"a540b860a23e576f\"} Read hits: No complete match: localization and fraction-ring hits cover ingredients only; the prime-local depth equality is absent. MvPolynomial.isLocalization localizes coefficients, rather than asserting this whole rational-field tensor and local Cohen–Macaulay statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|cohen.macaulay|fraction.*tensor|tensor.*fraction",
+   "results": "{\"t\": \"2026-10-22T06:48:09Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|cohen.macaulay|fraction.*tensor|tensor.*fraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\"], \"digest\": \"c6070dc7c41f5b09\"} Read hits: No complete match: localization and fraction-ring hits cover ingredients only; the prime-local depth equality is absent. MvPolynomial.isLocalization localizes coefficients, rather than asserting this whole rational-field tensor and local Cohen–Macaulay statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational function field tensored with a field extension is a localization of the polynomial ring and is Cohen Macaulay",
+   "results": "{\"t\": \"2026-10-22T06:48:09Z\", \"tool\": \"leansearch\", \"query\": \"A rational function field tensored with a field extension is a localization of the polynomial ring and is Cohen Macaulay\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RatFunc.instIsFractionRingPolynomial\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"RatFunc.ofFractionRing_mk'\", \"IsLocalization.tensor\", \"RatFunc.noConfusionType\", \"Algebra.Extension.localization\", \"MvPolynomial.isLocalization\", \"FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial\"], \"digest\": \"6753d611fcba5e09\"} Read hits: No complete match: localization and fraction-ring hits cover ingredients only; the prime-local depth equality is absent. MvPolynomial.isLocalization localizes coefficients, rather than asserting this whole rational-field tensor and local Cohen–Macaulay statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|cohen.macaulay|isLocalization.*tensor|tensor.*isLocalization",
+   "results": "{\"t\": \"2026-10-23T12:14:00Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|cohen.macaulay|isLocalization.*tensor|tensor.*isLocalization\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\"], \"digest\": \"4c5996c4bbabdf38\"} Read the returned hits: localization/tensor and dimension declarations are ingredients, not the full rational-field tensor plus local-depth statement. No full match; the existing DAG nodes cover the needed ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor product of a rational function field with a field extension is a localization of a polynomial ring and is Cohen Macaulay",
+   "results": "{\"t\": \"2026-10-23T12:14:01Z\", \"tool\": \"leansearch\", \"query\": \"The tensor product of a rational function field with a field extension is a localization of a polynomial ring and is Cohen Macaulay\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalizedModule.rTensor\", \"IsLocalization.tmul_mk'\", \"RatFunc.instIsFractionRingPolynomial\", \"IsLocalization.mk'_tmul\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"IsLocalization.tensor\"], \"digest\": \"3e0742eaa9a6a003\"} Read the returned hits: localization/tensor and dimension declarations are ingredients, not the full rational-field tensor plus local-depth statement. No full match; the existing DAG nodes cover the needed ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T12:14:01Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalization.tensorRight\", \"IsLocalization.tensor\", \"IsLocalization.algebraLid\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.moduleLid\", \"IsLocalization.moduleTensorEquiv\", \"IsLocalization.mk'_tmul\", \"IsLocalization.tmul_mk'\"], \"digest\": \"de9de3ef9b2f9c16\"} Read the returned hits: localization/tensor and dimension declarations are ingredients, not the full rational-field tensor plus local-depth statement. No full match; the existing DAG nodes cover the needed ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A purely transcendental extension tensored with a field is a localization of a multivariate polynomial ring with Cohen Macaulay local rings",
+   "results": "{\"t\": \"2026-10-23T12:14:04Z\", \"tool\": \"leanfinder\", \"query\": \"A purely transcendental extension tensored with a field is a localization of a multivariate polynomial ring with Cohen Macaulay local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.not_isField_of_transcendental\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"IntermediateField.LinearDisjoint.isDomain\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\"], \"digest\": \"f365329658785325\"} Read the returned hits: localization/tensor and dimension declarations are ingredients, not the full rational-field tensor plus local-depth statement. No full match; the existing DAG nodes cover the needed ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizations of finite polynomial rings over fields have depth equal to Krull dimension",
+   "results": "{\"t\": \"2026-10-23T12:14:41Z\", \"tool\": \"leanfinder\", \"query\": \"Localizations of finite polynomial rings over fields have depth equal to Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.localizationAway_dimension_zero\", \"Ring.DimensionLEOne.localization\", \"Ring.KrullDimLE.of_isLocalization\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Polynomial.ringKrullDim_le\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Polynomial.ringKrullDim_of_isNoetherianRing\"], \"digest\": \"1505765dfa7d7fce\"} Read the returned hits: localization/tensor and dimension declarations are ingredients, not the full rational-field tensor plus local-depth statement. No full match; the existing DAG nodes cover the needed ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tensor-fields-cohen-macaulay",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, flat-family component-closure input through relative associated specialization; in the proof of Stacks 05DC used there, the residue-field tensor ring has no embedded associated primes because it is Noetherian Cohen–Macaulay. This input is the rational-field tensor localization and local Cohen–Macaulay base in Stacks 045M.",
+   "via": [
+    "lem-trf-tensor-fields-cohen-macaulay",
+    "lem-trf-relative-assassin-base-change",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-rational-field-tensor-local-cm",
+  "worker": "stage1",
+  "summary": "Expanded the rational-field tensor construction via fractions, polynomial coefficient tensors, and the existing localization-over-base theorem. Reused polynomial Cohen–Macaulayness and Noetherian localization; verified the field base case and explicitly identified each prime local ring. No new nodes and no statement change.",
+  "blueprint": "Serves lem-trf-local-term-locality proof (1)--(2), through the existing relative-associated specialization chain: the rational-field base case of the residue-field tensor Cohen–Macaulay input in Stacks 045M. Read the current latest blueprint; the algebraic input is supplied by the existing DAG chain, not stated as a separate blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-7c87f7a45",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-7c87f7a45 (reviewer sub-agent of L); spot-checked: I read all six steps against Stacks 045M (algebra.tex line 47267, last two proof sentences) and the full statements of every cited node. The item statement and stmt_deps are unchanged from live, where the item is still unsplit, so no other group has superseded this delivery. There are no new nodes, no tool_uses and no repair note. Step 1: S^{-1}B≅F holds, using the subfield E with explicit inverses and injectivity from algebraic independence. Step 2: B⊗_kL≅L[x] as L-algebras, checked on generators. Step 3: lem-weil-pbc-localization-tensor-over-base is instantiated correctly (R=k, A=B, T=S, M=B, N=L) and composed with (step-1 iso)⊗id; multiplicativity, unit and L-structure are checked separately, so the module iso is not over-attributed. Step 4: L meets the base hypotheses of lem-trf-polynomial-algebra-cm (Noetherian, dim 0, depth 0 via the empty sequence). Step 5: polynomial Cohen–Macaulay plus Noetherian localization at W gives A Noetherian. Step 6: I checked by hand that D_p≅P_q is well defined (b/v∉p ⇒ b∉q; w∉q) and that both composites are identities; depth and dim transport along the iso. Small cases r=0 and r=1 (L=k, L=k(u)) are consistent. Two cited statements are mathlib leaves and the third is in the item's own unit, and none of their closures reaches the item. proof_deps equal the union of the step uses. No duplicate exists in the DAG, and the item is not a restatement of its parent lem-trf-tensor-fields-cohen-macaulay. No SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RationalFieldTensorLocalCohenMacaulay",
+  "declaration": "Algebra.TensorProduct.rationalField_localization_and_local_depth_eq_dimension",
+  "file": "lean/Sheaf/RingTheory/RationalFieldTensorLocalCohenMacaulay.lean",
+  "statement": "theorem rationalField_localization_and_local_depth_eq_dimension (k : Type u) (F : Type v) (L : Type w) [Field k] [Field F] [Field L] [Algebra k F] [Algebra k L] (r : ℕ) (t : Fin r → F) (hind : Function.Injective (MvPolynomial.aeval t : MvPolynomial (Fin r) k →ₐ[k] F)) (hgen : IntermediateField.adjoin k (Set.range t) = ⊤) : ∃ e : @AlgEquiv L (Localization ((nonZeroDivisors (MvPolynomial (Fin r) k)).map (MvPolynomial.map (algebraMap k L)))) (F ⊗[k] L) _ _ _ _ (rightAlgebra (R := k) (A := F) (B := L)), (∀ (α : Fin r →₀ ℕ) (l : L) (s : nonZeroDivisors (MvPolynomial (Fin r) k)), e (Localization.mk (MvPolynomial.monomial α l) ⟨MvPolynomial.map (algebraMap k L) s, ⟨s, s.property, rfl⟩⟩) = ((∏ i : Fin r, t i ^ α i) / MvPolynomial.aeval t (s : MvPolynomial (Fin r) k)) ⊗ₜ[k] l) ∧ IsNoetherianRing (F ⊗[k] L) ∧ ∀ (p : Ideal (F ⊗[k] L)) [p.IsPrime], IsNoetherianRing (Localization.AtPrime p) ∧ IsLocalRing (Localization.AtPrime p) ∧ (IsLocalRing.depth (R := Localization.AtPrime p) (Localization.AtPrime p) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime p)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87a0f6fae",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Checked every clause of the node against the Lean. The field and extensions use Field/Algebra with independent universes u,v,w. hind is the node's injective-aeval definition of algebraic independence. hgen is IntermediateField.adjoin k (range t) = ⊤ (field generation). W is the coefficient-map image of k[x]⁰, which equals the nonzero polynomials since k[x] is a domain. The AlgEquiv over L uses the rightAlgebra instance (algebraMap l = 1⊗l). The monomial-fraction formula is quantified over all α, l and s, with w(t) = aeval t s. A is Noetherian, and each A_p is stated Noetherian and local with depth = ringKrullDim; IsLocalRing.depth (Depth.lean:50) needs only IsLocalRing plus the self-module's finiteness. Edge cases r=0, L=k, L=F, l=0, α=0, s=1 are fine; no extra assumptions. Only the item's lean record changed (JSON diff against live); the statement matches the file verbatim; docstrings carry Stacks 045M, the blueprint id and the six proof steps; proof is sorry only; no definitions; no Mathlib duplicate; report has both required sections; no parallel stage-2 delivery in svc.log. No compile run because no file changed. Minor: the IsLocalRing conjunct is redundant (an instance) but harmless."
+ }
+}

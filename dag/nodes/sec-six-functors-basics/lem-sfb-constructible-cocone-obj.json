@@ -150,7 +150,22 @@
  ],
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sfb-qlbar-two-colimit",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-sfb-constructible-cocone-obj",
@@ -209,13 +224,54 @@
   "note": "Only the item's lean field changes: an existing:true binding to AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj (TwoColimit.lean:622). It matches the node and main-20261015 source order 1772 clause by clause: Fact ℓ.Prime, X : Scheme.{u}, NoetherianSpace X, EssSurjObj = ∀ K ∃ E (finite intermediate field) ∃ K_E bounded-constructible, Nonempty(Φ_E K_E ≅ K), with the cocone recorded for def-sfb-constructible-cocone. No stronger hypotheses, the statement field is verbatim, the blueprint lean frontmatter names this declaration, the item is not dropped, and edge cases (empty X, ℓ=2, universes) are covered. Compile: a probe importing TwoColimit fails at import on both nt_compile --json (side) and lcompile (live) because etaleModuleCohomology_isColimit_of_isFiltered is declared in both Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit and WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit (line 154), both in TwoColimit's own import closure. This is a project environment fault the delivery cannot repair (it has no Lean file). Maintainer note: make the Sheaf copy a re-export of the WeilConjectures copy; land this binding as is or once the collision is cleared."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F5",
+  "group": "Z6",
   "result": "pass",
-  "landing": "20261021T225118-L-3772049",
+  "landing": "20261024T223355-L-1602497",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj",
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_homInj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_homSurj"
+  ],
+  "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $\\ell$ be a prime and $X$ a scheme whose underlying topological space is Noetherian. The\nconstructible cocone ([def-sfb-constructible-cocone]) satisfies (Obj) of\n[sk-def-sfb-filtered-two-colimit]: every $K\\in D_{\\mathrm{cons}}(X,\\Qlb)$ is isomorphic to\n$T_{E,\\Qlb}K_E$ for some finite extension $E$ of $\\mathbf Q_\\ell$ in $\\Qlb$ and some\n$K_E\\in D_{\\mathrm{cons}}(X,E)$.",
+  "proof": [
+   {
+    "text": "Constructible descent, by induction on the number of nonzero cohomology sheaves of $K$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Modules.* Let $M$ be a constructible $\\overline{\\mathbf Q}_{\\ell,X}$-module ([sk-def-sfb-constructible]): on the\nstrata of a finite stratification of $X$ it is locally finitely presented. A finite\npresentation is a matrix with finitely many entries, sections of\n$\\overline{\\mathbf Q}_{\\ell,X}=\\operatorname{colim}_EE_X$ ([sk-prop-sfb-qlbar-colimit-x]) over quasi-compact\nopens, and finitely many such sections are defined over a single finite extension $E$. So $M$\nis $\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}M_E$ for a constructible $E_X$-module $M_E$, glued over the finitely\nmany strata and charts; the gluing data are again finitely many morphisms, which descend after\nenlarging $E$.",
+    "uses": [
+     "sk-def-sfb-constructible",
+     "sk-prop-sfb-qlbar-colimit-x"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Complexes.* For $K$ with more than one nonzero cohomology sheaf, a truncation triangle\n$\\tau_{\\le n}K\\to K\\to\\tau_{>n}K\\xrightarrow{\\delta}$ has outer terms of shorter length, which by\ninduction are $T_{E,\\Qlb}$ of bounded constructible $E_X$-complexes for a common $E$. The\nextension of scalars is exact ([lem-sfb-qlbar-flat]) and so commutes with truncations. The\nconnecting morphism $\\delta$ descends to some finite $E'\\supseteq E$ by\n[lem-sfb-constructible-cocone-hom-surj]; its cone over $E'$ is bounded constructible (the\nbounded constructible complexes form a triangulated subcategory on Noetherian $X$,\n[det-def-sfb-bounded-constructible]), and its extension of scalars is isomorphic to $K$.",
+    "uses": [
+     "lem-sfb-qlbar-flat",
+     "lem-sfb-constructible-cocone-hom-surj",
+     "det-def-sfb-bounded-constructible"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

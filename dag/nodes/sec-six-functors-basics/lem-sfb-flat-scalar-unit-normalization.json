@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-flat-scalar-unit-normalization",
+ "kind": "statement",
+ "title": "Flat scalar units in tensor and section presentations",
+ "statement": "Let a:R→S be a morphism of commutative condensed ring objects whose scalar extensions on schemes preserve finite limits. For a scheme T, let e be a TensorNormalization with TensorNormalized, and q:R_T→Res(S_T) a regular-module map whose underlying sheaf map is a_T. The specified scalar adjunction unit, followed by e, is the inverse right unitor followed by tensoring with Q(q[0]). There is a SectionScalarComparison s which is SectionScalarNormalized and SectionTensorNormalized with e, and its fixed derived restriction and extension comparisons carry the internal scalar unit to s.pair.adjunction.unit. All objects and normalization predicates are those of [def-sfb-internal-derived-scalar-comparisons], [def-sfb-internal-section-scalar-pullback-comparison-data], [def-sfb-section-scalar-tensor-normalization-data], and [def-pd-section-derived-realization].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison; step 2 of lem-sfb-flat-coefficient-square-normalization; Stacks Tags 03EK, 015F and 0FND"
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-section-scalar-pullback-comparison-data",
+  "def-sfb-section-scalar-tensor-normalization-data",
+  "def-pd-section-derived-realization"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary scalar unit inserts 1 before the balanced quotient; the specified ordinary tensor comparison sends s tensor m to m tensor s, hence carries it to inverse right unitor followed by tensoring with q.",
+   "uses": [
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the exact scalar functors termwise. Use the normalized adjunction computation formula, then cancel the tensor localization map with the flat coefficient in degree zero. This proves the internal unit equation for all unbounded objects.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply internal scalar pullback normalization to the identity of T. The obtained tensor normalization agrees with e by cancellation of the flat-coefficient tensor computation map. The local generator formula preserves the ordinary scalar unit. The normalized internal/section scalar Hom comparison, first on flat-term K-flat models and then by localization, identifies the specified derived units.",
+   "uses": [
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison, as expanded by the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar adjunction unit under tensor normalization and section equivalence",
+   "results": "8 hits, including ModuleCat.extendRestrictScalarsAdj_unit_app_apply and CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "date": "2026-10-23",
+   "verdict": "Ordinary unit and monoidal adjunction formulas; no statement includes the fixed internal/section universal normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "One hit: Mathlib.CategoryTheory.Functor.Derived.Adjunction",
+   "date": "2026-10-23",
+   "verdict": "Useful generic representative unit formula; still requires the tensor and section comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*derived|derived.*conjugateEquiv",
+   "results": "No Mathlib matches. Local rg finds RightDerivedFunctor.CompConjugate and DerivedExactMate.",
+   "date": "2026-10-23",
+   "verdict": "Generic conjugacy tools do not supply the particular scalar section or balanced comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For flat scalar extension of module sheaves, the derived scalar unit under tensor normalization is tensoring with the ring homomorphism, and geometric comparison maps preserve the same section adjunction units",
+   "results": "8 hits, including ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, and ModuleCat.ExtendRestrictScalarsAdj.homEquiv.",
+   "date": "2026-10-23",
+   "verdict": "Ordinary module scalar extension results; no fixed unbounded internal/section comparison normalization or geometric derived coherence statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatCoefficientSquareNormalization",
+  "date": "2026-10-23",
+  "group": "R9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-sfb-flat-coefficient-square-normalization",
+   "place": "step 2",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatScalarUnitNormalization",
+  "file": "lean/Sheaf/Paper/FlatScalarUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.flat_scalar_unit_normalization",
+  "statement": "theorem flat_scalar_unit_normalization (T : Scheme.{u})\n    (e : TensorNormalization a T) (he : TensorNormalized a T e)\n    (q : Mod.regular (condensedRingObj R T) ⟶ B₀ a T)\n    (hq : q.hom = coefficientMap a T) :\n    (∀ M : DerivedCategory (Modules R T),\n      (scalarAdj a T).unit.app M ≫ e.derived.hom.app M =\n        (ρ_ M).inv ≫ M ◁ DerivedCategory.Q.map\n          ((CochainComplex.singleFunctor (Modules R T) 0).map q)) ∧\n    ∃ s : SectionScalarComparison a T,\n      SectionScalarNormalized a T s ∧ SectionTensorNormalized a T s e ∧\n      ∀ M : DerivedCategory (Modules R T),\n        (ModuleRingedComparison.derivedEquivalence R T).functor.map\n            ((scalarAdj a T).unit.app M) ≫\n          (sectionScalarRestriction a T s).hom.app ((D a T).obj M) ≫\n          (SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n            (CategoryTheory.InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u}\n              (Scheme.ProEt.topology T) (coefficientMap a T))).map\n                (s.derived.hom.app M) =\n        s.pair.adjunction.unit.app\n          ((ModuleRingedComparison.derivedEquivalence R T).functor.obj M)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261024T020139-L-2560514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261024T020139-L-2560514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-ring-localization-tensor-blocks",
+ "kind": "statement",
+ "title": "Evaluating a two-term localization tensor as two rows",
+ "statement": "Let A be a commutative ring, s an element, S=A[1/s], K a complex of module sheaves on the one-object bottom-topology ring site, and a:K to A[0] an augmentation, using [def-weil-pbc-ring-complex-cech-data]. Suppose K is zero in negative degrees. Set P=[A to A[1/s]] using [def-weil-pbc-ringed-extended-cech], L=P tensor K, and b the tensor augmentation followed by the left unitor. Write M(n)=K^n evaluated at the unique object and D_n for its evaluated differential. There exist A-linear equivalences z:L^0 to M(0) and c_q:L^(q+1) to M(q+1) times (S tensor_A M(q)), for all natural q, with: b(x)=a(z(x)); c_0(d_L x)=(D_0(z(x)),1 tensor z(x)); and c_(q+1)(d_L x)=(D_(q+1)(u),1 tensor u-(id_S tensor D_q)(v)) whenever c_q(x)=(u,v). No ordered subsets, generating list, or coordinates on K are assumed or constructed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0996 (lemma-map-twice-localize); assigned proof step 1 and the two-row part of step 3; tensor-total sign convention"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof": [
+  {
+   "text": "On the bottom-topology site every presheaf is a sheaf, so the sheafification unit and the sectionwise tensor comparison are isomorphisms. Prove that the comparison is natural in both inputs and preserves the left unitor, using the monoidal sheafification adjunction and its triangle identity. Evaluation of the localization unit is the algebra map, hence tensoring it sends x to 1 tensor x.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech",
+    "lem-weil-pbc-ring-point-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any first factor supported in degrees zero and one, construct the inverse to the two coproduct inclusions by HomologicalComplex.mapBifunctorDesc. Check the inverse identities by mapBifunctor.hom_ext, using that all other tensor summands are zero. Apply evaluation, mapBiprod and ModuleCat.biprodIsoProd and the row tensor isomorphisms to obtain the coordinates. In degree zero discard S tensor K^(-1), which is zero by hneg.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the signed differential on each coproduct inclusion from mapBifunctor.d_eq, iota_D1, iota_D2, d1_eq and d2_eq. The degree-zero localization differential gives the additional 1 tensor x term, and the degree-one vertical term has sign minus one. Naturality of the evaluated tensor comparison transports the second-row differential to minus id tensor d_K. Add the two row formulas and use the inverse coordinate formula. Finally compute the tensor augmentation on row zero with iota_mapBifunctorMap and naturality of the left unitor; the degree-zero input has no second row.",
+   "uses": [
+    "def-weil-pbc-ring-complex-cech-data",
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-ring-point-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0996 (lemma-map-twice-localize); assigned proof step 1 and the two-row part of step 3; tensor-total sign convention",
+  "note": "Complete direct proof following the three original steps, using Mathlib total-complex coproduct and differential APIs. The fully proved tensor evaluation and unit comparison is in RingPointTensorComparison; remaining helpers are private in the item. No new obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor total with A to localization of A has two rows and block differential d u, one tensor u minus one tensor d v",
+   "results": "8 hits: IsLocalization.tensorProduct_tensorProduct, IsLocalizedModule.rTensor, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.tmul_mk', KaehlerDifferential.isLocalizedModule, IsLocalization.mk'_tmul, KaehlerDifferential.isLocalizedModule_map",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs only; no theorem with the displayed block/ordered-coordinate interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product with a two term cochain complex has terms direct sums with shifted complex and signed differential",
+   "results": "8 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.tensorObj, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.tensor_unit_d₂, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs only; no theorem with the displayed block/ordered-coordinate interface."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj.*d|ιTensorObj.*d",
+   "results": "25 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Action.lean, Mathlib/RepresentationTheory/Action.lean, Mathlib/RepresentationTheory/Action.lean",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs only; no theorem with the displayed block/ordered-coordinate interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingCechCoordinateTensorStep",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned node lem-weil-pbc-ring-cech-coordinate-tensor-step, Tag 0996 (lemma-map-twice-localize); assigned proof step 1 and the two-row part of step 3; tensor-total sign convention. The inherited ancestry has null node; blueprint_refs.py ancestor also returns None.",
+   "via": [
+    "lem-weil-pbc-ring-cech-coordinate-tensor-step",
+    "lem-weil-pbc-ring-tensor-cech-coordinates",
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingLocalizationTensorBlocks",
+  "file": "lean/Sheaf/Paper/RingLocalizationTensorBlocks.lean",
+  "declaration": "CategoryTheory.ringLocalizationTensor_blocks",
+  "statement": "theorem ringLocalizationTensor_blocks (A : CommRingCat.{u}) (s₀ : A)\n    (K : CochainComplex (RingSiteModules A) ℤ) (a : K ⟶ ringComplexSingle A)\n    (hneg : ∀ n : ℤ, n < 0 → Limits.IsZero (K.X n)) :\n    let O := CochainComplex.onePointRingSheaf A\n    letI : IsGrothendieckAbelian.{u} (RingSiteModules A) :=\n      SheafOfModules.isGrothendieckAbelian _\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.symmetricCategory O\n    letI := Classical.choice (SheafOfModules.tensorClosed O).1\n    letI := Classical.choice (SheafOfModules.tensorClosed O).2.1\n    let s : (O.obj ⋙ forget CommRingCat).sections := ⟨fun _ ↦ s₀, fun _ ↦ rfl⟩\n    let P := ringedLocalizationTwoTerm O s\n    let L := HomologicalComplex.tensorObj P K\n    let b : L ⟶ ringComplexSingle A :=\n      HomologicalComplex.tensorHom (ringedLocalizationTwoTermAugmentation O s) a ≫\n        (HomologicalComplex.leftUnitor (ringComplexSingle A)).hom\n    let M (n : ℕ) : ModuleCat.{u} A := (K.X (n : ℤ)).val.obj (op ⟨PUnit.unit⟩)\n    let S := Localization.Away s₀\n    ∃ (z : (L.X 0).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A] M 0)\n      (c : ∀ q : ℕ, (L.X ((q + 1 : ℕ) : ℤ)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A]\n        M (q + 1) × (S ⊗[A] M q)),\n      (∀ x, ringComplexAugmentationValue b x = ringComplexAugmentationValue a (z x)) ∧\n      (∀ x, c 0 ((L.d 0 1).val.app (op ⟨PUnit.unit⟩) x) =\n        ((K.d 0 1).val.app (op ⟨PUnit.unit⟩) (z x), 1 ⊗ₜ[A] z x)) ∧\n      (∀ (q : ℕ) (x : (L.X ((q + 1 : ℕ) : ℤ)).val.obj (op ⟨PUnit.unit⟩)),\n        c (q + 1) ((L.d ((q + 1 : ℕ) : ℤ) ((q + 2 : ℕ) : ℤ)).val.app\n            (op ⟨PUnit.unit⟩) x) =\n          ((K.d ((q + 1 : ℕ) : ℤ) ((q + 2 : ℕ) : ℤ)).val.app\n            (op ⟨PUnit.unit⟩) (c q x).1,\n          1 ⊗ₜ[A] (c q x).1 - TensorProduct.map (LinearMap.id : S →ₗ[A] S)\n            ((K.d (q : ℤ) ((q + 1 : ℕ) : ℤ)).val.app (op ⟨PUnit.unit⟩)).hom\n              (c q x).2))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringLocalizationTensor_blocks"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T104422-L-813305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T121127-L-2753799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

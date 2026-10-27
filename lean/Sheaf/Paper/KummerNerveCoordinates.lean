@@ -51,7 +51,9 @@ theorem kummerNerveVertex_over {X B : Scheme.{u}} {G : Profinite.{u}} [CommGroup
     (n : ℕ) (i : Fin (n + 1)) :
     kummerNerveVertex action f n i ≫ f =
       coefficientParameterProjection X (CategoryTheory.CondensedBar.power G n) ≫ f := by
-  sorry
+  unfold kummerNerveVertex coefficientActionFamily
+  rw [Category.assoc, h, ← Category.assoc]
+  rw [Over.w]
 
 /-- The canonical map from parameterized root lifts to the actual Cech fibre product.
 Its vertices, rather than an arbitrary nerve isomorphism, fix the Kummer coordinates.
@@ -80,7 +82,8 @@ theorem kummerNerveCoordinateMap_over {X B : Scheme.{u}} {G : Profinite.{u}} [Co
     kummerNerveCoordinateMap action f h n ≫
         (CondensedRing.cechProjection f (.mk n)) =
       coefficientParameterProjection X (CategoryTheory.CondensedBar.power G n) ≫ f := by
-  sorry
+  unfold kummerNerveCoordinateMap CondensedRing.cechProjection
+  exact WidePullback.lift_base ..
 
 /-- A presentation of the canonical root-coordinate maps with their structural
 maps kept explicit. Equality with the actual wide-pullback lift is part of the data,

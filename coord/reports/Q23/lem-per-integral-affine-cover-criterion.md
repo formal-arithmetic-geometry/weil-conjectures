@@ -1,0 +1,29 @@
+## Worker report
+
+1. Files written: `dag/nodes/sec-deligne-laumon-a1/lem-per-integral-affine-cover-criterion.json` (item, statement, split; no exact Mathlib match), `citations.json`, and this report. No new nodes and no new Mathlib leaves. The existing item's statement, provenance, blueprint ancestry and six earlier searches are retained; Q23's actual searches are appended from `searches.jsonl`.
+2. Attachments: none. Searches of `lean/WeilConjectures/` for the exact blueprint tag, the item id and integral/open-cover and pairwise-intersection terminology found no completed declaration stating all clauses. Mathlib declarations are reused through their existing DAG leaves.
+3. WANTED: none.
+4. The unsplit item had no proof. Its statement is correct as written. The source tags are correctly mapped to `properties-lemma-characterize-reduced` (01OL), `properties-lemma-characterize-irreducible` (01OM) and `properties-lemma-characterize-integral` (01ON). Nothing in the argument requires separatedness, quasi-separatedness, a finite cover, or affine overlaps. No statement correction or route change was needed.
+5. Unfinished: none at this split level.
+
+## Review by Q23
+
+I read Stacks `properties.tex`, the full statements and proofs of 01OL, 01OM and 01ON, and checked their labels in `tags/tags`. I read the chapter and unit records and the current `literature/blueprint/latest/` chapter, perverse-heart unit and ancestor Artin–Gabber proof. This item is the elementary scheme-theoretic gluing tool already requested by the integrality spreading branch below that ancestor, not a new route for the perverse-heart theorem. The item is not the unit's key statement, so no unit realization is changed.
+
+Step 1 uses the domain-spectrum integrality conclusion of `lem-weil-pbc-spec-domain-stalks-function-field` (2), followed by the reduced-and-irreducible equivalence expressly stated by `def-pc-integral-scheme`. I opened both statements: the former really asserts integrality of the spectrum, and the latter really states the equivalence, rather than merely defining an unrelated notion. The coordinate rings are commutative domains by the item hypothesis, and the given scheme isomorphisms transfer these properties to the open subschemes. I also read Mathlib `Properties.lean` lines 249, 264, 307 and 331–337, which substantiate precisely these existing leaves.
+
+Step 2 uses `lem-trf-reduced-scheme-open-cover`: its statement permits any open cover, and says that reducedness of every member implies reducedness of the scheme. I read the pinned Mathlib proof and equivalence at lines 133–141. All cover members were proved reduced in Step 1. The nonempty index set and nonempty charts give a point of the scheme; this is written as an elementary observation in the same step.
+
+Step 3 uses only the closed-cover definition of irreducibility in `def-weil-irreducible-components` and the irreducibility already proved in Step 1. I expanded the density sentence in Stacks 01OM into its closed-complement argument: two disjoint nonempty opens of an irreducible chart would have proper closed complements covering it. This checks directly from the cited definition. The pairwise-overlap hypothesis makes the open O nonempty; openness in each chart follows because both charts are open in Y. No affine structure is used on an overlap. Once all charts lie in the same closed piece, the cover gives the required equality with Y.
+
+Step 4 uses exactly the explicitly stated equivalence in `def-pc-integral-scheme`; all three properties it asks for have now been established. `citations.json` contains verbatim statement text for every dependency in each step, so each citation can be checked independently. The entire assembly has fewer than 3000 characters, and no individual step is longer than 2000 characters or hides a separate non-elementary lemma.
+
+I checked delivery-errors B–E against the actual statements. There are no new nodes to have missing hypotheses, unrun searches, duplicates, or restated clauses. Existing nodes supply all non-elementary scheme facts, and the only new argument is the explicit elementary closed-cover calculation. The proof dependency list is exactly the union of the steps' uses. The references are all Stacks and Mathlib; no SGA source is used. The statement has single TeX escapes after decoding the JSON.
+
+Edge cases: a singleton index set reduces to one affine domain; Spec of a field is included; infinite index sets need only a single chosen index and no finite subcover. The zero ring is excluded by the domain hypothesis, and the empty scheme cannot satisfy the hypotheses. A disjoint union of two nonempty affine domains fails the overlap condition, as it must. A line with doubled origin satisfies the hypotheses and illustrates why separatedness is unnecessary. Removing domain reducedness would allow nonreduced one-point affines, so that hypothesis is used substantively.
+
+Mathlib searches were run with the prescribed `msearch.py` command: two LeanFinder phrasings, Loogle on `AlgebraicGeometry.IsIntegral`, a grep over `AlgebraicGeometry`, and LeanSearch. I read the hits: they include affine-domain integrality and locality of reducedness, but not this combined cover criterion as a single declaration or one-line specialization. Prior searches belonging to the imported item were preserved as provenance rather than claimed as Q23 work.
+
+## Not duplicates
+
+No new nodes. The similarly named `lem-sfb-integral-affine-cover-criterion` concerns integral morphisms and integral ring maps, rather than an integral scheme covered by spectra of domains. It is not the present statement. `lem-zl-spectrum-irreducible-nilradical-prime` concerns one affine spectrum; existing domain-spectrum and reduced-cover leaves already suffice. Blueprint searches for integral, 01ON, 01OM, reduced scheme, pairwise intersect, spectrum of a domain and irreducible affine found no blueprint node stating this cover criterion.

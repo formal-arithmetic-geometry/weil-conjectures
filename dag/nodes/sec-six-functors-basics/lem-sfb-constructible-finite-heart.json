@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-constructible-finite-heart",
+ "kind": "statement",
+ "title": "Constructible modules are finite constructible complex hearts",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "For any scheme X [def-pc-scheme], with the fixed small-site universe [def-weil-size-convention], and any commutative condensed coefficient ring Λ on profinite sets, every finite constant scalar-model constructible internal Λ_X-module [sk-def-sfb-constructible] is a finite constructible complex heart [def-sfb-finite-constructible-complex-heart-presentations]: there is a finite-support cochain complex of such constructible modules whose degree-zero homology is isomorphic to it. No finiteness or nonemptiness assumption is imposed on X or Λ.",
+ "source": {
+  "document": "lean/Sheaf/Paper/FiniteConstructibleComplexHeartPresentations.lean",
+  "place": "Definition finiteConstructibleComplexHearts, specialized to the complex concentrated in degree zero."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "def-sfb-finite-constructible-complex-heart-presentations",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "The zero module admits the zero finite scalar presentation and the identity cover. Its one-stratum stratification is valid even on the empty scheme; affine restriction preserves zero.",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the single complex with the given constructible module in degree zero. Its other terms are zero, hence constructible. Its support lies in {0}. The canonical singleObjHomologySelfIso identifies its zeroth homology with the given module.",
+   "uses": [
+    "def-sfb-finite-constructible-complex-heart-presentations",
+    "lem-sfb-condensed-coefficient-iso-constructible"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "def-sfb-finite-constructible-complex-heart-presentations",
+  "lem-sfb-condensed-coefficient-iso-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FiniteConstructibleComplexHeartPresentations.lean",
+  "place": "Definition finiteConstructibleComplexHearts, specialized to the complex concentrated in degree zero."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module is the zeroth homology of a finite complex concentrated in degree zero",
+   "results": "8 hits: ChainComplex.alternatingConstHomologyDataZero, HomologicalComplex.instHasHomologyObjSingle, ChainComplex.alternatingConstHomologyZero, HomologicalComplex.isZero_single_obj_homology, HomologicalComplex.singleObjHomologySelfIso, HomologicalComplex.singleObjOpcyclesSelfIso, HomologicalComplex.singleObjCyclesSelfIso, Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+   "date": "2026-10-25",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.ind",
+   "results": "0 hits: ; loogle: unknown identifier 'ObjectProperty.ind'",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderExtensions|singleObjHomologySelfIso|ind_inverseImage",
+   "results": "23 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite discrete coefficient constructible sheaves on a qcqs scheme generate a weak Serre coproduct hull contained in filtered colimits of finite constructible complex hearts, and derived sections preserve the resulting uniform vanishing bound",
+   "results": "8 hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, AlgebraicGeometry.Scheme.Modules.instHasColimits, CategoryTheory.Sheaf.instHasFiniteCoproducts, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.Sheaf.instHasColimitsOfSize, CategoryTheory.Sheaf.instHasFiniteColimits, SheafOfModules.GeneratingSections.IsFiniteType, CategoryTheory.Sheaf.isColimitSheafifyCocone",
+   "date": "2026-10-25",
+   "verdict": "Only generic sheaf colimits and finite-type definitions were found, not the finite coefficient Serre-to-ind presentation or its cohomological bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionCdTopologicalSerreTransfer",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-torsion-cd-topological-serre-transfer",
+   "place": "Finite discrete coefficient branch and conditional ind-finite-heart assembly",
+   "via": [
+    "lem-sfb-torsion-cd-topological-serre-transfer"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleFiniteHeart",
+  "file": "lean/Sheaf/Paper/ConstructibleFiniteHeart.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_le_finiteConstructibleComplexHearts",
+  "statement": "theorem constructible_le_finiteConstructibleComplexHearts\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :\n    IsConstantModelConstructible Λ X ≤ finiteConstructibleComplexHearts Λ X",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T011040-L-3638342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T011040-L-3638342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

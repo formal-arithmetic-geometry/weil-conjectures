@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-proetale-local-scalar-derived-iso",
+ "kind": "statement",
+ "title": "Local invariance of derived extension to constant coefficients",
+ "statement": "Let i:Y→X be any morphism of schemes [def-pc-scheme, def-weil-proetale-inverse-image], R a commutative ring sheaf on X_proet, B an arbitrary commutative ring, φ:R→constant(B), U an object of Y_proet, and K,K′ objects of D(R-modules). Use the ordinary derived scalar extension and the actual-ring local restriction of [def-sfb-adic-stratified-perfect-data]. Suppose sfbLocalRestriction i R U K ≅ sfbLocalRestriction i R U K′. Define residue(M) by applying fixed B-scalar restriction termwise to a localization representative of completedAdicDerivedChange X φ M and then localizing. With L the fixed B-scalar inverse image along i followed by slice restriction to U, there is an isomorphism D(L)(residue(K)) ≅ D(L)(residue(K′)). No adic, completeness, boundedness, immersion, finite-generation or perfectness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-base-change (Tag 06YY), lemma-pullback-K-flat (Tag 0G7E), lemma-pullback-tensor-product, and lemma-restriction-K-flat (Tag 0E8K); constant-ring action normalized by the constant-sheaf inverse-image comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-adic-stratified-perfect-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify sfbLocalRestriction with the derived exact composite H of actual-ring inverse image and slice restriction. Cancel identity-coefficient extension using uniqueness of left adjoints and the identity restriction isomorphism; compose the exact localization factor and representative isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-local-derived-restriction-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary B-linear natural tensor comparison between global scalar extension followed by fixed-scalar local restriction and H followed by scalar extension on the slice and fixed scalars there. Fixed scalar restriction is exact because it retains the underlying abelian sheaf.",
+   "uses": [
+    "lem-sfb-proetale-local-scalar-ordinary-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve every complex by a flat-term K-flat complex. Algebraic inverse image preserves K-flatness of these complexes by the existing pullback computation with identity coefficient extension; slice restriction preserves K-flatness. The two scalar-extension counits are thus invertible on the resolving class. Whisker these counits by the exact functors and descend their conjugate ordinary comparison through the fully faithful restriction to resolving representatives.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the supplied local isomorphism by the derived scalar-extension functor on the slice followed by exact fixed scalar restriction. Conjugate by the descended comparison and by the exact localization-representative identifications of residue. This yields the required fixed-B derived isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-derived-restriction-comparisons",
+  "lem-sfb-proetale-local-scalar-ordinary-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-resolving-representative-whiskering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 0E8K; resolving-class descent of the ordinary B-linear tensor comparison, written in Lean by Z7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local derived scalar extension to a constant ring commutes with inverse image and slice restriction",
+   "results": "Eight results concern algebraic scalar restriction and localization; none gives the derived sheaf-module locality comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension commutes with exact inverse image of module sheaves and restriction to a slice site",
+   "results": "Ordinary sheaf-module pullback composition and adjunction results, no derived locality comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "Underived pullback composition only; no unbounded derived fixed-scalar statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "local.*derived.*scalar|derived.*scalar.*local",
+   "results": "Mathlib service returned zero hits. Repository search found proEtaleLocalScalarHomologyIso, which concludes only additive cohomology isomorphisms, and pbcActualScalarDerivedPullIso, whose coefficients are specified adic coefficient data. Neither supplies this fixed-scalar derived-object comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueLocalHomologyComparison",
+  "date": "2026-10-26",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-residue-local-homology-comparison",
+   "place": "Step 2, transport of a specified local isomorphism through derived scalar extension, before calculation of the completed perfect model.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleLocalScalarDerivedIso",
+  "file": "lean/Sheaf/Paper/ProEtaleLocalScalarDerivedIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleLocalScalarDerivedIso",
+  "statement": "theorem proEtaleLocalScalarDerivedIso {X Y : Scheme.{u}} (i : Y ⟶ X)\n    {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}\n    (B : Type (u + 1)) [CommRing B]\n    (φ : R ⟶ (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj\n      (CommRingCat.of B))\n    (U : Y.ProEt) (K K' : DerivedCategory (proEtaleRingModules X R))\n    (e : sfbLocalRestriction i R U K ≅ sfbLocalRestriction i R U K') :\n    let L := ProEtale.upperStar (ModuleCat.{u + 1} B) i ⋙\n      (ProEt.topology Y).overPullback (ModuleCat.{u + 1} B) U\n    letI : L.Additive := Functor.additive_of_preserves_binary_products L\n    let F := sfbFixedScalarRestriction X B\n    let residue := fun M : DerivedCategory (proEtaleRingModules X R) ↦\n      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj\n        (DerivedCategory.Q.objPreimage ((completedAdicDerivedChange X φ).obj M)))\n    Nonempty (L.mapDerivedCategory.obj (residue K) ≅\n      L.mapDerivedCategory.obj (residue K'))",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T001653-L-20776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261026T071628-L-3960546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

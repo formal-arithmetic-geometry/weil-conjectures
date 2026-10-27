@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-normalized-tate-tensor-reductions",
+ "kind": "statement",
+ "title": "Normalized derived reductions of the actual integral Tate tensor",
+ "statement": "For every Noetherian scheme T, prime ell invertible on T, and d in N, there exist an AdicTower M for datum ell, level isomorphisms e to derivedRealization of finiteTwist, and h:M.tower=strictDerivedTower T ell d. They satisfy ProjectionNormalized. For every b>=a there exists a generator-normalized CoefficientLineComparison of the finite root lines, and the scalarComparison/proTwistMap square equals M.normalization for every such comparison. This asserts neither a uniform model nor constructibility nor reconstruction. Use the actual objects of [def-pur-condensed-tate-integral-tower-data] and [def-weil-pbc-bounded-constructible-tower].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Steps 1--3 of lem-pur-normalized-tate-tensor-tower"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "On the compatible primitive-root covering, identify the completed root module with the completed coefficient unit by sending a compatible residue family to the corresponding powers of the compatible roots. The actual projections are residue followed by the finite root generator. Use the fixed residue and completion isomorphisms and iterate sheaf tensor balancing to identify the d-fold integral quotient with the finite ordinary root tensor. At zero use coefficient multiplication. The arbitrary-scalar formula is exactly ProjectionBalanced and hence glues.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "det-def-sp-tate-twist-locally-free",
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral and finite lines are K-flat in their single degree: slice restriction is exact and commutes with tensor; on a trivializing cover tensor with a line preserves acyclic complexes. Vanishing of cohomology descends. Derived quotients are therefore computed by the ordinary balanced quotients, including the shift by 2d.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-kflat-complex",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the quotient-linear derived levels of the shifted integral line. Exact evaluation of the strict ordinary quotient tower gives evaluation, and balanced derived quotients give normalization. Their semilinear adjuncts are the strict transitions by the scalar adjunction formula. On pure tensors two successive reductions multiply the same quotient scalars as direct reduction; this proves transition and cocycle, including repeated indices, so the data form AdicTower. Identify the levels through finiteModelIso. The single-complex evaluation formula and ProjectionBalanced give ProjectionNormalized.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each comparable pair, the root power map followed by scalar extension is the unit isomorphism on primitive-root bases; it therefore gives a CoefficientLineComparison, with its derived component the scalar counit followed by the single sheaf comparison. Any other normalized comparison agrees on scalar/root generators and so has the same sheaf and derived map. Tensor factor by factor, using coefficient multiplication at d=0, and take the specified site/scalar adjunction mates: the resulting proTwistMap squares are exactly the tower normalization squares.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "det-def-sp-tate-twist-locally-free",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-roots-of-unity-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Refinement of the normalized Tate tensor argument, reduction component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible primitive roots of unity give a normalized strict derived tensor power reduction tower with constructible rank one local models",
+   "results": "IsPrimitiveRoot.integralPowerBasis.congr_simp, primitiveRoots, rootsOfUnityEquivOfPrimitiveRoots; generic root facts, no sheaf tower or model theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system of roots of unity sheaves tensor powers yields an adic tower with a common local model and constructible finite reductions",
+   "results": "BDeRhamPlus, BDeRham, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion; none has the required sheaf or normalization interface. Loogle Functor.map_comp supplies only composition glue.",
+   "date": "2026-10-27",
+   "verdict": "Generic completion tools do not state either component."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Tt]ower|root.*[Tt]ower|tensorPower.*zero",
+   "results": "Mathlib scalar towers and root polynomial facts; project search finds CondensedTateIntegralTowerData, the assigned theorem and its consumer, but no theorem constructing its normalized reductions or common models. Whole-blueprint keyword search gives no duplicate of either separate component.",
+   "date": "2026-10-27",
+   "verdict": "Use the project root-line, K-flat and tower declarations; the remaining component is new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedTateTensorTower",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2: realize the normalized Tate-unit system with common bounds and stratification",
+   "via": [
+    "lem-pur-normalized-tate-tensor-tower",
+    "lem-pur-condensed-tate-integral-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedTateTensorTowerCore",
+  "file": "lean/Sheaf/Paper/NormalizedTateTensorTowerCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.normalizedTateTensorTower_core",
+  "statement": "theorem normalizedTateTensorTower_core\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (hT : IsUnit (ell : Γ(T, ⊤))) (d : ℕ) :\n    ∃ (M : AdicTower T (datum.{u} ell))\n      (e : ∀ n : ℕ, M.level n ≅ (derivedRealization T ell n).obj (finiteTwist T ell n d))\n      (h : M.tower = strictDerivedTower T ell d),\n      ProjectionNormalized T ell hT d M e h ∧\n      (∀ (b a : ℕ) (hab : a ≤ b), Nonempty\n        (CoefficientLineComparison\n          (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n          (ell ^ (b + 1)) (ell ^ (a + 1))\n          (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)) ∧\n        (∀ (b a : ℕ) (hab : a ≤ b)\n          (r : CoefficientLineComparison\n            (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n            (ell ^ (b + 1)) (ell ^ (a + 1))\n            (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T),\n          (pbcDerivedExtend (pbcAdicQuotient T (datum.{u} ell) b a hab)).map (e b).hom ≫\n              (scalarComparison T ell b a hab).hom.app (finiteTwist T ell b d) ≫\n              (derivedRealization T ell a).map (proTwistMap d r) =\n            (M.normalization b a hab).hom ≫ (e a).hom)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T094426-L-224478",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T094426-L-224478",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

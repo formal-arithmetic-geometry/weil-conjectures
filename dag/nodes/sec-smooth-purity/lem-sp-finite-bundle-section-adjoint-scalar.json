@@ -1,0 +1,136 @@
+{
+ "id": "lem-sp-finite-bundle-section-adjoint-scalar",
+ "kind": "statement",
+ "title": "Scalar and annihilator compatibility of the bundle zero-section integration adjunct",
+ "statement": "Let A,B be finite commutative rings, φ:A→B unital, and N,M>0 with M dividing N, NA=0 and MB=0. Let S be Noetherian with N and M invertible, let d≥0, and let E be a locally free O_S-module of constant rank d, with actual vector bundle π and zero section z [def-asd-vector-bundle-zero-section]. Let t be the root-power, root-generator and derived-counit normalized coefficient-line comparison [def-pur-finite-smooth-coefficient-arrows]. Let a_A and a_B denote the actual Kummer-normalized bundle integration adjuncts restricted to z, at annihilators N and M respectively [lem-trf-finite-ring-section-deformation]. Let q_(π,z) be the actual exceptional coefficient section map [def-pur-dnc-coefficient-section-maps], using the canonical vector-bundle compactification. Then Q_S(a_A) ≫ q_(π,z) = (t.tensorPower d).hom ≫ a_B. No deformation family, ambient smooth section, cone-to-bundle map or choice of smooth orientation occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation, vector integration factor; cor-pur-vector-bundle-purity proof paragraph 2"
+ },
+ "stmt_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "def-pur-dnc-coefficient-section-maps",
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "The root-power map N/M fits the Kummer diagram: the map on the first units sheaf is power N/M and the map on the second is identity. Thus the N-boundary of O(1) maps to its M-boundary. The root-power and generator equations of t identify this map after balancing with t.sheafIso, and derived normalization identifies its single-complex map with t.derivedIso. Transposition through the projective-line adjunction gives the normalized decomposition and trace square. This extends the common-exponent Kummer scalar argument to this change of exponent.",
+   "uses": [
+    "lem-sp-p1-kummer-derived-scalar",
+    "def-pur-finite-smooth-coefficient-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The vector trace scalar-descent theorem gives the common-annihilator scalar square. Apply the preceding Kummer exponent diagram in each ordered affine-line factor and iterate the actual compact-support counits, using the scalar composition and projection squares. The scalar unit is multiplication at rank zero. At each successor the tensor and shift comparisons are exactly those defining t.tensorPower. Restriction to bundle frames computes the global vector integration by those coordinate traces; the open-restriction and refinement squares make the resulting equations agree on all frame overlaps and descend.",
+   "uses": [
+    "lem-pur-vector-trace-scalar-descent",
+    "lem-pur-etale-compact-scalar-coherence",
+    "def-amb-vector-integration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the resulting integration trace equation through the specified compact-support adjunctions. The integration-transpose scalar-mate theorem gives the actual exceptional coefficient map, with its coefficient-unit multiplication. Pull the equation back to z and cancel the scalar/pullback section compositors. The left and right adjuncts are precisely bundleSectionAdjoint at N and M. This proves the displayed square, before taking inverses. Rank zero is the identity adjunction and scalar unit; empty bases and zero rings have unique maps. All scalar and tensor operations are derived and there is no scalar-flatness assumption.",
+   "uses": [
+    "lem-pur-integration-transpose-scalar-mate",
+    "lem-pur-scalar-section-compositor",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-p1-kummer-derived-scalar",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "lem-pur-vector-trace-scalar-descent",
+  "lem-pur-etale-compact-scalar-coherence",
+  "def-amb-vector-integration",
+  "lem-pur-integration-transpose-scalar-mate",
+  "lem-pur-scalar-section-compositor",
+  "lem-trf-finite-ring-section-deformation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation, vector integration factor; cor-pur-vector-bundle-purity proof paragraph 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kummer root power change of annihilating integer and derived scalar compatibility of vector bundle integration adjunction",
+   "results": "Eight unrelated Mathlib hits; no ordinary etale derived section or integration scalar square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer normalized vector bundle integration adjoint commutes with finite coefficient scalar extension changing annihilating exponent from N to divisor M",
+   "results": "Eight unrelated Mathlib hits; no ordinary etale derived section or integration scalar square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "specialization_scalar|bundleSectionAdjoint.*scalar|scalar.*bundleSectionAdjoint; blueprint_refs coefficient specialization / integration scalar / normalized family / vector trace scalar",
+   "results": "No exact declaration in Mathlib or the adopted source library. Project PurityDncCoefficientTransport has a prime-power/finite-field theorem, whose private generic transport helper assumes invertible scalar maps not supplied here. VectorTraceScalarDescent treats a common exponent and traces, not the two-exponent zero-section adjunct square. The blueprint search found only the broader vector-bundle purity unit.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSectionIntegratedScalar",
+  "date": "2026-10-27",
+  "group": "P1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "(3), Orientation, vector integration factor; cor-pur-vector-bundle-purity proof paragraph 2",
+   "via": [
+    "lem-sp-finite-section-integrated-scalar",
+    "lem-sp-finite-orientation-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteBundleSectionAdjointScalar",
+  "file": "lean/Sheaf/Paper/FiniteBundleSectionAdjointScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteBundleSectionAdjoint_scalar",
+  "statement": "theorem finiteBundleSectionAdjoint_scalar {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (hMN : M ∣ N) (hA : (N : A) = 0) (hB : (M : B) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (E : S.Modules) [E.IsFiniteLocallyFreeOfRank d] (hS : IsUnit (N : Γ(S, ⊤))) (hS' : IsUnit (M : Γ(S, ⊤))) (t : CoefficientLineComparison φ N M hA hB S) : letI := (vectorBundlePurityCompactification S d E).hasCompactification (ordinaryScalar φ S).map (FiniteRingSectionDeformation.bundleSectionAdjoint N hN A hA S hS d E) ≫ WeilConjectures.DncCoefficientTransport.sectionMap φ (VectorBundleZeroSection.π S d E) (VectorBundleZeroSection.zero S d E) = (t.tensorPower d).hom ≫ FiniteRingSectionDeformation.bundleSectionAdjoint M hM B hB S hS' d E",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T103455-L-1086018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T103455-L-1086018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

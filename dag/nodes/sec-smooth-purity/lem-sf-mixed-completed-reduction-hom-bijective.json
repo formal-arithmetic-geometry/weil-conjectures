@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-mixed-completed-reduction-hom-bijective",
+ "kind": "statement",
+ "title": "The prescribed completed mixed unit represents finite scalar extension",
+ "statement": "Let ell be a prime, E and L finite extensions of Q_ell, iota:E→L a Q_ell-algebra homomorphism, and W a scheme on which ell is invertible. For any unbounded derived module K over the completed E-coefficient sheaf and n≥0, write A_n and B_n for the actual E and L coefficient quotient rings at exponent n+1, and R for derived restriction along integralScalarQuotientMap [def-weil-integral-scalar-extension]. Set N to finite L-reduction of completed scalar extension of K. For every unbounded derived B_n-module Z, composition with the specified sfMixedCompletedReductionUnit [def-weil-mixed-reduction-unit] gives a bijection Hom(N,Z)→Hom(K_n,RZ). There is no compactification or operation in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support paragraph and final paragraph; first normalization step, before inverse compact-support reduction"
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-weil-mixed-reduction-unit"
+ ],
+ "proof": [
+  {
+   "text": "Use the coherent reduction comparison: its counit and inverse tensor association identify N with derived finite extension of K_n. Compute the ordinary mixed unit on flat-term K-flat representatives as s tensor x ↦ iota(s) tensor (1 tensor x). Scalar association carries it to the finite extension/restriction unit.",
+   "uses": [
+    "lem-pur-coefficient-extension-reduction-model",
+    "def-weil-mixed-reduction-unit",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed factor is the diagonal Roos augmentation with zero shifted coordinate. Strict Roos comparison preserves its actual limit projections, and the effectivity counit is the adjunct of those projections. Hence the same comparison carries the entire completed mixed unit to the finite scalar unit. Resolution comparisons and localization extend this equality to all K.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-pur-coefficient-extension-reduction-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport Hom by the comparison isomorphism and then apply the derived coefficient adjunction. Its Hom equivalence is composition with the finite scalar unit, and is defined for every unbounded target Z. Thus its transported equivalence is exactly the displayed function.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-extension-reduction-model",
+  "def-weil-mixed-reduction-unit",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-strict-roos-comparison",
+  "lem-coef-normalized-dvr-effectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support paragraph and final paragraph; first normalization step, before inverse compact-support reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension is left adjoint to restriction of scalars; the finite reduction of the completed tensor unit induces a bijection on derived Hom",
+   "results": "ModuleCat.extendRestrictScalarsAdj and ordinary module Hom maps; no theorem for the prescribed completed sheaf mixed unit. A separate compact-support unit query returned the same ordinary module APIs, with no realized proper/open transpose equation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unit of scalar extension induces a bijection on morphisms to restricted scalars, and mates are uniquely determined by composing with the unit",
+   "results": "Eight ordinary ModuleCat extension/restriction results, including homEquiv_extendScalarsComp. None identifies the specified derived mixed unit or compact-support system realization. Loogle CategoryTheory.Adjunction.homEquiv_unit confirms the abstract formula, which still needs the concrete normalization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "MixedCompletedReductionUnit|scalarCompletion.*[Ii]so|[Ii]so.*scalarCompletion; compactSupport.*[Ss]calar|lowerShriek.*[Ss]calar",
+   "results": "msearch Mathlib grep returned zero hits. Project search found StrictDirectImageMixedUnit and its data, whose finite normalization needs the additional proper/separated geometric setup and does not state either assertion here. Blueprint searches mixed unit and compact support scalar found no duplicate.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportFiniteScalarMateNormalization",
+  "date": "2026-10-27",
+  "group": "T8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Compact-support paragraph and final paragraph; first normalization step, before inverse compact-support reduction",
+   "via": [
+    "lem-sf-compact-support-finite-scalar-mate-normalization",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.MixedCompletedReductionHomBijective",
+  "file": "lean/Sheaf/Paper/MixedCompletedReductionHomBijective.lean",
+  "declaration": "WeilConjectures.sfMixedCompletedReductionHomBijective",
+  "statement": "theorem sfMixedCompletedReductionHomBijective\n    (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (W : Scheme.{u})\n    [∀ w : W, Invertible (l : W.residueField w)]\n    (K : DerivedCategory (scalarReductionSource l E W)) (n : ℕ)\n    (Z : proEtaleDerivedCategory W (Padic.coefficientExtensionRing l L (n + 1))) :\n    Function.Bijective (fun a :\n      (scalarReductionDerivedExtension l L W n).obj\n        ((integralScalarExtension l E L ι W).obj K) ⟶ Z ↦\n      sfMixedCompletedReductionUnit l E L ι W n K ≫\n        (proEtaleCoefficientRestrictScalars W\n          (integralScalarQuotientMap l E L ι n)).mapDerivedCategory.map a)",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261027T084456-L-3684675",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261027T084456-L-3684675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

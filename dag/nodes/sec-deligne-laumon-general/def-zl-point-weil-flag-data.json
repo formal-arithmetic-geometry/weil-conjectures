@@ -1,0 +1,135 @@
+{
+ "id": "def-zl-point-weil-flag-data",
+ "kind": "definition",
+ "title": "Data for point Weil flags and their finite coefficient models",
+ "statement": "Fix a finite-field datum, a prime ell different from its characteristic, and an algebraic closure Omega of Q_ell. Use the raw common-stage and finite-stage constructible Weil hearts [def-weil-weil-sheaf-complex; def-weil-constructible-heart; def-weil-algebraically-closed-coefficients]. On Spec(k0), define the specified H^0 point fibre and local Frobenius using [def-weil-local-frobenius-trace]. A flag diagram consists of Weil objects G_0,...,G_d, inclusions into F, successive arrows, quotient objects Q_j, quotient projections with zero underlying-heart composite, and units alpha_j in Omega. Its full-flag predicate records ranks j, initial zero, terminal isomorphism, underlying-heart exact sequences, scalar quotient Frobenius, punctual purity [def-weil-punctual-weights], monotonicity and invariance of fibre images, and invertibility on every term. A finite coefficient diagram records one field E and Weil models of all terms, arrows and unit scalars; its model predicate records exactness, ranks, all descent squares and scalar identities. These are the unchanged data declarations formerly in PointWeilHeartFlag, publicly reexported there.",
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "lem-weil-point-fibre-equivalence",
+  "def-weil-constructible-heart",
+  "def-weil-algebraically-closed-coefficients",
+  "def-wf-positive-real-logarithm"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration."
+ },
+ "proof": [
+  {
+   "text": "Use the recorded heart and local-operator constructions to define the data and write each displayed property as its corresponding equality or predicate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible linear map over an algebraic closure admits a full invariant flag defined over a finite field extension",
+   "results": "8 hits: generic algebraic closure and invertibility results, no sheaf flag.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem about the actual common-stage Weil heart."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite filtration with pure quotients in an abelian category gives a mixed sheaf",
+   "results": "8 hits: Grothendieck abelian sheaf categories and finite-type sheaves; no matching assembly.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem about the actual common-stage Weil heart."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "12 hits including ShortExact.gIsCokernel and mono_f; no finite-stage Weil flag.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem about the actual common-stage Weil heart."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_flag_finite_coefficients|HasEigenvalue.*smul|hasEigenvalue_smul",
+   "results": "msearch grep: 0 hits. Local rg located Sheaf.LinearAlgebra.AutomorphismFlagFiniteCoefficients; its flag is linear algebra only, not a Weil sheaf diagram.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem about the actual common-stage Weil heart."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointWeilHeartFlag",
+  "date": "2026-10-25",
+  "group": "J4"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof, paragraph 7: dimension-zero Jordan filtration before gluing.",
+   "via": [
+    "lem-zl-point-weil-heart-flag"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointWeilHeartFlagData",
+  "file": "lean/Sheaf/Paper/PointWeilHeartFlagData.lean",
+  "declaration": "WeilConjectures.zlPointBase",
+  "statement": "abbrev zlPointBase : Over (Spec (.of D.k₀))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.zlPointBase",
+   "WeilConjectures.zlPointBaseLocallyOfFiniteType",
+   "WeilConjectures.zlPointBaseQuasiCompact",
+   "WeilConjectures.zlPointWeilHeartCategory",
+   "WeilConjectures.zlPointFiniteWeilHeartCategory",
+   "WeilConjectures.zlPointRawHeartCategory",
+   "WeilConjectures.zlPointFiniteRawHeartCategory",
+   "WeilConjectures.zlPointWeilFiber",
+   "WeilConjectures.zlPointWeilFrobenius",
+   "WeilConjectures.zlPointFiniteHeart",
+   "WeilConjectures.zlPointCommonHeart",
+   "WeilConjectures.zlPointFiniteFiber",
+   "WeilConjectures.zlPointFiniteFrobenius",
+   "WeilConjectures.ZlPointWeilFlagDiagram",
+   "WeilConjectures.ZlPointWeilHeartFlag",
+   "WeilConjectures.ZlPointWeilFlagFiniteDiagram",
+   "WeilConjectures.ZlPointWeilHeartFlagModel"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cffe2",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261025T123139-L-1837581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cffe2",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261025T123139-L-1837581",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointWeilHeartFlag(+Data, AlgebraicFlag, ScalarPunctualSpectrum) and 4 nodes against clone's PointWeilHeartFlag.lean, AdicPunctualWeights SfPunctualEigenvalue/SfIsMixedOfWeightsAtMost, LocalFrobeniusTrace Qbar vs finite closed Frobenius, item node and change record"
+ }
+}

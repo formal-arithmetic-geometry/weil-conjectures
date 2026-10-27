@@ -1,0 +1,448 @@
+{
+ "id": "lem-sfb-koszul-evaluation-pasting",
+ "kind": "statement",
+ "title": "Signed Koszul evaluation pastes for successive regular quotients",
+ "statement": "Let $S$ be a commutative ring, $f=(f_1,\\ldots,f_r)$ a finite ordered tuple, $B=S/(f)$, and $K_S(f)$ the quotient-augmented Koszul complex in degrees $[-r,0]$ [def-weil-pbc-koszul-complex]. Assume this augmentation is a quasi-isomorphism. Put $V_f=\\bigwedge^r_S S^r$, with ordered generator $v_f=e_1\\wedge\\cdots\\wedge e_r$ [def-weil-pbc-exterior-algebra]. In ordinary module derived categories [def-weil-abstract-derived-category], use coinduction $C_B^S$ with its precomposition action [def-trf-derived-coinduction]. There is a specified isomorphism in $D(B)$\n$$\\tau_f:C_B^S(V_f[r])\\xrightarrow{\\sim}B[0].$$\nAfter restriction to $S$, it is represented by the top-coefficient map from the total Hom complex $\\operatorname{Hom}_S^\\bullet(K_S(f),V_f[r])$: in degree zero a functional $z:K_S(f)^{-r}\\to V_f$ is sent to $\\overline c$ when $z(v_f)=cv_f$, and all other degrees map to zero [def-sc-module-total-hom-complex]. Thus the dual ordered top wedge paired with $v_f$ goes to $1$.\nFor every $S\\to S'$ with $\\operatorname{Tor}_i^S(B,S')=0$ for $i>0$, put $B'=B\\otimes_SS'$. The scalar-extended Koszul augmentation resolves $B'$, and the evaluation-counit coinduction comparison [lem-sfb-perfect-coinduction-tor-independent-exchange] carries $\\tau_f\\otimes_B^{\\mathbf L}B'$ to $\\tau_{f'}$, under the displayed coefficient-line identification. This includes localization and commutes with identity and successive such scalar extensions [lem-pur-derived-change-of-rings]. For an invertible matrix $M$ and $f'=Mf$, the Koszul chain isomorphism induced by $M^{\\mathsf t}$ and its top exterior map on the coefficient line intertwine $\\tau_{f'}$ and $\\tau_f$; in particular a triangular change with diagonal entries $1$ preserves the ordered top normalization.\nLet $g=(g_1,\\ldots,g_s)$ be another tuple in $S$, assume $K_B(\\bar g)\\to D=B/(\\bar g)$ is a quasi-isomorphism, and order the concatenation as $(f,g)$. Its augmented Koszul complex resolves $D$. Under $V_{(f,g)}=V_f\\otimes_SV_g$, the map $(-1)^{rs}\\tau_{(f,g)}$ equals the composite obtained by coinduction transitivity $C_D^S\\simeq C_D^B C_B^S$ (the right-adjoint composition comparison of the coinduction adjunctions, whose counit is the composite of the two evaluation counits) [lem-trf-derived-coinduction-adjunction], [lem-cat-right-adjoint-composition], evaluation by $\\tau_f$, and then evaluation by $\\tau_{\\bar g}$. In this pasting use the coefficient/shift comparison from $V_f[r]\\otimes_S V_g[s]$ to $V_{(f,g)}[r+s]$ which multiplies the two shifted ordered generators by $(-1)^{rs}$. Use total tensor differential $d(u\\otimes v)=du\\otimes v+(-1)^{\\deg u}u\\otimes dv$ and the associated Hom currying and shift comparisons $t^{\\rm Ch}$ and symmetry $\\sigma^{\\rm Ch}$ of [lem-pur-total-tensor-signed-coherence] throughout; on the generators in degrees $-r,-s$ the comparison $t^{\\rm Ch}_{r,s}$ is exactly the factor $(-1)^{rs}$; on unshifted Hom models, exchanging the resolution blocks contributes $(-1)^{rs}$, and extracting the right-hand coefficient factor contributes another $(-1)^{rs}$, so those two signs cancel before applying the coefficient/shift comparison. Consequently the displayed $t^{\\rm Ch}_{r,s}$ coefficient comparison leaves the factor $(-1)^{rs}$ in the pasted map. Equivalently, replacing the coefficient comparison by $(-1)^{rs}t^{\\rm Ch}_{r,s}$ makes the pasted map exactly $\\tau_{(f,g)}$. This equality holds in $D(D)$ and is compatible with scalar extension and ordered iterated concatenation. Empty tuples and zero rings are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent signed evaluation-pasting refinement of Tags 0624 (lemma-functorial), 0625 (lemma-change-basis), 0628 (lemma-cone-koszul-abstract); duality.tex Tag 0BQZ (lemma-regular-immersion-ext), dual Koszul calculation; dualizing.tex lemma-composition-right-adjoints. The chain-level pasting and arbitrary Tor-independent naturality are additional assertions, not verbatim claims of those tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-abstract-derived-category",
+  "def-trf-derived-coinduction",
+  "def-sc-module-total-hom-complex",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-cat-right-adjoint-composition",
+  "lem-pur-total-tensor-signed-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=K_S(f)$ and $L=V_f[r]$. The increasing-wedge basis makes $P$ bounded finite free and $V_f$ free on $v_f$ [lem-weil-pbc-exterior-power-free-basis]. By [lem-pod-projective-hom-evaluation-model], $E=\\operatorname{Hom}_S^\\bullet(P,L)$ represents the restriction of $C_B^S(L)$; [lem-trf-derived-coinduction-adjunction] specifies its $B$-action through the K-injective model. Trivialize $V_f$ by $v_f$. The complementary equivalences of [lem-sc-koszul-complementary-equivalences], and the hypothesis $P\\simeq B[0]$, show that $H^n(E)=0$ for $n\\ne0$ (shifting the dual by $r$ gives this indexing). In degree zero every element is $z:P^{-r}\\to V_f$. The preceding Hom differential has image $(f)V_f$: evaluating it on $v_f$ is a signed sum of the $f_i$ times arbitrary coefficients on the omitted wedges. Thus $H^0(E)\\to B$, $[z]\\mapsto\\bar c$ for $z(v_f)=cv_f$, is an isomorphism. The same quotient calculation works for $r=0$: there is no preceding term and the ideal is zero.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-sc-koszul-complementary-equivalences",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes; dual Koszul computation of duality.tex Tag 0BQZ, lemma-regular-immersion-ext, with the ordered coefficient line."
+   }
+  },
+  {
+   "text": "The preceding cohomology identification is $B$-linear: for $b\\in B$, choose a lift $s\\in S$; multiplication by $s$ on $P$ lifts multiplication by $b$ on $B$. Naturality of the projective Hom model identifies precomposition with this lift with the prescribed action, and its top evaluation is multiplication by $\\bar s$. This is independent of the lift because $(f)$ is exactly the top boundary ideal. Apply [lem-sf-derived-concentrated-single] in $D(B)$, then normalize its degree-zero isomorphism by this $B$-linear map to obtain $\\tau_f$. Full faithfulness of single complexes [lem-weil-pbc-derived-single-fully-faithful] makes a map between degree-zero-concentrated derived objects determined by $H^0$. After restriction to $S$, the top-coefficient chain map has the same $H^0$ map, so it represents $\\tau_f$. This also proves uniqueness of that normalization in $D(B)$; no faithfulness of restriction on general derived morphisms is asserted.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-sf-derived-concentrated-single",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext); agent normalization by top cohomology, using the duality.tex 0BQZ calculation."
+   }
+  },
+  {
+   "text": "For $S\\to S'$ satisfying the stated Tor vanishing, the wedge-by-wedge scalar comparison and augmentation square of [lem-trf-koszul-augmented-scalar-extension] identify $P\\otimes_SS'$ with $K_{S'}(f')$. The augmentation is a resolution by [lem-trf-koszul-augmentation-kflat-model] and the Tor hypothesis: its derived source has no negative cohomology and $H^0=B'$. Apply [lem-sfb-perfect-coinduction-tor-independent-exchange] to $P$, $L=V_f[r]$ (use its finite projective coefficient formula before the shift, then shift). Its representative sends $z\\otimes t$ to $(x\\otimes s\\mapsto ts(z(x)\\otimes1))$. Hence top reduction sends $c\\otimes t$ to $\\bar c t$ on both sides. The exchange source is isomorphic to $B'[0]$ via $\\tau_f\\otimes_B^{\\mathbf L}B'$, and the target is concentrated in degree zero by steps 1--2 over $S'$. Their $B'$-linear maps agree by single-complex full faithfulness. The identity and successive-extension compatibility is the last clause of the exchange lemma. Localization is included, since localization is flat [lem-weil-pbc-localization-flat].",
+   "uses": [
+    "lem-trf-koszul-augmented-scalar-extension",
+    "lem-trf-koszul-augmentation-kflat-model",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0621, definition-koszul-complex, scalar extension of the wedge model; derived coinduction exchange as specified by the cited node."
+   }
+  },
+  {
+   "text": "For $f'=Mf$, set $T=M^{\\mathsf t}:S^r\\to S^r$. Then contraction by $f$ after $T$ equals contraction by $f'$. The derivation rule in [lem-weil-pbc-koszul-differential] shows that $\\bigwedge T$ commutes with the differentials; $\\bigwedge(T^{-1})$ is its inverse. In degree zero it is the identity, so it preserves the quotient augmentations. Write $a=\\bigwedge^rT:V_{f'}\\to V_f$. The induced Hom comparison is $z\\mapsto a^{-1}z(\\bigwedge T)$, with the coefficient shift understood. If $z$ acts by $c$ on the rank-one top line, this map also acts by $c$, since $a^{-1}(c a(v_{f'}))=cv_{f'}$. Thus the top-coefficient reductions agree, and step 2 gives the claimed equality in $D(B)$. For a triangular matrix with diagonal $1$, $a$ sends the ordered wedge to the ordered wedge, giving the asserted fixed normalization.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0624 (lemma-functorial), 0625 (lemma-change-basis); explicit ordered-wedge calculation."
+   }
+  },
+  {
+   "text": "Set $Q=K_S(g)$. The map $P\\otimes_S Q\\to K_S(f,g)$ sends $x\\otimes y$ to $x\\wedge y$ with the $f$ generators first. It is bijective in every degree: increasing subsets of the disjoint ordered union correspond to one increasing subset in each block [lem-weil-pbc-exterior-power-free-basis]. The differential is preserved because contraction satisfies $d(x\\wedge y)=dx\\wedge y+(-1)^{\\deg x}x\\wedge dy$ [lem-weil-pbc-koszul-differential]. The two quotient augmentations agree on degree zero. Each term of $Q$ is finite free, hence flat [lem-weil-pbc-projective-module-flat], and $Q$ is K-flat by [lem-pc-module-bounded-flat-kflat]. Its defining preservation of quasi-isomorphisms gives $P\\otimes_S Q\\simeq B\\otimes_S Q$. The scalar comparison in [lem-trf-koszul-augmented-scalar-extension] identifies the latter with $K_B(\\bar g)$ including its augmentation. By assumption that complex resolves $D$, so $K_S(f,g)$ resolves $D$. The top line is $V_f\\otimes_SV_g$ in precisely that order.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-weil-pbc-koszul-differential",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex",
+    "lem-trf-koszul-augmented-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0664 (lemma-join-sequences-koszul-complex), 0669 (lemma-join-koszul-regular-sequences); the omitted wedge identification is written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-perfect-resolution-coinduction-comparison] to $P,Q$, their quotient augmentations and $N=(V_f\\otimes_SV_g)[r+s]$. It identifies the actual right-adjoint composition comparison, rather than an arbitrary isomorphism, with currying after the signed flip $P\\otimes Q\\to Q\\otimes P$. Its diagram retains the derived $D$-action and has the composite evaluation counit. These are exactly the transitivity and counit required by [lem-cat-right-adjoint-composition] for the coinduction adjunctions [lem-trf-derived-coinduction-adjunction]. In these models the remaining operation is extraction of the coefficient line followed by the two top reductions of steps 1--2. Since all final objects are concentrated in degree zero, equality of their top reductions proves equality in $D(D)$ by [lem-weil-pbc-derived-single-fully-faithful].",
+   "uses": [
+    "lem-sfb-perfect-resolution-coinduction-comparison",
+    "lem-cat-right-adjoint-composition",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0C0F, lemma-composition-right-adjoints; explicit double-resolution refinement before the sign computation."
+   }
+  },
+  {
+   "text": "Here is the sign calculation. First keep the coefficient as the raw tensor $A\\otimes T$, where $A=V_f[r]$ and $T=V_g[s]$. In the finite-projective Hom model the right-coefficient insertion is $h\\otimes t\\mapsto(x\\mapsto(-1)^{|t||x|}h(x)\\otimes t)$. Indeed move $t$ to the left of $h$, apply the unsigned left-coefficient insertion of [lem-trf-coinduction-tensor-comparison-model], and move $t$ past $h(x)$; the exponent is $|t||h|+|t|(|h|+|x|)=|t||x|$. The projective evaluation normalization [lem-pod-projective-hom-evaluation-model] and naturality of its Hom comparison identify this with the same counit mate. On $x=v_f$, $y=v_g$, the block flip in step 6 contributes $(-1)^{rs}$, and extracting $t$ of degree $-s$ from the inner Hom contributes $(-1)^{rs}$. Thus the two signs cancel: on the raw shifted coefficient tensor the iterated top reduction sends the functional with value $v_f\\otimes v_g$ to $1$. But $t^{\\rm Ch}_{r,s}$ sends that coefficient generator to $(-1)^{rs}v_{(f,g)}$ [lem-pur-total-tensor-signed-coherence]. Starting from $V_{(f,g)}[r+s]$ therefore uses its inverse, with the same sign. The pasted map is $(-1)^{rs}\\tau_{(f,g)}$. Equivalently, the coefficient comparison $(-1)^{rs}t^{\\rm Ch}_{r,s}$ gives exactly $\\tau_{(f,g)}$.",
+   "uses": [
+    "lem-trf-coinduction-tensor-comparison-model",
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-pur-total-tensor-signed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5Y, lemma-compose, and Tag 0A8H, section-hom-complexes; explicit agent calculation of the coefficient and block signs."
+   }
+  },
+  {
+   "text": "All maps used in the top reductions are wedge maps, tensor maps, or reductions of coefficients; the formula in step 3 consequently preserves the calculation in step 7 whenever the scalar extensions satisfy the Tor-independence conditions for the quotient stages being compared. For three blocks of lengths $r,s,t$, the accumulated corrected pasting signs are $(-1)^{rs+(r+s)t}$ and $(-1)^{st+r(s+t)}$, which agree. The associator is unsigned and the shift comparisons satisfy the triple coherence of [lem-pur-total-tensor-signed-coherence]; coinduction transitivity has the pasted counit by [lem-cat-right-adjoint-composition]. Repeating this argument proves the ordered iterated assertion. Empty blocks have length zero and all sign factors $1$. If a quotient is zero, every normalized target is the zero module and the same formulas remain meaningful; in the zero base ring every displayed complex and map is zero. No proper-ideal or nonzero-ring assumption has been used.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-pur-total-tensor-signed-coherence",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0664 (lemma-join-sequences-koszul-complex), 0A5Y (lemma-compose); ordered associativity of the displayed formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-sc-koszul-complementary-equivalences",
+  "def-sc-module-total-hom-complex",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-trf-koszul-augmented-scalar-extension",
+  "lem-trf-koszul-augmentation-kflat-model",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-koszul-differential",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "lem-sfb-perfect-resolution-coinduction-comparison",
+  "lem-cat-right-adjoint-composition",
+  "lem-trf-coinduction-tensor-comparison-model",
+  "lem-pur-total-tensor-signed-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0624, 0625, 0664, 0669 and duality.tex 0BQZ; explicit signed refinement of dualizing.tex 0C0F, correcting the extra sign in the imported pasting formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "koszul.*(map|baseChange|congr)|dual.*koszul",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exterior pairings, determinants, cotangent maps and algebra traces do not state derived Koszul evaluation pasting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex duality determinant evaluation compatible base change and change of generators",
+   "results": "Actual returned hits: Module.Basis.det_comp_basis, LinearMap.det_baseChange, IsBaseChange.toDualBaseChange_tmul, IsBaseChange.toDualBaseChange, IsBaseChange.dual, Module.Basis.det_reindex, Module.Dual.baseChange, IsBaseChange.det_endHom",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exterior pairings, determinants, cotangent maps and algebra traces do not state derived Koszul evaluation pasting"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"koszulComplex\", \"map\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exterior pairings, determinants, cotangent maps and algebra traces do not state derived Koszul evaluation pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Koszul complex dual determinant evaluation natural change of scalars triangular change of generators",
+   "results": "Actual returned hits: Algebra.SubmersivePresentation.aevalDifferentialEquiv, LinearMap.detAux, Algebra.Norm.Transitivity.eval_zero_comp_det, Algebra.Norm.Transitivity.eval_zero_det_det, IsBaseChange.det_endHom, exteriorPower.pairingDual_ιMulti_ιMulti, LinearMap.det_baseChange, exteriorPower.alternatingMapToDual_apply_ιMulti",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exterior pairings, determinants, cotangent maps and algebra traces do not state derived Koszul evaluation pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated dual Koszul evaluation concatenated regular sequences tensor Hom adjunction determinant orientation triangular change",
+   "results": "Actual returned hits: exteriorPower.pairingDual_ιMulti_ιMulti, exteriorPower.pairingDual_apply_apply_eq_one, FGModuleCat.FGModuleCatEvaluation, exteriorPower.alternatingMapToDual_apply_ιMulti, TensorPower.pairingDual_tprod_tprod, exteriorPower.pairingDual_apply_apply_eq_one_zero, contractLeft_assoc_coevaluation, exteriorPower.toTensorPower_apply_ιMulti",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exterior pairings, determinants, cotangent maps and algebra traces do not state derived Koszul evaluation pasting"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalClass|dualizing.*koszul|koszul.*dualizing|coinduction.*diagonal",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exterior pairings, determinants, cotangent maps and algebra traces do not state derived Koszul evaluation pasting"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|Koszul",
+   "results": "Actual returned hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exterior pairings, determinants, cotangent maps and algebra traces do not state derived Koszul evaluation pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dual Koszul trace for regular quotient compatible concatenation triangular basis changes and arbitrary Tor independent extension of scalars",
+   "results": "Actual returned hits: Algebra.Generators.CotangentSpace.compEquiv, Algebra.trace_comp_trace_of_basis, LinearMap.trace_eq_contract_apply, Algebra.trace_trace_of_basis, Module.Basis.trace_traceDual_mul, Algebra.trace_comp_trace, LinearMap.trace_eq_contract, LinearMap.trace_eq_contract'",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary exterior pairings, determinants, cotangent maps and algebra traces do not state derived Koszul evaluation pasting"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(dual|tensor|map)|dual.*koszul",
+   "results": "Actual returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex self dual determinant orientation evaluation transitivity regular quotients",
+   "results": "Actual returned hits: Algebra.Norm.Transitivity.eval_zero_det_det, Module.Basis.orientation, Module.eval_ker, HomologicalComplex.acyclic_op_iff, HomologicalComplex.instIsMultiplicativeQuasiIso, HomologicalComplex.instHasHomologyOppositeOp, OrthonormalBasis.same_orientation_iff_det_eq_det, HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"koszul\", \"dual\"",
+   "results": "Actual returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Koszul top coefficient evaluation and composition for regular quotient rings",
+   "results": "Actual returned hits: Algebra.Generators.cotangentCompAwaySec, Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.PreSubmersivePresentation.cotangentComplexAux_apply, Algebra.Generators.H1Cotangent.δAux_toAlgHom, Algebra.Generators.H1Cotangent.δAux_X, Algebra.PreSubmersivePresentation.aevalDifferential_single, Algebra.Presentation.differentialsSolution, Algebra.Generators.cotangentRestrict_mk",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "Actual returned hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings iterated derived Hom top Ext product finite projective resolutions tensor Hom sign",
+   "results": "Actual returned hits: Ext, CategoryTheory.ProjectiveResolution.isoExt, CategoryTheory.ProjectiveResolution.mk₀_comp_extMk, CategoryTheory.Abelian.Ext.bilinearCompOfLinear, CategoryTheory.Tor, CategoryTheory.Abelian.Ext.instModule, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.Abelian.Ext.precompOfLinear",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|coinduct|coinduction|homEquiv.*[Hh]om",
+   "results": "Actual returned hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coextendScalars\"",
+   "results": "Actual returned hits: ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.CoextendScalars.map', ModuleCat.CoextendScalars.instCoeFunCarrierObjCoextendScalarsForall, ModuleCat.CoextendScalars.hasSMul, ModuleCat.CoextendScalars.mulAction",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated derived coinduction comparison computed using projective resolutions and evaluation at one",
+   "results": "Actual returned hits: CategoryTheory.ProjectiveResolution.leftDerived_app_eq, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.leftDerived, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, groupCohomology.linearYonedaObjResProjectiveResolutionIso",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction transitivity represented by augmented finite projective resolutions P to B and B tensor Q to D with Hom Q Hom P I currying",
+   "results": "Actual returned hits: CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Tor_map, CategoryTheory.Tor_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|restrictCoextendScalarsAdj",
+   "results": "Actual returned hits: 31, 32, 39, 40, 441",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coinduction composition comparison computed on finite projective resolutions by currying and the signed flip of the two resolution complexes",
+   "results": "Actual returned hits: CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.ProjectiveResolution.Hom.hom'_f, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.Functor.mapProjectiveResolution_complex, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality",
+   "date": "2026-10-23",
+   "verdict": "no match: no derived Koszul evaluation-pasting declaration; ordinary coextension, Ext functoriality, determinants and cotangent presentations do not state the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-polynomial-koszul-diagonal-class",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Repair of polynomial-model steps 5--8: graph-normalized diagonal generator at Noetherian stages, compatible with nonflat changes of stage, localization and Koszul refinement, before intrinsic-pair rigidity. Sublemma: signed top-Koszul evaluation and its pasting for two successive regular quotients, used in graph normalization and one-variable refinement.",
+   "via": [
+    "lem-sfb-polynomial-koszul-diagonal-class",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-koszul-evaluation-pasting",
+  "worker": "stage1",
+  "summary": "Constructed the normalized trace from top Hom cohomology, retained the precomposition quotient action, proved Tor-independent exchange and generator naturality, and reduced actual coinduction pasting to a general double-resolution comparison. STATEMENT-DISPUTED: the t^Ch coefficient comparison leaves (-1)^(rs); corrected the pasting formula and recorded the r=s=1 counterexample in the report. One new statement-only generic resolution lemma; existing complementary-dual, K-flat, derived-Hom, exchange and concentration nodes reused.",
+  "blueprint": "Current latest blueprint, det-thm-sf-ctf-stability-direct-images proof (3), inherited auxiliary polynomial-duality route: ordered Koszul normalization before graph/one-variable refinement. The live created.item chain has no imported ancestor (blueprint_refs ancestor returns None), retained as null with the precise inherited place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   },
+   {
+    "node": "lem-trf-derived-coinduction-adjunction",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   },
+   {
+    "node": "lem-sc-koszul-complementary-equivalences",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   },
+   {
+    "node": "def-sc-module-total-hom-complex",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   },
+   {
+    "node": "lem-trf-koszul-augmented-scalar-extension",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   },
+   {
+    "node": "lem-trf-koszul-augmentation-kflat-model",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   },
+   {
+    "node": "lem-trf-coinduction-tensor-comparison-model",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Generic ordinary-module complex or coinduction comparison used with its stated hypotheses; this is an auxiliary Koszul calculation on the inherited polynomial-duality route, and no unit-specific six-functor result supplies this algebraic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-sc-koszul-complementary-equivalences",
+  "def-sc-module-total-hom-complex",
+  "lem-trf-koszul-augmented-scalar-extension",
+  "lem-trf-koszul-augmentation-kflat-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-coinduction-tensor-comparison-model",
+  "lem-pur-total-tensor-signed-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-303f5b835",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-303f5b835 (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, the new node and every cited statement in full, plus Stacks 0C0F, 0A5Y, 0917, 0BQZ, 0625 and 0664 at the cited places. The statement change (STATEMENT-DISPUTED, E7) is correct and does not weaken the item. I checked it independently on S=Q[x,y], f=(x), g=(y). Unsigned currying (0A5Y) and the flip give H(e_y)(e_x)=-v_f⊗v_g. The canonical projection map pulls out the right-hand coefficient with sign (-1)^{|t||x|}, the only chain-map representative of the adjoint of ε⊗1. These two signs cancel, so the raw tensor pastes to +1. t^Ch_{1,1} contributes -1, so the pasting with t^Ch equals -τ_{(f,g)} on H^0 over Q. The base statement was false; (-1)^{rs}τ, equivalently using (-1)^{rs}t^Ch, is right. Steps 1-8 are sound. The augmentation qis is exactly Koszul-regularity (def (3)), and the signed dual differential matches the total-Hom one. M^t matches Stacks 0625 (x_ji). The wedge identification parities agree, and the bounded flat Q is K-flat. Tor domains, empty tuples and zero rings are handled. proof_deps equals the union of uses. The new node lem-sfb-perfect-resolution-coinduction-comparison is true: w is a qis by K-flatness, J is K-injective (0917), e intertwines the composite counit h(1)(1), the square commutes by hand check (only |p|=0 contributes), and W and Q are K-projective. It is a general lemma, not a clause of the item, and not a duplicate of trf coinduction-total-hom-model (which gives only e) or the other coinduction nodes. B1-B7 hold. Batch 5: the closures of lem-pod-projective-hom-evaluation-model (30 nodes), lem-trf-koszul-augmented-scalar-extension (26), lem-trf-koszul-augmentation-kflat-model (76), lem-trf-coinduction-tensor-comparison-model (402) and def-trf-derived-coinduction (202, a definition already cited at base) contain no trace-formula, PD or target theorem. They are generic algebra, so all flags and all nine tool_uses are accepted. MAINTAINER: the only citer, lem-sfb-polynomial-koszul-diagonal-class (reviewed split), uses in step 7 the literal equality τ_{(t-a,f)} under t^Ch_{1,n}. That now carries an extra (-1)^n, so the parent's step-7 sign bookkeeping and orientation claim must be re-checked with the (-1)^{rs}t^Ch form (HUMAN.md / repair note)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KoszulEvaluationPasting",
+  "declaration": "ModuleCat.KoszulEvaluation.koszul_evaluation_pasting",
+  "file": "lean/Sheaf/Algebra/Homology/KoszulEvaluationPasting.lean",
+  "statement": "theorem koszul_evaluation_pasting (F : Presentation R B r) (hF : F.Resolves) : ∃ τ : F.model ≅ unitObject B, F.IsNormalized τ ∧ (∀ υ : F.model ≅ unitObject B, F.IsNormalized υ → υ = τ) ∧ ScalarNaturality F τ ∧ GeneratorNaturality F τ ∧ Pasting F τ ∧ (∀ m : F.model ⟶ unitObject B, OrderedPasting F m → m = τ.hom)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "ModuleCat.KoszulEvaluation.Presentation",
+   "ModuleCat.KoszulEvaluation.Presentation.complex",
+   "ModuleCat.KoszulEvaluation.Presentation.line",
+   "ModuleCat.KoszulEvaluation.Presentation.volume",
+   "ModuleCat.KoszulEvaluation.Presentation.coefficient",
+   "ModuleCat.KoszulEvaluation.Presentation.top",
+   "ModuleCat.KoszulEvaluation.Presentation.coefficientVolume",
+   "ModuleCat.KoszulEvaluation.unitComplex",
+   "ModuleCat.KoszulEvaluation.unitObject",
+   "ModuleCat.KoszulEvaluation.Presentation.IsAugmentation",
+   "ModuleCat.KoszulEvaluation.Presentation.Resolves",
+   "ModuleCat.KoszulEvaluation.Presentation.model",
+   "ModuleCat.KoszulEvaluation.Presentation.IsNormalized",
+   "ModuleCat.KoszulEvaluation.coinductionComp",
+   "ModuleCat.KoszulEvaluation.coinductionShift",
+   "ModuleCat.KoszulEvaluation.IsSingleScalarComparison",
+   "ModuleCat.KoszulEvaluation.IsPastingCoefficient",
+   "ModuleCat.KoszulEvaluation.firstContraction",
+   "ModuleCat.KoszulEvaluation.pasted",
+   "ModuleCat.KoszulEvaluation.Pasting",
+   "ModuleCat.KoszulEvaluation.ScalarNaturality",
+   "ModuleCat.KoszulEvaluation.GeneratorNaturality",
+   "ModuleCat.KoszulEvaluation.OrderedPasting",
+   "ModuleCat.KoszulEvaluation.koszul_evaluation_pasting"
+  ],
+  "note": "Repairs H3 of returned head 32702c312fb3: unsigned IsPastingCoefficient after the s² right-shift identification; the third Pasting conjunct uses the signed coefficient map. The theorem signature and mathematical node statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20e985b4f",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery of returned head 32702c312fb3: the only changes are the module and lean.note; the node statement is unchanged. The fix matches the return exactly: IsPastingCoefficient is unsigned k v_(f,g)=v_f, the third Pasting conjunct uses (-1)^(rs)v_f, the second conjunct and OrderedPasting.step are kept, and the docstrings explain t^Ch=s1∘s2 with s2 absorbed in coinductionShift. Independent r=s=1 check over Q[x,y] in Mathlib conventions: the counit-pinned comparison is -1 on H^0 for every admissible chain map; coinductionShift is unsigned Cochain.rightShift (rightShift_v), so pasted=-ω with unsigned k and ω with signed k; both conjuncts and OrderedPasting are true and agree with node step 7. All other clauses re-audited (presentation and resolution, normalization and uniqueness, Tor-independent scalar exchange, change of generators M^t with det-1 case, empty tuples and zero rings). Statement verbatim and the 24 declarations match the record (checked by script). Single universe u, no hollow definitions, only sorry is the proof, docstrings carry source and blueprint, report sections present. Not compiled (no changes)."
+ }
+}

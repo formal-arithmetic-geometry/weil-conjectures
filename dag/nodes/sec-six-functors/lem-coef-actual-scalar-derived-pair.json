@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-actual-scalar-derived-pair",
+ "kind": "statement",
+ "title": "The normalized scalar-derived pair with the actual coefficient adjunctions",
+ "statement": "A specified ordinary extension functor, its sectionwise object and morphism equations, its additive structure, a left-derived functor with counit computing on K-flat complexes, and ordinary and derived adjunctions whose unit square commutes determine a ScalarDerivedPair with exactly those functors and adjunctions. In particular the actual integral-to-finite coefficient extension and recorded derived adjunction form such a pair.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03CZ, 07A4 and 07A6; ordinary adjunction units, K-flat derived scalar extension and its normalized derived adjunction."
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "For two adjunctions and a comparison of their right adjoints, apply the derived adjunction bijection to both candidate transposes. Rewrite the bijection with its unit, use naturality, the given unit square, and the ordinary triangle identity. This proves adjunctionTranspose_of_unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Build scalarPairWithAdjunction using the given functors, counit and adjunctions. K-flat computation is the supplied counit isomorphism. Its ordinary-unit formula is the supplied section formula. For the normalized transpose square apply the preceding transpose identity to the homotopy adjunction and derived adjunction; identify the homotopy quotient maps and the canonical complex/homotopy localization comparison.",
+   "uses": [
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize to the actual integral coefficient projection. The scalar-extension existence theorem supplies the object/morphism equations and normalized ordinary unit, the derived-existence theorem supplies left-derivedness and computation on K-flat complexes, and the recorded derived scalar adjunction supplies the unit square. All object data are the specified functors; no arbitrary witness of mere existence is used.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03CZ, 07A4 and 07A6; ordinary adjunction units, K-flat derived scalar extension and its normalized derived adjunction."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
+  "date": "2026-10-22",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-system-evaluation-calculus",
+   "place": "Auxiliary scalar tensor comparison, using the actual recorded scalar-extension and derived adjunctions.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientActualScalarDerivedPair",
+  "file": "lean/Sheaf/Paper/CoefficientActualScalarDerivedPair.lean",
+  "declaration": "WeilConjectures.coefficientActualScalarDerivedPair",
+  "declarations": [
+   "CategoryTheory.ScalarHomTensor.adjunctionTranspose_of_unit",
+   "CategoryTheory.ScalarHomTensor.scalarPairWithAdjunction",
+   "WeilConjectures.coefficientActualScalarDerivedPair",
+   "WeilConjectures.coefficientActualScalarDerivedPair_extension",
+   "WeilConjectures.coefficientActualScalarDerivedPair_ordinaryAdjunction",
+   "WeilConjectures.coefficientActualScalarDerivedPair_ordinaryAdjunction_heq",
+   "WeilConjectures.coefficientActualScalarDerivedPair_derived",
+   "WeilConjectures.coefficientActualScalarDerivedPair_adjunction"
+  ],
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-22",
+  "statement": "def coefficientActualScalarDerivedPair (n : ℕ) : SheafOfModules.ScalarDerivedPair (J := AlgebraicGeometry.Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) (S := integralCoefficientCommRingSheaf l E W n) (completedIntegralCommRingProjectionUnrestricted l E W n)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed left derived scalar extension functor with normalized unit defines a scalar derived pair",
+   "results": "8 hits: leftDerivedLift, totalLeftDerived, Tor and Ext infrastructure. None records the prescribed ordinary and derived scalar adjunctions with their unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "Use the library scalar-pair record and prove its normalized transpose from the supplied unit square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hit: CategoryTheory.Adjunction.homEquiv_unit in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-22",
+   "verdict": "This unit formula is used in the generic transpose proof; it does not assemble a scalar-derived pair."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*unit",
+   "results": "25 hits, including adjunction-unit calculations; no prescribed scalar-derived-pair constructor.",
+   "date": "2026-10-22",
+   "verdict": "The unit formula and naturality supply the elementary calculation. The scalar normalization interface is project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prescribed ordinary scalar extension functor and compatible derived adjunction define a normalized derived scalar extension pair.",
+   "results": "8 hits about ModuleCat scalar extension and adjunctions; none constructs a prescribed sheaf-level derived pair with its normalized transpose.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing project interfaces and the explicit construction in this module."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-73b77",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261022T145606-L-2021248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-73b77",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261022T145606-L-2021248",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules and 4 node files vs clones/live (diff), change records vs the 3 interface changes, all 44 direct importers compiled against the sandbox-built delivered item (44/44 rc 0), #print axioms of the 9 closed holes and new theorems (sorryAx only through upstream scalarHomTensorComparison_exists and the item's remaining coefficientEvaluationTensorIso_exists)"
+ }
+}

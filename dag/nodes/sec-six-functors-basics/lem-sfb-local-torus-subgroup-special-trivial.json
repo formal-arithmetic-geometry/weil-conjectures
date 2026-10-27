@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-local-torus-subgroup-special-trivial",
+ "kind": "statement",
+ "title": "Trivial closed fibre detects a trivial closed subgroup of a split torus",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], put $k=A/\\mathfrak m$ and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $r\\geq0$. An $S$-group scheme is an $S$-scheme with multiplication, identity section and inverse satisfying the associativity, unit and inverse diagrams; a homomorphism preserves these three operations. Let $T=\\operatorname{Spec}A[x_1,y_1,\\ldots,x_r,y_r]/(x_iy_i-1)_{1\\leq i\\leq r}$, with $\\Delta(x_i)=x_i\\otimes x_i$, $\\Delta(y_i)=y_i\\otimes y_i$, counit $x_i,y_i\\mapsto1$ and inverse interchanging $x_i,y_i$; for $r=0$, $T=1_S$. Let $j:K\\hookrightarrow T$ be a closed immersion [def-weil-closed-immersion] of $S$-group schemes which is a homomorphism. If the identity section $\\operatorname{Spec}k\\to K_k=K\\times_S\\operatorname{Spec}k$ [def-pc-base-change] is an isomorphism, then the identity section $S\\to K$ is an isomorphism. Neither flatness of $K\\to S$ nor completeness of $A$ is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes (2014), Exercise 2.4.3(iii), printed p.76, the trivial-special-fibre kernel argument, extracted for an arbitrary closed subgroup of a split torus; also the final torsion argument in the proof of Theorem B.3.2(2), printed pp.289-290. Agent-extracted supporting statement, not a verbatim theorem of the source. WANTED local archive; online source read."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-closed-immersion",
+  "def-sfb-split-torus-over-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $P=A[x_1,y_1,\\ldots,x_r,y_r]/(x_iy_i-1)$. The affine description of a closed immersion gives $K=\\operatorname{Spec}B$, with $B=P/I$. The identity section gives an augmentation $\\epsilon:B\\to A$ sending every $x_i,y_i$ to $1$. Its composite with the structure map $u:A\\to B$ is $1_A$, so $B=u(A)\\oplus J$ as $A$-modules, where $J=\\ker\\epsilon$. The ideal $J$ is generated as a $B$-module by the $2r$ elements $x_i-1,y_i-1$: subtracting the value at $(1,\\ldots,1)$ from a polynomial is a sum of multiples of these differences, and this passes to $B$. In particular $J$ is finite as a $B$-module, even though $B$ need not be finite as an $A$-module. For $r=0$ the same description already gives $J=0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Exercise 2.4.3(iii), printed p.76; affine augmentation setup written out by Q98"
+   }
+  },
+  {
+   "text": "For an integer $n>1$, let $H_n=\\ker([n]:K\\to K)$. Its functor of points consists of tuples in $K$ whose coordinates have $n$th power $1$. Thus $H_n=\\operatorname{Spec}C_n$ with $C_n=B/(x_i^n-1,y_i^n-1)_i$. Since $x_iy_i=1$, the second family of relations follows from the first and $y_i=x_i^{n-1}$ in $C_n$. Consequently the finitely many monomials $\\prod_i x_i^{a_i}$ with $0\\leq a_i<n$ span $C_n$ over $A$. The augmentation splits $C_n=A\\oplus L_n$, where $L_n$ is its augmentation kernel; $L_n$ is a finite $A$-module, being the image of the finite module $C_n$ under $c\\mapsto c-u\\epsilon(c)$. The affine fibre-product formula and the hypothesis identify $C_n/\\mathfrak mC_n$ with $k$: indeed $(H_n)_k=\\ker([n]:K_k\\to K_k)=1_k$. Reduction of the split decomposition gives $L_n/\\mathfrak mL_n=0$. Since $\\mathfrak m$ is the Jacobson radical of $A$, Nakayama gives $L_n=0$. Hence $H_n=1_S$ for every $n>1$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Exercise 2.4.3(iii), printed p.76; Theorem B.3.2(2), final torsion paragraph, printed pp.289-290; Nakayama: Stacks 00DV (lemma-NAK)(2)"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset A$, put $F=\\kappa(\\mathfrak p)$, and choose an algebraic closure $\\Omega/F$. Base change of the closed immersion embeds $K_\\Omega$ as a closed subgroup of $\\mathbf G_{m,\\Omega}^r$. The cited subgroup theorem gives $K_\\Omega\\simeq D_\\Omega(M)$ for a finitely generated abelian group $M$. The group-algebra basis in its statement computes the coordinate algebra of $D_\\Omega(M)[n]$ as $\\Omega[M]/(e_{nm}-1:m\\in M)=\\Omega[M/nM]$: the quotient map sends $e_m$ to $e_{\\bar m}$, and the inverse sends a coset basis vector to the class of any representative; representatives differing by $nm'$ give the same class. From Step 2 these torsion schemes are trivial. Thus $M/nM=0$ for every $n>1$, because the augmentation of $\\Omega[M/nM]$ is an isomorphism only when its basis has just the identity index. By the structure theorem for finitely generated abelian groups, a nonzero free summand has a nonzero quotient modulo $2$, and any nonzero cyclic prime-power summand has a nonzero quotient modulo its prime. Therefore $M=0$ and $K_\\Omega=1_\\Omega$. This uses scheme-theoretic torsion, including $p$-power torsion in characteristic $p$, rather than just geometric points.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Exercise 2.4.3(iii), printed p.76; final torsion argument of Theorem B.3.2(2), printed pp.289-290; diagonalizable subgroup input also Milne Theorems 12.8-12.9, pp.233-234"
+   }
+  },
+  {
+   "text": "Let $B_F=B\\otimes_A F$. Its augmentation to $F$ becomes an isomorphism after scalar extension to $\\Omega$, by Step 3 and the affine fibre-product formula. If $b\\in B_F$ has augmentation zero, its image in $B_F\\otimes_F\\Omega$ is zero; the cited field-extension injection gives $b=0$. The augmentation is already surjective since it has its scalar section. Hence $B_F\\simeq F$ by the augmentation itself. Tensoring the split decomposition $B=A\\oplus J$ gives $B_F=F\\oplus(J\\otimes_A F)$ (send $(a,j)\\otimes t$ to $(at,j\\otimes t)$ and use the two inclusions for the inverse), so $J\\otimes_A\\kappa(\\mathfrak p)=0$ for every prime $\\mathfrak p\\subset A$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-field-extension-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Exercise 2.4.3(iii), printed p.76, passage from geometric to ordinary fibres; Q98 affine form of the final fibre argument"
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak q\\subset B$, put $\\mathfrak p=u^{-1}(\\mathfrak q)$ and $S_{\\mathfrak p}=A\\setminus\\mathfrak p$. Write $S_{\\mathfrak p}^{-1}J$ for module localization. The maps $j\\otimes(\\bar a/\\bar s)\\mapsto (aj/s)\\bmod\\mathfrak pS_{\\mathfrak p}^{-1}J$ and $j/s\\mapsto j\\otimes(1/\\bar s)$ identify $J\\otimes_A\\kappa(\\mathfrak p)$ with $S_{\\mathfrak p}^{-1}J/\\mathfrak pS_{\\mathfrak p}^{-1}J$; the fraction relation and balancing check that both are well defined and inverse. Step 4 therefore implies that every $j/1$ is a finite sum of terms $(a/1)(j'/s)$ with $a\\in\\mathfrak p$. All $u(s)$ are invertible in $B_{\\mathfrak q}$. Thus $J_{\\mathfrak q}=\\mathfrak pJ_{\\mathfrak q}$, where $J_{\\mathfrak q}$ denotes the localization of the $B$-module $J$. It is finite over the local ring $B_{\\mathfrak q}$ by the generators in Step 1, and the ideal generated by $u(\\mathfrak p)$ is contained in its maximal ideal $\\mathfrak qB_{\\mathfrak q}$. Nakayama over $B_{\\mathfrak q}$ yields $J_{\\mathfrak q}=0$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK)(2); localization and residue-field definitions (00CO, 07BI); Q98 affine specialization of Conrad Lemma B.3.1 for an identity section"
+   }
+  },
+  {
+   "text": "Finally let $j\\in J$. Since $j/1=0$ in every $J_{\\mathfrak q}$, the localization zero criterion says that for each prime $\\mathfrak q\\subset B$ there exists $s\\notin\\mathfrak q$ with $sj=0$. If $j\\ne0$, its annihilator would be a proper ideal, hence contained in a maximal ideal $\\mathfrak q$ (apply Zorn to proper ideals containing it: a chain union is proper because it does not contain $1$). The preceding $s$ would belong to this annihilator and lie outside $\\mathfrak q$, a contradiction. Therefore $J=0$ and the augmentation $B\\to A$ is inverse to $u$. Taking spectra proves that the actual identity section $S\\to K$ is an isomorphism. No step assumed flatness of $K$ or completeness of $A$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Localization zero criterion, Section 00CM; elementary annihilator argument completing the affine fibre argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-nakayama-jacobson",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-sfb-field-extension-tensor-injective",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Exercise 2.4.3(iii), printed p.76, and the final paragraph of Theorem B.3.2(2), printed pp.289-290. Q98 writes out the finite torsion argument and replaces the invocation of Lemma B.3.1 by its direct affine identity-section proof; local Conrad archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of a split torus over a Noetherian local ring with trivial special fibre is trivial",
+   "results": "{\"t\": \"2026-10-24T04:00:06Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subgroup scheme of a split torus over a Noetherian local ring with trivial special fibre is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.default_asIdeal\", \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"AlgebraicGeometry.spec_punit_isEmpty\", \"AlgebraicGeometry.instIsClosedImmersionISchemeOfSubsingletonCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.nilradical_eq_bot\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\"], \"digest\": \"fd4d6da829f604a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological ClosedSubgroup, scheme-point facts, or the standard Laurent Hopf structure; none detects a closed subgroup scheme from its closed fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Hopf ideal in a Laurent polynomial ring over a local ring whose reduction is the augmentation ideal equals the augmentation ideal",
+   "results": "{\"t\": \"2026-10-24T04:00:07Z\", \"tool\": \"leanfinder\", \"query\": \"A Hopf ideal in a Laurent polynomial ring over a local ring whose reduction is the augmentation ideal equals the augmentation ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instHopfAlgebra\", \"LaurentPolynomial.instBialgebra\", \"LaurentPolynomial.antipode_C_mul_T\", \"LaurentPolynomial.antipode_T\", \"LaurentPolynomial.instIsCocomm\", \"LaurentPolynomial.antipode_C\", \"LaurentPolynomial.comul_T\", \"LaurentPolynomial.counit_T\"], \"digest\": \"e74da7ab0059c771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological ClosedSubgroup, scheme-point facts, or the standard Laurent Hopf structure; none detects a closed subgroup scheme from its closed fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"IsLocalRing\"",
+   "results": "{\"t\": \"2026-10-24T04:00:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"IsLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological ClosedSubgroup, scheme-point facts, or the standard Laurent Hopf structure; none detects a closed subgroup scheme from its closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "(torus|diagonalizable|multiplicative.type).*(subgroup|kernel)|(subgroup|kernel).*diagonalizable",
+   "results": "{\"t\": \"2026-10-24T04:00:02Z\", \"tool\": \"grep\", \"query\": \"(torus|diagonalizable|multiplicative.type).*(subgroup|kernel)|(subgroup|kernel).*diagonalizable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological ClosedSubgroup, scheme-point facts, or the standard Laurent Hopf structure; none detects a closed subgroup scheme from its closed fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subgroups of a torus with trivial closed fibre over a local base are trivial without flatness",
+   "results": "{\"t\": \"2026-10-24T04:00:03Z\", \"tool\": \"leansearch\", \"query\": \"Closed subgroups of a torus with trivial closed fibre over a local base are trivial without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup\", \"ClosedSubgroup.ctorIdx\", \"ClosedSubgroup.recOn\", \"ClosedSubgroup.isClosed'\", \"ClosedSubgroup.mk\", \"ClosedAddSubgroup\", \"ClosedSubgroup.mk.injEq\", \"ClosedAddSubgroup.isClosed'\"], \"digest\": \"be4a700897760947\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological ClosedSubgroup, scheme-point facts, or the standard Laurent Hopf structure; none detects a closed subgroup scheme from its closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "(torus|diagonalizable|multiplicative.type).*(subgroup|kernel)|(subgroup|kernel).*diagonalizable",
+   "results": "{\"t\": \"2026-10-24T04:38:32Z\", \"tool\": \"grep\", \"query\": \"(torus|diagonalizable|multiplicative.type).*(subgroup|kernel)|(subgroup|kernel).*diagonalizable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subgroups of a torus with trivial closed fibre over a local base are trivial without flatness",
+   "results": "{\"t\": \"2026-10-24T04:38:32Z\", \"tool\": \"leansearch\", \"query\": \"Closed subgroups of a torus with trivial closed fibre over a local base are trivial without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup\", \"ClosedSubgroup.ctorIdx\", \"ClosedSubgroup.recOn\", \"ClosedSubgroup.isClosed'\", \"ClosedSubgroup.mk\", \"ClosedAddSubgroup\", \"ClosedSubgroup.mk.injEq\", \"ClosedAddSubgroup.isClosed'\"], \"digest\": \"be4a700897760947\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"IsLocalRing\"",
+   "results": "{\"t\": \"2026-10-24T04:38:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"IsLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of a split torus over a Noetherian local ring with trivial special fibre is trivial",
+   "results": "{\"t\": \"2026-10-24T04:38:33Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subgroup scheme of a split torus over a Noetherian local ring with trivial special fibre is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.default_asIdeal\", \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"AlgebraicGeometry.spec_punit_isEmpty\", \"AlgebraicGeometry.instIsClosedImmersionISchemeOfSubsingletonCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.nilradical_eq_bot\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\"], \"digest\": \"fd4d6da829f604a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Hopf ideal in a Laurent polynomial ring over a local ring whose reduction is the augmentation ideal equals the augmentation ideal",
+   "results": "{\"t\": \"2026-10-24T04:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"A Hopf ideal in a Laurent polynomial ring over a local ring whose reduction is the augmentation ideal equals the augmentation ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instHopfAlgebra\", \"LaurentPolynomial.instBialgebra\", \"LaurentPolynomial.antipode_C_mul_T\", \"LaurentPolynomial.antipode_T\", \"LaurentPolynomial.instIsCocomm\", \"LaurentPolynomial.antipode_C\", \"LaurentPolynomial.comul_T\", \"LaurentPolynomial.counit_T\"], \"digest\": \"e74da7ab0059c771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(fiber|fibre)|((fiber|fibre).*isIso)|fibral.*isomorphism",
+   "results": "{\"t\": \"2026-10-24T04:41:10Z\", \"tool\": \"grep\", \"query\": \"isIso.*(fiber|fibre)|((fiber|fibre).*isIso)|fibral.*isomorphism\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\"], \"digest\": \"016e33db5439d639\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of schemes over S with flat source and locally finitely presented source and target is an isomorphism when all fibre maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-24T04:41:10Z\", \"tool\": \"leansearch\", \"query\": \"A map of schemes over S with flat source and locally finitely presented source and target is an isomorphism when all fibre maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.isIso_iff_stalk_iso\"], \"digest\": \"17ae2937832c7d2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.IsIso",
+   "results": "{\"t\": \"2026-10-24T04:41:11Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_left\", \"AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right\", \"AlgebraicGeometry.isIso_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Scheme.Hom.finrank_comp_left_of_isIso\", \"AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq\"], \"digest\": \"014a5d1e980c2ffb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between schemes locally of finite presentation over a base is an isomorphism if its source is flat over the base and every fibre map is an isomorphism",
+   "results": "{\"t\": \"2026-10-24T04:41:12Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between schemes locally of finite presentation over a base is an isomorphism if its source is flat over the base and every fibre map is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"0ad55a58bc68a980\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme, flat-monomorphism, Laurent Hopf-structure or topological-group facts do not assert this local subgroup theorem or the proposed general fibre criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-complete-local-split-torus-hom-lift",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field; completion step in the proof of Conrad Proposition 3.1.6, using Corollary B.3.5 for the fixed split source. Supporting input to the complete-local torus lifting proof: Exercise 2.4.3(iii), printed p.76, the trivial-special-fibre kernel argument, extracted for an arbitrary closed subgroup of a split torus; also the final torsion argument in the proof of Theorem B.3.2(2), printed pp.289-290. Agent-extracted supporting statement, not a verbatim theorem of the source.",
+   "via": [
+    "lem-sfb-complete-local-split-torus-hom-lift",
+    "lem-sfb-split-torus-etale-subgroup-lift",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-torus-subgroup-special-trivial",
+  "worker": "stage1",
+  "summary": "Q98 proves the unchanged statement by finite torsion and Nakayama, geometric diagonalizable fibres, and an explicit local augmentation-kernel argument. All supporting facts already have DAG nodes; no new nodes. No flatness or completeness is added.",
+  "blueprint": "Inherited supporting chain for det-thm-sf-ctf-stability-direct-images, proof (3), through the complete-local split-torus lifting input. This split realizes the trivial-special-fibre kernel argument of Conrad Exercise 2.4.3(iii). The inherited created.item chain ends at the module-name record Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs ancestor returns null; the existing from.node and via are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-cab4dc437",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-cab4dc437 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery is one commit: the item plus a report with a Q98 review. Statement, stmt_deps, source and blueprint are byte-identical to the live node (live is still unsplit); only proof, proof_deps, proof_origin, searches and split_report changed. There is no repair note, so this is not a re-split order. proof_deps equals the union of the step uses (11 ids). All cited nodes exist and are unmerged: ten are Mathlib leaves and lem-sfb-split-torus-subgroups-diagonalizable is in the same unit, so tool_uses=[] is right. A traversal of 134 dependency nodes finds no cycle. The source, Conrad Ex. 2.4.3(iii) and B.3.2(2), has no local copy; it is WANTED and the proof is marked agent-written. The proof is self-contained and correct. Step 1: J = ker ε is generated by x_i-1 and y_i-1. Step 2: the n-torsion scheme H_n has coordinate ring C_n = B/(x_i^n-1, y_i^n-1); its augmentation kernel L_n is a finite A-module; kernels commute with base change, so L_n/mL_n = 0 and Nakayama over Jac(A)=m gives L_n = 0. Step 3: over Ω, K_Ω ≅ D(M), and the n-torsion of D(M) has coordinate ring Ω[M/nM]. So M/nM = 0 for all n>1, and the structure theorem gives M = 0. This is scheme-theoretic and handles the char-p infinitesimal part. Step 4: injectivity of B_F → B_F⊗Ω gives B_F ≅ F, so J⊗κ(p) = 0 for every prime p. Step 5: J⊗κ(p) ≅ S_p^{-1}J/p, so J_q = u(p)J_q; J_q is finite over B_q, so Nakayama over B_q gives J_q = 0. Step 6: local vanishing gives J = 0, so the actual identity section is an isomorphism. Edge cases checked: r=0, a field base, μ_2 over Z_(2), μ_p over Z_(p), non-flat K over a DVR. The statement matches its use in Step 5 of the parent lem-sfb-complete-local-split-torus-hom-lift. A DAG search on torus/diagonalizable/special-fibre/subgroup found no duplicate. Minor points, no fix needed: the Noetherian hypothesis is unused but correctly kept; there is no local-ring definition node, an inherited gap shared with the parent; Step 3 does not repeat the fibre-product citation for torsion commuting with base change, which is elementary. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalTorusSubgroupSpecialTrivial",
+  "declaration": "AlgebraicGeometry.isIso_unit_of_splitTorus_closed_specialFiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalTorusSubgroupSpecialTrivial.lean",
+  "statement": "theorem isIso_unit_of_splitTorus_closed_specialFiber (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (r : ℕ) (K : Grp (Over (Spec (.of A)))) (j : K ⟶ RingGroupSchemes.splitTorus A r) [IsClosedImmersion j.hom.hom.left] (hspecial : IsIso (η[((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).mapGrp.obj K).X]).left) : IsIso (η[K.X]).left",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6b5188ad",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Lean exact: K : Grp (Over Spec A), j closed immersion (IsClosedImmersion j.hom.hom.left) into landed RingGroupSchemes.splitTorus A r (Nat.rec product of Laurent Hopf Spec, trivial at r=0 = node T); hypothesis IsIso of the actual unit section of (Over.pullback (Spec.map residue)).mapGrp.obj K; conclusion IsIso (η[K.X]).left; no flatness/completeness; Noetherian+local verbatim; edge cases r=0, field, nonreduced, char p (mu_p fails hypothesis) OK; added stmt_dep def-sfb-split-torus-over-ring is landed and is the owner; lean.statement verbatim; sorry only; source/blueprint/6-step docstrings present; no duplicate declaration found. Sole fault H11: the Second reading section only says no second worker was started -> FIX fixes/lem-sfb-local-torus-subgroup-special-trivial.report.md (Worker report verbatim + independent clause-by-clause second reading). No Lean changed, no compile needed."
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-flat-lfp-space-universally-open",
+ "kind": "statement",
+ "title": "Flat finitely presented morphisms of spaces are universally open",
+ "statement": "Algebraic spaces are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. Flatness and local finite presentation for their morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed: separated means its diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying spaces after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). Let $f:X\\to Y$ be flat and locally of finite presentation. Then $f$ is universally open: for every morphism $Y'\\to Y$ of algebraic spaces, the map $|X\\times_YY'|\\to|Y'|$ is open [lem-trf-space-fibre-products-etale-covers]. The topology on an algebraic space is the quotient topology from any surjective etale scheme atlas. In particular $|f|(|X|)$ is open in $|Y|$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 042S (lemma-fppf-open), statement for algebraic spaces."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose scheme atlases of X and Y from def-trf-algebraic-space. Test the target atlas over the composite of the source atlas with f. The resulting scheme U has a compatible map h to the target atlas V. Surjectivity of the projection U to the original source atlas follows by uniqueness of representing pullback squares; use Yoneda to transfer their isomorphism to schemes. Scheme base change proves that a surjective etale scheme morphism induces a representable surjective etale Yoneda map. Compose with the source atlas using isEtale_comp and direct pasting of surjective scheme tests.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the flatness and local-finite-presentation chart tests to h. Mathlib UniversallyOpen.of_flat proves that h is universally open.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every algebraic-space base change Yprime to Y, choose a scheme atlas W to Yprime. Test V to Y over W to form Z, and form the scheme fibre product T = U times_V Z. The scheme map T to Z is universally open, and Z to W is etale, so T to W is open. Construct T to P = X times_Y Yprime by the presheaf pullback universal properties. Pullback pasting exhibits this map as a composite of base changes of the atlas of X and the atlas W; direct scheme tests prove it representable etale and surjective. Reuse the existing representableWith_baseChange helper of lem-trf-space-chartwise-etale-permanence for both properties, exposed in its original module rather than reproved here.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A representable surjective scheme-source map is surjective on point classes: test on each field-valued representative, lift the field point to the representing surjective scheme map, and take its residue field. The definition of the final point topology makes every etale scheme-source map continuous. The affine-atlas topology theorem gives a topology tau in which all etale scheme-source maps are open and continuous; compare the defining supremum with tau and the coinduced topology of its atlas to identify tau with the existing point topology. Functoriality of schemePointMap along a scheme morphism follows from naturality of residue-field maps and Quot.sound. Hence the composite |T| to |P| to |Yprime| equals the open composite |T| to |W| to |Yprime|. Apply IsOpenMap.of_comp to the continuous surjective map |T| to |P|. This proves universal openness without identifying topological fibre products.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-a1-space-point-topology",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the identity base change, compare the range of its second projection on points with the range of f using the first projection and the canonical section into the pullback. Quotient induction proves functoriality of mapPoint and identifies pointImage with its range. Apply universal openness to the full open subset, obtaining the asserted open whole image. Empty sources and empty opens are covered by the same argument.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-point-topology",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-flat-lfp-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 042S (lemma-fppf-open), using compatible scheme atlases and the source-atlas argument of Tag 03Z5 (lemma-universally-open-local). Final step uses Mathlib IsOpenMap.of_comp: the continuous surjective source atlas detects openness of the composite. Point topology is supplied by lem-a1-space-affine-etale-cover. The presheaf base-change helper is reused from ChartwiseEtalePermanence after exposing that existing proved helper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented morphism of algebraic spaces is universally open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.universallyOpen_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyOpen f ↔ (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally open if and only if for every base change $ Y' \\to Y $, the induced continuous map on topological spaces $ X \\times_Y Y' \\to Y' $ is an open map. This e\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.out\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, if $ f $ is universally open, then the underlying continuous map of $ f $ satisfies the universal property of being an open map. That is, for every base chan\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is universally open, every base change $ Y' \\\\to Y $ induces an open map $ X \\\\times_Y Y' \\\\to Y' $ on the underlying topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Images of open subsets under flat morphisms of algebraic spaces locally of finite presentation are open after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Flat\", \"IsOpenMap\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicSpace|universallyOpen",
+   "results": "[grep] OK 23 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"92\", \"text\": \"    [GeometricallyIntegral f] [Flat f] [UniversallyOpen f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"107\", \"text\": \"instance [GeometricallyIntegral f] [Flat f] [UniversallyOpen f] [IsIntegral Y]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"111\", \"text\": \"instance [GeometricallyIntegral g] [Flat g] [UniversallyOpen g]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"111\", \"text\": \"instance [GeometricallyIrreducible f] [UniversallyOpen f] [IrreducibleSpace Y] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"115\", \"text\": \"instance [GeometricallyIrreducible g] [UniversallyOpen g] [IrreducibleSpace X] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"126\", \"text\": \"    [UniversallyOpen f] [UniversallyOpen g] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"103\", \"text\": \"instance [GeometricallyConnected f] [UniversallyOpen f] [ConnectedSpace Y] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"107\", \"text\": \"instance [GeometricallyConnected g] [UniversallyOpen g] [ConnectedSpace X] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"117\", \"text\": \"    [UniversallyOpen f] [UniversallyOpen g] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"42\", \"text\": \"class UniversallyOpen (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"46\", \"text\": \"alias UniversallyOpen.out := UniversallyOpen.universally_isOpenMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"48\", \"text\": \"lemma Scheme.Hom.isOpenMap {X Y : Scheme} (f : X ⟶ Y) [UniversallyOpen f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"49\", \"text\": \"    IsOpenMap f := UniversallyOpen.universally_isOpenMap _ _ _ IsPullback.of_id_snd\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"51\", \"text\": \"namespace UniversallyOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"22\", \"text\": \"  (`AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"66\", \"text\": \"instance descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"67\", \"text\": \"    DescendsAlong @UniversallyOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"106\", \"text\": \"    have hopen' : UniversallyOpen g :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat locally finitely presented morphism of algebraic spaces is universally open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \": @UniversallyOpen = universally (topologically @IsOpenMap)\", \"doc\": \"The property of a morphism of schemes being universally open is equivalent to the property that its underlying continuous map is an open map, and this openness is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is universally open, every base change $ Y' \\\\to Y $ induces an open map $ X \\\\times_Y Y' \\\\to Y' $ on the underlying topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [UniversallyOpen f] : IsOpenMap f\", \"doc\": \"For any schemes $X$ and $Y$, if a morphism $f : X \\to Y$ is universally open, then $f$ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.universallyOpen_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyOpen f ↔ (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally open if and only if for every base change $ Y' \\to Y $, the induced continuous map on topological spaces $ X \\times_Y Y' \\to Y' $ is an open map. This e\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f → AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map satisfies the property that for every base change $ Y' \\to Y $, the induced map $ X \\times_Y Y' \\to Y' $ is an open map of topo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.Flat",
+   "results": "Actual logged search: 5 hits; declarations/files: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian, AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian, AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian_1, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: UniversallyOpen.of_flat and the other relevant hits are for schemes; the scheme result is already lem-weil-pbc-flat-lfp-open. Source checked at Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:147."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|UniversallyOpen.of_flat",
+   "results": "Actual logged search: 1 hits; declarations/files: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: UniversallyOpen.of_flat and the other relevant hits are for schemes; the scheme result is already lem-weil-pbc-flat-lfp-open. Source checked at Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:147."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat morphisms of algebraic spaces locally of finite presentation are open after arbitrary base change",
+   "results": "Actual logged search: 8 hits; declarations/files: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: UniversallyOpen.of_flat and the other relevant hits are for schemes; the scheme result is already lem-weil-pbc-flat-lfp-open. Source checked at Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:147."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented morphism of algebraic spaces is universally open",
+   "results": "Actual logged search: 8 hits; declarations/files: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: UniversallyOpen.of_flat and the other relevant hits are for schemes; the scheme result is already lem-weil-pbc-flat-lfp-open. Source checked at Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:147."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Openness of images of open subsets under flat locally finitely presented maps of algebraic spaces, universally after base change",
+   "results": "Actual logged search: 8 hits; declarations/files: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: UniversallyOpen.of_flat and the other relevant hits are for schemes; the scheme result is already lem-weil-pbc-flat-lfp-open. Source checked at Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:147."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 042S (lemma-fppf-open), statement for algebraic spaces.",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-flat-lfp-space-universally-open",
+  "worker": "stage1",
+  "summary": "Q73 follows Tag 042S through compatible etale scheme charts and the existing scheme openness leaf, expanding universal descent into explicit atlas pullbacks and a common-field-extension image identity. All supporting facts already have DAG nodes; no new node is needed. The statement is preserved, including arbitrary algebraic-space base changes.",
+  "blueprint": "Realizes the existing blueprint.from.place chain: det-thm-sf-ctf-stability-direct-images proof (3), nodal-curve-stack smoothness prerequisite in the stable pointed-curve extension route. This item supplies exactly the Tag 042S supporting input; steps 1-2 construct its charts and steps 3-6 expand its descent of universal openness. blueprint_refs.py ancestor returns None for the inherited chain; the inherited from.node and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and pullback of etale covers, needed for compatible charts and universal base changes; no statement in this unit supplies these constructions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-b0af151a6",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-b0af151a6 (reviewer sub-agent of L); spot-checked: Read in full: the item (6 steps, no new nodes), the Q73 report, Stacks spaces-morphisms Tag 042S (lemma-fppf-open, lines 5879-5903) and 03MM (lemma-flat-local), and the statements of every cited node: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, lem-weil-pbc-etale-composition-cancellation(2), lem-weil-pbc-flat-lfp-open (UniversallyOpen.of_flat), lem-weil-pbc-etale-morphism-open-map, def-weil-flat-morphism and def-sbc-locally-finite-presentation. The statement and stmt_deps are unchanged from the base, and the proof follows the 042S route. Checks: step 1 builds the atlas U=U_0x_YV, and the scheme-test composition is correct. Step 3: T=UxYW, and r: T->XxYW=Px_{Y'}W is the pullback of p, so a: T->P is a surjective etale atlas. Step 4: beta is the base change of alpha along Z->V, so h=(Z->W)∘beta is open. Step 5 checks the identity w^{-1}(f'(O))=h(A) through a common field extension, the fibre-product universal property and the surjectivity of r; 03H4 (lem-a1-space-fibre-product-point) needs schemes, so it correctly is not cited. Step 6 is quotient-topology descent. Empty and identity cases work. No duplicate exists: I grepped 'universally open', 042S, 03MM, 03Z5 and 03H4, and only scheme versions exist. Accepted tool_use: lem-trf-space-fibre-products-etale-covers, the generic construction of algebraic-space fibre products. FIX (step 2 only): the step relied on reading 'tested on etale scheme charts' as 'every compatible chart' (03MM(7)). I added a sentence: under the existence reading (03MM(8)), take the witnessing square with surjective etale vertical maps, since steps 3-6 use only that p and q are surjective etale atlases, that q·alpha=f·p, and that alpha is flat and locally of finite presentation. This closes the possible uncited use of 03MM without adding a node. The fixed item is in fixes/dag/nodes/sec-six-functors-basics/; the review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFlatLfpUniversallyOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.universallyOpen_of_flat_of_locallyOfFinitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFlatLfpUniversallyOpen.lean",
+  "statement": "theorem universallyOpen_of_flat_of_locallyOfFinitePresentation {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsFlat f) (hlfp : MapIsLocallyOfFinitePresentation f) : MapIsUniversallyOpen f ∧ IsOpen (pointImage f.hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q104",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46ade79af",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Item: MapIsFlat/MapIsLocallyOfFinitePresentation = all-compatible-étale-chart test (Stacks 03MM(7)/0410(7), equivalent to the definition, not stronger); conclusion MapIsUniversallyOpen (∀ algebraic-space Y'→Y, IsOpenMap of mapPoint of sheaf-pullback snd) ∧ IsOpen (pointImage f) matches the node; no extra qc/sep/universe hypotheses; edge cases (empty, identity base change) covered; sorry-only proof; docstrings carry source + blueprint + steps 1-6; lean.statement verbatim. New node def-sfb-space-morphism-properties: 8 real Prop defs matching the node text and Stacks definitions, not a duplicate at delivery base, stale import_flags removed. Advisory: later Q01 CategoryTheory.SpaceMapIsProper (2026-10-23) overlaps MapIsProper, which this item does not use; pointImage (def-a1-space-point-topology) reached only via the new node's stmt_deps. No files changed; no recompilation (worker compiled both modules cleanly)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261023T135748-L-2969913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

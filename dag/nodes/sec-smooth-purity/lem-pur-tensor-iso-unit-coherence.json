@@ -1,0 +1,99 @@
+{
+ "id": "lem-pur-tensor-iso-unit-coherence",
+ "kind": "lemma",
+ "title": "Tensor-compatible isomorphisms preserve the unit",
+ "statement": "Let \\(C,D\\) be monoidal categories, \\(F,G:C\\to D\\) functors, and \\(a:F\\simeq G\\) a natural isomorphism. For \\(H=F,G\\), let \\(d_H(X,Y):H(X\\otimes Y)\\simeq HX\\otimes HY\\) be a family of isomorphisms and \\(e_H:H1_C\\simeq1_D\\) an isomorphism satisfying \\(d_H(1_C,X);(e_H\\mathbin{\\triangleright}HX);\\lambda_{HX}=H(\\lambda_X)\\). Suppose \\(a_{X\\otimes Y};d_G(X,Y)=d_F(X,Y);(a_X\\otimes a_Y)\\) for all \\(X,Y\\). Then \\(a_{1_C};e_G=e_F\\). Semicolon denotes composition in application order. No naturality or associativity axiom for the families \\(d_H\\) is required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; agent extraction of normalized tensor and unit coherence used in more-etale.tex Tag 0GL6"
+ },
+ "proof": [
+  {
+   "text": "Apply naturality of a to the left unitor at 1. Replace the two functor images of this unitor by their left-unit laws and use binary tensor compatibility. Cancel dF_{1,1}. Naturality of the left unitor and tensor interchange show eF tensor a_1 equals (a_1 eG) tensor a_1. Cancel tensoring on the left by the invertible a_1. Tensoring on the right by F1 is faithful since F1≅1: compose with the tensor of eF and use right-unitor naturality. This gives the asserted equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; normalized representative descent and elementary categorical unit calculations"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible natural transformation between strong monoidal functors that preserves tensor products also preserves the monoidal unit",
+   "results": "Functor.Monoidal.ofLaxMonoidal; CoreMonoidal.ofLaxMonoidal; Monoidal.transport_ε; NatTrans.IsMonoidal.of_cartesianMonoidalCategory; Iso.instIsMonoidalInvFunctor; Monoidal.εIso; Monoidal.ofBifunctor; Monoidal.coreMonoidalTransport",
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized scalar comparisons or the required tensor-only implication; ordinary monoidal unit laws are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom in Mathlib.CategoryTheory.Monoidal.Functor",
+   "date": "2026-10-25",
+   "verdict": "Underlying ordinary unit law; representative transport and site descent remain necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "left_unitality|IsMonoidal.of|unit.*tensor",
+   "results": "ModuleCat.Monoidal.Adjunction ordinary left_unitality; Monoidal.Category tensor/unit constructions; no scalar derived representative or pullback normalization square. Local source search also found ScalarRightUnitTransport and ExceptionalCoefficientUnitCoherence; their proved right-unit arguments guide the left-unit proof.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the new normalized left-unit or scalar/pullback tensor statements."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactScalarCoherence",
+  "date": "2026-10-25",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing; scalar binary tensor comparison and coefficient-unit normalization",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TensorIsoUnitCoherence",
+  "file": "lean/Sheaf/CategoryTheory/TensorIsoUnitCoherence.lean",
+  "declaration": "CategoryTheory.tensorIso_preserves_unit",
+  "statement": "theorem tensorIso_preserves_unit\n    {C D : Type*} [Category C] [Category D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    (F G : C ⥤ D) (a : F ≅ G)\n    (dF : ∀ X Y : C, F.obj (X ⊗ Y) ≅ F.obj X ⊗ F.obj Y)\n    (dG : ∀ X Y : C, G.obj (X ⊗ Y) ≅ G.obj X ⊗ G.obj Y)\n    (eF : F.obj (𝟙_ C) ≅ 𝟙_ D) (eG : G.obj (𝟙_ C) ≅ 𝟙_ D)\n    (hF : ∀ X, (dF (𝟙_ C) X).hom ≫ eF.hom ▷ F.obj X ≫\n      (λ_ (F.obj X)).hom = F.map (λ_ X).hom)\n    (hG : ∀ X, (dG (𝟙_ C) X).hom ≫ eG.hom ▷ G.obj X ≫\n      (λ_ (G.obj X)).hom = G.map (λ_ X).hom)\n    (hc : ∀ X Y, a.hom.app (X ⊗ Y) ≫ (dG X Y).hom =\n      (dF X Y).hom ≫ (a.hom.app X ⊗ₘ a.hom.app Y)) :\n    a.hom.app (𝟙_ C) ≫ eG.hom = eF.hom",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

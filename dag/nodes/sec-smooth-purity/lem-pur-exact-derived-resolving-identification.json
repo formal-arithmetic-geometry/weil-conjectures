@@ -1,0 +1,302 @@
+{
+ "id": "lem-pur-exact-derived-resolving-identification",
+ "kind": "statement",
+ "title": "Exact pullback: resolving-model identification with exact localization",
+ "statement": "Let $(\\mathcal C,R)$ and $(\\mathcal D,S)$ be ringed sites small relative to a common universe of ordinary module sheaves [def-weil-sheaf-of-modules-category]. Let $u^{-1}\\dashv u_*$ be a geometric morphism, with $u^{-1}$ preserving finite limits and a homomorphism of commutative ring sheaves $u^{-1}R\\to S$. Put $F(M)=S\\otimes_{u^{-1}R}u^{-1}M$ [def-pur-sheaf-tensor-product], and assume $F$ exact. Use unbounded derived categories with localization functors $q_R,q_S$ [def-weil-abstract-derived-category]. A resolving complex means a K-flat complex with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules].\n\nLet $L=Lu^*$ and $\\epsilon_A:L(q_RA)\\to q_S(FA)$ be the canonical derived pullback and its natural comparison, with $e_P=\\epsilon_P$ invertible on resolving complexes [lem-weil-pbc-ringed-topoi-derived-pullback]. Let $U=D(F)$ and $\\kappa_A:U(q_RA)\\cong q_S(FA)$ be the exact localization and its factorization [lem-weil-pbc-exact-functor-derived-factorization]. Give $L$ the shift comparisons obtained by shifting resolving complexes and $U$ those induced by the identity termwise maps $F(A[n])\\cong(FA)[n]$, for every $n\\in\\mathbf Z$.\n\nThen $F$ preserves flat module sheaves and resolving complexes, and preserves every small direct sum, including the infinite diagonal sums in unbounded total tensors. For every module morphism $v$ and integer $z$, $F(zv)=zF(v)$; the termwise functor preserves the differential signs $(-1)^n$, all integer shift signs and Koszul interchange signs.\n\nEvery $\\epsilon_A$ is invertible. There is a unique natural isomorphism $\\eta:L\\xrightarrow{\\sim}U$ satisfying $\\kappa_P\\eta_{q_RP}=e_P$ for every resolving $P$. In fact $\\kappa_A\\eta_{q_RA}=\\epsilon_A$ for every complex $A$, without any flatness or boundedness hypothesis on $A$. This isomorphism commutes with all integer shift comparisons. For every module sheaf $M$, it identifies the degree-zero comparison $L(M[0])\\cong(FM)[0]$ given by $\\epsilon_{M[0]}$ with the exact-localization comparison $U(M[0])\\cong(FM)[0]$, including when $M$ is not flat.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), dual left-derived exactness; ringed-site resolving normalization from sites-cohomology.tex lemma-derived-base-change and lemma-K-flat-resolution. Agent-formulated identification and shift refinement of the returned proof, steps 1–5."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Transport the given AlgebraicInverseImage to the independent-universe interface using the trivial ULift isomorphisms. The flat pullback theorem then gives flatness of F(M), using hobj. Apply the existing K-flat pullback theorem with hobj and hmap to obtain preservation of resolving complexes and all their flat terms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E and 05VD; the universe bridge is the identity on modules."
+   }
+  },
+  {
+   "text": "The specified ringed-topos pullback preserves coefficient-sized filtered colimits. For an index set iota, express its coproduct as the filtered colimit, over finite subsets, of finite subcoproducts. F preserves the latter by finite-colimit preservation. Build the cocone on the images of finite subcoproducts by their universal properties. Its universal map satisfies the coproduct equations by restriction to singleton subsets; uniqueness follows by testing all finite summand inclusions. This proves preservation of coproducts without a universe-restricted module-adjunction presentation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-pullback-filtered-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, exact-functor setting; filtered-to-coproduct assembly by the agent from Mathlib Limits.Constructions.Filtered."
+   }
+  },
+  {
+   "text": "Apply Mathlib additive-functor map_zsmul to F and to its termwise complex functor. These are precisely the integer-sign equations in the Lean statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014X, additive termwise functors."
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat resolution p:P→A. The source localization sends p to an isomorphism, and so does F followed by target localization, by exact factorization. The comparison epsilon is invertible at P by he. Its naturality square makes the composite of L(q(p)) with epsilon_A invertible; cancel L(q(p)) to conclude that epsilon_A is invertible.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 015F, dual exact comparison."
+   }
+  },
+  {
+   "text": "The exact factorization kappa exhibits mapDerivedCategory as a left derived functor: an invertible localization factorization is its right Kan extension. Apply Mathlib leftDerivedUnique with hL to construct eta. The leftDerivedNatTrans factorization identity is the all-complex normalization equation. To prove uniqueness from resolving normalization, compare the two hom natural transformations. For every A, choose p:P→A as above; cancel G(q(p)) in their naturality squares to reduce equality at A to equality at P. Localization faithfulness extends this equality to every derived object. Cancel kappa_P to obtain equality on resolving representatives, then use this determination argument.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 015F; Mathlib leftDerivedUnique and localization faithfulness."
+   }
+  },
+  {
+   "text": "For each integer n, the desired shift square is an equality of natural transformations from shift[n] followed by L to exact localization followed by shift[n]. By the resolving determination argument in the preceding step it suffices to test resolving P. Substitute the global factorization epsilon = whiskerLeft(Qh,eta.hom) followed by kappa into hshift. The shift equation for kappa rewrites its right side; cancel the shifted kappa component. Expand the composite-functor shift comparisons, use naturality of eta along the Qh shift isomorphism, and cancel its image under L. This is exactly the desired square at q(P). This argument uses the stipulated hshift directly, so it does not need a separate proof that shifted resolving complexes remain resolving.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 015F; all-integer shift comparison."
+   }
+  },
+  {
+   "text": "Specialize the all-complex normalization equation to the single complex M[0]. No flatness of M is used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, degree-zero specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-ringed-topos-pullback-filtered-colimits",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (dual), with sites-cohomology.tex 06YS and 0G7E. Lean proof by P3: exact localization universal property, resolving determination, and finite-subcoproduct assembly of the existing filtered-colimit theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact ringed site module pullback canonical left derived functor uniquely identifies with termwise exact localization on flat term K-flat resolutions compatibly with integer shifts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"If a morphism of localizers $\\\\Phi : C_1 \\\\to C_2$ satisfies the left derivability structure condition, then the associated two-square diagram formed by $\\\\Phi$ and the localization functors $L_1 : C_1 \\\\\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"For a localizer morphism $\\\\Phi$ equipped with a left derivability structure and an isomorphism $e : \\\\Phi.functor \\\\circ L_2 \\\\cong L_1 \\\\circ F$, the inverse of $e$ satisfies the Guitart exactness condit\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {H : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_2} D] [inst_2 : CategoryTheory.Category.{v_5, u_3} H]\\n  (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C)\\n \", \"doc\": \"The total left derived functor of $ F $ with respect to the morphism property $ W $, constructed via the localization functor $ L $, satisfies the universal property of a left derived functor. Specifi\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"If a localizer morphism $\\\\Phi$ satisfies the right derivability structure condition, then the two-square diagram formed by the localization functors $L_1$, $L_2$, the morphism $\\\\Phi$, and its localize\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete ringed-site representative-normalized assertion; hits are component tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived counit invertible on resolving complexes for an exact functor is invertible everywhere and determines a unique shift compatible natural isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.LocalizerMorphism.Derives.isIso\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₂ : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : \", \"doc\": \"Given a localizer morphism $\\\\Phi$ and a right derived functor $RF$ via localization with respect to morphism property $W_2$, the component of the natural transformation $\\\\alpha$ at the object $\\\\Phi.\\\\t\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₂ : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : \", \"doc\": \"A functor $ RF $ is a right derived functor of $ F $ via the localization $ L $ with respect to the morphism property $ W_2 $ if and only if, for every object $ X_1 $ in the category $ C_1 $, the comp\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the natural transformation from $ F $ to its 0th right-derived functor $ R^0F $ is an iso\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the inverse of the isomorphism $ R^0F \\\\cong F $ satisfies the associativity condition: co\"}\n  {\"name\": \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For every object $X$ in category $\\\\mathcal{C}$, the component of the natural transformation from an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ to its 0th right-derived functor $R^0F$ at $X$ is\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, composing the natural transformation $ F \\\\to R^0F $ with the inverse isomorphism $ R^0F \\\\\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is given \"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete ringed-site representative-normalized assertion; hits are component tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.NatIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match; query identifier rejected by service, superseded by corrected Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|mapDerivedCategoryFactors",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"41\", \"text\": \"noncomputable def mapDerivedCategoryFactors :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"47\", \"text\": \"lemma mapDerivedCategoryFactors_hom_naturality {X Y : CochainComplex C₁ ℤ} (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"48\", \"text\": \"    F.mapDerivedCategory.map (DerivedCategory.Q.map f) ≫ F.mapDerivedCategoryFactors.hom.app Y =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"49\", \"text\": \"      F.mapDerivedCategoryFactors.hom.app X ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"51\", \"text\": \"  F.mapDerivedCategoryFactors.hom.naturality f\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"62\", \"text\": \"    (F.mapDerivedCategoryFactors.hom.app S.X₃) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"64\", \"text\": \"        (F.mapDerivedCategoryFactors.inv.app S.X₁)⟦1⟧' ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"69\", \"text\": \"    descShortComplex_triangleOfSESδ, F.mapDerivedCategoryFactors_hom_naturality_assoc,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"75\", \"text\": \"    ← F.mapDerivedCategoryFactors_hom_naturality_assoc, Functor.map_comp]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"96\", \"text\": \"    Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app_assoc,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete ringed-site representative-normalized assertion; hits are component tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*(iso|Iso)|[Ii]so.*CommShift",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"704\", \"text\": \"      P.fullyFaithfulι.preimage (e.inv ≫ h' ≫ (P.ι.commShiftIso (1 : ℤ)).inv.app X),\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"715\", \"text\": \"    have := P.ι.commShiftIso_hom_naturality a (1 : ℤ)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"716\", \"text\": \"    rw [← cancel_mono ((Functor.commShiftIso P.ι (1 : ℤ)).hom.app T₂.obj₁)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"731\", \"text\": \"        exact ⟨X⟦n⟧, ⟨(F.commShiftIso n).app _ ≪≫ (shiftFunctor D n).mapIso e⟩⟩ }\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"736\", \"text\": \"      (F.commShiftIso (1 : ℤ)).inv.app X₁)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"line\": \"143\", \"text\": \"    L.map h ≫ (L.commShiftIso (1 : ℤ)).hom.app _ ≫ e.hom.left⟦(1 : ℤ)⟧', _, ?_, H⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"line\": \"227\", \"text\": \"  exact Functor.additive_of_iso (W.Q.commShiftIso n)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"line\": \"239\", \"text\": \"  exact Functor.additive_of_iso (W.Q'.commShiftIso n)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"78\", \"text\": \"lemma op_commShiftIso_hom_app (X : Cᵒᵖ) (n m : ℤ) (h : n + m = 0) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"79\", \"text\": \"    (F.op.commShiftIso n).hom.app X =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"81\", \"text\": \"        ((F.commShiftIso m).inv.app X.unop).op ≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"89\", \"text\": \"lemma op_commShiftIso_inv_app (X : Cᵒᵖ) (n m : ℤ) (h : n + m = 0) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"90\", \"text\": \"    (F.op.commShiftIso n).inv.app X =\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean\", \"line\": \"35\", \"text\": \"  have := Functor.additive_of_iso (P.ι.commShiftIso n).symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/OpOp.lean\", \"line\": \"105\", \"text\": \"  commShiftIso := iso _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/OpOp.lean\", \"line\": \"106\", \"text\": \"  commShiftIso_zero := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/OpOp.lean\", \"line\": \"111\", \"text\": \"  commShiftIso_add p q := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/OpOp.lean\", \"line\": \"126\", \"text\": \"  commShiftIso := iso _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/OpOp.lean\", \"line\": \"127\", \"text\": \"  commShiftIso_zero := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"58\", \"text\": \"    (Iso.homCongr ((L.commShiftIso a).app X) ((L.commShiftIso b).app Y))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"117\", \"text\": \"    (L.commShiftIso a).hom.app X ≫ (equiv W L f)⟦a⟧' ≫ (L.commShiftIso a).inv.app Y :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"118\", \"text\": \"  (W.shiftLocalizerMorphism a).equiv_smallHomMap _ _ _ (L.commShiftIso a) f\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"187\", \"text\": \"  (SmallHom.equiv W L).trans ((L.commShiftIso m).app Y).homToEquiv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"191\", \"text\": \"    equiv W L f = (SmallHom.equiv W L) f ≫ ((L.commShiftIso m).app Y).hom :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"line\": \"211\", \"text\": \"  Functor.CommShift.ofComp (P.liftCompιIso F hF) A\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete ringed-site representative-normalized assertion; hits are component tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique natural isomorphism between left derived exact module pullback and the exact derived functor normalized on K-flat representatives",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.leftDerivedUnique\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"[LF'.IsLeftDerivedFunctor α'₂ W] : LF ≅ LF'\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and two left derived functors $LF, LF' : \\\\mathcal{D} \\\\to \\\\mathc\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedUnique.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {H : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_2} D] [inst_2 : CategoryTheory.Category.{v_5, u_3} H]\\n  (LF' LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and two left derived functors $LF, LF' : \\\\mathcal{D} \\\\to \\\\mathc\"}\n  {\"name\": \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_inverts\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived\", \"type\": \"[L.IsLocalization W] {F : C ⥤ H} (LF : D ⥤ H) (α : L ⋙ LF ⟶ F) (hF : W.IsInvertedBy F) :\\n  LF.IsLeftDerivedFunctor α W ↔ IsIso α\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $LF : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, along with a morphism p\"}\n  {\"name\": \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"(G : D ⥤ H) (β : L ⋙ G ⟶ F) : G.IsLeftDerivedFunctor β W ↔ IsIso (LF.leftDerivedLift α W G β)\", \"doc\": \"For categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $LF : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, along with a morphism pro\"}\n  {\"name\": \"CategoryTheory.Functor.leftKanExtensionUniqueOfIso\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \"{G : C ⥤ H} (i : F ≅ G) (G' : D ⥤ H) (β : G ⟶ L ⋙ G') [G'.IsLeftKanExtension β] : F' ≅ G'\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{H}, \\\\mathcal{D}$ and functors $F', L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, if $F, G : \\\\mathcal{D} \\\\to \\\\mathcal{H}$ are isomorphic functors both satisfying the left Ka\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedZeroIsoSelf\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \": F.leftDerived 0 ≅ F\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, this constructs an isomorphism between the 0th left-derived functor $ L_0F $ and $ F $. The isomorphism arises f\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerived_ext\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"(G : D ⥤ H) (γ₁ γ₂ : G ⟶ LF) (hγ : whiskerLeft L γ₁ ≫ α = whiskerLeft L γ₂ ≫ α) : γ₁ = γ₂\", \"doc\": \"For any functors $ G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $ and natural transformations $ \\\\gamma_1, \\\\gamma_2 : G \\\\Rightarrow \\\\mathrm{LF} $, if the compositions of the left whiskered natural transformations $\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatIso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"(τ : F' ≅ F) : LF' ≅ LF\", \"doc\": \"Given a natural isomorphism $\\\\tau : F' \\\\cong F$ between functors $F', F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, this constructs the induced natural isomorphism $LF' \\\\cong LF$ between their left derived functo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete ringed-site representative-normalized assertion; hits are component tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUnique\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Functor.leftDerivedUnique\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (LF' LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : L.comp LF ⟶ F) (α'₂ : L.comp\", \"doc\": \"Uniqueness (up to a natural isomorphism) of the left derived functor.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete ringed-site representative-normalized assertion; hits are component tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact ringed topos pullback left derived functor equals exact localization canonically on K-flat complexes and commutes with shifts",
+   "results": "{\"top\": [\"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\"], \"n_hits\": 8, \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for complete ringed-site assertion; component exact-localization and abstract derived-functor results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "{\"top\": [\"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Functor.HasLeftDerivedFunctor.mk'\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension\", \"CategoryTheory.Functor.leftDerivedLift\", \"CategoryTheory.Functor.leftDerivedUnique\"], \"n_hits\": 12, \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for complete ringed-site assertion; component exact-localization and abstract derived-functor results only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|mapDerivedCategoryFactors",
+   "results": "{\"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\"], \"n_hits\": 10, \"note\": \"\", \"subdirectory\": \"Algebra/Homology/DerivedCategory\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for complete ringed-site assertion; component exact-localization and abstract derived-functor results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor induces its own left derived functor on unbounded derived categories",
+   "results": "{\"top\": [\"CategoryTheory.Functor.leftDerived\", \"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\"], \"n_hits\": 8, \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for complete ringed-site assertion; component exact-localization and abstract derived-functor results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived counit of an exact functor is invertible on all complexes and identifies derived functors compatibly with shifts",
+   "results": "{\"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc\"], \"n_hits\": 8, \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for complete ringed-site assertion; component exact-localization and abstract derived-functor results only"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|isLeftDerivedFunctor_of_iso|isLeftDerivedFunctor_iff",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\"], \"n_hits\": 7, \"note\": \"\", \"subdirectory\": \"CategoryTheory/Functor/Derived\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for complete ringed-site assertion; component exact-localization and abstract derived-functor results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-exact-pullback-signed-comparison",
+  "date": "2026-10-22",
+  "group": "Q150"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Unit multiples / Elementary shears: exact pullback of the supported cup operations; identification of canonical derived pullback with exact localization, including resolving models and shifts (returned signed-comparison proof steps 1–5).",
+   "via": [
+    "lem-pur-exact-pullback-signed-comparison",
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-exact-derived-resolving-identification",
+  "worker": "stage1",
+  "summary": "Reused existing ringed-topos adjunction, flat/K-flat pullback, K-flat resolution, exact localization and localization universal-property nodes. Proved comparison invertibility by naturality along an arbitrary resolving quasi-isomorphism; descended its factorization, proved resolving-normalized uniqueness, all-integer shift compatibility and the nonflat degree-zero case. No new nodes and no statement change.",
+  "blueprint": "lem-pur-frame-independence, Unit multiples / Elementary shears: exact pullback in supported-cup functoriality; makes precise the resolving identification and shift normalization through the recorded ancestor chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-site homological algebra tool for exact pullback; supplies Module pullback and pushforward adjunction on arbitrary ringed topoi without replacing any geometric step of the purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Generic ringed-site homological algebra tool for exact pullback; supplies Ringed-topos pullback of a flat module sheaf without replacing any geometric step of the purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-site homological algebra tool for exact pullback; supplies Ringed-topos pullback preserves flat-term K-flat complexes without replacing any geometric step of the purity unit."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site homological algebra tool for exact pullback; supplies Existence of K-flat resolutions on a ringed site without replacing any geometric step of the purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic ringed-site homological algebra tool for exact pullback; supplies Derived pullback on ringed topoi computed by K-flat resolutions without replacing any geometric step of the purity unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-a7a157d91",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-a7a157d91 (reviewer sub-agent of L); spot-checked: I read the whole item and all 14 cited statements, and checked the four Stacks tags at their places: 015F at derived.tex:5884, 06YS at sites-cohomology.tex:3207, 0G7E at :3508 and 06YY at :3585. The delivery adds no new nodes. Statement, stmt_deps and blueprint are byte-identical to the Q150 version of this node, which created it statement-only from old parent steps 1-5. There is no repair note for this item, and it is still unsplit live, so no other group has superseded it. Every old argument reappears in more detail: old 3 becomes steps 3-4; old 4 becomes step 5, with localization faithfulness (3) in place of the optional tensor-descent alternative; old 5 becomes steps 6-7, with an explicit sign check in place of the total-tensor-integer-shifts citation. Hypothesis checks: the flat and K-flat pullback nodes need small sites and no flatness of c, and the K-flat node needs flat terms, which the resolving definition supplies. The adjunction plus the left-adjoint colimit leaf covers infinite diagonal sums. ε is natural on K(R) and invertible on resolving P. The factorization node gives quasi-isomorphism preservation, κ and its shift equation, with τ_{K,n} the termwise identity. Localization parts (2) and (3) give the lift, the inverse and uniqueness. I recomputed the (-1)^{np} map T⊗P[n]≅(T⊗P)[n] on both differential components; it is a chain isomorphism, so P[n] is resolving. Edge cases: identity over Z with M=Z/2 (not flat), zero complexes, n=0 and n=-1, unbounded acyclic A. tool_uses (module-adjunction, flat and K-flat pullback, kflat-resolution, ringed-topoi derived pullback) are accepted as generic black-box tools; proof_deps equals the union of step uses; no SGA. FIX, one fault: step 6 said e_{P[n]} and e_P[n] agree 'under the termwise signed shift map', but the comparison F(P[n])→(FP)[n] is the unsigned termwise identity τ_{P,n} of the factorization node, and the parent's signed coherence depends on this normalization. The corrected proof text (only that step changes) is in fixes/dag/nodes/sec-smooth-purity/lem-pur-exact-derived-resolving-identification.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExactDerivedResolvingIdentification",
+  "declaration": "SheafOfModules.exactDerivedResolvingIdentification",
+  "file": "lean/Sheaf/Paper/ExactDerivedResolvingIdentification.lean",
+  "statement": "theorem exactDerivedResolvingIdentification {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{r} C] [EssentiallySmall.{r} D] {JC : GrothendieckTopology C} {JD : GrothendieckTopology D} {R : Sheaf JC CommRingCat.{r}} {S RI : Sheaf JD CommRingCat.{r}} (uInv : Sheaf JC (Type r) ⥤ Sheaf JD (Type r)) (uPush : Sheaf JD (Type r) ⥤ Sheaf JC (Type r)) (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S) (F : Mod JC R ⥤ Mod JD S) (hobj : ∀ M : Mod JC R, F.obj M = changeOfRings c (I.modules.obj M)) (hmap : ∀ {M N : Mod JC R} (v : M ⟶ N), F.map v = eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map v) ≫ eqToHom (hobj N).symm) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [HasDerivedCategory.{w} (Mod JC R)] [HasDerivedCategory.{w} (Mod JD S)] (L : DerivedCategory (Mod JC R) ⥤ DerivedCategory (Mod JD S)) (epsilon : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (hL : L.IsLeftDerivedFunctor epsilon (HomotopyCategory.quasiIso (Mod JC R) (.up ℤ))) (he : ∀ P : CochainComplex (Mod JC R) ℤ, P.IsKFlatIndependentCoefficients → (∀ i : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X i)) → IsIso (epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) [L.CommShift ℤ] (hshift : ∀ (P : CochainComplex (Mod JC R) ℤ), P.IsKFlatIndependentCoefficients → (∀ i : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X i)) → ∀ n : ℤ, ((DerivedCategory.Qh ⋙ L).commShiftIso n).hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫ (shiftFunctor _ n).map (epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) = epsilon.app (((HomotopyCategory.quotient _ (.up ℤ)).obj P)⟦n⟧) ≫ ((F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).commShiftIso n).hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) : (∀ M : Mod JC R, IsFlatOnSite (J := JC) (R := R) M → IsFlatOnSite (J := JD) (R := S) (F.obj M)) ∧ (∀ P : CochainComplex (Mod JC R) ℤ, P.IsKFlatIndependentCoefficients → (∀ i : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X i)) → CochainComplex.IsKFlatIndependentCoefficients ((F.mapHomologicalComplex (.up ℤ)).obj P) ∧ ∀ i : ℤ, IsFlatOnSite (J := JD) (R := S) (((F.mapHomologicalComplex (.up ℤ)).obj P).X i)) ∧ (∀ ι : Type r, PreservesColimitsOfShape (Discrete ι) F) ∧ (∀ (M N : Mod JC R) (v : M ⟶ N) (z : ℤ), F.map (z • v) = z • F.map v) ∧ (∀ (A B : CochainComplex (Mod JC R) ℤ) (v : A ⟶ B) (z : ℤ), (F.mapHomologicalComplex (.up ℤ)).map (z • v) = z • (F.mapHomologicalComplex (.up ℤ)).map v) ∧ (∀ A : CochainComplex (Mod JC R) ℤ, IsIso (epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj A))) ∧ ∃ eta : L ≅ F.mapDerivedCategory, (∀ P : CochainComplex (Mod JC R) ℤ, P.IsKFlatIndependentCoefficients → (∀ i : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X i)) → eta.hom.app (DerivedCategory.Q.obj P) ≫ F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) = epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ∧ (∀ eta' : L ≅ F.mapDerivedCategory, (∀ P : CochainComplex (Mod JC R) ℤ, P.IsKFlatIndependentCoefficients → (∀ i : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X i)) → eta'.hom.app (DerivedCategory.Q.obj P) ≫ F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) = epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) → eta' = eta) ∧ (∀ A : CochainComplex (Mod JC R) ℤ, eta.hom.app (DerivedCategory.Q.obj A) ≫ F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj A) = epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj A)) ∧ NatTrans.CommShift eta.hom ℤ ∧ (∀ M : Mod JC R, eta.hom.app (DerivedCategory.Q.obj ((HomologicalComplex.single _ (.up ℤ) 0).obj M)) ≫ F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((HomologicalComplex.single _ (.up ℤ) 0).obj M)) = epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((HomologicalComplex.single _ (.up ℤ) 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded homotopy-category comparison epsilon; Qh on the quotient of a complex is definitionally Q. The resolving shift normalization is hshift. The canonical exact localization is F.mapDerivedCategory with mapDerivedCategoryFactorsh. No statement correction or dependency replacement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e76bb79da",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read node, all 7 stmt_deps and records, Mathlib ExactFunctor.lean (mapDerivedCategory CommShift via commShiftOfLocalization through mapHomotopyCategory = termwise-identity shift; NatTrans.CommShift Factorsh), side-live AlgebraicInverseImage and Mod. Hypotheses match: F pinned by hobj/hmap to changeOfRings c (I.modules M) as in landed ringedTopoiDerivedPullbackIndependent; exactness = Additive+finite limits/colimits; L, epsilon, hL, he = dep outputs; L.CommShift pinned by hshift on resolving P (determines it, satisfiable); c not assumed flat; 4 independent site universes. All 11 conjuncts match the node: flat and resolving preservation, Discrete ι : Type r sums, zsmul on maps and chain maps (sign clause per proof step 2), epsilon invertible for all A, ∃ eta with resolving normalization, resolving-only uniqueness, all-A equation, NatTrans.CommShift, degree-zero single ℤ-indexed complex with no flatness. All true by the node's proof; edge cases M=0, ℤ/2, empty ι, n≤0, z=0/−1 fine. statement field verbatim (script); no defs, one sorry; docstrings have source, blueprint and 7 steps; node unchanged from S1, not delivered elsewhere. Advisory: Mod/AlgebraicInverseImage/changeOfRings owners not in stmt_deps (same as landed dep; S2 cannot change stmt_deps); he redundant given hL. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261024T190533-L-4090494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

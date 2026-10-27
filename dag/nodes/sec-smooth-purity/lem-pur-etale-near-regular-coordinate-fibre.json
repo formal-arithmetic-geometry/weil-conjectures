@@ -18,98 +18,73 @@
  ],
  "proof": [
   {
-   "text": "Work on affine base and source neighbourhoods of the images of y. Write the base as Spec R and X as Spec A, and put f_j=h*(t_(a+j)). Finite-presentation permanence makes h finitely presented since p is smooth and affine-space projection is finitely presented. The cartesian hypothesis identifies Y with A/(f); etaleness of v makes this quotient smooth, flat and finitely presented over R. The weak regularity hypothesis becomes regularity after localizing at y, since the quotient has that point. Put k=κ(s) for the base point s. Apply [lem-pur-relative-regular-equations-base-change] to these flat algebras; the f_j form a regular sequence in L=O_(X_s),y, and its quotient is D=O_(Y_s),y. By [lem-weil-pbc-smooth-fibre-regular-local], L is regular local. The local ring T of affine (a+b)-space over k at h(y) is regular by [lem-weil-pbc-polynomial-ring-smooth] and [lem-weil-pbc-smooth-over-field-regular-local]. A minimal generating system of the maximal ideal of L is regular by [lem-weil-pbc-regular-local-generators-regular-sequence], hence L is Cohen--Macaulay.",
+   "text": "Affine-space projection q is smooth. Finite-presentation permanence applied to h≫q=p makes h locally of finite presentation. The cartesian square identifies v with the base change of h along the zero-coordinate inclusion. The unramified-locus base-change theorem therefore puts i(y) in the unramified locus of h, since v is etale. Its unramified neighbourhood gives a formally unramified actual stalk map h_(i(y))^# by cancellation of the open-immersion stalk isomorphism.",
    "uses": [
-    "lem-weil-pbc-smooth-fibre-regular-local",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-smooth-over-field-regular-local",
+    "sbc-lem-affine-space-smooth",
+    "lem-pc-smooth-flat",
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-trf-unramified-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, finite presentation and etale base change; morphisms.tex Tag 02GF"
+   }
+  },
+  {
+   "text": "Put s=p(i(y)), z=p.asFiber(i(y)) and let m:X_s→(A^(a+b)_S)_s be the canonical pullback map. Apply the regular-coordinate fibre dimension formula to m at z. Both its local rings are regular local, since p and q have smooth fibres over the residue field of s. A minimal generating family of the target-ring maximal ideal has length its Krull dimension and is a regular sequence. The defining supremum for depth gives depth at least that dimension. Miracle flatness now makes m_z^# flat.",
+   "uses": [
+    "lem-pur-regular-coordinate-fibre-dimension-formula",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
     "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-pur-relative-regular-equations-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0FUE, local rings on the fibre; divisors.tex Tag 0FUD, algebra.tex Tags 00TT and 00NQ"
-   }
-  },
-  {
-   "text": "Let Q be the local ring of affine a-space over k at v(y). The last b variables in T form a regular sequence, since multiplication by the next variable is injective on each polynomial quotient and remains injective after localization; their quotient is Q. Repeatedly apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] to get dim L=b+dim D and dim T=b+dim Q. Base change preserves etaleness [lem-weil-pbc-etale-scheme-base-change]; its affine comparison [lem-weil-pbc-etale-ring-map-iff-etale-affine] and [lem-sc-etale-local-dimension] give dim D=dim Q. Thus dim L=dim T, also when b=0.",
-   "uses": [
-    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "lem-sc-etale-local-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0FUE, dimension comparison; more-algebra.tex Tag 07QP; algebra.tex Tag 00KW"
-   }
-  },
-  {
-   "text": "The closed fibre of T→L is also the closed fibre of Q→D, since all last variables are in the maximal ideal of T and their images are f. It is the local ring of a fibre of the etale map v_s. By [lem-weil-pbc-etale-fibre-discrete-separable-points] it is a finite separable field extension, so has dimension zero. Now [lem-weil-pbc-miracle-flatness] applies: T is regular, L is Cohen--Macaulay and dim L=dim T+0. Therefore T→L is flat.",
-   "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
     "lem-weil-pbc-miracle-flatness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0FUE, finite local fibre and miracle flatness; algebra.tex Tag 00R4; morphisms.tex Tag 02GL"
+    "place": "Tag 0FUE, final paragraph; algebra.tex Tags 00NQ and 00R4"
    }
   },
   {
-   "text": "Put R₀=O_(S,s), T₀=O_(A^(a+b)_S,h(y)), L₀=O_(X,i(y)). Apply [lem-weil-pbc-criterion-flatness-fibre] to R₀→T₀→L₀ and the module L₀. Both algebras are essentially finitely presented: they are prime localizations of the affine-space polynomial algebra and the finitely presented ambient algebra. L₀ is a nonzero free rank-one L₀-module, and is flat over R₀ by [lem-pc-smooth-flat]. Reduction modulo the maximal ideal of R₀ is the flat map T→L just proved; quotient and localization identify the reductions with the displayed local rings of the fibre. The criterion yields flatness of T₀→L₀.",
+   "text": "The pointwise fibrewise flatness criterion applies to p,q,h at i(y): p is locally finitely presented and flat at that point by smoothness; q is locally of finite type; and the actual map on base-fibre stalks is flat by the previous step. It yields flatness of h_(i(y))^#.",
    "uses": [
-    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-sfb-fibrewise-flatness-criterion",
     "lem-pc-smooth-flat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0FUE, fibre criterion; Tag 039C, theorem-criterion-flatness-fibre, algebraic input Tag 00R7"
+    "place": "Tag 0FUE, application of theorem-criterion-flatness-fibre, Tag 039C"
    }
   },
   {
-   "text": "On affine charts let P be the polynomial algebra of the target. The localized module N=(Ω_(A/P))_y is finite, since h is finitely presented [def-weil-pbc-kahler-differentials]. Differential base change [lem-weil-pbc-kahler-differentials-base-change], followed by localization, identifies its residue fibre with differentials of the local fibre of h. Localization follows from the universal derivation formula d(u/v)=v⁻¹du−uv⁻²dv. By the cartesian hypothesis that fibre is the corresponding fibre of v, which is etale by [lem-weil-pbc-etale-scheme-base-change]. The affine etale comparison [lem-weil-pbc-etale-ring-map-iff-etale-affine] makes its differential module zero. Hence N modulo the maximal ideal of L₀ is zero. Nakayama [lem-weil-pbc-nakayama-local-generators], applied to the empty generating family, gives N=0. Finite presentation, flatness of T₀→L₀, and [lem-sc-etale-at-prime-flat-unramified-criterion] give a principal open T containing i(y) on which this specified h is etale.",
+   "text": "Choose affine target and source neighbourhoods of h(i(y)) and i(y). The affine stalk-map arrow isomorphism transports flatness and formal unramifiedness to the prime localizations. Compose formal unramifiedness with the base localization, and use localization of differentials to see that the localized differential module vanishes. The etale-at-prime criterion then gives a basic localization of the source algebra that is etale over the target algebra. Its corresponding affine basic open contains i(y). The affine property comparison and the target open immersion turn this into Etale(T.ι≫h).",
    "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-kahler-differentials-base-change",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "lem-weil-pbc-nakayama-local-generators",
     "lem-sc-etale-at-prime-flat-unramified-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0FUE, application of morphisms.tex Tag 02GU; algebra.tex Tags 00RV, 00DV and 00U6 spell out the pointwise criterion"
+    "place": "Tag 0FUE; morphisms.tex Tag 02GU; algebra.tex Tags 00U6 and 00RV"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-smooth-fibre-regular-local",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-smooth-over-field-regular-local",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-pur-relative-regular-equations-base-change",
-  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "lem-sc-etale-local-dimension",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "lem-weil-pbc-miracle-flatness",
-  "lem-weil-pbc-criterion-flatness-fibre",
+  "sbc-lem-affine-space-smooth",
   "lem-pc-smooth-flat",
-  "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-kahler-differentials-base-change",
-  "lem-weil-pbc-nakayama-local-generators",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-trf-unramified-locus-base-change",
+  "lem-pur-regular-coordinate-fibre-dimension-formula",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-sfb-fibrewise-flatness-criterion",
   "lem-sc-etale-at-prime-flat-unramified-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0FUE, last two proof paragraphs: finite presentation, fibre dimension comparison, miracle flatness, fibre criterion and etale criterion"
+  "place": "Tag 0FUE, final paragraphs; numerical comparison isolated, unramified-locus base change replaces the explicit Nakayama calculation"
  },
  "mathlib_searches": [
   {
@@ -177,14 +152,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261020T051045-L-1546210",
+  "landing": "20261026T091548-L-3353544",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

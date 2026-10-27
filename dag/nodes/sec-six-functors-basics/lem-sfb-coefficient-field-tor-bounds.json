@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-coefficient-field-tor-bounds",
+ "kind": "statement",
+ "title": "Bounded constant-field objects have the same coefficient Tor bounds",
+ "statement": "Let (C,J) be a small site in universe w and k a field in the same universe. For an object K in the standard derived category of modules over the constant k ring sheaf [def-weil-proetale-tor-amplitude], let a <= b be integers such that its cohomology vanishes below a and above b. Then HasCoefficientModelTorAmplitude K a b holds, with exactly the same endpoints.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G0 and 08G1; modules.tex Tag 03ER; Bhatt--Scholze Remark 6.3.2"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Use the standard derived t-structure and Mathlib DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE to obtain a strictly bounded representative in the given interval.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every term is flat over the constant field sheaf. Transport flatness from the monoidal tensor functor to the site tensor functor.",
+   "uses": [
+    "lem-exc-constant-field-module-flat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coefficient-model bounded-flat criterion to the representative and its localization isomorphism.",
+   "uses": [
+    "lem-pe-coefficient-tor-flat-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-constant-field-module-flat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pe-coefficient-tor-flat-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08G0 and 08G1; modules.tex Tag 03ER; Bhatt--Scholze Remark 6.3.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|[Tt]orAmplitude|[Ii]sFlat.*[Ff]ield",
+   "date": "2026-10-25",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "verdict": "Mathlib supplies the bounded representative; existing project flatness and flat-model lemmas complete the coefficient Tor proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded object in a derived category over a field has Tor amplitude in the same interval because every module is flat",
+   "date": "2026-10-25",
+   "results": "Module.Flat.of_projective; Module.Flat.of_free; Module.Flat.iff_rTensor_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; Module.Flat.instOfIsDedekindDomainOfIsTorsionFree; Module.Flat; Module.FaithfullyFlat.toFlat",
+   "verdict": "Mathlib supplies the bounded representative; existing project flatness and flat-model lemmas complete the coefficient Tor proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded object in a derived category over a field has Tor amplitude in the same interval because every module is flat",
+   "date": "2026-10-25",
+   "results": "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsGEObjSingleFunctor",
+   "verdict": "Mathlib supplies the bounded representative; existing project flatness and flat-model lemmas complete the coefficient Tor proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FixedScalarEtaleOrigin",
+  "date": "2026-10-26",
+  "group": "M3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Fixed scalar etale origin: Bounded constant-field objects have the same coefficient Tor bounds",
+   "via": [
+    "lem-sfb-fixed-scalar-etale-origin",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientFieldTorBounds",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientFieldTorBounds.lean",
+  "declaration": "CategoryTheory.coefficientFieldTorBounds",
+  "statement": "theorem coefficientFieldTorBounds {C : Type w} [SmallCategory C]\n    (J : GrothendieckTopology C) (k : Type w) [Field k]\n    (K : ConstantCompletion.D (ConstantCompletion.constant J k))\n    (a b : ℤ) (hab : a ≤ b)\n    (h : ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((coefficientModelCohomology _ q).obj K)) :\n    HasCoefficientModelTorAmplitude _ K a b",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T180900-L-4047669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T180900-L-4047669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,59 @@
+# Q85: lem-trf-bennett-normal-flat-numerical-criterion
+
+## Files written
+
+- dag/nodes/sec-trace-formula/lem-trf-bennett-normal-flat-numerical-criterion.json — statement item, now split in 13 steps; no Mathlib match. The statement and its hypotheses are unchanged.
+- No new nodes and no new Mathlib leaves.
+- citations.json contains a verbatim statement quotation for every cited-node occurrence. searches.jsonl records the actual five search calls; prepare.py is a sandbox-only preparation script, not a project tool.
+
+## Attachments
+
+None. Searches of the live WeilConjectures source for the item tag, Bennett, normal flatness and Hilbert--Samuel did not find a project declaration stating the criterion. A conormal-flat-basechange result is a different assertion. No Lean file was written or compiled.
+
+## Sources wanted
+
+WANTED: Cossart--Jannsen--Saito, Desingularization: Invariants and Strategy, March 12 2009 preprint, Theorem 2.3(1) iff (2), printed p.29, for lem-trf-bennett-normal-flat-numerical-criterion; archival copy of https://epub.uni-regensburg.de/13766/1/MP32.pdf, suggested destination literature/cossart-jannsen-saito-desingularization-20090312.pdf. I read the theorem online without downloading an archival file. Its proof refers to Bennett rather than supplying the calculation used here.
+
+WANTED: B. M. Bennett, On the characteristic functions of a local ring, Annals of Mathematics 91 (1970), 25--87, Theorem (3) and the convention in Section 0 (2.1.2), for lem-trf-bennett-normal-flat-numerical-criterion; the original reference cited by CJS. This delivery does not assert that its proof was read.
+
+## Problems found and corrected
+
+The item was unsplit, not an attachment. ILO VIII 2.3.13, printed p.94, discusses synchronization and is motivation rather than a proof of this numerical criterion. CJS Theorem 2.3 uses the degree-wise Hilbert function; the present statement uses lengths. Step 3 explicitly proves the summation conversion, including the index-zero convention. I kept the precise source distinction already present in the item and marked this proof as agent-written.
+
+CJS Definition 2.1 restricts the geometric terminology for a centre containing an irreducible component. That restriction must not silently remove the explicitly allowed I=0 in our numerical statement. The calculation here covers I=0 directly. No statement dispute or statement correction was needed.
+
+## Unfinished work
+
+None in this stage-1 split. Existing cited nodes remain the DAG obligations they already were; this is not a claim that their Lean proofs exist. The requested archival sources remain WANTED. The delivery is ready for independent mathematical review.
+
+## Not duplicates
+
+There are no new-node/existing-node pairs: no new nodes were created. I reused the existing completion, Cohen, regular-local, localization, length, Nakayama and finite-flat nodes. Whole-blueprint searches for normal flat and Hilbert Samuel found no synonym of the criterion. The regular-complete coefficient-coordinate theorem already exists as lem-trf-regular-complete-coefficient-coordinates and was reused, rather than introducing a new power-series presentation theorem.
+
+## Review by Q85
+
+I read the item, its parent lem-trf-hilbert-samuel-near-normal-cone, the inherited blueprint ancestry, the current main-20261015 local-term-locality text, the chapter and unit, and delivery-errors B through E. The item is an inherited historical algebraic input, not a replacement for the current contracting-correspondence proof. There is no blueprint_update on the item. I preserve its chapter, unit, statement, import fields and historical provenance. Off-unit generic algebra inputs are declared in split_report.tool_uses. I checked that the cited nodes do not lead back to the criterion, avoiding the circular alternative of using its parent.
+
+For the statement I read ILO VIII 2.3.13 and the CJS theorem above. For the supporting results I read their full DAG statements and the relevant Stacks text: algebra.tex Tags 00NP (regular local domain), 00IK (Noetherian finiteness), 00CS (exact localization), 00DV (Nakayama), 00IV (length additivity), 05GH (Noetherian completion), 05GG (completion and reduction), 05GI (radical of completion), 00MA/00MB (finite-module completion), 032A/0326 (coefficient ring), 0C0S(2) (regular complete coordinates), and 00NZ (finite flat local free); more-algebra.tex 07NY/07NV for regularity and dimension under completion and the adic evaluation construction at 07NL/07NN. No SGA source is used. The proof below is my calculation from these inputs, not a claim that one Stacks tag states Bennett's theorem.
+
+Step 1 uses precisely lem-sc-regular-local-domain for the domain A, lem-weil-pbc-noetherian-submodule-finite for finite ideal powers, and lem-weil-pbc-localization-module-exact for the quotients of their localizations. I checked that localizing R/I at the image of R minus I gives its fraction field and that I annihilates G_j; thus the tensor product really computes the degree-j tangent space of R_I. Step 2 uses the local-generators form of Nakayama, not just a definition of the radical, and exact localization. The proof that the kernel is zero is written coordinate by coordinate inside A^mu; no assertion that a generic isomorphism is automatically an isomorphism is used. This handles rank zero as well.
+
+Step 3 uses the actual additive-length theorem on the finite maximal-ideal filtration. Each factor is a finite residue-field vector space, so its dimension is its length by an explicit basis filtration. The written Delta/Lambda telescoping proves both directions for all n, not merely eventual Hilbert polynomials. It gives g_R=Lambda^d r with exactly the summation exponent d in the statement.
+
+Step 4 uses the Noetherian-completion node with finitely generated maximal ideal and field quotient, the local-completion node for the residue field, and the mod-power node to identify successive tangent quotients. The regular-completion and dimension-completion statements are separately cited: neither is inferred from the other. All rings are nonzero because they have the same nonzero residue field. Step 5 uses quotient completion for C/J=D and for the kernel associated with each ideal power, exact completion only for finite modules, the finite-module tensor theorem over A, and the module-completion reduction theorem for H_j/pH_j. The m-adic and a-adic filtrations agree because I kills G_j. In particular the completion statements supply both freeness preservation and the equality of closed-fibre dimensions that the later induction needs; I do not claim a generic-rank comparison after completing a localization.
+
+Step 6 uses the coefficient-ring existence statement with complete Noetherian local C, the existing specified-coefficient-field coordinate statement with complete regular D of dimension d, and the adic evaluation statement with parameters lifted into n. The field F injects into the residue field, so C is equicharacteristic: in positive characteristic p the coefficient ring's maximal ideal p k_0 vanishes, and in characteristic zero p=0. Its image is therefore a coefficient field of D. The composite evaluation to D is the coordinate isomorphism, proving the section explicitly. No F-linear section is assumed. This is necessary for imperfect F or inseparable residue-field extensions. The d=0 coordinate statement includes the empty list.
+
+Steps 7 and 8 use only the conclusions of steps 5 and 6 and finite module arithmetic. Lifting a basis gives an injective D-linear map whose projection is the identity, and subtracting its expansion proves the displayed splitting. Applying this successively gives a fixed decomposition of every Q^a. Expanding (Q+pB)^q and taking the minimum exponent on each fixed direct summand proves the formula for b^q; taking q=N and N+1 proves the displayed quotient. These are explicit elementary operations, not an invocation of an unproved flat-filtration or tensor-exactness lemma. Crucially, the final summand M=H_N is never assumed free. That is what lets the induction prove freeness rather than presuppose it.
+
+Step 9 uses the coordinate isomorphism already established in step 6. I wrote out the finite monomial-factorization argument that identifies p^q/p^(q+1), including zero variables. The inclusion J^(N+1) in n^(N+1) proves that passage to the truncated ring leaves degree N unchanged. The finite dimension formula follows from the displayed direct sum, not from an external Hilbert-series comparison. Step 10 is the finite-sum convolution identity, proved by separating the exponent of the last variable. Both include d=0 and degree zero.
+
+Step 11 cites the finite-flat-local-free statement only after proving directly that each graded summand is flat, checking its finiteness and the locality of A. Generic rank is the basis cardinality by tensoring with K. Step 12 compares two finite sums under the induction hypothesis only in degrees below N; cancelling them gives mu_N=r_N, and the argument of step 2 supplies the free module. Step 13 writes out why the union of the degree-labelled bases is a basis, and why tensoring an injection with that free direct sum is injective. No unstated theorem about arbitrary sums of flat modules is needed.
+
+I tested the unchanged statement and calculation on the following small cases. For I=m, d=0 and both sides hold identically. For I=0, regular R is a domain, R_I is its fraction field, and the formula is h_R(n)=binomial(n+d,d)=Lambda^d(1)(n). For the reduced crossing R=k[u,t]_(u,t)/(ut), I=(u), A=k[t]_(t), the associated graded has the torsion relation tU=0; h_R(n)=2n+1 whereas Lambda h_RI(n)=n+1. For a delayed failure, R=Q[x,u,t]_(x,u,t)/(x^3-t^2u^2), I=(x,u), G_0 and G_1 are free, while G_2 has the torsion relation t^2 u^2=0: mu_2=3 and r_2=2. Its degree-two tangent dimension is 6 while the generic convolution is 5. This checks the need to keep the top summand unrestricted. The latter hypersurface is a domain (the cubic is irreducible over Q(u,t), by the u valuation), so it also respects reducedness. No new statement needed separate edge-case testing.
+
+I checked C1 by writing out the basis lifts, ideal-power expansion, coefficient extraction, cancellation, and direct-sum tensor argument; the non-elementary ingredients each have the cited existing nodes. I checked C4 by opening every cited statement, and citations.json quotes its actual wording; for multi-clause completion inputs the quotation includes the complete statement so none of the needed clauses is lost. All 13 steps are below 1000 characters, hence below the 2000-character long-step audit threshold. No proof step is merely 'apply a newly created restatement of this criterion'.
+
+I read the five actual msearch results and retained the pre-existing searches. The new calls were LeanFinder's Bennett/normal-flat/Hilbert--Samuel wording; Loogle's associatedGraded/Flat name pattern; grep for Bennett, normal flat and Hilbert--Samuel; LeanSearch's associated-graded numerical-equivalence wording; and a second LeanFinder formulation using minimal generators and generic ranks. All services answered. The results were general flat localization, smooth-flatness, regular-sequence and going-down assertions, with no statement of this criterion; the Loogle and source-grep calls had no hits. The exact tool/query strings and returned records are in the item and searches.jsonl. I did not invent a search or declare any new node absent from Mathlib without searching.
+
+The first dry run rejected the short quotation for the finite-flat-local-free input (it was under the tool's 40-character minimum). I replaced that quotation by the full existing statement, which also exposes the hypotheses checked in step 11; no mathematical step or dependency changed.

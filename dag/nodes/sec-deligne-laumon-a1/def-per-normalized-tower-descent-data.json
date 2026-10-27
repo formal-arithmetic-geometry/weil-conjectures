@@ -1,0 +1,142 @@
+{
+ "id": "def-per-normalized-tower-descent-data",
+ "kind": "definition",
+ "title": "Center-preserving descent data and actions on finite normalized blowup towers",
+ "statement": "Let $n\\geq0$ and let $T=(T_i,J_i,b_i)_{0\\leq i\\leq n}$ be a finite normalized blowup tower with its coherent ideal centers [def-trf-monoscheme-toric-realization], using the componentwise-normalized construction [def-trf-normalized-blowup]. Put $t_0=\\mathrm{id}_{T_0}$ and $t_{i+1}=t_i\\circ b_i:T_{i+1}\\to T_0$. Say its centers are nowhere dense when each $V(J_i)\\subset T_i$ is nowhere dense. A center-preserving map $c:T\\to S$ between length-$n$ towers is a family $c_i:T_i\\to S_i$ commuting with all adjacent arrows and satisfying $J_i=K_i\\mathcal O_{T_i}$, the extension along $c_i$. A center-preserving isomorphism is such a family of scheme isomorphisms. Such a map is cartesian when the square with horizontal arrows $c_i,c_0$ and vertical arrows $t_i,s_i$ is a fibre product [def-pc-fibre-product] for every $i$.\n\nGiven $u:T_0\\to X$ of schemes [def-pc-scheme], a center-preserving descent datum $D$ consists of a scheme descent datum [def-pd-descent-datum] on each $T_i\\to T_0$ relative to $u$, commuting with every $b_i$. On the universal overlap $T_i\\times_X T_0$, let $p_i$ be the first projection and let $q_i$ be the map to $T_i$ obtained by the datum transport from the first lift to the second. Require $p_i^*J_i=q_i^*J_i$ as ideal sheaves for $i<n$. Equivalently the overlap isomorphisms identify the actual center ideals. The existing scheme descent data include naturality, the diagonal identity and the triple-overlap cocycle. Two $W$-points of $T_i$ are $D$-related if one is the transport of the other along two $W$-lifts to $T_0$ with equal composite to $X$. A tower $S$, an isomorphism $e:S_0\\simeq X$ and a center-preserving map $c:T\\to S$ realize $D$ when $e c_0=u$, all level squares are cartesian, and $c_i$ identifies every pair of $D$-related points. Define the center image subset of $T_0$ to be $\\bigcup_{i<n}t_i(V(J_i))$.\n\nFor a presheaf $G$ of groups on schemes, an action on $T$ means, naturally in every test scheme $W$, actions of $G(W)$ on $\\operatorname{Hom}(W,T_i)$, satisfying the group identity and multiplication laws, commuting with $b_i$, and preserving pulled-back center ideals: $(g x)^*J_i=x^*J_i$. This includes constant abstract groups and representable scheme-valued groups. An action is compatible with $D$ when applying the same $g\\in G(W)$ to any two $D$-related $W$-points gives $D$-related points. No triviality of the base action is imposed.",
+ "stmt_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "def-trf-normalized-blowup",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-pd-descent-datum"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 2.2.3--2.2.11, printed pp.90--91; 5.5.3--5.5.5, printed pp.128--129. Scheme descent transport presentation: Stacks Tag 023V, by Yoneda."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized blowup tower center preserving descent data and equivariant actions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"[F.IsPrestack J] (hf : Sieve.ofArrows _ f ∈ J S) : (F.toDescentData f).FullyFaithful\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ satisfying the prestack condition, an object $S \\\\\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, if $\\\\mathcal{F}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ f₁_1 : X ⟶ T) (e_f₁ : f₁ = f₁_1)\\n  (f₂ f₂_1 : T ⟶ Y) (e_f₂ : f₂ = f₂_1) [inst_2 : AlgebraicGeometry.IsIntegralHom f₂]\\n  (H : f =\", \"doc\": \"Given schemes $X, Y, T$ and morphisms $f: X \\\\to Y$, $f_1, f_1': X \\\\to T$, $f_2, f_2': T \\\\to Y$ such that $f_1 = f_1'$, $f_2 = f_2'$, and $f = f_1 \\\\circ f_2 = f_1' \\\\circ f_2'$, with $f$ quasi-compact, \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{ι' : Type t'} {X' : ι' → C} (f' : ∀ i', X' i' ⟶ S) (h : Sieve.ofArrows _ f = Sieve.ofArrows _ f') :\\n  ∃ (e : F.DescentData f ≌ F.DescentData f'), Nonempty (F.toDescentData f ⋙ e.functor ≅ F.toDescentData f')\", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and two families of morphisms $ f_i: X_i \\\\to S $ and $ f'_j: X'_j \\\\to S \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": PreservesLocalization _ ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap)\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{S' : C} {ι' : Type t'} {X' : ι' → C} {f' : ∀ j, X' j ⟶ S'} (e : S' ≅ S) {α : ι' → ι} {p' : ∀ j, X' j ⟶ X (α j)}\\n  (w : ∀ j, p' j ≫ f (α j) = f' j ≫ e.hom) {β : ι → ι'} {q' : ∀ i, X i ⟶ X' (β i)}\\n  (w' : ∀ i, q' i ≫ f' (β i) = f i ≫ e.inv) : F.DescentData f ≌ F.DescentData f'\", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an isomorphism $ e: S' \\\\cong S $ in $ \\\\mathcal{C} $, and compatible families of morphisms $ p'_j: X'_j \\\\t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact normalized tower center-preserving descent or action definition. Generic descent data is reused; existing project NormalizedTower is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, CategoryTheory.Over.DescentDatum",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Over.DescentDatum'\n",
+   "date": "2026-10-24",
+   "verdict": "No exact normalized tower center-preserving descent or action definition. Generic descent data is reused; existing project NormalizedTower is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "NormalizedTower|normalizedBlowup|CenterMap|CenterIso",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact normalized tower center-preserving descent or action definition. Generic descent data is reused; existing project NormalizedTower is reused."
+  },
+  {
+   "tool": "grep project",
+   "query": "normalizedBlowup|NormalizedTower|CenterMap|CenterIso",
+   "results": "lean/Sheaf/AlgebraicGeometry/NormalizedBlowup.lean:28:noncomputable def normalizedBlowup {S : Scheme.{u}} (J : S.IdealSheafData) : Scheme.{u} :=\nlean/Sheaf/AlgebraicGeometry/NormalizedBlowup.lean:33:noncomputable def normalizedBlowupMap {S : Scheme.{u}} (J : S.IdealSheafData) :\nlean/Sheaf/AlgebraicGeometry/NormalizedBlowup.lean:34:    J.normalizedBlowup ⟶ S :=\nlean/Sheaf/AlgebraicGeometry/MonoschemeToricRealization.lean:619:    ∃ e : Y ≅ J.normalizedBlowup, e.hom ≫ J.normalizedBlowupMap = b\nlean/Sheaf/AlgebraicGeometry/MonoschemeToricRealization.lean:623:structure NormalizedTower (n : ℕ) where\nlean/Sheaf/AlgebraicGeometry/MonoschemeToricRealization.lean:633:structure NormalizedPullback {n : ℕ} (T S : NormalizedTower.{u} n) where\nlean/Sheaf/AlgebraicGeometry/MonoschemeToricRealization.lean:644:    (T : NormalizedTower.{u} n) (S : NormalizedTower.{u} m) where\nlean/Sheaf/AlgebraicGeometry/MonoschemeToricRealization.lean:669:def NormalizedTower.IsDesingularization {n : ℕ} (T : NormalizedTower.{u} n) : Prop :=\n",
+   "date": "2026-10-24",
+   "verdict": "Existing tower in def-trf-monoscheme-toric-realization and generic datum in def-pd-descent-datum are reused. No node defines center-preserving tower descent data, its realization, or compatible action."
+  },
+  {
+   "tool": "grep DAG",
+   "query": "normalized blowup tower",
+   "results": "dag/nodes/sec-trace-formula/def-trf-monoscheme-toric-realization.json\ndag/nodes/sec-trace-formula/lem-trf-monoscheme-toric-tower-descent.json\ndag/nodes/sec-trace-formula/lem-trf-conductor-extension-of-normalized-resolution.json\ndag/nodes/sec-trace-formula/lem-trf-smooth-functorial-tower-torus-equivariance.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-rigidified-quotient-tower-comparison.json\ndag/nodes/sec-trace-formula/lem-trf-monoscheme-tower-comparison-coherence.json\ndag/nodes/sec-trace-formula/lem-trf-toric-normalized-desingularization.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-gabber-log-blowup-regularization.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-complete-local-rigidification-comparison.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-characteristic-zero-log-resolution-independence.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-gabber-equivariant-log-modification.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-log-regular-projective-log-resolution.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-normalized-blowup-tower-etale-descent.json\ndag/nodes/sec-trace-formula/lem-trf-log-regular-desingularization.json\ndag/nodes/sec-trace-formula/lem-trf-normalized-resolution-on-normal-inputs.json\ndag/nodes/sec-deligne-laumon-a1/lem-per-gabber-absolute-equivariant-modification.json\n",
+   "date": "2026-10-24",
+   "verdict": "Existing tower in def-trf-monoscheme-toric-realization and generic datum in def-pd-descent-datum are reused. No node defines center-preserving tower descent data, its realization, or compatible action."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "normalized blowup tower",
+   "results": "0 blueprint nodes match 'normalized blowup tower'\n",
+   "date": "2026-10-24",
+   "verdict": "Existing tower in def-trf-monoscheme-toric-realization and generic datum in def-pd-descent-datum are reused. No node defines center-preserving tower descent data, its realization, or compatible action."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-normalized-blowup-tower-etale-descent",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The geometric modification input used below the ancestor proof Step 3; ILO VIII 2.2.5--2.2.11 gives the ordered normalized tower and its descent, with the action descent used in 5.5.5.",
+   "via": [
+    "lem-per-normalized-blowup-tower-etale-descent",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedTowerDescentData",
+  "declaration": "AlgebraicGeometry.Monoscheme.NormalizedTower.DescentData",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.toFirst",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.HasNowhereDenseCenters",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.CenterMap",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.CenterIso",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.CenterMap.IsCartesian",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.DescentData",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.DescentData.Related",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.DescentData.Realizes",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.centerImages",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.Action",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.Action.Compatible"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedTowerDescentData.lean",
+  "statement": "structure DescentData {n : ℕ} {X : Scheme.{u}} (T : NormalizedTower.{u} n) (uMap : T.level 0 ⟶ X)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c0ad14ae",
+  "group": "Q16",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c0ad14ae",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Read item node (10 steps, ILO VIII 2.2.1-2.2.11/5.5.3-5.5.5), both delivered modules, new node def-per-normalized-tower-descent-data, and deps (NormalizedTower/IsNormalizedBlowup, normalizedBlowup=reducedNormalization of blowup, Mathlib IdealSheafData.comap=extended ideal, Over.DescentDatum transport+cocycle, IsQuasiExcellent, IsProjectiveBundle). Hypotheses/clauses match: stalkwise normality (allows empty/disconnected), U not separated, DescentData per-level datum + arrows + center identification, Realizes pins the given datum (checked converse via cartesian squares), ∃! CenterIso uniqueness, flat ideal/tower detection without qc, geometry (finite normalization, projective+finite type, iso over dense centerImagesᶜ, integral generic stalks), action descent. Edge cases n=0, empty, unit centers OK. No name clashes; 4 added stmt_deps all used; both lean.statement verbatim. F1 (H3): normalizedBlowupTower_etalePullback required [(T.level 0).IsSeparated], but the node applies etale pullback to the tower on non-separated U and its overlaps (steps 5,6,9); FIX fixes/NormalizedBlowupTowerEtaleDescent.lean drops that binder (+docstring). Compiled once via nt_compile --json with the new-node module: both clean (7.9 s, 13.9 s), exit 0."
+ }
+}

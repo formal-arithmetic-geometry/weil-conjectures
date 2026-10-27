@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-section-pull-computation-of-realization",
+ "kind": "statement",
+ "title": "K-flat computation of a realized scalar pullback comparison",
+ "statement": "Let a:Λ→Λ′ be a map of commutative condensed coefficient rings, f:X→Y a scheme morphism, sX and sY normalized section scalar comparisons, and b an internal scalar/pullback isomorphism satisfying PullNormalized, all as in [def-sfb-internal-derived-scalar-comparisons] and [def-sfb-internal-section-scalar-pullback-comparison-data]. Supply an ordinary restriction/pushforward isomorphism r that is identity on sections, an ordinary scalar/pullback isomorphism c whose inverse has conjugate r under the specified composite adjunctions, and a derived scalar/pullback isomorphism d satisfying the realization equation for b. Then for every flat-term K-flat section cochain complex P the d computation equation in SectionPullNormalized holds with the supplied c. This conclusion asserts only the representative equation and constructs none of r, c, d.",
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-section-scalar-pullback-comparison-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 0D6D and 07A6; lemma-derived-base-change and lemma-derived-pullback-composition, with the representative computation step of internal scalar/pullback normalization."
+ },
+ "proof": [
+  {
+   "text": "Extend each endpoint scalar computation equation to every internal complex by incoming flat-term K-flat resolutions and naturality.",
+   "uses": [
+    "lem-sfb-section-scalar-computation-all"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the ordinary scalar/geometric square with the given c using the ordinary mate compatibility equation. Apply the termwise functor to obtain its cochain equation.",
+   "uses": [
+    "lem-sfb-section-ordinary-pull-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the endpoint scalar equations with the two geometric representative equations. Naturality of the middle scalar or geometric computation map gives the two composite computation equations.",
+   "uses": [
+    "lem-pd-section-derived-pushpull-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate PullNormalized at the homotopy quotient of P. Substitute this internal equality between the two pasted computation paths. Use naturality of the localization factor maps, the ordinary cochain equality, and the supplied realization of d. Cancel the scalar and geometric comparison isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The resulting equality of natural transformations on section complexes holds after precomposition with the termwise section equivalence. Faithfulness of this precomposition gives equality on every section complex. The original flat-term K-flat hypotheses are therefore unnecessary for this final calculation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-section-scalar-computation-all",
+  "lem-sfb-section-ordinary-pull-compatibility",
+  "lem-pd-section-derived-pushpull-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "W8: extend endpoint computation equations by resolving naturality; paste universal computation squares before transporting through the termwise equivalence. No pullback K-flatness preservation is needed for this route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_ext",
+   "results": "CategoryTheory.Functor.leftDerived_ext",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction and equivalence results do not state this representative normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a normalized derived scalar extension pullback comparison through an equivalence of module categories using K-flat computation counits",
+   "results": "PresheafOfModules.pullbackComp; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; comonadicExtendScalars; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; Algebra.FormallyUnramified.flat_of_restrictScalars",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction and equivalence results do not state this representative normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "SectionPullNormalized|section_pull_normalized_of_normalized",
+   "results": "No hits",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction and equivalence results do not state this representative normalization equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport the computation counit of a normalized scalar pullback comparison through an equivalence of module sheaves",
+   "results": "CategoryTheory.Equivalence.sheafCongr.counitIso; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_inv_app_val_app; CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app; ModuleCat.RestrictionCoextensionAdj.counit'; Equiv.smul; CategoryTheory.Equivalence.sheafCongrPreregular_counitIso_hom_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction and equivalence results do not state this representative normalization equation."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "scalar pullback; normalization",
+   "results": "No blueprint node states this supplied-comparison representative equation; existing parent transport result includes its construction and realization as further obligations.",
+   "date": "2026-10-26",
+   "verdict": "Strict substep of the existing transport node, not a duplicate blueprint statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionPullNormalizationTransport",
+  "date": "2026-10-26",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (1), scalar/pullback normalization; K-flat representative computation inside endpoint transport.",
+   "via": [
+    "lem-sfb-section-pull-normalization-transport",
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionPullComputationOfRealization",
+  "file": "lean/Sheaf/Paper/SectionPullComputationOfRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.section_pull_computation_of_realization",
+  "statement": "theorem section_pull_computation_of_realization (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (sX : SectionScalarComparison a X) (sY : SectionScalarComparison a Y)\n    (hX : SectionScalarNormalized a X sX) (hY : SectionScalarNormalized a Y sY)\n    (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)\n    (normalized : PullNormalized a f b)\n    (r : ModuleRingedComparison.pushforward Λ' f ⋙\n      SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n      (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology Y) (coefficientMap a Y)) ≅\n        SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n          (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X) (coefficientMap a X)) ⋙\n            ModuleRingedComparison.pushforward Λ f)\n    (identity_on_sections : (∀ (N : ModuleRingedComparison.modules Λ' X) (U : Y.ProEtᵒᵖ)\n      (x : ((ModuleRingedComparison.pushforward Λ' f).obj N).val.obj U),\n    (r.hom.app N).val.app U x = x))\n    (c : sY.pair.extension ⋙ ModuleRingedComparison.pullback Λ' f ≅\n    ModuleRingedComparison.pullback Λ f ⋙ sX.pair.extension)\n    (conjugate : conjugateEquiv\n      (sY.pair.ordinaryAdjunction.comp (ModuleRingedComparison.adjunction Λ' f))\n      ((ModuleRingedComparison.adjunction Λ f).comp sX.pair.ordinaryAdjunction) c.inv = r.hom)\n    (d : sY.pair.derived ⋙ ModuleRingedComparison.derivedPullback Λ' f ≅\n    ModuleRingedComparison.derivedPullback Λ f ⋙ sX.pair.derived)\n    (realization : ∀ M : DerivedCategory (Modules Λ Y),\n    (ModuleRingedComparison.derivedEquivalence Λ' X).functor.map (b.hom.app M) ≫\n        sX.derived.hom.app ((L Λ f).obj M) ≫\n        sX.pair.derived.map ((scalarSectionPullComparison Λ f).hom.app M) =\n      (scalarSectionPullComparison Λ' f).hom.app ((D a Y).obj M) ≫\n        (ModuleRingedComparison.derivedPullback Λ' f).map (sY.derived.hom.app M) ≫\n        d.hom.app ((ModuleRingedComparison.derivedEquivalence Λ Y).functor.obj M)) :\n    ∀ (P : CochainComplex (ModuleRingedComparison.modules Λ Y) ℤ),\n    CochainComplex.IsKFlatIndependentCoefficients (R := ModuleRingedComparison.ring Λ Y) P →\n    (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n      (R := ModuleRingedComparison.ring Λ Y) (P.X n)) →\n    d.hom.app (DerivedCategory.Q.obj P) ≫\n        sX.pair.derived.map\n          ((ModuleRingedComparison.pullback Λ f).mapDerivedCategoryFactors.hom.app P) ≫\n        SheafOfModules.scalarPairComplexComparison.{u + 1, u, u + 1, u + 1}\n          sX.pair.extension sX.pair.extension_additive\n          sX.pair.derived sX.pair.counit\n          (((ModuleRingedComparison.pullback Λ f).mapHomologicalComplex (.up ℤ)).obj P) =\n      (ModuleRingedComparison.derivedPullback Λ' f).map\n        (SheafOfModules.scalarPairComplexComparison.{u + 1, u, u + 1, u + 1}\n          sY.pair.extension sY.pair.extension_additive\n          sY.pair.derived sY.pair.counit P) ≫\n        (ModuleRingedComparison.pullback Λ' f).mapDerivedCategoryFactors.hom.app\n          ((SheafOfModules.scalarComplex.{u + 1, u, u + 1}\n              sY.pair.extension sY.pair.extension_additive).obj P) ≫\n        DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso c (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T001145-L-4172374",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261026T093010-L-3491281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

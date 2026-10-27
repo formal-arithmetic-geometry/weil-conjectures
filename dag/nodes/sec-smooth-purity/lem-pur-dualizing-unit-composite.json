@@ -20,97 +20,78 @@
  ],
  "proof": [
   {
-   "text": "Write $F=Ra_!$, $G=Ra^!$, $P=La^*$ and $W=GA$. Work at the specified compactification $a=pj$. The proper projection of [def-exchange-projection] is the counit-defined map of [lem-weil-pbc-ringed-projection-mate-exact]; its last assertion says that its component at $A$ is the identity after unit identifications. For the open factor, [lem-sf-open-tensor-normalization] specifies the inverse of $\\gamma_{M,N}$ as the $j_!\\dashv j^*$-adjunct of $u_M\\otimes1$. At $N=A$, the tensor unit identifications turn this adjunct into $u_M$. The identity of $j_!M$ has the same adjunct, so $\\gamma_{M,A}$ is the identity under the unit identifications. Composing these two factors in the displayed definition of $\\operatorname{PF}^c$ gives $\\operatorname{PF}^c_{a,M,A}=1_{FM}$ after inserting $PA\\simeq A$ and the unitors. No absolute separatedness is used: the proper-factor lemma applies to any ringed topos morphism and the open-factor lemma to any open immersion.",
-   "uses": [
-    "def-exchange-projection",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-open-tensor-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map), Tag 0GL1 (lemma-j-shriek-and-tensor); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor), specialized to the coefficient unit"
-   }
-  },
-  {
-   "text": "Use the specified transpose of [def-pur-co-smoothness] and the adjunction of [def-weil-exceptional-inverse-image]. At $K=A$, Step 1 removes $\\operatorname{PF}^{-1}$; the symmetry and unitors turn its defining adjunct into $\\varepsilon_{a,A}:FW\\to A$, preceded by $F$ of the canonical map $PA\\otimes W\\to W$. The adjunct of $\\varepsilon_{a,A}$ is $1_W$, by the adjunction triangle identity. Naturality of the adjunction bijection in the source therefore identifies $\\theta_{a,A}$ with that canonical map. This proves the first clause with the actual coefficient-unit pullback comparison.",
+   "text": "In the etale-origin W-first coordinates, prove unit normalization directly from the existing source-library projectionMap_rightUnitality (WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit). Compare the two adjuncts using Adjunction.ext_of_comp_counit, expand the specified tensor transpose, and use counit naturality and map_projectionTensorMap_comp_counit. Precompose by the invertible projection component at the unit. Its inverse cancels; projectionMap_rightUnitality and rightUnitor_naturality identify the remaining composites. This is private tensor_unit, specialized to the fixed finite modules in dualizingTensor_unit. The unit comparison and the right unitor are the existing ones, unchanged.",
    "uses": [
     "def-pur-co-smoothness",
-    "def-weil-exceptional-inverse-image"
+    "def-weil-derived-pullback-tensor-hom",
+    "def-exchange-projection"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: etale normalization; explicit tensor-unit and naturality calculation"
+    "place": "Step 1: source-etale cancellation and tensor-unit/naturality calculation for the target-etale composition factor"
    }
   },
   {
-   "text": "For the naturality calculation put $q_K: F(PK\\otimes W)\\to K$ equal to the adjunct defining $\\theta_{a,K}$ in [def-pur-co-smoothness]. The finite projection theorem [lem-weil-finite-compact-projection-formula] gives natural invertible projection maps on precisely these finite-Tor inputs. Thus, for $v:K\\to L$, inverse-projection naturality and tensor symmetry give\n$$q_L\\circ F(Pv\\otimes1_W)=v\\circ q_K.$$\nIndeed the inverse-projection square moves $v$ to $1_{FW}\\otimes v$, and $(\\varepsilon_{a,A}\\otimes1)$ then gives $\\varepsilon_{a,A}\\otimes v$ on either path; the final unitors are natural. Apply the natural Hom bijection of [def-weil-exceptional-inverse-image] to get\n$$G(v)\\circ\\theta_{a,K}=\\theta_{a,L}\\circ(Pv\\otimes1_W).$$\nThis uses only naturality of the specified projection and the defining transpose, with no hypothesis that $a$ is cohomologically smooth.",
+   "text": "Prove tensor-map naturality directly by the existing source-library Adjunction.projectionTensorMap_naturality_right (WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap). The hypothesis is precisely naturality of projectionMap in its second variable. Postcompose by the exceptional image of the left unitor and use leftUnitor_naturality and preservation of composition. This is private tensor_naturality. No abstract symmetric tensor transport theorem or extra monoidal structure is needed.",
    "uses": [
     "def-pur-co-smoothness",
-    "lem-weil-finite-compact-projection-formula",
-    "def-weil-exceptional-inverse-image"
+    "def-exchange-projection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: etale normalization; explicit tensor-unit and naturality calculation"
+    "place": "Step 1: source-etale cancellation and tensor-unit/naturality calculation for the target-etale composition factor"
    }
   },
   {
-   "text": "The compact-support compositor is a natural isomorphism by [thm-sf-comp-composition]. Conjugation sends an isomorphism to an isomorphism by [def-weil-pbc-adjunction-conjugate]. Hence the specified $c_{b,a,A}:W_{ba}\\to G(W_b)$ is invertible. This uses only the compositor and its right-adjoint conjugate, not a smooth-purity identification.",
+   "text": "For any eta, apply the naturality equality from Step 2 at eta.hom and insert the unit equality from Step 1. Expand sigma and cancel the inverse of the specified exceptional conjugate against its hom. Functoriality of tensor and pullback gives exactly sigma followed by c.hom followed by a!(eta.hom) equals t.hom. The conjugate and t are the isomorphisms already constructed by def-pur-finite-exceptional-composition and the stated formula definitions. Hence sigma is invertible by IsIso.of_isIso_comp_right. Take asIso sigma, precompose the equality by its inverse, and cancel to obtain the required inverse formula.",
    "uses": [
-    "thm-sf-comp-composition",
-    "def-weil-pbc-adjunction-conjugate"
+    "def-pur-finite-exceptional-composition",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-pur-co-smoothness"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: etale normalization; explicit tensor-unit and naturality calculation"
+    "place": "Step 1: source-etale cancellation and tensor-unit/naturality calculation for the target-etale composition factor"
    }
   },
   {
-   "text": "Apply Step 3 with $v=\\eta:W_b\\xrightarrow{\\sim}A_Y$, then Step 2, and precompose by the tensor symmetry $s:W\\otimes PW_b\\to PW_b\\otimes W$. Cancellation of $c$ in the definition of $\\sigma$ gives\n$$G(\\eta)c_{b,a,A}\\sigma_{a,b}=G(\\eta)\\theta_{a,W_b}s=\\theta_{a,A}(P\\eta\\otimes1_W)s=\\operatorname{unitor}(1_W\\otimes P\\eta)=t_{a,\\eta}.$$\nThe last equality is naturality of symmetry followed by its unit constraint. Both $G(\\eta)c_{b,a,A}$ and $t_{a,\\eta}$ are isomorphisms: functors preserve an inverse, and tensoring the maps $P\\eta$ and $P\\eta^{-1}$ gives mutually inverse maps. Consequently $\\sigma_{a,b}=(G(\\eta)c_{b,a,A})^{-1}t_{a,\\eta}$ is invertible. Postcomposing the displayed equality by $\\sigma_{a,b}^{-1}$ proves exactly $t_{a,\\eta}\\sigma_{a,b}^{-1}=G(\\eta)c_{b,a,A}$. In particular no special normalization of the arbitrary isomorphism $\\eta$ has been imposed.",
+   "text": "For source cancellation put K equal to the existing dualizingCompositeModel of h, whose property follows by constructibleFiniteTor_dualizingComplex applied to the coefficient unit. Apply the assumed rho normalization at K. Expanding sigma and cancelling c.inv followed by c.hom gives exactly the required equation. Its right side is invertible because tensor sends the iso dualizingRhoUnit to an iso and the left unitor is invertible. Since c.hom and rho.hom.app K are invertible, IsIso.of_isIso_comp_right proves that sigma is invertible.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "def-pur-finite-exceptional-composition",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1: source-etale cancellation and tensor-unit/naturality calculation for the target-etale composition factor"
+   }
+  },
+  {
+   "text": "For each open restriction functor apply congrArg to the unit equality and the inverse or source-cancellation equality. Functor.map_comp yields exactly the displayed restricted equations. Functor.mapIso gives the specified restricted inverse, and functors preserve isomorphisms. Thus no additional operation-compatibility theorem or geometric hypothesis is used for these stated restriction clauses.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: etale normalization; explicit tensor-unit and naturality calculation"
-   }
-  },
-  {
-   "text": "For the additional hypotheses on $e$, write $s:W_e\\otimes Le^*W_h\\to Le^*W_h\\otimes W_e$ for symmetry. Expand the two specified maps and cancel $c_{h,e,A}c_{h,e,A}^{-1}$:\n$$E_{e,h}\\sigma_{e,h}=\\rho_{e,W_h}\\theta_{e,W_h}s=\\operatorname{unitor}(1\\otimes\\eta_e)s=\\operatorname{unitor}(\\eta_e\\otimes1).$$\nThe middle equality is precisely the assumed equation at $K=W_h$; the last is naturality of symmetry and the unit constraint. The final map is invertible since $\\eta_e$ is an isomorphism, and $E_{e,h}$ is invertible by Step 4 and the assumed natural isomorphism $\\rho_e$. Hence $\\sigma_{e,h}$ is invertible as well. Neither $h$ nor $e$ has been assumed smooth or oriented.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: etale normalization; explicit tensor-unit and naturality calculation"
-   }
-  },
-  {
-   "text": "For a restriction satisfying the compatibility required in the statement, apply the restriction functor to each displayed equality. It preserves compositions and identities; the image of an inverse is the inverse of the image since both inverse equations are preserved. The stipulated compatibilities identify the restricted $P,F,G$, coefficient-unit comparisons, tensor symmetry, unitors, projections, counits and $c$ with their restricted data. They also carry $P\\eta$, $G\\eta$, $\\rho_e$ and its normalization equation to the corresponding restricted maps. Thus Steps 1--6 become the same equations for the restrictions. This proves the claimed naturality for compatible open restriction; it does not assert the existence of an additional comparison not supplied in that compatibility hypothesis.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: etale normalization; explicit tensor-unit and naturality calculation"
+    "place": "Step 1: source-etale cancellation and tensor-unit/naturality calculation for the target-etale composition factor"
    }
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sf-open-tensor-normalization",
   "def-pur-co-smoothness",
-  "def-weil-exceptional-inverse-image",
-  "lem-weil-finite-compact-projection-formula",
-  "thm-sf-comp-composition",
-  "def-weil-pbc-adjunction-conjugate"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-exchange-projection",
+  "def-pur-finite-exceptional-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-exceptional-inverse-image"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "R6 stage 3",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-  "place": "Step 1: full formal expansion of the unit and tensor-transpose naturality calculations, using Stacks Tags 0B56, 0GL1, 0E8I and existing DAG lemmas"
+  "place": "Step 1; direct source-library projection unitality and adjunction tensor naturality, followed by explicit isomorphism cancellation and functorial transport in the canonical etale-origin coordinates"
  },
  "mathlib_searches": [
   {
@@ -200,44 +181,27 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-dualizing-unit-composite",
   "worker": "stage1",
-  "group": "Q116",
-  "summary": "Kept the statement and statement dependencies unchanged. Expanded the compactification projection at the unit, its exceptional-adjunction transpose, naturality at an arbitrary unit trivialization, and the conditional source normalization with all symmetries and inverses explicit. Reused existing ringed projection and open tensor normalization nodes; no new node and no smoothness or absolute separatedness assumption.",
+  "group": "Q96",
+  "summary": "Repair of the 5092-character proof return: extracted two independent comparable statement-only tasks, compactification transpose unitality/naturality and a general symmetric-monoidal transport/cancellation lemma. Kept the statement and stmt_deps unchanged; the parent only instantiates these tasks and the existing compositor/conjugation statements. The report preserves the full returned argument and its task allocation. Landing-return repair 2026-10-22: compared against the current live item and preserved its fields; re-read current compositor/conjugation statements and recorded the distinct newly arrived completed-target augmentation node sharing Tag 0B56. Delivery is rebuilt on the fetched current DAG.",
   "blueprint": "thm-pur-composition-coherence, current blueprint Proof Step 1: compatibility of the remaining comparison factors under etale local normal forms. Through lem-pur-diagonal-section-pasting and lem-pur-finite-etale-dualizing-normalization, realizes the source-etale cancellation and target-etale unit calculation of lem-pur-co-smooth-etale-locality, Step 1.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Generic counit-defined ringed-topos projection at the coefficient unit; the purity unit has no replacement for this direct-image normalization."
-   },
-   {
-    "node": "lem-sf-open-tensor-normalization",
-    "why": "Generic open-adjunction characterization of the actual tensor comparison; it identifies the compactification open factor at the coefficient unit without absolute separatedness."
-   },
-   {
-    "node": "lem-weil-finite-compact-projection-formula",
-    "why": "Finite-coefficient projection isomorphism and naturality on the specified constructible finite-Tor domain, used only as the operation theorem required by the definition of theta."
-   },
-   {
     "node": "thm-sf-comp-composition",
-    "why": "Generic compact-support compositor whose conjugate defines c; no smoothness or purity result substitutes for its invertibility."
+    "why": "Existing compact-support compositor gives the isomorphism whose conjugate supplies c; the new categorical cancellation lemma assumes an actual isomorphism c."
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sf-open-tensor-normalization",
-  "lem-weil-finite-compact-projection-formula",
-  "thm-sf-comp-composition"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q116-1c8ee9a28",
-  "group": "Q116",
+  "reviewer": "NT-cc-Q96-55f6b6e06",
+  "group": "Q96",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-1c8ee9a28 (reviewer sub-agent of L); spot-checked: First split of the Q81 statement-only node. Live and side-live have it unsplit; statement and stmt_deps are byte-identical to live. There are no new nodes and no fixes. Its 7 steps fully cover the parent's old Steps 6-7 from the Q152 base (theta_{a,A} = unitor, naturality at eta, the E sigma cancellation), with nothing dropped. Step 1: lem-weil-pbc-ringed-projection-mate-exact gives alpha_{R_Y} = 1 for the counit-defined proper factor, which is the map def-exchange-projection uses. lem-sf-open-tensor-normalization gives gamma^{-1} as the adjunct of u_M tensor 1, which at N = A is the adjunct of 1_{j_!M}, so PF^c_{M,A} = 1. Step 2: by the triangle identity the transpose of eps_A composed with F(x) is x, so theta_{a,A} is the canonical map. Step 3: I re-checked the naturality square for q_K. It needs PF^{-1}_{W,K}, which lem-weil-finite-compact-projection-formula gives on D^b_c x D^b_ctf, and W_b is ctf by def-weil-exceptional-inverse-image. Step 4: c is the conjugate of the iso alpha_{b,a} (direction checked), invertible by def-weil-pbc-adjunction-conjugate. Steps 5-6: recomputed G(eta)c sigma = rho(1 tensor P eta) = t and E sigma = lambda(eta_e tensor 1). Step 7: a functor preserves equations and inverses, using only the supplied compatibility data. Edge cases tested: identities, eta rescaled by a unit, e = id, empty schemes, n = 1, non-separated schemes. Stacks labels 0B56, 0GL1 and 0E8I are correct; no SGA is cited. Duplicate search with rg -L found no node stating this item. Accepted tool_uses: lem-sf-open-tensor-normalization and lem-weil-finite-compact-projection-formula are generic and off-route; ringed-projection and comp-composition are on-route. Batch-5 flag on lem-weil-finite-compact-projection-formula accepted: the chain ends at the generic lisse-module/FLC algebra lemma lem-pod-lisse-module-sheaves-as-module-objects; the projection formula is a six-functor foundation that neither assumption states; and the node is already in the base closure through def-pur-co-smoothness, fix-prop-projection-formula and its proof_deps. review_split 'no such node' messages come from the snapshot's symlinked chapter directories; all four nodes exist and were read."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-55f6b6e06 (reviewer sub-agent of L); spot-checked: Landing-return re-delivery of b025eabc (FIX). The two new nodes are byte-identical to b025, and the item differs only in split_report, so b025's FIX was lost. I re-applied it on this head. Live still has the old 7-step Q116 proof, the human re-split note is released, and neither new id is in live, so the delivery is not superseded. Re-split check: old Steps 1-3 (2412 chars) became lem-pur-compact-transpose-unit-naturality, old Steps 5-7 (2341 chars) became the categorical lem-pur-unital-tensor-transport-cancellation, and old Step 4 (compositor and conjugate) stays in the assembly. The two nodes are comparable in size, neither restates the item, all 7 old texts are kept verbatim in the report, and the assembly is 2748 chars. Node B checked by hand: G(η)cs=ϑ_1(Pη⊗1)β=λ_Wβ_{W,1}(1⊗uPη)=ρ_W(1⊗uPη)=t, and Es=ρ_{PT}β_{1,PT}(ζ⊗1)=λ_{PT}(ζ⊗1). The two hypotheses agree at K=1. Node A checked: q_K is the composite in def-pur-co-smoothness(2), PF^c at A_Y is the identity by mate-exact α_{R_Y}=1 and the open-tensor γ normalisation, and naturality comes from lem-weil-finite-compact-projection-formula. Edge cases tested: identity a, empty X, scalar η and r, and non-invertible c. Re-applied faults: (C1) Step 1 now names C=D^b_ctf(Y,A) with chosen object A_Y and D=D(X_proet,A) and cites lem-sf-ringed-derived-closed-symmetric-monoidal; its 249-node closure does not contain the item, so no cycle and no batch-5 change. Node B's C is relaxed to a category with a chosen object, since the monoidal structure of C is unused. (E1) Steps 2-3 now state W_b, W_h ∈ D^b_ctf by the finite-Tor preservation in def-weil-exceptional-inverse-image. Conjugate direction checked against def-weil-pbc-adjunction-conjugate: τ:Rb_!Ra_!→R(ba)_! gives c:R(ba)^!→Ra^!Rb^!. No SGA; source is blueprint main-20261015 lem-pur-co-smooth-etale-locality Step 1, plus Stacks 0B56/0GL1/0E8I. Advisory: lem-pur-tensor-map-naturality (Q90, created 2026-10-22) is the smooth special case of node A's naturality clause, not a duplicate; node A's PF^c-unit clause overlaps lem-pur-projection-formula-coefficient-coherence. Accepted tool_uses: the generic projection, open-tensor and compositor statements. Maintainer: this FIX was lost after the landing return; the group rebuilds from its delivered head.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.DualizingUnitComposite",
@@ -275,5 +239,27 @@
   "group": "Q27",
   "result": "pass",
   "note": "Re-delivery of 16b9a6c9cec6 RETURN (H2/theorem stmt_dep lem-pur-dnc-section-geometry used only for Dnc.invertibleExponent). Item module diff vs returned head: only the PurityDncComparisons import is dropped and the helper is swapped to finiteComparedInvertibleExponent; stmt_deps drop the dnc theorem and keep the previously accepted def-pur-finite-exceptional-composition; lean.statement is verbatim. Section 1(B) repair of def-pur-co-smoothness is additive only: 7 declarations byte-identical to live and side-live; the record changes only in lean (by, date, note appended, declarations superset); live equals the repair base, so nothing is overwritten. The new helper HasInvertibleExponent P.Coefficient T for any T over Spec k is true (n = l^level: zero in O_E/varpi^n, a unit in k since l != p; the same type is already proved as Dnc.invertibleExponent), is unconditional in the level, has a source/blueprint/proof docstring and no name clash. Independent re-read: theta_A unit clause with the unit comparison; sigma = dualizingComplexTensorMap followed by c.inv with the canonical conjugate compositor; arbitrary eta and exists s with s.hom = sigma and s.inv then t = c then a!(eta); rho on Dctf, normalized for all K, giving the E sigma clause and IsIso; j* open-restriction images per node Step 7; no absolute separatedness, smoothness or universe restriction. Report has the Worker report and a clause-by-clause Second reading by Q27 (H11 addressed). No compile needed (no file changed); the worker reports clean per-file compiles of 6.5 s and 29.4 s."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261022T144121-L-1501506",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

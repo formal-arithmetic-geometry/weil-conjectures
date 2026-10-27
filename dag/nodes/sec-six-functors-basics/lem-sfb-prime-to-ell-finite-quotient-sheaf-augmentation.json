@@ -1,0 +1,451 @@
+{
+ "id": "lem-sfb-prime-to-ell-finite-quotient-sheaf-augmentation",
+ "kind": "statement",
+ "title": "Sheafified finite-quotient scalar cochains and their augmentation",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E$, and $F\\in\\{E,\\Omega\\}$. Set $A(S)=C(S,F)$ with all continuous maps [def-sfb-continuous-map-condensed-ring], on the small coherent profinite site of [def-weil-size-convention]. Let $K$ be a compact Hausdorff totally disconnected topological group all of whose finite continuous quotients have order prime to $\\ell$, with trivial action on $F$. For $n\\geq0$ let $L_{pre}^n(S)$ be the $A(S)$-module of functions in $C(S\\times K^n,F)$ which factor in the group coordinates through $(K/U)^n$ for some open normal subgroup $U$ of $K$. Put $L_{pre}^n=0$ for $n<0$. Restriction is pullback in $S$. Use the trivial-action inhomogeneous differential, with $d^0=0$ and\n$$(dc)(s;g_1,\\ldots,g_{n+1})=c(s;g_2,\\ldots,g_{n+1})+\\sum_{a=1}^{n}(-1)^a c(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{n+1})+(-1)^{n+1}c(s;g_1,\\ldots,g_n).$$\nWrite $\\mathcal L_F^\\bullet(K)$ for degreewise sheafification, as ordinary internal $A$-modules [sk-def-sfb-module-objects], with its induced differential. Let $u_L:A[0]\\to\\mathcal L_F^\\bullet(K)$ be the identity in degree zero and zero in every other degree, where $[0]$ means concentration in degree zero. The actual morphism\n$$Q(u_L):A[0]\\longrightarrow Q(\\mathcal L_F^\\bullet(K))$$\nis an isomorphism in the ordinary derived category [sk-def-sfb-derived-categories], where $Q$ localizes at quasi-isomorphisms. More precisely, for every $n\\geq1$ and every local cocycle section of $\\mathcal L_F^n(K)$, there is a covering family on which it has representatives $\\bar c\\in C(S_i\\times Q_i^n,F)$, with $Q_i=K/U_i$ finite, satisfying $d\\bar c=0$. The cover and open normal subgroups can be refined simultaneously for a representative and its cocycle equation. Each such representative has the continuous primitive\n$$b(s;g_1,\\ldots,g_{n-1})=\\frac{(-1)^n}{|Q_i|}\\sum_{h\\in Q_i}\\bar c(s;g_1,\\ldots,g_{n-1},h),\\qquad db=\\bar c,$$\nwhich factors through the same finite quotient in the remaining group variables. These primitives witness equality of the image and kernel sheaves in every positive degree. For $n=1$ every such cocycle is zero. In degree zero $\\mathcal L_F^0(K)=A$ and $d^0=0$; there are no negative terms. The statements include empty test sets and $K=1$. All scalars and cochains retain the norm topology; no completeness, infinite average, or replacement of $\\Omega$-valued functions by finite-subextension-valued functions is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel input; old steps 4–5 of lem-sfb-prime-to-ell-condensed-acyclicity: local representatives, simultaneous refinement, signed finite averaging, image-kernel sheaves and the augmented derived isomorphism. Agent-formulated extraction; exact external reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-finite-quotient-scalar-cochains",
+  "def-sfb-parametrized-scalar-cochain-differential"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the continuous-cochain complex C, its finite-quotient subcomplex P, its degreewise sheafification L, the coordinates e and the comparison iota from lem-sfb-prime-to-ell-cochain-finite-quotient-descent. Use only this coordinate and sheafification data, not the derived-isomorphism conclusion. Define the additive coordinates of P by composing e with its injective inclusion. Define eta by the actual abelian sheafification unit followed by a.hom. The adjunction identities and the specified counit formula give eta followed by iota equal to the inclusion of P. Sheafification preserves monomorphisms, so iota and eta are injective. Naturality gives the restriction and differential formulas.",
+   "uses": [
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel input; agent-written finite-quotient sheaf argument."
+   }
+  },
+  {
+   "text": "For a positive-degree cocycle factoring through K/U, apply the finite clause of lem-sfb-scalar-cochain-averaging-primitives directly on K with the same U. The normed Q_ell-algebra is ultrametric, the compact totally disconnected group has an open normal basis, and hK gives the prime-to-ell quotient orders. The primitive is the required signed last-variable finite sum. Pullback along the surjective quotient map commutes with the inhomogeneous differential, so the quotient primitive has differential cbar. In degree one, the degree-zero differential is zero, hence cbar is zero. The exact finite-quotient image of P supplies the primitive as a P-section.",
+   "uses": [
+    "lem-sfb-scalar-cochain-averaging-primitives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel input; agent-written finite-quotient sheaf argument."
+   }
+  },
+  {
+   "text": "The image sieve of eta over a given section is covering, by Mathlib local surjectivity of the sheafification unit. For a sheaf cocycle, lift locally to P; naturality and the already proved injectivity of eta force its differential to vanish in P. Intersect its quotient subgroup with the arbitrary prescribed U0 and precompose the representative with the quotient homomorphism. Surjectivity of that quotient transfers the cocycle equation. This yields all the required local representatives on one covering without a second cover for local equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel input; agent-written finite-quotient sheaf argument."
+   }
+  },
+  {
+   "text": "Every presheaf cocycle in positive degree has a primitive by the same finite calculation. Mathlib objectwise exactness of additive-group presheaves and exact abelian sheafification give exactness of the sheafified complex. Transport along a and reflect exactness through the faithful exact forgetful functor from internal A-modules. For the scalar identity of eta, compose with the monomorphism iota, use linearity of iota under the section-module functor, and apply the coordinate scalar identity of C.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel input; agent-written finite-quotient sheaf argument."
+   }
+  },
+  {
+   "text": "Evaluation at the unique empty group tuple identifies C in degree zero with the regular A-module. Its linearity uses the compatibility of the monoid multiplication of an abelian ring sheaf with multiplication of ring sections (the proved source-library lemma Sheaf.μ_sheafToPresheaf_comp_map_mul_sheafCompose). All degree-zero cochains factor through the trivial quotient, so P to C and iota are isomorphisms in degree zero. Define z by these isomorphisms, prove the degree-zero differential vanishes, and form the actual augmentation by CochainComplex.fromSingle₀Equiv. Its degree zero is z and every higher component is zero. It is a quasi-isomorphism: in degree zero use the short-complex criterion, and in every positive degree use exactness. Extension by zero preserves quasi-isomorphisms; DerivedCategory.Q inverts the extended map. Apply the argument separately to E and Omega. All constructions and formulas include empty S and trivial K, with no completeness assumption.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel input; agent-written finite-quotient sheaf argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+  "lem-sfb-scalar-cochain-averaging-primitives",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "H8 stage-3 Lean proof: reuse the already stated comparison coordinate data, then prove finite primitives, local lifting, exactness, degree-zero identification and the actual augmentation. Generic sheafification, homology and localization APIs are from Mathlib; regular-module multiplication compatibility is a proved source-library lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(cohomology|cochain).*(averag|finite.*quotient)|(averag|finite.*quotient).*(cohomology|cochain)",
+   "results": {
+    "t": "2026-10-23T09:46:38Z",
+    "tool": "grep",
+    "query": "(cohomology|cochain).*(averag|finite.*quotient)|(averag|finite.*quotient).*(cohomology|cochain)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology, locally constant integer sequences and sheafification constructors do not state the augmented finite-quotient complex comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"IsZero\"",
+   "results": {
+    "t": "2026-10-23T09:46:39Z",
+    "tool": "loogle",
+    "query": "\"groupCohomology\", \"IsZero\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "isZero_groupCohomology_succ_of_subsingleton",
+     "groupCohomology.mono_δ_of_isZero",
+     "groupCohomology.epi_δ_of_isZero",
+     "groupCohomology.isIso_δ_of_isZero"
+    ],
+    "digest": "fd370da951672282"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology, locally constant integer sequences and sheafification constructors do not state the augmented finite-quotient complex comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of finite quotient profinite group cochains is quasi isomorphic to the trivial scalar sheaf via finite averaging",
+   "results": {
+    "t": "2026-10-23T09:46:39Z",
+    "tool": "leansearch",
+    "query": "Sheafification of finite quotient profinite group cochains is quasi isomorphic to the trivial scalar sheaf via finite averaging",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.isoSheafify",
+     "CategoryTheory.Sheaf.isColimitSheafifyCocone",
+     "PresheafOfModules.toSheafify",
+     "PresheafOfModules.sheafify",
+     "CategoryTheory.Sheaf.sheafifyCocone",
+     "LightProfinite.hasSheafify",
+     "PresheafOfModules.sheafification",
+     "PresheafOfModules.sheafifyMap"
+    ],
+    "digest": "411ea75b8bdfaade"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology, locally constant integer sequences and sheafification constructors do not state the augmented finite-quotient complex comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafified finite quotient continuous group cochain complex with trivial characteristic zero normed field coefficients has zero positive cohomology and constant degree zero",
+   "results": {
+    "t": "2026-10-23T09:46:41Z",
+    "tool": "leanfinder",
+    "query": "The sheafified finite quotient continuous group cochain complex with trivial characteristic zero normed field coefficients has zero positive cohomology and constant degree zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "isZero_groupCohomology_succ_of_subsingleton",
+     "groupCohomology",
+     "ContinuousCohomology.kerHomogeneousCochainsZeroEquiv",
+     "CategoryTheory.Sheaf.H",
+     "groupCohomology.π_comp_H0IsoOfIsTrivial_hom",
+     "groupCohomology.π_comp_H0IsoOfIsTrivial_hom_apply",
+     "groupCohomology.H2π_eq_zero_iff"
+    ],
+    "digest": "2979c4c25173ff53"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology, locally constant integer sequences and sheafification constructors do not state the augmented finite-quotient complex comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafif.*(quasiIso|exact)|((quasiIso|exact).*sheafif)",
+   "results": {
+    "t": "2026-10-23T09:47:31Z",
+    "tool": "grep",
+    "query": "sheafif.*(quasiIso|exact)|((quasiIso|exact).*sheafif)",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean"
+    ],
+    "digest": "5fd2b50060a3fe34"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology, locally constant integer sequences and sheafification constructors do not state the augmented finite-quotient complex comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotient cochains with continuous profinite parameter and trivial normed coefficients have local primitives after sheafification by the signed finite average",
+   "results": {
+    "t": "2026-10-23T09:47:36Z",
+    "tool": "leanfinder",
+    "query": "Finite quotient cochains with continuous profinite parameter and trivial normed coefficients have local primitives after sheafification by the signed finite average",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightCondAb.ofSheafLightProfinite",
+     "Condensed.lanSheafProfinite",
+     "Profinite.NobelingProof.CC_exact",
+     "Profinite.NobelingProof.Nobeling_aux",
+     "Condensed.isColimitLocallyConstantPresheaf_desc_apply",
+     "Condensed.isColimitLocallyConstantPresheafDiagram",
+     "CompHausLike.LocallyConstantModule.functor"
+    ],
+    "digest": "36a3e3e3ad007b32"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology, locally constant integer sequences and sheafification constructors do not state the augmented finite-quotient complex comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomology|cochain).*(averag|finite.*quotient)|(averag|finite.*quotient).*(cohomology|cochain)",
+   "results": {
+    "t": "2026-10-23T10:38:12Z",
+    "tool": "grep",
+    "query": "(cohomology|cochain).*(averag|finite.*quotient)|(averag|finite.*quotient).*(cohomology|cochain)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology and representation resolutions, or general sheafification constructors, do not state finite-quotient continuous scalar sheaf augmentation with local signed primitives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of finite quotient group cochains with continuous scalar parameters is quasi isomorphic to the scalar sheaf in degree zero",
+   "results": {
+    "t": "2026-10-23T10:38:12Z",
+    "tool": "leansearch",
+    "query": "Sheafification of finite quotient group cochains with continuous scalar parameters is quasi isomorphic to the scalar sheaf in degree zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.isColimitSheafifyCocone",
+     "PresheafOfModules.toSheafify",
+     "PresheafOfModules.sheafification",
+     "CategoryTheory.Sheaf.H",
+     "PresheafOfModules.sheafify",
+     "CategoryTheory.Sheaf.sheafifyCocone",
+     "PresheafOfModules.sheafifyMap",
+     "PresheafOfModules.Sheafify.map_smul_eq"
+    ],
+    "digest": "49943a4029ded2f2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology and representation resolutions, or general sheafification constructors, do not state finite-quotient continuous scalar sheaf augmentation with local signed primitives"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"IsZero\"",
+   "results": {
+    "t": "2026-10-23T10:38:12Z",
+    "tool": "loogle",
+    "query": "\"groupCohomology\", \"IsZero\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "isZero_groupCohomology_succ_of_subsingleton",
+     "groupCohomology.mono_δ_of_isZero",
+     "groupCohomology.epi_δ_of_isZero",
+     "groupCohomology.isIso_δ_of_isZero"
+    ],
+    "digest": "fd370da951672282"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology and representation resolutions, or general sheafification constructors, do not state finite-quotient continuous scalar sheaf augmentation with local signed primitives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified finite quotient continuous cochains of a profinite group with trivial normed characteristic zero field coefficients admit finite averaging primitives and the scalar augmentation is a quasi isomorphism",
+   "results": {
+    "t": "2026-10-23T10:38:13Z",
+    "tool": "leanfinder",
+    "query": "Sheafified finite quotient continuous cochains of a profinite group with trivial normed characteristic zero field coefficients admit finite averaging primitives and the scalar augmentation is a quasi isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightProfinite.hasSheafify_type",
+     "Rep.FiniteCyclicGroup.resolution_quasiIso",
+     "continuousCohomology",
+     "LightCondAb.ofSheafLightProfinite",
+     "ContinuousCohomology.homogeneousCochains"
+    ],
+    "digest": "e2b8e24df12865d9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology and representation resolutions, or general sheafification constructors, do not state finite-quotient continuous scalar sheaf augmentation with local signed primitives"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_groupCohomology_succ_of_subsingleton|instQuasiIsoNatεToSingle₀|def continuousCohomology|def sheafification",
+   "results": {
+    "t": "2026-10-23T10:38:55Z",
+    "tool": "grep",
+    "query": "isZero_groupCohomology_succ_of_subsingleton|instQuasiIsoNatεToSingle₀|def continuousCohomology|def sheafification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+     "Mathlib/CategoryTheory/Sites/LocallySurjective.lean"
+    ],
+    "digest": "9227e9690f346923"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology and representation resolutions, or general sheafification constructors, do not state finite-quotient continuous scalar sheaf augmentation with local signed primitives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group inhomogeneous cocycles with trivial characteristic zero coefficients have continuous primitives by signed finite averaging over the last variable",
+   "results": {
+    "t": "2026-10-23T10:38:56Z",
+    "tool": "leanfinder",
+    "query": "Finite group inhomogeneous cocycles with trivial characteristic zero coefficients have continuous primitives by signed finite averaging over the last variable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cocycles₁_map_mul_of_isTrivial",
+     "groupCohomology.cocyclesMk",
+     "groupCohomology.cocycles",
+     "groupCohomology.cocycles₁_map_one",
+     "groupCohomology.cocycles₂_map_one_fst",
+     "groupCohomology.mem_cocycles₁_of_addMonoidHom",
+     "groupCohomology.isCocycle₁_of_mem_cocycles₁",
+     "groupCohomology.mem_cocycles₁_iff"
+    ],
+    "digest": "aaf15de1ba904d32"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group cohomology and representation resolutions, or general sheafification constructors, do not state finite-quotient continuous scalar sheaf augmentation with local signed primitives"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-condensed-acyclicity",
+  "date": "2026-10-23",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel input; old steps 4–5 of lem-sfb-prime-to-ell-condensed-acyclicity: local representatives, simultaneous refinement, signed finite averaging, image-kernel sheaves and the augmented derived isomorphism. Agent-formulated extraction; exact external reference WANTED.",
+   "via": [
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-prime-to-ell-finite-quotient-sheaf-augmentation",
+  "worker": "stage1",
+  "summary": "Reused the existing scalar averaging primitive, general site local sheafification, underlying-set compatibility, exact module sheafification and derived localization. Wrote simultaneous local representatives/equations and canonical augmentation. No new nodes, statement changes, Lean writing or compilation.",
+  "blueprint": "Steps 1–5 realize the finite-quotient local averaging input of paragraph (3) of the latest direct-images proof, extracted from old steps 4–5 of lem-sfb-prime-to-ell-condensed-acyclicity. Whole-blueprint finite quotient, averaging and sheafification searches found no statement of this item. blueprint_refs.py ancestor returns None; inherited null ancestor and via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "General site sheafification supplies local representatives and local equality; this is a generic tool, and no statement of the scalar tame-kernel unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-2f7ef04b7",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-2f7ef04b7 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, every cited statement and the sources: Stacks sites.tex 00WB/00WK (lines 1975/2156) and sites-modules.tex lemma-sheafification-exact (line 874). The direct-images paragraph (3) is identical in latest and main-20261015 and does not state the lemma, so proof_origin=agent is correct. The statement is unchanged and true. Averaging over a finite group works because char F=0; I checked n=1 (cocycle is 0), n=2 (b=a/|Q|, db=c), n=3 (negative sign), K=1, S empty and degree 0 (L^0=A). Live still has the item unsplit, so nothing supersedes it. There are no new nodes and no SGA. The tool use of lem-weil-pbc-site-sheafification-sections-local (generic Stacks 00WB/00WK) is accepted. Step 3 meets every hypothesis of the finite clause of the averaging node (G=Q_i finite and prime to ell, P=S_i, V=E or Omega, no completeness). Step 4's presheaf exactness plus exact module sheafification is correct, and step 5's quasi-isomorphism is correct. C1/C4 fault: the statement's complex and D(Mod_A) are made of internal A-module objects, but steps 2-5 compute in sheaves of A-modules on the ringed site without citing the identification. FIX: step 4 now cites def-weil-pbc-internal-abelian-sheaf-module-equivalence (as the reviewed sibling lem-sfb-prime-to-ell-cochain-finite-quotient-descent does), with the exact-equivalence transport of kernel, image and cohomology; proof_deps = union of uses. No statement change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PrimeToEllFiniteQuotientSheafAugmentation",
+  "declaration": "Profinite.ContinuousScalarCochains.prime_to_ell_finite_quotient_sheaf_augmentation",
+  "declarations": [
+   "Profinite.ContinuousScalarCochains.HasFiniteQuotientSheafAugmentation",
+   "Profinite.ContinuousScalarCochains.prime_to_ell_finite_quotient_sheaf_augmentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PrimeToEllFiniteQuotientSheafAugmentation.lean",
+  "statement": "theorem prime_to_ell_finite_quotient_sheaf_augmentation (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (K : Type u) [Group K] [TopologicalSpace K] [IsTopologicalGroup K] [CompactSpace K] [T2Space K] [TotallyDisconnectedSpace K] (hK : ∀ (Q : Type u) [Group Q] [Fintype Q] [TopologicalSpace Q] [DiscreteTopology Q] (q : K →ₜ* Q), Function.Surjective q → Nat.Coprime (Nat.card Q) ell) : HasFiniteQuotientSheafAugmentation E K ∧ HasFiniteQuotientSheafAugmentation Ω K",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section-coordinate presentation of the canonical finite-quotient presheaf, its actual sheafification unit and scalar augmentation. Returned-head H4/H12 ownership repair: stmt_deps now cite existing definition nodes for FactorsThroughFiniteQuotient and scalarCochainDifferential, rather than the theorem nodes in their source modules. Lean source and signature are unchanged from 1e687f985aea. Includes all local refinement, finite primitive, degree-zero and derived clauses checked by the independent review."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-384d080ac",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery after review_split return of 25bb6ace8586 (cc PASS there). Only change vs 25bb: item proof_deps drops the unused lem-sfb-prime-to-ell-cochain-finite-quotient-descent; delivered proof_deps now equal live side-live proof_deps and the union of step uses (no H7). Lean module byte-identical to 1e687f98/25bb; re-read by me against the node: hypotheses match (normed alg closure, finite E, F∈{E,Ω} as a conjunction, compact T2 totally disconnected K, prime-to-ℓ finite discrete quotients), e has exactly the FactorsThroughFiniteQuotient image, scalarCochainDifferential signs incl. last face and d0=0, eta pinned to toSheafify, scalar action, z, uL, extendMap, IsIso Q.map, ExactAt, local refinement with U≤U0, primitive (-1)^{n+1}|K/U|⁻¹ finite tsum checked in degrees 1/2/3, empty S, K=1. New existing:true def nodes def-sfb-finite-quotient-scalar-cochains / def-sfb-parametrized-scalar-cochain-differential: signatures verbatim in side-live (lines 49/35), H12 fields OK, no duplicate owner; added stmt_dep internal-abelian equivalence has landed. Single sorry, statement verbatim, report sections present. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261025T060850-L-2379808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

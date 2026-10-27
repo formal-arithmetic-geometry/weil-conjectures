@@ -1,0 +1,131 @@
+{
+ "id": "lem-diagonal-completed-frame",
+ "kind": "statement",
+ "title": "Normalized completed coefficient frame",
+ "statement": "Let ell be prime, Y a scheme with ell invertible on global sections, and Y,P=P1_Y,W=P×_Y P Noetherian with the specified DiagonalTraceLocalizations. Fix the projection-normalized IntegralRoots maps at Y,P,W from [lem-diagonal-integral-root-map]. Given any three completed trace Results for q,p1,p2 and normalized supported sources for p1,p2 as in [det-prop-diagonal-tower-trace], there exist exact completed-to-condensed Z_ell equivalences at Y,P,W as in [def-sfb-diagonal-coefficient-reference], with those exact root maps, a normalized supported-source isomorphism, ordinary direct-image squares whose normalized derived squares are supplied by [lem-diagonal-completed-push-square] in the fixed canonical models [lem-diagonal-canonical-right-derived], and acyclic normalized supported sources on the condensed side. The supported-source derived squares commute. This assertion contains no diagonal arrow, trace morphism, integration equation or extension of coefficient fields.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-diagonal-canonical-right-derived",
+  "det-prop-diagonal-tower-trace",
+  "lem-diagonal-integral-root-map",
+  "lem-diagonal-completed-push-square"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), initial completed/condensed coefficient identification"
+ },
+ "proof": [
+  {
+   "text": "Map invertibility of l along the structure morphisms from P and W to Y. Obtain one completed realization at each of Y, P and W. The existing uniqueness theorem for IntegralRoots identifies their roots with the three prescribed roots.",
+   "uses": [
+    "lem-diagonal-completed-coefficient-realization",
+    "lem-diagonal-integral-root-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain normalized ordinary coefficient squares for q, p1, p2 and the diagonal. The existing derive construction supplies the canonical universal-unit derived square for each.",
+   "uses": [
+    "lem-diagonal-completed-ordinary-square",
+    "lem-diagonal-completed-push-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary diagonal square to construct the supported-source isomorphism. Its transport theorem gives its normalization and gives normalized condensed supported sources and their derived equations for p1 and p2 separately. Assemble all fields of CompletedFrame. No class or trace is chosen.",
+   "uses": [
+    "lem-diagonal-completed-supported-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-completed-coefficient-realization",
+  "lem-diagonal-completed-ordinary-square",
+  "lem-diagonal-completed-push-square",
+  "lem-diagonal-completed-supported-transport",
+  "lem-diagonal-integral-root-map"
+ ],
+ "proof_origin": {
+  "by": "K3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1); assembly from three independent coefficient-construction steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport integration identity through a natural transformation and endpoint isomorphisms; canonical right derived functor computed on K injective complexes; diagonal trace coefficient extension and uniformizer quotient annihilation",
+   "results": "Eight hits, including InjectiveResolution.isoRightDerivedObj and Functor.mapDerivedCategoryFactorsh_hom_app; none states the normalized diagonal comparison. The canonical K-injective unit API is reused.",
+   "date": "2026-10-24",
+   "verdict": "No complete existing diagonal coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits, including rightDerivedUnique and LocalizerMorphism.Derives construction APIs. These provide the canonical unit universal property; they do not assert the geometric coefficient endpoints.",
+   "date": "2026-10-24",
+   "verdict": "Use the published universal-property API for the canonical derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|canonicalDiagonalRightDerived|diagonalUniformizer_annihilator|diagonalCompleted_frame|diagonalCoefficientFamily_extension|diagonalCoefficient_uniformizerFiniteComparison",
+   "results": "Zero hits in the search service. Local rg of both roots found the definitions of Reference, Family and ScalarCompatibility but no constructions.",
+   "date": "2026-10-24",
+   "verdict": "New comparison components are necessary for this reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "date": "2026-10-24",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), initial completed/condensed coefficient identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletedFrame",
+  "file": "lean/Sheaf/Paper/DiagonalCompletedFrame.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCompleted_frame",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.condensedDiagonalRightDerived",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CompletedFrame",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCompleted_frame"
+  ],
+  "statement": "theorem diagonalCompleted_frame\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (rootsY : IntegralRoots l (bottomField l) Y)\n    (rootsP : IntegralRoots l (bottomField l) (ProjectiveLine Y))\n    (rootsW : IntegralRoots l (bottomField l) (diagonalSurface Y))\n    (tq : DiagonalTrace.Result l (ULift.{u} (Padic l)) (ProjectiveLine Y ↘ Y))\n    (t₁ : DiagonalTrace.Result l (ULift.{u} (Padic l))\n      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)))\n    (t₂ : DiagonalTrace.Result l (ULift.{u} (Padic l))\n      (pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)))\n    (a₁ : DiagonalTrace.SupportedSource l Y\n      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) t₁.Rc)\n    (a₂ : DiagonalTrace.SupportedSource l Y\n      (pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) t₂.Rc) :\n    Nonempty (CompletedFrame l Y rootsY rootsP rootsW tq t₁ t₂ a₁ a₂)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T183249-L-3697987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

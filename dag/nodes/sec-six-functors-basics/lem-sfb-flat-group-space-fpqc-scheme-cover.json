@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-flat-group-space-fpqc-scheme-cover",
+ "kind": "statement",
+ "title": "Fpqc schematic cover of a flat group space over a trait",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring] and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $G$ be an algebraic space over $S$ [def-trf-algebraic-space] with multiplication, identity and inverse satisfying the group identities, without assuming commutativity. Suppose $G\\to S$ is separated, flat and locally of finite type: its diagonal is representable by closed immersions [def-weil-closed-immersion], and flatness and local finite type are tested on etale scheme charts [def-weil-flat-morphism, def-weil-finite-type-morphism]. There is an fpqc morphism of schemes $p:T\\to S$ [def-weil-pbc-fpqc-covering] such that the sheaf fibre product $G_T=G\\times_ST$ [lem-trf-space-fibre-products-etale-covers] is represented, as a group sheaf, by a separated flat $T$-group scheme locally of finite presentation [def-sbc-locally-finite-presentation]. No quasi-compactness or smoothness of $G$ is assumed, and $T$ is not required to be Noetherian or of finite type over $S$.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Anantharaman, Schemas en groupes, espaces homogenes et espaces algebriques sur une base de dimension 1, Memoires SMF 33 (1973), 3.4.1, printed p.52 (OCR renders 3.4.1 as 5.4.1), including the normalization-in-an-algebraic-closure cover; local finite presentation and flatness are retained under base change. Local archive WANTED; primary scan read at https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$ and an etale scheme chart meeting the identity in the special fibre. Such a chart exists by the surjective atlas in [def-trf-algebraic-space]. By the hypotheses on $G$, every etale scheme chart is flat and locally of finite type over $S$. Since $R$ is Noetherian, [pqf-lem-locnoeth-lft] makes these charts locally Noetherian; thus $G$ is locally Noetherian. By [pqf-def-locnoeth], refine the chart near a point over the identity to a Noetherian affine chart $Y_0=\\operatorname{Spec}A$. Since $(\\pi)$ is proper in $A$, [lem-weil-pbc-minimal-prime-over-proper-ideal] supplies a prime $\\mathfrak q$ minimal over $(\\pi)$. By [lem-sfb-krull-principal-ideal-height-bound], $\\dim A_{\\mathfrak q}\\leq1$. Apply [lem-sfb-space-schematic-near-height-one] to this chart point: there is a scheme open $U\\subset G$ with $U_s\\ne\\varnothing$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-krull-principal-ideal-height-bound",
+    "lem-sfb-space-schematic-near-height-one",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0ADD, lemma-codim-1-point-in-schematic-locus; algebra.tex Tag 00KV, algebra-lemma-minimal-over-1. The special fibre is nonempty because of the identity section."
+   }
+  },
+  {
+   "text": "The scheme $U\\to S$ is flat and locally of finite type by the chartwise hypotheses. Apply [lem-weil-pbc-finite-type-noetherian-finite-presentation] on affine opens of $U$ to make it locally of finite presentation: finitely many polynomial relations suffice over the Noetherian ring $R$. By [lem-weil-pbc-flat-lfp-open] its image is open in $S$. It contains $s$, so it equals $S$, since an open subset of a trait containing its closed point also contains the generic point. In particular both $U_s$ and $U_\\eta$ are nonempty. The same finite-presentation argument applies to every affine etale chart of $G$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TX (locally finite type over a locally Noetherian base is locally of finite presentation) and 01UA (flat locally finitely presented morphisms are universally open)."
+   }
+  },
+  {
+   "text": "Take $B,T$ from [lem-sfb-trait-absolute-normalization-local-sections], and put $H=G\\times_ST$. By [lem-trf-space-fibre-products-etale-covers], $H$ is an algebraic space, the original atlas pulls back to an etale scheme atlas, and $U_T$ is a scheme. On each original affine chart $Y_i\\to S$, step 2 gives finite presentation (the map is affine, hence quasi-compact and quasi-separated). Apply the base-change clauses of [lem-sfb-space-flat-proper-fp-locality] to these charts: their pullbacks are flat and finitely presented over $T$. They prove chartwise flatness and local finite presentation of $H$. By [lem-sfb-space-separated-fp-composition] $H\\to T$ remains separated. The group operations and identities pull back as maps and equations of sheaves. For each $t\\in T$, $U_t$ is nonempty: it is the scalar extension of $U_s$ or $U_\\eta$, and a nonempty affine piece remains nonzero after a field extension (a basis vector survives tensoring). The point description in the normalization lemma makes all $\\kappa(t)$ algebraically closed.",
+   "uses": [
+    "lem-sfb-trait-absolute-normalization-local-sections",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03MO and 03XR, base change of flatness and finite presentation; Tag 03KL, base change of separatedness; Anantharaman 3.4.1 normalization cover."
+   }
+  },
+  {
+   "text": "Fix $t\\in T$ over $s$, and put $k=\\kappa(t)$. By [lem-sc-lft-over-field-jacobson-space] and [lem-weil-pbc-closed-point-residue-field-base], the nonempty locally finite type $k$-scheme $U_t$ has a $k$-point $u$. Let $x$ be any $k$-point of $H_t$ and form $g=xu^{-1}$ in the group $H_t(k)$. Pulling the etale atlas back to $g:\\operatorname{Spec}k\\to H_t$ gives a nonempty etale $k$-scheme by [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. It has a closed point, hence a $k$-point by the same two field-scheme lemmas; etaleness includes local finite presentation by [def-weil-etale-morphism]. Thus $g$ lifts to a $k$-point $y$ of some $(Y_i)_t$. Apply [lem-sfb-trait-absolute-normalization-local-sections] to the original flat locally finite type $R$-scheme $Y_i$ and this $y$. Its local section, followed by the atlas, gives $h:W\\to H$ over an open neighborhood $W$ of $t$, with $h_t=g$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-sfb-trait-absolute-normalization-local-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, quasi-sections as refined in the normalization lemma; varieties.tex Tag 0478; algebra.tex Tag 00FV. Anantharaman 3.4.1, lifting chart quasi-sections."
+   }
+  },
+  {
+   "text": "On $H_W$, left multiplication by $h$ is an automorphism: multiplication by the section $h^{-1}$ is its inverse, by the group identities on every scheme test. Hence the translate $hU_W$ is a scheme open of $H_W$, containing $x$ because $h_tu=(xu^{-1})u=x$. It is also a scheme open of $H$: for every scheme test $D\\to H$, first restrict to the open $D\\times_TW$, then take the inverse image of $U_W$ under multiplication by $h^{-1}$; this is an open subscheme of $D$. This verifies representability and openness directly, without any descent of schemes. Thus every rational point in every special fibre lies in a scheme open of $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Inherited trait-group helper below proof (3); elementary group translation and open-subfunctor scheme tests."
+   }
+  },
+  {
+   "text": "The generic open $D(\\pi)\\subset T$ is $\\operatorname{Spec}\\overline K$ by [lem-sfb-trait-absolute-normalization-local-sections]. The nonempty scheme $U_{\\overline K}$ has a rational point by [lem-sc-lft-over-field-jacobson-space] and [lem-weil-pbc-closed-point-residue-field-base]. For any $\\overline K$-point $x$ of $H_{\\overline K}$, translation by $xu^{-1}\\in H(\\overline K)$ sends this scheme open to a scheme open containing $x$. These are also opens of $H$, since the entire generic fibre is open. This treats generic points without asserting that an arbitrary generic group point extends to a section over $T$.",
+   "uses": [
+    "lem-sfb-trait-absolute-normalization-local-sections",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Absolute-normalization generic open; field-point existence from varieties.tex Tag 0478 and algebra.tex Tag 00FV; elementary group translation."
+   }
+  },
+  {
+   "text": "Let $L\\subset H$ be the largest scheme open from [lem-sfb-space-largest-schematic-open]; it contains all scheme opens from steps 5 and 6. For each $t\\in T$ pull $L_t$ back to each scheme of an etale atlas of $H_t$. Every closed point of that scheme is $\\kappa(t)$-rational by [lem-weil-pbc-closed-point-residue-field-base], so its image lies in $L_t$. The closed complement is therefore empty by [lem-sc-lft-over-field-jacobson-space]. Atlas surjectivity and [lem-a1-space-point-open-calculus] give $L_t=H_t$. Every point of $H$ lies over some $t\\in T$ and lifts to its fibre: the point fibre-product surjectivity in that same calculus, applied to $\\operatorname{Spec}\\kappa(t)\\to T$, gives such a lift. Thus $L$ has full point image, so $L=H$. Therefore $H$ is represented by a scheme. By [lem-galois-yoneda-fully-faithful] its sheaf group operations uniquely come from scheme morphisms, and faithfulness gives their identities; this gives a group scheme without commutativity. Step 3 gives its separatedness, flatness and local finite presentation, and the normalization lemma gives the required fpqc $T\\to S$.",
+   "uses": [
+    "lem-sfb-space-largest-schematic-open",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-a1-space-point-open-calculus",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JH, lemma-subscheme; Tags 03H4 and 03BZ, point fibre products and equality of open subspaces; varieties.tex Tag 0478."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-krull-principal-ideal-height-bound",
+  "lem-sfb-space-schematic-near-height-one",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sfb-trait-absolute-normalization-local-sections",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-etale-morphism",
+  "lem-sfb-space-largest-schematic-open",
+  "lem-a1-space-point-open-calculus",
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Agent assembly of Tag 0ADD, the absolute-normalization local-section input following Anantharaman 3.4.1, and cited scheme/topology lemmas. Primary scan read; Anantharaman local archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat separated locally finitely presented group algebraic space over a DVR becomes a scheme after an fpqc base cover",
+   "results": "{\"t\": \"2026-10-24T11:08:29Z\", \"tool\": \"leanfinder\", \"query\": \"A flat separated locally finitely presented group algebraic space over a DVR becomes a scheme after an fpqc base cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"2d0ff86286f98306\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat group algebraic space over a Dedekind scheme is representable after a faithfully flat quasi compact base change",
+   "results": "{\"t\": \"2026-10-24T11:08:30Z\", \"tool\": \"leansearch\", \"query\": \"A flat group algebraic space over a Dedekind scheme is representable after a faithfully flat quasi compact base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"Module.Flat.of_flat_tensorProduct\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"a99456f06bc6ddb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Fpqc\"",
+   "results": "{\"t\": \"2026-10-24T11:08:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Fpqc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fpqc.*represent|represent.*fpqc",
+   "results": "{\"t\": \"2026-10-24T11:08:30Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|fpqc.*represent|represent.*fpqc\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a trait in an algebraic closure makes a flat locally algebraic group space schematic",
+   "results": "{\"t\": \"2026-10-24T11:08:36Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a trait in an algebraic closure makes a flat locally algebraic group space schematic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"fda09d41c547a3b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated flat group algebraic space locally of finite type over a discrete valuation ring becomes a scheme after an fpqc base change",
+   "results": "{\"t\": \"2026-10-24T11:43:57Z\", \"tool\": \"leanfinder\", \"query\": \"A separated flat group algebraic space locally of finite type over a discrete valuation ring becomes a scheme after an fpqc base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"428ddeb17698c417\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme flatness, faithful flatness and stability under base change do not assert fpqc schematicity of a group algebraic space"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fpqc.*represent|represent.*fpqc",
+   "results": "{\"t\": \"2026-10-24T11:44:35Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|fpqc.*represent|represent.*fpqc\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme flatness, faithful flatness and stability under base change do not assert fpqc schematicity of a group algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat group algebraic space over a trait admits a faithfully flat quasi compact schematic base change",
+   "results": "{\"t\": \"2026-10-24T11:44:35Z\", \"tool\": \"leansearch\", \"query\": \"A flat group algebraic space over a trait admits a faithfully flat quasi compact schematic base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.instTensorProduct\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"3523a33e68e8ca2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme flatness, faithful flatness and stability under base change do not assert fpqc schematicity of a group algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Fpqc\"",
+   "results": "{\"t\": \"2026-10-24T11:44:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Fpqc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme flatness, faithful flatness and stability under base change do not assert fpqc schematicity of a group algebraic space"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-group-space-schematicity",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input, schematicity of the descended group space; 3.4.1, printed p.52 (OCR renders 3.4.1 as 5.4.1), including the normalization-in-an-algebraic-closure cover; local finite presentation and flatness are retained under base change",
+   "via": [
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-group-space-fpqc-scheme-cover",
+  "worker": "stage1",
+  "summary": "Kept the statement, constructed the absolute-normalization fpqc cover and an explicit translation cover. Added only two genuine prerequisites: schematic neighborhoods at local dimension at most one and local sections of flat trait schemes over the absolute normalization. Fieldwise coverage is checked on etale scheme atlases via Jacobson closed points, including a separate generic-open argument. No finiteness of the group or Noetherianness of the new base is used.",
+  "blueprint": "Historical inherited trait-group schematicity input below det-thm-sf-ctf-stability-direct-images proof (3), along the unchanged existing via chain. Steps 1-2 produce the schematic open, 3-4 the normalization and local chart sections, 5-7 translate and verify the open cover. The latest blueprint proof (3) was read; it contains no independent statement of either new helper.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic scheme or algebraic-space topology tool for the trait-group translation construction; no result about constructible six functors is used."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme or algebraic-space topology tool for the trait-group translation construction; no result about constructible six functors is used."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic scheme or algebraic-space topology tool for the trait-group translation construction; no result about constructible six functors is used."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic locally Noetherian scheme or representable-functor tool; used only to refine the chart or transfer group laws, not as a replacement for the six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "pqf-def-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-9fc97ac17",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-9fc97ac17 (reviewer sub-agent of L); spot-checked: I read the whole item and both new nodes, and checked them against the cited node statements and the sources. This is not a re-split: the base item had no proof, and its statement is unchanged. The seven steps are sound. Step 1: a prime minimal over (π) in a Noetherian affine chart through e(s) has height ≤1, and the new 0ADD node gives a scheme open U with U_s nonempty. Step 2: U is flat and lfp, so its image is open, which gives U_η nonempty. Step 3: the base-change uses of flat-proper-fp-locality and separated-fp-composition apply only to affine charts over an affine base, which is honest. Step 4: a rational point u of U_t exists by the Jacobson lemma plus the residue-field lemma; g=xu⁻¹ lifts to a k-point of a chart, and the new section node gives h:W→H with h_t=g. Step 5: the translate hU_W is a scheme open containing x, and representability is written out. Step 6: the generic open is Spec K̄ and is handled separately. Step 7: L is the largest schematic open; Jacobson on lft atlases gives L_t=H_t, point calculus gives L=H, and Yoneda transfers the group law. New node lem-sfb-space-schematic-near-height-one equals Stacks 0ADD (spaces-over-fields lemma-codim-1-point-in-schematic-locus): separated, locally Noetherian, local-ring dimension ≤1 at a chart point. It is not a duplicate: lem-sfb-separated-space-dimension-one-scheme is global over a field, and the 0ABI groupoid node is only an input. New node lem-sfb-trait-absolute-normalization-local-sections is true. B is flat and surjective, its points are 0 or maximal, B[1/π]=K̄, and its residue fields are algebraically closed. For the local sections: flatness gives a generization, a dominant quasi-finite component through y0 gives a valuation ring of K̄ extending R, Galois transitivity plus surjectivity of the decomposition group onto Aut(κ(t)/k) moves it to the prescribed t and embedding, and finite presentation spreads the map to D(b). Small cases checked: R[x]/(x²−π) works; the non-flat R[x]/(πx) shows the flatness hypothesis is necessary. Batch-5: every sec-trace-formula node in the closures of the flagged citations lies in unit sk-i-curve-zero or sk-lem-finite (algebraic-space foundations). None is a trace-formula or Poincaré-duality step, so the citations are accepted. Accepted tool_uses: def-trf-algebraic-space, pqf-def-locnoeth, lem-trf-space-fibre-products-etale-covers, lem-a1-space-point-open-calculus. No changes made. Note: blueprint.from.node is null, inherited along the existing via chain, as on base."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatGroupSpaceFpqcSchemeCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_fpqc_groupScheme_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatGroupSpaceFpqcSchemeCover.lean",
+  "statement": "theorem exists_fpqc_groupScheme_cover (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (G : AlgebraicSpace (Spec (CommRingCat.of R))) (F : (Over (Spec (CommRingCat.of R)))ᵒᵖ ⥤ GrpCat.{u}) (hF : Nonempty (F ⋙ forget GrpCat ≅ G.obj.obj)) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 G.obj.obj) (𝟙 G.obj.obj))) (hflat : ∀ (U : Over (Spec (CommRingCat.of R))) (a : yoneda.obj U ⟶ G.obj.obj), IsEtale a → Flat U.hom) (hlft : ∀ (U : Over (Spec (CommRingCat.of R))) (a : yoneda.obj U ⟶ G.obj.obj), IsEtale a → LocallyOfFiniteType U.hom) : ∃ (T : Scheme.{u}) (p : T ⟶ Spec (CommRingCat.of R)), Presieve.singleton p ∈ Scheme.fpqcPrecoverage (Spec (CommRingCat.of R)) ∧ QuasiCompact p ∧ ∃ (H : Over T) (_ : GrpObj H), IsSeparated H.hom ∧ Flat H.hom ∧ LocallyOfFinitePresentation H.hom ∧ Nonempty (yonedaGrpObj H ≅ (Over.map p).op ⋙ F)",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33efb6204",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean via the recorded deps (AlgebraicSpace/IsRepresentableWith/IsEtale, IsDiscreteValuationRing, Spec, IsClosedImmersion, Flat, LocallyOfFiniteType, fpqcPrecoverage, LocallyOfFinitePresentation); group law as GrpCat-valued F with hF iso to G.obj.obj (equivalent, noncommutative, no representability assumed); separated diagonal via closed-immersion IsRepresentableWith; chartwise flat/lft over all étale charts; conclusion ∃ T, p fpqc + QuasiCompact p (= 'fpqc morphism', true for affine normalization cover), ∃ H : Over T with GrpObj (Mathlib global scheme Over instance), separated/flat/lfp, group-presheaf iso yonedaGrpObj H ≅ (Over.map p).op ⋙ F = canonical G×_S T restriction (fibre-product dep records no bypassed def, no H4). Single universe u, all bound; no defs, sorry-only; docstrings with source/blueprint/7 steps; lines ≤100; imports resolve; node diff only lean, statement verbatim; Worker report + Second reading present. Not recompiled (no change)."
+ }
+}

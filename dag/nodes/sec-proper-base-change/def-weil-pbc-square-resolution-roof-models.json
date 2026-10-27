@@ -1,0 +1,134 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "def-weil-pbc-square-resolution-roof-models",
+ "kind": "definition",
+ "title": "Separated classical and raw resolution comparisons",
+ "statement": "For an injective resolution I of F on a scheme X, an open U, a restricted-resolution section comparison R [def-weil-pbc-flat-base-change-open-choices], and q≥0, define a_q from classical cohomology of F restricted to U to H^q(Γ(U,I extended by zero)). For f:X→Y, V open in Y and U=f⁻¹V, define b_f from this raw section cohomology to local hypercohomology of Rf_*F[0], using the normalized inverse-open and local Leray models [def-weil-pbc-derived-square-local-models]. Then the existing squareLocalResolutionComparison is a_q followed by b_f. These are compositions of specified actual isomorphisms, with no choices of unproved data.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4, 01FB, 0D5T and 0D5X; the indicated resolution and normalization calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-derived-square-local-models"
+ ],
+ "proof": [
+  {
+   "text": "Compose the standard right-derived resolution comparison, exact forgetful homology comparison, the prescribed R.sections, the extension homology comparison and mapExtendIso. This constructs the classical comparison a_q.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Eliminate U=f inverse V. Use the augmentation Iota of I to identify F[0] with Q(I), compute inverse-open hypercohomology on the K-injective complex I, then compose exact evaluation and inverse local Leray. This constructs b_f with the same normalization as squareLocalResolutionComparison.",
+   "uses": [
+    "def-weil-pbc-derived-square-local-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold these three isomorphism expressions. Functoriality of isomorphism composition, cancellation of identity transports and associativity give the factorization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-derived-square-local-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Resolution roofs of Tag 01FB, local sections of Tag 01E4, normalized derived compositions of Tags 0D5T and 0D5X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of local hypercohomology comparison for a coefficient map and derived direct image composition",
+   "results": "Eight generic sheaf-global-section, hypercover and homology naturality hits; no normalized comparison for the project coefficient square. Project rg found the exact comparison definitions and the classical cohomology roof implementation.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorOfQuasiIsoResolutionsObjIso\"",
+   "results": "No Mathlib hits. This is a project API; its definition and naturality calculation were read in the source.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localLerayComparison|rightDerivedFunctorOfQuasiIsoResolutionsObjIso",
+   "results": "No Mathlib hits. Local rg found UnboundedDirectImageSectionPresheaf, DerivedAdjunctionTopEdgeData, ModuleCohomologyFMap and its independence theorem. These give the ingredients, but do not state the new comparison equations.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareLocalHypercohomology",
+  "date": "2026-10-26",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison. Local hypercohomology of a normalized coefficient square; Separated classical and raw resolution comparisons",
+   "via": [
+    "lem-weil-pbc-square-local-hypercohomology",
+    "lem-weil-pbc-derived-square-local-classes",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareResolutionRoofModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareResolutionRoofModels.lean",
+  "declaration": "AlgebraicGeometry.squareResolutionCohomologyIso",
+  "declarations": [
+   "AlgebraicGeometry.squareResolutionCohomologyIso",
+   "AlgebraicGeometry.squareInjectiveLocalComparison",
+   "AlgebraicGeometry.squareLocalResolutionComparison_factor"
+  ],
+  "statement": "def squareResolutionCohomologyIso {X : Scheme.{u}} {F : X.Modules}\n    (I : InjectiveResolution F) (U : X.Opens) (R : RestrictedResolutionSections I U)\n    (q : ℕ) :\n    (forget₂ _ AddCommGrpCat.{u}).obj\n        ((RingedSpace.moduleCohomology U.toScheme.toRingedSpace q).obj\n          ((restrictFunctor U.ι).obj F)) ≅\n      (((RingedSpace.openModuleSections X.toRingedSpace U).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj I.cochainComplex).homology (q : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T111935-L-1782906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T111935-L-1782906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

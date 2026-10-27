@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-affine-group-homomorphism-image",
+ "kind": "statement",
+ "title": "Rational-point criterion for faithful flatness of affine group homomorphisms",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], smoothness as in [def-sbc-smooth-morphisms], and finite type as in [def-weil-finite-type-morphism]. Let $H_1,H_2$ be affine $F$-group schemes of finite type, with $H_2$ smooth, and let $f:H_1\\to H_2$ be a homomorphism. Then $f$ is faithfully flat if and only if the group homomorphism $f:H_1(F)\\to H_2(F)$ is surjective. Faithfully flat means that the induced map of coordinate algebras makes the target algebra a faithfully flat module: extension of scalars is exact and detects zero modules. ",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.47, printed p.110 (with Theorem 5.39 for the image used in its proof)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=F[H_2]$, $B=F[H_1]$, and let $\\alpha:A\\to B$ be induced by $f$. Assume $\\alpha$ faithfully flat. A point $y\\in H_2(F)$ gives $y^*:A\\to F$ with maximal kernel $\\mathfrak m$. By [lem-weil-pbc-faithfully-flat-surjective-spectrum], some prime $\\mathfrak p\\subset B$ contracts to $\\mathfrak m$. Choose a maximal ideal $\\mathfrak n\\supseteq\\mathfrak p$. Its contraction is proper and contains $\\mathfrak m$, hence equals $\\mathfrak m$. By clause (1) of [lem-wf-affine-nullstellensatz-vanishing], $B/\\mathfrak n=F$ as an $F$-algebra. The resulting $x^*:B\\to F$ satisfies $x^*\\alpha=y^*$: both factor through $A/\\mathfrak m=F$ and are $F$-algebra maps. Thus $f(x)=y$. No smoothness of $H_1$ or $H_2$ was used in this direction.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.47, printed p.110; affine image factorization Theorem 3.34, printed p.75"
+   }
+  },
+  {
+   "text": "Conversely assume $f:H_1(F)\\to H_2(F)$ surjective. Apply [lem-sfb-affine-homomorphism-flat-image] to write $f=j\\circ q$ (its $u$ is written $q$ here) with $q:H_1\\to I$ faithfully flat on coordinate algebras and $j:I\\hookrightarrow H_2$ a closed immersion. Both groups are affine of finite type, exactly the hypotheses of that node; it permits a nonreduced source. By [def-weil-closed-immersion], write $I=\\operatorname{Spec}(A/J)$ for an ideal $J\\subset A$. Every $y\\in H_2(F)$ equals $j(q(x))$ for some $x\\in H_1(F)$, so $y^*(a)=0$ for every $a\\in J$.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.47, printed p.110; affine image factorization Theorem 3.34, printed p.75"
+   }
+  },
+  {
+   "text": "The structure morphism of $H_2$ is smooth. By [sbc-lem-smooth-geometrically-reduced] its fibre over the unique point of $\\operatorname{Spec}F$, namely $H_2$, is geometrically reduced, hence reduced. By [def-pc-reduced-scheme] its global coordinate ring $A$ is reduced. Clause (2) of [lem-wf-affine-nullstellensatz-vanishing] now gives $a=0$ for every $a\\in J$, since step 2 showed vanishing at all $F$-points. Thus $J=0$. The coordinate map $A\\to A/J$ is an isomorphism, and $\\alpha$ identifies with the faithfully flat coordinate map of $q$. Hence $f$ is faithfully flat, completing the equivalence.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.47, printed p.110; affine image factorization Theorem 3.34, printed p.75"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "def-weil-closed-immersion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.47, printed p.110; affine image factorization Theorem 3.34, printed p.75"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homomorphism of affine algebraic groups factors as faithfully flat map and closed immersion; surjectivity on algebraically closed points characterizes faithful flatness for smooth target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map f) ∧ AlgebraicGeometry.Surjective (AlgebraicGeometry.Spec.map f) ↔\\n    (CommRingCat.Hom.hom f).FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient maps of smooth algebraic groups are faithfully flat and surjective on rational points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map f) ∧ AlgebraicGeometry.Surjective (AlgebraicGeometry.Spec.map f) ↔\\n    (CommRingCat.Hom.hom f).FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Surjective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"Given a pushout diagram of commutative rings with a faithfully flat homomorphism $ R \\to R' $ and a surjective homomorphism $ R' \\to S' $, the induced homomorphism $ R \\to S $ is surjective. This establi\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any commutative ring $ R $ and a commutative $ R $-algebra $ A $ that is smooth over $ B $, there exists a finitely generated $ R $-subalgebra $ A_0 $ of $ A $ such that $ A_0 $ is smooth over $ B\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"FaithfullyFlat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "group.*homomorphism.*image|GroupScheme.*[Ff]lat",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"line\": \"79\", \"text\": \"/-- If `φ` is mono, it is a normal group homomorphism if and only if for all `X` the image of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homomorphism of affine algebraic groups factors as faithfully flat map and closed immersion; surjectivity on algebraically closed points characterizes faithful flatness for smooth target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": f.FaithfullyFlat ↔ f.Flat ∧ Function.Surjective (PrimeSpectrum.comap f)\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is faithfully flat if and only if it is flat and the induced map on prime spectra $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ is\"}\n  {\"name\": \"Module.FaithfullyFlat.of_comap_surjective\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra\", \"type\": \"[Flat A B] (h : Function.Surjective (PrimeSpectrum.comap (algebraMap A B))) : Module.FaithfullyFlat A B\", \"doc\": \"If the induced map on prime spectra given by taking preimages under the canonical algebra homomorphism $ A \\\\to B $ is surjective, then $ B $ is a faithfully flat $ A $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"RingHom.faithfullyFlat_algebraMap_iff\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"[Algebra R S] : (algebraMap R S).FaithfullyFlat ↔ Module.FaithfullyFlat R S\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, the canonical algebra homomorphism $ R \\\\to S $ is faithfully flat if and only if $ S $ is a faithfully flat $ R $-module\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{R S : CommRingCat.{u}} (f : R ⟶ S) : Flat (Spec.map f) ∧ Surjective (Spec.map f) ↔ f.hom.FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Spec_faithful\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": Spec.Faithful\", \"doc\": \"The contravariant Spec functor from the opposite category of commutative rings to the category of affine schemes is faithful, meaning that for any commutative rings $R$ and $S$, the induced map from r\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{f : X ⟶ Y} : IsClosedImmersion f ↔ IsAffineHom f ∧ ∀ U : Y.Opens, IsAffineOpen U → Function.Surjective (f.app U)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is a closed immersion if and only if it is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism on sections $\\\\mathcal{O}_Y(U\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, individual Hopf algebra structures, or scheme morphism properties; none states this affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between finite type affine group schemes over an algebraically closed field with smooth target is faithfully flat if and only if surjective on rational points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map f) ∧ AlgebraicGeometry.Surjective (AlgebraicGeometry.Spec.map f) ↔\\n    (CommRingCat.Hom.hom f).FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Surjective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"Given a pushout diagram of commutative rings with a faithfully flat homomorphism $ R \\to R' $ and a surjective homomorphism $ R' \\to S' $, the induced homomorphism $ R \\to S $ is surjective. This establi\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FaithfullyFlat ↔ f.Flat ∧ Function.Surjective (PrimeSpectrum.comap f)\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is faithfully flat if and only if it is flat and the induced map on prime spectra $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ is\"}\n  {\"name\": \"Module.FaithfullyFlat.of_specComap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be commutative rings, and suppose $ B $ is an $ A $-algebra that is flat as an $ A $-module. If the induced map on prime spectra, given by taking preimages under the algebra homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine flat-and-surjective criteria and abstract group images do not supply group-scheme image factorization or the rational-point criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"FaithfullyFlat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: affine flat-and-surjective criteria and abstract group images do not supply group-scheme image factorization or the rational-point criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "group.*homomorphism.*image|GroupScheme.*[Ff]lat",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"line\": \"79\", \"text\": \"/-- If `φ` is mono, it is a normal group homomorphism if and only if for all `X` the image of\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine flat-and-surjective criteria and abstract group images do not supply group-scheme image factorization or the rational-point criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism between finite type affine group schemes is faithfully flat if and only if surjective on algebraically closed points for smooth target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": f.FaithfullyFlat ↔ f.Flat ∧ Function.Surjective (PrimeSpectrum.comap f)\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is faithfully flat if and only if it is flat and the induced map on prime spectra $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ is\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{R S : CommRingCat.{u}} (f : R ⟶ S) : Flat (Spec.map f) ∧ Surjective (Spec.map f) ↔ f.hom.FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.iff_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \"[IsAffine X] [IsAffine Y] : SurjectiveOnStalks f ↔ RingHom.SurjectiveOnStalks (f.app ⊤).hom\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is surjective on stalks if and only if the corresponding ring homomorphism between their global sections is surjective on stalks.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.ofHom\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X Y : Scheme} [IsAffine X] [IsAffine Y] (f : X ⟶ Y) : AffineScheme.of X ⟶ AffineScheme.of Y\", \"doc\": \"Given a morphism $ f : X \\to Y $ between two affine schemes $ X $ and $ Y $, this function constructs the corresponding morphism in the category of affine schemes by leveraging the fact that affine sch\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine flat-and-surjective criteria and abstract group images do not supply group-scheme image factorization or the rational-point criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For smooth affine algebraic target groups, surjectivity on algebraically closed rational points implies the group morphism is a quotient map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f)) →\\n    AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If $ X $ and $ Y $ are affine schemes and the morphism $ f : X \\to Y $ induces a surjective map on global sections, then $ f $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme}, Function.Surjective AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"doc\": \"The function converting partial maps between schemes $X$ and $Y$ to rational maps is surjective, meaning every rational map from $X$ to $Y$ can be represented by at least one partial map defined on an\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.specTargetImageRingHom f))\", \"doc\": \"The ring homomorphism associated to the target image of a morphism of schemes is surjective, i.e., for a morphism $ f $ of schemes, the induced ring homomorphism $ \\\\operatorname{specTargetImageRingHom\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Surjective ⇑P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine flat-and-surjective criteria and abstract group images do not supply group-scheme image factorization or the rational-point criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-torus-semisimple-derived-product",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Rational-point criterion for faithful flatness of affine group homomorphisms.",
+   "via": [
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-group-homomorphism-image",
+  "worker": "stage1",
+  "summary": "Followed Milne Proposition 5.47, replacing the general image theorem by its affine instance 3.34. Cited the existing affine image factorization node lem-sfb-affine-homomorphism-flat-image (Milne 3.34) for step 2; reused existing Nullstellensatz, faithful-flat spectrum surjectivity and smooth reduced-fibre nodes. Kept every hypothesis and the original statement.",
+  "blueprint": "The inherited null blueprint ancestor is retained. This is a supporting algebraic-group input to the central torus/derived multiplication argument in the plurinodal alteration prerequisite of direct-image stability; steps realize Milne 5.47 in the inherited from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic affine finite-type Nullstellensatz, used for rational maximal ideals and zero functions; this unit supplies no algebraic substitute."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-geometrically-reduced fact, used solely to make the smooth target coordinate algebra reduced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-777b71648",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-777b71648 (reviewer sub-agent of L); spot-checked: Read in full: Milne iAG2017 Prop 5.47 (printed p.110) and Thm 3.34 (p.75, which uses 3.14 and 3.31). All three steps are correct against the cited statements. Step 1: 00HQ spectrum surjectivity, a maximal ideal over the prime contracting to m, then Nullstellensatz clause (1) applied to the finitely generated algebra B. Step 2: a closed immersion into affine H2 gives I=Spec(A/J), and surjectivity on points gives y*(J)=0. Step 3: smoothness gives a geometrically reduced fibre H2, so A is reduced, Nullstellensatz clause (2) gives J=0, and alpha is faithfully flat. Edge cases checked: 1->alpha_p shows the smoothness hypothesis is needed; Frobenius on Ga and alpha_p->1 agree with the statement. One fault, C5: the new node lem-sfb-affine-group-faithfully-flat-image-factorization is a verbatim duplicate of the base node lem-sfb-affine-homomorphism-flat-image (same Milne 3.34, same hypotheses, same conclusion and stmt_deps, same unit). The report wrongly says no such node exists. The fix drops the new node. In the item, step 2 and proof_deps now cite lem-sfb-affine-homomorphism-flat-image, and the split_report summary is updated. This creates no cycle, since the existing node has no proof deps. The item statement is unchanged, no SGA is cited, and the tool_uses (Nullstellensatz, smooth geometrically reduced) are accepted as generic.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineHomRationalPoints",
+  "declaration": "AlgebraicGeometry.affineGroupHom_faithfullyFlat_iff_surjective_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineHomRationalPoints.lean",
+  "statement": "theorem affineGroupHom_faithfullyFlat_iff_surjective_points (F : Type u) [Field F] [IsAlgClosed F] (H₁ H₂ : Over (Spec (.of F))) [GrpObj H₁] [GrpObj H₂] [IsAffine H₁.left] [IsAffine H₂.left] [LocallyOfFiniteType H₁.hom] [QuasiCompact H₁.hom] [LocallyOfFiniteType H₂.hom] [QuasiCompact H₂.hom] [Smooth H₂.hom] (f : H₁ ⟶ H₂) [IsMonHom f] : f.left.appTop.hom.FaithfullyFlat ↔ Function.Surjective (fun x : Over.mk (𝟙 (Spec (.of F))) ⟶ H₁ ↦ x ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bca5712af",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Node vs Lean clause by clause: IsAlgClosed F; GrpObj on Over (Spec F); IsAffine; LocallyOfFiniteType+QuasiCompact for both; Smooth only on H2.hom; IsMonHom f; appTop.hom.FaithfullyFlat (Γ(H2)→Γ(H1), Module.FaithfullyFlat via toModule); surjectivity of x ↦ x ≫ f on F-points Over.mk (𝟙 Spec F); iff. No extra or missing hypotheses, single universe u. Edge cases: trivial group, Frobenius on G_a, α_p→1 consistent; 1→α_p shows target smoothness is needed. Item node differs from side-live only in lean; statement verbatim; name new. Sorry-only proof, docstrings with source and blueprint and proof steps, lines ≤100, plain imports = proof-dep modules (brief rule 7); lem-sfb-affine-homomorphism-flat-image has no Lean record yet. Report has Worker report and Second reading. No compile (no fix); worker compiled clean."
+ }
+}

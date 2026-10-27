@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-restricted-pbw-top-pairing",
+ "kind": "statement",
+ "title": "Restricted PBW basis and top coefficient pairing for a Borel radical",
+ "statement": "Let $F$ be an algebraically closed field of prime characteristic $p>0$ [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected normal unipotent subgroup. Fix a split maximal torus $T\\subseteq B\\subseteq G$, with $B$ a Borel subgroup and $U=R_u(B)$ its unipotent radical, and character lattice $X=X^*(T)$ and positive roots $\\Psi^+$ as in [lem-sfb-reductive-borel-pair-structure]. Here split means a product of copies of $\\mathbf G_m$, Borel means maximal smooth connected solvable closed subgroup, and unipotent radical means the largest smooth connected normal unipotent subgroup; unipotent means unipotent geometric matrices in a faithful representation. Choose an ordering $\\beta_1,\\ldots,\\beta_N$ of $\\Psi^+$ and root parametrizations $x_{\\beta_i}:\\mathbf G_a\\simeq U_{\\beta_i}$ [lem-sfb-reductive-root-subgroup-parametrizations]. Put $e_i=(dx_{\\beta_i})_0(1)\\in\\mathfrak u=\\operatorname{Lie}(U)$, the tangent Lie algebra, with restricted operation $x^{[p]}$ given by the $p$th iterate of its invariant derivation. Define $A=u(\\mathfrak u)$ as the quotient of the tensor algebra by $xy-yx-[x,y]$ and $x^p-x^{[p]}$. Conjugation by $T$ acts on $A$; a weight $\\gamma\\in X$ means the character identity $ta=\\gamma(t)a$ after every commutative $F$-algebra extension. Then the ordered monomials\n$$e_1^{a_1}\\cdots e_N^{a_N}\\quad(0\\leq a_i<p)$$\nform an $F$-basis of $A$ and are weight vectors of weight $\\sum_i a_i\\beta_i$. Put $z=e_1^{p-1}\\cdots e_N^{p-1}$, and let $L:A\\to F$ take the coefficient of $z$ in this basis. The bilinear pairing $(a,b)\\mapsto L(ab)$ is nondegenerate in both arguments. The weight space of weight $\\tau=(p-1)\\sum_i\\beta_i$ is exactly $Fz$, and $L$ is zero on every other weight space. For $N=0$ these statements mean $A=F$, $z=1$, and $L=\\operatorname{id}_F$.",
+ "source": {
+  "document": "literature/mathieu-tilting-modules-2000.pdf",
+  "place": "Theorem 1.2 and Corollary 1.3, printed p.149, applied to a Borel unipotent radical; root coordinates in Milne 21.68 and 21.84. WANTED: Mathieu is not stored locally; read online at https://www.imsc.res.in/~knr/vdk/mathieu.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-borel-root-product-coordinates] to the given reductive Borel pair and the chosen order of all its positive roots. Composing its scheme isomorphism with the parametrizations $x_{\\beta_i}$ and taking tangent vectors at the identity gives an isomorphism $F^N\\to\\mathfrak u$ sending the $i$th standard vector to $e_i$: on dual numbers, multiplication of tangent vectors is addition. Thus the $e_i$ form an ordered basis. Apply [lem-sfb-restricted-rational-differentiation] to the smooth affine finite-type group $U$; its invariant-derivation operation makes this tangent Lie algebra a restricted Lie algebra with exactly the operation in the statement.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-restricted-rational-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.68(a), p.445; invariant derivations, 10.29 and the paragraph before 11.36, pp.195--196 and 223."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sfb-restricted-pbw-basis] now hold for $L=\\mathfrak u$ with this ordered basis; its tensor quotient is precisely $A$. It gives the asserted basis. The conjugation formula in [lem-sfb-reductive-root-subgroup-parametrizations], evaluated on dual numbers over an arbitrary commutative $F$-algebra $R$, gives $t e_i=\\beta_i(t)e_i$. Conjugation acts on the tensor quotient: it preserves brackets, and on invariant derivations the identity $(CDC^{-1})^p=CD^pC^{-1}$ preserves the restricted relations. This identity works over $R$ as well. Multiplication therefore gives $t e^a=(\\sum_i a_i\\beta_i)(t)e^a$ in $A\\otimes_FR$. In particular these are character weights, not differentiated characters.",
+   "uses": [
+    "lem-sfb-restricted-pbw-basis",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.40, p.207; root conjugation identity (135), 21.19, p.431; functoriality by conjugating invariant derivations."
+   }
+  },
+  {
+   "text": "Put $D=N(p-1)$ and $P_d=\\operatorname{span}_F\\{e^a:0\\leq a_i<p,\\ |a|\\leq d\\}$, with $P_d=0$ for $d<0$. Apply [lem-sfb-bounded-monomial-straightening] with $y_i=e_i$ and $q=p$. Its bounded-basis hypothesis is step 2. Its other hypotheses hold since $e_je_i-e_ie_j=[e_j,e_i]$ and $e_i^p=e_i^{[p]}$ lie in the span of the $e_i$. It gives the degree bound and both leading-product formulas. Since the sole bounded monomial of degree $D$ is $z$, the basis also gives $A=P_D$ and $L(P_{D-1})=0$.",
+   "uses": [
+    "lem-sfb-bounded-monomial-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Degree tracking in the reordering of 10.36 and restricted reduction of 10.40, pp.200--207."
+   }
+  },
+  {
+   "text": "Write a nonzero $v\\in A$ as $\\sum_c v_c e^c$. Choose an exponent $a$ of maximal total degree $d$ with $v_a\\ne0$, and put $b_i=p-1-a_i$, so $|b|=D-d$. For $|c|<d$, the degree bound in step 3 puts both $e^ce^b$ and $e^be^c$ in $P_{D-1}$. If $|c|=d$, their leading terms are given by that step. An overflow in $c+b$ puts both products in $P_{D-1}$. Otherwise $c+b$ is bounded and has degree $D$, forcing every entry to equal $p-1$, hence $c=a$. For $c=a$, each product is $z$ modulo $P_{D-1}$. Consequently $L(ve^b)=v_a=L(e^bv)\\ne0$. This proves nondegeneracy in each argument without assuming the multiplication is commutative or the pairing symmetric.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/mathieu-tilting-modules-2000.pdf",
+    "place": "Corollary 1.3(ii), p.149; the complementary-exponent calculation spelling out the filtered-to-graded argument."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-regular-cocharacter-borel-description] for this same Borel pair to choose a regular cocharacter $\\lambda$ with $B=P(\\lambda)$. Its Lie-weight formula says $h_i=\\langle\\beta_i,\\lambda\\rangle>0$ for every positive root. If a bounded exponent $a$ has $\\sum_i a_i\\beta_i=\\tau$, pairing the difference with $\\lambda$ gives $\\sum_i(p-1-a_i)h_i=0$. All summands are nonnegative integers and each $h_i>0$, so every $a_i=p-1$. To identify weight spaces, use the universal point of $T$ over $F[T]$. For a vector $v=\\sum_a v_a e^a$ of character weight $\\gamma$, comparison of its coordinates in the scalar-extended basis gives $v_a(\\chi_a-\\gamma)=0$ in $F[T]$, where $\\chi_a=\\sum_i a_i\\beta_i$. Whenever $v_a\\ne0$, its invertibility as a scalar forces equality of the two character functions. Thus a weight space is spanned by precisely the basis vectors of that character. The preceding integer calculation gives $A_\\tau=Fz$, and a vector in any other weight space has zero $z$ coefficient, so $L$ vanishes there.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.32 and Definition 21.35, pp.434--435; positive-character height applied to the PBW weights."
+   }
+  },
+  {
+   "text": "If $N=0$, step 1 gives $U=1$ and $\\mathfrak u=0$, while step 2 gives the single basis element $1$. Hence $A=F$, $z=1$ and $L=\\operatorname{id}_F$. Its product pairing is nondegenerate since $L(v\\cdot1)=v=L(1\\cdot v)$, and the only weight is $\\tau=0$. This also verifies directly the negative-filtration-index convention $P_{-1}=0$ used above.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Empty-root instance of Theorem 21.68(a) and empty-basis instance of Theorem 10.40."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-restricted-rational-differentiation",
+  "lem-sfb-restricted-pbw-basis",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-bounded-monomial-straightening",
+  "lem-sfb-regular-cocharacter-borel-description"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne 10.36, 10.40 and 21.68 for the PBW route; explicit complement and weight-space calculations completing Mathieu Corollary 1.3 (read online, not stored locally)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restricted|PBW|Frobenius",
+   "results": "6 hits; Mathlib/Algebra/Lie/Submodule.lean, Mathlib/Algebra/Lie/TraceForm.lean, Mathlib/Algebra/Lie/Weights/Cartan.lean, Mathlib/Algebra/Lie/Weights/Killing.lean, Mathlib/Algebra/Lie/Weights/Killing.lean, Mathlib/Algebra/Lie/Free.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary enveloping algebras, abstract group representations, characteristic-zero Lie weights, or unrelated bilinear forms; none states restricted PBW/top pairing or the Steinberg theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalEnvelopingAlgebra",
+   "results": "12 hits; UniversalEnvelopingAlgebra, instInhabitedUniversalEnvelopingAlgebra, instRingUniversalEnvelopingAlgebra, instAlgebraUniversalEnvelopingAlgebra, UniversalEnvelopingAlgebra.ι, UniversalEnvelopingAlgebra.lift, UniversalEnvelopingAlgebra.mkAlgHom, UniversalEnvelopingAlgebra.hom_ext",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary enveloping algebras, abstract group representations, characteristic-zero Lie weights, or unrelated bilinear forms; none states restricted PBW/top pairing or the Steinberg theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted enveloping algebra of a finite dimensional restricted Lie algebra has truncated PBW basis and a nondegenerate top degree coefficient pairing",
+   "results": "8 hits; RootPairing.GeckConstruction.lieAlgebra, LieAlgebra.IsKilling.chainTopCoeff_zero_right, LieAlgebra.IsKilling.chainBotCoeff_zero_right, RootPairing.GeckConstruction.e_mem_lieAlgebra, RootPairing.GeckConstruction.f_mem_lieAlgebra, LieAlgebra.IsKilling.traceForm_cartan_nondegenerate, RootPairing.GeckConstruction.h_mem_cartanSubalgebra', RootPairing.GeckConstruction.h'",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary enveloping algebras, abstract group representations, characteristic-zero Lie weights, or unrelated bilinear forms; none states restricted PBW/top pairing or the Steinberg theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "RestrictedEnveloping|restrictedEnveloping|Poincar|Birkhoff|FrobeniusAlgebra",
+   "results": "25 hits; Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean, Mathlib/Dynamics/BirkhoffSum/Average.lean, Mathlib/Dynamics/BirkhoffSum/Average.lean, Mathlib/Dynamics/BirkhoffSum/Average.lean, Mathlib/Dynamics/BirkhoffSum/Average.lean, Mathlib/Dynamics/BirkhoffSum/Average.lean, Mathlib/Dynamics/BirkhoffSum/NormedSpace.lean, Mathlib/Dynamics/BirkhoffSum/NormedSpace.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary enveloping algebras, abstract group representations, characteristic-zero Lie weights, or unrelated bilinear forms; none states restricted PBW/top pairing or the Steinberg theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restricted Poincare Birkhoff Witt basis and nondegenerate top degree pairing in positive characteristic",
+   "results": "8 hits; RootPairing.posRootForm_posForm_nondegenerate, RootPairing.rootForm_restrict_nondegenerate_of_ordered, Subspace.dualPairing_nondegenerate, RootPairing.rootForm_nondegenerate, LinearMap.BilinForm.dualBasis_eq_iff, RootPairing.Base.cartanMatrixIn_nondegenerate, RootSystem.rootForm_nondegenerate, RootPairing.nonempty_base",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary enveloping algebras, abstract group representations, characteristic-zero Lie weights, or unrelated bilinear forms; none states restricted PBW/top pairing or the Steinberg theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The top coefficient functional on a restricted universal enveloping algebra gives a perfect Frobenius bilinear form and truncated monomial basis in characteristic p",
+   "results": "8 hits; RootPairing.GeckConstruction.h', LieModule.chainBotCoeff, LieAlgebra.IsKilling.chainTopCoeff_zero_right, RootPairing.GeckConstruction.trace_toEnd_eq_zero, RootPairing.GeckConstruction.ω_mul_f, LieModule.traceForm_genWeightSpace_eq, killingForm_eq_zero_of_mem_zeroRoot_mem_posFitting, LieAlgebra.IsKilling.restrict_killingForm_eq_sum",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary enveloping algebras, abstract group representations, characteristic-zero Lie weights, or unrelated bilinear forms; none states restricted PBW/top pairing or the Steinberg theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted enveloping algebra truncated PBW basis and top coefficient nondegenerate pairing",
+   "results": "{\"t\": \"2026-10-23T23:31:05Z\", \"tool\": \"leanfinder\", \"query\": \"Restricted enveloping algebra truncated PBW basis and top coefficient nondegenerate pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.chainTopCoeff\", \"RootPairing.Base.chainTopCoeff_eq_of_ne\", \"LieAlgebra.IsKilling.chainTopCoeff_zero_right\", \"RootPairing.chainTopCoeff_chainTopIdx\", \"LieModule.chainBotCoeff\", \"RootPairing.GeckConstruction.u\", \"LieModule.coe_chainTop'\", \"LieModule.coe_chainTop\"], \"digest\": \"07828cfad0c3539d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary enveloping algebra and Lie/root-weight declarations do not state the restricted PBW basis with the top-coefficient pairing."
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalEnvelopingAlgebra",
+   "results": "{\"t\": \"2026-10-23T23:31:05Z\", \"tool\": \"loogle\", \"query\": \"UniversalEnvelopingAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra\", \"instInhabitedUniversalEnvelopingAlgebra\", \"instRingUniversalEnvelopingAlgebra\", \"instAlgebraUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.lift\", \"UniversalEnvelopingAlgebra.mkAlgHom\", \"UniversalEnvelopingAlgebra.hom_ext\"], \"digest\": \"a8beafc2fe0aadad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary enveloping algebra and Lie/root-weight declarations do not state the restricted PBW basis with the top-coefficient pairing."
+  },
+  {
+   "tool": "grep",
+   "query": "RestrictedEnveloping|restrictedEnveloping|PBW|Poincare",
+   "results": "{\"t\": \"2026-10-23T23:31:05Z\", \"tool\": \"grep\", \"query\": \"RestrictedEnveloping|restrictedEnveloping|PBW|Poincare\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Free.lean\"], \"digest\": \"cf2d0d3c3437d8ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary enveloping algebra and Lie/root-weight declarations do not state the restricted PBW basis with the top-coefficient pairing."
+  },
+  {
+   "tool": "grep",
+   "query": "PBW|[Ss]traighten|[Tt]runcated",
+   "results": "{\"t\": \"2026-10-23T23:33:58Z\", \"tool\": \"grep\", \"query\": \"PBW|[Ss]traighten|[Tt]runcated\", \"sub\": \"RingTheory/FilteredAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered noncommutative algebra with bounded PBW monomial basis has truncated polynomial leading multiplication",
+   "results": "{\"t\": \"2026-10-23T23:33:58Z\", \"tool\": \"leansearch\", \"query\": \"A filtered noncommutative algebra with bounded PBW monomial basis has truncated polynomial leading multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.symmetricAlgebra\", \"Polynomial.degreeLT.basis\", \"MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictTotalDegreeOfFinite\", \"MvPowerSeries.truncFun\", \"FreeAlgebra.basisFreeMonoid\", \"Filter.BoundedAtFilter.mul\", \"MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite\", \"RingFilterBasis.recOn\"], \"digest\": \"76aec4eba063131e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingFiltration, AssociatedGraded",
+   "results": "{\"t\": \"2026-10-23T23:33:58Z\", \"tool\": \"loogle\", \"query\": \"RingFiltration, AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'RingFiltration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: query identifiers were not recognized; subsequent searches use the actual IsRingFiltration naming and broader semantic queries."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an algebra with an ordered bounded monomial basis and commutators and powers of smaller degree the leading term of a product is the truncated monomial product",
+   "results": "{\"t\": \"2026-10-23T23:33:59Z\", \"tool\": \"leanfinder\", \"query\": \"In an algebra with an ordered bounded monomial basis and commutators and powers of smaller degree the leading term of a product is the truncated monomial product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.leadingCoeff_mul\", \"MonomialOrder.sPolynomial_leadingTerm_mul'\", \"MonomialOrder.degree_leadingTerm_mul\", \"MonomialOrder.leadingCoeff_mul\", \"MonomialOrder.coeff_prod_sum_degree\", \"MonomialOrder.degree_mul_leadingTerm\", \"MonomialOrder.C_mul_leadingCoeff_monomial_degree\", \"MonomialOrder.coeff_mul_of_add_of_degree_le\"], \"digest\": \"ac064892cc1ac8cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "grep",
+   "query": "commutator|[Ss]traighten|PBW|Poincar|[Tt]runcated",
+   "results": "{\"t\": \"2026-10-23T23:34:36Z\", \"tool\": \"grep\", \"query\": \"commutator|[Ss]traighten|PBW|Poincar|[Tt]runcated\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AssociatedGraded",
+   "results": "{\"t\": \"2026-10-23T23:34:36Z\", \"tool\": \"loogle\", \"query\": \"AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AssociatedGraded'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: query identifiers were not recognized; subsequent searches use the actual IsRingFiltration naming and broader semantic queries."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional restricted universal enveloping algebra is a Frobenius algebra with perfect pairing given by its highest PBW coefficient",
+   "results": "{\"t\": \"2026-10-23T23:34:39Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional restricted universal enveloping algebra is a Frobenius algebra with perfect pairing given by its highest PBW coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instInhabitedUniversalEnvelopingAlgebra\", \"instAlgebraUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra\", \"instRingUniversalEnvelopingAlgebra\", \"LieAlgebra.exists_isRegular_of_finrank_le_card\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.ι_apply\"], \"digest\": \"475caf3038a8be50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary enveloping algebra and Lie/root-weight declarations do not state the restricted PBW basis with the top-coefficient pairing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal ordering generators with commutators linear in the generators and power relations of smaller degree yields a multiplicative degree filtration and truncated polynomial symbols",
+   "results": "{\"t\": \"2026-10-23T23:34:40Z\", \"tool\": \"leanfinder\", \"query\": \"Normal ordering generators with commutators linear in the generators and power relations of smaller degree yields a multiplicative degree filtration and truncated polynomial symbols\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsRingFiltration.mk_int\", \"IsRingFiltration.toGradedMonoid\", \"IsModuleFiltration.mk_int\", \"MvPolynomial.supDegree_esymmAlgHomMonomial\", \"TensorAlgebra.gradedAlgebra\", \"Ideal.Filtration.submodule\", \"AddMonoidAlgebra.gradeBy\", \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\"], \"digest\": \"ea1f25994dffb62f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "grep",
+   "query": "namespace|class|def ",
+   "results": "{\"t\": \"2026-10-23T23:35:00Z\", \"tool\": \"grep\", \"query\": \"namespace|class|def \", \"sub\": \"RingTheory/FilteredAlgebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FilteredAlgebra/Basic.lean\", \"Mathlib/RingTheory/FilteredAlgebra/Basic.lean\", \"Mathlib/RingTheory/FilteredAlgebra/Basic.lean\"], \"digest\": \"e1a23b7e12e8c889\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"filtration\"",
+   "results": "{\"t\": \"2026-10-23T23:35:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"filtration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Ideal.Filtration\", \"Ideal.Filtration.Stable\", \"Ideal.Filtration.instBot\", \"Ideal.Filtration.instCompleteLattice\", \"Ideal.Filtration.instInfSet\", \"Ideal.Filtration.instInhabited\", \"Ideal.Filtration.instMax\", \"Ideal.Filtration.instMin\"], \"digest\": \"87f4b2a47cb88721\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-steinberg-weyl-restricted-freeness",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Theorem 2.6(i), printed pp.156--157: the Weyl module A((p-1)rho) is free of rank one over u(u^-), generated by its highest-weight vector. The proof there uses the lowest PBW weight and the Frobenius-algebra pairing, before Kempf vanishing and the Weyl character formula. Supporting algebra input for Theorem 2.6(i): restricted PBW and the top-coefficient Frobenius pairing (Theorem 1.2, Corollary 1.3).",
+   "via": [
+    "lem-sfb-steinberg-weyl-restricted-freeness",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-restricted-pbw-top-pairing",
+  "worker": "stage1",
+  "summary": "Reused restricted PBW, root-product coordinates, restricted differentiation and the positive cocharacter description. Extracted only degree-controlled normal ordering as a new statement-only node. Proved both nondegeneracy assertions by complementary exponents and isolated the top character by a positive cocharacter. Verified arbitrary root order, small primes and N=0. Normalized doubled TeX escapes; the mathematical statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Theorem 2.6(i), printed pp.156--157: the Weyl module A((p-1)rho) is free of rank one over u(u^-), generated by its highest-weight vector. The proof there uses the lowest PBW weight and the Frobenius-algebra pairing, before Kempf vanishing and the Weyl character formula. Supporting algebra input for Theorem 2.6(i): restricted PBW and the top-coefficient Frobenius pairing (Theorem 1.2, Corollary 1.3). The six steps realize the restricted-PBW and top-coefficient prerequisite to Steinberg freeness. Current latest blueprint direct-image proof (3) is the inherited upper route; the null ancestor returned by blueprint_refs.py is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-41403a71e",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-41403a71e (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and the new node lem-sfb-bounded-monomial-straightening in full; no fixes. The item's statement, stmt_deps and source match live byte for byte. Live and side-live still hold the item unsplit, so no other group has split it, and there is no re-split note. No cycle. Every cited node is in unit sk-thm-sf-ctf-stability and no file contains SGA. Steps: step 1 gets the basis e_i from the root-product isomorphism (any enumeration, each U_beta inside U) and the restricted structure from restricted-rational-differentiation, which defines D_{x^[p]}=D_x^p, the same operation as the item. Step 2: the hypotheses of restricted-pbw-basis hold. The weights come from the conjugation formula on dual numbers over any R and are characters, not differentials. Step 3: brackets and e_i^p=e_i^[p] lie in W, and z is the only bounded monomial of degree D. Step 4: I recomputed the complementary-exponent argument, L(v e^b)=v_a=L(e^b v), which proves nondegeneracy on both sides without commutativity; it is genuinely elementary. Step 5: the regular cocharacter with B=P(lambda) gives <beta_i,lambda>>0; comparing coordinates at the universal point of T gives A_tau=Fz. Step 6: N=0 holds. New node: statement-only, inline definitions, true by Milne's p.200 inversion induction plus reduction of y^q (q>=2). I tested n=0, q=2 with y^2=y and with y^2=0, and a scalar commutator. It is strictly smaller than the item, generic, and not a clause of the item. A DAG grep (PBW, enveloping, straighten, normal order, monomial) found no duplicate: restricted-pbw-basis has no degree control and rational-pbw is the characteristic-0 unbounded case. Sources checked: Milne 10.36 (pp.200-201), 10.40 (p.207) and 21.68 (p.445). Mathieu is WANTED and the proof does not rely on it. Batch-5 flags: lem-trf-fppf-covering-base-change and lem-trf-smooth-fpqc-base-descent are generic Mathlib leaves (fppf coverings stable under base change; smoothness descends along fpqc base change). Neither is a step of the trace formula or of Poincare duality, and the first was already reached on the base through lem-sfb-reductive-borel-pair-structure. Both accepted. The parent steinberg-weyl-restricted-freeness uses only what the item states."
+ }
+}

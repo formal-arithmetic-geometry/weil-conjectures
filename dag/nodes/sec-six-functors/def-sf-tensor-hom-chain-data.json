@@ -1,0 +1,140 @@
+{
+ "id": "def-sf-tensor-hom-chain-data",
+ "kind": "definition",
+ "title": "Supplied restricted adjunction data and the specified five-arrow Hom chain",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite-field datum, finite coefficient extension $E/\\mathbf Q_\\ell$, integer $n\\geq1$, finite-type geometric schemes and six-functor datum $S$ of [def-fix-six-functor-datum]. Choose one of the four stages $s$ and its finite-Tor full domains $\\mathcal C_X,\\mathcal C_Y$ using [def-sf-ctf-coefficient-stage-selectors]. Let $f:X\\to Y$ have a chosen compactification $c$. A supplied restricted-adjunction presentation $R$ consists of preservation of these domains by the four recorded functors $f^*,Rf_*,Rf_!,f^!$, symmetric closed presentations of the recorded internal Hom on both domains, and natural tensor comparison isomorphisms identifying their left-factor tensors through full inclusion with the recorded partial tensors. The pull/direct/support/exceptional functors are the full-subcategory restrictions, and their ordinary and exceptional adjunctions are the fully faithful restrictions of the specified adjunctions [fix-prop-adjunctions]. The left-factor tensor-Hom adjunctions are obtained from the supplied closed presentations using their symmetry. For separated finite-type $f$, $M\\in\\mathcal C_X$ and $N,T\\in\\mathcal C_Y$, use the actual forward projection $P_{M,T}$ and fixed-left Hom functors $H^X_M,H^Y_{Rf_!M}$ of [def-pod-ctf-pairing-maps]. Define $A_M=f_*\\circ H^X_M\\circ f^!$ and $B_M=H^Y_{Rf_!M}$ as functors of $N$. Define $\\Gamma_{M,N,T}:\\operatorname{Hom}(T,A_MN)\\simeq\\operatorname{Hom}(T,B_MN)$ to be the composite of inverse ordinary adjunction, inverse left-factor tensor-Hom adjunction, inverse exceptional adjunction, precomposition with forward $P_{M,T}$, and target left-factor tensor-Hom adjunction, in that order. This is supplied data and a specified composite, with no assertion of existence of a restricted presentation and no theorem about the composite.",
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-ctf-coefficient-stage-selectors",
+  "fix-prop-adjunctions",
+  "def-pod-ctf-pairing-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, the specified adjunction/projection Hom chain, read backwards; supplied full domains in lem-sf-tensor-hom-coefficient-transposes."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The specified five-arrow tensor Hom adjunction chain and its full finite Tor adjunction presentation",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.Tor'_obj_obj, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv; digest 7ab674470348c356",
+   "date": "2026-10-24",
+   "verdict": "Existing project definitions are exact; Mathlib has generic restriction and Hom congruence primitives, not the four-stage chain definition. Bind the published definitions without duplicating data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full subcategory restriction of ordinary exceptional and tensor Hom adjunctions and the composite five adjunction bijections",
+   "results": "8 hits: CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.FunctorToTypes.adj, CategoryTheory.MonoidalClosed.FunctorCategory.adj, CategoryTheory.Adjunction.toCat_comp_toCat, CategoryTheory.Adjunction.Quadruple.recOn, CategoryTheory.Adjunction.derived; digest f5322593ecf48ad5",
+   "date": "2026-10-24",
+   "verdict": "Existing project definitions are exact; Mathlib has generic restriction and Hom congruence primitives, not the four-stage chain definition. Bind the published definitions without duplicating data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Iso.homCongr",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "Existing project definitions are exact; Mathlib has generic restriction and Hom congruence primitives, not the four-stage chain definition. Bind the published definitions without duplicating data."
+  },
+  {
+   "tool": "grep",
+   "query": "PodCtfAdjunctionData|PodHomChain|PodCoefficientStage",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "Existing project definitions are exact; Mathlib has generic restriction and Hom congruence primitives, not the four-stage chain definition. Bind the published definitions without duplicating data."
+  },
+  {
+   "tool": "grep",
+   "query": "rg PodCtfAdjunctionData|PodHomChain in lean/WeilConjectures and lean/Sheaf; rg -l PodCtfAdjunctionData|five.*bijections|five-arrow dag/nodes/sec-six-functors; blueprint_refs.py search Hom chain; blueprint_refs.py ancestor lem-sf-tensor-hom-coefficient-transposes",
+   "results": "Upstream: no hits. Sheaf: PodCtfAdjunctions.lean:49-120 defines the supplied restriction structure and eight constructors; PodHomChainCounitFormula.lean:127-189 defines endpoints and the exact five-arrow equivalence. DAG has theorem consumers, and def-pod-ctf-pairing-maps already owns projection/homX/homY. def-sf-ctf-coefficient-stage-selectors owns the stage selectors. No definition node owns the remaining restriction/chain data. Blueprint search Hom chain: 0 matches; ancestor: fix-lem-tensor-adjunction.",
+   "date": "2026-10-24",
+   "verdict": "Add an existing:true definition owner only for the remaining plain data; reuse both landed definition nodes."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-tensor-hom-coefficient-transposes",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Step 1: the chosen full-domain adjunction presentations and five specified bijections; coefficient-comparison sentence.",
+   "via": [
+    "lem-sf-tensor-hom-coefficient-transposes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.PodHomChainCounitFormula",
+  "declaration": "WeilConjectures.PodHomChain.homEquiv",
+  "declarations": [
+   "WeilConjectures.PodCtfAdjunctionData",
+   "WeilConjectures.PodCtfAdjunctionData.pull",
+   "WeilConjectures.PodCtfAdjunctionData.direct",
+   "WeilConjectures.PodCtfAdjunctionData.support",
+   "WeilConjectures.PodCtfAdjunctionData.exceptional",
+   "WeilConjectures.PodCtfAdjunctionData.ordinaryAdjunction",
+   "WeilConjectures.PodCtfAdjunctionData.exceptionalAdjunction",
+   "WeilConjectures.PodCtfAdjunctionData.tensorAdjunctionX",
+   "WeilConjectures.PodCtfAdjunctionData.tensorAdjunctionY",
+   "WeilConjectures.PodHomChain.sourceFunctor",
+   "WeilConjectures.PodHomChain.targetFunctor",
+   "WeilConjectures.PodHomChain.homEquiv"
+  ],
+  "statement": "def homEquiv\n    (M : (PodCoefficientStage.domain S s X).FullSubcategory)\n    (N T : (PodCoefficientStage.domain S s Y).FullSubcategory) :\n    (T ⟶ (sourceFunctor S s f c R M).obj N) ≃\n      (T ⟶ (targetFunctor S s f c R M).obj N)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair: exact existing plain data from PodCtfAdjunctions (publicly imported here) and PodHomChainCounitFormula. No use of podCtfAdjunctions_exists or counit_formula. The selectors already have def-sf-ctf-coefficient-stage-selectors; forward projection/homX/homY already have def-pod-ctf-pairing-maps and are reused definitionally. No new Lean module or duplicate data."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c2dc5fd5",
+  "group": "Q16",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c2dc5fd5",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Repair of 0d7a RETURN verified. H2: theorem stmt_deps det-thm-sf-ctf-stability-adjunctions/lem-pod-hom-chain-counit-formula replaced by existing:true def-sf-tensor-hom-chain-data (statement verbatim at live PodHomChainCounitFormula.lean:175) plus landed def-pod-ctf-pairing-maps and def-sf-ctf-coefficient-stage-selectors; no race owner; other snapshot node records identical to live. H3: successive_square concludes direct.source/target cocycles + Square direct from component cocycles (checked provable); integralGammaIso = (Γ(1_A), Γ⁻¹(1_B)) with named sorry inverse laws (true by test-object naturality); rational/common Γ are images of it; rationalGamma_formula ties to localized Γ; common_stage_bijection concludes transport compatibility + ∃! descent; common_stage_representatives assumes Γz=z≫b; equations_pass_to_fields states N- and test-naturality; field_coefficient_square holds for every rY. Clauses, Permitted (3 changes, identity cases), no site-perfectness, single universe u, no hollow defs, docstrings and verbatim statements checked. Advisory: uncited landed def owners def-pur-integral-compact-support-coefficient-data / def-sp-coefficient-mate-comparisons / def-weil-pbc-bounded-constructible-tower; shift clause is functorial image (as node step 7); PodHomChain.* duplicates of PodCtfPairing.* (maintainer note); self second reading (H11 minor). No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f0968",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T202144-L-2681991",
+  "kind": "interface",
+  "note": "independent cc review: counit_formula proof vs node steps 2–4 (uncurried_transport conj.5 + pairing_naturality conj.6 + adjunction naturality); child adaptation PodCtfPairing.{rawProjection,rawProjectionIso,projection,homX} vs parent copies (identical bodies) and directHomObject vs sourceFunctor unfolding; node records vs Lean; sandbox compile + #print axioms (sorryAx only from upstream sorried statements)",
+  "sorry_before": [
+   "WeilConjectures.PodHomChain.counit_formula"
+  ],
+  "sorry_after": []
+ }
+}

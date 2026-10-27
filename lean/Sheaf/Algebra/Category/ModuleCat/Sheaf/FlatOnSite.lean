@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 /-!
 # Flat sheaves of modules

@@ -1,0 +1,258 @@
+{
+ "id": "lem-trf-localized-polynomial-resolution-model",
+ "kind": "statement",
+ "title": "Localized augmented polynomial-resolution model",
+ "statement": "Let $R$ be a commutative ring, $S\\subseteq R$ a multiplicative subset containing $1$, and $B=S^{-1}R$, with $0\\in S$ allowed. Let $T$ be a commutative $R$-algebra and $P_\\bullet\\xrightarrow{\\epsilon}T$ a polynomial resolution in the sense of [lem-trf-cotangent-resolution-coherence]. Put $T_S=S^{-1}T$ and $Q_\\bullet=P_\\bullet\\otimes_R B$, using scalar extension [def-weil-module-base-change], with augmentation $p\\otimes b\\mapsto(\\epsilon(p)/1)b$. Then $Q_\\bullet\\to T_S$ is a polynomial resolution over $B$. More precisely, for every $R$-module $M$ there is a natural $B$-linear isomorphism $B\\otimes_R M\\cong S^{-1}M$ sending $(r/s)\\otimes m$ to $rm/s$, with inverse $m/s\\mapsto(1/s)\\otimes m$. These maps, with the tensor factors interchanged, identify the augmented alternating-face complex $s(Q_\\bullet)\\to T_S[0]$ with the termwise localized augmented complex $S^{-1}s(P_\\bullet)\\to S^{-1}T[0]$. For any polynomial coordinates $P_n=R[E_n]$, the coefficient map identifies $Q_n$ with $B[E_n]$, for arbitrary sets $E_n$. In particular, when $T=B$, the isomorphism $S^{-1}B\\cong B$, $b/s\\mapsto(s/1)^{-1}b$, makes this a polynomial resolution of $B$ over $B$, with augmentation $p\\otimes b\\mapsto\\epsilon(p)b$.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), localized-resolution computation, with Tag 08QI (remark-resolution); exact localization: algebra.tex, Tag 00CS (proposition-localization-exact)."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] with its base and algebra both $R$, its first module $R$, its second module $M$, and multiplicative subset $S$. It gives $S^{-1}(R\\otimes_RM)\\cong B\\otimes_RM$, $(r\\otimes m)/s\\mapsto(r/s)\\otimes m$. The maps $R\\otimes_RM\\to M$, $r\\otimes m\\mapsto rm$, and $m\\mapsto1\\otimes m$ are inverse by the tensor relations [def-weil-pbc-module-tensor-product]. Localizing these maps using [def-weil-pbc-module-localization] therefore gives an $R$-linear isomorphism $G_M:S^{-1}M\\to B\\otimes_RM$, $m/s\\mapsto(1/s)\\otimes m$. It is $B$-linear: $G_M((a/t)(m/s))=(1/(ts))\\otimes am=(a/t)((1/s)\\otimes m)$. Its inverse $F_M$ sends $(r/s)\\otimes m=(1/s)\\otimes rm$ to $rm/s$. For any $R$-linear $h:M\\to N$, both composites in $F_N(1\\otimes h)=(S^{-1}h)F_M$ send $(r/s)\\otimes m$ to $r h(m)/s$; pure tensors generate, so the equality holds. These are the claimed maps and their naturality.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), its explicit fraction formula and proof; Tag 00D2 (lemma-tensor-with-bimodule); Tag 00CX (lemma-tensor-product)."
+   }
+  },
+  {
+   "text": "The switch $p\\otimes b\\mapsto b\\otimes p$ and its inverse are linear maps by the tensor relations [def-weil-pbc-module-tensor-product]. Consequently Step 1 gives $\\alpha_M:M\\otimes_RB\\xrightarrow{\\sim}S^{-1}M$, $m\\otimes(r/s)\\mapsto rm/s$. For an $R$-algebra $C$, it is an algebra isomorphism: $\\alpha_C((c\\otimes r/s)(c\\prime\\otimes r\\prime/t))=rr\\prime cc\\prime/(st)=\\alpha_C(c\\otimes r/s)\\alpha_C(c\\prime\\otimes r\\prime/t)$, and it sends $1\\otimes1$ to $1/1$. Here products on the tensor algebra are obtained by extending the multiplication of $C$ as in [def-weil-module-base-change]. Define the faces and degeneracies of $Q$ by $d_i\\otimes1$ and $s_i\\otimes1$. Scalar extension preserves compositions and identities, so every simplicial identity for $P$ remains an identity for $Q$. Naturality of $\\alpha$ identifies these maps with $p/s\\mapsto d_i(p)/s$ and $p/s\\mapsto s_i(p)/s$. With $C=T$ the same naturality identifies the induced augmentation with $p\\otimes b\\mapsto(\\epsilon(p)/1)b$, as required.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), bilinearity relations; Tag 00DK (lemma-tensor-localization), formula; localization functor immediately before Tag 00CS."
+   }
+  },
+  {
+   "text": "Choose any coordinates $P_n\\cong R[E_n]$ supplied by the polynomial-resolution hypothesis [lem-trf-cotangent-resolution-coherence]. By [lem-weil-pbc-polynomial-scalar-extension], applied to $R\\to B$ and the set $E_n$, $B\\otimes_RR[E_n]\\cong B[E_n]$ via $b\\otimes p\\mapsto b\\bar p$. Compose with the factor switch of Step 2. This gives $Q_n\\cong B[E_n]$ with the asserted coefficient map and variable images. The cited statement allows an arbitrary set of variables; no finite generation or finiteness assumption is introduced.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof: u(P_bullet) = P_bullet tensor_A A_prime; Tag 08QI (remark-resolution), polynomial terms. Polynomial scalar extension is the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "The underlying alternating-face complex is $s(P)^{-n}=P_n$, with differential the finite sum $\\sum_i(-1)^id_i$, by [lem-trf-cotangent-resolution-coherence]. Write $d_n$ for this sum from degree $-n$ to degree $1-n$. The maps of Step 2 give $\\alpha_{P_{n-1}}((d_n\\otimes1)(p\\otimes r/s))=r d_n(p)/s=(S^{-1}d_n)(\\alpha_{P_n}(p\\otimes r/s))$. Scalar extension is linear on maps [def-weil-module-base-change], hence the alternating sum on $Q$ is exactly $d_n\\otimes1$. For the augmentation the corresponding equality is $\\alpha_T((\\epsilon\\otimes1)(p\\otimes r/s))=r\\epsilon(p)/s$. Thus these degreewise inverse maps form an isomorphism of the augmented complexes, including their maps to $T_S[0]$. This is an actual isomorphism of complexes, not only an identification of their homology groups.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof: s(P_bullet) tensor_A A_prime = s(P_bullet tensor_A A_prime); Tag 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "The polynomial-resolution hypothesis [lem-trf-cotangent-resolution-coherence] says that $\\cdots\\to P_2\\xrightarrow{d_2}P_1\\xrightarrow{d_1}P_0\\xrightarrow{\\epsilon}T\\to0$ is exact: the negative homology groups vanish, the induced map $P_0/\\operatorname{im}d_1\\to T$ is an isomorphism, and $\\epsilon$ is surjective. Apply [lem-weil-pbc-localization-module-exact] to each consecutive triple of this sequence, including $P_1\\to P_0\\to T$ and $P_0\\to T\\to0$. The localized augmented complex is exact. By Step 4 the augmentation $s(Q)\\to T_S[0]$ is consequently a quasi-isomorphism. Each augmentation $Q_n\\to T_S$ is surjective: for $t/s\\in T_S$, choose $p\\in P_n$ with $\\epsilon(p)=t$ and use $p\\otimes(1/s)$. Together with Step 3, this checks every clause of the definition of polynomial resolution over $B$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), localized case of its resolution computation; Tag 08QI (remark-resolution). Exactness input: algebra.tex, Tag 00CS (proposition-localization-exact)."
+   }
+  },
+  {
+   "text": "Finally let $T=B$. Every $s\\in S$ acts on $B$ by the invertible element $s/1$, with inverse $1/s$. Therefore $\\psi:S^{-1}B\\to B$, $b/s\\mapsto(s/1)^{-1}b$, is well defined: a relation $u(tb-sc)=0$ becomes $tb=sc$ after multiplying by the inverse of $u/1$, and multiplying by the inverses of $s/1,t/1$ gives equal images. The fraction formulas [def-weil-pbc-module-localization] show additivity and $B$-linearity. The maps $\\psi$ and $b\\mapsto b/1$ are inverse, since $((s/1)^{-1}b)/1=b/s$. The same formulas show multiplicativity and preservation of $1$. Composing the augmentation of Step 2 with $\\psi$ sends $p\\otimes b$ to $\\epsilon(p)b$, so Step 5 gives the last assertion. If $0\\in S$, the fraction relation makes $B$, every $S^{-1}M$, and $T_S$ zero; $M\\otimes_RB=0$ by the tensor relations [def-weil-pbc-module-tensor-product]. All the displayed maps and resolution conditions remain valid, and $B[E_n]$ is the zero ring even for empty or infinite $E_n$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ (definition-localization-module), fraction equivalence and operations; localization universal property in section-localization (Tag 00CM)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "def-weil-module-base-change",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), resolution computation specialized to localization; Tag 08QI (remark-resolution); explicit module comparison and exactness from algebra.tex, Tags 00DK and 00CS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "simplicial.*localiz|localiz.*simplicial|resolution.*localiz [sub=RingTheory]",
+   "results": "{\"t\": \"2026-10-22T06:45:10Z\", \"tool\": \"grep\", \"query\": \"simplicial.*localiz|localiz.*simplicial|resolution.*localiz\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: module localization exactness and tensor identifications cover components, not the augmented simplicial polynomial-resolution model, its fraction chain identification and actual augmentation. No one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a polynomial simplicial algebra resolution preserves its exact augmentation",
+   "results": "{\"t\": \"2026-10-22T06:45:11Z\", \"tool\": \"leansearch\", \"query\": \"Localizing a polynomial simplicial algebra resolution preserves its exact augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.localization\", \"ModuleCat.localizedModule_functor_map_exact\", \"RingHom.LocalizationPreserves\", \"instFinitePresentationLocalizationLocalizedModule\", \"exact_of_localized_span\", \"instFinitePresentationAway\", \"Algebra.FormallyEtale.localization_base\", \"IsLocalization.isLocalization_of_algEquiv\"], \"digest\": \"a40e550ac050be17\"}; Read returned types: module localization exactness and tensor identifications cover components, not the augmented simplicial polynomial-resolution model, its fraction chain identification and actual augmentation. No one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-22T06:45:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalization.tensorProduct_compatibleSMul\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.Away.tensorProductEquivTMulRight\", \"IsLocalization.tensorProductEquivOfMapIncludeRight\", \"IsLocalization.tensorProductEquivOfMapIncludeRight_tmul\", \"IsLocalization.tensorProduct_tensorProduct_right\"], \"digest\": \"60c85124c3a41db4\"}; Read returned types: module localization exactness and tensor identifications cover components, not the augmented simplicial polynomial-resolution model, its fraction chain identification and actual augmentation. No one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an augmented simplicial polynomial algebra resolution, with tensor to module fraction identification, is a polynomial resolution over the localized ring",
+   "results": "{\"t\": \"2026-10-22T06:45:24Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of an augmented simplicial polynomial algebra resolution, with tensor to module fraction identification, is a polynomial resolution over the localized ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.tensorModelOfHasCoeffsInv\", \"ModuleCat.projectiveResolution\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"Algebra.H1Cotangent.isLocalizedModule\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.Generators.compLocalizationAwayAlgHom\", \"Algebra.PreSubmersivePresentation.localizationAway\"], \"digest\": \"f30bcb01ee7edf7c\"}; Read returned types: module localization exactness and tensor identifications cover components, not the augmented simplicial polynomial-resolution model, its fraction chain identification and actual augmentation. No one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization of augmented chain complexes with natural tensor fraction isomorphism and polynomial algebra scalar extension",
+   "results": "{\"t\": \"2026-10-22T06:46:00Z\", \"tool\": \"leanfinder\", \"query\": \"Exact localization of augmented chain complexes with natural tensor fraction isomorphism and polynomial algebra scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.localizedModule_functor_map_exact\", \"CategoryTheory.Tor\", \"exact_of_isLocalized_span\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"IsLocalizedModule.map_exact\", \"LocalizedModule.map_exact\"], \"digest\": \"3e8c8ba6a6649028\"}; Read returned types: module localization exactness and tensor identifications cover components, not the augmented simplicial polynomial-resolution model, its fraction chain identification and actual augmentation. No one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*localiz|localiz.*simplicial|resolution.*localiz [sub=RingTheory]",
+   "results": "{\"t\": \"2026-10-23T09:42:56Z\", \"tool\": \"grep\", \"query\": \"simplicial.*localiz|localiz.*simplicial|resolution.*localiz\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No localized augmented simplicial polynomial-resolution declaration was found in RingTheory.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a polynomial simplicial algebra resolution preserves its exact augmentation",
+   "results": "{\"t\": \"2026-10-23T09:45:40Z\", \"tool\": \"leansearch\", \"query\": \"Localizing a polynomial simplicial algebra resolution preserves its exact augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.localization\", \"ModuleCat.localizedModule_functor_map_exact\", \"RingHom.LocalizationPreserves\", \"instFinitePresentationLocalizationLocalizedModule\", \"exact_of_localized_span\", \"instFinitePresentationAway\", \"Algebra.FormallyEtale.localization_base\", \"IsLocalization.isLocalization_of_algEquiv\"], \"digest\": \"a40e550ac050be17\"}; Read returned types: localization exactness and algebra extensions are components, not the full augmented simplicial polynomial-resolution statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-23T09:45:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalization.tensorProduct_compatibleSMul\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.Away.tensorProductEquivTMulRight\", \"IsLocalization.tensorProductEquivOfMapIncludeRight\", \"IsLocalization.tensorProductEquivOfMapIncludeRight_tmul\", \"IsLocalization.tensorProduct_tensorProduct_right\"], \"digest\": \"60c85124c3a41db4\"}; Read returned types: IsLocalization.tensorProduct_isLocalizedModule and tensor-product localization declarations cover components, not polynomiality plus augmented resolution compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an augmented simplicial polynomial algebra resolution with exact augmentation",
+   "results": "{\"t\": \"2026-10-23T09:45:47Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of an augmented simplicial polynomial algebra resolution with exact augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AlgebraicTopology.DoldKan.N₁\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"CategoryTheory.Abelian.DoldKan.N\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"AlgebraicTopology.DoldKan.Γ₀\", \"AlgebraicTopology.DoldKan.Γ₀'\"], \"digest\": \"53f4fcc5c18722cf\"}; Read returned types: generic simplicial constructions, Dold-Kan and localization exactness do not state the complete item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization of augmented chain complexes with natural tensor fraction isomorphism and polynomial algebra scalar extension",
+   "results": "{\"t\": \"2026-10-23T09:48:13Z\", \"tool\": \"leanfinder\", \"query\": \"Exact localization of augmented chain complexes with natural tensor fraction isomorphism and polynomial algebra scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.localizedModule_functor_map_exact\", \"CategoryTheory.Tor\", \"exact_of_isLocalized_span\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"IsLocalizedModule.map_exact\", \"LocalizedModule.map_exact\"], \"digest\": \"3e8c8ba6a6649028\"}; Read returned types: generic simplicial constructions, Dold-Kan and localization exactness do not state the complete item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-localization-cotangent-vanishing",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Sheaf cotangent stalks, section maps and ring localization. Underived input: The full cotangent complex of a localization vanishes. Re-split of lem-trf-localization-cotangent-vanishing: old proof steps 1--2, fraction comparisons and localized augmented polynomial resolution.",
+   "via": [
+    "lem-trf-localization-cotangent-vanishing",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-localized-polynomial-resolution-model",
+  "worker": "stage1",
+  "summary": "Q98: supplied six proof steps, using existing Mathlib leaves for tensor localization, polynomial scalar extension and localization exactness. Checked all fraction maps, naturality, augmented alternating differentials, levelwise surjectivity, arbitrary variable sets and 0 in S. Statement unchanged; made its module-localization notion explicit in stmt_deps. No new nodes, no Lean writing or compilation.",
+  "blueprint": "Historical auxiliary branch of lem-trf-local-term-locality recorded in blueprint.from: localization-cotangent-vanishing, old steps 1--2, localized augmented polynomial resolution. Current latest blueprint instead proves local-term locality through contracting correspondences; this item remains the existing generic algebra input and changes no chapter or unit route. Steps 1--6 supply exactly the localized-resolution computation requested by the parent; same_as search found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-655a466a8",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-655a466a8 (reviewer sub-agent of L); spot-checked: Read the item, all 7 cited statements, and Stacks 08QP (cotangent.tex:958-980), 08QI (line 667) and 00CS. The statement is unchanged (sha1 prefix 8d9f3d0a, the same in all earlier dagsnaps). The added stmt_dep def-weil-pbc-module-localization is correct because the statement uses S^{-1}M. The delivery has 0 new nodes and is not a re-split (no repair note). Steps: (1) the localization-tensor lemma with R->A=id and first module R gives B⊗M≅S^{-1}M; I checked B-linearity and naturality on pure tensors. (2) The factor switch is multiplicative by the beta_A clause of def-weil-module-base-change, and the simplicial identities follow from functoriality; the augmentation formula is checked. (3) Polynomial scalar extension for arbitrary E_n gives Q_n≅B[E_n]. (4) The isomorphism of augmented complexes follows from linearity of f↦f⊗B. (5) Exact localization is applied to every triple, including P_1→P_0→T and P_0→T→0, and levelwise surjectivity is proved by lifting through P_n→T. (6) psi: S^{-1}B→B is well defined because u/1 is a unit. Edge cases checked: S={1}; 0∈S (all zero); E_n empty or infinite; zero divisors; T=B, which is the use in the parent lem-trf-localization-cotangent-vanishing step 1. The cited nodes from other units are all Mathlib leaves, so no tool_uses. No SGA. Overlap with the existing lem-trf-polynomial-simplicial-tensor-model and lem-trf-cotangent-augmentation-localization is advisory only: the item already existed, and those nodes state different results. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizedPolynomialResolutionModel",
+  "declaration": "Algebra.CotangentResolution.exists_localized_polynomial_resolution_model",
+  "declarations": [
+   "Algebra.CotangentResolution.resolutionAlgebras",
+   "Algebra.CotangentResolution.resolutionTarget",
+   "Algebra.CotangentResolution.resolutionForgetModules",
+   "Algebra.CotangentResolution.resolutionModuleAugmented",
+   "Algebra.CotangentResolution.resolutionModuleComplexAugmentation",
+   "Algebra.CotangentResolution.resolutionLocalizedTarget",
+   "Algebra.CotangentResolution.resolutionTensorTerm",
+   "Algebra.CotangentResolution.resolutionComplexArrow",
+   "Algebra.CotangentResolution.resolutionComplexElement",
+   "Algebra.CotangentResolution.resolutionLocalizedArrow",
+   "Algebra.CotangentResolution.LocalizedPolynomialResolutionModel",
+   "Algebra.CotangentResolution.exists_localized_polynomial_resolution_model",
+   "Algebra.CotangentResolution.resolutionLocalizationArrow",
+   "Algebra.CotangentResolution.exists_self_localized_polynomial_resolution_model"
+  ],
+  "file": "lean/Sheaf/RingTheory/LocalizedPolynomialResolutionModel.lean",
+  "statement": "theorem exists_localized_polynomial_resolution_model {f : Arrow CommRingCat.{u}} (P : Augmentation f) (hP : IsPolynomialResolution P) (S : Submonoid f.left) : Nonempty (LocalizedPolynomialResolutionModel.{u, v} P S)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-137c4d12d",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read the node (unchanged except lean record vs side-live), the 3 stmt_deps and the dependency module (Augmentation, IsPolynomialResolution E:Type u, additiveAugmentation), the Mathlib localizedModuleFunctor (Shrink carrier, so equivShrink is canonical) and the module (14 decls, all real data, 2 sorry). Clause check: moduleIso for every M:ModuleCat.{v} with both fraction formulas and naturality; termIso+operator for all θ+augmentation b•(ε p/1) pin Q ≅ P⊗B; polynomial; complexIso is an arrow-category iso with left map pinned degreewise by complex_fraction, right map forced canonical via the square and degree-0 surjectivity; coordinates for every E:Type u and every R-algebra coordinate iso; T=B case gives ψ(b/s)=(1/s)b, a resolution over 𝟙_B, e compatible with base and augmentation, ε(p)b formula. No Nontrivial, finiteness or universe restrictions; 0∈S allowed. statement verbatim; declarations complete; docstrings with source place, blueprint id and the 6 proof steps; report has Worker report and Second reading by Q26. H4: resolutionModuleComplexAugmentation is the ModuleCat-linear analogue of additiveAugmentation, needed for the localization functor; theorem-owned tensorAugmentation correctly not used. No changes, no compile."
+ }
+}

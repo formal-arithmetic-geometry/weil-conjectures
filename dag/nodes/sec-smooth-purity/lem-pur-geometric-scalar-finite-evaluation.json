@@ -1,0 +1,155 @@
+{
+ "id": "lem-pur-geometric-scalar-finite-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of the geometric scalar mate before ramified balancing",
+ "statement": "Let $\\ell$ be prime, $E,F/\\mathbf Q_\\ell$ finite extensions and $i:E\\to F$ a $\\mathbf Q_\\ell$-algebra map. Let $e\\geq1$ satisfy $(t)\\mathcal O_F=(v^e)$ for the specified uniformizers [def-pur-finite-compact-support-scalar-data]. Let $f:X\\to Y$ be a scheme morphism, $c=(j,p)$ a compactification, $S$ an $E$ derived reduction-system calculus, $M\\in D(X_{\\mathrm{pro\\acute et}},\\widehat{\\mathcal O_E})$, and $n\\geq0$ [def-coef-derived-system-calculus-data]. Let $a_M$ be scalar extension of supportModel followed by the proper/open scalar comparison on the reduced $E$ input, stopping before reductionBalancing [def-pur-native-constant-support-model, def-pur-constant-scalar-tower-mates]. Let $\\sigma_M=\\operatorname{scalarImageEvaluation}_M$ be the independently constructed constant-image/tensor/local-reduction/finite-balancing/restriction transport [def-pur-strict-scalar-finite-evaluation-transport], and let $\\lambda_M=\\operatorname{sourceEvaluation}_M$ [def-pur-strict-scalar-mate-evaluation-data]. Then $\\sigma_M\\circ e_n(a_M)=\\operatorname{Res}(\\operatorname{finiteTensorMap}_M)\\circ\\lambda_M$, where the restriction is to constant $\\mathcal O_F$ coefficients and finiteTensorMap has exponents $n+1,e(n+1)$ [def-pur-finite-compact-support-scalar-data]. This equation uses no $F$ reduction calculus, ramified reductionBalancing, image reindexing, target supportModel, or targetEvaluation.",
+ "stmt_deps": [
+  "def-pur-strict-scalar-finite-evaluation-transport",
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-pur-constant-scalar-tower-mates",
+  "def-pur-native-constant-support-model",
+  "def-coef-derived-system-calculus-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map), 0940 (section-derived-limits); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor). Step 7 of lem-pur-compact-support-strict-scalar-mate."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of Step 7 of lem-pur-compact-support-strict-scalar-mate, separating the geometric mate from the ramified reduction isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized derived scalar extension comparison for proper image and extension by zero commutes with evaluation and finite quotient tensor balancing",
+   "results": "Eight hits, including ModuleCat.extendScalarsComp and its associativity and tensor-unit formulas. These concern ordinary module scalar extension, not the evaluated geometric mate or native reduction data. The separate ramified quotient query returned unrelated finite-sum balancing results.",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for either normalization square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": "Seven hits in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor. The exact-functor comparison is available; it does not assert compatibility of the particular proper scalar mate, native reduction, and finite quotient maps. CategoryTheory.mateEquiv search also found the general mate and pasting lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing exact-functor and mate calculus; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalarsComp'App|mapDerivedCategoryCompIso",
+   "results": "Nine Mathlib hits including ModuleCat.restrictScalarsComp'App, its identity-on-elements formulas, and applications in module presheaves and sheaves. The scalar restriction identification uses this constructor. Local rg over Sheaf and WeilConjectures found tensorEvaluation only in the original evaluation data and no reductionBalancing evaluation theorem.",
+   "date": "2026-10-27",
+   "verdict": "Reuse ordinary scalar restriction composition; the two normalization equations remain separate proof steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension proper direct image extension by zero finite quotient evaluation compatibility",
+   "results": "Eight hits, including ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, Function.ExtendByZero.linearMap and evaluation preserving zero morphisms. None states the normalized derived geometric mate or ramified reduction evaluation equation.",
+   "date": "2026-10-27",
+   "verdict": "No matching statement; reuse the existing scalar adjunction and evaluation constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictScalarMateFiniteEvaluation",
+  "date": "2026-10-27",
+  "group": "J9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "The finite evaluation calculation in strict compact-support scalar comparison, Step 7.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-strict-scalar-mate-finite-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "Compare supportModel followed by constant image evaluation with the native supportEvaluation. Transpose their proper parts under the finite geometric adjunction. Identity-on-sections ordinary restriction and normalized derived counits make the transposes equal. The open parts agree by the ordinary open unit normalization.",
+   "uses": [
+    "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "lem-pur-system-evaluation-scalar-restriction-normalization",
+    "def-pur-strict-scalar-finite-evaluation-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the evaluated proper scalar mate. The scalar-adjunction tensor-unit formula and proper counit give exactly the transpose of finite properComparison. Injectivity of the adjunction bijection identifies these maps.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the open the open scalar comparison is tensor balancing, and off the open both modules are zero. Its exact localization is finite openComparison. This remains true on diagram resolutions.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary finite balancing commutes with these units and counits on each pure tensor, by its quotient coefficient formula. Its universal cochain equation gives the same derived balancing. Compose proper mate with proper image of the open map; naturality moves the reduction evaluation through them, leaving precisely the scalarImageEvaluation endpoint and finiteTensorMap. Localization extends the equation to every derived M. Positivity includes e=1,n=0; zero inputs and empty opens use the same identities.",
+   "uses": [
+    "def-pur-strict-scalar-mate-evaluation-data",
+    "def-pur-finite-compact-support-scalar-data",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-pur-system-evaluation-scalar-restriction-normalization",
+  "def-pur-strict-scalar-finite-evaluation-transport",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricScalarFiniteEvaluation",
+  "file": "lean/Sheaf/Paper/GeometricScalarFiniteEvaluation.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.geometricScalar_finiteEvaluation",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.geometricScalar_finiteEvaluation"
+  ],
+  "statement": "theorem geometricScalar_finiteEvaluation\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E X) (e : ℕ)\n    (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e)\n    (M : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :\n    (ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) Y n).map\n        ((T l E F i Y).map ((supportModel l E c S).hom.app M) ≫\n          (comparison l E F i c).app ((reduction l E X S).obj M)) ≫\n        (scalarImageEvaluation l E F i c S e he hepos n).hom.app M =\n      (sourceEvaluation l E F i c S e he hepos n).hom.app M ≫\n        (positiveRestriction l F Y (e * (n + 1))\n          (Nat.mul_pos hepos (Nat.le_add_left 1 n))).map\n          (PurCompactSupport.finiteTensorMap l E F i e he hepos n c M)",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261026T183009-L-3600165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261026T183009-L-3600165",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

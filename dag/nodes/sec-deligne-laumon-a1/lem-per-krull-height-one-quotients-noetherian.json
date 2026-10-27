@@ -1,0 +1,232 @@
+{
+ "id": "lem-per-krull-height-one-quotients-noetherian",
+ "kind": "statement",
+ "title": "A Krull domain with Noetherian height-one prime quotients is Noetherian",
+ "statement": "A commutative integral domain $D$ (a nonzero commutative ring without zero divisors), with fraction field $F=\\operatorname{Frac}(D)$, is called Krull if: (i) for every height-one prime $P$ (a nonzero prime with no prime strictly between $(0)$ and $P$), $D_P$ [def-weil-pbc-localization-at-prime] is a Noetherian [def-weil-pbc-noetherian-ring] normal domain [def-weil-pbc-normal-ring]; (ii) $D=\\bigcap_{\\mathrm{ht}(P)=1}D_P$ inside $F$; and (iii) every nonzero element of $D$ lies in only finitely many height-one primes. An empty intersection inside $F$ means $F$ itself. Let $D$ be a Krull domain. If $D/P$ is a Noetherian ring for every height-one prime ideal $P\\subset D$, then $D$ is a Noetherian ring. No prior Noetherianity assumption on $D$, and no finite-dimensionality assumption, is imposed.",
+ "source": {
+  "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+  "place": "Marot, Sur les anneaux universellement japonais (1975), printed p.104, footnote (1) to Lemma 1.2: Nishimura’s general Krull-domain criterion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix a height-one prime $P$ and set $S_n=P^{(n)}=D\\cap(PD_P)^n$ for $n\\ge0$. The maximal-ideal contraction statement [lem-trf-localization-maximal-contraction] gives $S_1=P$, while $S_0=D$. By [lem-per-krull-symbolic-graded-embedding], each $S_n/S_{n+1}$ embeds $D$-linearly into $D/P$. A module is called Noetherian here when all its submodules are finitely generated. The $D$-submodules of $D/P$ are exactly its ideals, since the scalar action factors through the surjection $D\\to D/P$. Thus the hypothesis makes $D/P$ Noetherian as a $D$-module; the injection shows that all $S_n/S_{n+1}$ are Noetherian $D$-modules as well: identify any submodule with its image ideal in $D/P$ and lift its finite generators.",
+   "uses": [
+    "lem-trf-localization-maximal-contraction",
+    "lem-per-krull-symbolic-graded-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, first two proof paragraphs, printed pp.92–93; module interpretation expanded."
+   }
+  },
+  {
+   "text": "Induct on $n\\ge1$ to show that $D/S_n$ is Noetherian as a $D$-module. The base case is $D/S_1=D/P$. For the step, let $N$ be any submodule of $D/S_{n+1}$ and use the natural surjection $D/S_{n+1}\\to D/S_n$. Its kernel is $S_n/S_{n+1}$: a class represented by $a$ maps to zero exactly when $a\\in S_n$. The intersection of $N$ with this kernel has finitely many generators by the preceding step, and the image of $N$ has finitely many generators by induction. Choose lifts in $N$ of the latter generators. These lifts together with the kernel generators generate $N$, since subtracting a combination with the same image leaves an element of the kernel. This proves the inductive assertion, without assuming $D$ Noetherian.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, short exact sequences and induction, printed p.93; finite-generator proof written out."
+   }
+  },
+  {
+   "text": "Let $0\\ne b\\in D$. Apply [lem-trf-krull-principal-primary-decomposition] to obtain the finite list $P_1,\\ldots,P_t$ of height-one primes containing $b$, and $bD=\\bigcap_iJ_i$, with $J_i=D\\cap bD_{P_i}$. Its Krull hypotheses are exactly the three conditions in our statement. If $t=0$, the empty intersection is $D$, so $bD=D$ and $D/bD=0$.",
+   "uses": [
+    "lem-trf-krull-principal-primary-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Definition 4.10.1 and Proposition 4.10.3; Theorem 4.10.7, last proof paragraph, printed p.93."
+   }
+  },
+  {
+   "text": "For each listed $P_i$, [lem-weil-pbc-localization-dimension-chains-below-prime] gives $\\dim D_{P_i}=1$. It is a Noetherian normal local domain by the Krull hypothesis, so [lem-sc-normal-dim1-dvr] makes it a discrete valuation ring. Choose a nonzero generator $\\pi_i$ of its maximal ideal $P_iD_{P_i}$. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], $b/1=u_i\\pi_i^{e_i}$ with $u_i$ a unit. The element $b/1$ is nonzero because $D$ is a domain and localization is injective: if $b/1=0$, some nonzero denominator kills $b$. It lies in the maximal ideal because $b\\in P_i$, so $e_i\\ge1$. Consequently $bD_{P_i}=(P_iD_{P_i})^{e_i}$ and $J_i=P_i^{(e_i)}$. Step 2 therefore makes $D/J_i$ Noetherian as a $D$-module.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-sc-normal-dim1-dvr",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, last proof paragraph, printed p.93; Stacks Tag 00PD (lemma-characterize-dvr), conditions (5) and (4) and final assertion."
+   }
+  },
+  {
+   "text": "Write $I_k=J_1\\cap\\cdots\\cap J_k$ for $0\\le k\\le t$, with $I_0=D$. Induct on $k$ to show that $D/I_k$ is Noetherian as a $D$-module; for $k=0$ it is the zero module. For the step, the natural surjection $D/I_k\\to D/I_{k-1}$ has kernel $I_{k-1}/I_k$. The map $I_{k-1}/I_k\\to D/J_k$, $a+I_k\\mapsto a+J_k$, is well defined and $D$-linear because $I_k\\subseteq J_k$, and it is injective: $a\\in I_{k-1}$ and $a\\in J_k$ give $a\\in I_k$. Since $D/J_k$ is Noetherian by Step 4, every submodule of $I_{k-1}/I_k$ is finitely generated: identify it with its image and lift finite generators. The generator-lifting argument of Step 2, with $D/I_k\\to D/I_{k-1}$ in place of $D/S_{n+1}\\to D/S_n$, then shows that every submodule of $D/I_k$ is finitely generated. For $k=t$, Step 3 gives $I_t=\\bigcap_iJ_i=bD$. Thus $D/bD$ is Noetherian as a $D$-module for every nonzero $b$, including the unit case $t=0$, where it is $D/D=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, last proof paragraph, printed p.93; the finite intersection of the $J_i$ handled by the same extension argument, written out."
+   }
+  },
+  {
+   "text": "Finally let $I$ be any ideal of $D$. If $I=0$, the empty set generates it. Otherwise choose $0\\ne b\\in I$. The image $I/bD$ is a $D$-submodule of the Noetherian module $D/bD$, so has finite generators $a_1+bD,\\ldots,a_r+bD$ with $a_j\\in I$. For $a\\in I$, subtract a $D$-linear combination of the $a_j$ with the same image in $I/bD$; the remainder belongs to $bD$. Hence $I=(b,a_1,\\ldots,a_r)$. Every ideal is finitely generated, which is precisely that $D$ is Noetherian. This also handles a field: the only nonzero ideals contain a unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, final sentence, printed p.93; missing ideal-generation implication expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-krull-symbolic-graded-embedding",
+  "lem-sc-normal-dim1-dvr",
+  "lem-trf-krull-principal-primary-decomposition",
+  "lem-trf-localization-maximal-contraction",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-localization-dimension-chains-below-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/swanson-huneke-integral-closure.pdf",
+  "place": "Worker-written assembly following Swanson–Huneke Theorem 4.10.7, printed pp.92–93, read online; local source unavailable (WANTED in report). Elementary exact-sequence, diagonal-kernel, and ideal-generation arguments are expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-krull-height-one-quotients-noetherian: A Krull domain whose quotient by every height one prime ideal is Noetherian is Noetherian",
+   "results": "{\"t\": \"2026-10-24T07:07:37Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-krull-height-one-quotients-noetherian: A Krull domain whose quotient by every height one prime ideal is Noetherian is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindRing.toIsNoetherian\", \"IsDedekindDomainInv.isNoetherianRing\", \"IsDedekindDomainDvr.toIsNoetherian\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsNoetherianRing.of_isLocalization_maximal\", \"isDedekindRing_iff\", \"IsNoetherianRing.of_prime_ne_bot\", \"IsNoetherianRing.of_prime\"], \"digest\": \"a6fba34a4bf3891e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Krull-domain criterion absent; IsNoetherianRing.of_prime and of_prime_ne_bot require finite generation of prime ideals, not Noetherian prime quotients (Noetherian/OfPrime.lean:69-87 read). Dedekind results already assume Noetherianity or invertibility; semilocal descent assumes finitely many maximal ideals. Dimension results do not assert this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Nishimura|IsKrullDomain|[Kk]rull [Dd]omain",
+   "results": "{\"t\": \"2026-10-24T07:08:17Z\", \"tool\": \"grep\", \"query\": \"Nishimura|IsKrullDomain|[Kk]rull [Dd]omain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Krull-domain criterion absent; IsNoetherianRing.of_prime and of_prime_ne_bot require finite generation of prime ideals, not Noetherian prime quotients (Noetherian/OfPrime.lean:69-87 read). Dedekind results already assume Noetherianity or invertibility; semilocal descent assumes finitely many maximal ideals. Dimension results do not assert this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-krull-height-one-quotients-noetherian: Krull domain is Noetherian if its quotients by height one prime ideals are Noetherian",
+   "results": "{\"t\": \"2026-10-24T07:08:18Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-krull-height-one-quotients-noetherian: Krull domain is Noetherian if its quotients by height one prime ideals are Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Ideal.height_le_ringKrullDim_quotient_add_one\", \"IsDedekindRing.casesOn\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"isDedekindRing_iff\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"isFiniteLength_quotient_span_singleton\"], \"digest\": \"1f6369d8babb475e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Krull-domain criterion absent; IsNoetherianRing.of_prime and of_prime_ne_bot require finite generation of prime ideals, not Noetherian prime quotients (Noetherian/OfPrime.lean:69-87 read). Dedekind results already assume Noetherianity or invertibility; semilocal descent assumes finitely many maximal ideals. Dimension results do not assert this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherianRing\", \"HeightOneSpectrum\"",
+   "results": "{\"t\": \"2026-10-24T07:08:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNoetherianRing\\\", \\\"HeightOneSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Krull-domain criterion absent; IsNoetherianRing.of_prime and of_prime_ne_bot require finite generation of prime ideals, not Noetherian prime quotients (Noetherian/OfPrime.lean:69-87 read). Dedekind results already assume Noetherianity or invertibility; semilocal descent assumes finitely many maximal ideals. Dimension results do not assert this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-krull-height-one-quotients-noetherian: Nishimura criterion Noetherianity of Krull rings from Noetherian prime divisors",
+   "results": "{\"t\": \"2026-10-24T07:08:19Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-krull-height-one-quotients-noetherian: Nishimura criterion Noetherianity of Krull rings from Noetherian prime divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_prime\", \"IsNoetherianRing.of_prime_ne_bot\", \"IsDedekindRing.toIsNoetherian\", \"IsDedekindDomainDvr.toIsNoetherian\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsDedekindDomainInv.isNoetherianRing\", \"IsNoetherianRing.of_isLocalization_maximal\", \"IsPrincipalIdealRing.krullDimLE_one\"], \"digest\": \"8c4d7c687341afac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Krull-domain criterion absent; IsNoetherianRing.of_prime and of_prime_ne_bot require finite generation of prime ideals, not Noetherian prime quotients (Noetherian/OfPrime.lean:69-87 read). Dedekind results already assume Noetherianity or invertibility; semilocal descent assumes finitely many maximal ideals. Dimension results do not assert this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Nishimura|IsKrullDomain|Krull.domain|Krull.ring",
+   "results": "{\"t\": \"2026-10-24T07:31:44Z\", \"tool\": \"grep\", \"query\": \"Nishimura|IsKrullDomain|Krull.domain|Krull.ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind candidates assume Noetherianity or dimension one; OfPrime.lean:69-87 requires finitely generated prime ideals, not Noetherian prime quotients. No general Krull-domain criterion found after two phrasings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krull domain with Noetherian quotients by height one primes is Noetherian",
+   "results": "{\"t\": \"2026-10-24T07:31:44Z\", \"tool\": \"leansearch\", \"query\": \"Krull domain with Noetherian quotients by height one primes is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindRing.toIsNoetherian\", \"IsDedekindDomainDvr.toIsNoetherian\", \"isDedekindRing_iff\", \"IsDedekindRing.casesOn\", \"isDedekindDomain_iff\", \"IsDedekindDomainInv.dimensionLEOne\", \"Ideal.height_le_card_of_mem_minimalPrimes_span_finset\", \"Ideal.height_le_ringKrullDim_quotient_add_one\"], \"digest\": \"a0106b195c0b7611\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind candidates assume Noetherianity or dimension one; OfPrime.lean:69-87 requires finitely generated prime ideals, not Noetherian prime quotients. No general Krull-domain criterion found after two phrasings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherianRing\", \"HeightOneSpectrum\"",
+   "results": "{\"t\": \"2026-10-24T07:31:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNoetherianRing\\\", \\\"HeightOneSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind candidates assume Noetherianity or dimension one; OfPrime.lean:69-87 requires finitely generated prime ideals, not Noetherian prime quotients. No general Krull-domain criterion found after two phrasings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Krull domain is Noetherian if its quotients by height one prime ideals are Noetherian",
+   "results": "{\"t\": \"2026-10-24T07:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"A Krull domain is Noetherian if its quotients by height one prime ideals are Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainInv.isNoetherianRing\", \"IsDedekindRing.toIsNoetherian\", \"IsDedekindDomainDvr.toIsNoetherian\", \"IsNoetherianRing.of_isLocalization_maximal\", \"isDedekindRing_iff\", \"IsNoetherianRing.of_prime\", \"IsNoetherianRing.of_prime_ne_bot\", \"FractionalIdeal.isNoetherian\"], \"digest\": \"a42d3dda423b0b14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind candidates assume Noetherianity or dimension one; OfPrime.lean:69-87 requires finitely generated prime ideals, not Noetherian prime quotients. No general Krull-domain criterion found after two phrasings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nishimura theorem Krull rings noetherian height one prime quotient rings",
+   "results": "{\"t\": \"2026-10-24T07:32:58Z\", \"tool\": \"leanfinder\", \"query\": \"Nishimura theorem Krull rings noetherian height one prime quotient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrincipalIdealRing.krullDimLE_one\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"isDedekindRing_iff\", \"IsDedekindRing.toDimensionLEOne\", \"IsDedekindRing\", \"IsDedekindDomain.HeightOneSpectrum\", \"isDedekindDomain_iff\", \"IsDedekindRing.toIsNoetherian\"], \"digest\": \"e0ef22ac18905bb0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind candidates assume Noetherianity or dimension one; OfPrime.lean:69-87 requires finitely generated prime ideals, not Noetherian prime quotients. No general Krull-domain criterion found after two phrasings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-japanese-quotients-noetherian-normalization",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, and Appendix A, printed p.15: Marot’s lifting property for Nagata rings (reference [8]). Marot lifting input, Proposition 2.3: Marot, Sur les anneaux universellement japonais (1975), Lemma 1.2, printed pp.104-105, with the stronger hypothesis on all nonzero primes used in Proposition 2.3, printed p.107. Noetherian-normalization input: Marot Lemma 1.2, proof, sentence reducing to height-one prime quotients, and footnote (1).",
+   "via": [
+    "lem-per-japanese-quotients-noetherian-normalization",
+    "lem-per-adic-nagata-lifting",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-krull-height-one-quotients-noetherian",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuses the existing Krull principal decomposition; one new statement-only lemma isolates the genuine symbolic-power embedding argument. Six steps supply the Noetherian module filtration, finite-intersection extension argument, and arbitrary-ideal finite generation, with no prior Noetherianity or dimension bound.",
+  "blueprint": "Historical auxiliary algebra branch through Marot Lemma 1.2 footnote (1), as recorded in blueprint.from.place. The current latest ancestor proof Step 3 concerns Artin–Gabber duality and does not itself state a Krull-ring criterion; no new verbatim blueprint claim is asserted. The split supplies exactly the existing descendant criterion, via Mori–Nishimura Theorem 4.10.7.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-krull-principal-primary-decomposition",
+    "why": "Generic commutative-algebra theorem about principal ideals in a Krull domain, used as stated; this perverse-sheaf unit has no such algebra input."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic one-dimensional normal local ring criterion for DVRs, needed only for the height-one local algebra; it replaces no geometric step of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-krull-principal-primary-decomposition",
+  "lem-sc-normal-dim1-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-af1534118",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-af1534118 (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-per-krull-symbolic-graded-embedding in full, and the statement of every cited node. The item statement is unchanged: the Krull definition matches Swanson–Huneke Def. 4.10.1 and the conclusion is Mori–Nishimura, Thm 4.10.7. That PDF is not in the local literature (the worker filed a WANTED), so I worked every step out again myself. Step 1 gets S_1=P from the contraction leaf and uses the new embedding; submodules of D/P are its ideals. Step 2 is a correct elementary extension induction. Step 3 uses the trf Krull decomposition exactly as stated, including t=0. Step 4 is correct: height 1 gives dim 1, then normal-dim1-dvr, then unit×π^e with e≥1, so J_i=P_i^(e_i). Step 6 is correct ideal generation, and the field case works. The new node is true: take x=a/∏c_i^{N_i} with v_P(x)=1 and v_Q(x)≤0 for every other Q, and B=D[x]. Then D∩x^nB=P^(n), B/xB≅D/P, and B/xB≅x^nB/x^{n+1}B. I tested n=0, a DVR, and k[u,v] with P=(u). It is statement-only and self-contained, it does not restate an item clause, and my DAG search (symbolic power, Nishimura, 4.10.7) found no duplicate. Batch-5 check: lem-trf-localization-maximal-contraction is a Mathlib leaf. The closure of lem-trf-krull-principal-primary-decomposition is 8 general commutative-algebra nodes. Neither assumption gives either result and neither is part of their proofs, so both are accepted as generic. The tool_uses for the Krull decomposition and normal-dim1-dvr are accepted. Route check: the delivery cited lem-per-noetherian-module-finite-product (Q04, 2026-10-19 dropped route) at Step 5. The fact itself is route-neutral, but I removed the citation to a dropped node. FIX: Step 5 now proves D/(J_1∩…∩J_k) Noetherian by induction on k, since the kernel I_{k-1}/I_k embeds into D/J_k, using the Step 2 extension argument. I also removed the node from proof_deps and updated the split_report summary. Corrected item: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-krull-height-one-quotients-noetherian.json.; 1 file(s) fixed by the reviewer"
+ }
+}

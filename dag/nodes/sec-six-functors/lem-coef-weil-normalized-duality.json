@@ -1,0 +1,137 @@
+{
+ "id": "lem-coef-weil-normalized-duality",
+ "kind": "statement",
+ "title": "One-scheme normalized coefficient Weil duality",
+ "statement": "Fix $D,\\ell,\\Omega$ and a separated finite-type model $X_0$ [def-weil-finite-field-fiber]. There exist actual finite/common coefficient duality data $B$ on its geometric fiber, with an internal-Hom identification and exceptional-unit dualizing identification [def-sf-common-stage-verdier-data], and a coefficient Weil-duality record $W$ [def-coef-verdier-weil-data] on this $B$, with its same evaluation and biduality, such that DualizingNormalization holds for $B,W$. In particular the finite scalar and finite-to-common dualizing and dual comparisons are equivariant. The duality is existential: the recorded interface pins the signed symmetry of the finite data only on literal K-flat pairs, so a duality whose biduality is twisted by a locally constant sign not preserved by geometric Frobenius (e.g. $X_0=\\operatorname{Spec}\\mathbf F_{q^2}$) satisfies the interface but admits no Weil structure with equivariant biduality. This statement concerns one scheme and asserts no exceptional adjunction for a general relative morphism.",
+ "stmt_deps": [
+  "def-coef-verdier-weil-data",
+  "def-weil-finite-field-fiber",
+  "def-sf-common-stage-verdier-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Proof paragraphs 1–3; One-scheme normalized coefficient Weil duality"
+ },
+ "proof": [
+  {
+   "text": "Construct $B$ with its internal-Hom and dualizing identifications by the normalized coefficient construction of [thm-coef-qbar-verdier], with the natural Koszul signed symmetry at every finite field. The Frobenius pullbacks are equivalences [lem-pod-isomorphism-field-transport]. At the structure morphism take the right mate of inverse canonical compact-support exchange [lem-coef-frobenius-exchange-equivalence, lem-weil-mate-iso-along-equivalences]. Apply it to the constant object with its tensor-unit identification, and conjugate by the given dualizing identification. Adjoint uniqueness makes it independent of compactification. The counit-normalized scalar comparisons give the dualizing scalar square.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport",
+    "lem-coef-frobenius-exchange-equivalence",
+    "lem-weil-mate-iso-along-equivalences",
+    "def-sf-common-stage-verdier-data",
+    "thm-coef-qbar-verdier"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the evaluation-normalized internal-Hom pullback comparison of [lem-pod-geometric-frobenius-internal-hom-comparison], conjugated through the given internal-Hom identification and the dualizing structure. On a Weil pair precompose its contravariant argument with the inverse structure. Naturality proves the arrow equation. Evaluation normalization gives the evaluation equation, and the injective tensor-Hom transpose of [lem-coef-completed-tensor-hom-transpose] applied after tensor symmetry gives the actual biduality square.",
+   "uses": [
+    "lem-pod-geometric-frobenius-internal-hom-comparison",
+    "lem-coef-completed-tensor-hom-transpose",
+    "def-sf-common-stage-verdier-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite scalar and common-stage comparisons are the evaluation-normalized comparisons of the same coefficient operations [thm-coef-rational-verdier, thm-coef-qbar-verdier]. Their two Frobenius routes have equal evaluation transposes, so they coincide. At common coefficients use the actual common-stage Hom and evaluation transport; finite representatives are an alternative verification by [def-weil-algebraically-closed-coefficients]. No integral stable lattice is chosen.",
+   "uses": [
+    "thm-coef-rational-verdier",
+    "thm-coef-qbar-verdier",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-isomorphism-field-transport",
+  "lem-coef-frobenius-exchange-equivalence",
+  "lem-weil-mate-iso-along-equivalences",
+  "def-sf-common-stage-verdier-data",
+  "lem-pod-geometric-frobenius-internal-hom-comparison",
+  "lem-coef-completed-tensor-hom-transpose",
+  "thm-coef-rational-verdier",
+  "thm-coef-qbar-verdier",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "V3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "One-scheme normalized coefficient Weil duality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural compact support Frobenius exchange commutes with extension of coefficient fields and descends to the common coefficient category",
+   "results": "8 hits, including ModuleCat.extendScalarsComp, ModuleCat.homEquiv_extendScalarsComp, comonadicExtendScalars, and field Frobenius identities. No constructible-sheaf compact-support normalization result.",
+   "date": "2026-10-25",
+   "verdict": "no exact match; the project geometric exchange interface is needed"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Mates, including mateEquiv, unit_mateEquiv, mateEquiv_counit and mateEquiv_vcomp. These supply the generic mate calculus, not the geometric or coefficient normalizations.",
+   "date": "2026-10-25",
+   "verdict": "generic mate calculus reused; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|Verdier|mateEquiv|IsoAlgebra",
+   "results": "Search restricted to Mathlib/CategoryTheory/Adjunction: 5 hits in Mathlib/CategoryTheory/Adjunction/Mates.lean, lines 53, 84, 123, 124, 128. Direct project rg searches also read the coefficient duality, exchange, and IsoAlgebra interfaces.",
+   "date": "2026-10-25",
+   "verdict": "no exact geometric statement; reuse the project definitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefVerdierWeilEquivariance",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Proof paragraphs 1–3; One-scheme normalized coefficient Weil duality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefWeilNormalizedDuality",
+  "file": "lean/Sheaf/SixFunctors/CoefWeilNormalizedDuality.lean",
+  "declaration": "WeilConjectures.coef_weil_normalized_duality",
+  "declarations": [
+   "WeilConjectures.coef_weil_normalized_duality"
+  ],
+  "statement": "theorem coef_weil_normalized_duality\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom]\n    [QuasiCompact X₀.hom] [IsSeparated X₀.hom] :\n    ∃ B : CoefVerdierWeil.FiberDuality D l hl Ω X₀,\n      Nonempty (CoefVerdierWeil.FiberInternalHom D l hl Ω X₀ B) ∧\n      CoefVerdierWeil.FiberDualizing D l hl Ω X₀ B ∧\n      ∃ W : CoefVerdierWeil.Coefficients D l hl Ω X₀ B,\n        CoefVerdierWeil.DualizingNormalization D l hl Ω X₀ B W",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c479c",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T003041-L-142554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c479c",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T003041-L-142554",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery c479 Lean/JSON byte-identical to 4fd08 (whose FIX never landed: report fix name refused); holes vs IntegralVerdier.SignedSymmetry (still unpinned in clone 03f3c71); 5 modules + 3 direct importers compiled"
+ }
+}

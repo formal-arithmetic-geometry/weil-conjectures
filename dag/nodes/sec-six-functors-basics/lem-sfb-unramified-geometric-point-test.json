@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-unramified-geometric-point-test",
+ "kind": "statement",
+ "title": "Unramifiedness tested at rational points of geometric fibres",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. For an algebraically closed field $\\Omega$ and a geometric point $s:\\operatorname{Spec}\\Omega\\to S$ [def-weil-geometric-point], put $X_s=X\\times_S\\operatorname{Spec}\\Omega$, with projections $p_s:X_s\\to\\operatorname{Spec}\\Omega$ and $g_s:X_s\\to X$ [def-pc-fibre-product]. Then $f$ is unramified [def-weil-unramified-morphism] if and only if, for every such $\\Omega,s$ and every morphism $x:\\operatorname{Spec}\\Omega\\to X_s$ with $p_s\\circ x=\\mathrm{id}$, the morphism $p_s$ is unramified at the image of $x$, meaning on some open neighbourhood of that point. Every $z\\in X$ admits such $\\Omega,s,x$ with $g_s(x)=z$ and $\\Omega$ an algebraic closure of $\\kappa(z)$ [def-weil-residue-field, def-weil-algebraic-closure]. The quantifier on $\\Omega$ allows extensions transcendental over $\\kappa(f(z))$. No flatness, local finite presentation, quasi-compactness, or Noetherian hypothesis is imposed; an empty source satisfies the criterion.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0475 (lemma-set-points-where-fibres-unramified), together with schemes.tex Tag 01J9 (lemma-characterize-points) for field-valued points."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "def-weil-unramified-morphism",
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "For $z\\in X$, choose an algebraic closure $\\iota:\\kappa(z)\\to\\Omega$ by [def-weil-algebraic-closure]. By [lem-weil-pbc-morphism-from-spec-field], the pair $(z,\\iota)$ gives $a:\\operatorname{Spec}\\Omega\\to X$ with image $z$. Put $s=f\\circ a$, a geometric point by [def-weil-geometric-point]. The pair $(a,\\mathrm{id})$ satisfies $f\\circ a=s\\circ\\mathrm{id}$, so [def-pc-fibre-product] gives $x=(a,\\mathrm{id}):\\operatorname{Spec}\\Omega\\to X_s$ with $g_s\\circ x=a$ and $p_s\\circ x=\\mathrm{id}$. Its image $y$ therefore has $g_s(y)=z$. This proves the lifting clause without any algebraicity assumption over $\\kappa(f(z))$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-geometric-point",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J9 (lemma-characterize-points), preceding description by pairs; fibre-product universal property, Tag 01JP (definition-fibre-product)"
+   }
+  },
+  {
+   "text": "Write $W_f$ for the union of unramified source neighbourhoods in [lem-trf-unramified-locus-base-change]. For each geometric $s$, independently of whether $f$ is unramified, [lem-weil-pbc-lft-base-change] makes $p_s$ locally of finite type, and the locus lemma gives $W_{p_s}=g_s^{-1}(W_f)$. If $f$ is unramified, $X$ itself occurs in that union, hence $W_f=X$ and $W_{p_s}=X_s$. In particular every test section has image in an unramified source neighbourhood for $p_s$.",
+   "uses": [
+    "lem-trf-unramified-locus-base-change",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0475 (lemma-set-points-where-fibres-unramified), first assertion; Tag 01T4 (lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "Conversely assume the test condition. For any $z\\in X$, take $s,x,y$ from Step 1. The hypothesis gives $y\\in W_{p_s}$, because it supplies an open unramified neighbourhood of $y$. Apply the equality $W_{p_s}=g_s^{-1}(W_f)$ of [lem-trf-unramified-locus-base-change], with the locally finite type hypothesis for $p_s$ already checked in Step 2. This gives $z=g_s(y)\\in W_f$. Since $z$ was arbitrary, $W_f=X$.",
+   "uses": [
+    "lem-trf-unramified-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0475 (lemma-set-points-where-fibres-unramified), arbitrary-base-change equality"
+   }
+  },
+  {
+   "text": "Thus $X$ is covered by opens on which $f$ is unramified. On each such open take the affine unramified charts in the equivalent affine-cover formulation of [def-weil-unramified-morphism]. Their union is an affine unramified covering for $f$ itself; the ring maps are unchanged on these charts. That same formulation proves $f$ unramified. If $X$ is empty this is the empty affine cover; the test and lifting clauses are vacuous, so the argument includes that case.",
+   "uses": [
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G4 (definition-unramified), unramified at every source point; Tag 02GE (lemma-unramified-diagonal), equivalence with open-immersion diagonal"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "lem-trf-unramified-locus-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "def-weil-unramified-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0475 (lemma-set-points-where-fibres-unramified) with schemes.tex Tag 01J9 (lemma-characterize-points); explicit geometric-point assembly by Q101"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unramified.*[Gg]eometric|[Gg]eometric.*unramified|unramifiedLocus|formallyUnramified.*baseChange",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"grep\", \"query\": \"unramified.*[Gg]eometric|[Gg]eometric.*unramified|unramifiedLocus|formallyUnramified.*baseChange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"9f169bec06f5efda\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unramifiedness descends from rational points of geometric fibres using an algebraic closure of the residue field of each source point",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"leansearch\", \"query\": \"Unramifiedness descends from rational points of geometric fibres using an algebraic closure of the residue field of each source point\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, CategoryTheory.Limits.pullback.snd",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.FormallyUnramified, CategoryTheory.Limits.pullback.snd\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of schemes is unramified if every rational point of every geometric fibre lies in the unramified locus of the fibre",
+   "results": "{\"t\": \"2026-10-22T06:01:52Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism of schemes is unramified if every rational point of every geometric fibre lies in the unramified locus of the fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.FormallyUnramified.of_comp\"], \"digest\": \"decb7a53d5e58ed5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyUnramified|unramified",
+   "results": "{\"t\": \"2026-10-22T06:01:57Z\", \"tool\": \"grep\", \"query\": \"FormallyUnramified|unramified\", \"sub\": \"AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"10\", \"11\", \"14\", \"16\", \"17\"], \"digest\": \"51264257bc7a6d0f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect a locally finite type scheme morphism being unramified by pulling its unramified locus back to all algebraically closed field valued sections of its fibres",
+   "results": "{\"t\": \"2026-10-22T06:02:08Z\", \"tool\": \"leanfinder\", \"query\": \"Detect a locally finite type scheme morphism being unramified by pulling its unramified locus back to all algebraically closed field valued sections of its fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.FormallyUnramified.of_comp\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\"], \"digest\": \"fd9f3e06fa958859\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "grep",
+   "query": "unramified.*[Gg]eometric|[Gg]eometric.*unramified|unramifiedLocus|formallyUnramified.*baseChange",
+   "results": "{\"t\": \"2026-10-23T04:19:07Z\", \"tool\": \"grep\", \"query\": \"unramified.*[Gg]eometric|[Gg]eometric.*unramified|unramifiedLocus|formallyUnramified.*baseChange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"9f169bec06f5efda\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give formal unramifiedness, its base change, or ring unramified loci, not the geometric-fibre rational-point test together with source-point lifting; the geometric-locus identification and lifting construction are additional steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, CategoryTheory.Limits.pullback.snd",
+   "results": "{\"t\": \"2026-10-23T04:19:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.FormallyUnramified, CategoryTheory.Limits.pullback.snd\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give formal unramifiedness, its base change, or ring unramified loci, not the geometric-fibre rational-point test together with source-point lifting; the geometric-locus identification and lifting construction are additional steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unramifiedness of a locally finite type scheme morphism is detected on rational points of all geometric fibres",
+   "results": "{\"t\": \"2026-10-23T04:19:08Z\", \"tool\": \"leansearch\", \"query\": \"Unramifiedness of a locally finite type scheme morphism is detected on rational points of all geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.Unramified\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.Unramified.of_isLocalization_Away\", \"Algebra.Unramified.mk\", \"Algebra.unramifiedLocus\", \"Algebra.FormallyUnramified\"], \"digest\": \"7a055b12775deb39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give formal unramifiedness, its base change, or ring unramified loci, not the geometric-fibre rational-point test together with source-point lifting; the geometric-locus identification and lifting construction are additional steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism is unramified if its geometric fibre morphisms are unramified at every rational point, lifting each source point using its residue field algebraic closure",
+   "results": "{\"t\": \"2026-10-23T04:19:15Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type scheme morphism is unramified if its geometric fibre morphisms are unramified at every rational point, lifting each source point using its residue field algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.isOpen_unramifiedLocus\"], \"digest\": \"1ac95dde1a6600ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give formal unramifiedness, its base change, or ring unramified loci, not the geometric-fibre rational-point test together with source-point lifting; the geometric-locus identification and lifting construction are additional steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unramified locus of a scheme morphism of locally finite type pulls back exactly along arbitrary base changes and every point lifts to a geometric fibre rational point",
+   "results": "{\"t\": \"2026-10-23T04:20:49Z\", \"tool\": \"leanfinder\", \"query\": \"The unramified locus of a scheme morphism of locally finite type pulls back exactly along arbitrary base changes and every point lifts to a geometric fibre rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"733e8998cbb954dc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give formal unramifiedness, its base change, or ring unramified loci, not the geometric-fibre rational-point test together with source-point lifting; the geometric-locus identification and lifting construction are additional steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-tangent-unramified",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Unramified morphisms detected by geometric fibre tangent spaces; re-split of lem-sfb-geometric-tangent-unramified, old steps 3--5: base-change of unramified locus and lifting each source point",
+   "via": [
+    "lem-sfb-geometric-tangent-unramified",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unramified-geometric-point-test",
+  "worker": "stage1",
+  "summary": "Proved the geometric-point test with no new nodes: explicitly construct the section from an algebraic closure of each source residue field, apply the existing arbitrary-base-change unramified-locus equality in both directions, then unpack the affine-cover definition. Statement and statement dependencies unchanged. Searched the project, whole DAG and blueprint, and Mathlib with both semantic phrasings, Loogle and grep. Repair after the live-promotion return: rebased the retained stage-1 fields onto the current live record, re-read every cited statement and Stacks 0475/01J9/01T4/02G4, revalidated all eight citation quotes, and clarified that the base-change equality in Step 2 is unconditional and applies in Step 3.",
+  "blueprint": "Realizes the inherited rigidity input to lem-sfb-geometric-tangent-unramified, old Steps 3--5: geometric pullback of the unramified locus, algebraic-closure source-point lift, and the source-neighbourhood cover. The ultimate inherited place is det-thm-sf-ctf-stability-direct-images proof (3), alteration/plurinodal route. blueprint_refs.py ancestor returns None; the existing null from.node and complete via chain are preserved. Blueprint searches unramified, 0475 and 01J9 found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-unramified-locus-base-change",
+    "why": "Generic arbitrary-base-change equality for the unramified locus, needed in Steps 2 and 3. This rigidity prerequisite has no same-unit substitute and retains precisely the parent split route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-unramified-locus-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-e29e19303",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-e29e19303 (reviewer sub-agent of L); spot-checked: I read the item and all 4 steps in full. The re-push differs from the prior head 66283c7f only in wording: Step 2 says the locus equality holds unconditionally, Step 3 says the local-finite-type hypothesis for p_s was checked in Step 2, and the split_report summary has a repair sentence. Statement, stmt_deps, proof_deps and sources are unchanged, and there are no new nodes. Step 1: algebraic closure of κ(z), then the pair↔Spec Ω morphism (01J9), then s=f∘a, then x=(a,id) from the fibre-product universal property; correct. Steps 2–3: lem-weil-pbc-lft-base-change (01T4) gives p_s locally of finite type. lem-trf-unramified-locus-base-change gives W_{p_s}=g_s^{-1}(W_f) for an arbitrary base change, matching Stacks 0475 (morphisms.tex l.7938, local finite type only). This gives both directions. Step 4: W_f=X, then the affine-chart form of def-weil-unramified-morphism (02G4, local on the source); the empty cover handles X=∅. Small cases checked: empty X, A^1 over k̄, dual numbers, generic point of A^1 with transcendental Ω, F_p(t^{1/p})/F_p(t). The statement is not weakened, does not restate the parent or the locus lemma, and cites no SGA. Batch-5 flag: lem-trf-unramified-locus-base-change is generic Stacks 0475 in unit sk-i-curve-zero with generic permanence proof deps. It is not part of the trace formula or Poincaré duality statements or proofs, so I accept it as outside both assumptions, together with its declared tool_use."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedGeometricPointTest",
+  "declaration": "AlgebraicGeometry.unramified_iff_geometricPoint_test",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedGeometricPointTest.lean",
+  "statement": "theorem unramified_iff_geometricPoint_test {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] : (IsUnramified f ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (x : Spec (.of Ω) ⟶ pullback f s), x ≫ pullback.snd f s = 𝟙 (Spec (.of Ω)) → ∃ U : (pullback f s).Opens, x (IsLocalRing.closedPoint Ω) ∈ U ∧ IsUnramified (U.ι ≫ pullback.snd f s)) ∧ (∀ z : X, ∃ (s : Spec (.of (AlgebraicClosure (X.residueField z))) ⟶ S) (x : Spec (.of (AlgebraicClosure (X.residueField z))) ⟶ pullback f s), x ≫ pullback.snd f s = 𝟙 (Spec (.of (AlgebraicClosure (X.residueField z)))) ∧ pullback.fst f s (x (IsLocalRing.closedPoint (AlgebraicClosure (X.residueField z)))) = z)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d404a33e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Item lean record + new module UnramifiedGeometricPointTest (one sorried theorem unramified_iff_geometricPoint_test). Only the lean field differs from live; all 7 stmt_dep records identical to live; no new nodes. Clause check vs Stacks 0475/01J9: [LocallyOfFiniteType f] only; IsUnramified (Q39 LFT ∧ open-immersion diagonal); Ω : Type u alg closed + s : Spec Ω ⟶ S per def-weil-geometric-point inline interface (transcendental Ω allowed); X_s/p_s/g_s = pullback/snd/fst; section x ≫ snd = 𝟙; 'unramified at image' = ∃ open U ∋ x(pt) with IsUnramified (U.ι ≫ snd), literal, no theorem-node def cited; ↔ both directions; lifting clause over AlgebraicClosure κ(z) with section eq and fst(x pt)=z. True via unramifiedLocus_baseChange + (a,id) lift; universe u suffices. Edge cases: empty X, empty fibre, dual numbers, generic point/transcendental Ω, inseparable κ(z). H4: GeometricTangentUnramified, GeometricFibreUnramifiedCriterion, UnramifiedOrdinaryFibreCriterion, Mathlib FormallyUnramified differ. lean.statement verbatim; imports per brief line 114 (plain import of UnramifiedLocusBaseChange as the only stated proof dep); docstrings with source, blueprint id and 4 proof steps; no defs; lines ≤100; report sections present. No recompile (no change); worker's clean server compile. Advisory: def-weil-algebraic-closure lean null on base (pre-existing)."
+ }
+}

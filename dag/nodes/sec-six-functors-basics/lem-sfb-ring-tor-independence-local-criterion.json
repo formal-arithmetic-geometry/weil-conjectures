@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-ring-tor-independence-local-criterion",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Local-ring criterion for Tor independence of two algebras",
+ "statement": "Let $R$ be a commutative ring, let $A,C$ be commutative $R$-algebras, and use Tor groups [def-weil-pbc-tor-modules] and tensor products [def-weil-pbc-module-tensor-product]. For a prime ideal $\\mathfrak p$ in a ring $T$, write $T_{\\mathfrak p}$ for its localization [def-weil-pbc-localization-at-prime]. Then the following are equivalent: (i) $\\operatorname{Tor}^R_n(A,C)=0$ for every $n>0$; (ii) for every pair of primes $\\mathfrak p\\subset A$, $\\mathfrak q\\subset C$ with common inverse image $\\mathfrak r\\subset R$, one has $\\operatorname{Tor}^{R_{\\mathfrak r}}_n(A_{\\mathfrak p},C_{\\mathfrak q})=0$ for every $n>0$. Equivalently, the canonical augmentation $A\\otimes_R^{\\mathbf L}C\\to(A\\otimes_RC)[0]$ is an isomorphism in the unbounded derived category of $R$-modules [def-weil-abstract-derived-category], with derived tensor computed by K-flat resolutions [def-pc-module-kflat-complex]. No Noetherian, finite-generation or flatness hypothesis on these rings or algebras is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 08HX, lemma-tor-independent, equivalence (1) and (2); the augmentation formulation is the defining Tor homology calculation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=A\\otimes_R C$ and $T_n=\\operatorname{Tor}^R_n(A,C)$. By [lem-kun-derived-module-tor-comparison], $H^{-n}(A[0]\\otimes_R^{\\mathbf L}C[0])\\cong T_n$ for $n\\ge0$, and the positive cohomology is zero. Its simultaneous naturality in the two module variables identifies the actions of multiplication by $a\\in A$ and $c\\in C$ with their actions on Tor. Hence these identifications respect the commuting factor actions, giving the $D$-module structure used below. For any $A$-algebra $A_1$, $A[0]\\otimes_A^{\\mathbf L}A_1[0]\\cong A_1[0]$: the single complex $A[0]$ is K-flat by [lem-pc-module-bounded-flat-kflat], since $A\\otimes_A-$ is the identity and therefore exact. On representatives its tensor is $A\\otimes_A A_1\\to A_1$, $a\\otimes a_1\\mapsto aa_1$, with inverse $a_1\\mapsto1\\otimes a_1$.",
+   "uses": [
+    "lem-kun-derived-module-tor-comparison",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 08HW (lemma-tor-independent-flat), 0DJD (lemma-lemma-tor-independent-flat-compare), and 064K (lemma-derived-tor-quasi-isomorphism); Tor interpretation from Algebra Tag 00LY (section-tor)."
+   }
+  },
+  {
+   "text": "Fix primes $\\mathfrak p\\subset A$ and $\\mathfrak q\\subset C$ contracting to $\\mathfrak r\\subset R$. Put $R_1=R_{\\mathfrak r}$, $A_1=A_{\\mathfrak p}$, $C_1=C_{\\mathfrak q}$ and $E=A_1\\otimes_{R_1}C_1$. All structure maps exist: an element outside $\\mathfrak r$ maps outside both $\\mathfrak p$ and $\\mathfrak q$, hence becomes invertible. The algebra $A\\otimes_R R_1$ is the localization of $A$ at the image of $R\\setminus\\mathfrak r$: the inverse fraction formulas are $a\\otimes(t/s)\\mapsto ta/s$ and $a/s\\mapsto a\\otimes(1/s)$. This also follows by specializing [lem-weil-pbc-localization-tensor-over-base] and using tensor symmetry. Its subsequent localization at the image of $A\\setminus\\mathfrak p$ is $A_1$, because a fraction of fractions maps to the same fraction in $A_{\\mathfrak p}$ and every denominator outside $\\mathfrak p$ has been inverted. The identical formulas with $C,\\mathfrak q$ give $C_1$ as a localization of $R_1\\otimes_R C$. Thus [lem-weil-pbc-localization-flat] verifies all three flatness hypotheses of [lem-sfb-flat-ring-diagram-tensor-cohomology]. Apply that node with $B=C$, $M=A[0]$ and $i=-n$. Step 1 over $R$ and $R_1$, and the displayed tensor-unit identification over $A$, give the canonical isomorphism\n$$T_n\\otimes_D E\\ \\cong\\ \\operatorname{Tor}^{R_{\\mathfrak r}}_n(A_{\\mathfrak p},C_{\\mathfrak q})\\qquad(n\\ge0).$$",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-flat",
+    "lem-sfb-flat-ring-diagram-tensor-cohomology",
+    "lem-kun-derived-module-tor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08HX (lemma-tor-independent), both uses of Tag 08HW; obtain the 08HW formula by specializing Tag 0DJD to M=A[0]. Localization input: Algebra Tags 00DK (lemma-tensor-localization), 00HT (lemma-flat-localization)."
+   }
+  },
+  {
+   "text": "Assume (i). For each pair of primes in (ii) and each $n>0$, $T_n=0$. Its tensor with $E$ is zero: the tensor product is generated by pure tensors and $0\\otimes e=0$. The isomorphism of Step 2 therefore makes $\\operatorname{Tor}^{R_{\\mathfrak r}}_n(A_{\\mathfrak p},C_{\\mathfrak q})$ zero. This proves (ii).",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08HX (lemma-tor-independent), implication (1) to (2)."
+   }
+  },
+  {
+   "text": "Assume (ii), and fix $n>0$. For a maximal ideal $\\mathfrak s\\subset D$, let $\\mathfrak p$ and $\\mathfrak q$ be its inverse images in $A$ and $C$. They are prime, since the inverse image of a proper prime under a unital ring map is proper and prime; their inverse images in $R$ coincide because $r\\otimes1=1\\otimes r$. Form $E$ as in Step 2. There is a compatible ring map $E\\to D_{\\mathfrak s}$: send $a/u$ to $(a\\otimes1)/(u\\otimes1)$ and $c/v$ to $(1\\otimes c)/(1\\otimes v)$. The denominators avoid $\\mathfrak s$ by the definitions of $\\mathfrak p,\\mathfrak q$; both maps agree on $R_{\\mathfrak r}$. By (ii) and Step 2, $T_n\\otimes_D E=0$. Consequently\n$$T_n\\otimes_D D_{\\mathfrak s}\\cong (T_n\\otimes_D E)\\otimes_E D_{\\mathfrak s}=0.$$\nHere associativity has explicit mutually inverse maps $(t\\otimes e)\\otimes z\\mapsto t\\otimes ez$ and $t\\otimes z\\mapsto(t\\otimes1)\\otimes z$. By [lem-weil-pbc-localization-tensor-over-base], with base and first module both $D$, this tensor is the module localization $(T_n)_{\\mathfrak s}$ (using symmetry and $D\\otimes_D T_n=T_n$). Thus the linear map $0\\to T_n$ becomes bijective at every maximal ideal. Apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to conclude that $0\\to T_n$ is bijective, so $T_n=0$. Since $n>0$ was arbitrary, (i) follows.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08HX (lemma-tor-independent), (2) to (3) to (1); Algebra Tag 00HN (lemma-characterize-zero-local), using its maximal-localization bijectivity clause on 0 to T_n."
+   }
+  },
+  {
+   "text": "Finally consider the canonical augmentation $\\epsilon:A\\otimes_R^{\\mathbf L}C\\to D[0]$. In the Tor definition choose a free resolution $F_\\bullet\\to A$ and put $F_i$ in cochain degree $-i$. It is bounded above and K-flat by [lem-pc-module-bounded-flat-kflat], since its terms are free and tensoring with a free module is a direct sum of copies of the identity. Thus $F_\\bullet\\otimes_R C$ computes this derived tensor and represents $\\epsilon$ by its augmented degree-zero map. Its $H^0$ map is the canonical identification $\\operatorname{Tor}^R_0(A,C)=D$ from [def-weil-pbc-tor-modules]; there is no positive cochain term, and its degree $-n$ cohomology is $T_n$ for $n>0$, also as in [lem-kun-derived-module-tor-comparison]. Therefore $H^i(\\epsilon)$ is an isomorphism for all $i$ exactly when every $T_n$ for $n>0$ vanishes. By [lem-weil-pbc-unbounded-derived-iso-cohomology] this is equivalent to $\\epsilon$ being an isomorphism in the unbounded derived category. This proves the final equivalence without any finiteness or flatness hypothesis on $A$ or $C$.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-kun-derived-module-tor-comparison",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Algebra Tag 00LY (section-tor) and Tag 00LZ (lemma-tor-welldefined); More on Algebra Tag 064K (lemma-derived-tor-quasi-isomorphism), Section 06XY (section-derived-tensor-product); Derived Categories Tag 05RT (lemma-acyclic)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-derived-module-tor-comparison",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-flat",
+  "lem-sfb-flat-ring-diagram-tensor-cohomology",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 08HX (lemma-tor-independent), using the existing Tag 0DJD flat-diagram theorem to supply Tag 08HW, and the defining Tor calculation for the augmentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For commutative R algebras A and B vanishing of all positive Tor over R is equivalent to Tor vanishing after localizing A B and R at every pair of primes over the same base prime",
+   "results": "Read returned hits: instFlatAtPrime, RingHom.Flat.ofLocalizationPrime, RingHom.Flat.propertyIsLocal, RingHom.Flat.holdsForLocalizationAway, Module.flat_of_isLocalized_maximal, Algebra.HasGoingDown.of_flat, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary prime-spectrum or localization identities, generic Tor declarations, and unrelated results do not state this Tor-vanishing localization criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independence of two commutative algebras is local on their tensor product prime spectrum",
+   "results": "Read returned hits: PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux, IsLocalization.tensorProduct_tensorProduct, PrimeSpectrum.continuous_tensorProductTo, PrimeSpectrum.tensorProductTo, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks, IsLocalization.tensorProduct_isLocalizedModule, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, PrimeSpectrum.nontrivial_iff_mem_rangeComap. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary prime-spectrum or localization identities, generic Tor declarations, and unrelated results do not state this Tor-vanishing localization criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"Localization\"",
+   "results": "Read returned hits: AddOreLocalization.numeratorAddUnit, OreLocalization.numeratorUnit, AddOreLocalization.numeratorHom, OreLocalization.numeratorHom, AddOreLocalization.numerator_isAddUnit, OreLocalization.numerator_isUnit, AddOreLocalization.numeratorHom_apply, OreLocalization.numeratorHom_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary prime-spectrum or localization identities, generic Tor declarations, and unrelated results do not state this Tor-vanishing localization criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b.*[Ll]ocal|[Ll]ocal.*\\bTor\\b|[Tt]or[Ii]ndependent",
+   "results": "No hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary prime-spectrum or localization identities, generic Tor declarations, and unrelated results do not state this Tor-vanishing localization criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher Tor modules of two algebras vanish if their local rings are Tor independent for all pairs of points with the same image",
+   "results": "Read returned hits: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Extension.tensorH1Cotangent, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallyUnramified.iff_exists_tensorProduct, Module.free_of_lTensor_residueField_injective, Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary prime-spectrum or localization identities, generic Tor declarations, and unrelated results do not state this Tor-vanishing localization criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For commutative R algebras A and C positive Tor groups vanish if and only if they vanish after localizing both algebras at every pair of primes above the same base prime",
+   "results": "Read returned hits: RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway, Module.mem_freeLocus_iff_tensor, Module.comap_freeLocus_le, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Rep.isZero_Tor_succ_of_projective, Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule, Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary localization, flatness, cotangent homology, or unrelated Tor; none states the two-algebra local-ring criterion or its full derived augmentation equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b.*[Ll]ocal|[Ll]ocal.*\\bTor\\b|[Tt]or[Ii]ndependent",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary localization, flatness, cotangent homology, or unrelated Tor; none states the two-algebra local-ring criterion or its full derived augmentation equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independence of two algebras can be checked at pairs of prime ideals over a common prime of the base ring",
+   "results": "Read returned hits: Algebra.IsEtaleAt.comp, PrimeSpectrum.tensorProductTo, Ideal.primesOver, Localization.AtPrime.instAlgebraOfLiesOver, Algebra.IsUnramifiedAt.congr_simp, instFlatAtPrime, Localization.AtPrime.instAlgebraOfLiesOver.congr_simp, Ideal.primesOver.isPrime.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary localization, flatness, cotangent homology, or unrelated Tor; none states the two-algebra local-ring criterion or its full derived augmentation equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"localization\"",
+   "results": "Read returned hits: AddOreLocalization.numeratorAddUnit, OreLocalization.numeratorUnit, AddOreLocalization.numeratorHom, OreLocalization.numeratorHom, AddOreLocalization.numerator_isAddUnit, OreLocalization.numerator_isUnit, AddOreLocalization.numeratorHom_apply, OreLocalization.numeratorHom_apply.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary localization, flatness, cotangent homology, or unrelated Tor; none states the two-algebra local-ring criterion or its full derived augmentation equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of higher derived tensor homology of commutative algebras is local on the prime spectrum of their tensor product",
+   "results": "Read returned hits: Algebra.H1Cotangent.isLocalizedModule, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux, Algebra.FormallyEtale.instTensorProduct, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, Algebra.Extension.tensorH1Cotangent, Algebra.FormallySmooth.instTensorProduct, Module.mem_freeLocus_iff_tensor.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary localization, flatness, cotangent homology, or unrelated Tor; none states the two-algebra local-ring criterion or its full derived augmentation equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-tor-independent-base-change",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf. Supporting input: Tag 08IR, lemma-compare-base-change: the general qcqs direct-image theorem, before specializing to the closed structure sheaf. Supporting input for Tag 08IR, last affine calculation: passage from ordinary local-ring Tor vanishing to coordinate-ring Tor vanishing, Tag 08HX.",
+   "via": [
+    "lem-sfb-space-tor-independent-base-change",
+    "lem-sfb-space-relative-flat-closed-kernel-base-change",
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ring-tor-independence-local-criterion",
+  "worker": "stage1",
+  "summary": "Checked Tag 08HX against the unchanged statement and proved its two implications by specializing the existing flat-diagram derived-cohomology comparison, followed by maximal-localization detection. Supplied the augmentation equivalence via a bounded-above free resolution. Reused all prerequisite nodes; no new nodes. Repeated current Mathlib searches in the required logged tool and found no full match.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3); the item supplies the final affine ordinary-local-ring Tor criterion needed by the existing Tag 08IR algebraic-space base-change dependency chain. Retained the inherited from.node=null and via chain: blueprint_refs.py ancestor returns None for this imported ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-derived-module-tor-comparison",
+    "why": "The natural Tor/cohomology dictionary for ordinary modules supplies the factor actions and all cohomology degrees; the unit does not replace this homological-algebra tool."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Bounded-above free module resolutions and the rank-one single complex are valid K-flat representatives; this is a generic resolution tool outside the geometric unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-derived-module-tor-comparison",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-22da776a6",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-22da776a6 (reviewer sub-agent of L); spot-checked: I read the whole proof against Stacks Tag 08HX (more-algebra.tex line 15102), its definition (line 14948) and Tag 0DJD; the full checks are in review.md. The item statement is unchanged and matches 08HX (1)<=>(2); the augmentation clause is an equivalent restatement. There are no new nodes. No repair or re-split note exists for this item, and no SGA source is used. Step 1: the cited Tor comparison is natural in both variables, which carries the A and C actions over to Tor, and A[0] is K-flat by lem-pc-module-bounded-flat-kflat. Step 2: the flat-diagram node is applied with R_1=R_r, A_1=A_p, B_1=C_q, M=A[0], i=-n. I checked each flatness hypothesis: A tensor R_r is a localisation of A, A_p is a further localisation of it, and the same holds for C. The node's conclusion gives T_n tensor_D E = Tor^{R_r}_n(A_p,C_q), which is the 08HW formula. Step 3 is genuinely elementary. Step 4: the contractions of a maximal ideal s of D are primes over a common prime, the map E->D_s is well defined, (T_n)_s is identified by the localization-tensor node, and the 00HN node applies to 0->T_n; the case D=0 is covered vacuously. Step 5: a free resolution in cochain degrees <=0 is K-flat, H^0 of the augmentation is Tor_0=A tensor C, and the derived-iso criterion finishes the equivalence with the canonical map. Small cases checked: Z/p with Z/p (both sides fail), Z/2 with Z/3 (vacuous, D=0, both sides hold), R[x] (flat, both sides hold). The DAG has no ring-level duplicate and the item does not cycle back on itself. The two tool_uses (Tor comparison, bounded-flat K-flat) are generic homological tools and accepted. The report mentions a citations.json that is not in the commit; nothing refers to it, so this is not a fault."
+ }
+}

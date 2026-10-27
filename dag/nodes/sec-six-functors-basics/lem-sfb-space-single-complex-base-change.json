@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-space-single-complex-base-change",
+ "kind": "statement",
+ "title": "Direct-image base change under the geometric-stalk condition",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use the unbounded module derived categories [def-weil-abstract-derived-category], the canonical tensor pullback and direct image [def-trf-space-etale-module-functors], their total derived functors computed by K-flat resolutions with flat terms and K-injective resolutions, and K-flat derived tensor product. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms, and set $X'=X\\times_Y Y'$ with projections $g':X'\\to X$ and $f':X'\\to Y'$. For a geometric point $\\bar x':\\operatorname{Spec}\\Omega\\to X'$ with $\\Omega$ algebraically closed, write $\\bar x=g'\\bar x'$, $\\bar y'=f'\\bar x'$, $\\bar y=f\\bar x$, and put $R=\\mathcal O_{Y,\\bar y}$, $A=\\mathcal O_{X,\\bar x}$, $B=\\mathcal O_{Y',\\bar y'}$, $C=\\mathcal O_{X',\\bar x'}$, $D=A\\otimes_R B$. The stalks are colimits over pointed etale scheme neighbourhoods, and $D\\to C$ is induced by the projection stalk maps. For $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, $K'\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'})$ and $\\phi:L(g')^*K\\to K'$, define the stalk comparison $\\beta^i_{\\phi,\\bar x'}$ to be\n$$H^i(K_{\\bar x}\\otimes_R^{\\mathbf L}B)\\otimes_D C\\longrightarrow H^i(K'_{\\bar x'}).$$\nHere the arrow is induced by $K_{\\bar x}\\otimes_R^{\\mathbf L}B\\to K_{\\bar x}\\otimes_A^{\\mathbf L}C\\simeq(L(g')^*K)_{\\bar x'}\\xrightarrow{\\phi_{\\bar x'}}K'_{\\bar x'}$, extended $C$-linearly on cohomology. Assume $f$ is quasi-compact and quasi-separated (tested on etale scheme charts), and that $\\beta^i_{\\phi,\\bar x'}$ is an isomorphism for every geometric $\\bar x'$ and every $i\\in\\mathbf Z$. Then the composition\n$$Lg^*Rf_*K\\xrightarrow{\\mathrm{Ex}}Rf'_*L(g')^*K\\xrightarrow{Rf'_*(\\phi)}Rf'_*K'$$\nis an isomorphism in $D(\\mathcal O_{Y'})$. Here $\\mathrm{Ex}$ is the adjunction-mate map: its adjoint is $L(f')^*Lg^*Rf_*K\\simeq L(g')^*Lf^*Rf_*K\\to L(g')^*K$, with the last arrow the pullback of the counit of $Lf^*\\dashv Rf_*$. No Tor-independence, properness or boundedness is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-single-complex-stalk-condition",
+  "def-sfb-space-module-derived-exchange",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Use etale chart calculus to restrict first to affine etale charts $V\\to Y$, then to affine etale charts $V'\\to Y'\\times_YV$. These cover the two bases by the algebraic-space atlas definition and the fibre-product covering lemma. Under the restriction isomorphisms, the exchange is still the stated mate: pullback composition respects units and counits. The stalk-condition chart lemma preserves the hypothesis. Thus it suffices to prove the assertion when $Y,Y'$ are affine. Indeed exact restriction commutes with cohomology, and a cohomology sheaf vanishing on a covering is zero by the sheaf axiom. The restricted $f$ is qcqs by the chart-tested hypothesis, so its source $X$ is qcqs over the affine base.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-sfb-space-stalk-condition-etale-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKH (lemma-single-complex-base-change), etale localization in the opening paragraph"
+   }
+  },
+  {
+   "text": "For each qcqs etale algebraic space $T\\to X$, put $T'=T\\times_YY'$ and let $P(T)$ say that the canonical composite $\\gamma_T:Lg^*R(T\\to Y)_*(K|_T)\\to R(T'\\to Y')_*(K'|_{T'})$ is invertible. Use the restricted coefficient map, with the canonical pullback composition comparisons. The stalk-condition chart lemma supplies the same hypothesis on every such restriction. We verify the affine and distinguished-square premises of the algebraic-space induction principle.",
+   "uses": [
+    "lem-sfb-space-stalk-condition-etale-charts",
+    "lem-sfb-space-qcqs-distinguished-square-induction",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKH (lemma-single-complex-base-change), induction setup in the opening paragraph"
+   }
+  },
+  {
+   "text": "If $T$ is affine, then $T,Y,Y',T'$ are schemes. Transport the complexes and coefficient map through the etale–Zariski equivalence. Its pullback and pushforward comparisons respect composition, so adjunction uniqueness identifies the transported exchange with the scheme mate. The chart lemma gives exactly the ordinary stalk hypothesis. Apply the existing scheme single-complex qcqs criterion; $T\\to Y$ is a morphism of affines and hence qcqs. Transporting its isomorphism back proves $P(T)$.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-space-stalk-condition-etale-charts",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKH (lemma-single-complex-base-change), scheme case, second paragraph"
+   }
+  },
+  {
+   "text": "For an elementary distinguished square $(U\\subset W,V\\to W)$ in the induction principle, apply the relative Mayer–Vietoris exchange lemma to $K|_W$, $K'|_{W'}$, and the restricted coefficient map. It gives a morphism of distinguished triangles with components $\\gamma_W$, $\\gamma_U\\oplus\\gamma_V$, $\\gamma_{U\\times_WV}$. The latter two are invertible by the three induction assumptions (the inverse of a direct sum is the direct sum of the inverses). The two-out-of-three lemma for triangle morphisms proves $P(W)$.",
+   "uses": [
+    "lem-sfb-space-relative-mv-exchange-triangles",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKH (lemma-single-complex-base-change), induction step and displayed triangle diagram"
+   }
+  },
+  {
+   "text": "The algebraic-space induction principle now gives $P(X)$, whose arrow is the required composite, with the identity restrictions and unital composition comparisons. Undo the etale restrictions of Step 1; its cohomology sheaves are isomorphisms on a covering and therefore everywhere. This proves the claimed isomorphism in the unbounded derived category.",
+   "uses": [
+    "lem-sfb-space-qcqs-distinguished-square-induction",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKH (lemma-single-complex-base-change), conclusion of the induction and etale descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-stalk-condition-etale-charts",
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-pc-rf-single-complex-qcqs-induction",
+  "lem-sfb-space-relative-mv-exchange-triangles",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKH, using 0DKG, 08GP and 08JK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A stalkwise base change criterion for one quasi coherent derived complex implies derived direct image base change for quasi compact quasi separated morphisms of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For qcqs algebraic spaces a coefficient map satisfying the geometric stalk tensor comparison condition gives an isomorphism of derived direct images after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.stalkMap_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  {Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : \", \"doc\": \"If a ring homomorphism property $ Q' $ is invariant under isomorphisms and for every ring homomorphism $ f $ satisfying property $ P $, the induced localized homomorphisms at prime ideals satisfy $ Q'\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P).RespectsIso\", \"doc\": \"If a ring homomorphism property $P$ is invariant under isomorphisms, then the corresponding stalk-wise morphism property for schemes, defined by requiring $P$ on stalks, is also invariant under isomor\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) →\\n      (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [Comm\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := R, commRing := inst } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpe\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R) {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat (AlgebraicGeometry.Spec.topMap f)).obj\\n            (AlgebraicGeometry.Spec.structureSheaf ↑S).val).stalk\\n        p ⟶\\n      Z),\\n  CategoryTheory.CategoryStruct.comp f\\n      \", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $f: R \\\\to S$ be a ring homomorphism. Let $p$ be a prime ideal of $R$. This theorem establishes the commutativity of a diagram involving canonical maps to \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image single complex base change theorem for algebraic spaces using a condition on every geometric stalk",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"[HasColimits C] (x : X) : IsIso (f.stalkMap x)\", \"doc\": \"If the category $ \\\\mathcal{C} $ has colimits, then for any open immersion $ f $ of presheafed spaces over $ \\\\mathcal{C} $ and any point $ x $ in the domain, the induced map on the stalk at $ x $ is an\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.stalkMap_germ\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{X Y : PresheafedSpace.{_, _, v} C} (α : X ⟶ Y) (U : Opens Y) (x : X) (hx : α x ∈ U) :\\n  Y.presheaf.germ U (α x) hx ≫ α.stalkMap x = α.c.app (op U) ≫ X.presheaf.germ ((Opens.map α.base).obj U) x hx\", \"doc\": \"For a morphism $\\\\alpha: X \\\\to Y$ of presheafed spaces over a category $\\\\mathcal{C}$, an open set $U \\\\subseteq Y$ containing $\\\\alpha(x)$ for $x \\\\in X$, the composition of the germ map $Y.\\\\text{presheaf\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : Hom X Y) (x : X) : Y.presheaf.stalk (f.1.1 x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism of locally ringed spaces $f: X \\\\to Y$ and a point $x \\\\in X$, `stalkMap` defines the induced ring homomorphism from the stalk of the structure sheaf of $Y$ at $f(x)$, denoted $\\\\mathcal{O\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{X Y : PresheafedSpace.{_, _, v} C} (α : X ≅ Y) (x : X) : Y.presheaf.stalk (α.hom.base x) ≅ X.presheaf.stalk x\", \"doc\": \"Given presheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$ with colimits, if $\\\\alpha: X \\\\to Y$ is an isomorphism and $x \\\\in X$ is a point, then the induced morphism between stalks $\\\\mathcal{F}_\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P : MorphismProperty Scheme) [IsZariskiLocalAtTarget P] (hP₂ : (of P).IsStableUnderBaseChange) :\\n  P.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and its restriction to morphisms with affine targets is stable under base change, then $ P $ is stable under base change for all schemes. Sp\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|single.complex.*base.change|derived.*direct.image.*base.change",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stalkwise base change criterion for one quasi coherent derived complex implies derived direct image base change for quasi compact quasi separated morphisms of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For qcqs algebraic spaces a coefficient map satisfying geometric stalk tensor comparison gives derived direct image base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R) {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat (AlgebraicGeometry.Spec.topMap f)).obj\\n            (AlgebraicGeometry.Spec.structureSheaf ↑S).val).stalk\\n        p ⟶\\n      Z),\\n  CategoryTheory.CategoryStruct.comp f\\n      \", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $f: R \\\\to S$ be a ring homomorphism. Let $p$ be a prime ideal of $R$. This theorem establishes the commutativity of a diagram involving canonical maps to \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.StructureSheaf.toPushforwardStalk f p) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toStalk (↑R) p)\\n      ((TopCat.Presheaf.stalkFunctor CommRingCat p).ma\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and a point $ p $ in $ \\\\operatorname{Spec}(R) $, the composition of $ f $ with the canonical morphism from $ R $ to the pushforward of the structure sheaf on $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R),\\n  algebraMap ↑R\\n      ↑(((TopCat.Presheaf.pushforward CommRingCat (AlgebraicGeometry.Spec.topMap f)).obj\\n              (AlgebraicGeometry.Spec.structureSheaf ↑S).val).stalk\\n          p) =\\n    CommRingCat.Hom.hom (CategoryTheory.CategoryStruct\", \"doc\": \"The algebra map from $ R $ to the stalk of the pushforward structure sheaf at $ p $ is equal to the composition of the ring homomorphism $ f $ with the stalk map at $ p $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"(R S : CommRingCat) →\\n  (p : PrimeSpectrum ↑R) →\\n    [inst : Algebra ↑R ↑S] →\\n      ↑S →ₐ[↑R]\\n        ↑(((TopCat.Presheaf.pushforward CommRingCat\\n                    (AlgebraicGeometry.Spec.topMap (CommRingCat.ofHom (algebraMap ↑R ↑S)))).obj\\n                (AlgebraicGeometry.Spec.structureSheaf ↑S)\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ S $, and a point $ p $ in the prime spectrum $ \\\\operatorname{Spec}(S) $, this constructs the canonical $ R $-algebra homomorphism from $ S $ to the s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g)),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t))\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).SpecTensorTo =\\n \", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes and any point $t$ in the fiber product $X \\\\times_S Y$, the composition of the morphism $\\\\operatorname{Spec}$ induced by the tensor product \"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑S),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.StructureSheaf.toStalk (↑R) (PrimeSpectrum.comap (CommRingCat.Hom.hom f) p))\\n      (AlgebraicGeometry.PresheafedSpace.Hom.stalkMap (AlgebraicGeometry.Spec.sheafedSpaceMap f).hom p)\", \"doc\": \"For a ring homomorphism $ f: R \\to S $ and a prime ideal $ \\\\mathfrak{p} $ in $ \\\\operatorname{Spec}(S) $, the composition of the localization map $ R \\\\to R_{f^{-1}(\\\\mathfrak{p})} $ followed by the induc\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R S : CommRingCat) (p : PrimeSpectrum ↑R) [inst : Algebra ↑R ↑S] (a : ↑{ carrier := ↑S, commRing := S.commRing }),\\n  (AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom R S p) a =\\n    (((TopCat.Presheaf.pushforward CommRingCat\\n                  (AlgebraicGeometry.Spec.topMap (CommRingCat.o\", \"doc\": \"Given commutative rings $ R $ and $ S $ where $ S $ is an $ R $-algebra, and a point $ p $ in the prime spectrum $ \\\\operatorname{Spec}(S) $, this constructs the canonical $ R $-algebra homomorphism fr\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image single complex base change theorem algebraic spaces geometric stalk condition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(U : Opens Y) (x : X) (hx : f.base x ∈ U) (y) :\\n  f.stalkMap x (Y.presheaf.germ U (f.base x) hx y) = X.presheaf.germ ((Opens.map f.base).obj U) x hx (f.c.app (op U) y)\", \"doc\": \"Let $f: (X, \\\\mathcal{O}_X) \\\\to (Y, \\\\mathcal{O}_Y)$ be a morphism of locally ringed spaces, consisting of a continuous map (also denoted $f$) and a sheaf morphism $f^\\\\sharp: \\\\mathcal{O}_Y \\\\to f_*\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : Hom X Y) (x : X) : Y.presheaf.stalk (f.1.1 x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism of locally ringed spaces $f: X \\\\to Y$ and a point $x \\\\in X$, `stalkMap` defines the induced ring homomorphism from the stalk of the structure sheaf of $Y$ at $f(x)$, denoted $\\\\mathcal{O\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) :\\n  restrictFunctor f ⋙ toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ x ≅\\n    toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ (f x)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, this definition establishes a natural isomorphism between the functor that computes the stalk at $x$ of the pullback of a sheaf of \"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{X Y : PresheafedSpace.{_, _, v} C} (α : X ≅ Y) (x : X) : Y.presheaf.stalk (α.hom.base x) ≅ X.presheaf.stalk x\", \"doc\": \"Given presheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$ with colimits, if $\\\\alpha: X \\\\to Y$ is an isomorphism and $x \\\\in X$ is a point, then the induced morphism between stalks $\\\\mathcal{F}_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(x : X) : Y.presheaf.stalk (f x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ x \\\\in X $, this is the induced morphism between the stalk of $ Y $'s structure sheaf at $ f(x) $ and the stalk of $ X $'s structure sheaf at $ x\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(x x' : X) (h : x ⤳ x') (y) :\\n  f.stalkMap x (Y.presheaf.stalkSpecializes (f.base.hom.map_specializes h) y) =\\n    (X.presheaf.stalkSpecializes h (f.stalkMap x' y))\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of locally ringed spaces. Let $x, x'$ be points in $X$ such that $x$ specializes to $x'$. Since the underlying map of $f$ is continuous, $f(x)$ specializes to $f(x')$.\\nL\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"[HasColimits C] (x : X) : IsIso (f.stalkMap x)\", \"doc\": \"If the category $ \\\\mathcal{C} $ has colimits, then for any open immersion $ f $ of presheafed spaces over $ \\\\mathcal{C} $ and any point $ x $ in the domain, the induced map on the stalk at $ x $ is an\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|single.complex.*base.change|derived.*direct.image.*base.change",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-complex-base-change",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement.",
+   "via": [
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-single-complex-base-change",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0DKH: etale localization, scheme criterion via 0DKG and etale–Zariski equivalence, then 08GP induction with the canonical 08JK exchange triangle diagram. Three genuinely supporting nodes; statement unchanged; no Lean edits or compilation.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability, direct-images proof (3); this is the inherited supporting 0DKH input below the direct-image route. The imported ancestor chain currently has blueprint.from.node null; retained the result of blueprint_refs ancestor verbatim.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-single-complex-qcqs-induction",
+    "why": "Scheme case of Stacks 0DKH explicitly invokes the scheme single-complex theorem 0DJ9; the unit supplies no separate scheme criterion."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic two-out-of-three for morphisms of distinguished triangles, used in the Mayer–Vietoris induction step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-single-complex-qcqs-induction",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-e22838e2b",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-e22838e2b (reviewer sub-agent of L); spot-checked: Read Stacks spaces-perfect.tex: equation-bc, 0DKG (statement and proof), 0DKH (statement and proof), 08GP with its definition of elementary distinguished squares and 08GN, and 08JK. The item statement is the same as on live and matches 0DKH hypothesis by hypothesis: arbitrary cartesian square, D_QCoh complexes, geometric-stalk condition (1), f qcqs, composite through the counit mate. Steps follow 0DKH. Step 1 reduces étale locally on Y and Y' using the chart calculus restriction isomorphisms, the atlas and fibre-product covering lemma, and the permanence clause of the chart node; X_V is qcqs over affine V. Steps 2-3: the affine case goes through the étale-Zariski D_QCoh equivalence and the scheme theorem lem-pc-rf-single-complex-qcqs-induction, whose hypotheses all hold (maps of affines are qcqs; the chart condition with U=T, V=Y, V'=Y' is the def-pc stalk condition). Step 4: the relative-MV node gives the triangle morphism including the connecting square, then 014A two-out-of-three. Step 5 applies 08GP. New nodes: the chart node is 0DKG (1)<=>(2) plus true étale-permanence clauses; the induction node is 08GP (requiring V representable is harmless since V is affine); the MV node is 08JK plus the diagram asserted in 0DKH, with no invertibility conclusion, so it does not restate the item. Tested on K=0, g=id with phi=id, and the all-schemes case. No duplicates: the scheme analogues 08DR and the picard rf-mv nodes are for schemes and opens. Accepted tool uses: 0DJ9 scheme theorem and 014A. Batch-5: the def-trf-* nodes are general definitions and lem-trf-space-fibre-products-etale-covers is a generic fibre-product/cover lemma; none is a step of the trace formula or Poincare duality proofs. FIX (B3): the induction node and the MV node used 'open subspace', '|W|' and 'reduced closed subspace' with no definition node. Added [def-a1-space-open-subspace], [def-a1-space-point-topology] and [lem-sfb-space-reduced-closed-support] to the statements and stmt_deps; none of them reaches the item, so no cycle. In the MV node, renamed the closed subspace Z to E because it clashed with the index Z of gamma_Z. Blueprint from.node null is inherited from the base node, not a fault of this delivery. No SGA is cited.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSingleComplexBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.singleComplexBaseChange_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSingleComplexBaseChange.lean",
+  "statement": "theorem singleComplexBaseChange_isIso {S : Scheme.{u}} [∀ Z : AlgebraicSpace S, HasDerivedCategory.{w} Z.SmallModules] {X X' Y Y' : AlgebraicSpace S} (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (hqc : MapIsQuasiCompact f.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (K : X.DerivedModules) (hK : X.derivedQCohProperty K) (K' : X'.DerivedModules) (hK' : X'.derivedQCohProperty K') (φ : (spaceDerivedPullback g').obj K ⟶ K') (h_stalk : SingleComplex.StalkCondition f f' g g' sq K K' φ) : IsIso (moduleDerivedExchange f f' g g' sq.w K ≫ (derivedDirectImage f').map φ)",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed geometric SingleComplex.StalkCondition and the existing counit-mate moduleDerivedExchange. Added only landed definition owners needed by the signature: derived module calculus, stalk condition, exchange, pullback, and the quasi-compactness predicate. The mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95b96c4de",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read item node, all 11 stmt_dep records, the module, the report, and exact decls on side-live (StalkCondition/comparison/Coordinates/coordinates_nonempty, moduleDerivedExchange, spaceDerivedPullback = SingleComplex.derivedPullback = derivedTensorPullback.{u,w,w}, derivedQCohProperty, derivedDirectImage, MapIsQuasiCompact). Matches 0DKH/0DKG(1)/equation-bc clause by clause: IsPullback g' f' f g with node orientation; qcqs = MapIsQuasiCompact of f and of its diagonal (same pattern as landed SpaceFlatComplexBaseChange; no dedicated space-qs node); D_QCoh for K and K'; arbitrary φ; stalk condition over all coordinates (nonempty, canonical), all alg. closed Ω : Type u, all geometric points, all i; conclusion IsIso(moduleDerivedExchange … sq.w K ≫ Rf'_*(φ)) in D(O_Y'), exchange = adjoint of comp⁻¹≫eqToIso≫comp≫L(g')*ε, i.e. derived form. No extra assumptions; u and w independent. Node diff vs live only lean + 5 landed definition-owner stmt_deps; statement verbatim; docstrings carry source, blueprint id and proof steps; sorry-only; no new definitions. Report has Worker report and a Second reading (self-check, disclosed). No changes, so no compile."
+ }
+}

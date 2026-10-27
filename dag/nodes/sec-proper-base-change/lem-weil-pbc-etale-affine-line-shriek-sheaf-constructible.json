@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Affine-line compact support of constructible finite-coefficient sheaves",
- "statement": "Let $\\Lambda$ be a finite commutative ring. All derived categories below are the bounded-below derived categories of sheaves of $\\Lambda$-modules on the small etale sites [def-weil-pbc-derived-categories] [def-weil-pbc-direct-image]. For a separated finite-type morphism $h:T\\to B$ of quasi-compact and quasi-separated schemes [def-pc-scheme] [def-weil-pbc-scheme-conventions] and a compactification $c=(j:T\\hookrightarrow\\overline T,p:\\overline T\\to B)$, with $j$ a quasi-compact open immersion and $p$ proper, set $Rh_!^c=Rp_*j_!$ [def-weil-pbc-projection-compactification] [def-weil-pbc-extension-by-zero]. Let $Y=\\operatorname{Spec}A$ be affine for a commutative ring $A$, let $a:\\mathbf A^1_Y\\to Y$ be the projection [def-nagata-relative-affine-space], and let $F$ be a constructible sheaf of $\\Lambda$-modules on $(\\mathbf A^1_Y)_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], placed in degree zero. Then $\\mathcal H^q(Ra_!^cF)$ is constructible for every integer $q$ and every compactification $c$ of $a$.",
+ "statement": "Let $\\Lambda$ be a finite commutative ring. All derived categories below are the bounded-below derived categories of sheaves of $\\Lambda$-modules on the small etale sites [def-weil-pbc-derived-categories] [def-weil-pbc-direct-image]. For a separated finite-type morphism $h:T\\to B$ of quasi-compact and quasi-separated schemes [def-pc-scheme] [def-weil-pbc-scheme-conventions] and a compactification $c=(j:T\\hookrightarrow\\overline T,p:\\overline T\\to B)$, with $j$ a quasi-compact open immersion and $p$ proper, set $Rh_!^c=Rp_*j_!$ [def-weil-pbc-projection-compactification] [def-weil-pbc-extension-by-zero]. Let $Y=\\operatorname{Spec}A$ be affine for a commutative ring $A$, let $a:\\mathbf A^1_Y\\to Y$ be the projection [def-nagata-relative-affine-space], and let $F$ be a constructible sheaf of $\\Lambda$-modules on $(\\mathbf A^1_Y)_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], placed in degree zero. Assume that the additive order of every element of $\\Lambda$ is invertible on $Y$. Then $\\mathcal H^q(Ra_!^cF)$ is constructible for every integer $q$ and every compactification $c$ of $a$.",
  "source": {
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tag 0GKZ, label lemma-constructible-shriek-rel-dim-1; finite-ring bounded-below specialization"
@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Realize the affine line as the limit over finitely generated integer subrings using the affine-space cartesian squares and connected-limit preservation. Apply constructible-module limit descent, obtaining an input on a finite-type integer affine spectrum.",
+   "text": "Realize the affine line as the limit over finitely generated integer subrings using the affine-space cartesian squares and connected-limit preservation. Apply constructible-module limit descent, obtaining an input on a finite-type integer affine spectrum. The finite generating set is enlarged by an inverse of the characteristic of the coefficient ring, a unit on the base, so the hypothesis holds on the finite-type model.",
    "uses": [
     "lem-weil-pbc-constructible-module-limit-descent"
    ],
@@ -371,7 +371,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-b87f53eea (reviewer sub-agent of L); spot-checked: Full mathematical review passed: item and four new nodes agree with Tags 0GKZ, 0GKY, 0F7L, 0GKP, and 02NW; hypotheses, coefficient category, base change, localization, edge cases, route, searches, and duplicate checks were verified. Fixed the concrete metadata fault by adding required created.by and created.date fields to all four new-node JSON files under fixes/dag/nodes/sec-proper-base-change/. No nodes dropped.; 4 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
@@ -384,20 +395,66 @@
   "module": "Sheaf.AlgebraicGeometry.EtaleAffineLineShriekSheafConstructible",
   "declaration": "AlgebraicGeometry.isConstructibleEtaleModuleSheaf_affineLine_shriek",
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineLineShriekSheafConstructible.lean",
-  "statement": "theorem isConstructibleEtaleModuleSheaf_affineLine_shriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y] (F : Sheaf (AffineSpace (ULift.{u} (Fin 1)) Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) (c : Compactification (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)) (q : ℤ) : Scheme.IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj ((_root_.DerivedCategory.Plus.singleFunctor (Sheaf (AffineSpace (ULift.{u} (Fin 1)) Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)))",
+  "statement": "theorem isConstructibleEtaleModuleSheaf_affineLine_shriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y] (hΛ : ∀ (a : Λ) (y : Y), IsUnit (addOrderOf a : Y.presheaf.stalk y)) (F : Sheaf (AffineSpace (ULift.{u} (Fin 1)) Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) (c : Compactification (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)) (q : ℤ) : Scheme.IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj ((_root_.DerivedCategory.Plus.singleFunctor (Sheaf (AffineSpace (ULift.{u} (Fin 1)) Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)))",
   "branch": "newtargets-dag",
   "by": "NZ",
   "date": "2026-10-15",
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "K7",
   "result": "pass",
-  "landing": "20261018T091413-L-3259206",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261023T041118-L-1258706",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "M stage 2",
+  "old_statement": "Let $\\Lambda$ be a finite commutative ring. All derived categories below are the bounded-below derived categories of sheaves of $\\Lambda$-modules on the small etale sites [def-weil-pbc-derived-categories] [def-weil-pbc-direct-image]. For a separated finite-type morphism $h:T\\to B$ of quasi-compact and quasi-separated schemes [def-pc-scheme] [def-weil-pbc-scheme-conventions] and a compactification $c=(j:T\\hookrightarrow\\overline T,p:\\overline T\\to B)$, with $j$ a quasi-compact open immersion and $p$ proper, set $Rh_!^c=Rp_*j_!$ [def-weil-pbc-projection-compactification] [def-weil-pbc-extension-by-zero]. Let $Y=\\operatorname{Spec}A$ be affine for a commutative ring $A$, let $a:\\mathbf A^1_Y\\to Y$ be the projection [def-nagata-relative-affine-space], and let $F$ be a constructible sheaf of $\\Lambda$-modules on $(\\mathbf A^1_Y)_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], placed in degree zero. Then $\\mathcal H^q(Ra_!^cF)$ is constructible for every integer $q$ and every compactification $c$ of $a$.",
+  "what": "Route audit 2026-10-25 (the human approved 2026-10-26): the statement assumed no invertibility and so also proved the characteristic-p case (Artin-Schreier, Frobenius vector bundles), which the blueprint does not use: its only user, compact-support constructibility for the l-adic theorems, has l different from the characteristic. The hypothesis that the coefficient torsion is invertible on the base is added and the characteristic-p branch dropped; every caller supplies it.",
+  "source": {
+   "document": "literature/stacks-project/more-etale.tex",
+   "place": "Tag 0GL0 (theorem-constructible-shriek) for torsion prime to the residue characteristics; Tag 0GKV for a prime invertible on the base"
+  },
+  "citers": [
+   "lem-weil-pbc-etale-compactification-constructibility"
+  ],
+  "old_proof": [
+   {
+    "text": "Realize the affine line as the limit over finitely generated integer subrings using the affine-space cartesian squares and connected-limit preservation. Apply constructible-module limit descent, obtaining an input on a finite-type integer affine spectrum.",
+    "uses": [
+     "lem-weil-pbc-constructible-module-limit-descent"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "For a finite-type integer affine base, use well-founded induction on closed subsets. A closed immersion has affine source whose coordinate ring is again finite type over the integers. Apply the dense-open theorem to every closed restriction of the input and base-change compactification. The dense open has strictly smaller closed complement. Constructibility glues along the open and closed parts; empty schemes give zero sheaves.",
+    "uses": [
+     "lem-weil-pbc-affine-line-shriek-finite-type-dense-open",
+     "lem-weil-pbc-finite-type-over-noetherian",
+     "prop-constructible-open-closed",
+     "prop-constructible-pullback",
+     "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Choose a compactification of the descended projection. Exact inverse image, compact-support exchange, the single-functor comparison and compactification independence identify its pulled-back cohomology with the cohomology for the original F and specified compactification. Pullback preserves constructibility, finishing the arbitrary-base case.",
+    "uses": [
+     "prop-nagata-compactification-category",
+     "def-cbc-exchange-map",
+     "prop-weil-pbc-inverse-image-modules-exact",
+     "lem-weil-pbc-etale-shriek-compactification-independence",
+     "prop-constructible-pullback"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }

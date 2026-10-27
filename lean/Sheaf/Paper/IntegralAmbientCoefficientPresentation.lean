@@ -18,6 +18,8 @@ public import Sheaf.CategoryTheory.ConstantScalarRestrictionTensor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import Sheaf.AlgebraicGeometry.UnboundedDirectImageComparisonMap
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.CategoryTheory.DerivedCategory.ScalarPerfectCohomologyAndPidModels
+import Mathlib.GroupTheory.OrderOfElement
 
 /-! # Normalized integral coefficient presentation and quotient Roos completeness
 
@@ -135,7 +137,40 @@ theorem arithmetic (π : PadicAlgCl.integers l E.1)
         (Ideal.span {ULift.up π}) ^ (n + 1))) ∧
       (∀ n : ℕ, 1 ≤ n → adicQuotientPerfect (integers.{u} l E)
         (Ideal.span {ULift.up π}) n) := by
-  sorry
+  let e : integers.{u} l E ≃+* PadicAlgCl.integers l E.1 := ULift.ringEquiv
+  let : IsPrincipalIdealRing (integers.{u} l E) :=
+    IsPrincipalIdealRing.of_surjective e.symm e.symm.surjective
+  let : IsDomain (integers.{u} l E) := e.toMulEquiv.isDomain _
+  have hfinite (n : ℕ) : Finite (integers.{u} l E ⧸
+      (Ideal.span {ULift.up π}) ^ (n + 1)) := by
+    have hI : IsLocalRing.maximalIdeal (PadicAlgCl.integers l E.1) ^ (n + 1) =
+        Ideal.map e.toRingHom ((Ideal.span {ULift.up π}) ^ (n + 1)) := by
+      rw [Ideal.map_pow, Ideal.map_span, Set.image_singleton]
+      change _ = (Ideal.span {π}) ^ (n + 1)
+      rw [hπ]
+    exact Finite.of_equiv
+      (PadicAlgCl.integers l E.1 ⧸
+        IsLocalRing.maximalIdeal (PadicAlgCl.integers l E.1) ^ (n + 1))
+      (Ideal.quotientEquiv _ _ e hI).symm.toEquiv
+  refine ⟨inferInstance, Submodule.fg_span_singleton _, ?_, hfinite, ?_⟩
+  · have : Finite (integers.{u} l E ⧸ Ideal.span {ULift.up π}) := by
+      simpa only [Nat.zero_add, pow_one] using hfinite 0
+    intro x
+    exact (isOfFinAddOrder_of_finite x).exists_nsmul_eq_zero
+  · intro n _hn
+    let R := integers.{u} l E
+    let J : Ideal R := (Ideal.span {ULift.up π}) ^ n
+    let M := ModuleCat.of R (R ⧸ J)
+    let := HasDerivedCategory.standard (ModuleCat.{u + 1} R)
+    have : Module.FinitePresentation R M := Module.finitePresentation_of_finite R M
+    let q : (Fin 1 → R) →ₗ[R] M := J.mkQ.comp (LinearMap.proj (0 : Fin 1))
+    have hq : Function.Surjective q := by
+      intro x
+      obtain ⟨y, rfl⟩ := J.mkQ_surjective x
+      exact ⟨fun _ ↦ y, rfl⟩
+    obtain ⟨_, _, _, _, _, hperfect, _⟩ :=
+      (DerivedCategory.scalar_perfect_cohomology_and_pid_models R).2 M 1 q hq
+    exact hperfect
 
 /-- The adic datum has real data: its only data field is the displayed principal ideal.
 All other fields are the named arithmetic properties of that fixed object.

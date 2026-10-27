@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-gm-action-attracting-subgroup-big-cell",
+ "kind": "statement",
+ "title": "Attracting subgroups and a big cell for a multiplicative-group automorphism action over a field",
+ "statement": "Let $k$ be any field [def-weil-field] and $H$ a smooth geometrically connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $a:\\mathbf G_m\\times_k H\\to H$ be an action by group-scheme automorphisms [def-sc-gm-ga]: $a(1,h)=h$, $a(st,h)=a(s,a(t,h))$ and $a(t,hh')=a(t,h)a(t,h')$ on all test algebras. For every commutative $k$-algebra $A$ define $U_+(A)$ to be the $h\\in H(A)$ such that $t\\mapsto a(t,h)$ extends to an $A$-morphism $\\mathbf A^1_A\\to H_A$ taking $0$ to the identity; define $U_-(A)$ by the same condition on $t\\mapsto a(t^{-1},h)$. Here $H_A$ is scalar extension and $\\mathbf A^1_A=\\operatorname{Spec}A[t]$. The functors $U_+$ and $U_-$ are represented by smooth geometrically connected closed $a$-stable $k$-subgroups of $H$ [def-sc-group-scheme-subgroup]. Put $\\mathfrak h=T_1H$ [def-sc-scheme-tangent-space] and $\\mathfrak h_j=\\{v:a(t)v=t^jv\\}$, where equality is required after every commutative algebra extension. Then $\\operatorname{Lie}(U_+)=\\bigoplus_{j>0}\\mathfrak h_j$ and $\\operatorname{Lie}(U_-)=\\bigoplus_{j<0}\\mathfrak h_j$, equivariantly for $a$. If $\\mathfrak h_0=0$, multiplication $U_-\\times_k U_+\\to H$ is an open immersion with dense image [def-weil-open-immersion]. Density means density of the image in the underlying topological space. Both assertions include the trivial group and arbitrary characteristic; no perfectness assumption is made.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.33(a)-(e), printed pp.265-266, applied to the semidirect product H semidirect G_m with its distinguished cocharacter; definitions 13.29-13.30, pp.263-265. The final big-cell assertion is the zero-fixed-tangent specialization, obtained from the smooth connected centralizer and the open multiplication map in (b),(d); this is an agent-extracted automorphism-action form, not Proposition 16.63."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sc-scheme-tangent-space",
+  "def-weil-open-immersion",
+  "def-sfb-torus-character-tangent-weights"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-noetherian-finite-presentation] to the coordinate algebra of $H$: a field is Noetherian since its only ideals are $0$ and $k$. Thus the affine finite-type group $H$ is finitely presented, as required by [lem-sfb-relative-dynamic-subgroups]. Apply that node over $R=k$ to $a$ and to $-a(t,h)=a(t^{-1},h)$. Its functors on every commutative test algebra are exactly the two functors in the item. It supplies smooth geometrically connected closed subgroups $U_+,U_-$ and the equalities $T_1U_+=\\bigoplus_{j>0}\\mathfrak h_j$, $T_1U_-=\\bigoplus_{j<0}\\mathfrak h_j$: the reciprocal action replaces character $j$ by $-j$. Also retain its smooth geometrically connected fixed subgroup $Z=Z_a$, limit subgroup $P=P_a$, equality $T_1Z=\\mathfrak h_0$, and scheme isomorphism $Z\\times U_+\\simeq P$ given by multiplication. The geometric connectedness clauses apply because $H$ is geometrically connected; the node expressly permits arbitrary base change.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sfb-relative-dynamic-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(a)-(c),(e), pp.265-266, automorphism-action form; existing relative dynamic-subgroup theorem supplies this general form."
+   }
+  },
+  {
+   "text": "For every $A$, let $F_h(s)\\in H(A[s])$ be the extension belonging to $h\\in U_+(A)$. It is unique because the coordinate restriction $A[s]\\to A[s,s^{-1}]$ is injective. For $t\\in A^\\times$, the morphism $s\\mapsto a(t,F_h(s))$ extends the orbit of $a(t,h)$: for invertible $s$, $a(s,a(t,h))=a(t,a(s,h))$. Its value at zero is $a(t,1)=1$. Therefore $a(t,h)\\in U_+(A)$, naturally in $A$; the same calculation for $a(s^{-1},h)$ proves stability of $U_-$. Apply this natural rule to the universal point of the affine scheme $\\mathbf G_m\\times U_\\pm$ to obtain the restricted action morphism, and compose with the closed inclusion to check its action identities. Differentiating these commuting inclusion diagrams gives equivariance of the tangent identifications in step 1; in dual-number terms both maps simply apply $a(t,-)$ to the same infinitesimal point. The natural injective tangent maps for closed subgroup inclusions are supplied by [lem-sfb-affine-group-dual-number-calculus].",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 13.29-13.30 and Theorem 13.33(c), pp.264-266; stability and equivariance checked on all test algebras."
+   }
+  },
+  {
+   "text": "Now suppose $\\mathfrak h_0=0$. The group $Z$ of step 1 is smooth, geometrically connected, affine and finite type, has the rational identity point, and satisfies $T_1Z=0$. Equip it with the trivial $\\mathbf G_m$ action. The positive-weight hypothesis of [lem-sfb-positive-weight-affine-space-arbitrary-field] is satisfied by the empty direct sum of weight spaces. Its zero-dimensional clause gives $Z\\simeq\\operatorname{Spec}k$, carrying the identity to its sole point. Hence $Z(A)$ has exactly its identity element for every $A$, including nonreduced algebras. This is triviality as a group scheme, not just triviality of its geometric points.",
+   "uses": [
+    "lem-sfb-positive-weight-affine-space-arbitrary-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.41, pp.269-270, empty-tangent case; applied to the fixed subgroup from Theorem 13.33(a),(c),(e)."
+   }
+  },
+  {
+   "text": "The isomorphism $Z\\times U_+\\to P$ of step 1 now has source $U_+$, and its map is $u\\mapsto1u=u$ in $H(A)$ for every $A$. It therefore identifies the actual subgroup inclusion $U_+\\hookrightarrow H$ with $P\\hookrightarrow H$. Substitute this identification in the open immersion $U_{-a}\\times P_a\\to H$ of [lem-sfb-relative-dynamic-subgroups]. Since $U_{-a}=U_-$ by the defining orbit formula, the resulting morphism is precisely $(u_-,u_+)\\mapsto u_-u_+$, proving the requested open immersion. Its image contains the identity.",
+   "uses": [
+    "lem-sfb-relative-dynamic-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(b),(d), pp.265-266; fixed-subgroup-trivial specialization."
+   }
+  },
+  {
+   "text": "The underlying space of $H$ is nonempty, because it has its identity, and connected, because it is geometrically connected. Smoothness gives regularity by [lem-weil-pbc-smooth-scheme-over-field-regular]; [lem-sc-regular-connected-integral] then makes $H$ integral. By [def-pc-integral-scheme], its space is irreducible. The image in step 4 is a nonempty open subset by [def-weil-open-immersion]. Every nonempty open subset of an irreducible space is dense: otherwise the nonempty open complement of its closure would be disjoint from it, contrary to irreducibility. This is precisely density in the underlying topological space required in the item.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "def-pc-integral-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(d)-(e), p.266; regular connected scheme geometry for density."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-relative-dynamic-subgroups",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-positive-weight-affine-space-arbitrary-field",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "def-pc-integral-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assembly of existing relative dynamic-subgroup and positive-weight inputs; Theorem 13.33, pp.265-266, and Theorem 13.41, pp.269-270. Conrad Theorem 4.1.7, pp.112-114, checked online; local copy WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cocharacter|attracting.*subgroup|contracting.*group",
+   "results": "{\"t\": \"2026-10-24T05:02:01Z\", \"tool\": \"grep\", \"query\": \"cocharacter|attracting.*subgroup|contracting.*group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocharacter\"",
+   "results": "{\"t\": \"2026-10-24T05:02:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocharacter contraction subgroup smooth connected affine space positive tangent weights open big cell",
+   "results": "{\"t\": \"2026-10-24T05:02:02Z\", \"tool\": \"leansearch\", \"query\": \"Cocharacter contraction subgroup smooth connected affine space positive tangent weights open big cell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.range_weylGroup_coweightHom\", \"LieAlgebra.IsKilling.coe_corootSpace_eq_span_singleton'\", \"LieAlgebra.IsKilling.corootSubmodule\", \"LieModule.genWeightSpace\", \"LieModule.shiftedGenWeightSpace\", \"Subgroup.periods\", \"LieSubalgebra.root\", \"posTangentConeAt\"], \"digest\": \"12b3488837ce90a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Positive and negative attracting subgroups for a multiplicative group action on a smooth connected affine group are affine spaces and their product is open when there is no zero tangent weight",
+   "results": "{\"t\": \"2026-10-24T05:02:08Z\", \"tool\": \"leanfinder\", \"query\": \"Positive and negative attracting subgroups for a multiplicative group action on a smooth connected affine group are affine spaces and their product is open when there is no zero tangent weight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.fundamentalInterior\", \"isOpenMap_smul_of_sigmaCompact\", \"IsOpen.iUnion_smul\", \"MeasureTheory.fundamentalFrontier_union_fundamentalInterior\", \"IsOpen.exists_smul_mem\", \"MeasureTheory.fundamentalInterior_union_fundamentalFrontier\", \"IsOpen.iUnion_preimage_smul\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\"], \"digest\": \"6cb41c2e1ecffce5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The positive limit subgroup of a cocharacter in an affine algebraic group is isomorphic as a scheme to affine space over any field",
+   "results": "{\"t\": \"2026-10-24T05:02:09Z\", \"tool\": \"leanfinder\", \"query\": \"The positive limit subgroup of a cocharacter in an affine algebraic group is isomorphic as a scheme to affine space over any field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.SpecIso\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_over\", \"AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\"], \"digest\": \"9cd83a2d94a5adb1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|concentrator|attracting.*subgroup|contracting.*subgroup",
+   "results": "{\"t\": \"2026-10-24T06:59:27Z\", \"tool\": \"grep\", \"query\": \"cocharacter|concentrator|attracting.*subgroup|contracting.*subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract topological groups, Lie-algebra weights, affine-space constructions or smooth loci; none states the algebraic-group attracting-subgroup and big-cell assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth connected attracting subgroups for a multiplicative group action on an algebraic group and open big cell from positive and negative Lie weights",
+   "results": "{\"t\": \"2026-10-24T06:59:28Z\", \"tool\": \"leansearch\", \"query\": \"Smooth connected attracting subgroups for a multiplicative group action on an algebraic group and open big cell from positive and negative Lie weights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTopologicalGroup.mulInvClosureNhd\", \"OpenAddSubgroup.instInhabited\", \"LieModule.instLinearWeightsOfIsLieAbelian\", \"OpenSubgroup.instSubgroupClass\", \"OpenSubgroup\", \"LieModule.genWeightSpace\", \"LieModule.Weight.instInvolutiveNegSubtypeMemLieSubalgebra\", \"LieModule.genWeightSpaceChain\"], \"digest\": \"25c8afe739621a90\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract topological groups, Lie-algebra weights, affine-space constructions or smooth loci; none states the algebraic-group attracting-subgroup and big-cell assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T06:59:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract topological groups, Lie-algebra weights, affine-space constructions or smooth loci; none states the algebraic-group attracting-subgroup and big-cell assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine group scheme over any field with multiplicative group automorphisms the subgroups contracting to identity are smooth connected and opposite subgroups multiply to an open immersion if the tangent has no zero weights",
+   "results": "{\"t\": \"2026-10-24T06:59:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth affine group scheme over any field with multiplicative group automorphisms the subgroups contracting to identity are smooth connected and opposite subgroups multiply to an open immersion if the tangent has no zero weights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"Algebra.isOpen_smoothLocus\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"1126dc5ad019f5ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract topological groups, Lie-algebra weights, affine-space constructions or smooth loci; none states the algebraic-group attracting-subgroup and big-cell assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth affine concentrator scheme for a Gm action with tangent equal to positive weight subspace and contraction to a fixed point",
+   "results": "{\"t\": \"2026-10-24T07:00:48Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth affine concentrator scheme for a Gm action with tangent equal to positive weight subspace and contraction to a fixed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.homOfVector\"], \"digest\": \"6873fa5165e7c1b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract topological groups, Lie-algebra weights, affine-space constructions or smooth loci; none states the algebraic-group attracting-subgroup and big-cell assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "attractor|Bialynicki|cocharacter|concentrator",
+   "results": "{\"t\": \"2026-10-24T07:00:48Z\", \"tool\": \"grep\", \"query\": \"attractor|Bialynicki|cocharacter|concentrator\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract topological groups, Lie-algebra weights, affine-space constructions or smooth loci; none states the algebraic-group attracting-subgroup and big-cell assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-no-invariants-unipotence",
+  "date": "2026-10-24",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 13.33(a)-(e), printed pp.265-266, applied to the semidirect product H semidirect G_m with its distinguished cocharacter; definitions 13.29-13.30, pp.263-265. The final big-cell assertion is the zero-fixed-tangent specialization, obtained from the smooth connected centralizer and the open multiplication map in (b),(d); this is an agent-extracted automorphism-action form, not Proposition 16.63.",
+   "via": [
+    "lem-sfb-split-torus-no-invariants-unipotence",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-gm-action-attracting-subgroup-big-cell",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Reused the existing relative dynamic-subgroup theorem rather than creating duplicate cocharacter clauses. Checked the arbitrary-ring hypotheses over a field, stability and tangent equivariance over every test algebra, triviality of the smooth connected fixed subgroup via the empty-weight case, and topological density. No new nodes and no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 13.33(a)-(e), printed pp.265-266, applied to the semidirect product H semidirect G_m with its distinguished cocharacter; definitions 13.29-13.30, pp.263-265. The final big-cell assertion is the zero-fixed-tangent specialization, obtained from the smooth connected centralizer and the open multiplication map in (b),(d); this is an agent-extracted automorphism-action form, not Proposition 16.63. The five steps supply the supporting arbitrary-field attracting-subgroup/big-cell argument. The ancestor command returns None in the inherited created-node chain; retained that provenance, and searched all blueprint nodes with no equivalent statement found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic finite-type algebra over a Noetherian field implies finite presentation, to apply the relative theorem; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic smooth-over-field regularity used only for density of the nonempty open cell."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic regular connected scheme is integral, used only for density of the nonempty open cell."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-10aafb13a",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-10aafb13a (reviewer sub-agent of L); spot-checked: First split of the item; the base proof was empty, so this is not a 2026-10-21 re-split. The statement is unchanged and there are no new nodes. I read all five steps against the cited statements. Step 1: a field is Noetherian, so the finite-type affine H is finitely presented (Stacks 00FP); lem-sfb-relative-dynamic-subgroups over R=k then gives U_+=U_a and U_-=U_{-a} as the item defines them. The U_a geometric fibres are connected, so U_± are geometrically connected, and Z and P are geometrically connected because H is. It also gives the Lie clauses, with the reciprocal action turning j into -j. Step 2: stability is proved by an explicit orbit calculation, a(ts,h)=a(s,a(t,h)) with value a(t,1)=1 at s=0. The extension is unique because A[s] embeds in A[s,s^{-1}], and the dual-number calculus node supplies the injective tangent maps for equivariance. Step 3: h_0=0 gives T_1Z=0. Z is smooth, geometrically connected, affine and of finite type, and its identity is fixed by the trivial action, so the empty-weight (d=0) clause of lem-sfb-positive-weight-affine-space-arbitrary-field gives Z≅Spec k (matches Milne 13.41). Step 4: with Z trivial, the isomorphism Z⋉U_+≅P, (z,u)↦zu, makes U_+=P. The open immersion U_{-a}×P_a→H then becomes exactly multiplication (u_-,u_+)↦u_-u_+ in the stated order. Step 5: smooth gives regular; regular, nonempty and connected gives integral, hence irreducible; a nonempty open subset of an irreducible space is dense. I checked Milne iAG2017 Thm 13.33(a)-(e), pp.265-266, and Thm 13.41/Def 13.40, pp.269-270, in the local PDF. Small cases, all consistent: H=1; G_a with weight n>0 and n<0; G_a^2 with weights ±1; GL_2 under diag(t,t^{-1}), where h_0≠0 so no big-cell claim; weight p in characteristic p. Batch-5 check: the cited positive-weight node reaches lem-trf-polynomial-nonzero-ideal-quotient-dimension-bound, which says dim k[t_1..t_n]/I ≤ n-1 for nonzero I (Stacks 00QK). That is a general Krull-dimension fact, outside both the trace-formula and Poincaré-duality assumptions and not specific to their proofs, so I accept it. The three tool_uses (Noetherian finite type gives finite presentation, smooth over a field gives regular, regular connected gives integral) are generic scheme facts and are accepted. proof_deps is the union of the uses. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.GmAttractingBigCell",
+  "declaration": "AlgebraicGeometry.GmAttractingBigCell.exists_attracting_subgroups_bigCell",
+  "declarations": [
+   "AlgebraicGeometry.GmAttractingBigCell.gmPoint",
+   "AlgebraicGeometry.GmAttractingBigCell.IsAttracting",
+   "AlgebraicGeometry.GmAttractingBigCell.weightSpace",
+   "AlgebraicGeometry.GmAttractingBigCell.multiplication",
+   "AlgebraicGeometry.GmAttractingBigCell.exists_attracting_subgroups_bigCell"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/GmAttractingBigCell.lean",
+  "statement": "theorem exists_attracting_subgroups_bigCell (H : Grp (Over (Spec (.of k)))) [IsAffine H.X.left] [Smooth H.X.hom] [GeometricallyConnected H.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [a : ModObj (StandardGroupSchemes.multiplicative k) H.X] (hAut : TorusCharacterTangent.ActsByGroupAutomorphisms (Grp.mk (StandardGroupSchemes.multiplicative k)) H) : ∃ (Uminus Uplus : Grp (Over (Spec (.of k)))) (iminus : Uminus ⟶ H) (iplus : Uplus ⟶ H) (aminus : ModObj (StandardGroupSchemes.multiplicative k) Uminus.X) (aplus : ModObj (StandardGroupSchemes.multiplicative k) Uplus.X), IsClosedSubgroupScheme iminus.hom.hom ∧ IsClosedSubgroupScheme iplus.hom.hom ∧ Smooth Uminus.X.hom ∧ Smooth Uplus.X.hom ∧ GeometricallyConnected Uminus.X.hom ∧ GeometricallyConnected Uplus.X.hom ∧ (∀ (R : Type u) [CommRing R] [Algebra k R] (h : points H.X R), (h ∈ Set.range (fun x : points Uminus.X R ↦ x ≫ iminus.hom.hom) ↔ IsAttracting H (-1) R h) ∧ (h ∈ Set.range (fun x : points Uplus.X R ↦ x ≫ iplus.hom.hom) ↔ IsAttracting H 1 R h)) ∧ (∀ (W : Over (Spec (.of k))) (s : W ⟶ StandardGroupSchemes.multiplicative k) (x : W ⟶ Uminus.X), lift s x ≫ aminus.smul ≫ iminus.hom.hom = s • (x ≫ iminus.hom.hom)) ∧ (∀ (W : Over (Spec (.of k))) (s : W ⟶ StandardGroupSchemes.multiplicative k) (x : W ⟶ Uplus.X), lift s x ≫ aplus.smul ≫ iplus.hom.hom = s • (x ≫ iplus.hom.hom)) ∧ (GrpObj.differential iminus.hom.hom).toLinearMap.range = ⨆ (j : ℤ) (_ : j < 0), weightSpace H j ∧ (GrpObj.differential iplus.hom.hom).toLinearMap.range = ⨆ (j : ℤ) (_ : 0 < j), weightSpace H j ∧ (weightSpace H 0 = ⊥ → IsOpenImmersion (multiplication iminus iplus).left ∧ DenseRange (multiplication iminus iplus).left)",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All-algebra orbit extension and character tests; actual restricted internal actions encode stability and tangent equivariance. Lie is the existing canonical identity tangent module. Uses the landed automorphism predicate, whose owning definition node is added to stmt_deps. Coefficient extension is Mathlib DualNumber.lift at the actual epsilon. No statement correction or new mathematical notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cf6f953a",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: field k; H affine/smooth/GeometricallyConnected/LocallyOfFiniteType+QuasiCompact; ModObj + ActsByGroupAutomorphisms = action by automorphisms; nothing stronger. IsAttracting: Laurent orbit t^±1, value 1 at 0, all R : Type u; signs checked. Representation: closed subgroups with Grp-hom inclusions and all-algebra membership iff. Smooth + GeometricallyConnected clauses. Stability via restricted ModObj commuting with inclusions (unique, not arbitrary). weightSpace tests a(z)v_R = scale(z^j) v_R after every algebra extension (correct over finite fields and in char p; existing TorusCharacterTangent.weightSpace is F-points only, so the new def is justified). Lie(U±) = range of differential = sup of weight spaces (internal-sum convention as positiveRaySpace). Big cell conditional on weightSpace 0 = ⊥: IsOpenImmersion + DenseRange of (fst≫i₋)*(snd≫i₊). Only base changes: lean record + landed def stmt_dep def-sfb-torus-character-tangent-weights (no cycle). lean.statement verbatim; lines ≤100; sorry-only; docstrings with source/blueprint and proof plan; proof-only plain imports allowed. Edge cases (H=1, trivial action, G_a weight p, zero ring, universes) ok. No compile (no file changed)."
+ }
+}

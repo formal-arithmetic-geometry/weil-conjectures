@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-schematic-integral-open-criterion",
+ "kind": "statement",
+ "title": "Integrality from a schematically dense integral open",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme] and $j:V\\hookrightarrow Z$ a quasi-compact open immersion [def-weil-open-immersion], where quasi-compact means that the inverse image of every affine open is quasi-compact. Suppose $V$ is integral [def-pc-integral-scheme] and is scheme-theoretically dense in $Z$ [def-nagata-scheme-theoretically-dense-open], meaning that $\\mathcal O_Z\\to j_*\\mathcal O_V$ is injective. Let $\\eta$ be the generic point of $V$ [def-sc-generic-point], and put $K=\\mathcal O_{V,\\eta}$ [def-weil-pbc-module-stalk]. Then $Z$ is integral, $K$ is a field, and for every nonempty affine open $W\\subseteq Z$, the intersection $W\\cap V$ is nonempty and the restriction followed by the germ map\n$$\\Gamma(W,\\mathcal O_Z)\\longrightarrow\\Gamma(W\\cap V,\\mathcal O_V)\\longrightarrow K$$\nis injective.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01RE (lemma-characterize-scheme-theoretically-dense), the affine restriction-injectivity argument; Tag 01RV (lemma-integral-scheme-rational-functions), integral case. This agent-formulated consequence isolates the dense-open/function-field argument in the returned proof, step 2."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-pc-integral-scheme",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Since $V$ is integral it is nonempty. Choose a nonempty affine open $U\\subseteq V$ (schemes have affine open neighbourhoods). Apply [lem-sc-integral-function-field-affine-fraction] to $V$, its given generic point $\\eta$, and $U$: it states in particular that $K=\\mathcal O_{V,\\eta}$ is a field. The open immersion also shows that $Z$ is nonempty.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-pc-scheme",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions, integral case; affine fraction-field specialization in lem-sc-integral-function-field-affine-fraction"
+   }
+  },
+  {
+   "text": "Fix a nonempty affine open $W=\\operatorname{Spec}A\\subseteq Z$. By the injectivity of $\\mathcal O_Z\\to j_*\\mathcal O_V$ in [def-nagata-scheme-theoretically-dense-open], evaluation on $W$ gives an injective restriction $r_W:A\\to\\Gamma(W\\cap V,\\mathcal O_V)$. Explicitly, if two sections have the same image, their germs have the same image at every point of $W$; injectivity of the sheaf morphism makes the germs equal, and the sheaf locality axiom makes the sections equal. If $W\\cap V$ were empty its section ring would have $0=1$, so injectivity would force $0=1$ in $A$. But $W$ has a point, hence $A$ has a proper prime ideal by [def-weil-affine-spectrum], impossible when $0=1$. Thus $W\\cap V$ is nonempty. This is the affine restriction argument of Stacks Tag 01RE, written out rather than using an additional density lemma.",
+   "uses": [
+    "def-nagata-scheme-theoretically-dense-open",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RE, lemma-characterize-scheme-theoretically-dense, and the paragraph immediately before example-scheme-theretically-dense-not-dense"
+   }
+  },
+  {
+   "text": "The nonempty open $W\\cap V$ contains $\\eta$: otherwise its closed complement in $V$ would contain $\\eta$ and therefore its closure $\\overline{\\{\\eta\\}}=V$, contradicting nonemptiness [def-sc-generic-point]. Apply clause 1 of [lem-sc-integral-scheme-stalks-in-function-field] to the integral scheme $V$, its open $W\\cap V$, and the point $\\eta$ of $V$. Its hypothesis is integrality of $V$, established by the assumptions, and not integrality of $Z$, which is still to be proved. It gives an injective germ map $g_W:\\Gamma(W\\cap V,\\mathcal O_V)\\to\\mathcal O_{V,\\eta}=K$; the lemma has no affineness assumption on this open. Hence $g_Wr_W$ is injective: equality of two composite images first implies equality under $r_W$ by injectivity of $g_W$, and then equality of the original sections by step 2. This is exactly the composite in the statement.",
+   "uses": [
+    "def-sc-generic-point",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Properties Section 01OJ, Definition 01OK and Lemma 01ON, and Morphisms Tag 01RV (lemma-integral-scheme-rational-functions), integral case; the precise germ-injectivity input is clause 1 of lem-sc-integral-scheme-stalks-in-function-field (Mathlib/AlgebraicGeometry/FunctionField.lean:55)."
+   }
+  },
+  {
+   "text": "For each such $W$, write $\\varphi_W=g_Wr_W:A\\hookrightarrow K$. Since this is a unital ring map to a field, injectivity gives $1\\ne0$ in $A$. If $ab=0$, then $\\varphi_W(a)\\varphi_W(b)=0$ in $K$, so one factor is zero; injectivity gives $a=0$ or $b=0$. Therefore $A$ is an integral domain. Step 1 gives $Z\\ne\\emptyset$, and this argument applies to every nonempty affine open of $Z$. These are exactly the conditions defining an integral scheme in [def-pc-integral-scheme]. Thus $Z$ is integral; steps 1--3 already give every other asserted clause.",
+   "uses": [
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OK, definition-integral"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-weil-affine-spectrum",
+  "def-sc-generic-point",
+  "lem-sc-integral-scheme-stalks-in-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Elementary assembly of Tag 01RE (lemma-characterize-scheme-theoretically-dense), Tag 01RV (lemma-integral-scheme-rational-functions), and Properties Tag 01OK (definition-integral), using existing Mathlib leaves for the generic field and germ injectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIntegral.*(dense|open)|isIntegral_of|[Dd]ense.*[Ii]ntegral",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: isIntegral_of_isOpenImmersion proves integrality of the open from the ambient scheme, in the reverse direction. IsSchemeTheoreticallyDominant.isReduced gives reducedness only. The criterion with the field-embedding conclusion requires a separate argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If an integral open subscheme is scheme theoretically dense then the ambient scheme is integral",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits:",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsIntegral\"",
+   "results": "12 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.IsIntegral.nonempty, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.affine_isIntegral_iff, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsIntegral.of_isIso, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced",
+   "date": "2026-10-22",
+   "verdict": "no match: isIntegral_of_isOpenImmersion proves integrality of the open from the ambient scheme, in the reverse direction. IsSchemeTheoreticallyDominant.isReduced gives reducedness only. The criterion with the field-embedding conclusion requires a separate argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with a scheme-theoretically dense nonempty integral open subscheme is integral",
+   "results": "8 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain",
+   "date": "2026-10-22",
+   "verdict": "no match: isIntegral_of_isOpenImmersion proves integrality of the open from the ambient scheme, in the reverse direction. IsSchemeTheoreticallyDominant.isReduced gives reducedness only. The criterion with the field-embedding conclusion requires a separate argument."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]chemeTheoreticallyDominant.*[Ii]ntegral|[Ii]ntegral.*[Ss]chemeTheoreticallyDominant|[Ss]chemeTheoreticallyDominant.isReduced",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: isIntegral_of_isOpenImmersion proves integrality of the open from the ambient scheme, in the reverse direction. IsSchemeTheoreticallyDominant.isReduced gives reducedness only. The criterion with the field-embedding conclusion requires a separate argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion with injective structure sheaf restriction from an integral source has integral target",
+   "results": "8 hits: AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.isIntegralHom_iff, AlgebraicGeometry.Scheme.Hom.isIntegral_app, AlgebraicGeometry.IsIntegralHom.integral_app, AlgebraicGeometry.IsIntegralHom.isIntegral_app, AlgebraicGeometry.IsIntegralHom.hasAffineProperty",
+   "date": "2026-10-22",
+   "verdict": "no match: isIntegral_of_isOpenImmersion proves integrality of the open from the ambient scheme, in the reverse direction. IsSchemeTheoreticallyDominant.isReduced gives reducedness only. The criterion with the field-embedding conclusion requires a separate argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with a scheme theoretically dense integral open subscheme is integral and its affine sections inject into the generic stalk",
+   "results": "{\"t\": \"2026-10-23T04:11:13Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with a scheme theoretically dense integral open subscheme is integral and its affine sections inject into the generic stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\"], \"digest\": \"92a256c7918e7758\"}; Read the returned declarations and FunctionField.lean:37--66, SchemeTheoreticallyDominant.lean:38--90, Properties.lean:288--314. Germ injectivity and the generic field are existing leaves; the reverse open-integrality lemma and reducedness descent do not state all clauses of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsSchemeTheoreticallyDominant",
+   "results": "{\"t\": \"2026-10-23T04:12:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsSchemeTheoreticallyDominant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned declarations and FunctionField.lean:37--66, SchemeTheoreticallyDominant.lean:38--90, Properties.lean:288--314. Germ injectivity and the generic field are existing leaves; the reverse open-integrality lemma and reducedness descent do not state all clauses of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral schematically dense open subscheme makes the ambient scheme integral",
+   "results": "{\"t\": \"2026-10-23T04:12:21Z\", \"tool\": \"leansearch\", \"query\": \"An integral schematically dense open subscheme makes the ambient scheme integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isReduced_of_isIntegral\"], \"digest\": \"5de412ef569db6f7\"}; Read the returned declarations and FunctionField.lean:37--66, SchemeTheoreticallyDominant.lean:38--90, Properties.lean:288--314. Germ injectivity and the generic field are existing leaves; the reverse open-integrality lemma and reducedness descent do not state all clauses of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_of|germToFunctionField_injective|app_injective|isReduced",
+   "results": "{\"t\": \"2026-10-23T04:12:21Z\", \"tool\": \"grep\", \"query\": \"isIntegral_of|germToFunctionField_injective|app_injective|isReduced\", \"sub\": \"AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"61\", \"70\", \"74\", \"89\", \"90\"], \"digest\": \"92d36c1eea1c210a\"}; Read the returned declarations and FunctionField.lean:37--66, SchemeTheoreticallyDominant.lean:38--90, Properties.lean:288--314. Germ injectivity and the generic field are existing leaves; the reverse open-integrality lemma and reducedness descent do not state all clauses of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_of|germToFunctionField_injective|app_injective|IsSchemeTheoreticallyDominant.isReduced",
+   "results": "{\"t\": \"2026-10-23T04:13:09Z\", \"tool\": \"grep\", \"query\": \"isIntegral_of|germToFunctionField_injective|app_injective|IsSchemeTheoreticallyDominant.isReduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\"], \"digest\": \"5f5a8edc34fd2f81\"}; Read the returned declarations and FunctionField.lean:37--66, SchemeTheoreticallyDominant.lean:38--90, Properties.lean:288--314. Germ injectivity and the generic field are existing leaves; the reverse open-integrality lemma and reducedness descent do not state all clauses of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion from an integral scheme to a scheme with injective restriction of the structure sheaf has integral target",
+   "results": "{\"t\": \"2026-10-23T04:13:12Z\", \"tool\": \"leanfinder\", \"query\": \"An open immersion from an integral scheme to a scheme with injective restriction of the structure sheaf has integral target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.IsIntegralHom.integral_app\"], \"digest\": \"f0f4f9bf7a8e2abd\"}; Read the returned declarations and FunctionField.lean:37--66, SchemeTheoreticallyDominant.lean:38--90, Properties.lean:288--314. Germ injectivity and the generic field are existing leaves; the reverse open-integrality lemma and reducedness descent do not state all clauses of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-point-blowup-geometry",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 6: preserve regularity, integrality, Noetherianity and local dimension two through the point-blowup tower.; Returned proof step 2: infer integrality of the blowup from the dense integral complement, including its affine section embeddings.",
+   "via": [
+    "lem-sfb-regular-point-blowup-geometry",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-schematic-integral-open-criterion",
+  "worker": "stage1",
+  "summary": "Four-step proof with no new nodes: field of the integral open, affine restriction injectivity and nonempty intersection from the sheaf injection, generic germ injectivity on the possibly nonaffine intersection, and the elementary subring-of-field argument giving the affine definition of integrality. Statement and hypotheses unchanged. Existing field/germ Mathlib leaves reused; no exact project attachment or whole-item Mathlib match found. Returned delivery 98fc9b705bd rebased by deliver.py onto the current DAG after the side-completion promotion refusal; all current dependency statements and nine quotations reread. Step 3 now explicitly distinguishes the integral source V from the as-yet-unproved integral target Z, and its source pinpoints the general-open germ-injectivity input.",
+  "blueprint": "Retains the inherited from.place and via chain: det-thm-sf-ctf-stability-direct-images (3), through the marked plurinodal/regular-point-blowup prerequisites; realizes the returned proof step 2 dense-integral-complement argument. blueprint_refs.py ancestor prints from.node = None because this inherited creation chain has no resolved blueprint ancestor; the existing null is retained. Whole-blueprint searches for integral, scheme-theoretically dense, rational-functions and germ map found no same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-6b86f41f2",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-6b86f41f2 (reviewer sub-agent of L); spot-checked: Re-delivery of 98fc9b705bd9, which passed review but whose landing was refused because the side completion was not promoted. The item is still unsplit with an empty proof in clones/live and side-live; there is no repair note and no new nodes. Compared with 98fc, only step 3 gains a sentence (the germ lemma's hypothesis is that V is integral, not Z) and its source.place changes. The statement, stmt_deps, source and blueprint fields are unchanged from live. I read the whole item and every cited statement and checked the Stacks places: morphisms.tex 01RE l.1100, 01RV l.12705, and properties.tex 01OK l.190, which is verbatim def-pc-integral-scheme. Step 1: lem-sc-integral-function-field-affine-fraction, applied to V and any nonempty affine U, gives that O_{V,eta} is a field, and Z is nonempty. Step 2: Gamma(W, j_*O_V) = O_V(W∩V); the injective sheaf map makes r_W injective, and W∩V = ∅ would force A = 0, which is impossible for a nonempty Spec A. Step 3: eta lies in W∩V by the closed-complement argument, and clause 1 of lem-sc-integral-scheme-stalks-in-function-field (any open, no affineness needed) makes the germ map injective. Step 4: A injects into a field, so A is a domain, which with Z nonempty is exactly the definition of integral. Edge cases (Spec k, D(t) in A^1, a non-separated Z, an extra component, a boundary nilpotent) all behave correctly. The rg -L duplicate search over the density nodes (lem-trf-affine-schematic-density-criterion and others) found no node concluding that Z is integral. No SGA citation. Maintainer note: landing depends on promoting the side completion."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchematicIntegralOpenCriterion",
+  "declaration": "AlgebraicGeometry.schematicIntegralOpenCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchematicIntegralOpenCriterion.lean",
+  "statement": "theorem schematicIntegralOpenCriterion {Z V : Scheme.{u}} (j : V ⟶ Z) [IsOpenImmersion j] [QuasiCompact j] [IsIntegral V] [IsSchemeTheoreticallyDominant j] (η : V) (hη : IsGenericPoint η Set.univ) : IsIntegral Z ∧ IsField (V.presheaf.stalk η) ∧ ∀ (W : Z.Opens), IsAffineOpen W → Nonempty W → Nonempty (j ⁻¹ᵁ W) ∧ ∃ hηW : η ∈ j ⁻¹ᵁ W, Function.Injective (j.app W ≫ V.presheaf.germ (j ⁻¹ᵁ W) η hηW)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf9387bf9",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Node copy differs from live/side-live only in lean; lean.statement verbatim. Clause-by-clause: Scheme.{u} Z V, IsOpenImmersion+QuasiCompact j, IsIntegral V, IsSchemeTheoreticallyDominant j (dep mathlib_match; ker=⊥ equivalent to O_Z→j_*O_V injective under QC via Scheme.Hom.app_injective and affine ker), IsGenericPoint η univ; conclusions IsIntegral Z, IsField (V.presheaf.stalk η), ∀ affine nonempty W: Nonempty (j⁻¹ᵁW) ∧ ∃ η∈j⁻¹ᵁW (implied conclusion, true) with injective j.app W ≫ germ. No extra hypotheses; edge cases (empty W excluded, j=id, Spec K) fine; Stacks 01RE/01RV read. No defs, sorry-only proof, source/blueprint docstrings with 4 proof steps, imports are recorded dep modules, no duplicate found. No file changed; not recompiled."
+ }
+}

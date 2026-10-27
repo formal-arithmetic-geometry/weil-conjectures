@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-space-derived-qcoh-pullback-tensor",
+ "kind": "statement",
+ "title": "Derived pullback and tensor preserve quasi-coherence on spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use the unbounded module derived categories [def-weil-abstract-derived-category], the canonical tensor pullback and direct image [def-trf-space-etale-module-functors], their total derived functors computed by K-flat resolutions with flat terms and K-injective resolutions, and K-flat derived tensor product. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. For every morphism $a:Z'\\to Z$ of algebraic spaces, $La^*$ sends $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ into $D_{\\mathrm{QCoh}}(\\mathcal O_{Z'})$. For every algebraic space $Z$ and every $K,L\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ one has $K\\otimes_{\\mathcal O_Z}^{\\mathbf L}L\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$. No boundedness, flatness, quasi-compactness or quasi-separatedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08F4 (lemma-quasi-coherence-pullback) and 08F5 (lemma-quasi-coherence-tensor-product)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the pullback clause of [lem-sfb-space-derived-etale-chart-calculus] to the given morphism $a$. Its universally quantified morphism $u$ is instantiated by $a$, with the source and target renamed accordingly. It applies to every unbounded quasi-coherent complex and gives the first assertion.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F4, lemma-quasi-coherence-pullback; using its already recorded general pullback clause."
+   }
+  },
+  {
+   "text": "First handle tensor on a scheme $U$, on its small etale site. By [lem-sfb-scheme-derived-etale-qcoh-comparison], write any two quasi-coherent derived objects there as $\\epsilon_U^*E$ and $\\epsilon_U^*F$ with $E,F\\in D_{\\mathrm{QCoh}}(\\mathcal O_{U,\\mathrm{Zar}})$. The scheme tensor clause of [lem-pc-derived-pullback-tensor-qcoh] puts $E\\otimes^{\\mathbf L}F$ in the Zariski quasi-coherent category. The same equivalence sends this object into the etale quasi-coherent category. Since $\\epsilon_U^*$ is exact it equals $L\\epsilon_U^*$, and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies its image with $\\epsilon_U^*E\\otimes^{\\mathbf L}\\epsilon_U^*F$. Thus tensor preserves quasi-coherence on the small etale site of every scheme.",
+   "uses": [
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 071Q, lemma-derived-quasi-coherent-small-etale-site; Tag 08F5, lemma-quasi-coherence-tensor-product, reduction to perfect.tex Tag 08DX; sites-cohomology.tex Tag 07A4."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $\\varphi:U\\to Z$ from [def-trf-algebraic-space]. By [lem-sfb-space-derived-etale-chart-calculus], its pullback is exact restriction, and $\\varphi^*K,\\varphi^*L$ have quasi-coherent cohomology. The canonical isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives $\\varphi^*(K\\otimes^{\\mathbf L}L)\\cong\\varphi^*K\\otimes^{\\mathbf L}\\varphi^*L$. Step 2 makes the right side quasi-coherent. The covering criterion in [lem-sfb-space-derived-etale-chart-calculus] now implies that $K\\otimes^{\\mathbf L}L$ has quasi-coherent cohomology on $Z$. All cited results apply to unbounded objects and this atlas requires no finiteness or separation assumption.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F5, lemma-quasi-coherence-tensor-product, proof; Tag 08F2, lemma-check-quasi-coherence-on-covering; sites-cohomology.tex Tag 07A4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08F4 and 08F5, with the scheme/small-etale comparison of Tag 071Q made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On an algebraic space derived pullback and unbounded derived tensor product preserve quasi coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quasi coherent derived category of an algebraic space is stable under derived tensor product and pullback without boundedness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [HasDerivedCategory C] → Type (max u v)\", \"doc\": \"The derived category of homological complexes with integer-indexed shapes, obtained by localizing the category of such complexes at quasi-isomorphisms (morphisms inducing isomorphisms on all homology \"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a complex with quasi coherent cohomology on algebraic spaces has quasi coherent cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"{K L : CochainComplex C ℤ} (φ : K ⟶ L) : IsIso (Q.map φ) ↔ QuasiIso φ\", \"doc\": \"A morphism $\\\\phi$ between cochain complexes $K$ and $L$ is a quasi-isomorphism if and only if its image under the localization functor $Q$ is an isomorphism in the derived category. This equivalence c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"DerivedCategory.left_fac\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) :\\n  ∃ (Y' : CochainComplex C ℤ) (g : X ⟶ Y') (s : Y ⟶ Y') (_ : IsIso (Q.map s)), f = Q.map g ≫ inv (Q.map s)\", \"doc\": \"In the derived category $ \\\\mathcal{D}(\\\\mathcal{C}) $ of an abelian category $ \\\\mathcal{C} $, any morphism $ f : Q(X) \\\\to Q(Y) $ between the images of cochain complexes $ X $ and $ Y $ under the locali\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"DerivedCategory.right_fac\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) :\\n  ∃ (X' : CochainComplex C ℤ) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g : X' ⟶ Y), f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"In the derived category $ \\\\mathcal{D}(\\\\mathcal{C}) $ of an abelian category $ \\\\mathcal{C} $, every morphism $ f: Q(X) \\\\to Q(Y) $ can be expressed as a fraction $ g \\\\circ s^{-1} $, where $ s: X' \\\\to X \"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.Q\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": CochainComplex C ℤ ⥤ DerivedCategory C\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category, obtained by localizing at quasi-isomorphisms (morphisms inducing isomorphisms on all homology\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasicoherent.*derived|derived.*quasicoherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasicoherent.*derived|derived.*quasicoherent",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme module pullbacks, generic derived localizations, and unrelated ring tensors do not state preservation for unbounded quasi-coherent algebraic-space complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On algebraic spaces derived tensor product and derived pullback preserve quasicoherent complexes without boundedness",
+   "results": "8 hits; HasDerivedCategory.standard, DerivedCategory.right_fac_of_isStrictlyLE, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left, AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_preservesPullback_of_right, SheafOfModules.sheafificationCompPullback, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme module pullbacks, generic derived localizations, and unrelated ring tensors do not state preservation for unbounded quasi-coherent algebraic-space complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"tensor\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme module pullbacks, generic derived localizations, and unrelated ring tensors do not state preservation for unbounded quasi-coherent algebraic-space complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and unbounded derived tensor preserve quasi coherent cohomology on algebraic spaces",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme module pullbacks, generic derived localizations, and unrelated ring tensors do not state preservation for unbounded quasi-coherent algebraic-space complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full derived subcategory of complexes with quasicoherent cohomology is closed under tensor products and inverse image",
+   "results": "8 hits; DerivedCategory.Q, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, HasDerivedCategory.standard",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme module pullbacks, generic derived localizations, and unrelated ring tensors do not state preservation for unbounded quasi-coherent algebraic-space complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-complex-base-change",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tags 08F4 (lemma-quasi-coherence-pullback) and 08F5 (lemma-quasi-coherence-tensor-product).",
+   "via": [
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "worker": "stage1",
+  "summary": "Retained the statement and inherited searches. Reused the existing space chart calculus for pullback preservation and etale locality; proved tensor preservation by the existing scheme tensor theorem, explicit Zariski/etale derived equivalence, and general ringed-topos derived tensor pullback. No new nodes or source hypotheses are needed.",
+  "blueprint": "Supporting derived quasi-coherent input to the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry, specifically spaces-perfect Tags 08F4 and 08F5. The latest blueprint direct-image route was read; the inherited ancestry has null from.node, as reported by blueprint_refs ancestor, and is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-pullback-tensor-qcoh",
+    "why": "General scheme quasi-coherent tensor theorem (08DX), used as the scheme case in the prescribed 08F5 chart reduction; no same-unit node states this Zariski scheme result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General unbounded ringed-topos monoidality (07A4), applied to epsilon and the etale atlas; it supplies tensor compatibility rather than replacing any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-537c62368",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-537c62368 (reviewer sub-agent of L); spot-checked: Read the item in full, all five cited statements, and the Stacks sources: spaces-perfect 08F2, 08F4, 08F5 and 071Q, perfect 08DX, sites-cohomology 07A4. The statement is byte-identical to live. The item is still unsplit on live and side-live, there is no repair note and there are no new nodes. The only stmt_deps added are K-flat and K-injective, which the statement already names. Step 1 is the pullback clause of lem-sfb-space-derived-etale-chart-calculus with u=a, which is exactly 08F4. Step 2 proves the scheme case on the étale site. The 071Q equivalence (comparison node, no qcqs on this clause) gives K=ε*E and L=ε*F, and 08DX on Zariski gives E⊗F quasi-coherent. ε* is exact, so Lε*=ε*, and 07A4 gives ε*(E⊗F)≅K⊗L. This makes explicit the 071Q bridge that Stacks leaves silent. Step 3 is the 08F5 proof: take an atlas φ, use that étale pullback is exact restriction, transport the tensor along φ by 07A4, apply step 2 on U_et, and conclude by 08F2(4) through the covering criterion of chart-calculus. No qc/qs or boundedness is used. Edge cases checked: empty Z, zero, O_Z, identity a, non-flat a. There is no cycle (closures checked). Duplicate search by 08F4/08F5/08F2: only chart-calculus states the pullback clause, and it is reused. Advisory: chart-calculus, which is unsplit, must not cite this item when it is split. The two tool_uses (scheme 08DX node and ringed-topos 07A4 monoidality) are accepted as generic. Batch-5 flag: the path reaches def-trf-algebraic-space, a general definition. The other lem-trf nodes in the comparison node's closure are foundations on spaces and Zariski/étale from sk-i-curve-zero, not steps of the trace formula or Poincaré duality, so they are outside both assumptions. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedQCohPullbackTensor",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceDerivedPullback_tensor_preserve_QCoh",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceDerivedPullback_tensor_preserve_QCoh"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedQCohPullbackTensor.lean",
+  "statement": "theorem spaceDerivedPullback_tensor_preserve_QCoh {S : Scheme.{u}} {X Y : AlgebraicSpace S} [HasDerivedCategory.{wX} X.SmallModules] [HasDerivedCategory.{wY} Y.SmallModules] (a : X ⟶ Y) : (∀ K : Y.DerivedModules, Y.derivedQCohProperty K → X.derivedQCohProperty ((derivedTensorPullback a).obj K)) ∧ (∀ (Z : AlgebraicSpace S) [HasDerivedCategory.{wZ} Z.SmallModules] (K L : Z.DerivedModules), Z.derivedQCohProperty K → Z.derivedQCohProperty L → Z.derivedQCohProperty (Z.derivedDualityModel.closed.tensor.obj (K, L)))",
+  "branch": "sheaf-dag",
+  "by": "Q129",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-018f7b981",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Item matches node and Stacks 08F4/08F5 clause by clause: arbitrary a : X ⟶ Y, La^* = landed derivedTensorPullback (O3 owner, Mathlib totalLeftDerived) preserves derivedQCohProperty; ∀ Z, ∀ K L qcoh, closed.tensor of the landed derivedDualityModel (pinned on K-flat representatives; derivedQCohProperty iso-invariant) is qcoh. No boundedness/flatness/qc/qs; universes u,wX,wY,wZ free; edge cases (empty, zero, identity, non-flat, unbounded) covered. Statement verbatim; node diff vs side-live only lean + 2 used stmt_deps; the other 10 dep records byte-identical; no new nodes, no duplicate Lf^* or tensor (moduleDerivedTensorComplex is tensor with a fixed complex, a different notion); plain imports are proof_dep modules, no cycle; docstrings carry source, blueprint id and 3-step proof; proof sorry; report sections present. No recompile per instruction; no fixes."
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-completed-affine-free-local-dual",
+ "kind": "statement",
+ "title": "Local linear tests detect sections of free pro-affine etale completed modules",
+ "statement": "Let l be prime, X a scheme with its small pro-etale site [def-weil-pbc-proetale-site], and U an object whose structure map is proAffineEtale [sk-def-pe-morphisms]. Let R be the completed coefficient ring, the limit of the constant ring sheaves Z/l^(n+1) [def-pur-twist-coefficient-rings], and P the module sheafification of the free R-presheaf on the universe-lifted representable of U [def-weil-presheaf-modules-sheafification]. For V and x in P(V), suppose that for every W, map f:W to V, and R|W-linear sheaf map phi:P|W to R|W, evaluation of phi on x restricted to W is zero. Then x=0. Restrictions and the unit module are the ordinary slice-site restrictions of module sheaves. There are no divisibility hypotheses or coefficient projection hypotheses.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-morphisms",
+  "def-pur-twist-coefficient-rings",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), corrected finite-support local generator argument"
+ },
+ "proof": [
+  {
+   "text": "Lift x locally along the locally surjective sheafification unit. On the covering image sieve, a representative y has image equal to the restriction of x. If its sheafification image is zero, the restriction is zero. Otherwise apply the corrected presheaf local-dual lemma to get a slice functional nonzero on that image, contradicting the hypothesis on all local functionals. Sheaf separatedness descends the resulting vanishing to x=0. No injectivity of the free-presheaf sheafification unit is used.",
+   "uses": [
+    "lem-sfb-completed-affine-free-local-dual-local-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-completed-affine-free-local-dual-local-presheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W3",
+  "document": "lean/Sheaf/Paper/CompletedAffineFreeLocalDual.lean",
+  "place": "completedAffineFree_localDual_detect, image-sieve descent proof",
+  "note": "Forced proof adaptation to the corrected nonzero-image hypothesis; the public theorem signature is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local linear functionals to the completed coefficient ring detect sections of the sheafified free module on an affine pro-etale representable",
+   "results": "SheafOfModules.ιFree, freeCofan and freeHomEquiv for constant indexing types; LocallyConstant.coeFnₗ; ModuleCat.Tilde.toOpen; TopCat.Presheaf.Sheafify.isLocallyGerm; Condensed.lanSheafProfinite. None detects local linear tests on a free representable module sheaf.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. Constant-index free sheaves do not model the nonconstant representable generator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local linear functionals to the coefficient ring separate sections of a sheafified free module on a pro etale affine representable",
+   "results": "ModuleCat.Tilde.exists_const, ModuleCat.Tilde.toOpen, affine-limit section detection and quasicoherent generators; none applies to this free pro-etale module sheaf.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the required geometric detection is the new finite-support step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"free\", \"injective\"",
+   "results": "Group.IsTorsionFree instances for free groups and monoids, unrelated to module sheaf duals.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*dual|dual.*free",
+   "results": "25 hits, including ordinary finite-free dual bases, contraction and reflection. No sheafified free-representable local-dual detection theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match. Local searches of Sheaf and WeilConjectures also found no such declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedFreeAdicSeparation",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), local completed generator argument",
+   "via": [
+    "lem-sfb-completed-free-adic-separation",
+    "lem-sfb-diagonal-completed-free-generator",
+    "lem-sfb-diagonal-completed-section-action",
+    "lem-diagonal-completed-ordinary-square",
+    "lem-diagonal-completed-frame"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAffineFreeLocalDual",
+  "file": "lean/Sheaf/Paper/CompletedAffineFreeLocalDual.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedAffineFree_localDual_detect",
+  "statement": "theorem completedAffineFree_localDual_detect (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) :\n    let R := Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)\n    let P := (PresheafOfModules.sheafification (𝟙 R.obj)).obj\n      ((PresheafOfModules.free R.obj).obj (uliftYoneda.{u + 1}.obj U.unop))\n    ∀ (V : X.ProEtᵒᵖ) (x : P.val.obj V),\n      (∀ (W : X.ProEt) (f : W ⟶ V.unop)\n        (φ : P.over W ⟶ SheafOfModules.unit (R.over W)),\n        φ.val.app (op (Over.mk (𝟙 W))) (P.val.map f.op x) = 0) → x = 0",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4e5d7",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T034636-L-3668862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8ba6c",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261027T053012-L-506028",
+  "kind": "interface",
+  "note": "independent cc review: corrected completedAffineFree_presheaf_localDual (eta(y)≠0) against node lem-sfb-completed-affine-free-local-dual-local-presheaf, change record counterexample, and consumer completedAffineFree_localDual_detect (signature unchanged, minimal forced case-split adaptation)"
+ }
+}

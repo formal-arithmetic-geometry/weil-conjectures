@@ -1,0 +1,200 @@
+{
+ "id": "lem-a1-twisted-tensor-invariant-coefficients",
+ "kind": "statement",
+ "title": "Invariant expansion coefficients from a twisted tensor comparison",
+ "statement": "Let $A,B$ be commutative rings and $\\sigma,\\tau:A\\to B$ unital ring homomorphisms. Let $D=B\\otimes_{\\sigma,A,\\tau}B$, using $\\sigma$ on the first factor and $\\tau$ on the second [def-weil-pbc-module-tensor-product], with its tensor-product ring structure [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Put $p_0(b)=b\\otimes1$, $p_1(b)=1\\otimes b$. Suppose a ring homomorphism $\\Delta:B\\to D$ satisfies $\\Delta\\sigma=p_1\\sigma$ and $\\Delta\\tau=p_0\\tau$. Let $r\\geq1$ and $x_1,\\ldots,x_r\\in A$. Assume $(\\tau(x_j))_{j=1}^r$ is an $A$-basis of $B$ through $\\sigma$ [def-weil-pbc-free-module], meaning every $b\\in B$ has a unique expansion $b=\\sum_j\\sigma(a_j)\\tau(x_j)$ with $a_j\\in A$. Then $(p_0(\\tau(x_j)))_{j=1}^r$ is a $B$-basis of $D$ through $p_1$. Moreover, for every $a\\in A$, the unique coefficients $a_j$ in $\\tau(a)=\\sum_j\\sigma(a_j)\\tau(x_j)$ satisfy $\\sigma(a_j)=\\tau(a_j)$ for every $j$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03C8 (groupoids-lemma-basis), second diagram, left vertical isomorphism and coefficientwise equalizer comparison; old proof steps 3-4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Give the first copy of $B$ its $A$-module structure through $\\sigma$ and the second its $A$-algebra structure through $\\tau$. Apply [lem-weil-pbc-free-module-base-change-free] to the assumed basis $e_j=\\tau(x_j)$ of the first copy. Its right-tensor form says that $(e_j\\otimes1)_j=(p_0(\\tau(x_j)))_j$ is a basis of $D$ over the second copy of $B$, whose scalar action is multiplication through $p_1$. This proves the first conclusion; write this basis as $(E_j)_j.",
+   "uses": [
+    "lem-weil-pbc-free-module-base-change-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), second commutative diagram: left vertical basis isomorphism and coefficientwise comparison."
+   }
+  },
+  {
+   "text": "For a fixed $a\\in A$, write its assumed unique expansion $\\tau(a)=\\sum_j\\sigma(a_j)\\tau(x_j)$. The tensor balancing relation gives $p_0(\\sigma(u))=\\sigma(u)\\otimes1=1\\otimes\\tau(u)=p_1(\\tau(u))$ for every $u\\in A$. The ring structure makes $p_0,p_1$ ring maps. Apply $\\Delta$ to the expansion and use the two assumed identities to obtain $p_0(\\tau(a))=\\sum_jp_1(\\sigma(a_j))E_j$. Apply $p_0$ to the same expansion and use the balancing identity to obtain $p_0(\\tau(a))=\\sum_jp_1(\\tau(a_j))E_j$. Both are expansions over the second copy of $B$ in exactly the same basis.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), second commutative diagram: left vertical basis isomorphism and coefficientwise comparison."
+   }
+  },
+  {
+   "text": "By the uniqueness clause in the definition of a basis [def-weil-pbc-free-module], the two coefficient vectors in step 2 are equal as vectors with entries in $B$: their $j$th entries are $\\sigma(a_j)$ and $\\tau(a_j)$. Hence $\\sigma(a_j)=\\tau(a_j)$ for every $j$. The argument applies to each $a\\in A$ and proves the second conclusion.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), second commutative diagram: left vertical basis isomorphism and coefficientwise comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-module-base-change-free",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03C8 (groupoids-lemma-basis), second commutative diagram: left vertical basis isomorphism and coefficientwise comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "eqLocus.*[Bb]asis|[Bb]asis.*eqLocus|[Bb]asis.*[Dd]escent|[Dd]escent.*[Bb]asis",
+   "results": "Recorded output: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: equalizer and linear-disjointness hits do not assert invariance of these coefficients under the stated comultiplication identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.eqLocus, Module.Basis",
+   "results": "Recorded output: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: equalizer and linear-disjointness hits do not assert invariance of these coefficients under the stated comultiplication identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For split ring maps sigma tau from A to B with comultiplication into B tensor A B, a basis tau(x) over sigma(A) has invariant expansion coefficients and descends to a basis over the equalizer subring",
+   "results": "Recorded output: 8 hits; Algebra.SubmersivePresentation.basisKaehlerOfIsCompl, IntermediateField.LinearDisjoint.algebraMap_basisOfBasisRight_repr_apply, Algebra.SubmersivePresentation.basisKaehler, IntermediateField.LinearDisjoint.basisOfBasisLeft_repr_apply, Algebra.FormallyUnramified.finite_of_free_aux, Subalgebra.LinearDisjoint.basisOfBasisLeft_repr_apply, Algebra.SubmersivePresentation.basisCotangent_apply, Algebra.SubmersivePresentation.basisCotangent",
+   "date": "2026-10-22",
+   "verdict": "no match: equalizer and linear-disjointness hits do not assert invariance of these coefficients under the stated comultiplication identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparing coefficients in a basis of a twisted tensor product forces expansion coefficients into the equalizer of two ring maps",
+   "results": "Recorded output: 8 hits; LinearMap.tensorEqLocusBil, AlgHom.coe_tensorEqualizer, AlgHom.tensorEqualizer, AlgHom.tensorEqualizerEquiv_apply, LinearMap.tensorEqLocus_tmul, CommRingCat.Under.tensorProdEqualizer, Algebra.TensorProduct.ext', MvPolynomial.coeff_rTensorAlgHom_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: equalizer and linear-disjointness hits do not assert invariance of these coefficients under the stated comultiplication identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A basis of a module remains a basis after extension of scalars, with coordinates of pure tensors obtained by applying the scalar homomorphism to the original coordinates",
+   "results": "8 hits: Module.Basis.baseChange, IsBaseChange.basis, IsBaseChange.basis_apply, Module.Basis.baseChange_apply, Module.Basis.baseChange_repr_tmul, IsBaseChange.of_basis, IsBaseChange.basis_repr_comp_apply, Algebra.TensorProduct.basis; ",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined claim: basis-change clause found, already represented by lem-weil-pbc-free-module-base-change-free; this does not assert the invariant-coefficient clause"
+  },
+  {
+   "tool": "grep",
+   "query": "def baseChange|baseChange_apply|baseChange_repr",
+   "results": "12 hits: Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean; ",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined claim: basis-change clause found, already represented by lem-weil-pbc-free-module-base-change-free; this does not assert the invariant-coefficient clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For ring maps sigma tau from A to B and Delta from B to the twisted tensor product, comparing Delta and the first inclusion in a base changed basis proves sigma and tau agree on expansion coefficients",
+   "results": "8 hits: LinearMap.baseChange_eq_ltensor, Algebra.TensorProduct.includeLeftRingHom_comp_algebraMap, Algebra.TensorProduct.ext_iff, Module.Basis.baseChange_repr_tmul, LinearMap.liftBaseChange_tmul, Algebra.Generators.baseChange, LinearMap.toMvPolynomial_baseChange, Algebra.EssFiniteType.baseChange; ",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined claim: hits give base-change coordinates and the balancing identity but do not assert the Delta comparison for two different A-structures"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.baseChange",
+   "results": "3 hits: Module.Basis.baseChange, Module.Basis.baseChange_apply, Module.Basis.baseChange_repr_tmul; ",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined claim: basis-change clause found, already represented by lem-weil-pbc-free-module-base-change-free; this does not assert the invariant-coefficient clause"
+  },
+  {
+   "tool": "grep",
+   "query": "eqLocus.*[Bb]asis|[Bb]asis.*eqLocus|[Ii]nvariant.*[Cc]oefficient|[Cc]oefficient.*[Ii]nvariant",
+   "results": "3 hits: Mathlib/Algebra/Lie/Loop.lean, Mathlib/Analysis/Meromorphic/TrailingCoefficient.lean, Mathlib/Analysis/Meromorphic/TrailingCoefficient.lean; ",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined claim: Lie-loop and meromorphic-coefficient hits do not concern twisted algebra tensors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant coefficients of an expansion tau(a) in a sigma linear basis tau(x_i), using a comultiplication Delta sigma equals p1 sigma and Delta tau equals p0 tau",
+   "results": "8 hits: Coalgebra.Repr.arbitrary, Coalgebra.Repr.eq, LaurentPolynomial.comul_T, LaurentPolynomial.comul_C, LaurentPolynomial.comul_C_mul_T, LaurentPolynomial.comul_C_mul_T_self, Coalgebra.sum_counit_smul, AddMonoidAlgebra.comul_single; ",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined claim: coalgebra and Laurent-polynomial formulas use different structures and do not compare the two given ring maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-basis-descent",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting Tag 03C8 (groupoids-lemma-basis), finite nonempty index-set case. Extracted supporting argument: Tag 03C8 (groupoids-lemma-basis), second diagram, left vertical isomorphism and coefficientwise equalizer comparison; old proof steps 3-4.",
+   "via": [
+    "lem-a1-affine-groupoid-basis-descent",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-twisted-tensor-invariant-coefficients",
+  "worker": "stage1",
+  "summary": "Read Stacks 03C8 and wrote its tensor-basis coefficient comparison explicitly. Reused the existing Mathlib leaf for arbitrary-ring free-module base change; the remaining steps are ring-map identities and uniqueness of coefficients. No new nodes and no statement change. Searched project declarations and Mathlib, with no exact attachment or Mathlib match for the combined claim.",
+  "blueprint": "The inherited lem-a1-affine-hc0 ancestry records the historical auxiliary 03XX quotient route. This supporting lemma realizes Tag 03C8 second-diagram left vertical isomorphism and the coefficientwise equalizer comparison, as specified in blueprint.from.place; latest lem-a1-affine-hc0 has moved to sk-lem-wrp-hc2 and no longer spells out that auxiliary route. No chapter/unit route is replaced here.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-4349dfd80",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-4349dfd80 (reviewer sub-agent of L); spot-checked: Read the whole item, its 4 cited nodes and Stacks groupoids.tex 03C8 (lines 4744-4808). The statement and stmt_deps are identical to the NK base copy; only the previously empty proof was filled, with 0 new nodes. In Stacks, c∘s=p1∘s, c∘t=p0∘t and p1∘t=p0∘s, which match the item's Δσ=p1σ, Δτ=p0τ and its balancing relation; the left vertical basis is p0(t(x_i)). Step 1: lem-weil-pbc-free-module-base-change-free (Mathlib leaf, F⊗_R A clause) with R=A, F=B through σ and scalar ring B through τ gives the basis E_j=τ(x_j)⊗1 over p1; the orientation is right. Step 2: I recomputed both expansions. Applying Δ gives Σp1σ(a_j)E_j, and applying p0 with balancing σ(u)⊗1=1⊗τ(u) (from the bilinearity relations) gives Σp1τ(a_j)E_j. Step 3: uniqueness of basis coefficients in B gives σ(a_j)=τ(a_j), with no injectivity of p1 needed. Edge cases σ=τ=id, σ=τ arbitrary and the zero ring are all fine, and no hidden flatness is used. proof_deps is the union of the step uses. No SGA. Duplicate search (03C8, Δ identities) finds only the NK sibling nodes, which supply the hypotheses or consume the result; the parent's step 2 uses the item with matching factor order. Unit sk-p-real-rankin is untouched (inherited supporting lemma). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TwistedTensorInvariantCoefficients",
+  "declaration": "RingHom.twistedTensor_invariant_coefficients",
+  "declarations": [
+   "RingHom.TwistedTensorProduct",
+   "RingHom.instCommRingTwistedTensorProduct",
+   "RingHom.twistedTensorLeft",
+   "RingHom.twistedTensorRight",
+   "RingHom.twistedTensor_invariant_coefficients"
+  ],
+  "file": "lean/Sheaf/RingTheory/TwistedTensorInvariantCoefficients.lean",
+  "statement": "theorem twistedTensor_invariant_coefficients {A : Type u} {B : Type v} [CommRing A] [CommRing B] (σ τ : A →+* B) (Δ : B →+* TwistedTensorProduct σ τ) (_hΔσ : Δ.comp σ = (twistedTensorRight σ τ).comp σ) (_hΔτ : Δ.comp τ = (twistedTensorLeft σ τ).comp τ) (r : ℕ) (_hr : 1 ≤ r) (x : Fin r → A) (_hbasis : ∀ b : B, ∃! c : Fin r → A, b = ∑ j : Fin r, σ (c j) * τ (x j)) : (∃ e : @Module.Basis (Fin r) B (TwistedTensorProduct σ τ) _ _ (twistedTensorRight σ τ).toAlgebra.toModule, ∀ j : Fin r, e j = twistedTensorLeft σ τ (τ (x j))) ∧ ∀ (a : A) (c : Fin r → A), τ a = ∑ j : Fin r, σ (c j) * τ (x j) → ∀ j : Fin r, σ (c j) = τ (c j)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helpers specialize Mathlib's TensorProduct, tensor commutative-ring instance and inclusion maps with explicit sigma and tau algebra structures on the same ring. The basis conclusion is Module.Basis with the module structure induced by the second inclusion. The coefficient conclusion quantifies over the unique expansion characterized by the input hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b19792fd",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read item, 3 Mathlib-leaf stmt_deps, Stacks 03C8 (groupoids.tex 4745-4812), module, report. D=@TensorProduct with σ/τ algebra modules, Mathlib instCommRing, p0=includeLeftRingHom, p1=includeRight; Δσ=p1σ, Δτ=p0τ; unique-expansion hypothesis = node's stated meaning; basis conclusion is Module.Basis over p1-action with vectors p0(τ x_j) pinned; coefficient clause σ(c j)=τ(c j) in B, equivalent by uniqueness. Math rechecked (balancing p0σ=p1τ + baseChange basis uniqueness). Edge cases r=1, σ=τ, zero rings, universes u/v independent OK. Only lean field changed vs base; statement verbatim; 5 declarations listed with source/blueprint docstrings; only theorem sorry; lines ≤87; imports = dep/proof-dep modules. Advisory: sibling Q88 coordinate-identities has parallel CommRingCat.{u} helpers owned by a theorem node (not citable, single universe), defeq to these; not a fault. No recompile (no change)."
+ }
+}

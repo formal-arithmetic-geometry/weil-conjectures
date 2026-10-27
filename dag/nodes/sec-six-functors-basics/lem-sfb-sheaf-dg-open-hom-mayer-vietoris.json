@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-sheaf-dg-open-hom-mayer-vietoris",
+ "kind": "statement",
+ "title": "Open-cover sheaf dg Hom sequence and derived scalar naturality",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $X$ be a topological space with a sheaf $\\mathcal S$ of commutative rings and a sheaf dg $\\mathcal S$-algebra $\\mathcal C$. Use left dg modules, signed shifts and cones, and the localization $D_X(\\mathcal C)$ of [def-sfb-sheaf-dg-module-localization]. Let $U,V\\subseteq X$ be opens with $X=U\\cup V$, and put $T=U\\cap V$. For $P,Q\\in D_X(\\mathcal C)$ and any open $Z$ put\n$$H_Z^n(P,Q)=\\operatorname{Hom}_{D_Z(\\mathcal C|_Z)}(P|_Z,(Q|_Z)[n])\\qquad(n\\in\\mathbf Z).$$\nThere is a long exact sequence of abelian groups\n$$\\cdots\\to H_U^{n-1}(P,Q)\\oplus H_V^{n-1}(P,Q)\\to H_T^{n-1}(P,Q)\\xrightarrow{\\partial}H_X^n(P,Q)\\to H_U^n(P,Q)\\oplus H_V^n(P,Q)\\to H_T^n(P,Q)\\xrightarrow{\\partial}H_X^{n+1}(P,Q)\\to\\cdots.$$\nThe maps from $X$ are restriction and the maps to $T$ are difference of restrictions. The boundary is the one obtained by applying contravariant Hom into $Q[n]$ to the extension-by-zero triangle\n$$j_{T!}(P|_T)\\longrightarrow j_{U!}(P|_U)\\oplus j_{V!}(P|_V)\\longrightarrow P\\longrightarrow j_{T!}(P|_T)[1].$$\nHere $j_Z:Z\\hookrightarrow X$ is inclusion, and $j_{Z!}$ is termwise extension by zero: its stalk is the given module stalk at points of $Z$ and zero outside $Z$, with the induced dg action. The first triangle map has the inclusion components with opposite signs and the second has the two counits as components. The sequence is natural contravariantly in $P$ and covariantly in $Q$.\n\nFor every map $\\varphi:\\mathcal C\\to\\mathcal C'$ of sheaf dg $\\mathcal S$-algebras, put $L_\\varphi=\\mathcal C'\\otimes_{\\mathcal C}^{\\mathbf L}-$, the derived extension of [lem-sfb-ringed-dg-scalar-adjunction], and use its canonical comparisons with open restriction and shifts. Applying $L_\\varphi$ to morphisms gives a morphism from the displayed sequence to the sequence for $L_\\varphi P,L_\\varphi Q$ over $\\mathcal C'$, including all boundary squares. These maps respect identity maps and composition of algebra maps with the canonical adjunction comparisons. No flatness, perfectness, quasi-coherence, boundedness or quasi-compactness hypothesis is imposed; empty opens are allowed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW (lemma-mayer-vietoris-hom), extension-by-zero triangle proof; sheaf dg refinement using sdga.tex Tags 0FRW (lemma-extension-by-zero-dg) and 0FRX (lemma-tensor-with-extension-by-zero-dg). The dg scalar-extension boundary compatibility is an agent-formulated strengthening, not the assertion of Tag 08BW itself."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-ringed-dg-scalar-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For an actual left dg module $M$, put $A(M)=j_{T!}M|_T$ and $B(M)=j_{U!}M|_U\\oplus j_{V!}M|_V$. The open-extension calculus defines natural dg maps $a=(\\iota_{T,U},-\\iota_{T,V}):A(M)\\to B(M)$ and $b=(\\varepsilon_U,\\varepsilon_V):B(M)\\to M$, with $ba=0$ by its counit coherence. In each degree apply [lem-sc-open-cover-mate-module-short-exact] to the underlying $\\mathcal S$-module sheaf $M^r$ on the ringed space $(X,\\mathcal S)$ and the ordinary extension/restriction adjunctions. Its maps are exactly these underlying maps, since both transpose the identity on the smaller open. Thus $0\\to A(M)\\xrightarrow a B(M)\\xrightarrow b M\\to0$ is degreewise short exact. The dg Grothendieck-category node computes kernels and cokernels on underlying graded sheaves, so this is also exact as dg modules. The stalk cases are the diagonal-with-minus followed by addition on $T$, and the identity sequence on $U\\setminus V$ or $V\\setminus U$; the cover excludes any fourth case.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sc-open-cover-mate-module-short-exact",
+    "lem-sfb-sheaf-dg-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU (lemma-exact-sequence-lower-shriek), degreewise sequence; sdga.tex Tag 0FRW"
+   }
+  },
+  {
+   "text": "Form the specified dg cone $C(a)=B(M)\\oplus A(M)[1]$ and $q:C(a)\\to M$, $q(b_0,a_0)=b(b_0)$. It is a dg map since $ba=0$. The cone-short-exact quasi-isomorphism node, applied to the underlying complexes of $\\mathcal S$-module sheaves, makes $q$ a quasi-isomorphism; this is exactly the class inverted in the dg localization. The scalar-adjunction node gives the triangulated structure with the specified cone triangles. Replacing the third vertex of $A(M)\\to B(M)\\to C(a)\\xrightarrow{-p}A(M)[1]$ by $M$ gives a distinguished triangle with boundary $\\delta_M=-p q^{-1}$. A dg map $f:M\\to M'$ gives the cone map $(B(f),A(f)[1])$; its compositions with $p$ and $q$ give $A(f)[1]\\delta_M=\\delta_{M'}f$. Since $A,B$ preserve homotopies and quasi-isomorphisms by the open-extension calculus, localization of natural transformations extends this identity to every derived morphism. Hence the triangle is natural in $P$, with the same signed boundary for any representative.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTB (lemma-derived-canonical-delta-functor), cone formula and its naturality"
+   }
+  },
+  {
+   "text": "Apply contravariant Hom into $Q[n]$ to this triangle and all its rotations. The Hom-out-of-triangle exactness node gives exactness at each adjacent pair; rotating and shifting covers every integer. The additive open adjunctions identify $\\operatorname{Hom}(j_{Z!}P|_Z,Q[n])$ with $H_Z^n(P,Q)$. Under them precomposition with $b$ is restriction, and precomposition with $a$ is restriction from $U$ minus restriction from $V$. If $\\gamma:P|_T\\to Q|_T[n-1]$ and $\\widetilde\\gamma:A(P)\\to Q[n-1]$ is its adjunct, the connecting map is $\\partial\\gamma=\\widetilde\\gamma[1]\\circ\\delta_P$, using the coherent shift identifications. This fixes its sign. All terms are abelian groups since the category is additive. Naturality of the triangle in $P$, and postcomposition into $Q[n]$, prove the stated contravariance and covariance, including the boundary.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-weil-triangulated-category",
+    "lem-sfb-sheaf-dg-open-extension-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BW (lemma-mayer-vietoris-hom); derived.tex Tag 0149 (lemma-representable-homological)"
+   }
+  },
+  {
+   "text": "Fix $\\varphi:\\mathcal C\\to\\mathcal C'$ and abbreviate ordinary extension by $F$ and its derived functor by $L$. Choose a graded-flat homotopically flat resolution $H\\to P$ using [lem-sfb-sheaf-dg-hflat-computation]. Restrictions of $H$ are again graded-flat homotopically flat: for an acyclic right module $T$ on $Z$, extend it by zero; [lem-sfb-sheaf-dg-open-tensor-projection] identifies $(j_!T)\\otimes_{\\mathcal C}H$ with $j_!(T\\otimes_{\\mathcal C|_Z}H|_Z)$, and restrict back to $Z$. The same argument with a short exact sequence of graded right modules proves graded flatness. Conversely, for graded-flat homotopically flat $G$ on $Z$, the other projection formula identifies $T\\otimes j_!G$ with $j_!(T|_Z\\otimes G)$; exactness of restriction and extension by zero proves both properties of $j_!G$. Consequently $H,A(H),B(H)$ have these properties. So does $C(a)$: its underlying graded module is $B(H)\\oplus A(H)[1]$, and tensoring it with an acyclic right module is the signed cone of a map between acyclic complexes, hence acyclic by the cohomology long exact sequence. Thus the derived-to-ordinary comparisons $\\epsilon$ are isomorphisms on all four objects.",
+   "uses": [
+    "lem-sfb-sheaf-dg-hflat-computation",
+    "lem-sfb-sheaf-dg-open-tensor-projection",
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRB, 0FRX; Tag 0FSH (lemma-resolve) and the definition of homotopical flatness"
+   }
+  },
+  {
+   "text": "The tensor projection isomorphism with the $(\\mathcal C',\\mathcal C)$-bimodule $\\mathcal C'$ identifies $F A(H),F B(H)$ with $A'(FH),B'(FH)$, carrying $Fa,Fb$ to the cover maps by counit compatibility. Here primes mean extension by zero for $\\mathcal C'$. Tensor commutes with the signed cone: on a homogeneous tensor $c'\\otimes(b_0,a_0)$ the cone comparison is $(c'\\otimes b_0,(-1)^{|c'|}c'\\otimes a_0)$. Inserting the tensor differential and the shifted left action gives exactly the cone differential and action. Hence $Fq$ is the cover cone map $q'$ and $Fp$ is $p'$ after this shift comparison. The right-Kan coherent-shift node makes $\\epsilon_{A(H)[1]}=\\epsilon_{A(H)}[1]\\sigma_{A(H)}$, where $\\sigma:L(A[1])\\simeq (LA)[1]$. Naturality of $\\epsilon$ for $p,q$, and invertibility of $q,q'$ and these comparison maps, therefore gives\n$$\\epsilon_{A(H)}[1]\\sigma_{A(H)}L(-p q^{-1})=(-p'(q')^{-1})\\epsilon_H.$$\nThis is the missing boundary square, not merely a comparison of the first two arrows. The isomorphisms on $H,A(H),B(H)$ consequently identify $L$ of the entire cover triangle with the cover triangle of $LP$. Independence of $H$ follows from the universal derived comparison and the open/scalar adjunctions: their comparison is the left-adjoint uniqueness map to the same right composite, so agrees with the canonical comparisons in the statement.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-tensor-projection",
+    "lem-sfb-sheaf-dg-hflat-computation",
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-pur-right-kan-extension-coherent-shift",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRX, 0FTF (lemma-derived-tensor-product), 0FTB; derived comparison shift compatibility"
+   }
+  },
+  {
+   "text": "For each open $Z$, send $f:P|_Z\\to Q|_Z[n]$ to $L_Z(f)$ followed by the shift comparison, using the restriction comparison to view its endpoints as $(LP)|_Z,(LQ)|_Z[n]$. This is additive. The first two arrow squares follow from the counit-compatible comparisons of step 5. For the boundary, apply $L$ to $\\widetilde\\gamma[1]\\delta_P$. Step 5 replaces $L(\\delta_P)$ by $\\delta_{LP}$ and the shift of the comparison on $A(P)$; naturality of the shift comparison replaces $L(\\widetilde\\gamma[1])$ by $(L\\widetilde\\gamma)[1]$. Since the open adjunction comparison preserves counits, $L\\widetilde\\gamma$ is the adjunct of the image of $\\gamma$. The resulting composite is precisely $\\partial$ of that image. This proves every boundary square in every degree.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-pur-right-kan-extension-coherent-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FTR (lemma-derived-adjoint-push-pull), 0FRX; the explicit boundary formula of Tag 0FTB"
+   }
+  },
+  {
+   "text": "For two successive algebra maps, the right adjoints are restrictions and their composite is literally restriction along the composite. The canonical unit-compatible left-adjoint uniqueness isomorphism identifies the two successive derived extensions with extension along the composite. Its naturality gives the same map on every Hom group, and compatibility with the units and counits makes its open comparisons the ones already used. Associativity is exactly the left-adjoint-composition associativity node; the identity comparison is the uniqueness map to the identity adjunction. These comparisons commute with shifts because both composites have the shift comparison determined by the derived universal comparison. Thus identities and compositions respect the whole sequence and the boundary calculation. All constructions were unbounded and used flat resolutions over the dg algebra, never flatness of the algebra map or of the algebras over $\\mathcal S$. If an open is empty its extension by zero and all its Hom groups are zero; the same formulas still apply.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-pur-right-kan-extension-coherent-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FTR and adjunction uniqueness; canonical composition of derived scalar adjunctions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "def-weil-triangulated-category",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-left-adjoint-composition-iso-associativity",
+  "lem-sc-open-cover-mate-module-short-exact",
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "lem-sfb-sheaf-dg-grothendieck",
+  "lem-sfb-sheaf-dg-hflat-computation",
+  "lem-sfb-sheaf-dg-open-extension-calculus",
+  "lem-sfb-sheaf-dg-open-tensor-projection",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW and Tag 08BU, lifted to sheaf dg modules using sdga.tex Tags 0FRX and 0FTB; explicit derived-scalar boundary and composition refinement by Q70"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Mayer.Vietoris|mayer.vietoris|extensionByZero.*[Dd]g|[Dd]g.*extensionByZero",
+   "results": "{\"t\": \"2026-10-24T08:17:57Z\", \"tool\": \"grep\", \"query\": \"Mayer.Vietoris|mayer.vietoris|extensionByZero.*[Dd]g|[Dd]g.*extensionByZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"Mathlib/Topology/Sheaves/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"25c0f2b3c014b8ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary abelian sheaf cohomology, ordinary module maps or categorical Ext results; no sheaf dg Hom sequence compatible with derived coefficient extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris exact sequence for derived Hom of sheaf differential graded modules and naturality under extension of scalars",
+   "results": "{\"t\": \"2026-10-24T08:17:57Z\", \"tool\": \"leansearch\", \"query\": \"Mayer Vietoris exact sequence for derived Hom of sheaf differential graded modules and naturality under extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex\"], \"digest\": \"d9a3cc79a3b938dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary abelian sheaf cohomology, ordinary module maps or categorical Ext results; no sheaf dg Hom sequence compatible with derived coefficient extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MayerVietoris\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-24T08:17:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"MayerVietoris\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars preserves the open cover extension by zero triangle and its Hom connecting homomorphism for sheaf dg modules",
+   "results": "{\"t\": \"2026-10-24T08:17:59Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension of scalars preserves the open cover extension by zero triangle and its Hom connecting homomorphism for sheaf dg modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\"], \"digest\": \"dfd551240fb2d9ef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary abelian sheaf cohomology, ordinary module maps or categorical Ext results; no sheaf dg Hom sequence compatible with derived coefficient extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris long exact sequence of morphisms in the derived category of sheaves of differential graded modules compatible with derived change of coefficient algebra",
+   "results": "{\"t\": \"2026-10-24T08:18:01Z\", \"tool\": \"leanfinder\", \"query\": \"Mayer Vietoris long exact sequence of morphisms in the derived category of sheaves of differential graded modules compatible with derived change of coefficient algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\"], \"digest\": \"a277add76b8826a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary abelian sheaf cohomology, ordinary module maps or categorical Ext results; no sheaf dg Hom sequence compatible with derived coefficient extension"
+  },
+  {
+   "tool": "grep",
+   "query": "Mayer.Vietoris|sheaf.*dg|dg.*sheaf",
+   "results": "{\"t\": \"2026-10-24T08:54:47Z\", \"tool\": \"grep\", \"query\": \"Mayer.Vietoris|sheaf.*dg|dg.*sheaf\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"2acce2c2661fe996\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary abelian sheaf Mayer-Vietoris sequences and ordinary derived categories do not state the sheaf dg result with scalar-extension boundary naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris long exact sequence of derived Hom for sheaf dg modules natural under derived extension of scalars",
+   "results": "{\"t\": \"2026-10-24T08:54:47Z\", \"tool\": \"leansearch\", \"query\": \"Mayer Vietoris long exact sequence of derived Hom for sheaf dg modules natural under derived extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.Abelian.Ext.covariantSequence\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex\"], \"digest\": \"8a0a203b998f09a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary abelian sheaf Mayer-Vietoris sequences and ordinary derived categories do not state the sheaf dg result with scalar-extension boundary naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris exact sequence for derived Hom of sheaves of differential graded modules compatible with extension of scalars",
+   "results": "{\"t\": \"2026-10-24T08:54:49Z\", \"tool\": \"leanfinder\", \"query\": \"Mayer Vietoris exact sequence for derived Hom of sheaves of differential graded modules compatible with extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex\"], \"digest\": \"83201748ec7768dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary abelian sheaf Mayer-Vietoris sequences and ordinary derived categories do not state the sheaf dg result with scalar-extension boundary naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated dg sheaf derived category has a Mayer Vietoris Hom long exact sequence natural for coefficient change",
+   "results": "{\"t\": \"2026-10-24T08:56:26Z\", \"tool\": \"leanfinder\", \"query\": \"A triangulated dg sheaf derived category has a Mayer Vietoris Hom long exact sequence natural for coefficient change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"DerivedCategory.HomologySequence.exact₃\", \"DerivedCategory.HomologySequence.exact₁\", \"DerivedCategory.triangleOfSESδ\"], \"digest\": \"f82c24c65a85833f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary abelian sheaf Mayer-Vietoris sequences and ordinary derived categories do not state the sheaf dg result with scalar-extension boundary naturality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-sheaf-dg-hom-continuity",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Uniform Mayer--Vietoris locality step: the predicate on each open covers all perfect sources, ordinary targets, integer cutoffs and arrows surjective on cohomology above the cutoff; conditional on this full predicate on both opens and their intersection. Independent prerequisite: finite coefficient descent of the perfect sheaf dg source, before transposing the arrow to an ordinary coherent object. Morphisms and eventual equalities on the overlap, before binary sheaf dg gluing. Independent sheaf dg Mayer--Vietoris input for the Hom-continuity argument, including scalar-extension naturality of its boundary.",
+   "via": [
+    "lem-sfb-perfect-sheaf-dg-hom-continuity",
+    "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+    "lem-sfb-perfect-arrow-coherent-factorization-locality",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-open-hom-mayer-vietoris",
+  "worker": "stage1",
+  "summary": "Constructed the dg open-cover triangle by an explicit cone, identified the Hom sequence and signs by adjunction, and computed coefficient-change compatibility using graded-flat homotopically flat resolutions. One new statement-only graded/dg tensor projection lemma; existing open calculus, scalar adjunction, and category-theoretic tools reused. No change to the item statement.",
+  "blueprint": "Realizes the inherited from.place: the sheaf dg Mayer-Vietoris input for perfect Hom continuity. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) is only the distant route; the inherited ancestor tool returns None and the existing explicit via chain is retained. No imported blueprint node states this sheaf dg input.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Exact ordinary extension-by-zero/restriction adjunction on an arbitrary ringed space, used degreewise and for the tensor acyclicity test."
+   },
+   {
+    "node": "lem-sc-open-cover-mate-module-short-exact",
+    "why": "Degreewise ordinary module sheaf exactness for the canonical open-cover mate maps; used as a generic ringed-space tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Representable Hom exactness in any pre-triangulated category, applied to the explicitly constructed dg triangle."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Ordinary cochain cohomology exactness to check that a tensor cone of acyclic complexes is acyclic."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Fully faithful descent of natural transformations through localization to extend the explicitly constructed boundary to derived morphisms."
+   },
+   {
+    "node": "lem-pur-right-kan-extension-coherent-shift",
+    "why": "Coherent shift normalization of a universal left derived functor and its derived-to-ordinary comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-open-cover-mate-module-short-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-right-kan-extension-coherent-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-e3b44b9bc",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-e3b44b9bc (reviewer sub-agent of L); spot-checked: I read the item (7 steps) and the new node lem-sfb-sheaf-dg-open-tensor-projection in full, together with the statements of all 16 cited nodes. Sources checked: Stacks 08BU and 08BW in cohomology.tex (an arbitrary ringed space), and sdga.tex 0FRB l.943, 0FRX l.2119, 0FRW and 0FTB. Step 1: ba=ε_T−ε_T=0. The open-cover mate node applies degreewise to any ringed space (def-weil-locally-ringed-space-morphism does not require local stalks), and the dg Grothendieck node gives exactness as dg modules. Step 2: q∘d_C=d∘q uses ba=0, q is a quasi-isomorphism by the Mathlib cone leaf, q∘i=b, so δ=−pq⁻¹ gives a distinguished triangle. δ descends to the derived category by part (2) of the localization universal property. Step 3: exactness at all three spots from Hom-out-of-triangle (i)/(ii) and TR2, with the terms identified by j_!⊣j^*. Step 4: restriction and extension by zero preserve graded-flat homotopically flat modules through the two projection formulas, and the cone is acyclic after tensoring by the long exact sequence, so ε is an isomorphism on all four objects. Step 5: I checked by hand that the sign ψ(c′⊗a₀)=(−1)^{|c′|}c′⊗a₀ is compatible with the differential, the cross term, the balanced relation and the shifted action. The boundary equation then follows from ε-naturality and the coherent-shift node. Steps 6–7: the boundary squares hold, and compatibility with composition follows from strict composition of restrictions, the conjugate-isomorphism node and the associativity node. The new node is true: the stalks agree on U and are zero off U, and the bimodule and graded clauses hold. Small cases: U empty, U=X, a one-point space. It is general rather than a clause of the item, and no duplicate exists: rg -L for 0FRB/0FRX/extension-by-zero tensor finds only pro-étale condensed or derived versions. No cycle (DFS on the snapshot). Batch 5: hflat-computation and open-extension-calculus reach lem-trf-triangulated-subcategory-cone-system only via sheaf-dg-homotopy-system. That node is a generic Verdier multiplicative-system Mathlib leaf, neither of the two assumed statements nor a step of their proofs, so all three listed citations are accepted. I accept the declared tool_uses: two generic ringed-space lemmas, the right-Kan coherent-shift node (on route through sk-def-sf-operations) and Mathlib leaves. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgOpenHomMayerVietoris",
+  "declaration": "CategoryTheory.SheafDg.sheaf_dg_open_hom_mayer_vietoris",
+  "declarations": [
+   "CategoryTheory.SheafDg.HomTriangulation",
+   "CategoryTheory.SheafDg.OpenHomGeometry",
+   "CategoryTheory.SheafDg.coverOrdinary",
+   "CategoryTheory.SheafDg.coverDerived",
+   "CategoryTheory.SheafDg.coverComparison",
+   "CategoryTheory.SheafDg.OpenHomInclusions",
+   "CategoryTheory.SheafDg.ordinaryCoverFirst",
+   "CategoryTheory.SheafDg.ordinaryCoverSecond",
+   "CategoryTheory.SheafDg.OpenHomTriangles",
+   "CategoryTheory.SheafDg.OpenHom",
+   "CategoryTheory.SheafDg.homRestrict",
+   "CategoryTheory.SheafDg.homAdjunct",
+   "CategoryTheory.SheafDg.homRestrictNested",
+   "CategoryTheory.SheafDg.homCoverRestrict",
+   "CategoryTheory.SheafDg.homCoverDifference",
+   "CategoryTheory.SheafDg.homCoverBoundary",
+   "CategoryTheory.SheafDg.HomCoverExact",
+   "CategoryTheory.SheafDg.HomCoverAdditive",
+   "CategoryTheory.SheafDg.homOpenMap",
+   "CategoryTheory.SheafDg.HomCoverNatural",
+   "CategoryTheory.SheafDg.HomScalarSystem",
+   "CategoryTheory.SheafDg.scalarHom",
+   "CategoryTheory.SheafDg.scalarOpenHom",
+   "CategoryTheory.SheafDg.HomCoverScalar",
+   "CategoryTheory.SheafDg.scalarIdentityIso",
+   "CategoryTheory.SheafDg.scalarCompositionIso",
+   "CategoryTheory.SheafDg.HomScalarCoherent",
+   "CategoryTheory.SheafDg.OpenHomMayerVietoris",
+   "CategoryTheory.SheafDg.sheaf_dg_open_hom_mayer_vietoris"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafDgOpenHomMayerVietoris.lean",
+  "statement": "theorem sheaf_dg_open_hom_mayer_vietoris (S : Sheaf (Opens.grothendieckTopology X) CommRingCat.{w}) (U V : Opens X) (hcover : U ⊔ V = ⊤) : Nonempty (OpenHomMayerVietoris S U V)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-a8d6974d0"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8d6974d0",
+  "group": "Q07",
+  "result": "fix",
+  "note": "Read the node (7 steps), the delivered module, the localization, size-convention and scalar-adjunction dependencies (side-live Lean), and Stacks 08BU/08BW and sdga 0FRW/0FTB. Every clause is rendered and pinned: preadditive structure via additive moduleQ; distinguished triangles ↔ IsConeTriangle; j_! as left adjoint of the actual restriction with the derived adjunction normalized by the ordinary one; inclusions by the counit characterization; boundary δ=−p∘q⁻¹ with q forced to (b,0) (coneConnecting = Mathlib mor₃ = −p); nested restriction, difference sign and ∂γ=γ̃[1]∘δ correct; exact at all three positions for every n; additivity and naturality; scalar adjunction pinned by derivedActionCounit and the open comparison by openCounit; boundary squares, identity and composition stated. Using the localization node's DerivedExtension instead of the RingedSiteDg right-module scalar package is accepted, since the node mandates D_X(C). F1 (H3): OpenHomGeometry.restrictionShift (CommShift of derivedRestriction) was constrained only by additivity, so a (−1)^n-twisted shift gives a second witness in which the maps from X are ±restriction. FIX adds the field restrictionExact : (derivedRestriction A U).IsTriangulated, as in the landed RingedSiteDg.ScalarModel, with a docstring note; signature and records unchanged. Fixed file compiled via nt_compile --json: exit 0, clean, 27.3 s. No hollow definitions, docstrings ok, only sorry, edge cases (empty opens, n=0, zero objects) covered, both report sections present."
+ }
+}

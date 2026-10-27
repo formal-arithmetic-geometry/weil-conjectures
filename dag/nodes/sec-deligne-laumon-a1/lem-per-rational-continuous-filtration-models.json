@@ -1,0 +1,138 @@
+{
+ "id": "lem-per-rational-continuous-filtration-models",
+ "kind": "statement",
+ "title": "Completed integral quotient models for rational finite stratum filtrations",
+ "statement": "Let l be prime, E/Q_l finite, and X a noetherian finite-dimensional scheme with l stalkwise invertible. Let s be the raw normalized rational module realization [lem-per-rational-module-realization-functor]. For every module F over the continuous rational coefficient sheaf that is finite locally free after site inverse image on each stratum of a finite locally closed stratification, there is a finite filtration of F by monomorphisms with zero first term and final term F. Every successive quotient is the realization of a degree-zero object of the published completed integral constructible category. More precisely these data form RationalConeModels.Filtration [lem-per-rational-realization-finite-cone-models], with the original filtration maps and a specified integral realization isomorphism for each quotient.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-realization-finite-cone-models",
+  "def-constructible-stratification"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1, 6.8.6, 6.8.10; Lemma 6.8.13 and Proposition 6.8.14(2), pp. 60–62"
+ },
+ "proof": [
+  {
+   "text": "Transport F to the WithAbs continuous coefficient presentation. The finite free criterion gives continuous constructibility, so the rational stratum integral-model theorem supplies a finite filtration and the normalized integral lattice models of its quotients.",
+   "uses": [
+    "lem-per-rational-stratum-integral-models",
+    "lem-per-rational-continuous-finite-free-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each integral piece N use its completed-model certificate b and take the explicit degree-zero complex of restriction of N along b.hom. Its given membership proof places this object in the published completed constructible category. The finite normalization of s determines each finiteIso uniquely by the constant-sheaf universal property. Comparison of all finite projections then identifies b.inv followed by s.integralIso.hom with the pointwise integral coefficient encoding. The normalized inclusion gives the ordinary scalar square. Uniqueness of left adjoints supplies the ordinary scalar-extension comparison; no arbitrary derived essential-image witness is used.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport every term and arrow of the supplied filtration along inverse coefficient restriction. The restriction round trip gives the final identification with F; exactness preserves zero objects, monomorphisms and cokernels. Uniqueness of the left-derived functor identifies the exact scalar-extension functor with its induced derived functor, and Mathlib mapDerivedCategorySingleFunctor identifies its value on the explicit single complex. Compose s.objects, this comparison, the ordinary scalar square, the supplied beta quotient isomorphism and the preserved cokernel isomorphism. These maps give every Filtration field, including length zero.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-integral-coefficient-completeness-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-rational-stratum-integral-models",
+  "lem-per-rational-continuous-finite-free-criterion",
+  "lem-per-rational-module-realization-functor",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-integral-coefficient-completeness-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "K7 complete Lean assembly of the given stratum filtration, normalized finite/completed scalar square, exact derived-single comparison and preservation of cokernels in BS 6.8.14(2)."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible continuous rational module complexes are precisely the essential image of rationalized integral constructible complexes",
+   "results": "8 hits, including CondensedMod.isDiscrete_tfae and bounded continuous function module instances; no result for these project coefficient sheaves.",
+   "date": "2026-10-25",
+   "verdict": "No match for continuous rational module local models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous coefficient sheaf constructible modules over a field are locally finite free on a finite locally closed stratification",
+   "results": "8 hits, including SheafOfModules local generator data, finite type and finite presentation infrastructure; no coefficient model or stratum transport theorem.",
+   "date": "2026-10-25",
+   "verdict": "Generic local model infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteLocallyFree",
+   "results": "unknown identifier 'SheafOfModules.IsFiniteLocallyFree'",
+   "date": "2026-10-25",
+   "verdict": "The specific project predicate is not indexed by Loogle."
+  },
+  {
+   "tool": "grep",
+   "query": "IsContinuousConstructible|RationalConeModels.Filtration",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib theorem in the project presentations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousRationalDerivedRealization",
+  "date": "2026-10-25",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "The continuous rational realization used to compare the standard cohomological support bounds.",
+   "via": [
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalContinuousFiltrationModels",
+  "file": "lean/Sheaf/Paper/RationalContinuousFiltrationModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.rationalContinuousFiltrationModels",
+  "statement": "theorem rationalContinuousFiltrationModels (X : Base.{u} l)\n    (s : RationalModuleRealization l E X.scheme)\n    (F : pbcModules X.scheme (rationalCoefficientSheaf l X.scheme E))\n    (hF : ∃ t : FiniteLocallyClosedStratification X.scheme, ∀ i : Fin t.n,\n      ((proEtaleModuleInverseImage (t.immersion i)\n        (rationalCoefficientSheaf l X.scheme E)).obj F).IsFiniteLocallyFree) :\n    Nonempty (RationalConeModels.Filtration l E X.scheme s F)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2133",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T043222-L-1690703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T094439-L-227911",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

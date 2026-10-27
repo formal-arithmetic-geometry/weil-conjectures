@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-strict-local-sections-meet-dense-fibre-opens",
+ "kind": "statement",
+ "title": "Strict-local sections meet dense opens after any fibre field extension",
+ "statement": "Let $A$ be a nonzero commutative Noetherian strictly henselian local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-henselian-terminology], put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $p:Y\\to S$ be a smooth surjective finite-type morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. A section is a morphism $a:S\\to Y$ with $p\\circ a=\\mathrm{id}_S$. Then $Y(S)\\ne\\varnothing$. Moreover, for every point $s\\in S$, every field extension $L/\\kappa(s)$ [def-weil-residue-field, def-pc-field-extension], and every dense open $O\\subseteq Y_L=Y\\times_S\\operatorname{Spec}L$ [def-pc-base-change], there is a section $a\\in Y(S)$ whose induced $L$-point belongs to $O$. No geometric irreducibility, connectedness, fixed relative dimension, or chosen section is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "2.3 Proposition 5, printed p.47 (PDF p.53); 5.3 Lemma 7, printed pp.126-127 (PDF pp.132-133), and the field-extension paragraph in the proof of Lemma 6, printed pp.125-126 (PDF pp.131-132), citing EGA IV_3 11.10.7; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Write $s_0$ for the closed point and $k=\\kappa(s_0)$. The field $k$ is separably closed by [def-weil-pbc-henselian-terminology]. The fibre $Y_k$ is nonempty by surjectivity and [lem-weil-pbc-surjective-base-change], and smooth by [lem-pc-proper-base-change]. By [lem-pc-dense-separable-points] its closed points with finite separable residue field are dense, so choose one, $y$; its residue field is $k$. Apply [lem-sfb-smooth-space-dimension-strata] to the scheme $Y$, viewed as an algebraic space with its identity chart. The relative dimension stratum containing $y$ is open and has some dimension $n\\geq0$. Choose an affine open $U=\\operatorname{Spec}B$ of $Y$ containing $y$ inside that stratum. Its map to $S$ is smooth by [lem-pc-open-immersion-smooth-composition]. Since source and target are affine, [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] says $B$ is a smooth, hence finitely presented and finite type, $A$-algebra.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-pc-proper-base-change",
+    "lem-pc-dense-separable-points",
+    "lem-sfb-smooth-space-dimension-strata",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemma 7, reduction to constant relative dimension; 2.3 Proposition 5; Stacks 056U (varieties-lemma-smooth-separable-closed-points-dense) and 02G1 (morphisms-lemma-smooth-omega-finite-locally-free)."
+   }
+  },
+  {
+   "text": "For every $b\\in U_k(k)$ its affine-coordinate map $B\\to k=A/\\mathfrak m$ lifts to an $A$-algebra map $B\\to A$ by [lem-trf-henselian-smooth-algebra-lifting], taking its $R=A$, smooth algebra $S=B$, target algebra $A$, and ideal $I=\\mathfrak m$. The maximal-ideal pair is henselian by [def-weil-pbc-henselian-terminology]. Thus reduction $U(S)\\to U_k(k)$ is onto. The fibre $U_k=U\\times_S\\operatorname{Spec}k$ is smooth over $k$ as a base change of the smooth $U\\to S$ of step 1 [lem-pc-proper-base-change], so the same separable-point density lemma applied to $U_k$ shows that the values at $s_0$ of all sections $a\\in U(S)$ are dense in $U_k$. In particular one such section exists, and composition with $U\\hookrightarrow Y$ proves $Y(S)\\ne\\varnothing$.",
+   "uses": [
+    "lem-trf-henselian-smooth-algebra-lifting",
+    "def-weil-pbc-henselian-terminology",
+    "lem-pc-proper-base-change",
+    "lem-pc-dense-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "2.3 Proposition 5; Stacks 0H74 (more-algebra-lemma-lift-smooth-henselian) and 056U."
+   }
+  },
+  {
+   "text": "For $t\\in S$ put $D_t=\\{a(t):a\\in U(S)\\}$ and $C_t=\\overline{D_t}\\subseteq U_t$. Since $S$ is local, each $t$ specializes to $s_0$. Apply [lem-sfb-section-value-closure-dimension-specialization] to $A,B$, the family of all sections of $U$, and $(t_1,t_0)=(t,s_0)$. It gives $\\dim C_t\\geq\\dim C_{s_0}=\\dim U_k$. The strata lemma makes every point of every $U_t$ have local fibre dimension $n$; its base-change clause also applies to these ordinary fibres. These are affine finite type schemes over fields, hence Noetherian with finitely many components by [lem-wf-affine-noetherian-components]. By [lem-sbc-constant-local-dimension-components] each component has dimension $n$. Consequently a nonempty $U_t$ has dimension $n$: any irreducible closed chain is contained in a component, and the dimension of each component is $n$. Thus $\\dim U_k=n$, $\\dim C_t\\geq n$, and in particular $U_t$ is nonempty and has dimension $n$.",
+   "uses": [
+    "lem-sfb-section-value-closure-dimension-specialization",
+    "lem-sfb-smooth-space-dimension-strata",
+    "lem-wf-affine-noetherian-components",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemma 7, first assertion and constant-dimension argument; Stacks 02G1 and 02G2."
+   }
+  },
+  {
+   "text": "Fix the point $s$ and extension $L/\\kappa(s)$ of the statement. The closed subset $C_s$ has dimension at least $n$ in the nonempty Noetherian scheme $U_s$ of dimension $n$. By [lem-sc-hilbert-nowhere-dense-dimension-drop] it cannot be nowhere dense. Since it is closed, its interior $V=\\operatorname{Int}_{U_s}(C_s)$ is therefore a nonempty open of $U_s$. The subset $D_s\\cap V$ is dense in $V$: every nonempty open of $V$ is an open of $U_s$ contained in $C_s=\\overline{D_s}$, so meets $D_s$. Each of these rational points factors uniquely through $V$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]. Apply [lem-sfb-rational-density-field-extension] to the scheme $V$ over $\\kappa(s)$ and this specified subset of rational points. Their induced $L$-points are dense in $V_L$.",
+   "uses": [
+    "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-sfb-rational-density-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-IV-3_PMIHES-28-1966.pdf",
+    "place": "11.10.7, applied after taking the nonempty interior supplied by the BLR 5.3 Lemma 7 dimension bound."
+   }
+  },
+  {
+   "text": "The open immersions $V\\hookrightarrow U_s\\hookrightarrow Y_s$ remain open immersions after extension to $L$ by [lem-weil-pbc-open-immersion-base-change], so $V_L$ is open in $Y_L$. It is nonempty: [lem-pc-field-extension-surjective] and [lem-weil-pbc-surjective-base-change] make $V_L\\to V$ surjective. The dense open $O\\subseteq Y_L$ therefore meets $V_L$ in a nonempty open. The density proved in step 4 gives a section $a\\in U(S)$ with $a(s)\\in V$ and $a_L\\in O\\cap V_L$. Compose $a$ with $U\\hookrightarrow Y$. Its composite with $p$ is still $\\mathrm{id}_S$, and its induced $L$-point is the one just selected, by the defining projection equalities of base change. This proves the required assertion for every $s,L,O$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 proof of Lemma 6, printed pp.125–126 (PDF pp.131–132), dense-open conclusion of the field-extension paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-pc-proper-base-change",
+  "lem-pc-dense-separable-points",
+  "lem-sfb-smooth-space-dimension-strata",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-sfb-section-value-closure-dimension-specialization",
+  "lem-wf-affine-noetherian-components",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-sfb-rational-density-field-extension",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-field-extension-surjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Assembly of BLR 2.3 Proposition 5 and 5.3 Lemma 7 and the field-extension paragraph of Lemma 6. Primary scan read online; EGA IV_3 11.10.7 read locally. The nonempty-interior variant avoids any claim that every component is met."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian strictly henselian local ring sections of a smooth surjective scheme meet every dense open in every field extension of a fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (X.residue x))\", \"doc\": \"The canonical ring homomorphism from the local ring $\\\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) to its residue field $k(x)$, obtained by quotienting $\\\\mathcal{O}_{X,x}$ by its unique\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantOfSurjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f], AlgebraicGeometry.IsDominant f\", \"doc\": \"Every surjective morphism of schemes is dominant, meaning that if a morphism $ f: X \\to Y $ is surjective on the underlying topological spaces, then its image is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian simple-root lifting, smooth local presentations, and ordinary dominance do not give sections meeting dense opens in arbitrary fibre field extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"section\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian simple-root lifting, smooth local presentations, and ordinary dominance do not give sections meeting dense opens in arbitrary fibre field extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*smooth|smooth.*henselian|section.*dense",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"243\", \"text\": \"section DenseOpen\"}\n  {\"file\": \"Mathlib/Topology/Neighborhoods.lean\", \"line\": \"323\", \"text\": \"/-- The intersection of an open dense set with a dense set is a dense set. -/\"}\n  {\"file\": \"Mathlib/Topology/Neighborhoods.lean\", \"line\": \"328\", \"text\": \"/-- The intersection of a dense set with an open dense set is a dense set. -/\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"370\", \"text\": \"section Condensed\"}\n  {\"file\": \"Mathlib/Topology/Order/IntermediateValue.lean\", \"line\": \"308\", \"text\": \"In this section we prove that a closed interval (hence, any `OrdConnected` set) in a dense\"}\n  {\"file\": \"Mathlib/Topology/Order/DenselyOrdered.lean\", \"line\": \"22\", \"text\": \"section DenselyOrdered\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"926\", \"text\": \"section denseRange\"}\n  {\"file\": \"Mathlib/Topology/Continuous.lean\", \"line\": \"257\", \"text\": \"section DenseRange\"}\n  {\"file\": \"Mathlib/GroupTheory/ArchimedeanDensely.lean\", \"line\": \"534\", \"text\": \"section DenselyOrdered\"}\n  {\"file\": \"Mathlib/Topology/Defs/Basic.lean\", \"line\": \"229\", \"text\": \"any countable intersection of open dense subsets is dense.\"}\n  {\"file\": \"Mathlib/Topology/GDelta/Basic.lean\", \"line\": \"24\", \"text\": \"  countable intersection of dense open sets.\"}\n  {\"file\": \"Mathlib/Topology/GDelta/Basic.lean\", \"line\": \"169\", \"text\": \"/-- A set `s` is called *residual* if it includes a countable intersection of dense open sets. -/\"}\n  {\"file\": \"Mathlib/Topology/GDelta/Basic.lean\", \"line\": \"187\", \"text\": \"/-- A set is residual iff it includes a countable intersection of dense open sets. -/\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean\", \"line\": \"18\", \"text\": \"This section follows the proof in [scholze2019condensed] quite closely. A translation of the\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/SeparableMeasure.lean\", \"line\": \"77\", \"text\": \"section MeasureDense\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/UniformEmbedding.lean\", \"line\": \"508\", \"text\": \"section DenseExtension\"}\n  {\"file\": \"Mathlib/Topology/Baire/LocallyCompactRegular.lean\", \"line\": \"26\", \"text\": \"  /- To prove that an intersection of open dense subsets is dense, prove that its intersection\"}\n  {\"file\": \"Mathlib/Topology/Baire/Lemmas.lean\", \"line\": \"18\", \"text\": \"if a countable intersection of dense open subsets is dense.\"}\n  {\"file\": \"Mathlib/Topology/Baire/Lemmas.lean\", \"line\": \"28\", \"text\": \"intersection of dense Gδ sets is a dense Gδ set. We deduce this version from Baire property.\"}\n  {\"file\": \"Mathlib/Topology/Baire/Lemmas.lean\", \"line\": \"49\", \"text\": \"/-- The intersection of finitely many open dense sets is dense. -/\"}\n  {\"file\": \"Mathlib/Topology/Baire/Lemmas.lean\", \"line\": \"124\", \"text\": \"/-- Baire theorem: a countable intersection of dense open sets is dense. Formulated here with ⋂₀. -/\"}\n  {\"file\": \"Mathlib/Topology/Baire/Lemmas.lean\", \"line\": \"132\", \"text\": \"/-- Baire theorem: a countable intersection of dense open sets is dense. Formulated here with\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Multiplier.lean\", \"line\": \"583\", \"text\": \"section DenselyNormed\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Field/Lemmas.lean\", \"line\": \"242\", \"text\": \"section Densely\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Field/Basic.lean\", \"line\": \"261\", \"text\": \"section Densely\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian simple-root lifting, smooth local presentations, and ordinary dominance do not give sections meeting dense opens in arbitrary fibre field extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a smooth surjective scheme over a strictly henselian local base are dense on at least one component of each fibre and remain so after field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsDominantOfSurjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"[Surjective f] : IsDominant f\", \"doc\": \"Every surjective morphism of schemes is dominant, meaning that if a morphism $ f: X \\to Y $ is surjective on the underlying topological spaces, then its image is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.rec\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsDominant f → Sort u_1} →\\n      ((denseRange : DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → motive ⋯) →\\n        (t : AlgebraicGeometry.IsDominant f) → motive t\", \"doc\": \"For any property $ P $ of dominant morphisms $ f: X \\to Y $, if $ P $ holds whenever the underlying continuous map $ f_{\\\\text{base}} $ has dense image, then $ P $ holds for all dominant morphisms $ f $\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"(f : X ⟶ Y) [IsDominant f] : DenseRange f\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsDominant f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsDominant f) →\\n        ((denseRange : DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → motive ⋯) → motive t\", \"doc\": \"For any property $ P $ of a dominant morphism $ f: X \\to Y $, if $ P $ holds under the assumption that the underlying continuous map $ f_{\\\\text{base}} $ has dense image, then $ P $ holds for all domina\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsDominant f ↔ DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is dominant if and only if the underlying continuous function of its base map $ f_{\\\\text{base}} : X \\to Y $ has dense image in $ Y $, i.e., the closure of the image\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian simple-root lifting, smooth local presentations, and ordinary dominance do not give sections meeting dense opens in arbitrary fibre field extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fibrewise dense open after extending the residue field contains a value of a section of a smooth scheme over a strictly henselian local ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {X : AlgebraicGeometry.Scheme} →\\n      {x : ↥X} →\\n        (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing }) →\\n          [IsLocalHom (CommRingCat.Hom.hom f)] →\\n            X.residueField x ⟶ { carrier := K, commRing := \", \"doc\": \"Let $X$ be a scheme, $x$ a point in $X$, and $K$ a field. Given a local ring homomorphism $f \\\\colon \\\\mathcal{O}_{X,x} \\\\to K$ from the stalk of the structure sheaf at $x$, this function constructs the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(k(x)) \\\\to X$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a preimmersion, where $k(x)$ denotes the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f y).base) x =\\n    IsLocalRing.closedPoint ↑(Y.residueField y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $y \\\\in Y$ be a point. Let $\\\\kappa(y)$ be the residue field of $Y$ at $y$. The canonical projection from the fiber $X_y := X \\\\times_Y \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (K : Type u) [inst : Field K] (X : AlgebraicGeometry.Scheme)\\n  (f : AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map\\n        (AlgebraicGeometry.Scheme.descResidueField (AlgebraicGeom\", \"doc\": \"For a field $ K $, a scheme $ X $, and a morphism $ f : \\\\operatorname{Spec}(K) \\\\to X $, the composition of the morphism induced by the residue field at the closed point of $ \\\\operatorname{Spec}(K) $ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (X.residue x))\", \"doc\": \"The canonical ring homomorphism from the local ring $\\\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) to its residue field $k(x)$, obtained by quotienting $\\\\mathcal{O}_{X,x}$ by its unique\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian simple-root lifting, smooth local presentations, and ordinary dominance do not give sections meeting dense opens in arbitrary fibre field extensions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-law-finite-translate-envelope",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; 5.3 finite translate construction and Lemma 6; only completion of the original square, not realization as a group; 2.3 Proposition 5, printed p.47 (PDF p.53); 5.3 Lemma 7, printed pp.126-127 (PDF pp.132-133), and the field-extension paragraph in the proof of Lemma 6, printed pp.125-126 (PDF pp.131-132), citing EGA IV_3 11.10.7",
+   "via": [
+    "lem-sfb-strict-law-finite-translate-envelope",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-local-sections-meet-dense-fibre-opens",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused smooth strata, separable-point density and affine henselian lifting. Added only a general affine section-value closure dimension inequality and field-extension invariance of rational-point density. Full-dimensional closure has nonempty interior, so no irreducibility, fixed global relative dimension, or density on every component is required. Checked source hypotheses and all cited node statements.",
+  "blueprint": "This created item has blueprint.from.node=null (blueprint_refs ancestor). It serves the inherited BLR 5.3 Lemma 6 field-extension paragraph and Lemma 7 input of the finite translate construction; steps 1–3 realize the closed-fibre lifting and dimension argument, steps 4–5 its field-extension dense-open consequence. Searched all blueprint nodes for equivalent section-density and rational-density assertions; none.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "General scheme, dimension, or henselian lifting tool: smoothness survives fibre base change. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "General scheme, dimension, or henselian lifting tool: density of finite-separable closed points on smooth field schemes. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sfb-smooth-space-dimension-strata",
+    "why": "General scheme, dimension, or henselian lifting tool: choose a constant-relative-dimension open and identify its fibre dimensions. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "General scheme, dimension, or henselian lifting tool: restrict the smooth morphism to an affine open. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "General scheme, dimension, or henselian lifting tool: identify the affine chart algebra as smooth. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "General scheme, dimension, or henselian lifting tool: lift each closed-fibre rational point over the maximal-ideal henselian pair. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "General scheme, dimension, or henselian lifting tool: Noetherianity of finite-type affine field fibres. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "General scheme, dimension, or henselian lifting tool: component dimensions from constant local dimension. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "why": "General scheme, dimension, or henselian lifting tool: a full-dimensional closed subset has nonempty interior. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "General scheme, dimension, or henselian lifting tool: regard rational points in the interior as points of that open scheme. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "General scheme, dimension, or henselian lifting tool: keep the chosen interior open after scalar extension. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pc-field-extension-surjective",
+    "why": "General scheme, dimension, or henselian lifting tool: nonempty spectrum map for the field extension. No node of this item’s inherited unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "General scheme, dimension, or henselian lifting tool: nonemptiness of the scalar-extended interior. No node of this item’s inherited unit supplies this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-pc-dense-separable-points",
+  "lem-sfb-smooth-space-dimension-strata",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-wf-affine-noetherian-components",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-561010e76",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-561010e76 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 16 cited node statements. EGA IV_3 Cor. 11.10.7 (printed p.172) was read locally. BLR is not in literature/ (the report says WANTED, and proof_origin is agent), so I checked the BLR-based steps independently. The statement is unchanged and true. Step 1: strictly henselian means the residue field is separably closed; the separable closed points of the smooth closed fibre (Stacks 056U) are therefore k-rational; the smooth-space strata are used with the identity chart, and only the clopen strata are used; an affine chart is chosen inside one stratum. Step 2: Stacks 0H74 is applied with (A,m) a henselian pair, so U(S) maps onto U_k(k). Step 3: the new dimension inequality with t specializing to s0 (S is local), constant local dimension, finitely many components, so dim U_t = n and U_t is nonempty. Step 4: the nowhere-dense dimension-drop gives C_s a nonempty interior V, and the new density lemma is applied on V. Step 5: open-immersion base change and surjectivity give a nonempty V_L that meets O. New node lem-sfb-section-value-closure-dimension-specialization is true: reduce to a DVR (Stacks 054F); the flat closure Z̄ of the generic closure contains every a_i(s), and dim Z̄_s ≤ dim Z_eta. Tested on x=ct over k[t] (generic dimension 1, special dimension 0) and on an empty family. New node lem-sfb-rational-density-field-extension is true for arbitrary k-schemes: in the affine case, write f = Σ r_j⊗l_j with the l_j independent; vanishing on D_L makes each r_j nilpotent. This matches EGA 11.10.7. Duplicates: cor-pc-dense-points-curves-sections (1) needs a separably closed base and all of X(k), and lem-sfb-dense-rational-closed-subscheme-descent is a different statement; no node states the dimension inequality, and neither new node restates the item. Batch-5: lem-sfb-smooth-space-dimension-strata reaches def-trf-algebraic-space only as a general definition, and lem-trf-henselian-smooth-algebra-lifting is general commutative algebra (0H74); neither is a step of the trace formula or of Poincaré duality, so both are accepted. Tool uses accepted. FIX: step 2 used the smoothness of U_k without citing it; it now cites [lem-pc-proper-base-change] (corrected item in fixes/dag/nodes/sec-six-functors-basics/).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSectionsMeetDenseFibreOpens",
+  "declaration": "AlgebraicGeometry.strictLocal_sections_meet_dense_fibre_opens",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSectionsMeetDenseFibreOpens.lean",
+  "statement": "theorem strictLocal_sections_meet_dense_fibre_opens (A : Type u) [CommRing A] [IsNoetherianRing A] [IsStrictlyHenselianLocalRing A] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [Smooth p] [Surjective p] [LocallyOfFiniteType p] [QuasiCompact p] : Nonempty (SplitEpi p) ∧ ∀ (s : Spec (.of A)) (L : Type u) [Field L] [Algebra ((Spec (.of A)).residueField s) L] (O : (pullback p (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of A)).residueField s) L)) ≫ (Spec (.of A)).fromSpecResidueField s)).Opens), Dense O.carrier → ∃ a : SplitEpi p, sectionBaseChange p a.section_ a.id (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of A)).residueField s) L)) ≫ (Spec (.of A)).fromSpecResidueField s)) (default : Spec (.of L)) ∈ O",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26f04ccc9",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: [IsNoetherianRing A][IsStrictlyHenselianLocalRing A] (class extends HenselianLocalRing ⊇ IsLocalRing, so A is nonzero); [Smooth p][Surjective p][LocallyOfFiniteType p][QuasiCompact p] (the recorded finite-type pair); Nonempty (SplitEpi p) for Y(S)≠∅; ∀ s, field L : Type u with an Algebra structure over κ(s) (the universe is forced by Spec L : Scheme.{u}), O an open of the actual pullback p along Spec L→Spec κ(s)→S, Dense O.carrier → ∃ a : SplitEpi p whose induced L-point (AlgebraicGeometry.sectionBaseChange from Picard/Defs, characterized by the def-pc-base-change record, evaluated at the unique point of Spec L) lies in O. No extra assumptions (separated, irreducible, dimension, given section). Node differs from live only in lean; lean.statement matches the file verbatim; one sorry; no definitions; docstrings give BLR/EGA places and the blueprint id, theorem docstring follows the 5 proof steps; imported modules exist in side-live; report has Worker report and Second reading by ND. Edge cases checked (zero ring, empty Y, empty O, closed/generic s, identity/inseparable/transcendental L, mixed-dimension components). No file changed, so no compile; relied on the worker's reported clean server compile."
+ }
+}

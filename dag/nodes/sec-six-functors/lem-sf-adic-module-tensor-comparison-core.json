@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "proof_origin": {
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, characterization of tensor by bilinear maps and compatibility with sheafification; native Mod.tensorDesc and tensorLeft_obj_hom_ext."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural tensor comparison between a native balanced tensor and a sheaf of modules tensor",
+   "results": "Only generic tensor and sheafification APIs; no native adic comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso SheafOfModules.siteSheafTensorRight",
+   "results": "Generic site tensor declarations only; no normalized adic map.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "adicComparisonTmul|adicComparisonEval|comparisonModuleFunctor",
+   "results": "The explicit adic definitions and functor are in Sheaf.SixFunctors.AdicModuleSectionComparison and AdicSectionModuleEquivalence.",
+   "date": "2026-10-26",
+   "verdict": "Use the stated native constructions."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-module-tensor-hom-comparison",
+   "place": "Strict tensor/Hom components of the closed comparison record.",
+   "via": [
+    "lem-sf-adic-module-tensor-hom-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleTensorHomComparison",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "id": "lem-sf-adic-module-tensor-comparison-core",
+ "title": "Normalized tensor comparison for the explicit adic section equivalence",
+ "statement": "For each prime ℓ and scheme X, the explicitly constructed comparisonModuleFunctor carries native balanced tensor to the sectionwise sheaf tensor, naturally in both variables and with the canonical pure-tensor section formula.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EO; balanced tensor comparison through sectionwise sheafification."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-section-module-equivalence",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For the sectionwise sheaf tensor, lift a restriction-compatible family of section-ring bilinear maps using TensorProduct.lift and the module-sheafification adjunction. Its unit gives the pure-tensor formula, and injectivity of the adjunction bijection plus tensor extensionality gives uniqueness. Naturality of the same unit computes tensor maps on pure tensors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sf-adic-section-tensor-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A lax braided functor carries the two internal bilinearity diagrams to the corresponding presheaf diagrams, by associativity and tensorator naturality. For the sheaf-to-presheaf functor the converse follows by detecting morphisms on threefold pure tensors: sheafification inverts its tensorator and its tensor with any presheaf. Thus native pure tensors are bilinear over the section rings. Conversely restrict a section-ring bilinear pairing along constant coefficients, extend it through vector-space sheafification, reflect the bilinearity diagrams, and apply the existing native balanced-coequalizer map Mod.tensorDesc. Mod.tensorLeft_obj_hom_ext and Sheaf.tensor_hom_ext prove uniqueness.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-weil-pbc-sheafification",
+    "lem-sf-adic-section-module-equivalence",
+    "lem-sf-adic-section-tensor-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the explicit section-module equivalence and its counit to regard the sectionwise tensor pairing as a pairing into a native module; native descent gives the forward comparison. The sectionwise tensor universal property applied to the native pure-tensor pairing gives its inverse. The two pure-tensor formulas and the two extensionality principles prove both inverse identities. Compute the native tensor maps using Mod.tensorπ_map and Mod.tensorπ_tensorLeftMap, then prove naturality in both variables by native pure-tensor extensionality. Package the objectwise isomorphisms with NatIso.ofComponents and retain the exact normalized section formula.",
+   "uses": [
+    "lem-sf-adic-section-module-equivalence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-adic-section-module-equivalence",
+  "lem-sf-adic-section-tensor-universal"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicModuleTensorComparisonCore",
+  "file": "lean/Sheaf/SixFunctors/AdicModuleTensorComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicModuleTensorComparisonCore",
+  "statement": "theorem adicModuleTensorComparisonCore (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :\n    Nonempty (AdicModuleTensorComparisonCore l X)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T182445-L-3560085",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T201748-L-3412982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

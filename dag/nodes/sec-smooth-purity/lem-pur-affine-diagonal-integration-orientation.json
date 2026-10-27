@@ -1,0 +1,256 @@
+{
+ "id": "lem-pur-affine-diagonal-integration-orientation",
+ "kind": "statement",
+ "title": "Diagonal/DNC orientation of a trivial bundle equals inverse integration transpose",
+ "statement": "Fix the finite coefficient conventions [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $Y$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. For $d\\geq0$ put $X_d=\\mathbf A^d_Y$ and $p_d:X_d\\to Y$ [def-sbc-affine-space], with $X_0=Y$ and $p_0=1_Y$. Use the small pro-etale derived categories, derived pullback and tensor [def-weil-derived-pullback-tensor-hom], the specified Tate twists [def-coefficient-twists-detailed], compact supports [def-compact-support-direct-image-detailed], and constructible exceptional inverse images [def-weil-exceptional-inverse-image]. Write $\\otimes=\\otimes_A^L$ and $\\omega_f=Rf^!A_{\\operatorname{target}(f)}$. The vector integration $t_f:Rf_!A_{\\operatorname{source}(f)}(r)[2r]\\to A_{\\operatorname{target}(f)}$ for a rank-$r$ trivial bundle $f$ is [def-amb-vector-integration], realized on this site by [lem-pur-vector-integration-site-comparison]. Write $P_{f,H}:Lf^*H(r)[2r]\\to Rf^!H$ for the exceptional transpose of $(1_H\\otimes t_f)\\Pi_{f;A(r)[2r],H}$, where $\\Pi_{f;M,H}:Rf_!(Lf^*H\\otimes M)\\to H\\otimes Rf_!M$ is the inverse of the canonical compactification projection [def-exchange-projection], with tensor symmetries inserted.\n\nFor $p=p_d$, put $X=X_d$, $W=X\\times_YX$, let $p_1,p_2:W\\to X$ be the first and second projections, and let $\\Delta:X\\to W$ be the diagonal. Let $C(g,s)=Ls^*\\omega_g$ be the section invariant [def-pur-section-invariant], let $N=N_{\\Delta/W}$ be the normal bundle [def-pur-normal-bundle], and let $\\pi_N:N\\to X$ and $0_N:X\\to N$ be its projection and zero section. Use the ordered normal coordinates induced by $u_i=y_i-x_i$ on $W$; thus $N\\cong\\mathbf A^d_X$ with ordered coordinates $v_i$ corresponding to $u_i$, and the standard deformation has $u_i=t v_i$. Let $\\alpha:C(p_1,\\Delta)\\xrightarrow{\\sim}\\omega_p$ be [lem-pur-diagonal-base-change], $\\delta:C(p_1,\\Delta)\\xrightarrow{\\sim}C(\\pi_N,0_N)$ the normalized DNC comparison [thm-pur-dnc-invariance], and let $\\beta:C(\\pi_N,0_N)\\xrightarrow{\\sim}A_X(d)[2d]$ be $L0_N^*(P_{\\pi_N,A_X}^{-1})$ followed by the canonical Tate restriction. Set $J=P_{p_1,A_X}$ and $P=P_{p,A_Y}$; these are integration-transposed isomorphisms [thm-amb-vector-bundle-purity]. Let $B:Lp_2^*\\omega_p\\to\\omega_{p_1}$ be the counit-transposed dualizing base-change map of [def-pur-co-smoothness](3).\n\nThe specified maps satisfy, as equalities of derived morphisms,\n$$J=B\\circ Lp_2^*P,\\qquad \\alpha\\circ L\\Delta^*J=P,$$\n$$\\beta\\circ\\delta=(L\\Delta^*J)^{-1},\\qquad \\beta\\circ\\delta\\circ\\alpha^{-1}=P^{-1}.$$\nThe Tate restrictions and pullback-composition identifications are understood. The translation $h:W\\to\\mathbf A^d_X$, $(x,y)\\mapsto(x,y-x)$, identifies the integration and its transpose for $p_1$ with those of the trivial bundle on the right, with the stated ordered normal coordinates. All these equalities hold for every $n\\geq1$, independently of an annihilating exponent $\\ell^rA=0$. For $d=0$ they are identities, including over the empty base.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Proof: diagonal normal bundle, translation to the standard pair, and normalized DNC identity; unit Agreement on the model; returned steps 3-6"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-affine-space",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-amb-vector-integration",
+  "lem-pur-vector-integration-site-comparison",
+  "def-exchange-projection",
+  "def-pur-section-invariant",
+  "def-pur-normal-bundle",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "thm-amb-vector-bundle-purity",
+  "def-pur-co-smoothness"
+ ],
+ "proof": [
+  {
+   "text": "The explicit constructions and already proved coordinate specifications are publicly reexported from [def-pur-affine-diagonal-integration-constructions], with identical names, types and non-theorem bodies.",
+   "uses": [
+    "def-pur-affine-diagonal-integration-constructions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-pur-affine-diagonal-trace-restriction] for each q,hq to obtain I,J,Q with the three prescribed hom maps, trace base change and T alpha = I.",
+   "uses": [
+    "lem-pur-affine-diagonal-trace-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-affine-diagonal-dnc-normalization] to the same pinned J,Q to obtain delta beta = T inverse.",
+   "uses": [
+    "lem-pur-affine-diagonal-dnc-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite alpha inverse followed by delta and beta as alpha inverse followed by T inverse. Invert the isomorphism equality T alpha = comparison(I), obtaining alpha inverse T inverse = comparison(I inverse). The private inverse_composite lemma proves this by Iso.ext and congrArg Iso.inv. The private orientation_composite helper carries the entire groupoid calculation; the final application supplies alpha, delta, beta and comparison.mapIso I explicitly from the goal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the exponent clause, apply the exponent comparison in [lem-asd-etale-finite-twist-pullback] on U. The root map satisfies the kernel-inclusion power equation, and its degree-one isomorphism satisfies the pure-generator formula. Apply [lem-pur-affine-diagonal-transpose-power] for the equality of the presented transposes. Unfold presented integration as the inverse exceptional Hom bijection and apply homEquiv_naturality_left_symm to obtain the lowerShriek integration equation. No statement or definition changes.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-affine-diagonal-transpose-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The separately stated translation and rank-zero clauses remain pending, with their original source proofs. Translation uses the actual trace and its exceptional mate; rank zero uses the identity tower and identity adjunction.",
+   "uses": [
+    "lem-pur-affine-translation-trace",
+    "lem-pur-trace-transpose-base-change",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-amb-affine-space-top-trace",
+    "lem-pur-affine-diagonal-integration-translation-integration",
+    "lem-pur-affine-diagonal-integration-translation-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "lem-pur-affine-diagonal-trace-restriction",
+  "lem-pur-affine-diagonal-dnc-normalization",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-affine-diagonal-transpose-power",
+  "lem-pur-affine-translation-trace",
+  "lem-pur-trace-transpose-base-change",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-affine-diagonal-integration-translation-integration",
+  "lem-pur-affine-diagonal-integration-translation-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: original P2 assembly preserved; F2 exponent clause reduced to coefficient-prefix and raw ordered-trace compatibility, followed by functoriality and source naturality of the exceptional Hom bijection; translation and rank zero unchanged"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For affine space the diagonal deformation to the normal cone orientation is inverse to the adjoint transpose of integration",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc. Inspected returned signatures: affine-scheme coordinate maps, real volume forms, matrix transpose and elementary limits; no derived etale orientation or DNC normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a trivial vector bundle translating the diagonal to the zero section identifies normalized dualizing orientation with trace purity",
+   "results": "8 hits: Orientation.volumeForm_zero_neg, Orientation.volumeForm_zero_pos, Orientation.volumeForm_def, LinearMap.det_eq_one_of_subsingleton, LinearMap.det_eq_one_of_finrank_eq_zero, Orientation.volumeForm, ContinuousLinearMap.det_toSpanSingleton, Orientation.volumeForm_robust. Inspected returned signatures: affine-scheme coordinate maps, real volume forms, matrix transpose and elementary limits; no derived etale orientation or DNC normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: . Inspected returned signatures: affine-scheme coordinate maps, real volume forms, matrix transpose and elementary limits; no derived etale orientation or DNC normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*orientation|orientation.*diagonal|deformation.*purity",
+   "results": "0 hits: . Inspected returned signatures: affine-scheme coordinate maps, real volume forms, matrix transpose and elementary limits; no derived etale orientation or DNC normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonal normal cone orientation of an affine space projection equals inverse integration transpose",
+   "results": "8 hits: EuclideanGeometry.orthogonalProjection_linear, Matrix.diagonal_conjTranspose, EuclideanGeometry.orthogonalProjection.congr_simp, Matrix.isDiag_conjTranspose_iff, EuclideanGeometry.orthogonalProjection, Matrix.diagonal_transpose, EuclideanGeometry.orthogonalProjection_contLinear, CategoryTheory.Limits.Cone.ofPullbackCone_π. Inspected returned signatures: affine-scheme coordinate maps, real volume forms, matrix transpose and elementary limits; no derived etale orientation or DNC normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a trivial affine bundle the DNC diagonal orientation equals the inverse of the exceptional transpose of integration",
+   "results": "8 hits: Orientation.map_of_isEmpty, Orientation.map_refl, Orientation.map_positiveOrientation_of_isEmpty, Orientation.reindex_refl, Orientation.volumeForm_zero_neg, Orientation.volumeForm_zero_pos, IsEmpty.oriented, Orientation.reindex_symm.  Recorded interrupted search result read on resumption: orientation reindexing and real vector-space orientation, not etale DNC maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine space diagonal deformation to the normal cone orientation agrees with the inverse integration transpose",
+   "results": "8 hits: AffineEquiv.coe_toHomeomorphOfFiniteDimensional_symm, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc, AffineIsometryEquiv.toIsometryEquiv_symm, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly.  Returned signatures concern affine-scheme coordinate morphisms and affine/metric equivalences; none states an equality of exceptional transposes or DNC orientations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional adjunction transpose of affine space integration is compatible with change of base and translation",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.map_over, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.AffineSpace.homOfVector_over_assoc, AlgebraicGeometry.AffineSpace.homOfVector_over, AlgebraicGeometry.AffineSpace.map_over_assoc, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc.  Returned signatures concern affine-scheme coordinate morphisms and affine/metric equivalences; none states an equality of exceptional transposes or DNC orientations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-projection-purity-agreement",
+  "group": "Q87",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Proof: diagonal normal bundle, translation to the standard pair, and normalized DNC identity; unit Agreement on the model; returned steps 3-6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-affine-diagonal-integration-orientation",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its coefficient domain. Reused existing trace-base-change, translation-trace, transpose-base-change and projection-unit nodes; wrote the ordered coordinate and normalized DNC comparison explicitly. No new nodes and no Lean changes. Checked every cited statement, bounded etale witnesses, separated finite-type domains, rank zero and empty base.",
+  "blueprint": "lem-pur-projection-purity-agreement proof: diagonal normal coordinates and normalized DNC comparison; the unit Agreement on the model paragraph supplies the translation and trace-base-change normalization. Steps 1-4 track the actual integration transpose and diagonal restriction; Steps 5-7 track the standard pair; Step 8 assembles the equality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Step 2 needs only invertibility of the projection map with unit coefficient on a bounded Tate input; generic six-functor tool, not replaced by any step of sk-thm-smooth-purity."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 1: Noetherianity of finite-type k-schemes, a generic scheme fact needed for the hypotheses of the sk-prop-an statements."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Step 1: affine-space projections are smooth of relative dimension d; generic geometry."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Step 4: the natural pullback-composition isomorphism used to cancel L Delta^* L p_2^*; generic tool."
+   },
+   {
+    "node": "lem-pur-dnc-section-geometry",
+    "why": "Steps 5 and 7: standard-pair clause (4), named in the unit's model paragraph ([sk-lem-geometry](4)); stmt_dep of the cited thm-pur-dnc-invariance."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Step 3: the pro-etale compact-support exchange is defined there as the transported etale exchange; generic base-change tool, already a stmt_dep of def-pur-co-smoothness."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-2911d952c",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-2911d952c (reviewer sub-agent of L); spot-checked: FIX, one small repair. Read the item's statement and all 8 steps, the statement of every cited node, and the unit's model paragraph. This is an ordinary one-level split: there is no repair note and the delivery creates no new nodes. The proof follows the sk-thm-smooth-purity model route: base change of the trace (lem-amb-affine-space-top-trace plus lem-pur-trace-transpose-base-change with (f,b,a,f')=(p,p,p_2,p_1), where B is beta_{p,p} of def-pur-co-smoothness(3)), diagonal restriction (alpha is LDelta^* of B^{-1}, which cancels), the explicit polynomial normal coordinates u=y-x with u_i=t v_i, translation h=tau_x by lem-pur-affine-translation-trace (S=X, sign z->z-a matches) whose transpose via the automorphism square gives P_q kappa = B_tau tau^*P_q, and the DNC normalization identity on the global standard pair with beta=T^{-1}. Directions and types check out. Checked d=0, empty Y, n=1 and arbitrary ramification. Fault repaired: Step 3 moves the exchange map to the pro-etale site, but lem-pur-vector-integration-site-comparison does not cover exchange maps. Added thm-cbc-finite-level-proetale (the pro-etale exchange is the transported etale one) to Step 3's text, uses and proof_deps. Also declared split_report.tool_uses: finite-compact projection formula, Noetherianity, smoothness of affine space, pullback composition, dnc-section-geometry, cbc-finite-level. All are generic tools; accepted. Batch-5: closure from both targets is 20383 nodes with the item's proof and 20378 without. The 5 added nodes are all sec-smooth-purity (def-trf-ambient-affine-translation-trace, lem-pur-affine-translation-trace, lem-pur-trace-transpose-base-change, lem-pur-universal-translation-multiplier, lem-pur-affine-constant-section-zero-detection); none is a trf or pd node. Flag 1, lem-weil-finite-compact-projection-formula: already in the closure, and here it is the generic projection formula with unit coefficient; accepted. Flag 2, lem-pur-dnc-section-geometry: already in the closure via thm-pur-dnc-invariance, and its path reaches trf only through regular-implies-smooth algebra; accepted. Flag 3, lem-pur-affine-translation-trace: the trf translation lemma is already in the closure, and this is a generic trace computation, not part of either assumption; accepted. The fix leaves the closure unchanged. No SGA; not a duplicate (checked lem-pur-diagonal-orientation-compatibility and the translation nodes).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineDiagonalIntegrationOrientation",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalIntegrationOrientation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalIntegration_translation",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalIntegration_exponent",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalIntegration_zero",
+   "WeilConjectures.PurityFiniteSetting.AffineDiagonalIntegrationConclusion",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalIntegrationOrientation"
+  ],
+  "file": "lean/Sheaf/Paper/AffineDiagonalIntegrationOrientation.lean",
+  "statement": "theorem affineDiagonalIntegrationOrientation (P : PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (d r : ℕ) (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : P.Coefficient) = 0) : P.AffineDiagonalIntegrationConclusion Y aY d r hA",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Four canonical derived-map equations are in affineDiagonalIntegrationOrientation; the translation, exponent-independence and rank-zero clauses are stated in affineDiagonalIntegration_translation, affineDiagonalIntegration_exponent and affineDiagonalIntegration_zero. Coordinate helpers construct y-x and its homogeneous normal classes on the actual cone. The small pro-etale equations use the recorded canonical finite-etale presentation comparisons."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-710eed67d",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read node, all 16 stmt_deps, report, full module and the used declarations (Dnc source/normal comparisons, existsUnique_dncInvariance, diagonalComparedRestriction, finiteComparedBaseChangeClause, ReesConeNormalized + reesConeComparison_exists, ambientAffineTranslation sign, vectorIntegrationLocalTrace). Four equations rendered with correct order; B = dualizingComplexBaseChangeMap of flipped square (p2*omega_p -> omega_p1) matching def-pur-co-smoothness(3); alpha = pullback of B^-1 + composition; delta pinned by ExistsUnique; beta = zero-section pullback of Q^-1 + Tate restriction; I/J/Q homs fixed to the explicit transposes. u=y-x, v=[u], u=tv pinned by Rees normalization; translation z->z-a gives y-x. Translation, exponent and d=0 clauses stated separately with pinned maps. No extra hypotheses, universes explicit, docstrings and 8-step proof present, only lean field changed, statement verbatim. Advisories: decls from non-stmt_dep definition nodes (affine trace tower/construction/linear action, vector-integration charts, def-trf ambient translation, rees-cone normalization), not addable under H2; integration transpose rendered via chart trace (def-amb-vector-integration's defining local formula), stage-3 bridge."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T000938-L-4149719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalIntegration_translation",
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalIntegration_zero"
+  ],
+  "sorry_after": [
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalIntegration_zero"
+  ]
+ }
+}

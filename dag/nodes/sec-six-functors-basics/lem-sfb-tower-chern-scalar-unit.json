@@ -1,0 +1,160 @@
+{
+ "id": "lem-sfb-tower-chern-scalar-unit",
+ "kind": "statement",
+ "title": "Scalar extension of the coefficient unit with its adjunction normalization",
+ "statement": "Let l be prime, E a finite extension of Q_l in the stated universe, and T a scheme. For every ScalarData s [def-coef-semilinear-system-models] for the actual coefficientSystemMap R_l(T) -> A_l,E(T) [def-sp-tower-class-coefficients], there exists an isomorphism from s.T applied to the integral coefficient unit to the E-coefficient unit whose adjunct, after the exact single comparison, is precisely scalarGenerator. Thus unitNormalization [def-sp-tower-class-reduction] holds. No flatness of the coefficient map or geometric hypothesis on T is required.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-coefficients",
+  "def-sp-tower-class-reduction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), extension of scalars along the actual coefficient map and its unital comparison"
+ },
+ "proof": [
+  {
+   "text": "The coefficient unit in degree zero is K-flat: the right tensor unitor identifies tensoring any acyclic complex with it with that same complex. Hence ScalarData.model.computes makes its universal derived counit invertible.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), extension of scalars along the actual coefficient map and its unital comparison"
+   }
+  },
+  {
+   "text": "Ordinary scalar extension of the unit is the target ring by multiplication s tensor a mapping to s phi(a), with inverse s mapping to s tensor one. Compose this isomorphism with the model object equality, the invertible derived counit and the standard single-complex comparisons to construct e.",
+   "uses": [
+    "lem-pd-sheaf-scalar-extension-constraint-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), extension of scalars along the actual coefficient map and its unital comparison"
+   }
+  },
+  {
+   "text": "On each section the ordinary adjunct of multiplication sends x to phi(x), using ScalarData.unit_section and the pure-tensor formula for the unit isomorphism. Uniqueness in scalarGenerator_existsUnique identifies this adjunct with scalarGenerator. ScalarData.transpose_model transports the chain-level adjunct to the derived adjunct; the exact restriction single comparison cancels its factorization comparison. This gives exactly unitNormalization.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-sp-tower-class-coefficients",
+    "def-sp-tower-class-reduction",
+    "lem-pd-sheaf-scalar-extension-constraint-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), extension of scalars along the actual coefficient map and its unital comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence",
+  "def-sp-tower-class-coefficients",
+  "def-sp-tower-class-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), extension of scalars along the actual coefficient map and its unital comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars sends the unit module in degree zero to the target ring, with adjoint equal to the ring map",
+   "results": "8 hits: ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendScalars.map'_id, ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-27",
+   "verdict": "No match for this statement on actual ringed systems and its fixed comparison maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of the unit ring is the target unit ring, with its adjunction normalization",
+   "results": "8 hits: Algebra.Extension.self_Ring, Algebra.Extension.self, Algebra.Extension.algebra₁, Algebra.Extension.Ring, Algebra.FormallyUnramified.inst, Algebra.Extension.algebra₂, Algebra.Extension.instRingOfIsScalarTower, KaehlerDifferential.moduleBaseChange'",
+   "date": "2026-10-27",
+   "verdict": "No corresponding theorem for these sheaf-system data and normalization equations."
+  },
+  {
+   "tool": "grep",
+   "query": "unitNormalization|scalarGenerator|extendScalars.*[Uu]nit|singleMapHomologicalComplex",
+   "results": "9 source hits, including HomologicalComplex.singleMapHomologicalComplex, singleMapHomologicalComplex_hom_app_self, singleMapHomologicalComplex_hom_app_ne, and the exact derived single-functor comparison. No unitNormalization or scalarGenerator match.",
+   "date": "2026-10-27",
+   "verdict": "The generic single-complex comparisons are used in the proof; the sheaf-system unit normalization remains specialized to this project."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): scalar extension with the unit fixed by one mapping to one",
+   "via": [
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerChernScalarUnit",
+  "file": "lean/Sheaf/Paper/TowerChernScalarUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_normalizedScalarUnit",
+  "statement": "theorem exists_normalizedScalarUnit (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u})\n    (s : SemilinearSections.ScalarData.{u + 1, u, u + 1}\n      (coefficientSystemMap l E T)) :\n    ∃ e : s.T.obj (unit T (Rrings l T)) ≅ unit T (Arings l E T),\n      unitNormalization s.T (SemilinearSections.res.{u + 1, u, u + 1}\n        (coefficientSystemMap l E T)) s.adjunction e (scalarGenerator l E T)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "worker": "stage3",
+  "summary": "Separate a proper step of normalized integral reduction, scalar unit normalization, finite evaluation or line twisting; retain the simultaneous-system argument and fixed signs.",
+  "blueprint": "proof (1): scalar extension with the unit fixed by one mapping to one",
+  "tool_uses": [
+   {
+    "node": "lem-pd-sheaf-scalar-extension-constraint-coherence",
+    "why": "The ordinary scalar-extended unit and its multiplication formula."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T012844-L-2340165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T012844-L-2340165",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

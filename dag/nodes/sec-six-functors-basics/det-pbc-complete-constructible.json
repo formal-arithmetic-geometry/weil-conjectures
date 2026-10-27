@@ -1,0 +1,90 @@
+{
+ "id": "det-pbc-complete-constructible",
+ "kind": "statement",
+ "title": "Completed and ordinary exchange agree on constructible complexes",
+ "statement": "In the cartesian square of [det-pbc-complete-exchange-map], let $p\\colon X\\to Y$\nbe proper and $g\\colon Y'\\to Y$ arbitrary, with $X$, $Y$ and $Y'$ separated and\nof finite type over $k$, and let $K\\in\\Dbc(X,\\mathcal O_E)$. Then:\n\n1. each reduction $K_n$ lies in\n   $D^+_{\\mathrm{class}}(X_{\\mathrm{proét}},\\mathcal O_E/\\pi_E^n)$, so\n   $\\operatorname{Ex}^{\\mathrm{comp}}_K$ is an isomorphism\n   ([det-pbc-complete-exchange-iso]);\n2. the completion maps $g^*Rp_*K\\to g^*_{\\mathrm{comp}}Rp_*K$ and\n   $g'^*K\\to g'^*_{\\mathrm{comp}}K$ are isomorphisms;\n3. under these isomorphisms $\\operatorname{Ex}^{\\mathrm{comp}}_K$ is the ordinary\n   base change morphism $\\operatorname{Ex}_K$, which is the morphism\n   $\\mathrm{BC}$ of [sk-def-sfb-base-change-morphism], so\n   $$\n   \\operatorname{Ex}_K\\colon g^*Rp_*K\\xrightarrow{\\ \\sim\\ }Rp'_*g'^*K\n   \\qquad\\text{in }\\Dbc(Y',\\mathcal O_E).\n   $$",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/det-pbc-complete-constructible.md",
+  "place": "node det-pbc-complete-constructible, order 1519"
+ },
+ "stmt_deps": [
+  "det-pbc-complete-exchange-map",
+  "det-pbc-complete-exchange-iso",
+  "sk-def-sfb-base-change-morphism"
+ ],
+ "proof": [
+  {
+   "text": "(1) By [sk-prop-integral-criterion] and [det-prop-integral-criterion-reductions],\n$K$ is derived complete and every $K_n$ lies in $\\Dbc(X,\\mathcal O_E/\\pi_E^n)$;\nbounded constructible complexes with finite coefficients are classical by\n[sk-thm-pe-constructible-comparison].",
+   "uses": [
+    "det-prop-integral-criterion-reductions",
+    "sk-thm-pe-constructible-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(2) By [det-thm-sfb-proper-base-change-integral] (1), $Rp_*K\\in\\Dbc(Y,\\mathcal O_E)$.\nInverse image preserves $\\Dbc(-,\\mathcal O_E)$ ([sk-lem-integral-models] (3)), so\n$g^*Rp_*K\\in\\Dbc(Y',\\mathcal O_E)$ and $g'^*K\\in\\Dbc(X',\\mathcal O_E)$, and both\nare derived complete by [sk-prop-integral-criterion]. The completion maps are\nthen isomorphisms by [lemma-weil-pbc-completed-pullback-reduction] (3).",
+   "uses": [
+    "det-thm-sfb-proper-base-change-integral",
+    "sk-lem-integral-models",
+    "lemma-weil-pbc-completed-pullback-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(3) The completion map is natural, so applied to $\\operatorname{Ex}_K$ it gives\n$\\kappa_{Rp'_*g'^*K}\\circ\\operatorname{Ex}_K=R\\varprojlim\\operatorname{red}(\\operatorname{Ex}_K)\n\\circ\\kappa_{g^*Rp_*K}$. Under the identifications\n$\\operatorname{red}(g^*Rp_*K)\\simeq g^*_{\\operatorname{Tow}}Rp^{\\operatorname{Tow}}_*\\operatorname{red}(K)$\nand $\\operatorname{red}(Rp'_*g'^*K)\\simeq Rp'^{\\operatorname{Tow}}_*g'^*_{\\operatorname{Tow}}\\operatorname{red}(K)$\n([lemma-weil-pbc-completed-pullback-reduction] (1),\n[prop-weil-pbc-direct-image-limits] (2)), which are induced by the termwise\ncone construction and therefore commute with units, counits and pullback\ncomparisons, $\\operatorname{red}(\\operatorname{Ex}_K)$ is\n$\\operatorname{Ex}^{\\operatorname{Tow}}_{\\operatorname{red}(K)}$. Moreover\n$R\\varprojlim\\operatorname{red}(Rp'_*g'^*K)\\simeq Rp'_*R\\varprojlim\\operatorname{red}(g'^*K)$\nby [prop-weil-pbc-direct-image-limits] (1), (2), and $\\kappa_{Rp'_*g'^*K}$\ncorresponds to $Rp'_*\\kappa_{g'^*K}$ by [prop-weil-pbc-direct-image-limits] (3).\nSo the displayed equation says that $\\operatorname{Ex}^{\\mathrm{comp}}_K$,\nprecomposed with $\\kappa_{g^*Rp_*K}$, equals $Rp'_*\\kappa_{g'^*K}\\circ\n\\operatorname{Ex}_K$. Since $\\operatorname{Ex}^{\\mathrm{comp}}_K$ is an isomorphism by\n(1) and both completion maps are isomorphisms by (2), $\\operatorname{Ex}_K$ is an\nisomorphism. Its source is in $\\Dbc(Y',\\mathcal O_E)$ by (2), and so is its\ntarget, by [det-thm-sfb-proper-base-change-integral] (1) for the proper\nmorphism $p'$. Finally, $\\operatorname{Ex}_K$ is the composite of the unit of\n$p'^*\\dashv Rp'_*$, the pullback comparison of the square and the counit of\n$p^*\\dashv Rp_*$ ([det-pbc-complete-exchange-map] (1)); on bounded\nconstructible complexes these are the unit, comparison and counit of the\nrestricted functors, so $\\operatorname{Ex}_K$ is $\\mathrm{BC}$ of\n[sk-def-sfb-base-change-morphism].",
+   "uses": [
+    "lemma-weil-pbc-completed-pullback-reduction",
+    "prop-weil-pbc-direct-image-limits",
+    "det-thm-sfb-proper-base-change-integral",
+    "det-pbc-complete-exchange-map",
+    "sk-def-sfb-base-change-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-integral-criterion-reductions",
+  "sk-thm-pe-constructible-comparison",
+  "det-thm-sfb-proper-base-change-integral",
+  "sk-lem-integral-models",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-pbc-direct-image-limits",
+  "det-pbc-complete-exchange-map",
+  "sk-def-sfb-base-change-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/det-pbc-complete-constructible.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1519,
+ "blueprint_uses": [
+  "det-pbc-complete-exchange-map",
+  "det-pbc-complete-exchange-iso",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-pbc-direct-image-limits",
+  "sk-prop-integral-criterion",
+  "det-prop-integral-criterion-reductions",
+  "sk-thm-pe-constructible-comparison",
+  "sk-lem-integral-models",
+  "det-thm-sfb-proper-base-change-integral",
+  "sk-def-sfb-base-change-morphism"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "det-pbc-complete-constructible",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change"
+}

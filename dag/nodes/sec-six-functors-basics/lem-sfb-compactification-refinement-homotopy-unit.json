@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-compactification-refinement-homotopy-unit",
+ "kind": "statement",
+ "title": "The homotopy unit pastes with a single cartesian refinement",
+ "statement": "Let A be a commutative ring, f:X→Y a morphism of schemes, c,d compactifications, and r:c→d a refinement with cartesian square over X [def-weil-compactifications-refinements]. Let F be an additive exact functor from small-etale A-module sheaves on X to those on Y [def-weil-pbc-etale-sheaves], and a:F→(d.i)!⋙(d.g)* any natural transformation. Let t_r be the explicitly constructed sheaf refinement map [lem-sfb-compactification-sheaf-refinement]. Write N(F,O,P,a) for normalizationHomotopyTransformation [def-asd-compact-support-graph-comparison], the exact-source factorization, followed by Qh(a), followed by the right-derived unit of P and the inverse exact factorization of O. Then N(F,(d.i)!,(d.g)*,a), followed by Qh-whiskering of the canonical derived refinement comparison [def-amb-etale-compact-support], equals N(F,(c.i)!,(c.g)*,a;t_r). No finite-coefficient, Noetherian, or invertibility assumption on a is needed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-etale-sheaves",
+  "lem-sfb-compactification-sheaf-refinement",
+  "def-asd-compact-support-graph-comparison",
+  "def-amb-etale-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "On a homotopy representative, use the derived-adjunction unit factorization for the exact inverse-image functor. Apply the exact derived triangle comparison to inverse open base change. Its inverse formula follows by canceling only the exact comparison isomorphisms. Naturality of the right-derived unit gives the unit for the adjunct of inverse open base change.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "Apply the right-derived composition-unit identity. It combines the refinement direct-image unit and the coarser proper direct-image unit into the finer direct-image unit, with the ordinary direct-image compositor. This identity is rightDerivedNatTrans_app applied to rightDerivedFunctorCompIso and rightDerivedFunctorNatIso; direct image preserves K-injectives because its left adjoint is exact.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "Move the supplied natural transformation a through the units by naturality. The ordinary factors are exactly a;t_r and the exact comparison factors are precisely those in N. Associativity therefore gives the claimed equality as natural transformations on the homotopy category.",
+   "uses": [
+    "lem-sfb-compactification-sheaf-refinement",
+    "def-asd-compact-support-graph-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-amb-etale-compact-support",
+  "lem-sfb-compactification-sheaf-refinement",
+  "def-asd-compact-support-graph-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along open immersion followed by proper pushforward is independent of compactification as a subsheaf of direct image",
+   "results": "Eight hits, including Scheme.Modules.restrictAdjunction, restrictFunctorAdjCounitIso, and instFullPushforward. These concern sheaves on the Zariski space, not the specified small-etale extension-by-zero comparison.",
+   "date": "2026-10-27",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of a right derived functor is compatible with composition and an adjunction with exact left adjoint",
+   "results": "Eight hits, including Adjunction.derived_unit, derivedη, Functor.totalRightDerivedUnit, and Adjunction.comp_unit. These give the generic unit identities used in the proof, but no etale compactification refinement formula.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryCompIso_fach\"",
+   "results": "0 hits in Mathlib; the exact-derived compositor API is in the adopted source.",
+   "date": "2026-10-27",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactificationSheafRefinement|compactificationRefinement_homotopyUnit|rightDerivedFunctorCompIso",
+   "results": "msearch.py: 0 Mathlib hits. Local source search found rightDerivedFunctorCompIso and rightDerivedFunctorCompUnit in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp and mapDerivedCategoryTriangleIso_hom_app_Qh_obj in WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate.",
+   "date": "2026-10-27",
+   "verdict": "use generic source APIs; no existing geometric statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExactCompactificationUnitRefinement",
+  "date": "2026-10-27",
+  "group": "G8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (2), the canonical compact-support composition identification used in the Hom bijections, via the compactification-independence normalization.",
+   "via": [
+    "lem-sfb-exact-compactification-unit-refinement",
+    "lem-sfb-quasifinite-compact-support-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactificationRefinementHomotopyUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactificationRefinementHomotopyUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactificationRefinement_homotopyUnit",
+  "statement": "theorem compactificationRefinement_homotopyUnit\n    (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}\n    (r : c.Refinement d) (hcart : IsPullback c.i (𝟙 X) r.hom d.i)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (a : F ⟶ openImmersionLowerShriek (ModuleCat.{u + 1} A) d.i ⋙\n      lowerStar (ModuleCat.{u + 1} A) d.g) :\n    normalizationHomotopyTransformation F\n        (openImmersionLowerShriek (ModuleCat.{u + 1} A) d.i)\n        (lowerStar (ModuleCat.{u + 1} A) d.g) a ≫\n      Functor.whiskerLeft DerivedCategory.Qh\n        (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} A) r hcart) =\n    normalizationHomotopyTransformation F\n      (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)\n      (lowerStar (ModuleCat.{u + 1} A) c.g)\n      (a ≫ compactificationSheafRefinement A r hcart)",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T050603-L-240707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T050603-L-240707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

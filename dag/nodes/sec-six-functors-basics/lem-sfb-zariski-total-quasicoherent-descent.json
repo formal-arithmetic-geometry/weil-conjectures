@@ -1,0 +1,378 @@
+{
+ "id": "lem-sfb-zariski-total-quasicoherent-descent",
+ "kind": "statement",
+ "title": "Unbounded ordinary quasi-coherent descent on a Zariski total site",
+ "statement": "Let $T$ be any scheme [def-pc-scheme] and $(W_i\\hookrightarrow T)_{i\\in I}$ a set-indexed Zariski open cover [def-weil-open-immersion, def-weil-size-convention]. Put $T_n=\\coprod_{(i_0,\\ldots,i_n)\\in I^{n+1}}(W_{i_0}\\cap\\cdots\\cap W_{i_n})$, with the usual face maps dropping indices. Use only injective order maps, the small Zariski ringed sites $(T_{n,\\mathrm{Zar}},\\mathcal O_{T_n})$, their exact structure-module pullbacks, and the ordinary ringed total module category $\\mathscr M$ with augmentation $a$ and exact evaluations $e_n$ of [lem-sfb-semisimplicial-ringed-total-category]. Use ordinary unbounded derived categories [def-pc-derived-category]. Let $\\mathcal L\\subset D(\\mathscr M)$ consist of objects with quasi-coherent cohomology on each component scheme [pqf-def-coherent], and let $\\mathcal L_{\\mathrm{cart}}$ be its full subcategory of objects for which every derived transition $Lf_\\alpha^*e_mE\\to e_nE$ is an isomorphism. Then the augmentation pullback induces a triangulated equivalence\n$$a^*:D_{\\mathrm{QCoh}}(\\mathcal O_T)\\xrightarrow{\\sim}\\mathcal L_{\\mathrm{cart}}.$$\nIts quasi-inverse is the restriction of the ambient derived augmentation pushforward $Ra_*$, and its adjunction unit and counit are isomorphisms on these subcategories. In particular this is an equivalence on actual total derived objects and their morphisms. No lower bound, quasi-compactness, quasi-separatedness, or vanishing of negative self extensions is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D7V, lemma-equivalence-unbounded-one, applied to the Zariski ringed total augmentation. The verification is the Zariski Cech instance of spaces-simplicial.tex Tag 0DHF, lemma-coh-descent-qcoh-unbounded-for-fppf-hypercovering: affine Zariski objects give cohomological bound zero; face-only ringed total model is the one already recorded by lem-sfb-semisimplicial-ringed-total-category. This records the ordinary Zariski version on complexes of structure-module systems."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-pc-derived-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Every tuple component of a face map, or of an augmentation component $a_n:T_n\\to T$, is an inclusion of open subschemes. Its module pullback is restriction and is exact by [lem-weil-pbc-module-open-restriction-injectives]. Exactness can be checked separately on the disjoint open components, since kernels and local lifts for epimorphisms are checked on an open cover. Thus all face and augmentation component pullbacks are exact. By [lem-sfb-semisimplicial-ringed-total-category], $e_na^*=a_n^*$ and the evaluations are exact and jointly conservative, so $a^*$ itself is exact.",
+   "uses": [
+    "lem-weil-pbc-module-open-restriction-injectives",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHF, proof Ad (1), specialized to Zariski open components; cohomology.tex Tag 01E1, lemma-cohomology-of-open."
+   }
+  },
+  {
+   "text": "Let $\\mathcal B=\\operatorname{QCoh}(\\mathcal O_T)$ and let $\\mathcal A\\subset\\mathscr M$ be the cartesian systems with quasi-coherent components. On any scheme, kernels and cokernels of maps between quasi-coherent modules and extensions of quasi-coherent modules are quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel, lem-weil-pbc-quasi-coherent-module-cokernel-closure, lem-pc-quasi-coherent-extension]. Apply these statements to $T$ and each $T_n$. Exact evaluation and exact face pullback show that the transitions on a kernel or cokernel of a map in $\\mathcal A$ remain invertible. For an extension, compare the two short exact sequences along a face: a kernel element in the middle maps to zero in the quotient and then vanishes in the left term; a target middle section lifts locally in the quotient and its remaining difference lifts locally in the left term. Hence its middle transition is invertible. Zero belongs to both categories and they are strictly full, so both are weak Serre subcategories.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-pc-quasi-coherent-extension",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHF, weak Serre paragraph; schemes.tex Tags 01IC, 01ID, 01IE (affine-local closure properties)."
+   }
+  },
+  {
+   "text": "For a cartesian system $F$, write $t_r:F_{i_r}|_{W_{i_0\\cdots i_n}}\\xrightarrow{\\sim}F_{i_0\\cdots i_n}$ for its vertex transitions. Define $\\phi_{ij}=t_1^{-1}t_0$ on $W_i\\cap W_j$. Compatibility with the three edges of a triple gives $\\phi_{ik}=\\phi_{jk}\\phi_{ij}$. This includes repeated indices: the triple $(i,i,i)$ gives $\\phi_{ii}^2=\\phi_{ii}$, hence $\\phi_{ii}=1$. The module gluing theorem [lem-weil-pbc-module-object-open-descent] gives $H$ on $T$ with $H|_{W_i}\\simeq F_i$. It is quasi-coherent when all $F_i$ are, by the affine-neighbourhood definition [pqf-def-coherent]. Conversely restriction of a quasi-coherent sheaf is quasi-coherent by the same definition.",
+   "uses": [
+    "lem-weil-pbc-module-object-open-descent",
+    "pqf-def-coherent",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 00AL and 00AM, lemma-glue-sheaves and lemma-glue-sheaves-structures; face-only cocycle verification supplied here."
+   }
+  },
+  {
+   "text": "For any tuple choose a vertex $r$ and compose $H|_{W_{i_0\\cdots i_n}}\\to F_{i_r}|_{W_{i_0\\cdots i_n}}\\xrightarrow{t_r}F_{i_0\\cdots i_n}$. The overlap equation $\\phi_{ij}e_i=e_j$ and $\\phi_{ij}=t_j^{-1}t_i$ make this independent of the chosen vertex. For each injection its transition compatibility follows by choosing a vertex in the smaller tuple and using composition compatibility of the original system. Thus these maps give $a^*H\\simeq F$. A map of cartesian systems is determined by its degree-zero components; their overlap equalities glue sectionwise to one module map $H\\to H'$, and the vertex formulas give all higher components. This proves $a^*:\\mathcal B\\simeq\\mathcal A$. The same construction works for all modules, without quasi-coherence. Its inverse on a cartesian $F$ has on an open $V$ exactly the compatible sections of all $F_n$ over $a_n^{-1}V$: such a family is determined by the degree-zero sections and the pair equations, by the vertex formulas. These are also the sections of the ambient right adjoint $a_*F$, by the module adjunction. Hence the inverse is $a_*$.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 00AL and 00AM, explicit gluing and uniqueness; all-degree extension verified by vertex transitions."
+   }
+  },
+  {
+   "text": "For $G\\in\\mathcal B$, apply [lem-sfb-zariski-cech-module-derived-unit] to the present scheme and its very same open cover and face total augmentation. It gives the canonical map $G[0]\\xrightarrow{\\sim}Ra_*a^*G[0]$. The result applies to arbitrary modules, so in particular to every quasi-coherent $G$ here. This verifies the degree-zero derived-unit hypothesis of the unbounded criterion; the underived heart equivalence alone would not verify it.",
+   "uses": [
+    "lem-sfb-zariski-cech-module-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, injective resolution construction; cohomology.tex Tags 01EP and 01EQ. Small-Zariski face-only module version isolated in the cited node."
+   }
+  },
+  {
+   "text": "The small ringed total and component module categories are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], and have enough injectives by [lem-sp-grothendieck-enough-injectives]. For each $n$, [lem-sfb-semisimplicial-evaluation-free-adjoint] gives an exact left adjoint $\\ell_n$ to $e_n$, since all face pullbacks are exact by step 1. Thus $e_n$ preserves injectives: extend an adjoint map across $\\ell_n$ of a monomorphism and transpose back. Evaluating an injective resolution of $F\\in\\mathscr M$ therefore gives an injective resolution of $F_n$. Sections at a total-site object $V\\subset T_n$ are exactly sections of its evaluation at $V$. Consequently\n$$H^p_{\\mathrm{tot}}(V,F)=R^p\\Gamma_{\\operatorname{Mod}(\\mathcal O_{T_n})}(V,F_n).$$\nBy [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] the latter is the abelian sheaf cohomology of $F_n$ over $V$, with identity comparison in degree zero. The same comparison applies downstairs on $T$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHF proof Ad (4), and lemma-sanity-check-modules; exact evaluation adjoint gives its face-only proof. sites-cohomology.tex Tag 03FD, lemma-cohomology-modules-abelian-agree."
+   }
+  },
+  {
+   "text": "Use affine opens in the individual tuple components as total-site basis, and affine opens of $T$ downstairs. Every open admits such an affine covering. Every covering of a basis object refines to a covering by affine opens, by taking affine neighbourhoods inside each member of the covering. By [lem-trf-slice-site-total-pseudofunctor], componentwise coverings generate the total-site topology, so the same refinements are cofinal there. For $F\\in\\mathcal A$ its $F_n$ is quasi-coherent, and [pqf-lem-affine-vanishing] gives $H^p(V,F_n)=0$ for $p>0$ and every such affine open. Step 6 identifies this with total-site module cohomology. Downstairs the same lemma and step 6 give the identical vanishing for $G\\in\\mathcal B$. Thus each of the two local bound properties holds with $d_V=0$ and with the cofinal family of affine-domain coverings. This does not assert that intersections of affine opens of $T$ are affine.",
+   "uses": [
+    "pqf-lem-affine-vanishing",
+    "lem-trf-slice-site-total-pseudofunctor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHF proof Ad (4)-(5), affine basis; coherent.tex Tag 01XB, lemma-quasi-coherent-affine-cohomology-zero."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-unbounded-descent-criterion] to $a$, with the weak Serre categories $\\mathcal B$ and $\\mathcal A$. Exactness is step 1, weak Serre closure step 2, the heart equivalence with inverse $a_*$ steps 3-4, the canonical module derived unit step 5, and both local bounds steps 6-7. This gives the inverse triangulated functors $a^*=La^*$ and the restriction of the ambient $Ra_*$ on $D_{\\mathcal B}$ and $D_{\\mathcal A}$, with their canonical unit and counit isomorphisms. Finally [lem-sfb-semisimplicial-ringed-total-category] identifies derived cartesianness with invertible cohomology transitions because the face pullbacks are exact. Exact evaluation gives $e_nH^q(E)=H^q(e_nE)$, so $D_{\\mathcal A}=\\mathcal L_{\\mathrm{cart}}$; downstairs $D_{\\mathcal B}=D_{\\mathrm{QCoh}}(\\mathcal O_T)$ by [def-pc-derived-category]. The equivalence is therefore on the full subcategories of actual total derived objects and all their morphisms, as claimed.",
+   "uses": [
+    "lem-sfb-ringed-unbounded-descent-criterion",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7V, lemma-equivalence-unbounded-one; spaces-simplicial.tex Tag 0DHF, final application, with the small-Zariski hypotheses verified above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-module-object-open-descent",
+  "pqf-def-coherent",
+  "lem-sfb-zariski-cech-module-derived-unit",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "pqf-lem-affine-vanishing",
+  "lem-trf-slice-site-total-pseudofunctor",
+  "lem-sfb-ringed-unbounded-descent-criterion",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D7V, lemma-equivalence-unbounded-one; verification follows the pattern of spaces-simplicial.tex Tag 0DHF, with the ordinary small-Zariski face total site throughout."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded quasi coherent derived complexes on a scheme are equivalent to cartesian complexes on the ringed total site of a Zariski Cech cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.coversTop\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and a quasicoherent sheaf $M$ over $\\\\mathcal{O}$, the induced Grothendieck topology on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : Type u_1} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} A] →\\n      [∀ (U : X.Opensᵒᵖ),\\n            CategoryTheory.Limits.HasLimitsOfShape\\n              (CategoryTheory.StructuredArrow U (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op) A] →\\n\", \"doc\": \"For a scheme $X$ and a category $\\\\mathcal{A}$, this establishes an equivalence between the category of sheaves on the affine Zariski site of $X$ (equipped with the Grothendieck topology induced by the\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski cover unbounded derived category quasi coherent cohomology cohomological descent total simplicial ringed site",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \": Precoverage Scheme.{u}\", \"doc\": \"The Zariski precoverage on the category of schemes is the precoverage generated by open immersions. Each covering sieve consists of morphisms that are open immersions, forming a basis for the Zariski \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.coversTop\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and a quasicoherent sheaf $M$ over $\\\\mathcal{O}$, the induced Grothendieck topology on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes where covering families are collections of open immersions that are jointly surjective, constructed by intersecting the jointly surjective preco\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.grothendieckTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": GrothendieckTopology X.AffineZariskiSite\", \"doc\": \"The Grothendieck topology on the affine Zariski site of a scheme $X$ is defined as the topology induced via the inclusion functor from the standard Zariski topology on the open subsets of $X$. A sieve\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by open immersions as covering morphisms. A sieve is covering if it contains a family of open immersions whose images cover the target sc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": X.OpenCover\", \"doc\": \"A covering sieve in the Zariski precoverage generated by affine open immersions whose union covers the scheme, forming a directed family of affine open subsets in the small affine Zariski site topolog\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"descent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDescent|cohomological_descent|[Cc]artesian.*[Dd]erived|[Dd]erived.*[Cc]artesian",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent equivalence for ordinary unbounded derived categories of structure sheaf modules with quasi coherent cohomology along arbitrary open covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.coversTop\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and a quasicoherent sheaf $M$ over $\\\\mathcal{O}$, the induced Grothendieck topology on\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk.inj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If two quasicoherent sheaf data structures constructed via local presentations are equal, then their index types are equal, their covering families are isomorphic, and their local presentations are is\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDescent|cohomological_descent|derived.*unit.*cech|cech.*derived.*unit",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules satisfy cohomological descent along an open covering via the derived augmentation pushforward on the Cech total site",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Modules.isSheaf, SheafOfModules.pushforwardSections, SheafOfModules, SheafOfModules.pushforward_obj_val, TopCat.Presheaf.IsSheaf.isSheafOpensLeCover, AlgebraicGeometry.SheafedSpace.IsSheaf, TopCat.Presheaf.IsSheafOpensLeCover",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"cech\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski open cover Cech ringed total site augmentation derived unit is an isomorphism for every sheaf of modules in degree zero",
+   "results": "8 hits; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, TopCat.Presheaf.generateEquivalenceOpensLe_unitIso, TopCat.Presheaf.generateEquivalenceOpensLe_counitIso, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso, CategoryTheory.GrothendieckTopology.isoToPlus, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived quasi coherent Zariski open cover descent equivalence on cartesian complexes of a ringed total site",
+   "results": "8 hits; SheafOfModules.QuasicoherentData.coversTop, AlgebraicGeometry.Scheme.subcanonical_zariskiTopology, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda, TopCat.Presheaf.generateEquivalenceOpensLe",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDescent|cohomological_descent|[Cc]artesian.*[Dd]erived|[Dd]erived.*[Cc]artesian",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived quasi coherent Zariski cover descent is a triangulated equivalence with inverse derived augmentation pushforward",
+   "results": "8 hits; HasDerivedCategory.standard, SheafOfModules.QuasicoherentData.I, AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, DerivedCategory.instIsTriangulated, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.presentation, CategoryTheory.Equivalence.instIsDenseSubsiteCoherentTopologyInverse",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"descent\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any sheaf of rings and any sheaf of modules on a scheme the Cech open cover total topos augmentation has invertible derived adjunction unit on that module",
+   "results": "8 hits; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.plusPlusAdjunction_unit_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.GrothendieckTopology.instIsIsoSheafAppFunctorOppositeSheafComposeNatTransPlusPlusAdjunction, CategoryTheory.plusPlusAdjunction_counit_app_val, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+  "date": "2026-10-23",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Ordinary unbounded descent only after an actual cartesian total object has been constructed; no strictification of a diagram in homotopy categories is asserted.",
+   "via": [
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-zariski-total-quasicoherent-descent",
+  "worker": "stage1",
+  "summary": "Verified all five hypotheses of the existing ringed unbounded descent criterion on the ordinary Zariski face total site. Proved the heart equivalence explicitly from module gluing, including repeated indices and all higher components; obtained local bounds from the exact evaluation left adjoint and affine vanishing. One new degree-zero module cohomological-descent input; no statement change, no Lean attachment and no Mathlib match.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/duality prerequisite chain, specifically the Zariski coherent-adjoint locality prerequisite of lem-sfb-proper-flat-families-coherent-adjoint-locality. Current ancestor command returns null; preserve the inherited from.node and via. The current blueprint has no exact ordinary Zariski total descent node; this is an auxiliary theorem, not a change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-open-restriction-injectives",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-quasi-coherent-extension",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-object-open-descent",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic scheme/module/sheaf-cohomology input for verifying the ordinary ringed Zariski descent criterion. This is an auxiliary locality input in the existing alteration/duality chain, and the unit provides no replacement for this general tool."
+   },
+   {
+    "node": "lem-trf-slice-site-total-pseudofunctor",
+    "why": "The total site is defined with the generated topology of this general construction; its vertical-cover characterization is needed for affine refinements in step 7. This generic site construction does not change the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-module-object-open-descent",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "pqf-lem-affine-vanishing",
+  "lem-trf-slice-site-total-pseudofunctor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-2b25cbc1c",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-2b25cbc1c (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited statement. The item is still unsplit in live and side-live, has no repair note, and its statement, stmt_deps, source and blueprint are identical to live. No SGA is cited and there is no cycle. Source: Stacks 0D7V. Its five hypotheses match the existing lem-sfb-ringed-unbounded-descent-criterion, and the item verifies them on the Zariski face total site, following 0DHF Ad (1)-(5). Step checks: (1) every tuple component is an open inclusion, so pullback is restriction and is exact, and the evaluations are jointly conservative. (2) The three qcoh closure lemmas hold on any scheme, and the extension case is a five-lemma chase that I checked. (3) phi_ij = t1^{-1}t0 satisfies the cocycle condition, and (i,i,i) gives phi_ii idempotent, hence the identity; gluing works for arbitrary I. (4) Vertex maps give a^*H = F, and the compatible sections of a_*F show the quasi-inverse is a_*. (5) The new node gives criterion hypothesis (3). (6) The free adjoint (exact because of step 1) makes e_n preserve injectives, and with 03FD gives H_tot = H(F_n). (7) Covering sieves are vertically generated, so affine refinements are cofinal; 01XB gives d_V = 0 on both sides. (8) The assembly gives D_A = L_cart through the exact-pullback cartesian clause, and D_B = D_QCoh. New node lem-sfb-zariski-cech-module-derived-unit: it is true, because the first-quadrant double complex of products of j_*(I|W) has exact augmented full-tuple Cech rows (face-only homotopy). I checked one open, repeated copies of T, empty overlaps, G = 0 and T empty. It is not a duplicate: lem-trf-site-hypercover-derived-descent is abelian, simplicial and D^+; the fppf/face-total nodes are on etale sites of spaces; the lem-sc Cech nodes are explicit complexes. It is not a restatement of the item. Batch-5: semisimplicial-ringed-total-category, evaluation-free-adjoint and lem-trf-slice-site-total-pseudofunctor are generic total-site constructions, already in the base stmt_dep closure and no part of the trace formula or Poincare duality, so all are accepted. All 10 tool_uses are generic and accepted. Advisories: step 3's restriction-of-qcoh claim is elementary but terse; the base statement cites def-pc-derived-category for D(M); blueprint.from.node is null, inherited from the NW chain (maintainer note). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiTotalQuasicoherentDescent",
+  "declaration": "AlgebraicGeometry.ZariskiTotal.zariski_total_quasicoherent_descent",
+  "declarations": [
+   "AlgebraicGeometry.ZariskiTotal.intersection",
+   "AlgebraicGeometry.ZariskiTotal.level",
+   "AlgebraicGeometry.ZariskiTotal.augmentation",
+   "AlgebraicGeometry.ZariskiTotal.face",
+   "AlgebraicGeometry.ZariskiTotal.site",
+   "AlgebraicGeometry.ZariskiTotal.Model",
+   "AlgebraicGeometry.ZariskiTotal.Model.cartesianQCoh",
+   "AlgebraicGeometry.ZariskiTotal.Descent",
+   "AlgebraicGeometry.ZariskiTotal.zariski_total_quasicoherent_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiTotalQuasicoherentDescent.lean",
+  "statement": "theorem zariski_total_quasicoherent_descent (T : Scheme.{u}) (I : Type u) (W : I → T.Opens) (hcover : ⨆ i, W i = ⊤) : ∃ M : Model W, Nonempty (Descent M)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Concrete coproduct-intersection schemes and injective-order face maps; Model specializes the recorded total presentation to their small Zariski ringed sites, with the actual face and augmentation ring maps. The theorem asserts existence of this model and of the normalized ambient derived adjunction, its full quasi-coherent cartesian restriction, triangulated equivalence and canonical unit/counit isomorphisms. No total-model or derived-descent certificate is assumed as a hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e27dba9ea",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Read node, report (Worker + Second reading by Q90 present), module, deps SemisimplicialRingedTotalCategory/TotalSitePseudofunctor/DerivedCategory/pqf-def-coherent. Hypotheses = any Scheme.{u}, I:Type u, W:I→T.Opens, hcover; no extra assumptions. level/face/augmentation are actual coproduct-of-intersection schemes over SemiSimplexCategory (face variance checked vs baseChange/faceDirect). ∃ M : Model W is pinned up to canonical iso: fibre site equality, baseChange, faceDirect/faceRing, augmentationDirect/Ring + dependency equations; Augmentation comparisons unique on poset sites. Descent: ambient Ra_* as right derived functor of total.map.modules with beta; adjunction pinned by unit_model/counit_model (shapes checked); unit/counit iso on D_QCoh (recorded schemeDerivedQCohProperty) and cartesianQCoh (IsCartesian ∧ IsQuasicoherent H^q(e_n E) for all n,q). Edge cases: I empty, empty/repeated intersections, n=0, zero, unbounded q, universes u/u+1. Statement field verbatim; only lean record changed vs side-live; no name clash; docstrings with source/blueprint and the 8 proof steps; sorry only. No compile (no FIX); worker dry run OK 7985eea7a58. Advisory: CommShift for the equivalence is freely chosen rather than tied to La^*'s via forward; not blocking."
+ }
+}

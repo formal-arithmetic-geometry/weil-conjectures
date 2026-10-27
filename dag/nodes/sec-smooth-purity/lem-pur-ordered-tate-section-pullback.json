@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-ordered-tate-section-pullback",
+ "kind": "statement",
+ "title": "Section coherence of normalized ordered Tate pullback",
+ "statement": "Let A be a commutative ring with N=0 in A and let t be normalized ordinary finite Tate transport [def-asd-ordinary-finite-p1-arrows]. Let p:Z→X and s:X→Z satisfy s≫p=id_X, and assume N is invertible on X and Z. For every d≥0 use the ordered shifted coefficient L_T(d) and its pullback comparison c_f:Lf*L_target(d)≅L_source(d) of [def-amb-vector-integration]. Then c_s^{-1} followed by Ls*(c_p^{-1}) followed by the canonical section pullback compositor equals id_{L_X(d)}. This involves only coefficient pullbacks and no trace or exceptional inverse image.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-vector-integration",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved private coefficient_comp calculation in OrderedTateExactOpenComposition, accessed by a proof-only import all to two identity morphisms. Cancel the coefficient comparison, and use the left unit law for the derived pullback compositor and naturality of leftDerivedUpperStarId. Since the coefficient comparison is invertible, this forces its identity-morphism component to equal leftDerivedUpperStarId on the ordered Tate coefficient. This is identity_comparison and coefficient_identity in the Lean proof.",
+   "uses": [
+    "lem-pur-ordered-tate-exact-open-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the same composition theorem to s, p and the composite named identity via hs.symm. Substitute the identity component just proved. Expand the canonical section compositor as the inverse of the named composition comparison followed by leftDerivedUpperStarId. Cancel the compositor with its inverse, combine mapped inverse/hom coefficient comparisons using functoriality, and cancel the remaining section coefficient comparison. The result is the identity, without induction or additional coherence obligations.",
+   "uses": [
+    "lem-pur-ordered-tate-exact-open-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ordered-tate-exact-open-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/OrderedTateSectionPullback.lean",
+  "place": "S6: access the complete private arbitrary-composition lemma coefficient_comp in OrderedTateExactOpenComposition by import all, derive its identity component from invertibility and the derived unit law, then cancel the section compositor.",
+  "group": "S6",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback of ordered Tate tensor powers along a retraction and a section agrees with the composition isomorphism of derived pullbacks",
+   "results": "Generic scheme module pullbackComp and categorical Over.pullbackComp; no normalized finite Tate derived coefficient section law.",
+   "date": "2026-10-26",
+   "verdict": "no matching specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction counit transpose under a Cartesian base change of affine space and a coordinate isomorphism",
+   "results": "AffineSpace.homOverEquiv, homOfVector, map_over, map_Spec_map; no derived trace equation. A separate right-adjoint-uniqueness query found the generic Mathlib adjunction lemmas.",
+   "date": "2026-10-26",
+   "verdict": "no matching concrete comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "affineDiagonalPresentedTranspose|vectorIntegrationBaseCoefficientPullback|leftDerivedUpperStarCompSectionIso in Mathlib, WeilConjectures, Sheaf; blueprint_refs search ordered Tate section pullback and presented transpose self product",
+   "results": "SectionCoordinateCounitNormalization.affineCoordinateCounit_baseChange supplies the tower counit transpose. No presented self-product equation or ordered Tate section equation found. Both blueprint searches returned zero matches.",
+   "date": "2026-10-26",
+   "verdict": "two strictly simpler transport steps remain"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalTraceRestriction",
+  "date": "2026-10-26",
+  "group": "W9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Section coherence of normalized ordered Tate pullback",
+   "via": [
+    "lem-pur-affine-diagonal-trace-restriction",
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrderedTateSectionPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrderedTateSectionPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.orderedTateSectionPullback",
+  "statement": "theorem orderedTateSectionPullback (A : Type (u + 1)) [CommRing A]\n    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {X Z : Scheme.{u}} (p : Z ⟶ X) (s : X ⟶ Z) (hs : s ≫ p = 𝟙 X)\n    (hX : IsUnit (N : Γ(X, ⊤))) (hZ : IsUnit (N : Γ(Z, ⊤))) (d : ℕ) :\n    (vectorIntegrationBaseCoefficientPullback A N hA t s hZ d).inv ≫\n      (ordinaryFinitePullback A s).map\n        (vectorIntegrationBaseCoefficientPullback A N hA t p hX d).inv ≫\n      (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) s p hs).hom.app\n        (affineLinearBaseCoefficient A N hA X d) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T203656-L-2839534",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261027T012937-L-2350440",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

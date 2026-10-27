@@ -1,0 +1,110 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-effectivity",
+   "place": "Proof paragraph 3: explicit two-term free tensor model, made functorial by localization",
+   "via": [
+    "lem-coef-normalized-dvr-bounded-free-cone",
+    "lem-coef-normalized-dvr-adic-cone-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVRBoundedFreeCone",
+  "date": "2026-10-25",
+  "group": "V8"
+ },
+ "mathlib_match": null,
+ "kind": "definition",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "the bounded finite-free tensor calculation, before applying it to the normalized DVR tower"
+ },
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mappingCone.*(Preserves|IsTriangulated)|scalar.*cone|smulArrow",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching scalar-cone localization theorem; source-library alternatives require additional monoidal hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of scalar multiplication induces an exact functor on the derived category and preserves countable products",
+   "results": "8 hits: CochainComplex.mappingCone, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CochainComplex.mappingCone.mapTrianglehIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CochainComplex.mappingCone.mapTriangleIso, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapExtLinearMap",
+   "date": "2026-10-25",
+   "verdict": "No matching scalar-cone localization theorem; source-library alternatives require additional monoidal hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"Additive\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching scalar-cone localization theorem; source-library alternatives require additional monoidal hypotheses."
+  }
+ ],
+ "id": "def-coef-linear-scalar-cone",
+ "title": "Universal localization of the explicit linear scalar cone",
+ "statement": "Using the scalar-multiplication arrow interface of [lem-coef-strict-normalized-adic-cone-limit], for a ring R, an R-linear abelian category A with a derived category, and a scalar s : R, define cochain to send X to Cone(s times the identity of X), and a chain map to the diagonal cone map. The localized functor derived is the universal localization of cochain followed by Q at quasi-isomorphisms. The comparison is its canonical factorization isomorphism Q followed by derived to cochain followed by Q. Quasi-isomorphism invariance is proved by the mapping-cone distinguished triangles and two-isomorphisms property. For a strict normalized tower T and exponent n, augmentation is explicitly rho followed by desc and the normalized cokernel descent on T_(m+n). Its localized form derivedAugmentation is the canonical factorization comparison followed by Q of augmentation.",
+ "stmt_deps": [
+  "lem-coef-strict-normalized-adic-cone-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LinearScalarCone",
+  "file": "lean/Sheaf/Algebra/Homology/LinearScalarCone.lean",
+  "declaration": "CochainComplex.LinearScalarCone.derived",
+  "declarations": [
+   "CochainComplex.LinearScalarCone.cochain",
+   "CochainComplex.LinearScalarCone.inverts",
+   "CochainComplex.LinearScalarCone.comparison",
+   "CochainComplex.LinearScalarCone.augmentation",
+   "CochainComplex.LinearScalarCone.derivedAugmentation"
+  ],
+  "statement": "def derived : DerivedCategory A ⥤ DerivedCategory A",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261025T164621-L-1042801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261025T164621-L-1042801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

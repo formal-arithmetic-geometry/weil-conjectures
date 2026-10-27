@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-simple-hyperplane-splitting-criterion",
+ "kind": "statement",
+ "title": "Complete-reducibility criterion from splitting simple hyperplanes",
+ "statement": "Let $F$ be an algebraically closed field of characteristic zero [def-weil-field, def-weil-algebraic-closure]. A rational module for an affine finite-type $F$-group scheme $G$ [def-sc-group-scheme, def-weil-finite-type-morphism] means an $F$-vector space $V$ with a coaction $V\\to V\\otimes_F F[G]$ satisfying coassociativity and the counit identity. A submodule is a subspace whose coaction takes values in its tensor product with $F[G]$. A simple module is nonzero and has no proper nonzero submodule. An equivariant linear map means one commuting with coactions, equivalently with the actions after every commutative $F$-algebra extension. Suppose every character $G\\to\\mathbf G_m$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga], is the identity-valued group-scheme morphism. Assume that for every finite-dimensional rational module $U$ and every simple rational submodule $W\\subseteq U$ with $\\dim_F(U/W)=1$, there is a rational submodule $L\\subseteq U$ with $U=W\\oplus L$. Then every finite-dimensional rational $G$-module $V$ is a finite direct sum of simple rational submodules, allowing the empty sum for $V=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Subspaces, inverse images and quotients used below carry their induced rational coactions: for a submodule $T\\subseteq M$, set $\\rho_{M/T}(m+T)=(q\\otimes1)\\rho_M(m)$, which is independent of the lift since $\\rho_M(T)\\subseteq T\\otimes C$, where $C=F[G]$. The two coaction identities descend. Kernels of equivariant maps and inverse images of submodules are submodules: in bases adapted to a kernel, tensoring with the vector space $C$ preserves that kernel, so the coaction identity gives the assertion. These observations also apply to all scalar extensions; bases adapted to subspaces show exactness after extension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+   }
+  },
+  {
+   "text": "First prove by strong induction on $n=\\dim_F U$ that every rational submodule $W\\subseteq U$ with $\\dim(U/W)=1$ has a rational complement. There is no such pair for $n=0$. If $W=0$, take $U$ as complement. If $W$ is simple, use the hypothesis of the item. Otherwise choose a proper submodule $T\\subsetneq W$ of maximal dimension. Because $W\\ne0$ is not simple, such a $T$ can be chosen nonzero: the finite set of dimensions contains that of a proper nonzero submodule. The induced module $W/T$ is nonzero and simple, since the inverse image of any proper nonzero submodule would contradict maximality of $\\dim T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+   }
+  },
+  {
+   "text": "The pair $W/T\\subseteq U/T$ has simple hyperplane $W/T$, since the natural map $(U/T)/(W/T)\\to U/W$ sends $(u+T)+(W/T)$ to $u+W$ and is a linear isomorphism. The assumed splitting therefore gives $U/T=(W/T)\\oplus Q$, with $\\dim Q=1$. Let $P\\subseteq U$ be the inverse image of $Q$. Then $P/T=Q$, $P\\cap W=T$, and $\\dim P=\\dim T+1<n$ (because $T\\subsetneq W$). The induction hypothesis applied to the hyperplane $T\\subseteq P$ gives $P=T\\oplus L$ with $L$ rational and one-dimensional. Now $L\\cap W\\subseteq P\\cap W=T$ and $L\\cap T=0$, hence $L\\cap W=0$; dimensions give $U=W\\oplus L$. This closes the strong induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+   }
+  },
+  {
+   "text": "For an arbitrary finite-dimensional rational module $V$ and submodule $W$, the cases $W=0$ and $W=V$ have complements $V$ and $0$. Assume $0\\ne W\\ne V$. Apply [lem-sfb-rational-linear-hom] to obtain the finite-dimensional rational module $H=\\operatorname{Hom}_F(V,W)$ with $(g\\cdot f)(v)=g f(g^{-1}v)$ after every algebra extension. Applying the same node to $W,W$ gives the conjugation action on $E=\\operatorname{End}_F(W)$. Restriction $r:H\\to E$ is equivariant: for $w\\in W_A$, $r(g\\cdot f)(w)=g f(g^{-1}w)=(g\\cdot r(f))(w)$.",
+   "uses": [
+    "lem-sfb-rational-linear-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+   }
+  },
+  {
+   "text": "The line $F\\operatorname{id}_W\\subseteq E$ is fixed under conjugation, because $g\\operatorname{id}_{W_A}g^{-1}=\\operatorname{id}_{W_A}$. Put $H_1=r^{-1}(F\\operatorname{id}_W)$ and $H_0=\\ker r$; these are rational submodules. Choose a basis of $W$, extend it to a basis of $V$, and define $p:V\\to W$ to be the identity on the first basis and zero on the added vectors. Then $r(p)=\\operatorname{id}_W\\ne0$, so the map $H_1\\to F$ sending $f$ to its unique scalar $a$ in $f|_W=a\\operatorname{id}_W$ is surjective with kernel $H_0$. Thus $\\dim(H_1/H_0)=1$. The hyperplane result just proved gives $H_1=H_0\\oplus L$ with $L$ a one-dimensional rational submodule.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+   }
+  },
+  {
+   "text": "Choose $0\\ne f\\in L$. The action on the rational line $L$ defines a character $\\chi:G\\to\\mathbf G_m$: in the basis $f$, write $g(f\\otimes1)=\\chi_A(g)(f\\otimes1)$ for every commutative $F$-algebra $A$. These scalars are units because $g^{-1}$ acts inversely, are natural in $A$, and multiply under the group law. Equivalently the coaction is $f\\mapsto f\\otimes c$ with $c\\in F[G]^\\times$, $\\Delta(c)=c\\otimes c$ and $\\epsilon(c)=1$, giving the coordinate morphism $F[t,t^{-1}]\\to F[G]$, $t\\mapsto c$. By the no-character hypothesis this character is trivial. Hence $f$ is fixed by the Hom action, and [lem-sfb-rational-linear-hom] implies that $f:V\\to W$ is equivariant.",
+   "uses": [
+    "lem-sfb-rational-linear-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+   }
+  },
+  {
+   "text": "Write $f|_W=a\\operatorname{id}_W$. Since $L\\cap H_0=0$ and $f\\ne0$, we have $a\\ne0$. Then $K=\\ker f$ is a rational submodule. For each $v\\in V$,\n$$v=a^{-1}f(v)+(v-a^{-1}f(v)),$$\nwhere the first summand lies in $W$ and the second in $K$, since $f$ acts by $a$ on $W$. If $w\\in W\\cap K$, then $0=f(w)=aw$, so $w=0$. Thus $V=W\\oplus K$. We have proved that every rational submodule of every finite-dimensional rational module has a rational complement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+   }
+  },
+  {
+   "text": "Finally induct on $\\dim_F V$ to obtain the required finite simple decomposition. For $V=0$ use the empty sum. For $V\\ne0$, choose a nonzero rational submodule $S$ of least positive dimension (the set of dimensions is nonempty because it contains $\\dim V$). Every proper nonzero rational submodule of $S$ would have smaller dimension, so $S$ is simple. The complement property gives $V=S\\oplus K$ with $\\dim K<\\dim V$. Decompose $K$ by induction and adjoin $S$. The submodules in that decomposition are rational submodules of $V$ by restriction of the coaction. This proves exactly the conclusion, including the zero-dimensional case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, implication (c) to (a), printed pp.476-477; characteristic zero is the standing hypothesis on printed p.475."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-linear-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 22.40 (c) to (b) to (a), printed pp.476-477; with the induction and zero cases written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "codim.*[Ss]imple|[Ss]imple.*codim|[Ss]emisimple.*[Hh]yperplane",
+   "results": "{\"t\": \"2026-10-23T13:56:33Z\", \"tool\": \"grep\", \"query\": \"codim.*[Ss]imple|[Ss]imple.*codim|[Ss]emisimple.*[Hh]yperplane\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\"], \"digest\": \"126278abbf0233ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Maschke requires a finite abstract group; complemented-submodule-lattice characterizations assume all submodules have complements and do not reduce to simple codimension-one submodules across rational representations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimpleModule\", \"codim\"",
+   "results": "{\"t\": \"2026-10-23T13:56:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimpleModule\\\", \\\"codim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Maschke requires a finite abstract group; complemented-submodule-lattice characterizations assume all submodules have complements and do not reduce to simple codimension-one submodules across rational representations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete reducibility of all rational representations follows from complements of simple codimension one submodules",
+   "results": "{\"t\": \"2026-10-23T13:56:33Z\", \"tool\": \"leansearch\", \"query\": \"Complete reducibility of all rational representations follows from complements of simple codimension one submodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSemisimpleModule.mk\", \"Module.End.isSemisimple_iff'\", \"Module.End.isSemisimple_iff\", \"IsSemisimpleModule.toComplementedLattice\", \"IsSemisimpleModule.isCoatomic_submodule\", \"isSemisimpleModule_iff\", \"Representation.IsIrreducible.toIsSimpleOrder\", \"Submodule.complete_of_finiteDimensional\"], \"digest\": \"b3c23412c82a368d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Maschke requires a finite abstract group; complemented-submodule-lattice characterizations assume all submodules have complements and do not reduce to simple codimension-one submodules across rational representations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic group with no characters, complete reducibility follows if every simple submodule of codimension one has a complement",
+   "results": "{\"t\": \"2026-10-23T13:56:37Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic group with no characters, complete reducibility follows if every simple submodule of codimension one has a complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.Submodule.exists_isCompl\", \"Representation.IsIrreducible\", \"FDRep.simple_iff_end_is_rank_one\", \"FDRep.simple_iff_char_is_norm_one\", \"Representation.is_simple_module_iff_irreducible_ofModule\", \"Representation.IsIrreducible.toIsSimpleOrder\", \"Representation.isIrreducible_iff\", \"Representation.irreducible_iff_isSimpleModule_asModule\"], \"digest\": \"8a709b6c9306cf89\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Maschke requires a finite abstract group; complemented-submodule-lattice characterizations assume all submodules have complements and do not reduce to simple codimension-one submodules across rational representations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl complete reducibility criterion reduction to splitting extensions of a trivial one dimensional representation by a simple module",
+   "results": "{\"t\": \"2026-10-23T13:56:38Z\", \"tool\": \"leanfinder\", \"query\": \"Weyl complete reducibility criterion reduction to splitting extensions of a trivial one dimensional representation by a simple module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.isSimpleModule_weylGroupRootRep\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"IsIsotypic.linearEquiv_finsupp\", \"IsIsotypic.linearEquiv_fun\", \"IsIsotypic.submodule_linearEquiv_fun\", \"LieModule.IsIrreducible\", \"isotypicComponent_eq_top_iff\", \"IsIsotypicOfType.of_isotypicComponent_eq_top\"], \"digest\": \"e51b7fb9cda5fefa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Maschke requires a finite abstract group; complemented-submodule-lattice characterizations assume all submodules have complements and do not reduce to simple codimension-one submodules across rational representations"
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|codim",
+   "results": "{\"t\": \"2026-10-23T15:00:12Z\", \"tool\": \"grep\", \"query\": \"hyperplane|codim\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite abstract groups (Maschke), irreducibility, or characterizations of already semisimple modules. They do not deduce complete reducibility from splitting simple rational hyperplanes; the second tensor-category phrasing does not change that conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete reducibility criterion splitting extensions of the trivial representation by simple rational modules",
+   "results": "{\"t\": \"2026-10-23T15:00:13Z\", \"tool\": \"leansearch\", \"query\": \"Complete reducibility criterion splitting extensions of the trivial representation by simple rational modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.irreducible_iff_isSimpleModule_asModule\", \"IsSemisimpleModule.of_sSup_simples_eq_top\", \"Representation.is_simple_module_iff_irreducible_ofModule\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"IsSemisimpleModule.exists_simple_submodule\", \"IsSemisimpleModule.exists_linearEquiv_dfinsupp\", \"IsSemisimpleModule\", \"instIsSemisimpleModuleOfIsSimpleModule\"], \"digest\": \"60bf1d10cf57f1a3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite abstract groups (Maschke), irreducibility, or characterizations of already semisimple modules. They do not deduce complete reducibility from splitting simple rational hyperplanes; the second tensor-category phrasing does not change that conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimpleModule\", \"codim\"",
+   "results": "{\"t\": \"2026-10-23T15:00:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimpleModule\\\", \\\"codim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite abstract groups (Maschke), irreducibility, or characterizations of already semisimple modules. They do not deduce complete reducibility from splitting simple rational hyperplanes; the second tensor-category phrasing does not change that conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every rational representation is completely reducible if every simple invariant hyperplane in every rational representation has a complement and the group has no characters",
+   "results": "{\"t\": \"2026-10-23T15:00:17Z\", \"tool\": \"leanfinder\", \"query\": \"Every rational representation is completely reducible if every simple invariant hyperplane in every rational representation has a complement and the group has no characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IsIrreducible\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"FDRep.simple_iff_char_is_norm_one\", \"Rep.instProjective\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"Representation.isIrreducible_iff\", \"FDRep.simple_iff_end_is_rank_one\", \"Representation.IsIrreducible.toIsSimpleOrder\"], \"digest\": \"b1820f98715d4fd4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite abstract groups (Maschke), irreducibility, or characterizations of already semisimple modules. They do not deduce complete reducibility from splitting simple rational hyperplanes; the second tensor-category phrasing does not change that conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semisimplicity can be tested by complements of simple submodules with one dimensional quotient in a tensor category of group representations",
+   "results": "{\"t\": \"2026-10-23T15:02:03Z\", \"tool\": \"leanfinder\", \"query\": \"Semisimplicity can be tested by complements of simple submodules with one dimensional quotient in a tensor category of group representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"FDRep.simple_iff_end_is_rank_one\", \"isSemisimpleModule_iff_exists_linearEquiv_dfinsupp\", \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"IsIsotypic.submodule_linearEquiv_fun\", \"Representation.is_simple_module_iff_irreducible_ofModule\", \"IsIsotypic.linearEquiv_finsupp\", \"IsIsotypic.linearEquiv_fun\"], \"digest\": \"22692f000b23a478\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite abstract groups (Maschke), irreducibility, or characterizations of already semisimple modules. They do not deduce complete reducibility from splitting simple rational hyperplanes; the second tensor-category phrasing does not change that conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-characteristic-zero-complete-reducibility",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Complete-reducibility criterion from splitting simple hyperplanes.",
+   "via": [
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-simple-hyperplane-splitting-criterion",
+  "worker": "stage1",
+  "summary": "Followed Milne Lemma 22.40, proving general hyperplane splitting by strong dimension induction and arbitrary complements through scalar restriction of the rational Hom representation. Added only the rational Hom construction as a statement-only dependency; all induction, restriction, line-character and kernel arguments are explicit. Handled W=0 separately to avoid a zero scalar-identity line. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Complete-reducibility criterion from splitting simple hyperplanes. Steps 1-3 and 4-8 supply the complete-reducibility criterion beneath the recorded characteristic-zero representation-theoretic prerequisite; the current latest direct-images proof (3) is the ancestor route, not a replacement of a unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-803ec5917",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-803ec5917 (reviewer sub-agent of L); spot-checked: The item statement and stmt_deps are byte-identical to the base (Q141 snapshot) and match Milne iAG Lemma 22.40 (c)=>(a), printed pp.476-477, which I read in full; the hypothesis X(G)=0 appears as 'every character to G_m is trivial'. Steps 2-3 are Milne's (c)=>(b), done as an explicit strong induction: T is a maximal proper submodule of W, so it is nonzero and W/T is simple; P is the preimage of Q with P∩W=T and dim P=dim T+1<n; L∩W=0. Steps 4-7 are Milne's (b)=>(a) on p.477: r:Hom(V,W)->End(W) is equivariant because W_A is stable; dim H_1/H_0=1 via a basis retraction; the line L has coaction f->f⊗c with c group-like and invertible since S(c)c=ε(c)=1, so c=1 by the no-character hypothesis; f is then equivariant, and ker f complements W because a≠0. Step 8 gives the simple decomposition by minimal-dimension induction, with the empty sum for V=0. proof_deps equals the union of the step uses. There is no SGA. The new node lem-sfb-rational-linear-hom is correct: H⊗A=Hom_A(V_A,W_A) for finite-dimensional V; the conjugation action is natural in A and so comes from a coaction; fixed vectors are exactly the equivariant maps (checked at the universal point); V=0, W=0 and the trivial group work. Its sources are Milne Remark 4.1 (p.83) and p.477, both verified. It is not a clause of the item. No duplicate exists: I read the statements of comodule-dictionary (trivial and tensor coactions only), simple-module-dual-highest-weight (contragredient of a simple module only), rational-fixed-space-base-change, char-zero-differentiation-hom and the O_X-module Hom nodes. Advisory only: step 6 is flagged elementary although it cites the node; the new node uses the coaction-induced action without citing comodule-dictionary, which would not fit anyway since that node needs finite type while the new node allows any affine G."
+ }
+}

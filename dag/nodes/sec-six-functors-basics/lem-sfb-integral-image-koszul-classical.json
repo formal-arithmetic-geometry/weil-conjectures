@@ -1,0 +1,174 @@
+{
+ "id": "lem-sfb-integral-image-koszul-classical",
+ "kind": "statement",
+ "title": "Classical abelian cohomology of integral-image Koszul complexes",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with norm-topological valuation integers $B=\\mathcal O_E$ and uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension, det-pe-derived-nakayama-resolution]. On a Noetherian scheme $S$ (quasi-compact and locally Noetherian) [def-pc-scheme, def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth], use internal modules over $B_S=p_S^*C(-,B)$ [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. For any morphism $f:L\\to M$ between modules separately having finite constant scalar local models [sk-def-sfb-constructible], take the actual abelian image $I=\\operatorname{im}f$. For every $n\\ge1$, put $C_n(I)=[I\\xrightarrow{\\pi^n}I]$ in degrees $-1,0$, with the sectionwise scalar specified by the resolution theorem. Every abelian cohomology sheaf $H^q C_n(I)$ is in the essential image of the abelian comparison inverse image $\\nu_S^*$ [def-weil-pbc-site-comparison-morphism]. Thus it is isomorphic to $\\nu_S^*F_q$ for some abelian etale sheaf $F_q$. There is no support chain, pullback, or derived direct image in this statement. Empty schemes, zero maps and torsion images are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 6.2(3), Corollary 6.11, Section 7.1.1 and Proposition 7.1; original local-comparison proof steps 1 and 2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "det-pe-derived-nakayama-resolution"
+ ],
+ "proof": [
+  {
+   "text": "$L$ and $M$ are constructible on $S$ using the single stratum $S$ in [sk-def-sfb-constructible]. The Noetherian constructible-heart theorem applies with coefficient $B=\\mathcal O_E$ and gives closure under kernels and cokernels of arbitrary maps. Apply it first to $f$ and then to $M\\to\\operatorname{coker}f$. Thus the actual abelian image $I=\\ker(M\\to\\operatorname{coker}f)$ is constructible. This uses neither constant entries for $f$ nor closedness of its topological image. For an abstract finite extension E, embed it into an algebraic closure and transport the valuation integers and scalar models along the resulting coefficient isomorphism before applying the embedded-coefficient clause of the recorded heart theorem.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sfb-noetherian-scalar-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 6.2(3), Lemma 6.10 and Corollary 6.11; image obtained by two kernel/cokernel operations."
+   }
+  },
+  {
+   "text": "The scheme $S$ is qcqs: quasi-compactness is an assumption and locally Noetherian schemes are quasi-separated. Apply the finite-model quotient theorem to $I$. For every $n\\ge1$, $A_n=B/\\pi^n$ is a finite discrete ring, and $I[0]\\otimes^L_{B_S}(A_n)_S$ has finite constructible ordinary $A_n$-module cohomology, only in degrees $-1,0$. The principal-reduction cone calculus identifies its underlying $B_S$-complex with $C_n(I)=[I\\xrightarrow{\\pi^n}I]$, using the actual quotient map. Constructible comparison on the qcqs scheme $S$ says that each of these two cohomology sheaves is classical. Consequently there are étale $A_n$-module sheaves $F_{-1},F_0$ whose comparison pullbacks are $H^{-1}C_n(I),H^0C_n(I)$. No assertion about the image of the reduced map is used.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-pe-principal-reduction-cone-calculus",
+    "sk-thm-pe-constructible-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 7.1.1 and Proposition 7.1; finite-quotient scalar calculation; Stacks Tags 09AK and 099V."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "lem-sfb-noetherian-scalar-constructible-heart",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-sfb-finite-model-sheaf-quotient-constructible",
+  "lem-pe-principal-reduction-cone-calculus",
+  "sk-thm-pe-constructible-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 6.2(3), Corollary 6.11, Section 7.1.1 and Proposition 7.1; original local-comparison proof steps 1 and 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image pro etale comparison nonpositive for a bounded classical complex",
+   "results": "{\"t\": \"2026-10-25T06:29:13Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image pro etale comparison nonpositive for a bounded classical complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsLE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"4f1e6e21c5e061b1\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.isZero_double_X",
+   "results": "{\"t\": \"2026-10-25T06:31:37Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.isZero_double_X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomologicalComplex.isZero_double_X\"], \"digest\": \"3c0ed3379a4f29e8\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*HomologyFunctorIso",
+   "results": "{\"t\": \"2026-10-25T06:31:37Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategory.*HomologyFunctorIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex with classical abelian cohomology has invertible pro etale comparison counit",
+   "results": "{\"t\": \"2026-10-25T06:55:00Z\", \"tool\": \"leansearch\", \"query\": \"A bounded complex with classical abelian cohomology has invertible pro etale comparison counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_hom\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f\", \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_inv\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_inv_app_f\", \"HomologicalComplex.dgoEquivHomologicalComplex_counitIso\", \"HomologicalComplex.opEquivalence_counitIso\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\"], \"digest\": \"adf832dd448ce5ea\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "classical.*(Koszul|koszul)|Koszul.*classical",
+   "results": "{\"t\": \"2026-10-25T06:55:46Z\", \"tool\": \"grep\", \"query\": \"classical.*(Koszul|koszul)|Koszul.*classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classical cohomology of a scalar two term complex is preserved by open extension zero closed direct image and pullback",
+   "results": "{\"t\": \"2026-10-25T06:55:47Z\", \"tool\": \"leansearch\", \"query\": \"Classical cohomology of a scalar two term complex is preserved by open extension zero closed direct image and pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instQuasiIsoExtendMap\", \"HomologicalComplex.extend.instHasHomology\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left\", \"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass\", \"CochainComplex.HomComplex.CohomologyClass.mk_zero\", \"groupCohomology.instPreservesZeroMorphismsRepCochainComplexModuleCatNatCochainsFunctor\", \"CategoryTheory.ShortComplex.hasHomology_of_preserves\", \"CategoryTheory.ShortComplex.hasRightHomology_of_preserves\"], \"digest\": \"7bf8c6721c782e0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "results": "{\"t\": \"2026-10-25T06:55:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.essImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage\", \"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.obj_mem_essImage\", \"CategoryTheory.Functor.EssSurj.mem_essImage\", \"CategoryTheory.Functor.EssSurj.mk\", \"CategoryTheory.Functor.toEssImage\", \"CategoryTheory.Functor.essImage.ofIso\"], \"digest\": \"a1dbd04fd41f719d\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a uniformizer Koszul complex of the image of a map of constructible integral sheaves is classical",
+   "results": "{\"t\": \"2026-10-25T06:55:48Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a uniformizer Koszul complex of the image of a map of constructible integral sheaves is classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"Algebra.H1Cotangent\", \"Algebra.Extension.h1Cotangent\\u03b9_apply\", \"Algebra.H1Cotangent.isLocalizedModule\", \"Algebra.Extension.H1Cotangent\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.Extension.H1Cotangent.map\"], \"digest\": \"10ecae7a40fb68db\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageKoszulComparisonNonpositive",
+  "date": "2026-10-25",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Proof of compactification coherence: local comparison prerequisite, source-image constructibility and finite reductions (original steps 1--2).",
+   "via": [
+    "lem-sfb-supported-image-koszul-comparison-nonpositive"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralImageKoszulClassical",
+  "file": "lean/Sheaf/Paper/IntegralImageKoszulClassical.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_image_koszul_classical",
+  "statement": "theorem integral_image_koszul_classical\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]\n    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]\n    (S : Scheme.{u}) [CompactSpace S] [IsLocallyNoetherian S]\n    (L M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})\n      (condensedRingObj (DerivedNakayama.integerRing ℓ E) S)) (f : L ⟶ M)\n    (hL : HasFiniteConstantLocalModel (DerivedNakayama.integerRing ℓ E) S L)\n    (hM : HasFiniteConstantLocalModel (DerivedNakayama.integerRing ℓ E) S M)\n    (n : ℕ) (hn : 1 ≤ n) :\n    ∀ q : ℤ, (comparisonUpperStar Ab.{u + 1} S).essImage\n      ((HomologicalComplex.double\n        (((DerivedNakayama.scalarOnModules ℓ E S\n          ((DerivedNakayama.derived_nakayama_resolution ℓ E).choose ^ n)).app\n            (image f)).hom) (c := ComplexShape.up ℤ) (i₀ := -1) (i₁ := 0)\n        (by decide)).homology q)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T095316-L-3353513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T095316-L-3353513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

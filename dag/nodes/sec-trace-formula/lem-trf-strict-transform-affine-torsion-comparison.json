@@ -14,10 +14,9 @@
  ],
  "proof": [
   {
-   "text": "Set $S=\\{1,a,a^2,\\ldots\\}$, $L=A_a$ and $N=M\\otimes_A B$. By [def-nagata-blowup-chart-ring], $B$ is an $A$-subalgebra of $L$, so its inclusion $i:B\\to L$ is injective. It is a localization of the $A$-module $B$ at $S$, in the explicit sense of [lem-weil-pbc-localization-tensor-product]: (a) every $a^n$ acts bijectively on $L$, since $a$ is invertible there; (b) every element of $L$ is $c/a^r$ with $c\\in A$, and hence is $a^{-r}i(\\overline c)$ for the structural image $\\overline c\\in B$; (c) $i(b)=i(b')$ implies $b=b'$ by the subalgebra inclusion, so the equality criterion holds with $s=1$. The ring map $A\\to L$ is a localization at $S$ by [def-weil-ring-localization-away]. These statements also hold when $a$ is nilpotent and $L=B=0$.",
+   "text": "Put B = A[I/a] and L = A_a using [def-nagata-blowup-chart-ring, def-weil-ring-localization-away], and S = powers(a). The inclusion i : B → L is IsLocalizedModule S: map_units is inherited from A → L; a fraction numerator c in A comes from algebraMap A B c, so the surj condition is inherited too; and i(b)=i(b′) implies b=b′, giving exists_of_eq with denominator 1. No hypothesis on a or x being regular is needed.",
    "uses": [
     "def-nagata-blowup-chart-ring",
-    "lem-weil-pbc-localization-tensor-product",
     "def-weil-ring-localization-away"
    ],
    "elementary": true,
@@ -27,23 +26,11 @@
    }
   },
   {
-   "text": "Take the module localization $\\lambda:M\\to M_a$, $m\\mapsto m/1$, of [def-weil-pbc-module-localization-away]. Apply [lem-weil-pbc-localization-tensor-product] with base ring $A$, localization algebra $L$, module pair $(M,B)$, localized pair $(M_a,L)$ and maps $(\\lambda,i)$; Step 1 checks the second map's hypotheses. It says that $N\\to M_a\\otimes_L L$, $m\\otimes b\\mapsto(m/1)\\otimes i(b)$, is a localization at $S$. The balanced map $M_a\\otimes_L L\\to M_a$, $v\\otimes t\\mapsto tv$, has inverse $v\\mapsto v\\otimes1$: the two compositions are the identity because $tv\\otimes1=v\\otimes t$ and pure tensors generate [def-weil-pbc-module-tensor-product]. Thus the composite $j:N\\to M_a$, $j(m\\otimes b)=i(b)(m/1)$, has the same localization properties (a)--(c). Define $u:M\\to N$ by $u(m)=m\\otimes1$, using the same tensor universal property. The formula gives $ju=\\lambda$.",
+   "text": "By the tensor-localization result [lem-weil-pbc-localization-tensor-product], in its Mathlib IsLocalizedModule.rTensor form, i tensor id_M is a localization of B tensor_A M at S. Precompose with tensor commutativity [def-weil-pbc-module-tensor-product] to obtain the localization f : M tensor_A B → L tensor_A M. The latter target is also the localization of M through lambda(m)=1 tensor m, by IsLocalization.tensorProduct_isLocalizedModule; this is a realization of [def-weil-pbc-module-localization-away].",
    "uses": [
-    "def-weil-pbc-module-localization-away",
     "lem-weil-pbc-localization-tensor-product",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080H, lemma-strict-transform-different-centers, proof of (2), affine algebra paragraph."
-   }
-  },
-  {
-   "text": "We spell out the kernel and cokernel assertion about $u$ in Tag 080H. If $u(m)=0$, then $m/1=ju(m)=0$; the fraction criterion in [def-weil-pbc-module-localization-away] gives $a^s m=0$ for some $s\\geq0$. For $z\\in N$, write $j(z)=m/a^r$ in $M_a$. Then $j(a^r z-u(m))=0$. Property (c) of the localization $j$ in Step 2, as stated in [lem-weil-pbc-localization-tensor-product], gives $a^k(a^r z-u(m))=0$ for some $k\\geq0$. Consequently $a^{k+r}z=u(a^km)$. Hence every element of $\\ker u$ is killed by a power of $a$, and every element of $N$ has a power-of-$a$ multiple in $\\operatorname{im}u$.",
-   "uses": [
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-localization-tensor-product"
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization-away"
    ],
    "elementary": true,
    "source": {
@@ -52,9 +39,22 @@
    }
   },
   {
-   "text": "If $z\\in\\Gamma_{(xa)}(N)$, choose $n\\geq1$ with $(xa)^nz=0$ [def-nagata-power-torsion]. By Step 3 choose $r\\geq0$ and $m\\in M$ with $a^rz=u(m)$. Then $u(x^na^nm)=x^na^{n+r}z=a^r(xa)^nz=0$. The kernel assertion of Step 3 gives $s\\geq0$ such that $a^sx^na^nm=0$. Commutativity rewrites this as $x^n(a^{s+n}m)=0$. Since $\\Gamma_{(x)}(M)=0$, its definition [def-nagata-power-torsion] gives $a^{s+n}m=0$. Therefore $a^{s+n+r}z=u(a^{s+n}m)=0$, proving $z\\in\\Gamma_{(a)}(N)$. Conversely, if $a^qz=0$ for some $q\\geq1$, then $(xa)^qz=x^qa^qz=0$. The two submodules consequently have the same elements. The definition permits exponent zero; replacing a zero exponent by one gives the positive-exponent convention of the statement without changing either submodule.",
+   "text": "The hypothesis Gamma_x(M)=0 [def-nagata-power-torsion] implies that x acts injectively: if xm=0, exponent 1 places m in Gamma_x(M), so m=0. Applying Mathlib IsSMulRegular.of_isLocalizedModule to lambda from Step 2 shows that x acts injectively on L tensor_A M too. Every power x^n therefore acts injectively there. This is the standard preservation of regular scalar multiplication by localization, applied to the localization realization of [def-weil-pbc-module-localization-away].",
    "uses": [
-    "def-nagata-power-torsion"
+    "def-nagata-power-torsion",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080H, lemma-strict-transform-different-centers, proof of (2), affine algebra paragraph."
+   }
+  },
+  {
+   "text": "For z killed by (xa)^n, linearity gives (xa)^n f(z)=0. Since a^n acts injectively on the localization target, and x^n acts injectively by Step 3, f(z)=0. IsLocalizedModule.eq_zero_iff for f gives a power a^r with a^r z=0, proving membership in Gamma_a. Conversely a^n z=0 implies (xa)^n z=x^n a^n z=0. Apply [def-nagata-power-torsion] to obtain equality of submodules. All witnesses allow n=0, which forces z=0, so the positive-power convention agrees.",
+   "uses": [
+    "def-nagata-power-torsion",
+    "def-weil-pbc-module-localization-away"
    ],
    "elementary": true,
    "source": {
@@ -65,11 +65,11 @@
  ],
  "proof_deps": [
   "def-nagata-blowup-chart-ring",
-  "def-nagata-power-torsion",
-  "def-weil-pbc-module-localization-away",
-  "def-weil-pbc-module-tensor-product",
   "def-weil-ring-localization-away",
-  "lem-weil-pbc-localization-tensor-product"
+  "lem-weil-pbc-localization-tensor-product",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization-away",
+  "def-nagata-power-torsion"
  ],
  "proof_origin": {
   "by": "document",
@@ -202,5 +202,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261023T110140-L-3655083",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

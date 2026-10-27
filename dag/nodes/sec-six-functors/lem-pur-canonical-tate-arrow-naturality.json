@@ -1,0 +1,276 @@
+{
+ "id": "lem-pur-canonical-tate-arrow-naturality",
+ "kind": "statement",
+ "title": "Naturality and additivity of the canonical Tate Weil arrows",
+ "statement": "Fix the finite-field and coefficient conventions of [def-pur-conventions]: $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$. For a separated finite-type $k_0$-scheme $T_0$ put $T=T_0\\times_{k_0}k$ and $G_T=Lg_{T,\\gamma}^*$, with $g_{T,\\gamma}=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for geometric Frobenius $\\gamma$ [def-pur-scheme-geometric-frobenius]. Let $w_0:T'_0\\to T_0$ be any morphism between separated finite-type $k_0$-schemes, with geometric base change $w:T'\\to T$. At each coefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ put $T_{r,T}=\\Lambda_T(r)$ and let $\\tau_{r,T}:G_TT_{r,T}\\xrightarrow{\\sim}T_{r,T}$ be the roots-of-unity Weil arrow of [def-weil-frobenius-coefficient-twists], with twists of [def-coefficient-twists-detailed]. For $r\\ge0$ let $t_{w,r}:Lw^*T_{r,T}\\cong T_{r,T'}$ be the canonical twist comparison and $C_w:Lw^*G_T\\cong G_{T'}Lw^*$. Then\n$$t_{w,r}Lw^*(\\tau_{r,T})=\\tau_{r,T'}G_{T'}(t_{w,r})C_{w,T_{r,T}}.$$\nFor a coefficient functor $R$, namely finite reduction, integral-to-finite reduction, or integral extension $\\mathcal O_E\\to\\mathcal O_L$ for a finite extension $E\\subseteq L$, let $t_{R,r}:RT_{r,T}\\cong T'_{r,T}$ and $C_R:RG_T\\cong G'_TR$ be its canonical comparisons. Then\n$$t_{R,r}R(\\tau_{r,T})=\\tau'_{r,T}G'_T(t_{R,r})C_{R,T_{r,T}}.$$\nThese equations concern the canonical arrows, including their compatible roots-of-unity inverse systems; at integral level they hold on the specified strict quotient systems and at field level on their localized/common-stage images. For $r,s\\ge0$ let $\\alpha_{r,s,T}:T_{r,T}\\otimes^LT_{s,T}\\xrightarrow{\\sim}T_{r+s,T}$ be the tensor-power identification. Additivity means\n$$\\alpha_{r,s,T}(\\tau_{r,T}\\otimes^L\\tau_{s,T})\\mu_{g_T;T_{r,T},T_{s,T}}=\\tau_{r+s,T}G_T(\\alpha_{r,s,T}).$$\nThe mixed identity is an equation on $T'$: put $\\tau^w_{s,T}=Lw^*(\\tau_{s,T})C_{w,T_{s,T}}^{-1}:G_{T'}Lw^*T_{s,T}\\to Lw^*T_{s,T}$ and $a_{w,r,s}=\\alpha_{r,s,T'}(1\\otimes^Lt_{w,s}):T_{r,T'}\\otimes^LLw^*T_{s,T}\\xrightarrow{\\sim}T_{r+s,T'}$. Then\n$$a_{w,r,s}(\\tau_{r,T'}\\otimes^L\\tau^w_{s,T})\\mu_{g_{T'};T_{r,T'},Lw^*T_{s,T}}=\\tau_{r+s,T'}G_{T'}(a_{w,r,s}).$$ The case $r=0$ is the coefficient-unit arrow. Twists have degree zero; their reassociations with even shifts $[2r],[2s]$ have sign $1$. The roots-of-unity comparisons are those of [def-pur-roots-of-unity-inverse-image], the twist comparisons $t_{w,r}$ those of [det-prop-sfb-cartesian-coefficients-twists], and the tensor-power identifications use the comparison $\\mu$ of [lem-pur-derived-pullback-tensor-iso]. Here finite reduction means the derived coefficient functor $-\\otimes^L_{A_{E,m}}A_{E,n}$ for $m\\ge n\\ge1$; integral-to-finite reduction is $-\\otimes^L_{\\mathcal O_E}A_{E,n}$, and integral extension uses the completed scalar functor of [lem-pur-integral-operations-scalar-extension]. All operations are on the finite pro-etale derived categories or their derived-complete integral, rationalized and common-stage constructible categories of [def-weil-derived-pullback-tensor-hom].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Displayed source-of-purity composite; agent-extracted argument from lem-pur-weil-tate-datum-transport, old Steps 2, 3; constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-scheme-geometric-frobenius",
+  "def-weil-frobenius-coefficient-twists",
+  "def-coefficient-twists-detailed",
+  "def-pur-roots-of-unity-inverse-image",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-canonical-tate-comparisons",
+  "def-sf-orientation-integral-line-comparisons",
+  "lem-weil-signed-twist-reduction-comparison",
+  "lem-weil-frobenius-square-cartesian",
+  "def-pur-canonical-tate-naturality-laws",
+  "def-pur-canonical-tate-ordinary-naturality",
+  "def-pur-canonical-tate-scalar-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Apply the split theorem `geometricTateCore`, which packages the six geometric, coefficient, strict-system and root-tower clauses. Its proof is the full canonical comparison argument recorded in the original ten steps of this node; the arithmetic sign clauses are separated below.",
+   "uses": [
+    "lem-pur-canonical-tate-arrow-naturality-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every integer p, the exponent 2*s*p is even, and the exponent (2*r)*(2*s) is even. The characterization `Int.negOnePow_eq_one_iff` therefore gives both displayed parity identities, including r=0, s=0 and ell=2.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Publicly re-export the existing categorical law, ordinary-comparison and scalar-comparison modules. The split preserves all constructors, the original core hole, parity proof and final theorem proof. Local canonical instance priorities and opacity are retained; no new mathematical statement or hole is added.",
+   "uses": [
+    "def-pur-canonical-tate-naturality-laws",
+    "def-pur-canonical-tate-ordinary-naturality",
+    "def-pur-canonical-tate-scalar-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-canonical-tate-arrow-naturality-core",
+  "def-pur-canonical-tate-naturality-laws",
+  "def-pur-canonical-tate-ordinary-naturality",
+  "def-pur-canonical-tate-scalar-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Canonical Tate naturality assembled from the split core comparison theorem and the elementary even-shift parity calculation. E9: compilation subdivision preserving all original constructors and proof bodies after the full consumer exceeded 60 seconds in delivery preflight."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Weil Frobenius arrow on roots of unity Tate line is natural for scheme pullback and coefficient reduction and additive tensor powers",
+   "results": "LinearMap.frobenius; modularCyclotomicCharacter.toFun; modularCyclotomicCharacter.toFun_spec'; cyclotomicCharacter.toFun_spec; WittVector.coeff_frobenius_charP; AlgHom.IsArithFrobAt.apply_of_pow_eq_one; WittVector.StandardOneDimIsocrystal.frobenius_apply; coe_iterateFrobeniusEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of roots of unity commutes with geometric Galois action and scalar extension on nonnegative Tate twists",
+   "results": "modularCyclotomicCharacter'.spec'; cyclotomicCharacter.toFun_spec; modularCyclotomicCharacter.spec; autEquivRootsOfUnity_smul; cyclotomicCharacter.spec; modularCyclotomicCharacter.toFun_spec'; modularCyclotomicCharacter.aux_spec; modularCyclotomicCharacter.toFun_spec",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\", \"Frobenius\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|rootsOfUnity.*(pullback|frobenius)|tate.*naturality",
+   "results": "Mathlib/CategoryTheory/Bicategory/Functor/Cat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|rootsOfUnity.*(pullback|frobenius)|tate.*naturality",
+   "results": "Mathlib/CategoryTheory/Bicategory/Functor/Cat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic roots of unity, general sheaf/module pullback or generic monoidal comparisons do not state these canonical pro-etale Tate Weil-arrow equations across coefficient systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"map\"",
+   "results": "map_rootsOfUnity; map_rootsOfUnity_eq_pow_self; IsPrimitiveRoot.map_rootsOfUnity; Ideal.rootsOfUnityMapQuot; Ideal.rootsOfUnityMapQuot_injective; Ideal.rootsOfUnityMapQuot_apply; Ideal.rootsOfUnityMapQuot_inj",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic roots of unity, general sheaf/module pullback or generic monoidal comparisons do not state these canonical pro-etale Tate Weil-arrow equations across coefficient systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric Galois action on roots of unity compatible with pullback and tensor powers of Tate sheaves",
+   "results": "modularCyclotomicCharacter.toFun_spec; autEquivRootsOfUnity_smul; modularCyclotomicCharacter.toFun_spec'; autEquivRootsOfUnity_apply_rootOfSplit; modularCyclotomicCharacter.spec; modularCyclotomicCharacter'.spec'; cyclotomicCharacter.toFun_spec; cyclotomicCharacter.spec",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic roots of unity, general sheaf/module pullback or generic monoidal comparisons do not state these canonical pro-etale Tate Weil-arrow equations across coefficient systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Frobenius action on Tate twists is natural under scheme pullback and extension of coefficient rings",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic roots of unity, general sheaf/module pullback or generic monoidal comparisons do not state these canonical pro-etale Tate Weil-arrow equations across coefficient systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of roots of unity respects composition and tensor power monoidal comparison",
+   "results": "CategoryTheory.sheafToPresheaf_μ; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.unitHomEquiv_symm_comp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic roots of unity, general sheaf/module pullback or generic monoidal comparisons do not state these canonical pro-etale Tate Weil-arrow equations across coefficient systems"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-tate-datum-transport",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly: source datum on pullback, Tate twist and even shift; extracted old Tate-source transport proof Steps 2, 3.",
+   "via": [
+    "lem-pur-weil-tate-datum-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-canonical-tate-arrow-naturality",
+  "worker": "stage1",
+  "summary": "Repaired the ill-typed mixed tensor shorthand by displaying its transported datum and comparison. Proved root-comparison composition on sections, line naturality, coefficient balancing, tensor-power induction, additivity, strict quotient-system realization, common-stage descent and the even-shift sign. Reused existing nodes only; no new nodes or Mathlib leaves.",
+  "blueprint": "Constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities, via lem-pur-weil-tate-datum-transport: canonical Tate-source arrow, tensor, coefficient and shift factors of the displayed def-pur-tate-datum composite.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-module-pullback-composition",
+    "why": "Generic Composition of pro-etale module inverse images with canonical constant coefficients used for [1], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-pur-roots-of-unity-inverse-image-iso",
+    "why": "Generic Roots-of-unity comparison: transition compatibility and isomorphism along isomorphisms used for [2], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-pur-integral-twist-line-inverse-image",
+    "why": "Generic Inverse image of the completed integral twist line, compatibly with coefficient field inclusions used for [2, 3], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic Inverse image along an isomorphism of schemes on the pro-etale site used for [2, 3], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-weil-integral-twist-base-change",
+    "why": "Generic Completed integral twist lines commute with finite scalar base change used for [3, 8], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic Exactness of the pro-etale inverse image for constant coefficients used for [4], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic Composition of derived pro-etale module pullbacks used for [4], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic Derived pullback along an isomorphism of schemes is the termwise inverse image used for [4], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic The twisting sheaves are locally free of rank one and derived complete used for [4, 7], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Generic Inverse image of Tate twists used for [4], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic Derived pullback commutes with derived tensor product on the constructible categories used for [5, 6, 9], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic Coherent substitution of normalized systems into completed operations used for [7], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic The towers defining integral pullback and completed tensor product are invariant under change of K-flat resolution used for [7], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic Integral derived operations commute with finite scalar extension used for [7, 8], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   },
+   {
+    "node": "lem-pur-shifted-tensor-morphism-calculus",
+    "why": "Generic Signed calculus of shifted derived tensor morphisms on ringed sites used for [9], supplying the comparison or exactness explicitly stated there; the package unit itself does not reprove this sheaf/derived-system tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "lem-pur-integral-twist-line-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-integral-twist-base-change",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-pur-twist-sheaf-locally-free",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-shifted-tensor-morphism-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-31e96fbb4",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-31e96fbb4 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read all 9 steps, the 21 cited statements, and the source def-pur-tate-datum (main-20261015); no new nodes, no cycle, no SGA, proof_deps equals the union of the step uses. Statement: the worker's STATEMENT-DISPUTED correction is right. The old mixed shorthand composes arrows from different sources (Lw*G_T versus G_{T'}Lw*); the delivered form inserts C_w and t_{w,s} and spells out α and μ. I re-typed every equation by hand. This repairs the typing without weakening anything, and it gives exactly the parent's step-1 shorthand τ_d⊗Lf*τ_e=τ_{d+e} 'under twist additivity'; the sibling strict-system node reads the integral identities on strict systems, as the item states. Steps: (1) the composition rule c^{fh}=c^h h^{-1}(c^f) holds by the adjoint calculation with the specified compositor; (2) limit/projection argument via the integral-line lemma clauses 2-3, with only g^{-1} (an equivalence) commuting with limits; (3) the ramified exponent rule matches clause 4; (4) exactness, termwise compositor and the local-freeness argument; (5)-(6) tensor-power induction and additivity (elementary); (7) the strict-system realization uses what the tower-substitution, integral-operations and scalar-extension statements actually say; (8) rational and common stage by definition; (9) the mixed identity re-derived and the signs (−1)^{bp}=1 for b=2s. Edge cases r=0, s=0, w=id, empty schemes, ℓ=2 and ramified E⊂L all hold. Duplicate search: twist-scheme-compatibility, the Q157 siblings, twist-frobenius-scalar, the point-twist nodes and completed-line-tensor-coherence; none restates the item. Batch-5 flag: the newly cited lem-pur-completed-operation-tower-substitution reaches lem-pod-derived-exact-square-composition, which is an abstract lemma that pasting identities of exact squares pass to the derived comparisons of exact functors. It has no Poincaré-duality or trace content, so it is a generic tool outside both assumptions and the citation is accepted. The 11 declared tool_uses are generic sheaf/derived comparisons used as black boxes for what their statements say; accepted. Maintainer note: the STATEMENT-DISPUTED typing repair of the mixed identity should be recorded for HUMAN."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CanonicalTateArrowNaturality",
+  "declaration": "WeilConjectures.CanonicalTate.canonicalTateArrowNaturality",
+  "declarations": [
+   "WeilConjectures.CanonicalTate.allStageLaws",
+   "WeilConjectures.CanonicalTate.geometricMap",
+   "WeilConjectures.CanonicalTate.geometricTateLaws",
+   "WeilConjectures.CanonicalTate.canonicalTateArrowNaturality"
+  ],
+  "file": "lean/Sheaf/Paper/CanonicalTateArrowNaturality.lean",
+  "statement": "theorem canonicalTateArrowNaturality (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X₀ Y₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (w₀ : X₀ ⟶ Y₀) : geometricTateLaws l E D hl Ω X₀ Y₀ w₀",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ebf5ba28",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Every clause of the node is rendered: pullback naturality, coefficient naturality (finite m>=n including m=n, integral-to-finite, integral extension, plus rational), additivity on X and Y, and the mixed identity with C_w^{-1} and a_w re-typed by hand, at finite/integral/rational/common stages (Omega in an independent universe), with root-tower and strict-system clauses. Hypotheses: l != p and separated finite-type models; w0 arbitrary; invertibility derived via sfWeilPrimeInvertible. All comparisons are canonical: every choose comes from an existsUnique fixed on generators; integralPull follows the completedToOrdinaryOnGood pattern; sfOrientationIntegralLineMaps and positiveLineMaps share one normalization; finitePullSheaf extends finitePositiveLineMaps to arbitrary f (no existing equivalent); no H4 duplicate found. Mechanical finding: PASS on both points. frobenius_square_cartesian supplies the proof of g' w = w g needed to type the compositor squares; signedTwistReduction_comparison constructs the reduction iso, fixed by nested existsUnique. Edge cases r=0, s=0, n=1, m=n, w=id, empty schemes, l=2 and ramified E in L are covered. Advisories: sign remark rendered only as arithmetic facts; NZ second reading is a self-check; some declarations come from modules whose nodes are not direct stmt_deps (base-era); comparisons module docstring repeats the item title. Not recompiled per instructions; no FIX."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "independent cc review: old CanonicalTateComparisons/CanonicalTateArrowNaturality/RationalPurityTraceCoherence (clone == delivery base) block-by-block against the 12 delivered modules; node lean records and stmt_deps against declaration usage; #print axioms of the new proofs and their cited helpers"
+ }
+}

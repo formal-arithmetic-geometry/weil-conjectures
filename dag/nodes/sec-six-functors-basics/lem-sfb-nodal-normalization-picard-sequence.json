@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-nodal-normalization-picard-sequence",
+ "kind": "statement",
+ "title": "Normalization and the gluing-parameter sequence of a nodal curve",
+ "statement": "Let $\\Omega$ be an algebraically closed field [def-weil-field], and let $C/\\Omega$ be a proper connected reduced nodal curve [def-trf-nodal-geometric-fibres], [def-weil-proper-morphism]. Let $\\nu:\\coprod_{i\\in I}\\widetilde C_i\\to C$ be its normalization [def-weil-pbc-reduced-normalization], indexed by the finite set of irreducible components. Each $\\widetilde C_i$ is a smooth projective connected curve. Let $E$ be the finite set of nodes, choose an ordering of the two preimages of each node, and let $i_-(e),i_+(e)\\in I$ be the components containing them. Put $P_C=\\operatorname{Pic}_{C/\\Omega}$ and $P_i=\\operatorname{Pic}_{\\widetilde C_i/\\Omega}$ [sk-def-picard-pic]. There is an exact sequence of fppf sheaves of commutative groups on $\\Omega$-schemes\n$$1\\longrightarrow\\mathbf G_m\\xrightarrow{\\mathrm{diag}}\\mathbf G_m^I\\xrightarrow{\\delta}\\mathbf G_m^E\\longrightarrow P_C\\xrightarrow{\\nu^*}\\prod_{i\\in I}P_i\\longrightarrow0,\\qquad \\delta((a_i))_e=a_{i_+(e)}a_{i_-(e)}^{-1}.$$\nHere $\\mathbf G_m(T)=\\Gamma(T,\\mathcal O_T)^\\times$. The map $\\mathbf G_m^E\\to P_C$ assigns gluing parameters to the trivial line modules on the components. Let $J_i\\subset P_i$ be the degree-zero Jacobian [def-sc-jacobian], and put $B=\\prod_iJ_i$. Then $B$ is an abelian variety [def-sc-abelian-variety]. The sheaf $Q=\\operatorname{coker}\\delta$ is represented by an algebraic group, and the inverse image $D_C=(\\nu^*)^{-1}(B)$ is represented by a smooth group algebraic space [def-trf-algebraic-space]; the induced map $D_C\\to B$ is a smooth surjective open $Q$-torsor. A $Q$-torsor here means a sheaf with a $Q$-action which becomes the translation action of $Q$ on itself after an fppf covering. These statements concern the sheaves on all $\\Omega$-schemes, not only their $\\Omega$-points.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1M, lemma-glue-points and its units-sequence proof, iterated over the nodes; the fppf-functor form with gluing parameters is the agent formulation needed here. Smooth normalization Jacobians: literature/stacks-project/pic.tex Tag 0BA0, lemma-picard-pieces."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-reduced-normalization",
+  "sk-def-picard-pic",
+  "def-sc-jacobian",
+  "def-sc-abelian-variety",
+  "def-trf-algebraic-space",
+  "def-sfb-pinching-line-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-nodal-completed-normalization-model] to $C$: its hypotheses hold because a nodal curve is nonempty and pure one-dimensional, reduced and proper, with completed node rings $\\Omega[[u,v]]/(uv)$. It gives finite $E$, finite normalization and the smooth projective connected components asserted. At a node $e$, write $A=\\mathcal O_{C,e}$ and $A^\\nu=(\\nu_*\\mathcal O_{\\widetilde C})_e$. The residue difference $A^\\nu\\to\\Omega$, $b\\mapsto b(e_+)-b(e_-)$, gives a complex $0\\to A\\to A^\\nu\\to\\Omega\\to0$. After tensoring with $\\widehat A$, the cited completed model makes this the exact sequence of pairs of power series and their constant-term difference. The completion is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat]; flat tensor exactness [lem-weil-pbc-flat-tensor-exact] and reflection of zero modules [lem-sc-faithfully-flat-tensor-zero], applied to the kernel and cokernel defects, show that the original complex is exact. Away from $E$, normalization is an isomorphism. Thus $\\mathcal O_C$ is the subsheaf of normalized functions whose two values agree at each node. Set $Z=\\coprod_E\\operatorname{Spec}\\Omega$ and $Z'=\\coprod_E(\\operatorname{Spec}\\Omega\\amalg\\operatorname{Spec}\\Omega)$. The same local computation gives $Z'=\\widetilde C\\times_C Z$ scheme-theoretically: $\\mathfrak m_eA^\\nu$ equals the ideal of the two reduced points, since this equality holds after completion and its quotient is detected by faithful flatness. Consequently this is an affine fibre-product square with $\\mathcal O_C=\\nu_*\\mathcal O_{\\widetilde C}\\times_{\\mathcal O_{Z'}}\\mathcal O_Z$.",
+   "uses": [
+    "lem-sfb-nodal-completed-normalization-model",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sc-faithfully-flat-tensor-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), units-sequence proof, with Example 0C1J (example-glue-points); relative argument supplied by Q02."
+   }
+  },
+  {
+   "text": "Every $\\Omega$-scheme is flat over $\\Omega$. Tensoring the affine ring sequences of Step 1 with a $\\Omega$-algebra preserves exactness by [lem-weil-pbc-flat-tensor-exact], so the same fibre-product square holds over every $T$, including nonreduced $T$. Apply [lem-sfb-finite-pinching-invertible-patching]. A line bundle on $C_T$ is a line bundle $L_i$ on each $\\widetilde C_i\\times T$, a line bundle $N_e$ on each node copy of $T$, and identifications $L_{i_-(e)}|_{e_-}\\simeq N_e\\simeq L_{i_+(e)}|_{e_+}$. Eliminating $N_e$ gives exactly one branch identification $\\lambda_e:L_{i_-(e)}|_{e_-}\\to L_{i_+(e)}|_{e_+}$ per node, and morphisms are component isomorphisms commuting with these identifications. Conversely take $N_e=L_{i_-(e)}|_{e_-}$ to reconstruct the triple. These operations are inverse up to the indicated isomorphisms, respect tensor products and commute with base change by the cited patching equivalence. In particular arbitrary gluing units on trivial $L_i$ define a homomorphism $\\mathbf G_m^E\\to P_C$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sfb-finite-pinching-invertible-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), units-sequence proof, with Example 0C1J (example-glue-points); relative argument supplied by Q02."
+   }
+  },
+  {
+   "text": "Each $\\widetilde C_i$ is a nonempty smooth connected one-dimensional curve; [lem-sc-smooth-connected-curve-local-rings] makes it integral. By properness, [lem-pc-h0-proper-variety] says $H^0(\\widetilde C_i,\\mathcal O)$ is a finite field extension of $\\Omega$, hence is $\\Omega$ because $\\Omega$ is algebraically closed. Flat base change [lem-pc-flat-base-change-cohom], in degree zero over any affine $T$, gives $(\\mathrm{pr}_T)_*\\mathcal O_{\\widetilde C_i\\times T}=\\mathcal O_T$. These identifications glue on arbitrary $T$, so automorphisms of the trivial component bundles are exactly $\\mathbf G_m(T)^I$. Changing their frames by $(a_i)$ sends $\\lambda_e$ to $a_{i_+(e)}\\lambda_ea_{i_-(e)}^{-1}$. Thus a trivial-component gluing is isomorphic to the trivial gluing precisely when its parameters lie in $\\operatorname{im}\\delta$. The dual graph is connected: a partition of its vertices with no crossing edge would partition the finite set of irreducible components of $C$ into two disjoint closed unions, contradicting connectedness. Therefore $\\ker\\delta$ consists exactly of tuples with all $a_i$ equal, on every $T$; this is the diagonal copy of $\\mathbf G_m$.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-pc-h0-proper-variety",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), units-sequence proof, with Example 0C1J (example-glue-points); relative argument supplied by Q02."
+   }
+  },
+  {
+   "text": "Use the sheafification definition [sk-def-picard-pic]. A section of $\\prod_iP_i$ is fppf locally represented by bundles $L_i$. There are finitely many branches; their restricted line bundles on $T$ become trivial on a common Zariski cover. On that cover choose the $\\lambda_e$ and glue by Step 2. Hence $\\nu^*$ is an epimorphism of fppf sheaves. A section of $P_C$ whose pullback is zero is locally represented by $L$ with every $\\nu_i^*L$ trivial: first choose representatives, then refine where their zero classes become trivial bundles, as allowed by sheafification. Step 2 then expresses $L$ by gluing units. Likewise if such a gluing has zero class in $P_C$, refine so its bundle is trivial, and Step 3 expresses its parameters as $\\delta((a_i))$. These arguments also account for bundles pulled back from $T$, since they are Zariski locally trivial. Thus the sequence in the statement is exact as sheaves on all $\\Omega$-schemes. In particular $\\ker(\\nu^*)=Q=\\operatorname{coker}\\delta$.",
+   "uses": [
+    "sk-def-picard-pic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), units-sequence proof, with Example 0C1J (example-glue-points); relative argument supplied by Q02."
+   }
+  },
+  {
+   "text": "Choose a root vertex and a spanning tree $F$ in the connected finite dual graph by adjoining, until all vertices occur, an edge from a reached vertex to an unreached vertex. For parameters $\\lambda\\in\\mathbf G_m(T)^E$, set $a_{\\rm root}=1$ and recursively choose the other $a_i$ so that $(\\delta(a)\\lambda)_e=1$ on every tree edge: if $e$ points from parent $p$ to child $c$, take $a_c=a_p\\lambda_e^{-1}$; if it points the other way, take $a_c=a_p\\lambda_e$. Each $a_i$ is a Laurent monomial in tree parameters. This normalization is unique, since a tuple in $\\operatorname{im}\\delta$ which is $1$ on all tree edges is $1$ everywhere. The remaining parameters on $E\\setminus F$ therefore give a natural group isomorphism $Q\\simeq\\mathbf G_m^{E\\setminus F}$, with inverse induced by assigning $1$ on $F$. It is defined on arbitrary test schemes by the same Laurent monomials. The representing scheme is $\\operatorname{Spec}\\Omega[t_e^{\\pm1}:e\\in E\\setminus F]$; multiplication and inverse are coordinatewise and hence it is an algebraic group. Its smoothness follows from [lem-trf-split-lattice-torus-projection] with the free lattice on $E\\setminus F$. For a smooth connected curve $E=\\varnothing$ and $I$ is a singleton; for a tree $Q=1$; a self-node is a non-tree edge and contributes one unrestricted factor.",
+   "uses": [
+    "lem-trf-split-lattice-torus-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), units-sequence proof, with Example 0C1J (example-glue-points); relative argument supplied by Q02."
+   }
+  },
+  {
+   "text": "Apply [sk-thm-picard-main] to each smooth proper connected $\\widetilde C_i$. Its degree-zero Picard sheaf $J_i$ is represented by a smooth proper geometrically connected commutative group scheme. The product scheme $B=\\prod_iJ_i$ represents their product functor, with coordinatewise group law. It is proper by [lem-pc-proper-base-change] and [lem-weil-pbc-proper-composition], and smooth by base change and composition in [lem-sbc-smooth-relative-dimension-permanence] (the relative dimensions of the factors are their genera). It is connected by induction using [lem-weil-pbc-geometrically-connected-product-components]. Thus [def-sc-abelian-variety] identifies $B$ as an abelian variety.",
+   "uses": [
+    "sk-thm-picard-main",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), degree-zero component, and finite products; product permanence uses the cited nodes."
+   }
+  },
+  {
+   "text": "Pull back the epimorphism $P_C\\to\\prod_iP_i$ along $B\\hookrightarrow\\prod_iP_i$. This gives $D_C\\to B$, with kernel $Q$. For two sections of $D_C$ over a common section of $B$, their difference is a unique section of $Q$ by Step 4. Consequently $Q\\times D_C\\to D_C\\times_BD_C$, $(q,d)\\mapsto(q+d,d)$, is an isomorphism of sheaves. The epimorphism supplies fppf local sections; translating by one identifies the pullback of $D_C$ with $Q\\times B$. Thus this is precisely the torsor required in the statement. Since $Q$ is the smooth affine finitely presented split torus of Step 5 and $B$ is a scheme, [lem-sfb-smooth-affine-group-torsor-representability] represents $D_C$ by a scheme, affine smooth surjective and open over $B$. The composite with $B\\to\\operatorname{Spec}\\Omega$ is smooth by [lem-trf-smooth-composition], because $B$ is smooth. The sheaf's group operations are morphisms of the representing scheme by Yoneda. A scheme is in particular an algebraic space [def-trf-algebraic-space], so this gives the asserted smooth group algebraic space and its smooth surjective open $Q$-torsor map.",
+   "uses": [
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "def-trf-algebraic-space",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 049C (remark-fun-with-torsors), applied after the explicit sheaf-torsor calculation; relative Picard assembly supplied by Q02."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-completed-normalization-model",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-sfb-finite-pinching-invertible-patching",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-flat-base-change-cohom",
+  "sk-def-picard-pic",
+  "lem-trf-split-lattice-torus-projection",
+  "sk-thm-picard-main",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "def-sc-abelian-variety",
+  "lem-sfb-smooth-affine-group-torsor-representability",
+  "def-trf-algebraic-space",
+  "lem-trf-smooth-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1M, units-sequence proof, upgraded to all base schemes using 0D2J patching; graph and fppf-sheaf assembly by Q02, with pic.tex 0BA0 and groupoids.tex 049C."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a proper nodal curve gives an exact sequence of Picard fppf sheaves whose kernel is the torus with character lattice first homology of the dual graph",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.Hom.ker (AlgebraicGeometry.Scheme.Hom.toNormalization f) = ⊥\", \"doc\": \"For a scheme morphism $ f: X \\to Y $, the kernel of the morphism from $ X $ to its normalization is equal to the bottom element $ \\bot $ in the relevant order structure of subschemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\", \"doc\": \"For a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, the composition of the open cover morphism of the normalization with the normalization morphism to $ Y $ and an arbitrary mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj ↑U).ι\\n      (AlgebraicGeometry.Scheme.Hom.toNormalization f) =\\n\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The generalized Jacobian of a nodal curve is an extension of the product of Jacobians of its normalization components by a split torus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Jacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \": Type r\", \"doc\": \"The Jacobian of a Weierstrass curve over a given type $ R $ is defined as the Weierstrass curve itself.\"}\n  {\"name\": \"WeierstrassCurve.toJacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"(W : WeierstrassCurve R) : Jacobian R\", \"doc\": \"The function maps a Weierstrass curve $ W $ over a ring $ R $ to its Jacobian, which is defined as $ W $ itself.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.noConfusionType\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"Sort u →\\n  {R : Type r} →\\n    [inst : CommRing R] →\\n      {W' : WeierstrassCurve.Jacobian R} →\\n        W'.Point → {R' : Type r} → [inst' : CommRing R'] → {W'' : WeierstrassCurve.Jacobian R'} → W''.Point → Sort u\", \"doc\": \"Given a commutative ring $ R $, a Weierstrass curve Jacobian $ W' $, and a type family $ P $ over $ W'.\\\\text{Point} $, this function defines a function on all points of $ W' $ by specifying its behavi\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.mk.sizeOf_spec\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Jacobian R} [inst_1 : SizeOf R]\\n  {point : WeierstrassCurve.Jacobian.PointClass R} (nonsingular : W'.NonsingularLift point),\\n  sizeOf { point := point, nonsingular := nonsingular } = 1 + sizeOf point + sizeOf nonsingular\", \"doc\": \"The size of a point on the Jacobian of a Weierstrass curve constructed from a nonsingular point class is given by $1 + \\\\text{size}(\\\\text{point class}) + \\\\text{size}(\\\\text{nonsingular lift})$.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingularLift_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"(P : Fin 3 → R) : W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"For any point $ P $ in the Jacobian of a Weierstrass curve over a commutative ring $ R $, the point class $ [P] $ is nonsingular if and only if the representative $ P $ is nonsingular.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"{P : Sort u} →\\n  {R : Type r} →\\n    {inst : CommRing R} →\\n      {W' : WeierstrassCurve.Jacobian R} →\\n        {t : W'.Point} →\\n          {R' : Type r} →\\n            {inst' : CommRing R'} →\\n              {W'' : WeierstrassCurve.Jacobian R'} →\\n                {t' : W''.Point} →\\n                  R = R'\", \"doc\": \"Given equivalences between commutative rings, Jacobians of Weierstrass curves, and their points, this function ensures that definitions on all points can be constructed by specifying their behavior on\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] →\\n    {W' : WeierstrassCurve.Jacobian R} →\\n      {motive : W'.Point → Sort u} →\\n        (t : W'.Point) →\\n          ({point : WeierstrassCurve.Jacobian.PointClass R} →\\n              (nonsingular : W'.NonsingularLift point) → motive { point := point, nonsingular :=\", \"doc\": \"Given a commutative ring $ R $, a Weierstrass curve Jacobian $ W' $, and a type family $ P $ over $ W'.\\\\text{Point} $, this function defines a function on all points of $ W' $ by specifying its behavi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": (iU ≫ f).normalization ⨿ (iV ≫ f).normalization ≅ f.normalization\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and quasi-separated morphism of schemes. Suppose $X$ is the coproduct of two schemes $U$ and $V$ via open immersions $i_U: U \\\\to X$ and $i_V: V \\\\to X$, which are al\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"exact\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "generalizedJacobian|dualGraph|semiabelian|normalization.*[Pp]icard",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard functor of a nodal curve normalization gluing parameters exact sequence multiplicative group",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, CommRing.Pic.functor, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.fromNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary normalization and Weierstrass Jacobian coordinates do not state the relative Picard sheaf sequence or its torsor geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a proper connected nodal curve gives an exact sequence of Picard fppf sheaves and an extension of Jacobians by a torus",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary normalization and Weierstrass Jacobian coordinates do not state the relative Picard sheaf sequence or its torsor geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generalized Jacobian of a singular nodal curve is a smooth semiabelian variety with split torus kernel",
+   "results": "8 hit(s): WeierstrassCurve.Jacobian.NonsingularLift, WeierstrassCurve.Jacobian.Point.nonsingular, WeierstrassCurve.Jacobian.Point.toAffine_of_singular, WeierstrassCurve.Jacobian.nonsingularLift_zero, WeierstrassCurve.Jacobian.nonsingular_zero, WeierstrassCurve.Jacobian.nonsingularLift_addMap, WeierstrassCurve.Jacobian.nonsingularLift_some, WeierstrassCurve.Jacobian.nonsingularLift_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary normalization and Weierstrass Jacobian coordinates do not state the relative Picard sheaf sequence or its torsor geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"normalization\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary normalization and Weierstrass Jacobian coordinates do not state the relative Picard sheaf sequence or its torsor geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Pp]icard|generalizedJacobian|dualGraph",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary normalization and Weierstrass Jacobian coordinates do not state the relative Picard sheaf sequence or its torsor geometry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-relative-picard-kummer",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Normalization and the gluing-parameter sequence of a nodal curve.",
+   "via": [
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-normalization-picard-sequence",
+  "worker": "stage1",
+  "summary": "Q02 verified the nodal completed conductor square, upgraded field-point gluing to arbitrary base schemes by invertible-sheaf patching, proved fppf exactness and the spanning-tree torus quotient, and represented the resulting torsor over the product Jacobian. Two statement-only generic inputs added; existing geometry and Jacobian nodes reused. Statement unchanged.",
+  "blueprint": "Supports the inherited alteration/plurinodal input at det-thm-sf-ctf-stability-direct-images proof (3), specifically normalization and the all-base-schemes Picard gluing assertion in the stable relative Picard Kummer prerequisite. The latest blueprint no longer spells out this deep input; its local route and ancestor metadata are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic input used for constant units after arbitrary base change from the field. The item unit has no replacement for this general tool; this supports rather than changes the normalization/Picard route."
+   },
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Generic input used for smoothness of the explicitly constructed split torus. The item unit has no replacement for this general tool; this supports rather than changes the normalization/Picard route."
+   },
+   {
+    "node": "sk-thm-picard-main",
+    "why": "Generic input used for representability and smooth proper geometric connectedness of component Jacobians. The item unit has no replacement for this general tool; this supports rather than changes the normalization/Picard route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic input used for properness of product projections. The item unit has no replacement for this general tool; this supports rather than changes the normalization/Picard route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic input used for smoothness of finite products of Jacobians. The item unit has no replacement for this general tool; this supports rather than changes the normalization/Picard route."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "integrality of each smooth connected normalized curve; generic geometry tool with no replacement in this unit."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "the finite constant field of a proper integral curve; generic geometry tool with no replacement in this unit."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic composition of the torsor projection with the smooth Jacobian product over the field; this unit has no substitute for this scheme-morphism permanence tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-base-change-cohom",
+  "lem-trf-split-lattice-torus-projection",
+  "sk-thm-picard-main",
+  "lem-pc-proper-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-h0-proper-variety",
+  "lem-trf-smooth-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-72df511d9",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-72df511d9 (reviewer sub-agent of L); spot-checked: I read the whole item and both new nodes. The statement is unchanged from live and side-live, where the item is still unsplit. It is a first split, with no re-split note. Sources checked: curves.tex 0C1J/0C1M with the units-sequence proof, more-algebra Situation 0D2F/0D2G, 07RU and 0D2J (A'→A surjective, B'=B×_A A'), and groupoids 049C(2) for affine G via affine descent. Step 1: the hypotheses of the completed-normalization model hold; pure dimension one follows from connectedness plus dim 1. Faithful flatness of the completion gives exactness of 0→A→B→Ω→0 and m_eB = the ideal of the two branch points, which yields the patching node's affine fibre-product hypothesis. Step 2: Ω-flatness preserves the square over every T, and eliminating N_e is a correct groupoid equivalence. Step 3: integrality, H^0=Ω and flat base change give Aut = G_m(T)^I; the frame-change formula matches δ; ker δ is the diagonal because the dual graph is connected. Step 4: exactness holds as fppf sheaves through the sheafification definition, using local representatives and Zariski triviality of Pic(T) classes. Step 5: the spanning-tree normalization makes the presheaf cokernel equal to G_m^{E∖F}, already a sheaf. I tested E=∅, a tree, a one-node irreducible curve and parallel edges. Step 6: B is an abelian variety from sk-thm-picard-main plus proper and smooth permanence and geometric connectedness of products. Step 7: the torsor node applies with S=B and G=Q_B; base change of Q to B is implicit (advisory only). New nodes: the patching node is the true rank-one, globalized 0D2J; the torsor node is true by fpqc affine descent plus descent of smooth and surjective and 056G. Neither restates the item. Duplicate search with rg -L found only finite-Galois torsor nodes, kernel-pair quotient, stack-presentation and scheme-pushout nodes; none is a duplicate. Batch 5: none of the five flagged citations is part of the trace formula or Poincaré duality. The normalization–completion commutative algebra, the schematically-dense definition, split-torus smoothness, the Riemann–Roch χ formula reached via picard-main, and smooth composition are all generic, so all are accepted. I accept the 8 generic tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalNormalizationPicardSequence",
+  "declaration": "AlgebraicGeometry.NodalNormalizationPicard.normalization_picard_sequence",
+  "declarations": [
+   "AlgebraicGeometry.NodalNormalizationPicard.componentMap",
+   "AlgebraicGeometry.NodalNormalizationPicard.component",
+   "AlgebraicGeometry.NodalNormalizationPicard.Nodes",
+   "AlgebraicGeometry.NodalNormalizationPicard.Branches",
+   "AlgebraicGeometry.NodalNormalizationPicard.branchSection",
+   "AlgebraicGeometry.NodalNormalizationPicard.componentBaseMap",
+   "AlgebraicGeometry.NodalNormalizationPicard.branchFrame",
+   "AlgebraicGeometry.NodalNormalizationPicard.Glues",
+   "AlgebraicGeometry.NodalNormalizationPicard.Sequence",
+   "AlgebraicGeometry.NodalNormalizationPicard.normalization_picard_sequence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalNormalizationPicardSequence.lean",
+  "statement": "theorem normalization_picard_sequence (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsProper f] [IsReduced C] [LocallyOfFinitePresentation f] (hnodal : HasNodalGeometricFibres f) : Nonempty (Branches f) ∧ ∀ N : Branches f, Nonempty (Sequence N)",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Branches and Sequence package the geometry and every clause of this node. The canonical gluing map is fixed by the branch-frame condition Glues; normalization pullback is fixed on line classes. Covering sieves encode fppf exactness on all schemes. Quotient and inverse-image representations retain their specified maps and translation torsor action. No choices of data are made from postponed existence theorems; the only sorry is the main theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a88b31ca",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H3 RETURN of 0da9e85a. The snapshot diff shows only the three coboundary uses replaced by the inline a(index e 1)*a(index e 0)⁻¹ (correct orientation), the graph import dropped, and the theorem removed from stmt_deps. Node statement/proof/proof_deps are verbatim side-live; the added stmt_dep def-sfb-pinching-line-data is the landed owner of pinchingBaseMap; lean.statement is verbatim. Clause reading: hypotheses are IsAlgClosed, IsProper, IsReduced and the recorded HasNodalGeometricFibres (connected, dim 1, completed node rings), with no extra assumption. Normalization is the actual reducedNormalization over irreducibleComponents and Nodes is the non-smooth locus; Branches gives an exhaustive distinct ordered pair of k-points per node, and the theorem holds for every ordering. P_C and P_i are picardFunctorGrp. glue is pinned by Glues (canonical pullbackComp/Congr/unit isos; frame change gives z·δ(a)); restrict is pinned on line classes. Exactness at every place uses fppf covering sieves. IsJacobian with group-compatible reps, B an IsLimit product with IsAbelianVariety, Q a finite-type separated CommGrpObj characterizing coker δ, D an fppf group algebraic space with smooth étale charts, injective inclusion with image exactly (ν*)⁻¹(B), projection smooth/surjective/open on scheme base changes, local sections, and unique translation action pinned to glue. Edge cases E=∅, tree, self-node, parallel edges and empty T are fine. No hollow defs, a single sorry, docstrings and proof plan present, report sections present. No compile: nothing changed. Advisory: representability of D_C→B is stated in addition; it is true by proof step 7."
+ }
+}

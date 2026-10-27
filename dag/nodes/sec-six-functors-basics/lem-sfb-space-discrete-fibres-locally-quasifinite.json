@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-space-discrete-fibres-locally-quasifinite",
+ "kind": "statement",
+ "title": "Discrete field fibres detect local quasi-finiteness of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Assume $f$ is locally of finite type, tested on compatible etale scheme charts using the scheme notion [def-weil-finite-type-morphism]. Then $f$ is locally quasi-finite if and only if, for every field $k$ and morphism $\\operatorname{Spec}k\\to Y$, the underlying topological space of $X_k=X\\times_Y\\operatorname{Spec}k$ is discrete [def-pc-fibre-product, def-a1-space-point-topology]. Here locally quasi-finite means that for each etale scheme chart $V\\to Y$ and each etale scheme chart $U\\to X\\times_YV$, the scheme morphism $U\\to V$ is locally quasi-finite [pqf-def-quasifinite]. Discrete means that every subset is open; empty fibres are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06RW (lemma-locally-quasi-finite)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-a1-space-point-topology",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Assume $f$ is locally quasi-finite and fix $b:\\operatorname{Spec}k\\to Y$. Choose surjective representable etale scheme atlases $V\\to Y$ and $U\\to X\\times_YV$. The sheaf fibre products are algebraic spaces, and scheme-source maps to them are representable. Composition and base change of representable surjective etale maps give a surjective etale map $U\\to X$ and hence an atlas $A=U\\times_Y\\operatorname{Spec}k\\to X_k$. Put $W=V\\times_Y\\operatorname{Spec}k$. Both $W$ and $A$ are schemes, $W\\to\\operatorname{Spec}k$ is etale, and pullback pasting identifies $A$ with $U\\times_VW$: on each test scheme both sides consist of the same compatible pair of sections.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RW (lemma-locally-quasi-finite), proof."
+   }
+  },
+  {
+   "text": "The hypothesis on $f$ makes $U\\to V$ locally quasi-finite. Its scheme base change $A\\to W$ is locally quasi-finite. The etale map $W\\to\\operatorname{Spec}k$ is chartwise etale: its composite with each etale scheme chart is etale by representable composition. The etale-space lemma therefore makes it locally quasi-finite. Scheme composition now makes $A\\to\\operatorname{Spec}k$ locally quasi-finite, and thus locally of finite type.",
+   "uses": [
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-etale-space-locally-quasi-finite",
+    "lem-a1-scheme-lqf-composition",
+    "lem-weil-pbc-lqf-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RW (lemma-locally-quasi-finite), proof."
+   }
+  },
+  {
+   "text": "Every point of $A$ is isolated in its fibre over the unique point of $\\operatorname{Spec}k$, by the quasi-finite-point isolation lemma and the definition of local quasi-finiteness. The fibre projection is a homeomorphism onto the entire underlying space of $A$, so $|A|$ is discrete. The atlas point map $q:|A|\\to|X_k|$ is open and surjective by the point-open calculus. For any subset $B\\subseteq|X_k|$, its preimage is open in $|A|$ and $B=q(q^{-1}(B))$ is open. This proves discreteness, including an empty fibre.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "def-pc-scheme-fibre",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RW (lemma-locally-quasi-finite), proof."
+   }
+  },
+  {
+   "text": "Conversely assume all the stated field fibres are discrete. Take arbitrary etale scheme charts $V\\to Y$ and $U\\to X\\times_YV$ and write $g:U\\to V$. By the local finite-type hypothesis $g$ is locally of finite type. For every $v\\in V$, let $k=\\kappa(v)$, $B=U\\times_V\\operatorname{Spec}k$, and $Z=X\\times_Y\\operatorname{Spec}k$. Scheme base change makes $B/k$ locally of finite type. Pullback pasting identifies $B$ with $U\\times_{X\\times_YV}Z$, so $a:B\\to Z$ is representable etale by base change of the given chart. The space $|Z|$ is discrete by the hypothesis applied to $\\operatorname{Spec}\\kappa(v)\\to V\\to Y$. No surjectivity of $U$ is used.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RW (lemma-locally-quasi-finite), proof."
+   }
+  },
+  {
+   "text": "If $B/k$ were not locally quasi-finite, the field specialization lemma would give distinct $u,u^{\\prime}\\in B$ with $u\\leadsto u^{\\prime}$. The strict-drop lemma gives $\\operatorname{trdeg}_k\\kappa(u)>\\operatorname{trdeg}_k\\kappa(u^{\\prime})$. The point-open calculus makes $|a|$ continuous, so its images specialize in $|Z|$; discreteness forces the images to coincide. The point-fibre-product clause then supplies $r\\in R=B\\times_ZB$ whose projections are $u,u^{\\prime}$. The space $R$ is a scheme, since both maps to $Z$ have scheme source. Its two projections $s,t:R\\to B$ are etale by base change of $a$.",
+   "uses": [
+    "lem-sfb-field-nonquasifinite-specialization",
+    "lem-sfb-field-specialization-trdeg-drop",
+    "lem-a1-space-point-open-calculus",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RW (lemma-locally-quasi-finite), proof."
+   }
+  },
+  {
+   "text": "Composition of representable etale maps makes each of $s,t$ chartwise etale; the etale-space lemma makes each chartwise locally quasi-finite. Apply the chart transcendence-degree comparison to $R\\xrightarrow{s}B\\to\\operatorname{Spec}k$ and $R\\xrightarrow{t}B\\to\\operatorname{Spec}k$, using the identity scheme chart $R\\to R$ and the same point $r$. Its locally finite-type target hypothesis holds by step 4. It gives $\\operatorname{trdeg}_k\\kappa(u)=\\operatorname{trdeg}_k\\kappa(r)=\\operatorname{trdeg}_k\\kappa(u^{\\prime})$, contradicting step 5. Thus $B/k$ is locally quasi-finite for every $v$.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-etale-space-locally-quasi-finite",
+    "lem-sfb-space-quasifinite-trdeg-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RW (lemma-locally-quasi-finite), proof."
+   }
+  },
+  {
+   "text": "By the isolation lemma every point of $B$ is isolated, since $B/k$ is locally quasi-finite and locally of finite type. The scheme-fibre homeomorphism therefore makes every point $u\\in U$ isolated in its $g$-fibre. Choose affine open neighbourhoods of $u$ and $g(u)$ with the former mapping into the latter, using the affine-open basis and continuity of $g$. The isolated-fibre affine-pair lemma makes the induced ring map finite type and quasi-finite at the prime of $u$. This is precisely quasi-finiteness of $g$ at $u$. Hence $g$ is locally quasi-finite; since both charts were arbitrary, the chartwise definition in the statement proves the required local quasi-finiteness of $f$.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RW (lemma-locally-quasi-finite), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-trf-algebraic-space",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-a1-scheme-lqf-composition",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-field-nonquasifinite-specialization",
+  "lem-sfb-field-specialization-trdeg-drop",
+  "lem-sfb-space-quasifinite-trdeg-comparison",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06RW (lemma-locally-quasi-finite), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of algebraic spaces is locally quasi finite if and only if every field valued fiber has discrete underlying topological space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discrete geometric fibers criterion for local quasi finiteness of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"DiscreteTopology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyQuasiFinite.*discrete|discrete.*locallyQuasiFinite",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"34\", \"text\": \"- `AlgebraicGeometry.locallyQuasiFinite_iff_isDiscrete_preimage_singleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"63\", \"text\": \"- `locallyQuasiFinite_iff_isDiscrete_preimage_singleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"65\", \"text\": \"- `locallyQuasiFinite_iff_isDiscrete_preimage_singleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"163\", \"text\": \"lemma Scheme.Hom.isDiscrete_preimage_singleton [LocallyQuasiFinite f] (y : Y) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"168\", \"text\": \"lemma Scheme.Hom.isDiscrete_preimage [LocallyQuasiFinite f] {s : Set Y} (hs : IsDiscrete s) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"346\", \"text\": \"  refine ⟨fun H ↦ locallyQuasiFinite_iff_isDiscrete_preimage_singleton.mpr fun x ↦ ?_,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finite type morphism algebraic spaces discrete fibers locally quasi finite",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyQuasiFinite_iff_isDiscrete_preimage_singleton",
+   "results": "{\"t\": \"2026-10-23T12:22:58Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|locallyQuasiFinite_iff_isDiscrete_preimage_singleton\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"26f7e157d09b4f3c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes or ring algebras; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic spaces locally finite type discrete field fibres criterion locally quasi finite",
+   "results": "{\"t\": \"2026-10-23T12:22:58Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic spaces locally finite type discrete field fibres criterion locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"Algebra.QuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"Algebra.QuasiFinite.recOn\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFinite.iff_finite_primesOver\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"7afd45511decd1f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes or ring algebras; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"DiscreteTopology\"",
+   "results": "{\"t\": \"2026-10-23T12:22:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"DiscreteTopology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes or ring algebras; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of algebraic spaces is locally quasi finite if and only if all its field fibres have discrete topology",
+   "results": "{\"t\": \"2026-10-23T12:23:01Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism of algebraic spaces is locally quasi finite if and only if all its field fibres have discrete topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"Algebra.QuasiFinite.discreteTopology_primeSpectrum\"], \"digest\": \"c47bdbcac8c4dde6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes or ring algebras; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discrete geometric fibers detect locally quasi finite algebraic space morphisms using etale scheme charts",
+   "results": "{\"t\": \"2026-10-23T12:23:02Z\", \"tool\": \"leanfinder\", \"query\": \"Discrete geometric fibers detect locally quasi finite algebraic space morphisms using etale scheme charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"c2f72cc725c4a247\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes or ring algebras; no algebraic-space assertion or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-serre-affineness",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Tag 07V6 final paragraph: universal injectivity and local finite type give local quasi-finiteness by Tag 06RW.",
+   "via": [
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-discrete-fibres-locally-quasifinite",
+  "worker": "stage1",
+  "summary": "Checked Tag 06RW against its actual field-base-change statement and chartwise meaning. Reused existing scheme specialization, strict transcendence-degree drop, chart comparison, chart permanence and point topology nodes. Seven complete steps prove both directions without new nodes or a statement change. Scheme-only Mathlib hits are not attachments or a match for algebraic spaces.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Tag 07V6 final paragraph: universal injectivity and local finite type give local quasi-finiteness by Tag 06RW. This split supplies the field-fibre local-quasi-finiteness input there. The creation chain has no resolvable imported ancestor (blueprint_refs.py ancestor returns None); the latest blueprint direct-images proof paragraph (3) remains the route anchor.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-etale-space-locally-quasi-finite",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   },
+   {
+    "node": "lem-a1-scheme-lqf-composition",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic scheme, algebraic-space chart or point-topology tool used in the proof of Stacks 06RW; no node of this unit replaces this foundational input, and the direct-images alteration route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-a1-scheme-lqf-composition",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-separated-lqf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-78ca2d14a",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-78ca2d14a (reviewer sub-agent of L); spot-checked: I read Stacks 06RW (spaces-morphisms.tex, lemma-locally-quasi-finite) in full, both the statement and the proof. The delivery is one commit and creates no new nodes. Against the base, the statement, stmt_deps and blueprint are unchanged. proof_deps equals the union of the step uses, all cited ids exist and none is merged, and the dependency closure does not reach the item, so there is no cycle. Step checks: steps 1-3 (forward direction) take atlases via fibre-products and representable-étale scheme tests, identify A=U×_Y Spec k with U×_V W, and get A→W lqf from clause (2) of the base-change lemma. W→Spec k is lqf by the étale-space lemma with the identity chart. Composition then gives A→Spec k lqf and lft, isolation plus the fibre homeomorphism make |A| discrete, and the representable surjective étale point map is open and surjective, so |X_k| is discrete. Steps 4-7 (converse) use arbitrary charts. B=U×_V Spec κ(v) is lft and pastes to U×_{X×_YV}Z, so B→Z is representable étale. The 01TH contrapositive and the 06RU strict trdeg drop give u⇝u'; continuity and discreteness make their images equal; 03H4 gives r in the scheme R=B×_ZB with étale s,t. The trdeg-comparison node (target B lft over k, identity chart) gives equal trdeg, a contradiction. Isolated fibre points plus the affine-pair lemma then give exactly pqf-def-quasifinite (1). Small cases tested: A^1_k, Spec k(t) (shows the lft hypothesis is needed), an infinite disjoint union of points, and the empty space. Duplicate candidates are not duplicates: lem-sfb-space-field-discreteness-criterion is over a field only, and lem-sfb-dm-lqf-atlas-test (DM stacks, with a diagonal condition) is not a one-line specialization. I accept the 9 declared tool_uses as generic scheme and algebraic-space foundations. Batch-5: the a1 nodes reach sec-trace-formula only through the definition def-trf-algebraic-space. The specialization node reaches only the Mathlib leaf Algebra 00I0. lem-trf-space-fibre-products-etale-covers (02X2/041F) and lem-trf-space-representable-etale-scheme-tests (03EC) are basic algebraic-space foundations, not the trace formula or Poincare duality or steps of their proofs, so all are accepted. No SGA source is cited."
+ }
+}

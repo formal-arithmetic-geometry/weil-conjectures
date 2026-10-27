@@ -1,0 +1,139 @@
+{
+ "id": "lem-zl-canonical-immersion-punctual-spectrum",
+ "kind": "statement",
+ "title": "Immersion pullback preserves punctual spectrum and residue size",
+ "statement": "Let D be a finite-field datum, l a prime distinct from its characteristic, and Qbar an algebraic closure of the l-adic field, in a universe independent of that of D. For a locally closed immersion h0 of separated finite-type finite-field schemes and a closed source point z, its image x is closed and the two residue fields have equal cardinality. Every eigenvalue of the specified local Frobenius on the canonical pullback of a constructible Weil sheaf F at z is a local eigenvalue of F at x. No weight, purity or complex embedding is assumed. Uses [def-weil-constructible-heart; def-weil-weil-sheaf-complex; def-weil-punctual-weights; def-weil-closed-immersion; def-weil-open-immersion; def-weil-derived-pullback-tensor-hom; def-zl-weil-ind-sheaf-category].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+  "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-punctual-weights",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof": [
+  {
+   "text": "The scheme X0 is Jacobson since it is locally of finite type over a field. Mathlib Scheme.Hom.closePoints_subset_preimage_closedPoints gives the closed image. A locally closed immersion is surjective on stalks; the proved source lemma Scheme.Hom.isIso_residueFieldMap identifies the actual residue fields. Nat.card_congr gives equality of their cardinalities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  },
+  {
+   "text": "Unpack the finite Weil presentation witnessing the output eigenvalue. Apply the canonical immersion stalk conjugacy to obtain an input presentation and an intertwining stalk isomorphism.",
+   "uses": [
+    "lem-zl-canonical-immersion-stalk-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  },
+  {
+   "text": "Choose a nonzero eigenvector. The stalk isomorphism preserves its nonvanishing and its linearity and intertwining equation preserve the eigenvalue. That input presentation witnesses the input punctual-eigenvalue predicate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-canonical-immersion-stalk-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+  "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZlImmersionPullbackWeightPreservation",
+  "date": "2026-10-25",
+  "group": "U3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Restriction paragraph: preservation of weights under immersion inverse image, via the finite-model Frobenius and cohomology arguments.",
+   "via": [
+    "lem-zl-immersion-pullback-weight-preservation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZlCanonicalImmersionPunctualSpectrum",
+  "file": "lean/Sheaf/Paper/ZlCanonicalImmersionPunctualSpectrum.lean",
+  "declaration": "WeilConjectures.zlCanonicalImmersionPunctualSpectrum",
+  "statement": "theorem zlCanonicalImmersionPunctualSpectrum (h₀ : W₀ ⟶ X₀) [IsImmersion h₀.left]\n    (z : {z : W₀.left // z ∈ closedPoints W₀.left}) :\n    ∃ hx : h₀.left z.val ∈ closedPoints X₀.left,\n      Nat.card (W₀.left.residueField z.val) =\n        Nat.card (X₀.left.residueField (h₀.left z.val)) ∧\n      ∀ (F : sfCommonStageWeilSheaf D l hl X₀ Qbar) (α : Qbar),\n        SfPunctualEigenvalue D l hl Qbar W₀ ((zlWeilPull D l hl Qbar h₀).obj F) z α →\n          SfPunctualEigenvalue D l hl Qbar X₀ F ⟨h₀.left z.val, hx⟩ α",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A t-exact pullback with its canonical Frobenius square commutes with cohomology of Weil pairs",
+   "results": "8 hits: module-sheaf pullback compositions and Witt-vector isocrystal equivariance; no common-stage Weil result.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; local library comparisons require identification with the specified canonical square and normalized shifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasEigenvalue\", \"LinearEquiv\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Eigenvector transfer is written directly from Mathlib eigenvector definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "zlFrobeniusSquare|localClosedFrobeniusCohomology",
+   "results": "0 Mathlib hits; local rg finds constructions in WeilIndSheafCategory and LocalFrobeniusTrace.",
+   "date": "2026-10-25",
+   "verdict": "These define the required operators but do not state their immersion/cohomology identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t-exact pullback with the canonical Frobenius square commutes with cohomology of Weil sheaves and preserves Frobenius eigenvalues on stalks",
+   "results": "8 hits: TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.germ_stalkPullbackHom, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, TopCat.Presheaf.stalkPullbackIso, CategoryTheory.IsPullback.exact_shortComplex', AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-25",
+   "verdict": "No common-stage Weil comparison. The results give topological stalk comparisons and exactness of site pullback, without the prescribed Frobenius structure and signed shift."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T015421-L-341801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T015421-L-341801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

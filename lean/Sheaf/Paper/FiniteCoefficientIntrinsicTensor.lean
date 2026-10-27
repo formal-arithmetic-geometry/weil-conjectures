@@ -25,6 +25,17 @@ set_option synthInstance.maxSize 4096
 
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
+namespace FiniteCoefficientTotalComparison
+
+/-- The ordinary tensor-comparison type, shared before any site specialization.
+Source: Stacks 03EK and 0GMW
+(blueprint: lem-sf-finite-intrinsic-tensor-generators). -/
+def Ordinary {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D] (G : C ⥤ D) : Type _ :=
+  tensor C ⋙ G ≅ G.prod G ⋙ tensor D
+
+end FiniteCoefficientTotalComparison
+
 namespace AlgebraicGeometry.ProEtale
 
 variable (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
@@ -364,11 +375,8 @@ def finiteCoefficientEtalePure
 Source: Stacks 00YV and 03EK (blueprint: lem-sf-finite-intrinsic-tensor-generators). -/
 def FiniteCoefficientTensorNormalization :
     letI := finiteCoefficientIntrinsicMonoidal X A
-    (tensor (Sheaf X.smallEtaleTopology
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ⋙
-          finiteCoefficientIntrinsicComparison X A ≅
-        (finiteCoefficientIntrinsicComparison X A).prod
-          (finiteCoefficientIntrinsicComparison X A) ⋙ tensor _) → Prop :=
+    FiniteCoefficientTotalComparison.Ordinary
+      (finiteCoefficientIntrinsicComparison X A) → Prop :=
   letI := finiteCoefficientIntrinsicMonoidal X A
   fun e ↦ ∀ (M N : Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) (U : X.Etale)

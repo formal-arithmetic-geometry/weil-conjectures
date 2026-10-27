@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-fibre-product-patched-module",
+ "kind": "definition",
+ "title": "Canonical compatible-module fibre product",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $b:B\\to A$ and $q:A'\\to A$ be homomorphisms of commutative rings, let $N$ be a $B$-module and $M'$ an $A'$-module, and let $\\varphi:N\\otimes_B A\\xrightarrow{\\sim}M'\\otimes_{A'}A$ be an $A$-linear isomorphism. Tensor products are those of [def-weil-pbc-module-tensor-product]. Put $R=B\\times_A A'=\\{(x,y):b(x)=q(y)\\}$ with coordinatewise ring operations and $M=M'\\otimes_{A'}A$. The left and right maps to $M$ are $\\ell:N\\to M$, $n\\mapsto\\varphi(n\\otimes1)$, and $r:M'\\to M$, $m'\\mapsto m'\\otimes1$, regarded as $R$-linear maps by restriction along the two projections $R\\to B,A'$ and their common composite to $A$. Define the patched $R$-module to be $P=\\{(n,m')\\in N\\times M':\\ell(n)=r(m')\\}$ with coordinatewise addition and action $(x,y)(n,m')=(xn,ym')$. In the surjective case $q:A'\\twoheadrightarrow A$, with $I=\\ker q$, the common reduction $M$ is canonically $M'/IM'$, so this is $N\\times_{M'/IM'}M'$ with the quotient map on the right. No flatness, finiteness, nilpotence, Noetherian or nonzero assumption is part of this construction.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Situation 08KH (situation-module-over-fibre-product), equation-functor and the following definition of (N, M-prime, phi), and the compatible-module construction F in Tag 07RU (lemma-module-over-fibre-product)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The compatible module of two modules with isomorphic scalar extensions over a fibre product ring",
+   "results": "{\"t\": \"2026-10-24T11:24:45Z\", \"tool\": \"leansearch\", \"query\": \"The compatible module of two modules with isomorphic scalar extensions over a fibre product ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.linearMap_compatibleSMul\", \"TensorProduct.CompatibleSMul\", \"TensorProduct.CompatibleSMul.casesOn\", \"LinearMap.IsScalarTower.compatibleSMul'\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"ModuleCat.ExtendScalars.obj'\", \"LinearMap.CompatibleSMul.mk\", \"LinearMap.IsScalarTower.compatibleSMul\"], \"digest\": \"840a69dff9f9b93b\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; reuse ModuleCat.FibreProductPatching.patchedModule and leftMap/rightMap in lean/Sheaf/RingTheory/FlatModuleFibreProductPatching.lean. Source-root grep had no match; Sheaf grep found precisely these existing definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compatible module of two modules with isomorphic scalar extensions over a fibre product ring",
+   "results": "{\"t\": \"2026-10-24T11:24:47Z\", \"tool\": \"leanfinder\", \"query\": \"The compatible module of two modules with isomorphic scalar extensions over a fibre product ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange\", \"IsBaseChange.lift\", \"Algebra.IsPushout.cancelBaseChange_tmul\", \"KaehlerDifferential.moduleBaseChange'\", \"Algebra.IsPushout.cancelBaseChange\", \"Algebra.IsPushout.cancelBaseChangeAux_symm_tmul\", \"Algebra.IsPushout.cancelBaseChangeAux\", \"Subbimodule.baseChange\"], \"digest\": \"4069bc75d7798086\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; reuse ModuleCat.FibreProductPatching.patchedModule and leftMap/rightMap in lean/Sheaf/RingTheory/FlatModuleFibreProductPatching.lean. Source-root grep had no match; Sheaf grep found precisely these existing definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "patchedModule|FibreProductPatching|Milnor",
+   "results": "{\"t\": \"2026-10-24T11:24:44Z\", \"tool\": \"grep\", \"query\": \"patchedModule|FibreProductPatching|Milnor\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; reuse ModuleCat.FibreProductPatching.patchedModule and leftMap/rightMap in lean/Sheaf/RingTheory/FlatModuleFibreProductPatching.lean. Source-root grep had no match; Sheaf grep found precisely these existing definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-module-fibre-product-patching",
+  "date": "2026-10-24",
+  "group": "O3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX reduces to the ring-algebra lemma Tag 08KQ, parts (2), (3) and final assertion. Module input: 0D2H (lemma-finite-module-over-fibre-product). Definition input: the compatible-module fibre product in Situation 08KH used by 0D2H.",
+   "via": [
+    "lem-sfb-finite-module-fibre-product-patching",
+    "lem-sfb-fibre-product-algebra-flat-presentation",
+    "lem-sfb-scheme-pushout-flat-patching",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatModuleFibreProductPatching",
+  "declaration": "ModuleCat.FibreProductPatching.patchedModule",
+  "declarations": [
+   "ModuleCat.FibreProductPatching.leftMap",
+   "ModuleCat.FibreProductPatching.rightMap",
+   "ModuleCat.FibreProductPatching.patchedModule"
+  ],
+  "statement": "def patchedModule {A A' B : CommRingCat.{u}} (b : B ⟶ A) (q : A' ⟶ A) (N : ModuleCat.{max u v} B) (M' : ModuleCat.{max u v} A') (φ : (extendScalars b.hom).obj N ≅ (extendScalars q.hom).obj M') : ModuleCat.{max u v} (pullback (C := CommRingCat) b q)",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only ownership record requested by maintainer return H2: the existing leftMap/rightMap/patchedModule definitions construct the compatible-module pullback without flatness. No theorem conclusion from the flat-patching node is used. Tensor symmetry matches the written convention; surjective q identifies its scalar extension with M-prime/I M-prime. No definitions are duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a7f6f64c",
+  "group": "O3",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a7f6f64c",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after H2 return on 1f655d57: the item now cites the new def node def-sfb-fibre-product-patched-module (existing:true on leftMap/rightMap/patchedModule in Sheaf.RingTheory.FlatModuleFibreProductPatching) instead of the flat-patching theorem node. Item JSON differs from side-live only by that stmt_dep plus lean. Checked against Stacks 08KH/0D2H: surjective q, arbitrary b, φ: A⊗_B N ≅ A⊗_{A'}M' (canonically M'/IM'), patchedModule = ModuleCat pullback of the unit maps (real defs, no flatness), Module.Finite hypotheses and conclusion over the CommRingCat pullback; no extra hypotheses; universes u / max u v as in the reused API. lean.statement verbatim for both records (script check). New node meets the H12 field rule; no duplicate owner in the DAG. Docstring has source place, blueprint tag and the 4 proof steps; proof is sorry only. No files changed, no compile run. Advisory only: the reused defs' docstrings name the flat theorem node as blueprint."
+ }
+}

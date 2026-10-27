@@ -5,17 +5,12 @@ Authors: SHEAF group Q151
 -/
 module
 
-public import Sheaf.CategoryTheory.Sites.GeometricMorphism
-public import Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
-public import Mathlib.CategoryTheory.Sites.LeftExact
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Sheaf.CategoryTheory.Sites.FreeModuleSheafConstruction
 
-import Sheaf.CategoryTheory.GeometricModuleTransport
+import Sheaf.CategoryTheory.Sites.FreeModuleUniversalProperty
+import Sheaf.CategoryTheory.Sites.GeometricFreeModuleHomEquivalence
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Sheaf.CategoryTheory.Sites.NormalizedFreeModuleComparison
 
 /-!
 # Geometric inverse image of free module sheaves
@@ -32,7 +27,7 @@ operations. Underlying modules use the common value universe of that recorded in
 
 universe w wI uC vC uD vD uH vH
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory.SheafFreeModule
 
@@ -42,88 +37,104 @@ set_option backward.isDefEq.respectTransparency false
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C}
 
-/-- Forget commutativity of the coefficient sheaf, using Mathlib's sheaf composition.
-Source: Stacks 04BL (blueprint: lem-trf-geometric-inverse-image-free-module). -/
-abbrev ring (B : Sheaf J CommRingCat.{w}) : Sheaf J RingCat.{w} :=
-  (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj B
-
-/-- Underlying set sheaves of modules, with the lift used by algebraic inverse image.
-Source: Stacks 03D2 (blueprint: lem-trf-geometric-inverse-image-free-module). -/
-noncomputable abbrev moduleSets (B : Sheaf J CommRingCat.{w}) :
-    ringedSiteModules.{w, w, vC, uC} (ring B) ⥤ Sheaf J (Type w) :=
-  SheafOfModules.toSheaf (ring B) ⋙
-    sheafCompose J (forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w})
-
-/-- Module sheafification of `U ↦ B(U)[E(U)]`. Mathlib's presheaf free functor sends
-restrictions to the semilinear extension of `[s] ↦ [s|V]`, and its map on generator
-sheaves is the sectionwise linear extension. Source: Stacks 04BL and 03CY
-(blueprint: lem-trf-geometric-inverse-image-free-module). -/
-noncomputable def free (B : Sheaf J CommRingCat.{w}) :
-    Sheaf J (Type w) ⥤ ringedSiteModules.{w, w, vC, uC} (ring B) :=
-  letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
-  letI : ∀ U : Cᵒᵖ,
-      HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
-        AddCommGrpCat.{w} :=
-    fun _ ↦ HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
-  letI := GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
-    J (A := AddCommGrpCat.{w})
-  sheafToPresheaf J (Type w) ⋙ PresheafOfModules.free (ring B).obj ⋙
-    PresheafOfModules.sheafification (𝟙 (ring B).obj)
-
-/-- The presheaf generator map followed by the abelian sheafification unit, before
-lifting the underlying sets. Source: Stacks 04BL
-(blueprint: lem-trf-geometric-inverse-image-free-module). -/
-noncomputable def generatorRaw (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w)) :
-    E ⟶ (SheafOfModules.toSheaf (ring B) ⋙
-      sheafCompose J (forget AddCommGrpCat.{w})).obj ((free B).obj E) :=
-  letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
-  letI : ∀ U : Cᵒᵖ,
-      HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
-        AddCommGrpCat.{w} :=
-    fun _ ↦ HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
-  letI := GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
-    J (A := AddCommGrpCat.{w})
-  { hom := PresheafOfModules.freeAdjunctionUnit (ring B).obj E.obj ≫
-      Functor.whiskerRight
-        (toSheafify J (PresheafOfModules.freeObj (R := (ring B).obj) E.obj).presheaf)
-        (forget AddCommGrpCat.{w}) }
-
-/-- The map `s ↦ [s]` into the underlying sheaf of the free module, with the harmless
-`ULift` identification required by the recorded algebraic inverse-image interface.
-Source: Stacks 04BL (blueprint: lem-trf-geometric-inverse-image-free-module). -/
-noncomputable def generator (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w)) :
-    E ⟶ (moduleSets B).obj ((free B).obj E) where
-  hom := (generatorRaw B E).hom ≫ Functor.whiskerLeft
-    (((free B).obj E).val.presheaf ⋙ forget AddCommGrpCat.{w}) uliftFunctorTrivial.inv
-
-/-- Simultaneous coefficient and generator change: the sheafified linear extension of
-`[s] ↦ [e(s)]`, semilinear along `b`. It is constructed by the two recorded adjunctions,
-with target scalars restricted along `b`. Source: Stacks 04BL and 03CY
-(blueprint: lem-trf-geometric-inverse-image-free-module). -/
-noncomputable def change {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
-    {E E' : Sheaf J (Type w)} (e : E ⟶ E') :
-    (free B).obj E ⟶ (SheafOfModules.restrictScalars
-      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map b)).obj
-        ((free B').obj E') :=
-  letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
-  letI : ∀ U : Cᵒᵖ,
-      HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
-        AddCommGrpCat.{w} :=
-    fun _ ↦ HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
-  letI := GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
-    J (A := AddCommGrpCat.{w})
-  ((PresheafOfModules.sheafificationAdjunction (𝟙 (ring B).obj)).homEquiv _ _).symm
-    (PresheafOfModules.freeObjDesc (e.hom ≫ (generatorRaw B' E').hom))
-
-/-- The simultaneous change map on underlying lifted set sheaves.
-Source: Stacks 04BL (blueprint: lem-trf-geometric-inverse-image-free-module). -/
-noncomputable def changeSets {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
-    {E E' : Sheaf J (Type w)} (e : E ⟶ E') :
-    (moduleSets B).obj ((free B).obj E) ⟶ (moduleSets B').obj ((free B').obj E') :=
-  (moduleSets B).map (change b e)
-
 variable {D : Type uD} [Category.{vD} D] [EssentiallySmall.{w} D]
   {K : GrothendieckTopology D}
+
+local instance : J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w}) := inferInstance
+
+local instance : J.HasSheafCompose (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w}) := inferInstance
+
+local instance : J.HasSheafCompose (forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w}) := inferInstance
+
+local instance : K.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w}) := inferInstance
+
+local instance : K.HasSheafCompose (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w}) := inferInstance
+
+local instance : K.HasSheafCompose (forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w}) := inferInstance
+
+private def rawLift (B : Sheaf J CommRingCat.{w})
+    (M : ringedSiteModules.{w, w, vC, uC} (ring B)) :
+    (underlyingRaw B).obj M ≅ (moduleSets B).obj M where
+  hom := ⟨{ app := fun _ ↦ ↾ULift.up, naturality := by intros; rfl }⟩
+  inv := ⟨{ app := fun _ ↦ ↾ULift.down, naturality := by intros; rfl }⟩
+
+private theorem rawLift_naturality (B : Sheaf J CommRingCat.{w})
+    {M N : ringedSiteModules.{w, w, vC, uC} (ring B)} (a : M ⟶ N) :
+    (underlyingRaw B).map a ≫ (rawLift B N).hom =
+      (rawLift B M).hom ≫ (moduleSets B).map a := rfl
+
+private theorem generator_lift (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w)) :
+    generatorRaw B E ≫ (rawLift B ((free B).obj E)).hom = generator B E := rfl
+
+private theorem generator_naturality (B : Sheaf J CommRingCat.{w})
+    {E E' : Sheaf J (Type w)} (e : E ⟶ E') :
+    generator B E ≫ (moduleSets B).map ((free B).map e) = e ≫ generator B E' := by
+  have h := (freeModule_restrict_naturality B E E' e
+    ((free B).obj E') ((free B).obj E')).1 (𝟙 _)
+  have hh := congrArg (fun a ↦ a ≫ (rawLift B ((free B).obj E')).hom) h
+  simp only [restrictGenerators, Functor.map_id, Category.comp_id, Category.assoc,
+    rawLift_naturality, generator_lift] at hh
+  rw [← Category.assoc, generator_lift] at hh
+  exact hh
+
+private def identityUnderlying
+    (B : Sheaf J CommRingCat.{w})
+    (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uC, vC, w, w}
+      (𝟭 (Sheaf J (Type w))) B B)
+    (hB : F.ringUnderlying = Iso.refl ((sheafCompose J
+      (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).obj B))
+    (M : ringedSiteModules.{w, w, vC, uC} (ring B)) : M ⟶ F.modules.obj M := by
+  let α := F.moduleUnderlying.inv.app M
+  refine { val :=
+    { app := fun U ↦ ModuleCat.ofHom
+        { toFun := fun x ↦ (α.hom.app U (ULift.up x)).down
+          map_add' := ?_
+          map_smul' := ?_ }
+      naturality := ?_ } }
+  · intro x y
+    let T := (underlyingRaw B).obj M ⊗ (underlyingRaw B).obj M
+    let a : T ⟶ (moduleSets B).obj M :=
+      ⟨{ app := fun _ ↦ ↾fun z ↦ ULift.up z.1, naturality := by intros; rfl }⟩
+    let b : T ⟶ (moduleSets B).obj M :=
+      ⟨{ app := fun _ ↦ ↾fun z ↦ ULift.up z.2, naturality := by intros; rfl }⟩
+    let t : T ⟶ (moduleSets B).obj M :=
+      ⟨{ app := fun V ↦ ↾fun z ↦ ULift.up
+           (@id (M.val.obj V) z.1 + @id (M.val.obj V) z.2)
+         naturality := by
+           intro U V i
+           ext z
+           exact congrArg ULift.up ((M.val.map i).hom.map_add _ _).symm }⟩
+    exact F.moduleAdd M T a b t (fun _ _ ↦ rfl) U (x, y)
+  · intro a x
+    let R := (sheafCompose J (forget CommRingCat.{w})).obj B
+    let T := R ⊗ (underlyingRaw B).obj M
+    let r : T ⟶ (sheafCompose J
+        (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).obj B :=
+      ⟨{ app := fun _ ↦ ↾fun z ↦ ULift.up z.1, naturality := by intros; rfl }⟩
+    let b : T ⟶ (moduleSets B).obj M :=
+      ⟨{ app := fun _ ↦ ↾fun z ↦ ULift.up z.2, naturality := by intros; rfl }⟩
+    let t : T ⟶ (moduleSets B).obj M :=
+      ⟨{ app := fun V ↦ ↾fun z ↦ ULift.up
+           (@id (B.obj.obj V) z.1 • @id (M.val.obj V) z.2)
+         naturality := by
+           intro U V i
+           ext z
+           exact congrArg ULift.up ((M.val.map i).hom.map_smulₛₗ _ _).symm }⟩
+    simpa [α, t, r, b, hB] using F.moduleSMul M T r b t (fun _ _ ↦ rfl) U (a, x)
+  · intro U V i
+    ext x
+    exact congrArg ULift.down (congrArg (fun a ↦ a (ULift.up x))
+      (α.hom.naturality i))
+
+private theorem transportedFreeProperty
+    (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
+    {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
+    (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w}
+      f.inverse B BI) (E : Sheaf J (Type w)) :
+    HasTransportedFreeUniversalProperty f.inverse F E := by
+  obtain ⟨P, eP, hAdd, hSmul, A, G, hA, hG, hChain, hAL, hAR, hGL, hGR,
+    hBij, hEL, hER⟩ := geometricFreeModule_hom_chain f F
+  exact hBij E
 
 /-- The underlying comparison with the canonical inverse-image identification retained.
 Source: Stacks 08TQ (blueprint: lem-trf-geometric-inverse-image-free-module). -/
@@ -169,7 +180,33 @@ theorem inverseFreeModule_existsUnique
       f.inverse B BI) (E : Sheaf J (Type w)) :
     ∃! p : F.modules.obj ((free B).obj E) ≅ (free BI).obj (f.inverse.obj E),
       IsComparison f F E p := by
-  sorry
+  let P := F.modules.obj ((free B).obj E)
+  let k := f.inverse.map (generator B E) ≫ F.moduleUnderlying.inv.app ((free B).obj E)
+  let kRaw := k ≫ (rawLift BI P).inv
+  have hP : ∀ M : ringedSiteModules.{w, w, vD, uD} (ring BI),
+      Function.Bijective (fun h : P ⟶ M ↦ kRaw ≫ (underlyingRaw BI).map h) := by
+    intro M
+    have h := transportedFreeProperty f F E M
+    have eqn (a : P ⟶ M) :
+        kRaw ≫ (underlyingRaw BI).map a =
+          inverseFreeRestriction f F E M a ≫ (rawLift BI M).inv := by
+      ext V x
+      rfl
+    simp_rw [eqn]
+    exact ((rawLift BI M).symm.homToEquiv).bijective.comp h
+  obtain ⟨p, hp, hu⟩ := freeModule_unique_iso BI (f.inverse.obj E) P kRaw hP
+  have normalize (q : P ≅ (free BI).obj (f.inverse.obj E)) :
+      (kRaw ≫ (underlyingRaw BI).map q.hom = generatorRaw BI (f.inverse.obj E)) ↔
+        IsComparison f F E q := by
+    rw [← cancel_mono (rawLift BI ((free BI).obj (f.inverse.obj E))).hom]
+    simp only [Category.assoc, rawLift_naturality, generator_lift]
+    simp only [kRaw, k, Category.assoc, Iso.inv_hom_id_assoc]
+    rfl
+  refine ⟨p, (normalize p).mp hp.1, ?_⟩
+  intro q hq
+  apply Iso.ext
+  have hqp := (hP ((free BI).obj (f.inverse.obj E))).1
+  exact hqp (((normalize q).mpr hq).trans hp.1.symm)
 
 /-- Naturality in both generator sheaves and coefficient-ring maps, expressed on
 underlying sheaves to retain semilinear coefficient changes. The compatibility hypothesis
@@ -199,7 +236,9 @@ theorem inverseFreeModule_naturality
     (hp : IsComparison f F E p) (hp' : IsComparison f F' E' p') :
     f.inverse.map (changeSets b e) ≫ comparison f F' E' p' =
       comparison f F E p ≫ changeSets bi (f.inverse.map e) := by
-  sorry
+  let := f.leftExact
+  exact normalizedFreeModule_naturality f.inverse F F' b bi hb e
+    (transportedFreeProperty f F E) p p' hp hp'
 
 /-- Finite-product compatibility on the generator sheaves, including the empty product.
 Source: Stacks 08TQ (blueprint: lem-trf-geometric-inverse-image-free-module).
@@ -219,7 +258,8 @@ theorem inverseFreeModule_products
     f.inverse.map (generator B (∏ᶜ E)) ≫ comparison f F (∏ᶜ E) p ≫
         (moduleSets BI).map ((free BI).map (piComparison f.inverse E)) =
       piComparison f.inverse E ≫ generator BI (∏ᶜ fun i ↦ f.inverse.obj (E i)) := by
-  sorry
+  rw [← Category.assoc, hp]
+  exact generator_naturality BI (piComparison f.inverse E)
 
 /-- The identity comparison is identity after its underlying-module identification.
 The ring presentation is normalized to the identity, rather than requiring equality of
@@ -239,10 +279,29 @@ theorem inverseFreeModule_identity
       (moduleSets B).map p.hom = generator B E) :
     F.moduleUnderlying.inv.app ((free B).obj E) ≫ (moduleSets B).map p.hom =
       𝟙 ((moduleSets B).obj ((free B).obj E)) := by
-  sorry
+  let a := identityUnderlying B F hB ((free B).obj E) ≫ p.hom
+  have ha : (moduleSets B).map a =
+      F.moduleUnderlying.inv.app ((free B).obj E) ≫ (moduleSets B).map p.hom := by
+    ext U x
+    rfl
+  have hid : a = 𝟙 _ := by
+    apply (freeModule_restrict_bijective B E ((free B).obj E)).1
+    apply (cancel_mono (rawLift B ((free B).obj E)).hom).mp
+    simp only [restrictGenerators, Functor.map_id, Category.comp_id, Category.assoc,
+      rawLift_naturality, generator_lift, ha]
+    rw [← Category.assoc, generator_lift]
+    exact hp
+  rw [← ha, hid, Functor.map_id]
 
 variable {H : Type uH} [Category.{vH} H] [EssentiallySmall.{w} H]
   {T : GrothendieckTopology H}
+
+local instance : T.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w}) := inferInstance
+
+local instance : T.HasSheafCompose (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w}) := inferInstance
+
+local instance : T.HasSheafCompose (forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w}) := inferInstance
+
 
 /-- Composition coherence with the actual composite inverse image and ring comparison.
 Source: Stacks 08TQ (blueprint: lem-trf-geometric-inverse-image-free-module).
@@ -276,6 +335,9 @@ theorem inverseFreeModule_composition
     (hr : IsComparison (g.comp f) FG E r) :
     comparison (g.comp f) FG E r =
       g.inverse.map (comparison f F E p) ≫ comparison g G (f.inverse.obj E) q := by
-  sorry
+  let := f.leftExact
+  let := g.leftExact
+  exact normalizedFreeModule_composition f.inverse g.inverse F G FG hB E
+    (transportedFreeProperty (g.comp f) FG E) p q r hp hq hr
 
 end CategoryTheory.SheafFreeModule

@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-semilinear-equivariant-chow-modification",
+ "kind": "statement",
+ "title": "Semilinear equivariant projective Chow modification",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be an integral finite-type $k$-scheme [def-pc-integral-scheme, def-weil-finite-type-morphism] proper over $k$ [def-weil-proper-morphism], and let a finite group $H$ act on $X$ and $k$ compatibly with the structure morphism. Compatibility means that the structure map commutes with each pair of scheme and field automorphisms; the action need not be faithful. Then there are an integral finite-type $k$-scheme $T$, a compatible $H$-action on $T$, and an $H$-equivariant proper surjective morphism $q:T\\to X$ [def-weil-surjective-morphism] which is an isomorphism over a dense open subscheme of $X$ [def-weil-open-immersion], such that both $T\\to\\operatorname{Spec}k$ and $q$ admit closed immersions into finite-dimensional projective spaces over their respective targets [def-kun-projective, def-weil-closed-immersion]. In particular $q$ identifies $k(T)$ with $k(X)$ [def-sc-function-field].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0200, lemma-chow-Noetherian, followed by the finite product of semilinear translates and the schematic closure of their common dense open; constructions.tex Tag 01WD, lemma-segre-embedding. Equivariant averaging is the construction referenced in de Jong (1997) §2.10, printed p.605."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-kun-projective",
+  "def-weil-closed-immersion",
+  "def-sc-function-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}k$ and write $f:X\\to S$. A field is Noetherian: an ideal containing a nonzero element contains $1$, so its only ideals are $(0)$ and $(1)$. Thus $S$ is affine Noetherian. Since $X$ is integral it is reduced. Apply [lem-fin-noetherian-chow-modification] to obtain $\\pi:Y\\to X$, proper and an isomorphism over a dense open $U_0\\subset X$, with $Y$ projective over $S$. Here projective means a closed immersion $i:Y\\hookrightarrow\\mathbf P^n_S$ for some finite $n$, as in [def-pc-projective-morphism]. Also $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "def-weil-field",
+    "pqf-def-locnoeth",
+    "def-pc-integral-scheme",
+    "lem-fin-noetherian-chow-modification",
+    "def-pc-projective-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0200, lemma-chow-Noetherian, specialized to a proper scheme over a field; the proper-source immersion is closed as in the existing modification node."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-semilinear-translated-modification-product] to $f,\\pi,i$ and the given compatible actions. It supplies the copies $q_g=a_g\\pi$, each with its finite projective-space embedding over $S$, their fibre product $r:P\\to X$, and its semilinear action $A_h$. It also supplies a dense invariant open $U\\subset X$ and the equivariant open immersion $j:U\\hookrightarrow P$ inverse to $P\\times_XU\\to U$.",
+   "uses": [
+    "lem-sfb-semilinear-translated-modification-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WF, lemma-H-projective-base-change; explicit finite-translate construction in the returned proof of lem-sfb-semilinear-equivariant-chow-modification, steps 2, 4 and 5. The averaging route is referenced in de Jong (1997), §2.10, printed p.605 (locally WANTED); the precise action and common-open argument are agent-written."
+   }
+  },
+  {
+   "text": "The map $f$ is separated because it is proper [def-weil-proper-morphism], and $H$ is finite and nonempty. Apply [lem-sfb-projective-fibre-product-closed-model] to the family $(q_g)_{g\\in H}$. It gives a closed immersion $P\\hookrightarrow\\mathbf P^N_S$, $N=(n+1)^{|H|}-1$, and proves that $P$ is Noetherian.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-projective-fibre-product-closed-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD, lemma-segre-embedding; schemes.tex Tag 01KR, lemma-fibre-product-after-map; morphisms.tex Tag 0C4Q, lemma-projective-permanence (closed-graph proof in the finite-space convention), Tag 01WC, lemma-locally-projective-proper, and Tag 01T6, lemma-finite-type-noetherian. Returned proof steps 3 and 8 and the projective ambient Noetherianity part of step 6."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-invariant-integral-open-schematic-closure] to $r:P\\to X$, its actions, and $U$. Its hypotheses hold by the preceding two steps and integrality of $X$. For $c:T=\\operatorname{SIm}(j)\\hookrightarrow P$ and $q=rc$, it gives integral $T$, a compatible action making $q$ equivariant, an isomorphism $q^{-1}(U)\\simeq U$, and the isomorphism of the actual generic stalks induced by $q$, identifying $k(X)$ with $k(T)$.",
+   "uses": [
+    "lem-sfb-invariant-integral-open-schematic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B, lemma-scheme-theoretic-image-reduced; Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, including restriction to an open and the ideal kernel; Tag 01RW, definition-function-field, and Tag 01RV, lemma-integral-scheme-rational-functions. Returned proof steps 6 (closure and restriction), 7 (invariant ideal and descended action), and 9 (generic stalk map); action descent is agent-explicit."
+   }
+  },
+  {
+   "text": "Use the closed-model conclusion of [lem-sfb-projective-fibre-product-closed-model] for $c:T\\hookrightarrow P$. It provides closed immersions $T\\hookrightarrow\\mathbf P^N_S$ and $T\\hookrightarrow\\mathbf P^N_X$, and properness and finite type of both structure maps. Its final clause applies to the dense open $U$ from step 4 and proves that $q$ is surjective. These are all the remaining clauses.",
+   "uses": [
+    "lem-sfb-projective-fibre-product-closed-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD, lemma-segre-embedding; schemes.tex Tag 01KR, lemma-fibre-product-after-map; morphisms.tex Tag 0C4Q, lemma-projective-permanence (closed-graph proof in the finite-space convention), Tag 01WC, lemma-locally-projective-proper, and Tag 01T6, lemma-finite-type-noetherian. Returned proof steps 3 and 8 and the projective ambient Noetherianity part of step 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "lem-fin-noetherian-chow-modification",
+  "def-pc-projective-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-semilinear-translated-modification-product",
+  "def-weil-proper-morphism",
+  "lem-sfb-projective-fibre-product-closed-model",
+  "lem-sfb-invariant-integral-open-schematic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0200, lemma-chow-Noetherian, followed by the three independent extracted construction lemmas. Full returned argument retained in the repair report; de Jong (1997), §2.10, locally WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Chow|equivariant.*(projective|modification)|projective.*birational",
+   "results": "{\"t\": \"2026-10-22T03:43:06Z\", \"tool\": \"grep\", \"query\": \"Chow|equivariant.*(projective|modification)|projective.*birational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern properness, relative normalization, ordinary projective spectra or special Weierstrass models; none constructs a semilinear equivariant projective modification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chow lemma with finite group actions and a projective birational modification of a proper scheme",
+   "results": "{\"t\": \"2026-10-22T03:43:07Z\", \"tool\": \"leansearch\", \"query\": \"Chow lemma with finite group actions and a projective birational modification of a proper scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsProper.recOn\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.toIsSeparated\"], \"digest\": \"25b22ca1cb05af3d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern properness, relative normalization, ordinary projective spectra or special Weierstrass models; none constructs a semilinear equivariant projective modification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": "{\"t\": \"2026-10-22T03:43:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern properness, relative normalization, ordinary projective spectra or special Weierstrass models; none constructs a semilinear equivariant projective modification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism of integral schemes with a finite semilinear group action admits an equivariant projective birational modification with projective composite",
+   "results": "{\"t\": \"2026-10-22T03:43:08Z\", \"tool\": \"leanfinder\", \"query\": \"A proper morphism of integral schemes with a finite semilinear group action admits an equivariant projective birational modification with projective composite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"4eaf5b3301127dff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern properness, relative normalization, ordinary projective spectra or special Weierstrass models; none constructs a semilinear equivariant projective modification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant Chow lemma projective modification dominating a proper variety over a projective base",
+   "results": "{\"t\": \"2026-10-22T03:43:09Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant Chow lemma projective modification dominating a proper variety over a projective base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Proj\"], \"digest\": \"75c203d5e0d24818\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern properness, relative normalization, ordinary projective spectra or special Weierstrass models; none constructs a semilinear equivariant projective modification"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*(Chow|flatten)|geometricallyNormal.*normaliz|purelyInseparable.*curve",
+   "results": "{\"t\": \"2026-10-22T03:43:15Z\", \"tool\": \"grep\", \"query\": \"equivariant.*(Chow|flatten)|geometricallyNormal.*normaliz|purelyInseparable.*curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern properness, relative normalization, ordinary projective spectra or special Weierstrass models; none constructs a semilinear equivariant projective modification"
+  },
+  {
+   "tool": "grep",
+   "query": "Chow|equivariant.*(projective|modification)|projective.*birational",
+   "results": "{\"t\": \"2026-10-22T03:58:13Z\", \"tool\": \"grep\", \"query\": \"Chow|equivariant.*(projective|modification)|projective.*birational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Proj properness, linear projectivization, representation theory or invariant open subsets; none constructs a projective semilinear equivariant birational modification of schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant Chow lemma for a finite group acting compatibly on a proper scheme and its base field",
+   "results": "{\"t\": \"2026-10-22T03:58:13Z\", \"tool\": \"leansearch\", \"query\": \"Equivariant Chow lemma for a finite group acting compatibly on a proper scheme and its base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.sumOfConjugatesEquivariant.congr_simp\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"IsGalois.of_fixed_field\", \"MulAction.selfEquivSigmaOrbits'\", \"Representation.toCoinvariants_mk\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"Representation.linHom.mem_invariants_iff_comm\"], \"digest\": \"1f3bd26e1000f45f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Proj properness, linear projectivization, representation theory or invariant open subsets; none constructs a projective semilinear equivariant birational modification of schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": "{\"t\": \"2026-10-22T03:58:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Proj properness, linear projectivization, representation theory or invariant open subsets; none constructs a projective semilinear equivariant birational modification of schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetrizing a projective modification by a finite product of translates and taking the closure of a dense invariant open",
+   "results": "{\"t\": \"2026-10-22T03:58:14Z\", \"tool\": \"leanfinder\", \"query\": \"Symmetrizing a projective modification by a finite product of translates and taking the closure of a dense invariant open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpen.dense_of_preimage_smul_invariant\", \"Profinite.NobelingProof.isClosed_C'\", \"Profinite.NobelingProof.isClosed_C1\", \"IsOpen.dense_iUnion_preimage_smul\", \"NumberField.mixedEmbedding.fundamentalCone.closure_paramSet\", \"IsOpen.dense_iUnion_smul\", \"MulAction.isTopologicallyTransitive_iff_dense_of_preimage_invariant\", \"IsOpen.dense_iUnion_preimage_vadd\"], \"digest\": \"524753c8efb4095c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Proj properness, linear projectivization, representation theory or invariant open subsets; none constructs a projective semilinear equivariant birational modification of schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite semilinear group action on a proper integral variety admits a projective birational equivariant modification",
+   "results": "{\"t\": \"2026-10-22T03:58:16Z\", \"tool\": \"leanfinder\", \"query\": \"Finite semilinear group action on a proper integral variety admits a projective birational equivariant modification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.finite_of_finite\", \"Projectivization.smul_mk\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"Rep.instProjective\", \"Projectivization.smul_def\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"Projectivization.finite_iff_of_finite\"], \"digest\": \"cb2f2d2103bd179e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Proj properness, linear projectivization, representation theory or invariant open subsets; none constructs a projective semilinear equivariant birational modification of schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral scheme over a field with a finite semilinear group action has an equivariant birational projective Chow modification",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: properness of Proj, fixed fields, module equivariance and actions on vector-space projectivizations do not construct a semilinear equivariant Chow modification of schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: properness of Proj, fixed fields, module equivariance and actions on vector-space projectivizations do not construct a semilinear equivariant Chow modification of schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Chow|equivariant.*(projective|modification)|projective.*birational",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: properness of Proj, fixed fields, module equivariance and actions on vector-space projectivizations do not construct a semilinear equivariant Chow modification of schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant Chow lemma for a proper scheme and a finite group acting on its base field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"LinearMap.sumOfConjugatesEquivariant.congr_simp\", \"module\": \"Mathlib.RepresentationTheory.Maschke\", \"type\": \"∀ {k : Type u} [inst : CommRing k] (G : Type u) [inst_1 : Group G] {V : Type v} [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] [inst_4 : Module (MonoidAlgebra k G) V] [inst_5 : IsScalarTower k (MonoidAlgebra k G) V]\\n  {W : Type w} [inst_6 : AddCommGroup W] [inst_7 : Module k W] [inst_8 : Module (\", \"doc\": \"If two $k[G]$-equivariant linear maps $\\\\pi, \\\\pi_1 : W \\\\to V$ are equal, then their equivariant conjugate sums over a finite group $G$ coincide, i.e., $\\\\sum_{g \\\\in G} g \\\\cdot \\\\pi(g^{-1} \\\\cdot -) = \\\\sum\"}\n  {\"name\": \"IsGalois.of_fixed_field\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"(G : Type*) [Group G] [Finite G] [MulSemiringAction G E] : IsGalois (FixedPoints.subfield G E) E\", \"doc\": \"If a finite group $ G $ acts on a field $ E $, then the extension $ E $ over the subfield of elements fixed by all elements of $ G $ is a Galois extension (i.e., it is algebraic, normal, and separable\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": IsFinite f ↔ IsProper f ∧ IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"IsGaloisGroup.fixedPoints\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[Finite G] [FaithfulSMul G L] : IsGaloisGroup G (FixedPoints.subfield G L) L\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ L $, then $ G $ is the Galois group of the field extension $ L $ over the subfield of elements fixed by the action of $ G $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.RespectsIso @IsProper\", \"doc\": \"Every isomorphism of schemes is a proper morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: properness of Proj, fixed fields, module equivariance and actions on vector-space projectivizations do not construct a semilinear equivariant Chow modification of schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective birational modification compatible with a finite group acting nontrivially on the ground field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Projectivization.instMulAction\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"{G : Type u_1} →\\n  {K : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : AddCommGroup V] →\\n        [inst_1 : DivisionRing K] →\\n          [inst_2 : Module K V] →\\n            [inst_3 : Group G] →\\n              [inst_4 : DistribMulAction G V] → [SMulCommClass G K V] → MulAction G (Projectivization K V)\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ (with commuting scalar multiplications between $G$ and $K$), this constructs a group action of $G$ on the projectivizatio\"}\n  {\"name\": \"Projectivization.smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) (x : Projectivization K V),\\n  SMul.smul g x = Projectivization.map ((DistribMulAction.toM\", \"doc\": \"Given a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the proje\"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"Projectivization.smul_mk\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) {v : V} (hv : v ≠ 0),\\n  g • Projectivization.mk K v hv = Projectivization.mk K (g • v) ⋯\", \"doc\": \"For a group $ G $ acting distributively on a module $ V $ over a division ring $ K $, the induced action of $ G $ on the projectivization $ \\\\mathbb{P}_K(V) $ satisfies that for any non-zero vector $ v\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Projective.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The quotient of the type of triples $(x_0, x_1, x_2)$ in $R^3$ by the equivalence relation identifying triples that are scalar multiples of each other under the action of the multiplicative group of u\"}\n  {\"name\": \"WeierstrassCurve.Projective.comp_equiv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Projective F} (f : F →+* K)\\n  {P Q : Fin 3 → F}, W.Nonsingular P → W.Nonsingular Q → (⇑f ∘ P ≈ ⇑f ∘ Q ↔ P ≈ Q)\", \"doc\": \"For a ring homomorphism $ f : F \\\\to K $ between fields and nonsingular points $ P, Q $ on a projective Weierstrass curve over $ F $, the images $ f \\\\circ P $ and $ f \\\\circ Q $ are projectively equival\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: properness of Proj, fixed fields, module equivariance and actions on vector-space projectivizations do not construct a semilinear equivariant Chow modification of schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-flat-curve-preparation",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160.; equivariant Chow preparation in de Jong §2.10, before simultaneous flattening",
+   "via": [
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-semilinear-equivariant-chow-modification",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return: three self-contained statement-only unsplit nodes divide the original finite-translate action and common open, finite-product and relative closed-model embeddings, and invariant integral schematic closure with canonical function-field identification. The statement is unchanged. The original nine-step argument and its complete allocation are preserved in report.md; the item now has a short five-step assembly.",
+  "blueprint": "The inherited ancestry has no imported ancestor (blueprint_refs.py ancestor returns None). Realizes the inherited place: det-thm-sf-ctf-stability-direct-images proof (3), through equivariant flat curve preparation, de Jong (1997) §2.10, first paragraph before flattening. The main-20261015 unit section and the current unit record were read; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-noetherian-chow-modification",
+    "why": "Ordinary nonequivariant Chow modification over the affine Noetherian field spectrum, before the finite-translate product."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity used for X in step 1; the unit has no competing geometric construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-noetherian-chow-modification",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-chow-segre",
+  "lem-trf-reduced-scheme-image",
+  "lem-kun-projective-implies-proper",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NK-585f44e4f",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-585f44e4f (reviewer sub-agent of L); spot-checked: Re-split is valid. The released note (live, 05:47Z on 2026-10-22, after the NF S2 landing) keeps the item S1-open. Base proof = live node: all 9 old step texts appear verbatim in the report. The item statement and its lean/reviewed_lean records are unchanged. Every old argument moved into one of three statement-only unsplit nodes of comparable size (statements 1570/1632/1806 chars). Translated-product node = old steps 2, 4, 5. I re-derived each clause: the twist embedding is (id×b_g)∘i; A_h is well defined because q_g ρ_{h⁻¹g} = a_h r; the group law is ρ_{(hl)⁻¹g}; r⁻¹U ≅ U because a_g⁻¹U ⊂ U_0. Projective-fibre-product-closed-model node = old steps 3 and 8 plus P Noetherian. Separated diagonal gives the closed immersion (01KR), Segre gives N = (n+1)^|I| − 1 (01WD), and the closed graph gives d_T (0C4Q proof). This carries the dropped lem-per-h-projective-permanence argument inline and does not cite it. Proper ⇒ closed image ⊇ dense V ⇒ surjective. Invariant-closure node = old steps 6, 7, 9. Its proof route: Noetherian P ⇒ j quasi-compact; reduced image (056B); restriction to the open (01R8(3)); A_h(r⁻¹U) = r⁻¹U, so SIm(A_h j) = T and the action descends uniquely; the generic stalks lie in the dense opens. def-sc-function-field covers any integral X (last sentence). The parent is a 2127-char, 5-step assembly with every hypothesis matched (step 1 is old step 1 verbatim). Edge cases checked: trivial H, |I| = 1, n = 0, empty T, non-faithful actions, any characteristic. No new statement restates the item or a parent clause, and there is no cycle. No cited node is on route-pivot-dropped.txt and no SGA source is used. Stacks tags 01WF, 01WD, 01KR, 0C4Q, 01WC, 01T6, 056B, 01R8, 01RW, 01RV and 0200 were read and match their labels. Duplicate searches found only ingredients (lem-chow-segre, lem-trf-reduced-scheme-image, lem-trf-h-projective-composition, lem-weil-pbc-chow-noetherian). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearEquivariantChowModification",
+  "declaration": "AlgebraicGeometry.exists_semilinear_equivariant_chow_modification",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearEquivariantChowModification.lean",
+  "statement": "theorem exists_semilinear_equivariant_chow_modification (k : Type u) [Field k] (X : Scheme.{u}) [IsIntegral X] (f : X ⟶ Spec (.of k)) [IsProper f] (H : Type v) [Group H] [Finite H] (rho : H →* (k ≃+* k)) (a : H →* Aut X) (ha : ∀ h : H, (a h).hom ≫ f = f ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) : ∃ (T : Scheme.{u}) (_ : IsIntegral T) (q : T ⟶ X) (aT : H →* Aut T), LocallyOfFiniteType (q ≫ f) ∧ QuasiCompact (q ≫ f) ∧ (∀ h : H, (aT h).hom ≫ (q ≫ f) = (q ≫ f) ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) ∧ (∀ h : H, (aT h).hom ≫ q = q ≫ (a h).hom) ∧ IsProper q ∧ Surjective q ∧ (∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (q ∣_ U)) ∧ IsHProjective (q ≫ f) ∧ IsHProjective q ∧ ∃ eta : T, IsGenericPoint eta Set.univ ∧ q eta = genericPoint X ∧ IsIso (q.stalkMap eta)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The finite-type hypothesis on X is included in IsProper f (LocallyOfFiniteType and QuasiCompact). The actions are homomorphisms to the existing automorphism groups. The final canonical function-field identification is expressed directly as the stalk-map isomorphism at the generic point of T, whose image is the generic point of X; no arbitrary field isomorphism is substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-335d92263",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records, the module, the report, the IsHProjective source and the Mathlib Aut/functionField definitions. Hypotheses match: Field k, IsIntegral X, IsProper f (includes finite type), Finite H in its own universe v, arbitrary homs rho and a. Checked that a and h↦Spec.map(rho h⁻¹) are both left actions, so ha is the node's compatibility. The conclusion has all clauses: integral finite-type T, aT semilinear, q equivariant, proper, surjective, IsIso (q ∣_ U) for a dense U, IsHProjective of q≫f and of q, and the generic-point stalkMap iso (the actual function-field map, not an arbitrary iso). Statement verbatim, node equals live apart from lean, docstrings and the 9 steps present, sorry only, imports follow rule 7, not superseded or dropped. Advisories only: the Second reading section is not an independent reading (dispatcher policy) but the Worker report matches every clause; some clauses are implied by others. No file changed, so no compile run."
+ }
+}

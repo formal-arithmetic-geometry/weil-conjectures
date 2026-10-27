@@ -20,183 +20,160 @@
  ],
  "proof": [
   {
-   "text": "Fix the completed coefficient convention throughout. The completed-constant reduction lemma gives flatness of $A_T$ over the constant $A$-sheaf and $A_T\\otimes_A^L A/\\varpi^n\\simeq(A/\\varpi^n)_T$. For a stratum immersion $i:S\\to T$, inverse image is exact and preserves limits, hence $i^{-1}A_T=A_S$; for a site object $U\\to S$, slice restriction has the same property by the localization description. Since the coefficient map $c$ is an isomorphism, module pullback $u^*=u^{-1}(-)\\otimes_{u^{-1}A_T,c}A_S$ is exact, so it equals its left derived functor, and the derived tensor-pullback lemma gives $u^{-1}(K\\otimes^L_{A_T}(P_n)_T)\\simeq u^{-1}K\\otimes^L_{A_S}(P_n)_S$, naturally in the quotient maps. In particular these restrictions preserve finite reductions and their normalization maps. To check completeness, use the quotient-tower completion unit furnished by the constant-completion equivalence. Exact countable products compute derived products termwise, and the strict-tower Roos triangle computes its derived limit. Exact restriction preserving products therefore preserves this unit and its cone. The finite-stratum detection lemma, followed by covering detection of zero sheaves, shows that the cone vanishes on $T$ if and only if it vanishes on all chosen stratum covers. Thus intrinsic completeness restricts to strata and covers and is detected on a finite stratification. This argument uses the actual coefficient isomorphism for immersions and slices, not scalar extension along an arbitrary scheme morphism.",
+   "text": "Identify the ordinary integralConstantModule with constants followed by scalar extension along CompletedConstantReduction.base and pbcCompletedComparison. Equality of the scalar maps follows by their finite limit projections. Uniqueness of the tensor/restriction adjunction identifies the composite extension. On a bounded projective representative the K-flat extension counit is invertible; the exact realization factorization identifies integralConstantDerived with the explicit derived-extension model used by perfect-strata-uniform-reductions.",
    "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-countable-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.8(1),(2); Proposition 6.6.11, restriction and completeness devissage; explicit Roos-cone argument"
-   }
-  },
-  {
-   "text": "For a bounded finite-projective $A$-complex $P$, its completed constant realization is $A_U\\otimes_A P$ termwise. Its finite reductions are the constant complexes $P\\otimes_A A/\\varpi^n$ by the completed-constant reduction lemma. In each degree the finite-projective module is a summand of $A^r$; the transition maps on the corresponding constant sheaves are sectionwise surjective by the constant-module section lemma. On products of this tower, $1-s$ is sectionwise surjective: given $(y_n)$, choose $x_1$ and recursively lift $x_n-y_n$ to $x_{n+1}$, so $x_n-q(x_{n+1})=y_n$. Its kernel is the inverse limit. The limit of a finite-projective summand is the same summand of $A_U^r$. The Roos triangle therefore identifies the quotient completion unit with an isomorphism onto the original realized complex. Such a complex is intrinsically complete. A finite stratification with perfect local models has globally bounded cohomology and globally bounded reductions: the finite Noetherian affine cover of $T$ makes its underlying space Noetherian (a descending closed chain stabilizes on each affine member). Every subset of that space is quasi-compact, hence so is each stratum. Thus the covering axiom of the pro-etale site allows finitely many quasi-compact pieces of the trivializing cover to cover it; take the smallest and largest term degrees of their finitely many models. The finite-stratum detection lemma detects vanishing outside these bounds. Completeness also follows from step 1.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "def-weil-pbc-proetale-site",
-    "lem-sc-affine-noetherian-underlying-space",
-    "lem-sfb-noetherian-space-compact-subsets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication; completed perfect constants and finite bounds"
-   }
-  },
-  {
-   "text": "First verify the coefficient completeness needed below. The coefficient ring is adically complete: for a compatible family in $A/\\varpi^n$, choose representatives $x_n\\in A$. Compatibility gives $x_{n+1}-x_n\\in\\varpi^nA$, so $|x_m-x_n|_E\\leq|\\varpi|_E^n$ for $m\\geq n$. Completeness of $E$ gives a limit $x$ in its closed unit ball $A$; each closed ball $x_n+\\varpi^nA$ contains that limit. Thus $x$ has the prescribed residues, and $\\bigcap_n\\varpi^nA=0$ gives uniqueness. This verifies the extra adic-completeness hypothesis of the lifting lemma. ",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-l-adic-extension-absolute-value"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.5, complete coefficient hypothesis; elementary Cauchy-sequence verification for the chosen valuation ring"
-   }
-  },
-  {
-   "text": "Assume (i). The uniform tower definition gives local complexes in a fixed term interval $[d_0,d_1]$, and every cohomology sheaf of $K_1$ is finite lisse on its finite stratification. Uniform boundedness of the derived reductions requires a separate check: for every $n\\geq1$, over the DVR $A$, $[A\\xrightarrow{\\varpi^n}A]$ in degrees $[-1,0]$ resolves $A/\\varpi^n$. Flatness and finite reduction in the completed-constant reduction lemma therefore give the flat resolution $[A_T\\xrightarrow{\\varpi^n}A_T]$ of $(A/\\varpi^n)_T$. Tensoring a local complex from the uniform tower definition with this resolution has terms only in $[d_0-1,d_1]$. Its quasi-isomorphism with $K_n$ on the chosen covers, and the finite-stratum detection of step 1, give that same global cohomological interval independently of $n$. ",
-   "uses": [
-    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-integral-stratified-perfect-models",
     "def-weil-pbc-bounded-constructible-tower",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-noetherian-stratum-detection"
+    "lem-weil-pbc-completed-realization-derived-cohomology",
+    "lem-weil-pbc-perfect-local-reduction-models",
+    "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, forward implication; local ingredient Lemma 6.6.8 and Stacks Tag 09C6"
+    "place": "Proposition 6.6.11; Definition 6.5.1, retaining uniform reduction models and compatible etale origins."
    }
   },
   {
-   "text": "Continue with (i) and the reduction bounds of step 4. In particular $K_1$ is bounded with intrinsically constructible cohomology: on the strata and covers of the uniform tower its cohomology sheaves are finite lisse. Every locally closed subset of $T$ is constructible: the underlying space of $T$ is Noetherian (step 2), and in a Noetherian space every finite union of locally closed subsets is constructible by the definition of constructible subsets. So the strata of every finite stratification used here satisfy the constructibility clause of intrinsic pro-etale constructibility. Finite-ring derived origin gives a bounded constructible etale complex $L_1$ with $\\nu_T^*L_1\\simeq K_1$; one may use the existing compatible witness, since bounded-below full faithfulness identifies it with this origin. By the definition of etale constructibility choose a finite stratification on which all the finitely many nonzero cohomology sheaves of $L_1$ are finite locally constant. A common refinement is obtained by intersecting the finitely many locally closed partitions and using their fibre-product immersions. Comparison-pullback identifies its restriction to every new stratum with the corresponding restriction of $K_1$. Apply finite-ring derived local constancy on each stratum to $L_1$. Since $A/\\varpi$ is a field, its bounded finite-module constant models are perfect: split cycles and boundaries as vector spaces to replace the complex by its finitely many finite-dimensional cohomology spaces in their degrees. Step 1 makes $K$ intrinsically complete on every stratum. By step 3 the coefficient ring is adically complete. The residue-lisse perfect-lifting lemma now gives pro-etale locally a perfect $A$-complex on each stratum. This proves (ii). No claim is made that a general finite-ring bounded complex is perfect; the residue field is essential here.",
+   "text": "For stratified perfect K, pull each model sieve back from the chosen terminal object to ProEt.mk(identity), and refine it by a covering presieve. Apply perfect-strata-uniform-reductions to the preceding scalar-extension models. Exact scalar restriction commutes with cohomology, so its common vanishing interval and intrinsic constructible cohomology are precisely PbcUniformReductionProfile.",
    "uses": [
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-perfect-strata-uniform-reductions",
+    "def-weil-pbc-uniform-reduction-profile",
+    "lem-sf-constant-model-stratification-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Definition 6.5.1, retaining uniform reduction models and compatible etale origins."
+   }
+  },
+  {
+   "text": "On every member of these stratum covers, integral-perfect-chart-complete gives intrinsic completeness for every representative. Map the covering presieves to scheme covers and use stratum-completion-unit-restriction to detect invertibility of the global intrinsic unit. The presentation/intrinsic completeness equivalence in PbcCompletedPullbackActual converts this into PbcIsIntrinsicallyComplete.",
+   "uses": [
+    "lem-weil-pbc-integral-perfect-chart-complete",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Definition 6.5.1, retaining uniform reduction models and compatible etale origins."
+   }
+  },
+  {
+   "text": "The proved uniform reduction criterion converts the profile into uniform constructible tower models and compatible etale-origin witnesses. Together with the preceding intrinsic completeness, these give membership in PbcIsBoundedConstructibleComplete.",
+   "uses": [
+    "lem-weil-pbc-uniform-reduction-criterion",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Definition 6.5.1, retaining uniform reduction models and compatible etale origins."
+   }
+  },
+  {
+   "text": "Conversely, extract intrinsic completeness and the uniform reduction profile from the membership predicates using the same uniform criterion. Its local-effectivity argument supplies a bounded constructible etale presentation of the exponent-one reduction. The chosen uniformizer generates the maximal ideal by the finite-extension DVR theorem; transporting across ULift gives a field structure on the recorded quotient. Apply finite-field-stratified-perfect-models to the etale origin, retaining the finite stratification and all local perfect residue models.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-residue-lisse-perfect-lift",
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-constructible-subset",
+    "lem-weil-pbc-uniform-reduction-criterion",
+    "lem-weil-pbc-finite-field-stratified-perfect-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Definition 6.5.1, retaining uniform reduction models and compatible etale origins."
+   }
+  },
+  {
+   "text": "Each stratum is locally Noetherian by its finite-type immersion and has Noetherian underlying space by the embedding, hence is quasi-compact. Transport the local residue-model isomorphisms across the chosen etale-origin realization isomorphism. Apply integral-residue-stratum-lift independently on each stratum. Its proetale covering sieves and perfect integral models supply exactly IsIntegralStratifiedPerfect, with the same constructible stratification.",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "pqf-lem-locnoeth-lft",
     "lem-sc-affine-noetherian-underlying-space",
-    "def-weil-proetale-constructible-sheaf"
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-integral-residue-stratum-lift",
+    "def-weil-pbc-integral-stratified-perfect-models",
+    "lem-sf-constant-model-stratification-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, forward implication; local ingredient Lemma 6.6.8 and Stacks Tag 09C6"
-   }
-  },
-  {
-   "text": "Assume (ii). Steps 1 and 2 give intrinsic completeness and a common cohomological interval for all reductions $K_n$. Their restrictions to the given strata are constant perfect $(A/\\varpi^n)$-complexes locally, so every finite-level cohomology sheaf is finite lisse there, hence intrinsically constructible, the strata being constructible as in step 5. The quotient tower has the strict realization and normalization cocycle of the coefficient-datum definition. Normalized constructible local effectivity supplies exactly the common local models required by the uniform tower definition. Finite-ring derived origin supplies $L_n\\in D^+(T_{\\mathrm{et}},A/\\varpi^n)$ and $\\alpha_n:\\nu_T^*L_n\\simeq K_n$. Pullback commutes with coefficient tensor, so the source $L_{n+1}\\otimes^L_{A/\\varpi^{n+1}}A/\\varpi^n$ pulls back to $K_n$. Exact finite-level comparison reflects zero cohomology sheaves, by its sheaf unit; therefore this source is bounded before bounded-below full faithfulness is applied. Lift $\\alpha_n^{-1}\\rho_n(\\alpha_{n+1}\\otimes^L A/\\varpi^n)$ uniquely by full faithfulness to $\\beta_n$. Its inverse also lifts, so $\\beta_n$ is an isomorphism. Faithfulness turns the quotient-cocycle equalities after pullback into equalities of the lifted maps. These are compatible etale-origin witnesses as required, not unrelated levelwise origins. All conditions of (i) hold.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-normalized-constructible-local-effectivity",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-proetale-constructible-sheaf",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication; explicit verification of the DAG uniform models and compatible witnesses"
+    "place": "Proposition 6.6.11; Definition 6.5.1, retaining uniform reduction models and compatible etale origins."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-countable-products-core",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-noetherian-stratum-detection",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-constant-module-section-properties",
-  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-completed-realization-derived-cohomology",
+  "lem-weil-pbc-perfect-local-reduction-models",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-perfect-strata-uniform-reductions",
+  "def-weil-pbc-uniform-reduction-profile",
+  "lem-sf-constant-model-stratification-transport",
+  "lem-weil-pbc-integral-perfect-chart-complete",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-uniform-reduction-criterion",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-field-stratified-perfect-models",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "pqf-lem-locnoeth-lft",
   "lem-sc-affine-noetherian-underlying-space",
   "lem-sfb-noetherian-space-compact-subsets",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-l-adic-extension-complete",
-  "lem-weil-l-adic-extension-absolute-value",
-  "def-weil-pbc-bounded-constructible-complete",
-  "def-weil-pbc-bounded-constructible-tower",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-weil-pbc-finite-ring-derived-local-constancy",
-  "lem-weil-pbc-residue-lisse-perfect-lift",
-  "lem-weil-pbc-comparison-pullback",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "thm-weil-pbc-site-comparison",
-  "def-weil-constructible-subset",
-  "def-weil-proetale-constructible-sheaf",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-weil-pbc-normalized-constructible-local-effectivity",
-  "prop-weil-pbc-site-comparison-finite-level"
+  "lem-weil-pbc-integral-residue-stratum-lift"
  ],
  "proof_origin": {
-  "by": "worker K2",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.6.11, both implications; expanded completion and uniformity checks of the parent node steps 1-6."
+  "place": "Proposition 6.6.11 and Definition 6.5.1. G2 Lean assembly: explicit perfect scalar-model comparison, uniform profiles via perfect-strata-uniform-reductions, global intrinsic completeness detection, normalized uniform criterion, finite-field stratification, and two isolated local presentation comparisons. The item theorem is proved from those two strictly local remaining statements; no global equivalent criterion is introduced."
  },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "A derived complete constructible pro-etale complex over l-adic integers is locally a perfect constant complex on a finite stratification",
-   "results": "No matching criterion; unrelated perfectoid results.",
-   "date": "2026-10-21",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsPerfectRingComplex\"",
-   "results": "No results.",
-   "date": "2026-10-21",
-   "verdict": "no match"
-  },
-  {
    "tool": "grep",
-   "query": "finitePresentation.*perfect|perfect.*finitePresentation|stratified.*perfect",
-   "results": "No Mathlib statement of the completed criterion.",
-   "date": "2026-10-21",
-   "verdict": "no match"
+   "query": "pro.?[ée]tale|StratifiedPerfect|DerivedComplete",
+   "results": "Hits read: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the completed constructible/perfect-stratification criterion"
   },
   {
    "tool": "leansearch",
-   "query": "A derived complete constructible pro-etale complex has stratified perfect constant local models over a complete discrete valuation ring",
-   "results": [
-    "Algebra.Etale.formallyEtale",
-    "AlgebraicGeometry.Scheme.Etale",
-    "RingHom.Etale.propertyIsLocal",
-    "Algebra.instEtaleOfIsStandardEtale",
-    "Algebra.etaleLocus_eq_univ_iff",
-    "Algebra.FormallyEtale.instFormallySmooth",
-    "AlgebraicGeometry.IsEtale.instFormallyUnramified",
-    "Algebra.etaleLocus_eq_univ_iff_etale"
-   ],
-   "date": "2026-10-21",
-   "verdict": "Only general etale algebra results; no completed local-perfect criterion."
+   "query": "Constructible adically complete pro etale complexes are locally perfect on a finite stratification",
+   "results": "Hits read: IsAdicComplete, IsAdicComplete.toIsPrecomplete, AdicCompletion, IsAdicComplete.toIsHausdorff, IsAdicComplete.mk, IsAdicComplete.casesOn, IsAdicComplete.recOn, IsAdic.isPrecomplete_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the completed constructible/perfect-stratification criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"complete\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the completed constructible/perfect-stratification criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete constructible complexes of pro etale sheaves over a complete discrete valuation ring are stratified locally constant with perfect values",
+   "results": "Hits read: BDeRham, BDeRhamPlus, LightCondensed.locallyConstantPresheaf, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.lanSheafProfinite, CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the completed constructible/perfect-stratification criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|perfect|complete",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the completed constructible/perfect-stratification criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bhatt Scholze constructible completed coefficient complexes admit perfect constant local models after finite stratification of a Noetherian scheme",
+   "results": "Hits read: BDeRhamPlus, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, BDeRham, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the completed constructible/perfect-stratification criterion"
   }
  ],
  "mathlib_match": null,
@@ -231,23 +208,49 @@
   "date": "2026-10-21"
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-0ced5",
-  "group": "K2",
+  "reviewer": "NT-cc-Q05-4bf3f4e7c",
+  "group": "Q05",
   "result": "pass",
-  "landing": "20261021T061432-L-1774768",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-4bf3f4e7c (reviewer sub-agent of L); spot-checked: Item lem-weil-pbc-integral-completed-local-perfect-criterion at 4bf3f4e7: re-split delivery answering the released human note of 2026-10-22, which asks for at least 2 new nodes. I read the base proof (6 steps, 7613 characters), the earlier RETURN 98e053c8, both new nodes, every cited statement, and the sources (Bhatt-Scholze 6.6.11 and 6.5.1, Stacks 09B1/09AJ). The item's statement is unchanged. Neither the item nor the new ids is on the drop list. FIX for three faults, and both new nodes are dropped. (1) C5: new lem-weil-pbc-ringed-comparison-normalized-tower-lifts generalizes the existing Lean-closed lem-weil-pbc-normalized-etale-origin-witnesses (same unit, A8 proof pass). That node states exactly what step 7 uses: D+ sources, unique beta_{m,n} with alpha_n∘nu^*beta = rho∘(alpha_m⊗P_n), beta_{n,n}=1 and the full cocycle. The report itself calls it the special case. The two extras (arbitrary ringed topoi, initially unbounded L_n) are never needed, since finite-ring origin already gives bounded L_n. (2) C5: new lem-weil-pbc-uniform-tower-global-reduction-control generalizes the existing Lean-closed lem-weil-pbc-uniform-local-model-cohomology (F2 proof pass). Its hypotheses, uniform models plus compatible D+ origins, are available under (i). Its conclusion is the profile: one interval [a,b] and intrinsically constructible reductions, which is exactly what steps 4-5 need. (3) C4: step 5 took quasi-compactness of the finite-field strata from step 4's tower strata, which are different strata. Repaired with lem-sc-affine-noetherian-underlying-space and lem-sfb-noetherian-space-compact-subsets (|T| is Noetherian, so every subset is quasi-compact). The fix re-cites steps 4, 5 and 7 and updates proof_deps, proof_origin and split_report. The proof is now 2938 characters and has no cycle. Every base argument now has a carrier node: stratum-completion-unit-restriction, adic-perfect-model-complete-reduction with constant-completion-equivalence, uniform-local-model-cohomology, finite-field-stratified-perfect-models with residue-lisse-perfect-lift, perfect-strata-uniform-reductions with normalized-constructible-local-effectivity, normalized-etale-origin-witnesses, and the elementary O_E Cauchy step. Steps 1-3, 6 and 8 check out hypothesis by hypothesis. Edge cases checked: empty T, K=0, torsion A/varpi^r with reductions in [-1,0]. Both dropped nodes were true statements; they go only as duplicates. Batch-5 flags: both cited nodes reach lem-pod-derived-exact-square-composition, a generic lemma on pasting exact-functor squares on derived categories that is not part of either assumption. Comparing the closure of the base item with the fixed item gives the same 6 flagged nodes and 0 added, so I accept them. I accept the tool_use of lem-sfb-adic-perfect-model-complete-reduction. Maintainer: please waive the count of 2 new nodes, since every argument already has an existing node and two of them are Lean-closed.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-0ced5",
-  "group": "K2",
+  "reviewer": "C-4f63c",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261021T061432-L-1774768",
+  "landing": "20261026T222652-L-680402",
   "kind": "interface",
-  "note": "independent cc review: integralStratifiedPerfectCharacterization (ii)⇔(iii) proof + new criterion sorry vs node lem-weil-pbc-integral-stratified-perfect-characterization and B-S 6.6.11/6.8.11(3); public decl type/value hashes of AdicCoefficientDatumCompleted, BoundedConstructibleComplete, Models/item published vs sandbox; 54 direct importers compiled"
- }
+  "note": "independent cc review: item signature vs clone (identical); new sorry statements vs their nodes and residue_lisse_perfect_lift/stratum_completion_unit_restriction; removed imports vs unit sk-thm-properbasechange realized list (not on route); both direct importers compiled against delivered files (OK)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-integral-completed-local-perfect-criterion",
+  "worker": "stage1",
+  "summary": "Response to the released 2026-10-22 re-split note. Every argument of the old six-step proof is carried by an existing node: stratum-completion-unit-restriction, adic-perfect-model-complete-reduction with constant-completion-equivalence, uniform-local-model-cohomology (forward reduction profile), finite-field-stratified-perfect-models with residue-lisse-perfect-lift, perfect-strata-uniform-reductions, normalized-constructible-local-effectivity and normalized-etale-origin-witnesses (compatible beta). The two delivered generalizations of existing nodes were dropped in review. Item statement unchanged; proof is a short assembly.",
+  "blueprint": "thm-weil-pbc-finite-extension proof first sentence (choose an integral lattice), via the integral characterization: steps 1-3 realize base steps 1-3 using existing dedicated nodes; step 4 realizes base step 4 and the constructibility part of base step 5 through uniform-local-model-cohomology; step 5 retains residue-model lifting; steps 6-8 realize base step 6, the compatible witnesses through normalized-etale-origin-witnesses.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-adic-perfect-model-complete-reduction",
+    "why": "Generic completeness of a bounded finite-projective completed constant complex, also on slices; the proper-base-change unit does not prove this local coefficient calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-adic-perfect-model-complete-reduction"
+ ]
 }

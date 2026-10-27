@@ -59,6 +59,39 @@ theorem regularQuotientCompletionKernelTest
         RingTheory.Sequence.IsRegular Q ys ∧
           Ideal.ofList ys = RingHom.ker π ∧
             ∀ y ∈ ys, y ∈ IsLocalRing.maximalIdeal Q) := by
-  sorry
+  classical
+  have : Nontrivial (R ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr
+    (ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal R).ne_top hI)
+  have : IsLocalRing (R ⧸ I) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  let n := Ideal.map (Ideal.Quotient.mk I) (IsLocalRing.maximalIdeal R)
+  have hn : n = IsLocalRing.maximalIdeal (R ⧸ I) :=
+    IsLocalRing.map_maximalIdeal_of_surjective
+      (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  have : IsLocalRing (AdicCompletion n (R ⧸ I)) := by
+    rw [hn]
+    infer_instance
+  have : IsNoetherianRing (AdicCompletion n (R ⧸ I)) :=
+    AdicCompletion.isNoetherianRing n
+  have hcomplete (J : Ideal (R ⧸ I)) (hJ : J = IsLocalRing.maximalIdeal (R ⧸ I))
+      [IsLocalRing (AdicCompletion J (R ⧸ I))] :
+      IsAdicComplete (IsLocalRing.maximalIdeal (AdicCompletion J (R ⧸ I)))
+        (AdicCompletion J (R ⧸ I)) := by
+    subst J
+    infer_instance
+  have := hcomplete n hn
+  have : IsRegularLocalRing (AdicCompletion (IsLocalRing.maximalIdeal R) R) :=
+    (AdicCompletion.isRegularLocalRing_iff R).mp inferInstance
+  let q₀ : AdicCompletion (IsLocalRing.maximalIdeal R) R →+*
+      AdicCompletion n (R ⧸ I) :=
+    (AdicCompletion.exists_local_completion_quotient R (R ⧸ I)
+      (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective).2.choose
+  have hc := completionRegularKernelPreservation I hI (IsNoetherian.noetherian I)
+  change Function.Surjective q₀ ∧ _ at hc
+  have : IsLocalHom q₀ := IsLocalHom.of_surjective q₀ hc.1
+  have : IsLocalHom π := IsLocalHom.of_surjective π hπ
+  exact hc.2.trans (completeLocalCIPresentationIndependence
+    (AdicCompletion n (R ⧸ I)) (AdicCompletion (IsLocalRing.maximalIdeal R) R) Q
+    q₀ π hc.1 hπ)
 
 end

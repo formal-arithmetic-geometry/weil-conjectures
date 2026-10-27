@@ -1,0 +1,161 @@
+{
+ "id": "lem-sp-purity-pullback-level-bounds",
+ "kind": "statement",
+ "title": "Single-level constructibility and Tor bounds for the actual twisted pullback source",
+ "statement": "Fix a finite-field datum $D$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be Noetherian separated finite-type schemes over the algebraic closure field of $D$, and let $f:X\\to Y$ be a separated quasi-compact finite-type morphism over that field, smooth of pure relative dimension $d\\ge0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Set $R_n=\\mathcal O_E/(\\ell^{n+1})$ for $n\\ge0$ and use the ordinary strict coefficient-tower categories and their prescribed section-preserving derived realization [sk-def-sp-coefficient-towers, def-weil-abstract-derived-category, det-sp-tower-shriek-levels]. Choose the actual Tate tower $w$ with its prescribed finite evaluations and quotient transitions [def-coefficient-twists-detailed]. Let $K$ be an arbitrary object of the ordinary derived category of strict towers on $Y$. For one fixed $n\\ge0$ and integers $a\\le z$, assume only at that level that $K_n$ is bounded constructible of finite Tor amplitude [sk-def-sp-normalized-towers] and has the specified Tor amplitude $[a,z]$ [def-weil-proetale-tor-amplitude]. Form the actual system source by levelwise derived inverse image of the realization of $K$, tensored with the ordered $d$-fold product of the positive Tate tower shifted by two, using the ordinary derived tensor [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor]. Apply the inverse realization and evaluate at $n$. The resulting object has constructible cohomology in every degree and Tor amplitude $[a-2d,z-2d]$. This is a one-level assertion: it concludes neither a common interval nor membership in a uniform tower category, and assumes no normalization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), pullback and twist preserve the tower category; finite-level part of lem-sp-purity-conjugates-tower-reduction, Step 1"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-tower-shriek-levels"
+ ],
+ "proof": [
+  {
+   "text": "Apply the private finite_constant_pullback_bounds helper directly to R_n. Its proof specializes the argument of sf_pullback_torAmplitude to an arbitrary finite constant ring: descend the input through finiteRing_constructibleDerived_origin; convert its constructibility and boundedness; form the canonical intrinsic pullback square from openSquarePullbackModel, the intrinsic equivalence and comparisonUpperStarCompUpperStarIso; reflect the specified Tor interval through comparison_torAmplitudeIn_iff; apply the etale flat-model inverse-image theorem and transfer back. The essential-image criterion on X supplies bounded constructibility, and the specified interval witnesses finite Tor amplitude. No uniformizer quotient transport is used.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "prop-constructible-derived-subcategory",
+    "lem-trf-open-square-exchange",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-exc-comparison-tor-interval",
+    "lem-sf-etale-flat-model",
+    "lem-sfb-etale-flat-geometric-fibers",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose inverse levelComparison, the evaluated realization counit, tensorEvaluation, pullEvaluation and the pullback of levelComparison on Y. This explicitly identifies the output finite evaluation with finite inverse image of the original input level tensored with the evaluated ordered line. Apply ordered_line_level_bounds to the finite inverse image from step 1.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "def-sp-coefficient-tower-shriek-interfaces",
+    "lem-sp-ordered-line-level-bounds"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport constructibility by applying the homology functor and the constant-scalar restriction functor to the inverse evaluation isomorphism. Transport the Tor interval directly from its representative definition by composing each representative isomorphism with the evaluation isomorphism. No global bound or normalization is introduced.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-derived-subcategory",
+  "lem-trf-open-square-exchange",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-exc-comparison-tor-interval",
+  "lem-sf-etale-flat-model",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "det-sp-tower-shriek-levels",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "lem-sp-ordered-line-level-bounds",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/PurityPullbackLevelBounds.lean",
+  "place": "S9: direct finite-ring pullback preservation, explicit evaluated source isomorphism, and tensor with the evaluated ordered line"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback and tensor with a rank one Tate line shifted by twice the relative dimension preserve constructibility and translate a fixed Tor amplitude interval",
+   "results": "8 hits, including SheafOfModules.pullback, pullbackPushforwardAdjunction, DerivedCategory.instLinearShiftFunctorInt, and sheaf pullback finite-limit instances; none asserts the finite coefficient ordered-Tate-tower bounds.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of finite coefficient pullback tensored with a Tate twist and shifted",
+   "results": "8 hits: derived t-structure and isGE_Q_obj_iff, representation Tor vanishing, categorical Tor functors, and shifted K-projective complexes; no match for the required actual tower source.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]or|[Tt]or.*[Tt]wist",
+   "results": "25 Mathlib hits concerning ordinary pullbacks and unrelated torsors; local rg on lean/Sheaf and lean/WeilConjectures found sf_pullback_torAmplitude, twist_preserves_finiteness, etale_pullback_twist_tor_window, and twisted_pullback_tower_domain. The first two need quotient/model transport; the etale theorem does not identify the strict-system source; the last requires an existing tower orientation and extra adjunction data not assumed here. None gives this single-level assertion directly.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityConjugatesTowerReduction",
+  "date": "2026-10-25",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (3), one finite-level preservation calculation",
+   "via": [
+    "lem-sp-purity-conjugates-tower-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityPullbackLevelBounds",
+  "file": "lean/Sheaf/Paper/PurityPullbackLevelBounds.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpPurityReduction.pullback_level_bounds",
+  "statement": "theorem pullback_level_bounds\n    (D : FiniteFieldDatum.{u}) [CharP D.k D.p] (hne : l ≠ D.p)\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [IsSeparated (Y ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (d : ℕ) [SmoothOfRelativeDimension d f]\n    (w : SpChartAdmissibility.Twists l E X)\n    (K : spDerivedCoefficientTowers l E Y (q.abelian Y)) (n : ℕ)\n    (hK : spFiniteConstructibleTor Y (SpTowerShriek.R l E n)\n      ((spDerivedCoefficientEvaluation l E Y (q.abelian Y) n).obj K))\n    (a z : ℤ) (haz : a ≤ z)\n    (hTor : HasProEtaleTorAmplitude Y (SpTowerShriek.R l E n)\n      ((spDerivedCoefficientEvaluation l E Y (q.abelian Y) n).obj K) a z) :\n    let P := (SpTowerCalculus.realization l E b X (q.abelian X)).inverse.obj\n      ((SpTowerShriek.tensor l E b X).obj\n        ((SpTowerShriek.pull l E b (o.geometry f)).obj\n          ((SpTowerCalculus.realization l E b Y (q.abelian Y)).functor.obj K),\n          SpTowerGamma.orderedLine l E b X w d))\n    let Pn := (spDerivedCoefficientEvaluation l E X (q.abelian X) n).obj P\n    (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf X (SpTowerShriek.R l E n)\n      ((DerivedCategory.homologyFunctor\n        (proEtaleRingModules X (proEtaleConstantRing X (SpTowerShriek.R l E n))) i).obj Pn)) ∧\n      HasProEtaleTorAmplitude X (SpTowerShriek.R l E n) Pn\n        (a - 2 * d) (z - 2 * d)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261025T143721-L-1078735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T164321-L-997519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

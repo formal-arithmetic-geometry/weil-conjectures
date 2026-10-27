@@ -1,0 +1,60 @@
+# Q24: lem-sfb-relative-block-gauss-chart
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-relative-block-gauss-chart.json: statement, split; eight proof steps using existing Mathlib leaves, with no new nodes and no new Mathlib leaves. Statement and statement dependencies unchanged.
+- citations.json: a verbatim statement quote for each of the 34 step/node citation pairs.
+- searches.jsonl: actual msearch.py responses; the item's inherited Q06 searches are retained in the item, with this session's six searches appended.
+- report.md: this report. write_split.py is sandbox-only scratch work and is not part of the DAG delivery.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the exact blueprint tag and for Gauss, Schur, unitriangular and block factorization. The matches concern other algebraic calculations or Schur's representation-theoretic lemma. No project declaration states all clauses of this arbitrary-base scheme chart. In particular SplitFactorization.lean is a different rank/minor factorization, not an attachment. No Lean was written or compiled.
+
+## WANTED
+
+None. The source and all supporting local Stacks and Mathlib files used here are available.
+
+## What was wrong or incomplete
+
+The item was unsplit with no proof. Its statement is correct and is retained verbatim. The older lem-sfb-block-gauss-scheme-chart is over a field F; it cannot be applied to an arbitrary base A (for example Z). Its reviewed proof was useful source material, but this delivery supplies its own ring-general argument and does not cite that field-only statement for a stronger result. The required algebraic inputs already exist: lem-sfb-two-block-schur-identities is genuinely over an arbitrary commutative ring, including the zero ring. No new node merely relabels the item, its clauses, an elementary calculation, or a Mathlib result.
+
+The item's source is an agent generalization motivated by Milne, not a theorem claiming to occur verbatim in Milne. I read Milne iAG2017 §23h, printed pp.510–511, including (152), the maps for every Z-algebra in (153), and Theorem 23.72's proof, which omits details. I use none of the subsequent root-datum existence results or references; the route is the explicit matrix calculation. proof_origin.by is agent.
+
+The inherited blueprint.from.node is null. blueprint_refs.py ancestor gives None; whole-blueprint searches for Gauss, Schur and leading block find no matching blueprint statement. I retained that provenance and via chain, with same_as []. I read the chapter record, unit record and current latest sk-thm-sf-ctf-stability/_section.md. This is a supporting matrix-closure atlas input along the inherited direct-image alteration chain, with no change to a unit or chapter route.
+
+## Unfinished work
+
+None for this one-level stage-1 split. No new unsplit nodes are needed. Downstream Lean formalization remains outside this brief.
+
+## Not duplicates
+
+No new nodes. The existing field-only chart differs in its base hypothesis; the current item already exists as the arbitrary-base generalization. The existing two-block Schur, determinant/adjugate and affine-coordinate nodes are cited directly.
+
+## Review by Q24
+
+I read the B–E return cases in coord/delivery-errors.md and checked them against the actual node statements and source text, rather than treating a source label as evidence for an uncited theorem. No new nodes are delivered, so B's statement-only, new-notion, duplicate and new-search-log requirements introduce no missing objects. The item keeps single-escaped TeX and its original statement. Every node used below is a pre-existing Mathlib leaf; the route check therefore requires no off-unit tool declaration. citations.json quotes each actual cited statement verbatim. No definition is being used for a theorem its statement does not contain.
+
+For step 1 I checked polynomial evaluation and uniqueness in def-weil-pbc-mv-polynomial-ring (MvPolynomial.aeval, Eval.lean:593–615; algHom_ext, Basic.lean:436), the contravariant bijection in def-weil-affine-spectrum (Spec.homEquiv, GammaSpecAdjunction.lean:579), and the affine quotient criterion explicitly included in def-weil-closed-immersion. The determinant node has the permutation formula and the empty determinant 1. I wrote out why triangular identity blocks force only the identity permutation to contribute, and why strict block order makes N^s vanish, so no triangular-inverse lemma is hidden. The determinant multiplicativity node only assumes n >= 1, satisfied here because s > 0 and each r_i > 0. The adjugate node states both adj(M)M and M adj(M), so multiplying by a unit inverse of det really gives a two-sided inverse. I read Matrix.det_mul (Determinant/Basic.lean:138) and Matrix.mul_adjugate/adjugate_mul (Adjugate.lean:264–269).
+
+For step 2 I read lem-weil-pbc-fibre-product-affine-spectra: its statement gives the scheme product, its tensor-product ring and its projections. I read lem-weil-pbc-algebra-tensor-pushout-universal-property: clauses (2) and (3) give precisely existence and uniqueness of a map from the tensor product for chosen factor maps. Its ring statement has commutative algebras, which all the coordinate rings here are. I checked pullbackSpecIso in Pullbacks.lean:726, productMap in TensorProduct/Maps.lean:810–829 and ext in TensorProduct/Basic.lean:353. Polynomial and localization uniqueness then give the joint presentation; this is not inferred just from the definition of fibre product. The open-section node's clause (b), not merely its residue-field clause (a), gives affineness and R = H_f. I read Stacks schemes.tex lemma-standard-open-affine (01I3) and lemma-spec-sheaves (01HV, for sections), together with lemma-fibre-product-affine-schemes (01I4). The localization node states the full map and uniqueness assertions: Stacks algebra.tex proposition-universal-property-localization (00CP), IsLocalization.lift and ringHom_ext (Defs.lean:488 and :543). I explicitly proved product-unit iff each factor-unit, with an actual inverse formula, so the statement about nonreduced B-points uses no reducedness assumption.
+
+For step 3 the Schur node states BOTH the factorization and determinant identity for arbitrary commutative R with a two-sided-invertible first block. I read SchurComplement.lean:35–58 and :363–375, checking there is no field, domain, Nontrivial or nonempty index assumption. The repeated identity-pivot applications prove determinants of the unitriangular matrices; the diagonal-block applications use their actual inverses. The other determinant node supplies multiplicativity for every nonempty leading size. The restriction formula l_<=j d_<=j u_<=j is checked by intermediate indices k <= i,h. Polynomial evaluation, localization and Spec's stated bijection then give a morphism on the universal triple, not just a set map on points.
+
+Step 4 uses exactly the adjugate and two-block Schur statements just read. I verified the block sizes after splitting off E_1, applied the Schur determinant formula to each leading (k+1)-block matrix, and obtained Delta_k(S) as a product of units; in particular det(S) is a unit before invoking induction. This is an induction on fewer blocks, with base cases s=0 and s=1 specified, independent of the scheme inverse built later. I recomputed L0 diag(I,l') and diag(I,u') U0; they have the required unitriangular shapes, and the middle factor is invertible block by block.
+
+Step 5 is elementary block multiplication, with no node cited: P=p, Q=py, T=xp, W=xpy+l'd'u'. These four equations force both outer off-diagonal blocks and reduce uniqueness to S. Algebra maps preserve inverses because they send both inverse identities to inverse identities. There is no additional functoriality lemma hidden here.
+
+Step 6 uses polynomial, localization and tensor universal properties and the exact affine-spectrum correspondence already checked in steps 1–2. The universal g over R = H_f is an actual matrix over that ring with all the required units, so step 4 applies even if that ring has nilpotents or is zero. The universal triple over C is likewise a valid input to step 5. Fixing all entry coordinates determines the maps on the polynomial rings; localization uniqueness determines inverse determinants, and tensor uniqueness determines the combined map. Hence both scheme composites are identities; no general Yoneda assertion or field-point detection theorem is being imported without a node. I read Stacks schemes.tex lemma-morphism-into-affine (01I1) as a source for this coordinate argument; the cited spectrum node already states the affine-to-affine bijection actually used.
+
+Step 7 again uses the affine-product, tensor, polynomial and localization statements, all of which allow arbitrary commutative rings. I wrote out how their universal properties identify A' tensor_A K with the presentation over A', specifying entry coordinates and inverse determinants. This avoids assuming an uncited flat-base-change theorem. The multiplication coordinates are the same sums of products after changing coefficients. Its inverse is consequently the base change of v because an inverse is unique. This establishes the nonflat base-change clause at the scheme level.
+
+Step 8 uses determinant multiplicativity (the positive-size hypothesis still holds), the adjugate inverse formula, and the affine-product and coordinate-map statements. I checked the actual block formula h_i g_ij h_j^{-1}, determinant invariance on every leading restriction, and the three-factor product identity. I then ran that same algebraic calculation on universal matrices in the affine products D times X and D times V, whose affineness is supplied by the cited node. Inverted diagonal determinants make h_i^{-1} regular there by the cited adjugate identity, so these are morphisms and equalities of morphisms. This proves the full conjugation assertion, not only equivariance on geometric points.
+
+I checked the edge cases explicitly. For s=0 every coordinate ring is A, the determinant product is 1 and all morphisms are identities of Spec A. For s=1 the chart is all GL_{r_1}, with factors (I,g,I). Over the nonreduced ring Z/4, the scalar-block matrix [[1,2],[2,1]] has det=1 and factors L=[[1,0],[2,1]], D=I, U=[[1,2],[0,1]]; multiplying gives the original matrix since 4=0. Over Z/6, [[5,2],[3,5]] has det=1 and has pivots 5 and 5, both units, illustrating that the argument uses units rather than division by merely nonzero elements. The swap matrix over Z/4 is invertible but has Delta_1=0, so it is outside V, as it must be. If the base or test ring is zero, all matrices are the unique matrices of their sizes and inverse identities hold with 0=1; no step imposes nontriviality. For arbitrary s the induction tracks every leading block determinant, rather than assuming only the full determinant suffices.
+
+I also inspected all eight steps for the long-step rule. Each is shorter than 2000 characters and consists of the indicated coordinate construction, induction or routine comparison, with each non-elementary input named. No standalone lemma with different hypotheses is hidden inline. No SGA source is used. I corrected the initially abbreviated triangular-determinant explanation by writing out the block-index permutation argument. No statement dispute or source correction is necessary.
+
+## Validation
+
+The first deliver.py --no-push reported B4 on steps 4 and 5: a matrix row separator immediately followed by a letter was read as a doubled TeX command. I inserted whitespace after the matrix row separators, retaining exactly the same formulas. The repaired deliver.py --no-push exited 0 and printed OK (not pushed) at 9d07c3db8e4: preflight passed. This includes the required server check_dag and review_split checks. The final delivery command will check the packaged report and node again before pushing. All check_dag, review_split and preflight execution is delegated to the required delivery tool on the server. No local compiler, Lake or project-check invocation was run.

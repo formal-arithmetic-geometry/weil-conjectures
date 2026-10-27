@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-scalar-six-derived-pullback-normalization",
+ "kind": "statement",
+ "title": "Canonical scalar pullback mate and its composition and tower equations",
+ "statement": "For arbitrary commutative condensed rings and coefficient maps there exists ScalarSixPullbackData. Its theta has forward map the specified scalarSixPullHom, and it satisfies the geometric composition and canonical scalar-tower equations, with no flatness condition. Uses [def-sfb-scalar-six-coefficient-interfaces].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(1) and (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-six-coefficient-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Identify each component of scalarSixPullHom with the free-parameter scalar pullback comparison by the unit formula for inverse mates. The existing non-flat invertibility theorem makes these components, and hence the natural transformation, invertible.",
+   "uses": [
+    "def-sfb-free-parameter-scalar-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1) and (3)"
+   }
+  },
+  {
+   "text": "The ordinary restriction square composes in geometric morphisms. Exact derived square composition transports this equality, and the generic unit-mate pasting equation gives the theta composition equation.",
+   "uses": [
+    "new-comap-upper-star-iso-composition",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1) and (3)"
+   }
+  },
+  {
+   "text": "For coefficient towers, take geometric mates of the ordinary restriction squares. Their direct-image mates and the coefficient restriction compositor are identity on underlying module morphisms. Derive the equality of squares and take scalar mates; the conjugate of restriction transitivity is exactly scalarSixTower.",
+   "uses": [
+    "new-comap-upper-star-iso-mate",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1) and (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-free-parameter-scalar-maps",
+  "lem-pod-derived-exact-square-composition",
+  "new-comap-upper-star-iso-composition",
+  "new-comap-upper-star-iso-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "The implemented inverse-mate component formula, geometric pasting, and coefficient restriction-tower pasting; blueprint (1) and (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "map_preimage|preimage_map|unit_mateEquiv",
+   "results": "25 hits: Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Algebra/Category/Grp/Ulift.lean, Mathlib/Algebra/Category/Grp/Ulift.lean, Mathlib/Algebra/Category/Grp/Ulift.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module categories transports an adjunction and determines a unique mate-normalized isomorphism of left adjoints",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.conjugateIsoEquiv",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived extension of scalars commutes with exact inverse image of sheaves of modules for a cartesian square of coefficients and the comparison is compatible with composition",
+   "results": "8 hits: ModuleCat.extendScalarsComp, CommRingCat.moduleCatExtendScalarsPseudofunctor, SheafOfModules.pullbackComp, ModuleCat.extendScalars_assoc, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.extendScalars_id_comp, PresheafOfModules.pullback, CategoryTheory.TwoSquare.lanBaseChange",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ScalarSixPullback",
+  "date": "2026-10-24",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(1) and (3)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarSixDerivedPullbackNormalization",
+  "file": "lean/Sheaf/SixFunctors/ScalarSixDerivedPullbackNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixPullbackData_exists",
+  "statement": "theorem scalarSixPullbackData_exists : Nonempty ScalarSixPullbackData.{u}",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "Sheaf.SixFunctors.ScalarSixPullback",
+  "worker": "T7",
+  "summary": "Formalization of the corresponding normalized comparison step, with the published interfaces unchanged.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-free-parameter-scalar-maps",
+    "why": "Published comparison or generic transport result used by this proof step; see proof."
+   },
+   {
+    "node": "lem-pod-derived-exact-square-composition",
+    "why": "Published comparison or generic transport result used by this proof step; see proof."
+   },
+   {
+    "node": "new-comap-upper-star-iso-composition",
+    "why": "Published comparison or generic transport result used by this proof step; see proof."
+   },
+   {
+    "node": "new-comap-upper-star-iso-mate",
+    "why": "Published comparison or generic transport result used by this proof step; see proof."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-a1985",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T191254-L-290782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-a1985",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T191254-L-290782",
+  "kind": "interface",
+  "note": "independent cc review: Old ScalarSixPullback interfaces vs new ScalarSixDefinitions: changed transports rfl-equal to old bodies; old ∃-form ScalarSixExtensionData ⇔ new Nonempty structure proved both ways; 9 direct importers compiled against delivered modules (rc 0); scalarSixPullback signature byte-identical; single sorry scalarSixNormalizedImmersion_exists checked as true strict part of clause (2)"
+ }
+}

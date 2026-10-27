@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-module-shriek-forgetful-counit-criterion",
+ "kind": "statement",
+ "title": "Localized coefficient-ring counit criterion for forgetting module lower shriek",
+ "statement": "Fix the small-site universes of [def-weil-size-convention]. Let $u:\\mathcal C\\to\\mathcal D$ be a continuous and cocontinuous functor of sites [def-weil-pbc-sites-and-cohomology, def-weil-pbc-special-cocontinuous-functor](1), let $R$ be a sheaf of commutative rings on $\\mathcal D$, and put $R'=R\\circ u$ with identity structural ring map. Write $T:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R')$ and $T^{\\mathrm{Ab}}:\\operatorname{Ab}(\\mathcal D)\\to\\operatorname{Ab}(\\mathcal C)$ for precomposition, and $F_{\\mathcal C},F_{\\mathcal D}$ for forgetting module actions [def-weil-sheaf-of-modules-category]. Fix an additive left adjoint $L\\dashv T$, with unit $\\eta$, and a left adjoint $A\\dashv T^{\\mathrm{Ab}}$. For every $U\\in\\mathcal C$ let $u_U:\\mathcal C/U\\to\\mathcal D/u(U)$ be the induced continuous and cocontinuous functor on localized sites [def-pur-localized-ringed-site], let $T_U^{\\mathrm{Ab}}$ be its precomposition functor on abelian sheaves, and fix a left adjoint $A_U\\dashv T_U^{\\mathrm{Ab}}$ with counit $\\varepsilon_U$. Here an adjunction means natural bijections $\\operatorname{Hom}(LX,Y)\\simeq\\operatorname{Hom}(X,TY)$, and similarly for $A,A_U$. Regard ring sheaves as abelian sheaves when applying $A_U$. Define $c_U$ to be the counit map\n$$c_U:A_U(R'|_U)=A_UT_U^{\\mathrm{Ab}}(R|_{u(U)})\\xrightarrow{\\varepsilon_{U,R|_{u(U)}}}R|_{u(U)}.$$\nIf every $c_U$ is an isomorphism, then the natural transformation\n$$\\gamma:A F_{\\mathcal C}\\longrightarrow F_{\\mathcal D}L,$$\nwhose component at $M$ is the $A\\dashv T^{\\mathrm{Ab}}$ adjunct of $F_{\\mathcal C}(\\eta_M):F_{\\mathcal C}M\\to T^{\\mathrm{Ab}}F_{\\mathcal D}LM$, is an isomorphism. No equivalence assumption on $u_U$, no preservation of equalizers, and no terminal object is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0798, remark-when-shriek-equal, natural transformation and equation-compare-on-localizations; the ring map there is the counit at the restricted ring for the identity structural map."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Write $J_U$ for module extension by zero from $\\mathcal C/U$ and $J_U^{\\mathrm{Ab}}$ for abelian extension by zero; use the same notation on $\\mathcal D$. Their adjunctions with restriction are [lem-pur-site-restriction-module-adjunction-exact] and [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint]. Both constructions have the same underlying presheaf: its value at $V$ is the sum of the groups $H(V\\xrightarrow a U)$ over arrows $a:V\\to U$ [def-weil-extension-by-zero-presheaf, def-weil-pbc-site-extension-by-zero-presheaf]. Module sheafification has underlying abelian sheafification [def-weil-presheaf-modules-sheafification]. Thus $FJ_UH=J_U^{\\mathrm{Ab}}FH$, with the identifications preserving the inclusions of the summands. In particular, for $E_U=J_U(R'|_U)$ and $Q_U=J_{u(U)}(R|_{u(U)})$, we have $F_{\\mathcal C}E_U=J_U^{\\mathrm{Ab}}(R'|_U)$ and $F_{\\mathcal D}Q_U=J_{u(U)}^{\\mathrm{Ab}}(R|_{u(U)})$. These are the sheafified free representables of [lem-trf-ringed-site-restriction-generator-data], by their identical sum formulas.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-trf-ringed-site-restriction-generator-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, lemma-extension-by-zero; 08P4, remark-localize-shriek-equal; 03CY, lemma-sheafification-presheaf-modules; 0797, lemma-lower-shriek-modules."
+   }
+  },
+  {
+   "text": "For every $R$-module sheaf $N$, adjunction and the evaluation bijections of [lem-trf-ringed-site-restriction-generator-data] give natural bijections $\\operatorname{Hom}_R(LE_U,N)\\cong\\operatorname{Hom}_{R'}(E_U,TN)\\cong N(u(U))\\cong\\operatorname{Hom}_R(Q_U,N)$. By [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection], applied to the inverse bijection, there is an isomorphism $e_U:LE_U\\to Q_U$ characterized by this correspondence. More explicitly its $L\\dashv T$ adjunct $b_U:E_U\\to TQ_U$ corresponds to the standard section $e_{1_{u(U)}}\\in Q_U(u(U))$. Consequently $b_U=T(e_U)\\eta_{E_U}$. On the presheaf summand indexed by $a:V\\to U$, it sends $r\\in R'(V)=R(u(V))$ to $r e_{u(a)}\\in Q_U(u(V))$, followed by sheafification.",
+   "uses": [
+    "lem-trf-ringed-site-restriction-generator-data",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0797, lemma-lower-shriek-modules, evaluation calculation; Categories Tag 001P, lemma-yoneda, on the opposite category."
+   }
+  },
+  {
+   "text": "Put $B=R|_{u(U)}$ and $S=R'|_U=T_U^{\\mathrm{Ab}}B$, considered as abelian sheaves. For any abelian sheaf $N$ on $\\mathcal D$, the two localization adjunctions [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint] and the adjunctions in the hypotheses give\n$$\\operatorname{Hom}(AJ_U^{\\mathrm{Ab}}S,N)\\cong\\operatorname{Hom}(S,(T^{\\mathrm{Ab}}N)|_U)=\\operatorname{Hom}(S,T_U^{\\mathrm{Ab}}(N|_{u(U)}))\\cong\\operatorname{Hom}(A_US,N|_{u(U)})\\cong\\operatorname{Hom}(J_{u(U)}^{\\mathrm{Ab}}A_US,N).$$\nThe middle equality is sectionwise: both restrictions at $V\\to U$ are $N(u(V))$, with the same maps [def-pur-localized-ringed-site]. The bijections are natural in $N$. Applying [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] to their inverse defines an isomorphism $\\lambda_U:AJ_U^{\\mathrm{Ab}}S\\to J_{u(U)}^{\\mathrm{Ab}}A_US$. This specifies its normalization, including the units; no base-change theorem is being assumed.",
+   "uses": [
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0798, remark-when-shriek-equal, identity g_!^{Ab} j_{U!}=j_{u(U)!}(g\\prime)_!^{Ab}; Tag 03DI localization adjunction."
+   }
+  },
+  {
+   "text": "We identify the actual map, not just its source and target. Let $d_U:B\\to(F_{\\mathcal D}Q_U)|_{u(U)}$ be the abelian localization unit, and put $\\beta_U=J_{u(U)}^{\\mathrm{Ab}}(c_U)\\lambda_U:AF_{\\mathcal C}E_U\\to F_{\\mathcal D}Q_U$. In the Hom chain of step 3, this map corresponds to the slice map\n$$S\\xrightarrow{\\eta^U_S}T_U^{\\mathrm{Ab}}A_US\\xrightarrow{T_U^{\\mathrm{Ab}}c_U}T_U^{\\mathrm{Ab}}B\\xrightarrow{T_U^{\\mathrm{Ab}}d_U}T_U^{\\mathrm{Ab}}((F_{\\mathcal D}Q_U)|_{u(U)}),$$\nwhere $\\eta^U$ is the unit of $A_U\\dashv T_U^{\\mathrm{Ab}}$. Since $S=T_U^{\\mathrm{Ab}}B$ and $c_U=\\varepsilon_{U,B}$, the first two arrows compose to $1_S$ by the triangle identity (equivalently, the counit is the adjunct of $1_{T_U^{\\mathrm{Ab}}B}$). The resulting map is $T_U^{\\mathrm{Ab}}d_U$. Under the localization adjunction its map on the summand $a:V\\to U$ sends $r$ to $r e_{u(a)}$. Indeed, by the explicit adjunct formula of [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint] applied on $\\mathcal D$ to the identity of $J_{u(U)}^{\\mathrm{Ab}}B$, the unit $d_U$ sends $r\\in B(u(V)\\xrightarrow{u(a)}u(U))=R(u(V))$ to the image of $r$ in the summand of $u(a)$ of the direct-sum presheaf [def-weil-pbc-site-extension-by-zero-presheaf], that is to $re_{u(a)}$; by the same formula applied on $\\mathcal C$, the map $J_U^{\\mathrm{Ab}}S\\to T^{\\mathrm{Ab}}F_{\\mathcal D}Q_U$ corresponding to $T_U^{\\mathrm{Ab}}d_U$ sends $r$ in the summand of $a$ to $(T_U^{\\mathrm{Ab}}d_U)_{(V,a)}(r)=re_{u(a)}$. By step 2 this is precisely $F_{\\mathcal C}b_U$. Meanwhile the $A\\dashv T^{\\mathrm{Ab}}$ adjunct of $F_{\\mathcal D}(e_U)\\gamma_{E_U}$ is $T^{\\mathrm{Ab}}F_{\\mathcal D}(e_U)F_{\\mathcal C}(\\eta_{E_U})=F_{\\mathcal C}b_U$. Injectivity of the adjunction bijection proves $F_{\\mathcal D}(e_U)\\gamma_{E_U}=\\beta_U$.",
+   "uses": [
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0798, remark-when-shriek-equal, equation-compare-on-localizations; Tag 03DI, proof of lemma-extension-by-zero, explicit adjunction maps."
+   }
+  },
+  {
+   "text": "The hypothesis makes $c_U$ invertible. The functor $J_{u(U)}^{\\mathrm{Ab}}$ sends its inverse to an inverse, so $\\beta_U=J_{u(U)}^{\\mathrm{Ab}}(c_U)\\lambda_U$ is invertible. The same holds for $F_{\\mathcal D}(e_U)$. Step 4 therefore gives $\\gamma_{E_U}=F_{\\mathcal D}(e_U)^{-1}\\beta_U$, an isomorphism for every $U$. This uses only the stated counits and does not require the slice functor to be an equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0798, remark-when-shriek-equal, final sufficient condition."
+   }
+  },
+  {
+   "text": "Put $P=AF_{\\mathcal C}$ and $Q=F_{\\mathcal D}L$. The forgetful functors preserve small coproducts and cokernels by [lem-weil-pbc-module-sheaves-colimits-forgetful]; small-site sheafification exists in the fixed universes. A left adjoint preserves these colimits directly from the Hom universal property: maps out of its value on a colimit are maps from that colimit into the right adjoint, hence compatible families of maps into the right adjoint, hence compatible families of maps out of the images. Apply this to $A$ and $L$. They also preserve the initial zero object, so cokernels can be treated as coequalizers with zero. Thus $P,Q$ preserve coproducts and cokernels. Naturality of $\\gamma$ follows by applying the adjunction bijection to the naturality equation for $\\eta$. For a small sum $H=\\bigoplus_iE_{U_i}$, naturality at every coproduct inclusion says that $\\gamma_H$, under the colimit identifications, is the sum of the $\\gamma_{E_{U_i}}$. Its inverse is the sum of their inverses. The empty sum is included.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA, lemma-abelian; 03DB, lemma-limits-colimits; 0798, reduction to the free-module generators."
+   }
+  },
+  {
+   "text": "For any $M$, [lem-trf-ringed-site-restriction-generator-data] supplies a small sum $H_0$ of the $E_U$ and an epimorphism $p:H_0\\to M$. Its kernel $K$ exists in the abelian module category [def-weil-sheaf-of-modules-category]. Apply the same generator statement to $K$ to obtain an epimorphism $q:H_1\\to K$ from another small sum, and put $a:H_1\\xrightarrow qK\\hookrightarrow H_0$. Then $p$ is the cokernel of $a$: a map killing $a$ kills $K$ because $q$ is epi, and therefore factors uniquely through the quotient $H_0/K=M$. Steps 5 and 6 make $\\gamma_{H_0}$ and $\\gamma_{H_1}$ invertible. Naturality gives a commuting square between $Pa$ and $Qa$. Their cokernels are $PM$ and $QM$ by step 6; the two inverse vertical isomorphisms also commute with the arrows and hence induce an inverse between these cokernels. The induced forward map is $\\gamma_M$, by naturality at $p$ and uniqueness in the cokernel property. Thus $\\gamma_M$ is invertible for every $M$, proving the asserted natural isomorphism. No projectivity of the generators was used.",
+   "uses": [
+    "lem-trf-ringed-site-restriction-generator-data",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EW, lemma-module-quotient-flat (3), applied to M and then its kernel; Tag 0798, remark-when-shriek-equal, reduction to generators."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-trf-ringed-site-restriction-generator-data",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0798, remark-when-shriek-equal; expanded using Tags 0797, 03EW, 03DI, 08P4, 03CY, 03DA and 03DB, with explicit adjunction normalization and a two-term generator presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous cocontinuous functor of sites the module lower shriek commutes with forgetting to abelian sheaves if the localized abelian counit on every restricted ring sheaf is invertible",
+   "results": "{\"t\": \"2026-10-23T22:39:44Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous cocontinuous functor of sites the module lower shriek commutes with forgetting to abelian sheaves if the localized abelian counit on every restricted ring sheaf is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"d5d48efd29d15634\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations. Module pullback/sheafification adjunctions and reflection of isomorphisms do not state the localized-ring counit criterion. Read PullbackContinuous.lean:45-125 and CoverLifting.lean:317-375; the latter adjunction makes precomposition the left adjoint, whereas A here is its left adjoint. No hit proves gamma invertible from the c_U."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"forget\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-23T22:39:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheaf\\\", \\\"forget\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"skyscraperSheafForgetAdjunction\"], \"digest\": \"53eb4f0ab1872ac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations. Module pullback/sheafification adjunctions and reflection of isomorphisms do not state the localized-ring counit criterion. Read PullbackContinuous.lean:45-125 and CoverLifting.lean:317-375; the latter adjunction makes precomposition the left adjoint, whereas A here is its left adjoint. No hit proves gamma invertible from the c_U."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|forget.*[Cc]ompatib|[Cc]ompatib.*forget",
+   "results": "{\"t\": \"2026-10-23T22:39:44Z\", \"tool\": \"grep\", \"query\": \"shriek|forget.*[Cc]ompatib|[Cc]ompatib.*forget\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations. Module pullback/sheafification adjunctions and reflection of isomorphisms do not state the localized-ring counit criterion. Read PullbackContinuous.lean:45-125 and CoverLifting.lean:317-375; the latter adjunction makes precomposition the left adjoint, whereas A here is its left adjoint. No hit proves gamma invertible from the c_U."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison between module lower shriek and abelian lower shriek is an isomorphism if localized lower shriek carries the restricted coefficient ring to the target coefficient ring",
+   "results": "{\"t\": \"2026-10-23T22:40:16Z\", \"tool\": \"leansearch\", \"query\": \"Comparison between module lower shriek and abelian lower shriek is an isomorphism if localized lower shriek carries the restricted coefficient ring to the target coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.stalkIso_hom\", \"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf\", \"LocalizedModule.coe_map_eq\", \"LocalizedModule.restrictScalars_map_eq\"], \"digest\": \"3b3f02abd70698a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations. Module pullback/sheafification adjunctions and reflection of isomorphisms do not state the localized-ring counit criterion. Read PullbackContinuous.lean:45-125 and CoverLifting.lean:317-375; the latter adjunction makes precomposition the left adjoint, whereas A here is its left adjoint. No hit proves gamma invertible from the c_U."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAdjunctionCocontinuous|sheafPushforwardCocontinuous",
+   "results": "{\"t\": \"2026-10-23T22:40:18Z\", \"tool\": \"grep\", \"query\": \"sheafAdjunctionCocontinuous|sheafPushforwardCocontinuous\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\"], \"digest\": \"e9b36e48b91af425\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations. Module pullback/sheafification adjunctions and reflection of isomorphisms do not state the localized-ring counit criterion. Read PullbackContinuous.lean:45-125 and CoverLifting.lean:317-375; the latter adjunction makes precomposition the left adjoint, whereas A here is its left adjoint. No hit proves gamma invertible from the c_U."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint to precomposition of ringed site module sheaves has the same underlying abelian sheaf as abelian left Kan extension after sheafification when every slice counit on the ring is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T22:40:18Z\", \"tool\": \"leanfinder\", \"query\": \"A left adjoint to precomposition of ringed site module sheaves has the same underlying abelian sheaf as abelian left Kan extension after sheafification when every slice counit on the ring is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"f3667ff737d73b2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned declarations. Module pullback/sheafification adjunctions and reflection of isomorphisms do not state the localized-ring counit criterion. Read PullbackContinuous.lean:45-125 and CoverLifting.lean:317-375; the latter adjunction makes precomposition the left adjoint, whereas A here is its left adjoint. No hit proves gamma invertible from the c_U."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module sheaf lower shriek commutes with forgetting the ring action when the abelian lower shriek counit on each localized coefficient ring is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T23:28:03Z\", \"tool\": \"leanfinder\", \"query\": \"Module sheaf lower shriek commutes with forgetting the ring action when the abelian lower shriek counit on each localized coefficient ring is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.toSheafCompSheafToPresheafIso\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"SheafOfModules.unitToPushforwardObjUnit\", \"PresheafOfModules.sheafificationAdjunction\"], \"digest\": \"265e06ab54275d4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the sheafification and pullback adjunction hits in Presheaf/Sheafification.lean:66-154 and Sheaf/PullbackContinuous.lean:45-125. They do not identify the comparison map under localized coefficient-ring counits. CoverLifting.lean:317-375 has precomposition as the left adjoint, whereas this criterion concerns its left adjoint. No matching project declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|forget.*[Cc]ompatib|[Cc]ompatib.*forget",
+   "results": "{\"t\": \"2026-10-23T23:28:26Z\", \"tool\": \"grep\", \"query\": \"shriek|forget.*[Cc]ompatib|[Cc]ompatib.*forget\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the sheafification and pullback adjunction hits in Presheaf/Sheafification.lean:66-154 and Sheaf/PullbackContinuous.lean:45-125. They do not identify the comparison map under localized coefficient-ring counits. CoverLifting.lean:317-375 has precomposition as the left adjoint, whereas this criterion concerns its left adjoint. No matching project declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting module structures commutes with a left adjoint to site restriction if all localized counits on the coefficient ring are invertible",
+   "results": "{\"t\": \"2026-10-23T23:28:27Z\", \"tool\": \"leansearch\", \"query\": \"Forgetting module structures commutes with a left adjoint to site restriction if all localized counits on the coefficient ring are invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.sheafificationAdjunction\", \"SheafOfModules.forget\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.forgetToPresheafModuleCatObjObj\", \"Condensed.freeForgetAdjunction\", \"Condensed.forget\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\"], \"digest\": \"4b85de2101e098bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the sheafification and pullback adjunction hits in Presheaf/Sheafification.lean:66-154 and Sheaf/PullbackContinuous.lean:45-125. They do not identify the comparison map under localized coefficient-ring counits. CoverLifting.lean:317-375 has precomposition as the left adjoint, whereas this criterion concerns its left adjoint. No matching project declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"forget\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-23T23:28:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheaf\\\", \\\"forget\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"skyscraperSheafForgetAdjunction\"], \"digest\": \"53eb4f0ab1872ac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the sheafification and pullback adjunction hits in Presheaf/Sheafification.lean:66-154 and Sheaf/PullbackContinuous.lean:45-125. They do not identify the comparison map under localized coefficient-ring counits. CoverLifting.lean:317-375 has precomposition as the left adjoint, whereas this criterion concerns its left adjoint. No matching project declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian sheaf left adjoint to restriction of ringed sites agrees with module left adjoint on underlying sheaves if its slice counits on rings are isomorphisms",
+   "results": "{\"t\": \"2026-10-23T23:29:18Z\", \"tool\": \"leanfinder\", \"query\": \"An abelian sheaf left adjoint to restriction of ringed sites agrees with module left adjoint on underlying sheaves if its slice counits on rings are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.sheafificationCompPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\"], \"digest\": \"4edc55b5bc4c8860\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the sheafification and pullback adjunction hits in Presheaf/Sheafification.lean:66-154 and Sheaf/PullbackContinuous.lean:45-125. They do not identify the comparison map under localized coefficient-ring counits. CoverLifting.lean:317-375 has precomposition as the left adjoint, whereas this criterion concerns its left adjoint. No matching project declaration was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-slice-module-shriek-exact",
+  "date": "2026-10-24",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Injective module transport along representable stack morphisms. Supporting input: Exact module lower shriek under local slice equivalences. Comparison prerequisite: the localized coefficient-ring counit criterion of Stacks 0798, before using the slice equivalences.",
+   "via": [
+    "lem-sfb-local-slice-module-shriek-exact",
+    "lem-sfb-stack-representable-module-injective-transport",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-module-shriek-forgetful-counit-criterion",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0798 into the generator comparison, a counit-normalized localization Hom calculation, and extension through coproducts and a cokernel presentation. Reused all supporting DAG facts; no new nodes. Kept the statement unchanged and checked that no slice equivalence, equalizers, terminal objects, exactness of A, or projective generators are assumed.",
+  "blueprint": "Supporting input to the inherited direct-image proof (3), via exact module lower shriek under local slice equivalences. Read the current latest sk-thm-sf-ctf-stability-direct-images.proof.md; this is the coefficient-forgetting comparison prerequisite, not a replacement of any unit step. The inherited ancestry has from.node=null; its existing place and via fields are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "General module localization adjunction used to define the free localized-unit generators; this unit has no version of that site-level tool."
+   },
+   {
+    "node": "lem-trf-ringed-site-restriction-generator-data",
+    "why": "General free representable evaluation and epimorphic generation used to compare adjoints on generators and present an arbitrary module; this unit has no presentation theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General variable-ring sheaf colimits and forgetful compatibility, used for coproducts and cokernels; this unit has no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+    "why": "Explicit abelian extension-by-zero adjunction with its adjunct formula on summands (Stacks 03DI), needed to identify the adjunct of the slice unit in steps 3-4; this unit has no version of that site-level tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-trf-ringed-site-restriction-generator-data",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6c5b0e7dc",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6c5b0e7dc (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, every cited statement, and Stacks 0798 remark-when-shriek-equal (with 0797, 03DI and Sites lemma-localize-cocontinuous). The statement is exactly the sufficient condition of 0798: c_U is the counit at R|_{u(U)} = equation-compare-on-localizations, and γ is the adjunct of F(η). It is unchanged and not weakened. There are 0 new nodes, no SGA reference, no duplicate (rg for 0798 finds only the item's citers; lem-sfb-abelian-lower-shriek-exact is about exactness) and no cycle. The mathematics checks out: the step-2 co-Yoneda e_U with b_U = T(e_U)η giving r↦re_{u(a)}; the step-4 triangle identity T_U(ε_B)η^U_{T_U B} = id and the comparison of A-adjuncts; the colimit and cokernel extension in steps 6-7. Edge cases checked: identity functor, empty site, zero ring, non-subterminal U. One C4 fault, repaired: steps 1, 3 and 4 cited the abstract Mathlib leaf lem-weil-pbc-site-restriction-adjunction (and the definition node) for the explicit localization unit/adjunct on summands, which neither states. They now cite lem-weil-pbc-site-extension-by-zero-presheaf-adjoint, which gives the adjunction for (j_{p!}F)^# with the explicit adjunct formula; step 4 writes out its two applications. proof_deps are now the union of the uses, and that node is added to split_report.tool_uses. Batch-5 flag: lem-trf-ringed-site-restriction-generator-data is a generic site-module generator/evaluation fact (Stacks 0797/03EW, generic pbc/pc proof_deps). It is not part of the trace-formula or Poincaré-duality assumptions or their proofs, so it is accepted. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-module-shriek-forgetful-counit-criterion.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleShriekForgetfulCounitCriterion",
+  "declaration": "CategoryTheory.isIso_moduleShriekForgetfulComparison_of_localizedCounit",
+  "declarations": [
+   "CategoryTheory.moduleShriekForgetfulComparison",
+   "CategoryTheory.isIso_moduleShriekForgetfulComparison_of_localizedCounit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModuleShriekForgetfulCounitCriterion.lean",
+  "statement": "theorem isIso_moduleShriekForgetfulComparison_of_localizedCounit {C : Type c} [Category.{vc} C] {D : Type d} [Category.{vd} D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (F : C ⥤ D) (hcover : ∀ (X : C) (P : Presieve X), P ∈ J X → P.map F ∈ K (F.obj X)) (hpullback : ∀ (X Y Z : C) (P : Presieve X), P ∈ J X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), P f → PreservesLimit (cospan f g) F) [F.IsContinuous J.toGrothendieck K.toGrothendieck] [F.IsCocontinuous J.toGrothendieck K.toGrothendieck] (R : Sheaf K.toGrothendieck CommRingCat.{max c d vc vd r}) (L : ringedSiteModules.{max c d vc vd r} ((F.sheafPushforwardContinuous RingCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck).obj ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R)) ⥤ ringedSiteModules.{max c d vc vd r} ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R)) [L.Additive] (adjL : L ⊣ SheafOfModules.pushforward.{max c d vc vd r} (F := F) (R := (sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R) (𝟙 ((F.sheafPushforwardContinuous RingCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck).obj ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R)))) (A : Sheaf J.toGrothendieck AddCommGrpCat.{max c d vc vd r} ⥤ Sheaf K.toGrothendieck AddCommGrpCat.{max c d vc vd r}) (adjA : A ⊣ F.sheafPushforwardContinuous AddCommGrpCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck) [∀ U : C, (Over.post (X := U) F).IsContinuous (J.toGrothendieck.over U) (K.toGrothendieck.over (F.obj U))] (AU : ∀ U : C, Sheaf (J.toGrothendieck.over U) AddCommGrpCat.{max c d vc vd r} ⥤ Sheaf (K.toGrothendieck.over (F.obj U)) AddCommGrpCat.{max c d vc vd r}) (adjU : ∀ U : C, AU U ⊣ (Over.post (X := U) F).sheafPushforwardContinuous AddCommGrpCat.{max c d vc vd r} (J.toGrothendieck.over U) (K.toGrothendieck.over (F.obj U))) (hcounit : ∀ U : C, IsIso ((adjU U).counit.app (((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r} ⋙ forget₂ RingCat.{max c d vc vd r} AddCommGrpCat.{max c d vc vd r})).obj R).over (F.obj U)))) : IsIso (moduleShriekForgetfulComparison.{c, d, vc, vd, r} F R L adjL A adjA)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-498299023",
+  "group": "NY",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0798 (remark-when-shriek-equal, equation-compare-on-localizations). T = SheafOfModules.pushforward (𝟙 R'); c_U = (adjU U).counit.app at the restricted abelian ring sheaf; γ = ((adjA.whiskerRight _).homEquiv _ _).symm (whiskerRight adjL.unit toSheaf), real data; conclusion IsIso of that γ. hcover/hpullback/IsCocontinuous are the recorded IsSpecialCocontinuousForCoverings conjuncts 1-3; the global and slice IsContinuous instances follow from them (Stacks 00WW, lemma-localize-cocontinuous; Mathlib Over.lean:385 also assumes slice continuity; consumer step 3 supplies it); slice cocontinuity is Mathlib's instance. Universes c,d,vc,vd independent with coefficients in max ... r, same as the consumer LocalSliceModuleShriekExact. lean.statement verbatim; only the lean field differs from live; no duplicate (rg in side-live); imports exist, no cycle; docstrings carry source, blueprint and 7 proof steps; sorry only; report sections present. Edge cases: empty site, zero ring, non-subterminal U, identity F. No changes, so no compile."
+ }
+}

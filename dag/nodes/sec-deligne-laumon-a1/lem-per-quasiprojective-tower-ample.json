@@ -1,0 +1,178 @@
+{
+ "id": "lem-per-quasiprojective-tower-ample",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 second paragraph through its last paragraph, printed pp.254--255: semistable G-alteration, ell-Sylow H, tame equivariant modification, quotient over T=S prime/H, and log resolution. Geometric construction only, before applying Theorem 3.6.2 and Proposition 3.5.7; preliminary finite extension to normalize constants in the first paragraph. Specifically: XVI 3.7: scheme quotient X double-prime/H, projectivity over X, and the prime-to-ell generic cover.; Original lem-per-projective-finite-group-quotient Step 1; Stacks Properties 09NV, Morphisms 0892 and 01WD. The Segre composition and affine-section pullback are fully proved here, so neither a composition prerequisite nor relative ample twisting is assumed.",
+   "via": [
+    "lem-per-projective-finite-group-quotient",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Absolute ampleness in a finite quasi-projective tower",
+ "statement": "Let S be an affine Noetherian scheme, B a Noetherian scheme, and b:B→S and p:V→B morphisms. Assume p is locally of finite type and quasi-compact [def-weil-finite-type-morphism], and both b and p admit immersions into finite-dimensional projective spaces over their respective targets [def-per-gabber-modification-data]. Then V admits an invertible module L [def-sc-invertible-module] which is absolutely ample [def-weil-pbc-ample-invertible-module]. This asserts no group action or quotient.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Original lem-per-projective-finite-group-quotient Step 1; Stacks Properties 09NV, Morphisms 0892 and 01WD. The Segre composition and affine-section pullback are fully proved here, so neither a composition prerequisite nor relative ample twisting is assumed."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-per-gabber-modification-data",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Compose the given immersions by base changing B→P^m_S along P^n, identifying the result with P^n_S times_S P^m_S, and applying the closed Segre embedding. Reindex the finite nonempty product of coordinate types by ULift(Fin(d+1)). The composite is an immersion over S. This is the proved private helper quasiProjective_comp, not an assumed composition theorem.",
+   "uses": [
+    "lem-chow-segre",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-projective-space-finite-index-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WD, 01NE; quotient original Step 1, replacement of the relative-twist route"
+   }
+  },
+  {
+   "text": "Identify the affine S with Spec Γ(S,⊤). Apply the projective ample theorem to the identity closed immersion of the finite-dimensional projective space. This supplies an actual ample invertible module N on that ambient scheme.",
+   "uses": [
+    "lem-weil-pbc-projective-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Properties Tags 01PS, 01PU; original Step 1"
+   }
+  },
+  {
+   "text": "For each source point choose an affine positive-power section locus of N containing its image and contained in the coborder open of the immersion, using the finite-principal-affine theorem on the singleton. The immersion is closed inside that coborder, so this affine open has affine inverse image. The tensor-power section pullback theorem gives a section of the pulled-back module with exactly that inverse-image locus. Invertibility is preserved by pullback. These are the pointwise clauses of the absolute ample criterion.",
+   "uses": [
+    "lem-sc-ample-finite-principal-affine",
+    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Properties Tags 09NV, 01PS; Morphisms Tag 0892; original Step 1"
+   }
+  },
+  {
+   "text": "The top scheme V is quasi-compact since p is quasi-compact and B is Noetherian. Together with the preceding section loci this proves absolute ampleness. For empty V the pointwise condition is vacuous.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Original Step 1, compactness clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-chow-segre",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-projective-space-finite-index-iso",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Original lem-per-projective-finite-group-quotient Step 1; Stacks Properties 09NV, Morphisms 0892 and 01WD. The Segre composition and affine-section pullback are fully proved here, so neither a composition prerequisite nor relative ample twisting is assumed.; H1 formalization of the indicated steps, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf exists on a quasiprojective scheme over a quasiprojective Noetherian affine base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.IsAffine.casesOn",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of quasiprojective morphisms over a Noetherian affine scheme has an ample invertible sheaf",
+   "results": "8 hits: AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasi[Pp]rojective|[Aa]mple",
+   "results": "25 hits: Mathlib/NumberTheory/LucasLehmer.lean, Mathlib/NumberTheory/LucasLehmer.lean, Mathlib/Tactic/Push.lean, Mathlib/Tactic/Push.lean, Mathlib/Tactic/Push.lean, Mathlib/Tactic/Push.lean, Mathlib/Tactic/Push.lean, Mathlib/Topology/ClopenBox.lean",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveFiniteGroupQuotient",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasiProjectiveTowerAmple",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiProjectiveTowerAmple.lean",
+  "declaration": "AlgebraicGeometry.exists_ample_of_quasiProjective_tower",
+  "statement": "theorem exists_ample_of_quasiProjective_tower\n    (S B V : Scheme.{u}) [IsAffine S] [IsNoetherian S] [IsNoetherian B]\n    (b : B ⟶ S) (hb : GabberModification.QuasiProjective b)\n    (p : V ⟶ B) [LocallyOfFiniteType p] [QuasiCompact p]\n    (hp : GabberModification.QuasiProjective p) :\n    ∃ (L : V.Modules) (hL : L.IsInvertible), @Scheme.Modules.IsAmple V L hL",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-per-quasiprojective-tower-ample",
+  "worker": "stage3",
+  "summary": "Absolute ampleness in a finite quasi-projective tower",
+  "blueprint": "Original lem-per-projective-finite-group-quotient Step 1; Stacks Properties 09NV, Morphisms 0892 and 01WD. The Segre composition and affine-section pullback are fully proved here, so neither a composition prerequisite nor relative ample twisting is assumed.; blueprint_refs searches for quasi-projective ample, finite group quotient and quotient ample found no matching blueprint nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091653-L-3362064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091653-L-3362064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

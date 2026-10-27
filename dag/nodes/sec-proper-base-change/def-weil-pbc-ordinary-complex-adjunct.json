@@ -1,0 +1,104 @@
+{
+ "id": "def-weil-pbc-ordinary-complex-adjunct",
+ "kind": "definition",
+ "title": "The ordinary termwise adjunct of a single-complex map",
+ "statement": "Let $C,D$ be abelian categories, $L:C\\to D$ and $R:D\\to C$ additive functors with an adjunction $\\eta:\\mathrm{id}_C\\to R\\circ L$, let $A\\in C$ and let $J$ be an integer-indexed cochain complex in $D$. For a chain map $c:(LA)[0]\\to J$, define $\\operatorname{adj}_0(c):A[0]\\to R(J)$ to be $\\mathrm{single}(\\eta_A)\\gg\\rho_{LA}^{-1}\\gg R(c)$, where $\\rho:R(\\mathrm{single}(-))\\cong\\mathrm{single}(R(-))$ is the canonical single-complex comparison. This is the explicit ordinary termwise adjunct. Its data is this composite of already constructed chain maps; no existence theorem is used to choose it.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0DVC, pre-derived adjoint functors: the ordinary adjunction unit on complexes; also the termwise adjunct in Tag 072W."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Compose the single of the adjunction unit with the inverse single-complex comparison for R and the image of c. Each factor is a chain map, so their categorical composite supplies the data and all chain-map laws. Its displayed equation is reflexivity after unfolding. In degree zero this is the ordinary adjunction unit formula; for zero c the composite is zero. No derived category or choice of resolution is involved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0DVC, pre-derived adjoint functors: the ordinary adjunction unit on complexes; also the termwise adjunct in Tag 072W."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Named direct construction of an existing composite, with a declared source and target."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*homEquiv|mapCochainComplexSingleFunctor",
+   "results": "OK 10 hits; Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-25",
+   "verdict": "The existing components are used. This definition names their explicit composite and gives it a stable source and target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For additive adjoint functors L and R, construct the ordinary adjunct from A[0] to R(J) of a cochain map from (L A)[0] to J",
+   "results": "OK 8 hits; CategoryTheory.Adjunction.ofIsLeftAdjoint, CochainComplex.HomComplex.Cochain.ofHom, CategoryTheory.Adjunction.right_adjoint_additive, CochainComplex.HomComplex.Cocycle.ofHom, CategoryTheory.Adjunction.homAddEquiv, CategoryTheory.Adjunction.Quadruple.adj₁, CategoryTheory.Adjunction.left_adjoint_additive, CategoryTheory.abelianOfAdjunction",
+   "date": "2026-10-25",
+   "verdict": "The existing components are used. This definition names their explicit composite and gives it a stable source and target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary termwise adjunct of a chain map out of a single cochain complex, expressed using the adjunction unit and the single functor comparison",
+   "results": "OK 8 hits; CochainComplex.HomComplex.Cochain.toSingleEquiv, CochainComplex.HomComplex.Cochain.fromSingleEquiv, CochainComplex.toSingle₀Equiv, CochainComplex.HomComplex.Cochain.toSingleMk_v, CochainComplex.HomComplex.Cochain.toSingleMk, CochainComplex.HomComplex.Cochain.fromSingleMk_v, CochainComplex.HomComplex.Cochain.toSingleEquiv_toSingleMk, CochainComplex.HomComplex.Cochain.fromSingleEquiv_fromSingleMk",
+   "date": "2026-10-25",
+   "verdict": "The existing components are used. This definition names their explicit composite and gives it a stable source and target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResolutionCocycleAdjunctionClass",
+  "date": "2026-10-26",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof of the constructibility statement: the fixed-resolution cocycle comparison and its explicitly constructed ordinary adjunct and shifted homology maps.",
+   "via": [
+    "lem-weil-pbc-resolution-cocycle-adjunction-class",
+    "lem-weil-pbc-raw-restricted-resolution-class",
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.OrdinaryComplexAdjunct",
+  "file": "lean/Sheaf/CategoryTheory/OrdinaryComplexAdjunct.lean",
+  "declaration": "CategoryTheory.ordinaryComplexAdjunct",
+  "statement": "def ordinaryComplexAdjunct {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] (L : C ⥤ D) (R : D ⥤ C) [L.Additive] [R.Additive] (adj : L ⊣ R) (A : C) (J : CochainComplex D ℤ) (c : (CochainComplex.singleFunctor D 0).obj (L.obj A) ⟶ J) : (CochainComplex.singleFunctor C 0).obj A ⟶ (R.mapHomologicalComplex (.up ℤ)).obj J",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261026T002143-L-61660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261026T002143-L-61660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

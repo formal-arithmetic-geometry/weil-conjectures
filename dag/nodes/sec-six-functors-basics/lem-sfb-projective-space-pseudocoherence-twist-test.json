@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-projective-space-pseudocoherence-twist-test",
+ "kind": "statement",
+ "title": "Pseudo-coherence on projective space detected by finitely many derived twists",
+ "statement": "Let $R$ be a commutative ring and $N\\geq0$. Put $P=\\operatorname{Proj}(R[x_0,\\ldots,x_N])$, with twists $\\mathcal O_P(d)$ as in [def-pc-projective-space-twist]. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_P)$ [def-pc-derived-category], meaning an object of the derived category of $\\mathcal O_P$-modules whose cohomology sheaves are quasi-coherent. Suppose that, for each $d=0,1,\\ldots,N$, the derived global-section complex [def-pc-global-derived-rhom] $R\\Gamma(P,K\\otimes^{\\mathbf L}_{\\mathcal O_P}\\mathcal O_P(d))\\in D(R)$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. Here the derived tensor is that of [def-pc-scheme-derived-tensor-structure]. Then $K$ is pseudo-coherent on $P$ [def-pur-pseudo-coherent-complex].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSG, lemma-pseudo-coherent-on-projective-space, implication (5) => (1), lines 8556--8647."
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "def-pc-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-global-derived-rhom",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=\\bigoplus_{i=0}^N\\mathcal O_P(-i)$ and $B=\\operatorname{End}_{\\mathcal O_P}(T)$. The projective-space tilting equivalence supplies $M\\in D(\\operatorname{Mod}\\!\\text{-}B)$ with $M\\otimes_B^{\\mathbf L}T\\simeq K$ and $\\operatorname{Res}_R M\\simeq R\\operatorname{Hom}_P(T,K)$ in $D(R)$. This uses the unbounded equivalence, so imposes no preliminary boundedness condition on $K$.",
+   "uses": [
+    "lem-sfb-projective-space-tilting-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSG, lemma-pseudo-coherent-on-projective-space, implication (5) => (1)."
+   }
+  },
+  {
+   "text": "The bundle $T$ is perfect: on every standard open $U_j=D_+(x_j)$ it is the finite free module with basis the specified bases of the $N+1$ twists, placed in degree zero. Its dual is $T^\\vee=\\bigoplus_{d=0}^N\\mathcal O_P(d)$: the pairing on the $d$th summand multiplies the local twist bases to $1$, and their inverse transition factors cancel. Perfect duality and the definition of global derived Hom give $$R\\operatorname{Hom}_P(T,K)\\simeq R\\Gamma(P,K\\otimes^{\\mathbf L}T^\\vee)\\simeq\\bigoplus_{d=0}^N R\\Gamma(P,K\\otimes^{\\mathbf L}\\mathcal O_P(d)).$$ The second isomorphism uses finite biproducts: the tensor and global-section functors are additive, their finite-sum inclusions and projections retain the identities $p_di_e=\\delta_{de}$ and $\\sum_di_dp_d=1$ after derivation (finite sums of resolving complexes remain resolving).",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-pc-perfect-complex",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "def-pc-global-derived-rhom",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSG, lemma-pseudo-coherent-on-projective-space, implication (5) => (1)."
+   }
+  },
+  {
+   "text": "For each of these $N+1$ summands choose a bounded-above finite-free $R$-complex representing it, using the assumed pseudo-coherence. Their finite termwise direct sum is again finite free in each degree, is zero above the maximum of their finitely many upper bounds, and represents the displayed biproduct: cohomology commutes with finite direct sums. Thus the underlying object $\\operatorname{Res}_R M$ is pseudo-coherent.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSG, lemma-pseudo-coherent-on-projective-space, implication (5) => (1)."
+   }
+  },
+  {
+   "text": "In the matrix description of $B$, each block $S_{j-i}$ is finite free over $R$ on the monomials of fixed degree $j-i$ in $N+1$ variables. There are only finitely many such monomials and finitely many blocks. Hence $B$ is finite free over $R$, including when $N=0$. Apply the finite-free algebra resolution lemma to $M$ and its pseudo-coherent underlying $R$-complex. Obtain a bounded-above complex $F^\\bullet$ of finite free right $B$-modules representing $M$.",
+   "uses": [
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-finite-free-algebra-pseudocoherent-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSG, lemma-pseudo-coherent-on-projective-space, implication (5) => (1)."
+   }
+  },
+  {
+   "text": "Use the bounded-above projective-complex computation lemma for $V(L)=L\\otimes_B T$ (sheaf tensor as in the tilting node). Its total left derived functor exists on all objects by that node. The functor is additive and right exact, since balanced tensor is given by a cokernel and sheafification is exact. Right $B$-modules have enough projectives by the free module on their underlying set; a free module is projective because maps from its basis lift across a surjection. Therefore the bounded-above finite-free complex $F^\\bullet$ computes $LV(M)$, and $$K\\simeq Q(F^\\bullet\\otimes_B T).$$ If $F^i\\simeq B^{r_i}$, its tensor with $T$ is $T^{\\oplus r_i}$, by $(b_a)_a\\otimes t\\mapsto(b_at)_a$. On every $U_j$ this is free of rank $(N+1)r_i$; the resulting complex has the same upper bound as $F^\\bullet$. Thus $K$ has on these opens a bounded-above finite-free representative, exactly the definition of pseudo-coherence on $P$.",
+   "uses": [
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "def-pur-pseudo-coherent-complex",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSG, lemma-pseudo-coherent-on-projective-space, implication (5) => (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-space-tilting-equivalence",
+  "def-pc-projective-space-twist",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "def-pc-global-derived-rhom",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-finite-free-algebra-pseudocoherent-resolution",
+  "lem-trf-bounded-above-acyclic-derived-computation",
+  "def-pur-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSG, lemma-pseudo-coherent-on-projective-space, implication (5) => (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo-coherent complex on projective space over any ring is detected by derived global sections of its twists in degrees zero through the projective dimension",
+   "results": "OK 8 hits: CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.instIsKProjectiveObjIntShiftFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: K-projectivity and quasi-coherent sheaf presentation data do not give the projective-space finite twist criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|PseudoCoherent|pseudo_coherent",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: K-projectivity and quasi-coherent sheaf presentation data do not give the projective-space finite twist criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"ProjectiveSpace\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: K-projectivity and quasi-coherent sheaf presentation data do not give the projective-space finite twist criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex with quasi coherent cohomology on projective n space is pseudo coherent if derived global sections of its twists O(d) for d from 0 to n are pseudo coherent",
+   "results": "OK 8 hits: SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsQuasicoherent.rec",
+   "date": "2026-10-22",
+   "verdict": "no match: K-projectivity and quasi-coherent sheaf presentation data do not give the projective-space finite twist criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherence of a complex on projective space is detected by global derived sections of its finitely many twists",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective [Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives]; CochainComplex.IsKProjective [Mathlib/Algebra/Homology/HomotopyCategory/KProjective]; CochainComplex.isKProjective_of_projective [Mathlib/Algebra/Homology/HomotopyCategory/KProjective]; CochainComplex.IsKProjective.Qh_map_bijective [Mathlib/Algebra/Homology/DerivedCategory/KProjective]; CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex [Mathlib/CategoryTheory/Abelian/Projective/Ext]; CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt [Mathlib/CategoryTheory/Abelian/Projective/Extend]; CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ [Mathlib/CategoryTheory/Abelian/LeftDerived]; DerivedCategory.isGE_Q_obj_iff [Mathlib/Algebra/Homology/DerivedCategory/TStructure]",
+   "date": "2026-10-23",
+   "verdict": "no match: general K-projectivity, projective dimension and quasi-coherent presentation results do not assert the finite-twist pseudo-coherence criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the derived global sections of K tensor O(d) for zero through n on projective n space are pseudo coherent then K is pseudo coherent",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.instIsQuasicoherentOfIsFinitePresentation [Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent]; AlgebraicGeometry.finite_appTop_of_universallyClosed [Mathlib.AlgebraicGeometry.Morphisms.Proper]; SheafOfModules.QuasicoherentData.IsFinitePresentation [Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent]; CategoryTheory.HasGlobalSectionsFunctor [Mathlib.CategoryTheory.Sites.GlobalSections]; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE [Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic]; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk [Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent]; AlgebraicGeometry.Proj.pow_apply [Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf]; AlgebraicGeometry.Proj.mul_apply [Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf]",
+   "date": "2026-10-23",
+   "verdict": "no match: general K-projectivity, projective dimension and quasi-coherent presentation results do not assert the finite-twist pseudo-coherence criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: general K-projectivity, projective dimension and quasi-coherent presentation results do not assert the finite-twist pseudo-coherence criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|Beilinson|tilting",
+   "results": "[grep] OK 6 hit(s); Mathlib/RingTheory/Perfectoid/Untilt.lean:31 Perfectoid, Tilting equivalence, Untilt; Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean:27 * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean:25 * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*, 1.2][bbd-1982]; Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean:35 * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]; Mathlib/MeasureTheory/Measure/Tilted.lean:13 The exponential tilting of a measure `μ` on `α` by a function `f : α → ℝ` is the measure with; Mathlib/MeasureTheory/Measure/Tilted.lean:23 * `Measure.tilted μ f`: exponential tilting of `μ` by `f`, equal to",
+   "date": "2026-10-23",
+   "verdict": "no match: general K-projectivity, projective dimension and quasi-coherent presentation results do not assert the finite-twist pseudo-coherence criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite twist criterion on projective space for a bounded above finite locally free resolution",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.HasProjectiveDimensionLT [Mathlib/CategoryTheory/Abelian/Projective/Dimension]; CochainComplex.IsKProjective [Mathlib/Algebra/Homology/HomotopyCategory/KProjective]; CategoryTheory.isZero_Tor'_succ_of_projective [Mathlib/CategoryTheory/Monoidal/Tor]; CategoryTheory.isZero_Tor_succ_of_projective [Mathlib/CategoryTheory/Monoidal/Tor]; CochainComplex.isKProjective_of_projective [Mathlib/Algebra/Homology/HomotopyCategory/KProjective]; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective [Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives]; CategoryTheory.projectiveDimension_ne_top_iff [Mathlib/CategoryTheory/Abelian/Projective/Dimension]; CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex [Mathlib/CategoryTheory/Abelian/Projective/Ext]",
+   "date": "2026-10-23",
+   "verdict": "no match: general K-projectivity, projective dimension and quasi-coherent presentation results do not assert the finite-twist pseudo-coherence criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-section-image-flat-fp",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG).",
+   "via": [
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-space-pseudocoherence-twist-test",
+  "worker": "stage1",
+  "summary": "Verified the statement against Stacks 0CSG (5) => (1) without changing it. Split via the projective-space tilting equivalence and the base-pseudo-coherent finite-free algebra resolution lemma (two new statement-only nodes). Reused perfect duality and the existing general bounded-above derived-computation node. Wrote out the finite-sum and standard-chart finite-free arguments; kept all hypotheses over arbitrary commutative rings.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited alteration/pointed-curve chain and the relative section-image finite-presentation argument. Realizes precisely Stacks 0CSG (5) => (1), the finite-twist prerequisite named in the inherited blueprint.from.place. The ancestor command reports None for this existing broken created.item chain; preserved that null ancestor and full via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-perfect-rhom-tensor-comparison",
+    "why": "Uses the general perfect-dual tensor description of derived Hom on the scheme P; no same-unit node supplies this scheme-theoretic duality."
+   },
+   {
+    "node": "lem-trf-bounded-above-acyclic-derived-computation",
+    "why": "Uses the general computation of a total left derived functor on bounded-above projective complexes; avoids introducing a duplicate bimodule tensor-computation lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-trf-bounded-above-acyclic-derived-computation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-ae8413b09",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-ae8413b09 (reviewer sub-agent of L); spot-checked: I read all of the item and both new nodes against Stacks perfect.tex 0CSG (5)=>(1) (lines 8556-8647), 0BQU (4690-4790) and 0CSF (8470-8553). The item statement and stmt_deps are unchanged from live, where it is still unsplit, so nothing supersedes it. Step 1: the tilting node's 'in particular' clause gives M with M(x)^L T ~ K and Res M ~ RHom(T,K), with no boundedness assumption on K. Step 2: T is strictly perfect on D_+(x_j); lem-pc-perfect-rhom-tensor-comparison applies with K:=T and M:=K in D_QCoh; T^dual is the direct sum of O(d), as Stacks also uses. Step 3: a finite direct sum of bounded-above finite-free complexes, correctly marked elementary. Step 4: B is upper triangular with entries S_{j-i}, which is finite free over R with R central; the 0CSF node then applies. Step 5: every hypothesis of lem-trf-bounded-above-acyclic-derived-computation holds (Mod-B has enough projectives, V is right exact via cokernel plus exact sheafification, LV exists by the tilting node), so K ~ Q(F(x)_B T) with terms T^r, which are free on each chart; this is def-pur pseudo-coherence. The tilting node's matrix convention (Hom(O(-j),O(-i)) = S_{j-i}) is correct, and both new nodes are true on the edge cases n=0, A=0, B=0 and M=0. Both are statement-only, cite tag and label, and have three kinds of Mathlib search. Neither restates the item. I found no duplicates (rg -L over dag/nodes and blueprint_refs search for 0BQU, 0CSF, tilting, Beilinson, endomorphism algebra). I accept the tool uses: perfect rhom-tensor comparison (generic duality) and the trf derived-computation lemma (generic). Batch 5: the trf lemma is pure homological algebra. Its 219-node closure reaches only generic resolution and K-projective trf lemmas, with no trace-formula or Poincare-duality statement and no batch-4 target, so it lies outside the assumptions. The null blueprint.from.node is inherited from the parent's broken created.item chain; this is a base issue, and I note that the chain could be re-rooted at det-thm-sf-ctf-stability-direct-images. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpacePseudoCoherenceTwistTest",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.isPseudoCoherent_of_twist_derivedGlobalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpacePseudoCoherenceTwistTest.lean",
+  "statement": "theorem isPseudoCoherent_of_twist_derivedGlobalSections (R : Type u) [CommRing R] (N : ℕ) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))).toRingedSpace))] [∀ U : (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))).Opens, HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))).toRingedSpace).over U))] [HasDerivedCategory.{wR} (ModuleCat.{u} R)] [HasDerivedCategory.{wG} (ModuleCat.{u} ((moduleRings (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))).toRingedSpace).obj.obj (op ⊤)))] (K : schemeDerivedQCohCategory (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R)))) (hK : ∀ d : Fin (N + 1), DerivedCategory.IsPseudoCoherent ((Functor.mapDerivedCategory.{wG, wR} (ModuleCat.restrictScalars.{u} (S := (moduleRings (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))).toRingedSpace).obj.obj (op ⊤)) (((Scheme.ΓSpecIso (.of R)).inv ≫ ((ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))) ↘ Spec (.of R)).appTop).hom))).obj ((schemeDerivedGlobalSections (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R)))).obj (K.obj ⊗ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))).toRingedSpace)) 0).obj (twist (ULift.{u} (Fin (N + 1))) (Spec (.of R)) (d.val : ℤ)))))) : Scheme.IsPseudoCoherent (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of R))) K.obj",
+  "branch": "sheaf-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-085ccd195",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Single module states isPseudoCoherent_of_twist_derivedGlobalSections (sorry only), matching Stacks 0CSG (5)=>(1), perfect.tex lines 8556-8576. Clauses checked: R : Type u CommRing with no extra assumptions; N : ℕ; P = ProjectiveSpace (ULift (Fin (N+1))) (Spec R), the model of the recorded ProjectiveSpace.twist and of the tilting node; K : schemeDerivedQCohCategory with no bound; ∀ d : Fin (N+1); tensor is the global schemeDerivedTensorMonoidal (the generic FromJoel instance needs HasDerivedMonoidalCategory, which is not global anywhere); RΓ = recorded schemeDerivedGlobalSections followed by restrictScalars along the canonical (ΓSpecIso).inv ≫ appTop, the same map as tiltingBaseScalars; DerivedCategory.IsPseudoCoherent hypotheses; conclusion Scheme.IsPseudoCoherent with a shared wX for P and its opens, wR and wG independent, no universe equality. lean.statement is verbatim in the file; the node otherwise equals live apart from the lean record; docstrings carry source and blueprint and all 5 proof steps; all proof_deps modules are imported and exist in live; no duplicate and not yet landed. Edge cases N=0, R=0 and K=0 are covered. No compile because nothing was changed."
+ }
+}

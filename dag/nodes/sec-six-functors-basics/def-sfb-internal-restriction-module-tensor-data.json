@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-internal-restriction-module-tensor-data",
+ "kind": "definition",
+ "title": "Specifications for normalized internal-action module pullback and tensor",
+ "statement": "On small sites with module sheaves [def-weil-sheaf-of-modules-category], a precomposition ringed morphism is a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism] with inverse image equal, on presheaves and maps, to precomposition and with identity structural ring map. A module pullback core records the algebraic inverse image [def-weil-pbc-algebraic-inverse-image], sectionwise linear equivalences, actual identity scalar-extension objects, its module adjunction, and a multiplication unitor. Its laws specify the underlying ring and module identifications, naturality in site arrows and module maps, multiplication and insertion on scalar tensors, additivity, and preservation of finite limits and colimits. An exact tensor pullback additionally records the existing normalized canonical comparison [def-weil-pbc-canonical-ringed-tensor-comparison], its equation on pure tensors, a monoidal structure with that tensorator, symmetry and the identity regular-ring unit. For an action-site presentation [lem-sfb-internal-action-site-presentation], its section map is the recorded presheaf comparison followed by its linear section equivalence. The diagonal tensor predicate asks for an equivariant sheaf whose underlying and action-site tensors are the existing sheaf tensors [def-pur-sheaf-tensor-product], with diagonal action and compatibility on pure tensors. All scalar and pure sections use existing module sheafification [def-weil-presheaf-modules-sheafification]. These are specifications, not assertions of existence.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-sfb-internal-action-site-presentation",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Specifying precomposition inverse image scalar extension module pullback section formulas diagonal tensor and monoidal coherence",
+   "results": "CategoryTheory.Mod_.scalarRestriction; PresheafOfModules.pullback; ModuleCat.extendScalarsId_inv_app_apply; no match for these specification structures.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; instAdditiveRestrictScalars; restrictScalars_obj_val; restrictScalars_map_val.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|Tensor|exact|Monoidal in Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; InternalModulePullback in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib provides restrictScalars only here; all seven specification declarations already occur together in the item and are extracted verbatim, not redefined.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalRestrictionModuleTensor",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor. Specifications for normalized internal-action module pullback and tensor.",
+   "via": [
+    "lem-sfb-internal-restriction-module-tensor",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalRestrictionModuleTensorData",
+  "file": "lean/Sheaf/CategoryTheory/InternalRestrictionModuleTensorData.lean",
+  "declaration": "CategoryTheory.InternalActionSite.InternalPrecompositionMorphism",
+  "statement": "structure InternalPrecompositionMorphism {D : Type u} [SmallCategory D] (J : GrothendieckTopology C) (T : GrothendieckTopology D) (F : D ⥤ C) (R : Sheaf J CommRingCat.{u}) (hR : Presheaf.IsSheaf T (F.op ⋙ R.obj))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.InternalActionSite.InternalPrecompositionMorphism",
+   "CategoryTheory.InternalActionSite.internalRegularUnitMap",
+   "CategoryTheory.InternalActionSite.InternalModulePullback",
+   "CategoryTheory.InternalActionSite.InternalModulePullbackLaws",
+   "CategoryTheory.InternalActionSite.InternalExactTensorPullback",
+   "CategoryTheory.InternalActionSite.internalPresentationSection",
+   "CategoryTheory.InternalActionSite.InternalDiagonalTensor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd0c6",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T081855-L-2094745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd0c6",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T081855-L-2094745",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); 7 extracted defs vs clone item (verbatim); 3 sorry statements vs their nodes and the item plan steps 1-6; Presentation.inverse_morphisms vs node lem-sfb-internal-action-site-presentation and its importers"
+ }
+}

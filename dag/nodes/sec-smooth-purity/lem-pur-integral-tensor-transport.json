@@ -1,0 +1,156 @@
+{
+ "id": "lem-pur-integral-tensor-transport",
+ "kind": "statement",
+ "title": "Tensor transport for the recorded integral line",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-weil-proetale-inverse-image], $\\ell$ a prime invertible in every residue field of both schemes, and $E/\\mathbf Q_\\ell$ a finite extension with valuation ring $\\mathcal O_E$. Set $R_{E,T}=\\varprojlim_{n\\geq0}(\\mathcal O_E/\\varpi_E^{n+1})_T$ [def-weil-completed-integral-coefficients], $L_T=\\varprojlim_n\\mu_{\\ell^{n+1},T}$ [def-pur-roots-of-unity-sheaf], and $N_{E,T}=(\\mathcal O_E)_T\\otimes_{(\\mathbf Z_\\ell)_T}L_T$ with the completed action of [def-pur-twist-sheaves]. Supply isomorphisms $\\alpha:h^{-1}R_{E,Y}\\to R_{E,X}$ and $\\tau:h^{-1}L_Y\\to L_X$, with all projection equations $\\alpha\\pi_{X,n}=h^{-1}(\\pi_{Y,n})\\delta_{\\mathcal O_E/\\varpi_E^{n+1}}$ and $\\tau\\operatorname{pr}_{X,n}=h^{-1}(\\operatorname{pr}_{Y,n})c^h_{\\mu_{\\ell^{n+1}}}$, using the recorded constant-section and root comparisons [def-pur-roots-of-unity-inverse-image]. Then there exists an additive isomorphism $\\rho:h^{-1}N_{E,Y}\\to N_{E,X}$ whose actual adjunct sends every local pure tensor $b\\otimes t$ over $V\\in Y_{\\mathrm{proet}}$ to $\\widetilde\\delta_{\\mathcal O_E,V}(b)\\otimes\\widetilde\\tau_V(t)$ over $V\\times_Y X$. Its adjunct is semilinear over the adjunct of $\\alpha$: $\\widetilde\\rho_V(a\\cdot s)=\\widetilde\\alpha_V(a)\\cdot\\widetilde\\rho_V(s)$ for every local completed scalar $a$ and line section $s$. This conclusion constructs neither $\\alpha$ nor $\\tau$ and asserts no field-inclusion square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity and Integral twist paragraphs."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-twist-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Projection uniqueness identifies alpha with the normalized completed coefficient comparison. The normalized coefficient tensor square and epsilon square identify the discrete and completed scalar structures.",
+   "uses": [
+    "lem-pur-completed-coefficient-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the root action after every root projection: the finite root inverse-image comparisons are semilinear, hence tau is semilinear for the coordinatewise completed base action.",
+   "uses": [
+    "lem-pur-roots-of-unity-inverse-image-iso",
+    "def-pur-twist-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the semilinear tensor-presentation transport theorem on the small site models. Identify its M tensor_D B with the recorded B tensor_D M by the factor-switching tensor universal property. Transport the additive inverse-image comparisons through the unit-normalized forgetful isomorphisms.",
+   "uses": [
+    "lem-pur-semilinear-tensor-presentation-transport",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunct agrees on pure tensors by the defining pairing equations. Uniqueness of the completed tensor-pushout action identifies its action with purTwistIntegralModule and gives semilinearity on all sections. The inverse is obtained from the inverse root and constant comparisons; empty schemes and E=Q_l satisfy the same universal properties.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-coefficient-tensor-normalization",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "def-pur-twist-sheaves",
+  "lem-pur-semilinear-tensor-presentation-transport",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-twist-sheaf-locally-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity and Integral twist paragraphs. W3 stage-3 reduction, following the existing unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the completed integral Tate twist sheaf commutes with scalar extension",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.pre",
+   "results": "12 hits: CategoryTheory.Limits.limit.pre, CategoryTheory.Limits.limit.lift_pre, CategoryTheory.Limits.limit.pre_π, CategoryTheory.Limits.limit.id_pre, CategoryTheory.Limits.limit.pre_id, CategoryTheory.Limits.limit.pre_pre, CategoryTheory.Limits.limit.pre_π_assoc, CategoryTheory.Limits.limit.inv_pre_π",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLimit.*[Rr]ootsOfUnity|purIntegralTwist|integralCompletedScalarMap",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image on the pro-etale site preserves the inverse limit of the finite constant rings ZMod (p^n) and of the roots of unity sheaves",
+   "results": "8 hits: PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, ProfiniteGrp.isIso_toLimit, PresheafOfModules.evaluation_preservesFiniteLimits, AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux, Profinite.lim",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralTwistLineInverseImage",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "Proof final sentence on levelwise integral scalar extension, realized through the Roots of unity and Integral twist paragraphs of the Cartesian coefficient-twists proof: Tensor transport for the recorded integral line.",
+   "via": [
+    "lem-weil-integral-twist-base-change",
+    "lem-pur-integral-twist-line-inverse-image"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralTensorTransport",
+  "file": "lean/Sheaf/Paper/PurIntegralTensorTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pur_integral_tensor_transport",
+  "statement": "theorem pur_integral_tensor_transport\n    {X Y : Scheme.{u}} (h : X ⟶ Y) (l : ℕ) [Fact l.Prime]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (α : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj\n      (completedIntegralCommRingSheafUnrestricted l E Y) ⟶\n        completedIntegralCommRingSheafUnrestricted l E X) [IsIso α]\n    (τ : (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).obj\n      (purTwistZlOne Y l) ⟶ purTwistZlOne X l) [IsIso τ]\n    (hα : ∀ n : ℕ, α ≫ completedIntegralCommRingProjectionUnrestricted l E X n =\n    (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map\n      (completedIntegralCommRingProjectionUnrestricted l E Y n) ≫\n        proEtaleConstantInverseImageMap h CommRingCat.{u + 1}\n          (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))\n    (hτ : ∀ n : ℕ,\n    τ ≫ limit.π (proEtaleRootsOfUnityTower X l (Fact.out : l.Prime)) (op n) =\n      (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).map\n        (limit.π (proEtaleRootsOfUnityTower Y l (Fact.out : l.Prime)) (op n)) ≫\n          proEtaleRootsOfUnityInverseImageMap h (l ^ (n + 1))) :\n    ∃ ρ : (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}).obj\n        ((SheafOfModules.toSheaf _).obj (purTwistIntegralModule Y l E)) ⟶\n          (SheafOfModules.toSheaf _).obj (purTwistIntegralModule X l E),\n      IsIso ρ ∧\n    (∀ (V : Y.ProEtᵒᵖ) (b : (purTwistIntegralConstant Y l E).obj.obj V)\n          (t : (purTwistZlModule Y l).val.obj V),\n        (((proEtaleSheafAdjunction h AddCommGrpCat.{u + 1}).homEquiv _ _) ρ).hom.app V\n            (purTwistIntegralTensor Y l E V b t) =\n          purTwistIntegralTensor X l E ((proEtaleBaseChange h).op.obj V)\n            ((proEtaleConstantDirectImageMap h CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n                V b)\n            ((((proEtaleSheafAdjunction h AddCommGrpCat.{u + 1}).homEquiv _ _) τ).hom.app\n              V t)) ∧\n      ∀ (V : Y.ProEtᵒᵖ)\n          (a : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj V)\n          (t : (purTwistIntegralModule Y l E).val.obj V),\n        (((proEtaleSheafAdjunction h AddCommGrpCat.{u + 1}).homEquiv _ _) ρ).hom.app V\n            (a • t) =\n          @id ((completedIntegralCoefficientSheafUnrestricted l E X).obj.obj\n            ((proEtaleBaseChange h).op.obj V))\n            ((((proEtaleSheafAdjunction h CommRingCat.{u + 1}).homEquiv _ _) α).hom.app V a) •\n          @id ((purTwistIntegralModule X l E).val.obj ((proEtaleBaseChange h).op.obj V))\n            ((((proEtaleSheafAdjunction h AddCommGrpCat.{u + 1}).homEquiv _ _) ρ).hom.app V t)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6da90",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261025T203613-L-2832800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6da90",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261025T203613-L-2832800",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new modules/nodes against node lem-pur-integral-twist-line-inverse-image, unit sk-prop-sf-existence (realized empty; qlbar-colimit unit not on its route), library ProfiniteCoefficientInverseImage, 6 importers compiled"
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "id": "lem-pur-ringed-proper-open-pullback-coefficients",
+ "kind": "statement",
+ "title": "Scalar extension preserves the clopen pullback comparison before taking mates",
+ "statement": "Fix an ordinary or vertical sequence site mode m, an ambient scheme T, and normalized coefficient, geometric and scalar data c, o, sp, sc, e of [def-pur-ringed-refinement-data]. Let k:U→V, r:U→W, p:V→Z, i:W→Z be arrows over T with k and i open, and let d be a Factorization of this square as in [def-pur-ringed-proper-open-pullback-formula]. Write H,b,q,s for its fibre product and distinguished clopen lift. For every ring sheaf map a:A→B on the chosen site of T and N∈D(A_W), form τ_D=p_D^*i_!,D→b_!,D q_D^*→b_!,D s_!,D s_D^*q_D^*→k_!,D r_D^* from the normalized beta, clopen projector pi, and canonical pullback/open compositors. Then λ_p(i_!,A N);S_V(τ_A(N));δ_k(r_A^*N)=p_B^*(δ_i(N));τ_B(S_W N);k_!,B(λ_r(N)), where semicolons denote composition in the order written. This is an equality on the entire ordinary unbounded derived categories, directly on the vertical site in sequence mode. It contains no proper-adjunction mate or proper direct image. In Lean the same equation is recorded by the single-field proposition PullbackCompatibility, to avoid kernel expansion of the large derived-functor expressions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FJ, 0GL1, 06YS, 06YY, 07A4; agent coefficient supplement Steps 1–3 of lem-pur-ringed-proper-open-coefficient-square, for the clopen construction of more-etale.tex Tag 0F7B."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-refinement-data",
+  "def-pur-ringed-proper-open-pullback-formula"
+ ],
+ "proof": [
+  {
+   "text": "Work on the chosen ordinary or vertical site throughout. The supplied open immersion s has clopen image by hypothesis. Restriction to U and its complementary open C gives the exact module equivalence of lem-pur-clopen-ringed-module-gluing for every ring sheaf D. For sequences apply its section formula at every index: all transitions preserve the two factors, since they are restrictions of the same ring and module maps. Conversely glue the two systems with that same section formula. These inverse exact equivalences act degreewise on complexes, preserve quasi-isomorphisms, and hence induce inverse derived equivalences by the localization universal property; lem-sfb-product-localization identifies the localization of the finite product with the product of the localizations. This is a product decomposition of the whole system category, not a test of morphisms by evaluation. Under it s_!G=(G,0), s^*(F,G)=F and pi_s=(1,0). Consequently Hom(F,s_!G)=Hom(s^*F,G). The specified adjunction-defined open compositor identifies k_! with b_!s_!; since b_! is fully faithful, restriction gives a bijection Hom(b_!F,k_!G)=Hom(s^*F,G) in D(D_V), also for whole systems.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-product-localization",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict) and 0GL1 (lemma-j-shriek-and-tensor); agent product-gluing argument; geometry from more-etale.tex Tag 0F7B."
+   }
+  },
+  {
+   "text": "Record the balancing coherence used below. For composable geometric maps v,w with all rings inverse images, lambda_(wv) equals S applied to the A-pullback compositor, followed by the two lambdas and the B-pullback compositor in the appropriate directions. Indeed choose a flat-term K-flat representative. Such representatives exist, and geometric and coefficient pullbacks preserve them by the cited K-flat results. On the representative, both routes are scalar association: after identifying inverse images, a local tensor b tensor x is sent to b tensor x; any intervening scalar is multiplied into b. The cochain comparison of lem-pur-cochain-pullback-tensor-coherence gives precisely these balancing maps and compositors, with degree-zero scalars and no additional sign. Thus they agree on every representative and every map. The resolving-subcategory equivalence in lem-weil-pbc-site-derived-tensor-descent descends the equality to the derived category. Apply the same small-site statements directly to the vertical site for systems. In particular this coherence applies to pk=ir and to sb=k, sq=r. All uses involve sheaves of rings, not merely constant rings.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product); agent balancing calculation on the prescribed models."
+   }
+  },
+  {
+   "text": "For N in D(A_W), the following equality has source p_B^* S_Z i_!,A N and target k_!,B S_U r_A^* N:\n$$\\delta_k(r_A^*N)\\,S_V(t_{A,N})\\,\\lambda_p(i_{!,A}N)=k_{!,B}(\\lambda_r(N))\\,t_{B,S_WN}\\,p_B^*(\\delta_i(N)).\\tag{*}$$\nHere and below compositions are written right to left. To check it, use delta_i and the B-open base-change beta to identify its source with b_!,B q_B^* S_W N. Step 1 says that maps from this source to the displayed target are determined by restriction to U. Under restriction, the beta factors are identities after the specified open units, the pi_s factors are identities, and the open and pullback compositors are their canonical identifications. The restrictions of delta_i and delta_k are also identities after the balancing identifications: apply lem-sf-open-tensor-normalization to the identity geometric map with ring map A to B. The two restrictions in (*) are therefore exactly the two routes comparing k_B^* p_B^* S_Z i_!,A N with S_U r_A^* N. They agree by Step 2 and pk=ir. The bijection of Step 1 proves (*), as an equality of B-linear derived maps. This argument checks the clopen projector, not just the cartesian beta: its restriction is identity on U and its complementary target is zero.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ and 0GL1, with the intrinsic clopen normalization of more-etale.tex Tag 0F7B; agent application of the restriction bijection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-product-localization",
+  "lem-sf-open-tensor-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent restriction-and-balancing argument, expanding Steps 1–3 of the parent coefficient supplement; Tags 08FJ, 0GL1 and 07A4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scalar extension preserves the clopen projector and open pullback base change comparison on derived sheaves of modules",
+   "results": "ModuleCat.ExtendScalars.obj', ModuleCat.preservesFiniteLimits_extendScalars_of_flat, LinearEquiv.extendScalarsOfIsLocalizationEquiv, Algebra.FormallyUnramified.projective_of_restrictScalars, PresheafOfModules.pullback, AlgHom.extendScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-25",
+   "verdict": "No match: ordinary module scalar APIs do not assert the normalized clopen derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings preserves a proper open mate by adjunction and a compatible left adjoint square",
+   "results": "CategoryTheory.mateEquiv_apply, mateEquiv, mateEquiv_counit, mateEquiv_square, iterated_mateEquiv_conjugateEquiv, mateEquiv_conjugateEquiv_vcomp, mateEquiv_counit_symm, mateEquiv_symm_apply.",
+   "date": "2026-10-25",
+   "verdict": "These prove formal mate pasting after a compatible left square is given. They do not establish the geometric/scalar compatibility stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*coefficient|mateEquiv_square",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:245 and Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:362 give mateEquiv_square. Repository searches find RingedRefinementClopen (only identity-left refinement compatibility), SemilinearScalarProperOpen and SemilinearAlphaPullback (constant coefficient towers), not this arbitrary ring-sheaf pullback identity. blueprint_refs.py search \"clopen coefficient\" returns 0 blueprint nodes.",
+   "date": "2026-10-25",
+   "verdict": "No existing arbitrary ring-sheaf general-square pullback identity. Reuse the existing normalized operations and split only the geometric compatibility step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProperOpenCoefficientSquare",
+  "date": "2026-10-25",
+  "group": "M9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Intended source recorded by the item: thm-pur-rational-and-qbar-purity; current sk-prop-sp-composition proof, Towers and passage by Rlim, inversion of ell and finite-extension descent; sk-thm-purity-transport proof Steps 2–3, identifying the reconstructed compact-support adjunction with the specified condensed one. The created.item chain ends at the launcher-created nt-target-smooth-purity-qbar, whose created.item is a human description, so the computed nearest imported blueprint ancestor is null. This auxiliary supplies the single proper/open coefficient square used when reducing the completed compositor and then changing to E and Omega coefficients. Specifically the parent coefficient supplement Steps 1–3, before transposing the proper adjunctions.",
+   "via": [
+    "lem-pur-ringed-proper-open-coefficient-square",
+    "lem-pur-condensed-compositor-realization",
+    "lem-route-smooth-purity-iso-comp-open-immersion",
+    "def-pur-condensed-smooth-purity-iso",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProperOpenPullbackCoefficients",
+  "file": "lean/Sheaf/Paper/RingedProperOpenPullbackCoefficients.lean",
+  "declaration": "SheafOfModules.RingedProperOpen.clopenPullback_coefficients",
+  "statement": "theorem clopenPullback_coefficients {m : Mode} {T : Scheme.{u}}\n    {c : Coefficients m T} {o : Calculus c} (sc : ScalarComparisons o)\n    {sp : Spatial o} (e : OpenComparisons sp)\n    {U V W Z : Over T} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n    [IsOpenImmersion k.left] [IsOpenImmersion i.left]\n    (d : Factorization k r p i) {A B : Rings m T} (a : A ⟶ B) :\n    PullbackCompatibility\n      (lpA := (o.operation p A).left) (lpB := (o.operation p B).left)\n      (lrA := (o.operation r A).left) (lrB := (o.operation r B).left)\n      (su := (o.scalar U a).T) (sv := (o.scalar V a).T)\n      (sw := (o.scalar W a).T) (sz := (o.scalar Z a).T)\n      (iA := o.shriek i A) (iB := o.shriek i B)\n      (kA := o.shriek k A) (kB := o.shriek k B)\n      (sc.pull p a).hom (sc.pull r a).hom (sc.delta i a).hom (sc.delta k a).hom\n      (t e k r p i d A) (t e k r p i d B)",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-24263",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T211954-L-4179387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-24263",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T211954-L-4179387",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + new RingedProperOpenPullbackCoefficients module and 4 node files vs clone sheaf-dag (68b8e04) and lem-pur-ringed-proper-open-coefficient-square Steps 1-5; defeq of new gamma/left/right with old bodies checked by rfl in a scratch compile"
+ }
+}

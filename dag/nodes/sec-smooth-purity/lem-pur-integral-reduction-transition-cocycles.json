@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-integral-reduction-transition-cocycles",
+ "kind": "statement",
+ "title": "Identity and composition of actual integral reduction transitions",
+ "statement": "Let D be a finite-field datum, let l be a prime different from its characteristic, let E be a finite extension of Q_l, and let W be a scheme. Use the completed coefficient category and actual scalar-reduction functors of [def-weil-integral-derived-reduction]. For every object M of this derived category, write L_n M for its derived reduction at exponent n+1, and t_(m,n)(M): L_m M -> Res_(m,n)(L_n M) for the transition fixed by the smaller quotient unit under the scalar adjunction [def-pur-integral-reduction-transitions]. With the canonical restriction unit and compositor of [def-coef-normalized-dvr-tower], the following equations hold: t_(n,n)(M);unit_n = id, and t_(c,b)(M);Res_(c,b)(t_(b,a)(M));comp_(c,b,a) = t_(c,a)(M) for every a <= b <= c. No constructibility, boundedness or completeness hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 1, compatibility with finite reductions; retained source-object argument of lem-pur-adic-source-finiteness-reductions, Steps 3--7."
+ },
+ "stmt_deps": [
+  "def-weil-integral-derived-reduction",
+  "def-pur-integral-reduction-transitions",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Transpose both equations under the scalar extension/restriction adjunction at the largest index. By definition each transition transposes to the smaller quotient unit followed by the inverse restriction compositor. Naturality of the intermediate unit and the adjunction triangle identities remove the intermediate transition.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-pur-integral-reduction-transitions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1, compatibility with finite reductions; retained source-object argument of lem-pur-adic-source-finiteness-reductions, Steps 3--7."
+   }
+  },
+  {
+   "text": "Use the canonical restriction identity and composition equations. After naturality moves the intermediate transition past the inverse completion comparison, its defining adjunction equation removes it. The restriction coherence equation identifies the remaining composite with the direct transition transpose. Injectivity of the Hom bijection gives the claimed equations.",
+   "uses": [
+    "lem-pur-integral-reduction-restriction-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1, compatibility with finite reductions; retained source-object argument of lem-pur-adic-source-finiteness-reductions, Steps 3--7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-pur-integral-reduction-transitions",
+  "lem-pur-integral-reduction-restriction-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 1, compatibility with finite reductions; retained source-object argument of lem-pur-adic-source-finiteness-reductions, Steps 3--7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived coefficient reduction transitions satisfy the identity and composition cocycle laws.",
+   "results": "{\"t\": \"2026-10-25T11:53:32Z\", \"tool\": \"leansearch\", \"query\": \"The canonical derived coefficient reduction transitions satisfy the identity and composition cocycle laws.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cocyclesMap_id_comp_assoc\", \"groupCohomology.cocyclesMap_id\", \"groupCohomology.cocyclesMap_comp_isoCocycles\\u2082_hom_assoc\", \"CochainComplex.HomComplex.\\u03b4_zero_cocycle_comp\", \"groupCohomology.cocyclesMap_id_comp\", \"groupCohomology.toCocycles_comp_isoCocycles\\u2081_hom\", \"groupCohomology.toCocycles_comp_isoCocycles\\u2081_hom_assoc\", \"groupCohomology.toCocycles_comp_isoCocycles\\u2082_hom_assoc\"], \"digest\": \"c634f2590d6c5fe9\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified derived sheaf maps; the results give only general adjunction or algebraic completion facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction units induce coherent scalar restriction transitions on all coefficient reductions of a complex",
+   "results": "{\"t\": \"2026-10-25T11:50:27Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction units induce coherent scalar restriction transitions on all coefficient reductions of a complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalarsComp'App_hom_naturality\", \"ModuleCat.restrictScalarsComp'App_inv_naturality\", \"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.restrictScalarsComp'App_hom_naturality_assoc\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"CategoryTheory.Mod_.scalarRestriction_hom\", \"ModuleCat.restrictScalarsComp'App_inv_naturality_assoc\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\"], \"digest\": \"66a8ca92d07910c5\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified derived sheaf maps; the results give only general adjunction or algebraic completion facts."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDVRReductionTransition|purAdicSourceReduction|purAdicFiniteSourceTransition",
+   "results": "{\"t\": \"2026-10-25T11:28:23Z\", \"tool\": \"grep\", \"query\": \"normalizedDVRReductionTransition|purAdicSourceReduction|purAdicFiniteSourceTransition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified derived sheaf maps; the results give only general adjunction or algebraic completion facts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPuritySourceFiniteness",
+  "date": "2026-10-25",
+  "group": "H1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Source-object argument, canonical quotient square and cocycles; current transport Step 1.",
+   "via": [
+    "lem-pur-adic-source-finiteness-reductions"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralReductionTransitionCocycles",
+  "declaration": "WeilConjectures.integralReductionTransition_cocycles",
+  "file": "lean/Sheaf/Paper/IntegralReductionTransitionCocycles.lean",
+  "statement": "theorem integralReductionTransition_cocycles\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (W : Scheme.{u}) (M : completedIntegralDerivedCategory l E W D hl) :\n    (∀ n : ℕ, normalizedDVRReductionTransition.{u, u, u} l E W D hl (Nat.le_refl n) M ≫\n      (normalizedDVRResUnit.{u, u} l E W n).hom.app _ = 𝟙 _) ∧\n    (∀ {c b a : ℕ} (hab : a ≤ b) (hbc : b ≤ c),\n      normalizedDVRReductionTransition.{u, u, u} l E W D hl hbc M ≫\n        (normalizedDVRRes.{u, u} l E W hbc).map\n          (normalizedDVRReductionTransition.{u, u, u} l E W D hl hab M) ≫\n        (normalizedDVRResComp.{u, u} l E W hbc hab).hom.app _ =\n      normalizedDVRReductionTransition.{u, u, u} l E W D hl (hab.trans hbc) M)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T202123-L-2676524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T202123-L-2676524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

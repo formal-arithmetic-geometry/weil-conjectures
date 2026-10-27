@@ -1,0 +1,311 @@
+{
+ "id": "lem-sf-smooth-dualizing-complex-invertible",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "the Lean proof of sk-prop-sf-rf-shriek-preservation's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the smooth case of the preservation of constructibility and Tor amplitude by Rf^!",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Smooth duality: the dualizing complex is an invertible sheaf in degree -2d",
+ "statement": "Let $f\\colon X\\to Y$ be a smooth separated morphism of pure relative dimension $d$ [def-sbc-smooth-morphisms] admitting a compactification [def-asd-compactifiable], and let $\\Lambda$ be a finite commutative ring whose exponent is invertible on $X$. Put $\\omega_f=Rf^!\\Lambda_Y$ [lem-sf-etale-ambient-adjoint-projection] in $D(X_{\\mathrm{et}},\\Lambda)$ [def-weil-pbc-derived-categories]. Then there is a locally constant sheaf $L$ of $\\Lambda$-modules on $X_{\\mathrm{et}}$ [def-constructible-locally-constant] whose stalk at every geometric point (with separably closed residue field) is isomorphic to $\\Lambda$, with $\\omega_f\\cong L[2d]$; and for every $K\\in D(Y_{\\mathrm{et}},\\Lambda)$ the canonical map $\\theta_{f,K}\\colon\\omega_f\\otimes^Lf^*K\\to Rf^!K$ [def-kun-derived-tensor] is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/_section.md",
+  "place": "sk-prop-sf-rf-shriek-preservation: the smooth case of the preservation of constructibility and Tor amplitude by Rf^!; Lean: upstream file lean/WeilConjectures/SixFunctors/Etale/Derived/SmoothDuality.lean, declaration AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor (module WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality, lines 77-85, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-asd-compactifiable",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-derived-categories",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "def-constructible-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Identify sfEtaleAmbientTensorMap for the chosen compactification and rightDerivedUpperShriekAdjunction with dualizingComplexTensorMap. Unfold the two transposes and move the derived left unitor inside homEquiv by homEquiv_naturality_right; associativity gives equality. For any other compactification of a quasi-compact morphism, transport the same adjunction along rightDerivedLowerShriekIso. The already proved projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso equation, inverted and composed with the transported counit, cancels both comparison components. Thus the actual tensor maps agree, rather than merely their sources and targets being isomorphic. Quasi-compactness is used only later for the affine-line projection.",
+   "uses": [
+    "lem-sf-etale-ambient-adjoint-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraphs 1-4; reuse the already proved upstream SmoothDuality.AffineSpace, Charts and Local modules."
+   }
+  },
+  {
+   "text": "Specialize sfEtaleUnitTensorArbitraryBase to the chosen compactification, actual upper-shriek functor and actual adjunction of every compactifiable etale e. Compactifiability supplies separatedness. Its last two conjuncts give the invertible coefficient-unit comparison and all invertible ambient tensor maps. Step 1 changes the latter to the upstream canonical maps, proving the EtaleSmoothDuality interface with no quasi-compactness assumption.",
+   "uses": [
+    "lem-sf-etale-unit-tensor-arbitrary-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraphs 1-4; reuse the already proved upstream SmoothDuality.AffineSpace, Charts and Local modules."
+   }
+  },
+  {
+   "text": "Choose the positive annihilator N supplied by HasInvertibleExponent on an affine base S. Its global unit maps to a unit in every stalk of S and, via the projection stalk maps, in every stalk of the affine line. Apply finite_etale_torsion_twist_line at twist 1. Its local module-sheaf trivializations give locally constant. To obtain the rank-one assertion at an arbitrary separably closed geometric point, choose a cover member over its image, lift the geometric point by exists_comp_eq_of_etale, transport the localized-site trivialization through overSheafEquiv, and compose upperStarCompSheafFiberIso, the image of that trivialization, uliftSheafFiberIso and sheafFiberUnitIso. This also works for the zero ring; for an empty scheme the stalk assertion is vacuous.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraphs 1-4; reuse the already proved upstream SmoothDuality.AffineSpace, Charts and Local modules."
+   }
+  },
+  {
+   "text": "Apply sfAffineLineCanonicalDuality to its explicit standard compactification, with G equal to the actual upper-shriek functor and adj the transported actual adjunction. The returned gamma presents its dualizing complex as the concrete Tate line shifted by 2. Step 3 supplies the local constancy and rank-one stalks. Each gamma tensor identity is invertible; cancel it from the returned invertible composite and use step 1 to obtain invertibility of the actual canonical tensor map. This proves the AffineLineSmoothDuality interface.",
+   "uses": [
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-etale-ambient-adjoint-projection",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraphs 1-4; reuse the already proved upstream SmoothDuality.AffineSpace, Charts and Local modules."
+   }
+  },
+  {
+   "text": "Apply the already proved exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine to steps 2 and 4. Its affineSpaceSmoothDuality_of_affineLineSmoothDuality proves the affine-space case by coordinate splitting and induction; its Charts theorem uses the source coefficient unit locus, smooth etale normal form and relative dimension d, then composes with the target open immersion and descends along source open charts. The underlying Local module proves the actual canonical-map composition and shifted-line descent. Chart compactifications use the already proved HasCompactification.of_isQuasiAffine construction, not the general Nagata theorem. These existing proofs retain the unit route and apply over arbitrary schemes, including empty sources.",
+   "uses": [
+    "lem-sf-shifted-etale-lines-locality",
+    "sbc-thm-etale-local-normal-form",
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "prop-nagata-affine-compactification",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraphs 1-4; reuse the already proved upstream SmoothDuality.AffineSpace, Charts and Local modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-ambient-adjoint-projection",
+  "lem-sf-etale-unit-tensor-arbitrary-base",
+  "lem-asd-finite-etale-twist-line",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-sf-affine-line-canonical-duality",
+  "lem-sf-shifted-etale-lines-locality",
+  "sbc-thm-etale-local-normal-form",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "prop-nagata-affine-compactification",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraphs 1-4; reuse the already proved upstream SmoothDuality.AffineSpace, Charts and Local modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dualizing complex of a smooth morphism of relative dimension d is an invertible sheaf shifted by 2d, etale cohomology",
+   "results": "IsSmoothOfRelativeDimension, isSmoothOfRelativeDimension_comp, ..._isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Smooth): smoothness only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dualizing complex of smooth morphism is locally constant rank one shifted by twice relative dimension",
+   "results": "IsSmoothOfRelativeDimension(.exists_isStandardSmoothOfRelativeDimension) (Mathlib.AlgebraicGeometry.Morphisms.Smooth): no duality",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'dualizingComplex|Dualizing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth Poincare duality for all unbounded torsion etale module complexes over arbitrary bases",
+   "results": "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.smoothLocus_eq_compl_support_inter, Algebra.Smooth, Algebra.FormallyEtale.instFormallySmooth, Algebra.etaleLocus_eq_compl_support, Algebra.Etale.formallyEtale, RingHom.etale_iff_formallyUnramified_and_smooth; Only smoothness and etale algebra hits; no duality theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizingComplex\"",
+   "results": "No hits; Only smoothness and etale algebra hits; no duality theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|SmoothDuality|upperShriek",
+   "results": "No hits; Only smoothness and etale algebra hits; no duality theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dualizing complex of a smooth scheme morphism is a locally constant rank one sheaf shifted by twice relative dimension",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn; Only smoothness and etale algebra hits; no duality theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality",
+     "lines": [
+      68,
+      85
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/SmoothDuality.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor"
+  ],
+  "statement": "theorem exists_dualizingComplex_iso_and_tensor :\n    ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧\n      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),\n        Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧\n      Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅\n        ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * d : ℤ)⟧) ∧\n      ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n        IsIso (dualizingComplexTensorMap Λ f K) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; blueprint form: thm-asd-smooth-tensor (its SHEAF Lean smooth_tensor_duality uses this upstream declaration)"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-smooth-dualizing-complex-invertible",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof by the ordinary-etale chart argument, with an explicit affine-space induction, coefficient unit-locus argument, arbitrary-base compactification checks, canonical tensor-map comparison and derived line descent. Added five statement-only inputs. Corrected only the adjoint citation in the statement, which formerly pointed to a Noetherian-only node; all mathematical hypotheses and conclusions are unchanged. thm-asd-smooth-tensor is neither used nor marked same_as because its Noetherian statement is narrower and its present proof invokes this very upstream sorry.",
+  "blueprint": "Unit sk-prop-sf-rf-shriek-preservation step 3 (smooth case); the current thm-asd-smooth-tensor proof paragraphs 1,2,3,4 are realized by steps 1,2-5,6-7,7 respectively. The maintainer-created item has created.item=null, so blueprint_refs.py ancestor returns None; new from.node=null and via=[item] follow that exact computed ancestry, with the known blueprint place spelled out.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic input to the unit step-3 smooth chart argument: Finite torsion Tate twists are etale locally free lines. Its statement is used with its actual hypotheses; the unit has no arbitrary-base replacement."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Generic input to the unit step-3 smooth chart argument: The standard affine chart in relative projective space. Its statement is used with its actual hypotheses; the unit has no arbitrary-base replacement."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic input to the unit step-3 smooth chart argument: Projective space is proper over its base. Its statement is used with its actual hypotheses; the unit has no arbitrary-base replacement."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic input to the unit step-3 smooth chart argument: Etale-local normal form of a smooth morphism. Its statement is used with its actual hypotheses; the unit has no arbitrary-base replacement."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic input to the unit step-3 smooth chart argument: Affine space is smooth. Its statement is used with its actual hypotheses; the unit has no arbitrary-base replacement."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic input to the unit step-3 smooth chart argument: Base change and composition of smooth morphisms of fixed relative dimension. Its statement is used with its actual hypotheses; the unit has no arbitrary-base replacement."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic input to the unit step-3 smooth chart argument: Nagata compactification, [stacks-project]. Its statement is used with its actual hypotheses; the unit has no arbitrary-base replacement."
+   },
+   {
+    "node": "def-sbc-affine-space",
+    "why": "The chart construction uses this existing general scheme-theoretic input: Affine space. It establishes hypotheses of Nagata or identifies the polynomial projection; no node of the preservation unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "The chart construction uses this existing general scheme-theoretic input: A morphism between affine schemes is affine (Stacks 01SH). It establishes hypotheses of Nagata or identifies the polynomial projection; no node of the preservation unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "The chart construction uses this existing general scheme-theoretic input: Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms. It establishes hypotheses of Nagata or identifies the polynomial projection; no node of the preservation unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "The chart construction uses this existing general scheme-theoretic input: Affine schemes are quasi-compact and quasi-separated. It establishes hypotheses of Nagata or identifies the polynomial projection; no node of the preservation unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Gives the finite affine polynomial presentation needed to verify Nagata finite-type hypotheses for the etale/smooth chart morphisms; no preservation-unit input supplies this general scheme lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-finite-etale-twist-line",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sbc-thm-etale-local-normal-form",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "thm-nagata-compactification",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-644580b42",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-644580b42 (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes and every cited node in full, against the current blueprint thm-asd-smooth-tensor.proof.md (paragraphs 1-4) and the upstream SmoothDuality.lean:68-85, which is stated for arbitrary schemes with HasCompactification. The statement change only replaces the Noetherian thm-amb-etale-exceptional-adjoint cite with the new arbitrary-base ambient node; hypotheses and conclusions are unchanged and the report names the change. The route is kept: steps 1, 2-5, 6 and 7 realize paragraphs 1, 2, 3 and 4. The affine-space part is an explicit induction from the affine line. No SGA source is cited. Checked: P(e,0) from the etale unit node; composition through the transitivity equation (both sides type-checked); r=0 and the successor step, with Nagata projective compactifications for p_r, q and p_{r+1}; source-only N invertibility through the local-homomorphism argument; Nagata hypotheses for e and p_de; (i,id) for the open immersion; the etale restriction equation identifying u^*theta_f with the canonical theta_h; conservativity and line descent with L=H^{-2d}; empty X and Lambda=0. The new nodes are true, statement-only, strictly smaller than the item, and not duplicates: the Noetherian analogues are thm-amb-etale-exceptional-adjoint, lem-amb-etale-adjoint-locality, cor-amb-affine-space-adjunction, lem-asd-tensor-mate-etale-precomp and lem-per-field-exceptional-tensor, and nothing bundles the shifted-line calculus. FIX (C4): step 4 asserted a normal-form chart over the prescribed U, but sbc-thm-etale-local-normal-form only gives one after shrinking the base. The fix applies it to f^{-1}(U_0)->U_0 and takes a smaller affine U inside D(N), with V inside f^{-1}(U); only the step 4 text changes. Maintainer note: lem-etale-unbounded-compact-support-composition cites def-weil-compactifications-refinements (finite type) while its Lean source and text allow bare factorizations, and the split relies on that for a non-quasi-compact i; accepted. The off-unit tools in split_report.tool_uses (twist line, Nagata, normal form, smooth permanence, affine-morphism facts) are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261023T151814-L-411065",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

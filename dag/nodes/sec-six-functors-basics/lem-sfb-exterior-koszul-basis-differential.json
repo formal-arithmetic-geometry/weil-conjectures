@@ -1,0 +1,103 @@
+{
+ "id": "lem-sfb-exterior-koszul-basis-differential",
+ "kind": "statement",
+ "title": "Finite coordinate expansion of the actual exterior Koszul differential",
+ "statement": "For a finite list f over a commutative ring A, extend its actual exterior Koszul complex to nonpositive integer cochain degrees. Define exteriorKoszulBasis by the increasing-wedge basis and the extension coordinate, exteriorKoszulCoordinate by its dual basis projection, and exteriorKoszulCoefficient as the value at 1 of inclusion followed by the actual differential followed by projection. The differential on each basis inclusion is the finite sum of the target basis inclusions preceded by multiplication by these actual coefficients. The definitions use the constructed ExteriorAlgebra.koszulComplex boundary and do not assume any proposed formula for its entries. This has no site, realization functor, tower or duality.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "proof": [
+  {
+   "text": "In each supported degree reindex the exterior basis by supported subsets. Transport the usual sum of coordinate projection followed by basis inclusion equals identity through extendXIso; unsupported terms are zero objects, where the same equality holds. Postcompose the actual boundary with this identity decomposition of its target. Every resulting A-linear endomorphism of A is multiplication by its value at 1. This proves the expansion in the explicitly defined actual coefficients, including empty index types and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F3",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664. F3 proves the generic finite basis identity and the matrix expansion of the actual constructed boundary in Lean; no contraction-sign formula is assumed or left as a hole here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor sends a finite free Koszul complex to the tensor product of two term complexes via scalar compatibility",
+   "results": "Eight hits on total tensor constructions, including HomologicalComplex.ιTensorObj and HasTensor; none gives either ordered exterior contraction coordinates or the dual tower matrices.",
+   "verdict": "Use the existing tensor infrastructure; the two explicit matrix calculations are separate finite statements.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"map\"",
+   "results": "Twelve hits including exteriorPower.map_apply_ιMulti_family and its basis/naturality API.",
+   "verdict": "The diagonal exterior-map calculation is proved in the item using this API. No matching contraction or ringed dual-tower matrix theorem.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "Three unrelated Mathlib hits. Repository reads found SignedKoszulFiniteCoordinates and the proved RingedNegativeKoszulDuality; the exterior-to-tensor comparison uses a successor universe.",
+   "verdict": "Reuse finite tensor coordinates and duality; isolate the algebraic contraction matrix and normalized dual-tower matrix calculations.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ExteriorKoszulScalarRealization",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-exterior-koszul-scalar-realization",
+   "place": "Proof steps 1 and 2: explicit finite subset matrices, independent of the additive realization."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExteriorKoszulBasisDifferential",
+  "file": "lean/Sheaf/CategoryTheory/ExteriorKoszulBasisDifferential.lean",
+  "declaration": "CategoryTheory.exteriorKoszulBasis_d",
+  "statement": "theorem exteriorKoszulBasis_d {A : Type w} [CommRing A]\n    (r : ℕ) (f : Fin r → A) (q : ℤ) (I : exteriorKoszulIndex r q) :\n    exteriorKoszulBasis r f q I ≫ (exteriorKoszulExtended r f).d q (q + 1) =\n      ∑ L : exteriorKoszulIndex r (q + 1),\n        ModuleCat.ofHom (LinearMap.mul A A (exteriorKoszulCoefficient r f q I L)) ≫\n          exteriorKoszulBasis r f (q + 1) L",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T152525-L-1134807",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T152525-L-1134807",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-space-square-zero-picard-obstruction",
+ "kind": "statement",
+ "title": "Picard obstruction sequence for a square-zero thickening of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $j:Z\\hookrightarrow Z'$ be a first order thickening of algebraic spaces over $S$ [def-trf-algebraic-space]: a representable closed immersion, tested on schemes as in [def-weil-closed-immersion], with quasi-coherent ideal $J=\\ker(\\mathcal O_{Z'}\\to j_*\\mathcal O_Z)$ satisfying $J^2=0$ and inducing a homeomorphism on point spaces. Regard $J$ as an $\\mathcal O_Z$-module by the quotient action. Quasi-coherence is on the small etale ringed site [def-trf-space-quasi-coherent-module]. A line module is a module on this site locally isomorphic to the structure sheaf. Write $\\operatorname{Pic}(W)$ for the abelian group of isomorphism classes of line modules on $W$, with tensor-product law. Pullback is the tensor pullback of [lem-trf-space-enlarged-etale-ringed-site-model]. There is a canonical homomorphism $\\delta:\\operatorname{Pic}(Z)\\to H^2(Z,J)$ such that $\\operatorname{Pic}(Z')\\xrightarrow{j^*}\\operatorname{Pic}(Z)\\xrightarrow{\\delta}H^2(Z,J)$ is exact at $\\operatorname{Pic}(Z)$. Here $H^2$ is the right derived functor of global sections of module sheaves on $Z_{\\mathrm{et}}$, computed by injective resolutions. In particular, $H^2(Z,J)=0$ implies that every line module on $Z$ extends, up to a specified restriction isomorphism, to a line module on $Z'$. No Noetherian or properness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DNM (lemma-picard-group-first-order-thickening), middle row and its connecting map into H^2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "def-sfb-space-picard-units-presentation",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-space-first-order-ringed-description], restriction identifies the small etale sites of $Z'$ and $Z$ and presents the structural quotient on the common site as $0\\to J\\to A\\xrightarrow{p}B\\to0$, where $A=\\mathcal O_{Z'}$, $B=\\mathcal O_Z$ and $J^2=0$. Thus all three sheaves can be considered on $Z_{\\mathrm{et}}$. Its coverings and ringed pullback are the canonical ones of [lem-trf-space-enlarged-etale-ringed-site-model].",
+   "uses": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DNM (lemma-picard-group-first-order-thickening), proof, first sentence; Tag 05ZS (lemma-thickening-equivalence)."
+   }
+  },
+  {
+   "text": "On this common site form $0\\to J\\xrightarrow{x\\mapsto1+x}A^\\times\\xrightarrow{p^\\times}B^\\times\\to0$. The first map is injective and additive-to-multiplicative because $(1+x)(1+y)=1+x+y$ for $x,y\\in J$, and $(1+x)^{-1}=1-x$. Its image is precisely the kernel of $p^\\times$: $p(a)=1$ means $a=1+x$. To lift $b\\in B^\\times(U)$, locally lift both $b$ and $b^{-1}$ through the sheaf surjection $p$. For lifts $a,c$ one has $ac=1+x$ with $x\\in J$, so $c(1-x)$ is an inverse of $a$. This proves local surjectivity, hence an epimorphism of abelian sheaves by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective]. No surjectivity of $A(U)\\to B(U)$ for a fixed $U$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DNM, proof, displayed short exact sequence and the formula f maps to 1+f."
+   }
+  },
+  {
+   "text": "The category of abelian sheaves has enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]. Global sections is additive and left exact, since a compatible family of sections is in a kernel exactly when all its components are. Apply [lem-weil-pbc-right-derived-universal-delta-functor] to the short exact sequence from step 2. Its canonical connecting homomorphism $\\partial:H^1(Z_{\\mathrm{et}},B^\\times)\\to H^2(Z_{\\mathrm{et}},J_{ab})$ gives an exact segment $H^1(A^\\times)\\to H^1(B^\\times)\\xrightarrow{\\partial}H^2(J_{ab})$, all computed on the common site.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DNM, proof, long exact cohomology sequence; derived.tex Tag 015B (lemma-higher-derived-functors), (4)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-site-picard-h1-natural] on the common site to $A$ and $B$. It gives group isomorphisms $c_A:\\operatorname{Pic}(Z')\\cong H^1(A^\\times)$ and $c_B:\\operatorname{Pic}(Z)\\cong H^1(B^\\times)$, sending a line to the class of its sheaf of generators; its lines are modules locally isomorphic to the ring sheaf, as in the statement. Apply its naturality clause to the morphism of ringed topoi $f=(\\mathrm{id},p):(\\operatorname{Sh},B)\\to(\\operatorname{Sh},A)$ of the common site. Here $f^{-1}$ is the identity, so $f^*L'=B\\otimes_AL'$ and $\\rho=p^\\times$. The inner map $f^*$ on $H^1$ is the identity: take $J^\\bullet=I^\\bullet$ and $\\beta=\\mathrm{id}$; the unit $\\eta$ is the identity. Thus $c_B([B\\otimes_AL'])=H^1(p^\\times)(c_A([L']))$. By the ringed-site identification in [lem-trf-space-enlarged-etale-ringed-site-model] and the restriction equivalence in [lem-sfb-space-first-order-ringed-description], this tensor pullback is exactly $j^*$ in the statement. Consequently the exactness in step 3 is exactness of the restriction map on the stated line modules, not of a different Picard convention. Write $\\alpha_A=c_A$ and $\\alpha_B=c_B$.",
+   "uses": [
+    "lem-sfb-ringed-site-picard-h1-natural",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-space-first-order-ringed-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), frame-torsor identification, for locally free rank-one modules on a ringed site; spaces-more-morphisms.tex Tag 0DNM, final sentence of proof."
+   }
+  },
+  {
+   "text": "Identify $H^2(Z_{\\mathrm{et}},J_{ab})$ with the underlying abelian group of module cohomology $H^2(Z,J)$ as follows. The enlarged etale site of [lem-trf-space-enlarged-etale-ringed-site-model] has terminal object $Z$ and equivalent sheaf and module categories, preserving global sections. Its module category has enough injectives by [lem-pur-ringed-site-grothendieck-abelian] and [lem-sp-grothendieck-enough-injectives]. Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] at its terminal object $Z$ with $\\mathcal O_Z$ and $J$. Transfer the resulting canonical isomorphism back along the equivalences: an equivalence and its inverse preserve kernels, cokernels and injectives, so applying it to an injective resolution preserves both its exactness and its section complex. Denote the resulting isomorphism by $\\beta:H^2(Z_{\\mathrm{et}},J_{ab})\\cong H^2(Z,J)$.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), global comparison; passage to a site with a final object uses the enlarged-site model."
+   }
+  },
+  {
+   "text": "Define $\\delta=\\beta\\circ\\partial\\circ\\alpha_B$. These canonical homomorphisms make $\\delta$ canonical. Since $\\beta$ and $\\alpha_B$ are isomorphisms, step 3 and the commutative identification in step 4 give $\\ker\\delta=\\operatorname{im}(j^*)$. If $H^2(Z,J)=0$, every class of a line module $L$ lies in this kernel, hence is $[j^*L']$ for a line module $L'$ on $Z'$. Equality of isomorphism classes supplies an isomorphism $j^*L'\\cong L$; taking this isomorphism as part of the extension gives the final assertion. None of the steps used Noetherianity or properness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DNM, exactness at Pic(X), and its immediate vanishing consequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-first-order-ringed-description",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sfb-ringed-site-picard-h1-natural",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DNM (lemma-picard-group-first-order-thickening), proof via the common etale site, square-zero units sequence, Tag 040E and the long exact sequence; coefficient convention compared using Tag 03FD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a square zero thickening of algebraic spaces the sequence Pic of the thickening to Pic of the closed space to second etale cohomology of the ideal is exact",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the cotangent modules of algebra extensions induced by composition of generators is exact, meaning the image of the first cotangent map equals the kernel of the second cotangent\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent sequences, derivation lifts and ring Picard exactness do not give etale Picard obstruction cohomology for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Exact\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \" (R : Type u) (A : Type u_4) [CommSemiring R] [CommSemiring A] [Algebra R A] [FaithfulSMul R A] : Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"Exactness of the sequence `1 → Rˣ → Aˣ → (Submodule R A)ˣ → Pic R → Pic A` at `Pic R`.\"}\n  {\"name\": \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \" (R : Type u) (A : Type u_4) [CommSemiring R] [Semiring A] [Algebra R A] [FaithfulSMul R A] : Function.MulExact ⇑(Units.map ↑(Submodule.spanSingleton R)) ⇑(Submodule.unitsToPic R A)\", \"doc\": \"Exactness of the sequence `1 → Rˣ → Aˣ → (Submodule R A)ˣ → Pic R → Pic A`\\nat `(Submodule R A)ˣ`.\"}\n  {\"name\": \"Path.Homotopic.Quotient.exact\", \"module\": \"Mathlib.Topology.Homotopy.Path\", \"type\": \" {X : Type u} [TopologicalSpace X] {x₀ x₁ : X} {p q : Path x₀ x₁} (h : Path.Homotopic.Quotient.mk p = Path.Homotopic.Quotient.mk q) : p.Homotopic q\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent sequences, derivation lifts and ring Picard exactness do not give etale Picard obstruction cohomology for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*(thicken|square|obstruct)|picard.*(thicken|obstruct)|thicken.*Pic",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Data/Matrix/Block.lean\", \"line\": \"175\", \"text\": \"/-- Let `p` pick out certain rows and columns of a square matrix `M`. Then\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent sequences, derivation lifts and ring Picard exactness do not give etale Picard obstruction cohomology for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The obstruction to extending a line bundle over a first order thickening of algebraic spaces lies in H2 of the square zero ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \"(P : Extension.{u} R S) : Function.Bijective (H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"liftOfDerivationToSquareZero_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] [inst_6 : IsScalarTower R A B]\\n  (hI : I ^ 2 = ⊥) (f : Derivation R A ↥I) (x : A),\\n  (liftOfDerivation\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\\\to I $ over $ R $, there exists an $ R $-algebra homomorph\"}\n  {\"name\": \"liftOfDerivationToSquareZero\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A I) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\to I $ over $ R $, this constructs an $ R $-algebra homomor\"}\n  {\"name\": \"derivationToSquareZeroOfLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : A →ₐ[R] B)\\n  (e : (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I)) : Derivation R A I\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring, forming a scalar tower with algebra homomorphisms $R \\\\to A \\\\to B$. Let $I$ be an ideal of $B$ such that $I^2 = \\\\{0\\\\}$. Let $f: \"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent sequences, derivation lifts and ring Picard exactness do not give etale Picard obstruction cohomology for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of invertible sheaves across a square zero closed immersion of algebraic spaces has image the kernel of the canonical Picard obstruction homomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.kerFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → CategoryTheory.Functor (CategoryTheory.Over Y)ᵒᵖ Y.IdealSheafData\", \"doc\": \"The functor assigns to each object in the opposite category of the over category over a scheme $ Y $ the kernel of its structure morphism as an ideal sheaf on $ Y $. For morphisms, it maps a morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U V : ↑X.affineOpens),\\n  I.ideal V ≤\\n    RingHom.ker\\n      (CommRingCat.Hom.hom\\n        (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app (↑U).ι ↑V)\\n          (AlgebraicGeometry.Scheme.Hom.app (I.glueDataObjι U) ((Topologic\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and affine open subsets $U,V \\\\subseteq X$, the ideal $\\\\mathcal{I}(V)$ is contained in the kernel of the ring homomorphism obtained by composing the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (i : Z ⟶ Y) (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion i],\\n  AlgebraicGeometry.Scheme.Hom.ker (CategoryTheory.Limits.pullback.fst f i) =\\n    (AlgebraicGeometry.Scheme.Hom.ker i).comap f\", \"doc\": \"Given a closed immersion $ i: Z \\\\to Y $ and a morphism $ f: X \\\\to Y $, the kernel of the first projection from the pullback of $ f $ and $ i $ to $ X $ is equal to the comap of the kernel of $ i $ alo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.Hom Y → Y.IdealSheafData\", \"doc\": \"For a morphism of schemes $f : X \\\\to Y$, the kernel of $f$ is the ideal sheaf data on $Y$ constructed from the kernels of the ring homomorphisms on sections over affine open sets. Specifically, for ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : ↑Y.affineOpens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.toImage f)\\n      ((TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.imageι f).base).obj ↑U) =\\n    CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Schem\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $\\\\tilde{f}: X \\\\to \\\\mathrm{im}(f)$ be the canonical morphism to its image subscheme. For any affine open subset $U \\\\subseteq Y$, the ring of sections \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  RingHom.ker (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop (I.glueDataObjι U))) =\\n    Ideal.comap (CommRingCat.Hom.hom (↑U).topIso.hom) (I.ideal U)\", \"doc\": \"For an affine open subset $U$ of a scheme $X$ and an ideal sheaf $\\\\mathcal{I}$, the kernel of the ring homomorphism $\\\\operatorname{Hom}_{\\\\text{appTop}}$ induced by the gluing data $\\\\mathcal{I}.\\\\text{g\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerFunctor_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) {f g : (CategoryTheory.Over Y)ᵒᵖ} (hfg : f ⟶ g),\\n  Y.kerFunctor.map hfg = CategoryTheory.homOfLE ⋯\", \"doc\": \"For a scheme $Y$, given morphisms $f,g$ in the opposite category of the over category over $Y$, if there exists a morphism $f \\to g$, then the kernel functor maps this morphism to the unique inclusion \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.map_ker\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (AlgebraicGeometry.Scheme.Hom.ker f).map g = AlgebraicGeometry.Scheme.Hom.ker (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For morphisms $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ of schemes, the kernel of the composition $ g \\\\circ f $ is equal to the image of the kernel of $ f $ under the ideal sheaf map induced by $ g $, i.e.,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent sequences, derivation lifts and ring Picard exactness do not give etale Picard obstruction cohomology for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*(thicken|square|obstruct)|picard.*(thicken|obstruct)|thicken.*Pic",
+   "results": "1 hits: Mathlib/Data/Matrix/Block.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, free sheaves, and fixed-cover nonabelian cocycles do not identify line modules on ringed sites with derived H1 of units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Obstruction to extending line modules over a square zero thickening of algebraic spaces lies in H2 of the ideal",
+   "results": "8 hits: TrivSqZeroExt.liftEquiv_apply, TrivSqZeroExt.lift_def, liftOfDerivationToSquareZero_apply, Algebra.Extension.infinitesimal, TrivSqZeroExt.lift, TrivSqZeroExt.instNontrivial_of_right, liftOfDerivationToSquareZero, derivationToSquareZeroEquivLift",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, free sheaves, and fixed-cover nonabelian cocycles do not identify line modules on ringed sites with derived H1 of units"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Exact\"",
+   "results": "3 hits: Submodule.mulExact_unitsToPic_mapAlgebra, Submodule.mulExact_unitsMap_spanSingleton_unitsToPic, Path.Homotopic.Quotient.exact",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, free sheaves, and fixed-cover nonabelian cocycles do not identify line modules on ringed sites with derived H1 of units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a square zero thickening of algebraic spaces the restriction map on Picard groups has obstruction in second cohomology of the ideal",
+   "results": "8 hits: Algebra.Extension.H1Cotangent.map, Algebra.Extension.H1Cotangent, Algebra.H1Cotangent, Algebra.Extension.h1Cotangentι_apply, Algebra.Extension.homInfinitesimal, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.FormallySmooth.iff_subsingleton_and_projective",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, free sheaves, and fixed-cover nonabelian cocycles do not identify line modules on ringed sites with derived H1 of units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The long exact sequence of units for a nilpotent closed immersion gives Picard lifting via the connecting homomorphism H1 of units to H2 of the additive ideal",
+   "results": "8 hits: Algebra.H1Cotangent.exact_map_δ, Submodule.mulExact_unitsToPic_mapAlgebra, Algebra.Generators.H1Cotangent.δ, Algebra.Extension.H1Cotangent.map, Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective, Algebra.Extension.H1Cotangent, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Generators.H1Cotangent.exact_map_δ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, free sheaves, and fixed-cover nonabelian cocycles do not identify line modules on ringed sites with derived H1 of units"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-picard-stack-smooth",
+  "date": "2026-10-23",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Picard obstruction sequence for a square-zero thickening of algebraic spaces.",
+   "via": [
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-square-zero-picard-obstruction",
+  "worker": "stage1",
+  "summary": "Retained the statement; proved Tag 0DNM through the explicit square-zero units sequence, canonical derived connecting map, natural identification of line modules with H1 of units, and module/abelian comparison. Step 4 cites the existing ringed-site Picard-H1 node lem-sfb-ringed-site-picard-h1-natural, specialized to the identity topos with the quotient ring map. Checked the absence of a final object in a non-schematic small etale site by using the existing enlarged-site model for the evaluation comparison.",
+  "blueprint": "Preserves the recorded ancestor route through det-thm-sf-ctf-stability-direct-images (3), stable-curve moduli, and Picard-stack smoothness. This item supplies its Picard obstruction input using Tag 0DNM. tools/blueprint_refs.py ancestor returns None for this pre-existing chain; kept that inherited null ancestor and precise from.place. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) was read.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Canonical site and module equivalences; its enlarged site has terminal object Z, needed to apply the existing evaluation comparison without assuming the small scheme-object site has a final object."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Converts the explicit local unit lift into an epimorphism of abelian sheaves on the algebraic-space etale site."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Enough injectives for abelian sheaves on any small site, so the usual derived-functor exact sequence applies."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Canonical connecting map and exactness for right derived global sections in an abelian category with enough injectives."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Comparison for variable structure-ring modules on a general ringed site, not just constant-ring modules on a scheme etale site."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Enough-injectives prerequisite for modules on the enlarged ringed site via its Grothendieck abelian property."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Grothendieck abelian categories have enough injectives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-6e1fa5111",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-6e1fa5111 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement (unchanged from base, and faithful to Stacks 0DNM's Pic(Z')->Pic(Z)->H^2(Z,J) segment), all six steps, the new node, every cited statement, and the sources: 0DNM statement and proof, 05ZS, 040E statement and frame-torsor proof, 03FD. Steps: 1 uses only what the first-order ringed description and the enlarged-site model state. 2: the units sequence is elementary and checked (kernel 1+J; local unit lift c(1-x)), with the epimorphism from the general-site criterion. 3: Ab has enough injectives and the universal delta-functor gives the exact H^1->H^2 segment. 5: H^2 module/abelian comparison applied at the final object Z of the enlarged site, with enough module injectives from the Grothendieck abelian lemma; correct. 6: ker delta = im j^* by a correct chase. Small cases checked: J=0, the empty space, k[eps]->k. Fault (C5/D duplicate), fixed: the new node lem-sfb-ringed-site-line-modules-h1 is true but duplicates the base node lem-sfb-ringed-site-picard-h1-natural (Q98, same unit): Pic(A)=H^1(A^x) on any small site with naturality for any ringed-topos morphism, whose specialization f=(id,p) is the new node's coefficient-change formula. The fix drops the new node and rewrites step 4 to cite the existing node with that specialization. proof_deps, the step source and the summary are updated; nothing else cites the dropped node, and there is no cycle. Maintainer note: lem-sfb-space-picard-obstruction-natural (Q140, reviewed pass) already implies this item up to the H^2 convention and the quasi-coherence wording, so the two are a same-day merge candidate; the independent 0DNM proof is kept. Batch-5: lem-sfb-space-first-order-ringed-description reaches only def-trf-algebraic-space, a general definition, and the trf enlarged-site model is a generic site foundation; neither is a step of the trace formula or Poincare duality, so accepted. All 7 tool_uses are generic and accepted. No SGA. The null blueprint.from.node is inherited and kept.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSquareZeroPicardObstruction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_squareZero_picard_obstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSquareZeroPicardObstruction.lean",
+  "statement": "theorem space_squareZero_picard_obstruction {S : Scheme.{u}} {Z Z' : AlgebraicSpace S} (j : Z ⟶ Z') (hj : IsSpaceFirstOrderThickening j) : ∃ (P : SpacePicardUnitsPresentation j) (c' : Comparison Z'.smallStructureSheaf) (c : Comparison Z.smallStructureSheaf) (r : @AddMonoidHom (Pic Z'.smallStructureSheaf) (Pic Z.smallStructureSheaf) c'.group.toAddZeroClass.toAddZero c.group.toAddZeroClass.toAddZero) (δ : @AddMonoidHom (Pic Z.smallStructureSheaf) (picardModuleCohomology Z (Z.smallModuleRestriction.obj P.ideal.obj) 2) c.group.toAddZeroClass.toAddZero inferInstance), (∀ M : Line Z'.smallStructureSheaf, ∃ N : Line Z.smallStructureSheaf, Nonempty (N.val ≅ (Z.smallModuleRestriction.obj ((moduleTensorPullback j).obj (Z'.smallModuleEquivalence.inverse.obj M.val)))) ∧ r (lineClass M) = lineClass N) ∧ Function.Bijective (P.moduleToAbelian 2) ∧ (∀ L : Pic Z.smallStructureSheaf, P.moduleToAbelian 2 (δ L) = Sheaf.H.map P.unitsIdentification.inv 2 (Sheaf.H.δSucc P.exact 1 (c.comparison L))) ∧ Function.Exact r δ ∧ (Subsingleton (picardModuleCohomology Z (Z.smallModuleRestriction.obj P.ideal.obj) 2) → ∀ L : Line Z.smallStructureSheaf, ∃ L' : Line Z'.smallStructureSheaf, Nonempty ((Z.smallModuleRestriction.obj ((moduleTensorPullback j).obj (Z'.smallModuleEquivalence.inverse.obj L'.val))) ≅ L.val))",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dcab15a2",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-space-picard-units-presentation, both modules, Stacks 0DNM (spaces-more-morphisms l.2265-2299), and dependency declarations (IsSpaceFirstOrderThickening/ThickeningSiteModel, small ringed model, RingedSitePicard Line/Pic/Comparison/IsComparison, Sheaf.H.δSucc). Every clause matches: thickening hypothesis; J pinned as the actual kernel by injective/kernel_eq/quotient_normalization/ringIdentification, with the O_Z action fixed by scalar plus local surjectivity; Pic group pinned by IsComparison; r fixed on actual lines via moduleTensorPullback; H^2 = Ext^2(O,J) in all module sheaves (right-derived global sections); δ pinned by the units δSucc, the x↦1+x identification and the bijective 03FD module-to-abelian map; Function.Exact r δ correctly oriented; vanishing clause gives the restriction iso. No extra hypotheses, single universe u. New node is not a duplicate, has real data, no sorry, docstrings with source and blueprint id, fields per the extra-node rule; no name clashes in live Sheaf. Item changed only lean/stmt_deps (new node plus landed def-trf-space-etale-module-functors); both statements verbatim; lines ≤100; report sections present. Edge cases: empty space, J=0, k[ε]→k, no terminal object. No compile run (no changes); worker's dry run OK. Advisory: some declarations used are owned by definition nodes reached only through the new node's stmt_deps; Q140 lem-sfb-space-picard-obstruction-natural overlaps mathematically but has no Lean."
+ }
+}

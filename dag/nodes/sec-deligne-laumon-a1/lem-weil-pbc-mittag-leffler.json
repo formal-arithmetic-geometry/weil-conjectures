@@ -169,7 +169,18 @@
   "prop-weil-pbc-roos-triangle"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-l-dl-a1-endpoints",
  "split_report": {
@@ -237,18 +248,23 @@
   "note": "The four theorems render the finite tower, D(Ab), degree-zero, and completed-coefficient clauses. The helper firstDerivedLimitAb only supplies canonical recorded instance parameters to the actual lim.rightDerived 1; it constructs no new limit notion. Canonical Milnor maps are characterized by all limit-projection equations. The completed clause uses the published CompletedAdicCoefficientDatum, SequentialDerivedInverseLimit and PbcRoosTriangle interfaces."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "A tower of finite abelian groups satisfies the Mittag--Leffler condition and\nhas $\\varprojlim{}^1=0$. Consequently, for the derived inverse-limit\nconstruction of [def-weil-pbc-derived-inverse-limit], the canonical Milnor\nmap is an isomorphism for such a tower.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "A tower of finite abelian groups satisfies the Mittag--Leffler condition and\nhas $\\varprojlim{}^1=0$. Consequently, for a tower $(K_n)$ of complexes of\nabelian groups whose cohomology groups $H^q(K_n)$ are all finite, the\nMilnor sequence of [sk-prop-pe-milnor] reduces to isomorphisms\n$H^q(R\\varprojlim_nK_n)\\xrightarrow{\\sim}\\varprojlim_nH^q(K_n)$.",
   "proof": [
    {
-    "text": "Descending chains of subgroups of a finite group stabilize, so the tower is\nMittag--Leffler and $\\varprojlim{}^1=0$ by the product-cokernel description\nof $\\varprojlim{}^1$; the exact sequence of\n[prop-weil-pbc-roos-triangle] then identifies the Milnor map.",
+    "text": "Descending chains of subgroups of a finite group stabilize, so the tower is\nMittag--Leffler and $\\varprojlim{}^1=0$ by the cokernel description\n$R^1\\varprojlim_nM_n=\\coker(1-T)$ of [det-pe-milnor-sequence](2) (Stacks, Tag 07KV).\nApplied to the towers $H^{q-1}(K_n)$, the left term of the Milnor sequence\n[det-pe-milnor-sequence](3) vanishes, which identifies\n$H^q(R\\varprojlim_nK_n)$ with $\\varprojlim_nH^q(K_n)$.",
     "uses": [
-     "prop-weil-pbc-roos-triangle"
+     "det-pe-milnor-sequence"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "reviewed_proof": {
   "date": "2026-10-19",

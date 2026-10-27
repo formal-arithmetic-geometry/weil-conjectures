@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0ATM, natural coherent base change; sheaves.tex Tags 0096 and 0097, structural unit and normalized tensor pullback"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+  "place": "Tags 01F8, 01FB, 0ATM, 0096 and 0097; explicit construction and restriction-square reduction"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages",
+  "date": "2026-10-24",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+   "place": "Unit coefficient transport and scalar normalization, separately",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "new-unit-affine-comparison-transport",
+ "title": "Transport of affine structural comparisons through pullback symmetry",
+ "statement": "Let f:X→S be quasi-compact and separated [def-pc-scheme], E quasi-coherent [def-sc-etale-qcoherent-module]. Suppose a family of Γ(T,O_T)-linear equivalences from H¹(X×_S T,pr_X^*O_X) to Γ(T,g^*E) for every affine g:T→S is natural for the coherent edge restriction [lem-weil-pbc-coherent-affine-base-change-edge-naturality]. Then there is an additive comparison family on the oppositely ordered fibre products T×_S X, with coefficient pr_X^*O_X, that is semilinear for pr_T and natural for the etale tensor-section restriction [def-weil-pbc-affine-cohomology-comparison-data]. This asserts only an ordinary coherent cohomology comparison, not an etale higher-image realization.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-qcoherent-module",
+  "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+  "def-weil-pbc-affine-cohomology-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the additive comparison by composing the explicit unitAffineSymmetry with the given affine linear equivalence. Its scalar equation follows from unitAffineSymmetry_smul and linearity of e. The canonical naturality lemma supplies the restriction square for this exact family.",
+   "uses": [
+    "new-unit-affine-symmetry",
+    "new-unit-affine-comparison-canonical-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-unit-affine-symmetry",
+  "new-unit-affine-comparison-canonical-naturality"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback symmetry transports natural affine unit cohomology comparisons; coherent scalar higher-image classes normalize to actual structural functions",
+   "results": "8 hits: nonabelian one-cocycle relations and pullback projection/cocycle identities; none supplies the normalized cohomology or scalar-class interface.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"unit\", \"pullback\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*(comparison|scalar).*normalization|pullback.*symmetry.*cohomology",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural affine cohomology comparisons for a split structural direct image; pullback symmetry and structural scalar normalization of etale higher images",
+   "results": "8 hits: affine-cover pullback identities, affine pullback instances, presheaf pullback adjunction, affine-space pullback identities and additive module pullback. No cohomology comparison or normalized scalar-class realization theorem.",
+   "date": "2026-10-24",
+   "verdict": "No exact matching statement; the recorded structural and cohomological interfaces are supplied by project declarations."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitAffineComparisonTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitAffineComparisonTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_unitAffineComparisonTransport",
+  "statement": "theorem exists_unitAffineComparisonTransport {X S : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] [IsSeparated f] (E : S.Modules) [E.IsQuasicoherent]\n    (e : ∀ (T : Scheme.{u}) (g : T ⟶ S) (_ : IsAffine T),\n      coherentEdgeH f (SheafOfModules.unit X.ringCatSheaf) g ≃ₗ[Γ(T, ⊤)]\n        (RingedSpace.globalSectionsFunctor T.toRingedSpace).obj\n          ((tensorPullback g).obj E))\n    (e_natural : ∀ (T T' : Scheme.{u}) (g : T ⟶ S) (h : T' ⟶ T)\n      (hT : IsAffine T) (hT' : IsAffine T')\n      (x : coherentEdgeH f (SheafOfModules.unit X.ringCatSheaf) g),\n      e T' (h ≫ g) hT' (coherentEdgePullback f\n        (SheafOfModules.unit X.ringCatSheaf) g h x) =\n      coherentEdgeRho g h E (e T g hT x)) :\n    ∃ c : ∀ (V : S.Etale) [IsAffine V.left],\n      (RingedSpace.moduleCohomology (Limits.pullback V.hom f).toRingedSpace 1).obj\n        (affineRealizationCoefficient f (SheafOfModules.unit X.ringCatSheaf) V) ≃+\n          Γ((tensorPullback V.hom).obj E, ⊤),\n      (∀ (V : S.Etale) [IsAffine V.left] (a : Γ(V.left, ⊤))\n        (x : (RingedSpace.moduleCohomology (Limits.pullback V.hom f).toRingedSpace 1).obj\n          (affineRealizationCoefficient f (SheafOfModules.unit X.ringCatSheaf) V)),\n        c V ((pullback.fst V.hom f).appTop a • x) = a • c V x) ∧\n      (∀ (V V' : S.Etale) [IsAffine V.left] [IsAffine V'.left] (h : V' ⟶ V)\n        (x : (RingedSpace.moduleCohomology (Limits.pullback V.hom f).toRingedSpace 1).obj\n          (affineRealizationCoefficient f (SheafOfModules.unit X.ringCatSheaf) V)),\n        c V' (affineRealizationRestriction f (SheafOfModules.unit X.ringCatSheaf) 1 h x) =\n          etaleTensorSectionsRestriction E h (c V x))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T020641-L-2636577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261025T204840-L-3021695",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

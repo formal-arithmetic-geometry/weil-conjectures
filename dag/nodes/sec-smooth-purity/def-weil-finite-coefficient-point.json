@@ -31,9 +31,79 @@
   "lem-weil-point-sections-finiteness",
   "lem-weil-point-sections-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Preserve bounded finite-dimensional cohomology under the exact coefficient and carrier universe lift using its homology comparison. For essential surjectivity split field complexes into their cohomology, shrink each finite-dimensional vector space, and lift the zero-differential complex. The bijection from derived maps to graded homology maps proves fullness and faithfulness.",
+   "uses": [
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent derived sheaves by cochain complexes, apply the three sections-finiteness conclusions, and transport their target predicates through mapDerivedCategoryFactors and isomorphisms. For the finite torsion input transport the constructible predicate through its representative isomorphism.",
+   "uses": [
+    "lem-weil-point-sections-finiteness",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the constant integral coefficient action termwise and descend the equality through the derived localization. Apply the integral linearity specification and then the coefficient semilinearity of fraction-field tensor and size descent.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the rational fibre map by the balanced tensor universal property on each Hom group. Check identities and composition on pure tensors and extend by tensor induction; tensor generators also prove uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the coefficient-down comparison by TensorProduct.congr for the ULift ring equivalence and the unchanged section module. Construct the tensor/carrier-lift comparison by ULift.moduleEquiv and AlgebraTensorModule.congr. Verify naturality and uniqueness by induction on tensors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compare the carrier-only lift with the already proved coefficient-and-carrier size equivalence, followed by coefficient restriction, to obtain full faithfulness. Assemble the normalized integral sections isomorphism from the size-descent counit and the coefficient-down comparison. The pure-tensor specifications at scalar one give natural isomorphisms identifying rational fibre and scalar transition after integral localization. Compose these with the rational sections scalar comparison and the tensor/carrier comparison, and cancel the fully faithful carrier lift. Extend this integral natural isomorphism uniquely through raw scalar localization. Its normalization equation follows by cancellation of the inverse tensor and rational-normalization comparisons and equality transport. That equation determines all components, hence the natural isomorphism uniquely.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-real-raw-localization-natural-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite coefficient subfield, apply its rational point fibre and then the recorded Shrink coefficient equivalence. The conjugated coefficient inclusions commute by the Shrink algebra equivalences. Whisker the normalized rational scalar comparison with these equivalences and the canonical tensor towers to define the stage comparison. For a pair object retain its coefficient stage and take its finite-stage fibre. For a common-stage map, conjugate its finite-stage fibre by the two stage comparisons and the two canonical target-stage comparisons. All data are explicit constructions; quotient descent is a separate statement.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the one-step transport equality of the representative formula to define a map on the quotient of common-stage maps: two equivalent representatives have equal transports at one later field and hence equal images. The identity is represented by a stage identity; the two comparison factors cancel. Represent two composable morphisms at one common stage; functoriality there and cancellation of the middle comparisons prove preservation of composition. These data define a genuine functor with the prescribed object and representative formulas. For uniqueness, apply functor extensionality with the prescribed object equalities, then morphism induction on common-stage representatives; the prescribed HEq formulas identify the two maps.",
+   "uses": [
+    "def-weil-point-fibre-stage-constructions",
+    "lem-weil-point-fibre-representative-transport",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-point-fibre-stage-constructions",
+  "lem-real-raw-localization-natural-iso",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-point-fibre-representative-transport",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "proof_origin": "Existing finite-stage and rational proofs relocated unchanged; F3, 2026-10-26: quotient descent, identity, composition, and uniqueness proved from one-step representative transport, isolated as a strictly smaller statement.",
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,7 +132,18 @@
   "def-weil-finite-field-fiber",
   "def-weil-finite-torsion-constructibility"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-finite-coefficient-point",
@@ -88,57 +169,6 @@
   "module": "Sheaf.Paper.FiniteCoefficientPoint",
   "declaration": "WeilConjectures.pointQbarFibre",
   "declarations": [
-   "WeilConjectures.pointFibreBaseIsAlgClosed",
-   "WeilConjectures.pointFibreModuleLift",
-   "WeilConjectures.pointFibreModuleLift_exact",
-   "WeilConjectures.pointFibreModuleLiftAdditive",
-   "WeilConjectures.pointFibreModuleLiftLimits",
-   "WeilConjectures.pointFibreModuleLiftColimits",
-   "WeilConjectures.pointFibreModuleLift_mem",
-   "WeilConjectures.pointFibreSizeLift",
-   "WeilConjectures.pointFibreSizeLift_equivalence",
-   "WeilConjectures.pointFibreSizeDescent",
-   "WeilConjectures.pointFibreFinite_exact",
-   "WeilConjectures.pointFibreFiniteLimits",
-   "WeilConjectures.pointFibreFiniteColimits",
-   "WeilConjectures.pointFibreIntegral_exact",
-   "WeilConjectures.pointFibreFraction_exact",
-   "WeilConjectures.pointFibreIntegralLimits",
-   "WeilConjectures.pointFibreIntegralColimits",
-   "WeilConjectures.pointFibreFractionLimits",
-   "WeilConjectures.pointFibreFractionColimits",
-   "WeilConjectures.pointFibreIntegralAmbient",
-   "WeilConjectures.pointFibreRationalAmbient",
-   "WeilConjectures.pointFibre_sections_mem",
-   "WeilConjectures.pointFiniteFibre",
-   "WeilConjectures.pointIntegralFibre",
-   "WeilConjectures.pointIntegralFibre_linear",
-   "WeilConjectures.pointIntegralRationalFibre",
-   "WeilConjectures.pointRationalFibre_existsUnique",
-   "WeilConjectures.pointRationalFibre",
-   "WeilConjectures.pointFibreCoefficientDown",
-   "WeilConjectures.pointFibreCoefficientDown_exact",
-   "WeilConjectures.pointFibreCoefficientDownLimits",
-   "WeilConjectures.pointFibreCoefficientDownColimits",
-   "WeilConjectures.pointFibreLiftDown_existsUnique",
-   "WeilConjectures.pointFibreLiftDownIso",
-   "WeilConjectures.pointFibreRationalDown_existsUnique",
-   "WeilConjectures.pointFibreRationalDownIso",
-   "WeilConjectures.pointFibreRationalLarge",
-   "WeilConjectures.pointIntegralRationalNormalization",
-   "WeilConjectures.pointRationalFibreObjIso",
-   "WeilConjectures.pointRationalNormalization",
-   "WeilConjectures.pointFibreTensorLift_existsUnique",
-   "WeilConjectures.pointFibreTensorLiftIso",
-   "WeilConjectures.pointRationalFibreScalar_existsUnique",
-   "WeilConjectures.pointRationalFibreScalarIso",
-   "WeilConjectures.pointFibreFdTensorTower",
-   "WeilConjectures.pointStageFibre",
-   "WeilConjectures.pointStageCoefficientSquare",
-   "WeilConjectures.pointStageTensorSquare",
-   "WeilConjectures.pointStageFibreScalarIso",
-   "WeilConjectures.pointQbarFibreObj",
-   "WeilConjectures.pointQbarFibreRepresentative",
    "WeilConjectures.pointQbarFibre_existsUnique",
    "WeilConjectures.pointQbarFibre"
   ],
@@ -148,45 +178,26 @@
   "by": "Q154",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The four functors are pointFiniteFibre, pointIntegralFibre, pointRationalFibre and pointQbarFibre. The rational and common-stage functors are specified uniquely by their actual object maps and pure-tensor/common-stage map formulas. ULift coefficient transport and bounded finite-dimensional size descent retain the existing target categories. Equivalence of the fibre functors is not asserted here."
+  "note": "Finite, integral, rational and finite-stage representative constructions are reexported verbatim from Sheaf.Paper.FiniteCoefficientPointStages (def-weil-point-fibre-stage-constructions). This module proves the unique common-stage functor from one-step representative transport. All previous public declaration names, signatures and construction data remain available through the original module."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "A3",
+  "reviewer": "C-5aa9e",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261019T002454-L-2138028",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.pointFibreCoefficientDown_exact",
-   "WeilConjectures.pointFibreFinite_exact",
-   "WeilConjectures.pointFibreFraction_exact",
-   "WeilConjectures.pointFibreIntegral_exact",
-   "WeilConjectures.pointFibreLiftDown_existsUnique",
-   "WeilConjectures.pointFibreModuleLift_exact",
-   "WeilConjectures.pointFibreModuleLift_mem",
-   "WeilConjectures.pointFibreRationalDown_existsUnique",
-   "WeilConjectures.pointFibreSizeLift_equivalence",
-   "WeilConjectures.pointFibreTensorLift_existsUnique",
-   "WeilConjectures.pointFibre_sections_mem",
-   "WeilConjectures.pointIntegralFibre_linear",
-   "WeilConjectures.pointQbarFibre_existsUnique",
-   "WeilConjectures.pointRationalFibreScalar_existsUnique",
-   "WeilConjectures.pointRationalFibre_existsUnique",
-   "WeilConjectures.pointStageCoefficientSquare"
+  "landing": "20261026T023120-L-522042",
+  "kind": "interface",
+  "note": "independent cc review: the moved 51 public declarations, diffed against the published FiniteCoefficientPoint.lean (bodies unchanged); the descent proof against pointQbarFibre_existsUnique (axioms: sorryAx only via the new transport theorem); the transport sorry against the pinned stageSystem associators and the proved sections tower clause; the 89 direct importers compiled against the delivered modules"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
   ],
-  "sorry_after": [
-   "WeilConjectures.pointFibreModuleLift_mem",
-   "WeilConjectures.pointFibreRationalDown_existsUnique",
-   "WeilConjectures.pointFibreSizeLift_equivalence",
-   "WeilConjectures.pointFibreTensorLift_existsUnique",
-   "WeilConjectures.pointFibre_sections_mem",
-   "WeilConjectures.pointIntegralFibre_linear",
-   "WeilConjectures.pointQbarFibre_existsUnique",
-   "WeilConjectures.pointRationalFibreScalar_existsUnique",
-   "WeilConjectures.pointRationalFibre_existsUnique"
-  ]
+  "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$,\nand fix a prime $\\ell\\neq p$. Write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic\nclosure $\\Qlb$ of $\\Ql$, and fix a finite extension $E/\\Ql$ with valuation\nring $\\mathcal O_E$, a uniformizer $\\pi_E$, and $n\\geq1$. Put\n$A_{E,n}=\\mathcal O_E/\\pi_E^n$. Let $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$,\nregarded as a condensed ring ([det-def-sfb-condensed-ring],\n[det-def-sfb-qlbar-condensed]; $A_{E,n}$ is discrete), and write\n$\\Lambda(*)$ for its ring of sections over the point, which is the ordinary\nring $A_{E,n}$, $\\mathcal O_E$, $E$ or $\\Qlb$.\n\nLet $D^b_{\\mathrm{fin}}(A_{E,n})$ be the full subcategory of $D(A_{E,n})$ of\nbounded complexes with finite cohomology modules, $D^b_{\\mathrm{fg}}(\\mathcal\nO_E)$ the full subcategory of $D(\\mathcal O_E)$ of bounded complexes with\nfinitely generated cohomology modules, and $D^b_{\\mathrm{fd}}(E)$ and\n$D^b_{\\mathrm{fd}}(\\Qlb)$ the full subcategories of $D(E)$ and $D(\\Qlb)$ of\nbounded complexes with finite-dimensional cohomology. These are ordinary\nderived categories of modules over the rings $\\Lambda(*)$; no colimit over\nfinite extensions enters the definition of $D^b_{\\mathrm{fd}}(\\Qlb)$.\n\nLet $s=\\operatorname{Spec}k$. Since $k$ is algebraically closed, the qcqs objects\nof $s_{\\mathrm{proét}}$ are the spectra of the algebras of locally constant\nfunctions on profinite sets, and a family of maps to such an object is a cover\nexactly when finitely many of its members are jointly surjective (Bhatt–Scholze,\n*The pro-étale topology for schemes*, Example 4.1.10). So every cover of the\nfinal object $s$ has a section, and $\\Lambda_s=p_s^*\\Lambda$ ([det-def-sfb-pulled-back-coefficients]) is free\non the final object. Hence evaluation at the geometric point $s$, that is\n$\\Gamma(s,-)$, is exact on $\\Lambda_s$-modules, and a constructible\n$\\Lambda_s$-module ([sk-def-sfb-constructible]) is globally of the form\n$\\Lambda_s\\otimes_{\\Lambda(*)}P$ with $P$ finitely presented over $\\Lambda(*)$,\nthe finite-torsion case being that of\n[def-weil-finite-torsion-constructibility]. Extension of scalars\n$P\\mapsto\\Lambda_s\\otimes_{\\Lambda(*)}P$ is exact (the sections of $\\Lambda_s$ are\ncontinuous functions on profinite sets, a flat $\\Lambda(*)$-module) and left\nadjoint to $\\Gamma(s,-)$, with unit an isomorphism. Evaluation at the geometric\npoint therefore defines equivalences\n\n$$\n\\begin{aligned}\n\\operatorname{Fib}_s:D^b_c(s,A_{E,n})&\\xrightarrow{\\sim}\nD^b_{\\mathrm{fin}}(A_{E,n}),&\n\\operatorname{Fib}_s:D^b_c(s,\\mathcal O_E)&\\xrightarrow{\\sim}\nD^b_{\\mathrm{fg}}(\\mathcal O_E),\\\\\n\\operatorname{Fib}_s:D^b_c(s,E)&\\xrightarrow{\\sim}D^b_{\\mathrm{fd}}(E),&\n\\operatorname{Fib}_s:D^b_c(s,\\Qlb)&\\xrightarrow{\\sim}\nD^b_{\\mathrm{fd}}(\\Qlb),\n\\end{aligned}\n$$\n\nwhere $D^b_c(s,\\Lambda)\\subset D(s_{\\mathrm{proét}},\\Lambda)$ is the condensed\nbounded constructible category ([det-def-sfb-bounded-constructible]), with\nquasi-inverse $P\\mapsto\\Lambda_s\\otimes_{\\Lambda(*)}P$.\n\nThat a complex in $D^b_{\\mathrm{fd}}(\\Qlb)$, or a morphism between two such\ncomplexes, is defined over some finite $E\\subset\\Qlb$ is a consequence, read\noff from [sk-thm-sfb-qlbar-two-colimit] through these equivalences; it is not\npart of the definition.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

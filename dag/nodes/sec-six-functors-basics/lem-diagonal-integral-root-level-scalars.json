@@ -1,0 +1,136 @@
+{
+ "id": "lem-diagonal-integral-root-level-scalars",
+ "kind": "statement",
+ "title": "Normalized scalar extension at the positive finite root levels",
+ "statement": "Let l be prime, E a finite intermediate extension of Q_l in its fixed algebraic closure, and X any scheme. Set a0=coefficientMap(integralMap(l,bottomField(l)),X) and a=coefficientMap(integralMap(l,E),X), using [def-sfb-diagonal-coefficient-maps]. There is a natural isomorphism from spIntegralTwistSystem(X,l,bottomField(l)) followed by restriction along a0 and extension along a to spIntegralTwistSystem(X,l,E), using the positive-level towers of [sk-def-sp-tate-twist]. At each n >= 0, its hom after the ordinary scalar unit is spEllMap(X,l,bottom<=E,n) tensor the identity of mu_(l^(n+1),X). This asserts only the finite-level tensor calculation and compatibility with the coefficient-reduction/root-power transitions. It asserts no inverse-limit, flatness, derived, or diagonal comparison. No invertibility or Noetherian hypothesis on X is needed.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-maps",
+  "sk-def-sp-tate-twist",
+  "def-sfb-modobj-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite-level scalar extension of the root tower; sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md, finite-level tensor formulas"
+ },
+ "proof": [
+  {
+   "text": "For N=l^(n+1), the actual condensed reduction p_E:O_E -> O_E/(N) is the cokernel of N times the identity. Check this on every profinite test S. A continuous quotient-valued function lifts continuously by choosing representatives of the discrete quotient. A continuous function in the kernel divides by N continuously: multiplication by l^(n+1) on O_E is an embedding (the proved PadicAlgCl.isEmbedding_natCast_pow_mul in WeilConjectures.NumberTheory.Padics.IntegersModPow), its range is the kernel ideal (PadicAlgCl.exists_natCast_pow_mul_eq), and the inverse of an embedding is continuous on its range. This gives an exact sequence of abelian groups on each test. Apply the proved source-library sectionwise cokernel criterion CategoryTheory.Sheaf.isColimitCokernelCoforkOfSurjective (WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowCokernel) to obtain the asserted cokernel in condensed abelian sheaves.",
+   "uses": [
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pullback from the point is a left adjoint and preserves this cokernel. Tensoring on the right with mu_N also preserves it. The map N times the identity becomes zero, since N annihilates mu_N; hence the resulting reduction tensor identity is an isomorphism. The linear free-module map from O_E tensor_Z mu_N to the actual finite twist has this underlying map, so it too is an isomorphism, as forgetting the module action reflects isomorphisms.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "def-pur-roots-of-unity-sheaf",
+    "def-sfb-modobj-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The bottom integral coefficient map is an isomorphism by its pointwise normalization in the base coefficient identification. Its tensor with the roots, followed by the bottom reduction map of step 2, gives an isomorphism from the free Z_l module on mu_N to the restricted bottom finite twist. Extension of scalars carries the free Z_l module on mu_N to the free O_E module on mu_N: compose the free/forget and extend/restrict adjunctions and use uniqueness of left adjoints. Compose the inverse of the extended bottom comparison, this free-module scalar isomorphism, and the target reduction comparison. This is the required O_E-linear level isomorphism.",
+   "uses": [
+    "lem-sfb-base-coefficient-condensed-identification",
+    "def-sfb-diagonal-coefficient-maps",
+    "def-sfb-modobj-extension",
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The unit equation for uniqueness of left adjoints fixes the free scalar isomorphism on roots; naturality of the ordinary extension unit and the defining quotient square of spEllMap then give the requested normalization. For successive indices, the spEllMap reduction squares commute by cancelling the epic integral reduction. Tensor with the root transition to obtain the finite-level square. The extension-unit Hom equivalence is injective, so this square and the level normalization give naturality of the linear level isomorphisms. NatTrans.ofOpSequence assembles them, and pointwise invertibility gives the tower isomorphism. These constructions use no invertibility of l, root generator, nonempty-scheme assumption, or inverse limit.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "def-sfb-modobj-extension",
+    "def-sfb-diagonal-coefficient-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sp-tate-twist",
+  "def-pur-roots-of-unity-sheaf",
+  "def-sfb-modobj-extension",
+  "lem-sfb-base-coefficient-condensed-identification",
+  "def-sfb-diagonal-coefficient-maps"
+ ],
+ "proof_origin": {
+  "by": "T4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite-level scalar-extension calculation, with the actual reduction cokernel and adjunction unit equations written out; finite-level definitions in sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of coefficients commutes with inverse limit and Tate twist root module",
+   "results": "Eight hits concerning adic completion, finite products, and Witt-vector quotient maps. No normalized internal module scalar comparison at the actual root levels. Read project ConstantZModScalarTensor, ProEtaleTateTwistLevels, and BottomFiniteRootUnitIsIso. The bottom unit result does not compare extensions to O_E.",
+   "date": "2026-10-27",
+   "verdict": "Use the recorded coefficient and finite-root tensor definitions; no duplicate full comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"quotient\"",
+   "results": "Twelve hits: quotientTensorEquiv, tensorQuotientEquiv and their variants and pure-tensor formulas in Mathlib.LinearAlgebra.TensorProduct.Quotient. These concern algebraic module tensors, not the sheafified internal-module extension with prescribed coefficient and root maps.",
+   "date": "2026-10-27",
+   "verdict": "Generic quotient tensor ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*free|free.*extendScalars|quotient.*tensor",
+   "results": "Twenty-five Mathlib service hits in tensor quotient and right-exactness files. Local rg in both roots found scalar extension and associativity APIs, ConstantZModScalarTensor and finite-level comparisons, but no comparison of these two positive root towers with scalar-unit normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalFiniteIntegralEndpoint",
+  "date": "2026-10-27",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-finite-integral-endpoint",
+   "place": "step 1, balanced finite-level scalar comparison, before passage to inverse limits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalIntegralRootLevelScalars",
+  "file": "lean/Sheaf/Paper/DiagonalIntegralRootLevelScalars.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalIntegral_rootLevelScalars",
+  "statement": "theorem diagonalIntegral_rootLevelScalars (l : ℕ) [Fact l.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u}) :\n    ∃ i : (spIntegralTwistSystem X l (bottomField l) ⋙\n        Mod.comap (coefficientMap (integralMap l (bottomField l)) X)) ⋙\n          Mod.extendScalars (coefficientMap (integralMap l E) X) ≅\n        spIntegralTwistSystem X l E,\n      ∀ n : ℕ,\n        Mod.extendUnitHom (coefficientMap (integralMap l E) X)\n            ((Mod.comap (coefficientMap (integralMap l (bottomField l)) X)).obj\n              (spIntegralTwistLevel X l (bottomField l) n)) ≫\n          (i.hom.app (op n)).hom =\n        spEllMap X l (show (bottomField l).1 ≤ E.1 from bot_le) n ⊗ₘ\n          𝟙 (Scheme.proEtaleRootsOfUnitySheaf X (l ^ (n + 1)))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T012804-L-2330827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261027T021407-L-2764908",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

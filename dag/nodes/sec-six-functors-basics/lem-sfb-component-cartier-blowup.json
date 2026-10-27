@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-component-cartier-blowup",
+ "kind": "statement",
+ "title": "Integral Cartier blowups of the reduced components of a proper pair",
+ "statement": "Let $e$ be a field [def-weil-field], let $T$ be a nonempty reduced proper finite-type $e$-scheme [def-pc-reduced-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and let $C\\subseteq T$ be nowhere dense and closed. The irreducible components [def-weil-irreducible-components] of $T$ admit a finite nonempty enumeration $T_1,\\ldots,T_s$, each equipped with its reduced induced closed subscheme structure [def-weil-pbc-scheme-reduction, def-weil-closed-immersion]. Each $T_i$ is nonempty integral [def-pc-integral-scheme] and proper over $e$. Write $C_i=C\\cap T_i$ with its reduced induced structure and $\\mathcal I_i$ for its ideal sheaf [def-sbc-closed-immersion-ideal-sheaf]. This ideal is quasi-coherent of finite type, and $U_i=T_i\\setminus C_i$ is nonempty, quasi-compact and dense. The ordinary blowup $b_i:S_i=\\operatorname{Bl}_{\\mathcal I_i}T_i\\to T_i$ [def-nagata-global-blowup] is proper and surjective [def-weil-surjective-morphism], $S_i$ is a nonempty integral proper finite-type $e$-scheme, and $b_i^{-1}U_i\\to U_i$ is an isomorphism with $b_i^{-1}U_i$ dense in $S_i$. In particular $b_i$ is birational, meaning it identifies dense open subschemes, and identifies the function fields [def-sc-function-field]. The extended ideal $\\mathcal I_i\\mathcal O_{S_i}$ [def-nagata-extended-ideal] is an effective Cartier ideal [def-nagata-effective-cartier-ideal], with support $b_i^{-1}C_i$. If $C_i$ is empty, $\\mathcal I_i=\\mathcal O_{T_i}$ and $b_i$ is the identity.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150: reduced components and blowing up the marking. Stacks divisors.tex Tags 02ND (lemma-blow-up-integral-scheme), 02OS (lemma-blowing-up-gives-effective-Cartier-divisor)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-reduced-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-nagata-global-blowup",
+  "def-weil-surjective-morphism",
+  "def-sc-function-field",
+  "def-nagata-extended-ideal",
+  "def-nagata-effective-cartier-ideal"
+ ],
+ "proof": [
+  {
+   "text": "The field $e$ is Noetherian: its only ideals are $0$ and $(1)$, both finitely generated. Thus $\\operatorname{Spec}e$ is locally Noetherian and quasi-compact (its space has one point). Apply finite type over a Noetherian base to $T\\to\\operatorname{Spec}e$. The scheme $T$ is Noetherian and hence has finitely many irreducible components. These components cover $T$; since $T$ is nonempty, their finite set is nonempty. Choose an enumeration $|T_1|,\\ldots,|T_s|$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex Tag 0BA8 (lemma-Noetherian-irreducible-components); topology.tex Tag 004W (lemma-irreducible)"
+   }
+  },
+  {
+   "text": "Give each closed component its reduced induced closed subscheme structure. It is nonempty, reduced and irreducible, hence integral by the characterization of integrality. Its closed immersion into $T$ makes it proper over $e$; in particular its structure morphism is of finite type, so it too is Noetherian. Apply the reduced-induced-subscheme construction inside $T_i$ to the closed subset $C\\cap|T_i|$, obtaining $C_i$ and its quasi-coherent ideal $\\mathcal I_i$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 01J4 (definition-reduced-induced-scheme); properties.tex Tag 01ON (lemma-characterize-integral); morphisms.tex Tags 01W5 and 01T6"
+   }
+  },
+  {
+   "text": "No component is contained in $C$. Indeed, for fixed $i$ put $O_i=T\\setminus\\bigcup_{j\\ne i}|T_j|$. The components cover $T$, so $O_i\\subseteq|T_i|$. It is nonempty: otherwise $|T_i|$ would be a finite union of its closed intersections with the other components, so irreducibility would force containment in one other component, contrary to maximality and distinctness. If $|T_i|\\subseteq C$, the nonempty open $O_i$ would be contained in $C$, contradicting nowhere density. Therefore $U_i=T_i\\setminus C_i$ is nonempty and dense, since every nonempty open in an irreducible space is dense (two disjoint nonempty opens would give a union of two proper closed subsets).",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052 (lemma-Noetherian), component-open argument; the finite union and density arguments are written out"
+   }
+  },
+  {
+   "text": "The open subscheme $U_i$ of the Noetherian scheme $T_i$ is Noetherian and in particular quasi-compact. Take a Noetherian affine open covering of $T_i$. On each member $V=\\operatorname{Spec}A$, the ideal $\\mathcal I_i(V)$ is finitely generated by the definition of a Noetherian ring. The affine finite-type criterion for quasi-coherent modules now makes $\\mathcal I_i$ of finite type. It is nonzero: if it were zero, its affine vanishing sets would be all of $T_i$, whereas its vanishing set is $C_i$ and $U_i$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology), 01PB (lemma-finite-type-module); topology.tex Tags 0052, 04ZA"
+   }
+  },
+  {
+   "text": "Form the ordinary blowup $b_i:S_i=\\operatorname{Bl}_{\\mathcal I_i}(T_i)\\to T_i$. Apply integral-blowup geometry using the nonzero quasi-coherent finite-type ideal established above; it gives that $S_i$ is integral, in particular nonempty. The global blowup properness theorem makes $b_i$ proper. The complement theorem identifies $b_i^{-1}U_i$ with $U_i$. This inverse image is a nonempty open in the integral (hence irreducible) scheme $S_i$, and is therefore dense by the two-open argument of step 3.",
+   "uses": [
+    "lem-sfb-integral-blowup-projective-geometry",
+    "def-pc-integral-scheme",
+    "thm-nagata-global-blowup-proper",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02ND (lemma-blow-up-integral-scheme), 02NS (lemma-blowing-up-projective), 02OS (lemma-blowing-up-gives-effective-Cartier-divisor)"
+   }
+  },
+  {
+   "text": "The image of $b_i$ is closed because proper morphisms are universally closed; it contains $U_i$ by the complement isomorphism, so density of $U_i$ makes the image all of $T_i$. This is surjectivity. Compose $b_i$ with the proper structure morphism $T_i\\to\\operatorname{Spec}e$. Proper composition gives that $S_i$ is proper over $e$, and finite type is part of the definition of proper. This proves all finiteness, nonemptiness and properness assertions for $S_i$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W3 (lemma-composition-proper); surjectivity is the elementary closed-image argument"
+   }
+  },
+  {
+   "text": "The complement isomorphism identifies dense opens on both integral schemes, which is the stated meaning of birationality. By sobriety each has a unique generic point, and both generic points belong to these dense opens. The isomorphism of opens identifies these points and their structure-sheaf stalks: restriction to an open neighbourhood does not change a stalk, since neighbourhoods inside that open are cofinal among all neighbourhoods. The resulting isomorphism $\\mathcal O_{T_i,\\eta_i}\\simeq\\mathcal O_{S_i,\\xi_i}$ is the function-field identification $k(T_i)\\simeq k(S_i)$, with both rings fields by the generic-stalk theorem.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-rational-functions-generic-stalks",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS (lemma-scheme-sober); morphisms.tex Tags 01RV (lemma-meromorphic-irreducible-components), 01RW (definition-function-field)"
+   }
+  },
+  {
+   "text": "Principalization applies to the finite-type quasi-coherent ideal $\\mathcal I_i$ and says that its extended ideal on $S_i$ is locally generated by a non-zero-divisor, hence is an effective Cartier ideal. To check the support, use the extended-ideal definition and the closed-subscheme base-change ideal formula: this is the ideal of $C_i\\times_{T_i}S_i$. Affine-locally, if $A\\to B$ represents $b_i$ and $J\\subseteq A$ defines $C_i$, that ideal is $JB$. A prime $\\mathfrak q$ of $B$ contains $JB$ exactly when its inverse-image prime in $A$ contains $J$. The affine ideal-zero-set formula therefore gives precisely $V(\\mathcal I_i\\mathcal O_{S_i})=b_i^{-1}|C_i|$.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "def-nagata-extended-ideal",
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor); affine base-change formula for closed immersions"
+   }
+  },
+  {
+   "text": "If $C_i=\\varnothing$, the reduced-induced ideal is the unit ideal: its sections are the functions vanishing at all points of the empty set, a vacuous condition. Now $U_i=T_i$, so the complement isomorphism is the entire map $b_i:S_i\\to T_i$. It identifies the blowup canonically with $T_i$ and $b_i$ with its identity. The extended unit ideal defines the empty effective Cartier divisor, consistently with the preceding step.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), first paragraph of proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-extended-ideal",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-rational-functions-generic-stalks",
+  "lem-sc-scheme-sober",
+  "lem-sfb-integral-blowup-projective-geometry",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-def-locnoeth",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-global-blowup-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3, Step 1, printed p.150 (PDF p.156), component and Cartier-boundary reductions; details supplied by the Stacks lemmas cited in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Blow up the reduced marking on each irreducible component of a proper reduced scheme to obtain integral proper birational models with effective Cartier boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral scheme blown up in a nowhere dense closed subscheme remains integral and the exceptional ideal is effective Cartier",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsProper",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Group.Abelian\", \"type\": \" {K : Type u} [Field K] [IsAlgClosed K] (G : CategoryTheory.Over (AlgebraicGeometry.Spec ↧K)) [AlgebraicGeometry.IsProper G.hom] [AlgebraicGeometry.IsIntegral (CategoryTheory.MonoidalCategoryStruct.tensorObj G G).left] [CategoryTheory.GrpObj G] : CategoryTheory.IsCommMonObj G\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blow.up|ReesAlgebra|Cartier",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blow up the reduced marking on each irreducible component of a proper reduced scheme to obtain integral proper birational models with effective Cartier boundary",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U)))\\n      AlgebraicGeometry.IsReduced.component_reduced._autoParam →\\n    AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $ X $ is reduced if for every open subset $ U $ of $ X $, the ring of sections $ \\\\mathcal{O}_X(U) $ is reduced (i.e., contains no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(U : X.Opens) [IsReduced X] : IsReduced U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \": IsIntegral X ↔ IrreducibleSpace X ∧ IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsReduced Y] : IsReduced X\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f: X \\\\to Y$ be an open immersion. If $Y$ is a reduced scheme, then $X$ is also a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : (irreducibleComponents X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsReduced X → Sort u} →\\n    (t : AlgebraicGeometry.IsReduced X) →\\n      ((component_reduced : ∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U))) → motive ⋯) → motive t\", \"doc\": \"Given a scheme $X$ and a type family $P$ over the predicate that $X$ is reduced, if for every open subset $U \\\\subseteq X$ the ring of sections $\\\\mathcal{O}_X(U)$ is reduced (contains no nonzero nilpot\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowup of a nowhere dense closed subscheme in each reduced irreducible component of a proper scheme is integral proper birational with Cartier exceptional ideal",
+   "results": "Actual msearch output: 8 hits; AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern normalization or basic integral-scheme properties, not the componentwise blowup statement"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blow.up|ReesAlgebra|Cartier",
+   "results": "Actual msearch output: 0 hits; . Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: no blowup, Rees algebra or Cartier declarations in Mathlib AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsProper",
+   "results": "Actual msearch output: 1 hits; AlgebraicGeometry.isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern normalization or basic integral-scheme properties, not the componentwise blowup statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up an integral scheme in a nonzero ideal gives an integral scheme and an effective Cartier exceptional divisor",
+   "results": "Actual msearch output: 8 hits; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.IsIntegral.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern normalization or basic integral-scheme properties, not the componentwise blowup statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a finite type ideal on an integral scheme preserves integrality and is an isomorphism outside its vanishing set",
+   "results": "Actual msearch output: 8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, Algebra.ZariskisMainProperty, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.affine_isIntegral_iff, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern normalization or basic integral-scheme properties, not the componentwise blowup statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-pair-radicial-preparation",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 1, printed p.150 (compactification, reduced components, radicial constants, blowup, finite normalization), applied to the finitely many components with one common finite radicial constant extension. The compactification is chosen with C the closure of Z; including the complement of X is optional, not required.; returned proper-pair proof steps 4--6: Integral Cartier blowups of the reduced components of a proper pair. No imported blueprint ancestor exists on this added-input branch.",
+   "via": [
+    "lem-sfb-proper-pair-radicial-preparation",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-component-cartier-blowup",
+  "worker": "stage1",
+  "summary": "Checked ILO X 2.3 Step 1 and the Stacks component, reduced-induced structure and blowup lemmas. Supplied the componentwise nowhere-density argument, verified nonzero finite-type ideals, and assembled existing integral-blowup, properness, complement and principalization results. All nine steps cite their exact inputs; no new nodes or statement changes.",
+  "blueprint": "The inherited added-input branch has no imported blueprint ancestor (blueprint_refs ancestor returns None). Realizes the component and Cartier blowup substeps of lem-sfb-proper-pair-radicial-preparation, serving det-thm-sf-ctf-stability-direct-images proof (3) through the alteration/tame-boundary reduction. Current snapshot proof (3) uses open direct-image finiteness; this is its existing alteration-input branch, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-sc-function-field",
+    "why": "Generic scheme/topological input for the componentwise blowup construction; no node of this unit supplies this basic fact. It does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Generic scheme/topological input for the componentwise blowup construction; no node of this unit supplies this basic fact. It does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-sc-rational-functions-generic-stalks",
+    "why": "Generic scheme/topological input for the componentwise blowup construction; no node of this unit supplies this basic function-field/generic-stalk identification. It does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "why": "Generic scheme/topological input for the componentwise blowup construction; no node of this unit supplies this basic fact. It does not replace a step of the unit route."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic scheme/topological input for the componentwise blowup construction; no node of this unit supplies this basic fact. It does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-function-field",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-sc-rational-functions-generic-stalks",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "pqf-def-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-11abdb9ef",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-11abdb9ef (reviewer sub-agent of L); spot-checked: Read the item and all nine steps against ILO X 2.3 Step 1 (printed p.150) and the statement of every cited node. There are no new nodes, the statement is unchanged, uses equal proof_deps exactly, there is no cycle and no SGA citation. Step checks: e is Noetherian, so T is Noetherian with finitely many components covering it (s>=1). Reduced-induced components are integral via def-pc-integral-scheme and proper via closed-immersion (c). Step 3 is elementary: O_i = T minus the other components is nonempty and open, so nowhere density of C gives U_i nonempty and dense. Step 4 gives I_i finite type through the affine finite-type criterion and nonzero because V(I_i)=C_i≠T_i, which is the hypothesis of lem-sfb-integral-blowup-projective-geometry. The Nagata proper, complement and principalization theorems carry no hidden hypotheses. Surjectivity follows from a closed image containing the dense U_i. Function fields come from generic stalks (def-sc-function-field, integral-scheme sentence). The Cartier support b^{-1}C_i comes from JB on affines through the base-change ideal-image node. C_i empty gives the unit ideal and the complement isomorphism. Edge cases tested: Spec e, crossing lines with C the node, and line plus isolated point (rightly excluded). The duplicate search found nothing; the closest node, lem-sfb-birational-cartier-geometric-reduction, starts after the blowup. Batch-5 flag: the closure of lem-sfb-integral-blowup-projective-geometry reaches only def-trf-projective-bundle-morphism and def-trf-canonical-symmetric-graded-algebra. Both are general definitions, not steps of the trace-formula or Poincaré-duality proofs, and only the integrality clause is used, so the citation is accepted. The off-unit generic tools (the split_report tool_uses, the imported Nagata blowup theorems and the pbc Mathlib leaves) are acceptable as tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentCartierBlowup",
+  "declaration": "AlgebraicGeometry.Scheme.exists_component_cartier_blowups",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentCartierBlowup.lean",
+  "statement": "theorem exists_component_cartier_blowups (e : Type u) [Field e] (T : Scheme.{u}) (p : T ⟶ Spec (.of e)) [Nonempty T] [IsReduced T] [IsProper p] (C : Closeds T) (hC : interior (C : Set T) = ∅) : ∃ (s : ℕ) (_ : 0 < s) (components : Fin s ≃ {Z : Set T // Z ∈ irreducibleComponents T}) (Ti : Fin s → Scheme.{u}) (ι : ∀ i : Fin s, Ti i ⟶ T) (I : ∀ i : Fin s, (Ti i).IdealSheafData) (U : ∀ i : Fin s, (Ti i).Opens), ∀ i : Fin s, IsClosedImmersion (ι i) ∧ Set.range (ι i) = (components i).val ∧ I i = IdealSheafData.vanishingIdeal (C.preimage (ι i).continuous) ∧ U i = (C.preimage (ι i).continuous).compl ∧ (∀ V : (Ti i).affineOpens, ((I i).ideal V).FG) ∧ Nonempty (U i) ∧ IsCompact (U i : Set (Ti i)) ∧ Dense (U i : Set (Ti i)) ∧ IsProper (ι i ≫ p) ∧ IsProper (I i).blowupMap ∧ Surjective (I i).blowupMap ∧ IsProper ((I i).blowupMap ≫ ι i ≫ p) ∧ LocallyOfFiniteType ((I i).blowupMap ≫ ι i ≫ p) ∧ QuasiCompact ((I i).blowupMap ≫ ι i ≫ p) ∧ IsIso ((I i).blowupMap ∣_ U i) ∧ Dense ((I i).blowupMap ⁻¹' (U i : Set (Ti i))) ∧ ((I i).comap (I i).blowupMap).IsInvertible ∧ ((I i).comap (I i).blowupMap).support = (C.preimage (ι i).continuous).preimage (I i).blowupMap.continuous ∧ ((C.preimage (ι i).continuous : Closeds (Ti i)) = ⊥ → I i = ⊤ ∧ IsIso (I i).blowupMap) ∧ ∃ (hTi : IsIntegral (Ti i)) (hS : IsIntegral (I i).blowup) (hη : (I i).blowupMap (@genericPoint (I i).blowup _ inferInstance (@irreducibleSpace_of_isIntegral _ hS)) = @genericPoint (Ti i) _ inferInstance (@irreducibleSpace_of_isIntegral _ hTi)) (K : @Scheme.functionField (Ti i) (@irreducibleSpace_of_isIntegral _ hTi) ≅ @Scheme.functionField (I i).blowup (@irreducibleSpace_of_isIntegral _ hS)), K.hom = ((Ti i).presheaf.stalkCongr (Inseparable.of_eq hη.symm)).hom ≫ (I i).blowupMap.stalkMap (@genericPoint (I i).blowup _ inferInstance (@irreducibleSpace_of_isIntegral _ hS))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7fc34315",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read the item node, all 14 stmt_dep records, the module, the report and the live Blowup.Gluing / IdealSheaf.Invertible / Mathlib IdealSheaf sources. Every hypothesis matches the node with nothing stronger (IsProper covers finite type; universe forced by Spec). Every clause is rendered: the components by a bijection Fin s ≃ irreducibleComponents, the reduced induced structure pinned by an integral closed immersion with the given image, I = vanishingIdeal(C∩Ti), finite type, U nonempty/compact/dense, the blowup proper and surjective with an integral proper finite-type source, an iso over U with dense preimage, the function-field iso pinned to stalkCongr ≫ stalkMap (direction checked), comap IsInvertible with support = preimage, and the empty-center case I=⊤ ∧ IsIso. Edge cases (empty T, Spec e, component inside C, nodal crossings, empty marking) are covered. No defs, sorry only, docstrings and blueprint tag present, lean.statement verbatim, no duplicate in the live trees, item record only. No file changed, so no compile."
+ }
+}

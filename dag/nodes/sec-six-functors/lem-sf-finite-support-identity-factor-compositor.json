@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-finite-support-identity-factor-compositor",
+ "kind": "statement",
+ "title": "Identity-factor evaluation of the canonical finite coefficient compositor",
+ "statement": "For the identity-proper compactification ci of an open immersion i:X→Z and the identity-open compactification cp of a proper map p:Z→Y, put c=(i,p). For every retained bounded-below etale-origin witness O and its fixed-scalar object M, the composite of proper support applied to the open coefficient comparison, the proper coefficient comparison, and coefficient realization of the witnessed compositor equals the proper candidate identity at open support of realization(M), proper image of the open candidate identity at realization(M), and the coefficient comparison for c. Only canonical coefficient functors and O occur: no supplied SixFunctorFiniteOperations, constructible input K, or operation comparison occurs. All objects and maps are those of [def-sf-operation-stages].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "def-sf-operation-stages, finiteCompositionNormalization,\nfiniteOpenNormalization and finiteProperNormalization; prop-sf-pf-coherence.proof.md,\ncompatibility of comparisons with counits and j_!."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages"
+ ],
+ "proof": [
+  {
+   "text": "Apply the fixed-scalar identity-factor compositor evaluation at the retained etale origin O.2.L. Naturality of identityFactorFixedIso with respect to refinementFixedWitnessIso.inv moves the input witness map past the identity-factor unit comparison. The output witness map cancels its inverse by functoriality. This identifies sixFunctorFiniteCompositionComparison with the identity-factor unit comparison at the fixed finite object M.",
+   "uses": [
+    "lem-sf-identity-factor-fixed-support",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the independent coefficient identity-unit comparison at M. The actual pair, the open compactification, and the proper compactification agree definitionally with the prescribed compactifications. The fixed realization is the canonical intrinsic derived equivalence, so this is exactly the desired equation.",
+   "uses": [
+    "lem-sf-identity-factor-coefficient-comparison",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "lem-sf-identity-factor-fixed-support",
+  "lem-sf-identity-factor-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "J6: separate geometric identity-unit evaluation and coefficient identity-unit transport, then cancel the retained witness by naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functor natural isomorphisms preserve composition and identity under whiskering",
+   "results": "Found isoWhiskerLeft_trans_isoWhiskerRight, whiskering isIso instances, isoWhiskerLeft_hom and whiskering composition isomorphisms.",
+   "date": "2026-10-27",
+   "verdict": "Generic whiskering identities do not evaluate the specified geometric coefficient compositor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism compatibility with composite functors and identity functors",
+   "results": "Found Iso.hom_inv_id_app_app, isoWhiskerRight_refl, isoWhiskerLeft_refl, rightUnitor, triangleIso and related generic functor identities.",
+   "date": "2026-10-27",
+   "verdict": "No canonical geometric coefficient compositor evaluation; generic identities support cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Found naturality and generic pullback/pushout cone identities.",
+   "date": "2026-10-27",
+   "verdict": "Naturality is used in the combining proof, but does not identify the specified coefficient compositor."
+  },
+  {
+   "tool": "grep",
+   "query": "sixFunctorProperCandidateIso|coherenceProEtaleCompositor; support.*compos|compos.*support|proper.*open in Mathlib/CategoryTheory, WeilConjectures, Sheaf",
+   "results": "The project has the candidate identity isomorphisms, finiteCompositionNormalization, and the witnessed compositor. No theorem evaluating their identity-factor coefficient composite was found. Mathlib has no such geometric support-composition result.",
+   "date": "2026-10-27",
+   "verdict": "State just the coefficient-only evaluation step; remove all finite operation data and constructible inputs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSupportFactorRealization",
+  "date": "2026-10-27",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-projection-support-factor-coordinates",
+   "place": "The coefficient-only identity-factor calculation inside finiteSupportFactorRealization, before operation normalization and witness cancellation.",
+   "via": [
+    "lem-sf-finite-support-factor-realization",
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSupportIdentityFactorCompositor",
+  "file": "lean/Sheaf/Paper/FiniteSupportIdentityFactorCompositor.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.finiteSupportIdentityFactorCompositor",
+  "statement": "theorem finiteSupportIdentityFactorCompositor\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    {X Z Y : SixFunctorSpace D} (i : X ⟶ Z) (p : Z ⟶ Y)\n    (hi : IsOpenImmersion i.hom.left) (hp : IsProper p.hom.left)\n    [QuasiCompact i.hom.left]\n    (O : RefinementFiniteLevelOrigin C.l E n hn X.obj.left) :\n    letI := hp\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    let A := Padic.coefficientExtensionRing C.l E n\n    let ci := sixFunctorOpenCompactification i hi\n    let cp := Compactification.ofIsProper p.hom.left\n    let c := sixFunctorFactorCompactification i p hi hp (i ≫ p) rfl\n    let M := refinementFiniteLevelFixedObject C.l E n hn X.obj.left O\n    (sfIntrinsicCompactSupport cp A).map\n        ((sfIntrinsicCompactSupportComparison A ci).hom.app M) ≫\n      (sfIntrinsicCompactSupportComparison A cp).hom.app\n        ((sfFixedCompactSupport A ci).obj M) ≫\n      (sixFunctorFiniteRealization D C E n hn Y).functor.map\n        (sixFunctorFiniteCompositionComparison C E n hn i p ci cp c O) =\n    (sixFunctorProperCandidateIso A p.hom.left).hom.app\n        ((sfIntrinsicCompactSupport ci A).obj\n          ((sixFunctorFiniteRealization D C E n hn X).functor.obj M)) ≫\n      (proEtaleConstantDerivedDirectImage p.hom.left A).map\n        ((@sixFunctorOpenCandidateIso A _ _ X.obj.left Z.obj.left i.hom.left hi).hom.app\n          ((sixFunctorFiniteRealization D C E n hn X).functor.obj M)) ≫\n      (sfIntrinsicCompactSupportComparison A c).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261027T103516-L-1093489",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T123458-L-2304837",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

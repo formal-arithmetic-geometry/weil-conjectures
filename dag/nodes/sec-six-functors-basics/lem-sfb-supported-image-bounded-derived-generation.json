@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-supported-image-bounded-derived-generation",
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison. Image rigidity after all supported finite-model comparisons have been supplied. Independent structural input: derived generation of supported images before applying any closed-pair restriction. Agent formulation; exact reference WANTED. Hemo–Richarz–Scholbach Examples 3.6 and 4.2 explain why finite scalar-model image closure cannot be substituted."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-subcategory",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "def-sfb-qcqs-open-closed-tree"
+ ],
+ "proof": [
+  {
+   "text": "Recover CompactSpace and QuasiSeparatedSpace for the source S by induction on the actual tree path: every vertex tree carries both instances. Apply the source kernel-generation lemma to obtain (ker u)[0] in G_S.",
+   "uses": [
+    "lem-sfb-finite-model-kernel-generation",
+    "def-sfb-qcqs-open-closed-tree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply support-path preservation to get J(ker u)[0] in G_X. Separately prove by path induction that J is additive and preserves finite limits and finite colimits. Open edges use the existing exact extension-by-zero instances; closed edges use closedSupport_lowerStarExact with the displayed complementary open sibling.",
+   "uses": [
+    "lem-sfb-supported-hull-path-extension",
+    "det-lem-formal-closed-support-adjunction",
+    "def-sfb-qcqs-open-closed-tree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the actual short complex ker(u) -> L -> image(u), with second arrow factorThruImage u. Mathlib exact_kernel(u).isColimitImage identifies the second arrow as the cokernel of the first, giving a short exact sequence. Map it by exact J and form its singleTriangle. For any admissible class P, J(ker u)[0] lies in P by the preceding steps and JL[0] is a defining generator. ObjectProperty.ext_of_isTriangulatedClosed₃ on the distinguished triangle gives J(image u)[0] in P. Quantifying over P is exactly the required hull membership.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-sfb-supported-image-generation-hull"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-model-kernel-generation",
+  "def-sfb-qcqs-open-closed-tree",
+  "lem-sfb-supported-hull-path-extension",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sfb-supported-image-generation-hull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "G7 Lean assembly: original steps 1--5 isolated as source kernel generation, step 6 as support-path preservation; exactness of actual path functors and the kernel-image short exact triangle are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The localizing and colocalizing closure of supported finitely presented topological coefficient local systems contains the image sheaf of every morphism between finite scalar local models",
+   "results": "{\"t\": \"2026-10-23T22:21:41Z\", \"tool\": \"leanfinder\", \"query\": \"The localizing and colocalizing closure of supported finitely presented topological coefficient local systems contains the image sheaf of every morphism between finite scalar local models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\"], \"digest\": \"875d5126c5ba6b46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite presentation, ordinary limits, discrete condensed objects or scalar localization; none gives derived generation of these supported continuous-coefficient images"
+  },
+  {
+   "tool": "grep",
+   "query": "(image|Image).*(localizing|colocalizing)|(localizing|colocalizing).*image",
+   "results": "{\"t\": \"2026-10-23T22:26:20Z\", \"tool\": \"grep\", \"query\": \"(image|Image).*(localizing|colocalizing)|(localizing|colocalizing).*image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Away/Basic.lean\", \"Mathlib/RingTheory/Localization/Away/Basic.lean\", \"Mathlib/RingTheory/Localization/Away/Basic.lean\", \"Mathlib/RingTheory/Localization/Away/Basic.lean\"], \"digest\": \"bdf69bcb6e237742\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite presentation, ordinary limits, discrete condensed objects or scalar localization; none gives derived generation of these supported continuous-coefficient images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Images of finite scalar local model sheaves over continuous l adic coefficient rings belong to the derived closure of locally closed supported finite models under cones products and bounded filtered colimits",
+   "results": "{\"t\": \"2026-10-23T22:26:20Z\", \"tool\": \"leansearch\", \"query\": \"Images of finite scalar local model sheaves over continuous l adic coefficient rings belong to the derived closure of locally closed supported finite models under cones products and bounded filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"instHasLimitsOfShapeCondensed\", \"SheafOfModules.Finite.hasFiniteLimits\", \"instHasFiniteLimitsCondensed\", \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"LightCondensed.isColimitLocallyConstantPresheaf\"], \"digest\": \"ab2da594f89f2f9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite presentation, ordinary limits, discrete condensed objects or scalar localization; none gives derived generation of these supported continuous-coefficient images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"image\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-23T22:26:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"image\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.imageSieve_cofanIsColimitDesc_shrinkYoneda_map\"], \"digest\": \"673a784201b1f51b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite presentation, ordinary limits, discrete condensed objects or scalar localization; none gives derived generation of these supported continuous-coefficient images"
+  },
+  {
+   "tool": "grep",
+   "query": "(image|kernel).*(localizing|colocalizing)|(localizing|colocalizing).*(image|kernel)",
+   "results": "{\"t\": \"2026-10-24T09:28:58Z\", \"tool\": \"grep\", \"query\": \"(image|kernel).*(localizing|colocalizing)|(localizing|colocalizing).*(image|kernel)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/RingTheory/Localization/Algebra.lean\", \"Mathlib/RingTheory/Localization/Away/Basic.lean\", \"Mathlib/RingTheory/Localization/Away/Basic.lean\", \"Mathlib/RingTheory/Localization/Away/Basic.lean\", \"Mathlib/RingTheory/Localization/Away/Basic.lean\"], \"digest\": \"55c311c4761cfbf9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary sheaf finite-generation and image APIs or scalar localization, not supported continuous-coefficient derived image generation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian image of a morphism of finite locally constant topological coefficient module sheaves lies in their triangulated closure under products and bounded below filtered colimits",
+   "results": "{\"t\": \"2026-10-24T09:28:58Z\", \"tool\": \"leansearch\", \"query\": \"An abelian image of a morphism of finite locally constant topological coefficient module sheaves lies in their triangulated closure under products and bounded below filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.instAbelian\", \"CategoryTheory.sheafIsAbelian\", \"CategoryTheory.instHasImagesSheafType\", \"CategoryTheory.ShortComplex.Exact.isColimitImage\", \"instAbelianLightCondMod\", \"instAbelianCondensedMod\"], \"digest\": \"1c495a29536e5762\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary sheaf finite-generation and image APIs or scalar localization, not supported continuous-coefficient derived image generation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"image\", \"closure\"",
+   "results": "{\"t\": \"2026-10-24T09:28:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"image\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary sheaf finite-generation and image APIs or scalar localization, not supported continuous-coefficient derived image generation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Images of continuous coefficient local systems on qcqs schemes are generated in the ordinary derived category by supported finite scalar local models using products and uniformly bounded below filtered colimits",
+   "results": "{\"t\": \"2026-10-24T09:29:00Z\", \"tool\": \"leanfinder\", \"query\": \"Images of continuous coefficient local systems on qcqs schemes are generated in the ordinary derived category by supported finite scalar local models using products and uniformly bounded below filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"d02e85ac40518a6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary sheaf finite-generation and image APIs or scalar localization, not supported continuous-coefficient derived image generation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-image-rigidity-from-model-comparisons",
+  "date": "2026-10-24",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "title": "Derived generation of supported images by finite scalar local models",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E\\}$, with discrete topology for $A$ and the induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Its condensed ring on profinite sets is $P\\mapsto C(P,\\Lambda)$, using all continuous maps. On each scheme $V$, put $\\Lambda_V=p_V^*\\Lambda$ and $\\mathcal A_V=\\operatorname{Mod}_{\\Lambda_V}$, with ordinary uncompleted module-object derived categories and actual module-derived global sections to abelian groups [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Use the small sites and indexing universe of [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention].\nLet $X$ be a quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-pbc-scheme-conventions]. A support chain over $X$ is a finite chain $S=X_r\\xrightarrow{a_r}\\cdots\\xrightarrow{a_1}X_0=X$, each arrow a quasi-compact open immersion or a closed immersion with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. Set $J=(a_1)_!\\cdots(a_r)_!$, where at a closed arrow the notation $(a_k)_!$ means the ordinary closed direct image $(a_k)_*$; the empty chain gives the identity [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. A finite scalar local model on a scheme $V$ is a $\\Lambda_V$-module which on each member $U_i$ of some pro-étale cover is $\\Lambda_{U_i}\\otimes_{\\underline\\Lambda}\\underline{P_i}$ for a finitely presented scalar $\\Lambda$-module $P_i$. Both underlines mean discrete constant sheaves, and the scalar modules may vary with $i$ [sk-def-sfb-constructible].\n\nLet $\\mathcal G_X$ be the intersection of all full replete classes of objects of $D(\\mathcal A_X)$ with the following properties. They contain zero and $JL[0]$ for every support chain and finite scalar local model $L$ on its source; they are closed under integer shifts, distinguished-triangle extensions, and retracts [def-weil-triangulated-subcategory]. A retract means maps $K\\xrightarrow{i}L\\xrightarrow{p}K$ with $pi=\\mathrm{id}_K$. They are closed under all small products in the derived category [def-weil-category-product]. Finally, whenever $I$ is a small filtered category and $C_i^\\bullet$ is a strict diagram of complexes of $\\Lambda_X$-modules with a common termwise lower bound and every $Q(C_i^\\bullet)$ in the class, the class contains $Q(\\varinjlim_i C_i^\\bullet)$, where the colimit is termwise in module sheaves and $Q$ is localization at quasi-isomorphisms [def-weil-pbc-category-colimit, def-weil-abstract-derived-category]. This paragraph is the explicit meaning of $\\mathcal G_X$, not an appeal to an unspecified closure convention.\n\nFor every support chain over $X$ and every actual module morphism $u:L\\to M$ between finite scalar local models on its source, one has\n$$J(\\operatorname{im}u)[0]\\in\\mathcal G_X.$$\nThe image is the abelian module-sheaf image. Covers and scalar modules for $L,M$ may differ, and the maps may have arbitrary continuous matrix entries. This includes integral torsion local models. No closed pair, cohomology comparison, torsion-rigidity assumption, Noetherianity, cohomological-dimension bound, or finite-subextension-valued restriction is assumed. Empty schemes, zero coefficient rings, zero maps, identity maps and empty support chains are included.",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison. Image rigidity after all supported finite-model comparisons have been supplied. Independent structural input: derived generation of supported images before applying any closed-pair restriction. Agent formulation; exact reference WANTED. Hemo–Richarz–Scholbach Examples 3.6 and 4.2 explain why finite scalar-model image closure cannot be substituted.",
+   "via": [
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-supported-image-bounded-derived-generation",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reduced locally to actual kernels between constant scalar models over extremally disconnected profinite component spaces; transported the explicitly bounded closure operations by exact component pullback; descended hull membership and then applied exact support and the kernel-image triangle. Two statement-only independent structural inputs remain, with actual searches and exact-reference requests. No claim that continuous kernels or images are finite scalar local models.",
+  "blueprint": "The refinement-isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart-comparison obligation, specifically structural image generation before closed-pair restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-in-quasi-compact",
+    "why": "Generic A closed subset of a quasi-compact space is quasi-compact input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Generic Quasi-separatedness from affine-open intersections input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "sk-thm-pe-weakly-contractible-basis",
+    "why": "Generic Enough affine weakly contractible objects input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic The relative profinite test functor over an affine component space input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-sfb-wcontractible-component-derived-hom",
+    "why": "Generic Component pullback on a w-contractible affine preserves derived internal Hom input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Generic Local models and constructible sheaves input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic The single-complex embedding of an abelian category is fully faithful input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic Exactness of pullback on module objects input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-sfb-component-pullback-unbounded-evaluation",
+    "why": "Generic Unbounded module evaluation of component pullback on w-contractible tests input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "det-pe-sections-conservative",
+    "why": "Generic Evaluation on weakly contractible affines is conservative input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "det-pe-products-derived",
+    "why": "Generic Products in the derived category are termwise input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic Left adjoints preserve colimits input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic Ringed pro-etale open-closed localization input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "det-sf-open-closed-extension-zero-limits",
+    "why": "Generic Extension by zero preserves products and derived limits input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Generic A right adjoint preserves limits input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic Internal and sectionwise module operations agree input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Generic Derived pushforward and pullback of module objects input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "sk-def-sfb-derived-categories",
+    "why": "Generic Derived categories and derived functors input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic A short exact sequence of complexes gives a distinguished triangle in D(A), functorially input to component reduction, exact support, or the final image triangle; no result of the compactification-coherence unit supplies this general operation."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-fdcbab345",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-fdcbab345 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, every cited statement, and Hemo–Richarz–Scholbach (HRS) Ex 3.6, Lem 4.1, Ex 4.2, Prop 4.3 with (4.2), Cor 4.7, Rem 6.4 and Thm 6.12. This is a first split: the base item was unsplit, so the re-split rule does not apply, and the statement is unchanged. Steps: (1) Every member of the chain is qcqs. sk-thm-pe-weakly-contractible-basis gives w-contractible affine charts, and projectivity of h_U gives the weakly-contractible hypothesis of the descent node. The step says 'weakly contractible' where the basis theorem gives w-contractible; harmless. (2) lem-sfb-wcontractible-component-derived-hom gives F_W exact and fully faithful and π_0(W) extremally disconnected. Exact pullback of the matrix presentation gives F_W(B_R)=Λ_W⊗B. Degree-0 Hom equals module Hom, so v is a module map, and b^*K≅F_W ker v. (3) The evaluation node and det-pe-sections-conservative(3) show that F_W preserves sheaf products. det-pe-products-derived plus full faithfulness then identifies the source derived product. Colimits, shifts, triangles and retracts are fine. (4) The inverse class is admissible, so H_P⊆F_W^{-1}G_W, and node 1 applies. (5) The descent node's hypotheses are met. (6) j_! preserves products (det-sf-open-closed-extension-zero-limits(2), qcqs target) and colimits as a left adjoint. i_* preserves filtered colimits (lem-weil-pbc-proetale-ringed-open-closed, qcqs target) and products as a right adjoint. So J(G_S)⊆G_X. (7) The image short exact sequence gives a triangle whose cone is J(im u)[0]. New nodes: both are statement-only and self-contained, with the closure class written out, and neither restates a clause of the item. For node 1 I tested empty and singleton P and finite discrete Λ (locally constant matrices). The critical case is the HRS Ex 4.2/Rem 6.4 βN kernel, which is not lisse but is in the hull: over Z_ℓ it is fib(R→∏_n e_{n}R), and over Q_ℓ a bounded colimit of that. HRS Thm 6.12 (C(S,Λ) semi-hereditary) supports plausibility; I found no false case. Node 2 is a plausible Čech/Rlim descent and passes the small cases (identity cover, empty V, zero N). Duplicate search: norm-local-model-finite-field-derived-generation, integral-continuous-cokernel-local-model, profinite-constant-derived-functions, local-model-cohomology-descent and principal-complete-heart-kernels all differ. Batch 5: lem-zl-component-relative-profinite-site reaches def-trf-geometric-morphism, a plain definition of geometric morphisms. The w-contractible component nodes reach lem-trf-geometric-inverse-image-exact, which is Stacks 04JC exactness of inverse image, a general topos fact. Neither is a trace-formula or Poincaré-duality step, and both arrive through existing nodes, so I accept all four flags. The generic tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedImageBoundedDerivedGeneration",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.supported_image_mem_bounded_derived_generation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.supported_image_mem_bounded_derived_generation"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedImageBoundedDerivedGeneration.lean",
+  "statement": "theorem supported_image_mem_bounded_derived_generation (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) {X S : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (tree : QcqsOpenClosedTree X) (p : tree.Path S) (L M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)) (hL : HasFiniteConstantLocalModel Λ S L) (hM : HasFiniteConstantLocalModel Λ S M) (u : L ⟶ M) : supportedImageGenerationHull Λ X ((DerivedCategory.singleFunctor _ 0).obj ((p.extension Λ).obj (image u)))",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two helper definitions render exactly the explicit hull paragraph of this node, rather than introducing a different closure convention. The existing qcqs open-closed tree paths represent support chains, with complementary leaf siblings; their extension is the actual composite of open lower shriek and closed lower star. The recorded coefficient predicate also admits finite-subextension-valued algebraic-closure sections, so the hypothesis expands the six all-continuous cases explicitly, following the node and the existing supported image comparison interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3aa58b485",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean record + stmt_dep def-sfb-qcqs-open-closed-tree (landed owner, cited by landed consumer the same way); statement and proof unchanged; lean.statement matches the file verbatim. hΛ has the node's six all-continuous coefficient cases, same as landed consumer supported_image_rigidity_from_model_comparisons. Support chains = QcqsOpenClosedTree paths (qc open / closed with qc complement; any chain extends to a tree; Path.extension = composite of openImmersionLowerShriek and lowerStar, identity at root). HasFiniteConstantLocalModel = finite matrices over scalar Λ(*), discrete constant models; separate covers for L and M. Hull defs match the explicit paragraph: IsTriangulated (zero, ℤ-shifts, Closed₂) + IsClosedUnderIsomorphisms, retracts i≫p=𝟙, Fan/IsLimit products over Type (u+1) = size-convention universe, generators J L[0], filtered strict IsStrictlyGE a termwise colimits then Q; intersection over all such classes; not hollow. Conclusion takes the abelian image before extension, u arbitrary. Edge cases (empty scheme, root path, zero/identity map, zero ring, empty product) covered. No other Lean hull (H4 clear); sorry only; docstrings carry source place, blueprint tag and 7 proof steps; imports exist; genuine ProEt site; report has both sections. Not compiled (no change). Only cosmetic finding: CompactSpace/QuasiSeparatedSpace X repeats what the tree implies."
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal, follow-up of 66b1ce0e791)",
+  "old_statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega\\}$, with discrete topology for $A$ and the induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Its condensed ring on profinite sets is $P\\mapsto C(P,\\Lambda)$, using all continuous maps, also for $\\Omega$. On each scheme $V$, put $\\Lambda_V=p_V^*\\Lambda$ and $\\mathcal A_V=\\operatorname{Mod}_{\\Lambda_V}$, with ordinary uncompleted module-object derived categories and actual module-derived global sections to abelian groups [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Use the small sites and indexing universe of [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention].\nLet $X$ be a quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-pbc-scheme-conventions]. A support chain over $X$ is a finite chain $S=X_r\\xrightarrow{a_r}\\cdots\\xrightarrow{a_1}X_0=X$, each arrow a quasi-compact open immersion or a closed immersion with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. Set $J=(a_1)_!\\cdots(a_r)_!$, where at a closed arrow the notation $(a_k)_!$ means the ordinary closed direct image $(a_k)_*$; the empty chain gives the identity [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. A finite scalar local model on a scheme $V$ is a $\\Lambda_V$-module which on each member $U_i$ of some pro-étale cover is $\\Lambda_{U_i}\\otimes_{\\underline\\Lambda}\\underline{P_i}$ for a finitely presented scalar $\\Lambda$-module $P_i$. Both underlines mean discrete constant sheaves, and the scalar modules may vary with $i$ [sk-def-sfb-constructible].\n\nLet $\\mathcal G_X$ be the intersection of all full replete classes of objects of $D(\\mathcal A_X)$ with the following properties. They contain zero and $JL[0]$ for every support chain and finite scalar local model $L$ on its source; they are closed under integer shifts, distinguished-triangle extensions, and retracts [def-weil-triangulated-subcategory]. A retract means maps $K\\xrightarrow{i}L\\xrightarrow{p}K$ with $pi=\\mathrm{id}_K$. They are closed under all small products in the derived category [def-weil-category-product]. Finally, whenever $I$ is a small filtered category and $C_i^\\bullet$ is a strict diagram of complexes of $\\Lambda_X$-modules with a common termwise lower bound and every $Q(C_i^\\bullet)$ in the class, the class contains $Q(\\varinjlim_i C_i^\\bullet)$, where the colimit is termwise in module sheaves and $Q$ is localization at quasi-isomorphisms [def-weil-pbc-category-colimit, def-weil-abstract-derived-category]. This paragraph is the explicit meaning of $\\mathcal G_X$, not an appeal to an unspecified closure convention.\n\nFor every support chain over $X$ and every actual module morphism $u:L\\to M$ between finite scalar local models on its source, one has\n$$J(\\operatorname{im}u)[0]\\in\\mathcal G_X.$$\nThe image is the abelian module-sheaf image. Covers and scalar modules for $L,M$ may differ, and the maps may have arbitrary continuous matrix entries. This includes the full all-continuous norm-topological $\\Omega$ coefficient and integral torsion local models. No closed pair, cohomology comparison, torsion-rigidity assumption, Noetherianity, cohomological-dimension bound, or finite-subextension-valued restriction is assumed. Empty schemes, zero coefficient rings, zero maps, identity maps and empty support chains are included.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient (commit 66b1ce0e791, coord/changes/L-coefficient-allcontinuous-removal.md). That commit narrowed the roots of this chain (weak-Serre generation, torsion-cd Serre transfer) to A, Z_l, O_E, Q_l, E, but this statement still listed the all-continuous case. It is dropped here and from the Lean hypothesis (landing L 20261025T093525); the remaining coefficients are unchanged. No citer uses the dropped case.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   },
+   {
+    "id": "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   },
+   {
+    "id": "lem-sfb-weak-serre-supported-derived-generation",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e944c",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261025T162509-L-464154",
+  "kind": "interface",
+  "note": "independent cc review: item proof (kernel lemma + path extension + SES single triangle) against node plan steps 1-7; moved hull defs verbatim against clone; importers WeakSerreSupportedDerivedGeneration and SupportedImageRigidityFromModelComparisons compiled against delivered modules"
+ }
+}

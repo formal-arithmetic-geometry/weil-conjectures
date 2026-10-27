@@ -1,0 +1,139 @@
+{
+ "id": "def-pur-etale-graph-product-interchange",
+ "kind": "definition",
+ "title": "The explicit common interchange boundary in the product grid",
+ "statement": "For finite A and two supplied diagrams, use F,G,H,BV,BW,E,K,R,P from [lem-pur-etale-graph-product-geometry]. The productLiftInterchange from F.functor followed by R(G.a) to R(H.a) J(E) R(R) is the inverse exchange for the Cartesian square B, with its two proper compositors. The productSquareInterchange from that word followed by J(G.e) R(G.p) to H.functor is the normalized exchange for the product square Q0, with open and proper compositors. productInterchange is their composite, from F.functor followed by G.functor to H.functor. All maps are these explicit isomorphisms, without any arbitrary choice of a map between the endpoints.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+ },
+ "stmt_deps": [
+  "lem-pur-etale-graph-product-geometry",
+  "def-pur-etale-graph-interchange-data",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [
+  {
+   "text": "Split the proper composite F.p G.a as BV R. Apply the inverse normalized exchange for B, and combine F.a BW=H.a. This defines productLiftInterchange. Apply the exchange for the product Q0, combine E K=H.e and P G.p=H.p, to define productSquareInterchange. Compose after the canonical associator to obtain productInterchange.",
+   "uses": [
+    "lem-pur-etale-graph-product-geometry",
+    "def-pur-etale-graph-interchange-data",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-graph-product-geometry",
+  "def-pur-etale-graph-interchange-data",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, the indicated strict substep of the product-graph extension; formalization by V1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper maps to graph neighborhoods and inverse triangle interchange are compatible with shrinking the supporting open immersion",
+   "results": "IsProper.instMorphismRestrict; Scheme.Hom.app_appIso_inv; sheafed-space open-immersion inverse formulas; proper-map restrictions. None states the derived graph pasting equality.",
+   "date": "2026-10-24",
+   "verdict": "No match for the graph construction or its specified derived maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "product graph grid row boundary proper open exchange",
+   "results": "Combinatorial graph and Young-diagram results, not scheme graph comparisons.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback.map\"",
+   "results": "pullback.mapDesc, pullback.map, pullback.map_comp, pullback.map_id, IsPullback.map_fst_comp_fst_snd_comp_fst. Used the pullback-map API for geometry; no derived word equality.",
+   "date": "2026-10-24",
+   "verdict": "Geometry API applies to the projection steps; it does not state the complete assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "graphNeighborhoodShrink|graphSide₂|productInterchange|productBV",
+   "results": "No Mathlib declarations with these graph-neighborhood or derived product-boundary constructions.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Explicit common product boundary for proper direct image and extension by zero on unbounded etale derived categories",
+   "results": "AB4StarOfSize, manifold product boundaries, formal etale tensor products and DerivedCategory.instHasZeroObject; no proper/open product word.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonInterchange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence. Missing comparison/interchange square when changing the graph presentations; Stacks 0F7J independence-of-choices argument.",
+   "via": [
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProductInterchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProductInterchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram.productInterchange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram.productF₀",
+   "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram.productLiftInterchange",
+   "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram.productSquareInterchange",
+   "AlgebraicGeometry.Etale.EtaleGraphInterchangeDiagram.productInterchange"
+  ],
+  "statement": "def productInterchange : (d₁.productF d₂).functor A ⋙ (d₁.productG d₂).functor A ≅ (d₁.productH d₂).functor A",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-b198d",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261024T020820-L-2671853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-b198d",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261024T020820-L-2671853",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs live (byte-identical); moved defs in EtaleGraphInterchangeData vs live item module (bodies verbatim); three new sorry statements (side/middle/row pasting) vs plan steps 2,6-7 and the explicit graph-model, pairwise-lambda and pinned exchange-cube Γ definitions; node lean records vs files"
+ }
+}

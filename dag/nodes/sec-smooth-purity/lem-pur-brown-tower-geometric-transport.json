@@ -1,0 +1,307 @@
+{
+ "id": "lem-pur-brown-tower-geometric-transport",
+ "kind": "statement",
+ "title": "Geometric tower comparisons before transporting the Brown counit",
+ "statement": "Fix distinct primes p and l, a field k of characteristic p, separated finite-type k-schemes X and Y and a k-morphism f : X → Y [def-weil-pbc-scheme-conventions]. Fix a finite extension E/Q_l, its valuation ring O and a uniformizer t [def-weil-l-adic-coefficient-extension], and a compactification c of f [def-weil-compactifications-refinements]. Let S be the ordinary unbounded derived strict-system compact-support presentation and G its chosen linear Brown right adjoint [lem-pur-etale-tower-brown-adjunction]. There exist a finite-evaluation package H [def-pur-brown-finite-evaluation] and the following geometric data, chosen simultaneously: the actual system site adjunctions V_X and V_Y with constant-module realizations equal to those of H, and the actual pro-etale proper/open compact-support functor P [def-pur-brown-system-site]. There is a natural transformation d : S.functor ⋙ V_Y.inverse → V_X.inverse ⋙ P and finite-evaluation isomorphisms for P. Their evaluated components satisfy precisely the canonical finite compact-support site-comparison equation of [def-pur-brown-bounded-transport]. The components of d and the two site units are invertible on bounded-below objects; the site counits are invertible on bounded-below objects of levelwise etale origin. If C is a bounded-below normalized pro-etale system of etale origin whose finite realizations are constructible finite-Tor complexes, and all finite exceptional images have one common lower bound a, then G(V_Y.direct C) and V_X.inverse(G(V_Y.direct C)) have lower bound a and the latter is normalized. This assertion chooses neither the transported exceptional counit nor any Hom equivalence; those are subsequently constructed from d and the three adjunctions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Tower adjunction and bounded-below site comparison preceding the first Hom display; refined by Zheng Construction 4.1 and Lemmas 4.10, 5.16 and 5.22."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-tower-brown-adjunction",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "def-pur-brown-tower-realization",
+  "def-pur-brown-finite-evaluation",
+  "def-pur-brown-system-site",
+  "def-pur-brown-bounded-transport"
+ ],
+ "proof": [
+  {
+   "text": "All schemes in the chosen compactification are Noetherian: a field is Noetherian since its only ideals are zero and the whole field, finite-type schemes over it are Noetherian, and the proper finite-type factor $g$ makes $\\overline X$ Noetherian too. Thus the ordinary etale compact-support and scalar comparison hypotheses apply. Write $L_n^T=LE_n^T$, $G=G^{\\mathrm{et}}$ and $F=F^{\\mathrm{et}}$ until Step 10. Let $a_n:e_nF\\cong F_ne_n$ be the canonical evaluated proper/open comparison. The Brown-adjunction node supplies this comparison, compatible with transitions, on all unbounded objects. Define $\\chi_{n,P}:L_n^YF_nP\\to FL_n^XP$ by the $L_n^Y\\dashv e_n$ transpose of $F_nP\\cong F_ne_nL_n^XP\\xrightarrow{a_n^{-1}}e_nFL_n^XP$. The first isomorphism uses $e_nL_n^X\\cong1$ from the evaluation-extension formula. This defines a natural transformation in the derived category of whole systems; it is the meaning of the identity transpose in the statement.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pur-etale-tower-brown-adjunction",
+    "lem-pur-coefficient-evaluation-derived-left-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "For $q\\le n$ let $T_{nq}=-\\otimes^L_{A_n}A_q$. Under the evaluation formulas, $e_q\\chi_n$ is the canonical compact-support coefficient map $q_{nq}:T_{nq}F_n\\to F_qT_{nq}$. To check the named arrow, the $L_n$-transpose at $q$ first tensors the level-$n$ identity and then follows the transition of $FL_nP$. The transition formula for derived direct image is its coefficient counit mate, and extension by zero acts termwise. Thus this is exactly the proper coefficient counit mate followed by the open balancing map defining $q_{nq}$. This calculation uses the actual transition/Hom formulas, not faithfulness of evaluations. The unbounded scalar-coherence node says every $q_{nq}$ is invertible, without quotient flatness. For $q>n$ both sides evaluate to zero. Joint conservativity therefore makes $\\chi_n$ invertible on all $P$.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-pur-etale-tower-brown-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "For $P\\in D(X_{\\mathrm{et}},A_n)$ and arbitrary $Q$, compose the natural bijections\n$$\\operatorname{Hom}(P,e_nGQ)\\cong\\operatorname{Hom}(L_n^XP,GQ)\\cong\\operatorname{Hom}(FL_n^XP,Q)\\cong\\operatorname{Hom}(L_n^YF_nP,Q)\\cong\\operatorname{Hom}(F_nP,e_nQ)\\cong\\operatorname{Hom}(P,f_n^\\times e_nQ).$$\nThe middle map precomposes with $\\chi_{n,P}$. Yoneda gives a unique natural isomorphism $\\theta_{n,Q}:e_nGQ\\cong f_n^\\times e_nQ$. Here Yoneda is used only between the two represented Hom functors, precisely the fully faithful representable statement. Every operation is natural on derived morphisms. There is no constructibility restriction in this calculation.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-etale-tower-brown-adjunction",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "Let $\\epsilon:FG\\to1$ and $\\epsilon_n:F_nf_n^\\times\\to1$ be the chosen counits. Apply the Hom chain to the identity of $e_nGQ$. Its finite transpose is\n$$\\epsilon_{n,e_nQ}\\circ F_n(\\theta_{n,Q})=e_n(\\epsilon_Q)\\circ a_{n,GQ}^{-1}.$$\nIndeed the first evaluation transpose is the extension counit $L_n e_nGQ\\to GQ$; naturality of $a_n$ and the defining transpose of $\\chi_n$ cancel the extension unit/counit by a triangle identity. This proves compatibility with the evaluated counit for the specified, rather than an arbitrary, isomorphism. Equivalently, the mate of $\\chi_n^{-1}:FL_n^X\\to L_n^YF_n$ under $F\\dashv G$, $F_n\\dashv f_n^\\times$ is $L_n^Xf_n^\\times\\to GL_n^Y$, and the same Hom chain gives its evaluation mate $\\theta_n$.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "For $m\\ge n$ put $T_X=-\\otimes^L_{A_m}A_n$, $T_Y=-\\otimes^L_{A_m}A_n$ and use $q:T_YF_m\\cong F_nT_X$ from Step 2. Transpose the level-$m$ counit identity of Step 4 along the actual transition of $Q$. The extension-adjunction formula for $\\sigma_{mn}$ identifies precomposition with that map with $t^{GQ}_{mn}\\circ T_X(-)$. Naturality of the whole-system counit $\\epsilon$ then gives\n$$\\epsilon_{n,Q_n}\\circ F_n(\\theta_{n,Q}\\,t^{GQ}_{mn})\n=t^Q_{mn}\\circ T_Y(\\epsilon_{m,Q_m})\\circ q^{-1}_{f_m^\\times Q_m}\\circ F_n(T_X\\theta_{m,Q}).$$\nBoth sides are maps $F_nT_X e_mGQ\\to Q_n$. By injectivity of the finite adjunction transpose, the actual transition, in $\\theta$ coordinates, is\n$$T_X f_m^\\times Q_m\\xrightarrow{b_{mn}}f_n^\\times T_YQ_m\\xrightarrow{f_n^\\times(t^Q_{mn})}f_n^\\times Q_n,$$\nwhere $b_{mn}$ is the transpose of $T_Y\\epsilon_m\\circ q^{-1}$. This argument works for arbitrary $Q$; it does not claim the ordinary unbounded $b_{mn}$ is invertible.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-etale-compact-scalar-coherence",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "These identifications respect $m\\to n\\to r$: use the actual composition law for $\\sigma$ and the tensor associators, then apply the same successive adjunction transposes to $\\epsilon$. Mate pasting says the successive transposes equal the transpose of the pasted map; identities give identities. In particular the transition equations of Step 5 are equalities of natural transformations obtained from the whole-system counit and extension adjunctions. Their cocycle is the cocycle of those actual transitions (with the scalar restriction compositors inserted), not an inference from equality of evaluations of two unrelated system morphisms.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-system-derived-transition-coherence",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "Put $U_T=\\nu_{T,\\bullet}^*$ and $V_T=R\\nu_{T,\\bullet,*}$. The system comparison gives $U_T\\dashv V_T$, evaluation compatibility and the counit isomorphism $U_TV_TM\\cong M$ for bounded-below etale-origin $M$. For any bounded-below etale system $H$, the evaluated unit $H\\to V_TU_TH$ is the finite site unit, hence invertible by the finite site-comparison theorem. Joint conservativity makes the system unit invertible. Thus $U_T$ is fully faithful on all such bounded-below objects and morphisms, with inverse $V_T$ on the bounded-below origin subcategory. The exact pullback $U_T$ preserves bounds; $V_T$ preserves lower bounds by the system comparison. For the stated $C$, $Q=V_YC$ is consequently bounded below and normalized, and $U_YQ\\cong C$. The finite and geometric packages are chosen simultaneously, so their fixed-module support and coefficient realizations agree; the claim is not extension of every arbitrary package H.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-system-derived-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "By Step 3 and the evaluation formula for $V_Y$, $\\nu_X^*e_nGQ\\cong\\nu_X^* f_n^\\times R\\nu_{Y,*}C_n=Rf_n^!C_n$. The finite-adjoint-comparison node defines exactly this transported exceptional functor and gives its counit normalization and invertible quotient mates on the finite constructible finite-Tor inputs. Exact inverse image reflects every cohomological lower bound: $H^i(\\nu_X^*Z)=\\nu_X^*H^i(Z)$, and full faithfulness on degree-zero objects implies $\\nu_X^*H=0$ only if $H=0$ (the identity of $H$ must vanish). This applies even when $Z$ is unbounded. The assumed common lower bound on the displayed exceptional images is therefore a common lower bound on every $e_nGQ$. The system-evaluation bound criterion implies $GQ$ has that lower bound. Hence $N=U_XGQ$ is bounded below, with the asserted finite evaluations.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-system-derived-evaluation",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "Transport Step 5 through $\\nu^*$ and $U_YQ\\cong C$. The specified finite compact-support scalar/site square identifies $q$ with the finite pro-etale projection, and the finite-adjoint-comparison node identifies the counits. Taking the same finite adjunction transpose therefore identifies the transported transition with $Rf_n^!(t^C_{mn})\\circ b_{mn,C_m}$. The etale witnesses $Q_m=R\\nu_{Y,*}C_m$ are bounded constructible finite-Tor: the finite-ring constructible-origin theorem and the Noetherian Tor-comparison equivalence identify this class on the two sites. The same applies to $e_mGQ$ using its exceptional-image identification and finite-adjoint preservation. Hence the coefficient-compatibility theorem applies to these etale inputs and their pro-etale images: all schemes are separated finite type over the given characteristic-$p$ field, and $\\ell\\ne p$. It allows nonflat quotients. Both $b_{mn,C_m}$ and $t^C_{mn}$ are invertible. Thus each adjoint transition of $N$ is invertible: $N$ is normalized. Counits and quotient cocycles have the specified normalization because the finite comparison fixes the counit equation and the mate composition law.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  },
+  {
+   "text": "Now write $F^p=Rg_{*,\\bullet}^{\\mathrm{proet}}j_{!,\\bullet}^{\\mathrm{proet}}$. There is an actual natural comparison $d:U_YF\\to F^pU_X$: paste the system direct-image mate for the square $\\nu_{\\bar X}^*g_{\\mathrm{et}}^*\\cong g_{\\mathrm{proet}}^*\\nu_Y^*$ with the open comparison. These are whole-system transformations furnished by semilinear derived sections and mate pasting. The open comparison is formed termwise, from the sheaf comparison and exact extension by zero. At each $n$, $d_H$ is the named bounded-below compact-support site isomorphism for $H_n$. Thus for bounded-below $H$, conservativity makes $d_H$ invertible. All its objects are bounded below: open extension and inverse image are exact, while right-derived direct images preserve lower bounds. This constructs $d$, including its action on morphisms, before checking its invertibility.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-class-compact-support-comparison",
+    "lem-pur-exact-derived-adjunction-bounds",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, Lemma 4.10, Construction 5.15, Lemmas 5.16 and 5.22 (printed pp. 21, 23, 35–36); agent ordinary-derived adjunction argument and bounded site transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-pur-etale-tower-brown-adjunction",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-system-derived-transition-coherence",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 4.1, Lemmas 4.10, 5.16 and 5.22; original finite-site-comparison proof Steps 1–10, before the transported Hom chain."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right adjoints commute with evaluation using left adjoint extension and invertible Beck Chevalley comparison",
+   "results": "8 hits: CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv, CategoryTheory.LiftRightAdjoint.otherMap, CategoryTheory.LiftLeftAdjoint.otherMap, CategoryTheory.LiftRightAdjoint.constructRightAdjoint, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv, CategoryTheory.Adjunction.leftAdjointCompNatTrans_app",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Generic mates, adjunction restriction and evaluation provide categorical tools but not the geometric coefficient-system comparisons or normalized exceptional-image bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*[Cc]ompos|[Ii]so.*[Mm]ate",
+   "results": "7 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Sites/Adjunction.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Generic mates, adjunction restriction and evaluation provide categorical tools but not the geometric coefficient-system comparisons or normalized exceptional-image bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an adjunction transports along fully faithful functors on bounded below objects with a natural compact support comparison and preserves the counit",
+   "results": "8 hits: CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CondensedSet.compactlyGeneratedAdjunction, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Generic mates, adjunction restriction and evaluation provide categorical tools but not the geometric coefficient-system comparisons or normalized exceptional-image bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComparisonAdjunctionPlus|conjugateIsoEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Generic mates, adjunction restriction and evaluation provide categorical tools but not the geometric coefficient-system comparisons or normalized exceptional-image bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transport under full faithful functors counit bijection Hom",
+   "results": "8 hits: CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful, CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit, CategoryTheory.Functor.FullyFaithful.casesOn, CategoryTheory.Adjunction.isIso_counit_app_of_iso, CategoryTheory.ObjectProperty.isColocal_adj_counit_app, CategoryTheory.unitCompPartialBijectiveAux",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Generic mates, adjunction restriction and evaluation provide categorical tools but not the geometric coefficient-system comparisons or normalized exceptional-image bounds."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BrownTowerFiniteSiteComparison",
+  "date": "2026-10-25",
+  "group": "U5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "thm-pur-rational-and-qbar-purity proof Steps 1–2 and sk-thm-purity-transport Steps 2–3, via the first tower Hom display in sk-prop-sp-integral-adjunction.proof.md; the geometric comparison preceding its Hom chain.",
+   "via": [
+    "lem-pur-brown-tower-finite-site-comparison",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "tool_uses": [
+  "def-weil-pbc-adjunction-mate",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-system-derived-transition-coherence",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BrownTowerGeometricTransport",
+  "file": "lean/Sheaf/Paper/BrownTowerGeometricTransport.lean",
+  "declaration": "AlgebraicGeometry.BrownTowerComparison.brownTowerGeometricTransport_exists",
+  "declarations": [
+   "AlgebraicGeometry.BrownTowerComparison.GeometricTransport",
+   "AlgebraicGeometry.BrownTowerComparison.brownTowerGeometricTransport_exists"
+  ],
+  "statement": "theorem brownTowerGeometricTransport_exists\n    (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (_hpl : p ≠ l)\n    (k : Type u) [Field k] [CharP k p]\n    (E : Type (u + 1)) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E]\n    (t : Padic.coefficientExtensionIntegers l E)\n    (_ht : Ideal.span ({t} : Set (Padic.coefficientExtensionIntegers l E)) =\n      Padic.coefficientExtensionMaximalIdeal l E)\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (c : Compactification f)\n    (S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) t c)\n    (G : EtaleTowerBrownAdjunction S) :\n    ∃ H : FiniteEvaluation S G, Nonempty (GeometricTransport S G H)",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-25"
+ },
+ "blueprint_search": {
+  "query": "Brown tower; geometric transport; bounded site transport",
+  "date": "2026-10-25",
+  "result": "No imported blueprint statement supplies this simultaneous geometric construction. The Brown tower search returns only def-weil-exceptional-inverse-image, which defines the full exceptional operation under the finite-field convention and does not assert this arbitrary-field system comparison. The broader geometric transport hits concern different purity/trace/coefficient-stage statements."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261025T013247-L-3946054",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261025T013247-L-3946054",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

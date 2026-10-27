@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-algebra-diagram-ordinary-unit-naturality",
+ "kind": "statement",
+ "title": "Ordinary scalar units and coefficient naturality",
+ "statement": "For the ordinary normalized restriction and coefficient comparisons of a coefficient square, scalar association commutes with the scalar extension units. Comparisons of the underlying coefficient modules commute with compatible maps of ring sheaves represented by their actual sectionwise module maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E and 06YU; scalar-unit refinement with sites-modules.tex Tag 03EL; parent proof steps 1–6."
+ },
+ "stmt_deps": [
+  "def-pur-algebra-diagram-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "Precompose with the inverse-image generator of the identity. The invertible structural coefficient makes this an isomorphism. Generator naturality and the scalar-association generator equation prove the unit square.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise hypotheses identify the underlying module maps with the ring maps. Precompose by the identity generator, apply the two coefficient normalization equations and cancel. The assumed ring square gives the desired equality.",
+   "uses": [
+    "lem-pur-algebra-diagram-ordinary-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-coefficient-arrows",
+  "lem-pur-algebra-diagram-ordinary-comparisons",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit formalization of the parent scalar/unit refinement of Tags 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with exact geometric inverse image and its tensor comparison preserves scalar extension units",
+   "results": "Ordinary ModuleCat.extendScalars identity and adjunction unit lemmas; no normalized derived ringed-site comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; reuse ordinary adjunction and localization lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived tensor with a module in degree zero and scalar extension units on ringed sites",
+   "results": "PresheafOfModules tensor definitions and SheafOfModules pullback free-module unit formulas; no derived normalized statement.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySquareIso",
+   "results": "Unknown identifier in Mathlib search; this comparison is project-local.",
+   "date": "2026-10-25",
+   "verdict": "Use existing project comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|kFlat.*single.*tensor|ScalarDerivedPresentation",
+   "results": "0 Mathlib hits; project source supplies exact localization and K-flat comparison tools.",
+   "date": "2026-10-25",
+   "verdict": "No direct Mathlib match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramPullbackExtensionCoherence",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof steps 6-7 and 10). Original normalization proof steps 1-2: scalar-unit and tensor pullback comparison.",
+   "via": [
+    "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlgebraDiagramOrdinaryUnitNaturality",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraDiagramOrdinaryUnitNaturality.lean",
+  "declaration": "CategoryTheory.AlgebraDiagramPullback.coefficient_naturality",
+  "declarations": [
+   "CategoryTheory.AlgebraDiagramPullback.ordinary_unit_square",
+   "CategoryTheory.AlgebraDiagramPullback.coefficient_naturality"
+  ],
+  "statement": "theorem coefficient_naturality\n    (f : RingedPullback.{u, u, u, u, u} R S)\n    (k : Comparison.{u, u, u, u, u} f)\n    [IsIso f.coefficient]\n    (d d' : CoefficientSquare.{u, u, u, u, u} f)\n    (beta : f.L.obj (coefficient d.sourceMap) ≅ coefficient d.targetMap)\n    (beta' : f.L.obj (coefficient d'.sourceMap) ≅ coefficient d'.targetMap)\n    (hb : ∀ (Z : Sheaf K (Type u))\n      (x : Z ⟶ (underlying.{u, u, u} R).obj (coefficient d.sourceMap)),\n      generator f k x ≫ (underlying.{u, u, u} S).map beta.hom =\n        f.uInv.map x ≫ d.I'.ringUnderlying.hom ≫\n          (sheafCompose L (forget CommRingCat.{u})).map d.coefficient')\n    (hb' : ∀ (Z : Sheaf K (Type u))\n      (x : Z ⟶ (underlying.{u, u, u} R).obj (coefficient d'.sourceMap)),\n      generator f k x ≫ (underlying.{u, u, u} S).map beta'.hom =\n        f.uInv.map x ≫ d'.I'.ringUnderlying.hom ≫\n          (sheafCompose L (forget CommRingCat.{u})).map d'.coefficient')\n    (psiY : d.R' ⟶ d'.R') (psiX : d.S' ⟶ d'.S')\n    (hc : f.uInv.map ((sheafCompose K (forget CommRingCat.{u})).map psiY) ≫\n      d'.I'.ringUnderlying.hom ≫\n        (sheafCompose L (forget CommRingCat.{u})).map d'.coefficient' =\n      d.I'.ringUnderlying.hom ≫\n        (sheafCompose L (forget CommRingCat.{u})).map d.coefficient' ≫\n        (sheafCompose L (forget CommRingCat.{u})).map psiX)\n    (hY : coefficient d.sourceMap ⟶ coefficient d'.sourceMap)\n    (hX : coefficient d.targetMap ⟶ coefficient d'.targetMap)\n    (hy : ∀ (V : Cᵒᵖ) (b : d.R'.obj.obj V), hY.val.app V b = psiY.hom.app V b)\n    (hx : ∀ (V : Dᵒᵖ) (b : d.S'.obj.obj V), hX.val.app V b = psiX.hom.app V b) :\n    f.L.map hY ≫ beta'.hom = beta.hom ≫ hX",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e45d3",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T095621-L-3454102",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e45d3",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T095621-L-3454102",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); AlgebraDiagramPullbackData vs clone's removed block (verbatim apart from dropped proof-only imports, one docstring line and a local instance attribute); ambient_balancing vs Coherence.tensor_coherence with pinned normalizations; 12 node lean.statement vs Lean files; delivered modules + importer TowerChernPullback compiled in /tmp sandbox (exit 0); #print axioms on all proved constituents"
+ }
+}

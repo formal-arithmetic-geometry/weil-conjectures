@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-p1-trace-transport-pasting",
+ "kind": "statement",
+ "title": "Categorical naturality pasting for trace transport",
+ "statement": "Let C,D,E,W,Z be categories. Let P:C→D, Q:E→C, F:E→D, H:C→E, R:Z→D, R₀:W→C, U:W→Z, V:C→W, W₀:D→Z and T,T₀:D→E be functors, with natural isomorphisms b:U⋙R≅R₀⋙P, d:H⋙Q≅V⋙R₀, s:P⋙W₀≅V⋙U, e:T⋙F≅W₀⋙R, c:F≅Q⋙P and z:T≅T₀. Choose B in C, B' in D, L in W, K in Z, isomorphisms a:U(L)≅K, v:V(B)≅L, l:P(B)≅B', k:W₀(B')≅K, and an arrow g:T₀(P(B))→H(B). Choose J,J' in E, J₀ in C, J₁ in D, and arrows u:J→J', uQ:Q(J)→J₀, uP:P(J₀)→J₁, uF:F(J')→J₁. Suppose (1) b.hom at V(B) followed by P(d.inv at B) equals R(s.inv at B), e.inv at P(B), F(z.hom at P(B) followed by g), c.hom at H(B); (2) a.inv followed by U(v.inv) and s.inv at B equals k.inv followed by W₀(l.inv); (3) c.hom at J followed by P(uQ) and uP equals F(u) followed by uF. Lists of arrows are composed in their written order. Then for every τ:H(B)→J, middleComposite R b a from def-sf-p1-integral-transport-data, followed by P(R₀(v.inv) followed by d.inv at B), P(Q(τ) followed by uQ), and uP equals R(k.inv), followed by e.inv at B', F(z.hom at B' followed by T₀(l.inv), g, τ, u), and uF. No invertibility of g, τ or the unit arrows is assumed. Here the five-factor expression inside F is packaged by the actual generic construction traceComposite from def-sf-p1-integral-transport-data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The categorical naturality calculation carrying the arbitrary trace through the three comparison squares in the second triangle."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of b to move v.inv across the middle comparison. Apply the geometric equation (1), combine the three consecutive R-images and use the coefficient equation (2). Naturality of e.inv moves l.inv across exchange. Naturality of c.hom moves the arbitrary trace tau across pullback composition. Equation (3) finishes the unit factors. Functoriality and associativity justify each reassociation. Finally naturality of z moves the inverse coefficient comparison to the ordinary direct-image side of forget-supports.",
+   "uses": [
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The categorical naturality pasting in the second triangle calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chain of naturality squares pastes to a trace transport identity, with coefficient and unit comparison squares",
+   "results": "Eight hits, including CatCommSq.iso_hom_naturality_assoc and mateEquiv_square. These give individual naturality and mate squares, not the displayed chain with separate coefficient and unit hypotheses.",
+   "date": "2026-10-26",
+   "verdict": "Use elementary naturality directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits including CategoryTheory.NatTrans.naturality in Mathlib.CategoryTheory.NatTrans; used in the proof for b, e, c and z.",
+   "date": "2026-10-26",
+   "verdict": "Ingredient used."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*naturality|map_comp_assoc",
+   "results": "Twenty-five hits displaying reassociated naturality and Functor.map_comp_assoc in existing categorical calculations. The proof uses these elementary reassociation operations.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients used; no exact packaged chain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of isomorphisms between functors, functor composition and preservation of tensor units by monoidal functors",
+   "results": "Eight hits, including Functor.CoreMonoidal.muIso_hom_natural_left, Functor.Monoidal.muNatIso, and unitOfTensorIsoUnit_hom_app. These provide general monoidal naturality, but not the constructed cached constant-object normalization or the specific pasted trace equation.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; retain the proved concrete normalization and categorical pasting calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransportTrue",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-p1-projection-trace-transport-true",
+   "place": "The generic naturality calculation combining the three comparison squares.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1TraceTransportPasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1TraceTransportPasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.traceTransportPasting",
+  "statement": "theorem traceTransportPasting\n    {C D E W Z : Type*} [Category C] [Category D] [Category E]\n    [Category W] [Category Z]\n    (P : C ⥤ D) (Q : E ⥤ C) (F : E ⥤ D) (H : C ⥤ E)\n    (R : Z ⥤ D) (R₀ : W ⥤ C) (U : W ⥤ Z) (V : C ⥤ W)\n    (W₀ : D ⥤ Z) (T : D ⥤ E)\n    (b : U ⋙ R ≅ R₀ ⋙ P) (d : H ⋙ Q ≅ V ⋙ R₀)\n    (s : P ⋙ W₀ ≅ V ⋙ U) (e : T ⋙ F ≅ W₀ ⋙ R) (c : F ≅ Q ⋙ P)\n    {B : C} {B' : D} {L : W} {K : Z}\n    (a : U.obj L ≅ K) (v : V.obj B ≅ L) (l : P.obj B ≅ B')\n    (k : W₀.obj B' ≅ K) (T₀ : D ⥤ E) (z : T ≅ T₀)\n    (g : T₀.obj (P.obj B) ⟶ H.obj B)\n    {J J' : E} {J₀ : C} {J₁ : D}\n    (u : J ⟶ J') (uQ : Q.obj J ⟶ J₀) (uP : P.obj J₀ ⟶ J₁)\n    (uF : F.obj J' ⟶ J₁) (τ : H.obj B ⟶ J)\n    (hb : b.hom.app (V.obj B) ≫ P.map (d.inv.app B) =\n      R.map (s.inv.app B) ≫ e.inv.app (P.obj B) ≫\n        F.map (z.hom.app (P.obj B) ≫ g) ≫ c.hom.app (H.obj B))\n    (ha : a.inv ≫ U.map v.inv ≫ s.inv.app B = k.inv ≫ W₀.map l.inv)\n    (hu : c.hom.app J ≫ P.map uQ ≫ uP = F.map u ≫ uF) :\n    middleComposite R b a ≫ P.map (R₀.map v.inv ≫ d.inv.app B) ≫\n        P.map (Q.map τ ≫ uQ) ≫ uP =\n      R.map k.inv ≫ e.inv.app B' ≫ F.map (traceComposite T T₀ z l g τ u) ≫ uF",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SfP1Transport.traceTransportPasting"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "independent cc review: item proof + presentationExchange sorry vs nodes lem-sf-p1-projection-trace-transport-true / lem-sf-p1-presentation-exchange; trace refactor vs change record sf-p1-trace-factorization and clone; forced adaptation ProjectiveLineTraceNormalization vs clone diff; all 11 direct importers compiled OK against the delivered set"
+ }
+}

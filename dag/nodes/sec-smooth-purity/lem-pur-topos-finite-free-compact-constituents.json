@@ -1,0 +1,489 @@
+{
+ "id": "lem-pur-topos-finite-free-compact-constituents",
+ "kind": "statement",
+ "title": "Finite-free scalar comparison for direct-image/open composites on topoi",
+ "statement": "Use Grothendieck topoi with fixed small-site presentations [def-weil-pbc-topos] and constant sheaves of commutative rings. A morphism of topoi $v:T\\to W$ means an adjunction $v^{-1}\\dashv v_*$ with $v^{-1}$ preserving finite limits. For a ring $R$, write $D_R(T)$ for the ordinary unbounded derived category of sheaves of $R$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $L_{v,R}=v^{-1}$ and $R_{v,R}=Rv_*$, with their derived adjunction and counit $\\varepsilon_{v,R}$. An open embedding means the inclusion of the slice topos of a subterminal object; its exact extension by zero $I_{j,R}$ is left adjoint to $L_{j,R}$, fully faithful, with unit $\\eta_{j,R}:1\\xrightarrow{\\sim}L_{j,R}I_{j,R}$. All equations below insert the canonical inverse-image and direct-image compositors. For a unital ring map $A\\to B$ put $S_T=-\\otimes_A^LB$ [lem-pur-derived-change-of-rings] and let $U_T:D_B(T)\\to D_A(T)$ be exact restriction of scalars. Use the canonical tensor/pullback comparison $\\lambda_v:L_{v,B}S_W\\xrightarrow{\\sim}S_TL_{v,A}$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Define $\\chi_v:S_WR_{v,A}\\to R_{v,B}S_T$ as the adjoint transpose of $S_T(\\varepsilon_{v,A})\\lambda_v$ [def-weil-pbc-adjunction-mate], and, for an open embedding $j:V\\hookrightarrow T$, $\\beta_j:S_TI_{j,A}\\xrightarrow{\\sim}I_{j,B}S_V$ as the balancing map induced by tensoring sections on the open and the zero map on its complement. Assume that $B$ is finite free as an $A$-module. Let $j:X\\hookrightarrow T$ be an open embedding and $p:T\\to Y$ any morphism of these topoi, and set $F_R=R_{p,R}I_{j,R}$. Then $\\chi_p$, $\\beta_j$, and\n$$c_{p,j}=R_{p,B}(\\beta_j)\\,\\chi_{p,I_{j,A}(-)}:S_YF_A\\xrightarrow{\\sim}F_BS_X$$\nare natural isomorphisms in the $B$-linear derived categories, on every unbounded input. If a finite $A$-basis $(b_a)_{a\\in I}$ of $B$ is chosen, exact scalar extension is represented on every complex by termwise tensor. Under $U S\\cong\\bigoplus_{a\\in I}1$, the map $U(\\chi_p)$ is precisely the canonical finite-biproduct comparison $\\bigoplus_I R_{p,A}\\to R_{p,A}\\bigoplus_I$, and $U(\\beta_j)$ is the analogous comparison for $I_{j,A}$. This assertion specifies the maps under restriction, not just their invertibility.\n\nLet $\\rho:F_AU_X\\xrightarrow{\\sim}U_YF_B$ be the composite of the canonical restriction/direct-image and restriction/open-extension identifications, obtained on complexes by the identity on underlying sections and then by derived adjunction. With $\\eta^S:1\\to U S$ the scalar-extension unit, the $S_Y\\dashv U_Y$ transpose of $c_{p,j,M}$ is exactly\n$$F_AM\\xrightarrow{F_A(\\eta^S_M)}F_AU_XS_XM\\xrightarrow{\\rho_{S_XM}}U_YF_BS_XM.$$\nFor composable morphisms $v,w$ and composable open embeddings $j_1,j_2$, respectively, the same specified maps satisfy\n$$\\chi_{wv}=R_{w,B}(\\chi_v)\\,\\chi_{w,R_{v,A}(-)},\\qquad\n\\beta_{j_2j_1}=I_{j_2,B}(\\beta_{j_1})\\,\\beta_{j_2,I_{j_1,A}(-)}.$$\nFor every open $j$ they also satisfy the unit-normalization identity\n$$S_V(\\eta_{j,A,M}^{-1})\\lambda_{j,I_{j,A}M}\n=\\eta_{j,B,S_VM}^{-1}L_{j,B}(\\beta_{j,M}).$$\nThe equalities retain the $B$ action and are independent of the chosen basis and of all resolutions. No finiteness, properness or scheme presentation of the topoi is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 1–3: finite-free representatives and constituent/counit normalization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-adjunction-mate",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-pur-localized-ringed-site",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Lean formal reduction of the constituent assertions: the iterated mates equivalence identifies restrictionPushforward with the conjugate of tensorPullbackInv. Conjugation preserves isomorphisms, so tensorPullbackInv_isIso proves restrictionPushforward_isIso. Likewise betaInv is the inverse double mate of tau, hence the inverse conjugate of that isomorphism; this proves betaInv_isIso without a separate extension-by-zero balancing proof. The ordinary open units are invertible by the recorded Open.unitA and Open.unitB assumptions. The unit of their localized adjunction on a complex is the image of the termwise unit, composed with the localization factor isomorphisms. Componentwise invertibility and essential surjectivity of the derived localization prove open_units_isIso. Finally unit_mateEquiv_symm applied to lambda.inv gives the betaInv unit equation; invert both sides to obtain beta_unit. These are formal adjunction arguments and do not assert that derived coefficient restriction is faithful. D3 formalizes the main finiteFreeCompactConstituents theorem from the existing finiteFreeCompactCoordinates statement: choose a finite basis, construct the matrix inverse as the sum of coordinate projection/inclusion composites, and apply the direct-image column identity. Exact scalar restriction reflects isomorphisms because it commutes with every homology functor and reflects ordinary module-sheaf isomorphisms. The chi scalar transpose follows by inverse geometric transposition, the tau mate counit equation, tau naturality and the scalar-unit identity for lambda inverse. The beta scalar transpose follows by the inverse-double-mate conjugation identity, followed by the scalar mate unit equation. Finally naturality of restrictionPushforward moves beta through the direct-image comparison, leaving exactly FA of the scalar unit followed by rho. No new assumed statement is introduced.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1 (finite coefficient compatibility) and Step 3 (coefficient-field extensions); agent abstraction of returned finite-free compact-support proof Steps 1–3: finite-free representatives and constituent/counit normalization"
+   }
+  },
+  {
+   "text": "J4 formalizes scalar_exact without any new hole. Ordinary left exactness is proved by the finite-free constant-scalar coordinate construction at independent site and coefficient universes (lem-pur-constant-finite-free-extension-left-exact). Apply sheafRingCoefficientOrdinaryAdjunction to the prescribed ordinary functor and its exact object/map equations; as a left adjoint it preserves finite colimits. The resulting exact functor preserves quasi-isomorphisms of all unbounded complexes. Its termwise functor followed by derived localization therefore inverts quasi-isomorphisms. The universal left-derived counit of the given cochain model is invertible by Functor.isIso_of_isLeftDerivedFunctor_of_inverts. No K-flatness or boundedness condition is added.",
+   "uses": [
+    "lem-pur-constant-finite-free-extension-left-exact",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ (lemma-adjointness-tensor-restrict) and Section 03EK; finite-basis construction of parent proof Step 1"
+   }
+  },
+  {
+   "text": "Fix a finite basis $(b_a)_{a\\in I}$ of $B/A$ and its coordinate maps $q_a$. For any module sheaf $M$, the maps $x\\otimes b\\mapsto(q_a(b)x)_a$ and $(x_a)_a\\mapsto\\sum_a x_a\\otimes b_a$ are mutually inverse: their composites are the identity by $b=\\sum_aq_a(b)b_a$ and $q_a(b_c)=\\delta_{ac}$. These are sheaf maps, defined first on local pure tensors and then by the sheafified tensor universal property, not by an assertion that tensor-sheaf sections are sectionwise tensors. The identities hold locally for sections of the constant coefficient sheaves, hence sheafify. They are natural in $M$. Thus $US=\\bigoplus_I1$ on module sheaves. Restriction is exact and detects zero modules by its unchanged underlying abelian sheaf, so finite-sum exactness proves ordinary extension exact. Apply exact-functor localization to identify derived extension with termwise tensor, using its canonical left-derived comparison. In particular these coordinate formulas apply to every complex, without a boundedness assumption. The scalar adjunction has unit $x\\mapsto x\\otimes1$ and transpose $x\\otimes b\\mapsto b\\,g(x)$; its representative normalization extends to arbitrary complexes here because extension is exact. On derived categories $U$ reflects isomorphisms: $U\\operatorname{Cone}(t)=0$ implies every underlying cohomology sheaf of $\\operatorname{Cone}(t)$ is zero. We use no claim that $U$ is faithful on derived morphisms.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  },
+  {
+   "text": "For a geometric morphism $v:T\\to W$, denote by $d_v:U_WR_{v,B}\\xrightarrow{\\sim}R_{v,A}U_T$ the canonical two-factorization comparison. Specialize the general ringed-coefficient restriction/counit theorem to $R_T=B_T$, $R_W=B_W$. Its map $\\tau:L_{v,A}U_W\\to U_TL_{v,B}$ is invertible: the structural map $v^{-1}B_W\\to B_T$ is the constant-coefficient identification, so $1\\otimes x\\mapsto x$ is its inverse. Its stated counit equation is\n$$U_T\\varepsilon_{v,B}\\,\\tau_{R_{v,B}N}=\\varepsilon_{v,A}\\,L_{v,A}(d_{v,N}).$$\nThe canonical $\\lambda_v$ also obeys\n$$U_T(\\lambda_{v,M})\\,\\tau_{S_WM}\\,L_{v,A}(\\eta^S_M)=\\eta^S_{L_{v,A}M}.$$\nIndeed all scalar functors are termwise by Step 1, and both sides send a local inverse-image generator $x$ to $x\\otimes1$; the balancing and sheafification universal properties determine the maps. This also proves coherence of $\\lambda$ for two geometric inverse images: both composites send a pulled-back pure tensor to that same tensor. The constant coefficient identifications are inserted throughout.",
+   "uses": [
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  },
+  {
+   "text": "We identify the scalar transpose of $\\chi_v$ before discussing coordinates. Put $R_A=R_{v,A}$ and $L_A=L_{v,A}$. By definition its geometric transpose is $S_T\\varepsilon_{v,A}\\,\\lambda_v$. Transpose the map $d_vU_W(\\chi_{v,M})\\eta^S_{R_AM}$ under $L_A\\dashv R_A$. The counit equation of Step 2 changes this transpose to\n$$U_T(S_T\\varepsilon_{v,A,M})\\,U_T\\lambda_{v,R_AM}\\,\\tau_{S_WR_AM}\\,L_A\\eta^S_{R_AM}\n=U_TS_T\\varepsilon_{v,A,M}\\,\\eta^S_{L_AR_AM}\n=\\eta^S_M\\,\\varepsilon_{v,A,M}.$$\nThe first equality is Step 2 and the second is naturality of the scalar unit. The last expression is also the transpose of $R_A(\\eta^S_M)$. The adjunction bijection therefore gives the identity in $D_A(W)$\n$$d_{v,S_TM}\\,U_W(\\chi_{v,M})\\,\\eta^S_{R_AM}=R_A(\\eta^S_M).$$\nEquivalently the scalar transpose of the specified $B$-linear $\\chi_{v,M}$ is $d_v^{-1}R_A(\\eta^S_M)$. This argument uses bijections of Hom sets, not detection of equality by forgetting scalars.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-ringed-coefficient-restriction-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  },
+  {
+   "text": "Write $i_{a,M}:M\\to U_TS_TM$ for $x\\mapsto x\\otimes b_a$, the coordinate inclusions from Step 1. The scalar transpose formula of Step 3 gives the column for $1\\in B$. Since $\\chi$ is a morphism in $D_B(W)$ it commutes with multiplication by every $b_a$. Naturality of $d_v$ with respect to the $B$-linear endomorphism multiplication by $b_a$ of $S_TM$ identifies that endomorphism with $R_A$ of multiplication by $b_a$. Multiplying the formula of Step 3 by $b_a$ thus gives\n$$d_vU_W(\\chi_{v,M})i_{a,R_AM}=R_A(i_{a,M}).$$\nThese are precisely all columns of the finite-biproduct comparison. The latter is invertible: the maps $R_A(i_a)$ and $R_A(q_a)$ satisfy $R_A(q_a)R_A(i_c)=\\delta_{ac}$ and $\\sum_aR_A(i_a)R_A(q_a)=1$, because the derived direct image is additive (its module functor and K-injective localization are additive). Thus $U\\chi_v$ is exactly the claimed map and is an isomorphism. Step 1 reflects this to an isomorphism $\\chi_v$ in $D_B(W)$. The argument includes the empty basis: its two sum identities say the relevant objects are zero.",
+   "uses": [
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  },
+  {
+   "text": "For an open embedding $j:V\\hookrightarrow T$, use its localized-site extension by zero and the general ringed-open scalar adjunction. That theorem gives $e_j:U_TI_{j,B}\\xrightarrow{\\sim}I_{j,A}U_V$, with identity on the defining sum presheaves, and gives its unit and counit identities on complexes. Its finite-sum model and exactness apply in a site presenting the subterminal slice, independently of the original site presentation. The ordinary scalar adjunction sends the balancing map $\\beta_{j,M}$ to\n$$I_{j,A}M\\xrightarrow{I_{j,A}\\eta^S_M}I_{j,A}U_VS_VM\\xrightarrow{e_j^{-1}}U_TI_{j,B}S_VM.$$\nThis follows on every defining presheaf summand from $x\\mapsto x\\otimes1$; tensor balancing and sheafification extend the calculation to sheaves. All involved functors are exact by Step 1 and the cited open theorem, so exact localization proves the same transpose on arbitrary complexes. The formula $x\\otimes b_a\\mapsto I_j(x)\\otimes b_a$ gives every restricted column. Thus $U\\beta_j$ is the finite-sum comparison for $I_{j,A}$, which is invertible by its additive sum identities. Reflection by $U$ proves the claimed $B$-linear isomorphism.",
+   "uses": [
+    "lem-cbc-ringed-open-scalar-adjunction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 03CZ (lemma-adjointness-tensor-restrict), 03CY (lemma-sheafification-presheaf-modules); explicit balancing calculation"
+   }
+  },
+  {
+   "text": "Put $d_p:U_YR_{p,B}\\to R_{p,A}U_T$ and $e_j:U_TI_{j,B}\\to I_{j,A}U_X$. The specified $\\rho:F_AU_X\\to U_YF_B$ is\n$$\\rho_N=d_{p,I_{j,B}N}^{-1}\\,R_{p,A}(e_{j,N}^{-1}).$$\nThe scalar transpose of $c_{p,j}$ is $U_YR_{p,B}(\\beta_j)U_Y(\\chi_{p,I_{j,A}M})\\eta^S_{F_AM}$. Naturality of $d_p$ moves $\\beta_j$ to $R_{p,A}U_T(\\beta_j)$; Step 3 replaces the remaining $d_pU\\chi_p\\eta^S$ by $R_{p,A}\\eta^S$. Step 5 then gives\n$$d_{p,I_{j,B}S_XM}^{-1}R_{p,A}\\bigl(U_T\\beta_{j,M}\\,\\eta^S_{I_{j,A}M}\\bigr)\n=d_{p,I_{j,B}S_XM}^{-1}R_{p,A}(e_{j,S_XM}^{-1})F_A(\\eta^S_M)\n=\\rho_{S_XM}F_A(\\eta^S_M).$$\nThis is the asserted transpose, including its prescribed $\\rho$. The two constituents are already isomorphisms by Steps 4 and 5; hence their composite $c_{p,j}$ is one on every unbounded input.",
+   "uses": [
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-cbc-ringed-open-scalar-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  },
+  {
+   "text": "For composable geometric morphisms $v:T\\to W$ and $w:W\\to Z$, use the exact inverse images and their module-induced derived adjunctions. The derived composition-normalization theorem identifies the canonical direct-image compositor with the conjugate of the inverse-image compositor. Consequently the composite counit is $\\varepsilon_v\\,L_v(\\varepsilon_w)R_v$, rather than an independently chosen adjunction structure. The tensor comparisons satisfy $\\lambda_{wv}=\\lambda_v L_{w,A}\\,L_{v,B}\\lambda_w$ by the pure-tensor calculation of Step 2. Apply pasting along the adjunctions to these two squares: the mate of this pasted $\\lambda$ is\n$$R_{w,B}(\\chi_v)\\,\\chi_{w,R_{v,A}(-)}.$$\nIts transpose is $S\\varepsilon_{wv}\\,\\lambda_{wv}$, so it equals $\\chi_{wv}$ by the defining mate bijection. This proves the first composition identity inside the $B$-linear category.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  },
+  {
+   "text": "For one open $j$ put\n$$u_M=\\lambda_{j,I_{j,A}M}^{-1}\\,S_V(\\eta_{j,A,M}):S_VM\\to L_{j,B}S_TI_{j,A}M.$$\nBy the explicit open adjunction unit, its $I_{j,B}\\dashv L_{j,B}$ adjunct is the inverse balancing map: on each extension-presheaf summand it sends $x\\otimes b$ to the same tensor $x\\otimes b$ in $S_TI_{j,A}M$. The scalar restriction/open unit identities in the ringed-open theorem identify the units in this computation with the stated ones, and exact localization preserves it. Hence\n$$L_{j,B}(\\beta_{j,M}^{-1})\\eta_{j,B,S_VM}=\\lambda_{j,I_{j,A}M}^{-1}S_V(\\eta_{j,A,M}).$$\nCompose with $\\lambda_j$, invert the two open units (they are isomorphisms for a subterminal slice), and rearrange to obtain exactly\n$$S_V(\\eta_{j,A,M}^{-1})\\lambda_{j,I_{j,A}M}=\\eta_{j,B,S_VM}^{-1}L_{j,B}(\\beta_{j,M}).$$\nThis calculation takes place through the open Hom bijection in $D_B$, not through a claim of faithfulness of $U$.",
+   "uses": [
+    "lem-cbc-ringed-open-scalar-adjunction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  },
+  {
+   "text": "Let $j_1:V\\hookrightarrow T$ and $j_2:T\\hookrightarrow Z$. The open compositor identifies $I_{j_2j_1}$ with $I_{j_2}I_{j_1}$ as the left adjoint to $L_{j_1}L_{j_2}$; its unit is $L_{j_1}(\\eta_{j_2})I_{j_1}\\,\\eta_{j_1}$. Evaluate the inverse of $I_{j_2,B}(\\beta_{j_1})\\,\\beta_{j_2,I_{j_1,A}(-)}$ under this composite open adjunction. Substituting Step 8 twice gives\n$$L_{j_1,B}(\\lambda_{j_2}^{-1})\\,\\lambda_{j_1}^{-1}\\,S_V\\bigl(L_{j_1,A}(\\eta_{j_2,A})I_{j_1,A}\\,\\eta_{j_1,A}\\bigr),$$\nwith the argument slots fixed by the composite functors. The first two factors are $\\lambda_{j_2j_1}^{-1}$ by Step 2, and the last is $S_V\\eta_{j_2j_1,A}$. This is the transpose specifying $\\beta_{j_2j_1}^{-1}$ in Step 8. Injectivity of the composite adjunction Hom bijection proves equality of the inverses and hence the second composition formula. The common-left-adjoint compositor is the canonical extension-presheaf compositor: both send a generator indexed by the nested open inclusions to the same generator; the sheafification universal property identifies them.",
+   "uses": [
+    "lem-cbc-ringed-open-scalar-adjunction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  },
+  {
+   "text": "The basis was used only to prove exactness, identify columns, and detect invertibility. The maps themselves are defined by balancing or by the specified adjunction transposes, which do not use a basis. Changing a basis changes both coordinate isomorphisms by the same finite matrix, so the displayed column statement still describes the same map. All comparisons of exact functors come from termwise localization. The remaining comparisons are the canonical derived ones; on changing K-injective representatives their transitions intertwine every map and satisfy the cocycle identity by the arbitrary-resolution computation theorem. Thus the maps and identities are independent of all resolutions, retain their $B$ action, and require only the assumed small-site presentations and finite freeness. No geometric finiteness or properness entered the proof.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent finite-free specialization and normalization calculation for blueprint sk-thm-purity-transport Steps 1 and 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-constant-finite-free-extension-left-exact",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-cbc-ringed-open-scalar-adjunction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Existing finite-free coordinate and composition plan retained; G7 formal double-mate and localization-unit reductions of four constituent assertions, 2026-10-24. D3 finite-matrix and scalar-transpose proof of the main constituent theorem from the already stated coordinates, 2026-10-26. J4 proves scalar_exact by independent-universe ordinary finite-free coordinates, the ordinary scalar adjunction and the localization universal property, 2026-10-26; other remaining clauses retain their existing plans."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary Grothendieck topoi and a finite free map of constant coefficient rings, the counit transpose scalar map commutes with derived direct image and exact extension by zero as a B-linear isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the composition of $ F $'s action on the inclus\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For a functor $F$ between sheaf of modules categories over ring sheaves $R$ and $S$, the composition of $\\\\iota_{\\\\text{Free}}(i)$ with the inverse of $\\\\text{mapFree}(F,\\\\eta,I)$ followed by a morphism $\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free sheaf and module scalar adjunction formulas do not give the normalized derived B-linear direct-image/open composite, its finite-sum model and composite scalar transpose."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite direct sum model of derived change of rings identifies the scalar adjunction counit comparison for a composite of direct image and open extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          (ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f) ⟶ CategoryTheory.Functor.id (ModuleCat S)\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, this is the counit natural transformation of the adjunction between extending scalars from $ R $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, and an $ S $-module $ Y $, this is the counit morphism of the adjunction between extending and restricting scalars. It provid\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {R : CommRingCatᵒᵖ},\\n  AlgebraicGeometry.ΓSpec.adjunction.counit.app R = AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.counit.app R\", \"doc\": \"For any commutative ring $ R $, the counit of the Γ-Spec adjunction for schemes at $ R $ is equal to the counit of the Γ-Spec adjunction for locally ringed spaces at $ R $.\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free sheaf and module scalar adjunction formulas do not give the normalized derived B-linear direct-image/open composite, its finite-sum model and composite scalar transpose."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, SheafOfModules.pushforward",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"SheafOfModules.overPushforwardOverAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] [CategoryTheory.Limits.HasBinaryProducts C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} (x : C) : SheafOfModules.pushforward (CategoryTheory.CategoryStruct.id (R.over x)) ⊣ SheafOfModules.pushforward (SheafOfMod\", \"doc\": \"The adjunction between restriction to `Over x` and pushforward along `Over.star x`.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sheaf J RingCat} {R : C\", \"doc\": \"If `F ⊣ G`, then the pushforwards along `F` and `G` are also adjoint.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sheaf J RingCat} {R : C\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sheaf J RingCat} {R : C\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Construction of a left adjoint to the functor `pushforward.{v} φ` by using the\\npullback of presheaves of modules and the sheafification.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free sheaf and module scalar adjunction formulas do not give the normalized derived B-linear direct-image/open composite, its finite-sum model and composite scalar transpose."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*(pushforward|shriek)|scalar.*(counit|extensionByZero)|tensor.*directImage",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"438\", \"text\": \"        ← AlgHom.coe_restrictScalars R (Bialgebra.counitAlgHom S _), -AlgHom.coe_restrictScalars,\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"136\", \"text\": \"    extendRestrictScalarsAdj_counit_app_apply_one_tmul,\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"137\", \"text\": \"    extendRestrictScalarsAdj_counit_app_apply_one_tmul]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"890\", \"text\": \"    counit := ExtendRestrictScalarsAdj.counit.{v, u₁, u₂} f\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"901\", \"text\": \"          erw [ExtendRestrictScalarsAdj.Counit.map_hom_apply,\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"920\", \"text\": \"lemma extendRestrictScalarsAdj_counit_app_apply_one_tmul (M : ModuleCat S) (m : M) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"921\", \"text\": \"    dsimp% (extendRestrictScalarsAdj f).counit.app M ((1 : S) ⊗ₜ[R] m) = m := by\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"922\", \"text\": \"  apply ExtendRestrictScalarsAdj.Counit.map_apply_one_tmul\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free sheaf and module scalar adjunction formulas do not give the normalized derived B-linear direct-image/open composite, its finite-sum model and composite scalar transpose."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension commutes with derived pushforward and extension by zero on Grothendieck topoi with the counit-defined comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardPushforwardAdj adj φ ψ H₁ H₂).counit.app M).val.app U x = M.val.map (adj.unit.app U.unop).op x\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardPushforwardAdj adj φ ψ H₁ H₂).unit.app M).val.app U x = M.val.map (adj.counit.app U.unop).op x\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"{M : SheafOfModules.{u} R} (f : unit R ⟶ M) :\\n  pushforwardSections φ (M.unitHomEquiv f) =\\n    ((pushforward φ).obj M).unitHomEquiv (unitToPushforwardObjUnit φ ≫ (pushforward φ).map f)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, and an $ S $-module $ Y $, this is the counit morphism of the adjunction between extending and restricting scalars. It provid\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"{I : Type u} (i : I) : (pullback φ).map (ιFree i) ≫ (pullbackObjFreeIso φ I).hom = pullbackObjUnitToUnit φ ≫ ιFree i\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary free sheaf and module scalar adjunction formulas do not give the normalized derived B-linear direct-image/open composite, its finite-sum model and composite scalar transpose."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree|finite_free|restrictScalars",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"d6440073342ced2b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension commutes with derived direct image and open extension by zero on a topos",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalars\", \"PresheafOfModules.free\", \"ModuleCat.instIsLeftAdjointExtendScalars\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"PresheafOfModules.pushforward\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"digest\": \"9dd3da357666152e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.DerivedCategory",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.DerivedCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of constant coefficient rings commutes with unbounded derived direct image of sheaves on a Grothendieck topos with canonical counit comparison",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.mapFree\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"Condensed.profiniteSolidCounit\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"4e8c01465dcd08d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"pushforward\"",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardId\", \"SheafOfModules.overMapPushforwardAdj\", \"SheafOfModules.pushforward\", \"SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver\", \"SheafOfModules.overPushforwardOverAdj\", \"SheafOfModules.isLeftAdjoint_pushforward_of_isIso\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardNatIso\"], \"digest\": \"7cee0ab1b093ec9e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit-defined comparison between scalar extension and a right derived sheaf pushforward is an isomorphism when the coefficient algebra is finite free",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardNatIso_hom\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"fb1cbbe8d358fc48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|pushforwardComp|derived.*adjunction",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"069e7c7273ba3d9e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves on ringed topoi commutes with unbounded derived direct image and preserves the inverse image direct image adjunction unit and counit",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"5844291dd8c6d3bc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"restrictScalars\"",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.restrictScalars_map_val\", \"PresheafOfModules.instFaithfulSheafOfModulesCompObjFunctorOppositeRingCatIsSheafForgetRestrictScalars\", \"PresheafOfModules.instFullSheafOfModulesCompObjFunctorOppositeRingCatIsSheafForgetRestrictScalars\"], \"digest\": \"36f81673100fba11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting coefficient square of ringed topoi gives canonical restriction of scalars comparisons compatible with derived pullback pushforward adjunctions",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"13d7b768631efdb1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coefficient restriction on module sheaves over topoi commutes with open extension by zero and with derived direct image, respecting geometric adjunctions",
+   "results": "Recorded search result: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toOpen_res\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"digest\": \"7d761521945a0fe1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary sheaf/module comparisons do not state the normalized unbounded finite-free constituent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-free-compact-composition",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 (Qbar stage): well-defined finite coefficient extension, through sk-thm-purity-transport Step 3; extracted compact-support composition/refinement compatibility in the ordered affine-coordinate argument; constituent 1 of the finite-free compact-support coefficient calculation",
+   "via": [
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-topos-finite-free-compact-constituents",
+  "worker": "stage1",
+  "summary": "Proved the finite-free constant-scalar comparison by explicit sheaf tensor coordinates, the general ringed-coefficient counit normalization, and open scalar adjunction transposes. Reused existing general topos lemmas instead of creating duplicate or clause-restatement nodes. Distinguished reflection of isomorphisms by scalar restriction from the invalid assumption that restriction is faithful on derived morphisms. No statement correction.",
+  "blueprint": "thm-pur-rational-and-qbar-purity proof Step 2, via sk-thm-purity-transport Steps 1 and 3: finite coefficient extension, constituent normalization, and composition of the finite scalar comparisons.",
+  "tool_uses": [
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-restriction-counit",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   },
+   {
+    "node": "lem-cbc-ringed-open-scalar-adjunction",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic module-sheaf, derived-adjunction or normalization tool used in the indicated steps; the purity-transport unit supplies no replacement and its finite-coefficient route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-cbc-ringed-open-scalar-adjunction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-9bfd4d440",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-9bfd4d440 (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and all 10 steps, every cited statement, the blueprint sk-thm-purity-transport proof (Steps 1 and 3), and Stacks 07A6, 0D6D/0D6E, 0E8I, 03CZ and 03DI. The statement is byte-identical to the Q78 782651f6 fix file. The 4 stmt_deps added (restrict-scalars, sheaf-ring coefficient adjunction, localized ringed site, site restriction/extension adjunction) are notions the statement uses. No repair note, so the re-split rules do not apply. I redid the main calculations. Step 2: lem-pur-ringed-coefficient-restriction-counit specialised to R = B constant; τ is invertible because v^{-1}B_W = B_T. Step 3: the transpose d_v U(χ) η^S = R_A(η^S); it needs one omitted use of τ-naturality, which I checked. Step 4: the columns via b_a-multiplication naturality, biproduct inverse, reflection by U. Steps 5/8: the open β transpose and the unit normalization on summand generators, direction checked. Step 6: ρ orientation (d^{-1}, e^{-1}). Step 7: mate-pasting clause 2 with α = λ_w, β = λ_v gives R_wB(χ_v)χ_w, and the derived composition normalization identifies the adjunctions. Step 9: the composite open unit and the λ coherence. Step 10: independence of basis and of K-injective representatives. Edge cases: point topos with ℤ→ℤ[i], empty open, rank 0. Subterminal objects that are not representable are handled by re-presenting the site (terse but correct). The 9 tool_uses (generic module-sheaf/derived tools) are accepted; their 'why' text is boilerplate. Advisory: Q154's same-day unsplit lem-sfb-topos-finite-free-counit-comparison and lem-sfb-derived-finite-free-scalar-coordinates overlap Steps 3–4 and Step 1. I did not repoint to them: it would add unsplit dependencies, and the Step 3 transpose is still needed. Maintainer note only. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ToposFiniteFreeCompactConstituents",
+  "declaration": "CategoryTheory.ToposFiniteFreeCompact.finiteFreeCompactConstituents",
+  "declarations": [
+   "CategoryTheory.ToposFiniteFreeCompact.Site",
+   "CategoryTheory.ToposFiniteFreeCompact.coefficientMap",
+   "CategoryTheory.ToposFiniteFreeCompact.Mod",
+   "CategoryTheory.ToposFiniteFreeCompact.res",
+   "CategoryTheory.ToposFiniteFreeCompact.scalar_exact",
+   "CategoryTheory.ToposFiniteFreeCompact.ScalarSite",
+   "CategoryTheory.ToposFiniteFreeCompact.scalarLimits",
+   "CategoryTheory.ToposFiniteFreeCompact.scalarColimits",
+   "CategoryTheory.ToposFiniteFreeCompact.U",
+   "CategoryTheory.ToposFiniteFreeCompact.S",
+   "CategoryTheory.ToposFiniteFreeCompact.scalarAdj",
+   "CategoryTheory.ToposFiniteFreeCompact.Geometric",
+   "CategoryTheory.ToposFiniteFreeCompact.LA",
+   "CategoryTheory.ToposFiniteFreeCompact.LB",
+   "CategoryTheory.ToposFiniteFreeCompact.RA",
+   "CategoryTheory.ToposFiniteFreeCompact.RB",
+   "CategoryTheory.ToposFiniteFreeCompact.adjA",
+   "CategoryTheory.ToposFiniteFreeCompact.adjB",
+   "CategoryTheory.ToposFiniteFreeCompact.tau",
+   "CategoryTheory.ToposFiniteFreeCompact.tensorPullbackInv",
+   "CategoryTheory.ToposFiniteFreeCompact.tensorPullbackInv_isIso",
+   "CategoryTheory.ToposFiniteFreeCompact.lambda",
+   "CategoryTheory.ToposFiniteFreeCompact.chi",
+   "CategoryTheory.ToposFiniteFreeCompact.restrictionPushforward",
+   "CategoryTheory.ToposFiniteFreeCompact.restrictionPushforward_isIso",
+   "CategoryTheory.ToposFiniteFreeCompact.Open",
+   "CategoryTheory.ToposFiniteFreeCompact.IA",
+   "CategoryTheory.ToposFiniteFreeCompact.IB",
+   "CategoryTheory.ToposFiniteFreeCompact.openAdjA",
+   "CategoryTheory.ToposFiniteFreeCompact.openAdjB",
+   "CategoryTheory.ToposFiniteFreeCompact.betaInv",
+   "CategoryTheory.ToposFiniteFreeCompact.betaInv_isIso",
+   "CategoryTheory.ToposFiniteFreeCompact.beta",
+   "CategoryTheory.ToposFiniteFreeCompact.restrictionOpen",
+   "CategoryTheory.ToposFiniteFreeCompact.restrictionOpen_isIso",
+   "CategoryTheory.ToposFiniteFreeCompact.FA",
+   "CategoryTheory.ToposFiniteFreeCompact.FB",
+   "CategoryTheory.ToposFiniteFreeCompact.compactComparison",
+   "CategoryTheory.ToposFiniteFreeCompact.rho",
+   "CategoryTheory.ToposFiniteFreeCompact.finiteFreeCompactConstituents",
+   "CategoryTheory.ToposFiniteFreeCompact.open_units_isIso",
+   "CategoryTheory.ToposFiniteFreeCompact.openUnitA",
+   "CategoryTheory.ToposFiniteFreeCompact.openUnitB",
+   "CategoryTheory.ToposFiniteFreeCompact.beta_unit",
+   "CategoryTheory.ToposFiniteFreeCompact.constantSection",
+   "CategoryTheory.ToposFiniteFreeCompact.tensorSection",
+   "CategoryTheory.ToposFiniteFreeCompact.Inclusions",
+   "CategoryTheory.ToposFiniteFreeCompact.BasisCoordinates",
+   "CategoryTheory.ToposFiniteFreeCompact.finiteFreeCompactCoordinates",
+   "CategoryTheory.ToposFiniteFreeCompact.Composite",
+   "CategoryTheory.ToposFiniteFreeCompact.compLA",
+   "CategoryTheory.ToposFiniteFreeCompact.compLB",
+   "CategoryTheory.ToposFiniteFreeCompact.compRA",
+   "CategoryTheory.ToposFiniteFreeCompact.compRB",
+   "CategoryTheory.ToposFiniteFreeCompact.chi_comp",
+   "CategoryTheory.ToposFiniteFreeCompact.compIA",
+   "CategoryTheory.ToposFiniteFreeCompact.compIB",
+   "CategoryTheory.ToposFiniteFreeCompact.beta_comp"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ToposFiniteFreeCompactConstituents.lean",
+  "statement": "theorem finiteFreeCompactConstituents {X T Y : ScalarSite.{u, v, r, w} A B} (j : Open X T) (p : Geometric T Y) : IsIso (chi p) ∧ IsIso (compactComparison j p) ∧ ∀ M : DerivedCategory (Mod X.toSite A), (scalarAdj Y).homEquiv _ _ ((compactComparison j p).app M) = (FA j p).map ((scalarAdj X).unit.app M) ≫ (rho j p).hom.app ((S X).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The node is stated by the named family of declarations in this single module: finiteFreeCompactConstituents gives invertibility and the specified scalar transpose; finiteFreeCompactCoordinates gives every normalized basis column on all complexes; chi_comp, beta_comp and beta_unit give the B-linear coherence identities. All maps are constructed adjunction mates. ScalarSite, Geometric, Open and Composite package presentations of the objects and canonical structural identifications already described inline in the node, using the recorded module, scalar-tensor, inverse-image and localization definitions. Open extension is characterized together with its adjunction, hence transported only by the unique adjunction-preserving isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f4740751",
+  "group": "Q156",
+  "result": "pass",
+  "note": "First S2 delivery; only the lean record and new module ToposFiniteFreeCompactConstituents differ from live; lean.statement verbatim. Every clause matches the node: chi = mateEquiv(adjA,adjB) lambda.hom (S_W R_A -> R_B S_T); lambda = inverse of the S-|U mate of tau (Step-2 unit normalization, canonical); beta = inverse of the open mate of lambda^-1; compactComparison = whiskerLeft IA chi then RB(beta); IsIso chi, IsIso c and the scalar-transpose clause = FA(eta^S) then rho with the order checked; finiteFreeCompactCoordinates pins iota on all complexes via b_a⊗x and gives biproduct identities plus the U(chi)/U(beta) columns; chi_comp/beta_comp/beta_unit orders match the node. Presentations are pinned: AlgebraicInverseImage sectionwise, constantsA/B, homA/B by the geometric Hom bijection, restrictionFormula = identity, adjFormula = 1⊗x, Open = slice of a subterminal with the exact left adjoint; Composite.inverse is free but the identities stay true (central twists commute with tau). S = exact termwise model with scalar_exact IsIso ε. No hollow defs, sorry-only proofs with docstrings, no universe equation (node's V-small u=v=r case covered), empty basis covered. Not reproduced per instructions (worker clean 33.5 s). H4 search: FiniteFreeCompactScalar/Composition are scheme-specific nodes, FiniteFreeScalarCoordinates is the monoidal lemma, none states this result. Advisory: constantRing/modules/underlying/restriction (def-pur-ringed-coefficient-counit-presentations) and AlgebraicInverseImage owners are not in stmt_deps; IsGrothendieckTopos and the tensor-pullback theorem are cited but unused as declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T213307-L-317420",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

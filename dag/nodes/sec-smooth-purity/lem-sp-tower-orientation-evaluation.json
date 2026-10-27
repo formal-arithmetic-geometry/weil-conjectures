@@ -1,0 +1,370 @@
+{
+ "id": "lem-sp-tower-orientation-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation and concentration of composite tower orientation arrows",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be smooth separated morphisms of pure relative dimensions $d,e\\geq0$ between separated finite-type $k$-schemes, and put $h=gf$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms].\n\nFix a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$ and $A_n=\\mathcal O_E/\\ell^n$, $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Use the strict varying-coefficient tower categories [sk-def-sp-coefficient-towers], their ordinary derived categories and exact evaluations $\\mathrm{ev}_n$ [det-sp-coefficient-towers-abelian], and their full subcategories with uniformly bounded constructible finite-Tor levels [sk-def-sp-normalized-towers]. No normalization of inputs is assumed. All tensor products are ordinary derived tensors over $A_\\bullet$, with the levelwise derived pullback and Tate twists [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor, def-coefficient-twists-detailed].\n\nFor $u=f,g,h$ write $G_{u,\\bullet}=u^!_\\bullet$, $\\omega_{u,\\bullet}=G_{u,\\bullet}A_{\\bullet,\\mathrm{target}(u)}$, $L_{u,\\bullet}=A_{\\bullet,\\mathrm{source}(u)}(d_u)[2d_u]$, where $d_f=d,d_g=e,d_h=d+e$. Let $a_{u,\\bullet}:L_{u,\\bullet}\\simeq\\omega_{u,\\bullet}$ and $t_{u,\\bullet,K}$ be the specified diagonal orientation and counit-defined tensor maps [det-sp-tower-gamma, det-sp-tower-gluing]. Use the counit-normalized exceptional compositor $c_\\bullet:G_{h,\\bullet}\\simeq G_{f,\\bullet}G_{g,\\bullet}$ [det-sp-composition-comparisons]. Put\n$$W_\\bullet=f^*\\omega_{g,\\bullet}\\otimes^L\\omega_{f,\\bullet},\\quad \\rho_\\bullet=t_{f,\\bullet,\\omega_{g,\\bullet}},\\quad \\mu_\\bullet=\\rho_\\bullet^{-1}c_{\\bullet,1}.$$\nThe map $\\rho_\\bullet$ is invertible, and the two arrows\n$$\\Phi_\\bullet=\\mu_\\bullet a_{h,\\bullet},\\qquad \\Psi_\\bullet=f^*a_{g,\\bullet}\\otimes a_{f,\\bullet}$$\nare actual derived tower maps from $L_{h,\\bullet}$ to $W_\\bullet$ under shifted-Tate tensor splitting. Their exact evaluations are respectively\n$$\\mathrm{ev}_n(\\Phi_\\bullet)=\\mu_n a_{h,A_n},\\qquad \\mathrm{ev}_n(\\Psi_\\bullet)=f^*a_{g,A_n}\\otimes a_{f,A_n},$$\nwhere $\\mu_n=t_{f,A_n,\\omega_{g,A_n}}^{-1}c_{A_n,1}$ and all finite arrows are those of [det-sp-finite-general-ring, det-sp-composition-comparisons]. Both $L_{h,\\bullet}$ and $W_\\bullet$ have cohomology only in degree $-2(d+e)$, and their cohomology sheaves have locally free rank-one finite evaluations. These assertions include quotient transitions and the actual adjunction units and counits; they make no assertion of faithfulness of evaluation on arbitrary derived Hom groups.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), parenthesis on tower sheaves, and unit proof tower paragraph; former Step 9 before the shifted-heart equality test"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gamma",
+  "det-sp-tower-gluing",
+  "det-sp-composition-comparisons",
+  "det-sp-finite-general-ring",
+  "def-sp-composition-orientation-arrow-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite_levels fields of the three GIVEN purity records [def-sp-tower-gamma-data] for the finite orientations, geometries and normalized unit identifications. The proved unit-normalization lemma [lem-sp-tower-orientation-word-normalization] converts their targetWord square into the dualizingWord square. At K=omega_g, the given af.purity_iso makes gamma invertible. The first gamma factor is tensor of identity with the isomorphism af.orientation. Mathlib IsIso.of_isIso_fac_left therefore proves invertibility of the actual towerRho. No new purity record is selected.",
+   "uses": [
+    "def-sp-tower-gamma-data",
+    "lem-sp-tower-orientation-word-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sp-tower-tate-split-normalized] to obtain the actual shifted Tate splitting s with exactly TowerSplitNormalized. This supplies the finite formula for s before either orientation is composed into it.",
+   "uses": [
+    "lem-sp-tower-tate-split-normalized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sp-ordered-tate-tower-cohomology] to X, wh and r=d+e. It gives concentration and locally free rank-one finite evaluations for the source orderedLine, including the coefficient unit and the empty scheme.",
+   "uses": [
+    "lem-sp-ordered-tate-tower-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the actual isomorphism PsiIso by composing s with tensor of pullback of ag.orientation and af.orientation. Homology and exact evaluation preserve isomorphisms. Transport off-degree IsZero and surviving IsFiniteLocallyFreeOfRank along these isomorphisms to obtain concentration of W.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each of the two constructed tower arrows, apply cal.reduction.reduction_naturality to its image under inverse realization. These are exactly TowerOrientationReduction, for every m<=n, including equality. No finite-evaluation faithfulness statement is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each level choose F,G,H from step 1. Apply [lem-sp-tower-mu-evaluation] with their normalized unit comparisons. Paste H.evaluated with the resulting mu square to obtain the finite Phi square. For Psi, naturality of exactSitePull, the geometric pull comparison and pullEvaluation transports G.evaluated through pullWord. Apply [lem-sp-tensor-word-comparison]: naturality of the site tensor comparison in both variables, tc.derived and tensorEvaluation transports this square and F.evaluated through tensorWord. Paste that square with TowerSplitNormalized at n. Functor.map_comp gives the two displayed composite finite arrows.",
+   "uses": [
+    "lem-sp-tower-mu-evaluation",
+    "lem-sp-tensor-word-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-gamma-data",
+  "lem-sp-tower-tate-split-normalized",
+  "lem-sp-ordered-tate-tower-cohomology",
+  "lem-sp-tower-mu-evaluation",
+  "lem-sp-tower-orientation-word-normalization",
+  "lem-sp-tensor-word-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "(1), tower paragraph; Lean assembly of rho invertibility, normalized Tate splitting, cohomology, natural reduction squares and finite composite comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Dualizing product orientation arrows in ordinary derived coefficient towers evaluate to finite orientation arrows and have shifted sheaf endpoints",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ComplexShape.σ\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"{I₁ : Type u_1} →\\n  {I₂ : Type u_2} →\\n    {I₁₂ : Type u_4} →\\n      (c₁ : ComplexShape I₁) →\\n        (c₂ : ComplexShape I₂) →\\n          (c₁₂ : ComplexShape I₁₂) →\\n            [inst : TotalComplexShape c₁ c₂ c₁₂] →\\n              [inst_1 : TotalComplexShape c₂ c₁ c₁₂] → [TotalComplexShapeSymmetry c₁ c₂\", \"doc\": \"A function assigning a sign $\\\\pm 1$ to each pair of indices $(i_1 \\\\in I_1, i_2 \\\\in I_2)$, encoding the symmetry between total complex shapes defined by $(c_1, c_2, c_{12})$ and $(c_2, c_1, c_{12})$. T\"}\n  {\"name\": \"ComplexShape.ε₂\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"{I₁ : Type u_1} →\\n  {I₂ : Type u_2} →\\n    {I₁₂ : Type u_4} →\\n      (c₁ : ComplexShape I₁) →\\n        (c₂ : ComplexShape I₂) → (c₁₂ : ComplexShape I₁₂) → [TotalComplexShape c₁ c₂ c₁₂] → I₁ × I₂ → ℤˣ\", \"doc\": \"A function assigning a sign $\\\\pm 1$ to pairs of indices $(i_1, i_2) \\\\in I_1 \\\\times I_2$, which is part of the structure defining a chain complex in homological algebra. This function takes values in t\"}\n  {\"name\": \"ComplexShape.ε₁\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"{I₁ : Type u_1} →\\n  {I₂ : Type u_2} →\\n    {I₁₂ : Type u_4} →\\n      (c₁ : ComplexShape I₁) →\\n        (c₂ : ComplexShape I₂) → (c₁₂ : ComplexShape I₁₂) → [TotalComplexShape c₁ c₂ c₁₂] → I₁ × I₂ → ℤˣ\", \"doc\": \"The function $\\\\varepsilon_1$ assigns to each pair of indices $(i_1, i_2) \\\\in I_1 \\\\times I_2$ a sign (either $+1$ or $-1$) as an element of the group of units $\\\\mathbb{Z}^\\\\times$, which is part of the \"}\n  {\"name\": \"ComplexShape.σ_ε₂\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"∀ {I₁ : Type u_1} {I₂ : Type u_2} {I₁₂ : Type u_4} (c₁ : ComplexShape I₁) {c₂ : ComplexShape I₂}\\n  (c₁₂ : ComplexShape I₁₂) [inst : TotalComplexShape c₁ c₂ c₁₂] [inst_1 : TotalComplexShape c₂ c₁ c₁₂]\\n  [inst_2 : TotalComplexShapeSymmetry c₁ c₂ c₁₂] (i₁ : I₁) {i₂ i₂' : I₂},\\n  c₂.Rel i₂ i₂' → c₁.σ c₂ \", \"doc\": \"For complex shapes $c_1$ on index set $I_1$, $c_2$ on $I_2$, and $c_{12}$ on product index $I_{12}$, the symmetry sign function $\\\\sigma$ satisfies the identity $\\\\sigma(i_1, i_2) \\\\cdot \\\\varepsilon_2(i_\"}\n  {\"name\": \"ComplexShape.σ_ε₁\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"∀ {I₁ : Type u_1} {I₂ : Type u_2} {I₁₂ : Type u_4} {c₁ : ComplexShape I₁} (c₂ : ComplexShape I₂)\\n  (c₁₂ : ComplexShape I₁₂) [inst : TotalComplexShape c₁ c₂ c₁₂] [inst_1 : TotalComplexShape c₂ c₁ c₁₂]\\n  [inst_2 : TotalComplexShapeSymmetry c₁ c₂ c₁₂] {i₁ i₁' : I₁},\\n  c₁.Rel i₁ i₁' → ∀ (i₂ : I₂), c₁.σ \", \"doc\": \"For indices $i_1, i_1' \\\\in I_1$ with a relation $h_1$ in complex shape $c_1$ and $i_2 \\\\in I_2$, the product of the symmetry sign function $\\\\sigma$ and the sign function $\\\\varepsilon_1$ equals the prod\"}\n  {\"name\": \"ComplexShape.σ_def\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"∀ (p q : ℤ),\\n  TotalComplexShapeSymmetry.σ (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ) p q = (p * q).negOnePow\", \"doc\": \"The sign function $\\\\sigma$ for the total complex shape symmetry on integer-indexed chain complexes is defined by $\\\\sigma(p, q) = (-1)^{pq}$ for all integers $p, q$. This function encodes the symmetry \"}\n  {\"name\": \"exteriorPower.pairingDual_apply_apply_eq_one\", \"module\": \"Mathlib/LinearAlgebra/ExteriorPower/Pairing\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {ι : Type u_3}\\n  [inst_3 : LinearOrder ι] (x : ι → M) (f : ι → Module.Dual R M),\\n  (∀ (i : ι), (f i) (x i) = 1) →\\n    (∀ ⦃i j : ι⦄, i ≠ j → (f i) (x j) = 0) →\\n      ∀ (n : ℕ) (a : Fin n ↪o ι),\\n       \", \"doc\": \"For a commutative ring $ R $, $ R $-module $ M $, and order embedding $ a : \\\\mathrm{Fin}(n) \\\\hookrightarrow \\\\iota $, the evaluation of the canonical pairing between the $ n $-th exterior power $ \\\\Lamb\"}\n  {\"name\": \"ComplexShape.ε₁_ε₂\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"∀ {I₁ : Type u_1} {I₂ : Type u_2} {I₁₂ : Type u_4} {c₁ : ComplexShape I₁} {c₂ : ComplexShape I₂}\\n  (c₁₂ : ComplexShape I₁₂) [inst : TotalComplexShape c₁ c₂ c₁₂] {i₁ i₁' : I₁} {i₂ i₂' : I₂},\\n  c₁.Rel i₁ i₁' →\\n    c₂.Rel i₂ i₂' → c₁.ε₁ c₂ c₁₂ (i₁, i₂) * c₁.ε₂ c₂ c₁₂ (i₁, i₂) = -c₁.ε₂ c₂ c₁₂ (i₁', i₂) \", \"doc\": \"For indices $i_1, i_1' \\\\in I_1$ and $i_2, i_2' \\\\in I_2$ with relations $h_1$ and $h_2$ in the complex shape $S$, the product of the sign functions satisfies $\\\\varepsilon_1(i_1, i_2) \\\\cdot \\\\varepsilon_\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, CategoryTheory.Abelian",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ower.*[Oo]rientation|[Dd]ualizing.*[Ee]valuation|[Oo]rientation.*[Cc]oncentrat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluate composite dualizing tensor maps and inverse diagonal orientations at each finite coefficient level in a derived tower",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"map_dualTensorHom\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \"(f : Module.Dual R M) (p : P) (g : Module.Dual R N) (q : Q) :\\n  TensorProduct.map (dualTensorHom R M P (f ⊗ₜ[R] p)) (dualTensorHom R N Q (g ⊗ₜ[R] q)) =\\n    dualTensorHom R (M ⊗[R] N) (P ⊗[R] Q) (dualDistrib R M N (f ⊗ₜ g) ⊗ₜ[R] (p ⊗ₜ[R] q))\", \"doc\": \"For modules $M,N$ over a commutative semiring $R$, the composition of tensor product maps induced by dualTensorHom agrees with the dualTensorHom applied to the dualDistrib isomorphism. Specifically, t\"}\n  {\"name\": \"LinearEquiv.dualMap_trans\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"{M₃ : Type*} [AddCommMonoid M₃] [Module R M₃] (f : M₁ ≃ₗ[R] M₂) (g : M₂ ≃ₗ[R] M₃) :\\n  g.dualMap.trans f.dualMap = (f.trans g).dualMap\", \"doc\": \"For linear equivalences $ f: M_1 \\\\simeq_R M_2 $ and $ g: M_2 \\\\simeq_R M_3 $, the dual map of the composition $ g \\\\circ f $ is equal to the composition of the dual maps of $ f $ and $ g $ in reverse or\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.dualDistrib_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"(f : Dual A M) (g : Dual R N) (m : M) (n : N) : dualDistrib R A M N (f ⊗ₜ g) (m ⊗ₜ n) = g n • f m\", \"doc\": \"There exists an $A$-linear map from the tensor product $\\\\mathrm{Dual}_A(M) \\\\otimes_R \\\\mathrm{Dual}_R(N)$ to the dual module $\\\\mathrm{Dual}_A(M \\\\otimes_R N)$. This map is constructed by composing the r\"}\n  {\"name\": \"LinearMap.dualMap_comp_dualMap\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"{M₃ : Type*} [AddCommMonoid M₃] [Module R M₃] (f : M₁ →ₗ[R] M₂) (g : M₂ →ₗ[R] M₃) :\\n  f.dualMap.comp g.dualMap = (g.comp f).dualMap\", \"doc\": \"For $ R $-linear maps $ f: M_1 \\\\to M_2 $ and $ g: M_2 \\\\to M_3 $, the dual map of the composition $ g \\\\circ f $ equals the composition of the dual maps of $ f $ and $ g $ in reverse order, i.e., $ (g \\\\\"}\n  {\"name\": \"comp_dualTensorHom\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \"(f : Module.Dual R M) (n : N) (g : Module.Dual R N) (p : P) :\\n  dualTensorHom R N P (g ⊗ₜ[R] p) ∘ₗ dualTensorHom R M N (f ⊗ₜ[R] n) = g n • dualTensorHom R M P (f ⊗ₜ p)\", \"doc\": \"For modules $M$, $N$, and $P$ over a commutative semiring $R$, the composition of the linear maps $\\\\text{dualTensorHom}(g \\\\otimes p)$ and $\\\\text{dualTensorHom}(f \\\\otimes n)$, where $f \\\\in M^*$, $g \\\\in\"}\n  {\"name\": \"PiTensorProduct.dualDistrib_apply\", \"module\": \"Mathlib.LinearAlgebra.PiTensorProduct.Dual\", \"type\": \"[Fintype ι] (f : Π i, Dual R (M i)) (m : Π i, M i) : dualDistrib (⨂ₜ[R] i, f i) (⨂ₜ[R] i, m i) = ∏ i, (f i) (m i)\", \"doc\": \"For a finite index type $\\\\iota$ and a family of $R$-modules $M_i$, the evaluation of the $R$-linear map $\\\\bigotimes_R \\\\text{Dual}(M_i) \\\\to \\\\text{Dual}(\\\\bigotimes_R M_i)$ on the tensor product $\\\\bigoti\"}\n  {\"name\": \"PiTensorProduct.dualDistrib_dualDistribInvOfBasis_left_inverse\", \"module\": \"Mathlib.LinearAlgebra.PiTensorProduct.Dual\", \"type\": \"[Finite ι] [∀ i, Finite (κ i)] (b : Π i, Basis (κ i) R (M i)) :\\n  (dualDistrib) ∘ₗ (dualDistribInvOfBasis b) = LinearMap.id\", \"doc\": \"For a finite index type $\\\\iota$ and a family of $R$-modules $M_i$, there exists an $R$-linear map from the tensor product of the dual modules $\\\\bigotimes_R \\\\text{Dual}(M_i)$ to the dual of the tensor \"}\n  {\"name\": \"TensorPower.multilinearMapToDual_apply_tprod\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Pairing\", \"type\": \"(f : (_ : Fin n) → Module.Dual R M) (v : Fin n → M) : multilinearMapToDual R M n f (tprod _ v) = ∏ i, (f i (v i))\", \"doc\": \"For a commutative semiring $ R $, an $ R $-module $ M $, and natural number $ n $, evaluating the multilinear map $ \\\\mathrm{TensorPower} \\\\, R \\\\, n \\\\, M \\\\to R $ (constructed from dual elements $ f_i \\\\i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison maps between shifted Tate line tower sheaves have finite level evaluations prescribed by counit compatible gluing",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n), AdicCompletion.transitionMap I M hmn ∘ₗ AdicCompletion.eval I M n = AdicCompletion.eval I M m\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the transition map $M/I^nM \\\\to M/I^mM$ with the evaluation map at level $n$ equals the evaluation map at level $m$. In other words, projecting an ele\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n  Profinite.NobelingProof.GoodProducts.SumEval C ho ∘ Sum.inl =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (ModuleCat.ofHom (Profinite.NobelingProof.\", \"doc\": \"The composition of the evaluation map for good products with the left injection into the disjoint union of good and maximal products equals the composition of the module homomorphism induced by the No\"}\n  {\"name\": \"CompHausLike.LocallyConstant.counitAppApp\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"{P : TopCat → Prop} →\\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    [inst : CompHausLike.HasProp P PUnit.{u + 1}] →\\n      (S : CompHausLike P) →\\n        (Y : CategoryTheory.Functor (CompHausLike P)ᵒᵖ (Type (max u w))) →\\n          [CategoryTheory.Limits.Pr\", \"doc\": \"For a compact Hausdorff-like space $ S $, a functor $ Y $ from the opposite category of compact Hausdorff-like spaces to types preserving finite products, and a locally constant function $ r $ from $ \"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite))\\n  (X : Type u) (hc : CategoryTheory.Limits.IsLimit c) [inst : ∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)]\\n  (s :\\n    CategoryTheory.Limits.Cocone\\n      ((F.comp FintypeCat.toLightProf\", \"doc\": \"Given a limit cone $ c $ with epimorphic projections and a cocone $ s $ over the diagram of locally constant presheaves, the application of the colimit's universal morphism $ \\\\text{desc} $ to a locall\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.opEpi_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given generating sections $\\\\sigma$ of a sheaf of modules $M$ and epimorphisms $p : M \\\\to N$ and $q : N \\\\to P$ in the category of sheaves over a ringed space, the generating sections obtained by compos\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ower.*[Oo]rientation|[Dd]ualizing.*[Ee]valuation|[Oo]rientation.*[Cc]oncentrat",
+   "results": "Actual logged result: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dualizing coefficient tower orientation maps evaluation and cohomology concentrated in one degree",
+   "results": "Actual logged result: 8 hits; Module.DualBases.coeffs_apply, Module.Dual.eval, LinearMap.IsPerfPair.dualEval, Module.Basis.toDual_eq_repr, Module.Basis.toDualFlip, Module.symm_dualMap_evalEquiv, Module.DualBases.dual_lc, Submodule.comap_dualAnnihilator",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, CategoryTheory.Abelian",
+   "results": "Actual logged result: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact finite level evaluation of dualizing orientation and tensor maps in derived varying coefficient towers",
+   "results": "Actual logged result: 8 hits; IsBaseChange.toDualBaseChange_tmul, comp_dualTensorHom, FGModuleCat.FGModuleCatEvaluation_apply', FGModuleCat.FGModuleCatEvaluation_apply, TensorPower.pairingDual_tprod_tprod, PiTensorProduct.dualDistribEquivOfBasis_apply_apply, TensorPower.multilinearMapToDual_apply_tprod, TensorPower.pairingDual",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth exceptional inverse image of the constant coefficient tower is a shifted locally free rank one sheaf with finite level purity orientations",
+   "results": "Actual logged result: 8 hits; smoothSheafRing, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, smoothSheafAddCommGroup.compLeft, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ower|[Cc]ohomology.*[Rr]ank.one",
+   "results": "Actual logged result: 0 hits; ; subdirectory argument was mistaken and did not search the intended source; corrected by the CategoryTheory search below",
+   "date": "2026-10-24",
+   "verdict": "invalid subdirectory; superseded by corrected search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A composite smooth exceptional orientation is evaluated levelwise and is concentrated in a single shifted degree",
+   "results": "Actual logged result: 8 hits; CochainComplex.shiftEval, CochainComplex.HomComplex.Cochain.toSingleMk, smoothSheafCommRing.ι_evalHom_assoc, HomologicalComplex.forgetEval, smoothSheaf.evalHom, smoothSheaf.eval, smoothSheafCommRing.ι_evalHom, smoothSheafCommRing.forgetStalk_inv_comp_eval",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.IsIso, CategoryTheory.Functor.mapIso",
+   "results": "Actual logged result: 0 hits; ; loogle: unknown identifier 'CategoryTheory.NatTrans.IsIso'",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ower|[Cc]ohomology.*[Rr]ank.one",
+   "results": "Actual logged result: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ower.*[Oo]rientation|[Dd]ualizing.*[Ee]valuation|[Oo]rientation.*[Cc]oncentrat",
+   "results": "Actual logged result: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dualizing coefficient tower orientation maps evaluation and cohomology concentrated in one degree",
+   "results": "Actual logged result: 8 hits; Module.DualBases.coeffs_apply, Module.Dual.eval, LinearMap.IsPerfPair.dualEval, Module.Basis.toDual_eq_repr, Module.Basis.toDualFlip, Module.symm_dualMap_evalEquiv, Module.DualBases.dual_lc, Submodule.comap_dualAnnihilator",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, CategoryTheory.Abelian",
+   "results": "Actual logged result: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact finite level evaluation of dualizing orientation and tensor maps in derived varying coefficient towers",
+   "results": "Actual logged result: 8 hits; IsBaseChange.toDualBaseChange_tmul, comp_dualTensorHom, FGModuleCat.FGModuleCatEvaluation_apply', FGModuleCat.FGModuleCatEvaluation_apply, TensorPower.pairingDual_tprod_tprod, PiTensorProduct.dualDistribEquivOfBasis_apply_apply, TensorPower.multilinearMapToDual_apply_tprod, TensorPower.pairingDual",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth exceptional inverse image of the constant coefficient tower is a shifted locally free rank one sheaf with finite level purity orientations",
+   "results": "Actual logged result: 8 hits; smoothSheafRing, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, smoothSheafAddCommGroup.compLeft, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ower|[Cc]ohomology.*[Rr]ank.one",
+   "results": "Actual logged result: 0 hits; ; subdirectory argument was mistaken and did not search the intended source; corrected by the CategoryTheory search below",
+   "date": "2026-10-24",
+   "verdict": "invalid subdirectory; superseded by corrected search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A composite smooth exceptional orientation is evaluated levelwise and is concentrated in a single shifted degree",
+   "results": "Actual logged result: 8 hits; CochainComplex.shiftEval, CochainComplex.HomComplex.Cochain.toSingleMk, smoothSheafCommRing.ι_evalHom_assoc, HomologicalComplex.forgetEval, smoothSheaf.evalHom, smoothSheaf.eval, smoothSheafCommRing.ι_evalHom, smoothSheafCommRing.forgetStalk_inv_comp_eval",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.IsIso, CategoryTheory.Functor.mapIso",
+   "results": "Actual logged result: 0 hits; ; loogle: unknown identifier 'CategoryTheory.NatTrans.IsIso'",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ower|[Cc]ohomology.*[Rr]ank.one",
+   "results": "Actual logged result: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-composition-factors",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "proof (1), parenthesis on tower sheaves, and unit proof tower paragraph; former Step 9 before the shifted-heart equality test",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-tower-orientation-evaluation",
+  "worker": "stage1",
+  "summary": "Q105: retained the statement, reused existing tower orientation, domain, transpose-evaluation and counit-normalized compositor results, and proved concentration using the tensor orientation isomorphism. No new nodes or Mathlib leaves; no derived-Hom faithfulness or normalization assumption.",
+  "blueprint": "det-sp-composition-factors proof (1), parenthesis on shifted rank-one tower sheaves; sk-prop-sp-composition unit tower paragraph, preparing only the endpoints and evaluated arrows, not their equality.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Smooth relative dimension adds under composition; a generic permanence result, used only to type the composite h."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Generic tower coefficient operation used with exactly its stated hypotheses, within the composition unit route through tower purity; it supplies Tower orientation and tower purity isomorphism."
+   },
+   {
+    "node": "det-sp-tower-gluing",
+    "why": "Generic tower coefficient operation used with exactly its stated hypotheses, within the composition unit route through tower purity; it supplies Gluing the local tower adjunctions."
+   },
+   {
+    "node": "det-sp-finite-general-ring",
+    "why": "Generic tower coefficient operation used with exactly its stated hypotheses, within the composition unit route through tower purity; it supplies Smooth purity over an arbitrary finite coefficient ring."
+   },
+   {
+    "node": "lem-sp-twisted-pullback-tower-domain",
+    "why": "Generic tower coefficient operation used with exactly its stated hypotheses, within the composition unit route through tower purity; it supplies Uniform twisted-pullback bounds and the domain of the tower projection formula."
+   },
+   {
+    "node": "lem-sp-tower-tensor-transpose-evaluation",
+    "why": "Generic tower coefficient operation used with exactly its stated hypotheses, within the composition unit route through tower purity; it supplies Finite evaluations and naturality of the tower tensor transpose."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Provides ordinary strict-system derived tensor and exact pullback evaluation, not a substitute for geometric composition of purity."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Generic tower coefficient operation used with exactly its stated hypotheses, within the composition unit route through tower purity; it supplies Coefficient Tate twists."
+   },
+   {
+    "node": "lem-pur-diagram-pullback-monoidal-shift-models",
+    "why": "Provides canonical tensor-shift comparisons with actual quotient transitions; generic coherence for the displayed shifted-Tate splitting."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Finite Tate lines commute with pullback and tensor, used only for the coefficient-line splitting, not the geometric orientation composition."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Generic tower coefficient operation used with exactly its stated hypotheses, within the composition unit route through tower purity; it supplies The abelian category of coefficient towers."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Provides local rank one of the finite Tate line; the composition unit contains no proof of this coefficient fact."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-24954430e",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-24954430e (reviewer sub-agent of L); spot-checked: Read in full: the item, all 13 cited node statements, the unit sk-prop-sp-composition and main-20261015 sk-prop-sp-composition-factors.proof (1) (towers: 'tower sheaves, equality tested levelwise'). The statement and stmt_deps are identical to the live unsplit node; 0 new nodes; no repair note; no SGA. Step checks: tower-gamma (2) defines gamma = t(1⊗a)tau and makes it an iso for omega_g in Dctf, so rho is invertible in the tower category. Twisted-pullback-domain gives transpose-evaluation's hypotheses for all K, so (t_K)_n = theta_{f,K_n}, which is the finite-general-ring tensor map (R_n = O_E/l^n = A_{E,en}). Gluing (3) identifies the levels of omega_g; composition-comparisons (3) gives the actual c with evaluation theta_{A_n}. Psi uses the levelwise pullback and tensor of semilinear-derived-sections, the lem-asd line pullbacks with the m|m' transitions, and the shift sign (-1)^{bp} = 1 for b = 2d. Concentration: twist-sheaf-locally-free (3) at r = an, plus levelwise flatness. Edge cases checked: d=e=0, empty X, n=1, ramified E, non-normalized inputs. No duplicate found (the compositor-realization and composite-projection siblings differ). Tool uses accepted: tower-gamma, twisted-pullback-domain and transpose-evaluation (the item's own a_u and t_u), and the generic system/shift coherence nodes. Batch-5: both listed closures reach generic nodes only (trf Leray global-sections identity; flat resolutions of module sheaves), not steps of the trace formula or Poincaré duality, so accepted. FIX: Step 1 now cites lem-weil-pbc-proper-fp-permanence (e) for h = gf separated, a hypothesis of tower-gamma for h that the step left unjustified. Step 4 now states that the line-tower tensor is underived by the Step 6 flatness. proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerOrientationEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCompositionFactors.tower_orientation_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.TowerOrientationLevel",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerOrientationTarget",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerOrientationPhi",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerOrientationPsi",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerOrientationTargetWord",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.TowerOrientationConcentrated",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.TowerOrientationReduction",
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.tower_orientation_evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/TowerOrientationEvaluation.lean",
+  "statement": "theorem tower_orientation_evaluation (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] [(jf ≫ pf).IsOver (Spec (.of D.k))] [(jg ≫ pg).IsOver (Spec (.of D.k))] [IsSeparated (jf ≫ pf)] [IsSeparated (jg ≫ pg)] [SmoothOfRelativeDimension d (jf ≫ pf)] [SmoothOfRelativeDimension e (jg ≫ pg)] (hcomp : (jf ≫ pf) ≫ (jg ≫ pg) = jh ≫ ph) (z : SpTowerCalculus.FiniteCoordinates l E) (pres : SpTowerCalculus.Preservation l E D.k b o q) (cal : SpTowerCalculus.Calculus l E D.k b o q z pres) (alpha : TowerAdjointCompositor.left l E b o q Pf ⋙ TowerAdjointCompositor.left l E b o q Pg ≅ TowerAdjointCompositor.left l E b o q Ph) (_ha : ∀ M, (alpha.hom.app M).hom = (cal.composition.composition (jf ≫ pf) (jg ≫ pg) (jh ≫ ph) hcomp (SpTowerGamma.factorization jf pf) (SpTowerGamma.factorization jg pg) (SpTowerGamma.factorization jh ph)).hom.app M) (_hc : ∀ K, (TowerAdjointCompositor.left l E b o q Pf ⋙ TowerAdjointCompositor.left l E b o q Pg).map (c.hom.app K) ≫ (Pf.adj.comp Pg.adj).counit.app K = alpha.hom.app (Ph.right.obj K) ≫ Ph.adj.counit.app K) : ∃ hR : IsIso (towerRho l E b o q jf pf jg pg d e wf wg Pf Pg af ag), ∃ s : SpTowerGamma.orderedLine l E b X wh (d + e) ≅ (SpTowerShriek.tensor l E b X).obj ((SpTowerShriek.pull l E b (o.geometry (jf ≫ pf))).obj (SpTowerGamma.orderedLine l E b Y wg e), SpTowerGamma.orderedLine l E b X wf d), TowerSplitNormalized l E b o q jf pf jg pg jh ph d e wf wg wh Pf Pg Ph af ag ah s ∧ TowerOrientationConcentrated l E d e (SpTowerGamma.orderedLine l E b X wh (d + e)) ∧ TowerOrientationConcentrated l E d e (towerOrientationTarget l E b o q jf pf jg pg d e wf wg Pf Pg af ag) ∧ TowerOrientationReduction l E b q (towerOrientationPhi l E b o q jf pf jg pg jh ph d e wf wg wh Pf Pg Ph af ag ah c hR) ∧ TowerOrientationReduction l E b q (towerOrientationPsi l E b o q jf pf jg pg d e wf wg wh Pf Pg af ag s) ∧ ∀ n : ℕ, ∃ F : TowerOrientationLevel l E b o q jf pf d wf Pf af n, ∃ G : TowerOrientationLevel l E b o q jg pg e wg Pg ag n, ∃ H : TowerOrientationLevel l E b o q jh ph (d + e) wh Ph ah n, ∃ hr : IsIso (finiteRho (SpTowerP1.levelRing l E n) (jf ≫ pf) (jg ≫ pg)), SpTowerP1.WordComparison l E n (SpTowerGamma.coefficientWord l E b X wh ah.roots n (ah.unitsX n) (ah.coefficientsX n) (ah.tensors n) (d + e)) (towerOrientationTargetWord l E b o q jf pf jg pg d e wf wg Pf Pg af ag n F G) (towerOrientationPhi l E b o q jf pf jg pg jh ph d e wf wg wh Pf Pg Ph af ag ah c hR) (H.orientation.inv ≫ (Etale.rightDerivedUpperShriekCongr (SpTowerP1.levelRing l E n) hcomp.symm).hom.app (MonoidalCategory.tensorUnit _) ≫ (finiteMu (SpTowerP1.levelRing l E n) (jf ≫ pf) (jg ≫ pg) hr).hom) ∧ SpTowerP1.WordComparison l E n (SpTowerGamma.coefficientWord l E b X wh ah.roots n (ah.unitsX n) (ah.coefficientsX n) (ah.tensors n) (d + e)) (towerOrientationTargetWord l E b o q jf pf jg pg d e wf wg Pf Pg af ag n F G) (towerOrientationPsi l E b o q jf pf jg pg d e wf wg wh Pf Pg af ag s) ((finiteLineSplit (SpTowerP1.levelRing l E n) (jf ≫ pf) (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _) (SpTowerP1.levelAnnihilates l E n) (ag.unitsX n) e d).hom ≫ ((Etale.derivedTensor (ModuleCat.{u + 1} (SpTowerP1.levelRing l E n)) X).map ((Etale.ordinaryFinitePullback (SpTowerP1.levelRing l E n) (jf ≫ pf)).map G.orientation.inv)).app _ ≫ ((Etale.derivedTensor (ModuleCat.{u + 1} (SpTowerP1.levelRing l E n)) X).obj _).map F.orientation.inv)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "Exact finite evaluation and ambient concentration; all indices n represent exponent n+1. Reuses published composition-factor arrow definitions through the new existing-definition node. Its downstream composition theorem is never used; omit the reverse proof import into SmoothPurityCompositionFactors to avoid a module cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1c2516e5",
+  "group": "NA",
+  "result": "pass",
+  "note": "All node hypotheses are in the Lean and none is stronger; the hypothesis set, including the alpha/_ha/_hc pinning of c, is identical to the landed parent towers. Every conclusion clause is present: rho invertible; Phi = mu a_h and Psi = f*a_g ⊗ a_f with s pinned by TowerSplitNormalized; finite evaluations via finiteMu, finiteLineSplit and the hcomp comparison; degree -2(d+e) concentration with rank-one finite evaluations; reductions for all m<=n. TowerOrientationLevel copies tower-gamma FiniteLevels, so the existential finite orientations are pinned by OrientationNormalized. New existing:true node def-sp-composition-orientation-arrow-data re-exports the parent's helpers without copying (the parent is downstream); H12 fields OK; the reverse import is omitted per rule 7 and listed in lean.note. lean.statement is verbatim, lines <=100, docstrings carry the source and 6 proof steps, sorry only. Edge cases d=e=0, empty X, n=0, ramified E OK. Advisory: owners of dualizingWord (def-sp-tensor-transpose-evaluation-words) and SpTowerShriek (def-sp-tower-shriek-data) are uncited. No compile run (no change); worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

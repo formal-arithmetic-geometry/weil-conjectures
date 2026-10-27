@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-syntomic-presentation-conormal-fibre-rank",
+ "kind": "statement",
+ "title": "Finite projective syntomic conormal and its fibre dimension rank",
+ "statement": "Call a map $T\\to E$ syntomic if it is flat [def-weil-pbc-flat-ring-map], finitely presented [def-weil-pbc-finitely-presented-algebra], and every fibre $E\\otimes_T\\kappa(\\mathfrak p)$ is a local complete intersection over $\\kappa(\\mathfrak p)$ [def-weil-pbc-complete-intersection-over-field]; residue fields are as in [def-weil-residue-field]. Let $R\\to S$ be syntomic and let $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow S$ be an $R$-algebra presentation with finitely generated kernel $J$ [def-weil-pbc-mv-polynomial-ring]. Then $J/J^2$ is a finite projective $S$-module, meaning a direct summand of a finite free $S$-module. For every prime $\\mathfrak p\\subset R$, put $k=\\kappa(\\mathfrak p)$, $F=S\\otimes_R k$ and $\\bar J=\\ker(k[x_1,\\ldots,x_n]\\to F)$. The canonical map $(J/J^2)\\otimes_S F\\to\\bar J/\\bar J^2$, induced by coefficient reduction, is an isomorphism. For every prime $\\mathfrak q\\subset F$, the localization $(\\bar J/\\bar J^2)_{\\mathfrak q}$ is free of rank $n-\\dim_{\\mathfrak q}(\\operatorname{Spec}F)$, where dimension at a point means the local topological dimension [def-kun-topological-dimension-at-point], not the Krull dimension of the local ring $F_{\\mathfrak q}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BT (lemma-syntomic-presentation-ideal-mod-squares), g=1; Tag 00SC (lemma-lci), (1) implies (4). The fibre comparison follows by tensoring 0 -> J -> P -> S -> 0, using R-flatness of S; this uses flatness of the quotient, not flatness of R -> k."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-residue-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=J/J^2$. Fix a prime $q$ of $S$ and put $p=q\\cap R$. The local map $R_p\\to S_q$ is flat by [lem-weil-pbc-flat-local-ring-maps]. In the fibre $F_p=S\\otimes_R\\kappa(p)$ the kernel $Q$ of $F_p\\to\\kappa(q)$ is a prime: the map sends $s\\otimes a$ to $\\bar s a$ and has domain a nonzero ring because it maps unitally to the field $\\kappa(q)$. The local-complete-intersection hypothesis, unpacked using [def-weil-pbc-complete-intersection-over-field], gives $h\\notin Q$ with $(F_p)_h$ a global complete intersection. Apply [lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection] with finite-presentation neighbourhood $g=1$, this local flatness and this $h$. It gives $g_q\\in S\\setminus q$ and a presentation $S_{g_q}\\cong R[y_1,\\ldots,y_m]/H$ which is a relative global complete intersection, with $H=(f_1,\\ldots,f_c)$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BT (lemma-syntomic-presentation-ideal-mod-squares), first sentence of proof; Tag 00SY (lemma-syntomic), (3) implies (2)."
+   }
+  },
+  {
+   "text": "For the chart $g=g_q$ of step 1, [lem-weil-pbc-conormal-module-principal-localization] applied to the given presentation of $S$ and the chosen presentation of $S_g$ gives $N_g\\oplus S_g^m\\cong(H/H^2)\\oplus S_g^n$. By [lem-weil-pbc-relative-global-complete-intersection-conormal-free], the right side is $S_g^{c+n}$. Thus $N_g$ is a direct summand of a finite free module: inclusion and projection of its first summand, conjugated by the displayed isomorphism, exhibit the splitting. In particular it is finitely generated and projective over $S_g$.",
+   "uses": [
+    "lem-weil-pbc-conormal-module-principal-localization",
+    "lem-weil-pbc-relative-global-complete-intersection-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BT, last sentence of proof, using Tags 00S6 (lemma-conormal-module-localize) and 00SV (lemma-relative-global-complete-intersection-conormal)."
+   }
+  },
+  {
+   "text": "The prime $q$ determines a prime of $S_{g_q}$. Apply [lem-weil-pbc-finite-projective-prime-local-free] to the finite projective module $N_{g_q}$ of step 2 at that prime. Obtain an element $h=a/g_q^r$ outside it such that $(N_{g_q})_h$ is finite free over $(S_{g_q})_h$. Here $a\\notin q$. Inverting $g_q$ and $a/g_q^r$ is the same as inverting $g_q a$: both rings have precisely the universal property of making $g_q$ and $a$ units. The corresponding module fractions identify $(N_{g_q})_h=N_{g_q a}$. Consequently every prime $q$ has a standard neighbourhood $D(t_q)$, $t_q=g_q a\\notin q$, on which $N$ is finite free.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-prime-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX (lemma-finite-projective), (3) implies (7), refining the cover in the proof of Tag 07BT."
+   }
+  },
+  {
+   "text": "The $D(t_q)$ cover $\\operatorname{Spec}S$. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] their elements generate the unit ideal. An expression of $1$ as a finite sum of multiples of these elements selects finitely many $t_1,\\ldots,t_l$ generating that ideal. Each $N_{t_i}$ is finite free by step 3, so [lem-sc-affine-standard-cover-finite-projective] gives that $N$ is finite projective over $S$, i.e. finitely generated and projective [def-weil-pbc-projective-module]. This is the direct-summand sense of the statement: finitely many generators $n_1,\\ldots,n_r$ of $N$ give a surjection $\\pi:S^{\\oplus r}\\to N$, $e_i\\mapsto n_i$, and the lifting property of the projective module $N$ in [def-weil-pbc-projective-module] lifts $\\mathrm{id}_N$ along $\\pi$ to $\\sigma:N\\to S^{\\oplus r}$ with $\\pi\\sigma=\\mathrm{id}_N$, so $N$ is a direct summand of $S^{\\oplus r}$. This argument includes $S=0$: the empty family generates its unit ideal and $N=0$.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sc-affine-standard-cover-finite-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BT, reduction using Tag 00NX (lemma-finite-projective); Tags 00E0 (lemma-Zariski-topology) and 00E8 (lemma-quasi-compact) for the finite standard cover."
+   }
+  },
+  {
+   "text": "Fix now an arbitrary prime $\\mathfrak p$ of $R$ and set $k=\\kappa(\\mathfrak p)$, $F=S\\otimes_R k$. Apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to J\\to P\\to S\\to0$ over $R$, with flat quotient $S$ and tensor factor $k$. It gives $0\\to k\\otimes_R J\\to k\\otimes_R P\\to k\\otimes_R S\\to0$. Under the polynomial scalar-extension isomorphism [lem-weil-pbc-polynomial-scalar-extension], the middle term is $k[x_1,\\ldots,x_n]$ and the last arrow is the given coefficient-reduced presentation of $F$. Therefore the injection identifies $k\\otimes_R J$ with its kernel $\\bar J$. The identification sends $a\\otimes j$ to $a\\bar j$; in particular $\\bar J$ is generated by the reductions of elements of $J$. No flatness of $k$ over $R$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL (lemma-flat-tor-zero); coefficient-reduced presentation as in the proof of Tag 00SY (lemma-syntomic)."
+   }
+  },
+  {
+   "text": "Tensor $J^2\\to J\\to N\\to0$ with $k$ using [lem-weil-pbc-tensor-right-exact]. Under step 5, the image of $k\\otimes_R J^2$ in $\\bar J$ is exactly $\\bar J^2$: a term $a\\otimes jj'$ maps to $a\\bar j\\bar j'$, and conversely a product of sums of terms $a\\bar j$ expands into such terms; coefficients from $k[x_1,\\ldots,x_n]$ can be absorbed in $j$ because $J$ is an ideal. Thus $k\\otimes_R N\\cong\\bar J/\\bar J^2$, sending $a\\otimes[j]$ to $a[\\bar j]$. Finally $N\\otimes_S F\\cong k\\otimes_R N$ explicitly by $[j]\\otimes(s\\otimes a)\\mapsto a\\otimes s[j]$, with inverse $a\\otimes x\\mapsto x\\otimes(1\\otimes a)$. The balancing relations show these are inverse. Their composite is precisely the coefficient-reduction map asserted in the statement, hence proves that this canonical map is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF (lemma-tensor-product-exact), applied to J^2 -> J -> J/J^2 -> 0, after the flat-quotient injection of Tag 00HL."
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak q$ of $F$, the hypothesis that $F$ is a local complete intersection, unpacked using [def-weil-pbc-complete-intersection-over-field], supplies $u\\in F\\setminus\\mathfrak q$ with $F_u$ a global complete intersection over $k$. The polynomial presentation of step 5 identifies $F$ with $k[x_1,\\ldots,x_n]/\\bar J$. Apply [lem-weil-pbc-lci-conormal-free-rank-codimension] to this presentation, $\\mathfrak q$ and $u$. It says that $d=\\dim_{\\mathfrak q}(\\operatorname{Spec}F)$ is an integer between $0$ and $n$ and that $(\\bar J/\\bar J^2)_{\\mathfrak q}$ is free of rank $n-d$. Its dimension is explicitly the topological dimension at the point, as required. If $F=0$ there is no such prime, while the isomorphism in step 6 is still the zero-module isomorphism. This proves every remaining clause.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-lci-conormal-free-rank-codimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SC (lemma-lci), implication (1) implies (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-weil-pbc-conormal-module-principal-localization",
+  "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-lci-conormal-free-rank-codimension",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BT (lemma-syntomic-presentation-ideal-mod-squares), proof via 00SY, 00S6, 00SV and 00NX; Tag 00SC (lemma-lci), (1) implies (4); fibre comparison from Tags 00HL and 00DF with the tensor maps written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite polynomial presentation of a flat finitely presented algebra with local complete intersection fibres has finite projective conormal module whose rank is the number of variables minus local fibre dimension",
+   "results": "{\"t\": \"2026-10-23T12:42:54Z\", \"tool\": \"leanfinder\", \"query\": \"A finite polynomial presentation of a flat finitely presented algebra with local complete intersection fibres has finite projective conormal module whose rank is the number of variables minus local fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmooth.out\", \"Algebra.IsStandardSmooth.finitePresentation\"], \"digest\": \"924f7b4c442db296\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.Cotangent, Module.Projective",
+   "results": "{\"t\": \"2026-10-23T12:42:54Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Extension.Cotangent, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]yntomic|[Cc]otangent.*[Pp]rojective|[Pp]rojective.*[Cc]otangent",
+   "results": "{\"t\": \"2026-10-23T12:42:54Z\", \"tool\": \"grep\", \"query\": \"[Ss]yntomic|[Cc]otangent.*[Pp]rojective|[Pp]rojective.*[Cc]otangent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conormal module of a syntomic algebra presentation is finite projective and its rank determines the dimension of each fibre",
+   "results": "{\"t\": \"2026-10-23T12:42:55Z\", \"tool\": \"leansearch\", \"query\": \"The conormal module of a syntomic algebra presentation is finite projective and its rank determines the dimension of each fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Module.isLocallyConstant_rankAtStalk\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Algebra.IsStandardSmooth.relativeDimension\"], \"digest\": \"eabfa5e2aa2d7eb2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a syntomic polynomial quotient S of R in n variables the conormal is finite projective, commutes with every residue field fibre, and its fibre rank is n minus the local fibre dimension",
+   "results": "{\"t\": \"2026-10-23T12:47:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a syntomic polynomial quotient S of R in n variables the conormal is finite projective, commutes with every residue field fibre, and its fibre rank is n minus the local fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.Extension.Cotangent.finite\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Polynomial.fiberEquivQuotient\"], \"digest\": \"03c8c39d54fc2ca3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smoothness, formally smooth map lifting, finite conormal modules, or general localization; none proves this syntomic statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]yntomic|[Cc]otangent.*[Pp]rojective|[Pp]rojective.*[Cc]otangent",
+   "results": "{\"t\": \"2026-10-23T14:12:42Z\", \"tool\": \"grep\", \"query\": \"[Ss]yntomic|[Cc]otangent.*[Pp]rojective|[Pp]rojective.*[Cc]otangent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smoothness, finite cotangent, Grassmannian, localization, or definition results do not state projectivity for arbitrary syntomic quotients or the full conjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conormal module of a syntomic polynomial quotient is projective and commutes with residue field base change",
+   "results": "{\"t\": \"2026-10-23T14:12:42Z\", \"tool\": \"leansearch\", \"query\": \"The conormal module of a syntomic polynomial quotient is projective and commutes with residue field base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.projective_quotient\", \"Algebra.FormallyUnramified.projective_of_restrictScalars\", \"Module.projective_of_isLocalizedModule\", \"Algebra.Extension.Cotangent\", \"KaehlerDifferential.isLocalizedModule_map\", \"Ideal.instIsNoetherianCotangentOfSubtypeMem\", \"Module.Invertible.instProjective\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\"], \"digest\": \"fe12cb2d9ab95d9d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smoothness, finite cotangent, Grassmannian, localization, or definition results do not state projectivity for arbitrary syntomic quotients or the full conjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.Cotangent, Module.Projective",
+   "results": "{\"t\": \"2026-10-23T14:12:43Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Extension.Cotangent, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smoothness, finite cotangent, Grassmannian, localization, or definition results do not state projectivity for arbitrary syntomic quotients or the full conjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial quotient flat over a base ring with complete intersection fibres has locally free ideal modulo square and fibre rank equal to codimension",
+   "results": "{\"t\": \"2026-10-23T14:12:49Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial quotient flat over a base ring with complete intersection fibres has locally free ideal modulo square and fibre rank equal to codimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"RingHom.IsStandardSmooth\"], \"digest\": \"d5862c52f4ada1be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smoothness, finite cotangent, Grassmannian, localization, or definition results do not state projectivity for arbitrary syntomic quotients or the full conjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective conormal module of a flat finitely presented local complete intersection algebra polynomial presentation",
+   "results": "{\"t\": \"2026-10-23T14:12:50Z\", \"tool\": \"leanfinder\", \"query\": \"Finite projective conormal module of a flat finitely presented local complete intersection algebra polynomial presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmooth.out\", \"Algebra.Smooth\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\"], \"digest\": \"a0b8f84eecf3f14c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned smoothness, finite cotangent, Grassmannian, localization, or definition results do not state projectivity for arbitrary syntomic quotients or the full conjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-algebra-surjection-lift",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZH (lemma-lci-unobstructed), scheme formulation via Tag 0DYX (lemma-affine), with example-schemes and section-general; formal-defos.tex, definition-CLambda specifies the coefficient identifications. Ring-theoretic input: Tag 0DZH proof invokes Smoothing Ring Maps Tag 07M8 (1) after recognizing the given deformation algebra as syntomic. Supporting input: 07M8(1), first paragraph: finite projectivity of the chosen conormal; expected fibre dimension for a basis presentation.",
+   "via": [
+    "lem-sfb-syntomic-algebra-surjection-lift",
+    "lem-sfb-affine-lci-artinian-lift",
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-syntomic-presentation-conormal-fibre-rank",
+  "worker": "stage1",
+  "summary": "Kept the statement and its definition dependencies. Reused the existing local syntomic-chart, stable conormal, relative-CI conormal, finite-projective cover and lci fibre-rank nodes; proved the canonical fibre comparison by flat-quotient injectivity and tensor right exactness. No new nodes. Checked source hypotheses, all citation statements, empty fibres, zero rings and the distinction between local topological dimension and local-ring dimension.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images (3) alteration route, through the 07M8 syntomic lifting prerequisite recorded in blueprint.from.place; realizes the 07BT conormal input and 00SC expected fibre dimension. Current latest blueprint direct-images proof (3) read; no change of route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "why": "Generic commutative-algebra input in the Stacks 07BT/00SC conormal argument supporting the existing 07M8 prerequisite; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-conormal-module-principal-localization",
+    "why": "Generic commutative-algebra input in the Stacks 07BT/00SC conormal argument supporting the existing 07M8 prerequisite; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+    "why": "Generic commutative-algebra input in the Stacks 07BT/00SC conormal argument supporting the existing 07M8 prerequisite; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Generic commutative-algebra input in the Stacks 07BT/00SC conormal argument supporting the existing 07M8 prerequisite; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-sc-affine-standard-cover-finite-projective",
+    "why": "Generic commutative-algebra input in the Stacks 07BT/00SC conormal argument supporting the existing 07M8 prerequisite; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-lci-conormal-free-rank-codimension",
+    "why": "Generic commutative-algebra input in the Stacks 07BT/00SC conormal argument supporting the existing 07M8 prerequisite; the six-functor unit has no replacement for this algebraic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-weil-pbc-conormal-module-principal-localization",
+  "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-weil-pbc-lci-conormal-free-rank-codimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-27d152f6a",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-27d152f6a (reviewer sub-agent of L); spot-checked: Read the item's 7 steps against every cited statement and against Stacks 07BT (proof via 00SY, 00NX, 00S6, 00SV) and 00SC (1)=>(4). There are no new nodes and the statement is unchanged. Step 1: g=1, local flatness from lem-weil-pbc-flat-local-ring-maps, and the lci cover gives h outside Q, so every hypothesis of the syntomic-at-prime node holds. Step 2: the stable iso N_g+S_g^m = H/H^2+S_g^n has the correct sides, and H/H^2 = S_g^c. Steps 3-5 checked: a/g^r localizations, unit ideal from the cover, flat-quotient injectivity with flat S rather than flat kappa(p). Step 6: image(k⊗J^2) = Jbar^2 checked both ways, and the explicit balanced maps compose to the coefficient-reduction map. Step 7 matches the topological dimension at a point. Edge cases checked: S=0, F=0, J=0 polynomial fibre (rank n-n), k[x]/(x^2), n=0. DAG search (07BT, syntomic, conormal+projective) found no duplicate. The six tool_uses are generic Stacks algebra inputs of units p1 and curveestimate; accepted. FIX: step 4 claimed the statement's 'direct summand of a finite free module' form but the cited node only gives finitely generated and projective. Added the two-line splitting of S^r->N by the lifting property of def-weil-pbc-projective-module, and added that definition to the step's uses and to proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SyntomicPresentationConormalFibreRank",
+  "declaration": "Algebra.syntomic_presentation_conormal_fibre_rank",
+  "file": "lean/Sheaf/RingTheory/SyntomicPresentationConormalFibreRank.lean",
+  "statement": "theorem syntomic_presentation_conormal_fibre_rank {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S] [FinitePresentation R S] (hci : ∀ p : PrimeSpectrum R, IsLocalCompleteIntersection p.asIdeal.ResidueField (p.asIdeal.Fiber S)) (n : ℕ) (α : MvPolynomial (Fin n) R →ₐ[R] S) (hα : Function.Surjective α) (hJ : (RingHom.ker α.toRingHom).FG) : (∃ (m : ℕ) (i : (Extension.ofSurjective α hα).Cotangent →ₗ[S] (Fin m → S)) (r : (Fin m → S) →ₗ[S] (Extension.ofSurjective α hα).Cotangent), r.comp i = LinearMap.id) ∧ ∀ p : PrimeSpectrum R, (∃ e : p.asIdeal.ResidueField ⊗[R] (Extension.ofSurjective α hα).Cotangent ≃ₗ[p.asIdeal.ResidueField] ((Generators.ofAlgHom α hα).baseChange p.asIdeal.ResidueField).toExtension.Cotangent, ∀ (a : p.asIdeal.ResidueField) (j : (Extension.ofSurjective α hα).ker) (j' : ((Generators.ofAlgHom α hα).baseChange p.asIdeal.ResidueField).toExtension.ker), j'.val = MvPolynomial.map (algebraMap R p.asIdeal.ResidueField) j.val → e (a ⊗ₜ[R] Extension.Cotangent.mk j) = a • Extension.Cotangent.mk j') ∧ ∀ q : PrimeSpectrum (p.asIdeal.Fiber S), ∃ d : ℕ, topologicalKrullDimAt q = (d : WithBot ℕ∞) ∧ d ≤ n ∧ Nonempty (Module.Basis (Fin (n - d)) (Localization.AtPrime q.asIdeal) (LocalizedModule q.asIdeal.primeCompl ((Generators.ofAlgHom α hα).baseChange p.asIdeal.ResidueField).toExtension.Cotangent))",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1027a50b",
+  "group": "NS",
+  "result": "pass",
+  "note": "Clause-by-clause check of Algebra.syntomic_presentation_conormal_fibre_rank against the node and Stacks 07BT/00SC. Hypotheses are the node's: Module.Flat, FinitePresentation, IsLocalCompleteIntersection of every p.Fiber S, and a surjective α : MvPolynomial (Fin n) R →ₐ S with finitely generated kernel; no stronger assumption, independent universes u and v. Finite projectivity is an explicit splitting through Fin m → S. The fibre comparison is an e : k⊗_R N ≃ₗ[k] J̄/J̄² fixed by coefficient reduction on the spanning elements a⊗[j], so it is the canonical map. J̄ is the kernel of Generators.baseChange, which has ring MvPolynomial (Fin n) k and x_i ↦ 1⊗α(X_i) (Mathlib source read). The rank clause gives a Basis (Fin (n-d)) of the localized J̄/J̄² with d = topologicalKrullDimAt q ≤ n, the topological dimension, not the local-ring dimension. Edge cases S=0, empty fibre, J=0, n=0 and k[x]/(x^2) are covered. No duplicate in side-live lean, Sheaf or dag. Only the lean field differs from the live node, and lean.statement matches the file signature verbatim. One sorry; docstrings carry the source place and blueprint id; proof steps are in the docstring. No hollow definitions or new nodes. Second reading is the worker's self-rereading, present and substantive. Delivery compile clean (2.5 s/2.8 s, no diagnostics) and dry run OK (f2e60fd63e4); no recompile since no file changed."
+ }
+}

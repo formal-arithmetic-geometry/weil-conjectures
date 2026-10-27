@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-embedded-integral-scalar-flat",
+ "kind": "lemma",
+ "title": "Flatness of the embedded integral scalar map on the coefficient-sized site",
+ "statement": "Fix a prime ell, a finite intermediate field E of PadicAlgCl ell, an element pi of its embedded integers generating the maximal ideal, and a Noetherian scheme X. Let phi be the small-site scalar map of [def-sfb-embedded-integral-model-coefficients]. The regular continuous integral coefficient module, restricted along phi to constant embedded coefficients, is flat as a sheaf of modules. This asserts only flatness, not finite type of the residue kernel, identification of its extension, or a quotient isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Paragraph (1); Stacks proetale.tex, section-derived-completion-noetherian (099L); sites-modules.tex, lemma-completion-flat; algebraization.tex, lemma-restriction-derived-complete-equivalence (099I). Finite-type kernel uses the local single generator pi; flatness and canonical quotient are Stacks Tag 093M."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "def-weil-pbc-ringed-site-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved embedded-to-spectral continuous integer ring comparison, and compose it with the canonical pointComparison to the spectral condensed ring. Pull this isomorphism to X. The existing embeddedIntegralScalarKernelSquare supplies an isomorphism of the discrete coefficient rings and the commuting square for the actual scalar maps. Only its scalar-square clause is needed.",
+   "uses": [
+    "lem-integral-coefficient-ext-comparison",
+    "def-sfb-integral-constant-model-realization",
+    "lem-sfb-embedded-integral-scalar-kernel-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the flatness clause of integralModels_flat_residue for the finite extension ULift E. Reconstruct both isomorphisms as small-site ring-sheaf isomorphisms; sectionwise functoriality preserves their scalar square. Transport the local equational criterion across these two ring isomorphisms: lift coefficients and module entries using the inverses, factor the relation locally using spectral flatness, and map the matrix and entries forward. Ring-homomorphism and naturality identities prove the two factorization equations. The criterion and its tensor comparison give exactly the displayed IsFlat assertion. Finite-dimensionality of ULift E is transported by ULift.moduleEquiv. Empty sites and zero-length relations are covered by the same criterion.",
+   "uses": [
+    "lem-sfb-integral-models-flat-residue",
+    "lem-weil-pbc-flat-local-relations-universes",
+    "lem-exc-site-local-relations-imply-flat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-integral-coefficient-ext-comparison",
+  "def-sfb-integral-constant-model-realization",
+  "lem-sfb-embedded-integral-scalar-kernel-square",
+  "lem-sfb-integral-models-flat-residue",
+  "lem-weil-pbc-flat-local-relations-universes",
+  "lem-exc-site-local-relations-imply-flat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D6",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Paragraph (1), using the existing spectral scalar flatness and the existing embedded scalar-square comparison; the private transport argument uses the local equational criterion (Stacks Tag 08FC)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flatness of constant to continuous coefficient sheaves over a discrete valuation ring and their principal residue kernels",
+   "results": "Module.Flat torsion-free and valuation-ring criteria; DVR constructors; flatness of localizations, smooth algebras and scheme stalk maps. No normalized embedded ring-sheaf statement.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing project completion theorem; no matching Mathlib statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal kernel of a constant sheaf quotient by a principal ideal is a finite type sheaf of modules",
+   "results": "SheafOfModules.IsFiniteType and its local-generator API, finite-presentation instances. No identification of the embedded coefficient residue maps or their kernels.",
+   "date": "2026-10-25",
+   "verdict": "The generator API is used by the existing proved ideal_finiteType_of_span helper."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.map_span",
+   "results": "Ideal.map_span in Mathlib.RingTheory.Ideal.Maps.",
+   "date": "2026-10-25",
+   "verdict": "Use to prove that scalar image of a principal ideal has the image generator."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelIdeal|IsQuotientIso; constantToContinuous_preservesFiniteLimits; embedded integral residue; constant continuous flat",
+   "results": "Mathlib has the finite-generation and locally-surjective APIs; project ConstantCompletionEquivalence proves ideal_finiteType_of_span and extension_eq_of_span privately. ConstantToContinuousScalarFlat and the Type-0 private continuousScalarExtension_leftExact cover point coefficients but do not identify the reconstructed small-site embedded map. The spectral comparison and normalized integral limit do not state the full required scalar/residue squares. Blueprint search found no duplicate embedded residue statement.",
+   "date": "2026-10-25",
+   "verdict": "Keep existing generic facts; split only the embedded underived specialization and map normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsEmbeddedCoefficientKernels",
+  "date": "2026-10-25",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "Proof paragraph (1), flat scalar map and canonical first residue quotient.",
+   "via": [
+    "lem-sfb-embedded-integral-coefficient-kernels",
+    "lem-sfb-embedded-integral-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralModelsEmbeddedScalarFlat",
+  "file": "lean/Sheaf/Paper/IntegralModelsEmbeddedScalarFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralModelsEmbeddedScalarFlat",
+  "statement": "theorem integralModelsEmbeddedScalarFlat\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (π : PadicAlgCl.integers ℓ E.1)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))\n    (X : Scheme.{u}) [IsNoetherian X] :\n    let φ := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.scalarMap ℓ E X)\n    SheafOfModules.IsFlat.{u + 1}\n      ((SheafOfModules.restrictScalars.{u + 1}\n        ((sheafCompose (Scheme.coefficientProEtaleModelTopology.{u, u} X)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)).obj\n          (SheafOfModules.unit (siteModuleRings _)))",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T124027-L-1927887",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261025T162201-L-348601",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

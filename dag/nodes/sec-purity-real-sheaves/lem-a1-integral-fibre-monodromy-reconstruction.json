@@ -1,0 +1,307 @@
+{
+ "id": "lem-a1-integral-fibre-monodromy-reconstruction",
+ "kind": "statement",
+ "title": "Continuous integral fibre reconstruction and normalized rational realization",
+ "statement": "Let $X$ be a nonempty connected Noetherian separated scheme [def-pc-scheme, def-weil-connected-scheme, pqf-def-locnoeth, def-weil-scheme-morphism-properties], with Noetherian meaning locally Noetherian and quasi-compact. Assume also that its underlying topological space is Noetherian and that $X$ is quasi-separated. Fix a geometric point $\\bar x$ [def-weil-geometric-point] and put $\\Pi=\\pi_1^{\\mathrm{et}}(X,\\bar x)$ [def-galois-fibre-functor]. Let $\\ell$ be a prime invertible on $X$, let $E/\\mathbf Q_\\ell$ be finite with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. On $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] put $B_X=\\varprojlim_{n\\geq1}(A/\\varpi^n)_X$, where the terms are constant ring sheaves [def-weil-pbc-constant-sheaf], and put $R_X=B_X[1/\\varpi]$. Identify these with the continuous-function integral and rational coefficient sheaves using [lem-sfb-integral-lisse-reduction-equivalence] and localization at $\\ell$ or $\\varpi$. Let $J_X$ be any fully faithful $E$-linear representation-realization functor with lisse values and the simultaneous integral normalizations of [lem-sfb-etale-local-monodromy-realization, def-sfb-monodromy-realization-data]. Its source consists of finite-dimensional $E$-vector spaces with jointly continuous $\\Pi$-action for their product $\\ell$-adic topology, with equivariant linear maps.\n\nLet $M$ be a lisse $B_X$-module, meaning a sheaf module pro-etale locally finite free, with rank zero allowed [def-weil-sheaf-of-modules-category]. Let $(F_n)_{n\\geq1}$ be its normalized tower of finite locally free etale $A/\\varpi^n$-module sheaves under [lem-per-lisse-completed-system-comparison], so $M\\cong\\varprojlim_n\\nu_X^*F_n$, with $\\nu_X^*$ the comparison inverse image [def-weil-pbc-site-comparison-morphism]. Put $\\Lambda_n=(F_n)_{\\bar x}$, with its finite discrete continuous $\\Pi$-action from [cor-galois-lisse-representations](1). Then the fibre transitions are equivariant and induce $\\Lambda_{n+1}/\\varpi^n\\Lambda_{n+1}\\cong\\Lambda_n$. The module $\\Lambda=\\varprojlim_n\\Lambda_n$ is finite free over $A$, its projections induce equivariant isomorphisms $\\Lambda/\\varpi^n\\Lambda\\cong\\Lambda_n$, and its inverse-limit topology equals its $\\varpi$-adic topology. The coordinatewise action $\\Pi\\times\\Lambda\\to\\Lambda$ is jointly continuous.\n\nSet $V=E\\otimes_A\\Lambda$. Then $V$ is finite dimensional and its induced action is jointly continuous for the product $\\ell$-adic topology. The canonical map $\\Lambda\\to V$ is injective and exhibits $\\Lambda$ as a stable finite free lattice. The finite-level correspondence identifies $F_n$ with the local system associated to $\\Lambda/\\varpi^n\\Lambda$, compatibly with all quotient transitions. For the specified $J_X$ and its integral normalization there is consequently an isomorphism $J_X(V)\\cong M[1/\\varpi]$ of lisse $R_X$-modules. No normality hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), pp. 59–60, and first sentence of proof of Lemma 7.4.7, p. 70. Returned proof steps 6–8 expand finite-level evaluation, torsion-free inverse limits, joint continuity and normalized recovery."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-geometric-point",
+  "def-galois-fibre-functor",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-sfb-etale-local-monodromy-realization",
+  "def-sfb-monodromy-realization-data",
+  "def-weil-sheaf-of-modules-category",
+  "lem-per-lisse-completed-system-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "cor-galois-lisse-representations"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized etale tower supplied by lem-per-lisse-completed-system-comparison. Its terms are finite locally free over the finite rings $A/\\varpi^n$, so their stalks $\\Lambda_n$ are finite free over these rings (evaluate an etale local trivialization at $\\bar x$). Apply cor-galois-lisse-representations(1) to each finite level. It gives the continuous discrete actions and makes every transition equivariant. Its compatibility with finite-ring scalar extension carries the given isomorphism $F_{n+1}\\otimes_{A/\\varpi^{n+1}}A/\\varpi^n\\cong F_n$ to $\\Lambda_{n+1}/\\varpi^n\\Lambda_{n+1}\\cong\\Lambda_n$, with the actual transition as quotient map. In Lean use the existing linear fibre path family to define each representation and transport its evaluation formula to the actual stalk; continuity follows from the finite correspondence topology.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "new-e5-linear-fibre-path-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), p. 59, and the integral finite-monodromy reduction in Corollary 6.8.5, p. 60"
+   }
+  },
+  {
+   "text": "The tower in Step 1 satisfies part (1) of lem-pod-adic-limit-finite-modules, with $\\mathcal O_E=A$ and $\\varpi_E=\\varpi$. Hence $\\Lambda=\\varprojlim_n\\Lambda_n$ is finitely generated over $A$, the projections give $\\Lambda/\\varpi^n\\Lambda\\cong\\Lambda_n$, and the inverse-limit topology is the $\\varpi$-adic topology. On compatible tuples define $g(x_n)_n=(gx_n)_n$. Equivariance of the transitions makes this a well-defined $A$-linear group action. Every projection is equivariant by this formula, so its induced quotient isomorphism is equivariant too.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09B8 (lemma-limit-complete) and Tag 031D (lemma-finite-over-complete-ring), as assembled in lem-pod-adic-limit-finite-modules(1)"
+   }
+  },
+  {
+   "text": "To prove torsion-freeness, suppose $\\varpi x=0$ in $\\Lambda$. For each $n\\geq1$, the coordinate $x_{n+1}$ is killed by $\\varpi$ in a free $A/\\varpi^{n+1}$-module. In each free coordinate, $\\varpi a\\in\\varpi^{n+1}A$ implies $a\\in\\varpi^nA$, since $A$ is a domain and $\\varpi\\ne0$. Thus $x_{n+1}\\in\\varpi^n\\Lambda_{n+1}$, whose image in $\\Lambda_n$ is zero by Step 1. All $x_n$ vanish, hence $x=0$. Repeatedly applying this implication shows $\\varpi^s x=0\\Rightarrow x=0$ for every $s\\geq0$. By lem-weil-l-adic-extension-integers-dvr, $A$ is a DVR and every nonzero $a\\in A$ is $u\\varpi^s$ with $u$ a unit and $s\\geq0$. Therefore $\\Lambda$ is torsion-free. Apply lem-sc-dvr-fg-torsionfree-free to the finitely generated module of Step 2: $\\Lambda$ is finite free, including the zero module.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW (lemma-dedekind-torsion-free-flat), part (3); the torsion-freeness calculation is written out here"
+   }
+  },
+  {
+   "text": "For each $n$, the $n$-th coordinate of the action is $(g,x)\\mapsto g p_n(x)$, the composite of $\\operatorname{id}\\times p_n:\\Pi\\times\\Lambda\\to\\Pi\\times\\Lambda_n$ and the continuous finite-level action supplied by cor-galois-lisse-representations(1). Thus every coordinate map is continuous. The topology of the inverse limit is the subspace topology of the product of the discrete $\\Lambda_n$, so a map with values in that limit is continuous exactly when all its coordinates are continuous: inverse images of its basic open sets are finite intersections of coordinate inverse images. This proves joint continuity, not merely continuity for each fixed $g$. By Step 2 the same assertion holds for the $\\varpi$-adic topology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, p. 60: explicit continuity check in the integral-monodromy reduction"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-integral-representation-rationalization] to the finite free integral limit representation. Its basis-coordinate argument proves injectivity of the tensor unit, finite dimensionality, the invariant lattice and joint rational continuity.",
+   "uses": [
+    "lem-a1-integral-representation-rationalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, p. 60: explicit scalar-extension topology check for the integral-monodromy reduction"
+   }
+  },
+  {
+   "text": "Let $\\mathcal L_n$ be the finite local system associated to $\\Lambda/\\varpi^n\\Lambda$. Step 2 identifies this representation equivariantly with $\\Lambda_n$. By full faithfulness and essential surjectivity of cor-galois-lisse-representations(1), the specified fibre identification lifts to an isomorphism $\\mathcal L_n\\cong F_n$. For successive transitions both composites in the required square have the same map on fibres, namely the projection of a compatible tuple to level $n$. Faithfulness therefore makes the square commute. This proves the identification of the entire inverse diagram, including all transitions, rather than just an isomorphism at each level. Use [lem-a1-finite-fibre-linear-lifting] for the unique levelwise linear lift; faithfulness identifies all transition squares. The faithful stalk and equality-detection helpers are reused from Sheaf.Paper.LatticeNormalizationRationalExact, where their unchanged proofs transport the given finite correspondence; its rational-exactness theorem is not used.",
+   "uses": [
+    "lem-a1-finite-fibre-linear-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1) and the finite-monodromy correspondence used in Corollary 6.8.5, pp. 59–60"
+   }
+  },
+  {
+   "text": "The entire normalized etale diagram is now identified. Apply [lem-a1-completed-normalization-recovery] to recover the specified J(V) as actual scalar extension of M. This uses both limit cones, continuous integral scalar compatibility and uniqueness of coefficient extension; no replacement realization or normality is used.",
+   "uses": [
+    "lem-a1-completed-normalization-recovery"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4) and Corollary 6.8.5, pp. 59–60: assemble the prescribed integral normalization and localize"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-lisse-completed-system-comparison",
+  "new-e5-linear-fibre-path-transport",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-a1-integral-representation-rationalization",
+  "lem-a1-finite-fibre-linear-lifting",
+  "lem-a1-completed-normalization-recovery"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "K7",
+  "date": "2026-10-24",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), Corollary 6.8.5; Lean assembly from canonical stalk actions, adic inverse limits, torsion-freeness and the three stated component results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reconstruct a continuous finite free integral fundamental group representation from the normalized finite quotient stalks of an integral lisse proetale sheaf, whose rational monodromy realization recovers its localization",
+   "results": "CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat; CategoryTheory.PreGaloisCategory.IsFundamentalGroup; CategoryTheory.PreGaloisCategory.exists_lift_of_continuous; InfiniteGalois.asProfiniteGaloisGroupFunctor; CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul; CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen; InfiniteGalois.profiniteGalGrpIsoLimit; InfiniteGalois.algEquivToLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-set Galois equivalence, profinite group limits or discrete condensed module functors, not integral lisse fibre reconstruction together with the specified rational realization"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|lisse|pro.?etale|adic.*representation|representation.*adic",
+   "results": "Mathlib/Topology/MetricSpace/MetricSeparated.lean; Mathlib/Topology/MetricSpace/Cover.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-set Galois equivalence, profinite group limits or discrete condensed module functors, not integral lisse fibre reconstruction together with the specified rational realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of finite free quotient stalks of an integral lisse sheaf is a finite free continuous fundamental group representation and rationalization realizes the original sheaf",
+   "results": "ProfiniteGrp.isIso_toLimit; Profinite.asLimitCone; ProfiniteGrp.toLimit_fun_continuous; ProfiniteGrp.isoLimittoFiniteQuotientFunctor; Profinite.lim; ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor; ProfiniteGrp.toLimit_surjective; ProfiniteGrp.toLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-set Galois equivalence, profinite group limits or discrete condensed module functors, not integral lisse fibre reconstruction together with the specified rational realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"Sheaf\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-set Galois equivalence, profinite group limits or discrete condensed module functors, not integral lisse fibre reconstruction together with the specified rational realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral l-adic local system gives a continuous action on the inverse limit of its finite locally constant etale stalks; this is finite free and rationalizing recovers the local system under normalized monodromy",
+   "results": "LocallyConstant.freeOfProfinite; LightCondMod.LocallyConstant.functorToPresheaves; Condensed.profiniteFree; LightCondMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.LocallyConstant.functorToPresheaves; Condensed.profiniteSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-set Galois equivalence, profinite group limits or discrete condensed module functors, not integral lisse fibre reconstruction together with the specified rational realization"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|lisse|pro.?etale|adic.*representation|representation.*adic",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the integral lisse fibre reconstruction and its specified normalized rational realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"Sheaf\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the integral lisse fibre reconstruction and its specified normalized rational realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a finite free continuous fundamental group representation from compatible finite locally constant sheaves over the quotients of a complete discrete valuation ring",
+   "results": "CompHausLike.LocallyConstant.functorIso; CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat; Condensed.lanSheafProfinite; ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor; LocallyConstant.freeOfProfinite; CondensedSet.LocallyConstant.iso; SheafOfModules.freeFunctorCompPullbackIso; Rep.free",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the integral lisse fibre reconstruction and its specified normalized rational realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral lisse proetale sheaf is recovered from its finite quotient stalk representations by taking their finite free adic inverse limit and normalized rational realization",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral; AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgebraicGeometry.exists_lift_of_germInjective; AlgebraicGeometry.germ_injective_of_isIntegral; AlgebraicGeometry.Scheme.Hom.normalization",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the integral lisse fibre reconstruction and its specified normalized rational realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite free modules over quotients of a complete discrete valuation ring with continuous group actions give a finite free inverse limit representation and its lisse sheaf realization after inverting a uniformizer",
+   "results": "Condensed.finFree; BDeRhamPlus; BDeRham; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion; instCommRingBDeRhamPlus; AdicCompletion.ofLinearEquiv; AdicCompletion.module",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the integral lisse fibre reconstruction and its specified normalized rational realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-normal-proetale-monodromy",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Proof of lem-a1-affine-hc0, first sentence about a compactly supported global section: integral realization inside the monodromy comparison used for global lattices. Returned monodromy split steps 6–8: finite-level fibres, torsion-freeness, joint continuity and recovery by the same normalized functor.",
+   "via": [
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-integral-fibre-monodromy-reconstruction",
+  "worker": "stage1",
+  "summary": "Kept the statement and reconstructed the normalized fibre tower using existing finite-coefficient monodromy and adic-limit results. Proved torsion-freeness directly in quotient coordinates before invoking the existing DVR freeness leaf, verified joint continuity by coordinate inverse images and an open lattice cover, and recovered M by the stipulated normalization of the same J_X. No new nodes were needed.",
+  "blueprint": "Realizes the integral-fibre reconstruction inside the first compact-support sentence of lem-a1-affine-hc0, through the integral-lattice/normal-monodromy chain recorded in blueprint.from. Steps 1–3 supply the integral fibre; steps 4–5 its topology; steps 6–7 normalized recovery. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Generic integral reduction/inverse-limit comparison for pro-etale lisse modules; used for the specified normalized tower and recovery of M, not as a replacement of the Rankin–Selberg route."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Generic finite-coefficient fibre equivalence, including scalar extension and faithfulness; used only at finite levels, with the actual evaluation action."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Generic algebraic adic-tower reconstruction, including finite generation, canonical quotient maps and topology; the current unit has no separate algebraic reconstruction theorem."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-field valuation-ring structure and uniformizer factorization, used in the torsion and topology calculations and to compare the two localizations."
+   },
+   {
+    "node": "lem-sfb-etale-local-monodromy-realization",
+    "why": "Only its integral normalization formula for the J_X already assumed by the item, not its etale-local essential-image assertion."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-reduction-equivalence",
+    "why": "Only its canonical coefficient-sheaf identifications already stipulated by the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-lisse-completed-system-comparison",
+  "cor-galois-lisse-representations",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-etale-local-monodromy-realization",
+  "lem-sfb-integral-lisse-reduction-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-2ffca2d5a",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-2ffca2d5a (reviewer sub-agent of L); spot-checked: I read the item in full; this delivery has 0 new nodes and keeps the statement and stmt_deps unchanged. Source checked: Bhatt–Scholze pp. 59–60, Def 6.8.3, Prop 6.8.4(1) (left to the reader) and (4), and the proof of Cor 6.8.5 (Loc_X(O_E) = representations of π1 on finite free O_E-modules); the item writes out that reconstruction (D5). Steps: S1 lem-per gives finite locally free towers, so the stalks Λ_n are free; cor-galois(1) functoriality and its finite-ring base change give equivariant transitions and Λ_{n+1}/ϖ^n ≅ Λ_n. S2 lem-pod-adic(1) hypotheses hold exactly. S3 torsion-freeness is checked correctly through ann(ϖ) = ϖ^n in a free A/ϖ^{n+1}-module plus the dvr(2),(5) factorization; it does not claim that a limit of torsion-free modules is torsion-free; then the DVR freeness leaf. S4 coordinatewise continuity is elementary. S5 the topologies agree via ϖ^nA^d balls (discrete value group), and the ϖ^{-r}Λ open cover gives joint continuity on Π×V; d=0 is fine. S6 full faithfulness lifts the fibre identification, and faithfulness gives the commuting transition squares, so the whole diagram is identified. S7 uses the stipulated J_X normalization from lem-sfb-etale-local/def-sfb on the lattice Λ (X connected, qcqs, topologically Noetherian), reindexed; lem-per gives M ≅ lim ν^*F_n; ℓ = uϖ^e with e > 0, so inverting ℓ or ϖ gives the same localization; the A_X/E_X vs B_X/R_X coefficients are matched by lem-sfb-integral exactly as the statement stipulates. No replacement functor, no normality, no SGA. No cycle. Batch-5 flag: lem-pod-adic-limit-finite-modules is pure commutative algebra (Stacks 09B8/031D/00MA); its 30-node closure reaches no trace-formula or Poincaré-duality theorem, and neither assumption gives it or uses it as a proof step, so it is outside the assumed statements and accepted. cor-galois-lisse-representations was already a base stmt_dep. I accept the six declared tool uses (generic coefficient/algebra tools used through their statements; unit sk-p-real-rankin has no step for this). Small cases checked: M=0, M=B_X^d, nonnormal X."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralFibreMonodromyReconstruction",
+  "declaration": "AlgebraicGeometry.Scheme.integral_fibre_monodromy_reconstruction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.a1IntegralFibreDiagram",
+   "AlgebraicGeometry.Scheme.a1IntegralFibre",
+   "AlgebraicGeometry.Scheme.a1IntegralFibreProjection",
+   "AlgebraicGeometry.Scheme.a1IntegralEtaleTower",
+   "AlgebraicGeometry.Scheme.a1IntegralFibreTopology",
+   "AlgebraicGeometry.Scheme.a1RationalFibre",
+   "AlgebraicGeometry.Scheme.a1RationalFibreUnit",
+   "AlgebraicGeometry.Scheme.integral_fibre_monodromy_reconstruction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralFibreMonodromyReconstruction.lean",
+  "statement": "theorem integral_fibre_monodromy_reconstruction (C : Comparison l P) (J : SfMonodromyRealization l P.E p) (M : Integral l P) : ∃ (hflc : ∀ n : ℕ, IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf (Integers l P) ((a1IntegralEtaleTower l P C M).obj (op n)))) (r : ∀ n : ℕ, Representation (Integers l P) p.group ((a1IntegralFibreDiagram l P p C M).obj (op n))) (rho : Representation (Integers l P) p.group (a1IntegralFibre l P p C M)), (∀ (n : ℕ) (g : p.group) (x : (a1IntegralFibreDiagram l P p C M).obj (op n)), sfModuleFiberToSet l P.E p ((a1IntegralEtaleTower l P C M).obj (op n)) (r n g x) = (J.finiteCorrespondence.γ g).hom.app (galoisUnderlyingFLC (Integers l P) ((a1IntegralEtaleTower l P C M).obj (op n)) (hflc n)) (sfModuleFiberToSet l P.E p ((a1IntegralEtaleTower l P C M).obj (op n)) x)) ∧ (∀ n : ℕ, Finite ((a1IntegralFibreDiagram l P p C M).obj (op n)) ∧ @Continuous _ _ (@instTopologicalSpaceProd _ _ inferInstance ⊥) ⊥ (fun z : p.group × (a1IntegralFibreDiagram l P p C M).obj (op n) ↦ r n z.1 z.2)) ∧ (∀ (n m : ℕ) (h : m ≤ n) (g : p.group) (x : (a1IntegralFibreDiagram l P p C M).obj (op n)), (a1IntegralFibreDiagram l P p C M).map (homOfLE h).op (r n g x) = r m g ((a1IntegralFibreDiagram l P p C M).map (homOfLE h).op x)) ∧ (∀ n : ℕ, Function.Surjective ((a1IntegralFibreDiagram l P p C M).map (homOfLE (Nat.le_succ n)).op) ∧ LinearMap.ker ((a1IntegralFibreDiagram l P p C M).map (homOfLE (Nat.le_succ n)).op).hom = Padic.coefficientExtensionIdeal l P.E (n + 1) • (⊤ : Submodule (Integers l P) ((a1IntegralFibreDiagram l P p C M).obj (op (n + 1))))) ∧ Module.Finite (Integers l P) (a1IntegralFibre l P p C M) ∧ Module.Free (Integers l P) (a1IntegralFibre l P p C M) ∧ (∀ n : ℕ, Function.Surjective (a1IntegralFibreProjection l P p C M n) ∧ LinearMap.ker (a1IntegralFibreProjection l P p C M n) = Padic.coefficientExtensionIdeal l P.E (n + 1) • (⊤ : Submodule (Integers l P) (a1IntegralFibre l P p C M))) ∧ (∀ (n : ℕ) (g : p.group) (x : a1IntegralFibre l P p C M), a1IntegralFibreProjection l P p C M n (rho g x) = r n g (a1IntegralFibreProjection l P p C M n x)) ∧ a1IntegralFibreTopology l P p C M = (Padic.coefficientExtensionMaximalIdeal l P.E).adicModuleTopology (a1IntegralFibre l P p C M) ∧ @Continuous _ _ (@instTopologicalSpaceProd _ _ inferInstance (a1IntegralFibreTopology l P p C M)) (a1IntegralFibreTopology l P p C M) (fun z : p.group × a1IntegralFibre l P p C M ↦ rho z.1 z.2) ∧ ∃ (V : SfContinuousRepresentations l P.E p) (e : a1RationalFibre l P p C M ≅ ModuleCat.of P.E V.obj.V) (B : SfInvariantLattice l P.E V) (i : a1IntegralFibre l P p C M ≃ₗ[Integers l P] B.submodule), Function.Injective (a1RationalFibreUnit l P p C M) ∧ (∀ x : a1IntegralFibre l P p C M, (i x).val = e.hom (a1RationalFibreUnit l P p C M x)) ∧ (∀ (g : p.group) (x : a1IntegralFibre l P p C M), e.hom (a1RationalFibreUnit l P p C M (rho g x)) = V.obj.ρ g (e.hom (a1RationalFibreUnit l P p C M x))) ∧ ∃ d : a1IntegralEtaleTower l P C M ≅ (J.normalization V B).etale, (∀ (n : ℕ) (x : a1IntegralFibre l P p C M), ((J.normalization V B).fiber n).hom (((pointSmallEtale p.point).sheafFiber (A := ModuleCat.{u + 1} (Integers l P))).map (d.hom.app (op n)) (a1IntegralFibreProjection l P p C M n x)) = sfLatticeQuotientMk l P.E B n (i x)) ∧ Nonempty (J.functor.obj V ≅ (completedAdicChange P.X (C.coefficientIso.inv ≫ lisseIntegerToFieldSized l P.E P.X)).obj M.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q130",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the actual normalized tower of the specified completed comparison, concrete compatible-tuple inverse limit, canonical tensor unit, and the same specified SfMonodromyRealization. Positive exponent n+1 is indexed by n. Surjectivity and exact kernels render the induced quotient isomorphisms; their action compatibility is explicit. The finite sheaf correspondence is an isomorphism of entire diagrams, normalized on every lattice residue."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc7bc8fdd",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Item node changed only in lean; no new nodes and no dependency modules. lean.statement is verbatim; the only sorry is the theorem; docstrings carry source, blueprint tag and the 7 proof steps. Hypotheses match the node via Base + SfMonodromyPoint, with no normality. Tower = C.equivalence.functor.obj M, level n = A/ϖ^(n+1), consistent with sfLatticeQuotient. r n is pinned through the sfModuleFiberToSet bijection to J.finiteCorrespondence.γ and is jointly continuous with discrete stalks. Equivariance for all m≤n; transitions and projections are surjective with kernel (ϖ)^(n+1)•⊤; Λ (sectionsSubmodule) is finite free; rho is determined by the projections; induced Pi-of-discrete topology = maximal-ideal adic topology; rho jointly continuous. extendScalars ≅ V via E-linear e; unit injective; i : Λ ≃ B.submodule tied to e∘unit; action pinned on a spanning set. d is a natural iso of the whole tower with (J.normalization V B).etale, with fibre = residue of i x. The Nonempty J(V) ≅ completedAdicChange(...) M is faithful to the node's 'there is an isomorphism'. Edge cases rank 0, index 0, ramified E and universes are OK. Advisory: Base/Comparison/Integral/completedRing are owned by def-per-lisse-completed-system-data, completedAdicChange and the Galois correspondence data by other nodes, none in the base-era stmt_deps; the maintainer may add the system-data node. Not recompiled, per the instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261024T190243-L-4006348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

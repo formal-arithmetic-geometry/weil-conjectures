@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-normalized-coefficient-transition-squares",
+ "kind": "statement",
+ "title": "Transition squares for normalized coefficient comparisons",
+ "statement": "For a normalized coefficient diagram [def-pur-normalized-coefficient-diagram] with arbitrary cochain complexes and arbitrary semilinear transition adjoints, the kappa comparison commutes with every coefficient square, and both scalar tensor comparisons commute with every coefficient square. These are equalities of the actual chain maps defined by canonical scalar associators; no transition is inverted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Steps 5 and 6 of lem-pur-coefficient-comparisons-strict-totalization; Stacks 03EK, 03EL, 07A4, proof constituents."
+ },
+ "stmt_deps": [
+  "def-pur-normalized-coefficient-diagram",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Apply the two scalar-extension adjunctions degreewise. The normalized pullback generators detect equality by the inverse-image presentation. Evaluate the proved kappa transition value with both coefficients one. The opposite route has the same value by the scalar square formula, the semilinear pull-arrow formula and kappa normalization. For scalar tensor transitions, apply lem-pur-normalized-scalar-tensor-transitions for each of the two ring diagrams.",
+   "uses": [
+    "lem-pur-normalized-kappa-transition-calculus",
+    "lem-pur-normalized-scalar-tensor-transitions",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-kappa-transition-calculus",
+  "lem-pur-normalized-scalar-tensor-transitions",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Original steps 5–6; explicit adjunction and generalized-generator reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar extension tensor comparisons for cochain complexes with arbitrary semilinear transitions",
+   "results": "8 hits: HomologicalComplex.extendCyclesIso_hom_naturality, HomologicalComplex.extendCyclesIso_hom_naturality_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, CochainComplex.HomComplex.Cochain.comp_units_smul, ModuleCat.extendScalars_assoc', ModuleCat.ExtendScalars.map_tmul, HomologicalComplex.extendHomologyIso_hom_naturality, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁",
+   "date": "2026-10-23",
+   "verdict": "No exact result: generic total and module scalar-extension APIs do not state these normalized sheaf transition calculations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.mapHomologicalComplex",
+   "results": "7 hits: CategoryTheory.NatIso.mapHomologicalComplex, CategoryTheory.NatIso.mapHomologicalComplex_hom_app_f, CategoryTheory.NatIso.mapHomologicalComplex_inv_app_f, CategoryTheory.Equivalence.mapHomologicalComplex_counitIso, CategoryTheory.Equivalence.mapHomologicalComplex_unitIso, CategoryTheory.NatIso.mapHomotopyCategory_hom_app, CategoryTheory.NatIso.mapHomotopyCategory_inv_app",
+   "date": "2026-10-23",
+   "verdict": "No exact result: generic total and module scalar-extension APIs do not state these normalized sheaf transition calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*hom_ext|ι_D₁|ι_D₂",
+   "results": "24 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/TotalComplex.lean, Mathlib/Algebra/Homology/TotalComplex.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact result: generic total and module scalar-extension APIs do not state these normalized sheaf transition calculations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.CoefficientComparisonsStrictTotalization",
+  "date": "2026-10-23",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-coefficient-comparisons-strict-totalization",
+   "place": "Steps 5 and 6"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.CoefficientTransitionSquares",
+  "file": "lean/Sheaf/SecSmoothPurity/CoefficientTransitionSquares.lean",
+  "declaration": "CategoryTheory.CochainPullback.StrictCoefficient.normalizedCoefficientTransitionSquares",
+  "statement": "theorem normalizedCoefficientTransitionSquares\n    (d : Diagram (J := J) (K := K))\n    (c : ∀ i : Index, Comparison (d.ringed i)) (e : Comparisons d)\n    (_normalized : e.Normalized c) :\n  e.KappaTransitionLaws ∧ TensorTransitionLaws d.R e.sigmaR ∧\n    TensorTransitionLaws d.S e.sigmaS",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-61114",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261024T185821-L-3693383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-61114",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261024T185821-L-3693383",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs live clone (byte-identical statement); wrapper def bodies vs old bodies (verbatim); node lem-pur-coefficient-comparisons-strict-totalization proof/proof_deps vs Lean proof; delivered modules + direct importers CoefficientComparisonsUnitComposition, StrictCoefficientComparisonCalculus and transitive Paper users compiled rc=0; #print axioms (sorryAx only via upstream sorried coefficientComparisons_balanced_construction)"
+ }
+}

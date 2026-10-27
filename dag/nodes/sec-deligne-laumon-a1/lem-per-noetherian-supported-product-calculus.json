@@ -20,272 +20,190 @@
  ],
  "proof": [
   {
-   "text": "For a closed $i:C\\hookrightarrow X$ put $P_C=i_*\\Lambda_C$ in degree zero and $A_b=\\Lambda_X(b)$. Apply [lem-pur-support-restriction-triangle] with its first support equal to $X$: the derived support complex is the homotopy fibre of restriction to $X-C$. By [lem-amb-closed-support-hom] this is $R\\operatorname{Hom}_X(P_C,-)$. Module sheaves have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Taking cohomology and [lem-sc-p1-rhom-hom-derived-roof] identify\n$$H_C^a(X,A_b)=\\operatorname{Hom}_{D(X,\\Lambda)}(P_C,A_b[a]).$$\nUse the natural normalization of [lem-asd-supported-kummer-support-hom-naturality]: pullback is inverse image followed by the inverse closed-constant exchange, and forgetting support is precomposition by $q_C:\\Lambda_X\\to P_C$. The twists $A_b$ are invertible flat degree-zero sheaves, with natural multiplication $A_b\\otimes A_{b'}\\cong A_{b+b'}$, by [lem-asd-etale-finite-twist-pullback]. All ensuing formulas concern these ordinary small-etale Hom groups.",
+   "text": "Put $P_C=(i_C)_*\\Lambda_C$ and let $\\rho_C:\\Lambda_X\\to P_C$ be constant restriction. The open-closed short exact sequence, applied to $\\Lambda_X$, identifies $\\operatorname{Hom}_X(P_C,M)$ with $\\ker(\\Gamma(X,M)\\to\\Gamma(X\\setminus C,M))$: precompose with $\\rho_C$ and evaluate at $1$. Derive this identity on bounded-below injective resolutions. The supported-Hom theorem and the support-restriction triangle (take its first support to be all of $X$) give\n$$H_C^a(X,\\Lambda(b))=\\operatorname{Hom}_{D(X_{\\mathrm{et}},\\Lambda)}(P_C,\\Lambda_X(b)[a]).$$\nThese are the same identifications, since both are induced by the preceding underived kernel identity. In particular forgetting support is precomposition with $\\rho_C$, and restriction to a closed subscheme is ordinary inverse image of the represented morphism with the closed-constant exchange. All coefficient complexes here are bounded below, including every shifted line sheaf used below.",
    "uses": [
-    "lem-pur-support-restriction-triangle",
+    "lem-weil-pbc-open-closed-short-exact",
     "lem-amb-closed-support-hom",
-    "lem-sc-p1-rhom-hom-derived-roof",
-    "lem-asd-supported-kummer-support-hom-naturality",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-weil-pbc-module-sheaves-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 2.1, supported morphism representing a pseudo-divisor; Stacks 0A45, support triangle; derived-Hom interpretation"
-   }
-  },
-  {
-   "text": "For each closed immersion $i:C\\hookrightarrow X$, [lem-trf-oriented-closed-base-localization] gives exact fully faithful module direct image and invertible counit $i^{-1}i_*\\cong1$, with essential image the modules vanishing off $C$. Exact inverse image is [prop-weil-pbc-inverse-image-modules-exact]. Localizing this exact adjunction [def-weil-exact-derived-adjunction] retains its termwise counit, hence $i_*$ is fully faithful on derived categories too. Moreover, for a complex $K$ with cohomology supported on $C$, the unit $K\\to i_*i^{-1}K$ is an isomorphism: its cohomology maps are the invertible supported units of the cited localization lemma. In particular\n$$P_C\\otimes^L A_b\\cong i_*\\Lambda_C(b).$$\nIndeed tensor with the flat line $A_b$ is exact, its restriction off $C$ is zero, and applying $i^{-1}$ gives $\\Lambda_C(b)$ under [lem-kun-inverse-image-monoidal] and [lem-asd-etale-finite-twist-pullback]. This specifies the comparison by its restriction to $C$.",
-   "uses": [
-    "lem-trf-oriented-closed-base-localization",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-exact-derived-adjunction",
-    "lem-kun-inverse-image-monoidal",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04CA, proposition-closed-immersion-pushforward; module form Tag 08M3, lemma-i-star-equivalence; exact-adjunction localization Tag 015F"
-   }
-  },
-  {
-   "text": "For closed $C,D$ and $I=C\\times_XD$, use the specified flat-source isomorphism $\\mu_{C,D}:P_C\\otimes^LP_D\\xrightarrow{\\sim}P_I$ of [lem-pur-etale-closed-constant-tensor]. For representatives $\\alpha:P_C\\to A_b[a]$ and $\\beta:P_D\\to A_{b'}[a']$, define\n$$\\alpha\\cup\\beta=(A_b\\otimes A_{b'}\\cong A_{b+b'})[a+a']\\circ t_{a,a'}(\\alpha\\otimes^L\\beta)\\circ\\mu_{C,D}^{-1}.$$\nHere $t$ is the shift comparison in [lem-pur-shifted-tensor-morphism-calculus]. Its source flatness is supplied by the closed-constant tensor lemma, and the twist multiplication is [lem-asd-etale-finite-twist-pullback]. Step 1 gives precisely the group and support claimed in the statement.",
-   "uses": [
-    "lem-pur-etale-closed-constant-tensor",
-    "lem-pur-shifted-tensor-morphism-calculus",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0FPL/0FPM, associative and symmetric cup diagrams; ordinary supported tensor-morphism construction using Tag 03Q1"
-   }
-  },
-  {
-   "text": "The tensor-morphism operation of [lem-pur-shifted-tensor-morphism-calculus] is additive separately, associative, and changes by $(-1)^{aa'}$ under interchange. The source identifications $\\mu$ obey exactly the same associativity and symmetry diagrams by [lem-pur-etale-closed-constant-tensor]. Twist multiplication is associative, and it is symmetric: by [lem-asd-etale-finite-twist-pullback] the twists are locally free of rank one, etale locally generated by $\\zeta^{\\otimes b}$ for a primitive root $\\zeta$ (dual bases for negative twists), and the interchange of tensor factors fixes $\\zeta^{\\otimes b}\\otimes\\zeta^{\\otimes b'}$, so twist multiplication commutes with the symmetry without sign. Substituting these three equalities in Step 3 proves bilinearity, associativity and the stated sign. No boundedness of a tensor of arbitrary complexes is used: the final coefficients here are the flat lines $A_{b+b'}$.",
-   "uses": [
-    "lem-pur-shifted-tensor-morphism-calculus",
-    "lem-pur-etale-closed-constant-tensor",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0FPL and 0FPM; substitution of signed tensor and closed-coefficient coherence"
-   }
-  },
-  {
-   "text": "For a morphism $v:X'\\to X$ use the normalized supported-Hom pullback of [lem-asd-supported-kummer-support-hom-naturality]. The exchange maps $v^{-1}P_C\\cong P_{C'}$ preserve $\\mu$ by [lem-pur-etale-closed-constant-tensor]. Exactness of inverse image and the pullback identity for shifted tensor morphisms in [lem-pur-shifted-tensor-morphism-calculus], together with the twist identifications of [lem-asd-etale-finite-twist-pullback], identify the inverse image of every factor in Step 3 with its primed factor. Hence $v^*(\\alpha\\cup\\beta)=v^*\\alpha\\cup v^*\\beta$. This includes open restriction and respects the actual support-forgetting maps by Step 1.",
-   "uses": [
-    "lem-asd-supported-kummer-support-hom-naturality",
-    "lem-pur-etale-closed-constant-tensor",
-    "lem-pur-shifted-tensor-morphism-calculus",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product; supported functoriality as in cohomology.tex Tag 0G78, with etale closed-coefficient exchange"
-   }
-  },
-  {
-   "text": "Let $N\\geq n$ and let $T=-\\otimes^L_{\\Lambda_N}\\Lambda_n$ on the same etale site [lem-pur-derived-change-of-rings]. The canonical source comparison $T(P_{C,N})\\cong P_{C,n}$ preserves $q_C$ by [lem-asd-supported-kummer-scalar-source]. The power map on roots of unity gives $T(\\Lambda_N(b))\\cong\\Lambda_n(b)$: etale locally choose a primitive $\\ell^N$-th root, whose image is a primitive $\\ell^n$-th root, so the map sends a basis to a basis; use tensor powers and dual bases for all signed twists [lem-asd-etale-finite-twist-pullback]. The functor $T$ is symmetric strong monoidal with its canonical comparisons by [lem-sfb-ringed-derived-monoidal-comparisons] (the underlying topos map is the identity). On flat degree-zero $P_C,P_D$, its comparison carries $\\mu_{C,D}$ to the reduced $\\mu$: both multiply the reduced local sections. The shifted comparison has the same scalar $(-1)^{a'p}$ on total K-flat models, since scalar extension preserves these integer signs. Thus applying $T$ to Step 3 proves product reduction compatibility, without assuming that reduction is exact.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-asd-supported-kummer-scalar-source",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-pur-etale-closed-constant-tensor",
-    "lem-pur-shifted-tensor-morphism-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 and 0D6D; derived scalar extension and closed coefficient source; roots-of-unity power comparison"
-   }
-  },
-  {
-   "text": "For $Z\\xrightarrow{k}Y\\xrightarrow{i}X$, represent $\\alpha\\in H_Z^a(Y,\\Lambda(b))$ by $k_*\\Lambda_Z\\to\\Lambda_Y(b)[a]$ and $\\beta\\in H_Y^{a'}(X,\\Lambda(b'))$ by $P_Y\\to A_{b'}[a']$. Define\n$$\\alpha\\star\\beta=\\beta(b)[a]\\circ i_*\\alpha:P_Z\\longrightarrow A_{b+b'}[a+a'].$$\nThe intermediate target is $P_Y(b)[a]$ by Step 2; direct images compose because both section functors evaluate a sheaf on the same fibre product, and their derived functors are termwise exact by [lem-trf-oriented-closed-base-localization]. This construction is additive in each class. For a third nested support, both parenthesizations are the same three morphisms in the same order with the same twist-shift additions, so composition proves associativity.",
-   "uses": [
-    "lem-trf-oriented-closed-base-localization",
-    "def-weil-exact-derived-adjunction",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 2.1, composition of supported morphisms; 2.2.3.2, canonical action of cohomology of the support"
-   }
-  },
-  {
-   "text": "For an ordinary class $u:\\Lambda_Y\\to\\Lambda_Y(t)[p]$ and a supported class $\\alpha:k_*\\Lambda_Z\\to\\Lambda_Y(b)[a]$, the cup $u\\cup\\alpha$ equals $u(b)[a]\\circ\\alpha$. To see this, insert the tensor-unit inverse in the cup formula, factor $u\\otimes\\alpha$ as $(u\\otimes1)\\circ(1\\otimes\\alpha)$, and use naturality of the left unitor and $t_{0,a}$ (with first target $\\Lambda_Y(t)[p]$) of [lem-pur-shifted-tensor-morphism-calculus]. Therefore\n$$(u\\cup\\alpha)\\star\\beta=\\alpha\\star(u\\star\\beta).$$\nBoth sides are $\\beta(b+t)[a+p]\\circ i_*u(b)[a]\\circ i_*\\alpha$. This is the projection formula for the action of classes on $Y$. Writing the class $u$ on the other side introduces exactly the Koszul sign from Step 4.",
-   "uses": [
-    "lem-pur-shifted-tensor-morphism-calculus",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 2.2.3.2, cohomology-on-support action; formal tensor-unit and composition calculation"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-closed-immersion-proper], a closed $i:Y\\hookrightarrow X$ is proper and finite type. Since $X$ is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] makes $Y$ Noetherian. The compactification with identity open and proper map $i$ is a compactification between Noetherian schemes. Thus [thm-amb-etale-exceptional-adjoint] supplies $i_*=Ri_*\\dashv i^!$ with counit $\\epsilon_i$. If $\\bar\\alpha:\\Lambda_Z\\to k^!\\Lambda_Y(b)[a]$ and $\\bar\\beta:\\Lambda_Y\\to i^!\\Lambda_X(b')[a']$ are the transposes of $\\alpha,\\beta$, the transpose of Step 7's composite is\n$$k^!(\\bar\\beta)(b)[a]\\circ\\bar\\alpha.$$\nIndeed untransposing gives $\\epsilon_i\\circ i_*\\bar\\beta\\circ i_*\\epsilon_k\\circ i_*k_*\\bar\\alpha$, with the indicated twist-shifts. Naturality of $\\epsilon_k$ rewrites this as the untranspose under the pasted counit for $(ik)^!\\cong k^!i^!$ of [lem-cat-right-adjoint-composition]. Twists commute with these adjoints because they are invertible lines: moving a line across Hom uses its dual and Step 2's twist projection identification. Thus this is exceptional composition of the actual supported morphisms, with no purity identification asserted.",
-   "uses": [
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-cat-right-adjoint-composition",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 2.1 and 2.3.2, reading supported composition through exceptional adjunction"
-   }
-  },
-  {
-   "text": "The nested action also has the asserted functoriality. For pullback, the canonical exchange $v^{-1}i_*K\\to i'_*v_Y^{-1}K$ is an isomorphism for a closed $i$: both objects are supported on $Y'$, and restriction to $Y'$ gives the identity by the counits in [lem-trf-oriented-closed-base-localization], exact inverse image [prop-weil-pbc-inverse-image-modules-exact], and the composition comparisons of [lem-sfb-ringed-derived-monoidal-comparisons]. Step 2's supported derived-unit test proves the claim, including naturality on morphisms. The identical argument gives the scalar comparison $T_Xi_*K\\cong i_*T_YK$: restriction commutes with scalar extension by composition of ringed pullbacks, and open restriction of $T_Xi_*K$ is zero by that same comparison. Consequently both pullback and reduction preserve the composition in Step 7. On closed constant sources the scalar comparison is the unit-normalized one of [lem-asd-supported-kummer-scalar-source], and on twist targets it is that of Step 6. Open restriction is a pullback case.",
-   "uses": [
-    "lem-trf-oriented-closed-base-localization",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-asd-supported-kummer-scalar-source"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 04CA and 0D6D; closed supported-unit test and composition of ringed pullbacks"
-   }
-  },
-  {
-   "text": "Put $U=X-C$. The frame torsor of a trivialized line $(L,s)$ is a $\\mathbf G_m$-torsor with specified section on $U$, by [lem-sc-line-bundle-torsor]. Its relative class $[L,s]\\in H^1(X,U;\\mathbf G_m)$ is [lem-amb-relative-torsor-cohomology]. Apply its relative connecting homomorphism for the exact Kummer sequence [lem-amb-kummer-any-base] with exponent $\\ell^n$ and define $e_C(L,s)=\\delta[L,s]$. The relative groups of [lem-amb-relative-torsor-cohomology] use abelian-sheaf cohomology, Step 1 uses $\\Lambda$-module cohomology of $\\Lambda(1)=\\mu_{\\ell^n}$; they agree canonically. Take an injective resolution $\\mu_{\\ell^n}\\to I$ of $\\Lambda_X$-modules. Restriction to $U$, i.e. to the slice $X_{\\mathrm{et}}/U\\simeq U_{\\mathrm{et}}$ [lem-weil-pbc-etale-cohomology-over-open], has the exact left adjoint extension by zero [lem-weil-pbc-site-restriction-injectives], which carries the $\\Lambda$-action; so $I|_U$ is an injective resolution of $\\Lambda_U$-modules. By [lem-weil-pbc-etale-module-cohomology-forget] on $X$ and on $U$ these terms are acyclic as abelian sheaves. Hence the one complex $\\operatorname{Cone}(\\Gamma(X,I)\\to\\Gamma(U,I))[-1]$ computes both the abelian relative group and the support complex of Step 1, so $\\delta[L,s]$ is the required class in $H^2_C(X,\\Lambda(1))$. Naturality of the relative connecting maps proves pullback and support-forgetting compatibility. For reduction $N\\to n$ the Kummer square has vertical maps $z\\mapsto z^{\\ell^{N-n}}$ on the kernel and on the first $\\mathbf G_m$, and identity on the last $\\mathbf G_m$; the square commutes since $\\ell^n\\ell^{N-n}=\\ell^N$. Its relative connecting square proves the stated power-map reduction for $e$.",
-   "uses": [
-    "lem-sc-line-bundle-torsor",
-    "lem-amb-relative-torsor-cohomology",
-    "lem-amb-kummer-any-base",
-    "lem-weil-pbc-etale-module-cohomology-forget",
-    "lem-weil-pbc-site-restriction-injectives",
-    "lem-weil-pbc-etale-cohomology-over-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 2.1, supported first Chern class; Stacks 03AJ, lemma-torsors-h1, relative refinement; 03PL, lemma-kummer-sequence"
-   }
-  },
-  {
-   "text": "Enlarge the supports to their union, so both trivializations are on the same open $U$. The frame torsor of $(L\\otimes M,s\\otimes t)$ is the contracted product of the two frame torsors [lem-sc-line-bundle-torsor]. Their relative classes add: apply naturality in [lem-amb-relative-torsor-cohomology] first to the two projections $\\mathbf G_m^2\\to\\mathbf G_m$, identifying the class of the product torsor with $([L,s],[M,t])$, and then to multiplication $\\mathbf G_m^2\\to\\mathbf G_m$. Relative cohomology preserves finite products, since finite sums of injective resolutions compute the product and its restriction cone componentwise. Multiplication therefore induces addition. The connecting map is additive, so $e(L\\otimes M,s\\otimes t)=e(L,s)+e(M,t)$. Taking $(M,t)=(L^\\vee,s^\\vee)$ gives $e(L^\\vee,s^\\vee)=-e(L,s)$, since the trivial pair has zero relative torsor class.",
-   "uses": [
-    "lem-sc-line-bundle-torsor",
-    "lem-amb-relative-torsor-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 2.1 and proof of 2.3.2, p.236, additivity for trivialized line bundles"
-   }
-  },
-  {
-   "text": "For an effective Cartier divisor $D$, [lem-asd-ordinary-supported-kummer] identifies $e_D(\\mathcal O_X(D),1)$ with the morphism $c_{D,\\Lambda}$, and identifies its support-forgetting image with $+c_1(\\mathcal O_X(D))$. Since $\\mathcal O_X(D)=\\mathcal I_D^\\vee$ [def-pc-divisor-line-bundle], Step 12 gives $e_D(\\mathcal I_D,1)=-[c_{D,\\Lambda}]$. This is the ideal normalization in XVI Definition 2.1.1, not a sign convention chosen after the composition calculation. The pullback of these trivialized lines when the pulled divisor is Cartier is [lem-asd-supported-kummer-cartier-pullback]; the same holds for their duals, by tensoring the evaluation pairing.",
-   "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "def-pc-divisor-line-bundle",
-    "lem-asd-supported-kummer-cartier-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI Definition 2.1.1 and its warning on the ideal/divisor signs; Stacks 0C4U, lemma-pullback-effective-Cartier-divisors"
-   }
-  },
-  {
-   "text": "Let $i:C\\hookrightarrow X$, and let $e:P_C\\to A_1[2]$ represent $e_C(L,s)$. For $u:\\Lambda_C\\to\\Lambda_C(b)[a]$, define\n$$G_{L,s}(u)=e(b)[a]\\circ i_*u.$$\nMore generally, for $W\\subset C$ closed and $u\\in H_W^a(C,\\Lambda(b))$, the identical formula with source $P_W$ is $u\\star e\\in H_W^{a+2}(X,\\Lambda(b+1))$. These are well typed by Steps 2 and 7. Pulling the first formula back to $C$ gives the cup with $i^{-1}e$ by Step 8. By [lem-asd-supported-kummer-support-hom-naturality] and Step 11, $i^{-1}e$ is $c_1(L|_C)$: pullback to $C$ of forgetting support commutes, and the pulled trivialized open is empty. Thus restriction of $G$ is multiplication by $c_1(L|_C)$, as in XVI Lemma 2.2.2.4.",
-   "uses": [
-    "lem-asd-supported-kummer-support-hom-naturality",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 2.1 and Lemma 2.2.2.4; explicit extension to smaller supports by nested action"
-   }
-  },
-  {
-   "text": "Let $x:\\Lambda_X\\to A_b[a]$. Naturality of the closed adjunction unit gives $i_*i^{-1}x\\circ q_C=q_C(b)[a]\\circ x$. Consequently forgetting support in Step 14 yields\n$$G_{L,s}(x|_C)\\circ q_C=e(b)[a]\\circ q_C(b)[a]\\circ x=c_1(L)(b)[a]\\circ x=c_1(L)\\cup x.$$\nHere $e\\circ q_C=c_1(L)$ is Step 11 and the last equality is the tensor-unit factorization of Step 8, with support all of $X$. Since $c_1(L)$ has degree two, it also equals $x\\cup c_1(L)$ by the sign formula of [lem-pur-shifted-tensor-morphism-calculus]. This proves the requested support-forgetting identity with its prescribed sign.",
-   "uses": [
-    "lem-asd-supported-kummer-support-hom-naturality",
-    "lem-pur-shifted-tensor-morphism-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 2.1, forgetting the support of a pseudo-divisor class; tensor-unit projection calculation"
-   }
-  },
-  {
-   "text": "Put $I=D_1\\times_XD_2$ and $i_j:D_j\\hookrightarrow X$. Let $e_j=e_{D_j}(\\mathcal I_{D_j},1)$. Transversality makes $I\\hookrightarrow D_1$ an effective Cartier divisor, and Step 13 together with [lem-asd-supported-kummer-support-hom-naturality] identifies $i_1^{-1}e_2$ with its ideal-normalized class $e_{I\\subset D_1}$. In particular the comparison of ideal lines and their trivializations is justified by [lem-asd-supported-kummer-cartier-pullback], taking duals. Under $P_{D_1}\\otimes^LP_{D_2}\\cong P_I$ of [lem-pur-etale-closed-constant-tensor], one has\n$$i_{1*}e_{I\\subset D_1}=1_{P_{D_1}}\\otimes^Le_2:P_I\\to P_{D_1}(1)[2].$$\nBoth endpoints are in the fully faithful closed derived image of Step 2, and restricting this equality to $D_1$ gives the just-proved pullback identity. Thus this equality holds globally in the derived category; it is not inferred by gluing arbitrary local derived morphisms.",
-   "uses": [
-    "lem-asd-supported-kummer-support-hom-naturality",
-    "lem-asd-supported-kummer-cartier-pullback",
-    "lem-pur-etale-closed-constant-tensor",
-    "lem-trf-oriented-closed-base-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI proof of Theorem 2.3.2, p.236, transverse Cartier interchange; derived tensor proof using Cartier pullback rather than the external Fujiwara reference"
-   }
-  },
-  {
-   "text": "For $u\\in H^a(I,\\Lambda(b))$, Step 16 and tensor bifunctoriality identify the morphism underlying $G_{D_1\\subset X}G_{I\\subset D_1}$ with $e_1\\cup e_2:P_I\\to\\Lambda_X(2)[4]$, followed on the source by the supported action of $u$. Indeed its two arrows are $1\\otimes e_2$ and $e_1\\otimes1$ with the shifts moved out; their composite is $e_1\\otimes e_2$. With $D_1,D_2$ exchanged the same calculation gives $e_2\\cup e_1$. By [lem-pur-shifted-tensor-morphism-calculus] the interchange sign is $(-1)^{2\\cdot2}=1$, and [lem-pur-etale-closed-constant-tensor] identifies the two intersection sources canonically. Therefore the two operators agree in $H_I^{a+4}(X,\\Lambda(b+2))$ for every $u$. Every construction used above is natural for pullback and reduction by Steps 5, 6, 10 and 11, hence so are these operators and identities. Regularity of $X$ was never used.",
-   "uses": [
-    "lem-pur-shifted-tensor-morphism-calculus",
+    "lem-pur-support-restriction-triangle",
+    "def-pur-etale-derived-supported-sections",
     "lem-pur-etale-closed-constant-tensor"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095L (lemma-ses-associated-to-open), 0A45 (lemma-cohomology-with-support-triangle); kernel and restriction-cone realization"
+   }
+  },
+  {
+   "text": "For $\\alpha:P_C\\to\\Lambda(b)[a]$ and $\\beta:P_D\\to\\Lambda(b')[a']$, define their product by\n$$P_{C\\cap D}\\xrightarrow{\\mu_{C,D}^{-1}}P_C\\otimes^L P_D\\xrightarrow{\\alpha\\otimes\\beta}\\Lambda(b)[a]\\otimes^L\\Lambda(b')[a']\\xrightarrow{t_{a,a'}}\\Lambda(b+b')[a+a'].$$\nThe closed-constant tensor lemma supplies the specified associative, symmetric multiplication $\\mu$, and the twist lemma supplies locally free rank-one coefficient lines. The multiplication of signed powers is associative and symmetric: on any local basis it sends $e^b\\otimes e^{b'}$ to $e^{b+b'}$, including negative powers by evaluation. Apply the source-system cup-calculus lemma with labels the closed supports and meet their intersection. Its hypotheses are exactly these flatness and coherence statements. It gives bilinearity, associativity and interchange sign $(-1)^{aa'}$ for every integer degree and twist. Bilinearity factors the pairing through the tensor product of the cohomology groups. No purity or regularity assertion is used.",
+   "uses": [
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-pur-supported-source-system-cup-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPL and 0FPM (associative and commutative cup products), applied via the signed tensor-morphism/source-system refinements"
+   }
+  },
+  {
+   "text": "For $k:Z\\hookrightarrow Y$ and $i:Y\\hookrightarrow X$, represent $u\\in H_Z^a(Y,\\Lambda(b))$ by $k_*\\Lambda_Z\\to\\Lambda_Y(b)[a]$, and $v\\in H_Y^{a'}(X,\\Lambda(b'))$ by $P_Y\\to\\Lambda_X(b')[a']$. Closed pushforward is exact: closed immersions are finite and finite direct image is exact. Identify $i_*k_*\\Lambda_Z=P_Z$ by composition of direct images. Let\n$$p_{i,N,K}:i_*N\\otimes^L K\\longrightarrow i_*(N\\otimes^Li^*K)$$\nbe the canonical projection map, adjoint to the inverse-image tensor comparison followed by the ordinary adjunction counit. For a shifted twist line $K$ it is an isomorphism: locally trivialize the line and use the projection map's unit and shift laws. Its inverse identifies $i_*\\Lambda_Y(b)[a]$ with $P_Y(b)[a]$. Define\n$$u\\cdot v=(-1)^{a a'}v(b)[a]\\circ p_{i,\\Lambda_Y,\\Lambda_X(b)[a]}^{-1}\\circ i_*u.$$\nThe displayed sign is the Koszul comparison for composing homogeneous morphisms with the fixed $t_{a,a'}$: moving the second degree past the first shift contributes $(-1)^{a a'}$. This is the shifted tensor action, expressed as composition of supported morphisms; for every Cartier factor its degree is two and this sign is $1$. This gives the nested action with support $Z$; the same formula applies to every further closed support in $Y$. Its associativity is composition associativity: for degrees $a,a',a''$ both signs are $(-1)^{a a'+a a''+a' a''}$, and both parenthesizations are the successive pushed morphisms, with all line factors reassociated by $(n\\otimes l)\\otimes l'\\mapsto n\\otimes(ll')$. The signed shift comparisons agree by the shifted tensor-calculus lemma.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI §2.1, pp. 228–229, composition description of Gys; Proposition 2.2.3.2, p. 233, canonical action pairing. Projection map: Stacks sites-cohomology.tex Tag 0B56"
+   }
+  },
+  {
+   "text": "Projection for a class on $Y$ is the same composition formula with its first support all of $Y$. Thus $(u\\cup y)\\cdot v=u\\cdot(y\\cdot v)$, with the indicated shifts, by the associativity just checked. For an ambient class $x$, naturality of $p_{i,N,K}$ in $K$ says that tensoring by $x$ before the projection map equals $i_*i^*x$ after it. This gives $(i^*x)\\cdot v=x\\cup v$, including any smaller support in $Y$. This is the projection formula used here. Finally the right adjoints $Ri^!$ and $Rk^!$ exist for closed immersions. With the homogeneous-composition sign fixed in Step 3, a composite $i_*k_*\\Lambda_Z\\xrightarrow{i_*u}i_*\\Lambda_Y(b)[a]\\xrightarrow{v(b)[a]}\\Lambda_X(b+b')[a+a']$ transposes by applying first the $i_*\\dashv Ri^!$ Hom bijection and then the $k_*\\dashv Rk^!$ bijection. Their composite is exactly the Hom bijection for $(ik)_*\\dashv Rk^!Ri^!$. Including that same shift comparison, this is exceptional composition after adjunction. The line comparison in this displayed composite is the one fixed in Step 3.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-exc-closed-ambient",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI §2.1, p. 229, morphism and composition interpretation; §2.2.3, canonical pairings. Adjunction composition: Stacks categories.tex Tag 0DV0"
+   }
+  },
+  {
+   "text": "Let $v:X'\\to X$, and pull back every closed support scheme-theoretically. Inverse image on constant-coefficient etale modules is exact. The particular closed-constant exchanges $b_{v,C}:v^{-1}P_C\\cong P_{C'}$ preserve $\\rho$ and $\\mu$, and the roots-of-unity comparisons preserve line multiplication and evaluation. Consequently the exact-pullback clause of the source-system cup-calculus lemma applies to Step 2. For Step 3 use finite exchange for each closed immersion, on both the source and target of the pushed morphism. The projection map is the mate of the tensor comparison and counit; replacing these by their inverse-image comparisons gives the same mate, so the defining nested composite pulls back to the composite defining the pulled-back action. More explicitly, before taking mates both maps are the tensor of the pulled-back morphism with the identity followed by the pulled-back counit; the adjunction bijection identifies them. Exchanges compose as constant restriction and inverse image do, so these products preserve identities and compositions of pair maps. Open restriction is the case that $v$ is open. No Cartier hypothesis is needed for this step.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-supported-source-system-cup-calculus",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0B56 (canonical projection mate); etale-cohomology.tex Tag 03Q1, finite closed exchange"
+   }
+  },
+  {
+   "text": "For coefficient reduction $A=\\mathbf Z/\\ell^N\\to B=\\mathbf Z/\\ell^n$, $N\\geq n$, use the derived change-of-rings functor $F=-\\otimes_A^LB$, not underived tensor on arbitrary complexes. The closed-source scalar comparison gives $F(P_C^A)\\cong P_C^B$ without flatness of $B$ over $A$. The map on lines is induced by $z\\mapsto z^{\\ell^{N-n}}$; etale locally a primitive root is a basis and maps to a primitive-root basis at level $n$, so its scalar extension is an isomorphism. The signed-power lemma extends this comparison to all weights, compatibly with multiplication and evaluation. The ringed-topos tensor-pullback theorem, specialized to the identity topos and $A\\to B$, gives $F(K\\otimes_A^LL)\\cong FK\\otimes_B^LFL$. Its compatibility with our products is visible on flat K-flat models: $(p\\otimes q)\\otimes s\\mapsto(p\\otimes1)\\otimes(q\\otimes s)$ respects multiplication, reassociation and the sign $(-1)^{a'p}$ of the shift comparison. Thus applying $F$ to the defining tensor composite in Step 2 gives exactly the $B$ composite. The closed projection comparison and closed scalar-source maps are induced by these same balanced formulas, so applying $F$ to the composite in Step 3 gives its $B$ counterpart as well. The natural scalar source map is fixed by the coefficient unit, so forgetting support also commutes. This proves reduction compatibility without asserting that reduction is exact on module sheaves.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-geo-cartier-coeff-extension",
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU, 06YY, 07A4 (derived change of rings and tensor comparison); etale-cohomology.tex Tag 03Q1 for the closed scalar-source stalk calculation"
+   }
+  },
+  {
+   "text": "Let $U=X\\setminus C$. The frame torsor of $(L,s)$ determines $[L,s]\\in H^1(X,U;\\mathbf G_m)$ by the relative torsor theorem. Apply the relative connecting map for the exact $\\ell^n$-Kummer sequence to define $e_C(L,s)$. The line-torsor correspondence sends tensor product to contracted product. To see addition with the specified sections, form the product of two framed torsors, a $\\mathbf G_m\\times\\mathbf G_m$-torsor, and push it out by multiplication. Relative cohomology of a finite product of coefficient sheaves is the product of relative cohomologies: take the product of the two injective resolutions and their restriction cones. Projection naturality of the relative torsor classification identifies its two coordinates with the given relative classes; multiplication therefore sends them to their sum. The relative Kummer connecting map is a group homomorphism, so $e_C(L\\otimes M,s\\otimes t)=e_C(L,s)+e_C(M,t)$. The evaluation pairing identifies $(L\\otimes L^\\vee,s\\otimes s^\\vee)$ with the trivial framed line; its class is zero. Hence $e_C(L^\\vee,s^\\vee)=-e_C(L,s)$. When supports differ, restrict both specified sections to the complement of their union and apply the same argument there; forgetting the old support is induced by that restriction of the cones.",
+   "uses": [
+    "lem-amb-relative-torsor-cohomology",
+    "lem-amb-kummer-any-base",
+    "lem-sc-line-bundle-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI §2.1, pp. 228–229; proof of Theorem 2.3.2, p. 236, addition of framed line classes. Stacks sites-cohomology.tex Tag 03AJ; etale-cohomology.tex Tag 03PL"
+   }
+  },
+  {
+   "text": "The relative torsor theorem makes these classes natural under pullback of the pair, and identifies forgetting the specified section with the ordinary line-torsor class. Naturality of its connecting maps therefore identifies the forgotten $e_C(L,s)$ with the ordinary Kummer $c_1(L)$. Reduction from level $N$ to $n$ uses the commuting Kummer diagram: the map on roots is $z\\mapsto z^{\\ell^{N-n}}$, the map on the middle $\\mathbf G_m$ is the same power, and the map on the right $\\mathbf G_m$ is the identity. Indeed $(z^{\\ell^{N-n}})^{\\ell^n}=z^{\\ell^N}$. Its relative connecting square sends $e_C^{(N)}(L,s)$ to $e_C^{(n)}(L,s)$, under Step 6's coefficient identification. For a Cartier $D$, the ordinary supported Kummer theorem identifies $e_D(\\mathcal O_X(D),1)$ with $c_{D,\\Lambda}$. Since $\\mathcal O_X(D)=\\mathcal I_D^\\vee$ with dual off-divisor trivializations, Step 7 identifies $e_D(\\mathcal I_D,1)$ with $-c_{D,\\Lambda}$. Pullback retains this Cartier interpretation whenever the inverse-image divisor is Cartier; pullback of the framed line class itself always exists.",
+   "uses": [
+    "lem-amb-relative-torsor-cohomology",
+    "lem-amb-kummer-any-base",
+    "lem-asd-ordinary-supported-kummer",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI §2.1 and Definition 2.1.1, pp. 228–229 (ideal normalization and its sign); Stacks Tag 03PL, Kummer sequence naturality"
+   }
+  },
+  {
+   "text": "Define $G_{L,s}(u)=u\\cdot e_C(L,s)$ by Step 3 with $Y=C$. For $u\\in H_W^a(C,\\Lambda(b))$, its represented source after closed pushforward is $P_W$; hence the same formula lands in $H_W^{a+2}(X,\\Lambda(b+1))$. This supplies the required extension for every closed $W\\subset C$. Pull back the defining morphism to $C$. Closed inverse image cancels its own direct image, and Step 8 identifies the inverse image of $e_C(L,s)$ with $c_1(L|_C)$, because the pulled-back support is all of $C$. Thus restriction of $G$ is multiplication by this class. For $x\\in H^a(X,\\Lambda(b))$, Step 4 gives $G_{L,s}(x|_C)=x\\cup e_C(L,s)$. Precomposition with $\\rho_C$ forgets support by Step 1; the restriction/multiplication map defining $\\mu$ carries the two constant units to the constant unit on the intersection. Forgetting support therefore gives $x\\cup c_1(L)$, as asserted. The pullback and reduction compatibilities of $G$ follow by substituting Step 8 into the defining action and applying Steps 5–6.",
+   "uses": [
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-amb-relative-torsor-cohomology",
+    "lem-pur-etale-closed-constant-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI §2.1, p. 229, definition of the operator; Lemma 2.2.2.4, p. 232, restriction of Gys"
+   }
+  },
+  {
+   "text": "Write $i:D_1\\hookrightarrow X$, $j:D_2\\hookrightarrow X$ and $I=D_1\\times_XD_2$, with $k:I\\hookrightarrow D_1$. Let $e_1,e_2$ be the ideal-normalized supported classes. Transversality ensures that $I$ is Cartier in each $D_i$. Pullback of the local equation and its ideal trivialization identifies $i^*e_2$ with $e(\\mathcal I_{I/D_1},1)$ by Step 8 (and likewise with the indices reversed). Apply naturality of the projection map of Step 3 to the morphism $e_2:P_{D_2}\\to\\Lambda(1)[2]$:\n$$p_{i,\\Lambda,\\Lambda(1)[2]}(1\\otimes e_2)=i_*(i^*e_2)\\,p_{i,\\Lambda,P_{D_2}}.$$\nThe latter projection map is $\\mu_{D_1,D_2}$ under the closed-constant exchange: both are induced by restricting the two constant sections and multiplying them on $I$. Their equality is an equality of degree-zero sheaf maps; the same equality holds on their flat models. Compose the displayed square with $e_1(1)[2]$ and invert the projection isomorphisms. The resulting identity is\n$$e_1\\star e_2=e_1(1)[2]\\circ p_{i,\\Lambda,\\Lambda(1)[2]}^{-1}\\circ i_*(i^*e_2):P_I\\to\\Lambda(2)[4].$$\nThus the two iterated Cartier class morphisms are respectively $e_1\\star e_2$ and $e_2\\star e_1$. Step 2 makes them equal, since $(-1)^{2\\cdot2}=1$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-asd-ordinary-supported-kummer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI proof of Theorem 2.3.2, p. 236, transverse Cartier operator equality; tensor/projection calculation supplies the interchange argument without a purity theorem"
+   }
+  },
+  {
+   "text": "For an arbitrary $u\\in H^a(I,\\Lambda(b))$, push its represented morphism $\\Lambda_I\\to\\Lambda_I(b)[a]$ to $X$, obtaining $\\widetilde u:P_I\\to P_I(b)[a]$. By Step 3, the two composites of the extended operators in the question are the two class morphisms in Step 10, shifted and twisted by $(b)[a]$, each precomposed with the same $\\widetilde u$. Their equality in Step 10 therefore gives equality on every such $u$, in $H_I^{a+4}(X,\\Lambda(b+2))$. This also checks the common domain and codomain; no extension of $u$ to $D_1$, $D_2$, or $X$ is assumed. All arguments used only exact closed-support functors, line twists, and the Cartier condition on the two restrictions. In particular no regularity hypothesis on $X$ has entered.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI proof of Theorem 2.3.2, p.236, equality of transverse Cartier operators; even-degree tensor interchange"
+    "place": "XVI proof of Theorem 2.3.2, pp. 236–237, action of the transverse Cartier equality on supported classes"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-support-restriction-triangle",
+  "lem-weil-pbc-open-closed-short-exact",
   "lem-amb-closed-support-hom",
-  "lem-sc-p1-rhom-hom-derived-roof",
-  "lem-asd-supported-kummer-support-hom-naturality",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-trf-oriented-closed-base-localization",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-exact-derived-adjunction",
-  "lem-kun-inverse-image-monoidal",
+  "lem-pur-support-restriction-triangle",
+  "def-pur-etale-derived-supported-sections",
   "lem-pur-etale-closed-constant-tensor",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-supported-source-system-cup-calculus",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-exc-closed-ambient",
+  "def-weil-pbc-composite-adjunction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-weil-pbc-finite-exchange",
   "lem-pur-derived-change-of-rings",
-  "lem-asd-supported-kummer-scalar-source",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "thm-amb-etale-exceptional-adjoint",
-  "lem-cat-right-adjoint-composition",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sc-line-bundle-torsor",
+  "lem-geo-cartier-coeff-extension",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-amb-relative-torsor-cohomology",
   "lem-amb-kummer-any-base",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-site-restriction-injectives",
-  "lem-weil-pbc-etale-cohomology-over-open",
+  "lem-sc-line-bundle-torsor",
   "lem-asd-ordinary-supported-kummer",
   "def-pc-divisor-line-bundle",
-  "lem-asd-supported-kummer-cartier-pullback"
+  "prop-openclosed-lowerstar-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "XVI 2.1, Definition 2.1.1, Lemma 2.2.2.4, Proposition 2.2.3.2 and proof of Theorem 2.3.2 pp.235-236. Agent supplies the ordinary etale tensor-Hom derivation of the supported actions and transverse interchange from existing DAG tools."
+  "place": "XVI §2.1, Lemma 2.2.2.4, Proposition 2.2.3.2 and proof of Theorem 2.3.2, pp. 228–229, 232–233, 236; tensor-Hom reconstruction of the supported operations using the cited Stacks-based interfaces"
  },
  "mathlib_searches": [
   {
@@ -357,6 +275,41 @@
    "results": "{\"t\": \"2026-10-18T19:28:42Z\", \"tool\": \"leanfinder\", \"query\": \"Relative first Chern classes of line bundles with an open trivialization yield commuting Gysin maps for transverse Cartier divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_fst\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.cocycle\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_fst\", \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd\"], \"digest\": \"ffb2eefb522c55b7\"}",
    "date": "2026-10-18",
    "verdict": "no match: read the returned declarations; cotangent modules, scheme pullback cocycles, topology construction and Hom-complex classes do not state the supported etale Kummer/Gysin calculus"
+  },
+  {
+   "tool": "grep",
+   "query": "cupWithSupports|supportedCup|Gysin|pseudoDivisor",
+   "results": "{\"t\": \"2026-10-24T09:36:16Z\", \"tool\": \"grep\", \"query\": \"cupWithSupports|supportedCup|Gysin|pseudoDivisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme pullbacks, cotangent modules, finest site topology and Hom-complex class arithmetic do not state ordinary etale supported products or Cartier Gysin interchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology with supports cup product and relative first Chern class of a line bundle",
+   "results": "{\"t\": \"2026-10-24T09:36:16Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology with supports cup product and relative first Chern class of a line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass\", \"CochainComplex.HomComplex.CohomologyClass.mk_sub\", \"CochainComplex.HomComplex.CohomologyClass.mk\", \"CochainComplex.HomComplex.CohomologyClass.mk_add\", \"CochainComplex.HomComplex.CohomologyClass\", \"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom\", \"CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom\", \"CochainComplex.HomComplex.Cochain.units_smul_v\"], \"digest\": \"f1c5ac74735b16a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme pullbacks, cotangent modules, finest site topology and Hom-complex class arithmetic do not state ordinary etale supported products or Cartier Gysin interchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "{\"t\": \"2026-10-24T09:36:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gysin\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"], \"digest\": \"31824d43e9c1a0fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme pullbacks, cotangent modules, finest site topology and Hom-complex class arithmetic do not state ordinary etale supported products or Cartier Gysin interchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology with closed supports associative cup product graded commutativity and Cartier divisor Gysin maps",
+   "results": "{\"t\": \"2026-10-24T09:36:17Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology with closed supports associative cup product graded commutativity and Cartier divisor Gysin maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"Algebra.Generators.H1Cotangent.δ_map\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"Algebra.Extension.H1Cotangent.map_comp\", \"Algebra.Generators.H1Cotangent.δ\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\"], \"digest\": \"00ecf7f711cff55c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme pullbacks, cotangent modules, finest site topology and Hom-complex class arithmetic do not state ordinary etale supported products or Cartier Gysin interchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of relative first Chern supported classes for transverse effective Cartier divisors equals their cup product",
+   "results": "{\"t\": \"2026-10-24T09:36:38Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of relative first Chern supported classes for transverse effective Cartier divisors equals their cup product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion_assoc\"], \"digest\": \"8e15ec849fb6430b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme pullbacks, cotangent modules, finest site topology and Hom-complex class arithmetic do not state ordinary etale supported products or Cartier Gysin interchange"
   }
  ],
  "mathlib_match": null,
@@ -385,149 +338,145 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-noetherian-supported-product-calculus",
   "worker": "stage1",
-  "summary": "Seventeen explicit ordinary-etale steps: supported Hom, exact closed image and twists, signed tensor cup products, pullback and derived coefficient reduction, nested composition and projection, exceptional transposes, additive relative Kummer classes, ideal sign, smaller-support Gysin action and transverse Cartier interchange. No new nodes. Corrected the omitted smaller-support domain of iterated G operators; no hypothesis or asserted equality was removed. All cited statements were opened; the field-specific pro-etale cup nodes are not used for the general Noetherian base.",
-  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, Step 3: regular finite-torsion local model for normalized duality; through lem-per-regular-immersion-class-calculus this item supplies supported products and Cartier interchange used in its Steps 2,3,5,6,8 and 12.",
+  "summary": "Fresh reconstruction of the re-admitted finite-coefficient interface, preserving its statement, source, statement dependencies, searches and provenance. Existing ordinary-etale tensor, projection, relative torsor, Kummer and scalar-source nodes suffice; no new node. Explicitly constructs nested actions and their extension to smaller supports, computes the ideal-line sign, and proves transverse interchange by the projection naturality square and degree-two symmetry. Historical proof closure is not reused.",
+  "blueprint": "Retains the inherited ancestry to lem-per-artin-gabber-affine-curve, historical proof Step 3, solely as provenance of this finite-coefficient construction input. Realizes the supported-product input in lem-per-regular-immersion-class-calculus; does not claim or restore the discarded Artin–Gabber argument. Latest ancestor statement/proof and unit were read.",
   "tool_uses": [
    {
-    "node": "lem-pur-support-restriction-triangle",
-    "why": "Generic ordinary-etale/derived-category tool: Restriction triangle inside a closed support. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic ordinary-etale or ringed-site tool: The open-closed short exact sequence of an etale sheaf. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
     "node": "lem-amb-closed-support-hom",
-    "why": "Generic ordinary-etale/derived-category tool: Closed support as a relative section complex. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "why": "Generic ordinary-etale or ringed-site tool: Closed support as a relative section complex. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
-    "node": "lem-sc-p1-rhom-hom-derived-roof",
-    "why": "Generic ordinary-etale/derived-category tool: Natural RHom comparison with the cocycle roof formula. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-asd-supported-kummer-support-hom-naturality",
-    "why": "Generic ordinary-etale/derived-category tool: Naturality of the supported Hom identification under base change. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Generic ordinary-etale/derived-category tool: Finite Tate lines on the small etale site and their pullback. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
-    "why": "Generic ordinary-etale/derived-category tool: Sheaves of modules on the small etale site have enough injectives. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-trf-oriented-closed-base-localization",
-    "why": "Generic ordinary-etale/derived-category tool: Closed complementary subtopoi: factorization and supported module sheaves. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Generic ordinary-etale/derived-category tool: Inverse image of etale sheaves of modules over a constant ring is exact. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "def-weil-exact-derived-adjunction",
-    "why": "Generic ordinary-etale/derived-category tool: Localization of an exact adjunction to derived categories. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-kun-inverse-image-monoidal",
-    "why": "Generic ordinary-etale/derived-category tool: Monoidality of the derived inverse image. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "node": "lem-pur-support-restriction-triangle",
+    "why": "Generic ordinary-etale or ringed-site tool: Restriction triangle inside a closed support. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
     "node": "lem-pur-etale-closed-constant-tensor",
-    "why": "Generic ordinary-etale/derived-category tool: Closed constant coefficient tensors and pullback on the etale site. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "why": "Generic ordinary-etale or ringed-site tool: Closed constant coefficient tensors and pullback on the etale site. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic ordinary-etale or ringed-site tool: Finite Tate lines on the small etale site and their pullback. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lem-pur-signed-line-scalar-tensor-tower",
+    "why": "Generic ordinary-etale or ringed-site tool: Dual scalar comparisons of lines and signed tensor and tower coherence. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lem-pur-supported-source-system-cup-calculus",
+    "why": "Generic ordinary-etale or ringed-site tool: Supported source system cup calculus. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic ordinary-etale or ringed-site tool: Exactness of finite direct image. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic ordinary-etale or ringed-site tool: Inverse images along a composite: the canonical isomorphism compatible with the units. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ordinary-etale or ringed-site tool: Exactness data for the ringed-topos projection mate. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
     "node": "lem-pur-shifted-tensor-morphism-calculus",
-    "why": "Generic ordinary-etale/derived-category tool: Signed calculus of shifted derived tensor morphisms on ringed sites. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "why": "Generic ordinary-etale or ringed-site tool: Signed calculus of shifted derived tensor morphisms on ringed sites. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic ordinary-etale or ringed-site tool: Closed-immersion right adjoint before restriction. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary-etale or ringed-site tool: Inverse image of etale sheaves of modules over a constant ring is exact. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Generic ordinary-etale or ringed-site tool: Finite exchange isomorphism. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
     "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic ordinary-etale/derived-category tool: Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "why": "Generic ordinary-etale or ringed-site tool: Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
-    "node": "lem-asd-supported-kummer-scalar-source",
-    "why": "Generic ordinary-etale/derived-category tool: Derived scalar extension of a closed supported constant sheaf. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "node": "lem-geo-cartier-coeff-extension",
+    "why": "Generic ordinary-etale or ringed-site tool: Derived scalar extension of a closed supported constant sheaf. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "Generic ordinary-etale/derived-category tool: Monoidal and adjunction normalization of derived ringed-topos comparisons. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "thm-amb-etale-exceptional-adjoint",
-    "why": "Generic ordinary-etale/derived-category tool: The ordinary ambient exceptional adjoint. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-cat-right-adjoint-composition",
-    "why": "Generic ordinary-etale/derived-category tool: Right adjoint of a composite. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-proper",
-    "why": "Generic ordinary-etale/derived-category tool: Closed immersions are proper. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic ordinary-etale/derived-category tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-sc-line-bundle-torsor",
-    "why": "Generic ordinary-etale/derived-category tool: Line bundles and $\\mathbf G_m$-torsors. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ordinary-etale or ringed-site tool: Derived tensor comparison for arbitrary ringed topoi. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
     "node": "lem-amb-relative-torsor-cohomology",
-    "why": "Generic ordinary-etale/derived-category tool: Relative first cohomology and torsors with a specified open section. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "why": "Generic ordinary-etale or ringed-site tool: Relative first cohomology and torsors with a specified open section. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
     "node": "lem-amb-kummer-any-base",
-    "why": "Generic ordinary-etale/derived-category tool: The Kummer sequence on an arbitrary base. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "why": "Generic ordinary-etale or ringed-site tool: The Kummer sequence on an arbitrary base. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
+   },
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Generic ordinary-etale or ringed-site tool: Line bundles and $\\mathbf G_m$-torsors. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
     "node": "lem-asd-ordinary-supported-kummer",
-    "why": "Generic ordinary-etale/derived-category tool: Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "why": "Generic ordinary-etale or ringed-site tool: Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    },
    {
-    "node": "def-pc-divisor-line-bundle",
-    "why": "Generic ordinary-etale/derived-category tool: The module $\\mathcal{O}_X(D)$ of an effective Cartier divisor. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
-   },
-   {
-    "node": "lem-asd-supported-kummer-cartier-pullback",
-    "why": "Generic ordinary-etale/derived-category tool: Cartier line bundle and canonical section under Cartier preserving pullback. It supplies the indicated coefficient/support calculus; this perverse-curve unit has no unrestricted replacement, and no step of its Fourier/perversity route is replaced."
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "Generic ordinary-etale or ringed-site tool: $i_*$ is fully faithful. Used only for the finite-coefficient supported tensor/Hom construction; no same-unit node supplies this input and no perverse/adic route is substituted."
    }
   ]
  },
  "tool_uses": [
-  "lem-pur-support-restriction-triangle",
+  "lem-weil-pbc-open-closed-short-exact",
   "lem-amb-closed-support-hom",
-  "lem-sc-p1-rhom-hom-derived-roof",
-  "lem-asd-supported-kummer-support-hom-naturality",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-trf-oriented-closed-base-localization",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-exact-derived-adjunction",
-  "lem-kun-inverse-image-monoidal",
+  "lem-pur-support-restriction-triangle",
   "lem-pur-etale-closed-constant-tensor",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-supported-source-system-cup-calculus",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-exc-closed-ambient",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-weil-pbc-finite-exchange",
   "lem-pur-derived-change-of-rings",
-  "lem-asd-supported-kummer-scalar-source",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "thm-amb-etale-exceptional-adjoint",
-  "lem-cat-right-adjoint-composition",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sc-line-bundle-torsor",
+  "lem-geo-cartier-coeff-extension",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-amb-relative-torsor-cohomology",
   "lem-amb-kummer-any-base",
+  "lem-sc-line-bundle-torsor",
   "lem-asd-ordinary-supported-kummer",
-  "def-pc-divisor-line-bundle",
-  "lem-asd-supported-kummer-cartier-pullback"
+  "prop-openclosed-lowerstar-fully-faithful"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q20-460794973",
-  "group": "Q20",
+  "reviewer": "NT-cc-NZ-8e1047b15",
+  "group": "NZ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-460794973 (reviewer sub-agent of L); spot-checked: I read the whole item, all 17 steps, and the statements of all 25 cited nodes. Source checked: ILO XVI 2.1/Def 2.1.1 (pp.228-229, including the warning that I and Z have opposite classes), Lemma 2.2.2.4, Prop 2.2.3.2 and the proof of Thm 2.3.2 (pp.235-237). The statement correction is faithful and needed for the types: in ILO's Fujiwara interchange the outer Gys acts on a class supported on P'. The added twist stmt_dep covers negative twists. No hypothesis is added or weakened, and the citers still hold. Steps 1-10, 12-14, 16 and 17 are correct. I recomputed the shift and Koszul signs: t_{p,a} on a degree-0 class gives sign +1; Step 17 has (-1)^4=1. The ideal sign (I,1)^vee=(O(D),s_D) gives e(I,1)=-c_D. Step 16's equality i_{1*}e_{I subset D1}=1 tensor e_2 holds globally because the closed derived image is fully faithful. Fault repaired (C1/E6): Step 11 identified the abelian-sheaf relative torsor group H^2(X,U;mu) with Step 1's Lambda-module H^2_C(X,Lambda(1)) without argument. It now cites lem-weil-pbc-etale-module-cohomology-forget, lem-weil-pbc-site-restriction-injectives and lem-weil-pbc-etale-cohomology-over-open: a Lambda-injective resolution restricts to a Lambda_U-injective one and is acyclic as abelian sheaves, so one cone computes both groups. All three are on route, reviewed, create no cycle, and are already in the batch-5 closure. Wording fixes: Step 4 now gives the local-generator reason that twist multiplication is symmetric. Step 15 now writes c_1 cup x, with the ordinary class on the left as in Step 8; the result is unchanged because the degree is even. Batch 5: the closure from both targets, computed with and without the item's proof_deps, differs by 0 nodes. lem-trf-oriented-closed-base-localization (generic closed subtopos and module i_* exactness) and closed-constant-tensor and scalar-source (both reach only lem-pod-etale-stalk-tensor-scalar, i.e. stalk of a tensor) are generic and outside both assumptions, so accepted. Route: the 3 off-route tools (that trf node, kun-inverse-image-monoidal, sfb-ringed-derived-monoidal-comparisons) are generic and accepted. No SGA. Not a duplicate of the pur/pod supported-cup nodes, which are over a field, pro-etale or smooth only. No new nodes. Edge cases checked: empty or full support, n=1, l=2, negative twists, odd degrees, a nonreduced ambient, disjoint divisors.; 1 file(s) fixed by the reviewer"
- },
- "lean_audit": {}
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-8e1047b15 (reviewer sub-agent of L); spot-checked: Fresh Q26 re-admission split, not a 2026-10-21 re-split: the base item is unsplit with an empty proof. The delivery has 11 steps, no new nodes, and all 26 cited nodes exist. The statement, source and stmt_deps are unchanged. ILO XVI §2.1 (pp. 228-229) matches the item: c1(L,s) comes from H^1_Z(G_m) and Kummer, Gys is defined by composition, Déf. 2.1.1 uses the ideal normalisation, and the source warns that I and Z have opposite classes. Thm 2.3.2 and Prop 2.2.3.2 (pp. 234-236) supply the supported pairings. I checked each step. Step 1 gets H_C = Hom(P_C, Λ(b)[a]) from the open-closed sequence, the closed-support-Hom proof builds this from the same kernel arrow. Step 2 matches the definition and hypotheses of the source-system cup calculus: closed-subset labels, flat P_C, associative and symmetric μ, and twist lines with e^a⊗e^b ↦ e^{a+b}. Step 3: the projection mate is an isomorphism for twist lines (degree-0 stalk check), and I recomputed the associativity sign exponent aa'+aa''+a'a''. Step 4: the projection formula follows from naturality of α in K, and exceptional composition is the composite adjunction (Λ is finite). Step 5: pullback uses exact v^{-1} and finite exchange. Step 6: coefficient reduction correctly avoids the exact-pullback clauses and uses the derived change of rings, α_{A,B} and z ↦ z^{ℓ^{N-n}}. Step 7: additivity via the G_m×G_m pushout and naturality in G is correct, and the dual sign follows by evaluation. Step 8: I compared with lem-asd-ordinary-supported-kummer, and e(I_D,1) = −c_{D,Λ} via O(D) = I^∨. Step 9: restriction and forgetful clauses hold. Step 10: the naturality square at e_2 gives p_{i,Λ,P_{D2}} = μ_{D1,D2}, hence e_1⋆e_2, and the interchange sign is (−1)^4 = 1. Edge cases tested: empty and full supports, N = n, negative twists, odd degrees. No duplicate exists in this generality; the flag, localized-top-Chern and pro-étale nodes are all over k. Batch 5: lem-geo-cartier-coeff-extension and the flagged leaf lem-pod-etale-stalk-tensor-scalar are generic coefficient-change and stalk-tensor facts, not given by the trace formula or Poincaré duality and not steps of their proofs, so this is not grounds for RETURN. All tool_uses are generic étale and ringed-site interfaces; accepted. No changes."
+ }
 }

@@ -14,9 +14,66 @@
   "def-sbc-standard-tstructure-derived-category",
   "lem-weil-heart-short-exact-triangles"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For 0 ≤ j ≤ n choose L_j = τ_{<a+j} K once and for all. The comparison truncLEIsoTruncLT identifies this with τ_{≤a+j-1} K. The zero-object clause of lem-sfb-upper-truncation-counit-calculus gives L_0 ≅ 0 from K ≥ a, and its invertible-counit clause gives L_n ≅ K from K ≤ a+n-1. The nested-counit clause is not needed: the next step uses the already constructed adjacent truncation triangle.",
+   "uses": [
+    "lem-sfb-upper-truncation-counit-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.3(i) and 1.3.4, pp. 29-30; original steps 1, 2, 4 and 5 extracted into the cited calculus leaf."
+   }
+  },
+  {
+   "text": "For each $0\\le j<n$ put $q=a+j$. Apply lem-sfb-adjacent-t-truncation-layer to $K,q$. Its first two vertices are $L_j,L_{j+1}$, and its third is $C_q=\\tau^{\\ge q}\\tau^{\\le q}K\\in\\mathcal U^{\\ge q}\\cap\\mathcal U^{\\le q}$. By the shift convention in def-weil-t-structure, $C_q[q]$ belongs to the heart; this is the stated $H_t^q(K)$. The inverse shifts identify $C_q\\cong H_t^q(K)[-q]$. Substituting this isomorphism in the distinguished triangle is allowed by TR1 in def-weil-triangulated-category. The first arrows commute with the counits to this same $K$, as the layer node states.",
+   "uses": [
+    "lem-sfb-adjacent-t-truncation-layer",
+    "def-weil-t-structure",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.3-1.3.5, pp. 29-31; original step 3 supplied by the cited single-layer leaf, followed by shift cancellation."
+   }
+  },
+  {
+   "text": "The vertices were chosen once, so these triangles share their adjacent vertices and are ordered by the increasing integers $a+j$. There are exactly $n$ integers $0\\le j<n$. Step 1 gives the endpoints and the formula for every $L_j$. If $n=0$, the only vertex is $L_0=L_n$, the two endpoint isomorphisms give $K\\cong0$, and there are no triangles. No argument used global boundedness or nondegeneracy.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Finite assembly of 1.3.3-1.3.5; compare 1.3.13, pp. 34-35. Original step 6."
+   }
+  },
+  {
+   "text": "Let L = τ_{≤q}K and M = τ_{≥q}L for the standard derived t-structure. Its bounds put M in degrees [q,q], so Mathlib DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE gives an isomorphism e : M ≅ single_q(Y). The proved source-library lemmas DerivedCategory.isIso_homologyFunctor_map_truncLTι_app and isIso_homologyFunctor_map_truncGEπ_app identify H^q(L) with H^q(K) and H^q(M) with H^q(L). Composing these with H^q(e) and singleFunctorCompHomologyFunctorIso identifies Y with H^q(K). Apply single_0 to this coefficient isomorphism, and compose with e shifted by q and singleFunctors.shiftIso q 0 q, to obtain M[q] ≅ single_0(H^q(K)). Thus this is the cohomology of the original K, not merely an unspecified object of its heart. These are elementary compositions of the existing standard-t-structure and descended-cohomology comparison isomorphisms; no representative-level good-truncation or homotopy-colimit construction is required.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); explicit good truncation formulas, also BBD 1.3.2(i) and the example after 1.3.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-upper-truncation-counit-calculus",
+  "lem-sfb-adjacent-t-truncation-layer",
+  "def-weil-t-structure",
+  "def-weil-triangulated-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "1.3.3–1.3.6, pp. 29–32; finite assembly using Mathlib adjacent truncation triangles and endpoint calculus. The standard specialization uses the existing derived shifted-heart classification and cohomology comparison isomorphisms (Stacks Tag 08J5)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -150,10 +207,66 @@
    "results": "{\"t\": \"2026-10-21T13:49:25Z\", \"tool\": \"grep\", \"query\": \"[Pp]ostnikov|finite.*tower|tower.*finite|filtration.*cohomology|cohomology.*filtration\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: one truncation triangle, t-bounds, or extension closure; none constructs the finite ordered tower with its own t-cohomology factors for an arbitrary t-structure"
+  },
+  {
+   "tool": "grep",
+   "query": "triangle|truncLE.*truncLE|truncGE.*truncLE|isIso|isZero",
+   "results": "{\"t\": \"2026-10-22T04:48:11Z\", \"tool\": \"grep\", \"query\": \"triangle|truncLE.*truncLE|truncGE.*truncLE|isIso|isZero\", \"sub\": \"CategoryTheory/Triangulated/TStructure\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean\"], \"digest\": \"9cc53a79f728b17a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual truncations, t-bounds or the zero-object criterion, not the finite ordered tower with its own cohomology factors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite t-amplitude object has an ordered filtration by its canonical upper truncations with successive factors its own shifted heart cohomology objects",
+   "results": "{\"t\": \"2026-10-22T04:48:32Z\", \"tool\": \"leansearch\", \"query\": \"A finite t-amplitude object has an ordered filtration by its canonical upper truncations with successive factors its own shifted heart cohomology objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.IsGE.ge\", \"CochainComplex.truncate\", \"CategoryTheory.Triangulated.TStructure.ge\", \"CategoryTheory.Triangulated.TStructure.truncLT\", \"CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE\", \"IsFiltration.casesOn\", \"CategoryTheory.Triangulated.TStructure.ge_antitone\", \"CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat\"], \"digest\": \"0267a820c564483f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual truncations, t-bounds or the zero-object criterion, not the finite ordered tower with its own cohomology factors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"tower\"",
+   "results": "{\"t\": \"2026-10-22T04:48:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"TStructure\\\", \\\"tower\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.instIsScalarTowerCarrierStalkCommRingCatStructurePresheafInCommRingCatCarrierAbPresheafOpensCarrierTopModuleStructurePresheaf\"], \"digest\": \"24eec597023195a8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual truncations, t-bounds or the zero-object criterion, not the finite ordered tower with its own cohomology factors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary t-structure every object with t-amplitude from a to a+n-1 has a finite ordered Postnikov tower with n triangles whose factors are its shifted t-cohomology objects",
+   "results": "{\"t\": \"2026-10-22T04:48:35Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary t-structure every object with t-amplitude from a to a+n-1 has a finite ordered Postnikov tower with n triangles whose factors are its shifted t-cohomology objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.exists_triangle\", \"CategoryTheory.Triangulated.TStructure.instIsLEObj₁ObjTriangleTriangleLTGEHSubIntOfNat\", \"CategoryTheory.Triangulated.TStructure.IsGE\", \"CategoryTheory.Triangulated.TStructure.IsLE\", \"CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one\", \"CategoryTheory.Triangulated.TStructure.ge\", \"CategoryTheory.Triangulated.TStructure.le\", \"CategoryTheory.Triangulated.TStructure.ge_of_isGE\"], \"digest\": \"c58af80c543f54e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual truncations, t-bounds or the zero-object criterion, not the finite ordered tower with its own cohomology factors"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ostnikov|finite.*tower|tower.*finite|filtration.*cohomology|cohomology.*filtration",
+   "results": "{\"t\": \"2026-10-22T04:48:53Z\", \"tool\": \"grep\", \"query\": \"[Pp]ostnikov|finite.*tower|tower.*finite|filtration.*cohomology|cohomology.*filtration\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual truncations, t-bounds or the zero-object criterion, not the finite ordered tower with its own cohomology factors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"filtration\"",
+   "results": "{\"t\": \"2026-10-22T04:48:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"TStructure\\\", \\\"filtration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual truncations, t-bounds or the zero-object criterion, not the finite ordered tower with its own cohomology factors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object bounded above and below for a t-structure can be reconstructed from a finite chain of upper truncations with zero initial object and original object as final vertex",
+   "results": "{\"t\": \"2026-10-22T04:48:54Z\", \"tool\": \"leanfinder\", \"query\": \"An object bounded above and below for a t-structure can be reconstructed from a finite chain of upper truncations with zero initial object and original object as final vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.exists_triangle\", \"CategoryTheory.Triangulated.TStructure.isZero\", \"CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_obj₁\", \"CategoryTheory.Triangulated.TStructure.le_of_isLE\", \"CategoryTheory.Triangulated.TStructure.IsLE.le\", \"CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat\", \"CategoryTheory.Triangulated.TStructure.le\"], \"digest\": \"500974ea8280ddf5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual truncations, t-bounds or the zero-object criterion, not the finite ordered tower with its own cohomology factors"
+  },
+  {
+   "tool": "grep",
+   "query": "public (lemma|def).*exists_triangle|lemma exists_triangle|lemma isZero|def exists_triangle",
+   "results": "{\"t\": \"2026-10-22T04:49:05Z\", \"tool\": \"grep\", \"query\": \"public (lemma|def).*exists_triangle|lemma exists_triangle|lemma isZero|def exists_triangle\", \"sub\": \"CategoryTheory/Triangulated/TStructure/Basic.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"79\", \"254\"], \"digest\": \"1ebbfc2dc69b0bd7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual truncations, t-bounds or the zero-object criterion, not the finite ordered tower with its own cohomology factors"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-bounded-bifunctor-devissage",
@@ -172,5 +285,70 @@
   },
   "same_as": [],
   "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-bounded-postnikov-extension-generation",
+  "worker": "stage1",
+  "group": "Q21",
+  "summary": "Dedicated repair handoff in coord/returns/Q21.md: extracted the nested truncation and endpoint calculus and the single-degree adjacent-truncation layer into two Mathlib leaves. Kept the exact statement, Lean record, t-structure route, zero-length case and explicit standard-derived-category computation. The parent now only assembles the vertices, triangles and factors. All recorded searches were actually run with msearch.py.",
+  "blueprint": "Realizes paragraph (2) of det-lem-integral-models-operations.proof.md at the bounded-complex tensor passage, through lem-sfb-bounded-bifunctor-devissage: finite canonical truncations, zero and identity endpoints and the single-degree factors. This is an auxiliary tool, not the key node of sk-lem-integral-models.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-fcacbdc05",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-fcacbdc05 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This answers the 2026-10-21/22 re-split note. The proof drops from 7 steps (3942 chars) to 4 (2034 chars) and adds two new nodes, both Mathlib leaves (status mathlib). The statement is unchanged and agrees with BBD 1.3.3-1.3.6 (PDF pp. 30-32, read). No SGA is cited, and the item is not in the dropped list. lem-sfb-upper-truncation-counit-calculus has one Mathlib declaration per clause: (1) isIso_truncLE_map_truncLEι_app, TruncLEGT:392, in the IsTriangulated section (TR4, which def-weil-triangulated-category includes); (2) isZero_truncLT_obj_of_isGE, TruncLTGE:516, plus truncLE n = truncLT (n+1) at TruncLEGT:38; (3) isLE_iff_isIso_truncLEι_app, TruncLEGT:242. lem-sfb-adjacent-t-truncation-layer is triangleLTLTGELT_distinguished (TruncLTGE:847) at a=q, b=q+1: the second arrow is truncGEπ, natTransTruncLTOfLE_ι_app (:355) gives the counit compatibility, truncLEIsoTruncLT transports the first vertex in one line, and the truncGELE q q bounds are the instances at TruncLEGT:352 and :388. Both new statements are true and were tested on r=s, K=0, q=-1 and degenerate t-structures. Both are self-contained, statement-only, and searched with all three kinds of search. Their blueprint from/via is correct. Neither restates the item. A whole-DAG rg -L for the truncation declarations found no duplicate: the candidates are D(A)-specific or fixed-pair results. Old steps 1, 2, 4 and 5 are now clauses of the counit leaf, old step 3 is the layer leaf, old step 6 is the elementary assembly (n=0 forces K=0), and old step 7 is kept verbatim as the elementary D(A) calculation through def-kun-truncations. No argument was shortened or blurred. The note asked for unsplit nodes; making them Mathlib leaves is correct per the brief. Advisory: the item's merged tool_uses entry lem-weil-heart-short-exact-triangles is now unused by any step, and the Lean docstring of exists_bounded_postnikov_tower still cites node steps 1-7 (stage-2 cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.BoundedPostnikovTower",
+  "declaration": "CategoryTheory.Triangulated.TStructure.exists_bounded_postnikov_tower",
+  "declarations": [
+   "CategoryTheory.Triangulated.TStructure.exists_bounded_postnikov_tower",
+   "DerivedCategory.bounded_postnikov_cohomology_iso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/BoundedPostnikovTower.lean",
+  "statement": "theorem exists_bounded_postnikov_tower {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ m : ℤ, (shiftFunctor C m).Additive] [Pretriangulated C] [IsTriangulated C] (t : TStructure C) (a : ℤ) (n : ℕ) (K : C) [t.IsGE K a] [t.IsLE K (a + (n : ℤ) - 1)] : (∀ q : ℤ, t.heart (((t.truncGELE q q).obj K)⟦q⟧)) ∧ ∃ L : Fin (n + 1) → C, Nonempty (L 0 ≅ 0) ∧ Nonempty (L (Fin.last n) ≅ K) ∧ (∀ j : Fin (n + 1), Nonempty (L j ≅ (t.truncLE (a + (j : ℤ) - 1)).obj K)) ∧ ∃ (f : ∀ j : Fin n, L j.castSucc ⟶ L j.succ) (g : ∀ j : Fin n, L j.succ ⟶ (((t.truncGELE (a + (j : ℤ)) (a + (j : ℤ))).obj K)⟦a + (j : ℤ)⟧)⟦ -(a + (j : ℤ))⟧) (δ : ∀ j : Fin n, (((t.truncGELE (a + (j : ℤ)) (a + (j : ℤ))).obj K)⟦a + (j : ℤ)⟧)⟦ -(a + (j : ℤ))⟧ ⟶ (L j.castSucc)⟦(1 : ℤ)⟧), ∀ j : Fin n, Triangle.mk (f j) (g j) (δ j) ∈ distTriang C",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The first declaration gives the arbitrary-t-structure tower and heart membership of its cohomology objects. The second states the standard-derived-category identification H_t^q(K) ≅ H^q(K)[0]; shifting this isomorphism by -q identifies the same tower factors with H^q(K)[0][-q]. No global boundedness or nondegeneracy is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91b932adc",
+  "group": "NO",
+  "result": "pass",
+  "note": "Only the item's lean record changed; one module, two sorry theorems, lean.statement verbatim in the file. Tower theorem matches the node clause by clause: arbitrary TStructure with no global bounds; IsGE K a / IsLE K (a+n-1) on K itself; L : Fin (n+1) -> C with L 0 iso 0, L last iso K, L j iso truncLE (a+j-1) K; n distinguished triangles L j.castSucc -> L j.succ -> (truncGELE (a+j) (a+j) K)[a+j][-(a+j)] -> L j[1]; heart membership of truncGELE q q K [q] (truncGELE = truncLE then truncGE, TruncLEGT:349; heart = le 0 and ge 0). Derived theorem is a derived-category iso truncGELE q q K [q] iso single 0 of H^q K, correct for both signs of q, universes u v w free. Edge cases n=0 (K iso 0), n=1, K=0, degenerate t-structures ok. No duplicate in Mathlib, live Sheaf or WeilConjectures (FinitePostnikovIsomorphism and BoundedBifunctorDevissage are D(A)-specific and different). Imports match the dependency records; docstrings carry source places, the blueprint tag and node steps 1-7. Advisory: the Second reading section is the worker's own pass; the def-kun-truncations import is proof-only. No recompile, per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261022T143624-L-1236769",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

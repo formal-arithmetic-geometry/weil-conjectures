@@ -1,0 +1,635 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q73
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+public import Sheaf.Algebra.Homology.OrdinaryDerivedChangeOfRings
+public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Quotient
+import Sheaf.Paper.KFlatRingedToposPullback
+import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.AlgebraicGeometry.ProEtaleAlgebraicInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+
+/-! # Descent of a supplied scalar chain comparison along a scheme isomorphism
+
+Source: Stacks Project, sites-cohomology.tex, Tags 0G7D, 0G7E, 06YT and 06YU;
+categories.tex, Tag 04VG.
+(blueprint: lem-weil-isomorphism-scalar-kflat-descent).
+
+The geometric functors are the existing ringed inverse images. Scalar extension is
+presented by its existing universal cochain model, retaining its canonical counit.
+The input comparison is supplied only on flat-term K-flat complexes. The conclusion
+fixes its descent on every resolution and includes the two- and three-resolution laws.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+
+universe u
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent
+
+/-- The full-subcategory predicate in the statement: K-flat, with every term flat.
+Source: Stacks 0G7D (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+def good {W : Scheme.{u}} (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) :
+    ObjectProperty (CochainComplex (proEtaleRingModules W R) ℤ) :=
+  fun P ↦ CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (R := R) P ∧
+    ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (R := R) (P.X n)
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem descend_good
+    {M : Type*} [Category M] [Abelian M] [HasDerivedCategory M]
+    {D : Type*} [Category D] (p : ObjectProperty (CochainComplex M ℤ))
+    (hres : ∀ K, ∃ (P : CochainComplex M ℤ) (s : P ⟶ K), QuasiIso s ∧ p P)
+    (F G : DerivedCategory M ⥤ D)
+    (t : p.ι ⋙ DerivedCategory.Q ⋙ F ≅ p.ι ⋙ DerivedCategory.Q ⋙ G) :
+    ∃! β : F ≅ G, ∀ P : p.FullSubcategory,
+      β.hom.app (DerivedCategory.Q.obj P.obj) = t.hom.app P := by
+  classical
+  let H := HomotopyCategory.quotient M (.up ℤ)
+  let W := HomotopyCategory.quasiIso M (.up ℤ)
+  have hr : ∀ X, ∃ (Y : HomotopyCategory M (.up ℤ)) (s : Y ⟶ X), p Y.as ∧ W s := by
+    intro X
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨P, s, hs, hP⟩ := hres K
+    exact ⟨H.obj P, H.map s, hP,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  let α (X : HomotopyCategory M (.up ℤ)) (hX : p X.as) := t.hom.app ⟨X.as, hX⟩
+  have hinv : W.IsInvertedBy (DerivedCategory.Qh ⋙ F) := by
+    intro X Y f hf
+    have := Localization.inverts DerivedCategory.Qh W f hf
+    change IsIso (F.map (DerivedCategory.Qh.map f))
+    infer_instance
+  have hn : ∀ X Y (hX : p X.as) (hY : p Y.as) (s : X ⟶ Y),
+      (DerivedCategory.Qh ⋙ F).map s ≫ α Y hY =
+        α X hX ≫ (DerivedCategory.Qh ⋙ G).map s := by
+    intro X Y hX hY s
+    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨Q, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
+    obtain ⟨f, rfl⟩ := H.map_surjective s
+    exact t.hom.naturality (ObjectProperty.homMk f : (⟨P, hX⟩ : p.FullSubcategory) ⟶ ⟨Q, hY⟩)
+  obtain ⟨τ, hτ⟩ := exists_natTrans_from_resolvingClass W
+    (fun X ↦ p X.as) hr (DerivedCategory.Qh ⋙ F) (DerivedCategory.Qh ⋙ G) hinv α hn
+  let FF := Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Qh W D
+  let β := FF.preimage τ
+  have hβ : Functor.whiskerLeft DerivedCategory.Qh β = τ := FF.map_preimage τ
+  have he (P : p.FullSubcategory) : β.app (DerivedCategory.Q.obj P.obj) = t.hom.app P :=
+    (congr_app hβ (H.obj P.obj)).trans (hτ (H.obj P.obj) P.property)
+  have hk (K : CochainComplex M ℤ) : IsIso (β.app (DerivedCategory.Q.obj K)) := by
+    obtain ⟨P, s, hs, hP⟩ := hres K
+    have := hs
+    have hi : IsIso (β.app (DerivedCategory.Q.obj P)) := by
+      rw [he ⟨P, hP⟩]
+      infer_instance
+    have hc : IsIso (F.map (DerivedCategory.Q.map s) ≫ β.app (DerivedCategory.Q.obj K)) := by
+      rw [β.naturality]
+      infer_instance
+    exact (isIso_comp_left_iff _ _).1 hc
+  have hi (X : DerivedCategory M) : IsIso (β.app X) := by
+    let e := DerivedCategory.Q.objObjPreimageIso X
+    have := hk (DerivedCategory.Q.objPreimage X)
+    have hc : IsIso (F.map e.hom ≫ β.app X) := by
+      rw [β.naturality]
+      infer_instance
+    exact (isIso_comp_left_iff _ _).1 hc
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  refine ⟨asIso β, he, ?_⟩
+  intro β' he'
+  apply Iso.ext
+  apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso M (.up ℤ))
+  intro K
+  obtain ⟨P, s, hs, hP⟩ := hres K
+  have := hs
+  change β'.hom.app _ = β.app _
+  apply (cancel_epi (F.map (DerivedCategory.Q.map s))).1
+  rw [β'.hom.naturality, β.naturality, he' ⟨P, hP⟩, he ⟨P, hP⟩]
+
+private theorem conjugate_cancel {C : Type*} [Category C] {X Y Z T : C}
+    (a : X ⟶ Y) (b : Y ⟶ Z) (d : T ≅ Z) :
+    (a ≫ b ≫ d.inv) ≫ d.hom = a ≫ b := by
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+
+private theorem iso_square {C : Type*} [Category C] {A B U₁ U₂ V₁ V₂ : C}
+    (β : A ≅ B) (a₁ : A ≅ U₁) (a₂ : A ≅ U₂) (d₁ : B ≅ V₁) (d₂ : B ≅ V₂)
+    (b₁ : U₁ ≅ V₁) (b₂ : U₂ ≅ V₂)
+    (h₁ : β ≪≫ d₁ = a₁ ≪≫ b₁) (h₂ : β ≪≫ d₂ = a₂ ≪≫ b₂) :
+    b₁ ≪≫ d₁.symm ≪≫ d₂ = a₁.symm ≪≫ a₂ ≪≫ b₂ := by
+  apply Iso.ext
+  have he₁ := congrArg Iso.hom h₁
+  have he₂ := congrArg Iso.hom h₂
+  dsimp only [Iso.trans_hom] at he₁ he₂ ⊢
+  apply (cancel_epi a₁.hom).1
+  simp only [Iso.symm_hom, Iso.hom_inv_id_assoc]
+  rw [← Category.assoc a₁.hom b₁.hom, ← he₁]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  exact he₂
+
+private theorem iso_cocycle {C : Type*} [Category C] {A X Y Z : C}
+    (a : A ≅ X) (b : A ≅ Y) (c : A ≅ Z) :
+    (a.symm ≪≫ b) ≪≫ (b.symm ≪≫ c) = a.symm ≪≫ c := by
+  apply Iso.ext
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc]
+
+private def composeSquare
+    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    (Q₀ : C₀ ⥤ D₀) (Q₁ : C₁ ⥤ D₁) (Q₂ : C₂ ⥤ D₂)
+    (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (F' : D₀ ⥤ D₁) (G' : D₁ ⥤ D₂)
+    (a : Q₀ ⋙ F' ⟶ F ⋙ Q₁) (b : Q₁ ⋙ G' ⟶ G ⋙ Q₂) :
+    Q₀ ⋙ (F' ⋙ G') ⟶ (F ⋙ G) ⋙ Q₂ where
+  app P := G'.map (a.app P) ≫ b.app (F.obj P)
+  naturality P Q f := by
+    dsimp only [Functor.comp_map, Functor.comp_obj]
+    have ha := a.naturality f
+    have hb := b.naturality (F.map f)
+    dsimp only [Functor.comp_map] at ha hb
+    rw [← Category.assoc, ← G'.map_comp, ha,
+      G'.map_comp, Category.assoc, hb]
+    exact (Category.assoc _ _ _).symm
+
+private theorem normalized_map
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (F G : D ⥤ E) (U V : C ⥤ E)
+    (a : Q ⋙ F ⟶ U) (d : Q ⋙ G ⟶ V) (β : F ≅ G)
+    {P K : C} (s : P ⟶ K) [IsIso (Q.map s)] (b : U.obj P ⟶ V.obj P)
+    (h : β.hom.app (Q.obj P) ≫ d.app P = a.app P ≫ b) :
+    β.hom.app (Q.obj K) ≫ (G.map (inv (Q.map s)) ≫ d.app P) =
+      (F.map (inv (Q.map s)) ≫ a.app P) ≫ b := by
+  rw [← Category.assoc, ← β.hom.naturality]
+  simp only [Category.assoc]
+  rw [h]
+
+private theorem inv_map_id {C D : Type*} [Category C] [Category D]
+    (Q : C ⥤ D) (P : C) : inv (Q.map (𝟙 P)) = 𝟙 (Q.obj P) := by
+  apply IsIso.inv_eq_of_hom_inv_id
+  simp only [Q.map_id, Category.comp_id]
+
+private theorem normalized_id
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (F G : D ⥤ E) (U V : C ⥤ E)
+    (a : Q ⋙ F ⟶ U) (d : Q ⋙ G ⟶ V) (β : F ≅ G)
+    (P : C) (b : U.obj P ⟶ V.obj P)
+    (h : β.hom.app (Q.obj P) ≫ (G.map (inv (Q.map (𝟙 P))) ≫ d.app P) =
+      (F.map (inv (Q.map (𝟙 P))) ≫ a.app P) ≫ b) :
+    β.hom.app (Q.obj P) ≫ d.app P = a.app P ≫ b := by
+  rw [inv_map_id, F.map_id, G.map_id, Category.id_comp, Category.id_comp] at h
+  exact h
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem descend_normalized
+    {M : Type*} [Category M] [Abelian M] [HasDerivedCategory M]
+    {D : Type*} [Category D] (p : ObjectProperty (CochainComplex M ℤ))
+    (hres : ∀ K, ∃ (P : CochainComplex M ℤ) (s : P ⟶ K), QuasiIso s ∧ p P)
+    (F G : DerivedCategory M ⥤ D) (U V : CochainComplex M ℤ ⥤ D)
+    (a : DerivedCategory.Q ⋙ F ⟶ U) (d : DerivedCategory.Q ⋙ G ⟶ V)
+    (ha : ∀ P : p.FullSubcategory, IsIso (a.app P.obj))
+    (hd : ∀ P : p.FullSubcategory, IsIso (d.app P.obj))
+    (b : p.ι ⋙ U ≅ p.ι ⋙ V) :
+    ∃! β : F ≅ G, ∀ (P K : CochainComplex M ℤ) (s : P ⟶ K) (_ : QuasiIso s)
+      (hP : p P),
+      β.hom.app (DerivedCategory.Q.obj K) ≫
+          (G.map (inv (DerivedCategory.Q.map s)) ≫ d.app P) =
+        (F.map (inv (DerivedCategory.Q.map s)) ≫ a.app P) ≫ b.hom.app ⟨P, hP⟩ := by
+  classical
+  have (P : p.FullSubcategory) : IsIso ((Functor.whiskerLeft p.ι a).app P) := ha P
+  have (P : p.FullSubcategory) : IsIso ((Functor.whiskerLeft p.ι d).app P) := hd P
+  have : IsIso (Functor.whiskerLeft p.ι a) := NatIso.isIso_of_isIso_app _
+  have : IsIso (Functor.whiskerLeft p.ι d) := NatIso.isIso_of_isIso_app _
+  let ai := asIso (Functor.whiskerLeft p.ι a)
+  let di := asIso (Functor.whiskerLeft p.ι d)
+  let t : p.ι ⋙ DerivedCategory.Q ⋙ F ≅ p.ι ⋙ DerivedCategory.Q ⋙ G :=
+    ai ≪≫ b ≪≫ di.symm
+  obtain ⟨β, hβ, huniq⟩ := descend_good p hres F G t
+  have hbase (P : p.FullSubcategory) :
+      β.hom.app (DerivedCategory.Q.obj P.obj) ≫ d.app P.obj =
+        a.app P.obj ≫ b.hom.app P := by
+    rw [hβ P]
+    change (ai.hom.app P ≫ b.hom.app P ≫ di.inv.app P) ≫ di.hom.app P =
+      ai.hom.app P ≫ b.hom.app P
+    exact conjugate_cancel _ _ (di.app P)
+  refine ⟨β, ?_, ?_⟩
+  · intro P K s hs hP
+    exact normalized_map DerivedCategory.Q F G U V a d β s
+      (b.hom.app ⟨P, hP⟩) (hbase ⟨P, hP⟩)
+  · intro β' hn'
+    apply huniq
+    intro P
+    have h := hn' P.obj P.obj (𝟙 P.obj) inferInstance P.property
+    have he := normalized_id DerivedCategory.Q F G U V a d β' P.obj (b.hom.app P) h
+    have := hd P
+    exact ((cancel_mono (d.app P.obj)).1 (he.trans (hbase P).symm)).trans (hβ P)
+
+variable {X Y : Scheme.{u}} (g : X ⟶ Y)
+  (RY SY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+  (RX SX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+  (jY : RY ⟶ SY) (jX : RX ⟶ SX)
+  (cR : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj RY ≅ RX)
+  (cS : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj SY ≅ SX)
+
+/-- `G_R`: the actual module inverse image with coefficients identified by `cR`.
+Extension along a ring isomorphism is canonical action transport, by multiplication
+and the inverse `m ↦ m ⊗ 1`.
+Source: Stacks 03D3, 0G7E (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+abbrev inverseR := proEtaleRingModulePullback g RY RX cR
+
+/-- `G_S`, with the same geometric inverse image and the specified coefficient transport.
+Source: Stacks 03D3, 0G7E (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+abbrev inverseS := proEtaleRingModulePullback g SY SX cS
+
+variable (CY : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2}
+    (J := ProEt.topology Y) jY)
+  (CX : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2}
+    (J := ProEt.topology X) jX)
+
+/-- `U(P) = G_R(P) ⊗ S_X`, with the ordinary termwise scalar extension.
+Source: Stacks 06YT (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+abbrev U := (inverseR g RY RX cR).mapHomologicalComplex (.up ℤ) ⋙
+  CX.E.mapHomologicalComplex (.up ℤ)
+
+/-- `V(P) = G_S(P ⊗ S_Y)`, with ordinary termwise scalar extension.
+Source: Stacks 06YT (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+abbrev V := CY.E.mapHomologicalComplex (.up ℤ) ⋙
+  (inverseS g SY SX cS).mapHomologicalComplex (.up ℤ)
+
+/-- The source derived composite `C_X G_R`.
+Source: Stacks 06YU (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+abbrev A := (inverseR g RY RX cR).mapDerivedCategory ⋙ CX.T
+
+/-- The target derived composite `G_S C_Y`.
+Source: Stacks 06YU (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+abbrev B := CY.T ⋙ (inverseS g SY SX cS).mapDerivedCategory
+
+/-- Homotopy on the full category of good complexes, using the original chain homotopies.
+Source: Stacks 0G7D (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+def goodHomotopy : HomRel (good RY).FullSubcategory :=
+  fun _ _ f f' ↦ Nonempty (Homotopy f.hom f'.hom)
+
+/-- The canonical source representative identification for a good resolution `s`.
+Its first factor inverts the localized resolution; its second is exact inverse image;
+its last is the K-flat counit of ordinary derived change of rings.
+Source: Stacks 06YU, derived.tex 015F
+(blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+def sourceIso (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
+    (s : P ⟶ K) [QuasiIso s]
+    (hP : good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P)) :
+    (A g RY RX SX jX cR CX).obj (DerivedCategory.Q.obj K) ≅
+      DerivedCategory.Q.obj ((U g RY RX SX jX cR CX).obj P) :=
+  ((A g RY RX SX jX cR CX).mapIso (asIso (DerivedCategory.Q.map s))).symm ≪≫
+    CX.T.mapIso ((inverseR g RY RX cR).mapDerivedCategoryFactors.app P) ≪≫
+    @asIso _ _ _ _ (CX.ε.app
+      (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P))
+      (CX.computes _ hP.1)
+
+/-- The canonical target representative identification for a good resolution `s`.
+It uses the scalar counit on `P` and then the exact `G_S` representative comparison.
+Source: Stacks 06YU, derived.tex 015F
+(blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+def targetIso (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
+    (s : P ⟶ K) [QuasiIso s] (hP : good RY P) :
+    (B g RY SY SX jY cS CY).obj (DerivedCategory.Q.obj K) ≅
+      DerivedCategory.Q.obj ((V g RY SY SX jY cS CY).obj P) :=
+  ((B g RY SY SX jY cS CY).mapIso (asIso (DerivedCategory.Q.map s))).symm ≪≫
+    (inverseS g SY SX cS).mapDerivedCategory.mapIso
+      (@asIso _ _ _ _ (CY.ε.app P) (CY.computes _ hP.1)) ≪≫
+    (inverseS g SY SX cS).mapDerivedCategoryFactors.app
+      ((CY.E.mapHomologicalComplex (.up ℤ)).obj P)
+
+/-- Compatibility of the supplied comparison with the actual termwise images of chain
+homotopies, including every degree-minus-one component.
+Source: Stacks 0G7D (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+def HomotopyCompatible
+    (b : (good RY).ι ⋙ U g RY RX SX jX cR CX ≅
+      (good RY).ι ⋙ V g RY SY SX jY cS CY) : Prop :=
+  ∀ (P P' : (good RY).FullSubcategory) (f f' : P.obj ⟶ P'.obj)
+    (h : Homotopy f f') (i j : ℤ),
+    CX.E.map ((inverseR g RY RX cR).map (h.hom i j)) ≫ (b.hom.app P').f j =
+      (b.hom.app P).f i ≫ (inverseS g SY SX cS).map (CY.E.map (h.hom i j))
+
+/-- The component normalization on every flat-term K-flat resolution. Both sides are
+isomorphisms with exactly the same source and target; the source identification
+includes the localized quasi-isomorphism `G_R P → G_R K` through exact descent.
+Source: Stacks 06YU (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+def Normalized
+    (hGR : ∀ P : CochainComplex (proEtaleRingModules Y RY) ℤ,
+      good RY P → good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P))
+    (b : (good RY).ι ⋙ U g RY RX SX jX cR CX ≅
+      (good RY).ι ⋙ V g RY SY SX jY cS CY)
+    (β : A g RY RX SX jX cR CX ≅ B g RY SY SX jY cS CY) : Prop :=
+  ∀ (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
+    (s : P ⟶ K) (_ : QuasiIso s) (hP : good RY P),
+    β.app (DerivedCategory.Q.obj K) ≪≫ targetIso g RY SY SX jY cS CY P K s hP =
+      sourceIso g RY RX SX jX cR CX P K s (hGR P hP) ≪≫
+        DerivedCategory.Q.mapIso (b.app ⟨P, hP⟩)
+
+/-- The two-resolution square and the cocycle laws for a third resolution, using only
+canonical representative identifications, with no choices of chain comparison maps.
+Source: Stacks 06YU (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+def ResolutionCoherent
+    (hGR : ∀ P : CochainComplex (proEtaleRingModules Y RY) ℤ,
+      good RY P → good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P))
+    (b : (good RY).ι ⋙ U g RY RX SX jX cR CX ≅
+      (good RY).ι ⋙ V g RY SY SX jY cS CY) : Prop :=
+  ∀ (K P₁ P₂ P₃ : CochainComplex (proEtaleRingModules Y RY) ℤ)
+    (s₁ : P₁ ⟶ K) (s₂ : P₂ ⟶ K) (s₃ : P₃ ⟶ K)
+    (_ : QuasiIso s₁) (_ : QuasiIso s₂) (_ : QuasiIso s₃)
+    (h₁ : good RY P₁) (h₂ : good RY P₂) (h₃ : good RY P₃),
+    DerivedCategory.Q.mapIso (b.app ⟨P₁, h₁⟩) ≪≫
+        (targetIso g RY SY SX jY cS CY P₁ K s₁ h₁).symm ≪≫
+        targetIso g RY SY SX jY cS CY P₂ K s₂ h₂ =
+      (sourceIso g RY RX SX jX cR CX P₁ K s₁ (hGR P₁ h₁)).symm ≪≫
+        sourceIso g RY RX SX jX cR CX P₂ K s₂ (hGR P₂ h₂) ≪≫
+        DerivedCategory.Q.mapIso (b.app ⟨P₂, h₂⟩) ∧
+    ((sourceIso g RY RX SX jX cR CX P₁ K s₁ (hGR P₁ h₁)).symm ≪≫
+        sourceIso g RY RX SX jX cR CX P₂ K s₂ (hGR P₂ h₂)) ≪≫
+        ((sourceIso g RY RX SX jX cR CX P₂ K s₂ (hGR P₂ h₂)).symm ≪≫
+          sourceIso g RY RX SX jX cR CX P₃ K s₃ (hGR P₃ h₃)) =
+      (sourceIso g RY RX SX jX cR CX P₁ K s₁ (hGR P₁ h₁)).symm ≪≫
+        sourceIso g RY RX SX jX cR CX P₃ K s₃ (hGR P₃ h₃) ∧
+    ((targetIso g RY SY SX jY cS CY P₁ K s₁ h₁).symm ≪≫
+        targetIso g RY SY SX jY cS CY P₂ K s₂ h₂) ≪≫
+        ((targetIso g RY SY SX jY cS CY P₂ K s₂ h₂).symm ≪≫
+          targetIso g RY SY SX jY cS CY P₃ K s₃ h₃) =
+      (targetIso g RY SY SX jY cS CY P₁ K s₁ h₁).symm ≪≫
+        targetIso g RY SY SX jY cS CY P₃ K s₃ h₃
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem inverse_good (P : CochainComplex (proEtaleRingModules Y RY) ℤ)
+    (hP : good RY P) :
+    good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P) := by
+  have : PreservesFiniteLimits (proEtaleSheafInverseImage g (Type (u + 1))) :=
+    (AlgebraicGeometry.ProEtale.toposFunctorialityInverseImage g (𝟙 Y)).2.2.2.1
+  obtain ⟨I, hI⟩ := proEtaleAlgebraicInverseImage_exists g RY
+  let C := proEtaleRingModules Y RY
+  let D := proEtaleRingModules X
+    ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj RY)
+  let c := cR.hom
+  have hm (F : C ⥤ D) (h : I.modules = F) {M N : C} (f : M ⟶ N) :
+      SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} c (F.obj M) (F.map f) =
+        eqToHom (congrArg (fun G : C ⥤ D ↦
+          SheafOfModules.changeOfRings.{u, u + 1, u + 1} c (G.obj M)) h.symm) ≫
+        SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1}
+          c (I.modules.obj M) (I.modules.map f) ≫
+        eqToHom (congrArg (fun G : C ⥤ D ↦
+          SheafOfModules.changeOfRings.{u, u + 1, u + 1} c (G.obj N)) h.symm).symm := by
+    subst F
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  exact SheafOfModules.isKFlat_ringedToposPullback
+    (proEtaleSheafInverseImage g (Type (u + 1)))
+    (proEtaleSheafDirectImage g (Type (u + 1)))
+    (proEtaleSheafAdjunction g (Type (u + 1))) I cR.hom (inverseR g RY RX cR)
+    (fun M ↦ congrArg (fun F : C ⥤ D ↦
+      SheafOfModules.changeOfRings.{u, u + 1, u + 1} c (F.obj M)) hI.symm)
+    (fun f ↦ hm _ hI f) P hP.1 hP.2
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private def identityInverse {W : Scheme.{u}}
+    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) :
+    SheafOfModules.AlgebraicInverseImage (𝟭 (Sheaf (ProEt.topology W) (Type (u + 1))))
+      R R where
+  ringUnderlying := Iso.refl _
+  ringAdd := fun _ _ _ _ h ↦ h
+  ringMul := fun _ _ _ _ h ↦ h
+  ringZero := fun _ _ h ↦ h
+  ringOne := fun _ _ h ↦ h
+  modules := 𝟭 _
+  moduleUnderlying := Iso.refl _
+  moduleAdd := fun _ _ _ _ _ h ↦ h
+  moduleZero := fun _ _ _ h ↦ h
+  moduleSMul := fun _ _ _ _ _ h ↦ h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalar_good {W : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} {j : R ⟶ S}
+    (C : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2} j)
+    (P : CochainComplex (proEtaleRingModules W R) ℤ) (hP : good R P) :
+    good S ((C.E.mapHomologicalComplex (.up ℤ)).obj P) := by
+  exact SheafOfModules.isKFlat_ringedToposPullback (𝟭 _) (𝟭 _) Adjunction.id
+    (identityInverse R) j C.E C.obj_eq C.map_eq P hP.1 hP.2
+
+set_option backward.isDefEq.respectTransparency true in
+@[irreducible] private def sourceCounit :
+    DerivedCategory.Q ⋙ A g RY RX SX jX cR CX ⟶
+      U g RY RX SX jX cR CX ⋙ DerivedCategory.Q :=
+  composeSquare DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q
+    ((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ))
+    (CX.E.mapHomologicalComplex (.up ℤ))
+    (inverseR g RY RX cR).mapDerivedCategory CX.T
+    (inverseR g RY RX cR).mapDerivedCategoryFactors.hom CX.ε
+
+set_option backward.isDefEq.respectTransparency true in
+@[irreducible] private def targetCounit :
+    DerivedCategory.Q ⋙ B g RY SY SX jY cS CY ⟶
+      V g RY SY SX jY cS CY ⋙ DerivedCategory.Q :=
+  composeSquare DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q
+    (CY.E.mapHomologicalComplex (.up ℤ))
+    ((inverseS g SY SX cS).mapHomologicalComplex (.up ℤ))
+    CY.T (inverseS g SY SX cS).mapDerivedCategory
+    CY.ε (inverseS g SY SX cS).mapDerivedCategoryFactors.hom
+
+private theorem sourceCounit_app (P : CochainComplex (proEtaleRingModules Y RY) ℤ) :
+    (sourceCounit g RY RX SX jX cR CX).app P =
+      CX.T.map ((inverseR g RY RX cR).mapDerivedCategoryFactors.hom.app P) ≫
+        CX.ε.app (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P) := by
+  unfold sourceCounit
+  rfl
+
+private theorem targetCounit_app (P : CochainComplex (proEtaleRingModules Y RY) ℤ) :
+    (targetCounit g RY SY SX jY cS CY).app P =
+      (inverseS g SY SX cS).mapDerivedCategory.map (CY.ε.app P) ≫
+        (inverseS g SY SX cS).mapDerivedCategoryFactors.hom.app
+          ((CY.E.mapHomologicalComplex (.up ℤ)).obj P) := by
+  unfold targetCounit
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem sourceIso_hom (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
+    (s : P ⟶ K) [QuasiIso s]
+    (hP : good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P)) :
+    (sourceIso g RY RX SX jX cR CX P K s hP).hom =
+      (A g RY RX SX jX cR CX).map (inv (DerivedCategory.Q.map s)) ≫
+        (sourceCounit g RY RX SX jX cR CX).app P := by
+  rw [sourceCounit_app]
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem targetIso_hom (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
+    (s : P ⟶ K) [QuasiIso s] (hP : good RY P) :
+    (targetIso g RY SY SX jY cS CY P K s hP).hom =
+      (B g RY SY SX jY cS CY).map (inv (DerivedCategory.Q.map s)) ≫
+        (targetCounit g RY SY SX jY cS CY).app P := by
+  rw [targetCounit_app]
+  rfl
+
+attribute [local irreducible] DerivedCategory.Q DerivedCategory.Qh
+  proEtaleRingModulePullback Functor.mapDerivedCategory
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- K-flat preservation and unique normalized descent of a supplied scalar comparison.
+Source: Stacks Project, sites-cohomology.tex, Tags 0G7D, 0G7E, 06YT and 06YU;
+derived.tex, Tag 015F; categories.tex, Tag 04VG.
+(blueprint: lem-weil-isomorphism-scalar-kflat-descent).
+
+Proof plan:
+1. Apply `lem-weil-pbc-ringed-topos-kflat-pullback` to `(g,cR)`, to the
+   identity topos with `jY`, and to the identity topos with `jX`. Transport along
+   `cR` is extension along an isomorphism, so these are precisely `G_R`, `Q`, `Z`.
+   Each input has flat terms. No flatness of the coefficient maps is used.
+2. Exact-functor derived factorization preserves quasi-isomorphisms for `G_R,G_S`.
+   Apply clause (1) of `lem-pur-derived-change-of-rings` to `G_R f` and `f`.
+   This proves preservation for `U,V`. Apply the additive functors to the homotopy
+   equation degree by degree; the resulting homotopies have the stated components.
+   Quotient by homotopies to obtain the two functors on the good homotopy category.
+3. Resolve every complex by a good complex. Extend the comparison from this
+   resolving class in the homotopy category, using
+   `lem-sc-nattrans-from-resolving-class`. Fullness of the homotopy quotient
+   supplies chain representatives for its naturality check.
+4. On a good complex, combine the exact representative comparison with the
+   change-of-rings counit to obtain `a_P`, and in the other order obtain `d_P`.
+   The supplied isomorphism gives the natural comparison `a_P [b_P] d_P⁻¹`.
+5. Descend the transformation by full faithfulness of restriction along the
+   derived localization. Its components are invertible on good objects, hence
+   everywhere by naturality along resolutions and essential surjectivity.
+   Equality on good resolutions likewise proves uniqueness.
+6. For a resolution `s:P→K`, naturality gives the displayed `Normalized` equation.
+   Its source identification factors through exact inverse image of `s`, so it
+   includes the quasi-isomorphism `G_R s`. Two such equations give the comparison
+   square in `ResolutionCoherent`; cancellation of the intermediate identifications
+   gives both third-resolution cocycle laws. No boundedness, completeness,
+   constructibility, flatness of `jY` or `jX`, or quotient-tower comparison is used. -/
+theorem scalar_kflat_descent [IsIso g]
+    (comm : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map jY ≫ cS.hom =
+      cR.hom ≫ jX)
+    (b : (good RY).ι ⋙ U g RY RX SX jX cR CX ≅
+      (good RY).ι ⋙ V g RY SY SX jY cS CY)
+    (hb : HomotopyCompatible g RY SY RX SX jY jX cR cS CY CX b) :
+    ∃ hGR : ∀ P : CochainComplex (proEtaleRingModules Y RY) ℤ,
+        good RY P →
+          good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P),
+      (∀ (P : CochainComplex (proEtaleRingModules Y RY) ℤ) (_ : good RY P),
+        good SY ((CY.E.mapHomologicalComplex (.up ℤ)).obj P) ∧
+        good SX ((U g RY RX SX jX cR CX).obj P)) ∧
+      (∀ (P P' : (good RY).FullSubcategory) (f : P ⟶ P'), QuasiIso f.hom →
+        QuasiIso ((U g RY RX SX jX cR CX).map f.hom) ∧
+        QuasiIso ((V g RY SY SX jY cS CY).map f.hom)) ∧
+      (∃ (UH VH : CategoryTheory.Quotient (goodHomotopy RY) ⥤
+            HomotopyCategory (proEtaleRingModules X SX) (.up ℤ)),
+        Nonempty (CategoryTheory.Quotient.functor (goodHomotopy RY) ⋙ UH ≅
+          (good RY).ι ⋙ U g RY RX SX jX cR CX ⋙ HomotopyCategory.quotient _ (.up ℤ)) ∧
+        Nonempty (CategoryTheory.Quotient.functor (goodHomotopy RY) ⋙ VH ≅
+          (good RY).ι ⋙ V g RY SY SX jY cS CY ⋙ HomotopyCategory.quotient _ (.up ℤ))) ∧
+      (∀ (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
+        (s : P ⟶ K) (_ : QuasiIso s),
+        QuasiIso (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).map s)) ∧
+      (∃! β : A g RY RX SX jX cR CX ≅ B g RY SY SX jY cS CY,
+        Normalized g RY SY RX SX jY jX cR cS CY CX hGR b β) ∧
+      ResolutionCoherent g RY SY RX SX jY jX cR cS CY CX hGR b := by
+  classical
+  have _ := comm
+  have _ := hb
+  let hGR := inverse_good g RY RX cR
+  have hsc (P : CochainComplex (proEtaleRingModules Y RY) ℤ) (hP : good RY P) :
+      good SY ((CY.E.mapHomologicalComplex (.up ℤ)).obj P) ∧
+        good SX ((U g RY RX SX jX cR CX).obj P) :=
+    ⟨scalar_good CY P hP, scalar_good CX _ (hGR P hP)⟩
+  have hqi (P P' : (good RY).FullSubcategory) (f : P ⟶ P') (hf : QuasiIso f.hom) :
+      QuasiIso ((U g RY RX SX jX cR CX).map f.hom) ∧
+        QuasiIso ((V g RY SY SX jY cS CY).map f.hom) := by
+    have hg : QuasiIso (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).map
+        f.hom) := inferInstance
+    have hY := CY.preserves f.hom P.property.1 P'.property.1 hf
+    constructor
+    · exact CX.preserves _ (hGR P.obj P.property).1 (hGR P'.obj P'.property).1 hg
+    · change QuasiIso (((inverseS g SY SX cS).mapHomologicalComplex (.up ℤ)).map
+        ((CY.E.mapHomologicalComplex (.up ℤ)).map f.hom))
+      infer_instance
+  let UF := (good RY).ι ⋙ U g RY RX SX jX cR CX ⋙ HomotopyCategory.quotient _ (.up ℤ)
+  let VF := (good RY).ι ⋙ V g RY SY SX jY cS CY ⋙ HomotopyCategory.quotient _ (.up ℤ)
+  have hUF : ∀ P P' (f f' : P ⟶ P'), goodHomotopy RY f f' → UF.map f = UF.map f' := by
+    intro P P' f f' h
+    exact HomotopyCategory.eq_of_homotopy _ _
+      (CX.E.mapHomotopy ((inverseR g RY RX cR).mapHomotopy h.some))
+  have hVF : ∀ P P' (f f' : P ⟶ P'), goodHomotopy RY f f' → VF.map f = VF.map f' := by
+    intro P P' f f' h
+    exact HomotopyCategory.eq_of_homotopy _ _
+      ((inverseS g SY SX cS).mapHomotopy (CY.E.mapHomotopy h.some))
+  have hquot : ∃ (UH VH : CategoryTheory.Quotient (goodHomotopy RY) ⥤
+        HomotopyCategory (proEtaleRingModules X SX) (.up ℤ)),
+      Nonempty (CategoryTheory.Quotient.functor (goodHomotopy RY) ⋙ UH ≅ UF) ∧
+      Nonempty (CategoryTheory.Quotient.functor (goodHomotopy RY) ⋙ VH ≅ VF) :=
+    ⟨CategoryTheory.Quotient.lift _ UF hUF, CategoryTheory.Quotient.lift _ VF hVF,
+      ⟨CategoryTheory.Quotient.lift.isLift _ UF hUF⟩,
+      ⟨CategoryTheory.Quotient.lift.isLift _ VF hVF⟩⟩
+  let a := sourceCounit g RY RX SX jX cR CX
+  let d := targetCounit g RY SY SX jY cS CY
+  have ha (P : (good RY).FullSubcategory) : IsIso (a.app P.obj) := by
+    have := CX.computes _ (hGR P.obj P.property).1
+    change IsIso ((sourceCounit g RY RX SX jX cR CX).app P.obj)
+    rw [sourceCounit_app]
+    change IsIso (CX.T.map ((inverseR g RY RX cR).mapDerivedCategoryFactors.hom.app
+      P.obj) ≫ CX.ε.app _)
+    infer_instance
+  have hd (P : (good RY).FullSubcategory) : IsIso (d.app P.obj) := by
+    have := CY.computes _ P.property.1
+    change IsIso ((targetCounit g RY SY SX jY cS CY).app P.obj)
+    rw [targetCounit_app]
+    change IsIso ((inverseS g SY SX cS).mapDerivedCategory.map (CY.ε.app P.obj) ≫
+      (inverseS g SY SX cS).mapDerivedCategoryFactors.hom.app _)
+    infer_instance
+  have hres (K : CochainComplex (proEtaleRingModules Y RY) ℤ) :
+      ∃ (P : CochainComplex (proEtaleRingModules Y RY) ℤ) (s : P ⟶ K),
+        QuasiIso s ∧ good RY P := by
+    obtain ⟨P, s, hP, hf, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := RY) K
+    refine ⟨P, s, hs, hP, fun n ↦ ?_⟩
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso RY (P.X n)).symm (hf n)
+  obtain ⟨β, hβ, huniq⟩ := descend_normalized (good RY) hres
+    (A g RY RX SX jX cR CX) (B g RY SY SX jY cS CY)
+    (U g RY RX SX jX cR CX ⋙ DerivedCategory.Q)
+    (V g RY SY SX jY cS CY ⋙ DerivedCategory.Q) a d ha hd
+    (Functor.isoWhiskerRight b DerivedCategory.Q)
+  have hn : Normalized g RY SY RX SX jY jX cR cS CY CX hGR b β := by
+    intro P K s hs hP
+    apply Iso.ext
+    simp only [Iso.trans_hom, Iso.app_hom, sourceIso_hom, targetIso_hom,
+      Functor.mapIso_hom]
+    exact hβ P K s hs hP
+  have hu : ∃! β : A g RY RX SX jX cR CX ≅ B g RY SY SX jY cS CY,
+      Normalized g RY SY RX SX jY jX cR cS CY CX hGR b β := by
+    refine ⟨β, hn, ?_⟩
+    intro β' hn'
+    apply huniq
+    intro P K s hs hP
+    have h := congrArg Iso.hom (hn' P K s hs hP)
+    simp only [Iso.trans_hom, Iso.app_hom, sourceIso_hom, targetIso_hom,
+      Functor.mapIso_hom] at h
+    exact h
+  refine ⟨hGR, hsc, hqi, hquot, ?_, hu, ?_⟩
+  · intro P K s hs
+    infer_instance
+  · intro K P₁ P₂ P₃ s₁ s₂ s₃ hs₁ hs₂ hs₃ h₁ h₂ h₃
+    have e₁ := hn P₁ K s₁ hs₁ h₁
+    have e₂ := hn P₂ K s₂ hs₂ h₂
+    exact ⟨iso_square _ _ _ _ _ _ _ e₁ e₂, iso_cocycle _ _ _, iso_cocycle _ _ _⟩
+
+end AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent

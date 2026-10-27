@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-vector-integration-base-change-local",
+ "kind": "statement",
+ "title": "Base change of vector integration on a common refinement of two frame opens",
+ "statement": "Let N>0, A a finite commutative ring killed by N, S and T Noetherian schemes, f:T→S, with N invertible on S. Let F be locally free of constant rank r, and let F′=f*F. Use the canonical symmetric-algebra bundle square of [def-pur-vector-trace-geometry] and the sources and local traces of [def-amb-vector-integration-charts]. Let c be exactly the specified Tate and inverse-image coefficient comparison, and b:f*C_F≅C_F′ have hom equal to actual compact-support exchange followed by direct image of c. Fix normalized Tate transport t and projective-line data D [def-asd-ordinary-finite-p1-arrows]. Take one frame eS of F on V⊆S, one frame eT of F′ on U⊆T, and a Noetherian scheme W with j:W→T, a:W→U and g:W→V satisfying a followed by U.ι=j and j followed by f=g followed by V.ι. If arbitrary arrows kS:C_F→A_S[0] and kT:C_F′→A_T[0] have the prescribed trace restrictions only on these supplied frames, then j*(b followed by kT)=j*(f*kS followed by the constant-unit comparison). This is a calculation on W, requiring no covering or global normalization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: specified affine counits, base change and frame independence; geometric-descent Step 3"
+ },
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-vector-trace-geometry",
+  "def-amb-vector-integration-charts",
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the two supplied frames along a and g. The generator formula for the canonical symmetric-algebra base-change map identifies the source pulled back coordinates with the pullback bundle. Their comparison with the other frame is an invertible linear substitution over W.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-pur-vector-trace-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine counits, base change and frame independence; geometric-descent Step 3"
+   }
+  },
+  {
+   "text": "Paste the inverse-coordinate squares with the base-change square and the two factorizations of W to S. The proper/open compact-support exchange composition equation and Tate pullback composition identify the restricted specified exchange b and coefficient c with the two chart comparisons. Substitute the two single-frame normalization equations hkS and hkT. No globally normalized arrow is used.",
+   "uses": [
+    "def-amb-vector-integration-charts",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine counits, base change and frame independence; geometric-descent Step 3"
+   }
+  },
+  {
+   "text": "Use the affine counit base-change equation over the Noetherian scheme W, and linear trace invariance for the change of frames there. Naturality of inverse-image compositors and the constant-unit composition equation give the same outer factors. Cancel the invertible constant comparison to obtain the displayed unadjusted restriction equality. For zero rank the affine tower is the identity; the same equations include empty W and zero coefficients.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-linear-trace-invariance",
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine counits, base change and frame independence; geometric-descent Step 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration-charts",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-vector-trace-geometry",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-linear-trace-invariance",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: specified affine counits, base change and frame independence; geometric-descent Step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Vector bundle integration in the etale derived category commutes with base change and direct sums",
+   "results": "KaehlerDifferential tensor base-change and SheafOfModules.mapFree results; no etale vector-integration exchange equation.",
+   "date": "2026-10-25",
+   "verdict": "No match; these describe algebraic base change and free sheaves, not the specified trace maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_injective",
+   "results": "Functor.map_injective and abstract triangulated subcategory results.",
+   "date": "2026-10-25",
+   "verdict": "The abstract faithful-functor API supports the global equality proof but supplies no local counit exchange calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundleIntegration|vectorIntegration.*[Bb]aseChange",
+   "results": "Remote Mathlib: zero hits. Project rg finds the original global base-change hole and same-bundle overlap compatibility; no cross-base single-frame equation.",
+   "date": "2026-10-25",
+   "verdict": "No existing local comparison declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorTraceGeometricDescent",
+  "date": "2026-10-25",
+  "group": "R5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "paragraph 2: specified affine counits, base change and frame independence; geometric-descent Step 3",
+   "via": [
+    "lem-pur-vector-trace-geometric-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationBaseChangeLocal.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_baseChange_local",
+  "statement": "theorem vectorIntegration_baseChange_local (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T]\n    (f : T ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (r : ℕ) (F : S.Modules)\n    [F.IsFiniteLocallyFreeOfRank r]\n    (c : (ordinaryFinitePullback A (VectorTraceGeometry.baseChange f r F)).obj\n        (vectorIntegrationCoefficient A N hA S r F) ≅\n      vectorIntegrationCoefficient A N hA T r ((Scheme.Modules.tensorPullback f).obj F))\n    (hc : c =\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (VectorTraceGeometry.baseChange f r F) (VectorBundleZeroSection.π S r F)).symm.app _ ≪≫\n      (eqToIso (congrArg (ordinaryFinitePullback A)\n        (VectorTraceGeometry.baseChange_isPullback f r F).w)).app _ ≪≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (VectorBundleZeroSection.π T r ((Scheme.Modules.tensorPullback f).obj F)) f).app _ ≪≫\n      (ordinaryFinitePullback A\n        (VectorBundleZeroSection.π T r ((Scheme.Modules.tensorPullback f).obj F))).mapIso\n        (vectorIntegrationBaseCoefficientPullback A N hA t f hS r))\n    (b : (ordinaryFinitePullback A f).obj (vectorIntegrationSource A N hA S r F) ≅\n      vectorIntegrationSource A N hA T r ((Scheme.Modules.tensorPullback f).obj F))\n    (hb : b.hom =\n      (rightDerivedLowerShriekBaseChangeMap A\n        (VectorTraceGeometry.baseChange_isPullback f r F)).app\n        (vectorIntegrationCoefficient A N hA S r F) ≫\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n        (VectorBundleZeroSection.π T r ((Scheme.Modules.tensorPullback f).obj F))).map c.hom)\n    (D : ∀ (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (N : Γ(X, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t X hX)\n    (V : S.Opens) (eS : VectorBundleZeroSection.Trivialization S r F V)\n    (U : T.Opens)\n    (eT : VectorBundleZeroSection.Trivialization T r\n      ((Scheme.Modules.tensorPullback f).obj F) U)\n    (W : Scheme.{u}) [IsNoetherian W]\n    (j : W ⟶ T) (a : W ⟶ U.toScheme) (g : W ⟶ V.toScheme)\n    (ha : a ≫ U.ι = j) (hg : j ≫ f = g ≫ V.ι)\n    (kS : vectorIntegrationSource A N hA S r F ⟶ ordinaryFiniteUnit A S)\n    (kT : vectorIntegrationSource A N hA T r ((Scheme.Modules.tensorPullback f).obj F) ⟶\n      ordinaryFiniteUnit A T)\n    (hkS : (ordinaryFinitePullback A V.ι).map kS ≫ (ordinaryFiniteUnitPullback A V.ι).hom =\n      vectorIntegrationLocalTrace N hN A hA t D S hS r F V eS)\n    (hkT : (ordinaryFinitePullback A U.ι).map kT ≫ (ordinaryFiniteUnitPullback A U.ι).hom =\n      vectorIntegrationLocalTrace N hN A hA t D T (affineTracePullbackInvertible N f hS) r\n        ((Scheme.Modules.tensorPullback f).obj F) U eT) :\n    (ordinaryFinitePullback A j).map (b.hom ≫ kT) =\n      (ordinaryFinitePullback A j).map\n        ((ordinaryFinitePullback A f).map kS ≫ (ordinaryFiniteUnitPullback A f).hom)",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261025T202956-L-2771585",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261025T202956-L-2771585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

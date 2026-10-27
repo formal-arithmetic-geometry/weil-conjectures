@@ -1,0 +1,122 @@
+{
+ "id": "lem-per-rational-continuous-comparison-coherence",
+ "kind": "statement",
+ "title": "Coherence of normalized continuous rational comparisons",
+ "statement": "Any simultaneous normalized realizations with prescribed Along and FieldChange comparisons [def-per-continuous-rational-realization-data] satisfy the specified Composition, Identity, FieldComposition and Mixed equations, using the actual ordinary tensor units, derived computation counits, completion units and published raw scalar associators.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), with Lemma 6.8.2(1), Proposition 6.8.11(3), Definition 6.8.8 and Remark 6.8.15; completed-ring presentation via Proposition 6.6.11. Scalar-extension and composition compatibility refer to the canonical coefficient and tensor comparisons."
+ },
+ "proof": [
+  {
+   "text": "Obtain the normalized ordinary and derived composition/identity data from continuous-ambient-geometric-coherence. Build an ambient natural isomorphism by composing the supplied realization comparisons with its derived compositor. Full faithfulness of realization induces full faithfulness of postcomposition on functor categories. Take its preimage isomorphism. Its map-preimage equation and inverse cancellation give precisely Composition.compatibility. The same preimage construction applied to the identity unitor gives Identity.compatibility. These raw isomorphisms are constructed, not postulated.",
+   "uses": [
+    "lem-per-continuous-ambient-geometric-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the field coefficient composition equality by evaluating on each section and point and applying the three FieldChange.normalized equations. Use the integral-scalar-tower component equation on the underlying integral object of every raw object. Raw localization keeps its integral objects literally, so this supplies FieldComposition.compatibility without any extra extension lemma.",
+   "uses": [
+    "lem-per-continuous-integral-scalar-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the normalized ordinary/derived mixed tensor data. Compose the two Along comparisons, the two FieldChange comparisons and its ambient isomorphism to give an ambient natural isomorphism between the realized raw functors. Full faithfulness on functor categories gives its raw preimage isomorphism; cancellation proves Mixed.compatibility on every raw object. On the underlying integral object, the mixed-integral-component theorem gives a single arrow with the prescribed published normalization and the same realized compatibility. Cancel the invertible scalar/Along comparisons and use faithfulness to identify that arrow with the constructed raw component. Its HEq is exactly Mixed.raw_normalization.",
+   "uses": [
+    "lem-per-continuous-ambient-mixed-coherence",
+    "lem-per-continuous-mixed-integral-component"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-continuous-ambient-geometric-coherence",
+  "lem-per-continuous-integral-scalar-tower",
+  "lem-per-continuous-ambient-mixed-coherence",
+  "lem-per-continuous-mixed-integral-component"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "H8 categorical assembly: fully faithful lifting of ambient natural isomorphisms; scalar coefficient extensionality; integral-component normalization of the prescribed mixed map."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical normalized derived inverse image commutes with composition scalar extension and restriction to slice sites",
+   "results": "8 hits, including Scheme.Modules pullback pseudofunctors; generic module comparisons only.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these coefficient encodings and completion units."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits on Kan extensions and derived uniqueness, including leftDerivedUnique; no project coefficient normalization.",
+   "date": "2026-10-25",
+   "verdict": "Generic universal-property API only."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalRealizationPullbackComparison|ContinuousRational|rationalPullModule",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "No match in Mathlib."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousRationalDerivedRealization",
+  "date": "2026-10-25",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Continuous rational realization before the standard support bounds.",
+   "via": [
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalContinuousComparisonCoherence",
+  "file": "lean/Sheaf/Paper/RationalContinuousComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.rationalContinuousComparisonCoherence",
+  "statement": "theorem rationalContinuousComparisonCoherence (l : ℕ) [Fact l.Prime]\n    (realization : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] (X : Base.{u} l), At l A X)\n    (along : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme),\n      Along l A g (realization A X) (realization A Y))\n    (fieldChange : ∀ (A B : Type u) [Field A] [Field B]\n      [Algebra ℚ_[l] A] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] A] [FiniteDimensional ℚ_[l] B]\n      (i : A →ₐ[ℚ_[l]] B) (X : Base.{u} l),\n      FieldChange l A B i X (realization A X) (realization B X)) :\n    (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n    {X Y Z : Base.{u} l} (g : X.scheme ⟶ Y.scheme) (h : Z.scheme ⟶ X.scheme),\n    Nonempty (Composition l A g h (realization A X) (realization A Y) (realization A Z)\n      (along A g) (along A h) (along A (h ≫ g)))) ∧\n    (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n    (X : Base.{u} l), Nonempty (Identity l A X (realization A X) (along A (𝟙 X.scheme)))) ∧\n    (∀ (A B C : Type u) [Field A] [Field B] [Field C]\n    [Algebra ℚ_[l] A] [Algebra ℚ_[l] B] [Algebra ℚ_[l] C]\n    [FiniteDimensional ℚ_[l] A] [FiniteDimensional ℚ_[l] B]\n    [FiniteDimensional ℚ_[l] C]\n    (i : A →ₐ[ℚ_[l]] B) (j : B →ₐ[ℚ_[l]] C) (X : Base.{u} l),\n    Nonempty (FieldComposition l A B C i j X (realization A X) (realization B X) (realization C X)\n      (fieldChange A B i X) (fieldChange B C j X) (fieldChange A C (j.comp i) X))) ∧\n    (∀ (A B : Type u) [Field A] [Field B] [Algebra ℚ_[l] A] [Algebra ℚ_[l] B]\n    [FiniteDimensional ℚ_[l] A] [FiniteDimensional ℚ_[l] B]\n    (i : A →ₐ[ℚ_[l]] B) {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme),\n    Nonempty (Mixed l A B i g (realization A X) (realization A Y)\n      (realization B X) (realization B Y)\n      (along A g) (along B g) (fieldChange A B i X) (fieldChange A B i Y)))",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2133",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T043222-L-1690703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T094422-L-223889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "lem-sc-euler-twist-coordinate-difference",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mult-n-finite-flat",
+   "place": "proof paragraph invoking Tag 0BEM for the numerical-polynomial bound; Uniform geometric coordinate difference with smaller support",
+   "via": [
+    "lem-sc-snapper-numerical-polynomial",
+    "def-sc-intersection-number"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Uniform geometric coordinate difference with smaller support",
+ "statement": "Let k be a field [def-weil-field], X a proper k-scheme [def-weil-proper-morphism], F a coherent module [pqf-def-coherent], and d a natural number with dim Supp(F)≤d+1 [def-kun-topological-krull-dimension]. Let L_i, i in Fin r, be invertible modules [def-sc-invertible-module], and j in Fin r. Write chi_n(M) for chi(X,M tensor the integer powers L_i^(n_i)), folded in order [def-pc-euler-characteristic]. There are a natural number m, coherent modules G_a on X with dim Supp(G_a)≤d, and integers c_a, independent of n, such that chi_(n+e_j)(F)-chi_n(F)=sum_(a in Fin m)c_a chi_n(G_a) for every integer vector n.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEM, proof of Lemma 33.45.1; lean/Sheaf/AlgebraicGeometry/EulerTwistCoordinateDifference.lean"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-sc-invertible-module",
+  "def-pc-euler-characteristic",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Write chi_n(M) for the Euler characteristic after the list-fold tensor twist. If dim Supp(F)≤d, use G_0=F tensor L_j, G_1=F and signs +1,-1. Invertible tensoring preserves coherent modules and their support, and associativity, symmetry and dual evaluation give chi_(n+e_j)(F)=chi_n(F tensor L_j). The empty-support case can also use the empty sum.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
+   }
+  },
+  {
+   "text": "Otherwise the finite dimension of Supp(F) is d+1. Remove embedded points by [lem-sc-hilbert-embedded-points], giving 0→K→F→Fprime→0 and dim Supp(K)≤d. Take the scheme-theoretic support i:Z→X of Fprime and its coherent module H via [lem-weil-pbc-scheme-theoretic-support] and [lem-weil-pbc-closed-immersion-coherent-equivalence]. It is faithful with support Z. The local embedding O_Z into a finite sum of copies of H implies Ass(O_Z)⊆Ass(H), hence Z has no embedded points. It is proper, Noetherian, nonempty and of dimension d+1.",
+   "uses": [
+    "lem-sc-hilbert-embedded-points",
+    "lem-weil-pbc-scheme-theoretic-support",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
+   }
+  },
+  {
+   "text": "Choose a regular meromorphic section of i^*L_j by [lem-sc-regular-meromorphic-section-exists] and apply [lem-sc-hilbert-difference] to H itself. Keep its two monomorphisms from the denominator product and their coherent cokernels Q,Qprime, with supports of dimension≤d. These modules and maps are chosen before n. Tensor both exact sequences by all pulled-back integer powers; their invertibility gives exactness. Subtract Euler additivity: the coordinate difference is chi_n(Qprime)-chi_n(Q), uniformly in every coordinate, not just on a chosen one-dimensional slice.",
+   "uses": [
+    "lem-sc-regular-meromorphic-section-exists",
+    "lem-sc-hilbert-difference",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
+   }
+  },
+  {
+   "text": "Push these two cokernels to X. Closed-immersion cohomology and projection formula identify all twisted Euler characteristics; closed embeddings preserve the dimensions of their supports. Tensor 0→K→F→Fprime→0 by the same powers and subtract its Euler identities at n+e_j and n. The additional contribution is chi_n(K tensor L_j)-chi_n(K). Thus use four sheaves i_*Qprime,i_*Q,K tensor L_j,K, signs +1,-1,+1,-1; each is coherent and has support dimension≤d.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hilbert-embedded-points",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-sc-regular-meromorphic-section-exists",
+  "lem-sc-hilbert-difference",
+  "lem-pc-euler-additive",
+  "lem-pc-closed-immersion-coherent-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEM, proof of Lemma 33.45.1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coordinate difference Euler characteristic tensor invertible sheaf smaller support dimension",
+   "results": "{\"t\": \"2026-10-23T12:15:49Z\", \"tool\": \"leanfinder\", \"query\": \"coordinate difference Euler characteristic tensor invertible sheaf smaller support dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"IncidenceAlgebra.eulerChar_prod\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\"], \"digest\": \"7c49589510eff08a\"}; No sheaf-theoretic uniform smaller-support difference theorem in Mathlib. The project HilbertDifference supplies the two exact-sequence maps on the support; embedded-point and closed-immersion glue remain.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\"",
+   "results": "{\"t\": \"2026-10-23T12:17:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"eulerChar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ComplexShape.EulerCharSigns\", \"ComplexShape.EulerCharSigns.χ\", \"GradedObject.eulerChar\", \"HomologicalComplex.eulerChar\", \"ComplexShape.EulerCharSigns.mk\", \"ComplexShape.EulerCharSigns.χ_next\", \"HomologicalComplex.homologyEulerChar\", \"ComplexShape.eulerCharSignsDownNat\"], \"digest\": \"d9919b6efc11e86e\"}; No sheaf-theoretic uniform smaller-support difference theorem in Mathlib. The project HilbertDifference supplies the two exact-sequence maps on the support; embedded-point and closed-immersion glue remain.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Euler characteristic difference after tensoring by an invertible sheaf is a sum of Euler characteristics of coherent sheaves of smaller support dimension",
+   "results": "{\"t\": \"2026-10-23T12:17:04Z\", \"tool\": \"leansearch\", \"query\": \"The Euler characteristic difference after tensoring by an invertible sheaf is a sum of Euler characteristics of coherent sheaves of smaller support dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IncidenceAlgebra.eulerChar\", \"IncidenceAlgebra.eulerChar_prod\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"Module.Invertible.instTensorProduct_2\", \"Module.Invertible.instTensorProduct\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_iSup\", \"FDRep.char_tensor\", \"TensorProduct.finsuppLeft\"], \"digest\": \"5e17b45be4298834\"}; No sheaf-theoretic uniform smaller-support difference theorem in Mathlib. The project HilbertDifference supplies the two exact-sequence maps on the support; embedded-point and closed-immersion glue remain.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar.*(tensor|difference)|coordinate.*difference",
+   "results": "{\"t\": \"2026-10-23T12:15:45Z\", \"tool\": \"grep\", \"query\": \"eulerChar.*(tensor|difference)|coordinate.*difference\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No sheaf-theoretic uniform smaller-support difference theorem in Mathlib. The project HilbertDifference supplies the two exact-sequence maps on the support; embedded-point and closed-immersion glue remain.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial",
+  "date": "2026-10-23",
+  "group": "X8"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-isogeny",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EulerTwistCoordinateDifference",
+  "file": "lean/Sheaf/AlgebraicGeometry/EulerTwistCoordinateDifference.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.eulerChar_tensorPowers_coordinate_difference",
+  "statement": "theorem eulerChar_tensorPowers_coordinate_difference\n    (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsProper (X ↘ Spec (.of k))] (F : X.Modules)\n    (hF : RingedSpace.IsCoherent X.toRingedSpace F) (d : ℕ)\n    (hdim : topologicalKrullDim {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ≤\n      ((d + 1 : ℕ) : WithBot ℕ∞))\n    (r : ℕ) (L : Fin r → X.Modules) [∀ i : Fin r, (L i).IsInvertible]\n    (j : Fin r) :\n    ∃ (m : ℕ) (G : Fin m → X.Modules) (c : Fin m → ℤ),\n      (∀ i, RingedSpace.IsCoherent X.toRingedSpace (G i)) ∧\n      (∀ i, topologicalKrullDim {x : X | ¬ Subsingleton ((G i).presheaf.stalk x)} ≤\n        (d : WithBot ℕ∞)) ∧\n      ∀ n : Fin r → ℤ,\n        (((List.ofFn fun i : Fin r =>\n          if 0 ≤ Function.update n j (n j + 1) i then\n            (L i).tensorPow (Function.update n j (n j + 1) i).toNat\n          else (L i).dual.tensorPow (-Function.update n j (n j + 1) i).toNat).foldl\n            (fun M N : X.Modules => M ⊗ N) F).eulerChar k) -\n        (((List.ofFn fun i : Fin r =>\n          if 0 ≤ n i then (L i).tensorPow (n i).toNat\n          else (L i).dual.tensorPow (-n i).toNat).foldl\n            (fun M N : X.Modules => M ⊗ N) F).eulerChar k) =\n        ∑ a : Fin m, c a *\n          (((List.ofFn fun i : Fin r =>\n            if 0 ≤ n i then (L i).tensorPow (n i).toNat\n            else (L i).dual.tensorPow (-n i).toNat).foldl\n              (fun M N : X.Modules => M ⊗ N) (G a)).eulerChar k)",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261023T132407-L-2265406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261023T132407-L-2265406",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

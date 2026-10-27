@@ -1,0 +1,314 @@
+{
+ "id": "lem-trf-qcqs-line-section-algebra-evaluation",
+ "kind": "statement",
+ "title": "QCQS line section algebra, coproduct comparison and affine evaluation charts",
+ "statement": "Let $f:X\\to T$ be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme] [def-weil-finite-type-morphism] [def-weil-quasi-separated-morphism], and let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Put $\\mathcal A=\\bigoplus_{n\\geq0}f_*L^{\\otimes n}$, with $L^{\\otimes0}=\\mathcal O_X$, direct image $f_*N(V)=N(f^{-1}V)$ and tensor-product multiplication [def-pur-sheaf-tensor-product] [def-weil-pbc-graded-sheaf-structures]. Then $\\mathcal A$ is a quasi-coherent graded $\\mathcal O_T$-algebra [def-weil-pbc-quasi-coherent-algebra]. The canonical comparison $c:\\bigoplus_{n\\geq0}f_*L^{\\otimes n}\\to f_*(\\bigoplus_{n\\geq0}L^{\\otimes n})$, whose restriction to the $n$th summand is the direct image of its coproduct inclusion, is an isomorphism of graded algebras. Let $P=\\operatorname{Proj}_T(\\mathcal A)$ [def-nagata-relative-proj] and let $\\psi:f^*\\mathcal A\\to\\bigoplus_{n\\geq0}L^{\\otimes n}$ be evaluation, using module pullback [def-pc-module-pullback]. There is the canonical $T$-morphism $r:U(\\psi)\\to P$ of [lem-trf-space-line-module-proj-map]. For every affine open $V\\subseteq T$, put $W=f^{-1}V$ and $M=L|_W$. There are canonical identifications $\\mathcal A(V)=\\Gamma_*(W,M)$ [def-sc-invertible-section-ring] and $P\\times_TV=\\operatorname{Proj}(\\Gamma_*(W,M))$ [def-pc-proj]. Under these identifications, the induced graded map $\\mathcal A(V)\\to\\Gamma_*(W,M)$ is the identity, $U(\\psi)\\cap W=\\bigcup_{n\\geq1,\\ s\\in\\Gamma(W,M^{\\otimes n})}W_s$, and $r|_{U(\\psi)\\cap W}$ is the usual canonical map for that identity graded map, where $W_s$ is the nonvanishing open of [def-weil-pbc-ample-invertible-module]. These identifications respect further affine restriction, multiplication and the unit. In particular, if these nonvanishing opens cover every such $W$, then $U(\\psi)=X$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (lemma-characterize-relatively-ample), (3) implies (5), section algebra and adjunction map; Schemes Tag 01LC (lemma-push-forward-quasi-coherent); Constructions Tag 01O9 (lemma-invertible-map-into-relative-proj), clause (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback",
+  "lem-trf-space-line-module-proj-map",
+  "def-sc-invertible-section-ring",
+  "def-pc-proj",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $N_n=L^{\\otimes n}$ and $B=\\bigoplus_{n\\geq0}N_n$. On an affine open with a frame $e$ of $L$, the frame $e^{\\otimes n}$ identifies $N_n$ with $\\mathcal O$, also for $n=0$. Thus every $N_n$ is quasi-coherent by the affine-local definition [def-sc-invertible-module, def-pur-sheaf-tensor-product, pqf-def-coherent]. The homogeneous multiplication sends $(a e^{\\otimes i},b e^{\\otimes j})$ to $ab e^{\\otimes(i+j)}$; replacing $e$ by $ue$ multiplies both sides by $u^{i+j}$, so these formulas agree on overlaps. Associativity, commutativity and the unit are the corresponding identities for local coefficients.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), (3) implies (5), tensor-power algebra; elementary local-frame verification."
+   }
+  },
+  {
+   "text": "Apply [pqf-lem-pushforward-qcoh] to each $N_n$: its morphism hypothesis is exactly the assumed quasi-compactness and quasi-separatedness of $f$. Apply [lem-weil-pbc-quasi-coherent-module-coproduct-closure] on $T$ to these direct images, and on $X$ to the $N_n$. This proves quasi-coherence of $\\mathcal A$ and $B$. For an open $V\\subseteq T$, multiply $s\\in(f_*N_i)(V)$ and $t\\in(f_*N_j)(V)$ by their tensor product on $f^{-1}V$. The structural unit sends $a\\in\\mathcal O_T(V)$ to $f^\\sharp(a)\\in(f_*N_0)(V)$. The preceding identities and restriction of sections give precisely the homogeneous operations of [def-weil-pbc-graded-sheaf-structures], hence a graded algebra whose underlying module is quasi-coherent [def-weil-pbc-quasi-coherent-algebra].",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "def-weil-pbc-graded-sheaf-structures",
+    "def-weil-pbc-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01LC (lemma-push-forward-quasi-coherent); Tag 01ID (lemma-colimit-quasi-coherent) and Section 01LA, arbitrary sums; applied as in Morphisms Tag 01VJ."
+   }
+  },
+  {
+   "text": "Fix $V=\\operatorname{Spec}R\\subseteq T$, $W=f^{-1}V$ and $M=L|_W$. Restriction to an open preserves coproducts [lem-weil-pbc-module-restriction-open-immersion-colimits]. For $E_n=(f_*N_n)|_V$, the counit isomorphism of [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies $E_n$ with $\\widetilde{E_n(V)}$; its colimit assertion and unit isomorphism therefore identify $\\Gamma(V,\\bigoplus_n E_n)$ with $\\bigoplus_n E_n(V)$, by the map from the inclusions. By the definition of direct image, $E_n(V)=\\Gamma(W,M^{\\otimes n})$. Consequently $\\mathcal A(V)=\\Gamma_*(W,M)$ [def-sc-invertible-section-ring], canonically and degree by degree. The multiplication and unit on both sides are the tensor product of the same sections and the section $1$, so this is an identification of graded rings.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I7 (lemma-compare-constructions), 01IB (lemma-equivalence-quasi-coherent), 01ID (lemma-colimit-quasi-coherent); Properties Tag 01PZ, section ring."
+   }
+  },
+  {
+   "text": "The affine $V$ is qcqs [lem-weil-pbc-affine-scheme-qcqs]. Base change and composition in [lem-weil-pbc-qcqs-morphism-permanence], parts (3) and (2), imply that $W\\to V$ is qcqs and that $W$ is a qcqs scheme. By [lem-weil-pbc-module-restriction-open-immersion-colimits], $B|_W$ is the coproduct of the $M^{\\otimes n}$. Apply [lem-weil-pbc-qcqs-cohomology-direct-sum] with $p=0$ on $W$. Here $H^0(W,F)=\\Gamma(W,F)$: in the resolution definition [def-sc-ringed-space-module-cohomology], degree zero is $\\ker(\\Gamma I^0\\to\\Gamma I^1)=\\Gamma(\\ker(I^0\\to I^1))=\\Gamma F$, since sections of a kernel are exactly sections killed by its map. Thus $\\bigoplus_n\\Gamma(W,M^{\\otimes n})\\to\\Gamma(W,B|_W)$ is bijective. Under step 3 this is precisely $c(V)$, since on summand $n$ it is $\\Gamma(W,N_n\\to B)$. Hence $c$ is an isomorphism: these maps are bijective on every affine open, a basis, and their inverses commute with restrictions by uniqueness. On homogeneous local sections, $c(st)=c(s)c(t)$ and $c(1)=1$, by the inclusion multiplication in $B$; by local finite sums the equations hold on the whole coproduct. Therefore $c$ is an isomorphism of graded algebras.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01FF (lemma-quasi-separated-cohomology-colimit), degree-zero direct-sum specialization; also Modules Tag 01AI (lemma-section-direct-sum-quasi-compact). Scheme hypotheses: Tags 01K5 and 01KU."
+   }
+  },
+  {
+   "text": "Take the mate of $c:\\mathcal A\\to f_*B$ under [lem-pc-module-pullback-adjunction], giving $\\psi:f^*\\mathcal A\\to B$. In the tensor definition [def-pc-module-pullback], its degree-$n$ formula is $a\\otimes s\\mapsto a\\,s|_O$ on a source open $O\\subseteq f^{-1}V$, for $s\\in\\Gamma(f^{-1}V,N_n)$. The tensor balancing relation is exactly $f^\\sharp(r)a\\otimes s=a\\otimes rs$, and both sides evaluate to $f^\\sharp(r)a s$. Thus this is evaluation; it preserves the multiplication and unit just constructed. In particular, the induced map $\\mathcal A(V)_n\\to\\Gamma(W,M^{\\otimes n})$ sends $s$ to $s$, so its graded ring map is the identity under step 3. For $V'\\subseteq V$, both ways of applying evaluation to $s$ give $s|_{f^{-1}V'}$; products restrict as $(st)|=s|\\,t|$ and the unit restricts to $1$.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096 (lemma-adjoint-pullback-pushforward-modules), explicit tensor/restriction adjunction; applied to the map in Morphisms Tag 01VJ."
+   }
+  },
+  {
+   "text": "By [lemma-nagata-relative-proj-exists], $P$ exists and $P\\times_TV=\\operatorname{Proj}(\\mathcal A(V))=\\operatorname{Proj}(\\Gamma_*(W,M))$, with chart identifications commuting with further affine restriction. The scheme clause of [lem-trf-space-line-module-proj-map] gives the canonical $T$-morphism $r:U(\\psi)\\to P$. To compute its domain over this fixed $V$, [lem-weil-pbc-module-pullback-affine-sections] says that on each affine $O\\subseteq W$, $f^*\\mathcal A_n$ has sections $\\mathcal A_n(V)\\otimes_R\\mathcal O_X(O)$, generated by the pulled-back $s\\in\\mathcal A_n(V)$. Their evaluations are precisely the sections $s$ in step 5. After choosing a frame of $N_n$ at $x\\in W$, $\\psi_n$ is surjective at $x$ exactly when these coefficients generate the unit ideal of the local ring $\\mathcal O_{X,x}$. If they do, a finite combination equals $1$, so at least one coefficient is a unit; conversely a unit coefficient generates. By [def-sc-section-generating-locus], this says $x\\in W_s$ for some $s\\in\\Gamma(W,M^{\\otimes n})$. Taking $n>0$ proves $U(\\psi)\\cap W=\\bigcup_{n>0,s}W_s$.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists",
+    "lem-trf-space-line-module-proj-map",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O9 (lemma-invertible-map-into-relative-proj), opening definition of U(psi) and clause (3); Tags 01NQ (lemma-glue-relative-proj) and 01I9 (lemma-widetilde-pullback), affine local descriptions."
+   }
+  },
+  {
+   "text": "On $W_s$, with $s$ of positive degree $d$, [lem-trf-line-proj-affine-chart-atlas] characterizes the canonical map into $D_+(s)$ by $b/s^k\\mapsto\\psi(b)/\\psi(s)^k$ for $b$ of degree $kd$. Step 5 turns this into $b/s^k\\mapsto b/s^k$, where on the right the ratio is the coefficient of $b$ relative to the invertible section $s^k$ of $M^{\\otimes kd}$. This is exactly the chart formula for the usual canonical map associated with the identity of $\\Gamma_*(W,M)$. The chart theorem's uniqueness and overlap compatibility identify the two maps on all of $U(\\psi)\\cap W$. Its compatibility with affine refinements, together with the restriction-compatible charts of [lemma-nagata-relative-proj-exists], gives the asserted further affine restriction: the fraction $b/s^k$ is sent to $b|/(s|)^k$, which is the restriction of its coefficient. Multiplication and the unit were checked in steps 3 and 5. Finally, if every such $W$ is covered by its $W_s$, step 6 gives $W\\subseteq U(\\psi)$; the inverse images of affine opens cover $X$, so $U(\\psi)=X$.",
+   "uses": [
+    "lem-trf-line-proj-affine-chart-atlas",
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), homogeneous fraction construction and uniqueness; 01O9 (lemma-invertible-map-into-relative-proj), clause (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-coherent",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-sc-invertible-section-ring",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-pullback",
+  "lemma-nagata-relative-proj-exists",
+  "lem-trf-space-line-module-proj-map",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-sc-section-generating-locus",
+  "lem-trf-line-proj-affine-chart-atlas"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (lemma-characterize-relatively-ample), (3) implies (5), section-algebra part only; explicit comparisons from Schemes 01LC, 01ID, Cohomology 01FF at degree zero, Sheaves 0096, Constructions 01NK and 01O9(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism direct image of the tensor section algebra is the direct sum of direct images and its relative Proj canonical evaluation map restricts to the absolute section ring map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤),\\n  CategoryTheo\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ over a commutative ring $A$, a scheme $X$, and a ring homomorphism $f : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ such that the image of the irrelevant ideal $\\\\mathcal{I} \\\\subs\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {Z : AlgebraicG\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a scheme $X$, a ring homomorphism $f : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ satisfying $f(\\\\text{irrelevant ideal}) = A$, and a morphism $h : \\\\text{Spec}(\\\\mathcal{A}_0) \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι_toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm) (AlgebraicGeometry.Proj.toSp\", \"doc\": \"The composition of the inclusion morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)}) \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ with the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A}\\n  (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp\\n      (Al\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, element $f$ of degree $f_\\\\deg$, and element $x$ divisible by $f$ with degree $x_\\\\deg$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(x)}) \\\\to \\\\ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Proj.basicOpenToSpec 𝒜 x)\\n     \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, the composition of the morphism $D_+(f) \\\\to \\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ with the scheme morphism induced by the homogeneous l\"}\n  {\"name\": \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A}\\n  (hx : x = f * g) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGe\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with $0 < m$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)}) \\\\to \\\\oper\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent graded section algebra of an invertible sheaf qcqs pushforward commutes with direct sums and affine restriction of evaluation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"AlgebraicGeometry.Proj.add_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": (s + t).1 x = s.1 x + t.1 x\", \"doc\": \"For any sections $s$ and $t$ of the structure sheaf on the projective spectrum of a graded ring, and for any point $x$ in their domain, the evaluation of the sum $s + t$ at $x$ equals the sum of the e\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": Presheaf CommRingCat (ProjectiveSpectrum.top 𝒜)\", \"doc\": \"A presheaf of commutative rings on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, assigning to each open set $U$ the commutative ring of sections locally represente\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) :\\n  (fromOfGlobalSections 𝒜 f hf) ∣_ (basicOpen 𝒜 r) =\\n    (Scheme.isoOfEq _ (fromOfGlobalSections_preimage_basicOpen _ _ _ hn hr)).hom ≫\\n      toBasicOpenOfGlobalSections 𝒜 f rfl hn hr\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"DirectSum.GAlgebra.recOn\", \"module\": \"Mathlib.Algebra.DirectSum.Algebra\", \"type\": \"{ι : Type uι} →\\n  {R : Type uR} →\\n    {A : ι → Type uA} →\\n      [inst : CommSemiring R] →\\n        [inst_1 : (i : ι) → AddCommMonoid (A i)] →\\n          [inst_2 : (i : ι) → Module R (A i)] →\\n            [inst_3 : AddMonoid ι] →\\n              [inst_4 : DirectSum.GSemiring A] →\\n                {motive :\", \"doc\": \"Given a commutative semiring $ R $, an additive monoid index type $ \\\\iota $, and a family of $ R $-modules $ A_i $, this recursor allows defining functions on the graded algebra $ \\\\bigoplus_{i \\\\in \\\\io\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"coproduct\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionAlgebra|section_algebra|pushforward.*[Cc]oproduct|pushforward.*[Dd]irect[Ss]um|[Aa]mple",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"8\", \"text\": \"-- these `ModuleCat` instances are only used by the `example` below, which `shake` cannot see\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"154\", \"text\": \"example (R : Type u) [Ring R] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"24\", \"text\": \"this can be used to show that the `P`-site admits sheafification. For an example,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"725\", \"text\": \"example {U X Y : Scheme.{u}} (f : U ⟶ X) (g : U ⟶ Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"493\", \"text\": \"example (R : CommRingCat) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"18\", \"text\": \"For example, if `X` is irreducible then this will give back the original scheme `X`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"line\": \"24\", \"text\": \"  If 2 is invertible in the ring (for example, if it is a field of characteristic ≠ 2),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"line\": \"35\", \"text\": \"  If 2 and 3 are invertible in the ring (for example, if it is a field of characteristic ≠ 2 or 3),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"22\", \"text\": \"Typical examples of this are affine morphisms (where `Q` is trivial), finite morphisms\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"line\": \"45\", \"text\": \"example : IsZariskiLocalAtTarget (isomorphisms Scheme) := inferInstance\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical direct sum comparison isomorphism for qcqs pushforward of line bundle powers and compatibility of evaluation with relative Proj affine charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A)\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n                { carrier := HomogeneousLocalization.Awa\", \"doc\": \"The theorem establishes the associativity of composed morphisms involving the structure sheaf on the projective spectrum $\\\\text{Proj}(A)$ of a graded ring $A$. Specifically, it asserts that for an ope\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A)\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n                { carrier := HomogeneousLocalization.Awa\", \"doc\": \"For any open set $U$ in the projective spectrum $\\\\text{Proj}(A)$, the composition of the structure sheaf restriction map $\\\\mathcal{O}_{\\\\text{Proj}(A)}(D_+(f)) \\\\to \\\\mathcal{O}_{\\\\text{Proj}(A)}(U)$ with\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  {x x' : ↑(X.presheaf.obj (Opposite.op ⊤))} {t t' : A} {d d' : ℕ} {H : f t = x}\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a scheme $X$, and homogeneous elements $t \\\\in \\\\mathcal{A}_d$ and $t' \\\\in \\\\mathcal{A}_{d'}$ with $d, d' > 0$, if there exists $s \\\\in \\\\mathcal{A}_n$ such that $t \\\\cdot\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (HomogeneousLocalization.awayMa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g$ where $f$ divides $g$, the composition of the ring homomorphism $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$ (induced by localization) follo\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g) {Z : CommRingCat}\\n  (h : (AlgebraicGeometry.Proj 𝒜).presheaf.obj (Opposite.op (Algebraic\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g,x$ with $x = f \\\\cdot g$, the composition of the homogeneous localization map $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$, the structure shea\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionAlgebra|section_algebra|pushforward.*[Cc]oproduct|pushforward.*[Dd]irect[Ss]um",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent graded section algebra of an invertible sheaf pushforward commutes with direct sums and affine restriction of evaluation",
+   "results": "[leansearch] OK 8 hit(s): SetLike.gmodule.congr_simp, DirectSum.GAlgebra.casesOn, DirectSum.GAlgebra.recOn, AlgebraicGeometry.Proj.add_apply, DirectSum.GAlgebra.rec, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, DirectSum.Gmodule, Algebra.directSumGAlgebra_toFun_apply",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"coproduct\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated morphism pushforward commutes with direct sums of quasi coherent modules and the evaluation of the section algebra of a line bundle gives the relative Proj map",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections commute with arbitrary direct sums of quasi coherent modules on quasi compact quasi separated schemes",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def fromOfGlobalSections|theorem fromOfGlobalSections_morphismRestrict|instAdditivePushforward",
+   "results": "[grep] OK 1 hit: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:443, AlgebraicGeometry.Proj.fromOfGlobalSections. Read lines 406-456: source is a ring map to ordinary global functions with an irrelevant-ideal unit-ideal hypothesis, not a section-algebra pushforward or a line-bundle relative-Proj evaluation statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-ample-canonical-proj-criterion",
+  "date": "2026-10-22",
+  "group": "Q105"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized descent input below lem-trf-local-term-locality through lem-trf-algebraic-space-ample-local: canonical section algebra and its affine evaluation map; returned criterion proof steps 3--5, including the degreewise direct-sum comparison.",
+   "via": [
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-qcqs-line-section-algebra-evaluation",
+  "worker": "stage1",
+  "summary": "Seven steps, no new nodes: tensor-frame verification; qcqs pushforward and coproduct closure; affine graded-section identification; canonical coproduct comparison using existing qcqs H^0 direct-sum theorem; explicit adjunction evaluation; fixed-affine generation locus; homogeneous fraction charts and restriction. Existing DAG statements supply all non-elementary inputs. No statement or hypotheses changed. No exact completed project declaration or Mathlib match found.",
+  "blueprint": "Realizes the section-algebra and affine-evaluation input in the existing from.place: the polarized-descent chain below lem-trf-local-term-locality, specifically the canonical algebra/evaluation part of lem-trf-scheme-ample-canonical-proj-criterion (Stacks 01VJ (3) implies (5)). No alteration of the unit or chapter route. Whole-blueprint searches section algebra, section ring, graded section, 01LC, 01O9, 01FF and coproduct found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "Generic qcqs direct-image quasi-coherence theorem (01LC), required for each graded piece; the unit has no alternative direct-image theorem."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Generic closure under arbitrary sums, needed for the underlying section algebra; the unit has no closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine module equivalence and colimit preservation, used to compute sections of the algebra coproduct."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "why": "Generic canonical direct-sum theorem, specialized to H^0 on each affine preimage; no cohomological route is substituted for a unit step."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic module adjunction, constructing evaluation as the mate of the coproduct comparison."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Generic relative-Proj existence and restriction charts, needed for the codomain and its affine identification."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine tensor formula, used to check the fixed-affine generation locus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-pc-module-pullback-adjunction",
+  "lemma-nagata-relative-proj-exists",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-7037bff74",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-7037bff74 (reviewer sub-agent of L); spot-checked: First stage-1 split, not a re-split: no repair note, no new nodes, statement inherited, proof_deps equals the union of step uses, no cycle (the only citers are the scheme-ample criterion and sfb-nodal-log). I read all 7 steps and every cited statement. S1 tensor-frame quasi-coherence and cocycle check: OK. S2 01LC (needs only qcqs) plus closure under arbitrary sums, unit f^sharp with no A_0=O_T assumed: OK. S3 restriction keeps coproducts, tilde counit/unit/colimit give Gamma(V, sum E_n) = sum Gamma(W,M^n) as graded rings: OK. S4 W qcqs via permanence (3),(2), qcqs H^0 direct sum at p=0, H^0=Gamma (pqf and sc definitions are both derived functors), c(V) is exactly this map, iso on an affine basis: OK. S5 psi = mate of c, germ formula respects balancing, induced map is the identity: OK. S6 Proj restriction, affine pullback tensor formula, local-ring unit-ideal test gives U(psi) cap W = union of W_s for n>0: OK. Accepted point: the étale-site U(psi) is identified through the scheme clause of space-line-module-proj-map and the Zariski chart atlas. S7 chart formula b/s^k -> b/s^k matches 01NK for the identity, plus overlap and refinement compatibility: OK. Sources: Stacks Constructions 01O9(3) (constructions.tex l.4503), Morphisms 01VJ (3)=>(5), tags 01LC/01NK/01NQ/01O9 confirmed in the tags table. No SGA. Edge cases tested: empty X or V, degree 0, d>1, trivial L on affine X, L with no positive-degree sections. Tool uses (all generic inputs) accepted."
+ }
+}

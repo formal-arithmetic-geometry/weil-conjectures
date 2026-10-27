@@ -281,21 +281,42 @@
  "lean": {
   "module": "Sheaf.RingTheory.ParameterIdealFormalNormalization",
   "declaration": "MvPowerSeries.parameter_ideal_formal_normalization",
+  "declarations": [
+   "MvPowerSeries.parameter_ideal_formal_normalization_dvr"
+  ],
   "file": "lean/Sheaf/RingTheory/ParameterIdealFormalNormalization.lean",
-  "statement": "theorem parameter_ideal_formal_normalization (B : Type v) [CommRing B] [IsLocalRing B] [IsNoetherianRing B] [IsAdicComplete (maximalIdeal B) B] (e : ℕ) : (∀ (Λ : Type u) [Field Λ] [IsReduced B] (α : Λ →+* B) (_hα : Function.Injective α) (_hres : Function.Bijective ((residue B).comp α)) (_hdim : ∀ q : PrimeSpectrum B, q.asIdeal ∈ minimalPrimes B → ringKrullDim (B ⧸ q.asIdeal) = (e : WithBot ℕ∞)) (b : Fin e → B) (_hb : ∀ i : Fin e, b i ∈ maximalIdeal B) (_hparam : (Ideal.span (Set.range b)).radical = maximalIdeal B), ∃ (_ : Algebra (MvPowerSeries (Fin e) Λ) B) (_ : IsLocalHom (algebraMap (MvPowerSeries (Fin e) Λ) B)), (∀ c : Λ, algebraMap (MvPowerSeries (Fin e) Λ) B (C c) = α c) ∧ (∀ i : Fin e, algebraMap (MvPowerSeries (Fin e) Λ) B (X i) = b i) ∧ (∀ N : ℕ, ∃ M : ℕ, ∀ F ∈ maximalIdeal (MvPowerSeries (Fin e) Λ) ^ M, algebraMap (MvPowerSeries (Fin e) Λ) B F ∈ maximalIdeal B ^ N) ∧ Function.Injective (algebraMap (MvPowerSeries (Fin e) Λ) B) ∧ Function.Bijective (ResidueField.map (algebraMap (MvPowerSeries (Fin e) Λ) B)) ∧ Module.Finite (MvPowerSeries (Fin e) Λ) B ∧ Module.IsTorsionFree (MvPowerSeries (Fin e) Λ) B ∧ ∃ f : ∀ q : {q : PrimeSpectrum B // q.asIdeal ∈ minimalPrimes B}, FractionRing (MvPowerSeries (Fin e) Λ) →+* FractionRing (B ⧸ q.val.asIdeal), (∀ q : {q : PrimeSpectrum B // q.asIdeal ∈ minimalPrimes B}, ∀ r : MvPowerSeries (Fin e) Λ, f q (algebraMap (MvPowerSeries (Fin e) Λ) (FractionRing (MvPowerSeries (Fin e) Λ)) r) = algebraMap (B ⧸ q.val.asIdeal) (FractionRing (B ⧸ q.val.asIdeal)) (Ideal.Quotient.mk q.val.asIdeal (algebraMap (MvPowerSeries (Fin e) Λ) B r))) ∧ (∀ q : {q : PrimeSpectrum B // q.asIdeal ∈ minimalPrimes B}, (f q).Finite) ∧ ∃ E : B ⊗[MvPowerSeries (Fin e) Λ] FractionRing (MvPowerSeries (Fin e) Λ) ≃+* (∀ q : {q : PrimeSpectrum B // q.asIdeal ∈ minimalPrimes B}, FractionRing (B ⧸ q.val.asIdeal)), ∀ (x : B) (k : FractionRing (MvPowerSeries (Fin e) Λ)) (q : {q : PrimeSpectrum B // q.asIdeal ∈ minimalPrimes B}), E (x ⊗ₜ[MvPowerSeries (Fin e) Λ] k) q = algebraMap (B ⧸ q.val.asIdeal) (FractionRing (B ⧸ q.val.asIdeal)) (Ideal.Quotient.mk q.val.asIdeal x) * f q k) ∧ (∀ (Λ : Type u) [CommRing Λ] [IsDomain Λ] [IsDiscreteValuationRing Λ] [IsDomain B] [IsAdicComplete (maximalIdeal Λ) Λ] (π : Λ) (_hπ : maximalIdeal Λ = Ideal.span {π}) (α : Λ →+* B) [IsLocalHom α] (_hα : Function.Injective α) (_hres : Function.Bijective (ResidueField.map α)) (_hdim : ringKrullDim B = ((e + 1 : ℕ) : WithBot ℕ∞)) (b : Fin e → B) (_hb : ∀ i : Fin e, b i ∈ maximalIdeal B) (_hparam : (Ideal.span (insert (α π) (Set.range b))).radical = maximalIdeal B), ∃ (_ : Algebra (MvPowerSeries (Fin e) Λ) B) (_ : IsLocalHom (algebraMap (MvPowerSeries (Fin e) Λ) B)), (∀ c : Λ, algebraMap (MvPowerSeries (Fin e) Λ) B (C c) = α c) ∧ (∀ i : Fin e, algebraMap (MvPowerSeries (Fin e) Λ) B (X i) = b i) ∧ (∀ N : ℕ, ∃ M : ℕ, ∀ F ∈ maximalIdeal (MvPowerSeries (Fin e) Λ) ^ M, algebraMap (MvPowerSeries (Fin e) Λ) B F ∈ maximalIdeal B ^ N) ∧ Function.Injective (algebraMap (MvPowerSeries (Fin e) Λ) B) ∧ Function.Bijective (ResidueField.map (algebraMap (MvPowerSeries (Fin e) Λ) B)) ∧ Module.Finite (MvPowerSeries (Fin e) Λ) B ∧ Module.IsTorsionFree (MvPowerSeries (Fin e) Λ) B)",
+  "statement": "theorem parameter_ideal_formal_normalization (Λ : Type u) [Field Λ] (B : Type v) [CommRing B] [IsLocalRing B] [IsNoetherianRing B] [IsReduced B] [IsAdicComplete (maximalIdeal B) B] (e : ℕ) (α : Λ →+* B) (_hα : Function.Injective α) (_hres : Function.Bijective ((residue B).comp α)) (_hdim : ∀ q : PrimeSpectrum B, q.asIdeal ∈ minimalPrimes B → ringKrullDim (B ⧸ q.asIdeal) = (e : WithBot ℕ∞)) (b : Fin e → B) (_hb : ∀ i : Fin e, b i ∈ maximalIdeal B) (_hparams : (Ideal.span (Set.range b)).radical = maximalIdeal B) : ∃ (_ : Algebra (MvPowerSeries (Fin e) Λ) B), (∀ a : Λ, algebraMap (MvPowerSeries (Fin e) Λ) B (C a) = α a) ∧ (∀ i : Fin e, algebraMap (MvPowerSeries (Fin e) Λ) B (X i) = b i) ∧ (∀ n : ℕ, ∃ m : ℕ, Ideal.map (algebraMap (MvPowerSeries (Fin e) Λ) B) (maximalIdeal (MvPowerSeries (Fin e) Λ) ^ m) ≤ maximalIdeal B ^ n) ∧ Function.Injective (algebraMap (MvPowerSeries (Fin e) Λ) B) ∧ ∃ (_ : IsLocalHom (algebraMap (MvPowerSeries (Fin e) Λ) B)), Function.Bijective (ResidueField.map (algebraMap (MvPowerSeries (Fin e) Λ) B)) ∧ Module.Finite (MvPowerSeries (Fin e) Λ) B ∧ Module.IsTorsionFree (MvPowerSeries (Fin e) Λ) B ∧ ∃ f : ∀ q : {p : PrimeSpectrum B // p.asIdeal ∈ minimalPrimes B}, FractionRing (MvPowerSeries (Fin e) Λ) →+* FractionRing (B ⧸ q.val.asIdeal), (∀ (q : {p : PrimeSpectrum B // p.asIdeal ∈ minimalPrimes B}) (r : MvPowerSeries (Fin e) Λ), f q (algebraMap _ (FractionRing (MvPowerSeries (Fin e) Λ)) r) = algebraMap (B ⧸ q.val.asIdeal) (FractionRing (B ⧸ q.val.asIdeal)) (Ideal.Quotient.mk q.val.asIdeal (algebraMap _ B r))) ∧ (∀ q : {p : PrimeSpectrum B // p.asIdeal ∈ minimalPrimes B}, (f q).Finite) ∧ ∃ E : (B ⊗[MvPowerSeries (Fin e) Λ] FractionRing (MvPowerSeries (Fin e) Λ)) ≃+* (∀ q : {p : PrimeSpectrum B // p.asIdeal ∈ minimalPrimes B}, FractionRing (B ⧸ q.val.asIdeal)), ∀ (x : B) (k : FractionRing (MvPowerSeries (Fin e) Λ)) (q : {p : PrimeSpectrum B // p.asIdeal ∈ minimalPrimes B}), E (x ⊗ₜ[MvPowerSeries (Fin e) Λ] k) q = algebraMap (B ⧸ q.val.asIdeal) (FractionRing (B ⧸ q.val.asIdeal)) (Ideal.Quotient.mk q.val.asIdeal x) * f q k",
   "branch": "newtargets-dag",
-  "by": "N5",
-  "date": "2026-10-18",
+  "by": "Q03",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.ParameterIdealFormalNormalization deleted (dead: no target reaches it); this node is not reached either."
+  "note": "The two declarations state respectively cases (a) and (b). The evaluation algebra is determined by its constant and variable values. The generic product isomorphism is determined by its pure-tensor formula and the component field maps by compatibility with the source."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-0fbe815bd",
-  "group": "N5",
+  "reviewer": "NT-stage2-cc-c83366fc3",
+  "group": "Q03",
   "result": "pass",
-  "note": "Statement matches node clause by clause: (a) reduced, all minimal components of dim e, coefficient field via injective α and bijective residue∘α, radical(span b)=n; (b) domain of dim e+1, complete DVR with uniformizer π, local α iso on residue fields, radical(span(απ,b))=n. φ is algebraMap of an existential Algebra fixed by its C/X values plus continuity (unique since B is n-adically Hausdorff), so not arbitrary. Injective, IsLocalHom, residue bijective, Module.Finite, Module.IsTorsionFree (regular elements act injectively = usual notion over a domain). Case (a): f q fixed on R, (f q).Finite, E : B⊗K ≃+* Π_{minimal q} Frac(B/q) fixed on pure tensors. No extra assumptions; universes u, v independent; e=0 covered. No duplicate: the side CompleteLocalDomain*ParameterMap theorems are existential-parameter variants. Node differs from live only in lean; statement verbatim; docstrings carry source, blueprint and 8 steps; sorry-only; plain imports = the 16 proof deps. nt_compile --json clean 2.5 s exit 0. Advisory only: IsTorsionFree reached transitively via Torsion.Basic."
+  "note": "S2 restore of the module deleted as dead (lean_removed f6bf55e2b05); node differs from side-live only in lean; lean.statement verbatim in file. Clause by clause faithful: (a) IsReduced, ringKrullDim(B/q)=e for all minimal q, Field Λ with injective α and bijective residue∘α, radical(span b)=𝔫; (b) IsDomain, ringKrullDim B=e+1, complete DVR Λ with maxIdeal=span{π}, α injective+IsLocalHom+bijective ResidueField.map, radical(span({απ}∪b))=𝔫. φ = algebraMap of ∃ Algebra pinned by C a↦α a, X i↦b i and adic continuity (unique by Hausdorffness): evaluation, not arbitrary. Conclusions injective, IsLocalHom, residue bijective, Module.Finite, Module.IsTorsionFree; (a) f q pinned on R, (f q).Finite, E: B⊗Frac R ≃+* Π Frac(B/q) pinned on pure tensors. e=0, multiple minimal primes, zero ring and universes u/v checked. Only sorry; docstrings carry source, blueprint and steps 1-8 / 1-6; the six WeilConjectures.RingTheory proof-dep modules exist and are not dropped; no name clash, no importers. No compile (no change). Maintainer note: the item (route-pivot-dropped l.1756), its module (dropped-modules l.1495) and its 3 direct citers are on the drop lists, but it is reached via non-dropped lem-per-complete-local-nodal-dimension-reduction → marked-algebraization → equivariant-cohen-presentation and queue.md lists it as state; take it off the drop lists or re-drop the route, or future importers hit route_pivot (c)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/ParameterIdealFormalNormalization.lean",
+  "module": "Sheaf.RingTheory.ParameterIdealFormalNormalization",
+  "declaration": "MvPowerSeries.parameter_ideal_formal_normalization",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

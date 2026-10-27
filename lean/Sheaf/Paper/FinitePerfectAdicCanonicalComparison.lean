@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicCoefficientLimit
 public import Sheaf.Paper.FinitePerfectAdicQuotientDiagram
+import Sheaf.Paper.FinitePerfectAdicFlatTensorComparison
+import Mathlib.RingTheory.Finiteness.Projective
 
 /-! # The canonical quotient diagram as an explicit coefficient complex
 
@@ -23,6 +25,65 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
+private theorem tensorModule_retract
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    (M : ModuleCat.{t} A) [Module.Projective A M] [Module.Finite A M] :
+    Nonempty (FinitePerfectAdicCoefficientRetract X d
+      ((finitePerfectAdicTensorFunctor X d).obj ((finitePerfectAdicOrdinary X d).obj M))
+      (finitePerfectAdicTensorCone X d ((finitePerfectAdicOrdinary X d).obj M))) := by
+  obtain ⟨r, f, g, _, _, hfg⟩ := Module.Finite.exists_comp_eq_id_of_projective A M
+  let H := finitePerfectAdicOrdinary X d
+  let O := finitePerfectAdicTensorFunctor X d
+  let F : CompletedAdicModules X d ⥤ CompletedAdicModules X d :=
+    Functor.const (Discrete (Fin r)) ⋙ lim
+  let f' : ModuleCat.of A (Fin r → A) ⟶ M := ModuleCat.ofHom f
+  let g' : M ⟶ ModuleCat.of A (Fin r → A) := ModuleCat.ofHom g
+  have hgf : g' ≫ f' = 𝟙 M := by
+    apply ModuleCat.hom_ext
+    exact hfg
+  obtain ⟨e, e₀, he⟩ := finitePerfectAdicFreeTensorCone_comparison X d r
+  let i := (O.map (H.map g')) ≫ e.hom
+  let p := e.inv ≫ (O.map (H.map f'))
+  let i₀ := H.map g' ≫ e₀.hom
+  let p₀ := e₀.inv ≫ H.map f'
+  have hip : i ≫ p = 𝟙 _ := by
+    simp only [i, p, Category.assoc, Iso.hom_inv_id_assoc, ← O.map_comp,
+      ← H.map_comp, hgf, H.map_id, O.map_id]
+  have hip₀ : i₀ ≫ p₀ = 𝟙 _ := by
+    simp only [i₀, p₀, Category.assoc, Iso.hom_inv_id_assoc, ← H.map_comp,
+      hgf, H.map_id]
+  have hi (n : ℕᵒᵖ) : i₀ ≫ F.map ((finitePerfectAdicCoefficientCone X d).π.app n) =
+      (finitePerfectAdicTensorCone X d (H.obj M)).π.app n ≫ i.app n := by
+    dsimp only [i₀, i, NatTrans.comp_app]
+    rw [Category.assoc, he, ← Category.assoc]
+    change (H.map g' ≫ finitePerfectAdicTensorProjection X d _ n.unop) ≫ _ = _
+    rw [finitePerfectAdicTensorProjection_naturality, Category.assoc]
+    rfl
+  have hp (n : ℕᵒᵖ) : p₀ ≫
+      (finitePerfectAdicTensorCone X d (H.obj M)).π.app n =
+      F.map ((finitePerfectAdicCoefficientCone X d).π.app n) ≫ p.app n := by
+    have he' : e₀.inv ≫ (finitePerfectAdicTensorCone X d
+        (H.obj (ModuleCat.of A (Fin r → A)))).π.app n =
+        F.map ((finitePerfectAdicCoefficientCone X d).π.app n) ≫ e.inv.app n := by
+      apply (cancel_epi e₀.hom).1
+      simp only [Iso.hom_inv_id_assoc]
+      rw [← Category.assoc, he, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+    dsimp only [p₀, p, NatTrans.comp_app]
+    rw [Category.assoc]
+    have hn := finitePerfectAdicTensorProjection_naturality X d (H.map f') n.unop
+    change H.map f' ≫ (finitePerfectAdicTensorCone X d (H.obj M)).π.app n =
+      (finitePerfectAdicTensorCone X d _).π.app n ≫ (O.map (H.map f')).app n at hn
+    rw [hn, ← Category.assoc, he', Category.assoc]
+  exact ⟨{ rank := r
+           inclusion := i
+           projection := p
+           splitting := hip
+           coneInclusion := i₀
+           coneProjection := p₀
+           coneSplitting := hip₀
+           inclusion_naturality := hi
+           projection_naturality := hp }⟩
+
 /-- The canonical algebraic quotient diagram is computed by the corresponding explicit
 coefficient complex and its compatible finite-free summands.
 
@@ -30,23 +91,21 @@ Source: Stacks Project, Tag 09C6, the displayed finite-projective quotient calcu
 Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW.
 (blueprint: lem-weil-pbc-finite-perfect-adic-canonical-comparison).
 
-Proof: use Module.Finite.exists_comp_eq_id_of_projective to split each term of P
-from a finite power of A, with projection composed with inclusion equal to id. Form its
-ordinary completed constant realization and, at each quotient level, the same
-idempotent summand of the finite coefficient module. The scalar normalization
-identifies the ordinary quotient maps with the coefficient projections. Naturality
-for linear maps makes the differentials and all tower maps commute, giving a complex
-tower T and its explicit cone c. The same inclusions and projections supply compatible
-finite-free retracts of both diagrams and cones in each degree. Exact constant
-sheafification preserves the bounded flat representative. Flatness of the completed
-coefficient algebra and the finite quotient comparisons identify this representative
-with completed derived scalar extension of P, and its quotient levels with the
-realization of derived A/I^(n+1) tensor P. Uniqueness of left adjoints identifies each
-supplied L_n with derived scalar extension, preserving its unit. Their canonical
-transitions are transposes of these units, so the comparisons form an isomorphism
-of entire diagrams. The cone point comparison is the ordinary-to-derived comparison
-on the bounded flat complex. No inverse limit or Roos assertion is used here. Zero
-terms, rank zero, and the zero coefficient ring give zero summands throughout. -/
+Proof: form the ordinary completed constant complex and tensor it termwise with the
+actual coefficient diagram. Map the coefficient cone under tensor and extend it
+along the inverse right unitor; tensor-projection naturality proves that its maps
+commute with every differential. Split each finite-projective term P^j from A^r
+using Module.Finite.exists_comp_eq_id_of_projective. The finite-free tensor-cone
+comparison identifies the image of A^r with the finite power of the coefficient
+diagram and its unit cone. Compose the images of the splitting maps with that
+diagram isomorphism and its inverse, and do the same at the cone point. Functoriality
+proves the two splittings. Naturality of the tensor projections and the finite-free
+cone comparison prove the inclusion equation; the inverse comparison proves the
+projection equation. Finally each projective term is flat, so the bounded-flat
+tensor comparison supplies the derived diagram and cone-point isomorphisms. This
+last comparison is a separate named obligation; the explicit construction and all
+finite-projective retract equations are proved here. Zero terms, rank zero, and
+the zero coefficient ring are included. No limit or Roos assertion is used -/
 theorem finitePerfectAdicCanonical_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
@@ -66,6 +125,16 @@ theorem finitePerfectAdicCanonical_comparison
       Nonempty (DerivedCategory.Q.obj c.pt ≅
         (completedAdicDerivedChange X (completedAdicScalar X d)).obj
           ((finitePerfectAdicDerivedConstant X A).obj (DerivedCategory.Q.obj P))) := by
-  sorry
+  classical
+  have hflat (i : ℤ) : Module.Flat A (P.X i) := by
+    have := (hP i).1
+    infer_instance
+  obtain ⟨e, e₀⟩ := finitePerfectAdicFlatTensor_comparison X d L adj P a b ha hb hflat
+  refine ⟨finitePerfectAdicTensorComplexDiagram X d P,
+    finitePerfectAdicTensorComplexCone X d P, ?_, e, e₀⟩
+  intro j
+  have := (hP j).1
+  have := (hP j).2
+  exact tensorModule_retract X d (P.X j)
 
 end AlgebraicGeometry.Scheme

@@ -17,144 +17,68 @@
  ],
  "proof": [
   {
-   "text": "First replace $T$ by $T_{\\mathrm{red}}$ and $Z$ by $Z\\times_TT_{\\mathrm{red}}$. By [lem-weil-pbc-reduction-universal-homeomorphism] the new base is reduced and has the same topological space, hence is irreducible and integral [def-pc-integral-scheme]. The residue fields are unchanged: on an affine chart the quotient by the nilradical induces $(A/\\sqrt{0})_{\\mathfrak p/\\sqrt{0}}/(\\mathfrak p/\\sqrt{0})=A_{\\mathfrak p}/\\mathfrak p$. Thus the old and new fibres are canonically isomorphic by the fibre-product universal property [def-pc-scheme-fibre]. Local finite type and quasi-compactness persist by [lem-weil-pbc-lft-base-change] and [lem-pc-quasi-compact-base-change], so the new morphism is finite type [def-weil-finite-type-morphism]. A nonempty open found on this new base therefore gives the required open on the old base. In the remaining steps $T$ is integral.",
+   "text": "Apply [lem-trf-generic-nilpotent-affine-preparation] to $h:Z\\to T$. It gives $T'=T_{\\mathrm{red}}$, $Z'=Z\\times_TT'$, a nonempty affine $V=\\operatorname{Spec}A\\subset T'$ with $A$ a domain, and an affine open $U=\\operatorname{Spec}B\\subset Z'\\times_{T'}V$. Here $B$ is finite type over $A$, $b^n=0$ for $n\\ge1$, and $b\\otimes1\\ne0$ over $K=\\operatorname{Frac}(A)$. It also gives the homeomorphism $T'\\to T$ and canonical identifications of all residue-field fibres.",
    "uses": [
-    "lem-weil-pbc-reduction-universal-homeomorphism",
-    "def-pc-integral-scheme",
+    "lem-trf-generic-nilpotent-affine-preparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof; assembly step 1"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-annihilator-quotients-generic-free] to $A,B,b$: step 1 gives the domain, finite-type and generic nonvanishing hypotheses. Write $C=B/\\operatorname{Ann}_B(b)$ and $D=B/bB$. Obtain $0\\ne g\\in A$ and put $b_g=b/1$, $V_g=D(g)$, $Q=B_g/\\operatorname{Ann}_{B_g}(b_g)$ and $R=B_g/b_gB_g$. The canonical identifications give $A_g$-linear isomorphisms $u:Q\\to C_g$ and $v:R\\to D_g$, with both targets free and $C_g\\ne0$. For a basis $(e_j)$ of $C_g$, $q=\\sum_j a_ju^{-1}(e_j)$ iff $u(q)=\\sum_j a_je_j$, uniquely with finite support; likewise for $v$ and $R$ [def-weil-pbc-free-module]. A nonzero $c\\in C_g$ has $u^{-1}(c)\\ne0$, so $Q\\ne0$. Both $Q,R$ are free, and $b_g^n=(b^n)/1=0$.",
+   "uses": [
+    "lem-trf-annihilator-quotients-generic-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof; assembly step 2"
+   }
+  },
+  {
+   "text": "By [lem-trf-generic-nilpotent-affine-preparation], $U_g=\\operatorname{Spec}B_g$ is an affine open of $Y_g=Z'\\times_{T'}V_g$ with its specified $A_g$-algebra structure. Fix $t'\\in V_g$ and put $k=\\kappa_{V_g}(t')$. Apply [lem-trf-free-annihilator-nonreduced-fibres] with $X=Y_g$, $U=U_g$, base $A_g$, element $b_g$ and field map $A_g\\to\\mathcal O_{V_g,t'}\\to k$, using the freeness, nonzeroness and nilpotence verified in step 2: the fibre $Y_g\\times_{V_g}\\operatorname{Spec}k$ is nonreduced. The open inclusion identifies $\\mathcal O_{V_g,t'}$ with $\\mathcal O_{T',t'}$ [def-weil-open-immersion], and hence identifies their quotients by maximal ideals, $k\\cong\\kappa_{T'}(t')$ [def-weil-residue-field]. Under this identification, $\\operatorname{Spec}k\\to V_g\\to T'$ is the canonical point morphism because it induces that local-ring quotient [def-pc-scheme-fibre]. Iterated base change [def-pc-base-change] therefore gives $Y_g\\times_{V_g}\\operatorname{Spec}k\\cong Z'\\times_{T'}\\operatorname{Spec}k\\cong Z'_{t'}$, preserving the projections to $Z'$ and $\\operatorname{Spec}k$. Isomorphic local rings have the same nilpotents, so reducedness of $Z'_{t'}$ would contradict the nonreduced fibre just obtained [def-pc-reduced-scheme].",
+   "uses": [
+    "lem-trf-generic-nilpotent-affine-preparation",
+    "lem-trf-free-annihilator-nonreduced-fibres",
     "def-pc-scheme-fibre",
-    "lem-weil-pbc-lft-base-change",
-    "lem-pc-quasi-compact-base-change",
-    "def-weil-finite-type-morphism"
+    "def-pc-base-change",
+    "def-pc-reduced-scheme",
+    "def-weil-open-immersion",
+    "def-weil-residue-field"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, first four sentences: reduction of the base"
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof; assembly step 3"
    }
   },
   {
-   "text": "Choose a nonempty affine open $T_0=\\operatorname{Spec}A$ in $T$. It contains $\\xi$, and $A$ is a domain with fraction field $K=\\kappa(\\xi)$ by [lem-sc-integral-function-field-affine-fraction] and [def-weil-residue-field]. By [def-weil-finite-type-morphism], $h^{-1}(T_0)$ has a finite affine open cover $U_i=\\operatorname{Spec}B_i$ with each $B_i$ finite type over $A$. Their generic fibres are open and cover $Z_\\xi$, using [lem-weil-pbc-open-fibre-product]; they are $\\operatorname{Spec}(B_i\\otimes_AK)$ by [lem-weil-pbc-fibre-product-affine-spectra]. Since $Z_\\xi$ is not reduced, [lem-trf-reduced-scheme-open-cover] gives an index $i$ whose generic fibre is not reduced. By [lem-weil-pbc-affine-scheme-reduced-iff], its ring has a nonzero nilpotent element. Fix this chart, writing $U=\\operatorname{Spec}B$ and $0\\ne e\\in B\\otimes_AK$ with $e^n=0$, $n\\ge1$.",
+   "text": "Let $i:T'\\to T$ be the homeomorphism of [lem-trf-generic-nilpotent-affine-preparation] and put $W=i(V_g)$. The set $V_g$ is open in $V$, hence in $T'$, so $W$ is open. Since $A$ is a domain and $g\\ne0$, its prime $(0)$ belongs to $V_g=D(g)$; thus $W\\ne\\varnothing$. For $t\\in W$, its unique preimage $t'$ belongs to $V_g$. Step 3 gives $Z'_{t'}$ nonreduced and preparation gives $Z'_{t'}\\cong Z_t$. Were $Z_t$ reduced, the isomorphic local rings of $Z'_{t'}$ would have no nonzero nilpotents: a nilpotent maps to zero and injectivity makes it zero. This contradicts [def-pc-reduced-scheme].",
    "uses": [
-    "lem-sc-integral-function-field-affine-fraction",
-    "def-weil-residue-field",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-trf-reduced-scheme-open-cover",
-    "lem-weil-pbc-affine-scheme-reduced-iff"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, affine reduction and selection of a nonzero nilpotent generic section"
-   }
-  },
-  {
-   "text": "Write $S=A\\setminus\\{0\\}$. The generic ring is $S^{-1}B$: the mutually inverse maps are $b\\otimes(a/s)\\mapsto ab/s$ and $b/s\\mapsto b\\otimes(1/s)$, as follows from the tensor relations and the fraction relation in [def-weil-pbc-localization-at-prime] at $(0)$. Express $e=b/s$. The equation $e^n=0$ means that some $0\\ne a\\in A$ has $ab^n=0$ in $B$. Over $D(a)$ put $h=b/1\\in B_a$. Then $h^n=0$, while $h$ remains nonzero in the generic ring because $e\\ne0$ and $s$ is invertible there. Replace $A,B,T_0,U$ by $A_a,B_a,D(a),U\\times_{T_0}D(a)$. Here $D(a)$ contains $(0)$, and the localized algebra is still generated by the original finite list [def-weil-ring-localization-away, def-weil-pbc-finite-type-algebra]. Thus $h\\in B$ is now nilpotent and generically nonzero. This writes out both denominator shrinkings in the source.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-ring-localization-away",
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, spreading and making the section nilpotent"
-   }
-  },
-  {
-   "text": "Set $I=\\operatorname{Ann}_B(h)=\\{b\\in B:hb=0\\}$, $C=B/I$, and $D=B/hB$. These are finite type $A$-algebras: the images of generators of $B$ generate each quotient [def-weil-pbc-finite-type-algebra]. Multiplication by $h$ gives the short exact sequence $0\\to C\\xrightarrow{\\iota}B\\to D\\to0$, with $\\iota(\\bar b)=hb$: the kernel of multiplication is exactly $I$, and its image is $hB$. Moreover no nonzero scalar $a\\in A$ lies in $I$, since $ah=0$ would make $h=0$ in the generic ring, where $a$ is invertible. In particular $C$ and every localization $C_a$ for $a\\ne0$ are nonzero: $1=0$ in $C_a$ would say that some power of $a$ belongs to $I$ [def-weil-ring-localization-away].",
-   "uses": [
-    "def-weil-pbc-finite-type-algebra",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, annihilator quotient and its generically nonzero fibre"
-   }
-  },
-  {
-   "text": "Choose a finite polynomial algebra $P=A[x_1,\\ldots,x_r]$ surjecting onto $B$ [def-weil-pbc-finite-type-algebra]. Both $C$ and $D$ are cyclic, hence finite, $P$-modules. Apply [lem-pur-generic-finite-module-presentation] first to $(A,P,C)$ and then to $(A,P,D)$, obtaining $a_C,a_D\\ne0$. Restrict to $A_a$ for $a=a_Ca_D$; then $C_a,D_a$ are finitely presented over $P_a=A_a[x_1,\\ldots,x_r]$. To check persistence on this common restriction, localize each finite presentation: a fraction in the kernel has a numerator whose image is killed by a power of the inverted scalar, so after multiplying that numerator by the power it lies in the original image; this proves exactness of the localized presentation. The identity $P_a=A_a[x_1,\\ldots,x_r]$ sends a polynomial with coefficient fractions to a common-denominator polynomial and has the coefficientwise inverse. This uses precisely the finite-presentation part of generic flatness, with no Noetherian assumption.",
-   "uses": [
-    "def-weil-pbc-finite-type-algebra",
-    "lem-pur-generic-finite-module-presentation",
-    "def-weil-ring-localization-away",
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, generic flatness, finite-presentation preparation of C and B/hB (Tag 051T)"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-fp-algebra-module-generic-freeness] over the domain $A_a$ to the finitely presented algebra $P_a=A_a[x_1,\\ldots,x_r]$ (zero relations) and each of the finitely presented modules $C_a,D_a$ of step 5. After two further principal restrictions, both are free over the same localized base. Indeed further localization of a free module preserves its basis: localize the unique finite coefficient expansion of each element [def-weil-pbc-free-module, def-weil-pbc-module-localization-away]. A nonzero element of $A_a$ is a fraction $c/a^j$ with $c\\ne0$; inverting it amounts to restricting to $D(ac)$. Thus all the restrictions combine to $D(g)$ for some $g\\ne0$ in the current original domain. Relabel the localized objects $A,B,C,D,h$. The exact sequence of step 4 remains exact by the same fraction-kernel calculation as in step 5; its first map is still $\\bar b\\mapsto hb$. By step 4, $C\\ne0$. This obtains the source's nonzero free $C$ and flat quotient, even making the quotient free.",
-   "uses": [
-    "lem-pur-fp-algebra-module-generic-freeness",
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, generic flatness for C and B/hB, using Tag 051S after the Tag 051T preparation"
-   }
-  },
-  {
-   "text": "Fix any $t\\in\\operatorname{Spec}A$ and put $k=\\kappa(t)$. Since $D$ is free, it is flat in [def-weil-pbc-flat-ring-map]: tensoring an injection with a module with basis $J$ is the direct sum of copies of that injection indexed by $J$, hence is injective, by the finite-support coefficient expansion [def-weil-pbc-free-module, def-weil-module-base-change]. The basis of $C$ has a member since $C\\ne0$. Its coordinate inclusion $A\\to C$ has a retraction $C\\to A$, so after tensoring with $k$ it exhibits $k$ as a retract of $C\\otimes_Ak$; hence $C\\otimes_Ak\\ne0$. Apply [lem-weil-pbc-flat-quotient-tensor-injective] to the short exact sequence of step 4 and $N=k$. Thus $C\\otimes_Ak\\to B\\otimes_Ak$, $\\bar b\\otimes\\lambda\\mapsto hb\\otimes\\lambda$, is injective. Its source is nonzero, so it is a nonzero map. If $h\\otimes1$ were zero, every displayed image would be $(h\\otimes1)(b\\otimes\\lambda)=0$, a contradiction. Therefore $h\\otimes1$ is a nonzero nilpotent, its $n$th power being zero.",
-   "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-free-module",
-    "def-weil-module-base-change",
-    "lem-weil-pbc-flat-quotient-tensor-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, tensoring the short exact sequence with residue fields (Tag 00HL)"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], the ring in step 7 is the coordinate ring of $U_t$. Hence $U_t$ is not reduced by [lem-weil-pbc-affine-scheme-reduced-iff]. It is an open subscheme of $Z_t$ by [lem-weil-pbc-open-fibre-product]; if $Z_t$ were reduced its local rings, and therefore those of this open, would be reduced [def-pc-reduced-scheme]. Thus every fibre over the final principal open is nonreduced. Every scalar inverted was nonzero in a domain, so that open contains $\\xi$ and is nonempty; it is open in $T_0$, hence in the integral base. Step 1 identifies it with a nonempty open $W$ in the original $T$ and identifies its fibres with the original fibres, completing the claim.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-affine-scheme-reduced-iff",
-    "lem-weil-pbc-open-fibre-product",
+    "lem-trf-generic-nilpotent-affine-preparation",
     "def-pc-reduced-scheme"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, last sentence and return from the reduced base"
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof; assembly step 4"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-reduction-universal-homeomorphism",
-  "def-pc-integral-scheme",
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-lft-base-change",
-  "lem-pc-quasi-compact-base-change",
-  "def-weil-finite-type-morphism",
-  "lem-sc-integral-function-field-affine-fraction",
-  "def-weil-residue-field",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-trf-reduced-scheme-open-cover",
-  "lem-weil-pbc-affine-scheme-reduced-iff",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-ring-localization-away",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-pur-generic-finite-module-presentation",
-  "def-weil-pbc-module-localization-away",
-  "lem-pur-fp-algebra-module-generic-freeness",
+  "lem-trf-generic-nilpotent-affine-preparation",
+  "lem-trf-annihilator-quotients-generic-free",
   "def-weil-pbc-free-module",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-module-base-change",
-  "lem-weil-pbc-flat-quotient-tensor-injective",
-  "def-pc-reduced-scheme"
+  "lem-trf-free-annihilator-nonreduced-fibres",
+  "def-pc-scheme-fibre",
+  "def-pc-base-change",
+  "def-pc-reduced-scheme",
+  "def-weil-open-immersion",
+  "def-weil-residue-field"
  ],
  "proof_origin": {
   "by": "document",
@@ -291,41 +215,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-trf-nonreduced-fibre-open",
   "worker": "stage1",
-  "summary": "Read Stacks 0575 in full and expanded the reduction, affine generic section, explicit denominator shrinkings, annihilator sequence, simultaneous generic freeness and residue-field injection. Reused the existing 051T finite-module presentation, 051S freeness and 00HL flat-quotient injection nodes; no new nodes and no statement correction. No Lean attachment was found.",
-  "blueprint": "Serves the existing constructibility-input ancestry of lem-trf-local-term-locality: Stacks 0577 calls 0575 after the 0550 preparation. This is the proof of that ordinary-nonreducedness input; the current main-20261015 contracting-local-term route and unit are unchanged. Whole-blueprint searches for nonreduced, reduced fibre and nilpotent generic found no equivalent blueprint node.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
-    "why": "Generic scheme reduction and its topology, used to remove nilpotents in the base while retaining residue-field fibres; the unit has no replacement."
-   },
-   {
-    "node": "lem-weil-pbc-lft-base-change",
-    "why": "Generic permanence of locally finite type under reduction base change."
-   },
-   {
-    "node": "lem-pc-quasi-compact-base-change",
-    "why": "Generic permanence of quasi-compactness under reduction base change."
-   },
-   {
-    "node": "lem-weil-pbc-open-fibre-product",
-    "why": "Generic identification of an open chart after passage to a fibre."
-   },
-   {
-    "node": "lem-pur-generic-finite-module-presentation",
-    "why": "Finite-presentation clause of Stacks 051T for cyclic modules over a polynomial algebra; supplies the source generic-flatness preparation."
-   },
-   {
-    "node": "lem-pur-fp-algebra-module-generic-freeness",
-    "why": "Stacks 051S yields generic freeness for the prepared finitely presented modules over a polynomial algebra."
-   },
-   {
-    "node": "lem-weil-pbc-flat-quotient-tensor-injective",
-    "why": "Stacks 00HL gives the residue-field injection when the quotient is flat, exactly as in the source."
-   }
-  ]
+  "summary": "Q90 repair of promotion-refusal return 2aa740a1f3d. Initial retained-split dry run passed at d449e0f8123. Rebased onto the current shared DAG, retaining only proof, proof_deps and split_report changes. Reread all 21 dependency statements: no dependency-file hash changed. Step 3 now explicitly instantiates the fibre-detection statement with X=Y_g, U=U_g, A_g and b_g and checks its hypotheses using step 2. All 12 citation pairs remain verbatim. The three statement-only children, 17 actual logged searches and all eight original proof arguments are retained. No statement, hypothesis, Lean or route change. The authorized delivery tool builds against fresh origin/sheaf-dag; live promotion remains the maintainer operation described in the return.",
+  "blueprint": "Retains the existing constructibility-input ancestry through 0577 and 0575 below lem-trf-local-term-locality under the released keep_plan repair. Read latest blueprint main-20261024 (ef6f9619fdbffa59e88528fb56483d76c70258c8): its current local-term-locality and sk-i-curve-zero use the supported-pairing/contracting-correspondence route. This generic-algebra subargument is inherited DAG work; no chapter or unit route is replaced. Renewed whole-blueprint nonreduced and annihilator free searches found no equivalent workload."
  },
  "tool_uses": [
   "lem-weil-pbc-reduction-universal-homeomorphism",
@@ -337,12 +231,12 @@
   "lem-weil-pbc-flat-quotient-tensor-injective"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NW-c52ddd79c",
-  "group": "NW",
+  "reviewer": "NT-cc-Q90-af8cd6719",
+  "group": "Q90",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-c52ddd79c (reviewer sub-agent of L); spot-checked: Read Stacks 0575 (more-morphisms.tex l.7110, lemma-nonreduced-in-neighbourhood) in full, plus the statements of all 23 cited nodes. The item statement is unchanged and matches 0575 hypothesis by hypothesis. The 8 steps follow the source's proof: (1) reduce the base to T_red, (2) take an affine chart, (3) two denominator shrinkings, (4) the sequence 0->C->B->B/hB->0, (5) 051T for finite presentation, (6) 051S for freeness, (7) 00HL for the residue-field injection, (8) conclude. Every hypothesis of the cited nodes holds: 051T on (A, P, cyclic module), 051S on (A_a, P_a with no relations, finitely presented module), 00HL with N=kappa(t), 01JR with U=T_0. Steps 3, 4 and 8 are genuinely elementary, and the denominator clearing is written out (E5). Small cases checked: k[eps]/eps^2; A[x]/(x^2,tx), where the generic fibre is reduced so the hypothesis correctly fails; a nonreduced base; a non-Noetherian A. Grepping the DAG for 0575/nonreduced found no duplicate. No cycle (closure of 114 nodes); union of step uses = proof_deps; review_split.py PASS with 0 new nodes. The 7 declared tool_uses are generic black-box algebra/scheme lemmas and are accepted. The unit sk-i-curve-zero and the 0577 ancestry are unchanged. No SGA source is used. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-af8cd6719 (reviewer sub-agent of L); spot-checked: I read Stacks Tag 0575 (more-morphisms.tex l.7110-7160), the item, all three new nodes and every cited statement in full. The three children are byte-identical to the previous PASSed head 2aa740a1, whose fixes/ is empty, so no fix was lost. The only change to the item is one sentence in assembly step 3. It now applies lem-trf-free-annihilator-nonreduced-fibres explicitly with X=Y_g, U=U_g, base A_g, element b_g and field map A_g→O_{V_g,t'}→κ(t'). Every hypothesis of that child is met: U_g is an affine open with its A_g-structure by the preparation child's 'Moreover' clause; step 2 shows that C=Q and D=R are free and that Q≠0; and b_g^n=0. This instantiation is correct. The remaining change is the split_report summary. The live and side-live clones still hold the old 8-step proof and none of the children, so the delivery is not superseded. All 18 cited dependency statements are equal to the live versions. Truth checks: in the detection child, D free gives the injection C⊗k→B⊗k, C⊗k is nonzero, and 1 maps to b⊗1, so b⊗1≠0. In the annihilator child, C_a=0 would force a^m b=0, contradicting b⊗1≠0; generic freeness over a domain is 051T. Ann_{B_g}(b/1)=Ann_B(b)_g. W=i(D(g)) is open and nonempty because the zero prime lies in D(g). Re-split check: old steps 1-3 go to the preparation node, 4-6 to the annihilator node and 7-8 to the detection node. No argument was dropped, the workloads are comparable, no child restates the item, and the assembly is 4 short steps. No SGA source is cited. Edge cases checked: A[ε], tε over k[t], k[t,x]/(x²,tx). Advisories: the maintainer-owned tool_uses still list the old-proof lemmas. This is a promotion loop with no real change, and L needs to promote the side completion. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.NonreducedFibreOpen",
@@ -362,5 +256,16 @@
   "result": "pass",
   "note": "Statement matches Stacks 0575 and the node clause by clause: LocallyOfFiniteType+QuasiCompact = def-weil-finite-type-morphism, IrreducibleSpace T, IsGenericPoint ξ univ, ¬IsReduced (h.fiber ξ), ∃ nonempty W : T.Opens with every fibre over W not reduced; no extra hypotheses or universe restriction. Node differs from live only in lean; lean.statement verbatim in file. Docstrings carry source place, blueprint id and the 8 proof steps; proof is sorry only; no new defs. No duplicate in side lean/DAG (the 0576 geometric variant is a different node). nt_compile --json clean in 1.4 s; a broken-identifier control fails. Advisory: def-weil-irreducible-components has no lean record (mathlib_match only); IrreducibleSpace is its whole-space form."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

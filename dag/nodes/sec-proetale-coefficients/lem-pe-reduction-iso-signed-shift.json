@@ -1,0 +1,142 @@
+{
+ "id": "lem-pe-reduction-iso-signed-shift",
+ "kind": "statement",
+ "title": "Signed shift equation for the canonical principal-resolution tensor comparison",
+ "statement": "Let A be a Grothendieck abelian category [def-sp-grothendieck-abelian] with a closed braided monoidal structure and additive tensor [def-sfb-monoidal-category], functorial flat resolutions, and the resulting derived tensor and canonical lax monoidal localization Q [lem-sfb-derived-monoidal]. Let B be a commutative ring acting linearly and monoidally on A, meaning scalar multiplication commutes with tensoring on either side. Fix b in B, an object N of A, and p:1→N such that 0→1 --b--> 1 --p--> N→0 is short exact (the first arrow is b times the identity). Write e_M:QM⊗Q(N[0])≅Q Cone(b:M→M) for the canonical reductionIso: inverse tensor of Q applied to the two-term resolution augmentation, followed by the canonical scalar-cone tensor comparison [lem-pe-scalar-cone-tensor-model]. Use the cochain localization and cone of [def-weil-abstract-derived-category] and standard derived tensor shifts of [def-weil-triangulated-category]. For every unbounded cochain complex M and every integer t, the inverse e_M satisfies Q(mappingCone.shiftIso(b·id_M,t).inv) ≫ Q.shift_t(Cone(b_M)) ≫ (e_M.inv)[t] = e_{M[t]}.inv ≫ tensorRight(Q(N[0])).map(Q.shift_t(M)) ≫ tensorRight(Q(N[0])).shift_t(QM). This asserts only compatibility of the already constructed comparison with one input shift; it asserts no family of coefficient quotients or natural isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "On X: the free two-term resolution computes the scalar cone naturally; first-reduction proof, Cones: the canonical cone constructions commute with shifts. Signed shift refinement in lem-pe-principal-cone-tensor-normalization, proof step 3."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sfb-monoidal-category",
+  "lem-sfb-derived-monoidal",
+  "lem-pe-scalar-cone-tensor-model",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing upstream definitions tensorScalarConeIso and reductionIso. The inverse of tensorScalarConeIso is Q.map of the inverse cochain comparison followed by the inverse lax-monoidal comparison. The latter is invertible at the scalar cone by the upstream kFlat_scalarCone and isIso_μ_scalarCone results. No new comparison object is chosen.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the scalar cone naturally; first-reduction proof, Cones: the canonical cone constructions commute with shifts. Signed shift refinement in lem-pe-principal-cone-tensor-normalization, proof step 3."
+   }
+  },
+  {
+   "text": "Compute the inverse tensorScalarConeIso′ on the two cone inclusions using the upstream mapBifunctorMappingCone₂Iso inverse. Its inr component is the right unitor inverse followed by tensoring the coefficient inclusion. Its inl component is the right unitor inverse followed by the signed total-tensor inclusion ι₁. On each total-tensor summand the latter has sign (-1)^p. Shifting the first factor by t changes that sign by (-1)^t; Int.negOnePow_add and the square-one property prove the equality. The existing rightUnitor_inv_mapBifunctorShift₁Iso_hom and coefficient naturality identify both components. Extensionality from the cone proves the chain-level inverse shift square.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the scalar cone naturally; first-reduction proof, Cones: the canonical cone constructions commute with shifts. Signed shift refinement in lem-pe-principal-cone-tensor-normalization, proof step 3."
+   }
+  },
+  {
+   "text": "Construct the cochain localization tensor comparison as a composite of quotientCompQhIso, the tensorRightCounit on the homotopy category, and the quotient/tensor factorization isomorphism. All factors commute with shifts: for the counit this is commShift_tensorRightCounit at the K-flat scalar cone. Compute its components to identify it with the canonical μ of Q. Apply its shift equation, the localized chain-level equation, and naturality of Q.commShiftIso, then cancel the invertible μ. Finally expand reductionIso.inv, apply naturality of the derived tensor shift in the localized augmentation scalarConeDesc, and the whisker exchange identity. This gives exactly the claimed equation for every M and integer t.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the scalar cone naturally; first-reduction proof, Cones: the canonical cone constructions commute with shifts. Signed shift refinement in lem-pe-principal-cone-tensor-normalization, proof step 3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-monoidal",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent X6",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "On X: the free two-term resolution computes the scalar cone naturally; first-reduction proof, Cones: the canonical cone constructions commute with shifts. Signed shift refinement in lem-pe-principal-cone-tensor-normalization, proof step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison between the derived tensor with a principal quotient and the mapping cone of scalar multiplication commutes with integer shifts",
+   "results": "8 hits: mappingCone.map_δ, mappingCone.shiftIso, mappingCone.shiftTriangleIso, mappingCone.shiftTrianglehIso and generic exact-functor commutation with shifts.",
+   "date": "2026-10-25",
+   "verdict": "No match: these give cone or exact-functor shift comparisons, not the signed equation for the canonical reductionIso."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.shiftIso",
+   "results": "1 hit: CochainComplex.mappingCone.shiftIso, Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated.",
+   "date": "2026-10-25",
+   "verdict": "No match: the cone shift alone does not identify its image through reductionIso."
+  },
+  {
+   "tool": "grep",
+   "query": "shiftIso|commShift_tensorRightCounit",
+   "results": "25 hits in generic Mathlib shift, induced shift, localization, opposite, and quotient files. Project rg finds commShift_tensorRightCounit in WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison and no reductionIso signed shift equation.",
+   "date": "2026-10-25",
+   "verdict": "No match for the complete equation. The project counit shift and total-tensor component API supply steps of its proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrincipalConeTensorNormalization",
+  "date": "2026-10-25",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-derived-nakayama-first-reduction",
+   "place": "On X: the free two-term resolution computes the scalar cone naturally; first-reduction proof, Cones: the canonical cone constructions commute with shifts. Signed shift refinement in lem-pe-principal-cone-tensor-normalization, proof step 3.",
+   "via": [
+    "lem-pe-principal-cone-tensor-normalization",
+    "lem-pe-principal-reduction-derived-normalization",
+    "lem-pe-principal-reduction-cone-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-pe-derived-nakayama",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ReductionIsoShift",
+  "file": "lean/Sheaf/Algebra/Homology/ReductionIsoShift.lean",
+  "declaration": "DerivedCategory.reductionIso_inv_signed_shift",
+  "statement": "theorem reductionIso_inv_signed_shift {b : B} {N : A} {p : 𝟙_ A ⟶ N}\n    (w : (b • 𝟙 (𝟙_ A)) ≫ p = 0)\n    (hS : (ShortComplex.mk _ _ w).ShortExact) (M : CochainComplex A ℤ) (t : ℤ) :\n    Q.map (CochainComplex.mappingCone.shiftIso (b • 𝟙 M) t).inv ≫\n        (Q.commShiftIso t).hom.app (CochainComplex.mappingCone (b • 𝟙 M)) ≫\n        (reductionIso w hS M).inv⟦t⟧' =\n      (reductionIso w hS (M⟦t⟧)).inv ≫\n        (tensorRight ((singleFunctor A 0).obj N)).map\n          ((Q.commShiftIso t).hom.app M) ≫\n        ((tensorRight ((singleFunctor A 0).obj N)).commShiftIso t).hom.app\n          (Q.obj M)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T122635-L-1792889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261025T164740-L-1071629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

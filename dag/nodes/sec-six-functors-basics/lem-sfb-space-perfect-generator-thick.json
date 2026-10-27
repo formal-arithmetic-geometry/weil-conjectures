@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-space-perfect-generator-thick",
+ "kind": "statement",
+ "title": "A perfect weak generator classically generates perfect algebraic-space complexes",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover of $|X|$ has a finite subcover, and the absolute diagonal is quasi-compact. Use its small etale structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $G\\in C_X$ be perfect and suppose that, for every $F\\in C_X$, vanishing of $\\operatorname{Hom}(G[n],F)$ for all integers $n$ implies $F\\simeq0$. Every perfect $P\\in D(\\mathcal O_X)$ belongs to the thick closure $\\langle G\\rangle$ [def-pc-thick-closure], the smallest full subcategory of $D(\\mathcal O_X)$ containing $G$ and closed under isomorphisms, integer shifts, distinguished cones and retracts.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0GFC, remark-classical-generator."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-thick-closure",
+  "def-sfb-space-derived-module-calculus",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=D(\\mathcal O_X)$ and $A=C_X$. The ambient category is triangulated by [def-weil-abstract-derived-category]. By [lem-sfb-space-perfect-localizing-generation], $A$ is strictly full and closed under shifts, cones, retracts and set-indexed ambient coproducts. In particular it contains zero (the empty coproduct), and is a full triangulated subcategory with the induced triangles. Choose its coproducts to be the ambient ones: fullness restricts their universal property to $A$. Thus both the countable coproducts and the attaching coproducts below are the same in $A$ and $D$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sfb-space-perfect-localizing-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFC, remark-classical-generator, invoking Tag 08F3, lemma-quasi-coherence-direct-sums"
+   }
+  },
+  {
+   "text": "Fix a perfect $P$. By [lem-sfb-space-perfect-objects-compact], both $G$ and $P$ belong to $A$ and are compact there. This uses exactly the quasi-compact and quasi-separated hypotheses on $X$; no ambient compactness is asserted.",
+   "uses": [
+    "lem-sfb-space-perfect-objects-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFC, invoking Tag 09M8, proposition-compact-is-perfect"
+   }
+  },
+  {
+   "text": "The shift autoequivalence [def-weil-triangulated-category] gives $\\operatorname{Hom}(G,F[n])\\cong\\operatorname{Hom}(G[-n],F)$. Hence the hypothesis says that $G$ is a weak generator as in [def-pc-generators]: a nonzero $F$ cannot have all these groups zero. Apply [lem-pc-compact-generators-build-objects] in $A$ to the singleton family $E_1=G$ and $Y=P$. It supplies a tower $Y_1\\to Y_2\\to\\cdots$, with $Y_1$ and every attaching $Z_n$ coproducts of shifts of $G$, triangles $Z_n\\to Y_n\\to Y_{n+1}\\to Z_n[1]$, and the telescope triangle $S\\xrightarrow{1-s}S\\to P\\to S[1]$, where $S=\\bigoplus_{n\\ge1}Y_n$ and $s\\iota_n=\\iota_{n+1}t_n$. All index sets are taken in the fixed universe.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-pc-generators",
+    "lem-pc-compact-generators-build-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SR, proposition-generator-versus-classical-generator, converse proof; Tag 09SN, lemma-write-as-colimit"
+   }
+  },
+  {
+   "text": "Normalize the tower by setting $X_0=0$ and $X_n=Y_n$ for $n\\ge1$. Its first triangle is $0\\to Y_1\\xrightarrow{1}Y_1\\to0$; for $n\\ge1$ rotate the preceding triangles to $Y_n\\to Y_{n+1}\\to Z_n[1]\\to Y_n[1]$, using [def-weil-triangulated-category]. Each $Z_n[1]$ is again a coproduct of shifts of $G$: maps from it to $T$ are maps from $Z_n$ to $T[-1]$, hence families of maps from its summands to $T[-1]$, equivalently from their shifts to $T$. Adding the zero summand gives $\\bigoplus_{n\\ge0}X_n\\cong S$, by the identity on every $Y_n$ and the unique maps on zero. This isomorphism identifies the shift operators (the initial transition has zero source), so it carries the telescope triangle to the required triangle for the normalized tower.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SR, converse proof; normalization for the ambient telescope interface"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-compact-generator-ambient-thick] with ambient category $D$, full subcategory $A$, compact objects $G,P$, and the normalized telescope. Step 1 supplies the ambient coproduct closure, step 2 the internal compactness, and steps 3–4 all the prescribed triangles and coproduct cofans. Its conclusion is precisely $P\\in\\langle G\\rangle$ in the ambient category $D$, as required.",
+   "uses": [
+    "lem-sc-compact-generator-ambient-thick"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SR, converse proof, last two sentences; Tag 09SP, lemma-factor-through, and Tag 094A, lemma-commutes-with-countable-sums"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-space-perfect-localizing-generation",
+  "lem-sfb-space-perfect-objects-compact",
+  "def-weil-triangulated-category",
+  "def-pc-generators",
+  "lem-pc-compact-generators-build-objects",
+  "lem-sc-compact-generator-ambient-thick"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0GFC, remark-classical-generator, expanded along derived.tex Tag 09SR converse proof via Tags 09SN, 09SP and 094A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect weak generator classically generates all perfect complexes on an algebraic space",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isStrongGenerator",
+     "perfect_def",
+     "Perfect",
+     "PerfectSpace",
+     "Algebra.FormallySmooth.of_perfectField",
+     "Perfect.mk",
+     "perfectSpace_of_module",
+     "PerfectSpace.recOn"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect weak generator of derived quasi coherent sheaves generates every perfect object using finite cones shifts and retracts",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HasDerivedCategory.standard",
+     "DerivedCategory.instEssSurjCochainComplexIntQ",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "HasDerivedCategory",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompact.*[Gg]enerator|[Gg]enerator.*[Cc]ompact",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsClassicalTriangulatedGenerator",
+   "results": {
+    "hits": 3,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsClassicalTriangulatedGenerator",
+     "CategoryTheory.ObjectProperty.IsStrongTriangulatedGenerator.isClassicalTriangulatedGenerator",
+     "CategoryTheory.ObjectProperty.isClassicalTriangulatedGenerator_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*generator|generator.*compact|AlgebraicSpace",
+   "sub": "CategoryTheory",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived-category infrastructure, triangulated closure definitions or underived quasi-coherent presentations, not compact weak generation or the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every compact object of a triangulated category with a compact weak generator belongs to the thick closure of that generator",
+   "sub": "",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₁",
+     "CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂'",
+     "CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃'",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₁.mk'",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₂",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₃",
+     "CategoryTheory.IsStrongGenerator.colimitsCardinalClosure_eq_isCardinalPresentable"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived-category infrastructure, triangulated closure definitions or underived quasi-coherent presentations, not compact weak generation or the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsClassicalTriangulatedGenerator",
+   "sub": "",
+   "results": {
+    "hits": 3,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsClassicalTriangulatedGenerator",
+     "CategoryTheory.ObjectProperty.IsStrongTriangulatedGenerator.isClassicalTriangulatedGenerator",
+     "CategoryTheory.ObjectProperty.isClassicalTriangulatedGenerator_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived-category infrastructure, triangulated closure definitions or underived quasi-coherent presentations, not compact weak generation or the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect weak generator of the quasi coherent derived category of a quasi compact quasi separated algebraic space classically generates all perfect complexes",
+   "sub": "",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.QuasicoherentData.localGeneratorsData_X",
+     "HasDerivedCategory.standard",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData",
+     "DerivedCategory.instEssSurjCochainComplexIntQ",
+     "SheafOfModules.QuasicoherentData.coversTop",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "HasDerivedCategory"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived-category infrastructure, triangulated closure definitions or underived quasi-coherent presentations, not compact weak generation or the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "compact|weak|ClassicalTriangulatedGenerator",
+   "sub": "CategoryTheory/Triangulated/Generators.lean",
+   "results": {
+    "hits": 5,
+    "top": [
+     "28",
+     "35",
+     "191",
+     "193",
+     "194"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived-category infrastructure, triangulated closure definitions or underived quasi-coherent presentations, not compact weak generation or the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a triangulated category with arbitrary coproducts a compact weak generator generates every compact object under finite cones shifts and retracts",
+   "sub": "",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₁",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₃",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₂",
+     "CategoryTheory.Triangulated.Subcategory.W_iff'",
+     "CategoryTheory.Triangulated.TStructure.ge",
+     "CategoryTheory.Triangulated.TStructure.IsGE.ge",
+     "CategoryTheory.Pretriangulated.instHasFiniteCoproducts",
+     "CategoryTheory.ObjectProperty.trW_iff'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived-category infrastructure, triangulated closure definitions or underived quasi-coherent presentations, not compact weak generation or the algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-generator-detects-lower-bound",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, third paragraph: G is a classical generator by remark-classical-generator.",
+   "via": [
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-generator-thick",
+  "worker": "stage1",
+  "summary": "Q93 checked Stacks 0GFC and its 09SR telescope proof. Reused the existing space compactness and localizing-closure nodes and the generic telescope/ambient-thick nodes; wrote the zero-stage normalization explicitly. Statement unchanged; no new nodes. All Mathlib queries were executed through msearch.py.",
+  "blueprint": "Inherited ancestry has from.node=null. This supplies the 0GFC classical-generation input in the 0GFI lower-bound proof, beneath the recorded det-thm-sf-ctf-stability-direct-images proof (3) ancestry. Current latest blueprint direct-images proof (3) was read; the original long alteration ancestry is retained, not asserted to occur verbatim in the latest proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-compact-generators-build-objects",
+    "why": "Generic triangulated compact-generator telescope construction (09SN); no node of this unit supplies that abstract construction."
+   },
+   {
+    "node": "lem-sc-compact-generator-ambient-thick",
+    "why": "Generic compact telescope factorization into the ambient thick envelope (09SP/094A); no node of this unit supplies that abstract result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-compact-generators-build-objects",
+  "lem-sc-compact-generator-ambient-thick"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-e201e0498",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-e201e0498 (reviewer sub-agent of L); spot-checked: I read Stacks 0GFC (spaces-perfect.tex l.3924), 09SR converse, 09SN and 09SP. The statement is unchanged and is the same as 0GFC: X qcqs, G perfect generating D_QCoh, every perfect P lies in thick <G> in D(O_X), which equals <G> in D_perf since D_perf is saturated. All 5 steps check. Step 1: localizing-generation's 'smallest such subcategory = D_QCoh' makes D_QCoh strictly full and closed under shifts, cones, retracts and ambient coproducts. That node is heavier than needed (it uses BvdB); advisory only. Step 2: perfect objects are compact in C_X, not ambiently. Step 3: shift turns Hom(G[n],F) into the def-pc-generators notion; the singleton telescope meets every hypothesis of build-objects. Step 4: TR2 rotation; the zero-stage normalization identifies 1-s'. Step 5: every hypothesis of ambient-thick holds. proof_deps = union of the uses. No new nodes, no duplicates (I checked compact-perfect-generator, perfect-ring-classical-generator, pc-perfect-thick-closure, sc-compact-objects-thick), no cycles, no SGA. Tool uses accepted: build-objects and compact-generator-ambient-thick are generic picard-duality triangulated lemmas. Batch 5: the closures of localizing-generation and objects-compact reach trf only through algebraic-space foundations (sk-i-curve-zero) and generic defs or coherence lemmas (scalar-tensor-section, kflat-word descent, localization surjectivity, adjoint composition coherence). None is a trace-formula or Poincaré-duality step, so the citations are outside both assumptions. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectGeneratorThick",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfect_mem_thick_of_weak_generator",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectGeneratorThick.lean",
+  "statement": "theorem perfect_mem_thick_of_weak_generator {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (G : X.DerivedQCoh) (hG : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, 0, w} X.smallStructureSheaf G.obj) (hgen : ∀ F : X.DerivedQCoh, (∀ n : ℤ, Subsingleton (G.obj⟦n⟧ ⟶ F.obj)) → IsZero F.obj) (P : X.DerivedModules) (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, 0, w} X.smallStructureSheaf P) : (ObjectProperty.singleton G.obj).triangEnvelope P",
+  "branch": "sheaf-dag",
+  "by": "Q89",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5cfca50a7",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 0GFC clause by clause: arbitrary S, X; hqc CompactSpace(Point X); hqs affine-test absolute qs (0AHR(3)); G : X.DerivedQCoh perfect (IsPerfectOnRingedSiteOfUniverses.{u,u,0,w}, defeq to sibling's {u,u,u,w} since r only enters as max u u r); hgen = ∀F∈D_QCoh, (∀n:ℤ, Hom(G[n],F)=0) → IsZero F; P any ambient perfect object, no QCoh added; conclusion Mathlib triangEnvelope(singleton G.obj) P in ambient D (owner def-pc-thick-closure). Item diff vs side-live: only lean + two used landed def stmt_deps (derived-module-calculus, a1-space-point-topology); all 10 dep records byte-identical; statement verbatim; single sorry; docstrings carry source, blueprint id and all 5 proof steps; report has Worker report + Second reading sections; no new defs, no duplicate theorem; edge cases (empty X, G=0, n=0, rank 0) covered. No file changed, so no compile. Advisory A1 (not fixable by an S2 fix, since item stmt_deps can't be changed): hqs is a verbatim inline copy of landed IsAbsolutelyQuasiSeparated (def-sfb-space-absolute-quasi-separated); defeq, and the proof dep perfect_localizing_generation uses the same inline form; maintainer may later switch to the predicate."
+ }
+}

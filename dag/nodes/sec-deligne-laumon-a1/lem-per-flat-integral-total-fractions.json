@@ -1,0 +1,264 @@
+{
+ "id": "lem-per-flat-integral-total-fractions",
+ "kind": "statement",
+ "title": "Flat scalar extension of integral intermediate total-fraction algebras",
+ "statement": "Let $A,R$ be reduced commutative rings, let $f:A\\to R$ be flat [def-weil-pbc-flat-ring-map], and for any ring $D$ write $Q(D)=S_D^{-1}D$, where $S_D$ is the multiplicative set of nonzerodivisors (elements $s$ satisfying $sx=0\\Rightarrow x=0$) [def-weil-pbc-module-localization]. Let $A\\subseteq B\\subseteq Q(A)$ be an integral $A$-subalgebra [def-weil-pbc-integral-closure]. Put $C=R\\otimes_A B$ [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Flatness makes $f(S_A)\\subseteq S_R$; write $Q(f):Q(A)\\to Q(R)$ for the induced fraction map. Then the formula $j(r\\otimes b)=rQ(f)(b)$ defines an injective $R$-algebra map $j:C\\hookrightarrow Q(R)$, and $R\\to C$ is injective and integral. Via these embeddings the canonical map $Q(C)\\to Q(R)$ is an isomorphism. If $C$ is a normal ring [def-weil-pbc-normal-ring], $j(C)$ is exactly the integral closure of $R$ in $Q(R)$. Neither $A,R,B,C$ is assumed Noetherian, and $B$ is not assumed finite over $A$. The zero ring is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00HB (definition-flat), 02JK (lemma-base-change-integral), 034M (lemma-normal-ring-integrally-closed); affine algebra underlying ILO VIII Lemma 2.2.9, printed p.91. Agent generalization of the finite intermediate-algebra comparison lem-trf-flat-birational-normalization-comparison; no single Stacks tag states the whole assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "For any commutative ring $D$, the localization map $D\\to Q(D)$ is injective: if $x/1=0$, [def-weil-pbc-module-localization] gives $v\\in S_D$ with $vx=0$, hence $x=0$. If $s\\in S_A$, multiplication by $s$ is injective on $A$ and on $B$: on $B\\subseteq Q(A)$ it is multiplication by a unit. Apply [lem-trf-flat-tensor-preserves-injection] with the flat $A$-module $R$ to these two maps. Under $R\\otimes_A A\\simeq R$, $r\\otimes a\\mapsto rf(a)$ (inverse $r\\mapsto r\\otimes1$), and on $C=R\\otimes_A B$, the resulting maps are multiplication by $f(s)$. Thus $f(s)\\in S_R$ and multiplication by $f(s)$ on $C$ is injective. Since $f(S_A)$ consists of units in $Q(R)$, [lem-weil-pbc-ring-localization-universal-property] gives $Q(f)$, with $Q(f)(a/s)=f(a)/f(s)$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-flat-ring-map",
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CM/07JZ (localization construction and kernel), 00HB (definition-flat), 00HD (lemma-flat), 00CX (lemma-tensor-product), 00CP (proposition-universal-property-localization). Explicit application to multiplication by a regular element."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-algebra-tensor-pushout-universal-property] to $R\\to Q(R)$ and the restriction $B\\to Q(A)\\xrightarrow{Q(f)}Q(R)$, which agree on $A$. This constructs a ring map $j:C\\to Q(R)$ with $j(r\\otimes b)=(r/1)Q(f)(b)$. Let $i:R\\to C$ be $r\\mapsto r\\otimes1$. Then $ji(r)=r/1$, so $j$ is an $R$-algebra map and $i$ is injective by Step 1.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), bilinearity relations and multiplication on the algebra tensor product; explicit construction from the two compatible algebra maps."
+   }
+  },
+  {
+   "text": "We prove injectivity of $j$ without a common denominator for all of $B$. By [def-weil-pbc-module-tensor-product], write an arbitrary $c\\in C$ as a finite sum $c=\\sum_{h=1}^n r_h\\otimes b_h$, absorbing any $A$-coefficients into $r_h$. Write $b_h=a_h/t_h$ in $Q(A)$, with $t_h\\in S_A$, and put $s=\\prod_h t_h$ (empty product $1$). A product of regular elements is regular, since $uvx=0$ implies $vx=0$ and then $x=0$. In $B$ the equality $sb_h=a_h\\prod_{k\\ne h}t_k\\in A$ holds. Tensor balancing therefore gives $f(s)c=i(r_c)$, where $r_c=\\sum_h r_h f(a_h\\prod_{k\\ne h}t_k)\\in R$. If $j(c)=0$, applying $j$ gives $r_c/1=0$, whence $r_c=0$ by Step 1. Thus $f(s)c=0$, and the injectivity of multiplication by $f(s)$ on $C$ proved in Step 1 gives $c=0$. Hence $j$ is injective.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX (lemma-tensor-product: pure tensors generate and balancing relations) and 00CM/07JZ (fraction representation). Explicit finite-sum denominator calculation; the two injectivity inputs were established in Step 1."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-base-change] to $A\\to B$ and $A\\to R$. Its hypotheses are exactly the assumed integral extension and the given ring map, and its structure map is $i(r)=r\\otimes1$. Thus $R\\to C$ is integral. Step 2 already proved that it is injective.",
+   "uses": [
+    "lem-weil-pbc-integral-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JK (lemma-base-change-integral), part (1); no finite-module hypothesis."
+   }
+  },
+  {
+   "text": "Identify $R\\subseteq C\\subseteq Q(R)$ using $i,j$. For $u\\in S_R$, multiplication by $u$ on $C$ is injective, since $u$ is a unit in $Q(R)$; thus $u\\in S_C$. Conversely take $t\\in S_C$ and write $j(t)=r/u$ in $Q(R)$ with $r\\in R$, $u\\in S_R$, using [def-weil-pbc-module-localization]. Injectivity of $j$ gives $ut=r$ in $C$. If $rx=0$ for $x\\in R$, then $t(ux)=0$ in $C$, hence $ux=0$ by regularity of $t$, and $x=0$ by regularity of $u$ and injectivity of $R\\to C$. Therefore $r\\in S_R$. It follows that $j(t)=r/u$ is a unit of $Q(R)$, with inverse $u/r$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CM/07JZ (fraction representation and multiplication); explicit regular-denominator argument for the intermediate ring, with the embeddings supplied in Steps 2--3."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ring-localization-universal-property], Step 5 lets $j$ extend to $J:Q(C)\\to Q(R)$ and $R\\to C\\to Q(C)$ extend to $H:Q(R)\\to Q(C)$. The composite $JH$ is the identity because it agrees on $R$. For $c\\in C$ write $j(c)=r/u$ with $u\\in S_R$. Then $uc=i(r)$ by injectivity of $j$, and $i(u)\\in S_C$ by Step 5. Consequently $HJ(c/1)=H(r/u)=i(r)/i(u)=c/1$. The two maps $HJ$ and $1_{Q(C)}$ therefore agree on $C$, so localization uniqueness gives $HJ=1$. Thus the canonical $J$, characterized by $J(c/t)=j(c)j(t)^{-1}$, is an isomorphism compatible with the given embeddings.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), existence, fraction formula and uniqueness; explicit verification of both inverse composites."
+   }
+  },
+  {
+   "text": "Assume now that $C$ is normal. Step 4 and [def-weil-pbc-integral-closure] put $j(C)$ inside the integral closure of $R$ in $Q(R)$: apply $j$ to a monic equation for each $c\\in C$. Conversely let $x\\in Q(R)$ satisfy a monic equation over $R$. Apply $H$ to that equation; its coefficients are the images in $C$ of the coefficients in $R$, so $H(x)\\in Q(C)$ is integral over $C$. The hypothesis of [lem-weil-pbc-normal-ring-integrally-closed-total] holds for this $C$, so $H(x)=c/1$ for some $c\\in C$. Applying $J$ gives $x=j(c)$. This proves the required equality of subrings. Every preceding argument also works when a ring is zero: regularity means injective multiplication, the localization and tensor universal properties allow the zero ring, and neither a prime nor a nonzero element was chosen.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GI/00GP (integral equations and integral closure), 034M (lemma-normal-ring-integrally-closed). Explicit transfer of the monic equation along the inverse total-fraction isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-integral-base-change",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-normal-ring-integrally-closed-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-explicit affine algebra expansion of ILO VIII Lemma 2.2.9 (printed p.91), using Stacks 00HD, 00CP, 00CX, 02JK and 034M. The item generalizes the finite-denominator comparison lem-trf-flat-birational-normalization-comparison by using denominators for individual tensor elements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-per-flat-integral-total-fractions: flat base change of an integral birational extension embeds in the total quotient ring and equals normalization when normal",
+   "results": "{\"t\": \"2026-10-24T02:15:19Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-flat-integral-total-fractions: flat base change of an integral birational extension embeds in the total quotient ring and equals normalization when normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"IsIntegrallyClosed.integralClosure_eq_bot_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"3bb04d0e035f7811\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization factorization and tensor integral-closure comparisons do not assert this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-integral-total-fractions: a flat base change of any integral subalgebra of the total quotient ring embeds in the new total quotient ring and has the same total fractions, without module finiteness",
+   "results": "{\"t\": \"2026-10-24T02:15:19Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-integral-total-fractions: a flat base change of any integral subalgebra of the total quotient ring embeds in the new total quotient ring and has the same total fractions, without module finiteness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\", \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"IsLocalization.Away.integralClosure\", \"RingHom.Flat.holdsForLocalizationAway\", \"IsFractionRing.trans\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"IsLocalization.integralClosure\", \"IsFractionRing.isFractionRing_of_isDomain_of_isLocalization\"], \"digest\": \"b9255490fd054682\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization factorization and tensor integral-closure comparisons do not assert this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsFractionRing",
+   "results": "{\"t\": \"2026-10-24T02:15:20Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ideal.eq_top_of_mk_tensor_eq_one\"], \"digest\": \"3fa720b697bb9375\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization factorization and tensor integral-closure comparisons do not assert this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure|isBaseChange_of_isFractionRing|IsFractionRing.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-24T02:15:20Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure|isBaseChange_of_isFractionRing|IsFractionRing.*[Tt]ensor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\"], \"digest\": \"d3714c1589d09b51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization factorization and tensor integral-closure comparisons do not assert this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-integral-total-fractions: tensoring a not necessarily finite integral birational ring extension with a flat algebra preserves birationality in total quotient rings",
+   "results": "{\"t\": \"2026-10-24T02:16:49Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-integral-total-fractions: tensoring a not necessarily finite integral birational ring extension with a flat algebra preserves birationality in total quotient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\", \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"Algebra.IsIntegral.tensorProduct\", \"Algebra.TensorProduct.isAlgebraic_of_isField\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"Algebra.instIsStandardOpenImmersionTensorProduct\"], \"digest\": \"3c310bb3e69e0e64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization factorization and tensor integral-closure comparisons do not assert this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure|isBaseChange_of_isFractionRing|IsFractionRing.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-24T03:08:23Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure|isBaseChange_of_isFractionRing|IsFractionRing.*[Tt]ensor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\"], \"digest\": \"d3714c1589d09b51\"}; Read the returned declarations: flat tensor injection and integral base change are existing leaves; integral-closure tensor comparisons have different source/target, and algebraic fraction base change assumes a domain. None states all clauses for an arbitrary integral intermediate algebra and reduced rings with zero divisors.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item; partial inputs already have DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-flat-integral-total-fractions: tensor product of a flat algebra and an integral intermediate total quotient algebra preserves total fractions",
+   "results": "{\"t\": \"2026-10-24T03:08:24Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-flat-integral-total-fractions: tensor product of a flat algebra and an integral intermediate total quotient algebra preserves total fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Algebra.TensorProduct.includeLeft_injective\", \"IsIntegral.tmul\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Algebra.IsIntegral.tensorProduct\", \"Module.Flat.iff_flat_tensorProduct\"], \"digest\": \"9d6aa767b4e971e1\"}; Read the returned declarations: flat tensor injection and integral base change are existing leaves; integral-closure tensor comparisons have different source/target, and algebraic fraction base change assumes a domain. None states all clauses for an arbitrary integral intermediate algebra and reduced rings with zero divisors.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item; partial inputs already have DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsFractionRing",
+   "results": "{\"t\": \"2026-10-24T03:08:24Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ideal.eq_top_of_mk_tensor_eq_one\"], \"digest\": \"3fa720b697bb9375\"}; Read the returned declarations: flat tensor injection and integral base change are existing leaves; integral-closure tensor comparisons have different source/target, and algebraic fraction base change assumes a domain. None states all clauses for an arbitrary integral intermediate algebra and reduced rings with zero divisors.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item; partial inputs already have DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-integral-total-fractions: flat base change of an integral subalgebra of the total fraction ring is birational and equals normalization when normal",
+   "results": "{\"t\": \"2026-10-24T03:08:25Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-integral-total-fractions: flat base change of an integral subalgebra of the total fraction ring is birational and equals normalization when normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"IsLocalization.Away.integralClosure\", \"IsLocalization.integralClosure\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"Ring.instIsFractionRingNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Algebra.ZariskisMainProperty\"], \"digest\": \"3943e8c393a57645\"}; Read the returned declarations: flat tensor injection and integral base change are existing leaves; integral-closure tensor comparisons have different source/target, and algebraic fraction base change assumes a domain. None states all clauses for an arbitrary integral intermediate algebra and reduced rings with zero divisors.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item; partial inputs already have DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-integral-total-fractions: arbitrary integral intermediate extension inside the total quotient ring stays a birational extension after flat tensor product, without finiteness",
+   "results": "{\"t\": \"2026-10-24T03:08:36Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-integral-total-fractions: arbitrary integral intermediate extension inside the total quotient ring stays a birational extension after flat tensor product, without finiteness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"Algebra.ZariskisMainProperty\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"integralClosure.isFractionRing_of_finite_extension\"], \"digest\": \"432e4b75eae81b19\"}; Read the returned declarations: flat tensor injection and integral base change are existing leaves; integral-closure tensor comparisons have different source/target, and algebraic fraction base change assumes a domain. None states all clauses for an arbitrary integral intermediate algebra and reduced rings with zero divisors.",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item; partial inputs already have DAG nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-per-normalized-tower-regular-pullback",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. VIII Theorem 2.3.10 and Remarks 2.3.11--2.3.12, pp.93--94 (existence and normalized regular functoriality); 3.2.19 and Theorem 3.4.15 with its proof and Remark 3.4.16(i), pp.106,113--114 (induced rule, independence, and synchronization). Supporting input: VIII Proposition 2.2.4(ii), 2.2.6, Lemma 2.2.9, Remark 2.3.3(i) and Remark 2.3.12(i), printed pp.90--94; supporting Flat scalar extension of integral intermediate total-fraction algebras",
+   "via": [
+    "lem-per-normalized-tower-regular-pullback",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-flat-integral-total-fractions",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies unchanged. Seven explicit proof steps use existing flat tensor injection, tensor pushout, integral base change, localization and normal-ring integral-closedness nodes; no new nodes. The finite-sum denominator argument proves injectivity without module finiteness, and both inverse fraction maps are verified. Checked the zero ring, nonfaithful flat maps, zero divisors and a genuinely nonfinite intermediate algebra.",
+  "blueprint": "Inherited ancestor lem-per-artin-gabber-affine-curve, proof Step 3: auxiliary normalized regular-pullback branch through lem-per-normalized-tower-regular-pullback, Steps 5--7, realizing the affine algebra underlying ILO VIII Lemma 2.2.9. Read latest/main-20261024 ancestor and unit; no change of chapter or unit route. Whole-blueprint searches for total fraction and birational found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Generic commutative algebra tool (Stacks 034M), used only for the conditional final normality clause. No node of the perverse unit supplies integral closedness of a normal ring; its existing project theorem was also read."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-ring-integrally-closed-total"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-4470345a7",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-4470345a7 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement and stmt_deps are unchanged from live, where the item is still unsplit with an empty proof; there is no repair note and no new nodes. All 7 steps check against the statements of the cited nodes (Stacks 00HB/00CP/00CX/02JK/034M; all tags verified in tags/tags). Step 1: the flat-injection leaf is applied to multiplication by s on A and on B, which gives f(S_A)⊆S_R and the injectivity of multiplication by f(s) on C. Step 3 clears denominators per element: s·b_h∈A gives f(s)c=i(r_c), so j is injective with no finiteness of B. Step 5 proves both directions S_R⊆S_C and t∈S_C ⇒ j(t) a unit. Step 6 verifies both composites JH and HJ. Step 7 uses 034M only under the normality hypothesis. Edge cases checked: B=A, a non-injective flat map, the zero ring, and the non-finite monomial example. No duplicate: the trf finite comparison assumes B finite. Batch-5 check: I accept lem-trf-flat-tensor-preserves-injection, a generic Mathlib leaf (Module.Flat.lTensor_preserves_injective_linearMap) that is essentially the definition of flatness and not part of the trace-formula or Poincaré-duality proofs. I also accept the tool use of lem-weil-pbc-normal-ring-integrally-closed-total (Stacks 034M) in Step 7. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatIntegralTotalFractions",
+  "declaration": "flat_integral_totalFractions",
+  "file": "lean/Sheaf/RingTheory/FlatIntegralTotalFractions.lean",
+  "statement": "theorem flat_integral_totalFractions (A : Type u) (R : Type v) [CommRing A] [CommRing R] [IsReduced A] [IsReduced R] [Algebra A R] (hf : (algebraMap A R).Flat) (B : Subalgebra A (FractionRing A)) [Algebra.IsIntegral A B] : ∃ hregular : nonZeroDivisors A ≤ (nonZeroDivisors R).comap (algebraMap A R), ∃ j : R ⊗[A] B →ₐ[R] FractionRing R, (∀ (r : R) (b : B), j (r ⊗ₜ[A] b) = algebraMap R (FractionRing R) r * IsLocalization.map (FractionRing R) (algebraMap A R) hregular (b : FractionRing A)) ∧ Function.Injective j ∧ Function.Injective (algebraMap R (R ⊗[A] B)) ∧ Algebra.IsIntegral R (R ⊗[A] B) ∧ (∃ e : FractionRing (R ⊗[A] B) ≃+* FractionRing R, ∀ c : R ⊗[A] B, e (algebraMap (R ⊗[A] B) (FractionRing (R ⊗[A] B)) c) = j c) ∧ ((∀ (p : Ideal (R ⊗[A] B)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) → j.range = integralClosure R (FractionRing R))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e284cb990",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Node unchanged apart from the lean record; lean.statement verbatim in the file. Every clause matches the node: reduced A,R; RingHom.Flat; FractionRing = localization at nonZeroDivisors (total fractions); B a Subalgebra of FractionRing A with Algebra.IsIntegral and no finiteness; f(S_A)⊆S_R concluded; Q(f) = IsLocalization.map; j pinned by the pure-tensor formula; j and R→C injective, R→C integral; ring iso e with e(c/1)=j c, so it is the canonical J; inline normal-ring predicate implies j.range = integralClosure. No extra hypotheses, independent universes. Edge cases R=0, A=0, non-injective f, B=A, non-finite B covered. No definitions, sorry only, source and blueprint docstrings with the 7 steps, published proof_dep import; Worker report and Second reading sections present; no duplicate in Mathlib or the project."
+ }
+}

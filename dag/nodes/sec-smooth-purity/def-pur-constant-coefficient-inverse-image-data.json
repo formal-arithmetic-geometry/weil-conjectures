@@ -1,0 +1,121 @@
+{
+ "id": "def-pur-constant-coefficient-inverse-image-data",
+ "kind": "definition",
+ "title": "Constant-coefficient algebraic inverse-image and derived-pullback data",
+ "status": "split",
+ "statement": "Let $(C,J)$ and $(C',J')$ be small sites, with their sheaf topoi [def-weil-pbc-topos]. Use the module-sheaf categories $\\operatorname{Mod}(R)$, cochain categories $\\operatorname{Cx}(R)$, standard localizations $Q_R:\\operatorname{Cx}(R)\\to D(R)$, ordinary scalar extension $\\operatorname{change}_c$, and its pure tensor sections from [def-sfb-constant-completion-coefficient-data]; use the constant ring sheaves $\\underline A$ of [def-pur-strict-quotient-completion-data]. Write $|M|$ for the underlying sheaf of sets of a module sheaf. For $c:R\\to S$ define $\\operatorname{insertion}_c(M):|M|\\to|\\operatorname{change}_c(M)|$ by $m\\mapsto1\\otimes m$, including sheafification. For a functor $L:\\operatorname{Sh}(J)\\to\\operatorname{Sh}(J')$, define $\\operatorname{InverseImageData}(L)$ to consist of a functor $F_{\\mathrm{rings}}$ on commutative ring sheaves, an algebraic inverse-image lift [def-weil-pbc-algebraic-inverse-image] for each $R$ from $R$ to $F_{\\mathrm{rings}}R$, naturality of the underlying ring isomorphisms in ring-sheaf maps, and a natural isomorphism $\\operatorname{constant}_J F_{\\mathrm{rings}}\\cong\\operatorname{constant}_{J'}$. For such data $F$ and $c:F_{\\mathrm{rings}}R\\to S$, define $\\operatorname{pull}_{F,c}$ to be the algebraic module inverse image followed by $\\operatorname{change}_c$. Define $\\operatorname{pullInsertion}_{F,c}(M):L|M|\\to|\\operatorname{pull}_{F,c}M|$ by the inverse of the algebraic underlying-module isomorphism followed by $\\operatorname{insertion}_c$. Define $\\operatorname{DerivedPull}(F,c)$ to be a functor $T:D(R)\\to D(S)$ and a comparison $Q_RT\\to\\operatorname{pull}_{F,c}^{\\operatorname{Cx}}Q_S$ exhibiting its left-derived universal property at quasi-isomorphisms, with invertible comparison on every K-flat complex [def-pc-kflat-complex] whose terms are flat [def-pc-flat-sheaf-modules]. When $L$ is the inverse image of a geometric morphism [def-trf-geometric-morphism], write $\\operatorname{derivedPull}_{F,c}$ for the universally specified such pair, unique up to comparison-preserving natural isomorphism. Define $\\operatorname{constantMap}_F(A):F_{\\mathrm{rings}}(\\underline A)\\to\\underline A$ to be the component of the specified constant-ring natural isomorphism. These are the underlying, scalar-insertion and inverse-image constructions and their universal comparison data, with no completion-equivalence or flatness hypothesis on $c$.",
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-trf-geometric-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 00YV (functoriality-algebraic-structures-topoi), Tag 03D2 (pullback-module), and Tag 06YY (lemma-derived-base-change): algebraic inverse image, extension-of-scalars insertion and universal derived pullback computed on flat-term K-flat complexes. Packaging of the existing constant-coefficient inverse-image interface used in sk-thm-purity-transport.proof.md Steps 1 and 3."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Algebraic inverse image on module sheaves with extension of scalars and universal left derived pullback comparison on K-flat complexes",
+   "results": "{\"t\": \"2026-10-23T04:28:14Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic inverse image on module sheaves with extension of scalars and universal left derived pullback comparison on K-flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"64a3f1421cafadbe\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib has site-induced module pullback and free-module comparisons, but not this coherent all-ring inverse-image and universal derived-pair package. Reuse the exact published ConstantCompletion definitions through existing:true; no new Lean definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image data for sheaves of commutative rings and modules, constant coefficient map and derived tensor pullback",
+   "results": "{\"t\": \"2026-10-23T04:28:20Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image data for sheaves of commutative rings and modules, constant coefficient map and derived tensor pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.freeFunctorCompPullbackIso\"], \"digest\": \"ba56d60c97a905fd\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib has site-induced module pullback and free-module comparisons, but not this coherent all-ring inverse-image and universal derived-pair package. Reuse the exact published ConstantCompletion definitions through existing:true; no new Lean definition."
+  },
+  {
+   "tool": "grep",
+   "query": "structure InverseImageData|structure DerivedPull|def pullInsertion|def constantMap",
+   "results": "{\"t\": \"2026-10-23T04:28:14Z\", \"tool\": \"grep\", \"query\": \"structure InverseImageData|structure DerivedPull|def pullInsertion|def constantMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/ModelTheory/Basic.lean\"], \"digest\": \"7621e06ff9295cb0\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib has site-induced module pullback and free-module comparisons, but not this coherent all-ring inverse-image and universal derived-pair package. Reuse the exact published ConstantCompletion definitions through existing:true; no new Lean definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"structure InverseImageData|structure DerivedPull|def pullInsertion|def constantMap\" lean/WeilConjectures lean/Sheaf; exact lean.declarations ownership scan of dag/nodes; blueprint_refs.py search \"constant coefficient inverse image data\"",
+   "results": "No exact declaration in WeilConjectures. In Sheaf: ConstantCompletionEquivalence.lean lines 3073 InverseImageData, 3216 pullInsertion, 3225 DerivedPull, 3350 constantMap. Other constantMap names are unrelated. Exact node declaration scan: only theorem lem-weil-pbc-constant-completion-equivalence lists the eight helpers; no definition node owns the coherent package. blueprint_refs search: 0 blueprint nodes match.",
+   "date": "2026-10-23",
+   "verdict": "Create a definition ownership node with existing:true as explicitly requested in the return; reuse all published Lean data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-topos-scalar-inverse-exchange-mate",
+  "date": "2026-10-23",
+  "group": "Q159"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "sk-thm-purity-transport.proof.md Steps 1 and 3: the ordinary algebraic inverse-image, scalar insertion and universal derived comparison underlying the normalized coefficient/exchange maps.",
+   "via": [
+    "lem-pur-topos-scalar-inverse-exchange-mate",
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantCompletionInverseImage",
+  "file": "lean/Sheaf/Paper/ConstantCompletionInverseImage.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.InverseImageData",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.underlying",
+   "CategoryTheory.ConstantCompletion.insertion",
+   "CategoryTheory.ConstantCompletion.InverseImageData",
+   "CategoryTheory.ConstantCompletion.pull",
+   "CategoryTheory.ConstantCompletion.pullInsertion",
+   "CategoryTheory.ConstantCompletion.DerivedPull",
+   "CategoryTheory.ConstantCompletion.derivedPull",
+   "CategoryTheory.ConstantCompletion.constantMap"
+  ],
+  "statement": "structure InverseImageData (L : Sheaf J (Type u) ⥤ Sheaf J' (Type u))",
+  "branch": "sheaf-dag",
+  "by": "Q159",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition-only ownership requested by independent return L of immutable head 8227b6409f81 (H2). These are unchanged published definitions, not ConstantCompletion.equivalence. underlying and insertion retain their actual sheafified formulas; InverseImageData retains all algebraic operations, ring-map naturality and the constant-ring natural isomorphism; DerivedPull/derivedPull retain the left-derived universal comparison and computation on flat-term K-flat models. Mod/Cx/D/Q/change/extend/extendComparison remain owned by def-sfb-constant-completion-coefficient-data, and constant by def-pur-strict-quotient-completion-data. 2026-10-27: module split (maintainer); the declaration now lives in Sheaf.Paper.ConstantCompletionInverseImage, and Sheaf.Paper.ConstantCompletionEquivalence re-exports all parts."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1133df44",
+  "group": "Q159",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1133df44",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Lean module unchanged from 8227b6409f81; the H2 return is resolved: theorem stmt_dep lem-weil-pbc-constant-completion-equivalence dropped; def-sfb-constant-completion-coefficient-data, def-pur-strict-quotient-completion-data and new existing:true def node def-pur-constant-coefficient-inverse-image-data (InverseImageData/pull/pullInsertion/DerivedPull/derivedPull/constantMap/underlying/insertion; TeX states each, deps live, no other def owner) cited. Re-checked all clauses: λ pinned by ScalarPure/ScalarResolving, χ and E as mateEquiv, β by mate(β⁻¹)=λ⁻¹ (equivalent to open-scalar-unit (4), unique), t and γ = adjunct of t⁻¹; identity 1 unconditional, identity 2 under pointwise IsIso t_A, t_B; no extra hypotheses; edge cases OK; statement verbatim, 23 decls present, sorry only, docstrings OK, no collision, no supersession. Advisories: unused public imports GrothendieckTopos and RingedTopoiCanonicalTensorPullbackOfUniverses; conjuncts 3-6 follow from the definitions. No compile (no file changed)."
+ }
+}

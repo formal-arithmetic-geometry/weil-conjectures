@@ -90,7 +90,18 @@
   "lem-weil-pbc-weak-etale-tor"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -159,5 +170,38 @@
   "landing": "20261015T154213-L-164905",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "If $k$ is a field and $B/k$ is weakly etale\n[def-weil-pbc-ind-etale-algebra], every finitely generated $k$-subalgebra of\n$B$ is finite etale. In particular $B$ is ind-etale, is reduced, and all its\nresidue fields are separable algebraic over $k$.",
+  "proof": [
+   {
+    "text": "By [lem-weil-pbc-weak-etale-tor], every $B$-module is flat. For a local ring\nwith this property, flatness of the quotient by $(b)$ gives $b=bc$ for some\n$c\\in(b)$. If $b$ is a nonunit, $1-c$ is a unit, so $b=0$. All local rings of\n$B$ are therefore fields; in particular $B$ is reduced.",
+    "uses": [
+     "lem-weil-pbc-weak-etale-tor"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "We first treat a weakly etale field extension $k\\subset L$. By\n[lem-weil-pbc-ind-etale-stability], $L\\to L\\otimes_kL$ is weakly etale, so by\n[lem-weil-pbc-weak-etale-tor] $L\\otimes_kL$ also has every module flat. For any subfield $E\\subset L$ containing $k$, the map\n$E\\otimes_kE\\to L\\otimes_kL$ is faithfully flat. Flatness of every module\ndescends along a faithfully flat ring map, by the tensor criterion for\ninjectivity. Thus $E\\otimes_kE$ has every module flat. If $t\\in L$ were\ntranscendental, take $E=k(t)$. Then $E\\otimes_kE$ is a domain with the\nnonzero nonunit $t\\otimes1-1\\otimes t$, and its localization at the diagonal\nprime is not a field, a contradiction. Hence $L/k$ is algebraic. An\ninseparable element would instead give a finite subextension $E/k$ for which\n$E\\otimes_kE$ is nonreduced: its presentation by the minimal polynomial has a\nrepeated factor at the root already in $E$. This is the same contradiction.\nThus $L/k$ is separable algebraic.",
+    "uses": [
+     "lem-weil-pbc-ind-etale-stability",
+     "lem-weil-pbc-weak-etale-tor"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply this result to the fields $B_{\\mathfrak q}$. They are weakly etale over\n$k$, since localization is ind-Zariski and weak etaleness is preserved by\ncomposition. Given $b\\in B$, at each prime choose a monic separable\npolynomial annihilating its germ. This relation holds on a basic open\nneighbourhood. Finitely many such neighbourhoods cover $\\operatorname{Spec}B$;\nthe product of their polynomials annihilates $b$ in every local ring, hence\nin $B$. Thus every element of $B$ is integral over $k$. A finitely generated\nsubalgebra is consequently finite-dimensional and reduced, hence a product of\nfinite field extensions. Each factor embeds into some $B_{\\mathfrak q}$, so\neach extension is separable. These finite etale subalgebras form the filtered\npresentation of [def-weil-pbc-ind-etale-algebra]. This proves the field\ncalculation also recorded in\n[Stacks Project, Tag 092Q](https://stacks.math.columbia.edu/tag/092Q).",
+    "uses": [
+     "def-weil-pbc-ind-etale-algebra"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

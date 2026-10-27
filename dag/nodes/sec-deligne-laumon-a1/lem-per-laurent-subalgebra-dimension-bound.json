@@ -1,0 +1,260 @@
+{
+ "id": "lem-per-laurent-subalgebra-dimension-bound",
+ "kind": "statement",
+ "title": "Dimension bound for a finite type Laurent polynomial subalgebra",
+ "statement": "Let $R$ be a nonzero commutative Noetherian ring [def-weil-pbc-noetherian-ring] with finite Krull dimension $d\\geq0$ [def-weil-pbc-krull-dimension-ring]. Let $L=R[t,t^{-1}]$ denote the ring of finite sums $\\sum_{i\\in\\mathbf Z}r_it^i$, with $r_i\\in R$, coefficientwise addition and convolution multiplication. Let $B\\subseteq L$ be an $R$-subalgebra containing the constant copy of $R$, and assume $B$ is of finite type over $R$ [def-weil-pbc-finite-type-algebra]. Then $\\dim B\\leq d+1$. No reducedness, domain, locality or catenarity hypothesis on $R$ or $B$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAG (lemma-alteration-dimension-general), with Tag 0BAE (lemma-dimension-formula-general): algebraic consequence for finite type subalgebras of a one-variable Laurent polynomial algebra, including the reduction along minimal primes."
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], enumerate the minimal primes of $R$ as $\\mathfrak p_1,\\ldots,\\mathfrak p_s$. This family is nonempty: otherwise [lem-per-nilradical-minimal-prime-intersection] would make $1$ nilpotent in the nonzero ring $R$. Put $D_i=R/\\mathfrak p_i$ and $F_i=\\operatorname{Frac}(D_i)$; these are a domain and its fraction field [lem-weil-pbc-prime-residue-field-algebra]. Coefficient reduction gives a ring map $\\rho_i:B\\to D_i[t,t^{-1}]\\subset F_i(t)$, where the last field is [def-weil-rational-function-field]. Addition and multiplication commute with reduction because their coefficients are finite sums of coefficients and products. The last inclusion is injective: multiplying a finite Laurent sum by a large power of $t$ gives a polynomial, whose coefficients vanish if its image in $F_i(t)$ vanishes. Let $K_i=\\ker\\rho_i$. Since the target is a field and $\\rho_i(1)=1$, $K_i$ is prime; its contraction to $R$ is $\\mathfrak p_i$, by testing constant coefficients.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-per-nilradical-minimal-prime-intersection",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-rational-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAG (lemma-alteration-dimension-general), applied after the explicit coefficient/minimal-prime reduction; Tag 0BAE (lemma-dimension-formula-general)."
+   }
+  },
+  {
+   "text": "If $b\\in\\bigcap_iK_i$, every Laurent coefficient $r_j$ of $b$ belongs to all $\\mathfrak p_i$, hence is nilpotent by [lem-per-nilradical-minimal-prime-intersection]. For its finitely many nonzero coefficients choose $e_j\\geq1$ with $r_j^{e_j}=0$. In any product of $M=1+\\sum_j(e_j-1)$ coefficients, one $r_j$ occurs at least $e_j$ times, so each monomial in the expansion of $b^M$ vanishes. Thus $b$ is nilpotent (if $b$ has no nonzero coefficient, then $b=0$ and $M=1$). Since a nilpotent element lies in every prime ideal of $B$, every prime $\\mathfrak q$ of $B$ contains $\\bigcap_iK_i$, and hence contains some $K_i$: otherwise choose $b_i\\in K_i\\setminus\\mathfrak q$; then $\\prod_i b_i\\in\\bigcap_iK_i\\subseteq\\mathfrak q$, contradicting primality. Consequently every minimal prime $\\mathfrak q$ of $B$ equals some $K_i$, since $K_i$ is itself prime.",
+   "uses": [
+    "lem-per-nilradical-minimal-prime-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAG (lemma-alteration-dimension-general), applied after the explicit coefficient/minimal-prime reduction; Tag 0BAE (lemma-dimension-formula-general)."
+   }
+  },
+  {
+   "text": "Fix a minimal prime $\\mathfrak q=K_i$ of $B$ and write $E=\\operatorname{Frac}(B/\\mathfrak q)$. The map $B/\\mathfrak q\\hookrightarrow F_i(t)$ extends to an embedding $E\\hookrightarrow F_i(t)$ by $a/b\\mapsto\\rho_i(a)/\\rho_i(b)$. Denominators are nonzero; the fraction equality $ab\\prime=a\\prime b$ verifies well-definedness, and a fraction maps to zero only if its numerator is zero. The constants give an injection $D_i\\hookrightarrow B/\\mathfrak q$, since $K_i\\cap R=\\mathfrak p_i$. Thus $F_i\\hookrightarrow E$ by the same fraction formula, and the composite into $F_i(t)$ is its usual constant embedding. In particular all embeddings commute with $R\\to R/\\mathfrak p_i$; this is the residue-field extension $\\operatorname{Frac}(R/\\mathfrak p_i)\\subseteq\\operatorname{Frac}(B/\\mathfrak q)$, not a fibre ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAG (lemma-alteration-dimension-general), applied after the explicit coefficient/minimal-prime reduction; Tag 0BAE (lemma-dimension-formula-general)."
+   }
+  },
+  {
+   "text": "Every $z\\in F_i(t)$ has a presentation $P(t)/Q(t)$ with $Q\\ne0$ [def-weil-rational-function-field]. It satisfies the nonzero polynomial $Q(t)Z-P(t)$ over the subalgebra $F_i[t]$: its coefficient of $Z$ is nonzero. Apply [lem-sfb-algebraic-adjoin-transcendence-bound] with base $F_i$, domain algebra $F_i(t)$ and singleton $\\{t\\}$ to get $\\operatorname{trdeg}_{F_i}F_i(t)\\leq1$. Any algebraically independent subset of $E$ stays algebraically independent in $F_i(t)$: a polynomial relation there is zero in $E$ by injectivity of step 3, with the same constant coefficients. The definition [def-kun-transcendence-degree] therefore gives $\\operatorname{trdeg}_{F_i}E\\leq1$.",
+   "uses": [
+    "def-weil-rational-function-field",
+    "lem-sfb-algebraic-adjoin-transcendence-bound",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030F (lemma-transcendence-degree), proof: a generating set contains a transcendence basis; algebraic-adjoin cardinal bound, specialized to the rational-function field generated by one indeterminate."
+   }
+  },
+  {
+   "text": "Form $f:\\operatorname{Spec}B\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Its source and target are the affine pair in [lem-weil-pbc-lft-pointwise-criterion], so finite type of $B$ over $R$ gives local finite type of $f$. The one-member affine covering of $\\operatorname{Spec}R$ gives local Noetherianity by [pqf-def-locnoeth]. By [lem-weil-pbc-spec-irreducible-components-minimal-primes] and the closure formula [lem-weil-pbc-spec-irreducible-closed-subsets-primes], the generic points of its source components are precisely the minimal primes $\\mathfrak q$ of $B$. By [lem-weil-pbc-spec-field-point-residue-field], their residue fields are $\\operatorname{Frac}(B/\\mathfrak q)$ and those of their images are $\\operatorname{Frac}(R/(\\mathfrak q\\cap R))$. The residue-field map is the fraction map induced by $R\\to B$, by [lem-weil-pbc-spec-map-residue-field-naturality]. Thus step 4 gives the exact generic residue-field bound $1$ required by Tag 0BAG.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "lem-weil-pbc-spec-map-residue-field-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAG (lemma-alteration-dimension-general), applied after the explicit coefficient/minimal-prime reduction; Tag 0BAE (lemma-dimension-formula-general)."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-krull-dimension-ring], topological dimension of $\\operatorname{Spec}R$ equals $\\dim R=d$, and likewise that of $\\operatorname{Spec}B$ equals $\\dim B$. Apply [lem-sfb-generic-residue-transcendence-dimension-bound] to $f$ with $n=1$: step 5 verifies local finite type, local Noetherianity of the base and the bound at every generic point. It yields $\\dim B=\\dim\\operatorname{Spec}B\\leq\\dim\\operatorname{Spec}R+1=d+1$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-sfb-generic-residue-transcendence-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAG (lemma-alteration-dimension-general), applied after the explicit coefficient/minimal-prime reduction; Tag 0BAE (lemma-dimension-formula-general)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-per-nilradical-minimal-prime-intersection",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "def-weil-rational-function-field",
+  "lem-sfb-algebraic-adjoin-transcendence-bound",
+  "def-kun-transcendence-degree",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "lem-weil-pbc-spec-map-residue-field-naturality",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sfb-generic-residue-transcendence-dimension-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAG (lemma-alteration-dimension-general); agent-written coefficientwise minimal-prime and rational-function reduction, using Stacks 00E0 and 030F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*(Subalgebra|Laurent)|Laurent.*ringKrullDim|Subalgebra.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-24T07:59:22Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*(Subalgebra|Laurent)|Laurent.*ringKrullDim|Subalgebra.*ringKrullDim\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: polynomial-ring dimension, ordinary Rees finite generation, and principal-quotient dimension do not give a dimension bound for a finite type subalgebra; no Laurent-subalgebra or associated-graded dimension theorem returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-laurent-subalgebra-dimension-bound: Krull dimension bound for a finitely generated subalgebra of a Laurent polynomial ring over a Noetherian ring",
+   "results": "{\"t\": \"2026-10-24T07:59:23Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-laurent-subalgebra-dimension-bound: Krull dimension bound for a finitely generated subalgebra of a Laurent polynomial ring over a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.ringKrullDim_le\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_succ_le_ringKrullDim_powerseries\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_quotient_le\"], \"digest\": \"e1ab7448e2e77e3f\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: polynomial-ring dimension, ordinary Rees finite generation, and principal-quotient dimension do not give a dimension bound for a finite type subalgebra; no Laurent-subalgebra or associated-graded dimension theorem returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Subalgebra\"",
+   "results": "{\"t\": \"2026-10-24T07:59:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"ringKrullDim\\\", \\\"Subalgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: polynomial-ring dimension, ordinary Rees finite generation, and principal-quotient dimension do not give a dimension bound for a finite type subalgebra; no Laurent-subalgebra or associated-graded dimension theorem returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-laurent-subalgebra-dimension-bound: A finite type R subalgebra of R[t,t inverse] over a Noetherian ring R of finite Krull dimension d has Krull dimension at most d plus one",
+   "results": "{\"t\": \"2026-10-24T07:59:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-laurent-subalgebra-dimension-bound: A finite type R subalgebra of R[t,t inverse] over a Noetherian ring R of finite Krull dimension d has Krull dimension at most d plus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.ringKrullDim_of_isNoetherianRing\", \"Polynomial.ringKrullDim_le\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"ringKrullDim_succ_le_ringKrullDim_powerseries\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"Ring.KrullDimLE\", \"instKrullDimLEOfNatNat\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\"], \"digest\": \"9d6c3d7494698fd6\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: polynomial-ring dimension, ordinary Rees finite generation, and principal-quotient dimension do not give a dimension bound for a finite type subalgebra; no Laurent-subalgebra or associated-graded dimension theorem returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-laurent-subalgebra-dimension-bound: dimension of a finite type algebra embedded in a polynomial ring with one invertible variable is at most dimension of the coefficient ring plus one",
+   "results": "{\"t\": \"2026-10-24T07:59:25Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-laurent-subalgebra-dimension-bound: dimension of a finite type algebra embedded in a polynomial ring with one invertible variable is at most dimension of the coefficient ring plus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"Polynomial.ringKrullDim_le\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.finrank_R\", \"MvPolynomial.rank_R\"], \"digest\": \"2f92f9c930d7baa8\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: polynomial-ring dimension, ordinary Rees finite generation, and principal-quotient dimension do not give a dimension bound for a finite type subalgebra; no Laurent-subalgebra or associated-graded dimension theorem returned."
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*(Subalgebra|Laurent)|Laurent.*ringKrullDim|Subalgebra.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-24T08:28:17Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*(Subalgebra|Laurent)|Laurent.*ringKrullDim|Subalgebra.*ringKrullDim\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial-ring dimension does not bound subalgebra dimension; finite-type trdeg finiteness and domain tower identities do not supply the Laurent-component reduction. Reuse the existing general Tag 0BAG node for the last step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "dimension bound for a finitely generated subalgebra of a rational function ring over a Noetherian coefficient ring",
+   "results": "{\"t\": \"2026-10-24T08:28:18Z\", \"tool\": \"leansearch\", \"query\": \"dimension bound for a finitely generated subalgebra of a rational function ring over a Noetherian coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.finiteDimensional_subalgebra\", \"trdeg_lt_aleph0\", \"Subalgebra.fg_of_fg_toSubmodule\", \"isNoetherianRing_of_fg\", \"Algebra.instFiniteTypeSubtypeMemSubalgebraSubalgebra\", \"FiniteDimensional.of_subalgebra_toSubmodule\", \"Subalgebra.fg_of_noetherian\", \"IsIntegral.of_mem_of_fg\"], \"digest\": \"8a98e4beb3d604b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial-ring dimension does not bound subalgebra dimension; finite-type trdeg finiteness and domain tower identities do not supply the Laurent-component reduction. Reuse the existing general Tag 0BAG node for the last step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Subalgebra\"",
+   "results": "{\"t\": \"2026-10-24T08:28:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"ringKrullDim\\\", \\\"Subalgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial-ring dimension does not bound subalgebra dimension; finite-type trdeg finiteness and domain tower identities do not supply the Laurent-component reduction. Reuse the existing general Tag 0BAG node for the last step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of a finite type R subalgebra of R[t,t inverse] is at most dimension R plus one",
+   "results": "{\"t\": \"2026-10-24T08:28:19Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension of a finite type R subalgebra of R[t,t inverse] is at most dimension R plus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Polynomial.ringKrullDim_le\", \"Ring.KrullDimLE\", \"ringKrullDim_succ_le_ringKrullDim_powerseries\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"instKrullDimLEOfNatNat\", \"FiniteRingKrullDim\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\"], \"digest\": \"fc3cc2e26821cb1c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial-ring dimension does not bound subalgebra dimension; finite-type trdeg finiteness and domain tower identities do not supply the Laurent-component reduction. Reuse the existing general Tag 0BAG node for the last step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite type algebra whose generic component fraction fields have transcendence degree at most one has dimension at most base dimension plus one",
+   "results": "{\"t\": \"2026-10-24T08:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"a finite type algebra whose generic component fraction fields have transcendence degree at most one has dimension at most base dimension plus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"trdeg_lt_aleph0\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"lift_trdeg_add_le\", \"trdeg_add_le\", \"Algebra.IsAlgebraic.trdeg_le_cardinalMk\", \"lift_trdeg_add_eq\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsAlgebraic.lift_rank_of_isFractionRing\"], \"digest\": \"60a8be73fc506505\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial-ring dimension does not bound subalgebra dimension; finite-type trdeg finiteness and domain tower identities do not supply the Laurent-component reduction. Reuse the existing general Tag 0BAG node for the last step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-associated-graded-local-dimension",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "ILO III Corollary 5.4(i), proof pp.42–43, the dimension comparison with the normal cone used in III Proposition 6.2, final boundary-intersection paragraph pp.44–45; algebraic upper bound for the extended Rees deformation.",
+   "via": [
+    "lem-per-associated-graded-local-dimension",
+    "lem-per-marked-finite-diagram-approximation",
+    "lem-per-uniformization-complete-local-descent",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-laurent-subalgebra-dimension-bound",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote the coefficient kernels, nilpotent finite-coefficient intersection argument, minimal-prime selection, compatible fraction embeddings and one-variable generic transcendence bound. Reused the existing algebraic-adjoin cardinal bound and general Stacks 0BAG dimension bound; created only the exact Mathlib minimal-prime intersection leaf. No reducedness or catenarity is used.",
+  "blueprint": "ILO III Corollary 5.4(i), pp.42–43, normal-cone dimension comparison, used in III Proposition 6.2 as recorded in the ancestor chain of lem-per-artin-gabber-affine-curve; algebraic upper bound for the extended Rees deformation. Latest ancestor statement and proof read; this node is a generic algebra tool below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-generic-residue-transcendence-dimension-bound",
+    "why": "General Stacks 0BAG dimension inequality is used only after the explicit generic Laurent-component bound; this is generic dimension theory, not replacement of the Fourier/perverse unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-generic-residue-transcendence-dimension-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-70b71d1b9",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-70b71d1b9 (reviewer sub-agent of L); spot-checked: Read the item, its six steps, the new node and every cited statement; the statement is unchanged and true by Stacks 0BAG (morphisms.tex l.13814). Tested on small cases: R=k; B=R; nonreduced R=Z/p^2 with B=R[t]; R=k[[x]]. Steps 1–6 checked. Coefficient reduction rho_i into F_i(t), K_i is prime and K_i∩R=p_i. Minimal primes of B are among the K_i (pigeonhole nilpotency plus prime avoidance). Frac(B/q) embeds into F_i(t) compatibly with F_i, and trdeg ≤1 via lem-sfb-algebraic-adjoin-transcendence-bound (Q(t)Z−P(t)). The scheme translation uses 00ES and the residue-field nodes, and 0BAG is applied with n=1. All hypotheses are verified. The new node lem-per-nilradical-minimal-prime-intersection is true and self-contained. Its Mathlib leaf Ideal.sInf_minimalPrimes (MinimalPrime/Basic.lean:116, read l.104–126) is an exact specialization at I=0. No duplicate in the DAG, and it does not restate the item. FIX: step 2 said 'b is nilpotent; b=0 is immediate', which is false read literally for nonreduced R. Rewrote it as the degenerate M=1 case and made 'nilpotents lie in every prime' explicit. Only the step-2 text changed, in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-laurent-subalgebra-dimension-bound.json. Batch-5 flag (lem-sfb-generic-residue-transcendence-dimension-bound → lem-trf-local-dimension-formula, Stacks 02JU): this is generic dimension theory, which neither the trace formula nor Poincaré duality gives, so accepted. tool_use of the general 0BAG node accepted. Not a re-split: the base proof was empty.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LaurentSubalgebraDimensionBound",
+  "declaration": "LaurentPolynomial.ringKrullDim_subalgebra_le",
+  "file": "lean/Sheaf/RingTheory/LaurentSubalgebraDimensionBound.lean",
+  "statement": "theorem ringKrullDim_subalgebra_le (R : Type u) [CommRing R] [Nontrivial R] [IsNoetherianRing R] (d : ℕ) (hd : ringKrullDim R = (d : WithBot ℕ∞)) (B : Subalgebra R (LaurentPolynomial R)) (hB : (algebraMap R B).FiniteType) : ringKrullDim B ≤ ((d + 1 : ℕ) : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-904eef8c1",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Only the lean record changed vs live. Each hypothesis (Nontrivial, IsNoetherianRing, ringKrullDim R = d, Subalgebra R (LaurentPolynomial R), (algebraMap R B).FiniteType) and the conclusion ringKrullDim B ≤ d+1 match the node via the recorded dep declarations, with no extra assumptions. True by Stacks 0BAG (generic trdeg ≤ 1); edge cases d=0 (nonreduced), B=⊥/⊤ and zero ring checked. No H4 duplicate; sorry only; docstrings carry the source, blueprint and six steps; statement verbatim; proof-plan imports exist (Mathlib and side-live WeilConjectures); report sections present. No fixes."
+ }
+}

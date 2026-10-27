@@ -1,0 +1,273 @@
+{
+ "id": "lem-sf-weil-geometric-hom-constructibility",
+ "kind": "statement",
+ "title": "Geometric cohomology criterion and internal-Hom finiteness for native Weil complexes",
+ "statement": "Fix a finite field $k_0$, its algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $X_0$ be separated of finite type over $k_0$, put $X=X_0\\times_{k_0}k$ and let $g$ be geometric Frobenius [def-weil-frobenius-detailed]. On $X_{\\mathrm{proet}}$ put $R_X=p_X^*\\underline\\Omega$ for the finite-subextension-valued coefficient ring [sk-def-sfb-qlbar-condensed, sk-def-sfb-pulled-back-coefficients], and $\\mathcal A_X=\\operatorname{Mod}(R_X)$ [def-weil-sheaf-of-modules-category]. Write $\\mathcal B_X=\\mathcal A_X^{g^*}$ for sheaves with invertible Frobenius structure [def-weil-endofunctor-fixed-pair-category]. Let $U:D(\\mathcal B_X)\\to D(\\mathcal A_X)$ be termwise forgetting Frobenius in the ordinary derived categories [def-weil-abstract-derived-category, lem-sf-weil-native-closed-forgetful]. Let $\\mathrm{WC}(X_0)\\subset D(\\mathcal B_X)$ be the full subcategory whose cohomology vanishes outside a finite interval and whose underlying cohomology modules admit a finite locally closed constructible stratification with pro-etale locally finite free restrictions, using the native module presentation of [def-sf-native-weil-derived-framework] and its comparison [lem-sf-weil-verdier-module-constructibility-comparison]. Let $\\Dbc(X,\\Omega)$ and $\\Dctf(X,\\Omega)$ have the finite-scalar-local-model and finite-Tor-amplitude meanings of [sk-def-sfb-constructible], and use the ambient relative derived sheaf internal Hom of [sk-def-sfb-derived-tensor-hom].\n\nFor every $M\\in D(\\mathcal B_X)$, one has $M\\in\\mathrm{WC}(X_0)$ if and only if $UM\\in\\Dbc(X,\\Omega)$. This criterion preserves and reflects each finite cohomological support interval. For every $K,L\\in\\mathrm{WC}(X_0)$, both $UK$ and $UL$ belong to $\\Dctf(X,\\Omega)$ and\n$$R\\mathcal Hom_{R_X}(UK,UL)\\in\\Dctf(X,\\Omega)\\subset\\Dbc(X,\\Omega).$$\nThe latter conclusion includes bounded cohomology and constructibility for arbitrary such $K,L$; no lissity or site-perfectness of $K$ is imposed. It concerns geometric relative sheaf Hom and makes no assertion about Frobenius-invariant global Hom groups.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph: old preservation proof steps 2-3, derived forgetful cohomology criterion and geometric internal-Hom finiteness. Read also sk-lem-coefficient-heart/_section.md opening equality Dctf=Dbc and sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.md and .proof.md. Agent-formulated derived-sheaf specialization for arbitrary two Weil complexes."
+ },
+ "stmt_deps": [
+  "def-weil-frobenius-detailed",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "lem-sf-weil-native-closed-forgetful",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-weil-verdier-module-constructibility-comparison",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Apply separated finite-type base change to $X_0\\to\\operatorname{Spec}k_0$ along $\\operatorname{Spec}k\\to\\operatorname{Spec}k_0$. Thus $X$ is separated of finite type over the field $k$, so it is a standing scheme for the geometric constructibility results below. The algebraic extension $k/k_0$ has the same positive characteristic, different from $\\ell$.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KU, schemes-lemma-separated-permanence (3); morphisms.tex Tag 01T4, morphisms-lemma-base-change-finite-type"
+   }
+  },
+  {
+   "text": "Let U be the abelian forgetful functor from invertible Frobenius structures and let F be native scalar-forgetting followed by transport along nativeModuleCoefficientIso. The native module comparison supplies an equivalence whose functor is F followed by the existing sectionwise presentation. Its faithfulness and that of the presentation make F faithful; U is faithful as well. Exactness of U and F and the exact-functor homology comparison identify H^n of the displayed composite derived functor with F(U(H^n M)). The sectionwise equivalence unit and the constructibility clause of the native comparison identify native constructible sheaves with finite constant scalar models. Isomorphism invariance follows through the adic constructibility predicate comparison. Apply this degreewise and use preservation and reflection of boundedness by faithful exact functors to prove the Weil-complex criterion. For each prescribed interval, apply the same homology isomorphism: forward vanishing follows by preservation of zero, and reverse vanishing by faithfulness applied to the identity morphism. This works also for reversed or empty support intervals.",
+   "uses": [
+    "lem-sf-weil-verdier-module-constructibility-comparison",
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Internal-Hom paragraph, native derived specialization: cohomology criterion via the two existing comparison interfaces"
+   }
+  },
+  {
+   "text": "For $K,L\\in\\mathrm{WC}(X_0)$, step 2 gives $UK,UL\\in\\Dbc(X,\\Omega)$. The field-coefficient equality $\\Dctf=\\Dbc$ in the constructible-heart statement applies with $\\Lambda=\\Omega=\\Qlb$. Hence $UK,UL\\in\\Dctf(X,\\Omega)$; this is finite Tor amplitude of the complexes, not a claim of site-perfectness.",
+   "uses": [
+    "sk-lem-coefficient-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/_section.md",
+    "place": "Opening sentence, field stages: Dctf=Dbc"
+   }
+  },
+  {
+   "text": "For $K,L\\in\\mathrm{WC}(X_0)$, step 2 gives $UK,UL\\in\\Dbc(X,\\Omega)$. A field is Noetherian, so by step 1 and [lem-weil-pbc-finite-type-over-noetherian] the scheme $X$ is Noetherian. Hence [lem-sfb-adic-constructibility-predicate-comparison], for the finite-subextension-valued ring $\\Omega$ of [sk-def-sfb-qlbar-condensed], identifies $\\Dbc(X,\\Omega)$ of [sk-def-sfb-constructible] with the bounded constructible subcategory of [sk-def-sfb-bounded-constructible], as object properties of the same derived category. So $UK,UL$ are bounded constructible in the latter sense. The coefficient $\\underline{\\Qlb}$ case of [lem-sfb-dc-hom-small-coefficients] is this same finite-subextension ring, and step 1 supplies its scheme hypothesis. It shows that the ambient relative internal Hom $R\\mathcal Hom_{R_X}(UK,UL)$ of [sk-def-sfb-derived-tensor-hom] is bounded constructible. The same comparison returns it to $\\Dbc(X,\\Omega)$. The field equality $\\Dctf=\\Dbc$ of [sk-lem-coefficient-heart] for $\\Lambda=\\Qlb$ places it in $\\Dctf(X,\\Omega)$, a full subcategory of $\\Dbc(X,\\Omega)$ by definition. Both arguments are arbitrary; no lissity or site-perfectness of $K$ is used. The admissible-coefficient internal-Hom stability theorem is not applied: its $\\Qlb$ is the full continuous-map ring $C(-,\\Qlb)$ of the localizing-closure convention, a different condensed ring.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-dc-hom-small-coefficients",
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-lem-coefficient-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.md",
+    "place": "statement, case $\\underline{\\Qlb}$ of [sk-def-sfb-qlbar-condensed]; with sk-lem-coefficient-heart/_section.md opening equality Dctf=Dbc"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sf-weil-verdier-module-constructibility-comparison",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "sk-def-sfb-constructible",
+  "sk-lem-coefficient-heart",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-bounded-constructible",
+  "lem-sfb-dc-hom-small-coefficients",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "T8: direct degreewise assembly from the native module equivalence, exact faithful abelian functors and their standard derived homology comparison; field-coefficient heart equality; adic constructibility predicate comparison; existing class-indexed internal-Hom closure theorem, in its finite-subextension algebraic-closure case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Dctf|constructible.*[Hh]om|[Hh]om.*constructible|WeilComplex",
+   "results": "Read returned hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Generic derived category/cohomology/condensed tools only; no geometric constructible internal-Hom finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For constructible bounded complexes on a finite type scheme over a finite field the geometric derived internal Hom over condensed Qbar_l remains constructible and bounded",
+   "results": "Read returned hits: LightCondensed.ihomPoints, HomologicalComplex.locallySmall, DerivedCategory, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.isGrothendieckAbelian, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, instHasLimitsOfShapeCondensed, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat. Generic derived category/cohomology/condensed tools only; no geometric constructible internal-Hom finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"internalHom\"",
+   "results": "Read returned hits: . Generic derived category/cohomology/condensed tools only; no geometric constructible internal-Hom finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom between underlying geometric complexes of bounded constructible Frobenius equivariant pro etale sheaves over algebraic closure of Q_l has bounded constructible cohomology",
+   "results": "Read returned hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.ofSheafLightProfinite, CategoryTheory.Sheaf.cohomologyPresheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor. Generic derived category/cohomology/condensed tools only; no geometric constructible internal-Hom finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onstructible|[Aa]dic|[Pp]ro[Ee]tale|[Tt]or[Aa]mplitude",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Scheme.lean. Generic derived category/cohomology/condensed tools only; no geometric constructible internal-Hom finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible l adic complexes have finite Tor amplitude and their relative derived sheaf Hom is bounded constructible after forgetting a Frobenius action",
+   "results": "Read returned hits: localCohomology.diagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, CondensedMod.IsSolid, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE. Generic derived category/cohomology/condensed tools only; no geometric constructible internal-Hom finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived forgetful functor from Frobenius equivariant sheaves detects bounded constructible cohomology and geometric internal Hom finiteness over condensed algebraic Q_l",
+   "results": "Read returned hits: LightCondMod.instReflectsEpimorphismsLightCondSetForget, SheafOfModules.forget, Condensed.forget, LightCondensed.forget, PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf, SheafOfModules.fullyFaithfulForget, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace. Generic derived category/cohomology/condensed tools only; no geometric constructible internal-Hom finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Dctf|WeilComplex|constructible.*[Hh]om|[Hh]om.*constructible",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic condensed-module closed structure, derived categories or constructible subsets do not state this native Weil cohomology criterion and geometric Hom finiteness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative derived internal Hom between bounded constructible l adic complexes is bounded constructible with finite Tor amplitude",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.IsGrothendieckAbelian.hasExt, HomologicalComplex.instHasFiniteLimits, CategoryTheory.Functor.rightDerivedToHomotopyCategory, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.hasExt_of_hasDerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic condensed-module closed structure, derived categories or constructible subsets do not state this native Weil cohomology criterion and geometric Hom finiteness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"constructible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic condensed-module closed structure, derived categories or constructible subsets do not state this native Weil cohomology criterion and geometric Hom finiteness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For native Frobenius equivariant derived module sheaves, forgetting Frobenius detects bounded constructibility and geometric relative derived internal Hom is constructible",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: generic condensed-module closed structure, derived categories or constructible subsets do not state this native Weil cohomology criterion and geometric Hom finiteness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible proetale complexes over algebraic Q_l have finite Tor dimension and their internal derived sheaf Hom preserves bounded constructibility",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, Condensed.profiniteSolid, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: generic condensed-module closed structure, derived categories or constructible subsets do not state this native Weil cohomology criterion and geometric Hom finiteness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Internal-Hom paragraph: old preservation proof steps 2-3, derived forgetful cohomology criterion and geometric internal-Hom finiteness. Read also sk-lem-coefficient-heart/_section.md opening equality Dctf=Dbc and sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.md and .proof.md. Agent-formulated derived-sheaf specialization for arbitrary two Weil complexes.",
+   "via": [
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-geometric-hom-constructibility",
+  "worker": "stage1",
+  "summary": "Q63 retains the statement and gives a four-step assembly using existing nodes only: scheme base change, degreewise cohomology and constructibility comparison, field-coefficient finite Tor amplitude, and bounded-constructible internal-Hom stability for the finite-subextension Qlbar ring (maintainer FIX: step 4 re-pointed from det-thm-sf-ctf-stability-internal-hom, whose Qlbar is C(-,Qlbar) of sk-def-localizing-closure, to lem-sfb-dc-hom-preserves with lem-sfb-adic-constructibility-predicate-comparison). No site-perfectness or fixed-pairs-in-derived-category replacement is used. No new nodes.",
+  "blueprint": "Realizes the geometric constructibility prerequisite of lem-fix-weil-operations internal-Hom paragraph and the old preservation steps 2-3 named in source.place. The field finite-Tor step is the opening equality of sk-lem-coefficient-heart; the arbitrary-two-complex Hom clause is the Qlbar case of lem-sfb-dc-hom-preserves, transported by lem-sfb-adic-constructibility-predicate-comparison. blueprint_refs.py ancestor returns None for this maintainer-seeded ancestry, retained as null.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-coefficient-heart",
+    "why": "The existing field-coefficient equality Dctf=Dbc supplies finite Tor amplitude; this generic coefficient tool preserves the unit duality route."
+   },
+   {
+    "node": "lem-sfb-dc-hom-preserves",
+    "why": "Bounded constructibility of the ambient internal Hom of two bounded constructible complexes over the finite-subextension Qlbar ring; the biduality unit does not reprove this coefficient finiteness result."
+   },
+   {
+    "node": "lem-sfb-adic-constructibility-predicate-comparison",
+    "why": "Identifies the local-finite-presentation Dcons of lem-sfb-dc-hom-preserves with the finite-constant-local-model Dbc of the statement for finite-subextension Qlbar on Noetherian X; a coefficient convention tool, no unit node gives it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Mathlib leaf: X of finite type over a field is Noetherian, the hypothesis of the predicate comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-coefficient-heart",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-0203f27f8",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-0203f27f8 (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, the blueprint sources (the lem-fix-weil-operations internal-Hom paragraph, the coefficient-heart opening and the lem-sfb-dc-hom-preserves statement) and the unit. Statement and stmt_deps are byte-identical to the Q03 02eeff96 seed. There is no repair note, and live still has the item unsplit. Step 1 is correct: lem-pod-separated-finite-type-base-change (a Mathlib leaf), and char p != l is elementary. Step 2 is correct: closed-forgetful makes U exact and conservative and makes it commute with cohomology; the module comparison gives native locally-free-on-strata <=> finite constant local model, on the same strata and cover, for separated finite-type T over k; the zero pair is zero; quantifying over degrees gives both directions and the interval claim. Step 3 is correct: sk-lem-coefficient-heart states Dctf=Dbc for the finite-subextension Qlbar and proves it via det-def-localizing-closure-ctf-equals-bc. Step 4 was wrong (C4/E4, wrong coefficient object). It applied det-thm-sf-ctf-stability-internal-hom, whose admissible Qlbar comes from sk-def-localizing-closure, i.e. the full continuous-map ring C(-,Qlbar) of sk-def-sfb-condensed-ring. It then claimed that the item's finite-subextension R_X of sk-def-sfb-qlbar-condensed is among those coefficients; that ring is a proper subsheaf, and no node identifies the two. FIX: step 4 now cites lem-sfb-dc-hom-preserves, which is stated for this ring and the dc-setting: RHom of bounded constructible complexes is bounded constructible, in the lfp sense. It also cites lem-sfb-adic-constructibility-predicate-comparison: for Noetherian X and the finite-subextension Qlbar, the lfp Dcons equals the constant-model Dbc, used in both directions. X is Noetherian by lem-weil-pbc-finite-type-over-noetherian. The step adds sk-lem-coefficient-heart, Dctf=Dbc, to conclude RHom is in Dctf, a subcategory of Dbc. proof_deps, split_report.summary, split_report.blueprint, split_report.tool_uses (det-thm replaced by the three new tool uses) and proof_origin.place are updated. Checks: tools/review_split.py PASS on a patched /tmp copy; the item is in no cited closure (snapshot and live); the cited statements are identical in live; no SGA. Batch-5: the flagged det-thm citation is removed. The replacement reaches the same lem-pod-adic-limit-finite-modules through lem-sfb-dc-hom-small-coefficients. That node is pure algebra on finitely generated O_E-modules, not part of the trace formula or of Poincare duality, so I accept it. The lem-pod-etale-stalk-tensor-scalar paths, via coefficient-heart and the predicate comparison, are generic stalk algebra and also accepted. No new nodes, nothing dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilGeometricHomConstructibility",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.weil_geometric_hom_constructibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeGeometricForget",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.weil_geometric_hom_constructibility"
+  ],
+  "file": "lean/Sheaf/Paper/WeilGeometricHomConstructibility.lean",
+  "statement": "theorem weil_geometric_hom_constructibility (k₀ : Type u) [Field k₀] [Finite k₀] (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k₀ ≠ ℓ)] (X₀ : Scheme.{u}) [X₀.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X₀ ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X₀ ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X₀ ↘ Spec (CommRingCat.of k₀))] : (∀ M : DerivedCategory (ProEtaleWeilSheaf k₀ ℓ X₀), WeilComplex.objectProperty k₀ ℓ X₀ M ↔ ProEtale.constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber ((nativeGeometricForget k₀ ℓ X₀).obj M)) ∧ (∀ (M : DerivedCategory (ProEtaleWeilSheaf k₀ ℓ X₀)) (a b : ℤ), (∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor _ n).obj M)) ↔ ∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor _ n).obj ((nativeGeometricForget k₀ ℓ X₀).obj M))) ∧ (∀ K L : WeilComplex k₀ ℓ X₀, DerivedCategory.finiteTorAmplitude _ ((nativeGeometricForget k₀ ℓ X₀).obj K.obj) ∧ DerivedCategory.finiteTorAmplitude _ ((nativeGeometricForget k₀ ℓ X₀).obj L.obj) ∧ (ProEtale.constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber ⊓ DerivedCategory.finiteTorAmplitude _) (((ProEtale.CondensedRing.derivedHom (Profinite.padicAlgClRingObj ℓ) (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber).obj (op ((nativeGeometricForget k₀ ℓ X₀).obj K.obj))).obj ((nativeGeometricForget k₀ ℓ X₀).obj L.obj)))",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical native forgetful functor is followed by forgetAb and restriction of the action along nativeModuleCoefficientIso, then ordinary derived localization. This is the internal-module presentation of the recorded ordinary sectionwise comparison. The theorem states the Dbc criterion, every fixed cohomological support interval in both directions, finite Tor amplitude of both inputs, and Dctf membership of ambient geometric relative derived Hom. No lissity or site-perfectness hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9e148bb6",
+  "group": "NG",
+  "result": "pass",
+  "note": "Clause-by-clause match: finite field k0, prime l != char via Fact, X0 separated finite type (IsSeparated+LocallyOfFiniteType+QuasiCompact), no extra hypotheses. R_X = condensedRingObj(padicAlgClRingObj l) on the geometric fibre (finite-subextension ring, not C(-,Qlbar)); D(B_X) is the native IsoAlgebra derived category; U = recorded nativeForget composed with (forgetAb then Mod.comap of the recorded, normalization-pinned nativeModuleCoefficientIso).mapDerivedCategory, i.e. the dependency's nativeToOrdinaryModules before its sectionwise equivalence; real data, no arbitrary map. (1) for all M: WeilComplex.objectProperty M iff constantModelBoundedConstructible (U M). (2) for all M, a, b: support outside [a,b] preserved and reflected. (3) UK, UL have finiteTorAmplitude (Dbc from clause 1, so Dctf); derivedHom(UK,UL) satisfies Dbc inf finiteTorAmplitude, exactly the property defining the recorded ConstantModelConstructibleFiniteTor. lean.statement verbatim; dependency nodes equal live; item not landed; only sorry; source and blueprint docstrings; worker report and second-reading sections present. Advisory: NativeEncoding.realization (node outside stmt_deps) is a parallel composite to be identified later. No compile rerun (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261025T013927-L-4039957",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

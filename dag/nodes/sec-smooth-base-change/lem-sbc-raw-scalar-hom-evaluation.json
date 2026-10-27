@@ -15,12 +15,11 @@
  ],
  "proof": [
   {
-   "text": "Unfold rawModuleAbelianHomMap. Its additive homomorphism is derived forgetting followed by right composition with the coefficient factor and left composition with the source factor. Evaluate AddCommGrpCat.ofHom and the two additive compositions. The canonical named factors have these exact bodies, so the equality is definitional (rfl). No coherence, invertibility or restriction on q beyond q:ℕ is used; zero classes, zero sheaves, identity maps and degree zero are included. Present raw class inputs and outputs at their native derived Hom types using the concrete identity functions in def-sbc-raw-class-native-morphisms. These return the input element itself; unfolding their identity bodies makes no mathematical change.",
+   "text": "Unfold rawModuleAbelianHomMap. Its additive homomorphism is derived forgetting followed by right composition with the coefficient factor and left composition with the source factor. Evaluate AddCommGrpCat.ofHom and the two additive compositions. The canonical named factors have these exact bodies, so the equality is definitional (rfl). No coherence, invertibility or restriction on q beyond q:ℕ is used; zero classes, zero sheaves, identity maps and degree zero are included.",
    "uses": [
     "def-sbc-raw-module-abelian-hom-map",
     "def-sbc-raw-scalar-source-factors",
-    "lem-sbc-raw-scalar-coefficient-square",
-    "def-sbc-raw-class-native-morphisms"
+    "lem-sbc-raw-scalar-coefficient-square"
    ],
    "elementary": true
   }
@@ -28,15 +27,14 @@
  "proof_deps": [
   "def-sbc-raw-module-abelian-hom-map",
   "def-sbc-raw-scalar-source-factors",
-  "lem-sbc-raw-scalar-coefficient-square",
-  "def-sbc-raw-class-native-morphisms"
+  "lem-sbc-raw-scalar-coefficient-square"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "V3",
-  "date": "2026-10-21",
-  "document": "Stacks Project; existing raw-map calculations with explicit native class values",
-  "place": "Tags 03FD, 03D7 and 03Q8; identity presentation of the same classes and unchanged categorical equations"
+  "group": "G2",
+  "date": "2026-10-25",
+  "document": "Stacks Project",
+  "place": "Tags 03FD and 03Q8; explicit additive-map evaluation in lem-sbc-raw-module-abelian-hom-map-naturality; existing canonical upstream proof in lean/WeilConjectures/AlgebraicGeometry/RawModuleScalarHomEvaluation.lean"
  },
  "mathlib_searches": [
   {
@@ -86,15 +84,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarHomEvaluation",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarHomEvaluation.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleScalarHomEvaluation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleScalarHomEvaluation.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleScalarHom_evaluate",
-  "statement": "theorem rawModuleScalarHom_evaluate\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A : Over W)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op A)) :\n    rawAbelianClassMorphism (A.hom ≫ k)\n      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U\n      (rawModuleAbelianHomMap Λ k G q U A z) =\n      scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U)\n        (RawModuleScalarComparison.freeAbelian S U)\n        (RawModuleScalarComparison.freeMap Λ S U) ≫\n      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map\n        (rawModuleClassMorphism Λ k G (q : ℤ) U A z) ≫\n        scalarCoefficientFactor Λ A.hom G (q : ℤ)",
+  "statement": "theorem rawModuleScalarHom_evaluate\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A : Over W)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op A)) :\n    rawModuleAbelianHomMap Λ k G q U A z =\n      scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U)\n        (RawModuleScalarComparison.freeAbelian S U)\n        (RawModuleScalarComparison.freeMap Λ S U) ≫\n      (moduleAbelianForget Λ A.left).mapDerivedCategoryPlus.map z ≫\n        scalarCoefficientFactor Λ A.hom G (q : ℤ)",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-21",
-  "note": "Presentation repair only: rawModuleClassMorphism and rawAbelianClassMorphism return their inputs at the definitionally equal derived Hom types. The mathematical statement, binders and degree conventions are unchanged."
+  "by": "G2",
+  "date": "2026-10-25",
+  "note": "Retire the unclaimed Sheaf duplicate and use the existing canonical upstream theorem. Unfolding the identity raw-class views, RawModuleScalarComparison.forget, moduleCoefficientFactorNative and the inverse comparison abbreviation recovers exactly the same categorical equation, with unchanged binders and hypotheses."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -107,16 +105,27 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-aa2a9",
-  "group": "V3",
-  "result": "fix",
-  "landing": "20261021T061739-L-1825145",
+  "reviewer": "C-9dbc6",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T060830-L-2376591",
   "kind": "interface",
-  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
+  "note": "independent cc review: 4 node lean.statement records vs WeilConjectures upstream declarations (verbatim); retired Sheaf statements vs upstream via identity views/abbrevs (derivedPullbackIso.inv = moduleAbelianDerivedUpperStarIso.hom); importer graph of the 5 withdrawn modules (chain-internal only); non-lean/proof node fields vs clone (identical)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "statement_change": {
   "date": "2026-10-21",
   "by": "V3 stage 2",

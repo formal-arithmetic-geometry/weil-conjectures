@@ -1,0 +1,242 @@
+{
+ "id": "lem-a1-nonconstant-curve-stalk-torsion-free",
+ "kind": "statement",
+ "title": "Nonconstant maps to integral curves give torsion-free stalk modules",
+ "statement": "Let $k$ be a field, let $Y$ be a curve over $k$ [def-pc-curve], so $Y$ is a separated integral scheme of finite type over $k$ and dimension one, and let $X$ be an integral scheme [def-pc-integral-scheme]. Let $f:X\\to Y$ be a morphism of schemes whose image contains at least two points. Write $\\eta_X,\\eta_Y$ for the generic points (the points whose closures are the whole schemes) [def-sc-generic-point]. Then $f(\\eta_X)=\\eta_Y$ and $f(X)$ is dense in $Y$. For every $x\\in X$, put $y=f(x)$, $A=\\mathcal O_{Y,y}$ and $B=\\mathcal O_{X,x}$ [def-weil-pbc-module-stalk], and let $\\varphi=f_x^\\sharp:A\\to B$ be the induced homomorphism [def-weil-locally-ringed-space-morphism]. The rings $A,B$ are integral domains, $\\varphi$ is injective, and $B$ is torsion free as an $A$-module for the action $a\\cdot b=\\varphi(a)b$: for every $a\\ne0$ and $b\\in B$, $\\varphi(a)b=0$ implies $b=0$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCK, lemma-flat, proof: nonconstant implies dominant and injective stalk maps, then torsion-freeness; morphisms.tex Tag 0CC1, lemma-dominant-between-integral, (2) implies (6). Extracts former steps 1–2,5 and the torsion argument in step 6 of lem-a1-nonconstant-normal-curve-map-flat."
+ },
+ "stmt_deps": [
+  "def-pc-curve",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [def-pc-curve] and [def-pc-integral-scheme], both $X$ and $Y$ are nonempty irreducible schemes. Their unique generic points exist by [lem-sc-scheme-sober]. The dimension in [def-pc-curve] is that of [def-pc-dimension], the supremum of the Krull dimensions of the local rings. By [lem-pc-scheme-dimension-local-rings], the topological Krull dimension of $Y$ is therefore one.",
+   "uses": [
+    "def-pc-curve",
+    "def-pc-integral-scheme",
+    "def-pc-dimension",
+    "lem-sc-scheme-sober",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof: generic-point assertion; properties.tex Tag 04MU, lemma-dimension, equality of (1) and (2)."
+   }
+  },
+  {
+   "text": "Put $z=f(\\eta_X)$. For every $x\\in X$, continuity of the underlying map in [def-weil-locally-ringed-space-morphism] gives $f(x)\\in\\overline{\\{z\\}}$, because $x\\in\\overline{\\{\\eta_X\\}}$. Suppose $z\\ne\\eta_Y$. Then $Z=\\overline{\\{z\\}}$ is a proper irreducible closed subset of $Y$, by uniqueness of generic points [lem-sc-scheme-sober]. If $w\\in Z$ and $w\\ne z$, the same uniqueness makes $\\overline{\\{w\\}}\\subsetneq Z$. Thus $\\overline{\\{w\\}}\\subsetneq Z\\subsetneq Y$ would be a chain of length two, contradicting Step 1 and [def-kun-topological-krull-dimension]. Hence $Z=\\{z\\}$ and $f(X)\\subseteq\\{z\\}$, contrary to the two-point image hypothesis. Therefore $f(\\eta_X)=\\eta_Y$. Since $\\eta_Y\\in f(X)$ and $\\overline{\\{\\eta_Y\\}}=Y$, the image is dense.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof: expand nonconstant implies dominant by the dimension-one chain argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-integral-scheme-stalks-in-function-field] to $X$ and $Y$. Their generic stalks $K_X=\\mathcal O_{X,\\eta_X}$ and $K_Y=\\mathcal O_{Y,\\eta_Y}$ are fields, and all their stalks are domains with injective maps $\\rho_x:\\mathcal O_{X,x}\\to K_X$ and $\\rho_y:\\mathcal O_{Y,y}\\to K_Y$ sending germs to generic germs. By Step 2, the generic stalk map of $f$ is a unital ring homomorphism $\\alpha:K_Y\\to K_X$ [def-weil-locally-ringed-space-morphism]. It is injective: if $c\\ne0$ had $\\alpha(c)=0$, then $1=\\alpha(cc^{-1})=0$ in the field $K_X$, a contradiction.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof, expanded through morphisms.tex Tag 0CC1, lemma-dominant-between-integral: generic stalk fields and their embeddings."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and $y=f(x)$. The square $\\rho_x\\circ f_x^\\sharp=\\alpha\\circ\\rho_y$ follows on each germ: represent $a\\in\\mathcal O_{Y,y}$ as $s_y$ for a section $s$ on a neighbourhood $W$ of $y$ [def-weil-pbc-module-stalk]. Its pullback is $t=f_W^\\sharp(s)$ on $f^{-1}W$ [def-weil-locally-ringed-space-morphism]. The left side sends $s_y$ first to $t_x$ and then to $t_{\\eta_X}$; the right side sends it first to $s_{\\eta_Y}$ and then to $t_{\\eta_X}$. Both generic points lie in these opens by [lem-sc-integral-scheme-stalks-in-function-field] and Step 2. The composite $\\alpha\\circ\\rho_y$ is injective, so $f_x^\\sharp$ is injective: equality of its values implies equality after composing with $\\rho_x$, and then equality of the original elements.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof; morphisms.tex Tag 0CC1, lemma-dominant-between-integral, (2) implies (6), expanded as the germ square."
+   }
+  },
+  {
+   "text": "Write $A=\\mathcal O_{Y,y}$, $B=\\mathcal O_{X,x}$ and $\\varphi=f_x^\\sharp$. Step 3 gives that $A$ and $B$ are domains, and Step 4 makes $\\varphi$ injective. For $a\\ne0$ in $A$, injectivity gives $\\varphi(a)\\ne0$. Thus $\\varphi(a)b=0$ in the domain $B$ forces $b=0$. With scalar action $a\\cdot b=\\varphi(a)b$, this is exactly the asserted torsion-free condition, for every $x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof: injectivity and the domain property imply torsion-freeness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-curve",
+  "def-pc-integral-scheme",
+  "def-pc-dimension",
+  "lem-sc-scheme-sober",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-weil-locally-ringed-space-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-generic-point",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCK, lemma-flat, proof, nonconstant/dominant/injective/torsion-free argument; morphisms.tex Tag 0CC1, lemma-dominant-between-integral, expanded through the existing integral-stalk function-field leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonconstant morphism from an integral scheme to an integral curve sends generic point to generic point and induces injective maps on every local ring, making the target stalk module torsion free",
+   "results": "{\"t\": \"2026-10-22T07:52:58Z\", \"tool\": \"leanfinder\", \"query\": \"A nonconstant morphism from an integral scheme to an integral curve sends generic point to generic point and induces injective maps on every local ring, making the target stalk module torsion free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.IsGermInjective\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"f41c6130247a1488\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField.lean:38–72 supplies fields and germ injections for one integral scheme only. AffineScheme.lean:843–851,999–1002 requires a separate zero-kernel proof; ClosedImmersion.lean:264–268 requires an open injective map. None deduces dominance from a two-point image in a curve or proves the stated stalk-module assertion in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkMap.*injective|injective.*stalkMap|nonconstant|IsTorsionFree",
+   "results": "{\"t\": \"2026-10-22T07:54:23Z\", \"tool\": \"grep\", \"query\": \"stalkMap.*injective|injective.*stalkMap|nonconstant|IsTorsionFree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"a7ea132ae24191c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField.lean:38–72 supplies fields and germ injections for one integral scheme only. AffineScheme.lean:843–851,999–1002 requires a separate zero-kernel proof; ClosedImmersion.lean:264–268 requires an open injective map. None deduces dominance from a two-point image in a curve or proves the stated stalk-module assertion in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsDominant, Function.Injective",
+   "results": "{\"t\": \"2026-10-22T07:54:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsDominant, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isDominant_of_of_appTop_injective\"], \"digest\": \"c58ff7f8198a0afa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField.lean:38–72 supplies fields and germ injections for one integral scheme only. AffineScheme.lean:843–851,999–1002 requires a separate zero-kernel proof; ClosedImmersion.lean:264–268 requires an open injective map. None deduces dominance from a two-point image in a curve or proves the stated stalk-module assertion in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonconstant morphism from an integral scheme to an integral curve induces injective stalk maps and torsion free modules",
+   "results": "{\"t\": \"2026-10-22T07:54:24Z\", \"tool\": \"leansearch\", \"query\": \"A nonconstant morphism from an integral scheme to an integral curve induces injective stalk maps and torsion free modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"AlgebraicGeometry.IsAffineOpen.stalkMap_injective\", \"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.stalkwise\"], \"digest\": \"c4cdb4aac73bfa78\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField.lean:38–72 supplies fields and germ injections for one integral scheme only. AffineScheme.lean:843–851,999–1002 requires a separate zero-kernel proof; ClosedImmersion.lean:264–268 requires an open injective map. None deduces dominance from a two-point image in a curve or proves the stated stalk-module assertion in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from an irreducible reduced scheme into a one dimensional integral scheme with at least two image points has dense image and injective homomorphisms of local rings",
+   "results": "{\"t\": \"2026-10-22T07:56:22Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from an irreducible reduced scheme into a one dimensional integral scheme with at least two image points has dense image and injective homomorphisms of local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\"], \"digest\": \"956ed88d1bc6c456\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField.lean:38–72 supplies fields and germ injections for one integral scheme only. AffineScheme.lean:843–851,999–1002 requires a separate zero-kernel proof; ClosedImmersion.lean:264–268 requires an open injective map. None deduces dominance from a two-point image in a curve or proves the stated stalk-module assertion in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkMap.*injective|injective.*stalkMap|nonconstant|IsTorsionFree",
+   "results": "{\"t\": \"2026-10-24T00:30:44Z\", \"tool\": \"grep\", \"query\": \"stalkMap.*injective|injective.*stalkMap|nonconstant|IsTorsionFree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"a7ea132ae24191c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read FunctionField.lean:51-95,163-179, AffineScheme.lean:843-851 and ClosedImmersion.lean:264-268. Germ injections are already an existing leaf; stalkMap_injective requires an additional zero-kernel argument, genericPoint_eq_of_isOpenImmersion assumes an open immersion, and no result supplies the full two-point-image assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from an integral scheme to an integral curve with at least two image points induces injective stalk homomorphisms and torsion free local rings",
+   "results": "{\"t\": \"2026-10-24T00:30:44Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from an integral scheme to an integral curve with at least two image points induces injective stalk homomorphisms and torsion free local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"AlgebraicGeometry.IsAffineOpen.stalkMap_injective\", \"AlgebraicGeometry.germ_injective_of_isIntegral\"], \"digest\": \"2c37623bcda82b70\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read FunctionField.lean:51-95,163-179, AffineScheme.lean:843-851 and ClosedImmersion.lean:264-268. Germ injections are already an existing leaf; stalkMap_injective requires an additional zero-kernel argument, genericPoint_eq_of_isOpenImmersion assumes an open immersion, and no result supplies the full two-point-image assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsDominant, Function.Injective",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsDominant, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isDominant_of_of_appTop_injective\"], \"digest\": \"c58ff7f8198a0afa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isDominant_of_of_appTop_injective (ClosedImmersion.lean:246) proves a converse from injectivity of global sections, with affine target and quasi-compact source; it does not prove this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonconstant morphism from an integral scheme to an integral curve has dense image and injective local ring maps, so its stalk modules are torsion free",
+   "results": "{\"t\": \"2026-10-24T00:30:47Z\", \"tool\": \"leanfinder\", \"query\": \"A nonconstant morphism from an integral scheme to an integral curve has dense image and injective local ring maps, so its stalk modules are torsion free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\"], \"digest\": \"6386fa82b6971650\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read FunctionField.lean:51-95,163-179, AffineScheme.lean:843-851 and ClosedImmersion.lean:264-268. Germ injections are already an existing leaf; stalkMap_injective requires an additional zero-kernel argument, genericPoint_eq_of_isOpenImmersion assumes an open immersion, and no result supplies the full two-point-image assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "germToFunctionField|stalkFunctionFieldAlgebra|IsDomain \\(X.presheaf.stalk|instance.*Field",
+   "results": "{\"t\": \"2026-10-24T00:31:45Z\", \"tool\": \"grep\", \"query\": \"germToFunctionField|stalkFunctionFieldAlgebra|IsDomain \\\\(X.presheaf.stalk|instance.*Field\", \"sub\": \"AlgebraicGeometry/FunctionField.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"18\", \"41\", \"49\", \"51\", \"65\"], \"digest\": \"24a43e99814a81ef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FunctionField.lean:51,55,65,81,163,178 gives generic fields and germ/stalk embeddings for one integral scheme, already represented by lem-sc-integral-scheme-stalks-in-function-field; it does not prove dominance or injectivity for this morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous scheme morphism to a one dimensional integral scheme whose image has two points sends generic point to generic point, and all stalk maps are injective",
+   "results": "{\"t\": \"2026-10-24T00:31:47Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous scheme morphism to a one dimensional integral scheme whose image has two points sends generic point to generic point, and all stalk maps are injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsGermInjective\", \"AlgebraicGeometry.IsPreimmersion\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\"], \"digest\": \"6780dcf81a107b91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read FunctionField.lean:51-95,163-179, AffineScheme.lean:843-851 and ClosedImmersion.lean:264-268. Germ injections are already an existing leaf; stalkMap_injective requires an additional zero-kernel argument, genericPoint_eq_of_isOpenImmersion assumes an open immersion, and no result supplies the full two-point-image assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-nonconstant-normal-curve-map-flat",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-curve",
+   "place": "Proof paragraph 3 of lem-a1-finite-map-curve, automatic flatness in the differential criterion, via lem-a1-nonzero-differential-generically-etale and Stacks 0CCK. Dominance, injectivity on stalks and torsion-freeness.",
+   "via": [
+    "lem-a1-nonconstant-normal-curve-map-flat",
+    "lem-a1-nonzero-differential-generically-etale"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-nonconstant-curve-stalk-torsion-free",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Expanded the dimension-one generic-point argument and the germ square proving injectivity, then deduced torsion-freeness by cancellation in a domain. Reused the existing integral-stalk function-field Mathlib leaf, sobriety leaf and dimension-comparison node; no new nodes are needed. Read the sources and all cited statements, checked hypotheses and edge cases, and recorded actual msearch responses.",
+  "blueprint": "Realizes the automatic-flatness input to paragraph 3 of lem-a1-finite-map-curve, via lem-a1-nonzero-differential-generically-etale and lem-a1-nonconstant-normal-curve-map-flat: Stacks 0CCK nonconstant implies dominant, injective stalk maps and torsion-freeness. Latest blueprint paragraph 3 proves generic etaleness using the nonzero differential; its underlying route is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic comparison between the local-ring dimension convention in def-pc-curve and topological dimension, needed for the length-two chain contradiction; the unit supplies no alternate dimension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-bab3bb1e3",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-bab3bb1e3 (reviewer sub-agent of L); spot-checked: I read the whole split: 5 steps, no new nodes, statement and stmt_deps unchanged. Sources: Stacks 0CCK curves.tex lemma-flat, proof lines 85-103, and 0CC1 morphisms.tex lemma-dominant-between-integral, all six clauses and the proof. The statement is true; the small cases checked are identity, Spec k(Y), constant map, Spec O_{Y,y} -> Y, a surface onto a curve factor and Frobenius. Step 2's dominance argument is correct: uniqueness of generic points gives a length-2 chain against topological dimension 1, so the image would be one point. Step 4's germ square needs eta_Y in W and eta_X in f^{-1}W; both hold, so the stalk maps are injective. Step 5 is cancellation in a domain. Every cited statement says what its step takes from it. The tool use of lem-pc-scheme-dimension-local-rings (generic dimension comparison, another unit) is accepted. The DAG duplicate search found nothing that states the item: lem-sfb-dominant-affine-germ-comparison and lem-trf-dominant-affine-chart-data have extra hypotheses. One fault, C1/C4: Step 1 used the local-ring-sup convention of def-pc-dimension without citing it. Fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-nonconstant-curve-stalk-torsion-free.json by adding def-pc-dimension to the Step 1 text, its uses and proof_deps. The report mentions a citations.json that is not on the branch; this is not a DAG fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.NonconstantCurveStalkTorsionFree",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.nonconstant_curve_stalk_torsion_free",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NonconstantCurveStalkTorsionFree.lean",
+  "statement": "theorem Scheme.Hom.nonconstant_curve_stalk_torsion_free {k : Type u} [Field k] {X Y : Scheme.{u}} [IsIntegral X] (sY : Y ⟶ Spec (.of k)) [IsIntegralCurve sY] (f : X ⟶ Y) (h_nonconstant : ∃ x₁ x₂ : X, f x₁ ≠ f x₂) : f (genericPoint X) = genericPoint Y ∧ DenseRange f ∧ ∀ x : X, IsDomain (Y.presheaf.stalk (f x)) ∧ IsDomain (X.presheaf.stalk x) ∧ Function.Injective (f.stalkMap x) ∧ ∀ (a : Y.presheaf.stalk (f x)) (b : X.presheaf.stalk x), a ≠ 0 → (f.stalkMap x) a * b = 0 → b = 0",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c18cd449b",
+  "group": "NV",
+  "result": "pass",
+  "note": "Only the item's lean record changed against live; the item is not landed by another group. The theorem's hypotheses (field k, IsIntegralCurve sY on Y, IsIntegral X, f : X ⟶ Y, ∃ x₁ x₂, f x₁ ≠ f x₂) and conclusions (f (genericPoint X) = genericPoint Y, DenseRange f, ∀ x: IsDomain of both stalks, Function.Injective (f.stalkMap x), a ≠ 0 → stalkMap a * b = 0 → b = 0) match the node clause for clause, with no extra assumptions. Scheme.Hom.stalkMap direction checked (Mathlib Scheme.lean:237). Universe sharing between k and the schemes is forced by Spec k. lean.statement is verbatim in the file. The only proof is sorry, there are no definitions, the docstrings carry the source place, blueprint tag and 5 proof steps, and the report has both required sections. No findings; no compile needed because no file was changed."
+ }
+}

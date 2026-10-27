@@ -21,115 +21,77 @@
  ],
  "proof": [
   {
-   "text": "Fix $P$. By [lem-pur-kflat-tensor-quasiiso-independent], $A\\mapsto Q(A\\otimes_R P)$ inverts all quasi-isomorphisms. Thus [lem-weil-pbc-localization-universal-property](1) gives a functor $T_P:D(R)\\to D(R)$ with $T_P(QA)=Q(A\\otimes_R P)$, up to its specified factorization isomorphism. On the full subcategory of K-flat complexes with flat terms, the normalized comparisons $c_{F,P}:Q(F\\otimes P)\\xrightarrow{\\sim}QF\\otimes^{\\mathbf L}QP$ are natural [def-coef-ringed-tensor-hom-model]. The equivalence $W^{-1}\\mathcal P_R\\simeq D(R)$ of [lem-weil-pbc-site-derived-tensor-descent], together with [lem-weil-pbc-localization-universal-property](2), extends this isomorphism uniquely to $T_P\\cong(-\\otimes^{\\mathbf L}QP)$. Denote its component by $c_{A,P}$. Concretely, choose a K-flat flat-term resolution $q:F\\to A$ using [lem-pc-kflat-resolution]. Then\n$$c_{A,P}=(Qq\\otimes^{\\mathbf L}1)\\circ c_{F,P}\\circ Q(q\\otimes1)^{-1}.$$\nBoth inverted maps are isomorphisms by the cited quasi-isomorphism-preservation result and localization. Uniqueness of the extension proves independence of $q$ and naturality in $A$. For a chain map $b:P\\to P'$ between the allowed second factors, naturality in $P$ on K-flat $F$ is part of the normalized comparison; faithfulness of restriction along the same equivalence gives the naturality square for every $A$.",
+   "text": "For fixed P, use the existing K-flat tensor quasi-isomorphism theorem to show that H(A)=Q(Tot(A,P)) inverts quasi-isomorphisms. The inclusion of all K-flat complexes followed by Q is a localization, as proved by the K-flat localization helper of the existing tensor-Hom adjunction module. Lift H along Q, and lift the fixed natural two-K-flat comparison through the fully faithful whiskering functor. Composing with the localization factorization gives a natural isomorphism H≅S.tensor(Q(-),QP). Its restriction equals the given T.iso because map_preimage cancels the factorization and its inverse.",
    "uses": [
     "lem-pur-kflat-tensor-quasiiso-independent",
     "lem-weil-pbc-localization-universal-property",
-    "def-coef-ringed-tensor-hom-model",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-kflat-resolution"
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-coef-ringed-tensor-hom-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YP (lemma-K-flat-quasi-isomorphism), 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and its preceding construction); agent comparison with the fixed normalized tensor."
-   }
+   "elementary": false
   },
   {
-   "text": "Construct $\\widetilde f$ on each summand $A^n\\otimes_R P^m$ by the bilinear map $(a,p)\\mapsto f^n(a)^m(p)$. This is compatible with restriction, so the sheafification defining the sheaf tensor and then the direct-sum universal property give a sheaf morphism in every total degree [def-pur-sheaf-tensor-product; def-pc-tensor-complex-sheaves]. The chain-map identity for $f$, with the differential of [def-pur-hom-complex], reads\n$$d_E(f(a)(p))=f(d_Aa)(p)+(-1)^n f(a)(d_Pp).$$\nThis is exactly the total-tensor chain-map identity. Hence these morphisms form $\\widetilde f:A\\otimes P\\to E$, with no additional sign in this order of factors. Each input tensor section is first mapped by the actual sheafification unit and then the actual total-summand inclusion; the formula specifies those generators, rather than asserting that every tensor-sheaf section is a global pure tensor.",
+   "text": "Naturality in A is the naturality of this isomorphism. To prove naturality in a map b:P→P′, choose a K-flat resolution q:F→A. The total tensor square commutes by functoriality. At F the desired equation is naturality of T.comparison. Apply first-variable naturality on its two sides, and cancel the invertible image of q tensor id_P. This does not require flatness or boundedness of A.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A90 (lemma-compose), underlying component calculation with the differentials of Section 0A8X (section-hom-complexes)."
-   }
-  },
-  {
-   "text": "The factor interchange on homogeneous sections is $s(a\\otimes p)=(-1)^{nm}p\\otimes a$ for $a\\in A^n$, $p\\in P^m$, extended by sheafification and direct sums [def-pur-sheaf-tensor-product; def-pc-tensor-complex-sheaves]. In $s\\,d(a\\otimes p)$ the coefficients of $p\\otimes d_Aa$ and $d_Pp\\otimes a$ are respectively $(-1)^{(n+1)m}$ and $(-1)^{n+n(m+1)}=(-1)^{nm}$. In $d\\,s(a\\otimes p)$ they are $(-1)^{nm+m}$ and $(-1)^{nm}$, respectively. Thus $s$ is a chain map; the reversed interchange is its inverse since $(-1)^{2nm}=1$. This proves the asserted interchange sign, and permits use of right-K-flat quasi-isomorphism preservation on either tensor side below.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), subsequent commutativity display and its sign convention; expanded direct calculation."
-   }
-  },
-  {
-   "text": "Let $u:E\\to I(E)$ be the fixed functorial K-injective augmentation [prop-pur-kinjective-resolutions-exist; def-coef-hom-representative-evaluation]. Since $E$ and $I(E)$ are K-injective, [lem-pur-rhom-well-defined] with first-variable identity gives a quasi-isomorphism $\\mathcal Hom(P,u)$. The localization factorization of [def-coef-hom-representative-evaluation] consequently identifies $Q\\mathcal Hom(P,E)$ with $H(QP,QE)$: first apply $Q\\mathcal Hom(P,u)$, then the inverse of $H(QP,QE)\\cong Q\\mathcal Hom(P,I(E))$. Write $h:QA\\to H(QP,QE)$ for the image of $Qf$ under this identification. This uses K-injectivity of $E$, not termwise injectivity of $E$; only its chosen replacement is required to have injective terms.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-coef-hom-representative-evaluation",
-    "lem-pur-rhom-well-defined"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A95 (lemma-RHom-well-defined) and Section 08J7 (section-internal-hom), construction with a chosen K-injective representative."
-   }
-  },
-  {
-   "text": "Let $\\tau$ denote inverse closed transposition from $\\operatorname{Hom}(QA,H(QP,QE))$ to $\\operatorname{Hom}(QA\\otimes^{\\mathbf L}QP,QE)$. Use the resolution $q:F\\to A$ of step 1 and the chain map $\\phi=\\mathcal Hom(P,u)\\circ f\\circ q:F\\to\\mathcal Hom(P,I(E))$. Both $F$ and $P$ are K-flat, so the normalization in [def-coef-ringed-tensor-hom-model] applies. Step 2 identifies its uncurried chain map with $u\\circ\\widetilde f\\circ(q\\otimes1)$, since both send $x\\otimes p$ to $u(f(qx)(p))$. With the fixed inverse localized augmentation of [def-coef-hom-representative-evaluation], normalization says\n$$\\tau(h\\circ Qq)\\circ c_{F,P}=Q(u)^{-1}\\circ Q(u\\circ\\widetilde f\\circ(q\\otimes1))=Q(\\widetilde f)\\circ Q(q\\otimes1).$$\nNaturality of the given adjunction gives $\\tau(h\\circ Qq)=\\tau(h)\\circ(Qq\\otimes^{\\mathbf L}1)$. Substitute $c_{A,P}\\circ Q(q\\otimes1)=(Qq\\otimes^{\\mathbf L}1)\\circ c_{F,P}$ from step 1. Cancel the isomorphism $Q(q\\otimes1)$ to obtain\n$$\\tau(h)\\circ c_{A,P}=Q(\\widetilde f).$$\nThis is the required representative formula for the fixed normalized derived adjunction; it does not introduce a new adjunction.",
-   "uses": [
-    "def-coef-ringed-tensor-hom-model",
-    "def-coef-hom-representative-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), proof; agent extension of the fixed two-K-flat normalization by a resolution and cancellation."
-   }
-  },
-  {
-   "text": "For chain maps $a:A'\\to A$, $b:P'\\to P$ and $e:E\\to E'$ with $P',P$ K-flat with flat terms and $E,E'$ K-injective, put $f'=\\mathcal Hom(b,e)\\circ f\\circ a$. On a homogeneous generator,\n$$\\widetilde {f'}(x\\otimes y)=e(f(a(x))(b(y)))=(e\\circ\\widetilde f\\circ(a\\otimes b))(x\\otimes y).$$\nThus the two chain maps are equal by the tensor and direct-sum universal properties [def-pur-sheaf-tensor-product; def-pc-tensor-complex-sheaves; def-pur-hom-complex]. The fixed augmentation is natural [prop-pur-kinjective-resolutions-exist], the Hom localization factorization is the fixed one [def-coef-hom-representative-evaluation], and $c$ is natural by step 1. Localizing this equality and using step 5 proves simultaneous naturality of the transpose formula. No sign appears for $a,b,e$, which have degree zero.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-coef-hom-representative-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A90 (lemma-compose), functoriality; Tag 08J9 (lemma-internal-hom), functoriality after localization."
-   }
-  },
-  {
-   "text": "For completeness all representative quasi-isomorphisms used in step 6 become invertible on the indicated models. In $A$ this follows directly from [lem-pur-kflat-tensor-quasiiso-independent]. For a quasi-isomorphism $b:P'\\to P$, fix $q:F\\to A$ as in step 1. In the square with top $F\\otimes P'\\xrightarrow{1\\otimes b}F\\otimes P$ and bottom $A\\otimes P'\\xrightarrow{1\\otimes b}A\\otimes P$, both vertical maps $q\\otimes1$ are quasi-isomorphisms by that same lemma. The top map is also one: conjugate it by the signed symmetries of step 3 to $b\\otimes1_F$, and apply the lemma using K-flatness of $F$. After localization the bottom map is a composite of three isomorphisms. Thus the tensor model inverts $b$ without K-flatness of $A$. Quasi-isomorphisms between the allowed $P$ representatives, and between the K-injective $E$ representatives, induce quasi-isomorphisms on the Hom side by [lem-pur-rhom-well-defined]. The equalities of step 6 therefore remain equalities after solving for any of these inverse isomorphisms. Independence of a chosen $q$ is already part of step 1. None of these arguments truncates $A$ or requires its terms to be flat; the total degrees use direct sums and the Hom degrees use products exactly as defined.",
-   "uses": [
+    "lem-pc-kflat-resolution",
     "lem-pur-kflat-tensor-quasiiso-independent",
-    "lem-pur-rhom-well-defined"
+    "def-coef-ringed-tensor-hom-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side), proof square using 06YP; Tag 0A95 (lemma-RHom-well-defined)."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved chainEquiv of the ringed derived tensor-Hom adjunction module. Its inverse constructs the ordinary chain uncurrying map for arbitrary complexes, with its proved unsigned pure-section formula and its simultaneous chain naturality. The existing complexConstraints theorem gives the actual Koszul sign on factor interchange.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-tensor-complex-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For K-flat A, apply the existing coefficientTensorCurry_normalize theorem to chainEquiv inverse and its pure-section formula. Multiply by T.iso.hom and cancel T.iso.inv. This proves exactly the fixed transpose equation, before any resolution of A.",
+   "uses": [
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary A choose a K-flat resolution q:F→A. First-variable naturality of the comparison, left naturality of the given adjunction Hom equivalence, and chain uncurrying naturality identify the two sides after precomposition by Q(q tensor id_P). Apply the preceding K-flat equation at F and cancel this invertible map. The augmentation in this formula is definitionally the same fixed K-injective augmentation as in the normalization theorem.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For quasi-isomorphisms in both tensor representatives, comparison naturality expresses the localized tensor map as conjugate to S.tensor applied to two localized isomorphisms; hence it is invertible. The independent-universe Hom quasi-isomorphism theorem gives Hom representative inversion. Apply it also to the identity of P and the fixed augmentation E→I(E), whose source and target are K-injective, to prove that the Hom comparison is invertible. Assemble these results in the original eleven-field structure.",
+   "uses": [
+    "lem-pur-rhom-well-defined-universes",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-coef-hom-representative-evaluation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pur-kflat-tensor-quasiiso-independent",
   "lem-weil-pbc-localization-universal-property",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
   "def-coef-ringed-tensor-hom-model",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-pc-kflat-resolution",
-  "def-pur-sheaf-tensor-product",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-hom-complex",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-pur-rhom-well-defined-universes",
   "prop-pur-kinjective-resolutions-exist",
-  "def-coef-hom-representative-evaluation",
-  "lem-pur-rhom-well-defined"
+  "def-coef-hom-representative-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YP, 06YS, 06YT, 06YU, 0A90, 0A95 and 08J9; representative-normalized refinement and explicit chain calculations."
+  "place": "Tags 06YP, 06YS, 06YT, 06YU, 0A90, 0A95, 08J9; formal extension and cancellation using existing proved chain currying and normalization APIs, A8."
  },
  "mathlib_searches": [
   {
@@ -268,9 +230,7 @@
   "lem-pc-kflat-resolution",
   "lem-pur-kflat-tensor-quasiiso-independent",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-rhom-well-defined"
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -280,7 +240,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-72a16c6eb (reviewer sub-agent of L); spot-checked: I read the delivery in full. It makes no new nodes, and the statement is byte-identical to side-live; the only stmt_deps change adds def-pc-flat-sheaf-modules for the stated 'flat terms'. The item has no repair note (so it is not a re-split) and is not in the dropped list. No dependency is merged, there is no cycle (closure of 218 nodes), and proof_deps equals the union of the uses. I read Stacks 08J9 and 06YT in the source, and every cited label matches tags/tags. Step 1: the K-flat tensor quasi-iso lemma lets A↦Q(A⊗P) factor through localization (1); the equivalence in the descent node with localization (2)/(3) extends the normalized c_{F,P} uniquely, and c_{A,P}=(Qq⊗1)c_{F,P}Q(q⊗1)^{-1} follows by naturality. Step 2: with d(g)=d_E g−(−1)^n g d_P, f̃ is a chain map with no sign. Step 3: I recomputed the Koszul coefficients ((n+1)m vs nm+m, and nm vs nm) and they agree. Step 4: Hom(P,u) is a quasi-iso by rhom-well-defined with E and I(E) K-injective. Step 5: φ=Hom(P,u)fq meets the normalization of def-coef-ringed-tensor-hom-model with ψ=u f̃(q⊗1); adjunction naturality and cancelling Q(q⊗1) give τ(h)c_{A,P}=Q(f̃), and I checked the algebra. Step 6: the variances are right. Step 7: this is exactly the 06YT square, with the top map handled by the step-3 symmetry and the K-flatness of F. Small cases checked: A=0 or P=0, degree 0 (classical uncurrying), odd degrees (sign −1), and non-flat or unbounded A. The closest duplicate candidates are not duplicates: lem-sf-coefficient-tensor-curry-normalization requires both factors K-flat, and the flat-evaluation-roof and étale chain-transpose nodes are about other maps. I accept the six declared tool uses as generic ringed-site and categorical black boxes: kflat-resolution, kflat-tensor-quasiiso, localization-UP (a Mathlib leaf), site-derived-tensor-descent, kinjective-resolutions-exist and rhom-well-defined. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Algebra.Homology.OneKFlatChainTranspose",
   "declaration": "WeilConjectures.oneKFlatChainTranspose",
@@ -313,5 +284,15 @@
   "group": "Q05",
   "result": "pass",
   "note": "115c449780d9 re-delivers fb99135d5498 (PASS) after its landing RETURN 'def-sfb-tensor-symmetry-pure-equation not reached and not flagged unreachable'. The Lean module and item node are byte-identical to fb99. The only node delta is that the delivered symmetry-node copy carries import_flags unreachable; it equals the landed side-live node, so this delivery adds no new-node delta. Recomputed reach with dag_queue: on side-live the item is reached (6) and the symmetry node is unreached and flagged; with the item overlaid the node is reached (7), a stale flag that nt_incremental2.check filters (stale_flag, land2fix 2026-10-18), so landing is not blocked; the worker's dry run printed OK at a6ff3b55c72. Mathematics re-read on the unchanged Lean against Stacks 08J9/06YT/06YU: arbitrary unbounded A; P K-flat with flat terms; E K-injective; comparison pinned by normalization to T.iso, naturality and tensor_inverts; uncurry fixed on the actual generators as f(a)(p) via coefficientHomComponent (p+n=q convention checked in side-live); transpose_eq uses the given adjunction with coefficientHomAugmentation (the same toKInjectiveResolution as coefficientHomResolution); hom/tensor inversion clauses true; symmetryPure gives the (p*q).negOnePow sign; no edge case excluded; statement verbatim; one sorry. No compile run since nothing changed; the same file compiled clean in 50.0 s (fb99 review) and passed the 16:01 landing compile. Advisory: coefficientHomComponent and coefficientHomResolutionIso are owned by def-coef-hom-representative-evaluation, a proof_dep only. Maintainer note: the stale unreachable flag on the symmetry node can be cleared after landing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261023T230352-L-3418701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

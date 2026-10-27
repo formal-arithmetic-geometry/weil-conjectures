@@ -21,130 +21,41 @@
  ],
  "proof": [
   {
-   "text": "Work at the finite coefficient stage $\\Lambda=A=A_{E,n}$ prescribed by [def-pur-conventions]. Choose a finite affine open cover $\\{V_i=\\operatorname{Spec}B_i\\}$ of $Y$ with each $B_i$ finitely generated over $k$, using [def-weil-finite-type-morphism]. Put $X_i=X\\times_YV_i$, $f_i:X_i\\to V_i$, $j_i:X_i\\hookrightarrow X$, and $W_i=X_i\\times_{V_i}X_i$. The domain of [def-weil-exceptional-inverse-image] gives that $f$ is separated and finite type. Thus [lem-pod-separated-finite-type-base-change] gives the same properties for $f_i$ and the two projections of $W_i$, and [lem-sbc-smooth-relative-dimension-permanence](1) gives their smoothness of pure relative dimension $d$. The affine structure map $V_i\\to\\operatorname{Spec}k$ is separated by [lem-weil-pbc-affine-morphism-permanence](3); composing separated maps by [lem-weil-pbc-proper-fp-permanence](e) makes $X_i$ and $W_i$ separated over $k$. They are finite type over $k$: a finite affine cover of $X_i$ has coordinate rings finitely generated over $B_i$, hence over $k$, and the same argument applies to $W_i$ over an affine cover of $X_i$. This is the finite-type criterion in [def-weil-finite-type-morphism]. Finally [thm-pur-cohomological-smoothness](3) gives canonical identifications $Lj_i^*\\omega_f\\cong\\omega_{f_i}$. All subsequent applications of the restricted DNC theorem are to these separated finite-type schemes.",
+   "text": "Apply diagonalOrientationRefinement at aX=f aY. It supplies normalized affine-target charts with Agrees on every inclusion. Apply the ordinary realization lemma to obtain e with all specified local composites.",
    "uses": [
-    "def-pur-conventions",
-    "def-weil-finite-type-morphism",
-    "def-weil-exceptional-inverse-image",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-proper-fp-permanence",
-    "thm-pur-cohomological-smoothness"
+    "lem-pur-diagonal-orientation-refinement",
+    "lem-pur-diagonal-ordinary-orientation-gluing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
-    "place": "Step 1, localized on affine target opens to meet the current DNC hypotheses; Stacks Tags 01S7, 01KU, 01T3, 01T4, 01VB, 02NK"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $i$, let $p_{1,i},p_{2,i}:W_i\\to X_i$ be the projections and $\\Delta_i:X_i\\hookrightarrow W_i$ the diagonal. By [lem-pur-diagonal-base-change] there is the canonical isomorphism $\\alpha_i:C(p_{1,i},\\Delta_i)\\xrightarrow{\\sim}\\omega_{f_i}$. By [lem-pur-diagonal-regular-immersion], the diagonal is a regular closed immersion of pure codimension $d$, with $N_i=N_{\\Delta_i/W_i}\\cong T_{X_i/V_i}$. The normal-bundle description of [def-pur-normal-bundle] makes $\\pi_i:N_i\\to X_i$ a vector bundle of rank $d$, with zero section $z_i$. The identity $p_{1,i}\\Delta_i=\\operatorname{id}_{X_i}$ verifies the section hypothesis. Step 1 verifies that both the base $X_i$ and the total space $W_i$ are separated finite type over $k$ and that $p_{1,i}$ is separated finite type and smooth of pure dimension $d$. Consequently [thm-pur-dnc-invariance] applies and gives its uniquely normalized comparison $\\delta_i:C(p_{1,i},\\Delta_i)\\xrightarrow{\\sim}C(\\pi_i,z_i)$.",
+   "text": "The coordinate-normalization lemma applied to that e gives DiagonalOrientationNormalization. Compose diagonalDualizingComparison with nu_X^*e to construct the requested theta and its exact ordinary presentation. No arbitrary isomorphism is chosen.",
    "uses": [
-    "lem-pur-diagonal-base-change",
-    "lem-pur-diagonal-regular-immersion",
-    "def-pur-normal-bundle",
-    "thm-pur-dnc-invariance"
+    "lem-pur-diagonal-ordinary-orientation-normalization",
+    "def-pur-diagonal-dualizing-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
-    "place": "Step 1: the section invariant of the diagonal, on each separated target chart"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [cor-pur-vector-bundle-purity] to $\\pi_i$ to obtain $\\omega_{\\pi_i}\\xrightarrow{\\sim}\\Lambda_{N_i}(d)[2d]$. By [def-pur-section-invariant], $C(\\pi_i,z_i)=Lz_i^*\\omega_{\\pi_i}$. Restricting the vector-bundle comparison to $z_i$ gives $\\beta_i:C(\\pi_i,z_i)\\xrightarrow{\\sim}\\Lambda_{X_i}(d)[2d]$. For the final identification use [det-prop-sfb-cartesian-coefficients-twists] for $z_i$, at the finite coefficient $A=A_{E,n}$: $z_i^{-1}\\Lambda_{N_i}(d)\\cong\\Lambda_{X_i}(d)$ on the small pro-etale site. Derived finite-coefficient pullback is termwise inverse image by [def-weil-derived-pullback-tensor-hom], so this sheaf comparison also gives the displayed shifted comparison. The twists are those of [def-coefficient-twists-detailed]; at finite level their nonnegative powers are sheaves in degree zero. The same Tate comparison for open inclusions identifies $\\Lambda_X(d)|_{X_i}$ with $\\Lambda_{X_i}(d)$. Form the local orientation $\\theta_i=\\beta_i\\delta_i\\alpha_i^{-1}:\\omega_{f_i}\\xrightarrow{\\sim}\\Lambda_{X_i}(d)[2d]$, and use Step 1 to view its source as $\\omega_f|_{X_i}$.",
+   "text": "For any other theta with normalized ordinary witness e prime, ordinary rigidity gives e prime=e. Rewrite its presentation equation to identify theta with the constructed comparison. This is the full exists-unique conclusion.",
    "uses": [
-    "cor-pur-vector-bundle-purity",
-    "def-pur-section-invariant",
-    "def-coefficient-twists-detailed",
-    "det-prop-sfb-cartesian-coefficients-twists",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-pur-diagonal-ordinary-orientation-rigidity",
+    "def-pur-diagonal-dualizing-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
-    "place": "Step 2: the two sides; combining the diagonal, DNC and zero-section comparisons locally"
-   }
-  },
-  {
-   "text": "We check agreement of these maps on overlaps, without assuming that an intersection of affine target opens is affine. Cover $V_i\\cap V_j$ by affine opens $V=\\operatorname{Spec}(B_i)_b$ distinguished in $V_i$ and contained in $V_j$. The basis assertion is [lem-weil-pbc-spec-localization-away-basic-open](i), and [lem-weil-pbc-affine-open-section-vanishing-prime](b) identifies their affine coordinate rings with the displayed localizations; $(B_i)_b$ is finitely generated over $k$, by adding $b^{-1}$ to generators of $B_i$. For $X_V=X\\times_YV$, repeat Steps 1--3 and call the resulting orientation $\\theta_V$. The base change of the pair $(W_i\\to X_i,\\Delta_i)$ along $a_i:X_V\\to X_i$ is exactly $(X_V\\times_VX_V\\to X_V,\\Delta_V)$: once the first component has image in $V$, its second component has the same image in $Y$ and therefore also lies over $V$. The same description holds using $j$. By [thm-pur-cohomological-smoothness](3), the dualizing-object comparisons in [lem-pur-diagonal-base-change] restrict to those for $f_V$. By the base-change compatibility in [thm-pur-dnc-invariance], the restriction of $\\delta_i$ is $\\delta_V$, with the normal bundle and zero section identified with their pullbacks. This application has separated finite-type base $X_V$ by Step 1; its morphism $a_i$ needs no flatness hypothesis. By the base-change compatibility in [cor-pur-vector-bundle-purity], the zero-section comparison $\\beta_i$ restricts to $\\beta_V$. Thus, under the canonical source restriction and Tate target restriction identifications of [det-prop-sfb-cartesian-coefficients-twists], $\\theta_i|_{X_V}=\\beta_V\\delta_V\\alpha_V^{-1}=\\theta_V=\\theta_j|_{X_V}$. These equalities also hold on a further refinement, because each comparison is the pullback of the same canonical factor. The next two steps convert this local equality into equality and gluing on $X_i\\cap X_j$.",
-   "uses": [
-    "thm-pur-cohomological-smoothness",
-    "lem-pur-diagonal-base-change",
-    "thm-pur-dnc-invariance",
-    "cor-pur-vector-bundle-purity",
-    "lem-weil-pbc-spec-localization-away-basic-open",
-    "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "det-prop-sfb-cartesian-coefficients-twists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
-    "place": "Combining paragraph: base-change compatibility, used on common affine refinements of target overlaps; Stacks Tags 00E0 (basic-open basis), 01I3 (standard-open-affine)"
-   }
-  },
-  {
-   "text": "Here is the explicit reduction to sheaf maps on the possibly nonseparated scheme $X$. Put $K=\\omega_f$, $r=-2d$, $M=\\mathcal H^r(K)$ and $G=\\Lambda_X(d)$, using [def-weil-derived-cohomology-sheaves] and [def-coefficient-twists-detailed]. By [lem-weil-proetale-weakly-etale-localization](1)--(3), sheaves on each open are exactly sheaves on the localized site with the restricted constant coefficient ring. Exact restriction [lem-pur-site-restriction-module-adjunction-exact] commutes with kernels, images and quotients, hence with cohomology. The local orientations of Step 3 therefore give $\\mathcal H^q(K)|_{X_i}=0$ for $q\\ne r$. A sheaf which restricts to zero on a covering family is zero: restrict any section to the induced cover of its domain and apply uniqueness in the sheaf axiom. Thus $\\mathcal H^q(K)=0$ for $q\\ne r$ globally. For a representative $P$ of $K$, the good truncation of [def-kun-truncations] gives the explicit roof $P\\xleftarrow{\\sim}\\tau_{\\le r}P\\xrightarrow{\\sim}M[-r]$. The left arrow induces an identity on cohomology in degrees at most $r$, and the groups above $r$ vanish. The right arrow is the quotient $\\ker d^r\\to\\ker d^r/\\operatorname{im}d^{r-1}$ in degree $r$ and zero in lower degrees; it induces the identity in degree $r$, and the other cohomology groups vanish. Both arrows are therefore quasi-isomorphisms. Inverting the left arrow in [def-weil-abstract-derived-category] gives the canonical isomorphism $\\epsilon:K\\xrightarrow{\\sim}M[2d]$. Both truncation and cohomology preserve quasi-isomorphisms by their displayed cohomology computations, so the natural roof descends through the localization universal property and is independent of the representative. The roof is natural in $P$; exact restriction preserves its kernels and quotient, so it gives the same isomorphism on every open. This calculation uses no absolute separatedness and does not apply the separated-scheme concentration lemma to $X$.",
-   "uses": [
-    "def-weil-derived-cohomology-sheaves",
-    "def-coefficient-twists-detailed",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-kun-truncations",
-    "def-weil-abstract-derived-category",
-    "lem-weil-proetale-weakly-etale-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (section-truncations): good truncations and the explicit kernel/quotient calculation; derived localization as in Definition 05RU"
-   }
-  },
-  {
-   "text": "Taking $\\mathcal H^{-2d}$ of $\\theta_i$ gives isomorphisms of sheaves $t_i:M|_{X_i}\\xrightarrow{\\sim}G|_{X_i}$. Their restrictions to the common affine refinements agree by Step 4. Apply uniqueness in [lem-pur-sheaf-hom-cover-gluing] on the cover of each overlap $X_i\\cap X_j$ by these $X_V$ to conclude that $t_i$ and $t_j$ agree on the whole overlap. The same node, now for the covering family $\\{X_i\\to X\\}$, glues them to a unique sheaf map $t:M\\to G$. Their inverses agree as well and glue to $s:G\\to M$; uniqueness applied to $st$ and $ts$ makes them the identity, so $t$ is an isomorphism. Define $\\theta_f=t[2d]\\circ\\epsilon:K\\xrightarrow{\\sim}G[2d]$. After removing the common shift, [lem-weil-pbc-derived-single-fully-faithful] identifies morphisms between degree-zero sheaves with their sheaf maps, so $\\theta_f|_{X_i}$ is exactly $\\theta_i$, not just an isomorphism with the same source and target. For another affine cover, Step 4 gives agreement on a common affine refinement, and sheaf-map uniqueness gives the same $t$ and hence the same $\\theta_f$. The factors of each $\\theta_i$ are canonical, with the DNC factor fixed by its uniqueness clause in Step 2. The global map is therefore canonical and proves the asserted isomorphism for arbitrary finite-type $X,Y$ and separated smooth $f$.",
-   "uses": [
-    "lem-pur-sheaf-hom-cover-gluing",
-    "lem-weil-pbc-derived-single-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EM (lemma-internal-hom), via Sites Tag 04TQ; Stacks Tag 06XS (derived.tex, lemma-negative-exts (2)); gluing the current blueprint local diagonal orientation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-conventions",
-  "def-weil-finite-type-morphism",
-  "def-weil-exceptional-inverse-image",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-proper-fp-permanence",
-  "thm-pur-cohomological-smoothness",
-  "lem-pur-diagonal-base-change",
-  "lem-pur-diagonal-regular-immersion",
-  "def-pur-normal-bundle",
-  "thm-pur-dnc-invariance",
-  "cor-pur-vector-bundle-purity",
-  "def-pur-section-invariant",
-  "def-coefficient-twists-detailed",
-  "det-prop-sfb-cartesian-coefficients-twists",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-affine-open-section-vanishing-prime",
-  "def-weil-derived-cohomology-sheaves",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-kun-truncations",
-  "def-weil-abstract-derived-category",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-weil-pbc-derived-single-fully-faithful"
+  "lem-pur-diagonal-orientation-refinement",
+  "lem-pur-diagonal-ordinary-orientation-gluing",
+  "lem-pur-diagonal-ordinary-orientation-normalization",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-ordinary-orientation-rigidity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
-  "place": "Steps 1--2 and combining paragraph; expanded affine-target localization and sheaf-level overlap gluing to retain the source domain"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Affine-target refinement and three strict substeps: ordinary gluing, conditional coordinate normalization, and equality rigidity. Final pro-etale transport and uniqueness are proved in Lean by K3."
  },
  "mathlib_searches": [
   {
@@ -272,6 +183,41 @@
    "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree), smoothSheafCommGroup.compLeft, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.isSmoothOfRelativeDimension_iff (Mathlib/AlgebraicGeometry/Morphisms/Smooth), PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp, AlgebraicGeometry.Scheme.Modules.pullback (Mathlib/AlgebraicGeometry/Modules/Sheaf). Read the returned signatures: algebraic smoothness, ordinary structure-sheaf pullback and differentials, or open immersion maps; none is an exceptional inverse-image purity theorem.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated morphism of schemes the exceptional pullback of the finite constant sheaf is canonically the Tate twist shifted by twice the relative dimension",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l. Read returned signatures: ordinary scheme module pullback/adjunction and coherence only, not exceptional pullback, Tate twists or smooth purity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Iso",
+   "results": "0 hits. . Read returned signatures: ordinary scheme module pullback/adjunction and coherence only, not exceptional pullback, Tate twists or smooth purity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|smooth.purity|Tate.*twist",
+   "results": "0 hits. . Read returned signatures: ordinary scheme module pullback/adjunction and coherence only, not exceptional pullback, Tate twists or smooth purity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative dualizing complex of a smooth separated scheme morphism equals the shifted Tate twist",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Poincare duality identifies extraordinary inverse image of the constant torsion sheaf with a twisted constant complex for a smooth scheme map",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj; AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r. Read returned signatures: ordinary scheme module pullback/adjunction and coherence only, not exceptional pullback, Tate twists or smooth purity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -296,61 +242,27 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-smooth-purity",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "thm-pur-diagonal-dualizing-object",
   "worker": "stage1",
-  "summary": "Repaired E1/E7: removed absolute separatedness of X and Y, retaining separatedness of f and the finite-type exceptional-inverse-image domain. Applied diagonal/DNC/vector-bundle comparisons only over affine target charts, checked every separated finite-type hypothesis there, proved agreement on common affine refinements, and glued the sole nonzero cohomology sheaf maps using an explicit natural truncation roof. No new nodes; no Lean or build commands.",
-  "blueprint": "Current main-20261015 Steps 1--2 are realized on each affine target chart (Steps 1--3); the combining/base-change paragraph gives overlap compatibility (Step 4); Steps 5--6 write out the gluing needed to keep the source domain. The existing unit realization already names this item and is unchanged.",
-  "tool_uses": [
-   {
-    "node": "lem-pod-separated-finite-type-base-change",
-    "why": "Separatedness and finite type of the chart morphisms and projections; a geometric permanence tool, not a replacement for the diagonal route."
-   },
-   {
-    "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Pure relative dimension survives target-open base change; this is a geometric permanence tool."
-   },
-   {
-    "node": "lem-weil-pbc-affine-morphism-permanence",
-    "why": "Affine target charts are separated over the affine field base; no purity content is taken from this tool."
-   },
-   {
-    "node": "lem-weil-pbc-proper-fp-permanence",
-    "why": "Composition of separated maps makes the localized source and diagonal ambient scheme separated; only clause (e) is used."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Exactness of restriction permits the kernel/quotient calculation of the sole nonzero cohomology sheaf."
-   },
-   {
-    "node": "lem-pur-sheaf-hom-cover-gluing",
-    "why": "Maps of module sheaves glue uniquely; this glues the locally constructed orientation after the explicit single-degree reduction."
-   },
-   {
-    "node": "lem-weil-pbc-derived-single-fully-faithful",
-    "why": "A morphism between sheaves in degree zero is determined by its sheaf map; this identifies the glued orientation with each local derived map."
-   },
-   {
-    "node": "det-prop-sfb-cartesian-coefficients-twists",
-    "why": "The finite-coefficient Tate line pulls back canonically along the zero section; the comparison is stated on the pro-etale site and uses the existing coefficient twists."
-   },
-   {
-    "node": "lem-weil-pbc-spec-localization-away-basic-open",
-    "why": "Principal basic opens form a basis of the Zariski topology; this provides common refinements of affine target charts."
-   },
-   {
-    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "why": "A basic open inside an affine scheme is affine with the localized coordinate ring; this ensures the common refinement is finite type over k."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "The small pro-etale site of an open subscheme is the localized site, and its constant ring is the restriction of the original ring; this allows the sheaf restriction and gluing tools to apply literally."
-   }
-  ]
+  "summary": "Human-requested re-split: new statement-only affine-target diagonal/DNC lemma carries old Steps 1--2; new statement-only zero-section/refinement lemma carries old Steps 3--4. Old Steps 5--6 are already stated, with exact truncation and sheaf-map descent, by existing lem-pur-degree-zero-derived-map-gluing (and its two recent extraction nodes), so reused instead of duplicated. The assembly is under 3000 characters. Item statement, Lean record and maintainer metadata are unchanged; the full inherited argument and its allocation are retained in report.md.",
+  "blueprint": "Main-20261015 Step 1 is realized by lem-pur-affine-target-diagonal-dnc; Step 2 and combining paragraph by lem-pur-diagonal-orientation-refinement. Existing degree-zero gluing and its concentration/truncation subnodes realize the global gluing expansion needed for nonseparated X,Y. Unit route remains diagonal -> DNC -> zero-section vector purity.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-pur-immersion-twist",
@@ -368,12 +280,12 @@
   "lem-weil-proetale-weakly-etale-localization"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q04-7d33db6e3",
-  "group": "Q04",
+  "reviewer": "NT-cc-Q82-cb1fd9c6d",
+  "group": "Q82",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-7d33db6e3 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages and unit/chapter route. Verified all six steps, affine localization, DNC hypotheses, overlap compatibility, coefficient pullback, truncation and gluing; tested edge cases and checked reuse/cycles. Accepted eleven declared tool uses. No fixes needed. Exact master target categories remain distinct; no unstated comparison is certified. Findings recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-cb1fd9c6d (reviewer sub-agent of L); spot-checked: I read the full item, both new nodes, every cited statement, the main-20261015 proof (Steps 1-2 and the combining paragraph) and the human's re-split note of 2026-10-22. The item is not dropped and not superseded: live and side-live still hold the old 6-step proof. The statement, stmt_deps and Lean record are unchanged. The assembly is 4 steps of about 2000 characters. Old Steps 1-2 now live in lem-pur-affine-target-diagonal-dnc (chart cover, separated finite-type checks, rho, alpha, regular diagonal with N=T, normalized DNC delta). Old Steps 3-4 now live in lem-pur-diagonal-orientation-refinement (beta, theta=beta delta alpha^-1 rho, and its restriction to smaller affines, so it agrees on overlaps). I checked that the base change of the section pair along X_{V'}->X_V is X_{V'}x_{V'}X_{V'}. Old Steps 5-6 go to the existing same-unit node lem-pur-degree-zero-derived-map-gluing (split, Lean pass). Its statement covers concentration, the natural truncation, the Hom bijection and the equality test for any scheme and any Zariski cover. This reuse is legitimate, and the inverse-gluing and cover-independence arguments are kept in the assembly. The new nodes are of comparable size and neither restates the item. I found no cycles and no duplicates among the diagonal, orientation and DNC nodes. No SGA source is cited. Edge cases checked: d=0, f=id on a nonseparated Y, empty schemes, and a nonaffine overlap. DNC base change along an open immersion is allowed (B' separated finite type). Vector-bundle purity is stated on the étale side; carrying it to the pro-étale site through nu^* is true. FIX (whole files under fixes/dag/nodes/sec-smooth-purity/): (1) node 1 called rho_V and alpha_V only 'canonical' and named no source for them, so any isomorphisms would satisfy it and the item's orientation would not be the beta delta alpha^-1 composite that its citer lem-pur-diagonal-dnc-chart-normalization relies on. It now ties rho to thm-pur-cohomological-smoothness(3), N=T to lem-pur-diagonal-regular-immersion, alpha to lem-pur-diagonal-base-change and delta to thm-pur-dnc-invariance, all added to stmt_deps. (2) In node 2, both Tate pullback identifications now cite det-prop-sfb-cartesian-coefficients-twists. Maintainer note: the item's tool_uses still lists 13 nodes from the old proof that the new proof no longer cites; they should be pruned at merge. No tool uses are needed.; 2 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -413,15 +325,6 @@
   "module": "Sheaf.Paper.PurityDiagonalDualizingObject",
   "declaration": "WeilConjectures.PurityFiniteSetting.existsUnique_diagonalDualizingObject",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.diagonalOrdinaryDualizing",
-   "WeilConjectures.PurityFiniteSetting.diagonalDualizing",
-   "WeilConjectures.PurityFiniteSetting.diagonalUnitPlus",
-   "WeilConjectures.PurityFiniteSetting.diagonalDualizingComparison",
-   "WeilConjectures.PurityFiniteSetting.diagonalEtaleLocality",
-   "WeilConjectures.PurityFiniteSetting.diagonalAffineMate",
-   "WeilConjectures.PurityFiniteSetting.diagonalDualizingCongr",
-   "WeilConjectures.PurityFiniteSetting.DiagonalOrientationNormalization",
-   "WeilConjectures.PurityFiniteSetting.DiagonalDualizingConclusion",
    "WeilConjectures.PurityFiniteSetting.existsUnique_diagonalDualizingObject",
    "WeilConjectures.PurityFiniteSetting.diagonalDualizingObject"
   ],
@@ -440,5 +343,15 @@
   "group": "Q118",
   "result": "fix",
   "note": "The delivery's `## Second reading by Q118` section is explicitly the worker's self-reading, so it does not satisfy the required independent second reading (H11). Replace that section with the independent reading recorded in the review; mathematical statements and Lean modules otherwise passed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a76a",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261025T101229-L-3673535",
+  "kind": "interface",
+  "note": "independent cc review: Item proof and 3 new sorry lemmas (gluing/normalization/rigidity) against thm-pur-diagonal-dualizing-object, the Chart/BetaNormalized defs and the moved data block (byte-identical to published); 22 modules (5 delivered + 17 direct importers) compiled clean"
  }
 }

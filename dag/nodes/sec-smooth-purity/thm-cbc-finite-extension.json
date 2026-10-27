@@ -26,46 +26,9 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pod-separated-finite-type-base-change], $f'$ is separated of finite type. Apply [lem-cbc-integral-compact-support-uniform-restriction] to $f$ and $f'$ with the compactifications of [def-cbc-compact-support-square]. All source and target schemes have its required domain hypotheses. This gives exact $A$-linear compact-support functors on the stated integral categories. The opens are quasi-compact: their sources are noetherian, and each inverse image of an affine open is an open subspace of that source.",
+   "text": "Identify the completed coefficient isomorphism with the datum isomorphism by its quotient projections. Uniqueness of left adjoints identifies the open-extension functors. Apply the integral compact-support uniform-restriction theorem and its strictly-full landing predicate to obtain compact-support preservation.",
    "uses": [
-    "lem-pod-separated-finite-type-base-change",
     "lem-cbc-integral-compact-support-uniform-restriction",
-    "def-cbc-compact-support-square"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
-    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
-   }
-  },
-  {
-   "text": "For every $M\\in\\mathcal C_T$ on any of the four corners, [lem-weil-pbc-integral-stratified-perfect-characterization] gives an interval $[a,b]$ containing its cohomology. Apply [lem-cbc-finite-extension-reduction-cone-bound] to this completed-module object. Its canonical quotient reductions therefore have the common cohomological interval $[a-1,b]$, independently of the exponent. This applies to every integral object, including the compact-support images obtained in step 1.",
-   "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-cbc-finite-extension-reduction-cone-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
-    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
-   }
-  },
-  {
-   "text": "For $u:T'\\to T$ equal to either horizontal map, specialize [prop-weil-pbc-preservation-constructible] to $X=Y=T$, $X'=Y'=T'$, vertical maps the identities and both horizontal maps $u$. This square is cartesian; the identities are proper with fibres empty or points, so take $e=0$. Take $N=\\ell$: the residue field $A/I$ has characteristic $\\ell$, so $N(A/I)=0$, and $N$ is invertible on both schemes. Step 2 supplies its common reduction interval for every input. The theorem's third conclusion gives $Lu^*_{\\mathrm{comp}}M\\in\\mathcal C_{T'}$.",
-   "uses": [
-    "prop-weil-pbc-preservation-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
-    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
-   }
-  },
-  {
-   "text": "By [lem-cbc-completed-pullback-triangles], the specified completed pullback preserves shifts and ambient distinguished triangles of complete objects. Its additivity and $A$-linearity on these complete categories are exactly the assertions of [lem-sbc-completed-operations-linear-natural-exchange]. Step 3 gives constructible landing. The full categories have inherited shifts and triangles by [lem-weil-pbc-uniform-complete-triangulated], so the ambient shift comparisons and distinguished triangles restrict. Thus the two completed pullbacks are exact $A$-linear functors on the stated categories. Together with step 1 this defines the two exact $A$-linear composites $F=Lg^*_{\\mathrm{comp}}Rf_!$ and $G=Rf'_!Lg'^*_{\\mathrm{comp}}$.",
-   "uses": [
-    "lem-cbc-completed-pullback-triangles",
-    "lem-sbc-completed-operations-linear-natural-exchange",
     "lem-weil-pbc-uniform-complete-triangulated"
    ],
    "elementary": false,
@@ -75,11 +38,10 @@
    }
   },
   {
-   "text": "By [def-weil-pbc-rational-category], the raw rational category has the same objects as its integral category. Thus regard $K$ as an integral object $K_0\\in\\mathcal C_X$, without any lattice-existence assertion. By [def-weil-pbc-bounded-constructible-complete], $K_0$ is derived $I$-complete and its reductions have compatible etale-origin witnesses. The adic datum and compact-support square are assumed, so [thm-cbc-complete-proetale] applies and gives the specified integral exchange $\\eta_{K_0}:F(K_0)\\xrightarrow{\\sim}G(K_0)$, where $F=Lg^*_{\\mathrm{comp}}Rf_!$ and $G=Rf'_!Lg'^*_{\\mathrm{comp}}$. Its endpoints belong to $\\mathcal C_{Y'}$ by steps 1–4. Since this is a full subcategory, the ambient inverse is a morphism in it and still satisfies both inverse equations. It is natural and coherent for identities and pasted squares as asserted by that theorem.",
+   "text": "For a horizontal map U to V use the proper identity square with fibre dimension zero. The valuation-ring quotient has characteristic l by the DVR theorem, and stalkwise invertibility gives global invertibility. The third conclusion of actual-coefficient constructible preservation gives completed-pullback preservation; this theorem needs no separate common-interval hypothesis.",
    "uses": [
-    "def-weil-pbc-rational-category",
-    "def-weil-pbc-bounded-constructible-complete",
-    "thm-cbc-complete-proetale"
+    "lem-weil-pbc-actual-coefficient-constructible-preservation",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
    "elementary": false,
    "source": {
@@ -88,22 +50,50 @@
    }
   },
   {
-   "text": "Apply the general functor-and-transformation assertion of [prop-weil-pbc-rational-transport] to the four exact $A$-linear integral functors and to $\\eta:F\\Rightarrow G$. This gives the rational functors and the extended exchange with component $\\eta_{K_0}\\otimes1$. It is the displayed exchange by its definition in the statement. The extension of a composite agrees with the composite of extensions: for a pure tensor $u\\otimes a$ both send it to $F_1(F_2(u))\\otimes a$, since the extensions are $E$-linear and agree on integral maps. Such pure tensors generate each Hom module by [def-weil-linear-scalar-localization]. Thus the transformation has exactly the indicated source and target functors.",
+   "text": "Prove scalar compatibility on ordinary reduction towers by the tensor generators and the reduction unit. Scalar endomorphisms descend to the universal left-derived functor by right-Kan-extension uniqueness. Tower pullback and inverse limit are linear by their adjunctions. Open extension and derived direct image are linear by their linear right and left adjoints. Additivity descends to the derived categories; restrict these properties through the full inclusions.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-cbc-integral-compact-support-uniform-restriction",
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
+  },
+  {
+   "text": "Use intrinsic completeness of each bounded constructible object to obtain its complete-property witness for every generating tuple. The unit-normalization equation for the completed open exchange is tuple-free. Restrict the exchange for a second tuple to the first full complete subcategory and use uniqueness to identify the components. The datum transport and ordered proper/open composite preserve this equality.",
+   "uses": [
+    "def-wf-tensor-product",
+    "lem-cbc-completed-extension-zero-comparison",
+    "def-cbc-completed-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
+  },
+  {
+   "text": "Choose a generating tuple for the finitely generated ideal. Apply complete compact-support base change to each bounded constructible object and its retained etale origins. The two endpoints land in the full bounded constructible category by the first two steps, so its inverse belongs to this category. Integral naturality assembles these components into a natural isomorphism.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "thm-cbc-complete-proetale",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
+  },
+  {
+   "text": "Transport the integral natural transformation through scalar localization. Each localized component is the image of an integral isomorphism and is therefore invertible. Generator independence gives the specified component formula for every tuple. Naturality is naturality of this transported transformation for every rational morphism, and hence gives lattice independence.",
    "uses": [
     "prop-weil-pbc-rational-transport",
     "def-weil-linear-scalar-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
-    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
-   }
-  },
-  {
-   "text": "Let $v=\\eta_{K_0}^{-1}$. The composition and identity formulas of [def-weil-linear-scalar-localization] give\n$$(v\\otimes1)\\circ(\\eta_{K_0}\\otimes1)=(v\\circ\\eta_{K_0})\\otimes1=\\mathrm{id}\\otimes1,$$\nwhile $(\\eta_{K_0}\\otimes1)\\circ(v\\otimes1)=(\\eta_{K_0}\\circ v)\\otimes1=\\mathrm{id}\\otimes1$. Hence $v\\otimes1$ is an inverse in the raw rational category on $Y'$, proving the claimed isomorphism for every $K$.",
-   "uses": [
-    "def-weil-linear-scalar-localization"
-   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
@@ -111,24 +101,12 @@
    }
   },
   {
-   "text": "Write $F_E,G_E$ for the rational composites. Integral naturality says $G(u)\\eta_M=\\eta_NF(u)$ for an integral map $u:M\\to N$. Using the bilinear composition of [def-weil-linear-scalar-localization], tensoring this equation with $a\\in E$ gives $G_E(u\\otimes a)(\\eta_M\\otimes1)=(\\eta_N\\otimes1)F_E(u\\otimes a)$. By addition it holds for every rational map, including a rational isomorphism $h:M\\to N$ specifying the identification of two integral representatives. Since a functor sends inverse pairs to inverse pairs, $F_E(h)$ and $G_E(h)$ are isomorphisms. The equation therefore identifies the two components under precisely these induced identifications, proving lattice independence without requiring an integral lift of $h$.",
-   "uses": [
-    "def-weil-linear-scalar-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
-    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
-   }
-  },
-  {
-   "text": "The integral identity and pasting diagrams commute by [thm-cbc-complete-proetale]. Apply the localization functor $Q$ to every component and comparison in those diagrams. By [def-weil-linear-scalar-localization], $Q(vu)=Q(v)Q(u)$ and $Q(\\mathrm{id})=\\mathrm{id}$. Step 6 identifies the rational composite functors with the extensions of the integral composites. Whiskering is also respected: if $H$ is one of the integral functors and $t$ a comparison component, its rational extension satisfies $H_E(Q(t))=Q(H(t))$ by [prop-weil-pbc-rational-transport]. Therefore every edge and every path in a rational identity or pasting diagram is the image of its integral counterpart. The integral equalities remain equalities after $Q$, giving the claimed coherence for all identity and pasted squares within the stated category domains.",
+   "text": "Apply the localization map on the full integral Hom module to the integral identity, horizontal-pasting, and vertical-pasting equalities. Establish the required endpoint membership by the preservation results above. Congruence gives exactly the three rational coherence formulas.",
    "uses": [
     "thm-cbc-complete-proetale",
-    "def-weil-linear-scalar-localization",
-    "prop-weil-pbc-rational-transport"
+    "def-weil-linear-scalar-localization"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
     "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
@@ -136,25 +114,25 @@
   }
  ],
  "proof_deps": [
-  "lem-pod-separated-finite-type-base-change",
   "lem-cbc-integral-compact-support-uniform-restriction",
-  "def-cbc-compact-support-square",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-cbc-finite-extension-reduction-cone-bound",
-  "prop-weil-pbc-preservation-constructible",
-  "lem-cbc-completed-pullback-triangles",
-  "lem-sbc-completed-operations-linear-natural-exchange",
   "lem-weil-pbc-uniform-complete-triangulated",
-  "def-weil-pbc-rational-category",
-  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-actual-coefficient-constructible-preservation",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-wf-tensor-product",
+  "def-cbc-completed-exchange-map",
   "thm-cbc-complete-proetale",
+  "def-weil-pbc-bounded-constructible-complete",
   "prop-weil-pbc-rational-transport",
   "def-weil-linear-scalar-localization"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "G5",
+  "date": "2026-10-25",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
-  "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+  "place": "Proof, integral restriction and scalar localization; actual-coefficient preservation and universal derived linearity"
  },
  "mathlib_searches": [
   {
@@ -309,7 +287,18 @@
   "def-cbc-compact-support-square"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -401,12 +390,18 @@
   "note": "Node diff vs side: only lean + stmt_deps (two added deps thm-cbc-complete-proetale and lemma-weil-pbc-completed-exchange-coherence, both landed, upstream and used for cbcExchange/cbcTowerCompositionMap/completedPullId/completedPullComp); statement/proof unchanged. lean.statement verbatim in file; all 22 declarations present. Hypotheses match the node: prime l, finite E/Q_l via landed pbcPadicCoefficientDatum (E : Type (u+1) inherited, not a new restriction), compactification plus Cartesian proper/open squares, f separated + LocallyOfFiniteType + QuasiCompact, four noetherian/finite-dim/l-invertible schemes, nothing on g. Conclusion: exists natural iso between ScalarLocalization.transport functors with every component = pbcRationalization of completedCompactSupportExchange (tuple-independent because the exchange is unique for a tuple-free equation; finiteExtension_cbcComplete makes the completeness binder vacuous); naturality gives lattice independence. identity/horizontal/vertical mirror the landed completeCompactSupportProetale_* arrow for arrow, localized, with domain conditions on every corner. No hollow defs, only sorry proofs, docstrings carry source/blueprint, no pro-etale substitute. nt_compile.py --json against the local side overlay: module 6.2 s, exit 0, no errors or warnings. Report has real Worker report and Second reading by Q06 sections."
  },
  "tool_uses": [
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "prop-weil-pbc-preservation-constructible",
-  "lem-sbc-completed-operations-linear-natural-exchange",
   "lem-weil-pbc-uniform-complete-triangulated",
   "prop-weil-pbc-rational-transport",
   "def-weil-linear-scalar-localization"
- ]
+ ],
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T023933-L-2487238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

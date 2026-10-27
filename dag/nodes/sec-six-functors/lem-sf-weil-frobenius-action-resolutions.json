@@ -1,0 +1,405 @@
+{
+ "id": "lem-sf-weil-frobenius-action-resolutions",
+ "kind": "statement",
+ "title": "Frobenius action-site realization and preservation of resolutions",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $T_0$ be a separated finite-type $k_0$-scheme, $T=T_0\\times_{k_0}k$, and $g_T=1_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for geometric Frobenius $\\gamma$ [def-weil-frobenius-detailed]. Let $R_T$ be the pro-etale ring sheaf of continuous $\\Omega$-valued functions locally taking values in a finite subextension of $\\mathbf Q_\\ell$ [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Put $\\mathcal A=\\operatorname{Mod}(R_T)$ [def-weil-sheaf-of-modules-category], let $\\mathcal B$ consist of pairs $(M,\\theta:g_T^*M\\xrightarrow{\\sim}M)$ with intertwining maps [def-weil-endofunctor-fixed-pair-category], and let $U:\\mathcal B\\to\\mathcal A$ forget $\\theta$.\n\nThere is a small model $C$ of $T_{\\mathrm{proet}}$ closed under all integer iterates of $g_T$ in the universes of [def-weil-size-convention, def-weil-pbc-proetale-site]. Postcomposition by $g_T$ and its inverse induce mutually inverse site automorphisms preserving coverings and pullbacks. The induced identification $g_T^{-1}R_T\\simeq R_T$ transports continuous functions by the object homeomorphism and preserves their finite coefficient field and the local finite-subextension condition. The twisted action site of [lem-sf-twisted-action-ringed-site] gives an additive equivalence $\\mathcal B\\simeq\\operatorname{Mod}(C\\rtimes\\mathbf Z,R_{\\rtimes})$ identifying $U$ with ringed-topos pullback [def-weil-pbc-ringed-topos-morphism] with invertible structural map. Under this equivalence tensor is diagonal, sheaf Hom is contragredient, and their symmetry and evaluation are the usual underlying module maps. The functor $U$ is exact, conservative, creates small limits and colimits, and has the exact additive left adjoint with underlying object $\\bigoplus_{n\\in\\mathbf Z}(g_T^*)^nM$ and shifting action.\n\nTermwise forgetting induces a triangulated conservative functor $D(U):D(\\mathcal B)\\to D(\\mathcal A)$ on unbounded derived categories [def-weil-abstract-derived-category], with natural identities $H^nD(U)K\\simeq U H^nK$. Thus it carries bounded objects whose underlying cohomology admits a finite locally closed stratification with pro-etale locally finite free restrictions [def-sf-proetale-locally-finite-free-module] to bounded objects with the same constructibility property. Every complex in $\\mathcal B$ admits a K-flat resolution with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules] and a functorially chosen K-injective resolution [def-pur-kinjective-complex]. Termwise $U$ carries these resolutions to quasi-isomorphisms in $\\mathcal A$, preserves K-flat complexes with flat terms, and preserves K-injective complexes. All assertions concern the localization of complexes in $\\mathcal B$; no identification with fixed pairs in $D(\\mathcal A)$ is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation/transposition paragraph; agent native ringed-site refinement, argument allocated from returned item steps 1--3; supporting Stacks labels and original arguments in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-sf-twisted-action-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-kinjective-complex",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sf-proetale-locally-finite-free-module",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing full lifted category AsSmall of the bounded pro-etale site. Postcomposition by the scheme isomorphism and its inverse leaves the domains and arrows unchanged. Mapping a presieve and then applying the domain-forgetful functor is the same presieve on schemes, so the generated topology is preserved. Transport continuity through the AsSmall equivalence. Equivalences preserve pullbacks.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native Frobenius specialization of the action-site construction; bounded model and postcomposition"
+   }
+  },
+  {
+   "text": "On the original site, postcomposition is continuous and cocontinuous (its inverse preserves coverings). Restriction therefore commutes with abelian sheafification. Lift the normalized comparison through the monoid-object sheafification adjunction, explicitly comparing composite and successive lax monoidal structures. Reconstruct section rings and restrict through AsSmall.down. The unit equation for sheafification proves that the resulting inverse ring isomorphism fixes each finite-subextension-valued generating function, hence the same coefficient field. Prove the concrete ambientModules equivalence using the two inverse restriction functors and the existing internal-to-sectionwise module equivalence.",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native Frobenius specialization; coefficient ring identification by precomposition"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-twisted-action-ringed-site] to this small site, its translation and the coefficient ring identification of step 2. Its module equivalence is with the fixed pairs for $\\sigma=s^*$ on $\\operatorname{Mod}(R_T|_C)$. The restriction equivalence $\\Phi:\\mathcal A\\simeq\\operatorname{Mod}(R_T|_C)$ of step 2 comes with a natural isomorphism $c:\\Phi g_T^*\\simeq\\sigma\\Phi$; $(M,\\theta)\\mapsto(\\Phi M,\\Phi(\\theta)\\circ c_M^{-1})$ is then an equivalence of fixed-pair categories [def-weil-endofunctor-fixed-pair-category] commuting with forgetting (its inverse uses a quasi-inverse of $\\Phi$ and the conjugate of $c$), and $\\Phi$ preserves sheaf tensor and Hom because it is restriction along a covering-reflecting equivalence of sites. Composing gives $\\mathcal B\\simeq\\operatorname{Mod}(C\\rtimes\\mathbf Z,R_{\\rtimes})$, under which $U$ corresponds to restriction to degree-zero arrows followed by $\\Phi^{-1}$. The theorem identifies forgetting with ringed-topos pullback with invertible structural map and supplies all its ordinary tensor, contragredient Hom, symmetry and evaluation comparisons. It also gives exactness, conservativity, creation of small limits and colimits, and the exact additive left adjoint $\\operatorname{Ind}$ with underlying $\\bigoplus_{n\\in\\mathbf Z}(g_T^*)^nM$ and shifting action. These statements use the ringed site of step 1, not a site requiring $g_T$ to be a $k$-morphism.",
+   "uses": [
+    "lem-sf-twisted-action-ringed-site",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal-Hom/evaluation paragraph; ordinary action-site presentation"
+   }
+  },
+  {
+   "text": "By [lem-sf-exact-functor-derived-triangulated], exact additive $U$ induces the asserted triangulated functor $D(U)$ computed termwise. The cohomology formula in [def-weil-abstract-derived-category] gives naturally $H^n(UK)=\\ker U(d^n)/\\operatorname{im}U(d^{n-1})\\simeq U(\\ker d^n/\\operatorname{im}d^{n-1})=UH^n(K)$, since $U$ preserves kernels and cokernels. The identity holds first on chain maps and then on their localized morphisms. If $D(U)(f)$ is invertible, every $UH^n(f)$ is invertible; conservativity of $U$ implies that every $H^n(f)$ is invertible. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to deduce that $f$ is invertible. Hence $D(U)$ is conservative.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; cohomology formula and detection of isomorphisms"
+   }
+  },
+  {
+   "text": "By the natural cohomology identification in step 4, vanishing outside a finite interval remains vanishing outside that interval. A finite locally closed stratification on which the underlying $H^n(K)$ is pro-etale locally finite free is the very same stratification for $H^n(D(U)K)$. Thus the stated bounded constructibility property is preserved, without an assertion about fixed pairs in $D(\\mathcal A)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native bounded constructible restriction, from termwise cohomology"
+   }
+  },
+  {
+   "text": "Apply the existing independent-coefficient K-flat resolution theorem on the small action site. Transport its resolution morphism through the additive presentation equivalence and use its unit to transfer K-flatness and termwise flatness; exact forgetting preserves the augmentation quasi-isomorphism. For the injective resolution, first use Grothendieck abelianness of the module category and then the existing Grothendieck instance for IsoAlgebra of an additive autoequivalence. Apply the generic functorial K-injective replacement directly to this fixed-pair category. Exact forgetting preserves its augmentation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-twisted-action-ringed-site",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-kinjective-complex",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Section 07A5 and injectives.tex Tag 079P, theorem-K-injective-embedding-grothendieck"
+   }
+  },
+  {
+   "text": "For the ringed-topos morphism of step 3, $U$ is its module pullback. Apply [lem-weil-pbc-supplied-ringed-topos-kflat-pullback] to conclude that $U$ preserves K-flat complexes with flat terms. For K-injectives use instead the exact additive LEFT adjoint $\\operatorname{Ind}\\dashv U$ supplied by [lem-sf-twisted-action-ringed-site]: [lem-weil-pbc-right-adjoint-preserves-kinjective] applies with $v=\\operatorname{Ind}$ and $u=U$. Concretely, for acyclic $A$, $\\operatorname{Ind}A$ is acyclic, and $\\operatorname{Hom}_{K(\\mathcal A)}(A,UI)\\simeq\\operatorname{Hom}_{K(\\mathcal B)}(\\operatorname{Ind}A,I)=0$. Finally the cohomology calculation of step 4 shows that termwise $U$ sends every quasi-isomorphism, in particular both chosen resolution arrows, to a quasi-isomorphism. This proves preservation of resolutions of arbitrary unbounded complexes.",
+   "uses": [
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; derived.tex Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sf-twisted-action-ringed-site",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-kinjective-complex",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "K1: explicit continuity, normalized monoidal sheafification comparison, existing action-site presentation, derived cohomology comparison, K-flat pullback and exact orbit-induction adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariant module sheaves have a small ringed action site presentation and exact conservative derived forgetting",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, CondensedMod, LightCondMod, CondensedMod.ofSheafCompHaus, instAbelianCondensedMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An infinite cyclic action on a ringed site realizes Weil sheaves and the forgetful functor commutes with cohomology",
+   "results": "8 hits: PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, SheafOfModules.forgetToSheafModuleCat, AlgebraicGeometry.LocallyRingedSpace.preservesCoequalizer, CategoryTheory.sheafForget, AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace, SheafOfModules.forget, SheafOfModules.toSheaf, AlgebraicGeometry.LocallyRingedSpace.instFaithfulSheafedSpaceCommRingCatForgetToSheafedSpace. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "3 hits: algEquivIsoAlgebraIso, algEquivIsoAlgebraIso_hom, algEquivIsoAlgebraIso_inv. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|actionSite|frobeniusPullback|nativeForget",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariant sheaves on a ringed action site forgetful functor preserves K flat and K injective resolutions",
+   "results": "8 hits: SheafOfModules.fullyFaithfulForget, SheafOfModules.instFaithfulPresheafOfModulesValRingCatForget, SheafOfModules.forgetToSheafModuleCat, LightCondensed.forget, CategoryTheory.compatiblePreservingOfFlat, SheafOfModules.forgetToSheafModuleCat_obj_val, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, LightCondensed.instIsGrothendieckAbelianLightCondMod; hits concern ordinary module forgetting, condensed categories, or invariance under an existing complex isomorphism, not the complete Frobenius action-site/resolution assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "actionSite|twistedAction|IsoAlgebra|preservesKInjectiveComplexes|KFlat",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean; hits concern ordinary module forgetting, condensed categories, or invariance under an existing complex isomorphism, not the complete Frobenius action-site/resolution assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting an invertible Frobenius action on sheaves of modules preserves K injective and K flat complexes",
+   "results": "8 hits: SheafOfModules.forgetToSheafModuleCat, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, AlgebraicGeometry.Scheme.Modules.toPresheafOfModules, SheafOfModules.forgetPreservesLimitsOfSize, CochainComplex.isKInjective_of_iso, SheafOfModules.forget, SheafOfModules.forgetPreservesLimitsOfShape; hits concern ordinary module forgetting, condensed categories, or invariance under an existing complex isomorphism, not the complete Frobenius action-site/resolution assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, KFlat",
+   "results": "0 hits: none; loogle: unknown identifier 'KFlat'; hits concern ordinary module forgetting, condensed categories, or invariance under an existing complex isomorphism, not the complete Frobenius action-site/resolution assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact forgetful functor from infinite cyclic equivariant sheaves preserves injective and flat resolutions of unbounded complexes",
+   "results": "8 hits: instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod, CategoryTheory.ShortComplex.exact_iff_of_hasForget, LightCondensed.instCountableAB4StarLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, Condensed.instAB5CondensedMod; hits concern ordinary module forgetting, condensed categories, or invariance under an existing complex isomorphism, not the complete Frobenius action-site/resolution assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CochainComplex.IsKInjective",
+   "results": "0 hits: none; hits concern ordinary module forgetting, condensed categories, or invariance under an existing complex isomorphism, not the complete Frobenius action-site/resolution assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-closed-forgetful",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native refinement of cor-coef-verdier-weil-equivariance, internal-Hom comparison, evaluation and transposition paragraph; returned item steps 1--3. The maintainer-created ancestry has no blueprint id (ancestor command prints None).",
+   "via": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-frobenius-action-resolutions",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed an orbit-closed small presentation and checked coefficient reindexing; specialized the existing twisted action-site theorem; proved cohomology compatibility and conservativity; used existing ringed-site resolution and preservation nodes. No new node was needed. Searched upstream and Mathlib; no whole-item attachment or leaf.",
+  "blueprint": "cor-coef-verdier-weil-equivariance.proof.md: internal-Hom/evaluation/transposition paragraph, native abelian action-site and unbounded representative obligations inherited through lem-sf-weil-native-closed-forgetful. The recorded ancestry has no imported blueprint id (ancestor prints None).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "why": "Identifies the orbit-closed small presentation with the bounded site and identifies sheaf reindexing; a generic site equivalence tool. This does not replace the biduality unit route; that unit has no such general site or homological-algebra statement."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Generic ringed-site tool for the native Weil realization. This does not replace the biduality unit route; that unit has no such general site or homological-algebra statement."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Descends exact forgetting to a triangulated functor on ordinary unbounded derived categories. This does not replace the biduality unit route; that unit has no such general site or homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Detects derived isomorphisms from all cohomology maps, after ordinary conservativity. This does not replace the biduality unit route; that unit has no such general site or homological-algebra statement."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies unbounded flat-term K-flat resolutions on the small ringed action site. This does not replace the biduality unit route; that unit has no such general site or homological-algebra statement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Supplies functorial unbounded K-injective resolutions on the small ringed action site. This does not replace the biduality unit route; that unit has no such general site or homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "why": "Supplies preservation of flat-term K-flat complexes for the module pullback identified with U. This does not replace the biduality unit route; that unit has no such general site or homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Applies to the exact induction left adjoint to U, giving preservation of K-injectives. This does not replace the biduality unit route; that unit has no such general site or homological-algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-5fe934490",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-5fe934490 (reviewer sub-agent of L); spot-checked: I read in full the item, all seven steps, and every cited statement: twisted-action-ringed-site, the site-equivalence lemma, the two Q̄_ℓ coefficient nodes, both resolution-existence nodes, both preservation nodes, the exact-functor node, the derived-iso node and the definitions. Shape: no new nodes, statement and stmt_deps unchanged, no repair note, no SGA, no cycle. Step 1: s_g(U,u)=(U,g∘u) is a strict automorphism with inverse s_{g^-1}. Weak étaleness and the fpqc covering condition do not depend on the structure map, and the orbit model is small, has pullbacks and is closed under s_g. Step 2: base change along g equals postcomposition by g^-1, so g^{-1}F=F∘s_g, which matches the step. The coefficient iso is canonical by the scheme-pullback compatibility in colimit-x (p_T∘g=p_T); h is the identity on |U|. Step 4: H^n(UK)=UH^nK and conservativity of D(U) follow from the derived-iso lemma. Step 7: K-flat via the left adjoint of u_* (equal to U), and K-injective via Ind⊣U with Ind exact; I checked Hom_B(⊕σ^nM,N)=Hom_A(M,N). FIX in step 3: the twisted lemma's fixed pairs are for σ=s^* on Mod(R_T|_C), not for g_T^* on Mod(R_T); I added the transfer (M,θ)↦(ΦM,Φ(θ)c_M^{-1}) along the restriction equivalence with c:Φg_T^*≅σΦ, and added def-weil-endofunctor-fixed-pair-category to step 3's uses and to proof_deps. Advisory: lem-sf-fixed-pair-derived-forget-comparison overlaps parts of steps 3, 4 and 7 but is not a duplicate. I accept all eight tool_uses as generic infrastructure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilFrobeniusActionResolutions",
+  "declaration": "WeilConjectures.WeilFrobeniusAction.frobenius_action_resolutions",
+  "declarations": [
+   "WeilConjectures.WeilFrobeniusAction.postcompose",
+   "WeilConjectures.WeilFrobeniusAction.Site",
+   "WeilConjectures.WeilFrobeniusAction.topology",
+   "WeilConjectures.WeilFrobeniusAction.translation",
+   "WeilConjectures.WeilFrobeniusAction.coefficient",
+   "WeilConjectures.WeilFrobeniusAction.generator",
+   "WeilConjectures.WeilFrobeniusAction.Modules",
+   "WeilConjectures.WeilFrobeniusAction.ambientModules",
+   "WeilConjectures.WeilFrobeniusAction.Constructible",
+   "WeilConjectures.WeilFrobeniusAction.Realization",
+   "WeilConjectures.WeilFrobeniusAction.pullback",
+   "WeilConjectures.WeilFrobeniusAction.pullbackEquivalence",
+   "WeilConjectures.WeilFrobeniusAction.pullbackAdditive",
+   "WeilConjectures.WeilFrobeniusAction.Pairs",
+   "WeilConjectures.WeilFrobeniusAction.forget",
+   "WeilConjectures.WeilFrobeniusAction.onActionSite",
+   "WeilConjectures.WeilFrobeniusAction.KFlat",
+   "WeilConjectures.WeilFrobeniusAction.FlatTerms",
+   "WeilConjectures.WeilFrobeniusAction.ResolutionAssertions",
+   "WeilConjectures.WeilFrobeniusAction.frobenius_action_resolutions"
+  ],
+  "file": "lean/Sheaf/Paper/WeilFrobeniusActionResolutions.lean",
+  "statement": "theorem frobenius_action_resolutions (D : FiniteFieldDatum.{u}) (T₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom] [IsSeparated T₀.hom] (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) : ∃ A : Realization (D.geometricFiber T₀).left l (D.geometricFrobenius T₀), ∀ (_hA : HasDerivedCategory.{wA} (Modules (D.geometricFiber T₀).left l)) (_hB : HasDerivedCategory.{wB} (Pairs A)), Nonempty (ResolutionAssertions A)",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Concrete orbit-stable AsSmall model of the recorded pro-etale site, normalized finite-subextension coefficient action, full recorded twisted presentation, and derived/resolution assertions. Auxiliary declarations package the clauses using the recorded module, flatness, K-flatness and K-injectivity definitions; all data definitions are explicit. H2/H12 return repaired by attaching the existing general local-freeness predicate to def-sf-proetale-locally-finite-free-module; the pullback theorem is not a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0ced0056",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H12 return of 2ad1093ac536. The theorem stmt_dep lem-weil-pbc-continuous-locally-free-pullback is replaced by the new definition node def-sf-proetale-locally-finite-free-module, with an existing:true record on AlgebraicGeometry.ProEtale.CondensedRing.LocallyFree (Sheaf.Paper.ContinuousLocallyFreePullback:31). The record's statement is the verbatim abbrev header; the node content matches the Lean (pro-etale scheme cover, Mod.IsFree = some finiteFree n, rank zero and varying ranks allowed, arbitrary MonObj R); its cited inverse image ringSheafInverseImage = (upperStar Ab f).mapMod is literally the functor LocallyFree uses; no node in live or side-live already owns the declaration. The item statement change is citation-only: old_statement and the 14 old_stmt_deps are verbatim from live, and the 5-citer audit holds. The added def deps internal-abelian-sheaf-module-equivalence and constructible-stratification are definition nodes on live. The Lean module is byte-identical to the returned head except one Constructible docstring line. My independent clause-by-clause re-reading is ok: hypotheses; AsSmall orbit-closed model with translation = postcompose g^-1; coefficient = sectionRingSheaf(padicAlgClSheaf) with a pinned on generators; recorded Presentation; unbounded mapDerivedCategory triangulated and conservative; stratification constructibility; K-flat, flat terms and functorial K-injective; preservation clauses; universes wA/wB only for localization; edge cases. Gates: no hollow defs, single sorry, docstrings present, lean.statement verbatim, both report sections present. Advisories: Nonempty cohomology iso not pinned; LocallyFree docstring still names the old theorem node. No compile (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q50 stage 2",
+  "old_statement": "Fix a finite field $k_0$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $T_0$ be a separated finite-type $k_0$-scheme, $T=T_0\\times_{k_0}k$, and $g_T=1_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for geometric Frobenius $\\gamma$ [def-weil-frobenius-detailed]. Let $R_T$ be the pro-etale ring sheaf of continuous $\\Omega$-valued functions locally taking values in a finite subextension of $\\mathbf Q_\\ell$ [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Put $\\mathcal A=\\operatorname{Mod}(R_T)$ [def-weil-sheaf-of-modules-category], let $\\mathcal B$ consist of pairs $(M,\\theta:g_T^*M\\xrightarrow{\\sim}M)$ with intertwining maps [def-weil-endofunctor-fixed-pair-category], and let $U:\\mathcal B\\to\\mathcal A$ forget $\\theta$.\n\nThere is a small model $C$ of $T_{\\mathrm{proet}}$ closed under all integer iterates of $g_T$ in the universes of [def-weil-size-convention, def-weil-pbc-proetale-site]. Postcomposition by $g_T$ and its inverse induce mutually inverse site automorphisms preserving coverings and pullbacks. The induced identification $g_T^{-1}R_T\\simeq R_T$ transports continuous functions by the object homeomorphism and preserves their finite coefficient field and the local finite-subextension condition. The twisted action site of [lem-sf-twisted-action-ringed-site] gives an additive equivalence $\\mathcal B\\simeq\\operatorname{Mod}(C\\rtimes\\mathbf Z,R_{\\rtimes})$ identifying $U$ with ringed-topos pullback [def-weil-pbc-ringed-topos-morphism] with invertible structural map. Under this equivalence tensor is diagonal, sheaf Hom is contragredient, and their symmetry and evaluation are the usual underlying module maps. The functor $U$ is exact, conservative, creates small limits and colimits, and has the exact additive left adjoint with underlying object $\\bigoplus_{n\\in\\mathbf Z}(g_T^*)^nM$ and shifting action.\n\nTermwise forgetting induces a triangulated conservative functor $D(U):D(\\mathcal B)\\to D(\\mathcal A)$ on unbounded derived categories [def-weil-abstract-derived-category], with natural identities $H^nD(U)K\\simeq U H^nK$. Thus it carries bounded objects whose underlying cohomology admits a finite locally closed stratification with pro-etale locally finite free restrictions to bounded objects with the same constructibility property. Every complex in $\\mathcal B$ admits a K-flat resolution with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules] and a functorially chosen K-injective resolution [def-pur-kinjective-complex]. Termwise $U$ carries these resolutions to quasi-isomorphisms in $\\mathcal A$, preserves K-flat complexes with flat terms, and preserves K-injective complexes. All assertions concern the localization of complexes in $\\mathcal B$; no identification with fixed pairs in $D(\\mathcal A)$ is asserted.",
+  "what": "Repair of returned immutable head 2ad1093ac536, H2/H12: the existing local finite-free predicate was used through a theorem node that does not own its definition. Add the dedicated definition node and cite it in the local-freeness clause. Only a definition citation is added; no mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+   "place": "Internal-Hom/evaluation/transposition paragraph, native refinement step 5: pro-etale locally finite-free restrictions; Stacks sites-modules.tex, finite locally free definition and Tag 03DO, lemma-local-pullback."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-native-open-derived-tensor",
+    "holds": true,
+    "note": "Uses equivariant K-flat resolutions and their forgetting; both assertions are unchanged."
+   },
+   {
+    "id": "lem-sf-native-proper-projection-realization",
+    "holds": true,
+    "note": "Uses preserved equivariant K-flat/K-injective representatives; the new definition citation changes neither."
+   },
+   {
+    "id": "lem-sf-native-weil-open-proper-forgetting",
+    "holds": true,
+    "note": "Uses inverse site equivalences and coefficient-preserving Frobenius pullback; those assertions are unchanged."
+   },
+   {
+    "id": "lem-sf-native-weil-scalar-frobenius-counit",
+    "holds": true,
+    "note": "Uses exact derived forgetting of fixed-pair complexes; that assertion is unchanged."
+   },
+   {
+    "id": "lem-sf-weil-native-closed-forgetful",
+    "holds": true,
+    "note": "Uses the action-site presentation, derived forgetting and bounded constructibility; the new node names exactly the existing local-free predicate."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-finite-field-fiber",
+   "def-weil-frobenius-detailed",
+   "sk-def-sfb-qlbar-condensed",
+   "sk-prop-sfb-qlbar-colimit-x",
+   "def-weil-sheaf-of-modules-category",
+   "def-weil-endofunctor-fixed-pair-category",
+   "def-weil-size-convention",
+   "def-weil-pbc-proetale-site",
+   "lem-sf-twisted-action-ringed-site",
+   "def-weil-abstract-derived-category",
+   "def-pc-kflat-complex",
+   "def-pc-flat-sheaf-modules",
+   "def-pur-kinjective-complex",
+   "def-weil-pbc-ringed-topos-morphism"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261024T214401-L-610107",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

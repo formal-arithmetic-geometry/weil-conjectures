@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-stack-coarse-properties-etale-locality",
+ "kind": "statement",
+ "title": "Etale locality and base change of coarse-morphism properties",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Deligne--Mumford stacks, representability by algebraic spaces, stacks in groupoids, and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. Let $f:\\mathcal A\\to\\mathcal B$ be any morphism of Deligne--Mumford stacks over $S$, and let $\\{W_i\\to\\mathcal B\\}$ be a set-indexed jointly surjective family of representable etale maps from schemes. A morphism of stacks is separated when its relative diagonal is proper, with properness tested on scheme charts using [def-weil-proper-morphism]. It is quasi-compact when, after every scheme base change $T$ into its target, inverse images of quasi-compact opens of $T$ have quasi-compact underlying point spaces. It is a universal homeomorphism when every base change by an algebraic stack induces a homeomorphism on underlying point spaces. An algebraic stack means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; smooth uses [def-sbc-smooth-morphisms]. The underlying points are field-valued objects modulo isomorphism after common field extension, with topology detected by a smooth scheme atlas. For each property $P$ in the list separated, quasi-compact, universal homeomorphism, $f$ has $P$ if and only if every base change $\\mathcal A\\times_{\\mathcal B}W_i\\to W_i$ has $P$. Each of these three properties is preserved under arbitrary base change by a Deligne--Mumford stack. Etale means [def-weil-etale-morphism] on scheme charts.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 050F (lemma-base-change-separated), 06TZ (lemma-check-separated-covering), 0DTL (lemma-check-quasi-compact-covering), 0DTQ (lemma-check-universal-homeomorphism-covering); base-change clauses: Tag 050V (lemma-base-change-quasi-compact) and Tag 0CI8 (lemma-base-change-universal-homeomorphism). Family version by scheme coproduct. Restricted to DM source and target; universal homeomorphisms still tested by arbitrary algebraic stacks."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-point-topological-space",
+  "def-sfb-universal-homeomorphism-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "We first record the point calculation used below. For arbitrary maps $X\\to Y$, $Z\\to Y$ of the stacks in question, a pair of point classes with the same image in $|Y|$ has representatives over fields whose images become isomorphic over a common extension. Over that extension the representatives and this isomorphism form an object of $X\\times_Y Z$. Thus $|X\\times_Y Z|\\to|X|\\times_{|Y|}|Z|$ is surjective. In particular images pull back as sets, and jointly surjective families remain jointly surjective after base change. This uses no assertion that this map of point sets is injective. The objectwise triple construction is the specified 2-fibre product.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XH (lemma-points-cartesian), common-field-extension proof"
+   }
+  },
+  {
+   "text": "Put $D=\\mathcal A\\times_{\\mathcal B}\\mathcal A$. For any $\\mathcal B'\\to\\mathcal B$, put $\\mathcal A'=\\mathcal A\\times_{\\mathcal B}\\mathcal B'$. Then $D'=\\mathcal A'\\times_{\\mathcal B'}\\mathcal A'$ identifies with $D\\times_{\\mathcal B}\\mathcal B'$, and $\\Delta_{f'}$ is the pullback of $\\Delta_f$ along $D'\\to D$. Indeed a test object of $D'$ is two objects of $\\mathcal A$ with an isomorphism of their images, together with one compatible object of $\\mathcal B'$; the fibre of its diagonal is the space of isomorphisms between those two objects inducing the specified isomorphism in $\\mathcal B$. This is exactly the fibre of $\\Delta_f$ at the underlying object of $D$. These identifications commute with arrows and pullbacks. The relative diagonal is representable by algebraic spaces: on any scheme test its fibre is the subfunctor of $\\operatorname{Isom}_{\\mathcal A}(a_1,a_2)$ mapping to the specified section of $\\operatorname{Isom}_{\\mathcal B}(f(a_1),f(a_2))$. Both Isom functors are algebraic spaces, and taking this fibre is an algebraic-space fibre product.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-dm-isom-space-unramified",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 050F (lemma-base-change-separated) and 06TZ (lemma-check-separated-covering), diagonal pullback calculation"
+   }
+  },
+  {
+   "text": "If $f$ is separated, every scheme test of $\\Delta_{f'}$ is, by Step 2, a base change of a scheme test of $\\Delta_f$ (take its composite into $D$). Properness of algebraic-space morphisms is stable under arbitrary algebraic-space base change. Consequently that test is proper, proving separatedness of $f'$. In particular separatedness implies separatedness of each $f_i$. Conversely suppose every $f_i$ is separated. Fix a scheme $T\\to D$. The algebraic spaces $E_i=T\\times_{\\mathcal B}W_i$ form a jointly surjective etale family over $T$ by Step 1 and the chart calculus. Choose surjective etale scheme atlases $Q_i\\to E_i$. Then $\\{Q_i\\to T\\}$ is jointly surjective, flat and locally finitely presented, hence an fppf covering. The algebraic space $H=T\\times_D\\mathcal A$ has proper pullback over every $Q_i$: the map $Q_i\\to D$ lifts to $D\\times_{\\mathcal B}W_i$, so its pullback of $\\Delta_f$ is a test of $\\Delta_{f_i}$ by Step 2. Properness descends along this scheme fppf covering, giving properness of $H\\to T$. Every scheme test has now been checked, so $f$ is separated.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-a1-space-affine-etale-cover",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 050F and 06TZ; scheme-test proof of proper diagonal descent, using spaces-descent.tex Tag 0422"
+   }
+  },
+  {
+   "text": "Quasi-compactness is preserved under base change directly from the stated scheme-test definition. Given $\\mathcal B'\\to\\mathcal B$, a scheme $T\\to\\mathcal B'$ and a quasi-compact open $V\\subseteq T$, the inverse image of $V$ under $\\mathcal A'\\times_{\\mathcal B'}T\\to T$ is the same stack as $\\mathcal A\\times_{\\mathcal B}V$ via the composite $V\\to\\mathcal B$; both are 2-fibre products of DM stacks, hence DM stacks with etale scheme atlases, so the point topology applies. Their point spaces agree with their atlas topologies. The latter is quasi-compact by the hypothesis on $f$. This also proves the forward implication for each $W_i$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-sfb-stack-point-topology-flat-lfp-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050V (lemma-base-change-quasi-compact), omitted proof expanded for the item's scheme-test convention"
+   }
+  },
+  {
+   "text": "Suppose each $f_i$ is quasi-compact. Fix a scheme $T\\to\\mathcal B$ and a quasi-compact open $V\\subseteq T$. Choose etale scheme atlases of the algebraic spaces $W_i\\times_{\\mathcal B}V$, and cover their source schemes by affine opens $U_{ia}$. The maps $U_{ia}\\to V$ are etale, flat and locally finitely presented by the chart calculus. They are open on point spaces, and their images cover $|V|$ by Step 1. Quasi-compactness of $V$ supplies finitely many of these images covering $V$. Every selected $U_{ia}$ is quasi-compact, since an affine scheme is a spectrum and spectra are quasi-compact. This selection requires neither quasi-compactness of a whole $W_i$ nor any condition on intersections of affine opens.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-point-topology-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTL (lemma-check-quasi-compact-covering), finite quasi-compact scheme refinement in its proof; algebra.tex Tag 00E8"
+   }
+  },
+  {
+   "text": "For each of the finitely selected $U=U_{ia}$, its map to $\\mathcal B$ factors through $W_i$. The hypothesis on $f_i$, tested on the scheme $U\\to W_i$ and its quasi-compact open $U$ itself, says that $|\\mathcal A\\times_{\\mathcal B}U|$ is quasi-compact. Its map to $|\\mathcal A\\times_{\\mathcal B}V|$ is continuous. These finitely many point images cover the latter by Step 1. Given any open cover of that latter space, its inverse image on each of the finitely many quasi-compact sources has a finite subcover; the union of these finite choices covers every point of the target. Thus $|\\mathcal A\\times_{\\mathcal B}V|$ is quasi-compact. This holds for every $T,V$, and proves quasi-compactness of $f$. All products of DM stacks used here are DM and have scheme atlases.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "lem-sfb-dm-etale-atlas-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTL (lemma-check-quasi-compact-covering), final surjective-image argument, written directly for scheme tests"
+   }
+  },
+  {
+   "text": "For universal homeomorphisms the base-change implication is also formal: if $f$ has the property and $\\mathcal B'\\to\\mathcal B$ is a DM base change, every algebraic-stack test $Z\\to\\mathcal B'$ gives $(\\mathcal A\\times_{\\mathcal B}\\mathcal B')\\times_{\\mathcal B'}Z\\simeq\\mathcal A\\times_{\\mathcal B}Z$ over $Z$. Hence the point map is a homeomorphism. Conversely assume every $f_i$ is a universal homeomorphism and fix an arbitrary algebraic stack $Z\\to\\mathcal B$. The stacks $Z_i=Z\\times_{\\mathcal B}W_i$ are algebraic; choose smooth surjective scheme atlases $U_i\\to Z_i$. Their composites $q_i:U_i\\to Z$ are representable smooth, hence flat and locally finitely presented, and jointly surjective by Step 1. Thus each $|q_i|$ is open. Write $X=\\mathcal A\\times_{\\mathcal B}Z$ and $X_i=\\mathcal A\\times_{\\mathcal B}U_i=X\\times_ZU_i$. Because $U_i\\to\\mathcal B$ factors through $W_i$, the hypothesis on $f_i$ says $h_i:|X_i|\\to|U_i|$ is a homeomorphism. No DM assumption on $Z$ or $Z_i$ is made.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-point-topology-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0CI8 (lemma-base-change-universal-homeomorphism) and 0DTQ (lemma-check-universal-homeomorphism-covering), smooth refinement diagram"
+   }
+  },
+  {
+   "text": "Let $h:|X|\\to|Z|$. It is continuous. For any $z\\in|Z|$, choose $u\\in|U_i|$ above it. The unique point of $|X_i|$ above $u$ supplies a point of $|X|$ above $z$, proving surjectivity. If $x_1,x_2\\in|X|$ both map to $z$, Step 1 lifts each pair $(x_j,u)$ to a point $t_j\\in|X_i|$. Injectivity of $h_i$ gives $t_1=t_2$, and projection gives $x_1=x_2$. Finally for an open $O\\subseteq|X|$, its inverse image $O_i\\subseteq|X_i|$ is open. Each $h_i(O_i)$ is open in $|U_i|$, so $|q_i|(h_i(O_i))$ is open in $|Z|$. Their union is $h(O)$: one containment follows from commutativity, and the other follows by lifting the pair $(x,u)$ for any $x\\in O$. Hence $h$ is open, continuous and bijective, and therefore a homeomorphism. Since $Z$ was an arbitrary algebraic-stack test, $f$ is a universal homeomorphism. This completes all three equivalences and all base-change clauses.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTQ (lemma-check-universal-homeomorphism-covering), injectivity, surjectivity and open-map argument expanded using Tag 04XH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-dm-isom-space-unramified",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-a1-space-affine-etale-cover",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-pc-fppf-site",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-sfb-dm-etale-atlas-calculus",
+  "lem-sfb-algebraic-stack-fibre-products"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 050F, 06TZ, 050V, 0DTL, 0CI8 and 0DTQ; field-point lifting from stacks-properties.tex Tag 04XH; proper diagonal descent via spaces-descent.tex Tag 0422. Omitted details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Separated quasi compact and universal homeomorphism properties of algebraic stack morphisms descend along surjective etale covers of the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalHomeomorph\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "check.*quasi.compact.*cover|check.*separated.*cover|check.*universal.homeomorph|algebraic.stack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated morphisms of algebraic stacks are stable under arbitrary base change and separatedness quasi compactness and universal homeomorphism are local on target for etale covers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.MorphismProperty C → Prop\", \"doc\": \"A predicate asserting that a morphism property is stable under base change, meaning that if a morphism satisfies the property, then any base change (pullback) of the morphism also satisfies the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \"[IsJointlySurjectivePreserving P] [P.IsStableUnderBaseChange] : (precoverage P).IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ in the category of schemes is preserved under jointly surjective families and is stable under base change, then the precoverage defined as the intersection of the jointly \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|stack.*[Ss]eparated|stack.*[Qq]uasiCompact",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Topology/Constructible.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"11107f485a6c423c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, scheme morphism properties or general prestacks, not these properties of arbitrary DM morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent of separatedness quasi compactness and universal homeomorphisms for algebraic stacks using proper relative diagonals and point spaces",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\"], \"digest\": \"7f1fcfae78d6fd4c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, scheme morphism properties or general prestacks, not these properties of arbitrary DM morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalHomeomorph\", \"Etale\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, scheme morphism properties or general prestacks, not these properties of arbitrary DM morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated quasi compact and universal homeomorphism properties of morphisms of Deligne Mumford stacks are local on the etale target and stable under base change",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\"], \"digest\": \"9f98c0988eeb016d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, scheme morphism properties or general prestacks, not these properties of arbitrary DM morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stack proper diagonal descent along an etale atlas and compactness of stack point spaces after scheme base change",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\"], \"digest\": \"600a996b4ae75b32\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, scheme morphism properties or general prestacks, not these properties of arbitrary DM morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-keel-mori-finite-inertia-quotient",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Etale locality and base change of coarse-morphism properties.",
+   "via": [
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-coarse-properties-etale-locality",
+  "worker": "stage1",
+  "summary": "Proved the locality and base-change assertions using existing lower-level nodes only: diagonal scheme tests and algebraic-space properness descent, finite affine refinement for quasi-compactness, and smooth scheme tests plus explicit field-point lifting for universal homeomorphisms. No new nodes or statement changes.",
+  "blueprint": "Supporting coarse-morphism calculus in the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli chain. The current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) is the upper direct-image context; it no longer mentions this older detailed alteration chain. The existing creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor reports None); retain its null from.node and the precise inherited place. No unit-route change.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Step 2: generic statement that fibre products of algebraic spaces are algebraic spaces, used to represent the fibre of the relative diagonal as Isom_A x_{Isom_B} T; no node of sk-thm-sf-ctf-stability states it."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Steps 3 and 5: generic existence of a surjective etale scheme atlas (disjoint union of affines) of an algebraic space; no node of sk-thm-sf-ctf-stability gives it, and sibling sfb nodes already record it as a tool use."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-affine-etale-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-bf475cd8b",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-bf475cd8b (reviewer sub-agent of L); spot-checked: Read all eight steps in full; the delivery adds 0 new nodes and leaves the statement, stmt_deps, source and blueprint identical to live, where the item is still unsplit with no repair note. Checked the Stacks sources: stacks-morphisms 050F/06TZ/0DTL/0DTQ (labels read), 050V/0CI8 via tags, stacks-properties 04XH, spaces-descent 0422. Steps are correct: (1) point lifting is surjectivity only; (2) D'=D x_B B', and the fibre of the diagonal is Isom_A x_{Isom_B} T, using the DM Isom-space node for both A and B; (3) separatedness via scheme atlases Q_i of E_i=T x_B W_i, an fppf covering, and properness descent from lem-sfb-space-flat-proper-fp-locality; (4)-(6) quasi-compactness via the scheme-test definition and a finite affine selection; (7)-(8) universal homeomorphism with smooth atlases of Z x_B W_i, no DM assumption on Z, and direct surjectivity/injectivity/openness. FIX: step 4 now cites lem-sfb-dm-etale-atlas-calculus so the point topology applies to the fibre products, and split_report.tool_uses declares the generic off-unit tools lem-trf-space-fibre-products-etale-covers and lem-a1-space-affine-etale-cover. Batch 5: every listed citation reaches sec-trace-formula only through def-trf-algebraic-space or general algebraic-space fibre products; the 68 newly reached trf/pod nodes are foundational space, descent and projective-bundle lemmas and none is a trace-formula or duality step, so all are accepted. Advisory: the later unsplit lem-sfb-stack-etale-local-qcqs-homeomorphism (Q58, 2026-10-23) overlaps the quasi-compact and universal-homeomorphism clauses for algebraic stacks; this is not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackCoarsePropertiesEtaleLocality",
+  "declaration": "CategoryTheory.stack_coarse_properties_etale_locality",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackCoarsePropertiesEtaleLocality.lean",
+  "statement": "theorem stack_coarse_properties_etale_locality {S : Scheme.{u}} {A B : BasedCategory.{max u v, max (u + 1) w} (Over S)} (hA : IsDeligneMumfordModuliStack A) (hB : IsDeligneMumfordModuliStack B) (f : BasedFunctor A B) (I : Type z) (W : I → Over S) (q : ∀ i : I, BasedFunctor (discreteModuli (yoneda.obj (W i))) B) (hqrep : ∀ i : I, IsRepresentableByAlgebraicSpaces (q i)) (hqet : ∀ i : I, IsEtaleModuliMap (q i)) (hqsurj : ∀ y : ModuliPoints B, ∃ (i : I) (x : ModuliPoints (discreteModuli (yoneda.obj (W i)))), moduliPointMap (q i) x = y) : (ModuliSchemeTest @IsProper (moduliRelativeDiagonal f) ↔ ∀ i : I, ModuliSchemeTest @IsProper (moduliRelativeDiagonal (moduliTwoFiberFst (q i) f))) ∧ (IsQuasiCompactModuliMap f ↔ ∀ i : I, IsQuasiCompactModuliMap (moduliTwoFiberFst (q i) f)) ∧ (IsUniversalHomeomorphismModuliMap f ↔ ∀ i : I, IsUniversalHomeomorphismModuliMap (moduliTwoFiberFst (q i) f)) ∧ (∀ (B' : BasedCategory.{max u v, max (u + 1) w} (Over S)), IsDeligneMumfordModuliStack B' → ∀ g : BasedFunctor B' B, (ModuliSchemeTest @IsProper (moduliRelativeDiagonal f) → ModuliSchemeTest @IsProper (moduliRelativeDiagonal (moduliTwoFiberFst g f))) ∧ (IsQuasiCompactModuliMap f → IsQuasiCompactModuliMap (moduliTwoFiberFst g f)) ∧ (IsUniversalHomeomorphismModuliMap f → IsUniversalHomeomorphismModuliMap (moduliTwoFiberFst g f)))",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All three locality equivalences and all three arbitrary DM-base-change clauses. Existing DM affine-test compact-atlas quasi-compactness is equivalent to the stated scheme-open compact-point convention; separatedness uses the existing proper scheme-test predicate on the relative diagonal."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cccecd77e",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read the item node, all 11 stmt_deps and the declarations actually used (ModuliSchemeTest, moduliRelativeDiagonal, IsQuasiCompactModuliMap, moduliTwoFiberFst, IsEtaleModuliMap, IsAlgebraicModuliStack, moduliPointTopologicalSpace), both delivered modules and the new def-sfb-universal-homeomorphism-moduli-map node. Each of separated, quasi-compact and universal homeomorphism has its own iff with the actual projections W_i x_B A -> W_i, plus its own preservation under arbitrary DM base change B' with arbitrary g; no extra hypothesis on f or g; empty I allowed; independent index universe. Separated reuses the proper scheme-test diagonal clause of IsProperModuliMap, equivalent for DM sources because the diagonal is unramified. Quasi-compact reuses IsQuasiCompactModuliMap, equivalent to the node's qc-open/compact-point condition for DM fibre products. The new universal-homeomorphism def is Stacks 0CI7: all algebraic-stack tests, not DM-restricted, on the existing point topology; real content, no rival definition in the project or DAG, node fields correct. The H2 repair (cite def-sfb-stack-point-topological-space) is correct. Item differs from live only in lean and stmt_deps; both Lean statements verbatim; docstrings carry source place, blueprint id and all 8 steps; lines <=100; only sorry is the theorem proof; required report sections present. No file changed, nothing compiled. Advisory: B' shares the universes of A and B; IsEtaleModuliMap's owner def-sfb-moduli-chart-normalization is reached only indirectly via def-sfb-dm-stack-morphism-properties; overlap with the unsplit Q58 lem-sfb-stack-etale-local-qcqs-homeomorphism and with def-sfb-stack-qcqs-morphism's quasi-compactness predicate."
+ }
+}

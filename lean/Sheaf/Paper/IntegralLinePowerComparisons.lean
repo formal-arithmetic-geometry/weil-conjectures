@@ -21,7 +21,6 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] WeilConjectures.IntegralOnSlice.abLocallyBijective
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall
 attribute [local irreducible] WeilConjectures.completedIntegralCommRingSheafUnrestricted
   WeilConjectures.scalarReductionExistence
 universe u
@@ -137,7 +136,7 @@ private theorem ordinary_power_comparisons
     change (B n (Int.ofNat (r + 2))).hom.val.app U
       ((c n (power l E X L (Int.ofNat (r + 2)))).hom.val.app U _) = _
     rw [hc]
-    rw [(hB n).2.2.1 r U a x y]
+    erw [(hB n).2.2.1 r U a x y]
     change SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1} _ _ U _
       ((c n L).inv.val.app U _) = _
     rw [hci]

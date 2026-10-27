@@ -37,6 +37,7 @@ The derived adjunction is normalized by its unit on every K-flat representative.
 @[expose] public section
 
 set_option autoImplicit false
+set_option Elab.async false
 
 universe t u
 
@@ -328,8 +329,8 @@ private theorem exactFunctor_ind_essentialConstancy
   exact ind_of_eventually_constant D j₀ hevent
 
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 private theorem derivedAdjunction_of_resolutions
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -414,8 +415,8 @@ private theorem derivedAdjunction_of_resolutions
 
 
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 private theorem derivedAdjunction_of_witness
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -483,7 +484,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Modules over the completed coefficient ring, without a finite-field convention.
 Source: Stacks Tag 06YY
 (blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
-noncomputable abbrev scalarReductionSource :=
+@[reducible]
+noncomputable def scalarReductionSource :=
   SheafOfModules.{max u (t + 1)}
     (SheafOfModules.derivedChangeRingIndependentCoefficients
       (AlgebraicGeometry.Scheme.ProEt.topology Y)
@@ -492,7 +494,8 @@ noncomputable abbrev scalarReductionSource :=
 /-- Modules over the constant finite quotient ring at exponent n+1.
 Source: Stacks Tag 06YY
 (blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
-noncomputable abbrev scalarReductionTarget (n : ℕ) :=
+@[reducible]
+noncomputable def scalarReductionTarget (n : ℕ) :=
   SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)
 
 /-- The standard localization of completed-coefficient module complexes.
@@ -510,21 +513,35 @@ noncomputable instance scalarReductionTargetDerived (n : ℕ) :
 /-- The site fits in the chosen module universe via its standard small model.
 Source: blueprint small-site convention
 (blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
-noncomputable instance scalarReductionSiteSmall :
+noncomputable def scalarReductionSiteSmall :
     EssentiallySmall.{max u (t + 1)} (AlgebraicGeometry.Scheme.ProEt Y) :=
   essentiallySmallSelf _
+
+-- 2026-10-26 (maintainer): no longer a global instance. Its free coefficient universe made
+-- `EssentiallySmall` of the pro-etale site ambiguous (`u + 1 =?= max (u + 1) ?u`) in every
+-- importer once W2's af916432f81 exported this module through IntegralReductionTowerUnrestricted.
+attribute [local instance] scalarReductionSiteSmall
 
 variable (n : ℕ)
 
 /-- Restriction along the coordinate projection of the completed ring sheaf.
 Source: Stacks Tag 03CZ
 (blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
-noncomputable abbrev scalarReductionRestriction :
+@[reducible]
+noncomputable def scalarReductionRestriction :
     scalarReductionTarget l E Y n ⥤ scalarReductionSource l E Y :=
   SheafOfModules.restrictScalars
     ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
       (completedIntegralCommRingProjectionUnrestricted l E Y n))
+
+/-- Additivity of the explicit scalar-restriction functor.
+Source: Stacks Tag 03CZ
+(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
+instance scalarReductionRestrictionAdditive :
+    (scalarReductionRestriction l E Y n).Additive := by
+  unfold scalarReductionRestriction
+  infer_instance
 
 /-- Restriction is exact, since it leaves underlying abelian sheaves unchanged.
 Source: Stacks Tags 03DA and 03CZ
@@ -613,8 +630,11 @@ theorem scalarReductionExtensionAdditive :
 
 attribute [local instance] scalarReductionExtensionAdditive
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+attribute [local irreducible] scalarReductionExistence scalarReductionExtension
+  HasDerivedCategory.standard
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.defProp false in
 /-- The universal derived pair, including the K-flat computation and exactness.
 Source: Stacks Tag 06YY
@@ -630,8 +650,11 @@ noncomputable def scalarReductionDerivedExistence :
         (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
         ∀ P : CochainComplex (scalarReductionSource l E Y) ℤ,
           P.IsKFlatIndependentCoefficients →
-            IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
-  (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+            IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
+  unfold scalarReductionExtension
+  exact (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+
+attribute [local semireducible] scalarReductionExtension
 
 /-- Derived tensor with the finite quotient over the completed coefficient ring.
 Its universal property determines it up to unique compatible isomorphism.
@@ -652,10 +675,10 @@ noncomputable def scalarReductionCounit :
   (scalarReductionDerivedExistence l E Y n).choose_spec.choose
 
 -- The proof-valued witnesses have large types; their bodies are never needed below.
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
+attribute [local irreducible] scalarReductionDerivedExistence
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The underived tensor/restriction adjunction with its sectionwise unit normalization.
 Source: Stacks Tag 03CZ
 (blueprint: lem-weil-derived-scalar-extension-restriction-adjunction).
@@ -691,8 +714,8 @@ theorem scalarReductionExtension_adjunction :
     (scalarReductionExistence l E Y n).choose_spec.choose
     (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Derived scalar extension is left adjoint to exact restriction, and its unit is
 induced by the completed coefficient projection on every K-flat representative.
 Source: Stacks Tags 07A6, 06YY, 09T5 and 0DVC

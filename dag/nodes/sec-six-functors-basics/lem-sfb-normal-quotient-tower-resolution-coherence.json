@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-normal-quotient-tower-resolution-coherence",
+ "kind": "statement",
+ "title": "Quotient-tower inflation and identity coherence on resolutions",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring] on the small coherent profinite site [def-weil-size-convention]. For a profinite group $P$, write $\\mathcal A_P(A)$ for internal $A$-modules with condensed $P$-action [def-sfb-condensed-action-module], and $\\Gamma_P$ for sections fixed after every profinite base change. Use ordinary unbounded derived categories and K-injective total right derived functors [sk-def-sfb-derived-categories]. Let $P_0\\xrightarrow{p_1}P_1\\xrightarrow{p_2}P_2$ be quotient projections of profinite groups with open normal kernels; a further profinite factor $L$ is allowed and each projection then acts as the identity on $L$. Put $T_1(M)=M^{\\ker p_1}$, $T_2(M)=M^{\\ker p_2}$ and $T_{02}(M)=M^{\\ker(p_2p_1)}$, retaining the respective residual actions. Use normalized invariant inclusions, inflation adjunctions, derived comparison $c$ and derived inflation with the resolution formulas of [def-sfb-normal-invariant-comparison-data, lem-sfb-normal-inflation-resolution-naturality]. On objects and maps, $T_{02}=T_2T_1$ and the inclusion $\\operatorname{Inf}_{02}T_{02}M\\to M$ is the composite of the two invariant inclusions. For a K-injective $I$ in $\\mathcal A_{P_0\\times L}(A)$, $T_1I$ and $T_2T_1I$ are K-injective, and the derived composition comparisons in either parenthesization are the identity on\n$$I^{P_0\\times L}=(T_1I)^{P_1\\times L}=(T_2T_1I)^{P_2\\times L}.$$\nThese equalities of canonical comparisons hold naturally for all unbounded derived objects.\n\nFor every module $N$ in $\\mathcal A_{P_0\\times L}(A)$, the actual derived inflation arrows satisfy\n$$\\operatorname{inf}_{02,N}=\\operatorname{inf}_{1,N}\\circ\\operatorname{inf}_{2,T_1N},$$\nwhere $T_{02}N$ is identified with $T_2T_1N$. Its resolution normalization is the following precise assertion. Given K-injective resolutions $i:N[0]\\to I$, $a:T_1N[0]\\to J$, $z:T_2T_1N[0]\\to Z$, choose homotopy classes $b:J\\to T_1I$, $d:Z\\to T_2J$ with $ba\\simeq T_1(i)$ and $dz\\simeq T_2(a)$. Then $T_2(b)d:Z\\to T_2T_1I$ is the unique homotopy class extending $T_2T_1(i)$ along $z$, and its full $P_2\\times L$-invariants represent both the direct inflation and the composite inflation.\n\nFor a quotient with trivial kernel, the functor $T$ is the identity and the unit $\\eta_N$, the kernel comparison $\\beta$ and the composition comparison $c$ are identities under the canonical exact-functor identifications. All assertions include the zero ring, zero module, a quotient to the trivial group and trivial $L$, with no division by group orders.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated tame-boundary quotient input; extraction of returned normal-subgroup-comparison proof steps 12–14. The blueprint does not state this condensed-action lemma explicitly."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-normal-invariant-comparison-data",
+  "lem-sfb-normal-inflation-resolution-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\ker p_1$ and $H=\\ker(p_2p_1)$. These are open normal subgroups of $P_0$, and $p_1(H)=\\ker p_2$. Use the continuous set section of $p_1$ supplied by [lem-sfb-open-normal-action-injective-models]. For a section $m$ of $M$ fixed by $H$ after every profinite base change, it is fixed by $K$. Every generalized element $v$ of $\\ker p_2$ lifts through that section to an $H$-valued generalized element, so the residual action fixes $m$. Conversely, if $m$ is $K$-fixed and its residual action is fixed by $\\ker p_2$, an $H$-valued generalized element acts as its image under $p_1$, hence fixes $m$. This proves $T_{02}M=T_2T_1M$ as submodules of $M$ with their normalized inclusions. The residual $P_2\\times L$-actions agree because both are induced by lifts in $P_0\\times L$. An equivariant map restricts to the same map of these submodules in either construction, so the equality is functorial. Both inflated inclusions send a fixed section to that very section of $M$; their composite is the direct inclusion. The same argument, with all elements instead of kernel elements, gives $\\Gamma_{P_0\\times L}=\\Gamma_{P_1\\times L}T_1=\\Gamma_{P_2\\times L}T_2T_1$.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-open-normal-action-injective-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated normalized quotient argument; no explicit tower assertion in the blueprint"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-open-normal-action-injective-models] to $p_1$, $p_2$ and $p_2p_1$, using their specified quotient identifications. The first two kernels are open normal by hypothesis; the third is $H=p_1^{-1}(\\ker p_2)$, hence open normal as well. The lemma permits the unchanged factor $L$ and supplies K-injective resolutions in each action category. It says that $T_1$, $T_2$ and $T_{02}$ preserve K-injectives. In particular $T_1I$ and then $T_2T_1I$ are K-injective, and $T_2J$ is K-injective whenever $J$ is. Thus every target of a resolution lift used below has the required K-injectivity.",
+   "uses": [
+    "lem-sfb-open-normal-action-injective-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated normalized quotient argument; no explicit tower assertion in the blueprint"
+   }
+  },
+  {
+   "text": "Use the composition comparison of [lem-sfb-normal-inflation-resolution-naturality] for each projection and for the composite. On the common K-injective representative $I$, its normalization is the identity on the full-invariant complex. In computing the iterated comparison no new resolution is needed, by step 2. By step 1 all complexes in the two paths are the same subcomplex $I^{P_0\\times L}$. Each path is therefore a composite of identity chain maps on this subcomplex, so the paths agree with the direct comparison, including either parenthesization.",
+   "uses": [
+    "lem-sfb-normal-inflation-resolution-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated normalized quotient argument; no explicit tower assertion in the blueprint"
+   }
+  },
+  {
+   "text": "For the specified resolutions $i,a,z$, apply [lem-sfb-normal-inflation-resolution-naturality] first to $p_1$ with resolutions $i,a$, and then to $p_2$ with resolutions $a,z$. This supplies $b:J\\to T_1I$ and $d:Z\\to T_2J$ with $ba\\simeq T_1(i)$ and $dz\\simeq T_2(a)$. Their targets $T_1I$ and $T_2J$ are K-injective by step 2. Additive functors act termwise on homotopies, so $T_2(b)d\\,z\\simeq T_2(b)T_2(a)=T_2(ba)\\simeq T_2T_1(i)$. Put $B=T_2T_1I$, also K-injective by step 2. For both sources $Z$ and $T_2T_1N[0]$, [lem-weil-pbc-kinjective-hom-derived] identifies homotopy Hom into $B$ with derived Hom. Precomposition by $Qz$ is bijective since $z$ is a quasi-isomorphism. Naturality of the localization map therefore makes precomposition by $z$ bijective on these homotopy Hom sets. Hence $T_2(b)d$ is the unique homotopy class extending $T_2T_1(i)$. Neither $T_2(a)$ nor $T_1(i)$ is assumed to be a quasi-isomorphism.",
+   "uses": [
+    "lem-sfb-normal-inflation-resolution-naturality",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), equivalence (1)–(3); application to the displayed quotient resolution lifts"
+   }
+  },
+  {
+   "text": "By [lem-sfb-normal-inflation-resolution-naturality], $\\operatorname{inf}_{2,T_1N}$ is represented by $\\Gamma_{P_2\\times L}(d):\\Gamma_{P_2\\times L}Z\\to\\Gamma_{P_1\\times L}J$, and $\\operatorname{inf}_{1,N}$ by $\\Gamma_{P_1\\times L}(b):\\Gamma_{P_1\\times L}J\\to\\Gamma_{P_0\\times L}I$. The identifications of step 1 hold on maps, so the second chain map is also $\\Gamma_{P_2\\times L}(T_2b)$. Their composite is therefore $\\Gamma_{P_2\\times L}(T_2(b)d)$. The direct inflation, by the same single-projection formula for $p_2p_1$ and the uniqueness in step 4, is represented by exactly this map. Homotopic lifts remain homotopic after the additive full-invariant functor. Hence the two actual derived arrows agree, as required.",
+   "uses": [
+    "lem-sfb-normal-inflation-resolution-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated normalized quotient argument; no explicit tower assertion in the blueprint"
+   }
+  },
+  {
+   "text": "The single-projection formula [lem-sfb-normal-inflation-resolution-naturality] is independent of resolutions and natural in module maps; thus the equality in step 5 has these same properties. For the comparison identities on all unbounded derived objects, choose K-injective representatives using step 2. Every derived morphism between these representatives is represented by a chain map unique up to homotopy, by [lem-weil-pbc-kinjective-hom-derived]. Full invariants and iterated kernel invariants restrict that chain map to the identical fixed subcomplexes of step 1; identity chain maps commute with those restrictions. Changing K-injective representatives gives an isomorphism represented by mutually inverse homotopy classes, again by the cited Hom bijection. The additive invariant functors preserve their homotopies and hence these inverses. The same restriction calculation therefore proves independence of representatives as well as naturality of step 3 for every unbounded derived morphism.",
+   "uses": [
+    "lem-sfb-normal-inflation-resolution-naturality",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), (3), and Tag 070Y (lemma-K-injective-defined); application to the common invariant representatives"
+   }
+  },
+  {
+   "text": "If the kernel is trivial, every section is kernel-fixed, so its normalized invariant inclusion identifies $T$ with the identity, after transport along the quotient group isomorphism. For any resolution $i:X\\to I$, the unit defined in [def-sfb-normal-invariant-comparison-data] is represented by $i$; under the canonical exact-identity-functor identification this is the identity of $QX$. The formulas of [lem-sfb-open-normal-action-injective-models] and [lem-sfb-normal-inflation-resolution-naturality] represent $\\beta$ and $c$ by identities on the same complexes, so they too are identities. The argument used only invariant inclusions, functoriality and K-injective comparison. It therefore also applies to the zero ring and zero module, to a quotient onto the trivial group, and to trivial $L$; no averaging or group-order inversion occurs.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sfb-normal-invariant-comparison-data",
+    "lem-sfb-open-normal-action-injective-models",
+    "lem-sfb-normal-inflation-resolution-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated normalized quotient argument; no explicit tower assertion in the blueprint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-action-module",
+  "def-sfb-normal-invariant-comparison-data",
+  "lem-sfb-normal-inflation-resolution-naturality",
+  "lem-sfb-open-normal-action-injective-models",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), formal quotient input; tower proof written by Q99 using the existing normalized single-quotient lemmas and Stacks Tag 070I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(map_comp|infNatTrans|[Ii]nflat)",
+   "results": "5 hits: Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean; searched Mathlib/RepresentationTheory/Homological/GroupCohomology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology.map_comp\"",
+   "results": "2 hits: groupCohomology.map_comp, groupCohomology.map_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitivity inflation normal subgroup quotient tower unbounded derived condensed invariants",
+   "results": "8 hits: groupCohomology.H1InfRes, groupCohomology.infNatTrans, groupCohomology.infNatTrans_app, QuotientGroup.le_comap_mk', QuotientGroup.quotientMapSubgroupOfOfLe, Algebra.QuasiFinite.trans, derivedSeries_normal, IsScalarTower.AlgEquiv.restrictNormalHom_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a tower of open normal quotient projections of profinite groups, derived inflation of condensed modules is transitive and its comparison is identity for trivial kernel",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, CondensedMod.IsSolid.isIso_solidification_map, Condensed.profiniteFree, CondensedMod.ofSheafProfinite, Hausdorffification.lift_comp_of, LightCondMod.hom_naturality_apply, Condensed.profiniteSolid, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(infNatTrans|map_comp|quotientToInvariants)",
+   "results": {
+    "n_hits": 25,
+    "top": [
+     "Mathlib/RepresentationTheory/Induced.lean",
+     "Mathlib/RepresentationTheory/Induced.lean",
+     "Mathlib/RepresentationTheory/Intertwining.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean"
+    ],
+    "note": "",
+    "subdirectory": "RepresentationTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read hits concern ordinary representations, topological representations, or constant-ring condensed modules; none gives normalized unbounded derived inflation for internal modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived invariants of condensed modules: inflation is compatible with successive quotient homomorphisms",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "groupCohomology.infNatTrans",
+     "groupCohomology.instMonoModuleCatFH1InfRes",
+     "groupCohomology.H1InfRes",
+     "groupCohomology.infNatTrans_app",
+     "Submodule.mapQLinear",
+     "groupCohomology.H1InfRes_f",
+     "Submodule.mapQ",
+     "Submodule.factorPowSucc"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read hits concern ordinary representations, topological representations, or constant-ring condensed modules; none gives normalized unbounded derived inflation for internal modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology.map_comp\"",
+   "results": {
+    "n_hits": 2,
+    "top": [
+     "groupCohomology.map_comp",
+     "groupCohomology.map_comp_assoc"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read hits concern ordinary representations, topological representations, or constant-ring condensed modules; none gives normalized unbounded derived inflation for internal modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity of derived inflation for a tower of profinite quotient groups acting on modules over a condensed ring, computed by K-injective resolutions",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteFree",
+     "Condensed.profiniteSolidification",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "LightCondMod.LocallyConstant.functorToPresheaves",
+     "LightCondensed.ihomPoints_symm_comp"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read hits concern ordinary representations, topological representations, or constant-ring condensed modules; none gives normalized unbounded derived inflation for internal modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "grep",
+   "query": "(inflat|invariant|KInjective)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "Condensed"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read hits concern ordinary representations, topological representations, or constant-ring condensed modules; none gives normalized unbounded derived inflation for internal modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed submodule for a composite quotient is iterated fixed submodules, and K-injective lifts give composition of inflation in the unbounded derived category",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "LinearMap.iterateMapComap",
+     "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+     "DerivedCategory.quotientCompQhIso",
+     "LinearMap.iterateKer",
+     "HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+     "Module.Injective.mk",
+     "CategoryTheory.injectiveResolutions",
+     "CategoryTheory.InjectiveResolution.descCompHomotopy"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read hits concern ordinary representations, topological representations, or constant-ring condensed modules; none gives normalized unbounded derived inflation for internal modules over an arbitrary condensed ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"invariants\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read hits concern ordinary representations, topological representations, or constant-ring condensed modules; none gives normalized unbounded derived inflation for internal modules over an arbitrary condensed ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-invariants-normal-subgroup-comparison",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent-formulated tame-boundary quotient input; extraction of returned normal-subgroup-comparison proof steps 12–14. The blueprint does not state this condensed-action lemma explicitly.",
+   "via": [
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-quotient-tower-resolution-coherence",
+  "worker": "stage1",
+  "summary": "Repair of the returned head e052c06c4ad against the current live DAG: retained the statement, searches and seven-step route, re-read every cited statement and verified that the retained full-statement quotes are unchanged. Made the successive applications and K-injectivity of every lift target explicit, expanded the precomposition-bijection argument, and spelled out independence under changing K-injective representatives. No new nodes or statement changes.",
+  "blueprint": "Paragraph (3) formal tame-boundary quotient input, specifically the extracted normal-subgroup-comparison steps 12–14; no blueprint node states this auxiliary condensed tower assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-f7fecab28",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-f7fecab28 (reviewer sub-agent of L); spot-checked: This is an ordinary one-level split with no repair note: one commit changing the item and the report, no new nodes, no SGA. It is the re-delivery of e052c06c4ad, which a reader passed and which was returned only for a landing promotion reason. Compared with that head, the statement, stmt_deps, proof_deps, source and blueprint are byte-identical. Only steps 2, 4 and 6 and split_report changed, and each change makes the argument more explicit: step 2 also applies the lemma to p2p1 and records that T2 J is K-injective; step 4 names the resolution pairs (i,a) and (a,z) and spells out the bijection z^* through Qz; step 6 handles a change of representative. In both live and side-live the item is still unsplit, and the five cited statements are textually identical there. The source is main-20261015 direct-images.proof.md paragraph (3), lines 19-25, which only motivates the lemma; proof_origin agent and from.node null are honest. Step checks. Step 1: H=p1^{-1}(ker p2). The continuous section s from lem-sfb-open-normal-action-injective-models lifts ker p2-valued generalized elements into H, and conversely g=s(p1 g)k with k K-valued, so T02=T2T1 holds after base change. Step 2: all three kernels are open normal, so T1 I, T2 T1 I and T2 J are K-injective. Step 3: c is the identity on K-injectives. Step 4: T2(b)dz ≃ T2T1(i) by additivity. Uniqueness uses the Stacks 070I Mathlib leaf and the fact that z is a quasi-isomorphism; it does not assume T(i) or T(a) is a quasi-isomorphism. Step 5: Γ(d) composed with Γ(b)=Γ(T2 b) gives Γ(T2(b)d), which equals the direct inflation by uniqueness, with the composition order checked. Steps 6 and 7 cover naturality and independence, and the trivial-kernel, zero-ring and trivial-group cases, with no averaging. No duplicate: product-action-inflation covers only product projections, and derived-inflation-arrows and finite-image-open-kernel-inflation do not state tower coherence. The only citer is the parent normal-subgroup-comparison, which the item does not cite, so there is no cycle. The route stays within the unit plus a Mathlib leaf, so no tool_uses are needed."
+ }
+}

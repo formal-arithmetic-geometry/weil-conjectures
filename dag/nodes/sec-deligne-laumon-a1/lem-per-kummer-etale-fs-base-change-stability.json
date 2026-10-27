@@ -13,9 +13,67 @@
   "def-per-kummer-log-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-per-fs-product-finite-comparison], the fs product exists and is locally Noetherian with finite comparison to the assumed locally Noetherian ordinary product. Choose affine chart neighbourhoods $U\\to V$ for $f$ using [lem-per-kummer-etale-local-chart-criterion], with $h:P\\to Q$, finite cokernel $C$ killed by $n$ invertible on $V$, and etale $c:U\\to B=V\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$. Strict etale chart neighbourhoods pull back to ordinary etale neighbourhoods: the strict clause of [lem-per-fs-product-finite-comparison] identifies these fs products with ordinary products, and [lem-weil-pbc-etale-covering-base-change] gives the covering property. It therefore suffices to give such chart data after base change on each of these neighbourhoods.",
+   "uses": [
+    "lem-per-fs-product-finite-comparison",
+    "lem-per-kummer-etale-local-chart-criterion",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72, local standard-cover description; X 1.8, pp.146--147, local base-change assertion."
+   }
+  },
+  {
+   "text": "Replace $Y'$ locally by an affine etale neighbourhood $V'$ mapping to $V$. The chart-refinement clause of [lem-per-kummer-saturated-pushout-algebra] supplies an fs chart $R$ on $V'$ and a compatible $a:P\\to R$. Put $S_0=Q\\oplus_PR$ and $S=(S_0^{\\rm int})^{\\rm sat}$. The same node states that $R\\to S$ and its group map are injective, every element of $S$ has a positive multiple in $R$, and $S^{\\rm gp}/R^{\\rm gp}\\simeq C$. Thus this cokernel is finite, killed by the same $n$, which remains invertible on $V'$ because a ring homomorphism takes an inverse of $n$ to an inverse of its image.",
+   "uses": [
+    "lem-per-kummer-saturated-pushout-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1--2.2, pp.71--72; VIII 3.3.5--3.3.6, p.107; X 1.8, p.147."
+   }
+  },
+  {
+   "text": "Write $F=U\\times_VV'$ and $D=V'\\times_{\\operatorname{Spec}\\mathbf Z[R]}\\operatorname{Spec}\\mathbf Z[S]$. The fs-product chart formula of [lem-per-kummer-saturated-pushout-algebra] identifies the local pullback with\n$$U'=F\\times_{\\operatorname{Spec}\\mathbf Z[S_0]}\\operatorname{Spec}\\mathbf Z[S],$$\nwith chart $S$. There is a canonical ordinary-scheme identification $U'=U\\times_BD$. Indeed, writing $H=\\Gamma(V,\\mathcal O)$, $A=\\Gamma(V',\\mathcal O)$ and $T=\\Gamma(U,\\mathcal O)$, the two coordinate rings are\n$$(T\\otimes_H A)\\otimes_{\\mathbf Z[S_0]}\\mathbf Z[S],\\qquad T\\otimes_{H\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]}(A\\otimes_{\\mathbf Z[R]}\\mathbf Z[S]).$$\nA map from either ring to a ring $E$ is a triple of maps $T,A,\\mathbf Z[S]\\to E$: the first two agree on $H$, and their monomial values agree with the third on $Q,R$, respectively. Agreement on $P$ is included in agreement on $H$; the pushout relations of $S_0$ impose exactly these equations. This proves the identification compatibly with all projections.",
+   "uses": [
+    "lem-per-kummer-saturated-pushout-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.5--3.3.6, p.107, chart base change; X 1.8 diagram (1.a)."
+   }
+  },
+  {
+   "text": "Consequently $c':U'\\to D$ is the ordinary base change of $c:U\\to B$. All these schemes are affine, so [lem-weil-pbc-etale-ring-base-change] proves that $c'$ is etale. The compatible charts $R\\to S$ have the injectivity, root-cofinality and invertible finite cokernel from Step 2. They therefore satisfy the converse of [lem-per-kummer-etale-local-chart-criterion]. The strict etale neighbourhoods used above cover $X'$, so that criterion applied to this family proves globally that $f'$ is Kummer etale. The integer $n$ was pulled back only as a unit; no flatness or strictness of $g$ was used.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-per-kummer-etale-local-chart-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72; X 1.8, p.147. Ordinary etale ring base change: Stacks Tag 00U2 (algebra.tex, lemma-etale, item (2))."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-fs-product-finite-comparison",
+  "lem-per-kummer-etale-local-chart-criterion",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-per-kummer-saturated-pushout-algebra",
+  "lem-weil-pbc-etale-ring-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 2.2, p.72 and X 1.8, pp.146--147; the chart-pushout proof expands the latter parenthetical base-change assertion using existing DAG inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +116,52 @@
    "results": "{\"t\": \"2026-10-18T23:28:09Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer etale morphism of fine saturated log schemes is stable under arbitrary fs base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"338acedf396313ae\"}; Read the returned types: ordinary scheme pullbacks, ordinary etale algebras, Kummer field extensions, manifold charts, or number-field logarithms do not state the logarithmic claim. No fs-log match.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer etale morphisms of fine saturated logarithmic schemes have local charts by injective Kummer monoids with invertible finite cokernel and etale comparison",
+   "results": "{\"t\": \"2026-10-24T01:29:30Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer etale morphisms of fine saturated logarithmic schemes have local charts by injective Kummer monoids with invertible finite cokernel and etale comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.instEtaleOfIsStandardEtale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"770657c7ecb74db4\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KummerEtale|LogEtale|LogScheme",
+   "results": "{\"t\": \"2026-10-24T01:30:01Z\", \"tool\": \"grep\", \"query\": \"KummerEtale|LogEtale|LogScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chart criterion for Kummer etale logarithmic morphisms using finite index monoids and monoid rings",
+   "results": "{\"t\": \"2026-10-24T01:30:02Z\", \"tool\": \"leansearch\", \"query\": \"Chart criterion for Kummer etale logarithmic morphisms using finite index monoids and monoid rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isLocalization\", \"NumberField.Units.isMaxRank_iff_closure_finiteIndex\", \"MonoidAlgebra.finiteType_of_fg\", \"ContMDiffMonoidMorphism.toMonoidHom\", \"Submonoid.log_mul\", \"ContMDiffMonoidMorphism\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"IsLocalization.iff_map_piEvalRingHom\"], \"digest\": \"9800c52d63df2ad8\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KummerEtale\"",
+   "results": "{\"t\": \"2026-10-24T01:30:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"KummerEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fine saturated log schemes Kummer etale morphisms are stable under arbitrary saturated logarithmic fibre products",
+   "results": "{\"t\": \"2026-10-24T01:30:48Z\", \"tool\": \"leanfinder\", \"query\": \"Fine saturated log schemes Kummer etale morphisms are stable under arbitrary saturated logarithmic fibre products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"2b17370725b297f6\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A logarithmic morphism is Kummer etale if and only if locally it has a Kummer monoid chart of invertible index and an ordinary etale map to the chart base change",
+   "results": "{\"t\": \"2026-10-24T01:30:49Z\", \"tool\": \"leanfinder\", \"query\": \"A logarithmic morphism is Kummer etale if and only if locally it has a Kummer monoid chart of invertible index and an ordinary etale map to the chart base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.mem_etaleLocus_iff\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"Algebra.instEtaleOfIsStandardEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"6554f220b6844611\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-kummer-g-cover-fs-base-change",
@@ -90,5 +190,31 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-kummer-etale-fs-base-change-stability",
+  "worker": "stage1",
+  "summary": "Reused existing fs-product existence and saturated Kummer-pushout algebra. Added only the independent local Kummer chart criterion. Computed the fs chart comparison as the ordinary base change of the old etale comparison, preserving the actual projections. No statement change or Lean attachment.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3, regular-pair purity geometry, abelian-inertia toric comparison: expands the ILO X 1.8 fs-base-change input, not the perverse argument itself."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-f97cb2355",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-f97cb2355 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 4 steps, the new node lem-per-kummer-etale-local-chart-criterion, every cited statement, and ILO VI 2.1-2.3 (pp.71-73), X 1.2 and X 1.8 (pp.146-147). The item statement and stmt_deps are byte-identical to the live base. Dropped-route finding: the item (drop-list line 1663) and its Step-1 cite lem-per-fs-product-finite-comparison (line 1594) are both on the drop list. Both are still reached from nt-target-zeta-rational through lem-sfb-field-log-smooth-gabber-modification -> lem-per-gabber-abelian-stage-toric-chart -> lem-per-kummer-g-cover-fs-base-change. Q30's split of fs-product-finite-comparison was merged at 01:11, after the Q39 RETURN of this item. A BFS with the item excluded shows the delivery adds only the new node to the target closure and no dropped node. The fs-product node supplies only generic existence, local Noetherianity and the strict-case comparison; none of the forbidden artin-gabber machinery is used. I accepted it under the 10-24 re-reach practice. Batch 5: def-trf-fs-log-blowup and the per definitions are generic definitions. The fs-product closure reaches only generic trf monoid and log lemmas, with no thm-trf, sk-thm, nt-assume or Poincaré-duality node. All accepted. New node: the VI 2.2 iff chart criterion, which is true. Converse: K=0, C has invertible order, and characteristic injectivity holds because h^{-1}(G)=F and P^gp/F^gp is torsion-free. Forward: Kato/Nakayama/Stix sharp characteristic charts. Putting n on the target is equivalent to the definition's source condition after shrinking V to V[1/n]. It is not a duplicate of strict-local-standard-model, def-per-kummer-log-morphism, kummer-boundary-restriction or saturated-pushout-algebra, and not a clause of the item. Steps: Step 1, strict étale pullback via the strict clause, and covering via etale-covering-base-change. Step 2, chart R with a:P->R and the S monoid clauses from saturated-pushout-algebra; n stays invertible. Step 3, I checked U'=U x_B D through the triple description of ring maps, and D->B is well defined by compatibility of a. Step 4, c' étale by ring base change, then the converse criterion. Edge cases checked: h=id, the root map with the log point (torsion units), empty X', and n not invertible. Maintainer note: the drop-listed chain stays reachable through sfb gabber-modification Step 6; either re-admit it explicitly or repair that step. No changes made."
+ }
 }

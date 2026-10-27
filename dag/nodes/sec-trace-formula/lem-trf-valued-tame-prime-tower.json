@@ -1,0 +1,187 @@
+{
+ "id": "lem-trf-valued-tame-prime-tower",
+ "kind": "statement",
+ "title": "Tame descent of prime-degree towers and the immediate obstruction criterion",
+ "statement": "All fields below are fields [def-weil-field] with compatible nontrivial nonarchimedean real absolute values. For such a field $A$, write $A^\\circ=\\{x:|x|\\le1\\}$ for its valuation ring [def-trf-valuation-ring], $\\widetilde A=A^\\circ/\\{x:|x|<1\\}$ and $\\Gamma_A=|A^\\times|$. For a finite extension $B/A$ set $e(B/A)=[\\Gamma_B:\\Gamma_A]$, $f(B/A)=[\\widetilde B:\\widetilde A]$ and $d(B/A)=[B:A]/(e(B/A)f(B/A))$. Call it immediate if its value group and residue field equal those of $A$, unramified if $e=d=1$ and the residue extension is separable, and tame if $d=1$, its residue extension is separable and its ramification index is prime to the residue characteristic (with no index restriction in residue characteristic zero). A field extension is separable if every algebraic element has a minimal polynomial with distinct roots. Let $A$ be complete and let $p=\\operatorname{char}(\\widetilde A)>0$. (1) If $B/A$ is finite of degree a power of $p$, there is a finite tame extension $A^\\prime/A$ in a common algebraic closure such that $BA^\\prime/A^\\prime$ admits a finite tower whose nonidentity successive degrees are all $p$. (2) If no finite extension $B/A$ admits a finite immediate extension of degree $p$, then every finite extension $C/A$ has $d(C/A)=1$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§2.1, p. 9 (maximal tame extension has pro-p absolute Galois group); §6.1 opening, p. 36 (criterion); proof of Theorem 6.3.1, first paragraph, p. 49 (finite tame descent and prime-degree towers).",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix the algebraic closure $\\Omega$ and its extending absolute value. By [lem-trf-maximal-tame-galois-p-property], the field $T$, the union of finite tame extensions of $A$ in $\\Omega$, is algebraic over $A$ and every finite Galois extension of $T$ has $p$-power degree. The characteristic of $T$ is $0$ or $p$, since a field with residue characteristic $p$ has characteristic $0$ or $p$. For ANY finite $D/A$, the extension $DT/T$ is finite. Apply [lem-trf-galois-p-property-prime-towers] to obtain a degree-$p$ tower from $T$ to $DT$, including when $D/A$ is inseparable.",
+   "uses": [
+    "lem-trf-maximal-tame-galois-p-property",
+    "lem-trf-galois-p-property-prime-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 2.1, printed p. 9; proof of Theorem 6.3.1, first paragraph, printed p. 49."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-algebraic-union-finite-tower-descent] to this tower with $M=T$, $B=D$. It gives a finite $A^\\prime\\subseteq T$ and a tower from $A^\\prime$ to $DA^\\prime$ with the same successive degrees $p$. By [lem-trf-maximal-tame-galois-p-property], $A^\\prime/A$ is tame. With $D=B$ this proves (1); in fact the construction works without the $p$-power restriction on $[B:A]$. If the tower is empty, the descent statement gives $DA^\\prime=A^\\prime$.",
+   "uses": [
+    "lem-trf-algebraic-union-finite-tower-descent",
+    "lem-trf-maximal-tame-galois-p-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49, finite tame descent."
+   }
+  },
+  {
+   "text": "Assume the hypothesis of (2), and suppose for contradiction that some finite $C/A$ has $d(C/A)>1$. Apply the construction of steps 1--2 with $D=C$. By [lem-trf-valued-finite-ramification-calculus], $CA^\\prime/C$ is tame (base change of $A^\\prime/A$), all the fields in the resulting finite tower are complete, and multiplicativity gives $$d(CA^\\prime/A^\\prime)=\\frac{d(CA^\\prime/C)d(C/A)}{d(A^\\prime/A)}=d(C/A)>1.$$ Thus one of its degree-$p$ steps $E_{i+1}/E_i$ has defect greater than one, since the product of their defects is greater than one.",
+   "uses": [
+    "lem-trf-valued-finite-ramification-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 6.1.6 proof, printed p. 41; Section 2.1, printed p. 9."
+   }
+  },
+  {
+   "text": "For that step write $e=e(E_{i+1}/E_i)$, $f=f(E_{i+1}/E_i)$ and $d=d(E_{i+1}/E_i)$. The calculus [lem-trf-valued-finite-ramification-calculus] gives positive integers $e,f$, and $d$ a power of $p$, with $p=efd$. Since $d>1$, this forces $d=p$ and $e=f=1$. Hence $E_{i+1}/E_i$ is an immediate extension of degree $p$, whereas $E_i/A$ is finite. This contradicts the hypothesis of (2). Every finite extension therefore has $d=1$.",
+   "uses": [
+    "lem-trf-valued-finite-ramification-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 6.1 opening, printed p. 36; Corollary 6.1.6 proof, printed p. 41."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-maximal-tame-galois-p-property",
+  "lem-trf-galois-p-property-prime-towers",
+  "lem-trf-algebraic-union-finite-tower-descent",
+  "lem-trf-valued-finite-ramification-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Section 2.1, printed p. 9; Section 6.1 opening, printed p. 36; Corollary 6.1.6 proof, printed p. 41; Theorem 6.3.1 proof, first paragraph, printed p. 49. Primary PDF read online; local archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite immediate extension of a henselian field becomes a tower of extensions of residue characteristic prime degree after a finite tame base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.inertiaDeg_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\to S $ be a ring homomorphism, $ p $ a maximal ideal of $ R $, and $ P $ a prime ideal of $ S $ lying over $ p $. If $ p \\neq 0 $ and there are no zero divisors in the scalar multiplication fro\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For maximal ideals $\\\\mathfrak{p}$ in $B$ and $\\\\mathfrak{P}$ in $C$ such that $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, the product of the inertia degree $f_{\\\\mathfrak{p}/B}$ of $\\\\mathfrak{p}$ in $B$ an\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib/RingTheory/Smooth/Field\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field L] [inst_1 : Field K] [inst_2 : Algebra K L] [PerfectField K]\\n  [Algebra.EssFiniteType K L], Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete valued field is defectless in every finite extension if and only if no finite extension admits an immediate extension of prime degree",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valued.completable\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \": CompletableTopField K\", \"doc\": \"A valued field $ K $ is completable with respect to its uniform structure induced by the valuation to a linearly ordered commutative group with zero.\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpace\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": CompleteSpace K\", \"doc\": \"A field $ K $ equipped with a valuative relation and a uniform space structure is a non-Archimedean local field if it is complete and its additive group operations are uniformly continuous.\"}\n  {\"name\": \"perfectField_iff_splits_of_natSepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.SeparableDegree\", \"type\": \"(F : Type*) [Field F] : PerfectField F ↔ ∀ f : F[X], f.natSepDegree = 1 → Splits f\", \"doc\": \"A field $ F $ is perfect if and only if for every polynomial $ f $ over $ F $, if $ f $ has exactly one distinct root in its splitting field, then $ f $ splits into linear factors.\"}\n  {\"name\": \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[(Valued.v : Valuation K Γ₀).RankOne] : ProperSpace K ↔ CompleteSpace K ∧ IsDiscreteValuationRing 𝒪[K] ∧ Finite 𝓀[K]\", \"doc\": \"For a field $ K $ equipped with a rank one valuation, the topology induced by the valuation makes $ K $ a proper space (every closed ball is compact) if and only if $ K $ is complete, its ring of inte\"}\n  {\"name\": \"IntermediateField.isSimpleOrder_of_finrank_prime\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Basic\", \"type\": \"(hp : Nat.Prime (Module.finrank F E)) : IsSimpleOrder (IntermediateField F E)\", \"doc\": \"If the degree of the field extension $ E $ over $ F $ is a prime number, then the lattice of intermediate fields between $ F $ and $ E $ is a simple order, meaning every intermediate field is either $\"}\n  {\"name\": \"Valued.integer.totallyBounded_iff_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[(Valued.v : Valuation K Γ₀).RankOne] [IsDiscreteValuationRing 𝒪[K]] :\\n  TotallyBounded (Set.univ (α := 𝒪[K])) ↔ Finite 𝓀[K]\", \"doc\": \"For a valued field with a rank one valuation and a discrete valuation ring of integers, the universal set of the ring of integers is totally bounded if and only if the residue field is finite.\"}\n  {\"name\": \"Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[(Valued.v : Valuation K Γ₀).RankOne] :\\n  CompactSpace 𝒪[K] ↔ CompleteSpace 𝒪[K] ∧ IsDiscreteValuationRing 𝒪[K] ∧ Finite 𝓀[K]\", \"doc\": \"For a valued field $ K $ with a rank one valuation, the ring of integers $ \\\\mathcal{O}[K] $ is compact if and only if it is complete, a discrete valuation ring, and its residue field $ \\\\kappa[K] $ is \"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": CompleteSpace 𝒪[K]\", \"doc\": \"The ring of integers $\\\\mathcal{O}_K$ in a non-Archimedean local field $K$ is a complete topological space with respect to the topology induced by the valuation on $K$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, IsGalois",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "immediate.*extension|pro.p.group|tame.*ramif|defectless",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal tame extension has pro p absolute Galois group and finite extensions descend to prime degree towers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n  {\"name\": \"Field.absoluteGaloisGroup\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The absolute Galois group of a field $ K $ is the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise. This group captures the symmetries of the algebraic closure ove\"}\n  {\"name\": \"InfiniteGalois.profiniteGalGrp\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_3) →\\n  (K : Type u_4) → [inst : Field k] → [inst_1 : Field K] → [inst_2 : Algebra k K] → [IsGalois k K] → ProfiniteGrp.{u_4}\", \"doc\": \"The Galois group $\\\\text{Gal}(K/k)$ of an infinite Galois extension $K/k$, equipped with the Krull topology, is constructed as an object in the category of profinite groups. This topology ensures the g\"}\n  {\"name\": \"Field.instGroupAbsoluteGaloisGroup\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [inst : Field K] → Group (Field.absoluteGaloisGroup K)\", \"doc\": \"The absolute Galois group of a field $ K $, defined as the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise, is equipped with a canonical group structure under com\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension, if $\\\\mathfrak{p}$ is a maximal ideal in $R$ and $\\\\mathfrak{P}, \\\\mathfrak{Q}$ are ideals in $S$ lying over $\\\\mathfrak{p}$, then the inertia degrees $[S/\\\\mathfrak{P} : R/\\\\mathfrak\"}\n  {\"name\": \"IsAbelianGalois.tower_top\", \"module\": \"Mathlib/FieldTheory/Galois/Abelian\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Field M] [inst_4 : Algebra K M] [inst_5 : Algebra L M] [IsScalarTower K L M] [IsAbelianGalois K M],\\n  IsAbelianGalois L M\", \"doc\": \"If $ K $ is an abelian Galois extension of $ M $, then $ L $ is also an abelian Galois extension of $ M $ in the tower of field extensions $ L/K/M $.\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with finite Galois group $ G $, if $ P $ and $ Q $ are prime ideals in $ B $ lying over a maximal ideal $ p $ in $ A $, then the inertia degrees $ [B/P : A/p] $ \"}\n  {\"name\": \"Ideal.inertiaDegIn_eq_inertiaDeg\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] [p.IsMaximal], p.inertiaDegIn B =\", \"doc\": \"If $ \\\\mathfrak{p} $ is a maximal ideal in a ring $ R $, then the inertia degree of $ \\\\mathfrak{p} $ in a ring extension $ B $ equals the inertia degree of $ \\\\mathfrak{p} $ in an ideal $ \\\\mathfrak{P} $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian valued field has a maximal tame extension whose absolute Galois group is pro p",
+   "results": "OK 8 hits: Field.henselian, Tilt.instField, Field.absoluteGaloisGroupAbelianization, Field.absoluteGaloisGroup, Field.instGroupAbsoluteGaloisGroup, Field.instTopologicalSpaceAbsoluteGaloisGroup, InfiniteGalois.profiniteGalGrp, ValuationSubring.inertiaSubgroup; ; digest 50074a70b09e1856",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, IsGalois",
+   "results": "OK 0 hits: ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*tame|tame.*extension|wild.*inertia|defectless",
+   "results": "OK 0 hits: ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite tame base change gives a tower of prime degree extensions and detects nontrivial defect",
+   "results": "OK 8 hits: Ideal.inertiaDegIn_mul_inertiaDegIn, Field.finInsepDegree_top_le_finInsepDegree_of_isScalarTower, Algebra.Unramified, Ideal.inertiaDeg_le_finrank, Algebra.IsUnramifiedAt.of_liesOver, Algebra.Unramified.baseChange, Algebra.IsAlgebraic.isBaseChange_of_isFractionRing, RingHom.FormallyUnramified.isStableUnderBaseChange; ; digest e3930f718883f6fc",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-type23-stability",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: §2.1, p. 9 (maximal tame extension has pro-p absolute Galois group); §6.1 opening, p. 36 (criterion); proof of Theorem 6.3.1, first paragraph, p. 49 (finite tame descent and prime-degree towers).",
+   "via": [
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-valued-tame-prime-tower",
+  "worker": "stage1",
+  "summary": "Separated maximal tame Galois theory, abstract prime-degree towers, and finite-data descent into three statement-only inputs. Assembled both clauses, treating arbitrary finite extensions for the defect criterion and explicitly including inseparability. Reused the finite ramification calculus. No statement change; no Mathlib leaf or project attachment found.",
+  "blueprint": "Retained historic semistable-alteration / Temkin input at blueprint.from.place: steps 1--2 realize the tame descent in Theorem 6.3.1 p. 49; steps 3--4 realize the stability criterion of Section 6.1 p. 36 and Corollary 6.1.6 p. 41. Latest blueprint locality proof has changed to contracting correspondences; no chapter/unit route is changed by this assigned retained input."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NB-792a996cf",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-792a996cf (reviewer sub-agent of L); spot-checked: Read the item, the three new nodes, the cited lem-trf-valued-finite-ramification-calculus and Temkin's own PDF. The Temkin file is absent from literature/ (WANTED stands), so it was read via pdftotext of math.huji.ac.il/~temkin/papers/Stable_Modification.pdf. The places match: §2.1 p.9 (k^mr pro-p; Lemma 2.1.5(iii) gives moderately ramified iff separable residue, (e,p)=1, d=1, which is the delivery's 'tame'), §6.1 p.36, the converse of Cor 6.1.6 on p.41 ('maybe inseparable' p-towers over K^mr, first non-Cartesian step immediate), and Thm 6.3.1 p.49 (subgroup chain plus the purely inseparable tower). Statement and stmt_deps unchanged. Step 1: T is algebraic with the p-property; char T is 0 or p; DT/T is finite; the prime-tower node applies. Step 2: the descent node applies with M=T, B=D, and A'⊆T finite is tame by the maximal-tame node. This proves (1); the empty tower case is covered. Step 3: CA'/C is tame by base change, and multiplicativity gives d(CA'/A')=d(C/A)>1, so some p-step has d>1. Step 4: p=efd with d a power of p forces d=p, e=f=1, an immediate step over the finite E_i, a contradiction. Steps 3 and 4 are rightly elementary from the calculus statement. All three new nodes are true and self-contained, and I checked them on small cases. Maximal-tame: T is k^mr and Gal(k^s/k^mr) is pro-p; tested on Q_p^tr and on F_p((t)) with its inseparable extensions. Prime towers: separable part via p-group chains (H<N_G(H)), inseparable part via p-th roots; the char 0 or p hypothesis is needed. Descent: a finite-data argument; n=0 needs B⊆A_0. None restates an item clause. rg over the DAG found no duplicates: analytic-ramification-tower needs an algebraically closed residue field and is a consumer; the DVR tame nodes and pgroup-filtration are different statements. Form is correct: blueprint from/via, created.item, five searches each, no proofs, no cycle, all nodes in unit sk-i-curve-zero, no tool_uses, no SGA."
+ }
+}

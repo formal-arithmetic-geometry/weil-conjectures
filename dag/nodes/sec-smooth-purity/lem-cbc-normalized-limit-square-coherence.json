@@ -1,0 +1,264 @@
+{
+ "id": "lem-cbc-normalized-limit-square-coherence",
+ "kind": "statement",
+ "title": "Normalized inverse-limit comparisons respect an exact functor square",
+ "statement": "For $i=0,1,2,3$, let $\\mathcal C_i$ be a site small in the module universe, $R_i$ a sheaf of commutative rings, and $\\mathcal A_i=\\operatorname{Mod}(R_i)$ [def-weil-sheaf-of-modules-category]. Assume countable products in each $\\mathcal A_i$ are exact. Let $F:\\mathcal A_0\\to\\mathcal A_1$, $G:\\mathcal A_1\\to\\mathcal A_3$, $H:\\mathcal A_0\\to\\mathcal A_2$, and $K:\\mathcal A_2\\to\\mathcal A_3$ be additive exact functors whose canonical countable-product comparisons $\\phi_E:E(\\prod_nN_n)\\to\\prod_nE(N_n)$ are invertible. Let $e:GF\\xrightarrow{\\sim}KH$ be a natural isomorphism. Use the same letters for termwise functors on complexes and strict towers and their exact derived functors [lem-sf-exact-functor-derived-triangulated, lem-weil-tower-category-levelwise-abelian]. Write $L_i=R\\lim$ on $D(\\operatorname{Tow}(\\mathcal A_i))$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Use precisely the comparisons $\\lambda_E$ and normalized isomorphisms $\\theta:L_i\\xrightarrow{\\sim}\\mathsf R_i$ of [lem-cbc-exact-product-functor-strict-limit], with signed coordinates\n$$\\mathsf R_i(M)^q=P_M^q\\oplus P_M^{q-1},\\quad P_M=\\prod_nM_n,\\quad d(x,y)=(dx,(1-s)x-dy).$$\n\nFor any countable family $(N_n)$ in $\\mathcal A_0$ and $P=\\prod_nN_n$, the prescribed product maps satisfy\n$$(\\prod_ne_{N_n})\\circ\\phi_G\\circ G(\\phi_F)\n=\\phi_K\\circ K(\\phi_H)\\circ e_P.$$\nTheir common composite has $n$th projection $e_{N_n}\\circ GF(\\pi_n)=KH(\\pi_n)\\circ e_P$. Let $\\kappa_E:E\\mathsf R_i\\to\\mathsf R_jE$ be the canonical biproduct comparison followed by $\\phi_E$ on both signed summands. For every strict tower complex $M$, one has the chain-map equality\n$$\\mathsf R_3(e_M)\\circ\\kappa_{G,FM}\\circ G(\\kappa_{F,M})\n=\\kappa_{K,HM}\\circ K(\\kappa_{H,M})\\circ e_{\\mathsf R_0M}.$$\nThis equality descends to the derived categories. For every $M\\in D(\\operatorname{Tow}(\\mathcal A_0))$ the normalized comparisons obey\n$$L_3(e_M)\\circ\\lambda_{G,FM}\\circ G(\\lambda_{F,M})\n=\\lambda_{K,HM}\\circ K(\\lambda_{H,M})\\circ e_{L_0M}.$$\nThis is natural for all derived tower maps, with $e$ localized termwise and $\\lambda_E=\\theta_{EM}^{-1}\\kappa_{E,M}E(\\theta_M)$, including its specified K-injective normalization.\n\nFor every complex $C$ and strict augmentation $\\gamma:\\Delta C\\to M$ [def-weil-inverse-system], the composite $\\lambda_G\\circ G(\\lambda_F)$ carries $GF(u_\\gamma)$ to $u_{GF\\gamma}$, and $\\lambda_K\\circ K(\\lambda_H)$ carries $KH(u_\\gamma)$ to $u_{KH\\gamma}$. Here $u$ is the canonical derived augmentation map specified in [lem-cbc-exact-product-functor-strict-limit]. These maps satisfy $L_3(e_M)\\circ u_{GF\\gamma}=u_{KH\\gamma}\\circ e_C$. No functor is assumed to preserve K-injective objects, and no boundedness is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Final paragraph: exact product-preserving functors applied to the defining derived limits; agent-formulated square compatibility extracted from returned parent Steps 5–8, with the same signed Roos and K-injective normalization."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-weil-inverse-system"
+ ],
+ "proof": [
+  {
+   "text": "Construct one common localized roosF at each corner, using the generic roos_map_quasiIso and roos_universal proofs of StrictRoosDerivation. For independent coefficient universes obtain moduleSheaves_grothendieck and tower_grothendieck from RingedStrictTowerHomotopyLimitIndependentCoefficients. Uniqueness of right derived functors supplies theta, and its unit equation gives eta_X followed by theta and the factorization equal to Q(roosι_X), for every X (hence also for the prescribed injective complexes). The choices here are localization and derived universal objects, not arbitrary witnesses of an unproved existence statement.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: exact product-preserving functors applied to the defining derived limits; agent-formulated square compatibility extracted from returned parent Steps 5–8, with the same signed Roos and K-injective normalization."
+   }
+  },
+  {
+   "text": "Use the actual roosAdditiveComparison for each edge. Its product-preservation hypothesis follows from invertibility of all piComparison maps. Its two coordinate equations, after the fixed braiding and negation, give the exact signed formula in Comparison. Lift its natural isomorphism through fullyFaithfulWhiskeringLeft; the preimage equation gives descent. Define lambda by conjugating this derived comparison with the shared corner theta maps.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: exact product-preserving functors applied to the defining derived limits; agent-formulated square compatibility extracted from returned parent Steps 5–8, with the same signed Roos and K-injective normalization."
+   }
+  },
+  {
+   "text": "Apply product projection uniqueness. Pi.map and piComparison reduce each nth projection to GF(pi_n) followed by e_Nn. Naturality of e at pi_n gives the other path. This proves product_square, product_projection and projection_naturality without a preservation assumption on the product calculation itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: exact product-preserving functors applied to the defining derived limits; agent-formulated square compatibility extracted from returned parent Steps 5–8, with the same signed Roos and K-injective normalization."
+   }
+  },
+  {
+   "text": "Apply roosComparison_horizontal_coherence to F,G,H⋙K,e and to H,K,H⋙K,id. The identity termwise transformation is the identity chain map. Cancel that identity to obtain the stated chain square for the very same four comparisons.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: exact product-preserving functors applied to the defining derived limits; agent-formulated square compatibility extracted from returned parent Steps 5–8, with the same signed Roos and K-injective normalization."
+   }
+  },
+  {
+   "text": "Form both derived natural transformations. Localization.natTrans_ext reduces equality to Q(X). Postcompose by the invertible target tower factorization followed by the corner factorization. The exact-functor composition and natural-isomorphism factor equations, naturality of corner factors, and the two edge descents reduce to Q of the chain square. This proves the Roos square on every derived object and morphism. Substitute the four conjugation equations, cancel theta_1 and theta_2, and use naturality of theta_3 and the localized e to obtain normalized_square.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: exact product-preserving functors applied to the defining derived limits; agent-formulated square compatibility extracted from returned parent Steps 5–8, with the same signed Roos and K-injective normalization."
+   }
+  },
+  {
+   "text": "The strict augmentation is limit.lift(gamma) followed by roosι. The existing Roos augmentation equation identifies it with roosAugment(gamma), and roosAdditiveComparison_augmentation carries it to the mapped cone augmentation. Use the edge descent and the unit normalization from the first step, cancel the target normalization, and obtain one-edge augmentation compatibility. Apply it successively for F,G and H,K to prove augmentationFG and augmentationHK.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: exact product-preserving functors applied to the defining derived limits; agent-formulated square compatibility extracted from returned parent Steps 5–8, with the same signed Roos and K-injective normalization."
+   }
+  },
+  {
+   "text": "Naturality of eta_3 at the explicitly typed termwise square map reduces augmentation_square to equality of strict maps into the limit. Test on every tower projection and every complex degree. The remaining equality is exactly e.naturality at gamma_n^q. Thus the actual canonical strict augmentation is respected, without boundedness or preservation of injectives.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: exact product-preserving functors applied to the defining derived limits; agent-formulated square compatibility extracted from returned parent Steps 5–8, with the same signed Roos and K-injective normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-strict-roos-derivation",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-roos-comparison-horizontal-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "B9 Lean proof: fixed Roos corners from the derived universal property, canonical additive comparison, horizontal coherence, localization extensionality, and direct augmentation naturality. The universe-independent helper interface is used instead of applying the maximum-universe strict-limit theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a commuting square of exact product preserving functors the normalized derived inverse limit comparison is coherent with the natural isomorphism of composites and strict augmentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagramComp\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v v')} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        {E : Type v'} →\\n          [inst_2 : CategoryTheory.SmallCategory E] →\\n            (I' : CategoryTheory.Functor E D) →\\n              (I : CategoryTheory.Functor D (Ideal R)) \", \"doc\": \"For any natural number $i$, the local cohomology diagram of the composition of functors $I' \\\\circ I$ at level $i$ is naturally isomorphic to the composition of the opposite functor of $I'$ with the lo\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso_inv_π\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (G : CategoryTheory.Functor C D) {J : Type w} [inst_2 : CategoryTheory.Category.{w', w} J]\\n  (F : CategoryTheory.Functor J C) [inst_3 : CategoryTheory.Limits.PreservesLimit F G]\\n\", \"doc\": \"For each object $j$ in the diagram category $\\\\mathcal{J}$, the composition of the inverse of the isomorphism between $G(\\\\text{lim} F)$ and $\\\\text{lim}(F \\\\circ G)$ with the functor $G$ applied to the p\"}\n  {\"name\": \"CategoryTheory.Limits.inv_piComparison_comp_map_π_assoc\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (G : CategoryTheory.Functor C D) {J : Type w} (f : J → C) [inst_2 : CategoryTheory.Limits.HasProduct f]\\n  [inst_3 : CategoryTheory.Limits.HasProduct fun j => G.obj (f j)]\\n  [inst\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a family of objects $f : \\\\beta \\\\to \\\\mathcal{C}$ with product $\\\\prod^\\\\circ f$ in $\\\\mathcal{C}$, and a morphi\"}\n  {\"name\": \"CategoryTheory.Localization.HasProductsOfShapeAux.instCatCommSqFunctorDiscreteLimObjWhiskeringRightLimitFunctor\", \"module\": \"Mathlib/CategoryTheory/Localization/FiniteProducts\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : L.IsLocalization W] →\\n              (J : Type\", \"doc\": \"There is a commutative square of functors involving the limit functor in the original category, the whiskered localization functor applied to discrete diagrams, and the limit functor in the localized \"}\n  {\"name\": \"CategoryTheory.Limits.inv_piComparison_comp_map_π\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (G : CategoryTheory.Functor C D) {J : Type w} (f : J → C) [inst_2 : CategoryTheory.Limits.HasProduct f]\\n  [inst_3 : CategoryTheory.Limits.HasProduct fun j => G.obj (f j)]\\n  [inst\", \"doc\": \"Given a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and a family of objects $ f : \\\\beta \\\\to \\\\mathcal{C} $ with product $ \\\\prod^\\\\circ f $ in $ \\\\mathcal{C} $, if the comparison morphism $ G(\\\\prod^\\\\circ \"}\n  {\"name\": \"CategoryTheory.preservesLimitNatIso\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          {J : Type w} →\\n            [inst_2 : CategoryTheory.Category.{w', w} J] →\\n              [CategoryTheory.Limit\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a small category $\\\\mathcal{J}$, and a functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserving limits of shape $\\\\mathcal{J}$, there exists a natural isomorp\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso_inv_π_assoc\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (G : CategoryTheory.Functor C D) {J : Type w} [inst_2 : CategoryTheory.Category.{w', w} J]\\n  (F : CategoryTheory.Functor J C) [inst_3 : CategoryTheory.Limits.PreservesLimit F G]\\n\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}$, a small category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, and a functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserving the limit of $F$, f\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso_hom_π\", \"module\": \"Mathlib/CategoryTheory/Limits/Preserves/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (G : CategoryTheory.Functor C D) {J : Type w} [inst_2 : CategoryTheory.Category.{w', w} J]\\n  (F : CategoryTheory.Functor J C) [inst_3 : CategoryTheory.Limits.PreservesLimit F G]\\n\", \"doc\": \"For each object $j$ in the diagram category $\\\\mathcal{J}$, the composition of the hom component of the isomorphism $\\\\text{preservesLimitIso}(G, F)$ with the projection $\\\\pi_{G \\\\circ F, j}$ from the li\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary product/limit comparisons and rightDerivedNatIso do not state the signed Roos-normalized square with strict-augmentation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under a natural transformation of the canonical signed Roos comparison for derived inverse limits of towers including constant tower units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagramComp\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v v')} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        {E : Type v'} →\\n          [inst_2 : CategoryTheory.SmallCategory E] →\\n            (I' : CategoryTheory.Functor E D) →\\n              (I : CategoryTheory.Functor D (Ideal R)) \", \"doc\": \"For any natural number $i$, the local cohomology diagram of the composition of functors $I' \\\\circ I$ at level $i$ is naturally isomorphic to the composition of the opposite functor of $I'$ with the lo\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Compatibility\", \"type\": \"∀ {A : Type u_1} {A' : Type u_2} {B : Type u_3} {B' : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} A'] [inst_2 : CategoryTheory.Category.{v_3, u_3} B]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} B'] {eA : A ≌ A'} {eB : B ≌ B'} {e' : A' ≌ B\", \"doc\": \"For any object $X$ in category $B$, the hom component of the isomorphism $\\\\tau_1$ at $X$ is given by the composition of three morphisms: first the hom component of $h_G$ at $X$, then the hom component\"}\n  {\"name\": \"CategoryTheory.Limits.SequentialProduct.functorMap_commSq_aux\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/SequentialProduct\", \"type\": \"∀ {C : Type u_1} {M N : ℕ → C} [inst : CategoryTheory.Category.{v_1, u_1} C] (f : (n : ℕ) → M n ⟶ N n)\\n  [inst_1 : CategoryTheory.Limits.HasProductsOfShape ℕ C] {n m k : ℕ} (h : n ≤ m) (hh : ¬k < m),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.Functor.ofOpSequence (CategoryTheory.Lim\", \"doc\": \"For natural numbers $n, m, k$ with $n \\\\leq m$ and $k \\\\geq m$, the composition of the morphism induced by the functor $\\\\text{Functor.ofOpSequence}$ applied to the preorder morphism $n \\\\leq m$, followed\"}\n  {\"name\": \"InverseSystem.globalEquiv_naturality\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} [inst : LinearOrder ι] {f : ⦃i j : ι⦄ → i ≤ j → F j → F i}\\n  [inst_1 : WellFoundedLT ι] [inst_2 : SuccOrder ι] [inst_3 : InverseSystem f]\\n  (equivSucc : (i : ι) → ¬IsMax i → { e // ∀ (x : F (Order.succ i)), (e x).1 = f ⋯ x })\\n  (equivLim : (i : \", \"doc\": \"For a directed inverse system indexed by a linearly ordered type with successor structure, the global equivalence between $F_i$ and the product $\\\\prod_{j < i} X_j$ commutes with transition maps: for a\"}\n  {\"name\": \"CategoryTheory.SmallObject.πObj_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [inst_3 : I.IsCardinalForSmallObjectArgument κ]\\n  {f g : CategoryTheory.Arrow C} (φ : f ⟶ g) {Z : C} (h : g.right ⟶ Z),\\n \", \"doc\": \"For any morphism $\\\\phi : f \\\\to g$ between arrows in a category $\\\\mathcal{C}$ equipped with a morphism property $I$ satisfying cardinal constraints relative to a regular cardinal $\\\\kappa$, and for any \"}\n  {\"name\": \"CategoryTheory.Limits.SequentialProduct.functorMap_commSq\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/SequentialProduct\", \"type\": \"∀ {C : Type u_1} {M N : ℕ → C} [inst : CategoryTheory.Category.{v_1, u_1} C] (f : (n : ℕ) → M n ⟶ N n)\\n  [inst_1 : CategoryTheory.Limits.HasProductsOfShape ℕ C] {n m : ℕ} (h : ¬m < n),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.Functor.ofOpSequence (CategoryTheory.Limits.SequentialP\", \"doc\": \"For natural numbers $n$ and $m$ with $m \\\\nless n$, the composition of the morphism induced by the opposite sequence functor, the projection from the product, and the identity morphism conversion equal\"}\n  {\"name\": \"CategoryTheory.Limits.SequentialProduct.functorMap_commSq_succ\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/SequentialProduct\", \"type\": \"∀ {C : Type u_1} {M N : ℕ → C} [inst : CategoryTheory.Category.{v_1, u_1} C] (f : (n : ℕ) → M n ⟶ N n)\\n  [inst_1 : CategoryTheory.Limits.HasProductsOfShape ℕ C] (n : ℕ),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.Functor.ofOpSequence (CategoryTheory.Limits.SequentialProduct.functorM\", \"doc\": \"In a category $\\\\mathcal{C}$ with products, for a natural number $n$ and a sequence of morphisms $f: \\\\mathbb{N} \\\\to \\\\text{Hom}(\\\\mathcal{C})$, the composition of the functor $F$ applied to the morphism \"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/GammaCompN\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ),\\n  AlgebraicTopology.DoldKan.N₂Γ₂.hom.app ((CategoryTheory.Idempotents.toKaroubi (ChainComplex C ℕ)).obj K) =\\n    Cat\", \"doc\": \"In a preadditive category $\\\\mathcal{C}$ with finite coproducts, for any chain complex $K$ over $\\\\mathcal{C}$ indexed by $\\\\mathbb{N}$, the component of the natural isomorphism $N_2\\\\Gamma_2$ at $K$ equa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary product/limit comparisons and rightDerivedNatIso do not state the signed Roos-normalized square with strict-augmentation compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"NatIso\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"The natural isomorphism `RF ≅ RF'` on right derived functors that is\\ninduced by a natural isomorphism `F ≅ F'`.\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso_hom\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso_inv\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary product/limit comparisons and rightDerivedNatIso do not state the signed Roos-normalized square with strict-augmentation compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized derived inverse limit comparison commutes with natural isomorphisms between two composites of exact functors preserving countable products",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.HasLimit.lift_isoOfNatIso_inv\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{F G : J ⥤ C} [HasLimit F] [HasLimit G] (t : Cone G) (w : F ≅ G) :\\n  limit.lift G t ≫ (HasLimit.isoOfNatIso w).inv = limit.lift F ((Cones.postcompose w.inv).obj _)\", \"doc\": \"Given categories $ \\\\mathcal{J} $ and $ \\\\mathcal{C} $, and functors $ F, G : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ each having a limit in $ \\\\mathcal{C} $, if there exists a natural isomorphism $ w : F \\\\cong G \"}\n  {\"name\": \"CategoryTheory.Limits.prodComparison_inv_natural_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{w, u₂} D]\\n  (F : CategoryTheory.Functor C D) {A A' B B' : C} [inst_2 : CategoryTheory.Limits.HasBinaryProduct A B]\\n  [inst_3 : CategoryTheory.Limits.HasBinaryProduct A' B']\\n  [inst_4 : CategoryT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and objects $A, A', B, B' \\\\in \\\\mathcal{C}$ with binary products, if $F(A \\\\times B) \\\\to F(A) \\\\times F(B)$ \"}\n  {\"name\": \"CategoryTheory.Limits.HasLimit.isoOfNatIso\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{F G : J ⥤ C} [HasLimit F] [HasLimit G] (w : F ≅ G) : limit F ≅ limit G\", \"doc\": \"Given categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, and functors $F,G: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ each having a limit in $\\\\mathcal{C}$, if there exists a natural isomorphism $w: F \\\\cong G$, then this \"}\n  {\"name\": \"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{F G : J ⥤ C} [HasLimit F] [HasLimit G] (w : F ≅ G) (j : J) :\\n  (HasLimit.isoOfNatIso w).inv ≫ limit.π F j = limit.π G j ≫ w.inv.app j\", \"doc\": \"Given categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, functors $F,G: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ with limits, and a natural isomorphism $w: F \\\\cong G$, the inverse of the limit isomorphism $\\\\text{HasLimi\"}\n  {\"name\": \"CategoryTheory.Limits.limitCompWhiskeringLeftIsoCompLimit\", \"module\": \"Mathlib.CategoryTheory.Limits.FunctorCategory.Basic\", \"type\": \"(F : J ⥤ K ⥤ C) (G : D ⥤ K) [HasLimitsOfShape J C] : limit (F ⋙ (whiskeringLeft _ _ _).obj G) ≅ G ⋙ limit F\", \"doc\": \"Given categories $\\\\mathcal{J}, \\\\mathcal{K}, \\\\mathcal{C}, \\\\mathcal{D}$, functors $F : \\\\mathcal{J} \\\\to [\\\\mathcal{K}, \\\\mathcal{C}]$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{K}$, and assuming $\\\\mathcal{C}$ has a\"}\n  {\"name\": \"CategoryTheory.Limits.prodComparisonNatIso\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts\", \"type\": \"[HasBinaryProducts C] [HasBinaryProducts D] (A : C) [∀ B, IsIso (prodComparison F A B)] :\\n  prod.functor.obj A ⋙ F ≅ F ⋙ prod.functor.obj (F.obj A)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with binary products, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and an object $A \\\\in \\\\mathcal{C}$, if the product comparison morphism $F(A \\\\times B)\"}\n  {\"name\": \"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"∀ {J : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} J] {C : Type u} [inst_1 : CategoryTheory.Category.{v, u} C]\\n  {F G : CategoryTheory.Functor J C} [inst_2 : CategoryTheory.Limits.HasLimit F]\\n  [inst_3 : CategoryTheory.Limits.HasLimit G] (w : F ≅ G) (j : J) {Z : C} (h : F.obj j ⟶ Z),\\n  Categor\", \"doc\": \"Given categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, functors $F,G: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ with limits, and a natural isomorphism $w: F \\\\cong G$, for any object $j \\\\in \\\\mathcal{J}$ and morphism $h:\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.plusFunctorWhiskerRightIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Sites.CompatiblePlus\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type w₁}\\n  [inst_1 : CategoryTheory.Category.{max v u, w₁} D] {E : Type w₂} [inst_2 : CategoryTheory.Category.{max v u, w₂} E]\\n  (F : CategoryTheory.Functor D E)\\n  [inst_3 :\\n    ∀ (J : CategoryT\", \"doc\": \"The inverse of the natural isomorphism between the composition of the plus construction functor with a limit-preserving functor $ F $ and the plus construction of the composed functor, evaluated at a \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary product/limit comparisons and rightDerivedNatIso do not state the signed Roos-normalized square with strict-augmentation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|derived.*[Ll]imit.*(coheren|square)|[Ll]imit.*[Nn]ormaliz",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary product/limit comparisons and rightDerivedNatIso do not state the signed Roos-normalized square with strict-augmentation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "piComparison_comp|piComparison.*naturality|rightDerivedNatIso|[Rr]oos",
+   "results": "15 hits; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Coherent/LocallySurjective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary product/biproduct comparisons or generic derived natural isomorphisms, not the signed Roos-normalized square and augmentation identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\", \"comp\"",
+   "results": "11 hits; CategoryTheory.Limits.piComparison, CategoryTheory.Limits.piComparison_comp_π, CategoryTheory.Limits.map_lift_piComparison, CategoryTheory.Limits.piComparison_comp_π_assoc, CategoryTheory.Limits.map_lift_piComparison_assoc, CategoryTheory.Limits.piComparison_comp_π_apply, CategoryTheory.Limits.instIsIsoPiComparison, CategoryTheory.Limits.inv_piComparison_comp_map_π",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary product/biproduct comparisons or generic derived natural isomorphisms, not the signed Roos-normalized square and augmentation identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the derived inverse limit product comparison under a natural isomorphism of exact functors",
+   "results": "8 hits; CategoryTheory.Limits.prodComparison_inv_natural, CategoryTheory.Limits.prodComparison_inv_natural_assoc, CategoryTheory.Limits.HasLimit.isoOfNatIso, CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Limits.coprodComparison_inv_natural, CategoryTheory.Functor.rightDerivedNatIso_inv, CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.Limits.prodComparisonNatIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary product/biproduct comparisons or generic derived natural isomorphisms, not the signed Roos-normalized square and augmentation identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between composites of exact product preserving functors commutes with their signed Roos derived inverse limit comparisons",
+   "results": "8 hits; CategoryTheory.Limits.prodComparison_comp, CategoryTheory.Limits.prodComparison_inv_natural_assoc, CategoryTheory.Limits.prodComparison_inv_natural, CategoryTheory.Limits.inv_piComparison_comp_map_π, CategoryTheory.Limits.inv_piComparison_comp_map_π_assoc, CategoryTheory.Limits.prodComparisonNatIso, localCohomology.diagramComp, CategoryTheory.Limits.map_lift_piComparison_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary product/biproduct comparisons or generic derived natural isomorphisms, not the signed Roos-normalized square and augmentation identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical product comparison and biproduct cone comparison for an exact functor are compatible with natural transformations and derived constant tower units",
+   "results": "8 hits; CategoryTheory.Functor.biprodComparison'_comp_biprodComparison, CategoryTheory.Functor.biproductComparison'_comp_biproductComparison, CategoryTheory.Functor.biprodComparison'_comp_biprodComparison_assoc, CategoryTheory.Functor.biproductComparison'_comp_biproductComparison_assoc, CategoryTheory.Functor.biproductComparison, CategoryTheory.Functor.inl_biprodComparison'_assoc, CategoryTheory.Functor.biproductComparison_π_assoc, CategoryTheory.Functor.biprodComparison",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary product/biproduct comparisons or generic derived natural isomorphisms, not the signed Roos-normalized square and augmentation identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-ringed-open-scalar-limit-coherence",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof first sentence, 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms'; Returned parent Steps 5–8: normalized product/Roos square and augmentation compatibility needed to identify the two-factor completed exchange with a strict-tower limit.",
+   "via": [
+    "lem-cbc-ringed-open-scalar-limit-coherence",
+    "lem-cbc-complete-proetale-strict-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-normalized-limit-square-coherence",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement by product and signed-coordinate projection uniqueness, localization of natural transformations, explicit cancellation of the fixed Roos normalizations, and the two augmentation calculations. Reused existing comparison lemmas; no new nodes.",
+  "blueprint": "thm-cbc-complete-proetale proof first sentence (the two isomorphisms in the completed exchange); the final paragraph of lem-cbc-completed-extension-zero-comparison.proof.md is refined by Steps 1–5 for exact-functor square coherence and Steps 6–7 for strict augmentations."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-61cea276f",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-61cea276f (reviewer sub-agent of L); spot-checked: Read the item in full (7 steps). The delivery adds no new nodes. Statement and stmt_deps are byte-identical to Q158's creation, so the target is not weakened. Cited statements read: lem-cbc-exact-product-functor-strict-limit (lambda = theta^-1 kappa F(theta), K-injective normalization, augmentation clause), roos-chain-maps (projections of kappa), roos-compatibility (u = theta^-1 (gamma,0)), and the Mathlib leaf lem-weil-pbc-localization-universal-property (2) and (3). Recomputed the signed model: Cone(1-s)[-1] with (id,-id) gives d(x,y)=(dx,(1-s)x-dy), matching the item and the cited nodes. Step 2 (product projections) and Step 3 (signed-coordinate projections plus naturality of e) are correct. Step 4 is valid descent: R_i preserves quasi-isomorphisms because products are exact, then the localization lift and uniqueness apply. Step 5: theta_1 and theta_2 cancel, then naturality of theta_3 and of the derived e gives the normalized square. Steps 6 and 7 are correct; (gamma,0) is a chain map because (1-s)gamma=0. Edge cases tested: identities, e=-id, zero functors, zero transitions, unbounded complexes. Sources checked: final paragraph of lem-cbc-completed-extension-zero-comparison.proof.md and the first sentence of the thm-cbc-complete-proetale proof (main-20261015). No SGA. No re-split note. No tool_uses. Advisory: lem-pur-roos-comparison-horizontal-coherence (Q82) also yields the chain clause of Step 3; the direct in-unit proof is fine."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedLimitSquareCoherence",
+  "declaration": "CategoryTheory.NormalizedLimitSquare.normalizedLimitSquareCoherence",
+  "declarations": [
+   "CategoryTheory.NormalizedLimitSquare.Corner",
+   "CategoryTheory.NormalizedLimitSquare.Comparison",
+   "CategoryTheory.NormalizedLimitSquare.augmentation",
+   "CategoryTheory.NormalizedLimitSquare.towerMap",
+   "CategoryTheory.NormalizedLimitSquare.towerSquare",
+   "CategoryTheory.NormalizedLimitSquare.SquareData",
+   "CategoryTheory.NormalizedLimitSquare.SquareLaws",
+   "CategoryTheory.NormalizedLimitSquare.Coherence",
+   "CategoryTheory.NormalizedLimitSquare.normalizedLimitSquareCoherence",
+   "CategoryTheory.NormalizedLimitSquare.SquareData.corner0",
+   "CategoryTheory.NormalizedLimitSquare.SquareData.corner1",
+   "CategoryTheory.NormalizedLimitSquare.SquareData.corner2",
+   "CategoryTheory.NormalizedLimitSquare.SquareData.corner3",
+   "CategoryTheory.NormalizedLimitSquare.SquareData.comparisonF",
+   "CategoryTheory.NormalizedLimitSquare.SquareData.comparisonG",
+   "CategoryTheory.NormalizedLimitSquare.SquareData.comparisonH",
+   "CategoryTheory.NormalizedLimitSquare.SquareData.comparisonK"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedLimitSquareCoherence.lean",
+  "statement": "theorem normalizedLimitSquareCoherence\n    {C0 : Type c0} [Category.{d0} C0] [EssentiallySmall.{r0} C0]\n    (J0 : GrothendieckTopology C0)\n    [HasSheafify J0 AddCommGrpCat.{r0}]\n    [J0.WEqualsLocallyBijective AddCommGrpCat.{r0}]\n    (R0 : Sheaf J0 RingCat.{r0})\n    (_comm0 : ∀ (U : C0ᵒᵖ) (a b : R0.obj.obj U), a * b = b * a)\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{r0} R0)]\n    [HasDerivedCategory.{w0} (ringedSiteModules.{r0} R0)]\n    [HasDerivedCategory.{w0} (ℕᵒᵖ ⥤ ringedSiteModules.{r0} R0)]\n    {C1 : Type c1} [Category.{d1} C1] [EssentiallySmall.{r1} C1]\n    (J1 : GrothendieckTopology C1)\n    [HasSheafify J1 AddCommGrpCat.{r1}]\n    [J1.WEqualsLocallyBijective AddCommGrpCat.{r1}]\n    (R1 : Sheaf J1 RingCat.{r1})\n    (_comm1 : ∀ (U : C1ᵒᵖ) (a b : R1.obj.obj U), a * b = b * a)\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{r1} R1)]\n    [HasDerivedCategory.{w1} (ringedSiteModules.{r1} R1)]\n    [HasDerivedCategory.{w1} (ℕᵒᵖ ⥤ ringedSiteModules.{r1} R1)]\n    {C2 : Type c2} [Category.{d2} C2] [EssentiallySmall.{r2} C2]\n    (J2 : GrothendieckTopology C2)\n    [HasSheafify J2 AddCommGrpCat.{r2}]\n    [J2.WEqualsLocallyBijective AddCommGrpCat.{r2}]\n    (R2 : Sheaf J2 RingCat.{r2})\n    (_comm2 : ∀ (U : C2ᵒᵖ) (a b : R2.obj.obj U), a * b = b * a)\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{r2} R2)]\n    [HasDerivedCategory.{w2} (ringedSiteModules.{r2} R2)]\n    [HasDerivedCategory.{w2} (ℕᵒᵖ ⥤ ringedSiteModules.{r2} R2)]\n    {C3 : Type c3} [Category.{d3} C3] [EssentiallySmall.{r3} C3]\n    (J3 : GrothendieckTopology C3)\n    [HasSheafify J3 AddCommGrpCat.{r3}]\n    [J3.WEqualsLocallyBijective AddCommGrpCat.{r3}]\n    (R3 : Sheaf J3 RingCat.{r3})\n    (_comm3 : ∀ (U : C3ᵒᵖ) (a b : R3.obj.obj U), a * b = b * a)\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{r3} R3)]\n    [HasDerivedCategory.{w3} (ringedSiteModules.{r3} R3)]\n    [HasDerivedCategory.{w3} (ℕᵒᵖ ⥤ ringedSiteModules.{r3} R3)]\n    (F : ringedSiteModules.{r0} R0 ⥤ ringedSiteModules.{r1} R1)\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (_phiF : ∀ N : ℕ → ringedSiteModules.{r0} R0, IsIso (piComparison F N))\n    (G : ringedSiteModules.{r1} R1 ⥤ ringedSiteModules.{r3} R3)\n    [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    (_phiG : ∀ N : ℕ → ringedSiteModules.{r1} R1, IsIso (piComparison G N))\n    (H : ringedSiteModules.{r0} R0 ⥤ ringedSiteModules.{r2} R2)\n    [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (_phiH : ∀ N : ℕ → ringedSiteModules.{r0} R0, IsIso (piComparison H N))\n    (K : ringedSiteModules.{r2} R2 ⥤ ringedSiteModules.{r3} R3)\n    [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K]\n    (_phiK : ∀ N : ℕ → ringedSiteModules.{r2} R2, IsIso (piComparison K N))\n    (e : F ⋙ G ≅ H ⋙ K)\n    (L0 : DerivedCategory.{w0} (ℕᵒᵖ ⥤ ringedSiteModules.{r0} R0) ⥤\n      DerivedCategory.{w0} (ringedSiteModules.{r0} R0))\n    (eta0 : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ L0)\n    (_derived0 : L0.IsRightDerivedFunctor eta0\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{r0} R0) (.up ℤ)))\n    (L1 : DerivedCategory.{w1} (ℕᵒᵖ ⥤ ringedSiteModules.{r1} R1) ⥤\n      DerivedCategory.{w1} (ringedSiteModules.{r1} R1))\n    (eta1 : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ L1)\n    (_derived1 : L1.IsRightDerivedFunctor eta1\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{r1} R1) (.up ℤ)))\n    (L2 : DerivedCategory.{w2} (ℕᵒᵖ ⥤ ringedSiteModules.{r2} R2) ⥤\n      DerivedCategory.{w2} (ringedSiteModules.{r2} R2))\n    (eta2 : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ L2)\n    (_derived2 : L2.IsRightDerivedFunctor eta2\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{r2} R2) (.up ℤ)))\n    (L3 : DerivedCategory.{w3} (ℕᵒᵖ ⥤ ringedSiteModules.{r3} R3) ⥤\n      DerivedCategory.{w3} (ringedSiteModules.{r3} R3))\n    (eta3 : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ L3)\n    (_derived3 : L3.IsRightDerivedFunctor eta3\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{r3} R3) (.up ℤ)))\n    : Nonempty (Coherence (A0 := ringedSiteModules.{r0} R0)\n      (A1 := ringedSiteModules.{r1} R1) (A2 := ringedSiteModules.{r2} R2)\n      (A3 := ringedSiteModules.{r3} R3) F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3 e)",
+  "branch": "sheaf-dag",
+  "by": "Q133",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem returns the normalized comparisons and all square/augmentation equations in one Nonempty Coherence record. Corner and Comparison only package this node's conclusions. The shifted cone, signed coordinates, exact derived functors, and canonical product maps are the existing constructions; site, coefficient and derived-category universes stay independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b64079dec",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Node unchanged except lean; dep records identical to live; lean.statement verbatim. Hypotheses match the node (EssentiallySmall.{r_i} sites, comm RingCat sheaves, exact countable products, additive exact F,G,H,K with IsIso piComparison, e : F⋙G≅H⋙K, L_i IsRightDerivedFunctor of roosLimitFunctor=complexOfFunctorsToFunctorToComplex⋙lim); independent universes. Coherence is not hollow: kappa pinned in all degrees by coordinate_formula (coordinates = roosχ≫braid≫(1,-1) = dep chiA), theta∘factors pinned by the K-injective normalization Q(roosι I) and extended by naturality (roosF preserves qis), derivedKappa by descent, lambda by conjugation = θ⁻¹κE(θ). product_square/projection, chain_square, roos_square, normalized_square, augmentationFG/HK and augmentation_square match the node in Lean order; u_γ = Q(limit.lift)≫eta equals the dep's θ⁻¹(γ,0) via roosAugment_eq. Edge cases id, e=-id, zero, zero transitions, γ=0, unbounded ok. Docstrings carry the source place, blueprint tag and 7 proof steps; only sorry. No compile (no change). Advisory: ExactProductFunctorStrictLimit import not referenced by name."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-cf040",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261024T184637-L-3086306",
+  "kind": "interface",
+  "note": "independent cc review: delivered Coherence (∃ SquareData, SquareLaws) vs old Coherence structure, clause by clause; theorem signature vs node lean.statement; proof vs node proof/proof_deps; #print axioms on scratch copy"
+ }
+}

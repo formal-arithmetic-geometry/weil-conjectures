@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-principal-strict-limit-reflector",
+ "kind": "statement",
+ "title": "Principal strict total Koszul limit with its normalized unit is a reflector",
+ "statement": "For the ringed site, module category, principal strict Koszul tower and normalized unit of [def-sf-regular-roos-koszul-data], with independent site universes, assume multiplication by t is monic. Then the total limit is locally derived (t)-complete and precomposition by its specified unit is a bijection into every locally derived (t)-complete object. The local test on every slice is vanishing of derived internal Hom from localization at any section which is a multiple of t. No K-flatness, boundedness or exact products are assumed. The monic multiplication map from the unit module presents the principal ideal.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B (lemma-derived-completion), 0A0E (lemma-derived-completion-koszul); sites-cohomology.tex Tag 0941. Principal regular-generator specialization with independent universes and the actual normalized strict unit."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-sf-koszul-total-derived-limit",
+  "def-sf-normalized-strict-tower-augmentation",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-section-localization",
+  "def-sf-regular-roos-koszul-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the coefficient sheaf and generator to the canonical small model. Monicity of multiplication transfers by sectionwise injectivity. The unit module has its one-element generating family, and multiplication sends its generator 1 to the restricted section, so it presents the principal ideal.",
+   "uses": [
+    "def-sf-koszul-small-model-completed-tensor",
+    "def-weil-pbc-ringed-ideal-generators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing singleton ringed Koszul completion reflector to this unit-module ideal presentation on the small site, obtaining D, complete outputs and the Hom bijection.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized strict small-model comparison gives an isomorphism E(koszulCompletion Q t) to D.completion(E(Q(Q))) carrying the actual koszulUnit to D.unit. The local-test comparison identifies the original local predicate with the small-site ideal predicate. Apply derived restriction and internal Hom to the output isomorphism and transfer output completeness back.",
+   "uses": [
+    "lem-sf-principal-strict-small-model-comparison",
+    "lem-sf-principal-strict-small-model-local-tests"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a locally complete L, transfer its local tests to E(L). Compose the small reflector Hom bijection with the equivalence f maps to e.inv followed by E(f). The normalized unit equation and cancellation of e.hom with e.inv identify this composite with E applied to precomposition by koszulUnit. The fully faithful equivalence E gives a bijection on the target Hom set, so cancel it to obtain the required original Hom bijection.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-koszul-small-model-completed-tensor",
+  "def-weil-pbc-ringed-ideal-generators",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-sf-principal-strict-small-model-comparison",
+  "lem-sf-principal-strict-small-model-local-tests"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 0A0E; singleton reflection after two independent small-model comparisons, preserving the normalized strict unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Koszul.*reflect|reflect.*Koszul",
+   "results": "{\"t\": \"2026-10-24T07:59:03Z\", \"tool\": \"grep\", \"query\": \"Koszul.*reflect|reflect.*Koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; returned adic ring and sheaf category constructions do not assert this principal strict total-limit reflector."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "{\"t\": \"2026-10-24T07:59:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; returned adic ring and sheaf category constructions do not assert this principal strict total-limit reflector."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total derived inverse limit of a principal Koszul tensor tower with its normalized strict unit reflects onto locally derived complete module sheaves",
+   "results": "{\"t\": \"2026-10-24T07:59:06Z\", \"tool\": \"leanfinder\", \"query\": \"The total derived inverse limit of a principal Koszul tensor tower with its normalized strict unit reflects onto locally derived complete module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"SheafOfModules.createsLimit\", \"CondensedMod.ofSheafProfinite\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\"], \"digest\": \"ca5786e2a5961bef\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; returned adic ring and sheaf category constructions do not assert this principal strict total-limit reflector."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total derived inverse limit of a principal Koszul tensor tower with its specified augmentation is the reflector onto locally derived complete sheaves of modules",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Functor.totalLeftDerived; AdicCompletion; SheafOfModules.hasLimit; SheafOfModules.hasLimitsOfShape; CategoryTheory.Functor.totalRightDerived; PresheafOfModules.isLimitLimitCone; SheafOfModules.Finite.hasFiniteLimits; SheafOfModules.Presentation.isColimit. Read the returned types: total derived functor constructors and ordinary sheaf limits do not assert local derived-completion reflection or the specified Koszul unit.",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The generic totalRightDerived construction supplies no Koszul reflector theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RegularRoosKoszulUnit",
+  "date": "2026-10-24",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open factor, existential quotient Roos triangle versus the canonical Koszul unit (returned item Steps 6-7).",
+   "via": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "is": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PrincipalStrictLimitReflector",
+  "file": "lean/Sheaf/SixFunctors/PrincipalStrictLimitReflector.lean",
+  "declaration": "CategoryTheory.RegularRoosKoszul.principal_strict_limit_reflector",
+  "statement": "theorem principal_strict_limit_reflector\n    (t : (SheafOfModules.unit (ring.{c, v, r} R)).sections)\n    (hreg : Mono (globalSectionMultiplication.{c, v, max c v r} R t))\n    (Q : CochainComplex (Modules.{c, v, r} R) ℤ) :\n    locallyComplete.{c, v, r, w} R t (koszulCompletion R Q t) ∧\n      ∀ L, locallyComplete.{c, v, r, w} R t L →\n        Function.Bijective (fun f : koszulCompletion R Q t ⟶ L ↦\n        koszulUnit.{c, v, r, w} R (DerivedCategory.Q.obj Q) Q (Iso.refl _) t ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b73f0",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T005406-L-3477167",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T091140-L-3313794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

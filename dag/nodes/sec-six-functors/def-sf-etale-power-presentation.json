@@ -1,0 +1,124 @@
+{
+ "id": "def-sf-etale-power-presentation",
+ "kind": "definition",
+ "title": "Normalized ordinary-etale Tate-power presentation and comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Use the finite coefficient setting $P$ of [def-pur-conventions]. Put $A=P.\\mathrm{Coefficient}$ and $N=P.\\mathrm{diagonalExponent}$, and let $T$ be a scheme with $N$ invertible in $\\Gamma(T,\\mathcal O_T)$. Write $D_d=P.\\mathrm{diagonalTwistEtale}(T,d)$ for the ordered $d$-fold derived tensor of the shifted root line, with $D_0=A_T[0]$ [def-coefficient-twists-detailed]. Let $B_d$ be the ordinary etale Tate sheaf $A_T(d)$ of [def-asd-finite-etale-tate-twist], with $B_0=A_T$, and put $S_d=B_d[0]$. All tensor products below are the ordinary etale sheaf tensor or its derived functor [def-weil-derived-pullback-tensor-hom]. Define $\\mathrm{EtalePowerPresentation}(P,T)$ to consist of isomorphisms $e_d:D_d\\xrightarrow{\\sim}S_d[2d]$ for every $d\\geq0$, with the following prescribed normalization. At zero $e_0$ is the inverse zero-shift unitor. For each $d$, $e_{d+1}$ is the composite of (i) $e_d$ tensored on the right with the shifted root line, (ii) the specified tensor-shift comparison moving shifts $2d$ and $2$ outside tensor, (iii) the flat single-complex tensor comparison for $B_d$ and $B_1$, (iv) the single-complex image of the sheaf-power step $B_d\\otimes B_1\\simeq B_{d+1}$, and (v) the shift identification $2d+2=2(d+1)$ used in [def-pur-frame-class]. The sheaf-power step is the left tensor unitor at $d=0$ and the identity of the recursively defined tensor power thereafter. Flatness is that of these locally free rank-one sheaves [def-pc-flat-sheaf-modules]. Endpoint presentations in this prescription are identified with the actual displayed tensor and shift comparisons, not arbitrary isomorphisms. Define $\\mathrm{etalePowerComparison}(P,T,d)$ as the comparison component of the uniquely normalized presentation. Also name the sheaf-power product, its zero unitor and step, the single-complex object $S_d$, and the etale derived tensor used in this construction. This is precisely the existing ordered-power construction, not a choice of an unnormalized Tate-line isomorphism.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-frame-class",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), finite smooth purity at the coefficient unit: its ordered shifted-root-line to shifted Tate-power presentation; also the coefficient-unit identification in literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical ordered tensor powers of a shifted etale Tate line identified with a shifted single sheaf Tate power",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorPower.mulEquiv\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{n m : ℕ} : ⨂[R]^n M ⊗[R] (⨂[R]^m) M ≃ₗ[R] (⨂[R]^(n + m)) M\", \"doc\": \"The tensor product of the $ n $-th and $ m $-th tensor powers of a module $ M $ over a commutative semiring $ R $ is linearly equivalent to the $ (n + m) $-th tensor power of $ M $.\"}\n  {\"name\": \"TensorPower.cast_symm\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{i j} (h : i = j) : (cast R M h).symm = cast R M h.symm\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-module $ M $, and natural numbers $ i $ and $ j $ with $ i = j $, there exists a canonical $ R $-linear isomorphism between the $ i $-th tensor power $ \\\\bi\"}\n  {\"name\": \"TensorPower.cast\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{i j} (h : i = j) : ⨂[R]^i M ≃ₗ[R] (⨂[R]^j) M\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-module $ M $, and natural numbers $ i $ and $ j $ with $ i = j $, this defines a canonical $ R $-linear isomorphism between the $ i $-th tensor power $ \\\\bi\"}\n  {\"name\": \"TensorPower.cast_refl\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{i} (h : i = i) : cast R M h = LinearEquiv.refl _ _\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, given natural numbers $ i = j $, there exists a canonical $ R $-linear isomorphism between the $ i $-th tensor power $ \\\\bigotimes_R^i M $ an\"}\n  {\"name\": \"TensorPower.cast_eq_cast\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{i j} (h : i = j) : ⇑(cast R M h) = _root_.cast (congrArg (fun i => ⨂[R]^i M) h)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-module $ M $, and natural numbers $ i $ and $ j $ with $ i = j $, there exists a canonical $ R $-linear isomorphism between the $ i $-th tensor power $ \\\\bigo\"}\n  {\"name\": \"TensorPower.gMul_def\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{i j} (a : ⨂[R]^i M) (b : (⨂[R]^j) M) : a ₜ* b = @mulEquiv R M _ _ _ i j (a ⊗ₜ b)\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, the tensor product of the $ n $-th and $ m $-th tensor powers of $ M $ is linearly equivalent to the $ (n + m) $-th tensor power of $ M $.\"}\n  {\"name\": \"TensorPower.gMul_eq_coe_linearMap\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{i j} (a : ⨂[R]^i M) (b : (⨂[R]^j) M) :\\n  a ₜ* b =\\n    ((TensorProduct.mk R _ _).compr₂ ↑(mulEquiv : _ ≃ₗ[R] (⨂[R]^(i + j)) M) :\\n        ⨂[R]^i M →ₗ[R] (⨂[R]^j) M →ₗ[R] (⨂[R]^(i + j)) M)\\n      a b\", \"doc\": \"The multiplication of an element $ a $ in the $ i $-th tensor power of $ M $ and an element $ b $ in the $ j $-th tensor power of $ M $ over a commutative semiring $ R $ is equal to the linear equival\"}\n  {\"name\": \"LinearEquiv.rTensor_pow\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"(f : M ≃ₗ[R] M) (n : ℕ) : f.rTensor N ^ n = (f ^ n).rTensor N\", \"doc\": \"For any linear equivalence $ f : M \\\\simeq_R M $ over a commutative semiring $ R $ and natural number $ n $, the $ n $-th power of the tensor product $ f \\\\otimes_R N $ equals the tensor product of the \"}\n",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions with a definition-level DAG owner."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical normalized comparison of derived tensor powers of a shifted etale Tate line with the shifted sheaf tensor power",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Let $R \\\\to S \\\\to T$ be homomorphisms of commutative rings, where $T$ is the localization of $S$ at a multiplicative submonoid $M \\\\subseteq S$. Then the first cotangent cohomology module commutes with \"}\n  {\"name\": \"tensorKaehlerQuotKerSqEquiv\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (P : Type u_2) →\\n    (S : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                [inst_5 : Algebra R S] →\\n                  [IsScalarTower\", \"doc\": \"The linear equivalence between the tensor product of $ S $ with the Kähler differentials $ \\\\Omega_{(P/I^2)/R} $ over the quotient ring $ P/I^2 $ (where $ I $ is the kernel of the algebra map $ P \\\\to S\"}\n  {\"name\": \"Algebra.Extension.tensorCotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  {P : Algebra.E\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures, and algebra extensions $ P $ and $ Q $, if the linear map induced by the kernel of $ Q $'s algebra map is bijective,\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions with a definition-level DAG owner."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.shiftFunctorZero",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions with a definition-level DAG owner."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePowerPresentation|etalePowerComparison|finiteEtaleTateTwist",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions with a definition-level DAG owner."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePowerPresentation|etalePowerComparison in lean/WeilConjectures, lean/Sheaf, dag/nodes; blueprint_refs.py search ordered Tate",
+   "results": "QUERY ['rg', '-n', 'EtalePowerPresentation|etalePowerComparison', '/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures']\nEXIT 1\n\nQUERY ['rg', '-n', 'EtalePowerPresentation|etalePowerComparison', '/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf']\nEXIT 0\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/AdicSmoothDualizingComplexes.lean:208:structure EtalePowerPresentation (P : PurityFiniteSetting.{u}) (T : Scheme.{u})\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/AdicSmoothDualizingComplexes.lean:251:    ∃! e : EtalePowerPresentation P T hT, True := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/AdicSmoothDualizingComplexes.lean:257:def etalePowerComparison (P : PurityFiniteSetting.{u}) (T : Scheme.{u})\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/AdicSmoothDualizingComplexes.lean:356:      (etalePowerComparison (levelSetting P n) T\n\nQUERY ['rg', '-l', 'EtalePowerPresentation|etalePowerComparison', '/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes']\nEXIT 0\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/cor-pur-adic-and-rational-smooth-dualizing-complexes.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/def-pur-finite-tate-site-comparison.json\n\nQUERY ['python3', '/home/ubuntu/weil-conjectures-sheaf-shared/tools/blueprint_refs.py', 'search', 'ordered', 'Tate']\nEXIT 0\ncor-pur-affine-space-zero-section-purity\tsec-smooth-purity\tsplit\tWork in the finite-coefficient setting of [def-pur-conventions], with $\\Lambda=A=A_{E,n}$ for any $n\\geq1$. Let $B$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism], let $c\\\ncor-pur-vector-bundle-purity\tsec-smooth-purity\tsplit\tIn the finite-coefficient part of the current purity conventions ([def-pur-conventions] fixed setting), put $\\Lambda=A_{E,n}$ with $n\\geq1$. The integral, rational and algebraically closed versions are the separate coeff\ndef-cbc-completed-exchange-map\tsec-smooth-purity\tsplit\tLet $$\\begin{array}{ccc}X'&\\xrightarrow{g'}&X\\\\ f'\\downarrow&&\\downarrow f\\\\ Y'&\\xrightarrow{g}&Y\\end{array}$$ be a compact-support square [def-cbc-compact-support-square]. Choose a compactification $c=(j,p)$, $X\\xrighta\ndef-pur-affine-space-comparison\tsec-smooth-purity\tsplit\tIn the finite-coefficient purity conventions [def-pur-conventions], put $\\Lambda=A=A_{E,n}$ and let $Y$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. For $r\\geq0$, let $X_r=\\mathbf A^r_Y$, \nlem-amb-affine-space-top-trace\tsec-smooth-purity\tsplit\tLet $N\\geq1$, let $A$ be a finite commutative ring with $NA=0$, and let $S$ be a Noetherian scheme [def-pc-scheme] (one admitting a finite affine cover by spectra of Noetherian rings) on which $N$ is invertible. Work in \nlem-pur-projection-purity-agreement\tsec-smooth-purity\tsplit\tUse the finite-coefficient purity conventions [def-pur-conventions], with $A=\\Lambda=A_{E,n}$ for any $n\\geq1$. Let $Y$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], let $d\\geq0$, let $p_d:\n6 blueprint nodes match 'ordered Tate'\n",
+   "date": "2026-10-26",
+   "verdict": "Only AdicSmoothDualizingComplexes declares the exact presentation and comparison; no existing definition node owns them. Blueprint hits concern purity consequences, not this normalized tensor-presentation definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-purity-orientation-datum",
+  "date": "2026-10-26",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (6), canonical finite smooth-purity orientation: ordered shifted-root-line presentation at the coefficient unit.",
+   "via": [
+    "lem-sf-purity-orientation-datum",
+    "lem-sf-package-normalized-orientation-perfect-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.AdicSmoothDualizingComplexes",
+  "declaration": "WeilConjectures.AdicSmoothDualizing.etalePowerComparison",
+  "declarations": [
+   "WeilConjectures.AdicSmoothDualizing.etalePowerProduct",
+   "WeilConjectures.AdicSmoothDualizing.etalePowerUnitor",
+   "WeilConjectures.AdicSmoothDualizing.etalePowerStep",
+   "WeilConjectures.AdicSmoothDualizing.etaleSingle",
+   "WeilConjectures.AdicSmoothDualizing.etaleTensor",
+   "WeilConjectures.AdicSmoothDualizing.EtalePowerPresentation",
+   "WeilConjectures.AdicSmoothDualizing.etalePowerComparison"
+  ],
+  "statement": "def etalePowerComparison (P : PurityFiniteSetting.{u}) (T : Scheme.{u})\n    (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) :\n    (d : ℕ) → P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "Exact existing declarations in AdicSmoothDualizingComplexes. EtalePowerPresentation stores the full zero/successor normalization, and etalePowerComparison selects its comparison using existsUnique_etalePowerPresentation. This definition node owns the data; the smooth-dualizing corollary is not used as a statement dependency in its place. No Lean declaration is copied or renamed."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4126d48da",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4126d48da",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after 5d810e6 H2 RETURN. Lean file byte-identical; only stmt_deps/lean record changed (−cor-pur-adic-and-rational-smooth-dualizing-complexes, −lem-weil-integral-scalar-extension-well-defined, +new existing:true def-sf-etale-power-presentation, +landed def-weil-pbc-integer-quotient-inclusions). New node: all 7 declarations exist in live AdicSmoothDualizingComplexes, lean.statement verbatim, statement matches EtalePowerPresentation zero/successor normalization exactly, stmt_deps all exist and cover statement refs, no other owner. Integer/quotient maps owned by def-weil-pbc-integer-quotient-inclusions (covers Shrink.algEquiv both directions, all n). Mechanical theorem stmt_dep lem-pur-finite-tate-scalar-source-normalization: sfPurityFiniteScalarLine is .choose of its ∃! balancing (the theorem's conclusion; def-pur-finite-tate-scalar-source-data explicitly selects none) → genuine, PASS on that point. Math as previously accepted: finite/primary/all-L-all-level arrows pinned to smoothPurityMap at coefficientUnit via canonical comparisons; integral/field via datum fields + line detection; no extra hypotheses, universes bound, edge cases d=0, a=0, empty X, ramified L OK; sorry only; docstrings OK. No compile (no file changed; worker scompile clean 42.8s/36.5s). Advisory: balancing helper duplicates theorem-module VectorTraceScalar.balancing; second reading is a self-check."
+ }
+}

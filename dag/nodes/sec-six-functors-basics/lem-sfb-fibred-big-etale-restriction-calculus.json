@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-fibred-big-etale-restriction-calculus",
+ "kind": "statement",
+ "title": "Exact small-etale restriction and comparison calculus for fibred big-etale modules",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $p:\\mathcal C\\to\\mathit{Sch}/S$ a category fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids]. Give $\\mathcal C$ the big etale topology: objects and arrows are those of $\\mathcal C$, and coverings lie over jointly surjective etale scheme families [def-weil-pbc-etale-site]. Put $\\mathcal O_{\\mathcal C}(z)=\\Gamma(U,\\mathcal O_U)$ for $z$ over $U$, with the usual pullback of regular functions on arrows. Use module sheaves [def-weil-sheaf-of-modules-category]. For $z$ over $U$, define $R_zF$ on $U_{\\mathrm{et}}$ by $(R_zF)(v:V\\to U)=F(v^*z)$, with restrictions from cartesian lifts. This defines an exact functor $R_z:\\operatorname{Mod}(\\mathcal C_{\\mathrm{et}},\\mathcal O_{\\mathcal C})\\to\\operatorname{Mod}(U_{\\mathrm{et}},\\mathcal O_U)$. In particular it preserves kernels, cokernels and short exact sequences. For each arrow $a:z\\to z'$ over $u:U\\to U'$, restriction induces a natural comparison $c_{a,F}:u_{\\mathrm{et}}^*R_{z'}F\\to R_zF$, where $u_{\\mathrm{et}}^*$ is tensor pullback of modules on the ringed small etale topoi [lem-weil-pbc-ringed-topoi-module-adjunction, def-pur-sheaf-tensor-product], explicitly $u_{\\mathrm{et}}^*M=\\mathcal O_U\\otimes_{u_{\\mathrm{et}}^{-1}\\mathcal O_{U'}}u_{\\mathrm{et}}^{-1}M$. These comparisons are natural in $F$, are the identity for identity arrows, and satisfy $c_{b\\circ a,F}=c_{a,F}\\circ u_{\\mathrm{et}}^*(c_{b,F})$ for composable arrows $a$ over $u$ and $b$ over $v$, under the canonical tensor-pullback identification $(v\\circ u)_{\\mathrm{et}}^*\\simeq u_{\\mathrm{et}}^*v_{\\mathrm{et}}^*$. If $u$ is etale, $c_{a,F}$ is an isomorphism, and $u_{\\mathrm{et}}^*$ is restriction to the slice $U'_{\\mathrm{et}}/U\\simeq U_{\\mathrm{et}}$. For every functor $h:\\mathcal D\\to\\mathcal C$ over $\\mathit{Sch}/S$, with $\\mathcal D$ also fibred in groupoids and endowed with the same big etale topology and structure sheaf, precomposition $h^*F(y)=F(h(y))$ is a module sheaf. There are canonical identifications $R_y(h^*F)\\simeq R_{h(y)}F$ carrying $c_{a,h^*F}$ to $c_{h(a),F}$ for every arrow $a$ of $\\mathcal D$. No quasi-coherence, algebraicity or flatness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 075D (lemma-comparison), (1)--(4), and 06WE (equation-functoriality-sheaves-modules), including the module comparison formula equation-comparison-modules; 06TS (lemma-functoriality-sheaves) for precomposition; 06W9 (lemma-localizing-structure-sheaf) for ringed restriction. Exact small-etale restriction is used explicitly in the proof of 06WM (lemma-lqc-colimits), (2)--(3)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The ring presheaves are sheaves, as the module-sheaf categories require: by [lem-weil-pbc-morphism-into-affine-scheme] with $R$ the polynomial ring over $\\mathbf Z$ in one variable $t$, $T\\mapsto\\Gamma(T,\\mathcal O_T)$ is, as a presheaf of sets, $T\\mapsto\\operatorname{Mor}(T,\\operatorname{Spec}R)$ (a morphism corresponds to the image of $t$), with pullback of regular functions corresponding to composition. A covering of $U_{\\mathrm{et}}$ is an fpqc covering [lem-weil-pbc-fpqc-finer-than-etale], so [lem-weil-pbc-fpqc-representable-descent] gives the sheaf condition of $\\mathcal O_U$ on $U_{\\mathrm{et}}$; ring operations are sectionwise. A covering $\\{z_i\\to z\\}$ of $\\mathcal C_{\\mathrm{et}}$ lies over a covering $\\{U_i\\to U\\}$ of $U_{\\mathrm{et}}$, and its pairwise fibre products lie over $U_i\\times_UU_j$ by [lem-sfb-cartesian-lift-pullback-square], so the sheaf condition of $\\mathcal O_{\\mathcal C}$ on it is that of $\\mathcal O_U$. Choose cartesian lifts $z_V\\to z$ for every $V\\to U$. The lifting uniqueness in [def-sfb-stable-pointed-moduli-groupoids] supplies the arrow $z_W\\to z_V$ over each $W\\to V$; its identity and composition laws follow because the two candidate composites have the same composite to $z$. Thus $V\\mapsto F(z_V)$ is a presheaf, independently of these choices up to their unique isomorphisms. For a covering $\\{V_i\\to V\\}$ in $U_{\\mathrm{et}}$, the lifted arrows cover $z_V$ by definition of the inherited topology. Their pairwise pullbacks are lifts of $V_i\\times_VV_j$ by [lem-sfb-cartesian-lift-pullback-square]. The sheaf equalizer diagram for $F$ on this cover is exactly that for $R_zF$. Its scalar ring at $V$ is $\\Gamma(V,\\mathcal O_V)$, and the semilinearity axiom of [def-weil-sheaf-of-modules-category] supplies its module restrictions. A module map is restricted componentwise, preserving identities, composition and addition. This constructs $R_z$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-cartesian-lift-pullback-square",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Definition-pullback, preceding Tag 075D; ringed restriction Tag 06W9; structure sheaf: section-structure-sheaf (sheaf property of p^{-1}O)"
+   }
+  },
+  {
+   "text": "Kernels are sectionwise by [def-weil-sheaf-of-modules-category], so $R_z\\ker(f)=\\ker(R_zf)$. If $f:F\\to G$ is epic, [lem-weil-pbc-module-sheaves-colimits-forgetful](1) and [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] imply that any $s\\in G(z_V)$ lifts over a covering $\\{w_i\\to z_V\\}$ of the fibred site. Each $w_i$ lies over a scheme $W_i$ etale over $V$, hence over $U$, and is uniquely isomorphic over $z_V$ to the chosen lift $z_{W_i}$. The $W_i$ jointly cover $V$. These lifts therefore prove local surjectivity of $R_zf$, so it is epic by the same criterion and the faithful exact forgetful functor (which reflects zero cokernels). Thus $R_z$ preserves kernels and epimorphisms. A short exact sequence remains short exact: its first term is the kernel of the second map, whose restriction is epic. For a general $f:F\\to G$, apply this to $0\\to\\ker(f)\\to F\\to\\operatorname{im}(f)\\to0$ and $0\\to\\operatorname{im}(f)\\to G\\to\\operatorname{coker}(f)\\to0$; the first identifies the restricted image and the second identifies the restricted cokernel. No surjectivity on unlocalized sections is asserted.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WM, proof (2)--(3); sites-modules.tex Tags 03DA and 03CN(5)"
+   }
+  },
+  {
+   "text": "For $u:U\\to U'$, put $B_u(V)=U\\times_{U'}V$ on the small etale sites. It preserves finite limits by [lem-weil-pbc-etale-base-change-finite-limits] and coverings by [lem-weil-pbc-etale-base-change-continuous]. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to obtain $u^{-1}\\dashv u_*$, with $(u_*H)(V)=H(B_uV)$. Pullback of regular functions along $B_uV\\to V$ gives a natural ring map $\\mathcal O_{U'}\\to u_*\\mathcal O_U$: it respects restrictions and ring operations because the scheme structural maps do. This is the ringed morphism of [def-weil-pbc-ringed-topos-morphism]. Consequently [lem-weil-pbc-ringed-topoi-module-adjunction] gives the tensor-formula functor $u^*$ and the natural bijection $\\operatorname{Hom}(u^*M,H)=\\operatorname{Hom}(M,u_*H)$, where the latter pushforward uses that structural ring map. This fixes the ringed small-etale pullback meant in the statement.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075D, comparison-push and comparison-modules; descent.tex Tag 070R(2)"
+   }
+  },
+  {
+   "text": "Let $a:z\\to z'$ lie over $u$. For $V\\to U'$ etale, let $z'_V\\to z'$ and $z_{B_uV}\\to z$ be the chosen lifts. There is a unique arrow $a_V:z_{B_uV}\\to z'_V$ over $B_uV\\to V$ whose composite to $z'$ is $a\\circ(z_{B_uV}\\to z)$, by [def-sfb-stable-pointed-moduli-groupoids]. Define $d_{a,F,V}=F(a_V):F(z'_V)\\to F(z_{B_uV})$. For $t:V_1\\to V$, the square of these arrows and the lift restrictions commutes: its two composites to $z'_V$ lie over the same base map and have the same composite to $z'$, so lifting uniqueness makes them equal. Applying $F$ proves restriction compatibility. Semilinearity gives $F(a_V)(rs)=\\operatorname{pr}_V^*(r)F(a_V)(s)$, exactly the $\\mathcal O_{U'}(V)$-linearity required for $d_{a,F}:R_{z'}F\\to u_*R_zF$. Naturality of a module morphism $F\\to G$ on $a_V$ gives naturality of $d$ in $F$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Construction equation-comparison-push before Tag 075D, and equation-comparison-modules after Tag 06W9"
+   }
+  },
+  {
+   "text": "Define $c_{a,F}$ to be the adjoint of $d_{a,F}$ under [lem-weil-pbc-ringed-topoi-module-adjunction]. Its naturality in $F$ follows by applying the natural Hom bijection to the equality of $d$-squares just proved. For $a=\\mathrm{id}_z$, the arrow $a_V$ is the identity after identifying the chosen lifts, so $d_{a,F}$ is the identity. The identity pullback is canonically the identity functor by uniqueness of left adjoints [lem-weil-pbc-conjugate-iso-unit-equation]; its unit is the identity, so its adjoint $c_{a,F}$ is the identity as claimed.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075D, naturality and identity verification omitted in source; module extension following equation-comparison-modules"
+   }
+  },
+  {
+   "text": "For $a:z\\to z'$ over $u:U\\to U'$ and $b:z'\\to z''$ over $v:U'\\to U''$, the projection-preserving isomorphism $U\\times_{U'}(U'\\times_{U''}W)\\cong U\\times_{U''}W$ of [def-pc-fibre-product] identifies $(vu)_*$ with $v_*u_*$, including their scalar maps (successive pullback of regular functions is composite pullback). Under this identification the unique lifted arrow for $ba$ is $b_W\\circ a_{B_vW}$ by lifting uniqueness. Contravariance gives $d_{ba,F}=v_*(d_{a,F})\\circ d_{b,F}$. By [def-weil-pbc-composite-adjunction], transposing through $u^*v^*\\dashv v_*u_*$ means first transposing through $u^*\\dashv u_*$ and then through $v^*\\dashv v_*$. The transpose of $c_{a,F}\\circ u^*(c_{b,F})$ is therefore $v_*(d_{a,F})\\circ d_{b,F}$, precisely $d_{ba,F}$. The canonical isomorphism $(vu)^*\\cong u^*v^*$ is the unique unit-compatible one for these right adjoints, by [lem-weil-pbc-conjugate-iso-unit-equation]. Equality under the bijective Hom correspondence proves the stated composition law for these actual maps.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075D(1), module extension following equation-comparison-modules; sites-modules.tex composition lemma after Tag 03D7"
+   }
+  },
+  {
+   "text": "Suppose $u$ is etale. Postcomposition $I_u:U_{\\mathrm{et}}\\to U'_{\\mathrm{et}}$ identifies $U_{\\mathrm{et}}$ with $U'_{\\mathrm{et}}/U$: a scheme etale over $U$ is etale over $U'$ by composition, and a factorization $W\\to U\\to U'$ with $W,U$ etale over $U'$ has $W\\to U$ etale by cancellation [lem-weil-pbc-etale-composition-cancellation]. These mutually inverse assignments act identically on arrows and coverings. Precomposition $I_u^s$ sends sheaves to sheaves, since a cover and its pairwise intersections are literally the same schemes on the two sites. The functor $B_u$ also preserves sheaves by Step 3. The adjunction $I_u\\dashv B_u$ and its projection counit are supplied by [lem-weil-pbc-etale-localization-functor-adjoint]; hence [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction] identifies $u^{-1}$ with $I_u^s$, with unit at $V$ the restriction along $B_uV\\to V$. On rings this identifies $u^{-1}\\mathcal O_{U'}$ with $\\mathcal O_U$ by the identity on $\\Gamma(W,\\mathcal O_W)$; the structural map is this identity since its adjunct is the projection pullback. Thus $u^*$ is also slice restriction on modules: $\\mathcal O_U\\otimes_{\\mathcal O_U}I_u^sM\\cong I_u^sM$, by $r\\otimes m\\mapsto rm$ with inverse $m\\mapsto1\\otimes m$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-localization-functor-adjoint",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075D(2); ringed restriction Tag 06W9; topologies.tex Tag 021I and descent.tex Tag 070R"
+   }
+  },
+  {
+   "text": "Still with $u$ etale, for $W\\to U$ etale the object $z_W$ is canonically isomorphic to the lift $z'_{W\\to U'}$: both map cartesianly to $z'$ over $W\\to U'$. Denote the resulting sectionwise isomorphism $e:I_u^sR_{z'}F\\to R_zF$. The uniqueness of lifts makes it commute with all restrictions. Its adjunct at $V\\to U'$ is restriction from $F(z'_V)$ to the lift over $B_uV$, followed by $e$ there, because the unit in Step 7 is projection restriction. This composite is $F(a_V)$, since the corresponding composite arrow is the unique $a_V$ from Step 4. Thus its adjunct is $d_{a,F}$, and the injective Hom bijection of [lem-weil-pbc-ringed-topoi-module-adjunction] identifies $e$ with $c_{a,F}$. Hence the specified comparison is an isomorphism, not merely some unspecified isomorphism of its source and target.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075D(2), verification of the specific comparison in equation-comparison-modules"
+   }
+  },
+  {
+   "text": "A functor $h:\\mathcal D\\to\\mathcal C$ over schemes preserves cartesian arrows: the unique factorization characterization in [def-sfb-stable-pointed-moduli-groupoids] holds for every arrow of a fibred groupoid. Use [lem-sfb-fibred-site-functor-continuity] with base the big etale scheme site. It applies to the chosen small models and proves that precomposition sends sheaves of sets to sheaves of sets. On the underlying abelian sheaf $h^*F$ the addition and zero are the original ones; its scalar ring at $y$ over $T$ is $\\mathcal O_{\\mathcal C}(h(y))=\\Gamma(T,\\mathcal O_T)=\\mathcal O_{\\mathcal D}(y)$. The module laws and semilinearity on arrows are consequently exactly those of $F$, proving that this is a module sheaf. This uses no comparison between fppf and etale sheaf categories.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-fibred-site-functor-continuity",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06TS and Tag 06WE, etale version explicitly stated after its tensor formula"
+   }
+  },
+  {
+   "text": "For $y$ over $U$ and $V\\to U$ etale, $h(y_V)\\to h(y)$ and the chosen lift $(h(y))_V\\to h(y)$ are uniquely isomorphic over $V$. Applying $F$ gives $F(h(y_V))\\cong F((h(y))_V)$, hence $R_y(h^*F)\\cong R_{h(y)}F$. For $a:y\\to y'$ the image under $h$ of the lifted arrow $a_V$ of Step 4 is the unique arrow used for $h(a)$: its base map and its composite to $h(y')$ are the prescribed ones. The sectionwise isomorphisms therefore carry $d_{a,h^*F}$ to $d_{h(a),F}$. They are linear since all maps of scalar rings along the isomorphisms over $V$ are identities. Naturality of the same module Hom bijection carries their adjoints $c_{a,h^*F}$ to $c_{h(a),F}$. Identity arrows, empty schemes and the zero module satisfy the identical formulas; nowhere was a quasi-coherence, flatness, representability or algebraicity hypothesis introduced.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075D(3)--(4), module extension following equation-comparison-modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-cartesian-lift-pullback-square",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-pc-fibre-product",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-etale-localization-functor-adjoint",
+  "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
+  "lem-sfb-fibred-site-functor-continuity",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 075D(1)--(4), 06WE and 06W9, with the comparison verifications omitted there supplied explicitly; exactness via local epimorphism lifting as used in 06WM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of module sheaves on a category fibred in groupoids big etale site to each small etale scheme site is exact and commutes with precomposition",
+   "results": "{\"t\": \"2026-10-23T19:57:53Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of module sheaves on a category fibred in groupoids big etale site to each small etale scheme site is exact and commutes with precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.over\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.hasLimit\"], \"digest\": \"ec5a30e2f57a1709\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: overFunctor restricts to an entire slice, not to the small etale subsite of a fibred big site; generic pullback composition lemmas do not give these comparison maps or their exact restriction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction from a stack big etale module category to small etale scheme sites with functorial comparison maps",
+   "results": "{\"t\": \"2026-10-23T19:58:00Z\", \"tool\": \"leanfinder\", \"query\": \"Exact restriction from a stack big etale module category to small etale scheme sites with functorial comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\"], \"digest\": \"a31b6fff55c7f42b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: overFunctor restricts to an entire slice, not to the small etale subsite of a fibred big site; generic pullback composition lemmas do not give these comparison maps or their exact restriction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Exact\"",
+   "results": "{\"t\": \"2026-10-23T19:57:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: overFunctor restricts to an entire slice, not to the small etale subsite of a fibred big site; generic pullback composition lemmas do not give these comparison maps or their exact restriction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*modules|restriction.*exact|exact.*restrict",
+   "results": "{\"t\": \"2026-10-23T19:57:52Z\", \"tool\": \"grep\", \"query\": \"comparison.*modules|restriction.*exact|exact.*restrict\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Valued/NormedValued.lean\", \"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/Dynamics/Ergodic/RadonNikodym.lean\"], \"digest\": \"3e4ee1571c0b7338\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: overFunctor restricts to an entire slice, not to the small etale subsite of a fibred big site; generic pullback composition lemmas do not give these comparison maps or their exact restriction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison|restrict|over",
+   "results": "{\"t\": \"2026-10-23T19:59:23Z\", \"tool\": \"grep\", \"query\": \"comparison|restrict|over\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\"], \"digest\": \"b43195511c5acb8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: overFunctor restricts to an entire slice, not to the small etale subsite of a fibred big site; generic pullback composition lemmas do not give these comparison maps or their exact restriction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of comparison maps for restrictions of sheaves of modules on fibred categories under composition and pullback",
+   "results": "{\"t\": \"2026-10-23T19:59:33Z\", \"tool\": \"leanfinder\", \"query\": \"Compatibility of comparison maps for restrictions of sheaves of modules on fibred categories under composition and pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"PresheafOfModules.map_comp\"], \"digest\": \"670411acb85d991c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: overFunctor restricts to an entire slice, not to the small etale subsite of a fibred big site; generic pullback composition lemmas do not give these comparison maps or their exact restriction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "fibred|fibered|smallEtale|overFunctor",
+   "results": "{\"t\": \"2026-10-23T20:35:34Z\", \"tool\": \"grep\", \"query\": \"fibred|fibered|smallEtale|overFunctor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\"], \"digest\": \"0580f7e097e6734f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Zariski scheme module pullback/restriction, generic sheafification or full-slice restriction; none states restriction to small etale tests of an arbitrary fibred big-etale module sheaf with these canonical comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of module sheaves to a subsite closed under all covering families and pullbacks",
+   "results": "{\"t\": \"2026-10-23T20:35:35Z\", \"tool\": \"leansearch\", \"query\": \"Exact restriction of module sheaves to a subsite closed under all covering families and pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"PresheafOfModules.restrictScalarsObj\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"CategoryTheory.Sheaf.ΓRes\", \"ModuleCat.Tilde.toOpen_res\", \"SheafOfModules.Finite.hasFiniteLimits\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"360c5e7a5c5af396\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Zariski scheme module pullback/restriction, generic sheafification or full-slice restriction; none states restriction to small etale tests of an arbitrary fibred big-etale module sheaf with these canonical comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T20:35:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackId\", \"PresheafOfModules.pullbackObjIsDefined\", \"PresheafOfModules.pullback\", \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackComp\", \"PresheafOfModules.pullback_comp_id\"], \"digest\": \"83751ccd8310f3d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Zariski scheme module pullback/restriction, generic sheafification or full-slice restriction; none states restriction to small etale tests of an arbitrary fibred big-etale module sheaf with these canonical comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of modules on a category fibred in groupoids from the big etale topology to the small etale site is exact and comparison maps compose",
+   "results": "{\"t\": \"2026-10-23T20:35:36Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of modules on a category fibred in groupoids from the big etale topology to the small etale site is exact and comparison maps compose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber\", \"PresheafOfModules.restrictHomEquivOfIsLocallySurjective\", \"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\"], \"digest\": \"f881968f16c78f52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Zariski scheme module pullback/restriction, generic sheafification or full-slice restriction; none states restriction to small etale tests of an arbitrary fibred big-etale module sheaf with these canonical comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module sheaf comparison from scheme tensor pullback to evaluation on cartesian lifts in a category fibered in groupoids",
+   "results": "{\"t\": \"2026-10-23T20:35:37Z\", \"tool\": \"leanfinder\", \"query\": \"Module sheaf comparison from scheme tensor pullback to evaluation on cartesian lifts in a category fibered in groupoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"220336788b61253b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Zariski scheme module pullback/restriction, generic sheafification or full-slice restriction; none states restriction to small etale tests of an arbitrary fibred big-etale module sheaf with these canonical comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-lqc-flat-comparison-local-structure",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Local structural properties of locally quasi-coherent flat-compatible modules. Supporting the restriction, naturality and local comparison arguments in Stacks 06WM, 075Y and 0764.",
+   "via": [
+    "lem-sfb-stack-lqc-flat-comparison-local-structure",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibred-big-etale-restriction-calculus",
+  "worker": "stage1",
+  "summary": "Expanded all clauses into ten steps with no new nodes: cartesian-lift sheaf descent, local-surjectivity exactness, ringed comparison construction, explicit adjunct composition, etale localization with unit normalization, and precomposition compatibility. Corrected the Zariski-only pullback citation to the general ringed-topos tensor-pullback statement. Read cited statements, Stacks sources, the current blueprint and Mathlib search hits; no exact Lean attachment found.",
+  "blueprint": "Supporting local-structure input to the existing det-thm-sf-ctf-stability-direct-images proof (3) ancestry recorded in blueprint.from.place. Latest blueprint direct-image proof was read. No unit or chapter route is changed; the exact-restriction and comparison checks serve the inherited Stacks 06WM/075Y/0764 input. Blueprint searches fibred, 075D, 06WM and comparison calculus found no equivalent blueprint node; ancestor reports None, retained as imported.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Generic preservation of covers and sheaves by small-etale base change is used only to construct the ringed morphism."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic existence of a geometric morphism from a finite-limit and covering preserving site functor, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic tensor-pullback/module-pushforward adjunction constructs and identifies the actual comparison morphisms; the unit supplies no different adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-aa5e99f96",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-aa5e99f96 (reviewer sub-agent of L); spot-checked: I read the whole item: all 10 steps, every cited statement, and the Stacks text at 075D(1)-(4), 06W9, equation-comparison-modules, section-structure-sheaf and 06WM. There are no new nodes and no repair note. Live and side-live still have the item unsplit, so no other group superseded this delivery.\n\nThe statement change is correct. It replaces def-pc-module-pullback, which is Zariski-only, with the general tensor pullback of lem-weil-pbc-ringed-topoi-module-adjunction. The object, the coefficient category and the direction of c are unchanged, and nothing is weakened.\n\nI rechecked the steps. Step 2 gives exactness via local surjectivity, and the image/cokernel argument is sound. Step 6 gives the transpose v_*(d_a)∘d_b = d_{ba} in the right order. Steps 7-8 identify u^{-1} with slice restriction and show c is the specific map e, using the sets-adjoint uniqueness clause with the projection unit. Steps 9-10 cover precomposition via fibred-site-functor-continuity. I also tested the edge cases: the empty scheme, the zero module, identity arrows, automorphisms, and non-étale u.\n\nOne fault (C1/E1): the proof never showed that O_U on U_et and O_C on C_et are sheaves of rings. Steps 2-3 need this because the module-sheaf and ringed-topos lemmas they cite assume it.\n\nFIX: the corrected item is in fixes/dag/nodes/sec-six-functors-basics/. Step 1 now opens with the argument, following the same route as def-pur-proetale-structure-sheaf:\n- global functions are Mor(-, Spec Z[t]) by lem-weil-pbc-morphism-into-affine-scheme;\n- étale covers are fpqc by lem-weil-pbc-fpqc-finer-than-etale (Lean-closed);\n- fpqc descent of morphisms comes from lem-weil-pbc-fpqc-representable-descent;\n- for O_C, cover overlaps lie over U_i×_U U_j by lem-sfb-cartesian-lift-pullback-square.\nThe three new citations are added to uses and proof_deps.\n\nI accept the three declared tool_uses: etale-base-change-continuous, left-exact-site-inverse-image-tensor and ringed-topoi-module-adjunction. I found no duplicate of the item; lem-sfb-stack-small-etale-comparison-calculus is about algebraic stacks and fppf modules, not this statement.; 1 file(s) fixed by the reviewer"
+ }
+}

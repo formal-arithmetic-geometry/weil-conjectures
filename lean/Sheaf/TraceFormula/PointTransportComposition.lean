@@ -7,18 +7,6 @@ module
 
 public import Sheaf.SixFunctors.FrobeniusPointTransport
 public import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.FiniteCoefficientPoint
-import Sheaf.Paper.InverseImagePullbackComparisonDerived
-import Sheaf.Paper.IsomorphismDerivedPullback
-import Sheaf.Paper.PointProEtaleSectionsExact
 
 /-!
 # Composition of finite-level point transports
@@ -62,6 +50,74 @@ def pointPowerRestriction (D : FiniteFieldDatum.{u}) (r : ℕ) :
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+set_option backward.isDefEq.respectTransparency.types false in
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
+private theorem pointPowerFiniteScalar_restriction (r n : ℕ)
+    (a : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) :
+    (inv (inverseImageFiniteCoefficientMap l E ((pointFrobeniusAut D) ^ r).hom n)).hom.app
+        (op (ProEt.mk (𝟙 (Spec (.of D.k)))))
+        (pointConstantSectionMap D.k (Padic.coefficientExtensionRing l E (n + 1)) a) =
+      (integralCoefficientSheaf l E (Spec (.of D.k)) n).obj.map
+        (pointPowerRestriction D r).op
+        (pointConstantSectionMap D.k (Padic.coefficientExtensionRing l E (n + 1)) a) := by
+  let A := CommRingCat.of
+    (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))
+  let U := ProEt.mk (𝟙 (Spec (.of D.k)))
+  let c := inverseImageFiniteCoefficientMap l E ((pointFrobeniusAut D) ^ r).hom n
+  have hn := (isoSectionwiseConstantMap_existsUnique.{u, u}
+    ((pointFrobeniusAut D) ^ r).hom A).exists.choose_spec U a
+  have hr := congrArg (fun f ↦ f a)
+    ((toSheafify (ProEt.topology (Spec (.of D.k)))
+      ((Functor.const (Spec (.of D.k)).ProEtᵒᵖ).obj A)).naturality
+        (pointPowerRestriction D r).op)
+  have hi := congrArg (fun f ↦ f.hom.app (op U)
+    ((toSheafify (ProEt.topology (Spec (.of D.k)))
+      ((Functor.const (Spec (.of D.k)).ProEtᵒᵖ).obj A)).app
+        (op ((proEtaleIsoPostcompose ((pointFrobeniusAut D) ^ r).hom).obj U)) a))
+    (IsIso.hom_inv_id c)
+  have hh := congrArg (fun x ↦ (inv c).hom.app (op U) x) hn
+  change _ = (integralCoefficientSheaf l E (Spec (.of D.k)) n).obj.map
+    (pointPowerRestriction D r).op (pointConstantSectionMap D.k _ a) at hr
+  change _ = (inv c).hom.app (op U) (pointConstantSectionMap D.k _ a) at hh
+  change _ = _ at hi
+  exact hh.symm.trans (hi.trans hr)
+
+set_option backward.isDefEq.respectTransparency.types false in
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
+private def sectionRestrictionLinear
+    {C : Type (u + 1)} [Category.{u} C] {R : Cᵒᵖ ⥤ RingCat.{u + 1}}
+    (M : PresheafOfModules.{u + 1} R) {U V : Cᵒᵖ} (r : U ⟶ V)
+    {A : Type (u + 1)} [Ring A] (a : A →+* R.obj U) (b : R.obj U →+* R.obj V)
+    (h : ∀ c, R.map r (a c) = b (a c)) :
+    (ModuleCat.restrictScalars a).obj (M.obj U) ⟶
+      (ModuleCat.restrictScalars a).obj ((ModuleCat.restrictScalars b).obj (M.obj V)) := by
+  refine ModuleCat.ofHom
+    (X := (ModuleCat.restrictScalars a).obj (M.obj U))
+    (Y := (ModuleCat.restrictScalars a).obj ((ModuleCat.restrictScalars b).obj (M.obj V)))
+    { toFun := fun x ↦ M.map r x
+      map_add' := fun x y ↦ (M.map r).hom.map_add x y
+      map_smul' := ?_ }
+  intro c x
+  exact (M.map_smul r (a c) x).trans
+    (congrArg (fun d ↦ @SMul.smul _ _ (M.obj V).isModule.toSMul d (M.map r x)) (h c))
+
+set_option backward.isDefEq.respectTransparency.types false in
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
+private def pointPowerFiniteSigmaTerm (r n : ℕ)
+    (M : integralOperationsFiniteModules l E (Spec (.of D.k)) n) :
+    (pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).obj M ⟶
+      (pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).obj
+        ((inverseImageFiniteModules l E ((pointFrobeniusAut D) ^ r).hom n).obj M) := by
+  exact sectionRestrictionLinear M.val (pointPowerRestriction D r).op
+    (pointConstantSectionMap D.k (Padic.coefficientExtensionRing l E (n + 1)))
+    ((inv (inverseImageFiniteCoefficientMap l E ((pointFrobeniusAut D) ^ r).hom n)).hom.app
+      (op (ProEt.mk (𝟙 (Spec (.of D.k)))))).hom
+    (fun a ↦ (pointPowerFiniteScalar_restriction D l E r n a).symm)
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite sigma chain map is uniquely fixed on every term and section.
 Source: Stacks 06UM and 015F; blueprint finite/integral paragraph
 (blueprint: lem-trf-point-transport-composition).
@@ -83,7 +139,23 @@ theorem pointPowerFiniteSigma_existsUnique (r n : ℕ)
                (.up ℤ)).obj K),
       ∀ (i : ℤ) (x : (K.X i).val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))),
         f.f i x = (K.X i).val.map (pointPowerRestriction D r).op x := by
-  sorry
+  let f : ((pointFiniteSections D.k
+        (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).obj K ⟶
+      ((pointFiniteSections D.k
+        (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).obj
+        (((inverseImageFiniteModules l E ((pointFrobeniusAut D) ^ r).hom n).mapHomologicalComplex
+          (.up ℤ)).obj K) :=
+    { f i := pointPowerFiniteSigmaTerm D l E r n (K.X i)
+      comm' i j _ := by
+        ext x
+        exact PresheafOfModules.naturality_apply (K.d i j).val
+          (pointPowerRestriction D r).op x }
+  refine ⟨f, fun _ _ ↦ rfl, ?_⟩
+  intro g hg
+  apply HomologicalComplex.hom_ext
+  intro i
+  ext x
+  exact hg i x
 
 /-- Sigma is the specified chain map res, ins, sheafification, in its sectionwise model.
 Source: Stacks 06UM and 015F; blueprint displayed sigma

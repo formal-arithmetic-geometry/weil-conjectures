@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-square-action-generation-locus-stable",
+ "kind": "statement",
+ "title": "The positive-power section-generation locus is stable under a square-condition action",
+ "statement": "Let $S$ be an affine scheme [def-pc-scheme] and $H\\to S$ a smooth separated morphism of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with an $S$-group scheme structure and connected fibres $H_s=H\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-fibre-product, def-weil-residue-field, def-weil-connected-scheme]. An $S$-group scheme means a scheme $H$ with $S$-morphisms $m:H\\times_SH\\to H$, $i:H\\to H$, $e:S\\to H$ satisfying associativity, identity and inverse identities; separated means its diagonal is a closed immersion. Let $X\\to S$ be a separated morphism of finite presentation, equipped with an action $a:H\\times_SX\\to X$, meaning that $a(e,x)=x$ and $a(g,a(h,x))=a(gh,x)$ as morphism identities. Let $M$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For any $S$-scheme $B$, put $X_B=X\\times_SB$, with structure map $q_B:X_B\\to B$, and let $M_B$ be the tensor pullback of $M$ [def-pc-module-pullback]. For $g\\in H(B)=\\operatorname{Hom}_S(B,H)$ let $\\tau_g:X_B\\to X_B$ be the action $x\\mapsto gx$. Say that $M$ satisfies the square condition for this action if, for every such $B$ and every $g,h\\in H(B)$, there is an invertible $\\mathcal O_B$-module $N$ and an isomorphism $$\\tau_{gh}^*M_B\\otimes M_B\\cong\\tau_g^*M_B\\otimes\\tau_h^*M_B\\otimes q_B^*N.$$ All tensors are module sheaf tensors [def-pur-sheaf-tensor-product]. This is equality of the translation differences in the group of invertible-module classes modulo modules pulled back from $B$; no coherence or chosen isomorphisms are part of the condition. Assume that $M$ satisfies this square condition. Put $$E=\\bigcup_{n\\geq1}\\ \\bigcup_{s\\in\\Gamma(X,M^{\\otimes n})} X_s,$$ where $X_s$ is the nonvanishing open of the section $s$ [def-weil-pbc-ample-invertible-module]; no affineness requirement is imposed on these opens. Then the image on underlying points of $a:H\\times_SE\\to X$ equals $E$. In particular, the action carries $H\\times_SE$ into the open subscheme $E$.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Guo, section 5.6 (square condition as Picard-admissibility), Lemma 6.3(ii), printed p.15 (smooth separated finite-presentation specialization); March 31, 2026 version, read online; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-connected-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}A$ and $E_n=\\bigcup_{s\\in\\Gamma(X,M^{\\otimes n})}X_s$ for $n>0$. Finite presentation includes quasi-compactness, so $X$ is quasi-compact since the base is affine; $X\\to S$ is separated by hypothesis. Each $M^{\\otimes n}$ is invertible and hence quasi-coherent. The generating-locus definition identifies each $X_s$ with an open subscheme. Thus $E_n$ and $E=\\bigcup_{n>0}E_n$ are open. These observations verify the compactness, separatedness and quasi-coherence hypotheses needed for flat cohomology base change below.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-pbc-ample-invertible-module",
+    "def-sc-invertible-module",
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Guo, Lemma 6.3(i)–(ii), printed p.15, with the local-ring flat-base-change argument expanded; online March 31, 2026 version, local copy WANTED."
+   }
+  },
+  {
+   "text": "Fix $z\\in|H\\times_SE_n|$ and let $K=\\kappa(z)$. Its components give $h\\in H(K)$ and $y\\in E_n(K)$; set $x=h y\\in X(K)$ and let $s\\in S$ be their base point. Choose an algebraic closure $\\Omega/K$. The fibre $H_s$ is connected and has its rational identity point, so it remains connected over $\\Omega$. The group scheme $H_\\Omega$ is locally of finite type: on affine presentation charts, tensoring a finite presentation $R[t_1,\\ldots,t_r]/(f_1,\\ldots,f_m)$ with $\\Omega$ gives the same finite generators and relations over $\\Omega$. Here finite-presentation base change supplies that assertion, and finite presentation implies finite type by forgetting the relations. Apply the identity-component theorem over the algebraically closed field $\\Omega$: the identity component is geometrically irreducible and, because $H_\\Omega$ is connected, it is all of $H_\\Omega$. In particular $|H_\\Omega|$ is irreducible.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Guo, Lemma 6.3(i)–(ii), printed p.15, with the local-ring flat-base-change argument expanded; online March 31, 2026 version, local copy WANTED."
+   }
+  },
+  {
+   "text": "Let $\\alpha:H_\\Omega\\to X_\\Omega$ be $v\\mapsto v x_\\Omega$, and let $W=\\alpha^{-1}((E_n)_\\Omega)$. This is open and contains $h_\\Omega^{-1}$, since $h_\\Omega^{-1}x_\\Omega=y_\\Omega$. Inversion is an automorphism of $H_\\Omega$, so $W\\cap i^{-1}(W)$ is the intersection of two nonempty opens. It is nonempty by irreducibility. Choose a point $u$ of this intersection, put $L=\\kappa(u)$ and denote its corresponding element of $H(L)$ by $g$. Then both $g x_L$ and $g^{-1}x_L$ belong to the inverse image of $E_n$ in $X_L$. By the definition of this inverse image as a union of inverse images of the $X_s$, there are original global sections $s_+,s_-\\in\\Gamma(X,M^{\\otimes n})$ whose values at these two points, respectively, are nonzero. No assertion that sections commute with the nonflat base change to $L$ is used.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Guo, Lemma 6.3(i)–(ii), printed p.15, with the local-ring flat-base-change argument expanded; online March 31, 2026 version, local copy WANTED."
+   }
+  },
+  {
+   "text": "Let $p\\in H$ be the image of $g:\\operatorname{Spec}L\\to H$, let $R=\\mathcal O_{H,p}$, and put $B=\\operatorname{Spec}R$. The canonical map $B\\to H$ is flat; $H\\to S$ is flat because it is smooth. Their composite $B\\to S$ is flat, and the affine flatness criterion gives that $R$ is a flat $A$-algebra. The canonical map $c:B\\to H$ is an element $g_B\\in H(B)$. By the local-spectrum bijection, $g:\\operatorname{Spec}L\\to H$ corresponds to the pair $(p,\\varphi)$ with $\\varphi:R\\to L$ its local stalk map. The morphism $\\operatorname{Spec}\\varphi:\\operatorname{Spec}L\\to B$ sends the point to the closed point, and $c$ maps that point to $p$ with stalk map the identity of $R$. Hence $c\\circ\\operatorname{Spec}\\varphi$ has the same pair $(p,\\varphi)$, so it equals $g$. Pairing this map with $x_L$ gives an $L$-valued point $\\widetilde x$ of $X_B$. At this point $g_B$ specializes to $g$. Notice that flatness is asserted for $B\\to S$, not for $\\operatorname{Spec}L\\to S$.",
+   "uses": [
+    "lem-sbc-canonical-stalk-spectrum-flat",
+    "lem-pc-smooth-flat",
+    "lem-pc-flat-compose",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Guo, Lemma 6.3(i)–(ii), printed p.15, with the local-ring flat-base-change argument expanded; online March 31, 2026 version, local copy WANTED."
+   }
+  },
+  {
+   "text": "Apply the square condition on $B$ to $g_B,g_B^{-1}$. Since their product is the identity, it gives $M_B^{\\otimes2}\\cong\\tau_{g_B}^*M_B\\otimes\\tau_{g_B^{-1}}^*M_B\\otimes q_B^*N$ for an invertible $N$ on $B$. An invertible module on $\\operatorname{Spec}R$, with $R$ local, is trivial: its trivializing open around the closed point is the entire spectrum, since every principal open containing that point is the entire spectrum. Choose such a trivialization, and take the $n$th tensor power of the displayed isomorphism. Pullback is functorial and commutes with tensor powers. Pull back $s_+$ along $\\tau_{g_B}$ after base change, and $s_-$ along $\\tau_{g_B^{-1}}$; their tensor product therefore gives a section $r\\in\\Gamma(X_B,(M_B)^{\\otimes2n})$. The pullback nonvanishing statement shows both factors are nonzero at $\\widetilde x$. In a one-dimensional vector space over $L$, their tensor product is nonzero. Consequently $r(\\widetilde x)\\ne0$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-sc-pullback-tensor-power-iso",
+    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Guo, Lemma 6.3(i)–(ii), printed p.15, with the local-ring flat-base-change argument expanded; online March 31, 2026 version, local copy WANTED."
+   }
+  },
+  {
+   "text": "Identify $(M_B)^{\\otimes2n}$ with the pullback of $M^{\\otimes2n}$. In degree zero, cohomology is global sections. Apply the separated flat-base-change theorem with the compact scheme $X$, its separated structure morphism to $\\operatorname{Spec}A$, the quasi-coherent module $M^{\\otimes2n}$ and the flat $A$-algebra $R$. Its specific comparison is surjective, and sends $b\\otimes t$ to $b\\,t_B$. Hence the section from step 5 has the form $r=\\sum_{j=1}^k b_j(t_j)_B$, with $t_j\\in\\Gamma(X,M^{\\otimes2n})$ and $b_j\\in R$. If all $t_j$ vanished at the underlying image $x_0\\in X$ of $x_L$, their pullbacks would vanish at $\\widetilde x$, so the displayed sum would vanish there. This contradicts step 5. Thus some $t_j$ is nonzero at $x_0$, giving $x_0\\in E_{2n}\\subseteq E$. This argument uses the canonical comparison formula, not merely an abstract isomorphism of the two modules.",
+   "uses": [
+    "lem-sc-pullback-tensor-power-iso",
+    "pqf-def-cohomology",
+    "lem-pc-flat-cohomology-separated",
+    "def-pc-flat-cohomology-comparison",
+    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Guo, Lemma 6.3(i)–(ii), printed p.15, with the local-ring flat-base-change argument expanded; online March 31, 2026 version, local copy WANTED."
+   }
+  },
+  {
+   "text": "Every point of $H\\times_SE$ belongs to $H\\times_SE_n$ for some $n>0$, since its second component lies in one of the $E_n$. Steps 2–6 therefore show $a(|H\\times_SE|)\\subseteq|E|$. Conversely the identity section gives $E\\to H\\times_SE$, and its composite with the action is the inclusion of $E$ into $X$. This gives the reverse inclusion on underlying points, hence equality. Since $E$ is open and the inverse image of $E$ under the restricted action is the whole source, restricting its continuous map and its structure-sheaf morphism to $E$ yields the asserted morphism $H\\times_SE\\to E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Guo, Lemma 6.3(i)–(ii), printed p.15, with the local-ring flat-base-change argument expanded; online March 31, 2026 version, local copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-invertible-module",
+  "def-sc-section-generating-locus",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lem-pc-smooth-flat",
+  "lem-pc-flat-compose",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-pc-module-pullback",
+  "lem-sc-pullback-tensor-power-iso",
+  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+  "pqf-def-cohomology",
+  "lem-pc-flat-cohomology-separated",
+  "def-pc-flat-cohomology-comparison",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Guo Lemma 6.3(i)–(ii), read online; expanded the sketch using the listed Stacks inputs. Local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The global section generation locus of a line bundle is invariant under a connected smooth group action satisfying the theorem of the square",
+   "results": "{\"t\": \"2026-10-24T03:15:46Z\", \"tool\": \"leanfinder\", \"query\": \"The global section generation locus of a line bundle is invariant under a connected smooth group action satisfying the theorem of the square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.exists_const\", \"ModuleCat.Tilde.sectionsSubmodule\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\"], \"digest\": \"ffb5e7ef21fed034\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The section generation open of a line bundle satisfying the theorem of the square is invariant under a connected smooth group action",
+   "results": "{\"t\": \"2026-10-24T03:16:09Z\", \"tool\": \"leansearch\", \"query\": \"The section generation open of a line bundle satisfying the theorem of the square is invariant under a connected smooth group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IsInvariantBlock\", \"Algebra.IsInvariant\", \"MulAction.IsFixedBlock\", \"Algebra.IsInvariant.casesOn\", \"Representation.le_comap_invariants\", \"Algebra.IsInvariant.recOn\", \"MulAction.IsFixedBlock.isInvariantBlock\", \"SlashInvariantForm.slash_action_eq'\"], \"digest\": \"f7d34b7fda814ed5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGloballyGenerated\", \"IsPretransitive\"",
+   "results": "{\"t\": \"2026-10-24T03:16:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGloballyGenerated\\\", \\\"IsPretransitive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|generationLocus|semiampleLocus|squareCondition",
+   "results": "{\"t\": \"2026-10-24T03:16:09Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|generationLocus|semiampleLocus|squareCondition\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle satisfying the theorem of the square, the union of nonvanishing loci of its positive power sections is stable under a connected group action",
+   "results": "{\"t\": \"2026-10-24T03:16:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a line bundle satisfying the theorem of the square, the union of nonvanishing loci of its positive power sections is stable under a connected group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.Proj.basicOpen_pow\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"ProjectiveSpectrum.basicOpen_pow\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"92280b18f406c512\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations and types read; section-ring charts, structure-sheaf sections and set-theoretic invariant blocks do not state this theorem for invertible modules and scheme group actions."
+  },
+  {
+   "tool": "grep",
+   "query": "generationLocus|semiampleLocus|Picard.admiss|squareCondition",
+   "results": "{\"t\": \"2026-10-24T03:37:18Z\", \"tool\": \"grep\", \"query\": \"generationLocus|semiampleLocus|Picard.admiss|squareCondition\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; basic opens of structure-sheaf sections and Proj charts do not assert stability for line bundles under scheme group actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles with the theorem of the square have an invariant open locus generated by sections of positive tensor powers",
+   "results": "{\"t\": \"2026-10-24T03:37:19Z\", \"tool\": \"leansearch\", \"query\": \"Line bundles with the theorem of the square have an invariant open locus generated by sections of positive tensor powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.basicOpen_pow\", \"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"AlgebraicGeometry.Scheme.zeroLocus_map_of_eq\", \"AlgebraicGeometry.Scheme.zeroLocus\"], \"digest\": \"831f4b2653bd9376\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; basic opens of structure-sheaf sections and Proj charts do not assert stability for line bundles under scheme group actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGloballyGenerated\", \"MulAction\"",
+   "results": "{\"t\": \"2026-10-24T03:37:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGloballyGenerated\\\", \\\"MulAction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; basic opens of structure-sheaf sections and Proj charts do not assert stability for line bundles under scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The positive power section generation locus of a line bundle satisfying the theorem of the square is stable under a connected smooth group scheme action",
+   "results": "{\"t\": \"2026-10-24T03:37:20Z\", \"tool\": \"leanfinder\", \"query\": \"The positive power section generation locus of a line bundle satisfying the theorem of the square is stable under a connected smooth group scheme action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\"], \"digest\": \"1a6ca6a6146b1055\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; basic opens of structure-sheaf sections and Proj charts do not assert stability for line bundles under scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected group scheme acting on a scheme preserves the union of basic opens defined by sections of powers of a Picard admissible invertible sheaf",
+   "results": "{\"t\": \"2026-10-24T03:37:21Z\", \"tool\": \"leanfinder\", \"query\": \"A connected group scheme acting on a scheme preserves the union of basic opens defined by sections of powers of a Picard admissible invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top'\", \"AlgebraicGeometry.iSup_basicOpen_of_span_eq_top\", \"AlgebraicGeometry.Scheme.basicOpen_add_le\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_union_eq_self_iff\", \"AlgebraicGeometry.Proj.basicOpen_eq_iSup_proj\", \"AlgebraicGeometry.Scheme.basicOpen_mul\"], \"digest\": \"950b2d814022ca0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; basic opens of structure-sheaf sections and Proj charts do not assert stability for line bundles under scheme group actions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-action-affine-orbit-criterion",
+  "date": "2026-10-24",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Guo, Proposition 5.9, final assertion, printed pp.13--14, and Corollary 6.6(ii), printed p.16 (Raynaud VI, Theorem 2.1), applied to the left translation action of G on itself. Some positive tensor power satisfies the theorem of the square; the section criterion then detects ampleness.; auxiliary to lem-sfb-symmetric-line-power-prolongation, proof step 3 (local ample line on H_W). Supporting input: Guo, Corollary 6.5, sufficient direction, affine-locus specialization; square condition is Picard-admissibility of section 5.6; Guo, section 5.6 (square condition as Picard-admissibility), Lemma 6.3(ii), printed p.15 (smooth separated finite-presentation specialization)",
+   "via": [
+    "lem-sfb-square-action-affine-orbit-criterion",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-square-action-generation-locus-stable",
+  "worker": "stage1",
+  "summary": "Expanded the two inverse-translation argument in Guo Lemma 6.3(i) and the deduction of (ii). All geometric and cohomological inputs reuse existing DAG nodes; no new nodes. Explicitly distinguished residue-field points from the flat spectrum of the group local ring and used the specified degree-zero base-change map to descend nonvanishing. Statement unchanged.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs.py ancestor returns None. This auxiliary node serves the inherited admissible-direct-image chain; the exact source place is Guo Lemma 6.3(ii), through (i), recorded in blueprint.from.place. Searches for square condition, generation locus and Picard-admissible found no blueprint duplicates.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "General algebraic-geometric/cohomological input used only in its stated form in the Guo inverse-translation proof; the inherited constructible-stability unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sbc-canonical-stalk-spectrum-flat",
+    "why": "General algebraic-geometric/cohomological input used only in its stated form in the Guo inverse-translation proof; the inherited constructible-stability unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-flat-cohomology-separated",
+    "why": "General algebraic-geometric/cohomological input used only in its stated form in the Guo inverse-translation proof; the inherited constructible-stability unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Added by the stage-1 reader: identifies the canonical morphism Spec O_{H,p} -> H (closed point to p, identity stalk map), needed to factor the L-point g through the flat local spectrum in step 4; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lem-pc-flat-cohomology-separated",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-f5ede38b0",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-f5ede38b0 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, plus the statement of every cited node. The statement and stmt_deps are byte-identical to the base copy. The Q141 reader checked that statement against Guo's online PDF (§5.6, Lemma 6.3(ii)); there is no local copy and this reviewer has no network access. I also re-derived the proof independently. Step 1: qc follows from finite presentation over an affine base, M^n is quasi-coherent, E is open. Step 2: geometric connectedness through the rational identity point; with locally finite type and identity-component irreducibility over Ω, |H_Ω| is irreducible. Step 3: h^{-1} lies in W and h lies in i^{-1}(W), so W ∩ i^{-1}(W) is nonempty; this gives g with g^{±1}x_L in E_n and original sections s_±. Step 4: R=O_{H,p} is flat over A. Step 5: the square condition with h=g^{-1}; N is trivial on the local B; the nonvanishing-pullback node is applied to p∘τ. Step 6: the bijective degree-0 β of lem-pc-flat-cohomology-separated, with formula b⊗t↦b·p^*t, writes r=Σb_j p^*t_j, so x_0 lies in E_{2n}. Step 7: identity section and open-subscheme factorization. FIX (C1/C4): step 4 claimed without citation that Spec L→H factors through Spec O_{H,p}. I added lem-weil-pbc-morphism-from-spec-local-ring and lem-weil-pbc-spec-local-ring-canonical-morphism with the argument that c∘Specφ and g have the same pair (p,φ). Both nodes were added to proof_deps, and the second to split_report.tool_uses. Edge cases (empty E, trivial H, M=O_X, nilpotents) are fine. No new nodes, no duplicate, no cycle, no SGA, and uses equal proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SquareActionGenerationLocusStable",
+  "declaration": "AlgebraicGeometry.square_action_generation_locus_stable",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareActionGenerationLocusStable.lean",
+  "statement": "theorem square_action_generation_locus_stable (S : Scheme.{u}) [IsAffine S] (H : Over S) [GrpObj H] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFinitePresentation H.hom] [QuasiCompact H.hom] [QuasiSeparated H.hom] (hH : ∀ s : S, ConnectedSpace (H.hom.fiber s)) (X : Over S) [IsSeparated X.hom] [LocallyOfFinitePresentation X.hom] [QuasiCompact X.hom] [QuasiSeparated X.hom] [ModObj H X] (M : X.left.Modules) [M.IsInvertible] (hsquare : ∀ (B : Over S) (g h : B ⟶ H), ∃ N : B.left.Modules, N.IsInvertible ∧ Nonempty (((Scheme.Modules.tensorPullback (((snd X B ≫ (g * h)) • fst X B).left)).obj M ⊗ (Scheme.Modules.tensorPullback (fst X B).left).obj M) ≅ (((Scheme.Modules.tensorPullback (((snd X B ≫ g) • fst X B).left)).obj M ⊗ (Scheme.Modules.tensorPullback (((snd X B ≫ h) • fst X B).left)).obj M) ⊗ (Scheme.Modules.tensorPullback (snd X B).left).obj N))) : ∃ E : X.left.Opens, (E : Set X.left) = ⋃ (n : ℕ) (_ : 0 < n) (s : (M.tensorPow n).val.presheaf.obj (Opposite.op ⊤)), Scheme.Modules.nonvanishingLocus (M.tensorPow n) s ∧ Set.image (γ[H, X].left.base) ((snd H X).left.base ⁻¹' (E : Set X.left)) = (E : Set X.left) ∧ ∃ aE : (H ⊗ Over.mk (E.ι ≫ X.hom)).left ⟶ E.toScheme, aE ≫ E.ι = ((H ◁ Over.homMk E.ι) ≫ γ[H, X]).left",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The square condition is written directly as an existential isomorphism hypothesis on every B-point pair. Translation pullback of M_B is expressed by tensor pullback along the composite (x,b) ↦ g(b)x, canonically identified by pullback composition. The conclusion names the specified union as an open E, states equality of its action image on all underlying points, and gives the restricted action factorization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a353ae067",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read node, all 10 stmt_deps, item module and report against Guo §5.6/Lemma 6.3(ii) (PDF online only, no network access; statement unchanged from the base copy the stage-1 reader checked against it). All hypotheses match: affine S; H smooth separated finite-presentation GrpObj in Over S; fibres ConnectedSpace on H.hom.fiber s (nonempty included); X separated finite presentation with ModObj action (mul_smul gives τ_gh=τ_g∘τ_h); M invertible. hsquare: (snd≫g)•fst = lift(snd≫g,fst)≫γ = pr_X∘τ_g, so its pullback is canonically τ_g^*M_B; factors in node order; N existential; only Nonempty iso. Conclusion: E an Opens equal to the union over 0<n of nonvanishingLocus (openness asserted; ⋃ body at prec 60 so the ∧ clauses parse correctly); image of γ on snd⁻¹(E) equals E; restricted action factorization. Edge cases (E empty, n=0 excluded, M=O_X, noncommutative H, same universe u for B) ok. Node delta is lean only; statement verbatim; no defs; sorry only; docstrings with source, blueprint and 7 steps; both report sections present; no pro-etale content. Advisory only: tensor is the Invertible/Mathlib SheafOfModules monoidal instance rather than the recorded cochain instance; same notion, and an existential-iso hypothesis does not depend on the choice. No compile run (no changes); worker reports a clean scompile."
+ }
+}

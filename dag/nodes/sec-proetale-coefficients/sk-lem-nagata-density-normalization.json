@@ -18,43 +18,45 @@
  ],
  "proof": [
   {
-   "text": "By [det-nagata-density-normalization-setup], the given compactification and its schematic closure satisfy the comparison setup: $j=i\\circ j_Z$, $j_Z$ is a quasi-compact open immersion, and $V=\\overline X\\setminus Z$ is a quasi-compact open with closed complement $Z$. The same setup says that $\\overline X$ is quasi-compact and quasi-separated. Thus clause (2) of [det-sf-open-closed-pullback-limits], with $B=\\Lambda_{\\overline X}$, makes the closed restriction $i^*$ exact for these coefficients. In particular it sends an acyclic complex to an acyclic complex: exactness preserves kernels and images, so $H^n(i^*C)=i^*H^n(C)=0$. Hence the closed restriction occurring in the sheaf comparison is computed degreewise on the unbounded derived category, as used in the source's first paragraph. Apply the unbounded-complex clause of [det-nagata-density-normalization-sheaves] to the pulled-back coefficient sheaves and any complex representing the given $K$. It supplies the canonical identification in $D(\\overline X_{\\mathrm{pro\\acute{e}t}},\\Lambda_{\\overline X})$:\n\n$$j_!K\\simeq i_*j_{Z,!}K.$$\n\nThe cited clause explicitly induces this identification in the derived category.",
+   "text": "Use det-nagata-density-normalization-sheaves to obtain the sheaf isomorphism theta: j_! ≅ j_Z,! ⋙ i_*. Apply lem-weil-pbc-condensed-open-closed-recollement to i and its quasi-compact complementary open in the Noetherian compactification, obtaining exactness of the actual condensed-module i_*. Pass theta termwise to the unbounded derived categories and compose with the inverse canonical exact-functor comparison Ri_* ≅ D(i_*). This supplies an isomorphism e: D(j_!) ≅ D(j_Z,!) ⋙ Ri_*.",
    "uses": [
-    "det-nagata-density-normalization-setup",
-    "det-sf-open-closed-pullback-limits",
-    "det-nagata-density-normalization-sheaves"
+    "det-nagata-density-normalization-sheaves",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "def-sfb-right-derived-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/sk-lem-nagata-density-normalization.proof.md",
-    "place": "first proof paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [det-nagata-density-normalization-pushforward] to these compactification, closure, and coefficient data. It gives the canonical identification in $D(S_{\\mathrm{pro\\acute{e}t}},\\Lambda_S)$:\n\n$$Rp_*j_!K\\simeq R(p\\circ i)_*j_{Z,!}K.$$\n\nParts (1) and (4) of [det-nagata-density-normalization-setup] say that $j_Z$ is a quasi-compact open immersion and $p\\circ i$ is proper. Also $(p\\circ i)\\circ j_Z=p\\circ j=f$. Hence $X\\xrightarrow{j_Z}Z\\xrightarrow{p\\circ i}S$ is a compactification by [sk-def-nagata-sketch-data]. Its compact-support expression is $R(p\\circ i)_*j_{Z,!}$, whereas the original expression is $Rp_*j_!$. The displayed natural identification equates these expressions, proving the final assertion, in particular for finite-type $k$-schemes.",
+   "text": "The equality j_Z ; i = j and injectivity of the closed immersion i give i inverse-image of range(j) = range(j_Z). Mathlib IsOpenImmersion.isPullback makes the common-open square with vertical maps i and id_X a pullback. Apply lem-sfb-derived-open-restriction-normalization to that square. Its first conjunct makes the actual derived open-restriction mate invertible for arbitrary commutative condensed coefficients. The definition of identityOpenDerivedRestriction then composes that mate with the canonical derived identity comparison and right unitor, both isomorphisms, so the specified restriction r is invertible. No admissibility hypothesis or identity normalization formula is needed.",
    "uses": [
-    "det-nagata-density-normalization-pushforward",
-    "det-nagata-density-normalization-setup",
-    "sk-def-nagata-sketch-data"
+    "lem-sfb-derived-open-restriction-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/sk-lem-nagata-density-normalization.proof.md",
-    "place": "second proof paragraph"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Normalize e by adjunction: transpose the unit of D(j_Z,!) ⊣ D(j_Z^*) followed by r inverse under D(j_!) ⊣ D(j^*). This is a natural transformation alpha: D(j_!) → D(j_Z,!) ⋙ Ri_*. The existing private openUnit proof in the sheaf-comparison module and Mathlib derived-adjunction-unit preservation make both open units invertible. The counit of D(j_!) is invertible on the target since e identifies that target with an object in its fully faithful image. Thus alpha is invertible. The Hom-bijection identity gives exactly unit_j ; D(j^*)(alpha) ; r = unit_j_Z, the first displayed normalization.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Whisker the normalized isomorphism by Rp_*, insert the functor associator, and whisker the inverse of the specified adjunction-normalized direct-image compositor. This is precisely the eS term in the statement; choose that composite, so its defining equality is reflexivity. This is the derived composition step of the unit proof. The geometry and quasi-compact open of det-nagata-density-normalization-setup make the closure another compactification. Only the public lowerComp definition is used, not the unrelated coordinateFace theorem in its defining module.",
+   "uses": [
+    "det-nagata-density-normalization-setup"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-nagata-density-normalization-pushforward",
-  "det-nagata-density-normalization-setup",
   "det-nagata-density-normalization-sheaves",
-  "det-sf-open-closed-pullback-limits",
-  "sk-def-nagata-sketch-data"
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "def-sfb-right-derived-exact",
+  "lem-sfb-derived-open-restriction-normalization",
+  "det-nagata-density-normalization-setup"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/sk-lem-nagata-density-normalization.proof.md",
-  "place": "first and second proof paragraphs"
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/sk-lem-nagata-density-normalization.proof.md",
+  "place": "Both proof paragraphs: exact termwise sheaf comparison, common-open pullback restriction, full-faithfulness normalization, and the specified derived direct-image compositor. Lean proof by S2, 2026-10-26."
  },
  "mathlib_searches": [
   {
@@ -144,36 +146,69 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-25e04ed27 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, item statement identical byte for byte to the main-20261015 _section.md, so no target is weakened. Step 1 cites the det setup node (clauses 1-2: j=i∘j_Z, j_Z a qc open immersion, Xbar and Z qcqs, V qc with complement Z), then det-sf-open-closed-pullback-limits (2), whose hypotheses hold (qcqs, closed immersion with qc open complement, any ring sheaf B=Λ_Xbar). That citation is not strictly needed but it is true and from the correct unit; the triangle sketch has no node and the other open-closed nodes are limited to finite Dctf coefficients. The step's derived conclusion is exactly the unbounded clause of det-nagata-density-normalization-sheaves. Step 2 takes exactly the statement of det-nagata-density-normalization-pushforward. Setup (1) and (4) together with sk-def-nagata-sketch-data (which agrees with def-nagata-compactification) show the closure is again a dense compactification. The coefficient category and the morphisms (unit with base change, Rp_*Ri_*≃R(p∘i)_*) match the blueprint det proofs; no seeded comparison is used as a theorem. Dependency closure (407 nodes) has no cycle and every id exists; proof_deps equals the union of uses; no SGA cited; unit realization is permitted. Tested K=0, X empty, X dense, a disjoint extra component, and non-reduced Xbar. No changes and no tool_uses."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-1febfeca4",
-  "group": "Q89",
+  "reviewer": "NT-stage2-cc-80f8253a9",
+  "group": "NG",
   "result": "pass",
-  "note": "Snapshot module compiles cleanly via nt_compile.py (rc=0, 6.4 s, no warnings); lean.statement is byte-identical to the file signature and the node changes only its lean field. Every clause matches node 748: Compactification with [IsNoetherian c.Z] (makes the open immersion qc, so equivalent to BoundaryCompactification), Mathlib scheme-theoretic image for the closure, Λ with only MonObj (framework functors checked by #check need no IsCommMonObj), all unbounded K. eZ is pinned by two-sided inverse equations to the canonical unit/base-change comparison; eS is pinned to whiskering by Rp_* plus the conjugate derived composition iso, and its domain is definitionally Rf_!(c). Helpers are real constructions (#print axioms: no sorryAx), justified because the existing pullback API needs commutativity; only the main theorem is sorry. EssentiallySmall is the framework size convention; single universe u, nothing unbound. Edge cases empty X, K=0, zero ring, dense, extra component, non-reduced are covered. Report has Worker report and Second reading by Q89 sections; the worker section is stale but explicitly superseded (cosmetic only)."
+  "note": "Item matches node clause by clause: setting, listed maps, BoundaryCompactification c,d with r:d⟶c (triangles + inverse-image open), case (a) IsSchemeTheoreticallyDominant both, case (b) ∃ e: Z'≅i.image with e≫imageι=h ∧ j'≫e=toImage (no density), K∈Dctf by recorded predicates; e = localizingRefinementMap (transpose of θ⁻¹), IsIso at K and T_X K; square 1 T_Z e ≫ γ_h ≫ Rh_*δ_j' = δ_j ≫ e'; C_c = γ_p ≫ Rp_*δ_j; φ_h = Rp_*e ≫ lowerComp.symm ≫ eqToIso(hom_g); square 2 C_c≫φ' = T_Y φ ≫ C_d. Helpers non-hollow. Dep §1(B) repair of deleted sk-lem-nagata-density-normalization module: ∃ eZ uniquely pinned by unit≫j^*eZ≫r_i = unit_Z, eS = whiskered composite; matches node, no added hypotheses (IsCommMonObj is framework standing). Records lean-only, statements verbatim, lines ≤93, imports exist, report sections present. Advisory: uncited def owners (scalar-six interfaces, listed maps, def-sf-comp-refinement-data, identity-open restriction) not addable at S2. No compile (no file changed)."
  },
  "lean": {
   "module": "Sheaf.Compactification.NagataDensityNormalization",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.nagata_density_normalization",
-  "file": "lean/Sheaf/Compactification/NagataDensityNormalization.lean",
-  "statement": "theorem nagata_density_normalization {X S : Scheme.{u}} (f : X ⟶ S) (c : Compactification f) [IsNoetherian c.Z] [EssentiallySmall.{u + 1} Profinite.{u}] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : ∃ eZ : D((c.i)_!open⟦Λ⟧) ≅ D((c.i.toImage)_!open⟦Λ⟧) ⋙ R((c.i.imageι)_*⟦Λ⟧), ∃ eS : rightDerivedLowerShriekOfCompactification Λ c ≅ D((c.i.toImage)_!open⟦Λ⟧) ⋙ R((c.i.imageι ≫ c.g)_*⟦Λ⟧), (∀ K : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), nagataClosureOpenComparison c Λ K ≫ ((nagataDerivedPullbackAdjunction c.i.imageι Λ).homEquiv _ _).symm (eZ.hom.app K) = 𝟙 _ ∧ ((nagataDerivedPullbackAdjunction c.i.imageι Λ).homEquiv _ _).symm (eZ.hom.app K) ≫ nagataClosureOpenComparison c Λ K = 𝟙 _) ∧ eS = Functor.isoWhiskerRight eZ R((c.g)_*⟦Λ⟧) ≪≫ Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (nagataClosurePushforwardCompIso c Λ)",
-  "branch": "newtargets-dag",
-  "by": "Q89",
-  "date": "2026-10-16",
-  "existing": false,
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataCoefficientChangeEquivalence",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataModulePullback",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataModulePullbackAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataDerivedPullbackAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataOpenAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataDerivedOpenAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataModulePullbackComp",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataClosurePullbackCompIso",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataClosureOpenComparison",
-   "AlgebraicGeometry.ProEtale.CondensedRing.nagataClosurePushforwardCompIso",
    "AlgebraicGeometry.ProEtale.CondensedRing.nagata_density_normalization"
   ],
-  "note": "Canonical natural identifications, normalized by the open-extension unit and derived direct-image composition. The coefficient transport helpers use the existing coefficient isomorphisms and work for arbitrary condensed rings, without the commutativity requirement of the K-flat pullback API. No pointwise arbitrary isomorphism, let binder or chosen closure compactification is used. 2026-10-20 (U): module Sheaf.Compactification.NagataDensityNormalization deleted (dead: no target reaches it); this node is not reached either."
+  "file": "lean/Sheaf/Compactification/NagataDensityNormalization.lean",
+  "statement": "theorem nagata_density_normalization (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (f : X ⟶ S) (c : Compactification f) [IsNoetherian c.Z] : ∃ eZ : (openImmersionLowerShriek Λ c.i).mapDerivedCategory ≅ (openImmersionLowerShriek Λ c.i.toImage).mapDerivedCategory ⋙ RootCoordinateFace.lower Λ c.i.imageι, (∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.i).unit.app K ≫ (upperStar Λ c.i).mapDerivedCategory.map (eZ.hom.app K) ≫ (identityOpenDerivedRestriction Λ c.i c.i.toImage c.i.imageι c.i.toImage_imageι).app ((openImmersionLowerShriek Λ c.i.toImage).mapDerivedCategory.obj K) = (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.i.toImage).unit.app K) ∧ ∃ eS : (openImmersionLowerShriek Λ c.i).mapDerivedCategory ⋙ RootCoordinateFace.lower Λ c.g ≅ (openImmersionLowerShriek Λ c.i.toImage).mapDerivedCategory ⋙ RootCoordinateFace.lower Λ (c.i.imageι ≫ c.g), eS = Functor.isoWhiskerRight eZ (RootCoordinateFace.lower Λ c.g) ≪≫ Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (RootCoordinateFace.lowerComp Λ c.i.imageι c.g).symm",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B): the recorded module was deleted and scompile.py --source confirms it is unavailable on the live server. This replacement states both canonical identifications on all ordinary unbounded objects over any commutative condensed coefficient ring. The first is fixed by the actual common-open restriction and open unit; the second is its proper direct image with the normalized composition comparison. No arbitrary comparison is chosen and no boundedness, admissibility or field hypothesis is added."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X\\xrightarrow{j}\\overline X\\xrightarrow{p}S$ be any compactification\n([sk-def-nagata-sketch-data]) of separated schemes of finite type over a\nfield $k$ of positive characteristic different from $\\ell$, and let\n$i:Z\\hookrightarrow\\overline X$ be the schematic closure of $X$, with\n$j_Z:X\\hookrightarrow Z$ the induced open immersion\n([sk-lem-nagata-sketch-closure]). Let $\\Lambda$ be the condensed coefficient\nring of a finite extension $E/\\Ql$ or of $\\Qlb$, and use its pulled-back\ncoefficient sheaves on these schemes. For every\n$K\\in D^b_c(X,\\Lambda)$ there are canonical identifications, in\n$D^b_c(\\overline X,\\Lambda)$ and $D^b_c(S,\\Lambda)$ respectively,\n\n$$\nj_!K\\simeq i_*j_{Z,!}K,\\qquad\nRp_*j_!K\\simeq R(p\\circ i)_*j_{Z,!}K.\n$$\n\nThus replacing a compactification by the schematic closure of $X$ does not\nchange the expression $Rp_*j_!$ defining $Rf_!$; that expression needs only\nan open immersion followed by a proper morphism.",
+  "proof": [
+   {
+    "text": "The open and closed immersion operations on the pro-étale site are exact by\n[sk-prop-sf-open-closed-triangle]. Its quasi-compact-open hypothesis applies\nto the complement of $Z$ here because $\\overline X$, being of finite type\nover $k$, is Noetherian, and\ntherefore ensures exactness of $i_*$. Extension by zero along $j$ is\nsupported on $X$, which lies in $Z$. Its inverse image on $Z$ is extension by\nzero along $j_Z$. Equivalently, the natural map\n\n$$\nj_!K\\longrightarrow i_*i^*j_!K=i_*j_{Z,!}K\n$$\n\nis the identity on the open $X$ and both sides restrict to zero on its closed\ncomplement. The open–closed localization sequence therefore makes it an\nisomorphism. Since the immersion operations are exact, the argument applies\ndegreewise to complexes, in particular to bounded constructible ones.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Since $i_*$ is exact, $Ri_*=i_*$. The derived direct-image composition\nisomorphism $Rp_*Ri_*\\simeq R(p\\circ i)_*$ proves the second\nidentification, as a composite of derived right adjoints.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203031-L-2776935",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

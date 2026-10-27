@@ -1,0 +1,152 @@
+{
+ "id": "lem-per-adic-integral-scalar-heart",
+ "kind": "statement",
+ "title": "Finite integral scalar extension preserves the standard heart",
+ "statement": "Let ℓ be prime, let E and L be finite extensions of Q_ℓ [def-weil-l-adic-coefficient-extension], and let i : E → L be a Q_ℓ-algebra embedding. Let X be a noetherian finite-dimensional scheme on which ℓ is invertible. Use the actual completed constructible integral categories [def-weil-pbc-bounded-constructible-complete], their induced standard t-structures [prop-weil-pbc-integral-tstructure], and the integral scalar functor C_i of [prop-weil-pbc-scalar-extension]. If K is in the standard integral E-heart, then C_i(K) is in the standard integral L-heart. This assertion concerns integral objects before rationalization and includes arbitrary integral torsion in K.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-bounded-constructible-complete",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), Proposition 6.8.11(3) and Proposition 6.8.14; integral finite-free scalar calculation in step 1 of lem-per-adic-common-stage-truncations"
+ },
+ "proof": [
+  {
+   "text": "The valuation-ring extension is finite free. Its integral basis and the cofinal uniformizer filtrations identify the completed target coefficient sheaf, with its residue-normalized scalar map, as finite free over the completed source. This is the coordinate argument of [lem-weil-completed-integral-finite-free], transported from constant quotient presentations to the actual continuous-function quotient sheaves by their canonical finite coefficient comparisons.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), Proposition 6.8.11(3) and Proposition 6.8.14; integral finite-free scalar calculation in step 1 of lem-per-adic-common-stage-truncations"
+   }
+  },
+  {
+   "text": "Restriction of ordinary scalar extension is a finite sum of copies of the input module, so it preserves kernels and cokernels. The universal K-flat derived change of rings of [lem-pur-derived-change-of-rings], computed on resolutions from [lem-pc-kflat-resolution], agrees with termwise derivation of this exact ordinary functor. Thus its nonzero-degree cohomology vanishes on an integral heart input. The actual scalar functor preserves constructible complete membership by [prop-weil-pbc-scalar-extension]. The induced integral heart of [prop-weil-pbc-integral-tstructure] is exactly ambient cohomology concentrated in degree zero, proving the conclusion.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "prop-weil-pbc-scalar-extension",
+    "prop-weil-pbc-integral-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), Proposition 6.8.11(3) and Proposition 6.8.14; integral finite-free scalar calculation in step 1 of lem-per-adic-common-stage-truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-completed-integral-finite-free",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "prop-weil-pbc-integral-tstructure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Finite-free coordinate argument underlying BS 6.8.14 and step 1 of lem-per-adic-common-stage-truncations, specialized to the integral heart"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact finite free extension of coefficients preserves complexes whose cohomology is concentrated in degree zero",
+   "results": "8 hits, including CategoryTheory.Functor.preservesHomologyOfExact and CategoryTheory.ShortComplex.exact_iff_isZero_homology.",
+   "date": "2026-10-25",
+   "verdict": "Generic exactness and homology APIs exist; none identifies the actual completed PBC scalar functor with an exact functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free derived scalar extension preserves integral standard heart cohomology concentrated in degree zero",
+   "results": "8 hits, including DerivedCategory.isLE_iff, DerivedCategory.isGE_iff and bounds on Q.obj; no completed PBC scalar-heart theorem.",
+   "date": "2026-10-25",
+   "verdict": "The general cohomology criterion exists, but the actual PBC completed scalar extension requires the finite-free coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE",
+   "results": "11 hits, including isLE_iff and existence of a single-object representative for an object in both bounds.",
+   "date": "2026-10-25",
+   "verdict": "No actual integral PBC scalar-heart result."
+  },
+  {
+   "tool": "grep",
+   "query": "integralScalar.*heart|scalar.*[Tt]Exact|[Tt]Exact.*[Ss]calar",
+   "results": "msearch Mathlib: 0 hits. Project search found podCompletedScalarExtension_tExact for the different sf strict-tower category, and perAdicCommonStageTruncations for coefficient subfields of a fixed algebraic closure. Neither directly gives this integral PBC assertion for an arbitrary embedding. blueprint_refs search finite scalar heart: 0 matches.",
+   "date": "2026-10-25",
+   "verdict": "Extract only the integral finite-free step; do not restate the rational conclusion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicFibreComparisonData",
+  "date": "2026-10-25",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Finite scalar extension comparison on standard hearts, before rationalization; the integral step in the normalized fibre comparison construction.",
+   "via": [
+    "def-per-adic-fibre-comparison-data",
+    "lem-per-adic-normalized-fibre-comparisons",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarHeart",
+  "file": "lean/Sheaf/Paper/IntegralScalarHeart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcIntegralScalarHeart",
+  "statement": "theorem pbcIntegralScalarHeart\n    (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E))\n    (hK : (pbcIntegralTStructure X l E).heart K) :\n    (pbcIntegralTStructure X l L).heart\n      ((pbcEmbeddingIntegralTensor l E L i X hDim.out hInv.out).obj K)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T122832-L-1812300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T122832-L-1812300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

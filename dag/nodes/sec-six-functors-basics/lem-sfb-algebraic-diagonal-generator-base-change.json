@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-algebraic-diagonal-generator-base-change",
+ "kind": "statement",
+ "title": "Algebraic diagonal Hom and its generator under arbitrary scalar extension",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of commutative rings [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra]. Put $B=A\\otimes_R A$, $p_1(a)=a\\otimes1$, and let $A$ be a $B$-module by multiplication. Work in ordinary unbounded module derived categories [def-weil-abstract-derived-category], with derived scalar extension [lem-pur-derived-change-of-rings] and derived Hom [def-pur-derived-internal-hom] on the one-object ringed site. Let $M\\in D(A)$ be pseudo-coherent over $A$ [def-pc-ring-pseudo-coherent-complex] and have finite Tor amplitude over $R$: there exist integers $a\\le b$ such that $H^i(M\\otimes_R^{\\mathbf L}N)=0$ for every $R$-module $N$ in degree zero and $i\\notin[a,b]$. Set $M_1=M\\otimes_{A,p_1}^{\\mathbf L}B$. Assume $R\\operatorname{Hom}_B(A[0],M_1)\\cong A[0]$ in $D(B)$, and let $\\gamma:A[0]\\to M_1$ generate the cyclic $A$-module $\\operatorname{Hom}_{D(B)}(A[0],M_1)$, whose action is by precomposition with multiplication on $A$. For any ring map $R\\to R'$, put $A'=A\\otimes_RR'$, $B'=A'\\otimes_{R'}A'$, $M'=M\\otimes_A^{\\mathbf L}A'$ and $M'_1=M'\\otimes_{A',p'_1}^{\\mathbf L}B'$. Let $\\gamma':A'[0]\\to M'_1$ be the image of $\\gamma$ under derived extension from $B$ to $B'$, using the canonical identifications $A\\otimes_B^{\\mathbf L}B'\\simeq A'$ and $M_1\\otimes_B^{\\mathbf L}B'\\simeq M'_1$. Then $R\\operatorname{Hom}_{B'}(A'[0],M'_1)\\cong A'[0]$ in $D(B')$, and $\\gamma'$ generates the cyclic $A'$-module $\\operatorname{Hom}_{D(B')}(A'[0],M'_1)$. No flatness of $R\\to R'$ or Noetherianity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0E2F, lemma-base-change-relative-dualizing, part (2) and its final generator assertion; hypotheses expanded from Tag 0E2C, definition-relative-dualizing-complex. Only the diagonal-Hom and generator conclusions are taken here; existence of a complex is not asserted."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-trf-affine-diagonal-module-data"
+ ],
+ "proof": [
+  {
+   "text": "Use temporary notation $r:D\\to C$ for a flat finitely presented ring map and $C_T=C\\otimes_DT$, $Q=C\\otimes_DC$, $Q_T=C_T\\otimes_TC_T$. Flat module base change makes $Q$ flat over $D$ and its coprojections flat over $C$. The Tor-independent tensor comparison of lem-sfb-perfect-coinduction-tor-independent-exchange, with base ring $D$, algebra $Q$ and extension $T$, identifies $N\\otimes_Q^{\\mathbf L}Q_T$ with $N\\otimes_D^{\\mathbf L}T$. For $N=C[0]$ this is $C_T[0]$, since $C$ is $D$-flat. For $N=U\\otimes_{C,p_1}^{\\mathbf L}Q$, associativity identifies it with $(U\\otimes_C^{\\mathbf L}C_T)\\otimes_{C_T,p_{1,T}}^{\\mathbf L}Q_T$. These are the specified diagonal and target identifications; the tensor comparison respects derived morphisms and iteration.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F, tensor-transitivity and diagonal base-change paragraph; more-algebra.tex Tag 0E1U, proof (b)."
+   }
+  },
+  {
+   "text": "We will also use relative perfection after extension and after the coprojection. A pseudo-coherent $U$ has a bounded-above finite-free $C$ representative by definition. It is K-flat, so scalar extension gives a bounded-above finite-free representative over $C_T$. For a $D$-perfect $U$, the new Hom-model lemma applied over $D\\to C$ with source $C[0]$ and target $U$ supplies a bounded $D$-flat representative $F$. Its termwise tensor with $T$ represents $U\\otimes_C^{\\mathbf L}C_T$, by that lemma's construction, and is bounded and $T$-flat by flat module base change. Tensoring with any $T$-module therefore stays in its fixed bounded interval. For $U_1=U\\otimes_{C,p_1}^{\\mathbf L}Q$, the finite-free representative extends along the flat coprojection and remains finite-free over $Q$; a bounded $D$-flat representative is $F\\otimes_D C$. Indeed $F\\otimes_{C,p_1}Q=F\\otimes_D C$, and the second factor $C$ is $D$-flat. Thus $U_1$ is pseudo-coherent over $Q$ and has finite Tor amplitude over $D$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-relative-rhom-finite-flat-base-change-model",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F, relative-perfection and Hom-model prerequisites; more-algebra.tex Tag 0DHW, lemma-base-change-relatively-perfect."
+   }
+  },
+  {
+   "text": "First suppose $D$ is Noetherian. Choose a finite polynomial presentation $P=D[x_1,\\ldots,x_e]\\twoheadrightarrow C$ and put $V=r^!D=R\\operatorname{Hom}_P(C,P)[e]$. The algebraic shriek calculus gives this model; the relative-perfection theorem says that $V$ is $D$-perfect. The rings $C,Q$ are Noetherian by the finite-type algebra theorem. Flat base change in the shriek calculus along $D\\to C$, using the second coprojection $p_2:C\\to Q$, gives $V_1\\cong p_2^!C$. For multiplication $\\delta:Q\\to C$, the surjective-map clause identifies $R\\operatorname{Hom}_Q(C,V_1)$ with the restriction of $\\delta^!V_1$. Composition gives $\\delta^!p_2^!C\\cong(\\delta\\circ p_2)^!C\\cong C$ (on ring maps, $\\delta\\circ p_2=1_C$). Hence the diagonal Hom is $C[0]$ in $D(Q)$. Composition is applicable because its input $C[0]$ is bounded below. This argument works for every Noetherian flat finitely presented algebra, without a complete-intersection assumption.",
+   "uses": [
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2E, lemma-relative-dualizing-noetherian, entire proof; Tag 0E2F, Noetherian starting complex."
+   }
+  },
+  {
+   "text": "Still with $D$ Noetherian, let $D\\to T$ have Noetherian target. The polynomial quotient $C$ is perfect over $P$ by lem-trf-flat-polynomial-quotient-perfect. Write $P_T=P\\otimes_DT$. Since $P$ and $C$ are flat over $D$, the tensor comparison in Step 1 (using $P$ as the flat algebra) gives $C\\otimes_P^{\\mathbf L}P_T\\simeq C_T[0]$. Thus $C$ and $P_T$ are Tor independent over $P$. Apply the perfect coinduction exchange over $P$ to the coefficient $P[e]$: it gives $V\\otimes_C^{\\mathbf L}C_T\\cong R\\operatorname{Hom}_{P_T}(C_T,P_T)[e]$. The right side is exactly the polynomial model of Step 3 for $T\\to C_T$. It is $T$-perfect and its diagonal Hom is $C_T[0]$. In particular this applies to every residue field $T=\\kappa(\\mathfrak p)$ of $D$. No claim of flatness of $D\\to T$ is used.",
+   "uses": [
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-algebraic-shriek-relative-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F, Noetherian-target case, using Tag 0BZV, lemma-base-change-relative-algebraic; its perfect-resolution calculation is supplied by the cited exchange."
+   }
+  },
+  {
+   "text": "For the same Noetherian $D\\to C$, form $Q=C\\otimes_DC$ and $V_1$ as above. Multiplication $Q\\twoheadrightarrow C$ and the flat finitely presented maps from $D$ satisfy lem-sfb-flat-fp-quotient-pseudocoherent. Applying it to $C[0]$ shows that this diagonal object is pseudo-coherent over $Q$. Step 2 gives that $V_1$ is pseudo-coherent over $Q$ and has finite Tor amplitude over $D$. The new Hom-model lemma, now for $D\\to Q$ with source $C[0]$ and target $V_1$, supplies a bounded-below complex $E^\\bullet$ of $D$-flat finitely presented $Q$-modules. It represents $R\\operatorname{Hom}_Q(C,V_1)$; $E\\otimes_DT$ represents the corresponding diagonal Hom for every $D\\to T$, including arbitrary non-Noetherian $T$. The normalization on degree-zero cocycles is the derived extension of the diagonal class.",
+   "uses": [
+    "lem-sfb-flat-fp-quotient-pseudocoherent",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sfb-relative-rhom-finite-flat-base-change-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F, application of more-algebra.tex Tags 0E1T and 0E1U."
+   }
+  },
+  {
+   "text": "By Step 3, $H^0(E)\\cong C$ as a $Q$-module, and it is $D$-flat. By Step 4 and the Hom model, $H^i(E\\otimes_D\\kappa(\\mathfrak p))=0$ for $i\\ne0$ at every prime of $D$. The new fibrewise concentration lemma applies with the Noetherian algebra $Q$ and gives, for every $D\\to T$, a specified truncation zigzag $E\\otimes_DT\\simeq(H^0(E)\\otimes_DT)[0]\\cong C_T[0]$ in $D(Q_T)$. Its map on zeroth cohomology sends $[z]\\otimes t$ to $[z\\otimes t]$. By the Hom-model normalization and the Hom/cohomology identification, this is the map on derived diagonal morphisms. In particular the diagonal Hom is $C_T[0]$, and the base change of any generator at $D$ generates at $T$. More generally, for $D\\to T\\to T'$, the induced map on diagonal morphisms is scalar extension $C_T\\to C_{T'}$, because both are obtained from $H^0(E)\\otimes_D(-)$ by this same zigzag. This proves the needed assertions for the extensions of the Noetherian model, including their actual maps on classes.",
+   "uses": [
+    "lem-sfb-fibrewise-flat-complex-concentration",
+    "lem-sfb-relative-rhom-finite-flat-base-change-model",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F, final two paragraphs and final sentence: universal concentration and generator assertion."
+   }
+  },
+  {
+   "text": "Return to the original arbitrary $R\\to A$. The flat-subring model theorem supplies a finitely generated $\\mathbf Z$-subalgebra $R_0\\subset R$ and a flat finitely presented $R_0\\to A_0$ with $A_0\\otimes_{R_0}R\\cong A$. Every ideal of $\\mathbf Z$ is zero or generated by its least positive element, so $\\mathbf Z$ is Noetherian. The finite-type Noetherian theorem then makes $R_0$ and $A_0$ Noetherian. Let $V_0$ be the polynomial complex of Step 3 and put $N=V_0\\otimes_{A_0}^{\\mathbf L}A$. Steps 2 and 6 say that $N$ is $R$-perfect and has diagonal Hom $A[0]$. The supplied $M$ has precisely those same two properties. The arbitrary-ring uniqueness lemma therefore gives an isomorphism $\\alpha:N\\xrightarrow{\\sim}M$ in $D(A)$. It need not preserve any chosen generator. With $N'=N\\otimes_A^{\\mathbf L}A'$, Step 6 applied to $R_0\\to R'$ gives the diagonal Hom of $N'$ as $A'[0]$. Extending $\\alpha$ and then along the coprojection gives an isomorphism $N'_1\\cong M'_1$. Hence the diagonal Hom of $M'$ is also $A'[0]$ in $D(B')$.",
+   "uses": [
+    "lem-trf-flat-subring-model-system",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F, first paragraph: reduction to a Noetherian model and uniqueness (Tag 0E2D)."
+   }
+  },
+  {
+   "text": "For the generator assertion put $\\eta=\\alpha_1^{-1}\\circ\\gamma$ in $\\operatorname{Hom}_{D(B)}(A,N_1)$. Postcomposition with $\\alpha_1$ is an $A$-linear isomorphism: it commutes with precomposition by multiplication on $A$. Thus $\\eta$ generates. Step 6 for the composable maps $R_0\\to R\\to R'$ identifies the extension of this Hom module with its scalar extension from $A$ to $A'$, including the map on classes. Tensoring the surjection $A\\to\\operatorname{Hom}_{D(B)}(A,N_1)$, $a\\mapsto\\eta\\circ m_a$, gives the surjection (each pure tensor has a preimage, so surjectivity is preserved) $A'\\to\\operatorname{Hom}_{D(B')}(A',N'_1)$, $a'\\mapsto\\eta'\\circ m_{a'}$. Hence $\\eta'$ generates. Functoriality of extension gives $\\gamma'=\\alpha'_1\\circ\\eta'$; the same precomposition calculation makes postcomposition by $\\alpha'_1$ an $A'$-linear isomorphism. Consequently $\\gamma'$ generates as asserted. The argument also covers $A'=0$, when both modules are zero.",
+   "uses": [
+    "lem-sfb-relative-rhom-finite-flat-base-change-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F, final generator assertion; explicit transfer from the Noetherian model by naturality of the Hom-complex construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-relative-rhom-finite-flat-base-change-model",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-trf-algebraic-shriek-calculus",
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-sfb-flat-fp-quotient-pseudocoherent",
+  "lem-sfb-fibrewise-flat-complex-concentration",
+  "lem-pur-rhom-global-sections",
+  "lem-trf-flat-subring-model-system",
+  "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0E2F, lemma-base-change-relative-dualizing, proof of (2) and generator assertion; Noetherian polynomial calculation expanded using Tags 0E2E and 0BZV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing complex flat finitely presented algebra arbitrary base extension preserves diagonal generator",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  {P : Type u_3} [inst_4 : AddCommGroup P] [inst_5 : Module R P] [Module.FinitePresentation R P] (h₁ : P →ₗ[R] M),\\n  ∃ k h₂ h₃, h₁ = h₃ ∘ₗ h₂\", \"doc\": \"For a flat module $ M $ over a commutative semiring $ R $, and a finitely presented $ R $-module $ P $, every linear map $ h_1 : P \\\\to M $ can be factored as the composition of a linear map $ h_2 : P \"}\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.FinitePresentation R M], Module.Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] (s : Set S),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₛ : ↑s → Type u_5) [inst_7 : (r : ↑s) → Add\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.Finite R M] [Module.Flat R M] {ι : Type u} (v : ι → M),\\n  Function.Bijective\\n      ⇑(Finsupp.linearCombination (IsLocalRing.ResidueField R)\\n          (⇑((TensorProdu\", \"doc\": \"For a finitely generated flat module $ M $ over a commutative local ring $ R $, if the linear combination map from the tensor product $ k \\\\otimes_R M $ (where $ k $ is the residue field of $ R $) to $\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  [Module.Flat R M, ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I)),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ[R] x i = 0 → TensorProduct.VanishesT\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n  {\"name\": \"Module.Flat.of_forall_exists_factorization\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  (∀ {l : ℕ} {f : Fin l →₀ R} {x : (Fin l →₀ R) →ₗ[R] M}, x f = 0 → ∃ k a y, x = y ∘ₗ a ∧ a f = 0) → Module.Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finite list $ f $ of elements in the free $ R $-module $ \\\\text{Fin}(l) \\\\to_0 R $, and for every $ R $-linear map $ x: \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom of diagonal algebra relative duality base change generator cyclic module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.toDualBaseChange\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    {V : Type u_2} →\\n      [inst_1 : AddCommMonoid V] →\\n        [inst_2 : Module R V] →\\n          {W : Type u_3} →\\n            [inst_3 : AddCommMonoid W] →\\n              [inst_4 : Module R W] →\\n                {A : Type u_4} →\\n                  [inst_5 : \", \"doc\": \"The linear equivalence between the tensor product of an $ R $-algebra $ A $ with the dual module $ \\text{Dual}_R V $ and the dual module $ \\text{Dual}_A W $, establishing that base change commutes with \"}\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"IsBaseChange.toDualBaseChange_tmul\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For an $ R $-algebra $ A $, dual module $ V^* = \\\\text{Dual}_R V $, and base-changed module $ W = A \\\\otimes_R V $, the linear equivalence $ \\\\text{toDualBaseChange}: A \\\\otimes_R V^* \\\\to \\\\text{Dual}_A W \"}\n  {\"name\": \"Module.Dual.baseChange\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    {V : Type u_2} →\\n      [inst_1 : AddCommMonoid V] →\\n        [inst_2 : Module R V] →\\n          (A : Type u_4) →\\n            [inst_3 : CommSemiring A] →\\n              [inst_4 : Algebra R A] → Module.Dual R V →ₗ[R] Module.Dual A (TensorProduct R A V)\", \"doc\": \"The linear map from the dual module $\\\\text{Hom}_R(V, R)$ to $\\\\text{Hom}_A(A \\\\otimes_R V, A)$ induced by base change from $R$ to an $R$-algebra $A$, constructed by composing the base change homomorphis\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ constructed by summing over finite supports, where each term is the tensor product of elements from $T$ and Kähler diff\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"IsBaseChange.toDual_comp_apply\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For any $ f \\\\in \\\\text{Dual}_R(V) $ and $ v \\\\in V $, the composition of the dual map under base change from $ R $ to $ A $ with the canonical inclusion $ j: V \\\\to W $ satisfies $ \\\\text{ibc.toDual}(f)(j\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"TensorProduct\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|RelativeDualizing|dualizing.*baseChange",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change relative dualizing complex flat algebra diagonal class generator",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": IsBaseChange A (ibc.toDual)\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"IsBaseChange.toDualBaseChange_tmul\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(a : A) (f : Dual R V) (v : V) : (ibc.toDualBaseChange (a ⊗ₜ[R] f)) (j v) = a * algebraMap R A (f v)\", \"doc\": \"For an $ R $-algebra $ A $, dual module $ V^* = \\\\text{Dual}_R V $, and base-changed module $ W = A \\\\otimes_R V $, the linear equivalence $ \\\\text{toDualBaseChange}: A \\\\otimes_R V^* \\\\to \\\\text{Dual}_A W \"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(f : Dual R V) : ibc.toDual f = (f.baseChange A).congr ibc.equiv\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n  {\"name\": \"IsBaseChange.toDual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A W\", \"doc\": \"The R-linear map from the dual module of V over R to the dual module of W over A, induced by base change via the algebra structure of A over R. This map sends an R-linear functional on V to an A-linea\"}\n  {\"name\": \"Module.Dual.baseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A (A ⊗[R] V)\", \"doc\": \"The linear map from the dual module $\\\\text{Hom}_R(V, R)$ to $\\\\text{Hom}_A(A \\\\otimes_R V, A)$ induced by base change from $R$ to an $R$-algebra $A$, constructed by composing the base change homomorphis\"}\n  {\"name\": \"IsBaseChange.toDualBaseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": A ⊗[R] Dual R V ≃ₗ[A] Dual A W\", \"doc\": \"The linear equivalence between the tensor product of an $ R $-algebra $ A $ with the dual module $ \\text{Dual}_R V $ and the dual module $ \\text{Dual}_A W $, establishing that base change commutes with \"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change commutes with derived Hom from a pseudocoherent diagonal into a relative perfect complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the homomorphism associated to the pseudofunctor's composition of pullback-pushforward adjunctions equals\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : CategoryTheory.Functor Y.Modules X.Modules}\\n  (h : AlgebraicGeometry.Scheme.Modules.pullback f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (Catego\", \"doc\": \"For any scheme morphism $ f : X \\to Y $, the pseudofunctor structure of the pullback operation on module sheaves satisfies a right unitality associativity condition: the composition of the inverse of t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flat-tensor exactness and support predicates do not state fibrewise concentration or universal truncation for this complex"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-dualizing-pair-base-change",
+  "date": "2026-10-23",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs. Specific prerequisite: Algebraic diagonal-Hom vanishing and generator preservation in the affine check of arbitrary base change of a supplied pair.",
+   "via": [
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-diagonal-generator-base-change",
+  "worker": "stage1",
+  "summary": "Kept the complete arbitrary-ring statement. Followed Stacks 0E2F: polynomial Noetherian model, finite flat Hom complex, residue-field concentration and universal truncation, then flat subring approximation and arbitrary-ring uniqueness. Added two general statement-only complex lemmas, and wrote the actual map on diagonal generators under successive extensions. No Lean source was changed or compiled.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs. Specific prerequisite: Algebraic diagonal-Hom vanishing and generator preservation in the affine check of arbitrary base change of a supplied pair. The current blueprint direct-images proof (3) is the inherited support route; this split supplies only its existing relative-duality prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-module-base-change",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-trf-algebraic-shriek-calculus",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-trf-algebraic-shriek-relative-perfect",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-trf-flat-polynomial-quotient-perfect",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   },
+   {
+    "node": "lem-trf-flat-subring-model-system",
+    "why": "Generic algebra/derived-category input used in the Stacks 0E2F argument; no change to the unit direct-image route. The proof takes only the displayed statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-trf-algebraic-shriek-calculus",
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-pur-rhom-global-sections",
+  "lem-trf-flat-subring-model-system"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-fc09b9215",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-fc09b9215 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full, against Stacks dualizing 0E2C/0E2D/0E2E/0E2F, more-algebra 0E1U and algebra 00ME. The item statement is unchanged and is 0E2F(2) plus its generator clause, with no weakening. Steps 1-8 check out. (1) θ of the perfect-coinduction exchange needs no perfectness, and Q is D-flat; the truncation to C_T[0] in D(Q_T) is a one-line implicit step. (2) Relative perfection after base change and after p1 follows from the model lemma's own F⊗T clause. (3) 0E2E: flat base change with the indices checked, δ^! = RHom_Q(C,-), composition on D^+. (4) Noetherian target via γ on P[e], with Tor independence over P from θ. (5) C[0] is pseudo-coherent over Q by flat-fp-quotient. (6) The concentration hypotheses hold and the generator map is f⊗t ↦ t·f_T. (7) Flat-subring model at j_f, then arbitrary-ring uniqueness (no generator claim). (8) Elementary generator transport. New node lem-sfb-relative-rhom-finite-flat-base-change-model is 0E1U(a), (b) and its finite-presentation clause; its terms, boundedness and termwise Hom base change were verified, and the flat-only trf Hom nodes are not duplicates. New node lem-sfb-fibrewise-flat-complex-concentration is the general form of 0E2F's last paragraphs; I re-derived it via 00ME at the local maps R_p → S_q, and the H^0 flatness hypothesis is redundant but harmless. Neither new node restates a clause of the item. All ten tool_uses are generic and accepted. Batch-5 citations: the coinduction exchange (def-trf-derived-coinduction is a general definition), trf algebraic shriek calculus and relative-perfect (Stacks 0BZI-0BZW), flat-polynomial-quotient-perfect (067J/068Y) and flat-subring-model-system (05FE) are all generic commutative algebra. None of the five closures reaches a trace-formula or Poincaré-duality theorem or an nt-assume node. No SGA, no cycle, proof_deps equals the union of uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AlgebraicDiagonalGeneratorBaseChange",
+  "declaration": "AlgebraicGeometry.algebraicDiagonalGenerator_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.algebraicDiagonalBaseChangeRingMap",
+   "AlgebraicGeometry.algebraicDiagonalGenerator_baseChange"
+  ],
+  "file": "lean/Sheaf/RingTheory/AlgebraicDiagonalGeneratorBaseChange.lean",
+  "statement": "theorem algebraicDiagonalGenerator_baseChange (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (hflat : RingHom.Flat (algebraMap R A)) [Algebra.FinitePresentation R A] (M : DerivedCategory (ModuleCat.{u} A)) (hM : DerivedCategory.IsPseudoCoherent M) (hTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (N : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj M) ⊗ DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj N)))) (hHom : Nonempty ((ordinaryModuleDerivedInternalHom (A ⊗[R] A)).obj (op (relativeDualizingModuleDiagonal R A), (ModuleCat.ordinaryDerivedExtendScalars (Algebra.TensorProduct.includeLeft : A →ₐ[R] A ⊗[R] A).toRingHom).obj M) ≅ relativeDualizingModuleDiagonal R A)) (γ : relativeDualizingModuleDiagonal R A ⟶ (ModuleCat.ordinaryDerivedExtendScalars (Algebra.TensorProduct.includeLeft : A →ₐ[R] A ⊗[R] A).toRingHom).obj M) (hγ : Function.Surjective (fun a : A ↦ ((Algebra.TensorProduct.includeLeft : A →ₐ[R] A ⊗[R] A) a • 𝟙 (relativeDualizingModuleDiagonal R A)) ≫ γ)) (T : Type u) [CommRing T] [Algebra R T] : Nonempty ((ordinaryModuleDerivedInternalHom ((T ⊗[R] A) ⊗[T] (T ⊗[R] A))).obj (op (relativeDualizingModuleDiagonal T (T ⊗[R] A)), (ModuleCat.ordinaryDerivedExtendScalars (Algebra.TensorProduct.includeLeft : (T ⊗[R] A) →ₐ[T] (T ⊗[R] A) ⊗[T] (T ⊗[R] A)).toRingHom).obj ((ModuleCat.ordinaryDerivedExtendScalars (Algebra.TensorProduct.includeRight : A →ₐ[R] T ⊗[R] A).toRingHom).obj M)) ≅ relativeDualizingModuleDiagonal T (T ⊗[R] A)) ∧ Function.Surjective (fun a' : T ⊗[R] A ↦ ((Algebra.TensorProduct.includeLeft : (T ⊗[R] A) →ₐ[T] (T ⊗[R] A) ⊗[T] (T ⊗[R] A)) a' • 𝟙 ((ModuleCat.ordinaryDerivedExtendScalars (algebraicDiagonalBaseChangeRingMap R A T)).obj (relativeDualizingModuleDiagonal R A))) ≫ (ModuleCat.ordinaryDerivedExtendScalars (algebraicDiagonalBaseChangeRingMap R A T)).map γ)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The primed algebra is the canonically commuted presentation T tensor_R A of A tensor_R T. The generator conclusion is stated on the actual scalar-extended arrow before the canonical B'-linear diagonal and first-pullback identifications: the scalar is includeLeft(a') and acts by precomposition. Transport by those isomorphisms is a bijection on Hom and commutes with that scalar action, so the displayed surjectivity is exactly the node's claim about gamma'. No arbitrary comparison or extra hypothesis is used. The explicit B-to-B' map is the existing Mathlib heterobasic tensor map, specialized without postponed proof or choice."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96c7e2eed",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read the item against Stacks 0E2F(2) plus its generator clause and 0E2C, and every stmt_dep declaration in side-live: ordinaryDerivedExtendScalars is pinned as the IsLeftDerivedFunctor with K-flat counit and normalisations; ordinaryModuleDerivedInternalHom is the closed internal Hom; IsPseudoCoherent is a bounded-above finite-free representative; relativeDualizingModuleDiagonal is A[0] restricted along lmul'; the scalar action is Mathlib's Linear instance on DerivedCategory. Every hypothesis matches the node: flat finitely presented R->A, Tor amplitude over R for all N with i<a or b<i, RHom iso, actual gamma, surjectivity of a -> p1(a)•1 composed with gamma. Arbitrary T with no flatness, A' = T⊗A. Conclusion 1 is a full derived-category iso on the primed objects. Conclusion 2 is surjectivity on E.map gamma, with E the extension along the B->B' map (Mathlib mapRingHom, real data); it is equivalent to the gamma' claim because composition is B'-bilinear, independent of the identifications. lean.statement is verbatim. The item JSON differs from side-live only in lean and stmt_deps; the added stmt_dep def-trf-affine-diagonal-module-data is a definition node that owns the diagonal. Only sorry; docstrings carry the source place and all 8 steps; plain imports are proof_dep modules; not superseded; no new nodes. Single universe u is the project convention. No compile was needed (no changes)."
+ }
+}

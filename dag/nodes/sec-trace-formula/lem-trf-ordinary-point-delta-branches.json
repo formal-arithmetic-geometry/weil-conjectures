@@ -27,168 +27,85 @@
  ],
  "proof": [
   {
-   "text": "Work on an affine neighbourhood of $x$; restriction of componentwise normalization is normalization of that neighbourhood. The normalization theorem makes $\\nu$ finite and surjective. The finite-fibres theorem therefore gives $1\\le b<\\infty$. A point $y_i$ above $x$ is closed: on the finite affine inverse image its prime contains the ideal of the fibre, and the corresponding quotient of the finite-dimensional $k$-algebra of the fibre is a finite-dimensional domain, hence a field (multiplication by a nonzero element is injective, hence surjective). The closed-point residue-field theorem gives $\\kappa(y_i)=k$ through the structural map. Put $A=\\mathcal O_{X,x}$, $B=(\\nu_*\\mathcal O_{\\widetilde X})_x$ and $M=B/A$. The finite-type Noetherianity theorem makes $A$ Noetherian. It is reduced, essentially of finite type over $k$, and has dimension one: a component through $x$ supplies a generic-point-to-$x$ chain, and no longer chain exists on a pure one-dimensional scheme.",
+   "text": "Put $A=\\mathcal O_{X,x}$, $B=(\\nu_*\\mathcal O_{\\widetilde X})_x$, $H=\\widehat A$ and $C=\\varprojlim_n B/\\mathfrak m_A^nB$. The local comparison gives $1\\le b<\\infty$, $\\delta<\\infty$, $\\delta=\\dim_k(C/H)$, and $C=\\overline H$. Here $H$ is reduced Noetherian local with structural residue field $k$, and $C=B\\otimes_A H$ is finite over $H$; also $B=A$ at smooth points.",
    "uses": [
-    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-trf-curve-delta-completion-data"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C1R (lemma-prepare-delta-invariant), (1), (3); normalization restricted to an affine neighbourhood; finite fibres: morphisms.tex Tags 01WN, 02NU, 02NH; residue fields over algebraically closed fields."
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C1U (equation-multicross), 0C1V (lemma-multicross-algebra); normalization and completion: varieties.tex Tag 0C1R (lemma-prepare-delta-invariant)."
    }
   },
   {
-   "text": "If $x$ is nonsmooth, the normalization-quotient theorem identifies $B$ with the integral closure of $A$ in its total ring of fractions and makes $M$ a finite-length $A$-module. If $x$ is smooth, the regularity/smoothness criterion applies to the finite-type affine chart with residue field $k$, hence $A$ is regular. Since $\\dim A=1$, the regular/normal equivalence makes $A$ a normal domain. The normalization theorem's isomorphism over its open normal locus then gives $B=A$ and $M=0$. Thus in both cases $B$ is the integral closure of $A$ in its total ring of fractions and $M$ has finite length.",
+   "text": "The branch coordinates identify $C$ with $D=\\prod_{i=1}^b k[[t_i]]$ and the residue image of $H$ with $\\Delta k\\subset k^b$. Set $P=\\rho^{-1}(\\Delta k)$ for the constant-coefficient map $\\rho:D\\to k^b$. Then $H\\subset P$, and $D/H\\to k^b/\\Delta k$ is surjective with kernel $P/H$. Since $\\dim_k(k^b/\\Delta k)=b-1$, dimension additivity gives $\\delta\\ge b-1$, with equality exactly when $H=P$.",
    "uses": [
-    "lem-trf-normalization-singular-skyscraper",
-    "lem-weil-pbc-regular-local-separable-residue-smooth",
-    "lem-weil-pbc-regular-local-dim-one-iff-normal",
-    "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+    "lem-trf-normalized-curve-branch-coordinates"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C1R (lemma-prepare-delta-invariant), (2)--(4); smooth case: algebra.tex Tags 00TV (lemma-separable-smooth) and 00PD (lemma-characterize-dvr)."
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C1U (equation-multicross), 0C1V (lemma-multicross-algebra); normalization and completion: varieties.tex Tag 0C1R (lemma-prepare-delta-invariant)."
    }
   },
   {
-   "text": "The finite-length filtration theorem gives a finite filtration of $M$ with simple quotients. Each simple $A$-module is $k$: choose a nonzero element, whose cyclic submodule is the whole simple module; the resulting surjection from $A$ has maximal kernel, necessarily $\\mathfrak m_A$. Adding dimensions along the filtration proves $\\delta=\\dim_k M<\\infty$. Put $H=\\widehat A$ and $C=\\widehat B$, where $B$ is completed for $\\mathfrak m_AB$. The local-curve normalization/completion theorem identifies $C=B\\otimes_AH$ with the integral closure of the reduced one-dimensional ring $H$ in its total ring of fractions. For nonsmooth $x$, the normalization-quotient theorem gives the natural $k$-linear isomorphism $M\\cong C/H$; its map is $A$-linear, hence respects the structural $k$-action. For smooth $x$, $B=A$, so $C=H$ and the same comparison is the zero-module isomorphism. Consequently $\\delta=\\dim_k(C/H)$.",
+   "text": "The axes calculation gives $P\\cong R_b=k[[T_1,\\ldots,T_b]]/(T_iT_j:i\\ne j)$, so equality implies the required $k$-algebra presentation. For the converse apply normalization-pair invariance to $H\\cong R_b\\cong P$. Its hypotheses hold: Step 1 gives reduced Noetherian local $H$ with structural residue field $k$, finite normalization $C$, and finite-dimensional $C/H$; Step 2 gives its $b$ nonzero local-domain factors. The axes calculation supplies these properties for $P$ and its normalization $D$. Invariance therefore identifies $C/H$ with $D/P$ as $k$-vector spaces, giving $\\delta=b-1$.",
    "uses": [
-    "lem-weil-pbc-finite-length-module-simple-filtration",
-    "lem-trf-curve-normalization-completion",
-    "lem-weil-pbc-completion-finite-extension",
-    "lem-trf-normalization-singular-skyscraper"
+    "lem-trf-coordinate-axes-normalization",
+    "lem-trf-normalization-pair-ring-invariance",
+    "lem-trf-curve-delta-completion-data",
+    "lem-trf-normalized-curve-branch-coordinates"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0C1R (lemma-prepare-delta-invariant), (6)--(9), and 0C3V (lemma-normalization-same-after-completion); finite-algebra completion: algebra.tex Tag 07N9 (lemma-completion-finite-extension)."
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C1U (equation-multicross), 0C1V (lemma-multicross-algebra); normalization and completion: varieties.tex Tag 0C1R (lemma-prepare-delta-invariant)."
    }
   },
   {
-   "text": "The finite-algebra completion theorem, applied to the finite $A$-algebra $B$ at $\\mathfrak m_A$, gives $C\\cong\\prod_{i=1}^b R_i$ with $R_i=\\widehat{\\mathcal O}_{\\widetilde X,y_i}$, respecting the maps from $H$ and $B$. Each normalized irreducible component is smooth over the perfect field $k$, by the normalization-properties theorem. Choose an affine open neighbourhood of $y_i$ in that integral component; it is a smooth separated connected curve of dimension one, so the smooth-connected-curve local-ring theorem says $\\mathcal O_{\\widetilde X,y_i}$ is a DVR. The DVR-completion theorem makes $R_i$ a complete DVR. The local-completion residue-field theorem and Step 1 identify its residue field with $k$, with the given $k$-algebra structure. The map $H\\to R_i$ is local and induces the identity on this residue field, since it is the completion of the local structural stalk map.",
+   "text": "If $x$ is smooth, $B=A$ gives $\\delta=0$, hence $b=1$ and the equality criterion makes $x$ ordinary one-fold. Conversely $H\\cong k[[T]]$ at an ordinary one-fold point. This power-series ring is regular; completion regularity descends to $A$, and the separable-residue smoothness criterion on an affine finite-type chart makes $x$ smooth. The residue extension is $k/k$.",
    "uses": [
-    "lem-weil-pbc-completion-finite-extension",
-    "lem-sc-normalization-properties",
-    "lem-sc-smooth-connected-curve-local-rings",
-    "lem-weil-pbc-completion-of-dvr-is-dvr",
-    "lem-weil-pbc-local-completion-local-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C1R (lemma-prepare-delta-invariant), (5), (8), and the proof of Tag 0C3V; algebra.tex Tag 07N9; more-algebra.tex Tag 0AP1 (lemma-completion-dvr)."
-   }
-  },
-  {
-   "text": "Choose a uniformizer $t_i$ of $R_i$. The local-completion residue-field theorem says the maximal ideal of $R_i$ is $\\mathfrak m_{y_i}R_i$, which is $t_iR_i$ since $R_i$ is a DVR; the completion-modulo-ideal theorem makes $R_i$ complete for $\\mathfrak m_{y_i}R_i=t_iR_i$. The continuous power-series evaluation theorem gives a $k$-algebra map $k[[T]]\\to R_i$ sending $T$ to $t_i$. It is bijective by the following direct expansion. For $r\\in R_i$, successively take its residue $a_0\\in k$, divide $r-a_0$ by $t_i$, take the next residue $a_1$, and continue. Completeness gives $r=\\sum_{n\\ge0}a_nt_i^n$. Uniqueness follows because a nonzero series with first nonzero coefficient $a_N$ evaluates to $t_i^N$ times an element with nonzero residue; the latter is a unit and $R_i$ is a domain. Identify $C$ with $D=\\prod_{i=1}^b k[[t_i]]$ by these maps; its coordinate residue maps are constant coefficients.",
-   "uses": [
-    "lem-weil-pbc-power-series-adic-evaluation",
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-adic-completion-mod-ideal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07NL (lemma-power-series-ring-over-Cohen-fs), universal property of power series used in its proof; explicit uniformizer expansion in a complete DVR."
-   }
-  },
-  {
-   "text": "Let $\\rho:D\\to k^b$ take constant coefficients and let $\\Delta k\\subset k^b$ be the diagonal. By Step 4, $\\rho(H)=\\Delta k$: containment follows from the local residue maps, and equality from the diagonal constants in the $k$-algebra $H$. Thus, for $P=\\rho^{-1}(\\Delta k)$, the induced map $D/H\\to k^b/\\Delta k$ is surjective with kernel $P/H$. Since $\\dim_k(D/H)=\\delta$, this gives $\\delta\\ge b-1$, with equality exactly when $P/H=0$, that is $H=P$. Here $\\dim_k(k^b/\\Delta k)=b-1$ because $b\\ge1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
-    "place": "Appendix B, printed pp. 56--57, the residue-map proof of the delta/branch inequality; written here for the completed normalization."
-   }
-  },
-  {
-   "text": "The ring $P$ is explicitly the coordinate-axes ring $R_b=k[[T_1,\\ldots,T_b]]/(T_iT_j\\mid i\\ne j)$. Indeed evaluate a series on each separate coordinate axis. Its images have the same constant coefficient. Conversely a tuple $(c+t_if_i(t_i))_i$ is the image of $c+\\sum_iT_if_i(T_i)$. The kernel consists exactly of the series having zero constant coefficient and zero coefficients on all monomials supported on a single variable. Every remaining monomial is divisible by $T_iT_j$ for some $i<j$. Assign each such monomial to its first two positive indices; grouping into the finitely many pairs $(i,j)$ writes the entire series as $\\sum_{i<j}T_iT_jg_{ij}$, proving ideal membership even for infinite series. For $b=1$ the kernel is zero. Hence $H=P$ implies $H\\cong R_b$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
-    "place": "Appendix B, printed pp. 56--57, the completed ordinary-point ring; explicit coefficient calculation replacing the gluing assertion."
-   }
-  },
-  {
-   "text": "For the converse, compute the normalization of the concrete subring $P\\subset D$ from Step 7. The coordinate idempotents $e_1,\\ldots,e_b$ generate $D$ as a $P$-module: a tuple equals its tuple of constants plus an element of $P$, and $1=\\sum_ie_i$. Hence $D$ is integral over $P$ by the finite-algebra integrality theorem. Put $s=(t_1,\\ldots,t_b)\\in P$. It is a non-zero-divisor, $sD\\subset P$, and $P[1/s]=D[1/s]=\\prod_i k((t_i))$: every nonzero one-variable series is $t_i^n$ times a unit. A non-zero-divisor of $P$ has every coordinate nonzero (otherwise it annihilates the nonzero tuple supported in that coordinate with entry $t_i$). Therefore this product of fields is precisely $Q(P)$. Each $k[[t_i]]$ is integrally closed in its fraction field by the power-series normal-domain theorem applied to the field $k$. Projecting a monic equation shows $D$ is integrally closed in $Q(P)$. Since $D$ is integral over $P$, and every element integral over $P$ is also integral over $D$, the integral closure of $P$ is exactly $D$. Moreover $D/P\\cong k^b/\\Delta k$ by $\\rho$.",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-power-series-normal-domain"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain); finite-module integrality and the explicit coordinate-axes calculation for Temkin Appendix B."
-   }
-  },
-  {
-   "text": "If $H\\cong R_b$, Step 7 identifies this ring with $P$. A ring isomorphism preserves non-zero-divisors and monic equations, so extends to the total fraction rings and identifies their integral closures. Steps 3 and 8 therefore identify the pair $(C,H)$, as $k$-algebras, with $(D,P)$. It follows that $\\delta=\\dim_k(C/H)=\\dim_k(D/P)=b-1$. Together with Steps 6--7 this proves both directions of the claimed equality criterion.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
-    "place": "Appendix B, printed pp. 56--57, equality characterization; the normalization invariance is explicit through fractions and monic equations."
-   }
-  },
-  {
-   "text": "When $x$ is smooth, Step 2 gives $M=0$, hence $\\delta=0$; the inequality and $b\\ge1$ force $b=1$, and the equality criterion gives $H\\cong k[[T]]$. Conversely an ordinary one-fold point has this completed ring. A one-variable power-series ring is regular of dimension one by the power-series regularity theorem; regularity descends to $A$ by the completion-regularity theorem. On an affine finite-type chart with residue field $k$, the regularity/smoothness criterion now makes $x$ smooth. Thus ordinary one-fold points are exactly smooth points, and all have $\\delta=0$.",
-   "uses": [
+    "lem-trf-curve-delta-completion-data",
     "lem-weil-pbc-power-series-field-cohen-regular-complete",
     "lem-weil-pbc-completion-regular-local",
     "lem-weil-pbc-regular-local-separable-residue-smooth"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07NY (lemma-completion-regular); algebra.tex Tags 032C (remark-Noetherian-complete-local-ring-universally-catenary) and 00TV (lemma-separable-smooth)."
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C1U (equation-multicross), 0C1V (lemma-multicross-algebra); normalization and completion: varieties.tex Tag 0C1R (lemma-prepare-delta-invariant)."
    }
   },
   {
-   "text": "The completed-geometric-local-ring definition of a node, stated in the nodal-point criterion, is here a ring isomorphism $\\varphi:H\\cong k[[u,v]]/(uv)=R_2$, because $k$ is already algebraically closed. Its normalization has exactly two local factors by Step 8. Step 4 identifies the normalization of $H$ with a product of $b$ local domains; the number of factors is intrinsic, since their coordinate idempotents are exactly the nonzero idempotents which cannot be written as a sum of two nonzero orthogonal idempotents. As in Step 9 (which uses only ring structure), $\\varphi$ carries $C$ onto $D$; so a node has $b=2$. Moreover $\\varphi$ induces a bijection of $H$-submodules of $C/H$ with $P$-submodules of $D/P\\cong k^2/\\Delta k$, which is one-dimensional over the residue field $k$ of $P$, hence simple. So $C/H$ is a simple $H$-module; as the residue field of $H$ is $k$ via the structure map, $\\delta=\\dim_k(C/H)=1=b-1$, and the equality criterion of Steps 6--7 gives a $k$-algebra isomorphism $H\\cong R_2$: a node is an ordinary two-fold point. Conversely a $k$-algebra isomorphism $H\\cong R_2$ is in particular a ring isomorphism, so an ordinary two-fold point is a node by that definition, with $\\delta=b-1=1$.",
+   "text": "The nodal criterion over algebraically closed $k$ says that a node has a ring isomorphism $H\\cong R_2$. Step 1 gives the finite normalization and finite defect; Step 2 identifies its local-domain factors with the actual fibre points. Thus the axes calculation and normalization-pair invariance apply and give $b=2$ and $\\delta=1$, even when this ring isomorphism is not $k$-linear. The equality criterion then supplies the $k$-algebra isomorphism, so the point is ordinary two-fold. Conversely an ordinary two-fold point has a ring isomorphism $H\\cong R_2$, hence is a node; the same invariance gives $b=2$ and $\\delta=1$.",
    "uses": [
-    "lem-trf-nodal-point-local-criterion"
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-coordinate-axes-normalization",
+    "lem-trf-normalization-pair-ring-invariance",
+    "lem-trf-curve-delta-completion-data",
+    "lem-trf-normalized-curve-branch-coordinates"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4D (lemma-nodal), completed geometric local-ring condition; Temkin Appendix B, printed p. 56, ordinary double points."
+    "place": "Tags 0C1U (equation-multicross), 0C1V (lemma-multicross-algebra); normalization and completion: varieties.tex Tag 0C1R (lemma-prepare-delta-invariant)."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-integral-morphism",
-  "lem-sc-normalization-properties",
-  "lem-sc-smooth-connected-curve-local-rings",
-  "lem-trf-curve-normalization-completion",
+  "lem-trf-coordinate-axes-normalization",
+  "lem-trf-curve-delta-completion-data",
   "lem-trf-nodal-point-local-criterion",
-  "lem-trf-normalization-singular-skyscraper",
-  "lem-weil-pbc-adic-completion-mod-ideal",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-completion-finite-extension",
-  "lem-weil-pbc-completion-of-dvr-is-dvr",
+  "lem-trf-normalization-pair-ring-invariance",
+  "lem-trf-normalized-curve-branch-coordinates",
   "lem-weil-pbc-completion-regular-local",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
-  "lem-weil-pbc-finite-length-module-simple-filtration",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-local-completion-local-ring",
-  "lem-weil-pbc-power-series-adic-evaluation",
   "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-power-series-normal-domain",
-  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-  "lem-weil-pbc-regular-local-dim-one-iff-normal",
   "lem-weil-pbc-regular-local-separable-residue-smooth"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
-  "place": "Appendix B, printed pp. 56--57, inequality/equality characterization before Lemma B.1; explicit completed-branch and coordinate-axes argument using the cited Stacks nodes. Author-hosted primary PDF read online; local archival copy WANTED."
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C1U (equation-multicross) and 0C1V (lemma-multicross-algebra), with varieties.tex Tag 0C1R. Assembly of four independently stated arguments, preserving the returned 11-step proof."
  },
  "mathlib_searches": [
   {
@@ -250,55 +167,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-ordinary-point-delta-branches",
   "worker": "stage1",
-  "summary": "Retained the statement and all imported ancestry. Wrote the local normalization/completion argument, the residue-map inequality, both directions of the coordinate-axes equality criterion, and the smooth/node clauses. Reused the existing normalization, completion and power-series nodes; created no new nodes. The uniformizer expansion, infinite-series kernel calculation and normalization of the axes ring are written explicitly rather than hidden in a gluing or transport claim.",
+  "summary": "Repair of the 8831-character returned proof: extracted four independent unsplit statement-only nodes for local normalization/completion data, actual completed branch coordinates, coordinate-axes normalization, and scalar-independent invariance of normalized pairs. Preserved the statement and all eleven original arguments, with their full text and extraction map in report.md. The item now assembles these results in fewer than 3000 characters. Rebased repair after the landing refusal at eb8e750c088: compared every retained citation with the current DAG, documented eight new same-tag comparisons, and made the base-ring ideal in the completed normalization explicit. The retained statement, statement dependencies, Lean records and previous full argument are preserved. Renewed repair after the repeated side-completion landing refusal: rechecked the current parent and all verbatim assembly citations, and expanded Step 3 to verify every hypothesis of normalization-pair invariance, citing the local-data and branch-coordinate statements there explicitly. Repair of returned head f0ef96862ea on 2026-10-23: compared current cited statements, recorded ten additional same-tag distinctions against five current nodes, and made the nodal-case application of pair invariance cite and check its geometric normalization hypotheses explicitly.",
   "blueprint": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion and lem-trf-curve-p1-tree-local-criterion: Temkin Appendix B, ordinary n-fold points and the delta/branch inequality before Lemma B.1. Retains the existing unit and ancestry; does not alter the current contracting-correspondence proof of sk-i-curve-zero.",
   "tool_uses": [
-   {
-    "node": "lem-sc-normalization-properties",
-    "why": "Uses smoothness of each normalized integral curve over the perfect field k. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
-   {
-    "node": "lem-sc-smooth-connected-curve-local-rings",
-    "why": "Uses that local rings of a smooth connected curve at closed points are DVRs, after taking an affine neighbourhood. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
-   {
-    "node": "lem-weil-pbc-completion-finite-extension",
-    "why": "Uses decomposition of completion of a finite algebra into the actual completed local factors. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
-   {
-    "node": "lem-weil-pbc-completion-of-dvr-is-dvr",
-    "why": "Uses preservation of DVRs under completion. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
    {
     "node": "lem-weil-pbc-completion-regular-local",
     "why": "Uses descent of regularity from a completed local ring. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
    },
    {
-    "node": "lem-weil-pbc-finite-length-module-simple-filtration",
-    "why": "Uses a finite simple filtration to compare module length and k-vector-space dimension. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
-   {
-    "node": "lem-weil-pbc-power-series-adic-evaluation",
-    "why": "Uses continuous evaluation into the completed DVR; bijectivity is proved in the item. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
-   {
     "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
     "why": "Uses regularity of k[[T]] to recognize the smooth one-branch case. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
-   {
-    "node": "lem-weil-pbc-power-series-normal-domain",
-    "why": "Uses normality of the one-variable power-series factors for the explicit axes normalization calculation. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
-   {
-    "node": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-    "why": "Uses finite surjective normalization, restriction to opens and isomorphism over the normal locus; no node of this unit states all these properties for a nonproper reduced curve. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
-   },
-   {
-    "node": "lem-weil-pbc-regular-local-dim-one-iff-normal",
-    "why": "Uses regularity iff normality in dimension one for the smooth case, a generic local-algebra tool. This is a black-box tool within the Appendix B route, not a replacement of a unit step."
    },
    {
     "node": "lem-weil-pbc-regular-local-separable-residue-smooth",
@@ -321,12 +202,12 @@
   "lem-weil-pbc-regular-local-separable-residue-smooth"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q97-6dc4738e2",
+  "reviewer": "NT-cc-Q97-9e020374c",
   "group": "Q97",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-6dc4738e2 (reviewer sub-agent of L); spot-checked: I read the item, all 21 proof deps and 10 stmt deps in full, the unit sk-i-curve-zero, and the Stacks sources. The Temkin PDF is WANTED and not available locally, so I checked the statement against Stacks curves.tex 0C1U/0C1V/0C1W/0C1X (multicross) and varieties.tex 0C1R, 0C3S, 0C3V and lemma-delta-number-branches-inequality(-sh). The statement is true as written and nothing was weakened; cases checked: b=1, node, three axes, cusp, tacnode, plane triple point, irreducible nodal curve. There are no new nodes. Searches of the DAG and both blueprints found no duplicate; the nodal-quotient nodes assume global properness and nodality, so they do not generalize this item. I accept all 12 declared tool_uses: they are generic algebra and curve tools used as black boxes. Two repairs are in fixes/dag/nodes/sec-trace-formula/lem-trf-ordinary-point-delta-branches.json. (1) C1/C4, Step 5: 'Completeness gives' had no node for the completeness of R_i, and the DVR-completion node does not state it. I added lem-weil-pbc-local-completion-local-ring (maximal ideal = t_iR_i) and the Mathlib leaf lem-weil-pbc-adic-completion-mod-ideal. (2) E5, Step 11: the node definition is a ring isomorphism, but 'the equality criterion then gives delta=1' needs a k-algebra isomorphism, and the step never derived node => ordinary two-fold point. The rewritten step shows that the ring isomorphism carries C onto D, so C/H is simple, delta=1=b-1, and Steps 6-7 give the k-algebra isomorphism. proof_deps was recomputed. I suggest adding Stacks 0C1V/0C1X as a local source.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-9e020374c (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item in full, all four new nodes, and every cited statement (nodal-point local criterion, the three pbc regularity/smoothness nodes, and the five same-tag nodes in the report).\n\nThis is the fourth head of this re-split. eb8e750c088, 380b294f0531 and f0ef96862eaa were all PASSed and then refused at landing ('not in the live DAG'). In clones/live and clones/side-live the item is still the 11-step 'split' node, and the batch-5 re-split note is released.\n\nWhat changed since f0ef: the four new nodes are byte-identical (same sha256). The item's statement, stmt_deps, source and Lean fields are unchanged. The only change is in Step 5: it now invokes Step 1 (finite normalization and finite defect) and Step 2 (fibre points are the local-domain factors) before applying pair invariance, and adds two matching 'uses'. This is a real improvement in hypothesis checking.\n\nAssembly, step by step:\n- Steps 1-2: H is contained in P = rho^-1(Delta k), and D/H maps onto k^b/Delta k with kernel P/H. So delta >= b-1, with equality iff H = P.\n- Step 3: the axes node gives R_b iso P, so equality gives the presentation. The converse uses pair invariance, whose hypotheses all hold.\n- Step 4: power series k[[T]] is regular, regularity descends from the completion, and the separable-residue smoothness criterion applies with residue extension k/k.\n- Step 5: the nodal criterion only gives a ring isomorphism, and invariance needs no k-linearity. It gives b = 2 and delta = 1, then the equality criterion gives the k-algebra presentation.\n\nNew nodes, all true:\n- Axes node: checked b=1, b=2, sD in P, m_P = ker rho kills D/P, and Q(P) = P[1/s].\n- Pair invariance: length equals dim_k because every simple factor is k, and b counts primitive idempotents.\n- Local data and branch coordinates: specialisations of Stacks 0C1R, 0C3V, 07N9 and 0C0S to algebraically closed k.\n\nNo node restates the parent, the four new nodes are of comparable size, and every old argument is carried by a node. No duplicates: split-node-component-normalization is only the b=2 case with a fixed k-algebra nodal completion, and finite-colength-completion-comparison is a generic input. No SGA source is used. The generic tool_uses in Step 4 are accepted."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.OrdinaryPointDeltaBranches",
@@ -350,5 +231,16 @@
   "result": "pass",
   "note": "Read the item, all 15 stmt_deps, both new def nodes, both modules and the report. Every clause matches the Lean (H3): alg-closed k; reduced finite-type X = LocallyOfFiniteType+QuasiCompact; pure dim 1; closed point x; b = Nat.card of the reducedNormalization fibre; delta = finrank over k of the stalk of conductorCokernel (genuine moduleStalkFunctor, restricted along localScalar); finiteness of both as conclusions; b>=1; b-1<=delta; equality iff IsOrdinaryMultiplePoint b (ring equiv of AdicCompletion with scalar compatibility = k-algebra iso); 1-fold iff smooth at x; 2-fold iff existing Orgogozo.IsOrdinaryDoublePoint (same ideal); smooth gives delta=0; node gives b=2, delta=1. No extra hypotheses or universe restrictions. New def-trf-ordinary-multiple-point is non-hollow, sourced to Temkin App. B and Stacks 0C1U/0C1W, and not a duplicate. def-trf-conductor-cokernel is an existing:true ownership record of the landed conductorCokernel (accepted Q07 pattern). No closure cycle. H4 searches of side/live Sheaf, WeilConjectures, Mathlib and DAG defs found no duplicate. Only sorry is the item theorem; docstrings carry source, blueprint tag and 11 steps. nt_compile --json is clean (2.6 s, 3.4 s, exit 0). Advisory: conductorCokernel is listed in both the theorem node and the new existing:true def node."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

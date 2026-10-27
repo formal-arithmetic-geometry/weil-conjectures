@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-constructible-exceptional-compositor-data",
+ "kind": "statement",
+ "title": "Constructible compositor data and normalized realization interface",
+ "statement": "The existing normalized realization comparisons, coefficient equation, finite and integral left compositors, exceptional mate construction and its properties are the data used by [lem-sf-constructible-exceptional-compositor]. They are defined using the exact constructible coefficient categories of [lem-sf-constructible-exceptional-adjunction-coefficients] and the finite maps of [def-sf-finite-exceptional-compositor-maps]. No compositor existence or coherence theorem is part of these definitions. In addition, for every finite coefficient stage and six-operation datum S [sk-def-sf-operations], every separated finite-type morphism f and compactification c of f, the integral compact-support operation of S at f and c equals the normalized finite-action integral functor of [def-weil-compact-support-finite-action] (constructibleIntegralSupport_eq).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Proof Step 1: mate of compact-support composition; returned proof step 2, including Hom-chain and pasted counit; agent-expanded obligation, not a verbatim theorem of Stacks"
+ },
+ "stmt_deps": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-sf-finite-exceptional-compositor-maps",
+  "sk-def-sf-operations",
+  "def-weil-compact-support-finite-action"
+ ],
+ "proof": [
+  {
+   "text": "Retain each existing definition verbatim. The normalized integral realization equality follows by normalized projection naturality and joint injectivity: the Milnor kernel vanishes for the finite shifted Hom tower of [lem-sf-compact-support-term-hom-finite]. Full-subcategory faithfulness and functor extensionality give equality of the normalized functors.",
+   "uses": [
+    "lem-sf-compact-support-term-hom-finite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-compact-support-term-hom-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Assigned existing module and blueprint Step 1",
+  "place": "Move existing public data verbatim to break the import cycle between geometric left coherence and formal mate combination."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical composition of compact support functors commutes with coefficient extension and shifts",
+   "results": "Found Functor.CommShift.comp, NatTrans.CommShift.whiskerRight and standard shift-composition declarations. These supply formal shift operations but no normalized geometric compact-support coefficient compositor.",
+   "date": "2026-10-25",
+   "verdict": "No applicable Mathlib statement; use the recorded source-library and project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of left adjoints compatibility canonical compact support coefficients shifts refinements",
+   "date": "2026-10-25",
+   "verdict": "Mathlib mates gives the formal right-adjoint consequences but no geometric compact-support construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateIsoEquiv",
+   "date": "2026-10-25",
+   "verdict": "Found Mathlib.CategoryTheory.Adjunction.Mates; used for parent formal mate calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftCompositors|finiteStructuralMaps_commShift|sfPackageCompactifiedTower",
+   "date": "2026-10-25",
+   "verdict": "Published finite/integral definitions and stated geometric coherence dependencies; no theorem constructing this combined left data."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCompositor",
+  "date": "2026-10-25",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-constructible-exceptional-compositor",
+   "place": "Existing compositor definitions and normalized integral realization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleExceptionalCompositorData",
+  "declaration": "WeilConjectures.constructibleIntegralSupport_eq",
+  "declarations": [
+   "WeilConjectures.constructibleFinitePullIso",
+   "WeilConjectures.constructibleFiniteImageIso",
+   "WeilConjectures.constructibleIntegralSupport_eq",
+   "WeilConjectures.ConstructibleExceptionalCompositor.finiteInclusion",
+   "WeilConjectures.ConstructibleExceptionalCompositor.integralInclusion",
+   "WeilConjectures.ConstructibleExceptionalCompositor.finiteLeft",
+   "WeilConjectures.ConstructibleExceptionalCompositor.integralLeft",
+   "WeilConjectures.ConstructibleExceptionalCompositor.separatedComp",
+   "WeilConjectures.ConstructibleExceptionalCompositor.lftComp",
+   "WeilConjectures.ConstructibleExceptionalCompositor.qcComp",
+   "WeilConjectures.ConstructibleExceptionalCompositor.LeftCoefficientEquation",
+   "WeilConjectures.ConstructibleExceptionalCompositor.exceptionalIso",
+   "WeilConjectures.ConstructibleExceptionalCompositor.MateProperties",
+   "WeilConjectures.ConstructibleExceptionalCompositor.finiteAlpha",
+   "WeilConjectures.ConstructibleExceptionalCompositor.integralAlpha",
+   "WeilConjectures.ConstructibleExceptionalCompositor.LeftCompositors",
+   "WeilConjectures.ConstructibleExceptionalCompositor.RefinementIndependent"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleExceptionalCompositorData.lean",
+  "statement": "theorem constructibleIntegralSupport_eq\n    (D : FiniteFieldDatum.{u}) (B : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic B.l) E]\n    [FiniteDimensional (Padic B.l) E] (n : ℕ+) (S : SixFunctorOperationDatum D B E n n.pos)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left) :\n    S.higher.integral.support f c =\n      sfCompactSupportFiniteIntegralFunctor B.l D.k\n        (PurCompactSupport.coefficientPrimeUnit B.l D B.different) c E",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a1ee",
+  "group": "D8",
+  "result": "fix",
+  "landing": "20261025T122737-L-1801866",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a1ee",
+  "group": "D8",
+  "result": "fix",
+  "landing": "20261025T122737-L-1801866",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-constructible-exceptional-compositor + 5 nodes vs delivered Lean (item, Data, LeftCompositorCoherence, CompactSupportTermHomFinite) and published module; universe params [u] verified; 3 direct importers compiled"
+ }
+}

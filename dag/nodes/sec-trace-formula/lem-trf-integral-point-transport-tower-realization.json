@@ -14,54 +14,44 @@
   "def-weil-finite-coefficient-point",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-frobenius-point-transport",
-  "def-weil-inverse-image-pullback-comparison"
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-point-transport-tower-realization-specification",
+  "def-trf-integral-point-transport-canonical-data"
  ],
  "proof": [
   {
-   "text": "Choose a flat-term K-flat resolution $q:P\\to N$ by [lem-pc-kflat-resolution]. Apply [lem-trf-point-transport-strict-quotient] to its simultaneous quotients. It supplies a strict map $u:D_\\bullet\\to B_\\bullet$, with $D_n=\\Gamma(s,P_n)$ and $B_n=\\Gamma(s,\\operatorname{Res}_ng_n^*P_n)$, whose evaluations are $\\iota_{N_n}$. It also supplies the strict augmentation equality $\\Gamma(s,\\theta_n)\\sigma_P=u_n\\Gamma(s,r_n)$ needed below, and natural descent of the tower map. Thus compatibility is established before passage to individual derived levels.",
+   "text": "Use the explicitly named canonical point data and the complete seven-property specification. The private expanded-form equivalence verifies that these definitions give the original raw formula without a changed hypothesis or coordinate condition.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-trf-point-transport-strict-quotient"
+    "def-trf-integral-point-transport-canonical-data",
+    "def-trf-point-transport-tower-realization-specification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), assembly of clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-trf-point-sections-completion-cone] to the same $P$. Its specified sectionwise cone comparison realizes $u$ by $H(u)$, diagonal on the two products. Its canonical isomorphisms $\\alpha_N:\\Gamma(s,N)\\simeq H(D_\\bullet)$ and $\\beta_N:\\Gamma(s,Lg_s^*N)\\simeq H(B_\\bullet)$ identify these cones with the asserted derived limits. Here $\\alpha_N\\Gamma(s,q)$ is the map $a_P:z\\mapsto(0,(\\Gamma(s,r_n)z)_n)$, and $\\beta_N$ is identity on both sectionwise product components of the defining completed-pullback cone. These comparisons are natural in derived inputs and independent of the representative.",
+   "text": "Apply the fully proved private canonical assembly. Its proof constructs the strict map and the two normalized comparisons, proves all coordinate identities and naturality, and isolates only the two coefficient sublemmas described in its dependency nodes.",
    "uses": [
-    "lem-trf-point-sections-completion-cone"
+    "lem-trf-point-transport-tower-canonical-assembly"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), assembly of clause (3), sectionwise shifted cone and canonical completion identifications: original realization proof steps 3-4 and comparison descent in step 6"
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-trf-point-transport-cone-comparison-descent] with the strict augmentation equality from step 1. It gives $b_q\\iota_N\\Gamma(s,q)=H(u)a_P$, and $b_q=\\beta_N$: both are induced by $c_C$ on the defining completed-pullback cone of the same $P$ (step 2). Step 2 identifies $a_P=\\alpha_N\\Gamma(s,q)$; the cited cone/descent lemma makes $\\Gamma(s,q)$ invertible. Cancel it to obtain $\\beta_N\\iota_N=H(u)\\alpha_N$. The lemma uses the specified integral comparison (b), including its zero shifted-product component, so this proves equality of the actual integral map with the realization. Its roof descent, combined with the natural tower map of step 1 and natural comparisons of step 2, gives all assertions naturally for arbitrary derived morphisms of $N$.",
+   "text": "The item theorem directly applies that assembly to the stated finite field datum, prime, coefficient field and inequality. This proves the original mathematical realization assertion with the equivalent named specification.",
    "uses": [
-    "lem-trf-point-transport-cone-comparison-descent"
+    "lem-trf-point-transport-tower-canonical-assembly",
+    "def-trf-point-transport-tower-realization-specification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), assembly of clause (3), actual comparison (b) on both cone components: original realization proof step 5 and derived-roof descent in step 6"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-trf-point-transport-strict-quotient",
-  "lem-trf-point-sections-completion-cone",
-  "lem-trf-point-transport-cone-comparison-descent"
+  "def-trf-integral-point-transport-canonical-data",
+  "def-trf-point-transport-tower-realization-specification",
+  "lem-trf-point-transport-tower-canonical-assembly"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "clause (3), explicit strict-quotient and shifted-cone refinement using the cited existing definitions and completion theorem"
+  "place": "G6: directly applies the fully proved private canonical assembly, with named canonical data and the seven-property specification; the exact expanded-form equivalence is proved. The all-complex finite laws are proved from existing library identities; only actual-quotient augmentation invertibility remains as a new unresolved coefficient assertion."
  },
  "mathlib_searches": [
   {
@@ -168,7 +158,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
   "lem-pur-integral-operations-well-defined",
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-derived-limit-existence",
@@ -204,11 +193,32 @@
    "WeilConjectures.integralPointTransportTowerRealization"
   ],
   "file": "lean/Sheaf/Paper/IntegralPointTransportTowerRealization.lean",
-  "statement": "theorem integralPointTransportTowerRealization (hl : l ≠ D.p) : ∃ (U : trfPointSourceTower D l E ⟶ trfPointTargetTower D l E) (α : trfPointSectionsComplex D l E ⟶ trfPointSourceTower D l E ⋙ integralOperationsRoosFunctor) (β : integralOperationsPullbackComplexFunctor l E (frobeniusPointIso D).hom ⋙ trfPointSectionsComplex D l E ≅ trfPointTargetTower D l E ⋙ integralOperationsRoosFunctor), (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (n : ℕ) (i : ℤ) (x : (((unrestrictedIntegralFiniteComplex l E (Spec (.of D.k)) n).obj P).X i).val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))), (((U.app P).app (op n)).f i) x = ((((integralOperationsPullbackLevel l E (frobeniusPointIso D).hom n).obj P).X i).val.map (proEtaleIsoCommaArrow (frobeniusPointIso D).hom (ProEt.mk (𝟙 (Spec (.of D.k))))).op (integralOperationsPullbackGenerator l E (frobeniusPointIso D).hom n (((unrestrictedIntegralFiniteComplex l E (Spec (.of D.k)) n).obj P).X i) ((proEtaleIsoPostcompose (frobeniusPointIso D).hom).obj (ProEt.mk (𝟙 (Spec (.of D.k))))) ((((unrestrictedIntegralFiniteComplex l E (Spec (.of D.k)) n).obj P).X i).val.map (frobeniusPointRestriction D).op x)))) ∧ (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (i : ℤ) (n : ℕ) (x : (P.X i).val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))), ((α.app P).f i ≫ (CochainComplex.mappingCocone.fst (trfPointSourceEnd D l E P)).f i ≫ (Pi.π (fun n ↦ ((trfPointSourceTower D l E).obj P).obj (op n)) n).f i) x = unrestrictedIntegralTensorSection l E (Spec (.of D.k)) n (P.X i) (op (ProEt.mk (𝟙 (Spec (.of D.k))))) 1 x) ∧ (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (i : ℤ), (α.app P).f i ≫ (CochainComplex.mappingCocone.snd (trfPointSourceEnd D l E P)).v i (i - 1) (by omega) = 0) ∧ (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (i : ℤ) (n : ℕ), (β.hom.app P).f i ≫ (CochainComplex.mappingCocone.fst (trfPointTargetEnd D l E P)).f i ≫ (Pi.π (fun n ↦ ((trfPointTargetTower D l E).obj P).obj (op n)) n).f i = ((trfPointSectionsComplex D l E).map (CochainComplex.mappingCocone.fst (trfPointSheafTargetEnd D l E P) ≫ Pi.π (fun n ↦ ((integralOperationsPullbackTowerFunctor l E (frobeniusPointIso D).hom).obj P).obj (op n)) n)).f i) ∧ (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (i : ℤ) (n : ℕ), (β.hom.app P).f i ≫ (CochainComplex.mappingCocone.snd (trfPointTargetEnd D l E P)).v i (i - 1) (by omega) ≫ (Pi.π (fun n ↦ ((trfPointTargetTower D l E).obj P).obj (op n)) n).f (i - 1) = (pointIntegralSections l E D.k).map ((CochainComplex.mappingCocone.snd (trfPointSheafTargetEnd D l E P)).v i (i - 1) (by omega) ≫ (Pi.π (fun n ↦ ((integralOperationsPullbackTowerFunctor l E (frobeniusPointIso D).hom).obj P).obj (op n)) n).f (i - 1))) ∧ (∀ P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory, sfIntegralConstructible l E (Spec (.of D.k)) (DerivedCategory.Q.obj P.obj) → IsIso (DerivedCategory.Q.map (α.app P.obj)) ∧ frobeniusPointTransportIntegral D l hl E (DerivedCategory.Q.obj P.obj) ≫ (pointFibreIntegralAmbient D l E).map ((integralDerivedPullbackComparison l E (frobeniusPointIso D).hom).hom.app P) ≫ (pointIntegralSections l E D.k).mapDerivedCategoryFactors.hom.app ((integralOperationsPullbackComplexFunctor l E (frobeniusPointIso D).hom).obj P.obj) ≫ DerivedCategory.Q.map (β.hom.app P.obj) = (pointIntegralSections l E D.k).mapDerivedCategoryFactors.hom.app P.obj ≫ DerivedCategory.Q.map (α.app P.obj) ≫ DerivedCategory.Q.map (integralOperationsRoosMap (U.app P.obj))) ∧ (∀ (N N' : sfIntegralConstructibleCategory l E (Spec (.of D.k))) (f : N ⟶ N'), (pointFibreIntegralAmbient D l E).map f.hom ≫ frobeniusPointTransportIntegral D l hl E N'.obj = frobeniusPointTransportIntegral D l hl E N.obj ≫ (pointFibreIntegralAmbient D l E).map ((integralDerivedPullback l E (frobeniusPointIso D).hom).map f.hom))",
+  "statement": "theorem integralPointTransportTowerRealization (hl : l ≠ D.p) :\n    pointTransportTowerRealizationSpec D l E hl",
   "branch": "newtargets-dag",
   "by": "Q14",
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery b2da vs returned 8fe8 (diff -r: LFTN split removed, C5 fix and item stmt_deps fix taken, Lean otherwise identical); spec vs published statement (earlier defeq check, published blob unchanged cb8c8b5c887); delivered set + 3 direct importers compiled in sandbox; #print axioms; nodes vs Lean"
+ }
 }

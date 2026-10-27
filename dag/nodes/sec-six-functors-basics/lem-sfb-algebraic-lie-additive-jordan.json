@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-algebraic-lie-additive-jordan",
+ "kind": "statement",
+ "title": "Functorial additive Jordan decomposition of algebraic Lie elements and faithful detection",
+ "statement": "Let $k$ be a field [def-weil-field], with a fixed algebraic closure $\\bar k$ [def-weil-algebraic-closure]. Let $H$ be an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Write $\\mathfrak h=T_{H/k,e}$ for its tangent space at the identity [def-sc-scheme-tangent-space], with its bracket [def-wf-lie-algebra]. A finite-dimensional rational representation means a homomorphism of $k$-group schemes $r:H\\to\\operatorname{GL}_{n,k}$ for an integer $n\\geq1$ [def-sc-general-linear-group], and $dr:\\mathfrak h\\to\\operatorname{Mat}_n(k)$ is its differential. A matrix is geometrically semisimple if it becomes diagonalizable over $\\bar k$, and is nilpotent if some positive power is zero. If $k$ is perfect (every algebraic extension of $k$ is separable), then each $Y\\in\\mathfrak h$ has a unique decomposition $Y=Y_s+Y_n$, with $[Y_s,Y_n]=0$, such that for every finite-dimensional rational representation $r$, $dr(Y_s)$ and $dr(Y_n)$ are respectively the geometrically semisimple and nilpotent commuting parts of the additive Jordan decomposition of $dr(Y)$. This decomposition is preserved by differentials of homomorphisms between affine finite-type $k$-group schemes and by extension between perfect fields. For arbitrary $k$, if $i:H\\hookrightarrow\\operatorname{GL}_{m,k}$ is a closed immersion [def-weil-closed-immersion], then $di$ is injective, and for every $Y\\in\\mathfrak h$ and every finite-dimensional rational representation $r$, geometric semisimplicity of $di(Y)$ implies geometric semisimplicity of $dr(Y)$, and nilpotence of $di(Y)$ implies nilpotence of $dr(Y)$. These statements concern differentials of algebraic group representations; they impose no assertion about arbitrary representations of the abstract Lie algebra.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.74(a),(b), printed p.377, and the geometric faithful-matrix formulation obtained by applying it over an algebraic closure. Rational representations, not arbitrary abstract Lie representations; Sections 10a–10d give tangent injectivity and matrix differentials. The theorem is the additive counterpart of Chapter 9 and does not assert a Jordan decomposition over an imperfect base field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose a closed faithful representation $i:H\\hookrightarrow\\operatorname{GL}_{m,k}$ by [lem-sfb-affine-group-faithful-linear-representation]. Use the tangent Lie structure and matrix formula of [lem-sfb-affine-group-lie-tangent-calculus]. The map $di$ is injective over every field: if $di(X)=di(X')$, the dual-number formula gives $i(t_X)=i(t_{X'})$; faithfulness on the algebra $k[\\epsilon]/(\\epsilon^2)$ gives $t_X=t_{X'}$, hence $X=X'$. The same argument applies after scalar extension, since the faithful-representation node gives injectivity on all algebra-valued points. No smoothness is involved.",
+   "uses": [
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9 and Corollary 4.10, p.87; 10.6--10.7, p.188, and 10.14, p.190."
+   }
+  },
+  {
+   "text": "Assume $k$ perfect. For every finite-dimensional rational representation $V$ (including zero), write $A_V=dr_V(Y)$ and take its linear parts $S_V,N_V$ using [lem-sfb-additive-jordan-linear-compatibility]. If $f:V\\to W$ is equivariant, evaluate equivariance at $t_Y$ and compare coefficients of $\\epsilon$ in $f(1+\\epsilon A_V)=(1+\\epsilon A_W)f$; thus $fA_V=A_Wf$ and $fS_V=S_Wf$, $fN_V=N_Wf$. For a tensor representation, $(1+\\epsilon A_V)\\otimes(1+\\epsilon A_W)=1+\\epsilon(A_V\\otimes1+1\\otimes A_W)$ because $\\epsilon^2=0$. The tensor-sum clause gives $S_{V\\otimes W}=S_V\\otimes1+1\\otimes S_W$, and the identical formula for $N$. On the trivial representation $A=0$, whose unique parts are both zero. These computations use the dual-number differential formula of [lem-sfb-affine-group-lie-tangent-calculus].",
+   "uses": [
+    "lem-sfb-additive-jordan-linear-compatibility",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.74 exercise, p.377: additive analogues of 9.13--9.15; dual-number formula 10.7."
+   }
+  },
+  {
+   "text": "Set $R=k[\\epsilon]/(\\epsilon^2)$. For each of the two families put $\\lambda^s_V=1+\\epsilon S_V$ and $\\lambda^n_V=1+\\epsilon N_V$ on $V_R$. Their inverses are $1-\\epsilon S_V$ and $1-\\epsilon N_V$. The previous intertwiner, tensor-sum and unit identities give exactly all hypotheses of [lem-sfb-affine-group-tensor-reconstruction], since $(1+\\epsilon S_V)\\otimes_R(1+\\epsilon S_W)=1+\\epsilon(S_V\\otimes1+1\\otimes S_W)$. Reconstruct $t_s,t_n\\in H(R)$. Their reductions in $H(k)$ have identity image under $i$, so are the identity by faithfulness [lem-sfb-affine-group-faithful-linear-representation]. Thus they define tangent vectors $Y_s,Y_n$. Comparing coefficients using [lem-sfb-affine-group-lie-tangent-calculus] gives $dr_V(Y_s)=S_V$ and $dr_V(Y_n)=N_V$ for every $V$.",
+   "uses": [
+    "lem-sfb-affine-group-tensor-reconstruction",
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent solution of exercise 17.74 using Theorem 9.2, pp.164--165, with R the dual numbers; 10.6--10.7."
+   }
+  },
+  {
+   "text": "The linearity and bracket preservation of [lem-sfb-affine-group-lie-tangent-calculus] give $di(Y_s+Y_n)=S_i+N_i=di(Y)$ and $di([Y_s,Y_n])=S_iN_i-N_iS_i=0$. Injectivity from step 1 gives $Y=Y_s+Y_n$ and $[Y_s,Y_n]=0$. Step 3 already gives the required representation identities. Any other pair satisfying the statement has, in representation $i$, the same unique matrix parts by [lem-sfb-additive-jordan-linear-compatibility]; injectivity gives equality of the two pairs. This also proves uniqueness if only commuting semisimple and nilpotent images in every representation were specified.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-additive-jordan-linear-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent solution of Proposition 17.74(a), p.377: matrix equality and faithfulness."
+   }
+  },
+  {
+   "text": "Let $f:H\\to H'$ be a homomorphism over perfect $k$. For every rational representation $r'$ of $H'$, apply step 3 to $r'\\circ f$. The chain rule [lem-sfb-affine-group-lie-tangent-calculus] gives $dr'(df(Y_s))=(dr'(df(Y)))_s$ and the corresponding nilpotent identity. Apply the same construction to $df(Y)$ in $H'$. Choose a faithful closed representation of $H'$ by [lem-sfb-affine-group-faithful-linear-representation]; its injective differential shows $df(Y_s)=(df(Y))_s$ and $df(Y_n)=(df(Y))_n$.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-affine-group-faithful-linear-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.74(b), p.377; argument through composite rational representations."
+   }
+  },
+  {
+   "text": "Let $K/k$ be an extension of perfect fields. Identify $\\operatorname{Lie}(H_K)$ with $K\\otimes_k\\mathfrak h$ using [lem-sfb-affine-group-lie-tangent-calculus]. By [lem-sfb-additive-jordan-linear-compatibility], the parts of $di_K(1\\otimes Y)=1\\otimes di(Y)$ are $1\\otimes di(Y_s)$ and $1\\otimes di(Y_n)$. Construct the parts of $1\\otimes Y$ over $K$ by steps 2--4. Their images under $di_K$ are those same matrix parts. Injectivity from step 1 gives $(1\\otimes Y)_s=1\\otimes Y_s$ and $(1\\otimes Y)_n=1\\otimes Y_n$. Representations over $K$ need not descend to $k$.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-additive-jordan-linear-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Preliminaries on p.376 and Theorem 9.11 scalar-extension uniqueness, pp.168--169; 10.19, p.192."
+   }
+  },
+  {
+   "text": "Now take arbitrary $k$ and the given closed immersion $i$ of the statement. It is injective on algebra-valued points: on affine coordinate rings it is a surjection, and two maps out of the quotient agreeing after that surjection are equal [def-weil-closed-immersion]. Thus $di$ and $di_{\\bar k}$ are injective by the dual-number argument of step 1 [lem-sfb-affine-group-lie-tangent-calculus]. The algebraic closure $\\bar k$ is perfect: its irreducible polynomials are linear, hence separable. Apply steps 2--4 to $Y_{\\bar k}$. If $di(Y)$ is geometrically semisimple, its extended matrix has parts $di_{\\bar k}(Y_{\\bar k})$ and zero; if it is nilpotent, its extended matrix has parts zero and $di_{\\bar k}(Y_{\\bar k})$. These identifications follow from uniqueness in [lem-sfb-additive-jordan-linear-compatibility]. Injectivity forces respectively $(Y_{\\bar k})_n=0$ or $(Y_{\\bar k})_s=0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-additive-jordan-linear-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.74 over the algebraic closure; 10.14, p.190. Geometric formulation supplied explicitly."
+   }
+  },
+  {
+   "text": "For any given rational $r$ over $k$, extend it to $\\bar k$. By step 3, $dr_{\\bar k}(Y_{\\bar k})$ has parts $dr_{\\bar k}((Y_{\\bar k})_s)$ and $dr_{\\bar k}((Y_{\\bar k})_n)$, using the scalar-extension differential identification [lem-sfb-affine-group-lie-tangent-calculus]. In the first case of step 7 the nilpotent part is zero, so this matrix is diagonalizable; this is exactly geometric semisimplicity of $dr(Y)$. In the second case its semisimple part is zero, so a positive power of it is zero. That power is obtained by entrywise extension of $(dr(Y))^q$; injectivity of $k\\to\\bar k$ makes each entry of $(dr(Y))^q$ zero. Thus $dr(Y)$ is nilpotent. All representations used are algebraic group representations, as required.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Geometric faithful detection deduced from Proposition 17.74(a), p.377; scalar extension as in 10.19."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-faithful-linear-representation",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-additive-jordan-linear-compatibility",
+  "lem-sfb-affine-group-tensor-reconstruction",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Exercise Proposition 17.74, p.377, solved using Theorem 9.2 over dual numbers and additive linear Jordan compatibility; Sections 10.6--10.23 supply tangent functoriality. Milne states this proposition without a proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial additive Jordan decomposition of tangent Lie elements of affine algebraic group schemes over a perfect field",
+   "results": "{\"t\": \"2026-10-24T07:07:17Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial additive Jordan decomposition of tangent Lie elements of affine algebraic group schemes over a perfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieAlgebraAddGroupLieAlgebra\", \"instLieAlgebraGroupLieAlgebra\", \"instAddCommGroupTangentSpace\", \"GroupLieAlgebra\", \"instLieRingGroupLieAlgebra\", \"instBracketAddGroupLieAlgebra\", \"instIsTopologicalAddGroupTangentSpace\", \"GroupLieAlgebra.bracket_def\"], \"digest\": \"20b0f848a5f842cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.exists_isNilpotent_isSemisimple and its uniqueness theorem (LinearAlgebra/JordanChevalley.lean:76,84) give linear endomorphism decompositions; LieAlgebra.ad_mem_adjoin_of_isSemisimple (Algebra/Lie/AdjointAction/JordanChevalley.lean:33) gives an associative adjoint identity. None asserts membership of the parts in the Lie algebra of an arbitrary affine algebraic group, compatibility with its rational representations, or faithful detection. Source files and the returned signatures were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple, IsNilpotent",
+   "results": "{\"t\": \"2026-10-24T07:08:49Z\", \"tool\": \"loogle\", \"query\": \"Module.End.IsSemisimple, IsNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.End.eq_zero_of_isNilpotent_isSemisimple\", \"Module.End.isNilpotent_isSemisimple_unique\", \"Module.End.exists_isNilpotent_isSemisimple\", \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"LieAlgebra.ad_mem_adjoin_of_isNilpotent\", \"LieAlgebra.ad_mem_adjoin_of_isSemisimple\"], \"digest\": \"9a2b540f9e25a7a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.exists_isNilpotent_isSemisimple and its uniqueness theorem (LinearAlgebra/JordanChevalley.lean:76,84) give linear endomorphism decompositions; LieAlgebra.ad_mem_adjoin_of_isSemisimple (Algebra/Lie/AdjointAction/JordanChevalley.lean:33) gives an associative adjoint identity. None asserts membership of the parts in the Lie algebra of an arbitrary affine algebraic group, compatibility with its rational representations, or faithful detection. Source files and the returned signatures were read."
+  },
+  {
+   "tool": "grep",
+   "query": "JordanChevalley|jordan.*[Cc]hevalley|isNilpotent_isSemisimple",
+   "results": "{\"t\": \"2026-10-24T07:08:49Z\", \"tool\": \"grep\", \"query\": \"JordanChevalley|jordan.*[Cc]hevalley|isNilpotent_isSemisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"c5a71e497b167e98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.exists_isNilpotent_isSemisimple and its uniqueness theorem (LinearAlgebra/JordanChevalley.lean:76,84) give linear endomorphism decompositions; LieAlgebra.ad_mem_adjoin_of_isSemisimple (Algebra/Lie/AdjointAction/JordanChevalley.lean:33) gives an associative adjoint identity. None asserts membership of the parts in the Lie algebra of an arbitrary affine algebraic group, compatibility with its rational representations, or faithful detection. Source files and the returned signatures were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Additive Jordan decomposition belongs to the Lie algebra of an algebraic group and is preserved by differentials of algebraic representations",
+   "results": "{\"t\": \"2026-10-24T07:08:50Z\", \"tool\": \"leansearch\", \"query\": \"Additive Jordan decomposition belongs to the Lie algebra of an algebraic group and is preserved by differentials of algebraic representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"mulInvariantVectorField_add\", \"instLieAlgebraAddGroupLieAlgebra\", \"AddGroupLieAlgebra\", \"mdifferentiable_addInvariantVectorField\", \"LieAlgebra.ad\", \"mdifferentiableAt_addInvariantVectorField\", \"instLieRingGroupLieAlgebra\"], \"digest\": \"b9f7b47780158734\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.exists_isNilpotent_isSemisimple and its uniqueness theorem (LinearAlgebra/JordanChevalley.lean:76,84) give linear endomorphism decompositions; LieAlgebra.ad_mem_adjoin_of_isSemisimple (Algebra/Lie/AdjointAction/JordanChevalley.lean:33) gives an associative adjoint identity. None asserts membership of the parts in the Lie algebra of an arbitrary affine algebraic group, compatibility with its rational representations, or faithful detection. Source files and the returned signatures were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The semisimple and nilpotent parts of a tangent matrix of an algebraic group belong to its tangent Lie algebra and commute with algebraic group homomorphisms",
+   "results": "{\"t\": \"2026-10-24T07:08:57Z\", \"tool\": \"leanfinder\", \"query\": \"The semisimple and nilpotent parts of a tangent matrix of an algebraic group belong to its tangent Lie algebra and commute with algebraic group homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieAlgebraGroupLieAlgebra\", \"GroupLieAlgebra.bracket_def\", \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'\", \"LieAlgebra.SpecialLinear.singleSubSingle\", \"LieAlgebra.SpecialLinear.singleSubSingle_add_singleSubSingle\", \"LieSubalgebra.engel\", \"LieDerivation.IsKilling.exists_eq_ad\", \"LieDerivation.exp\"], \"digest\": \"d12a566283bc82dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: second phrasing and source grep inspected; no algebraic-group Jordan compatibility or semisimple-derivation smooth zero-scheme assertion among the returned declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial additive Jordan decomposition in the Lie algebra of an affine algebraic group over a perfect field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.lieAlgebra\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra of the matrix algebra $ \\\\text{Mat}_{(S \\\\oplus \\\\iota) \\\\times (S \\\\oplus \\\\iota)}(R) $ generated by the images of the matrices $ h $, $ e(i) $, and $ f(i) $ constructed from the root pa\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_lieAlgebra\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For any index $ i $ in the finite support set $ S $ of the root pairing base structure $ b $, the matrix $ h(i) $ constructed from the root pairing $ P $ is an element of the Lie subalgebra generated \"}\n  {\"name\": \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L]\\n  [PerfectField K] {x : L}, x ∈ H → ((LieAlgebra.ad K L) x).IsSe\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with non-degenerate Killing form, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $x \\\\in \\\\mathfrak{h}$, then the adjoint end\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie submodule of the Geck-constructed Lie algebra $\\\\mathfrak{g}$ consisting of elements $x$ such that $\\\\omega(x) \\\\in N$, where $\\\\omega$ is the block matrix from the Geck construction and $N$ is a \"}\n  {\"name\": \"killingForm_eq_zero_of_mem_zeroRoot_mem_posFitting\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H] {x₀ x₁ : L},\\n  x₀ ∈ LieAlgebra.zeroRootSubalgebra R L H → x₁ ∈ LieModule.posFittingComp R (↥H) L → ((killingForm R L) x₀) x₁ = 0\", \"doc\": \"For a nilpotent Lie subalgebra $\\\\mathfrak{h}$ of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $x_0$ belongs to the zero root subalgebra $\\\\mathfrak{g}_0(\\\\mathfrak{h})$ (the generalized \"}\n  {\"name\": \"LieSubalgebra.engel\", \"module\": \"Mathlib/Algebra/Lie/EngelSubalgebra\", \"type\": \"(R : Type u_1) →\\n  {L : Type u_2} → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → L → LieSubalgebra R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ and an element $x \\\\in \\\\mathfrak{g}$, the Engel subalgebra associated to $x$ is the maximal generalized eigenspace of the adjoint representa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 is linear algebra; no returned declaration supplies Jordan parts in the tangent Lie algebra of an arbitrary affine group scheme or faithful rational detection."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple, IsNilpotent",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"Module.End.eq_zero_of_isNilpotent_isSemisimple\", \"module\": \"Mathlib.LinearAlgebra.Semisimple\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommRing R] [AddCommGroup M] [Module R M] {f : Module.End R M} (hn : IsNilpotent f) (hs : f.IsSemisimple) : f = 0\", \"doc\": \"\"}\n  {\"name\": \"Module.End.isNilpotent_isSemisimple_unique\", \"module\": \"Mathlib.LinearAlgebra.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V] [PerfectField K] {n₁ s₁ n₂ s₂ : Module.End K V} (hn₁ : IsNilpotent n₁) (hs₁ : s₁.IsSemisimple) (hn₂ : IsNilpotent n₂) (hs₂ : s₂.IsSemisimple) (hc₁ : Commute n₁ s₁) (hc₂ : Commute n₂ s₂) (h : n₁ + s₁ = n₂ +\", \"doc\": \"**Uniqueness of Jordan-Chevalley-Dunford decomposition**: if `n₁ + s₁ = n₂ + s₂` with `nᵢ`\\nnilpotent, `sᵢ` semisimple, and `nᵢ`, `sᵢ` commuting, then `n₁ = n₂` and `s₁ = s₂`.\"}\n  {\"name\": \"Module.End.exists_isNilpotent_isSemisimple\", \"module\": \"Mathlib.LinearAlgebra.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [AddCommGroup V] [Module K V] {f : Module.End K V} [FiniteDimensional K V] [PerfectField K] : ∃ n ∈ K[f], ∃ s ∈ K[f], IsNilpotent n ∧ s.IsSemisimple ∧ f = n + s\", \"doc\": \"**Jordan-Chevalley-Dunford decomposition**: an endomorphism of a finite-dimensional vector space\\nover a perfect field may be written as a sum of nilpotent and semisimple endomorphisms. Moreover\\nthese \"}\n  {\"name\": \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"module\": \"Mathlib.LinearAlgebra.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [AddCommGroup V] [Module K V] {f : Module.End K V} {P : Polynomial K} {k : ℕ} (sep : P.Separable) (nil : minpoly K f ∣ P ^ k) : ∃ n ∈ K[f], ∃ s ∈ K[f], IsNilpotent n ∧ s.IsSemisimple ∧ f = n + s\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.ad_mem_adjoin_of_isNilpotent\", \"module\": \"Mathlib.Algebra.Lie.AdjointAction.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [PerfectField K] [AddCommGroup V] [Module K V] [FiniteDimensional K V] {n s : Module.End K V} (hc : Commute n s) (hn : IsNilpotent n) (hs : s.IsSemisimple) : (LieAlgebra.ad K (Module.End K V)) n ∈ K[(LieAlgebra.ad K (Module.End K V)) (n + s)]\", \"doc\": \"The adjoint of the nilpotent part of a JC decomposition lies in the subalgebra generated by\\nthe adjoint of the sum.\"}\n  {\"name\": \"LieAlgebra.ad_mem_adjoin_of_isSemisimple\", \"module\": \"Mathlib.Algebra.Lie.AdjointAction.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [PerfectField K] [AddCommGroup V] [Module K V] [FiniteDimensional K V] {n s : Module.End K V} (hc : Commute n s) (hn : IsNilpotent n) (hs : s.IsSemisimple) : (LieAlgebra.ad K (Module.End K V)) s ∈ K[(LieAlgebra.ad K (Module.End K V)) (n + s)]\", \"doc\": \"The adjoint of the semisimple part of a JC decomposition lies in the subalgebra generated by\\nthe adjoint of the sum.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 is linear algebra; no returned declaration supplies Jordan parts in the tangent Lie algebra of an arbitrary affine group scheme or faithful rational detection."
+  },
+  {
+   "tool": "grep",
+   "query": "JordanChevalley|isNilpotent_isSemisimple",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"30\", \"text\": \"* `Module.End.eq_zero_of_isNilpotent_isSemisimple`: the zero endomorphism is the only endomorphism\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"127\", \"text\": \"lemma eq_zero_of_isNilpotent_isSemisimple (hn : IsNilpotent f) (hs : f.IsSemisimple) : f = 0 := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"139\", \"text\": \"    exact eq_zero_of_isNilpotent_isSemisimple hn hs\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"27\", \"text\": \"* `Module.End.exists_isNilpotent_isSemisimple`: an endomorphism of a finite-dimensional vector\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"31\", \"text\": \"* `Module.End.isNilpotent_isSemisimple_unique`: the Jordan-Chevalley-Dunford decomposition is\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"45\", \"text\": \"theorem exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow {P : K[X]} {k : ℕ}\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"76\", \"text\": \"theorem exists_isNilpotent_isSemisimple [PerfectField K] :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"80\", \"text\": \"  exact exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow sep nil\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.LinearAlgebra.JordanChevalley\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"40\", \"text\": \"    (ad K _ (n + s)).exists_isNilpotent_isSemisimple\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"44\", \"text\": \"  obtain ⟨-, hs_eq⟩ := Module.End.isNilpotent_isSemisimple_unique hn'_nil hs'_ss\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Algebra.Lie.AdjointAction.JordanChevalley\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"line\": \"86\", \"text\": \"  obtain ⟨n, hn_adj, s, hns, hn_nil, hs_ss, hX_ns⟩ := (φ x).exists_isNilpotent_isSemisimple\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.LinearAlgebra.JordanChevalley\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"328\", \"text\": \"  obtain ⟨N, -, S, hS₀, hN, hS, hSN⟩ := (ad K L x).exists_isNilpotent_isSemisimple\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 is linear algebra; no returned declaration supplies Jordan parts in the tangent Lie algebra of an arbitrary affine group scheme or faithful rational detection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie algebra of an algebraic group semisimple nilpotent parts of tangent elements faithful representation detection",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"GroupLieAlgebra\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \": Type _\", \"doc\": \"The Lie algebra of a group $ G $, defined as the tangent space at the identity element $ 1 $, modeled on the normed vector space $ E $ via the model with corners $ I $.\"}\n  {\"name\": \"LieModule.isFaithful_iff'\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \": IsFaithful R L M ↔ ∀ x : L, (∀ m : M, ⁅x, m⁆ = 0) → x = 0\", \"doc\": \"A Lie module $ M $ over a Lie algebra $ L $ is faithful if and only if for every element $ x \\\\in L $, the condition that $ [x, m] = 0 $ for all $ m \\\\in M $ implies that $ x = 0 $.\"}\n  {\"name\": \"LieModule.IsFaithful.mk\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \"∀ {R : Type u} {L : Type v} {M : Type w} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  Function.Injective ⇑(LieModule.toEnd R L M) → LieModule.IsFaithful R L M\", \"doc\": \"If the Lie algebra homomorphism from $\\\\mathfrak{g}$ to the endomorphism ring $\\\\text{End}_R(M)$ is injective, then $M$ is a faithful Lie module over $\\\\mathfrak{g}$, meaning the action of $\\\\mathfrak{g}$\"}\n  {\"name\": \"LieModule.isFaithful_iff_ker_eq_bot\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \": IsFaithful R L M ↔ LieModule.ker R L M = ⊥\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ and an $ R $-module $ M $, the Lie module $ M $ is faithful if and only if the kernel of the Lie module action (the set of elements in $ L $ actin\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.instIsFaithfulOfHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[HasTrivialRadical R L] : LieModule.IsFaithful R L L\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then $ L $ is a faithful Lie module over itself. This means the action of $ L $ on its\"}\n  {\"name\": \"LieModule.IsFaithful.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Nilpotent\", \"type\": \"∀ (R : Type u) (L : Type v) (M : Type w) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  LieModule.IsFaithful R L M = LieModule.IsFaithful R L M\", \"doc\": \"A Lie module $ M $ over a Lie algebra $ L $ is faithful if and only if the action of $ L $ on $ M $ is injective, i.e., the only element of $ L $ that acts as zero on all elements of $ M $ is the zero\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsSimple R L] : IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 is linear algebra; no returned declaration supplies Jordan parts in the tangent Lie algebra of an arbitrary affine group scheme or faithful rational detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jordan parts of algebraic group tangent vectors are preserved by differentials of rational representations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"mulInvariantVectorField\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"For a Lie group $G$ modeled on a normed vector space $E$ via a model with corners $I$, the left-invariant vector field associated to an element $v$ of the Lie algebra $\\\\mathfrak{g} = T_eG$ is defined \"}\n  {\"name\": \"addInvariantVectorField\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"For a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, and an additive group $G$ modeled on $E$ via a charted space structure with corners $I$, this constructs the \"}\n  {\"name\": \"mulInvariantVector_mlieBracket\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] [Lie\", \"doc\": \"For any elements $ v $ and $ w $ in the Lie algebra of a Lie group $ G $, the Lie bracket of their associated left-invariant vector fields is equal to the left-invariant vector field corresponding to \"}\n  {\"name\": \"LieDerivation.IsKilling.exists_eq_ad\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L]\\n  [LieAlgebra.IsKilling R L] (D : LieDerivation R L L), ∃ x, (LieDerivation.ad R L) x = D\", \"doc\": \"In a Lie algebra over a commutative ring $ R $ with a non-degenerate Killing form, every derivation is inner. Specifically, for any derivation $ D $ of the Lie algebra, there exists an element $ x $ i\"}\n  {\"name\": \"IsSl2Triple.HasPrimitiveVectorWith.lie_f_pow_toEnd_f\", \"module\": \"Mathlib/Algebra/Lie/Sl2\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] {h e f : L}\\n  {m : M} {μ : R} {t : IsSl2Triple h e f},\\n  t.HasPrimitiveVectorWit\", \"doc\": \"Given an $\\\\mathfrak{sl}_2$-triple $(h,e,f)$ in a Lie ring $\\\\mathfrak{g}$, a module $M$ over $\\\\mathfrak{g}$, and a primitive vector $m \\\\in M$ (satisfying $e \\\\cdot m = 0$ and $h \\\\cdot m = \\\\mu \\\\cdot m$ f\"}\n  {\"name\": \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"module\": \"Mathlib/Algebra/Lie/Sl2\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] {h e f : L}\\n  {m : M} {μ : R} {t : IsSl2Triple h e f},\\n  t.HasPrimitiveVectorWit\", \"doc\": \"For any natural number $ n $, the Lie bracket of $ h $ with the endomorphism $ \\\\psi_n $ satisfies $ [h, \\\\psi_n] = (\\\\mu - 2n) \\\\cdot \\\\psi_n $, where $ \\\\mu $ is the scalar by which $ h $ acts on a primit\"}\n  {\"name\": \"LieAlgebra.lieCharacter_apply_of_mem_derived\", \"module\": \"Mathlib/Algebra/Lie/Character\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (χ : LieAlgebra.LieCharacter R L) {x : L}, x ∈ LieAlgebra.derivedSeries R L 1 → χ x = 0\", \"doc\": \"For any Lie algebra character $\\\\chi : L \\\\to R$ (where $R$ has trivial Lie bracket) and element $x$ in the first derived series $[L, L]$, it holds that $\\\\chi(x) = 0$. This follows because Lie character\"}\n  {\"name\": \"LieDerivation.ad_apply_lieDerivation\", \"module\": \"Mathlib/Algebra/Lie/Derivation/AdjointAction\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (x : L)\\n  (D : LieDerivation R L L), (LieDerivation.ad R L) (D x) = -⁅x, D⁆\", \"doc\": \"For any element $ x $ in the Lie algebra $ L $ and any Lie derivation $ D $ from $ L $ to itself, the adjoint action of $ D x $ is equal to the negative of the Lie bracket of $ x $ and $ D $, i.e., $\\\\\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 is linear algebra; no returned declaration supplies Jordan parts in the tangent Lie algebra of an arbitrary affine group scheme or faithful rational detection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Propositions 17.76–17.79, printed pp.377–378, and the semisimple-centralizer case of Proposition 17.81, p.379. Use the identity component of the centralizer (Proposition 1.34, pp.16–17); it has the same Lie algebra. Nonunipotence follows from Example 17.75, p.377, and Theorem 14.5, pp.281–282. Supporting prerequisite: Proposition 17.74(a),(b), printed p.377, and the geometric faithful-matrix formulation obtained by applying it over an algebraic closure. Rational representations, not arbitrary abstract Lie representations; Sections 10a–10d give tangent injectivity and matrix differentials. The theorem is the additive counterpart of Chapter 9 and does not assert a Jordan decomposition over an imperfect base field.",
+   "via": [
+    "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algebraic-lie-additive-jordan",
+  "worker": "stage1",
+  "summary": "Filled the exercise via algebra-valued Tannaka reconstruction applied to 1+epsilon times the natural additive Jordan parts. Matrix faithfulness gives equality, bracket vanishing and uniqueness; composite representations give functoriality; a faithful matrix after scalar extension gives extension compatibility and arbitrary-field detection. Two genuine supporting nodes, no statement change, no Lean writing or compilation.",
+  "blueprint": "Inherited supporting input to det-thm-sf-ctf-stability-direct-images proof (3) via the recorded alteration/moduli/torus chain. Read the current latest direct-images proof. Its present proof uses compactification and open direct image; the historical supporting chain is retained as provenance without changing the fixed unit or chapter. blueprint_refs ancestor returns None for this imported-chain item. Whole-blueprint Jordan, reconstruction and Lie-functor searches found no same-statement node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-097e7b67e",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-097e7b67e (reviewer sub-agent of L); spot-checked: I read the whole item and both new nodes, and checked them against Milne iAG2017. Sources: the additive Jordan preliminaries on p.376, Prop 17.74(a),(b) on p.377 (stated there as an exercise, so proof_origin=agent is right), 10.6/10.7/10.19/Thm 10.23 for the tangent calculus, Thm 9.2 (the existing reconstruction node, any R) and 4.9/4.10 (the existing faithful-representation node). Item statement, stmt_deps and source are identical to the Q70 creation. Step checks: (1) di is injective because the faithful representation is injective on k[eps]-points, also after extension to K. (2) Equivariance and tensor products are read off the eps-coefficient, using eps^2=0. (3) lambda=1+eps S_V meets the tensor, unit and intertwiner hypotheses of the reconstruction node, and its reduction is trivial by faithfulness. (4) Sum, zero bracket and uniqueness follow from the injective di. (5) Functoriality uses r'∘f and a faithful representation of H'. (6) Perfect extensions use the naturality and entrywise GL identification. (7)-(8) The closed-field case gives geometric detection, and nilpotence descends entrywise. proof_deps is exactly the union of the uses lists; no cycle. The linear node is true: I checked the intertwiner (T_s is a polynomial in T), the tensor sum and separable scalar extension, and tested V=0, a Jordan block and char p. No Jordan node exists in the DAG, and Mathlib JordanChevalley gives existence only. The tangent-calculus node partly overlaps the Q18 node lem-sfb-affine-group-dual-number-calculus (linearity, naturality, E_{J,R}). It is not a duplicate, because it adds bracket preservation in any characteristic, the gl_n commutator and the GL formula; the other bracket nodes are char-0 or char-p only. The report did not make this comparison. Note for the maintainer: the item's closed immersion i must be read as a group homomorphism. Literally, a translate x↦[[0,1],[1,0]][[1,x],[0,1]] makes di(Y) semisimple while dr(Y) is nilpotent. The intended reading is forced by the statement's own definition of dr and by the parent's uses, so this is not a delivery fault. Blueprint from.node is null with an inherited chain. No tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicLieAdditiveJordan",
+  "declaration": "AlgebraicGeometry.existsUnique_algebraicLieJordanPair",
+  "declarations": [
+   "AlgebraicGeometry.IsAlgebraicLieJordanPair",
+   "AlgebraicGeometry.existsUnique_algebraicLieJordanPair",
+   "AlgebraicGeometry.algebraicLieJordanPair_differential",
+   "AlgebraicGeometry.IsLieScalarExtension",
+   "AlgebraicGeometry.algebraicLieJordanPair_scalarExtension",
+   "AlgebraicGeometry.algebraicLie_faithful_differential_detection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicLieAdditiveJordan.lean",
+  "statement": "theorem existsUnique_algebraicLieJordanPair {k : Type u} [Field k] [PerfectField k] (Ω : Type v) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (H : Over (Spec (.of k))) [GrpObj H] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (Y : GrpObj.Lie H) : ∃! p : GrpObj.Lie H × GrpObj.Lie H, IsAlgebraicLieJordanPair Ω H Y p.1 p.2",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The primary declaration is existence and uniqueness. The declarations list also records preservation under algebraic group homomorphisms, preservation under extension between perfect fields, and faithful differential detection over an arbitrary field. Two transparent proposition-valued helpers package the Jordan-pair condition and specify canonical scalar extension on dual-number points through the actual pullback projection. No group, tangent space, differential, matrix group or scalar-extension map is replaced by a private copy."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40b33cb9f",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Every clause of lem-sfb-algebraic-lie-additive-jordan is matched. The ∃! ordered pair uses IsAlgebraicLieJordanPair: sum, zero bracket, and for all n>0 and all RationalHom r with IsMonHom, dr(Ys) semisimple over the IsAlgClosure Ω and dr(Yn) nilpotent. r.differential is a Lie hom (GeneralLinear/Lie.lean:422), so these are exactly the Jordan parts. Homomorphism preservation requires IsMonHom f with H, H' affine finite type. Perfect scalar extension uses the actual Over.pullback mapGrp group; YK is pinned by the fst projection of the dual-number point, unique by tangentPoint_injective and the pullback; the conclusion covers all K-representations. Arbitrary-field detection has no PerfectField, requires IsMonHom i and IsClosedImmersion i.left, and gives di injective plus both implications. stmt_dep records are consistent (GrpObj, LocallyOfFiniteType+QuasiCompact, IsClosedImmersion, LinearGroupSchemes.Index, schemeTangentSpace via lieIdentityTangentEquiv). The statement field is verbatim, there are no hollow defs, all proofs are sorry, docstrings carry source and blueprint, and both report sections are present. Notes: K is in the same universe u as k, forced by Scheme pullback; Ω and ΩK share universe v; the extra 0<m only excludes a trivial case. A parallel Q152 delivery (82ac5f05) uses the same module path and has not landed, so the maintainer must keep one module. Not recompiled; no files changed."
+ }
+}

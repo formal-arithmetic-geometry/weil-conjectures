@@ -1,0 +1,88 @@
+{
+ "id": "lem-sf-finite-projection-binary-iteration-triangle-pasting",
+ "kind": "statement",
+ "title": "Pasting iteration realization with the raw triangle arrow",
+ "statement": "For a supplied open/proper Cartesian triangle and bounded K, finite-Tor L, the iterated native projection components followed by the explicit binary iteration target comparison equal the iteration source comparison followed by the raw tensor leftMap.",
+ "stmt_deps": [
+  "lem-sf-finite-projection-composition-realization",
+  "lem-sf-finite-projection-iteration-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition sentence: coefficient realization followed by the Cartesian triangle arrow."
+ },
+ "proof": [
+  {
+   "text": "Apply iteration_realization_factors and the explicit triangle target forward-map formula, then use the raw fixed triangle calculation and functoriality.",
+   "uses": [
+    "lem-sf-finite-projection-iteration-realization",
+    "lem-sf-finite-projection-composition-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-projection-iteration-realization",
+  "lem-sf-finite-projection-composition-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Cartesian triangle pasting."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionBinarySquare",
+  "date": "2026-10-27",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Cartesian triangle pasting",
+   "via": [
+    "lem-sf-finite-projection-binary-square"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionBinaryIterationTrianglePasting",
+  "file": "lean/Sheaf/Paper/FiniteProjectionBinaryIterationTrianglePasting.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.binary_iteration_triangle_pasting",
+  "statement": "theorem binary_iteration_triangle_pasting\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorFiniteOperations D C E n hn)\n    {X V W Y B Z : SixFunctorSpace D}\n    (j : X ⟶ V) (b : V ⟶ W) (q : V ⟶ Y) (p : W ⟶ B) (i : Y ⟶ B) (s : B ⟶ Z)\n    [IsOpenImmersion ((geometry D).map j)] [IsOpenImmersion ((geometry D).map b)]\n    [IsOpenImmersion ((geometry D).map i)] [QuasiCompact ((geometry D).map b)]\n    [QuasiCompact ((geometry D).map i)]\n    [IsProper ((geometry D).map q)] [IsProper ((geometry D).map p)] [IsProper ((geometry D).map s)]\n    (hb : b ≫ p = q ≫ i)\n    (K : sixFunctorFiniteCategory D C E n hn X)\n    (L : finiteTorConstructibleCategory C.l E n hn Z.obj.left)\n    (ha : letI := Padic.finite_coefficientExtensionRing C.l E n hn\n      IsIso (alpha (ordinary D\n        (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) j b q p i s hb)) :\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    let A := ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)\n    let c := ordinary D A\n    let t := fixedScalarTensorData (D := D) (C := C) (E := E) (n := n) (hn := hn)\n    let RX := realization (D := D) (C := C) (E := E) (n := n) (hn := hn) X\n    let RZ := realization (D := D) (C := C) (E := E) (n := n) (hn := hn) Z\n    let I := (intrinsicFiniteTorsionConstructible C.l E n hn Z.obj.left).ι\n    let f := j ≫ q\n    let g := i ≫ s\n    let cf := binaryFirst j q\n    let cg := binarySecond i s\n    let k := RX.inverse.obj K.obj\n    let l := RZ.inverse.obj L.obj\n    let sb := iterationSourceComparison S (X := X) (Y := Y) (Z := Z) f g cf cg K L\n    let td := binaryIterationTargetComparison S\n      (X := X) (V := V) (W := W) (Y := Y) (B := B) (Z := Z) j b q p i s hb K L ha\n    I.map (component S (X := Y) (Y := Z) g cg\n        ((S.finite.support (X := X) (Y := Y) f cf).obj K) L ≫\n      (S.finite.support (X := Y) (Y := Z) g cg).map\n        (component S (X := X) (Y := Y) f cf K ((torPull S (X := Y) (Y := Z) g).obj L))) ≫\n      td.hom = sb.hom ≫ RZ.functor.map (leftMap c t j b q p i s hb k l)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T050540-L-235778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261027T103513-L-1092034",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.CompactSupportFiniteProjection.binary_iteration_triangle_pasting"
+  ],
+  "sorry_after": []
+ }
+}

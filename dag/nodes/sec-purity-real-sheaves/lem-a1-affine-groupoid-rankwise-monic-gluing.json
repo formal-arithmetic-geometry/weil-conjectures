@@ -1,0 +1,239 @@
+{
+ "id": "lem-a1-affine-groupoid-rankwise-monic-gluing",
+ "kind": "statement",
+ "title": "Invariant rank decomposition and gluing of monic equations",
+ "statement": "Let $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ be affine schemes [def-pc-scheme, def-weil-affine-spectrum], with maps $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$, and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product] satisfying the groupoid laws [def-a1-scheme-groupoid-laws]. Write $\\sigma=s^\\sharp$, $\\tau=t^\\sharp:A\\to B$, and $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$. Assume $s,t$ are finite locally free [def-pc-finite-locally-free]. There exists a finite set $I\\subset\\mathbf Z_{\\ge1}$ and a disjoint open-and-closed decomposition $U=\\coprod_{r\\in I}U_r$ into nonempty affine opens for which $R_r=s^{-1}(U_r)=t^{-1}(U_r)$ is affine, the structure maps restrict to a groupoid $(U_r,R_r)$, and both $s_r,t_r:R_r\\to U_r$ have degree $r$. Put $A_r=\\Gamma(U_r,\\mathcal O)$, $B_r=\\Gamma(R_r,\\mathcal O)$, $\\sigma_r=s_r^\\sharp$, $\\tau_r=t_r^\\sharp$, and $C_r=\\{b\\in A_r:\\sigma_r(b)=\\tau_r(b)\\}$. Restriction gives ring isomorphisms\n$$\n\\rho_A:A\\xrightarrow{\\sim}\\prod_{r\\in I}A_r,\\qquad\n\\rho_B:B\\xrightarrow{\\sim}\\prod_{r\\in I}B_r,\\qquad\n\\rho_C:C\\xrightarrow{\\sim}\\prod_{r\\in I}C_r.\n$$\nThey satisfy $\\rho_B(\\sigma(a))_r=\\sigma_r(\\rho_A(a)_r)$ and $\\rho_B(\\tau(a))_r=\\tau_r(\\rho_A(a)_r)$, and $\\rho_C$ is the restriction of $\\rho_A$. For every $a\\in A$, put $a_r=\\rho_A(a)_r$. If $I\\ne\\emptyset$ and polynomials [def-weil-polynomial-ring] $P_r(T)=T^r+\\sum_{j<r}p_{r,j}T^j\\in C_r[T]$ satisfy $P_r(a_r)=0$ in $A_r$ for every $r\\in I$, let $d=\\max I$ and write\n$$\nT^{d-r}P_r(T)=T^d+\\sum_{j<d}q_{r,j}T^j,\\qquad\nq_j=\\rho_C^{-1}((q_{r,j})_{r\\in I}),\\qquad\nQ(T)=T^d+\\sum_{j<d}q_jT^j\\in C[T].\n$$\nThen $Q$ is monic, its coefficientwise restriction to $C_r[T]$ is $T^{d-r}P_r$, and $\\rho_A(Q(a))_r=a_r^{d-r}P_r(a_r)=0$ for every $r$, so $Q(a)=0$. If $U=\\emptyset$, then $I=\\emptyset$, $A$ is the zero ring, and $T\\in C[T]$ is a monic annihilator of its unique element. The existence of the family $P_r$ on nonempty pieces is not asserted.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first paragraph: reduction and recombination over the invariant rank pieces of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free); product of section rings as in Tag 01I5 (schemes-lemma-disjoint-union-affines)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-finite-locally-free",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Convert Scheme.IsGroupoid to IsGroupoidScheme by the pullback universal property, and apply lem-a1-affine-groupoid-invariant-rank-strata. Choose its restricted maps, and convert their laws back using pullback uniqueness. This gives the stated rank pieces, all restricted maps and all compatibility equations.",
+   "uses": [
+    "lem-a1-affine-groupoid-invariant-rank-strata",
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first paragraph: reduction and recombination over the invariant rank pieces of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free); product of section rings as in Tag 01I5 (schemes-lemma-disjoint-union-affines)."
+   }
+  },
+  {
+   "text": "For any pairwise disjoint open cover of a scheme X, the ring homomorphism from global sections to the product of sections on its opens is injective by sheaf separatedness. A tuple is compatible: restrictions coincide on a repeated open, and different opens have empty intersection. Unique sheaf gluing makes the map surjective, also for an empty index type. Transfer along Opens.topIso to global sections of the open subschemes. Apply to U and to its inverse images V under s; compose with GammaSpecIso to obtain rhoA and rhoB. GammaSpecIso naturality and the restricted source/target squares give the component formulas.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first paragraph: reduction and recombination over the invariant rank pieces of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free); product of section rings as in Tag 01I5 (schemes-lemma-disjoint-union-affines)."
+   }
+  },
+  {
+   "text": "Define C and C_r to be the specified equalizer subrings. Define the ring homomorphism C to the product of C_r by restricting rhoA. The component formulas show it is well-defined. Injectivity follows from rhoA; for a tuple b in the product equalizer, the element rhoA inverse of its underlying tuple is invariant by injectivity of rhoB. Thus this homomorphism is bijective and gives rhoC, with the asserted underlying-element formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first paragraph: reduction and recombination over the invariant rank pieces of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free); product of section rings as in Tag 01I5 (schemes-lemma-disjoint-union-affines)."
+   }
+  },
+  {
+   "text": "Let d be the finite supremum of I, q_r = X^(d-r) P_r, b_j = rhoC inverse of the tuple of coefficients of q_r, and Q = X^d plus sum over j<d of C(b_j) X^j. Positive degree r makes P_r nonzero; its monicity and degree give q_r monic of natural degree d. Mathlib degree_sum_fin_lt and monic_X_pow_add prove Q monic. Applying the r-th coefficient ring homomorphism to Q and using rhoC applied to its inverse gives the monic expansion q_r.as_sum, hence Q restricts to q_r.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first paragraph: reduction and recombination over the invariant rank pieces of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free); product of section rings as in Tag 01I5 (schemes-lemma-disjoint-union-affines)."
+   }
+  },
+  {
+   "text": "The underlying-element formula for rhoC identifies the two coefficient ring homomorphisms into A_r. The hom_eval2 and eval2_map identities therefore identify the r-th component of Q(a) with the evaluation of q_r at a_r, namely a_r^(d-r) P_r(a_r). The supplied root equation makes this zero. Injectivity of rhoA gives Q(a)=0.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first paragraph: reduction and recombination over the invariant rank pieces of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free); product of section rings as in Tag 01I5 (schemes-lemma-disjoint-union-affines)."
+   }
+  },
+  {
+   "text": "For empty Spec A, the rank-strata theorem gives I empty and PrimeSpectrum.isEmpty_iff_subsingleton gives Subsingleton A. Polynomial.X is monic over every ring, including the zero ring, and its evaluation in A is zero by subsingleton elimination. The section product construction above already covers empty index types.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first paragraph: reduction and recombination over the invariant rank pieces of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free); product of section rings as in Tag 01I5 (schemes-lemma-disjoint-union-affines)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-affine-groupoid-invariant-rank-strata",
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first paragraph: reduction and recombination over the invariant rank pieces of Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free); product of section rings as in Tag 01I5 (schemes-lemma-disjoint-union-affines). Lean implementation by S3 (2026-10-26): direct unique sheaf gluing replaces the binary-product induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine finite locally free scheme groupoid, decompose the invariant ring as the finite product over invariant constant rank strata and glue monic annihilating polynomials by padding their degrees",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace.toSpecMvPoly n S) =\\n    (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEqu\", \"doc\": \"For a scheme $ S $ and index set $ n $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the projection $ \\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_\\\\mathbb{Z} $ equals the inverse equivalence $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme} (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n).symm v =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (MvPolynomial.eval₂Hom \", \"doc\": \"The inverse of the natural equivalence between morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and $ n \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme}\\n  (f :\\n    X ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial })\\n  (i : n),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n) f i =\\n    (CategoryTheory.ConcreteC\", \"doc\": \"For any scheme $X$ and index set $n$, there is a natural bijection between the set of morphisms from $X$ to the affine space $\\\\mathbb{A}^n_\\\\mathbb{Z}$ (realized as $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} → (S : AlgebraicGeometry.Scheme) → n → ↑((AlgebraicGeometry.AffineSpace n S).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$, defined as the global section of the structure sheaf corresponding to the $i$-t\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf equalizer and polynomial factorization results do not supply invariant rank strata, the product of invariant rings, and the prescribed common-degree annihilator"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite invariant clopen decomposition of an affine groupoid identifies its equalizer subring with the product of the equalizers and glues monic polynomials of different degrees",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.universalFactorizationMapLiftEquiv\", \"module\": \"Mathlib.RingTheory.Polynomial.UniversalFactorizationRing\", \"type\": \"(p : MonicDegreeEq S n) :\\n  { f // AlgHom.comp f (universalFactorizationMap R n m k hn) = (mapEquivMonic _ _ n).symm p } ≃\\n    { q : MonicDegreeEq S m × MonicDegreeEq S k // q.1.1 * q.2.1 = p }\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, and natural numbers $ n = m + k $, there is a canonical equivalence between $ R $-algebra homomorphisms extending the $ R $-algebra s\"}\n  {\"name\": \"Polynomial.UniversalFactorizationRing.homEquiv\", \"module\": \"Mathlib.RingTheory.Polynomial.UniversalFactorizationRing\", \"type\": \": (𝓡 →ₐ[R] S) ≃ { q : MonicDegreeEq S m × MonicDegreeEq S k // q.1.1 * q.2.1 = p.1.map (algebraMap R S) }\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, and natural numbers $ m, k $ such that $ n = m + k $, there is a canonical equivalence between $ R $-algebra homomorphisms from the u\"}\n  {\"name\": \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": { e : R × R // e.1 * e.2 = 0 ∧ e.1 + e.2 = 1 } ≃o Clopens (PrimeSpectrum R)\", \"doc\": \"There is a bijective correspondence between clopen subsets of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ and pairs of elements $e, f \\\\in R$ satisfying $e \\\\cdot f = 0$ an\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"Polynomial.UniversalCoprimeFactorizationRing.homEquiv\", \"module\": \"Mathlib.RingTheory.Polynomial.UniversalFactorizationRing\", \"type\": \":\\n  (𝓡' →ₐ[R] S) ≃\\n    { q : MonicDegreeEq S m × MonicDegreeEq S k // q.1.1 * q.2.1 = p.1.map (algebraMap R S) ∧ IsCoprime q.1.1 q.2.1 }\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, and natural numbers $ m, k $ such that $ n = m + k $, there is a canonical equivalence between $ R $-algebra homomorphisms from the u\"}\n  {\"name\": \"PrimeSpectrum.isClopen_iff_mul_add\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{s : Set (PrimeSpectrum R)} : IsClopen s ↔ ∃ e f : R, e * f = 0 ∧ e + f = 1 ∧ s = basicOpen e\", \"doc\": \"A subset $ s $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $ is clopen in the Zariski topology if and only if there exist elements $ e, f \\\\in R $ such that $ e \\\\cdot\"}\n  {\"name\": \"prodXSubSMul.monic\", \"module\": \"Mathlib.Algebra.Polynomial.GroupRingAction\", \"type\": \"(x : R) : (prodXSubSMul G R x).Monic\", \"doc\": \"For any element $ x $ in a ring $ R $, the polynomial constructed as the product over all cosets $ g $ in the quotient group $ G / \\\\text{Stab}(x) $ of $ (X - g) $ is monic, i.e., its leading coefficie\"}\n  {\"name\": \"PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{s : Set (PrimeSpectrum R)} (hs : IsClopen s) : ∃ e : R, IsIdempotentElem e ∧ s = basicOpen e\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative semiring $ R $, every clopen set $ s $ is equal to the basic open set $ D(e) $ for some idempotent element $ e \\\\in R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf equalizer and polynomial factorization results do not supply invariant rank strata, the product of invariant rings, and the prescribed common-degree annihilator"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eqLocus\", \"pi\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X) : F.obj.obj (Opposite.op (U ⊔ V)) ≅ ↧↥(((CommRingCat.Hom.hom (F.obj.map (CategoryTheory.homOfLE ⋯).op)).comp (RingHom.fst ↑(F.obj.obj (Opposite.op U)) ↑(F.obj.obj (Opposite.op V)))).eqLocus ((CommRingCat.Hom.hom (F.obj.\", \"doc\": \"`F(U ⊔ V)` is isomorphic to the `eq_locus` of the two maps `F(U) × F(V) ⟶ F(U ⊓ V)`.\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X) (x : ↑(F.obj.obj (Opposite.op (U ⊔ V)))) : (↑((CategoryTheory.ConcreteCategory.hom (F.objSupIsoProdEqLocus U V).hom) x)).1 = (CategoryTheory.ConcreteCategory.hom (F.obj.map (CategoryTheory.homOfLE ⋯).op)) x\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X) (x : ↑(F.obj.obj (Opposite.op (U ⊔ V)))) : (↑((CategoryTheory.ConcreteCategory.hom (F.objSupIsoProdEqLocus U V).hom) x)).2 = (CategoryTheory.ConcreteCategory.hom (F.obj.map (CategoryTheory.homOfLE ⋯).op)) x\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X) (x : ↑↧↥(((CommRingCat.Hom.hom (F.obj.map (CategoryTheory.homOfLE ⋯).op)).comp (RingHom.fst ↑(F.obj.obj (Opposite.op U)) ↑(F.obj.obj (Opposite.op V)))).eqLocus ((CommRingCat.Hom.hom (F.obj.map (CategoryTheory.homOfLE ⋯)\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X) (x : ↑↧↥(((CommRingCat.Hom.hom (F.obj.map (CategoryTheory.homOfLE ⋯).op)).comp (RingHom.fst ↑(F.obj.obj (Opposite.op U)) ↑(F.obj.obj (Opposite.op V)))).eqLocus ((CommRingCat.Hom.hom (F.obj.map (CategoryTheory.homOfLE ⋯)\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V) (x : ↑↧↥(((CommRingCat.Hom.hom (F.obj.map (CategoryTheory.homOfLE ⋯).op)).comp (RingHom.fst ↑(F.obj.obj (Opposite.op U)) ↑(F.obj.obj (Opposite.op V)))).eqLocus ((CommRingCat.Hom.hom (F.obj.map (C\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf equalizer and polynomial factorization results do not supply invariant rank strata, the product of invariant rings, and the prescribed common-degree annihilator"
+  },
+  {
+   "tool": "grep",
+   "query": "eqLocus.*(pi|prod)|(?:pi|prod).*eqLocus|monic.*(?:glue|patch)|(?:glue|patch).*monic",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean\", \"line\": \"97\", \"text\": \"    TensorProduct.includeLeftRingHom.eqLocus TensorProduct.includeRight.toRingHom (S := S ⊗[R] S) =\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Pullback.lean\", \"line\": \"69\", \"text\": \"  rw [isUnit_eqLocus_mk_iff, Prod.isUnit_iff]\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"line\": \"301\", \"text\": \"def objSupIsoProdEqLocus {X : TopCat.{w}} (F : X.Sheaf CommRingCat) (U V : Opens X) :\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"line\": \"311\", \"text\": \"theorem objSupIsoProdEqLocus_hom_fst {X : TopCat.{w}} (F : X.Sheaf CommRingCat) (U V : Opens X)\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"line\": \"313\", \"text\": \"    ((F.objSupIsoProdEqLocus U V).hom x).1.fst = F.1.map (homOfLE le_sup_left).op x :=\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"line\": \"319\", \"text\": \"theorem objSupIsoProdEqLocus_hom_snd {X : TopCat.{w}} (F : X.Sheaf CommRingCat) (U V : Opens X)\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"line\": \"321\", \"text\": \"    ((F.objSupIsoProdEqLocus U V).hom x).1.snd = F.1.map (homOfLE le_sup_right).op x :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"386\", \"text\": \"    use (X.sheaf.objSupIsoProdEqLocus S U.1).inv ⟨⟨_ * _, _ * _⟩, this⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"387\", \"text\": \"    refine (X.sheaf.objSupIsoProdEqLocus_inv_eq_iff _ _ _ (X.basicOpen_res _\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf equalizer and polynomial factorization results do not supply invariant rank strata, the product of invariant rings, and the prescribed common-degree annihilator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate rings on finitely many invariant open and closed pieces form product rings; monic polynomial equations on the pieces combine after multiplying by powers of X",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Polynomial.UniversalFactorizationRing.presentation\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {n : ℕ} →\\n      (m k : ℕ) →\\n        (hn : n = m + k) →\\n          (p : Polynomial.MonicDegreeEq R n) →\\n            Algebra.PreSubmersivePresentation R (Polynomial.UniversalFactorizationRing m k hn p) (Fin m ⊕ Fin k) (Fin n)\", \"doc\": \"The algebraic presentation defining the universal factorization ring structure over a commutative ring $ R $, which encodes the data required to universally factor a monic polynomial of degree $ n = m\"}\n  {\"name\": \"Polynomial.instFinitePresentationUniversalFactorizationRing\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {n : ℕ} (m k : ℕ) (hn : n = m + k) (p : Polynomial.MonicDegreeEq R n),\\n  Algebra.FinitePresentation R (Polynomial.UniversalFactorizationRing m k hn p)\", \"doc\": \"For any commutative ring $ R $ and integers $ m, k $ with $ n = m + k $, the universal factorization ring $ \\\\text{UniversalFactorizationRing}_{m,k}(n) $ is equipped with a commutative ring structure. \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (x : W'.CoordinateRing),\\n  ∃ p q, p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X = x\", \"doc\": \"Let $W$ be an affine Weierstrass curve over a commutative ring $R$, and let $A(W)$ be its coordinate ring. Any element $x \\\\in A(W)$ can be expressed as $x = p + qY$, where $p$ and $q$ are polynomials \"}\n  {\"name\": \"MvPolynomial.finite_universalFactorizationMap\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (n m k : ℕ) (hn : n = m + k),\\n  (MvPolynomial.universalFactorizationMap R n m k hn).Finite\", \"doc\": \"The universal factorization map associated with multivariate polynomial rings is finite, meaning the target ring is finitely generated as a module over the source ring under this map.\"}\n  {\"name\": \"ChevalleyThm.chevalley_mvPolynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {n : ℕ} {M : Submodule ℤ R},\\n  1 ∈ M →\\n    ∀ (k : ℕ) (d : Multiset (Fin n)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin n) R)),\\n      (∀ C ∈ S, C.n ≤ k) →\\n        (∀ C ∈ S,\\n            ∀ (j : Fin C.n),\\n              C.g j ∈\\n                MvPolyno\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, $ k $ a natural number, $ d $ a multiset of indices $\\\\{1, ..., n\\\\}$, and $ S $ a constructible set in the mul\"}\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_6} [inst : CommRing R] (M : Submodule ℤ R),\\n  1 ∈ M →\\n    ∀ (S : PrimeSpectrum.ConstructibleSetData (Polynomial R)),\\n      (∀ C ∈ S, ∀ (j : Fin C.n) (k : ℕ), (C.g j).coeff k ∈ M) →\\n        ∃ T,\\n          PrimeSpectrum.comap Polynomial.C '' S.toSet = T.toSet ∧\\n            ∀ C ∈ T, C.n ≤\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\n  {\"name\": \"Polynomial.instCommRingUniversalFactorizationRing\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {n : ℕ} →\\n      (m k : ℕ) →\\n        (hn : n = m + k) →\\n          (p : Polynomial.MonicDegreeEq R n) → CommRing (Polynomial.UniversalFactorizationRing m k hn p)\", \"doc\": \"Given a commutative ring $ R $ and integers $ m, k $ with $ n = m + k $, this constructs the commutative ring structure on the universal factorization ring $ \\text{UniversalFactorizationRing}_{m,k}(n) \"}\n  {\"name\": \"MvPolynomial.finitePresentation_universalFactorizationMap\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (n m k : ℕ) (hn : n = m + k),\\n  (MvPolynomial.universalFactorizationMap R n m k hn).FinitePresentation\", \"doc\": \"The algebra structure on the codomain of the universal factorization map from $ R $ to a multivariate polynomial ring is finitely presented, meaning it is isomorphic to a quotient of a polynomial alge\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf equalizer and polynomial factorization results do not supply invariant rank strata, the product of invariant rings, and the prescribed common-degree annihilator"
+  },
+  {
+   "tool": "grep",
+   "query": "eqLocus.*(pi|prod)|(?:pi|prod).*eqLocus|monic.*(?:glue|patch)|(?:glue|patch).*monic",
+   "results": "9 hits: Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern sheaf gluing, affine schemes or polynomial factorizations; none states invariant rank decomposition together with equalizer products and the common-degree annihilator"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite product decomposition of an invariant subring and gluing monic polynomial equations of unequal degrees",
+   "results": "8 hits: Polynomial.monic_finprod_of_monic, Polynomial.UniversalFactorizationRing.presentation, MvPolynomial.decomposition, Polynomial.UniversalFactorizationRing, Polynomial.degree_multiset_prod_of_monic, Polynomial.natDegree_prod_of_monic, Polynomial.UniversalFactorizationRing.factor₁_mul_factor₂, Polynomial.monic_prod_of_monic",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern sheaf gluing, affine schemes or polynomial factorizations; none states invariant rank decomposition together with equalizer products and the common-degree annihilator"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eqLocus\", \"pi\"",
+   "results": "6 hits: TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern sheaf gluing, affine schemes or polynomial factorizations; none states invariant rank decomposition together with equalizer products and the common-degree annihilator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free affine scheme groupoid invariant rank decomposition and gluing monic annihilating polynomials",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.not_isIntegralHom, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.AffineCover.X",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern sheaf gluing, affine schemes or polynomial factorizations; none states invariant rank decomposition together with equalizer products and the common-degree annihilator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equalizer subrings of finite products of commutative rings and common degree monic equations on the factors",
+   "results": "8 hits: Polynomial.exists_image_comap_of_monic, ax_grothendieck_zeroLocus, FirstOrder.genericPolyMapSurjOnOfInjOn, MvPolynomial.finite_universalFactorizationMap, Polynomial.UniversalCoprimeFactorizationRing.homEquiv, ax_grothendieck_of_locally_finite, MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination, Polynomial.instFinitePresentationUniversalFactorizationRing",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern sheaf gluing, affine schemes or polynomial factorizations; none states invariant rank decomposition together with equalizer products and the common-degree annihilator"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-integral-invariants",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical supporting affine-quotient expansion beneath the lissity/support argument of lem-a1-affine-hc0. Precise current use: lem-a1-affine-groupoid-integral-invariants, old proof steps 1, 2 and 6; invariant rank decomposition, product equalizers and common-degree padding (Stacks 03BJ, first paragraph). The current main-20261015 ancestor has the support proof; no fourth paragraph is claimed.",
+   "via": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-groupoid-rankwise-monic-gluing",
+  "worker": "stage1",
+  "summary": "Reused the existing reviewed invariant-rank-strata lemma and Mathlib disjoint-open section product; wrote the finite-product induction, componentwise equalizer isomorphism, explicit degree padding and evaluation, and the empty-scheme zero-ring case. No new nodes, statement changes, Lean writes or builds.",
+  "blueprint": "Historical affine-quotient supporting expansion beneath lem-a1-affine-hc0, specifically the first proof paragraph of Stacks 03BJ as invoked by lem-a1-affine-groupoid-integral-invariants: rankwise reduction and recombination. The current main-20261015 ancestor only states compact-support vanishing; no nonexistent paragraph is claimed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-770f77e19",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-770f77e19 (reviewer sub-agent of L); spot-checked: I read the full mathematics of Q49 lem-a1-affine-groupoid-rankwise-monic-gluing @770f77e19237. Diffed against the copy of the item in the NL f860158c snapshot: the statement, stmt_deps, blueprint and source are byte-identical. Only the proof, proof_deps, proof_origin, status, split_report and appended searches are new. There are no new nodes and no repair note (no re-split order). Sources checked against the tags file: Stacks groupoids.tex 03BI (lemma-finite-locally-free-disjoint-free) and 03BJ first paragraph (lemma-integral-over-invariants: rank reduction, finitely many U_r), and schemes.tex 01I5 (sheaf-property product R = O(U)×O(V)). No SGA source is used. Steps checked against the cited statements. Step 1: lem-a1-affine-groupoid-invariant-rank-strata (same unit, reviewed) has exactly these hypotheses and gives finite I⊂Z≥1, nonempty affine clopen U_r, R_r = s⁻¹ = t⁻¹, restricted groupoids, degree r, and I = ∅ for U = ∅. Step 2: finite induction on the Mathlib leaf lem-weil-pbc-sheaf-disjoint-union-product, with Γ = A, B from def-weil-affine-spectrum and componentwise σ, τ by naturality of s♯ under restriction. Step 3: both directions of ρ_C, including surjectivity. Steps 4-5: the padding coefficients are explicit, Q is monic since A ≠ 0 for nonempty U, and ρ_A(Q(a))_r = a_r^{d−r}P_r(a_r) = 0. Step 6: in the empty case the binary leaf with both opens empty forces O(∅) = 0, so A = B = C = 0, and T is monic in the zero ring. Edge cases tested: empty, identity groupoid, constant rank, mixed ranks {2,3} with padding. The duplicate search (rg -L over the DAG) found no node for a finite product of section rings or for polynomial padding. Off-unit citations: only a Mathlib leaf, and tool_uses is empty. Advisory only: the statement says 'degree r' rather than 'finite locally free of degree r', which is automatic for a restriction over an open. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidRankwiseMonicGluing",
+  "declaration": "AlgebraicGeometry.affineGroupoid_rankwise_monic_gluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidRankwiseMonicGluing.lean",
+  "statement": "theorem affineGroupoid_rankwise_monic_gluing (A B : CommRingCat.{u}) (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (hG : Scheme.IsGroupoid s t e i c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] : ∃ (I : Finset ℕ) (U : I → (Spec A).Opens) (V : I → (Spec B).Opens) (s' t' : ∀ r : I, (V r).toScheme ⟶ (U r).toScheme) (e' : ∀ r : I, (U r).toScheme ⟶ (V r).toScheme) (i' : ∀ r : I, (V r).toScheme ⟶ (V r).toScheme) (c' : ∀ r : I, pullback (s' r) (t' r) ⟶ (V r).toScheme) (k : ∀ r : I, pullback (s' r) (t' r) ⟶ pullback s t) (C : Subring A) (Cᵣ : ∀ r : I, Subring Γ((U r).toScheme, ⊤)) (ρA : A ≃+* ∀ r : I, Γ((U r).toScheme, ⊤)) (ρB : B ≃+* ∀ r : I, Γ((V r).toScheme, ⊤)) (ρC : C ≃+* ∀ r : I, Cᵣ r), (∀ r : I, 0 < r.1) ∧ (∀ r : I, Nonempty (U r).toScheme ∧ IsClosed (U r : Set (Spec A)) ∧ IsAffine (U r).toScheme) ∧ Pairwise (fun r r' : I ↦ Disjoint (U r) (U r')) ∧ (⨆ r : I, U r) = ⊤ ∧ (∀ r : I, V r = s ⁻¹ᵁ U r ∧ V r = t ⁻¹ᵁ U r ∧ IsAffine (V r).toScheme ∧ Scheme.IsGroupoid (s' r) (t' r) (e' r) (i' r) (c' r) ∧ (s' r).IsFiniteLocallyFreeOfDegree r.1 ∧ (t' r).IsFiniteLocallyFreeOfDegree r.1 ∧ s' r ≫ (U r).ι = (V r).ι ≫ s ∧ t' r ≫ (U r).ι = (V r).ι ≫ t ∧ e' r ≫ (V r).ι = (U r).ι ≫ e ∧ i' r ≫ (V r).ι = (V r).ι ≫ i ∧ k r ≫ pullback.fst s t = pullback.fst (s' r) (t' r) ≫ (V r).ι ∧ k r ≫ pullback.snd s t = pullback.snd (s' r) (t' r) ≫ (V r).ι ∧ c' r ≫ (V r).ι = k r ≫ c) ∧ C = (Spec.preimage s).hom.eqLocus (Spec.preimage t).hom ∧ (∀ r : I, Cᵣ r = (s' r).appTop.hom.eqLocus (t' r).appTop.hom) ∧ (∀ (a : A) (r : I), ρA a r = (U r).ι.appTop ((Scheme.ΓSpecIso A).inv a)) ∧ (∀ (b : B) (r : I), ρB b r = (V r).ι.appTop ((Scheme.ΓSpecIso B).inv b)) ∧ (∀ (a : A) (r : I), ρB ((Spec.preimage s).hom a) r = (s' r).appTop (ρA a r) ∧ ρB ((Spec.preimage t).hom a) r = (t' r).appTop (ρA a r)) ∧ (∀ (a : C) (r : I), (ρC a r : Γ((U r).toScheme, ⊤)) = ρA (a : A) r) ∧ (∀ (a : A) (P : ∀ r : I, Polynomial (Cᵣ r)), I.Nonempty → (∀ r : I, (P r).Monic ∧ (P r).natDegree = r.1 ∧ (P r).eval₂ (Cᵣ r).subtype (ρA a r) = 0) → ∃ (d : ℕ) (Q : Polynomial C), d = I.sup id ∧ Q = Polynomial.X ^ d + ∑ j ∈ Finset.range d, Polynomial.C (ρC.symm (fun r : I ↦ ((Polynomial.X ^ (d - r.1)) * P r).coeff j)) * Polynomial.X ^ j ∧ Q.Monic ∧ (∀ r : I, Q.map ((Pi.evalRingHom (fun r : I ↦ Cᵣ r) r).comp ρC.toRingHom) = Polynomial.X ^ (d - r.1) * P r) ∧ (∀ r : I, ρA (Q.eval₂ C.subtype a) r = (ρA a r) ^ (d - r.1) * (P r).eval₂ (Cᵣ r).subtype (ρA a r) ∧ (ρA a r) ^ (d - r.1) * (P r).eval₂ (Cᵣ r).subtype (ρA a r) = 0) ∧ Q.eval₂ C.subtype a = 0) ∧ (IsEmpty (Spec A) → I = ∅ ∧ Subsingleton A ∧ (Polynomial.X : Polynomial C).Monic ∧ ∀ a : A, (Polynomial.X : Polynomial C).eval₂ C.subtype a = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a8ad155f",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Item record is unchanged except its new lean field; the six stmt_dep records match side-live exactly; no new nodes and no supersession. Checked every clause against the node and Stacks 03BJ/03BI/01I5: the recorded declarations (Spec, Spec.preimage for s♯/t♯, pullback s t, Scheme.IsGroupoid, IsFiniteLocallyFree/OfDegree) are used throughout, and every witness (restricted groupoid maps, the induced map on composable pairs, C and C_r as equalizers, ρA/ρB as restriction maps, ρC as the restriction of ρA) is fixed by equations. Monic plus natDegree r matches T^r + lower terms on nonempty pieces; Q is explicit and its monic, restriction and annihilation clauses are true; the empty-U clause is present. Edge cases checked: empty U, single rank, mixed ranks, rank 0, one universe u throughout. Docstrings carry source, blueprint id and the six proof steps; the statement field is verbatim; one sorry; no definitions. Not recompiled (no file changed). Advisory: the landed IsGroupoidScheme duplicates Scheme.IsGroupoid (pre-existing)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T082926-L-2238782",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

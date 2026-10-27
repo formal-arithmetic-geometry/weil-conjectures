@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-flat-line-derived-reduction",
+ "kind": "statement",
+ "title": "derived reduction for a flat line.",
+ "statement": "theorem flatLineDerivedReduction\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u}) (n : ℕ)\n    (L : scalarReductionSource.{u, u} l E S) (N : scalarReductionTarget.{u, u} l E S n)\n    [L.IsFiniteLocallyFreeOfRank 1] [N.IsFiniteLocallyFreeOfRank 1]\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).Additive]\n    [PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L)]\n    [PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L)]\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := integralCoefficientCommRingSheaf.{u, u} l E S n) N).Additive]\n    [PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := integralCoefficientCommRingSheaf.{u, u} l E S n) N)]\n    [PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := integralCoefficientCommRingSheaf.{u, u} l E S n) N)]\n    (b : (scalarReductionExtension.{u, u} l E S n).obj L ≅ N) :\n    Nonempty ((scalarReductionDerivedExtension.{u, u} l E S n).obj\n      ((DerivedCategory.singleFunctor _ 0).obj L) ≅\n        (DerivedCategory.singleFunctor (scalarReductionTarget.{u, u} l E S n) 0).obj N) ∧\n    Nonempty ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).mapDerivedCategory ⋙\n      scalarReductionDerivedExtension.{u, u} l E S n ≅\n      scalarReductionDerivedExtension.{u, u} l E S n ⋙\n        (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := integralCoefficientCommRingSheaf.{u, u} l E S n) N).mapDerivedCategory)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "integral twists computed levelwise modulo the uniformizer"
+ },
+ "proof": [
+  {
+   "text": "Package the published ordinary quotient extension, derived extension and universal counit as a SuccessiveDerivedQuotient.Presentation. Transport the specified ordinary comparison b from its published scalar-extension presentation to changeOfRingsOfUniverses by extensionIso. Trivializing covers come from local freeness of rank one.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "integral twists computed levelwise modulo the uniformizer"
+   }
+  },
+  {
+   "text": "Apply exists_lineData to the two lines. Its single_flat field makes the degree-zero source line K-flat, so the published reduction counit is invertible. Compose this counit with the homotopy quotient isomorphisms, the additive single-complex comparison and b to get the first conclusion.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-ordinary-line-derived-scalar-comparison",
+    "lem-pur-line-unbounded-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "integral twists computed levelwise modulo the uniformizer"
+   }
+  },
+  {
+   "text": "Extend b to all signed powers with exists_signedLineComparison. Apply ordinary_line_derived_scalar_comparison to the quotient presentation and these powers. Its exponent-one derived comparison gives commutation with the published K-flat derived line tensors.",
+   "uses": [
+    "lem-pur-ordinary-line-derived-scalar-comparison",
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "integral twists computed levelwise modulo the uniformizer"
+   }
+  },
+  {
+   "text": "Use siteSheafTensorRightIso and each LineData.factors field to identify the K-flat derived line tensor with the exact functor mapDerivedCategory. Localization.liftNatIso descends these identifications from complexes. Whiskering and composing the exponent-one comparison gives the required natural isomorphism. This works for empty sites and zero section rings, and uses no flatness of the coefficient projection.",
+   "uses": [
+    "lem-pur-ordinary-line-derived-scalar-comparison",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-line-unbounded-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "integral twists computed levelwise modulo the uniformizer"
+   }
+  }
+ ],
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_deps": [
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-pur-ordinary-line-derived-scalar-comparison",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FlatLineDerivedReduction.lean",
+  "place": "stage-3 proof from existing ordinary-line derived scalar comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(tensor|changeOfRings)|changeOfRings.*single",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-25",
+   "verdict": "generic adjunction API used; no exact coefficient-line derived theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with tensor by a locally free line sheaf and computes a flat sheaf in degree zero",
+   "results": "SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.mapFree, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.ιFree_mapFree_inv_assoc, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars commutes with exact tensor by a locally free rank one sheaf and computes its degree zero complex",
+   "results": "ModuleCat.ExtendScalars.obj' (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); Module.Flat.rTensor_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory); Algebra.TensorProduct.instFree (Mathlib.RingTheory.TensorProduct.Free)",
+   "date": "2026-10-26",
+   "verdict": "no exact sheaf-derived comparison; existing project ordinary-line comparison used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1802,
+ "blueprint_uses": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SignedTwistReductionComparison",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-signed-twist-reduction-comparison",
+   "place": "proof step isolated by stage-3 worker"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatLineDerivedReduction",
+  "file": "lean/Sheaf/Paper/FlatLineDerivedReduction.lean",
+  "declaration": "WeilConjectures.flatLineDerivedReduction",
+  "statement": "theorem flatLineDerivedReduction\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u}) (n : ℕ)\n    (L : scalarReductionSource.{u, u} l E S) (N : scalarReductionTarget.{u, u} l E S n)\n    [L.IsFiniteLocallyFreeOfRank 1] [N.IsFiniteLocallyFreeOfRank 1]\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).Additive]\n    [PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L)]\n    [PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L)]\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := integralCoefficientCommRingSheaf.{u, u} l E S n) N).Additive]\n    [PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := integralCoefficientCommRingSheaf.{u, u} l E S n) N)]\n    [PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := integralCoefficientCommRingSheaf.{u, u} l E S n) N)]\n    (b : (scalarReductionExtension.{u, u} l E S n).obj L ≅ N) :\n    Nonempty ((scalarReductionDerivedExtension.{u, u} l E S n).obj\n      ((DerivedCategory.singleFunctor _ 0).obj L) ≅\n        (DerivedCategory.singleFunctor (scalarReductionTarget.{u, u} l E S n) 0).obj N) ∧\n    Nonempty ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).mapDerivedCategory ⋙\n      scalarReductionDerivedExtension.{u, u} l E S n ≅\n      scalarReductionDerivedExtension.{u, u} l E S n ⋙\n        (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n        (A := integralCoefficientCommRingSheaf.{u, u} l E S n) N).mapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T204825-L-3016714",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T204825-L-3016714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

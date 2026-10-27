@@ -1,0 +1,159 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-transport",
+ "kind": "statement",
+ "title": "Transport supplied ringed tensor representatives and coherence",
+ "statement": "Fix a finite field k0, l prime different from its characteristic, a k0-scheme X, an additive native underived tensor T with normalized tensor-Hom adjunction, its supplied native total-tensor chain comparison with prescribed summands [lem-sf-native-weil-tensor-chain], and a NativeWeilTensorRingedBridge b [def-sf-native-weil-tensor-ringed-bridge]. Fix native closed models M, the prescribed ordinary closed structure S and symmetry beta, hmonoidal and ordinary normalized tensor models hS [def-sf-native-weil-closed-models]. On each of the two ringed sites supply closed symmetric monoidal tensor structures SB,SA with tensor models and representative coherence. Supply a TensorComparison d for b.forget [lem-sf-ringed-forget-tensor-descent], including its chain, representative and coherence equations. On the explicit native monoidal structure m=nativeWeilRingedMonoidal(b,SB) with its fixed transported symmetry [def-sf-native-weil-tensor-ringed-structure], there exists a tensor-forgetting isomorphism t and a NativeWeilTensorPresentation for m,t [def-sf-native-weil-tensor-presentation], together with TensorCoherence for t and the prescribed ordinary symmetry. The native monoidal structure, symmetry and unit are already constructed; this theorem constructs their representative and forgetting equations from the supplied d.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-tensor-ringed-bridge",
+  "def-sf-native-weil-tensor-ringed-structure",
+  "def-sf-native-weil-closed-models",
+  "def-sf-native-weil-tensor-presentation",
+  "lem-sf-ringed-forget-tensor-descent",
+  "lem-sf-native-weil-tensor-chain"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized underived and signed complex comparisons and K-flat localization from native_weil_tensor_ringed_complexes. Form the explicit one-K-flat native model by fully faithful preimage of the supplied ringed representative composite; its naturality is proved by the composed comparison squares.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-complexes",
+    "def-sf-native-weil-tensor-ringed-model",
+    "lem-sf-native-weil-tensor-ringed-model-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "Apply the proved orbit-sum retract lemma to the supplied chain comparison: forgetting preserves full acyclic-test native K-flatness, with no termwise flatness or finite-type assumption.",
+   "uses": [
+    "lem-sf-native-weil-tensor-forget-kflat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "Use the coherent derived-square lemma for the explicit native model, obtaining t, its normalized ordinary one-K-flat model, its representative equation and its four coherence equations. Build NativeWeilTensorComplexData from T, adj, e, the explicit model, the ordinary model and chain. Fill all seven NativeWeilTensorPresentation axioms with he, A.localization, the K-flat forgetting lemma, explicit model naturality, ordinary normalization, hchain and the representative equation. Return this presentation and the supplied coherence.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-derived-square",
+    "def-sf-native-weil-tensor-presentation",
+    "def-sf-native-weil-tensor-ringed-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-tensor-ringed-complexes",
+  "def-sf-native-weil-tensor-ringed-model",
+  "lem-sf-native-weil-tensor-ringed-model-naturality",
+  "lem-sf-native-weil-tensor-forget-kflat",
+  "lem-sf-native-weil-tensor-ringed-derived-square",
+  "def-sf-native-weil-tensor-presentation",
+  "def-sf-native-weil-tensor-ringed-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "H2: explicit one-K-flat model and orbit-retract proof; normalized complex transport and the coherent derived square split separately from steps 1--3; Stacks 06YS, 06YU, 0FPT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A monoidal structure on a derived category transported across an additive equivalence preserving tensor products and units",
+   "results": "Eight hits including CategoryTheory.Monoidal.transport, transportStruct and equivalenceTransported. Generic transport exists; no native Weil representative comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic transport definitions; the normalized native comparison is not in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal.transport\"",
+   "results": "Twelve hits including CategoryTheory.Monoidal.transport, transportStruct, Transported and Functor.Monoidal.transport.",
+   "date": "2026-10-27",
+   "verdict": "Transport of structures is available, but not the native coefficient and representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "transportStruct|instSymmetricCategory|IsoAlgebra.*tensor",
+   "results": "Nine hits including Monoidal/Transport.lean:138 and Monoidal/Braided/Transport.lean:81; no IsoAlgebra tensor presentation.",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib for transport; no exact native statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorGeometry",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom/evaluation paragraph of cor-coef-verdier-weil-equivariance; native tensor geometry steps 1--3; Stacks 06YS, 06YU, 0FPT. The blueprint ancestor tool returns None for the parent.",
+   "via": [
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorRingedTransport",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_transport",
+  "statement": "theorem native_weil_tensor_ringed_transport\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})\n    [X.Over (Spec (CommRingCat.of k₀))]\n    (T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤\n      ProEtaleWeilSheaf k₀ l X)\n    [T.Additive] [∀ P, (T.obj P).Additive]\n    (adj : T ⊣₂ ihomBifunctor k₀ l X)\n    (e : Functor.uncurry.obj T ⋙\n        Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X) ≅\n      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).prod\n        (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) ⋙\n          Functor.uncurry.obj\n            (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))\n    (he : ∀ (P Q I : ProEtaleWeilSheaf k₀ l X)\n      (f : Q ⟶ ((ihomBifunctor k₀ l X).obj (op P)).obj I),\n      e.inv.app (P, Q) ≫\n          (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map\n            (((adj.adj P).homEquiv Q I).symm f) =\n        ((Mod.ihomAdjunction P.carrier).homEquiv Q.carrier I.carrier).symm f.hom.f)\n    [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]\n    (chain : ∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ,\n      ((Endofunctor.IsoAlgebra.forget\n        (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj\n          (CochainComplex.mapBifunctor P Q T) ≅\n        ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q))\n    (hchain : ∀ (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)\n      (p q n : ℤ) (h : p + q = n),\n      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map\n          (HomologicalComplex.ιMapBifunctor P Q T (.up ℤ) p q n h) ≫\n            (chain P Q).hom.f n =\n        e.hom.app (P.X p, Q.X q) ≫ HomologicalComplex.ιMapBifunctor\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q)\n          (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n          (.up ℤ) p q n h)\n    (b : NativeWeilTensorRingedBridge k₀ l X)\n    [HasDerivedCategory.{u + 2} (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)]\n    [HasDerivedCategory.{u + 2} (RingedTensorModules.{u + 1, u + 1, u + 1} b.K b.Q)]\n    (M : NativeClosedHomModels k₀ l X)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (β : @SymmetricCategory _ _ S.monoidal)\n    (hmonoidal : S.monoidal = (inferInstance : MonoidalCategory\n      (DerivedCategory (ProEtale.AdicSheaf l\n        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))))\n    (hS : NativeOrdinaryTensorModels l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber\n      M.ordinaryHom M.ordinaryRepresentatives S β)\n    (SB : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses.{u + 1, u + 1, u + 1, u + 2} b.J b.R))\n    (TB : CoefficientTensorModels.{u + 1, u + 1, u + 1, u + 2} b.J b.R SB)\n    (βB : @SymmetricCategory _ _ SB.monoidal)\n    (cB : RingedDerivedTensorCoherence b.J b.R SB TB βB)\n    (SA : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses.{u + 1, u + 1, u + 1, u + 2} b.K b.Q))\n    (TA : CoefficientTensorModels.{u + 1, u + 1, u + 1, u + 2} b.K b.Q SA)\n    (βA : @SymmetricCategory _ _ SA.monoidal)\n    (cA : RingedDerivedTensorCoherence b.K b.Q SA TA βA)\n    (d : RingedForgetTensorTransposition.TensorComparison\n      b.J b.R b.K b.Q b.forget b.underived SB TB βB cB SA TA βA cA) :\n    ∃ t : @MonoidalCategory.tensor _ _ (nativeWeilRingedMonoidal b SB) ⋙\n        nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor,\n    ∃ _P : NativeWeilTensorPresentation k₀ l X M S (nativeWeilRingedMonoidal b SB) t,\n      Nonempty (RingedForgetTensorTransposition.TensorCoherence\n        (nativeWeilRingedMonoidal b SB) S.monoidal\n        (nativeWeilRingedSymmetric b SB βB) β (nativeForget k₀ l X) t)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T094352-L-218480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T123444-L-2301020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

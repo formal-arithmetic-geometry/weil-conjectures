@@ -1,0 +1,162 @@
+{
+ "id": "lem-sf-open-factor-quotient-realization",
+ "kind": "statement",
+ "title": "The fixed open extension has its normalized strict quotient-tower comparison",
+ "statement": "Fix l,E and an open immersion j:U→X, with reduction calculi SX,SU, Operations o, TensorComparison st, ordinary reductions AX,AU, semilinear comparison m, integral comparison c and augmented-square comparison q as in [lem-sf-open-tensor-quotient-augmentation]. In the fixed presentation [def-sf-pull-completion-comparison], there is a natural isomorphism t from the quotient tower of termwise j-extension to termwise j-extension of the quotient tower. Its components commute with the actual quotient augmentation, and its hom is the unique natural transformation with that augmentation equation. This is a comparison of entire strict towers of complexes. It asserts no derived-completion comparison, pullback realization or geometry.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations."
+ },
+ "stmt_deps": [
+  "lem-sf-open-tensor-quotient-augmentation",
+  "def-sf-pull-completion-comparison",
+  "def-sf-integral-open-operations",
+  "def-sf-integral-open-reduction-comparison-data",
+  "def-sf-open-semilinear-tensor-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved ordinary quotient module comparison toolkit: the quotient augmentation is an epimorphism and exhibits the quotient as the cokernel of multiplication by the (n+1)-st power of the completed uniformizer. Identify the published direct coefficient map with ordinaryCompletedRingMap by their finite-projection equations. Its compatibility with the constant uniformizer shows that direct image preserves the scalar endomorphism. Twice applying the adjunction hom equivalence, first for pullback/direct image and then for open extension/pullback, shows that the published open extension preserves this endomorphism.",
+   "uses": [
+    "lem-fix-ordinary-quotient-module-comparison",
+    "def-fix-qcqs-completion-ordinary-models",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The published open extension is additive and preserves cokernels because it is a left adjoint. Consequently its image of the source quotient augmentation and the target quotient augmentation are cokernels of the same scalar endomorphism. Their universal properties give the canonical isomorphism, normalized by the augmentation equation. Cancel the epimorphic target augmentation to prove naturality in the module. Apply mapHomologicalComplex to obtain the natural comparison on complexes at each quotient level.",
+   "uses": [
+    "lem-fix-ordinary-quotient-module-comparison",
+    "def-pur-integral-compact-support-coefficient-data",
+    "def-sf-pull-completion-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual complex augmentation has degreewise components equal to the ordinary quotient module unit, by their common pure-tensor formula. It is therefore epi in every degree, hence epi as a complex map. The level comparison has the prescribed augmentation equation. Cancel the augmentation and use its naturality in the tower index to prove compatibility with every tower arrow, obtaining an isomorphism of entire strict towers. Naturality in the complex follows from the level comparisons. Finally cancel each augmentation and apply complex/tower/natural-transformation extensionality to prove the asserted uniqueness. This works for all levels including n=0, the zero complex and the empty site; no nonzero section or lifting choice is needed.",
+   "uses": [
+    "lem-fix-ordinary-quotient-module-comparison",
+    "def-pur-integral-derived-operations",
+    "def-sf-pull-completion-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-ordinary-quotient-module-comparison",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-pull-completion-comparison",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Open-factor strict quotient normalization: F1 uses preservation of the uniformizer cokernel and augmentation epimorphisms, rather than the ordinary-transport and tensor-comparison route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact open extension by zero commutes with derived completion and preserves its augmentation unit",
+   "results": "IsAdicComplete.StrictMono.of_comp_lift; IsAdicComplete.StrictMono.of_lift; HomologicalComplex.extendSingleIso_inv_f_assoc; HomologicalComplex.extendSingleIso; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; HomologicalComplex.extend_exactAt; IsAdicComplete.StrictMono.factorPow_comp_extend; HomologicalComplex.extendSingleIso_hom_f_assoc",
+   "date": "2026-10-27",
+   "verdict": "No complete fixed-coefficient open realization. Generic adjunction and exact-derived-functor APIs are used in the assembly; project declarations were searched separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": "CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-27",
+   "verdict": "No complete fixed-coefficient open realization. Generic adjunction and exact-derived-functor APIs are used in the assembly; project declarations were searched separately."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*open|open.*completion|openDerivedAdjunction",
+   "results": "Mathlib/NumberTheory/Padics/WithVal.lean; Mathlib/NumberTheory/Padics/WithVal.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/Padics/PadicNumbers.lean; Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean",
+   "date": "2026-10-27",
+   "verdict": "No complete fixed-coefficient open realization. Generic adjunction and exact-derived-functor APIs are used in the assembly; project declarations were searched separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact open extension quotient completion normalized unit strict towers",
+   "results": "UniformSpace.Completion; UniformSpace.Completion.completeSpace; UniformSpace.Completion.uniformSpace; UniformSpace.Completion.cPkg; UniformSpace.Completion.coe'; AbstractCompletion.ofComplete; UniformSpace.Completion.coe_eq; UniformSpace.Completion.t0Space",
+   "date": "2026-10-27",
+   "verdict": "No complete fixed-coefficient open realization. Generic adjunction and exact-derived-functor APIs are used in the assembly; project declarations were searched separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized constant coefficient transport between modules on an open subscheme and modules on the slice ringed site",
+   "results": "SheafOfModules.pushforwardSections; ModuleCat.Tilde.res_const; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Modules.restrictFunctor; ModuleCat.tildeInModuleCat; ModuleCat.Tilde.toOpen; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Scheme.Modules",
+   "date": "2026-10-27",
+   "verdict": "No match for the fixed completed coefficient presentation or its strict quotient-generator normalization. Scheme.Modules is the structure-sheaf category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along an open immersion commutes with strict quotient tensor towers and derived completion",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_cone_of_left_condition; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset",
+   "date": "2026-10-27",
+   "verdict": "No match for the fixed completed coefficient presentation or its strict quotient-generator normalization. Scheme.Modules is the structure-sheaf category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenFactorOpenRealization",
+  "group": "S5",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations.",
+   "via": [
+    "lem-sf-open-factor-open-realization",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenFactorQuotientRealization",
+  "file": "lean/Sheaf/SixFunctors/OpenFactorQuotientRealization.lean",
+  "declaration": "WeilConjectures.OpenFactorCoherence.openFactorQuotientRealization",
+  "statement": "theorem openFactorQuotientRealization\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    (SX : CoefficientDerivedSystemCalculus l E X)\n    (SU : CoefficientDerivedSystemCalculus l E U)\n    (o : IntegralOpenReduction.Operations l E j)\n    (st : IntegralOpenReduction.TensorComparison l E j o)\n    (AX : OpenSemilinearTensor.OrdinaryReduction l E X)\n    (AU : OpenSemilinearTensor.OrdinaryReduction l E U)\n    (m : OpenSemilinearTensor.Comparison l E j o SX SU AX AU st)\n    (c : IntegralOpenReduction.Comparison l E j o SX SU st)\n    (q : OpenTensorQuotient.Comparison l E j o SX SU AX AU st m c) :\n    ∃ t : jCx l E j ⋙ IntegralOnSlice.tower.{u, u} l E X none ≅\n        IntegralOnSlice.tower.{u, u} l E U none ⋙\n          (Functor.whiskeringRight ℕᵒᵖ (Cx l E U) (Cx l E X)).obj (jCx l E j),\n      (∀ (P : Cx l E U) (n : ℕ),\n        ((IntegralOnSlice.augmentation.{u, u} l E X none).app ((jCx l E j).obj P)).app\n            (op n) ≫ (t.hom.app P).app (op n) =\n          (jCx l E j).map\n            (((IntegralOnSlice.augmentation.{u, u} l E U none).app P).app (op n))) ∧\n      (∀ v : jCx l E j ⋙ IntegralOnSlice.tower.{u, u} l E X none ⟶\n          IntegralOnSlice.tower.{u, u} l E U none ⋙\n            (Functor.whiskeringRight ℕᵒᵖ (Cx l E U) (Cx l E X)).obj (jCx l E j),\n        (∀ (P : Cx l E U) (n : ℕ),\n          ((IntegralOnSlice.augmentation.{u, u} l E X none).app ((jCx l E j).obj P)).app\n              (op n) ≫ (v.app P).app (op n) =\n            (jCx l E j).map\n              (((IntegralOnSlice.augmentation.{u, u} l E U none).app P).app (op n))) →\n        v = t.hom)",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T050644-L-249917",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T094359-L-220278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

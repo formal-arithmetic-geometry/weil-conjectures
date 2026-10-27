@@ -1,0 +1,224 @@
+{
+ "id": "lem-trf-complete-local-nonzero-rhom-detection",
+ "kind": "statement",
+ "title": "Derived Hom from any nonzero bounded coherent complex over a complete local ring detects zero",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], with $\\mathfrak m$ its unique proper maximal ideal. Suppose $R$ is complete, meaning that $R\\to\\varprojlim_{n\\geq1}R/\\mathfrak m^n$ is an isomorphism. Work in the ordinary module derived category $D(R)$ [def-weil-abstract-derived-category], realized on the one-object ringed site. Write $D^b_{\\mathrm{fg}}(R)$ for objects whose cohomology is zero outside a finite interval and is finitely generated [def-weil-finitely-generated-module] in every degree. Use the derived internal Hom [def-pur-derived-internal-hom]. For every nonzero $C\\in D^b_{\\mathrm{fg}}(R)$ and every $Z\\in D^b_{\\mathrm{fg}}(R)$,\n$$R\\operatorname{Hom}_R(C,Z)=0\\quad\\Longrightarrow\\quad Z=0.$$\nThere is no scalar-action, finite projective dimension, or finite injective dimension assumption on $C$.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Agent corollary of Tag 0BFR, lemma-ubiquity-dualizing, case (2), and Tag 0A7C, lemma-dualizing, including biduality on unbounded coherent complexes. Tensor nonvanishing and currying give the corollary as recorded in report.md (returned proof steps 3--4)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-pur-derived-internal-hom",
+  "def-pc-ring-hom-extension-shared-definitions"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-complete-local-coherent-duality] to the complete Noetherian local ring $R$. Fix its $\\Omega$ and write $\\mathbb D(K)=R\\operatorname{Hom}_R(K,\\Omega)$. Put $W=\\mathbb D(Z)$. Since $Z\\in D^b_{\\mathrm{fg}}(R)$, the cited boundedness-preservation clause gives $W\\in D^b_{\\mathrm{fg}}(R)$, and its canonical biduality clause gives $Z\\simeq\\mathbb D(W)$.",
+   "uses": [
+    "lem-trf-complete-local-coherent-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0BFR, lemma-ubiquity-dualizing (2), and 0A7C, lemma-dualizing; agent assembly of their coherent duality consequences."
+   }
+  },
+  {
+   "text": "Both $C$ and $W$ have bounded-above finitely generated cohomology. By the closure clause of [lem-trf-local-derived-tensor-nonvanishing], $T=C\\otimes_R^{\\mathbf L}W$ belongs to $D^-_{\\mathrm{fg}}(R)$. In particular it belongs to $D_{\\mathrm{fg}}(R)$, even though it need not be bounded below.",
+   "uses": [
+    "lem-trf-local-derived-tensor-nonvanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent; local coherent tensor-closure corollary stated in the cited node."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-bimodule-tensor-hom] to the identity map $S=B=R$, with $(X,E,V)=(C,W,\\Omega)$. Restriction of scalars is the identity and its $J_W(\\Omega)$ is $\\mathbb D(W)$: the specified action $(rh)(w)=h(rw)=r h(w)$ is the ordinary $R$-action on Hom. Its derived isomorphism and Step 1 give $$\\mathbb D(T)\\simeq R\\operatorname{Hom}_R(C,\\mathbb D(W))\\simeq R\\operatorname{Hom}_R(C,Z)=0.$$ The replacement of the target along biduality uses functoriality of [def-pur-derived-internal-hom].",
+   "uses": [
+    "lem-trf-derived-bimodule-tensor-hom",
+    "lem-trf-complete-local-coherent-duality",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A65, lemma-internal-hom; equivalently dga.tex Tags 09LN, lemma-tensor-hom-adjunction, and 09LT, lemma-tensor-hom-adjoint, with all rings equal to R."
+   }
+  },
+  {
+   "text": "Apply the unbounded coherent biduality clause of [lem-trf-complete-local-coherent-duality] to $T$ from Step 2. Step 3 gives $T\\simeq\\mathbb D\\mathbb D(T)\\simeq\\mathbb D(0)=0$; the last equality follows by taking the zero source complex in [def-pur-derived-internal-hom]. The zero-detection clause of [lem-trf-local-derived-tensor-nonvanishing] now gives $C=0$ or $W=0$. As $C\\ne0$, we have $W=0$. Biduality for $Z$ from Step 1 therefore gives $Z\\simeq\\mathbb D(W)=\\mathbb D(0)=0$.",
+   "uses": [
+    "lem-trf-complete-local-coherent-duality",
+    "def-pur-derived-internal-hom",
+    "lem-trf-local-derived-tensor-nonvanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0BFR, lemma-ubiquity-dualizing (2), and 0A7C, lemma-dualizing; agent assembly of their coherent duality consequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-complete-local-coherent-duality",
+  "lem-trf-local-derived-tensor-nonvanishing",
+  "lem-trf-derived-bimodule-tensor-hom",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Agent corollary assembling Tags 0BFR(2), 0A7C, more-algebra.tex 0A65 and 0DJE, with the existing local tensor nonvanishing lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a complete Noetherian local ring derived Hom from any nonzero bounded complex of finite modules detects zero bounded coherent complexes",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective', 'CategoryTheory.hasInjectiveDimensionLT_iff', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.isLE_iff', 'CategoryTheory.HasInjectiveDimensionLT.mk', 'DerivedCategory.isGE_iff', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\"]; note=; digest=08726013b6bd4f21; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern cohomological bounds or vanishing Ext/Tor for projectives, not detection by an arbitrary nonzero coherent complex"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For nonzero finite complexes over a complete local ring RHom vanishing detects the zero complex using a dualizing complex",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"isZero\"",
+   "results": "4 hits; top=['DerivedCategory.isZero_of_isGE', 'DerivedCategory.isZero_of_isLE', 'DerivedCategory.Plus.isZero_homology_of_isGE', 'DerivedCategory.Plus.isZero_homology_of_isLE']; note=; digest=3d7e6c26a6272676; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern cohomological bounds or vanishing Ext/Tor for projectives, not detection by an arbitrary nonzero coherent complex"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|RHom.*(nonzero|[Zz]ero)|complete.*local.*[Hh]om",
+   "results": "25 hits; top=['Mathlib/Data/Set/Defs.lean', 'Mathlib/LinearAlgebra/Contraction.lean', 'Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean', 'Mathlib/LinearAlgebra/TensorProduct/Map.lean', 'Mathlib/LinearAlgebra/TensorProduct/Map.lean', 'Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean', 'Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean']; note=; digest=8f252c5be964e05c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern cohomological bounds or vanishing Ext/Tor for projectives, not detection by an arbitrary nonzero coherent complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local duality converts vanishing derived Hom into vanishing derived tensor product of nonzero finite complexes",
+   "results": "8 hits; top=['CategoryTheory.isZero_Tor_succ_of_projective', \"CategoryTheory.isZero_Tor'_succ_of_projective\", 'isZero_Ext_succ_of_projective', 'CategoryTheory.hasProjectiveDimensionLT_iff', 'Rep.isZero_Tor_succ_of_projective', 'CategoryTheory.hasInjectiveDimensionLT_iff', 'DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective', 'CategoryTheory.HasProjectiveDimensionLT.subsingleton']; note=; digest=6bb436d4d1a60008; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern cohomological bounds or vanishing Ext/Tor for projectives, not detection by an arbitrary nonzero coherent complex"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|RHom.*(nonzero|[Zz]ero)|complete.*local.*[Hh]om",
+   "results": "2 hits; top=['Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/Algebra/Homology/HomotopyFiber.lean']; note=; digest=d9e4cdc09590e62e; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern cohomological bounds or vanishing Ext/Tor for projectives, not detection by an arbitrary nonzero coherent complex"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|rhom.*(nonzero|isZero)|hom.*conservative",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/HomotopyFiber.lean']; note=; digest=064930e5919f47f9; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match: returned bounds, injective/projective Ext vanishing, acyclicity criteria or HomotopyFiber terminology do not assert complete-local RHom zero detection for arbitrary nonzero coherent sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing derived Hom from a nonzero coherent complex over a complete local ring implies its bounded coherent target is zero",
+   "results": "8 hits; top=['HomologicalComplex.ExactAt.isZero_homology', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'DerivedCategory.isZero_of_isLE', 'CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat', 'HomologicalComplex.acyclic_of_isZero', 'CochainComplex.isZero_of_isStrictlyGE', 'DerivedCategory.isZero_of_isGE', 'HomologicalComplex.exactAt_iff_isZero_homology']; note=; digest=d36181fa99fd2b92; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: returned bounds, injective/projective Ext vanishing, acyclicity criteria or HomotopyFiber terminology do not assert complete-local RHom zero detection for arbitrary nonzero coherent sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"isZero\"",
+   "results": "4 hits; top=['DerivedCategory.isZero_of_isGE', 'DerivedCategory.isZero_of_isLE', 'DerivedCategory.Plus.isZero_homology_of_isGE', 'DerivedCategory.Plus.isZero_homology_of_isLE']; note=; digest=3d7e6c26a6272676; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: returned bounds, injective/projective Ext vanishing, acyclicity criteria or HomotopyFiber terminology do not assert complete-local RHom zero detection for arbitrary nonzero coherent sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a nonzero bounded finite complex over a complete Noetherian local ring detects zero coherent complexes",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'DerivedCategory.isLE_iff', 'DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective', 'DerivedCategory.isGE_iff', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE', 'DerivedCategory.isZero_of_isLE', 'DerivedCategory.isZero_of_isGE', 'DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE']; note=; digest=172e0e782993a9fb; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: returned bounds, injective/projective Ext vanishing, acyclicity criteria or HomotopyFiber terminology do not assert complete-local RHom zero detection for arbitrary nonzero coherent sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local duality converts derived Hom vanishing to tensor vanishing for finite complexes",
+   "results": "8 hits; top=['DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective', 'DerivedCategory.isLE_iff', \"CategoryTheory.isZero_Tor'_succ_of_projective\", 'CategoryTheory.isZero_Tor_succ_of_projective', 'DerivedCategory.isGE_iff', 'CochainComplex.IsKProjective.leftOrthogonal', 'DerivedCategory.isZero_of_isLE', 'CochainComplex.isKProjective_iff_leftOrthogonal']; note=; digest=ea00c76f26250e49; directory=Mathlib/",
+   "date": "2026-10-23",
+   "verdict": "no match: returned bounds, injective/projective Ext vanishing, acyclicity criteria or HomotopyFiber terminology do not assert complete-local RHom zero detection for arbitrary nonzero coherent sources."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semidualizing-rhom-conservative",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Re-split component: Derived Hom from any nonzero bounded coherent complex over a complete local ring detects zero.",
+   "via": [
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-complete-local-nonzero-rhom-detection",
+  "worker": "stage1",
+  "summary": "Q53: retained the exact statement and assembled complete-local coherent biduality, same-ring derived tensor-Hom currying, and local coherent tensor nonvanishing, all already in the DAG. Explicitly used unbounded coherent biduality for the possibly unbounded-below tensor. No new nodes or Mathlib leaves.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), auxiliary nearby-cycle/relative-duality rigidity branch recorded in blueprint.from.place: this item supplies zero detection over a complete local ring used by lem-trf-semidualizing-rhom-conservative. The current latest blueprint ancestor and unit were read; no chapter or unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-2f461bf9d",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-2f461bf9d (reviewer sub-agent of L); spot-checked: I read the item, all four cited statements, the parent semidualizing-rhom-conservative, and Stacks dualizing.tex 0A7C (l.2601: D is an anti-equivalence of D_Coh with D∘D≅id, unbounded) and 0BFR(2), and more-algebra 0DJE. Step 1: the complete-local-coherent-duality node gives Ω, W=D(Z) in D^b_fg and Z≅D(W). Step 2: the closure clause of the local tensor node puts T=C⊗^L W in D^-_fg, which is in D_fg; the step does not claim T is bounded below. Step 3: the bimodule tensor-hom node with S=B=R and (C,W,Ω) gives D(T)≅RHom(C,D(W)); J_W(Ω) is the ordinary Hom complex because R is commutative; functoriality then gives RHom(C,Z)=0. Step 4: unbounded biduality gives T≅D(0)=0, zero detection gives C=0 or W=0, so W=0 since C≠0, hence Z≅D(W)=0. All cited theorem nodes are in the same unit sk-i-curve-zero, so no tool_uses are needed. The transitive closure of the dependencies (748 nodes) does not contain the item, so there is no cycle. A title scan of the DAG found no duplicate. No SGA source is used. Edge cases checked: C=0 is a counterexample without the nonzero hypothesis; the field case holds; k[ε]/ε² with C=Z=k is covered by the unbounded biduality; localness is needed (k×k fails). There are no new nodes and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CompleteLocalNonzeroRHomDetection",
+  "declaration": "DerivedCategory.complete_local_nonzero_rhom_detection",
+  "file": "lean/Sheaf/Algebra/Homology/CompleteLocalNonzeroRHomDetection.lean",
+  "statement": "theorem complete_local_nonzero_rhom_detection (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [HasDerivedCategory.{u} (RingSiteModules R)] (C Z : DerivedCategory (RingSiteModules R)) (hCfin : ∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj C).val.obj (op ⟨PUnit.unit⟩))) (hCbdd : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (RingSiteModules R) i).obj C)) (hC : ¬ IsZero C) (hZfin : ∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj Z).val.obj (op ⟨PUnit.unit⟩))) (hZbdd : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (RingSiteModules R) i).obj Z)) (hHom : IsZero ((derivedInternalHomOfUniverses.{u, u, u, u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op C, Z))) : IsZero Z",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37b480f7a",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery repairs the H3 fault of the 6f5874e84acd return as requested: the statement uses DerivedCategory (RingSiteModules R) with [HasDerivedCategory.{u}], finiteness evaluated at the unique site object, and the derived Hom derivedInternalHomOfUniverses.{u,u,u,u} ⊥ (onePointRingSheaf R). The citer's SignedRingedHom.hom is by definition the same functor with C fixed (RingedInternalHomSignedCalculus.lean:149-155), so the citer's hypothesis matches exactly; the proof dependency complete-local-coherent-duality uses the same category. All clauses match the node (Noetherian, IsLocalRing, IsAdicComplete at the maximal ideal, separate bounded/finite hypotheses for C and Z, C nonzero, conclusion IsZero Z); no extra hypotheses and no universe restriction. Node differs from live only in lean and in stmt_deps, which gains def-pc-ring-hom-extension-shared-definitions, an existing node with a Lean record (allowed). lean.statement verbatim; proof only sorry; source/blueprint docstrings and the four proof steps present; report has Worker report and Second reading sections. Stacks 0A7C/0BFR(2) read. Edge cases C=0 excluded, Z=0, a>b, field, k[e]/e^2, k×k, zero ring all handled. No compile (no change); worker reports clean compile and dry run. Advisory for stage 3: proof deps tensor-nonvanishing and bimodule-tensor-hom are on ModuleCat R, so the proof needs a ModuleCat/RingSiteModules derived comparison compatible with tensor and Hom."
+ }
+}

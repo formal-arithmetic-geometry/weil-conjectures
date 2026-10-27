@@ -1,0 +1,99 @@
+{
+ "id": "lem-diagonal-coefficient-integration-transport",
+ "kind": "statement",
+ "title": "Transport of an integration identity",
+ "statement": "Let C,D,Cprime,Dprime be categories, F:C→D and Fprime:Cprime→Dprime functors, U:C→Cprime and V:D→Dprime, and beta:F⋙V→U⋙Fprime a natural transformation. Let S,L in C and T in D, with arrows a:T→F(S), delta:S→L, trace:F(L)→T whose composite a F(delta) trace is id_T. Given primed endpoints and arrows, source and line comparisons s:U(S)→Sprime, h:U(L)→Lprime, and an isomorphism e:V(T)≅Tprime, suppose the source, class and trace comparison squares commute. Then aprime Fprime(deltaprime) traceprime=id_Tprime.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraphs (1)--(2), transport of the two integration composites"
+ },
+ "proof": [
+  {
+   "text": "Precompose by e.hom. Substitute the source square, the class square, naturality of beta on delta, and the trace square. The composite is V applied to the original identity, followed by e.hom. Cancel e.hom.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "U4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraphs (1)--(2), transport of the two integration composites"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport integration identity through a natural transformation and endpoint isomorphisms; canonical right derived functor computed on K injective complexes; diagonal trace coefficient extension and uniformizer quotient annihilation",
+   "results": "Eight hits, including InjectiveResolution.isoRightDerivedObj and Functor.mapDerivedCategoryFactorsh_hom_app; none states the normalized diagonal comparison. The canonical K-injective unit API is reused.",
+   "date": "2026-10-24",
+   "verdict": "No complete existing diagonal coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits, including rightDerivedUnique and LocalizerMorphism.Derives construction APIs. These provide the canonical unit universal property; they do not assert the geometric coefficient endpoints.",
+   "date": "2026-10-24",
+   "verdict": "Use the published universal-property API for the canonical derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|canonicalDiagonalRightDerived|diagonalUniformizer_annihilator|diagonalCompleted_frame|diagonalCoefficientFamily_extension|diagonalCoefficient_uniformizerFiniteComparison",
+   "results": "Zero hits in the search service. Local rg of both roots found the definitions of Reference, Family and ScalarCompatibility but no constructions.",
+   "date": "2026-10-24",
+   "verdict": "New comparison components are necessary for this reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "date": "2026-10-24",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraphs (1)--(2), transport of the two integration composites",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.IntegrationTransport",
+  "file": "lean/Sheaf/CategoryTheory/IntegrationTransport.lean",
+  "declaration": "CategoryTheory.integration_transport",
+  "declarations": [
+   "CategoryTheory.integration_transport"
+  ],
+  "statement": "theorem integration_transport\n    {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}\n    [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} C'] [Category.{v₄} D']\n    (F : C ⥤ D) (F' : C' ⥤ D') (U : C ⥤ C') (V : D ⥤ D')\n    (mate : F ⋙ V ⟶ U ⋙ F')\n    {S L : C} {T : D} {S' L' : C'} {T' : D'}\n    (s : U.obj S ⟶ S') (line : U.obj L ⟶ L') (e : V.obj T ≅ T')\n    (a : T ⟶ F.obj S) (delta : S ⟶ L) (trace : F.obj L ⟶ T)\n    (a' : T' ⟶ F'.obj S') (delta' : S' ⟶ L') (trace' : F'.obj L' ⟶ T')\n    (hsource : V.map a ≫ mate.app S ≫ F'.map s = e.hom ≫ a')\n    (hdelta : U.map delta ≫ line = s ≫ delta')\n    (htrace : V.map trace ≫ e.hom = mate.app L ≫ F'.map line ≫ trace')\n    (h : a ≫ F.map delta ≫ trace = 𝟙 T) :\n    a' ≫ F'.map delta' ≫ trace' = 𝟙 T'",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "independent cc review: item module diff + 13 new modules/nodes vs clone (Family, ScalarCompatibility, FiniteReductions, FamilyPullback, SupportedSource defs; unit sk-prop-diagonal-tower realized=empty; importer grep = 0)"
+ }
+}

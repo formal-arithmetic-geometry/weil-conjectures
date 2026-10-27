@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-scheme-etale-relative-differentials-comparison",
+ "kind": "statement",
+ "title": "Scheme relative differentials agree with differentials on the small etale ringed topos",
+ "statement": "Let $f:U\\to V$ be any morphism of schemes [def-pc-scheme]. Regard $U,V$ as representable algebraic spaces [def-trf-algebraic-space], and use their small etale ringed topoi and the canonical ringed morphism $(f_{\\mathrm{et}},f^\\sharp)$ [lem-trf-space-enlarged-etale-ringed-site-model, def-weil-pbc-ringed-topos-morphism]. Put $\\mathcal A=f_{\\mathrm{et}}^{-1}\\mathcal O_{V,\\mathrm{et}}$ and $\\mathcal B=\\mathcal O_{U,\\mathrm{et}}$. Define $\\Omega^{\\mathrm{et}}_{U/V}$ as the module sheafification [def-weil-presheaf-modules-sheafification] of $W\\mapsto\\Omega_{\\mathcal B(W)/\\mathcal A(W)}$, using ring differentials [def-weil-pbc-kahler-differentials] and their functorial restriction maps; it has the derivation induced by the sectionwise universal derivations. Modules mean [def-weil-sheaf-of-modules-category]. Let $F=\\Omega^1_{U/V}$ be the usual Zariski relative differential sheaf [def-sc-relative-differential-sheaf], a quasi-coherent module [pqf-def-coherent], and let $F_{\\mathrm{et}}$ be its associated etale module [def-sc-etale-qcoherent-module]. There is a canonical $\\mathcal O_{U,\\mathrm{et}}$-linear isomorphism $F_{\\mathrm{et}}\\xrightarrow{\\sim}\\Omega^{\\mathrm{et}}_{U/V}$ identifying the associated universal derivation with the sectionwise-induced universal derivation. No finite-type, finite-presentation, flatness, separation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04CS, lemma-match-modules-differentials, statement and derivation-normalized isomorphism; Tag 04CT, definition-sheaf-differentials, for representable spaces."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-relative-differential-sheaf",
+  "pqf-def-coherent",
+  "def-sc-etale-qcoherent-module",
+  "def-a1-relative-differentials-pullback-map"
+ ],
+ "proof": [
+  {
+   "text": "For an etale object $h:W\\to U$, apply [lem-sfb-etale-localization-relative-differentials] with $X_2=W$, $X_1=U$, and $S_2=S_1=V$. Write $q_h:h^*F\\xrightarrow{\\sim}\\Omega^1_{W/V}$ for the canonical map. Define $d^a_W(s)=q_h^{-1}(d_{W/V}s)$ in $F_{\\mathrm{et}}(W)=\\Gamma(W,h^*F)$ [def-sc-etale-qcoherent-module]. It is additive and satisfies Leibniz. For an arrow $g:W'\\to W$ over $U$, the two maps from $g^*h^*F$ to $\\Omega^1_{W'/V}$ obtained by composing the canonical differential maps agree: by the scheme differential universal property and module-pullback adjunction, both are determined by sending each pulled-back $da$ to $d((hg)^\\sharp a)$. Thus the $q_h$ agree with the pullback composition comparisons. Since $g$ is etale by [lem-weil-pbc-etale-composition-cancellation], the same localization theorem applies to it, and its formula gives $d^a_W(s)|_{W'}=d^a_{W'}(g^\\sharp s)$. Hence $d^a:\\mathcal B\\to F_{\\mathrm{et}}$ is an additive sheaf map satisfying Leibniz.",
+   "uses": [
+    "lem-sfb-etale-localization-relative-differentials",
+    "def-sc-etale-qcoherent-module",
+    "lem-sfb-relative-differentials-sheaf-universal-property",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CS, first proof paragraph, using More on Morphisms Tag 04BX and Morphisms Tag 01UV (lemma-functoriality-differentials)."
+   }
+  },
+  {
+   "text": "The map $d^a$ annihilates the image of $\\mathcal A=f_{\\mathrm{et}}^{-1}\\mathcal O_{V,\\mathrm{et}}$. Indeed, on an etale object $W\\to U$ the localization and composition identifications of [lem-trf-space-enlarged-etale-ringed-site-model] identify the restriction of this inverse image with that for $W\\to V$. By [lem-weil-pbc-etale-inverse-image-section-description], any section is, on an etale cover $W_i\\to W$, represented by a regular function on some etale $V_i\\to V$ and a map $W_i\\to V_i$ over $V$. Apply the localization theorem to the square $X_2=X_1=W_i$, $S_2=V_i$, $S_1=V$, with source arrow the identity. It identifies $\\Omega^1_{W_i/V}$ with $\\Omega^1_{W_i/V_i}$ on universal differentials. The differential of the pulled-back function is zero, by the base-vanishing clause of the scheme universal derivation. Consequently $d^a$ kills the given section after this cover and therefore globally by the sheaf axiom. This proves that $d^a$ is an $\\mathcal A$-derivation.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-weil-pbc-etale-inverse-image-section-description",
+    "lem-sfb-etale-localization-relative-differentials",
+    "lem-sfb-relative-differentials-sheaf-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CS, first proof paragraph, base-linearity of d^a; Tag 04BX and Etale Cohomology Tag 09XN, lemma-describe-pullback, for local inverse-image sections."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-sheafified-module-differentials-cokernel] to the sheaves $\\mathcal A\\to\\mathcal B$. It identifies the module sheafification in the statement with the representing sheaf for $\\mathcal A$-derivations, with the specified $d_{\\mathrm{et}}$. Therefore $d^a$ gives a unique $\\mathcal B$-linear map $c:\\Omega^{\\mathrm{et}}_{U/V}\\to F_{\\mathrm{et}}$ satisfying $c\\,d_{\\mathrm{et}}=d^a$.",
+   "uses": [
+    "lem-trf-sheafified-module-differentials-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CS, first proof paragraph: the map c; Modules on Sites Tags 04BL, 04BN and 08TP."
+   }
+  },
+  {
+   "text": "Let $G$ be any $\\mathcal B$-module sheaf and $D:\\mathcal B\\to G$ an $\\mathcal A$-derivation. Put $G_U(A)=G(A\\hookrightarrow U)$ for Zariski opens $A$ of $U$; this is the module direct image of [lem-trf-zariski-etale-tensor-sections]. The restriction $D_U:\\mathcal O_U\\to G_U$ is a usual $V$-derivation: the section induced by any regular function on an open of $V$ is in the image of $\\mathcal A$, so $D_U$ kills it. By [lem-sfb-relative-differentials-sheaf-universal-property] it factors uniquely as $\\psi d_{U/V}$ with $\\psi:F\\to G_U$ linear. Apply [lem-trf-etale-tensor-sections-adjunction-extension] to $\\psi$. Since $F$ is quasi-coherent, its presheaf $P_F$ there is exactly the already-sheaf $F_{\\mathrm{et}}$ of [def-sc-etale-qcoherent-module]. We obtain a linear map $\\beta_D:F_{\\mathrm{et}}\\to G$ whose restriction to every Zariski open is $\\psi$, under the unit-compatible identification. In particular $(\\beta_Dd^a)|_{U_{\\mathrm{Zar}}}=D_U$.",
+   "uses": [
+    "lem-trf-zariski-etale-tensor-sections",
+    "lem-sfb-relative-differentials-sheaf-universal-property",
+    "lem-trf-etale-tensor-sections-adjunction-extension",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CS, second and third proof paragraphs: restrict to Zariski opens and extend by the ringed-site adjunction; Descent Tags 070S and 03FH."
+   }
+  },
+  {
+   "text": "In fact $\\beta_Dd^a=D$ on every etale object. The difference $E=\\beta_Dd^a-D$ is a derivation and is zero on all Zariski opens of $U$ by Step 4. Cover an etale $W\\to U$ by affine opens $T=\\operatorname{Spec}B$ mapping into affine opens $A_0=\\operatorname{Spec}A$ of $U$. The map $T\\to A_0$ is etale by the open-immersion, composition and cancellation clauses of [lem-weil-pbc-etale-composition-cancellation]. Naturality implies that $E_T:B\\to G(T)$ vanishes on the image of $A$, since $E_{A_0}=0$. It is therefore an $A$-derivation. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], $\\Omega_{B/A}=0$. The ring universal property [def-weil-pbc-kahler-differentials] forces $E_T=0$. Hence $E_W=0$ by the sheaf axiom for the indicated open cover. No intersection of affine opens was assumed affine, and no quasi-coherence of $G$ was used.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CS, final omitted verification, expanded by the affine derivation argument; Morphisms Tag 02GJ and Algebra Tag 00U1. This step is the elementary factorization of an A-derivation through Omega_{B/A}=0."
+   }
+  },
+  {
+   "text": "If $\\alpha:F_{\\mathrm{et}}\\to G$ also satisfies $\\alpha d^a=D$, its restriction to the Zariski opens factors the same derivation $D_U$. The uniqueness in [lem-sfb-relative-differentials-sheaf-universal-property] gives $\\alpha|_{U_{\\mathrm{Zar}}}=\\psi=\\beta_D|_{U_{\\mathrm{Zar}}}$. Now [lem-trf-etale-tensor-sections-open-determination], with $M=F$ and target $G$, gives $\\alpha=\\beta_D$. Thus $d^a$ has the full universal factorization property, with the specified sectionwise formulas.",
+   "uses": [
+    "lem-sfb-relative-differentials-sheaf-universal-property",
+    "lem-trf-etale-tensor-sections-open-determination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CS, final paragraph: uniqueness of the map out of the associated differential module, using Descent Tag 070S/03FH adjunction."
+   }
+  },
+  {
+   "text": "Take $G=\\Omega^{\\mathrm{et}}_{U/V}$ and $D=d_{\\mathrm{et}}$ in Steps 4--6, and write $b=\\beta_D$. Then $b d^a=d_{\\mathrm{et}}$. Since $(bc)d_{\\mathrm{et}}=b d^a=d_{\\mathrm{et}}$, uniqueness in Step 3 gives $bc=\\mathrm{id}$. Since $(cb)d^a=c d_{\\mathrm{et}}=d^a$, uniqueness in Step 6 gives $cb=\\mathrm{id}$. Thus $b:F_{\\mathrm{et}}\\xrightarrow{\\sim}\\Omega^{\\mathrm{et}}_{U/V}$ is the required canonical isomorphism and identifies the derivations. These equations and the local arguments include empty schemes. No condition was imposed on the original morphism $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CS, final paragraph: corrected mutually-inverse pair c and c-double-prime and the two generator-normalized identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-kahler-differentials",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sfb-etale-localization-relative-differentials",
+  "lem-sfb-relative-differentials-sheaf-universal-property",
+  "lem-trf-etale-tensor-sections-adjunction-extension",
+  "lem-trf-etale-tensor-sections-open-determination",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-zariski-etale-tensor-sections",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-inverse-image-section-description",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04CS, lemma-match-modules-differentials, all proof paragraphs. The final omitted verification is expanded using the elementary affine etale derivation calculation and existing Zariski-open determination. Tag 04BX, lemma-sheaf-differentials-etale-localization, supplies the only new prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "differential|Differential",
+   "sub": "AlgebraicGeometry/Modules",
+   "results": "{\"t\": \"2026-10-23T13:48:34Z\", \"tool\": \"grep\", \"query\": \"differential|Differential\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits construct sectionwise presheaf differentials or ring-level etale base change, not the comparison with the Zariski relative differential sheaf on a scheme. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-235; AlgebraicGeometry/Modules grep has no differential hit. Two semantic phrasings and the ringed-site query were read."
+  },
+  {
+   "tool": "grep",
+   "query": "HasDifferentials|relativeDifferentials|localiz",
+   "sub": "Algebra/Category/ModuleCat/Differentials",
+   "results": "{\"t\": \"2026-10-23T13:50:29Z\", \"tool\": \"grep\", \"query\": \"HasDifferentials|relativeDifferentials|localiz\", \"sub\": \"Algebra/Category/ModuleCat/Differentials\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\"], \"digest\": \"061950e0fe0cf71c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits construct sectionwise presheaf differentials or ring-level etale base change, not the comparison with the Zariski relative differential sheaf on a scheme. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-235; AlgebraicGeometry/Modules grep has no differential hit. Two semantic phrasings and the ringed-site query were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Differentials\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:50:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Differentials\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal'\", \"PresheafOfModulesOfCommRing.HasDifferentials\", \"PresheafOfModulesOfCommRing.HasDifferentials.exists_universal_derivation\", \"PresheafOfModulesOfCommRing.HasDifferentials.mk\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_obj\"], \"digest\": \"63f12b5b81707e02\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits construct sectionwise presheaf differentials or ring-level etale base change, not the comparison with the Zariski relative differential sheaf on a scheme. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-235; AlgebraicGeometry/Modules grep has no differential hit. Two semantic phrasings and the ringed-site query were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Kahler differentials commute with inverse image on the small etale site of a scheme",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:53:10Z\", \"tool\": \"leansearch\", \"query\": \"Relative Kahler differentials commute with inverse image on the small etale site of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"CommRingCat.KaehlerDifferential.d\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"CommRingCat.KaehlerDifferential\", \"CommRingCat.KaehlerDifferential.map\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\"], \"digest\": \"76438693d3b522f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits construct sectionwise presheaf differentials or ring-level etale base change, not the comparison with the Zariski relative differential sheaf on a scheme. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-235; AlgebraicGeometry/Modules grep has no differential hit. Two semantic phrasings and the ringed-site query were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of schemes its differential module as a morphism of small etale ringed topoi is canonically the associated etale sheaf of the Zariski relative differential sheaf",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:53:14Z\", \"tool\": \"leanfinder\", \"query\": \"For any morphism of schemes its differential module as a morphism of small etale ringed topoi is canonically the associated etale sheaf of the Zariski relative differential sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"c730498028fdaa96\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits construct sectionwise presheaf differentials or ring-level etale base change, not the comparison with the Zariski relative differential sheaf on a scheme. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-235; AlgebraicGeometry/Modules grep has no differential hit. Two semantic phrasings and the ringed-site query were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the etale ringed site of a scheme the sheafification of sectionwise relative differentials agrees with the tensor pullback of the usual relative differential sheaf from the Zariski site",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:55:30Z\", \"tool\": \"leanfinder\", \"query\": \"On the etale ringed site of a scheme the sheafification of sectionwise relative differentials agrees with the tensor pullback of the usual relative differential sheaf from the Zariski site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\"], \"digest\": \"155ee63994288d22\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits construct sectionwise presheaf differentials or ring-level etale base change, not the comparison with the Zariski relative differential sheaf on a scheme. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-235; AlgebraicGeometry/Modules grep has no differential hit. Two semantic phrasings and the ringed-site query were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the sheaf of relative differentials on the small etale ringed site equals the etale sheaf associated to the Zariski differential module",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T14:51:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of schemes the sheaf of relative differentials on the small etale ringed site equals the etale sheaf associated to the Zariski differential module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"7d51aface697a6fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf sectionwise differential construction and ring-level tensor base change do not identify the scheme differential sheaf on the two ringed sites. Candidate sources read at Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 and RingTheory/Etale/Kaehler.lean:38-52."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of differentials on a ringed etale topos is tensor extension of the relative Zariski differential sheaf",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T14:54:06Z\", \"tool\": \"leanfinder\", \"query\": \"The sheaf of differentials on a ringed etale topos is tensor extension of the relative Zariski differential sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\"], \"digest\": \"ba85cebcf56a49de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf sectionwise differential construction and ring-level tensor base change do not identify the scheme differential sheaf on the two ringed sites. Candidate sources read at Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 and RingTheory/Etale/Kaehler.lean:38-52."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeDifferentials\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T14:56:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"relativeDifferentials\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map_d\"], \"digest\": \"087a3d986bff6784\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf sectionwise differential construction and ring-level tensor base change do not identify the scheme differential sheaf on the two ringed sites. Candidate sources read at Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 and RingTheory/Etale/Kaehler.lean:38-52."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|etale.*differential|differential.*etale",
+   "sub": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T14:51:35Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials|etale.*differential|differential.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presheaf sectionwise differential construction and ring-level tensor base change do not identify the scheme differential sheaf on the two ringed sites. Candidate sources read at Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 and RingTheory/Etale/Kaehler.lean:38-52."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-differentials-finite-presentation",
+  "date": "2026-10-23",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms. Supporting input: Tags 04CU, 05ZF, finite presentation of the relative differential sheaf on compatible etale charts. Supporting input for this split: Scheme relative differentials agree with differentials on the small etale ringed topos.",
+   "via": [
+    "lem-sfb-space-relative-differentials-finite-presentation",
+    "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-etale-relative-differentials-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the item statement exactly. Constructed the associated derivation by scheme etale localization, checked annihilation of inverse-image base sections on local representatives, used both existing universal-property interfaces, and wrote out the inverse comparison by vanishing of affine etale ring differentials and the existing open-determination theorem. One new statement-only node is the independent scheme etale-localization theorem 04BX, strictly below the 04CS comparison.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting input, through the space-relative-differentials finite-presentation prerequisite. This split realizes the precise Tag 04CS comparison used there. The latest blueprint search has no standalone scheme etale comparison or etale-localization node; blueprint_refs ancestor returns None, retained with the full existing via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic localization/composition model for the small etale ringed morphism already named by the item statement; needed to read inverse-image sections on a chart, not to replace any unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-section-description",
+    "why": "Generic local representatives for sections of an etale inverse image; needed to check that the associated derivation kills its base ring, with no alternative construction in this unit."
+   },
+   {
+    "node": "lem-trf-sheafified-module-differentials-cokernel",
+    "why": "Generic ringed-site universal-derivation interface for sheafified sectionwise differentials; used to match the concrete definition in the item with the representing object in Stacks 04CS."
+   },
+   {
+    "node": "lem-trf-zariski-etale-tensor-sections",
+    "why": "Generic ringed-site restriction/extension comparison; identifies restriction to Zariski opens as the module direct image in the source proof."
+   },
+   {
+    "node": "lem-trf-etale-tensor-sections-adjunction-extension",
+    "why": "Generic section-normalized extension of a Zariski module map to the associated etale tensor-sections presheaf; supplies the adjoint map used in the source proof."
+   },
+   {
+    "node": "lem-trf-etale-tensor-sections-open-determination",
+    "why": "Generic uniqueness of a map out of the associated tensor-sections presheaf from its restriction to Zariski opens; supplies the final uniqueness in the source proof."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic scheme-module tensor-pullback adjunction, needed only to normalize the canonical differential comparison under restrictions."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic identity and composition comparisons for scheme-module pullback, used to compare restrictions of the associated differential sheaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-etale-inverse-image-section-description",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-trf-zariski-etale-tensor-sections",
+  "lem-trf-etale-tensor-sections-adjunction-extension",
+  "lem-trf-etale-tensor-sections-open-determination",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-90ea420e6",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-90ea420e6 (reviewer sub-agent of L); spot-checked: I read Stacks 04CS (spaces-more-morphisms lemma-match-modules-differentials) and 04BX in full, plus every cited statement. The item's statement and stmt_deps are identical to live, and the live node is still unsplit, so this delivery is not superseded. Steps 1-2 build d^a through the new 04BX node: Step 1 applies it with a=h and b=id; Step 2 with a=id and b=V_i->V, using the 09XN local representatives to show d^a kills f^{-1}O_V. Step 3 gets c from the 08TP sheafified-differentials node. Steps 4-6 write out the converse that the source omits: beta_D comes from the 070S adjunction-extension node with no quasi-coherence of G; Step 5 shows agreement on every etale object because Omega_{B/A}=0 for etale Spec B->Spec A (02GJ), which is elementary from the three cited statements and assumes no affine intersections; Step 6 gets uniqueness from the open-determination node. Step 7 checks bc=id and cb=id correctly. The new node lem-sfb-etale-localization-relative-differentials states 04BX exactly: a commutative square with both horizontal maps etale, no cartesian hypothesis. It is not a duplicate of the a1 pullback map, 01UX transitivity, the trf cartesian base change, the log chart model or the ring-level formally etale node, and it is not a clause of the item. It is unsplit, its searches are logged, and Mathlib has no scheme-level Kahler sheaf. I tested small cases: empty schemes, identity maps, f=id, and finite separable extensions. Batch-5: the four flagged trf nodes (sheafified-module-differentials-cokernel, zariski-etale-tensor-sections, etale-tensor-sections-adjunction-extension, etale-tensor-sections-open-determination) are generic sk-i-curve-zero site/module foundations. Their closures contain no Poincare-duality, sk-thm-trace-transport or nt- node, so I accept them. I accept the eight split_report tool_uses as generic. No SGA is cited. The new node lacks a lean_audit field, which I note only and do not repair."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeEtaleRelativeDifferentialsComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.scheme_etale_relativeDifferentials_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.etaleRelativeDifferentials",
+   "AlgebraicGeometry.Scheme.Hom.etaleRelativeDifferentialsDerivation",
+   "AlgebraicGeometry.Scheme.Hom.scheme_etale_relativeDifferentials_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeEtaleRelativeDifferentialsComparison.lean",
+  "statement": "theorem scheme_etale_relativeDifferentials_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) : ∃ hF : f.relativeDifferentials.IsQuasicoherent, ∃! e : @Modules.etaleTensorSectionsSheaf X f.relativeDifferentials hF ≅ (SheafOfModules.toSheaf _).obj (etaleRelativeDifferentials f), (∀ (W : X.Etale) (r : Γ(W.left, ⊤)) (s : Γ((Modules.tensorPullback W.hom).obj f.relativeDifferentials, ⊤)), e.hom.hom.app (op W) ((((Modules.tensorPullback W.hom).obj f.relativeDifferentials).smul r).hom s) = r • (@id ((etaleRelativeDifferentials f).val.obj (op W)) (e.hom.hom.app (op W) s))) ∧ (∀ (W : X.Etale) (a : Γ(W.left, ⊤)), (relativeDifferentialsPullbackMap f W.hom).app ⊤ (@id (Γ((Modules.tensorPullback W.hom).obj f.relativeDifferentials, ⊤)) (e.inv.hom.app (op W) ((etaleRelativeDifferentialsDerivation f).d (X := op W) a))) = (W.hom ≫ f).relativeDifferentialsDerivation.d (X := op ⊤) a)",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing associated etale sheaf is kept literally as etaleTensorSectionsSheaf. An additive sheaf isomorphism with explicit sectionwise scalar compatibility is exactly a module-sheaf isomorphism, without constructing another associated module. Its inverse derivation normalization on every etale chart is written via the existing canonical relativeDifferentialsPullbackMap; etale localization makes this the associated universal derivation. The helper definitions are the sheafification and induced derivation explicitly specified by this item. No statement correction, finiteness hypothesis, coefficient lift or arbitrary comparison map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-038942c97",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Item theorem matches node clause by clause. Any f : X ⟶ Y in Scheme.{u}, no extra hypotheses. Canonical ring map = mate of existing etaleStructurePresheafToPullback; left adjoint from the sorried theorem etaleDifferentialRingDirect_isRightAdjoint, which has a proof docstring. Omega^et = Mathlib sheafification of relativeDifferentials' with derivation' plus sheafification unit. F and F_et = recorded relativeDifferentials and etaleTensorSectionsSheaf. ∃! additive iso with scalar compatibility on every étale chart is a linear iso. Normalization relativeDifferentialsPullbackMap(e⁻¹(d_et a)) = d_{W/Y} a is exactly e∘d^a = d_et. Edge cases (empty schemes, f = id) and universes (site u+1/u, coefficients u) OK. Statements verbatim, docstrings complete, only sorried theorems, no name clash in live. Notes: (1) ∃ hF quasi-coherence repeats the existing instance TangentBundle.isQuasicoherent_relativeDifferentials; harmless. (2) §1(B) record of lem-trf-space-enlarged-etale-ringed-site-model is a superset of Q107's landed record (69 declarations kept, 4 added), but its headline now points to the scheme map etaleDifferentialRingMap. (3) Generic SheafDifferentials.omega needs EssentiallySmall and is owned by a theorem node, so it is not reusable; the item-local helper is justified."
+ }
+}

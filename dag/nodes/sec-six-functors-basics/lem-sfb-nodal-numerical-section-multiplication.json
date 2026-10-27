@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-nodal-numerical-section-multiplication",
+ "kind": "statement",
+ "title": "Numerical normal generation on a projective nodal curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], and let $X$ be a nonempty connected projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-connected-scheme, def-kun-topological-krull-dimension]. Assume $X$ is smooth except at ordinary nodes, whose completed local rings are $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Suppose that for every nonempty reduced union $B$ of irreducible components of $X$, including disconnected unions and $B=X$, one has\n$$\\deg_k(L|_B)\\geq 2p_a(B)+1,\\qquad p_a(B):=1-\\chi(B,\\mathcal O_B),$$\nusing degree [def-pc-degree-line-bundle], Euler characteristic [def-pc-euler-characteristic], and module pullback for restriction [def-pc-module-pullback]. Then for every integer $j\\geq1$ the multiplication map\n$$\\operatorname{Sym}^j_k H^0(X,L)\\longrightarrow H^0(X,L^{\\otimes j})$$\nis surjective. The map is induced by tensor products of sections, with the multiplication convention of [def-sc-invertible-section-ring] and cohomology [def-sc-ringed-space-module-cohomology].",
+ "source": {
+  "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+  "place": "Franciosi--Tenni, The canonical ring of a 3-connected curve, Rend. Lincei Mat. Appl. 25 (2014), 37--51, Section 4, Theorem 4.2, printed p.49; nodal specialization of the reduced planar-singularity theorem. Section 2, printed p.39, fixes arbitrary algebraically closed characteristic and the meaning of subcurve. Local PDF WANTED; author-hosted primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-kun-projective",
+  "def-pc-reduced-scheme",
+  "def-weil-connected-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sc-invertible-module",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-module-pullback",
+  "def-sc-invertible-section-ring",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "The projective morphism $X\\to\\operatorname{Spec}k$ is proper by [lem-kun-projective-implies-proper], hence of finite type by [def-weil-proper-morphism]. Thus $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Invertible modules are locally free of rank one and quasi-coherent [def-sc-invertible-module], hence coherent by [pqf-lem-coherent-ft-locnoeth]. We use the long exact sequence [lem-weil-pbc-derived-functor-long-exact] for module-sheaf cohomology: its hypotheses hold by [lem-weil-pbc-scheme-modules-enough-injectives] and [lem-sc-global-sections-left-exact]. Every reduced closed subcurve is proper by [lem-weil-pbc-closed-immersion-proper, lem-weil-pbc-proper-composition], so the same Noetherian and cohomology facts apply to it.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sc-invertible-module",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Franciosi--Tenni, The canonical ring of a 3-connected curve, Section 4, Theorem 4.2, printed p.49; primary author-hosted text read online; local PDF WANTED.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "For any nonempty connected reduced subcurve $B$, [lem-weil-pbc-proper-reduced-algclosed-global-sections-product] gives $h^0(B,\\mathcal O_B)=1$. Higher cohomology above degree one vanishes by [lem-sc-noetherian-cohomology-above-dimension]; hence $p_a(B)=h^1(B,\\mathcal O_B)\\geq0$, using [def-pc-euler-characteristic]. Therefore $\\deg(L|_B)\\geq1$, and degree additivity [lem-trf-curve-degree-tensor-additive] gives $\\deg(L^{\\otimes r}|_B)=r\\deg(L|_B)\\geq2p_a(B)+1$ for $r\\geq1$. Apply [lem-sfb-curve-ideal-h1-subcurve-obstruction] with the empty subscheme: nonzero $H^1(X,L^{\\otimes r})$ would give such a $B$ with degree at most $2p_a(B)-2$, a contradiction. Thus $H^1(X,L^{\\otimes r})=0$ for every $r\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "def-pc-euler-characteristic",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Franciosi--Tenni, The canonical ring of a 3-connected curve, Section 4, Theorem 4.2, printed p.49; primary author-hosted text read online; local PDF WANTED.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Let $x$ be a reduced closed point of $X$. Its residue field is $k$ by [lem-weil-pbc-closed-point-residue-field-base]. For every reduced subcurve $B$, the intersection $x\\times_XB$ is empty or this reduced point, hence has length at most one. Nonzero $H^1(X,I_x\\otimes L)$ would, by [lem-sfb-curve-ideal-h1-subcurve-obstruction], give $\\deg(L|_B)\\leq 2p_a(B)-1$, contradicting the hypothesis. Thus this $H^1$ vanishes. Tensoring the defining ideal quotient sequence with $L$ is exact by [def-sbc-closed-immersion-ideal-sheaf, lem-sc-ext-tensor-exact]. Its cohomology sequence (Step 1) gives surjectivity $V=H^0(X,L)\\to L\\otimes k(x)$. Thus some global section is nonzero at each closed point. Also $V$ is finite-dimensional by the proper coherent cohomology theorem [lem-pc-coherent-hi].",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-sc-ext-tensor-exact",
+    "lem-pc-coherent-hi",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Theorem 4.2, first sentence (Proposition 2.5); only base-point-freeness and H1 are needed outside the general-section cluster lemma. Stacks Tag 0E3E (curves.tex lemma-vanishing-on-gorenstein) supplies these directly.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Choose $s$ and $S=Z(s)$ by [lem-sfb-general-section-cluster-strict-bound]. They have exactly the hypotheses of that node: the degree bound is imposed on every reduced subcurve, with no assumption of irreducibility or of characteristic zero. The section is nonzero on each generic point, and every nonempty $T\\subseteq S$ satisfies $h^0(I_TL)+h^1(I_TL)<h^0(L)$.",
+   "uses": [
+    "lem-sfb-general-section-cluster-strict-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Theorem 4.2, choice of a generic hyperplane section and last sentence, invoking Proposition 4.1.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Consider $p:V\\otimes_kV\\to H^0(S,L^{\\otimes2}|_S)$, $a\\otimes b\\mapsto (ab)|_S$. If $p$ is not surjective, [lem-sfb-cluster-product-obstruction] gives a nonempty $T\\subseteq S$ with $h^0(I_TL)+h^1(I_TL)\\geq h^0(L)+h^1(L)=h^0(L)$, contradicting Step 4. Thus $p$ is surjective. If $S$ is empty the target is zero and this conclusion holds directly.",
+   "uses": [
+    "lem-sfb-cluster-product-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Theorem 4.2, final sentence, invoking Lemma 2.12 and Proposition 4.1.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Locally write $L=\\mathcal O_Xe$ and $s=ae$. Since $s$ has reduced smooth zero scheme and is nonzero at every component generic point, $a$ is a non-zero-divisor: it is a unit away from $S$, and at a point of $S$ it generates the maximal ideal of a smooth one-dimensional local ring. Equivalently, $X$ is reduced and a function vanishing on no component is a non-zero-divisor, as follows by embedding each affine reduced coordinate ring into the product of its component domains. From [def-pc-zero-scheme] the ideal of $S$ is locally $(a)$, so multiplication by $s$ identifies $I_S\\otimes L\\cong\\mathcal O_X$ and gives\n$$0\\longrightarrow L\\xrightarrow{s}L^{\\otimes2}\\longrightarrow Q\\longrightarrow0,$$\nwhere $Q$ is the module sheaf of $L^{\\otimes2}|_S$ extended by zero. Local exactness is the sequence $0\\to A\\xrightarrow{a}A\\to A/(a)\\to0$. Its global sections are $H^0(S,L^{\\otimes2}|_S)$.",
+   "uses": [
+    "def-pc-zero-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Theorem 4.2, proof of exactness of the second row and surjectivity of the first column in the displayed diagram.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Step 2 and the cohomology sequence of Step 6 give\n$$0\\to H^0(X,L)\\xrightarrow{s}H^0(X,L^{\\otimes2})\\to H^0(S,L^{\\otimes2}|_S)\\to0.$$\nFor $q\\in H^0(X,L^{\\otimes2})$, Step 5 supplies a finite sum $\\sum_i a_ib_i$ with the same restriction as $q$. Exactness writes $q-\\sum_i a_ib_i=sc$ for a global section $c$ of $L$. This expresses $q$ as a sum of quadratic products, proving the degree-two assertion.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Theorem 4.2, the diagram chase, written on sections.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Choose $t\\in V$ nonvanishing at every point of the finite set $S$. Each vanishing condition is a proper linear hyperplane since $L$ is generated (Step 3). A finite union of proper linear subspaces cannot exhaust a finite-dimensional vector space over the infinite field $k$: choose for each subspace a nonzero annihilating linear form; their product is a nonzero polynomial, and induction on the number of variables shows such a polynomial cannot vanish on every $k$-point. Thus such $t$ exists. The sections $s,t$ generate $L$ everywhere, because $s$ generates away from $S$ and $t$ generates at $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Theorem 4.2, higher-degree multiplication assertion; explicit base-point-free pencil argument replacing the reference to Franciosi [8], Proposition 1.5.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "The sheaf maps $L^{-1}\\to\\mathcal O_X^{\\oplus2}\\to L$ given by $c\\mapsto(-tc,sc)$ and $(a,b)\\mapsto sa+tb$ form a short exact sequence. Locally one of the coefficients of $s,t$ is a unit; solving $sa+tb=0$ then gives uniquely $(a,b)=(-tc,sc)$, which proves both injectivity and the kernel assertion. Tensor with $L^{\\otimes n}$ to get\n$$0\\to L^{\\otimes(n-1)}\\to (L^{\\otimes n})^{\\oplus2}\\xrightarrow{(s,t)}L^{\\otimes(n+1)}\\to0.$$\nThe same unit calculation proves exactness after tensoring. For $n\\geq2$, Step 2 gives $H^1(X,L^{\\otimes(n-1)})=0$, so its cohomology sequence makes $H^0(X,L^{\\otimes n})^{\\oplus2}\\to H^0(X,L^{\\otimes(n+1)})$ surjective. Its image consists of sums $su+tv$, hence lies in the image of $V\\otimes H^0(X,L^{\\otimes n})$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Theorem 4.2, higher-degree assertion; explicit pencil-kernel computation and cohomology sequence.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  },
+  {
+   "text": "Induct on $j\\geq1$ with the claim that every section of $L^{\\otimes j}$ is a finite sum of products of $j$ sections of $L$. The case $j=1$ is the identity and $j=2$ is Step 7. If $j\\geq2$, Step 9 writes any section in degree $j+1$ as $su+tv$; substitute the inductive product expressions for $u,v$. Thus the tensor multiplication is surjective in every degree. The multiplication of [def-sc-invertible-section-ring] is commutative, so each such product is the image of its monomial in $\\operatorname{Sym}^j_kV$. This proves the required surjectivity without dividing by $j!$, in every characteristic.",
+   "uses": [
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Theorem 4.2, assembly of degree two with the higher-degree multiplication maps.",
+    "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-euler-characteristic",
+  "def-pc-zero-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-weil-proper-morphism",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-coherent-hi",
+  "lem-sc-ext-tensor-exact",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sfb-cluster-product-obstruction",
+  "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+  "lem-sfb-general-section-cluster-strict-bound",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+  "place": "Theorem 4.2, Proposition 4.1 and Lemma 2.12 read in the primary online PDF. Local copy WANTED. Higher-degree reference [8] replaced by the explicit elementary pencil calculation; base-point-freeness expanded through existing Stacks nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On a projective reduced nodal curve an invertible sheaf of degree at least twice the arithmetic genus plus one on every subcurve has surjective symmetric power multiplication maps on global sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SymmetricPower.range_mk\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \": LinearMap.range (mk R ι M) = ⊤\", \"doc\": \"The range of the canonical linear map from the tensor product $\\\\bigotimes_R M$ to the symmetric power $\\\\text{Sym}^n(M)$ is the entire symmetric power module, i.e., $\\\\text{Range}(\\\\text{mk}) = \\\\top$.\"}\n  {\"name\": \"SymAlg.sym_surjective\", \"module\": \"Mathlib.Algebra.Symmetrized\", \"type\": \": Surjective (sym : α → αˢʸᵐ)\", \"doc\": \"The canonical map from $\\\\alpha$ to its symmetric algebra $\\\\alpha^{\\\\mathrm{sym}}$ is surjective, where the symmetric algebra is canonically isomorphic to $\\\\alpha$ itself.\"}\n  {\"name\": \"SymmetricPower.mk\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R ι : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type v) →\\n      [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → (PiTensorProduct R fun x => M) →ₗ[R] SymmetricPower R ι M\", \"doc\": \"The canonical $ R $-linear map from the tensor product $ \\bigotimes_R M $ to the symmetric power $ \\text{Sym}^n(M) $, induced by quotienting the symmetric tensor relation that identifies tensors differi\"}\n  {\"name\": \"Module.Invertible.instProjective\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Projective R M\", \"doc\": \"Every invertible module over a commutative semiring is a projective module. Specifically, if $ M $ is an invertible module over a commutative semiring $ R $, then $ M $ is projective, meaning it is a \"}\n  {\"name\": \"AlgebraicGeometry.Proj.pow_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(n : ℕ) : (s ^ n).1 x = s.1 x ^ n\", \"doc\": \"For any natural number $ n $ and section $ s $ of the structure sheaf on the projective spectrum, the equality $ (s^n)(x) = (s(x))^n $ holds for all points $ x $, where $ s^n $ denotes the $ n $-th po\"}\n  {\"name\": \"SymmetricPower.tprod\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R : Type u) →\\n  {ι : Type u} →\\n    [inst : CommSemiring R] →\\n      {M : Type v} →\\n        [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → MultilinearMap R (fun x => M) (SymmetricPower R ι M)\", \"doc\": \"The canonical multilinear map from the product of an $ R $-module $ M $ indexed by $ \\\\iota $ to its $ n $-th symmetric power $ \\\\text{Sym}^n(M) $, constructed by composing the canonical multilinear map\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) :\\n  (fromOfGlobalSections 𝒜 f hf).resLE _ _ (fromOfGlobalSections_preimage_basicOpen _ _ _ hn hr).ge =\\n    toBasicOpenOfGlobalSections 𝒜 f rfl hn hr\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": Presheaf CommRingCat (ProjectiveSpectrum.top 𝒜)\", \"doc\": \"A presheaf of commutative rings on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, assigning to each open set $U$ the commutative ring of sections locally represente\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal generation of line bundles on reducible nodal curves with degree at least 2p_a(B)+1 on each subcurve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"SymmetricAlgebra\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.generat|normally.generat|projective.normal|Castelnuovo|subcurve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Castelnuovo theorem for reduced planar algebraic curves: the section ring of a sufficiently positive line bundle is generated in degree one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (x : W'.CoordinateRing),\\n  ∃ p q, p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X = x\", \"doc\": \"Let $W$ be an affine Weierstrass curve over a commutative ring $R$, and let $A(W)$ be its coordinate ring. Any element $x \\\\in A(W)$ can be expressed as $x = p + qY$, where $p$ and $q$ are polynomials \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (x y ℓ : R),\\n  WeierstrassCurve.Affine.CoordinateRing.XYIdeal W' x (Polynomial.C y) =\\n    WeierstrassCurve.Affine.CoordinateRing.XYIdeal W' x (WeierstrassCurve.Affine.linePolynomial x y ℓ)\", \"doc\": \"In the coordinate ring of an affine Weierstrass curve over a commutative ring $ R $, the ideal generated by $ X - x $ and $ Y - (\\\\ell(X - x) + y) $ is equal to the ideal generated by $ X - x $ and $ Y\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $ is the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (X^3 + a_2\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle of subcurve degree at least twice arithmetic genus plus one on a projective nodal curve is normally generated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: coordinate-ring, normalization and general symmetric-power facts do not give curve normal generation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricPower\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: coordinate-ring, normalization and general symmetric-power facts do not give curve normal generation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Castelnuovo normal generation of sufficiently positive invertible sheaves on reduced reducible projective curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsReduced X] : IsReduced f.normalization\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"Module.Invertible.instFinite\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Module.Finite R M\", \"doc\": \"An invertible module over a commutative semiring is finitely generated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat} →\\n          {inst_2 : J.WEqualsLocallyBijective AddCommGrpCat} →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheafification and local bijectivity, this type represents the generatin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsDominant f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : IsIntegralHom (f.normalizationDesc f₁ f₂ H)\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: coordinate-ring, normalization and general symmetric-power facts do not give curve normal generation"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.generat|normally.generat|projective.normal|Castelnuovo|subcurve",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Tactic/Clean.lean\", \"line\": \"45\", \"text\": \"Identity functions are normally generated with terms like `show t from p`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"363\", \"text\": \"theorem IsNormal.generatedNormal_le {S : Subgroupoid C} (Sn : S.IsNormal) :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: only unrelated tactic and subgroupoid text"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-field-linear-series",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability",
+   "via": [
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-numerical-section-multiplication",
+  "worker": "stage1",
+  "summary": "Split the quadratic obstruction argument into two independent cluster inputs, reuse Stacks subcurve obstruction to prove vanishing and closed-point evaluation surjectivity, and write the divisor chase and higher-degree pencil induction explicitly. Original statement unchanged. Correct empty-cluster omission of source Proposition 4.1 only in the auxiliary node.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; realize the normal-generation prerequisite by Theorem 4.2 proof, not by a restatement of its conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Transfer from the finite projective-space embedding convention to properness, to apply the subcurve vanishing obstruction. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of the finite-type curve for coherent modules and dimension vanishing. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherence of invertible modules and their finite length quotients. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "The long exact sequence of Zariski module-sheaf cohomology, applied to the explicitly constructed divisor and pencil sequences. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Enough injectives required by the long exact sequence theorem. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Left exactness required by the long exact sequence theorem. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Connected proper reduced subcurves have only constant global functions, so arithmetic genus is nonnegative. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "No cohomology above degree one on the subcurve, used to identify arithmetic genus with h1. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Degree of tensor powers on a connected subcurve, used to apply the same degree obstruction to every positive power. No node of the six-functor unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "Exactness of tensoring the ideal sequence of a reduced point with an invertible module. No node of the six-functor unit states this generic module-sheaf tool."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Finite dimensionality of V=H0(X,L) on the proper curve. No node of the six-functor unit states this generic coherent-cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Residue field of a closed point equals the algebraically closed base, so its intersection with a reduced subcurve has k-length at most one. No node of the six-functor unit states this generic finite-type field tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Closed subcurves are proper over X. No node of this unit states this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Compose closed-subcurve properness with X proper over the field. No node of this unit states this generic scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-sc-ext-tensor-exact",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-f39e46003",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-f39e46003 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The item statement is unchanged and is Franciosi-Tenni Theorem 4.2 (p.49), specialised to connected nodal curves in any characteristic. I read the author PDF online because no local copy exists (WANTED); the source checks were Lemma 2.12 (pp.42-43), Prop 4.1 (pp.47-49), Thm 4.2 (p.49) and Section 2 (any characteristic), plus Stacks 0E3E verbatim. Steps 2-3: 0E3E with Z empty gives degree <= 2p_a-2, and with a reduced closed point gives <= 2p_a-1. Both contradict deg >= 2p_a+1, which gives H^1(L^r)=0 for r>=1 and that L is generated by global sections. p_a(B)>=0 comes from 0BUG. Advisory: (L^r)|_B=(L|_B)^r is used without a citation, a one-line identity. Steps 6-7 write the source's diagram chase out on sections. Steps 8-10 are a complete Castelnuovo base-point-free pencil argument replacing the source's [8, Prop 1.5]: n>=2 uses H^1(L^{n-1})=0, n=1 goes through degree 2, and there is no division by j!. New node lem-sfb-cluster-product-obstruction is Lemma 2.12 for a reduced smooth-support cluster with the restricted-line target; I checked it independently: a minimal failing T carries a full-support functional, so the image of V is isotropic for a nondegenerate diagonal form, giving 2c>=|T| in every characteristic. New node lem-sfb-general-section-cluster-strict-bound is Prop 4.1 plus the generic smooth reduced section from the proof of Thm 4.2. The worker's exclusion of the empty cluster is a correct fix: the printed statement gives equality there. I tested it on two P^1s meeting in one node with bidegree (1,1) and in two nodes with bidegree (1,2); every nonempty T gives a strict inequality. Both new nodes are statement-only and searched, and neither duplicates anything: lem-sfb-nodal-special-clifford-subcurve, 0E3E, lem-sfb-product-subseries-eventual-fullness and the other DAG grep hits are different statements. Batch-5: lem-pc-coherent-hi (02O5 finiteness), lem-trf-curve-degree-tensor-additive (0AYX degree additivity) and lem-weil-pbc-proper-reduced-algclosed-global-sections-product (0BUG) are generic coherent facts, not part of the trace formula or of Poincare duality. Their closure reaches only def-trf-schematically-dense-open, and the parent already cites all three, so I accept them. I accept all 14 declared tool_uses. No SGA is used. proof_deps equals the union of uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalNumericalSectionMultiplication",
+  "declaration": "AlgebraicGeometry.nodal_numerical_section_multiplication",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalNumericalSectionMultiplication.lean",
+  "statement": "theorem nodal_numerical_section_multiplication (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsHProjective f] [ConnectedSpace X] [IsReduced X] (hpure : X.IsPureDimension 1) (hnodal : ∀ x : X, x ∉ f.smoothLocus → ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}), ∀ a : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) (X.presheaf.germ ⊤ x trivial (f.appTop ((Scheme.ΓSpecIso (.of k)).inv a)))) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) (L : X.Modules) [L.IsInvertible] (hdegree : ∀ (B : Scheme.{u}) (i : B ⟶ X), IsClosedImmersion i → IsReduced B → Nonempty B → (∃ S : Set (Set X), S ⊆ irreducibleComponents X ∧ Set.range i = ⋃₀ S) → 2 * (1 - @Scheme.Modules.eulerChar k _ B ⟨i ≫ f⟩ (SheafOfModules.unit B.ringCatSheaf)) + 1 ≤ @Scheme.Modules.degree k _ B ⟨i ≫ f⟩ ((Scheme.Modules.tensorPullback i).obj L)) : ∀ j : ℕ, 1 ≤ j → ∃! μ : SymmetricPower k (ULift.{u} (Fin j)) ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (L.val.obj (Opposite.op ⊤))) →ₗ[k] ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj ((L.tensorPow j).val.obj (Opposite.op ⊤))), (∀ s : ULift.{u} (Fin j) → ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (L.val.obj (Opposite.op ⊤))), μ (SymmetricPower.tprod k s) = (∏ i : ULift.{u} (Fin j), (DirectSum.of (Scheme.Modules.SectionRingComponent L) 1 ((ρ_ L).inv.app ⊤ (s i)) : Scheme.Modules.InvertibleSectionRing L)) j) ∧ Function.Surjective μ",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical symmetric multiplication is specified by its values on every pure symmetric tensor, as a uniquely specified surjective linear map; no arbitrary map is assumed. Products are evaluated in the existing InvertibleSectionRing. ULift (Fin j) only lifts the finite index set into the coefficient universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-783fee5d7",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node (Franciosi-Tenni Thm 4.2): IsAlgClosed k; IsHProjective f; ConnectedSpace (nonempty); IsReduced; IsPureDimension 1; hnodal is a k-linear iso from the completed stalk to k[[u,v]]/(uv) off f.smoothLocus; hdegree over all reduced nonempty closed B whose range is a union of irreducible components (disconnected and B=X allowed), 2(1-chi(O_B))+1 <= degree(tensorPullback i L) in Z; for all j>=1, a unique k-linear mu on SymmetricPower k (ULift (Fin j)) Gamma(L), fixed on all pure tensors as the degree-j product in the existing InvertibleSectionRing (rho_ inverse into tensorPow 1 = L tensor 1), is surjective: the canonical map, not an arbitrary one. Hypotheses identical to the landed sibling nodal_numerical_very_ample. Item changed only in lean and stmt_deps; the added def-weil-pure-dimension is a landed definition node (allowed). lean.statement verbatim in the file. No definitions, sorry only, docstrings with source and blueprint plus 10 proof steps, report has Worker report and Second reading by Q34. First delivery, not a rebind. No recompile (no change). Minor note: Mathlib irreducibleComponents is used without def-weil-irreducible-components in stmt_deps; the node text does not cite it, so not a fault."
+ }
+}

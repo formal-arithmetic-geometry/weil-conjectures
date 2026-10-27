@@ -1,0 +1,120 @@
+{
+ "id": "def-pod-completion-tensor-reindex-models",
+ "kind": "definition",
+ "title": "Normalized tensor reindexing models",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite and $g:X\\xrightarrow{\\sim}Y$ with $\\ell$ invertible where constructibility is used. Use [def-pod-completion-reindex-models] [def-weil-derived-complete-integral-detailed] [def-pur-completed-pullback-tensor-comparison]. A completed tensor reindexing model on a normalized ambient model D consists of preservation of complete constructibility, isomorphisms on the actual strict finite tensor-reduction towers and on completed tensors of complete constructible inputs. Its forward and reverse maps send each homogeneous tensor generator to its relabelled generator via the same D.quotient maps; its naturality predicates quantify over all tower maps and all derived input morphisms.",
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; Stacks 03EL, 07A4, 0941"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized reindexing comparisons for derived completion and completed tensor, identity composition scalar coefficient transitions signed shifts and coherent substitution",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, TensorAlgebra.mk_reindex_cast, AdicCompletion.ofTensorProductEquivOfPiFintype, PiTensorProduct.reindex_reindex, TensorAlgebra.mk_reindex_fin_cast, PiTensorProduct.reindex_trans, PiTensorProduct.lift_comp_reindex; digest 0a59da8c06238b6b",
+   "date": "2026-10-24",
+   "verdict": "No exact normalized reindexing/completion coherence definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits: CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor, CategoryTheory.NatTrans.CommShift.of_iso_inv; digest 90520e9555bd11f4",
+   "date": "2026-10-24",
+   "verdict": "No exact normalized reindexing/completion coherence definition."
+  },
+  {
+   "tool": "grep",
+   "query": "PodReindex|PodCompletionReindex|isoReductionIntegralInverse|pullbackTensorIntegralAssociator",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "No exact normalized reindexing/completion coherence definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical ordinary and strict-system reindexing along scheme isomorphisms, normalized derived completion and completed tensor coherence",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.Cover.copy_X, PiTensorProduct.reindex, PiTensorProduct.map_comp_reindex_eq, PiTensorProduct.map_reindex, PiTensorProduct.reindex_symm, AlgebraicGeometry.instIsAffineHomOfIsIsoScheme, AlgebraicGeometry.Scheme.Cover.copy; digest 16a2c422e46b5d53",
+   "date": "2026-10-24",
+   "verdict": "No exact normalized reindexing/completion coherence definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg PodCompletionReindex|PodCompletedTensorReindex|isoReductionIntegralInverse|pullbackTensorIntegralAssociator lean/WeilConjectures lean/Sheaf; blueprint_refs.py search reindexing completion; rg -l new definition ids dag/nodes",
+   "results": "No blueprint node matches reindexing completion. No new definition id already exists. No matching upstream WeilConjectures definition. Sheaf contains the reused IsomorphismReductionTower and DerivedPullbackTensorIso definitions; no preexisting PodCompletionReindex/PodCompletedTensorReindex definitions.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact recorded definitions and add owners for the missing normalized comparison predicates."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-reindexing-completion-unit-tensor",
+  "date": "2026-10-24",
+  "group": "Q51"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: normalized coefficient-stage automorphism transport",
+   "via": [
+    "lem-pod-reindexing-completion-unit-tensor",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "module": "Sheaf.Paper.PodCompletionTensorModels",
+  "declaration": "WeilConjectures.PodCompletedTensorReindex",
+  "statement": "structure PodCompletedTensorReindex {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/PodCompletionTensorModels.lean",
+  "declarations": [
+   "WeilConjectures.podGoodReindex",
+   "WeilConjectures.PodCompletedTensorReindex",
+   "WeilConjectures.PodCompletedTensorReindex.Generators",
+   "WeilConjectures.PodCompletedTensorReindex.InverseGenerators",
+   "WeilConjectures.PodCompletedTensorReindex.TowerNaturality",
+   "WeilConjectures.PodCompletedTensorReindex.Naturality"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93bb1f2f8",
+  "group": "Q51",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93bb1f2f8",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery after 839c RETURN; F1-F3 repaired. F1: copied canonical-coherence and Fin 3 substitution conjuncts removed; PodReindexFamily with Relabelling (Over.mapId/mapComp section formulas), Identity (reduction/limit/tensor vs integralComparisonSystemUnit), Composition (vs integralComparisonSystemComposition), own TensorConstraints (associator/braiding/unitors; unit iso determined); PodReindexCoefficientTransition.Laws for all L, iota incl. id, with pure-tensor pin and own D/D'/T/T' squares; PodReindexSignedShifts (CommShift of D.reduction/limit, Roos squares, shift generators with (-1)^(pr), Model pins left/right); PodReindexSubstitution ties model C on Bool to D's calculi/Roos/pullback, primitive pullback = D.limit, plus T.Model/Canonical. F2: theorem stmt_deps replaced by existing:true def-pod-isomorphism-reduction-reindexing, def-pod-integral-tensor-constraints, def-pod-scalar-completion-tensor-comparisons; statements verbatim, decls exist, no duplicate owners. F3: RestrictedGenerators pins restricted via the sequence-pullback unit generator along proEtaleIsoCommaArrow, so no sign twist. Statement verbatim; item differs from live only in lean/stmt_deps; no dep records or modules changed; only 2 theorem sorries; docstrings with source/blueprint everywhere; no stronger hypotheses; edge cases (empty schemes, g=id, n=0, incomplete K, all shifts, E=L) fine. No compile (no file changed). Advisories: substitution def node cites theorem lem-pur-completed-operation-tower-substitution instead of def-pur-completed-operation-model-data/-comparison-data; auxiliary evaluation/restriction fields only partly pinned; base-era non-stmt_dep owners; self second reading."
+ }
+}

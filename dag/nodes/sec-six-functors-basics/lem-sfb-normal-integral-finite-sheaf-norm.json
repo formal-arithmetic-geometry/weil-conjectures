@@ -17,101 +17,59 @@
  ],
  "proof": [
   {
-   "text": "For a nonempty affine open $U=\\operatorname{Spec}B\\subseteq Z$, write $p^{-1}U=\\operatorname{Spec}A$. Finiteness supplies this affine inverse image and makes $A$ a finite $B$-module. Surjectivity makes it nonempty, and integrality of the schemes makes $A,B$ domains. The map $B\\to A$ is injective: a point above the prime $(0)\\subset B$ exists by surjectivity, its prime in $A$ contracts to zero, and the kernel is contained in that contraction. Thus the fraction fields form a finite extension by the cited finite-domain lemma. These fields identify with the generic stalks $K=k(Y)$ and $L=k(Z)$ by the affine-fraction-field lemma. The map $p$ sends the generic point of $Y$ to that of $Z$: its image is dense since $p$ is continuous and surjective. The fraction-field embeddings on every affine are therefore the same map $L\\hookrightarrow K$ on generic stalks, because they extend the same section maps and fractions have a unique extension. Fix $d=\\dim_L K\\geq1$; it is independent of the affine open.",
+   "text": "Apply the affine-field-data lemma to $p$. It gives $p(\\eta_Y)=\\eta_Z$, the single finite extension $\\iota:L=k(Z)\\hookrightarrow K=k(Y)$, and its positive degree $d$. On every nonempty affine $U=\\operatorname{Spec}B$, it gives a finite domain inclusion $B\\hookrightarrow A=\\Gamma(p^{-1}U,\\mathcal O_Y)$ with $B$ integrally closed. Its generic-germ embeddings $\\rho_U,\\sigma_U$ realize $L,K$ as fraction fields and satisfy $\\sigma_U(p^\\sharp b)=\\iota(\\rho_U(b))$.",
    "uses": [
-    "def-weil-finite-integral-morphism",
-    "def-weil-surjective-morphism",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-spec-map-residue-field-naturality",
-    "lem-sc-integral-function-field-affine-fraction",
-    "lem-trf-finite-domain-fraction-degree"
+    "lem-sfb-finite-normal-cover-affine-field-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph, affine rings and their fraction fields"
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), affine rings and function fields"
    }
   },
   {
-   "text": "The affine ring $B$ is integrally closed in $L$. Indeed, if $c\\in L$ satisfies a monic polynomial over $B$, that polynomial maps to a monic polynomial over each $\\mathcal O_{Z,z}$, $z\\in U$. The stalk embeds in $L$ and has $L$ as fraction field, so normality of that stalk puts $c$ in its image. The cited section-gluing statement then supplies $b\\in\\Gamma(U,\\mathcal O_Z)=B$ with generic germ $c$. Hence $B$ is integrally closed, without any Noetherian hypothesis.",
+   "text": "Apply the domain-norm lemma to each inclusion with these specified embeddings. Step 1 supplies its finiteness, normal-base and commuting-square hypotheses. Its unique maps $\\nu_U:A\\to B$ preserve multiplication and $1$, satisfy $\\nu_U(p^\\sharp b)=b^d$, and have generic formula $\\rho_U(\\nu_U(a))=N_{K/L}(\\sigma_U(a))$. Thus every chart uses the single function $F=N_{K/L}:K\\to L$ and the same positive integer $d$.",
    "uses": [
-    "def-weil-pbc-normal-ring",
-    "lem-sc-integral-scheme-stalks-in-function-field",
-    "lem-sc-function-field-sections-glue"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), normality needed for the application of the minimal-polynomial lemma"
-   }
-  },
-  {
-   "text": "Let $N=N_{K/L}$ be the field norm. Every $a\\in A$ is integral over $B$ by finite-algebra integrality. The minimal-polynomial descent lemma gives a monic $Q_a\\in B[T]$, annihilating $a$ in $A$, whose image in $L[T]$ is its minimal polynomial. If $m=\\deg Q_a$ and $e=\\dim_{L(a)}K\\geq1$, the field-norm formula says $N(a)=((-1)^mQ_a(0))^e\\in B$. Define $\\nu_U(a)$ to be this element of $B$, equivalently the unique element with image $N(a)$ in $L$. Since the field norm preserves multiplication and one, injectivity of $B\\to L$ proves the same for $\\nu_U$. Its scalar formula gives $\\nu_U(p^\\sharp b)=b^d$ for $b\\in B$.",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-sfb-integral-minpoly-fraction-descent",
-    "lem-sfb-finite-field-norm-minpoly",
-    "lem-sc-integral-function-field-affine-fraction"
+    "lem-sfb-finite-normal-domain-norm-prime"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph, minimal polynomial and construction on affine sections"
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), affine restriction of the field norm"
    }
   },
   {
-   "text": "If $W\\subseteq U$ is another nonempty affine open, the sections $a$ and $a|_{p^{-1}W}$ have the same generic germ in $K$. Both $\\nu_U(a)|_W$ and $\\nu_W(a|_{p^{-1}W})$ consequently have germ $N(a)$ in $L$, so they are equal by injectivity of the germ map on $W$. For two affine opens $U,U^{\\prime}$, cover $U\\cap U^{\\prime}$ by affine opens $W$ and apply this equality twice. Thus the affine norms agree on overlaps. This uses no assumption that the intersection itself is affine.",
+   "text": "Use the affine-gluing lemma with this $F$, $d$ and the maps $\\nu_U$. Generic-point preservation comes from step 1; the generic and scalar formulas come from step 2. The lemma extends the affine maps uniquely to $\\nu_V$ on every open $V$, commuting with all restrictions, preserving multiplication and $1$, and satisfying $\\nu_V(p^\\sharp b)=b^d$. Its unique map on the empty open also covers restrictions to that open.",
    "uses": [
-    "lem-sc-integral-scheme-stalks-in-function-field",
-    "def-pc-scheme"
+    "lem-sfb-generic-multiplicative-affine-gluing"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), compatible system of maps on affine sections"
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), compatible affine maps and global norm, property (1)"
    }
   },
   {
-   "text": "For any nonempty open $V\\subseteq Z$ and $a\\in\\Gamma(p^{-1}V,\\mathcal O_Y)$, choose an affine cover $(U_i)$ of $V$. The sections $\\nu_{U_i}(a|_{p^{-1}U_i})$ agree on overlaps by the preceding step, so the structure-sheaf axiom glues them uniquely to $\\nu_V(a)$. Uniqueness of gluing proves compatibility with restriction to every open subset. Multiplicativity, preservation of one, and $\\nu_V(p^\\sharp b)=b^d$ hold after restricting to every $U_i$, hence hold on $V$ by the uniqueness part of the same sheaf axiom. For $V=\\varnothing$ both section rings have one element; use the unique map. This also verifies restrictions to the empty open.",
+   "text": "If $V=\\varnothing$, there is no point $y\\in p^{-1}V$, so the vanishing condition is vacuous. Otherwise fix such a point with $a(y)=0$. Choose a nonempty affine neighbourhood $U\\subseteq V$ of $p(y)$. The affine-field-data lemma makes $p^{-1}U=\\operatorname{Spec}A$, with $U=\\operatorname{Spec}B$. The affine vanishing criterion puts $a|_{p^{-1}U}$ in the prime $\\mathfrak q$ corresponding to $y$. The domain-norm lemma puts its norm in $\\mathfrak q\\cap B$. Spectrum-map naturality identifies this contracted prime with $p(y)$, so the affine vanishing criterion gives $\\nu_U(a|_{p^{-1}U})(p(y))=0$. Restriction compatibility from step 3 yields $\\nu_V(a)(p(y))=0$. Evaluation of a section and its restriction at a point of the smaller open uses the same germ in the stalk and then the same residue-field quotient. Thus restricting to this affine neighbourhood preserves both the assumed zero value upstairs and the resulting zero value downstairs.",
    "uses": [
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), global norm map and property (1)"
-   }
-  },
-  {
-   "text": "For property (2), take $y\\in p^{-1}V$ with $a(y)=0$, and choose an affine neighbourhood $U=\\operatorname{Spec}B\\subseteq V$ of $p(y)$. Write $p^{-1}U=\\operatorname{Spec}A$ and $a_U=a|_{p^{-1}U}$. The point $y$ corresponds to a prime $\\mathfrak q\\subset A$, and $a_U\\in\\mathfrak q$ by the affine vanishing criterion. Its image point has prime $\\mathfrak r=\\mathfrak q\\cap B$. From step 3 write $Q_{a_U}(T)=T^m+\\sum_{i<m}b_iT^i$ in $B[T]$, with $Q_{a_U}(a_U)=0$. Thus $b_0=-a_U(a_U^{m-1}+\\sum_{1\\leq i<m}b_i a_U^{i-1})\\in\\mathfrak q$, so $b_0\\in\\mathfrak r$. The signed norm formula gives $\\nu_U(a_U)=((-1)^mb_0)^e\\in\\mathfrak r$ since $e\\geq1$. The affine vanishing criterion says this section vanishes at $p(y)$, and restriction compatibility gives $\\nu_V(a)(p(y))=0$.",
-   "uses": [
+    "lem-sfb-finite-normal-cover-affine-field-data",
+    "lem-sfb-finite-normal-domain-norm-prime",
     "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "lem-weil-pbc-spec-map-residue-field-naturality",
-    "lem-sfb-integral-minpoly-fraction-descent",
-    "lem-sfb-finite-field-norm-minpoly"
+    "lem-weil-pbc-spec-map-residue-field-naturality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), final paragraph, vanishing at the image point; constant coefficient is b_0 and the sign is retained"
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), final paragraph, property (2)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-integral-morphism",
-  "def-weil-surjective-morphism",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-spec-map-residue-field-naturality",
-  "lem-sc-integral-function-field-affine-fraction",
-  "lem-trf-finite-domain-fraction-degree",
-  "def-weil-pbc-normal-ring",
-  "lem-sc-integral-scheme-stalks-in-function-field",
-  "lem-sc-function-field-sections-glue",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-sfb-integral-minpoly-fraction-descent",
-  "lem-sfb-finite-field-norm-minpoly",
-  "def-pc-scheme",
-  "lem-weil-pbc-affine-open-section-vanishing-prime"
+  "lem-sfb-finite-normal-cover-affine-field-data",
+  "lem-sfb-finite-normal-domain-norm-prime",
+  "lem-sfb-generic-multiplicative-affine-gluing",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-spec-map-residue-field-naturality"
  ],
  "proof_origin": {
   "by": "document",
@@ -219,28 +177,22 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "item": "lem-sfb-normal-integral-finite-sheaf-norm",
   "worker": "stage1",
-  "summary": "Read Tag 0BD3 and norm conditions in 0BCX. Constructed the field norm on finite affine charts; verified affine normality from the given stalk hypothesis, fraction-field compatibility, gluing on arbitrary opens and vanishing via the signed minimal-polynomial constant coefficient. Two searched Mathlib leaves isolate the algebraic inputs. The statement is unchanged. Corrected the source proof's b_m/b_0 typo and omitted sign.",
-  "blueprint": "Auxiliary norm input below det-thm-sf-ctf-stability-direct-images proof (3), through finite-normal ample descent; inherited null nearest blueprint ancestor as returned by blueprint_refs.py ancestor. The six steps realize the full proof of 0BD3 used at that place.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-function-field-sections-glue",
-    "why": "Generic tool: realizes a rational function regular in each stalk as a section, to deduce normality of the affine coordinate ring. The current unit has no such algebraic-geometric sections lemma."
-   }
-  ]
+  "summary": "Repair of the human re-split request: three independent statement-only unsplit nodes distribute the old six-step argument into affine generic data and normality (old steps 1-2), domain norm with its signed constant-term and prime argument (old steps 3 and 6), and generic-germ affine compatibility plus sheaf gluing on all opens (old steps 4-5). The unchanged item is now four short assembly steps. All original arguments, sources and citations are preserved and assigned to the new nodes in the report. No Lean changes. Rebased repair of the 2026-10-22 06:47 UTC landing return (returned head b60c8698465): re-read the current item and every parent proof dependency; all cited statement quotes still agree verbatim, so the three retained interfaces and original route are preserved. Step 4 now explicitly justifies evaluation after restriction through the common stalk germ. The delivery tool rebases onto current origin/sheaf-dag and retains current maintainer metadata. Latest return repaired: 2026-10-22 12:14 UTC, returned head a4d5003c775. Rechecked the current DAG, the released keep_plan re-split order, all cited statements and the preserved six-step argument. Steps 1-3 now explicitly pass generic-point preservation and the commuting generic-field square to the domain-norm and gluing interfaces. The three new statements, search records and original argument remain intact; current maintainer metadata is retained. The required delivery tool builds the fresh commit on current origin/sheaf-dag; live promotion remains the maintainer’s operation. Repaired again on 2026-10-23 after the repeated landing-promotion return: compared the retained delivery with the current read clone and reread every parent citation and old dependency. The parent now explicitly treats the empty-open vanishing clause as vacuous before choosing the affine neighbourhood. All retained arguments and searches remain; no cited statement changed.",
+  "blueprint": "Auxiliary norm input below det-thm-sf-ctf-stability-direct-images proof (3), through finite-normal ample descent; inherited null nearest blueprint ancestor as returned by blueprint_refs.py ancestor. The six steps realize the full proof of 0BD3 used at that place. Re-split: the three new nodes distribute all six original steps; the parent assembles their conclusions without changing the alteration/ample-descent route."
  },
  "tool_uses": [
   "lem-sc-function-field-sections-glue"
  ],
  "reviewed": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NS-83f86a8ce",
-  "group": "NS",
+  "reviewer": "NT-cc-Q92-2b66924b5",
+  "group": "Q92",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-83f86a8ce (reviewer sub-agent of L); spot-checked: I read the item, both new leaves and every cited node in full. The item matches Stacks 0BD3 together with the definition of a norm of degree d at the start of section-norms. The delivery's sign correction is right: the norm is ((-1)^m b_0)^e (0BIH), which the a=1, Q/Q example confirms. Step 1: B→A is injective because a prime lies over (0), the generic point maps to the generic point, and Frac(A)/Frac(B) is finite. Step 2: B is integrally closed, using stalk normality and lem-sc-function-field-sections-glue; the generic-tool tool_use is accepted. Step 3: the norm lands in B via 00H7 and the minimal-polynomial norm formula. Steps 4-5: the charts agree through the injective generic germ, gluing works on overlaps that are only covered by affines, and the empty open is handled. Step 6: b_0 lies in the prime q contracted to B, and e≥1. In the pinned Mathlib, Algebra.norm_eq_norm_adjoin (Transitivity.lean 229) needs no separability, and the remaining declarations are at the cited lines. A purely inseparable test case gives the right norm. Both new leaves are pure algebra, not clauses of the parent, and the duplicate search found nothing. Batch-5: lem-trf-finite-domain-fraction-degree is a Mathlib leaf with empty proof_deps (fraction-field finiteness for module-finite domains). It is general algebra outside the trace-formula and Poincaré-duality assumptions, so it is accepted. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-2b66924b5 (reviewer sub-agent of L); spot-checked: Fourth push of the 2026-10-21 human re-split. Earlier reviews: b60c FIX, a4d5 PASS, af6c PASS. The pushes since answer 'side completion not promoted' landing returns. Against the af6c snapshot: the three new nodes are byte-identical (same sha256), and the item changes only in proof step 4 and split_report. Step 4 gains one correct sentence: for V=∅ there is no y in p^{-1}V, so the vanishing clause is vacuous. The statement and stmt_deps are unchanged. In clones/live and clones/side-live the item still has the old 6-step proof and no child id exists, so no other split supersedes this one. Source: I re-read divisors.tex 0BD3 in full. Its hypotheses are finite surjective, integral, normal target, matching the item. The signed formula ((-1)^m Q(0))^e agrees with 0BIH, and the algebra step needs only a normal base (00H7). Steps: step 1 takes p(η_Y)=η_Z, L↪K of degree d≥1, finite B↪A with B normal, and the germ square from affine-field-data. Step 2 checks the domain-norm hypotheses and gets one F=N_{K/L} on every chart. Step 3 checks the gluing hypotheses. Step 4 uses section-vanishing-prime (a), the domain-norm prime clause, spec-map naturality (1) and restriction compatibility. proof_deps equals the union of the step uses. Step lengths are [461,414,417,945], 2237 characters in total. No SGA citation. Children re-checked and true. Affine-field-data: p(Y) ⊆ closure{p(η_Y)}; B normal as the intersection of its normal localizations, with no Noetherian hypothesis. Domain-norm: Z⊂Z[2i] with a=2i gives 4 ∈ (2); a=0; scalars give c^d; a purely inseparable extension of degree p. Gluing: germ maps are injective, overlaps are covered by affines, and the empty open has the unique map to the zero ring. Re-split: old steps 1-2, 3+6 and 4-5 go to three nodes of comparable size, and none restates the item. Duplicate search: finite-normal-cover-normalization needs a locally Noetherian normal source, generic-section-extension is about sections, the pd norm nodes need free or flat morphisms, and Mathlib intNorm needs a normal source. None states a child. Advisory: tool_uses lem-sc-function-field-sections-glue is unused by the parent but child 1's future split needs it; the new nodes lack lean_audit. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.NormalIntegralFiniteSheafNorm",
@@ -259,5 +211,17 @@
   "group": "NS",
   "result": "pass",
   "note": "Lean exists_normalIntegralFiniteSheafNorm matches the node and Stacks 0BD3/0BCX clause by clause: IsFinite, Surjective, IsIntegral Y Z, stalks IsDomain∧IsIntegrallyClosed (recorded inline normal-domain form; IsDomain redundant, not stronger); ∃ d:ℕ, 1≤d, one MonoidHom family ν_V on all opens, restriction law in the right direction via preimage_mono, ν V (p.app V a)=a^d, vanishing via Scheme.evaluation (germ≫residue, ResidueField.lean:96) with hy defeq to p y ∈ V. Edge cases: empty open trivial, empty schemes excluded, no separability/Noetherian/affine assumption, single universe u. Node differs from the live side node only in lean (the live node has no lean record yet); statement field is verbatim the file signature; one sorry; docstrings cite 0BD3/0BCX and the blueprint id with the 6 proof steps. Duplicate search (Mathlib AG, WeilConjectures, Sheaf live/side) found nothing. No change, so no compile; worker reports a clean compile. Advisory only: plain proof-plan imports are unused by the statement."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

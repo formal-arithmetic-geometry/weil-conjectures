@@ -1,0 +1,98 @@
+{
+ "id": "lem-sfb-paracompact-closed-cover-refinement",
+ "kind": "statement",
+ "title": "Locally finite precise refinements of open covers of closed subsets",
+ "statement": "Let $X$ be a topological space that is paracompact, meaning that every open cover admits a locally finite open refinement. Let $S\\subseteq X$ be closed, with its subspace topology [def-kun-subspace-topology], let $I$ be a set, and let $(U_a)_{a\\in I}$ be open subsets of $X$ with $S\\subseteq\\bigcup_{a\\in I}U_a$. Then there are open subsets $(W_a)_{a\\in I}$ of $X$ such that $S\\subseteq\\bigcup_{a\\in I}W_a$, $W_a\\subseteq U_a$ for every $a$, and $(W_a)_{a\\in I}$ is locally finite in $X$: every point of $X$ has an open neighborhood meeting only finitely many of the $W_a$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. IV §4.B, Definition (4.5) and Lemma (4.6)(a), printed p.203, locally finite refinement input; precise indexed form is Mathlib/Topology/Compactness/Paracompact.lean, precise_refinement_set:99--102."
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "theorem precise_refinement_set",
+   "results": "OK 1 hits: Mathlib/Topology/Compactness/Paracompact.lean.  Source directory Mathlib/Topology/Compactness",
+   "date": "2026-10-24",
+   "verdict": "match: precise_refinement_set states all the clauses exactly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open cover of a closed set in a paracompact topological space has a locally finite precise open refinement",
+   "results": "OK 8 hits: precise_refinement_set, ParacompactSpace.mk, ParacompactSpace, precise_refinement, ParacompactSpace.locallyFinite_refinement, exists_subset_iUnion_closure_subset_t2space, IsCompact.elim_finite_subcover_image, paracompact_of_compact. ",
+   "date": "2026-10-24",
+   "verdict": "match: precise_refinement_set states all the clauses exactly"
+  },
+  {
+   "tool": "loogle",
+   "query": "precise_refinement_set",
+   "results": "OK 1 hits: precise_refinement_set. ",
+   "date": "2026-10-24",
+   "verdict": "match: precise_refinement_set states all the clauses exactly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every open covering of a closed subset of a paracompact space admits a locally finite open refinement indexed by the same set with each refined open inside the corresponding original open",
+   "results": "OK 8 hits: precise_refinement_set, BumpCovering.exists_isSubordinate, precise_refinement, ParacompactSpace.locallyFinite_refinement, PartitionOfUnity.exists_isSubordinate, BumpCovering.exists_isSubordinate_of_prop, ParacompactSpace, BumpCovering.exists_isSubordinate_of_locallyFinite. ",
+   "date": "2026-10-24",
+   "verdict": "match: precise_refinement_set states all the clauses exactly"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "precise_refinement_set",
+  "file": "Mathlib/Topology/Compactness/Paracompact.lean",
+  "line": 99,
+  "how": "exact: precise_refinement_set, Paracompact.lean:99--102. Its LocallyFinite condition is precisely neighborhood-finiteness (Mathlib/Topology/LocallyFinite.lean:29--30); neighborhoods may be taken open. No separation hypothesis is needed."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-section-neighborhood-extension",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound. Supporting input for smooth-module acyclicity: IV §4, Lemma (4.6)(a), Theorem (4.7), Corollary (4.8), printed pp.203--204. The printed occurrence of a neighborhood of A in (4.7) means a neighborhood of S. Supporting topological input: Precise locally finite refinement of the local-representative cover in Demailly IV §4, Lemma (4.6)(a).",
+   "via": [
+    "lem-sfb-closed-section-neighborhood-extension",
+    "lem-sfb-smooth-function-modules-acyclic",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

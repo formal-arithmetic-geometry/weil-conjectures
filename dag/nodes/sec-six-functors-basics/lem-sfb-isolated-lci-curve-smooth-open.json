@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-isolated-lci-curve-smooth-open",
+ "kind": "statement",
+ "title": "Smooth open of curves with isolated complete intersection singularities",
+ "statement": "On schemes over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-affine-spectrum], let $\\mathcal C(T)$ be the groupoid of flat proper finitely presented morphisms $X\\to T$ of algebraic spaces whose geometric fibres have dimension at most one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Arrows in $\\mathcal C(T)$ are $T$-isomorphisms and pullback is cartesian base change; arrows over $T'\\to T$ are isomorphisms $X'\\cong X\\times_TT'$ [def-pc-fibre-product]. Algebraic spaces are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. Flatness and local finite presentation for their morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed: separated means its diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying spaces after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). Assume $\\mathcal C$ has been shown to be an algebraic stack (representable diagonal and a smooth surjective scheme atlas). There is an open substack $\\mathcal L\\subseteq\\mathcal C$ smooth over $\\operatorname{Spec}\\mathbf Z$ with this characterization: for every field $K$ and every proper $K$-scheme $C$ of dimension at most one, the classifying point of $C$ belongs to $\\mathcal L$ if and only if $C$ is a local complete intersection over $K$ and $C\\to\\operatorname{Spec}K$ is smooth except at finitely many points. Here local complete intersection means an affine open cover by spectra of finitely generated local-complete-intersection $K$-algebras [def-weil-pbc-complete-intersection-over-field]; smoothness is [def-sbc-smooth-morphisms]. For an open substack, its pullback along any scheme-valued object is an open subscheme of the base; smooth over Z means that its smooth scheme atlas has smooth composite to Spec Z. Empty and disconnected $C$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof": [
+  {
+   "text": "Let $f:X\\to B$ be any family classified by $\\mathcal C$. Properness makes its underlying map closed, and flatness and finite presentation supply the hypotheses of [lem-sfb-space-lci-base-open]. Obtain the universal open $B_{\\mathrm{lci}}\\subseteq B$ on which all fibres are local complete intersections. Its formation commutes with arbitrary scheme base change. In particular its field-valued points are exactly the lci curves, in the affine-cover convention of the statement.",
+   "uses": [
+    "lem-sfb-space-lci-base-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DZX (lemma-big-smooth-part-curves), intersection construction; Tag 0DZV (lemma-lci-curves) and its use of Tag 06CE."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-space-smooth-locus] to $f$ and write $U_f\\subseteq X$ for its smooth locus. Its complement $T=|X|\\setminus|U_f|$ is closed. Apply [lem-sfb-space-closed-subset-finite-fibre-open] to this closed subset and the proper map $f$. This gives an open $B_+\\subseteq B$ commuting with every scheme base change, characterized by finiteness of the nonsmooth set of each fibre. The identification with the fibre nonsmooth set specializes the arbitrary-base-change assertion of [lem-sfb-flat-space-smooth-locus] to Spec(kappa(b)) -> B; finiteness can be checked over the residue field or its algebraic closure by [lem-sfb-space-closed-subset-finite-fibre-open]. Thus this works over imperfect fields as well.",
+   "uses": [
+    "lem-sfb-flat-space-smooth-locus",
+    "lem-sfb-space-closed-subset-finite-fibre-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DZX (lemma-big-smooth-part-curves), intersection construction; Tag 0DZW (lemma-isolated-sings-curves), proof via the closed nonsmooth locus and Tag 0A4Y."
+   }
+  },
+  {
+   "text": "Set $B_{\\mathrm{good}}=B_{\\mathrm{lci}}\\cap B_+$. Define $\\mathcal L(B)$ as the full subgroupoid of $\\mathcal C(B)$ consisting of families with $B_{\\mathrm{good}}=B$. Both opens commute with pullback, so this condition is stable under pullback. It is local on an etale cover: the complement of $B_{\\mathrm{good}}$ is empty when its inverse image in a surjective cover is empty. Hence descent for $\\mathcal L$ is descent for $\\mathcal C$ with this local condition. For an object $X/B$ of $\\mathcal C$ and a map $A\\to B$, its pullback belongs to $\\mathcal L(A)$ exactly when $A\\to B$ factors through $B_{\\mathrm{good}}$. Because $\\mathcal L$ is full, the groupoid fibre product $B\\times_{\\mathcal C}\\mathcal L$ has the same functor of points as this open subscheme (the chosen isomorphism to $X_A$ removes all automorphisms). This proves that $\\mathcal L\\subseteq\\mathcal C$ is an open substack. This is the direct test-object argument, without invoking a theorem about quotient presentations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DZX (lemma-big-smooth-part-curves), displayed intersection; section-open, universal properties, expanded using the definitions of full substack and fibre product."
+   }
+  },
+  {
+   "text": "Over $B=\\operatorname{Spec}K$, the good open is the whole one-point base exactly when $C$ is a local complete intersection and its nonsmooth set is finite. The first condition is precisely the affine-cover condition in the item, and the second says precisely that $C\\to\\operatorname{Spec}K$ is smooth except at finitely many points. This proves both directions of the requested field-point characterization. Empty curves satisfy both conditions vacuously, and none of the construction requires connectedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DZX (lemma-big-smooth-part-curves), clause (3), by the two opens constructed in steps 1 and 2."
+   }
+  },
+  {
+   "text": "Now take any field-valued object $X/K$ in $\\mathcal L$. It is a proper algebraic space over $K$, and its dimension is at most one: cover it by an etale scheme atlas of affine schemes $U_i$, each of finite type over $K$ because $X\\to\\operatorname{Spec}K$ is of finite type; the base changes $(U_i)_{\\bar K}$ form an etale scheme atlas of the geometric fibre $X_{\\bar K}$, so $\\dim(U_i)_{\\bar K}\\leq1$, and [lem-weil-pbc-dimension-preserved-field-extension] gives $\\dim U_i=\\dim(U_i)_{\\bar K}\\leq1$. Hence [lem-sfb-separated-space-dimension-one-scheme] represents it by a $K$-scheme; separatedness and finite type follow from properness. The same lemma, applied to each affine open $V\\subseteq X$ with $V_{\\bar K}$ open in $X_{\\bar K}$, gives $\\dim X\\leq1$ for this scheme. By the good-open conditions it is lci and smooth except at finitely many points. The criterion [lem-sfb-curve-smooth-locus-deformation-test] supplies a coefficient ring $\\Lambda$ with residue field $K$ (equal to $K$ in characteristic zero and a Cohen ring in positive characteristic). Apply [lem-sfb-isolated-lci-curve-unobstructed] to this separated finite-type curve and this Noetherian local coefficient ring: every Artinian $\\Lambda$-deformation lifts across every surjection, so $\\operatorname{Def}_{X,\\Lambda}$ is unobstructed. The equivalence in [lem-sfb-curve-smooth-locus-deformation-test] now puts this classifying point in the smooth open $\\mathcal M\\subseteq\\mathcal C$.",
+   "uses": [
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-curve-smooth-locus-deformation-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DZX (lemma-big-smooth-part-curves), proof of (1), combining Tag 0DZU with examples-defos.tex Tag 0DZQ."
+   }
+  },
+  {
+   "text": "For any scheme-valued object $B\\to\\mathcal L$, pull back $\\mathcal M$ to an open subscheme $B_{\\mathcal M}\\subseteq B$. Every residue-field point of $B$ lies in this open by step 5. Therefore $B_{\\mathcal M}=B$, and $\\mathcal L$ factors through $\\mathcal M$. Since $\\mathcal L$ is open in $\\mathcal C$, it is open in $\\mathcal M$ as well. Restricting a smooth scheme atlas of $\\mathcal M$ to this open gives a smooth scheme atlas of $\\mathcal L$ whose composite to $\\operatorname{Spec}\\mathbf Z$ is the restriction of a smooth morphism. Smoothness is local on the source by its definition on charts, so this restriction is smooth. Thus $\\mathcal L$ is smooth over $\\operatorname{Spec}\\mathbf Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DZX (lemma-big-smooth-part-curves), conclusion (1), using the smooth open from step 5 and the atlas definition of smoothness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-lci-base-open",
+  "lem-sfb-flat-space-smooth-locus",
+  "lem-sfb-space-closed-subset-finite-fibre-open",
+  "lem-sfb-separated-space-dimension-one-scheme",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-sfb-isolated-lci-curve-unobstructed",
+  "lem-sfb-curve-smooth-locus-deformation-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DZX (lemma-big-smooth-part-curves), proof via Tags 0DZV, 0DZW, 0DZU and examples-defos.tex Tag 0DZQ; direct test-object expansion of section-open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The locus of proper curves with local complete intersection and isolated singularities is an open smooth algebraic substack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformations of proper local complete intersection curves smooth away from finitely many points are unobstructed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "curveStack|isolated.*lci|unobstructed",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus of proper curves with local complete intersection and isolated singularities is an open smooth algebraic substack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] {f : A} :\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] {f : A} :\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[EssFiniteType R A] : smoothLocus R A = (Module.support A (H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open moduli stack of proper local complete intersection curves with isolated singularities is smooth over the integers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring smoothness is not the moduli-stack statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformations of local complete intersection curves smooth except at finitely many points are unobstructed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring smoothness is not the moduli-stack statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The open moduli stack of proper local complete intersection curves with isolated singularities is smooth over the integers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and $n \\\\in \\\\mathbb{N}$. If for every point $x \\\\in X$, there exist open subsets $V \\\\subseteq X$ and $U \\\\subseteq Y$ such that $x \\\\in V$, $V \\\\subseteq f^{-1}(U)\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring smoothness is not the moduli-stack statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring smoothness is not the moduli-stack statement"
+  },
+  {
+   "tool": "grep",
+   "query": "curveStack|isolated.*lci|unobstructed",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring smoothness is not the moduli-stack statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus.",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-isolated-lci-curve-smooth-open",
+  "worker": "stage1",
+  "summary": "Constructed the intersection of base-change-compatible lci-fibre and finite-nonsmooth-fibre opens, proved directly that its full subgroupoid is an open substack, checked all field points including algebraic-space objects, and used unobstructed isolated-lci curve deformations and the full curve-stack smoothness criterion. Five independent statement-only inputs; no statement change, Lean writing, or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. The six steps realize the supporting 0DZX intersection and unobstructedness argument; this is not a unit key node, so no unit record is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Generic commutative-algebra fact (Stacks 00P3): Krull dimension of a finite type algebra is unchanged by field extension; step 5 needs it to pass from the geometric-fibre dimension bound of a field-valued family to the dimension of the space and scheme itself. No node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-preserved-field-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-47922ef4d",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-47922ef4d (reviewer sub-agent of L); spot-checked: Verdict FIX: one missing citation added in step 5; nothing else changed. I read the item, all five new nodes and the sources in full. Stacks sources read: moduli-curves.tex 0DZX (statement and proof), 0DZV, 0DZW, section-open, 0DZU with the Cohen-ring paragraph before it; examples-defos.tex 0DZQ, example-schemes, section-general; spaces-more-morphisms.tex 06CE, 06CA, 0A4Y; spaces-morphisms.tex 0DZI; stacks-geometry.tex lemma-characterize-smoothness; algebra.tex definition-cohen-ring. Delivery status: the statement and stmt_deps are byte-identical to the base. The base proof was empty and there is no repair note. The item and its citer are not on the side-live drop list, and the item is still unsplit in side-live, so the delivery is not superseded. Route: steps 1-4 build the 0DZX intersection: B_lci from the new 06CE node (properness gives the closed-map hypothesis), and B_+ from the 0DZI/02V4 smooth-locus node and the 0A4Y closed-subset node. Step 3 is the open-substack argument of section-open, done on test objects; it is elementary. Step 4 checks both directions at field points. Step 5 gets smoothness from the 0ADD scheme node, the 0DZQ node and the 0DZU node, with the same coefficient ring Λ. Step 6 shows L lies in M and is smooth; it is elementary. New nodes, all true and not duplicates: (1) lem-sfb-space-lci-base-open: for flat lfp maps, lci = syntomic = lci fibres, invariant under field extension; lem-trf-syntomic-locus-base-change is only a scheme source locus. (2) lem-sfb-space-flat-smooth-locus: true via 01V9 on charts; it honestly notes that 0DZI alone gives only flat base change. (3) lem-sfb-space-closed-subset-finite-fibre-open: a finite closed subset of the fibre consists of closed points, so the map is quasi-finite there and 0A4Y applies to the reduced subspace; this needs no lfp or Noetherian hypothesis, and base change and field-extension invariance hold. (4) lem-sfb-isolated-lci-curve-unobstructed: hypotheses equal to 0DZQ; Noetherian local Λ is a special case of section-general. (5) lem-sfb-curve-smooth-locus-deformation-test: the full 0DZU criterion for every proper curve of dimension at most one, so not a clause of the item; Λ = k in characteristic 0 works because k is flat over Z and Spec k → Spec Λ is of finite type. No new node restates the item (no D1). Fault fixed (C1/E1): step 5 used dim X ≤ 1 for a field-valued object X/K, but the stack only bounds the dimension of the geometric fibre. The step now uses an affine étale atlas and cites lem-weil-pbc-dimension-preserved-field-extension (Stacks 00P3, reviewed). That node is added to uses and proof_deps and declared in split_report.tool_uses as a generic tool from unit sk-thm-p1 (precedent: lem-pc-dim-base-change). Batch-5 finding: the four new nodes cite def-trf-algebraic-space, which is a general definition. It is neither a statement of the trace formula or of Poincaré duality nor a step of their proofs, and the base stmt_deps already cite it, so I accepted all four citations. The fix file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-isolated-lci-curve-smooth-open.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsolatedLCICurveSmoothOpen",
+  "declaration": "AlgebraicGeometry.ProperCurveModuli.exists_isolated_lci_curve_smooth_open",
+  "declarations": [
+   "AlgebraicGeometry.ProperCurveModuli.IntegerSchemePointIn",
+   "AlgebraicGeometry.ProperCurveModuli.exists_isolated_lci_curve_smooth_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IsolatedLCICurveSmoothOpen.lean",
+  "statement": "theorem exists_isolated_lci_curve_smooth_open (halgebraic : IsAlgebraicModuliStack (category (Spec (.of (ULift.{u} ℤ))))) : ∃ L : OpenModuliSubstack (category (Spec (.of (ULift.{u} ℤ)))), IsSmoothModuliStack L.category ∧ ∀ (K : Type u) [Field K] (C : Scheme.{u}) (f : C ⟶ Spec (.of K)), IsProper f → topologicalKrullDim C ≤ 1 → (IntegerSchemePointIn L K C f ↔ (∃ (I : Type u) (A : I → CommRingCat.{u}) (aA : ∀ i, Algebra K (A i)) (ft : ∀ i, Algebra.FiniteType K (A i)) (φ : ∀ i, Spec (A i) ⟶ C), (∀ i, IsOpenImmersion (φ i)) ∧ (∀ i, φ i ≫ f = Spec.map (CommRingCat.ofHom (@algebraMap K (A i) _ _ (aA i)))) ∧ (∀ x : C, ∃ i, ∃ y : Spec (A i), φ i y = x) ∧ (∀ i, @Algebra.IsLocalCompleteIntersection K (A i) _ _ (aA i) (ft i))) ∧ ∃ S : Set C, S.Finite ∧ ∀ x ∉ S, ∃ U : C.Opens, x ∈ U ∧ Smooth (U.ι ≫ f))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d4d944a1",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Item-only delivery: lean record plus stmt_deps gaining 3 landed def-sfb nodes (allowed by §5); no other node differs from base; the private AlgebraicModuliStack copy that caused the 59b8 return is removed and the landed Q18 module is imported. Statement matches Stacks 0DZX (1),(3) and the node: hypothesis IsAlgebraicModuliStack on ProperCurveModuli.category over Spec ULift Z; ∃ OpenModuliSubstack L with IsSmoothModuliStack (atlas with smooth U.hom); for all K, C, f with IsProper f and dim C ≤ 1, IntegerSchemePointIn (pinned classifying family with iso over K) ↔ affine cover by finite-type lci K-algebras (00S9 record) ∧ smooth away from a finite set. Edge cases (empty, disconnected, imperfect K, all characteristics, universes) OK; no extra hypotheses; only sorry is the theorem proof; docstrings carry source, blueprint and 6 steps; statement verbatim. No compile (no file changed). Advisories: unify with Q20 SchemePointIn (field-base only, not a duplicate); file lacks copyright header."
+ }
+}

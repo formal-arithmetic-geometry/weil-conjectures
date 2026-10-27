@@ -1,0 +1,282 @@
+{
+ "id": "lem-sf-adic-ambient-hom-evaluation-comparison",
+ "kind": "statement",
+ "title": "Ambient Hom identification from a constructible realization and its transpose",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $T$ be a separated finite-type $k$-scheme. On its small pro-etale site [def-weil-pbc-proetale-site], for each finite $E\\subset\\Omega$ put $B_{E,T}=\\varprojlim_{n\\ge1}(\\mathcal O_E/\\varpi_E^n)_T$ [def-weil-completed-integral-coefficients], $E_T=B_{E,T}[1/\\varpi_E]$, and $R_T=p_T^*\\underline\\Omega$, where $\\underline\\Omega(S)$ consists of continuous functions on a profinite set $S$ valued in one finite subextension [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal C_E(T)=D^b_c(T,E)$ for the raw rationalization of derived-complete integral constructible complexes, with its specified completed finite scalar transitions $S_{F/E}$ [def-weil-rationalization-karoubi]. Write $\\mathcal C_T$ for the common-stage pair category of these $\\mathcal C_E(T)$, with Hom groups the directed colimits over common finite fields [def-weil-algebraically-closed-coefficients]. For $A=E_T,R_T$, let $\\mathcal D_T(A)$ be the full subcategory of $D(\\operatorname{Mod}(A))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] of bounded objects whose cohomology sheaves have a finite locally closed stratification on each stratum of which they are pro-etale locally finite free over $A$.\n\nUse the specified tensor and permitted coefficient-passage internal Hom of [def-weil-derived-pullback-tensor-hom]. Suppose $\\rho_T:\\mathcal C_T\\simeq\\mathcal D_T(R_T)$ is an exact equivalence with balanced finite-stage scalar comparisons and a symmetric strong tensorator $\\mu:\\rho_TL\\otimes^L_{R_T}\\rho_TM\\simeq\\rho_T(L\\otimes M)$. Fix a permitted pair $M,N$ and its coefficient-passage Hom $H$, with right evaluation $e:H\\otimes M\\to N$. Assume $a\\mapsto e\\circ(a\\otimes1_M)$ is a natural bijection $\\operatorname{Hom}(L,H)\\simeq\\operatorname{Hom}(L\\otimes M,N)$ for every $L\\in\\mathcal C_T$, compatible with the specified finite rational Hom scalar maps.\n\nLet $Q=R\\mathcal Hom_{R_T}(\\rho_TM,\\rho_TN)$ in the ambient unbounded derived category [def-pur-derived-internal-hom], and define $c:\\rho_TH\\to Q$ to be the ambient tensor-Hom transpose of $\\rho_T(e)\\circ\\mu_{H,M}$. Then $Q$ is bounded constructible in the locally finite free convention of $\\mathcal D_T(R_T)$ and $c$ is an isomorphism in $D(R_T)$. For every $L$, the Hom bijection obtained from full faithfulness of $\\rho_T$, the assumed transpose and the ambient adjunction is exactly postcomposition with $c$. The map $c$ is natural contravariantly in $M$ and covariantly in $N$, and its evaluation equation is $\\operatorname{ev}_{R_T}\\circ(c\\otimes1)=\\rho_T(e)\\circ\\mu_{H,M}$.\n\nThe actual $c$ respects signed symmetry and finite coefficient extension. In every tower the direct and successive comparison maps agree under balanced scalar multiplication and the specified rational Hom comparison; the identity extension gives the identity comparison. These are equalities of the evaluation-defined maps, not merely existence of some internal-Hom isomorphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Lemma 3.4.11 and Remark 6.8.15; full-subcategory evaluation comparison and coefficient coherence, old steps 10--11; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-derived-internal-hom",
+  "def-sf-native-adic-realization-data",
+  "def-sf-common-stage-inclusion-tensor-comparison",
+  "def-sf-adic-closed-reindexing-maps",
+  "def-sf-locally-finite-adic-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "First put the two constructibility conventions on the same footing. The constructibility-identification clause of [lem-sf-adic-finite-realization-cocone] says that, for $A=R_T$, the locally finite free description of $\\mathcal D_T(R_T)$ and bounded constructibility in the stratified local-finite-presentation sense of [sk-def-sfb-bounded-constructible] agree, as object properties of $D(\\operatorname{Mod}(R_T))$; we use only this clause and its finiteness clause, not the realization equivalence. Hence $\\rho_TM$ and $\\rho_TN$ are bounded constructible in that sense. The coefficient is $R_T=p_T^*\\underline\\Omega$ with $\\underline\\Omega$ the finite-subextension-valued ring of [sk-def-sfb-qlbar-condensed], exactly the algebraic-closure coefficient of [lem-sfb-dc-hom-preserves] (not the ring $C(-,\\overline{\\mathbf Q}_\\ell)$ of the localizing-closure convention). The scheme $T$ is separated of finite type over $k=\\overline{\\mathbf F}_q$, of characteristic $p>0$ with $p\\ne\\ell$, so $T$ is a scheme of the setting [sk-def-sfb-dc-setting] used by that lemma. Applying [lem-sfb-dc-hom-preserves] with $\\Lambda=\\underline\\Omega$, $X=T$, $K=\\rho_TM$, $L=\\rho_TN$ gives that the internal Hom $\\RHom_{\\Lambda_T}(\\rho_TM,\\rho_TN)$ of the closed relative module-object tensor of [sk-def-sfb-derived-tensor-hom] is bounded constructible. The zero object is bounded with zero cohomology and is allowed on either side.",
+   "uses": [
+    "lem-sf-adic-finite-realization-cocone",
+    "sk-def-sfb-dc-setting",
+    "lem-sfb-dc-hom-preserves",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 (ambient RHom restricts to the constructible six functors); the closure statement is the cited existing DAG result lem-sfb-dc-hom-preserves"
+   }
+  },
+  {
+   "text": "Identify the internal Hom of Step 1 with the item's $Q$. Under [def-weil-pbc-internal-abelian-sheaf-module-equivalence] the internal-module and sectionwise-module presentations of $R_T$-modules agree, and the forward functor preserves underlying sheaves, sections and restriction maps; hence exactness, cohomology and the balanced relative tensor coincide in the two presentations, and both derived tensors are the K-flat derived functor of that balanced tensor, i.e. the native derived tensor, which is symmetric by [lem-sf-ringed-derived-native-tensor]. The site and sheafification universes are those of the item's ringed-site derived-category convention; no larger-index colimit is introduced. By [lem-sf-ringed-derived-tensor-hom-adjunction] the recorded ringed-site internal Hom $Q$ of [def-pur-derived-internal-hom] is right adjoint to this native tensor, naturally in the tensor parameter; the internal Hom of [sk-def-sfb-derived-tensor-hom] is by definition right adjoint to the same tensor, so uniqueness of right adjoints gives a canonical isomorphism between them, natural in both variables. Bounded constructibility is invariant under isomorphism, so $Q$ is bounded constructible in the sense of [sk-def-sfb-bounded-constructible], and Step 1's convention identification gives $Q\\in\\mathcal D_T(R_T)$. No discrete or continuous-map coefficient ring is substituted. Denote the ambient adjunction by $\\Theta_U:\\operatorname{Hom}(U\\otimes\\rho_TM,\\rho_TN)\\simeq\\operatorname{Hom}(U,Q)$. Its counit is $\\operatorname{ev}$.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-pur-derived-internal-hom",
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15, ambient versus constructible operations; the all-coefficient closure theorem is the cited existing DAG result"
+   }
+  },
+  {
+   "text": "Write $A=\\rho_TH$, $B=\\rho_TM$, $C=\\rho_TN$ and $v=\\rho_T(e)\\mu_{H,M}:A\\otimes B\\to C$. Define $c=\\Theta_A(v)$, as required. For $a:L\\to H$, naturality of the tensorator gives\n$$\\rho_T\\bigl(e(a\\otimes1)\\bigr)\\mu_{L,M}=v(\\rho_Ta\\otimes1).$$\nNaturality of $\\Theta$ in its test object then gives $\\Theta_{\\rho_TL}(v(\\rho_Ta\\otimes1))=c\\rho_Ta$. Since the assumed source transpose, full faithfulness of $\\rho_T$, the tensorator and $\\Theta$ are bijections, postcomposition with $c$ is bijective on $\\operatorname{Hom}(\\rho_TL,A)$ for every $L$. Taking $a=1_H$ gives $\\operatorname{ev}(c\\otimes1_B)=v$, the claimed evaluation equation. These equalities use the naturality and counit laws of the adjunction from Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.11 (adjunction convention); direct naturality calculation from the assumed source transpose and the ambient adjunction"
+   }
+  },
+  {
+   "text": "Both $A$ and $Q$ lie in the full subcategory $\\mathcal D_T(R_T)$, by Step 2. Choose $L_Q$ and an isomorphism $t:\\rho_TL_Q\\xrightarrow{\\sim}Q$ using essential surjectivity of the assumed equivalence. Surjectivity in Step 3 gives $s:\\rho_TL_Q\\to A$ with $cs=t$. Put $b=st^{-1}:Q\\to A$, so $cb=1_Q$. The two endomorphisms $bc,1_A$ of $A$ have the same composite with $c$, since $cbc=c$. Injectivity in Step 3 with $L=H$ gives $bc=1_A$. Thus $b$ is an inverse to this specified $c$. This argument uses only two constructible test objects, after establishing that $Q$ is constructible; it makes no assertion that constructible tests detect arbitrary ambient objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent-written two-test-object argument after Remark 6.8.15; inverse constructed explicitly"
+   }
+  },
+  {
+   "text": "Let $a:M'\\to M$ and $b:N\\to N'$ be morphisms between permitted pairs, and write $h=H(a,b):H(M,N)\\to H(M',N')$ for the coefficient-passage Hom functor of [def-weil-derived-pullback-tensor-hom]. The naturality-in-the-permitted-pair assertion of [lem-sf-adic-common-stage-hom-transpose] gives the evaluation equation\n$$e_{M',N'}(h\\otimes1_{M'})=b\\,e_{M,N}(1_H\\otimes a).$$\nApply $\\rho_T$ and the natural tensorator. By the evaluation equation of Step 3, the uncurries of\n$$c_{M',N'}\\rho_T(h),\\qquad R\\mathcal Hom(\\rho_Ta,\\rho_Tb)c_{M,N}$$\nare both $\\rho_T(b)\\rho_T(e_{M,N})\\mu_{H,M}(1_A\\otimes\\rho_Ta)$. Injectivity of $\\Theta$ proves their equality, hence the required contravariant/covariant naturality. The naturality of the ambient adjunction in its tensor parameter, as well as its target, is part of [lem-sf-ringed-derived-tensor-hom-adjunction].",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-adic-common-stage-hom-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.11; direct computation of the two uncurries using the specified Hom bifunctor"
+   }
+  },
+  {
+   "text": "For the symmetry convention put $e^{\\mathrm{left}}=e\\,\\beta_{M,H}$. Symmetric monoidality of the assumed $\\rho_T$ gives\n$$\\rho_T(e^{\\mathrm{left}})\\mu_{M,H}=v\\,\\beta_{B,A}=\\operatorname{ev}(c\\otimes1_B)\\beta_{B,A}=\\operatorname{ev}^{\\mathrm{left}}(1_B\\otimes c).$$\nThe last equality is naturality of the ambient braiding, whose signed complex normalization is preserved by [lem-sf-ringed-derived-native-tensor]. This proves compatibility for the actual comparison in either evaluation convention: on homogeneous degrees $p,q$ both swaps carry the same sign $(-1)^{pq}$. Applying the inverse swap returns the right-evaluation identity, so it cannot select a different comparison.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent-written signed-symmetry calculation; ordinary symmetry constraints supplied by the cited native tensor theorem"
+   }
+  },
+  {
+   "text": "For a finite extension $E\\subset F$ choose the common-stage representatives of $M,N,H$. Write $\\gamma_Z:A_{Z,E}\\xrightarrow{\\sim}A_{Z,F}$ for their specified scalar identifications after realization over $R_T$; for $H$ include the specified rational Hom comparison. Compatibility of the assumed transpose with this comparison says precisely\n$$v_F(\\gamma_H\\otimes\\gamma_M)=\\gamma_Nv_E.$$\nThe tensorators here commute with the assumed balanced scalar identifications. Put $\\kappa=R\\mathcal Hom(\\gamma_M^{-1},\\gamma_N):Q_E\\to Q_F$. By Step 3 and naturality of ambient evaluation, the uncurries of $c_F\\gamma_H$ and $\\kappa c_E$, after precomposing the tensor variable with $\\gamma_M$, are both $\\gamma_Nv_E$. Transposition is injective, so $c_F\\gamma_H=\\kappa c_E$. For $E\\subset F\\subset G$, substitute this equation twice: the composite uses $\\gamma_{G/F,Z}\\gamma_{F/E,Z}=\\gamma_{G/E,Z}$ for each $Z$. For the contravariant variable, $\\gamma_{G/F,M}^{-1}$ followed by $\\gamma_{F/E,M}^{-1}$ equals $\\gamma_{G/E,M}^{-1}$. Consequently bifunctoriality gives $\\kappa_{G/F}\\kappa_{F/E}=R\\mathcal Hom(\\gamma_{F/E,M}^{-1}\\gamma_{G/F,M}^{-1},\\gamma_{G/F,N}\\gamma_{F/E,N})=\\kappa_{G/E}$. These are the specified scalar comparisons: their associator multiplies scalars by $(g,f,e)\\mapsto gfe$, so both evaluation composites multiply by the same product. For $F=E$, $1\\otimes z\\mapsto z$ and the specified identity Hom comparison give $\\gamma_Z=1$, $\\kappa=1$ and the identity equation. Thus the direct, successive and identity comparisons agree as maps, not just as isomorphism classes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent-written coefficient-square calculation from the hypotheses; BS Lemma 3.4.11 fixes the transpose convention"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-finite-realization-cocone",
+  "sk-def-sfb-dc-setting",
+  "lem-sfb-dc-hom-preserves",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-pur-derived-internal-hom",
+  "sk-def-sfb-bounded-constructible",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-adic-common-stage-hom-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.11 and Remark 6.8.15; HRS Theorem 7.7, Lemma 7.9, Remark 7.10; formal comparison proof written explicitly by NW in the seven steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful essentially surjective strong monoidal constructible realization identifies the specified evaluation transpose with ambient derived internal Hom",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.bijection: {C : Type u₁} →\n  {D : Type u₂} →\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\n      [inst_1 : CategoryTheory.Category.{v₁, u₂} D] →\n        (i : CategoryTheory.Functor D C) →\n          [inst_2 : CategoryTheory.CartesianMonoidalCategory C] →\n            [inst_3 : CategoryTheory.Reflective i] →\n; LightCondensed.ihomPoints_symm_apply: ∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite)\n  (x : CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\n  (LightCondensed.ihomPoints R A B S).symm x =\n    (CategoryTheory.coherentTopology LightProfinite).yonedaEquiv\n  ; CategoryTheory.coev_expComparison: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\n  (F : CategoryTheory.Functor C D) [inst_4 : CategoryTheory.MonoidalClosed; CategoryTheory.expComparison: {C : Type u} →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    {D : Type u'} →\n      [inst_1 : CategoryTheory.Category.{v, u'} D] →\n        [inst_2 : CategoryTheory.CartesianMonoidalCategory C] →\n          [inst_3 : CategoryTheory.CartesianMonoidalCategory D] →\n            (F : CategoryTheory.Func; CategoryTheory.FunctorToTypes.adj: {C : Type u} →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    (F : CategoryTheory.Functor C (Type (max w v u))) →\n      CategoryTheory.MonoidalCategory.tensorLeft F ⊣ CategoryTheory.FunctorToTypes.rightAdj F; CategoryTheory.Functor.ihom_ev_app: ∀ {D : Type u} {C : Type u_1} [inst : CategoryTheory.Groupoid D] [inst_1 : CategoryTheory.Category.{v_1, u_1} C]\n  [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : CategoryTheory.MonoidalClosed C]\n  (F G : CategoryTheory.Functor D C), (CategoryTheory.ihom.ev F).app G = F.closedCounit.app G; CategoryTheory.Functor.closedUnit: {D : Type u} →\n  {C : Type u_1} →\n    [inst : CategoryTheory.Groupoid D] →\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} C] →\n        [inst_2 : CategoryTheory.MonoidalCategory C] →\n          [inst_3 : CategoryTheory.MonoidalClosed C] →\n            (F : CategoryTheory.Functor D C) →\n            ; CategoryTheory.Functor.ihom_coev_app: ∀ {D : Type u} {C : Type u_1} [inst : CategoryTheory.Groupoid D] [inst_1 : CategoryTheory.Category.{v_1, u_1} C]\n  [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : CategoryTheory.MonoidalClosed C]\n  (F G : CategoryTheory.Functor D C), (CategoryTheory.ihom.coev F).app G = F.closedUnit.app G",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*equivalence|equivalence.*internalHom|scalar.*hom.*comparison",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation transpose internal Hom comparison for constructible continuous coefficient realizations is invertible natural and compatible with coefficient towers",
+   "results": "[leansearch] OK 8 hit(s); Module.Dual.transpose: : (M →ₗ[R] M') →ₗ[R] Dual R M' →ₗ[R] Dual R M; transpose_dualTensorHom: (f : Module.Dual R M) (m : M) :\n  Dual.transpose (R := R) (dualTensorHom R M M (f ⊗ₜ m)) = dualTensorHom R _ _ (Dual.eval R M m ⊗ₜ f); LinearEquiv.trans_dualMap_symm_flip: : e.trans e.flip.symm.dualMap = Dual.eval R N; MvPowerSeries.coe_eval₂Hom: (hφ : Continuous φ) (ha : HasEval a) : ⇑(eval₂Hom hφ ha) = eval₂ φ a; Matrix.transposeInvertibleEquivInvertible: : Invertible Aᵀ ≃ Invertible A; CategoryTheory.GlueData.t_inv_assoc: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v, u₁} C] (D : CategoryTheory.GlueData C) (i j : D.J) {Z : C}\n  (h : D.V (i, j) ⟶ Z),\n  CategoryTheory.CategoryStruct.comp (D.t i j) (CategoryTheory.CategoryStruct.comp (D.t j i) h) = h; WeakDual.CharacterSpace.homeoEval_naturality: {X Y 𝕜 : Type*} [RCLike 𝕜] [TopologicalSpace X] [CompactSpace X] [T2Space X] [TopologicalSpace Y] [CompactSpace Y]\n  [T2Space Y] (f : C(X, Y)) :\n  (homeoEval Y 𝕜 : C(_, _)).comp f = (f.compStarAlgHom' 𝕜 𝕜 |> compContinuousMap).comp (homeoEval X 𝕜 : C(_, _)); LinearMap.flip.instIsContPerfPair: : p.flip.IsContPerfPair",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two test objects prove invertibility of ambient internal Hom realization comparison and evaluation transposes prove coefficient coherence",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ExactPairing.evaluation_coevaluation: : η_ _ _ ▷ X ≫ (α_ _ _ _).hom ≫ X ◁ ε_ _ Y = (λ_ X).hom ≫ (ρ_ X).inv; CategoryTheory.ExactPairing.coevaluation_evaluation: : Y ◁ η_ _ _ ≫ (α_ _ _ _).inv ≫ ε_ X _ ▷ Y = (ρ_ Y).hom ≫ (λ_ Y).inv; Mathlib.Tactic.BicategoryLike.CoherenceHom.unfold: Mathlib.Tactic.BicategoryLike.CoherenceHom → Lean.Expr; CategoryTheory.exp.coev_ev: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.MonoidalCategory C] (A B : C)\n  [inst_2 : CategoryTheory.Closed A],\n  CategoryTheory.CategoryStruct.comp ((CategoryTheory.ihom.coev A).app (A ⟹ B))\n      ((CategoryTheory.ihom A).map ((CategoryTheory.ihom.ev A).app B)); CategoryTheory.ihom.ihom_adjunction_unit: : (ihom.adjunction A).unit = coev A; Mathlib.Tactic.BicategoryLike.CoherenceHom.inst: Mathlib.Tactic.BicategoryLike.CoherenceHom → Lean.Expr; CategoryTheory.ihom.coev_ev_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.MonoidalCategory C] (A B : C)\n  [inst_2 : CategoryTheory.Closed A] {Z : C} (h : (CategoryTheory.ihom A).obj B ⟶ Z),\n  CategoryTheory.CategoryStruct.comp ((CategoryTheory.ihom.coev A).app ((CategoryTheory.ihom A).obj B); CategoryTheory.ihom.coev: : 𝟭 C ⟶ tensorLeft A ⋙ ihom A",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|fullyFaithful.*[Cc]losed|[Cc]losed.*fullyFaithful",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian exponential comparisons and general categorical infrastructure do not give ambient constructibility or the specified coefficient-passage map; inspected Closed/Functor.lean and Closed/Basic.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The evaluation induced internal Hom comparison under a monoidal realization equivalence of constructible adic complexes is invertible and commutes with finite scalar extension",
+   "results": "8 hits; CategoryTheory.expComparison_ev, CategoryTheory.exp.ev, CategoryTheory.ihom.ev, CategoryTheory.coev_expComparison, CategoryTheory.expComparison, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.hasRightDualOfEquivalence, CategoryTheory.MonoidalClosed.ofEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian exponential comparisons and general categorical infrastructure do not give ambient constructibility or the specified coefficient-passage map; inspected Closed/Functor.lean and Closed/Basic.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\", \"IsIso\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian exponential comparisons and general categorical infrastructure do not give ambient constructibility or the specified coefficient-passage map; inspected Closed/Functor.lean and Closed/Basic.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful strong monoidal equivalence to a full subcategory closed under ambient internal Hom identifies the evaluation transpose with the ambient derived Hom and its coefficient comparison",
+   "results": "8 hits; CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, CategoryTheory.expComparison, CategoryTheory.bijection, CategoryTheory.Functor.ihom_ev_app, CategoryTheory.ObjectProperty.ihom_map, CategoryTheory.Functor.ihom_coev_app, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian exponential comparisons and general categorical infrastructure do not give ambient constructibility or the specified coefficient-passage map; inspected Closed/Functor.lean and Closed/Basic.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison_ev|def ofEquiv|IsMonoidalClosed",
+   "results": "7 hits; Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian exponential comparisons and general categorical infrastructure do not give ambient constructibility or the specified coefficient-passage map; inspected Closed/Functor.lean and Closed/Basic.lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The native obligation has no imported blueprint ancestor (ancestor prints None); supplied provenance is the evaluation/biduality clause of thm-coef-qbar-verdier. This node carries returned realization proof steps 10,11: Ambient Hom identification from a constructible realization and its transpose.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-ambient-hom-evaluation-comparison",
+  "worker": "stage1",
+  "summary": "Proved ambient closure before using essential surjectivity, then computed the Hom bijection as postcomposition, constructed an inverse with two test objects, and checked naturality, signed symmetry and the actual finite scalar identity/tower maps. Reused existing DAG statements; no new nodes or changed statement. Returned-head repair (18e336b8550): rechecked all current cited statements and resolved repair notes against the retained citation snapshots; preserved the statement and route and made contravariant composition in the finite-field tower explicit before rebuilding the delivery on the current DAG. Maintainer reader FIX re-applied (2026-10-23, head 0d6a67e9): the 18e336b8 FIX was lost when promotion failed. This head kept the old Step 2, which applies det-thm-sf-ctf-stability-internal-hom (algebraic-closure coefficient C(-,Qlbar) of sk-def-localizing-closure) to the finite-subextension ring R_T. Steps 1-2 now use lem-sfb-dc-hom-preserves for exactly that coefficient, together with the convention identification of lem-sf-adic-finite-realization-cocone and uniqueness of right adjoints against def-pur-derived-internal-hom. The Tor-amplitude inputs, which fed only the replaced theorem, are dropped. This head's refined Step 7 is retained.",
+  "blueprint": "No imported ancestor (blueprint_refs ancestor prints None). Realizes the native evaluation/biduality obligation of thm-coef-qbar-verdier through lem-sf-adic-qbar-constructible-realization, old steps 10--11; unit sk-prop-sf-biduality-general.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-dc-hom-preserves",
+    "why": "Closure of bounded constructible complexes under the ambient relative internal Hom for the finite-subextension-valued algebraic-closure coefficient; the unit does not supply this coefficient infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-dc-hom-preserves"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-0d6a67e92",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-0d6a67e92 (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged, no new nodes, seven agent-written steps. I read every cited statement and diffed against the 18e336b8 review run. The 18e3 maintainer FIX was lost when promotion failed. This head kept the original Steps 1-6 verbatim and changed only Step 7, so the C4/E7 fault is back. Step 2 applies det-thm-sf-ctf-stability-internal-hom with Lambda = the finite-subextension ring underline Omega. That theorem's admissible algebraic-closure coefficient is the one of sk-def-localizing-closure, i.e. C(-,Qlbar) from sk-def-sfb-condensed-ring, a different condensed ring. sk-prop-sfb-cartesian-coefficients fixes only its own Qlbar and does not change det-thm's hypothesis. Repair re-applied in fixes/dag/nodes/sec-six-functors/<item>.json. Step 1 now uses the convention clause of lem-sf-adic-finite-realization-cocone (stratified local finite presentation agrees with locally finite free for R_T). Since T is in sk-def-sfb-dc-setting (k = F_q-bar, p != l, separated finite type), lem-sfb-dc-hom-preserves, which covers exactly the finite-subextension Qlbar, makes RHom bounded constructible. Step 2 identifies that RHom with Q (def-pur-derived-internal-hom) by uniqueness of right adjoints, using the module equivalence, native tensor and lem-sf-ringed-derived-tensor-hom-adjunction, then gets Q in D_T(R_T) from the convention clause. The Tor citations and det-thm are dropped. proof_deps equals the union of uses, tool_uses declares only lem-sfb-dc-hom-preserves, the summary is annotated, and a dependency walk finds no cycle. Steps 3-6 and the new Step 7 are kept verbatim. Checked: the Hom bijection is postcomposition with c (naturality of mu and Theta); the inverse b = s t^-1 is built only after Q is shown constructible; dinaturality of e comes from naturality in the permitted pair (lem-sf-adic-common-stage-hom-transpose); signed braiding naturality. In Step 7 the tower composite RHom(gamma_FE,M^-1 gamma_GF,M^-1, gamma_GF,N gamma_FE,N) = kappa_GE is correct by contravariance, and the identity extension gives kappa = 1. Edge cases checked: empty T, zero M or N, E = F, three-field tower. BS 3.4.11/6.8.15 and HRS 7.7/7.9/7.10 are infrastructure only. No SGA citation. There is no re-split note for this item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicAmbientHomEvaluationComparison",
+  "declaration": "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.TensorInput",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.realizedEvaluation",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.comparison",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.finiteM",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.finiteN",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.finiteH",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.gammaM",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.gammaN",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.gammaH",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.finiteEvaluation",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.finiteComparison",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.homTransition",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.ambientTransition",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.Laws",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/AdicAmbientHomEvaluationComparison.lean",
+  "statement": "theorem adic_ambient_hom_evaluation_comparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (T : Over (Spec (CommRingCat.of D.k))) [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [∀ x : T.left, Invertible (l : T.left.residueField x)] (R : LocallyFiniteAdicRealization.Realization l T.left) (presentation : (sectionFunctor l T.left R).IsEquivalence) (A : TensorInput l T.left R) (source : PodPartialClosed (commonStageDerivedTensor l (PadicAlgCl l) T.left) (commonStageHomPairs l (PadicAlgCl l) T.left) (commonStageDerivedInternalHom l (PadicAlgCl l) T.left)) (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) : Laws l T.left R A source",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "TensorInput contains only the symmetric tensor hypotheses, never At.hom_isIso. The normalized realization datum records the assumed exact equivalence and balanced finite-stage comparisons. Laws states boundedness and invertibility of the actual transpose, the Hom-bijection formula, both-variable naturality, right/left signed evaluation, and finite extension/tower/identity equalities. gammaH includes the existing rational Hom scalar comparison; finiteComparison transposes the actual rational evaluation via the existing inclusion tensorator. Extra statement dependencies only name landed definition interfaces used verbatim."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49a1569c2",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause. Hypotheses: FiniteFieldDatum, l ≠ p, T separated + finite type; Realization R gives ρ_T = R.J then the section-module functor, triangulated and fully faithful with exact bounded-constructible image; presentation (section-module functor is an equivalence) is the true canonical identification; TensorInput = landed At without hom_isIso, needed because hom_isIso is the conclusion; closed structure quantified universally; source + source_normalized pinned to podCommonClosed by its ∃!. Laws: bounded, isIso of c = actual transpose of μ then ρ(e), postcomposition and transpose formula, naturality over all permitted-pair morphisms, evaluation, signed symmetry, finite stage equations on specified maps (isoToStage, commonStageHomComparison, stageTensor). lean.statement verbatim; live node unbound and otherwise unchanged; 4 added stmt_deps are definition nodes landed 10-23, before the base, no cycle; imports exist; docstrings complete; one sorry. Advisories: tower/identity hold by definition; owner nodes of PodPartialClosed, podRationalClosed, pullbackTensorCommonBraiding not cited directly; TensorInput repeats At fields. No file changed, no compile run."
+ }
+}

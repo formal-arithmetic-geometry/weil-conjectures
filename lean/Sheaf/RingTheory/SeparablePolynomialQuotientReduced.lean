@@ -48,6 +48,9 @@ theorem isReduced_quotient_of_separable
     ∀ (g : E[X]) (m : ℕ), 1 ≤ m →
       g ^ m ∈ Ideal.span ({Q} : Set E[X]) →
         g ∈ Ideal.span ({Q} : Set E[X]) := by
-  sorry
+  intro g m hm hgm
+  apply Ideal.mem_span_singleton.mpr
+  exact (hQ.squarefree.dvd_pow_iff_dvd (Nat.ne_of_gt hm)).mp
+    (Ideal.mem_span_singleton.mp hgm)
 
 end Polynomial

@@ -1,0 +1,137 @@
+{
+ "id": "def-sf-open-tensor-quotient-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor and finite-reduction compatibility: the normalized scalar and tensor chain comparisons before localization.",
+   "via": [
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "kind": "definition",
+ "title": "Strict quotient tower and open tensor comparison interfaces",
+ "statement": "For the completed coefficient categories, unbounded cochain complexes and strict positive quotient towers on schemes [def-weil-completed-integral-coefficients, def-weil-integral-reduction-tower], define the strict open quotient tensor interfaces formerly declared in OpenTensorQuotientAugmentation. Towers and transpose retain every transition; Balanced retains its coefficient formula; Augmentation its homogeneous scalar-unit formula; ScalarCompatibility and ScalarComparison their actual coefficient-level normalizations. StrictSquare records balanced comparisons, finite coefficient-linear comparisons, their reduction equations, strict augmentation square and localized equality. RoosNormalization pins the augmentation to the first normalized tensor-completion coordinate. FiniteGeometry, FiniteExtensionModel, RestrictionPartitions and IntegralGeometry state the exact geometric properties. Comparison packages these with compatible ordinary and complete open comparisons. All are unchanged definitions or structures, with no existence assertion [def-sf-integral-open-operations, def-sf-integral-open-reduction-comparison-data, def-sf-open-semilinear-tensor-model-data, def-sf-tensor-completion-comparison]. ScalarComponents names exactly the original degreewise ScalarComparison.components proposition, without altering its meaning.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I; Bhatt–Scholze Lemma 6.5.8(2),(3). Agent-formulated strict-system specialization."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-open-immersion",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-reduction-tower",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-sf-open-tensor-normalization",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-weil-finite-torsion-constructibility",
+  "def-sf-tensor-completion-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-finite-constructibility-interval",
+  "def-sf-integral-open-operations",
+  "def-sf-integral-open-reduction-comparison-data",
+  "def-sf-open-semilinear-tensor-model-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero preserves constructible integral sheaves and cohomological interval",
+   "results": "ContMDiff.extend_zero, Function.ExtendByZero.linearMap and unrelated function-extension declarations; no ringed-site integral-constructibility comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, _ ≅ _",
+   "results": "Functor.mapIso and its functoriality laws; these do not construct the geometric or strict-coefficient comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfIntegralConstructible|RoosNormalization|ScalarCompatibility",
+   "results": "No Mathlib matches. Project searches find the existing specialized interfaces and generic coefficient-interchange and scalar-unit lemmas, which are retained as dependencies.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorQuotientAugmentation",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorQuotientData",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorQuotientData.lean",
+  "declaration": "WeilConjectures.OpenTensorQuotient.Comparison",
+  "statement": "structure Comparison\n    (SX : CoefficientDerivedSystemCalculus l E X)\n    (SU : CoefficientDerivedSystemCalculus l E U)\n    (AX : OpenSemilinearTensor.OrdinaryReduction l E X)\n    (AU : OpenSemilinearTensor.OrdinaryReduction l E U)\n    (st : IntegralOpenReduction.TensorComparison l E j o)\n    (m : OpenSemilinearTensor.Comparison l E j o SX SU AX AU st)\n    (c : IntegralOpenReduction.Comparison l E j o SX SU st)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.OpenTensorQuotient.Towers",
+   "WeilConjectures.OpenTensorQuotient.extendTower",
+   "WeilConjectures.OpenTensorQuotient.totalSection",
+   "WeilConjectures.OpenTensorQuotient.transpose",
+   "WeilConjectures.OpenTensorQuotient.reductionTower",
+   "WeilConjectures.OpenTensorQuotient.Balanced",
+   "WeilConjectures.OpenTensorQuotient.finiteTotal",
+   "WeilConjectures.OpenTensorQuotient.Augmentation",
+   "WeilConjectures.OpenTensorQuotient.RoosNormalization",
+   "WeilConjectures.OpenTensorQuotient.forgetSystems",
+   "WeilConjectures.OpenTensorQuotient.ScalarCompatibility",
+   "WeilConjectures.OpenTensorQuotient.ScalarComparison",
+   "WeilConjectures.OpenTensorQuotient.StrictSquare",
+   "WeilConjectures.OpenTensorQuotient.derivedGamma",
+   "WeilConjectures.OpenTensorQuotient.FiniteGeometry",
+   "WeilConjectures.OpenTensorQuotient.FiniteExtensionModel",
+   "WeilConjectures.OpenTensorQuotient.RestrictionPartitions",
+   "WeilConjectures.OpenTensorQuotient.IntegralGeometry",
+   "WeilConjectures.OpenTensorQuotient.Comparison",
+   "WeilConjectures.OpenTensorQuotient.ScalarComponents"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2391b",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261025T122806-L-1807639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2391b",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261025T122806-L-1807639",
+  "kind": "interface",
+  "note": "independent cc review: item theorem (unchanged signature) against node lem-sf-open-tensor-quotient-augmentation and the context lemma completedOpenTensorRepresentatives; moved block line-diffed against the clone; the 2 new sorried statements read against their nodes and the pinned Operations/TensorComparison/TotalComparison; 3 direct importers compiled against the delivered and the fixed modules"
+ }
+}

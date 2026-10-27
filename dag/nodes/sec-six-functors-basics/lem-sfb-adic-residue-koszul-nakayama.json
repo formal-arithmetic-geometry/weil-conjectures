@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-adic-residue-koszul-nakayama",
+ "kind": "statement",
+ "title": "Koszul proof of residue-zero detection on a completed slice",
+ "statement": "Let $X$ be a scheme, $A$ a commutative Noetherian ring, $J$ an ideal, and $U$ an object of the coefficient-sized pro-etale site. Let $R$ be the completed coefficient ring sheaf restricted to $U$, let $q_0:R\\to B_0$ be its actual residue projection and $F_0=-\\otimes_R^L B_0$ the specified derived scalar extension [def-sfb-adic-residue-lift-comparisons]. Let $Q\\in D(R)$ be locally complete for the actual kernel ideal: its derived internal Hom from each localization at a local kernel section vanishes [def-sfb-quotient-kernel-completeness]. If $F_0Q$ is a zero object, then $Q$ is a zero object. There is no cohomological bound or finite-generation hypothesis on $Q$.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons",
+  "def-sfb-quotient-kernel-completeness"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1U, lemma-derived-complete-zero-bis, direct Koszul proof; Tag 0G1T, lemma-derived-vanishing-mod-I; Tag 0A0E, lemma-derived-completion-koszul. The module argument sheafifies using the same balanced tensor, ideal-power and finite Postnikov constructions on every slice."
+ },
+ "proof": [
+  {
+   "text": "Choose a finite generating family a of J by Noetherianity. On the slice, restrict its completed global sections. The sectionwise flat_and_quotients formula, followed by mapping the finite ideal span, identifies their span with the actual kernel of the residue projection. The projection is sectionwise surjective. Generate the kernel module on each further slice by these sections using the proved ideal_generated_global_sections construction.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the general ringedKoszulCompletionReflector, at the standard derived localizations, to that generating family and to the actual kernel ideal. Its unit is an isomorphism on Q by the given local internal-Hom completeness.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the localization representative P of Q. Transport residue vanishing along its representative isomorphism. Apply finiteKoszulTensor_acyclic_of_residue to obtain acyclicity of every finite negative Koszul tensor stage. This step uses no completeness, quotient reconstruction, or cohomological bound on Q.",
+   "uses": [
+    "lem-sfb-finite-koszul-residue-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation functors on the category of strict towers are exact and jointly reflect isomorphisms. Thus their exactAt tests imply that the transposed Koszul tensor tower is acyclic, and its image under the derived localization is zero. The tensorFactors isomorphism and the representative isomorphism identify this zero object with D.tensorTower(Q). A total right derived inverse limit sends this zero object to zero: its computation comparison is invertible on the zero K-injective complex, and the ordinary inverse limit preserves zero morphisms. Transport across that comparison and the zero-object isomorphism. Finally transport along the invertible Koszul unit to conclude Q is zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-sfb-finite-koszul-residue-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1U, direct Koszul proof. Kernel generation and the strict-tower/zero-K-injective assembly are formalized by Z7, 2026-10-26; the finite-stage Tag 0G1T calculation is isolated separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete unbounded complex over a ringed site with zero derived tensor with residue ring is zero",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.isZero_Tor'_succ_of_projective, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, CategoryTheory.isZero_Tor_succ_of_projective",
+   "date": "2026-10-26",
+   "verdict": "No matching ringed-site derived completion theorem; ordinary completion, degree-bound and generic categorical results do not supply this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZero\", \"DerivedCategory\"",
+   "results": "4 hits: DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.Plus.isZero_homology_of_isGE, DerivedCategory.Plus.isZero_homology_of_isLE",
+   "date": "2026-10-26",
+   "verdict": "No matching ringed-site derived completion theorem; ordinary completion, degree-bound and generic categorical results do not supply this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Zz]ero|[Zz]ero.*Koszul|IsComplete.*IsZero",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No matching ringed-site derived completion theorem; ordinary completion, degree-bound and generic categorical results do not supply this assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueQuotientUnitUniversal",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Local perfect lifting in det-lem-integral-models-stacks, normalization of the quotient unit: the cone of a map between complete complexes with invertible residue reduction vanishes. This is the independent Tag 0G1U Koszul detection argument, not quotient reconstruction.",
+   "via": [
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueKoszulNakayama",
+  "file": "lean/Sheaf/Paper/AdicResidueKoszulNakayama.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_isZero_of_complete_residue",
+  "statement": "theorem adicResidue_isZero_of_complete_residue\n    (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)\n    (Q : AdicResidueLocalDerived.{u, v} X J U)\n    (hQ : IsComplete (adicResidueLocalProjection.{u, v} X J U 0) Q)\n    (h₀ : IsZero ((adicResidueLocalReduction.{u, v} X J U 0).obj Q)) :\n    IsZero Q",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T023042-L-516251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261026T071618-L-3957067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

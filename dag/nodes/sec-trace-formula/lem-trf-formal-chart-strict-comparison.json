@@ -1,0 +1,156 @@
+{
+ "id": "lem-trf-formal-chart-strict-comparison",
+ "kind": "statement",
+ "title": "Canonical strict-local and log-chart comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For a locally Noetherian fs log scheme W, a map y:W -> Spec Z[R] from any commutative monoid R, an fs monoid Q and h:R -> Q, use the canonical notation of def-trf-formal-chart-geometric-data at a geometric point z of the toric pullback Z. Give Z a log structure N with a Q-chart gamma compatible with its toric coordinates. Fix the canonical closed-point lift zA and a coordinate isomorphism eC:Spec C ~= Spec A times_W Z over both A and Z[Q], its geometric prime q, and a compatible lift tB to Spec B, B=C_q. Assume B is Noetherian and the target face contracts to the source face. Then the canonical strict-local projection is an isomorphism; there is a ring isomorphism from the etale log-scheme strict local ring at z to the canonical strict henselization at tB, with the pointed-neighbourhood section and monomial formulas displayed in Lean, carrying the log nonunit ideal onto the extension of J. The characteristic is the target sharp chart, on chart representatives. The point tB factors through B/J, with a canonical quotient strict-henselization isomorphism respecting every element of B. Finally regularity of B/J implies regularity of Bsh/JBsh, dim Bsh=dim B, and dim(Bsh/JBsh)=dim(B/J). This statement uses no formal model or dimension identity.",
+ "stmt_deps": [
+  "def-trf-formal-chart-geometric-data",
+  "def-trf-fs-log-blowup",
+  "def-trf-chart-unit-face-data",
+  "def-per-formal-monoid-extension-data",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and 1.8, p.70; formal-model-to-geometric-stalk argument from returned item steps 6--7 (agent-supplied refinement). Stacks: algebra.tex Tag 00MA (lemma-completion-tensor), Tag 05WS (lemma-quotient-strict-henselization); more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension)."
+ },
+ "proof": [
+  {
+   "text": "The canonical map $\\operatorname{Spec}A\\to W$ is ind-etale on affine charts by the small-strict-henselization theorem. Apply ind-etale strict-local invariance to its base change $Z_A\\to Z$, at the chosen $\\Omega$-point. It gives that the canonical projection $Z_{A,(\\bar z_A)}\\to Z_{(\\bar z)}$ is an isomorphism over $Z$. Consequently it respects every $Q$-chart monomial, since those are pulled back from $Z$. On the affine $Z_A=\\operatorname{Spec}C$, the pointed-neighbourhood/triple comparison, followed by the triple theorem, identifies its geometric strict local ring at $\\bar z_A$ canonically with $(C_{\\mathfrak q})^{\\rm sh}=B^{\\rm sh}$, using the separable residue closure in the same $\\Omega$. Composing gives the asserted identification $\\mathcal O^{\\rm sh}_{Z,\\bar z}\\cong B^{\\rm sh}$ as a ring receiving the chart map.",
+   "uses": [
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local map $B\\to B^{\\rm sh}$ is faithfully flat, hence a $[q]\\in B$ is a unit after this map exactly when it was a unit before: a nonunit lies in $\\mathfrak m_B$ and maps into the maximal ideal, whereas an inverse is preserved. Thus the chart face at the geometric stalk in Step 6 is exactly $F$. Chart-face logification gives its characteristic $Q_F/F^{\\rm gp}=T$. Every nonunit of the associated log stalk is represented by a chart element outside $F$ multiplied by a ring unit, so its image generates exactly $JB^{\\rm sh}$. This also follows directly from the pushout formula in the cited logification statement; multiplication by ring units does not change the generated ideal.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-trf-chart-face-localization-logification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every generator of J is a nonunit of the local ring B, hence lies in its maximal ideal and evaluates to zero at tB. Factor the point through B/J. The strict-henselization quotient comparison supplies eJ with its equation on B; the construction uses the same separable residue closure in Omega. Apply regularity preservation to B/J and dimension preservation to B and B/J, obtaining the implication and the two comparison equalities. No dimension-plus-rank equality is assumed or concluded.",
+   "uses": [
+    "lem-sbc-strict-henselization-surjective-quotient-core",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-dimension",
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-strict-henselization-surjective-quotient-core",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-chart-face-localization-logification",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Extracted proof steps of lem-trf-formal-chart-geometric-regularity; Canonical strict-local and log-chart comparison. Uses the existing inputs with the indicated Stacks comparisons."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "indEtale_strictLocal_invariance|strictHenselization.*[Qq]uotient",
+   "results": "{\"t\": \"2026-10-26T08:05:44Z\", \"tool\": \"grep\", \"query\": \"indEtale_strictLocal_invariance|strictHenselization.*[Qq]uotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingEquiv, Ideal.quotientEquiv",
+   "results": "{\"t\": \"2026-10-26T08:05:45Z\", \"tool\": \"loogle\", \"query\": \"RingEquiv, Ideal.quotientEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Ideal.quotientEquiv\", \"Ideal.quotientEquiv_mk\", \"Ideal.quotientEquiv_symm_mk\", \"Ideal.quotientEquiv_apply\", \"Ideal.quotientEquiv_symm_apply\", \"PowerBasis.quotientEquivQuotientMinpolyMap_apply\", \"PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply\"], \"digest\": \"b83c0140f03e0cc3\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ind etale base change induces the canonical strict local ring comparison respecting log charts and strict henselization commutes with quotient",
+   "results": "{\"t\": \"2026-10-26T08:05:55Z\", \"tool\": \"leanfinder\", \"query\": \"An ind etale base change induces the canonical strict local ring comparison respecting log charts and strict henselization commutes with quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.HasMap.map\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.FormallyEtale.localization_map\", \"StandardEtalePair.homEquiv_symm_apply\", \"Algebra.IsEtaleAt\"], \"digest\": \"a70199085dc8a05f\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical strict henselization comparison after ind etale base change respecting chart monomials and characteristic monoids",
+   "results": "{\"t\": \"2026-10-26T08:14:10Z\", \"tool\": \"leansearch\", \"query\": \"Canonical strict henselization comparison after ind etale base change respecting chart monomials and characteristic monoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"HenselianLocalRing.casesOn\", \"HenselianLocalRing\", \"Field.henselian\", \"instHenselianRingMaximalIdeal\", \"RingHom.Etale\", \"RingHom.Etale.isStableUnderBaseChange\"], \"digest\": \"b34487ea2b8da255\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalChartGeometricRegularity",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: ILO VI Proposition 1.9, the final application of log smoothness, using VI 1.8 and VI 1.4. Extraction: VI 1.6 and 1.8, p.70; formal-model-to-geometric-stalk argument from returned item steps 6--7 (agent-supplied refinement). Stacks: algebra.tex Tag 00MA (lemma-completion-tensor), Tag 05WS (lemma-quotient-strict-henselization); more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension). Specific refinement: Canonical strict-local and log-chart comparison",
+   "via": [
+    "lem-trf-formal-chart-geometric-regularity",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalChartStrictComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalChartStrictComparison.lean",
+  "declaration": "AlgebraicGeometry.formal_chart_strict_comparison",
+  "declarations": [
+   "AlgebraicGeometry.formal_chart_strict_comparison"
+  ],
+  "statement": "theorem formal_chart_strict_comparison (W : FineSaturatedLogScheme.{u}) (R Q : Type u) [CommMonoid R] [CommMonoid Q] (_hQ : IsFineSaturatedMonoid Q) (y : W.scheme ⟶ Spec (.of (MonoidAlgebra ℤ R))) (h : R →* Q) (N : EtaleLogStructure (chartScheme y h)) (γ : Q →* N.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 (chartScheme y h))))) (_hγ : N.IsChart (Scheme.Etale.mk (𝟙 (chartScheme y h))) γ) (_hγmap : ∀ q : Q, (pullback.snd y (toricMap h)).appTop ((Scheme.ΓSpecIso (.of (MonoidAlgebra ℤ Q))).inv (MonoidAlgebra.single q 1)) = N.alpha.app (op (Scheme.Etale.mk (𝟙 (chartScheme y h)))) (γ q)) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ chartScheme y h) (zA : Spec (.of Ω) ⟶ pullback (baseMap y h z) (pullback.fst y (toricMap h))) (_hzA : zA ≫ pullback.snd (baseMap y h z) (pullback.fst y (toricMap h)) = z) (_hzAclosed : zA ≫ pullback.fst (baseMap y h z) (pullback.fst y (toricMap h)) = Spec.map (Scheme.strictHenselizationEval (z ≫ pullback.fst y (toricMap h)))) (eC : Spec (Algebra.monoidChartTensor (alpha y h z) h) ≅ pullback (baseMap y h z) (pullback.fst y (toricMap h))) (_heCA : eC.hom ≫ pullback.fst (baseMap y h z) (pullback.fst y (toricMap h)) = Spec.map (CommRingCat.ofHom (Algebra.monoidChartTensorBase (alpha y h z) h))) (_heCQ : eC.hom ≫ pullback.snd (baseMap y h z) (pullback.fst y (toricMap h)) ≫ pullback.snd y (toricMap h) = Spec.map (CommRingCat.ofHom (tensorRight (alpha y h z) h))) (q : Ideal (Algebra.monoidChartTensor (alpha y h z) h)) [q.IsPrime] (_hq : q = (Scheme.SpecToEquivOfField Ω _ (zA ≫ eC.inv)).1.asIdeal) (_hface : (Algebra.ChartResidual.targetFace (alpha y h z) h q).comap h = Algebra.ChartResidual.sourceFace (alpha y h z)) (tB : Spec (.of Ω) ⟶ Spec (.of (Localization.AtPrime q))) (_htB : tB ≫ Spec.map (CommRingCat.ofHom (algebraMap (Algebra.monoidChartTensor (alpha y h z) h) (Localization.AtPrime q))) = zA ≫ eC.inv) [IsNoetherianRing (Localization.AtPrime q)] : IsIso (Scheme.strictHenselizationMap (pullback.snd (baseMap y h z) (pullback.fst y (toricMap h))) zA) ∧ (∃ e : strictLocalRing (chartScheme y h) z ≃+* Scheme.strictHenselization tB, (∀ (U : (chartScheme y h).Etale) (v : (Scheme.pointSmallEtale z).fiber.obj U), ∃ k : Scheme.strictLocalization tB ⟶ U.left, k ≫ U.hom = Scheme.strictLocalizationToBase tB ≫ Spec.map (CommRingCat.ofHom (algebraMap (Algebra.monoidChartTensor (alpha y h z) h) (Localization.AtPrime q))) ≫ eC.hom ≫ pullback.snd (baseMap y h z) (pullback.fst y (toricMap h)) ∧ Spec.map (Scheme.strictHenselizationEval tB) ≫ k = v.left ∧ ∀ c : Γ(U.left, ⊤), e (strictLocalGerm (chartScheme y h) z U v c) = (Scheme.ΓSpecIso (Scheme.strictHenselization tB)).hom (k.appTop c)) ∧ (∀ v : Q, e (N.toEtalePrelogStructure.stalkAlpha z (N.toEtalePrelogStructure.germ z (Scheme.Etale.mk (𝟙 (chartScheme y h))) (Over.homMk z) (γ v))) = strictBase tB (Algebra.localizedTensorMonomial (alpha y h z) h q v)) ∧ (N.nonunitIdeal z).map e.toRingHom = strictIdeal tB (Algebra.localizedTensorBoundary (alpha y h z) h q)) ∧ (∃ eT : N.characteristic z ≃* Algebra.ChartResidual.targetSharp (alpha y h z) h q, ∀ v : Q, eT (Associates.mk (N.toEtalePrelogStructure.germ z (Scheme.Etale.mk (𝟙 (chartScheme y h))) (Over.homMk z) (γ v))) = Algebra.ChartResidual.sharpMap (Algebra.ChartResidual.targetFace (alpha y h z) h q) v) ∧ (∃ tJ : Spec (.of Ω) ⟶ Spec (.of (Localization.AtPrime q ⧸ Algebra.localizedTensorBoundary (alpha y h z) h q)), tJ ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Algebra.localizedTensorBoundary (alpha y h z) h q))) = tB ∧ ∃ eJ : (Scheme.strictHenselization tB ⧸ strictIdeal tB (Algebra.localizedTensorBoundary (alpha y h z) h q)) ≃+* Scheme.strictHenselization tJ, ∀ b : Localization.AtPrime q, eJ (Ideal.Quotient.mk _ (strictBase tB b)) = strictBase tJ (Ideal.Quotient.mk _ b)) ∧ (IsRegularRing (Localization.AtPrime q ⧸ Algebra.localizedTensorBoundary (alpha y h z) h q) → IsRegularRing (Scheme.strictHenselization tB ⧸ strictIdeal tB (Algebra.localizedTensorBoundary (alpha y h z) h q))) ∧ ringKrullDim (Scheme.strictHenselization tB) = ringKrullDim (Localization.AtPrime q) ∧ ringKrullDim (Scheme.strictHenselization tB ⧸ strictIdeal tB (Algebra.localizedTensorBoundary (alpha y h z) h q)) = ringKrullDim (Localization.AtPrime q ⧸ Algebra.localizedTensorBoundary (alpha y h z) h q)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2e473",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261026T092830-L-3471491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2e473",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261026T092830-L-3471491",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 split statements (local preparation, extended model dimensions, strict comparison) against node lem-trf-formal-chart-geometric-regularity, HasExtendedFormalMonoidModel/CompletedLocalModel defs, FineSaturatedLogScheme; moved defs diffed byte-identical vs clone; 0 importers"
+ }
+}

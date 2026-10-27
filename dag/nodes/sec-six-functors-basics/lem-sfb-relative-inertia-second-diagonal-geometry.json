@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-relative-inertia-second-diagonal-geometry",
+ "kind": "statement",
+ "title": "Relative inertia and the second diagonal of an algebraic-stack morphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $h:\\mathcal X\\to\\mathcal Y$ be a morphism of algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack]. Fibred groupoids, morphisms, 2-morphisms and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces use [def-trf-algebraic-space]. The relative inertia $I_{\\mathcal X/\\mathcal Y}$ has over an $S$-scheme $T$ objects $(x,\\alpha)$, where $x\\in\\mathcal X(T)$ and $\\alpha\\in\\operatorname{Aut}(x)$ satisfies $h(\\alpha)=\\mathrm{id}_{h(x)}$; arrows $v:(x,\\alpha)\\to(x',\\alpha')$ satisfy $v\\alpha=\\alpha'v$. Its projection $p$ forgets $\\alpha$, and its neutral section $e$ sends $x$ to $(x,\\mathrm{id}_x)$. Then $\\Delta_h:\\mathcal X\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ is representable by algebraic spaces. The relative inertia is an algebraic stack, and $p:I_{\\mathcal X/\\mathcal Y}\\to\\mathcal X$ is representable by algebraic spaces. There is an equivalence over $\\mathcal X$ between $\\mathcal X\\times_{(\\mathcal X\\times_{\\mathcal Y}\\mathcal X)}\\mathcal X$, formed using $\\Delta_h$ on both sides, and $I_{\\mathcal X/\\mathcal Y}$; under this equivalence the second diagonal $\\Delta_{\\Delta_h}$ is the neutral section $e$. For $\\mathcal Y=S$, the relative inertia is the absolute inertia $I_{\\mathcal X}$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 04XS (lemma-properties-diagonal), part (1); Tag 050Q (lemma-inertia); section-higher-diagonals, the identification immediately preceding Tag 0CL0 (lemma-diagonal-diagonal), using Categories Tag 034H (lemma-inertia-fibred-category)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-inertia",
+  "def-sfb-relative-moduli-inertia"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ and $D=\\mathcal X\\times_{\\Delta_h,B,\\Delta_h}\\mathcal X$. Apply [lem-sfb-algebraic-stack-fibre-products] first to $h,h$ and then to $\\Delta_h,\\Delta_h$. All three stacks in each application are algebraic: in the second application the base is $B$, already obtained in the first. Thus $B$ and $D$ are algebraic stacks. By [lem-sfb-stack-relative-diagonal-finite-type], $\\Delta_h$ is representable by algebraic spaces. Only its representability clause is needed.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-relative-diagonal-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 04XS (lemma-properties-diagonal), part (1), and 050Q (lemma-inertia), proof; algebraic.tex Tag 04T2 (lemma-2-fibre-product)."
+   }
+  },
+  {
+   "text": "Unpack [def-sfb-stable-pointed-moduli-groupoids] fibrewise. An object of $D(T)$ is $(x,y,(i,k))$, where $i,k:x\\xrightarrow{\\sim}y$ and $h(i)=h(k)$. An arrow to $(z,w,(l,m))$ is a pair $(u:x\\to z,v:y\\to w)$ satisfying $vi=lu$ and $vk=mu$. Define $F:D\\to I_{\\mathcal X/\\mathcal Y}$ by $F(x,y,(i,k))=(x,k^{-1}i)$ and $F(u,v)=u$. Here $h(k^{-1}i)=h(k)^{-1}h(i)=1$, and $u k^{-1}i=m^{-1}v i=m^{-1}l u$, exactly the inertia-arrow condition. Identities and compositions are preserved because $F$ selects the first component. Conversely define $G(x,\\alpha)=(x,x,(\\alpha,1_x))$ and $G(u)=(u,u)$. The equalities $h(\\alpha)=1$ and $u\\alpha=\\beta u$ give respectively its object and arrow conditions. Both formulas commute with pullback, using the canonical comparison isomorphisms of the fibred categories, since functors preserve identities, composition and inverses. Thus these are morphisms over $S$-schemes, not just unrelated fibre functors.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 034H (lemma-inertia-fibred-category), explicit functors in the proof."
+   }
+  },
+  {
+   "text": "The composite $FG$ is the identity. At $d=(x,y,(i,k))$, the pair $(1_x,k)$ is an isomorphism $GF(d)=(x,x,(k^{-1}i,1_x))\\to d$: its two required equations are $k(k^{-1}i)=i$ and $k1_x=k$. For an arrow $(u,v):d\\to d^{\\prime}$ with second structural isomorphism $m$ at $d^{\\prime}$, naturality is the componentwise equality $(u,v)(1_x,k)=(u,vk)=(u,mu)=(1_z,m)(u,u)$. These isomorphisms also commute with pullback, by the same identity/composition formulas. Hence $F$ and $G$ are quasi-inverse equivalences of fibred groupoids. If $q_1:D\\to\\mathcal X$ is the first projection, $pF=q_1$ and $q_1G=p$ on objects and arrows; the displayed comparison has first component the identity. The equivalence is therefore over $\\mathcal X$. This expands the omitted details of the source without invoking a separate inertia-equivalence lemma.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 034H (lemma-inertia-fibred-category), quasi-inverse and natural isomorphism in the proof."
+   }
+  },
+  {
+   "text": "The second diagonal sends $x$ to $(x,x,(1_x,1_x))$ and an arrow $u$ to $(u,u)$. Applying $F$ gives $(x,1_x)$ and $u$, so $F\\Delta_{\\Delta_h}=e$, including its action on arrows. If $\\mathcal Y=S$ is the discrete fibred groupoid represented by the base scheme, $h(\\alpha)=1$ for every automorphism over a fixed $S$-scheme. The relative inertia objects and arrows are then exactly the absolute inertia objects and arrows, with the same pullbacks, projection and neutral section.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "section-higher-diagonals, identification immediately before Tag 0CL0 (lemma-diagonal-diagonal); Tag 050Q (lemma-inertia), absolute case."
+   }
+  },
+  {
+   "text": "The first projection $q_1:D\\to\\mathcal X$ is the $2$-base change of $\\Delta_h:\\mathcal X\\to B$ along the other $\\Delta_h:\\mathcal X\\to B$. Its representability follows from step 1 and [lem-sfb-fibred-groupoid-representable-smooth-calculus]. For any scheme $T\\to\\mathcal X$, the explicit equivalence of step 3 gives an equivalence over $T$ between $I_{\\mathcal X/\\mathcal Y}\\times_{\\mathcal X}T$ and $D\\times_{q_1,\\mathcal X}T$: apply $F$ or $G$ on its first component and retain the structural isomorphism to the fixed object of $\\mathcal X(T)$. The latter fibre product is an algebraic space. Being equivalent to an algebraic space is precisely the scheme-test definition of representability in [def-sfb-stable-pointed-moduli-groupoids]. Thus the actual projection $p$ is representable by algebraic spaces.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Q (lemma-inertia), proof; algebraic.tex Tag 0302 (lemma-base-change-representable-by-spaces)."
+   }
+  },
+  {
+   "text": "Finally check algebraicity on the explicit equivalence of step 3, using [def-sfb-algebraic-moduli-stack]. Isomorphism sheaves and descent data for inertia correspond through $G$ to those for $D$, and full faithfulness gives unique corresponding arrows; a descended object of $D$ is sent back by $F$. Hence inertia is an etale stack. A scheme test of its diagonal is equivalent, by $G$ on the two objects and arrows, to the corresponding scheme test of the diagonal of $D$, so it is an algebraic space. Choose a smooth surjective scheme atlas $U\\to D$, whose existence follows from step 1. Compose with $F$ to get $U\\to I_{\\mathcal X/\\mathcal Y}$. For each scheme $T\\to I_{\\mathcal X/\\mathcal Y}$ its base change is equivalent over $T$ to $U\\times_D T$, with $T\\to D$ obtained by $G$ and the comparison $GF\\cong1_D$ of step 3. Thus it has exactly the same algebraic-space presentation and smooth surjective projection to $T$. This is a smooth surjective scheme atlas for inertia, proving that inertia is algebraic.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Q (lemma-inertia), first paragraph of proof; algebraic.tex Tag 026O (definition-algebraic-stack)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-stack-relative-diagonal-finite-type",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 04XS and 050Q; section-higher-diagonals preceding 0CL0; explicit equivalence from categories.tex Tag 034H."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The relative inertia of an algebraic stack is the self fibre product of its relative diagonal and the second diagonal is its identity section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, the diagonal morphism $X \\to X \\times X$ defined by lifting the identity morphism on $X$ to the product is an immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverFstOverInferInstanceOverClassId\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {M S : AlgebraicGeometry.Scheme} [inst : M.Over S],\\n  AlgebraicGeometry.Scheme.Hom.IsOver (CategoryTheory.Limits.pullback.fst (M ↘ S) (CategoryTheory.CategoryStruct.id S))\\n    S\", \"doc\": \"Given a morphism $ M \\to S $ in the category of schemes and the identity morphism $ \\text{id}_S : S \\to S $, the first projection morphism from the pullback of $ M \\to S $ and $ \\text{id}_S $ is a morphism\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isMonHom_fst_id_right\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {M S : AlgebraicGeometry.Scheme} [inst : M.Over S] [inst_1 : CategoryTheory.MonObj (M.asOver S)],\\n  CategoryTheory.IsMonHom\\n    (AlgebraicGeometry.Scheme.Hom.asOver\\n      (CategoryTheory.Limits.pullback.fst (M ↘ S) (CategoryTheory.CategoryStruct.id S)) S)\", \"doc\": \"In the Cartesian monoidal category of schemes over a base scheme $ S $, the first projection morphism from the pullback of a scheme $ M $ over $ S $ with the identity morphism $ \\\\mathrm{id}_S : S \\\\to \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals and ordinary categorical pullbacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative diagonals of Artin stack morphisms are representable by algebraic spaces and relative inertia is an algebraic stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.HasOfPostcompProperty AlgebraicGeometry.IsOpenImmersion] [P.RespectsRight AlgebraicGeometry.IsOpenImmersion]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P], AlgebraicGeometry.IsZariskiLocalAtSource P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski-local at the source, closed under post-composition with open immersions, and respects right composition with open immersions, then the diagonal morphis\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals and ordinary categorical pullbacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertia\", \"diagonal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals and ordinary categorical pullbacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeInertia|inertiaStack|AlgebraicStack|algebraic stack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals and ordinary categorical pullbacks do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The second diagonal of an algebraic stack morphism identifies with the neutral section of its relative inertia",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"CategoryTheory.Limits.pullback.diagonal\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \": X ⟶ diagonalObj f\", \"doc\": \"The morphism from $ X $ to the pullback object $ \\\\text{diagonalObj} f $, constructed by lifting the identity morphism on $ X $ against itself, ensuring the universal property of the pullback is satisf\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.diagonal_Spec_map\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"∀ (R S : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  CategoryTheory.Limits.pullback.diagonal (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S))) =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.Tensor\", \"doc\": \"The diagonal morphism of the morphism $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ induced by the $R$-algebra structure on $S$ coincides with the composition of the morphism $\\\\operatorname{Spec\"}\n  {\"name\": \"CategoryTheory.Limits.pullback.diagonal_snd\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \": diagonal f ≫ pullback.snd _ _ = 𝟙 _\", \"doc\": \"The composition of the diagonal morphism from $ X $ to the pullback of a morphism $ f: X \\\\to Z $ with itself, followed by the second projection morphism from the pullback object to $ X $, equals the i\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated g] : IsClosedImmersion (pullback.lift (𝟙 _) f (Category.id_comp (f ≫ g)))\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals and ordinary categorical pullbacks do not state this algebraic-stack assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separated-source-finite-inertia-target",
+  "date": "2026-10-23",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: last paragraph of Tag 0DUE: apply Tag 0CL0(1) and Tag 050M(3), with composite the separated structure map. Supporting input: Relative inertia and the second diagonal of an algebraic-stack morphism. The creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor returns None); current latest blueprint direct-images proof (3) is the recorded ancestor context.",
+   "via": [
+    "lem-sfb-separated-source-finite-inertia-target",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-inertia-second-diagonal-geometry",
+  "worker": "stage1",
+  "summary": "Reused existing relative-diagonal representability, algebraic-stack fibre products and representable base-change calculus. Wrote explicit inertia functors, their natural comparison, neutral-section calculation, and algebraicity transfer. No new nodes or statement changes. All search services were run and their hits read.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), the direct-image preservation input: this is a deep prerequisite in the inherited stable-curve/coarse-space implementation. The latest proof no longer spells out the inherited alteration chain. blueprint_refs.py ancestor returns None; retained the inherited null ancestor rather than inventing an imported node. Whole-blueprint inertia/second-diagonal/relative-diagonal searches give no equivalent algebraic-stack statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-e3e3a3828",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-e3e3a3828 (reviewer sub-agent of L); spot-checked: First S1 delivery with no new nodes. Compared with clones/live and clones/side-live, where the item is still unsplit: statement and stmt_deps are identical, and only the proof, proof_deps, proof_origin, status and split_report fields changed. Steps 2-4 match Stacks Categories 034H exactly. Checked: h(i)=h(k) in D; uk^-1 i = m^-1 l u, using vk=mu; FG=id; the natural iso (1,k) satisfies vk=mu; pF=q1; and Delta_{Delta_h}(x)=(x,x,(1,1)) goes to (x,1)=e(x). Steps 1 and 5 use 04T2, 04XS (which covers any stack morphism) and 0302 (arbitrary 2-base change) within their hypotheses. Step 6 transports the stack property, diagonal representability and the atlas along the equivalence, as in the 050Q proof. Small cases pass: h=id, BH->BK with nonabelian H, scheme maps, empty X, and Y=S (discrete). No duplicate found: the absolute-inertia node lem-sfb-inertia-locally-finite-type is a special case, not a restatement. No SGA is cited, and the item is not a target node. Batch-5 flags: both lem-sfb-algebraic-stack-fibre-products and lem-sfb-fibred-groupoid-representable-smooth-calculus reach only the general definition def-trf-algebraic-space, which is outside the trace-formula and Poincare-duality assumptions, so both are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeInertiaSecondDiagonalGeometry",
+  "declaration": "CategoryTheory.relative_inertia_second_diagonal_geometry",
+  "declarations": [
+   "CategoryTheory.relative_inertia_second_diagonal_geometry",
+   "CategoryTheory.relative_moduli_inertia_absolute"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeInertiaSecondDiagonalGeometry.lean",
+  "statement": "theorem relative_inertia_second_diagonal_geometry {S : AlgebraicGeometry.Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (h : BasedFunctor F G) (hF : IsAlgebraicModuliStack F) (hG : IsAlgebraicModuliStack G) : IsRepresentableByAlgebraicSpaces (moduliRelativeDiagonal h) ∧ IsAlgebraicModuliStack (relativeModuliInertia h) ∧ IsRepresentableByAlgebraicSpaces (relativeModuliInertiaProjection h) ∧ ∃ e : BasedFunctor (moduliTwoFiberProduct (moduliRelativeDiagonal h) (moduliRelativeDiagonal h)) (relativeModuliInertia h), e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (relativeModuliInertiaProjection h)) (moduliTwoFiberFst (moduliRelativeDiagonal h) (moduliRelativeDiagonal h))) ∧ Nonempty (ModuliTwoIso ((moduliRelativeDiagonal (moduliRelativeDiagonal h)).comp e) (relativeModuliInertiaNeutral h))",
+  "branch": "sheaf-dag",
+  "by": "Q145",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce5e0e288",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Read the item node, new node def-sfb-relative-moduli-inertia, both modules, the report, and the dep sources (ModuliInertia, moduliRelativeDiagonal, moduliTwoFiberProduct/Fst, ModuliTwoIso, IsRepresentableByAlgebraicSpaces, IsAlgebraicModuliStack), plus Stacks 050Q and the higher-diagonals paragraph. Clauses match: Delta_h representable; relative inertia (full subcategory of absolute inertia killed by h) algebraic; projection representable; exists e from D = X x_{Delta,B,Delta} X to I, an equivalence with a 2-iso over X to the first projection and a 2-iso from Delta_Delta followed by e to the neutral section (the node says 'there is an equivalence'; the canonical (x,k^-1 i) witnesses it, and the clause is not vacuous). The Y=S case is a separate equivalence to moduliInertia via the identity base category. Item diff vs side-live: only lean and stmt_deps (added the new node plus landed def-sfb-moduli-inertia and def-sfb-dm-stack-morphism-properties, whose records list the decls used). Statements verbatim; new node fields correct; no duplicate in side-live; real data in defs; theorems sorry; docstrings and source place OK; lines <=100; imports used; universes free. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-ringed-site-nonpositive-derived-hom",
+ "kind": "statement",
+ "title": "Derived Hom from a nonpositive complex into a module",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the universes of [def-weil-size-convention], with $\\mathcal O$ a sheaf of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived category $D(\\mathcal O)$ [def-weil-abstract-derived-category], and derived internal Hom computed by a K-injective resolution in the second argument [def-pur-derived-internal-hom]. Let $E\\in D(\\mathcal O)$ satisfy $\\mathcal H^i(E)=0$ for $i>0$, and let $M$ be an $\\mathcal O$-module, placed in degree zero. Then $\\mathcal H^i(R\\mathcal Hom_{\\mathcal O}(E,M[0]))=0$ for every $i<0$. The canonical truncation map $E\\to\\mathcal H^0(E)[0]$ induces a bijection\n$$\\operatorname{Hom}_{\\mathcal O}(\\mathcal H^0(E),M)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(\\mathcal O)}(E,M[0]),$$\nwhere an ordinary module map is first viewed as a map of single complexes and then precomposed with truncation. This bijection is natural in $E$ and $M$. Here $\\mathcal H^i$ is the cohomology sheaf of a representative, and no bounded-below, perfectness, quasi-coherence, Noetherian or enough-projectives hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XS (lemma-negative-exts), for the canonical degree-zero Hom comparison and negative Ext vanishing in an abelian category; sites-cohomology.tex Tag 08JA (lemma-section-RHom-over-U), applied on each localized ringed site, for the corresponding internal-Hom cohomology-sheaf bound."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Choose a complex $C$ representing $E$ and put $P=\\tau_{\\le0}C$, with its canonical inclusion $e:P\\to C$. By [lem-weil-pbc-truncation-cohomology], $H^i(e)$ is an isomorphism for $i\\le0$ and $H^i(P)=0$ for $i>0$. The hypothesis on $E$ therefore makes $e$ a quasi-isomorphism. Thus $QP\\cong E$, $P^p=0$ for $p>0$, and $H^0(P)\\cong\\mathcal H^0(E)$; here $P^0=\\ker d_C^0$ and $H^0(P)=\\operatorname{coker}(d_P^{-1}:P^{-1}\\to P^0)$.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (section-truncations), canonical upper truncation; derived.tex Tag 06XS (lemma-negative-exts), first truncation in the proof"
+   }
+  },
+  {
+   "text": "The smallness assumption permits application of the Grothendieck-abelian assertion in [prop-pur-kinjective-resolutions-exist] to $\\Mod(\\mathcal O)$. By [lem-sp-grothendieck-enough-injectives] it has enough injectives. Apply part (1) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] to choose $s:M[0]\\to I$ with $I^q=0$ for $q<0$, all $I^q$ injective, and $0\\to M\\xrightarrow{s^0}I^0\\xrightarrow{d_I^0}I^1\\to\\cdots$ exact. By [lem-weil-pbc-bounded-below-injectives-kinjective], $I$ is K-injective. In particular $s^0$ identifies $M$ with $\\ker d_I^0$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist) (1), 070J (lemma-bounded-below-injectives-K-injective); injectives.tex Tag 01DU (theorem-sheaves-modules-injectives)"
+   }
+  },
+  {
+   "text": "By [def-pur-derived-internal-hom], the representatives $P$ and $I$ compute $R\\mathcal Hom_{\\mathcal O}(E,M[0])$ by $\\mathcal Hom^\\bullet(P,I)$. For $n<0$ its degree-$n$ term is $\\prod_p\\mathcal Hom_{\\mathcal O}(P^p,I^{p+n})$ by [def-pur-hom-complex]. If $p>0$ then $P^p=0$; if $p\\le0$ then $p+n<0$ and $I^{p+n}=0$. Each factor is therefore the zero sheaf: over every localized site the only map from or to the zero module is zero. The whole product is zero. Consequently this representing complex is zero in every negative degree, so its negative cohomology sheaves vanish by the kernel/image definition of cohomology.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 08J7 (section-internal-hom), K-injective representative construction; Section 0A8X (section-hom-complexes), product formula"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kinjective-hom-derived] to $P$ and $I$: localization is a bijection $\\operatorname{Hom}_{K(\\mathcal O)}(P,I)\\to\\operatorname{Hom}_{D(\\mathcal O)}(QP,QI)$. Composing with the isomorphisms $Qe:QP\\to E$ and $Qs:M[0]\\to QI$ gives a bijection from homotopy classes of chain maps $P\\to I$ to $\\operatorname{Hom}_{D(\\mathcal O)}(E,M[0])$, sending $[f]$ to $(Qs)^{-1}\\circ Qf\\circ(Qe)^{-1}$. No boundedness of $P$ below is needed in the cited statement.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), (1) implies (3)"
+   }
+  },
+  {
+   "text": "A chain map $f:P\\to I$ has only the component $f^0:P^0\\to I^0$: for $p<0$ its target is zero, and for $p>0$ its source is zero. Its two possibly nontrivial chain conditions are $d_I^0f^0=0$ and $f^0d_P^{-1}=0$. Since $M\\xrightarrow{s^0}\\ker d_I^0$ is an isomorphism, the first condition uniquely writes $f^0=s^0g$; since $s^0$ is monic, the second says $gd_P^{-1}=0$. The cokernel property uniquely writes $g=u\\pi$ with $u:H^0(P)\\to M$ and $\\pi:P^0\\twoheadrightarrow H^0(P)$. Conversely these formulas construct a chain map for every $u$. A chain homotopy has components $h^p:P^p\\to I^{p-1}$; for $p\\le0$ its target is zero, and for $p>0$ its source is zero. Hence all homotopies are zero, so this is a bijection on homotopy classes as well. The homotopy formula used here is the one in [def-pur-kinjective-complex].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS (lemma-negative-exts), degree-zero endpoint calculation, made explicit with a nonnegative injective resolution"
+   }
+  },
+  {
+   "text": "Let $p:P\\to H^0(P)[0]$ be $\\pi$ in degree zero and zero elsewhere. Step 5 constructs precisely $f=s\\circ u[0]\\circ p$. Under step 4 its class is $u[0]\\circ Qp\\circ(Qe)^{-1}$, which is precomposition with the canonical truncation $t_E:E\\to\\mathcal H^0(E)[0]$. This proves that the requested canonical map itself is bijective. Taking $H^0$ of this expression gives $u$, since $H^0(t_E)$ is the identity under the truncation identification. Thus its inverse is the map induced by the cohomology functor $H^0$. For any derived morphism $a:E\\to E^{\\prime}$ and module morphism $b:M\\to M^{\\prime}$, functoriality gives $H^0(b[0]\\circ v\\circ a)=b\\circ H^0(v)\\circ H^0(a)$. Since the inverse bijections are $H^0$, this identity proves naturality in both variables and independence of all choices of representatives and resolutions.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS (lemma-negative-exts) (1) with a=b=0, identifying the comparison; homology.tex Tag 0118 (section-truncations)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-truncation-cohomology",
+  "def-weil-abstract-derived-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-kinjective-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XS, 013K, 070I, 070J; explicit representative proof of the internal-sheaf bound using sites-cohomology.tex Sections 0A8X and 08J7 instead of a hypercohomology-to-sheaf argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a nonpositive complex E of module sheaves and a module M in degree zero derived internal Hom is connective with H zero equal to sheaf Hom from H zero E to M and derived morphisms equal ordinary morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extMk_hom\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y)\\n  [inst_3 : HasDerivedCategory C] {n : ℕ} (f : X ⟶ R.cocomplex.X n) (m : ℕ) (hm : n + 1 = m)\\n  (hf : CategoryTheory.C\", \"doc\": \"Given an injective resolution $ R $ of an object $ Y $ in an abelian category $ \\\\mathcal{C} $, a morphism $ f: X \\\\to R.\\\\text{cocomplex}.X(n) $ satisfying $ f \\\\circ d_{n,m} = 0 $ for all $ m $, and int\"}\n  {\"name\": \"DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X Y : CochainComplex C ℤ) (a b : ℤ),\\n  a < b → ∀ [X.IsStrictlyLE a] [Y.IsStrictlyGE b], Subsingleton (DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category, and let $X$ and $Y$ be cochain complexes in $\\\\mathcal{C}$ with integer indices. If $X$ is strictly supported in degrees $\\\\leq a$ and $Y$ is strictly supported\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} [inst_3 : HasDerivedCategory C] (f : X ⟶ Y),\\n  (CategoryTheory.Abelian.Ext.mk₀ f).hom =\\n    CategoryTheory.ShiftedHom.mk₀ (↑0) CategoryTheory.Abelian.Ext.mk₀._p\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the function maps a morphism $ f : X \\\\to Y $ to the hom-set in the derived category between the $ a $-shifted single-term cochain co\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ}\\n  [inst_3 : HasDerivedCategory C]\\n  (x : CochainComplex.HomComplex.Cocycle ((CochainComplex.singleFunctor C 0\", \"doc\": \"For an object $X$ in an abelian category $\\\\mathcal{C}$ with derived category structure, the inverse of the cohomology class equivalence applied to a cocycle $x$ yields a morphism equal to the composit\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract derived orthogonality and single-complex declarations do not give the ringed-site internal Hom lower bound and canonical degree-zero bijection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"singleFunctor\", \"homEquiv\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract derived orthogonality and single-complex declarations do not give the ringed-site internal Hom lower bound and canonical degree-zero bijection"
+  },
+  {
+   "tool": "grep",
+   "query": "hom.*[Ii]sLE|[Ii]sLE.*hom|[Hh]om.*[Ss]ingle|single.*[Hh]om",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"line\": \"58\", \"text\": \"    apply (subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE K L 0 1 (by simp)).elim\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"line\": \"108\", \"text\": \"    X.IsLE n ↔ ∀ (i : ℤ) (_ : n < i), IsZero ((homologyFunctor C i).obj X) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"line\": \"111\", \"text\": \"    apply ((K.exactAt_of_isLE n i hi).isZero_homology).of_iso\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Algebra.Homology.SingleHomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"line\": \"29\", \"text\": \"`DerivedCategory.singleFunctor C n ⋙ DerivedCategory.homologyFunctor C n ≅ 𝟭 C` -/\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"line\": \"30\", \"text\": \"noncomputable def singleFunctorCompHomologyFunctorIso (n : ℤ) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"line\": \"31\", \"text\": \"    singleFunctor C n ⋙ homologyFunctor C n ≅ 𝟭 C :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"line\": \"35\", \"text\": \"      (HomologicalComplex.homologyFunctorSingleIso _ _ _)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"117\", \"text\": \"      isoWhiskerRight (HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) n) _ ≪≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"130\", \"text\": \"lemma mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app (X : C₁) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"131\", \"text\": \"    dsimp% F.mapDerivedCategoryFactors.inv.app ((HomologicalComplex.single C₁ (.up ℤ) 0).obj X) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"132\", \"text\": \"      (F.mapDerivedCategorySingleFunctor 0).hom.app X =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"133\", \"text\": \"    DerivedCategory.Q.map ((F.mapCochainComplexSingleFunctor 0).hom.app X) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"238\", \"text\": \"  (HomotopyCategory.singleFunctors C).postcomp Qh\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"251\", \"text\": \"    Qh.obj (((HomotopyCategory.singleFunctors C).functor n).obj X) = (singleFunctor C n).obj X :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"255\", \"text\": \"    Q.obj ((HomologicalComplex.single C _ n).obj X) = (singleFunctor C n).obj X :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"259\", \"text\": \"`DerivedCategory.singleFunctors C ≅ (HomotopyCategory.singleFunctors C).postcomp Qh` given\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"209\", \"text\": \"lemma isZero_homology_of_isLE\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\", \"line\": \"47\", \"text\": \"  (((SingleFunctors.evaluation _ _ 0).mapIso (singleFunctorsPostcompQIso C)).hom.app S.X₃) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\", \"line\": \"48\", \"text\": \"    triangleOfSESδ (hS.map_of_exact (HomologicalComplex.single C (ComplexShape.up ℤ) 0)) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\", \"line\": \"68\", \"text\": \"      triangleOfSES (hS.map_of_exact (HomologicalComplex.single C (ComplexShape.up ℤ) 0)) := by\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\", \"line\": \"80\", \"text\": \"    (HomologicalComplex.single C (ComplexShape.up ℤ) 0))) _ (singleTriangleIso hS)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\", \"line\": \"91\", \"text\": \"  hom₁ := (singleFunctor C 0).map f.τ₁\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"81\", \"text\": \"lemma ShortComplex.ShortExact.mapShiftedHom_singleδ'\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract derived orthogonality and single-complex declarations do not give the ringed-site internal Hom lower bound and canonical degree-zero bijection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived maps from nonpositive module sheaf complex to module are Hom from zeroth cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.mkHom_f_0\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \": (mkHom P Q zero one one_zero_comm succ).f 0 = zero\", \"doc\": \"The component of the cochain map at index $0$ constructed using `mkHom` is equal to the zero morphism in the category $V$.\"}\n  {\"name\": \"CochainComplex.toSingle₀Equiv\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \"(C : CochainComplex V ℕ) (X : V) : (C ⟶ (single₀ V).obj X) ≃ (C.X 0 ⟶ X)\", \"doc\": \"There is a natural equivalence between the set of chain maps from a cochain complex $ C $ to the single-term cochain complex at index 0 with object $ X $ and the set of morphisms from the 0th object o\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.ofHom_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": ofHom (0 : F ⟶ G) = 0\", \"doc\": \"The cochain of degree 0 in the homomorphism complex $\\\\text{Hom}(F,G)$ obtained from the zero chain map $0 : F \\\\to G$ is equal to the zero cochain.\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.mk_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology\", \"type\": \": mk (0 : Cocycle K L n) = 0\", \"doc\": \"The cohomology class in degree $n$ of the homomorphism complex $\\\\text{Hom}(K, L)$ corresponding to the zero cocycle is the zero element in the $n$-th cohomology group. Specifically, the canonical map \"}\n  {\"name\": \"CochainComplex.fromSingle₀Equiv\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \"(C : CochainComplex V ℕ) (X : V) : ((single₀ V).obj X ⟶ C) ≃ { f : X ⟶ C.X 0 // f ≫ C.d 0 1 = 0 }\", \"doc\": \"Let $V$ be a category with zero morphisms and a zero object. For any cochain complex $C = (C_n, d_n)$ over $V$ indexed by natural numbers, and for any object $X$ in $V$, there is a canonical bijection\"}\n  {\"name\": \"CochainComplex.HomComplex.δ_ofHom\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"{p : ℤ} (φ : F ⟶ G) : δ 0 p (Cochain.ofHom φ) = 0\", \"doc\": \"For any chain map $\\\\varphi : F \\\\to G$ between cochain complexes in a preadditive category and for every integer $p$, the differential $\\\\delta$ applied to the degree-zero cochain $\\\\varphi$ at $p$ equal\"}\n  {\"name\": \"groupCohomology.shortComplexH0\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": ShortComplex (ModuleCat k)\", \"doc\": \"In the category of modules over a ring $ k $, this constructs a short complex consisting of the inclusion map from the invariant submodule $ V^G $ to $ V $, followed by the first differential $ d^1 $ \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{X : C} (P : ProjectiveResolution X) (F : C ⥤ D) [F.Additive] :\\n  ((F.mapHomologicalComplex _).obj P.complex).opcycles 0 ⟶ F.obj X\", \"doc\": \"Given a projective resolution $ P $ of an object $ X $ in an abelian category $ \\\\mathcal{C} $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ to another abelian category $ \\\\mathcal{D} $, \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract derived orthogonality and single-complex declarations do not give the ringed-site internal Hom lower bound and canonical degree-zero bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ringed site internal Hom of a bounded above nonpositive complex into a sheaf is nonnegative and its hypercohomology zero is derived morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X Y : CochainComplex C ℤ) (a b : ℤ),\\n  a < b → ∀ [X.IsStrictlyLE a] [Y.IsStrictlyGE b], Subsingleton (DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category, and let $X$ and $Y$ be cochain complexes in $\\\\mathcal{C}$ with integer indices. If $X$ is strictly supported in degrees $\\\\leq a$ and $Y$ is strictly supported\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isZero_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ),\\n  n < i → ∀ [hX : X.IsLE n], CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"If an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $ (i.e., is isomorphic to a cochain complex strictly supported in degrees $ \\\\leq n $), then for every integer $ i \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract derived orthogonality and single-complex declarations do not give the ringed-site internal Hom lower bound and canonical degree-zero bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site derived internal Hom from a nonpositive complex to a module sheaf has no negative cohomology and morphisms are determined by zeroth cohomology",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extMk",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give abstract orthogonality, injective resolutions or single-complex cohomology; none states both ringed-site assertions under these hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor, DerivedCategory.homologyFunctor",
+   "results": "1 hits: DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give abstract orthogonality, injective resolutions or single-complex cohomology; none states both ringed-site assertions under these hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*isGE|derivedInternalHom|rhom.*isGE|homologyFunctor_map_bijective",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give abstract orthogonality, injective resolutions or single-complex cohomology; none states both ringed-site assertions under these hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps in the derived category from a nonpositive complex to an object concentrated in degree zero are maps from its zeroth cohomology",
+   "results": "8 hits: CochainComplex.toSingle₀Equiv, ChainComplex.toSingle₀Equiv, ChainComplex.fromSingle₀Equiv, CochainComplex.fromSingle₀Equiv, CochainComplex.mkHom_f_0, DerivedCategory.instHasZeroObject, CochainComplex.HomComplex.Cochain.ofHom_zero, CochainComplex.isoHomologyπ₀",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give abstract orthogonality, injective resolutions or single-complex cohomology; none states both ringed-site assertions under these hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "hom.*isLE|isLE.*hom|subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE|singleFunctorCompHomologyFunctorIso",
+   "results": "12 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give abstract orthogonality, injective resolutions or single-complex cohomology; none states both ringed-site assertions under these hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of commutative rings choose a nonpositive complex and a nonnegative injective resolution: the internal Hom complex vanishes in negative degrees and its degree zero maps factor through H0",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CochainComplex.cm5b.I, CategoryTheory.InjectiveResolution.extMk_zero, CategoryTheory.InjectiveResolution.ofCocomplex, CochainComplex.isKInjective_of_injective_aux, CochainComplex.isKInjective_of_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give abstract orthogonality, injective resolutions or single-complex cohomology; none states both ringed-site assertions under these hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-module-hom",
+  "date": "2026-10-24",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom. Supporting input: Tag 08JY (quot-lemma-noetherian-hom), the Noetherian finite-type-module case used in the last paragraph of Tag 08K6. In the proof of Tag 08JY: the comparisons using H^0(P_T)=F_T and vanishing in positive degrees, and the final RHom lower bound.",
+   "via": [
+    "lem-sfb-noetherian-module-hom",
+    "lem-sfb-space-module-hom-affine",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-nonpositive-derived-hom",
+  "worker": "stage1",
+  "summary": "Proved both clauses by a nonpositive good truncation and a nonnegative bounded-below injective resolution. Reused all resolution, Grothendieck, truncation and localization lemmas; created no new nodes. Wrote the two degree-zero chain conditions and vanishing of every possible homotopy, identified the resulting bijection with the canonical truncation map, and proved naturality on arbitrary derived morphisms by H^0. The statement is unchanged.",
+  "blueprint": "Supporting homological-algebra input in the ancestry recorded in blueprint.from.place: the H^0 comparison and RHom lower bound in Stacks Tag 08JY (lemma-noetherian-hom), serving the proper-direct-image clause (3) of det-thm-sf-ctf-stability-direct-images. The current latest blueprint proof has no further expansion of this foundational input.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Its ringed-site module category is Grothendieck abelian; used only as a general homological-algebra tool, not to replace any geometric step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-ec13e2bc1",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-ec13e2bc1 (reviewer sub-agent of L); spot-checked: Read the item in full. The statement and stmt_deps are unchanged against both clones/live and clones/side-live, which are still unsplit with no repair note, so no other group has superseded this delivery. The delivery has no new nodes and cites no SGA. Source check: Stacks derived.tex Tag 06XS (lemma-negative-exts, line 8713) with a=b=0 gives the Hom clause with no extra hypotheses. Tag 08JA is not needed, because the sheaf bound is proved directly on a representing complex. Step 1: lem-weil-pbc-truncation-cohomology holds for every complex, so the truncation inclusion e is a quasi-isomorphism; P^0=ker d^0, and H^0(P)=coker d_P^{-1} because P^1=0. Step 2: prop-pur-kinjective-resolutions-exist makes Mod(O) Grothendieck for a small site and a commutative ring sheaf; with enough-injectives and left-exact-resolution part (1) this gives I^{<0}=0 and the augmented sequence exact. The bounded-below lemma's 'Hom• acyclic' notion of K-injective is equivalent to the homotopy-class definition in def-pur-kinjective-complex, using shifts. Step 3: def-pur-derived-internal-hom explicitly allows any K-injective target and any source representative. For n<0 every term ∏Hom(P^p,I^{p+n}) is zero, since P^p=0 for p>0 and I^{p+n}=0 for p≤0. Step 4: kinjective-hom-derived holds for every source N, so P need not be bounded below. Step 5: I checked the components by hand. Only f^0 can be nonzero, its chain conditions are d_I^0f^0=0 and f^0d_P^{-1}=0, and every homotopy is zero; so Hom_K(P,I)=Hom(H^0P,M). Step 6: p is a chain map, the class of s∘u[0]∘p is u[0]∘t_E, and H^0 is the inverse, which gives naturality for arbitrary derived morphisms. Small cases checked: E=0, M=0, E=N[0], E=N[1], E with terms arbitrarily far in negative degrees, and M not injective. No duplicate of the general ringed-site statement found. The worker recorded the Grothendieck clause in split_report.tool_uses, which C8 leaves to L; the entry is accurate and I accept it as a generic tool use. No changes made."
+ }
+}

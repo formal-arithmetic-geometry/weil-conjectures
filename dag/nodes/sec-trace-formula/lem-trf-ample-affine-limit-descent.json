@@ -2,7 +2,7 @@
  "id": "lem-trf-ample-affine-limit-descent",
  "kind": "statement",
  "title": "Ampleness descends to a stage of an affine transition limit",
- "statement": "Let $I$ be a small nonempty directed set, $(Z_i)_{i\\in I}$ an inverse system of quasi-compact schemes [def-weil-pbc-quasi-compact-scheme] that are quasi-separated [def-weil-quasi-separated-morphism], with affine transition morphisms $q_{ji}:Z_j\\to Z_i$ for $j\\geq i$ [pqf-def-affine-morphism]. Let $Z=\\varprojlim_i Z_i$ with projections $q_i$ be the limit in schemes [def-pc-scheme, def-weil-pbc-category-colimit], and fix $i_0\\in I$. Let $L_0$ be an invertible $\\mathcal O_{Z_{i_0}}$-module [def-sc-invertible-module]. If $q_{i_0}^*L_0$ is ample [def-weil-pbc-ample-invertible-module] on $Z$, then there exists $j\\geq i_0$ such that $q_{j i_0}^*L_0$ is ample on $Z_j$. The pullbacks are tensor pullbacks [def-pc-module-pullback].",
+ "statement": "Let $I$ be a small nonempty directed set in the ambient universe of the schemes, $(Z_i)_{i\\in I}$ an inverse system of quasi-compact schemes [def-weil-pbc-quasi-compact-scheme] that are quasi-separated [def-weil-quasi-separated-morphism], with affine transition morphisms $q_{ji}:Z_j\\to Z_i$ for $j\\geq i$ [pqf-def-affine-morphism]. Let $Z=\\varprojlim_i Z_i$ with projections $q_i$ be the limit in schemes [def-pc-scheme, def-weil-pbc-category-colimit], and fix $i_0\\in I$. Let $L_0$ be an invertible $\\mathcal O_{Z_{i_0}}$-module [def-sc-invertible-module]. If $q_{i_0}^*L_0$ is ample [def-weil-pbc-ample-invertible-module] on $Z$, then there exists $j\\geq i_0$ such that $q_{j i_0}^*L_0$ is ample on $Z_j$. The pullbacks are tensor pullbacks [def-pc-module-pullback].",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Tag 09MT, lemma-limit-ample, in Situation 01YX (situation-descent)."
@@ -19,77 +19,80 @@
  ],
  "proof": [
   {
-   "text": "Because $q_{i_0}^*L_0$ is ample, the ampleness definition gives, for every point of $Z$, a section of some positive tensor power whose nonvanishing open is affine. Quasi-compactness of $Z$ lets us choose finitely many such sections $s_1,\\ldots,s_m$ (possibly of different powers) whose affine nonvanishing opens $Z_{s_a}$ cover $Z$.",
+   "text": "Choose finitely many affine nonvanishing opens of positive tensor powers covering the ample limit, using the finite-cover form of the ampleness definition. This includes the empty cover when the limit is empty.",
    "uses": [
-    "def-weil-pbc-ample-invertible-module",
-    "def-weil-pbc-quasi-compact-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 09MT proof, first sentence; Properties, Definition 01PS"
-   }
-  },
-  {
-   "text": "Because $L_0$ is invertible, it is quasi-coherent by [def-sc-invertible-module]. Apply [lem-sc-valuation-limit-qcoh-section-descent] to the tail above $i_0$ with $F_{i_0}=L_0$: for each chosen section $s_a$ there are an index $i_a\\ge i_0$ and a section $s_{a,i_a}$ of the pullback of $L_0$ to $Z_{i_a}$ whose pullback to $Z$ is $s_a$. A common upper bound $i_2$ of the finitely many $i_a$ gives sections $s_{a,i_2}$ on one stage, all pulling back to $s_a$.",
-   "uses": [
-    "def-sc-invertible-module",
-    "lem-sc-valuation-limit-qcoh-section-descent"
+    "lem-sc-ample-finite-affine-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 09MT proof, invoking Tags 0B8W and 01Z0"
+    "place": "Tag 09MT, lemma-limit-ample, in Situation 01YX (situation-descent)."
    }
   },
   {
-   "text": "Fix $a$. The principal open $(Z_{i_2})_{s_{a,i_2}}$ has inverse image $Z_{s_a}$ in $Z$, because pullback of a section of an invertible module pulls back its nonvanishing locus. By [lem-weil-pbc-limit-affine-transition], the inverse images of this open form an inverse system with affine transitions and limit $Z_{s_a}$. The latter is affine by Step 1, so [lem-weil-pbc-limit-affine-stage] gives an index $j_a\\ge i_2$ such that $(Z_j)_{s_{a,j}}$ is affine for every $j\\ge j_a$.",
+   "text": "Use the structure-module/global-section correspondence and pullback tensor-power isomorphisms to write each section as a map between pullbacks of invertible modules. Invertible modules are locally finite free and hence finitely presented. Apply the morphism clause of finitePresentation_descent_affineLimit to descend each map. Compare its nonzero locus with the section nonvanishing locus, using zero schemes and invariance under isomorphisms of arrows. Zero schemes commute with pullback; hence these descended opens pull back to the chosen limit opens.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-limit-affine-stage"
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-sc-pullback-tensor-power-iso",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 09MT proof, invoking Lemma 01Z6 (lemma-limit-affine) after descending the sections"
+    "place": "Tag 09MT, lemma-limit-ample, in Situation 01YX (situation-descent)."
    }
   },
   {
-   "text": "Choose a common upper bound $j_0$ of the finitely many $j_a$. Pulling the sections forward to $Z_{j_0}$ preserves affineness of their principal opens because each transition morphism is affine. Their inverse images in $Z$ still cover $Z$, so the union $W_{j_0}=\\bigcup_a(Z_{j_0})_{s_{a,j_0}}$ has inverse image equal to $Z$. Apply clause (2) of [pqf-lem-limit-qc-open-descends] to the quasi-compact opens $W_{j_0}$ and $Z_{j_0}$, whose inverse images in the limit agree; after increasing to some $j\\ge j_0$ their pullbacks are equal. Thus the finitely many affine principal opens $(Z_j)_{s_{a,j}}$ cover $Z_j$.",
+   "text": "A map between invertible modules has quasi-compact nonzero locus on a quasi-compact scheme: choose finitely many affine simultaneous trivializations, on each of which this locus is a principal open. Its restricted inverse system consists of quasi-compact quasi-separated schemes with affine transitions, and its limit is the chosen affine open. Apply Scheme.exists_isAffine_of_isLimit to make it affine at a later stage. Transport the maps along the composition isomorphisms for tensor pullback.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-stage",
+    "pqf-lem-limit-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MT, lemma-limit-ample, in Situation 01YX (situation-descent)."
+   }
+  },
+  {
+   "text": "Choose a common upper bound for the finitely many stages and the initial index, including when there are no chosen sections. Pullback of an affine open along an affine transition is affine. The finite union of the transported nonzero loci pulls back to the whole limit. Apply Mathlib exists_map_eq_top to this union to make its preimage the whole of a later stage.",
    "uses": [
     "pqf-lem-limit-qc-open-descends"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 09MT proof, final use of Lemma 01YX/lemma-descend-opens"
+    "place": "Tag 09MT, lemma-limit-ample, in Situation 01YX (situation-descent)."
    }
   },
   {
-   "text": "The module on $Z_j$ is invertible, the sections $s_{a,j}$ have affine nonvanishing opens, and those opens cover the quasi-compact scheme $Z_j$. By the definition of an ample invertible module [def-weil-pbc-ample-invertible-module], its pullback $q_{j i_0}^*L_0$ is ample on $Z_j$.",
+   "text": "Convert the transported maps back to sections of the appropriate powers of the pulled-back line module. Their affine nonvanishing opens cover the quasi-compact final stage. Invertibility is preserved by pullback, so the definition gives ampleness.",
    "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
     "def-weil-pbc-ample-invertible-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 09MT proof, concluding sentence"
+    "place": "Tag 09MT, lemma-limit-ample, in Situation 01YX (situation-descent)."
    }
   }
  ],
  "proof_deps": [
-  "def-sc-invertible-module",
-  "def-weil-pbc-ample-invertible-module",
-  "def-weil-pbc-quasi-compact-scheme",
-  "lem-sc-valuation-limit-qcoh-section-descent",
+  "lem-sc-ample-finite-affine-cover",
+  "lem-trf-fp-modules-affine-limit-descent",
+  "lem-sc-pullback-tensor-power-iso",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
   "lem-weil-pbc-limit-affine-stage",
-  "lem-weil-pbc-limit-affine-transition",
-  "pqf-lem-limit-qc-open-descends"
+  "pqf-lem-limit-qc-open-descends",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 09MT (lemma-limit-ample), proof"
+  "place": "Tag 09MT proof, with section descent realized by Tag 01ZR morphism descent; Mathlib restricted-limit, eventual-affineness and eventual-cover lemmas."
  },
  "mathlib_searches": [
   {
@@ -179,9 +182,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sc-valuation-limit-qcoh-section-descent",
   "lem-weil-pbc-limit-affine-stage",
-  "lem-weil-pbc-limit-affine-transition",
   "pqf-lem-limit-qc-open-descends"
  ],
  "reviewed": {
@@ -204,11 +205,124 @@
   "module": "Sheaf.AlgebraicGeometry.AmpleAffineLimitDescent",
   "declaration": "AlgebraicGeometry.exists_stage_isAmple_of_limit_isAmple",
   "file": "lean/Sheaf/AlgebraicGeometry/AmpleAffineLimitDescent.lean",
-  "statement": "theorem exists_stage_isAmple_of_limit_isAmple {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : I, CompactSpace (D.obj (op i))] [∀ i : I, QuasiSeparatedSpace (D.obj (op i))] (haff : ∀ {i j : I} (h : i ≤ j), IsAffineHom (D.map (homOfLE h).op)) (i₀ : I) (L₀ : (D.obj (op i₀)).Modules) [L₀.IsInvertible] (hL : ∃ h : ((tensorPullback (c.π.app (op i₀))).obj L₀).IsInvertible, @IsAmple c.pt ((tensorPullback (c.π.app (op i₀))).obj L₀) h) : ∃ (j : I) (hij : i₀ ≤ j), ∃ h : ((tensorPullback (D.map (homOfLE hij).op)).obj L₀).IsInvertible, @IsAmple (D.obj (op j)) ((tensorPullback (D.map (homOfLE hij).op)).obj L₀) h",
+  "statement": "theorem exists_stage_isAmple_of_limit_isAmple {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : I, CompactSpace (D.obj (op i))] [∀ i : I, QuasiSeparatedSpace (D.obj (op i))] (haff : ∀ {i j : I} (h : i ≤ j), IsAffineHom (D.map (homOfLE h).op)) (i₀ : I) (L₀ : (D.obj (op i₀)).Modules) [L₀.IsInvertible] (hL : ∃ h : ((tensorPullback (c.π.app (op i₀))).obj L₀).IsInvertible, @IsAmple c.pt ((tensorPullback (c.π.app (op i₀))).obj L₀) h) : ∃ (j : I) (hij : i₀ ≤ j), ∃ h : ((tensorPullback (D.map (homOfLE hij).op)).obj L₀).IsInvertible, @IsAmple (D.obj (op j)) ((tensorPullback (D.map (homOfLE hij).op)).obj L₀) h",
   "branch": "newtargets-dag",
   "by": "Q113",
   "date": "2026-10-17",
-  "existing": false
+  "existing": false,
+  "note": "Z5: index smallness made explicit in the schemes universe; complete finite-cover proof from finitely-presented map descent."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "Z5 stage 2",
+  "old_statement": "Let $I$ be a small nonempty directed set, $(Z_i)_{i\\in I}$ an inverse system of quasi-compact schemes [def-weil-pbc-quasi-compact-scheme] that are quasi-separated [def-weil-quasi-separated-morphism], with affine transition morphisms $q_{ji}:Z_j\\to Z_i$ for $j\\geq i$ [pqf-def-affine-morphism]. Let $Z=\\varprojlim_i Z_i$ with projections $q_i$ be the limit in schemes [def-pc-scheme, def-weil-pbc-category-colimit], and fix $i_0\\in I$. Let $L_0$ be an invertible $\\mathcal O_{Z_{i_0}}$-module [def-sc-invertible-module]. If $q_{i_0}^*L_0$ is ample [def-weil-pbc-ample-invertible-module] on $Z$, then there exists $j\\geq i_0$ such that $q_{j i_0}^*L_0$ is ample on $Z_j$. The pullbacks are tensor pullbacks [def-pc-module-pullback].",
+  "what": "The Lean index formerly had an independent unconstrained universe v. All declared continuity and affine-limit dependencies require a small index in the schemes universe u. Set I : Type u to formalize the node's smallness convention; no geometry or conclusion is changed. This is an explicit size restriction of the previous Lean signature, not a proof of its arbitrary-universe variant. This follows the standing INDEX UNIVERSES FOR LIMITS AND FILTERED COLIMITS decision in coord/STATE.md.",
+  "source": {
+   "document": "literature/stacks-project/limits.tex",
+   "place": "Tag 09MT, lemma-limit-ample, in Situation 01YX (situation-descent)."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-model-fibre-ample-open",
+    "holds": true,
+    "note": "The application is to the small scheme inverse system in the ambient universe; the mathematical conclusion is unchanged. No Lean attachment exists for this node yet."
+   },
+   {
+    "id": "lem-sfb-space-relative-ample-locus",
+    "holds": true,
+    "note": "The application is to the small scheme inverse system in the ambient universe; the mathematical conclusion is unchanged. No Lean attachment exists for this node yet."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Because $q_{i_0}^*L_0$ is ample, the ampleness definition gives, for every point of $Z$, a section of some positive tensor power whose nonvanishing open is affine. Quasi-compactness of $Z$ lets us choose finitely many such sections $s_1,\\ldots,s_m$ (possibly of different powers) whose affine nonvanishing opens $Z_{s_a}$ cover $Z$.",
+    "uses": [
+     "def-weil-pbc-ample-invertible-module",
+     "def-weil-pbc-quasi-compact-scheme"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/limits.tex",
+     "place": "Tag 09MT proof, first sentence; Properties, Definition 01PS"
+    }
+   },
+   {
+    "text": "Because $L_0$ is invertible, it is quasi-coherent by [def-sc-invertible-module]. Apply [lem-sc-valuation-limit-qcoh-section-descent] to the tail above $i_0$ with $F_{i_0}=L_0$: for each chosen section $s_a$ there are an index $i_a\\ge i_0$ and a section $s_{a,i_a}$ of the pullback of $L_0$ to $Z_{i_a}$ whose pullback to $Z$ is $s_a$. A common upper bound $i_2$ of the finitely many $i_a$ gives sections $s_{a,i_2}$ on one stage, all pulling back to $s_a$.",
+    "uses": [
+     "def-sc-invertible-module",
+     "lem-sc-valuation-limit-qcoh-section-descent"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/limits.tex",
+     "place": "Tag 09MT proof, invoking Tags 0B8W and 01Z0"
+    }
+   },
+   {
+    "text": "Fix $a$. The principal open $(Z_{i_2})_{s_{a,i_2}}$ has inverse image $Z_{s_a}$ in $Z$, because pullback of a section of an invertible module pulls back its nonvanishing locus. By [lem-weil-pbc-limit-affine-transition], the inverse images of this open form an inverse system with affine transitions and limit $Z_{s_a}$. The latter is affine by Step 1, so [lem-weil-pbc-limit-affine-stage] gives an index $j_a\\ge i_2$ such that $(Z_j)_{s_{a,j}}$ is affine for every $j\\ge j_a$.",
+    "uses": [
+     "lem-weil-pbc-limit-affine-transition",
+     "lem-weil-pbc-limit-affine-stage"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/limits.tex",
+     "place": "Tag 09MT proof, invoking Lemma 01Z6 (lemma-limit-affine) after descending the sections"
+    }
+   },
+   {
+    "text": "Choose a common upper bound $j_0$ of the finitely many $j_a$. Pulling the sections forward to $Z_{j_0}$ preserves affineness of their principal opens because each transition morphism is affine. Their inverse images in $Z$ still cover $Z$, so the union $W_{j_0}=\\bigcup_a(Z_{j_0})_{s_{a,j_0}}$ has inverse image equal to $Z$. Apply clause (2) of [pqf-lem-limit-qc-open-descends] to the quasi-compact opens $W_{j_0}$ and $Z_{j_0}$, whose inverse images in the limit agree; after increasing to some $j\\ge j_0$ their pullbacks are equal. Thus the finitely many affine principal opens $(Z_j)_{s_{a,j}}$ cover $Z_j$.",
+    "uses": [
+     "pqf-lem-limit-qc-open-descends"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/limits.tex",
+     "place": "Tag 09MT proof, final use of Lemma 01YX/lemma-descend-opens"
+    }
+   },
+   {
+    "text": "The module on $Z_j$ is invertible, the sections $s_{a,j}$ have affine nonvanishing opens, and those opens cover the quasi-compact scheme $Z_j$. By the definition of an ample invertible module [def-weil-pbc-ample-invertible-module], its pullback $q_{j i_0}^*L_0$ is ample on $Z_j$.",
+    "uses": [
+     "def-weil-pbc-ample-invertible-module"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/limits.tex",
+     "place": "Tag 09MT proof, concluding sentence"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-sc-invertible-module",
+   "def-weil-pbc-ample-invertible-module",
+   "def-weil-pbc-quasi-compact-scheme",
+   "lem-sc-valuation-limit-qcoh-section-descent",
+   "lem-weil-pbc-limit-affine-stage",
+   "lem-weil-pbc-limit-affine-transition",
+   "pqf-lem-limit-qc-open-descends"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-852b1",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261023T135806-L-2973244",
+  "kind": "interface",
+  "note": "independent cc review: delivered AmpleAffineLimitDescent.lean (I : Type u, complete proof via finitePresentation_descent_affineLimit clause 2 + Mathlib opensCone/exists_isAffine_of_isLimit/exists_map_eq_top) against node lem-trf-ample-affine-limit-descent, STATE.md INDEX UNIVERSES decision, change record, proof_deps lean records; importer AmpleNeighbourhood compiled against it"
+ }
 }

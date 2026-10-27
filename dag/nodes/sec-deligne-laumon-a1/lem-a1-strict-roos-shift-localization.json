@@ -1,0 +1,256 @@
+{
+ "id": "lem-a1-strict-roos-shift-localization",
+ "kind": "statement",
+ "title": "Signed strict Roos shifts descend through the prescribed localization",
+ "statement": "Let $\\mathcal A$ be an abelian category with countable products and inverse limits of strict positive-integer towers $\\mathcal T=\\operatorname{Fun}(\\mathbf N_{\\ge1}^{\\mathrm{op}},\\mathcal A)$, with levelwise exactness [lem-weil-tower-category-levelwise-abelian]. Fix unbounded derived localizations $Q_T,Q_A$ with their integer shifts [def-weil-abstract-derived-category]. For a tower complex $X$, put $P_X=\\prod_nX_n$, $h_X=1-s_X$, where $\\operatorname{pr}_ns_X=t_n\\operatorname{pr}_{n+1}$, and $F(X)=\\operatorname{Cone}(h_X)[-1]$ with the actual functor and inclusion $j_X:\\lim X\\to F(X)$ of [def-weil-strict-roos-model]. Its coordinates are $F(X)^i=P_X^{i-1}\\oplus P_X^i$ with $d(y,x)=(-dy-h_Xx,dx)$; $F(f)$ acts diagonally by $\\prod_nf_n$, and $j_X(z)=(0,z)$. Suppose a functor $G:D(\\mathcal T)\\to D(\\mathcal A)$ and a natural isomorphism $\\kappa_X:Q_AF(X)\\xrightarrow{\\sim}G(Q_TX)$ are given.\n\nThere is a coherent natural chain isomorphism $c_{X,r}:F(X[r])\\xrightarrow{\\sim}F(X)[r]$ whose coordinates are $(y,x)\\mapsto((-1)^r y,x)$ and whose inverse has the same formula. It satisfies $c_{X,0}=1$ and $c_{X,r}[s]\\circ c_{X[r],s}=c_{X,r+s}$. If $\\lambda_{X,r}:\\lim(X[r])\\xrightarrow{\\sim}(\\lim X)[r]$ is identity on compatible tuples, then $c_{X,r}j_{X[r]}=j_X[r]\\lambda_{X,r}$. There is a unique coherent natural shift comparison $\\bar c_{N,r}:G(N[r])\\xrightarrow{\\sim}G(N)[r]$ such that\n$$\\bar c_{Q_TX,r}\\circ\\kappa_{X[r]}=\\kappa_X[r]\\circ Q_A(c_{X,r}),$$\nwith the canonical localization/shift identifications understood. This comparison is natural for every morphism in $D(\\mathcal T)$, including inverses of quasi-isomorphisms, and makes the localized inclusion $Q_A(\\lim X)\\xrightarrow{Q_Aj_X}Q_AF(X)\\xrightarrow{\\kappa_X}G(Q_TX)$ commute with the specified termwise limit shift.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014E, definition-cone, together with the cochain shifts in homology.tex, definition-shift-cochain; agent refinement: returned proof steps 1–2 and the strict-map localization argument in step 6."
+ },
+ "stmt_deps": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-weil-product-comm-shift on the evaluation functors of the tower. Its projection formula identifies the product of the shifted tower with the shifted product. Projection extensionality proves that one minus the transition endomorphism commutes with this shift. Apply lem-weil-signed-mapping-cocone-shift to that endomorphism. Identify its arrow-map construction with the mappingCone.map construction in roosF, by the two cone inclusions, and transport the coherent shift through this natural identity-component isomorphism. The cocone inclusion formulas and its identity decomposition give the two projection-coordinate formulas. Composing with every tower product projection gives the forward formulas. Precompose the inverse formulas with the invertible forward shift map, then use the forward formulas and the identity (-1)^r squared equals one.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category",
+    "lem-weil-product-comm-shift",
+    "lem-weil-signed-mapping-cocone-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; cone coordinates from derived.tex Tag 014E, definition-cone; agent calculation"
+   }
+  },
+  {
+   "text": "Naturality and the zero/addition coherence are included in the product and signed cocone CommShift structures. Transport along the natural isomorphism to roosF preserves these laws; no separate elementwise argument is needed.",
+   "uses": [
+    "lem-weil-product-comm-shift",
+    "lem-weil-signed-mapping-cocone-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; cone coordinates from derived.tex Tag 014E, definition-cone; agent calculation"
+   }
+  },
+  {
+   "text": "Construct a cone for the diagram of level complexes using the complex obtained by applying the additive tower limit functor degreewise. Evaluation at each degree is the ordinary limiting cone, so it is a limit. The unique cone-point isomorphism identifies this degreewise model naturally with roosLimitFunctor. Transfer the standard shift structure of a functor applied degreewise across that isomorphism. Its limit projections give the asserted limit-shift formula. For the inclusion, first compare its product projections using that formula, then compare its two cocone coordinates: the product coordinate is the limit inclusion and the other is zero. The cocone identity decomposition proves the strict inclusion equation.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; cone coordinates from derived.tex Tag 014E, definition-cone; agent calculation"
+   }
+  },
+  {
+   "text": "Give the composite roosF followed by QA the composite shift structure. Regard the prescribed kappa inverse as Localization.Lifting for QT. Mathlib Functor.commShiftOfLocalization, which is constructed from the natural-isomorphism lifting clause of lem-weil-pbc-localization-universal-property, supplies the coherent shift on G. Its iso_hom_app formula followed by cancellation of the kappa and localization shift inverses gives the required factorization square.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement in Mathlib/CategoryTheory/Localization/Predicate.lean:278–357, used through lem-weil-pbc-localization-universal-property"
+   }
+  },
+  {
+   "text": "Zero/addition coherence and naturality for all morphisms are part of Functor.commShiftOfLocalization. For uniqueness, cancel the invertible kappa component and G of the QT shift component in two proposed factorization squares. This gives equality of the shift natural transformations on every QT.obj X. Localization.natTrans_ext extends the equality to the whole localized category. Iso extensionality and proof irrelevance for the coherence laws identify the CommShift structures.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement in Mathlib/CategoryTheory/Localization/Predicate.lean:278–357, used through lem-weil-pbc-localization-universal-property"
+   }
+  },
+  {
+   "text": "Substitute the factorization square into the localized inclusion composite. Functoriality of QA moves the strict inclusion-shift equation from step 3 under QA. Naturality of the QA shift comparison at roosι gives the desired localized inclusion equation. The limit functor is used only on complexes, without assuming it inverts quasi-isomorphisms.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; cone coordinates from derived.tex Tag 014E, definition-cone; agent calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-strict-roos-model",
+  "def-weil-abstract-derived-category",
+  "lem-weil-product-comm-shift",
+  "lem-weil-signed-mapping-cocone-shift",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014E and homology.tex Tag 011G; reuse of proved coherent product and signed cocone shifts, degreewise limit comparison, and Mathlib Shift/Localization.lean commShiftOfLocalization with Localization.natTrans_ext; Lean proof by P2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The signed mapping fiber shift of one minus transition on inverse tower products descends through a specified derived localization factorization to a coherent natural integer shift",
+   "results": "Hits: CategoryTheory.LocalizerMorphism.commShift, CategoryTheory.LocalizerMorphism.smallShiftedHomMap_mk, CategoryTheory.LocalizerMorphism.instCommShiftLocalizedFunctor, CategoryTheory.LocalizerMorphism.smallShiftedHomMap_comp, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.LocalizerMorphism.instCommShiftLocalizationHomFunctorIsoFunctorQLocalizedFunctor, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Mathlib localization shifts provide the descent machinery, but do not construct the signed shift on the specified strict Roos model or prove its coordinate and inclusion equations; these require the cone/product bridge, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural coherent shift isomorphism on a quasi-isomorphism preserving cochain functor descends uniquely to its chosen derived category functor",
+   "results": "Hits: DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instCommShiftCochainComplexIntQ, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Mathlib localization shifts provide the descent machinery, but do not construct the signed shift on the specified strict Roos model or prove its coordinate and inclusion equations; these require the cone/product bridge, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.Localization",
+   "results": "No hits. loogle: unknown identifier 'CategoryTheory.Localization'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Mathlib localization shifts provide the descent machinery, but do not construct the signed shift on the specified strict Roos model or prove its coordinate and inclusion equations; these require the cone/product bridge, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*[Ll]ocaliz|[Ll]ocaliz.*CommShift",
+   "results": "Hits: Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean Subdirectory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Mathlib localization shifts provide the descent machinery, but do not construct the signed shift on the specified strict Roos model or prove its coordinate and inclusion equations; these require the cone/product bridge, not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prescribed localization factorization of the strict Roos cone functor admits the uniquely induced signed coherent integer shift",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.HasShift.localized, CategoryTheory.HasShift.localization', CategoryTheory.Functor.CommShift.localized, DerivedCategory.singleFunctors, CategoryTheory.HasShift.localization, CategoryTheory.MorphismProperty.commShift_Q, CategoryTheory.Functor.commShiftOfLocalization",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Mathlib localization shifts provide the descent machinery, but do not construct the signed shift on the specified strict Roos model or prove its coordinate and inclusion equations; these require the cone/product bridge, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.commShiftOfLocalization",
+   "results": "Hits: CategoryTheory.Functor.commShiftOfLocalization, CategoryTheory.NatTrans.commShift_iso_hom_of_localization, CategoryTheory.Functor.commShiftOfLocalization_iso_inv_app, CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Mathlib localization shifts provide the descent machinery, but do not construct the signed shift on the specified strict Roos model or prove its coordinate and inclusion equations; these require the cone/product bridge, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftOfLocalization|iso_hom_app",
+   "results": "Hits: 135, 139, 153, 154, 159 Subdirectory: CategoryTheory/Shift/Localization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Mathlib localization shifts provide the descent machinery, but do not construct the signed shift on the specified strict Roos model or prove its coordinate and inclusion equations; these require the cone/product bridge, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftOfLocalization|natTrans_ext|liftNatIso",
+   "results": "Hits: 135, 139, 142, 154, 159; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone-shift and localization APIs do not state the specified strict Roos coordinate and inclusion equations; localization descent is already the existing leaf lem-weil-pbc-localization-universal-property"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural signed integer shift of the inverse tower mapping fiber Cone one minus transition descends to the chosen derived functor",
+   "results": "Hits: CochainComplex.mappingCone.shiftIso, CategoryTheory.Pretriangulated.opShiftFunctorEquivalence_counitIso_inv_app_shift, CochainComplex.mappingCone.shiftTriangleIso, CochainComplex.mappingCone.shiftTrianglehIso, CochainComplex.shiftFunctor, CategoryTheory.Pretriangulated.opShiftFunctorEquivalence_counitIso_hom_app_shift, CategoryTheory.Pretriangulated.opShiftFunctorEquivalence, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone-shift and localization APIs do not state the specified strict Roos coordinate and inclusion equations; localization descent is already the existing leaf lem-weil-pbc-localization-universal-property"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.commShiftOfLocalization",
+   "results": "Hits: CategoryTheory.Functor.commShiftOfLocalization, CategoryTheory.NatTrans.commShift_iso_hom_of_localization, CategoryTheory.Functor.commShiftOfLocalization_iso_inv_app, CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone-shift and localization APIs do not state the specified strict Roos coordinate and inclusion equations; localization descent is already the existing leaf lem-weil-pbc-localization-universal-property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent signed shift on the strict Roos mapping fiber descends uniquely through a given derived localization factorization",
+   "results": "Hits: CategoryTheory.Functor.commShiftOfLocalization, CategoryTheory.Functor.commShiftOfLocalization.iso, CategoryTheory.LocalizerMorphism.commShift, CategoryTheory.MorphismProperty.commShift_Q', CategoryTheory.NatTrans.commShift_iso_hom_of_localization, CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app, CategoryTheory.LocalizerMorphism.instCommShiftLocalizedFunctor, CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone-shift and localization APIs do not state the specified strict Roos coordinate and inclusion equations; localization descent is already the existing leaf lem-weil-pbc-localization-universal-property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between two functors on cochain complexes that factor through localization descends uniquely and preserves integer shift coherence",
+   "results": "Hits: CategoryTheory.Functor.commShiftOfLocalization.iso, CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app, CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app, CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app_assoc, CategoryTheory.NatTrans.commShift_iso_hom_of_localization, CategoryTheory.Functor.commShiftOfLocalization.iso_inv_app_assoc, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone-shift and localization APIs do not state the specified strict Roos coordinate and inclusion equations; localization descent is already the existing leaf lem-weil-pbc-localization-universal-property"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-normalized-roos-shift-comparison",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph, geometric-stalk restriction by finite-map pullback; Old proof step 11: signed Roos coordinates and the shifted K-injective normalization of the cone/limit comparison. Returned steps 1–2, inclusion calculation in step 4, and strict-to-derived naturality in step 6.",
+   "via": [
+    "lem-a1-normalized-roos-shift-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-strict-roos-shift-localization",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Checked the actual signed coordinates, all integer shifts and the termwise-limit inclusion; descended the resulting natural isomorphism using the existing Mathlib localization universal-property leaf. No new nodes or unproved coordinate assertions.",
+  "blueprint": "Refines the recorded ancestor lem-a1-finite-map-purity, geometric-stalk restriction paragraph, through lem-a1-normalized-roos-shift-comparison: its returned steps 1–2, inclusion calculation and strict-to-derived naturality are realized by steps 1–6 here."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-ad3b5822f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-ad3b5822f (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full; the review is in review.md. No new nodes, no fixes, no tool_uses. The statement is unchanged against live and side-live (both unsplit, empty proof). There is no repair note for the item, it is not in route-pivot-dropped, and this is its first delivery. Sources: Stacks 014E (derived.tex:2471) gives Cone(h)[-1]^i=P^{i-1}+P^i with d(y,x)=(-dy-hx,dx), matching def-weil-strict-roos-model; Stacks 011G (homology.tex:3427) gives A[k] with differential (-1)^k d and no sign on shifted maps. Steps 1-3 and 6 are correct elementary biproduct sign checks. With eps=(-1)^r, both dc and cd send (y,x) to (-dy-eps h x, eps dx); c_0=1, the composite of two shifts gives (-1)^{r+s}, and c j_{X[r]}=j_X[r] lambda since both are (0,z). Step 4 applies clause (2) of the Mathlib leaf lem-weil-pbc-localization-universal-property (liftNatTrans) to H_r=G(-[r]) and K_r=G(-)[r] with phi=id; both invert quasi-isomorphisms because they factor through Q_T. Step 5 gives the zero and addition laws and uniqueness through clause (3) (natTrans_ext), using the shift compatibility of Q_A and Q_T from def-weil-abstract-derived-category. Edge cases tested: r=0; r=1 on a constant tower in degree 0; two odd shifts; characteristic 2; non-exact products, where kappa is a hypothesis and F need not preserve quasi-isomorphisms. The citer lem-a1-normalized-roos-shift-comparison gets everything its step 1 uses. Duplicate search: lem-pe-endomorphism-fibre-coordinate-calculus (another unit) generalizes steps 1-3 in reordered coordinates. Writing them as elementary steps instead is acceptable (C1 exception). Advisory: reuse that node's Lean in stage 2. No node states the localization-descent part."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StrictRoosShiftLocalization",
+  "declaration": "CategoryTheory.strictRoosShiftLocalization",
+  "file": "lean/Sheaf/CategoryTheory/StrictRoosShiftLocalization.lean",
+  "statement": "theorem strictRoosShiftLocalization {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A] [HasLimitsOfShape ℕᵒᵖ A] {DT : Type uT} [Category.{vT} DT] [HasShift DT ℤ] {DA : Type uD} [Category.{vD} DA] [HasShift DA ℤ] (QT : CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ DT) [QT.IsLocalization (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (.up ℤ))] [QT.CommShift ℤ] (QA : CochainComplex A ℤ ⥤ DA) [QA.IsLocalization (HomologicalComplex.quasiIso A (.up ℤ))] [QA.CommShift ℤ] (G : DT ⥤ DA) (κ : roosF ⋙ QA ≅ QT ⋙ G) : ∃ (cF : (roosF (A := A)).CommShift ℤ) (cL : (roosLimitFunctor (A := A)).CommShift ℤ), (∀ (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r q : ℤ) (n : ℕ), (((Functor.commShiftIso roosF (self := cF) r).hom.app X).f q ≫ (CochainComplex.shiftFunctorObjXIso (roosF.obj X) r q (q + r) rfl).hom ≫ (roosProj X).f (q + r) ≫ (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f (q + r) = (roosProj (X⟦r⟧)).f q ≫ (Pi.π (fun k : ℕ ↦ (X⟦r⟧).asFunctor.obj (op k)) n).f q ≫ ((CochainComplex.shiftFunctorObjXIso X r q (q + r) rfl).hom).app (op n)) ∧ (((Functor.commShiftIso roosF (self := cF) r).hom.app X).f q ≫ (CochainComplex.shiftFunctorObjXIso (roosF.obj X) r q (q + r) rfl).hom ≫ (CochainComplex.mappingCocone.snd (roosU X)).v (q + r) ((q - 1) + r) (by omega) ≫ (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f ((q - 1) + r) = r.negOnePow • ((CochainComplex.mappingCocone.snd (roosU (X⟦r⟧))).v q (q - 1) (by omega) ≫ (Pi.π (fun k : ℕ ↦ (X⟦r⟧).asFunctor.obj (op k)) n).f (q - 1) ≫ ((CochainComplex.shiftFunctorObjXIso X r (q - 1) ((q - 1) + r) rfl).hom).app (op n)))) ∧ (∀ (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r q : ℤ) (n : ℕ), (((Functor.commShiftIso roosF (self := cF) r).inv.app X).f q ≫ (roosProj (X⟦r⟧)).f q ≫ (Pi.π (fun k : ℕ ↦ (X⟦r⟧).asFunctor.obj (op k)) n).f q ≫ ((CochainComplex.shiftFunctorObjXIso X r q (q + r) rfl).hom).app (op n) = (CochainComplex.shiftFunctorObjXIso (roosF.obj X) r q (q + r) rfl).hom ≫ (roosProj X).f (q + r) ≫ (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f (q + r)) ∧ (((Functor.commShiftIso roosF (self := cF) r).inv.app X).f q ≫ (CochainComplex.mappingCocone.snd (roosU (X⟦r⟧))).v q (q - 1) (by omega) ≫ (Pi.π (fun k : ℕ ↦ (X⟦r⟧).asFunctor.obj (op k)) n).f (q - 1) ≫ ((CochainComplex.shiftFunctorObjXIso X r (q - 1) ((q - 1) + r) rfl).hom).app (op n) = r.negOnePow • ((CochainComplex.shiftFunctorObjXIso (roosF.obj X) r q (q + r) rfl).hom ≫ (CochainComplex.mappingCocone.snd (roosU X)).v (q + r) ((q - 1) + r) (by omega) ≫ (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f ((q - 1) + r)))) ∧ (∀ (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r q : ℤ) (n : ℕ), ((Functor.commShiftIso roosLimitFunctor (self := cL) r).hom.app X).f q ≫ (CochainComplex.shiftFunctorObjXIso (limit X.asFunctor) r q (q + r) rfl).hom ≫ (limit.π X.asFunctor (op n)).f (q + r) = (limit.π (X⟦r⟧).asFunctor (op n)).f q ≫ ((CochainComplex.shiftFunctorObjXIso X r q (q + r) rfl).hom).app (op n)) ∧ (∀ (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r : ℤ), roosι (X⟦r⟧) ≫ (Functor.commShiftIso roosF (self := cF) r).hom.app X = (Functor.commShiftIso roosLimitFunctor (self := cL) r).hom.app X ≫ (roosι X)⟦r⟧') ∧ (∃! cG : G.CommShift ℤ, (∀ (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r : ℤ), QA.map ((Functor.commShiftIso roosF (self := cF) r).hom.app X) ≫ (QA.commShiftIso r).hom.app (roosF.obj X) ≫ (κ.hom.app X)⟦r⟧' = κ.hom.app (X⟦r⟧) ≫ G.map ((QT.commShiftIso r).hom.app X) ≫ (Functor.commShiftIso G (self := cG) r).hom.app (QT.obj X)) ∧ (∀ (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r : ℤ), QA.map (roosι (X⟦r⟧)) ≫ κ.hom.app (X⟦r⟧) ≫ G.map ((QT.commShiftIso r).hom.app X) ≫ (Functor.commShiftIso G (self := cG) r).hom.app (QT.obj X) = QA.map ((Functor.commShiftIso roosLimitFunctor (self := cL) r).hom.app X) ≫ (QA.commShiftIso r).hom.app (limit X.asFunctor) ≫ (QA.map (roosι X) ≫ κ.hom.app X)⟦r⟧'))",
+  "branch": "sheaf-dag",
+  "by": "Q113",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-beb367c0f",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Statement field verbatim = file signature; node differs from side-live only in lean. Clause-by-clause match: arbitrary abelian A with countable products and ℕᵒᵖ limits; arbitrary localizations QT/QA with CommShift (generalizes DerivedCategory.Q, independent universes); dep's actual roosF/roosProj/roosι/roosLimitFunctor; κ : roosF ⋙ QA ≅ QT ⋙ G. cF is pinned by x = roosProj (= mappingCocone.fst) and y = mappingCocone.snd with r.negOnePow after every Pi.π (fst and snd jointly mono by id_X); cL is pinned by limit.π; strict inclusion square stated; ∃! cG equals the NatTrans.CommShift square for κ. The inclusion equation follows from the factorization square plus the strict square, so the ∃! uniqueness is not weakened. Signs verified in Mathlib cone/shift conventions; they agree with the landed NormalizedRoosShiftComparison and RoosConeCalculus.ShiftFormula. Edge cases r=0, odd/negative r, char 2, zero object, n=0, non-exact products covered. No duplicate for arbitrary A (roos_cone_calculus is pro-étale specialised). Single sorry, docstrings with sources, blueprint tag and six proof steps; report sections present. Advisory: the plain Localization.Predicate import is unneeded and the inverse-formula conjunct is redundant. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261023T090726-L-712043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

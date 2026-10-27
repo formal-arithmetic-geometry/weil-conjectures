@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-space-stalk-condition-etale-charts",
+ "kind": "statement",
+ "title": "The single-complex stalk condition on etale scheme charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use unbounded module derived categories [def-weil-abstract-derived-category] and the canonical module functors [def-trf-space-etale-module-functors], with derived pullback computed by K-flat resolutions with flat terms and derived direct image by K-injective resolutions. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for complexes with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms, $X'=X\\times_Y Y'$ with projections $g',f'$, and $\\phi:L(g')^*K\\to K'$ for $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and $K'\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'})$. At a geometric point $\\bar z$ of $X'$, put $\\bar x=g'\\bar z$, $\\bar y'=f'\\bar z$, $\\bar y=f\\bar x$, and $R=\\mathcal O_{Y,\\bar y}$, $A=\\mathcal O_{X,\\bar x}$, $B=\\mathcal O_{Y',\\bar y'}$, $C=\\mathcal O_{X',\\bar z}$. Define the geometric stalk condition by requiring that every canonical map\n$$H^i(K_{\\bar x}\\otimes_R^{\\mathbf L}B)\\otimes_{A\\otimes_RB}C\\longrightarrow H^i(K'_{\\bar z})$$\nis an isomorphism, for every $\\bar z$ and $i\\in\\mathbf Z$. The map is induced by the scalar-extension comparison $K_{\\bar x}\\otimes_R^{\\mathbf L}B\\to K_{\\bar x}\\otimes_A^{\\mathbf L}C\\to K'_{\\bar z}$, the second arrow coming from $\\phi$, followed by $C$-linear extension on cohomology.\nThis condition is equivalent to the following chart condition. For every commutative diagram of schemes $U\\to V$, $V'\\to V$ over $f:X\\to Y$, $g:Y'\\to Y$, with etale maps $a:U\\to X$, $b:V\\to Y$, $c:V'\\to Y'$, set $U'=U\\times_VV'$. Transport $a^*K$, $K'|_{U'}$, and the induced coefficient map to the Zariski derived categories using the canonical equivalences [lem-sfb-derived-etale-zariski-equivalence], obtaining $K_U,K'_{U'}$ and $\\phi_U$. For every ordinary point $z\\in U'$ and every integer $i$, put $x=g'_U(z)$, $v'=f'_U(z)$, $v=f_U(x)$; then the map\n$$H^i((K_U)_x\\otimes^{\\mathbf L}_{\\mathcal O_{V,v}}\\mathcal O_{V',v'})\\otimes_{\\mathcal O_{U,x}\\otimes_{\\mathcal O_{V,v}}\\mathcal O_{V',v'}}\\mathcal O_{U',z}\\longrightarrow H^i((K'_{U'})_z)$$\nis an isomorphism. It is precisely the canonical ordinary single-complex comparison [def-pc-single-complex-base-change-stalk-condition]. The geometric stalk condition is preserved by restricting $X$ to an etale algebraic space over $X$, by etale base change on $Y$, and by etale restriction on $Y'$. When all four spaces are schemes, it is equivalent to this ordinary Zariski stalk condition for the corresponding complexes. No quasi-compactness, boundedness, or flatness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKG (lemma-single-complex-base-change-condition), equivalence (1) with (2), and proof: etale locality on X′ and strict-henselization comparison; equation-bc immediately preceding the lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "proof": [
+  {
+   "text": "Fix a diagram of charts from the statement. The map $q:U'=U\\times_VV'\\to X'$ is etale: factor it through $U\\times_YV'$. The first factor is the base change of the etale diagonal $V\\to V\\times_YV$, and the second is the composite of the base changes of $U\\to X$ and $V'\\to Y'$. The diagonal is etale because it is a morphism over $V$ between the etale $V$-schemes $V$ and $V\\times_YV$. The scheme-test and permanence assertions cited below justify all these claims. At a geometric point of $U'$, etale localization identifies its four geometric local rings with those on $X,Y,Y',X'$; the ring maps agree. Ringed chart localization and derived pullback composition identify the restricted coefficient morphism with the chart coefficient morphism. Thus the two geometric comparison maps are the same: on tensor representatives both use the given coefficient morphism after multiplying the scalar factors.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-etale-pullback-chart-comparison",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-geometric-stalk-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG (lemma-single-complex-base-change-condition), proof and equation-bc immediately preceding it."
+   }
+  },
+  {
+   "text": "Work now on the scheme square $U'\\to U$, $V'\\to V$. The derived etale--Zariski equivalence supplies $K_U,K'_{U'}$ and carries their coefficient morphism to the specified etale one. Fix $\\bar z:\\operatorname{Spec}\\Omega\\to U'$ and its images $\\bar x,\\bar v',\\bar v$. Write $r,a,b,c$ for the ordinary local rings at $v,x,v',z$, and $\\widetilde r,\\widetilde a,\\widetilde b,\\widetilde c$ for their geometric local rings. They are the compatible strict henselizations. The natural module stalk formula, applied termwise, identifies\n$$K_{\\bar x}\\simeq (K_U)_x\\otimes_a^{\\mathbf L}\\widetilde a,\\qquad K'_{\\bar z}\\simeq (K'_{U'})_z\\otimes_c^{\\mathbf L}\\widetilde c.$$\nIndeed the scalar extensions are flat by faithful flatness of strict henselization, so ordinary tensor already computes derived tensor and commutes with cohomology (apply the flat-tensor lemma on the one-point ringed site). The stalk formula is natural for every module map; the resulting complex identifications therefore also identify the coefficient morphism, with the pullback comparison fixed in the derived equivalence. No boundedness is used.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-zariski-module-geometric-stalk",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-fd-ringed-flat-single-tensor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG (lemma-single-complex-base-change-condition), proof and equation-bc immediately preceding it."
+   }
+  },
+  {
+   "text": "Apply the strict-local refinement lemma to the local maps $r\\to a$ and $r\\to b$, using the residue embeddings determined by the common field $\\Omega$. It gives flatness of $a\\otimes_r\\widetilde r\\to\\widetilde a$ and $\\widetilde r\\otimes_r b\\to\\widetilde b$; $r\\to\\widetilde r$ is faithfully flat. Put $d=a\\otimes_r b$ and $\\widetilde d=\\widetilde a\\otimes_{\\widetilde r}\\widetilde b$. The flat ring-diagram comparison, with $M=(K_U)_x$, consequently gives the canonical isomorphism\n$$H^i(K_{\\bar x}\\otimes_{\\widetilde r}^{\\mathbf L}\\widetilde b)\\cong H^i((K_U)_x\\otimes_r^{\\mathbf L}b)\\otimes_d\\widetilde d.$$\nAll three flatness hypotheses of that comparison have just been checked. This is an identification of cohomology modules with their two commuting ring actions, not an assumption of Tor independence of $U$ and $V'$ over $V$.",
+   "uses": [
+    "lem-sfb-strict-local-refinement-flat",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sfb-flat-ring-diagram-tensor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG (lemma-single-complex-base-change-condition), proof and equation-bc immediately preceding it."
+   }
+  },
+  {
+   "text": "Extend the last isomorphism along $\\widetilde d\\to\\widetilde c$. Tensor associativity identifies the geometric source with $H^i((K_U)_x\\otimes_r^{\\mathbf L}b)\\otimes_d\\widetilde c$. On the target, the flat-tensor cohomology comparison identifies $H^i(K'_{\\bar z})$ with $H^i((K'_{U'})_z)\\otimes_c\\widetilde c$. Under these identifications the geometric arrow is precisely the ordinary comparison tensored with $\\widetilde c$ over $c$. To check the arrow, choose a flat-term K-flat representative $P$ and a K-injective target $N$ representing the coefficient map by $t$. Use a free $r$-resolution of $b$ for the base-derived tensor. Its augmentation, followed by $t_z$, sends a representative with factors $p,b_0$ and final scalar $s$ to $s\\,t_z(p\\otimes b_0)$. Extending the scalars through $\\widetilde r,\\widetilde a,\\widetilde b$ gives the identical formula with the product of the inserted scalars. The comparison of the previous step respects these augmentations, and the etale--Zariski comparison respects scalar insertion; hence the square commutes. Since $c\\to\\widetilde c$ is faithfully flat, the arrows are isomorphisms simultaneously: reflect exactness of the two triples $0\\to\\mathrm{source}\\to\\mathrm{target}$ and $\\mathrm{source}\\to\\mathrm{target}\\to0$. This proves the scheme ordinary/geometric equivalence point by point; every ordinary point has a geometric point above it.",
+   "uses": [
+    "lem-sfb-flat-ring-diagram-tensor-cohomology",
+    "lem-fd-ringed-flat-single-tensor-cohomology",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG (lemma-single-complex-base-change-condition), proof and equation-bc immediately preceding it."
+   }
+  },
+  {
+   "text": "If the global geometric condition holds, step 1 gives it on every chart square, and steps 2--4 give the stated ordinary condition. Conversely fix $\\bar z$ on $X'$. Choose an etale scheme atlas $V\\to Y$ and lift its image to $V$; choose an atlas $U\\to X\\times_YV$ and lift the pair $(\\bar x,\\bar v)$; choose an atlas $V'\\to Y'\\times_YV$ and lift $(\\bar y',\\bar v)$. The algebraic-space definition supplies the atlases, fibre-product covering and representable-etale permanence make their composites etale, and the specified-point lifting lemma supplies the lifts over the same $\\Omega$. They give a lift of $\\bar z$ to $U\\times_VV'$. The ordinary chart hypothesis implies the geometric comparison is invertible there by steps 2--4, and step 1 identifies it with the comparison at $\\bar z$. Thus it is invertible globally. In the scheme case use identity charts to obtain the ordinary condition, and the converse follows already from steps 2--4.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-etale-geometric-point-specified-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG (lemma-single-complex-base-change-condition), proof and equation-bc immediately preceding it."
+   }
+  },
+  {
+   "text": "Finally restrict $X$ etale, base change $Y$ etale, or restrict $Y'$ etale, pulling back the two complexes and the coefficient morphism. The resulting maps on the four vertices are etale, by the same permanence assertions. Their geometric local rings and all structural ring maps identify with the original ones by etale localization. Pullback composition identifies the coefficient morphisms; both comparison arrows are therefore still given by the scalar multiplication and coefficient-map formula in step 1. Each restricted comparison is an original comparison, so invertibility is preserved. This proves all three preservation assertions without a quasi-compactness, boundedness, or flatness hypothesis on $f$ or $g$.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-etale-pullback-chart-comparison",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-geometric-stalk-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG (lemma-single-complex-base-change-condition), proof and equation-bc immediately preceding it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-etale-pullback-chart-comparison",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-geometric-stalk-tensor-calculus",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-zariski-module-geometric-stalk",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-sfb-strict-local-refinement-flat",
+  "lem-sfb-flat-ring-diagram-tensor-cohomology",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-etale-geometric-point-specified-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKG (lemma-single-complex-base-change-condition), proof and equation-bc immediately preceding it."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk single complex base change condition for algebraic spaces is equivalent to the ordinary stalk condition on every etale scheme chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism property of schemes defined by requiring that for every point $x$ in the domain scheme, the induced ring homomorphism on the stalk at $x$ satisfies the predicate $P$ applied to the correspo\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRi\", \"doc\": \"If a ring homomorphism property $ Q $ holds for a morphism $ f : R → S $ and all localizations at prime ideals $ J ⊆ S $, then $ Q $ also holds for the induced stalk map homomorphism $ (f_{x})_{\\text{h\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ {R S : CommRingCat} (φ : R ⟶ S),\\n      AlgebraicGeometry.stalkwise (fun {R S} [CommRing R] [CommRing S] => P) (AlgebraicGeometry.Spec.map \", \"doc\": \"For a ring homomorphism $\\\\varphi: R \\\\to S$ and a property $P$ of ring homomorphisms invariant under isomorphisms, the induced morphism of schemes $\\\\operatorname{Spec}(\\\\varphi): \\\\operatorname{Spec}(S) \"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_Spec_map_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ {R S : CommRingCat} (φ : R ⟶ S),\\n      AlgebraicGeometry.stalkwise (fun {R S} [CommRing R] [CommRing S] => P) (AlgebraicGeometry.Spec.map \", \"doc\": \"For any property $ P $ of ring homomorphisms that is invariant under ring isomorphisms, a morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ induced by a ring homomorphism $ R \\\\to S $ sati\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u_1} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  RingHom.RespectsIso P →\\n    AlgebraicGeometry.HasRingHomProperty (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P)\\n      fun {x S} {x_1} {x_2} φ =>\\n      ∀ (p : Ideal S) (x_3 : p.IsPrime\", \"doc\": \"If a ring homomorphism property $ P $ is invariant under composition with ring isomorphisms, then the property that $ P $ holds stalk-wise (i.e., for the localized homomorphism at every prime ideal $ \"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (RingHom.OfLocalizationPrime fun {R S} [CommRing R] [C\", \"doc\": \"If a ring homomorphism property $ Q $, which is preserved under localization at prime ideals, holds for all stalk maps $ (f_{\\\\text{stalkMap}} x).\\\\text{hom} $ of a morphism $ f $, then the correspondin\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.stalkMap_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  {Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : \", \"doc\": \"If a ring homomorphism property $ Q' $ is invariant under isomorphisms and for every ring homomorphism $ f $ satisfying property $ P $, the induced localized homomorphisms at prime ideals satisfy $ Q'\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] {y : ↥Y}\\n  (e : (CategoryTheory.ConcreteCategory.hom sX.base) x = (CategoryTheory.ConcreteCategory.hom sY.base) y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization faithfully flat descent compares derived tensor cohomology stalk conditions on small etale and Zariski sites",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale scheme charts detect the derived tensor stalk base change condition for quasi coherent complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": IsStableUnderBaseChange Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tensorProduct\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"RingHom.SurjectiveOnStalks.tensorProductMap\", \"module\": \"Mathlib.RingTheory.SurjectiveOnStalks\", \"type\": \" {R : Type u_1} [CommRing R] {S : Type u_2} [CommRing S] {T : Type u_3} [CommRing T] {S' : Type u_4} {T' : Type u_5} [CommRing S'] [CommRing T'] [Algebra R S] [Algebra R T] [Algebra R S'] [Algebra R T'] {f : S →ₐ[R] S'} (Hf : f.SurjectiveOnStalks) {g : T →ₐ[R] T'} (Hg : g.SurjectiveOnStalks) : (Alge\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.TensorProduct\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [Algebra R S] [CommRing T] [Algebra R T] (hRT : (algebraMap R T).SurjectiveOnStalks) : Topology.IsEmbedding (PrimeSpectrum.tensorProductTo R S T)\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.TensorProduct\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [Algebra R S] [CommRing T] [Algebra R T] (hRT : (algebraMap R T).SurjectiveOnStalks) (p₁ p₂ : PrimeSpectrum (TensorProduct R S T)) (h : PrimeSpectrum.tensorProductTo R S T p₁ = PrimeSpectrum.tensorProductTo R S T p₂) : p₁ ≤ p₂\", \"doc\": \"\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.Flat R M] [Module.Finite R M] (N : Type u_1) [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Flat R N] : Module.rankAtStalk (TensorProduct R M N) = Module.rankAtStalk M * Module.rankAtStalk N\", \"doc\": \"See `rankAtStalk_tensorProduct_of_isScalarTower` for a hetero-basic version.\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.Flat R M] [Module.Finite R M] {S : Type u_1} [CommRing S] [Algebra R S] (N : Type u_2) [AddCommGroup N] [Module R N] [Module S N] [IsScalarTower R S N] [Module.Finite S N] [Module.Flat S N] (p : PrimeSpectrum S) : Module\", \"doc\": \"\"}\n  {\"name\": \"Module.rankAtStalk_eq_finrank_tensorProduct\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] (p : PrimeSpectrum R) : Module.rankAtStalk M p = Module.finrank (Localization.AtPrime p.asIdeal) (TensorProduct R (Localization.AtPrime p.asIdeal) M)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel.*derived|geometric.*stalk.*tensor|single.complex.*condition",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk derived tensor base change condition on algebraic spaces is equivalent to Zariski stalk conditions on etale scheme charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism property of schemes defined by requiring that for every point $x$ in the domain scheme, the induced ring homomorphism on the stalk at $x$ satisfies the predicate $P$ applied to the correspo\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRi\", \"doc\": \"If a ring homomorphism property $ Q $ holds for a morphism $ f : R → S $ and all localizations at prime ideals $ J ⊆ S $, then $ Q $ also holds for the induced stalk map homomorphism $ (f_{x})_{\\text{h\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ {R S : CommRingCat} (φ : R ⟶ S),\\n      AlgebraicGeometry.stalkwise (fun {R S} [CommRing R] [CommRing S] => P) (AlgebraicGeometry.Spec.map \", \"doc\": \"For a ring homomorphism $\\\\varphi: R \\\\to S$ and a property $P$ of ring homomorphisms invariant under isomorphisms, the induced morphism of schemes $\\\\operatorname{Spec}(\\\\varphi): \\\\operatorname{Spec}(S) \"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_Spec_map_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ {R S : CommRingCat} (φ : R ⟶ S),\\n      AlgebraicGeometry.stalkwise (fun {R S} [CommRing R] [CommRing S] => P) (AlgebraicGeometry.Spec.map \", \"doc\": \"For any property $ P $ of ring homomorphisms that is invariant under ring isomorphisms, a morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ induced by a ring homomorphism $ R \\\\to S $ sati\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u_1} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  RingHom.RespectsIso P →\\n    AlgebraicGeometry.HasRingHomProperty (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P)\\n      fun {x S} {x_1} {x_2} φ =>\\n      ∀ (p : Ideal S) (x_3 : p.IsPrime\", \"doc\": \"If a ring homomorphism property $ P $ is invariant under composition with ring isomorphisms, then the property that $ P $ holds stalk-wise (i.e., for the localized homomorphism at every prime ideal $ \"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (RingHom.OfLocalizationPrime fun {R S} [CommRing R] [C\", \"doc\": \"If a ring homomorphism property $ Q $, which is preserved under localization at prime ideals, holds for all stalk maps $ (f_{\\\\text{stalkMap}} x).\\\\text{hom} $ of a morphism $ f $, then the correspondin\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.stalkMap_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  {Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : \", \"doc\": \"If a ring homomorphism property $ Q' $ is invariant under isomorphisms and for every ring homomorphism $ f $ satisfying property $ P $, the induced localized homomorphisms at prime ideals satisfy $ Q'\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: stalkwise ring properties, ordinary tensor products and module stalk restriction do not state the derived algebraic-space chart criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The single complex base change stalk comparison is detected on etale charts by strict henselization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.rankAtStalk_baseChange\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"{S : Type*} [CommRing S] [Algebra R S] (p : PrimeSpectrum S) :\\n  rankAtStalk (S ⊗[R] M) p = rankAtStalk M (p.comap (algebraMap R S))\", \"doc\": \"For a commutative ring homomorphism $ R \\\\to S $, a prime ideal $ \\\\mathfrak{p} \\\\in \\\\text{Spec}(S) $, and an $ R $-module $ M $, the rank of the base-changed module $ S \\\\otimes_R M $ at $ \\\\mathfrak{p} $\"}\n  {\"name\": \"AlgebraicGeometry.localRingHom_comp_stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"{R S : CommRingCat.{u}} (f : R ⟶ S) (p : PrimeSpectrum S) :\\n  (stalkIso R (PrimeSpectrum.comap f.hom p)).hom ≫\\n      (CommRingCat.ofHom (Localization.localRingHom (PrimeSpectrum.comap f.hom p).asIdeal p.asIdeal f.hom rfl)) ≫\\n        (stalkIso S p).inv =\\n    (Spec.sheafedSpaceMap f).hom.stalkMap p\", \"doc\": \"Let $R$ and $S$ be commutative rings and let $f: R \\\\to S$ be a ring homomorphism. Let $\\\\mathfrak{p}$ be a prime ideal of $S$, and let $\\\\mathfrak{q} = f^{-1}(\\\\mathfrak{p})$. The induced morphism of aff\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.baseChange\", \"module\": \"Mathlib.RingTheory.SurjectiveOnStalks\", \"type\": \"[Algebra R T] [Algebra R S] (hf : (algebraMap R T).SurjectiveOnStalks) : (algebraMap S (S ⊗[R] T)).SurjectiveOnStalks\", \"doc\": \"Given commutative semirings $ R $, $ S $, and $ T $ with $ S $ and $ T $ as $ R $-algebras, if the canonical algebra homomorphism $ R \\\\to T $ is surjective on stalks, then the induced algebra homomorp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑S)\\n  (x :\\n    CategoryTheory.ToType\\n      ((AlgebraicGeometry.Spec.structureSheaf ↑R).presheaf.stalk (PrimeSpectrum.comap (CommRingCat.Hom.hom f) p))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.StructureSheaf.localizationToStalk (\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism between commutative rings, which induces a morphism of affine schemes $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$. For any prime ideal $\\\\mathfrak{p} \\\\in\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.baseChange'\", \"module\": \"Mathlib.RingTheory.SurjectiveOnStalks\", \"type\": \"[Algebra R T] [Algebra R S] (hf : (algebraMap R S).SurjectiveOnStalks) :\\n  (Algebra.TensorProduct.includeRight (R := R) (A := S) (B := T)).SurjectiveOnStalks\", \"doc\": \"Given a commutative semiring $ R $ and $ R $-algebras $ S $ and $ T $, if the canonical algebra map $ R \\\\to S $ is surjective on stalks, then the induced inclusion map $ S \\\\to S \\\\otimes_R T $ is also \"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) (x : X) : IsLocalHom (f.toHom.stalkMap x).hom\", \"doc\": \"For any morphism $f : X \\\\to Y$ between two locally ringed spaces, and for any point $x \\\\in X$, the ring homomorphism $\\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ induced by $f$ at $x$ is a local rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) :\\n  restrictFunctor f ⋙ toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ x ≅\\n    toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ (f x)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, this definition establishes a natural isomorphism between the functor that computes the stalk at $x$ of the pullback of a sheaf of \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: stalkwise ring properties, ordinary tensor products and module stalk restriction do not state the derived algebraic-space chart criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tensorProduct\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"RingHom.SurjectiveOnStalks.tensorProductMap\", \"module\": \"Mathlib.RingTheory.SurjectiveOnStalks\", \"type\": \" {R : Type u_1} [CommRing R] {S : Type u_2} [CommRing S] {T : Type u_3} [CommRing T] {S' : Type u_4} {T' : Type u_5} [CommRing S'] [CommRing T'] [Algebra R S] [Algebra R T] [Algebra R S'] [Algebra R T'] {f : S →ₐ[R] S'} (Hf : f.SurjectiveOnStalks) {g : T →ₐ[R] T'} (Hg : g.SurjectiveOnStalks) : (Alge\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.TensorProduct\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [Algebra R S] [CommRing T] [Algebra R T] (hRT : (algebraMap R T).SurjectiveOnStalks) : Topology.IsEmbedding (PrimeSpectrum.tensorProductTo R S T)\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.TensorProduct\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [Algebra R S] [CommRing T] [Algebra R T] (hRT : (algebraMap R T).SurjectiveOnStalks) (p₁ p₂ : PrimeSpectrum (TensorProduct R S T)) (h : PrimeSpectrum.tensorProductTo R S T p₁ = PrimeSpectrum.tensorProductTo R S T p₂) : p₁ ≤ p₂\", \"doc\": \"\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.Flat R M] [Module.Finite R M] (N : Type u_1) [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Flat R N] : Module.rankAtStalk (TensorProduct R M N) = Module.rankAtStalk M * Module.rankAtStalk N\", \"doc\": \"See `rankAtStalk_tensorProduct_of_isScalarTower` for a hetero-basic version.\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.Flat R M] [Module.Finite R M] {S : Type u_1} [CommRing S] [Algebra R S] (N : Type u_2) [AddCommGroup N] [Module R N] [Module S N] [IsScalarTower R S N] [Module.Finite S N] [Module.Flat S N] (p : PrimeSpectrum S) : Module\", \"doc\": \"\"}\n  {\"name\": \"Module.rankAtStalk_eq_finrank_tensorProduct\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] (p : PrimeSpectrum R) : Module.rankAtStalk M p = Module.finrank (Localization.AtPrime p.asIdeal) (TensorProduct R (Localization.AtPrime p.asIdeal) M)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: stalkwise ring properties, ordinary tensor products and module stalk restriction do not state the derived algebraic-space chart criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel.*derived|geometric.*stalk.*tensor|single.complex.*condition",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: stalkwise ring properties, ordinary tensor products and module stalk restriction do not state the derived algebraic-space chart criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-single-complex-base-change",
+  "date": "2026-10-23",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH scheme case: pass from the geometric condition to Tag 0DJ8 via Tag 0DKG.",
+   "via": [
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-stalk-condition-etale-charts",
+  "worker": "stage1",
+  "summary": "Q122 checked Tag 0DKG and its exact canonical maps; added the general 08HV flat refinement and 0DJD tensor-cohomology inputs, and assembled geometric locality, strict-local scalar comparison, faithful-flat detection and chart lifting. Statement unchanged.",
+  "blueprint": "Realizes the existing from.place route through the geometric-to-scheme reduction in Tag 0DKG, used by Tag 0DKH; latest blueprint sk-thm-sf-ctf-stability checked. The inherited nearest-blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic chart, stalk, or flat scalar-extension tool used with its stated hypotheses in Tag 0DKG; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic chart, stalk, or flat scalar-extension tool used with its stated hypotheses in Tag 0DKG; it does not replace the unit route."
+   },
+   {
+    "node": "lem-fd-ringed-flat-single-tensor-cohomology",
+    "why": "Generic chart, stalk, or flat scalar-extension tool used with its stated hypotheses in Tag 0DKG; it does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic chart, stalk, or flat scalar-extension tool used with its stated hypotheses in Tag 0DKG; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-456282901",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-456282901 (reviewer sub-agent of L); spot-checked: This is the item's first split: the item is unsplit with no proof on live and side-live, and has no repair note. The statement, stmt_deps, source and blueprint fields are byte-identical to live. I read spaces-perfect 0DKG (equation-bc, statement and proof), algebra 08HV, and more-algebra 08HW and 0DJD with their proofs. The six steps follow Stacks' route: étale locality (step 1 shows U×_V V'→X' is étale, using the diagonal and the representable-étale cancellation clause); K_x̄ = (K_U)_x ⊗ ã through the module geometric-stalk node, flatness and the flat-tensor node (step 2); the 0DJD comparison with all three 08HW hypotheses checked through the 08HV node applied to the local maps r→a and r→b (step 3); faithful flatness of c→c̃ reflecting both triples, with the arrow checked on the coordinates of def-pc-single-complex-base-change-stalk-condition (step 4); atlas and same-Ω lifts, with the identity-chart scheme case (step 5); the three preservation clauses (step 6). New node lem-sfb-strict-local-refinement-flat (flatness of A⊗_R R^sh→A^sh) is true: by 08HV it is a localization followed by a strict henselization. Tested on k=k, k→k(t), and k→K finite separable, which is flat but not faithfully flat. New node lem-sfb-flat-ring-diagram-tensor-cohomology is exactly 0DJD under the 08HW hypotheses. Tested on the identity diagram, M=0, and k⊗^L_{k[t]}k, where Tor_1 is kept. Both new nodes are statement-only and self-contained, their stmt_deps exist, and rg over dag/nodes and the main-20261015 blueprint finds no duplicates (functoriality, quasi-finite and smooth strict-local nodes, pc flat-base comparison and fd flat-tensor checked). Neither restates a clause of the item, and there is no SGA. Batch 5: the newly cited trf nodes (03EC representable-étale tests, 02X2 fibre products and covers, def-trf-algebraic-space) and the closure path through lem-trf-zariski-etale-tensor-sections are generic algebraic-space and module foundations, not steps of the trace formula or Poincaré duality, so they are accepted. The four generic tool_uses are accepted. No fixes."
+ }
+}

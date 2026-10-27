@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-space-affine-higher-direct-image-vanishing",
+ "kind": "statement",
+ "title": "Affine algebraic-space maps have no positive quasi-coherent higher direct images",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ and $Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $f:Y\\to X$ be affine, meaning representable with affine scheme base changes. Let $F$ be a quasi-coherent $\\mathcal O_Y$-module on the small etale ringed site [def-trf-space-quasi-coherent-module]. Write $F_{\\mathrm{ab}}$ for its underlying additive sheaf. For the induced direct image $f_*:\\operatorname{Ab}(Y_{\\mathrm{et}})\\to\\operatorname{Ab}(X_{\\mathrm{et}})$, let $R^qf_*$ denote its right derived functors, computed by injective resolutions [def-weil-pbc-sites-and-cohomology]. Then $R^qf_*(F_{\\mathrm{ab}})=0$ for every integer $q>0$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073H, lemma-affine-vanishing-higher-direct-images; higher direct images interpreted on underlying additive sheaves as in sites-cohomology.tex, lemma-limp-acyclic and lemma-cohomology-modules-abelian-agree."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "proof": [
+  {
+   "text": "Fix $q>0$. Since $f$ is representable, $u(V)=W=Y\\times_XV$ is a scheme for every scheme object $V\\to X$. Etale base-change permanence makes $W\\to Y$ an object of $Y_{\\mathrm{et}}$ and makes $u$ continuous. The canonical small-etale morphism of topoi is the one induced by this base-change functor: the enlarged-site model restricts to this functor here because its values on scheme objects are schemes. The site higher-direct-image formula therefore identifies $R^qf_*F_{\\mathrm{ab}}$ with $P^\\#$, where $P(V)=H^q(W,F_{\\mathrm{ab}})$ is cohomology over the object $W\\to Y$.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images, with spaces-cohomology.tex Tag 073H, lemma-affine-vanishing-higher-direct-images"
+   }
+  },
+  {
+   "text": "Now take $V\\to X$ with $V$ affine. By the stated meaning of affineness, $W=Y\\times_XV$ is an affine scheme. Put $h:W\\to Y$. Its etale module pullback is restriction, and pullback preserves quasi-coherence. Thus $F|_W$ is quasi-coherent on $W_{\\mathrm{et}}$. Apply the quasi-coherent groupoid equivalence to the identity atlas $W\\to W$: the relation groupoid is the identity groupoid, so its underlying quasi-coherent scheme module is a module $M$ on $W$ whose associated etale module is $F|_W$. In particular its underlying additive sheaf is $M_{\\mathrm{et}}$.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M3, proposition-quasi-coherent, including the scheme etale/Zariski convention in its proof; spaces-cohomology.tex Tag 073H"
+   }
+  },
+  {
+   "text": "Postcomposition gives an equivalence $W_{\\mathrm{et}}\\simeq Y_{\\mathrm{et}}/W$: objects in both are scheme maps $T\\to W$, and the etale permanence statement says $T\\to W$ is etale if and only if $T\\to Y$ is etale. The reverse implication applies its assertion that a map between etale objects over $Y$ is etale; the forward implication is composition. Arrows are the same maps over $W$, and coverings are the same jointly surjective etale families. Object-cohomology localization followed by invariance under this site equivalence identifies $H^q(W,F_{\\mathrm{ab}})$ with $H^q(W_{\\mathrm{et}},(F|_W)_{\\mathrm{ab}})$. By step 2 and affine etale quasi-coherent acyclicity, this is $H^q(W_{\\mathrm{et}},M_{\\mathrm{et}})=0$. Hence $P(V)=0$ on every affine etale test object.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3, lemma-cohomology-of-open; descent.tex Tag 03DW, proposition-same-cohomology-quasi-coherent (affine vanishing in its proof)"
+   }
+  },
+  {
+   "text": "Every scheme object $V\\to X$ has an affine open covering $V_i\\to V$, which is also an etale covering. If $a:P\\to G$ is any map to an abelian sheaf, the image of $s\\in P(V)$ restricts to zero on each $V_i$, since $P(V_i)=0$. The separatedness part of the sheaf axiom forces $a_V(s)=0$. Thus the only map $P\\to G$ is zero, for every sheaf $G$. By the universal property of sheafification, the identity and zero endomorphisms of $P^\\#$ coincide. Therefore $P^\\#=0$, and step 1 gives $R^qf_*F_{\\mathrm{ab}}=0$. The argument applies to each $q>0$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073H, lemma-affine-vanishing-higher-direct-images; elementary assembly using the sheafification universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-qcoh-groupoid-equivalence",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073H, lemma-affine-vanishing-higher-direct-images; expanded via affine etale test schemes using sites-cohomology.tex Tags 072W and 03F3 and descent.tex Tag 03DW, avoiding a module/additive derived-pushforward identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*higherDirectImage|higherDirectImage.*affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"pushforward\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on algebraic spaces are acyclic for direct image along affine morphisms",
+   "results": "[leansearch] OK 8 hit(s)\nSheafOfModules.IsQuasicoherent.mk\nSheafOfModules.isQuasicoherent\nSheafOfModules.IsQuasicoherent\nSheafOfModules.QuasicoherentData.I\nSheafOfModules.QuasicoherentData\nSheafOfModules.IsQuasicoherent.casesOn\nSheafOfModules.IsQuasicoherent.recOn\nSheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism of algebraic spaces has zero positive higher direct images of the underlying additive sheaf of any quasi coherent module",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\nAlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\nAlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\nAlgebraicGeometry.affineAnd_apply\nAlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\nAlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\nAlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of a quasi coherent module vanishes in positive degree for affine algebraic space maps",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\nAlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\nDerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\nAlgebraicGeometry.Scheme.Modules.instAbelian\nDerivedCategory.isZero_of_isGE\nDerivedCategory.isZero_of_isLE\nDerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme geometry, quasi-coherence definitions and derived-category vanishing facts do not state affine higher-image vanishing or the cohomology edge isomorphism for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*higherDirectImage|higherDirectImage.*affine",
+   "results": "No hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine scheme geometry and limits, not higher direct images of algebraic-space quasi-coherent additive sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of a quasi coherent sheaf along an affine map of algebraic spaces vanish",
+   "results": "Returned AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom, AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.IsAffineHom.casesOn, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, AlgebraicGeometry.Scheme.Hom.ker_apply, AlgebraicGeometry.instQuasiCompactOfIsAffineHom. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine scheme geometry and limits, not higher direct images of algebraic-space quasi-coherent additive sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheafPushforwardContinuous\"",
+   "results": "No hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine scheme geometry and limits, not higher direct images of algebraic-space quasi-coherent additive sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine morphisms of algebraic spaces have no positive higher direct images of quasi coherent modules",
+   "results": "Returned AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.affineAnd_apply, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine scheme geometry and limits, not higher direct images of algebraic-space quasi-coherent additive sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Positive etale cohomology of a quasi coherent sheaf vanishes over each affine inverse image for an affine map",
+   "results": "Returned AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.formallyUnramified_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine scheme geometry and limits, not higher direct images of algebraic-space quasi-coherent additive sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-cohomology",
+  "date": "2026-10-23",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent cohomology comparison along affine maps of algebraic spaces. Split of Tag 0D2U: its first cited lemma, Tag 073H, supplies positive higher-direct-image vanishing.",
+   "via": [
+    "lem-sfb-space-affine-cohomology",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-higher-direct-image-vanishing",
+  "worker": "stage1",
+  "summary": "NR expands affine higher-image vanishing into the sheafified object-cohomology formula, affine test-scheme quasi-coherence, localized-site cohomology, existing affine etale acyclicity, and an elementary universal-property argument. No new nodes, statement changes, or Lean files. All cited statements read; coefficient-category distinctions retained.",
+  "blueprint": "Supporting prerequisite of the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration chain: Tag 073H within the split of affine cohomology Tag 0D2U. Latest blueprint direct-images proof (3) read; this node realizes a lower-level prerequisite and does not replace its compactification/direct-image route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic Chartwise etale permanence for algebraic spaces used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic Enlarged etale ringed-site models of algebraic spaces used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "Generic Higher direct images along a morphism of sites are sheafified cohomology presheaves used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic Etale localization commutes with direct image of arbitrary space modules used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic Cohomology over an object is cohomology on its localized site used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+    "why": "Generic Etale cohomology is invariant under the localized-site sheaf equivalence used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic Etale acyclicity of a quasi-coherent module on an affine used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic Sites, morphisms of sites and cohomology on an object of a site used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic Sheafification on a site used only for the indicated test-site calculation; no statement in this unit supplies this general interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-90c80a5c2",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-90c80a5c2 (reviewer sub-agent of L); spot-checked: Shape: one commit touching only the item and its report; no new nodes. The statement, stmt_deps and source are identical to clones/live and clones/side-live, where the item is still unsplit; there is no repair note. Source: Tag 073H (spaces-cohomology l.1305) is read on the underlying additive sheaf as the item's source field says; also checked 072W, 03F3, 03FV, 03GA, 03M3, 03DW. Step 1: base-change permanence makes u(V)=Y×_X V an object of Y_et and makes u continuous; the enlarged-site model identifies u with the small-etale morphism, so the 072W node gives R^qf_*F_ab=(P^q)^#. Step 2: for affine V, W is affine; etale pullback is restriction and 03GA preserves quasi-coherence; the groupoid equivalence for the identity atlas W→W gives F|_W≅M_et. Step 3: W_et≃Y_et/W is checked both ways (composition one way, permanence of maps between etale objects the other) and coverings agree; then 03F3 localization, site-equivalence invariance, and lem-sc-etale-affine-qcoherent (abelian Sheaf.H, so the coefficient category matches) give P(V)=0. Step 4 is genuinely elementary: affine Zariski covers, sheaf separatedness and the universal property of sheafification give P^#=0. Edge cases: zero module, empty V, non-qcqs X; q=0 is correctly excluded. Duplicates: the existing affine-vanishing nodes are Zariski scheme versions; lem-sfb-space-affine-cohomology is the parent citing the item; same_as [] is correct. Batch-5: the three trf citations (chartwise etale permanence 03FV/041F, enlarged site model 03G0-03G2, etale module pushforward/restriction 03LV-03LX) are generic algebraic-space site interfaces, not steps of the trace-formula or Poincare-duality proofs, so they are accepted. Off-unit tool_uses are accepted as generic site/cohomology interfaces. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineHigherDirectImageVanishing",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isZero_affine_higherDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineHigherDirectImageVanishing.lean",
+  "statement": "theorem isZero_affine_higherDirectImage {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : Y ⟶ X) (hf : IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) f.hom.hom) (F : Y.Modules) (hF : F.IsQuasicoherent) (I : InjectiveResolution ((SheafOfModules.toSheaf Y.structureSheaf).obj F)) (q : ℕ) (hq : 0 < q) : IsZero (((abelianDirectImage f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex |>.homology q)",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The higher image is the homology of canonical abelian direct image applied to an arbitrary injective resolution of F_ab. This is the injective-resolution definition of R^q f_* in the node, without changing to module-derived images or adding a resolution-existence assumption. The source and target retain AddCommGrpCat.{u} on the full small etale sites."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb6736e1b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clauses match node and Stacks 073H/definition-affine: S, X Y : AlgebraicSpace S, affine = IsRepresentableWith IsAffineHom on scheme tests (equivalent to Stacks def), F : Y.Modules with Mathlib IsQuasicoherent, F_ab = toSheaf in AddCommGrpCat.{u} (no lift), R^q f_* = homology of abelianDirectImage applied to an arbitrary InjectiveResolution (resolution-independent, no existence assumption), q:ℕ with 0<q, IsZero; single universe u; statement verbatim. Mechanical theorem-stmt_dep finding: abelianDirectImage is asEquivalence of the theorem enlargedAbelianRestriction_isEquivalence plus enlargedDirectImage, i.e. the small-etale f_* the theorem node constructs (03G1/03G2(3)), and its Additive instance is a theorem of that node, so the statement genuinely depends on its conclusion: PASS on that point. §1(B) dependency repair of SpaceCotangentRingMap is additive only (3 imports, 4 declarations, none changed/removed), same pattern as enlargedSmallDirectImage/cotangentRingDirect, no name clash, no DAG cycle. representableAbelianDirectImage (def-sfb, u+1, representable only) is not the u-coefficient notion. Advisories: dependency record note overwritten instead of extended; HasSheafify owner def-sfb-space-comm-algebra-sheaf not in stmt_deps (advisory per precedent); MapIsAffine not used (inline form matches node text). Docstrings, sorry-only, no hollow defs; report has Worker report and Second reading by Q06. No changes, no compile.; reverted the delivery's change of existing node(s) lem-trf-space-enlarged-etale-ringed-site-model (--revert-nodes; kept as on sheaf-dag)"
+ }
+}

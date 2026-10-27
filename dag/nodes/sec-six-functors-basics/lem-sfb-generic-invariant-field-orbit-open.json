@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-generic-invariant-field-orbit-open",
+ "kind": "statement",
+ "title": "Dense open orbit fibres from purely inseparable invariant function fields",
+ "statement": "Let $k$ be a field and $a:W\\to X$ an H-projective surjective morphism of integral finite-type $k$-schemes inducing a finite extension of function fields. Let a finite group $N$ act on $W$ by $k$-scheme automorphisms such that $a$ is invariant, and assume $k(W)^N/k(X)$ is purely inseparable. There is a dense nonempty affine open $U=\\operatorname{Spec}R\\subset X$ such that $a^{-1}U=\\operatorname{Spec}S\\to U$ is finite surjective. The affine quotient $\\operatorname{Spec}S\\to\\operatorname{Spec}(S^N)$ is finite surjective with geometric fibres the $N$-orbits, and the induced finite morphism $\\operatorname{Spec}(S^N)\\to U$ is radicial and surjective. Moreover\n$$\\operatorname{Frac}(S^N)=\\operatorname{Frac}(S)^N.$$\nConsequently every geometric fibre of $a^{-1}U\\to U$ is a nonempty single $N$-orbit. In positive characteristic $p$, the open can be chosen with an integer $m\\geq0$ such that $t^{p^m}\\in R$ for every $t\\in S^N$; in characteristic zero it can be chosen with $S^N=R$. No normality, faithfulness or freeness of the action is assumed.\n\nH-projective means admitting a closed immersion into a finite-dimensional projective space over the target [def-kun-projective]. The other notions use [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-surjective-morphism], [def-weil-finite-integral-morphism], [def-weil-radicial-morphism], [def-weil-geometric-fibre], [def-sc-function-field], [def-pc-field-extension] and [def-pc-field-tower]. The fixed ring $S^N$ consists of elements fixed by every group element; $\\operatorname{Frac}$ denotes the fraction field of a domain.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X Lemma 2.2(iii), printed pp.149--150, generic quotient/orbit assertion. Agent-formulated spreading lemma isolating old steps 11--13; quotient construction Stacks groupoids.tex Tags 03JE, 03BJ, 03BL, and radicial criterion morphisms.tex Tag 01S4."
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-radicial-morphism",
+  "def-weil-geometric-fibre",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-sfb-dominant-function-field-map"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type hypothesis on $X\\to\\operatorname{Spec}k$ [def-weil-finite-type-morphism] gives a finite cover of $X$ by affine opens $\\operatorname{Spec}A_j$ with $A_j$ finitely generated $k$-algebras. These rings are Noetherian by [lem-wf-affine-noetherian-components] and these opens are quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so $X$ is locally Noetherian [pqf-def-locnoeth] and quasi-compact, i.e. Noetherian in the sense of [lem-weil-pbc-generic-finite-morphism-open-neighborhood]. The H-projective convention is exactly [def-kun-projective]; by [lem-kun-projective-implies-proper] and [def-weil-proper-morphism] the morphism $a$ is separated and of finite type, i.e. quasi-compact and locally of finite type [def-weil-finite-type-morphism], and it is quasi-separated by [lem-pc-separated-quasi-separated]. Since $W$ and $X$ are integral, hence irreducible, they have unique generic points $\\xi$ and $\\eta$ by [lem-sc-scheme-sober]; $\\eta$ is the generic point of the only irreducible component of $X$. Moreover $a(\\xi)=\\eta$: the closure of $a(\\xi)$ contains $a(\\overline{\\{\\xi\\}})=a(W)=X$ by continuity and surjectivity.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "def-kun-projective",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Noetherian charts: algebra.tex Tag 00FN (lemma-Noetherian-permanence); locally Noetherian: properties.tex Tag 01OV (definition-noetherian); H-projective properness: morphisms.tex Tag 01WC (lemma-locally-projective-proper); separated implies quasi-separated: schemes.tex Section 01KH, paragraph after Definition 01KK."
+   }
+  },
+  {
+   "text": "We show $a^{-1}(\\{\\eta\\})=\\{\\xi\\}$. Let $w\\in W$ with $a(w)=\\eta$. Choose a nonempty affine open $\\operatorname{Spec}A\\subseteq X$; it contains $\\eta$, and by [lem-weil-pbc-affine-opens-basis] $w$ lies in an affine open $\\operatorname{Spec}B\\subseteq a^{-1}(\\operatorname{Spec}A)$. By [lem-sc-integral-function-field-affine-fraction] $A$ and $B$ are domains, $\\operatorname{Spec}A\\ni\\eta$, $\\operatorname{Spec}B\\ni\\xi$, and the germ maps identify $\\operatorname{Frac}A=k(X)$, $\\operatorname{Frac}B=k(W)$; the residue fields at $\\eta,\\xi$ are these generic stalks, which are fields. The ring map $A\\to B$ is compatible with the given finite extension $k(X)\\to k(W)$, hence injective. The prime $\\mathfrak p_w\\subset B$ of $w$ contracts to the prime $(0)$ of $A$ corresponding to $\\eta$. Put $\\Sigma=A\\setminus\\{0\\}$. The domain $\\Sigma^{-1}B\\subseteq k(W)$ is a $k(X)$-subspace of the finite-dimensional $k(X)$-space $k(W)$, so it is a field by [lem-weil-pbc-finite-dimensional-domain-is-field]. Since $\\mathfrak p_w\\cap\\Sigma=\\emptyset$, $\\Sigma^{-1}\\mathfrak p_w$ is a proper ideal of this field, hence zero, and so $\\mathfrak p_w=0$ because $B\\subseteq\\Sigma^{-1}B$. Thus $w$ is the generic point of the dense open $\\operatorname{Spec}B$, i.e. $w=\\xi$. The fibre of $a$ over the generic point $\\eta$ of the only irreducible component of $X$ is therefore finite, and with Step 1 all hypotheses of [lem-weil-pbc-generic-finite-morphism-open-neighborhood] hold. It gives a dense open $V\\subseteq X$ containing $\\eta$ such that $a^{-1}V\\to V$ is finite.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW (lemma-generically-finite), (1)=>(4) at the generic point; generic stalks as fraction fields: Tag 01RV (lemma-integral-scheme-rational-functions); a finite-dimensional domain over a field is a field (rank-nullity)."
+   }
+  },
+  {
+   "text": "Choose an affine open $U_0=\\operatorname{Spec}R_0$ containing the generic point of $X$ inside $V$, using [lem-weil-pbc-affine-opens-basis]. By [lem-weil-pbc-finite-local-on-target] the restriction is still finite, hence $a^{-1}U_0=\\operatorname{Spec}S_0$ with $S_0$ a finite $R_0$-module by [def-weil-finite-integral-morphism]. It is surjective by restricting the given surjection. Both opens are nonempty and integral. The fraction-field theorem [lem-sc-integral-function-field-affine-fraction] identifies $\\operatorname{Frac}(R_0)=k(X)$ and $\\operatorname{Frac}(S_0)=k(W)$ through the germ maps, so the given field inclusion makes $R_0\\to S_0$ injective. We regard these rings as subrings of $k(W)$. Apply [lem-weil-pbc-lft-affine-pairs] to $X\\to\\operatorname{Spec}k$ and $U_0$: $R_0$ is a finitely generated $k$-algebra, so [lem-wf-affine-noetherian-components] makes it Noetherian directly. Invariance of $a$ makes its inverse image $N$-stable and makes $N$ fix $R_0$ pointwise.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-finite-local-on-target",
+    "def-weil-finite-integral-morphism",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW (lemma-generically-finite), affine neighbourhood; Tag 01WI (lemma-finite-local); Tag 01RV (lemma-integral-scheme-rational-functions). Affine basis: schemes.tex Tag 01IT; Noetherian affine opens: properties.tex Tag 01OW (lemma-locally-Noetherian). For the chart ring use morphisms.tex Tag 01T2 (lemma-locally-finite-type-characterize) and algebra.tex Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Put $T_0=S_0^N$. This is an $R_0$-submodule of $S_0$: the action fixes $R_0$ and is additive. Since $R_0$ is Noetherian and $S_0$ is a finite $R_0$-module, [lem-weil-pbc-noetherian-submodule-finite] gives generators $t_1,\\ldots,t_r$ of $T_0$ as an $R_0$-module. We can include $1$ among them. The single-affine-cover criterion in [lem-weil-pbc-finite-local-on-target] now shows that $\\operatorname{Spec}T_0\\to U_0$ is finite: its entire affine target has affine inverse image with the displayed finite coordinate algebra.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK (lemma-Noetherian-basic), submodules of finite modules; morphisms.tex Tag 01WI (lemma-finite-local), single-affine-cover criterion."
+   }
+  },
+  {
+   "text": "The affine-pairs criterion [lem-weil-pbc-lft-affine-pairs], applied to the original finite-type structure morphism $W\\to\\operatorname{Spec}k$ and the affine open $\\operatorname{Spec}S_0$, says that $S_0$ is a finite-type $k$-algebra. Thus this affine scheme is locally of finite type over $k$. It is separated over $k$ by [lem-weil-pbc-affine-source-morphism-separated], and every $N$-orbit lies in this single affine open. Apply [lem-sfb-admissible-finite-type-field-quotient]: the quotient is $q_0:\\operatorname{Spec}S_0\\to\\operatorname{Spec}T_0$, is finite and surjective, and its geometric fibres are precisely $N$-orbits. The inclusion $R_0\\subseteq T_0$ gives $b_0:\\operatorname{Spec}T_0\\to U_0$, with $a|_{U_0}=b_0q_0$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-admissible-finite-type-field-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BL (lemma-points), applied to the finite-group action groupoid; the existing admissible quotient node gives precisely its affine finite-type specialization. Morphisms Tag 01T2 (lemma-locally-finite-type-characterize); schemes.tex Tag 01KN (lemma-affine-separated)."
+   }
+  },
+  {
+   "text": "Here is the fixed fraction-field calculation without normality. Certainly $\\operatorname{Frac}(T_0)\\subseteq\\operatorname{Frac}(S_0)^N$. Conversely, write a fixed fraction as $x=u/v$ with $u,v\\in S_0$ and $v\\ne0$. Put $d=\\prod_{h\\in N}h(v)$. This is nonzero and fixed, and $xd=u\\prod_{h\\ne1}h(v)$ belongs to $S_0$. Since $x$ and $d$ are fixed in the fraction field, $xd$ belongs to $T_0$. Therefore $x=(xd)/d\\in\\operatorname{Frac}(T_0)$, proving equality. In particular every $t_i$ belongs to the assumed purely inseparable extension $k(W)^N/k(X)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written norm-denominator calculation for X Lemma 2.2(iii), printed pp.149--150; expands the generic invariant-field assertion with no normality assumption."
+   }
+  },
+  {
+   "text": "Suppose first that $\\operatorname{char}k=p>0$. By [def-weil-pbc-finite-purely-inseparable-extension], choose $n_i\\ge0$ with $t_i^{p^{n_i}}\\in\\operatorname{Frac}(R_0)$. Set $m=\\max_i n_i$ and $q=p^m$. Then $t_i^q\\in\\operatorname{Frac}(R_0)$ for every $i$; write $t_i^q=c_i/d_i$ with $c_i,d_i\\in R_0$, $d_i\\ne0$, and choose $f=\\prod_i d_i\\ne0$. If $\\operatorname{char}k=0$, the same definition gives $k(W)^N=k(X)$, so write $t_i=c_i/d_i$ and choose the same product $f$. These are fractions in the embedded base field from Step 3, not elements of the normalization of $R_0$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HE (definition-purely-inseparable), including its arbitrary-characteristic convention; agent-written finite-generator denominator choice."
+   }
+  },
+  {
+   "text": "Shrink to $U=D(f)\\subseteq U_0$ and set $R=(R_0)_f$, $S=(S_0)_f$, $T=(T_0)_f$. The principal-localization open immersion [lem-weil-pbc-principal-localization-open-immersion] and the pullback formula [lem-weil-pbc-basic-open-pullback] identify $U=\\operatorname{Spec}R$ and $a^{-1}U=\\operatorname{Spec}S$. Since $f\\ne0$ in the domain $R_0$, $U$ contains the generic point and is dense nonempty. Because $f$ is fixed and $S_0$ embeds in its fraction field, a fraction $s/f^j$ is fixed exactly when every $h(s)=s$; hence $S^N=T$. The $t_i$ still generate $T$ over $R$. In characteristic $p$, for $t=\\sum_i a_it_i$ with $a_i\\in R$, repeated binomial expansion gives $t^q=\\sum_i a_i^q t_i^q\\in R$ (the intermediate binomial coefficients for a $p$th power are divisible by $p$). In characteristic zero every $t_i\\in R$, so $R\\subseteq T\\subseteq R$ and $T=R$. The fixed-field calculation of Step 6 applies to $S$ as well, giving $\\operatorname{Frac}(S^N)=\\operatorname{Frac}(S)^N$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-basic-open-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3 (lemma-standard-open-affine); modules.tex Tag 0H78 (remark-pullback-s-open). Agent-written invariant-fraction and Frobenius computations after the explicit denominator choice in Step 6."
+   }
+  },
+  {
+   "text": "The finite morphisms $a|_{U_0}$, $q_0$, and $b_0$ restrict over $D(f)$ to finite morphisms $a|_U$, $q:\\operatorname{Spec}S\\to\\operatorname{Spec}T$, and $b:\\operatorname{Spec}T\\to\\operatorname{Spec}R$, by [lem-weil-pbc-finite-local-on-target]; the quotient restricts as asserted in [lem-sfb-admissible-finite-type-field-quotient]. The maps $a|_U$ and $q$ are surjective by restriction to these inverse images, so $b$ is surjective from $a|_U=bq$. To prove $b$ radicial, use the field-point criterion in [def-weil-radicial-morphism]. For two ring maps $\\phi,\\psi:T\\to K$ to any field that agree on $R$, in characteristic $p$ one has $\\phi(t)^q=\\phi(t^q)=\\psi(t^q)=\\psi(t)^q$ for every $t$; hence $(\\phi(t)-\\psi(t))^q=0$ forces equality. In characteristic zero $T=R$. Thus $b$ is radicial in both cases.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WI (lemma-finite-local) and Tag 01S4 (lemma-universally-injective), criterion (1). The quotient restriction is the existing admissible quotient theorem; the power calculation is elementary."
+   }
+  },
+  {
+   "text": "Fix $x\\in U$ and an algebraic closure $\\Omega$ of $\\kappa(x)$, with its canonical map $\\alpha:R\\to\\Omega$. In characteristic $p$, for $t\\in T$ define $\\beta(t)$ as the unique root of $Z^q-\\alpha(t^q)$ in $\\Omega$: existence follows from [def-weil-algebraic-closure], and uniqueness from $(z-z')^q=0$. The identities $(t+u)^q=t^q+u^q$ and $(tu)^q=t^qu^q$ show by uniqueness that $\\beta$ preserves addition, multiplication and $1$; also $\\beta(r)=\\alpha(r)$ for $r\\in R$. Thus $\\beta:T\\to\\Omega$ extends $\\alpha$ and is unique by Step 9. In characteristic zero use $T=R$. Write $y=\\ker\\beta$. The injection $T/y\\to\\Omega$ extends to its fraction field $\\kappa(y)$, and $\\kappa(x)\\subseteq\\kappa(y)\\subseteq\\Omega$. Since $\\Omega$ is algebraic over $\\kappa(x)$, the same polynomial equations show that it is algebraic over $\\kappa(y)$; it is therefore an algebraic closure of $\\kappa(y)$ as well. The geometric-fibre assertion of [lem-sfb-admissible-finite-type-field-quotient] now applies exactly to $q$ over $y$ with this closure. Its geometric fibre has underlying point set nonempty and one $N$-orbit.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-admissible-finite-type-field-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written geometric-point assembly of X Lemma 2.2(iii), printed pp.149--150; the quotient orbit assertion is Stacks groupoids.tex Tag 03BL (lemma-points). Root lifting uses the definition of algebraically closed field."
+   }
+  },
+  {
+   "text": "Interpret Step 10 on geometric fibre schemes [def-weil-geometric-fibre]. Both $a|_U$ and $q$ are finite, so their base changes along the displayed $\\Omega$-points are finite by [lem-trf-finite-radicial-basechange]. Each fibre is $\\operatorname{Spec}A$ for a finite $\\Omega$-algebra by [def-weil-finite-integral-morphism], hence integral over $\\Omega$ by [lem-weil-pbc-finite-algebra-is-integral]. For every prime $P\\subset A$, [lem-a1-integral-residue-extension-algebraic] makes $\\kappa(P)/\\Omega$ algebraic. It equals $\\Omega$: a polynomial for any element factors into linear factors over the algebraically closed field [def-weil-algebraic-closure], and a product vanishes in a field only when a factor vanishes. A point $P$ thus determines a unique $\\Omega$-algebra map $A\\to\\Omega$, and conversely such a map determines its kernel. This correspondence respects $N$. For the fibre of $q$, Step 10 therefore gives a nonempty single orbit of $\\Omega$-points. Every $\\Omega$-point of $a|_U$ above $\\alpha$ maps to the unique extension $\\beta$ by Step 9; conversely every point above $\\beta$ maps to $\\alpha$. These two sets of $\\Omega$-points coincide equivariantly. Applying the same point correspondence to the fibre of $a|_U$ gives the required nonempty single $N$-orbit on its underlying point set. No reducedness of either fibre, normality, or faithfulness is asserted or used.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "lem-trf-finite-radicial-basechange",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-a1-integral-residue-extension-algebraic",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BL (lemma-points), proof: integral residue extensions over an algebraically closed field. Finiteness base change: morphisms.tex Tag 01WL (lemma-base-change-finite); finite implies integral: algebra.tex Tag 00GK (lemma-finite-is-integral)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "def-kun-projective",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-local-on-target",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-admissible-finite-type-field-quotient",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-basic-open-pullback",
+  "def-weil-radicial-morphism",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-fibre",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-a1-integral-residue-extension-algebraic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X Lemma 2.2(iii), printed pp.149--150. This is the agent-formulated spreading consequence: generic finiteness via Stacks 02NW (ILO II Proposition 1.1.7), quotient orbit fibres via Stacks 03BL; explicit norm-denominator, localization, uniform-power and geometric-root calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spread a purely inseparable fixed field of a finite group action on an integral scheme to a radicial quotient on a dense open",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.IsFinite",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No exact match: Galois-category orbit lemmas and arithmetic-Frobenius invariant lemmas do not spread an arbitrary inseparable invariant function field of a projective scheme map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective dominant generically finite equivariant map with purely inseparable fixed function field has geometric fibres single group orbits on a dense open",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive, CategoryTheory.PreGaloisCategory.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive",
+   "date": "2026-10-22",
+   "verdict": "No exact match: Galois-category orbit lemmas and arithmetic-Frobenius invariant lemmas do not spread an arbitrary inseparable invariant function field of a projective scheme map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize a finite invariant algebra over a domain so all elements have a common p power in the base, giving geometric orbit fibres",
+   "results": "8 hits: IsArithFrobAt.exists_of_isInvariant, IsArithFrobAt.arithFrobAt, arithFrobAt, AlgHom.IsArithFrobAt.isArithFrobAt_localize, IsArithFrobAt, AlgHom.IsArithFrobAt.finite_quotient, Algebra.IsInvariant.exists_smul_of_under_eq, IsArithFrobAt.exists_primesOver_isConj",
+   "date": "2026-10-22",
+   "verdict": "No exact match: Galois-category orbit lemmas and arithmetic-Frobenius invariant lemmas do not spread an arbitrary inseparable invariant function field of a projective scheme map."
+  },
+  {
+   "tool": "grep",
+   "query": "[Uu]niversallyInjective|IsInvariant|orbit",
+   "results": "19 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+   "date": "2026-10-22",
+   "verdict": "No exact match: Galois-category orbit lemmas and arithmetic-Frobenius invariant lemmas do not spread an arbitrary inseparable invariant function field of a projective scheme map."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(fraction|radicial)|generically.*finite|purelyInseparable",
+   "results": "; 4 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field-theoretic purely inseparable powers, arithmetic Frobenius, or general radicial criteria; none gives this entire spreading and geometric-orbit statement in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.IsFinite",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field-theoretic purely inseparable powers, arithmetic Frobenius, or general radicial criteria; none gives this entire spreading and geometric-orbit statement in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spread purely inseparable fixed function field to a radicial quotient of a finite group action on a dense open",
+   "results": "; 8 hits: isPurelyInseparable_iff, IsPurelyInseparable.isAlgebraic, isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable.isIntegral, IsPurelyInseparable, IsPurelyInseparable.isPRadical, IsPurelyInseparable.mk, IsPurelyInseparable.isIntegral'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field-theoretic purely inseparable powers, arithmetic Frobenius, or general radicial criteria; none gives this entire spreading and geometric-orbit statement in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group invariant function field purely inseparable over the base implies geometric fibres are orbits after restricting a generically finite projective morphism to a dense open",
+   "results": "; 8 hits: arithFrobAt, IsArithFrobAt.exists_of_isInvariant, IsGaloisGroup.to_isFractionRing, IsFractionRing.stabilizerHom_surjective, IsGaloisGroup.iff_isFractionRing, Algebra.IsInvariant.orbit_eq_primesOver, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, IsArithFrobAt.exists_primesOver_isConj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field-theoretic purely inseparable powers, arithmetic Frobenius, or general radicial criteria; none gives this entire spreading and geometric-orbit statement in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize a finite algebra of domains with purely inseparable fraction field extension to get a uniform p power of every element in the base ring",
+   "results": "; 8 hits: IsPurelyInseparable.pow_mem, IsPurelyInseparable.isPRadical, IsPurelyInseparable.hasExponent_iff', IsPurelyInseparable.HasExponent.has_exponent, IsPurelyInseparable.elemExponent_def', IsPurelyInseparable.hasExponent_iff, AlgHom.IsArithFrobAt.isArithFrobAt_localize, isPurelyInseparable_iff_pow_mem",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field-theoretic purely inseparable powers, arithmetic Frobenius, or general radicial criteria; none gives this entire spreading and geometric-orbit statement in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-plurinodal-field-alteration",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X 2.2--2.3: X Lemma 2.2 proof, printed pp.149--150: the application of Vidal 2004b Proposition 4.4.3, before the successive applications of 4.4.4; retain the generic Galois/radicial condition (iii), equivalently geometric N-orbits over a dense open. No smoothness of the total T_i is asserted. Vidal primary article is WANTED locally.; extraction: X Lemma 2.2(iii), printed pp.149--150, generic quotient/orbit assertion. Agent-formulated spreading lemma isolating old steps 11--13; quotient construction Stacks groupoids.tex Tags 03JE, 03BJ, 03BL, and radicial criterion morphisms.tex Tag 01S4.",
+   "via": [
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generic-invariant-field-orbit-open",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Eleven proof steps reuse Stacks 02NW generic finiteness (after an explicit generic-fibre computation), affine finite-group quotient, and Noetherian submodule theorem. The fixed fraction field is computed by a product of translates of a denominator; finite module generators give an explicit common base denominator and a uniform Frobenius power. Radiciality and nonempty geometric orbit fibres are checked by field homomorphisms and unique roots. No new nodes or Mathlib leaves. Repair of the side-completion promotion return: rebuilt on the current live item, reread every current cited statement, replaced the chart Noetherianity detour by the affine-pairs and finite-type-algebra lemmas, and made the quotient geometric-fibre application use an actual algebraic closure of its residue field. Reviewer FIX (Q128 b26ff3d7): Step 1 split into Steps 1-2 citing lem-weil-pbc-generic-finite-morphism-open-neighborhood instead of a dropped route node.",
+  "blueprint": "Realizes the generic quotient/orbit subargument of det-thm-sf-ctf-stability-direct-images proof (3), through the existing alteration chain and ILO X 2.2(iii); steps 1--4 give the finite affine quotient, steps 5--7 its invariant field and uniform-power spread, and steps 8--10 radiciality and geometric orbit fibres. blueprint_refs ancestor returns null, as in the inherited from record; its exact place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic scheme tool giving finite type of the supplied H-projective morphism in exactly the def-kun-projective convention; it does not replace any alteration or six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Stacks 02NW generic finiteness (finite generic fibre => finite over a dense open) for a qcqs, finite-type morphism to a Noetherian scheme; replaces the ILO II 1.1.7 criterion node dropped in the 2026-10-19 route correction. Reviewer FIX."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-b26ff3d79",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-b26ff3d79 (reviewer sub-agent of L); spot-checked: I read the whole 10-step proof of the unchanged item, every cited statement, and ILO X Lemma 2.2(iii) on printed pp.149-150 ('W/K -> U1 ... universal homeomorphism'). There are 0 new nodes. This is a first split from Q39, not a 2026-10-21 re-split. The statement is true; I tested it on N=1 Frobenius, the characteristic-0 cusp normalisation, a trivial action with p dividing |N|, and a field base. Steps 2-10 hold as written: affine shrink, the fixed submodule T0 finite over Noetherian R0, the affine quotient via lem-sfb-admissible-finite-type-field-quotient (its invariant-affine clause, no faithfulness needed), the norm denominator giving Frac(T0)=Frac(S0)^N, uniform q=p^m with f=prod d_i, localisation commuting with invariants because f is fixed, radiciality via 01S4 (1), unique q-th roots giving beta with Omega also an algebraic closure of kappa(y), and points of finite Omega-algebras being Omega-points. Fault (one): Step 1 cites lem-per-generic-fibre-finiteness-criterion, which is in route-pivot-dropped.txt line 1617, section 2026-10-19 artin-gabber, so citing it revives a dropped node. Its batch-5 reach, lem-trf-finite-residue-point-closed-in-fibre, is generic 01TE and by itself would not force a RETURN. The item is not part of the lem-per-artin-gabber-affine-curve route. FIX: old Step 1 becomes new Steps 1-2. Step 1: X is locally Noetherian and quasi-compact (lem-wf-affine-noetherian-components, lem-weil-pbc-affine-scheme-qcqs, pqf-def-locnoeth); a is proper, hence finite type and separated, hence quasi-separated (lem-pc-separated-quasi-separated). Step 2: the generic fibre is {xi}, because Sigma^-1 B inside k(W) is a finite-dimensional domain over k(X) and so a field (lem-weil-pbc-finite-dimensional-domain-is-field); then lem-weil-pbc-generic-finite-morphism-open-neighborhood (Stacks 02NW) gives the dense open V. Its closure has no trace-formula, Poincare-duality, sk-trace or nt- node and no dropped node, checked by graph walk. Later steps and their Step-n references are renumbered by +1. proof_deps is recomputed as the union of uses. split_report.tool_uses swaps the dropped node for the 02NW node; lem-kun-projective-implies-proper is kept and accepted. Same repair as Q111 ec15f87f.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericInvariantFieldOrbitOpen",
+  "declaration": "AlgebraicGeometry.generic_invariant_field_orbit_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericInvariantFieldOrbitOpen.lean",
+  "statement": "theorem generic_invariant_field_orbit_open (k : Type u) [Field k] (W X : Scheme.{u}) [IsIntegral W] [IsIntegral X] (pW : W ⟶ Spec (.of k)) (pX : X ⟶ Spec (.of k)) [LocallyOfFiniteType pW] [QuasiCompact pW] [LocallyOfFiniteType pX] [QuasiCompact pX] (a : W ⟶ X) [IsHProjective a] [Surjective a] (ha : a ≫ pX = pW) (N : Type v) [Group N] [Finite N] (act : N →* Aut W) (hk : ∀ g : N, (act g).hom ≫ pW = pW) (hinv : ∀ g : N, (act g).hom ≫ a = a) (hfinite : (@algebraMap X.functionField W.functionField _ _ a.dominantFunctionFieldAlgebra).Finite) (hpure : ∀ z : W.functionField, (∀ g : N, (Scheme.functionFieldAut (act g)).hom z = z) → ∃ (n : ℕ) (c : X.functionField), @algebraMap X.functionField W.functionField _ _ a.dominantFunctionFieldAlgebra c = z ^ (ringExpChar k) ^ n) : ∃ (U : X.Opens) (hU : IsAffineOpen U), Dense (U : Set X) ∧ Set.Nonempty (U : Set X) ∧ ∃ (hV : IsAffineOpen (a ⁻¹ᵁ U)) (hη : genericPoint W ∈ a ⁻¹ᵁ U) (SN : Subring Γ(W, a ⁻¹ᵁ U)), SN = ⨅ (g : N) (T : W.Opens) (hT : T ≤ a ⁻¹ᵁ U) (hTg : T ≤ (act g).hom ⁻¹ᵁ (a ⁻¹ᵁ U)), ((act g).hom.appLE (a ⁻¹ᵁ U) T hTg).hom.eqLocus (W.presheaf.map (homOfLE hT).op).hom ∧ IsFinite (a ∣_ U) ∧ Surjective (a ∣_ U) ∧ ∃ (q : (a ⁻¹ᵁ U).toScheme ⟶ Spec (.of SN)) (r : Γ(X, U) →+* SN), q = hV.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom SN.subtype) ∧ SN.subtype.comp r = (a.app U).hom ∧ ∃ b : Spec (.of SN) ⟶ U.toScheme, b = Spec.map (CommRingCat.ofHom r) ≫ hU.isoSpec.inv ∧ q ≫ b = a ∣_ U ∧ IsFinite q ∧ Surjective q ∧ IsFinite b ∧ UniversallyInjective b ∧ Surjective b ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of SN)), Nonempty ↥(pullback q t) ∧ ∀ x y : ↥(pullback q t), ∃ (g : N) (l : pullback q t ⟶ pullback q t), l ≫ pullback.fst q t ≫ (a ⁻¹ᵁ U).ι = pullback.fst q t ≫ (a ⁻¹ᵁ U).ι ≫ (act g).hom ∧ l ≫ pullback.snd q t = pullback.snd q t ∧ l x = y) ∧ (∀ z : W.functionField, (∀ g : N, (Scheme.functionFieldAut (act g)).hom z = z) ↔ ∃ c d : SN, W.presheaf.germ (a ⁻¹ᵁ U) (genericPoint W) hη (d : Γ(W, a ⁻¹ᵁ U)) ≠ 0 ∧ z = W.presheaf.germ (a ⁻¹ᵁ U) (genericPoint W) hη (c : Γ(W, a ⁻¹ᵁ U)) / W.presheaf.germ (a ⁻¹ᵁ U) (genericPoint W) hη (d : Γ(W, a ⁻¹ᵁ U))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ U.toScheme), Nonempty ↥(pullback (a ∣_ U) t) ∧ ∀ x y : ↥(pullback (a ∣_ U) t), ∃ (g : N) (l : pullback (a ∣_ U) t ⟶ pullback (a ∣_ U) t), l ≫ pullback.fst (a ∣_ U) t ≫ (a ⁻¹ᵁ U).ι = pullback.fst (a ∣_ U) t ≫ (a ⁻¹ᵁ U).ι ≫ (act g).hom ∧ l ≫ pullback.snd (a ∣_ U) t = pullback.snd (a ∣_ U) t ∧ l x = y) ∧ (∀ p : ℕ, p.Prime → CharP k p → ∃ m : ℕ, ∀ t : SN, (t : Γ(W, a ⁻¹ᵁ U)) ^ p ^ m ∈ Set.range (a.app U).hom) ∧ (CharZero k → (a.app U).hom.range = SN)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 16bd1acd4b10: finite-type k-structures, canonical dominant function-field algebra and induced action, actual invariant section ring, canonical quotient/residual maps, both geometric orbit clauses, fraction-field identity inside k(W), and invariant-only characteristic clauses. Stage-2 review FIX: the fixed ring is written out as a pinned SN equal to the equalizer formula of finiteQuotientInvariantSections (a definition owned by the theorem node lem-sfb-admissible-finite-type-field-quotient, which is a proof_dep, not a stmt_dep); that module is now a proof-only import.",
+  "fixed_by": "NT-stage2-cc-2e22d2ab1"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e22d2ab1",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Maths correct clause by clause against node and ILO X 2.2(iii)/Stacks 03BL/01S4: k-structures with finite type, H-projective surjective a over k, canonical dominantFunctionFieldAlgebra for finiteness, purely-inseparable power criterion matching def-pc-field-tower, q/r/b fixed by canonical formulas, IsFinite/Surjective/UniversallyInjective, nonempty transitive geometric fibres of q and a|U for all algebraically closed Ω with the lift fixed by both projections, Frac(S^N)=Frac(S)^N inside k(W), char-p uniform power in range(a.app U), char-0 subring equality. Edge cases (Frobenius, t->-t, non-faithful action, m=0) and universes OK. H2: the statement used finiteQuotientInvariantSections, a def of theorem node lem-sfb-admissible-finite-type-field-quotient that is not a stmt_dep; FIX inlines it verbatim as SN equal to its infimum-of-equalizers formula, replaces all 9 uses, makes the import plain; script-checked substitution; nt_compile --json clean (16.5 s, exit 0). Fixes: fixes/GenericInvariantFieldOrbitOpen.lean, fixes/lem-sfb-generic-invariant-field-orbit-open.lean-record.json."
+ }
+}

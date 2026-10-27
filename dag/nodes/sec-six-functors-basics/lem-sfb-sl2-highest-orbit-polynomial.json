@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-sl2-highest-orbit-polynomial",
+ "kind": "statement",
+ "title": "Polynomial orbit and factorial coefficients of an SL2 highest vector",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], of arbitrary characteristic. Write $\\operatorname{SL}_2$ for the affine group scheme [def-sc-group-scheme] whose $R$-points are determinant-one $2\\times2$ matrices over a commutative $k$-algebra $R$. Put $x_+(a)=I_2+aE_{12}$, $x_-(a)=I_2+aE_{21}$ and $h(t)=\\operatorname{diag}(t,t^{-1})$, where $I_2$ is the identity matrix and $E_{ij}$ has its only nonzero entry $1$ in position $(i,j)$. Let $M$ be a finite-dimensional rational $\\operatorname{SL}_2$-module, meaning a finite-dimensional $k$-vector space with a coassociative counital coaction into $M\\otimes_k k[\\operatorname{SL}_2]$. Let $m\\ge0$ be an integer and $0\\ne v\\in M$ such that $x_+(a)(v\\otimes1)=v\\otimes1$ and $h(t)(v\\otimes1)=t^m(v\\otimes1)$ for every $R$, $a\\in R$ and $t\\in R^\\times$. Let $f\\in\\operatorname{End}_k(M)$ be the differential of $x_-$, so that $x_-(\\varepsilon)$ acts as $1+\\varepsilon f$ over $k[\\varepsilon]/(\\varepsilon^2)$. There are unique vectors $w_0,\\ldots,w_m\\in M$ such that, for every $R$ and $a\\in R$,\n$$x_-(a)(v\\otimes1)=\\sum_{j=0}^m a^j(w_j\\otimes1),\\qquad w_0=v,\\qquad f^jv=j!w_j\\quad(0\\le j\\le m).$$\nIn particular, if $\\operatorname{char}k=p>0$ and $m<p$, then every $j!$ in this sum is invertible in $k$, and the same orbit is $\\sum_{j=0}^m a^j(j!)^{-1}(f^jv\\otimes1)$. No simplicity assumption is made on $M$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent rank-one consequence of Proposition 22.14 (polynomial root-subgroup orbit coefficients and their weights), Proposition 22.15 (Weyl symmetry of weights), Proposition 22.17 (weights of a cyclic primitive module), and the SL2 root and weight lattices in 22.33. Factorial recurrence follows by comparing the linear dual-number coefficient in x_-(a+epsilon)=x_-(epsilon)x_-(a)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-general-linear-group",
+  "def-sfb-hopf-action-module-data",
+  "def-sfb-affine-coordinate-hopf-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write the coaction of $v$ as a finite sum $c(v)=\\sum_i v_i\\otimes g_i$. Substitution of the matrix $x_-(T)$ in each coordinate function $g_i$ gives an element $P(T)=\\sum_{j\\ge0}T^j w_j$ of $M\\otimes_k k[T]$, with only finitely many nonzero coefficients. Evaluating $T\\mapsto a$ gives $x_-(a)(v\\otimes1)$ over every commutative $k$-algebra $R$. Similarly write $Q(S)=x_+(S)(nv)=\\sum_{i\\ge0}S^i z_i$, where $n$ has rows $(0,-1)$ and $(1,0)$. These are polynomial expansions of the given coaction, not an assumption about its differential.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "p.466, paragraph preceding Proposition 22.14; direct substitution into the coaction."
+   }
+  },
+  {
+   "text": "For an invertible indeterminate $T$, direct matrix multiplication gives\n$$x_+(T^{-1})n h(T)x_+(T^{-1})=x_-(T).$$\nIndeed the first three factors have rows $(1,-T^{-1})$ and $(T,0)$; multiplying by the last factor gives rows $(1,0)$ and $(T,1)$. Apply the representation over $k[T,T^{-1}]$: the rightmost $x_+$ fixes $v$, and $h(T)v=T^m v$, by the hypotheses for this $k$-algebra. Therefore\n$$P(T)=T^m Q(T^{-1})=\\sum_{i\\ge0}T^{m-i}z_i.$$\nThe left side has coefficients only in nonnegative degrees, while the right side has coefficients only in degrees at most $m$. Comparing the coefficients in the free Laurent-monomial expansion gives $w_j=0$ for every $j>m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "pp.466–467, Propositions 22.14–22.17, rank-one big-cell coefficient argument written explicitly using 2 by 2 matrices."
+   }
+  },
+  {
+   "text": "The inclusion $M\\otimes_k k[T]\\to M\\otimes_k k[T,T^{-1}]$ is injective: after choosing a basis of $M$, it is a direct sum of the injective inclusion of ordinary polynomials into Laurent polynomials. Thus the degree conclusion is an identity already in $M\\otimes_k k[T]$, and evaluation yields the required truncated orbit over every $R$, without requiring $a$ to be invertible. Evaluation at $T=0$ gives $w_0=v$ since $x_-(0)=I_2$. Any other proposed list giving the orbit for all $R,a$ agrees with this polynomial by taking $R=k[T]$ and $a=T$; comparison of coefficients proves uniqueness, including zero coefficients at the upper end.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "p.466, Proposition 22.14, polynomial coefficients and constant term; universal-polynomial formulation."
+   }
+  },
+  {
+   "text": "In $A=k[T,\\varepsilon]/(\\varepsilon^2)$ the matrix identity $x_-(T+\\varepsilon)=x_-(\\varepsilon)x_-(T)$ and the definition of $f$ give\n$$\\sum_{j=0}^m(T+\\varepsilon)^j w_j=(1+\\varepsilon f)\\sum_{j=0}^m T^j w_j.$$\nHere $f$ acts $A$-linearly after scalar extension, and $x_-(\\varepsilon)=1+\\varepsilon f$ follows by extending its defining dual-number identity from $k$ to $k[T]$. Since $(T+\\varepsilon)^j=T^j+jT^{j-1}\\varepsilon$ for $j\\ge1$, comparison of the coefficients of $\\varepsilon T^j$ gives $f(w_j)=(j+1)w_{j+1}$ for $0\\le j<m$ (and $f(w_m)=0$). This comparison is valid in every characteristic and divides by no integer.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent coefficient calculation from the lower-root addition law, supplementing Proposition 22.14, p.466."
+   }
+  },
+  {
+   "text": "Induct on $j$ between $0$ and $m$. At $j=0$, $f^0v=v=0!w_0$. If $j<m$ and $f^jv=j!w_j$, linearity and the preceding recurrence give $f^{j+1}v=j!f(w_j)=j!(j+1)w_{j+1}=(j+1)!w_{j+1}$. If $\\operatorname{char}k=p>0$ and $m<p$, each integer $1\\le r\\le j\\le m$ has nonzero image in $k$ by the definition of characteristic. Their product $j!$ is therefore nonzero and has an inverse because $k$ is a field; $0!=1$ is also invertible. Solving for each $w_j$ and substituting into the already proved orbit identity gives the stated truncated exponential. No step uses simplicity of $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent factorial induction from the dual-number recurrence; field and characteristic definitions."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 22.14 and its preliminary polynomial expansion, p.466, and the rank-one big-cell route underlying Propositions 22.15–22.17, pp.466–467, with an explicit matrix factorization replacing abstract weight bounds; factorial recurrence from the lower-root addition law."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a rational SL2 representation an upper unipotent fixed vector of torus weight m has lower unipotent orbit polynomial of degree at most m whose coefficients satisfy factorial times coefficient equals the iterated lowering operator",
+   "results": "8 hits: Matrix.GeneralLinearGroup.fixpointPolynomial, IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat, IsSl2Triple.HasPrimitiveVectorWith.exists_nat, IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat, LieModule.chainBotCoeff, LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub, Matrix.GeneralLinearGroup.fixpointPolynomial_aeval_eq_zero_iff, LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat (Mathlib/Algebra/Lie/Sl2.lean:218) is a Lie-algebra statement requiring CharZero, not a positive-characteristic rational SL2 orbit formula. The weight-space and matrix fixpoint-polynomial hits do not state the orbit degree or its factorial coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "SpecialLinearGroup, Representation",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat (Mathlib/Algebra/Lie/Sl2.lean:218) is a Lie-algebra statement requiring CharZero, not a positive-characteristic rational SL2 orbit formula. The weight-space and matrix fixpoint-polynomial hits do not state the orbit degree or its factorial coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "SL2|SL₂|SpecialLinearGroup",
+   "results": "0 hits: . Search directory: Mathlib/RepresentationTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat (Mathlib/Algebra/Lie/Sl2.lean:218) is a Lie-algebra statement requiring CharZero, not a positive-characteristic rational SL2 orbit formula. The weight-space and matrix fixpoint-polynomial hits do not state the orbit degree or its factorial coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a rational SL2 module a highest weight vector of weight m has a lower root subgroup orbit polynomial of degree at most m",
+   "results": "8 hits: LieAlgebra.IsKilling.sl2SubmoduleOfRoot.congr_simp, LieAlgebra.lie_mem_genWeightSpace_of_mem_genWeightSpace, LieModule.coe_genWeightSpace_of_top, LieModule.weightSpace_le_genWeightSpace, LieModule.mem_genWeightSpaceOf, LieModule.weightSpace, LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup, LieModule.mem_genWeightSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat (Mathlib/Algebra/Lie/Sl2.lean:218) is a Lie-algebra statement requiring CharZero, not a positive-characteristic rational SL2 orbit formula. The weight-space and matrix fixpoint-polynomial hits do not state the orbit degree or its factorial coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For rational SL2 highest weight m less than characteristic p the lower unipotent orbit of a highest vector equals the truncated exponential of the lowering differential",
+   "results": "8 hits: IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat, IsSl2Triple.HasPrimitiveVectorWith.exists_nat, IsSl2Triple.HasPrimitiveVectorWith, IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat, IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f, IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f, IsSl2Triple.HasPrimitiveVectorWith.lie_f_pow_toEnd_f, IsSl2Triple.HasPrimitiveVectorWith.mk'",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat (Mathlib/Algebra/Lie/Sl2.lean:218) is a Lie-algebra statement requiring CharZero, not a positive-characteristic rational SL2 orbit formula. The weight-space and matrix fixpoint-polynomial hits do not state the orbit degree or its factorial coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "pow_toEnd_f_eq_zero_of_eq_nat|CharZero|HasPrimitiveVector",
+   "results": "5 hits: 24, 26, 82, 89, 91. Search directory: Mathlib/Algebra/Lie/Sl2.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat (Mathlib/Algebra/Lie/Sl2.lean:218) is a Lie-algebra statement requiring CharZero, not a positive-characteristic rational SL2 orbit formula. The weight-space and matrix fixpoint-polynomial hits do not state the orbit degree or its factorial coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "SpecialLinearGroup|IsSl2Triple|unipotent",
+   "results": "{\"t\": \"2026-10-23T22:35:06Z\", \"tool\": \"grep\", \"query\": \"SpecialLinearGroup|IsSl2Triple|unipotent\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Search directory: Mathlib/RepresentationTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra primitive-vector results require characteristic zero and do not give a rational SL2 group-scheme orbit identity in arbitrary characteristic; the other hits concern weight spaces, modular forms or the unrelated 2 by 2 fixpoint polynomial."
+  },
+  {
+   "tool": "loogle",
+   "query": "SpecialLinearGroup, Representation",
+   "results": "{\"t\": \"2026-10-23T22:35:07Z\", \"tool\": \"loogle\", \"query\": \"SpecialLinearGroup, Representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra primitive-vector results require characteristic zero and do not give a rational SL2 group-scheme orbit identity in arbitrary characteristic; the other hits concern weight spaces, modular forms or the unrelated 2 by 2 fixpoint polynomial."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For rational SL2 representations the lower root subgroup orbit of a highest weight vector of weight m has degree at most m",
+   "results": "{\"t\": \"2026-10-23T22:35:07Z\", \"tool\": \"leansearch\", \"query\": \"For rational SL2 representations the lower root subgroup orbit of a highest weight vector of weight m has degree at most m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"RootPairing.span_orbit_eq_top\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_ne_bot\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot.congr_simp\", \"LieAlgebra.IsKilling.sl2SubalgebraOfRoot\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\"], \"digest\": \"dc2f8ce52920b95f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra primitive-vector results require characteristic zero and do not give a rational SL2 group-scheme orbit identity in arbitrary characteristic; the other hits concern weight spaces, modular forms or the unrelated 2 by 2 fixpoint polynomial."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of the algebraic group SL2 has a highest weight vector v of weight m and its lower unipotent orbit is a polynomial of degree at most m with coefficient f^j v divided by j factorial",
+   "results": "{\"t\": \"2026-10-23T22:35:09Z\", \"tool\": \"leanfinder\", \"query\": \"A rational representation of the algebraic group SL2 has a highest weight vector v of weight m and its lower unipotent orbit is a polynomial of degree at most m with coefficient f^j v divided by j factorial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"Matrix.GeneralLinearGroup.fixpointPolynomial\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"EisensteinSeries.eisSummand_SL2_apply\", \"Matrix.GeneralLinearGroup.fixpointPolynomial_aeval_eq_zero_iff\", \"ModularGroup.T_pow_mul_apply_one\", \"Matrix.GeneralLinearGroup.fixpointPolynomial_eq_zero_iff\", \"ModularGroup.exists_eq_T_zpow_of_c_eq_zero\"], \"digest\": \"070fdec55acf1784\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra primitive-vector results require characteristic zero and do not give a rational SL2 group-scheme orbit identity in arbitrary characteristic; the other hits concern weight spaces, modular forms or the unrelated 2 by 2 fixpoint polynomial."
+  },
+  {
+   "tool": "grep",
+   "query": "CharZero|pow_toEnd_f_eq_zero_of_eq_nat|exists_nat",
+   "results": "{\"t\": \"2026-10-23T22:36:22Z\", \"tool\": \"grep\", \"query\": \"CharZero|pow_toEnd_f_eq_zero_of_eq_nat|exists_nat\", \"sub\": \"Algebra/Lie/Sl2.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"26\", \"186\", \"203\", \"217\", \"224\"], \"digest\": \"7609027961a9fdcf\"} Search directory: Mathlib/Algebra/Lie/Sl2.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra primitive-vector results require characteristic zero and do not give a rational SL2 group-scheme orbit identity in arbitrary characteristic; the other hits concern weight spaces, modular forms or the unrelated 2 by 2 fixpoint polynomial."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In arbitrary characteristic the coefficients of a rational additive group action satisfy f w_j equals (j+1) w_(j+1), and an SL2 highest weight bounds the orbit degree",
+   "results": "{\"t\": \"2026-10-23T22:36:24Z\", \"tool\": \"leanfinder\", \"query\": \"In arbitrary characteristic the coefficients of a rational additive group action satisfy f w_j equals (j+1) w_(j+1), and an SL2 highest weight bounds the orbit degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add\", \"LieModule.chainTopCoeff\", \"LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub\", \"LieModule.chainTopCoeff_add_one\"], \"digest\": \"1ad54ec61db0b109\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Lie-algebra primitive-vector results require characteristic zero and do not give a rational SL2 group-scheme orbit identity in arbitrary characteristic; the other hits concern weight spaces, modular forms or the unrelated 2 by 2 fixpoint polynomial."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-restricted-module-infinitesimal-simplicity",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Section 22(e), statement 22.54, printed p.481, infinitesimally simple representations in characteristic p. The displayed coefficients there must be coefficients of fundamental weights, equivalently pairings with simple coroots, not coefficients of simple roots. See report.md Source error. Corroboration read online: J. C. Jantzen, Moment graphs and representations, Sem. Congres 24 (2010), sections 5.1--5.2, printed pp.302--303, Curtis theorem, https://math.au.dk/~jantzen/grnbl.pdf. Full book reference WANTED: Jantzen (2003), Part II, sections 3.14--3.15. Supporting input to infinitesimal simplicity: Agent rank-one consequence of Proposition 22.14 (polynomial root-subgroup orbit coefficients and their weights), Proposition 22.15 (Weyl symmetry of weights), Proposition 22.17 (weights of a cyclic primitive module), and the SL2 root and weight lattices in 22.33. Factorial recurrence follows by comparing the linear dual-number coefficient in x_-(a+epsilon)=x_-(epsilon)x_-(a).",
+   "via": [
+    "lem-sfb-restricted-module-infinitesimal-simplicity",
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-highest-orbit-polynomial",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five direct elementary steps give the universal polynomial expansion, a Laurent-polynomial degree bound from an explicit SL2 big-cell matrix identity, existence and uniqueness over all k-algebras, the dual-number recurrence, and factorial induction. No new nodes or Mathlib leaves are needed. Retained inherited searches and added the searches actually logged for Q92.",
+  "blueprint": "Retained the precise inherited from.place and via chain; blueprint_refs.py ancestor reports a null blueprint ancestor. This realizes the supporting rank-one polynomial-orbit input beneath restricted-module-infinitesimal-simplicity in det-thm-sf-ctf-stability-direct-images proof (3). Searches of the whole latest blueprint and imported blueprint nodes for highest, unipotent, SL2, orbit polynomial and factorial found no equivalent statement. The explicit rank-one big-cell calculation is below the unit route; no unit step is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-0c104c56f",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-0c104c56f (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The live node is still unsplit with no repair note, so the delivery is not superseded and is not a re-split. Against live, the statement, stmt_deps, source and blueprint are byte-identical; only proof, proof_origin (agent), split_report, status and appended searches changed. The five elementary steps are correct. (1) The coaction substituted at x_-(T) gives P(T), and n has det 1. (2) I recomputed x_+(T^-1) n h(T) x_+(T^-1) = [[1,0],[T,1]] = x_-(T); with x_+ fixing v and h(T)v = T^m v over k[T,T^-1], P(T) = T^m Q(T^-1), so the degree is at most m. (3) Injectivity of k[T] into k[T,T^-1] makes the identity universal; T=0 gives w_0 = v; uniqueness follows by taking R = k[T]. (4) Comparing epsilon coefficients in x_-(T+eps) = x_-(eps) x_-(T) gives f(w_j) = (j+1)w_{j+1} with no division. (5) Factorial induction; j! is invertible when m < p. Milne iAG 2017 pp.466-467 (preliminary paragraph, Prop. 22.14, Lemma 22.15, Prop. 22.17) supports the agent route. The weight convention (standard module e1, m=1) and the parent's use in restricted-module-infinitesimal-simplicity (0 <= m_alpha < p) agree with the statement. Edge cases checked: m=0, characteristic 2, Frobenius twist with m=p, Sym^m, direct sums. A rg -L duplicate search over SL_2, highest-line, cyclic-weight and j! nodes found no duplicate. The Mathlib searches (Lie Sl2 needs CharZero) are correct. No citations, no SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SL2HighestOrbitPolynomial",
+  "declaration": "AlgebraicGeometry.SL2HighestOrbit.existsUnique_orbit_coefficients",
+  "declarations": [
+   "AlgebraicGeometry.SL2HighestOrbit.underlyingGroup",
+   "AlgebraicGeometry.SL2HighestOrbit.underlyingAffine",
+   "AlgebraicGeometry.SL2HighestOrbit.upper",
+   "AlgebraicGeometry.SL2HighestOrbit.lower",
+   "AlgebraicGeometry.SL2HighestOrbit.torus",
+   "AlgebraicGeometry.SL2HighestOrbit.act",
+   "AlgebraicGeometry.SL2HighestOrbit.existsUnique_orbit_coefficients"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SL2HighestOrbitPolynomial.lean",
+  "statement": "theorem existsUnique_orbit_coefficients [IsAlgClosed k] {M : Type u} [AddCommGroup M] [Module k M] [FiniteDimensional k M] (c : {c : M →ₗ[k] M ⊗[k] Γ((LinearGroupSchemes.specialLinear k 2).left, ⊤) // HopfAction.Coassociative k Γ((LinearGroupSchemes.specialLinear k 2).left, ⊤) M c ∧ HopfAction.Counital k Γ((LinearGroupSchemes.specialLinear k 2).left, ⊤) M c}) (m : ℕ) (v : M) (hv : v ≠ 0) (hupper : ∀ (R : Type u) [CommRing R] [Algebra k R] (a : R), act c R (upper a) v = v ⊗ₜ[k] (1 : R)) (htorus : ∀ (R : Type u) [CommRing R] [Algebra k R] (t : Rˣ), act c R (torus t) v = v ⊗ₜ[k] ((t : R) ^ m)) (f : Module.End k M) (hf : ∀ z : M, act c (DualNumber k) (lower DualNumber.eps) z = z ⊗ₜ[k] (1 : DualNumber k) + f z ⊗ₜ[k] DualNumber.eps) : ∃! w : Fin (m + 1) → M, (∀ (R : Type u) [CommRing R] [Algebra k R] (a : R), act c R (lower a) v = ∑ j, w j ⊗ₜ[k] (a ^ j.val)) ∧ w 0 = v ∧ (∀ j : Fin (m + 1), (f ^ j.val) v = (j.val.factorial : k) • w j) ∧ ∀ (p : ℕ) [CharP k p], 0 < p → m < p → (∀ j : Fin (m + 1), IsUnit (j.val.factorial : k)) ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (a : R), act c R (lower a) v = ∑ j : Fin (m + 1), (f ^ j.val) v ⊗ₜ[k] (a ^ j.val * algebraMap k R (j.val.factorial : k)⁻¹)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The module reuses the existing determinant-one group scheme and the inline subtype of counital coactions. Its real-data helpers expose the existing group/affine instances, construct the two Mathlib transvections and the diagonal by its six-transvection identity, and evaluate the coaction through the canonical matrix point and isoSpec equivalences. The statement cites the Hopf coaction and coordinate Hopf definition nodes rather than the unrelated dictionary theorem. The statement is unchanged; every algebra is tested, including nonreduced and zero algebras, in the existing common universe convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c778db38",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Re-delivery after f852 H2 RETURN applies option 2 exactly: the coaction subtype {c : M →ₗ[k] M ⊗ Γ(SL2) // Coassociative ∧ Counital} is inline; stmt_deps drop the dictionary theorem and add def-sfb-hopf-action-module-data (owns Coassociative/Counital), def-sfb-affine-coordinate-hopf-algebra (coordinateHopfAlgebra) and def-sc-general-linear-group (specialLinear/specialPoints/Index). Against live only lean and stmt_deps differ; the statement is byte-identical. Maths re-checked: transvections give I+aE12 and I+aE21; the six-factor torus multiplies to diag(t,t⁻¹); act is the coaction evaluated at the canonical point; the node's proof does not depend on the action's composition order; single ∃!, already forced by the orbit clause at k[T]; char-p truncated exponential under CharP, 0<p, m<p. Edge cases m=0, char 0/2, m≥p, zero algebra, nilpotent a. Universe u test algebras suffice. No hollow defs, sorry only, docstrings present, statement verbatim. No recompile, no fixes."
+ }
+}

@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-space-surjective-flat-closed-immersion-isomorphism",
+ "kind": "statement",
+ "title": "A surjective flat closed immersion of algebraic spaces is an isomorphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], and let $i:X\\to Y$ be a morphism. Suppose that $i$ is flat in the chartwise sense of [def-sfb-space-morphism-properties], that $|i|:|X|\\to|Y|$ is surjective on the point sets of [def-a1-space-point-topology], and that $i$ is a closed immersion: it is representable and every scheme base change $X\\times_YT\\to T$ is a closed immersion of schemes [def-weil-closed-immersion]. Then $i$ is an isomorphism of algebraic spaces. Fibre products are the sheaf fibre products of [lem-trf-space-fibre-products-etale-covers]. No finite-presentation, reducedness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XD (spaces-more-morphisms-lemma-where-isomorphism), proof, final paragraph: representable surjective flat closed immersion; scheme input Tag 04PW (morphisms-lemma-characterize-flat-closed-immersions) in literature/stacks-project/morphisms.tex."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $p:h_U\\to Y$. The pullback $W=X\\times_Yh_U$ is a scheme and $j:W\\to U$ is a closed immersion by the hypothesis on $i$. Its other projection $h_W\\to X$ is etale by the fibre-product lemma. Thus $j$ is one of the chart tests in the definition of flatness, so $j$ is flat. Since $i$ is representable and $|i|$ is surjective, the point-calculus lemma says that every scheme base change of $i$, in particular $j$, is surjective.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD (lemma-where-isomorphism), proof, final paragraph; chart and sheaf details expanded using spaces.tex Tag 0262 (lemma-space-presentation)."
+   }
+  },
+  {
+   "text": "Apply the scheme lemma to $j$: it is an isomorphism. For any $S$-scheme $T$ and $y\\in Y(T)$, the atlas local-lifting lemma gives an fppf cover $v:V=T\\times_YU\\to T$ with a map $a:V\\to U$ over $y$. The fibre of $X(V)\\to Y(V)$ over $y|_V$ is a singleton: its representing scheme $X\\times_YV$ identifies with $W\\times_UV$, and the inverse of $j$ gives the unique section of its projection to $V$. The identification sends $(x,z)$ to $(x,a(z),z)$; its inverse forgets the middle coordinate.",
+   "uses": [
+    "lem-sfb-surjective-flat-closed-immersion-isomorphism",
+    "lem-a1-representable-etale-fppf-local-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD (lemma-where-isomorphism), proof, final paragraph; chart and sheaf details expanded using spaces.tex Tag 0262 (lemma-space-presentation)."
+   }
+  },
+  {
+   "text": "For $x,x^{\\prime}\\in X(T)$ with common image $y$, take the cover $V\\to T$ of the preceding step. Uniqueness of its lift gives $x|_V=x^{\\prime}|_V$. The uniqueness part of the sheaf equalizer for $X$ then gives $x=x^{\\prime}$. Hence $i_T:X(T)\\to Y(T)$ is injective for every $T$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD (lemma-where-isomorphism), proof, final paragraph; chart and sheaf details expanded using spaces.tex Tag 0262 (lemma-space-presentation)."
+   }
+  },
+  {
+   "text": "For $y\\in Y(T)$, let $x_V$ be its unique lift on the cover in step 2. On $V\\times_TV$ its two restrictions have the same image; injectivity from step 3 makes them equal. The sheaf equalizer for $X$ glues them to $x\\in X(T)$. Its image equals $y$ since their restrictions agree on $V$ and $Y$ is a sheaf. Thus each $i_T$ is bijective. The inverses are natural: restriction of a lift is a lift of the restricted section and is unique by step 3. They therefore define a morphism $Y\\to X$ inverse to $i$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD (lemma-where-isomorphism), proof, final paragraph; chart and sheaf details expanded using spaces.tex Tag 0262 (lemma-space-presentation)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-surjective-flat-closed-immersion-isomorphism",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XD (lemma-where-isomorphism), proof, final paragraph; chart and sheaf details expanded using spaces.tex Tag 0262 (lemma-space-presentation)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective flat closed immersion of algebraic spaces is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T13:52:09Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective flat closed immersion of algebraic spaces is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isIso_iff_isOpenImmersion_and_surjective\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\"], \"digest\": \"08ec9f33d502e49e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme-only Flat.isIso_of_surjective_of_mono is reused through the existing scheme leaf; algebraic-space chart and sheaf arguments are required."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Ff]lat|[Ff]lat.*[Cc]losedImmersion|[Cc]losedImmersion.*[Ff]lat|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T13:52:35Z\", \"tool\": \"grep\", \"query\": \"isIso.*[Ff]lat|[Ff]lat.*[Cc]losedImmersion|[Cc]losedImmersion.*[Ff]lat|AlgebraicSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\"], \"digest\": \"62491b8d3b9c7558\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme-only Flat.isIso_of_surjective_of_mono is reused through the existing scheme leaf; algebraic-space chart and sheaf arguments are required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat surjective morphism of algebraic spaces representable by closed immersions is invertible",
+   "results": "{\"t\": \"2026-10-23T13:52:35Z\", \"tool\": \"leansearch\", \"query\": \"A flat surjective morphism of algebraic spaces representable by closed immersions is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\"], \"digest\": \"813f2cad4d922bf8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme-only Flat.isIso_of_surjective_of_mono is reused through the existing scheme leaf; algebraic-space chart and sheaf arguments are required."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-23T13:52:35Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme-only Flat.isIso_of_surjective_of_mono is reused through the existing scheme leaf; algebraic-space chart and sheaf arguments are required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable closed embedding of algebraic spaces which is flat and onto is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T13:52:36Z\", \"tool\": \"leanfinder\", \"query\": \"A representable closed embedding of algebraic spaces which is flat and onto is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.isIso_iff_isOpenImmersion\", \"AlgebraicGeometry.isIso_iff_isOpenImmersion_and_surjective\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\"], \"digest\": \"6284aef95fcd466a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme-only Flat.isIso_of_surjective_of_mono is reused through the existing scheme leaf; algebraic-space chart and sheaf arguments are required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-isomorphism-open",
+  "date": "2026-10-23",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection. Supporting input: Tag 05XD (spaces-more-morphisms-lemma-where-isomorphism), proof, final paragraph: representable surjective flat closed immersion; scheme input Tag 04PW (morphisms-lemma-characterize-flat-closed-immersions) in literature/stacks-project/morphisms.tex.",
+   "via": [
+    "lem-sfb-space-universal-isomorphism-open",
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-surjective-flat-closed-immersion-isomorphism",
+  "worker": "stage1",
+  "summary": "Expanded the final paragraph of Stacks 05XD through a representable etale scheme atlas and the existing scheme Mathlib leaf. The chartwise definition gives flatness directly on the pulled-back source scheme; the point-calculus statement supplies scheme-test surjectivity. Expanded descent of the inverse into local lifting, injectivity from the sheaf equalizer, and gluing with naturality. Reused all needed nodes; no new nodes and no statement correction.",
+  "blueprint": "Supports the inherited direct-image alteration chain at its specified Stacks 05XD final paragraph: the surjective flat closed immersion is an isomorphism. Steps 1-2 realize the scheme-chart reduction and 04PW input, steps 3-4 spell out the sheaf descent implicit in representability. Read the latest sec-six-functors-basics/sk-thm-sf-ctf-stability unit and direct-images proof; no unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General algebraic-space fibre products and etale base change give the source chart; no such chart calculus is supplied by this unit."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "General point-space comparison converts the given surjectivity to surjectivity of the scheme base change; this is a geometric tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "A representable surjective etale atlas gives a single fppf cover lifting any section; used only for sheaf gluing of the inverse."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-representable-etale-fppf-local-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-be5436295",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-be5436295 (reviewer sub-agent of L); spot-checked: I read Stacks 05XD (spaces-more-morphisms lemma-where-isomorphism, final paragraph of the proof) and 04PW (morphisms lemma-characterize-flat-closed-immersions, last assertion). The item statement matches the source hypothesis by hypothesis and is byte-identical to live and side-live. The item is still unsplit on live, so no other group has superseded it, and there are no new nodes. Step 1: the fibre-product family clause, applied to the single atlas member, gives that h_W->X is étale and representable. The chart test of def-sfb-space-morphism-properties ranges over every commuting pair of charts, so j:W->U is flat directly. lem-a1-space-point-open-calculus (representable a is surjective on every scheme base change iff |a| is surjective) gives that j is surjective. Step 2: the scheme leaf (Flat.isIso_of_surjective_of_mono) makes j an isomorphism. lem-a1-representable-etale-fppf-local-lifting gives V, v, a and the fppf covering {v} exactly as used. I checked the identification X×_Y V ≅ W×_U V, (x,z)->(x,a(z),z). Steps 3-4 are correct and genuinely elementary: injectivity from the singleton fibres plus sheaf separatedness, then gluing on V×_T V and naturality of the inverse. The existing node lem-galois-set-sheaf-local-bijection-isomorphism could optionally be cited for steps 3-4. Edge cases are fine: empty Y; Spec k -> Spec k[e]/e^2 is not flat; no finite-presentation or reducedness hypothesis is needed. No cycle. Duplicate searches over dag/nodes found only the scheme leaf. The citer lem-sfb-space-universal-isomorphism-open uses the item as stated. I accept the three tool_uses (fibre products, point calculus, fppf local lifting) as general algebraic-space foundations. Batch-5 check: both flagged citations reach sec-trace-formula only through def-trf-algebraic-space and the general fibre-product and atlas nodes. These are general definitions, not parts of the trace-formula or Poincaré-duality proofs, so this is not a reason to return. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSurjectiveFlatClosedImmersion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_of_surjective_of_flat_of_closedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSurjectiveFlatClosedImmersion.lean",
+  "statement": "theorem isIso_of_surjective_of_flat_of_closedImmersion {S : Scheme.{u}} {X Y : AlgebraicSpace S} (i : X ⟶ Y) (hf : MapIsFlat i) (hs : pointImage i.hom.hom = Set.univ) (hc : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) : IsIso i",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Review FIX (2026-10-24): point-surjectivity is stated as `pointImage i.hom.hom = Set.univ` with pointImage of the stmt_dep def-a1-space-point-topology (the node's \"surjective on the point sets of [def-a1-space-point-topology]\"), instead of `Function.Surjective (mapPoint i.hom.hom)`, whose owner def-sfb-proper-curve-moduli is not a stmt_dep of the item. The two hypotheses are equivalent (pointImage f is the range of mapPoint f on representatives); nothing else changed.",
+  "fixed_by": "NT-stage2-cc-a1a41a7ef"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1a41a7ef",
+  "group": "Q98",
+  "result": "fix",
+  "note": "Read the item, its 7 stmt_deps, the module, the report and Stacks 05XD final paragraph / 04PW. Flatness (MapIsFlat chart test), closed immersion (IsRepresentableWith IsClosedImmersion; the exists-form equals for-all because the property is iso-invariant), the conclusion IsIso i, the single universe u and the absence of fp/reduced/Noetherian hypotheses all match the node; edge cases (empty source or target, identity, k[ε]) are fine; sorry-only proof; docstrings carry the source place, blueprint id and 4 steps; searches recorded. H2: hs used AlgebraicSpace.mapPoint, owned by def-sfb-proper-curve-moduli, which is not a stmt_dep (precedent Q05 9461 RETURN). FIX without changing stmt_deps: hs is now `pointImage i.hom.hom = Set.univ` with pointImage from the stmt_dep def-a1-space-point-topology, which is the node's wording and the same hypothesis (range of mapPoint). Fixes: complete module, item lean-record.json (verbatim statement plus note), report.md with a Review fix section. nt_compile --json on the fixed module: clean, 4.1 s; refit_record OK."
+ }
+}

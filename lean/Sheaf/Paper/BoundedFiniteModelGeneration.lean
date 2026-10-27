@@ -18,6 +18,7 @@ import Sheaf.Paper.FiniteModelStratumFiltration
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import Mathlib.Data.Fin.Tuple.Basic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Finite generation from constant-model strata

@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.DerivedCategory.RingDerivedDualizablePerfect
 public import Sheaf.CategoryTheory.Sites.ContractibleDerivedSectionsTensor
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Sites.LocalSite
 
 /-! # Perfect complexes and dualizable objects under contractible evaluation
 

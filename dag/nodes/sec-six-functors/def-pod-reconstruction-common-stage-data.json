@@ -1,0 +1,125 @@
+{
+ "id": "def-pod-reconstruction-common-stage-data",
+ "kind": "definition",
+ "title": "Actual reconstruction realization and common-stage comparison predicates",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, a prime $\\ell\\ne\\operatorname{char}k$, and finite coefficient fields inside a fixed $\\overline{\\mathbf Q}_\\ell$, with valuation rings, uniformizers and finite quotients as in [def-weil-finite-coefficient-point]. For a field $F$ write $R_F=\\widehat{\\mathcal O}_{F,s}=\\lim_n B_{F,n}$ and $B_{F,n}=(\\mathcal O_F/\\varpi_F^n)_s$ [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded derived categories of module sheaves on the small pro-etale site of $s$, with the coefficient universes of [lem-coef-derived-system-evaluation-calculus]. Put $H_F=\\mathcal L_s^F\\mathcal R_s^F$, with actual unit $u^F$ of [lem-coef-derived-system-evaluation-calculus], normalized by [lem-trf-completion-unit-strict-quotient-model]. On the full derived-complete subcategory [def-weil-derived-complete] write $v^F=(u^F)^{-1}$, using [lem-pur-normalized-reconstruction-adjunction-calculus].\n\nFor each finite $E\\subset\\overline{\\mathbf Q}_\\ell$ use the raw rational category $\\mathcal A_E=D^b_c(s,E)$ and the completed coefficient transitions $S_{L/E}$ [def-weil-rationalization-karoubi], with canonical scalar associators $a_{M,L,E}:S_{M/L}S_{L/E}\\xrightarrow{\\sim}S_{M/E}$ [lem-weil-scalar-extension-composition]. Use the rationalized quotient-cone comparisons $\\beta_{L/E}:S_{L/E}H_E^{\\mathrm{rat}}\\xrightarrow{\\sim}H_L^{\\mathrm{rat}}S_{L/E}$ and actual components $v_{E,C}$, $u_{E,C}$ of [lem-pod-reconstruction-raw-rational-naturality]; their integral maps are those of [lem-pod-completion-unit-scalar-intertwining].\n\n Package actual integral and raw rational realizations and their units in Realization. IdentitySupport is exactly the strict identity-tower comparison of reconstruction_identityCompactSupport. SameIndexRealization records the quotient-model, scalar counit, same-index residue maps and completed conjugation for a supplied integral comparison. For any directed stage system S, family H of endofunctors and specified transition comparisons, stageObject and stageRepresentative are the literal stage-preserving object and comparison-conjugated arrow formulas. stageCoherence packages the unit and associator equations, transport and naturality on common-stage arrows, and the descended functor and inverse-unit isomorphism. Define object and representative by specializing these formulas to the coefficient stage system. Coherence specializes stageCoherence, namely the conjunction of the identity and associator equations, transport and naturality on all common-stage arrows, and the descended functor and inverse-unit isomorphism. These definitions assert no existence and introduce no new category or reconstruction functor. Constructions used: [def-weil-finite-coefficient-point], [def-weil-completed-integral-coefficients], [lem-coef-derived-system-evaluation-calculus], [lem-trf-completion-unit-strict-quotient-model], [def-weil-derived-complete], [lem-pur-normalized-reconstruction-adjunction-calculus], [def-weil-rationalization-karoubi], [lem-weil-scalar-extension-composition], [lem-pod-reconstruction-raw-rational-naturality], [lem-pod-completion-unit-scalar-intertwining], [def-weil-algebraically-closed-coefficients], [def-weil-integral-rational-qbar-compact-support].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "First sentence, identity compact support; Step 1 of lem-pod-reconstruction-common-stage-coherence."
+ },
+ "stmt_deps": [
+  "def-weil-finite-coefficient-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "def-weil-derived-complete",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition",
+  "lem-pod-reconstruction-raw-rational-naturality",
+  "lem-pod-completion-unit-scalar-intertwining",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived completion natural scalar extension comparisons normalized by adjunction unit",
+   "results": "ModuleCat.extendRestrictScalarsAdj, ordinary adic completion and scalar instances; no normalized pro-etale quotient-cone comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism to identity defines coherent functor on filtered colimit categories",
+   "results": "Eventually-constant filtered-colimit lemmas; no reconstruction normalization.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the project StageSystem functor API for the categorical part."
+  },
+  {
+   "tool": "grep",
+   "query": "naturallyIso|ofIso|conjugat|StageSystem",
+   "results": "Mathlib generic conjugation and functor.mapIso; project StageSystem.Morphism implements descent. No prescribed quotient-cone scalar realization for fixed coefficient calculi.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; existing project definitions reused."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "reconstruction scalar; quotient reconstruction",
+   "results": "No scalar realization duplicate; only general Koszul reconstruction found.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of the fixed-family normalization step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReconstructionCommonStageCoherence",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "First sentence, identity compact support; Step 1 of lem-pod-reconstruction-common-stage-coherence.",
+   "via": [
+    "lem-pod-reconstruction-common-stage-coherence",
+    "lem-pod-identity-compact-support-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReconstructionCommonStageData",
+  "file": "lean/Sheaf/Paper/PodReconstructionCommonStageData.lean",
+  "declaration": "WeilConjectures.PodCommonStageReconstruction.Realization",
+  "statement": "structure Realization (E : Index l Ω)\n    (A : CoefficientDerivedSystemCalculus l (Coefficient.{u} l Ω E) (point D))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.PodCommonStageReconstruction.Realization",
+   "WeilConjectures.PodCommonStageReconstruction.IdentitySupport",
+   "WeilConjectures.PodCommonStageReconstruction.scalarUnit",
+   "WeilConjectures.PodCommonStageReconstruction.quotientEndofunctor",
+   "WeilConjectures.PodCommonStageReconstruction.scalarDerived",
+   "WeilConjectures.PodCommonStageReconstruction.scalarOrdinary",
+   "WeilConjectures.PodCommonStageReconstruction.scalarCounit",
+   "WeilConjectures.PodCommonStageReconstruction.SameIndexRealization",
+   "WeilConjectures.PodCommonStageReconstruction.object",
+   "WeilConjectures.PodCommonStageReconstruction.representative",
+   "WeilConjectures.PodCommonStageReconstruction.Coherence",
+   "WeilConjectures.PodCommonStageReconstruction.stageObject",
+   "WeilConjectures.PodCommonStageReconstruction.stageRepresentative",
+   "WeilConjectures.PodCommonStageReconstruction.stageCoherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dae34",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T204504-L-2962801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dae34",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T204504-L-2962801",
+  "kind": "interface",
+  "note": "independent cc review: D4 item node, data/scalar new nodes, and three modules matched against the published PodReconstructionCommonStageCoherence; moved defs verbatim, Coherence/object/representative defeq via abbrev stageTransition; sandbox compile exit 0, axioms propext/sorryAx/Classical.choice/Quot.sound"
+ }
+}

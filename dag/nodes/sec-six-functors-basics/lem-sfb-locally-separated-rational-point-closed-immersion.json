@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-locally-separated-rational-point-closed-immersion",
+ "kind": "statement",
+ "title": "Rational points of locally separated algebraic spaces are closed immersions",
+ "statement": "Let $k$ be a field [def-weil-field] and $Z$ an algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space, def-weil-affine-spectrum] whose relative diagonal is an immersion. Here an immersion of algebraic spaces means a representable morphism whose pullbacks to schemes are immersions in the sense of [def-weil-closed-immersion]. For every field extension $K/k$ [def-pc-field-extension], put $Z_K=Z\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-fibre-product, lem-trf-space-fibre-products-etale-covers]. Every $K$-morphism $a:\\operatorname{Spec}K\\to Z_K$ is a closed immersion: for every scheme $T\\to Z_K$, the pullback $T\\times_{Z_K}\\operatorname{Spec}K$ is a scheme and its map to $T$ is a closed immersion [def-weil-closed-immersion]. The singleton image of $a$ in $|Z_K|$, with the atlas topology [def-a1-space-point-topology], is closed. No finite-type or quasi-separatedness hypothesis is imposed on $Z$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 088J (lemma-locally-separated-decent), Tag 08AL (lemma-finite-residue-field-extension-finite), final sentence with S=Spec K and k=K; Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point) for the singleton. Field base change preserves local separatedness by spaces-morphisms.tex Tag 03KL (lemma-base-change-separated). Closed immersion means spaces.tex Tag 02YU (definition-immersion)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Form $X=Z_K$ as an algebraic space. By local-separatedness permanence its diagonal over $\\operatorname{Spec}K$ is an immersion. The scheme map $\\operatorname{Spec}K\\to\\operatorname{Spec}\\mathbf Z$ is locally separated; composition therefore makes $X$ absolutely locally separated.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-locally-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KL, 03KQ, 03KY; scalar extension followed by the absolute structure map"
+   }
+  },
+  {
+   "text": "The locally-separated-space theorem now makes $X$ decent, in the explicit sense that every field-spectrum morphism into $X$ is quasi-compact.",
+   "uses": [
+    "lem-sfb-locally-separated-space-decent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J, lemma-locally-separated-decent"
+   }
+  },
+  {
+   "text": "The unique point $s$ of $\\operatorname{Spec}K$ is closed and has residue field $K$. Since $a$ is a $K$-morphism, its composite with $p:X\\to\\operatorname{Spec}K$ is the identity. Apply the finite-field-map theorem with $S=\\operatorname{Spec}K$, $L=K$ and the degree-one extension $K/K$. It gives representability of $a$ and finiteness on every scheme test.",
+   "uses": [
+    "lem-sfb-decent-space-finite-field-map",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 08AL, lemma-finite-residue-field-extension-finite, finite-morphism assertion"
+   }
+  },
+  {
+   "text": "The section $a$ is a monomorphism: for any test scheme $H$ and maps $b,c:H\\to\\operatorname{Spec}K$ with $ab=ac$, composition with $p$ gives $b=c$. For $T\\to X$, the projection $a_T:T\\times_X\\operatorname{Spec}K\\to T$ is also monic: two maps into the fibre product equal over $T$ have equal $\\operatorname{Spec}K$ components by this cancellation, so are equal as pairs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 08AL, equal-residue-field case; section cancellation written out"
+   }
+  },
+  {
+   "text": "For every scheme $T\\to X$, step 3 makes $a_T$ a finite morphism of schemes and step 4 makes it a monomorphism. The finite-monomorphism theorem makes $a_T$ a closed immersion. This is precisely the required closed-immersion assertion on all scheme tests.",
+   "uses": [
+    "lem-a1-finite-monomorphism-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03BB, lemma-finite-monomorphism-closed"
+   }
+  },
+  {
+   "text": "Let $x$ be the image of the unique point of $\\operatorname{Spec}K$. For every etale scheme test $U\\to X$, the point-lifting lemma identifies the inverse image of $\\{x\\}$ in $|U|$ with the point image of $U\\times_X\\operatorname{Spec}K\\to U$. This image is closed by step 5 and the definition of closed immersion. The definition of atlas topology therefore makes $\\{x\\}$ closed in $|X|$.",
+   "uses": [
+    "lem-a1-space-fibre-product-point",
+    "def-weil-closed-immersion",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX, lemma-topology-points; closedness from all atlas tests"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-locally-separated-base-change",
+  "lem-sfb-locally-separated-space-decent",
+  "lem-sfb-decent-space-finite-field-map",
+  "def-weil-affine-spectrum",
+  "lem-a1-finite-monomorphism-closed-immersion",
+  "lem-a1-space-fibre-product-point",
+  "def-weil-closed-immersion",
+  "def-a1-space-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tags 088J and 08AL; the final equal-residue-field assertion is assembled using a section and the scheme finite-monomorphism criterion 03BB, with closedness checked in the atlas topology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsAlgebraicSpace|LocallySeparated|locallySeparated|rationalPoint.*[Cc]losed|[Cc]losed.*rationalPoint",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary topology, not locally separated algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational points of an algebraic space with immersion diagonal are closed immersions without finite type hypotheses",
+   "results": "Hits: AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId, AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated, AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary topology, not locally separated algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsClosedImmersion\"",
+   "results": "Hits: AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.respectsIso, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary topology, not locally separated algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational point of a locally separated algebraic space over a field is a closed immersion",
+   "results": "Hits: AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.instIsClosedImmersionISchemeOfSubsingletonCarrierCarrierCommRingCat, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary topology, not locally separated algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosedImmersion.*(section|Spec)|[Ss]ection.*[Cc]losed|[Rr]ational.*[Pp]oint",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/Scheme.lean Directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary topology, not locally separated algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections over a field into an algebraic space whose diagonal is an immersion are closed embeddings",
+   "results": "Hits: AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding, AlgebraicGeometry.IsClosedImmersion.base_closed, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary topology, not locally separated algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections over a field into an algebraic space whose diagonal is an immersion are closed embeddings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\", \"doc\": \"If $ f: X \\to Y $ is an immersion of schemes, then the morphism $ f $ lifted to the cobord of the image of $ f $ is a closed immersion. The cobord is the open subset of $ Y $ obtained as the complement\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (𝒱 : (i : 𝒰.I₀) → (CategoryTheory.Limits.pullback f (𝒰.f i)).OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  [∀ (i : 𝒰.I₀) (j : (𝒱 i).I₀), AlgebraicGeometry.IsAffine ((𝒱 i).X j)],\\n  AlgebraicGeometry.IsClosedImmersi\", \"doc\": \"Given a morphism $ f $ of schemes and affine open covers $ \\\\mathcal{U} $ and $ \\\\mathcal{V} $, the diagonal morphism $ \\\\Delta_f $ restricted to the diagonal cover's diagonal range (constructed from the\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsClosedImmersion f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\to Y $ is a closed immersion of schemes, then the underlying continuous map $ f: X \\to Y $ is a closed embedding in the topological sense, meaning it induces a homeomorphism of $ X $ onto a c\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.base_closed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsClosedImmersion f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the underlying continuous map between the topological spaces is a closed embedding, meaning it induces a homeomorphism of $ X $ onto a closed subset \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern schemes, not algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-closure-equivalent-images",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions.",
+   "via": [
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-separated-rational-point-closed-immersion",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks route into six checked steps; three statement-only general inputs for local-separatedness permanence, decency, and finite field maps. Reused the existing finite-monomorphism Mathlib leaf. Kept rational section cancellation and scheme-test/topology assembly in the item. Clarified the sheaf fibre-product dependency without changing hypotheses or conclusions.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Steps 1-6 provide exactly this geometric supporting input, following Stacks rather than any SGA route. The null nearest blueprint ancestor is inherited and confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of algebraic-space fibre products; the current unit does not provide its own construction."
+   },
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Generic lifting of equal point classes to scheme fibre products, needed only to identify the inverse image of the singleton in an atlas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-fibre-product-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-e84c4fb11",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-e84c4fb11 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, and Stacks 088J and 08AL with their proofs, plus 03I8/03JV, 03KL/03KQ/03KY, 01KJ, 03H4 and 03BB. The item is not split on live and there is no repair note. The item statement only gains the space fibre-product citation; its hypotheses and conclusions are unchanged. New node lem-sfb-space-locally-separated-base-change states that immersion diagonals are preserved by base change and composition and hold for scheme maps; this is 03KL/03KQ/03KY/01KJ and is true. lem-sfb-locally-separated-space-decent is exactly 088J with the absolute diagonal; the inline definition of decent is 03JV(6) for all points, tested on affine schemes. lem-sfb-decent-space-finite-field-map is the finite-morphism sentence of 08AL only, so it does not restate the parent. Step 3 correctly applies it with S=Spec K and L=K (degree 1), which avoids needing K/k finite. Steps 4-5 show the section is mono, so each a_T is a finite monomorphism and hence a closed immersion. Step 6 uses 03H4 to identify the preimage of the point with the image of a closed immersion, so the point is closed in the final topology. Checked edge cases: K=k, empty spaces, nilpotents, K/k infinite or inseparable, and non-quasi-separated Z; A^1_Q/Z shows the immersion hypothesis is needed. No duplicates: the closest existing node, lem-sfb-qs-space-rational-point-topology, assumes a quasi-compact diagonal. Batch-5: def-trf-algebraic-space and def-a1-space-point-topology are definitions; lem-trf-space-fibre-products-etale-covers (02X2) and lem-a1-space-fibre-product-point (03H4) are generic space facts, not steps of the trace formula or Poincare duality. I accept them and the two declared tool_uses. No SGA. Minor, left unchanged: two things in the base-change step are accepted as standard conventions. First, a space over K is treated as a space over Z by the usual change of base scheme. Second, the decency node has a def-weil-field stmt_dep without an inline bracket. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallySeparatedRationalPointClosedImmersion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.rationalPoint_isClosedImmersion_of_locallySeparated",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallySeparatedRationalPointClosedImmersion.lean",
+  "statement": "theorem rationalPoint_isClosedImmersion_of_locallySeparated (k : Type u) [Field k] (Z : AlgebraicSpace (Spec (CommRingCat.of k))) (hdiag : IsRepresentableWith (fun _ _ p ↦ IsImmersion p.left) (prod.lift (𝟙 Z.obj.obj) (𝟙 Z.obj.obj))) (K : Type u) [Field K] [Algebra k K] (a : yoneda.obj (Over.mk (𝟙 (Spec (CommRingCat.of K)))) ⟶ (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙ Z.obj.obj) : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) a ∧ IsClosed ({schemePointMap a (IsLocalRing.closedPoint K)} : Set (Point ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙ Z.obj.obj)))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d08a9bc0",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: relative diagonal IsRepresentableWith IsImmersion over Spec k; arbitrary K/k via Algebra (same universe u forced by Over (Spec k)); Z_K = canonical restriction along Over.map (Spec.map algebraMap), same encoding as SeparatedGroupSpaceGeometricScheme; a from yoneda of the identity over Spec K is a K-morphism; conclusions IsRepresentableWith IsClosedImmersion plus IsClosed singleton in pointTopologicalSpace (étale-final, no atlas). Stacks 088J/08AL(final sentence, S=Spec K)/07U5 checked. Statement field verbatim; stmt_dep records read; sorry-only proof; docstrings carry source, blueprint id and 6 proof steps; no name clash in side-live; not a duplicate of lem-sfb-qs-space-rational-point-topology. No findings; no compile needed (no file changed)."
+ }
+}

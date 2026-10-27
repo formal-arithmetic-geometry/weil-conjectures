@@ -1,0 +1,125 @@
+{
+ "id": "lem-pe-rational-comparison-from-fraction-maps",
+ "kind": "statement",
+ "title": "Rational coefficient comparison assembled from fraction maps",
+ "statement": "Given the fraction maps supplied by the completed coefficient theorem, with zeroth leg the actual continuous ring inclusion, scalar recurrence, explicit module universal property and bundled pullback naturality, their natural transformation is colimiting and has the same pullback naturality. The coefficient field also satisfies the ring localization universal property against arbitrary ring objects on every scheme. This is only the rationalization clause of the comparison predicate, deduced from the specified module data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-invert-ell.proof.md",
+  "place": "Scalar sequence and ring structure paragraphs"
+ },
+ "stmt_deps": [
+  "def-pe-completed-coefficient-comparison-data",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof": [
+  {
+   "text": "Use the scalar recurrence to construct NatTrans.ofSequence. Every cocone satisfies this recurrence by successor naturality, so the explicit module universal property gives the descent, factorization and uniqueness fields of IsColimit. Retain the supplied pullback-leg equations. Apply the scalar telescope ring theorem to its ring zeroth leg and invertible scalar.",
+   "uses": [
+    "lem-pe-scalar-telescope-ring-universal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-scalar-telescope-ring-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P4",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-invert-ell.proof.md",
+  "place": "Complete Lean construction from fraction maps and scalar telescope universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal property of localization of a ring object given by a scalar telescope of regular modules",
+   "results": "IsLocalizedModule.is_universal, IsLocalizedModule.mk, ModuleCat.localizedModule_isLocalizedModule.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary modules; no ring-object universal property in an arbitrary preadditive monoidal category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit of regular module objects along multiplication by a natural number has the universal property of localization as a ring object",
+   "results": "RingCat.Colimits.colimitIsColimit and filtered ring colimits.",
+   "date": "2026-10-27",
+   "verdict": "The scalar transitions are module maps, not ring maps, so ordinary ring-colimit results do not apply."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_telescope_ring_universal; ring localization universal; telescope in Mathlib and both project roots",
+   "results": "PadicIntegersInvertEll supplies module telescopes and comparisons with commutative colimit models; RingLocalizationSheafification supplies localization among commutative ring objects. Neither gives the required arbitrary ring-object test property from a module telescope.",
+   "date": "2026-10-27",
+   "verdict": "Extract precisely the ring-structure argument missing from these APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "completedCondensedRational, completedCondensedPadicRational, Functor.ofSequence in both library roots and Mathlib",
+   "results": "Existing coefficient fraction-map universal properties and the sequence natural-transformation constructor; combine these with the scalar ring universal property.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing fraction maps; this module is proved assembly, not a new admitted comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleCompletedCoefficients",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Rationalization assembly split from the route theorem to keep compiled-artifact production within the per-file limit.",
+   "via": [
+    "lem-route-sfb-completed-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-sp-tate-twist",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleCompletedRationalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCompletedRationalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sfb_rational_comparison_from_completed",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfb_rational_comparison_from_completed"
+  ],
+  "statement": "theorem sfb_rational_comparison_from_completed\n    (ℓ : ℕ) (R K : Type) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]\n    [CommRing K] [TopologicalSpace K] [IsTopologicalRing K]\n    (φ : R →+* K) (hφ : Continuous φ)\n    (h : ∃ j : ∀ X : Scheme.{u}, ℕ →\n      (Mod.regular ((completedCoefficient X (Profinite.continuousMapRingSheaf R)).X) ⟶\n        ((Mod.comap (completedCoefficientMap X\n          (Profinite.continuousMapRingSheafMap φ hφ)).hom).obj\n        (Mod.regular (completedCoefficient X (Profinite.continuousMapRingSheaf K)).X))),\n      (∀ X : Scheme.{u},\n      IsIso (ℓ • 𝟙 ((completedCoefficient X (Profinite.continuousMapRingSheaf K)).X)) ∧\n      (j X 0).hom = (completedCoefficientMap X\n          (Profinite.continuousMapRingSheafMap φ hφ)).hom ∧\n      (∀ n, ℓ • j X (n + 1) = j X n) ∧\n      (∀ (B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n          ((completedCoefficient X (Profinite.continuousMapRingSheaf R)).X))\n        (b : ℕ → (Mod.regular\n          (completedCoefficient X (Profinite.continuousMapRingSheaf R)).X ⟶ B)),\n        (∀ n, ℓ • b (n + 1) = b n) →\n        ∃! a : ((Mod.comap (completedCoefficientMap X\n          (Profinite.continuousMapRingSheafMap φ hφ)).hom).obj\n        (Mod.regular (completedCoefficient X (Profinite.continuousMapRingSheaf K)).X)) ⟶ B,\n          ∀ n, j X n ≫ a = b n)) ∧\n      (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (n : ℕ),\n      (upperStar Ab.{u + 1} f).map (j Y n).hom ≫\n          ((coefficientPullbackIso f\n            (Mon.mk (Profinite.continuousMapRingObj K))).hom).hom =\n        ((coefficientPullbackIso f\n            (Mon.mk (Profinite.continuousMapRingObj R))).hom).hom ≫ (j X n).hom)) :\n    ∃ ι : ∀ X : Scheme.{u}, sfbRationalizationSequence ℓ R X ⟶\n        (Functor.const ℕ).obj (sfbRationalCoefficientModule R K\n          (fun Z ↦ completedCoefficientMap Z (Profinite.continuousMapRingSheafMap φ hφ)) X),\n      (∀ X : Scheme.{u},\n        ((ι X).app 0).hom = (completedCoefficientMap X\n          (Profinite.continuousMapRingSheafMap φ hφ)).hom ∧\n        Nonempty (IsColimit (Cocone.mk (sfbRationalCoefficientModule R K\n          (fun Z ↦ completedCoefficientMap Z (Profinite.continuousMapRingSheafMap φ hφ)) X)\n          (ι X))) ∧\n        IsIso (ℓ • 𝟙 (condensedRingObj (Profinite.continuousMapRingObj K) X))) ∧\n      (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (m : ℕ),\n        (upperStar Ab.{u + 1} f).map (((ι Y).app m).hom) ≫\n            ((coefficientPullbackIso f\n            (Mon.mk (Profinite.continuousMapRingObj K))).hom).hom =\n          ((coefficientPullbackIso f\n            (Mon.mk (Profinite.continuousMapRingObj R))).hom).hom ≫\n            ((ι X).app m).hom) ∧\n      (∀ (X : Scheme.{u}) (B : Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})),\n        IsIso (ℓ • 𝟙 B.X) →\n        ∀ a : coefficientRing X (Mon.mk (Profinite.continuousMapRingObj R)) ⟶ B,\n          ∃! b : coefficientRing X (Mon.mk (Profinite.continuousMapRingObj K)) ⟶ B,\n            completedCoefficientMap X\n              (Profinite.continuousMapRingSheafMap φ hφ) ≫ b = a)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e4d9",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T034720-L-3678500",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e4d9",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T034720-L-3678500",
+  "kind": "interface",
+  "note": "independent cc review: SfbCompletedCoefficientComparison bundled coefficientPullbackIso field vs published condensedPullbackHom (equal by id_comp, Basic.lean:538/576); two new sorry statements vs the item node and the published CompletedCondensedCoefficients; the 3 direct importers compiled against the delivered files (all OK)"
+ }
+}

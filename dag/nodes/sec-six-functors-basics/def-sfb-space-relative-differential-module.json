@@ -1,0 +1,119 @@
+{
+ "id": "def-sfb-space-relative-differential-module",
+ "kind": "definition",
+ "title": "Relative differential module of an algebraic-space morphism",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces [def-trf-algebraic-space]. Use the chart-normalized structural map $f^{-1}\\mathcal O_Y\\to\\mathcal O_X$ of [lem-trf-space-enlarged-etale-ringed-site-model], restricted to the small affine etale model [def-sfb-space-small-ringed-model]. Define $\\Omega_{X/Y}$ to be the module of sheafified sectionwise Kahler differentials of this map [def-sfb-sheaf-differentials], transported back by the inverse of the actual affine-basis restriction equivalence. For an affine-basis chart $U$ and a section $s$ of its structure ring, define $\\mathrm ds$ in the full small etale module by applying the inverse counit of this equivalence to the universal differential of $s$. Thus both the module and its differentials use the existing sheafification and specified ring map; no differential module, chart map, or inverse-image map is chosen arbitrarily.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-sheaf-differentials"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0618, 0619 and 05ZF; Tag 08TP; the relative differential module used in Tags 061C and 061D."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative differentials of a morphism of algebraic spaces and sheaf of lifts across a square zero thickening",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \": PresheafOfModules.{u} (R ⋙ forget₂ _ _)\", \"doc\": \"A presheaf of modules constructed by assigning to each object $X$ in the opposite category the module of Kähler differentials $\\\\Omega_{\\\\phi'(X)/R(X)}$, and to each morphism $f: X \\\\to Y$ the $R(Y)$-lin\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton Ω[A⁄R]\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., contains at most one element).\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"[Algebra.FormallyEtale S T] : IsBaseChange T (map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (f : { f // (Ideal.Quotient.mkₐ R I).comp f = IsScal\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"liftOfDerivationToSquareZero_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] [inst_6 : IsScalarTower R A B]\\n  (hI : I ^ 2 = ⊥) (f : Derivation R A ↥I) (x : A),\\n  (liftOfDerivation\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\\\to I $ over $ R $, there exists an $ R $-algebra homomorph\"}\n  {\"name\": \"derivationToSquareZeroOfLift_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (f : A →ₐ[R] B) (e : (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I))\\n  (x : A) : (derivationToSquareZeroOfLift I hI f e x : B) = f x - algebraMap A B x\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, and an $ R $-algebra $ B $, given an algebra homomorphism $ f : A \\\\to B $, a square-zero ideal $ I \\\\subseteq A $, and a compatibility conditio\"}\n  {\"name\": \"derivationToSquareZeroEquivLift_apply_coe_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (d : Derivation R A ↥I) (x : A),\\n  ↑((derivationToSq\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring. Suppose that $A$ is an $R$-algebra, and $B$ is an $A$-algebra and an $R$-algebra, such that the scalar actions form a tower (i.\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \": (relativeDifferentials' φ').Derivation' φ'\", \"doc\": \"A derivation constructed for the relative differentials presheaf, defined by assigning to each object the Kähler differential derivation $d$ satisfying the Leibniz rule and annihilating the images of \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No algebraic-space relative differential specialization: generic presheaf differentials and sheafification are reused through the landed SheafDifferentials.omega, together with the existing normalized cotangentRingMap. The scheme relativeDifferentials has a scheme morphism parameter."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented morphism of algebraic spaces the sheaf of square zero lifts is a pseudo torsor under the quasi coherent module of derivations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.Derivation'.Universal.mk\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      {M : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))} →\\n        {φ' : S' ⟶ R} →\\n          {d : M.Derivation' φ'} →\\n            (desc :\\n                {\", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ M $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ F $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.desc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, there exists a unique morphism of presheaves of modules from the universal derivation t\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) →\\n        PresheafOfModules.Derivation.Universal (PresheafOfModules.DifferentialsConstruction.derivation' φ')\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) → (PresheafOfModules.DifferentialsConstruction.relativeDifferentials' φ').Derivation' φ'\", \"doc\": \"A derivation constructed for the relative differentials presheaf, defined by assigning to each object the Kähler differential derivation $d$ satisfying the Leibniz rule and annihilating the images of \"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.fac\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  {M : PresheafOfModules (R.comp (CategoryTheory.forg\", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, the postcomposition of $ d $ with the unique morphism $ \\text{desc}(d') $ from the unive\"}\n  {\"name\": \"PresheafOfModules.Derivation'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat)) → (S' ⟶ R) → Type (max (max u₂ u) v)\", \"doc\": \"Given a presheaf of commutative rings $ S $ on a category $ \\\\mathcal{C} $, a derivation is a natural transformation from $ S $ to the composition of the identity functor on $ \\\\mathcal{D} $ with the pr\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No algebraic-space relative differential specialization: generic presheaf differentials and sheafification are reused through the landed SheafDifferentials.omega, together with the existing normalized cotangentRingMap. The scheme relativeDifferentials has a scheme morphism parameter."
+  },
+  {
+   "tool": "grep",
+   "query": "PseudoTorsor|liftOfDerivationToSquareZero|relativeDifferentials",
+   "results": "[grep] OK 0 hit(s)\n\nLocal rg of lean/WeilConjectures and lean/Sheaf: scheme relativeDifferentials in WeilConjectures.AlgebraicGeometry.Modules.Differentials; normalized cotangent ring map in Sheaf.AlgebraicGeometry.SpaceCotangentRingMap; generic SheafDifferentials.omega and derivation in Sheaf.CategoryTheory.Sites.InverseImageDifferentials; no space relative differential module declaration. DAG search: def-sfb-sheaf-differentials gives the generic ring-sheaf notion; def-sc-relative-differential-sheaf gives only schemes. blueprint_refs.py search algebraic space differential found no definition of this specialization.",
+   "date": "2026-10-24",
+   "verdict": "No algebraic-space relative differential specialization: generic presheaf differentials and sheafification are reused through the landed SheafDifferentials.omega, together with the existing normalized cotangentRingMap. The scheme relativeDifferentials has a scheme morphism parameter."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms. Relative differential module and its universal differential on the existing affine basis.",
+   "via": [
+    "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeDifferentialModule",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relativeDifferentialModule",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.relativeDifferentialModule",
+   "AlgebraicGeometry.AlgebraicSpace.relativeDifferentialSection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeDifferentialModule.lean",
+  "statement": "def relativeDifferentialModule (f : X ⟶ Y) : X.Modules",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-906079890",
+  "group": "Q01",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-906079890",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Re-delivery after a919 RETURN H2/H11. Both Lean files byte-identical to a919. Item stmt_deps now drop lem-trf-scheme-zariski-etale-quasi-coherent-equivalence and lem-trf-space-enlarged-etale-ringed-site-model and add def-trf-scheme-algebraic-space, def-sfb-space-small-ringed-model and def-sfb-space-quasi-coherent-algebra, exactly as requested. Against base, stmt_deps only gain landed def nodes; no theorem stmt_dep. Second reading is now a real clause-by-clause reading. Own reading: hf chart test, first-order j with no affineness, comm, canonical Omega (omega of cotangentRingMap via smallModuleEquivalence), E tensor pullback, homObj, ThickeningSiteModel/SquareZeroIdeal pinned (cartesian, quotient=Gamma, exact kernel, scalar law), exists qcoh H with ulift iso to j_*Hom plus scalar clause, lift sheaf with both equations, action zero/add/naturality/orbit-bijective with no existence, IsInfinitesimalAddition sign c#=a#+D as in 0618/0619. Edge cases OK; no hollow data; docstrings OK; imports all exist on live. Advisory: Q42 17ffdcf1 (unlanded) spaceRelativeDifferentials has the same body as relativeDifferentialModule, so the second to land should become an abbrev of the def-node decl; homObj (def-pur-sheaf-hom) and representable_etale_scheme_tests (Prop only) owners not in stmt_deps; Omega chart clause is Nonempty only. No file changed, so no compile."
+ }
+}

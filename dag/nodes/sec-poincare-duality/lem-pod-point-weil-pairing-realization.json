@@ -1,0 +1,282 @@
+{
+ "id": "lem-pod-point-weil-pairing-realization",
+ "kind": "statement",
+ "title": "Canonical point transport realizes shifted Weil pairings on cohomology",
+ "statement": "Fix distinct primes $p,\\ell$, $a\\ge1$, $q=p^a$, $k_0=\\mathbf F_q$, an algebraic closure $k$ of $k_0$, a finite extension $E/\\mathbf Q_\\ell$ inside a fixed $\\overline{\\mathbf Q}_\\ell$, and $\\Lambda=E$ [def-weil-finite-field-fiber]. For a finite-type $k_0$-scheme $T_0$ set $T=T_0\\times_{k_0}k$, $g_T=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q)$ with geometric Frobenius, and $P_T=Lg_T^*$ [def-weil-frobenius-detailed, def-weil-derived-pullback-tensor-hom]. Work in the rational bounded constructible categories with Weil pairs $(M,\\theta_M:P_TM\\simeq M)$ and Weil arrows $u\\theta_M=\\theta_NP_T(u)$ [def-weil-weil-sheaf-complex]. All Weil isomorphisms below are arbitrary rational arrows; a Frobenius-stable integral lattice is not assumed.\n\nPut $s=\\operatorname{Spec}k$, $P=P_s$, and let $(A,\\theta_A)$, $(D,\\theta_D)$ be bounded constructible Weil point complexes. Use the point fiber functor $\\operatorname{Fib}_s$ [def-weil-finite-coefficient-point] and its canonical transport $\\iota_N:\\operatorname{Fib}_sN\\to\\operatorname{Fib}_s(PN)$ [def-weil-frobenius-point-transport]. For every integer $r$ put $F_N=\\operatorname{Fib}_s(\\theta_N)\\iota_N$, with the induced shift datum on $N[r]$. Let $c_s:P\\Lambda_s\\simeq\\Lambda_s$ be the coefficient-unit datum [def-weil-frobenius-coefficient-twists], whose point Frobenius is $1$, and let $n\\in\\mathbf Z$. Suppose a morphism\n$$B:A\\otimes^LD[n]\\to\\Lambda_s$$\nobeys the Weil equation\n$$B(\\theta_A\\otimes\\theta_{D[n]})\\mu_{g_s}=c_sP(B),$$\nwhere $\\mu_{g_s}$ is canonical pullback tensor transport [def-weil-derived-pullback-tensor-hom]. The canonical point equivalence [lem-weil-point-fibre-equivalence] identifies $H^i(\\operatorname{Fib}_sA)$ with $\\operatorname{Hom}(\\Lambda_s,A[i])$. Under it, for any representative $x:\\Lambda_s\\to A[i]$, the transported representative is $P(x)c_s^{-1}$ and its Frobenius representative is $\\theta_A[i]P(x)c_s^{-1}$; the analogous formula holds for $D$.\n\nDefine $b_i:H^i(\\operatorname{Fib}_sA)\\times H^{n-i}(\\operatorname{Fib}_sD)\\to\\Lambda$ by tensoring the two representatives and composing with $B$, using canonical shift, tensor and unit constraints. Then\n$$b_i(F_Ax,F_Dy)=b_i(x,y),\\qquad b_i(F_Ax,F_Dy)=c_sP(b_i(x,y))c_s^{-1}$$\nwith the second formula interpreted in $\\operatorname{End}(\\Lambda_s)$ under the point equivalence. These formulas use the canonical point transports, with the pullback tensor unit constraint identifying the two factors of $c_s^{-1}$ with the pullback of the unit tensor constraint. The formulas hold for all integers $i,n$, for zero objects, and for arbitrary rational Weil arrows. In particular, let $X_0$ be separated of finite type over $k_0$, $X=X_0\\times_{k_0}k$, $a=a_X:X\\to s$, and let $(K,\\theta_K)$, $(L,\\theta_L)$ be bounded constructible Weil pairs on $X$. If $A=Ra_!K$ with $\\theta_A=Ra_!(\\theta_K)\\operatorname{FrEx}_{X,!}(K)$ and $D=Ra_*L$ with $\\theta_D=Ra_*(\\theta_L)\\operatorname{FrEx}_{X,*}(L)$, the exchange maps of [def-weil-frobenius-cohomology-transport], then $F_A$ and $F_D$ are $\\operatorname{Fib}_s(Ra_!\\theta_K)\\tau_{c,K}$ and $\\operatorname{Fib}_s(Ra_*\\theta_L)\\tau_L$, the canonical compact-support and ordinary cohomology actions of that definition; the two support conventions are retained separately.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Proof sentence 4 final clause (smooth pairing); retained rational proof Step 10, canonical point-Hom realization"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-point-transport",
+  "def-weil-frobenius-coefficient-twists",
+  "lem-weil-point-fibre-equivalence",
+  "def-weil-frobenius-cohomology-transport",
+  "def-zl-field-weil-shriek-shift-data",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pod-point-fibre-tensor-canonical",
+  "def-pod-point-coefficient-unit-coordinates",
+  "def-pod-point-tate-fibre-size-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use the unchanged canonical point coordinates, now owned in their dependency module. Tensor comparison existence and uniqueness follow there from a normalized system and comparison independence. The existing V4 proofs of the point shift, point unit, fullness, faithfulness and the two Hom bijections are preserved.",
+   "uses": [
+    "def-pod-point-weil-pairing-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7."
+   }
+  },
+  {
+   "text": "Apply the unit/shift/scalar transport identities. For postcomposition by a:N→M, naturality of the fibre shift, homSingleToHomology, and the homology shift show realize(x followed by a[r])=H^r(Fa)(realize x). Apply this to theta and combine with transportRep to obtain the Frobenius-representative equation.",
+   "uses": [
+    "lem-pod-point-weil-transport-unit-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7."
+   }
+  },
+  {
+   "text": "Apply the tensor-representative identities. Postcompose the vector identity by B and use its Weil equation; functoriality gives c^{-1}P(pairingEnd)c. The realization bijection identifies the inverse realizations of Frobenius vectors with Frobenius representatives. Finally c^{-1}P(h)c=h gives the stated scalar pairing invariance. These are actual Lean composites and inverse-bijection calculations.",
+   "uses": [
+    "lem-pod-point-weil-tensor-representatives",
+    "lem-pod-point-weil-transport-unit-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7."
+   }
+  },
+  {
+   "text": "Finally substitute the two Weil data specified in the statement. Functoriality and [def-weil-frobenius-cohomology-transport] give separately\n$$F_A=F(Ra_!\\theta_K)F(\\operatorname{FrEx}_{X,!}(K))\\iota_{Ra_!K}=F(Ra_!\\theta_K)\\tau_{c,K},$$\n$$F_D=F(Ra_*\\theta_L)F(\\operatorname{FrEx}_{X,*}(L))\\iota_{Ra_*L}=F(Ra_*\\theta_L)\\tau_L.$$\nTaking cohomology gives exactly the asserted compact-support and ordinary actions. These are two substitutions of the defining transports; no comparison between $Ra_!$ and $Ra_*$, and no properness hypothesis, enters.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final two sentences: formal duality exchange and its smooth pairing form; explicit point realization of the retained rational proof Step 10"
+   }
+  },
+  {
+   "text": "The existing exchange_isIso hole for the arbitrary retained SupportModel is unchanged. Its planned proof is to invert the direct geometric-Frobenius base-change mate and, in the compact branch, relabel the retained open/proper support recipe and descend the whole-system inverse integrally and rationally. No more specialized compactification exchange has been substituted for this arbitrary-support assertion.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-point-weil-pairing-coordinates",
+  "lem-pod-point-weil-transport-unit-shift",
+  "lem-pod-point-weil-tensor-representatives",
+  "def-weil-frobenius-cohomology-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7.",
+  "note": "Decomposition of two of the three V4-baseline holes; real Lean combination of transport identities, B-free tensor representatives and the Weil equation. The arbitrary-support exchange hole remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant pairing of rational adic Weil point complexes induces a Frobenius invariant degreewise cohomology pairing using canonical point transport and common finite coefficient fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"WittVector.exists_frobenius_solution_fractionRing_aux\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [inst_2 : IsAlgClosed k]\\n  (m n : ℕ) (r' q' : WittVector p k) (hr' : r'.coeff 0 ≠ 0) (hq' : q'.coeff 0 ≠ 0)\\n  (hq : ↑p ^ n * q' ∈ nonZeroDivisors (WittVector p k)),\\n  have b := WittVector.frobeniusRotation p hr'\", \"doc\": \"Given natural numbers $m,n$, Witt vectors $r',q' \\\\in \\\\mathbb{W}(k)$ with nonzero constant coefficients, and the condition that $p^n q' \\\\in \\\\mathbb{W}(k)$ is a non-zero divisor, let $b$ denote the Frob\"}\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"WittVector.IsocrystalEquiv.frob_equivariant\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {k : Type u_1} [inst_1 : CommRing k] [inst_2 : CharP k p]\\n  [inst_3 : PerfectRing k p] {V : Type u_2} [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V]\\n  {V₂ : Type u_3} [inst_6 : AddCommGroup V₂] [inst_7 : WittVector.Isocrystal p k V₂]\\n  (self : \", \"doc\": \"Let $p$ be a prime number and $k$ be a perfect commutative ring of characteristic $p$. Let $V$ and $V_2$ be two isocrystals over $k$, with corresponding Frobenius isomorphisms $\\\\Phi_V$ and $\\\\Phi_{V_2}\"}\n  {\"name\": \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [IsDomain k] →\\n          [inst_3 : CharP k p] →\\n            [inst_4 : PerfectRing k p] → (m : ℤ) → WittVector.Isocrystal p k (WittVector.StandardOneDimIsocrystal p k m)\", \"doc\": \"For any prime $ p $, field $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with\"}\n  {\"name\": \"WittVector.instAddCommGroupStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) → [inst_1 : CommRing k] → (_m : ℤ) → AddCommGroup (WittVector.StandardOneDimIsocrystal p k _m)\", \"doc\": \"For any prime $ p $, commutative ring $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal $ \\text{WittVector.StandardOneDimIsocrystal}(p, k, m) $ (defined as the f\"}\n  {\"name\": \"WittVector.IsocrystalEquiv\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            (V : Type u_2) →\\n              [inst_4 : AddCommGroup V] →\\n                [WittVector.Isocrystal p k V] →\\n                  \", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and additive commutative groups $ V $ and $ V_2 $ equipped with Witt vector isocrystal structures over $ k $, this defines the type o\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a shifted derived pairing A tensor D shifted by n to the coefficient unit the point Hom realization sends Frobenius to theta composed with pullback of x and inverse unit datum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.frobeniusMorphism_mate\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [inst_\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be monoidal closed categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ and $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a pair of adjoint functors, with $L$ being the left \"}\n  {\"name\": \"CategoryTheory.ExactPairing.evaluation'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  {inst : CategoryTheory.Category.{v₁, u₁} C} →\\n    {inst_1 : CategoryTheory.MonoidalCategory C} →\\n      {X Y : C} →\\n        [self : CategoryTheory.ExactPairing X Y] →\\n          CategoryTheory.MonoidalCategoryStruct.tensorObj Y X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorUnit C\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and objects $X,Y \\\\in \\\\mathcal{C}$ with an exact pairing, this is the morphism $Y \\\\otimes X \\\\to I$ (where $I$ is the unit object) that constitutes part of the du\"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (X Y Y' Z : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj Y' X ⟶ Z) ≃\\n            (X ⟶ CategoryTheory.MonoidalCatego\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given objects $X,Z$ and dual objects $Y,Y'$ (with an exact pairing), there is a natural equivalence between the hom-set $\\\\text{Hom}(Y' \\\\otimes X, Z)$ and $\\\\\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (X Y Y' Z : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y ⟶ Z) ≃\\n            (X ⟶ CategoryTheory.MonoidalCategor\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and dual objects $Y$ and $Y'$, this equivalence establishes a natural bijection between morphisms $X \\\\otimes Y \\\\to Z$ and morphisms $X \\\\to Z \\\\otimes Y'$. The eq\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_tensor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X X' Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\\n  (f : X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Z Y') (g : X' ⟶ Z'),\\n  (CategoryTheory.tensorRightHomEquiv (CategoryT\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and dual objects $Y$ and $Y'$, there is a natural bijection between morphisms $X \\\\otimes Y \\\\to Z$ and morphisms $X \\\\to Z \\\\otimes Y'$. This equivalence is constr\"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X X' Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\\n  (f : X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Y Z) (g : X' ⟶ Z'),\\n  (CategoryTheory.tensorLeftHomEquiv (CategoryThe\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given objects $X,X',Z,Z'$ and dual objects $Y,Y'$ with an exact pairing, the natural equivalence between $\\\\text{Hom}(Y' \\\\otimes X, Z)$ and $\\\\text{Hom}(X, Y \"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {Y Y' Z : C}\\n  [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : Y ⟶ Z),\\n  (CategoryTheory.tensorRightHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C) Y Y' Z).symm\\n      (CategoryTheo\", \"doc\": \"For dual objects $Y$ and $Y'$ in a monoidal category $\\\\mathcal{C}$, the symmetric tensor-hom equivalence maps the composition of the coevaluation morphism $\\\\eta_{Y,Y'}: I \\\\to Y \\\\otimes Y'$ and the rig\"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {Y Y' Z : C}\\n  [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : Y' ⟶ Z),\\n  (CategoryTheory.tensorLeftHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C) Y Y' Z).symm\\n      (CategoryTheo\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, for dual objects $Y, Y'$ with an exact pairing and any morphism $f : Y' \\\\to Z$, the composition of the coevaluation map $\\\\eta : I \\\\to Y' \\\\otimes Y$ with the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pairing\", \"Frobenius\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*pairing|pairing.*Frobenius|point.*transport",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/Independent.lean\", \"line\": \"252\", \"text\": \"/-- If we single out one member of an affine-independent family of points and affinely transport\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AffineSpace/Combination.lean\", \"line\": \"957\", \"text\": \"/-- Given a set of points, together with a chosen base point in this set, if we affinely transport\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point realization of a Frobenius equivariant derived pairing gives invariant degreewise cohomology pairings over common finite coefficient fields",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FiniteField.frobeniusAlgEquiv_apply\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"∀ (K : Type u_1) (R : Type u_2) [inst : Field K] [inst_1 : Fintype K] [inst_2 : CommRing R] [inst_3 : Algebra K R]\\n  (p : ℕ) [inst_4 : ExpChar R p] [inst_5 : PerfectRing R p] (a : R),\\n  (FiniteField.frobeniusAlgEquiv K R p) a = a ^ Fintype.card K\", \"doc\": \"For a finite field $ K $ of cardinality $ q $ and a commutative ring $ R $ with exponential characteristic $ p $, the Frobenius endomorphism defined by raising elements to the $ q $-th power is an alg\"}\n  {\"name\": \"LinearMap.IsPerfPair.compl₁₂\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"(eM : M' ≃ₗ[R] M) (eN : N' ≃ₗ[R] N) : (p.compl₁₂ eM eN : M' →ₗ[R] N' →ₗ[R] R).IsPerfPair\", \"doc\": \"Given a perfect pairing between $ R $-modules $ M $ and $ N $, and linear isomorphisms $ e_M: M' \\to M $ and $ e_N: N' \\to N $, the induced pairing on $ M' $ and $ N' $ defined by composing with $ e_M $\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquiv\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"(p : ℕ) [ExpChar R p] [PerfectRing R p] : R ≃ₐ[K] R\", \"doc\": \"The algebra equivalence from a $ K $-algebra $ R $ to itself defined by the Frobenius endomorphism raising elements to the power of the cardinality $ \\\\#K $ of the finite field $ K $. This equivalence \"}\n  {\"name\": \"WittVector.IsocrystalHom.mk.sizeOf_spec\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {k : Type u_1} [inst_1 : CommRing k] [inst_2 : CharP k p]\\n  [inst_3 : PerfectRing k p] {V : Type u_2} [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V]\\n  {V₂ : Type u_3} [inst_6 : AddCommGroup V₂] [inst_7 : WittVector.Isocrystal p k V₂] [inst_8 : \", \"doc\": \"The Frobenius endomorphism on the fraction ring $ K(p, k) $ of Witt vectors over a perfect commutative ring $ k $ of characteristic $ p $, which raises each coefficient to its $ p $-th power, has an i\"}\n  {\"name\": \"FGModuleCat.exactPairing\", \"module\": \"Mathlib.Algebra.Category.FGModuleCat.Basic\", \"type\": \": ExactPairing V (FGModuleCatDual K V)\", \"doc\": \"For any field $ K $ and finitely generated $ K $-module $ V $, there exists an exact pairing between $ V $ and its dual module $ \\\\text{Hom}_K(V, K) $, constructed via coevaluation and evaluation maps \"}\n  {\"name\": \"PreTilt.coeff_frobeniusEquiv_symm\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"(n : ℕ) (x : PreTilt O p) : (coeff n (((frobeniusEquiv _ p).symm) x)) = coeff (n + 1) x\", \"doc\": \"For any natural number $n$ and element $x$ in the pretilt of a commutative ring $O$ modulo prime $p$, the $n$-th coefficient of the inverse Frobenius equivalence applied to $x$ equals the $(n+1)$-th c\"}\n  {\"name\": \"frobeniusEquiv\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \": R ≃+* R\", \"doc\": \"The ring equivalence induced by the Frobenius endomorphism on a perfect ring $ R $ of characteristic $ p $, which maps each element $ x $ to its $ p $-th power $ x^p $. This equivalence is bijective d\"}\n  {\"name\": \"WittVector.frobeniusEquiv\", \"module\": \"Mathlib.RingTheory.WittVector.Frobenius\", \"type\": \"[PerfectRing R p] : WittVector p R ≃+* WittVector p R\", \"doc\": \"The ring equivalence on Witt vectors over a perfect commutative ring $ R $ of characteristic $ p $, induced by the Frobenius endomorphism that raises each coefficient to its $ p $-th power. This equiv\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical point transport for rational adic Weil complexes identifies the Frobenius action with theta composed with pullback on Hom from the coefficient unit and realizes invariant shifted cohomology pairings",
+   "results": "OK 8 hit(s): BDeRhamPlus, BDeRham, WittVector.IsocrystalEquiv.toLinearEquiv, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.IsocrystalEquiv, WittVector.factorPowSucc_comp_fontaineThetaModPPow, WittVector.IsocrystalHom.frob_equivariant, WittVector.mk_pow_fontaineTheta",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern isocrystals, affine geometry, rigid tensor-Hom, or categorical adjunctions; none realizes canonical rational adic point transport and its pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*pairing|pairing.*Frobenius|point.*transport",
+   "results": "OK 2 hit(s): Mathlib/LinearAlgebra/AffineSpace/Independent.lean, Mathlib/LinearAlgebra/AffineSpace/Combination.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern isocrystals, affine geometry, rigid tensor-Hom, or categorical adjunctions; none realizes canonical rational adic point transport and its pairing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical geometric point transport realizes Frobenius equivariant derived tensor pairings on cohomology of rational adic complexes",
+   "results": "OK 8 hit(s): WittVector.IsocrystalEquiv.frob_equivariant, CategoryTheory.frobeniusMorphism, CategoryTheory.Grothendieck.transportIso, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Grothendieck.toTransport_base, TensorPower.pairingDual, WittVector.frobeniusEquiv, coe_iterateFrobeniusEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern isocrystals, affine geometry, rigid tensor-Hom, or categorical adjunctions; none realizes canonical rational adic point transport and its pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"pairing\"",
+   "results": "OK 0 hit(s): none",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern isocrystals, affine geometry, rigid tensor-Hom, or categorical adjunctions; none realizes canonical rational adic point transport and its pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a linear strong monoidal pullback on a derived category an equivariant pairing A tensor D shifted by n to the unit induces invariant pairings on Hom from the unit",
+   "results": "OK 8 hit(s): CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.exactPairingCongrLeft, CategoryTheory.tensorRightHomEquiv_symm_naturality",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern isocrystals, affine geometry, rigid tensor-Hom, or categorical adjunctions; none realizes canonical rational adic point transport and its pairing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-rational-purity-pairing",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Final two sentences of the current prop-weil-operations proof (formal duality exchange and smooth pairing); canonical point-Hom realization, retained rational proof Step 10",
+   "via": [
+    "lem-pod-rational-purity-pairing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pod-point-weil-pairing-realization",
+  "worker": "stage1",
+  "summary": "Kept the corrected Q47 statement, including the specified two direct-image Weil data. Supplied a seven-step point-Hom proof from existing nodes, with explicit shift, unit and scalar calculations. No new nodes; the etale constant-coefficient Lean formula is only a partial match. Checked citations, hypotheses, cycles and shifted rank-one edge cases.",
+  "blueprint": "Current prop-weil-operations.proof.md final two sentences, under sk-thm-frobenius; realizes canonical point-Hom Step 10 retained in lem-pod-rational-purity-pairing. The inherited sk-lem-finite unit association is historical and is not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-point-ringed-evaluation-model",
+    "why": "Uses only the canonical unit evaluation at an algebraically closed point; this is a coefficient tool, not a duality theorem."
+   },
+   {
+    "node": "lem-trf-field-complex-cohomology-splitting",
+    "why": "Uses only the bijection of derived morphisms with maps on graded vector-space cohomology, specialized to E[0]; no trace-formula assertion is used."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Uses full faithfulness and shift compatibility of the point coefficient equivalence, independent of any pairing theorem."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Uses naturality for arbitrary rational arrows to identify cohomology Frobenius on Hom from the unit."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Uses naturality and unit coherence of canonical pullback tensor comparison; this is coefficient calculus."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Uses the signed total-complex shift comparison for the explicit shift calculation, not any purity assertion."
+   },
+   {
+    "node": "lem-sf-completed-tensor-shift-right",
+    "why": "Uses the precise tower and cone coordinates for the completed tensor shift; the unit has no replacement for this coefficient-model tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-point-ringed-evaluation-model",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-sf-completed-tensor-shift-right"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-0f3a260c1",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-0f3a260c1 (reviewer sub-agent of L); spot-checked: Read the item in full (Q47 statement kept, 7 steps, 0 new nodes), the full statement of every cited node, the source main-20261015 sk-lem-finite/prop-weil-operations.proof.md (final two sentences; the latest copy under sk-thm-frobenius has the same proof apart from an added first sentence) and the parent lem-pod-rational-purity-pairing step 9. The statement is true and not weakened: E-rational coefficients, geometric g_s, theta: P M -> M; the Ra_!/Ex_! and Ra_*/Ex_* Weil data match def-weil-frobenius-cohomology-transport. The point-Frobenius-1 clause is essential: a unit scalar alpha=F(c)iota_U would turn invariance into b(Fx,Fy)=alpha^2 b(x,y). C3/C4 fault in Steps 2 and 4: F(c_s)iota_U=1 and the identification of c_s with the unit isomorphism of mu (lem-pur-derived-pullback-tensor-iso) both need lambda kappa=id. But lambda in lem-weil-isomorphism-derived-pullback only exists (already STATEMENT-DISPUTED: 2lambda over F_5). FIX: Steps 2 and 4 now cite the same-unit reviewed node lem-pod-canonical-coefficient-pullback-reduction (lambda_R kappa=id; it is the lambda of def-weil-constant-weil-structure(3); pi_n theta_R=Res_n(c_n lambda_n)rho_n), and Step 2 also cites def-weil-constant-weil-structure(3),(4). Both steps are set non-elementary and proof_deps is recomputed; no cycle. Steps 1, 3, 5, 6 and 7 were recomputed and are correct: Hom(E[0],FN[i])=H^i, End U=E, the cone shift (b,a)->((-1)^r b,a) fixes (0,theta(z)), the (-1)^{vp} total-tensor sign, z_F=(theta x theta)mu P(z)c^{-1}, E-linearity of P_E, and the tau_{c,K}/tau_L substitution. Edge cases t=ell, shifted rank one with i=-1, n=1, t^2!=1 and zero objects behave as expected. No duplicates; the 7 tool_uses are accepted as generic coefficient calculus. Maintainer note: def-weil-frobenius-coefficient-twists clause 4 still uses the existence-only lambda.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointWeilPairingRealization",
+  "declaration": "WeilConjectures.PointWeilPairing.point_weil_pairing_realization",
+  "declarations": [
+   "WeilConjectures.PointWeilPairing.point_weil_pairing_realization",
+   "WeilConjectures.PointWeilPairing.operation",
+   "WeilConjectures.PointWeilPairing.exchange",
+   "WeilConjectures.PointWeilPairing.exchange_isIso",
+   "WeilConjectures.PointWeilPairing.operationTheta",
+   "WeilConjectures.PointWeilPairing.compact_ordinary_specialization"
+  ],
+  "file": "lean/Sheaf/Paper/PointWeilPairingRealization.lean",
+  "statement": "theorem point_weil_pairing_realization : frobenius D l hl E (U D l hl E) (c D l hl E) = 𝟙 _ ∧ (∀ (N : C D l E) (r : ℤ) (x : U D l hl E ⟶ N⟦r⟧), realize D l hl E ((P D l hl E).obj N) r (transportRep D l hl E N r x) = (DerivedCategory.homologyFunctor.{u} (ModuleCat.{u} E) r).map (iota D l hl E N) (realize D l hl E N r x)) ∧ (∀ (N : C D l E) (theta : (P D l hl E).obj N ≅ N) (r : ℤ) (x : U D l hl E ⟶ N⟦r⟧), realize D l hl E N r (frobeniusRep D l hl E N theta r x) = (DerivedCategory.homologyFunctor.{u} (ModuleCat.{u} E) r).map (frobenius D l hl E N theta) (realize D l hl E N r x)) ∧ ((c D l hl E).inv ≫ (P D l hl E).map (j D l hl E) ≫ (mu D l hl E (U D l hl E) (U D l hl E)).hom = j D l hl E ≫ (T D l hl E).map (Prod.mkHom (c D l hl E).inv (c D l hl E).inv)) ∧ (∀ (A D₁ : C D l E) (thetaA : (P D l hl E).obj A ≅ A) (thetaD : (P D l hl E).obj D₁ ≅ D₁) (n : ℤ) (B : (T D l hl E).obj (A, D₁⟦n⟧) ⟶ U D l hl E), (mu D l hl E A (D₁⟦n⟧)).hom ≫ (T D l hl E).map (Prod.mkHom thetaA.hom (shiftedTheta D l hl E D₁ thetaD n).hom) ≫ B = (P D l hl E).map B ≫ (c D l hl E).hom → (∀ (i : ℤ) (x : U D l hl E ⟶ A⟦i⟧) (y : U D l hl E ⟶ D₁⟦n - i⟧), pairingEnd D l hl E A D₁ n i B (frobeniusRep D l hl E A thetaA i x) (frobeniusRep D l hl E D₁ thetaD (n - i) y) = (c D l hl E).inv ≫ (P D l hl E).map (pairingEnd D l hl E A D₁ n i B x y) ≫ (c D l hl E).hom) ∧ (∀ (i : ℤ) (x : (DerivedCategory.homologyFunctor.{u} (ModuleCat.{u} E) i).obj ((F D l hl E).obj A)) (y : (DerivedCategory.homologyFunctor.{u} (ModuleCat.{u} E) (n - i)).obj ((F D l hl E).obj D₁)), pairing D l hl E A D₁ n i B ((DerivedCategory.homologyFunctor.{u} (ModuleCat.{u} E) i).map (frobenius D l hl E A thetaA) x) ((DerivedCategory.homologyFunctor.{u} (ModuleCat.{u} E) (n - i)).map (frobenius D l hl E D₁ thetaD) y) = pairing D l hl E A D₁ n i B x y))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Coordinate declarations relocated verbatim to PointWeilPairingCoordinates, publicly reexported here; main and scheme theorem signatures unchanged. See change record point-weil-pairing-coordinates-c3.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ee7a71d1",
+  "group": "N5",
+  "result": "fix",
+  "note": "Re-delivery of 84cc. The H2 repairs and the real second reading are accepted. Item stmt_deps add only landed def nodes plus 3 new existing:true def nodes (point-fibre-tensor-canonical, point-tate-fibre-size-coordinates, point-coefficient-unit-coordinates). Fields and verbatim statements checked; owners of all 17 Canonical fields are cited. Every clause matches the node with the right orientation: realize/transportRep/frobeniusRep, unit equation, Weil equation, pairing conjugation and invariance, SupportModel scheme clause. unitLarge rewrite is the same composite. FIX: integralSectionsUnit needs section_isIso (lem-zl-constant-geometric-stalk-unit) via asIso, but the new node did not cite it. fixes/def-pod-point-coefficient-unit-coordinates.json adds the stmt_dep and the statement citation; citations = stmt_deps; no cycle. Advisory: report overstates removal of section_isIso; integralConstantCoefficientObject owner cited only transitively. No Lean changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9897c",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T162040-L-226754",
+  "kind": "interface",
+  "note": "independent cc review: item Sheaf.Paper.PointWeilPairingRealization (relocated coordinates diffed verbatim vs clone; main theorem statement unchanged; 3 new sorry statements read against old conjuncts and blueprint steps 2-6, PointFibreDerivedTensorCanonical normalizations)"
+ }
+}

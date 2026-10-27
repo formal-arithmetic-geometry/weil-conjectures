@@ -1,0 +1,108 @@
+{
+ "id": "def-sf-standard-bifunctor-hom-model",
+ "kind": "definition",
+ "title": "Standard-sign product projections on the native bifunctor Hom",
+ "statement": "Let $B$ be a preadditive category with countable products and $H:B^{\\mathrm{op}}\\to B\\to B$ additive in both variables. Define $\\operatorname{nativeHomComplex}(H)$ to be the simultaneous native product-Hom bifunctor: on $(K,I)$ its value is $\\operatorname{bifunctorHomObj}(H,K,I)$, and a pair $(f^{\\mathrm{op}},g)$ acts by native precomposition by $f$ followed by native postcomposition by $g$. Define $\\operatorname{standardHomModel}(H)$ as the StandardModel of [def-sf-ringed-two-injective-models] with that underlying complex bifunctor and projection $\\pi^{n}_{p,q}=(-1)^{np}\\pi^{n,\\mathrm{nat}}_{p,q}$ for $p+n=q$. Its product universal property, standard differential $d_I f-(-1)^n f d_K$, and ordinary pre/postcomposition equations are proved in the construction. Thus the identity on the underlying complex is the native-to-standard chain isomorphism with the prescribed signed components. The native complexes use the row-sign differential described in [lem-sf-bifunctor-homotopy-exact].",
+ "stmt_deps": [
+  "def-sf-ringed-two-injective-models",
+  "lem-sf-bifunctor-homotopy-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-hom-complexes, standard product-Hom differential; native row-sign differential and product projections in lean/WeilConjectures/Algebra/Homology/BifunctorHomComplex.lean. Agent component calculation: rescale the degree-n, source-p projection by (-1)^(np)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-hom-complexes, standard product-Hom differential; native row-sign differential and product projections in lean/WeilConjectures/Algebra/Homology/BifunctorHomComplex.lean. Agent component calculation: rescale the degree-n, source-p projection by (-1)^(np)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A product total internal Hom complex can be normalized from the row sign differential to the standard cochain Hom differential by multiplying the component in degree n source degree p by negative one to the n times p",
+   "results": "8 hits, including CochainComplex.HomComplex.δ_v and HomologicalComplex₂.D₁_totalShift₁XIso_hom; these concern ordinary cochains or total shifts, not the native bifunctor with specified product projections.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"negOnePow\"",
+   "results": "12 hits including Int.negOnePow_add, Int.negOnePow_two_mul, Int.negOnePow_mul_self; the arithmetic API used for sign conversion. No complex-level model.",
+   "date": "2026-10-27",
+   "verdict": "Arithmetic ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHom|KInjective|negOnePow",
+   "results": "25 Mathlib hits, mostly Int.negOnePow arithmetic. Local rg found the private rowIso in NativeWeilRowHomComparison, but that module imports the item and assumes its model, so it cannot construct this model.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate standard model construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Hom complex of an additive bifunctor has standard cohomological differential after rescaling the degree n source p product projection by the sign negative one to n times p",
+   "results": "8 hits on CochainComplex.HomComplex.δ, δ_hom, shifts, and ordinary cochains. None constructs the projection-normalized native bifunctor Hom model.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTwoInjectiveHom",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom comparison paragraph of cor-coef-verdier-weil-equivariance.proof.md; native specialization steps 6–8 of lem-sf-ringed-forget-two-injective-hom.",
+   "via": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.StandardBifunctorHomModel",
+  "file": "lean/Sheaf/Algebra/Homology/StandardBifunctorHomModel.lean",
+  "declaration": "CategoryTheory.RingedForgetTwoInjective.standardHomModel",
+  "statement": "def standardHomModel : StandardModel H",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27",
+  "declarations": [
+   "CategoryTheory.RingedForgetTwoInjective.nativeHomComplex",
+   "CategoryTheory.RingedForgetTwoInjective.standardHomModel"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T235832-L-1459339",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T235832-L-1459339",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

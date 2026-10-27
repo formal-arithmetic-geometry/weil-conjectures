@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-finite-quotient-module-balancing",
+ "kind": "statement",
+ "title": "Tensor cancellation for one finite quotient module",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,F$ of $\\mathbf Q_\\ell$ and a $\\mathbf Q_\\ell$-algebra map $i:E\\to F$. Put $A=\\mathcal O_E$, $B=\\mathcal O_F$ with their chosen uniformizers $t,v$ [def-weil-l-adic-coefficient-extension]. Fix a scheme $W$ and $e\\geq1$ with $(t)B=(v^e)$, using the ramification datum and finite coefficient maps of [def-pur-finite-compact-support-scalar-data]. Let $n\\geq0$, $A_n=A/(t^{n+1})$, $B_n=B/(v^{e(n+1)})$, and let $M$ be a module sheaf over the constant sheaf of $A_n$ on the small pro-etale site of $W$ [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. Restrict $M$ to the constant sheaf of $A$ using its completed quotient projection and the constant-to-completion map [def-weil-completed-integral-coefficients]. There exists a $B$-linear isomorphism $B\\otimes_A\\operatorname{Res}_A M\\cong\\operatorname{Res}_B(B_n\\otimes_{A_n}M)$, with both ordinary tensors the specified sheafified scalar functors [def-weil-pbc-bounded-constructible-tower, def-pur-constant-scalar-tower-adjunction]. On each site object it sends the sheafified pure tensor $b\\otimes x$ to $\\overline b\\otimes x$, where $\\overline b$ is the image under the constant-to-completion map followed by the specified positive finite quotient projection. Only existence for this single $M,n$ is asserted; no uniqueness or naturality of these witnesses is assumed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pur-constant-scalar-tower-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, lemma-adjointness-tensor-restrict; the tensor/quotient construction in Step 7 and finiteOrdinaryBalancing_existsUnique docstring of lem-pur-compact-support-strict-scalar-mate."
+ },
+ "proof": [
+  {
+   "text": "Apply the ring-only ramified quotient section pushout to the four actual coefficient maps, at every pro-etale site object. This contains only the ramification and constant finite quotient calculation.",
+   "uses": [
+    "lem-pur-ramified-quotient-section-pushout"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a commutative-ring pushout A→B, A→C, B→D, C→D, use CommRingCat.isPushout_iff_isPushout and Algebra.IsPushout.cancelBaseChange to obtain the B-linear isomorphism B tensor_A M ≅ Res_B(D tensor_C M). The symm_tmul lemma gives b tensor m ↦ p(b) tensor m. Tensor induction and naturality of p show these objectwise isomorphisms commute with restrictions.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify the presheaf isomorphism. Use the restriction/sheafification isomorphism, whose underlying additive-sheaf map is identity, to reach restriction of the target sheafified tensor. Transport through the object equations of pbcExtend. Naturality of the sheafification unit proves the displayed pure tensor formula after cancelling the object transports. Restriction along a composite agrees with the two displayed restriction functors.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "def-pur-constant-scalar-tower-adjunction",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ramified-quotient-section-pushout",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "def-pur-constant-scalar-tower-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Q3: Step 1 isolated as the ring-only section pushout; Steps 2 and 3 proved using Mathlib pushout base-change cancellation and the existing restriction/sheafification comparison."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars B tensor over A of a module over A modulo I is B modulo I B tensor over A modulo I of the module",
+   "results": "8 hits including TensorProduct.tensorQuotMapSMulEquivTensorQuot and TensorProduct.quotTensorEquivQuotSMul. These are individual-module algebra equivalences, without the specified sheafified ordinary scalar functors and completed quotient maps.",
+   "date": "2026-10-26",
+   "verdict": "Component algebra found; no exact normalized sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.tensorQuotMapSMulEquivTensorQuot",
+   "results": "1 hit: Mathlib.LinearAlgebra.TensorProduct.Quotient, equivalence (S tensor_R M)/(I S) tensor submodule with S tensor_R (M/IM). No sheafified or pbc functor normalization.",
+   "date": "2026-10-26",
+   "verdict": "Useful algebraic ingredient, not a one-line specialization to the given sheaf functors."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteQuotientModuleBalancing|finiteOrdinaryBalancing|ordinaryScalarBalancingLevel_exists",
+   "results": "msearch Mathlib grep: 0 hits. Local rg additionally found the consuming finiteOrdinaryBalancing_existsUnique and OrdinaryScalarBalancingLevel; the latter takes a completed module and reduction-system adjunction units, rather than an arbitrary finite quotient module. Blueprint quotient tensor search found only unrelated supported cup-product material.",
+   "date": "2026-10-26",
+   "verdict": "No existing statement for this single finite quotient module."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarMate",
+  "date": "2026-10-26",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Finite scalar compact-support comparison, quotient tensor balancing, as expanded in Step 7 of lem-pur-compact-support-strict-scalar-mate.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientModuleBalancing",
+  "file": "lean/Sheaf/Paper/FiniteQuotientModuleBalancing.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.finiteQuotientModuleBalancing_exists",
+  "statement": "theorem finiteQuotientModuleBalancing_exists (W : Scheme.{u}) (e : ℕ)\n    (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ)\n    (M : pbcModules W ((PurCompactSupport.finite l E (n + 1)\n      (Nat.le_add_left 1 n)).ring W)) :\n    ∃ β : (pbcExtend (constantMap l E F i W)).obj\n        ((pbcRestrict (PurCompactSupport.projection l E (n + 1)\n          (Nat.le_add_left 1 n) W) ⋙\n          SheafOfModules.restrictScalars.{u + 1}\n            (integralConstantToCompletionOfUniverses l E W)).obj M) ≅\n      (pbcRestrict (PurCompactSupport.projection l F (e * (n + 1))\n          (Nat.mul_pos hepos (Nat.le_add_left 1 n)) W) ⋙\n        SheafOfModules.restrictScalars.{u + 1}\n            (integralConstantToCompletionOfUniverses l F W)).obj\n        ((pbcExtend ((PurCompactSupport.finiteChange l E F i e he hepos (n + 1)\n          (Nat.le_add_left 1 n)).map W)).obj M),\n      ∀ (U : W.ProEtᵒᵖ) (b : ((constants l F).ring W).obj.obj U) (x : M.val.obj U),\n        β.hom.val.app U\n            (pbcTensorSection (constantMap l E F i W)\n              ((pbcRestrict (PurCompactSupport.projection l E (n + 1)\n                (Nat.le_add_left 1 n) W) ⋙\n                SheafOfModules.restrictScalars.{u + 1}\n                  (integralConstantToCompletionOfUniverses l E W)).obj M) U b x) =\n          pbcTensorSection\n            ((PurCompactSupport.finiteChange l E F i e he hepos (n + 1)\n              (Nat.le_add_left 1 n)).map W) M U\n            (((PurCompactSupport.projection l F (e * (n + 1))\n              (Nat.mul_pos hepos (Nat.le_add_left 1 n)) W).hom.app U)\n              (((integralConstantToCompletionOfUniverses l F W).hom.app U) b)) x",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4af8b",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T023838-L-607497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T070609-L-3624728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

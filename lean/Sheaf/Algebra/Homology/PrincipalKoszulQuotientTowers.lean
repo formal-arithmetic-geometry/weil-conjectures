@@ -72,6 +72,16 @@ attribute [local instance]
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
 
+/-- Cache the existing sheaf-composition property on an essentially small site.
+Source: Mathlib, `CategoryTheory.Sites.Whiskering` (blueprint:
+def-pur-principal-koszul-quotient-towers).
+Proof: apply the existing instance. Naming this proof avoids repeated search when
+constructing the actual single-complex maps and their cones. -/
+theorem principalKoszulHasSheafCompose :
+    J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := by infer_instance
+
+attribute [local instance 20000] principalKoszulHasSheafCompose
+
 /-- Multiplication by a global section on the unit module sheaf.
 
 Source: Stacks Project, algebraization.tex Tag 0A0E (blueprint:
@@ -82,6 +92,17 @@ noncomputable def globalSectionMultiplication
     SheafOfModules.unit 𝓞 ⟶ SheafOfModules.unit 𝓞 :=
   (SheafOfModules.unit 𝓞).unitHomEquiv.symm t
 
+/-- The specified power multiplication map on the degree-zero ring complex.
+
+Source: Stacks Project, algebraization.tex Tag 0A0E (blueprint:
+def-pur-principal-koszul-quotient-towers).
+This named map shares the actual single-functor construction between the principal
+cone and its component API, without unfolding the single-functor coherence record. -/
+noncomputable def principalKoszulScalarComplex
+    (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :=
+  (CochainComplex.singleFunctor (𝒜) 0).map
+    (endoPow (globalSectionMultiplication R t) (m + 1))
+
 /-- The two-term principal Koszul complex in degrees `-1,0`, as a mapping cone.
 
 Source: Stacks Project, algebraization.tex Tag 0A0E (blueprint:
@@ -90,9 +111,7 @@ def-pur-principal-koszul-quotient-towers).
 noncomputable def principalKoszul
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     CochainComplex (𝒜) ℤ :=
-  CochainComplex.mappingCone
-    ((CochainComplex.singleFunctor (𝒜) 0).map
-      (endoPow (globalSectionMultiplication R t) (m + 1)))
+  CochainComplex.mappingCone (principalKoszulScalarComplex R t m)
 
 /-- The quotient sheaf `O/t^(m+1)O` as a categorical cokernel.
 
@@ -420,7 +439,7 @@ theorem koszulRepresentativeAugmentation_naturality (P : CochainComplex 𝒜 ℤ
   dsimp only [koszulRepresentativeAugmentation, koszulTensorTower, Functor.comp_map,
     principalKoszulTower]
   rw [Functor.ofOpSequence_map_homOfLE_succ, Category.assoc, ← Functor.map_comp]
-  dsimp only [principalKoszulTransition]
+  dsimp only [principalKoszulTransition, principalKoszulScalarComplex]
   simp [CochainComplex.mappingCone.map]
 
 /-- The canonical strict augmentation from the constant representative tower.

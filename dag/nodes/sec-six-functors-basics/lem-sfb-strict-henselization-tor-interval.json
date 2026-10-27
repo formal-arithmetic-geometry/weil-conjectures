@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-strict-henselization-tor-interval",
+ "kind": "statement",
+ "title": "Tor intervals over a local ring and its strict henselization",
+ "statement": "Let $R$ be a local commutative ring with residue field $k$, let $k^{\\mathrm s}$ be a separable closure of $k$ [def-pd-separable-closure], and let $R^{\\mathrm{sh}}$ be the strict henselization of $R$ relative to $k^{\\mathrm s}$ [def-sc-ring-strict-henselization]. Use unbounded derived categories of modules [def-weil-abstract-derived-category] and K-flat derived tensor [def-pc-module-kflat-complex]. For any $L\\in D(R^{\\mathrm{sh}})$ and integers $a\\le b$, the following are equivalent:\n(1) $H^i(L\\otimes_R^{\\mathbf L}N)=0$ for every degree-zero $R$-module $N$ and every $i\\notin[a,b]$, where $L$ is restricted along $R\\to R^{\\mathrm{sh}}$;\n(2) $H^i(L\\otimes_{R^{\\mathrm{sh}}}^{\\mathbf L}P)=0$ for every degree-zero $R^{\\mathrm{sh}}$-module $P$ and every $i\\notin[a,b]$.\nThe complex $L$ need not descend to $D(R)$; no Noetherian, finite-generation or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0DK0, lemma-tor-amplitude-up-down-henselization, equivalence (1) with (3); apply its scheme formulation to Spec(R) at the closed point."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pd-separable-closure",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Write $B=R^{\\mathrm{sh}}$. First assume (2). By [lem-pc-module-tor-amplitude-flat-model] over $B$, choose a flat $B$-module complex $E$ supported in $[a,b]$ and an isomorphism $E\\cong L$ in $D(B)$. By [lem-sfb-strict-henselization-module-flatness], every $E^i$ is also flat over $R$. Restriction of scalars leaves the underlying groups and differentials unchanged, hence leaves $\\ker d^i/\\operatorname{im}d^{i-1}$ unchanged and preserves quasi-isomorphisms. It therefore takes this derived isomorphism to an isomorphism in $D(R)$. Applying [lem-pc-module-tor-amplitude-flat-model] over $R$ to this same complex gives (1).",
+   "uses": [
+    "lem-pc-module-tor-amplitude-flat-model",
+    "lem-sfb-strict-henselization-module-flatness",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0DK0, lemma-tor-amplitude-up-down-henselization, (3) implies (1); flat-model version using Tags 0654 and 05VL."
+   }
+  },
+  {
+   "text": "Now assume (1), and represent $L$ by a complex $K$ of $B$-modules. Since $R$ in degree zero is K-flat (tensoring with it is the identity), $K\\otimes_R^{\\mathbf L}R\\cong K$. Taking $N=R$ in (1) gives $H^i(K)=0$ outside $[a,b]$; this is also the $B$-module cohomology, since scalar restriction changes neither kernels nor images. Put $T^i=K^i$ for $i<b$, $T^b=\\ker(d_K^b)$, and $T^i=0$ for $i>b$, with the induced differentials. The inclusion $T\\to K$ induces the identity on cohomology in degrees $i\\le b$; in higher degrees both sides have zero cohomology. Thus $T\\to K$ is a quasi-isomorphism and $T$ is strictly zero above $b$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0DK0, proof of (1) implies (3), obtaining the cohomological upper bound and truncating a representative."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-subcategory-left-resolution] in the abelian category of $B$-modules to $T$, with upper bound $b$ and the class of all free $B$-modules. The class contains zero. Every $B$-module $M$ is a quotient of the free module $\\bigoplus_{x\\in M}B$, by sending its basis vector $e_x$ to $x$; this map is surjective because $x$ is the image of $e_x$. The cited lemma gives a quasi-isomorphism $P\\to T$, all $P^i$ free, and $P^i=0$ for $i>b$. Consequently $P$ represents $L$ in $D(B)$ and its restriction in $D(R)$.",
+   "uses": [
+    "lem-sfb-subcategory-left-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0DK0, proof of (1) implies (3), choice of free resolution; Derived Categories Tag 05T7, lemma-subcategory-left-resolution, part (1)."
+   }
+  },
+  {
+   "text": "Each free $B$-module $B^{(I)}$ is flat: $B^{(I)}\\otimes_B M\\cong M^{(I)}$ by $e_i\\otimes m\\mapsto e_i m$, and a direct sum preserves exactness coordinate by coordinate, since every element has finite support. By [lem-sfb-strict-henselization-module-flatness], every $P^i$ is therefore flat over $R$. The upper bound on $P$ lets [lem-pc-module-bounded-flat-kflat] make $P$ K-flat over $R$, so $P\\otimes_R N$ computes $L\\otimes_R^{\\mathbf L}N$ for each $R$-module $N$. By (1), its cohomology in degree $a-1$ vanishes for every $N$. Apply [lem-pc-module-flat-opcycles-tor-criterion] over $R$ to obtain flatness over $R$ of $Q=P^a/\\operatorname{im}(d_P^{a-1})$. This is a $B$-module, because the differential is $B$-linear, so [lem-sfb-strict-henselization-module-flatness] makes $Q$ flat over $B$.",
+   "uses": [
+    "lem-sfb-strict-henselization-module-flatness",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex",
+    "lem-pc-module-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0DK0, proof of (1) implies (3), bottom cokernel; Tags 064K, 0653 and 05VL."
+   }
+  },
+  {
+   "text": "Define $E^i=0$ for $i<a$, $E^a=Q$, and $E^i=P^i$ for $i>a$, with $d_E^a$ induced by $d_P^a$. This is well-defined since $d_P^a d_P^{a-1}=0$. The quotient map $P\\to E$ induces the identity on $H^i$ for $i>a$ and the identification $\\ker(d_P^a)/\\operatorname{im}(d_P^{a-1})=\\ker(Q\\to P^{a+1})$ at $i=a$. For $i<a$, $H^i(P)=0$ by step 2 and $H^i(E)=0$ by construction. Thus $P\\to E$ is a quasi-isomorphism of $B$-complexes. The complex $E$ is supported in $[a,b]$, and its terms are flat over $B$ by step 4. The flat-model criterion [lem-pc-module-tor-amplitude-flat-model] over $B$ now gives (2), completing the equivalence.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-module-tor-amplitude-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0DK0, proof of (1) implies (3), lower good truncation; Tag 0654, lemma-tor-amplitude."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-sfb-strict-henselization-module-flatness",
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "lem-sfb-subcategory-left-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-module-flat-opcycles-tor-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0DK0, lemma-tor-amplitude-up-down-henselization, equivalence (1) with (3), and its cited Tags 05VL, 05T7, 064K, 0653 and 0654."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a local ring and its strict henselization a complex over the strict henselization has the same Tor amplitude over both rings",
+   "results": "8 hits; top=['Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange', 'HenselianLocalRing', 'HenselianLocalRing.TFAE', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField', 'Algebra.FormallySmooth.iff_injective_lTensor_residueField', 'RingHom.FormallyUnramified.holdsForLocalizationAway', 'RingHom.FormallyUnramified.propertyIsLocal', 'IsAdicComplete.henselianRing']; digest=23d93b2aabd2f4da; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(henseli[sz]|Henseli[sz]).*(Tor|amplitude)|(Tor|amplitude).*(henseli[sz]|Henseli[sz])",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization restriction of scalars preserves Tor amplitude",
+   "results": "8 hits; top=['RestrictScalars', 'Submodule.restrictScalars', \"ModuleCat.RestrictScalars.obj'\", 'Algebra.FormallyUnramified.of_restrictScalars', 'AlgHom.restrictScalars', 'RestrictScalars.moduleOrig', 'Submodule.restrictScalars_le', 'Submodule.restrictScalarsEmbedding']; digest=da99610809fa21f1; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\", \"Tor\"",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars from a strict henselization preserves and reflects a prescribed finite Tor interval for any complex",
+   "results": "8 hits; top=['Algebra.ZariskisMainProperty.restrictScalars', 'Algebra.QuasiFinite.of_restrictScalars', 'Algebra.IsUnramifiedAt.of_restrictScalars', 'Algebra.FormallyUnramified.of_restrictScalars', 'Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars', 'Algebra.FormallyEtale.of_restrictScalars', 'Algebra.FormallySmooth.of_restrictScalars', 'Algebra.FormallyUnramified.flat_of_restrictScalars']; digest=bf7f8da5336e0f78; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(henseli[sz]|Henseli[sz]).*(Tor|amplitude)|(Tor|amplitude).*(henseli[sz]|Henseli[sz])",
+   "results": {
+    "t": "2026-10-23T15:36:59Z",
+    "tool": "grep",
+    "query": "(henseli[sz]|Henseli[sz]).*(Tor|amplitude)|(Tor|amplitude).*(henseli[sz]|Henseli[sz])",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary scalar restriction, smoothness or etale algebras; none states equality of derived Tor intervals for a strict-henselization module complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along strict henselization preserves and reflects Tor amplitude for unbounded derived complexes",
+   "results": {
+    "t": "2026-10-23T15:36:59Z",
+    "tool": "leansearch",
+    "query": "Restriction of scalars along strict henselization preserves and reflects Tor amplitude for unbounded derived complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.RestrictScalars.obj'",
+     "RestrictScalars",
+     "AlgHom.restrictScalars",
+     "AlgHom.coe_restrictScalars'",
+     "Submodule.restrictScalars",
+     "RestrictScalars.moduleOrig",
+     "RestrictScalars.isScalarTower",
+     "Algebra.QuasiFinite.of_restrictScalars"
+    ],
+    "digest": "2acadbb8ca5234d3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary scalar restriction, smoothness or etale algebras; none states equality of derived Tor intervals for a strict-henselization module complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"Flat\"",
+   "results": {
+    "t": "2026-10-23T15:36:59Z",
+    "tool": "loogle",
+    "query": "\"HenselianLocalRing\", \"Flat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary scalar restriction, smoothness or etale algebras; none states equality of derived Tor intervals for a strict-henselization module complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex over the strict henselization of a local ring has the same Tor amplitude interval after restriction of scalars",
+   "results": {
+    "t": "2026-10-23T15:37:00Z",
+    "tool": "leanfinder",
+    "query": "A complex over the strict henselization of a local ring has the same Tor amplitude interval after restriction of scalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+     "Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+     "Algebra.IsUnramifiedAt.of_restrictScalars",
+     "Algebra.FormallyEtale.of_restrictScalars",
+     "Algebra.FormallyUnramified.of_restrictScalars",
+     "Algebra.ZariskisMainProperty.restrictScalars",
+     "Algebra.FormallySmooth.of_restrictScalars",
+     "Algebra.FormallyUnramified.flat_of_restrictScalars"
+    ],
+    "digest": "ced6686532a6c5dc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary scalar restriction, smoothness or etale algebras; none states equality of derived Tor intervals for a strict-henselization module complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prescribed finite Tor dimension bounds for a derived module over an ind etale local ring extension compared with the base ring",
+   "results": {
+    "t": "2026-10-23T15:37:15Z",
+    "tool": "leanfinder",
+    "query": "Prescribed finite Tor dimension bounds for a derived module over an ind etale local ring extension compared with the base ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyEtale.localization_base",
+     "Algebra.FormallyEtale.localization_map",
+     "RingHom.Etale.ofLocalizationSpanTarget",
+     "RingHom.Etale.ofLocalizationSpan",
+     "Algebra.Etale",
+     "Algebra.IsEtaleAt",
+     "Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+     "Algebra.Etale.formallyEtale"
+    ],
+    "digest": "3a7f33977f7fcc30"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary scalar restriction, smoothness or etale algebras; none states equality of derived Tor intervals for a strict-henselization module complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-relative-tor-comparison",
+  "date": "2026-10-23",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Diagonal pair associated to proper flat duality over a qcqs base. Supporting input: Relative Tor amplitude across the Zariski and small etale sites. Supporting input: Tag 0DK0, lemma-tor-amplitude-up-down-henselization, equivalence (1) with (3); apply its scheme formulation to Spec(R) at the closed point.",
+   "via": [
+    "lem-sfb-etale-relative-tor-comparison",
+    "lem-sfb-proper-adjoint-diagonal-pair",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-strict-henselization-tor-interval",
+  "worker": "stage1",
+  "group": "Q04",
+  "summary": "Kept the statement verbatim and followed Stacks 0DK0 using only existing DAG nodes. Wrote the upper and lower truncation calculations, the free-cover hypothesis of 05T7, the K-flat tensor computation, and the module-flatness comparison explicitly. No new nodes or Mathlib leaves.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), supporting the existing alteration/duality chain recorded in blueprint.from.place: relative Tor comparison across the Zariski and etale sites requires the strict-henselization comparison of 0DK0. This created item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); its existing from record is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-tor-amplitude-flat-model",
+    "why": "Generic ring-module criterion for an interval of Tor amplitude via a bounded flat model, needed in both directions; no such criterion in the item unit."
+   },
+   {
+    "node": "lem-sfb-subcategory-left-resolution",
+    "why": "Generic bounded-above class resolution in an abelian category; specializes to free modules without finite generation, as in Stacks 0DK0."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-above flat module complex is K-flat, needed to compute the tensor tests over R."
+   },
+   {
+    "node": "lem-pc-module-flat-opcycles-tor-criterion",
+    "why": "Generic module flat-opcycle criterion, needed for the actual bottom cokernel; no such criterion in the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-sfb-subcategory-left-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-module-flat-opcycles-tor-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-ef7b8545c",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-ef7b8545c (reviewer sub-agent of L); spot-checked: I read Stacks flat.tex Tag 0DK0 (statement and proof). The item is (1)<=>(3) at the closed point of Spec R, and its statement, stmt_deps and blueprint are unchanged from base. Live and side-live still have the item unsplit and there is no repair note. Step 1, (2)=>(1): the flat model over B (0654) plus 05VL termwise gives R-flat terms; restricting the quasi-isomorphisms and applying 0654 over R gives (1). This is a valid route in place of the source's 0DJN push. Step 2: N=R gives cohomology vanishing outside [a,b]; the truncation with T^b=ker d^b is a quasi-isomorphism (checked at b, below b and above b). It is needed because the DAG node states only 05T7(1). Step 3: 05T7(1) applied with the free modules (zero included, surjection from the direct sum over M). Step 4: free implies flat, 05VL, 064K K-flatness (bounded above and flat both hold), and 0653 for the cokernel P^a/im d^{a-1}, which I re-derived without boundedness; then 05VL makes Q flat over B. Step 5: the tau_{>=a} cohomology is checked at a, a+1 and below a (vanishing below a from step 2); 0654 over B gives (2). Edge cases checked: a=b, L=0, R already strictly henselian, non-Noetherian R, infinite rank. The cited closure has no cycle. Batch 5: the newly cited lem-sfb-strict-henselization-module-flatness reaches lem-trf-etale-local-ring-flatness, which is Stacks 05BA, a generic local-ring flatness fact for étale maps. It is not a step of the proof of the trace formula or of Poincare duality, so this is accepted. The four tool uses (0654, 05T7(1), 064K, 0653) are generic module lemmas and accepted. There are no new nodes and no duplicate in the DAG. Maintainer note: blueprint.from.node is null, inherited from the base node."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationTorInterval",
+  "declaration": "DerivedCategory.torAmplitudeIn_iff_strictHenselization",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationTorInterval.lean",
+  "statement": "theorem torAmplitudeIn_iff_strictHenselization (R K B : Type u) [CommRing R] [IsLocalRing R] [Field K] [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K] [CommRing B] [Algebra R B] (_presentation : Algebra.StrictHenselizationPresentationIn.{u, u} R K B) [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} B)] (L : DerivedCategory (ModuleCat.{u} B)) (a b : ℤ) (_hab : a ≤ b) : torAmplitudeIn (ModuleCat.{u} R) a b ((ModuleCat.restrictScalars.{u} (algebraMap R B)).mapDerivedCategory.obj L) ↔ torAmplitudeIn (ModuleCat.{u} B) a b L",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3685bdb7e",
+  "group": "NN",
+  "result": "pass",
+  "note": "Stacks 0DK0 (1)<=>(3) at the closed point of Spec R. Each clause matches the node: R local; k = canonical residue field; K is IsSepClosure over k, with R acting through k; B via the recorded StrictHenselizationPresentationIn.{u,u}; L arbitrary in D(ModuleCat B); a ≤ b; (1) torAmplitudeIn over R of the restriction of L along algebraMap R B; (2) torAmplitudeIn over B of L; iff in the node's order. torAmplitudeIn is the K-flat derived tensor with every degree-zero module. No extra assumptions; common universe u as in the def node's convention. Node changes only by the lean record; statement field verbatim; proof is sorry; docstrings carry source, blueprint tag and 5 proof steps; all imports exist; no duplicate and no parallel rebind. Nothing compiled (no file changed). No findings."
+ }
+}

@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-trf-projective-over-local-free], choose a basis $(e_b)_{b\\in B}$ of $M$, in the sense of [def-weil-pbc-free-module]. There is no finiteness assumption on $B$.",
+   "text": "By [lem-trf-projective-over-local-free], choose a basis $(e_b)_{b\\in B}$ of $M$, with no finiteness assumption on $B$ [def-weil-pbc-free-module].",
    "uses": [
     "lem-trf-projective-over-local-free",
     "def-weil-pbc-free-module"
@@ -22,23 +22,11 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FQ, first proof sentence, invoking Algebra Tag 0593"
+    "place": "Tag 05FQ, lemma-universally-injective-local, first proof sentence"
    }
   },
   {
-   "text": "For finite $E\\subset B$, let $P_E$ be the span of the $e_b$ with $b\\in E$, let $a_E:P_E\\to M$ be inclusion, and let $p_E:M\\to P_E$ discard all other basis coordinates [def-weil-pbc-free-module]. Since $p_Ea_E=1$, the same identity holds on the quotients modulo $\\mathfrak m$, so $\\overline{u a_E}$ is injective. It suffices to prove universal injectivity of every $v=u a_E$. Indeed any $z\\in L\\otimes_R M$ is a finite sum $\\sum_t l_t\\otimes m_t$ by [def-weil-pbc-module-tensor-product]. The union $E$ of the finite basis supports of its $m_t$ is finite, and $z=(1\\otimes a_E)(z_E)$ for the same sum formed in $L\\otimes_R P_E$. If $(1\\otimes u)(z)=0$, universal injectivity of $v$ gives $z_E=0$, hence $z=0$. Fix such an $E$ and write $P=P_E$, with its finite basis $e_1,\\ldots,e_r$.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FQ, reduction to finitely generated direct summands, with the finite-support argument explicit"
-   }
-  },
-  {
-   "text": "Flatness of $N$ gives injectivity after tensoring the first map of a short exact sequence by [def-weil-pbc-flat-ring-map]. The middle exactness and terminal surjectivity follow from [lem-weil-pbc-tensor-right-exact]. Thus $-\\otimes_R N$ preserves short exact sequences, exactly the hypothesis of [lem-kun-lazard-flat-module]. Choose its small nonempty directed partially ordered set $I$, finite free modules $F_i$, transition maps $t_{ij}:F_i\\to F_j$ for $i\\le j$, and colimit maps $q_i:F_i\\to N$. In particular $q_jt_{ij}=q_i$ and this cocone has colimit $N$.",
+   "text": "Flatness of $N$ supplies injectivity on tensoring an injection [def-weil-pbc-flat-ring-map]; [lem-weil-pbc-tensor-right-exact] supplies the remaining exactness. Thus tensoring with $N$ preserves short exact sequences. Apply [lem-kun-lazard-flat-module] to obtain a small nonempty directed poset $I$, finite free modules $F_i$, transitions $t_{ij}$, and a colimit cocone $q_i:F_i\\to N$.",
    "uses": [
     "def-weil-pbc-flat-ring-map",
     "lem-weil-pbc-tensor-right-exact",
@@ -47,74 +35,46 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FQ, Lazard presentation; Algebra Tag 058G (theorem-lazard)"
+    "place": "Tag 05FQ, lemma-universally-injective-local, Lazard presentation"
    }
   },
   {
-   "text": "By the representative clause of [lem-weil-pbc-filtered-colimit-modules-elementwise], each $v(e_s)$ is $q_{i_s}(y_s)$ for a stage $i_s$. Directedness gives a common upper bound $i$ for this finite list; for $r=0$, choose any $i$, using nonemptiness. Move the $y_s$ to $F_i$ and define $v_i:P\\to F_i$ on the basis by these moved vectors. This gives $q_iv_i=v$. For $j\\ge i$ put $v_j=t_{ij}v_i$, so $q_jv_j=v$. These identities also hold modulo $\\mathfrak m$. Since $\\bar v=\\bar q_j\\bar v_j$ is injective, $\\bar v_j$ is injective for every $j\\ge i$.",
+   "text": "For finite $E\\subset B$, let $P_E$ be its basis span, $a_E:P_E\\to M$ inclusion, and $p_E:M\\to P_E$ the coordinate projection [def-weil-pbc-free-module]. Since $p_Ea_E=1$, the same identity holds modulo $\\mathfrak m$; hence $\\bar a_E$ is injective. The composite $\\overline{ua_E}=\\bar u\\bar a_E$ is therefore injective. Apply [lem-trf-residue-injective-finite-free-stage-retractions] to $v=ua_E$ and the cocone of step 2: it gives $i_E$, $v_E$ with $q_{i_E}v_E=ua_E$, and a retraction of $t_{i_Ej}v_E$ for every $j\\ge i_E$.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FQ, factorization through one finite-free stage and persistence of residue injectivity"
-   }
-  },
-  {
-   "text": "Put $k=R/\\mathfrak m$. For every $R$-module $V$, the bilinear rule $\\bar a\\otimes x\\mapsto ax+\\mathfrak m V$ defines $k\\otimes_R V\\to V/\\mathfrak m V$, with inverse $x+\\mathfrak m V\\mapsto\\bar1\\otimes x$ [def-weil-pbc-module-tensor-product]. The first rule is independent of the lift $a$; the second kills $\\mathfrak m V$ because $\\bar1\\otimes bx=\\bar b\\otimes x=0$ for $b\\in\\mathfrak m$. The two composites are identities on the indicated generators. For a linear map $h:V\\to W$, both routes send $\\bar a\\otimes x$ to $ah(x)+\\mathfrak m W$, so these isomorphisms intertwine $1\\otimes h$ with $\\bar h$. In particular $k\\otimes_R v_j$ is injective for every $j\\ge i$.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FQ, interpretation of the reduction maps as residue-field base changes"
-   }
-  },
-  {
-   "text": "Fix $j\\ge i$ and use the finite bases of $P$ and $F_j$ to apply [lem-pc-finite-free-map-residue-localization-strong] at the maximal prime $\\mathfrak m$. Its residue field is $k$. It gives $a\\notin\\mathfrak m$ such that $(v_j)_a$ has a left inverse $s_j$. In a local ring the elements outside the maximal ideal are units. For any module $V$, localization at this unit has mutually inverse maps $V\\to V_a$, $x\\mapsto x/1$, and $V_a\\to V$, $x/a^n\\mapsto a^{-n}x$; the fraction relation of [def-weil-pbc-module-localization-away] verifies the second is well-defined. They intertwine $v_j$ and $(v_j)_a$ on $x/1$. Composing $s_j$ with these two maps therefore gives an $R$-linear $s:F_j\\to P$ with $s v_j=1$. For any $R$-module $L$, [def-weil-pbc-module-tensor-product] gives $(1\\otimes s)(1\\otimes v_j)=1$, so $1\\otimes v_j$ is injective. This conclusion holds for every $j\\ge i$; no compatibility between the chosen retractions is needed.",
-   "uses": [
-    "lem-pc-finite-free-map-residue-localization-strong",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-pbc-module-tensor-product"
+    "def-weil-pbc-free-module",
+    "lem-trf-residue-injective-finite-free-stage-retractions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FQ, finite-free split injections; the explicit finite-free form of Algebra Tag 00O0 (lemma-cokernel-flat)"
+    "place": "Tag 05FQ, lemma-universally-injective-local, finite basis restrictions and split lifts"
    }
   },
   {
-   "text": "Fix any $R$-module $L$ and $x\\in L\\otimes_R P$ such that $(1\\otimes v)(x)=0$. By [lem-weil-pbc-tensor-commutes-with-colimits], $L\\otimes_R N$ with the maps $1\\otimes q_h$ is the colimit of $L\\otimes_R F_h$; switching the two tensor factors is the bilinear isomorphism $l\\otimes y\\mapsto y\\otimes l$ [def-weil-pbc-module-tensor-product]. The element $y=(1\\otimes v_i)(x)$ in stage $i$ has zero image in this colimit. By the zero-detection clause of [lem-weil-pbc-filtered-colimit-modules-elementwise] there is $j\\ge i$ with $(1\\otimes t_{ij})(y)=0$. This is $(1\\otimes v_j)(x)$, so step 6 gives $x=0$. Thus $v:P\\to N$ is universally injective. This holds for every finite basis span $P_E$, so the argument of step 2 proves universal injectivity of $u:M\\to N$, for every $L$.",
+   "text": "The basis of step 1, the fixed directed colimit cocone of step 2, and the lifts and retractions for every finite $E$ from step 3 satisfy all hypotheses of [lem-trf-free-map-colimit-split-lifts-tensor-injective]. It yields injectivity of $1_L\\otimes u$ for every $R$-module $L$, which is precisely universal injectivity.",
    "uses": [
-    "lem-weil-pbc-tensor-commutes-with-colimits",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "def-weil-pbc-module-tensor-product"
+    "lem-trf-free-map-colimit-split-lifts-tensor-injective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FQ, final tensor-colimit argument; Algebra Tags 00DD and 00D7 with their canonical cocone maps"
+    "place": "Tag 05FQ, lemma-universally-injective-local, finite-support reduction and final tensor-colimit argument"
    }
   }
  ],
  "proof_deps": [
   "lem-trf-projective-over-local-free",
   "def-weil-pbc-free-module",
-  "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-flat-ring-map",
   "lem-weil-pbc-tensor-right-exact",
   "lem-kun-lazard-flat-module",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-pc-finite-free-map-residue-localization-strong",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-tensor-commutes-with-colimits"
+  "lem-trf-residue-injective-finite-free-stage-retractions",
+  "lem-trf-free-map-colimit-split-lifts-tensor-injective"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 05FQ, lemma-universally-injective-local, complete proof; expands finite-support reduction, finite-stage factorization, residue comparison, and the final colimit zero-detection argument. The finite-free splitting sentence is supplied by the existing explicit-inverse form of Algebra Tag 00O0."
+  "place": "Tag 05FQ, lemma-universally-injective-local, assembled from Kaplansky freeness, Lazard presentation, eventually split stage lifts and finite-support tensor-colimit injectivity. The source final displayed stage is a typo for N."
  },
  "mathlib_searches": [
   {
@@ -213,19 +173,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-local-universal-injective-residue",
   "worker": "stage1",
-  "summary": "Expanded the exact proof of Stacks Tag 05FQ, retaining arbitrary-rank projective source and arbitrary flat target. Added only the statement-only arbitrary-rank Kaplansky theorem (Tag 0593); reused Lazard, module colimit representatives and zero detection, tensor-colimit preservation, tensor right exactness, and the existing finite-free residue-localization statement with explicit left inverses. The source final displayed stage N_i' is a typo: the conclusion concerns N, and the zero-detection calculation above supplies the precise argument. No substantive statement change: only an explicit reference to the tensor-product definition was added.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'Hence by Lemmas 05FQ and 05FT the map S^{⊕r}→N_p is R-universally injective' (Tag 05FQ). The seven steps realize precisely the supporting proof of Tag 05FQ in that flattening branch, without replacing any step of the contracting-local-term unit.",
+  "summary": "Reconciled the returned delivery with the current live DAG on 2026-10-23, retaining its unchanged statement and all non-split metadata. The released keep_plan repair order is realized by two independent statement-only tasks: finite-stage lifts with eventual local retractions, and tensor injectivity from split lifts on finite basis spans. Four short assembly steps retain the Kaplansky and Lazard reductions and the residue direct-summand argument. Every argument of the current seven-step predecessor remains verbatim in report.md with its assignment. Re-read all cited current statements, checked all eight literal citation quotes and sixteen retained actual search entries, and confirmed that no current citation requires changing its use. Initial current-base dry run passed at 19bf2a9abb0; final checks follow this reconciliation.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'Hence by Lemmas 05FQ and 05FT the map S^{⊕r}→N_p is R-universally injective' (Tag 05FQ). The four assembly steps and the two new statement-only nodes realize precisely the supporting proof of Tag 05FQ in that flattening branch, without replacing any step of the contracting-local-term unit.",
   "tool_uses": [
    {
     "node": "lem-kun-lazard-flat-module",
-    "why": "Generic commutative algebra presentation theorem, exactly the Lazard input explicitly invoked in Tag 05FQ; no theorem in this trace-formula unit supplies it."
-   },
-   {
-    "node": "lem-pc-finite-free-map-residue-localization-strong",
-    "why": "Generic finite-free matrix rank theorem, specialized at the local maximal ideal to supply exactly the split injections required by Tag 05FQ; no trace-formula unit node gives this matrix result."
+    "why": "Generic directed finite-free presentation of a flat module, exactly the Lazard input in Tag 05FQ; the trace-formula unit has no replacement for this commutative algebra tool."
    }
   ]
  },
@@ -240,12 +196,12 @@
   "lem-pc-finite-free-map-residue-localization-strong"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q49-fff49070c",
-  "group": "Q49",
+  "reviewer": "NT-cc-Q21-e858c94b6",
+  "group": "Q21",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-fff49070c (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, cited DAG statements, and exact Stacks sources. All seven proof steps are mathematically valid with hypotheses checked; finite-stage reduction, residue comparison, localization retraction, and colimit zero detection handle zero and infinite-rank cases. The new arbitrary-rank local-projective freeness node is self-contained, correctly sourced, searched, unsplit, and nonduplicate. No route-pivot or SGA violation, circularity, restatement, or target weakening found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-e858c94b6 (reviewer sub-agent of L); spot-checked: This is the 4th delivery of the re-split of Stacks flat.tex Tag 05FQ, lemma-universally-injective-local; the earlier heads 0c5b983e, 228cfac9 and 32e8bb38 were all PASS and came back as promotion returns. Against the 32e8bb38 snapshot, both new nodes are byte-identical and the item differs only in split_report.date and split_report.summary. The statement, stmt_deps, lean record and the four proof steps are unchanged. clones/live and clones/side-live still hold the old 7-step proof and neither new id, so no other group has superseded this delivery. I read the 05FQ statement and full proof (flat.tex lines 1946-1975); the final N_{i'} is a typo for the colimit N, and no SGA source is used. Item steps: (1) lem-trf-projective-over-local-free gives a basis of arbitrary rank. (2) Flatness plus tensor right-exactness gives the Lazard hypothesis; lem-kun-lazard-flat-module gives a small nonempty directed finite-free cocone, and its colimit isomorphism makes (q_i) a colimit cocone. Lazard is the accepted cross-unit tool_use. (3) p_E a_E = 1 makes the residue map of u a_E injective, and the stage-retraction node then applies with every hypothesis met. (4) The tensor node's hypotheses match exactly and its conclusion covers every L. The parent (1371 characters) is a short assembly. Old step 2's finite-support part and old steps 4-7 each moved into a new node, nothing was dropped, and the two nodes are of comparable size. Stage-retraction node: true by stagewise representatives, the reduction identity v̄ = q̄_j v̄_j, and local finite-free splitting; P = 0 and non-injective transitions are fine. Tensor node: true by finite support, the tensor-colimit comparison and zero detection at some j ≥ i_E followed by 1⊗s_{E,j}; B empty and L = 0 are fine. Neither node restates a parent clause. rg -L duplicate search found none (checked selected-basis-of-localized-split, tensor-kernel-factorization, local-ui-flat-cokernel, generic-basis universal injectivity, finite-free-map-residue-localization-strong). No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -265,5 +221,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

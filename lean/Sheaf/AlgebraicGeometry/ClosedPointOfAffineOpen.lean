@@ -37,6 +37,8 @@ theorem closedPoint_of_affineOpen {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f]
     (U : X.Opens) (_hU : IsAffineOpen U) (x : U) (hx : x ∈ closedPoints U) :
     (x : X) ∈ closedPoints X := by
-  sorry
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  change x ∈ (Subtype.val : U → X) ⁻¹' closedPoints X
+  rwa [U.isOpenEmbedding'.preimage_closedPoints]
 
 end AlgebraicGeometry

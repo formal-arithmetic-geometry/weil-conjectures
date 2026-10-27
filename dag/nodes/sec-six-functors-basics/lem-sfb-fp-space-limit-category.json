@@ -1,0 +1,391 @@
+{
+ "id": "lem-sfb-fp-space-limit-category",
+ "kind": "statement",
+ "title": "Descent of the category of finitely presented algebraic spaces over affine limits",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] and algebraic spaces [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. A morphism of algebraic spaces is finitely presented if it is quasi-compact, quasi-separated (its diagonal is quasi-compact), and locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. Let $I$ be a small nonempty directed set, let $(T_i)_{i\\in I}$ be an inverse system of affine schemes with affine transition maps, and let $T=\\varprojlim_i T_i$. For an affine scheme $U$ let $\\mathsf{FP}(U)$ have finitely presented algebraic spaces over $U$ as objects and all $U$-morphisms as arrows. Base change defines the transition functors. The canonical functor $2\\!\\operatorname{colim}_{i\\in I}\\mathsf{FP}(T_i)\\to\\mathsf{FP}(T)$ is an equivalence. Explicitly, every finitely presented algebraic space over $T$ is isomorphic to $Y_i\\times_{T_i}T$ for some $Y_i\\in\\mathsf{FP}(T_i)$; for $Y_i,Z_i\\in\\mathsf{FP}(T_i)$, every $T$-morphism between their pullbacks is the pullback of a morphism at some $j\\ge i$; and two stage morphisms whose pullbacks to $T$ agree become equal at a sufficiently late common stage. Fibre products are those of [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Base change preserves finite presentation by [lem-sfb-space-flat-proper-fp-locality], so all transition and comparison functors in the statement are defined. Let $Y\\to T$ be finitely presented. Apply [lem-sfb-fp-etale-presentation-criterion] to choose an affine etale presentation $q:W\\to Y$ with $W$ and its scheme kernel pair $R=W\\times_YW$ both finitely presented over $T$. Write $s,t:R\\rightrightarrows W$ for the projections. By [lem-a1-etale-atlas-presentation], $(s,t):R\\to W\\times_TW$ is an etale equivalence relation and the canonical map from the fppf sheaf quotient $W/R$ to $Y$ is an isomorphism identifying the quotient map with $q$.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-fp-etale-presentation-criterion",
+    "lem-a1-etale-atlas-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK (lemma-descend-finite-presentation), first paragraph, with base-change stability from Tag 03XR"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [thm-pd-spreading-out] to the two schemes $W,R$ over $T$. Directedness gives a common stage $i$ with finitely presented models $W_i,R_i$ over $T_i$; moving the models to this stage preserves finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). Clause (2) of [thm-pd-spreading-out] then descends both $s,t$ to $s_i,t_i:R_i\\rightrightarrows W_i$ after enlarging $i$. Every stage base is affine, hence quasi-compact and quasi-separated, as required in that theorem. The same permanence node, (2), makes $W_i,R_i$ quasi-compact and quasi-separated. All comparisons with $W,R$ are the base-change identifications supplied by that theorem.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, first paragraph: descent of W, R and the two projections, using Tag 01ZM"
+   }
+  },
+  {
+   "text": "We record explicitly the local finite-presentation checks needed for the next step. Any map between schemes finitely presented over an affine $\\operatorname{Spec}A$ is locally finitely presented: on affine source and target opens its algebra map has the form $C\\to B$ with $C=A[y_1,\\ldots,y_m]/J$ and $B=A[x_1,\\ldots,x_n]/K$, with $J,K$ finitely generated, by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. If $y_a$ maps to $p_a(x)$, then $B=C[x_1,\\ldots,x_n]/(K(x),y_a-p_a(x))$, a finite presentation by [def-weil-pbc-finitely-presented-algebra]; applying the pointwise definition [def-sbc-locally-finite-presentation] proves the assertion. The same presentations show local finite type by forgetting the relations. Products over the affine base are finitely presented: a projection is a base change, and the structure map is its composite with the other structure map, by [lem-weil-pbc-qcqs-morphism-permanence](3) and [lem-weil-pbc-proper-fp-permanence](d). In particular this applies to $s_i,t_i$ and $j_i=(s_i,t_i):R_i\\to W_i\\times_{T_i}W_i$, and all their source and target schemes are quasi-compact and quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TQ (lemma-locally-finite-presentation-characterize), 02FV (lemma-finite-presentation-permanence); the displayed finite-algebra presentation is written out here"
+   }
+  },
+  {
+   "text": "The limiting maps $s,t$ are etale, and $j=(s,t):R\\to W\\times_TW$ is a monomorphism because $R$ is the kernel pair of $W\\to Y$. By [lem-weil-pbc-descend-etale], applied separately to $s_i,t_i$, and [lem-weil-pbc-descend-monomorphism], applied to $j_i$, a common later stage has $s_i,t_i$ etale and $j_i$ a monomorphism. Etaleness persists under further base change by [lem-weil-pbc-etale-scheme-base-change]; a pullback of a monomorphism is a monomorphism because equality of its two projected arrows forces equality by the fibre-product universal property. Thus a common stage and all subsequent enlargements retain these properties. Their hypotheses hold by the preceding step: the stage base and the source and target schemes are quasi-compact and quasi-separated, the first two maps are locally finitely presented, and $j_i$ is locally of finite type. We use base-change models throughout as required by both descent lemmas.",
+   "uses": [
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-descend-monomorphism",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, first paragraph: eventual etaleness and monomorphism, using Tags 07RP and 07RQ"
+   }
+  },
+  {
+   "text": "It remains to ensure an equivalence relation, rather than only an etale monomorphism. At the limit the kernel pair has maps $e:W\\to R$, $v:R\\to R$ and $c:P=R\\times_{t,W,s}R\\to R$, given by $w\\mapsto(w,w)$, $(w_1,w_2)\\mapsto(w_2,w_1)$ and $((w_1,w_2),(w_2,w_3))\\mapsto(w_1,w_3)$. The scheme $P_i=R_i\\times_{t_i,W_i,s_i}R_i$ is finitely presented over $T_i$: the preceding finite-algebra calculation makes $s_i,t_i$ locally finitely presented; [lem-weil-pbc-qcqs-morphism-permanence](1) makes them quasi-compact and quasi-separated, and its (3) and [lem-weil-pbc-proper-fp-permanence](d) apply to the product. Clause (2) of [thm-pd-spreading-out] descends $e,v,c$ to a common later stage. Clause (3), applied finitely many times, makes the six equations $s_ie_i=t_ie_i=\\mathrm{id}$, $s_iv_i=t_i$, $t_iv_i=s_i$, $s_ic_i=s_i\\operatorname{pr}_1$, $t_ic_i=t_i\\operatorname{pr}_2$ hold there. On points of every $T_i$-scheme these equations give reflexivity, symmetry and transitivity, respectively. Together with the monomorphism $j_i$, they make $R_i\\rightrightarrows W_i$ an etale equivalence relation. No groupoid-axiom assertion is inferred merely from the existence of $s_i,t_i$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, first paragraph, expanded relation-axiom descent before setting Y_i=W_i/R_i; Tag 01ZM(2),(3)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-relation-quotient] over $T_i$ to obtain the algebraic space $Y_i=W_i/R_i$ and its etale surjective atlas with kernel pair $R_i$. By [lem-sfb-fp-etale-presentation-criterion], $Y_i\\to T_i$ is finitely presented, since $W_i,R_i$ are. Pull the atlas back to $T$. It is still an etale surjective atlas, with kernel pair the pullback of $R_i$, by [lem-trf-space-fibre-products-etale-covers]. Its presentation is exactly $R\\rightrightarrows W$. By [lem-a1-etale-atlas-presentation], applied to the atlases $W\\to Y$ and $W\\to Y_i\\times_{T_i}T$, both spaces are the sheaf quotient $W/R$ compatibly with the maps from $W$. The quotient universal property of [lem-trf-etale-relation-quotient] gives maps $Y_i\\times_{T_i}T\\to Y$ and $Y\\to Y_i\\times_{T_i}T$, each induced by the identity on $W$ and respecting its two maps from $R$. Each composite restricts to the identity on $W$, so uniqueness of quotient factorization makes both composites identities. These maps are over $T$, since their structure maps also agree on $W$. Thus the comparison is an isomorphism over $T$, proving essential surjectivity.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-sfb-fp-etale-presentation-criterion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-etale-atlas-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, conclusion of its first paragraph; quotient Tag 02WW"
+   }
+  },
+  {
+   "text": "Fix $i$ and finitely presented $Y_i,Z_i$ over $T_i$, and a $T$-map $\\alpha:Y\\to Z$ between their pullbacks. By [lem-sfb-fp-etale-presentation-criterion], choose an affine etale surjective $W_i\\to Y_i$ with $R_i=W_i\\times_{Y_i}W_i$ finitely presented over $T_i$. For $j\\ge i$ put $W_j=W_i\\times_{T_i}T_j$ and $R_j=R_i\\times_{T_i}T_j$. By [lem-weil-pbc-scheme-over-limit] these are affine-transition systems with limits $W$ and $R$; their stages are quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence]. The pullback atlases and kernel pairs are those of [lem-trf-space-fibre-products-etale-covers]. Apply [lem-sfb-lfp-space-scheme-limit-test] with fixed base $T_i$ and fixed target $Z_i$, which is locally finitely presented over $T_i$. The composite $W\\to Y\\xrightarrow{\\alpha}Z\\to Z_i$ is a $T_i$-map and hence comes from $b_j:W_j\\to Z_i$ for some $j\\ge i$.",
+   "uses": [
+    "lem-sfb-fp-etale-presentation-criterion",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-lfp-space-scheme-limit-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, second paragraph: descend the map on an affine atlas, using Tags 04AK and 0CP4"
+   }
+  },
+  {
+   "text": "The two maps $b_j s_j,b_j t_j:R_j\\to Z_i$ agree after pullback to $R$, because the limiting map factors through $Y$. The injectivity part of [lem-sfb-lfp-space-scheme-limit-test], now on the quasi-compact quasi-separated scheme system $(R_k)_{k\\ge j}$, makes them equal at some later $k$. Pair $b_k$ with $W_k\\to T_k$ to obtain a $T_k$-map $W_k\\to Z_k=Z_i\\times_{T_i}T_k$. It equalizes the two maps from $R_k$. Since $R_k$ is the kernel pair of the base-changed atlas $W_k\\to Y_k$ [lem-trf-space-fibre-products-etale-covers], [lem-a1-etale-atlas-presentation] identifies $Y_k$ with the sheaf quotient $W_k/R_k$, so the universal property in [lem-trf-etale-relation-quotient] gives a unique sheaf map $\\alpha_k:Y_k\\to Z_k$. It is over $T_k$: its composite to $T_k$ and the structure map of $Y_k$ agree on $W_k$, hence agree by the same uniqueness. Its pullback is $\\alpha$, since both maps agree after the etale atlas $W\\to Y$. This proves descent of every morphism. The use of the limit test on $R_k$ does not require $R_k$ to be affine.",
+   "uses": [
+    "lem-sfb-lfp-space-scheme-limit-test",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-etale-atlas-presentation",
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, second paragraph: eventual equality on the kernel pair and descent to Y_k"
+   }
+  },
+  {
+   "text": "If two $T_i$-morphisms $a_i,b_i:Y_i\\to Z_i$ have equal pullbacks to $T$, restrict them to an affine presentation $W_i\\to Y_i$ as above. By the injectivity in [lem-sfb-lfp-space-scheme-limit-test], the resulting two maps $W_i\\to Z_i$ agree after some base change to $T_j$. Since [lem-a1-etale-atlas-presentation] identifies $Y_j$ with the quotient $W_j/R_j$ of the base-changed atlas, their factorizations through it are then equal by the uniqueness clause of [lem-trf-etale-relation-quotient]; hence $a_j=b_j$. Morphisms initially defined at different stages are first moved to a common stage by directedness. This proves precisely eventual equality of stage morphisms.",
+   "uses": [
+    "lem-sfb-lfp-space-scheme-limit-test",
+    "lem-trf-etale-relation-quotient",
+    "lem-a1-etale-atlas-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, final paragraph: essential uniqueness, made explicit"
+   }
+  },
+  {
+   "text": "The explicit filtered $2$-colimit has objects represented at stages and morphisms represented by stage morphisms modulo eventual equality. The two preceding arguments make its Hom maps bijective, while the construction of $Y_i$ makes every object of $\\mathsf{FP}(T)$ isomorphic to an image. To exhibit an inverse equivalence, choose for each $Y$ one such preimage and isomorphism; assign to a morphism the unique inverse image of its conjugate under these Hom bijections. Uniqueness makes identities and composition agree and gives the unit and counit isomorphisms. Thus the canonical functor is an equivalence, with exactly the three explicit clauses stated in the item. The chosen small index set and all these categories and colimits remain in the larger universe fixed by [def-weil-size-convention].",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, categorical reformulation of the proved object, morphism, and equality clauses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-fp-etale-presentation-criterion",
+  "lem-a1-etale-atlas-presentation",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-monomorphism",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-sfb-lfp-space-scheme-limit-test",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases, with its finite-presentation and relation-axiom details expanded; Tags 04AK and 0CP4 for map limits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The category of finitely presented algebraic spaces over an inverse limit of affine schemes is the filtered colimit of the categories at finite stages",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Let $ f : A \\\\to B $ be a finitely presented ring homomorphism between commutative rings, and let $ c $ be a colimit cocone for a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{CommRing} $. If $ g : S \\\\to c.\\\\text\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a colimit cocone $c$ for $F$, and a ring homomorphism $f : R \\\\to S$ of essential finite type, if morphisms $a : S \"}\n  {\"name\": \"CommRingCat.preservesFilteredColimits_coyoneda\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ (R : CommRingCat) (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.coyoneda.obj (Opposite.op S))\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an object in the under category $ R/\\\\mathsf{CommRing} $. If the ring homomorphism $ S.\\\\mathsf{hom} : R \\\\to S $ is finitely presented, then the Coyoneda embedd\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"preservesFilteredColimits_coyoneda\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ (R : CommRingCat) (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.coyoneda.obj (Opposite.op S))\", \"doc\": \"For any commutative ring $ R $ and an object $ S = (T, f: R \\to T) $ in the under category of $ R $, if the ring homomorphism $ f $ is finitely presented, then the coyoneda functor applied to the oppos\"}\n  {\"name\": \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"module\": \"Mathlib/CategoryTheory/Presentable/ColimitPresentation\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w} {I : J → Type w}\\n  [inst_1 : CategoryTheory.SmallCategory J] [inst_2 : (j : J) → CategoryTheory.SmallCategory (I j)]\\n  {D : CategoryTheory.Functor J C} {P : (j : J) → CategoryTheory.Limits.ColimitPresentation (I j) (D.obj j)}\\n  [C\", \"doc\": \"If each component of a family of colimit presentations is filtered and the objects in their diagrams are finitely presentable, then the total colimit presentation formed by their dependent sum is also\"}\n  {\"name\": \"CommRingCat.preservesColimit_coyoneda_of_finitePresentation\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    ∀ (F : CategoryTheory.Functor J (CategoryTheory.Under R))\\n      [CategoryTheory.Limits.PreservesColimit (\", \"doc\": \"In the category of commutative rings, if an object $ S $ in the under category of $ R $ is finitely presented over $ R $, then the coyoneda functor associated to $ S $ preserves colimits of diagrams $\"}\n  {\"name\": \"preservesColimit_coyoneda_of_finitePresentation\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    ∀ (F : CategoryTheory.Functor J (CategoryTheory.Under R))\\n      [CategoryTheory.Limits.PreservesColimit (\", \"doc\": \"Let $\\\\mathcal{J}$ be a filtered category, $R$ a commutative ring, and $S$ an object in the under category $R/\\\\mathcal{C}$ of commutative rings. If the ring homomorphism $\\\\text{Hom}(S)$ is finitely pre\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of algebraic spaces of finite presentation and all morphisms along filtered direct limits of rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Let $ f : A \\\\to B $ be a finitely presented ring homomorphism between commutative rings, and let $ c $ be a colimit cocone for a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{CommRing} $. If $ g : S \\\\to c.\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"FinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic spaces.*finite presentation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented algebraic spaces descend along affine inverse limits and morphisms descend uniquely eventually",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"RingHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →+* B) : Prop\", \"doc\": \"Given a ring homomorphism $ f : A \\\\to B $ between commutative semirings, this proposition asserts that the algebra structure on $ B $ over $ A $ induced by $ f $ is finitely presented. An algebra is f\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFinitePresentation f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFinitePresentation f) →\\n        ((finitePresentation_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineO\", \"doc\": \"This eliminator allows defining functions or proving properties about morphisms of schemes that are locally of finite presentation by reducing to the case where the morphism is defined on affine open \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps, or fpqc descent; none states this inverse-limit assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over an affine scheme is finitely presented if and only if it has an etale scheme presentation with both atlas and relation finitely presented over the base, and the atlas can be chosen affine",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.LocallyOfFinitePresentation, Algebra.Etale.finitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation and quasi separatedness of an algebraic space can be checked on a quasi compact etale presentation U and U fiber product U",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.quasiSeparated_over_affine_iff, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of an algebraic space is equivalent to finite presentation of an etale presentation and its relation",
+   "results": "[leansearch] OK 8 hit(s); hits: Algebra.Etale.finitePresentation, RingHom.FinitePresentation, AlgHom.FinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, Module.FinitePresentation.iff_finitePresentation_of_finite, Algebra.FinitePresentation.of_finiteType, Algebra.FiniteType.of_finitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented algebraic space over S represents a functor whose morphisms from inverse limits of quasi compact quasi separated schemes with affine transition maps form a filtered colimit",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from inverse limits of schemes into an algebraic space locally of finite presentation descend uniquely eventually",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space.*limit|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finitely presented algebraic spaces preserve inverse limits of qcqs schemes in their functors of points",
+   "results": "[leansearch] OK 8 hit(s); hits: AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineScheme.Γ_preservesLimits, AlgebraicGeometry.AffineScheme.createsLimitsForgetToScheme, AlgebraicGeometry.AffineScheme.forgetToScheme_preservesLimits, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-limit-preservation",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation).",
+   "via": [
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fp-space-limit-category",
+  "worker": "stage1",
+  "summary": "Split Stacks 07SK over affine scheme bases without changing the statement. Reused the three-clause scheme descent theorem, eventual etaleness and monomorphism, the etale quotient, and existing base-change and qcqs inputs. Added only the limit-independent etale-presentation finiteness criterion and the standard locally-finitely-presented algebraic-space functor limit test. Wrote the finite-algebra lfp check, six relation-witness equations, quotient/base-change identification, and morphism and equality arguments explicitly. No Lean attachment was found. Repair after live-DAG promotion refusal: compared the retained a8ddd2ac0e3 inputs with the current read clone, re-read all cited statements, checked their 29 retained extracts, and expanded the two inverse quotient comparisons in step 6. Distinguished the newly present affine-open-cover quotient lemma from the presentation finiteness criterion. The statement and dependency route are unchanged; delivery is rebuilt on the current DAG. In the retry after returned head 44db2fe9ab7, made the second application of the presentation criterion in step 6 explicit: the pulled-back atlas has the original finitely presented W and R, so its quotient universal property follows from that cited statement before constructing the inverse comparison maps. Repair of returned head 9db8d36b789: compared the current unsplit item and all cited statements, retained the two searched supporting lemmas, distinguished the newly live invariant-open quotient node, and explicitly proved that the descended quotient morphism in step 8 respects its stage base.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). The split realizes the category descent input Tag 07SK used in curve-limit preservation, along the existing stable-curve/moduli route; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic scheme limit/presentation or etale-quotient input used by Stacks 07SK; the curve-stability unit does not replace this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-etale",
+    "why": "Generic scheme limit/presentation or etale-quotient input used by Stacks 07SK; the curve-stability unit does not replace this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-monomorphism",
+    "why": "Generic scheme limit/presentation or etale-quotient input used by Stacks 07SK; the curve-stability unit does not replace this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic scheme limit/presentation or etale-quotient input used by Stacks 07SK; the curve-stability unit does not replace this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme limit/presentation or etale-quotient input used by Stacks 07SK; the curve-stability unit does not replace this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-over-limit",
+    "why": "Generic scheme limit/presentation or etale-quotient input used by Stacks 07SK; the curve-stability unit does not replace this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic algebraic-space input: an etale scheme atlas identifies the space with the fppf sheaf quotient by its kernel pair; used by Stacks 07SK for Y=W/R' and Y_i=W_i/R'_i, no node of the curve-stability unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-monomorphism",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-a1-etale-atlas-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-a30ce206d",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-a30ce206d (reviewer sub-agent of L); spot-checked: Fourth delivery of Stacks 07SK (spaces-limits.tex 1931-2010) over affine T_i. The statement is unchanged and still unsplit in live and side-live; there is no repair note and no SGA source. Diff against the 9db8 head: the new nodes are byte-identical; only step 8 changed, adding a correct check that the descended map is over T_k (uniqueness of factorization through the quotient W_k/R_k). The previous returns were promotion refusals, not mathematical rejections. Every step was checked against the cited statements: 01ZM (1)-(3) with qcqs affine stages; qcqs permanence (2),(3); B = C[x]/(K, y-p(x)) gives lfp and lft; 07RP and 07RQ hypotheses hold; the six e/v/c equations give reflexivity, symmetry and transitivity; the 02WW quotient over T_i, made fp by the criterion (2=>1); the base-changed atlas and kernel pair from 02X2; 01YZ limits W_j, R_j; the 0CP4 test at fixed T_i, Z_i on the affine W_j and on the qcqs, possibly nonaffine R_k; the 2-colimit equivalence. The criterion was proved both ways (03H6; R -> W x_T W is quasi-compact and a monomorphism; quasi-compactness of the diagonal checked etale-locally). The limit-test node is exactly 0CP4(3) with Y = S. Edge cases checked: |I| = 1, Y empty, Y nonseparated, W nonaffine. FIX (C5, re-applied for the third time): the criterion's quotient clause restated lem-a1-etale-atlas-presentation (Tag 0262). The clause, its sheafification and fppf-site stmt_deps and the 02WW place sentence are removed. Steps 1, 6, 8 and 9 now cite the a1 node, step 8 also the 02X2 node, and step 7 drops 'Y_i=W_i/R_i'. The new step-8 over-T_k sentence and the current summary are kept; proof_deps equals the union of uses; an a1 tool_use is added; there is no cycle. Batch-5 flags: def-trf-algebraic-space (a definition), lem-trf-space-fibre-products-etale-covers (02X2) and lem-trf-etale-relation-quotient (02WW) are general algebraic-space foundations. Their closures, and that of a1, reach no Poincare-duality node, no nt-assume leaf and no trace statement, so they are accepted. Maintainer note: please carry fixes/ into the landing and promote the side completion.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpSpaceAffineLimitCategory",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fp_space_affine_limit_category",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpSpaceAffineLimitCategory.lean",
+  "statement": "theorem fp_space_affine_limit_category (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Over (Spec (.of (ULift.{u} ℤ)))) (c : Cone D) (hc : IsLimit c) [∀ i : I, IsAffine (D.obj (op i)).left] : (∀ (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X.obj.obj ⟶ yoneda.obj c.pt), MapIsQuasiCompact f → MapIsQuasiCompact (pullback.diagonal f) → MapToSchemeIsLocally (@LocallyOfFinitePresentation) X c.pt f → ∃ (i : I) (Y : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (g : Y.obj.obj ⟶ yoneda.obj (D.obj (op i))), MapIsQuasiCompact g ∧ MapIsQuasiCompact (pullback.diagonal g) ∧ MapToSchemeIsLocally (@LocallyOfFinitePresentation) Y (D.obj (op i)) g ∧ Nonempty ((Over.pullback (yoneda.map (c.π.app (op i)))).obj (Over.mk g) ≅ Over.mk f)) ∧ (∀ (i : I) (X Y : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X.obj.obj ⟶ yoneda.obj (D.obj (op i))) (g : Y.obj.obj ⟶ yoneda.obj (D.obj (op i))), MapIsQuasiCompact f → MapIsQuasiCompact (pullback.diagonal f) → MapToSchemeIsLocally (@LocallyOfFinitePresentation) X (D.obj (op i)) f → MapIsQuasiCompact g → MapIsQuasiCompact (pullback.diagonal g) → MapToSchemeIsLocally (@LocallyOfFinitePresentation) Y (D.obj (op i)) g → ∀ α : (Over.pullback (yoneda.map (c.π.app (op i)))).obj (Over.mk f) ⟶ (Over.pullback (yoneda.map (c.π.app (op i)))).obj (Over.mk g), ∃ (j : I) (h : i ≤ j) (β : (Over.pullback (yoneda.map (D.map (homOfLE h).op))).obj (Over.mk f) ⟶ (Over.pullback (yoneda.map (D.map (homOfLE h).op))).obj (Over.mk g)), α = eqToHom (congrArg (fun r ↦ (Over.pullback r).obj (Over.mk f)) ((yoneda.map_comp (c.π.app (op j)) (D.map (homOfLE h).op)).symm.trans (congrArg (fun r ↦ yoneda.map r) (c.w (homOfLE h).op))).symm) ≫ (Over.pullbackComp (yoneda.map (c.π.app (op j))) (yoneda.map (D.map (homOfLE h).op))).hom.app (Over.mk f) ≫ (Over.pullback (yoneda.map (c.π.app (op j)))).map β ≫ (Over.pullbackComp (yoneda.map (c.π.app (op j))) (yoneda.map (D.map (homOfLE h).op))).inv.app (Over.mk g) ≫ eqToHom (congrArg (fun r ↦ (Over.pullback r).obj (Over.mk g)) ((yoneda.map_comp (c.π.app (op j)) (D.map (homOfLE h).op)).symm.trans (congrArg (fun r ↦ yoneda.map r) (c.w (homOfLE h).op))))) ∧ (∀ (i : I) (X Y : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X.obj.obj ⟶ yoneda.obj (D.obj (op i))) (g : Y.obj.obj ⟶ yoneda.obj (D.obj (op i))), MapIsQuasiCompact f → MapIsQuasiCompact (pullback.diagonal f) → MapToSchemeIsLocally (@LocallyOfFinitePresentation) X (D.obj (op i)) f → MapIsQuasiCompact g → MapIsQuasiCompact (pullback.diagonal g) → MapToSchemeIsLocally (@LocallyOfFinitePresentation) Y (D.obj (op i)) g → ∀ α β : Over.mk f ⟶ Over.mk g, (Over.pullback (yoneda.map (c.π.app (op i)))).map α = (Over.pullback (yoneda.map (c.π.app (op i)))).map β → ∃ (j : I) (h : i ≤ j), (Over.pullback (yoneda.map (D.map (homOfLE h).op))).map α = (Over.pullback (yoneda.map (D.map (homOfLE h).op))).map β)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-382355cef",
+  "group": "NX",
+  "result": "pass",
+  "note": "Matches node and Stacks 07SK clause by clause: same finite-presentation notion as def-sfb-proper-curve-moduli (MapIsQuasiCompact, its diagonal, MapToSchemeIsLocally LFP); object, morphism (canonical Over.pullbackComp/eqToHom transport, directions checked) and eventual-equality clauses. No stronger hypotheses (stage affineness implies affine transitions); one universe u, autoImplicit false. Only node change besides the lean record: landed def-sfb-proper-curve-moduli added to stmt_deps, which owns both predicates (same as the curve-limit sibling, no cycle). lean.statement verbatim; single sorry; docstrings with source, blueprint and 10 proof steps; imports exist; no duplicate declaration. Report has Worker report and Second reading by NX. No compile run (no file changed); worker reports a clean compile."
+ }
+}

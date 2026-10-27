@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-pseudodifferential-leading-calculus",
+ "kind": "statement",
+ "title": "Global leading-symbol calculus for real pseudodifferential operators",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $N$ be a compact oriented smooth manifold without boundary of dimension $m\\geq1$, with a smooth Riemannian metric and its positive volume form $dV$. Let $E,F,G$ be smooth finite-rank real vector bundles. Use the distribution spaces, symbol classes $S^r$ and operator classes $\\Psi^r$ of [def-sfb-symbol-pseudodifferential-operators]. Write $E_{\\mathbf C}=E\\otimes_{\\mathbf R}\\mathbf C$ and likewise for the other bundles. For $r\\in\\mathbf Z$, let $b(x,\\xi):E_{\\mathbf C,x}\\to F_{\\mathbf C,x}$ be smooth on $T^*N\\setminus0$, positively homogeneous of degree $r$, and satisfy $b(x,-\\xi)=\\overline{b(x,\\xi)}$ in real frames. Say that $T\\in\\Psi^r(E,F)$ has homogeneous leading symbol $b$ if, in every common coordinate trivialization and for all real $\\chi,\\psi\\in C_c^\\infty$ in that chart, $$\\chi T\\psi-\\chi\\operatorname{Re}\\operatorname{Op}(\\theta b)\\psi\\in\\Psi^{r-1}(E,F).$$ The chart operator in this formula is extended by zero after the cutoffs; $\\theta(\\xi)$ is any smooth real radial function zero for $|\\xi|\\leq1$ and one for $|\\xi|\\geq2$. Then the following hold. (i) For every such $b$ there exists a real $T\\in\\Psi^r(E,F)$ with leading symbol $b$. Two operators of order $r$ with the same leading symbol differ by an element of $\\Psi^{r-1}(E,F)$. (ii) Each $\\Psi^r(E,F)$ is a real vector space, $\\Psi^{r-1}(E,F)\\subseteq\\Psi^r(E,F)$, and $$S\\circ T\\in\\Psi^{s+r}(E,G)\\quad(T\\in\\Psi^r(E,F),\\ S\\in\\Psi^s(F,G)).$$ If $T,S$ have homogeneous leading symbols $b,c$, respectively, their composite has homogeneous leading symbol $cb$. (iii) The identity has order zero and leading symbol $\\operatorname{id}$. A real smooth-coefficient differential operator $D:E\\to F$ of order at most $k\\geq0$, locally $D=\\sum_{|\\alpha|\\leq k}a_\\alpha(x)\\partial^\\alpha$, extended by the same differential expression to distributions, belongs to $\\Psi^k(E,F)$ and has homogeneous leading symbol $$p_k(x,\\xi)=\\sum_{|\\alpha|=k}a_\\alpha(x)(i\\xi)^\\alpha.$$ In particular this formula defines a global bundle symbol. All memberships, differences and composition statements concern the given maps on all distributions.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Demailly, Part I §3.B, printed pp.12–14 (PDF pages 24–26); WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf; (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "First establish the local calculus for the given maps on distributions. A localized quantization has amplitude $\\chi(x)a(x,\\xi)\\psi(y)$; the amplitude-reduction theorem supplies its continuous transpose, its smooth off-diagonal kernel, and a left symbol with diagonal term $\\chi\\psi a$ modulo $S^{r-1}$. The coordinate-change theorem gives exactly the cotangent transformation and the frame factors in every other chart. Use real symbols throughout by replacing $a$ by $a_{\\mathbf R}=(a(x,\\xi)+\\overline{a(x,-\\xi)})/2$; amplitude reduction says this replacement equals the original real-part operator on every distribution. Both input and output cutoffs remain inside the transpose. No equality on a dense subspace is being substituted for equality on distributions.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "lem-sfb-local-quantization-coordinate-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7; supplemental Demailly course §3, (3.3)–(3.6), 3.12–3.15, read online. Agent-supplied details."
+   }
+  },
+  {
+   "text": "The order filtration and real-vector-space assertions follow directly by concatenating finite representations, multiplying their symbols by real scalars, and adding their smooth kernels: the symbol inequalities are stable under these operations, and $(1+|\\xi|)^{r-1-|\\beta|}\\leq(1+|\\xi|)^{r-|\\beta|}$. We will also use localization: multiplying either side by a smooth scalar just replaces an amplitude by that scalar times the amplitude, so it preserves order by amplitude reduction. Smoothing terms cause no obstruction in compositions: for a local term $L$, the kernels of $LR_K$ and $R_KL$ are obtained by applying $L$ in $x$, respectively its bilinear density transpose in $y$, to the smooth kernel. They are smooth jointly: difference quotients of a smooth parameter family of tests converge in every smooth seminorm on the fixed compact support, and continuity of the test map commutes with these limits and all iterated derivatives. This applies entrywise to bundle kernels in a finite atlas; hence both composites are smooth-kernel operators. All these kernel formulas agree on distributions by transposition.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-oscillatory-amplitude-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7; supplemental Demailly course §3, (3.3)–(3.6), 3.12–3.15, read online. Agent-supplied details."
+   }
+  },
+  {
+   "text": "Choose a finite cover by relatively compact coordinate domains trivializing the bundles. Apply the subordinate-partition theorem with $S=N$ to obtain real $\\rho_i$ with $\\sum_i\\rho_i=1$ and compact support in $U_i$. Obtain $\\eta_i\\in C_c^\\infty(U_i)$ equal to one near $\\operatorname{supp}\\rho_i$ from smooth separation, using a relatively compact intermediate neighborhood. Compact manifolds here are Hausdorff, sigma-compact and normal. Set $a_i=\\theta b_i$ in the chart and $T_b=\\sum_i\\rho_i\\operatorname{Re}\\operatorname{Op}(a_i)\\eta_i$. Homogeneity gives $\\partial_x^\\alpha\\partial_\\xi^\\beta b_i(x,t\\xi)=t^{r-|\\beta|}\\partial_x^\\alpha\\partial_\\xi^\\beta b_i(x,\\xi)$; boundedness on compact $x$ sets times the unit sphere and the compact frequency annulus therefore proves $a_i\\in S^r$. Step 1 makes $T_b$ an operator of order $r$. In any other chart its diagonal leading term is $\\sum_i\\rho_i\\eta_i b=b$ by the coordinate-change formula. Differences of radial cutoffs, including after the linear cotangent change, have bounded frequency support on compact $x$ sets and hence belong to every symbol order by the defining estimates. Localizing with any $\\chi,\\psi$ and applying amplitude reduction thus gives $\\chi T_b\\psi-\\chi\\operatorname{Re}\\operatorname{Op}(\\theta b)\\psi\\in\\Psi^{r-1}$, as required.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "lem-sfb-local-quantization-coordinate-change",
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-smooth-separating-cutoff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7; supplemental Demailly course §3, (3.3)–(3.6), 3.12–3.15, read online. Agent-supplied details."
+   }
+  },
+  {
+   "text": "For uniqueness, let $T_1,T_2$ have the same $b$ and put $H=T_1-T_2$. The definition of leading symbol gives $\\rho_i H\\eta_i\\in\\Psi^{r-1}$ in each common chart. Also $H=\\sum_i\\rho_i H\\eta_i+\\sum_i\\rho_i H(1-\\eta_i)$. In the second sum the output and input supports are separated. Expand the finite representations of $H$; their kernels are smooth off the diagonal by amplitude reduction, so after these separated cutoffs they are smooth kernels globally, extended by zero. Thus the second sum is smoothing, which belongs to every $\\Psi^j$ by the empty-sum clause of the definition. This proves $H\\in\\Psi^{r-1}$ on all distributions. The same argument proves the local-to-global order test used below: for an operator with a finite local representation and smooth off-diagonal kernel, lower-order localized pieces $\\rho_i H\\eta_i$ imply the same lower global order.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-smooth-separating-cutoff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7; supplemental Demailly course §3, (3.3)–(3.6), 3.12–3.15, read online. Agent-supplied details."
+   }
+  },
+  {
+   "text": "For arbitrary $T\\in\\Psi^r$ and $S\\in\\Psi^s$, expand their finite chart representations. Terms involving a smooth kernel are smoothing by step 2. For a product of two chart terms, insert a finite partition in the intermediate variable subordinate to their overlap. Near the full diagonal $x=y=z$, refine further to coordinate neighborhoods trivializing all three bundles; compactness permits finitely many such neighborhoods. These pieces are compositions in one chart: after coordinate change, the Fourier-product theorem gives order $r+s$. The remaining pieces are smoothing. Indeed cover the compact set of triples by product neighborhoods, each either lying in one common chart or having the first two or last two coordinate neighborhoods with disjoint closures. A sufficiently fine finite refinement of the three spatial covers, with product partition weights, is subordinate to these neighborhoods. In a separated box the corresponding factor has a smooth localized kernel by step 1, and step 2 handles its composition. This argument applies to the compact supports of the chart terms and uses the same subordinate partitions and neighborhood cutoffs as step 3. Hence $ST\\in\\Psi^{r+s}$. The common-chart diagonal product of symbols is the matrix product, modulo order $r+s-1$, by the Fourier-product remainder estimate; finite sums and real parts preserve this conclusion.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "lem-sfb-local-quantization-coordinate-change",
+    "lem-sfb-fourier-symbol-product-remainder",
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-smooth-separating-cutoff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7; supplemental Demailly course §3, (3.3)–(3.6), 3.12–3.15, read online. Agent-supplied details."
+   }
+  },
+  {
+   "text": "Suppose now the leading symbols are $b,c$. Construct $T_b,S_c,T_{cb}$ as in step 3. Step 4 gives $T-T_b\\in\\Psi^{r-1}$ and $S-S_c\\in\\Psi^{s-1}$. Therefore $ST-S_cT_b=(S-S_c)T+S_c(T-T_b)$ has order $r+s-1$ by step 5. For the constructed operators, the common-chart leading product in step 5 is $cb$: the diagonal partition weights sum to $1\\cdot1$, and the intermediate frame changes cancel. More explicitly, the outer chart weights give $(\\sum_j\\rho_j\\eta_j)c(\\sum_i\\rho_i\\eta_i)b=cb$. The Fourier-product and coordinate-change remainders are of order $r+s-1$. Consequently each localization of $S_cT_b-T_{cb}$ has that order; its off-diagonal kernel is smooth by the product argument of step 5. Step 4's local-to-global test gives $S_cT_b-T_{cb}\\in\\Psi^{r+s-1}$. Localizing the resulting equality proves that $ST$ has leading symbol $cb$. Its homogeneity degree is $r+s$ and its conjugation symmetry follows from $\\overline{cb}=\\bar c\\bar b$.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "lem-sfb-local-quantization-coordinate-change",
+    "lem-sfb-fourier-symbol-product-remainder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7; supplemental Demailly course §3, (3.3)–(3.6), 3.12–3.15, read online. Agent-supplied details."
+   }
+  },
+  {
+   "text": "Finally Fourier inversion on Schwartz functions, after the frequency substitution $\\xi=2\\pi\\zeta$, gives $\\operatorname{Op}(1)=\\mathrm{id}$ and $\\operatorname{Op}(\\sum_{|\\alpha|\\leq k}a_\\alpha(x)(i\\xi)^\\alpha)=\\sum a_\\alpha\\partial^\\alpha$ on chart tests. These are also identities of the bilinear transposes, by integration by parts with both spatial cutoffs; hence they are identities on all distributions under the conventions of the definition. The polynomial symbol belongs to $S^k$. Its terms of degree less than $k$ have order at most $k-1$; the difference between its top term and $\\theta p_k$ has compact frequency support and hence all orders. A finite partition gives $D=\\sum_i\\rho_iD\\eta_i$ exactly, since $\\eta_i=1$ near $\\operatorname{supp}\\rho_i$ and $D$ is differential. This proves global order $k$. The chain and Leibniz rules give the transition formula directly: terms in which any derivative hits a frame coefficient or a previously differentiated coordinate coefficient have at most $k-1$ derivatives on the input section. The remaining terms are the product of $k$ first coordinate derivatives, with the output and inverse input frame factors; replacing each derivative by $i\\xi$ gives exactly the cotangent pullback and these frame factors. Thus $p_k$ is a global bundle symbol and the preceding local remainder calculation proves precisely the prescribed leading-symbol condition. Its real symmetry is $(i(-\\xi))^\\alpha=\\overline{(i\\xi)^\\alpha}$. For $k=0$ the same compact-frequency argument applies; for the identity it yields order zero and leading symbol $\\mathrm{id}$.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "lem-sfb-local-quantization-coordinate-change",
+    "lem-sfb-schwartz-fourier-coordinate-rule",
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-smooth-separating-cutoff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7; supplemental Demailly course §3, (3.3)–(3.6), 3.12–3.15, read online. Agent-supplied details."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-compact-oscillatory-amplitude-reduction",
+  "lem-sfb-local-quantization-coordinate-change",
+  "lem-sfb-smooth-subordinate-partition",
+  "lem-sfb-smooth-separating-cutoff",
+  "lem-sfb-fourier-symbol-product-remainder",
+  "lem-sfb-schwartz-fourier-coordinate-rule"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Part I §3.B, (3.4)–(3.5) and Proposition 3.7; WANTED locally, original URL fetch failed. Supplemental course Differential and pseudodifferential operators on manifolds, §3, (3.3)–(3.6), 3.12–3.15, printed pp.6–12, read online. Local analytic inputs and global distributional details made explicit by Q84."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The principal symbol calculus for pseudodifferential operators on vector bundles realizes homogeneous symbols and multiplies them under composition",
+   "results": "{\"t\": \"2026-10-24T03:28:10Z\", \"tool\": \"leanfinder\", \"query\": \"The principal symbol calculus for pseudodifferential operators on vector bundles realizes homogeneous symbols and multiplies them under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.compCLM\", \"SchwartzMap.smulLeftCLM_compCLMOfContinuousLinearEquiv\", \"TestFunction.postcompCLM_apply\", \"ContDiffMapSupportedIn.postcompCLM_apply\", \"SchwartzMap.compCLM_apply\", \"ContDiffMapSupportedIn.postcompLM_apply\", \"SchwartzMap.smulRightCLM\", \"ContMDiffMap.smul_comp'\"], \"digest\": \"d58064d07d41f6ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map composition, multiplication on tempered distributions and homogeneous components of power series do not state the bundle symbol calculus or its order filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudodifferential\"",
+   "results": "{\"t\": \"2026-10-24T03:28:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudodifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map composition, multiplication on tempered distributions and homogeneous components of power series do not state the bundle symbol calculus or its order filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|pseudoDifferential|principalSymbol|principal_symbol",
+   "results": "{\"t\": \"2026-10-24T03:28:09Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|pseudoDifferential|principalSymbol|principal_symbol\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map composition, multiplication on tempered distributions and homogeneous components of power series do not state the bundle symbol calculus or its order filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudodifferential operators compose and their principal symbols multiply",
+   "results": "{\"t\": \"2026-10-24T03:28:09Z\", \"tool\": \"leansearch\", \"query\": \"Pseudodifferential operators compose and their principal symbols multiply\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Dilation.coe_mul\", \"TemperedDistribution.smulLeftCLM_compL_smulLeftCLM\", \"PseudoEpimorphism.comp_assoc\", \"SchwartzMap.smulLeftCLM_compL_smulLeftCLM\", \"FormalMultilinearSeries.compContinuousLinearMap_comp\", \"Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian\", \"DilationEquiv.coe_mul\", \"PositiveLinearMap.leftMulMapPreGNS_mul_eq_comp\"], \"digest\": \"069126ca44573ad8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map composition, multiplication on tempered distributions and homogeneous components of power series do not state the bundle symbol calculus or its order filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quantize a homogeneous bundle symbol and compute the leading symbol of a product modulo operators of one lower order",
+   "results": "{\"t\": \"2026-10-24T03:28:38Z\", \"tool\": \"leanfinder\", \"query\": \"Quantize a homogeneous bundle symbol and compute the leading symbol of a product modulo operators of one lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.homogeneousComponent_mul_of_le_order\", \"SchwartzMap.smulRightCLM\", \"Distributions.termN[_]_{_,_,_}\", \"MvPowerSeries.weightedHomogeneousComponent_mul_of_le_weightedOrder\", \"Distributions.term𝓓^{_}_{_}(_,_)\", \"Distributions.termN[_;_]_{_,_}\", \"Distributions.termN[_;_]_{_,_,_}\", \"HVertexOperator.of_coeff\"], \"digest\": \"123485321a78ba48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schwartz-map composition, multiplication on tempered distributions and homogeneous components of power series do not state the bundle symbol calculus or its order filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global leading symbol calculus realizes homogeneous symbols on real vector bundles and multiplies the symbols of composed pseudodifferential operators",
+   "results": "{\"t\": \"2026-10-24T04:23:04Z\", \"tool\": \"leanfinder\", \"query\": \"Global leading symbol calculus realizes homogeneous symbols on real vector bundles and multiplies the symbols of composed pseudodifferential operators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.compCLM\", \"ContMDiff.clm_bundle_apply₂\", \"ContMDiff.clm_bundle_apply\", \"ContMDiff.clm_precomp\", \"ContDiffMapSupportedIn.postcompCLM_apply\", \"ContDiffMapSupportedIn.postcompLM_apply\", \"TestFunction.postcompCLM_apply\", \"ContDiffMapSupportedIn.postcompLM\"], \"digest\": \"4dcb76c02846ce73\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary Fourier transforms, algebraic exact sequences, topology of bundles or parser symbols, not the real pseudodifferential leading-symbol calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"principalSymbol\"",
+   "results": "{\"t\": \"2026-10-24T04:23:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"principalSymbol\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary Fourier transforms, algebraic exact sequences, topology of bundles or parser symbols, not the real pseudodifferential leading-symbol calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|principalSymbol|principal_symbol|oscillatory",
+   "results": "{\"t\": \"2026-10-24T04:23:02Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|principalSymbol|principal_symbol|oscillatory\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary Fourier transforms, algebraic exact sequences, topology of bundles or parser symbols, not the real pseudodifferential leading-symbol calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global pseudodifferential quantization of homogeneous real bundle symbols",
+   "results": "{\"t\": \"2026-10-24T04:23:03Z\", \"tool\": \"leansearch\", \"query\": \"Global pseudodifferential quantization of homogeneous real bundle symbols\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FourierTransform.term𝓕\", \"SchwartzMap.fourierTransformCLM\", \"instIsContMDiffRiemannianBundleOfSomeENatTopOfLEInfty\", \"ContMDiffSection.coeAddHom\", \"instIsContMDiffRiemannianBundleOfTopWithTopENat\", \"ZMod.term𝓕\", \"IsContMDiffRiemannianBundle.casesOn\", \"SchwartzMap.instFourierPair\"], \"digest\": \"9f3c3ea31b580070\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary Fourier transforms, algebraic exact sequences, topology of bundles or parser symbols, not the real pseudodifferential leading-symbol calculus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Principal symbol exact sequence of the filtered algebra of pseudodifferential operators on a compact manifold",
+   "results": "{\"t\": \"2026-10-24T04:23:05Z\", \"tool\": \"leanfinder\", \"query\": \"Principal symbol exact sequence of the filtered algebra of pseudodifferential operators on a compact manifold\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.Cotangent.exact\", \"Algebra.Generators.CotangentSpace.exact\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\"], \"digest\": \"856b9ab85489469a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are ordinary Fourier transforms, algebraic exact sequences, topology of bundles or parser symbols, not the real pseudodifferential leading-symbol calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-distribution-parametrix",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit.",
+   "via": [
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pseudodifferential-leading-calculus",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Split the leading calculus into local amplitude reduction, coordinate change and the explicit Euclidean Fourier-product remainder, with finite global patching and equality by transpose on every distribution. Reused the existing partition, cutoff and Schwartz Fourier inversion nodes; all new nodes remain statement-only with executed searches. No project attachment or Mathlib match.",
+  "blueprint": "Inherited prerequisite below det-thm-sf-ctf-stability-direct-images proof (3), through the elliptic-parametrix and Hodge branch. Global quantization and leading product are realized by steps 1–6, and differential-symbol normalization by step 7. The latest blueprint unit was read; no analytic duplicate exists. blueprint_refs.py ancestor reports None; inherited null ancestor and via chain retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-d427cddca",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-d427cddca (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full. The Demailly PDF is not available locally (WANTED, and no pseudodifferential text exists under literature/), so I checked the formulas against the standard Kohn–Nirenberg calculus by direct computation. Product node: Op(c)Op(a) works out to the integral (2π)^{-m}∫e^{ixη}c(x,ξ+η)â(η,ξ)dη, the first-order Taylor term gives q−ca ∈ S^{r+s−1}, and the localized clause is an exact identity with no smoothing remainder (Op(c)M_g = Op(c#g)). Coordinate-change node: for κ(x)=2x and d/dy the leading term is a(κ(x),Dκ^{-T}ξ) = iξ/2, so the cotangent direction is right, and the frame factors H_F…H_E^{-1} match the definition of L. Amplitude node: the conjugation rule a♮(x,y,ξ) = conj a(x,y,−ξ) and the diagonal left-symbol reduction are correct. Item steps: 1 (local calculus), 2 (vector space, filtration, localization, smoothing ideal via a continuous C^∞→C_c^∞ map applied to a smooth parameter family), 3 (finite partition from the cited partition with S=N and the separating cutoff, θb_i in S^r by homogeneity, chart comparison through the coordinate node), 4 (separated terms ρ_iH(1−η_i) are smooth, then the empty-sum clause), 5 (output/intermediate/input box refinement into common-chart or separated boxes), 6 ((S−S_c)T+S_c(T−T_b); leading term Σρ_jη_jρ_iη_i cb = cb) and 7 (Fourier inversion with ξ=2πζ, locality of D, (1−θ)p_k in S^{-∞}, chain rule) all hold. No duplicate among the analytic siblings (frequency-kernel, asymptotic-sum, residual-kernel, Sobolev boundedness, chart-overlap). The new nodes are strictly local and do not restate any of the item's clauses. Node form (status unsplit, five searches, created.item, blueprint via) is correct. No SGA, no tool_uses, no re-split note applies, no fixes."
+ }
+}

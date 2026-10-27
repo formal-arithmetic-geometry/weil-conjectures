@@ -1,0 +1,117 @@
+{
+ "id": "def-trf-ring-cotangent-base-change-maps",
+ "kind": "definition",
+ "title": "Canonical derived scalar-extension and cotangent base-change maps for ring squares",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A\\xrightarrow{f}C$, $A'\\xrightarrow{g}C'$, $a:A\\to A'$ and $c:C\\to C'$ be homomorphisms of commutative rings with $c\\circ f=g\\circ a$, and denote this square by $q$. Write $D(R)$ for the derived category of ordinary $R$-modules [def-weil-abstract-derived-category]. For a ring map $h:R\\to S$, define $L_h:D(R)\\to D(S)$ as the universal total left derived functor of termwise extension of scalars $M\\mapsto M\\otimes_R S$ [def-weil-module-base-change], and use the derived tensor/restriction adjunction $L_h\\dashv\\operatorname{Res}_h$ induced by the ordinary tensor/restriction adjunction and the canonical exact-restriction comparison. Define $s_q:C\\to\\operatorname{Res}_a\\operatorname{Res}_g C'$ to be the $A$-linear map $x\\mapsto c(x)$, with $C$ viewed as an $A$-module through $f$. Define the canonical multiplication $\\mu_q:L_a(C[0])\\to (\\operatorname{Res}_g C')[0]$ in $D(A')$ to be the adjoint of $s_q[0]$ under this normalized adjunction, using the canonical comparison between restriction of scalars and the degree-zero embedding. For the standard cotangent complexes and square functoriality map $t_q:L_{C/A}\\to\\operatorname{Res}_c L_{C'/A'}$ [lem-trf-cotangent-resolution-coherence], define the canonical cotangent base-change morphism $\\beta_q:L_c(L_{C/A})\\to L_{C'/A'}$ in $D(C')$ to be the adjoint of $t_q$ under the same normalized derived tensor/restriction adjunction. These constructions require no flatness, Tor-vanishing or invertibility assumption on the square.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QL (section-functoriality), equation-commutative-square and the canonical standard-resolution functoriality map; Tag 08QQ (lemma-flat-base-change-cotangent-complex), canonical derived multiplication and induced cotangent base-change morphism."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived scalar extension adjunction cotangent complex base change morphism commutative ring square",
+   "results": "Eight hits: presentation cotangent base-change maps and identities, ModuleCat.extendRestrictScalarsAdj and restrictCoextendScalarsAdj, tensor Kaehler equivalence. Ordinary adjunction exists, but none supplies the full derived square maps.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex, TensorProduct",
+   "results": "Eight hits: presentation base-change identities, first cotangent homology maps and a formal-smoothness criterion; no full derived square construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSquareMultiplication|cotangentBaseChange|baseChangeAdjunction|squareModuleMap",
+   "results": "One Mathlib hit: Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean:8 imports Ideal.CotangentBaseChange. Local rg of both Lean roots found all five definitions in Sheaf.RingTheory.CotangentFlatBaseChange and consumers, no WeilConjectures definition. DAG rg found only theorem records, no owning definition node. Blueprint search cotangent returned two nodes, neither stating this definition.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-diagonal-tor-comparison",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Vanishing of the full cotangent complex for etale ring maps (Step 3 there): the Tor-vanishing bootstrap from the diagonal cotangent complex to $L_{B/A}$ (Stacks Tag 08R1). Re-split argument: Tag 08R1 (lemma-bootstrap), first sentence invoking Tag 08QQ (lemma-flat-base-change-cotangent-complex); the Tor-to-derived-comparison argument of returned Step 1. Definition of the canonical derived multiplication and cotangent base-change maps used by the Tor-independent diagonal comparison.",
+   "via": [
+    "lem-trf-cotangent-diagonal-tor-comparison",
+    "lem-trf-cotangent-bootstrap",
+    "lem-trf-etale-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentFlatBaseChange",
+  "declaration": "Algebra.CotangentResolution.cotangentBaseChange",
+  "declarations": [
+   "Algebra.CotangentResolution.baseChangeExtension",
+   "Algebra.CotangentResolution.baseChangeAdjunction",
+   "Algebra.CotangentResolution.squareModuleMap",
+   "Algebra.CotangentResolution.derivedSquareMultiplication",
+   "Algebra.CotangentResolution.cotangentBaseChange"
+  ],
+  "statement": "def cotangentBaseChange (C : Coherence.{u}) {f g : Arrow CommRingCat.{u}} (q : f ⟶ g) :\n    (baseChangeExtension q.right).obj (cotangentComplex C f) ⟶ cotangentComplex C g",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing definitions in the published module, lines 54–126; no source is moved or copied. This definition node owns the five constructions, separately from the theorem isIso_cotangentBaseChange, as requested in the H2 return of delivery 9708a8dc68c5."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65478b6f5",
+  "group": "Q45",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65478b6f5",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 9708a8dc68c5: theorem stmt_dep lem-trf-cotangent-flat-base-change replaced by new def node def-trf-ring-cotangent-base-change-maps (existing:true record on Sheaf.RingTheory.CotangentFlatBaseChange, 5 plain defs, statement verbatim, status split, TeX matches 08QL/08QQ and the Lean defs; no rival owner in live DAG). Item node equals live except lean/stmt_deps. Lean: cotangentDiagonalSquare concrete (left algebraMap, right ι1=includeLeft, lower ι2=includeRight); derivedSquareMultiplication = canonical γ B⊗ᴸ_A B→D[0] in D(B) via ι2; cotangentBaseChange = adjunct β L_{ι1}L_{B/A}→L_{D/B} in D(D); hTor = Tor'_i^A(B,B)=0 for i>0, no flatness; conclusion IsIso∧IsIso. Edge cases B=0, A=B, localizations covered; Z→F_p excluded. sorry only, docstrings/source/blueprint present. Module byte-identical to the worker-compiled earlier delivery; no compile run, no fixes."
+ }
+}

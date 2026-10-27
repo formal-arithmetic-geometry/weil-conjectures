@@ -1,0 +1,119 @@
+{
+ "id": "def-sf-perfect-evaluation-comparisons",
+ "kind": "definition",
+ "title": "Evaluation theta and line-cancellation comparisons",
+ "status": "split",
+ "statement": "Let $\\mathcal B$ be a category, $H:\\mathcal B^{op}\\times\\mathcal B\\to\\mathcal B$ a bifunctor, and $M$ a closed tensor-Hom structure for $H$ as in [def-coef-ringed-tensor-hom-model], with tensor unit $\\mathbf1$, tensor $\\otimes$ and evaluation $\\operatorname{ev}_{A,B}:H(A,B)\\otimes A\\to B$. Let $s$ be a symmetry for this monoidal structure, let $L,W\\in\\mathcal B$, and let $\\gamma:L\\xrightarrow\\sim W$. For $K\\in\\mathcal B$ put $K^\\vee=H(K,\\mathbf1)$. Define the theta inverse arrow $K^\\vee\\otimes L\\to H(K,W)$ by first braiding to $L\\otimes K^\\vee$, applying $\\gamma\\otimes1$, and then applying the transpose (under $-\\otimes K\\dashv H(K,-)$) of the canonical composite $(W\\otimes K^\\vee)\\otimes K\\xrightarrow{\\alpha}W\\otimes(K^\\vee\\otimes K)\\xrightarrow{1\\otimes\\operatorname{ev}_{K,\\mathbf1}}W\\otimes\\mathbf1\\xrightarrow{\\rho}W$. For any $A\\in\\mathcal B$, define the line-cancellation arrow $H(A,\\mathbf1)\\to H(A\\otimes L,L)$ as the transpose of $H(A,\\mathbf1)\\otimes(A\\otimes L)\\xrightarrow{\\alpha^{-1}}(H(A,\\mathbf1)\\otimes A)\\otimes L\\xrightarrow{\\operatorname{ev}_{A,\\mathbf1}\\otimes1}\\mathbf1\\otimes L\\xrightarrow{\\lambda}L$. These definitions make no dualizability or invertibility assertion.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.proof.md",
+  "place": "Steps 3-4 (the evaluation-defined theta inverse) and Step 5 (line cancellation); used in prop-functor-package proof clause (7)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical theta inverse and line cancellation comparison for oriented perfect duality in a closed symmetric monoidal category",
+   "results": "{\"t\": \"2026-10-22T11:27:25Z\", \"tool\": \"leansearch\", \"query\": \"Canonical theta inverse and line cancellation comparison for oriented perfect duality in a closed symmetric monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Iso.instIsMonoidalInvFunctor\", \"CategoryTheory.MonoidalCategory.inv_tensor\", \"CategoryTheory.op_inv_leftUnitor\", \"CategoryTheory.mop_inv_leftUnitor\", \"CategoryTheory.unmop_inv_leftUnitor\", \"CategoryTheory.mop_inv_rightUnitor\", \"CategoryTheory.Equivalence.cancel_counitInv_right_assoc\", \"CategoryTheory.Monoidal.instMonoidalTransportedInverseSymmEquivalenceTransported\"], \"digest\": \"ce4d27dcd3bd4bfb\"}",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions found; no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfPerfectThetaInverse|sfPerfectLineCancellation|ringedSiteDualEvaluation",
+   "results": "{\"t\": \"2026-10-22T11:27:26Z\", \"tool\": \"grep\", \"query\": \"sfPerfectThetaInverse|sfPerfectLineCancellation|ringedSiteDualEvaluation\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions found; no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical evaluation transpose theta inverse and tensor line cancellation for perfect biduality",
+   "results": "{\"t\": \"2026-10-22T11:27:27Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical evaluation transpose theta inverse and tensor line cancellation for perfect biduality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"contractLeft_assoc_coevaluation\", \"transpose_dualTensorHom\", \"contractLeft_assoc_coevaluation'\", \"dualTensorHomEquivOfBasis_symm_cancel_left\", \"dualTensorHomEquivOfBasis_symm_cancel_right\", \"dualTensorHomEquiv\", \"TensorProduct.dualDistribEquiv\", \"PiTensorProduct.dualDistrib_dualDistribInvOfBasis_right_inverse\"], \"digest\": \"949ce9e3e20cfa78\"}",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions found; no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n sfPerfectThetaInverse|sfPerfectLineCancellation in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search theta",
+   "results": "Only sk-thm-sf-dual-perfect owns the two declarations, in Sheaf.Paper.OrientedPerfectDuality lines 42 and 52. No definition node owns them. Blueprint search finds sk-thm-sf-dual-perfect and 98 other mentions of theta, none defines these two comparison maps independently.",
+   "date": "2026-10-22",
+   "verdict": "Record the existing definitions on a new definition node; write no duplicate Lean module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-normalized-orientation-perfect-duality",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "For (7), smooth site-perfect case reduced to local perfect-complex biduality, specifically its theta and line cancellation maps.",
+   "via": [
+    "lem-sf-package-normalized-orientation-perfect-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.OrientedPerfectDuality",
+  "declaration": "WeilConjectures.sfPerfectThetaInverse",
+  "declarations": [
+   "WeilConjectures.sfPerfectThetaInverse",
+   "WeilConjectures.sfPerfectLineCancellation"
+  ],
+  "statement": "def sfPerfectThetaInverse {B : Type a} [Category.{b} B] {H : Bᵒᵖ × B ⥤ B}\n    (M : CoefficientClosedStructure H) (s : @SymmetricCategory B _ M.monoidal)\n    {L W : B} (gamma : L ≅ W) (K : B) :\n    M.tensor.obj (H.obj (op K, M.monoidal.tensorUnit), L) ⟶ H.obj (op K, W)",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing real evaluation-transpose constructions, previously recorded only on theorem sk-thm-sf-dual-perfect. No theorem or A6 axiom is assumed by these definitions."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce10c7033",
+  "group": "Q76",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce10c7033",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Re-delivery after 6aaff388 RETURN. F1 repaired: SfPackageIntegralOrientationTrace now uses one reconstructed eR (factored SfPackageIntegralReconstruction, unchanged witness and reduction squares), a target realization b pinned by SfPackageIntegralCounitReduction (finite exceptional counit through purAdicTargetReduction at every n), trace t_R = P(eR)≫counit via b, and the general-input reduction Q_Y(t_R)=c≫finiteImageIso≫P_n(purAdicSourceReduction)≫coefficientValuedSmoothTrace plus finite further-quotient packages (child equation Q_Y(t_R)=t_n P(a_L) c). F2 repaired: new def node def-sf-perfect-evaluation-comparisons, existing:true on OrientedPerfectDuality, verbatim signature, TeX matches both bodies, cited in stmt_deps. Unchanged clauses (finite, rational, E⊂F, common, point, site-perfect) byte-identical to the reviewed head. Statement verbatim, one sorry, docstrings OK, no extra hypotheses. Edge cases n=1, d=0, empty scheme, E=F, torsion. No recompile (no file changed); worker reports clean 36 s compiles. Advisory: (1) the ∃ s (s≫integralMap=eR≫b) link is vacuous because all are isos, and the report overclaims it; rationalization stays on integralMap, accepted as route 1 of the prior return; (2) finiteImageIso is owned only by theorem lem-pur-compact-support-integral-coefficient-comparison, not a stmt_dep; (3) the integral trace conjunct is fixed to integralExceptionalCompactification."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c85e",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123118-L-1833257",
+  "kind": "interface",
+  "note": "independent cc review: sfOrientedPerfectDuality proof + new sfOrientationPerfectLines + wrapper sfOrientedCancellation_of_evaluationLaws against SfOrientedPerfectDuality def, unit sk-thm-sf-dual-perfect realized steps, and clone diff; axioms checked in /tmp sandbox (sorryAx only from upstream evaluation/dual-pair holes)",
+  "sorry_before": [
+   "WeilConjectures.sfOrientedPerfectDuality"
+  ],
+  "sorry_after": []
+ }
+}

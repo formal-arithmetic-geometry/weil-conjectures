@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-compact-submersion-phase-estimate",
+ "kind": "statement",
+ "title": "Uniform compact-support estimate for a submersion phase",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field], with Euclidean norms and Lebesgue measure. Let $n,k\\geq1$, let $U\\subset\\mathbf R^n$ be open, let $C\\subset U$ be compact, and let $H:U\\to\\mathbf R^k$ be smooth. Assume that the derivative $DH(z):\\mathbf R^n\\to\\mathbf R^k$ is surjective for every $z\\in U$. For an integer $N\\geq0$ and a smooth function $u:U\\to\\mathbf C$ vanishing off $C$, put $$p_N(u)=\\max_{|\\alpha|\\leq N}\\sup_{z\\in U}|\\partial^\\alpha u(z)|.$$ For every $N\\geq0$ there is a finite constant $A_N\\geq0$, depending only on $U,C,H,N$, such that for every such $u$ and every $\\eta\\in\\mathbf R^k$, $$\\left|\\int_U e^{iH(z)\\cdot\\eta}u(z)\\,dz\\right|\\leq A_N(1+|\\eta|)^{-N}p_N(u).$$ If $C$ is empty, take $p_N(u)=0$.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Agent-supplied analytic prerequisite below the inherited global-quantization branch: compact nonlinear submersion-phase estimate, extending the integration-by-parts idea in Demailly course §3, estimate (3.11), printed p.9. The nonlinear estimate is not asserted to be stated in those notes. WANTED locally; supplemental notes read online: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-euclidean-multi-index-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "If $C=\\varnothing$, then $u=0$ and take $A_N=0$. Henceforth $C\\ne\\varnothing$. Every derivative of $u$ vanishes on the open set $U\\setminus C$, so its support is contained in $C$. Apply [lem-sfb-compact-continuous-norm-bound] to the real and imaginary parts of each $\\partial^\\alpha u$ on $C$, extended arbitrarily outside $U$. There are finitely many $|\\alpha|\\leq N$, so $p_N(u)$ is finite and nonnegative. Write $V=\\operatorname{vol}(C)<\\infty$; finiteness is the compact-measure clause of [lem-sfb-real-compact-supported-integral-bound]. Each smooth function supported in $C$ is integrable on $C$ by [lem-sfb-continuous-on-compact-integrable], and its integral on $U$ equals its integral on $C$.",
+   "uses": [
+    "lem-sfb-compact-continuous-norm-bound",
+    "lem-sfb-real-compact-supported-integral-bound",
+    "lem-sfb-continuous-on-compact-integrable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent-written nonlinear extension of the integration-by-parts argument of Demailly, Differential and pseudodifferential operators on manifolds, §1 (1.7) and §3 (3.11), printed pp.2 and 9; supplemental notes read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. WANTED locally; the nonlinear assertion is not stated in those notes."
+   }
+  },
+  {
+   "text": "For $\\theta\\in\\mathbf R^k\\setminus\\{0\\}$ set $g(z,\\theta)=DH(z)^t\\theta$ and $q(z,\\theta)=\\sum_jg_j(z,\\theta)^2$. This is positive: if $g=0$, choose $w$ with $DH(z)w=\\theta$ by surjectivity, obtaining $|\\theta|^2=\\theta\\cdot DH(z)w=g\\cdot w=0$, a contradiction. The components $g_j$ and $q$ are smooth on the open set $U\\times(\\mathbf R^k\\setminus\\{0\\})$. Regard $q$ as complex-valued and apply [lem-sfb-smooth-nonzero-complex-reciprocal]. Thus $a_j=g_j/q$ are smooth real functions there. Put $\\phi_\\theta(z)=H(z)\\cdot\\theta$, $L_\\theta=\\sum_ja_j\\partial_j$ and $T_\\theta v=-\\sum_j\\partial_j(a_jv)$. The chain rule gives $L_\\theta\\phi_\\theta=\\sum_jg_j^2/q=1$ and $L_\\theta(e^{-it\\phi_\\theta})=-it e^{-it\\phi_\\theta}$ for real $t$.",
+   "uses": [
+    "lem-sfb-smooth-nonzero-complex-reciprocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent-written nonlinear extension of the integration-by-parts argument of Demailly, Differential and pseudodifferential operators on manifolds, §1 (1.7) and §3 (3.11), printed pp.2 and 9; supplemental notes read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. WANTED locally; the nonlinear assertion is not stated in those notes."
+   }
+  },
+  {
+   "text": "Fix $|\\theta|=1$. Apply [lem-sfb-coordinate-weighted-adjoint] on $U$ with scalar ranks $r=s=1$, both Hermitian matrices and density equal to $1$, coefficients $A_j=a_j$ and $B=0$, first input $e^{-it\\phi_\\theta}$ and second input any smooth $v$ supported in $C$. The coefficients are real, so the displayed $Q$ of that node is exactly $T_\\theta$. Only the second input needs compact support. Its pairing identity reads $$it\\int_Ue^{it\\phi_\\theta}v=\\int_Ue^{it\\phi_\\theta}T_\\theta v.$$ Differentiation and multiplication do not enlarge the support, so $T_\\theta^rv$ is smooth and supported in $C$ for every $r\\geq0$. Starting with $r=0$ and applying this identity to $v=T_\\theta^ru$ proves by induction $$ (it)^N\\int_Ue^{it\\phi_\\theta}u=\\int_Ue^{it\\phi_\\theta}T_\\theta^Nu.$$",
+   "uses": [
+    "lem-sfb-coordinate-weighted-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent-written nonlinear extension of the integration-by-parts argument of Demailly, Differential and pseudodifferential operators on manifolds, §1 (1.7) and §3 (3.11), printed pp.2 and 9; supplemental notes read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. WANTED locally; the nonlinear assertion is not stated in those notes."
+   }
+  },
+  {
+   "text": "Here is the coefficient induction, including its uniformity. Set $c_{0,0}=1$ and all other $c_{0,\\alpha}=0$. For absent indices put $c_{r,\\alpha}=0$ and define $$c_{r+1,\\beta}=-\\sum_{j=1}^n\\bigl[\\partial_j(a_jc_{r,\\beta})+a_jc_{r,\\beta-e_j}\\bigr],$$ with negative multi-indices interpreted as zero. The product rule proves, by induction on $r$, $$T_\\theta^ru=\\sum_{|\\alpha|\\leq r}c_{r,\\alpha}(z,\\theta)\\partial^\\alpha u(z).$$ All coefficients are jointly smooth, since the recursion only differentiates, adds and multiplies the smooth $a_j$. The unit sphere $S\\subset\\mathbf R^k$ is compact by [lem-cbc-euclidean-sphere-compact], and $C\\times S$ is compact by the following finite-cover argument. Refine any open cover at each $(z,\\theta)$ to product neighborhoods. For fixed $z$, finitely many second-factor neighborhoods cover $S$; intersect their first-factor neighborhoods to obtain $V_z$. Finitely many $V_z$ cover $C$, and the corresponding finitely many original cover elements cover $C\\times S$. Apply [lem-sfb-compact-continuous-norm-bound] to every $c_{N,\\alpha}$ on this subset of $\\mathbf R^{n+k}$, extending it arbitrarily off its open domain. Choose nonnegative bounds $b_{N,\\alpha}$ and put $B_N=\\sum_{|\\alpha|\\leq N}b_{N,\\alpha}$. The finite displayed sum gives $$|T_\\theta^Nu(z)|\\leq B_Np_N(u)\\quad(z\\in C,\\ |\\theta|=1).$$ The coefficients and their bounds depend only on $H,U,C,N$, never on $u,t$.",
+   "uses": [
+    "lem-cbc-euclidean-sphere-compact",
+    "lem-sfb-compact-continuous-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent-written nonlinear extension of the integration-by-parts argument of Demailly, Differential and pseudodifferential operators on manifolds, §1 (1.7) and §3 (3.11), printed pp.2 and 9; supplemental notes read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. WANTED locally; the nonlinear assertion is not stated in those notes."
+   }
+  },
+  {
+   "text": "Let $t=|\\eta|\\geq1$ and $\\theta=\\eta/t$. Then $H(z)\\cdot\\eta=t\\phi_\\theta(z)$. On $C$ the integrand on the right of the induction identity has absolute value at most $B_Np_N(u)$, since $|e^{it\\phi_\\theta}|=1$. Apply [lem-sfb-integrable-majorant-estimate] for Lebesgue measure restricted to $C$, with the constant integrable majorant $B_Np_N(u)$. (Its integral is $VB_Np_N(u)$, because $V<\\infty$.) Taking absolute values in that identity gives $$\\left|\\int_Ue^{iH\\cdot\\eta}u\\right|\\leq VB_Nt^{-N}p_N(u)\\leq2^NVB_N(1+t)^{-N}p_N(u).$$ The last inequality is $1+t\\leq2t$. This includes $N=0$.",
+   "uses": [
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent-written nonlinear extension of the integration-by-parts argument of Demailly, Differential and pseudodifferential operators on manifolds, §1 (1.7) and §3 (3.11), printed pp.2 and 9; supplemental notes read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. WANTED locally; the nonlinear assertion is not stated in those notes."
+   }
+  },
+  {
+   "text": "For $0\\leq t=|\\eta|\\leq1$, use [lem-sfb-integrable-majorant-estimate] on $C$ with constant majorant $p_0(u)$ to get $|\\int_Ue^{iH\\cdot\\eta}u|\\leq Vp_0(u)\\leq Vp_N(u)$. Since $(1+t)^N\\leq2^N$, this is at most $2^NV(1+t)^{-N}p_N(u)$. Together with the previous step, $A_N=2^NV\\max(1,B_N)$ proves the required estimate for every $\\eta$, including $\\eta=0$. It remains valid if $V=0$ or $u=0$.",
+   "uses": [
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent-written nonlinear extension of the integration-by-parts argument of Demailly, Differential and pseudodifferential operators on manifolds, §1 (1.7) and §3 (3.11), printed pp.2 and 9; supplemental notes read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. WANTED locally; the nonlinear assertion is not stated in those notes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-euclidean-sphere-compact",
+  "lem-sfb-compact-continuous-norm-bound",
+  "lem-sfb-continuous-on-compact-integrable",
+  "lem-sfb-coordinate-weighted-adjoint",
+  "lem-sfb-integrable-majorant-estimate",
+  "lem-sfb-real-compact-supported-integral-bound",
+  "lem-sfb-smooth-nonzero-complex-reciprocal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Agent-written nonlinear extension of the integration-by-parts argument of Demailly, Differential and pseudodifferential operators on manifolds, §1 (1.7) and §3 (3.11), printed pp.2 and 9; supplemental notes read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. WANTED locally; the nonlinear assertion is not stated in those notes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nonstationary|non.stationary|stationary.phase|oscillatory",
+   "results": "{\"t\": \"2026-10-24T05:06:31Z\", \"tool\": \"grep\", \"query\": \"nonstationary|non.stationary|stationary.phase|oscillatory\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"oscillatory\"",
+   "results": "{\"t\": \"2026-10-24T05:06:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"oscillatory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform nonstationary phase estimate for a smooth compactly supported amplitude and a phase with nonzero gradient",
+   "results": "{\"t\": \"2026-10-24T05:06:32Z\", \"tool\": \"leansearch\", \"query\": \"Uniform nonstationary phase estimate for a smooth compactly supported amplitude and a phase with nonzero gradient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"ContDiff.lipschitzWith_of_hasCompactSupport\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"IsCompact.uniform_oscillationWithin\", \"CompactlySupportedContinuousMapClass.uniformContinuous\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"ContDiffMapSupportedIn.uniformSpace\"], \"digest\": \"8d68068917d660dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform nonstationary phase estimate on a compact support: when the phase gradient never vanishes, integration against exp(i t phase) decays to any order with derivatives of the amplitude",
+   "results": "{\"t\": \"2026-10-24T05:06:33Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform nonstationary phase estimate on a compact support: when the phase gradient never vanishes, integration against exp(i t phase) decays to any order with derivatives of the amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"tendsto_integral_exp_inner_smul_cocompact_of_continuous_compact_support\", \"Real.tendsto_integral_exp_smul_cocompact\", \"tendsto_integral_exp_inner_smul_cocompact\", \"Real.zero_at_infty_fourierIntegral\"], \"digest\": \"583f892da7777d34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integral\", \"fderiv\"",
+   "results": "{\"t\": \"2026-10-24T05:07:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"integral\\\", \\\"fderiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"hasFDerivAt_integral_of_dominated_of_fderiv_le''\", \"hasFDerivAt_integral_of_dominated_loc_of_lip_interval\", \"hasFDerivAt_integral_of_dominated_of_fderiv_le\", \"hasFDerivAt_integral_of_dominated_loc_of_lip\", \"hasFDerivAt_integral_of_dominated_loc_of_lip'\", \"intervalIntegral.hasFDerivAt_integral_of_dominated_of_fderiv_le\", \"intervalIntegral.hasFDerivAt_integral_of_dominated_loc_of_lip\", \"intervalIntegral.integral_hasFDerivAt\"], \"digest\": \"b86b74ce4e732798\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Repeated integration by parts bounds a nonstationary exponential integral with nonlinear real phase by inverse powers of its frequency uniformly over a compact family of directions",
+   "results": "{\"t\": \"2026-10-24T05:07:34Z\", \"tool\": \"leanfinder\", \"query\": \"Repeated integration by parts bounds a nonstationary exponential integral with nonlinear real phase by inverse powers of its frequency uniformly over a compact family of directions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"HurwitzKernelBounds.isBigO_atTop_F_int_one\", \"SchwartzMap.integral_pow_mul_iteratedFDeriv_le\", \"dist_integral_mulExpNegMulSq_comp_le\", \"ProbabilityTheory.Fernique.lintegral_exp_mul_sq_norm_le_mul\"], \"digest\": \"7feb11d0164d2a93\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  },
+  {
+   "tool": "grep",
+   "query": "nonstationary|non.stationary|stationary.phase|oscillatory",
+   "results": "{\"t\": \"2026-10-24T06:57:59Z\", \"tool\": \"grep\", \"query\": \"nonstationary|non.stationary|stationary.phase|oscillatory\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier bounds use a bilinear linear phase; integration-by-parts results give one identity, not the nonlinear uniform estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourierIntegral\", \"norm\"",
+   "results": "{\"t\": \"2026-10-24T06:57:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourierIntegral\\\", \\\"norm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Fourier.norm_fourierIntegral_le_integral_norm\", \"VectorFourier.norm_fourierIntegral_le_integral_norm\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\"], \"digest\": \"7a82683983d465e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier bounds use a bilinear linear phase; integration-by-parts results give one identity, not the nonlinear uniform estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integration by parts for nonlinear phase yields arbitrary polynomial decay uniformly in unit frequency directions",
+   "results": "{\"t\": \"2026-10-24T06:57:59Z\", \"tool\": \"leansearch\", \"query\": \"Integration by parts for nonlinear phase yields arbitrary polynomial decay uniformly in unit frequency directions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.integral_mul_lineDerivOp_right_eq_neg_left\", \"SchwartzMap.integral_smul_lineDerivOp_right_eq_neg_left\", \"SchwartzMap.integral_clm_comp_lineDerivOp_right_eq_neg_left\", \"SchwartzMap.integral_bilinear_lineDerivOp_right_eq_neg_left\", \"MeasureTheory.integral_mul_deriv_eq_deriv_mul_of_integrable\", \"integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable\", \"integral_smul_fderiv_eq_neg_fderiv_smul_of_integrable\", \"SchwartzMap.integral_mul_deriv_eq_neg_deriv_mul\"], \"digest\": \"efbb2948286fddc4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier bounds use a bilinear linear phase; integration-by-parts results give one identity, not the nonlinear uniform estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform decay estimate for oscillatory integrals with smooth compactly supported amplitude and nonlinear phase with nowhere vanishing gradient",
+   "results": "{\"t\": \"2026-10-24T06:58:00Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform decay estimate for oscillatory integrals with smooth compactly supported amplitude and nonlinear phase with nowhere vanishing gradient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"HurwitzKernelBounds.isBigO_atTop_F_nat_zero_sub\", \"SchwartzMap.integral_pow_mul_iteratedFDeriv_le\", \"tendsto_integral_exp_inner_smul_cocompact_of_continuous_compact_support\", \"Real.tendsto_integral_exp_smul_cocompact\"], \"digest\": \"5935e52e22b0d92a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier bounds use a bilinear linear phase; integration-by-parts results give one identity, not the nonlinear uniform estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact smooth amplitudes with a submersive vector valued phase have rapid oscillatory decay controlled by finitely many amplitude derivatives",
+   "results": "{\"t\": \"2026-10-24T07:00:35Z\", \"tool\": \"leanfinder\", \"query\": \"Compact smooth amplitudes with a submersive vector valued phase have rapid oscillatory decay controlled by finitely many amplitude derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"SchwartzMap.decay\", \"SchwartzMap.decay'\", \"VectorFourier.norm_iteratedFDeriv_fourierPowSMulRight\", \"Function.HasTemperateGrowth.isBigO_uniform\"], \"digest\": \"d61e4e9749a6c9a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier bounds use a bilinear linear phase; integration-by-parts results give one identity, not the nonlinear uniform estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "pow_mul_norm_iteratedFDeriv_fourierIntegral_le|integral_mul_fderiv_eq_neg_fderiv_mul",
+   "results": "{\"t\": \"2026-10-24T07:00:35Z\", \"tool\": \"grep\", \"query\": \"pow_mul_norm_iteratedFDeriv_fourierIntegral_le|integral_mul_fderiv_eq_neg_fderiv_mul\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean\", \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\"], \"digest\": \"3dd54a798ca87354\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier bounds use a bilinear linear phase; integration-by-parts results give one identity, not the nonlinear uniform estimate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-oscillatory-linear-frequency-substitution",
+  "date": "2026-10-24",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit. Supporting local analytic input: Global quantization before Proposition 3.6: change of coordinates and real bundle frames modulo one lower order. Analytic prerequisite: frequency substitution in the near-diagonal kernel, with its parameter-dependent cutoff justified distributionally. Supporting estimate: repeated integration by parts for a compactly supported amplitude and a submersion phase, used before comparing the two cutoff families.",
+   "via": [
+    "lem-sfb-oscillatory-linear-frequency-substitution",
+    "lem-sfb-local-quantization-coordinate-change",
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-compact-submersion-phase-estimate",
+  "worker": "stage1",
+  "summary": "Kept the statement and supplied the nonlinear integration-by-parts proof. Reused seven existing analytic/topological nodes; no new nodes. The explicit coefficient recursion proves uniformity in the unit frequency direction without increasing the amplitude derivative order beyond N. Checked empty support, zero frequency, N=0 and zero volume.",
+  "blueprint": "Inherited supporting estimate below lem-sfb-oscillatory-linear-frequency-substitution: frequency substitution in the near-diagonal global-quantization kernel. Steps 2–4 give the nonstationary differentiation and coefficient control; steps 5–6 give the two frequency regimes. Whole-blueprint searches found no matching blueprint node; ancestor command returns None, retained. Latest snapshot main-20261024 inspected.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-5acd9746f",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-5acd9746f (reviewer sub-agent of L); spot-checked: The item's statement is unchanged and is a true non-stationary phase estimate; I tested it on C empty, N=0, eta=0, H the identity, a coordinate projection, and the impossible case n<k. The delivery adds no new nodes. Its six steps form a complete integration-by-parts proof, and I re-derived each one. Step 2: surjectivity of DH(z) makes q=|DH^t theta|^2 positive, a_j=g_j/q is smooth by lem-sfb-smooth-nonzero-complex-reciprocal, and L phi=1. Step 3: lem-sfb-coordinate-weighted-adjoint applies with r=s=1, rho=H_E=H_F=1, B=0 and real a_j, so Q=T_theta. The sign it*int e^{it phi} v = int e^{it phi} T v is correct, only v needs compact support in U, and the induction on r is set up properly. Step 4: the coefficient recursion is correct (product rule, order at most r). Compactness of C x S comes from lem-cbc-euclidean-sphere-compact plus a written tube-lemma argument, and lem-sfb-compact-continuous-norm-bound gives B_N independent of u and t. Steps 5 and 6: lem-sfb-integrable-majorant-estimate on Lebesgue measure restricted to C, with V finite from lem-sfb-real-compact-supported-integral-bound; 1+t<=2t gives A_N=2^N V max(1,B_N). Every cited node is in unit sk-thm-sf-ctf-stability or is a Mathlib leaf, there is no cycle, and tool_uses is empty. I searched the DAG for stationary, oscillat, decay, fourier and phase and found no duplicate; parameter-symbol-partial-fourier-decay has only a linear phase. Demailly (3.11) is honestly marked as motivation only, with an agent-written proof and WANTED recorded. blueprint.from.node=null is inherited (the ancestor tool returns None), so it is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.CompactSubmersionPhaseEstimate",
+  "declaration": "EuclideanSpace.compactSubmersion_phase_estimate",
+  "declarations": [
+   "EuclideanSpace.compactSupportDerivativeSeminorm",
+   "EuclideanSpace.compactSubmersion_phase_estimate"
+  ],
+  "file": "lean/Sheaf/Analysis/CompactSubmersionPhaseEstimate.lean",
+  "statement": "theorem compactSubmersion_phase_estimate {n k : ℕ} (hn : 1 ≤ n) (hk : 1 ≤ k) (U C : Set (EuclideanSpace ℝ (Fin n))) (hU : IsOpen U) (hC : IsCompact C) (hCU : C ⊆ U) (H : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin k)) (hH : ContDiffOn ℝ ∞ H U) (hsub : ∀ z ∈ U, Function.Surjective (fderiv ℝ H z)) : ∀ N : ℕ, ∃ A : ℝ, 0 ≤ A ∧ ∀ u : EuclideanSpace ℝ (Fin n) → ℂ, ContDiffOn ℝ ∞ u U → (∀ z ∈ U, z ∉ C → u z = 0) → ∀ η : EuclideanSpace ℝ (Fin k), ‖∫ z in U, Complex.exp (Complex.I * (inner ℝ (H z) η : ℂ)) * u z‖ ≤ A * (1 + ‖η‖) ^ (-(N : ℤ)) * compactSupportDerivativeSeminorm U N u",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the definition node def-sfb-euclidean-multi-index-partial-derivative, extracted without changing the existing construction; does not depend on the Plancherel weak-derivative theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5889e3807",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Delivery adds the CompactSubmersionPhaseEstimate module (helper p_N seminorm as a concrete sSup over multi-indices of order <= N, plus the theorem with a sorry proof) and the item's lean record and stmt_dep def-sfb-euclidean-multi-index-partial-derivative, whose node and module are byte-identical to live. Clause check: n,k>=1; U open, C compact, C subset of U; H ContDiffOn C^infinity on U; DH surjective on U via fderiv (true derivative on open U); quantifiers forall N exists A>=0 forall u forall eta; u smooth on U and zero on U minus C; sSup equals the node's max of sups (derivatives continuous on U, bounded on C, zero on U minus C, finitely many multi-indices); +i phase with dot product; (1+|eta|)^(-N) as zpow. Edge cases C empty (p_N=0), U empty, N=0, eta=0, zero volume all fine. Statement is true (non-stationary phase). lean.statement verbatim in file; no universes; docstrings carry source and blueprint; no duplicate seminorm (ContDiffMapSupportedIn.seminorm is a different quantity); proof-dep import exists. Second-reading section is the author's own re-check, honestly labelled; this review is the independent reading. Not recompiled (no changes); compile evidence is the worker's."
+ }
+}

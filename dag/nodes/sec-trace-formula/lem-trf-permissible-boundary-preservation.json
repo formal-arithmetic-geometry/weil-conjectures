@@ -39,72 +39,52 @@
    }
   },
   {
-   "text": "Fix $y\\in E$ and $x=b(y)$. Choose an actual étale neighborhood $v:W\\to X$, a point $w$ over $x$, and parameters in $R=\\mathcal O_{W,w}$ such that $B$ has equation $t_1\\cdots t_r=0$ and $M$ has ideal $(t_j:j\\in J)$. Here $J\\ne\\varnothing$ and $J\\cap\\{1,\\ldots,r\\}\\ne\\varnothing$ since $M\\subset B$. Choose representatives on an affine open $W^\\circ$ around $w$ retaining these equations. As $H$ is a reduced union of components of $B$, its pullback is the union of a subset of these coordinate hyperplanes, with equation $\\prod_{i\\in I}t_i=0$. Apply [lem-trf-etale-component-coordinate-identification] on $X$ with $D=H$ and with $H_a$ the actual distinct irreducible components of $H$, which are regular by hypothesis. After shrinking $W^\\circ$, each $H_a$ through $x$ pulls back to one distinct hyperplane $V(t_{i(a)})$ and the others miss $w$; the same statement supplies the generic-point hypothesis for strict-transform base change. This application concerns only the original components on $X$.",
+   "text": "Apply [lem-trf-permissible-boundary-etale-charts] at every point of $E$. It gives actual etale lifts with regular local rings, distinct labelled hyperplanes for $E$ and the surviving $H_a^{\\mathrm{st}}$, and the reduced boundary equations, including strict-transform equations. At a point of $X^+\\setminus E\\simeq X\\setminus M$ (step 1) take an etale chart of [def-trf-normal-crossings-divisor] for $B$ at its image, restricted over $X\\setminus M$, with $B=V(t_1\\cdots t_r)$; as $H$ is a reduced union of components of $B$, its pullback is a sub-product $V(\\prod_{i\\in I}t_i)$, and [lem-trf-etale-component-coordinate-identification], applied to the regular components $H_a$, makes each $H_a$ through the point one distinct hyperplane $V(t_{i(a)})$ and the others empty there; $E$ is empty there and $H_a^{\\mathrm{st}}=H_a\\setminus M$ by step 1. These two kinds of charts supply the pointwise local hypotheses of the globalization lemma at every point of $X^+$.",
    "uses": [
+    "lem-trf-permissible-boundary-etale-charts",
+    "def-trf-normal-crossings-divisor",
     "lem-trf-etale-component-coordinate-identification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Lemma 4.2.9 and its coordinate-chart proof, printed p. 121; Remark 4.2.2(i), printed p. 118"
+    "place": "Expose VIII 4.1.2--4.1.4(i), printed p. 117; Lemma 4.2.9 and its coordinate-chart proof, printed p. 121; the regular-intersection criterion is Remark 4.2.2(i), printed p. 118."
    }
   },
   {
-   "text": "Form $Y=X^+\\times_XW^\\circ$. The projection $Y\\to X^+$ is étale by [lem-weil-pbc-etale-scheme-base-change], and [thm-nagata-blowup-flat-base-change] identifies $Y$ with the blowup of $W^\\circ$ in the pulled-back center. Choose $\\tilde y$ in the fiber over the pair $(y,w)$, that is a point of $\\operatorname{Spec}(\\kappa(y)\\otimes_{\\kappa(x)}\\kappa(w))$; this tensor product of two field extensions is nonzero. Choose a standard chart through $\\tilde y$. Its local ring at $\\tilde y$ is a localization of the chart ring over $R=\\mathcal O_{W,w}$. By [lem-trf-permissible-coordinate-chart] this ring is regular, the reduced pullback of $B$ is a union of coordinate hyperplanes, and all coordinate intersections have the stated regularity and codimension. For each $H_a$, first use its hyperplane identification at $w$ from step 2, then [lem-trf-strict-transform-flat-etale-base-change] to identify $(H_a^{\\mathrm{st}})\\times_XW^\\circ$ with the strict transform of that hyperplane, and finally the strict-transform clause of [lem-trf-permissible-coordinate-chart]. It follows that near $\\tilde y$ this pullback is empty or one strict-transform coordinate hyperplane, distinct for distinct $a$. The reduced exceptional inverse image is the additional coordinate hyperplane $t_j=0$. No regularity of $H_a^{\\mathrm{st}}$ has been assumed.",
-   "uses": [
-    "lem-weil-pbc-etale-scheme-base-change",
-    "thm-nagata-blowup-flat-base-change",
-    "lem-trf-permissible-coordinate-chart",
-    "lem-trf-strict-transform-flat-etale-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Lemma 4.2.9 and its coordinate-chart proof, printed p. 121; Remark 4.2.2(i), printed p. 118"
-   }
-  },
-  {
-   "text": "The étale neighborhoods from step 3 and $X^+\\setminus E$ cover $X^+$. By [lem-trf-etale-reduced-cartier-descent], pullback of each reduced inverse image is the reduced subscheme on its pulled-back support; hence the calculated coordinate products are the actual pullbacks of $B^+$ and $H^+$, and their effective Cartier property descends. These equations directly make $B^+$ normal crossings. Consider the finite family consisting of $E$ and all nonempty $H_a^{\\mathrm{st}}$. At every étale point in step 3 its members are empty or distinct coordinate hyperplanes, so every selected intersection is empty or regular of the expected codimension. Off $E$ the same holds by the original SNC hypothesis and step 1. Apply [lem-trf-etale-regular-intersection-descent] to this family, including the empty intersection $X^+$, to obtain regularity of the ambient scheme, of each member, and of every intersection, with the asserted codimensions. In particular $E$ is regular and Noetherian; [rem-pc-regular-normal] says that its irreducible components are disjoint open and closed subschemes. They inherit the regular local rings of $E$. Each nonempty $H_a^{\\mathrm{st}}$ is irreducible, being the closure of the irreducible open $H_a\\setminus M$ under the isomorphism of step 1. Thus passing from $E$ to its disjoint components preserves the intersection conclusions. This proves that the actual irreducible components of $H^+$ and all their intersections satisfy the SNC criterion; no component-identification lemma is applied to $H^+$.",
-   "uses": [
-    "lem-trf-etale-reduced-cartier-descent",
-    "lem-trf-etale-regular-intersection-descent",
-    "rem-pc-regular-normal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Lemma 4.2.9 and its coordinate-chart proof, printed p. 121; Remark 4.2.2(i), printed p. 118"
-   }
-  },
-  {
-   "text": "On the complement of $E$ the strict transforms agree with the original divisors by step 1. On every chart of step 3 the reduced inverse images are exactly the union of the surviving strict-transform hyperplanes and the exceptional hyperplane. The closure definition [def-nagata-strict-transform] and reduction [def-weil-pbc-scheme-reduction] consequently give the reduced closed-subscheme equalities $B^+=B^{\\mathrm{st}}\\cup E$ and $H^+=H^{\\mathrm{st}}\\cup E$. Each hyperplane of $H^+$ occurs among those of $B^+$, so each irreducible component of $H^+$ is an irreducible component of $B^+$. Finiteness follows from step 1 and [lem-weil-pbc-noetherian-finitely-many-components]; regularity and all intersection codimensions follow from step 4. The empty product $\\prod_{i\\in\\varnothing}t_i=1$ includes $H=\\varnothing$, when $H^+=E$.",
+   "text": "Discard empty $H_a^{\\mathrm{st}}$. Each remaining transform is irreducible: by [def-nagata-strict-transform] it is the closure of the nonempty irreducible open $H_a\\setminus M$ under the complement isomorphism. Distinct transforms remain distinct there. The equations in step 2 and the unchanged complement from step 1 show that these closed subschemes are reduced. Apply [lem-trf-labelled-coordinate-boundary-globalization] to $Y=X^+$, $C=B^+$ and the labelled family $E,H_a^{\\mathrm{st}}$. Its reduced union is $H^+$ by step 2 and the complement calculation. The lemma gives ambient regularity, normal crossings for $B^+$, and the finite regular components and all required intersections for $H^+$, as well as the union-of-components assertion.",
    "uses": [
     "def-nagata-strict-transform",
-    "def-weil-pbc-scheme-reduction",
-    "lem-weil-pbc-noetherian-finitely-many-components"
+    "lem-trf-labelled-coordinate-boundary-globalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Lemma 4.2.9 and its coordinate-chart proof, printed p. 121; Remark 4.2.2(i), printed p. 118"
+    "place": "Expose VIII 4.1.2--4.1.4(i), printed p. 117; Lemma 4.2.9 and its coordinate-chart proof, printed p. 121; the regular-intersection criterion is Remark 4.2.2(i), printed p. 118."
+   }
+  },
+  {
+   "text": "On the charts of step 2, adjoining the exceptional hyperplane to the strict-transform hyperplanes gives exactly $B^+$ and $H^+$. On the complement the equalities follow from step 1. These are equalities of closed subschemes, since all the local ideals are the same products of distinct coordinate factors; thus $B^+=B^{\\mathrm{st}}\\cup E$ and $H^+=H^{\\mathrm{st}}\\cup E$. For $H=\\varnothing$ the selected product is $1$, its strict transform is empty, and the same equations give $H^+=E$.",
+   "uses": [
+    "lem-trf-permissible-boundary-etale-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 4.1.2--4.1.4(i), printed p. 117; Lemma 4.2.9 and its coordinate-chart proof, printed p. 121; the regular-intersection criterion is Remark 4.2.2(i), printed p. 118."
    }
   }
  ],
  "proof_deps": [
   "def-nagata-strict-transform",
-  "def-weil-pbc-scheme-reduction",
+  "def-trf-normal-crossings-divisor",
   "def-weil-proper-morphism",
   "lem-trf-etale-component-coordinate-identification",
-  "lem-trf-etale-reduced-cartier-descent",
-  "lem-trf-etale-regular-intersection-descent",
-  "lem-trf-permissible-coordinate-chart",
-  "lem-trf-strict-transform-flat-etale-base-change",
-  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-trf-labelled-coordinate-boundary-globalization",
+  "lem-trf-permissible-boundary-etale-charts",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-finitely-many-components",
   "lemma-nagata-strict-transform-restrict",
-  "rem-pc-regular-normal",
-  "thm-nagata-blowup-flat-base-change",
   "thm-nagata-global-blowup-complement",
   "thm-nagata-global-blowup-proper"
  ],
@@ -170,19 +150,45 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-permissible-boundary-preservation",
   "worker": "stage1",
-  "summary": "Repaired the returned false component-identification statement by requiring exactly the distinct irreducible components and defining coordinates by a regular system of parameters. Removed its strict-transform proof sketch. The proof now identifies the original H components on X, base-changes their strict transforms, and then applies the blowup chart clause at a point over both y and w, without assuming regularity of the transforms. Added strict-transform restriction off the center, corrected the flat base-change source to Stacks 081I and the flatness definition dependency, and removed the worker-written tool_uses.",
-  "blueprint": "Realizes ILO VIII 4.1.2--4.1.4(i), Remark 4.2.2(i), and Lemma 4.2.9 coordinate-chart proof; the new base-change/component statements make the étale-local strict-transform argument explicit."
+  "summary": "Rebase and repair following the landing refusal at returned head 7cdac0ba506: retained the two independent statement-only work packages and their logged searches; refreshed every other item field from the current shared DAG. The unchanged statement, statement dependencies, source, blueprint provenance, Lean records and maintainer reviews are preserved. Reread every assembly citation and the chart, component-identification, strict-transform comparison, reduced-Cartier descent, regular-intersection descent and regular-normal statements supporting the packages. No changed cited statement requires replacement. Reducedness of surviving transforms explicitly uses the exceptional charts and the unchanged complement. The 2382-character assembly retains old step 1; the chart package carries old steps 2--3 and the local-union part of 5, and the globalization package carries old step 4 and the component part of 5. Original arguments remain verbatim in report.md. Initial current-server-main dry run passed at f1389a53e03; this refreshed report and record are submitted for final preflight and delivery.",
+  "blueprint": "Realizes ILO VIII 4.1.2--4.1.4(i), Remark 4.2.2(i), and Lemma 4.2.9 coordinate-chart proof; the new base-change/component statements make the étale-local strict-transform argument explicit. Subarguments retain the original alteration/ILO permissible-blowup route.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Generic blowup/Noetherian scheme infrastructure for the ILO permissible-chart route; no replacement of a unit step."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic blowup/Noetherian scheme infrastructure for the ILO permissible-chart route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic blowup/Noetherian scheme infrastructure for the ILO permissible-chart route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic blowup/Noetherian scheme infrastructure for the ILO permissible-chart route; no replacement of a unit step."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic blowup/Noetherian scheme infrastructure for the ILO permissible-chart route; no replacement of a unit step."
+   },
+   {
+    "node": "lemma-nagata-strict-transform-restrict",
+    "why": "Generic blowup/Noetherian scheme infrastructure for the ILO permissible-chart route; no replacement of a unit step."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NJ-fa6dfcb10",
-  "group": "NJ",
+  "reviewer": "NT-cc-Q115-e88a92515",
+  "group": "Q115",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-fa6dfcb10 (reviewer sub-agent of L); spot-checked: Read in full: the item, the 4 new nodes, every cited statement, ILO VIII 4.1.2-4.1.4(i) p.117, Rem 4.2.2(i) p.118, Lemma 4.2.9 chart proof p.121, and Stacks 025N/039S (etale.tex), 081I (morphisms.tex) and 080E/080F (divisors.tex). The item's statement is unchanged. It assumes M in B, which is stronger than ILO's 'V has normal crossings with Z'; that is fine because the item is not a target and its only user, the strictification step, blows up centers inside the boundary. It holds on A^2 axes/origin, a Cartier center, a nodal B, A^3 with M=V(x,z), and H empty. Steps 1-5 check out: J meets {1..r} because (t_J) is prime and contains t_1...t_r. The component lemma is applied only to H on X, and its hypotheses hold. A point over (y,w) exists because the residue-field tensor product is nonzero. Strict-transform flat base change follows from 081I. The descent lemma is applied to the family {E, H_a^st}, then rem-pc-regular-normal passes the result to the components of E. The set equalities for B^+ and H^+ are immediate. All 4 new nodes are true, statement-only and self-contained, with correct blueprint.from/via. No duplicates found by rg over strict transform, 081I/080F, SNC, permissible, RSP and 025N/039S. The strict-transform node's generic-point hypothesis is stronger than needed but harmless, and step 2 supplies it. FIX: the corrected lem-trf-permissible-coordinate-chart.json restores '\\ne', which had become a literal newline followed by 'e' (B4). It also makes the strict-transform clause explicit: on chart j the strict transform of V(t_i) is V(u_i) for i in J\\{j}, empty for i=j and V(t_i) for i not in J. Step 3 uses exactly this identification. Accepted tool uses: thm-nagata-global-blowup-proper, thm-nagata-global-blowup-complement, lemma-nagata-strict-transform-restrict, thm-nagata-blowup-flat-base-change, rem-pc-regular-normal. These are generic blowup and scheme tools that no node of sk-i-curve-zero provides.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-e88a92515 (reviewer sub-agent of L); spot-checked: This head is the 7cdac0ba506 delivery pushed again unchanged. Both new nodes are byte-identical to 7cdac. The item's proof and proof_deps are identical too; only split_report.summary and its date changed. On live and side-live the item is still S1-open: split, with the old 5-step proof, and neither new id exists. Every item field other than proof, proof_deps and split_report equals live, so the statement is unchanged and no target is weakened. All 23 cited nodes are present in the snapshot. Reread: ILO Exposé VIII 4.1.2-4.1.4(i) p.117, Remark 4.2.2(i) p.118 and Lemma 4.2.9 p.121. This is not SGA, and none of the three nodes mentions SGA. Re-split check: old step 1 is assembly step 1. Old steps 2-3 and the local unions of step 5 became lem-trf-permissible-boundary-etale-charts. Old step 4 and the component/finiteness part of step 5 became lem-trf-labelled-coordinate-boundary-globalization. The packages are of comparable size and no argument was dropped. Charts node: J meets {1..r} because (t_J) is prime and contains t_1...t_r. Component identification gives the bijection with I. The residue tensor product is nonzero, so a point over both y and w exists. The chart ring and strict transforms (u_i / t_i / empty for j) match ILO 4.2.9. Checked edge cases: principal center, H empty, non-boundary parameter. Globalization node: étale descent, splitting of E because regular implies normal, and distinct indices. Checked edge cases: empty Y, E, C or D; m=0; disconnected E; B=V(xy) with M=V(x,z) in A3; nodal B. Fault (C1, missing citation) in step 2, the same one the 3bc4, 316c and 7cdac reviews fixed, now lost a fourth time. Off E the step only says 'complement from step 1', but B is only nc, and the globalization lemma needs labelled charts at every point. FIX re-applied: step 2 adds the def-trf-normal-crossings-divisor chart over X minus M and lem-trf-etale-component-coordinate-identification (both unit sk-i-curve-zero). proof_deps equal the union of the step uses, the assembly is 2953 characters, and stmt_deps are unchanged. Batch-5 flags for the two new nodes: they are sub-packages of this item's own proof and general boundary geometry, neither stated by nor a step of the trace formula or Poincaré duality, so they are accepted. Maintainer: a re-delivery should start from runs/*/fixes, or the landing should keep the reviewer fix.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -207,5 +213,24 @@
   ],
   "fixed_by": "NT-stage2-Codex-191379197"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "tool_uses": [
+  "thm-nagata-global-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-strict-transform-restrict"
+ ]
 }

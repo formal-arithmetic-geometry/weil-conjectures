@@ -119,7 +119,22 @@
   "def-weil-geometric-hypotheses"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le_two_mul_genus"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le_two_mul_genus"
+   ]
+  }
+ },
  "chapter": "sec-zeta-weil",
  "unit": "sk-cor-hasse",
  "lean": {
@@ -132,5 +147,77 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Fix the finite-field datum\n$(p,a,q,k_0,k)$, where $q=p^a$, choose a prime $\\ell\\neq p$, fix a\nfield embedding $\\iota:\\Qlb\\hookrightarrow\\mathbf C$, and let\n$C_0/k_0$ be a smooth, proper,\ngeometrically connected scheme of pure dimension $1$. Put\n$C=C_0\\times_{k_0}k$, and let\n\n$$\ng=g(C)=\\dim_kH^1(C,\\mathcal O_C)\n$$\n\nbe the genus of the\nsmooth proper connected curve $C$ over the\nalgebraically closed field $k$. Then, for every integer $n\\geq1$,\n\n$$\n\\boxed{\n\\left|\\#C_0(\\mathbf F_{q^n})-(q^n+1)\\right|\\leq2g\\,q^{n/2}}.\n$$",
+  "proof": [
+   {
+    "text": "Step 1: the point-count identity. The scheme $C_0$ is proper, so by\n[cor-trf-point-counting] applied to the constant Weil sheaf,\n\n$$\nN_n:=\\#C_0(\\mathbf F_{q^n})\n=\\sum_{i\\in\\mathbf Z}(-1)^i\\Tr\\bigl(F^n\\mid H^i(C,\\Qlb)\\bigr),\n$$\n\nwhere $F$ is the global geometric Frobenius in the\ngeometric-Frobenius convention.",
+    "uses": [
+     "cor-trf-point-counting"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 2: the range and the degree zero. By\n[prop-cohomological-finiteness] (the constant sheaf on a scheme of\ndimension $1$), $H^i(C,\\Qlb)=0$ for $i\\notin[0,2]$, and\n$H^0(C,\\Qlb)\\cong\\Qlb$ with geometric Frobenius acting as the\nidentity; hence $\\Tr(F^n\\mid H^0(C,\\Qlb))=1$ for every $n$.",
+    "uses": [
+     "prop-cohomological-finiteness"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 3: the top degree. By [prop-endpoints] with $d=1$,\n$H^2(C,\\Qlb)\\cong\\Qlb(-1)$ Frobenius-equivariantly, and by\n[def-weil-frobenius-coefficient-twists] geometric Frobenius acts on\n$\\Qlb(-1)$ by $q$; hence $\\Tr(F^n\\mid H^2(C,\\Qlb))=q^n$.",
+    "uses": [
+     "prop-endpoints",
+     "def-weil-frobenius-coefficient-twists"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 4: the dimension of $H^1$. Since $k$ is algebraically closed and\n$\\ell\\neq p$, there are primitive $\\ell^r$-th roots of unity $\\zeta_r\\in k$\n([lem-sc-primitive-root]), which we choose with $\\zeta_{r+1}^{\\ell}=\\zeta_r$.\nThe trivializations $\\theta_{\\zeta_r}:\\mathbf Z/\\ell^r\\xrightarrow{\\sim}\\mu_{\\ell^r}$\nof [def-sc-mu-trivialization] then carry the reductions\n$\\mathbf Z/\\ell^{r+1}\\to\\mathbf Z/\\ell^r$ to the $\\ell$-th power maps\n$\\mu_{\\ell^{r+1}}\\to\\mu_{\\ell^r}$. The $\\ell$-th power map of $\\mathbf G_m$\nand the identity of $\\mathbf G_m$ form a morphism from the Kummer sequence for\n$\\ell^{r+1}$ to the one for $\\ell^r$ ([def-sc-kummer-sequence]). By the\ncanonical identifications $H^1(C,\\mu_{\\ell^r})=\\operatorname{Pic}(C)[\\ell^r]$\nof [lem-sc-kummer-les], valid as $C$ is proper, connected and reduced, the\n$\\ell$-th power maps therefore become multiplication by $\\ell$. The degree\n$\\operatorname{Pic}(C)\\to\\mathbf Z$ is a homomorphism to a torsion-free group\n([def-sc-pic0]), so\n$\\operatorname{Pic}(C)[\\ell^r]=\\operatorname{Pic}^0(C)[\\ell^r]$, and\n$\\operatorname{Pic}^0(C)=J_C(k)$ for the Jacobian $J_C$, an abelian variety\nof dimension $g$ ([thm-sc-jacobian-representability]). Hence\n\n$$\n\\varprojlim_rH^1(C,\\mathbf Z/\\ell^r)\\cong\\varprojlim_rJ_C[\\ell^r](k)\n=T_\\ell J_C\\cong\\mathbf Z_\\ell^{2g}\n$$\n\n([def-wf-abelian-tate-module], [prop-av-tate-rank]). These étale cohomology\ngroups of torsion sheaves are the pro-étale ones. The $\\ell$-adic groups are\nobtained from them as consequences of the condensed theory. Let\n$a:C\\to\\operatorname{Spec}k$ be the structure morphism and\n$M^q=H^q(C,\\mathbf Z_\\ell)=H^q(Ra_*\\mathbf Z_{\\ell,C})$, with\n$\\mathbf Z_{\\ell,C}=p_C^*\\mathbf Z_\\ell\\cong\\varprojlim_r(\\mathbf Z/\\ell^r)_C$\n([det-def-sfb-pulled-back-coefficients], [sk-prop-sfb-qlbar-colimit-x]), a\nlimit of classical sheaves with epimorphic transition maps. The groups\n$H^0(C,\\mathbf Z/\\ell^r)$ are finite, so the Milnor sequence of\n[det-pe-continuous-cohomology-milnor] gives\n\n$$\nM^1\\cong\\varprojlim_rH^1(C,\\mathbf Z/\\ell^r)\\cong\\mathbf Z_\\ell^{2g}.\n$$",
+    "uses": [
+     "lem-sc-primitive-root",
+     "def-sc-mu-trivialization",
+     "def-sc-kummer-sequence",
+     "lem-sc-kummer-les",
+     "def-sc-pic0",
+     "thm-sc-jacobian-representability",
+     "def-wf-abelian-tate-module",
+     "prop-av-tate-rank",
+     "det-def-sfb-pulled-back-coefficients",
+     "sk-prop-sfb-qlbar-colimit-x"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Finally, the coefficient comparison along the flat map\n$\\mathbf Z_\\ell\\to\\Qlb$ ([sk-prop-scalar-six]) gives\n$H^1(C,\\Qlb)\\cong M^1\\otimes_{\\mathbf Z_\\ell}\\Qlb$, so\n\n$$\n\\dim_{\\Qlb}H^1(C,\\Qlb)=2g.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Step 5: the trace bound. By [prop-weight-purity-roots] with\n$i=1$ and $d=1$, every eigenvalue $\\alpha$ of $F$ on\n$H^1(C,\\Qlb)$ satisfies $|\\iota(\\alpha)|=q^{1/2}$. Let\n$\\alpha_1,\\ldots,\\alpha_{2g}$ be the eigenvalues with algebraic\nmultiplicity (Step 4). The trace equals the sum of the eigenvalues,\nso, applying the field embedding $\\iota$ and the triangle inequality\nin $\\mathbf C$,\n\n$$\n\\left|\\iota\\bigl(\\Tr(F^n\\mid H^1(C,\\Qlb))\\bigr)\\right|\n\\leq\\sum_{j=1}^{2g}|\\iota(\\alpha_j)|^n=2g\\,q^{n/2}.\n$$",
+    "uses": [
+     "prop-weight-purity-roots"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 6: assembly. Combining Steps 1, 2 and 3,\n\n$$\nN_n-1-q^n=-\\Tr\\bigl(F^n\\mid H^1(C,\\Qlb)\\bigr)\n\\quad\\text{in }\\Qlb.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The left-hand side is an integer, hence fixed by $\\iota$, so by\nStep 5,\n\n$$\n|N_n-(q^n+1)|=\\left|\\iota\\bigl(\\Tr(F^n\\mid H^1(C,\\Qlb))\\bigr)\\right|\n\\leq2g\\,q^{n/2},\n$$\n\nwhich is the claimed bound.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

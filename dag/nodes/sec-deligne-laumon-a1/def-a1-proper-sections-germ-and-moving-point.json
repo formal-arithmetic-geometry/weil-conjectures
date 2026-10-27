@@ -84,7 +84,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-thm-dl-a1-upper",
  "lean": {
@@ -95,14 +106,20 @@
    "WeilConjectures.ProperSemilinearGerms.integralCounit",
    "WeilConjectures.ProperSemilinearGerms.integralGerm",
    "WeilConjectures.ProperSemilinearGerms.rationalGerm",
-   "WeilConjectures.ProperSemilinearGerms.movingPoint"
+   "WeilConjectures.ProperSemilinearGerms.movingPoint",
+   "WeilConjectures.ProperSemilinearGerms.movingPoint_properties",
+   "WeilConjectures.ProperSemilinearGerms.rationalSquare",
+   "WeilConjectures.ProperSemilinearGerms.rationalFibre",
+   "WeilConjectures.ProperSemilinearGerms.stageRealization",
+   "WeilConjectures.ProperSemilinearGerms.realizedPointComparison",
+   "WeilConjectures.ProperSemilinearGerms.realizedTargetComparison"
   ],
   "statement": "def rationalGerm\n    (z : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left)\n    (hz : z ≫ (D.geometricFiber Y₀).hom = 𝟙 _)\n    (M : sfRationalConstructibleCategory l E (D.geometricFiber Y₀).left)",
   "branch": "newtargets-dag",
-  "by": "Q110",
-  "date": "2026-10-19",
+  "by": "Q48",
+  "date": "2026-10-24",
   "existing": true,
-  "note": "Ownership-only repair requested by L at immutable head 21a25d28cf8d. These are exact existing definitions, not choices of properSectionsSemilinearGerms. Reuse their unchanged module; this node owns their definitions, while the semilinear identity remains in lem-a1-proper-sections-semilinear-germs."
+  "note": "Ownership-only repair requested by L at immutable head 21a25d28cf8d. These are exact existing definitions, not choices of properSectionsSemilinearGerms. Reuse their unchanged module; this node owns their definitions, while the semilinear identity remains in lem-a1-proper-sections-semilinear-germs. H2-b repair of a43a8bd0ed4a, explicitly requested by L: extend this existing:true definition ownership record to the published rationalSquare and its elementary movingPoint_properties support, rationalFibre, stageRealization, realizedPointComparison and realizedTargetComparison. The old record lacked these canonical comparison interfaces, leaving the consumer to cite its downstream parent theorem. All are exact existing declarations of this same module; no source changes, new comparison choices, or semilinear identity theorem are introduced. movingPoint_properties is the elementary typing support of the canonical square, not the parent semilinear germ identity. The actual definition-node statement is unchanged."
  },
  "reviewed": {
   "date": "2026-10-19",
@@ -113,11 +130,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2d5d703ac",
-  "group": "Q110",
-  "result": "fix",
-  "note": "Third delivery. Item Lean byte-identical to 21a25d28cf8d (sha 7746195a), whose mathematics was accepted. The item now cites the new existing:true def node def-a1-proper-sections-germ-and-moving-point instead of theorem lem-a1-proper-sections-semilinear-germs (kept in proof_deps), so H2 is satisfied. The new node's text matches the bodies of comparisons/integralCounit/integralGerm/rationalGerm/movingPoint (order of composites, r+1 convention). check_existing and check_new_node are clean. No cycle, no parallel def node. The theorem stmt_deps lem-trf-integral-pullback-comparison-realization, lem-pod-integral-pullback-composition and lem-pod-proper-coincidence-frobenius are genuine (.choose used). FIX (whole node in fixes/def-a1-proper-sections-germ-and-moving-point.json): drop the unused theorem cite fix-prop-adjunctions and add the body owners def-weil-system-operation-exchange-realization, def-coef-ringed-sequence-site, def-trf-integral-comparison-sequence-systems, def-weil-derived-complete-integral-detailed and def-weil-frobenius-point-transport, with matching TeX cites. All five are already in the closure; the checkers are clean on the fix. Advisory: integralDerivedPullback has no owner node anywhere in the DAG (base gap). nt_compile --json of the item module: 31.8 s, exit 0, only sorry."
+  "reviewer": "NT-stage2-cc-d78ff8ce1",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Module byte-identical (sha 2f767b96) to a43a8bd0, whose mathematics was accepted; this re-delivery only repairs records. Mechanical H2 finding judged genuine: the item uses frobeniusCohomologyRationalScalar (sourceScalar) and frobeniusCohomologyRealizedComparison (qbarSourceComparison), whose data is the .choose of the ∃! theorems frobeniusCohomologyRationalOperationScalar_existsUnique and frobeniusCoefficientModulesTower_existsUnique of lem-weil-frobenius-cohomology-transport-iso; no def node owns them, so this is constructed data, PASS on that point (agrees with the a43a review). Re-checked the statement against the node: OneStep in diagrammatic order, recurrences tauHat/insertionHat/squareHat/contraction, all four equalities plus naturality, rational, scalarCompatibility and descent clauses, edge cases n=0, empty Y, identity extension, universes u,v independent. New node def-a1-proper-frobenius-operation-wrappers (existing:true over ProperCoincidenceFrobenius) matches its six declarations, lean.statement verbatim; def-a1-proper-sections-germ-and-moving-point changed lean only, with a note. No hollow defs, sorry only in theorems, docstrings and line lengths OK. No compile run, no file changed."
  }
 }

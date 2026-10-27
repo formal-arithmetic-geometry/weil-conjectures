@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-internal-bar-coefficient-transfer",
+ "kind": "statement",
+ "title": "Finite-index transfer and natural prism for individual internal coefficient modules",
+ "statement": "Let A be a commutative condensed ring [sk-def-sfb-condensed-ring] on the small profinite site [def-weil-size-convention]. Let G be a compact Hausdorff totally disconnected topological group and H an open subgroup, with its compact subspace topology. Fix an internal-function presentation F and bar diagrams B for G and B_H for H [def-sfb-condensed-equivariant-bar-data]. Write U_H for restriction of the condensed action along H → G [def-sfb-condensed-action-module]. There are natural cochain maps r : C_G → U_H C_H and t : U_H C_H → C_G and, for every equivariant internal A-module N [sk-def-sfb-module-objects], a homotopy h_N from t_N r_N to [G:H] times the identity of C_G(N). Each homotopy component is natural in every equivariant A-linear map N → P. Restriction r is pinned by the following evaluation: for every p ≥ 0, profinite test set S, section x of the internal functions from G^p to N over S, map f : T → S and continuous tuple g : T → H^p, evaluation of r(x) at (T,f,g) equals evaluation of x at (T,f,inclusion ∘ g), using the recorded bar-term identifications. All maps are internal A-module morphisms. This assertion concerns individual coefficient modules only; it neither introduces a coefficient complex nor asserts descent through a second differential or any cohomology identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal finite-index transfer argument, coefficient-level construction (original node proof steps 1--4), before application to complexes or cohomology. Agent-written internal transfer construction; exact external reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof": [
+  {
+   "text": "For the two fixed groups G and H use the homogeneous coordinates of [lem-sfb-internal-homogeneous-cochain-coordinates]: homogeneous cochains are precisely the equivariant sections of internal functions on tuples, and Phi/Psi are prefix products/successive quotients. At the Lean interface these presentations must be constructed for the fixed B and B_H, rather than assuming a family of bar diagrams for every group. Choose S using exists_finiteRightTransversal and rho using finiteCosetRetraction_properties in [lem-sfb-finite-coset-homogeneous-averaging]; these group-theoretic helpers require no coefficient field. Then x=rho(x)s(x), rho(hx)=h rho(x), rho restricted to H is the identity, and card(S)=[G:H]. For a_s(x)=s inverse rho(sx), right multiplication induces a coset permutation pi_a with a_s(ax)=a a_(pi_a(s))(x).",
+   "uses": [
+    "lem-sfb-internal-homogeneous-cochain-coordinates",
+    "lem-sfb-finite-coset-homogeneous-averaging"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct image via the open-coefficient theorem; finite-index transfer auxiliary argument below its scalar tame-kernel input. Agent-written internal transfer construction."
+   }
+  },
+  {
+   "text": "On generalized homogeneous functions prescribe\n$$(TF)(x_0,\\ldots,x_p)=\\sum_{s\\in S}s^{-1}F(\\rho(sx_0),\\ldots,\\rho(sx_p)).$$\nEach summand is internal linear: pull back along the continuous tuple map, then apply the constant section $s^{-1}$ of the coefficient action. The evaluation interpretation of [def-sfb-condensed-equivariant-bar-data] makes this a sheaf map before imposing homogeneity. To check homogeneity put $sa=h_su$ with $u=\\pi_a(s)$. Then $\\rho(sax)=h_s\\rho(ux)$ and $s^{-1}h_s=au^{-1}$, so $TF(ax)=aTF(x)$ by reindexing the finite sum. For a variable $a:T\\to G$, partition $T$ by the finitely many values of the locally constant permutation $\\pi_a$. These are clopen profinite subobjects covering $T$; the same computation holds on each and hence on $T$ by the sheaf axiom. Coordinatewise substitution commutes with every deletion; the constant coefficient actions commute with finite sums. Therefore $\\delta T=T\\delta$. For $G$-homogeneous $F$, $s^{-1}F(\\rho(sx_i))=F(a_s(x_i))$, giving $TR=\\sum_s a_s^*$.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "lem-sfb-finite-coset-homogeneous-averaging",
+    "lem-sfb-internal-homogeneous-cochain-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct image via the open-coefficient theorem; finite-index transfer auxiliary argument below its scalar tame-kernel input. Agent-written internal transfer construction."
+   }
+  },
+  {
+   "text": "On all internal function cochains set $K=\\sum_{s\\in S}P_{1,a_s}$ using [lem-sfb-internal-function-vertex-prism], where $1:G\\to G$ is the identity map. It gives $\\delta K+K\\delta=\\sum_s a_s^*-|S|1=TR-[G:H]1$ and $K_0=0$. This sum preserves the homogeneous submodules: its evaluation is\n$$(KF)(x_0,\\ldots,x_{p-1})=\\sum_s\\sum_{i=0}^{p-1}(-1)^iF(x_0,\\ldots,x_i,a_s(x_i),\\ldots,a_s(x_{p-1})).$$\nAfter replacing every $x_j$ by $ax_j$, covariance $a_s(ax)=aa_{\\pi_a(s)}(x)$ extracts the coefficient action $a$ from $F$ and permutes the $s$-sum. For generalized $a$ use the same finite clopen partition as in step 2. Thus $K:B_G^p\\to B_G^{p-1}$ internally, and the displayed homotopy identity restricts to $B_G$.",
+   "uses": [
+    "lem-sfb-internal-function-vertex-prism",
+    "lem-sfb-finite-coset-homogeneous-averaging",
+    "lem-sfb-internal-homogeneous-cochain-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct image via the open-coefficient theorem; finite-index transfer auxiliary argument below its scalar tame-kernel input. Agent-written internal transfer construction."
+   }
+  },
+  {
+   "text": "Conjugate the transfer and sum of prisms by the homogeneous coordinate isomorphisms. The restriction square identifies the resulting restriction with precomposition along H^p → G^p. This yields natural cochain maps r,t and a homotopy rt to [G:H] on each coefficient module N. Substitutions, finite sums and coefficient actions commute with every equivariant module map, so both chain maps and each homotopy component are natural in N. All components are internal maps. In degree zero the prism identity has only its outgoing-differential term. For H=G choose the singleton transversal and zero homotopy. No differential on N and no vertical or horizontal homology is involved.",
+   "uses": [
+    "lem-sfb-internal-homogeneous-cochain-coordinates",
+    "lem-sfb-internal-function-vertex-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct image via the open-coefficient theorem; finite-index transfer auxiliary argument below its scalar tame-kernel input. Agent-written internal transfer construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-homogeneous-cochain-coordinates",
+  "lem-sfb-finite-coset-homogeneous-averaging",
+  "def-sfb-condensed-equivariant-bar-data",
+  "lem-sfb-internal-function-vertex-prism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal finite-index transfer argument, coefficient-level construction (original node proof steps 1--4), before application to complexes or cohomology. Agent-written internal transfer construction; exact external reference WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "corestrict|transfer",
+   "results": {
+    "t": "2026-10-26T06:38:39Z",
+    "tool": "grep",
+    "query": "corestrict|transfer",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match: continuous topological or discrete representation cochains and cohomology functoriality do not provide internal condensed module cochain transfer with coefficient-natural prism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"transfer\"",
+   "results": {
+    "t": "2026-10-26T06:38:40Z",
+    "tool": "loogle",
+    "query": "\"groupCohomology\", \"transfer\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match: continuous topological or discrete representation cochains and cohomology functoriality do not provide internal condensed module cochain transfer with coefficient-natural prism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open subgroup of a profinite group construct restriction corestriction and a natural homotopy on bar cochains of an internal condensed module",
+   "results": {
+    "t": "2026-10-26T06:38:42Z",
+    "tool": "leanfinder",
+    "query": "For an open subgroup of a profinite group construct restriction corestriction and a natural homotopy on bar cochains of an internal condensed module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.linearYonedaObjResProjectiveResolutionIso",
+     "groupCohomology.resNatTrans",
+     "groupCohomology.infNatTrans",
+     "groupHomology.H1CoresCoinf_f",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "groupCohomology.H1InfRes_g",
+     "groupCohomology.H1InfRes_X₃"
+    ],
+    "digest": "e9a0926bcdfc1351"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match: continuous topological or discrete representation cochains and cohomology functoriality do not provide internal condensed module cochain transfer with coefficient-natural prism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composite of restriction and corestriction on internal condensed module bar cochains is chain homotopic to multiplication by the finite subgroup index, naturally in equivariant coefficient maps",
+   "results": {
+    "t": "2026-10-26T06:44:38Z",
+    "tool": "leansearch",
+    "query": "The composite of restriction and corestriction on internal condensed module bar cochains is chain homotopic to multiplication by the finite subgroup index, naturally in equivariant coefficient maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.resIndAdjunction",
+     "Rep.resIndAdjunction_homEquiv_symm_apply",
+     "groupCohomology.cochainsMap_comp",
+     "Rep.resIndAdjunction_counit_app",
+     "groupCohomology.resNatTrans",
+     "Rep.coindResAdjunction",
+     "HomologicalComplex.restrictionMap",
+     "CochainComplex.ConnectData.restrictionLEIso_hom_f"
+    ],
+    "digest": "b06e1763922e5246"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match: discrete representation induction and cohomology restriction do not supply a coefficient-natural homotopy on internal condensed bar cochains."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalBarFiniteIndexTransfer",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), internal finite-index transfer argument, coefficient-level construction (original node proof steps 1--4), before application to complexes or cohomology. Agent-written internal transfer construction; exact external reference WANTED.",
+   "via": [
+    "lem-sfb-internal-bar-row-finite-index-transfer",
+    "lem-sfb-prime-to-ell-scalar-bar-model",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalBarCoefficientTransfer",
+  "file": "lean/Sheaf/CategoryTheory/InternalBarCoefficientTransfer.lean",
+  "declaration": "CategoryTheory.CondensedBar.internal_bar_coefficient_transfer",
+  "statement": "theorem internal_bar_coefficient_transfer (A : Ring.{u}) (G : Type u)\n    [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G]\n    [TotallyDisconnectedSpace G] (H : OpenSubgroup G) [CompactSpace H.toSubgroup]\n    (F : InternalFunctions A) (B : BarDiagram (G := G) F)\n    (BH : BarDiagram (G := H.toSubgroup) F) :\n    let v : H.toSubgroup →ₜ* G :=\n      { H.toSubgroup.subtype with continuous_toFun := continuous_subtype_val }\n    ∃ r : cochains B ⟶ Profinite.CondensedAction.inflate (R := A.toMon) v ⋙ cochains BH,\n    ∃ t : Profinite.CondensedAction.inflate (R := A.toMon) v ⋙ cochains BH ⟶ cochains B,\n    ∃ h : ∀ N : Equivariant A G,\n      Homotopy (r.app N ≫ t.app N) (H.toSubgroup.index • 𝟙 ((cochains B).obj N)),\n      (∀ (N : Equivariant A G) (p : ℕ) (S : Profinite.{u})\n        (x : sections A ((F.functor (power G p)).obj N.module) S)\n        (T : Profinite.{u}) (f : T ⟶ S) (g : C(T, power H.toSubgroup p)),\n        (F.evaluate (power H.toSubgroup p) S N.module\n          (((B.term N p).inv ≫ (r.app N).f p ≫\n            (BH.term\n              ((Profinite.CondensedAction.inflate (R := A.toMon) v).obj N) p).hom).hom.hom.app\n              (op S) x)).val T f g =\n        (F.evaluate (power G p) S N.module x).val T f\n          (ContinuousMap.comp\n            ⟨fun x i ↦ (x i : G), continuous_pi fun i ↦\n              continuous_subtype_val.comp (continuous_apply i)⟩ g)) ∧\n      (∀ (N P : Equivariant A G) (f : N ⟶ P) (i j : ℕ),\n        ((cochains B).map f).f i ≫ (h P).hom i j =\n          (h N).hom i j ≫ ((cochains B).map f).f j)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T081742-L-2060412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T081742-L-2060412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

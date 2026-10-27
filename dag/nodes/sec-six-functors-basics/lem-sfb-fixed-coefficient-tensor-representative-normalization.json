@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-fixed-coefficient-tensor-representative-normalization",
+ "kind": "statement",
+ "title": "Fixed-coefficient tensor normalization on resolving representatives",
+ "statement": "For a scheme W on its small pro-etale site [def-weil-pbc-proetale-site], a ring-sheaf map φ : A → B and a signed-total tensor model a [def-sfb-proetale-tensor-model], let C be the literal coefficient complex [lem-sfb-scalar-tensor-ordinary-normalization]. There is a natural isomorphism e from Q of the ordinary total tensor (P tensor C), restricted to flat-term K-flat first factors P, to a.tensor(QP,QC). For every such P, every flat-term K-flat H and every map v : H → C, the composite a.representative(P,H) followed by a.tensor(1,Qv) equals Q(1_P tensor v) followed by e_P. There is no flatness assumption on C, and no quasi-isomorphism assumption on v. This is only the fixed-coefficient tensor calculation, before composing the scalar-derived counit or ordinary scalar comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-four-corners",
+  "def-sfb-proetale-tensor-model",
+  "lem-sfb-scalar-tensor-ordinary-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Resolve the coefficient complex C[0] by a flat-term K-flat complex Q with augmentation q. Tensoring with a flat-term K-flat P preserves q as a quasi-isomorphism. Restrict the model representative to (P,Q) and compose it with tensor(1,Qq). This gives an isomorphism after inverting Q(1 tensor q). The fixed-factor representative comparison shows that this isomorphism satisfies the same equation for every other coefficient complex H and every map H to C[0], not just the chosen augmentation. Its naturality follows by constructing it as the composite of three natural isomorphisms on the category of flat-term K-flat first factors. No flatness of C is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-sp-fixed-tensor-representative-comparison",
+    "def-pur-site-sheaf-tensor-presentation-data",
+    "lem-sfb-scalar-tensor-ordinary-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-sp-fixed-tensor-representative-comparison",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-sfb-scalar-tensor-ordinary-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism on K-flat representatives identifies restricted derived scalar extension with tensor with a fixed coefficient complex",
+   "results": "Eight hits, including ordinary ModuleCat flat scalar extension and tensor exactness statements, adjunction composition formulas and Module.Flat.baseChange. No normalized unbounded sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "Construct the comparison from the existing project representative and scalar-counit APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "Twelve hits, including NatIso.ofComponents and its hom_app and inv_app component lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Use these component equations to avoid costly conversion across the isomorphism constructor."
+  },
+  {
+   "tool": "grep",
+   "query": "fixed_tensor_representative_comparison|IsDerivedTensor",
+   "results": "Zero Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "The existing project fixed-factor comparison supplies the coefficient normalization; retain it as a proved dependency."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedScalarMateData",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-scalar-tensor-representative-normalization",
+   "place": "Fixed-coefficient tensor calculation before the scalar counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedFixedCoefficientTensorComparison",
+  "file": "lean/Sheaf/Paper/DerivedFixedCoefficientTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.fixedCoefficientTensorIso",
+  "statement": "theorem fixedCoefficientTensorIso\n    {W : Scheme.{u}}\n    {A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}\n    (φ : A ⟶ B) (a : ProEtaleTensorModel W A) :\n    ∃ e : (proEtaleFlatRepresentatives W A).ι ⋙\n          ((proEtaleOrdinaryTensor W A).map₂HomologicalComplex\n            (.up ℤ) (.up ℤ) (.up ℤ)).flip.obj (coefficientComplex φ) ⋙ DerivedCategory.Q ≅\n        ((proEtaleFlatRepresentatives W A).ι ⋙ DerivedCategory.Q) ⋙\n          (Functor.curryObj a.tensor).flip.obj\n            (DerivedCategory.Q.obj (coefficientComplex φ)),\n      ∀ (P : (proEtaleFlatRepresentatives W A).FullSubcategory)\n        (H : CochainComplex (proEtaleRingModules W A) ℤ)\n        (hH : proEtaleFlatRepresentatives W A H) (v : H ⟶ coefficientComplex φ),\n        a.representative.hom.app (P, ⟨H, hH⟩) ≫\n          a.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P.obj))\n            (DerivedCategory.Q.map v)) =\n        DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap (𝟙 P.obj) v\n          (proEtaleOrdinaryTensor W A) (.up ℤ)) ≫ e.hom.app P",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd860",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T065848-L-2482355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd860",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T065848-L-2482355",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone f87ce49 (verbatim move of 9 ordinary decls, only the sorry replaced) and the 4 new/changed nodes vs the Lean; 4 direct importers compiled OK in sandbox with delivered modules; axioms clean"
+ }
+}

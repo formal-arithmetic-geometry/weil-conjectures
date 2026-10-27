@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-brown-product-coproduct-obstruction",
+ "kind": "statement",
+ "title": "Finite Hom support in product-coproduct families under Brown hypotheses",
+ "statement": "For a scheme X and a commutative condensed coefficient ring Λ, let S be its bounded constructible finite-Tor property and L its localizing closure [sk-def-localizing-closure]. Suppose the Brown bundle of [lem-sfb-brown-hypotheses-criterion] holds. Let K be an object of L with underlying object in S. Let E be a family in L indexed in Type(u+1), and let a cofan c on E be a coproduct. Suppose maps π_i from its vertex to E_i make it a product and c.inj_i followed by π_j is zero when i≠j. Then there exists a finite set T of indices such that Hom_L(K,E_i) is a subsingleton for every i outside T. Consequently, if the set of indices admitting a nonzero map K→E_i is infinite, the Brown bundle does not hold. Compactness is the canonical Hom-map bijectivity notion [def-pc-compact-object].",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "lem-sfb-brown-hypotheses-criterion",
+  "def-pc-compact-object"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support compactness obstruction in not_preservesColimitsOfShape_of_forall_hom_ne_zero; applied to the Brown compactness clause"
+ },
+ "proof": [
+  {
+   "text": "Use brownHypothesesFor_iff to extract a coproduct structure and compactness of K. The source equivalence isCompactObject_iff_isCompactObj expresses every map from K to c as a finite sum of maps through the coproduct injections.",
+   "uses": [
+    "lem-sfb-brown-hypotheses-criterion",
+    "def-pc-compact-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each i choose a map f_i:K→E_i that is nonzero if such a map exists, and otherwise zero. The product universal property gives f:K→c with those components. Write f as a finite sum supported on T. For i outside T, composing with π_i annihilates every summand by the off-diagonal condition. Thus f_i=0 and by its choice every map K→E_i is zero. An infinite set of nonzero Hom indices contains an index outside T, contradicting subsingleton elimination.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-brown-hypotheses-criterion",
+  "def-pc-compact-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support compactness obstruction in not_preservesColimitsOfShape_of_forall_hom_ne_zero; applied to the Brown compactness clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact object has finitely many nonzero morphism groups into a family whose coproduct is also a product",
+   "results": "Eight general AB4, CountableAB4Star and product/filtered-colimit interface hits; no Brown obstruction criterion. The source library provides the related functor nonpreservation argument used here.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObj\"",
+   "results": "No hits; inspected the local IsCompactObject/IsCompactObj equivalence and the finite-sum definition in the source library.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_nonzero_hom|product_coproduct|not_preservesColimitsOfShape_of_forall_hom_ne_zero",
+   "results": "No Mathlib hits. Local source inspection found the existing derived-category functor obstruction but no theorem about BrownHypothesesFor. Blueprint search found no node for the new criterion.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-25",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2, checking the asserted compactness of constructible finite-Tor generators",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.not_brownHypothesesFor_of_product_coproduct",
+  "declarations": [
+   "CategoryTheory.BrownHypothesesFor.finite_nonzero_hom_of_product_coproduct",
+   "CategoryTheory.not_brownHypothesesFor_of_product_coproduct"
+  ],
+  "statement": "theorem not_brownHypothesesFor_of_product_coproduct\n    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}\n    (K : (localizingClosureProEtale Λ X).FullSubcategory)\n    (hK : constantModelBoundedConstructible Λ X K.obj ∧\n      DerivedCategory.finiteTorAmplitude _ K.obj)\n    {I : Type (u + 1)} (E : I → (localizingClosureProEtale Λ X).FullSubcategory)\n    (c : Cofan E) (hc : IsColimit c) (π : ∀ i, c.pt ⟶ E i)\n    (hp : IsLimit (Fan.mk c.pt π))\n    (hdiag : ∀ i j, i ≠ j → c.inj i ≫ π j = 0)\n    (hhom : {i : I | ∃ f : K ⟶ E i, f ≠ 0}.Infinite) :\n    ¬ BrownHypothesesFor Λ X",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261025T011031-L-3636199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

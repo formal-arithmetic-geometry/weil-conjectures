@@ -17,49 +17,27 @@
  ],
  "proof": [
   {
-   "text": "Fix $u\\in U$ and put $A=\\mathcal O_{U,u}$ and $I_u=\\{j:t_j\\in\\mathfrak m_A\\}$. The other factors are units. By [def-weil-regular-scheme], $A$ is a regular Noetherian local ring. Extend the factors indexed by $I_u$ to a regular system of parameters. By [lem-weil-pbc-regular-local-generators-regular-sequence], after any permutation every quotient by an initial subfamily is regular local, and the remaining parameters are successive nonzerodivisors. In particular $A/(t_j)$ is regular local for $j\\in I_u$. Let $H=A^{\\mathrm{sh}}$ for the separable closure selected by $\\bar u$. The geometric-to-algebraic presentation [lem-sbc-geometric-strict-henselization-local-presentation] identifies this with the strict local ring at $\\bar u$: on an affine chart the prime is $u$, as seen by contracting the kernel of the residue map induced by $\\bar u$. Apply [lem-sbc-strict-henselization-surjective-quotient] to $A\\twoheadrightarrow A/(t_j)$: its kernel lies in $\\mathfrak m_A$, so $H/t_jH$ is a strict henselization of $A/(t_j)$. It is regular local by [lem-sc-strict-henselization-regular], and a nonzero domain by [lem-sc-regular-local-domain]. Thus $P_j=t_jH$ is a proper prime ideal.",
+   "text": "Fix $u$ and let $A=\\mathcal O_{U,u}$, a regular local ring by [def-weil-regular-scheme], and $I=\\{j:t_j(u)=0\\}$. Factors outside $I$ are units, so $\\mathcal O_{D_U,u}=A/(F)$ for $F=\\prod_{j\\in I}t_j$ when $I\\neq\\varnothing$. For $\\bar u$ over $u\\in D_U$, apply [lem-sbc-geometric-strict-henselization-local-presentation] on an affine open $\\operatorname{Spec}R\\subseteq D_U$ containing $u$: it gives a prime $q\\subset R$ such that the geometric strict local ring $H$ of $D_U$ at $\\bar u$ is an algebraic strict henselization of $R_q$ relative to a separable closure of its residue field, compatibly with $R\\to H$. The prime $q$ is that of $u$: $R_q\\to H$ is local, so $q$ is the contraction of $\\mathfrak m_H$, which is the kernel of the residue map $R\\to\\Omega$ induced by $\\bar u$. Hence $R_q=A/(F)$ and $H$ is an algebraic strict henselization of $A/(F)$ for the residue-field choice selected by $\\bar u$. Apply [lem-trf-parameter-product-strict-local-branches] to the distinct parameter germs indexed by $I$: its reduction has exactly $|I|$ minimal primes. If $I=\\varnothing$, $u\\notin D_U$ and the count is zero. This identifies $b$ intrinsically and proves independence of coordinate equations.",
    "uses": [
     "def-weil-regular-scheme",
     "lem-sbc-geometric-strict-henselization-local-presentation",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-sbc-strict-henselization-surjective-quotient",
-    "lem-sc-strict-henselization-regular",
-    "lem-sc-regular-local-domain"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00NQ (lemma-regular-ring-CM), 05WS (lemma-quotient-strict-henselization), 00NP (lemma-regular-domain); more-algebra.tex Tag 06LN (lemma-henselization-regular). Local algebra underlying ILO VIII 4.1.6."
-   }
-  },
-  {
-   "text": "For distinct $i,j\\in I_u$, reorder the parameter system with $t_j$ first and $t_i$ second. By [lem-weil-pbc-regular-local-generators-regular-sequence], $t_i$ is a nonzerodivisor in the nonzero ring $A/(t_j)$, hence $t_i\\notin(t_j)$. The map $A\\to H$ is faithfully flat by [lem-sc-strict-henselization-faithfully-flat]. By [lem-weil-pbc-faithfully-flat-ideal-contraction], $t_i\\notin t_jH$. Thus the primes $P_j$ of Step 1 are pairwise incomparable. Put $F=\\prod_{j\\in I_u}t_j$. If $I_u$ is nonempty, the local ring of $D_U$ at $u$ is $A/(F)$, since discarded factors are units. By [lem-sbc-strict-henselization-surjective-quotient] its strict henselization is $H/(F)H$, identified with its geometric strict local ring by [lem-sbc-geometric-strict-henselization-local-presentation]. Every prime of $H$ containing $F$ contains some $t_j$, hence contains $P_j$. Conversely each $P_j$ contains $F$; incomparability shows that these, and only these, are the primes minimal over $(F)H$. Passing to the quotient and then killing nilpotents does not change this prime poset: every prime contains each nilpotent, and inverse image along the quotient is an inclusion-preserving bijection onto primes containing its kernel. Consequently the reduced strict local ring of $D_U$ has exactly $|I_u|$ minimal primes. When $I_u$ is empty, $F=1$ and $u\\notin D_U$, giving branch number zero by convention. This proves the intrinsic description of $b$ and its independence of coordinate equations.",
-   "uses": [
-    "lem-sbc-geometric-strict-henselization-local-presentation",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-sc-strict-henselization-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "lem-sbc-strict-henselization-surjective-quotient"
+    "lem-trf-parameter-product-strict-local-branches"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII 4.1.6, printed p.118, geometric interpretation of multiplicity; expanded prime-ideal argument using Stacks Tags 00NQ, 07QM(1), 05CK and 05WS."
+    "place": "Expose VIII, 4.1.6 and 4.1.8, printed pp. 118--119: multiplicity stratification by the number of points in the normalization fibre and the deepest closed stratum; the etale coordinate interpretation follows the normal-crossings charts."
    }
   },
   {
-   "text": "For $u\\in C$, all $s$ factors are in $\\mathfrak m_A$ and form part of a regular system of parameters, so $s\\le\\dim A$. The closed-subscheme description [def-weil-closed-immersion] identifies $\\mathcal O_{C,u}$ with $A/(t_1,\\ldots,t_s)$. By [lem-weil-pbc-regular-local-generators-regular-sequence] this ring is regular local. The scheme $C$ is locally Noetherian: on an affine Noetherian chart of $U$ its ring is the quotient by the finitely generated ideal of the restricted functions, and ideals in a quotient correspond to ideals containing the kernel, so ascending chains stabilize. Hence [def-weil-regular-scheme] implies that $C$ is regular. Every displayed local ring is a domain by [lem-sc-regular-local-domain]; a nilpotent in a domain is zero, so [def-pc-reduced-scheme] implies that $C$ is reduced. If $C$ is empty these local assertions hold vacuously.",
+   "text": "Apply [lem-trf-etale-coordinate-intersection-geometry] with $J=\\{1,\\ldots,s\\}$ to obtain that $C$ is regular and reduced, allowing $C=\\varnothing$. Its hypotheses are exactly the given regularity, local Noetherianity and pointwise parameter condition.",
    "uses": [
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "def-weil-regular-scheme",
-    "lem-sc-regular-local-domain",
-    "def-pc-reduced-scheme"
+    "lem-trf-etale-coordinate-intersection-geometry"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII 4.1.8, printed p.118: regularity of the deepest stratum; coordinate intersections as in 4.2.4, printed p.119. Stacks Tag 00NQ for the quotient rings."
+    "place": "Expose VIII, 4.1.6 and 4.1.8, printed pp. 118--119: multiplicity stratification by the number of points in the normalization fibre and the deepest closed stratum; the etale coordinate interpretation follows the normal-crossings charts."
    }
   },
   {
@@ -74,36 +52,23 @@
    }
   },
   {
-   "text": "Let $v:W\\to U$ be any etale morphism and let $w\\mapsto u$. It is locally of finite presentation by [def-weil-etale-morphism], hence locally of finite type (finite presentation supplies finitely many algebra generators). Thus $W$ is locally Noetherian by [pqf-lem-locnoeth-lft]. Work on affine etale charts and put $A=\\mathcal O_{U,u}$, $B=\\mathcal O_{W,w}$. By [lem-weil-pbc-etale-prime-generates-maximal], $\\mathfrak m_AB=\\mathfrak m_B$, and by [lem-sc-etale-local-dimension], $\\dim B=\\dim A=d$. A $d$-element regular system of parameters of $A$ therefore maps to $d$ generators of $\\mathfrak m_B$. By the definition [def-weil-regular-scheme], $B$ is regular local and those images form a regular system of parameters. The images of the factors vanishing at $u$ occupy distinct positions in this system. Precisely these factors vanish at $w$: the map of residue fields $\\kappa(u)\\to\\kappa(w)$ is injective, so it preserves and reflects zero. Thus the pulled-back functions satisfy exactly the original coordinate hypothesis on the regular locally Noetherian scheme $W$. Steps 1--4, applied to these functions, prove all the same assertions there, with $D_W$ and $C_W$ given by the pulled-back product and ideal. Their branch count is $|I_u|=b(\\bar u)$, proving invariance under etale neighborhoods as well as all the asserted base-change statements.",
+   "text": "For any etale $e:W\\to U$, [lem-trf-etale-coordinate-intersection-geometry] gives a regular locally Noetherian $W$, the coordinate hypothesis for $e^*t_j$, and identical vanishing-index sets at $w$ and $e(w)$. Apply Steps 1--3 to these functions on $W$; these steps have already proved the assertions on every chart satisfying that hypothesis. Pullback of the equations gives $D_W=V(\\prod e^*t_j)$ and $C_W=V(e^*t_1,\\ldots,e^*t_s)$. Hence every assertion holds on $W$, and the equal index sets give $b_W(\\bar w)=b_U(\\bar u)$. Applying the intrinsic formula also to any alternative coordinate equations for the same $D_W$ proves their branch counts agree.",
    "uses": [
-    "def-weil-etale-morphism",
-    "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-etale-prime-generates-maximal",
-    "lem-sc-etale-local-dimension",
-    "def-weil-regular-scheme"
+    "lem-trf-etale-coordinate-intersection-geometry"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00U4 (lemma-etale-at-prime); more-algebra.tex Tag 07QP (lemma-dimension-etale-extension); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian). Coordinate argument for etale invariance in ILO VIII 4.1.6."
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 4.1.6 and 4.1.8, printed pp. 118--119: multiplicity stratification by the number of points in the normalization fibre and the deepest closed stratum; the etale coordinate interpretation follows the normal-crossings charts."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-reduced-scheme",
   "def-weil-closed-immersion",
-  "def-weil-etale-morphism",
   "def-weil-regular-scheme",
   "lem-sbc-geometric-strict-henselization-local-presentation",
-  "lem-sbc-strict-henselization-surjective-quotient",
-  "lem-sc-etale-local-dimension",
-  "lem-sc-regular-local-domain",
-  "lem-sc-strict-henselization-faithfully-flat",
-  "lem-sc-strict-henselization-regular",
-  "lem-weil-pbc-etale-prime-generates-maximal",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "pqf-lem-locnoeth-lft"
+  "lem-trf-etale-coordinate-intersection-geometry",
+  "lem-trf-parameter-product-strict-local-branches"
  ],
  "proof_origin": {
   "by": "agent",
@@ -238,51 +203,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-nc-coordinate-max-stratum",
   "worker": "stage1",
-  "summary": "Split the coordinate branch-count lemma without creating nodes: parameter quotients and strict henselization identify its branch primes; faithful-flat contraction proves their incomparability; coordinate quotient rings give the regular reduced center; finite counting gives closed multiplicity loci; etale maximal-ideal generation and dimension transport the hypothesis. The statement is unchanged. Added the existing reduced-scheme definition as a statement dependency.",
-  "blueprint": "This descendant of lem-trf-local-term-locality realizes the coordinate-stratum input in Step 1 and Step 2 of lem-trf-nc-maximal-branch-blowup, on the existing alteration/normal-crossings branch below the ancestor specialization step. In ILO VIII 4.1.6 and 4.1.8, the multiplicity stratification and regular deepest stratum are expanded by Steps 1--4; Step 5 verifies the etale coordinate passage used there. No unit or chapter route changes.",
+  "summary": "Repair of the human re-split return: retain the statement verbatim and distribute the 5646-character proof into two independent statement-only tasks of comparable argument size: strict-henselian parameter-product branch algebra (old Steps 1--2) and coordinate-intersection geometry with etale transport (old Steps 3 and 5). Retain only assembly and the elementary finite counting in the parent. No Lean changed.",
+  "blueprint": "Same ancestor and unit route. ILO VIII 4.1.6 branch computation is assigned to the parameter-product node, VIII 4.1.8/4.2.4 intersection and etale-coordinate geometry to the second node; the parent assembles them with the finite union formula.",
   "tool_uses": [
    {
     "node": "lem-sbc-geometric-strict-henselization-local-presentation",
-    "why": "The general local presentation relates the pointed-etale geometric strict local ring to the algebraic strict henselization of the ordinary local ring; it is needed before applying the algebraic quotient theorem."
-   },
-   {
-    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "why": "The general parameter-quotient theorem supplies regular local quotients and nonzerodivisors; it is the local algebra needed by the coordinate normal-crossings argument."
-   },
-   {
-    "node": "lem-sbc-strict-henselization-surjective-quotient",
-    "why": "The general quotient theorem identifies the strict local rings of the coordinate hypersurfaces and of the divisor; this unit has no replacement for that algebraic identification."
-   },
-   {
-    "node": "lem-sc-strict-henselization-regular",
-    "why": "Regularity of strict henselizations makes the coordinate hypersurface quotients regular local."
-   },
-   {
-    "node": "lem-sc-regular-local-domain",
-    "why": "Regular local quotients are domains, giving prime coordinate ideals and reducedness of the center."
-   },
-   {
-    "node": "lem-sc-strict-henselization-faithfully-flat",
-    "why": "Faithful flatness allows comparison of the parameter ideals before and after strict henselization."
-   },
-   {
-    "node": "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "why": "Contraction of extended ideals preserves incomparability of distinct parameter ideals."
-   },
-   {
-    "node": "pqf-lem-locnoeth-lft",
-    "why": "General Noetherian ascent supplies locally Noetherian etale neighborhoods."
-   },
-   {
-    "node": "lem-weil-pbc-etale-prime-generates-maximal",
-    "why": "The general etale local-ring theorem transports generators of the maximal ideal."
-   },
-   {
-    "node": "lem-sc-etale-local-dimension",
-    "why": "The general etale dimension theorem ensures that the transported parameter list has the required length."
+    "why": "Generic geometric-to-algebraic strict-local-ring comparison, already accepted for this item; now only needed in assembly Step 1."
    }
   ]
  },
@@ -299,12 +228,12 @@
   "lem-sc-etale-local-dimension"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NN-5cdbc27b3",
-  "group": "NN",
+  "reviewer": "NT-cc-O1-c30d2490a",
+  "group": "O1",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-5cdbc27b3 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, ILO VIII 4.1.6–4.2.4 and relevant Stacks sources. All five steps are sound; strict-henselization comparisons, parameter transport, empty-center cases and dependency closure checked. No new nodes, duplicates, cycles or repairs. Accepted all ten declared tool uses. Detailed review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-c30d2490a (reviewer sub-agent of L); spot-checked: Re-split answer is sound: old Steps 1-2 (2660 chars) became lem-trf-parameter-product-strict-local-branches and old Steps 3+5 (2213 chars) became lem-trf-etale-coordinate-intersection-geometry. The two are comparable in size, statement-only, self-contained and true. Small cases tested: r=0 zero ring; DVR; k[x,y]_(x,y) gives 2 primes; x and x-1 give an empty C_12; a repeated x is excluded by the hypothesis; a non-surjective etale map. Old Step 4 is kept verbatim as elementary parent Step 3. The assembly ends at 2877 chars after the fix. Not duplicates of lem-per-ind-etale-regular-coordinate-locus (needs a quasi-excellent base and finite type), the snc-boundary-parameter criteria, lem-trf-etale-component-coordinate-identification, lem-trf-etale-regular-intersection-descent, lem-sbc-etale-regular-divisor-base-change or the strict-hensel single-divisor-quotient nodes. Sources checked: ILO VIII 4.1.6/4.1.8/4.2.4 (pp.118-119) and Stacks tags 00NQ/05WS/00NP/05CK/06LN/07QM/00U4/07QP/01T6 with their labels. The tool use of lem-sbc-geometric-strict-henselization-local-presentation is accepted (already accepted at base). FIX: delivered Step 1 dropped the old bridge identifying the existential prime q of the geometric presentation with u, and did not cite def-weil-regular-scheme for A regular local. Step 1 is restored on an affine chart of D_U (R_q->H is local, so q is the kernel of R->Omega, so R_q=A/(F)) and def-weil-regular-scheme is added to uses/proof_deps. The statement is unchanged and no node is dropped.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -324,5 +253,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

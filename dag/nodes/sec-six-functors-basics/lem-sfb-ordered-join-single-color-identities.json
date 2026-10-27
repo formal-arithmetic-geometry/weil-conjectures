@@ -1,0 +1,432 @@
+{
+ "id": "lem-sfb-ordered-join-single-color-identities",
+ "kind": "statement",
+ "title": "Boundary and single-color insertion identities for ordered join chains",
+ "statement": "Let $r\\geq1$, let $I=\\{0,\\ldots,r-1\\}$, and let $X_i$ be sets with specified $v_i\\in X_i$ for $i\\in I$. For each integer $q$, let $J_q$ be the free abelian group with specified $\\mathbf Z$-basis in the sense of [def-weil-pbc-free-module] consisting of symbols $[(i_0,x_0),\\ldots,(i_q,x_q)]$ with $i_0<\\cdots<i_q$ in $I$ and $x_a\\in X_{i_a}$ when $0\\leq q<r$. Let $J_{-1}=\\mathbf Z[\\varnothing]$ with its empty-symbol basis, and let $J_q=0$ in all other degrees. Define degree-one homomorphisms $c_i$ by zero on symbols containing $i$ and by inserting $(i,v_i)$ with sign $(-1)^k$ on symbols missing $i$, where $k$ counts colors less than $i$. Define degree-zero $R_i$ by zero on symbols missing $i$ and by $R_i\\sigma=\\sigma-T_i\\sigma$ otherwise, where $T_i$ replaces the color-$i$ vertex by $(i,v_i)$. All formulas are extended by integer linearity, and all components involving zero source or target groups are zero. Define $d_q:J_q\\to J_{q-1}$ by alternating deletion, with sign $(-1)^a$ for deletion of zero-based position $a$; thus $d_0[(i,x)]=[\\varnothing]$ and $d_{-1}=0$. Then, for every integer $q$ and every $i\\in I$,\n$$d_{q-1}d_q=0,\\qquad d_{q+1}c_{i,q}+c_{i,q-1}d_q=\\operatorname{id}_{J_q}-R_{i,q}.$$\nThese identities include degree $-1$, degree $r-1$, and the zero groups outside $[-1,r-1]$; no equality between any $x_a$ and any chosen vertex $v_i$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), Agent ordered-join expansion, original calculations 1-4: basis extension, paired deletions and the missing/present-color insertion identities. Not asserted in the blueprint itself."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-free-module], every chain has a unique finite integer expansion in the specified symbols. Each displayed basis assignment has a finite output: deletion has at most $q+1$ terms, insertion at most one, and replacement at most two. Extending by $\\sum_\\sigma a_\\sigma\\sigma\\mapsto\\sum_\\sigma a_\\sigma f(\\sigma)$ therefore defines homomorphisms. Both requested identities are equalities of homomorphisms, so it suffices to check the basis symbols in each nonzero degree.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-sfb-ordered-join-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculations 1-4; these elementary calculations are not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "For a symbol $\\sigma$ of degree $q\\geq1$, write $\\sigma_{\\widehat a,\\widehat b}$ for deletion of its original positions $a<b$. Deleting $a$ first and then the shifted position $b-1$ contributes $(-1)^{a+b-1}\\sigma_{\\widehat a,\\widehat b}$ to $d_{q-1}d_q\\sigma$; deleting $b$ first and then $a$ contributes $(-1)^{a+b}\\sigma_{\\widehat a,\\widehat b}$. Every term occurs in exactly one such pair, whose coefficients add to zero. Thus $d^2\\sigma=0$, including $q=1$, where the final symbol is empty. In degree $0$ or $-1$ the composite contains $d_{-1}=0$; all other source groups are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculations 1-4; these elementary calculations are not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Suppose $i$ is missing from a symbol $\\sigma$, and put $k=\\#\\{j\\text{ a color of }\\sigma:j<i\\}$. In $dc_i\\sigma$, deletion of the inserted vertex has coefficient $(-1)^{k+k}=1$ and leaves $\\sigma$. For an original position $a<k$, its deletion in $dc_i\\sigma$ has coefficient $(-1)^{k+a}$, whereas deletion followed by insertion in $c_id\\sigma$ has coefficient $(-1)^{a+k-1}$. For an original position $a\\geq k$, the two coefficients are $(-1)^{k+a+1}$ and $(-1)^{a+k}$. In each pair the output symbol is identical and the coefficients cancel. Hence $(dc_i+c_id)\\sigma=\\sigma=(1-R_i)\\sigma$, since $R_i\\sigma=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculations 1-4; these elementary calculations are not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Suppose $i$ occurs at position $k$ of $\\sigma$. Then $c_i\\sigma=0$. Every boundary face other than deletion of position $k$ still contains $i$, so insertion on it is zero. The face deleting position $k$ has coefficient $(-1)^k$ and reinsertion at the same position has coefficient $(-1)^k$, giving $c_id\\sigma=T_i\\sigma$. Consequently $(dc_i+c_id)\\sigma=T_i\\sigma=\\sigma-(\\sigma-T_i\\sigma)=(1-R_i)\\sigma$. This calculation does not require the original color-$i$ vertex to differ from $v_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculations 1-4; these elementary calculations are not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "In degree $-1$, $c_i[\\varnothing]=[(i,v_i)]$, so $d_0c_i[\\varnothing]=[\\varnothing]$, while $c_id_{-1}=0$ and $R_i[\\varnothing]=0$. In degree $r-1$ every color occurs, so the preceding present-color calculation applies, with $c_i=0$ into $J_r=0$. In every degree outside $[-1,r-1]$ all maps in either identity have zero source. Thus the formulas hold in every integer degree. For $r=1$ these are precisely the empty and singleton calculations. Linearity as in step 1 gives both identities on all chains.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculations 1-4; these elementary calculations are not asserted in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-sfb-ordered-join-chains"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written ordered-join expansion below local continuous-cocycle descent, calculations 1-4; these elementary calculations are not asserted in the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On free integer chains of a finite colored join, signed insertion c_i and vertex replacement R_i satisfy d squared zero and d c_i plus c_i d equals identity minus R_i",
+   "results": {
+    "t": "2026-10-22T06:10:49Z",
+    "tool": "leanfinder",
+    "query": "On free integer chains of a finite colored join, signed insertion c_i and vertex replacement R_i satisfy d squared zero and d c_i plus c_i d equals identity minus R_i",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.standardComplex.d_of",
+     "HomologicalComplex.alternatingConst_d",
+     "AlgebraicTopology.DoldKan.N₂_obj_X_d",
+     "ComplexShape.σ_ε₁",
+     "ComplexShape.σ_ε₂",
+     "AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq",
+     "AlgebraicTopology.AlternatingFaceMapComplex.d_squared",
+     "Rep.barComplex.d_single"
+    ],
+    "digest": "ce440394498dadcb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar-complex and alternating-face boundaries concern other complexes; Dold-Kan homotopies require a simplicial object and do not give the distinct-color insertion/replacement identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating deletion and insertion of a basepoint in ordered distinct-color simplices give a chain homotopy to the vertex replacement projection",
+   "results": {
+    "t": "2026-10-22T06:10:50Z",
+    "tool": "leanfinder",
+    "query": "Alternating deletion and insertion of a basepoint in ordered distinct-color simplices give a chain homotopy to the vertex replacement projection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "GenLoop.homotopyTo_apply",
+     "AlgebraicTopology.DoldKan.hσ'_eq",
+     "AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant",
+     "SSet.stdSimplex.faceSingletonComplIso_hom_ι",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom",
+     "SSet.PtSimplex.RelStruct.δ_map_of_lt",
+     "SSet.PtSimplex.RelStruct.δ_map_of_gt"
+    ],
+    "digest": "20728e51e7f46a31"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar-complex and alternating-face boundaries concern other complexes; Dold-Kan homotopies require a simplicial object and do not give the distinct-color insertion/replacement identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"add\"",
+   "results": {
+    "t": "2026-10-22T06:10:37Z",
+    "tool": "loogle",
+    "query": "\"Homotopy\", \"add\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.ShortComplex.Homotopy.eq_add_nullHomotopic",
+     "CategoryTheory.ShortComplex.Homotopy.add",
+     "CategoryTheory.ShortComplex.Homotopy.add_h₀",
+     "CategoryTheory.ShortComplex.Homotopy.add_h₁",
+     "CategoryTheory.ShortComplex.Homotopy.add_h₂",
+     "CategoryTheory.ShortComplex.Homotopy.add_h₃",
+     "Homotopy.eq_add_nullHomotopicMap",
+     "Homotopy.add"
+    ],
+    "digest": "90a5e42c4e301b66"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar-complex and alternating-face boundaries concern other complexes; Dold-Kan homotopies require a simplicial object and do not give the distinct-color insertion/replacement identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating boundary and signed insertion on ordered join chains satisfy d c plus c d equals identity minus replacement",
+   "results": {
+    "t": "2026-10-22T06:10:36Z",
+    "tool": "leansearch",
+    "query": "Alternating boundary and signed insertion on ordered join chains satisfy d c plus c d equals identity minus replacement",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlternatingMap.map_insertNth",
+     "AlgebraicTopology.DoldKan.P_add_Q",
+     "AlternatingMap.neg_one_pow_smul_map_insertNth",
+     "AlgebraicTopology.AlternatingFaceMapComplex.d_squared",
+     "ContinuousAlternatingMap.map_insertNth",
+     "groupHomology.inhomogeneousChains.d",
+     "AlgebraicTopology.AlternatingFaceMapComplex.objD",
+     "groupHomology.inhomogeneousChains.d_comp_d"
+    ],
+    "digest": "ddd576ec1c2f3c14"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar-complex and alternating-face boundaries concern other complexes; Dold-Kan homotopies require a simplicial object and do not give the distinct-color insertion/replacement identity."
+  },
+  {
+   "tool": "grep",
+   "query": "(join|colored|coloured).*(boundary|insert)|(boundary|insert).*(join|colored|coloured)",
+   "results": {
+    "t": "2026-10-22T06:10:36Z",
+    "tool": "grep",
+    "query": "(join|colored|coloured).*(boundary|insert)|(boundary|insert).*(join|colored|coloured)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar-complex and alternating-face boundaries concern other complexes; Dold-Kan homotopies require a simplicial object and do not give the distinct-color insertion/replacement identity."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem d_squared|def homotopyPToId|def homotopyPInftyToId",
+   "results": {
+    "t": "2026-10-22T06:12:11Z",
+    "tool": "grep",
+    "query": "theorem d_squared|def homotopyPToId|def homotopyPInftyToId",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/MooreComplex.lean",
+     "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean",
+     "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean"
+    ],
+    "digest": "69cf6d6267523877"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar-complex and alternating-face boundaries concern other complexes; Dold-Kan homotopies require a simplicial object and do not give the distinct-color insertion/replacement identity."
+  },
+  {
+   "tool": "grep",
+   "query": "(join|colored|coloured).*(boundary|insert)|(boundary|insert).*(join|colored|coloured)",
+   "results": {
+    "t": "2026-10-23T09:41:27Z",
+    "tool": "grep",
+    "query": "(join|colored|coloured).*(boundary|insert)|(boundary|insert).*(join|colored|coloured)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern simplicial-object alternating boundaries, degeneracies, bar resolutions, or unrelated notions; none gives the stated distinct-color augmented insertion/replacement identity by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For ordered simplices with distinct colors, signed insertion of a chosen vertex is a chain homotopy from vertex replacement to the identity",
+   "results": {
+    "t": "2026-10-23T09:41:27Z",
+    "tool": "leansearch",
+    "query": "For ordered simplices with distinct colors, signed insertion of a chosen vertex is a chain homotopy from vertex replacement to the identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategory.mkOfSucc_eq_id",
+     "AlgebraicTopology.DoldKan.hσ",
+     "SimplexCategory.mkOfSucc",
+     "SimplexCategoryGenRel.standardσ_simplicialInsert",
+     "SimplexCategoryGenRel.simplicialInsert",
+     "SimplexCategory.δ_comp_σ_self'_assoc",
+     "SimplexCategory.δ_comp_σ_self_assoc",
+     "SimplexCategoryGenRel.δ_comp_σ_self"
+    ],
+    "digest": "f2e7789d6cb856b1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern simplicial-object alternating boundaries, degeneracies, bar resolutions, or unrelated notions; none gives the stated distinct-color augmented insertion/replacement identity by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicTopology.AlternatingFaceMapComplex.d_squared\"",
+   "results": {
+    "t": "2026-10-23T09:41:27Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicTopology.AlternatingFaceMapComplex.d_squared\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.AlternatingFaceMapComplex.d_squared"
+    ],
+    "digest": "25efd0d7ded9602c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern simplicial-object alternating boundaries, degeneracies, bar resolutions, or unrelated notions; none gives the stated distinct-color augmented insertion/replacement identity by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating deletion on free abelian chains of ordered colored simplices and signed insertion of a chosen vertex satisfy d squared zero and d c plus c d equals vertex replacement",
+   "results": {
+    "t": "2026-10-23T09:41:37Z",
+    "tool": "leanfinder",
+    "query": "Alternating deletion on free abelian chains of ordered colored simplices and signed insertion of a chosen vertex satisfy d squared zero and d c plus c d equals vertex replacement",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.standardComplex.d_of",
+     "Rep.standardComplex.d",
+     "AlgebraicTopology.AlternatingFaceMapComplex.d_squared",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.d_squared",
+     "AlgebraicTopology.AlternatingFaceMapComplex.objD",
+     "Rep.barComplex.d_single",
+     "AlgebraicTopology.alternatingFaceMapComplex_obj_d",
+     "Rep.standardComplex.d_eq"
+    ],
+    "digest": "ed378ffdd2c739fd"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern simplicial-object alternating boundaries, degeneracies, bar resolutions, or unrelated notions; none gives the stated distinct-color augmented insertion/replacement identity by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In augmented chains of the join of pointed discrete sets, boundary composed with signed vertex insertion plus insertion composed with boundary equals the map replacing an existing same-color vertex by the basepoint",
+   "results": {
+    "t": "2026-10-23T09:42:27Z",
+    "tool": "leanfinder",
+    "query": "In augmented chains of the join of pointed discrete sets, boundary composed with signed vertex insertion plus insertion composed with boundary equals the map replacing an existing same-color vertex by the basepoint",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompositionAsSet.toComposition_boundaries",
+     "Cube.insertAt_boundary",
+     "Composition.orderEmbOfFin_boundaries",
+     "SSet.PtSimplex.MulStruct.δ_map_of_gt",
+     "Composition.toCompositionAsSet_boundaries",
+     "SSet.PtSimplex.MulStruct.δ_map_of_lt",
+     "SimplexCategoryGenRel.standardσ_simplicialInsert",
+     "ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryGE"
+    ],
+    "digest": "c6b83573c557dec1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern simplicial-object alternating boundaries, degeneracies, bar resolutions, or unrelated notions; none gives the stated distinct-color augmented insertion/replacement identity by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem d_squared|def hσ",
+   "results": {
+    "t": "2026-10-23T09:45:03Z",
+    "tool": "grep",
+    "query": "theorem d_squared|def hσ",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/MooreComplex.lean",
+     "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean",
+     "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean"
+    ],
+    "digest": "8ca8674b96ec171c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern simplicial-object alternating boundaries, degeneracies, bar resolutions, or unrelated notions; none gives the stated distinct-color augmented insertion/replacement identity by one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ordered-join-partial-contraction",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), below local continuous-cocycle descent; Agent ordered-join expansion, original calculations 1-4: basis extension, paired deletions and the missing/present-color insertion identities. This is an agent expansion, not asserted by the blueprint.",
+   "via": [
+    "lem-sfb-ordered-join-partial-contraction",
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ordered-join-single-color-identities",
+  "worker": "stage1",
+  "summary": "Q107: statement unchanged. Wrote the finite-basis extension, paired-deletion cancellation, and missing/present-color insertion calculations explicitly, with augmentation, top degree and zero groups checked separately. No new nodes and no Lean changes. Retained all previous searches and added six actually logged searches; no exact or one-line Mathlib match.",
+  "blueprint": "Read the latest direct-images proof paragraph (3): it states the compactification reduction, not the ordered-join calculation. The inherited agent expansion is retained honestly as such; steps 1-4 realize its original calculations 1-4 and step 5 checks the endpoints. Ancestor search returns None, so the inherited null ancestor and via chain remain. Blueprint searches ordered join, single-color, and vertex replacement found no matching imported node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-3e578eabc",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-3e578eabc (reviewer sub-agent of L); spot-checked: Q107 lem-sfb-ordered-join-single-color-identities @3e578eab: no new nodes, no tool_uses, no repair note. The statement, stmt_deps, source and blueprint fields are byte-identical to the Q136-created base record; only proof, proof_deps, proof_origin, status, searches and split_report changed. Source: blueprint direct-images proof paragraph (3) is the compactification reduction and says nothing about ordered joins, so proof_origin=agent and from.node=null are honest. The step sources point at latest/, which is identical to main-20261015. Step 1 takes from def-weil-pbc-free-module only basis extension and checking equality on basis symbols. Step 2: the deletion pairs carry signs (-1)^{a+b-1} and (-1)^{a+b}, and q=1 gives the empty symbol twice, which cancels. Step 3 (colour i missing): for a<k the signs are (-1)^{k+a} vs (-1)^{a+k-1}, for a>=k they are (-1)^{k+a+1} vs (-1)^{a+k}, and the inserted vertex contributes +sigma. Step 4 (colour i present): only the k-th face survives, giving T_i sigma=(1-R_i)sigma, also when x_k=v_i. Step 5: degree -1, degree r-1 and the zero groups all check. All steps are genuinely elementary; proof_deps equals the union of uses. My own independent Counter check (r=1..4, X={0,1,2}, v=0) passed on all 1252 symbol/colour pairs. No duplicate: prefix-telescope assumes these identities, functorial-expansion, coset-comparison and tuple-prefix-homotopy state other things, and the sec-six-functors join nodes are about simplicial sets. The parent partial-contraction step 1 uses exactly this statement. Mathlib searches cover all three kinds; d_squared and hσ need simplicial structure, so no match is correct. No SGA source and no off-unit statement is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.OrderedJoinSingleColorIdentities",
+  "declaration": "AlgebraicTopology.OrderedJoin.singleColorIdentities",
+  "file": "lean/Sheaf/AlgebraicTopology/OrderedJoinSingleColorIdentities.lean",
+  "statement": "theorem singleColorIdentities (r : ℕ) (hr : 1 ≤ r) (X : Fin r → Type u) (v : ∀ i : Fin r, X i) : (∀ q : ℤ, (boundary X (q - 1) (q - 2)).comp (boundary X q (q - 1)) = 0) ∧ (∀ (q : ℤ) (i : Fin r), (boundary X (q + 1) q).comp (insertion v i q (q + 1)) + (insertion v i (q - 1) q).comp (boundary X q (q - 1)) = LinearMap.id - remainder v i q)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already published OrderedJoin Chain, boundary, insertion and remainder constructions from Sheaf.AlgebraicTopology.OrderedJoinPartialContraction, without redefining them. That module owns the data used by this prerequisite theorem; its proof-only reverse import must be omitted to avoid an import cycle (stages/2-statements.md §3.7). Constructions are now publicly imported from Sheaf.AlgebraicTopology.OrderedJoinChains; this declaration and its complete proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f3fa74da",
+  "group": "NR",
+  "result": "pass",
+  "note": "singleColorIdentities matches the node clause by clause: r≥1, Fin r, X : Fin r → Type u with v, Chain = Symbol →₀ ℤ (basisSingleOne = def-weil-pbc-free-module), boundary/insertion/remainder from the landed OrderedJoinPartialContraction match d, c_i (zero if i is present, sign (-1)^k) and R_i = σ − T_iσ. Both identities hold for all q : ℤ and all i. Edge cases checked: q=-1 (empty face), q=r-1 (empty target), empty degrees, r=1, x_k=v_i. Statement verbatim in the file; only the lean field changed; no name clash; docstrings carry source, blueprint id and all 5 steps; nothing but sorry; autoImplicit off. The definitions are owned by the parent theorem, whose proof_deps cite this item; the cycle-closing import is listed as allowed by stages/2 §3 rule 7, following precedent (Q58/Q95/Q101/Q35). M1 maintainer note: move the OrderedJoin data definitions into a module owned by a definition node. No compile (no change; worker's scompile clean)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93fb1",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T071219-L-148254",
+  "kind": "interface",
+  "note": "independent cc review: the clone's item definitions vs the new OrderedJoinChains (byte-identical); partialContraction statement vs the clone (identical); the two prerequisite modules vs the clone (only the line-8 import changed); node proof fields vs the Lean proof; sandbox compile of the 4 delivered modules plus importers CosetComparison and FiniteIndexRectanglePrimitiveOperator (all OK); axioms clean"
+ }
+}

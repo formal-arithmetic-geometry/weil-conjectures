@@ -1,0 +1,98 @@
+{
+ "id": "def-sf-sheaf-precomposition",
+ "kind": "definition",
+ "title": "Precomposition on coefficient sheaves under sheaf preservation",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories with Grothendieck topologies $J,K$, and let $\\mathcal A$ be a coefficient category. Write $\\operatorname{Sh}(J,\\mathcal A)$ for the full subcategory of $\\mathcal A$-valued presheaves satisfying the sheaf condition [def-weil-pbc-sites-and-cohomology]. Given $P:\\mathcal C\\to\\mathcal D$ and a proof that $H\\circ P^{\\mathrm{op}}$ is a $J$-sheaf for every $K$-sheaf $H$, define $P_*:\\operatorname{Sh}(K,\\mathcal A)\\to\\operatorname{Sh}(J,\\mathcal A)$ by $(P_*H)(V)=H(P(V))$, with restrictions $H(P(a))$ and with $(P_*\\alpha)_V=\\alpha_{P(V)}$ on sheaf morphisms. Only the given preservation of coefficient sheaves is assumed; continuity for sheaves of sets, monoidal structures and sheafification are not required.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+  "place": "Lines 16–19: the precomposition functor P_*; generalized from the continuous fixed-ring version to the coefficient-sheaf preservation hypothesis of lem-sf-site-local-generators-relations-iso. Also the definition of coefficientRestriction in Sheaf/CategoryTheory/SectionRingLaxPushforwardCoherence.lean:45–49, with its unused monoidal/sheafification hypotheses removed, as requested by the immutable-head return 26346b0c7c5b."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Precomposition functor on coefficient sheaves assuming only that precomposition preserves sheaves",
+   "results": "{\"t\": \"2026-10-22T09:30:27Z\", \"tool\": \"leansearch\", \"query\": \"Precomposition functor on coefficient sheaves assuming only that precomposition preserves sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapPresheaf\", \"CategoryTheory.CostructuredArrow.preFunctor\", \"CategoryTheory.GrothendieckTopology.HasSheafCompose.isSheaf\", \"CategoryTheory.Functor.sectionsPrecomp\", \"CategoryTheory.CostructuredArrow.pre\", \"CategoryTheory.sheafCompose\", \"CategoryTheory.GrothendieckTopology.HasSheafCompose.mk\", \"CategoryTheory.Presheaf.isSheaf_comp_of_isSheaf\"], \"digest\": \"d907cd79a0c45296\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact usable interface: sheafPushforwardContinuous assumes continuity on set sheaves; sheafCompose changes coefficients instead of the site. Project coefficientRestriction has monoidal and sheafification instance arguments. The clean precomposition generalization is explicitly requested by the return."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves along a functor which preserves coefficient sheaves without continuity",
+   "results": "{\"t\": \"2026-10-22T09:30:28Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of sheaves along a functor which preserves coefficient sheaves without continuity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"TopCat.Sheaf.pullback\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"CategoryTheory.sheafCompose\", \"SheafOfModules.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuous\"], \"digest\": \"e28059a060131ca2\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact usable interface: sheafPushforwardContinuous assumes continuity on set sheaves; sheafCompose changes coefficients instead of the site. Project coefficientRestriction has monoidal and sheafification instance arguments. The clean precomposition generalization is explicitly requested by the return."
+  },
+  {
+   "tool": "grep",
+   "query": "ObjectProperty.lift|def sheafPushforwardContinuous|def coefficientRestriction",
+   "results": "{\"t\": \"2026-10-22T09:30:26Z\", \"tool\": \"grep\", \"query\": \"ObjectProperty.lift|def sheafPushforwardContinuous|def coefficientRestriction\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\"], \"digest\": \"e1394cb72ab6968a\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact usable interface: sheafPushforwardContinuous assumes continuity on set sheaves; sheafCompose changes coefficients instead of the site. Project coefficientRestriction has monoidal and sheafification instance arguments. The clean precomposition generalization is explicitly requested by the return."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-site-local-generators-relations-iso",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The precomposition P_* in the statement and the Hom bijection of steps 1 and 7–8 of lem-sf-site-local-generators-relations-iso, serving inherited prop-functor-package clause 3 at Adic/UpperStar.lean:273–303.",
+   "via": [
+    "lem-sf-site-local-generators-relations-iso",
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafPrecomposition",
+  "declaration": "CategoryTheory.Sheaf.precompositionOfSheafPreservation",
+  "file": "lean/Sheaf/CategoryTheory/SheafPrecomposition.lean",
+  "statement": "def precompositionOfSheafPreservation {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D] {A : Type uA} [Category.{vA} A] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (P : C ⥤ D) (hP : ∀ H : Sheaf K A, Presheaf.IsSheaf J (P.op ⋙ H.obj)) : Sheaf K A ⥤ Sheaf J A",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96228648a",
+  "group": "Q55",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96228648a",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery repairs the prior H2/H12 RETURN: new def node def-sf-sheaf-precomposition owns Sheaf.precompositionOfSheafPreservation (genuine ObjectProperty.lift, needs only hP, no monoidal/sheafify/continuity binders; no existing node or Mathlib match). Item node differs from live only in lean and the added stmt_dep; statement/proof/source verbatim. Clause check ok: universes independent (Category.{vC}/{vD}, coefficients AddCommGrpCat.{max uC vC uD vD w}, per the size convention); hP, products in C only, adj, η, (i), (ii) with φ'≫P.map a = v i≫φ, IsIso of homEquiv.symm η. Cover index Type (max uD vD) is equivalent to unrestricted. Both lean.statement fields verbatim; docstrings carry source, blueprint and 8 steps; proof is sorry only. Edge cases ok. No compile run (no fix). Advisory: source.place 244-284 vs theorem at 250."
+ }
+}

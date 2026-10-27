@@ -133,7 +133,32 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_closed_image_limit_system"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_closed_image_limit_system",
+     "module": "WeilConjectures.AlgebraicGeometry.ClosedImageLimitSystem",
+     "lines": [
+      26,
+      182
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "WeilConjectures.AlgebraicGeometry.ClosedImageLimitSystem",
@@ -163,5 +188,37 @@
   "landing": "20261012T095906-L-318172",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $J$ be a small nonempty cofiltered category and $D:J\\to\\mathsf{Scheme}$ a diagram of schemes [def-pc-scheme]. Suppose every $D_j$ is quasi-compact and quasi-separated (the intersection of any two quasi-compact open subsets is quasi-compact), and every transition morphism is affine [pqf-def-affine-morphism]. Let $\\pi_Y$ be a limit cone with vertex $Y$ and let $i:X\\to Y$ be a closed immersion. Then there exist a diagram $Z:J\\to\\mathsf{Scheme}$, a natural transformation $k:Z\\to D$ with closed immersion components, and a cone $\\pi_X$ with vertex $X$, such that $X$ is its limit, every transition of $Z$ is affine, and $\\pi_{X,j}\\mathbin{;}k_j=i\\mathbin{;}\\pi_{Y,j}$ for every $j\\in J$ (composition written in diagram order).",
+  "proof": [
+   {
+    "text": "*The stage images.* Let $I_j\\subseteq\\mathcal O_{D_j}$ be the kernel ideal sheaf of $\\pi_{Y,j}\\circ i:X\\to D_j$ (a quasi-compact morphism, so $I_j$ is quasi-coherent and computed on affine opens as the kernel on sections), and let $k_j:Z_j\\to D_j$ be the closed subscheme it defines, the scheme-theoretic image of $\\pi_{Y,j}\\circ i$. For an arrow $a:j\\to l$, naturality of the cone shows that $D(a)$ maps $Z_j$ into $Z_l$ (the ideal $I_l$ pulls back into $I_j$), which defines the transition maps of $Z$; the factorizations $\\pi_{X,j}:X\\to Z_j$ of $\\pi_{Y,j}\\circ i$ through $k_j$ are the canonical maps to the scheme-theoretic images. Since the $k_j$ are monomorphisms, the functor laws, naturality of $k$, the cone equations for $\\pi_X$ and $\\pi_{X,j}\\mathbin;k_j=i\\mathbin;\\pi_{Y,j}$ all follow by cancellation.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The kernel of $i$.* Let $K$ be the supremum of the pullbacks $\\pi_{Y,j}^{-1}I_j$ of the stage ideals to $Y$. Each is contained in $\\ker(i)$, so $K\\subseteq\\ker(i)$. Conversely, let $s$ be a section of $\\ker(i)$ over an affine open $W\\subseteq Y$ lying over an affine open of some stage. Since the transition maps are affine, $W$ is the limit of the affine inverse images $V_j$ in the stages, and its coordinate ring is the colimit of theirs; so $s$ comes from a section $t$ on some $V_j$. Since $i^\\sharp(s)=0$, $t$ maps to zero in $\\Gamma(X,\\cdot)$ after possibly enlarging $j$, i.e. $t\\in I_j(V_j)$, and hence $s\\in K(W)$. These affine opens cover $Y$, so $\\ker(i)=K$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The limit property.* Given a cone $s$ over $Z$, composing with $k$ gives a cone over $D$ and hence a map $m:s_{\\mathrm{pt}}\\to Y$. Every $I_j$ is killed by $s_j$ followed by $k_j$, so by the description $\\ker(i)=K$ the ideal $\\ker(i)$ is contained in $\\ker(m)$, and $m$ factors through the closed immersion $i$. The cone equations follow since each $k_j$ is a monomorphism, and uniqueness since $i$ is a monomorphism and maps into the limit $Y$ are determined by their components. So $X$ with $\\pi_X$ is a limit of $Z$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Affine transitions.* For $a:j\\to l$, the composite $Z_j\\to Z_l\\xrightarrow{k_l}D_l$ equals $Z_j\\xrightarrow{k_j}D_j\\xrightarrow{D(a)}D_l$, which is affine (a closed immersion followed by an affine morphism). Since $k_l$ is a closed immersion, hence separated, the transition $Z_j\\to Z_l$ is affine (if $g\\circ h$ is affine and $g$ is separated, then $h$ is affine). The $k_j$ are closed immersions by construction.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

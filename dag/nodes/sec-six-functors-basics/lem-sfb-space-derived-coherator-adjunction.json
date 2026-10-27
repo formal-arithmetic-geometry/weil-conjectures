@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-space-derived-coherator-adjunction",
+ "kind": "statement",
+ "title": "Triangulated derived quasi-coherator for qcqs algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact and quasi-separated: it admits a surjective etale map from a quasi-compact scheme, and $U\\times_X V$ is quasi-compact for every pair of affine etale scheme charts $U,V\\to X$ [lem-trf-space-fibre-products-etale-covers]. Use the small etale structure sheaf and the equivalent small ringed model [def-sfb-space-small-ringed-model], module sheaves [def-weil-sheaf-of-modules-category], and the unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be its full triangulated subcategory of objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. The inclusion $I_X:D_{\\mathrm{QCoh}}(\\mathcal O_X)\\hookrightarrow D(\\mathcal O_X)$ has a right adjoint $DQ_X$. This adjoint is a triangulated functor [def-weil-triangulated-category]. With counit $\\epsilon:I_XDQ_X\\to\\mathrm{id}$, composition with $\\epsilon_E$ gives natural bijections $$\\operatorname{Hom}_{D_{\\mathrm{QCoh}}}(P,DQ_XE)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(\\mathcal O_X)}(I_XP,E).$$ The unit $\\mathrm{id}\\to DQ_XI_X$ is an isomorphism. No Noetherian, separatedness, finite-type or finite-dimensional hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CR4 (lemma-better-coherator); triangulated adjoint structure as in derived.tex Tag 0A8D (lemma-adjoint-is-exact)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-small-ringed-model",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-triangulated-category",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-qcoh-derived-triangulation"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified small ringed model of $X_{\\mathrm{et}}$. Its module category is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], and an equivalence of abelian categories preserves this property, so the module sheaves on $X_{\\mathrm{et}}$ form a Grothendieck category through the retained restriction equivalence. Hence [lem-kun-grothendieck-derived-coproducts] gives all set-indexed coproducts in $D(\\mathcal O_X)$, represented by termwise coproducts of complexes. All indexing sets and Hom sets are taken in the fixed common universe; no larger-indexed coproduct is used.",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F3, lemma-quasi-coherence-direct-sums, proof; injectives.tex Tag 07D9, lemma-derived-products"
+   }
+  },
+  {
+   "text": "First, the item's hypothesis is the one used by the cited space results. A surjective etale map from a quasi-compact scheme makes the point space $|X|$ quasi-compact by the final clause of [lem-a1-space-finite-affine-subatlas]. Quasi-compactness of every $U\\times_XV$ for affine etale scheme charts $U,V\\to X$ is equivalent, by [lem-sfb-etale-affine-pairs-test-quasiseparated] applied to $X$ viewed as an algebraic space over $\\operatorname{Spec}\\mathbf Z$ through $S\\to\\operatorname{Spec}\\mathbf Z$, to quasi-compactness of the absolute diagonal. Put $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$. By [lem-sfb-space-perfect-localizing-generation], $C_X$ is a strictly full subcategory closed under shifts, distinguished-triangle cones and ambient set-indexed coproducts. It therefore inherits its triangulated structure, and $I_X$ is exact. For any family in $C_X$, its ambient coproduct belongs to $C_X$; fullness identifies its maps to each $T\\in C_X$ with the ambient maps, so the ambient coproduct universal property is also the one in $C_X$. Thus $I_X$ preserves coproducts. By [lem-sfb-space-compact-perfect-generator] there is a compact $P\\in C_X$ detecting zero objects by all $\\operatorname{Hom}(P[n],-)$, $n\\in\\mathbf Z$. The singleton family $\\{P\\}$ therefore compactly generates $C_X$ by [def-pc-compactly-generated]: the condition using $P[n]$ is the condition using $P$ and shifts of the target after replacing $n$ by $-n$.",
+   "uses": [
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-sfb-etale-affine-pairs-test-quasiseparated",
+    "lem-sfb-space-perfect-localizing-generation",
+    "lem-sfb-space-compact-perfect-generator",
+    "def-pc-compactly-generated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CR4, lemma-better-coherator, Second proof; Tags 09IY and 09M8"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-brown-representability-right-adjoint] to $I_X:C_X\\to D(\\mathcal O_X)$. Its source and target are triangulated and have set-indexed coproducts by the preceding steps; its source is compactly generated and it preserves these coproducts. It follows that $I_X$ has a right adjoint $DQ_X$. This uses only quasi-compactness and quasi-separatedness of $X$, the hypotheses of the generator and closure results; none requires $X$ to be Noetherian, separated, of finite type or finite dimensional.",
+   "uses": [
+    "lem-pc-brown-representability-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CR4, lemma-better-coherator, Second proof; derived.tex Tag 0A8G, proposition-brown"
+   }
+  },
+  {
+   "text": "Give $I_X$ its inherited coherent integer-shift isomorphisms. Clause (iii) of [lem-weil-pbc-adjunction-shift-compatibility-unique] supplies the compatible coherent shift isomorphisms on its right adjoint, with shift-compatible unit and counit. Now [lem-sf-triangulated-right-adjoint] applies to this precise adjunction: $I_X$ is exact, so $DQ_X$ is exact with that shift structure. Thus the right adjoint is triangulated.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact; canonical shift construction and exactness"
+   }
+  },
+  {
+   "text": "Write $\\eta$ and $\\epsilon$ for this adjunction. By the definition of the adjunction, the Hom bijection in the displayed direction sends $a:P\\to DQ_XE$ to $\\epsilon_E\\circ I_X(a)$. Its inverse sends $b:I_XP\\to E$ to $DQ_X(b)\\circ\\eta_P$; naturality and the two triangle identities show these maps are mutually inverse and natural in $P,E$. Finally, the inclusion of a full subcategory is fully faithful. Apply [lem-sp-adjunction-unit-fully-faithful-left] to $I_X\\dashv DQ_X$: $\\eta:\\mathrm{id}\\to DQ_XI_X$ is a natural isomorphism, as claimed.",
+   "uses": [
+    "lem-sp-adjunction-unit-fully-faithful-left"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Section section-adjoint, adjunction-map formulas; Tag 07RB, lemma-adjoint-fully-faithful (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-small-ringed-model",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sfb-etale-affine-pairs-test-quasiseparated",
+  "lem-sfb-space-perfect-localizing-generation",
+  "lem-sfb-space-compact-perfect-generator",
+  "def-pc-compactly-generated",
+  "lem-pc-brown-representability-right-adjoint",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-sp-adjunction-unit-fully-faithful-left"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CR4, lemma-better-coherator, Second proof, with derived.tex Tag 0A8D and categories.tex Tag 07RB for adjunction consequences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coherator|DQCoh|derived.*quasi.?coherent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived module pushforward, sheafification adjunctions or abstract derivation of an already supplied adjunction; none constructs the D_QCoh coreflector for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of the derived category of quasi coherent cohomology into the derived category of modules on a quasi compact quasi separated algebraic space has a triangulated right adjoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"DerivedCategory.Qh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        CategoryTheory.Functor (HomotopyCategory C (ComplexShape.up ℤ)) (DerivedCategory C)\", \"doc\": \"The functor induced by localizing at quasi-isomorphisms, mapping homotopy classes of chain maps in the homotopy category of integer-indexed complexes to the derived category. This functor identifies h\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived module pushforward, sheafification adjunctions or abstract derivation of an already supplied adjunction; none constructs the D_QCoh coreflector for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of the derived quasi coherator right adjoint for quasi compact quasi separated algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace.Γ.IsRightAdjoint\", \"doc\": \"The global sections functor $\\\\Gamma$ from the category of locally ringed spaces to the opposite category of commutative rings is a right adjoint functor. This establishes an adjunction between the con\"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.Scheme.Γ.IsRightAdjoint\", \"doc\": \"The contravariant global sections functor from the category of schemes to the category of commutative rings is a right adjoint functor. This establishes an adjunction between the opposite category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)]\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [∀ (i : I), QuasiSeparatedSpace ↥(D.obj i)],\\n  \", \"doc\": \"For any diagram of schemes where all morphisms are affine and each scheme is compact and quasi-separated, the right opposite of the global sections functor (mapping schemes to their global sections in\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived module pushforward, sheafification adjunctions or abstract derivation of an already supplied adjunction; none constructs the D_QCoh coreflector for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint to inclusion of D_QCoh into sheaf module derived category",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \": (sheafToPresheaf J D).IsRightAdjoint\", \"doc\": \"The inclusion functor from sheaves to presheaves is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.plusPlusAdjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \": plusPlusSheaf J D ⊣ sheafToPresheaf J D\", \"doc\": \"The sheafification functor (double plus construction) for presheaves on a category equipped with a Grothendieck topology forms an adjunction with the inclusion functor from sheaves to presheaves, wher\"}\n  {\"name\": \"CategoryTheory.HasSheafify.isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂}\\n  {inst_1 : CategoryTheory.Category.{v₂, u₂} A} [self : CategoryTheory.HasSheafify J A],\\n  CategoryTheory.HasWeakSheafify J A\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$, if there exists a sheafification functor from $\\\\mathcal{C}$ to $\\\\mathcal{A}$, then the inclusion functor f\"}\n  {\"name\": \"CategoryTheory.instIsLeftAdjointFunctorOppositeSheafPresheafToSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \"[HasWeakSheafify J A] : (presheafToSheaf J A).IsLeftAdjoint\", \"doc\": \"The sheafification functor from presheaves to sheaves on a category equipped with a Grothendieck topology is a left adjoint to the inclusion functor of sheaves into presheaves.\"}\n  {\"name\": \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \": (sheafification.{v} α).IsLeftAdjoint\", \"doc\": \"The sheafification functor for presheaves of modules over a presheaf of rings is a left adjoint to the inclusion functor from the category of sheaves of modules to the category of presheaves of module\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"CategoryTheory.instIsRightAdjointSheafΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : (Γ J A).IsRightAdjoint\", \"doc\": \"The global sections functor $\\\\Gamma$ is a right adjoint functor in the category of sheaves with respect to a Grothendieck topology.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived module pushforward, sheafification adjunctions or abstract derivation of an already supplied adjunction; none constructs the D_QCoh coreflector for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjoint\", \"DerivedCategory\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived module pushforward, sheafification adjunctions or abstract derivation of an already supplied adjunction; none constructs the D_QCoh coreflector for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint of the inclusion of the quasi coherent derived category of a quasi compact quasi separated algebraic space",
+   "results": "CategoryTheory.sheafToPresheaf_isRightAdjoint; CategoryTheory.Coreflective.R; CategoryTheory.Functor.IsRightAdjoint.mk; CategoryTheory.instIsRightAdjointSheafΓ; CategoryTheory.instIsRightAdjointCoreflector; CategoryTheory.Adjunction.ofIsRightAdjoint; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived sheaf adjunctions, an assumed coreflective subcategory, or generic derived-category localization; none supplies the algebraic-space derived quasi-coherator"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherator\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of complexes with quasi coherent cohomology on a quasi compact quasi separated algebraic space has a right adjoint derived coherator",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforward; CategoryTheory.Functor.sheafAdjunctionCocontinuous; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; CategoryTheory.sheafToPresheaf_isRightAdjoint; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived sheaf adjunctions, an assumed coreflective subcategory, or generic derived-category localization; none supplies the algebraic-space derived quasi-coherator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a coreflector from the unbounded derived category of sheaves of modules to objects with quasicoherent cohomology",
+   "results": "DerivedCategory.Qh; DerivedCategory.instEssSurjCochainComplexIntQ; DerivedCategory.Q; CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory; HasDerivedCategory.standard; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; HasDerivedCategory",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived sheaf adjunctions, an assumed coreflective subcategory, or generic derived-category localization; none supplies the algebraic-space derived quasi-coherator"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-derived-limit",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited coherent-family/Quot effectivity prerequisite in proof (3) of det-thm-sf-ctf-stability-direct-images; Stacks 0CST: Tag 0CR4 (lemma-better-coherator); triangulated adjoint structure as in derived.tex Tag 0A8D (lemma-adjoint-is-exact).",
+   "via": [
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-derived-coherator-adjunction",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0CR4 second proof and reused the existing algebraic-space compact generator and localizing-closure nodes. Made ambient coproducts explicit, applied the existing generic Brown theorem, supplied canonical shifts before the triangulated-right-adjoint leaf, and identified the counit Hom map and invertible unit. Statement unchanged; no new nodes; no exact project Lean attachment.",
+  "blueprint": "Inherited effectivity prerequisite under det-thm-sf-ctf-stability-direct-images, proof (3), through lem-sfb-space-inverse-module-derived-limit: realizes its derived quasi-coherator adjunction. Current latest blueprint direct-images proof (3) was read; it does not state this technical prerequisite separately. The inherited blueprint.from.node=null and via chain are retained; whole-blueprint searches found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Grothendieck property of modules on the specified small ringed site, used only to obtain ambient derived coproducts; the unit contains no replacement for this general site theorem."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic termwise computation of coproducts in a Grothendieck derived category; supplies the ambient coproduct hypothesis of Brown, independently of geometric operations."
+   },
+   {
+    "node": "lem-pc-brown-representability-right-adjoint",
+    "why": "Generic Brown right-adjoint theorem applied to the quasi-coherent inclusion, precisely the second proof of Stacks 0CR4; no direct-image or six-functor route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-brown-representability-right-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-a1142d87d",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-a1142d87d (reviewer sub-agent of L); spot-checked: FIX: the five steps follow the Second proof of Stacks 0CR4 and are mathematically correct, but Step 2 used a non-elementary hypothesis translation without a citation (C1/E1). I added the citations and the corrected item is in fixes/dag/nodes/sec-six-functors-basics/. Source (spaces-perfect.tex:4515-4527): Brown 0A8G; 08F3 for coproducts in D_QCoh commuting with the inclusion; 09IY with 09M8 for a compact perfect generator. No new nodes and the statement is unchanged. Each step checked against its cited statements: step 1 uses the small ringed model to get a Grothendieck module category, then termwise derived coproducts (empty family included). In step 2, localizing-generation gives closure under shifts, cones and ambient coproducts, so C_X is triangulated, I_X is exact and preserves coproducts. The compact generator in C_X gives Hom(P[n],E)=Hom(P,E[-n]), which matches def-pc-generators and def-pc-compactly-generated. Step 3: all hypotheses of the Brown node hold. Step 4: shift-compat clause (iii) comes before isTriangulated_rightAdjoint. Step 5: the counit Hom map is right, and the unit is invertible because the inclusion is a fully faithful left adjoint. The fault: both cited space nodes define qcqs as '|X| qc, absolute diagonal qc', while the item states it as 'qc scheme atlas, U×_X V qc for affine charts'. Step 2 now cites lem-a1-space-finite-affine-subatlas (final clause) and lem-sfb-etale-affine-pairs-test-quasiseparated for this. I also added one sentence to step 1 saying the Grothendieck property carries across the module equivalence. proof_deps = union of uses; no cycle. Edge cases (empty space, affine, empty coproduct, unbounded complexes) are fine. The scheme, stack and affine coherator nodes in the DAG are not duplicates of the item. Batch-5 flag: the two flagged citations reach sec-trace-formula only through algebraic-space foundations (def-trf-algebraic-space, quasi-coherent modules, atlas lemmas), not the trace formula or Poincaré duality, so I accept them. Tool use to record: lem-a1-space-finite-affine-subatlas (unit sk-p-real-rankin), a generic space-topology fact. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedCoheratorAdjunction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_derivedCoheratorAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedCoheratorAdjunction.lean",
+  "statement": "theorem exists_derivedCoheratorAdjunction {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : ∃ (U : Over S) (a : yoneda.obj U ⟶ X.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → IsEtale a → IsEtale b → ∃ W : Over S, Nonempty (yoneda.obj W ≅ Limits.pullback a b) ∧ CompactSpace W.left) : ∃ (DQ : X.DerivedModules ⥤ X.DerivedQCoh) (adj : X.derivedQCohProperty.ι ⊣ DQ), @Functor.IsTriangulated _ _ _ _ _ _ DQ (adj.rightAdjointCommShift ℤ) _ _ _ _ _ _ _ _ ∧ (∀ (P : X.DerivedQCoh) (E : X.DerivedModules), Function.Bijective (fun a : P ⟶ DQ.obj E ↦ X.derivedQCohProperty.ι.map a ≫ adj.counit.app E)) ∧ IsIso adj.unit",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing small-model DerivedModules and DerivedQCoh and their inherited triangulation. The quasi-compact atlas and affine etale overlap hypotheses are rendered directly; overlap compactness is compactness of a representing scheme. The exactness conclusion uses the canonical right-adjoint integer-shift structure of this precise adjunction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44923139b",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Item lem-sfb-space-derived-coherator-adjunction matches the node and Stacks 0CR4/0A8D/07RB clause by clause. Hypotheses: hqc is a surjective étale atlas U→X with CompactSpace U.left (IsEtale and IsSurjective are the representable base-change properties of Tag 025Y); hqs is a quasi-compact representing scheme for pullback a b over affine étale charts, which is equivalent to quasi-compactness of U×_X V and is not stronger. Conclusion: ∃ DQ and adj : derivedQCohProperty.ι ⊣ DQ; Functor.IsTriangulated DQ under the canonical adj.rightAdjointCommShift ℤ (unique shift compatible with ObjectProperty.commShiftι); Bijective of a ↦ ι.map a ≫ counit.app E (equal to homEquiv.symm, so natural); IsIso adj.unit. Universe pattern u/w matches the landed deps; no Noetherian, separated, finite or bounded hypotheses. The two added stmt_deps (def-sfb-space-derived-module-calculus, def-sfb-space-qcoh-derived-triangulation) are landed def nodes really used in the signature. Statement verbatim; node otherwise byte-identical to live. No space coherator duplicate (only the Zariski scheme exists_dqCoheratorAdjunction). Docstrings carry the source and blueprint tag, proof steps are given, proof is sorry, and the report has both required sections. No compile rerun per instructions; no files changed."
+ }
+}

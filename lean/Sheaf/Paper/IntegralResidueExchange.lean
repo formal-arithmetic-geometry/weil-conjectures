@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 import Sheaf.Paper.IntegralReductionConstructible
 import Sheaf.Paper.IntegralResidueExchangeAlgebra
+import Sheaf.Paper.BoundedExchangeAmbient
 
 /-! # Reduction of integral exchange to residue-coefficient exchange
 

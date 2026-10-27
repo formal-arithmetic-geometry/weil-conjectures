@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-strict-etale-inverse-transport-composition",
+ "kind": "statement",
+ "title": "Composition of normalized geometric inverse-image coefficient squares",
+ "statement": "Let a,b be composable arbitrary coefficient changes, and g:T→S a scheme morphism. At T and S fix strict evaluation records for three coefficient rings, normalized transports UTij and USij, normalized ordinary geometric inverse-image records Ai for g and their derived inverse-image realizations Di [def-pur-strict-etale-coefficient-transport-interfaces, def-per-strict-etale-system-interfaces]. Fix normalized inverse-image coefficient squares Vij from USij ⋙ Dj.inverse to Di.inverse ⋙ UTij. For any normalized composition records AT and AS on these transports, and every derived strict system K on S with coefficients in O1, D3.inverse.map(AS.derived.hom_K) ≫ V13.derived.hom_K equals V23.derived.hom_(US12 K) ≫ UT23.derived.map(V12.derived.hom_K) ≫ AT.derived.hom_(D1.inverse K). This is a square for one geometric inverse image; it contains no open extension, proper direct image, compactification, or compact-support projection.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng, Construction 4.1, Construction 5.15 and Proposition 2.29(2); tensor/adjunction normalization underlying the coefficient composition step."
+ },
+ "stmt_deps": [
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Paste the two ordinary inverse-image coefficient squares. Evaluate at coefficient level n, forget to set sheaves, and precompose with the two successive tensor units. Use the ordinary unit equations of AT and AS and the unit normalization of V12 and V23. Both resulting maps are the inverse image under g of the same composite tensor unit. The single square V13 has exactly that value by its own normalization.",
+   "uses": [
+    "def-pur-strict-etale-coefficient-transport-interfaces",
+    "def-per-strict-etale-system-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized scalar adjunction says that precomposition with the composite unit is injective on module-sheaf morphisms. Faithful forgetting to set sheaves therefore gives equality of the ordinary level squares. Equality of strict-system morphisms is componentwise, so this proves equality of the entire ordinary natural transformations, including their successor transitions.",
+   "uses": [
+    "def-pur-strict-etale-coefficient-transport-interfaces",
+    "def-per-strict-etale-system-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the complex functor and then the localization Q to the ordinary equality. Substitute the representative equations of V12,V23,V13 and of AT,AS. Naturality moves the factorization isomorphisms to the outside, where their inverses cancel. This gives the displayed equality after precomposition by Q. Fully faithful precomposition by a localization extends equality to all derived objects. It is equality of entire system morphisms, never an inference from evaluations in derived level categories.",
+   "uses": [
+    "def-pur-strict-etale-coefficient-transport-interfaces",
+    "lem-sfb-exact-derived-natural-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "def-per-strict-etale-system-interfaces",
+  "lem-sfb-exact-derived-natural-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Interface-level tensor/adjunction argument underlying Construction 4.1 and the coefficient comparisons in Construction 5.15; generalization to the arbitrary normalized records of the assigned item, not a verbatim theorem of Zheng."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of scalar extension pullback comparison with respect to composition of coefficient maps",
+   "results": "ModuleCat.extendScalarsComp; PresheafOfModules.pullback; scalar-composition ingredients, no strict-system geometric square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence for inverse image of sheaves of modules and coefficient scalar extension",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv and pullback/free-sheaf formulas; no normalized strict-system square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|siteCoefficientTensor.*[Cc]omp; rg for StrictEtaleTransportComposition and tensor associators in both source roots and dag/nodes",
+   "results": "The interfaces define the data and normalization but assert no existence. CoefficientTensorOrdinaryCoherence gives same-ring quotient transitions only. SystemLevelLeftExtensionTheory uses arbitrary ring diagrams but a different system interface. The existing item is the sole compact-support cocycle.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate. Blueprint searches coefficient transport, tensor associator, inverse image coefficient, strict tensor found no matching blueprint statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictEtaleCompactSupportComposition",
+  "date": "2026-10-26",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Coefficient compatibility of exceptional inverse image: the compatible coefficient operations in the earlier adic-stage route, specifically composition of scalar and reindexing maps before passage to a limit. The latest blueprint has replaced the adic construction by condensed Brown representability; this worker preserves the assigned strict-system lemma and its unit route. This node isolates composition of normalized geometric inverse-image coefficient squares.",
+   "via": [
+    "lem-pur-strict-etale-compact-support-composition",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictEtaleInverseTransportComposition",
+  "file": "lean/Sheaf/Paper/StrictEtaleInverseTransportComposition.lean",
+  "declaration": "AlgebraicGeometry.strictEtaleInverseTransport_composition",
+  "declarations": [
+   "AlgebraicGeometry.strictEtaleInverseTransport_composition"
+  ],
+  "statement": "theorem strictEtaleInverseTransport_composition\n    {O₁ O₂ O₃ : Type (u + 1)} [CommRing O₁] [CommRing O₂] [CommRing O₃]\n    {ell₁ : O₁} {ell₂ : O₂} {ell₃ : O₃} {phi₁₂ : O₁ →+* O₂} {phi₂₃ : O₂ →+* O₃}\n    {r₁₂ r₂₃ : ℕ →o ℕ}\n    {a : StrictEtaleCoefficientChange O₁ O₂ ell₁ ell₂ phi₁₂ r₁₂}\n    {b : StrictEtaleCoefficientChange O₂ O₃ ell₂ ell₃ phi₂₃ r₂₃}\n    {T S : Scheme.{u}} {g : T ⟶ S}\n    {PT₁ : StrictEtaleEvaluation T O₁ ell₁}\n    {PT₂ : StrictEtaleEvaluation T O₂ ell₂}\n    {PT₃ : StrictEtaleEvaluation T O₃ ell₃}\n    {PS₁ : StrictEtaleEvaluation S O₁ ell₁}\n    {PS₂ : StrictEtaleEvaluation S O₂ ell₂}\n    {PS₃ : StrictEtaleEvaluation S O₃ ell₃}\n    {UT₁₂ : StrictEtaleCoefficientTransport a T PT₁ PT₂}\n    {UT₂₃ : StrictEtaleCoefficientTransport b T PT₂ PT₃}\n    {UT₁₃ : StrictEtaleCoefficientTransport (a.comp b) T PT₁ PT₃}\n    {US₁₂ : StrictEtaleCoefficientTransport a S PS₁ PS₂}\n    {US₂₃ : StrictEtaleCoefficientTransport b S PS₂ PS₃}\n    {US₁₃ : StrictEtaleCoefficientTransport (a.comp b) S PS₁ PS₃}\n    {A₁ : StrictEtaleOrdinaryImage O₁ ell₁ g}\n    {A₂ : StrictEtaleOrdinaryImage O₂ ell₂ g}\n    {A₃ : StrictEtaleOrdinaryImage O₃ ell₃ g}\n    {D₁ : CoefficientDerivedImage A₁.inverse A₁.rightSystem A₁.systemAdj}\n    {D₂ : CoefficientDerivedImage A₂.inverse A₂.rightSystem A₂.systemAdj}\n    {D₃ : CoefficientDerivedImage A₃.inverse A₃.rightSystem A₃.systemAdj}\n    (V₁₂ : StrictEtaleInverseTransport UT₁₂ US₁₂ A₁ A₂ D₁ D₂)\n    (V₂₃ : StrictEtaleInverseTransport UT₂₃ US₂₃ A₂ A₃ D₂ D₃)\n    (V₁₃ : StrictEtaleInverseTransport UT₁₃ US₁₃ A₁ A₃ D₁ D₃)\n    (AT : StrictEtaleTransportComposition UT₁₂ UT₂₃ UT₁₃)\n    (AS : StrictEtaleTransportComposition US₁₂ US₂₃ US₁₃) (K) :\n    D₃.inverse.map (AS.derived.hom.app K) ≫ V₁₃.derived.hom.app K =\n      V₂₃.derived.hom.app (US₁₂.derived.obj K) ≫\n        UT₂₃.derived.map (V₁₂.derived.hom.app K) ≫\n          AT.derived.hom.app (D₁.inverse.obj K)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T001058-L-4167053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T001058-L-4167053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

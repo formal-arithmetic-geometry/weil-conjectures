@@ -5,13 +5,14 @@ Authors: SHEAF groups B4 and H2
 -/
 module
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
-public import Sheaf.Paper.ContinuousIntegralCoefficients
+public import Sheaf.Paper.ContinuousIntegralCoefficientData
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Sheaf.Paper.IntegralMatrixPivotCover
 import all Sheaf.Paper.ConstructibleCokernelsExtensions
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
-import all Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
+import Sheaf.AlgebraicGeometry.PullbackExtendScalarsComparison
+import Sheaf.AlgebraicGeometry.LocallyFinitelyPresentedExtendScalars
 
 /-! # Kernels of integral constructible internal module objects
 
@@ -25,6 +26,8 @@ rational cokernels; full integral Smith invariants are not required.
 
 open CategoryTheory Limits
 
+attribute [local instance 10000] CategoryTheory.CategoryStruct.toQuiver
+
 universe v u
 
 @[expose] public section
@@ -33,7 +36,7 @@ universe v u
 section
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-private noncomputable def pivotKernelIso {A B D E : C}
+@[irreducible] private noncomputable def pivotKernelIso {A B D E : C}
     (p : A ⟶ D) [Mono p] (r : B ⟶ A) (c : A ⟶ E) (d : B ⟶ E) :
     kernel (biprod.lift (biprod.desc p (r ≫ p)) (biprod.desc c d)) ≅
       kernel (d - r ≫ c) := by
@@ -71,7 +74,7 @@ private noncomputable def pivotKernelIso {A B D E : C}
     simp [a, b]
 
 
-private noncomputable def kernelCokernelCompIso
+@[irreducible] private noncomputable def kernelCokernelCompIso
     {B D E N : C} (b : D ⟶ E) (p : E ⟶ N) (w : b ≫ p = 0)
     (hp : IsColimit (CokernelCofork.ofπ p w)) (t : B ⟶ E) :
     let δ := biprod.desc b t
@@ -118,7 +121,7 @@ private noncomputable def kernelCokernelCompIso
     simp [q, z]
   exact colimit.isoColimitCocone ⟨_, hex.gIsCokernel⟩
 
-private noncomputable def kernelDescCokernelIso
+@[irreducible] private noncomputable def kernelDescCokernelIso
     {A B M N : C} (a : A ⟶ B) (p : B ⟶ M) (w : a ≫ p = 0)
     (hp : IsColimit (CokernelCofork.ofπ p w)) (f : M ⟶ N) :
     let l := kernel.lift (p ≫ f) a (by simp [reassoc_of% w])
@@ -151,7 +154,7 @@ private noncomputable def kernelDescCokernelIso
     simpa [q] using hy
   exact colimit.isoColimitCocone ⟨_, hex.gIsCokernel⟩
 
-private noncomputable def pivotCokernelIso {A B D E : C}
+@[irreducible] private noncomputable def pivotCokernelIso {A B D E : C}
     (p : A ⟶ D) [IsIso p] (r : B ⟶ A) (c : A ⟶ E) (d : B ⟶ E) :
     cokernel (biprod.lift (biprod.desc p (r ≫ p)) (biprod.desc c d)) ≅
       cokernel (d - r ≫ c) := by
@@ -189,7 +192,7 @@ private noncomputable def pivotCokernelIso {A B D E : C}
 
 attribute [local instance] preservesBinaryBiproducts_of_preservesBinaryCoproducts
 
-private noncomputable def mappedPivotCokernelIso
+@[irreducible] private noncomputable def mappedPivotCokernelIso
     {D' : Type*} [Category D'] [Abelian D'] (F : C ⥤ D')
     [F.Additive] [PreservesFiniteColimits F]
     {A B D E : C} (p : A ⟶ D) [IsIso (F.map p)]
@@ -214,6 +217,31 @@ private noncomputable def mappedPivotCokernelIso
     cokernelIsoOfEq (by simp only [Functor.map_sub, F.map_comp]) ≪≫
     (PreservesCokernel.iso F (d - r ≫ c)).symm
 
+omit [Abelian C] in
+private lemma conjugate_eq {A B A' B' : C} (eA : A ≅ A') (eB : B ≅ B')
+    (f : A ⟶ B) (g : A' ⟶ B') (h : eA.inv ≫ f ≫ eB.hom = g) :
+    eA.hom ≫ g = f ≫ eB.hom := by
+  rw [← h]
+  simp only [Iso.hom_inv_id_assoc]
+
+omit [Abelian C] in
+private lemma map_comp_squares {D' : Type*} [Category D'] (G : C ⥤ D')
+    {R S R' S' : C} {R'' S'' : D'} (φ : R ⟶ S) (φ' : R' ⟶ S')
+    (ψ : R'' ⟶ S'') (e : R ⟶ R') (d : S ⟶ S')
+    (e' : G.obj R' ⟶ R'') (d' : G.obj S' ⟶ S'')
+    (h : e ≫ φ' = φ ≫ d) (h' : e' ≫ ψ = G.map φ' ≫ d') :
+    (G.map e ≫ e') ≫ ψ = G.map φ ≫ (G.map d ≫ d') := by
+  rw [Category.assoc, h', ← Category.assoc, ← G.map_comp, h, G.map_comp,
+    Category.assoc]
+
+private lemma map_pullback_section {D' : Type*} [Category D'] (F : C ⥤ D')
+    {A B T : C} (p : A ⟶ T) (q : B ⟶ T)
+    [IsSplitEpi (F.map (pullback.snd p q))] :
+    (section_ (F.map (pullback.snd p q)) ≫ F.map (pullback.fst p q)) ≫ F.map p =
+      F.map q := by
+  rw [Category.assoc, ← F.map_comp, pullback.condition, F.map_comp,
+    ← Category.assoc, IsSplitEpi.id, Category.id_comp]
+
 end
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -221,6 +249,25 @@ open MonoidalCategory MonObj Opposite
 open Functor.LaxMonoidal Functor.OplaxMonoidal
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
+  monoidal_upperStarFromPoint laxBraided_upperStarFromPoint
+attribute [local irreducible] cokernelPresentationIso
+
+-- Keep the cached monoid structures folded during repeated instance comparisons.
+set_option warn.classDefReducibility false in
+private noncomputable def pulledMonObj {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] :
+    MonObj ((ProEtale.upperStar Ab.{u + 1} g).obj R) := inferInstance
+
+set_option warn.classDefReducibility false in
+private noncomputable def coefficientMonObj
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+    (X : Scheme.{u}) : MonObj (condensedRingObj Λ X) := inferInstance
+
+set_option warn.classDefReducibility false in
+attribute [local instance 2000] pulledMonObj coefficientMonObj
+attribute [local irreducible] Mod.extendScalars Mod.comap
+  AlgebraicGeometry.ProEtale.upperStar Functor.mapMod
 
 private abbrev DescendedMatrixKernels (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] : Prop :=
@@ -264,6 +311,9 @@ private lemma lfp_kernel_of_descended_matrix_kernels {X : Scheme.{u}}
   intro i
   let F := (ProEtale.upperStar Ab.{u + 1} (U.f i)).mapMod R
   let R' := (ProEtale.upperStar Ab.{u + 1} (U.f i)).obj R
+  let : F.Additive := inferInstance
+  let : PreservesFiniteLimits F := inferInstance
+  let : PreservesFiniteColimits F := inferInstance
   obtain ⟨n, m, a, ⟨eM⟩⟩ := (hU i).1
   obtain ⟨p, q, b, ⟨eN⟩⟩ := (hU i).2
   let πM := cokernel.π a ≫ eM.inv
@@ -277,17 +327,22 @@ private lemma lfp_kernel_of_descended_matrix_kernels {X : Scheme.{u}}
   intro j
   let G := (ProEtale.upperStar Ab.{u + 1} (V.f j)).mapMod R'
   let R'' := (ProEtale.upperStar Ab.{u + 1} (V.f j)).obj R'
+  let : G.Additive := inferInstance
+  let : PreservesFiniteLimits G := inferInstance
+  let : PreservesFiniteColimits G := inferInstance
   have : IsSplitEpi (G.map v) := hV j
   let t := section_ (G.map v) ≫ G.map (pullback.fst πN (πM ≫ F.map f))
   have ht : t ≫ G.map πN = G.map πM ≫ G.map (F.map f) := by
-    dsimp only [t]
-    rw [Category.assoc, ← G.map_comp, pullback.condition, G.map_comp,
-      ← Category.assoc, IsSplitEpi.id, Category.id_comp]
-    exact G.map_comp πM (F.map f)
-  let iM := G.mapIso eM ≪≫ PreservesCokernel.iso G a
-  let iN := G.mapIso eN ≪≫ PreservesCokernel.iso G b
-  have hπM : G.map πM ≫ iM.hom = cokernel.π (G.map a) := by simp [πM, iM]
-  have hπN : G.map πN ≫ iN.hom = cokernel.π (G.map b) := by simp [πN, iN]
+    exact (map_pullback_section G πN (πM ≫ F.map f)).trans
+      (G.map_comp πM (F.map f))
+  obtain ⟨iM, hπM⟩ : ∃ iM : G.obj (F.obj M) ≅ cokernel (G.map a),
+      G.map πM ≫ iM.hom = cokernel.π (G.map a) := by
+    refine ⟨G.mapIso eM ≪≫ PreservesCokernel.iso G a, ?_⟩
+    simp [πM]
+  obtain ⟨iN, hπN⟩ : ∃ iN : G.obj (F.obj N) ≅ cokernel (G.map b),
+      G.map πN ≫ iN.hom = cokernel.π (G.map b) := by
+    refine ⟨G.mapIso eN ≪≫ PreservesCokernel.iso G b, ?_⟩
+    simp [πN]
   let φ := iM.inv ≫ G.map (F.map f) ≫ iN.hom
   have hφ : t ≫ cokernel.π (G.map b) = cokernel.π (G.map a) ≫ φ := by
     rw [← hπN, ← Category.assoc, ht]
@@ -314,10 +369,10 @@ private lemma lfp_kernel_of_descended_matrix_kernels {X : Scheme.{u}}
         simp))
   let κ := kernel.lift δ (kernel.ι (G.map b) ≫ biprod.inl) (by simp [δ])
   have hE : IsLocallyFinitelyPresented R'' (kernel (G.map πM ≫ G.map (F.map f))) := by
-    rw [← ht]
     exact lfp_of_iso
-      (lfp_cokernel κ hKb hKδ)
-      (kernelCokernelCompIso (G.map b) (G.map πN) wN hpN t)
+      (lfp_of_iso (lfp_cokernel κ hKb hKδ)
+        (kernelCokernelCompIso (G.map b) (G.map πN) wN hpN t))
+      (kernelIsoOfEq ht)
   have wM : G.map a ≫ G.map πM = 0 := by
     simp only [← G.map_comp, πM, cokernel.condition_assoc, zero_comp, G.map_zero]
   have hpM : IsColimit (CokernelCofork.ofπ (G.map πM) wM) :=
@@ -359,7 +414,7 @@ private lemma locally_free_pullback {X Y : Scheme.{u}} (g : Y ⟶ X)
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
   [FiniteDimensional ℚ_[ℓ] E]
 
-private noncomputable def extendScalarsComapSquareIso {X : Scheme.{u}}
+@[irreducible] private noncomputable def extendScalarsComapSquareIso {X : Scheme.{u}}
     {R S R' S' : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [MonObj R'] [MonObj S']
     [IsCommMonObj R] [IsCommMonObj S] [IsCommMonObj R'] [IsCommMonObj S']
@@ -411,7 +466,7 @@ private lemma rationalCokernelFree_pullback {X Y : Scheme.{u}} (g : Y ⟶ X)
     (Mod.extendScalars ψ).mapIso (PreservesCokernel.iso T a).symm ≪≫
       (extendScalarsComapSquareIso (F.map φ) ψ e d hsq).app
         ((F.mapMod R).obj (cokernel a)) ≪≫
-      K.mapIso ((pullbackExtendScalarsIso g R S φ).symm.app (cokernel a))
+      K.mapIso ((pullbackExtendScalarsComparison g R S φ).symm.app (cokernel a))
   exact locally_free_of_iso
     (locally_free_comap (inv d) (locally_free_pullback g ha)) i.symm
 
@@ -499,26 +554,17 @@ private lemma integralMatrixKernels_of_pivots
       let T := F ⋙ J
       have hT : IsLocallyFinitelyPresented R' (kernel (T.map a)) := by
         rcases hV k with hz | ⟨m, hmn, A₁, B₁, iA, hB₁, p, hp, hunit, r, c, d, eA, eB, he⟩
-        · rw [show T.map a = 0 from hz]
-          exact lfp_of_iso (lfp_of_fp (fp_of_free
+        · exact lfp_of_iso (lfp_of_fp (fp_of_free
             (free_comap (inv α) (free_pullback (V.f k) ⟨n, hA⟩))))
-            kernelZeroIsoSource.symm
+            (kernelZeroIsoSource.symm ≪≫ (kernelIsoOfEq hz).symm)
         · let _ := hp
           let b := biprod.lift (biprod.desc p (r ≫ p)) (biprod.desc c d)
           let e : kernel (T.map a) ≅ kernel b :=
-            kernel.mapIso (T.map a) b eA eB (by
-              dsimp only [b]
-              rw [← he]
-              simp only [Iso.hom_inv_id_assoc]
-              rfl)
+            kernel.mapIso (T.map a) b eA eB (conjugate_eq eA eB (T.map a) b he).symm
           let L := Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) (V.X k))
           have : IsIso (L.map p) := hunit
           let eC : cokernel (T.map a) ≅ cokernel b :=
-            cokernel.mapIso (T.map a) b eA eB (by
-              dsimp only [b]
-              rw [← he]
-              simp only [Iso.hom_inv_id_assoc]
-              rfl)
+            cokernel.mapIso (T.map a) b eA eB (conjugate_eq eA eB (T.map a) b he).symm
           let eS := L.mapIso eC ≪≫ mappedPivotCokernelIso L p r c d
           have hS : RationalCokernelFree ℓ E (d - r ≫ c) :=
             locally_free_of_iso (rationalCokernelFree_pullback ℓ E (V.f k) a hLF) eS
@@ -573,10 +619,14 @@ private lemma rationalMatrixKernels_of_integral
   have : IsMonHom d := by dsimp [d]; infer_instance
   have : IsIso d := by dsimp [d]; infer_instance
   have hsq : e ≫ ψ = φ ≫ d := by
-    dsimp only [e, d, φ, ψ]
-    rw [Category.assoc, ← map_coefficientMap_comp_condensedPullbackHom,
-      ← Category.assoc, ← G.map_comp, ← map_coefficientMap_comp_condensedPullbackHom,
-      G.map_comp, Category.assoc]
+    exact map_comp_squares G (F.map (coefficientMap (integralScalarMap ℓ E) X))
+      (coefficientMap (integralScalarMap ℓ E) Y) ψ
+      (condensedPullbackHom (integralCoeff ℓ E) g)
+      (condensedPullbackHom (Profinite.continuousMapRingObj E) g)
+      (condensedPullbackHom (integralCoeff ℓ E) h)
+      (condensedPullbackHom (Profinite.continuousMapRingObj E) h)
+      (map_coefficientMap_comp_condensedPullbackHom (integralScalarMap ℓ E) g).symm
+      (map_coefficientMap_comp_condensedPullbackHom (integralScalarMap ℓ E) h).symm
   let T := Mod.comap (D := Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (inv e)
   let e' : (Mod.extendScalars ψ).obj (cokernel (T.map a)) ≅
       (Mod.comap (inv d)).obj ((Mod.extendScalars φ).obj (cokernel a)) :=
@@ -629,9 +679,9 @@ private lemma descendedMatrixKernels_of_rational
   let e' : (Mod.extendScalars (G.map (F.map φ))).obj (cokernel a) ≅
       ((G.mapMod (F.obj S)).obj ((F.mapMod S).obj P_E)) :=
     (Mod.extendScalars _).mapIso e ≪≫
-      ((pullbackExtendScalarsIso h (F.obj R) (F.obj S) (F.map φ)).app
+      ((pullbackExtendScalarsComparison h (F.obj R) (F.obj S) (F.map φ)).app
         ((F.mapMod R).obj P)).symm ≪≫
-      (G.mapMod (F.obj S)).mapIso ((pullbackExtendScalarsIso g R S φ).app P).symm
+      (G.mapMod (F.obj S)).mapIso ((pullbackExtendScalarsComparison g R S φ).app P).symm
   exact hmat X Y Z g h A B a hA hB
     (locally_free_of_iso hLF' e'.symm)
 

@@ -164,7 +164,18 @@
   "lem-weil-pbc-weak-etale-field"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -209,5 +220,29 @@
   "landing": "20261015T154210-L-164302",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "The algebra $C_A$ is faithfully flat and ind-etale\n[def-weil-pbc-ind-etale-algebra] over $A$. Its spectrum is w-local\n[def-weil-pbc-w-local], its closed points are exactly the points of\n$V(IC_A)$ (notation of [def-weil-pbc-strict-w-cover]), its maximal local\nrings are strictly henselian [def-weil-pbc-henselian-terminology], and its\nclosed points surject onto $\\operatorname{Spec}A$.",
+  "proof": [
+   {
+    "text": "Use the notation of [def-weil-pbc-strict-w-cover]. The map $W\\to E$ is\nfaithfully flat and ind-etale by [lem-weil-pbc-etale-contraction]. Its\nresidue field extensions are algebraic, by [lem-weil-pbc-weak-etale-field]\napplied to its fibres, which are weakly etale over fields\n([lem-weil-pbc-ind-etale-stability]). Since $W$ is w-local with closed points\n$V(I)$ ([lem-weil-pbc-w-localization-points]), part 3 of\n[lem-weil-pbc-retained-localization] shows that the closed points of\n$\\operatorname{Spec}C_A$ are the points of $V(IC_A)$ and that $W\\to C_A$ is\nfaithfully flat; by part 1, $\\operatorname{Spec}C_A$ is w-local and $E\\to C_A$\nis ind-Zariski, so it identifies local rings. A maximal ideal of $C_A$\ncontains $IC_A$, so it lies over a prime of $E$ containing $IE$, which is\nmaximal as in part 3 of [lem-weil-pbc-retained-localization]; its local ring\nequals that of $E$, which is strictly henselian by\n[lem-weil-pbc-etale-contraction]. The composite $A\\to W\\to E\\to C_A$ is\nind-etale and faithfully flat by [lem-weil-pbc-ind-etale-stability]. Finally\n$V(IC_A)\\to V(IE)$ is bijective by part 2 of\n[lem-weil-pbc-retained-localization], $V(IE)\\to V(I)$ is surjective by\nfaithful flatness of $W\\to E$, and $V(I)\\to\\operatorname{Spec}A$ is bijective\nby [lem-weil-pbc-w-localization-points]; so the closed points of $C_A$ surject\nonto $\\operatorname{Spec}A$.",
+    "uses": [
+     "def-weil-pbc-strict-w-cover",
+     "lem-weil-pbc-etale-contraction",
+     "lem-weil-pbc-weak-etale-field",
+     "lem-weil-pbc-ind-etale-stability",
+     "lem-weil-pbc-w-localization-points",
+     "lem-weil-pbc-retained-localization"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

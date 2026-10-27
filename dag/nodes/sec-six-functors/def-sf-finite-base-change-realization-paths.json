@@ -1,0 +1,107 @@
+{
+ "id": "def-sf-finite-base-change-realization-paths",
+ "kind": "definition",
+ "title": "The two finite base-change routes and their prescribed endpoint comparisons",
+ "statement": "Fix a finite-field datum D, a coefficient datum C with prime l, a finite extension E of Q_l and n >= 1. Let S be a six-functor datum [def-sf-datum] at these coefficients. For a compactified Cartesian square Q=(g prime,f prime,f,g) of its finite-type spaces and K in the full bounded constructible category on X and L in the finite-Tor bounded constructible category on Y, define the following maps using [def-sf-constructible-projection-mates]. TensorRealization is the inverse coefficient-equivalence unit on the fixed tensor. Mu is the pullback realization, fixed pullback comparison and TensorRealization followed by the canonical fixed pullback/tensor comparison and the inverse pullback realizations of the two factors. Exchange is the specified fixed compactification exchange conjugated by pullback/support realizations. LeftPath is g-star(PF);Exchange;f-prime-shriek(Mu followed by the restricted pullback-square comparison); RightPath is Mu; (Exchange tensor 1);PF-prime. Their common source comparison is pullRealization followed by the realized inverse fixed-pull comparison, the image of inverse-realized sourceComparison and the inverse coefficient-equivalence unit. Their common target comparison is targetComparison followed by the realized compact-support image of the tensor of the fixedPullRealization for g prime and the fixed f-prime pullback image of fixedPullRealization for g. The endpoints are the fixed-scalar diamond endpoints of [def-sf-finite-projection-exchange-coordinates]. These definitions are explicit composites; no arrow is chosen from an existence statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph: expressing the projection/exchange square in the prescribed coefficient realization"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-sf-constructible-projection-mates",
+  "def-sf-finite-projection-exchange-coordinates"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories transports a commutative diagram by specified natural comparison isomorphisms",
+   "results": "Generic transported monoidal categories and arrow equivalences found; none identifies these prescribed finite operation maps.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing realization definitions and normalization equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_injective",
+   "results": "CategoryTheory.Functor.map_injective in Mathlib.CategoryTheory.Functor.FullyFaithful.",
+   "date": "2026-10-27",
+   "verdict": "Used to reflect the final equality; does not establish the two coordinate equations."
+  },
+  {
+   "tool": "grep",
+   "query": "map_injective|cancel_mono",
+   "results": "Generic faithful-functor and categorical cancellation uses; local search also finds FiniteProjectionExchangeTransposes.diamond_equality and ConstructibleProjectionMates realization comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing fixed-scalar square and split only its coordinate identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "date": "2026-10-27",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph: specified monoidality, compactification exchange and coefficient identifications",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionFiniteBaseChangeCoordinates",
+  "file": "lean/Sheaf/Paper/ProjectionFiniteBaseChangeCoordinates.lean",
+  "declaration": "WeilConjectures.sixFunctorProjectionFiniteSquareSource",
+  "declarations": [
+   "WeilConjectures.sixFunctorProjectionFiniteTensorRealization",
+   "WeilConjectures.sixFunctorProjectionFiniteMu",
+   "WeilConjectures.sixFunctorProjectionFiniteExchange",
+   "WeilConjectures.sixFunctorProjectionFiniteLeftPath",
+   "WeilConjectures.sixFunctorProjectionFiniteRightPath",
+   "WeilConjectures.sixFunctorProjectionFiniteSquareSource",
+   "WeilConjectures.sixFunctorProjectionFiniteSquareTarget"
+  ],
+  "statement": "def sixFunctorProjectionFiniteSquareSource (S : SixFunctorDatum D C E n hn) (Q : SixFunctorCompactifiedSquare D) (K : sixFunctorFiniteCategory D C E n hn Q.X) (L : finiteTorConstructibleCategory C.l E n hn Q.Y.obj.left) : letI := Padic.finite_coefficientExtensionRing C.l E n hn let A := ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n) let RX := CompactSupportFiniteProjection.realization (C := C) (E := E) (n := n) (hn := hn) Q.X let RY := CompactSupportFiniteProjection.realization (C := C) (E := E) (n := n) (hn := hn) Q.Y let R' := CompactSupportFiniteProjection.realization (C := C) (E := E) (n := n) (hn := hn) Q.Y' ((S.finite.pull Q.g).obj (((CompactSupportFiniteProjection.partialTensor S.toSixFunctorFiniteOperations Q.Y).obj ((S.finite.support Q.f Q.compactification).obj K)).obj L)).obj ≅ R'.functor.obj ((FiniteProjectionExchange.pull A Q.g.hom.left).obj (FiniteProjectionExchange.tensor A Q.Y.obj.left ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) Q.compactification).obj (RX.inverse.obj K.obj)) (RY.inverse.obj L.obj)))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b30f0",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T222721-L-685893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b30f0",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T222721-L-685893",
+  "kind": "interface",
+  "note": "independent cc review: routes_realization (new sorry) against diamondLeft/diamondRight, finiteExchangeProjection, component/source/targetComparison and finitePullCompositionNormalization in the clone; the moved Mu/Exchange/TensorRealization diffed verbatim against the published item; item has no importers"
+ }
+}

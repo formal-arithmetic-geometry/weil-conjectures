@@ -1,0 +1,171 @@
+{
+ "id": "lem-trf-ordinary-atlas-tuple-realization",
+ "kind": "statement",
+ "title": "Small-section realization of ordinary atlas module tuples",
+ "statement": "Let S be a scheme [def-pc-scheme], F an algebraic space over S with its small etale site and structure sheaf [def-trf-algebraic-space], and I : Type u an index type in the scheme universe. Let V_i be objects of this site, with no joint-surjectivity assumption. Let R_ij be schemes over S equipped with projections representing V_i times_F V_j as presheaf pullback squares. Let M_i be ordinary invertible modules [def-sc-invertible-module]. Suppose alpha_ij : p_2^* M_j isomorphic to p_1^* M_i are ordinary module isomorphisms, with pullback and canonical transport as in [def-pc-module-pullback] and [def-sfb-ordinary-etale-identification]. Assume their restrictions along every diagonal are identities and their transitions compose on every triple test scheme. Then there exists a module sheaf N in F.Modules, with section sets in Type u, and ordinary etale identifications e_i of N with M_i [def-sfb-ordinary-etale-identification]. On every test object T with arrows a:T to V_i, b:T to V_j and r:T to R_ij respecting the two projections, e_i applied to the transported alpha_ij(s) equals e_j(s), for every section s of b^* M_j. No local-freeness conclusion for N, covering hypothesis, or assertion on descended morphisms is included.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR (lemma-glue-sheaves), ordinary tensor-section realization of the compatible-tuples construction; compare descent.tex Tags 03DU, 03LC, 05VG."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-ordinary-etale-identification"
+ ],
+ "proof": [
+  {
+   "text": "Associate tensor-section sheaves to the invertible M_i on the localized chart sites. The scheme comparison, with its unit-normalized identity and composition comparisons, transports alpha and its two coherence laws to local module sheaves. The values remain u-small.",
+   "uses": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "def-sfb-ordinary-etale-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DU, 03LC and 05VG: tensor-section sheaf and pullback comparison"
+   }
+  },
+  {
+   "text": "Use the literal compatible-tuples construction: at W, take tuples of sections on W times_F V_i satisfying the transition equation on every double overlap. The index types I and I times I and each section set are u-small, so this construction has u-small section values. Define operations and restrictions coordinatewise, as in the tuple-sheaf lemma; sheaf limits are sectionwise. This is the u-small section specialization of that construction, not an arbitrary witness chosen to define data.",
+   "uses": [
+    "lem-trf-space-etale-module-tuple-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00W2 and 04TR: compatible-tuples sheaf and sectionwise limits"
+   }
+  },
+  {
+   "text": "Evaluate a tuple on the graph in its own chart. The inverse uses the transported transitions on each coordinate. The diagonal law proves one inverse identity, and the (k,i) tuple equation pulled back along the graph proves the other. The cocycle makes the inverse tuple compatible. Linearity and naturality of tensor sections supply the ordinary etale identifications. Pull back the (i,j) tuple equation along the pair of graphs to obtain precisely the specified transition identity, including self-overlaps. For an empty index type the module is zero.",
+   "uses": [
+    "lem-trf-space-etale-tuple-graph-isomorphisms",
+    "def-sfb-ordinary-etale-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR: graph evaluation, inverse and overlap identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-etale-invertible-comparison",
+  "def-sfb-ordinary-etale-identification",
+  "lem-trf-space-etale-module-tuple-sheaf",
+  "lem-trf-space-etale-tuple-graph-isomorphisms"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR (lemma-glue-sheaves), ordinary tensor-section realization of the compatible-tuples construction; compare descent.tex Tags 03DU, 03LC, 05VG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The compatible tuples of local sheaves of modules with a descent cocycle form a sheaf with natural linear identifications on each etale atlas chart",
+   "results": "8 hits: SheafOfModules.isSheaf, SheafOfModules.sections, TopCat.Sheaf.forget, QuasicoherentData.rec, tildeInModuleCat, QuasicoherentData.mk, sheafificationCompPullback and TopCat.Presheaf.IsSheaf. No ordinary atlas realization or graph identification theorem.",
+   "date": "2026-10-26",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules on a ringed site is locally free of rank one when its restriction is naturally identified with an ordinary invertible sheaf on an etale scheme chart",
+   "results": "8 hits: Scheme.Modules, SheafOfModules, LocalGeneratorsData, free, iotaFree, IsFiniteType.mk, tildeInModuleCat, pullbackObjFreeIso_hom_naturality_assoc. None supplies the ordinary tensor-section identification or the atlas tuple construction.",
+   "date": "2026-10-26",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"over\"",
+   "results": "12 hits, including over, overFunctor, overMap, overPullback, Hom.over, overMapUnitIso and overFunctorMap. These supply localized module restrictions but no ordinary atlas realization or local-frame comparison.",
+   "date": "2026-10-26",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*descent|descent.*invertible; OrdinaryEtaleIdentification; local_frames; compatible tuples",
+   "results": "msearch grep returned 0 hits for invertible descent. Local rg inspected WeilConjectures/AlgebraicGeometry, Sheaf/AlgebraicGeometry and Mathlib/Algebra/Category/ModuleCat/Sheaf. EtaleModuleTupleSheaf and EtaleTupleGraphIsomorphisms handle abstract localized modules with section universe max (u + 1) v, not the ordinary-to-localized realization at section universe u. SchemeEtaleInvertibleComparison concerns a scheme small etale site, not the localized algebraic-space site. SpaceQcohGroupoidEquivalence records identifications but provides neither of these conclusions. Blueprint local-frames search had no hit; compatible-tuples search had one unrelated open-curve residue-sequence hit, hence no matching blueprint assertion.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; reuse existing constructions in the proof plan"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary invertible module on an etale chart naturally identifies a module sheaf with the structure sheaf on a covering by local frames",
+   "results": "8 hits: ModuleCat.Tilde.isUnit_toStalk, tilde, tildeInType, Tilde.exists_const, the module structure on tilde sections, tildeInModuleCat, Tilde.const, QuasicoherentData.localGeneratorsData_generators. No localized algebraic-space identification or local-frame theorem.",
+   "date": "2026-10-26",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceInvertibleDescent",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: descend the polarization to the quotient (Stacks 04W8). The ordinary atlas realization and local-frame steps of invertible descent.",
+   "via": [
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryAtlasTupleRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryAtlasTupleRealization.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_ordinary_atlas_tuple_realization",
+  "statement": "theorem exists_ordinary_atlas_tuple_realization\n    {S : Scheme.{u}} (F : AlgebraicSpace S) {I : Type u} (V : I → F.EtaleSite)\n    (R : I → I → Over S)\n    (p₁ : ∀ i j : I, R i j ⟶ (V i).obj.left)\n    (p₂ : ∀ i j : I, R i j ⟶ (V j).obj.left)\n    (hR : ∀ i j : I, IsPullback (yoneda.map (p₁ i j)) (yoneda.map (p₂ i j))\n      (V i).obj.hom (V j).obj.hom)\n    (M : ∀ i : I, (F.etaleForget.obj (V i)).Modules)\n    (hM : ∀ i : I, Scheme.Modules.IsInvertible (M i))\n    (α : ∀ i j : I,\n    (tensorPullback (p₂ i j).left).obj (M j) ≅ (tensorPullback (p₁ i j).left).obj (M i))\n    (hdiag : ∀ (i : I) (d : (V i).obj.left ⟶ R i i)\n    (h₁ : d ≫ p₁ i i = 𝟙 (V i).obj.left) (h₂ : d ≫ p₂ i i = 𝟙 (V i).obj.left),\n    atlasTransitionOver (M i) (M i) (p₁ i i) (p₂ i i) (α i i)\n      d (𝟙 (V i).obj.left) (𝟙 (V i).obj.left) h₁ h₂ =\n      Iso.refl ((tensorPullback (𝟙 (V i).obj.left.left)).obj (M i)))\n    (hcocycle : ∀ (i j k : I) (T : Over S)\n    (a : T ⟶ (V i).obj.left) (b : T ⟶ (V j).obj.left) (c : T ⟶ (V k).obj.left)\n    (rᵢⱼ : T ⟶ R i j) (rⱼₖ : T ⟶ R j k) (rᵢₖ : T ⟶ R i k)\n    (hᵢⱼ₁ : rᵢⱼ ≫ p₁ i j = a) (hᵢⱼ₂ : rᵢⱼ ≫ p₂ i j = b)\n    (hⱼₖ₁ : rⱼₖ ≫ p₁ j k = b) (hⱼₖ₂ : rⱼₖ ≫ p₂ j k = c)\n    (hᵢₖ₁ : rᵢₖ ≫ p₁ i k = a) (hᵢₖ₂ : rᵢₖ ≫ p₂ i k = c),\n    atlasTransitionOver (M i) (M k) (p₁ i k) (p₂ i k) (α i k)\n      rᵢₖ a c hᵢₖ₁ hᵢₖ₂ =\n    atlasTransitionOver (M j) (M k) (p₁ j k) (p₂ j k) (α j k)\n      rⱼₖ b c hⱼₖ₁ hⱼₖ₂ ≪≫\n    atlasTransitionOver (M i) (M j) (p₁ i j) (p₂ i j) (α i j)\n      rᵢⱼ a b hᵢⱼ₁ hᵢⱼ₂) :\n    ∃ (N : F.Modules),\n    ∃ (e : ∀ i : I, OrdinaryEtaleIdentification F (V i) N (M i)),\n        ∀ (i j : I) (T : F.EtaleSite) (a : T ⟶ V i) (b : T ⟶ V j)\n          (r : T.obj.left ⟶ R i j)\n          (h₁ : r ≫ p₁ i j = a.hom.left) (h₂ : r ≫ p₂ i j = b.hom.left)\n          (s : ((tensorPullback (F.etaleForget.map b)).obj (M j)).val.obj (op ⊤)),\n          (e i).app T a\n            (((atlasTransitionOver (M i) (M j) (p₁ i j) (p₂ i j) (α i j)\n              r a.hom.left b.hom.left h₁ h₂).hom.app ⊤) s) = (e j).app T b s",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T083228-L-2301471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T083228-L-2301471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

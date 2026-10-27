@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-closed-embedding-perfect-evaluation",
+ "kind": "statement",
+ "title": "Reflect perfect evaluation through a fully faithful closed embedding",
+ "statement": "Let B and A be categories, P an object property of B, Q a property of opposite-B times B, and H the actual partial internal Hom on Q. Let M be a closed domain on P, N a symmetric closed structure on A, and F:B→A fully faithful with evaluation-normalized ambient closed comparison e. Let O be isomorphic to the ambient tensor unit. For K,L in P, suppose ambient canonical evaluation Hom(FK,O) tensor T → Hom(FK,T) is invertible for every T in A. Then canonical evaluation Hom(K,I) tensor L → Hom(K,L) in M is invertible. These structures and maps are those of [def-sf-datum, lem-sfb-ringed-site-duality-maps].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md",
+  "place": "Finite and integral steps 1--7: comparison with the specified ambient ringed-site model."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "proof": [
+  {
+   "text": "write F for the composite inclusion. Full faithfulness and the Hom\ncomparison identify its tensor-right adjunction with the restriction of the\nambient tensor-right adjunction. The tensor comparison and source unitors\nidentify F(I) tensor F(M) with F(M). For an ambient dualizable F(K), use the\nambient evaluation isomorphism first with F(I), then with F(M). Tensor\nassociativity identifies Hom(F(K),F(I)) tensor F(M) with Hom(F(K),F(M).\nTranspose the comparison: the evaluation equation fixes its adjunct, and the\nsymmetry equation puts the dual on the left. The triangle identities remove\nthe source unitors. Thus this is the image of the source canonical comparison,\nup to invertible comparisons. It is invertible, and full faithfulness reflects\ninvertibility. This argument includes zero objects and the empty perfect model.",
+   "uses": [
+    "def-sf-datum",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-datum",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, applied to the coefficient-stage argument at Finite and integral steps 1--7: comparison with the specified ambient ringed-site model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful closed functor reflects dualizability and perfect tensor Hom evaluation",
+   "results": "8 hits including Functor.FullyFaithful.reflectsIsomorphisms, fullyFaithfulOfCoreflective, reflectsIsomorphisms_of_full_and_faithful",
+   "date": "2026-10-25",
+   "verdict": "Only categorical reflection tools; none states normalized closed evaluation transport, ambient rational slice detection, local bounded rational evaluation, or filtered coefficient descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Functor.Faithful",
+   "results": "12 hits including Functor.preimageIso and isIso_of_fully_faithful",
+   "date": "2026-10-25",
+   "verdict": "These reflect isomorphisms after a fully faithful functor, but do not identify the evaluation maps or establish local rational invertibility."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff.*cone|isIso_of_reflects_iso",
+   "results": "25 hits in Mathlib, including Functor.ReflectsIso and sheaf stalk applications",
+   "date": "2026-10-25",
+   "verdict": "No matching statement for normalized coefficient closed structures or rational constructibles on actual slice sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between triangulated categories sends a morphism to an isomorphism if and only if its cone becomes zero",
+   "results": "8 hits including Functor.distTriang_iff, map_distinguished_iff and IsHomological.exact",
+   "date": "2026-10-25",
+   "verdict": "General triangulated tools only; the specialized comparison, bounded rational local calculation and torsion detection remain additional arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SitePerfectDualizableHom",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-dualizable-hom",
+   "place": "Finite and integral steps 1--7: comparison with the specified ambient ringed-site model.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedEmbeddingPerfectEvaluation",
+  "file": "lean/Sheaf/Paper/ClosedEmbeddingPerfectEvaluation.lean",
+  "declaration": "WeilConjectures.closedEmbedding_perfectEvaluation",
+  "statement": "theorem closedEmbedding_perfectEvaluation\n    {B : Type a} [Category.{b} B] {A : Type c} [Category.{d} A]\n    {P : ObjectProperty B} {Q : ObjectProperty (Bᵒᵖ × B)}\n    {H : Q.FullSubcategory ⥤ B} (M : SixFunctorClosedDomain P Q H)\n    {H' : Aᵒᵖ × A ⥤ A} (N : CoefficientClosedStructure H')\n    (s : @SymmetricCategory _ _ N.monoidal) (F : B ⥤ A)\n    [F.Full] [F.Faithful] (e : SixFunctorAmbientClosedModel M N s F)\n    (O : A) (o : N.monoidal.tensorUnit ≅ O) (K L : P.FullSubcategory)\n    (h : ∀ T : A, IsIso (ringedSiteDualEvaluationLeft N s O o (F.obj K.obj) T)) :\n    IsIso (ringedSiteDualEvaluationLeft M.closed M.symmetric\n      M.closed.monoidal.tensorUnit (Iso.refl _) K L)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sf-closed-embedding-perfect-evaluation",
+  "worker": "E4",
+  "summary": "Stage-3 reduction; see Lean proof and report.",
+  "blueprint": {
+   "node": "prop-sf-dualizable-hom",
+   "place": "Finite and integral steps 1--7: comparison with the specified ambient ringed-site model.",
+   "via": []
+  },
+  "tool_uses": [
+   {
+    "node": "def-sf-datum",
+    "why": "Generic Six-functor datum, axiomatized is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "lem-sfb-ringed-site-duality-maps",
+    "why": "Generic Canonical coefficient-duality maps on a small ringed site is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T100943-L-3642728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T100943-L-3642728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

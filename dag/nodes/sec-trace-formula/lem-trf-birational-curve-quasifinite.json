@@ -19,11 +19,12 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sc-scheme-sober] to each of the irreducible schemes $E$ and $C$ (integrality gives irreducibility by [def-pc-integral-scheme]), obtaining unique generic points $\\eta_E$ and $\\eta_C$. For either scheme $X$, every point $x\\ne\\eta_X$ is closed: otherwise choose $z\\in\\overline{\\{x\\}}\\setminus\\{x\\}$. Closures of singletons are irreducible. The uniqueness clause of sobriety makes $\\overline{\\{z\\}}\\subsetneq\\overline{\\{x\\}}$, since equality would make $z$ and $x$ generic points of the same irreducible closed subset. Also $\\overline{\\{x\\}}\\subsetneq X$, since equality would make $x=\\eta_X$. These two strict inclusions form a chain of length $2$, contradicting $\\dim X=1$ by [def-kun-topological-krull-dimension]. Finally $\\eta_X$ is not closed: otherwise $X=\\overline{\\{\\eta_X\\}}=\\{\\eta_X\\}$ would have dimension $0$. Thus the points of each curve are its generic point and its closed points.",
+   "text": "For either integral curve X, a point x other than its generic point has an open neighbourhood of the generic point avoiding x: take the complement of closure{x}. If the generic point lay in closure{x}, the two opposite specializations and T0 would identify x with it. Apply the existing dimension-one result [lem-sc-dim-one-point-outside-open-closed] to this nonempty open, obtaining that x is closed. The generic point of C is not closed: otherwise its closure is both C and its singleton, making C a subsingleton discrete space of dimension at most zero, contradicting hC. Generic points and their uniqueness come from [lem-sc-scheme-sober].",
    "uses": [
     "lem-sc-scheme-sober",
     "def-pc-integral-scheme",
-    "def-kun-topological-krull-dimension"
+    "def-kun-topological-krull-dimension",
+    "lem-sc-dim-one-point-outside-open-closed"
    ],
    "elementary": false,
    "source": {
@@ -41,15 +42,14 @@
    }
   },
   {
-   "text": "If $x$ is closed in $E$, then $p(x)$ is closed in $C$. Put $y=p(x)$. By part (a) of [lem-kun-closed-point-field], $\\kappa(x)$ is finite over $k$, since $E$ is of finite type over $k$. By [def-weil-residue-field], $p$ induces an injective field homomorphism $\\kappa(y)\\to\\kappa(x)$; it is a $k$-homomorphism because $p$ is a $k$-morphism. Hence $\\kappa(y)$ is a $k$-vector subspace of the finite-dimensional space $\\kappa(x)$ and is itself finite-dimensional over $k$. Apply the converse in part (a) of [lem-kun-closed-point-field] to the finite-type $k$-scheme $C$: $y$ is closed.",
+   "text": "The finite-type k-scheme C is Jacobson by Mathlib LocallyOfFiniteType.jacobsonSpace applied to its structure morphism. Mathlib Scheme.Hom.closePoints_subset_preimage_closedPoints (Stacks Tag 01TB (1) implies (3)) applies to the assumed locally finite type morphism p, and shows directly that every closed point of E has closed image in C. This replaces the explicit residue-field calculation of the former plan.",
    "uses": [
-    "lem-kun-closed-point-field",
-    "def-weil-residue-field"
+    "def-weil-finite-type-morphism"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), part (1), and Morphisms Tags 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre) and 01TF (lemma-closed-point-fibre-locally-finite-type), applied to the structure morphisms; elementary subfield argument."
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TB (lemma-closed-point-fibre-locally-finite-type), (1) implies (3); Mathlib AlgebraicGeometry/Morphisms/Finite.lean, Scheme.Hom.closePoints_subset_preimage_closedPoints; C is Jacobson by AlgebraicGeometry/Morphisms/FiniteType.lean, LocallyOfFiniteType.jacobsonSpace."
    }
   },
   {
@@ -64,9 +64,10 @@
    }
   },
   {
-   "text": "For every $y\\in C$, apply [pqf-lem-locqf-fibre-discrete] to $p$ and $y$. Its hypotheses are exactly the assumed local finite type of $p$ and the finiteness of $p^{-1}(\\{y\\})$ proved in Step 4. It concludes that $p$ is quasi-finite at each point over $y$. Taking $y=p(x)$ for each $x\\in E$ proves that $p$ is quasi-finite at every point of $E$, as required.",
+   "text": "For every y apply [pqf-lem-locqf-fibre-discrete], namely Scheme.Hom.discreteTopology_fiber_and_quasiFiniteAt, to p and the finite fibre from Step 4. For y=p(x) its last clause yields Mathlib p.QuasiFiniteAt x. Convert to the required Stacks predicate [pqf-def-quasifinite] using Scheme.Hom.isQuasiFiniteAtPoint_iff_quasiFiniteAt from WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphismComparison; local finite type is assumed. The comparison theorem and all directly imported ingredients are already proved.",
    "uses": [
-    "pqf-lem-locqf-fibre-discrete"
+    "pqf-lem-locqf-fibre-discrete",
+    "pqf-def-quasifinite"
    ],
    "elementary": false,
    "source": {
@@ -79,15 +80,16 @@
   "lem-sc-scheme-sober",
   "def-pc-integral-scheme",
   "def-kun-topological-krull-dimension",
-  "lem-kun-closed-point-field",
-  "def-weil-residue-field",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "def-weil-finite-type-morphism",
   "lem-kun-finite-closed-subscheme",
-  "pqf-lem-locqf-fibre-discrete"
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-def-quasifinite"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Direct topological proof of the integral-curve specialization of Tag 0AB6 (lemma-quasi-finite-in-codim-1); uses the already present closed-point and finite-fibre lemmas in place of the general local dimension-formula argument."
+  "place": "Tag 0AB6, integral curve specialization. J6 formalized the direct dimension-one proof using the existing closed-point-off-open theorem, Mathlib Tag 01TB closed-image criterion, finite closed sets, and finite-fibre quasi-finiteness with the Stacks/Mathlib comparison. No unit-level route changed."
  },
  "mathlib_searches": [
   {
@@ -209,7 +211,6 @@
  },
  "tool_uses": [
   "lem-sc-scheme-sober",
-  "lem-kun-closed-point-field",
   "lem-kun-finite-closed-subscheme",
   "pqf-lem-locqf-fibre-discrete"
  ],
@@ -240,5 +241,26 @@
   "result": "pass",
   "note": "Every node clause has a matching Lean hypothesis or conclusion: k field; C,E Scheme.{u} over Spec k; IsIntegral; IsSeparated, LocallyOfFiniteType and QuasiCompact on the structure maps; topologicalKrullDim = 1; p IsOver, IsDominant, LocallyOfFiniteType; finite k(C)⊆k(E) as RingHom.Finite of p.stalkMap (genericPoint E), which is canonical and equal to the side Hom.functionFieldMap up to the stalkSpecializes iso, since dominance gives p(η_E)=η_C; conclusion ∀ x, Stacks-01TD IsQuasiFiniteAtPoint. No stronger assumptions. Edge cases checked (empty, dim 0, constant, empty fibres, inseparable, universes). lean.statement matches the file verbatim; only the lean field was added to the node. Docstrings have the source, the blueprint id and the five proof steps; the proof is sorry only; imports are correct; lines ≤100. nt_compile --json: clean, rc=0. Worker report and second reading are present; the second reading was by the same worker but checks each clause. Observation only: the existing Scheme.Hom.functionFieldMap could have been used."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261023T123734-L-1243757",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-flag-line-equivariant-serre-pairing",
+ "kind": "statement",
+ "title": "Equivariant Serre pairings for homogeneous flag line bundles",
+ "statement": "Let $F$ be an algebraically closed field of characteristic $p>0$ [def-weil-field, def-weil-algebraic-closure], and $S$ a semisimple simply connected $F$-group scheme [def-sc-group-scheme], with these terms as defined in [lem-sfb-rho-section-modules]. Fix a split maximal torus $T\\subseteq B\\subseteq S$, where $B$ is a Borel subgroup, with character lattice $X=X^*(T)$ and positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$ as in [lem-sfb-reductive-borel-pair-structure]. Put $N=|\\Phi^+|$ and $\\rho=\\tfrac12\\sum_{\\alpha\\in\\Phi^+}\\alpha\\in X$. Let $B^-$ be the opposite Borel containing $T$, with roots $-\\Phi^+$. For $y\\in X$, extend $y$ to $B^-$ through its projection to $T$ and let $\\mathcal L_y$ be the sheaf of sections of the homogeneous line bundle on $Q=S/B^-$ whose sections over $V$ are regular functions $f:\\pi^{-1}(V)\\to F$ satisfying $f(gb)=y(b)^{-1}f(g)$ after every commutative $F$-algebra extension, with $\\pi:S\\to Q$ the quotient. Write $H^i(y)=H^i(Q,\\mathcal L_y)$ for Zariski sheaf cohomology with the induced left-translation $S$-action. Rational action means a counital coassociative coaction $V\\to V\\otimes_F F[S]$, and equivariance means the coaction identity. The canonical invertible sheaf $\\omega_Q=\\bigwedge^N\\Omega^1_{Q/F}$, with its natural $S$-action, is $S$-equivariantly isomorphic to $\\mathcal L_{-2\\rho}$. Here $\\Omega^1_{Q/F}$ denotes the sheaf representing $F$-linear derivations. There is an $S$-invariant linear trace $\\operatorname{tr}:H^N(-2\\rho)\\to F$ such that for every $y\\in X$ and $0\\le i\\le N$ the cup product followed by this trace is a perfect pairing of finite-dimensional rational $S$-modules\n$$H^i(y)\\times H^{N-i}(-y-2\\rho)\\longrightarrow F.$$\nPerfect means that the maps from either factor to the linear dual of the other are bijective. The action on $F$ is trivial; invariance holds after every commutative $F$-algebra extension. This includes $N=0$, with the zeroth exterior power as the canonical line.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0FVV, lemma-duality-proper-over-field (6),(7); Tag 0FVY, lemma-duality-proper-over-field-perfect; remark-rework-duality-locally-free-CM. Homogeneous canonical-character and equivariance specialization intended in Andersen, The strong linkage principle (1980), Lemma 4 proof p.58; article WANTED locally."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "pqf-def-cohomology",
+  "def-sc-module-cohomology-cup-product",
+  "def-sfb-associated-character-line-bundle",
+  "def-sfb-group-scheme-linearization",
+  "def-a1-relative-differentials-pullback-map",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The semisimple group $S$ is reductive by [lem-sfb-reductive-borel-pair-structure]. Apply [lem-sfb-standard-parabolic-levi-charts] with $B_0=B^-$ and $I=\\varnothing$: $P_I=B^-$, the quotient $Q=S/B^-$ is proper of finite type, and $\\pi:S\\to Q$ is a faithfully flat finitely presented right $B^-$-torsor. The Borel is smooth. Thus [lem-sfb-homogeneous-cotangent-associated-bundle], with $G=S,H=B^-$, applies. For $V=(\\mathfrak s/\\mathfrak b^-)^\\vee$ and $d=\\dim_FV$, it gives smoothness of $Q$, pure dimension $d$, the equivariant identification $\\Omega^1_{Q/F}\\simeq S\\times^{B^-}V$, and its determinant identification $\\bigwedge^d\\Omega^1_{Q/F}\\simeq S\\times^{B^-}\\bigwedge^dV$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-standard-parabolic-levi-charts",
+    "lem-sfb-homogeneous-cotangent-associated-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "7.15 and 7.16(c), pp.142--143; 18.11--18.14, pp.389--390; homogeneous cotangent and determinant specialization"
+   }
+  },
+  {
+   "text": "The weight decomposition in [lem-sfb-reductive-rank-one-reflections] and the Borel decomposition in [lem-sfb-borel-opposite-root-dichotomy] give $\\mathfrak s=\\mathfrak t\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak s_\\alpha$ and $\\mathfrak b^-=\\mathfrak t\\oplus\\bigoplus_{\\alpha\\in-\\Phi^+}\\mathfrak s_\\alpha$. Each root space has dimension one by the first cited statement. Taking the quotient cancels exactly the toral and negative-root summands. Consequently $\\mathfrak s/\\mathfrak b^-$ has one-dimensional weight spaces $\\alpha\\in\\Phi^+$, and $V$ has weights $-\\alpha$. Therefore $d=N$ and the one-dimensional $B^-$-module $D=\\bigwedge^NV$ restricts to the $T$-character $-\\sum_{\\alpha\\in\\Phi^+}\\alpha=-2\\rho$. The wedge of a weight basis proves this determinant formula, including the empty basis for $N=0$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-borel-opposite-root-dichotomy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.11(b),(c) and Corollary 21.13, pp.428--430; quotient and exterior-basis calculation"
+   }
+  },
+  {
+   "text": "Let $\\chi:B^-\\to\\mathbf G_m$ be the action on $D$. Every root subgroup $U_\\gamma$, $\\gamma\\in\\Phi$, used in [lem-sfb-borel-root-product-coordinates] is isomorphic to $\\mathbf G_a$ by [lem-sfb-reductive-root-subgroup-parametrizations]. A homomorphism $\\mathbf G_a\\to\\mathbf G_m$ corresponds to a unit of $F[t]$, hence is a nonzero constant, and its value at $0$ forces that constant to be $1$. Thus $\\chi$ is trivial on each negative root subgroup as a group-scheme morphism. The product coordinates of [lem-sfb-borel-root-product-coordinates], used for $B^-$, imply it is trivial on $U^-=R_u(B^-)$. Since $B^-=U^-\\rtimes T$ by [lem-sfb-reductive-borel-pair-structure], $\\chi$ is exactly the extension of $-2\\rho$ through $B^-\\to T$. Choose a nonzero vector in $D$ to identify it with that character module. Step 1 identifies its associated line with $\\omega_Q$. The associated-bundle convention there is $(g,z)b=(gb,\\chi(b)^{-1}z)$, so its sections satisfy precisely $f(gb)=\\chi(b)^{-1}f(g)$. We obtain the required $S$-equivariant isomorphism $\\omega_Q\\simeq\\mathcal L_{-2\\rho}$, with no sign change.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-homogeneous-cotangent-associated-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18.11--18.14, pp.389--390; 21.11(c), pp.428--429; ordered root coordinates, with elementary polynomial-unit calculation"
+   }
+  },
+  {
+   "text": "For characters $a,b$, multiplication in the one-dimensional fibres gives $\\mathcal L_a\\otimes\\mathcal L_b\\simeq\\mathcal L_{a+b}$: on a local section of $\\pi$ these are free rank-one sheaves and the map sends the tensor of their basis elements to the basis element of the sum. On a change of section by $c\\in B^-$ the two transition factors multiply, since $a(c)^{-1}b(c)^{-1}=(a+b)(c)^{-1}$; hence these local maps glue, with inverses on the same trivializations. They commute with left translations since multiplication of functions does. In particular $\\mathcal L_y^\\vee\\otimes\\omega_Q\\simeq\\mathcal L_{-y-2\\rho}$ and evaluation is the multiplication map to $\\mathcal L_{-2\\rho}$. These lines are locally free and quasi-coherent, so [lem-sfb-linearized-qcoherent-cohomology-coaction] gives rational $S$-coactions on their cohomology; the induced action is the stipulated left-translation action. This applies because $Q$ is proper, hence quasi-compact and separated, and $S$ is affine of finite type.",
+   "uses": [
+    "lem-sfb-standard-parabolic-levi-charts",
+    "lem-sfb-linearized-qcoherent-cohomology-coaction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18.11--18.14, pp.389--390: local torsor sections and transition functions; cohomology coactions from the cited general node"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-proper-coherent-trace-pairing] to the smooth proper $F$-scheme $Q$ of pure dimension $N$ and the locally free line $\\mathcal E=\\mathcal L_y$. Compose the trace $t_Q:H^N(Q,\\omega_Q)\\to F$ with the cohomology map of the inverse of the isomorphism in step 3 to define $\\operatorname{tr}:H^N(-2\\rho)\\to F$. Step 4 identifies its cup-evaluation pairing with exactly $H^i(y)\\times H^{N-i}(-y-2\\rho)\\to F$ in the question. The cited theorem gives finite-dimensionality and bijectivity of both duality maps for every $0\\leq i\\leq N$.",
+   "uses": [
+    "lem-sfb-smooth-proper-coherent-trace-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0FVV (5),(7), 0FVW, 0FVY and 0FW0, smooth proper locally free specialization"
+   }
+  },
+  {
+   "text": "Fix any commutative $F$-algebra $A$ and $s\\in S(A)$. On $Q_A$ the inverse translation $h=L_{s^{-1}}$ and the bundle linearization identify $h^*\\mathcal L_{y,A}$ with $\\mathcal L_{y,A}$. The induced cohomology maps are exactly the evaluations of the rational coactions, by [lem-sfb-linearized-qcoherent-cohomology-coaction]. The dual linearization and differential on $\\omega$ give the action on the second factor in step 4. The isomorphism $\\omega_Q\\simeq\\mathcal L_{-2\\rho}$ is $S$-equivariant by its associated-bundle construction, so the trace and pairing invariance under $h$ are exactly the automorphism-naturality assertions of [lem-sfb-smooth-proper-coherent-trace-pairing]. They give $\\operatorname{tr}_A(s z)=\\operatorname{tr}_A(z)$ and $P_A(su,sv)=P_A(u,v)$. Taking $A=F[S]$ and its universal point proves the corresponding coaction identities, and hence the requested invariance after every scalar extension. For $N=0$ all wedges and tensor identifications above use the empty wedge and $\\omega_Q=\\mathcal O_Q$; the same smooth proper theorem with $d=0$ applies, so no positive-dimension exception was introduced.",
+   "uses": [
+    "lem-sfb-linearized-qcoherent-cohomology-coaction",
+    "lem-sfb-smooth-proper-coherent-trace-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6J, lemma-trace-map-and-base-change; Tag 0AAB, lemma-proper-flat-base-change; canonical smooth trace and isomorphism naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-standard-parabolic-levi-charts",
+  "lem-sfb-homogeneous-cotangent-associated-bundle",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-borel-opposite-root-dichotomy",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-linearized-qcoherent-cohomology-coaction",
+  "lem-sfb-smooth-proper-coherent-trace-pairing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0FVV,0FVW,0FVY,0FW0 with Milne 18.11--18.14 and 21.11; homogeneous canonical-character calculation and coaction assembly written by Q54."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Serre duality perfect pairing coherent cohomology line bundles on a smooth projective flag variety",
+   "results": "8 hits: LinearMap.IsPerfPair.dualEval, LinearMap.apply_symm_toPerfPair_self, LinearMap.flip.instIsPerfPair, LinearMap.IsPerfPair.mk, LinearMap.IsPerfectCompl.flip, LinearMap.IsPerfPair.flip, LinearMap.IsPerfectCompl, LinearMap.IsPerfPair. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group representation duals, Lie weight chains and linear perfect-pairing algebra do not supply equivariant coherent Serre duality on a flag variety"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Serre\", \"dual\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group representation duals, Lie weight chains and linear perfect-pairing algebra do not supply equivariant coherent Serre duality on a flag variety"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre.duality|canonical.*bundle|dualizing.*flag|flag.*cohomology",
+   "results": "10 hits: Mathlib/Analysis/Complex/CanonicalDecomposition.lean, Mathlib/Analysis/Complex/UpperHalfPlane/MoebiusAction.lean, Mathlib/Data/Bundle.lean, Mathlib/Algebra/Order/Hom/Monoid.lean, Mathlib/Geometry/Manifold/VectorBundle/Tangent.lean, Mathlib/Geometry/Manifold/ContMDiffMFDeriv.lean, Mathlib/Geometry/Manifold/ContMDiffMFDeriv.lean, Mathlib/Geometry/Manifold/MFDeriv/Defs.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group representation duals, Lie weight chains and linear perfect-pairing algebra do not supply equivariant coherent Serre duality on a flag variety"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant Serre duality for homogeneous line bundles on flag varieties with canonical character minus twice rho",
+   "results": "8 hits: FDRep.dualTensorIsoLinHomAux, FDRep.dualTensorIsoLinHom, FDRep.dualTensorIsoLinHom_hom_hom, Representation.dualTensorHom_comm, FDRep.char_dual, Rep.homEquiv, CharacterModule.dual_rTensor_conj_homEquiv, LieModule.shiftedGenWeightSpace.toEnd_eq. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group representation duals, Lie weight chains and linear perfect-pairing algebra do not supply equivariant coherent Serre duality on a flag variety"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|dualiz|cohomology.*line|line.*cohomology",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group representation duals, Lie weight chains and linear perfect-pairing algebra do not supply equivariant coherent Serre duality on a flag variety"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flag variety G over B the dual of top cohomology of weight lambda is global sections of weight minus lambda minus two rho",
+   "results": "8 hits: LieModule.chainTop, LieModule.chainTopCoeff, LieModule.coe_genWeightSpace_of_top, LieModule.chainTopCoeff_neg, LieModule.chainTop_neg, LieModule.genWeightSpace_add_chainTop, LieModule.coe_chainTop', LieModule.chainTop_zero. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group representation duals, Lie weight chains and linear perfect-pairing algebra do not supply equivariant coherent Serre duality on a flag variety"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"dual\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group representation duals, Lie weight chains and linear perfect-pairing algebra do not supply equivariant coherent Serre duality on a flag variety"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre.duality|dualizing|dualising|canonicalSheaf",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*cohomology|cohomology.*trace|Serre.*pair",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre duality trace perfect pairing for coherent cohomology on a smooth proper scheme",
+   "results": "8 hits: LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair, LinearMap.apply_symm_toPerfPair_self, LinearMap.IsPerfPair.mk, LinearMap.IsPerfectCompl, LinearEquiv.instIsPerfPair, LinearMap.IsPerfPair.compl₁₂, LinearMap.flip.instIsPerfPair. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"dual\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Serre\", \"dual\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth proper scheme over a field Serre duality gives a perfect cup product pairing between cohomology of a vector bundle and its dual tensor the canonical bundle",
+   "results": "8 hits: FGModuleCat.exactPairing, LinearMap.IsPerfPair.dualEval, Algebra.smoothLocus_eq_compl_support_inter, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.FormallySmooth.projective_kaehlerDifferential, FGModuleCat.FGModuleCatEvaluation, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, FGModuleCat.rightRigidCategory. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace from top cohomology of the canonical bundle on a smooth proper variety commutes with field algebra base change and automorphisms",
+   "results": "8 hits: Algebra.intTraceAux, LinearMap.trace_baseChange, Algebra.normalizedTrace_comp_algHom, trace_eq_sum_automorphisms, Algebra.normalizedTrace_algebraMap, Algebra.normalizedTrace, Algebra.normalizedTrace_map, Algebra.normalizedTrace_trans. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-top-bottom-cohomology-simple-image",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Simple image of top-to-bottom line cohomology maps. Serre-duality input: canonical homogeneous line and invariant trace pairing before the elementary map-space argument.",
+   "via": [
+    "lem-sfb-top-bottom-cohomology-simple-image",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flag-line-equivariant-serre-pairing",
+  "worker": "stage1",
+  "summary": "Computed the canonical Borel character from the actual cotangent isotropy representation, root multiplicities and the triviality of a character on root groups. Wrote tensor/evaluation descent and the universal-algebra equivariance argument explicitly. Reused the existing homogeneous cotangent, Borel, root and cohomology-coaction nodes; added one general smooth proper coherent trace-duality statement. The mathematical statement is unchanged.",
+  "blueprint": "The inherited blueprint ancestor is null (confirmed by blueprint_refs.py ancestor), so its existing exact place and via are retained. Steps 1--4 realize the homogeneous canonical-line input; steps 5--6 supply the Serre-duality and group-scheme-invariant trace input to top-bottom-cohomology-simple-image. The current latest direct-image unit was read; no unit or chapter route was replaced. Whole-blueprint searches found only curve duality and projective-space pairings, not this general-dimensional statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-5c8c5d6d7",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-5c8c5d6d7 (reviewer sub-agent of L); spot-checked: I read the item's six steps and the new node lem-sfb-smooth-proper-coherent-trace-pairing in full, together with every cited statement. The item is still unsplit live and its statement is byte-identical to live. All cited nodes are in the unit sk-thm-sf-ctf-stability. Conventions: Q=S/B⁻ with f(gb)=y(b)⁻¹f(g) is Jantzen's convention, and Milne iAG 18.13 (pdf p.401) has (g,x)b=(gb,χ(b⁻¹)x), which matches the homogeneous-cotangent node. The tangent weights are Φ⁺, so ω=L(−2ρ); for SL₂ this gives O(−2). Step checks: in step 1, levi-charts with I=∅ supplies a proper, finitely presented torsor and homogeneous-cotangent's hypotheses hold. In step 2, rank-one and dichotomy give d=N and det=−2ρ, with characters rather than differentials, so characteristic 2 is fine. In step 3, Hom(G_a,G_m)=1, product coordinates and B⁻=U⁻⋊T give χ=(−2ρ)∘p. In step 4, the tensor/dual identifications glue on local sections and the coaction node applies. In steps 5–6, the new node gives perfectness, base change, trace invariance and the η/η^∨ pairing invariance, and the universal point gives the coaction identities. New node: true by Stacks 0FVV(7)/0FVW/0FVY/0FW0, lemma-smooth-proper (canonical diagonal construction) and flat base change. Test cases: ℙ¹ under z↦az and z↦1/z, d=0 étale trace form, varying ranks, zero sheaf. It is statement-only with seven searches. It is not a duplicate of the concurrently landed lem-sfb-projective-line-module-serre-duality, which has no trace, base change or automorphism naturality, nor of the curve, ℙⁿ or nodal duality nodes. Advisory: its 'smooth dualizing identification' should later be pinned to the lemma-smooth-proper construction. FIX (C4), the only fault: step 3 took U_γ≅G_a from rank-one-reflections, which only gives 'a one-dimensional root subgroup' and does not identify it with the U_γ multiplied in product-coordinates. Step 3 now cites lem-sfb-reductive-root-subgroup-parametrizations, which states U_α≅G_a, and proof_deps is recomputed as the union of uses. Batch-5: all four flagged citations reach trf only through the status-mathlib generic leaves smooth-fpqc-base-descent, fg-torsionfree-group-free and fppf-covering-base-change. None is a step of the trace formula or of Poincaré duality, so they are accepted. No SGA source is cited, no tool uses are declared and no nodes are dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FlagLineEquivariantSerrePairing",
+  "declaration": "AlgebraicGeometry.FlagSerre.flagLine_equivariant_serre_pairing",
+  "declarations": [
+   "AlgebraicGeometry.FlagSerre.pullbackComparison",
+   "AlgebraicGeometry.FlagSerre.pullCohomology",
+   "AlgebraicGeometry.FlagSerre.cohomology",
+   "AlgebraicGeometry.FlagSerre.pointAction",
+   "AlgebraicGeometry.FlagSerre.IsPresentationLinearization",
+   "AlgebraicGeometry.FlagSerre.inverseTranslation",
+   "AlgebraicGeometry.FlagSerre.IsInducedCoaction",
+   "AlgebraicGeometry.FlagSerre.cotangentMap",
+   "AlgebraicGeometry.FlagSerre.IsCanonicalLineLinearization",
+   "AlgebraicGeometry.FlagSerre.IsLineMultiplication",
+   "AlgebraicGeometry.FlagSerre.flagLine_equivariant_serre_pairing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FlagLineEquivariantSerrePairing.lean",
+  "statement": "theorem flagLine_equivariant_serre_pairing {F : Type u} [Field F] [IsAlgClosed F] (pchar : ℕ) [CharP F pchar] (hpchar : 0 < pchar) (S : Grp (Over (Spec (.of F)))) (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (T B Bm : Grp (Over (Spec (.of F)))) (iT : T ⟶ S) (iB : B ⟶ S) (j : T ⟶ B) (hpair : IsRhoBorelPair iT iB j) (iBm : Bm ⟶ S) (jm : T ⟶ Bm) (hpairm : IsRhoBorelPair iT iBm jm) (aB : ModObj T.X B.X) (aBm : ModObj T.X Bm.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (haBm : aBm.smul = (jm.hom.hom ⊗ₘ 𝟙 Bm.X) ≫ GrpObj.conj Bm.X) (Φ : List (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hΦ : Φ.Nodup) (hpos : ∀ α, α ∈ Φ ↔ α.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T B aB α ≠ ⊥) (hneg : ∀ α : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), (α.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T Bm aBm α ≠ ⊥) ↔ ∃ β ∈ Φ, α.hom.hom = β.hom.hom⁻¹) (ρ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hρ : ρ.hom.hom ^ 2 = (Φ.map (fun α ↦ α.hom.hom)).prod) (pr : Bm ⟶ T) (hpr : jm ≫ pr = 𝟙 T) (hprU : ∀ (U : Grp (Over (Spec (.of F)))) (l : U ⟶ Bm), IsClosedSubgroupScheme l.hom.hom → IsNormalSubgroupScheme l.hom.hom → ConnectedSpace U.X.left → SolvableGroupStructure.IsUnipotent U → l.hom.hom ≫ pr.hom.hom = 1) (Q : Over (Spec (.of F))) (π : S.X ⟶ Q) (hQ : IsProper Q.hom) (hQft : LocallyOfFiniteType Q.hom) (hπflat : Flat π.left) (hπsurj : Surjective π.left) (hπinv : (fst S.X Bm.X * (snd S.X Bm.X ≫ iBm.hom.hom)) ≫ π = fst S.X Bm.X ≫ π) (hπtorsor : IsPullback (fst S.X Bm.X) (fst S.X Bm.X * (snd S.X Bm.X ≫ iBm.hom.hom)) π π) (P : ∀ y : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), AssociatedCharacterLineBundle.Presentation S Bm iBm Q π (pr ≫ y)) : ∃ (w : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), w.hom.hom = (ρ.hom.hom ^ 2)⁻¹ ∧ ∃ (D : ∀ y, GroupSchemeLinearization.Linearization (P y).baseAction (P y).L), (∀ y, IsPresentationLinearization (P y) (D y)) ∧ ∃ (Dω : GroupSchemeLinearization.Linearization (P w).baseAction (Scheme.Modules.exteriorSheaf Q.hom.relativeDifferentials Φ.length)) (e : Scheme.Modules.exteriorSheaf Q.hom.relativeDifferentials Φ.length ≅ (P w).L), IsCanonicalLineLinearization (P w).baseAction Φ.length Dω ∧ (∀ (W : Over (Spec (.of F))) (s : W ⟶ S.X) (x : W ⟶ Q), (Scheme.Modules.pullback x.left).map e.hom ≫ ((D w).lift W s x).hom = (Dω.lift W s x).hom ≫ (Scheme.Modules.pullback (GroupSchemeLinearization.act (P w).baseAction W s x).left).map e.hom) ∧ ∃ (δ : ∀ y (i : ℕ), cohomology Q (P y).L i →ₗ[F] cohomology Q (P y).L i ⊗[F] RhoSection.Coordinate S.X), (∀ y i, (∀ (A : Type u) [CommRing A] [Algebra F A], pointAction S (δ y i) (1 : StandardGroupSchemes.affine F A ⟶ S.X) = LinearMap.id ∧ ∀ (s t : StandardGroupSchemes.affine F A ⟶ S.X), pointAction S (δ y i) (s * t) = (pointAction S (δ y i) s).comp (pointAction S (δ y i) t)) ∧ IsInducedCoaction (D y) i (δ y i)) ∧ ∃ tr : cohomology Q (P w).L Φ.length →ₗ[F] F, (∀ v, tr.rTensor (RhoSection.Coordinate S.X) (δ w Φ.length v) = tr v ⊗ₜ[F] (1 : RhoSection.Coordinate S.X)) ∧ ∀ (y z : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), z.hom.hom = y.hom.hom⁻¹ * w.hom.hom → ∀ i : ℕ, i ≤ Φ.length → Module.Finite F (cohomology Q (P y).L i) ∧ Module.Finite F (cohomology Q (P z).L (Φ.length - i)) ∧ ∃ (m : (P y).L ⊗ (P z).L ≅ (P w).L) (cup : (RingedSpace.moduleCohomology Q.left.toRingedSpace i).obj (P y).L →ₗ[Γ(Q.left, ⊤)] (RingedSpace.moduleCohomology Q.left.toRingedSpace (Φ.length - i)).obj (P z).L →ₗ[Γ(Q.left, ⊤)] (RingedSpace.moduleCohomology Q.left.toRingedSpace (i + (Φ.length - i))).obj (@id Q.left.Modules ((P y).L ⊗ (P z).L))) (b : cohomology Q (P y).L i →ₗ[F] cohomology Q (P z).L (Φ.length - i) →ₗ[F] F), IsLineMultiplication (P y) (P z) (P w) m.hom ∧ Scheme.Modules.IsModuleCupProduct (P y).L (P z).L i (Φ.length - i) cup ∧ (∃ h : i + (Φ.length - i) = Φ.length, ∀ x v, b x v = tr ((eqToHom (congrArg (fun n ↦ (RingedSpace.moduleCohomology Q.left.toRingedSpace n).obj (P w).L) h)) (((RingedSpace.moduleCohomology Q.left.toRingedSpace (i + (Φ.length - i))).map m.hom) (cup x v)))) ∧ Function.Bijective b ∧ Function.Bijective b.flip ∧ (∀ (x : cohomology Q (P y).L i) (v : cohomology Q (P z).L (Φ.length - i)) (n k : ℕ) (x' : Fin n → cohomology Q (P y).L i) (v' : Fin k → cohomology Q (P z).L (Φ.length - i)) (c : Fin n → RhoSection.Coordinate S.X) (d : Fin k → RhoSection.Coordinate S.X), δ y i x = ∑ j, x' j ⊗ₜ[F] c j → δ z (Φ.length - i) v = ∑ j, v' j ⊗ₜ[F] d j → ∑ j, ∑ l, c j * d l * algebraMap F (RhoSection.Coordinate S.X) (b (x' j) (v' l)) = algebraMap F (RhoSection.Coordinate S.X) (b x v))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the actual homogeneous-line presentation and derived O-module cohomology. The helper definitions only normalize canonical pullback, translation, cotangent and line multiplication maps. Rationality is the identity/multiplication coaction law on every algebra; inducedness is pinned by the canonical universal-translation base-change identity. Trace and pairing invariance are coefficient-algebra coaction identities."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6de3d6c6f",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read item node, all stmt_dep records, live Linearization (natural, cocycles), AssociatedCharacterLineBundle.Presentation (orbit relation, pinned trivialization/actions), IsRhoBorelPair, exists_rho_section_modules, reductive_borel_pair_structure, weightSpace, IsModuleCupProduct. Snapshot vs live node differs only in lean+stmt_deps (6 landed def nodes added, none removed). Hypotheses match node: hS/hsc verbatim from rho-section-modules, Borel pair and opposite Borel via hpos/hneg, rho via rho^2=prod Phi, pr pinned by identity on T and killing unipotent normal subgroups, Q/pi fppf B- torsor, L_y = Presentation(pr≫y) with f(gb)=y(b)^-1 f(g). Conclusions: D pinned by IsPresentationLinearization; delta pinned by IsInducedCoaction (flat base change makes it unique; left action (s f)(x)=f(s^-1 x)); identity/multiplication laws over all A equivalent to counit/coassociativity; omega=exteriorSheaf of Omega_{Q/F} at N iso to L_{-2rho} with equivariance square, Domega pinned at F-points by the canonical differential pullback, unique since S×Q reduced and omega locally free; invariant trace; pairing = tr∘H(m)∘cup with m pinned by IsLineMultiplication and cup by IsModuleCupProduct; both factors finite, both curried maps bijective, pairing coaction identity. Edge cases N=0, char 2, zero cohomology, i=0/N, nonreduced A, single universe u: OK; SL2 signs OK. Statement field verbatim; one sorry; docstrings with source, blueprint and 6 steps; no collision. Advisories: IsRhoBorelPair via theorem stmt_dep inherited from stage 1; hQft redundant; rationality encoded inline via pointAction rather than RationalModule (node defines it inline; equivalent). No file changed, no compile run."
+ }
+}

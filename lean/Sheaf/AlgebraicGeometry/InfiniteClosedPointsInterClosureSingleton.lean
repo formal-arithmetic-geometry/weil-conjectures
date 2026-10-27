@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.JacobsonSpace
-import Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterOfTopologicalKrullDimPos
 
 /-!
 # Infinitely many closed specializations of a nonclosed point
@@ -29,19 +28,23 @@ namespace AlgebraicGeometry
 has infinitely many closed specializations. Source: Stacks Project, Tags 0478 and 0A21
 (blueprint: lem-sc-finite-type-nonclosed-closure-closed-points).
 
-Proof: Put `Z = closure {z}`. This is an irreducible closed subset with generic point `z`.
-Since `z` is not closed, there is `y ≠ z` in `Z`. The irreducible closed subset `closure {y}`
-is contained in `Z` and is strictly smaller: equality would give two distinct generic points
-of the same irreducible closed subset of a scheme. This chain has length one, so `Z` has
-positive dimension (Tag 0A21). Apply
-`lem-sc-positive-dimensional-locally-algebraic-closed-points` to the irreducible closed subset
-`Z` of the locally finite type scheme `X`. It gives infinitely many closed points of `X`
-in `Z`, using the Jacobson property from Tag 0478. -/
+Proof: The scheme `X` is Jacobson by Tag 0478. If the closed points in `closure {z}`
+were finite, their union of closed singletons would be closed. The Jacobson property says
+that the closure of this union is `closure {z}`, so the union itself equals `closure {z}`.
+In particular, `z` belongs to the union and is closed, contradicting the hypothesis. -/
 theorem infinite_closedPoints_inter_closure_singleton
     (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f]
     (z : X) (hz : ¬ IsClosed ({z} : Set X)) :
     (closure ({z} : Set X) ∩ closedPoints X).Infinite := by
-  sorry
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  intro hfinite
+  have hclosed : IsClosed (closure ({z} : Set X) ∩ closedPoints X) := by
+    rw [← Set.biUnion_of_singleton (closure ({z} : Set X) ∩ closedPoints X)]
+    exact hfinite.isClosed_biUnion fun y hy ↦ hy.2
+  have heq := closure_inter_closedPoints (X := X) (Z := closure ({z} : Set X))
+    isClosed_closure
+  rw [hclosed.closure_eq] at heq
+  exact hz ((heq.symm ▸ (subset_closure (Set.mem_singleton z))).2)
 
 end AlgebraicGeometry

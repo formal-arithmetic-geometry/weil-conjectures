@@ -1,0 +1,261 @@
+{
+ "id": "lem-sf-ambient-underived-clopen-pasting",
+ "kind": "statement",
+ "title": "Vertical and horizontal pasting of underived clopen comparison maps",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. All schemes are finite-type $k$-schemes; their structure maps are not required to be separated [def-weil-scheme-morphism-properties]. Use small pro-etale sites [def-weil-pbc-proetale-site]. For each $T$, choose either $\\mathscr M_T=\\operatorname{Mod}((A_n)_T)$ at one fixed $n$, or the category $\\mathscr M_T$ of module sheaves $M_n$ over $(A_n)_T$ with semilinear maps $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$ and compatible componentwise morphisms [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars, lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived category $D(\\mathscr M_T)$ [def-weil-abstract-derived-category]. For a scheme map $f$ write $f^*$ for exact constant-coefficient module inverse image and $P_f=D(f^*)$; for an open immersion $j$ write $j_!$ for exact extension by zero and $J_j=D(j_!)$. Use the specified adjunctions $P_f\\dashv S_f=Rf_*$ and $J_j\\dashv P_j$ [def-weil-pbc-proetale-operations, lem-pur-site-restriction-module-adjunction-exact]. System operations are constructed simultaneously on the ringed diagram site, before finite evaluation, scalar restriction or total limit [lem-coef-semilinear-derived-sections].\n\nFor each commutative square $Q$ with top $k_1:U\\hookrightarrow V$, bottom $i:W\\hookrightarrow Z$ quasi-compact open, and verticals $r:U\\to W$, $p:V\\to Z$ proper, let $b:V\\times_ZW\\to V$, $q:V\\times_ZW\\to W$, $s=(k_1,r):U\\to V\\times_ZW$ be the fibre-product maps [def-pc-fibre-product]. Use the clopen projector $\\pi_s$ (identity on $s(U)$, zero on its complementary open) and the open-unit-normalized $\\widetilde\\beta:p^*i_!\\cong b_!q^*$ to define the underived map\n$$\\widetilde a_Q:p^*i_!\\xrightarrow{\\widetilde\\beta}b_!q^*\\xrightarrow{b_!\\pi_sq^*}b_!s_!s^*q^*\\cong(k_1)_!r^*.$$\nThe compositors here are the canonical adjunction-normalized module-sheaf compositors [def-weil-pbc-composite-adjunction, lem-sf-open-tensor-normalization].\n\nFor three rows $U_a\\xrightarrow{j_a}V_a$ ($a=0,1,2$) of quasi-compact opens and proper verticals $r_a:U_{a-1}\\to U_a$, $p_a:V_{a-1}\\to V_a$, with $p_aj_{a-1}=j_ar_a$ ($a=1,2$), put\n$$A=(\\widetilde a_{Q_1}r_2^*)\\circ(p_1^*\\widetilde a_{Q_2}):p_1^*p_2^*(j_2)_!\\to(j_0)_!r_1^*r_2^*.$$\nUnder the canonical compositors, restriction of both factors along $j_0$ is identity on $r_1^*r_2^*$, and $A=\\widetilde a_{Q_{\\rm out}}$ for the outer square.\n\nFor horizontally adjacent squares with top opens $k_1:U\\to V$, $k_2:V\\to T$, bottom opens $i_1:W\\to Z$, $i_2:Z\\to Y$, proper verticals $r,p,q$, and $pk_1=i_1r$, $qk_2=i_2p$, put\n$$B=((k_2)_!\\widetilde a_{Q_1})\\circ(\\widetilde a_{Q_2}(i_1)_!):q^*(i_2)_!(i_1)_!\\to(k_2)_!(k_1)_!r^*.$$\nRestriction of both factors along $k_2k_1$ is identity on $r^*$, and $B=\\widetilde a_{Q_{\\rm out}}$ under the same compositors. Both equalities are equalities of natural transformations on module sheaves or on semilinear module systems, before deriving. Squares with identity verticals or identity horizontals give identity $\\widetilde a$ under the canonical units. No Cartesian hypothesis on any square, boundedness, constructibility or normalized-system condition is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal). Agent underived clopen-restriction formulation on pro-etale modules and semilinear systems; returned proof Steps 7 and 8 and identity part of Step 10."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-fibre-product",
+  "def-weil-pbc-composite-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-open-tensor-normalization",
+  "def-sf-ambient-underived-clopen-comparison",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalization and natural-transformation uniqueness clauses of [lem-sf-ambient-exact-clopen-comparison-localization] for each ordinary coefficient ring and for the actual semilinear system category. This packages the clopen restriction bijection already proved below that theorem; no separate invocation of the restriction equivalence is needed.",
+   "uses": [
+    "lem-sf-ambient-exact-clopen-comparison-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal). Agent underived clopen-restriction formulation on pro-etale modules and semilinear systems; returned proof Steps 7 and 8 and identity part of Step 10."
+   }
+  },
+  {
+   "text": "For ordinary vertical pasting, conjugate the pasted transformation by the inverse-image compositors. The proved source-library upperStarCompIso_hom_app_paste identifies the outer square comparison with the two inner comparisons. Naturality of that comparison and of the open unit, followed by the two normalization equations, proves normalization of the conjugated paste. Proper maps compose by [lem-weil-pbc-proper-composition]. Apply the uniqueness clause from Step 1 and cancel the compositor isomorphisms. Naturality gives the first factor restriction; the second is the first square normalization.",
+   "uses": [
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal). Agent underived clopen-restriction formulation on pro-etale modules and semilinear systems; returned proof Steps 7 and 8 and identity part of Step 10."
+   }
+  },
+  {
+   "text": "For ordinary horizontal pasting, expand the unit of the composite open adjunction using [def-weil-pbc-composite-adjunction]. Naturality of the first square comparison moves the second open unit through it, and the second square normalization cancels the second factor. Naturality of the second open unit and the first normalization complete the composite normalization equation. The conjugate-iso unit equation for Adjunction.leftAdjointCompIso transports this equation to the specified open compositors. The proved source-library pullback-square pasting law identifies the outer square comparison. Uniqueness from Step 1 and cancellation give horizontal pasting. The same two normalization calculations give the two factor equations.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal). Agent underived clopen-restriction formulation on pro-etale modules and semilinear systems; returned proof Steps 7 and 8 and identity part of Step 10."
+   }
+  },
+  {
+   "text": "For systems use the already proved ordinary-system moduleAlpha_vertical and moduleAlpha_horizontal equations of [lem-sp-varying-ring-proper-open-pasting], canceling respectively the pullback and open compositor. The two factor restrictions follow from naturality and the single-square normalization, exactly as at ordinary levels. Package the fixed categorical data of the horizontal factor calculation; the system horizontal assertion records its same two factor equations through this constructed package, avoiding repeated conversion inside chosen functors. The only varying arguments are essentially-small proofs, so proof irrelevance and congruence identify the data packages and transfer the factor predicates between the two existing cached presentations.",
+   "uses": [
+    "lem-sp-varying-ring-proper-open-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal). Agent underived clopen-restriction formulation on pro-etale modules and semilinear systems; returned proof Steps 7 and 8 and identity part of Step 10."
+   }
+  },
+  {
+   "text": "For identity verticals, the source-library upperStarComp identity laws express the square comparison by the two inverse-image identity isomorphisms. For systems use the ordinary identity compositor laws proved in [lem-sf-semilinear-compositor-coherence]. Naturality of the open unit and cancellation normalize the displayed identity word. For identity horizontals, Adjunction.leftAdjointIdIso is normalized by its conjugate right identity isomorphism: its defining unit equation normalizes the displayed word. The inverse square comparison gives the horizontal identity case. Apply the uniqueness clause from Step 1 in each case. These are categorical equations and cover the empty open and zero module without additional assumptions.",
+   "uses": [
+    "lem-sf-semilinear-compositor-coherence",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal). Agent underived clopen-restriction formulation on pro-etale modules and semilinear systems; returned proof Steps 7 and 8 and identity part of Step 10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-exact-clopen-comparison-localization",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sp-varying-ring-proper-open-pasting",
+  "lem-sf-semilinear-compositor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal). Agent underived clopen-restriction formulation on pro-etale modules and semilinear systems; returned proof Steps 7 and 8 and identity part of Step 10. Proof by normalization uniqueness for ordinary levels, published ordinary-system pasting, and conjugate unit identities; all equalities precede deriving."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*open.*past|properOpen|shriek.*comp",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate pasting does not prove the underived intrinsic clopen arrows have identity restrictions and coincide with the outer geometric arrow"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate pasting does not prove the underived intrinsic clopen arrows have identity restrictions and coincide with the outer geometric arrow"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero clopen projection base change natural transformations paste before deriving on inverse systems of module sheaves",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.diagramNatTrans_zero, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, PresheafOfModules.instZeroHom, CategoryTheory.instZeroHomSheaf, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id, AlgebraicGeometry.Scheme.Modules.Hom.zero_app, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate pasting does not prove the underived intrinsic clopen arrows have identity restrictions and coincide with the outer geometric arrow"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underived proper open clopen projection comparisons of sheaves and semilinear systems obey horizontal and vertical pasting",
+   "results": "8 hits; SheafOfModules.Presentation.map_π_eq, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app', TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate pasting does not prove the underived intrinsic clopen arrows have identity restrictions and coincide with the outer geometric arrow"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(past|comp)|properOpen|proper_open|shriek.*pasting",
+   "results": "25 hits; Mathlib/ModelTheory/Types.lean, Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean, Mathlib/Topology/ClopenBox.lean, Mathlib/Topology/ClopenBox.lean, Mathlib/Topology/MetricSpace/Polish.lean, Mathlib/Topology/MetricSpace/Polish.lean, Mathlib/Topology/CompactOpen.lean, Mathlib/Topology/Order/Priestley.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic square/mate composition and topological clopen facts do not identify the intrinsic proper/open sheaf comparison in both coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open squares comparison maps of module sheaves and inverse systems agree with the outer comparison after horizontal and vertical composition",
+   "results": "8 hits; CategoryTheory.CatCommSq.hComp', CategoryTheory.Square.Hom.comp, SheafOfModules.pullbackComp, CategoryTheory.TwoSquare.hComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pushforwardComp, ModuleCat.Tilde.toOpen_res",
+   "date": "2026-10-22",
+   "verdict": "no match: generic square/mate composition and topological clopen facts do not identify the intrinsic proper/open sheaf comparison in both coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic square/mate composition and topological clopen facts do not identify the intrinsic proper/open sheaf comparison in both coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underived clopen projection comparison between inverse image of extension by zero and extension by zero of inverse image obeys vertical and horizontal pasting for proper open squares",
+   "results": "8 hits; Profinite.NobelingProof.ProjRestricts, Profinite.Nobeling.ι, Opens.mayerVietorisSquare'_toSquare, Profinite.NobelingProof.GoodProducts.square_commutes, Profinite.NobelingProof.iso_map, Profinite.NobelingProof.fin_comap_jointlySurjective, TopCat.GlueData.preimage_image_eq_image', TopCat.GlueData.preimage_image_eq_image",
+   "date": "2026-10-22",
+   "verdict": "no match: generic square/mate composition and topological clopen facts do not identify the intrinsic proper/open sheaf comparison in both coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_hcomp|def pullbackComp",
+   "results": "17 hits; Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic square/mate composition and topological clopen facts do not identify the intrinsic proper/open sheaf comparison in both coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from pullback of extension by zero to extension by zero in a proper open commutative square are uniquely determined by their restriction, so the canonical clopen comparison is compatible with composition",
+   "results": "8 hits; CompHausLike.pullback.hom_ext, TopCat.Presheaf.pullback_obj_obj_ext, AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, TopCat.GlueData.MkCore.t', factorsThrough_of_pullbackCondition, CompHausLike.pullback.condition_assoc, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic square/mate composition and topological clopen facts do not identify the intrinsic proper/open sheaf comparison in both coefficient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ambient-proper-open-pasting",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": vertical/horizontal intrinsic clopen pasting and identity squares before deriving (returned Steps 7,8,10).",
+   "via": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ambient-underived-clopen-pasting",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Used existing clopen Hom-bijection and intrinsic comparison normalization, then wrote both underived restriction computations, outer-square uniqueness, identity cases and simultaneous system argument. Searched project Lean, whole DAG, blueprint and Mathlib; no complete project attachment or Mathlib match.",
+  "blueprint": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": vertical/horizontal intrinsic clopen pasting and identity squares before deriving (returned Steps 7,8,10).",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic realization of semilinear systems as modules on the diagram site, ensuring the ordinary argument takes place in the system category itself; no unit-local replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-fe2b67bf1",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-fe2b67bf1 (reviewer sub-agent of L); spot-checked: Read in full: the item, all six proof dependencies and the stmt_deps, plus Stacks more-etale 0F7B/0F7C/0F7D and the blueprint place fix-prop-projection-formula.proof.md:13. The delivery is one commit with no new nodes and no changes. No re-split note applies (the item was created by Q144 on 2026-10-22). No cycle, no SGA. Step 1: the clopen Hom bijection (I checked b^{-1}(U)=U×_Z W=U, so b^*(k_1)_!G=s_!G) plus the localization lemma's restriction 1 give uniqueness. Step 2: the d̃ associativity/unit laws and the composite-adjunction unit formula make the restriction identifications agree. Steps 3-5: vertical and horizontal restriction computations type-check. The outer squares commute and their verticals are proper (proper-composition Mathlib leaf), and the composite of qc opens is qc open. Step 6: identity squares give V_W=U or V, s=1; empty opens are handled. Step 7: the system category is abelian, with no derived-faithfulness claim. Edge cases checked: Cartesian square; non-Cartesian with an extra clopen component; U or W empty; non-flat transitions. The tool use lem-coef-semilinear-derived-sections is accepted. Maintainer note: lem-sp-varying-ring-proper-open-pasting (sp unit) and lem-cbc-proper-open-alpha-pasting (cbc unit, constant B, module-sheaf α pasting) overlap the item's content from other units. They are not exact duplicates, and the item predates this delivery, so this is a possible later merge, not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.AmbientUnderivedClopenPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.ambientUnderivedClopenPasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Ordinary.openIdentity",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Ordinary.Vertical",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Ordinary.Horizontal",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Ordinary.Identities",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Systems.pullIdentity",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Systems.openIdentity",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Systems.HorizontalFactorData",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Systems.HorizontalFactorData.factors",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Systems.horizontalFactorData",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Systems.Vertical",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Systems.Horizontal",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.Systems.Identities",
+   "AlgebraicGeometry.ProEtale.AmbientClopen.UnderivedPasting.ambientUnderivedClopenPasting"
+  ],
+  "file": "lean/Sheaf/SixFunctors/AmbientUnderivedClopenPasting.lean",
+  "statement": "theorem ambientUnderivedClopenPasting (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : (∀ n : ℕ, Ordinary.Vertical (scalarRings l E n) F ∧ Ordinary.Horizontal (scalarRings l E n) F ∧ Ordinary.Identities (scalarRings l E n) F) ∧ (Systems.Vertical (scalarRings l E) (scalarTransitions l E) F ∧ Systems.Horizontal (scalarRings l E) (scalarTransitions l E) F ∧ Systems.Identities (scalarRings l E) (scalarTransitions l E) F)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The six assertion predicates are the explicit ordinary natural-transformation pasting equations, the two individual factor restriction equations in each rectangle, and both identity-square words. They use AmbientClopen.alpha and VaryingRing.moduleAlpha without redefining either comparison. Positive levels use scalarRings n = ULift (A_(n+1)). All structure maps are finite type over the specified finite-field algebraic closure; no separated structure maps are assumed. Returned H2 repaired: the plain ordinary clopen definitions and finiteScalarRing are owned by the new existing:true definition node def-sf-ambient-underived-clopen-comparison. The localization theorem remains proof-only. Lean source and mathematical statement unchanged. S1 stage 3: the system horizontal assertion folds its two existing factor equations through a constructed HorizontalFactorData record. This is a definition representation repair with unchanged signature and mathematical content; see coord/changes/ambient-underived-horizontal-factor-data.md. The three new public data definitions are attached here; all new proof helpers are private and complete."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5388d97f1",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Re-delivery of the 841d56bd590a H2 return. Item Lean byte-identical; the only change replaces the theorem stmt_dep lem-sf-ambient-exact-clopen-comparison-localization with the new existing:true definition node def-sf-ambient-underived-clopen-comparison, and the theorem stays in proof_deps. New node checked against live AmbientExactClopenComparison.lean: beta (conjugate of baseChangeMap, inverted), projector (unit then inverse of open-to-direct-image map), openComp/openCongr (adjoint uniqueness), alpha (beta/projector/compositor word over squareLift; no Cartesian, finite-type or separatedness hypothesis) and finiteScalarRing all match its statement; none is a .choose of the theorem. lean.statement is verbatim live text; all 11 stmt_deps exist live as definition nodes; no other live owner of these declarations, no id collision, item not landed by another group. Independent re-read of the item: vertical/horizontal pasting equations, factor restrictions and identity squares for ordinary levels n>=1 (ULift A_{n+1}) and semilinear systems, finite type over k without separatedness, no extra hypotheses; empty opens, Cartesian squares, A_1 and the u/u+1 universes covered. Advisories: unused inherited theorem stmt_dep lem-sf-open-tensor-normalization; overlap with the sp/cbc pasting lemmas and with the strict-tower/varying-ring arrow def nodes (possible later merge). No compile run: Lean unchanged and no FIX."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T023957-L-622762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

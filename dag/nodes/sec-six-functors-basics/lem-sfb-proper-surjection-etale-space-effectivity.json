@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-proper-surjection-etale-space-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of etale algebraic-space descent along proper surjections",
+ "statement": "Work over a scheme $S$ [def-pc-scheme], in the universes of [def-weil-size-convention], with algebraic spaces [def-trf-algebraic-space], sheaf fibre products [lem-trf-space-fibre-products-etale-covers], and atlas point topology [def-a1-space-point-topology]. Quasi-compactness of a space means that every open cover of its point space has a finite subcover; a morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source. A space is quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact, and a morphism is quasi-separated if its relative diagonal is quasi-compact. Etaleness means chartwise etaleness [lem-trf-space-chartwise-etale-permanence], which allows nonrepresentable maps. Finite presentation means local finite presentation on scheme charts [def-sbc-locally-finite-presentation], quasi-compactness and quasi-separatedness. Let $p:B'\\to B$ be a proper surjective morphism of finite presentation between quasi-separated algebraic spaces, where proper means separated, finite type and universally closed [def-sfb-space-morphism-properties]. Let $X'\\to B'$ be quasi-compact and chartwise etale with $X'$ quasi-separated. Give it an isomorphism $\\theta:p_1^*X'\\simeq p_2^*X'$ over $B'\\times_BB'$ that restricts to the identity on the diagonal and satisfies $p_{23}^*\\theta\\circ p_{12}^*\\theta=p_{13}^*\\theta$ on the triple product. Then there exist a quasi-separated algebraic space $X$, a quasi-compact chartwise etale map $X\\to B$, and an isomorphism $X\\times_BB'\\simeq X'$ inducing exactly $\\theta$. No separatedness is imposed on $X'\\to B'$, and no flatness is imposed on $p$.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Corollary (5.16), printed p.22; Notation (5.1), Remark (5.2), and the standing quasi-separatedness convention on printed p.4. The algebraic-space base extension is Remark (5.2). Read online; local copy WANTED. A stronger object-effectivity statement is Stacks spaces-pushouts.tex Tag 0GG0 (lemma-descend-etale-proper-surjective), read as a cross-check.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Use the equivalence of [lem-sfb-space-etale-sheaf-realization]. Its explicit formula also checks base-change compatibility: for $g:H'\\to H$ and a scheme $t:T\\to H'$, both $E_{H'}(g^{-1}A)$ and $E_H(A)\\times_HH'$ have sections $(t,s)$ with $s\\in\\Gamma(T,(gt)^{-1}A)$. The restriction maps agree by the composition comparisons of [lem-trf-space-enlarged-etale-ringed-site-model]. Hence these spaces are naturally isomorphic. Applying the natural unit and counit gives $g^{-1}h_V\\simeq h_{V\\times_HH'}$, compatibly with maps and iterated pullback. Put $F=h_{X'}$ on $B'_{\\mathrm{et}}$. The given $\\theta$ therefore defines $\\varphi:r_1^{-1}F\\simeq r_2^{-1}F$ on $C=B'\\times_BB'$, with exactly the same diagonal identity and triple cocycle. No representability of $X'\\to B'$ has been used.",
+   "uses": [
+    "lem-sfb-space-etale-sheaf-realization",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0GG0 (lemma-descend-etale-proper-surjective), first paragraph; Tag 0GF6, explicit realization functor and its natural unit/counit."
+   }
+  },
+  {
+   "text": "Write $r_1,r_2:C\\to B'$ and $a=pr_1=pr_2$. Form the sheaf\n$$G=\\operatorname{Eq}\\bigl(p_*F\\rightrightarrows a_*r_2^{-1}F\\bigr).$$\nFor the first arrow use the adjunction unit for $r_1$, followed by $\\varphi$; for the second use the unit for $r_2$. Composition of direct images identifies their targets. Equalizers exist and are computed sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Explicitly on an etale test $T\\to B$, $G(T)$ consists of sections $s$ of $F$ over $B'\\times_BT$ satisfying $\\varphi(r_1^{-1}s)=r_2^{-1}s$ on $C\\times_BT$. Evaluation on these possibly nonschematic spaces uses the enlarged-site equivalence and direct-image formula of [lem-trf-space-enlarged-chart-ringed-morphism].",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-trf-space-enlarged-chart-ringed-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0GFW (lemma-glue-etale-sheaf-proper-surjective); explicit equalizer from etale-cohomology.tex Tag 0GF0, via the construction in Tag 0GEZ (lemma-glue-etale-sheaf-integral-surjective)."
+   }
+  },
+  {
+   "text": "Pull this equalizer back along $p$. Inverse image preserves finite limits by [lem-trf-space-enlarged-chart-ringed-morphism]. The maps $r_1,r_2$ are proper by [lem-sfb-space-proper-base-change]. Apply [lem-sfb-space-proper-set-sheaf-base-change] first to $p$ and then to $r_2$ to identify the two pulled-back terms with the direct-image terms for the base-changed datum over $B'$. These are the canonical counit mates, so applying adjunction to the two arrows gives respectively the pullback of $\\varphi$ and the two projection units: their adjoints are the same restrictions of the original sections. Thus $p^{-1}G$ is the sheaf of matching sections for the pulled-back cover $q:B'\\times_BB'\\to B'$, where $q$ is the second projection. This cover has the diagonal section. In the next step we compute its equalizer rather than assume a sheaf-descent theorem.",
+   "uses": [
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-proper-set-sheaf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0GF0, base-change of the equalizer; Tag 0DG0 (lemma-proper-base-change-f-star), applied to p and to the projection r_2."
+   }
+  },
+  {
+   "text": "Here is the split-cover calculation, on every etale test $T\\to B'$; write $x_0:T\\to B'$ for its fixed structure map and $x_1$ for the variable coordinate on $B'\\times_BT$. A matching section $s$ lies in the pullback of $F$ by $x_1$; matching means $\\varphi_{12}(s_1)=s_2$ on the double overlap. Restrict $s$ along the diagonal $x_1=x_0$ to obtain $t\\in F(T)$. Conversely send $t$ to $s=\\varphi_{01}(t)$, with $t$ first pulled back from $T$. The identity $\\varphi_{12}\\varphi_{01}=\\varphi_{02}$ proves matching. Pulling matching back along $(x_1,x_2)=(x_0,x_1)$ proves $s=\\varphi_{01}(t)$; the diagonal identity proves the other composite is the identity. These restrictions commute with every test map. The sectionwise criterion of [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] gives an isomorphism $\\alpha:p^{-1}G\\simeq F$. On $B'\\times_BB'$, the same matching identity says that evaluating a family at the second distinguished coordinate is $\\varphi$ times evaluation at the first. Therefore $r_2^{-1}\\alpha\\circ c=\\varphi\\circ r_1^{-1}\\alpha$, where $c$ is the canonical overlap map for $p^{-1}G$. This verifies the prescribed datum, not only the existence of an isomorphic underlying sheaf.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0GG0, compatibility with the descent datum; expanded split-cover equalizer verification in etale-cohomology.tex Tags 0GEY and 0GEZ."
+   }
+  },
+  {
+   "text": "Choose a common universe bound containing the small site and its set of generator/section pairs for $G$, as allowed by [def-weil-size-convention] and the explicit size convention in [lem-sfb-space-etale-sheaf-realization]. This is a set: $G$ is the sectionwise equalizer of two set-valued sheaves on a small skeleton. Form $X=E_B(G)$. The realization node gives a chartwise etale algebraic space $X\\to B$. Its natural unit, the base-change identity of step 1, $\\alpha$, and its natural counit give $X\\times_BB'\\simeq X'$. The overlap equation at the end of step 4, and full faithfulness of that equivalence, imply that the induced space isomorphism is exactly $\\theta$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-sfb-space-etale-sheaf-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0GG0, realization and set-theoretic footnote; Tag 0GF6 (lemma-sheaf-gives-space), size condition."
+   }
+  },
+  {
+   "text": "For an affine scheme $T\\to B$, put $T'=B'\\times_BT$. It is quasi-compact because $p$ is proper (hence quasi-compact), with base change as in [lem-sfb-space-flat-proper-fp-locality]. The hypothesis on $X'\\to B'$ uses affine tests, so convert it to the quasi-compact space $T'$: choose a surjective etale scheme atlas $U\\to T'$ with $U$ quasi-compact and write $U=U_1\\cup\\dots\\cup U_n$ with $U_i$ affine open. Each $X'\\times_{B'}U_i$ is quasi-compact by hypothesis, and $\\coprod_iX'\\times_{B'}U_i\\to X'\\times_{B'}T'$ is surjective on points by the image formula of [lem-a1-space-point-open-calculus]. Its point map is continuous, so $X'\\times_{B'}T'$ is quasi-compact. The same argument shows in general that a morphism quasi-compact on affine tests is quasi-compact on all quasi-compact space tests; the converse is trivial. Thus the affine-test convention of the statement agrees with the quasi-compact-space convention of [lem-sfb-space-quasicompact-fppf-local, lem-sfb-space-quasiseparated-test-calculus]. The map $X'\\times_{B'}T'\\to X\\times_BT$ is surjective: it is the base change of $p$, and [lem-a1-space-point-open-calculus] gives surjectivity after every base change as well as continuity. A continuous surjective image of a quasi-compact space is quasi-compact: pull any open cover back, take a finite subcover and use surjectivity. Thus $X\\times_BT$ is quasi-compact for every affine $T$, proving that $X\\to B$ is quasi-compact.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-space-quasiseparated-test-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 040W (lemma-surjection-from-quasi-compact) and Tag 03HE (definition-quasi-compact), written open-cover and affine-test conversion; retention of quasi-compactness as in Rydh (5.16)."
+   }
+  },
+  {
+   "text": "The relative diagonal $\\Delta_{X'/B'}$ is the base change of the absolute diagonal of $X'$ along $X'\\times_{B'}X'\\to X'\\times_{\\mathbf Z}X'$. It is quasi-compact by [lem-sfb-space-quasicompact-fppf-local], whose quasi-compact-space convention agrees with the affine-test one by step 6. For an affine scheme $T\\to X\\times_BX$, set $D=T\\times_{X\\times_BX}X$. Put $T'=T\\times_BB'$, which is quasi-compact as in step 6. The space $D'=T'\\times_{X'\\times_{B'}X'}X'$ is quasi-compact by quasi-compactness of $\\Delta_{X'/B'}$, tested on the quasi-compact space $T'$ as allowed by step 6. Fibre-product identities identify it with $D\\times_BB'$. Its map to $D$ is surjective and continuous by [lem-a1-space-point-open-calculus]. The same open-cover argument makes $D$ quasi-compact. Hence $\\Delta_{X/B}$ is quasi-compact. Finally [lem-sfb-space-quasiseparated-test-calculus] composes the quasi-separated morphisms $X\\to B$ and $B\\to\\operatorname{Spec}\\mathbf Z$, making $X$ absolutely quasi-separated. The arguments include empty bases and empty etale objects and impose neither flatness on $p$ nor separatedness on $X'\\to B'$.",
+   "uses": [
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-quasiseparated-test-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HF (lemma-base-change-quasi-compact) and 03KQ (lemma-composition-separated), diagonal and open-cover verification; quasi-separatedness convention of Rydh (5.16)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-etale-sheaf-realization",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-space-proper-set-sheaf-base-change",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-space-quasiseparated-test-calculus",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 0GG0 (lemma-descend-etale-proper-surjective), using the explicit equalizer proof of etale-cohomology.tex Tag 0GF0 and proper set-sheaf base change Tag 0DG0; retention of quasi-compactness and quasi-separatedness is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper surjective morphisms of finite presentation are effective descent morphisms for quasi compact etale algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T21:16:16Z\", \"tool\": \"leanfinder\", \"query\": \"Proper surjective morphisms of finite presentation are effective descent morphisms for quasi compact etale algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\"], \"digest\": \"2e7c18f6ca622363\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme property descent along flat covers does not construct an etale algebraic space with a prescribed cocycle along a proper cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proper\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-23T21:16:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proper\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme property descent along flat covers does not construct an etale algebraic space with a prescribed cocycle along a proper cover."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]roper.*[Dd]escent|[Dd]escent.*[Pp]roper|effectiveDescent",
+   "results": "{\"t\": \"2026-10-23T21:16:13Z\", \"tool\": \"grep\", \"query\": \"[Pp]roper.*[Dd]escent|[Dd]escent.*[Pp]roper|effectiveDescent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\"], \"digest\": \"2da04f93f4655c8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme property descent along flat covers does not construct an etale algebraic space with a prescribed cocycle along a proper cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact etale algebraic space with descent datum along a proper surjective map descends effectively",
+   "results": "{\"t\": \"2026-10-23T21:16:14Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact etale algebraic space with descent datum along a proper surjective map descends effectively\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"CategoryTheory.EffectiveEpiFamily.desc\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\"], \"digest\": \"d472d475601c5c08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme property descent along flat covers does not construct an etale algebraic space with a prescribed cocycle along a proper cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of finitely presented not necessarily separated etale spaces under proper covers",
+   "results": "{\"t\": \"2026-10-23T21:17:19Z\", \"tool\": \"leanfinder\", \"query\": \"Effective descent of finitely presented not necessarily separated etale spaces under proper covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"aa4fe3752ca81513\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme property descent along flat covers does not construct an etale algebraic space with a prescribed cocycle along a proper cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-23T21:58:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv\"], \"digest\": \"99979f992c8454fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme morphism-property descent and abstract stack equivalence require hypotheses not supplying proper-cover descent of etale algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*descent|descent.*proper|effectiveDescent",
+   "results": "{\"t\": \"2026-10-23T21:58:14Z\", \"tool\": \"grep\", \"query\": \"proper.*descent|descent.*proper|effectiveDescent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"3faca89a9d79e969\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme morphism-property descent and abstract stack equivalence require hypotheses not supplying proper-cover descent of etale algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper surjective morphisms of algebraic spaces give effective descent for sheaves of sets on their small etale sites",
+   "results": "{\"t\": \"2026-10-23T21:58:14Z\", \"tool\": \"leanfinder\", \"query\": \"Proper surjective morphisms of algebraic spaces give effective descent for sheaves of sets on their small etale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\"], \"digest\": \"3939e3f6ddc1bcac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme morphism-property descent and abstract stack equivalence require hypotheses not supplying proper-cover descent of etale algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of sets with a cocycle on a proper surjective covering of algebraic spaces descends to the small etale site of the base",
+   "results": "{\"t\": \"2026-10-23T21:58:15Z\", \"tool\": \"leansearch\", \"query\": \"A sheaf of sets with a cocycle on a proper surjective covering of algebraic spaces descends to the small etale site of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"CategoryTheory.Presheaf.IsSheaf\", \"TopCat.Sheaf\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"TopCat.Presheaf.IsSheafOpensLeCover\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"SheafOfModules.QuasicoherentData.rec\"], \"digest\": \"add8f834c05502f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme morphism-property descent and abstract stack equivalence require hypotheses not supplying proper-cover descent of etale algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of sheaves on small etale topoi along universally closed proper surjections is an equivalence with cocycle descent data",
+   "results": "{\"t\": \"2026-10-23T21:59:11Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of sheaves on small etale topoi along universally closed proper surjections is an equivalence with cocycle descent data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"CategoryTheory.Equivalence.sheafCongr\", \"CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq\"], \"digest\": \"458fc5b958b84684\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme morphism-property descent and abstract stack equivalence require hypotheses not supplying proper-cover descent of etale algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of quasi compact nonseparated etale algebraic spaces along proper surjective morphisms of finite presentation",
+   "results": "{\"t\": \"2026-10-23T21:59:12Z\", \"tool\": \"leanfinder\", \"query\": \"Effective descent of quasi compact nonseparated etale algebraic spaces along proper surjective morphisms of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"fc8ce5aec740de7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme morphism-property descent and abstract stack equivalence require hypotheses not supplying proper-cover descent of etale algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qc-subtrusive-etale-descent",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: Corollary (5.16), proper-surjective input after the refinement (3.10)",
+   "via": [
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proper-surjection-etale-space-effectivity",
+  "worker": "stage1",
+  "summary": "Retained the statement. Constructed the matching-section equalizer and proved its pulled-back counit is an isomorphism by an explicit diagonal-section contraction; realized it with the existing algebraic-space-base equivalence. Proved quasi-compactness and quasi-separatedness on affine tests. One new statement-only input: proper base change for arbitrary sheaves of sets on spaces (0DG0), not the torsion/module or scheme statement.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: Corollary (5.16), proper-surjective input after the refinement (3.10); same supporting proper-surjection input to Rydh (5.17). Current latest unit and direct-images proof read; no unit-level route changed. The inherited created chain has no resolvable blueprint ancestor, so its null anchor is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic algebraic-space small/enlarged etale-site composition, used to identify the explicit realization under base change; no unit theorem supplies this site foundation."
+   },
+   {
+    "node": "lem-trf-space-enlarged-chart-ringed-morphism",
+    "why": "Generic canonical sheaf adjunction, left exact inverse image and direct-image evaluation, needed for the equalizer construction; not a unit-level route replacement."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic continuity and base-change surjectivity of algebraic-space point maps, needed for the open-cover finiteness argument; not a trace or duality theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-d24d21a16",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-d24d21a16 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, every cited statement, and Stacks 0GG0/0GFW (spaces-pushouts), 0GEY/0GEZ/0GF0 (etale-cohomology), 0DG0 (spaces-more-cohomology), 0GF6 and 03HE/03HF/03KQ/040W. The item statement is unchanged from live and side-live (still unsplit there, no repair note), and no SGA source is used. The proof is mathematically correct. Steps 1-5 turn θ into a sheaf descent datum through the explicit E_H realization, build the 0GEZ equalizer, and pull it back along p using new-node 0DG0 for p and then for r_2 (no composite-properness claim needed). The pulled-back cover has the diagonal section; I checked the contraction to α and the overlap equation in coordinates, and the realization gives X with exactly θ. Steps 6-7 give X→B qc and X qs; I checked the fibre-product identities (D'≅D×_BB', and Δ_{X'/B'} as the base change of Δ_{X'}). One repaired fault (C4/E1): the item defines quasi-compact morphisms by affine tests, but step 6 applied the hypothesis on X'→B' to the non-affine space T' by pointing to the qc-space-test convention of lem-sfb-space-quasicompact-fppf-local, which is a different definition (used again in step 7 and by the qs composition node). The FIX writes the conversion into step 6: a finite affine atlas of T', the surjective continuous point map from lem-a1, and the statement that the two conventions agree. Step 7 now refers to it, and the step sources are corrected to spaces-morphisms.tex 040W/03HE and 03HF/03KQ. Only proof steps 6-7 changed; proof_deps are unchanged. The new node is exactly Stacks 0DG0 (proper, arbitrary g, any set sheaf, canonical mate map), true, statement-only and self-contained, and not a duplicate: the DAG grep finds only scheme/abelian 0A3U nodes, the 0DDW section equalizer and 0GF6 realizations. It is strictly smaller than the item. Batch-5: every listed trf citation or closure (def-trf-algebraic-space, sheaf fibre products, enlarged étale-site and chart adjunction models, point calculus) is a general algebraic-space or site foundation, neither assumption nor a step of their proofs, so the citations and the three tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

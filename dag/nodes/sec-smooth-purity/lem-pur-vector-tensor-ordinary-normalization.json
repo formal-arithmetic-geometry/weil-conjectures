@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-vector-tensor-ordinary-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Tensor and transpose clause of lem-pur-vector-integration-site-comparison",
+   "via": [
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary normalization of coefficient-first vector integration",
+ "statement": "Let A be a finite commutative ring, N>0 annihilate A, S a Noetherian scheme with N invertible, and F a locally free S-module of rank d. Use W, the compact-support adjunction, and the canonical coefficient-first projection of [def-pur-vector-integration-adjunction-arrows]. Let K be any ordinary derived A-module object on S, and pe an isomorphism from ordinary compact support of pi^*K tensor W to K tensor ordinary compact support of W whose inverse is that actual projection. Let ae be pe.hom followed by 1 tensor the normalized ordinary vector integration and the ordinary finite-unit right unitor [def-pur-finite-site-tensor-projection]. Then there exists the prescribed normalized natural purity transformation gamma of [def-pur-vector-purity-normalization] such that the adjunction transpose of ae equals the canonical signed symmetry pi^*K tensor W to W tensor pi^*K followed by gamma.app K. No constructibility restriction is added; existence of pe is the stated assumption.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "First two paragraphs: integration through the ordinary projection formula and its adjunction transpose. Agent-written coefficient-first symmetry conversion from def-pur-vector-purity-normalization."
+ },
+ "stmt_deps": [
+  "def-pur-vector-integration-adjunction-arrows",
+  "def-pur-finite-site-tensor-projection",
+  "def-pur-vector-purity-normalization",
+  "lem-kun-tensor-sym"
+ ],
+ "proof": [
+  {
+   "text": "Take gamma and its normalization from vectorBundleNormalized. At K, normalization supplies m equal to compact support of gamma followed by the counit, with the right-coefficient projection followed by m equal to the integration trace tensored with K and the left unitor.",
+   "uses": [
+    "lem-pur-normalized-vector-purity-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "First two paragraphs: integration through the ordinary projection formula and its adjunction transpose. Agent-written coefficient-first symmetry conversion from def-pur-vector-purity-normalization."
+   }
+  },
+  {
+   "text": "The coefficient-first projection is the right-coefficient projection conjugated by the two canonical signed symmetries. Precompose the desired integration identity by pe.inv. Cancel pe, combine the two source symmetries using involutivity, and use the normalization of m. Naturality moves the trace across symmetry; the braiding unit law converts the left unitor into the right unitor. Thus ae is compact support of the source symmetry followed by m. Generic coefficient-category helpers prove the symmetry square and unit identity before specializing to module sheaves; the existing Etale.singleFunctorObjUnitIso_inv identifies the canonical finite-unit comparison with the identity.",
+   "uses": [
+    "lem-asd-compact-projection-exchange",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "First two paragraphs: integration through the ordinary projection formula and its adjunction transpose. Agent-written coefficient-first symmetry conversion from def-pur-vector-purity-normalization."
+   }
+  },
+  {
+   "text": "Apply naturality of the adjunction Hom bijection to this equality. The Hom bijection sends compact support of gamma followed by the counit to gamma. This gives the claimed adjunct identity. In rank zero and over the empty scheme the same symmetry and unit equations apply.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "First two paragraphs: integration through the ordinary projection formula and its adjunction transpose. Agent-written coefficient-first symmetry conversion from def-pur-vector-purity-normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-compact-projection-exchange",
+  "lem-kun-tensor-sym",
+  "lem-pur-normalized-vector-purity-bundle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "First two paragraphs: integration through the ordinary projection formula and its adjunction transpose. Agent-written coefficient-first symmetry conversion from def-pur-vector-purity-normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal comparison functor preserves integration obtained by inverse projection formula and trace, and adjunction transpose",
+   "results": "Eight hits including MonoidalClosedFunctor.comparison_iso, exponential comparison and Frobenius maps. No compact-support site comparison of normalized vector integration.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Iso",
+   "results": "Twelve generic Functor.mapIso results. These supply functoriality only, not the geometric projection square or purity normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorCompatibilityData|comparedModuleProjection|vectorBundlePurityProjectionMap",
+   "results": "No Mathlib hits. Repository search found the coordinate definitions, the proved generic compact_projection_square, and the normalized purity declaration.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; reuse existing generic calculations"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorIntegrationSiteComparison",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorTensorOrdinaryNormalization",
+  "file": "lean/Sheaf/Paper/VectorTensorOrdinaryNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.vectorTensorOrdinaryNormalization",
+  "statement": "theorem vectorTensorOrdinaryNormalization\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (d : ℕ) (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]\n    (K : Etale.DerivedCategoryModule A S)\n    (pe : (Etale.vectorBundlePurityLower A S d F).obj\n        (Etale.vectorBundlePurityTwistedPullback A N hA S d F K) ≅\n      ((Etale.derivedTensor (ModuleCat.{u + 1} A) S).obj K).obj\n        (Etale.vectorIntegrationSource A N hA S d F))\n    (hpe : pe.inv = Etale.vectorBundlePurityProjectionMap A N hA S d F K) :\n    letI : IsAffineHom (VectorBundleZeroSection.π S d F) :=\n      (Etale.vectorIntegration_geometry S d F).1\n    letI : LocallyOfFiniteType (VectorBundleZeroSection.π S d F) :=\n      (Etale.vectorIntegration_geometry S d F).2.1\n    ∃ γ : WeilConjectures.PurityFiniteSetting.VectorPurityGamma A N hA S d F,\n      WeilConjectures.PurityFiniteSetting.VectorPurityGammaNormalized\n        A N hN hA S hS d F γ ∧\n      HEq ((Etale.vectorBundlePurityAdjunction A S d F).homEquiv _ K\n        (ordinaryTensorIntegrate A S K (Etale.vectorIntegrationSource A N hA S d F)\n          _ pe (Etale.vectorBundleIntegration N hN A hA S hS d F)))\n        ((((Etale.derivedTensorSymmetry (ModuleCat.{u + 1} A)\n          (VectorBundleZeroSection.scheme S d F)).hom.app\n            ((Etale.ordinaryFinitePullback A (VectorBundleZeroSection.π S d F)).obj K)).app\n              (Etale.vectorIntegrationCoefficient A N hA S d F)) ≫ γ.app K)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T222749-L-692883",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T222749-L-692883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

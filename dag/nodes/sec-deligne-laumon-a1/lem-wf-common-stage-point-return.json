@@ -1,0 +1,252 @@
+{
+ "id": "lem-wf-common-stage-point-return",
+ "kind": "statement",
+ "title": "Common-stage natural point transport with normalized semilinear return",
+ "statement": "Fix distinct primes $p,\\ell$, an integer $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, its fixed algebraic closure $k$, and an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $Y_0$ be separated of finite type over $k_0$, put $Y=Y_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$. Write $g_Y=\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q)$ and $g_s=\\operatorname{Spec}(\\operatorname{Frob}_q)$ for geometric Frobenius. For each finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, use the rationalized constructible categories and derived pullbacks in [def-weil-local-frobenius-trace]. Let $\\mathcal C_Y=D^b_c(Y,\\Omega)$ be the literal category of pairs $(E,K)$ and common-stage morphism classes of [def-weil-algebraically-closed-coefficients]. All composition and scalar comparisons are the specified rationalizations of [lem-trf-integral-pullback-comparison-realization], including equality of scheme morphisms, units and finite iterations. \nFix $n\\geq1$ and $x\\in Y_0(\\mathbf F_{q^n})$, with induced geometric point $\\bar x:s\\to Y$; thus $g_Y^n\\bar x=\\bar xg_s^n$. Put $P_E=\\operatorname{Fib}_{s,E}L\\bar x_E^*$, using the rational point-fibre functor in [def-weil-finite-coefficient-point], and $T_E=Lg_{Y,E}^*$. For $K\\in D^b_c(Y,E)$ define\n$$J_{E,K}:P_EK\\longrightarrow P_ET_E^nK$$\nas the $n$ successive point transports on $L\\bar x_E^*K$, followed by the return comparison for $g_Y^n\\bar x=\\bar xg_s^n$, exactly as the first two factors of the local operator in [def-weil-local-frobenius-trace]. No Weil structure on $K$ is required. For every underlying morphism $u:K\\to L$,\n$$P_E(T_E^nu)J_{E,K}=J_{E,L}P_E(u).$$\nFor $E\\subset M$ let $b_K:P_EK\\otimes_E M\\xrightarrow{\\sim}P_M(K\\otimes_E M)$ be the canonical point comparison and $d_{n,K}:(T_E^nK)\\otimes_E M\\xrightarrow{\\sim}T_M^n(K\\otimes_E M)$ the iterated pullback scalar comparison, both with the specified normalization. Then\n$$P_M(d_{n,K})b_{T_E^nK}(J_{E,K}\\otimes_E M)=J_{M,K\\otimes_E M}b_K.$$\nThe $b_K$ are natural in all underlying morphisms; this equation respects identity extensions and towers $E\\subset M\\subset N$. With these comparisons, the finite-stage point-complex functors $P_E$ define a functor $P$ from $\\mathcal C_Y$ to the common-stage category $D^b_{\\mathrm{fd}}(\\Omega)$ of bounded finite-dimensional point complexes (formed by the same pair and Hom-colimit construction). The maps $J_{E,K}$ define morphisms $J_K:P(K)\\to P(T^nK)$ in that category, independent of finite-stage representatives and compatible with their further scalar extensions. For every common-stage underlying morphism $u:K\\to L$,\n$$P(T^nu)J_K=J_LP(u).$$\nThis uses the semilinear return equality displayed above, without assuming $g_Y^n\\bar x=\\bar x$. It applies to all bounded constructible complexes, without a Weil-stable integral lattice or a finite-Tor-amplitude condition on integral reductions.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence about transport of Frobenius; expanded using the existing strict-system comparison and local-transport coefficient equations, not the trace theorem.; agent-extracted common-stage lemma from the returned rational-stalk proof, steps 3 and 4 (point-transport/return factor)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-local-frobenius-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-finite-coefficient-point",
+  "def-fd-local-frobenius-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $S_{M/E}=-\\otimes_E M$ on scheme complexes and $R_{M/E}=-\\otimes_E M$ on point complexes. Let $a_{E,M,K}:S_{M/E}L\\bar x_E^*K\\xrightarrow{\\sim}L\\bar x_M^*S_{M/E}K$ be the specified pullback comparison and let $\\beta_{E,M,N}:R_{M/E}\\operatorname{Fib}_{s,E}N\\xrightarrow{\\sim}\\operatorname{Fib}_{s,M}S_{M/E}N$ be the inverse rational sections comparison. Then $b_{E,M,K}=\\operatorname{Fib}_{s,M}(a_{E,M,K})\\beta_{E,M,L\\bar x_E^*K}$. The naturality of both factors gives naturality of $b$ for every rational underlying morphism. The identity and tower equations for the two factors give those for $b$: in the tower composite move $\\beta$ past $a$ by naturality, then replace the two successive $a$'s and the two successive $\\beta$'s by their direct comparisons. These are exactly the rationalizations specified in [lem-trf-integral-pullback-comparison-realization] and [lem-weil-point-sections-scalar-extension], using the rational point functor [def-weil-finite-coefficient-point].",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence about Frobenius transport; agent-written common-stage assembly of the specified finite-stage transport equations."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-local-frobenius-transport-normalization] with $X_0=Y_0$, $m=n$, $y=x$ and $\\Lambda=E$. Its map $t_{y,m,K}$ is precisely $J_{E,K}$: both use the successive point transports and the return $g_Y^n\\bar x=\\bar xg_s^n$ with the specified comparisons, as in [def-weil-local-frobenius-trace]. Its naturality is $P_E(T_E^nu)J_{E,K}=J_{E,L}P_E(u)$. Its final displayed equation is exactly the asserted scalar equation, with the $b$ of step 1 and the stated $d_n$. It also gives the identity and tower compatibility with these very comparisons. The hypotheses are separated finite type $Y_0$, the rationalized constructible category, and $n\\ge1$; no Weil structure on $K$ is among them. Its explicit no-finite-Tor clause applies here.",
+   "uses": [
+    "lem-trf-local-frobenius-transport-normalization",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence about Frobenius transport; agent-written common-stage assembly of the specified finite-stage transport equations."
+   }
+  },
+  {
+   "text": "For objects set $P(E,K)=(E,P_EK)$. For a representative $u:K_M\\to L_M$, where $K_M=S_{M/E}K$ and $L_M=S_{M/F}L$, set\n$$A_M(u)=b_{F,M,L}^{-1}P_M(u)b_{E,M,K}.$$\nUse the source equivalence relation of [def-weil-algebraically-closed-coefficients] and the target one of [def-weil-point-fd-qlbar-category]. For $M\\subset N$, substitute the tower formula for each $b_{E,N}$ and use naturality $P_N(S_{N/M}u)b_{M,N,K_M}=b_{M,N,L_M}R_{N/M}(P_Mu)$. Cancellation gives $A_N(u_N)=(A_M(u))_N$, with the displayed source and target associators. Hence representatives equal over a further common field have equal images. Identities map to identities. Over one common field, $A_M(v)A_M(u)=b_H^{-1}P_M(v)b_Lb_L^{-1}P_M(u)b_K=A_M(vu)$, so the classes define the required functor. Step 1 supplies naturality and tower equations used in this substitution.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence about Frobenius transport; agent-written common-stage assembly of the specified finite-stage transport equations."
+   }
+  },
+  {
+   "text": "Put $D_{E,M,K}=P_M(d_{n,K})b_{E,M,T_E^nK}$. By the common-stage pullback action of [def-weil-derived-pullback-tensor-hom], the functor $PT^n$ acts on $[M,u]$ by\n$$B_M(u)=D_{F,M,L}^{-1}P_M(T_M^nu)D_{E,M,K}.$$\nStep 2 says $D_{E,M,K}R_{M/E}(J_{E,K})=J_{M,K_M}b_{E,M,K}$. Substitute it and finite-stage naturality into the preceding formula:\n$$B_M(u)R_{M/E}(J_{E,K})=D_{F,M,L}^{-1}P_M(T_M^nu)J_{M,K_M}b_{E,M,K}$$\n$$=D_{F,M,L}^{-1}J_{M,L_M}P_M(u)b_{E,M,K}=R_{M/F}(J_{F,L})A_M(u).$$\nThus naturality holds over the very field representing $u$, for arbitrary underlying $u$, by cancellation of the specified invertible $D$'s. The normalized $d_n$ and their tower equations are those of [lem-trf-integral-pullback-comparison-realization]; the scalar and finite-stage naturality equations used here are those of [lem-trf-local-frobenius-transport-normalization].",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence about Frobenius transport; agent-written common-stage assembly of the specified finite-stage transport equations."
+   }
+  },
+  {
+   "text": "Define $J_{(E,K)}$ to be the class represented at $E$ by $J_{E,K}$, with the unit identifications. At any larger field $M$, its representative is $R_{M/E}(J_{E,K})$; step 2 identifies this with $D_{E,M,K}^{-1}J_{M,K_M}b_{E,M,K}$. Therefore the stage-$M$ construction gives the same class under the canonical transition isomorphisms. Scalar extension of the equation in step 4, followed by the tower identifications, gives that equation for $u_N$ at every $N\\supset M$. If two representatives agree at $N$, both sides agree there, hence define the same equation in the target Hom colimit [def-weil-point-fd-qlbar-category]. This proves $P(T^nu)J_K=J_LP(u)$ for every common-stage morphism. In particular every common-stage isomorphism intertwines these components; finite-stage models remain literal pairs, identified by their canonical comparison isomorphisms. All steps use only the semilinear return of step 2, never $g_Y^n\\bar x=\\bar x$.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence about Frobenius transport; agent-written common-stage assembly of the specified finite-stage transport equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-finite-coefficient-point",
+  "lem-trf-local-frobenius-transport-normalization",
+  "def-weil-local-frobenius-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence about Frobenius transport; agent-written common-stage assembly of the specified finite-stage transport equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobeniusPointTransport|localPointTransport|commonStage",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated geometric point transport and semilinear return comparisons descend naturally to the common-stage category of rational constructible complexes",
+   "results": "8 hits: CategoryTheory.Over.iteratedSliceForwardNaturalityIso, LinearMap.iterateMapComap, ContinuousLinearEquiv.arrowCongrEquiv, CategoryTheory.Grothendieck.toTransport, LinearMap.iterateRange, transfiniteIterate.congr_simp, LinearMap.compl₁₂, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric point return transport in rational adic categories is compatible with coefficient extension identity and towers and defines a natural map on the filtered category of finite coefficient models",
+   "results": "8 hits: AdicCompletion.transitionMap_comp_eval_apply, AdicCompletion.transitionMap_ideal_mk, AdicCompletion.transitionMap_comp_reduceModIdeal, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, AdicCompletion.map_val_apply, AdicCompletion.transitionMap_comp_eval",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits: CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The semilinear geometric point return transformation from a rational constructible point fibre to its iterated Frobenius pullback descends to algebraically closed coefficients and is natural on all morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, WeierstrassCurve.Affine.Point.map_map, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.map_over, AlgebraicGeometry.AffineSpace.map_appTop_coord",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusPointTransport|localPointTransport|commonStage|semilinear.*return",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic natural transformations, Frobenius field maps, site fibres or condensed colimits; none states the normalized rational adic point-return and coefficient descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric point fibre functors and iterated Frobenius transport descend to finite coefficient common stage categories",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Point.fiber, CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor, CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.Functor.Fiber, CategoryTheory.PreGaloisCategory.FiberFunctor, CategoryTheory.PreGaloisCategory.FiberFunctor.recOn, CategoryTheory.PreGaloisCategory.FiberFunctor.casesOn, CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic natural transformations, Frobenius field maps, site fibres or condensed colimits; none states the normalized rational adic point-return and coefficient descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.NatTrans, CategoryTheory.NatTrans.id, CategoryTheory.NatTrans.instInhabited, CategoryTheory.NatTrans.vcomp, CategoryTheory.NatTrans.app, CategoryTheory.NatTrans.ext, CategoryTheory.NatTrans.ext_iff, CategoryTheory.congr_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic natural transformations, Frobenius field maps, site fibres or condensed colimits; none states the normalized rational adic point-return and coefficient descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated geometric point transport with semilinear Frobenius return is natural and commutes with finite coefficient extension on rational constructible complexes",
+   "results": "8 hits: IsPurelyInseparable.iterateFrobeniusₛₗ, coe_iterateFrobeniusEquiv, iterateFrobeniusEquiv_add, iterateFrobeniusEquiv_apply, iterateFrobeniusEquiv_symm_add, PerfectClosure.iterate_frobenius_mk, iterateFrobeniusEquiv_symm_add_apply, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic natural transformations, Frobenius field maps, site fibres or condensed colimits; none states the normalized rational adic point-return and coefficient descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of point fibre natural transformations on constructible derived categories descends through the filtered colimit over finite l-adic coefficient fields",
+   "results": "8 hits: Condensed.isColimitLocallyConstantPresheaf_desc_apply, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective₂, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberDesc, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply, CategoryTheory.GrothendieckTopology.Point.presheafFiberDesc, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheafDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic natural transformations, Frobenius field maps, site fibres or condensed colimits; none states the normalized rational adic point-return and coefficient descent assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-rational-stalk-exact",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-l2-upper",
+   "place": "Opening punctual-bounds sentence: point transport and semilinear return, with coefficient descent, underlying the Frobenius-stable stalk filtration",
+   "via": [
+    "lem-wf-rational-stalk-exact"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-wf-common-stage-point-return",
+  "worker": "stage1",
+  "summary": "Kept the statement and normalized semilinear return. Reused the existing finite-stage local-transport normalization and comparison lemmas, then wrote the explicit conjugation and common-stage representative calculations. No new nodes, no Lean writes or compiles.",
+  "blueprint": "Realizes the opening punctual-Frobenius sentence of lem-wf-l2-upper through its rational-stalk-exact dependency: natural point transport and return descend to the literal coefficient-pair category. Also expands the final Frobenius-transport sentence of prop-trf-karoubi-independence.proof.md, without using its trace or perfectness assertions. Searches for point transport, semilinear return and common-stage found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Generic normalized composition/scalar coherence fixes the pullback comparisons used by this point-transport argument; it does not replace the energy-unit route."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic point sections comparison supplies naturality and coefficient unit/tower identities; the energy unit has no alternative point-sections construction."
+   },
+   {
+    "node": "lem-trf-local-frobenius-transport-normalization",
+    "why": "Its finite-stage transport naturality and normalized coefficient equation are used as a tool; the new work here is their explicit descent on all common-stage underlying morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-trf-local-frobenius-transport-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-bc5b40d99",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-bc5b40d99 (reviewer sub-agent of L); spot-checked: Read the whole S1 split of lem-wf-common-stage-point-return @bc5b40d9: 5 steps, 0 new nodes. Statement and stmt_deps are identical to clones/live and side-live; the item is still unsplit there, so no other group has already done it. Step 1: b=Fib_M(a)∘β, with β=φ⁻¹⊗L from lem-weil-point-sections-scalar-extension and a from lem-trf-integral-pullback-comparison-realization; the naturality and tower laws compose correctly. Step 2: lem-trf-local-frobenius-transport-normalization applied with X_0=Y_0, m=n, y=x, Λ=E. Its t equals J of def-weil-local-frobenius-trace (I^[n] followed by the return identification), and its last display is the item's scalar equation with the specified d. No Weil or Tor hypothesis is used. Step 3: A_M=b⁻¹P_M(u)b; the transition law (A_M u)_N=A_N(u_N) follows from the b tower law, and identities and composition hold. Step 4: def-weil-derived-pullback-tensor-hom gives B_M=D⁻¹P(T^n u)D, and the 3-line chain checks. Step 5: descent to the Hom colimit of def-weil-point-fd-qlbar-category. Edge cases checked: n=1, E=M, zero objects and maps, non-invertible u, empty point set, semilinear return only. Source: prop-trf-karoubi-independence.proof.md last sentence plus the lem-wf-l2-upper route; no SGA. Batch-5 flag on lem-trf-local-frobenius-transport-normalization accepted: it is point-transport normalization and coefficient coherence, which neither assumption leaf gives. Its closure reaches no thm-trf trace theorem and no sec-poincare-duality node, only transport, Roos and scalar lemmas plus finiteness results. Seven non-trf batch-5 nodes already reach it (lem-fd-rational-return-block-power, lem-fd-local-frobenius-coefficient-extension, prop-a1-fourier-weight-upper, lem-fd-pullback-weil-return-square, lem-rp-local-frobenius-models-agree, lem-zl-punctual-spectrum-exact-fibre, lem-zl-general-condensed-weil-realization). Advisory 1: the χ-associator vs lem-weil-scalar-extension-composition identification is silent DAG-wide, not specific to this delivery. Advisory 2: the finite-stage clauses of the unchanged statement overlap the trf node and lem-fd-local-frobenius-coefficient-extension. The three declared tool_uses are accurate. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonStagePointReturn",
+  "declaration": "WeilConjectures.commonStagePointReturn",
+  "declarations": [
+   "WeilConjectures.CommonStagePointReturn.pointObjectIso",
+   "WeilConjectures.CommonStagePointReturn.component",
+   "WeilConjectures.CommonStagePointReturn.FiniteNaturality",
+   "WeilConjectures.CommonStagePointReturn.ScalarEquation",
+   "WeilConjectures.CommonStagePointReturn.ScalarCoherence",
+   "WeilConjectures.CommonStagePointReturn.CommonNaturality",
+   "WeilConjectures.CommonStagePointReturn.RepresentativeCompatibility",
+   "WeilConjectures.commonStagePointReturn"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStagePointReturn.lean",
+  "statement": "theorem commonStagePointReturn (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (C : IntegralComparisonSystem.{u} c.l) (_hC : ∀ (E M : Type u) [Field E] [Algebra ℚ_[c.l] E] [FiniteDimensional ℚ_[c.l] E] [Field M] [Algebra ℚ_[c.l] M] [FiniteDimensional ℚ_[c.l] M] (ι : E →ₐ[ℚ_[c.l]] M), IntegralComparisonRealizationCoherence c.l E M ι C) (r : ℕ) (x : D.extensionPoints Y₀ (r + 1) (Nat.succ_pos r)) : CommonStagePointReturn.FiniteNaturality D c Y₀ C r x ∧ CommonStagePointReturn.ScalarEquation D c Y₀ C r x ∧ CommonStagePointReturn.ScalarCoherence D c Y₀ C (localExtensionPoint D Y₀ (r + 1) (Nat.succ_pos r) x) ∧ CommonStagePointReturn.CommonNaturality D c Y₀ C r x ∧ CommonStagePointReturn.RepresentativeCompatibility D c Y₀ C r x",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The source stipulates one normalized comparison family: C and its coherence witness render that datum for all finite coefficient inclusions. Positive exponents are successors. Reuses the published finite-stage return, point functors, coefficient comparisons and literal pair categories. Adds only owning-node component composites and predicates; no new categories, lattices, or Tor restrictions. The direct scheme-power pullback is the specified compositor presentation of the iterated pullback. H2 repair of d43bcd840b0b: the reused coefficient data are now bound by def-fd-local-frobenius-coefficient-data (existing:true in the same public import), not by the coefficient-extension theorem. Its prerequisites cite the landed pullback owner, and its declaration list explicitly includes the underlying normalized rational return recipe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15978bb69",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN d43b. Item diff: stmt_deps only adds new def node def-fd-local-frobenius-coefficient-data (existing:true on LocalFrobeniusCoefficientExtension: fibre/scalar/comparison/pointComparison/returnTransport + LocalFrobeniusTransport.rationalPointIterate/rationalReturn/rationalTransport); lean record; module identical except a comment. New node statement checked against Lean at 15978bb: c^C = theta;Q(c_int);theta^-1;Lh^*theta^-1 (same formula as def-trf-realized-pullback-comparisons), a^C pinned by rationalScalar_existsUnique, I_r recursion, rho = c^-1;eqToIso w;c, J, b = phi^-1;Fib(a), d = a_{g^{r+1}}; pullback cited to landed def-fd-specified-weil-iterate. H12 fields OK; cited owners d341383/cddf0dc are ancestors of head; no competing owner on live/side-live. Statement re-read: FiniteNaturality, ScalarEquation orientation, ScalarCoherence unit/tower, CommonNaturality, RepresentativeCompatibility, r+1, semilinear return, separated finite type; H2 closure via def-weil-finite-coefficient-point (point-fd-qlbar) and def-weil-local-frobenius-trace (derived-pullback-tensor-hom). Sorry-only, docstrings, <=100 cols. Advisory: rationalComposition/rationalScalar duplicate realized-pullback owners (pre-existing). No compile (no change)."
+ }
+}

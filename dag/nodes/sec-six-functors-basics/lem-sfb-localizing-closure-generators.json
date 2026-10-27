@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-localizing-closure-generators",
+ "kind": "statement",
+ "title": "Any representative family generates its localizing closure",
+ "statement": "Let C be a triangulated category with additive integer shifts. Let S be any property of objects, and let L = Loc(S) be the intersection of replete triangulated subcategories closed under existing coproducts and containing S, as in [sk-def-localizing-closure]. Suppose L has the inherited triangulation. Let E be an indexed family in L with an existing coproduct. If every object of S is isomorphic in C to some E_i, then E is a triangulated generating family of L [def-pc-generators]. Neither compactness, thickness, shift stability of S, nor pairwise nonisomorphism of representatives is required.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "def-pc-generators"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraph 2: the shifted left-orthogonal argument for generation of the localizing closure"
+ },
+ "proof": [
+  {
+   "text": "Suppose every map from the coproduct of the E_i to every shift of K in L is zero. Any map from E_i extends to the coproduct by assigning zero on the other summands. Hence every map from E_i to every shift of K vanishes. Representative isomorphisms and the canonical shift comparison of the inclusion L→C show that every map from an S-object to every ambient shift of K vanishes.",
+   "uses": [
+    "def-pc-generators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let P be the shift closure of the singleton K. Its left orthogonal is replete and triangulated. It is closed under every existing coproduct: each map from the coproduct to an object of P is zero because all its injection components are zero. The vanishing just proved says that S lies in this left orthogonal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Minimality of the localizing intersection places K in that left orthogonal. Since K itself lies in P, id_K is zero. Thus K is zero in C, hence also in the full subcategory L. Contrapositively each nonzero K has a nonzero map from the coproduct into some shift, which is the stated generating-family condition.",
+   "uses": [
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-generators",
+  "sk-def-localizing-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraph 2: the shifted left-orthogonal argument for generation of the localizing closure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A family representing every object of a property up to isomorphism generates the localizing closure as a triangulated category by orthogonality",
+   "results": "8 hits for triangulated orthogonal properties, including instIsTriangulatedClosed₂LeftOrthogonal; no localizing-generation theorem. Read the existing complete project proof localizingClosure_generatingFamily, attached here without changing it.",
+   "date": "2026-10-25",
+   "verdict": "no exact Mathlib match; existing project theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightOrthogonal\", \"shiftClosure\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingClosure|IsTriangulatedGeneratingFamily|IsWeakTriangulatedGenerator",
+   "results": "0 Mathlib hits. Local source contains localizingClosure_generatingFamily with the exact statement and complete proof. The item and formal-criterion nodes already cite this missing id. Blueprint generation search finds the Brown unit paragraph 2; the finite-field generation detail adds unrelated compactness and geometric restrictions.",
+   "date": "2026-10-25",
+   "verdict": "existing project theorem attached"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-25",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2: the shifted left-orthogonal argument for generation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.localizingClosure_generatingFamily",
+  "statement": "theorem localizingClosure_generatingFamily\n    {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]\n    (S : ObjectProperty C) [hL : (localizingClosure S).IsTriangulated]\n    {I : Type*} (E : I → (localizingClosure S).FullSubcategory) [HasCoproduct E]\n    (hE : ∀ X : C, S X → ∃ i : I, Nonempty (X ≅ (E i).obj)) :\n    IsTriangulatedGeneratingFamily E",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-25",
+  "note": "Restore the missing node for this already-proved public theorem. Its source and blueprint id were already in the Lean docstring, and the item and formal-criterion nodes already depended on this id. No theorem or proof is duplicated or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T071140-L-106437",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-trf-point-transport-strict-quotient-identities",
+ "kind": "statement",
+ "title": "Strict transition augmentation and chain-map identities",
+ "statement": "For every complex P of completed integral sheaves, the maps u_n of [def-trf-point-transport-strict-quotient-models] satisfy Gamma(t_n) followed by u_n = u_(n+1) followed by Gamma(v_n), and Gamma(r_n) followed by u_n = sigma_P followed by Gamma(theta_n). For every chain map f:P->P', Gamma(f_n) followed by u_n(P') = u_n(P) followed by Gamma(g_n^* f_n). The maps t_n,v_n,r_n,theta_n are the actual coefficient transitions, pulled-back transitions, quotient units and inverse-image reduction comparisons of [def-weil-integral-reduction-tower] and [def-weil-inverse-image-pullback-comparison]. No flatness or constructibility is needed for these strict identities.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6"
+ },
+ "stmt_deps": [
+  "def-trf-point-transport-strict-quotient-models",
+  "def-weil-integral-reduction-tower",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-frobenius-point-transport"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the section formula [lem-trf-point-transport-strict-quotient-sections]. The pullback transition is prescribed on the adjunction-unit generators. Its naturality under the comma-arrow restriction and naturality of the quotient transition give the first identity. For augmentation use the integral sigma formula, the theta formula, restriction naturality of the quotient unit, and its pure-tensor formula. For a chain map use restriction naturality and naturality of the pullback adjunction unit. Equality of sections in each degree implies equality of complex maps.",
+   "uses": [
+    "lem-trf-point-transport-strict-quotient-sections",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-integral-reduction-tower",
+    "def-weil-frobenius-point-transport",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-transport-strict-quotient-sections",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-integral-reduction-tower",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6; E3 compile-time split of the complete proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite Frobenius point transport on quotient sheaf complexes commutes strictly with transition augmentation and chain maps",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq; IsArithFrobAt.arithFrobAt; localCohomology.diagram; AlgHom.IsArithFrobAt.mk_apply; two DoldKan termwise naturality results; CochainComplex.mappingCone.map_δ; AlgHom.IsArithFrobAt.restrict_apply. None gives the specified point sigma/kappa comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryFactors",
+   "results": "0 hits: loogle unknown identifier. The actual local Mathlib ExactFunctor.lean was read and supplies this canonical factor isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "local Mathlib ingredient used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite Frobenius point transport quotient towers compatibility and exact localization factors",
+   "results": "8 hits: AlgHom.IsArithFrobAt.localize, isArithFrobAt_localize and localize_algebraMap; several IsScalarTower localization instances; Submodule.toLocalizedQuotient'_mk. These concern ring localization, not derived point transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors.*naturality",
+   "results": "4 hits in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:47,51 and Ext/Map.lean:69,75. The canonical exact-functor factor naturality is used; the specific strict Frobenius comparison still requires its section formulas.",
+   "date": "2026-10-27",
+   "verdict": "ingredient used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointTransportStrictQuotient",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6",
+   "via": [
+    "lem-trf-integral-point-transport-tower-realization",
+    "lem-trf-point-transport-strict-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointTransportStrictQuotientIdentities",
+  "file": "lean/Sheaf/Paper/PointTransportStrictQuotientIdentities.lean",
+  "declaration": "WeilConjectures.strictQuotientPointMap_identities",
+  "statement": "theorem strictQuotientPointMap_identities :\n    (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (n : ℕ),\n    ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n        ((unrestrictedIntegralTransition l E (Spec (.of D.k)) n).app P) ≫\n        strictQuotientPointMap D l E n P =\n      strictQuotientPointMap D l E (n + 1) P ≫\n        ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n          ((integralOperationsPullbackTransition l E (frobeniusPointIso D).hom n).app P)) ∧\n    (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (n : ℕ),\n    ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n        (unrestrictedTowerUnit l E (Spec (.of D.k)) P n) ≫\n        strictQuotientPointMap D l E n P =\n      frobeniusPointIntegralSigma D l E P ≫\n        ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n          (inverseImageReductionTheta l E (frobeniusPointIso D).hom n P)) ∧\n    (∀ (P P' : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ)\n    (f : P ⟶ P') (n : ℕ),\n    ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n        ((unrestrictedIntegralComplexFunctor l E (Spec (.of D.k)) n).map f) ≫\n        strictQuotientPointMap D l E n P' =\n      strictQuotientPointMap D l E n P ≫\n        ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n          ((integralOperationsPullbackLevel l E (frobeniusPointIso D).hom n).map f))",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4b71a",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261026T194957-L-2608907",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4b71a",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261026T194957-L-2608907",
+  "kind": "interface",
+  "note": "independent cc review: pointTransport_strictQuotient statement byte-identical to clone; 8 moved defs verbatim vs clone (docstring tag only); item has 0 importers; axioms clean (propext/choice/Quot.sound) on /tmp compile of all 5 modules"
+ }
+}

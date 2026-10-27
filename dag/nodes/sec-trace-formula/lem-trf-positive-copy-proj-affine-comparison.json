@@ -1,0 +1,295 @@
+{
+ "id": "lem-trf-positive-copy-proj-affine-comparison",
+ "kind": "statement",
+ "title": "Positive-copy relative Proj recovers an affine morphism",
+ "statement": "Let $h:T\\to S$ be an affine morphism of schemes [pqf-def-affine-morphism] and assume explicitly that $\\mathcal E=h_*\\mathcal O_T$, with its natural commutative $\\mathcal O_S$-algebra structure, is quasi-coherent [def-weil-pbc-quasi-coherent-algebra]. Let $\\mathcal B$ be the graded sheaf algebra with $\\mathcal B_0=\\mathcal O_S$, $\\mathcal B_n=\\mathcal E$ for $n>0$, positive multiplication $a[m]b[n]=(ab)[m+n]$, and degree-zero action through the algebra structure, as in [lem-trf-positive-copy-graded-quotient]. Then there is a canonical isomorphism over $S$\n$$\\theta:\\operatorname{Proj}_S(\\mathcal B)\\xrightarrow{\\sim}T,$$\nwith relative Proj as in [def-nagata-relative-proj]. More precisely, on every affine open $V=\\operatorname{Spec}R\\subseteq S$, write $h^{-1}(V)=\\operatorname{Spec}A$ and $C=R\\oplus\\bigoplus_{n\\geq1}A[n]$ with the above multiplication, and put $t=1_A[1]$. The whole scheme $\\operatorname{Proj}C$ is its standard open $D_+(t)$ [def-pc-proj]. There is an $R$-algebra isomorphism\n$$C_{(t),0}\\xrightarrow{\\sim}A,\\qquad a[m]/t^m\\longmapsto a\\quad(m\\geq1),$$\nwith inverse $a\\mapsto a[1]/t$, using the degree-zero homogeneous localization [def-nagata-homogeneous-localization-degree-zero]. The restriction of $\\theta$ is the standard-chart isomorphism followed by the spectrum map of this inverse ring isomorphism [def-weil-affine-spectrum]. These local isomorphisms and their inverses commute with inclusions of affine opens, including on affine refinements of overlaps, and determine $\\theta$ uniquely. The statements include $A=0$, noninjective $R\\to A$, and arbitrary non-Noetherian bases; $h$ need not be finite.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0B3I, morphisms-lemma-finite-projective: the canonical embedding into P(h_*O_T); explicit graded-quotient verification of this embedding in the returned item, written by the worker. Returned proof Steps 4, 5 and 6: the single chart, coefficient localization isomorphism, affine restriction compatibility and gluing."
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "lem-trf-positive-copy-graded-quotient",
+  "def-nagata-relative-proj",
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=\\operatorname{Proj}_S(\\mathcal B)$ and write $\\pi:P\\to S$. The construction in [lem-trf-positive-copy-graded-quotient], applied to the assumed quasi-coherent algebra $\\mathcal E$, makes $\\mathcal B$ quasi-coherent and identifies its affine section algebras, compatibly with affine restriction. Thus [lemma-nagata-relative-proj-exists] applies and supplies $i_V:\\pi^{-1}(V)\\simeq\\operatorname{Proj}C$ compatible with further restriction. By [pqf-def-affine-morphism], $h^{-1}(V)$ is affine; use its section ring $A$. The equality $\\mathcal E(V)=\\Gamma(h^{-1}(V),\\mathcal O_T)=A$ is the definition of direct image, so its section algebra is exactly the $C$ in the statement, not an algebra requiring an additional comparison.",
+   "uses": [
+    "lem-trf-positive-copy-graded-quotient",
+    "lemma-nagata-relative-proj-exists",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NQ (constructions-lemma-glue-relative-proj) and 01NO (constructions-lemma-proj-inclusion); apply the positive-copy construction to the algebra in Tag 0B3I."
+   }
+  },
+  {
+   "text": "Fix such $V$ and put $t=1_A[1]$. For every $a\\in A$ and $n\\geq1$, multiplication gives $(a[n])^2=t(a^2)[2n-1]$. If a homogeneous prime $\\mathfrak p$ contains $t$, it therefore contains every $a[n]$, hence the irrelevant ideal $C_+$, because its elements are finite sums of positive homogeneous elements. This excludes $\\mathfrak p$ from Proj by [def-pc-proj]. Every point of $\\operatorname{Proj}C$ consequently belongs to $D_+(t)$. This open is the entire open subscheme, not merely a subset with the same closed points.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01M4 (constructions-lemma-standard-open), 01MB (constructions-lemma-proj-scheme); elementary homogeneous-prime calculation for this C."
+   }
+  },
+  {
+   "text": "Write $L=C_{(t),0}$. By [def-nagata-homogeneous-localization-degree-zero], a fraction has numerator in degree equal to its denominator exponent. Its exponent can be made positive by multiplying numerator and denominator by $t$: for degree-zero numerator $r$, the fraction relation gives $r/1=(rt)/t=\\iota(r)[1]/t$, where $\\iota:R\\to A$ is the structure map. This equality uses $rt=\\iota(r)[1]$, not cancellation by $t$. Hence every element is $a[m]/t^m$ with $m\\geq1$. The equality relation in [def-weil-ring-localization-away] says that two such representatives, $a[m]/t^m$ and $b[n]/t^n$, are equal precisely when some $k\\geq0$ kills their cross difference. That difference after multiplication by $t^k$ is $(a-b)[m+n+k]$. This lies in a positive-degree copy of $A$, so it is zero precisely when $a=b$. Conversely, $a=b$ already makes the cross difference zero. Thus the assignment $\\alpha_V(a[m]/t^m)=a$ is well-defined and injective, with no use of injectivity of $\\iota$.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4 (constructions-lemma-standard-open), degree-zero chart ring; fraction equality is Algebra Tag 00CO (algebra-definition-localization)."
+   }
+  },
+  {
+   "text": "The fraction operations in [def-weil-ring-localization-away] give\n$$\\frac{a[m]}{t^m}+\\frac{b[n]}{t^n}=\\frac{(a+b)[m+n]}{t^{m+n}},\\qquad \\frac{a[m]}{t^m}\\frac{b[n]}{t^n}=\\frac{ab[m+n]}{t^{m+n}}.$$\nThe unit is $t/t$, and the image of $r\\in R$ is $\\iota(r)[1]/t$. Therefore $\\alpha_V:L\\to A$ preserves addition, multiplication, the unit and the $R$-algebra structure. Every $a$ is the image of $a[1]/t$. Moreover $a[m]/t^m=a[1]/t$ by the equality calculation in Step 3. It follows that $\\beta_V(a)=a[1]/t$ is the inverse $R$-algebra isomorphism. This proves both requested formulas including the degree-zero structural map. If $A=0$, then $t=0$, so localizing at $t$ gives $L=0$; both displayed maps are the unique maps of zero rings. Thus the argument includes the empty affine scheme without requiring $t$ to be nonzero.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4 (constructions-lemma-standard-open); explicit fraction operations using Algebra Tag 00CO (algebra-definition-localization)."
+   }
+  },
+  {
+   "text": "Since $t$ is homogeneous of degree one, [prop-nagata-proj-standard-open] gives the standard-chart isomorphism $j_V:D_+(t)\\simeq\\operatorname{Spec}L$. By Step 2 its source is all of $\\operatorname{Proj}C$. By [def-weil-affine-spectrum], $\\operatorname{Spec}(\\beta_V):\\operatorname{Spec}L\\to\\operatorname{Spec}A$ is an isomorphism with inverse $\\operatorname{Spec}(\\alpha_V)$. Set $\\theta_V=\\operatorname{Spec}(\\beta_V)\\circ j_V\\circ i_V:\\pi^{-1}(V)\\simeq h^{-1}(V)$. It is over $V$: on the chart the structural map of [def-nagata-affine-proj] is induced by $R\\to L$, $r\\mapsto r/1$, and Step 4 sends this to $\\iota(r)$. Functoriality of Spec identifies its composite to $\\operatorname{Spec}R$ with the given restriction of $h$.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "def-weil-affine-spectrum",
+    "def-nagata-affine-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MB (constructions-lemma-proj-scheme) and 01M4 (constructions-lemma-standard-open), the standard chart and its degree-zero structural map."
+   }
+  },
+  {
+   "text": "For affine opens $W\\subseteq V$, let $u:R\\to R'$ and $v:A\\to A'$ be the section restrictions. The compatibility clause of [lem-trf-positive-copy-graded-quotient] makes the graded restriction $r\\mapsto u(r)$ in degree zero and $a[n]\\mapsto v(a)[n]$ in positive degree; it sends $t$ to $t'=1_{A'}[1]$. By the specified chart restrictions of [def-nagata-relative-proj], the induced chart-ring map is\n$$\\ell_{VW}:L\\to L',\\qquad a[m]/t^m\\mapsto v(a)[m]/(t')^m.$$\nFor each representative, $\\alpha_W\\ell_{VW}(a[m]/t^m)=v(a)=v\\alpha_V(a[m]/t^m)$ and $\\ell_{VW}\\beta_V(a)=v(a)[1]/t'=\\beta_Wv(a)$. These are equalities on every element by Step 3. Applying the functorial Spec construction [def-weil-affine-spectrum] proves that both $\\theta_V$ and $\\theta_V^{-1}$ commute with restriction to $W$. The actual inclusion $h^{-1}(W)\\hookrightarrow h^{-1}(V)$ induces $v$ on sections, so the square compares the required morphisms, not just abstract affine schemes.",
+   "uses": [
+    "lem-trf-positive-copy-graded-quotient",
+    "def-nagata-relative-proj",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NO (constructions-lemma-proj-inclusion) and 01NQ (constructions-lemma-glue-relative-proj); explicit equality of the two coefficient-restriction maps."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-opens-basis], affine opens cover $S$, and every overlap $V\\cap V'$ admits an affine open covering $(W_a)$. Each $W_a$ is contained in both $V$ and $V'$. Step 6 makes $\\theta_V$ and $\\theta_{V'}$ restrict to $\\theta_{W_a}$ on $\\pi^{-1}(W_a)$; these preimages cover $\\pi^{-1}(V\\cap V')$. The equality clause of [lem-weil-pbc-scheme-morphism-gluing] proves equality of the two maps to $T$ on that overlap. The same argument on $h^{-1}(W_a)$ gives overlap equality of the inverse maps to $P$. Applying its existence clause twice glues them to $\\theta:P\\to T$ and $\\eta:T\\to P$. On each $\\pi^{-1}(V)$ the composite $\\eta\\theta$ is $\\theta_V^{-1}\\theta_V=1$, and on each $h^{-1}(V)$ the composite $\\theta\\eta$ is $\\theta_V\\theta_V^{-1}=1$; its equality clause makes these identities global. It also shows $h\\theta=\\pi$, since this holds on every $\\pi^{-1}(V)$, and gives uniqueness with the prescribed local formulas. No affine-intersection, finite-generation, finiteness or Noetherian hypothesis has entered.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NQ (constructions-lemma-glue-relative-proj), 01IT (schemes-lemma-basis-affine-opens), and 01JA (scheme gluing), with Sheaves Tag 00AN (sheaves-lemma-mapping-property-glue)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-positive-copy-graded-quotient",
+  "lemma-nagata-relative-proj-exists",
+  "pqf-def-affine-morphism",
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-ring-localization-away",
+  "prop-nagata-proj-standard-open",
+  "def-weil-affine-spectrum",
+  "def-nagata-affine-proj",
+  "def-nagata-relative-proj",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0B3I (morphisms-lemma-finite-projective), explicit positive-copy graded-algebra verification of its affine Proj embedding; chart and gluing inputs from Constructions Tags 01M4, 01MB, 01NO, 01NQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proj.*(spec|iso)|away.*(iso|equiv)|constant.*graded",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; standard open chart or general Proj structure only, no whole-Proj identification with Spec A or compatibility and global gluing for this algebra. Searched Mathlib/AlgebraicGeometry/ProjectiveSpectrum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization, AlgebraicGeometry.Proj",
+   "results": "2 hits; AlgebraicGeometry.Proj.awayι_toSpecZero, AlgebraicGeometry.Proj.awayι_toSpecZero_assoc; standard open chart or general Proj structure only, no whole-Proj identification with Spec A or compatibility and global gluing for this algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proj of the graded ring R plus copies of an R algebra A in all positive degrees is Spec A, via the single chart of the degree one unit",
+   "results": "8 hits; GradedRing.proj, ProjectiveSpectrum, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj, ProjectiveSpectrum.mk, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.Proj.awayι_toSpecZero, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; standard open chart or general Proj structure only, no whole-Proj identification with Spec A or compatibility and global gluing for this algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme morphism h with direct image algebra E, relative Proj of the graded algebra B_0=O_S and B_n=E for n positive is canonically isomorphic to the source of h",
+   "results": "8 hits; AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj.basicOpenIsoSpec_hom, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq; standard open chart or general Proj structure only, no whole-Proj identification with Spec A or compatibility and global gluing for this algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpenIsoSpec|isIso.*away|away.*isIso|relProj|relativeProj",
+   "results": "17 hits; Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; standard open chart or general Proj structure only, no whole-Proj identification with Spec A or compatibility and global gluing for this algebra. Searched Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine scheme of an algebra A is the projective spectrum of R plus A t plus A t squared and so on, with the degree one copy of the unit invertible on all of Proj; this identification glues over an arbitrary base scheme",
+   "results": "8 hits; AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq; standard open chart or general Proj structure only, no whole-Proj identification with Spec A or compatibility and global gluing for this algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projIsoSpec|projIsoSpecTopComponent|basicOpenIsoSpec",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean. Read Basic.lean:138-195 and Scheme.lean:835-855: projIsoSpec and basicOpenIsoSpec identify one standard open with its localization spectrum; none states the positive-copy coefficient isomorphism, whole-Proj assertion, or relative gluing. Source subdirectory: AlgebraicGeometry/ProjectiveSpectrum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projective spectrum of R plus A in each strictly positive degree is isomorphic to Spec A using the degree one unit chart",
+   "results": "8 hits: ProjectiveSpectrum.mk, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj, ProjectiveSpectrum, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpec. Read Basic.lean:138-195 and Scheme.lean:835-855: projIsoSpec and basicOpenIsoSpec identify one standard open with its localization spectrum; none states the positive-copy coefficient isomorphism, whole-Proj assertion, or relative gluing. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization, AlgebraicGeometry.Proj",
+   "results": "2 hits: AlgebraicGeometry.Proj.awayι_toSpecZero, AlgebraicGeometry.Proj.awayι_toSpecZero_assoc. Read Basic.lean:138-195 and Scheme.lean:835-855: projIsoSpec and basicOpenIsoSpec identify one standard open with its localization spectrum; none states the positive-copy coefficient isomorphism, whole-Proj assertion, or relative gluing. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Proj of the graded algebra with degree zero R and every positive degree equal to an R algebra A is canonically Spec A",
+   "results": "8 hits: AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.Proj. Read Basic.lean:138-195 and Scheme.lean:835-855: projIsoSpec and basicOpenIsoSpec identify one standard open with its localization spectrum; none states the positive-copy coefficient isomorphism, whole-Proj assertion, or relative gluing. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map R to A, adjoining a degree one unit copy of A makes Proj of R plus the strictly positive powers of A t equal to the affine spectrum of A, compatibly under restriction on the base",
+   "results": "8 hits: AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.toFun. Read Basic.lean:138-195 and Scheme.lean:835-855: projIsoSpec and basicOpenIsoSpec identify one standard open with its localization spectrum; none states the positive-copy coefficient isomorphism, whole-Proj assertion, or relative gluing. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-projective-bundle",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Stein-factorization step: the finite morphism S_0 -> S is projective in the EGA/ILO projective-bundle convention, using the pushforward module and affine Proj embedding of Tag 0B3I. Returned proof Steps 4, 5 and 6: the single chart, coefficient localization isomorphism, affine restriction compatibility and gluing.",
+   "via": [
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-positive-copy-proj-affine-comparison",
+  "worker": "stage1",
+  "summary": "Q140 repair of the current landing return at 244dc33233c: reconstructed the retained split on the current shared unsplit record, keeping all current maintainer-owned fields. Re-read all thirteen statement/proof dependencies and checked all fifteen citation excerpts against their present statements. Retained the approved seven-step argument and actual logged searches, and explicitly checked the zero-ring localization in Step 4. Current initial server dry run passed at 1066b07c8c0; final validation follows these changes. No statement change or new nodes.",
+  "blueprint": "Realizes the positive-copy affine comparison created for the Stein-factorization/projective-bundle step of lem-trf-local-term-locality through lem-trf-finite-projective-bundle; specifically the parent returned proof Steps 4-6 named in blueprint.from.place. No unit route or chapter data changed.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Generic relative-Proj existence and compatible affine restrictions; the local-term unit supplies no scheme-construction substitute."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "Generic homogeneous-localization chart theorem for a graded ring; used only at the degree-one element t."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine refinement of base overlaps; no separation assumptions or local-term geometry involved."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic existence and uniqueness of morphisms from compatible open restrictions, applied to both local maps and their inverses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-proj-exists",
+  "prop-nagata-proj-standard-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-44032f41f",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-44032f41f (reviewer sub-agent of L); spot-checked: This is the third delivery of this item. The earlier heads 47e0ba8f7d4 and 244dc33233c were both PASSed and then refused at landing only because the side completion had not been promoted. In live (clones/live) the item is still unsplit with no proof, and there is no repair or re-split note. The delivery has no new nodes. The item JSON diff against 244dc shows two changes: a sentence about the zero ring added to Step 4, and an updated split_report. The added sentence is correct: if A=0 then t=0, so the localization at t and Proj C are both empty or zero, even when R is not zero. The statement, the 7 stmt_deps, the 12 proof_deps and the other six steps are byte-identical. I re-read all 13 cited statements and each one matches live. I re-checked each step. Step 2: (a[n])^2=t·a^2[2n-1], so Proj C=D_+(t). Step 3: r/1 is rewritten as ι(r)[1]/t without cancelling t; the cross difference is (a-b)[m+n+k], so the map is well-defined and injective without needing R→A injective (checked on Z→Z/2). Step 4: the ring operations hold and β is the inverse map. Step 5: the degree-1 standard chart followed by Spec(β) is over V. Step 6: the chart restriction maps given in def-nagata-relative-proj commute with α and β for an arbitrary affine W⊆V. Step 7: affine refinements plus the existence and equality clauses of the gluing lemma give θ, its inverse and uniqueness, with no separatedness assumed. The source is Stacks 0B3I and its finiteness hypothesis is not used. There are no SGA citations, no duplicates, no fixes and no tool_uses. Maintainer note: the side completion needs promotion to end this redelivery loop."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PositiveCopyProjAffineComparison",
+  "declaration": "AlgebraicGeometry.existsUnique_positiveCopyProjAffineComparison",
+  "declarations": [
+   "AlgebraicGeometry.positiveCopyDirectImageAlgebra",
+   "AlgebraicGeometry.PositiveCopyProj.chartUnit",
+   "AlgebraicGeometry.PositiveCopyProj.fraction",
+   "AlgebraicGeometry.existsUnique_positiveCopyProjAffineComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PositiveCopyProjAffineComparison.lean",
+  "statement": "theorem existsUnique_positiveCopyProjAffineComparison {T S : Scheme.{u}} (h : T ⟶ S) [IsAffineHom h] [(positiveCopyDirectImageAlgebra h).toModule.IsQuasicoherent] (B : S.GradedAlgebraData) (e : ∀ (U : S.affineOpens) (n : ℕ), (positiveCopyPiece (positiveCopyDirectImageAlgebra h) n).val.obj (op U.1) ≃ₗ[Γ(S, U.1)] B.grading U n) (hzero : ∀ (U : S.affineOpens) (r : Γ(S, U.1)), (e U 0 r).val = algebraMap Γ(S, U.1) (B.obj U) r) (hmul : ∀ (U : S.affineOpens) (m n : ℕ) (a b : Γ(T, h ⁻¹ᵁ U.1)), (e U (m + n + 2) (a * b)).val = (e U (m + 1) a).val * (e U (n + 1) b).val) (hres : ∀ (U V : S.affineOpens) (i : U ≤ V) (n : ℕ) (a : (positiveCopyPiece (positiveCopyDirectImageAlgebra h) n).val.obj (op V.1)), B.res i (e V n a).val = (e U n ((positiveCopyPiece (positiveCopyDirectImageAlgebra h) n).val.map (homOfLE (X := S.Opens) i).op a)).val) : ∃ (α : ∀ U : S.affineOpens, HomogeneousLocalization.Away (B.grading U) (PositiveCopyProj.chartUnit (positiveCopyDirectImageAlgebra h) B e U).val ≃+* Γ(T, h ⁻¹ᵁ U.1)) (θV : ∀ U : S.affineOpens, Proj (B.grading U) ≅ (h ⁻¹ᵁ U.1).toScheme) (ℓ : ∀ (U V : S.affineOpens) (_ : U ≤ V), HomogeneousLocalization.Away (B.grading V) (PositiveCopyProj.chartUnit (positiveCopyDirectImageAlgebra h) B e V).val →+* HomogeneousLocalization.Away (B.grading U) (PositiveCopyProj.chartUnit (positiveCopyDirectImageAlgebra h) B e U).val), (∀ U : S.affineOpens, Proj.basicOpen (B.grading U) (PositiveCopyProj.chartUnit (positiveCopyDirectImageAlgebra h) B e U).val = ⊤) ∧ (∀ (U : S.affineOpens) (n : ℕ) (a : Γ(T, h ⁻¹ᵁ U.1)), α U (PositiveCopyProj.fraction (positiveCopyDirectImageAlgebra h) B e U n a) = a) ∧ (∀ (U : S.affineOpens) (a : Γ(T, h ⁻¹ᵁ U.1)), (α U).symm a = PositiveCopyProj.fraction (positiveCopyDirectImageAlgebra h) B e U 0 a) ∧ (∀ (U : S.affineOpens) (r : Γ(S, U.1)), α U (HomogeneousLocalization.fromZeroRingHom (B.grading U) _ (e U 0 r)) = h.app U.1 r) ∧ (∀ U : S.affineOpens, (Proj.basicOpen (B.grading U) (PositiveCopyProj.chartUnit (positiveCopyDirectImageAlgebra h) B e U).val).ι ≫ (θV U).hom = (Proj.basicOpenIsoSpec (B.grading U) _ (PositiveCopyProj.chartUnit (positiveCopyDirectImageAlgebra h) B e U).property (by decide : 0 < (1 : ℕ))).hom ≫ Spec.map (CommRingCat.ofHom (α U).symm.toRingHom) ≫ (U.2.preimage h).isoSpec.inv) ∧ (∀ (U V : S.affineOpens) (i : U ≤ V) (n : ℕ) (a : Γ(T, h ⁻¹ᵁ V.1)), ℓ U V i (PositiveCopyProj.fraction (positiveCopyDirectImageAlgebra h) B e V n a) = PositiveCopyProj.fraction (positiveCopyDirectImageAlgebra h) B e U n (T.presheaf.map (homOfLE (h.preimage_mono i)).op a)) ∧ (∀ (U V : S.affineOpens) (i : U ≤ V) (x : HomogeneousLocalization.Away (B.grading V) (PositiveCopyProj.chartUnit (positiveCopyDirectImageAlgebra h) B e V).val), α U (ℓ U V i x) = T.presheaf.map (homOfLE (h.preimage_mono i)).op (α V x)) ∧ (∀ (U V : S.affineOpens) (i : U ≤ V) (a : Γ(T, h ⁻¹ᵁ V.1)), ℓ U V i ((α V).symm a) = (α U).symm (T.presheaf.map (homOfLE (h.preimage_mono i)).op a)) ∧ (∀ (U V : S.affineOpens) (i : U ≤ V), B.relProjFunctor.map (homOfLE i) ≫ (θV V).hom = (θV U).hom ≫ T.homOfLE (h.preimage_mono i)) ∧ (∀ (U V : S.affineOpens) (i : U ≤ V), T.homOfLE (h.preimage_mono i) ≫ (θV V).inv = (θV U).inv ≫ B.relProjFunctor.map (homOfLE i)) ∧ (∃! θ : B.relProj ≅ T, θ.hom ≫ h = B.relProjHom ∧ ∀ U : S.affineOpens, B.relProjι U ≫ θ.hom = (θV U).hom ≫ (h ⁻¹ᵁ U.1).ι)",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing relative-Proj affine-basis presentation is used. Linear equivalences e identify every homogeneous piece with positiveCopyPiece of the actual direct-image algebra; hzero, hmul and hres specify its scalar, positive-product and restriction laws. The localization R-algebra isomorphism is expressed as a ring equivalence plus its scalar equation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e5e3791c",
+  "group": "Q25",
+  "result": "pass",
+  "note": "First S2 delivery; item differs from live only in lean; 7 stmt_dep records identical to live; lean.statement verbatim; only proof is sorry. Each node clause maps to the Lean: IsAffineHom; quasi-coherent instance on the actual Under.mk ⟨h.c⟩ direct-image algebra (no public owner exists; the other copies are private, directImageAlgebraSpace is a ringed space); B : GradedAlgebraData (recorded relProj input) pinned by linear equivalences to positiveCopyPiece, hzero/linearity/hmul fixing all products and hres the restrictions, so B is determined up to unique iso and exists; basicOpen t = ⊤; α ring equiv with a[m]/t^m↦a (m≥1), inverse a[1]/t, R-scalar equation, uniquely pinned; chart equation basicOpenIsoSpec ≫ Spec.map α.symm ≫ isoSpec.inv with correct directions; ℓ pinned on generators; both coefficient squares and both relProjFunctor/T.homOfLE scheme squares; ∃! θ over S with the chart formulas, outer witnesses pinned so no weakening. Edge cases A=0 (t=0), noninjective R→A, empty schemes, non-Noetherian base, nonfinite h, single universe u. Helpers are real data with source/blueprint docstrings; theorem docstring has all 7 steps; report has Worker report and Second reading by Q25. No file changed, so not compiled; the worker reports a clean compile."
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-finite-geometric-purity-factorization",
+ "kind": "statement",
+ "title": "Factor geometric purity into inverse orientation and tensor counit transpose",
+ "statement": "Fix a purity finite setting P and a smooth separated finite-type map f:X->Y of pure relative dimension d between finite-type k-schemes. Put N(M)=E_Y^-1 E_Y(M), with the specified realization unit u_M:M~N(M) [def-pur-finite-geometric-purity-coordinates]. In the fixed coefficient derived category let omega=G(A_Y), and define T(M)=f*N(M) tensor omega. Define a_M:H_d(M)->T(M) as H_d(u_M), then twist reassociation, then 1 tensor Pi_f^-1. For every etale presentation c:C(M0)~N(M), define t_(M,c):T(M)->G(M) as the existing smoothPurityTheta at that presentation followed by G(u_M^-1). For bounded constructible finite-Tor M, the specified Gamma_M equals a_M followed by t_(M,c). For a commuting self-square with maps gX,gY, define S_M:Q(T(M))~f*N(RM) tensor Q(omega) using canonical tensor pullback, Qf*(u_M^-1), the inverse-image square and f*(u_RM). Define e_omega:Q(omega)->omega using ordinary exceptional base change at A_Y, its canonical ordinary unit pullback, and the existing etale/pro-etale dualizing comparison. Neither S nor e_omega is defined using Pi or Gamma.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "Factor geometric purity into inverse orientation and tensor counit transpose"
+ },
+ "stmt_deps": [
+  "def-pur-finite-geometric-purity-coordinates",
+  "def-pur-smooth-purity-map",
+  "thm-pur-diagonal-dualizing-object",
+  "def-pur-composition-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "The given presentation is one of those quantified in existsUnique_smoothPurityTensorMap. Its choose_spec equation identifies the chosen tensor map with (1 tensor Pi inverse) followed by theta.",
+   "uses": [
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Definition of the tensor purity map"
+   }
+  },
+  {
+   "text": "Substitute that equation in geometricPurityMap. The first three factors are exactly a_M, and the remaining theta and exceptional inverse unit are t_(M,c). Associativity yields Gamma=a;t. S is the tensor-pullback isomorphism followed by the square and the realization units. The dualizing exchange is ordinary exceptional base change at the unit transported by the canonical comparison.",
+   "uses": [
+    "def-pur-finite-geometric-purity-coordinates",
+    "def-pur-composition-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Factorization and the comparison definitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "def-pur-finite-geometric-purity-coordinates",
+  "def-pur-composition-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "The two factors (1)--(2), in the fixed-scalar Frobenius coordinates of the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change of the normalized diagonal orientation on finite coefficient sheaves with a roots of unity twist",
+   "results": "IsBaseChange.finsuppPow and MorphismProperty.IsStableUnderBaseChange.diagonal; neither states purity of finite coefficient sheaves.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor counit transpose commutes with compact support base change, exceptional adjunction mate",
+   "results": "CategoryTheory.coev_expComparison and ExponentiableMorphism.pushforwardComp_hom_counit; general mate tools, no normalized finite geometric purity identity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurityTheta|diagonalDualizing|tensorCounit",
+   "results": "No hits. These constructions belong to this project.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteGeometricPurityMate",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Steps 1--2: finite purity square and compact-support counit mate; Factor geometric purity into inverse orientation and tensor counit transpose",
+   "via": [
+    "lem-pur-finite-geometric-purity-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteGeometricPurityFactors",
+  "file": "lean/Sheaf/Paper/FiniteGeometricPurityFactors.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.geometricPurityMap_factors",
+  "statement": "theorem geometricPurityMap_factors\n    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y)\n      (ModuleCat.{u + 1} P.Coefficient)))\n    (hM : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y\n      ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).functor.obj M))\n    (M₀ : Etale.DerivedCategoryModule P.Coefficient Y)\n    (e : (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj M₀ ≅\n        P.geometricPurityRealized Y M) :\n    P.geometricPurityMap f d M hM =\n      P.geometricPurityOrientationFactor f (Y ↘ Spec (.of P.field.k)) d M ≫\n        P.geometricPurityTensorFactor f (Y ↘ Spec (.of P.field.k)) M M₀ e",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.geometricPurityRealized",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityTensorObject",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityTensorFactor",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityOrientationFactor",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityDualizingExchange",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityTensorSquare",
+   "WeilConjectures.PurityFiniteSetting.geometricPurityMap_factors"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (byte-identical); FiniteGeometricPurityCoordinates vs clone FiniteGeometricPurityMate (verbatim extraction + 4 rfl private lemmas + 3 helpers made public); 4 new node lean.statements vs Lean text; two sorry statements read for truth against the parent equation and the published base-change map definitions"
+ }
+}

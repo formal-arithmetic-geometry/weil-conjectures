@@ -1,0 +1,110 @@
+{
+ "id": "def-pur-affine-ordered-counit-data",
+ "kind": "definition",
+ "title": "Canonical ordinary source descent and ordered counit coordinates",
+ "statement": "Fix the finite purity setting [def-pur-conventions], a Noetherian scheme $Y$ over its field, and an ordinary coefficient complex $K$. For the ordered affine tower [def-pur-affine-ordered-integration-data], construct its canonical source-descent isomorphism by dependent recursion: at rank zero use the inverse tensor-unit trace and identity pullback; at rank $d+1$ use affine-line descent, shifted Tate pullback, tensor associativity and inverse-image composition. Uniqueness is equality of the hom components. Compose this with the canonical tensor-pullback and coefficient-pullback isomorphisms to obtain the coefficient source on the tower itself. On bounded finite-Tor $K$, transport the actual ordered adjunction counit by the normalized bounded-below compact-support comparison. For any compactifiable $f:X\\to Y$, coefficient $W$, source $J$, source isomorphism $e:J\\cong f^*K\\otimes W$, counit $z:Rf_!J\\to K$ and trace $t:Rf_!W\\to A_Y$, define its coefficient-counit equation as $\\operatorname{PF}_f\\,Rf_!(e^{-1})\\,z=(1_K\\otimes t)\\rho$. All maps retain their original constructions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph, ordered affine-space integration and canonical reassociations; expanded ordered-transpose proof Steps 5 and 6."
+ },
+ "stmt_deps": [
+  "def-pur-affine-ordered-integration-data",
+  "def-pur-affine-space-comparison",
+  "lem-amb-affine-space-top-trace",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-asd-finite-etale-twist-line"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "One hit: CategoryTheory.Adjunction.comp_counit_app in Mathlib.CategoryTheory.Adjunction.Basic. It expands the composite counit but does not identify the normalized geometric projection or source-descent maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient counit of the identity adjunction is tensor with its unit trace and the counit of composed adjunctions propagates this formula by induction",
+   "results": "Eight hits, including Adjunction.comp_counit, comp_counit_app, id_counit and monoidal counit facts. These are abstract identities, without the canonical compact-support, finite Tate and coefficient-descent comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionMap_comp|projection.*composition|ordinary.*counit",
+   "results": "Five Mathlib hits in symbolic dynamics, tactic simps, Dold-Kan and transfinite composition; no compact-support projection or finite coefficient counit formula. Project search found the existing composite-counit, ordinary projection-composition and ordered-affine construction modules, reused here.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOrderedIntegrationTransposes",
+  "date": "2026-10-26",
+  "group": "H7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Final paragraph, ordered affine-space integration and canonical reassociations; expanded ordered-transpose proof Steps 5 and 6.",
+   "via": [
+    "lem-pur-affine-ordered-integration-transposes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineOrderedCounitData",
+  "file": "lean/Sheaf/Paper/AffineOrderedCounitData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinarySourceDescent",
+  "statement": "def ordinarySourceDescent (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (t : Etale.OrdinaryFiniteTwistTransport A N hA)\n    (Y : Scheme.{u}) (hY : IsUnit (N : Γ(Y, ⊤)))\n    (K : Etale.DerivedCategoryModule A Y) : (d : ℕ) →\n    (Etale.affineTraceRight A N hA Y d).obj K ≅\n      (Etale.ordinaryFinitePullback A (affineTraceProjection Y d)).obj\n        (((Etale.derivedTensor (ModuleCat.{u + 1} A) Y).obj K).obj\n          (Etale.affineLinearBaseCoefficient A N hA Y d))",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.identityPullbackSource",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinaryZeroTensorTrace_isIso",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinaryDescentZeroRaw",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinaryDescentStepRaw",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinarySourceDescent_existsUnique",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinarySourceDescent",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinarySourceIsoFixed",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinarySourceIso",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinaryCompactComparison",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinarySource_plus",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.ordinaryCounit",
+   "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.OrdinaryCounitEquation"
+  ],
+  "note": "Verbatim relocation of the item construction prefix from pullback_plus through OrdinaryCounitEquation. All public names, signatures, attributes, bodies and already proved lemmas are unchanged; the item publicly reexports this module."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-61915",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261026T222713-L-684473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-61915",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261026T222713-L-684473",
+  "kind": "interface",
+  "note": "independent cc review: delivered AffineOrderedCounitData body vs published item lines 36-372 (verbatim); new zero/successor statements vs the d=0 case and the d→d+1 step of the published ordinary_counit_formula; node lean.statement vs Lean signatures; 4 delivered modules + 4 direct importers compiled together in a sandbox (all OK); #print axioms"
+ }
+}

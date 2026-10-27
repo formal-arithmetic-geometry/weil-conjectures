@@ -1,0 +1,547 @@
+{
+ "id": "lem-per-regular-pullback-unresolved-strata",
+ "kind": "statement",
+ "title": "Regular pullback of unresolved sets and lowest codimension strata",
+ "statement": "Let $h:Y\\to X$ be a regular morphism between reduced Noetherian quasi-excellent schemes [def-pc-reduced-scheme, pqf-def-locnoeth, def-exc-excellent-ring], meaning flat [def-weil-flat-morphism] with geometrically regular fibres: for every $x\\in X$ and every finite extension $k'$ of $\\kappa(x)$ the scheme $Y_x\\times_{\\kappa(x)}\\operatorname{Spec}k'$, with $Y_x$ the fibre [def-pc-scheme-fibre], is regular. Write $c_X(x)=\\dim\\mathcal O_{X,x}$. Regular morphisms, including localizations and their base changes, preserve reducedness under base change and satisfy $Y_{\\mathrm{sing}}=h^{-1}(X_{\\mathrm{sing}})$, where singular means not regular [def-weil-regular-scheme]. For a finite ordinary blowup tower $R$ on $X$ with coherent centers [def-nagata-global-blowup, pqf-def-coherent], let $T(R)$ be the union of the images in $X$ of the singular loci of its terminal scheme and all its centers. This set is closed. The contracted pullback tower $h^*R$ satisfies $T(h^*R)=h^{-1}T(R)$.\n\nLet $Z\\subset X$ be closed, with no point of height less than $r$. Its height-$r$ points form a finite set $S$ of generic points of components of $Z$. Put $C=\\overline S$ with its reduced scheme structure. Then the height-$r$ points of $h^{-1}Z$ are exactly the generic points of $h^{-1}C$, and their reduced closure is $C\\times_XY$. A generic point $y$ of $h^{-1}C$ mapping to $s\\in S$ has $c_Y(y)=r$ and the local map $\\mathcal O_{X,s}\\to\\mathcal O_{Y,y}$ is regular. More generally a reduced center in a scheme proper over $X$ [def-weil-proper-morphism], whose image has pure codimension $e$ and which is schematically dense over the generic points of that image (its functions are determined on the local schemes there), has the same properties after pullback to $Y$, unless it becomes empty.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "§§2.1.8--2.1.10 and 4.1.1--4.1.3, and §4.3 functoriality paragraph, printed pp.7--8,26--27,31; reduced regular base change and flat height formula underlying the lowest-stratum assertion; Temkin arXiv:0904.1592v2, read online 2026-10-24; archival copy WANTED. No Stacks tag states this combined assertion."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-exc-excellent-ring",
+  "def-weil-regular-scheme",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-proper-morphism",
+  "def-per-resolution-strata",
+  "def-per-regular-scheme-morphism",
+  "def-trf-ordinary-resolution-rule",
+  "def-weil-pbc-g-ring",
+  "def-per-unresolved-strata-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Work in the Noetherian setting of the statement. On affine charts, flatness is equivalent to flatness of the coordinate-ring maps, by [lem-weil-pbc-flat-morphism-affine-criterion]. Their fibres are localizations and quotients of Noetherian rings, hence Noetherian; the assumed finite-extension test says precisely that these maps are regular. [lem-weil-pbc-regular-local-maximal] gives regularity of every induced stalk map. [lem-weil-pbc-localization-regular] also covers arbitrary localizations, including the empty localization. For every finite-type base change, [lem-weil-pbc-regular-base-change] and the same local criterion give regularity on affine charts and stalks. These are all the base changes used for the centers, tower schemes and reduced closed subsets below; no finite-type assumption is made on h itself.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-regular-local-maximal",
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-regular-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07C0, 07C1; localization argument in 07PT; affine flatness criterion 01U5 (lemma-flat-characterize). Agent assembly of the local interfaces for Temkin §2.1.8."
+   }
+  },
+  {
+   "text": "For y over x put $A=\\mathcal O_{X,x}$ and $B=\\mathcal O_{Y,y}$. These are Noetherian local rings, the map is local and flat by [def-weil-flat-morphism], and $B/\\mathfrak m_xB$ is the local ring of the regular fibre by [lem-sbc-scheme-fibre-stalk-quotient]. If A is regular, [lem-weil-pbc-flat-over-regular-with-regular-fibre] makes B regular. Conversely, if B is regular, [lem-weil-pbc-flat-under-regular] makes A regular. Thus y is singular exactly when x is singular. The argument requires neither reducedness nor quasi-excellence; in particular it applies to nonreduced centers and to every Noetherian regular base change from Step 1.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "lem-weil-pbc-flat-under-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 031E and 00OF, with Schemes 0HA1; proves Temkin §2.1.10 without a finite-type hypothesis."
+   }
+  },
+  {
+   "text": "Every regular local ring is a domain by [lem-sc-regular-local-domain], hence reduced (if a nonzero element had zero nth power, repeated use of the absence of zero divisors would give a contradiction). Applied after each finite extension of a fibre field, [lem-weil-pbc-prime-localizations-jointly-injective] therefore says that each affine fibre algebra is reduced after every finite purely inseparable extension. [lem-trf-geometric-reducedness-finite-inseparable-test] upgrades this to every field extension, without finite generation. Consequently all field-valued fibres of h are reduced. Now [lem-sfb-flat-geometrically-reduced-pullback] says that the pullback of any reduced locally Noetherian X-scheme is reduced. This proves reducedness under base change in the stated Noetherian setting and will apply to C, reduced images, and reduced centers. Flatness after arbitrary base change is supplied by [lem-weil-pbc-flat-morphism-base-change].",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-prime-localizations-jointly-injective",
+    "lem-trf-geometric-reducedness-finite-inseparable-test",
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NP, 00HN and 030V; Morphisms 01U9. The final reduced-pullback input is the existing Mathlib leaf lem-sfb-flat-geometrically-reduced-pullback."
+   }
+  },
+  {
+   "text": "Inductively [lem-per-reduced-noetherian-blowup-geometry] makes every scheme in the finite tower reduced Noetherian and of finite type over X. The centers are closed subschemes of these Noetherian schemes, hence finite type and Noetherian, even when nonreduced. [lem-per-quasi-excellent-finite-type-stability] makes both tower schemes and centers quasi-excellent. Their regular loci are open: on each affine chart apply the J-2 clause of [def-exc-excellent-ring], then [lem-trf-regular-locus-affine-chart-gluing]. Thus their singular loci are closed. Each blowup is proper by [thm-nagata-global-blowup-proper], and composites are proper by [lem-weil-pbc-proper-composition]; centers are proper over X by [lem-weil-pbc-closed-immersion-proper]. By universal closedness in [def-weil-proper-morphism], the images in X of the singular loci of the terminal scheme and all centers are closed. Their finite union $T(R)$ is closed.",
+   "uses": [
+    "lem-per-reduced-noetherian-blowup-geometry",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "def-exc-excellent-ring",
+    "lem-trf-regular-locus-affine-chart-gluing",
+    "thm-nagata-global-blowup-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU and J-2 definition 07P7; Divisors 0808, 02NS; Morphisms 01W1, 01W3 and 01W5. Agent assembly for Temkin §4.1.1."
+   }
+  },
+  {
+   "text": "At each stage pull back its coherent ideal along the flat projection of [lem-weil-pbc-flat-morphism-base-change]. The comparison defined in [def-nagata-blowup-flat-base-change-map] is an isomorphism by [thm-nagata-blowup-flat-base-change]. Induction identifies the entire uncontracted pullback tower and each of its centers with their ordinary fibre products over X. The projections to the original tower schemes and centers are regular by Step 1, since those schemes are finite type over X. Step 2 identifies their singular loci with inverse images. Contracting removes stages whose pulled-back center is empty: its ideal is the unit ideal, invertible, so the blowup is an isomorphism by [cor-nagata-blowup-cartier-iso]. Such a center has empty singular locus; deleting the stage changes neither the terminal scheme nor any other center up to the displayed identifications.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "cor-nagata-blowup-cartier-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805 (lemma-flat-base-change-blowing-up) (blowing up and flat base change); Temkin §§2.2.5 and 4.3, contracted blowup sequences. Existing Nagata comparison supplies the actual isomorphism."
+   }
+  },
+  {
+   "text": "For each proper tower scheme or center P over X, let E be its closed singular set, and I its closed image in X. Give E and I their reduced induced structures by [lem-weil-pbc-reduced-induced-closed-subscheme]. The map $E_{\\mathrm{red}}$ to X factors through $I_{\\mathrm{red}}$ by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], and $E_{\\mathrm{red}}\\to I_{\\mathrm{red}}$ is surjective on points by the definition of I. After base change to Y it is still surjective by [lem-weil-pbc-surjective-base-change]. Therefore the image of $E_{\\mathrm{red}}\\times_XY$ in Y is exactly $h^{-1}I$. Its support in $P\\times_XY$ is precisely the inverse image of E (on affine charts both are the zero set of the extended ideal). Step 2 identifies this support with the singular locus there. Taking the finite union over the terminal scheme and centers, then applying Step 5 to remove empty centers, proves $T(h^*R)=h^{-1}T(R)$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1; Schemes 01J3 and 0356. Explicit proper-image base-change argument for Temkin §4.3."
+   }
+  },
+  {
+   "text": "Give Z its reduced induced structure [lem-weil-pbc-reduced-induced-closed-subscheme]. It has finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components], each with a unique generic point by [lem-sc-scheme-sober]. Strict specialization increases height: in an affine neighborhood containing the special point, both points are primes, and a maximal-length chain ending at the smaller prime extends by the strict inclusion. Such a finite maximal length exists by [lem-trf-noetherian-prime-finite-height]. If x in Z has height r, a generic point z of any component containing x has height at least r by hypothesis; hence x cannot be a strict specialization of z. Thus x=z. Conversely exactly the component generic points of height r belong to S. Hence S is finite and C is the finite union of their components, with the reduced structure just cited. The empty S and $r=0$ cause no exception.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-scheme-sober",
+    "lem-trf-noetherian-prime-finite-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BBZ (finite height); Properties 0BA8 and Schemes 01IS, 01J3. Agent prime-chain argument for the lowest-stratum assertion in Temkin §4.3."
+   }
+  },
+  {
+   "text": "Here is the generic-point calculation used for C and later for the reduced image D of a center. For any reduced closed D in X, let $D_Y=D\\times_XY$, which is reduced by Step 3 and Noetherian since closed in Y. Its projection to D is flat by [lem-weil-pbc-flat-morphism-base-change]. On affine charts it is a flat ring map by [lem-weil-pbc-flat-morphism-affine-criterion]. If a minimal prime q of $D_Y$ contracted to a nonminimal prime p of D, choose $\\mathfrak p^{\\prime}\\subsetneq\\mathfrak p$. [lem-sc-flat-going-down] would give $\\mathfrak q^{\\prime}\\subsetneq\\mathfrak q$ over p', impossible. Thus a generic point of $D_Y$ maps to a generic point s of D, and is generic in its fibre. Conversely, if q is fibre-generic over a minimal p of D, any q' contained in q contracts to p (by minimality of p); a strict inclusion would remain a strict inclusion after taking the fibre, contradicting fibre-genericity. Thus q is minimal in $D_Y$. The generic points of $D_Y$ are exactly the fibre generic points over the generic points of D.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS. Written-out minimal-prime consequence of going down; no openness or finite-presentation hypothesis is used."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-height-formula] to affine charts of h (flat by [lem-weil-pbc-flat-morphism-affine-criterion]), and identify the fibre stalk using [lem-sbc-scheme-fibre-stalk-quotient]. It gives $c_Y(y)=c_X(x)+\\dim\\mathcal O_{Y_x,y}$. For a generic point of $C_Y$, Step 8 gives $x=s\\in S$ and a fibre generic point, whose local dimension is zero because there is no strictly smaller prime. Hence $c_Y(y)=r$. Conversely if y above Z has height r, the same formula, $c_X(x)\\geq r$, and nonnegativity of the fibre dimension force $c_X(x)=r$ and fibre dimension zero. Thus x is in S by Step 7 and y is fibre-generic, hence generic in $C_Y$ by Step 8. This identifies the required sets. A closed Noetherian scheme is the union of its components, so $C_Y$ is the closure of these generic points. It is reduced by Step 3; uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies it with the reduced closure. The local map at every such y is regular by Step 1.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON, Schemes 0HA1 and 01J3. This uses local heights only, not global finite dimension or catenarity."
+   }
+  },
+  {
+   "text": "For the final clause write W for the reduced center, closed in P proper over X. Then W is proper over X by [lem-weil-pbc-closed-immersion-proper], hence finite type and Noetherian by [def-weil-proper-morphism] and [lem-per-quasi-excellent-finite-type-stability], and its image D is closed by [def-weil-proper-morphism]. Endow D with its reduced induced structure [lem-weil-pbc-reduced-induced-closed-subscheme]; W factors through it by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme]. Write E for the preimage in W of the generic points of D. The assumed schematic density implies that E is topologically dense: otherwise its proper reduced closed closure would agree with W on every indicated local scheme, contradicting schematic density: over each generic s of the reduced D, its local ring is a field by [lem-weil-pbc-reduced-noetherian-total-ring-fractions], so these restrictions of W and its reduced closure are reduced localizations with the same support. E is stable under generalization, since generic points of D have no strict generalizations in D. Every generic point w of W belongs to E: the complement of all other components is an open neighborhood of w meeting only its component, using finiteness [lem-weil-pbc-noetherian-finitely-many-components]; density gives a point of E there, which generalizes to w. Thus every generic point of W maps to a generic point of D.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-per-quasi-excellent-finite-type-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 and 0356; Morphisms 01W5; Temkin §2.1.6 and §4.1.3. Explicit use of the assumed schematic density, not an inference from pure codimension alone."
+   }
+  },
+  {
+   "text": "The factor W to D is surjective. By [lem-weil-pbc-surjective-base-change], the image of $W_Y=W\\times_XY$ is exactly $D_Y$. By Step 3 both $W_Y$ and $D_Y$ are reduced; they are Noetherian by [lem-per-quasi-excellent-finite-type-stability] because $W_Y$ is closed in the finite-type Y-scheme $P\\times_XY$. Moreover $W_Y$ is proper over Y by [lem-weil-pbc-proper-base-change]. Pure codimension e of D means all its generic points have X-height e; every other point has at least this height by the prime-chain argument of Step 7. Apply Steps 8 and 9 with D in place of C: all generic points of $D_Y$ have Y-height e. Thus its image has pure codimension e. If $W_Y$ is empty the assertion has its stated exception; if not, $D_Y$ is nonempty by this image equality.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-per-quasi-excellent-finite-type-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S1 and 01W4. The height computation is the one already established in Steps 7--9; Temkin §4.1.3 and §4.3."
+   }
+  },
+  {
+   "text": "Let w' be any generic point of $W_Y$. The flat projection $W_Y$ to W ([lem-weil-pbc-flat-morphism-base-change]) sends it to a generic point w of W by precisely the minimal-prime going-down argument of Step 8; on charts use [lem-weil-pbc-flat-morphism-affine-criterion] and [lem-sc-flat-going-down]. By Step 10 the image s of w is generic in D. The point w' is still generic in $W_s\\times_{\\kappa(s)}Y_s$: a strict generalization there would also be one in $W_Y$ (in affine coordinates the fibre primes are primes containing the extended base prime, localized away from that prime). The projection of this fibre product to $Y_s$ is flat: every $\\kappa(s)$-vector space is flat since every short exact sequence of vector spaces splits, and base change is flat by [lem-weil-pbc-flat-morphism-base-change]. Going down again makes the image y of w' generic in $Y_s$. Step 8 now says y is generic in $D_Y$. Therefore the preimage in $W_Y$ of the generic points of $D_Y$ contains every generic point of $W_Y$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS used twice, with Morphisms 01U9. Agent explicit fibre argument establishing the density needed by Temkin §4.1.3 after regular base change."
+   }
+  },
+  {
+   "text": "On every affine open $\\operatorname{Spec}B$ of the reduced Noetherian scheme $W_Y$, [lem-weil-pbc-reduced-noetherian-total-ring-fractions] identifies $Q(B)$ with the product of $B_{\\mathfrak q}$ over its minimal primes. The map B to $Q(B)$ is injective: by [def-weil-pbc-module-localization], $b/1=0$ implies $ub=0$ for a nonzerodivisor u, hence $b=0$. Consequently functions are determined by their germs at these generic points. Step 12 puts all these points over the generic points of $D_Y$, so functions are determined on the local schemes over those generic image points. Equivalently, an ideal sheaf vanishing on all the indicated local schemes vanishes on every affine open by this injection; no proper closed subscheme can agree there. This is the required schematic density. Together with Step 11 it gives the final equicodimensional-center assertion; the regularity of the pullback projection and its local maps is already Step 1, since W and P are finite type over X. This also explains why reducedness of the center, unlike for the unresolved-set calculation, is essential.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02LX and 00EU, localization definition 07JZ; Temkin §§2.1.6 and 4.1.3. Explicit detection of functions finishes the schematic-density claim."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-regular-base-change",
+  "def-weil-flat-morphism",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-per-reduced-noetherian-blowup-geometry",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "def-exc-excellent-ring",
+  "lem-trf-regular-locus-affine-chart-gluing",
+  "thm-nagata-global-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-proper-morphism",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "cor-nagata-blowup-cartier-iso",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-sober",
+  "lem-trf-noetherian-prime-finite-height",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent assembly of Tags 07C0, 07C1, 07QU, algebra.tex Tags 00OF, 031E, 030V, 00HS, 00ON, 02LX, and the existing DAG interfaces; reconstructs Temkin §§2.1.8--2.1.10, 4.1.1--4.1.3 and §4.3, whose archival copy is WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-per-regular-pullback-unresolved-strata: Flat geometrically regular morphisms preserve reduced centers schematic density and codimension of generic fibre points",
+   "results": "{\"t\": \"2026-10-24T02:51:55Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-regular-pullback-unresolved-strata: Flat geometrically regular morphisms preserve reduced centers schematic density and codimension of generic fibre points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\"], \"digest\": \"5b543736f7076ebc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*(singular|reduced|codimension)|singularLocus",
+   "results": "{\"t\": \"2026-10-24T02:51:56Z\", \"tool\": \"grep\", \"query\": \"regular.*(singular|reduced|codimension)|singularLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\"",
+   "results": "{\"t\": \"2026-10-24T02:51:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.ReducibilityHints.isRegular\", \"Lean.PrettyPrinter.Delaborator.ParamKind.isRegularExplicit\", \"IsRegular\", \"IsRegular.left\", \"IsRegular.right\", \"IsRegular.mk\", \"isRegular_iff\", \"IsRegular.all\"], \"digest\": \"c3fa31260b4cc960\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-regular-pullback-unresolved-strata: Regular base change preserves the singular locus and minimal codimension components of a closed subset",
+   "results": "{\"t\": \"2026-10-24T02:51:58Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-regular-pullback-unresolved-strata: Regular base change preserves the singular locus and minimal codimension components of a closed subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.Scheme.Pullback.range_map\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\"], \"digest\": \"226f4fc6f711d0cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-regular-pullback-unresolved-strata: Flat geometrically regular morphisms preserve reduced centers schematic density and codimension of generic fibre points",
+   "results": "{\"t\": \"2026-10-24T02:51:59Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-regular-pullback-unresolved-strata: Flat geometrically regular morphisms preserve reduced centers schematic density and codimension of generic fibre points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"64eb05f527eb1199\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "singularLocus|regular.*(singular|codimension)|unresolved",
+   "results": "{\"t\": \"2026-10-24T03:47:19Z\", \"tool\": \"grep\", \"query\": \"singularLocus|regular.*(singular|codimension)|unresolved\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned results; none states the combined regular-morphism, unresolved-tower and minimal-height-stratum assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat geometrically regular morphism the inverse image of the singular locus equals the singular locus and minimal height strata pull back",
+   "results": "{\"t\": \"2026-10-24T03:47:19Z\", \"tool\": \"leansearch\", \"query\": \"For a flat geometrically regular morphism the inverse image of the singular locus equals the singular locus and minimal height strata pull back\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.Flat.stalkMap\", \"Algebra.smoothLocus_comap_of_isLocalization\", \"AlgebraicGeometry.Flat.flat_appLE\", \"RingHom.Flat.generalizingMap_comap\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.IsSmooth.recOn\"], \"digest\": \"46d34cc8083b3ddd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned results; none states the combined regular-morphism, unresolved-tower and minimal-height-stratum assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsReduced",
+   "results": "{\"t\": \"2026-10-24T03:47:19Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1\", \"AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents\"], \"digest\": \"a38b4fa92fd402bf\"}",
+   "date": "2026-10-24",
+   "verdict": "partial match only: the four reduced-pullback results supply only reducedness, not singular loci, blowup towers or heights. Read Geometrically/Reduced.lean:109-131; reuse the existing leaf lem-per-flat-geometrically-reduced-pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular base change preserves singular loci and lowest codimension components of a closed subset in a Noetherian scheme",
+   "results": "{\"t\": \"2026-10-24T03:47:20Z\", \"tool\": \"leanfinder\", \"query\": \"Regular base change preserves singular loci and lowest codimension components of a closed subset in a Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"69e0b5aa3b88045f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned results; none states the combined regular-morphism, unresolved-tower and minimal-height-stratum assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unresolved set of a blowup sequence is closed and commutes with regular morphisms; flat local dimension formula at generic points",
+   "results": "{\"t\": \"2026-10-24T03:47:21Z\", \"tool\": \"leanfinder\", \"query\": \"Unresolved set of a blowup sequence is closed and commutes with regular morphisms; flat local dimension formula at generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"c4b7a0fe8242bc0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned results; none states the combined regular-morphism, unresolved-tower and minimal-height-stratum assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-codimension-resolution-improvement",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, via ordinary characteristic-zero resolution: §§2.1.8--2.1.10 and 4.1.1--4.1.3, and §4.3 functoriality paragraph, printed pp.7--8,26--27,31; reduced regular base change and flat height formula underlying the lowest-stratum assertion",
+   "via": [
+    "lem-per-codimension-resolution-improvement",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-pullback-unresolved-strata",
+  "worker": "stage1",
+  "summary": "Q146: supplied a complete 13-step proof using existing DAG nodes only. Checked Temkin online, Stacks sources, every cited statement, Lean absence and logged Mathlib results. Separated stalk regularity, reduced base change, proper singular-image pullback, lowest-height prime calculation, and the twice-going-down argument plus generic-stalk injection for schematic density. No change to the mathematical statement; no new nodes, no Lean edits or compilation.",
+  "blueprint": "Realizes ancestor lem-per-artin-gabber-affine-curve proof Step 3 through the existing resolution/purity dependency chain recorded in blueprint.from.via, specifically regular pullback of the unresolved set and the lowest-codimension centers in lem-per-codimension-resolution-improvement. Latest blueprint searched; no same-statement blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Translate the given scheme flatness to chart ring flatness for going down and height formulas. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-maximal",
+    "why": "Pass between regular affine maps and regular stalk maps. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-regular",
+    "why": "Include arbitrary localizations in the regular-morphism assertion. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Regularity of the finite-type center and tower base changes. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Identify the closed fibre ring of a local morphism with its scheme-fibre stalk. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "why": "Ascend regularity of local rings along the regular map. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "Descend regularity of local rings along the flat local map. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Obtain reducedness of regular finite-extension fibres. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-prime-localizations-jointly-injective",
+    "why": "Detect reducedness of the affine fibre algebra at all primes. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-trf-geometric-reducedness-finite-inseparable-test",
+    "why": "Upgrade the finite purely inseparable reducedness test to every field extension. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Flat projections for the tower, closed image and center fibre products. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-trf-regular-locus-affine-chart-gluing",
+    "why": "Translate J-2 affine regular loci into closed singular sets of schemes. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Properness of each ordinary coherent blowup. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Properness of the composites in a finite blowup tower. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Centers closed in proper schemes are proper over the base. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "def-nagata-blowup-flat-base-change-map",
+    "why": "Specify the actual flat blowup comparison used by its isomorphism theorem. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Identify each pulled-back blowup with the blowup of the pulled-back ideal. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "Empty centers give identity blowups in the contracted sequence. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Construct reduced closed images and closures and use their uniqueness. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Factor a reduced source through its reduced closed image. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Show that proper closed images pull back as sets using a surjection onto the image. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Finiteness of the height-r generic set and of components of a center. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Existence and uniqueness of the generic point of each component. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-trf-noetherian-prime-finite-height",
+    "why": "Strict specialization increases local height without assuming globally bounded dimension. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Generic points contract to generic points under the flat projections. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Compute the ambient height of a fibre generic point. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Properness of the pulled-back center. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Detect functions of the reduced center at its generic stalks. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   },
+   {
+    "node": "def-weil-pbc-module-localization",
+    "why": "Prove injectivity of localization at the nonzerodivisors directly. This is a general algebra/geometry tool absent as a statement of this unit; it does not replace the Fourier/perverse or resolution route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-regular-base-change",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-trf-regular-locus-affine-chart-gluing",
+  "thm-nagata-global-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "cor-nagata-blowup-cartier-iso",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-sober",
+  "lem-trf-noetherian-prime-finite-height",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-weil-pbc-module-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-89302dd07",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-89302dd07 (reviewer sub-agent of L); spot-checked: Read the item's 13-step proof and the statements of all 35 proof_deps; there are no new nodes. The statement, stmt_deps, source and blueprint fields are identical to the base. The steps check out. Steps 1-2: regularity ascends and descends along the local maps (07C0/07C1, 031E/00OF). Step 3: reducedness under base change via 00HN, 030V and the Mathlib leaf. Steps 4-6: T(R) is closed and T(h^*R)=h^{-1}T(R), using flat blowup base change, Cartier contraction of empty centers and surjective base change. Steps 7-9: lowest-height strata, via finite height, two-way flat going down and the 00ON height formula. Steps 10-13: the equicodimensional center, via a density argument from schematic density, base change of the image, a second going-down in W_s x Y_s and total fractions 02LX. Edge cases checked: empty sets, r=0, A^1_k over k, zero and unit ideals, nonreduced centers. Batch 5: the cited trf nodes 030V, 07R4 and 0BBZ, and the trf chart lemmas reached through 07QU, are generic algebra. Their closures reach no trace-formula, Poincare, sk- or nt- theorem, so they are accepted. Artin-Gabber 2026-10-19 note: the item is reached through the sfb Gabber-modification chain, not artin-gabber. The flagged nodes are ordinary algebra, and quasi-excellent-finite-type-stability (07QU, no live equivalent) is accepted at steps 4, 10 and 11. FIX: Step 3 and proof_deps now cite the live identical Mathlib leaf lem-sfb-flat-geometrically-reduced-pullback instead of the dropped duplicate lem-per-flat-geometrically-reduced-pullback. Maintainer note: the inherited blueprint.from still names the artin-gabber ancestor with dropped Q144 nodes in via.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularPullbackUnresolvedStrata",
+  "declaration": "AlgebraicGeometry.ResolutionStrata.regular_pullback_geometry",
+  "declarations": [
+   "AlgebraicGeometry.ResolutionStrata.regular_pullback_geometry",
+   "AlgebraicGeometry.ResolutionStrata.unresolvedSet_isClosed_and_regular_pullback",
+   "AlgebraicGeometry.ResolutionStrata.lowestCodimensionStrata_regular_pullback",
+   "AlgebraicGeometry.ResolutionStrata.equicodimensionalCenter_regular_pullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularPullbackUnresolvedStrata.lean",
+  "statement": "theorem regular_pullback_geometry {X Y : Scheme.{u}} [IsReduced X] [IsReduced Y] [IsNoetherian X] [IsNoetherian Y] (hQX : ∀ U : X.affineOpens, IsQuasiExcellent Γ(X, U)) (hQY : ∀ U : Y.affineOpens, IsQuasiExcellent Γ(Y, U)) (h : Y ⟶ X) (hRegular : IsRegularSchemeMorphism h) : (∀ y : Y, (h.stalkMap y).hom.IsRegular) ∧ singularSet Y = h ⁻¹' singularSet X ∧ (∀ (T : Scheme.{u}) [IsReduced T] [IsLocallyNoetherian T] (f : T ⟶ X), IsReduced (pullback f h)) ∧ (∀ (T : Scheme.{u}) [IsNoetherian T] (f : T ⟶ X) [LocallyOfFiniteType f], IsRegularSchemeMorphism (pullback.fst f h) ∧ singularSet (pullback f h) = (pullback.fst f h) ⁻¹' singularSet T)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9c914622",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Read the item node, all 13 stmt_dep records (identical to live), the new node def-per-unresolved-strata-geometry and both modules. Lean matches the node clause by clause, with no stronger hypotheses: reduced Noetherian QE X,Y; IsRegularSchemeMorphism h; regular stalk maps; Sing Y = h^-1 Sing X; reduced pullback for reduced locally Noetherian T; unresolvedSet closed with equality for every OrdinaryResolutionComparison (cartesian levels, comap ideals, unit deletion); height-r stratum finite, made of generic points, equal on the Y side to the generic points of h^-1 C, ideal equality via comap = C x_X Y; equicodimensional center with the empty exception. Dependency declarations read: IsRegularSchemeMorphism, IsRegularLocalRing, RingHom.IsRegular, IsQuasiExcellent, OrdinaryBlowupTower/Comparison, IdealSheafData.comap/vanishingIdeal, genericPoints. New definitions have real data; no duplicate found (only singularLocusIdeal = closure ideal). stmt_deps gain only the new node plus landed nodes; statements verbatim; docstrings carry source, blueprint and steps 1-13; single universe. Edge cases: empty sets, r=0, zero-length tower, unit/Cartier/nonreduced centers, non-surjective h. No compile (no file changed)."
+ }
+}

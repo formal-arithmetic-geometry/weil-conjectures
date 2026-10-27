@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DJ, 07A4 and 0FPT; lemma-pullback-tensor-product, lines 3684–3725, and lemma-symmetric-monoidal-cat-complexes, lines 12936–12958."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DJ, 07A4 and 0FPT; lemma-pullback-tensor-product, lines 3684–3725, and lemma-symmetric-monoidal-cat-complexes, lines 12936–12958."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteDualityMaps",
+  "date": "2026-10-21",
+  "group": "U7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-ringed-site-duality-maps",
+   "place": "Restriction compatibility of the associator and scalar-unit equations in the evaluation transpose."
+  }
+ },
+ "id": "lem-sfb-ringed-slice-scalar-unit",
+ "title": "Normalized slice tensor comparison preserves coefficient scalar action",
+ "statement": "For a small ringed site and its slice [def-weil-size-convention, def-pur-localized-ringed-site], fix derived closed structures, K-flat tensor comparisons and full tensor coherences [lem-sf-ringed-derived-closed-symmetric-monoidal, def-coef-ringed-tensor-hom-model]. Given normalized slice tensor comparison [lem-weil-pbc-ringed-slice-evaluation-transpose], the coefficient identification furnished by termwise restriction and localization makes scalar action commute with restriction on every derived object. Explicitly, restriction of tensoring with the inverse coefficient-unit identification and then the right unitor equals tensor comparison, the restricted coefficient identification, inverse slice coefficient-unit identification, and slice right unitor.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose"
+ ],
+ "proof": [
+  {
+   "text": "The termwise restriction functor identifies the single coefficient complex with the single coefficient complex on the slice. Compose this single-complex isomorphism with the fixed localization isomorphism to construct the coefficient identification. The coefficient complex is flat-term and K-flat by its single-term boundedness and tensor-unit flatness. Flatness of the nonzero coefficient term follows directly from its tensor-unit isomorphism, without choosing a closed structure.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a flat-term K-flat representative compare source and slice scalar-action models with the tensor restriction model. After canceling the tensor comparison the two maps agree: in coefficient degree zero both send x tensor a to a times x, and in other coefficient degrees the source summand is zero. Sheafification and coproduct universal properties detect this equality.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sfb-ringed-tensor-constraint-completion",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the chain identity, use localization and model-comparison naturality, and cancel the model isomorphisms to obtain scalar compatibility on representatives. Resolve an arbitrary derived object by a flat-term K-flat complex and transport the equation by tensor-comparison and right-unitor naturality. The site tensor-right comparison transports flatness between the abstract tensor-right functor and IsFlatOnSite.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sfb-ringed-tensor-constraint-completion",
+  "lem-pur-module-tensor-generator-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ringedSlice.*(associator|scalar_unit)",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized slice constraint theorem. Use pure-tensor models and categorical naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associator_naturality\"",
+   "results": "12 hits: CategoryTheory.Bicategory.associator_naturality_left; CategoryTheory.Bicategory.associator_naturality_right; CategoryTheory.Bicategory.associator_naturality_middle; CategoryTheory.Bicategory.associator_naturality_left_assoc; CategoryTheory.Bicategory.associator_naturality_right_assoc; CategoryTheory.Bicategory.associator_naturality_middle_assoc; CategoryTheory.Limits.coprod.associator_naturality; CategoryTheory.Limits.prod.associator_naturality",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized slice constraint theorem. Use pure-tensor models and categorical naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized restriction of sheaves tensor product preserves associativity and scalar multiplication on the derived category by comparison on K-flat complexes",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Sheaf.monoidalCategory; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.instMonoidalLightCondSetLightCondModFree; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized slice constraint theorem. Use pure-tensor models and categorical naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves to a slice site preserves the coefficient unit and scalar multiplication under the derived tensor comparison.",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj; CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux; PresheafOfModules.restrictScalars; AlgebraicGeometry.Scheme.Modules.map_smul; SheafOfModules.restrictScalars; PresheafOfModules.restrictScalarsObj_map; PresheafOfModules.Sheafify.map_smul_eq; ModuleCat.Tilde.toOpen",
+   "date": "2026-10-22",
+   "verdict": "No exact match. Restriction of scalars and section scalar naturality do not give the specified derived coefficient identification and unit square."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceScalarUnit",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceScalarUnit.lean",
+  "declaration": "CategoryTheory.ringedSlice_scalar_unit",
+  "statement": "theorem ringedSlice_scalar_unit :\n    let r := ringedSliceDerivedRestriction.{c, v, r, w, w'} J R U\n    let O := DerivedCategory.Q.obj (ringedTensorUnitComplex.{c, v, r} J R)\n    let OU := DerivedCategory.Q.obj\n      (ringedTensorUnitComplex.{max c v, v, r} (J.over U) (R.over U))\n    ∃ o : r.obj O ≅ OU, ∀ N,\n      r.map (S.tensor.map (X := (N, O)) (Y := (N, S.monoidal.tensorUnit))\n        (𝟙 N, K.unitIso.inv) ≫ (S.monoidal.rightUnitor N).hom) =\n        (d.rho N O).hom ≫ SU.tensor.map\n          (X := (r.obj N, r.obj O)) (Y := (r.obj N, OU)) (𝟙 (r.obj N), o.hom) ≫\n          SU.tensor.map (X := (r.obj N, OU))\n            (Y := (r.obj N, SU.monoidal.tensorUnit)) (𝟙 (r.obj N), KU.unitIso.inv) ≫\n              (SU.monoidal.rightUnitor (r.obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, 5 adapted modules, 5 new modules, 7 node files and 2 change records matched against the base in clones/live (verbatim move, identical #check signatures, import-only adaptations of unclaimed modules, unchanged statements), #print axioms in a sandbox, and the reader gate: 57 of 63 direct importers compiled against the sandbox, 3 after recompiling a stale importer, 3 not compilable against the lagging published build either"
+ }
+}

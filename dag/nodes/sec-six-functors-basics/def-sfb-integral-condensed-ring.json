@@ -1,0 +1,110 @@
+{
+ "id": "def-sfb-integral-condensed-ring",
+ "kind": "definition",
+ "title": "Integral continuous-map condensed coefficient ring",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite extension. Let $R=\\mathcal O_E$ with the canonical valuation topology of [def-sfb-continuous-lattice-coefficients]. Define $\\underline R$ to be the continuous-map condensed ring of [def-sfb-continuous-map-condensed-ring] applied to this topological ring: its sections on a profinite set $S$ are $C(S,R)$, with precomposition restrictions and pointwise operations. Regard it as an abelian sheaf with the canonical monoid-object structure of that construction and its canonical commutativity instance.",
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-lattice-coefficients"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1, continuous-map condensed rings and rings of integers of extensions of Q_l"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "condensed|Condensed NumberTheory/Padics",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "Generic continuous-function and valuation topology results only; use the recorded project constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "condensed ring of continuous functions into the valuation ring of a finite extension of the p-adic numbers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.continuousFunctions\", \"continuousSubring\", \"ContinuousMap.instSeminormedRing\", \"ContinuousMap.instNormedRing\", \"Padic.coe_withValRingEquiv_symm\", \"ContinuousMap.instSeminormedCommRing\", \"Valued.instIsTopologicalRing\", \"Padic.adicCompletionEquiv\"]}",
+   "date": "2026-10-22",
+   "verdict": "Generic continuous-function and valuation topology results only; use the recorded project constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Profinite.continuousMapRingObj, PadicInt",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Profinite.continuousMapRingObj'\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "Generic continuous-function and valuation topology results only; use the recorded project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n integralCondensedRing|integralCondensedCoefficientRing lean/WeilConjectures lean/Sheaf; rg -l integral condensed ring|integralCondensedRing|continuous-map condensed ring dag/nodes; blueprint_refs.py search integral condensed ring",
+   "results": "No upstream integralCondensedRing hit. Sheaf.Paper.IntegralLfpConstantModelComparison defines integralCondensedRing and its two structures as theorem helpers. Existing continuous-map/lattice definition nodes provide the two general constituents. The quotient and bundled scalar-ring nodes encode different objects. No blueprint node matches integral condensed ring. The returned H2 review explicitly requests this definition-node specialization under a non-clashing name.",
+   "date": "2026-10-22",
+   "verdict": "Reuse both recorded constructions directly, with a transparent specialization and their exact structures; do not depend on the local-model theorem for a statement."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-general-lfp-sequential-continuity",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The integral coefficient ring in the statement and steps 2–4 of lem-sfb-integral-general-lfp-sequential-continuity.",
+   "via": [
+    "lem-sfb-integral-general-lfp-sequential-continuity",
+    "lem-sfb-integral-general-lfp-hom-inversion",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCondensedCoefficientRing",
+  "declaration": "AlgebraicGeometry.ProEtale.integralCondensedCoefficientRing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralCondensedCoefficientRing",
+   "AlgebraicGeometry.ProEtale.integralCondensedCoefficientRingMonObj",
+   "AlgebraicGeometry.ProEtale.integralCondensedCoefficientRingComm"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCondensedCoefficientRing.lean",
+  "statement": "def integralCondensedCoefficientRing (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Definition-node ownership requested by the H2 return. This specializes the existing Profinite.continuousMapRingObjOfUniverse to latticeCoefficientIntegers, with exactly its canonical structures. It is definitionally the same ring and structures as the helpers in IntegralLfpConstantModelComparison, without any statement dependency on that theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85e251c6b",
+  "group": "Q27",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85e251c6b",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery repairs the H2 return of 65254fec as instructed: theorem stmt_dep lem-sfb-integral-lfp-constant-model-comparison is dropped; new def node def-sfb-integral-condensed-ring owns integralCondensedCoefficientRing := Profinite.continuousMapRingObjOfUniverse (latticeCoefficientIntegers l E) with the canonical MonObj/IsCommMonObj, citing the two owner nodes (def-sfb-continuous-map-condensed-ring, def-sfb-continuous-lattice-coefficients). It is the same term as the old helper, has universe u+1 with no extra equation, does not clash with any live name, has HRS Ex 3.1 docstrings and 4 searches, and its statement is verbatim. Item diff vs the reviewed delivery: only the ring rename, the stmt_dep swap and the comparison module demoted to a proof import; NL statement and proof unchanged. All signature declarations are owned by cited stmt_deps, the item statement is verbatim with a single sorry, and the report has its Worker and Second-reading sections. No compile (no file changed)."
+ }
+}

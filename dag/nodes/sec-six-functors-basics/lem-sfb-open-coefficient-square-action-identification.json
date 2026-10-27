@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-open-coefficient-square-action-identification",
+ "kind": "statement",
+ "title": "The published open coefficient square is the identity action comparison",
+ "statement": "Let $a:\\Lambda\\to\\Lambda'$ be a map of commutative condensed rings, and let $j:U\\hookrightarrow X$ be an open immersion of schemes [sk-def-sfb-coefficient-change, def-weil-open-immersion]. Put $A_T=\\Lambda_T$, $B_T=\\Lambda'_T$, and let $a_T:A_T\\to B_T$ be the pulled-back coefficient map for $T=U,X$. Write $F=j^{-1}$ on abelian sheaves, with its strong monoidal structure $\\mu$ [sk-def-sfb-transport], and write $\\alpha_A:F(A_X)\\xrightarrow{\\sim}A_U$, $\\alpha_B:F(B_X)\\xrightarrow{\\sim}B_U$ for the canonical coefficient isomorphisms [lem-sfb-alpha-iso]. Use the module-object pullbacks $R_A=\\operatorname{Ext}_{\\alpha_A}\\operatorname{mapMod}(F)$ and $R_B=\\operatorname{Ext}_{\\alpha_B}\\operatorname{mapMod}(F)$ [sk-def-sfb-module-pushforward-pullback], and scalar restrictions $r_T=\\operatorname{Res}_{a_T}$ [sk-def-sfb-change-of-scalars]. Let $c^0:r_UR_B\\xrightarrow{\\sim}R_Ar_X$ be the specified comparison of [def-sfb-comap-upper-star-iso], formed using the invertible coefficient-square comparison [def-sfb-extend-comap-iso-of-iso].\n\nFor an ordinary $B_X$-module $N$, identify the extension along each $\\alpha$ with restriction along $\\alpha^{-1}$ by the balanced collapse $x\\otimes n\\mapsto\\alpha^{-1}(x)n$, whose inverse is $n\\mapsto1\\otimes n$. Under these identifications, the actions on $r_UR_BN$ and $R_Ar_XN$ are both the transported $F(B_X)$-action restricted along\n$$\\alpha_B^{-1}a_U=F(a_X)\\alpha_A^{-1}:A_U\\longrightarrow F(B_X).$$\nThe components $c^0_N$ and $(c^0_N)^{-1}$ are the identity on the underlying sheaf $FN$, naturally in $N$; both functors send a module morphism $h$ to $Fh$ under the same identifications. Let $d^0:R_Ar_X\\xrightarrow{\\sim}r_UR_B$ denote this identity action comparison. On ordinary unbounded derived module categories [sk-def-sfb-derived-categories], write $R,r$ also for the corresponding levelwise functors, and let $d:R_Ar_X\\xrightarrow{\\sim}r_UR_B$ be the localization of $d^0$ degreewise. Then the specified derived comparison $c$ of [def-sfb-derived-comap-upper-star-iso] satisfies $c^{-1}=d$, as a natural isomorphism of derived functors. No flatness of $a$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+  "place": "Transport/restriction and invertible coefficient-square composite; extracted component normalization and degreewise localization from the reviewed parent proof, steps 2–3; serves det-prop-scalar-six-pullback.proof.md (2), alternative open-adjunction argument"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-coefficient-change",
+  "def-weil-open-immersion",
+  "sk-def-sfb-transport",
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-comap-upper-star-iso",
+  "def-sfb-extend-comap-iso-of-iso",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-derived-comap-upper-star-iso"
+ ],
+ "proof": [
+  {
+   "text": "Work in $\\mathcal C_T=\\Sh(T_{\\mathrm{proét}},\\Ab)$, $T=X,U$. By the existing sheaf-category instances of [lem-weil-pbc-sheaf-tensor-closed], these are abelian symmetric monoidal closed categories with equalizers and coequalizers, additive tensor product, and tensor preserving colimits in each variable. Thus the hypotheses of [lem-sfb-extension-iso-quotient-formula] hold for the commutative coefficient ring isomorphisms $\\alpha_A,\\alpha_B$ of [lem-sfb-alpha-iso]. Apply that lemma to an arbitrary module $M$ over $F(A_X)$ or $F(B_X)$, respectively. Denote its specified collapse by $p_{A,M}$ or $p_{B,M}$, and its inverse by $s_{A,M}$ or $s_{B,M}$. The lemma gives $p_{A,M}(x\\otimes m)=\\alpha_A^{-1}(x)m$ and $s_{A,M}(m)=1\\otimes m$, and the analogous $B$-formulas, as identities of internal sheaf morphisms through the balancing coequalizer. They are natural module isomorphisms, so they identify the actual extension-along-isomorphism comparisons, not just the isomorphism classes of the extended modules.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-extension-iso-quotient-formula",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-extend-comap-iso-of-iso.proof.md",
+    "place": "First sentence, normalized by the existing quotient-formula lemma; its source is def-sfb-module-open-lower-shriek-adjunction.proof.md, final sentence."
+   }
+  },
+  {
+   "text": "Specialize [lem-sfb-coefficient-pullback-square] to $f=j$, source scheme $U$, target scheme $X$. It gives $\\alpha_B\\circ F(a_X)=a_U\\circ\\alpha_A$. Precompose with $\\alpha_A^{-1}$ and postcompose with $\\alpha_B^{-1}$, which exist by [lem-sfb-alpha-iso]. Cancellation gives\n$$h:\\quad\\alpha_B^{-1}\\circ a_U=F(a_X)\\circ\\alpha_A^{-1}:A_U\\longrightarrow F(B_X).$$\nOnly the two $\\alpha$ maps are inverted; $a_X$ and $a_U$ need not be invertible or flat.",
+   "uses": [
+    "lem-sfb-coefficient-pullback-square",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "Coefficient-square equality, rearranged by the two inverse identities."
+   }
+  },
+  {
+   "text": "For $N\\in\\Mod_{B_X}$ write $\\gamma_N:B_X\\otimes N\\to N$ for its action. The transport and restriction formulas of [sk-def-sfb-transport] and [def-sfb-modobj-restriction], functoriality of $F$, and naturality of its monoidal structure give\n$$F(\\gamma_N\\circ(a_X\\otimes1_N))\\circ\\mu_{A_X,N}\n=F\\gamma_N\\circ\\mu_{B_X,N}\\circ(F(a_X)\\otimes1_{FN}).$$\nConsequently the comparison\n$$\\tau_N:\\operatorname{mapMod}(F)(r_XN)\\xrightarrow{\\sim}\\operatorname{Res}_{F(a_X)}\\operatorname{mapMod}(F)(N)$$\nis the identity of $FN$ in both directions. Both sides send a module morphism $v$ to $Fv$, so naturality is $Fv\\circ1=1\\circ Fv$. This computes the transport/restriction factor used in the prescribed upper-star comparison.",
+   "uses": [
+    "sk-def-sfb-transport",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "Transport commutes with restriction of scalars: expand the two actions and use naturality of the monoidal structure."
+   }
+  },
+  {
+   "text": "Put $M_B=\\operatorname{mapMod}(F)(N)$, $M_A=\\operatorname{mapMod}(F)(r_XN)$ and $\\delta_N=F\\gamma_N\\circ\\mu_{B_X,N}$. By the module-pullback definition [sk-def-sfb-module-pushforward-pullback], the collapses of step 1 identify $r_UR_BN$ with $FN$ having action\n$$\\delta_N\\circ((\\alpha_B^{-1}\\circ a_U)\\otimes1),$$\nand $R_Ar_XN$ with $FN$ having action\n$$\\delta_N\\circ((F(a_X)\\circ\\alpha_A^{-1})\\otimes1),$$\nusing the action calculation of step 3. Equality $h$ from step 2 identifies these actions. By [det-def-sfb-module-objects-definition], the identity of $FN$ is therefore a module isomorphism in either direction. Naturality of the collapses and the formulas for transport and restriction show that both functors act on $v$ by $Fv$ under these identifications. This gives precisely the natural identity-action comparison $d^0:R_Ar_X\\xrightarrow{\\sim}r_UR_B$.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-transport",
+    "det-def-sfb-module-objects-definition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "Both composite actions after inverse-coefficient restriction; compare using the inverse square."
+   }
+  },
+  {
+   "text": "Compute the particular scalar-square construction named in the statement, [def-sfb-extend-comap-iso-of-iso], with $R=F(A_X)$, $S=F(B_X)$, $R'=A_U$, $S'=B_U$, $\\varphi=F(a_X)$, $\\psi=a_U$, and vertical maps $\\alpha_A,\\alpha_B$. Its prescribed composite first applies $\\operatorname{Res}_{a_U}(p_{B,M_B})$, identifies the two composite restrictions along $\\alpha_B^{-1}a_U=F(a_X)\\alpha_A^{-1}$, and then applies $p_{A,\\operatorname{Res}_{F(a_X)}M_B}^{-1}$. The middle identification has underlying identity: expanding restriction twice gives the action $\\delta_N\\circ(h\\otimes1)$ on either side, and all restriction functors keep underlying arrows, by [def-sfb-modobj-restriction]. Hence, if $\\sigma_N$ denotes this scalar-square component, cancellation of the last collapse with its inverse gives\n$$p_{A,\\operatorname{Res}_{F(a_X)}M_B}\\circ\\sigma_N=p_{B,M_B}$$\non underlying sheaves. Here the two extension comparisons $e_b,e_a$ of the scalar-square construction are, by its construction, those of clause 5 of [sk-def-sfb-change-of-scalars], and that clause takes them from [def-sfb-modobj-extension-along-iso]: they are the adjoint-uniqueness comparisons $\\operatorname{Ext}_{\\alpha}\\cong\\operatorname{Res}_{\\alpha^{-1}}$. By [lem-sfb-extension-iso-quotient-formula] these comparisons are exactly the collapses $p_B=e_b$ and $p_A=e_a$ of step 1, so the composite just described is the specified one. This is a computation of the specified composite, rather than an inference that an arbitrary scalar-square isomorphism has identity components.",
+   "uses": [
+    "def-sfb-extend-comap-iso-of-iso",
+    "def-sfb-modobj-restriction",
+    "lem-sfb-extension-iso-quotient-formula",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-extension-along-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-extend-comap-iso-of-iso.proof.md",
+    "place": "Entire inverse-restriction construction; explicitly the composite in WeilConjectures/CategoryTheory/ModuleObjects/ChangeOfScalarsSquare.lean, extendScalarsComapIsoOfIsIso, lines 120–129."
+   }
+  },
+  {
+   "text": "Unfold the prescribed composite of [def-sfb-comap-upper-star-iso]: after $\\sigma_N$ it applies $\\operatorname{Ext}_{\\alpha_A}(\\tau_N^{-1})$. Naturality of the collapse in [lem-sfb-extension-iso-quotient-formula] gives\n$$p_{A,M_A}\\circ\\operatorname{Ext}_{\\alpha_A}(\\tau_N^{-1})\n=\\tau_N^{-1}\\circ p_{A,\\operatorname{Res}_{F(a_X)}M_B}$$\non underlying sheaves. Compose with $\\sigma_N$ and use step 5 and the identity underlying $\\tau_N^{-1}$ from step 3 to get $p_{A,M_A}\\circ c^0_N=p_{B,M_B}$. Thus\n$$p_{A,M_A}\\circ c^0_N\\circ p_{B,M_B}^{-1}=1_{FN},\\qquad\np_{B,M_B}\\circ(c^0_N)^{-1}\\circ p_{A,M_A}^{-1}=1_{FN}.$$\nThe second equation follows by taking the inverse of the first. The faithful forgetful functor in [det-def-sfb-module-objects-definition] makes these equalities equalities of the compared module morphisms. Together with step 4 they prove $(c^0)^{-1}=d^0$ naturally, including both component directions and the action on module morphisms. In Lean expand the specified composite with local names for the two collapse isomorphisms and the transport/restriction comparison. Apply naturality of extendScalarsIsoComapInv separately to the hom and inverse components of mapModComapIso, whose underlying maps are identities. Cancel the two collapse inverse pairs in each direction. Faithfulness and cancellation then identify the ordinary natural isomorphisms.",
+   "uses": [
+    "def-sfb-comap-upper-star-iso",
+    "lem-sfb-extension-iso-quotient-formula",
+    "det-def-sfb-module-objects-definition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "Final displayed composite, with its transport factor and collapse factors retained; upstream ChangeOfCoefficients.lean, comapUpperStarIso, lines 177–187."
+   }
+  },
+  {
+   "text": "The existing instances upperStar_additive, preservesFiniteLimits_upperStar and preservesFiniteColimits_upperStar in the module-pullback construction [sk-def-sfb-module-pushforward-pullback] already supply exactness of both actual pullbacks. Left exactness is transported along the extension-to-inverse-restriction comparison [def-sfb-modobj-extension-along-iso]; right exactness follows from the pullback adjunction. Scalar restrictions are additive and exact by [sk-def-sfb-change-of-scalars]. Consequently the levelwise derived functors and their composition factorizations exist by [lem-weil-pbc-exact-functor-derived-factorization]. No separate application of the aggregate module_pullback_additive_exact theorem, flatness, boundedness or K-flat resolution is needed.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-modobj-extension-along-iso",
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.proof.md",
+    "place": "First sentence: exactness and levelwise derived extension; Stacks derived.tex Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "Write $P=r_UR_B$ and $T=R_Ar_X$ at the abelian level. For any cochain complex $K$ of $B_X$-modules the degree-$n$ maps $c^0_{K^n}$ define a chain isomorphism $C(P)K\\to C(T)K$: naturality for $d_K^n$ gives $T(d_K^n)c^0_{K^n}=c^0_{K^{n+1}}P(d_K^n)$. The maps $d^0_{K^n}$ satisfy the reverse equation. Naturality for each component of a chain map gives naturality on complexes. By step 6 the two chain isomorphisms are inverses degree by degree, so $C(c^0)^{-1}=C(d^0)$ as natural isomorphisms of functors on complexes. This also accounts for differentials: under the collapses both are $F(d_K^n)$, since step 4 applies to every module morphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.proof.md",
+    "place": "Second sentence: spell out the levelwise natural isomorphisms and inverse chain maps."
+   }
+  },
+  {
+   "text": "Let $Q_X:C(\\Mod_{B_X})\\to D(\\Mod_{B_X})$ and $Q_U:C(\\Mod_{A_U})\\to D(\\Mod_{A_U})$ be localization at quasi-isomorphisms. Set $P_D=D(r_U)D(R_B)$ and $T_D=D(R_A)D(r_X)$. Composing the factorization isomorphisms of [lem-weil-pbc-exact-functor-derived-factorization] gives $\\phi_P:P_DQ_X\\xrightarrow{\\sim}Q_UC(P)$ and $\\phi_T:T_DQ_X\\xrightarrow{\\sim}Q_UC(T)$. The construction of [def-sfb-derived-comap-upper-star-iso] localizes $C(c^0)$ using these composite factorizations. Consequently\n$$c_{Q_XK}=\\phi_{T,K}^{-1}Q_U(C(c^0)_K)\\phi_{P,K},\\qquad\nd_{Q_XK}=\\phi_{P,K}^{-1}Q_U(C(d^0)_K)\\phi_{T,K}.$$\nStep 8 makes the latter expression the inverse of the former. Clause (3) of [lem-weil-pbc-localization-universal-property] now gives $c^{-1}=d$ as natural transformations, hence as natural isomorphisms of the derived functors. Clause (2) of that node ensures that localization respects inverses and composition, including the factorization isomorphisms. This proves the stated equality on the whole unbounded category, rather than merely on a selected class of representatives. The existing proved library lemma Functor.mapDerivedCategoryNatIso_symm implements preservation of inverses using localization full faithfulness and preservation of composition. Apply it to the ordinary comparison equality from step 6 and expand the published composition factorization isomorphisms; associativity gives the required equality of natural isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-derived-comap-upper-star-iso",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-upper-star-iso.proof.md",
+    "place": "Second sentence: descent with composite factorization isomorphisms; Stacks categories.tex Tag 04VG, lemma-properties-left-localization, and the natural-transformation full faithfulness stated in the cited Mathlib leaf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-extension-iso-quotient-formula",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-coefficient-pullback-square",
+  "sk-def-sfb-transport",
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-pushforward-pullback",
+  "det-def-sfb-module-objects-definition",
+  "def-sfb-extend-comap-iso-of-iso",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-extension-along-iso",
+  "def-sfb-comap-upper-star-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sfb-derived-comap-upper-star-iso",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+  "place": "Transport/restriction comparison and invertible scalar square, with the normalized collapse supplied by lem-sfb-extension-iso-quotient-formula; levelwise localization follows def-sfb-derived-comap-upper-star-iso.proof.md and the cited exact-functor and localization nodes. Lean implementation by T9 (2026-10-22): all six theorem holes closed using the quotient formula, inverse-square cancellation, explicit scalar-comparison expansion and collapse naturality, followed by the existing mapDerivedCategoryNatIso_symm API. Independent aggregate sheaf-tensor and pullback-exactness theorem applications are unnecessary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comapUpperStarIso|extendScalarsComapIsoOfIsIso|restrictScalars.*mapMod",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme-structure-sheaf comparisons do not identify the published condensed coefficient square on the pro-étale module categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with pullback of module sheaves and the comparison is identity after identifying the pulled back coefficient rings",
+   "results": "8 hits: RestrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, PresheafOfModules.restrictScalars, ModuleCat.RestrictScalars.obj', RingCat.moduleCatRestrictScalarsPseudofunctor, SheafOfModules.restrictScalars, RestrictScalars.moduleOrig",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme-structure-sheaf comparisons do not identify the published condensed coefficient square on the pro-étale module categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.restrictScalars, CategoryTheory.Mod.map",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Mod.restrictScalars'",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme-structure-sheaf comparisons do not identify the published condensed coefficient square on the pro-étale module categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a commutative square of ring isomorphisms naturality of extension restriction of scalars is identity under the balanced tensor collapse maps",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.restrictScalarsId'App_inv_naturality_assoc, ModuleCat.restrictScalarsId'App_inv_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme-structure-sheaf comparisons do not identify the published condensed coefficient square on the pro-étale module categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes the specified restriction of scalars pullback comparison is the identity on inverse image modules after collapsing extension along the coefficient ring isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Hom.appIso_inv_app_presheafMap, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_inv_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme-structure-sheaf comparisons do not identify the published condensed coefficient square on the pro-étale module categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, SheafOfModules.pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme-structure-sheaf comparisons do not identify the published condensed coefficient square on the pro-étale module categories"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModComapIso|extendScalarsIsoComapInv|restrictFunctorIsoPullback",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme-structure-sheaf comparisons do not identify the published condensed coefficient square on the pro-étale module categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"pullback\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat and scheme structure-sheaf restriction formulas do not identify the specified condensed-coefficient module-object comparison or its derived localization"
+  },
+  {
+   "tool": "grep",
+   "query": "comapUpperStarIso|extendScalarsComapIsoOfIsIso|mapModComapIso",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat and scheme structure-sheaf restriction formulas do not identify the specified condensed-coefficient module-object comparison or its derived localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison between restriction of scalars and pullback is identity after extension along coefficient ring isomorphisms is collapsed",
+   "results": "8 hits: RestrictScalars, PresheafOfModules.restrictScalarsObj, Submodule.restrictScalars_self, ModuleCat.restrictScalarsCongr_hom_app, LinearEquiv.restrictScalars, ModuleCat.restrictScalarsId, ModuleCat.restrictScalarsId', ModuleCat.RestrictScalars.obj'",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat and scheme structure-sheaf restriction formulas do not identify the specified condensed-coefficient module-object comparison or its derived localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars and inverse image of internal module sheaves commute by the identity on the underlying inverse image, including localization to unbounded derived categories",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, ModuleCat.restrictScalarsComp'App_inv_naturality, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val, PresheafOfModules.restrictScalarsCompToPresheaf, ModuleCat.restrictScalarsComp'_inv_app, ModuleCat.restrictScalarsComp'App_inv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat and scheme structure-sheaf restriction formulas do not identify the specified condensed-coefficient module-object comparison or its derived localization"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*pullback|restrictFunctorIsoPullback|mapMod.*comap",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat and scheme structure-sheaf restriction formulas do not identify the specified condensed-coefficient module-object comparison or its derived localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical coefficient square for inverse image of ring module objects has identity underlying map after extension along invertible ring maps is replaced by inverse scalar restriction",
+   "results": "8 hits: ModuleCat.restrictScalarsId'_inv_app, ModuleCat.restrictScalarsId'App_inv_apply, ModuleCat.restrictScalarsComp'App_inv_apply, ModuleCat.restrictScalarsId'App_inv_naturality, ModuleCat.restrictScalarsCongr_inv_app, ModuleCat.restrictScalarsId'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'_inv_app, ModuleCat.extendScalarsId_inv_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat and scheme structure-sheaf restriction formulas do not identify the specified condensed-coefficient module-object comparison or its derived localization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-open-scalar-conjugate-normalization",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(2), alternative open-adjunction argument: restriction of scalars commutes with j^*; specify its action comparison rather than just its isomorphism class",
+   "via": [
+    "lem-sfb-open-scalar-conjugate-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-open-coefficient-square-action-identification",
+  "worker": "stage1",
+  "summary": "Computed both module actions, the specified scalar-square composite and transport factor, and both underlying component directions using the existing normalized extension quotient lemma. Spelled out naturality on maps and differentials and descended the inverse equality with the same composite factorization isomorphisms. Statement unchanged; no new nodes.",
+  "blueprint": "det-prop-scalar-six-pullback.proof.md (2), alternative open-adjunction argument, sentence that restriction of scalars commutes with j^*: steps 1–6 identify the particular underived coefficient square, steps 7–9 identify its published levelwise derived version. The calculations refine def-sfb-comap-upper-star-iso.proof.md and def-sfb-derived-comap-upper-star-iso.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Ambient sheaf category is Grothendieck abelian with additive tensor and all required colimits; this generic sheaf theorem verifies hypotheses of the existing internal collapse theorem without changing the coefficient-comparison route."
+   },
+   {
+    "node": "lem-sfb-extension-iso-quotient-formula",
+    "why": "The normalized component formula for extension along a ring-object isomorphism fixes the actual comparisons used in the published scalar square; coefficient-comparison existence statements alone do not provide this normalization."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "The exactness theorem for the actual coefficient module pullback supplies the levelwise functors; this is a property of the already fixed pullback construction, not an alternative route to a scalar comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-extension-iso-quotient-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NP-7a3392633",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-7a3392633 (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item's statement (unchanged against NO's creation: statement, stmt_deps, source, blueprint) and all 9 steps. I read the 16 cited nodes' statements and the constructions of def-sfb-comap-upper-star-iso, def-sfb-extend-comap-iso-of-iso and def-sfb-derived-comap-upper-star-iso. I read the main-20261015 blueprint proofs of these three definitions and checked the Lean they name: extendScalarsComapIsoOfIsIso, extendScalarsIsoComapInv = leftAdjointUniq, and mapModComapIso with Iso.refl components. The square is φ=F(a_X), a=α_A, b=α_B, ψ=a_U, and it commutes by lem-sfb-coefficient-pullback-square with f=j. Steps 3–4 check out: τ has identity components, and h makes the actions δ_N((α_B⁻¹a_U)⊗1) and δ_N((F(a_X)α_A⁻¹)⊗1) equal. Step 6 holds: c⁰=Ext(τ⁻¹)∘σ, and naturality of p gives p_A c⁰ p_B⁻¹=1. Steps 7–9 hold: exactness comes from det-prop-sfb-module-pullback-exact-main and clause 4 of change-of-scalars; the levelwise functors from 015F (node checked); the derived c is the lift under clause (2) of localization, so c⁻¹=d by step 8 and clause (3). One fault (C3/C4), fixed: step 5 equated the e_a, e_b of the scalar-square construction (clause 5 of sk-def-sfb-change-of-scalars, which comes from def-sfb-modobj-extension-along-iso) with the collapses p of lem-sfb-extension-iso-quotient-formula without citing that link. Step 5 now states it and cites sk-def-sfb-change-of-scalars and def-sfb-modobj-extension-along-iso; the latter is added to proof_deps. Edge cases tested: a=id, j=id, U=∅, N=0, non-flat Z/4→Z/2, and a nontrivial α orientation. There are no new nodes, and the item duplicates no existing node: def-sfb-comap-mapmod-square and its underlying lemma are lower-star restriction squares. I accept the split_report tool_uses (sheaf-tensor-closed, extension-iso-quotient-formula, module-pullback-exact-main) as generic structural tools. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenCoefficientSquareActionIdentification",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientSquare_action_identification",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientCollapse",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientCollapse_quotient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficient_inverse_square",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientIdentityRestrictionIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientIdentityIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientSquare_actions_components",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientSquare_maps",
+   "AlgebraicGeometry.ProEtale.CondensedRing.comapUpperStarIso_symm_eq_openCoefficientIdentityIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenCoefficientIdentityIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoefficientSquare_action_identification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoefficientSquareActionIdentification.lean",
+  "statement": "theorem openCoefficientSquare_action_identification [IsOpenImmersion j] : (derivedComapUpperStarIso a j).symm = derivedOpenCoefficientIdentityIso j a",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d061b82d8",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Read item node, 10 stmt_dep records, report, module, and upstream comapUpperStarIso/derivedComapUpperStarIso/extendScalarsComapIsoOfIsIso/extendScalarsIsoComapInv/mapModComapIso/upperStar/extensionIso_quotient_formula. c0 type at f=j is r_U R_B≅R_A r_X; collapse pinned by x⊗n↦α⁻¹(x)n and n↦1⊗n with correct orientation; inverse square, both actions, identity components of c0 and (c0)⁻¹ under the collapses, maps to Fh, d0 built from real identity-underlying data (no arbitrary iso), (c0).symm=d0, derived d with the same mapDerivedCategoryCompIso shape as derivedComapUpperStarIso, main c⁻¹=d on unbounded DerivedCategory without flatness. Statements true by unfolding c0 plus collapse naturality, not tautologies. Universes upstream; edge cases a=id, j=id, U=∅, zero, non-flat Z/4→Z/2 covered. Record: only lean field changed, statement verbatim, all 11 decls listed, no name collision, no hollow defs, all sorry, docstrings with source/blueprint tags. Advisory: condensedPullbackHom/extendScalarsIsoComapInv owned by non-stmt_dep nodes def-sfb-alpha/def-sfb-modobj-extension-along-iso. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261023T124518-L-1413853",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

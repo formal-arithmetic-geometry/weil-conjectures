@@ -13,93 +13,56 @@
  ],
  "proof": [
   {
-   "text": "Write $1_a$ for the identity transformation on $T^a$, including $1_0$ on the identity functor, and write $\\star$ for horizontal composition. Thus $d_i^n=1_i\\star e\\star1_{n-i}$ and $s_i^n=1_i\\star c\\star1_{n-i}$. These are natural transformations because whiskering a naturality square by a functor again gives a naturality square. We use the interchange identity $(\\alpha'\\circ\\alpha)\\star(\\beta'\\circ\\beta)=(\\alpha'\\star\\beta')\\circ(\\alpha\\star\\beta)$. To verify it directly, define $(\\alpha\\star\\beta)_x=\\alpha_{G'x}\\circ F(\\beta_x)$ for $\\alpha:F\\to F'$ and $\\beta:G\\to G'$. Expand the right side at $x$, move $F'(\\beta'_x)$ past $\\alpha_{G'x}$ using naturality of $\\alpha$ at $\\beta'_x$, and use functoriality of $F$. The result is $(\\alpha'\\circ\\alpha)_{G''x}\\circ F((\\beta'\\circ\\beta)_x)$, the left side. Horizontal composition is associative with these component formulas, and identities compose to identities; hence parentheses can be suppressed.",
-   "uses": [],
-   "elementary": true,
+   "text": "Take the degree objects $B_n=T^{n+1}$ and the natural transformations specified in the statement. Apply [lem-trf-comonad-face-identities] with this $T,e$. It supplies the face--face relation for every $n\\geq1$ and $0\\leq i<j\\leq n+1$, including adjacent indices; it needs no hypothesis on $c$.",
+   "uses": [
+    "lem-trf-comonad-face-identities"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 0G5N opening calculation; interchange of Tag 003F (categories-lemma-properties-2-cat-cats), here verified directly from naturality."
+    "place": "Tag 0G5N, lemma-godement, assembly from operator identities and counit augmentation; Tag 016B, lemma-characterize-simplicial-object."
    }
   },
   {
-   "text": "Face--face relations: for $n\\geq1$ and $0\\leq i<j\\leq n+1$, expand both $d_i^n\\circ d_j^{n+1}$ and $d_{j-1}^n\\circ d_i^{n+1}$ and apply interchange from step 1. Each becomes $1_i\\star e\\star1_{j-i-1}\\star e\\star1_{n+1-j}$. Thus $d_i d_j=d_{j-1}d_i$. In the boundary case $j=i+1$ the middle identity is $1_0$, so the calculation still applies.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-trf-comonad-mixed-degeneracy-identities] to the given $T,e,c$. Its hypotheses are exactly the two counit equations and coassociativity assumed here. It supplies both non-overlapping mixed relations, the two overlapping mixed identities, and the degeneracy--degeneracy relation, including degree zero. Thus all five relations required in [lem-trf-simplicial-operators-reconstruction] hold for the prescribed operators.",
+   "uses": [
+    "lem-trf-comonad-mixed-degeneracy-identities",
+    "lem-trf-simplicial-operators-reconstruction"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+    "place": "Tag 0G5N, lemma-godement, assembly from operator identities and counit augmentation; Tag 016B, lemma-characterize-simplicial-object."
    }
   },
   {
-   "text": "Mixed relations away from the duplicated factor: for $n\\geq2$ and $0\\leq i<j\\leq n-1$, both $d_i^n\\circ s_j^{n-1}$ and $s_{j-1}^{n-2}\\circ d_i^{n-1}$ reduce by interchange to $1_i\\star e\\star1_{j-i-1}\\star c\\star1_{n-j-1}$. For $0\\leq j$ and $j+1<i\\leq n$, both $d_i^n\\circ s_j^{n-1}$ and $s_j^{n-2}\\circ d_{i-1}^{n-1}$ reduce to $1_j\\star c\\star1_{i-j-2}\\star e\\star1_{n-i}$. Every displayed exponent is nonnegative in its stated range.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
-   }
-  },
-  {
-   "text": "Mixed relations at the duplicated factor: for $n\\geq1$ and $0\\leq j\\leq n-1$, interchange rewrites $d_j^n\\circ s_j^{n-1}$ as $1_j\\star((e\\star1_1)\\circ c)\\star1_{n-j-1}$ and $d_{j+1}^n\\circ s_j^{n-1}$ as $1_j\\star((1_1\\star e)\\circ c)\\star1_{n-j-1}$. The two counit hypotheses identify both with the identity on $T^n=B_{n-1}$. This includes $n=1$, so the two faces after the degree-zero degeneracy both give $1_{B_0}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
-   }
-  },
-  {
-   "text": "Degeneracy--degeneracy relations: fix $n\\geq1$, $0\\leq i\\leq j\\leq n-1$. If $i<j$, interchange makes both $s_i^n\\circ s_j^{n-1}$ and $s_{j+1}^n\\circ s_i^{n-1}$ equal to $1_i\\star c\\star1_{j-i-1}\\star c\\star1_{n-j-1}$. If $i=j$, these composites are respectively $1_i\\star((c\\star1_1)\\circ c)\\star1_{n-i-1}$ and $1_i\\star((1_1\\star c)\\circ c)\\star1_{n-i-1}$. Coassociativity identifies them. This proves the fifth simplicial relation, including the adjacent duplication in degree zero.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-simplicial-operators-reconstruction] to $\\mathcal D=\\operatorname{Fun}(\\mathcal C,\\mathcal C)$, $U_n=B_n$ and the specified natural transformations. Steps 2--5 establish each of its five relations in every defined degree. Its reconstruction clause gives a simplicial object with precisely these degree objects and operators. No limits, colimits, or smallness of $\\mathcal C$ are needed: functors and transformations are taken in a containing universe.",
+   "text": "Use the object reconstruction clause of [lem-trf-simplicial-operators-reconstruction] in $\\mathcal D=\\operatorname{Fun}(\\mathcal C,\\mathcal C)$. Steps 1--2 verify its five relations, so it constructs a simplicial object with exactly the specified degree objects, faces and degeneracies. Take endofunctors in a containing universe; no limits, colimits or smallness of $\\mathcal C$ are required.",
    "uses": [
     "lem-trf-simplicial-operators-reconstruction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tags 0G5N opening proof sentence and 016B(2), lemma-characterize-simplicial-object."
+    "place": "Tag 0G5N, lemma-godement, assembly from operator identities and counit augmentation; Tag 016B, lemma-characterize-simplicial-object."
    }
   },
   {
-   "text": "Define $A_n:B_n\\to\\mathrm{id}_{\\mathcal C}$ as the horizontal composite of $n+1$ copies of $e$, so $A_0=e$. For $n\\geq1$, interchange yields $A_{n-1}\\circ d_i^n=A_n$: the deleted factor contributes $e$ and every other factor contributes its existing copy of $e$. Moreover $A_{n+1}\\circ s_i^n$ is the horizontal composite of copies of $e$ with $(e\\star e)\\circ c$ in position $i$. Since $e\\star e=e\\circ(e\\star1_1)$ by interchange, the counit equation gives $(e\\star e)\\circ c=e$. Hence $A_{n+1}\\circ s_i^n=A_n$ for all $n\\geq0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
-   }
-  },
-  {
-   "text": "The constant simplicial object with value $\\mathrm{id}_{\\mathcal C}$ sends every operator to its identity. The face and degeneracy equations of step 7 therefore say exactly that the family $A_n$ commutes with its faces and degeneracies. The morphism clause of [lem-trf-simplicial-operators-reconstruction] gives an augmentation $B_\\bullet\\to\\operatorname{const}(\\mathrm{id}_{\\mathcal C})$, whose degree-zero component is $e$.",
+   "text": "Apply [lem-trf-comonad-counit-augmentation] to the simplicial object just constructed. Its one counit hypothesis is among our assumptions, and its operator hypotheses are the exact operators supplied in step 3. Its horizontal counit words give the augmentation with degree-zero component $e$; its evaluation functor has terms $T^{n+1}(x)$ and maps $T^{n+1}(f)$ and therefore proves the required naturality in $x$.",
    "uses": [
-    "lem-trf-simplicial-operators-reconstruction"
+    "lem-trf-comonad-counit-augmentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 0G5N last paragraph and Tag 016B(3), lemma-characterize-simplicial-object."
-   }
-  },
-  {
-   "text": "Evaluate the constructed functor and augmentation at $x\\in\\mathcal C$. Evaluation preserves identities and composition componentwise, so the simplicial functor laws and augmentation squares remain valid. For a morphism $f:x\\to y$, the degree maps $T^{n+1}(f)$ commute with every simplicial operator and with $A_n$ by naturality of those transformations; identities and composites of $f$ are preserved by each $T^{n+1}$. Thus the evaluated augmented simplicial object is natural in $x$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+    "place": "Tag 0G5N, lemma-godement, assembly from operator identities and counit augmentation; Tag 016B, lemma-characterize-simplicial-object."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-simplicial-operators-reconstruction"
+  "lem-trf-comonad-face-identities",
+  "lem-trf-comonad-mixed-degeneracy-identities",
+  "lem-trf-simplicial-operators-reconstruction",
+  "lem-trf-comonad-counit-augmentation"
  ],
  "proof_origin": {
   "by": "document",
@@ -219,19 +182,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-comonad-simplicial-object",
   "worker": "stage1",
-  "summary": "Checked the generic comonad statement against Stacks 0G5M/0G5N; wrote the interchange calculation, all five simplicial relations, explicit augmentation components and evaluation naturality. Added only the generic operator reconstruction theorem 016B, with no proof. No statement correction; searched the full DAG, blueprint and project Lean source and audited Mathlib candidates.",
-  "blueprint": "Preserves the ancestor lem-trf-local-term-locality proof (1)--(2) nearby-cycle/cotangent-resolution support route recorded in blueprint.from; realizes the entire foundational comonad input to lem-trf-adjunction-standard-simplicial-homotopy via Stacks 0G5N, used by 08NC. Steps 1--5 give 0G5N simplicial relations, step 6 its use of 016B, steps 7--8 its augmentation, step 9 evaluation."
+  "summary": "Repair of the landing-refused side completion, rebased by deliver.py on current origin/sheaf-dag: re-read the current endofunctor-powers, simplicial-object and reconstruction statements and verified every citation and hypothesis. Retained the approved three statement-only proof blocks and four-step assembly, with unchanged parent statement and route. Updated citation excerpts and the report to document the rebase, the retained prior-head receipt and the live-DAG promotion requirement. All prior source checks, calculations and logged searches are preserved. Final 2026-10-23 comparison confirmed that only the parent assembly fields differ from the current DAG, all three new IDs remain absent, the released repair order still applies, and all five citation pairs match the current statements verbatim; initial server dry run passed at 4563d4a7495.",
+  "blueprint": "Preserves the ancestor lem-trf-local-term-locality proof (1)--(2) nearby-cycle/cotangent-resolution support route recorded in blueprint.from; realizes the entire foundational comonad input to lem-trf-adjunction-standard-simplicial-homotopy via Stacks 0G5N, used by 08NC. Steps 1--5 give 0G5N simplicial relations, step 6 its use of 016B, steps 7--8 its augmentation, step 9 evaluation. Re-split: old steps 1--2, 3--5 and 7--9 are allocated respectively to the three new nodes; old step 6 is the parent reconstruction step."
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q18-faf179217",
-  "group": "Q18",
+  "reviewer": "NT-cc-N5-2c5ffa965",
+  "group": "N5",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-faf179217 (reviewer sub-agent of L); spot-checked: Read Stacks simplicial.tex 0G5M (example-godement), 0G5N (lemma-godement) with its full proof, and 016B (lemma-characterize-simplicial-object) (1)(a)-(e), (2), (3). The item statement is unchanged from live (unsplit; same stmt_deps) and matches 0G5N hypothesis by hypothesis: T,e,c are Y,d,s, the counit and coassociativity equations agree, and every degree is covered. I recomputed every step. Step 1: interchange law from naturality. Steps 2-5: all five relations by explicit words with checked index ranges; (c) uses the counits and (e) with i=j uses coassociativity. Step 6: new node applied in Fun(C,C), size handled by a containing universe. Step 7: A_n=e^{*(n+1)}, with (e*e)c=e from e*e=e(e*1_1) and the counit law. Step 8: the new node's morphism clause turns this into an augmentation. Step 9: naturality of evaluation. New node lem-trf-simplicial-operators-reconstruction: true, statement-only, self-contained, exactly 016B(2),(3), with all searches recorded. The pinned Mathlib only announces the GenRel equivalence (GeneratorsRelations/Basic.lean:18, NormalForms.lean:27), so the node is not a leaf. It is not a duplicate: simplex-presentation-faithful gives only faithfulness, godement-relations covers concrete module operators, monadic-bar-totalization is enriched/derived, and no blueprint node carries 0G5N or 016B. It is not a restatement of the item (D1). Blueprint from/via are correct. The route stays in unit sk-i-curve-zero, so no tool_uses. The parent's step 2 uses exactly the item's statement. No cycle, no SGA. Advisory: the inherited statement uses augmentation/const without a definition node; this is standard and not a split fault. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-2c5ffa965 (reviewer sub-agent of L); spot-checked: This is the fourth push of the human-ordered re-split (note released 2026-10-22, keep_plan). The three earlier heads 62a0, 905f and 1b55 were each PASSed and then refused at landing as 'side-complete, not in the live DAG', which is a promotion fault. Ignoring split_report, the item and the three new nodes on this head are byte-identical to 1b55. Live still has the old 9-step proof (4540 characters) with the note released, and none of the new ids exists live, so the delivery is not superseded. I re-read Stacks simplicial.tex 0G5M (example-godement) and 0G5N (lemma-godement, the statement and the proofs of (1)(a)-(e)). Where the old steps went: steps 1-2 (interchange calculus and face-face) to lem-trf-comonad-face-identities, about 1297 characters; steps 3-5 to lem-trf-comonad-mixed-degeneracy-identities, about 1339; steps 7-9 (counit words, augmentation, evaluation) to lem-trf-comonad-counit-augmentation, about 1438; step 6 stays as parent step 3. The parent is a 4-step assembly of 1527 characters. Nothing was dropped, the blocks are comparable, and none restates the item: the face node assumes only e, the mixed node constructs no object, and the augmentation node assumes the simplicial object is supplied. Index checks: face-face for 0<=i<j<=n+1 gives n+2 factors, and the edge j=i+1 has middle factor 1_0. Mixed (b) needs n>=2 and i<j<=n-1. Mixed (d) is written 0<=j<i-1<=n-1, the same range as Stacks' 0<j+1<i<=n. Mixed (c) gives (e*1_1)c=(eT)c and (1_1*e)c=(Te)c, the two counit laws; at n=1 it is the bare counit laws. (e) with i=j gives (cT)c=(Tc)c, which is coassociativity; at n=1, i=j=0 it is coassociativity itself. Augmentation: e*e=e(e*1_1), so the left counit alone gives (e*e)c=e and A_{n+1}s_i=A_n; also A_{n-1}d_i=A_n and A_0=e. The morphism criterion makes this an augmentation, and E(f)=T^{n+1}(f) commutes by naturality of d, s and A. Parent steps 1-4 meet the hypotheses of the nodes they cite. Reconstruction (statement unchanged from the previous head and live) applies in the ordinary category Fun(C,C). The duplicate search for 0G5N, 0G5M, godement, comonad, counital and coassociative over the current snapshot found only a predicate def (def-trf-comonad-standard-resolution), concrete free-category comonad nodes and concrete Godement nodes; none is a duplicate. Unit stays sk-i-curve-zero, no tool_uses, no SGA, no cycle. No changes. Maintainer: L must promote this identical split to the live DAG instead of re-dispatching it."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.ComonadSimplicialObject",
@@ -252,5 +215,16 @@
   "result": "pass",
   "note": "Re-delivery after H2 return (fb67a260); Lean file byte-identical. Adds new def node def-trf-endofunctor-powers with existing:true record on unchanged Sheaf.CategoryTheory.NaturalTransportInduction / CategoryTheory.NaturalTransport.power (signature verbatim, statement T^0=id, T^{n+1}=T∘T^n matches recursion, cites live def-nagata-category, source Stacks 0G5M/0G5N); item stmt_deps now [def-weil-pbc-simplicial-object, def-trf-endofunctor-powers], no theorem dep, no other node change vs live. power is the only owner-module decl used; no competing owner live or in runs/2; no cycle. Statement re-checked vs 0G5N: counit/coassoc hyps, faces T^i e T^{n+1-i}, degeneracies T^i c T^{n-i}, augmentation degree-0 = e, evaluation functor pinned; edge cases fine. nt_compile --json clean 1.4 s exit 0. Advisory: lem-trf-global-frobenius-iterate-formula can later cite the new def node."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

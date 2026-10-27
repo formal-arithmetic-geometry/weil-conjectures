@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-free-quotient-first-cohomology-estimate",
+ "kind": "statement",
+ "title": "Numerical first-cohomology estimate for a coherent free quotient",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq1$, $r\\geq1$, and $b\\geq1$ an integer, and put $X=\\mathbf P^n_k$. Let\n$$0\\longrightarrow K\\longrightarrow\\mathcal O_X^{\\oplus r}\\longrightarrow F\\longrightarrow0$$\nbe a short exact sequence of coherent modules [pqf-def-coherent]. Use twists $E(d)=E\\otimes\\mathcal O_X(d)$ [def-pc-projective-space-twist], module sheaf cohomology [pqf-def-cohomology], Euler characteristics [def-pc-euler-characteristic] and finite vector-space dimensions [def-weil-vector-space-dimension]. Assume $H^q(X,K(b))=0$ for every $q\\geq2$, and put $C=\\binom{n+b}{n}$. Then\n$$\\chi(X,K(b))=rC-\\chi(X,F(b)),\\qquad \\dim_kH^0(X,K(b))\\leq rC,$$\nand\n$$0\\leq\\dim_kH^1(X,K(b))=\\dim_kH^0(X,K(b))-\\chi(X,K(b))\\leq\\chi(X,F(b)).$$\nIn particular, for every polynomial $P\\in\\mathbf Q[t]$ with $\\chi(X,F(d))=P(d)$ for every integer $d$, one has\n$$0\\leq\\dim_kH^1(X,K(b))\\leq P(b)\\leq\\max(0,\\lceil P(b)\\rceil).$$",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08AG (lemma-bound-quotients-free), final paragraph starting On the other hand, by the vanishing of the higher cohomology groups; the numerical estimate is stated at b >= 1 to avoid the erroneous assertion about H0 at twist zero."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "pqf-def-coherent",
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology",
+  "def-pc-euler-characteristic",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=\\mathcal O_X(b)$. By the twist definition $L$ is locally free of rank one, so tensor exactness and tensor symmetry give an exact sequence with middle term $\\mathcal O_X^{\\oplus r}\\otimes L$. Identify this term with $L^{\\oplus r}$ by $(a_i)_i\\otimes s\\mapsto(a_i s)_i$; the inverse sends $(s_i)_i$ to $\\sum_i e_i\\otimes s_i$, where $e_i$ are the standard basis sections. These maps are inverse by bilinearity and commute with restriction, giving $0\\to K(b)\\to L^{\\oplus r}\\to F(b)\\to0$. These twists are coherent by the defining local conditions for coherence: on each trivializing open, tensoring identifies the twisted module with the original one, so finite generation and finite generation of kernels of maps from finite free modules hold on the same neighbourhoods. These local conditions give coherence on X. Projective-space properness applies to the finite coordinate set $\\{0,\\ldots,n\\}$ over $\\operatorname{Spec}k$. The proper coherent cohomology theorem therefore gives finite-dimensional cohomology and well-defined Euler characteristics for all three terms.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "pqf-def-coherent",
+    "lem-sc-ext-tensor-exact",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, final numerical paragraph (at positive twist b)"
+   }
+  },
+  {
+   "text": "For $0\\leq j\\leq r$, $L^{\\oplus j}$ is coherent directly from the coherence definition: the projection from the coherent $L^{\\oplus r}$ gives finite type, and a map from a finite free module into $L^{\\oplus j}$ has the same kernel after composing with its split inclusion into $L^{\\oplus r}$. In particular, $L$ is coherent because $r\\ge1$. Apply projective twist cohomology with $A=k$ and $d=b\\ge1$: $H^0(X,L)$ has basis the monomials $x_0^{e_0}\\cdots x_n^{e_n}$ with nonnegative exponents summing to $b$, and all positive cohomology vanishes. There are $C=\\binom{b+n}{n}$ such monomials: write $b$ identical marks separated into $n+1$ consecutive blocks by $n$ separators, and choose the separator positions among the $b+n$ positions. Thus $\\dim H^0(X,L)=\\chi(X,L)=C$, with the Euler sum justified by coherence and properness. A section of the finite direct sum $L^{\\oplus r}$ is an $r$-tuple of sections. For each monomial basis section $m$ and each index $1\\le i\\le r$, place $m$ in coordinate $i$ and zero elsewhere. These $rC$ tuples span by expanding each coordinate in the monomial basis; a relation is zero only when every coefficient is zero, by independence in each coordinate. They are therefore a basis, so the section space has dimension $rC$. For $0\\le j<r$, Euler additivity for $0\\to L^{\\oplus j}\\to L^{\\oplus(j+1)}\\to L\\to0$ gives $\\chi(X,L^{\\oplus(j+1)})=\\chi(X,L^{\\oplus j})+C$. The zero sheaf has zero cohomology and Euler characteristic, so induction starting at $j=0$ proves $\\chi(X,L^{\\oplus j})=jC$ for every $j\\le r$, in particular the required equality at $j=r$.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology",
+    "def-pc-euler-characteristic",
+    "lem-pc-euler-additive",
+    "pqf-def-coherent",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, final numerical paragraph (at positive twist b)"
+   }
+  },
+  {
+   "text": "Euler additivity applied to the twisted sequence gives $\\chi(X,K(b))=rC-\\chi(X,F(b))$. The cohomology sequence begins with an injection $H^0(X,K(b))\\hookrightarrow H^0(X,L^{\\oplus r})$. Hence $h^0(K(b))\\le rC$: the image of a basis under an injective linear map is linearly independent in the target, whose dimension is $rC$.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "pqf-def-cohomology",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, final numerical paragraph (at positive twist b)"
+   }
+  },
+  {
+   "text": "In the finite Euler sum for $K(b)$, every term of degree $q\\ge2$ is zero by the hypothesis. Therefore $\\chi(X,K(b))=h^0(K(b))-h^1(K(b))$. Rearranging and substituting step 3 gives $h^1(K(b))=h^0(K(b))-rC+\\chi(X,F(b))\\le\\chi(X,F(b))$. Dimensions are nonnegative integers, proving the full asserted chain.",
+   "uses": [
+    "def-pc-euler-characteristic",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, final numerical paragraph (at positive twist b)"
+   }
+  },
+  {
+   "text": "For the asserted polynomial $P$, substitute $\\chi(X,F(b))=P(b)$. The preceding inequality also proves $P(b)\\ge0$. By the defining property of the ceiling, $P(b)\\le\\lceil P(b)\\rceil$, and this is at most $\\max(0,\\lceil P(b)\\rceil)$. This proves the final chain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, final numerical paragraph (at positive twist b)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "pqf-def-coherent",
+  "lem-sc-ext-tensor-exact",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-projective-space-twist-cohomology",
+  "def-pc-euler-characteristic",
+  "lem-pc-euler-additive",
+  "pqf-def-cohomology",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08AG, lemma-bound-quotients-free, final numerical paragraph (at positive twist b)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a coherent quotient O power r to F on projective space with kernel K and no higher cohomology of K at positive twist b, h1(K(b)) is at most chi(F(b))",
+   "results": "{\"t\": \"2026-10-22T08:06:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a coherent quotient O power r to F on projective space with kernel K and no higher cohomology of K at positive twist b, h1(K(b)) is at most chi(F(b))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"isZero_Ext_succ_of_projective\", \"Rep.isZero_Tor_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"CategoryTheory.HasProjectiveDimensionLT.mk\"], \"digest\": \"a5e4bcab75aabfc6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give projective-object Ext vanishing, the definition of sheaf cohomology, cotangent cohomology, free sheaf presentations and unrelated number-theoretic bounds; none states the coherent free-quotient Euler and H1 estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"euler\", \"Exact\"",
+   "results": "{\"t\": \"2026-10-22T08:06:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"euler\\\", \\\"Exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give projective-object Ext vanishing, the definition of sheaf cohomology, cotangent cohomology, free sheaf presentations and unrelated number-theoretic bounds; none states the coherent free-quotient Euler and H1 estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar|hilbertPolynomial|finrank.*cohomology",
+   "results": "{\"t\": \"2026-10-22T08:06:09Z\", \"tool\": \"grep\", \"query\": \"eulerChar|hilbertPolynomial|finrank.*cohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give projective-object Ext vanishing, the definition of sheaf cohomology, cotangent cohomology, free sheaf presentations and unrelated number-theoretic bounds; none states the coherent free-quotient Euler and H1 estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic and global sections bound the first cohomology dimension of a kernel of a coherent free sheaf quotient at a nonnegative twist",
+   "results": "{\"t\": \"2026-10-22T08:06:09Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristic and global sections bound the first cohomology dimension of a kernel of a coherent free sheaf quotient at a nonnegative twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"IncidenceAlgebra.eulerChar\", \"groupCohomology.coboundaries₁_le_cocycles₁\", \"SheafOfModules.freeCofan\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"groupCohomology.shortComplexH1\", \"Algebra.Extension.H1Cotangent\", \"SheafOfModules.relationsOfIsCokernelFree_s\"], \"digest\": \"0e2e4dd32abc9f28\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give projective-object Ext vanishing, the definition of sheaf cohomology, cotangent cohomology, free sheaf presentations and unrelated number-theoretic bounds; none states the coherent free-quotient Euler and H1 estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Numerical bound h1 of kernel by Euler polynomial using chi kernel equal r binomial minus P and h0 kernel at most r binomial on projective space",
+   "results": "{\"t\": \"2026-10-22T08:06:19Z\", \"tool\": \"leanfinder\", \"query\": \"Numerical bound h1 of kernel by Euler polynomial using chi kernel equal r binomial minus P and h0 kernel at most r binomial on projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.numBound\", \"ChevalleyThm.MvPolynomialC.numBound\", \"NumberField.hermiteTheorem.boundOfDiscBdd\", \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"ClassGroup.normBound\", \"ChevalleyThm.MvPolynomialC.numBound_zero\", \"ChevalleyThm.degBound\", \"ChevalleyThm.MvPolynomialC.numBound_casesOn_succ\"], \"digest\": \"e905e2124913bb1d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give projective-object Ext vanishing, the definition of sheaf cohomology, cotangent cohomology, free sheaf presentations and unrelated number-theoretic bounds; none states the coherent free-quotient Euler and H1 estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar|hilbertPolynomial|finrank.*cohomology",
+   "results": "{\"t\": \"2026-10-23T04:30:12Z\", \"tool\": \"grep\", \"query\": \"eulerChar|hilbertPolynomial|finrank.*cohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; projective-object Ext/Tor vanishing, generic sheaf cohomology definitions and group/cotangent cohomology do not state this projective coherent numerical estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first cohomology dimension of the kernel of a free coherent sheaf quotient on projective space is bounded by the Euler characteristic of its quotient",
+   "results": "{\"t\": \"2026-10-23T04:30:13Z\", \"tool\": \"leansearch\", \"query\": \"The first cohomology dimension of the kernel of a free coherent sheaf quotient on projective space is bounded by the Euler characteristic of its quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.shortComplexH1\", \"SheafOfModules.relationsOfIsCokernelFree\", \"groupCohomology.H1InfRes\", \"Algebra.Extension.H1Cotangent\", \"groupCohomology.coboundaries₁_le_cocycles₁\", \"groupCohomology.cocycles₁\", \"groupCohomology.d₀₁_ker_eq_invariants\", \"groupCohomology.coboundaries₁\"], \"digest\": \"4a193f83c9ffed8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; projective-object Ext/Tor vanishing, generic sheaf cohomology definitions and group/cotangent cohomology do not state this projective coherent numerical estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\", \"Exact\"",
+   "results": "{\"t\": \"2026-10-23T04:30:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"eulerChar\\\", \\\"Exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; projective-object Ext/Tor vanishing, generic sheaf cohomology definitions and group/cotangent cohomology do not state this projective coherent numerical estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On projective space a coherent quotient of a finite free sheaf with kernel K satisfies h1(K(b)) at most the Euler characteristic of the quotient when higher cohomology of K(b) vanishes",
+   "results": "{\"t\": \"2026-10-23T04:30:13Z\", \"tool\": \"leanfinder\", \"query\": \"On projective space a coherent quotient of a finite free sheaf with kernel K satisfies h1(K(b)) at most the Euler characteristic of the quotient when higher cohomology of K(b) vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isZero_Ext_succ_of_projective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"Rep.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton\"], \"digest\": \"257b675d9989daf9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; projective-object Ext/Tor vanishing, generic sheaf cohomology definitions and group/cotangent cohomology do not state this projective coherent numerical estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic additivity and an injection on global sections bound the first sheaf cohomology of a twisted kernel by r times binomial minus its Euler characteristic",
+   "results": "{\"t\": \"2026-10-23T04:32:41Z\", \"tool\": \"leanfinder\", \"query\": \"Euler characteristic additivity and an injection on global sections bound the first sheaf cohomology of a twisted kernel by r times binomial minus its Euler characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\"], \"digest\": \"fb0a1c11fe3d07c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; projective-object Ext/Tor vanishing, generic sheaf cohomology definitions and group/cotangent cohomology do not state this projective coherent numerical estimate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-quotient-kernel-regularity-bound",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Tag 08AG (lemma-bound-quotients-free), final paragraph starting On the other hand, by the vanishing of the higher cohomology groups; the numerical estimate is stated at b >= 1 to avoid the erroneous assertion about H0 at twist zero.",
+   "via": [
+    "lem-sfb-free-quotient-kernel-regularity-bound",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-free-quotient-first-cohomology-estimate",
+  "worker": "stage1",
+  "summary": "Proved the unchanged numerical estimate from existing tensor exactness, proper coherent finiteness, projective twist cohomology, Euler additivity and the cohomology sequence. No new nodes. Checked the positive-twist restriction against the source error at twist zero. Repair of returned head 45303277079: rechecked all cited statements against the current DAG, preserved the numerical argument and logged searches, and made the coherence justification explicitly cite its definition. Delivery is rebased by the delivery tool onto current origin/sheaf-dag for promotion of the side completion. Rechecked the latest return at c3e2a8629cf; made coherence of every intermediate finite sum explicit before Euler additivity, using the already cited coherence definition. Repair of return 10bf131f132: reran the authorized rebase dry run, reread all current cited statements and verified all thirteen retained quotations; made the finite-free tensor identification explicit by mutually inverse section maps. Repair of the 08:59 UTC return of e0c87ad1a31: rebased by the authorized tool, reread all ten current cited statements and Stacks 08AG/08AA/01XT, expanded the finite-tuple section basis proof, and cited the dimension definition at both basis arguments. Repair of the 09:29 UTC return of f5cf86577a7: initial current-base dry run passed at dc48f2f0318; all current dependency statements still match all fifteen retained quotes. Moved the coherence check ahead of the first use of the Euler characteristic of L, and wrote the Euler-additivity induction with its base, recurrence and index range.",
+  "blueprint": "Realizes the final numerical paragraph of Stacks 08AG, the boundedness prerequisite in the recorded ancestry for det-thm-sf-ctf-stability-direct-images proof (3); no unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "Exact tensoring by a locally free rank-one twist is a generic module-sheaf tool, not another unit route to alteration boundedness."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Properness of projective space supplies the hypotheses of coherent finiteness and Euler additivity."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Proper coherent cohomology finiteness justifies all dimensions and Euler sums; it is a generic input to the Stacks 08AG calculation."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "The monomial basis and positive-twist vanishing are the standard projective-space computation used by Stacks 08AG."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Euler additivity on coherent exact sequences is precisely the generic numerical tool used by the source."
+   },
+   {
+    "node": "pqf-def-cohomology",
+    "why": "The statement explicitly supplies the cohomology long exact sequence, whose degree-zero injection is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ext-tensor-exact",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-euler-additive",
+  "pqf-def-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-f0005b55e",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-f0005b55e (reviewer sub-agent of L); spot-checked: This is the 6th push of the split. The 5 earlier heads were PASSed and then returned only because promotion to the live DAG failed; the live and side-live item is still unsplit with an empty proof, and its statement is identical to the delivered one. The delivery has 0 new nodes. The only change from f5cf86577a73 is in step 2. Coherence of L^{⊕j} now comes first: projection from L^{⊕r} gives finite type, and the kernel of any map from a finite free module into L^{⊕j} equals the kernel of its composite with the split inclusion into L^{⊕r}. The induction is now explicit: χ(0)=0 and χ(L^{⊕(j+1)})=χ(L^{⊕j})+C from lem-pc-euler-additive, so χ(L^{⊕r})=rC. Both changes are correct, and every Euler sum involves only coherent sheaves on the proper X. I reread all steps. Step 1: O(b) is invertible, tensoring is exact, O^r⊗L≅L^r explicitly, P^n_k is proper, and cohomology is finite. Step 2: twist-cohomology parts (i) and (iii) with n≥1 and b≥1 give the monomial basis, C=binom(n+b,n) by stars and bars, h0(L^r)=rC by the tuple basis. Step 3: χ(K(b))=rC−χ(F(b)), and h0≤rC from the H0 injection in the long exact sequence stated in pqf-def-cohomology. Step 4: χ=h0−h1, so h1=h0−rC+χ(F(b))≤χ(F(b)). Step 5 is the ceiling inequality. All 11 cited statements are identical to live. Source: Stacks varieties.tex 08AG, line 6856, closing paragraph at lines 6984–6999. The source wrongly says h0 is zero at twist m'=0; the item assumes b≥1 and avoids this. Edge cases check out: F=0, F=O^r, and on P^1 both K=O(−1) and K=O(−3) at b=1. No SGA is cited, the route is unchanged, there is no re-split note, and the generic tool_uses are accepted. No fixes. Maintainer: this split needs promotion to the live DAG."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeQuotientFirstCohomologyEstimate",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.freeQuotient_firstCohomology_estimate",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.freeQuotientTwistCohomology",
+   "AlgebraicGeometry.ProjectiveSpace.freeQuotientTwistEuler",
+   "AlgebraicGeometry.ProjectiveSpace.freeQuotient_firstCohomology_estimate"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeQuotientFirstCohomologyEstimate.lean",
+  "statement": "theorem freeQuotient_firstCohomology_estimate (k : Type u) [Field k] (n r : ℕ) (hn : 1 ≤ n) (hr : 1 ≤ r) (b : ℤ) (hb : 1 ≤ b) (K F : (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of k))).Modules) (i : K ⟶ SheafOfModules.free (R := (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of k))).ringCatSheaf) (ULift.{u} (Fin r))) (q : SheafOfModules.free (R := (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of k))).ringCatSheaf) (ULift.{u} (Fin r)) ⟶ F) (w : i ≫ q = 0) (hseq : (ShortComplex.mk i q w).ShortExact) (hK : RingedSpace.IsCoherent (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of k))).toRingedSpace K) (hF : RingedSpace.IsCoherent (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of k))).toRingedSpace F) (hvan : ∀ j : ℕ, 2 ≤ j → IsZero (freeQuotientTwistCohomology k n K b j)) : freeQuotientTwistEuler k n K b = (r * (n + b.toNat).choose n : ℕ) - freeQuotientTwistEuler k n F b ∧ (Module.finrank k (freeQuotientTwistCohomology k n K b 0) : ℤ) ≤ (r * (n + b.toNat).choose n : ℕ) ∧ 0 ≤ (Module.finrank k (freeQuotientTwistCohomology k n K b 1) : ℤ) ∧ (Module.finrank k (freeQuotientTwistCohomology k n K b 1) : ℤ) = (Module.finrank k (freeQuotientTwistCohomology k n K b 0) : ℤ) - freeQuotientTwistEuler k n K b ∧ (Module.finrank k (freeQuotientTwistCohomology k n K b 1) : ℤ) ≤ freeQuotientTwistEuler k n F b ∧ ∀ P : Polynomial ℚ, (∀ d : ℤ, (freeQuotientTwistEuler k n F d : ℚ) = P.eval (d : ℚ)) → 0 ≤ (Module.finrank k (freeQuotientTwistCohomology k n K b 1) : ℚ) ∧ (Module.finrank k (freeQuotientTwistCohomology k n K b 1) : ℚ) ≤ P.eval (b : ℚ) ∧ P.eval (b : ℚ) ≤ (max 0 ⌈P.eval (b : ℚ)⌉ : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The cohomology helper specializes RingedSpace.moduleCohomology and restricts scalars along the canonical projective structure map. The Euler helper specializes the recorded Scheme.Modules.eulerChar. Both have concrete bodies. All dimension differences are in Z; the polynomial clause is in Q, with an integer ceiling cast to Q. No statement correction or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29efb9d26",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Only the item node's new lean field differs from side-live; one new module; lean.statement matches the file verbatim; no new nodes; stmt_deps unchanged; report has Worker report and Second reading by Q92. Checked every clause against the node and Stacks 08AG (varieties.tex 6856, 6984-6999; b>=1 avoids the source's wrong twist-zero claim). Hypotheses: Field k; n,r>=1 in N, b:Z with hb; X = ℙ(ULift(Fin(n+1)); Spec k) with canonical Over and proper instances; real ShortExact with free O^r middle; RingedSpace.IsCoherent K,F (pqf-def-coherent record); E(d)=E⊗twist d, E first; vanishing for all j>=2. Conclusions: Euler equation in Z without truncated subtraction, C=(n+b.toNat).choose n, h0<=rC, 0<=h1, h1=h0-chi, h1<=chi(F(b)), polynomial clause for all d:Z with integer ceiling cast to Q. Helpers freeQuotientTwistCohomology (moduleCohomology restricted along globalSectionsRingHom) and freeQuotientTwistEuler (eulerChar) are concrete, have source/blueprint docstrings and duplicate nothing. Theorem docstring has the 5 steps; proof-only imports non-public; no stronger assumption; no pro-etale substitute. Edge cases F=0, K=0, P^1 O(-1), r=b=1 hold. eulerChar uses Scheme.Modules.H while h0/h1 use moduleCohomology: still true via Stacks 01E3 and each notion uses its recorded owner; the stage-3 proof and the consumer lem-sfb-free-quotient-kernel-regularity-bound will need that comparison. No compile run (no file changed)."
+ }
+}

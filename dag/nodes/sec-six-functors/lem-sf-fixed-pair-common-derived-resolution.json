@@ -1,0 +1,264 @@
+{
+ "id": "lem-sf-fixed-pair-common-derived-resolution",
+ "kind": "statement",
+ "title": "Transported fixed-pair functors and common derived resolution models",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be Grothendieck abelian categories [def-sp-grothendieck-abelian] in compatible chosen universes, with additive autoequivalences $F,H$. Write $\\mathcal B=\\mathcal C^F$, $\\mathcal E=\\mathcal D^H$ and $U_F,U_H$ for the fixed-pair categories and forgetting [def-weil-endofunctor-fixed-pair-category]. Assume $\\mathcal B,\\mathcal E$ are Grothendieck abelian, that $U_F,U_H$ create finite limits and are exact and conservative, and that $U_F$ preserves K-injective complexes. Let $L:\\mathcal C\\to\\mathcal D$ be additive and left exact, and $e:HL\\xrightarrow{\\sim}LF$ natural. The formulas\n$$\\widetilde L(X,\\theta)=(LX,L(\\theta)\\circ e_X),\\qquad\\widetilde L(a)=L(a)$$\ndefine an additive left exact functor $\\mathcal B\\to\\mathcal E$, with $U_H\\widetilde L=LU_F$ on objects, morphisms, complexes and homotopies. Use ordinary unbounded derived categories [def-weil-abstract-derived-category] and total right derived functors with units [def-sfb-right-derived-functor]. For every complex $K$ in $\\mathcal B$ there is a K-injective resolution $s:K\\to I$; every such resolution has $U_Fs$ a K-injective resolution of $U_FK$. There are canonical resolution isomorphisms in $D(\\mathcal D)$\n$$D(U_H)R\\widetilde L(Q_{\\mathcal B}K)\\xrightarrow{\\sim}Q_{\\mathcal D}U_H\\widetilde L(I)=Q_{\\mathcal D}L(U_FI)\\xleftarrow{\\sim}RL(D(U_F)Q_{\\mathcal B}K).$$\nThus the two derived values have a specified common complex model, giving an objectwise comparison by the identity on that model. For a chain map $t:I\\to I'$ of K-injective complexes of $\\mathcal B$, the two derived computations send $Qt$ to the same map $Q_{\\mathcal D}L(U_Ft)$ under these isomorphisms.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean",
+  "place": "rightDerivedFunctorMapOfNatIsoCompForgetIso, lines 75-97; Endofunctor/IsoAlgebra.lean mapOfNatIsoCompForgetIso and preservesFiniteLimits_mapOfNatIso; Stacks Tags 079P, 070K, 070Y; returned item steps 9-10"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\alpha_X=L(\\theta_X)e_X:HLX\\to LX$. It is an isomorphism, with inverse $e_X^{-1}L(\\theta_X^{-1})$. If $a:(X,\\theta_X)\\to(Y,\\theta_Y)$ is a fixed-pair morphism [def-weil-endofunctor-fixed-pair-category], then naturality of $e$ gives\n$$L(a)\\alpha_X=L(a\\theta_X)e_X=L(\\theta_Y F(a))e_X=L(\\theta_Y)e_YHL(a)=\\alpha_YHL(a).$$\nThus $L(a)$ is a morphism of the proposed target pairs. The identity and composition laws follow from those of $L$. This constructs $\\widetilde L$ and gives $U_H\\widetilde L=LU_F$ on objects and morphisms.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+    "place": "Map: mapOfNatIsoCompForgetIso; fixed-pair transport formula"
+   }
+  },
+  {
+   "text": "Addition and zero of fixed-pair morphisms are their underlying addition and zero: the commuting equation is closed under addition because $F,H$ are additive [def-weil-endofunctor-fixed-pair-category]. Therefore $\\widetilde L(a+b)=L(a+b)=L(a)+L(b)$, and both forgetful functors are additive. For a finite diagram $T$ in $\\mathcal B$ with limit $P$, the underlying cone $U_FP\\to U_FT$ is limiting since $U_F$ creates finite limits. Applying the left exact $L$ leaves a limiting cone. Its legs are exactly those of $\\widetilde LP\\to\\widetilde LT$ after $U_H$. This cone is limiting in $\\mathcal E$: the unique underlying mediating map is a fixed-pair morphism, since its commuting equation holds after every limit projection (the legs already commute with the structure maps), and the projections are jointly monic. Its uniqueness follows from faithfulness of forgetting. This also treats the empty diagram. Hence $\\widetilde L$ is left exact.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+    "place": "preservesFiniteLimits_mapOfNatIso; explicit cone verification using the assumed created finite limits"
+   }
+  },
+  {
+   "text": "Apply these functors degreewise to complexes [def-weil-abstract-derived-category]. Both composites have terms $L(U_FK^r)$ and differentials $L(U_Fd^r)$, and on chain maps both have components $L(U_Fa^r)$. A chain homotopy $h$ is sent by both to the same components $L(U_Fh^r)$: additivity carries $a-b=dh+hd$ to the corresponding equation. Thus the equality of step 1 holds on complexes and homotopies. Termwise additive functors commute with shifts and mapping cones: the shifted differential $-d$ maps to $-L(d)$ and the cone matrix $\\left(\\begin{smallmatrix}d'&a\\\\0&-d\\end{smallmatrix}\\right)$ maps to the same matrix with $L$ applied to every entry, using its canonical biproduct identification. Consequently their functors from the homotopy categories to the target derived categories are exact.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+    "place": "mapOfNatIsoCompForgetIso, applied termwise; derived-category cone and homotopy formulas"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kinjective-functorial-existence] to the assumed Grothendieck abelian categories $\\mathcal B$ and $\\mathcal C$. Every complex of each has a K-injective resolution; in particular choose $s:K\\to I$ in $\\mathcal B$. By [lem-weil-pbc-exact-functor-derived-factorization], the exact additive $U_F$ preserves quasi-isomorphisms, so $U_Fs$ is a quasi-isomorphism. Its target $U_FI$ is K-injective by the assumed preservation of K-injectives by $U_F$. This proves the assertion for every such $s$, not just the chosen replacement functor. Step 3 and [lem-weil-pbc-kinjective-total-derived] give the total right derived functors of $\\widetilde L$ and $L$, with units $\\widetilde\\eta,\\eta$ and isomorphic unit components at K-injectives as specified by [def-sfb-right-derived-functor].",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; derived.tex Tags 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "Use the natural localization identification $\\varphi_J:D(U_H)Q_{\\mathcal E}J\\xrightarrow{\\sim}Q_{\\mathcal D}U_HJ$ of [lem-weil-pbc-exact-functor-derived-factorization]. For the resolution $s:K\\to I$ define\n$$a_s=\\varphi_{\\widetilde LI}\\,D(U_H)(\\widetilde\\eta_I^{-1})\\,D(U_H)(R\\widetilde L(Q_{\\mathcal B}s)),\\qquad b_s=\\eta_{U_FI}^{-1}\\,RL(Q_{\\mathcal C}U_Fs).$$\nComposition here is read right to left. Both are isomorphisms: the localized resolutions are invertible, and the two unit components are invertible on the K-injectives of step 4 [def-sfb-right-derived-functor]. The source of $a_s$ is $D(U_H)R\\widetilde L(Q_{\\mathcal B}K)$; the source of $b_s$ is $RL(Q_{\\mathcal C}U_FK)$, identified with $RL(D(U_F)Q_{\\mathcal B}K)$ by the same exact-functor factorization for $U_F$. Their targets are respectively $Q_{\\mathcal D}U_H\\widetilde LI$ and $Q_{\\mathcal D}L(U_FI)$, which are the identical complex model by step 3. These are the claimed canonical resolution isomorphisms. In particular $b_s^{-1}a_s$ is the comparison obtained by the identity on that model.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y, 070K, evaluation on K-injectives and functoriality of the derived unit; Tag 015F, exact-functor localization"
+   }
+  },
+  {
+   "text": "For a chain map $t:I\\to I'$ between K-injectives, use the identity resolutions of $I,I'$ in step 5. Naturality of the unit [def-sfb-right-derived-functor] reads\n$$R\\widetilde L(Q_{\\mathcal B}t)\\,\\widetilde\\eta_I=\\widetilde\\eta_{I'}\\,Q_{\\mathcal E}(\\widetilde Lt).$$\nConjugate by the two invertible unit components, apply $D(U_H)$, and use naturality of $\\varphi$ [lem-weil-pbc-exact-functor-derived-factorization]. This yields\n$$a_{1_{I'}}D(U_H)R\\widetilde L(Q_{\\mathcal B}t)a_{1_I}^{-1}=Q_{\\mathcal D}U_H\\widetilde L(t)=Q_{\\mathcal D}L(U_Ft).$$\nThe same unit-naturality equation for $L$ at $U_Ft$ gives\n$$b_{1_{I'}}RL(Q_{\\mathcal C}U_Ft)b_{1_I}^{-1}=Q_{\\mathcal D}L(U_Ft).$$\nThe exact-functor factorization identifies the middle map on the left with $RL(D(U_F)(Q_{\\mathcal B}t))$. These equalities prove the last clause, including equality of the actual maps on the common model.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, canonical unit evaluation on K-injectives; naturality and Tag 015F localization factorization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+  "place": "Map section and RightDerivedFunctor/IsoAlgebra.lean:75-97; resolution formulas expanded using Stacks 079P, 070K, 070Y and the existing exact-functor factorization node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor intertwining two autoequivalences lifts to fixed pairs and both forgotten derived values are computed on the same underlying K-injective resolution",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an equivariant functor the derived object after forgetting is computed by applying the underlying functor to a shared K-injective resolution",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsoAlgebra\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|rightDerivedFunctorCompMapDerivedCategoryIso|mapOfNatIso",
+   "results": "Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left exact functor intertwining two autoequivalences lifts to fixed pairs and both forgotten derived values are computed on the same underlying K-injective resolution",
+   "results": "CategoryTheory.LeftExactFunctor.of_fst; CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift; CategoryTheory.injectiveResolutions; CategoryTheory.LeftExactFunctor.forget_obj_of; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; CategoryTheory.LeftExactFunctor.ofExact_map; CategoryTheory.LeftExactFunctor.forget_obj; CategoryTheory.Abelian.LeftResolution.transport",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|mapOfNatIso|rightDerivedFunctorMapOfNatIsoCompForgetIso",
+   "results": "Mathlib/Algebra/Category/AlgCat/Basic.lean; source read: ExactFunctor.lean:36-53 and RightDerived.lean:164-174 show only generic exact-functor factorization or higher derived functors of individual objects.",
+   "date": "2026-10-22",
+   "verdict": "no match: does not state transport on fixed pairs together with the common unbounded K-injective model and map compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsoAlgebra\"",
+   "results": "No hits; source read: ExactFunctor.lean:36-53 and RightDerived.lean:164-174 show only generic exact-functor factorization or higher derived functors of individual objects.",
+   "date": "2026-10-22",
+   "verdict": "no match: does not state transport on fixed pairs together with the common unbounded K-injective model and map compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport of fixed pairs along an equivariant additive functor and computation of both derived images on the same K-injective resolution",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.Functor.mapExtAddHom; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'; source read: ExactFunctor.lean:36-53 and RightDerived.lean:164-174 show only generic exact-functor factorization or higher derived functors of individual objects.",
+   "date": "2026-10-22",
+   "verdict": "no match: does not state transport on fixed pairs together with the common unbounded K-injective model and map compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor intertwining autoequivalences lifts to fixed pairs and forgotten derived values use a common K-injective resolution",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; source read: ExactFunctor.lean:36-53 and RightDerived.lean:164-174 show only generic exact-functor factorization or higher derived functors of individual objects.",
+   "date": "2026-10-22",
+   "verdict": "no match: does not state transport on fixed pairs together with the common unbounded K-injective model and map compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant functor between categories with automorphisms induces a functor on invertible algebras whose total right derived functor commutes with forgetting",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc; source read: ExactFunctor.lean:36-53 and RightDerived.lean:164-174 show only generic exact-functor factorization or higher derived functors of individual objects.",
+   "date": "2026-10-22",
+   "verdict": "no match: does not state transport on fixed pairs together with the common unbounded K-injective model and map compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-fixed-pair-derived-forget-comparison",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Parent lem-sf-fixed-pair-derived-forget-comparison proof step 4 (returned steps 9-10): construct the transported functor and identify the two derived values on a common K-injective resolution; inherited package clause (2), open-immersion comparison.",
+   "via": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-fixed-pair-common-derived-resolution",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the fixed-pair morphism equation, additivity, finite-limit creation and degreewise/homotopy equalities. Reused existing general K-injective existence, total-derived and exact-functor-factorization nodes. Specified both common-model isomorphisms by the derived units and wrote their chain-map compatibility. No new nodes; no unsupported attachment to the more abstract upstream comparison isomorphism.",
+  "blueprint": "Realizes the parent returned steps 9-10, now parent proof step 4, serving the package unit clause (2) open-immersion comparison. blueprint_refs ancestor returns None; retained inherited null ancestor and via rather than inventing an imported ancestor. Whole-blueprint searches fixed pair and common derived resolution found no equivalent general statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "General Grothendieck K-injective existence, used for B and C; no fixed-pair-specific existence theorem is required."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "General total right derivation from enough K-injectives, applied to the termwise additive functors after the cone computation; the package unit has no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-26002568e",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-26002568e (reviewer sub-agent of L); spot-checked: I read the item in full: statement, stmt_deps and unit are unchanged against base 4e3daa7, and the delivery adds six proof steps and no new nodes. The statement gives parent lem-sf-fixed-pair-derived-forget-comparison what its steps 4 and 5 use: L~ with U_H L~ = L U_F, K-injective resolutions in C^F, and the common model Q L(U_F I). It does not restate the parent: the parent's iso alpha and its unit identification at M[0] come from kinjective-exact-square-comparison. Step 1: I recomputed L(a)L(theta_X)e_X = L(theta_Y)e_Y HL(a) using naturality of e; the inverse is correct. Step 2: additivity follows from additivity of F and H. For left exactness, U_F creates finite limits, L preserves them, and the mediating map is equivariant because the equation holds after each projection, which are jointly monic; the empty diagram is included and L is not assumed exact. Step 3: the degreewise, homotopy, shift and cone computations match def-weil-abstract-derived-category. Step 4: 079P existence (injectives.tex theorem-K-injective-embedding-grothendieck, read) is applied to B and C, both assumed Grothendieck. 015F factorization makes U_F s a quasi-isomorphism, U_F I is K-injective by explicit hypothesis, and 070K/070Y total-derived (derived.tex, read) apply to the exact homotopy functors. Advisory only: the existence node's Hom-complex definition of K-injective and the null-homotopy definition used elsewhere are equivalent in two lines, and the DAG already uses them interchangeably. Step 5: the domains and codomains of a_s = phi D(U_H)(eta~^{-1}) D(U_H)RL~(Qs) and b_s = eta^{-1} RL(QU_F s) check out; both are invertible and their targets agree literally. Step 6: unit naturality plus phi naturality give both conjugation equations onto Q L(U_F t). Small cases: F = H = id with L = Hom(Z/2,-) (left exact, not exact), L = 0, the zero complex, unbounded complexes. Duplicate grep over all fixed-pair nodes (created-abelian-structure, natural-comparison-functor-transport, right-adjoint-comparison, exact-adjoint-forget-derived-detection, free-derived-weil-resolution) found nothing that states the item and no cycle. No SGA is cited. I accept the generic tool uses lem-weil-pbc-kinjective-functorial-existence and lem-weil-pbc-kinjective-total-derived. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedPairCommonDerivedResolution",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_commonDerivedResolution",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairForgottenResolutionIso",
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairUnderlyingResolutionIso",
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairCommonModelComparison",
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_commonDerivedResolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FixedPairCommonDerivedResolution.lean",
+  "statement": "theorem fixedPair_commonDerivedResolution [IsGrothendieckAbelian.{gC} C] [IsGrothendieckAbelian.{gD} D] [IsGrothendieckAbelian.{gB} (IsoAlgebra F)] [IsGrothendieckAbelian.{gE} (IsoAlgebra H)] [CreatesFiniteLimits (forget F)] [CreatesFiniteLimits (forget H)] [PreservesFiniteLimits (forget F)] [PreservesFiniteColimits (forget F)] [PreservesFiniteLimits (forget H)] [PreservesFiniteColimits (forget H)] [(forget F).ReflectsIsomorphisms] [(forget H).ReflectsIsomorphisms] [(forget F).PreservesKInjectiveComplexes] [PreservesFiniteLimits L] : (mapOfNatIso e).Additive ∧ PreservesFiniteLimits (mapOfNatIso e) ∧ (mapOfNatIso e ⋙ forget H = forget F ⋙ L) ∧ (∀ X : IsoAlgebra F, ((mapOfNatIso e).obj X).str = e.app X.carrier ≪≫ L.mapIso X.str) ∧ ((mapOfNatIso e).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ (forget H).mapHomologicalComplex (ComplexShape.up ℤ) = (forget F).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ L.mapHomologicalComplex (ComplexShape.up ℤ)) ∧ (∀ (K J : CochainComplex (IsoAlgebra F) ℤ) (f g : K ⟶ J) (h : Homotopy f g) (i j : ℤ), ((forget H).mapHomotopy ((mapOfNatIso e).mapHomotopy h)).hom i j = (L.mapHomotopy ((forget F).mapHomotopy h)).hom i j) ∧ ∃ (hB : ∀ K : CochainComplex (IsoAlgebra F) ℤ, ∃ (I : CochainComplex (IsoAlgebra F) ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s) (hC : ∀ K : CochainComplex C ℤ, ∃ (I : CochainComplex C ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s), (∀ (K I : CochainComplex (IsoAlgebra F) ℤ) (s : K ⟶ I), I.IsKInjective → QuasiIso s → CochainComplex.IsKInjective (((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).obj I) ∧ QuasiIso (((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).map s)) ∧ (∀ (I J : CochainComplex (IsoAlgebra F) ℤ) [I.IsKInjective] [J.IsKInjective] (t : I ⟶ J), (fixedPairForgottenResolutionIso e hB (𝟙 I)).inv ≫ (forget H).mapDerivedCategory.map (((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutions hB).map (DerivedCategory.Q.map t)) ≫ (fixedPairForgottenResolutionIso e hB (𝟙 J)).hom = DerivedCategory.Q.map ((L.mapHomologicalComplex (ComplexShape.up ℤ)).map (((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).map t))) ∧ (∀ (I J : CochainComplex (IsoAlgebra F) ℤ) [I.IsKInjective] [J.IsKInjective] (t : I ⟶ J), (fixedPairUnderlyingResolutionIso hC (𝟙 I)).inv ≫ (L.rightDerivedFunctorOfQuasiIsoResolutions hC).map ((forget F).mapDerivedCategory.map (DerivedCategory.Q.map t)) ≫ (fixedPairUnderlyingResolutionIso hC (𝟙 J)).hom = DerivedCategory.Q.map ((L.mapHomologicalComplex (ComplexShape.up ℤ)).map (((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).map t)))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper definitions give the specified canonical a_s and b_s for every arbitrary quasi-isomorphic K-injective resolution, and their identity-on-model comparison. They use the dependency-recorded total derived functor with arbitrary quasi-isomorphism resolutions; no monomorphism condition is imposed. The theorem supplies resolution existence, transport identities and the two chain-map conjugation equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-104dbf2f8",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read node, module, report and deps (RightDerivedFunctorOfQuasiIsoResolutions ObjIso/Unit, IsoAlgebra/forget/mapOfNatIso_obj_str, mapOfNatIsoCompForgetIso=refl, PreservesKInjectiveComplexes, Mathlib mapDerivedCategoryFactors, upstream RightDerivedFunctor/IsoAlgebra:62-97). Every hypothesis matches the node with nothing stronger: Grothendieck C,D,B,E; U create finite limits, exact, conservative; U_F preserves K-injectives; L additive and left exact; e : L⋙H ≅ F⋙L = HL≅LF. Clauses: additive, left exact, structure e_X then L(θ), functor equality on objects/maps/complexes, homotopy components, every quasi-iso K-injective s gives K-injective U_F s (no mono condition). a_s and b_s are real canonical isos onto the literal Q(L(U_F I)); the comparison is a_s≪≫b_s.symm; both chain-map conjugation equations give Q(L(U_F t)). Upstream iso is the monomorphic interface and a bare nat iso, so not a duplicate. Statement verbatim, record complete, docstrings carry all 6 steps, lines ≤100, imports used, only the theorem is sorry. No recompile per instructions; worker reports clean 2.5 s compile. Advisories: PreservesKInjectiveComplexes owner def-sfb-preserves-kinjective-complexes not in stmt_deps (S2 cannot add); second reading is short but concrete."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261024T185927-L-3775636",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_commonDerivedResolution"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lem-pod-normalized-common-evaluation-naturality",
+ "kind": "statement",
+ "title": "Naturality of normalized common-stage Hom-first evaluation",
+ "statement": "Let $\\ell$ be prime, $\\Omega/\\mathbf Q_\\ell$ an algebraic closure, and $W$ a scheme on whose residue fields $\\ell$ is invertible. Use the common-stage constructible coefficient category, tensor $T$, internal Hom $H$ and permitted-pair predicate $J$ of [def-weil-derived-pullback-tensor-hom], with the normalized partial closed structure of [lem-pod-derived-automorphism-hom-evaluation]. For any permitted pairs $P=(A,B)$ and $P\\prime=(A\\prime,B\\prime)$ and any arrow $g=(a^{op},b):P\\to P\\prime$, the Hom-first evaluations satisfy $T(H(g),1_{A\\prime});ev_{P\\prime}=T(1_{H(P)},a);ev_P;b$. This holds for arbitrary common-stage morphism classes, without separatedness, finite-type or lattice hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Evaluation paragraph; common-stage evaluation descent, steps 15--16 of lem-pod-derived-automorphism-hom-evaluation."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-derived-automorphism-hom-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Represent the two permitted pairs, their morphism, tensor and Hom objects over one finite coefficient field. The canonical common-stage operation formulas and inverse-transpose normalization specialized to identity express evaluation and all operation maps by rational representatives, conjugated by the specified tensor and Hom comparisons. Substitute these into the two composites and cancel intermediate comparisons. Apply normalized rational evaluation naturality at this field. The scalar comparison preserves evaluation and its tower law makes this equality independent of further enlargement and of the chosen arrow representatives. Passing to morphism classes proves the equality. No injectivity of transition maps is used.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-coef-normalized-rational-evaluation-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Evaluation paragraph; common-stage evaluation descent, steps 15--16 of lem-pod-derived-automorphism-hom-evaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-coef-normalized-rational-evaluation-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Evaluation paragraph; common-stage evaluation descent, steps 15--16 of lem-pod-derived-automorphism-hom-evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction commuting with autoequivalences lifts to categories of objects with invertible structure maps and preserves its unit and counit",
+   "results": "Generic adjunction and mate results only; no coefficient evaluation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Mates, unit and counit compatibility and pasting; no common-stage evaluation naturality.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*naturality; PodPartialClosed; podCommonClosed",
+   "results": "Mathlib has generic evaluation naturality. Sheaf.NormalizedRationalEvaluationNaturality gives the rational version. AdicCommonStageHomTranspose and SfPackageQbarAdjunctionMapDescent impose separated finite-type models, and do not cover this coefficient identity on arbitrary schemes.",
+   "date": "2026-10-25",
+   "verdict": "no exact existing common-stage statement with this domain"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleMateCoherence",
+  "date": "2026-10-25",
+  "group": "R1"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Evaluation naturality in both Weil maps, common-stage coefficient descent.",
+   "via": [
+    "lem-pod-constructible-mate-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCommonEvaluationNaturality",
+  "file": "lean/Sheaf/Paper/NormalizedCommonEvaluationNaturality.lean",
+  "declaration": "WeilConjectures.normalizedCommonEvaluation_naturality",
+  "statement": "theorem normalizedCommonEvaluation_naturality\n    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]\n    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (W : Scheme.{u})\n    [∀ w : W, Invertible (l : W.residueField w)]\n    (P P' : (commonStageHomPairs l Ω W).FullSubcategory) (g : P ⟶ P') :\n    (commonStageDerivedTensor l Ω W).map\n        (Prod.mkHom ((commonStageDerivedInternalHom l Ω W).map g) (𝟙 P'.obj.1.unop)) ≫\n      (podCommonClosed l Ω W).evaluation P' =\n    (commonStageDerivedTensor l Ω W).map\n        (Prod.mkHom (𝟙 ((commonStageDerivedInternalHom l Ω W).obj P)) g.hom.1.unop) ≫\n      (podCommonClosed l Ω W).evaluation P ≫ g.hom.2",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261025T123621-L-1884571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261025T123621-L-1884571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

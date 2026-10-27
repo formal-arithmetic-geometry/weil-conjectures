@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-top-intersection-multilinear",
+ "kind": "statement",
+ "title": "Multilinearity of top intersection numbers",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a nonempty proper $k$-scheme of dimension $g\\geq1$ [def-weil-proper-morphism, def-kun-topological-krull-dimension], and let $\\mathcal L_1,\\ldots,\\mathcal L_g$ be invertible modules [def-sc-invertible-module]. The intersection number $(\\mathcal L_1\\cdots\\mathcal L_g\\cdot X)$ [def-sc-intersection-number] is invariant under isomorphism, symmetric in its entries and additive under tensor product in each entry. Thus replacing the $i$th entry by $\\mathcal M\\otimes\\mathcal N$ gives the sum of the two intersection numbers with $\\mathcal M$ and with $\\mathcal N$ in that entry. The value with a trivial entry is zero, and replacing an entry by its dual negates the value. These operations extend uniquely by rational multilinearity to rational linear combinations of isomorphism classes of invertible modules, with the relations $[\\mathcal M\\otimes\\mathcal N]=[\\mathcal M]+[\\mathcal N]$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BER, lemma-intersection-number-additive; Definition 0BEP, definition-intersection-number (symmetry); rational extension of the additive pairing"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-sc-intersection-number",
+  "def-sc-picard-group"
+ ],
+ "proof": [
+  {
+   "text": "Use [def-sc-intersection-number] with the identity closed immersion $X\\to X$. By [lem-sc-snapper-numerical-polynomial], its Euler-characteristic function, and the function for any finite list of invertible modules, is represented by a rational polynomial of total degree at most $g$. Here the coherent module is $\\mathcal O_X$, whose support is all of $X$; the identity case and its degree bound are explicitly included in [def-sc-intersection-number]. We may identify such polynomials from their values on integer tuples. Indeed, induct on the number of variables: for fixed integer values of all but the first variable, [lem-trf-polynomial-infinite-evaluation-identity] over $\\mathbf Q$ identifies the two polynomials in the first variable, since they agree on all integers. Each coefficient of their difference, a polynomial in the remaining variables, therefore vanishes on all remaining integer tuples and is zero by induction. The zero-variable case is equality of constants.",
+   "uses": [
+    "def-sc-intersection-number",
+    "lem-sc-snapper-numerical-polynomial",
+    "lem-trf-polynomial-infinite-evaluation-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BEP and 0BEL; uniqueness of the representing rational polynomial"
+   }
+  },
+  {
+   "text": "An isomorphism of any entry induces an isomorphism of each tensor twist, and hence of its cohomology groups; their dimensions and the alternating sum defining $\\chi$ in [def-pc-euler-characteristic] agree. Permuting the entries permutes the exponents of the same tensor product, by the symmetry isomorphism of tensor products of modules. Thus the representing polynomial is unchanged under entry isomorphisms and has its variables permuted under entry permutations, by step 1. The coefficient of $n_1\\cdots n_g$ is unchanged by these permutations. By [def-sc-intersection-number] this proves isomorphism invariance and symmetry.",
+   "uses": [
+    "def-pc-euler-characteristic",
+    "def-sc-intersection-number"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Definition 0BEP, symmetry of its coefficient construction"
+   }
+  },
+  {
+   "text": "Fix the other $g-1$ entries, with variables $t_1,\\ldots,t_{g-1}$, and replace the remaining entry by $\\mathcal M\\otimes\\mathcal N$. Apply [lem-sc-snapper-numerical-polynomial] to the list consisting of those entries, $\\mathcal M$, and $\\mathcal N$, obtaining $Q(t_1,\\ldots,t_{g-1},u,v)$ of total degree at most $g$. Its substitutions $Q(t,z,z)$, $Q(t,z,0)$, and $Q(t,0,z)$ are the polynomials for $\\mathcal M\\otimes\\mathcal N$, $\\mathcal M$, and $\\mathcal N$, respectively: at every integer tuple this follows from $(\\mathcal M\\otimes\\mathcal N)^{\\otimes z}\\cong\\mathcal M^{\\otimes z}\\otimes\\mathcal N^{\\otimes z}$, also for negative $z$ by duals, and step 1 identifies the polynomials. A monomial contributing to the coefficient of $t_1\\cdots t_{g-1}z$ in $Q(t,z,z)$ must have each $t$ exponent one and $u,v$ exponents adding to one. Thus only $t_1\\cdots t_{g-1}u$ and $t_1\\cdots t_{g-1}v$ contribute, each with multiplicity one. Their coefficients are exactly those extracted from $Q(t,z,0)$ and $Q(t,0,z)$. By [def-sc-intersection-number] this is the required additivity. Symmetry allows any slot.",
+   "uses": [
+    "lem-sc-snapper-numerical-polynomial",
+    "def-sc-intersection-number"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BER, lemma-intersection-number-additive, proof expanded by coefficient extraction"
+   }
+  },
+  {
+   "text": "Write $I(\\mathcal L)$ for the value in a fixed slot. As $\\mathcal O_X\\otimes\\mathcal O_X\\cong\\mathcal O_X$, additivity gives $I(\\mathcal O_X)=2I(\\mathcal O_X)$, hence $I(\\mathcal O_X)=0$. For an invertible module, evaluation $\\mathcal L\\otimes\\mathcal L^\\vee\\to\\mathcal O_X$ is an isomorphism: on every rank-one trivializing open of [def-sc-invertible-module] it is multiplication $\\mathcal O_X\\otimes\\mathcal O_X\\to\\mathcal O_X$, and these evaluation maps agree on overlaps. Consequently $0=I(\\mathcal L\\otimes\\mathcal L^\\vee)=I(\\mathcal L)+I(\\mathcal L^\\vee)$, giving the dual clause.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Consequence of Tag 0BER and the rank-one module definition"
+   }
+  },
+  {
+   "text": "Let $V$ be the rational vector space of finite rational linear combinations of isomorphism classes of invertible modules, modulo the relations $[\\mathcal M\\otimes\\mathcal N]-[\\mathcal M]-[\\mathcal N]$. For $v_i=\\sum_j a_{ij}[\\mathcal L_{ij}]$ define the extended value to be $\\sum_{j_1,\\ldots,j_g}(\\prod_{i=1}^g a_{i j_i}) (\\mathcal L_{1j_1}\\cdots\\mathcal L_{gj_g}\\cdot X)$. Isomorphism invariance makes each summand independent of representatives. Expanding a generating relation in any slot gives zero by step 3, also when multiplied by any rational scalar, so the formula descends to $V^g$. It is rational multilinear by distributivity of the finite sum and symmetric by step 2. Every rational multilinear extension must have this same finite-sum formula, proving uniqueness. The assumption $g\\ge1$ ensures that the trivial-entry and dual assertions refer to an existing slot.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Rational multilinear extension of Tag 0BER, explicit finite-sum construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-intersection-number",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-trf-polynomial-infinite-evaluation-identity",
+  "def-pc-euler-characteristic",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Definition 0BEP and Tag 0BER proof, using 0BEL; coefficient and rational-extension details supplied by Q22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "intersectionNumber|intersection_number|degree_pullback|degree_pos_of_isAmple",
+   "results": "0 hits; searched AlgebraicGeometry; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intersection numbers of invertible sheaves are multilinear and satisfy the proper morphism degree projection formula",
+   "results": "8 hits; searched all Mathlib / remote service; MultilinearMap.mkPiAlgebra, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, MultilinearMap.map_sum_finset_aux, AlgebraicGeometry.Proj.mul_apply, FractionalIdeal.inf_mul, ExteriorAlgebra.ιMulti_apply, AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme, AlgebraicGeometry.Scheme.IdealSheafData.map_inf",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"intersection\"",
+   "results": "2 hits; searched all Mathlib / remote service; AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected, AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected_f",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Top intersection numbers of line bundles are symmetric multilinear positive for ample bundles and satisfy the degree pullback formula for proper varieties",
+   "results": "8 hits; searched all Mathlib / remote service; AlgebraicGeometry.Proj.pullbackAwayιIso, ChevalleyThm.numBound, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.instBraidedCategoryScheme, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc, AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intersection product of g divisor classes on a projective variety is multilinear and its top pullback is zero for nondominant morphisms",
+   "results": "8 hits; searched all Mathlib / remote service; AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.mul_apply, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this geometric or bounded-line interpolation result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"intersection\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T12:04:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"intersection\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected_f\"], \"digest\": \"b66e5fb50acff51d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covers, tensor algebra, or incidence-algebra Euler characteristics, not the intersection number defined by 0BEP"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Top intersection numbers of line bundles on a proper scheme are symmetric and additive under tensor product in each argument",
+   "results": "{\"t\": \"2026-10-23T12:05:04Z\", \"tool\": \"leanfinder\", \"query\": \"Top intersection numbers of line bundles on a proper scheme are symmetric and additive under tensor product in each argument\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instBraidedCategoryScheme\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf\", \"AlgebraicGeometry.instCartesianMonoidalCategoryScheme\", \"AlgebraicGeometry.Proj.add_apply\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\"], \"digest\": \"04d8ce16c1f2a723\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covers, tensor algebra, or incidence-algebra Euler characteristics, not the intersection number defined by 0BEP"
+  },
+  {
+   "tool": "grep",
+   "query": "intersectionNumber|intersection_number|intersection.*[Mm]ultilinear",
+   "results": "{\"t\": \"2026-10-23T12:05:45Z\", \"tool\": \"grep\", \"query\": \"intersectionNumber|intersection_number|intersection.*[Mm]ultilinear\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covers, tensor algebra, or incidence-algebra Euler characteristics, not the intersection number defined by 0BEP"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The top intersection product of invertible sheaves is additive for tensor products and symmetric",
+   "results": "{\"t\": \"2026-10-23T12:05:46Z\", \"tool\": \"leansearch\", \"query\": \"The top intersection product of invertible sheaves is additive for tensor products and symmetric\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.top_prod_top\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.piInters\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"TensorProduct.Eqv.of_add_left\", \"PiTensorProduct.add_tprodCoeff'\", \"TensorProduct.gradedComm\", \"PiTensorProduct.instAddCommMonoid\", \"TensorProduct.addCommSemigroup\"], \"digest\": \"a468caf11c69e62a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covers, tensor algebra, or incidence-algebra Euler characteristics, not the intersection number defined by 0BEP"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient of the product of all variables in the Euler characteristic polynomial is a multilinear intersection pairing on the Picard group",
+   "results": "{\"t\": \"2026-10-23T12:06:55Z\", \"tool\": \"leanfinder\", \"query\": \"The coefficient of the product of all variables in the Euler characteristic polynomial is a multilinear intersection pairing on the Picard group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IncidenceAlgebra.eulerChar_prod\", \"IncidenceAlgebra.eulerChar\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.Base.chainTopCoeff_eq_of_ne\", \"RootPairing.coxeterWeightIn\", \"RootPairing.chainBotCoeff_sub_chainTopCoeff\", \"RootPairing.chainTopCoeff_sub_chainBotCoeff\", \"RootPairing.chainCoeff_chainTopIdx_aux\"], \"digest\": \"121ac972d98e12d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covers, tensor algebra, or incidence-algebra Euler characteristics, not the intersection number defined by 0BEP"
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*product.*tensor|intersection.*Picard",
+   "results": "{\"t\": \"2026-10-23T12:15:00Z\", \"tool\": \"grep\", \"query\": \"intersection.*product.*tensor|intersection.*Picard\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covers, tensor algebra, or incidence-algebra Euler characteristics, not the intersection number defined by 0BEP"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MultilinearMap\", \"intersectionNumber\"",
+   "results": "{\"t\": \"2026-10-23T12:15:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"MultilinearMap\\\", \\\"intersectionNumber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covers, tensor algebra, or incidence-algebra Euler characteristics, not the intersection number defined by 0BEP"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic coefficient additive tensor product invertible sheaf intersection pairing",
+   "results": "{\"t\": \"2026-10-23T12:15:06Z\", \"tool\": \"leanfinder\", \"query\": \"Euler characteristic coefficient additive tensor product invertible sheaf intersection pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mk_tensor\", \"IncidenceAlgebra.eulerChar_prod\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"CommRing.Pic.mul_eq_tensor\"], \"digest\": \"aed8e0b64e41a502\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme covers, tensor algebra, or incidence-algebra Euler characteristics, not the intersection number defined by 0BEP"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem mk_tensor|theorem mul_eq_tensor|lemma mk_tensor|lemma mul_eq_tensor",
+   "results": "{\"t\": \"2026-10-23T12:22:57Z\", \"tool\": \"grep\", \"query\": \"theorem mk_tensor|theorem mul_eq_tensor|lemma mk_tensor|lemma mul_eq_tensor\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"504\", \"519\"], \"digest\": \"e664c85ab12087fa\"}; Read Mathlib/RingTheory/PicardGroup.lean:504 and :519. These identify multiplication in Pic R with tensor product and do not construct a scheme intersection pairing.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-degree-polynomial",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed. Supporting input in Milne Proposition 10.13: Tag 0BER, lemma-intersection-number-additive; Definition 0BEP, definition-intersection-number (symmetry); rational extension of the additive pairing",
+   "via": [
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-top-intersection-multilinear",
+  "worker": "stage1",
+  "summary": "Read Stacks 0BEP/0BER/0BEL and all cited statements. Reused the existing Snapper polynomial and infinite-evaluation identity nodes; expanded the diagonal coefficient calculation and the quotient construction of the rational extension. No new nodes, statement changes, or Lean attachments.",
+  "blueprint": "Supporting input to the abelian-degree-polynomial proof, behind the historical alteration chain recorded in blueprint.from.place: the top intersection coefficient construction and tensor additivity. Current latest blueprint direct-image proof (3) uses compactification; this item remains a generic intersection-theory prerequisite of the already reviewed abelian-degree-polynomial node, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "Generic multivariate Euler-characteristic polynomial theorem with arbitrary list length and degree bound, needed for the intersection coefficient calculation; the six-functor unit has no intersection-polynomial theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-snapper-numerical-polynomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-96b13bf67",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-96b13bf67 (reviewer sub-agent of L); spot-checked: Read in full and checked against Stacks varieties.tex 0BEP (l.10389), 0BER (l.10432) and 0BEL; no fixes. No new nodes; the item's statement is kept and its unsplit base gets a 5-step proof. No repair note exists, so the re-split rule does not apply. Step 1: Snapper (lem-sc-snapper-numerical-polynomial) is applied with F=O_X, Supp=X, dim g; its hypotheses (proper over a field, coherent, invertible) hold. Polynomials are identified on the integer grid by a correctly set-up induction on the number of variables, using the leaf lem-trf-polynomial-infinite-evaluation-identity (Mathlib Polynomial.eq_of_infinite_eval_eq, Roots.lean:156) over Q. Step 2: isomorphism invariance and symmetry follow from chi of isomorphic modules and the fact that the monomial n1...ng is fixed under permutations. Step 3: hand check of the coefficients of Q(t,u,v) under (z,z), (z,0) and (0,z): only t1...t_{g-1}u and t1...t_{g-1}v contribute, which is the additivity that 0BER leaves implicit. Negative powers use (M⊗N)^∨≅M^∨⊗N^∨ for invertible modules. Step 4: I(O)=2I(O) gives 0, and the evaluation map is an isomorphism because it is one locally on rank-one charts, which gives the dual clause. Step 5: the finite-sum formula on the free Q-space kills the generating relations in each slot by step 3, so it descends to the quotient; uniqueness and symmetry follow. Edge cases tested: g=1, trivial and dual entries, torsion bundles, finite k, non-equidimensional X. No duplicate of 0BER or multilinearity in dag/nodes (lem-sfb-top-intersection-pullback is a different statement). The clauses the citers lem-sfb-abelian-degree-polynomial and lem-sfb-abelian-trace-intersection use are present. tool_uses entry for Snapper (generic Stacks 0BEL, not given by unit sk-thm-sf-ctf-stability) accepted. Batch 5: Snapper is general coherent cohomology, neither assumption gives it and it is no step of their proofs; its closure only reaches the general definition def-trf-schematically-dense-open through general scheme lemmas, so it is kept. The polynomial-identity node is a pure-algebra Mathlib leaf filed under sec-trace-formula with no trace content, so it is kept. No SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TopIntersectionMultilinear",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.top_intersection_multilinear",
+  "file": "lean/Sheaf/AlgebraicGeometry/TopIntersectionMultilinear.lean",
+  "statement": "theorem top_intersection_multilinear (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [Nonempty X] (g : ℕ) (_hg : 1 ≤ g) (hd : topologicalKrullDim X = ((g : ℕ∞) : WithBot ℕ∞)) : (∀ (L M : Fin g → X.Modules) [∀ j, (L j).IsInvertible] [∀ j, (M j).IsInvertible], (∀ j, Nonempty (L j ≅ M j)) → intersectionNumber k X X (𝟙 X) g hd L = intersectionNumber k X X (𝟙 X) g hd M) ∧ (∀ (L M : Fin g → X.Modules) [∀ j, (L j).IsInvertible] [∀ j, (M j).IsInvertible] (σ : Equiv.Perm (Fin g)), (∀ j, Nonempty (M j ≅ L (σ j))) → intersectionNumber k X X (𝟙 X) g hd M = intersectionNumber k X X (𝟙 X) g hd L) ∧ (∀ (L M N : Fin g → X.Modules) [∀ j, (L j).IsInvertible] [∀ j, (M j).IsInvertible] [∀ j, (N j).IsInvertible] (i : Fin g), (∀ j, j ≠ i → M j = L j ∧ N j = L j) → Nonempty (L i ≅ M i ⊗ N i) → intersectionNumber k X X (𝟙 X) g hd L = intersectionNumber k X X (𝟙 X) g hd M + intersectionNumber k X X (𝟙 X) g hd N) ∧ (∀ (L : Fin g → X.Modules) [∀ j, (L j).IsInvertible] (i : Fin g), Nonempty (L i ≅ 𝟙_ X.Modules) → intersectionNumber k X X (𝟙 X) g hd L = 0) ∧ (∀ (L M : Fin g → X.Modules) [∀ j, (L j).IsInvertible] [∀ j, (M j).IsInvertible] (i : Fin g), (∀ j, j ≠ i → M j = L j) → Nonempty (M i ≅ (L i).dual) → intersectionNumber k X X (𝟙 X) g hd M = -intersectionNumber k X X (𝟙 X) g hd L) ∧ (∃ F : MultilinearMap ℚ (fun _ : Fin g ↦ ℚ ⊗[ℤ] Additive X.Pic) ℚ, (∀ (σ : Equiv.Perm (Fin g)) (v : Fin g → ℚ ⊗[ℤ] Additive X.Pic), F (v ∘ σ) = F v) ∧ (∀ (L : Fin g → X.Modules) [∀ j, (L j).IsInvertible], F (fun j ↦ (1 : ℚ) ⊗ₜ[ℤ] Additive.ofMul (Pic.ofIsInvertible (L j))) = intersectionNumber k X X (𝟙 X) g hd L) ∧ ∀ G : MultilinearMap ℚ (fun _ : Fin g ↦ ℚ ⊗[ℤ] Additive X.Pic) ℚ, (∀ (L : Fin g → X.Modules) [∀ j, (L j).IsInvertible], G (fun j ↦ (1 : ℚ) ⊗ₜ[ℤ] Additive.ofMul (Pic.ofIsInvertible (L j))) = intersectionNumber k X X (𝟙 X) g hd L) → G = F)",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b040ad1c",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read the node, the Stacks source (0BEP l.10389, 0BER l.10432), the module, the report, and the dependency declarations (intersectionNumber, Prop-valued IsInvertible, dual, Pic/ofIsInvertible/instCommGroup, the IsClosedImmersion instance for 𝟙). Hypotheses: field, X.Over+IsProper, Nonempty X, 1≤g, topologicalKrullDim X = g; no extra assumptions. Clauses checked: iso invariance, symmetry for every σ, additivity in every slot (0BER at Z=X), trivial entry 0, dual entry negated. Rational extension on ℚ⊗[ℤ]Additive X.Pic, which is canonically the node's space mod [M⊗N]=[M]+[N]; existence, symmetry, and uniqueness over all multilinear G (generators span). Edge cases g=1, nonreduced, any characteristic, torsion classes vanish. Single universe u; Pic in Type (u+1) without restriction. lean.statement verbatim; one sorry; no definitions; docstrings with source, blueprint tag and 5 proof steps; Worker report and Second reading present. Added stmt_dep def-sc-picard-group is an existing node with a lean record (brief-stage2 l.177). No duplicate multilinearity or rationalised-Pic declaration in lean/Sheaf or lean/WeilConjectures. No compile run, no files changed. No findings."
+ }
+}

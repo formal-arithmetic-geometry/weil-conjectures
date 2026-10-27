@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-component-primary-complement-separation",
+ "kind": "statement",
+ "title": "Separating one primary curve component from the remaining scheme",
+ "statement": "Let $k$ be algebraically closed [def-weil-field] and let $X\\subset\\mathbf P^{r-1}_k$ be a connected closed subscheme of dimension one [def-weil-connected-scheme, def-kun-topological-krull-dimension], with homogeneous-coordinate Hilbert polynomial $dm+c$, $d>0$ [def-sfb-projective-coordinate-hilbert-polynomial]. Let $Y$ be a reduced irreducible component of dimension one [def-weil-irreducible-components, def-pc-reduced-scheme], let $\\xi$ be its generic point, and put $\\mu=\\operatorname{length}_{\\mathcal O_{X,\\xi}}\\mathcal O_{X,\\xi}$ [def-weil-pbc-module-length]. Put $L=\\mathcal O_X(1)$ and $e=\\deg(\\nu^*L|_Y)$ on the normalization $\\nu:\\widetilde Y\\to Y$ [def-sc-normalization, def-pc-degree-line-bundle]. Let $\\mathcal I_Y=\\ker(\\mathcal O_X\\to\\mathcal O_Y)$ [def-sbc-closed-immersion-ideal-sheaf], with powers as in [def-sbc-ideal-sheaf-powers]. Then $\\mu$ is a finite positive integer. There exist a closed subscheme $C\\subset X$, possibly empty, an integer $Q\\ge1$, and an integer $c_C$ such that its Hilbert polynomial is\n$$P_C(m)=(d-\\mu e)m+c_C,\\qquad \\delta:=d-\\mu e\\ge0,$$\nand restriction gives an injection\n$$\\mathcal I_Y^Q\\longrightarrow\\mathcal O_C.$$\nConsequently, for all $t\\ge Q$ and $m\\ge0$, the restriction map $H^0(X,\\mathcal I_Y^t\\otimes L^{\\otimes m})\\longrightarrow H^0(C,L^{\\otimes m}|_C)$ is injective. The one-dimensional irreducible components of $C$ are precisely the irreducible components of $X$ other than $Y$, with their ambient generic multiplicities preserved. If $Y$ is a proper subset of $|X|$, there is a closed point $P\\in Y\\cap C$ lying on a one-dimensional component of $C$. No generic reducedness is assumed, and embedded components of $X$ are allowed.",
+ "source": {
+  "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+  "place": "Proposition 1.0.3, technical claim on printed pp.32--33 and its primary-decomposition proof on pp.36--37; agent formulation also records the complementary Hilbert slope and permits the empty complement Local PDF WANTED; agent-formulated geometric prerequisite, read the online book transcription.",
+  "url": "https://doczz.net/doc/7664568/lectures-on-moduli-of-curves---school-of-mathematics--tifr"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-connected-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-module-length",
+  "def-sc-normalization",
+  "def-pc-degree-line-bundle",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-projective-closed-subscheme-homogeneous-ideal] to write $X=\\operatorname{Proj}(B/I)$, $B=k[x_0,\\ldots,x_{r-1}]$. Apply [lem-sfb-homogeneous-primary-decomposition]. Let $\\mathfrak p_1$ be the homogeneous prime of $Y$ and label its primary factor $Q_1$; it is minimal over $I$. Indeed in the affine charts of [def-pc-proj], components are minimal primes by [lem-weil-pbc-spec-irreducible-components-minimal-primes]; a smaller homogeneous prime remains relevant and would give a strictly larger component. Put $J=\\bigcap_{a\\ne1}Q_a$, with $J=B$ for a single factor, and $C=\\operatorname{Proj}(B/J)$. All these ideals are finitely generated, since the decomposition node also states that $B$ is Noetherian. The quotient presentation [lem-sfb-polynomial-quotient-proj-presentation] supplies its projective closed embedding and properness. Since $I\\subseteq J$, its chart quotient maps factor those of $X$, so $C\\subseteq X$. The same presentation gives properness of $X$ and its reduced closed components.",
+   "uses": [
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "lem-sfb-homogeneous-primary-decomposition",
+    "def-pc-proj",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-sfb-polynomial-quotient-proj-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, technical claim, printed pp.32-33 and primary-decomposition proof pp.36-37. Local PDF WANTED; read online transcription. Agent global homogeneous-coordinate version, retaining all embedded primary factors."
+   }
+  },
+  {
+   "text": "Choose $Q\\ge1$ with $\\mathfrak p_1^Q\\subseteq Q_1$ by [lem-sfb-homogeneous-primary-decomposition]. Then $\\mathfrak p_1^Q\\cap J\\subseteq Q_1\\cap J=I$. On $D_+(x_i)$ divide homogeneous numerators by powers of $x_i$. The ideal of $Y$ is $(\\mathfrak p_1B[x_i^{-1}])_0/(IB[x_i^{-1}])_0$, and its $Q$th power is the corresponding image of $\\mathfrak p_1^Q$: multiplying numerators proves one inclusion, and decomposing a homogeneous element of an ideal power into homogeneous products proves the other, inserting powers of $x_i$ to make each fraction degree zero. Finite intersections commute with this localization: for membership in both ideals multiply the two witnessing denominators. Thus the kernel of restriction of $\\mathcal I_Y^Q$ to $\\mathcal O_C$ is zero on every chart, and hence zero as a sheaf. The quotient charts and the ideal-power convention used here are [def-pc-proj, def-weil-closed-immersion, def-sbc-ideal-sheaf-powers].",
+   "uses": [
+    "lem-sfb-homogeneous-primary-decomposition",
+    "def-pc-proj",
+    "def-weil-closed-immersion",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, technical claim, printed pp.32-33 and primary-decomposition proof pp.36-37. Local PDF WANTED; read online transcription. Agent global homogeneous-coordinate version, retaining all embedded primary factors."
+   }
+  },
+  {
+   "text": "For $t\\ge Q$ the inclusion $\\mathcal I_Y^t\\subseteq\\mathcal I_Y^Q$ follows from the definition of ideal powers. Consequently restriction of $\\mathcal I_Y^t$ is still injective. Trivialize $L^{\\otimes m}$ on each projective chart using [def-pc-projective-space-twist]; tensoring the injection there is the identity operation on a free rank-one factor, and the resulting injections glue. A global section in the restriction kernel is therefore zero on every chart and is zero by the sheaf axiom. This gives precisely the asserted injection into $H^0(C,L^{\\otimes m}|_C)$ for every $m\\ge0$.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, technical claim, printed pp.32-33 and primary-decomposition proof pp.36-37. Local PDF WANTED; read online transcription. Agent global homogeneous-coordinate version, retaining all embedded primary factors."
+   }
+  },
+  {
+   "text": "Set $\\mathfrak p_a=\\sqrt{Q_a}$. Prime membership gives $V_+(J)=\\bigcup_{a\\ne1}V_+(\\mathfrak p_a)$: a prime containing a finite intersection contains one factor (take a product of counterexamples otherwise). Thus $|X|=Y\\cup|C|$. The generic point of $Y$ is absent from $C$, since minimality of $\\mathfrak p_1$ and distinct radicals imply no $\\mathfrak p_a\\subseteq\\mathfrak p_1$ for $a\\ne1$. Every other dimension-one component remains in $C$. Every embedded primary support has dimension zero, since it is a proper irreducible closed subset of a component of a dimension-one scheme, so no new dimension-one component appears. At the generic prime of any remaining component, the removed factor becomes the unit ideal by [lem-sfb-homogeneous-primary-decomposition]; hence $I$ and $J$ have identical localized ideals there, and the degree-zero chart local rings of $X$ and $C$ coincide. Their lengths, and therefore their generic multiplicities, are equal.",
+   "uses": [
+    "lem-sfb-homogeneous-primary-decomposition",
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, technical claim, printed pp.32-33 and primary-decomposition proof pp.36-37. Local PDF WANTED; read online transcription. Agent global homogeneous-coordinate version, retaining all embedded primary factors."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-degree-weighted-irreducible-components] to $X$ and $L$, and then to $C$ and $L|_C$. Both are proper of dimension at most one; their twists are invertible by [def-pc-projective-space-twist]. This gives finite positive generic lengths, in particular $\\mu\\ge1$, and\n$$\\deg(L)=\\mu\\deg(L|_Y)+\\deg(L|_C).$$\nThe equality uses exactly the remaining components and identical generic local rings of Step 4, and includes the empty sum. By [lem-sc-normalization-exists], $\\widetilde Y$ is integral proper of dimension one and $\\nu$ is birational. Apply [lem-per-birational-curve-degree-invariance] to obtain $\\deg(L|_Y)=\\deg(\\nu^*L|_Y)=e$. Thus $\\deg(L|_C)=\\deg(L)-\\mu e$.",
+   "uses": [
+    "lem-trf-degree-weighted-irreducible-components",
+    "def-pc-projective-space-twist",
+    "lem-sc-normalization-exists",
+    "lem-per-birational-curve-degree-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYW (lemma-degree-in-terms-of-components); Tag 0AYU (lemma-degree-birational-pullback); normalization finiteness as in lem-sc-normalization-exists."
+   }
+  },
+  {
+   "text": "The degree-one case of [lem-sfb-projective-hilbert-polynomial-dimension] gives $dm+c=\\chi(X,L^{\\otimes m})$ at all integers. By [def-pc-degree-line-bundle], $\\deg(L)=P_X(1)-P_X(0)=d$. For $C\\ne\\varnothing$, apply [lem-trf-proper-field-invertible-coherent] and [lem-sc-snapper-numerical-polynomial] with $\\mathcal F=\\mathcal O_C$ and the single invertible module $L|_C$. This gives a polynomial $R$ of degree at most one with $R(m)=\\chi(C,L^{\\otimes m}|_C)$ at all integers. Its slope is $R(1)-R(0)=\\deg(L|_C)=d-\\mu e$ and $c_C=R(0)\\in\\mathbf Z$. To identify it with the specified coordinate polynomial, use [lem-sfb-projective-closed-subscheme-homogeneous-ideal] on $C$ and [lem-sfb-projective-coordinate-ring-euler-polynomial] on its canonical ideal. Their eventual equality says exactly that $R$ is the coordinate Hilbert polynomial. Since coordinate dimensions are nonnegative for arbitrarily large $m$, its slope is nonnegative. If $C=\\varnothing$, sections and Euler characteristics vanish by [lem-sfb-projective-twist-euler-section-uniqueness], so $P_C=0$, $c_C=0$ and $\\deg(L|_C)=0$, giving the same formula.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-dimension",
+    "def-pc-degree-line-bundle",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-sc-snapper-numerical-polynomial",
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "lem-sfb-projective-coordinate-ring-euler-polynomial",
+    "lem-sfb-projective-twist-euler-section-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+    "place": "Tag 0BEM (lemma-numerical-polynomial-from-euler), Tag 0AYR (definition-degree-invertible-sheaf), Tag 08AE (lemma-hilbert-polynomial-H0); Tag 0AG7 (lemma-recover-tail-graded-module). Slopes identified by evaluating a linear polynomial at 1 and 0."
+   }
+  },
+  {
+   "text": "For the final assertion apply [lem-trf-proper-field-invertible-coherent] to see that $X$ is Noetherian. The finite-component assertion of [lem-sc-component-intersections-finite] then applies. A dimension-zero component would be a closed singleton disjoint from all the others, hence also open; connectedness and dimension one rule this out. If $Y\\ne|X|$, let $Z$ be the nonempty union of all other components, all of dimension one. If $Y\\cap Z$ were empty these two closed sets would partition $X$ into nonempty clopen sets, contradicting [def-weil-connected-scheme]. Choose $P\\in Y\\cap Z$. Its membership in an intersection of distinct components makes it closed by [lem-sc-component-intersections-finite]. Step 4 places $Z$ inside $C$, so $P\\in Y\\cap C$ lies on a dimension-one component of $C$.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-sc-component-intersections-finite",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, technical claim, printed pp.32-33 and primary-decomposition proof pp.36-37. Local PDF WANTED; read online transcription. Agent global homogeneous-coordinate version, retaining all embedded primary factors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "lem-sfb-homogeneous-primary-decomposition",
+  "def-pc-proj",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sfb-polynomial-quotient-proj-presentation",
+  "def-weil-closed-immersion",
+  "def-sbc-ideal-sheaf-powers",
+  "def-pc-projective-space-twist",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-sc-normalization-exists",
+  "lem-per-birational-curve-degree-invariance",
+  "lem-sfb-projective-hilbert-polynomial-dimension",
+  "def-pc-degree-line-bundle",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-sfb-projective-coordinate-ring-euler-polynomial",
+  "lem-sfb-projective-twist-euler-section-uniqueness",
+  "lem-sc-component-intersections-finite",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+  "place": "Proposition 1.0.3, technical claim, printed pp.32-33 and primary-decomposition proof pp.36-37. Local PDF WANTED; read online transcription. Agent global homogeneous-coordinate version, retaining all embedded primary factors. Hilbert slope computed using Stacks 0AYW and 0AYU; graded primary decomposition from Altman-Kleiman Theorem 20.27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Primary decomposition on a projective curve removes one generic component and restriction is injective on a sufficiently high power of its reduced ideal",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_injective\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"Ideal.powQuotSuccInclusion_injective\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.ne_top\", \"ProjectiveSpectrum.mk.inj\", \"exists_integral_inj_algHom_of_quotient\"], \"digest\": \"8c37e35037b46f77\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: Mathlib has algebraic primary decompositions (RingTheory/Lasker.lean) and Proj constructions, but these do not state this global complementary subscheme, its Hilbert slope or the ideal-power restriction injection."
+  },
+  {
+   "tool": "grep",
+   "query": "primary.*decomp|IsPrimary|isPrimary",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/IsPrimary.lean\", \"Mathlib/RingTheory/IsPrimary.lean\", \"Mathlib/RingTheory/IsPrimary.lean\"], \"digest\": \"42d88f4018741558\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: Mathlib has algebraic primary decompositions (RingTheory/Lasker.lean) and Proj constructions, but these do not state this global complementary subscheme, its Hilbert slope or the ideal-power restriction injection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective curve has a closed complementary primary subscheme with restriction injective on high powers of an irreducible component ideal",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"ProjectiveSpectrum.mk.inj\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"ProjectiveSpectrum.mk.injEq\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"AlgebraicGeometry.instIsClosedImmersionMorphismRestrict\"], \"digest\": \"ccf7e9703d50b733\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: Mathlib has algebraic primary decompositions (RingTheory/Lasker.lean) and Proj constructions, but these do not state this global complementary subscheme, its Hilbert slope or the ideal-power restriction injection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimary\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Submodule.IsPrimary\", \"Submodule.IsPrimary.isPrime_radical_colon\", \"Submodule.IsPrimary.ne_top\", \"Submodule.IsPrimary.radical_colon_singleton_of_notMem\", \"Submodule.IsPrimary.inf\", \"Submodule.IsPrimary.radical_colon_singleton_eq_ite\", \"Submodule.isPrimary_finsetInf\", \"Submodule.IsPrimary.mem_or_mem\"], \"digest\": \"dd277e3cb4f728ec\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: Mathlib has algebraic primary decompositions (RingTheory/Lasker.lean) and Proj constructions, but these do not state this global complementary subscheme, its Hilbert slope or the ideal-power restriction injection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective curve has a primary complement separating high powers of the ideal of an irreducible component and preserving all other generic multiplicities",
+   "results": "{\"t\": \"2026-10-23T11:28:39Z\", \"tool\": \"leansearch\", \"query\": \"A projective curve has a primary complement separating high powers of the ideal of an irreducible component and preserving all other generic multiplicities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"Ideal.IsPrimary\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isLocalization_atPrime\", \"WeierstrassCurve.Projective.Point.mk.noConfusion\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\"], \"digest\": \"ce8743216e63e775\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Proj constructions, ideal powers and primary definitions do not state the complementary subscheme with Hilbert slope and generic multiplicities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a connected projective curve removing a primary component gives a complementary closed subscheme with degree d minus its generic multiplicity times component degree and injective restriction of high ideal powers",
+   "results": "{\"t\": \"2026-10-23T11:28:40Z\", \"tool\": \"leanfinder\", \"query\": \"On a connected projective curve removing a primary component gives a complementary closed subscheme with degree d minus its generic multiplicity times component degree and injective restriction of high ideal powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum.not_irrelevant_le\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"ProjectiveSpectrum.mem_compl_zeroLocus_iff_notMem\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"ax_grothendieck_zeroLocus\"], \"digest\": \"464516609516e9d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Proj constructions, ideal powers and primary definitions do not state the complementary subscheme with Hilbert slope and generic multiplicities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-component-projection-weight-bounds",
+  "date": "2026-10-23",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED. Supporting prerequisite: Proposition 1.0.3, technical claim on printed pp.32--33 and its primary-decomposition proof on pp.36--37; agent formulation also records the complementary Hilbert slope and permits the empty complement",
+   "via": [
+    "lem-sfb-component-projection-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-component-primary-complement-separation",
+  "worker": "stage1",
+  "summary": "Retained Gieseker primary-factor deletion and proved ideal-power restriction by an explicit chart calculation. Added only the graded primary-decomposition input; reused existing component-degree, normalization, coordinate/Euler and component-intersection nodes. Embedded factors are retained; empty complement and generic multiplicities checked. Clarified the codomain of the restriction map without changing its assertion.",
+  "blueprint": "Supporting curve-stability prerequisite under det-thm-sf-ctf-stability-direct-images: the inherited chain records Gieseker Proposition 1.0.3, technical claim pp.32-33, proved pp.36-37. Latest blueprint direct-image proof (3) was read; it has no separate node for this below-unit primary-complement argument. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-degree-weighted-irreducible-components",
+    "why": "Generic algebraic geometry tool used with exactly its stated hypotheses for proper schemes of dimension at most one or their integral normalization; the unit gives no replacement for this component-separation algebra input."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic algebraic geometry tool used with exactly its stated hypotheses for proper schemes of dimension at most one or their integral normalization; the unit gives no replacement for this component-separation algebra input."
+   },
+   {
+    "node": "lem-per-birational-curve-degree-invariance",
+    "why": "Generic algebraic geometry tool used with exactly its stated hypotheses for proper schemes of dimension at most one or their integral normalization; the unit gives no replacement for this component-separation algebra input."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic algebraic geometry tool used with exactly its stated hypotheses for proper schemes of dimension at most one or their integral normalization; the unit gives no replacement for this component-separation algebra input."
+   },
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "Generic algebraic geometry tool used with exactly its stated hypotheses for proper schemes of dimension at most one or their integral normalization; the unit gives no replacement for this component-separation algebra input."
+   },
+   {
+    "node": "lem-sc-component-intersections-finite",
+    "why": "Generic algebraic geometry tool used with exactly its stated hypotheses for proper schemes of dimension at most one or their integral normalization; the unit gives no replacement for this component-separation algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-sc-normalization-exists",
+  "lem-per-birational-curve-degree-invariance",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-sc-component-intersections-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-42486c213",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-42486c213 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps, the one new node and every cited statement. The item statement differs from base only in the clarified codomain of the restriction map, H^0(C,L^m|_C), plus stmt_deps for module pullback and sheaf tensor product; nothing is weakened. New node lem-sfb-homogeneous-primary-decomposition: graded Lasker (Altman-Kleiman 20.27) with radical-power and localization clauses. It is true, and I checked it on (x^2), (xy) and (x^2,xy). It is not a duplicate: lem-per-noetherian-primary-decomposition gives ordinary primary factors only, and the krull/normal-dichotomy and p-primary torsion nodes are unrelated. It does not restate a clause of the item. Steps: (1) p_1 is minimal, because any minimal prime below it is homogeneous by the new node and a smaller homogeneous prime is still relevant; C=Proj(B/J) is proper and lies in X. (2) On each chart the kernel is ((p_1^Q cap J)B_xi)_0, which lies in (I B_xi)_0. (3) Tensoring with invertible L^m keeps the injection. (4) Supports and identical generic local rings, via the unit-ideal localization. (5) 0AYW degree sum, normalization, then 0AYU birational invariance. (6) The coordinate polynomial of C equals the Euler polynomial via Snapper and the canonical-ideal Euler node; delta>=0; the empty case is covered. (7) Connectedness rules out 0-dimensional components and gives a closed point P in Y cap C. Examples checked: double line (C empty, delta=0); two lines (P_C=m+1); embedded point (delta=0). Advisory: the 'precisely' clause in step 4 relies on step 7's exclusion of 0-dimensional components. Batch-5 flags: all cited trf/sfb/sc nodes are generic Proj, Hilbert-polynomial and curve-degree facts (0AYW, 0AYU, 0BEM, proper implies coherent), not steps of the trace formula or Poincare duality, so accepted. Artin-Gabber flag: lem-per-birational-curve-degree-invariance is a generic Stacks 0AYU lemma used in step 5, outside the locked lem-per-artin-gabber-affine-curve route; accepted. The three tool_uses are accepted. The Gieseker and Altman-Kleiman PDFs are not in the local literature (marked WANTED); I verified the mathematics directly."
+ }
+}

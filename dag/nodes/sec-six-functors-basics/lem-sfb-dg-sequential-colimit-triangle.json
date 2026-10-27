@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-dg-sequential-colimit-triangle",
+ "kind": "statement",
+ "title": "Sequential DG colimits with their canonical telescope legs",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Let $(P_m,v_m:P_m\\to P_{m+1})_{m\\in\\mathbf N}$ be a sequence of right differential graded $A$-modules. Let $P=\\operatorname{colim}_mP_m$ be their degreewise module colimit, with induced differential and canonical maps $j_m:P_m\\to P$. The category $D(A,d)$ has all small coproducts, represented by direct sums of differential graded modules. In $D(A,d)$ there is a distinguished triangle $$\\bigoplus_mP_m\\xrightarrow{1-s}\\bigoplus_mP_m\\xrightarrow{j}P\\longrightarrow(\\bigoplus_mP_m)[1],\\qquad s\\iota_m=\\iota_{m+1}v_m,\\quad j\\iota_m=j_m.$$ Thus the specified canonical legs make $P$ a homotopy colimit in the sense of [def-kun-truncations]. No injectivity assumption on the transition maps is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRL, lemma-homotopy-colimit, including its proof with canonical maps; Tag 09QI, lemma-derived-products, clauses (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-kun-truncations",
+  "def-sfb-dg-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For complexes of abelian groups, cohomology commutes with degreewise direct sums and products: cycles are coordinatewise cycles, and a family of boundaries has coordinatewise primitives. In a direct sum choose primitives only on its finite support; in a product choose a primitive in every coordinate. Thus the boundaries are the direct sum, respectively product, of the boundary groups. Taking representatives of cohomology classes in the same way proves $H^r(\\bigoplus_i C_i)=\\bigoplus_i H^r(C_i)$ and $H^r(\\prod_i C_i)=\\prod_i H^r(C_i)$. These identifications commute with coordinate maps. In particular, sums of quasi-isomorphisms are quasi-isomorphisms and products of acyclic complexes are acyclic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QI, lemma-derived-products: coordinate calculations for the Hom-complex argument; written out here."
+   }
+  },
+  {
+   "text": "Let $(M_i)_{i\\in I}$ be any small family of right DG $A$-modules. Regard $A$ as the one-object dg category with endomorphism complex $A$ and composition $a\\circ b=ab$; by the DG Leibniz rule this is a dg category, and its right dg modules, Hom complexes, cohomology and shifts are those of this item, with representable module $A$. By [lem-coef-dg-module-semi-free-replacement] choose quasi-isomorphisms $q_i:Q_i\\to M_i$ with $Q_i$ semi-free; by [lem-coef-dg-semi-free-homotopically-projective] each $Q_i$ is homotopically projective. The degreewise sums $Q=\\bigoplus_iQ_i$ and $M=\\bigoplus_iM_i$ have coordinatewise differential and action. Restriction to summands identifies the complexes $\\underline{\\operatorname{Hom}}_A(Q,N)=\\prod_i\\underline{\\operatorname{Hom}}_A(Q_i,N)$: homogeneous module maps out of a sum correspond to their restrictions, and the Hom differential is computed coordinatewise. For acyclic $N$ every factor is acyclic, so step 1 makes $Q$ homotopically projective; $q=\\bigoplus_iq_i:Q\\to M$ is a quasi-isomorphism by step 1. By [lem-sfb-dg-homotopically-projective-hom-derived], applied to $Q$ and to each $Q_i$, the localization functor induces bijections $H^0\\underline{\\operatorname{Hom}}_A(Q,N)\\cong\\operatorname{Hom}_{D(A,d)}(Q,N)$ and $H^0\\underline{\\operatorname{Hom}}_A(Q_i,N)\\cong\\operatorname{Hom}_{D(A,d)}(Q_i,N)$. Taking $H^0$, using step 1 for products, and inverting $q,q_i$ therefore gives\n$$\\operatorname{Hom}_{D(A,d)}(M,N)\\cong H^0\\underline{\\operatorname{Hom}}_A(Q,N)\\cong\\prod_i H^0\\underline{\\operatorname{Hom}}_A(Q_i,N)\\cong\\prod_i\\operatorname{Hom}_{D(A,d)}(M_i,N).$$\nThe components are restriction along the actual summand inclusions, because the localization functor respects composition and $q\\iota_i=\\iota_iq_i$. This is exactly the coproduct universal property, including the empty family.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement",
+    "lem-coef-dg-semi-free-homotopically-projective",
+    "lem-sfb-dg-homotopically-projective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QI (lemma-derived-products), part (2) and its proof; Tags 09KP (lemma-resolve), 09KM (lemma-property-P-K-projective) and 09KY (lemma-hom-derived), part (1)."
+   }
+  },
+  {
+   "text": "Put $B=\\bigoplus_mP_m$ as a DG module. Define $f=1-s$ by $f\\iota_m=\\iota_m-\\iota_{m+1}v_m$, and define $j:B\\to P$ by $j\\iota_m=j_m$. These are DG maps and $jf=0$, since all $v_m,j_m$ commute with the differential and action and $j_{m+1}v_m=j_m$. In each degree $f(x)=0$ implies $x_0=0$ and $x_m=v_{m-1}(x_{m-1})$ for $m\\geq1$, hence $x=0$ by induction; no $v_m$ is assumed injective. The cokernel of $f$ is the quotient of $\\bigoplus_mP_m$ by $\\iota_m(x)=\\iota_{m+1}(v_mx)$. A homomorphism out of this quotient is precisely a family $a_m$ with $a_{m+1}v_m=a_m$; iteration gives compatibility with every transition. This is the defining universal property of the degreewise colimit, and its quotient map is $j$. Hence $0\\to B\\xrightarrow{f}B\\xrightarrow{j}P\\to0$ is degreewise exact as a sequence of complexes of abelian groups. The differential and homogeneous right actions preserve these relations, so these are the stated DG-module colimit and maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 093W, lemma-compute-colimit, as used by dga.tex Tag 0CRL, lemma-homotopy-colimit; injectivity and cokernel relations are proved explicitly."
+   }
+  },
+  {
+   "text": "Use the right DG cone $C(f)=B\\oplus B[1]$, with unchanged graded right action on the shifted summand and differential $d(y,x)=(d_By+f(x),-d_Bx)$. The DG Leibniz identity follows by substituting this formula and the identity for $B$, since $f$ is $A$-linear. Define $c:C(f)\\to P$ by $c(y,x)=j(y)$. It is $A$-linear, and $c\\,d(y,x)=j(d_By+f(x))=d_Pj(y)$ because $jf=0$, so it is a DG map. On underlying complexes of abelian groups this is exactly the canonical map of [lem-pc-cone-short-exact-quasi-iso] for the short exact sequence in step 3. That node therefore makes $c$ a quasi-isomorphism. DG quasi-isomorphisms are detected on these same underlying cohomology groups, so $c$ is inverted in $D(A,d)$. Moreover, for the cone inclusion $i:B\\to C(f)$, one has $ci=j$ already as DG maps.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09L0, lemma-derived-canonical-delta-functor and its preceding cone construction; Tag 0CRL, lemma-homotopy-colimit."
+   }
+  },
+  {
+   "text": "By the mapping-cone definition of distinguished triangles in $D(A,d)$, $B\\xrightarrow{f}B\\xrightarrow{i}C(f)\\xrightarrow{\\delta}B[1]$ is distinguished. The triangle with third object $P$, second arrow $j$ and last arrow $\\delta c^{-1}$ is isomorphic to it through $(1_B,1_B,c)$, using $ci=j$, and is therefore distinguished. Step 2 identifies both copies of $B$ with the required derived coproduct and their original inclusions with its coprojections. Consequently its first map satisfies $f\\iota_m=\\iota_m-\\iota_{m+1}v_m$ and its second satisfies $j\\iota_m=j_m$. These are the specified legs, so the triangle is precisely a homotopy-colimit triangle as defined in [def-kun-truncations].",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRL, lemma-homotopy-colimit; Tag 09L0, cone-to-quotient triangle; derived.tex Tag 090Z, definition-derived-colimit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-module-semi-free-replacement",
+  "lem-coef-dg-semi-free-homotopically-projective",
+  "lem-sfb-dg-homotopically-projective-hom-derived",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 0CRL (lemma-homotopy-colimit), 09QI (lemma-derived-products), 09KP, 09KM, 09KY and 09L0 (lemma-derived-canonical-delta-functor); explicit canonical-map proof, with coproducts computed from semi-free replacements and the Hom comparison of Tag 09KY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Hh]omotopy[Cc]olimit|[Hh]ocolim|[Tt]elescope|colimit.*[Cc]one",
+   "results": "Hits: Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean ; Mathlib/Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complex colimits, cone comparisons and short-exact derived triangles require additional DG-localization and coproduct compatibility; none states this DG telescope triangle in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"mappingCone\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complex colimits, cone comparisons and short-exact derived triangles require additional DG-localization and coproduct compatibility; none states this DG telescope triangle in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sequential direct limit of DG modules gives a distinguished telescope triangle",
+   "results": "Hits: ModuleCat.directLimitIsColimit, CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.triangleOfSES_distinguished, DirectLimit.Module.lift, ModuleCat.directLimitIsColimit_desc, Module.DirectLimit.inhabited, ModuleCat.directLimitDiagram, DerivedCategory.triangleOfSES",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complex colimits, cone comparisons and short-exact derived triangles require additional DG-localization and coproduct compatibility; none states this DG telescope triangle in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sequential colimit of differential graded modules is represented by the homotopy colimit telescope triangle with canonical colimit maps",
+   "results": "Hits: HomologicalComplex.coconeOfHasColimitEval_pt_d, HomologicalComplex.isColimitOfEval, HomologicalComplex.instHasColimit, HomologicalComplex.coconeOfHasColimitEval_pt_X, HomologicalComplex.coconeOfHasColimitEval, HomologicalComplex.coconeOfHasColimitEval_ι_app_f, HomologicalComplex.isColimitCoconeOfHasColimitEval, HomologicalComplex.instHasColimitsOfShape",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complex colimits, cone comparisons and short-exact derived triangles require additional DG-localization and coproduct compatibility; none states this DG telescope triangle in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cone of one minus shift on a countable sum of differential graded modules is quasi isomorphic to their ordinary direct limit",
+   "results": "Hits: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.mappingCone.quasiIso_descShortComplex, HomologicalComplex.instQuasiIsoExtendMap, HomologicalComplex.quasiIsoAt_extendMap_iff, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.mappingCone.mapHomologicalComplexXIso, HomologicalComplex.quasiIso_extendMap_iff, CochainComplex.mappingCone.mapHomologicalComplexXIso'",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary complex colimits, cone comparisons and short-exact derived triangles require additional DG-localization and coproduct compatibility; none states this DG telescope triangle in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sequential colimit of differential graded modules fits in the distinguished triangle from identity minus shift on their direct sum",
+   "results": "8 hits: HomotopyCategory.mappingCone_triangleh_distinguished, HomotopyCategory.mappingConeCompTriangleh_distinguished, HomotopyCategory.Pretriangulated.distinguished_cocone_triangle, CochainComplex.triangleOfDegreewiseSplit, DerivedCategory.triangleOfSESδ, CochainComplex.mappingCone.triangle, CochainComplex.mappingConeCompTriangle, HomotopyCategory.spectralObjectMappingCone_δ'_app",
+   "date": "2026-10-24",
+   "verdict": "no whole-item match: ordinary complexes, their cones, colimits and derived triangles do not identify DG-module coproducts and the canonical DG telescope in one specialization; reuse the cone comparison through its existing node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"mappingCone\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no whole-item match: ordinary complexes, their cones, colimits and derived triangles do not identify DG-module coproducts and the canonical DG telescope in one specialization; reuse the cone comparison through its existing node."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omotopy[Cc]olimit|[Hh]ocolim|[Tt]elescope|colimit.*[Cc]one",
+   "results": "25 hits: Mathlib/Algebra/Homology/ModelCategory/Lifting.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean, Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean ; Mathlib/Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no whole-item match: ordinary complexes, their cones, colimits and derived triangles do not identify DG-module coproducts and the canonical DG telescope in one specialization; reuse the cone comparison through its existing node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary sequential colimit of differential graded modules is a homotopy colimit with its canonical maps",
+   "results": "8 hits: HomologicalComplex.isColimitOfEval, HomologicalComplex.isColimitCoconeOfHasColimitEval, CategoryTheory.Limits.colim.mapShortComplex, CategoryTheory.ShortComplex.hasColimit_of_hasColimitπ, CategoryTheory.ShortComplex.colimitCocone, AddCommGrpCat.Colimits.Quot, ModuleCat.directLimitIsColimit, CategoryTheory.ShortComplex.isColimitColimitCocone",
+   "date": "2026-10-24",
+   "verdict": "no whole-item match: ordinary complexes, their cones, colimits and derived triangles do not identify DG-module coproducts and the canonical DG telescope in one specialization; reuse the cone comparison through its existing node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cone of identity minus shift on a direct sum of differential graded modules is quasi-isomorphic to their direct limit",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.mappingCone.quasiIso_descShortComplex, CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, CochainComplex.cm5b.homotopyEquiv, HomologicalComplex.homotopyCofiber.XIsoBiprod, CochainComplex.mappingConeHomOfDegreewiseSplitIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv",
+   "date": "2026-10-24",
+   "verdict": "no whole-item match: ordinary complexes, their cones, colimits and derived triangles do not identify DG-module coproducts and the canonical DG telescope in one specialization; reuse the cone comparison through its existing node."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_descShortComplex|triangleOfSES_distinguished",
+   "results": "9 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean ; Mathlib/Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no whole-item match: ordinary complexes, their cones, colimits and derived triangles do not identify DG-module coproducts and the canonical DG telescope in one specialization; reuse the cone comparison through its existing node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-countable-compact-telescope",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRL, lemma-homotopy-colimit, including its proof with canonical maps; Tag 09QI, lemma-derived-products, clauses (1) and (2).",
+   "via": [
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-sequential-colimit-triangle",
+  "worker": "stage1",
+  "summary": "Proved the canonical telescope exact sequence without injective transitions, used the existing ordinary-complex cone comparison on underlying abelian groups, and transported the cone triangle through its actual canonical augmentation. Derived coproducts are proved from semi-free replacements, their homotopical projectivity, the Hom comparison of Stacks 09KY and explicit coordinate cohomology calculations. No statement change. Reviewer FIX (Q92 maintainer reading): the former citation of the enhanced-localization projective-resolution node was replaced by the classical nodes lem-coef-dg-module-semi-free-replacement and lem-coef-dg-semi-free-homotopically-projective and the new statement node lem-sfb-dg-homotopically-projective-hom-derived.",
+  "blueprint": "Supports proof (3) of the current det-thm-sf-ctf-stability-direct-images through the inherited chain specified in blueprint.from.place: the canonical telescope input to Tag 0CRM (2) to (1), feeding the 0CRV/0CRW/0CX8 effectivity route. The item is an auxiliary created node, not the key statement of its unit. Whole-blueprint searches for homotopy colimit, telescope, sequential and differential graded found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-module-semi-free-replacement",
+    "why": "Generic semi-free replacement of right dg modules over a small dg category, specialized to the one-object dg category A in step 2; no node of this unit provides DG-module resolutions."
+   },
+   {
+    "node": "lem-coef-dg-semi-free-homotopically-projective",
+    "why": "Generic statement that semi-free right dg modules are homotopically projective, specialized to the one-object dg category A in step 2; no node of this unit provides it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-module-semi-free-replacement",
+  "lem-coef-dg-semi-free-homotopically-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-d6900e67a",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-d6900e67a (reviewer sub-agent of L); spot-checked: Read the item's 5-step proof against Stacks dga 0CRL, 09QI, 09KY and 09KM and derived 093W. The mathematics is correct: the coordinatewise cohomology of sums and products is right; ⊕Q_i is homotopically projective and the coproduct universal property holds with the actual coprojections; 1−s is injective with no injectivity assumption on v_m, and its cokernel is the degreewise colimit with map j; the DG cone signs and c(y,x)=j(y) are right, and the leaf lem-pc-cone-short-exact-quasi-iso (Mathlib quasiIso_descShortComplex) makes c a quasi-isomorphism; the triangle isomorphism (1,1,c) uses ci=j. This is exactly the def-kun-truncations hocolim triangle the parent lem-sfb-dg-countable-compact-telescope needs at steps 4 and 6. Small cases pass: v=0, identity transitions, P_m=0, the empty family. The statement is unchanged. Route-pivot flag: step 2 cites lem-coef-dg-module-projective-resolution, the dropped enhanced-localization node. Its closure has 1333 nodes, 1317 of which are new to this item (simplicial, Reedy, coherent-nerve and model-structure machinery). Step 2 uses only classical content, so the justification given does not hold, but the fault can be repaired. I repointed step 2 to lem-coef-dg-module-semi-free-replacement and lem-coef-dg-semi-free-homotopically-projective (3-node closures; Stacks 09KP/09KM, Drinfeld 14.8). I also added the unsplit statement node lem-sfb-dg-homotopically-projective-hom-derived (Stacks 09KY(1): Hom_K(P,N)→Hom_D(P,N) is bijective for homotopically projective P). The DAG has no node for this over a DGA: the abelian-category K-projective node does not apply, and the blueprint search found nothing. proof_deps, the step-2 source, proof_origin, the summary and tool_uses are updated. The 'dg categor' vocabulary appears only in step 2, to specialize the classical small-dg-category nodes to the one-object category A; that is acceptable. The new node's searches record two Mathlib greps that were run; LeanSearch and Loogle could not be reached from this sandbox and are recorded as unavailable. Fixed files are under fixes/dag/nodes/sec-six-functors-basics/; full checks are in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgSequentialColimitTriangle",
+  "declaration": "CategoryTheory.DgAlgebra.sequential_colimit_triangle",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.exists_degreewise_coproduct_derived",
+   "CategoryTheory.DgAlgebra.exists_degreewise_sequential_colimit",
+   "CategoryTheory.DgAlgebra.sequential_colimit_triangle"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgSequentialColimitTriangle.lean",
+  "statement": "theorem sequential_colimit_triangle (A : Algebra.{u}) [DerivedStructure A] (E : ℕ ⥤ RightModule A) (c : Cocone E) (hc : ∀ n : ℤ, Nonempty (IsColimit (((underlying A) ⋙ HomologicalComplex.eval (ModuleCat.{u} (ULift.{u} ℤ)) (ComplexShape.up ℤ) n).mapCocone c))) : (∃ (j : (∐ (fun m : ℕ ↦ (Q A).obj (E.obj m))) ⟶ (Q A).obj c.pt) (δ : (Q A).obj c.pt ⟶ (∐ (fun m : ℕ ↦ (Q A).obj (E.obj m)))⟦(1 : ℤ)⟧), (∀ m : ℕ, Sigma.ι (fun k : ℕ ↦ (Q A).obj (E.obj k)) m ≫ j = (Q A).map (c.ι.app m)) ∧ Triangle.mk (𝟙 _ - Sigma.desc (fun m : ℕ ↦ (Q A).map (E.map (homOfLE (Nat.le_succ m))) ≫ Sigma.ι (fun k : ℕ ↦ (Q A).obj (E.obj k)) (m + 1))) j δ ∈ distTriang (Derived A)) ∧ IsSequentialHomotopyColimit (fun m : ℕ ↦ (Q A).obj (E.obj m)) (fun m : ℕ ↦ (Q A).map (E.map (homOfLE (Nat.le_succ m)))) ((Q A).obj c.pt)",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed def-sfb-dg-derived-category interface, added to stmt_deps. The two auxiliary statements give degreewise direct-sum representatives in the derived category and existence of the degreewise sequential DG colimit; the main theorem retains every canonical colimit leg."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b763ad3a7",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Clause-by-clause check against node, Stacks 0CRL/09QI and the landed DgAlgebraDerivedCategory/IsSequentialHomotopyColimit: 1-s leg = 𝟙 - Sigma.desc(Q v_m ≫ ι_{m+1}) correct direction; j pinned by ι_m≫j = Q(c.ι.app m) ∀m; distinguished triangle + IsSequentialHomotopyColimit conjunct; hc = degreewise ModuleCat colimit (existence theorem separate); coproduct theorem over any I:Type u incl. empty with actual inclusions; holds for every DerivedStructure instance (unique preadditive via biproducts, distinguished_iff pins triangles, δ existential). No injectivity/extra assumptions, universes bound, statement verbatim, sorry-only, docstrings with source/blueprint/proof steps, node change only lean + landed stmt_dep def-sfb-dg-derived-category. Minor: unused OfSequence import; second reading done by same worker. No files changed, no compile run."
+ }
+}

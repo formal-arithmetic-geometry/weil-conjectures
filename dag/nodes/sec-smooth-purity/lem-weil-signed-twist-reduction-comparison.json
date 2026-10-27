@@ -21,34 +21,59 @@
  ],
  "proof": [
   {
-   "text": "the integral first line reduces to its prescribed finite line by the original\nquotient tensor construction. The reduction of the unit is the coefficient projection.\nTensor these maps recursively to obtain the positive powers. For a negative power,\nuse the unique map of duals compatible with the evaluation pairing. On a cover\ntrivializing the integral line these maps are the quotient coefficient maps, and\nthe induced scalar extensions are the identity on the quotient coefficient unit.\nThus all induced extension maps are isomorphisms. They glue because their equations\non tensors and evaluations are independent of the local basis. These equations also\nprove uniqueness, first at zero and one, then by induction on positive powers and\nby nondegeneracy of the dual pairing at negative powers. For derived comparisons,\nresolve K by a flat-term K-flat complex P. Exact line tensor preserves K-flatness\nand flat terms. Reduction of P is K-flat over the quotient ring. Rebracketing sends\n(x tensor y) tensor a to (x tensor a) tensor (y tensor 1), and its inverse multiplies\nthe two quotient coefficients. The balanced maps commute with differentials and\nwith every chain map, so descend to the displayed natural derived isomorphism.\nThe same computation on the flat degree-zero line gives the single-object comparison.\nAll formulas commute with quotient transitions and the unit augmentations.",
+   "text": "Use the root-normalized quotient isomorphism for the first line. The rank-one trivializing covers and exists_signedLineComparison extend it to all signed powers. Compose scalarExtensionEmbedding with the comparisons to obtain the reduction maps. The old-to-independent-universe scalar-extension isomorphism identifies sfReductionTensor with scalarExtensionSection. Tensor linearity proves the required scalar formula and pure-tensor extensionality proves uniqueness of each extension isomorphism.",
    "uses": [
-    "def-coefficient-twists-detailed",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-integral-twist-base-change",
-    "lem-weil-integral-twist-derived-scalar",
-    "lem-weil-finite-free-completed-scalar-comparison"
+    "lem-weil-twist-first-quotient-normalization",
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "the corresponding isolated parent-proof steps"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "integral twists computed levelwise modulo the uniformizer"
+   }
+  },
+  {
+   "text": "The normalized unit and first map determine the positive maps by two-step induction and tensor extensionality. For a negative exponent precompose the two dual sections with the positive reduction isomorphism. They agree on every scalar-extension tensor by evaluation normalization, naturality under slice restriction, and positive uniqueness. Scalar-dual section extensionality and cancellation of the positive isomorphism prove negative uniqueness.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sp-scalar-extension-dual-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "integral twists computed levelwise modulo the uniformizer"
+   }
+  },
+  {
+   "text": "Each signed line has rank one by signedLineTensor_equivalence; coefficientTwistLine_exact supplies exact tensor functors. Apply flatLineDerivedReduction to the ordinary isomorphism for each signed exponent. Its two conclusions are the derived single-object and functor comparisons.",
+   "uses": [
+    "lem-weil-signed-line-tensor-equivalence",
+    "def-coefficient-twists-detailed",
+    "lem-weil-flat-line-derived-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "integral twists computed levelwise modulo the uniformizer"
    }
   }
  ],
  "proof_deps": [
+  "lem-weil-twist-first-quotient-normalization",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-sp-scalar-extension-dual-evaluation",
+  "lem-weil-signed-line-tensor-equivalence",
   "def-coefficient-twists-detailed",
-  "lem-pur-kflat-change-of-rings",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-integral-twist-base-change",
-  "lem-weil-integral-twist-derived-scalar",
-  "lem-weil-finite-free-completed-scalar-comparison"
+  "lem-weil-flat-line-derived-reduction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "lean/Sheaf/Paper/TwistPreservesFiniteness.lean",
-  "place": "parent proof, isolated intermediate interface"
+  "document": "lean/Sheaf/Paper/SignedTwistReductionComparison.lean",
+  "place": "Q4 ordinary signed construction, uniqueness, and derived flat-line reduction"
  },
  "mathlib_searches": [
   {
@@ -116,14 +141,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G5",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261020T051323-L-1634726",
+  "landing": "20261025T204825-L-3016714",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

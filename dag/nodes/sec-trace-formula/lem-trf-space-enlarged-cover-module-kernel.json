@@ -1,0 +1,209 @@
+{
+ "id": "lem-trf-space-enlarged-cover-module-kernel",
+ "kind": "statement",
+ "title": "Module kernel from a functorial family of enlarged-site singleton covers",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and use sites small relative to the module universe [def-weil-size-convention]. Let $\\mathcal C_X$ and $\\widetilde{\\mathcal O}_X$ be the enlarged etale ringed site and extended structure sheaf of [lem-trf-space-enlarged-etale-ringed-site-model], and let $M$ be a sheaf of $\\widetilde{\\mathcal O}_X$-modules [def-weil-sheaf-of-modules-category]. Suppose $W,Z:Y_{\\mathrm{et}}\\to\\mathcal C_X$ are functors and $c:Z\\to W$ is natural, with every singleton $Z(V)\\to W(V)$ a covering [def-weil-pbc-sites-and-cohomology]. Put $Q(V)=Z(V)\\times_{W(V)}Z(V)$ with its two projections, functorially in $V$. Suppose given natural ring maps $\\mathcal O_Y(V)\\to\\widetilde{\\mathcal O}_X(W(V))$. Use their composites with ring restrictions to give $M(W(V)),M(Z(V)),M(Q(V))$ their $\\mathcal O_Y(V)$-module structures, and assume these three presheaves are sheaves; denote them $H_W,H_Z,H_Q$. Then restriction gives morphisms $i:H_W\\to H_Z$ and $d_1,d_2:H_Z\\to H_Q$ of $\\mathcal O_Y$-module sheaves, and $i$ induces a canonical isomorphism $H_W\\simeq\\ker(d_1-d_2)$. On every $V$, restriction is injective and its image consists exactly of the sections of $M(Z(V))$ having equal restrictions to $Q(V)$. The inverse on this kernel assigns the unique antecedent in $M(W(V))$; it is linear and commutes with restriction in $V$ and with morphisms in $M$. Thus $0\\to H_W\\to H_Z\\xrightarrow{d_1-d_2}H_Q$ is exact at the first two terms, with no assertion of surjectivity at $H_Q$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M8 (lemma-compute-pushforward), sheaf-condition paragraph and final functoriality sentence, extracted as a statement for a functorial family of covers with compatible scalar actions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Write $r_V=M(c_V)$ and $p_{j,V}:Q(V)\\to Z(V)$. By [def-weil-sheaf-of-modules-category], restrictions are additive and semilinear. If $\\alpha_V:\\mathcal O_Y(V)\\to\\widetilde{\\mathcal O}_X(W(V))$ is the given map, then $r_V(\\alpha_V(a)x)=\\alpha_V(a)|_{Z(V)}r_V(x)$. Thus $r_V$ is $\\mathcal O_Y(V)$-linear. Also $c_Vp_{1,V}=c_Vp_{2,V}$, so either route defines the same scalar action on $M(Q(V))$, and both $M(p_{j,V})$ are linear. Naturality of $c$ and of the pullback projections makes these maps commute with restriction in $V$. The natural ring maps give the scalar compatibility for these restrictions. Since the three presheaves are assumed sheaves, these are the required module-sheaf morphisms $i,d_1,d_2$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV (definition-sheaf-modules), semilinear restrictions and morphisms; Tag 03M8 of spaces-morphisms.tex, final functoriality sentence."
+   }
+  },
+  {
+   "text": "Work in the enlarged ringed site in the hypotheses, with its specified singleton covers and pullbacks. The underlying abelian presheaf of $M$ is a sheaf by [def-weil-sheaf-of-modules-category]. By the definition of an abelian sheaf on a site [def-weil-pbc-sites-and-cohomology], for every covering $\\{U_i\\to U\\}$ the diagram $M(U)\\to\\prod_iM(U_i)\\rightrightarrows\\prod_{i,j}M(U_i\\times_UU_j)$ is an equalizer; the fibre products exist by axiom (iii) of that definition. Apply this to the singleton covering $c_V:Z(V)\\to W(V)$, for each $V$. Its only overlap is $Q(V)=Z(V)\\times_{W(V)}Z(V)$, and the two maps are $M(p_{1,V})$ and $M(p_{2,V})$. Therefore $r_V$ is injective, its image is exactly $\\{z:M(p_{1,V})(z)=M(p_{2,V})(z)\\}$, and every such $z$ has a unique antecedent $s_V(z)$ in $M(W(V))$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), sheaf-condition paragraph; sites.tex Tags 00VH (definition-site), 00VM (definition-sheaf-sets), 00VN (equation-sheaf-condition)."
+   }
+  },
+  {
+   "text": "Put $K_V=\\{z:(d_{1,V}-d_{2,V})(z)=0\\}$. Equality of the two images is equivalent to their difference being zero. Linearity from step 1 makes $K_V$ a submodule. For $z,z\\prime\\in K_V$ and $a\\in\\mathcal O_Y(V)$, $r_V(s_V(z)+s_V(z\\prime))=z+z\\prime$, $r_V(a s_V(z))=az$, and $r_V(0)=0$. Uniqueness in step 2 gives $s_V(z+z\\prime)=s_V(z)+s_V(z\\prime)$, $s_V(az)=a s_V(z)$ and $s_V(0)=0$. Hence $r_V:M(W(V))\\to K_V$ and $s_V$ are inverse linear maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), linear version of the section equalizer; uniqueness argument expanded."
+   }
+  },
+  {
+   "text": "For $h:V\\prime\\to V$ and $z\\in K_V$, naturality of $d_1,d_2$ puts $z|_{Z(V\\prime)}$ in $K_{V\\prime}$. The naturality square for $c$ gives $r_{V\\prime}(s_V(z)|_{W(V\\prime)})=z|_{Z(V\\prime)}$, so uniqueness gives $s_V(z)|_{W(V\\prime)}=s_{V\\prime}(z|_{Z(V\\prime)})$. For a module-sheaf morphism $\\theta:M\\to N$ to another module satisfying the same sheaf assumptions, its naturality gives $r_V^N(\\theta_{W(V)}s_V^M(z))=\\theta_{Z(V)}(z)$. This lies in $K_V^N$, and uniqueness gives $\\theta_{W(V)}s_V^M(z)=s_V^N(\\theta_{Z(V)}z)$. Thus the inverse commutes with both kinds of restriction claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), final functoriality sentence; uniqueness checks expanded."
+   }
+  },
+  {
+   "text": "By [def-weil-sheaf-of-modules-category], the sheaf kernel $K=\\ker(d_1-d_2)$ is computed sectionwise, so $K(V)=K_V$ with the induced restrictions. Steps 3 and 4 assemble the inverse maps into a module-sheaf morphism $s:K\\to H_W$. The factored map $i:H_W\\to K$ satisfies $si=1$ and $is=1$ on every section, hence is a canonical isomorphism. The inclusion $K\\to H_Z$ is the kernel of $d_1-d_2$; consequently $i$ is monic and identifies $H_W$ with that kernel, which is exactly the asserted exactness at $H_W$ and $H_Z$. Nothing here requires the last map to be surjective.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), kernels and exactness; sectionwise kernels as in the preceding kernel construction. Tag 03M8 of spaces-morphisms.tex, conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M8 (lemma-compute-pushforward), sectionwise sheaf-condition proof and final functoriality sentence; linearity and uniqueness checks expanded using sites-modules.tex Tags 03CV and 03DA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equalizer|[Ss]heaf[Cc]ondition|kernel",
+   "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"n_hits\": 6, \"note\": \"\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic set-valued equalizers and pointwise module limits are ingredients, not this functorial ring-changing cover-to-module-kernel statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial Cech descent on an enlarged etale ringed site assembles section equalizers into a kernel of module sheaves with linear natural restriction maps",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.IsLimit",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic set-valued equalizers and pointwise module limits are ingredients, not this functorial ring-changing cover-to-module-kernel statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functorial family of singleton etale covers in the enlarged site of an algebraic space gives a kernel diagram of module sheaves over another algebraic space with compatible scalar actions",
+   "results": "{\"top\": [\"AlgebraicGeometry.Scheme.kerFunctor\", \"AlgebraicGeometry.Scheme.kerFunctor_obj\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.kerFunctor_map\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic set-valued equalizers and pointwise module limits are ingredients, not this functorial ring-changing cover-to-module-kernel statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf.*[Ee]qualizer|[Ee]qualizer.*isSheaf|isLimit.*[Ss]heaf|[Ss]heaf.*isLimit",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean\", \"Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\"], \"n_hits\": 25, \"note\": \"\", \"sub\": \"CategoryTheory/Sites\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic set-valued equalizers and pointwise module limits are ingredients, not this functorial ring-changing cover-to-module-kernel statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear descent for a natural diagram of covering objects in the enlarged etale site, and assembly of unique matching sections as an isomorphism onto a sheaf kernel",
+   "results": "{\"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext\", \"CategoryTheory.GrothendieckTopology.Plus.exists_rep\", \"CategoryTheory.Functor.IsCoverDense.sheaf_eq_amalgamation\", \"CategoryTheory.Presheaf.isLocallyInjective_iff_equalizerSieve_mem_imp\", \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"TopCat.Presheaf.whiskerIsoMapGenerateCocone\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda\", \"TopCat.Sheaf.existsUnique_gluing'\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic set-valued equalizers and pointwise module limits are ingredients, not this functorial ring-changing cover-to-module-kernel statement"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel|equalizer|[Ss]heaf[Cc]ondition",
+   "results": "{\"t\": \"2026-10-23T14:14:31Z\", \"tool\": \"grep\", \"query\": \"kernel|equalizer|[Ss]heaf[Cc]ondition\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"7687a3b2511d5f87\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleton sheaf descent and sectionwise kernels are separate ingredients; none states this ring-changing functorial family of covers with its natural module-sheaf kernel identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.KernelFork",
+   "results": "{\"t\": \"2026-10-23T14:14:32Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CategoryTheory.Limits.KernelFork\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleton sheaf descent and sectionwise kernels are separate ingredients; none states this ring-changing functorial family of covers with its natural module-sheaf kernel identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent along a singleton covering assembles matching module sections into a natural isomorphism of sheaves with a kernel",
+   "results": "{\"t\": \"2026-10-23T14:14:32Z\", \"tool\": \"leansearch\", \"query\": \"Descent along a singleton covering assembles matching module sections into a natural isomorphism of sheaves with a kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓNatIsoSheafSections\", \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"CategoryTheory.Presieve.isSheafFor_singleton\", \"CategoryTheory.Functor.IsCoverDense.sheafIso\", \"CategoryTheory.sheafSectionsNatIsoEvaluation\", \"CategoryTheory.Sheaf.ΓNatIsoCoyoneda\", \"CategoryTheory.Sheaf.ΓNatIsoSectionsFunctor\", \"CategoryTheory.Functor.IsCoverDense.presheafIso\"], \"digest\": \"5b52b4637fcbc2bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleton sheaf descent and sectionwise kernels are separate ingredients; none states this ring-changing functorial family of covers with its natural module-sheaf kernel identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural family of singleton covers gives a module sheaf isomorphic to the kernel of the difference of the two Cech restriction maps",
+   "results": "{\"t\": \"2026-10-23T14:14:33Z\", \"tool\": \"leanfinder\", \"query\": \"A natural family of singleton covers gives a module sheaf isomorphic to the kernel of the difference of the two Cech restriction maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.relationsOfIsCokernelFree\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"SheafOfModules.presentationOfIsCokernelFree_relations\", \"SheafOfModules.generatorsOfIsCokernelFree_I\"], \"digest\": \"09289ed4af68076d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleton sheaf descent and sectionwise kernels are separate ingredients; none states this ring-changing functorial family of covers with its natural module-sheaf kernel identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functorial family of covers and compatible scalar restriction maps identifies matching sections with a kernel of module sheaves naturally in the coefficient module",
+   "results": "{\"t\": \"2026-10-23T14:28:24Z\", \"tool\": \"leanfinder\", \"query\": \"A functorial family of covers and compatible scalar restriction maps identifies matching sections with a kernel of module sheaves naturally in the coefficient module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul\", \"CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux\", \"SheafOfModules.Presentation.relations\", \"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.Presentation.mapRelations\", \"SheafOfModules.Presentation.mapGenerators\", \"PresheafOfModules.Sheafify.SMulCandidate.mk'\"], \"digest\": \"8d1fff4b6e0e42c3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleton sheaf descent and sectionwise kernels are separate ingredients; none states this ring-changing functorial family of covers with its natural module-sheaf kernel identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-pushforward-atlas-equalizer",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Stacks 03M9 proof, the affine-target paragraph invoking 03M8: the direct image is computed by the equalizer from a surjective etale scheme atlas U -> X and its relation R = U x_X U. Extracted argument: Tag 03M8 (lemma-compute-pushforward), sheaf-condition paragraph and final functoriality sentence, extracted as a statement for a functorial family of covers with compatible scalar actions.",
+   "via": [
+    "lem-trf-space-pushforward-atlas-equalizer",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-enlarged-cover-module-kernel",
+  "worker": "stage1",
+  "summary": "Applied the existing covering-family equalizer criterion to each singleton cover; wrote out scalar linearity, inverse linearity, and both naturality squares, then used the existing sectionwise module-kernel statement. No new nodes or changed statement.",
+  "blueprint": "Expands the cover-to-module-kernel argument extracted from Stacks 03M8 along the recorded ancestor chain from lem-trf-local-term-locality; the current blueprint ancestor was checked, and this is a generic tool in that chain, not a replacement of the contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-c782a3028",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-c782a3028 (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes. It follows Stacks 03M8 (spaces-morphisms.tex l.1838-1871): singleton covering, overlap Q = Z x_W Z, sheaf equalizer, functorial in V. The statement is unchanged. The sheaf hypotheses on H_W/H_Z/H_Q are explicit, and no surjectivity is claimed at H_Q. I checked these cases: identity cover, M = 0, empty W(V), and a two-open Zariski cover. The citer lem-trf-space-pushforward-atlas-equalizer (step 3) applies the item consistently, getting Q from lem-trf-space-atlas-base-change-cech-geometry. Duplicate search found nothing: chart-limit-enlarged-sections, etale-module-pushforward-restriction and pe-set-sheaf-cover-descent are different statements. Steps 1, 3, 4 and 5 are correct. Linearity uses the semilinear clause of def-weil-sheaf-of-modules-category and c p1 = c p2; the inverse's linearity and its naturality in V and in M follow from uniqueness; sectionwise kernels come from the same def, with Y_et small by the size convention. One fault (E1/C4) in step 2: it cited lem-weil-pbc-pretopology-sheaf-condition, which assumes a category with all fibre products, and nothing establishes that for the enlarged site C_X. FIX: step 2 now gets the covering equalizer directly from the definition of an abelian sheaf in def-weil-pbc-sites-and-cohomology (1), with the fibre product from axiom (iii). That node is already a stmt_dep. Source place is now Sites 00VH/00VM/00VN; proof_deps is updated to the union of uses. No tool_uses, no SGA. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-space-enlarged-cover-module-kernel.json.; 1 file(s) fixed by the reviewer"
+ }
+}

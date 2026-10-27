@@ -1,0 +1,458 @@
+{
+ "id": "lem-sfb-profinite-action-free-restriction",
+ "kind": "statement",
+ "title": "Reconstructing an internal action by free restriction and right translations",
+ "statement": "Work in compatible universes and small skeletons [def-weil-size-convention]. Let $J$ be a compact Hausdorff totally disconnected topological group, let $P$ be the profinite site with finite jointly surjective covers [sk-def-sfb-condensed-ring], and let $P_J$ have profinite continuous left $J$-spaces, continuous equivariant maps and finite jointly surjective covers [def-weil-pbc-sites-and-cohomology]. Write $H(S)=J\\times S$ with left translation on $J$, and $tS=S$ with trivial action [def-sfb-profinite-action-parameters]. Put $\\mathscr E=\\operatorname{Sh}(P)$ and let $\\mathscr E^{\\underline J}$ be the category of internal actions: a sheaf $X$ with a natural unital associative action $C(S,J)\\times X(S)\\to X(S)$ [lem-sfb-action-topos-geometric-restriction]. Write $h_T(S)=C(S,T)$, with the induced action when $T\\in P_J$. For every $F\\in\\operatorname{Sh}(P_J)$, the presheaf\n$$G(F)(S)=F(H(S)),\\qquad G(F)(f)=F(\\operatorname{id}_J\\times f)$$\nis a sheaf on $P$. For $g:S\\to J$ define the continuous equivariant map $r_g:H(S)\\to H(S)$ by $r_g(j,s)=(jg(s),s)$. The operations\n$$g\\cdot x=F(r_g)x\\qquad(g\\in C(S,J),\\ x\\in G(F)(S))$$\ngive an internal left $\\underline J$-action on $G(F)$. In particular, $F(r_1)=1$, $F(r_g)F(r_h)=F(r_{gh})$, and for $f:V\\to S$ one has $G(F)(f)(g\\cdot x)=(g\\circ f)\\cdot G(F)(f)(x)$. Every sheaf map $F\\to F'$ induces an equivariant map $G(F)\\to G(F')$ by its components on $H(S)$, defining a functor $G:\\operatorname{Sh}(P_J)\\to\\mathscr E^{\\underline J}$. Moreover\n$$H(S_i)\\times_{H(S)}H(S_j)\\simeq H(S_i\\times_SS_j)$$\nby $((j,s_i),(j,s_j))\\mapsto(j,s_i,s_j)$, naturally in the maps to $S$, and $H$ carries finite jointly surjective covers to such covers.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated profinite-action infrastructure; extracted from the returned presentation proof steps 7,8. Exact external non-SGA source WANTED; this is an agent-formulated auxiliary lemma, not a theorem asserted by the blueprint paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-profinite-action-parameters",
+  "lem-sfb-action-topos-geometric-restriction",
+  "def-sfb-profinite-action-base-coefficients",
+  "def-sfb-profinite-action-space-site"
+ ],
+ "proof": [
+  {
+   "text": "The site and the acting group sheaf. By [lem-sfb-profinite-action-finite-cover-site], the indicated finite families define the site $P_J$, and continuous maps to any profinite target satisfy descent on $P$. Apply its latter assertion with target $J$: $\\underline J(S)=C(S,J)$ is a sheaf. Pointwise multiplication, unit and inverse preserve continuity because $J$ is a topological group and commute with precomposition; the group identities hold pointwise. Thus this is the group sheaf used below. The same assertion supplies the representable sheaves $h_T$ on $P$ appearing in the statement, with pointwise induced action when $T$ has a $J$-action.",
+   "uses": [
+    "lem-sfb-profinite-action-finite-cover-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary free-restriction construction; argument written by Q105"
+   }
+  },
+  {
+   "text": "Free parameters preserve covering pullbacks. Use the actual functor $H$ of [def-sfb-profinite-action-parameters]. For maps $a:A\\to S$, $b:B\\to S$, a point of $H(A)\\times_{H(S)}H(B)$ is a pair $((j,a_0),(k,b_0))$ with $j=k$ and $a(a_0)=b(b_0)$. The stated map to $H(A\\times_SB)$ therefore has inverse $(j,a_0,b_0)\\mapsto((j,a_0),(j,b_0))$. Both maps are continuous by their coordinate formulas, equivariant for left translation, and inverse. The projections commute with these maps, so the identification is natural. If $\\{S_i\\to S\\}$ is finite jointly surjective, then each $(j,s)$ lifts to $(j,s_i)$ for some lift $s_i$ of $s$; hence $\\{H(S_i)\\to H(S)\\}$ is finite jointly surjective. If the family is empty, its target is empty and so is $H(S)$.",
+   "uses": [
+    "def-sfb-profinite-action-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary free-restriction construction; argument written by Q105"
+   }
+  },
+  {
+   "text": "Restriction is a sheaf. Step 2 verifies both conditions for continuity of $H:P\\to P_J$: it preserves every covering family and the fibre products along its covering arrows (indeed all the indicated pullbacks). Apply [lem-weil-pbc-site-continuous-pushforward-sheaf] with $u=H$ and $\\mathcal G=F$. Its conclusion gives the sheaf $G(F)=F\\circ H$, with exactly the displayed restrictions. Concretely, a compatible family in $F(H(S_i))$ is compatible on $F(H(S_i\\times_SS_j))$, hence, by step 2, on $F(H(S_i)\\times_{H(S)}H(S_j))$; the sheaf condition for $F$ glues it uniquely to $F(H(S))$. The empty cover gives a singleton since $H(\\varnothing)=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WV (definition-continuous), 00WW (lemma-pushforward-sheaf), applied to the explicit pullback and cover formulas of step 2"
+   }
+  },
+  {
+   "text": "Right translations give a left action. For a continuous $g:S\\to J$, multiplication in $J$ makes $r_g(j,s)=(jg(s),s)$ continuous; it is equivariant since $(aj)g(s)=a(jg(s))$. Thus $F(r_g)$ is defined. Pointwise calculation gives $r_1=\\mathrm{id}$ and $r_h\\circ r_g=r_{gh}$, since $(jg(s))h(s)=j(g(s)h(s))$. Contravariance gives $F(r_1)=\\mathrm{id}$ and $F(r_g)\\circ F(r_h)=F(r_h\\circ r_g)=F(r_{gh})$. For $f:V\\to S$, the identity $r_g\\circ H(f)=H(f)\\circ r_{g\\circ f}$ follows by evaluating both sides at $(j,v)$, where both equal $(jg(f(v)),f(v))$. Applying $F$ gives $G(F)(f)F(r_g)=F(r_{g\\circ f})G(F)(f)$. The operations therefore define a natural map $\\underline J\\times G(F)\\to G(F)$ satisfying the unit and associativity equations, which is exactly an internal action by the definition in [lem-sfb-action-topos-geometric-restriction].",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary free-restriction construction; argument written by Q105"
+   }
+  },
+  {
+   "text": "Functoriality in the sheaf. For a sheaf map $\\alpha:F\\to F'$, put $G(\\alpha)_S=\\alpha_{H(S)}$. Naturality of $\\alpha$ for $H(f)$ gives the sheaf-map restriction equation, and naturality for $r_g$ gives $\\alpha_{H(S)}F(r_g)=F'(r_g)\\alpha_{H(S)}$. These are precisely equivariant morphisms of the action category defined in [lem-sfb-action-topos-geometric-restriction]. Since components of identity and composite natural transformations are identities and composites, $G(\\mathrm{id})=\\mathrm{id}$ and $G(\\beta\\alpha)=G(\\beta)G(\\alpha)$. This defines the asserted functor with all the prescribed formulas.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary free-restriction construction; argument written by Q105"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-profinite-action-parameters",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-sfb-profinite-action-finite-cover-site",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated free-restriction infrastructure; explicit proof by Q105, using Stacks Sites Tag 00WW for sheaf restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Condensed, Action",
+   "results": {
+    "t": "2026-10-22T06:03:24Z",
+    "tool": "loogle",
+    "query": "Condensed, Action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed-object constructors do not construct the internal action from right translations on free parameters."
+  },
+  {
+   "tool": "grep",
+   "query": "right.*[Tt]ranslation|[Tt]ranslation.*right|Condensed.*Action",
+   "results": {
+    "t": "2026-10-22T06:03:24Z",
+    "tool": "grep",
+    "query": "right.*[Tt]ranslation|[Tt]ranslation.*right|Condensed.*Action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Convex/Function.lean",
+     "Mathlib/Analysis/Convex/Function.lean",
+     "Mathlib/Analysis/Convex/Function.lean",
+     "Mathlib/Analysis/Convex/Function.lean",
+     "Mathlib/Analysis/Fourier/FourierTransform.lean",
+     "Mathlib/Analysis/Fourier/FourierTransform.lean",
+     "Mathlib/MeasureTheory/Group/Defs.lean",
+     "Mathlib/MeasureTheory/Group/Defs.lean"
+    ],
+    "digest": "0f4423cf88610e43"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed-object constructors do not construct the internal action from right translations on free parameters."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recover an internal group action by evaluating an equivariant space sheaf on J times S and pulling back right multiplication",
+   "results": {
+    "t": "2026-10-22T06:03:24Z",
+    "tool": "leansearch",
+    "query": "Recover an internal group action by evaluating an equivariant space sheaf on J times S and pulling back right multiplication",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.evalEquiv_apply",
+     "CategoryTheory.evalEquiv",
+     "CategoryTheory.evalEquiv.congr_simp",
+     "MulActionHom.map_smul",
+     "Action.functorCategoryEquivalenceCompEvaluation",
+     "CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply",
+     "Rep.ihom_obj_ρ",
+     "CategoryTheory.Limits.SingleObj.Types.colimitEquivQuotient"
+    ],
+    "digest": "864bded3256b7020"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed-object constructors do not construct the internal action from right translations on free parameters."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf on profinite group spaces restricts along free group spaces to a condensed set with an internal left action defined by pullback under right translations",
+   "results": {
+    "t": "2026-10-22T06:03:25Z",
+    "tool": "leansearch",
+    "query": "A sheaf on profinite group spaces restricts along free group spaces to a condensed set with an internal left action defined by pullback under right translations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ofSheafForgetLightProfinite",
+     "CondensedSet.ofSheafProfinite",
+     "LightCondensed.lanLightCondSet",
+     "LightCondensed",
+     "Condensed.ofSheafProfinite",
+     "Condensed.lanSheafProfinite",
+     "LightCondSet",
+     "Condensed.ofSheafCompHaus"
+    ],
+    "digest": "185ce9ddafe23cef"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed-object constructors do not construct the internal action from right translations on free parameters."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on profinite group spaces restricts along free group spaces to a condensed set with an internal left action defined by pullback under right translations",
+   "results": {
+    "t": "2026-10-22T06:03:33Z",
+    "tool": "leanfinder",
+    "query": "A sheaf on profinite group spaces restricts along free group spaces to a condensed set with an internal left action defined by pullback under right translations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondAb.ofSheafLightProfinite",
+     "Condensed.ofSheafForgetProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.ofSheafLightProfinite",
+     "Condensed.profiniteFree",
+     "Condensed.isSheafProfinite",
+     "Condensed.ofSheafProfinite",
+     "CondensedSet.ofSheafProfinite"
+    ],
+    "digest": "56161e8f3b9caa73"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed-object constructors do not construct the internal action from right translations on free parameters."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]ction|translation",
+   "results": {
+    "t": "2026-10-22T06:04:52Z",
+    "tool": "grep",
+    "query": "[Aa]ction|translation",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/Sequence.lean"
+    ],
+    "digest": "6ced45b36b6544c7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed-object constructors do not construct the internal action from right translations on free parameters."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Action\"",
+   "results": {
+    "t": "2026-10-22T06:04:53Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Action\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed-object constructors do not construct the internal action from right translations on free parameters."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Action\"",
+   "results": {
+    "t": "2026-10-22T06:04:53Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Action\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed-object constructors do not construct the internal action from right translations on free parameters."
+  },
+  {
+   "tool": "grep",
+   "query": "right.*[Tt]ranslation|[Ff]ree.*[Aa]ction|[Aa]ction.*[Ss]heaf",
+   "results": {
+    "t": "2026-10-22T13:39:12Z",
+    "tool": "grep",
+    "query": "right.*[Tt]ranslation|[Ff]ree.*[Aa]ction|[Aa]ction.*[Ss]heaf",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no relevant declaration in Condensed for this query."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Action\"",
+   "results": {
+    "t": "2026-10-22T13:39:13Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Action\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a sheaf on profinite continuous group actions along the free action functor J times S and recover an internal action by right translations",
+   "results": {
+    "t": "2026-10-22T13:39:14Z",
+    "tool": "leanfinder",
+    "query": "Restrict a sheaf on profinite continuous group actions along the free action functor J times S and recover an internal action by right translations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContAction.resComp",
+     "Condensed.ofSheafForgetProfinite",
+     "Condensed.profiniteFree",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.ofSheafLightProfinite",
+     "LightCondAb.ofSheafLightProfinite",
+     "CategoryTheory.PreGaloisCategory.functorToContAction_obj_obj",
+     "LightCondensed.ofSheafForgetLightProfinite_val"
+    ],
+    "digest": "d2a80c7c6e79d3c0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ContAction.resComp restricts along group homomorphisms, not free parameter spaces; condensed constructors do not supply the right-translation action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf on profinite group spaces restricts to a condensed set on free spaces with internal left action from pullback of right multiplication",
+   "results": {
+    "t": "2026-10-22T13:39:32Z",
+    "tool": "leansearch",
+    "query": "A sheaf on profinite group spaces restricts to a condensed set on free spaces with internal left action from pullback of right multiplication",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ofSheafForgetLightProfinite",
+     "LightCondensed.lanLightCondSet",
+     "CondensedSet.ofSheafProfinite",
+     "LightCondensed",
+     "Condensed.lanSheafProfinite",
+     "Condensed.isSheafProfinite",
+     "Condensed.ofSheafCompHaus",
+     "Condensed.ofSheafProfinite"
+    ],
+    "digest": "e18ced3bc1808471"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: returned condensed constructors and generic sheaf composition lemmas; none reconstructs the internal action from free parameters and right translations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf precomposition preserves the sheaf property for a functor preserving covering families and their pullbacks; right translations induce a group action",
+   "results": {
+    "t": "2026-10-22T13:39:32Z",
+    "tool": "leansearch",
+    "query": "Sheaf precomposition preserves the sheaf property for a functor preserving covering families and their pullbacks; right translations induce a group action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.GrothendieckTopology.HasSheafCompose.isSheaf",
+     "CategoryTheory.GrothendieckTopology.HasSheafCompose.mk",
+     "CategoryTheory.sheafComposeIso_hom_fac",
+     "CategoryTheory.Presheaf.isSheaf_comp_of_isSheaf",
+     "CategoryTheory.Presheaf.isSheafForIsSheafFor'",
+     "CategoryTheory.Presheaf.isSheaf_iff_isSheaf_comp",
+     "CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp",
+     "CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions_of_hasSheafCompose"
+    ],
+    "digest": "24d11f97e170ae99"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: returned condensed constructors and generic sheaf composition lemmas; none reconstructs the internal action from free parameters and right translations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-coherent-presentation",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), quasi-compact open direct image: coherent action-space presentation needed for filtered passage in the internal derived-invariant input. Re-split of the auxiliary presentation: returned proof steps 7,8.",
+   "via": [
+    "lem-sfb-profinite-action-coherent-presentation",
+    "lem-sfb-profinite-invariants-filtered-continuity",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-action-free-restriction",
+  "worker": "stage1",
+  "summary": "Repair of the returned side-completion delivery: rebased the retained approved five-step split onto the current DAG metadata and re-read every statement and proof dependency. All five citation quotes remain verbatim and all used hypotheses still hold. Retained the statement, proof, citations and logged searches; no new nodes and no Lean writing or compilation.",
+  "blueprint": "Realizes free restriction and right translations from returned presentation steps 7,8, auxiliary to paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md. This paragraph does not assert the auxiliary theorem itself; the proof is agent-written. Whole-blueprint searches for right translation and profinite action found no equivalent imported node. The ancestor tool returns None, so the existing null blueprint.from.node and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Generic Stacks 00WW restriction-of-sheaves tool after the explicit cover and pullback calculation; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-5cefa7c52",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-5cefa7c52 (reviewer sub-agent of L); spot-checked: I re-read the full mathematics. Item only: no new nodes, and the statement and stmt_deps are unchanged. In the live clone the item is still unsplit, and there is no repair note. Compared with the earlier delivery f73cb29c210f, only split_report.date and summary changed; the 5 steps, proof_deps and tool_uses are identical. Step 1: the continuous-map descent clause on P of lem-sfb-profinite-action-finite-cover-site (unsplit, no cycle) makes C(-,J) a sheaf, since J is profinite. Step 2: I checked by hand that (J×A)×_{J×S}(J×B)≅J×(A×_S B) for arbitrary maps, continuous and equivariant, and that finite jointly surjective covers are preserved, including the empty cover. Step 3: these are exactly hypotheses (a) and (b) of Stacks 00WV; Lemma 00WW (sites.tex l.2548) and its proof match lem-weil-pbc-site-continuous-pushforward-sheaf. The declared tool_use of this generic 00WW node from unit sk-thm-p1 is accepted. Step 4: r_h∘r_g=r_{gh} and F is contravariant, so F(r_g)F(r_h)=F(r_{gh}), a left action; r_g is equivariant; r_g∘H(f)=H(f)∘r_{g∘f} gives the stated naturality. Step 5: equivariance follows from the naturality of α. Checked J=1, S=∅ and non-abelian J. Not a duplicate of the cech-recovery, module-lift or coherent-presentation siblings. The source is honestly marked as agent-formulated: paragraph (3) of the direct-images proof does not assert this lemma, and a reference is WANTED. No SGA is cited ('non-SGA' is not a citation). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteActionFreeRestriction",
+  "declaration": "Profinite.CondensedAction.CoherentPresentation.freeRestriction_exists",
+  "declarations": [
+   "Profinite.CondensedAction.CoherentPresentation.freeRightTranslation_wellDefined",
+   "Profinite.CondensedAction.CoherentPresentation.freeRightTranslation",
+   "Profinite.CondensedAction.CoherentPresentation.freeParameter_site",
+   "Profinite.CondensedAction.CoherentPresentation.freeRestriction_isSheaf",
+   "Profinite.CondensedAction.CoherentPresentation.freeRightTranslation_laws",
+   "Profinite.CondensedAction.CoherentPresentation.FreeRestriction",
+   "Profinite.CondensedAction.CoherentPresentation.freeRestriction_exists"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteActionFreeRestriction.lean",
+  "statement": "theorem freeRestriction_exists : Nonempty (FreeRestriction J)",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52f3fd445",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 7041473dc2e7. Item Lean byte-identical (sha256 725e1eaa); item node differs from live only in lean and stmt_deps (+ landed def-sfb-profinite-action-base-coefficients, + new def-sfb-profinite-action-space-site). New def node: existing:true on live ProfiniteActionCoherentPresentation for Space/underlying/coverage/trivialParameter/freeParameter (live lines 102-132, plain defs, no use of the coherent-presentation theorem); statement verbatim 'def freeParameter : Base.{u} ⥤ Space J'; TeX matches AsSmall model, forget₂, finite jointly surjective coverage incl. empty cover, transported t/H; stmt_deps base-coefficients + parameters, acyclic; no other owner in live DAG or in-flight runs. All signature objects now have cited owners. Mathematics re-checked: J hypotheses exact; sheaf clause on H.op⋙F.obj; r_g real data; F(r_h)≫F(r_g)=F(r_gh) is the left-action order; unit; naturality H(f)≫r_g=r_{g∘f}≫H(f); FreeRestriction pins sections/action/maps (not hollow); cover and pullback for all a,b. Edge cases: S=∅ and empty cover, J=1, non-abelian J. Report sections present. No compile (no file changed). Advisory: stage-3 import cycle with the coherent-presentation module (move shared defs to a foundational module later); owner docstrings still name the theorem node."
+ }
+}

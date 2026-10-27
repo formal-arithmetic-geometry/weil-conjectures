@@ -1,0 +1,143 @@
+{
+ "id": "lem-cbc-single-alpha-restriction",
+ "kind": "statement",
+ "title": "Restriction of intrinsic ordinary proper/open alpha",
+ "statement": "Let $B$ be a commutative ring. For a scheme $X$ [def-pc-scheme], use the small pro-etale site [def-weil-pbc-proetale-site], the constant ring sheaf $\\underline B_X$ [def-weil-pbc-constant-sheaf], and its module-sheaf category [def-weil-sheaf-of-modules-category]. Write $P_f$ for the specified inverse image [def-cbc-strict-constant-tower-operations], $L_j$ for open extension [def-cbc-strict-tower-open-extension], and $\\eta_j:1\\cong P_jL_j$ for its specified open-adjunction unit. Set $\\epsilon_j=\\eta_j^{-1}$. Let $k:V\\to W$ and $i:S\\to T$ be quasi-compact open immersions [def-weil-open-immersion] [def-weil-finite-type-morphism], and let $r:V\\to S$ and $p:W\\to T$ be proper morphisms [def-weil-proper-morphism] with $pk=ir$. Let $\\sigma:P_rP_i\\cong P_kP_p$ be the specified inverse-image square comparison [lem-cbc-tower-open-beta-normalization] and let $\\alpha:P_pL_i\\to L_kP_r$ be the actual ordinary clopen-factor construction [def-cbc-strict-tower-ordinary-proper-open-arrows]. For every module sheaf $M$ on $S$,\n$$\\epsilon_{k,P_rM}\\circ P_k(\\alpha_M)=P_r(\\epsilon_{i,M})\\circ\\sigma^{-1}_{L_iM}.$$\nNo cartesianness of the square is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7F (lemma-shriek-proper-and-open-base-change); ordinary restriction calculation in steps 2--3 of lem-cbc-proper-open-alpha-horizontal-modules; open adjunction unit in proetale.tex Tag 09BN (lemma-open-immersion)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-cbc-tower-open-beta-normalization",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Factor the square through W times_T S. Let s be its clopen lift, b the first projection, and q the second. Write kappa_k and kappa_r for inverse-image composition with the equalities sb=k and sq=r. Apply moduleCompEq_coherence twice, to s,b,p and s,q,i, and expand moduleSquareG_eq. Cancel the common total compositor. This identifies kappa_r, restriction along s of the cartesian square, and inverse kappa_k with the original square comparison.",
+   "uses": [
+    "lem-cbc-tower-open-beta-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The open compositor preserves adjunction units because it is the left-adjoint comparison conjugate to the inverse-image compositor. Apply unit_conjugateEquiv to its inverse and substitute k=sb. This gives the unit equation required for the factored open extension.",
+   "uses": [
+    "lem-cbc-tower-open-beta-normalization",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The clopen projector theorem gives P_s(pi_s)=unit_s on P_s of an arbitrary module. The normalized beta theorem, via the open adjunction hom equivalence, gives unit_b followed by P_b(beta inverse) equal to P_q(unit_i) followed by the inverse cartesian square comparison.",
+   "uses": [
+    "lem-cbc-proper-open-clopen-projector",
+    "lem-cbc-tower-open-beta-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the alpha factor word on a module. First restrict the section/projector/open-compositor part: naturality of the inverse open unit moves the inverse-image compositor out, the open-unit composition identity replaces the open compositor, and restriction of the projector cancels the remaining unit. Transport this identity along sb=k and sq=r. For the beta part, move the inverse-image compositor past beta by naturality, use its one-square restriction equation, then move the second compositor past the inverse open unit. The square-factor identity gives exactly the inverse outer square comparison. Combine these two strictly shorter restriction calculations, and specialize the factorization to the pullback and its clopen lift.",
+   "uses": [
+    "lem-cbc-tower-open-beta-normalization",
+    "def-cbc-strict-tower-ordinary-proper-open-arrows",
+    "lem-cbc-proper-open-clopen-projector"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7F; B3 fixed-coefficient restriction calculation. The proved SemilinearAlphaRestriction module supplies the component-by-component strategy (section_restriction, square factorization, and generic functor_calculation). It cannot be imported because that would create a cycle, so the elementary categorical calculations are private helpers specialized here to the already specified fixed-ring constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the intrinsic proper open alpha map is the inverse open adjunction unit under the inverse image square comparison",
+   "results": "8 hits including Scheme.Modules.restrictAdjunction_unit_app_app and TopologicalSpace.Opens.adjunction_counit_map_functor; these concern Zariski modules or topological opens.",
+   "date": "2026-10-27",
+   "verdict": "No match for intrinsic proper/open alpha on constant-coefficient pro-etale module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv",
+   "results": "1 exact hit in Mathlib.CategoryTheory.Adjunction.CompositionIso.",
+   "date": "2026-10-27",
+   "verdict": "Used to prove unit preservation for the open compositor; does not itself give restriction of alpha."
+  },
+  {
+   "tool": "grep",
+   "query": "singleAlpha_restriction|moduleAlpha_restriction|factor_unit",
+   "results": "Search service returned 0 hits. Local rg found the proved generic factor_unit and the corresponding SemilinearAlphaRestriction proof; the latter imports the proper/open calculus and cannot be imported here without a cycle.",
+   "date": "2026-10-27",
+   "verdict": "The existing semilinear theorem cannot be imported without a cycle. Its component-by-component restriction proof informs the fixed-ring proof; the generic factor_unit alternative was tested but the final proof uses the shorter component calculations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperOpenAlphaHorizontalModules",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, last sentence: 'with the compatibility of the comparisons ... with the completed maps' — strict-tower open/proper comparison and coherence underlying the passage to derived limits; parent proof steps 7,8,9,10: Clopen alpha projections commute with pasting and pullback before derivation; isolated Intrinsic proper/open alpha horizontal equation on module sheaves (parent proof steps 1-3 and the corresponding diagram calculation). Single-square restriction calculation, isolated from steps 2--3 of lem-cbc-proper-open-alpha-horizontal-modules.",
+   "via": [
+    "lem-cbc-proper-open-alpha-pasting",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-proper-open-alpha-horizontal-modules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenAlphaRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenAlphaRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.singleAlpha_restriction",
+  "statement": "theorem singleAlpha_restriction {V W S T : Scheme.{u}}\n    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (M : Modules B S) :\n    (modulePullback B k).map ((singleAlpha B k r p i h).app M) ≫\n        (moduleOpenUnitInv B k).app ((modulePullback B r).obj M) =\n      (moduleSquareG B k r p i h).inv.app ((moduleJ B i).obj M) ≫\n        (modulePullback B r).map ((moduleOpenUnitInv B i).app M)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-cbc-tower-open-beta-normalization",
+  "def-cbc-strict-tower-open-extension",
+  "lem-cbc-proper-open-clopen-projector",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T123417-L-2292953",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T123417-L-2292953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

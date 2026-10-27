@@ -1,0 +1,413 @@
+{
+ "id": "lem-pur-closed-section-compact-origin",
+ "kind": "statement",
+ "title": "Identity-normalized compact origin for a map out of a closed section",
+ "statement": "Fix the finite coefficient datum $k,\\ell,F,n\\geq1,A=\\mathcal O_F/\\varpi_F^n$ of [def-pur-conventions]. Work on the ordinary small etale and pro-etale constant-$A$ module derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], and write $C_T=\\nu_T^*$ for [def-sf-comparison-derived-pullback]. Let $B,X$ be separated finite-type $k$-schemes, $f:X\\to B$ a separated finite-type morphism with a chosen compactification [def-weil-compactifications-refinements], and $s:B\\hookrightarrow X$ a closed section, $fs=\\mathrm{id}_B$, with quasi-compact complementary open. Use $F^e=Rf_!^{\\mathrm{et}}$ and $F^p=Rf_!$ of [def-amb-etale-compact-support, def-compact-support-direct-image-detailed], and let\n$$\\beta_M:C_BF^eM\\xrightarrow{\\sim}F^pC_XM$$\nbe the inverse-direction compact-support comparison of [lem-sf-class-compact-support-comparison]. Let $\\epsilon_s:C_X(s_*^eA_B)\\xrightarrow{\\sim}s_*^pA_B$ and $\\chi_B:C_BA_B^e\\xrightarrow{\\sim}A_B^p$ be the canonical closed-constant and constant-sheaf comparisons. Superscripts $e,p$ specify the site.\n\nThe identity/proper compactification $(\\mathrm{id}_B,s)$ identifies $Rs_!$ with $s_*$ on both sites. The composition comparisons for $f\\circ s$ [lem-amb-etale-compact-comparisons, thm-sf-comp-composition], normalized at the identity, give isomorphisms\n$$\\sigma_e:F^e(s_*^eA_B)\\xrightarrow{\\sim}A_B^e,\\qquad\\sigma_p:F^p(s_*^pA_B)\\xrightarrow{\\sim}A_B^p.$$\nThey obey the source normalization identity\n$$\\sigma_p\\circ F^p(\\epsilon_s)\\circ\\beta_{s_*^eA_B}=\\chi_B\\circ C_B(\\sigma_e).$$\nLet $M\\in D^+(X_{\\mathrm{et}},A)$, let $K\\in D^+(X_{\\mathrm{proet}},A)$, and retain an isomorphism $\\theta:C_XM\\xrightarrow{\\sim}K$ [def-weil-pbc-etale-origin-witness]. For any $c^e:s_*^eA_B\\to M$ and $c^p:s_*^pA_B\\to K$ satisfying $\\theta\\circ C_X(c^e)=c^p\\circ\\epsilon_s$, set\n$$\\tau_e=F^e(c^e)\\circ\\sigma_e^{-1},\\quad\\tau_p=F^p(c^p)\\circ\\sigma_p^{-1},\\quad\\psi=F^p(\\theta)\\circ\\beta_M.$$\nThen $F^eM$ is bounded below, $\\psi:C_BF^eM\\xrightarrow{\\sim}F^pK$, and\n$$\\psi\\circ C_B(\\tau_e)=\\tau_p\\circ\\chi_B.$$\nThus $(A_B^e,\\chi_B)$ and $(F^eM,\\psi)$, together with the actual representative $\\tau_e$, are bounded-below etale-origin witnesses for the source, target and map $\\tau_p$, retaining the specified identity-normalized source identification. No invertibility of $c^e,c^p,\\tau_e$ or $\\tau_p$ is assumed or concluded.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 1, induced global morphism: closed-section compact source, site-comparison naturality and identity normalization; expanded realization proof steps 6--7"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-compactifications-refinements",
+  "lem-sf-class-compact-support-comparison",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-amb-etale-compact-support",
+  "def-compact-support-direct-image-detailed",
+  "lem-amb-etale-compact-comparisons",
+  "thm-sf-comp-composition",
+  "lem-pur-supported-constant-exchange-normalization",
+  "lem-sf-comparison-pullback-exact",
+  "def-sf-origin-candidate-comparison",
+  "def-sf-compact-support-site-comparison-construction",
+  "def-pur-supported-constant-exchange-maps"
+ ],
+ "proof": [
+  {
+   "text": "Apply the separate source-normalization theorem. This proves the first conjunct using exactly the retained compactification and specified source maps.",
+   "uses": [
+    "lem-pur-closed-section-source-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1, induced global morphism: source normalization after the closed-image square"
+   }
+  },
+  {
+   "text": "The bounded-below compact-support functor has its existing compatibility isomorphism with ambient compact support. Transport its object property along that isomorphism to prove the lower-bound conjunct.",
+   "uses": [
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1, induced global morphism: source normalization after the closed-image square"
+   }
+  },
+  {
+   "text": "Naturality of the inclusion-level compactExchangeTransportComparison at ce, followed by F(theta) and the given class-map square, identifies C(F ce) psi with beta_source F(epsilon) F(cp). Precompose the source equation with C(Sigma_e inverse) and cancel Sigma_p, both isomorphisms. Postcompose with F(cp) and expand Tau_e and Tau_p to obtain the final class-map equality. No class map is cancelled.",
+   "uses": [
+    "def-pur-compact-exchange-witness-transport",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1, induced global morphism: source normalization after the closed-image square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-closed-section-source-normalization",
+  "def-amb-etale-compact-support",
+  "def-pur-compact-exchange-witness-transport",
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 1; B9 canonical transport proof with source normalization split off"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a compactifiable scheme morphism with closed section compact pushforward of a supported map from the constant sheaf has an identity normalized etale origin witness",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap",
+     "AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+     "AlgebraicGeometry.Scheme.Hom.toNormalization",
+     "AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+     "AlgebraicGeometry.Scheme.Hom.normalization",
+     "AlgebraicGeometry.Scheme.Hom.fromNormalization",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagram"
+    ],
+    "note": "",
+    "digest": "0c5e58282ddc52c7",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; the hits concern scheme normalization, affine limits or locally constant functions, not compact pushforward and the identity-normalized closed-section source square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale proetale comparison for compact support sends a morphism out of a closed section to the same map with constant source under the composition isomorphism",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "CompHausLike.LocallyConstant.incl_of_counitAppApp",
+     "CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "CompHausLike.LocallyConstant.counitAppApp",
+     "AlgebraicGeometry.exists_map_preimage_eq_map_preimage",
+     "CompHausLike.LocallyConstant.counit_app_val"
+    ],
+    "note": "",
+    "digest": "ce5a8b08209cc516",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; the hits concern scheme normalization, affine limits or locally constant functions, not compact pushforward and the identity-normalized closed-section source square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"compactSupport\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; the hits concern scheme normalization, affine limits or locally constant functions, not compact pushforward and the identity-normalized closed-section source square"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale|Etale|proetale|Proetale).*(compactSupport|[Ll]owerShriek)|compactSupport.*(comparison|section)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; the hits concern scheme normalization, affine limits or locally constant functions, not compact pushforward and the identity-normalized closed-section source square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported direct image of a closed section is the identity compatibly with etale proetale site comparison and morphisms",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"lowerShriek\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; ordinary scheme normalization, etale categories, topological compactly supported functions or condensed naturality do not state the specified etale/proetale compact-support square"
+  },
+  {
+   "tool": "grep",
+   "query": "closedSection|compactSupportSiteComparison|lowerShriek.*[Cc]omparison",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; ordinary scheme normalization, etale categories, topological compactly supported functions or condensed naturality do not state the specified etale/proetale compact-support square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale compact support comparison commutes with composition of a closed section and is normalized at the identity",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "HasCompactSupport.comp_isClosedEmbedding",
+     "AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc",
+     "HasCompactMulSupport.comp_isClosedEmbedding",
+     "HasCompactMulSupport.comp_homeomorph",
+     "AlgebraicGeometry.Scheme.stalkClosedPointTo_comp",
+     "Algebra.Etale.comp",
+     "CompactlySupportedContinuousMap.comp",
+     "AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc"
+    ],
+    "note": "",
+    "digest": "7cdc6cfb4d8a708c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; ordinary scheme normalization, etale categories, topological compactly supported functions or condensed naturality do not state the specified etale/proetale compact-support square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported direct image along a morphism with a closed section preserves etale origin and its natural transformation from the constant sheaf",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.liftCoborder_app",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+     "AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward"
+    ],
+    "note": "",
+    "digest": "633a585ae41423ac",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; ordinary scheme normalization, etale categories, topological compactly supported functions or condensed naturality do not state the specified etale/proetale compact-support square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the etale to proetale compact support comparison with the identity identification for a proper section",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "LightCondSet.hom_naturality_apply",
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet_hom_app_val_app_apply",
+     "LightCondMod.hom_naturality_apply",
+     "LightCondensed.ihomPoints_symm_comp",
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+     "CondensedSet.hom_naturality_apply",
+     "CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso",
+     "Condensed.profiniteSolidCounit"
+    ],
+    "note": "",
+    "digest": "e1d8b91be13d47c7",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; ordinary scheme normalization, etale categories, topological compactly supported functions or condensed naturality do not state the specified etale/proetale compact-support square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-line-zero-class-etale-realization",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 1, induced global morphism: closed-section compact source, site-comparison naturality and identity normalization; expanded realization proof steps 6--7",
+   "via": [
+    "lem-pur-line-zero-class-etale-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-closed-section-compact-origin",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery 38cad02197e on the current DAG: remove the two cycle-closing citations to proper coincidence and proper-factor site transport. Compute the identity-open candidate directly, use the compatible tower with t=js, and assemble the source-normalization equality from the existing proper/open site equation and direct-image composition compatibility. Keep the statement, witnesses, previous searches and final arrow calculation. No new nodes.",
+  "blueprint": "thm-pur-rank-one-thom proof Step 1, induced global morphism; realizes the source identity and comparison calculations of parent lem-pur-line-zero-class-etale-realization steps 6--7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic Every object of D^+ is represented by a bounded below K-injective complex of injectives used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic Enough K-injectives compute total right derived functors used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic Closed immersions are proper used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic Basic consequences of properness used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Generic Closed complementary subtopoi: factorization and supported module sheaves used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic Exactness of closed direct image used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-coef-proper-identity-open-site-comparison",
+    "why": "Generic Proper identity-open compact-support comparison is the inverse named mate used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-pur-supported-constant-exchange-normalization",
+    "why": "Generic Canonical closed constant exchange and its underived comparison square used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic The etale compact-support comparisons used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic The composition law for $Rf_!$ used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Generic tool: [stacks-project]; supplies the identity-open or compatible-tower calculation for the closed-section compact image. It does not replace the rank-one Thom route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic tool: Unbounded ordinary etale compact-support comparisons; supplies the identity-open or compatible-tower calculation for the closed-section compact image. It does not replace the rank-one Thom route."
+   },
+   {
+    "node": "lem-trf-proetale-composition-tower-normalization",
+    "why": "Generic tool: Pro-etale composition on a compatible tower has the open-adjoint normalization; supplies the identity-open or compatible-tower calculation for the closed-section compact image. It does not replace the rank-one Thom route."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic tool: Composition of derived direct images; supplies the identity-open or compatible-tower calculation for the closed-section compact image. It does not replace the rank-one Thom route."
+   },
+   {
+    "node": "lem-sp-proper-open-coefficient-mate",
+    "why": "Generic tool: Coefficient and site squares for cartesian proper/open interchange; supplies the identity-open or compatible-tower calculation for the closed-section compact image. It does not replace the rank-one Thom route."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic Comparison direct image used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic On the coefficient class the compact-support functor is computed on the étale site used on ordinary finite constant-module bounded-below categories for the closed-section source or site comparison; does not replace the rank-one Thom unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N7-cbeb29e00",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-cbeb29e00 (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full, and the full statement of every cited node. No new nodes; the statement is identical to live, and the item is still unsplit in live and side-live, so no other group has superseded it. This re-delivery removes the two citations that closed the cycle (cor-cbc-proper-coincidence and lem-trf-proper-composition-site-transport). On both the snapshot and the live clone, the item does not appear in its own dependency closure. Step checks: (1) the bound on F^e M follows from exact j_! and a bounded-below K-injective representative. (2) s is proper and B, X, X̄ are Noetherian. Étale s_* is exact by closed-subtopos localization; pro-étale s_* is exact because the complement is quasi-compact. The identity-open e and q come from lem-coef-proper-identity-open-site-comparison (k=F̄_q, s proper). (3) From S(e)∘C∘q⁻¹=b⁻¹ I derived q∘β_s=b_s∘S(e), and ε_s=P_s(χ)∘b_s holds by the mate characterization d∘ν⁻¹ρ=ρ'∘q. (5) t=js is proper by the triangle lemma, and the square (id_B,s,t,j) is Cartesian because t factors through the open j. (6) The trf pro-étale tower normalization with Ū=B, a=id, p=t gives H=B, b=id, and α reduces to Σ=v∘D_{r,t}∘P_r(Γ); the étale formula of lem-amb-unbounded-compact-support-comparisons reduces the same way. (7) The site clause of lem-sp-proper-open-coefficient-mate at (id_B,s,t,j) with e_id=1, and β=P_r(e_j)∘b_r from the site-comparison construction. (8) I redid the calculation by hand, using naturality of b_r, the composite and identity laws of prop-weil-pbc-comparison-direct-image, and naturality of Σ_p at χ_B. (9-10) Naturality in the witness, then cancellation of σ_e and σ_p only, never the class maps. Edge cases: empty B forces X=∅; zero maps, M=K=0 and the identity section all work. The source (main-20261015 rank-one Thom Step 1) is respected; no SGA. Batch 5: with the flagged citations added to the item's other citations, the only new trf/pd nodes are six. They are lem-trf-oriented-closed-base-localization, four generic topos lemmas it depends on, and lem-trf-proetale-composition-tower-normalization (a generic normalization of the compact-support compositor). lem-sp-proper-open-coefficient-mate adds nothing beyond what the other citations already reach; its flagged path ends in the generic pod-lisse-module node. None of the three is part of the trace formula, Poincaré duality or their proofs, so all are accepted. Advisory: Step 7 identifies the site-transported Γ^pro with the native pro-étale γ, the identification accepted in Q71."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedSectionCompactOrigin",
+  "declaration": "AlgebraicGeometry.ClosedSectionCompactOrigin.closed_section_compact_origin",
+  "declarations": [
+   "AlgebraicGeometry.ClosedSectionCompactOrigin.closed_section_compact_origin"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedSectionCompactOrigin.lean",
+  "statement": "theorem closed_section_compact_origin {B X : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] (f : X ⟶ B) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (s : B ⟶ X) [IsClosedImmersion s] [QuasiCompact s.openComplement.ι] (hs : s ≫ f = 𝟙 B) : (compactComparison P c (etaleSource P s)).hom ≫ (ProEtale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).map (supportedComparison P s).hom ≫ (proSigma P f c s hs).hom = (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map (DerivedCategory.Plus.ι.map (etaleSigma P f c s hs).hom) ≫ (constantComparison P B).hom ∧ ∀ (M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (theta : (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj M.obj ≅ K.obj) (ce : etaleSource P s ⟶ M) (cp : (proSource P s).obj ⟶ K.obj), (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.map (DerivedCategory.Plus.ι.map ce) ≫ theta.hom = (supportedComparison P s).hom ≫ cp → DerivedCategory.TStructure.t.plus ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).obj M.obj) ∧ (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map (DerivedCategory.Plus.ι.map (etaleTau P f c s hs ce)) ≫ (targetComparison P c M K theta).hom = (constantComparison P B).hom ≫ proTau P f c s hs cp",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Retains the given compactification and the specified composition/identity-normalized source identifications. Helpers assemble existing canonical comparisons and explicit retained witnesses; the only postponed theorem is the node statement. Returned H2 repaired: cite the existing definition owners of towerCandidateComparison, compactSupportSiteComparison and the supported-constant maps; coefficient finiteness is inlined locally from the positive-level quotient finiteness theorem and Equiv.ulift, without a statement dependency on compact-support coherence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fce924d1c",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 1d27ba1b (H2). Repairs verified: both theorem stmt_deps dropped. towerCandidateComparison is now cited via def-sf-origin-candidate-comparison (existing:true owner). Finite P.Coefficient is a local instance byte-identical to the landed compactSupportCoherenceCoefficientFinite (Padic.finite_coefficientExtensionRing + Equiv.ulift). Advisory def owners def-sf-compact-support-site-comparison-construction and def-pur-supported-constant-exchange-maps added. Lean otherwise unchanged vs 1d27. Node differs from live only in lean and stmt_deps. proof_deps = union of uses (the NJ a0126e8a landing fault does not recur). lean.statement is verbatim in the file. Item unsplit and unstated in live and side-live, so not superseded. Re-read: β direction, canonical ε (gamma mate) and χ (compareUnit), independently built σ_e/σ_p, source-normalization conjunct, class-map hypothesis, t.plus bound, ψ as an actual Iso, τ square, no invertibility assumed. Edge cases (zero maps, M=K=0, empty B, s=id) and universes u/u+1 OK. No hollow defs; the only sorry is the node theorem; docstrings OK. No compile (no fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2ab3d",
+  "group": "B9",
+  "result": "fix",
+  "landing": "20261025T201508-L-2547750",
+  "kind": "interface",
+  "note": "independent cc review: item closed_section_compact_origin proved from closedSectionSourceNormalization (= its first conjunct) + verbatim data extraction to ClosedSectionCompactOriginData, against node lem-pur-closed-section-compact-origin steps 1-10 and the published module"
+ }
+}

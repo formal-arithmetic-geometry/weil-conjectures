@@ -33,143 +33,40 @@
  ],
  "proof": [
   {
-   "text": "First check the geometric hypotheses needed for the product and completion results. The scheme $\\operatorname{Spec}k$ is Noetherian: it has one point and its coordinate ring is a field. By [lem-weil-pbc-finite-type-over-noetherian], $U$ and $X$ are Noetherian, hence quasi-compact and locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated] they are quasi-separated. Since $\\operatorname{Spec}k$ is affine, $X\\to\\operatorname{Spec}k$ is then quasi-separated: the preimage of an affine open $V\\times_kV'$ of $X\\times_kX$ under the diagonal is $V\\cap V'$, quasi-compact because $X$ is quasi-separated, and such products cover $X\\times_kX$. Apply [lemma-nagata-open-immersion-qc-over-separated-target] to $U\\to X\\to\\operatorname{Spec}k$: its composite is quasi-compact and its second arrow is quasi-separated. Thus $j$ is quasi-compact. Finally $\\ell$ is invertible on both schemes because they are $k$-schemes and $\\ell\\ne\\operatorname{char}k$. No separatedness of $X$ over $k$ is required.",
+   "text": "Prove good-to-flat conversion by the definitions and extension preservation by the two fields m.kflat and m.preservesFlatTerms. Exactness of restriction follows from exact slice restriction composed with the coefficient equivalence. Apply [lem-sf-open-projection-ordinary-roos] for the normalized Roos, actual unit and ordinary tensor witnesses.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lemma-nagata-open-immersion-qc-over-separated-target"
+    "lem-sf-open-projection-ordinary-roos",
+    "lem-sf-open-semilinear-tensor-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP, lemma-j-shriek-limits; augmentation-normalized refinement of the open-factor paragraph of prop-sf-pf-coherence, using the cited strict Roos comparison."
-   }
+   "elementary": true
   },
   {
-   "text": "Use the exact additive ringed-slice extension $F=j_!$ of [lem-pur-site-restriction-module-adjunction-exact]. Its canonical product comparison is invertible by [lem-cbc-ringed-open-extension-products], applied with $R=B_X$ and the quasi-compact open $j$. Countable products of modules over $B_U$ and $B_X$ are exact by [lem-weil-proetale-countable-products-exact]. Therefore [lem-cbc-exact-product-functor-strict-limit] applies and defines $\\lambda_j$ at $S_\\bullet$. Its target is $R\\lim JS_\\bullet$: termwise $j_!$ of the $B_U$-module complexes $S_n=\\operatorname{Res}_n(\\cdots)$ is $\\operatorname{Res}_n$ of the finite extension $j_!^{A_n}$, compatibly with all quotient transitions, because scalar restriction commutes with these open extensions by [lem-sf-open-tensor-quotient-augmentation]. In its signed model $\\mathsf H(S)^q=(\\prod_n S_n)^q\\oplus(\\prod_n S_n)^{q-1}$, the comparison is the product comparison $\\phi$ on both summands. The equations with the product projections characterize this $\\phi$; it commutes with $1-s$ and the differentials by naturality. The cited lemma supplies descent, naturality, invertibility, independence of resolutions, and preservation of every strict augmentation. This gives the specified $\\lambda_j$, rather than just an unspecified isomorphism between limit objects.",
+   "text": "Apply [lem-sf-open-projection-completed-square] to obtain Gamma, its actual chi square, invertibility of both chi maps and its strict representative formula.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-cbc-ringed-open-extension-products",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-sf-open-tensor-quotient-augmentation"
+    "lem-sf-open-projection-completed-square"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP, lemma-j-shriek-limits; augmentation-normalized refinement of the open-factor paragraph of prop-sf-pf-coherence, using the cited strict Roos comparison."
-   }
+   "elementary": true
   },
   {
-   "text": "The finite tensor comparison $\\gamma_\\bullet:T_\\bullet\\xrightarrow{\\sim}JS_\\bullet$ of [lem-sf-open-tensor-quotient-augmentation] is an isomorphism of the simultaneous strict systems, not just a family of derived evaluations. Apply the total derived-limit functor to this isomorphism and compose with $\\lambda_j^{-1}$. By [def-pur-integral-derived-operations], $R\\lim T_\\bullet=j_!K\\widehat\\otimes^L_RP$ and $R\\lim S_\\bullet=K\\widehat\\otimes^L_Rj^*P$, with the defining representative comparisons understood. This is exactly the displayed $\\Gamma_{K,P}$; it is an isomorphism. Naturality follows by composing the natural transformations $R\\lim(\\gamma_\\bullet)$ and $\\lambda_j^{-1}$.",
+   "text": "Define tensorRestriction as restriction of Gamma followed by the inverse derived unit, using whiskering, the functor associator and right unitor. Its displayed restriction identity follows by the component formulas and identity composition. Apply [lem-sf-open-projection-restriction-normalization] to this precise canonical isomorphism for the finite representative equation. Package all witnesses into CompletionData and then Completion without changing any clause.",
    "uses": [
-    "lem-sf-open-tensor-quotient-augmentation",
-    "def-pur-integral-derived-operations"
+    "def-sf-open-projection-roos-completion-data",
+    "lem-sf-open-projection-restriction-normalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP, lemma-j-shriek-limits; augmentation-normalized refinement of the open-factor paragraph of prop-sf-pf-coherence, using the cited strict Roos comparison."
-   }
-  },
-  {
-   "text": "Write $a_T:H\\to R\\lim T_\\bullet$ and $a_S:H_U\\to R\\lim S_\\bullet$ for the maps induced by the strict augmentations $c_T,c_S$. The augmented equality in [lem-sf-open-tensor-quotient-augmentation] is $\\gamma_\\bullet c_T=J(c_S)\\Delta(\\gamma^B)$. Apply the normalized Roos functor of [lem-weil-strict-roos-comparison]. On complexes the augmentation is $z\\mapsto((c_n(z))_n,0)$, so the equality gives the same first coordinates and zero shifted coordinates on both sides. Thus it is an equality of the actual induced derived maps, not an inference from equal projections out of a homotopy limit. The augmentation assertion of [lem-cbc-exact-product-functor-strict-limit] identifies the map induced by $J(c_S)$ with $\\lambda_j j_!(a_S)$. Consequently\n$$R\\lim(\\gamma_\\bullet)\\,a_T=\\lambda_j\\,j_!(a_S)\\,\\gamma^B.$$\nAll uses of $R\\lim$ here are on strict complexes of towers and their strictly commuting augmentation squares.",
-   "uses": [
-    "lem-sf-open-tensor-quotient-augmentation",
-    "lem-weil-strict-roos-comparison",
-    "lem-cbc-exact-product-functor-strict-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP, lemma-j-shriek-limits; augmentation-normalized refinement of the open-factor paragraph of prop-sf-pf-coherence, using the cited strict Roos comparison."
-   }
-  },
-  {
-   "text": "By [lem-fix-constructible-tensor-completion], the quotient augmentations defining $a_T,a_S$ are precisely those defining $\\chi_{j_!K,P}$ and $\\chi_{K,j^*P}$, respectively. The actual-unit convention of [def-sf-tensor-completion-comparison] uses the same first Roos coordinate and zero shifted coordinate. Thus $a_T=\\chi_{j_!K,P}$ and $a_S=\\chi_{K,j^*P}$ under the recorded tensor presentations. Multiplying the equality in the preceding step by $\\lambda_j^{-1}$ gives the required equality\n$$\\Gamma_{K,P}\\,\\chi_{j_!K,P}=j_!(\\chi_{K,j^*P})\\,\\gamma^B.$$\nIn particular this identifies the specified limit construction with the conjugate of the ordinary open map by the actual completion maps.",
-   "uses": [
-    "lem-fix-constructible-tensor-completion",
-    "def-sf-tensor-completion-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP, lemma-j-shriek-limits; augmentation-normalized refinement of the open-factor paragraph of prop-sf-pf-coherence, using the cited strict Roos comparison."
-   }
-  },
-  {
-   "text": "The statement of [lem-sf-open-tensor-quotient-augmentation] gives both $j_!K\\in D^b_c(X,R)$ and $j^*P\\in D^b_c(U,R)$. Together with the original assumptions on $K,P$, this allows [lem-fix-constructible-tensor-completion] to be applied to the pair $(j_!K,P)$ on $X$ and to $(K,j^*P)$ on $U$. The schemes are qcqs and $\\ell$ is invertible by step 1. It follows that both displayed $\\chi$ maps are isomorphisms. These applications require constructibility over the valuation ring $R$; they do not assume that the finite reductions have finite Tor dimension over the possibly nonregular rings $A_n$.",
-   "uses": [
-    "lem-sf-open-tensor-quotient-augmentation",
-    "lem-fix-constructible-tensor-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.5, pp.49-50; Lemma 6.5.8(2),(3), p.50; applied via the cited constructible tensor-completion and open-augmentation nodes."
-   }
-  },
-  {
-   "text": "For restriction, use the localized site formula $j^*F(V/U)=F(V)$ of [def-pur-localized-ringed-site] and the sectionwise products of [lem-weil-pbc-module-sheaves-limits-sectionwise]. Evaluating on $V/U$ identifies $j^*\\prod_nF_n$ with $\\prod_nj^*F_n$, with their actual projections. The same sectionwise limit formula identifies $j^*B_X=B_U$ from the quotient coefficient systems. Restriction is exact and additive by [lem-pur-site-restriction-module-adjunction-exact]. Hence it too satisfies the hypotheses of the exact-product strict-limit comparison. Its comparison on a Roos complex is restriction of both signed coordinates. In particular it sends a quotient augmentation $z\\mapsto((c_nz)_n,0)$ to its restricted quotient augmentation, so the tensor/restriction comparisons used here include the completion maps.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "lem-pur-site-restriction-module-adjunction-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP, lemma-j-shriek-limits; augmentation-normalized refinement of the open-factor paragraph of prop-sf-pf-coherence, using the cited strict Roos comparison."
-   }
-  },
-  {
-   "text": "Let $u:M\\xrightarrow{\\sim}j^*j_!M$ be the canonical open unit from [lem-sf-open-tensor-normalization], also for the strict system $S_\\bullet$. That statement gives identity restriction for the simultaneous open tensor map; [lem-sf-open-tensor-quotient-augmentation] identifies $\\gamma_\\bullet$ with that finite tensor map with its quotient transitions. Apply [lem-cbc-exact-product-functor-strict-limit] to restriction as in step 7. The restricted product comparison defining $\\lambda_j$ becomes the product of the units $u_{S_n}$: after each projection its equation is just naturality of $u$. This equality holds on both signed summands; therefore the restricted $\\lambda_j$ identifies $j^*j_!R\\lim S_\\bullet$ with $R\\lim j^*JS_\\bullet$ through exactly the same $u$. Under $j^*T_\\bullet\\cong S_\\bullet$ and $j^*JS_\\bullet\\cong S_\\bullet$, the restricted $\\gamma_\\bullet$ is identity. Its Roos map is consequently identity on both products. Composing with the inverse restricted $\\lambda_j$, and using $u_{R\\lim S_\\bullet}$, proves $j^*\\Gamma_{K,P}=1$ under the stated completed tensor/restriction identifications. The augmentation calculation in step 7 shows that these are the comparisons with the actual units.",
-   "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-sf-open-tensor-quotient-augmentation",
-    "lem-cbc-exact-product-functor-strict-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP, lemma-j-shriek-limits; augmentation-normalized refinement of the open-factor paragraph of prop-sf-pf-coherence, using the cited strict Roos comparison."
-   }
-  },
-  {
-   "text": "Finally compare with the integral open datum requested in [def-exchange-projection]. It asks for the natural open isomorphism together with its finite-reduction identifications and units. The preceding equality, and invertibility of the two $\\chi$ maps, give\n$$\\Gamma_{K,P}=j_!(\\chi_{K,j^*P})\\,\\gamma^B\\,\\chi_{j_!K,P}^{-1}.$$\nUse these actual $\\chi$ isomorphisms to identify each completed tensor with its ordinary tensor presentation. Under the strict coefficient-change and open-reduction comparisons of [lem-sf-open-tensor-quotient-augmentation], reduction of the resulting map is precisely $\\gamma_n$ and the transitions are precisely those of $\\gamma_\\bullet$. This supplies the finite-reduction normalization, simultaneously for all $n$, with no choice of morphism lifts from their evaluations. The restriction normalization is step 8. Thus $\\Gamma$ is the integral open projection datum on the stated constructible domain. This supplies the open tensor component of that definition, without asserting any of its separate proper, rational or algebraically closed coefficient existence claims.",
-   "uses": [
-    "def-exchange-projection",
-    "lem-sf-open-tensor-quotient-augmentation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP, lemma-j-shriek-limits; augmentation-normalized refinement of the open-factor paragraph of prop-sf-pf-coherence, using the cited strict Roos comparison."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "def-pur-integral-derived-operations",
-  "def-pur-localized-ringed-site",
-  "def-sf-tensor-completion-comparison",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-cbc-ringed-open-extension-products",
-  "lem-fix-constructible-tensor-completion",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-open-tensor-quotient-augmentation",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "lemma-nagata-open-immersion-qc-over-separated-target"
+  "def-sf-open-projection-roos-completion-data",
+  "lem-sf-open-projection-completed-square",
+  "lem-sf-open-projection-ordinary-roos",
+  "lem-sf-open-projection-restriction-normalization",
+  "lem-sf-open-semilinear-tensor-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09BP, lemma-j-shriek-limits; Bhatt–Scholze Lemmas 6.5.5 and 6.5.8, pp.49–50. Explicit strict-augmentation and signed-Roos argument for the open-factor paragraph of prop-sf-pf-coherence; not asserted verbatim in these sources."
+  "place": "C4 stage 3: unchanged completion specification assembled from ordinary descent, completed augmentation-square descent and restriction-unit normalization. The canonical tensor/restriction isomorphism and its component identity are constructed in Lean. Three shared proposition definitions name the original representative clauses verbatim to bound elaboration; expanding them restores the original CompletionData formula."
  },
  "mathlib_searches": [
   {
@@ -357,60 +254,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sf-open-projection-roos-completion",
   "worker": "stage1",
-  "summary": "Q140: split into nine steps using existing nodes only. Verified qcqs and quasi-compact open hypotheses, normalized exact-product Roos comparison, strict augmentation equality, identification and invertibility of actual completion maps, restriction identity with canonical units, and simultaneous finite reductions. No statement change; no new nodes; no Lean writes or builds.",
-  "blueprint": "prop-sf-pf-coherence.proof.md, base-change paragraph, open factor: both composites lie in the image of j prime shriek and restrict to the identity. This item carries the integral tensor-completion and actual-unit part of that open-factor reduction.",
+  "summary": "Q158 repair of the human re-split return: three comparable statement-only work packages carry old steps 1–2, 4–6 and 7–8. The unchanged item assembles them with old steps 3 and 9 in less than 3000 characters. All original arguments and the former report are preserved in report.md. Searches were run and their actual log results recorded.",
+  "blueprint": "The same prop-sf-pf-coherence open-factor paragraph: extension, actual completion normalization, and restriction to the identity. New nodes remain in sk-prop-sf-pf-coherence.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Geometric hypothesis check: finite-type schemes over the field are Noetherian; not a replacement for the unit open-factor argument."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Geometric hypothesis check giving quasi-separatedness for the product/completion tools."
-   },
-   {
-    "node": "lemma-nagata-open-immersion-qc-over-separated-target",
-    "why": "Geometric hypothesis check giving quasi-compactness of j from its finite-type source and quasi-separated target over k."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic exact ringed-slice adjunction supplies the functors to which normalized Roos comparison is applied."
-   },
-   {
-    "node": "lem-cbc-ringed-open-extension-products",
-    "why": "Generic ringed open-extension product theorem; verifies the canonical comparison hypothesis rather than assuming sectionwise extension by zero."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Exact products on both coefficient-module categories are a hypothesis of the strict Roos theorem."
-   },
-   {
-    "node": "lem-cbc-exact-product-functor-strict-limit",
-    "why": "Generic normalized exact-product functor comparison, including strict augmentations; the unit has no other actual-unit Roos statement."
-   },
-   {
-    "node": "lem-weil-strict-roos-comparison",
-    "why": "Generic natural descent and augmentation identification for strict Roos complexes."
-   },
-   {
-    "node": "lem-fix-constructible-tensor-completion",
-    "why": "Identifies the actual quotient augmentations with invertible tensor-completion maps on the constructible domain."
-   },
-   {
-    "node": "def-sf-tensor-completion-comparison",
-    "why": "Actual-unit normalization of the tensor presentation; a definition used only for its prescribed coordinate convention."
-   },
-   {
-    "node": "def-pur-localized-ringed-site",
-    "why": "Sectionwise definition of restriction used to verify its canonical product comparison."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "why": "Generic sectionwise module-limit theorem for checking restriction products."
-   },
    {
     "node": "lem-sf-open-tensor-normalization",
     "why": "Generic ordinary and strict-system tensor maps and the specified invertible open units; implements the same open-factor route."
@@ -443,29 +292,17 @@
   "def-exchange-projection"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q140-16f6ca3eb",
-  "group": "Q140",
+  "reviewer": "NT-cc-Q158-fe40f6723",
+  "group": "Q158",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-16f6ca3eb (reviewer sub-agent of L); spot-checked: Read the item and all 16 cited statements in full. The statement is unchanged from base and live, live is still unsplit, there are no new nodes, no cycle (closure of 12487 nodes), nothing on the drop/retire lists, and no SGA source. Sources checked: Stacks 09BP lemma-j-shriek-limits (proetale.tex l.5185, needs j quasi-compact), Stacks 0GL1 (sites-cohomology l.4578), and Bhatt–Scholze 6.5.5/6.5.8 (pp.49–51). Step by step: step 1 gets qcqs and j quasi-compact from the Noetherian and Nagata leaves; step 2 meets every hypothesis of lem-cbc-exact-product-functor-strict-limit (exact j_!, ringed product comparison for any ring sheaf, exact countable products); step 4 re-derived R lim(γ•)a_T = λ j_!(a_S) γ^B from the strict-Roos augmentation naturality plus the lem-cbc augmentation clause, and the sign check (cz,0) chain map ⇔ (1−s)c = 0 holds; step 5 identifies a_T, a_S with χ by the levelwise quotient-map description in lem-fix and def-sf-tensor-completion-comparison; step 6 χ is invertible from qcqs, ℓ invertible and D^b_c via quotient-augmentation, with no Tor assumption; step 8 gets j^*Γ = 1 from pr_n-equations giving ∏u plus lem-sf-open-tensor-normalization's j^*γ = id; step 9 shows Γ supplies the integral open tensor datum of def-exchange-projection and nothing more. Edge cases U = ∅, j = id, K or P = 0, n = 1 and nonseparated X all pass. Cross-unit tool uses are listed in split_report.tool_uses for the maintainer and accepted as generic. FIX: step 1 now proves that X→Spec k is quasi-separated (affine base, diagonal argument) instead of stopping at X being a quasi-separated scheme; step 2 now identifies the termwise j_! target of lem-cbc with J S• through the restriction-of-scalars clause of lem-sf-open-tensor-quotient-augmentation, which is added to that step's uses. No other field changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-fe40f6723 (reviewer sub-agent of L); spot-checked: This answers the released re-split note of 2026-10-22, and live still has the 9-step Q140 proof, so no other group has re-split it. Compared with live, only proof, proof_deps and split_report changed; the statement and stmt_deps are unchanged. The old steps are spread over three new statement-only nodes of comparable size (2316, 2200 and 2029 characters of old text). (A) lem-sf-open-roos-extension-comparison carries old steps 1-2. Its hypotheses are met: lem-cbc-exact-product-functor-strict-limit applied to j_!, with exactness from lem-pur-site-restriction-module-adjunction-exact, exact products for any ring sheaf from lem-weil-proetale-countable-products-exact, and the invertible product map from lem-cbc-ringed-open-extension-products, which needs j quasi-compact. j is quasi-compact by the Nagata triangle lemma on U→X→Spec k, with no separatedness assumed. Stacks 09BP (proetale.tex l.5185) was read. (B) lem-sf-open-tensor-augmentation-limit-square carries old steps 4-6. The strict equality from lem-sf-open-tensor-quotient-augmentation, the augmentation coordinates ((c_n),0) and A's augmentation clause give L(γ•)a_T=λ_S j_!(a_S)γ^B. lem-fix-constructible-tensor-completion and def-sf-tensor-completion-comparison give a_T=χ and a_S=χ, invertible because j_!K and j^*P are constructible, the schemes are qcqs and ℓ is invertible; Bhatt–Scholze 6.5.5 and 6.5.8 were read. (C) lem-sf-open-roos-restriction-unit carries old steps 7-8. The unit equation type-checks and is true: after each projection it is naturality of u, so the composite is the product of the units on both summands. It overlaps lem-sp-slice-restriction-strict-derived-limit and lem-sf-open-roos-unit-adjunction only partly (they give the restriction comparison, the latter only for quotient towers), so it is not a duplicate. The assembly is 2229 characters and keeps old steps 3 and 9 as composition and inversion only. I re-derived step 4: by C and naturality of ρ, u⁻¹ j^*Γ = L(δ)ρ_T, and δ is the identity by lem-sf-open-tensor-normalization. Edge cases U=∅, j=id, K or P=0 and unbounded towers pass, and the strict-augmentation sign check holds. No argument was dropped or blurred, there is no cycle and no SGA source. Advisory: a future prover of C may cite lem-sp-slice-restriction-strict-derived-limit for the existence of ρ."
  },
  "lean": {
   "module": "Sheaf.SixFunctors.OpenProjectionRoosCompletion",
   "declaration": "WeilConjectures.OpenProjectionRoos.openProjectionRoosCompletion",
   "declarations": [
-   "WeilConjectures.OpenProjectionRoos.boundary",
-   "WeilConjectures.OpenProjectionRoos.onTowers",
-   "WeilConjectures.OpenProjectionRoos.RoosComparison",
-   "WeilConjectures.OpenProjectionRoos.RoosComparison.derived",
-   "WeilConjectures.OpenProjectionRoos.leftInputs",
-   "WeilConjectures.OpenProjectionRoos.rightInputs",
-   "WeilConjectures.OpenProjectionRoos.pairs",
-   "WeilConjectures.OpenProjectionRoos.completedLeft",
-   "WeilConjectures.OpenProjectionRoos.completedInside",
-   "WeilConjectures.OpenProjectionRoos.completedRight",
-   "WeilConjectures.OpenProjectionRoos.CompletionData",
-   "WeilConjectures.OpenProjectionRoos.Completion",
    "WeilConjectures.OpenProjectionRoos.openProjectionRoosCompletion"
   ],
   "file": "lean/Sheaf/SixFunctors/OpenProjectionRoosCompletion.lean",
@@ -474,7 +311,7 @@
   "by": "NX",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Specified natural open projection comparison on the recorded constructible domains, with actual chi equality, normalized signed-Roos lambda preserving every strict augmentation, and restriction through the same strict quotient towers and canonical open units. CompletionData is a proposition retaining the simultaneously normalized data; Completion existentially supplies restriction exactness. No construction is chosen from an unproved existence statement."
+  "note": "Specified natural open projection comparison on the recorded constructible domains, with actual chi equality, normalized signed-Roos lambda preserving every strict augmentation, and restriction through the same strict quotient towers and canonical open units. CompletionData is a proposition retaining the simultaneously normalized data; Completion existentially supplies restriction exactness. No construction is chosen from an unproved existence statement. The original public interface is extracted verbatim to Sheaf.SixFunctors.OpenProjectionRoosCompletionData and publicly reexported by this module; its ownership is recorded in def-sf-open-projection-roos-completion-data."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -483,5 +320,27 @@
   "group": "NX",
   "result": "pass",
   "note": "Read the node, the 20 stmt_deps, the module, report.md and the dependency sources in side-live (OpenTensorQuotientAugmentation, OpenSemilinearTensorModel, OpenFactorTensorModel, IntegralOperationsWellDefined, TowerTransitionEndomorphism, IntegralDerivedOperations, ExchangeProjectionSuppliedDomains). Only the lean field changed vs live; lean.statement is verbatim. Hypotheses match the node: finite type = LOFT+QC, open immersion, l != p, no separatedness or Tor hypothesis, domains sfIntegralConstructible U x X. All data are pinned. RoosComparison: products by projections, iso by both mapping-cocone coordinates, augmentations with (lift a, 0), satisfiable since lift a composed with 1-s is 0. gamma^B is HEq-pinned to m.totalComparison.chain on good representatives. Gamma = lambda^-1 Rlim z.gamma via _representative; z.gamma is unique by Balanced/reduction. The chi square orientation is correct, both chi maps invertible, units equal to the adjunction units, tensorRestriction pinned via restriction.derived and Roos(delta). HEq probe: '=' fails at default transparency (unexposed getColimitCocone), but with_unfolding_all rfl proves constructibleTensorTotal = OpenSemilinearTensor.total (47.7 s) and uncurried proEtaleOrdinaryTensor map2 = total (34.6 s); a swapped control fails. So the HEq is between defeq types and is a genuine pin. Edge cases: empty U, j = id, zero objects, index n <-> A_(n+1), unbounded representatives. Gates: only sorry, real defs, docstrings with source and blueprint, 9-step proof, no line over 100 characters, side pro-etale declarations. Advisories: (1) delta is built from z.gamma, so the restriction-identity clause carries only the lambda/unit compatibility (as in node step 8; Gamma is pinned anyway); (2) the def-exchange-projection 'in particular' clause is not rendered, so the ExchangeProjectionSuppliedDomains import is unused in the statement; (3) decls from def-sf-integral-open-operations, def-sf-open-semilinear-tensor-model-data, def-sf-integral-open-reduction-comparison-data, def-coef-derived-system-calculus-data and def-sf-tensor-completion-comparison are used while these nodes are outside stmt_deps (base-era, advisory); (4) RoosComparison restates the existential exactProductFunctorStrictLimit locally, with every field pinned."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-20d2a",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T094942-L-3276214",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature/docstring vs clones/live (identical); extracted Data block vs original item block (verbatim, 3 named predicates whitespace-normalized equal to original CompletionData clauses); 3 new sorry statements vs old CompletionData ∃-clauses and SfOpenRoos.comparison/restriction_unit interfaces"
  }
 }

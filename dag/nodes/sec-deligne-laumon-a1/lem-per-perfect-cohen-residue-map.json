@@ -1,0 +1,246 @@
+{
+ "id": "lem-per-perfect-cohen-residue-map",
+ "kind": "statement",
+ "title": "Unique residue-map lifting from a perfect-residue Cohen ring",
+ "statement": "Let $p$ be a prime and let $A$ be a Cohen ring of residue characteristic $p$ [def-weil-pbc-cohen-ring]. Write $K=A/pA$, and suppose $K$ is perfect, meaning that $x\\mapsto x^p$ is bijective on $K$. Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring], complete for its maximal ideal [def-weil-pbc-adically-complete-ring], and let $j:K\\to R/\\mathfrak m$ be a field homomorphism. There is a unique local ring homomorphism $f:A\\to R$ whose induced residue map is $j$, that is, $q_R f=j q_A$, where $q_R:R\\to R/\\mathfrak m$ and $q_A:A\\to K$ are the quotient maps. Local means $f^{-1}(\\mathfrak m)=pA$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV Theorem 4.1.8(i) with I the maximal ideal, and 4.1.9 (perfect residue implies vanishing differentials), printed pp.57–58; uniqueness used in 4.3.5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [
+  {
+   "text": "Set $k_R=R/\\mathfrak m$. The Cohen-ring definition [def-weil-pbc-cohen-ring] gives $\\ker q_A=pA$ and makes $K$ a field. The field map $j$ is injective: a nonzero kernel element would give $j(1)=0$. Since $p=0$ in $K$, also $p=0$ in $k_R$, hence $p_R\\in\\mathfrak m$. Begin with $h_1=j q_A:A\\to R/\\mathfrak m$. We construct maps $h_n:A\\to R/\\mathfrak m^n$ for $n\\ge1$, compatible with the quotient projections and with this $h_1$.",
+   "uses": [
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV 4.1.7–4.1.8(i), printed p.57; initial residue map."
+   }
+  },
+  {
+   "text": "Suppose $h_n$ is constructed. Put $D=R/\\mathfrak m^{n+1}$ and $J=\\mathfrak m^n/\\mathfrak m^{n+1}\\subset D$. Then $D/J\\cong R/\\mathfrak m^n$ canonically, $J^2=0$ because $2n\\ge n+1$, and $p^{n+1}=0$ in $D$ because $p_R\\in\\mathfrak m$. As a ring map, $h_n$ kills $p^{n+1}A$, so it induces $\\bar h_n:A/p^{n+1}A\\to D/J$. Apply the explicit square-zero lifting clause of [lem-weil-pbc-cohen-ring-mod-pn-formally-smooth] with exponent $n+1$, ring $D$, ideal $J$ and map $\\bar h_n$. Precomposing its lift with $A\\to A/p^{n+1}A$ gives $h_{n+1}$ whose reduction is $h_n$. Recursive choice therefore gives the required compatible sequence.",
+   "uses": [
+    "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0329, lemma-cohen-ring-formally-smooth; Tag 032A, theorem-cohen-structure-theorem, positive-residue-characteristic lifting paragraph."
+   }
+  },
+  {
+   "text": "For each $a\\in A$, the compatible tuple $(h_n(a))_{n\\ge1}$ is an element of $\\varprojlim_n R/\\mathfrak m^n$. By [def-weil-pbc-adically-complete-ring] it comes from exactly one element $f(a)\\in R$. The coordinate maps $h_n$ preserve $0,1,+,\\cdot$; injectivity of the completion map therefore shows that $f$ preserves these operations, so $f$ is a ring homomorphism. Its first coordinate gives $q_R f=j q_A$. Consequently $f(a)\\in\\mathfrak m$ if and only if $j(q_A(a))=0$, if and only if $q_A(a)=0$, if and only if $a\\in pA$. This proves locality as well as existence.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0317, definition-complete; Tag 032A, theorem-cohen-structure-theorem, inverse-limit assembly."
+   }
+  },
+  {
+   "text": "For uniqueness, let $f,g:A\\to R$ both have residue map $j$. Inductively prove $f(a)-g(a)\\in\\mathfrak m^n$ for every $a$ and every $n\\ge1$; the base is their residue equality. For the induction step, perfectness of $K$ lets us choose $b,c\\in A$ with $a=b^p+pc$: lift a $p$th root of $q_A(a)$ to $b$, and use $\\ker q_A=pA$. Write $d=f(b)-g(b)\\in\\mathfrak m^n$. Expanding $(g(b)+d)^p-g(b)^p$, its term linear in $d$ is $p_R g(b)^{p-1}d\\in\\mathfrak m^{n+1}$; each term of degree at least two in $d$ lies in $\\mathfrak m^{2n}\\subseteq\\mathfrak m^{n+1}$. Also $p_R(f(c)-g(c))\\in\\mathfrak m^{n+1}$. Thus $f(a)-g(a)=f(b)^p-g(b)^p+p_R(f(c)-g(c))$ lies in $\\mathfrak m^{n+1}$, completing the induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV 4.1.8(i) and 4.1.9, printed pp.57–58; agent-written binomial verification of the perfect-residue uniqueness assertion."
+   }
+  },
+  {
+   "text": "By the separatedness included in [def-weil-pbc-adically-complete-ring], $\\bigcap_{n\\ge1}\\mathfrak m^n=0$. The preceding congruences give $f(a)=g(a)$ for every $a\\in A$, hence $f=g$. Together with the constructed local lift this proves the stated existence and uniqueness.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0317, definition-complete, injectivity of the canonical completion map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV 4.1.8(i) and 4.1.9, printed pp.57–58; existence expanded by Stacks Tags 0329 and 032A, uniqueness proved directly by binomial induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohen ring with perfect residue field unique local homomorphism to a complete Noetherian local ring lifting a residue field embedding",
+   "results": "OK 8 hits: HenselianLocalRing, IsLocalRing.ResidueField.lift, Field.henselian, PreTilt.untiltFun, PreTilt.untilt, PreTilt, HenselianLocalRing.TFAE, HenselianRing",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field maps go from a local ring to a field; perfect-closure lifts are in characteristic p; WittVector.lift in Truncated.lean:437 is the inverse-limit universal property with target Witt vectors, not a map out of a Cohen ring. Sources of these hits read; none supplies this existence-and-uniqueness assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique lifting of a map from a perfect characteristic p residue field to a local homomorphism from its Cohen ring",
+   "results": "OK 8 hits: PerfectRing.lift, PerfectionMap.lift, PerfectRing.liftAux, PerfectionMap.mk', PerfectRing.liftEquiv_apply, Perfection.lift, IsLocalRing.ResidueField.lift, PerfectRing.liftEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field maps go from a local ring to a field; perfect-closure lifts are in characteristic p; WittVector.lift in Truncated.lean:437 is the inverse-limit universal property with target Witt vectors, not a map out of a Cohen ring. Sources of these hits read; none supplies this existence-and-uniqueness assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Cohen ring with perfect residue field admits a unique local ring map into a complete local ring inducing a given residue field embedding",
+   "results": "OK 8 hits: IsLocalRing.ResidueField.map, IsLocalRing.residue, IsLocalRing.instCommRingResidueField, IsLocalRing.isLocalHom_residue, IsLocalRing.ResidueField.lift, IsLocalRing.ResidueField.map_id_apply, IsLocalRing.residue_surjective, IsLocalRing.ResidueField.map_id",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field maps go from a local ring to a field; perfect-closure lifts are in characteristic p; WittVector.lift in Truncated.lean:437 is the inverse-limit universal property with target Witt vectors, not a map out of a Cohen ring. Sources of these hits read; none supplies this existence-and-uniqueness assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WittVector\", \"lift\"",
+   "results": "OK 9 hits: WittVector.liftFun, WittVector.lift, WittVector.liftEquiv, WittVector.truncate_comp_lift, WittVector.lift_unique, WittVector.truncate_liftFun, WittVector.truncate_lift, WittVector.liftEquiv_symm_apply_coe",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field maps go from a local ring to a field; perfect-closure lifts are in characteristic p; WittVector.lift in Truncated.lean:437 is the inverse-limit universal property with target Witt vectors, not a map out of a Cohen ring. Sources of these hits read; none supplies this existence-and-uniqueness assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cohen\", \"lift\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field maps go from a local ring to a field; perfect-closure lifts are in characteristic p; WittVector.lift in Truncated.lean:437 is the inverse-limit universal property with target Witt vectors, not a map out of a Cohen ring. Sources of these hits read; none supplies this existence-and-uniqueness assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "CohenRing|WittVector.*(lift|equiv)|(lift|equiv).*WittVector",
+   "results": "OK 24 hits: Mathlib/RingTheory/WittVector/TeichmullerSeries.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/WittVector/Compare.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field maps go from a local ring to a field; perfect-closure lifts are in characteristic p; WittVector.lift in Truncated.lean:437 is the inverse-limit universal property with target Witt vectors, not a map out of a Cohen ring. Sources of these hits read; none supplies this existence-and-uniqueness assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.*unique|unique.*Cohen|Cohen.*perfect|perfect.*Cohen",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field maps go from a local ring to a field; perfect-closure lifts are in characteristic p; WittVector.lift in Truncated.lean:437 is the inverse-limit universal property with target Witt vectors, not a map out of a Cohen ring. Sources of these hits read; none supplies this existence-and-uniqueness assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "CohenRing|Cohen.*lift|perfect.*Cohen",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.lift is an inverse-limit map into Witt vectors, residue-field lifts descend maps into fields, perfect-closure lifts concern characteristic-p rings, and PreTilt.untilt is only multiplicative; none states the Cohen-ring residue-map universal property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique lifting of residue field maps from a Cohen ring with perfect residue field to a complete local ring",
+   "results": "OK 8 hits: Ideal.ResidueField.liftₐ.congr_simp, IsLocalRing.residue, IsLocalRing.ResidueField.lift, Ideal.ResidueField.liftₐ, Ideal.ResidueField.lift.congr_simp, Ideal.ResidueField.lift, IsFractionRing.lift_unique, Ideal.ResidueField.liftₐ_algebraMap",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.lift is an inverse-limit map into Witt vectors, residue-field lifts descend maps into fields, perfect-closure lifts concern characteristic-p rings, and PreTilt.untilt is only multiplicative; none states the Cohen-ring residue-map universal property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WittVector\", \"lift\"",
+   "results": "OK 9 hits: WittVector.liftFun, WittVector.lift, WittVector.liftEquiv, WittVector.truncate_comp_lift, WittVector.lift_unique, WittVector.truncate_liftFun, WittVector.truncate_lift, WittVector.liftEquiv_symm_apply_coe",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.lift is an inverse-limit map into Witt vectors, residue-field lifts descend maps into fields, perfect-closure lifts concern characteristic-p rings, and PreTilt.untilt is only multiplicative; none states the Cohen-ring residue-map universal property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cohen ring with perfect residue field has a unique local ring homomorphism to a complete local ring lifting a specified residue field embedding",
+   "results": "OK 8 hits: IsLocalRing.ResidueField.lift, HenselianLocalRing, IsLocalRing.ResidueField.lift_residue_apply, PreTilt.untilt, PreTilt.untiltFun, PerfectRing.liftEquiv_apply, PerfectionMap.lift, PerfectRing.liftEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.lift is an inverse-limit map into Witt vectors, residue-field lifts descend maps into fields, perfect-closure lifts concern characteristic-p rings, and PreTilt.untilt is only multiplicative; none states the Cohen-ring residue-map universal property."
+  },
+  {
+   "tool": "grep",
+   "query": "WittVector.*(lift|equiv)|(lift|equiv).*WittVector",
+   "results": "OK 24 hits: Mathlib/RingTheory/WittVector/TeichmullerSeries.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/WittVector/Compare.lean, Mathlib/RingTheory/WittVector/Compare.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.lift is an inverse-limit map into Witt vectors, residue-field lifts descend maps into fields, perfect-closure lifts concern characteristic-p rings, and PreTilt.untilt is only multiplicative; none states the Cohen-ring residue-map universal property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unramified complete discrete valuation ring with perfect residue field universal property maps into complete local rings",
+   "results": "OK 8 hits: PreTilt.untilt, Tilt, PreTilt, PreTilt.untiltFun, Algebra.instFormallyUnramifiedResidueField_1, Algebra.instFormallyUnramifiedResidueField, HenselianLocalRing, PreTilt.instPerfectRing",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector.lift is an inverse-limit map into Witt vectors, residue-field lifts descend maps into fields, perfect-closure lifts concern characteristic-p rings, and PreTilt.untilt is only multiplicative; none states the Cohen-ring residue-map universal property."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-equivariant-cohen-coefficient-lift",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, Gabber finiteness and its equivariant Cohen presentation, through ILO IV 4.3.5: Exposé IV Theorem 4.1.8(i) with I the maximal ideal, and 4.1.9 (perfect residue implies vanishing differentials), printed pp.57–58; uniqueness used in 4.3.5.",
+   "via": [
+    "lem-per-equivariant-cohen-coefficient-lift",
+    "lem-per-prime-to-ell-equivariant-cohen-presentation",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-perfect-cohen-residue-map",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Constructed compatible residue lifts through square-zero maximal-ideal quotients using the existing 0329 node, assembled the map by the explicit completeness definition, checked locality, and proved uniqueness by a written binomial congruence induction using perfectness. No new nodes are necessary. Searched the live project and Mathlib; no exact attachment or Mathlib match.",
+  "blueprint": "Realizes the inherited lem-per-artin-gabber-affine-curve Step 3 supporting local Cohen construction through ILO IV 4.3.5, specifically the use of 4.1.8(i) with I the maximal ideal and 4.1.9. The current latest ancestor proof and perverse unit remain unchanged; this is the algebra tool required by the existing equivariant Cohen coefficient lift.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+    "why": "Generic Cohen-ring square-zero lifting (Stacks 0329) supplies the induction step; the perverse unit has no replacement for this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-215e15508",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-215e15508 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It changes only the item, adds no new nodes and has a Q81 review section. The statement matches ILO IV 4.1.8(i) with I = m and u = j∘q_A, which is local because j is injective and ker q_A = pA, together with 4.1.9 (Ω¹_K = 0 iff K perfect) for uniqueness. It is unchanged, with nothing added or dropped. Step 1 is correct: K is a field, j is injective and p_R lies in m. Step 2: the explicit square-zero clause of lem-weil-pbc-cohen-ring-mod-pn-formally-smooth (reviewed by L) is applied with exponent n+1, D = R/m^{n+1} and J = m^n/m^{n+1}. J² = 0 because n ≥ 1, p^{n+1}D = 0, and h_n kills p^{n+1}, so every hypothesis holds. Step 3 assembles f by the bijectivity in the completeness definition, and the locality equivalence is correct. Step 4 is a binomial induction, with a = b^p + pc from Frobenius surjectivity; the term linear in d lies in m^{n+1} and the higher terms in m^{2n}. Step 5 uses ∩m^n = 0. I tested R a field, R = A, R = A/p^e, p = 2 with n = 1, p zero or a zero divisor in R, and a proper extension j. No duplicate exists: cohen-ring-lift-complete-local needs a residue isomorphism and gives existence only, and the coefficient-ring and presentation nodes state different things. The citer, equivariant-cohen-coefficient-lift step 2, uses exactly the stated existence and uniqueness. I accept the tool_use of the generic sk-thm-p1 Stacks 0329 lifting node. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PerfectCohenResidueMap",
+  "declaration": "IsLocalRing.existsUnique_cohenRing_lift_of_perfect",
+  "file": "lean/Sheaf/RingTheory/PerfectCohenResidueMap.lean",
+  "statement": "theorem existsUnique_cohenRing_lift_of_perfect (p : ℕ) (A : Type u) [CommRing A] (hA : IsCohenRing p A) [PerfectRing (A ⧸ Ideal.span {(p : A)}) p] (R : Type v) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsAdicComplete (maximalIdeal R) R] (j : (A ⧸ Ideal.span {(p : A)}) →+* ResidueField R) : ∃! f : A →+* R, (maximalIdeal R).comap f = Ideal.span {(p : A)} ∧ (residue R).comp f = j.comp (Ideal.Quotient.mk (Ideal.span {(p : A)}))",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-098beedf8",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsCohenRing p A (includes Nat.Prime, DVR, maximalIdeal=span{p}, completeness); PerfectRing on A⧸span{p} (Pow-only class, bijective Frobenius, no extra instance); R CommRing+IsNoetherianRing+IsLocalRing+IsAdicComplete (maximalIdeal R); j any ring hom into ResidueField R; ∃! f with comap m = span{p} ∧ residue∘f = j∘mk. Universes u,v independent; R=A case used by citer equivariant-cohen-coefficient-lift is admissible. lean.statement verbatim; source/blueprint docstrings and 5-step proof docstring present; sorry only; no defs/new nodes; no duplicate (exists_cohenRing_lift needs residue iso, existence only). Report has Worker report and Second reading by Q110. No file changed, so no compile."
+ }
+}

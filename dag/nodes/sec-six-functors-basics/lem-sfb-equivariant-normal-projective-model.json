@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-equivariant-normal-projective-model",
+ "kind": "statement",
+ "title": "Finite normalization of a semilinear projective modification",
+ "statement": "Let $k$ be a field, let $X$ be a normal integral proper finite-type $k$-scheme, and let $T$ be an integral finite-type $k$-scheme projective over $k$. Let a finite group $H$ act semilinearly on $T$, $X$ and $k$, and let $p:T\\to X$ be an equivariant $k$-morphism inducing an isomorphism $k(X)\\simeq k(T)$. Assume there is a dense open $U\\subseteq X$ over which $p$ is an isomorphism. Let $n:N\\to T$ be the normalization of $T$ in $k(T)$. Then $n$ is finite, surjective and birational, $N$ is normal integral of finite type and projective over $k$, and the given action on $T$ lifts uniquely to a semilinear $H$-action on $N$ making $n$ equivariant. The composite $p n:N\\to X$ is equivariant, proper, surjective and H-projective, induces the specified identification $k(X)\\simeq k(N)$, and is an isomorphism over $U$. If $X$ is geometrically integral over $k$, then $T$ and $N$ are geometrically integral over $k$ as well.\n\nThe notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-proper-morphism], [def-kun-projective], [def-sc-function-field], [def-sc-normalization], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-open-immersion], [def-pc-geometrically-irreducible]. Normal means that every local ring is an integrally closed domain. A projective morphism here means an H-projective morphism: it admits a closed immersion into a finite-dimensional projective space over its target. A semilinear $H$-action means actions by scheme automorphisms and by field automorphisms of $k$, with the structure morphisms equivariant; faithfulness is not assumed. A birational morphism here identifies the function fields and is an isomorphism over a dense open of the target.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BXR, lemma-normalization-locally-algebraic; morphisms.tex Tags 035K (lemma-normalization-localization), 035L (lemma-normal-normalization), 087S (lemma-projective-over-quasi-projective-is-H-projective). Semilinear lift and projective graph argument extracted from the proof of de Jong Lemma 5.2, printed p.613, and returned curve-pencil steps 6--7, 11."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-kun-projective",
+  "def-sc-function-field",
+  "def-sc-normalization",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-normalization-model-functoriality] with $V=T$, $M=H=k(T)$ and the identity field extension (here its letter $H$ denotes the function field, not our group). It gives normal integral finite-type $N$, finite surjective $n$, and the canonical identification $k(N)=k(T)$. Independently [lem-sc-normalization-exists] gives birationality of $n$. Composing the canonical field identification with the specified $p^*:k(X)\\simeq k(T)$ gives exactly $(pn)^*:k(X)\\simeq k(N)$.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality",
+    "lem-sc-normalization-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR, lemma-normalization-locally-algebraic; morphisms.tex Tag 035Q, lemma-normalization-normal."
+   }
+  },
+  {
+   "text": "A field is Noetherian: its only ideals are $(0)$ and $(1)$, so every ideal is finitely generated. Thus $\\operatorname{Spec}k$ is affine Noetherian. The structure map $T\\to\\operatorname{Spec}k$ is H-projective by hypothesis and quasi-compact because it is of finite type [def-weil-finite-type-morphism], so it is projective in the convention required by the next cited statement. Apply [lem-fin-finite-over-projective] to $T\\to\\operatorname{Spec}k$ and the finite map $n:N\\to T$. Its affine-base clause gives a closed immersion $N\\hookrightarrow\\mathbf P^r_k$ for a finite $r$, proving projectivity in the required finite-projective-space convention.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0GK4, lemma-normalize-projective; morphisms.tex Tags 0B3I, lemma-finite-projective, and 087S, lemma-projective-over-quasi-projective-is-H-projective."
+   }
+  },
+  {
+   "text": "For each $h\\in H$ use its scheme automorphism of $T$, its field automorphism of $k$, and its induced automorphism of $k(T)$ in the semilinear-isomorphism clause of [lem-sfb-finite-normalization-model-functoriality]. This gives a unique compatible automorphism $\\widetilde h$ of $N$. Preservation of identities and compositions gives $\\widetilde 1=1$ and $\\widetilde{h_1h_2}=\\widetilde h_1\\widetilde h_2$. The lifts commute with $n$ and have the original semilinearity on $k$. Hence $pn$ is equivariant. Any other equivariant lift induces the same automorphism on $k(N)=k(T)$, so the uniqueness clause forces equality. Faithfulness and invariance of the specified open $U$ are unnecessary.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, lemma-normalization-normal (4); explicit semilinear functoriality of the integral-closure construction."
+   }
+  },
+  {
+   "text": "Put $V=p^{-1}(U)$. The given isomorphism $V\\simeq U$ identifies local rings, and the local rings of $U$ are those of the normal scheme $X$. Thus $V$ is normal. By [lem-sc-normalization-over-normal-locus], $n^{-1}(V)\\to V$ is an isomorphism. Composing it with $V\\simeq U$ proves that $pn$ is an isomorphism over the original $U$.",
+   "uses": [
+    "lem-sc-normalization-over-normal-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035K, lemma-normalization-localization, and 0H7D, lemma-normalization-trivial."
+   }
+  },
+  {
+   "text": "By [def-weil-proper-morphism], $X\\to\\operatorname{Spec}k$ is separated, and $pn:N\\to X$ is a $k$-morphism. Apply [lem-sfb-finite-constant-projective-graph] with $F=k$ (the trivial finite extension), $R=N$, which embeds as a closed subscheme of $\\mathbf P^r_k$ by step 2, $S=X$ and $c=pn$. It gives an integer $N'\\geq0$ and a closed immersion $(i,pn):N\\hookrightarrow\\mathbf P^{N'}_k\\times_kX\\cong\\mathbf P^{N'}_X$ over $X$: precisely H-projectivity of $pn$ in the finite-projective-space convention, with no equivariant-embedding assertion. By [lem-kun-projective-implies-proper], $pn$ is proper. Its image is closed by [def-weil-proper-morphism] and contains the dense open $U$ by step 4, hence is all of $X$. This proves surjectivity.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-constant-projective-graph",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, closed-graph proof (as stated in the cited node); Tag 01WC, lemma-locally-projective-proper."
+   }
+  },
+  {
+   "text": "Assume $X$ geometrically integral. Choose a nonempty affine open $A\\subset X$. By [lem-zl-geometric-irreducibility-affine-local] it is geometrically irreducible. It is geometrically reduced because for every extension $L/k$, $A_L$ is open in reduced $X_L$, and its local rings are those of $X_L$ [def-pc-reduced-scheme, def-pc-geometrically-irreducible]. For $Y=T$ or $N$ and every nonempty affine open $B\\subset Y$, [lem-sc-integral-function-field-affine-fraction] identifies the fraction fields of the section rings of $A$ and $B$ with $k(X)$ and $k(Y)$. Compose these fraction-field identifications with $p^*$ and, for $Y=N$, $n^*$. Because $p,n$ are $k$-morphisms, the resulting ring equivalence fixes every base section, as required by the next cited statement. Therefore [lem-sbc-field-fraction-ring-geometric-integrality] applies to $A,B$ and proves that every such $B$ is geometrically irreducible and geometrically reduced.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-affine-local",
+    "def-pc-reduced-scheme",
+    "def-pc-geometrically-irreducible",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sbc-field-fraction-ring-geometric-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 038G, lemma-geometrically-irreducible-local; 035W, lemma-geometrically-reduced-at-point; 054Q, lemma-geometrically-irreducible-function-field. Affine fraction-field transfer as in the cited node."
+   }
+  },
+  {
+   "text": "For each $Y=T,N$, integrality gives irreducibility. The affine-local equivalence in [lem-zl-geometric-irreducibility-affine-local], applied to step 6, proves geometric irreducibility of $Y$. For every $L/k$, the base changes of its affine opens cover $Y_L$ and are reduced by step 6. Every local ring of $Y_L$ is a local ring of one of these opens, hence reduced [def-pc-reduced-scheme]. Thus $Y_L$ is both irreducible and reduced, and therefore integral [def-pc-integral-scheme]. Since $L$ was arbitrary, both $T$ and $N$ are geometrically integral [def-pc-geometrically-irreducible].",
+   "uses": [
+    "lem-zl-geometric-irreducibility-affine-local",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 038G, lemma-geometrically-irreducible-local, and 038K, lemma-geometrically-integral; reducedness is local by its definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-normalization-model-functoriality",
+  "lem-sc-normalization-exists",
+  "lem-fin-finite-over-projective",
+  "def-weil-finite-type-morphism",
+  "lem-sc-normalization-over-normal-locus",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-constant-projective-graph",
+  "lem-kun-projective-implies-proper",
+  "lem-zl-geometric-irreducibility-affine-local",
+  "def-pc-reduced-scheme",
+  "def-pc-geometrically-irreducible",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sbc-field-fraction-ring-geometric-integrality",
+  "def-pc-integral-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Synthesis of Tags 0BXR and 0GK4 with morphisms.tex Tags 035Q, 035K, 0H7D, 0C4Q and 01WC, and the affine fraction-field transfer lemma. This expands the finite-normalization portion of the de Jong Lemma 5.2 route using existing DAG tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of an integral projective variety lifts a finite semilinear group action and preserves a birational modification over a normal target",
+   "results": "{\"t\": \"2026-10-22T06:07:20Z\", \"tool\": \"leanfinder\", \"query\": \"Finite normalization of an integral projective variety lifts a finite semilinear group action and preserves a birational modification over a normal target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"1da264f8636c51e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-22T06:08:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(normalization|normaliz).*([Ee]quivariant|[Pp]rojective)|([Ee]quivariant|[Pp]rojective).*normalization",
+   "results": "{\"t\": \"2026-10-22T06:08:01Z\", \"tool\": \"grep\", \"query\": \"(normalization|normaliz).*([Ee]quivariant|[Pp]rojective)|([Ee]quivariant|[Pp]rojective).*normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group action on an integral projective scheme lifts to its finite normalization with a projective birational equivariant morphism",
+   "results": "{\"t\": \"2026-10-22T06:08:29Z\", \"tool\": \"leansearch\", \"query\": \"A finite group action on an integral projective scheme lifts to its finite normalization with a projective birational equivariant morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"8d43b54c17b1c102\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(normalization|normaliz).*([Ee]quivariant|[Pp]rojective)|([Ee]quivariant|[Pp]rojective).*normalization",
+   "results": "{\"t\": \"2026-10-22T11:06:18Z\", \"tool\": \"grep\", \"query\": \"(normalization|normaliz).*([Ee]quivariant|[Pp]rojective)|([Ee]quivariant|[Pp]rojective).*normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization declarations provide integral maps and universal properties, not finite projective semilinear birational models with all the stated clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a projective integral scheme is projective and carries a unique lift of any group action",
+   "results": "{\"t\": \"2026-10-22T11:06:19Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of a projective integral scheme is projective and carries a unique lift of any group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\"], \"digest\": \"dbdd9bfae7bc04cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization declarations provide integral maps and universal properties, not finite projective semilinear birational models with all the stated clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-22T11:06:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization declarations provide integral maps and universal properties, not finite projective semilinear birational models with all the stated clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of an integral projective variety lifts a semilinear finite group action and is projective birational over a normal target",
+   "results": "{\"t\": \"2026-10-22T11:06:25Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of an integral projective variety lifts a semilinear finite group action and is projective birational over a normal target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"090127bdf55746ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization declarations provide integral maps and universal properties, not finite projective semilinear birational models with all the stated clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An action by scheme automorphisms on an integral variety extends uniquely to the normalization and the normalization of a projective variety is projective",
+   "results": "{\"t\": \"2026-10-22T11:07:57Z\", \"tool\": \"leanfinder\", \"query\": \"An action by scheme automorphisms on an integral variety extends uniquely to the normalization and the normalization of a projective variety is projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\"], \"digest\": \"964a65b3235ec1a8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization declarations provide integral maps and universal properties, not finite projective semilinear birational models with all the stated clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-curve-pencil",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; extracted argument: Finite normalization of a semilinear projective modification",
+   "via": [
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-normal-projective-model",
+  "worker": "stage1",
+  "summary": "Repair of returned head 34b29a928dc after side-completion landing refusal: rechecked the retained split against the current unsplit live item and all thirteen current cited statements. Retained the exact statement, route and recorded searches; made explicit the finite-space closed immersion in step 5 and the base-section-compatible fraction-field equivalence in step 6. Seven steps, no new nodes, no statement correction. Delivery tool rebuilds on current origin/sheaf-dag and preserves maintainer fields.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; extracted argument: Finite normalization of a semilinear projective modification; steps 1--5 realize normalization, lifted action and projective graph; steps 6--7 realize geometric integrality. The inherited ancestor lookup returns null, retained without inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Finiteness, surjectivity and birationality of ordinary normalization over a field. This is a generic algebraic-geometry tool, not a replacement of the alteration route; no node of the unit states this tool."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Finite morphisms over a projective scheme yield a projective source over an affine Noetherian base; used only for Spec k. This is a generic algebraic-geometry tool, not a replacement of the alteration route; no node of the unit states this tool."
+   },
+   {
+    "node": "lem-sc-normalization-over-normal-locus",
+    "why": "Normalization restricts to an isomorphism over a normal open. This is a generic algebraic-geometry tool, not a replacement of the alteration route; no node of the unit states this tool."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Projective morphisms are proper. This is a generic algebraic-geometry tool, not a replacement of the alteration route; no node of the unit states this tool."
+   },
+   {
+    "node": "lem-zl-geometric-irreducibility-affine-local",
+    "why": "Generic affine-local criterion and restriction to nonempty opens, used to assemble geometric integrality. This is a generic algebraic-geometry tool, not a replacement of the alteration route; no node of the unit states this tool."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Canonical fraction-field description of every nonempty affine open of an integral scheme. This is a generic algebraic-geometry tool, not a replacement of the alteration route; no node of the unit states this tool."
+   },
+   {
+    "node": "lem-sbc-field-fraction-ring-geometric-integrality",
+    "why": "Generic affine transfer of geometric integrality along a base-compatible fraction-field isomorphism. This is a generic algebraic-geometry tool, not a replacement of the alteration route; no node of the unit states this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-normalization-exists",
+  "lem-fin-finite-over-projective",
+  "lem-sc-normalization-over-normal-locus",
+  "lem-kun-projective-implies-proper",
+  "lem-zl-geometric-irreducibility-affine-local",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sbc-field-fraction-ring-geometric-integrality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-712570a46",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-712570a46 (reviewer sub-agent of L); spot-checked: I read the whole item (7 steps, no new nodes). Its statement and stmt_deps are byte-identical to live, where the item is still unsplit; this is a first split, not a re-split. Mechanical finding confirmed: step 5 cites lem-per-h-projective-permanence, which is listed in live coord/route-pivot-dropped.txt (artin-gabber/Q̄ chain ancestry; Lean module deleted). Its statement is generic Stacks 0C4Q and uses none of the forbidden inputs, but a dropped node must not be cited, so this is a fault. FIX: step 5 now cites lem-sfb-finite-constant-projective-graph from the same unit sk-thm-sf-ctf-stability (snapshot: split, Q101 PASS; live: present and not dropped). Applied with F=k, R=N (projective over k by step 2), S=X (separated) and c=pn, it gives a closed immersion N↪P^{N'}_X over X, which is the required H-projectivity; no cycle. I removed the old node from proof_deps and split_report.tool_uses. Step 2: lem-fin-finite-over-projective requires the def-pc-projective-morphism convention (H-projective and quasi-compact); I added the quasi-compactness of T→Spec k via def-weil-finite-type-morphism. Steps 1, 3 and 4 were checked against the statements of lem-sfb-finite-normalization-model-functoriality (M=H=k(T), semilinear identity/composition and uniqueness clauses), lem-sc-normalization-exists and lem-sc-normalization-over-normal-locus (p^{-1}U is normal). Steps 6 and 7 were checked against lem-zl, lem-sc-integral-function-field-affine-fraction, lem-sbc-field-fraction-ring-geometric-integrality, and the integral, reduced and geometric definitions. Sources checked: Stacks 0GK4 l.4950, 0H7D l.14649, and 0BXR/035K/0C4Q/038G/038K by label; de Jong is correctly marked WANTED. Edge cases checked: normal T, U=X, dim 0, trivial or nonfaithful H, imperfect k, non-projective proper X. Duplicate search found no restatement (semilinear-normalization-finite-model, normalization-projective-spread and invariant-marked-generic-normalization all differ). No SGA is used. The remaining generic tool_uses are accepted. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-equivariant-normal-projective-model.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantNormalProjectiveModel",
+  "declaration": "AlgebraicGeometry.equivariant_normal_projective_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantNormalProjectiveModel.lean",
+  "statement": "theorem equivariant_normal_projective_model (k : Type u) [Field k] (X T : Scheme.{u}) [IsIntegral X] [IsIntegral T] (f : X ⟶ Spec (.of k)) [IsProper f] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x)) (g : T ⟶ Spec (.of k)) [LocallyOfFiniteType g] [QuasiCompact g] [IsHProjective g] (H : Type v) [Group H] [Finite H] (rho : H →* (k ≃+* k)) (aX : H →* Aut X) (aT : H →* Aut T) (haX : ∀ h : H, (aX h).hom ≫ f = f ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) (haT : ∀ h : H, (aT h).hom ≫ g = g ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) (p : T ⟶ X) (hp : p ≫ f = g) (hequiv : ∀ h : H, (aT h).hom ≫ p = p ≫ (aX h).hom) (e : X.functionField ≃+* T.functionField) (he : Spec.map (CommRingCat.ofHom e.toRingHom) ≫ X.fromSpecFunctionField = T.fromSpecFunctionField ≫ p) (U : X.Opens) (hU : Dense (U : Set X)) (hpU : IsIso (p ∣_ U)) : IsFinite T.fromNormalization ∧ Surjective T.fromNormalization ∧ (∃ V : T.Opens, Dense (V : Set T) ∧ IsIso (T.fromNormalization ∣_ V)) ∧ IsIntegral T.normalization ∧ (∀ x : T.normalization, IsIntegrallyClosed (T.normalization.presheaf.stalk x)) ∧ LocallyOfFiniteType (T.fromNormalization ≫ g) ∧ QuasiCompact (T.fromNormalization ≫ g) ∧ IsHProjective (T.fromNormalization ≫ g) ∧ IsProper (T.fromNormalization ≫ p) ∧ Surjective (T.fromNormalization ≫ p) ∧ IsHProjective (T.fromNormalization ≫ p) ∧ IsIso ((T.fromNormalization ≫ p) ∣_ U) ∧ (∃ eN : T.functionField ≃+* T.normalization.functionField, Spec.map (CommRingCat.ofHom eN.toRingHom) ≫ T.fromSpecFunctionField = T.normalization.fromSpecFunctionField ≫ T.fromNormalization ∧ Spec.map (CommRingCat.ofHom (e.trans eN).toRingHom) ≫ X.fromSpecFunctionField = T.normalization.fromSpecFunctionField ≫ (T.fromNormalization ≫ p)) ∧ (∃ aN : H →* Aut T.normalization, (∀ h : H, (aN h).hom ≫ (T.fromNormalization ≫ g) = (T.fromNormalization ≫ g) ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) ∧ (∀ h : H, (aN h).hom ≫ T.fromNormalization = T.fromNormalization ≫ (aT h).hom) ∧ (∀ aN' : H →* Aut T.normalization, (∀ h : H, (aN' h).hom ≫ (T.fromNormalization ≫ g) = (T.fromNormalization ≫ g) ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) → (∀ h : H, (aN' h).hom ≫ T.fromNormalization = T.fromNormalization ≫ (aT h).hom) → aN' = aN) ∧ (∀ h : H, (aN h).hom ≫ (T.fromNormalization ≫ p) = (T.fromNormalization ≫ p) ≫ (aX h).hom)) ∧ (GeometricallyIntegral f → GeometricallyIntegral g ∧ GeometricallyIntegral (T.fromNormalization ≫ g))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94fdf905f",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node (k field; X normal integral proper; T integral, finite type, H-projective; semilinear H-actions via rho h⁻¹, a consistent left action under Mathlib's Aut law; p equivariant k-morphism with e tied to p by a generic-point equation; dense U with p iso over U). Conclusions: n finite, surjective, birational (dense V plus eN tied to n); N integral with integrally closed stalks, finite type and IsHProjective over k; unique semilinear n-equivariant lift aN; pn equivariant, proper, surjective, IsHProjective, iso over the original U, with e.trans eN; geometric-integrality implication. Normalization is the canonical upstream Scheme.normalization of def-sc-normalization. Node JSON differs from live only in lean; lean.statement verbatim in file; no definitions, sorry-only proof, docstrings carry source and blueprint tag; imports exist on side-live. Edge cases checked: trivial or non-faithful H, U=X, dim 0, any characteristic, universe v separate. No blocking findings; the second-reading section is a self-reread, acknowledged in the report. Not recompiled (no file changed)."
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "def-pur-projection-purity-coordinates",
+ "kind": "definition",
+ "title": "The fixed source and exceptional coordinates of projection purity",
+ "statement": "Retain exactly the existing source coordinate isomorphism, exceptional target coordinate map, its etale-origin invertibility and common intrinsic Hom type from the projection-purity construction. These change only the coefficient, tensor, pullback and exceptional identity presentations. The source isomorphism is fixed by HEq to its literal tensor/root/shift composite; the target map is identity at positive rank and the ordinary exceptional identity followed by the comparison counit at rank zero. No purity equality enters these definitions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Existing source and exceptional coordinate declarations, before the intrinsic presentation constructions; extracted verbatim for use by the two model comparison steps."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-affine-space",
+  "def-weil-finite-tor-amplitude",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-amb-p1-trace",
+  "lem-amb-cartier-kummer-map",
+  "lem-sf-class-compact-support-comparison",
+  "def-exchange-projection",
+  "def-pur-affine-space-comparison",
+  "def-pur-affine-line-datum",
+  "def-pur-affine-line-purity-comparison",
+  "thm-pur-affine-line-purity",
+  "cor-pur-affine-space-purity",
+  "def-pur-smooth-purity-map",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "def-pur-section-invariant",
+  "thm-amb-vector-bundle-purity",
+  "def-amb-vector-integration",
+  "thm-sf-ambient-adjoint-class",
+  "def-pur-affine-diagonal-tate-coordinates",
+  "def-pur-affine-diagonal-tensor-coordinates"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor compatibility of exceptional integration transposes with the dualizing object",
+   "results": "8 hits, contraction and module-dual identities and tensorRightHomEquiv_tensor; no scheme exceptional functor normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smooth purity isomorphism for an affine space projection equals the iterated affine line integration transpose",
+   "results": "8 affine coordinate scheme formulas; no exceptional integration transpose. Loogle purity returned compiler IR declarations only.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|diagonalAffineMate|tensorTraceIntegrated; blueprint_refs search projection purity and tensor trace transpose",
+   "results": "Mathlib has no geometric purity comparison. Library has the generic tensor-trace identity and the normalized diagonal orientation, but not the present coordinate compatibility. Existing vector unit transpose statements import the item and cannot be its prerequisites.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionPurityAgreement",
+  "date": "2026-10-26",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Model diagonal/DNC integration normalization and final canonical reassociations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionPurityCoordinates",
+  "file": "lean/Sheaf/Paper/ProjectionPurityCoordinates.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.projectionSourceIso",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.projection_smooth",
+   "WeilConjectures.PurityFiniteSetting.projectionSmoothSource",
+   "WeilConjectures.PurityFiniteSetting.projectionSourceRaw",
+   "WeilConjectures.PurityFiniteSetting.ProjectionSourceIsoType",
+   "WeilConjectures.PurityFiniteSetting.projectionSourceIso_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionSourceIso",
+   "WeilConjectures.PurityFiniteSetting.projectionSmoothTarget",
+   "WeilConjectures.PurityFiniteSetting.projectionTargetRaw",
+   "WeilConjectures.PurityFiniteSetting.ProjectionTargetMapType",
+   "WeilConjectures.PurityFiniteSetting.projectionTargetMap_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionTargetMap",
+   "WeilConjectures.PurityFiniteSetting.projectionTarget_isIso",
+   "WeilConjectures.PurityFiniteSetting.projectionAffineInPresentation",
+   "WeilConjectures.PurityFiniteSetting.ProjectionIntrinsicHom"
+  ],
+  "statement": "def projectionSourceIso\n    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)\n    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]\n    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))\n    (K : AlgebraicGeometry.ProEtale.AffineSpacePurity.C\n      (projectionSetting F C E n).Coefficient Y) (d : ℕ) :\n    ProjectionSourceIsoType F C E n Y K d",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new sorried lemmas in ProjectionTensorIntegration against node lem-pur-projection-purity-agreement, smoothPurityMap/existsUnique_smoothPurityTensorMap and ordered_integration_transposes; 7 direct importers compiled"
+ }
+}

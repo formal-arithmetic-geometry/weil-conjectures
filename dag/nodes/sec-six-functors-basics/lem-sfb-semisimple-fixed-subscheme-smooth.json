@@ -1,0 +1,175 @@
+{
+ "id": "lem-sfb-semisimple-fixed-subscheme-smooth",
+ "kind": "statement",
+ "title": "Smooth fixed subschemes of semisimple elements",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Groups are affine group schemes [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A point $s\\in H(k)$ is semisimple if its image under every finite-dimensional algebraic representation $H\\to\\operatorname{GL}(V)$ is diagonalizable; an algebraic representation is a homomorphism of group schemes, $V$ is a finite-dimensional $k$-vector space, and $\\operatorname{GL}(V)(A)$ is the group of invertible $A$-linear maps on $V\\otimes_k A$. Let $H$ be smooth and connected, let $X$ be a smooth affine finite-type $k$-scheme [def-pc-scheme], and let $a:H\\times_k X\\to X$ be an action, meaning a morphism satisfying $a(1,x)=x$ and $a(h_1h_2,x)=a(h_1,a(h_2,x))$ after every commutative $k$-algebra extension. Products are scheme fibre products [def-pc-fibre-product]. Let $s\\in H(k)$ be semisimple and let $X^s$ be the closed subscheme equalizing $a(s,-):X\\to X$ and $\\mathrm{id}_X$ [def-weil-closed-immersion]. Thus $X^s(A)=\\{x\\in X(A):a(s_A,x)=x\\}$ for every commutative $k$-algebra $A$. Then $X^s$ is smooth over $k$. No connectedness assumption on $X$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 13.8, printed p.257, smoothness assertion, specialized to a smooth connected acting affine group and a smooth affine scheme."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-sfb-semisimple-group-scheme-point"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\Gamma=\\{s^n:n\\in\\mathbf Z\\}$. By [lem-sfb-semisimple-cyclic-closure-linearly-reductive], its reduced Zariski closure $G\\hookrightarrow H$ is a smooth affine finite-type closed subgroup, is linearly reductive, and contains the Zariski-dense subgroup $\\Gamma\\subset G(k)$. The hypothesis on $s$ is precisely the representation criterion in that lemma; no characteristic-zero or connectedness hypothesis on $G$ is needed. Restrict the given action along $G\\hookrightarrow H$; its two action laws follow by substitution into those of the original action.",
+   "uses": [
+    "lem-sfb-semisimple-cyclic-closure-linearly-reductive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.8, printed p.257, proof; application of Theorem 13.7, printed p.256."
+   }
+  },
+  {
+   "text": "For every commutative $k$-algebra $A$, a point $x\\in X(A)$ fixed by $s_A$ is fixed by every $s_A^n$: nonnegative powers follow by induction using the action law, and $s_A^{-1}x=x$ follows by applying $s_A^{-1}$ to $s_Ax=x$. Conversely, being fixed by all powers includes $n=1$. Hence the given closed equalizer $X^s\\hookrightarrow X$ represents exactly the common-fixed-point functor of $\\Gamma$ for the restricted $G$-action. This argument works for nonreduced $A$ as well, so it identifies the scheme functors, not just their $k$-points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.8, printed p.257, proof; application of Theorem 13.7, printed p.256."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-linearly-reductive-dense-fixed-smooth] with $G$, $\\Gamma$, the restricted action on the original smooth affine finite-type scheme $X$, and $F=X^s$. Step 1 supplies smoothness and linear reductivity of $G$ and density of $\\Gamma$; step 2 supplies the required representation of its common-fixed-point functor by the specified closed subscheme. The conclusion is that $X^s$ is smooth over $k$. The lemma permits disconnected $X$ and also covers an empty fixed scheme.",
+   "uses": [
+    "lem-sfb-linearly-reductive-dense-fixed-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.8, printed p.257, proof; application of Theorem 13.7, printed p.256."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimple-cyclic-closure-linearly-reductive",
+  "lem-sfb-linearly-reductive-dense-fixed-smooth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 13.8, printed p.257, proof; application of Theorem 13.7, printed p.256."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fixed subscheme of a semisimple element acting on a smooth affine variety is smooth",
+   "results": "8 hits: Algebra.instSmoothOfIsStandardSmooth, Algebra.isOpen_smoothLocus, Algebra.smoothLocus, Algebra.smoothLocus_eq_univ, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.smoothLocus_eq_univ_iff, AlgebraicGeometry.isSmooth_iff, Algebra.smoothLocus_eq_compl_support_inter. Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest e97ade41a7398afc.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixed\", \"Smooth\"",
+   "results": "0 hits: . Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|centralizer|fixed[Pp]oint",
+   "results": "0 hits: . Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest 4f53cda18c2baa0c. Mathlib/AlgebraicGeometry/ searched.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed points of a semisimple algebraic group element on a smooth scheme form a smooth subscheme",
+   "results": "8 hits: Function.fixedPoints, AddAction.fixedPoints, AddAction.fixedBy, MulAction.smul_inv_mem_fixedBy_iff_mem_fixedBy, MulAction.fixedPoints, AddAction.fixedBy_mem_fixedBy_of_addCommute, MulAction.fixedBy, AddAction.fixedPoints_of_subsingleton. Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest 7bc7cc3454064fef.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth variety the equalizer of a semisimple automorphism from an algebraic group action is smooth",
+   "results": "8 hits: Algebra.instSmoothOfIsStandardSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, Algebra.smoothLocus_eq_univ, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.isOpen_smoothLocus. Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest 05efe5d930b26149.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-solvable-semisimple-centralizer-connected",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Corollary 13.8, printed p.257, smoothness assertion, specialized to a smooth connected acting affine group and a smooth affine scheme.",
+   "via": [
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-fixed-subscheme-smooth",
+  "worker": "stage1",
+  "summary": "Q37: read Milne Corollary 13.8 and Theorem 13.7 with the reduced-closure preliminaries; keep the statement and statement dependencies. Isolate cyclic-closure linear reductivity and general dense-subgroup fixed-scheme smoothness as two statement-only inputs. Prove equality of the fixed functors over every algebra explicitly, including negative powers and nonreduced algebras. Search the DAG, latest blueprint, project Lean and Mathlib; no attachment or Mathlib leaf found.",
+  "blueprint": "Realizes the existing from.place: supporting smoothness input Corollary 13.8 below the solvable-semisimple-centralizer lemma, ultimately the alteration input of det-thm-sf-ctf-stability-direct-images (3). Read the current latest direct-image proof and unit: this is a group-action supporting lemma below the unit, with no change to its route. blueprint_refs ancestor returns None, retained faithfully; same_as searches found no matching blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-1a7060896",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-1a7060896 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 13.1–13.8 (printed pp.254–257) and 1.26/1.40/1.45/1.48/9.19–9.21 in the literature PDF. The item's statement, stmt_deps and source match live byte for byte, and live still has the item unsplit with no copies of the new nodes; there is no repair note. The split follows Milne's two-step proof of 13.8. Step 1 cites the cyclic-closure node, whose hypotheses H affine finite type and s semisimple hold, and gives G closed, smooth and linearly reductive with Gamma dense. Step 2 is elementary: fixed by s equals fixed by every power, checked over every algebra A, so X^s represents the Gamma-fixed functor. Step 3 cites the dense-fixed node with every input checked; proof_deps equals the union of the step uses. The cyclic-closure node is true by Milne 1.40/1.45/1.26 (reduced closure is a smooth subgroup) and 9.19 (s is semisimple in a faithful representation restricted to G, hence in all), with Milne's argument that s-stable equals G-stable. I tested s=1, finite order prime to p (disconnected G), a torus, and characteristic p (no mu_p). The dense-fixed node is Milne Lemma 13.6/13.7 with S=Gamma; I checked it independently: Gamma dense in reduced G gives X^Gamma=X^G, then Iversen/Fogarty. Linear reductivity is kept, which is needed by Milne 13.13. On duplicates: lem-sfb-torus-fixed-scheme-smooth covers tori only and is not enough, because the cyclic closure can be Z/m times a torus; the 13.2/13.3 regular-ring nodes are inputs for the later split, and nothing else matches. Neither new node restates a clause of the item. Form B1–B9 is OK: statement only, self-contained, stmt_deps equal the cited ids, TeX written once, no SGA, blueprint from/via extended, same_as []. No tool_uses and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemisimpleFixedSubschemeSmooth",
+  "declaration": "AlgebraicGeometry.semisimple_fixed_subscheme_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemisimpleFixedSubschemeSmooth.lean",
+  "statement": "theorem semisimple_fixed_subscheme_smooth {k : Type u} [Field k] [IsAlgClosed k] (H : Over (Spec (.of k))) [GrpObj H] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [Smooth H.hom] [ConnectedSpace H.left] (X : Over (Spec (.of k))) [IsAffine X.left] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [Smooth X.hom] [action : ModObj H X] (s : StandardGroupSchemes.affine k k ⟶ H) (hs : IsSemisimpleGroupSchemePoint H s) (F : Over (Spec (.of k))) (i : F ⟶ X) [IsClosedImmersion i.left] (hfixed : ∀ (A : Type u) [CommRing A] [Algebra k A] (x : StandardGroupSchemes.affine k A ⟶ X), (∃ z : StandardGroupSchemes.affine k A ⟶ F, z ≫ i = x) ↔ (StandardGroupSchemes.map k (Algebra.ofId k A) ≫ s) • x = x) : Smooth F.hom",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0eca8f62b",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Clause-by-clause match: alg-closed k; H GrpObj affine, LocallyOfFiniteType+QuasiCompact, Smooth, ConnectedSpace; X affine finite-type smooth with no connectedness; action = Mathlib ModObj (smul = lift m x ≫ γ); s : affine k k ⟶ H with landed IsSemisimpleGroupSchemePoint; F with closed immersion i and hfixed over every A : Type u comm k-algebra (s_A = map (ofId k A) ≫ s) = scheme-theoretic equalizer, satisfiable, same pattern as landed TorusFixedSchemeSmooth; conclusion Smooth F.hom. Node diff vs side-live = lean record + landed stmt_dep def-sfb-semisimple-group-scheme-point; statement verbatim; docstrings carry source/blueprint/3 proof steps; sorry only, no defs; report has both sections. Edge cases s=1, empty X/F, zero/nonreduced A, char p, empty rep, single universe u OK. No change, no compile."
+ }
+}

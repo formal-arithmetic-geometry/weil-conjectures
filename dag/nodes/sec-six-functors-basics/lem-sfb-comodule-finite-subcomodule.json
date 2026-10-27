@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-comodule-finite-subcomodule",
+ "kind": "statement",
+ "title": "Finite subsets of a comodule lie in finite-dimensional subcomodules",
+ "statement": "Let $k$ be a field [def-weil-field] and let $C$ be a $k$-vector space with linear maps $\\Delta:C\\to C\\otimes_k C$ and $\\epsilon:C\\to k$ satisfying coassociativity and both counit identities; tensor products use [def-weil-pbc-module-tensor-product]. A right $C$-comodule is a $k$-vector space $M$ with a linear map $\\rho:M\\to M\\otimes_k C$ satisfying $(\\rho\\otimes1_C)\\rho=(1_M\\otimes\\Delta)\\rho$ and $(1_M\\otimes\\epsilon)\\rho=1_M$, under the canonical associativity and unit identifications. For every finite subset $T\\subset M$, there is a finite-dimensional [def-weil-finite-dimensional-subspace] $k$-linear subspace $V\\subset M$ containing $T$ and a right $C$-comodule structure $\\rho_V:V\\to V\\otimes_k C$ for which the inclusion $i:V\\hookrightarrow M$ satisfies $(i\\otimes1_C)\\rho_V=\\rho i$. The zero comodule and the empty subset are allowed. No algebra structure on $C$ or cocommutativity is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 4.7, printed p.86; general coalgebra/comodule definitions in §9(d), printed p.174. The proof of Proposition 4.7 uses only the coassociativity and counit identities, so applies to every coalgebra."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Choose a $k$-basis $(e_j)_{j\\in J}$ of $C$ using [lem-weil-pbc-vector-space-basis-through-vector] with the empty independent set. Write $\\lambda_j:C\\to k$ for its coordinate functional: on a finite basis expansion it returns the coefficient of $e_j$. This is linear and $\\lambda_j(e_l)=\\delta_{jl}$. By [def-weil-pbc-module-tensor-product], every $\\rho(t)$ is a finite sum of pure tensors. Expanding their second factors in this basis and collecting terms gives $\\rho(t)=\\sum_{j\\in S_t}m_{tj}\\otimes e_j$ for a finite $S_t\\subset J$, for each $t\\in T$. Put $m_{tj}=0$ outside $S_t$. Applying the bilinear contraction $x\\otimes c\\mapsto\\lambda_j(c)x$, supplied by the tensor universal property, shows that these coefficients are $m_{tj}=(1_M\\otimes\\lambda_j)\\rho(t)$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86 (PDF p.98), coefficient-comparison proof; coalgebra and comodule identities in §9(d), printed p.174 (PDF p.186)."
+   }
+  },
+  {
+   "text": "For $t\\in T$ and $l\\in J$, coassociativity gives $\\sum_{j\\in S_t}\\rho(m_{tj})\\otimes e_j=\\sum_{j\\in S_t}m_{tj}\\otimes\\Delta(e_j)$ in $M\\otimes C\\otimes C$. Apply $1_M\\otimes1_C\\otimes\\lambda_l$, the linear contraction furnished by [def-weil-pbc-module-tensor-product]. The left side becomes $\\rho(m_{tl})$ and the right side becomes $\\sum_{j\\in S_t}m_{tj}\\otimes d_{jl}$, where $d_{jl}=(1_C\\otimes\\lambda_l)\\Delta(e_j)\\in C$. Consequently $\\rho(m_{tl})=\\sum_{j\\in S_t}m_{tj}\\otimes d_{jl}$. This is Milne's coefficient identity (26), with the second and third tensor factors kept in the right-comodule order.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86 (PDF p.98), coefficient-comparison proof; coalgebra and comodule identities in §9(d), printed p.174 (PDF p.186)."
+   }
+  },
+  {
+   "text": "Let $V\\subset M$ be the span of the finite set $\\{m_{tj}:t\\in T,\\ j\\in S_t\\}$. It is finite-dimensional by [def-weil-finite-dimensional-subspace]. Counitality gives $t=\\sum_{j\\in S_t}\\epsilon(e_j)m_{tj}$, so $T\\subset V$. Write $i:V\\hookrightarrow M$ and $J_C=i\\otimes1_C$. Step 2 expresses the image under $\\rho$ of every generator of $V$ as a sum of tensors whose first factors lie in $V$. Linearity then gives $\\rho(i(V))\\subset\\operatorname{im}(J_C)$: for a finite linear combination of generators, take the same linear combination of their displayed preimages in $V\\otimes C$. Here tensor maps and their linearity are those of [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86 (PDF p.98), coefficient-comparison proof; coalgebra and comodule identities in §9(d), printed p.174 (PDF p.186)."
+   }
+  },
+  {
+   "text": "Choose a basis of $V$, and extend its image under $i$ to a basis of $M$, using [lem-weil-pbc-vector-space-basis-through-vector] twice. The image is independent because $i$ is injective: a zero linear combination in $M$ is the same zero linear combination in $V$. Define a linear map $p:M\\to V$ by sending the extended basis vectors in $i(V)$ back to their basis vectors of $V$ and all remaining basis vectors to zero. Finite basis expansions give $pi=1_V$. Thus, for every vector space $D$, the maps $i\\otimes1_D$ and $p\\otimes1_D$ compose to the identity on pure tensors and hence on all tensors by [def-weil-pbc-module-tensor-product]; in particular $i\\otimes1_D$ is injective. Define $\\rho_V=(p\\otimes1_C)\\rho i$. Step 3 gives $(i\\otimes1_C)\\rho_V=\\rho i$: if $\\rho(i(v))=J_C(z)$, then $J_C(p\\otimes1_C)J_C(z)=J_C(z)$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86 (PDF p.98), coefficient-comparison proof; coalgebra and comodule identities in §9(d), printed p.174 (PDF p.186)."
+   }
+  },
+  {
+   "text": "It remains to check the identities for $\\rho_V$, not merely stability of its image. After composition with the injective map $i\\otimes1_C\\otimes1_C$ of step 4, $(\\rho_V\\otimes1_C)\\rho_V$ becomes $(\\rho\\otimes1_C)\\rho i$, and $(1_V\\otimes\\Delta)\\rho_V$ becomes $(1_M\\otimes\\Delta)\\rho i$. These formulas follow on pure tensors from $(i\\otimes1_C)\\rho_V=\\rho i$ and extend by linearity, using [def-weil-pbc-module-tensor-product]. Coassociativity on $M$ equates the two results, and injectivity cancels the inclusion. Similarly $i(1_V\\otimes\\epsilon)\\rho_V=(1_M\\otimes\\epsilon)\\rho i=i$, so injectivity of $i$ proves counitality. We have the required comodule and inclusion. For $T=\\emptyset$ the generating set is empty and $V=0$; for $M=0$ the same construction works. All calculations used only linearity and the stated coalgebra/comodule identities, never multiplication on $C$ or cocommutativity.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86 (PDF p.98), coefficient-comparison proof; coalgebra and comodule identities in §9(d), printed p.174 (PDF p.186)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-vector-space-basis-through-vector"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 4.7, printed p.86 (PDF p.98), coefficient-comparison proof; coalgebra and comodule identities in §9(d), printed p.174 (PDF p.186)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "subcomodule|subcoalgebra|finite.*comodule",
+   "results": "{\"t\": \"2026-10-23T18:52:40Z\", \"tool\": \"grep\", \"query\": \"subcomodule|subcoalgebra|finite.*comodule\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits. Coalgebra.Repr is a finite pure-tensor presentation, not a comodule or a stability theorem (Basic.lean:48–73); span_of_finite only proves finite dimension; dual evaluation and coevaluation do not assert closure under comultiplication. No matching theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coalgebra comodule is a union of finite dimensional subcomodules",
+   "results": "{\"t\": \"2026-10-23T18:52:40Z\", \"tool\": \"leansearch\", \"query\": \"A coalgebra comodule is a union of finite dimensional subcomodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Coalgebra.Repr.arbitrary\", \"Pi.counit_coe_finsupp\", \"Pi.counit_comp_finsuppLcoeFun\", \"Coalgebra\", \"CoalgCat.ofComonObj\", \"CoalgCat.toComonObj\", \"CoalgCat.toComonObj_X\", \"Coalgebra.toCoalgebraStruct\"], \"digest\": \"003e92ead742b092\"}; Read returned hits. Coalgebra.Repr is a finite pure-tensor presentation, not a comodule or a stability theorem (Basic.lean:48–73); span_of_finite only proves finite dimension; dual evaluation and coevaluation do not assert closure under comultiplication. No matching theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"FiniteDimensional\"",
+   "results": "{\"t\": \"2026-10-23T18:52:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coalgebra\\\", \\\"FiniteDimensional\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits. Coalgebra.Repr is a finite pure-tensor presentation, not a comodule or a stability theorem (Basic.lean:48–73); span_of_finite only proves finite dimension; dual evaluation and coevaluation do not assert closure under comultiplication. No matching theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite subset of a comodule over a coalgebra over a field lies in a finite dimensional subcomodule",
+   "results": "{\"t\": \"2026-10-23T18:52:41Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite subset of a comodule over a coalgebra over a field lies in a finite dimensional subcomodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.span_of_finite\", \"FiniteDimensional.span_finset\", \"Submodule.finiteDimensional_finset_sup\", \"Set.Finite.submoduleSpan\", \"Submodule.fg_iff_finiteDimensional\", \"FiniteDimensional.finiteDimensional_submodule\", \"RootPairing.instFiniteSubtypeMemSubmoduleCorootSpanOfFinite\", \"Submodule.finiteDimensional_iSup\"], \"digest\": \"39d3f5f39bb48429\"}; Read returned hits. Coalgebra.Repr is a finite pure-tensor presentation, not a comodule or a stability theorem (Basic.lean:48–73); span_of_finite only proves finite dimension; dual evaluation and coevaluation do not assert closure under comultiplication. No matching theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\"",
+   "results": "{\"t\": \"2026-10-23T18:53:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits. Coalgebra.Repr is a finite pure-tensor presentation, not a comodule or a stability theorem (Basic.lean:48–73); span_of_finite only proves finite dimension; dual evaluation and coevaluation do not assert closure under comultiplication. No matching theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a right coalgebra comodule is contained in a finite dimensional invariant subspace",
+   "results": "{\"t\": \"2026-10-23T18:53:44Z\", \"tool\": \"leanfinder\", \"query\": \"Every element of a right coalgebra comodule is contained in a finite dimensional invariant subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Coalgebra.Repr.arbitrary\", \"Coalgebra.Repr.right\", \"Coalgebra.Repr\", \"Coalgebra.Repr.index\", \"Coalgebra.Repr.ι\", \"Coalgebra.Repr.left\", \"Module.End.isFinitelySemisimple_iff\", \"Representation.invtSubmodule\"], \"digest\": \"e7ac92e5ef9ff3fc\"}; Read returned hits. Coalgebra.Repr is a finite pure-tensor presentation, not a comodule or a stability theorem (Basic.lean:48–73); span_of_finite only proves finite dimension; dual evaluation and coevaluation do not assert closure under comultiplication. No matching theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite subset of a right comodule over a coalgebra over a field is contained in a finite dimensional subcomodule",
+   "results": "{\"t\": \"2026-10-23T20:17:52Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite subset of a right comodule over a coalgebra over a field is contained in a finite dimensional subcomodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.span_of_finite\", \"Submodule.finiteDimensional_finset_sup\", \"FiniteDimensional.span_finset\", \"FiniteDimensional.finiteDimensional_submodule\", \"Submodule.fg_iff_finiteDimensional\", \"RootPairing.instFiniteSubtypeMemSubmoduleCorootSpanOfFinite\", \"Module.Finite.instIsCoatomicSubmodule\", \"Submodule.finiteDimensional_iSup\"], \"digest\": \"e790014596375c3a\"}; Read results: finite-span dimension and finite sums are not comodule stability; Coalgebra.Repr only presents comultiplication as a finite sum (Basic.lean:48–68), not a subcomodule. No theorem giving the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\"",
+   "results": "{\"t\": \"2026-10-23T20:17:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read results: finite-span dimension and finite sums are not comodule stability; Coalgebra.Repr only presents comultiplication as a finite sum (Basic.lean:48–68), not a subcomodule. No theorem giving the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subcomodule|finite.*comodule|comodule.*finite",
+   "results": "{\"t\": \"2026-10-23T20:17:52Z\", \"tool\": \"grep\", \"query\": \"subcomodule|finite.*comodule|comodule.*finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read results: finite-span dimension and finite sums are not comodule stability; Coalgebra.Repr only presents comultiplication as a finite sum (Basic.lean:48–68), not a subcomodule. No theorem giving the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coalgebra comodule is the union of its finite dimensional subcomodules",
+   "results": "{\"t\": \"2026-10-23T20:17:53Z\", \"tool\": \"leansearch\", \"query\": \"A coalgebra comodule is the union of its finite dimensional subcomodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Pi.counit_coe_finsupp\", \"Coalgebra.toCoalgebraStruct\", \"Pi.counit_comp_finsuppLcoeFun\", \"CategoryTheory.Comonad.Coalgebra\", \"Coalgebra.Repr.arbitrary\", \"CoalgCat.ofComonObj\", \"Coalgebra\", \"CoalgCat.toComonObj_X\"], \"digest\": \"531eb3ed975cbbae\"}; Read results: finite-span dimension and finite sums are not comodule stability; Coalgebra.Repr only presents comultiplication as a finite sum (Basic.lean:48–68), not a subcomodule. No theorem giving the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Repr|def arbitrary|class Coalgebra|structure Comodule|class Comodule",
+   "results": "{\"t\": \"2026-10-23T20:19:06Z\", \"tool\": \"grep\", \"query\": \"structure Repr|def arbitrary|class Coalgebra|structure Comodule|class Comodule\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Coalgebra/Basic.lean\", \"Mathlib/RingTheory/Coalgebra/Basic.lean\"], \"digest\": \"853edde442c93ea8\"}; Read results: finite-span dimension and finite sums are not comodule stability; Coalgebra.Repr only presents comultiplication as a finite sum (Basic.lean:48–68), not a subcomodule. No theorem giving the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"FiniteDimensional\"",
+   "results": "{\"t\": \"2026-10-23T20:19:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coalgebra\\\", \\\"FiniteDimensional\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read results: finite-span dimension and finite sums are not comodule stability; Coalgebra.Repr only presents comultiplication as a finite sum (Basic.lean:48–68), not a subcomodule. No theorem giving the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element in a coalgebra comodule belongs to a finite dimensional invariant subspace under the coaction",
+   "results": "{\"t\": \"2026-10-23T20:19:07Z\", \"tool\": \"leanfinder\", \"query\": \"Every element in a coalgebra comodule belongs to a finite dimensional invariant subspace under the coaction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Coalgebra.Repr.arbitrary\", \"Coalgebra.Repr\", \"Coalgebra.Repr.index\", \"Coalgebra.Repr.ι\", \"Coalgebra.Repr.left\", \"Coalgebra.Repr.right\", \"Coalgebra.Repr.induced\", \"CoalgCat.instComonObjModuleCatOfCarrier\"], \"digest\": \"4c52d0c4ab6009d2\"}; Read results: finite-span dimension and finite sums are not comodule stability; Coalgebra.Repr only presents comultiplication as a finite sum (Basic.lean:48–68), not a subcomodule. No theorem giving the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coalgebra-finite-subcoalgebra",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Theorem 12.23: character description needed before forming the torsion quotient in Notation 12.29. Supporting input for the character construction: separable splitting via the geometrically diagonal coordinate coalgebra. Supporting coalgebra input: Proposition 4.7, printed p.86 (proof uses only comodule identities), and coefficient coalgebras in §9(d), printed pp.174–175; applied to the regular comodule, as in Theorem 12.18(c)⇒(d), printed p.238. Supporting argument: Proposition 4.7, printed p.86; general coalgebra/comodule definitions in §9(d), printed p.174. The proof of Proposition 4.7 uses only the coassociativity and counit identities, so applies to every coalgebra.",
+   "via": [
+    "lem-sfb-coalgebra-finite-subcoalgebra",
+    "lem-sfb-geometrically-diagonal-coalgebra-separable-basis",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-comodule-finite-subcomodule",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 4.7 and §9(d). Proved finite-set containment by finite basis-coordinate expansions, coassociativity and counitality, then constructed the restricted coaction with a basis retraction and checked both identities by cancellation. Reused the existing Mathlib basis-extension node and tensor/finite-dimensionality definitions; no new nodes or strengthened hypotheses. No exact project Lean attachment or Mathlib match was found.",
+  "blueprint": "No imported blueprint node states the comodule result (whole-blueprint searches for comodule and finite-dimensional subcomodules returned none). This auxiliary lemma serves the inherited direct-images alteration/moduli chain recorded in blueprint.from.place; its proof supplies the Milne Proposition 4.7 input in the parent finite-subcoalgebra split. The current latest unit and direct-images proof were read; no unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-d9fbed5fa",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-d9fbed5fa (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. Statement and stmt_deps are unchanged from the base, and the item is still unsplit with no repair note in live/side-live. Source: Milne iAG2017 Prop 4.7, p.86 (PDF p.98), eq. (26), and §9(d), pp.174-175, checked by pdftotext. The proof uses only coassociativity and the counit, so the item's general-coalgebra statement matches it. Every cited node is a Mathlib leaf: basis-through-vector (Basis.extend, with S=∅), module-tensor-product and finite-dimensional-subspace. So there is no route issue and no tool_uses. Steps: (1) basis of C, coordinate functionals and finite expansion of ρ(t). (2) Apply 1⊗1⊗λ_l to the coassociativity equation, giving ρ(m_tl)=Σ m_tj⊗d_jl; I recomputed it and the right-comodule factor order is correct. (3) V=span{m_tj}; the counit gives t=Σε(e_j)m_tj, so T⊂V, and ρ(iV)⊂im(i⊗1). (4) Extending a basis gives a retraction p with pi=1, so i⊗1_D is injective; ρ_V:=(p⊗1)ρi satisfies (i⊗1)ρ_V=ρi. (5) Both comodule laws hold after cancelling the injective i⊗1⊗1 and i. Edge cases: T=∅, M=0, C=0 (forces M=0), infinite-dimensional C and M, and a noncocommutative C. proof_deps equals the union of uses, every step is under 2000 chars, and there is no SGA citation. Duplicate check: lem-sfb-comodule-finite-subrepresentation is only the C=k[H] special case, which the item strictly generalizes as its parent needs. The report fails to mention that node (advisory only). Mathlib has no comodule notion. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteSubcomodule",
+  "declaration": "Coalgebra.exists_finiteDimensional_subcomodule",
+  "file": "lean/Sheaf/RingTheory/FiniteSubcomodule.lean",
+  "statement": "theorem exists_finiteDimensional_subcomodule {k : Type u} [Field k] {C : Type v} [AddCommGroup C] [Module k C] [Coalgebra k C] {M : Type w} [AddCommGroup M] [Module k M] (ρ : M →ₗ[k] M ⊗[k] C) (hcoassoc : (TensorProduct.assoc k M C C).toLinearMap ∘ₗ ρ.rTensor C ∘ₗ ρ = (Coalgebra.comul (R := k) (A := C)).lTensor M ∘ₗ ρ) (hcounit : (TensorProduct.rid k M).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := C)).lTensor M ∘ₗ ρ = LinearMap.id) (T : Set M) (hT : T.Finite) : ∃ V : Submodule k M, FiniteDimensional k V ∧ T ⊆ V ∧ ∃ ρV : V →ₗ[k] V ⊗[k] C, (TensorProduct.assoc k V C C).toLinearMap ∘ₗ ρV.rTensor C ∘ₗ ρV = (Coalgebra.comul (R := k) (A := C)).lTensor V ∘ₗ ρV ∧ (TensorProduct.rid k V).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := C)).lTensor V ∘ₗ ρV = LinearMap.id ∧ V.subtype.rTensor C ∘ₗ ρV = ρ ∘ₗ V.subtype",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-909103344",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Read the item node, its three Mathlib-leaf stmt_deps, Mathlib Coalgebra (Basic.lean:36-86) and the delivered module FiniteSubcomodule.lean, which is new (absent from side-live); the node record differs from live only by the lean field. The Lean matches every clause: Field k; Mathlib Coalgebra k C is exactly Δ, ε, coassociativity and both counit laws, with no algebra structure or cocommutativity; ρ with assoc∘(ρ⊗1)∘ρ=(1⊗Δ)∘ρ and rid∘(1⊗ε)∘ρ=id in right-coaction order, identical to the landed sibling finite_comodule_coefficient_coalgebra; T : Set M with T.Finite; ∃ V : Submodule, FiniteDimensional ∧ T⊆V ∧ ∃ ρV with its own coassociativity and counit laws ∧ (i⊗1)ρV=ρi. Universes u, v, w independent; autoImplicit false. Edge cases: T=∅ and M=0 via V=⊥; C=0 forces M=0; infinite-dimensional C and M allowed. Docstrings carry Milne Prop 4.7 p.86, §9(d) p.174, the blueprint tag and all 5 proof steps; proof is sorry only; no definitions; lean.statement verbatim. No duplicate: Mathlib has no Comodule; comodule-finite-subrepresentation is the k[H] special case with no lean; the coefficient-coalgebra theorem assumes M finite-dimensional. Report has the Worker report and Second reading by Q103 sections. No compile run because no file was changed. No findings."
+ }
+}

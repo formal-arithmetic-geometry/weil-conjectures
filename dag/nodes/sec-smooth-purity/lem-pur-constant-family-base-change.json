@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-constant-family-base-change",
+ "kind": "statement",
+ "title": "Base change of the readings of constant line families",
+ "statement": "Fix a finite purity datum $P$ [def-pur-conventions], arbitrary schemes $B,B\\prime$ and a morphism $b:B\\prime\\to B$. Write $a,a\\prime$ for the affine-line projections and $v$ for the induced line map. Take arbitrary derived pro-etale objects $C,C\\prime$ on the bases and $F,F\\prime$ on their lines, with isomorphisms $\\kappa:F\\simeq a^*C$, $\\kappa\\prime:F\\prime\\simeq a\\prime{}^*C\\prime$, $T:v^*F\\simeq F\\prime$, and $c:b^*C\\simeq C\\prime$. Assume that any two isomorphisms $F\\prime\\simeq a\\prime{}^*D$ agreeing at one are equal, for every $D$. Define $r_j=i_j^*\\kappa\\,\\epsilon_j$ and $r_j\\prime=i_j\\prime{}^*\\kappa\\prime\\,\\epsilon_j\\prime$, with the canonical pullback section constraints, and let $q_j:b^*i_j^*F\\simeq i_j\\prime{}^*v^*F$ be the canonical endpoint pullback comparison [def-pur-section-restriction-data]. If $q_1(i_1\\prime{}^*T)r_1\\prime=(b^*r_1)c$, then $q_0(i_0\\prime{}^*T)r_0\\prime=(b^*r_0)c$. No smoothness, flatness, or invertibility assumption is imposed besides the displayed isomorphisms and detection hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+  "place": "Final paragraph, base change of the normalized constant comparison"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-section-restriction-data",
+  "lem-pur-section-constant-trivialization"
+ ],
+ "proof": [
+  {
+   "text": "The private compAlong construction combines equality transport with derived pullback composition. Its associativity and unit lemmas follow from ProEtale.leftDerivedUpperStarComp_assoc_app and the two derived identity laws. Three associativity instances and the two units prove section_coherence. Specializing to the line projections gives line_projection_coherence for the exact endpointPull and lineCounit of the statement; endpoint_naturality follows from the naturality of the comparison. Together with counit naturality, transport_reading computes both readings of alpha=(v*kappa);mu;(a\\prime*c), with the canonical mu from v;a=a\\prime;b.",
+   "uses": [
+    "def-pur-section-restriction-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set lambda=T inverse;alpha. The hypothesis and the proved transport equation at one identify the one readings of lambda and kappa\\prime. Cancel the common endpoint comparison and counit, then apply the assumed one-fibre detection to obtain lambda=kappa\\prime. Thus alpha=T;kappa\\prime. Substitute this in the already proved transport equation at zero to obtain the conclusion. All cancellation and association steps are Lean proofs.",
+   "uses": [
+    "def-pur-section-restriction-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-section-restriction-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+  "place": "Final paragraph, base change of the normalized constant comparison; complete Lean proof by Q4 using the source pro-etale derived associativity and unit laws"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image composition is coherent with sections and change of base",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl and CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app; none states the required derived pro-etale endpoint equations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the source library derived pullback constraints."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUpperStarComp\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib declaration of the source-library comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "lineCounit|section_constant_trivialization|rank_zero_family_readings",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PuritySectionNormalizedSpecialization",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, canonicality of DNC under restriction; constant-family normalization and standard rank-zero case",
+   "via": [
+    "lem-pur-section-normalized-specialization",
+    "lem-pur-section-etale-restriction-coherence",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityConstantFamilyBaseChange",
+  "file": "lean/Sheaf/Paper/PurityConstantFamilyBaseChange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionRestriction.constant_family_base_change",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.SectionRestriction.constant_family_base_change"
+  ],
+  "statement": "theorem constant_family_base_change (P : PurityFiniteSetting.{u})\n    {B B' : Scheme.{u}} (b : B' ⟶ B)\n    (C : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} P.Coefficient)))\n    (C' : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology B') (ModuleCat.{u + 1} P.Coefficient)))\n    (F : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology (AffineSpace (ULift.{u} (Fin 1)) B))\n        (ModuleCat.{u + 1} P.Coefficient)))\n    (F' : _root_.DerivedCategory\n      (Sheaf (Scheme.ProEt.topology (AffineSpace (ULift.{u} (Fin 1)) B'))\n        (ModuleCat.{u + 1} P.Coefficient))) :\n    let A := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).leftDerivedFunctor\n    let A' := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace (ULift.{u} (Fin 1)) B' ↘ B')).leftDerivedFunctor\n    let Lb := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor\n    let Lv := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace.map (ULift.{u} (Fin 1)) b)).leftDerivedFunctor\n    let E₁ := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace.oneSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor\n    let E₁' := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace.oneSection (ULift.{u} (Fin 1)) B')).leftDerivedFunctor\n    let E₀ := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor\n    let E₀' := (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B')).leftDerivedFunctor\n    ∀ (κ : F ≅ A.obj C) (κ' : F' ≅ A'.obj C')\n      (T : Lv.obj F ≅ F') (c : Lb.obj C ≅ C'),\n      (∀ D (α β : F' ≅ A'.obj D), E₁'.mapIso α = E₁'.mapIso β → α = β) →\n      (endpointPull P b _ _ (AffineSpace.oneSection_comp_map b) F ≪≫ E₁'.mapIso T ≪≫\n        E₁'.mapIso κ' ≪≫\n          (lineCounit P B' _ (AffineSpace.oneSection_comp_over _ B')).app C' =\n        Lb.mapIso (E₁.mapIso κ ≪≫\n          (lineCounit P B _ (AffineSpace.oneSection_comp_over _ B)).app C) ≪≫ c) →\n      endpointPull P b _ _ (AffineSpace.zeroSection_comp_map b) F ≪≫ E₀'.mapIso T ≪≫\n        E₀'.mapIso κ' ≪≫\n          (lineCounit P B' _ (AffineSpace.zeroSection_comp_over _ B')).app C' =\n        Lb.mapIso (E₀.mapIso κ ≪≫\n          (lineCounit P B _ (AffineSpace.zeroSection_comp_over _ B)).app C) ≪≫ c",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T200728-L-3337844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T200728-L-3337844",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

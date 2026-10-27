@@ -13,6 +13,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import Sheaf.Paper.CompletedScalarProjectionPerfectIso
+import Sheaf.CategoryTheory.RightDerivedComplexUnitNormalization
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 import Mathlib.CategoryTheory.Adjunction.Whiskering
@@ -340,6 +342,7 @@ def completedFiniteDirectImageComplexUnit (n : ℕ)
       ((DerivedCategory.quotientCompQhIso _).hom.app C)
 
 -- Compare the explicit scalar-restriction implementations of the same functors.
+set_option Elab.async false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived coefficient comparison is fixed by the ordinary identity comparison
@@ -477,12 +480,95 @@ def completedDirectImageProjectionFormula (n : ℕ)
       (completedDerivedRestrictionDirectImageIso f d n).hom.app
         ((pbcDerivedExtend (pbcAdicProjection X d n)).obj K))
 
+private theorem scalarProjection_naturality
+    {C D E B : Type*} [Category* C] [Category* D] [Category* E] [Category* B]
+    {LX : C ⥤ D} {RX : D ⥤ C} {LY : E ⥤ B} {RY : B ⥤ E}
+    (adjX : LX ⊣ RX) (adjY : LY ⊣ RY) (F : C ⥤ E) (G : D ⥤ B)
+    (e : RX ⋙ F ≅ G ⋙ RY) {K L : C} (h : K ⟶ L) :
+    LY.map (F.map h) ≫
+        (adjY.homEquiv _ _).symm (F.map (adjX.unit.app L) ≫ e.hom.app (LX.obj L)) =
+      (adjY.homEquiv _ _).symm (F.map (adjX.unit.app K) ≫ e.hom.app (LX.obj K)) ≫
+        G.map (LX.map h) := by
+  apply (adjY.homEquiv _ _).injective
+  rw [adjY.homEquiv_naturality_left, adjY.homEquiv_naturality_right]
+  simp only [Functor.id_obj, Equiv.apply_symm_apply]
+  change F.map h ≫ (F.map (adjX.unit.app L) ≫ e.hom.app (LX.obj L)) =
+    (F.map (adjX.unit.app K) ≫ e.hom.app (LX.obj K)) ≫ RY.map (G.map (LX.map h))
+  rw [← Category.assoc, ← F.map_comp]
+  have hu : h ≫ adjX.unit.app L = adjX.unit.app K ≫ RX.map (LX.map h) :=
+    adjX.unit.naturality h
+  rw [hu, F.map_comp, Category.assoc]
+  simpa only [Functor.comp_map, Category.assoc] using
+    congrArg (F.map (adjX.unit.app K) ≫ ·) (e.hom.naturality (LX.map h))
+
+private def restrictedUnitMap (T : Scheme.{u})
+    {R S B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (ψ : R ⟶ B) (a : S ⟶ B) (ha : φ ≫ a = ψ) :
+    (pbcRestrict φ).obj (SheafOfModules.unit (reductionModuleRing T S)) ⟶
+      (pbcRestrict ψ).obj (SheafOfModules.unit (reductionModuleRing T B)) :=
+  ⟨PresheafOfModules.homMk
+    (Functor.whiskerRight a.hom (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
+      forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1}))
+    (by
+      intro U r m
+      let m' : S.obj.obj U := m
+      change (a.hom.app U).hom ((φ.hom.app U).hom r * m') =
+        (ψ.hom.app U).hom r * (a.hom.app U).hom m'
+      rw [map_mul]
+      congr 1
+      exact congrArg (fun z ↦ z.hom.app U r) ha)⟩
+
+private def restrictedUnitIso (T : Scheme.{u})
+    {R S B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (ψ : R ⟶ B) (a : S ≅ B) (ha : φ ≫ a.hom = ψ) :
+    (pbcRestrict φ).obj (SheafOfModules.unit (reductionModuleRing T S)) ≅
+      (pbcRestrict ψ).obj (SheafOfModules.unit (reductionModuleRing T B)) where
+  hom := restrictedUnitMap T φ ψ a.hom ha
+  inv := restrictedUnitMap T ψ φ a.inv (by
+    rw [← ha, Category.assoc, a.hom_inv_id, Category.comp_id])
+  hom_inv_id := by
+    ext U x
+    exact congrArg (fun z ↦ z.hom.app U x) a.hom_inv_id
+  inv_hom_id := by
+    ext U x
+    exact congrArg (fun z ↦ z.hom.app U x) a.inv_hom_id
+
+private def completedQuotientModuleIso (T : Scheme.{u}) (n : ℕ) :
+    (pbcRestrict ((pbcCompletedComparison T d).hom ≫ pbcAdicProjection T d n)).obj
+        (SheafOfModules.unit (reductionModuleRing T ((pbcAdicRings T d).obj (op n)))) ≅
+      CompletedConstantReduction.residue T d.ideal n :=
+  (restrictedUnitIso T (limit.π (adicLisseRingSystem T d.ideal) (op n))
+    ((pbcCompletedComparison T d).hom ≫ pbcAdicProjection T d n)
+    (pbcLevelConstantComparison T d n) (by
+      exact (HasLimit.isoOfNatIso_hom_π (pbcConstantSystemComparison T d) (op n)).symm)).symm
+
+private theorem completedComplexUnit_eq
+    (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) :
+    completedDirectImageComplexUnit f d C =
+      (completedModuleDirectImage f d).rightDerivedFunctorUnitQ C := by
+  simpa only [completedDirectImageComplexUnit, completedDerivedDirectImage] using
+    Functor.rightDerivedComplexUnitNormalization (completedModuleDirectImage f d) C
+
+private theorem finiteComplexUnit_eq (n : ℕ)
+    (C : CochainComplex (pbcModules X ((pbcAdicRings X d).obj (op n))) ℤ) :
+    completedFiniteDirectImageComplexUnit f d n C =
+      (completedFiniteModuleDirectImage f d n).rightDerivedFunctorUnitQ C := by
+  simpa only [completedFiniteDirectImageComplexUnit, completedFiniteDerivedDirectImage] using
+    Functor.rightDerivedComplexUnitNormalization (completedFiniteModuleDirectImage f d n) C
+
+set_option Elab.async false in
 /-- Perfectness of each quotient makes this specified projection-formula arrow an
 isomorphism, functorial in the input.
-Source: blueprint order 1276 (blueprint: prop-weil-pbc-direct-image-limits).
-Proof: a finite projective resolution of A/I^(n+1) reduces the assertion to the free
-rank-one projection formula. It is the identity there. Finite sums, shifts, cones and
-retracts preserve invertibility. The mate construction is natural in K throughout. -/
+Source: blueprint order 1276; Stacks Project, Tag 0944.
+(blueprint: lem-pbc-completed-direct-image-projection-properties).
+Proof: identify the restricted finite-ring unit with the constant-system quotient
+module by the canonical ring comparison and its limit-projection equation. The
+scalar-to-tensor comparison identifies the specified arrow with the tensor projection.
+The existing perfect projection formula applies because this quotient is perfect.
+Cancel the comparison isomorphisms and reflect invertibility along exact restriction
+of scalars, using its conservative action on homology. For naturality transpose the
+equality through the scalar adjunction and use naturality of its unit and of the
+restriction/direct-image comparison. -/
 theorem completedDirectImageProjectionFormula_properties (d : AdicCoefficientDatum A) :
     (∀ (n : ℕ) (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))),
       IsIso (completedDirectImageProjectionFormula f d n K)) ∧
@@ -494,7 +580,36 @@ theorem completedDirectImageProjectionFormula_properties (d : AdicCoefficientDat
       completedDirectImageProjectionFormula f d n K ≫
         (completedFiniteDerivedDirectImage f d n).map
           ((pbcDerivedExtend (pbcAdicProjection X d n)).map h) := by
-  sorry
+  constructor
+  · intro n K
+    let := completedCoefficient_isIso f d
+    let r := (DerivedCategory.singleFunctor (PerfectProjection.modules d Y) 0).mapIso
+      (completedQuotientModuleIso d Y n)
+    exact completedScalarProjectionPerfectIso f d
+      ((pbcAdicRings Y d).obj (op n)) ((pbcAdicRings X d).obj (op n))
+      (pbcAdicProjection Y d n) (pbcAdicProjection X d n)
+      (asIso (completedFiniteCoefficientMap f d n)) (limit.lift_π _ (op n))
+      (completedModuleDirectImage f d) rfl (completedFiniteModuleDirectImage f d n) rfl
+      (completedRestrictionDirectImageIso f d n)
+      (by
+        intro M U
+        apply heq_of_eq
+        funext x
+        exact (completedRestrictionDirectImageIso_exists f d n).exists.choose_spec M U x)
+      (completedDerivedRestrictionDirectImageIso f d n)
+      (by
+        intro J
+        simpa only [finiteComplexUnit_eq, completedComplexUnit_eq,
+          completedDerivedRestrictionDirectImageIso,
+          completedDerivedDirectImage, completedFiniteDerivedDirectImage] using
+          (completedDerivedRestrictionDirectImageIso_exists f d n).exists.choose_spec J)
+      n r K
+  · intro n K L h
+    exact scalarProjection_naturality
+      (pbcDerivedScalarAdjunction (pbcAdicProjection X d n))
+      (pbcDerivedScalarAdjunction (pbcAdicProjection Y d n))
+      (completedDerivedDirectImage f d) (completedFiniteDerivedDirectImage f d n)
+      (completedDerivedRestrictionDirectImageIso f d n) h
 
 /-- Exact tower evaluation preserves K-injectives by its exact left adjoint.
 Source: blueprint order 1276, proof step 2 (blueprint: prop-weil-pbc-direct-image-limits).

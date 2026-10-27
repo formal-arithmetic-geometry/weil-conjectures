@@ -32,73 +32,46 @@
    }
   },
   {
-   "text": "For each $T$, [lem-weil-proetale-isomorphism-inverse-image] gives the exact inverse-image equivalence on module sheaves, its inverse, and its compatibility with the completed coefficient sheaf (inverse image commutes with the inverse limit of constant coefficient sheaves). [lem-weil-isomorphism-derived-pullback] identifies the completed constructible pullback with this termwise transport, $\\lambda^{g_T}_K:P_TK\\xrightarrow{\\sim}g_T^{-1}K$, and asserts that it preserves $D^b_c$. Apply the same result to $\\bar g_T=g_T^{-1}$. Put $\\epsilon_K:L\\bar g_T^*P_TK\\xrightarrow{\\sim}K$ equal to $\\lambda^{\\bar g_T}_{P_TK}$, followed by $\\bar g_T^{-1}(\\lambda^{g_T}_K)$ and the canonical isomorphism of inverse images along $g_T\\circ\\bar g_T=\\mathrm{id}$; define the other composite symmetrically with $g_T$ and $\\bar g_T$ exchanged. These are natural isomorphisms, since $\\lambda$ is natural and the inverse images are inverse site equivalences, so the two pullbacks are inverse equivalences on the integral constructible categories. Exactness follows already on module sheaves, hence also after passage to complexes and quasi-isomorphisms.",
+   "text": "Apply lem-pod-isomorphism-field-transport to geometric Frobenius. Its stage records supply both normalized integral epsilon equations, their rationalizations, exactness and equivalence. Its common-stage records supply the inverse identities and their finite-field inclusion formulas. The termwise realization is lem-weil-isomorphism-derived-pullback; exact completed module transport is also recorded in lem-pod-derived-automorphism-hom-evaluation. These give PodRationalFrobeniusTransportSpec and the transport clauses on both models.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-isomorphism-derived-pullback"
+    "lem-pod-isomorphism-field-transport",
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-pod-derived-automorphism-hom-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Sentence 1, exact integral Frobenius transport"
+    "place": "Sentence 1, expanded by lem-fix-weil-operations.proof.md, first paragraph; re-split of original Steps 2–3"
    }
   },
   {
-   "text": "At $E$, use the raw scalar localization of [def-weil-rationalization-karoubi]: the integral functors $P_T$ and $L\\bar g_T^*$ act on $\\operatorname{Hom}(-,-)\\otimes_{\\mathcal O_E}E$ by $u\\otimes c\\mapsto P_T(u)\\otimes c$, so the inverse-identity isomorphisms of Step 2 stay natural for every $u\\otimes c$ by linearity and each inverse identity remains the same equality after tensoring. At $\\overline{\\mathbf Q}_\\ell$, [def-weil-algebraically-closed-coefficients] represents every object and arrow over a common finite field, and the pullbacks act on an arrow represented over $L$ by its stage-$L$ image conjugated by the rationalized pullback scalar-extension comparisons $\\alpha$ of [lem-pur-integral-operations-scalar-extension]; these are natural, unital and compatible with successive extension, so the action does not depend on the representative. At $(E,K)$ take the class of the stage-$E$ isomorphism $\\epsilon_K$ of Step 2. By [lem-pod-pullback-identities-scalar-extension] (2), the scalar extension of $\\epsilon^E_K$ is $\\epsilon^L$ at the extended object composed with exactly the two comparisons $\\alpha$ by which the composite functor $L\\bar g_T^*P_T$ acts on arrows over $L$. Hence for an arrow represented over $L$ the naturality square of these classes is the stage-$L$ naturality square of $\\epsilon^L$ conjugated by those comparisons, and so commutes; tower compatibility makes the class independent of the representing field. Applying the same clause to $\\bar g_T$ gives the other inverse identity. These identities therefore hold in the common-stage category too. This also preserves the exact structures, whose triangles are images of integral triangles or are represented over a common finite field.",
+   "text": "Build the rational square from the canonical rationalized integral compositors. Naturality on a pure tensor is integral compositor naturality, and tensor induction gives every rational arrow. For the common-stage compositors, use the defining representative equations of def-weil-derived-pullback-tensor-hom and lem-pur-derived-pullback-tensor-iso. Represent an arrow over one field, compose representatives and cancel transition comparisons. The remaining equality is rational compositor naturality. Compose the inverse first compositor, the equality of scheme maps and the second compositor to obtain exactly the specified square components. On a supplied operation stage, apply lem-weil-mate-iso-along-equivalences to the ordinary square and its proper factor. The compactification exchange is a composite of this invertible proper mate, the supplied open base-change isomorphism and the supplied compactification identifications. Thus the stipulated exchange maps themselves are invertible.",
    "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients",
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-pod-pullback-identities-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Sentence 1, rationalization and common finite coefficient stages"
-   }
-  },
-  {
-   "text": "For $F=Lf^*$, form $a:P_XLf^*\\xrightarrow{\\sim}Lf^*P_Y$ as $c_{f,g_Y}\\circ c_{g_X,f}^{-1}$ through $L(fg_X)^*=L(g_Yf)^*$, where $c_{h,k}:L(kh)^*\\xrightarrow{\\sim}Lh^*Lk^*$. At the integral stage these are the natural isomorphisms $c^{\\mathcal O_E}_{h,k}$ of [lem-pod-integral-pullback-composition], which apply to arbitrary morphisms of schemes on which $\\ell$ is invertible and whose reductions modulo $\\varpi_E^n$ are the finite composition isomorphisms of [lem-weil-pbc-proetale-derived-pullback-composition]; thus $a^{-1}$ is the square identification $\\theta$ from which [def-exchange-projection] builds $\\operatorname{Ex}_*$. At $E$, $a\\otimes1$ is natural for every $u\\otimes c$ by linearity. At $\\overline{\\mathbf Q}_\\ell$ take at $(E,K)$ the class of the stage-$E$ component. By [lem-pod-pullback-identities-scalar-extension] (1), applied to the pairs $(g_X,f)$ and $(f,g_Y)$, the scalar extension of $c^{\\mathcal O_E}$ is $c^{\\mathcal O_L}$ conjugated by the composite comparisons $\\alpha$ of [lem-pur-integral-operations-scalar-extension], which are exactly the comparisons by which $P_XLf^*$ and $Lf^*P_Y$ act on arrows over $L$. So the classes are natural for arrows represented over any common field and independent of the representing field. Hence $a$ is a natural isomorphism of the specified pullbacks at both field stages.",
-   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
     "lem-pod-integral-pullback-composition",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-exchange-projection",
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-pod-pullback-identities-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Sentence 1, pullback Frobenius comparison"
-   }
-  },
-  {
-   "text": "For $F=Rf_*$ use $Lf^*\\dashv Rf_*$ from [fix-prop-adjunctions] (1). With $L=L'=Lf^*$, $R=R'=Rf_*$, $G=P_Y$, $G'=P_X$, the inverse of the comparison in Step 4 has type $L'G\\xrightarrow{\\sim}G'L$. Its mate is exactly $\\operatorname{Ex}_*$ in [def-exchange-projection], since that definition is the unit--pullback-comparison--counit composite. By [lem-weil-mate-iso-along-equivalences] it is invertible: Step 3 gives that $G$ is an equivalence and $G'$ is fully faithful. For $F=Rf_!$, [lem-pod-weil-frobenius-compact-support-exchange] gives the canonical natural isomorphism $\\operatorname{Ex}_!$ at both field stages on the stated domains, without separatedness of either base scheme. Thus all three covariant comparisons $a$ are natural isomorphisms.",
-   "uses": [
-    "fix-prop-adjunctions",
-    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso",
     "lem-weil-mate-iso-along-equivalences",
-    "lem-pod-weil-frobenius-compact-support-exchange"
+    "def-exchange-projection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Sentence 1, ordinary and compact-support direct-image comparisons"
+    "place": "Sentence 1, expanded by lem-fix-weil-operations.proof.md, first paragraph; re-split of original Steps 4–5"
    }
   },
   {
-   "text": "Let $F$ be any of the three functors with its comparison $a$, and set $\\Theta_K=F(\\theta_K)a_K$. Both factors are invertible. If $u\\theta_K=\\theta_LP_{\\mathrm{in}}(u)$, functoriality and naturality give\n$$F(u)\\Theta_K=F(u\\theta_K)a_K=F(\\theta_L)F(P_{\\mathrm{in}}u)a_K=F(\\theta_L)a_LP_{\\mathrm{out}}(F(u)).$$\nThis is exactly the arrow condition in [def-weil-weil-sheaf-complex]. Identities and composition are preserved because the underlying arrows are $F(u)$; equality of arrows of pairs is equality of underlying arrows. Hence this gives the asserted three functors, including the specified direct-image formulas.",
+   "text": "Put $\\Theta_K=F(\\theta_K)a_K$. For a Weil arrow, $F(u)\\Theta_K=F(u\\theta_K)a_K=F(\\theta_L)F(P_{\\rm in}u)a_K=F(\\theta_L)a_LP_{\\rm out}(F(u))$ by naturality. Both factors of $\\Theta$ are invertible. Arrows of pairs are equal iff their underlying arrows are, and the underlying functor preserves identities and composition, proving the three lifts by [def-weil-weil-sheaf-complex].",
    "uses": [
     "def-weil-weil-sheaf-complex"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Sentence 1, explicit covariant lift and arrow calculation"
+    "place": "Sentence 1, expanded by lem-fix-weil-operations.proof.md, first paragraph; original Step 6"
    }
   },
   {
-   "text": "For tensor use the natural isomorphism $\\mu_g$ of [lem-pur-derived-pullback-tensor-iso] at the field stages and put $\\Theta_{M,N}=(\\theta_M\\otimes\\theta_N)\\mu_{M,N}$. It is invertible. For Weil arrows $u:M\\to M'$ and $v:N\\to N'$, bifunctoriality, their two arrow equations, and naturality of $\\mu$ give\n$$(u\\otimes v)\\Theta_{M,N}=(u\\theta_M\\otimes v\\theta_N)\\mu_{M,N}=(\\theta_{M'}\\otimes\\theta_{N'})(P_Wu\\otimes P_Wv)\\mu_{M,N}=\\Theta_{M',N'}P_W(u\\otimes v).$$\nTensor preserves identities and simultaneous composition, so the same holds for its lift. This calculation uses only the natural tensor comparison and its defining bifunctor; it makes no additional preservation assertion.",
+   "text": "Use $\\mu$ of [lem-pur-derived-pullback-tensor-iso] and set $\\Theta_{M,N}=(\\theta_M\\otimes\\theta_N)\\mu$, invertible since $\\theta_M,\\theta_N,\\mu$ are. For Weil arrows $u,v$, $(u\\otimes v)\\Theta=(u\\theta_M\\otimes v\\theta_N)\\mu=(\\theta_{M\\prime}\\otimes\\theta_{N\\prime})(Pu\\otimes Pv)\\mu=\\Theta_{M\\prime,N\\prime}P(u\\otimes v)$. The tensor bifunctor [def-weil-derived-pullback-tensor-hom] supplies identity and composition laws.",
    "uses": [
     "lem-pur-derived-pullback-tensor-iso",
     "def-weil-derived-pullback-tensor-hom"
@@ -106,11 +79,11 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Sentence 1, tensor lift and its two-variable arrow calculation"
+    "place": "Sentence 1, expanded by lem-fix-weil-operations.proof.md, first paragraph; original Step 7"
    }
   },
   {
-   "text": "Write $H=R\\mathcal Hom$. [lem-pod-derived-automorphism-hom-evaluation] supplies the canonical natural isomorphism $h_{M,N}:P_WH(M,N)\\xrightarrow{\\sim}H(P_WM,P_WN)$ for an arbitrary scheme isomorphism, with the completed integral realization and its localized/common-stage forms, on pairs whose internal Hom is constructible. Set $\\Theta_{M,N}=H(\\theta_M^{-1},\\theta_N)h_{M,N}$, an isomorphism. For arrows $u:M'\\to M$, $v:N\\to N'$ of Weil pairs, their equations imply $\\theta_M^{-1}u=(P_Wu)\\theta_{M'}^{-1}$ and $v\\theta_N=\\theta_{N'}P_Wv$. Contravariant/covariant functoriality and naturality of $h$ give\n$$H(u,v)\\Theta_{M,N}=H(\\theta_M^{-1}u,v\\theta_N)h_{M,N}=H(\\theta_{M'}^{-1},\\theta_{N'})H(P_Wu,P_Wv)h_{M,N}=\\Theta_{M',N'}P_W(H(u,v)).$$\nThus $H(u,v)$ is a Weil arrow. Its identity and composition laws are the laws of the internal-Hom bifunctor in [def-weil-derived-pullback-tensor-hom]. The inverse in the first input is essential: it has type $M\\to P_WM$, precisely the contravariant input required for a map $H(P_WM,P_WN)\\to H(M,N)$.",
+   "text": "Write $H=R\\mathcal Hom$ and use $h:PH(M,N)\\simeq H(PM,PN)$ from [lem-pod-derived-automorphism-hom-evaluation], at the field stages on the pairs of the item, whose internal Hom is constructible. Put $\\Theta=H(\\theta_M^{-1},\\theta_N)h$, an isomorphism. For Weil arrows $u:M\\prime\\to M$, $v:N\\to N\\prime$, the arrow equations give $\\theta_M^{-1}u=Pu\\,\\theta_{M\\prime}^{-1}$ and $v\\theta_N=\\theta_{N\\prime}Pv$. Hence $H(u,v)\\Theta=H(\\theta_M^{-1}u,v\\theta_N)h=H(\\theta_{M\\prime}^{-1},\\theta_{N\\prime})H(Pu,Pv)h=\\Theta_{M\\prime,N\\prime}P(H(u,v))$. The bifunctor laws of [def-weil-derived-pullback-tensor-hom] give identities and composition; the first inverse has the required type $M\\to PM$.",
    "uses": [
     "lem-pod-derived-automorphism-hom-evaluation",
     "def-weil-derived-pullback-tensor-hom"
@@ -118,44 +91,37 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Sentence 1, internal-Hom lift, inverse first-variable datum and arrow calculation"
+    "place": "Sentence 1, expanded by lem-fix-weil-operations.proof.md, first paragraph; original Step 8"
    }
   },
   {
-   "text": "All constructions above leave each underlying object and arrow equal to the value of the stipulated operation. The forgetful functor of [def-weil-weil-sheaf-complex] therefore recovers all five operations. We have restricted throughout to the existing preserved constructible domains; tensor and Hom keep the finite-Tor and any site-perfect first-variable restrictions stated in the item. The formulas introduce no change to any underlying derived functor, shift comparison or underlying triangle. Thus their exactness means exactly the exactness already available for those underlying derived functors (in each covariant variable, and contravariantly in the first Hom variable); it supplies no triangulated-category claim about the category of pairs.",
+   "text": "The forgetful functor [def-weil-weil-sheaf-complex] recovers every stipulated object and arrow. All constructions stay in the already preserved domains, retaining finite-Tor and site-perfect restrictions. No underlying functor, shift comparison or triangle changes, so exactness is the underlying derived exactness, in each covariant variable and contravariantly in the first Hom variable, with no triangulation asserted for pairs.",
    "uses": [
     "def-weil-weil-sheaf-complex"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-    "place": "Sentence 1, forgetful images and preservation-domain boundary"
+    "place": "Sentence 1, expanded by lem-fix-weil-operations.proof.md, first paragraph; original Step 9"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-frobenius-square-cartesian",
-  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pod-isomorphism-field-transport",
   "lem-weil-isomorphism-derived-pullback",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-pod-pullback-identities-scalar-extension",
-  "lem-pod-integral-pullback-composition",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "def-exchange-projection",
-  "fix-prop-adjunctions",
-  "lem-weil-mate-iso-along-equivalences",
-  "lem-pod-weil-frobenius-compact-support-exchange",
-  "def-weil-weil-sheaf-complex",
-  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pod-derived-automorphism-hom-evaluation",
   "def-weil-derived-pullback-tensor-hom",
-  "lem-pod-derived-automorphism-hom-evaluation"
+  "lem-pod-integral-pullback-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-mate-iso-along-equivalences",
+  "def-exchange-projection",
+  "def-weil-weil-sheaf-complex"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
-  "place": "Proof sentence 1, expanded using the explicit transport and fixed-pair calculations of lem-fix-weil-operations.proof.md; geometric and coefficient inputs cited as existing nodes."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph; existing exact field transport and canonical coefficient comparison statements, with explicit fixed-pair and representative naturality calculations in Lean."
  },
  "mathlib_searches": [
   {
@@ -256,39 +222,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pod-semilinear-field-operation-lifts",
   "worker": "stage1",
-  "summary": "N5 proves the semilinear square and exact field-stage transport from existing scheme-isomorphism lemmas, obtains the three covariant comparisons by composition, ordinary mates and compact-support exchange, and writes out the covariant/tensor/contravariant-Hom fixed-pair arrow identities. No statement changes, no attachment. The maintainer reader added one statement-only node, lem-pod-pullback-identities-scalar-extension, for the compatibility of the integral pullback-composition and inverse-identity isomorphisms with the pullback scalar-extension comparisons, which the common-stage passages of Steps 3 and 4 need; Steps 2-4 now name these isomorphisms explicitly. Existing proof-level tools are declared explicitly; no constructibility or triangulated structure on Weil pairs is inferred.",
-  "blueprint": "prop-weil-operations proof sentence 1 and the first two steps isolated in its Q108 re-split: Steps 1–3 supply semilinear geometry and exact rational/common-stage transport; Steps 4–6 supply the three covariant lifts; Steps 7–8 give the two bifunctor lifts; Step 9 checks the forgetful and domain assertions.",
+  "summary": "Q23 repairs the dedicated batch-5 re-split handoff: two comparable statement-only children isolate exact inverse transport through coefficient stages and the canonical pullback square/ordinary mate. The statement is unchanged. The parent retains the geometry, compact-support citation and all three explicit arrow calculations; full original arguments and their allocation are preserved in the report. No Lean edit or compiler.",
+  "blueprint": "prop-weil-operations proof sentence 1 via lem-fix-weil-operations first paragraph; child A carries original Steps 2–3, child B Step 4 and the ordinary part of Step 5, and parent Steps 1, 3–7 retain original Steps 1 and 5–9.",
   "tool_uses": [
    {
     "node": "lem-weil-frobenius-square-cartesian",
     "why": "The geometric Frobenius Cartesian square for arbitrary schemes supplies the semilinear geometry, independently of Weil lifts."
-   },
-   {
-    "node": "lem-weil-proetale-isomorphism-inverse-image",
-    "why": "Generic inverse-image equivalence and limits for a scheme isomorphism; no statement of this unit supplies its site-theoretic input."
-   },
-   {
-    "node": "lem-weil-isomorphism-derived-pullback",
-    "why": "Generic completed constructible pullback comparison along scheme isomorphisms supplies the integral realization."
-   },
-   {
-    "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "Generic pullback scalar-extension naturality and cocycle allow transport at common finite coefficient stages."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Generic ambient ringed pullback composition identifies the comparison when completed pullback is exact inverse image."
-   },
-   {
-    "node": "fix-prop-adjunctions",
-    "why": "Only ordinary constructible adjunction (1) is used, as a black box; no exceptional adjunction or duality result is invoked."
-   },
-   {
-    "node": "lem-weil-mate-iso-along-equivalences",
-    "why": "Generic categorical mate criterion proves ordinary exchange invertibility along equivalences."
    },
    {
     "node": "lem-pur-derived-pullback-tensor-iso",
@@ -302,22 +244,18 @@
  },
  "tool_uses": [
   "lem-weil-frobenius-square-cartesian",
-  "lem-weil-proetale-isomorphism-inverse-image",
   "lem-weil-isomorphism-derived-pullback",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "fix-prop-adjunctions",
   "lem-weil-mate-iso-along-equivalences",
   "lem-pur-derived-pullback-tensor-iso",
   "lem-pod-derived-automorphism-hom-evaluation"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N5-18aaf87f5",
-  "group": "N5",
+  "reviewer": "NT-cc-Q23-c4df51337",
+  "group": "Q23",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-18aaf87f5 (reviewer sub-agent of L); spot-checked: FIX: I read the whole item (9 steps, no new nodes) and every cited statement. The sources were main-20261015 prop-weil-operations.proof.md sentence 1 and lem-fix-weil-operations.proof.md (equivariant lifts via Ex_*/Ex_!, g_X^*f^*=f^*g_Y^*, inverse Weil map on the contravariant Hom argument). No SGA is cited. The item is unsplit on live and side-live and has no repair note. The statement, base change, coefficient categories (raw E, common-stage Q̄_ℓ) and domains are unchanged and match def-weil-weil-sheaf-complex and prop-weil-operations. Steps 1, 2 and 5–9 check out: the Cartesian square and k-structure; the λ-based inverse transport; the mate types L=L'=Lf^*, G=P_Y, G'=P_X, with the mate equal to Ex_* of def-exchange-projection and invertible by lem-weil-mate-iso-along-equivalences; Ex_! by lem-pod-weil-frobenius-compact-support-exchange (acyclic, no separatedness); and the covariant, tensor and contravariant-Hom arrow identities. I tested the point case (scalars ab and b/a, a=ℓ with no lattice), f=id and non-separated bases. Two faults, both repaired: (1) E5/C4 in Steps 3–4. Q̄_ℓ naturality of the inverse identities and of a=c_{f,g_Y}c_{g_X,f}^{-1} needs the integral composition and inverse-identity isomorphisms to commute with the scalar-extension comparisons α of lem-pur-integral-operations-scalar-extension. No DAG node states this; lem-sf-scalar-pullback-composition, lem-weil-pbc-continuous-integral-pull-composition and lem-trf-frobenius-transports-scalar-extension are other models or cover Frobenius iterates only. I added the statement-only node lem-pod-pullback-identities-scalar-extension (unsplit, created.by reviewer, from prop-weil-operations via the item) and cite it in Steps 3–4. (2) C4 in Step 4: the unsupported claim that the integral c^{O_E} equal the ambient ringed composition maps is removed. lem-weil-pbc-proetale-derived-pullback-composition is now cited only for the finite reductions, and def-exchange-projection is added to uses. Corrected item and new node are in fixes/dag/nodes/sec-poincare-duality/. I accept the declared tool_uses, all generic site, coefficient or categorical inputs.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-c4df51337 (reviewer sub-agent of L); spot-checked: FIX. I read the whole delivery. The repair note in side-live is a released stage-1 re-split (batch5, 2026-10-22, keep_plan, at least 2 nodes, proof of at most 3000 characters) and is newer than the N5 S1 and Q33 S2 landings. Live and side-live still have the old 9-step proof, so the delivery is not superseded. The statement and stmt_deps are identical to side-live. Old Steps 2-3 (λ/ε transport, raw-E linear extension, Ω α-conjugation, pullback-identities(2)) went to the new node lem-pod-isomorphism-field-transport. That node covers any scheme isomorphism X→Y, non-separated and not over k. I typed its ε and scalar equations: T_Y P_ḡP_gK → T_YK. The common-stage formula (α^g)^{-1}P_{g,L}(u)α^g is well typed. Old Step 4 and the Ex_* part of Step 5 went to the new node lem-pod-frobenius-pullback-ordinary-exchange. I checked A_K and B_K: both sides have type T_X P_X f^*K → f_L^*P_{Y,L}T_YK. θ of def-exchange-projection (g=g_Y, f'=f, g'=g_X) equals a^{-1}, and the stated Ex_* matches the def. Invertibility follows from lem-weil-mate-iso-along-equivalences with G=P_Y and G'=P_X, plus fix-prop-adjunctions(1). The two nodes are comparable in size and neither restates the item. Old Steps 1 and 6-9 remain in the parent as glue calculations, and Ex_! still cites lem-pod-weil-frobenius-compact-support-exchange (no separatedness needed). Duplicate checks: lem-sf-automorphism-constructible-stage-equivalence covers only the separated automorphism case (advisory generalization); lem-fd-common-stage-comparison-descent, lem-pod-integral-pullback-composition, lem-pod-constructible-mate-coherence and fix-prop-adjunctions(4) are not duplicates. Source: main-20261015 prop-weil-operations sentence 1 and the first paragraph of lem-fix-weil-operations; no SGA. Small cases: f=id, g=id, empty schemes, rank one over Ω (xy for tensor, y/x for Hom), non-separated bases. My repair, in the item's proof only (2627 → 2973 characters), restores wording the compression had dropped: Θ invertible in the tensor step; the domain of h and Θ an isomorphism in the Hom step; equality of arrows of pairs; and in the last step, no change to the underlying functors, shifts or triangles, with the variance of exactness. It also corrects the step source places, which said 'original Steps 2–5' for Steps 4–7. I accept the 3 declared tool_uses: the Frobenius square, the tensor comparison and the Hom comparison.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.SemilinearFieldOperationLifts",
@@ -353,5 +291,27 @@
   "group": "Q33",
   "result": "pass",
   "note": "Full delivery read: the item node changes only in lean; statement verbatim; all 14 declarations present; sorry only; docstrings with source and blueprint tag and all 9 steps; report has Worker report and Second reading. Geometry: IsPullback gX f f gY and f≫gY≫aY=gX≫aX. Integral and rational/common-stage equivalences, with forward ε pinned to pullbackIdentityEpsilon and the termwise inverse-image realization. Lf^* comparison pinned to (comp f gX)⁻¹≫eqToIso≫comp gY f, direction checked. Ex_*/Ex_! = S.exchange/S.compactExchange of the supplied ExchangeProjectionStage, true for every such stage. Tensor μ and Hom κ pinned to the canonical maps; Hom lift uses θ_M⁻¹ in the contravariant variable on exactly the permitted pairs. Advisories: common-stage stage-level δ not pinned; exactness via ∃ CommShift instead of fieldRationalPullShift; Ex_! clause needs an endo-shaped stage (compactification over k₀), so the base-changed c′ of lem-pod-weil-frobenius-compact-support-exchange needs a coherence comparison; statement uses decls of theorem nodes outside stmt_deps (podRationalHomComparison, canonicalRationalPullbackTensor, pullbackIdentityEpsilon, isomorphismIntegralTermwiseInverseImage); duplicated integral ε clause. No compile run (no file changed); worker reports a clean compile in 18.2 s."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cfb97",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261025T123548-L-1879954",
+  "kind": "interface",
+  "note": "independent cc review: delivered SemilinearFieldOperationLifts vs clone 065e0cbdf5d: only _root_.Algebra / _hx binder renames in signatures, five sorries proved, node proof_deps vs declarations used; module + 3 direct importers compiled in sandbox, #print axioms checked"
  }
 }

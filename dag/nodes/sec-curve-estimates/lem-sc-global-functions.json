@@ -106,7 +106,32 @@
   "def-sc-curves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isAlgClosed"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isAlgClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective",
+     "lines": [
+      106,
+      137
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd-affine",
  "statement_change": {
@@ -156,19 +181,20 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $k$ be algebraically closed and let $C$ be a\nproper connected curve over $k$ which is reduced (for instance a\nproper smooth connected curve). Then\n\n$$\nH^0(C,\\mathcal O_C)=k.\n$$",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be algebraically closed and let $X$ be a\nproper, reduced and connected scheme over $k$ (for instance a\nproper smooth connected curve). Then the structure map\n$k\\to H^0(X,\\mathcal O_X)$ is bijective:\n\n$$\nH^0(X,\\mathcal O_X)=k.\n$$",
   "proof": [
    {
-    "text": "A global function $f\\in H^0(C,\\mathcal O_C)\\setminus k$ would, by\n[lem-sc-morphism-from-function], define a morphism\n$C\\to\\mathbf A^1_k$ whose image is proper (the image of a proper\nscheme in a separated finite-type target is proper) and affine, hence\nfinite by [lem-sc-proper-affine-finite]; but $C$ is connected,\nso the image is a single point, a $k$-point (the closed points of a\nfinite-type $k$-scheme are $k$-valued for $k$ algebraically\nclosed), say with value $c\\in k$. Then $f-c$ vanishes at every\npoint of $C$, so it is locally nilpotent, hence zero because $C$ is\nreduced: $f=c\\in k$, a contradiction. (Reducedness is needed:\n[def-sc-curves] does not ask for it, and\n$\\mathbf P^1_k\\times_k\\operatorname{Spec}k[\\varepsilon]/(\\varepsilon^2)$\nis a proper connected curve with global functions\n$k[\\varepsilon]/(\\varepsilon^2)$.)",
-    "uses": [
-     "lem-sc-morphism-from-function",
-     "lem-sc-proper-affine-finite",
-     "def-sc-curves"
-    ],
-    "elementary": false
+    "text": "Put $A=H^0(X,\\mathcal O_X)$. The map $k\\to A$ is injective, $X$ being\nnonempty. Since $X$ is proper over $k$, every global function is integral\nover $k$ (indeed $A$ is finite-dimensional over $k$, by finiteness of\ncoherent cohomology on proper schemes). Let $a\\in A$. The subalgebra\n$k[a]\\subseteq A$ is then a finite-dimensional $k$-algebra. It is\nreduced, as a subring of the reduced ring $A$, and it has no idempotents\nother than $0$ and $1$, because an idempotent of $A$ cuts $X$ into two\ndisjoint open and closed pieces and $X$ is connected. A finite reduced\nalgebra over a field is a finite product of finite field extensions, and\nwithout nontrivial idempotents it is a single finite extension of $k$, hence\nequal to $k$ as $k$ is algebraically closed. So $a\\in k$, and $k\\to A$ is\nbijective. (Reducedness is needed: the proper connected curve\n$\\mathbf P^1_k\\times_k\\operatorname{Spec}k[\\varepsilon]/(\\varepsilon^2)$ has\nglobal functions $k[\\varepsilon]/(\\varepsilon^2)$.)",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

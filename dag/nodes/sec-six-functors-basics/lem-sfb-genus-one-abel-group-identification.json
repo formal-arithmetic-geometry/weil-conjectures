@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-genus-one-abel-group-identification",
+ "kind": "statement",
+ "title": "Abel identification and algebraic group law on a pointed genus-one curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $Y/k$ be a smooth projective connected curve [def-sc-curves, def-kun-projective] of genus $g(Y)=1$ [def-sc-genus], and let $O\\in Y(k)$. Write $\\operatorname{Pic}^0(Y)$ for the group of degree-zero invertible sheaf classes [def-sc-pic0, def-sc-invertible-module], with addition induced by tensor product, and $\\mathcal O_Y(P-O)$ for the divisor line bundle [def-sc-divisor, lem-sc-divisor-class-curve]. There exist $k$-morphisms $m:Y\\times_kY\\to Y$ and $\\iota:Y\\to Y$ which make $Y$ a commutative group scheme with identity $O$. For this group law the map $\\alpha_O:Y(k)\\to\\operatorname{Pic}^0(Y)$ given by $P\\mapsto[\\mathcal O_Y(P-O)]$ is a bijective group homomorphism. This is the elliptic group law associated with the origin $O$; in particular $\\alpha_O(P+Q)=\\alpha_O(P)+\\alpha_O(Q)$ and $\\alpha_O(O)=0$.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSV, example-pos-dim, genus-one paragraph: the degree-one Abel map is an isomorphism and identifying Picard degree one with degree zero gives the abelian-variety structure."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-genus",
+  "def-sc-pic0",
+  "def-sc-invertible-module",
+  "def-sc-divisor",
+  "lem-sc-divisor-class-curve"
+ ],
+ "proof": [
+  {
+   "text": "The given smooth connected curve is integral by [lem-sc-smooth-connected-curve-local-rings]. It is projective by hypothesis and proper by [lem-pc-projective-proper]. With the given point $O$, [prop-pc-xk-integral] makes it geometrically integral. The genus conventions agree by [lem-pc-genus-agrees-sc], so its Picard-chapter genus is $1$. For the current blueprint's relative-dimension formulation, [lem-sc-curve-base-change-relative-dimension-one] with $T=\\operatorname{Spec}k$ supplies smooth relative dimension $1$. The field is separably closed because it is algebraically closed. Thus [thm-sc-jacobian-representability] supplies a Jacobian $(J,\\varphi)$, with $\\varphi:\\operatorname{Pic}^0_{Y/k}\\simeq h_J$ an isomorphism of group-valued functors and $\\varphi_k:\\operatorname{Pic}^0(Y)\\simeq J(k)$.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-pc-projective-proper",
+    "prop-pc-xk-integral",
+    "lem-pc-genus-agrees-sc",
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "thm-sc-jacobian-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tags 0B9Z (proposition-pic-curve) and 0BA0 (lemma-picard-pieces); Milne III Theorem 1.6, printed p.88"
+   }
+  },
+  {
+   "text": "Let $H_1$ represent $\\operatorname{Hilb}^1_{Y/k}$, using [thm-pc-hilb-curves]. Its $T$-points are the closed subschemes $D\\subset Y\\times_kT$ finite locally free of degree one over $T$ [def-pc-hilb-functor]. By [lem-pc-flf-properties], $q_*\\mathcal O_D$ is a locally free rank-one algebra. Locally write it as $Rb$, with $1=ub$ and $b^2=vb$; then $b=1b=uvb$, hence $uv=1$. Thus the unit $R\\to Rb$ is an isomorphism, and $q:D\\to T$ is an isomorphism. Consequently $D$ is the graph of a unique $T\\to Y$. Conversely, $Y\\times_kT\\to T$ is proper by [lem-weil-pbc-proper-base-change], hence separated [def-weil-proper-morphism]; the graph is a section and is closed by [lem-weil-pbc-section-separated-closed-immersion]. It is isomorphic to $T$, hence finite locally free of degree one. The constructions are inverse and commute with every base change, including nonreduced $T$. Therefore $H_1\\simeq Y$ by [lem-pc-representable-unique].",
+   "uses": [
+    "thm-pc-hilb-curves",
+    "def-pc-hilb-functor",
+    "lem-pc-flf-properties",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-pc-representable-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B94 (Hilbert functor) and Tag 0B9I (proposition-hilb-d), degree one; rank-one algebra calculation written here"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-symmetric-abel-image-geometry] with $C=Y$, $P=O$, and $g=1$. It gives the closed immersion $e=f_O:Y\\to J$. Under Step 2, its degree-one Abel morphism $f_O^{(1)}:H_1\\to J$ is $e$: both associate to the universal graph divisor its divisor line bundle, then tensor with $\\mathcal O_Y(-O)$ and apply the same representing isomorphism $\\varphi$. The universal-divisor characterization in [lem-sc-hilb-to-pic-morphism] makes this an equality of morphisms, not merely of maps on $k$-points. The same general Abel-image theorem states $W_g=J$, so $g=1$ says that the scheme-theoretic image of $e$ is $J$. By [def-nagata-scheme-theoretic-image] its kernel ideal is zero. Since $e$ is a closed immersion, locally it is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ [def-weil-closed-immersion], with $I$ this kernel. Hence $I=0$ on every affine open, so $e$ is an isomorphism of $k$-schemes. Its value at $O$ is $\\varphi_k([\\mathcal O_Y(O-O)])=0$.",
+   "uses": [
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-sc-hilb-to-pic-morphism",
+    "def-nagata-scheme-theoretic-image",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Proposition 2.3, printed pp.92–93, and Theorem 5.1(a), printed p.101; the genus-one consequence agrees with Stacks Tag 0DSV (moduli-curves.tex, example-pos-dim)"
+   }
+  },
+  {
+   "text": "Write $m_J$ and $\\iota_J$ for the group operations of $J$ [def-sc-jacobian, def-sc-abelian-variety]. Define $m=e^{-1}\\circ m_J\\circ(e\\times e)$ and $\\iota=e^{-1}\\circ\\iota_J\\circ e$, which are $k$-morphisms. For every $k$-scheme $T$, these operations on $Y(T)$ are exactly those of $J(T)$ under the bijection $e_T$. Associativity, both unit identities and both inverse identities therefore follow by cancelling $e_T$. The group $J(T)$ is commutative because $\\varphi_T$ identifies it with the abelian group $\\operatorname{Pic}^0_{Y/k}(T)$ [def-sc-picard-functor, def-sc-jacobian]. Thus commutativity also holds on $Y(T)$; by [lem-pc-yoneda] these are identities of scheme morphisms. Since $e(O)=0$, the identity section is $O$. This constructs the elliptic group law with the specified origin.",
+   "uses": [
+    "def-sc-jacobian",
+    "def-sc-abelian-variety",
+    "def-sc-picard-functor",
+    "lem-pc-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSV (example-pos-dim), genus-one paragraph: transferring the Picard group scheme structure; explicit conjugation formulas written here"
+   }
+  },
+  {
+   "text": "On $k$-points the Abel formula is $e_k(P)=\\varphi_k([\\mathcal O_Y(P-O)])$. Thus $\\alpha_O=\\varphi_k^{-1}\\circ e_k$. Both factors are bijections, and each is a group homomorphism: $e_k$ by the definition of $m$ in Step 4, and $\\varphi_k^{-1}$ by [thm-sc-jacobian-representability]. The target group here is exactly the kernel of the degree map [def-sc-pic0], whose addition is tensor product of invertible sheaf classes. Therefore $\\alpha_O$ is the required bijective group homomorphism, $\\alpha_O(P+Q)=\\alpha_O(P)+\\alpha_O(Q)$, and $\\alpha_O(O)=[\\mathcal O_Y]=0$.",
+   "uses": [
+    "thm-sc-jacobian-representability",
+    "def-sc-pic0"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSV (example-pos-dim), genus-one paragraph, with Picard group identification of Tag 0BA0 (lemma-picard-pieces)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-hilb-functor",
+  "def-sc-abelian-variety",
+  "def-sc-jacobian",
+  "def-sc-pic0",
+  "def-sc-picard-functor",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-pc-flf-properties",
+  "lem-pc-genus-agrees-sc",
+  "lem-pc-projective-proper",
+  "lem-pc-representable-unique",
+  "lem-pc-yoneda",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sfb-symmetric-abel-image-geometry",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "prop-pc-xk-integral",
+  "thm-pc-hilb-curves",
+  "thm-sc-jacobian-representability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "III Theorem 1.6 (p.88), Proposition 2.3 (pp.92–93), and Theorem 5.1(a) (p.101); genus-one specialization and transport as in Stacks moduli-curves.tex Tag 0DSV, example-pos-dim. Rank-one Hilbert identification and transport formulas are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth projective genus one curve with an origin, the Abel map P to the class of the divisor P minus O is an isomorphism with its Picard zero group, with group addition algebraic",
+   "results": "Available: 8 hits: WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.Point.toClass_apply, WeierstrassCurve.Jacobian.PointClass, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.Point.toClass_zero, WeierstrassCurve.Jacobian.Point.point, WeierstrassCurve.Projective.PointClass, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern point-coordinate conversions on specified Weierstrass equations and an injection into the affine coordinate-ring class group; they do not identify the degree-zero Picard group of an arbitrary smooth projective genus-one curve or construct its algebraic group law."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeierstrassCurve.Affine.Point.toClass",
+   "results": "Available: 6 hits: WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.Point.toClass_injective, WeierstrassCurve.Affine.Point.toClass_zero, WeierstrassCurve.Affine.Point.toClass_eq_zero, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.Point.toClass_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern point-coordinate conversions on specified Weierstrass equations and an injection into the affine coordinate-ring class group; they do not identify the degree-zero Picard group of an arbitrary smooth projective genus-one curve or construct its algebraic group law."
+  },
+  {
+   "tool": "grep",
+   "query": "Abel|Picard|toClass_injective",
+   "results": "Available: 9 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern point-coordinate conversions on specified Weierstrass equations and an injection into the affine coordinate-ring class group; they do not identify the degree-zero Picard group of an arbitrary smooth projective genus-one curve or construct its algebraic group law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth proper curve of genus one with a rational point is isomorphic to its Picard scheme of degree zero",
+   "results": "Available: 8 hits: WeierstrassCurve.Jacobian, WeierstrassCurve.toJacobian, WeierstrassCurve.Jacobian.nonsingularLift_iff, WeierstrassCurve.Jacobian.Point, WeierstrassCurve.Affine.Point.toClass_eq_zero, WeierstrassCurve.Jacobian.Point.zero_point, CommRing.Pic.mk_eq_one_iff, WeierstrassCurve.ofJ0. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern point-coordinate conversions on specified Weierstrass equations and an injection into the affine coordinate-ring class group; they do not identify the degree-zero Picard group of an arbitrary smooth projective genus-one curve or construct its algebraic group law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Jacobian of a pointed genus one smooth projective curve is the curve itself via P maps to O(P-O)",
+   "results": "Available: 8 hits: WeierstrassCurve.toJacobian, WeierstrassCurve.Affine.Point.toJacobian, WeierstrassCurve.Jacobian, WeierstrassCurve.Jacobian.Point.point, WeierstrassCurve.Jacobian.Point.mk_point, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply, WeierstrassCurve.Jacobian.toAffine, WeierstrassCurve.Jacobian.Point. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern point-coordinate conversions on specified Weierstrass equations and an injection into the affine coordinate-ring class group; they do not identify the degree-zero Picard group of an arbitrary smooth projective genus-one curve or construct its algebraic group law."
+  },
+  {
+   "tool": "grep",
+   "query": "Abel|Picard|toClass_injective",
+   "results": "Available: 25 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean. Scope: AlgebraicGeometry.",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass-coordinate point operations and the coordinate-ring class-group injection do not construct the Picard scheme isomorphism of an arbitrary pointed smooth projective genus-one curve or its scheme group law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Jacobian of a smooth projective pointed genus one curve is the curve itself with its elliptic group law",
+   "results": "Available: 8 hits; WeierstrassCurve.toJacobian, WeierstrassCurve.Jacobian, WeierstrassCurve.Jacobian.Point, WeierstrassCurve.Jacobian.toAffine, WeierstrassCurve.Jacobian.Point.instAdd, WeierstrassCurve.Jacobian.Equation, WeierstrassCurve.Jacobian.Point.ext_iff, WeierstrassCurve.Jacobian.add. Scope: service-wide.",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass-coordinate point operations and the coordinate-ring class-group injection do not construct the Picard scheme isomorphism of an arbitrary pointed smooth projective genus-one curve or its scheme group law."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeierstrassCurve.Affine.Point.toClass",
+   "results": "Available: 6 hits; WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.Point.toClass_injective, WeierstrassCurve.Affine.Point.toClass_zero, WeierstrassCurve.Affine.Point.toClass_eq_zero, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.Point.toClass_apply. Scope: service-wide.",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass-coordinate point operations and the coordinate-ring class-group injection do not construct the Picard scheme isomorphism of an arbitrary pointed smooth projective genus-one curve or its scheme group law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective connected curve of genus one with origin is isomorphic to its degree zero Picard group scheme by the pointed Abel map",
+   "results": "Available: 8 hits; WeierstrassCurve.Affine.Point.toClass_apply, WeierstrassCurve.Jacobian.PointClass, WeierstrassCurve.Projective.PointClass, WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply, WeierstrassCurve.Affine.Point.toClass_zero, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply, WeierstrassCurve.Projective.Point.toAffineAddEquiv. Scope: service-wide.",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass-coordinate point operations and the coordinate-ring class-group injection do not construct the Picard scheme isomorphism of an arbitrary pointed smooth projective genus-one curve or its scheme group law."
+  },
+  {
+   "tool": "grep",
+   "query": "genus|picard|Picard|toClass",
+   "results": "Available: 8 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean. Scope: AlgebraicGeometry/EllipticCurve.",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass-coordinate point operations and the coordinate-ring class-group injection do not construct the Picard scheme isomorphism of an arbitrary pointed smooth projective genus-one curve or its scheme group law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree one Abel Jacobi morphism from a genus one smooth proper curve to Picard degree one is an isomorphism of schemes",
+   "results": "Available: 8 hits; WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv, AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.AffineSpace.isoOfIsAffine, AlgebraicGeometry.AffineSpace.mapSpecMap, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec. Scope: service-wide.",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass-coordinate point operations and the coordinate-ring class-group injection do not construct the Picard scheme isomorphism of an arbitrary pointed smooth projective genus-one curve or its scheme group law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-low-genus-pointed-automorphism-rigidity",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: Lemma 1.15(b),(c) and Lemma 1.16(b),(c), printed pp.85–86; genus-one Abel identification and projective-line automorphisms. Genus-zero classification: Stacks curves.tex Tag 0C6N, lemma-genus-zero. Local PDF WANTED; primary PDF read online. Genus-one auxiliary: the Abel map and its algebraic group law, before applying the automorphism hypothesis.",
+   "via": [
+    "lem-sfb-low-genus-pointed-automorphism-rigidity",
+    "lem-sfb-stable-picard-action-faithful",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-genus-one-abel-group-identification",
+  "worker": "stage1",
+  "summary": "Reused existing general pointed Abel-embedding and symmetric-image geometry instead of introducing genus-one restatements. Checked the project Lean for exact attachments and searched Mathlib with two semantic phrasings. Wrote the functorial degree-one Hilbert identification over arbitrary bases, used scheme-theoretic image equality to obtain an actual Abel isomorphism, and gave explicit algebraic multiplication/inversion and functorial group-identity checks. The statement is unchanged; no new nodes.",
+  "blueprint": "Inherited prerequisite of det-thm-sf-ctf-stability-direct-images (3), via the existing stable pointed-curve and Picard-faithfulness chain: supplies the genus-one auxiliary used in lem-sfb-low-genus-pointed-automorphism-rigidity. The latest direct-image proof itself does not state this auxiliary. blueprint_refs.py ancestor returns None, so the inherited null from.node and via provenance are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flf-properties",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: The module $f_*\\mathcal{O}_X$ of a finite locally free morphism; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-pc-genus-agrees-sc",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Agreement with the genus of file 06; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Projective morphisms are proper; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-pc-representable-unique",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Uniqueness of the representing scheme; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-pc-yoneda",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Yoneda; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-sc-curve-base-change-relative-dimension-one",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Base changes of a smooth curve are smooth of relative dimension $1$; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-sc-hilb-to-pic-morphism",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: The morphism $\\gamma_d:\\underline{\\operatorname{Hilb}}^d_{C/k}\\to\\underline{\\operatorname{Pic}}^d_{C/k}$, $D\\mapsto\\mathcal O(D)$; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Smooth connected curves: integral, local rings at closed points are DVRs; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Properness is stable under base change; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: A section of a separated morphism is a closed immersion; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "prop-pc-xk-integral",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Base changes of $X$ are smooth projective curves; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "thm-pc-hilb-curves",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: Hilbert schemes of smooth projective curves; the six-functor stability unit does not state this tool."
+   },
+   {
+    "node": "thm-sc-jacobian-representability",
+    "why": "Generic Picard, Hilbert, or scheme-theoretic input for the genus-one auxiliary: The Jacobian over a separably closed field; the six-functor stability unit does not state this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flf-properties",
+  "lem-pc-genus-agrees-sc",
+  "lem-pc-projective-proper",
+  "lem-pc-representable-unique",
+  "lem-pc-yoneda",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "prop-pc-xk-integral",
+  "thm-pc-hilb-curves",
+  "thm-sc-jacobian-representability"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-a55bc77f5",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-a55bc77f5 (reviewer sub-agent of L); spot-checked: Read the item's five steps in full, every cited node's statement, Stacks moduli-curves.tex example-pos-dim (0DSV), pic.tex lemma-picard-pieces (0BA0), and Milne AV III Prop 2.3 and Thm 5.1(a). The delivery has one commit, no new nodes, an unchanged statement and stmt_deps, and proof_deps equal to the union of the uses lists. No repair note exists and there is no cycle (the item is absent from the 5685-node closure). Step 1: integrality (sc-smooth-connected-curve-local-rings), H-projective plus quasi-compact gives def-pc-projective-morphism, proper (pc-projective-proper), geometrically integral (prop-pc-xk-integral, algebraically closed implies separably closed, rational point O), genus agreement, then thm-sc-jacobian-representability. All hypotheses are met. The relative-dimension-one citation is true but unneeded (advisory). Step 2: Hilb^1 is identified with Y via the rank-one calculation (1=ub, b^2=vb, so uv=1, so q is an isomorphism), graph sections closed through proper base change and the section lemma, then representable-unique. It holds over nonreduced T and T empty. Step 3: symmetric-abel-image-geometry with g=1 (allowed by g>=1) gives f_O as a closed immersion and W_1=J. f^(1) composed with the Hilb^1 identification equals f_O, by the universal graph divisor and lem-sc-hilb-to-pic-morphism, and also by reducedness of Y. Since a closed immersion is quasi-compact, the kernel ideal is I=0, so e is an isomorphism. Steps 4 and 5: the group law is transported by conjugation, commutativity comes from Pic^0 being Ab-valued plus Yoneda, identity O since e(O)=0, and alpha_O=phi_k^{-1}∘e_k is a group bijection. Characteristics 2 and 3 cause no issue; genus 0 is excluded. This matches Milne's route, which is equivalent to the Stacks 0DSV route. It is not a relabelling, since the general node is strictly larger. No SGA source is cited, and I accept the declared generic tool_uses. Batch-5: each listed citation (def-sc-jacobian, def-sc-picard-functor, lem-pc-genus-agrees-sc, lem-sc-hilb-to-pic-morphism, lem-sfb-symmetric-abel-image-geometry, prop-pc-xk-integral, thm-pc-hilb-curves, thm-sc-jacobian-representability) is a general definition or curve/Picard/Hilbert fact. Each reaches the trf or pod chapters only through generic definitions or scheme lemmas (def-pod-ring-scalar-extension, def-trf-schematically-dense-open, lem-trf-reduced-scheme-image, lem-trf-proper-finite-fibre-finite-near). None is a step of the trace formula or of Poincare duality, so I accept them."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenusOneAbelGroupIdentification",
+  "declaration": "AlgebraicGeometry.exists_genus_one_abel_group_identification",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenusOneAbelGroupIdentification.lean",
+  "statement": "theorem exists_genus_one_abel_group_identification {k : Type u} [Field k] [IsAlgClosed k] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsHProjective f] (hg : f.genus = 1) (O : Over.mk (𝟙 (Spec (.of k))) ⟶ Over.mk f) : ∃ (_ : GrpObj (Over.mk f)), IsCommMonObj (Over.mk f) ∧ CartesianMonoidalCategory.toUnit (Over.mk (𝟙 (Spec (.of k)))) ≫ η[Over.mk f] = O ∧ ∃ (G : Subgroup Y.Pic), (G : Set Y.Pic) = f.picZero ∧ ∃ α : (Over.mk (𝟙 (Spec (.of k))) ⟶ Over.mk f) ≃* G, α O = 1 ∧ ∀ P : Over.mk (𝟙 (Spec (.of k))) ⟶ Over.mk f, ∃ p o : closedPoints Y, (∀ s : Spec (.of k), p.val = P.left.base s ∧ o.val = O.left.base s) ∧ Nonempty ((fromSkeleton Y.Modules).obj (α P).val.val ≅ Scheme.Divisor.moduleOfSmoothConnectedCurve k Y f (Finsupp.single p (1 : ℤ) - Finsupp.single o (1 : ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56ba22afe",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Only the item's lean record changed; one theorem with proof sorry, statement verbatim, both report sections present. Hypotheses match the recorded declarations exactly (IsAlgClosed, IsConnectedCurve, Smooth, IsHProjective, f.genus = 1, O a section over k); no extra assumptions. Group law: an existential GrpObj on Over.mk f, with Mathlib's global pullback cartesian and swap-braided instances (Pullbacks.lean:712-713), so the multiplication is Y×_kY→Y; IsCommMonObj; toUnit ≫ η = O. Pic0: a subgroup with carrier exactly picZero. α: a MulEquiv from Y(k), using the scoped Hom.group of the same GrpObj, pinned at each P to moduleOfSmoothConnectedCurve(p−o) on the actual support points, so not an arbitrary map; α O = 1 stated. Edge cases (P=O, coincident points, characteristics 2 and 3, empty or dimension-0 excluded as in def-sc-curves, universes) are fine. Stacks 0DSV lines 607-625 match; docstrings carry the source and all five proof steps; all imports exist. No file changed, so no compile."
+ }
+}

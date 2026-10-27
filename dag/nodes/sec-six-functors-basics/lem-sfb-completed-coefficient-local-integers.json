@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-completed-coefficient-local-integers",
+ "kind": "statement",
+ "title": "Local integer approximation of reconstructed completed coefficients",
+ "statement": "Let l be prime, X a scheme with its small pro-etale site [def-weil-pbc-proetale-site], and S the reconstructed section ring [def-weil-pbc-internal-abelian-sheaf-module-equivalence] of the pulled-back continuous-function condensed ring Z_l. For n a natural number and r in S(V), the sieve of arrows f:W to V such that r restricted along f equals a+l^(n+1)b for some integer a and b in S(W) is covering. Here integerApproximationSieve denotes exactly that sieve. There are no module sheaves or additive maps in this assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "proof step 1 of lem-sfb-diagonal-completed-free-generator; coefficient identification paragraph (1)"
+ },
+ "proof": [
+  {
+   "text": "The normalized ring comparison identifies the coefficient ring with the limit of constant positive finite rings. The normalization identifies reduction with its corresponding finite projection, followed by sfbConstantRingAbIso. Thus reduction of any integer agrees with the sheafification unit applied to its residue.",
+   "uses": [
+    "lem-diagonal-completed-coefficient-ring-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply local surjectivity of the constant abelian sheafification unit to the reduced section. On its image sieve, choose the integer representative of the finite cyclic residue. The difference between the restricted section and this integer is in the kernel of reduction. The cokernel calculation for purZlReduction and local exactness of abelian sheaves give, after a further covering refinement, a preimage b under multiplication by l^(n+1).",
+   "uses": [
+    "lem-pur-condensed-zl-reduction-mod-ell-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two covering sieves by transitivity of the topology. Restrictions preserve integers and natural multiples, so the resulting witnesses satisfy exactly the defining equation of integerApproximationSieve. The argument is unchanged for the empty test object and for n=0, which is reduction modulo l.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-completed-coefficient-ring-comparison",
+  "lem-pur-condensed-zl-reduction-mod-ell-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P9",
+  "document": "dag/nodes/sec-six-functors-basics/lem-sfb-diagonal-completed-free-generator.json",
+  "place": "proof step 1 of lem-sfb-diagonal-completed-free-generator; coefficient identification paragraph (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A section of the sheaf of p-adic integer coefficients is locally an integer plus p to the n times another section, using the finite cyclic quotient sheaf",
+   "results": "PadicInt.appr_spec, PadicInt.lift_sub_val_mem_span, PadicInt.toZMod_spec and related pointwise ring approximation lemmas; no theorem for the reconstructed ring sheaf. The local source analogue PadicInt.exists_isOpen_eq_intCast_add_pow_mul treats concrete continuous functions, whereas the existing quotient comparison directly applies to the reconstructed coefficients.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing sheaf quotient calculation and its normalized finite projection, rather than introducing a separate comparison with a concrete continuous-function sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_zsmul\"",
+   "results": "map_zsmul and AddMonoidHom.map_zsmul preserve integer multiples. These give the algebraic part, not local integer approximation or free-sheaf separation.",
+   "date": "2026-10-27",
+   "verdict": "Use integer-multiple preservation in the combination argument."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*separated|separated.*free|linearMapOfTendsto",
+   "results": "No relevant Mathlib free-sheaf separation theorem. Source PadicIntSheafLinear provides the action-defect criterion; PadicIntLatticeLisse applies it only to finite free targets. Local searches of Sheaf found no local-integer or free-adic-separation statement.",
+   "date": "2026-10-27",
+   "verdict": "The needed coefficient and target assertions are not duplicates of existing statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientFreeGenerator",
+  "date": "2026-10-27",
+  "group": "P9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-completed-free-generator",
+   "place": "proof step 1 of lem-sfb-diagonal-completed-free-generator; coefficient identification paragraph (1)",
+   "via": [
+    "lem-sfb-diagonal-completed-free-generator"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientLocalIntegers",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientLocalIntegers.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedCoefficient_localIntegers",
+  "declarations": [
+   "CategoryTheory.integerApproximationSieve",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedCoefficient_localIntegers"
+  ],
+  "statement": "theorem completedCoefficient_localIntegers (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) (n : ℕ) :\n    let S := (sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n          (Scheme.ProEt.topology X)\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X))\n    ∀ (V : X.ProEtᵒᵖ) (r : S.obj.obj V),\n      integerApproximationSieve S (l ^ (n + 1)) r ∈ Scheme.ProEt.topology X V.unop",
+  "branch": "sheaf-dag",
+  "by": "P9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261027T012919-L-2346904",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261027T012919-L-2346904",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

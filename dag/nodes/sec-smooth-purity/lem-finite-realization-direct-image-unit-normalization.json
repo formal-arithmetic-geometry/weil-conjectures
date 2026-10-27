@@ -1,0 +1,91 @@
+{
+ "id": "lem-finite-realization-direct-image-unit-normalization",
+ "kind": "statement",
+ "title": "The inverse intrinsic realization/direct-image comparison is normalized by complex right-derived units",
+ "statement": "Let A be a finite commutative ring, g:Z→Y a scheme morphism, and d the specified intrinsic derived direct-image comparison. For every cochain complex J of fixed-scalar A-sheaves on Z, the inverse d component, after precomposition by the canonical right-derived unit of intrinsic direct image and postcomposition by the intrinsic localization factor, equals the intrinsic realization factor followed by the localization of the inverse ordinary comparison and the canonical right-derived unit for the constant-module direct image. This holds for every complex, with no K-injectivity hypothesis on J.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 07A6; uniqueness of right-derived comparison from K-injective normalization and naturality."
+ },
+ "stmt_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "On a K-injective complex J, invert the defining normalization of sfIntrinsicDerivedDirectImageComparison, using the K-injective computation isomorphisms for intrinsic direct image and for constant-module direct image. Exactness of the realization equivalence supplies the K-injectivity instance for the realized complex.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the two composites as natural transformations on complexes. Their equality on K-injectives extends along a K-injective resolution: naturality transports the equality, and the localized resolution map is invertible, so cancellation gives equality on every complex. No restriction functor is asserted to preserve K-injectivity.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 07A6; uniqueness of right-derived functors from K-injective representatives.",
+  "by": "agent H8"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRealizationRestrictionCube",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-finite-realization-restriction-cube",
+   "place": "The intrinsic direct-image unit normalization used in Step 3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfIntrinsicDirectImageUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfIntrinsicDirectImageUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison_inv_unitQ_factors",
+  "statement": "theorem sfIntrinsicDerivedDirectImageComparison_inv_unitQ_factors\n    (A : Type u) [CommRing A] [Finite A] {Z Y : Scheme.{u}} (g : Z ⟶ Y) :\n    ∀ J : CochainComplex\n      (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ,\n    (sfIntrinsicModuleEquivalence Y A).functor.mapDerivedCategory.map\n        (Functor.rightDerivedFunctorUnitQ\n          (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g) J) ≫\n      (sfIntrinsicDerivedDirectImageComparison g A).inv.app (DerivedCategory.Q.obj J) ≫\n      (proEtaleConstantModuleDirectImage g A).rightDerivedFunctor.map\n        ((sfIntrinsicModuleEquivalence Z A).functor.mapDerivedCategoryFactors.hom.app J) =\n    (sfIntrinsicModuleEquivalence Y A).functor.mapDerivedCategoryFactors.hom.app\n        ((Functor.mapHomologicalComplex\n          (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g) (.up ℤ)).obj J) ≫\n      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex\n        (sfIntrinsicDirectImageComparison g A).inv (.up ℤ)).app J) ≫\n      (proEtaleConstantModuleDirectImage g A).rightDerivedFunctorUnitQ\n        (((sfIntrinsicModuleEquivalence Z A).functor.mapHomologicalComplex (.up ℤ)).obj J)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T123451-L-2302641",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T123451-L-2302641",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

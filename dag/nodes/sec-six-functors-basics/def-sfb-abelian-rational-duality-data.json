@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-abelian-rational-duality-data",
+ "kind": "definition",
+ "title": "Specified dual abelian varieties and pullback classification",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field]. An abelian variety with specified dual datum consists of a group scheme $A/k$ [def-sc-group-scheme] that is an abelian variety [def-sc-abelian-variety], together with a normalized dual Poincare datum $D$ for $A$ [def-sfb-abelian-dual-poincare-datum]. Use the integral group-scheme homomorphisms of [def-sfb-abelian-rational-hom]. Given specified data $D_A,D_B$, a homomorphism $g:D_B\\to D_A$ classifies pullback by $f:A\\to B$ when $(f\\times1)^*P_B\\cong(1\\times g)^*P_A$ as invertible modules; pullback here is the module inverse image used in the specified dual data [def-pc-module-pullback]. These definitions choose no dual, map, or line bundle from a mere existence assertion.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-pc-module-pullback",
+  "def-sfb-abelian-rational-hom"
+ ],
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §8 pp.36–40 (the normalized Poincare datum), §9 opening p.41 (pullback dual homomorphism). The bundle is only a package of these supplied objects; integral and rational homomorphisms are imported from their existing owning node."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilPairing|weilPairing|rationalHom|TateTwist",
+   "results": "{\"t\": \"2026-10-24T03:54:57Z\", \"tool\": \"grep\", \"query\": \"WeilPairing|weilPairing|rationalHom|TateTwist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching package or rational abelian homomorphism interface; root-pairing results concern root systems. Reuse Grp homs, TensorProduct and AbelianDualPoincareDatum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abelian variety with a chosen dual Poincare line bundle rational homomorphisms",
+   "results": "{\"t\": \"2026-10-24T03:58:29Z\", \"tool\": \"leansearch\", \"query\": \"Abelian variety with a chosen dual Poincare line bundle rational homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.polarizationEquiv_toLinearMap\", \"RootPairing.PolarizationEquiv\", \"RootPairing.Polarization\", \"RootPairing.CoPolarizationIn\", \"AddChar.coe_doubleDualEquiv\", \"AddChar.doubleDualEquiv\", \"RootPairing.toLinearMap_apply_CoPolarization\", \"CharacterModule.dual_rTensor_conj_homEquiv\"], \"digest\": \"65c70ea48b18e1ae\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching package or rational abelian homomorphism interface; root-pairing results concern root systems. Reuse Grp homs, TensorProduct and AbelianDualPoincareDatum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bundled abelian variety with specified dual Poincare datum and rational homomorphism tensor space",
+   "results": "{\"t\": \"2026-10-24T03:58:30Z\", \"tool\": \"leanfinder\", \"query\": \"Bundled abelian variety with specified dual Poincare datum and rational homomorphism tensor space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"RootPairingCat\", \"RootPairing.CoPolarizationIn\", \"RootPairingCat.weight\", \"RootPairingCat.coweight\", \"WeierstrassCurve\", \"Ab\", \"RootPairing\"], \"digest\": \"f4323fdf177fc912\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching package or rational abelian homomorphism interface; root-pairing results concern root systems. Reuse Grp homs, TensorProduct and AbelianDualPoincareDatum."
+  },
+  {
+   "tool": "grep",
+   "query": "rg AbelianVarietyWithDual|abelianRationalHom|rationalHom in Mathlib, WeilConjectures and Sheaf; rg -l abelian variety.*specified dual|variety.*dual.*datum dag/nodes; tools/blueprint_refs.py search dual abelian",
+   "results": "No matching bundled variety-with-dual or rational abelian hom space. Existing def-sfb-abelian-dual-poincare-datum provides the dual data and is reused. Blueprint search: 0 matches. Existing Grp hom, Additive and TensorProduct supply the component constructions. Item ancestor command reports blueprint.from.node = None, matching the item record.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate: package only existing objects; never redefine the dual, a group homomorphism, a tensor product or a Tate module."
+  },
+  {
+   "tool": "grep",
+   "query": "Read landed def-sfb-abelian-rational-hom and Sheaf.AlgebraicGeometry.AbelianVariety.RationalHom after return of immutable head 87cab2c205a9",
+   "results": "The landed module owns abelianHom, abelianRationalHom, abelianHomComp and abelianHomId. It landed after the returned delivery base. Removed both duplicate declarations; public-import RationalHom and use abelianHom in the classifier and consumer theorem.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing integral/rational hom notions; this node now owns only AbelianVarietyWithDual and dualHomClassifies."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-weil-pairing",
+  "date": "2026-10-24",
+  "group": "Q33"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The specified dual varieties and rational homomorphisms in the functorial Weil pairing input; Milne AV I §9 and §13.",
+   "via": [
+    "lem-sfb-abelian-weil-pairing",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.RationalDualityData",
+  "declaration": "AlgebraicGeometry.AbelianVarietyWithDual",
+  "declarations": [
+   "AlgebraicGeometry.AbelianVarietyWithDual",
+   "AlgebraicGeometry.AbelianVarietyWithDual.dualHomClassifies"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/RationalDualityData.lean",
+  "statement": "structure AbelianVarietyWithDual (k : Type u) [Field k]",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06a19816c",
+  "group": "Q33",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06a19816c",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Re-delivery of 87cab2c205a9 (returned H4/H12/H9). RationalDualityData now public-imports the landed RationalHom (def-sfb-abelian-rational-hom, N9) and declares only AbelianVarietyWithDual + dualHomClassifies (using abelianHom). The item changes only abelianIntegralHom->abelianHom and adds owner public imports. The new node's statement/stmt_deps/declarations are narrowed and cite def-sfb-abelian-rational-hom. Item stmt_deps add rational-hom, dual-poincare-datum and sk-d-ab-tate (all on base; base 04:26 UTC > landing 04:12 UTC). Both lean.statement fields verbatim; no duplicate names in live lean; no lines >100; report has Worker report + Second reading by Q33. Item node otherwise identical to live. Math re-checked vs node and Milne I 8.5/§9/§13: d pinned by the Poincare-pullback iff; dQ/cQ/cD/v/vD pinned on pure tensors; Q_l(1) = rationalTateModule l (Additive k^x), 1-dim; e existential as in the node, bijective + flip bijective, rational adjoint; alternation for every invertible L via ClassifiesAbelianDifference; two-sided nondegeneracy under IsIsogeny. Edge cases A=0, l=2, char 0, trivial L, l | deg. No compile (no file changed); relied on the worker's per-file compiles and joint-import probe with PolarizationCalculusOverField."
+ }
+}

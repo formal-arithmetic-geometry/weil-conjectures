@@ -1,0 +1,142 @@
+{
+ "id": "lem-sf-finite-intrinsic-verdier-biduality",
+ "kind": "statement",
+ "title": "Canonical finite intrinsic geometric biduality",
+ "statement": "Under the finite-field, prime-to-characteristic, finite coefficient extension and separated finite-type scheme hypotheses, fix n and any normalized intrinsic tensor presentation a and signed symmetry s. Assume symmetry naturality and first-variable evaluation naturality. For each intrinsic bounded constructible finite-Tor M, the actual map delta defined by the transpose of signed evaluation into the prescribed finite dualizing object is an isomorphism. No integral complete object or integral comparison is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "Second paragraph: the canonical finite double-dual maps are isomorphisms."
+ },
+ "stmt_deps": [
+  "def-sf-integral-verdier-models",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proetale-tor-amplitude",
+  "prop-coef-integral-dualizing"
+ ],
+ "proof": [
+  {
+   "text": "Take K to be the inverse image of M under the canonical intrinsic derived equivalence, and let i:FK ≅ M be its counit. The fixed-scalar finite-Tor constructible predicate is defined by F. Transport bounded constructibility along i inverse and transport the supplied interval by composing every representative isomorphism with i. Thus K belongs to the finite-stage domain without an etale-origin argument.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the pro-etale clause of finite_stage_verdier_biduality to K. Extract its normalized ambient pairing h and the invertibility of its specified biduality arrow.",
+   "uses": [
+    "thm-fix-general-biduality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The actual intrinsic exceptional functor is defined by conjugating the fixed-scalar functor with the canonical realization equivalences. Map the realization unit and the inverse image of finiteDualizingIntrinsicUnit through the fixed-scalar exceptional functor and then through realization. This constructs the isomorphism w:FW ≅ integralDualizingFiniteTerm, with the compactification proofs identified by proof irrelevance.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finiteIntrinsicBidualComparison to h,w,i. It gives c with i.hom followed by intrinsic delta equal to F of the fixed-scalar biduality arrow followed by c.hom. The right side is an isomorphism by step 2 and functoriality; cancel i.hom to conclude.",
+   "uses": [
+    "lem-sf-finite-intrinsic-bidual-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-proetale-inverse-image",
+  "thm-fix-general-biduality",
+  "def-weil-exceptional-inverse-image",
+  "lem-coef-finite-dualizing",
+  "lem-sf-finite-intrinsic-bidual-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "Second paragraph: finite double-dual maps are isomorphisms; J9 realization-counit proof from the fixed-scalar theorem and the normalized structural comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SignedSymmetry|finiteIntrinsicVerdier|reductionPairing|ringedSiteBidual",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlatIndependentCoefficients\", \"IsIso\", \"bidual\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent signed derived tensor presentations and evaluation naturality; intrinsic finite Verdier Tor bounds and biduality; compatibility of scalar reduction with evaluation",
+   "results": "8 hits: Module.Dual.eval_naturality, contractLeft, DFinsupp.comul_comp_lapply, dualTensorHomEquiv, MvPolynomial.scalarRTensor_apply_tmul_apply, LinearMap.IsPerfPair.dualEval, FGModuleCat.FGModuleCatEvaluation, PiTensorProduct.dualDistrib_apply",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralVerdier",
+  "date": "2026-10-25",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-integral-verdier",
+   "place": "Second paragraph: the canonical finite double-dual maps are isomorphisms.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteIntrinsicVerdierBiduality",
+  "file": "lean/Sheaf/SixFunctors/FiniteIntrinsicVerdierBiduality.lean",
+  "declaration": "WeilConjectures.IntegralVerdier.finiteIntrinsicVerdier_biduality",
+  "statement": "theorem finiteIntrinsicVerdier_biduality (n : ℕ)\n    (a : IntegralHom.TensorPresentation.{u, u} X (integralCoefficientCommRingSheaf l E X n))\n    (s : SignedSymmetry X (integralCoefficientCommRingSheaf l E X n) a)\n    (hs : ∀ (K L K' L' : DerivedCategory (scalarReductionTarget l E X n))\n      (f : K ⟶ K') (g : L ⟶ L'),\n      a.tensor.map (Prod.mkHom f g) ≫ (s.swap K' L').hom =\n        (s.swap K L).hom ≫ a.tensor.map (Prod.mkHom g f))\n    (he : ∀ (K K' W : DerivedCategory (scalarReductionTarget l E X n))\n      (f : K' ⟶ K),\n      a.tensor.map (Prod.mkHom (𝟙 K')\n        ((IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map\n          (Prod.mkHom f.op (𝟙 W)))) ≫ (a.adjunction K').counit.app W =\n      a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app W)\n    (M : DerivedCategory (scalarReductionTarget l E X n))\n    (hM : intrinsicFiniteTorsionConstructible l E (n + 1) (by omega) X M)\n    (p q : ℤ) (hTor : HasProEtaleTorAmplitude X\n      (Padic.coefficientExtensionRing l E (n + 1)) M p q) :\n    IsIso (delta X a s (integralDualizingFiniteTerm l E D X n) M)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6b177",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T043424-L-1751131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T202331-L-2708363",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

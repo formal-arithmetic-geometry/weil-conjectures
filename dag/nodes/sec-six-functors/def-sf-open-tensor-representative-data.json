@@ -1,0 +1,134 @@
+{
+ "id": "def-sf-open-tensor-representative-data",
+ "kind": "definition",
+ "title": "Normalized open tensor data on arbitrary one-K-flat representatives",
+ "status": "split",
+ "statement": "For two small ringed sites $(C,J,R)$ and $(C',J',R')$ in a common size bound [def-weil-size-convention], [def-weil-sheaf-of-modules-category], use their ordinary unbounded derived categories and recorded internal Homs [def-weil-abstract-derived-category], [def-pur-derived-internal-hom], closed tensor structures $A,A'$ and simultaneous K-flat models $T,T'$ [def-coef-ringed-tensor-hom-model]. Use actual sheafified module tensors, pure sections and signed direct-sum total tensors [def-coef-semilinear-system-models]. Fix exact additive module functors $F:\\operatorname{Mod}(R')\\to\\operatorname{Mod}(R)$ and $G:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R')$, an adjunction $F\\dashv G$, a site functor $H:C\\to C'$, and specified section pull maps $N(V)\\to(GN)(HV)$. Define normalized open tensor representative data, relative to these parameters, to consist of: (i) a derived restriction/tensor isomorphism with its ordinary, signed-chain, K-flat and derived representative models, whose ordinary map carries pulled-back pure tensors to the pure tensor of the pulled-back sections; (ii) ordinary isomorphisms $FM\\otimes N\\cong F(M\\otimes GN)$ whose inverses have adjoint transpose $(\\eta_M\\otimes1)$ followed by the inverse restriction/tensor comparison; (iii) chain isomorphisms $\\operatorname{Tot}(FC\\otimes P)\\cong F\\operatorname{Tot}(C\\otimes GP)$ whose restriction to every $(a,b)$ signed total summand is the ordinary comparison; (iv) the existing natural one-K-flat tensor comparisons on both sites, agreeing with $T,T'$ [def-zl-ringed-derived-closed-symmetric-monoidal-data], and preservation by $G$ of flat terms on flat-term K-flat complexes; (v) a whole-derived natural isomorphism $\\gamma:FM\\otimes^LN\\cong F(M\\otimes^LGN)$ with the adjoint-unit inverse normalization [def-weil-exact-derived-adjunction], whose value on every arbitrary complex $C$ and flat-term K-flat $P$ is the localization of the chain map in (iii) through the comparisons in (iv). This defines data only, without asserting its existence for arbitrary $F,G$. For the actual open adjunction the specified section pull is the inverse-image unit; on a sequence site all chain maps are module morphisms on the full site, hence include its horizontal semilinear restrictions.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-semilinear-system-models",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2; representative clauses of lem-coef-support-open-tensor-model proof steps 5–6, based on Stacks 0E8I, 0GL1, 07A4 and 06YT."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "One flat-term K-flat factor tensor model for arbitrary complexes and normalized open extension by zero tensor comparison on a ringed site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  [Module.Flat R M, ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I)),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ[R] x i = 0 → TensorProduct.VanishesT\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\x\"}\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S],\\n  Module.Flat S (TensorProduct R S M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"Module.Flat.iff_lTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived open extension tensor comparison represented on each signed total summand with only the second factor K flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.tensorKerEquiv_apply\", \"module\": \"Mathlib.RingTheory.Flat.Equalizer\", \"type\": \"[Module.Flat R M] (x : M ⊗[R] ker f) : tensorKerEquiv S M f x = tensorKer S M f x\", \"doc\": \"Given commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, an $ S $-module $ M $ satisfying scalar tower compatibility $ \\\\mathrm{IsScalarTower}(R, S, M) $, $ R $-modules $ N, P $, and an $ R\"}\n  {\"name\": \"TensorProduct.LinearIndepOn.tmul_of_flat_left\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Module.Flat R M] (hv : LinearIndepOn R v s) (hw : LinearIndepOn R w t) :\\n  LinearIndepOn R (fun i : ι × κ ↦ v i.1 ⊗ₜ[R] w i.2) (s ×ˢ t)\", \"doc\": \"Let $R$ be a commutative semiring, and let $M$ and $N$ be $R$-modules. Suppose $M$ is a flat $R$-module. Let $(v_i)_{i \\\\in s}$ be a linearly independent family of vectors in $M$ and $(w_j)_{j \\\\in t}$ \"}\n  {\"name\": \"TensorProduct.LinearIndepOn.tmul_of_flat_right\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Module.Flat R N] (hv : LinearIndepOn R v s) (hw : LinearIndepOn R w t) :\\n  LinearIndepOn R (fun i : ι × κ ↦ v i.1 ⊗ₜ[R] w i.2) (s ×ˢ t)\", \"doc\": \"If $ v $ and $ w $ are linearly independent families of vectors over a commutative semiring $ R $, indexed by sets $ s $ and $ t $ respectively, and $ N $ is a flat $ R $-module, then the family $ (v_\"}\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] : Module.Flat S (S ⊗[R] M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"LinearMap.tensorEqLocusEquiv\", \"module\": \"Mathlib.RingTheory.Flat.Equalizer\", \"type\": \"[Module.Flat R M] :\\n  M ⊗[R] eqLocus f g ≃ₗ[S] eqLocus (AlgebraTensorModule.lTensor S M f) (AlgebraTensorModule.lTensor S M g)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an $ S $-module $ M $ flat over $ R $, and $ R $-linear maps $ f,g:N\\\\to P $, this establishes a linear equivalence between the tensor product $ M \\\\otimes_R \\\\{n\"}\n  {\"name\": \"Module.Flat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{S} [CommSemiring S] [Algebra R S] [Module S M] [IsScalarTower R S M] [Flat S M] [Flat R N] : Flat S (M ⊗[R] N)\", \"doc\": \"Let $R$ and $S$ be commutative semirings, and let $S$ be an $R$-algebra. Let $M$ be an $S$-module and $N$ be an $R$-module. Assume that the scalar actions of $R$ and $S$ on $M$ are compatible (i.e., t\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"Module.Flat.tensorSubmoduleAlgebraEquivMul\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(I : Submodule R A) : I ⊗[R] submoduleAlgebra e ≃ₗ[R] I * submoduleAlgebra e\", \"doc\": \"For a flat module $ M $ over a commutative semiring $ R $, the tensor product of the submodule $ I $ with the submodule algebra $ e $ over $ R $ is isomorphic to the product of $ I $ and the submodule\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "OneFlatTensorModel|OpenTensorModel|one.*[Kk][Ff]lat.*[Mm]odel",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "OneFlatTensorModel|OpenTensorModel|one.K.flat lean/WeilConjectures",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/TensorCounitOneKFlatCoordinates.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/SingleComplexOpenCoordinateTransport.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures/AlgebraicGeometry/AffineCoordinateComparisonChartCocycle.lean\n",
+   "date": "2026-10-22",
+   "verdict": "Existing general one-K-flat tensor comparisons in RingedDerivedClosedSymmetricMonoidal are reused; no existing normalized-open representative data package."
+  },
+  {
+   "tool": "grep",
+   "query": "OneFlatTensorModel|OpenTensorModel|one.K.flat lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/RingedTensorComparisonExtension.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/DerivedInternalHomSectionsModel.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/OneKFlatChainTranspose.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/RingedHomCompositionModel.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/IntegralScalarExtensionConstructible.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/FlatInternalHomEvaluationRoof.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/ScalarPullbackStrictConeNaturality.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/FlatScalarEvaluationModel.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/RingedDerivedClosedSymmetricMonoidal.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Algebra/Homology/RingedDerivedTensorNative.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/KoszulReconstructionModels.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/FiniteProjectiveTensorProducts.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/AdicConstructibleFiniteReductions.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SmoothPurityCoefficientTowersAbelian.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/ProjectionFormulaInverseNaturality.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/CompleteCoefficientDatum.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SfCbcExtensionZeroCompletion.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TensorCounitOneKFlatCoordinates.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/LevelwiseAdicTruncations.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/FrobeniusCoefficientReductionCoherence.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/StrictHomNumeratorTranspose.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/DerivedInternalHomFilteredColimit.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/InternalScalarPullbackNormalization.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SiteDerivedTensorRestriction.lean\n",
+   "date": "2026-10-22",
+   "verdict": "Existing general one-K-flat tensor comparisons in RingedDerivedClosedSymmetricMonoidal are reused; no existing normalized-open representative data package."
+  },
+  {
+   "tool": "grep",
+   "query": "OpenTensorModel|open-tensor-representative-data dag/nodes",
+   "results": "no hits",
+   "date": "2026-10-22",
+   "verdict": "Existing general one-K-flat tensor comparisons in RingedDerivedClosedSymmetricMonoidal are reused; no existing normalized-open representative data package."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "open tensor",
+   "results": "lem-weil-finite-compact-projection-formula; thm-sf-pf-proetale; 2 blueprint nodes match. Neither is this representative-data definition.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-support-open-tensor-model",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Paragraph 2, normalized open tensor representative data in the compact-support reduction realization.",
+   "via": [
+    "lem-coef-support-open-tensor-model",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenTensorRepresentativeData",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.OpenTensorModel",
+  "declarations": [
+   "WeilConjectures.CoefSupportOpenTensor.OpenTensorModel"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenTensorRepresentativeData.lean",
+  "statement": "structure OpenTensorModel",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Pure data packaging the normalized-open representative clauses. Existing one-K-flat tensor-comparison definitions are reused, not redefined; existence is stated only by the owning compact-support/open-model theorem. H4 interface diagnosis: lem-sf-open-tensor-normalization's Mode.systems Assertion.gamma is relative to Operations.tensorX/tensorU of ProjectionRestriction.TensorModel. That type supplies a bifunctor and simultaneous resolving-pair representative/descent data only; it is not the CoefficientClosedStructure with the prescribed internal Hom and CoefficientTensorModels used by CoefficientDerivedSystemTensors, and provides no conversion to those fixed structures or one-K-flat comparison for an arbitrary first complex. Its restrictRing, open restriction and chosen extension also use the localized-site presentation rather than the native varying-ring pull/extension functors. Thus Assertion.gamma cannot directly be used at the required tensor and functor types. OpenTensorModel is the representative refinement at those recorded native interfaces, not a second definition of tensor: restrictionPure fixes the ordinary restriction comparison, ordinary_inverse and summand fix its signed total representative, and derived_model fixes its localization. gamma_inverse is exactly Assertion.gamma_inverse's open-unit adjoint transpose, using the same exactDerivedAdjunction. Under representative-preserving tensor and open-adjunction comparisons the inverse transposes agree, hence adjunction injectivity identifies the transported gamma with Assertion.gamma. The source normalization and all unbounded inputs are retained without assuming equality of independently presented tensor functors."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f28eca37",
+  "group": "Q155",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f28eca37",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Re-delivery after the 771bdcbd RETURN; every requested correction is applied. Item stmt_deps: lem-coef-derived-system-evaluation-calculus -> def-coef-derived-system-calculus-data; lem-sf-ringed-derived-closed-symmetric-monoidal -> def-zl-ringed-derived-closed-symmetric-monoidal-data; native-system-transition dropped with its import; def-weil-exact-derived-adjunction, def-weil-pbc-bounded-constructible-tower, def-coef-tower-trace-constructions, def-sf-scalar-reduction-categories-restriction and prop-pur-kinjective-resolutions-exist added. New existing:true node def-coef-constant-scalar-tower-sections (five live CoefTowerTraceRectification defs, verbatim, not double-owned). SectionsModel block moved unchanged into new def-coef-support-point-sections-data (field equations factored as named Props with identical bodies). Both earlier new nodes re-cite the definition nodes. H4 note on lem-sf-open-tensor-normalization's TensorModel/localized interface checked against live source: accurate. Mechanical finding prop-pur-kinjective-resolutions-exist: genuine use of the theorem's conclusion (.1 IsGrothendieckAbelian instance needed to form quotientSections in conjunct 3) -> PASS on that point. Maths re-checked: tower = actual composite with all m>=n transitions including m=n; point sections pinned by derived-unit equations, no limit; gamma pinned by gamma_inverse/restrictionPure/ordinary_inverse/summand/derived_model; GammaEvaluation arrows checked; no extra hypotheses or universe restriction; edge cases X empty, j=id, K=0, m=n, nonflat quotients, unbounded inputs kept. Five lean.statement strings verbatim; dep records identical to live; no name clash. Advisory: Additive/K-injective instances for integralSections/levelSections come from the theorem-owned CoefTowerTraceRectification module (same pattern as base def-coef-tower-trace-constructions); possibly redundant OrdinaryModuleDerivedInternalHom import. No file changed, no compile run."
+ }
+}

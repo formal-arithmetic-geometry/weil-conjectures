@@ -1,0 +1,229 @@
+{
+ "id": "lem-per-associated-log-arbitrary-scheme",
+ "kind": "statement",
+ "title": "Integral saturated stalks and section monoids of fs log structures on arbitrary schemes",
+ "statement": "Let $X$ be any scheme, with no Noetherian hypothesis. A log structure on $X$ means a sheaf of commutative monoids $M$ on the small etale site [def-weil-pbc-etale-site] with $\\alpha:M\\to(\\mathcal O_X,\\cdot)$ inducing an isomorphism on units, as in the arbitrary-scheme convention of [def-trf-log-ideal-chart-presentation]. For an etale $U\\to X$, a finitely generated integral commutative monoid $P$ and a homomorphism $c:P\\to\\Gamma(U,M)$, put $\\beta=\\alpha c:P\\to\\Gamma(U,\\mathcal O_U)$ and let $L_U(P,\\beta)$ be the associated log structure of [lem-per-integral-chart-logification-thickening]. Then $c$ is a chart when the homomorphism $L_U(P,\\beta)\\to M|_U$ corresponding to $c$ under the universal property of [lem-per-integral-chart-logification-thickening] (for the identity of $U$) is an isomorphism. The log structure $M$ is fs when it admits etale-local charts by fine saturated monoids (finitely generated monoids embedding in their group completions and closed under positive roots there) [def-trf-fs-log-blowup]. If $M$ is fs, then for every geometric point $\\bar x$ [def-weil-geometric-point] the stalk $M_{\\bar x}$, and for every etale $U\\to X$ the section monoid $\\Gamma(U,M)$, are integral and saturated: each embeds in its group completion, and an element $g$ of that group completion with $mg$ in the monoid for some integer $m>0$ lies in the monoid. No finite generation of these section monoids is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.1, printed p.69, and VIII 3.3.3--3.3.6, printed pp.106--107; arbitrary-scheme associated-log conventions, referring to Kato (1988), section 1. The general stalk and section formulation is an agent refinement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-trf-log-ideal-chart-presentation",
+  "lem-per-integral-chart-logification-thickening",
+  "def-weil-geometric-point",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar x$ and an fs chart on a pointed etale neighbourhood, using the definition of fs in the statement. By [lem-per-integral-chart-logification-thickening], the chart identifies $M_{\\bar x}$ with $C=P\\oplus_E G$, where $A=\\mathcal O_{X,\\bar x}$, $G=A^\\times$, $E=\\beta^{-1}(A^\\times)$ and $f:E\\to G$ is induced by $\\beta$. Here $P$ is finitely generated, integral and saturated. The stalk formula has no Noetherian hypothesis. Apply [lem-per-integral-monoid-unit-pushout] to embed $C$ in $H=(P^{\\rm gp}\\times G)/\\{(e,-f^{\\rm gp}(e)):e\\in E^{\\rm gp}\\}$, now writing all monoids additively. This group is $C^{\\rm gp}$: a homomorphism from $C$ to an abelian group is exactly a pair of homomorphisms from $P$ and $G$ agreeing on $E$, and extending the first to $P^{\\rm gp}$ gives precisely the displayed quotient universal property. In particular the stalk is integral.",
+   "uses": [
+    "lem-per-integral-chart-logification-thickening",
+    "lem-per-integral-monoid-unit-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, p.69; VIII 3.3.2--3.3.4, pp.106--107; agent calculation from the associated-log stalk formula"
+   }
+  },
+  {
+   "text": "For saturation of that stalk, take $h=[(z,g)]\\in H$, $z\\in P^{\\rm gp}$, with $nh=[(p,v)]\\in C$, $p\\in P$, $n>0$. The quotient relation in $H$ implies $nz-p=e_1-e_2$ for some $e_1,e_2\\in E$: every element of $E^{\\rm gp}$ is such a difference. Hence $n(z+e_2)=p+e_1+(n-1)e_2\\in P$. Saturation of $P$ gives $z+e_2\\in P$. But $h=[(z+e_2,g-f(e_2))]$, which belongs to $C$. This proves saturation of every geometric stalk. No divisibility or torsion-freeness of $G$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, p.101, saturation convention; agent three-line quotient calculation"
+   }
+  },
+  {
+   "text": "Let $U\\to X$ be any etale object and put $B=M(U)$, additively. If $a+c=b+c$ in $B$, every geometric germ satisfies this equality in an integral stalk, so cancellation there gives $a_{\\bar x}=b_{\\bar x}$ for every geometric point and every lift to $U$. The exact section-equality statement of [lem-weil-pbc-sets-sections-geometric-germ-ext], applied to the underlying set sheaf of $M$, gives $a=b$. Thus $B$ is cancellative. In the explicit group completion by differences, equality of the images of $a,b\\in B$ means $a+c=b+c$ for some $c\\in B$; cancellation proves that $B\\to B^{\\rm gp}$ is injective. This applies to every etale object, hence also to all overlaps used below.",
+   "uses": [
+    "lem-weil-pbc-sets-sections-geometric-germ-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03PU (theorem-exactness-stalks), injectivity; explicit cancellation argument"
+   }
+  },
+  {
+   "text": "Take $g\\in B^{\\rm gp}$ and $n>0$ with $ng\\in B$. Write $g=a-b$ with $a,b\\in B$. At every geometric point with lift to $U$, its image $g_{\\bar x}=a_{\\bar x}-b_{\\bar x}$ in $M_{\\bar x}^{\\rm gp}$ has $ng_{\\bar x}\\in M_{\\bar x}$, so Step 2 gives $d_{\\bar x}\\in M_{\\bar x}$ representing $g_{\\bar x}$. Integrality gives $d_{\\bar x}+b_{\\bar x}=a_{\\bar x}$ in the stalk. Stalks are the neighbourhood colimits of [def-weil-pbc-geometric-stalks]. By [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] and the representatives and eventual-equality clauses of [lem-weil-pbc-filtered-colimit-sets-elementwise], choose a pointed etale refinement $V\\to U$ and $d_V\\in M(V)$ with $d_V+b|_V=a|_V$. Work on small skeletons in the enlarged universe of [def-weil-size-convention]. Choosing such a neighbourhood for a geometric point over each point of $U$ gives a jointly surjective etale covering; no finite subcover is needed.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03PU (theorem-exactness-stalks), local-neighbourhood construction; filtered stalk argument"
+   }
+  },
+  {
+   "text": "On $V\\times_U W$, the two local representatives satisfy $d_V+b=a=d_W+b$. Cancellation for sections, proved in Step 3, gives $d_V=d_W$ on this overlap. The equalizer sheaf axiom in [def-weil-pbc-etale-sheaf-of-sets] therefore glues them to $d\\in M(U)$, and also gives $d+b=a$ globally. It follows that $g=a-b=d$ in $B^{\\rm gp}$, proving saturation. For $U=\\varnothing$, the empty-cover sheaf axiom makes $M(U)$ the one-element monoid, which is integral saturated. This argument neither asserts finite generation of sections nor imposes any Noetherian condition on $X$.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition Tag 00VM (definition-sheaf-sets), applied to the etale coverings of Tag 0215; agent gluing argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-integral-chart-logification-thickening",
+  "lem-per-integral-monoid-unit-pushout",
+  "lem-weil-pbc-sets-sections-geometric-germ-ext",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69, and VIII 3.1.17 and 3.3.2--3.3.6, pp.101,106--107; arbitrary-scheme refinement by explicit quotient calculation and Stacks Tag 03PU neighbourhood/gluing argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A prelog monoid on an arbitrary scheme has an associated log structure left adjoint to forgetting log structures with geometric stalk pushout formula",
+   "results": "{\"t\": \"2026-10-24T01:33:33Z\", \"tool\": \"leanfinder\", \"query\": \"A prelog monoid on an arbitrary scheme has an associated log structure left adjoint to forgetting log structures with geometric stalk pushout formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.instReflectiveLocallyRingedSpaceOppositeCommRingCatToLocallyRingedSpace\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\"], \"digest\": \"9b71b35c1fdc10d5\"}; Read the returned signatures. No returned declaration states the logarithmic assertion. Scheme adjunctions, ordinary stalks, module finite presentation and manifold charts do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-24T01:33:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures. No returned declaration states the logarithmic assertion. Scheme adjunctions, ordinary stalks, module finite presentation and manifold charts do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|prelog|logification",
+   "results": "{\"t\": \"2026-10-24T01:33:32Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|prelog|logification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures. No returned declaration states the logarithmic assertion. Scheme adjunctions, ordinary stalks, module finite presentation and manifold charts do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated logarithmic structure of a prelog scheme geometric stalks saturated monoids without Noetherian hypothesis",
+   "results": "{\"t\": \"2026-10-24T01:33:32Z\", \"tool\": \"leansearch\", \"query\": \"Associated logarithmic structure of a prelog scheme geometric stalks saturated monoids without Noetherian hypothesis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.submonoidPresheafOfStalk\", \"TopCat.Presheaf.submonoidPresheafOfStalk_obj\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.stalkwise\", \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.toLocallyRingedSpace\"], \"digest\": \"f41729909fc0b31f\"}; Read the returned signatures. No returned declaration states the logarithmic assertion. Scheme adjunctions, ordinary stalks, module finite presentation and manifold charts do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|prelog|logification",
+   "results": "{\"t\": \"2026-10-24T02:05:16Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|prelog|logification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures. Ordinary scheme ring stalks, submonoid presheaves of ring sheaves, smooth manifold units and topological sheaf mono tests do not state the logarithmic fs assertion or section saturation in group completion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a sheaf of cancellative saturated monoids are cancellative and saturated when all stalks are",
+   "results": "{\"t\": \"2026-10-24T02:05:16Z\", \"tool\": \"leansearch\", \"query\": \"Sections of a sheaf of cancellative saturated monoids are cancellative and saturated when all stalks are\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"TopCat.Presheaf.submonoidPresheafOfStalk\", \"TopCat.Presheaf.submonoidPresheafOfStalk_obj\", \"TopCat.Presheaf.mono_of_stalk_mono\", \"SheafOfModules.sections\", \"TopCat.Presheaf.mono_iff_stalk_mono\", \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\", \"AlgebraicGeometry.commRingStructureSheafInTypeObj\"], \"digest\": \"7ca74f77671d7d2e\"}; Read all returned signatures. Ordinary scheme ring stalks, submonoid presheaves of ring sheaves, smooth manifold units and topological sheaf mono tests do not state the logarithmic fs assertion or section saturation in group completion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-24T02:05:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures. Ordinary scheme ring stalks, submonoid presheaves of ring sheaves, smooth manifold units and topological sheaf mono tests do not state the logarithmic fs assertion or section saturation in group completion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks and all sections of a fine saturated logarithmic structure are integral saturated commutative monoids",
+   "results": "{\"t\": \"2026-10-24T02:05:18Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric stalks and all sections of a fine saturated logarithmic structure are integral saturated commutative monoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\"], \"digest\": \"32bc6d5261f5ec0c\"}; Read all returned signatures. Ordinary scheme ring stalks, submonoid presheaves of ring sheaves, smooth manifold units and topological sheaf mono tests do not state the logarithmic fs assertion or section saturation in group completion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale sheaf of commutative monoids cancellation and closure under positive roots in the group completion follow from the same properties of all geometric stalks",
+   "results": "{\"t\": \"2026-10-24T02:05:48Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale sheaf of commutative monoids cancellation and closure under positive roots in the group completion follow from the same properties of all geometric stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafCommRing.isUnit_stalk_iff\", \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"TopCat.Presheaf.submonoidPresheafOfStalk\", \"ModuleCat.Tilde.isUnit_toStalk\", \"AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ\", \"AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ\", \"TopCat.Presheaf.submonoidPresheafOfStalk_obj\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"5c43a59ba04ba7f5\"}; Read all returned signatures. Ordinary scheme ring stalks, submonoid presheaves of ring sheaves, smooth manifold units and topological sheaf mono tests do not state the logarithmic fs assertion or section saturation in group completion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-kummer-saturated-pushout-algebra",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-pair purity geometry via absolute equivariant modification, Kummer boundary restriction: ILO VI 1.1, printed p.69, and VIII 3.3.3--3.3.6, printed pp.106--107; arbitrary-scheme associated-log conventions, referring to Kato (1988), section 1. The general stalk and section formulation is an agent refinement.",
+   "via": [
+    "lem-per-kummer-saturated-pushout-algebra",
+    "lem-per-kummer-boundary-restriction",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-associated-log-arbitrary-scheme",
+  "worker": "stage1",
+  "summary": "Proved fs stalk integrality by the existing arbitrary-scheme chart formula and mixed pushout embedding, saturation by an explicit three-line quotient calculation, and section integrality/saturation by geometric germs and local fraction gluing. Reuses existing nodes throughout; creates no nodes and changes no statement.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3, inherited regular-pair/Kummer chart ancestry: this item supplies integral saturated target section monoids for the fs pushout universal property. The latest ancestor proof was read; no alternative route is introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-sections-geometric-germ-ext",
+    "why": "Generic equality-of-sections test by all geometric germs, for underlying set sheaves; no log-specific fact or replacement perverse route is taken from this other unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-sections-geometric-germ-ext"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-aaa5df2d3",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-aaa5df2d3 (reviewer sub-agent of L); spot-checked: I read the item in full (statement unchanged, 5 steps, 0 new nodes) and every cited statement. ILO VI 1.1 (p.69, PDF p.75): étale convention, fs = étale-local fs charts, locally Noetherian by default; the arbitrary-scheme form is correctly labelled an agent refinement. Step 1: the thickening node's stalk formula holds on any scheme. The pushout node applies (P integral, E submonoid, f arbitrary) and gives C into H; H = C^gp by the universal property, which I checked. Step 2: nz-p=e1-e2, so n(z+e2)=p+e1+(n-1)e2 is in P; saturation of P gives z+e2 in P and h=[(z+e2,g-f(e2))] in C. No torsion-freeness is used. Step 3: cancellation in the integral stalks gives equal germs at every geometric point and lift, and the 03PU germ node gives a=b. Step 4: Step-2 roots, filtered-colimit clauses (1),(3), cofilteredness and the size convention give local d_V with d_V+b=a; jointly surjective cover. Step 5: overlap cancellation, then the equalizer axiom glues d, and d+b=a gives g=d; empty cover handled. Small cases checked: empty U, trivial log structure with torsion, P=0, n=1, non-injective f. The citer lem-per-kummer-saturated-pushout-algebra uses exactly stalk integrality and section integral-saturation. No duplicate: lem-per-fs-log-sections-saturated is Noetherian and sections-only. Batch-5: def-trf-fs-log-blowup is a general log definition, and the item's live consumers are on the sfb constructibility chain (det-thm-sf-ctf-stability-direct-images), not inside the trace-formula or Poincaré proofs, so it is accepted. Dropped-route check: the thickening and unit-pushout nodes are live, generic and cited by many sfb/per/trf nodes. lem-per-artin-gabber-affine-curve is not an ancestor of this item on the snapshot DAG, so the 2026-10-19 restriction on that node and its three children does not apply; both nodes are justified at Step 1. Maintainer note: the inherited blueprint.from (artin-gabber via the dropped Q̄_ℓ middle-t-structure route) is stale metadata that the ancestor tool still reports. tool_use lem-weil-pbc-sets-sections-geometric-germ-ext (generic 03PU) accepted. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AssociatedLogArbitraryScheme",
+  "declaration": "AlgebraicGeometry.EtaleLogStructure.integral_saturated_of_isFineSaturated",
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedLogArbitraryScheme.lean",
+  "statement": "theorem EtaleLogStructure.integral_saturated_of_isFineSaturated {X : Scheme.{u}} (M : EtaleLogStructure X) (hM : M.IsFineSaturated) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), Function.Injective (Algebra.GrothendieckGroup.of (M := M.toEtalePrelogStructure.stalk x)) ∧ ∀ (g : Algebra.GrothendieckGroup (M.toEtalePrelogStructure.stalk x)) (n : ℕ), 0 < n → (∃ m : M.toEtalePrelogStructure.stalk x, Algebra.GrothendieckGroup.of m = g ^ n) → ∃ m : M.toEtalePrelogStructure.stalk x, Algebra.GrothendieckGroup.of m = g) ∧ ∀ U : X.Etale, Function.Injective (Algebra.GrothendieckGroup.of (M := M.monoidSheaf.obj.obj (op U))) ∧ ∀ (g : Algebra.GrothendieckGroup (M.monoidSheaf.obj.obj (op U))) (n : ℕ), 0 < n → (∃ m : M.monoidSheaf.obj.obj (op U), Algebra.GrothendieckGroup.of m = g ^ n) → ∃ m : M.monoidSheaf.obj.obj (op U), Algebra.GrothendieckGroup.of m = g",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64a5c1565",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Single theorem integral_saturated_of_isFineSaturated, sorry-only; item node differs from live only in lean (live null); 5 stmt_dep records byte-identical to live; statement verbatim in file. Clause check: arbitrary Scheme.{u}, recorded EtaleLogStructure (no Noetherian, defined for all schemes), IsFineSaturated = étale-local IsChart by IsFineSaturatedMonoid (stalkwise associated-log iso, matching the node), no injectivity or extra hypotheses; conclusions: geometric stalks (inline Ω : Type u encoding, pointedEtaleStalk) and all U : X.Etale sections, each Injective GrothendieckGroup.of + positive-root closure; no finite generation. Edge cases (empty X/U, n=0/1, torsion units, non-qc U, universes) ok. No dup: lem-per-fs-log-sections-saturated is Noetherian/sections-only with lean null; no other saturated-monoid predicate. Docstrings carry source, blueprint and the 5 proof steps; proof-only imports exist; unit-pushout node has no lean record. Advisory: redundant transitive PointedEtaleStalk import. No recompile (no file changed); worker compile 7.4/5.5 s."
+ }
+}

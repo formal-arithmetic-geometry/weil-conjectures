@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-ring-complex-endomorphism-self-dual",
+ "kind": "statement",
+ "title": "Endomorphisms of the ring complex are self-dual under evaluation",
+ "statement": "For a small site (C,J) and a sheaf R of commutative rings, let U=R[0] be the ring complex and e:Hom(U,U)≅U the evaluation-at-one isomorphism [def-weil-pbc-ringed-completion-unit], with the actual internal Hom complex [def-pur-hom-complex]. For every endomorphism a:U→U, contravariant Hom(a,U) followed by e.hom equals e.hom followed by a. No nonzero hypothesis on R or nonempty hypothesis on the site is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-completion-unit",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, section-hom-complexes; sites-modules.tex, internal Hom and evaluation on the coefficient ring module"
+ },
+ "proof": [
+  {
+   "text": "For endomorphisms f and g of the coefficient ring module, linearity gives f(x)=x*f(1) and g(x)=x*g(1). Commutativity gives f(g(1))=g(f(1)). Apply this identity sectionwise to a local internal-Hom section and the given sheaf endomorphism. Extensionality identifies precomposition followed by evaluation at one with evaluation at one followed by that endomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an object isomorphic to the coefficient ring module, conjugate the endomorphism across that isomorphism. Use internal-Hom composition and evaluation naturality to transport the preceding identity.",
+   "uses": [
+    "lem-sc-hom-complex-unit-evaluation-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the ring complex, use its degree-zero identification with the coefficient ring module. Apply the Hom-complex map projection formula in source and target degree zero, followed by the transported identity. In every other degree the target ring-complex term is a zero object, so the two component maps are equal. Componentwise extensionality completes the proof.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-pbc-ringed-completion-unit",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-unit-evaluation-naturality",
+  "def-pur-hom-complex",
+  "def-weil-pbc-ringed-completion-unit",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, section-hom-complexes; sites-modules.tex, internal Hom and evaluation on the coefficient ring module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Endomorphisms of a free rank-one module over a commutative ring agree with their dual under evaluation at one",
+   "results": "8 hits, including Dual.apply_one_mul_eq and RingEquiv.moduleEndSelf_symm_apply. These give the scalar calculation, not its internal sheaf Hom or ring-complex formulation. The proof performs the scalar calculation directly by linearity.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Dual\"",
+   "results": "12 hits: module dual definition, evaluation/reflexivity and annihilator results; no sheaf internal-Hom or ring-complex self-duality statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObjUnitIso.*homObjMap|homObjMap.*homObjUnitIso|End.*commute",
+   "results": "25 capped Mathlib hits, mostly unrelated commute namespaces and eigenspaces; none compares internal Hom with evaluation at one. Project evaluation_naturality supplies postcomposition and is reused to transport the scalar identity.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "F4",
+  "item": "Sheaf.Paper.FiniteFreeComplexDualPullback",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-free-complex-dual-pullback",
+   "place": "Unit normalization in the finite free complex dual comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexEndomorphismSelfDual",
+  "file": "lean/Sheaf/Paper/RingComplexEndomorphismSelfDual.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.ringComplexEndomorphism_selfDual",
+  "statement": "theorem ringComplexEndomorphism_selfDual\n    {C : Type v} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{v})\n    (a : ringedSiteRingComplex R ⟶ ringedSiteRingComplex R) :\n    ((homComplexFunctor (R := R)).flip.obj (ringedSiteRingComplex R)).map a.op ≫\n        (ringedHomUnitEvaluationIso R (ringedSiteRingComplex R)).hom =\n      (ringedHomUnitEvaluationIso R (ringedSiteRingComplex R)).hom ≫ a",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T111835-L-1749370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T111835-L-1749370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

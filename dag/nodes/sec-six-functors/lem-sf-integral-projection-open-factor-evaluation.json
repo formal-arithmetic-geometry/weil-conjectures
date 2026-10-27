@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-integral-projection-open-factor-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the unary open coefficient map",
+ "statement": "The following fully quantified Lean statement is the unary/finite component in the support-coordinate argument. All operations and normalizations are those of [def-sf-operation-stages], and its explicit coordinate maps are those of [def-sf-integral-projection-factor-evaluation-data] and [def-sf-integral-projection-middle-map].\n\ntheorem integralProjectionOpenFactorEvaluation\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left) (m : ℕ)\n    (K : sfIntegralConstructibleCategory C.l E X.obj.left) :\n    (coefficientSequenceDerivedEvaluation C.l E c.Z m).map\n        (ProjectionFactors.openReduction D C E n hn S hl o z f c K) ≫\n      ((o.openEvaluation c.i).evaluation m).hom.app\n        ((calculus C.l E X.obj.left).reduction.obj K.obj) ≫\n      (sfIntrinsicExtensionByZero c.i\n        (Padic.coefficientExtensionRing C.l E (m + 1))).mapDerivedCategory.map\n          (((calculus C.l E X.obj.left).reductionEvaluation m).hom.app K.obj) =\n    ((calculus C.l E c.Z).reductionEvaluation m).hom.app\n        (((S.higher.integralExchange (identitySquare f c)).stage.openExtension.obj K).obj) ≫\n      (FactorEvaluation.extension D C E n hn S f c m K).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "prop-sf-pf-coherence.proof.md, compatibility with j_!;\ndef-sf-operation-stages, openProjection, and the canonical open-unit scalar mate."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-integral-projection-factor-evaluation-data",
+  "def-sf-integral-projection-middle-map"
+ ],
+ "proof": [
+  {
+   "text": "Use integral_residue_tor to obtain finiteTorConstructibleIntegral for K from its constructibility. Apply openReconstructionEffectivity to the quasi-compact open immersion c.i. This supplies invertibility of the specified whole-system openReduction component, which is the map inverted in ProjectionFactors.openReduction.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-open-reconstruction-effectivity",
+    "def-sf-integral-projection-middle-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold FactorEvaluation.extensionIso. The openProjection field of S.integralNormalization identifies its component with scalar reduction of the specified openRealization followed by sixFunctorIntegralOpenReduction. This last map is definitionally openFiniteReduction: both consist of finiteReductionIso inverse, openComparison, localized finiteOpenIso, and finite extension of finiteReductionIso.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-integral-projection-factor-evaluation-data",
+    "lem-sf-integral-open-finite-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply integralOpenFiniteEvaluation to the actual c.i, realizationModel, K.obj and m. It identifies openEvaluation followed by finite extension of reductionEvaluation with evaluation of the whole-system openReduction followed by target reductionEvaluation and openFiniteReduction. Substitute this identity into the desired equation.",
+   "uses": [
+    "lem-sf-integral-open-finite-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand ProjectionFactors.openReduction and FactorEvaluation.extension. Functoriality and associativity place evaluation of the inverse openReduction immediately before evaluation of openReduction; cancel these maps using the invertibility from step 1. Apply naturality of reductionEvaluation first to openRealization and then to the eqToHom induced by the stage.openExtension equality. The result is exactly the right-hand composite. No faithfulness of evaluation and no equality inferred from finite evaluations is used.",
+   "uses": [
+    "def-sf-integral-projection-middle-map",
+    "def-sf-integral-projection-factor-evaluation-data",
+    "def-sf-operation-stages"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-sf-open-reconstruction-effectivity",
+  "def-sf-integral-projection-middle-map",
+  "def-sf-operation-stages",
+  "def-sf-integral-projection-factor-evaluation-data",
+  "lem-sf-integral-open-finite-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compatibility with j_!: finite open mate evaluation, cancellation of the specified whole-system reduction, and naturality through the prescribed stage and realization comparisons. W6 uses the existing generic integralOpenFiniteEvaluation theorem; no new split."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving a composition of adjunction mates and the naturality of an adjunction Hom equivalence",
+   "results": "Eight generic adjunction results, including CategoryTheory.Adjunction.homEquiv_naturality_left and homEquiv_naturality_right_square_iff in Mathlib.CategoryTheory.Adjunction.Basic. None identifies the specified geometric coefficient comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality supports the combining proof; no exact normalized proper/open realization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate of a composite natural transformation is composition of mates",
+   "results": "Generic mateEquiv composition lemmas, no normalized geometric coefficient statement.",
+   "date": "2026-10-27",
+   "verdict": "Use generic adjunction identities in the assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic homEquiv naturality and unit/counit formulas only.",
+   "date": "2026-10-27",
+   "verdict": "No exact geometric result."
+  },
+  {
+   "tool": "grep",
+   "query": "factoredSupport|support.*factor|factor.*support",
+   "results": "No Mathlib geometric match; local library has the finite support adjunct coordinates, but not the separate unary proper/open evaluation equations.",
+   "date": "2026-10-27",
+   "verdict": "This strictly smaller missing factor is stated separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionSupportFactorCoordinates",
+  "date": "2026-10-27",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-projection-support-factor-coordinates",
+   "place": "One separate factor of the proper/open compatibility, before the two factors are pasted.",
+   "via": [
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionOpenFactorEvaluation",
+  "file": "lean/Sheaf/Paper/IntegralProjectionOpenFactorEvaluation.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.integralProjectionOpenFactorEvaluation",
+  "statement": "theorem integralProjectionOpenFactorEvaluation\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left) (m : ℕ)\n    (K : sfIntegralConstructibleCategory C.l E X.obj.left) :\n    (coefficientSequenceDerivedEvaluation C.l E c.Z m).map\n        (ProjectionFactors.openReduction D C E n hn S hl o z f c K) ≫\n      ((o.openEvaluation c.i).evaluation m).hom.app\n        ((calculus C.l E X.obj.left).reduction.obj K.obj) ≫\n      (sfIntrinsicExtensionByZero c.i\n        (Padic.coefficientExtensionRing C.l E (m + 1))).mapDerivedCategory.map\n          (((calculus C.l E X.obj.left).reductionEvaluation m).hom.app K.obj) =\n    ((calculus C.l E c.Z).reductionEvaluation m).hom.app\n        (((S.higher.integralExchange (identitySquare f c)).stage.openExtension.obj K).obj) ≫\n      (FactorEvaluation.extension D C E n hn S f c m K).hom",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "summary": "A strictly smaller independent factor, not the parent equality in new coordinates.",
+  "blueprint": "Same unit route and same prescribed operation normalizations."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T050655-L-253002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261027T094536-L-240743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,290 @@
+{
+ "id": "lem-pur-roos-comparison-horizontal-coherence",
+ "kind": "statement",
+ "title": "Horizontal composition of canonical additive Roos comparisons",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal D$ be abelian categories with countable products [def-sp-abelian, def-weil-category-product]. For a strict tower $X$ of unbounded cochain complexes in one of them, write $\\mathsf H(X)=\\operatorname{Cone}(1-s:\\prod_nX_n\\to\\prod_nX_n)[-1]$ in the fixed coordinates of [def-weil-strict-roos-model]. Thus in degree $p+1$ the coordinates are $(\\prod_nX_n^p)\\oplus(\\prod_nX_n^{p+1})$ and the differential is $(y,x)\\mapsto(-dy-(1-s)x,dx)$. For an additive functor $F:\\mathcal A\\to\\mathcal B$ (additive means preserving sums of morphisms), use $F$ also for its termwise action on complexes and towers. Let $c_{F,X}:F(\\prod_n X_n)\\to\\prod_nF(X_n)$ be the cochain map with $n$th projection $F(\\pi_n)$, and use the canonical biproduct comparison from $F(U\\oplus W)$ to $F(U)\\oplus F(W)$.\n\nThese comparisons give a natural cochain map\n$$\\kappa_{F,X}:F\\mathsf H(X)\\longrightarrow\\mathsf H(FX)$$\nwhose degree-$p+1$ coordinate map is the biproduct comparison followed by $c_{F,X}^p\\oplus c_{F,X}^{p+1}$. It is an isomorphism if $F$ preserves countable products. Let $G:\\mathcal B\\to\\mathcal D$ and $L:\\mathcal A\\to\\mathcal D$ be additive functors and $\\alpha:GF\\Rightarrow L$ a natural transformation; $\\alpha_X$ denotes its termwise tower map and $\\alpha_{\\mathsf H(X)}$ its termwise map on the Roos complex. Then\n$$\\mathsf H(\\alpha_X)\\,\\kappa_{G,FX}\\,G(\\kappa_{F,X})\n=\\kappa_{L,X}\\,\\alpha_{\\mathsf H(X)}.$$\nThis is equality of cochain maps with the prescribed maps on both product coordinates. For the identity functor the comparison is the identity under the canonical identifications. If a compatible family $q_n:P\\to X_n$ has strict augmentation $q:P\\to\\mathsf H(X)$ with coordinates $(0,(q_n)_n)$, then $\\kappa_{F,X}F(q)$ has coordinates $(0,(F(q_n))_n)$. No exactness or product preservation is needed for the map or its composition equation; no derived category, scalar extension or arithmetic subsequence occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone model; agent-formulated additive-functor comparison and its horizontal composition extracted from original coherence proof Steps 2 and 5."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-category-product",
+  "def-weil-strict-roos-model",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinary right-to-left composition throughout. In an abelian category the biproduct projections $r_0,r_1$ and inclusions $i_0,i_1$ satisfy $r_j i_k=\\delta_{jk}$ and $i_0r_0+i_1r_1=1$. Define $b_F:F(U\\oplus W)\\to F(U)\\oplus F(W)$ by its projections $F(r_j)$. Its inverse is $a_F=F(i_0)\\operatorname{pr}_0+F(i_1)\\operatorname{pr}_1$: the matrix of $b_Fa_F$ has diagonal entries $1$ and off-diagonal entries $0$, and $a_Fb_F=F(i_0r_0+i_1r_1)=1$. These equations use precisely additivity and functoriality; additivity also gives $F(0)=0$ and $F(-h)=-F(h)$. Thus the canonical biproduct comparison and its coordinate rules follow directly, without any exactness assumption.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-additive-functor",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone context; agent-written strict-coordinate calculation using Categories Tag 002I (definition-product) and Homology Tag 00ZY (definition-preadditive)."
+   }
+  },
+  {
+   "text": "Put $P_X^r=\\prod_n X_n^r$, with projections $\\pi_n^r$, and write $d_X^r:P_X^r\\to P_X^{r+1}$ for the componentwise differential. Define $c_F^r:F(P_X^r)\\to P_{FX}^r$ uniquely by $\\pi_n^r c_F^r=F(\\pi_n^r)$. Then\n$$\\pi_n^{r+1}d_{FX}^r c_F^r=F(d_{X_n}^r)F(\\pi_n^r)=F(\\pi_n^{r+1})F(d_X^r)=\\pi_n^{r+1}c_F^{r+1}F(d_X^r).$$\nHence $d_{FX}c_F=c_FF(d_X)$. For the transition $t_n:X_{n+1}\\to X_n$ and $u_X=1-s_X$, the defining shift formula gives, degreewise,\n$$\\pi_n u_{FX}c_F=F(\\pi_n)-F(t_n)F(\\pi_{n+1})=F(\\pi_n-t_n\\pi_{n+1})=\\pi_n c_FF(u_X).$$\nThe universal property of the product proves $u_{FX}c_F=c_FF(u_X)$. Neither calculation inverts $c_F$.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-pbc-additive-functor",
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone context; agent-written strict-coordinate calculation using Categories Tag 002I (definition-product) and Homology Tag 00ZY (definition-preadditive)."
+   }
+  },
+  {
+   "text": "In the fixed coordinates $\\mathsf H(X)^{p+1}=P_X^p\\oplus P_X^{p+1}$ define $\\kappa_{F,X}^{p+1}=(c_F^p\\oplus c_F^{p+1})b_F$. The transported source differential is the matrix $(-F(d),-F(u_X);0,F(d))$, by step 1 and the specified differential of the strict Roos model. Consequently the first and second coordinates of $d\\kappa$ are respectively $-d_{FX}c_F^p\\operatorname{pr}_0-u_{FX}c_F^{p+1}\\operatorname{pr}_1$ and $d_{FX}c_F^{p+1}\\operatorname{pr}_1$. Step 2 rewrites them as $-c_F^{p+1}F(d_X^p)\\operatorname{pr}_0-c_F^{p+1}F(u_X^{p+1})\\operatorname{pr}_1$ and $c_F^{p+2}F(d_X^{p+1})\\operatorname{pr}_1$, the coordinates of $\\kappa F(d)$. Thus these maps form a cochain map. Write $e_{j,n,X}^{p+1}=\\pi_n^{p+j}r_j$ for $j=0,1$. Its defining, unique coordinate rule is\n$$e_{j,n,FX}^{p+1}\\kappa_{F,X}^{p+1}=F(e_{j,n,X}^{p+1}).$$\nUniqueness follows by first the two biproduct projections and then all product projections.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-category-product",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone context; agent-written strict-coordinate calculation using Categories Tag 002I (definition-product) and Homology Tag 00ZY (definition-preadditive)."
+   }
+  },
+  {
+   "text": "For a strict tower cochain map $h:X\\to Y$, the strict Roos map is diagonal on the two product coordinates. Therefore $e_{j,n,Y}\\mathsf H(h)=h_n^{p+j}e_{j,n,X}$. After $e_{j,n,FY}$, the two sides of $\\mathsf H(Fh)\\kappa_{F,X}=\\kappa_{F,Y}F(\\mathsf H(h))$ become respectively $F(h_n^{p+j})F(e_{j,n,X})$ and $F(e_{j,n,Y}\\mathsf H(h))$, which agree by functoriality. The coordinate uniqueness of step 3 proves naturality of $\\kappa$.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone context; agent-written strict-coordinate calculation using Categories Tag 002I (definition-product) and Homology Tag 00ZY (definition-preadditive)."
+   }
+  },
+  {
+   "text": "Naturality of $\\alpha:GF\\Rightarrow L$ with respect to each differential and transition makes its termwise maps a strict tower cochain map $\\alpha_X$ and a cochain map $\\alpha_{\\mathsf H(X)}$. In degree $p+1$, compose the asserted horizontal equation with $e_{j,n,LX}$, for each $j=0,1$ and $n$. The left side becomes\n$$\\alpha_{X_n^{p+j}}\\,e_{j,n,GFX}\\kappa_{G,FX}G(\\kappa_{F,X})=\\alpha_{X_n^{p+j}}\\,G(e_{j,n,FX})G(\\kappa_{F,X})=\\alpha_{X_n^{p+j}}\\,GF(e_{j,n,X}).$$\nThe right side becomes $L(e_{j,n,X})\\alpha_{\\mathsf H(X)^{p+1}}$. These are equal by naturality of $\\alpha$ for the single morphism $e_{j,n,X}:\\mathsf H(X)^{p+1}\\to X_n^{p+j}$. Coordinate uniqueness proves the displayed equality as actual cochain maps. It uses neither invertibility of $\\alpha$ nor preservation of products.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone context; agent-written strict-coordinate calculation using Categories Tag 002I (definition-product) and Homology Tag 00ZY (definition-preadditive)."
+   }
+  },
+  {
+   "text": "If $F$ preserves countable products, the cone with vertex $F(P_X^r)$ and projections $F(\\pi_n^r)$ is itself a product cone. Its universal property gives $v^r:P_{FX}^r\\to F(P_X^r)$ with $F(\\pi_n^r)v^r=\\pi_n^r$. The projection equations give $c_F^rv^r=1$ and $v^rc_F^r=1$, by uniqueness for the two product cones. Together with step 1 this makes each $\\kappa^{p+1}$ invertible, with inverse $a_F((c_F^p)^{-1}\\oplus(c_F^{p+1})^{-1})$. Multiplying $d\\kappa=\\kappa F(d)$ on the two sides by these inverses shows that the inverses commute with differentials, so $\\kappa$ is a cochain isomorphism. For $F=\\mathrm{id}$, the coordinate rule in step 3 is $e_{j,n,X}\\kappa=e_{j,n,X}$; coordinate uniqueness gives $\\kappa_{\\mathrm{id},X}=1$.",
+   "uses": [
+    "def-weil-category-product",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone context; agent-written strict-coordinate calculation using Categories Tag 002I (definition-product) and Homology Tag 00ZY (definition-preadditive)."
+   }
+  },
+  {
+   "text": "Let $q:P\\to\\mathsf H(X)$ be the stated augmentation. Its shifted coordinates are $e_{0,n,X}q=0$ and its unshifted coordinates are $e_{1,n,X}q=q_n^{p+1}$. Step 3 gives\n$$e_{0,n,FX}\\kappa_{F,X}F(q)=F(0)=0,\\qquad e_{1,n,FX}\\kappa_{F,X}F(q)=F(q_n^{p+1}).$$\nThese are exactly the coordinates $(0,(F(q_n))_n)$, since product projections determine each coordinate. The family remains compatible because $F(t_n)F(q_{n+1})=F(t_nq_{n+1})=F(q_n)$. This proves augmentation compatibility for the same specified map.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-category-product",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone context; agent-written strict-coordinate calculation using Categories Tag 002I (definition-product) and Homology Tag 00ZY (definition-preadditive)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-weil-category-product",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone context; agent-written strict-coordinate calculation using Categories Tag 002I (definition-product) and Homology Tag 00ZY (definition-preadditive)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Roos|roos|piComparison.*comp|mapHomologicalComplex.*comp",
+   "results": "{\"t\": \"2026-10-22T05:56:27Z\", \"tool\": \"grep\", \"query\": \"Roos|roos|piComparison.*comp|mapHomologicalComplex.*comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\"], \"digest\": \"ae0f41d9040b4e64\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapHomologicalComplexIso (MappingCone.lean:648) treats one additive functor and one cone; product comparisons and binary Cartesian comparison composition do not give the specified countable Roos cone comparison with horizontal natural-transformation and augmentation equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition coherence of an additive product preserving functor comparison with a countable inverse system mapping fiber cone",
+   "results": "{\"t\": \"2026-10-22T05:56:27Z\", \"tool\": \"leansearch\", \"query\": \"Composition coherence of an additive product preserving functor comparison with a countable inverse system mapping fiber cone\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"map\"",
+   "results": "{\"t\": \"2026-10-22T05:56:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"mappingCone\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.fst\", \"CochainComplex.mappingCone.snd\", \"CochainComplex.mappingCone.inl\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.descCochain\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone.liftCochain_snd\", \"CochainComplex.mappingCone.inl_descCochain\"], \"digest\": \"c635c86b913ff8c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapHomologicalComplexIso (MappingCone.lean:648) treats one additive functor and one cone; product comparisons and binary Cartesian comparison composition do not give the specified countable Roos cone comparison with horizontal natural-transformation and augmentation equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable additive functors preserving countable products the canonical comparisons with the shifted Roos mapping cone are compatible with composition and natural isomorphisms of functors",
+   "results": "{\"t\": \"2026-10-22T05:56:48Z\", \"tool\": \"leanfinder\", \"query\": \"For composable additive functors preserving countable products the canonical comparisons with the shifted Roos mapping cone are compatible with composition and natural isomorphisms of functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"CochainComplex.mappingCone.map_δ\", \"CochainComplex.mappingCone.mapTrianglehIso\", \"CochainComplex.mappingCone.mapTriangleIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso_eq\"], \"digest\": \"686310106947ce5c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapHomologicalComplexIso (MappingCone.lean:648) treats one additive functor and one cone; product comparisons and binary Cartesian comparison composition do not give the specified countable Roos cone comparison with horizontal natural-transformation and augmentation equations."
+  },
+  {
+   "tool": "grep",
+   "query": "piComparison|mapHomologicalComplexIso|mapHomologicalComplexCompIso",
+   "results": "{\"t\": \"2026-10-22T05:56:48Z\", \"tool\": \"grep\", \"query\": \"piComparison|mapHomologicalComplexIso|mapHomologicalComplexCompIso\", \"sub\": \"CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"77\", \"85\", \"86\", \"88\"], \"digest\": \"ae581acf932e69ab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapHomologicalComplexIso (MappingCone.lean:648) treats one additive functor and one cone; product comparisons and binary Cartesian comparison composition do not give the specified countable Roos cone comparison with horizontal natural-transformation and augmentation equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal coherence of canonical tensor product comparisons with products and mapping fibers for composable additive functors on abelian categories",
+   "results": "{\"t\": \"2026-10-22T05:57:08Z\", \"tool\": \"leanfinder\", \"query\": \"Horizontal coherence of canonical tensor product comparisons with products and mapping fibers for composable additive functors on abelian categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans_comp\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonIso_comp\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonNatTrans_comp\", \"CategoryTheory.CartesianMonoidalCategory.prodComparison_natural\", \"CategoryTheory.MonoidalCategory.prodCompExternalProduct_inv_app\", \"CategoryTheory.Functor.Monoidal.tensorObjComp\", \"CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_whiskerLeft_assoc\", \"CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_whiskerRight_assoc\"], \"digest\": \"9d94e8bca03f975f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapHomologicalComplexIso (MappingCone.lean:648) treats one additive functor and one cone; product comparisons and binary Cartesian comparison composition do not give the specified countable Roos cone comparison with horizontal natural-transformation and augmentation equations."
+  },
+  {
+   "tool": "grep",
+   "query": "piComparison|biprodComparison|mapHomologicalComplexIso",
+   "results": "{\"t\": \"2026-10-22T06:50:13Z\", \"tool\": \"grep\", \"query\": \"piComparison|biprodComparison|mapHomologicalComplexIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\"], \"digest\": \"36154b7049087790\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic piComparison and biprodComparison projection lemmas, product-preservation isomorphisms, and mappingCone.mapHomologicalComplexIso do not state the full strict Roos comparison with horizontal natural-transformation, identity and augmentation equations; candidates read in Products.lean:649-665, Preserves/Shapes/Products.lean:69-106, Preserves/Shapes/Biproducts.lean:298-326 and MappingCone.lean:639-658."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison between an additive functor of a Roos shifted mapping cone and the Roos cone of the image tower, compatible with composition and natural transformations",
+   "results": "{\"t\": \"2026-10-22T06:50:13Z\", \"tool\": \"leansearch\", \"query\": \"Canonical comparison between an additive functor of a Roos shifted mapping cone and the Roos cone of the image tower, compatible with composition and natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.map_δ\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'.congr_simp\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"CochainComplex.mappingCone.mapTrianglehIso\"], \"digest\": \"ef6b374284934470\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic piComparison and biprodComparison projection lemmas, product-preservation isomorphisms, and mappingCone.mapHomologicalComplexIso do not state the full strict Roos comparison with horizontal natural-transformation, identity and augmentation equations; candidates read in Products.lean:649-665, Preserves/Shapes/Products.lean:69-106, Preserves/Shapes/Biproducts.lean:298-326 and MappingCone.lean:639-658."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "{\"t\": \"2026-10-22T06:50:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"piComparison\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.piComparison\", \"CategoryTheory.Limits.piComparison_comp_π\", \"CategoryTheory.Limits.map_lift_piComparison\", \"CategoryTheory.Limits.piComparison_comp_π_assoc\", \"CategoryTheory.Limits.map_lift_piComparison_assoc\", \"CategoryTheory.Limits.piComparison_comp_π_apply\", \"CategoryTheory.Limits.instIsIsoPiComparison\", \"CategoryTheory.Limits.inv_piComparison_comp_map_π\"], \"digest\": \"f3dbde1e1ca0c968\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic piComparison and biprodComparison projection lemmas, product-preservation isomorphisms, and mappingCone.mapHomologicalComplexIso do not state the full strict Roos comparison with horizontal natural-transformation, identity and augmentation equations; candidates read in Products.lean:649-665, Preserves/Shapes/Products.lean:69-106, Preserves/Shapes/Biproducts.lean:298-326 and MappingCone.lean:639-658."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of an additive functor with the shifted cone of one minus shift on a countable product tower, natural for transformations of composable functors",
+   "results": "{\"t\": \"2026-10-22T06:50:24Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical comparison of an additive functor with the shifted cone of one minus shift on a countable product tower, natural for transformations of composable functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ShiftSequence.induced_shiftMap\", \"CategoryTheory.Limits.SequentialProduct.cone\", \"CategoryTheory.Functor.ShiftSequence.induced.shiftIso_hom_app_obj\", \"CategoryTheory.Functor.ShiftSequence.induced\", \"CategoryTheory.Functor.ShiftSequence.induced_shiftIso_hom_app_obj\", \"CategoryTheory.Functor.ShiftSequence.tautological\", \"CategoryTheory.Functor.ShiftSequence.shiftIso\", \"CategoryTheory.shiftFunctorAdd_hom_app_obj_of_induced\"], \"digest\": \"6942b20d009a562c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic piComparison and biprodComparison projection lemmas, product-preservation isomorphisms, and mappingCone.mapHomologicalComplexIso do not state the full strict Roos comparison with horizontal natural-transformation, identity and augmentation equations; candidates read in Products.lean:649-665, Preserves/Shapes/Products.lean:69-106, Preserves/Shapes/Biproducts.lean:298-326 and MappingCone.lean:639-658."
+  },
+  {
+   "tool": "grep",
+   "query": "def biprodComparison|biprodComparison_fst|biprodComparison_snd|biprodComparison.*[Cc]omp|piComparison.*[Cc]omp|instIsIsoPiComparison",
+   "results": "{\"t\": \"2026-10-22T06:50:41Z\", \"tool\": \"grep\", \"query\": \"def biprodComparison|biprodComparison_fst|biprodComparison_snd|biprodComparison.*[Cc]omp|piComparison.*[Cc]omp|instIsIsoPiComparison\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Galois/Decomposition.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/Sheaf.lean\"], \"digest\": \"28a52fcfd309e56c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic piComparison and biprodComparison projection lemmas, product-preservation isomorphisms, and mappingCone.mapHomologicalComplexIso do not state the full strict Roos comparison with horizontal natural-transformation, identity and augmentation equations; candidates read in Products.lean:649-665, Preserves/Shapes/Products.lean:69-106, Preserves/Shapes/Biproducts.lean:298-326 and MappingCone.lean:639-658."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal composition natural transformation coherence of functor product comparisons and binary biproduct comparisons for a mapping fiber of a tower",
+   "results": "{\"t\": \"2026-10-22T06:50:52Z\", \"tool\": \"leanfinder\", \"query\": \"Horizontal composition natural transformation coherence of functor product comparisons and binary biproduct comparisons for a mapping fiber of a tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.biprodComparison'_comp_biprodComparison_assoc\", \"CategoryTheory.Functor.biprodComparison'_comp_biprodComparison\", \"CategoryTheory.Functor.inl_biprodComparison'_assoc\", \"CategoryTheory.Functor.inr_biprodComparison'_assoc\", \"CategoryTheory.Functor.biprodComparison_fst_assoc\", \"CategoryTheory.Limits.prodComparison_comp\", \"CategoryTheory.Functor.biprodComparison_snd_assoc\", \"CategoryTheory.Functor.biproductComparison'_comp_biproductComparison\"], \"digest\": \"5b480afa5087659b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic piComparison and biprodComparison projection lemmas, product-preservation isomorphisms, and mappingCone.mapHomologicalComplexIso do not state the full strict Roos comparison with horizontal natural-transformation, identity and augmentation equations; candidates read in Products.lean:649-665, Preserves/Shapes/Products.lean:69-106, Preserves/Shapes/Biproducts.lean:298-326 and MappingCone.lean:639-658."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-free-completion-exchange-coherence",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final integral/common-stage compatibility paragraph: original coherence proof Steps 2 and 5, coherence of the two product coordinates before arithmetic restriction or completion.",
+   "via": [
+    "lem-pur-finite-free-completion-exchange-coherence",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-roos-comparison-horizontal-coherence",
+  "worker": "stage1",
+  "summary": "Expanded the unsplit additive Roos comparison into explicit product/biproduct calculations: construction, differential, strict naturality, horizontal natural-transformation equation, inverse, identity and augmentation. No new nodes and no statement changes. Every argument uses only cited definitions, functoriality, naturality and universal properties.",
+  "blueprint": "Realizes the final integral/common-stage compatibility paragraph of def-weil-derived-pullback-tensor-hom through original coherence Steps 2 and 5, as recorded in blueprint.from.place: compatibility of both Roos product coordinates under composition before arithmetic restriction or completion."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-b81938fc0",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-b81938fc0 (reviewer sub-agent of L); spot-checked: Read all of the item, its seven proof steps and every cited statement: def-weil-strict-roos-model, def-weil-tower-transition-endomorphism, def-weil-pbc-additive-functor, def-weil-category-product and def-sp-abelian. This is a first split of the Q82-created node; there is no re-split note. It creates no new nodes. The statement is unchanged apart from adding the additive-functor definition to stmt_deps, which is correct. Checked each step. Step 1: the biproduct comparison has inverse a_F, checked using additivity alone. Step 2: c_F commutes with d and with 1-s, by projections, using pr_n(1-s)=pr_n-f_n pr_{n+1}. Step 3: the matrix (-Fd,-Fu;0,Fd) gives a cochain map, and the coordinate rule e_{j,n,FX}κ=F(e_{j,n,X}) holds. Step 4: strict naturality. Step 5: typed and verified the horizontal equation via naturality of α at e_{j,n,X}; it needs neither α invertible nor products preserved. Step 6: inverse under product preservation, and κ_id=1. Step 7: augmentation (0,F(q_n)). All seven steps are honestly elementary, proof_deps equals the union of uses, and there is no cycle. Edge cases tested: F=0, α=0, identity functor, constant tower, ⊗Q (κ not an isomorphism, consistent with the statement), and ⊗Z/2 (not exact). No SGA is cited; the sources are Stacks 0941, 002I and 00ZY, and the proof is credited to the agent. No route or tool_use issue. No duplicate: def-sf-additive-roos-map defines the same κ on the parallel def-sf-strict-roos-functor model but has no horizontal clause, and lem-pur-roos-additive-comparison and lem-pur-finite-power-roos-comparison need more hypotheses or prove something else. Searches recorded: grep, Loogle, LeanFinder and LeanSearch. Advisory only: def-weil-strict-roos-model writes u as π_n−π_{n+1}t_n, a composition-order typo; there is a parallel-Roos-model overlap; coord/dag-sync.md is absent from the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RoosComparisonHorizontalCoherence",
+  "declaration": "CategoryTheory.roosComparison_horizontal_coherence",
+  "declarations": [
+   "CategoryTheory.roosTowerAction",
+   "CategoryTheory.roosAdditiveComparison",
+   "CategoryTheory.roosProductComparison",
+   "CategoryTheory.roosAdditiveComparison_lift_condition",
+   "CategoryTheory.roosAdditiveComparison_coordinates",
+   "CategoryTheory.roosAdditiveComparison_natural",
+   "CategoryTheory.roosAdditiveComparison_isIso",
+   "CategoryTheory.roosAdditiveComparison_id",
+   "CategoryTheory.roosAdditiveComparison_augmentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RoosComparisonHorizontalCoherence.lean",
+  "statement": "theorem roosComparison_horizontal_coherence (F : A ⥤ B) [F.Additive] (G : B ⥤ D) [G.Additive] (L : A ⥤ D) [L.Additive] (α : F ⋙ G ⟶ L) (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) : (G.mapHomologicalComplex (ComplexShape.up ℤ)).map (roosAdditiveComparison F X) ≫ roosAdditiveComparison G ((roosTowerAction F).obj X) ≫ roosF.map ((NatTrans.mapHomologicalComplex ((Functor.whiskeringRight ℕᵒᵖ A D).map α) (ComplexShape.up ℤ)).app X) = (NatTrans.mapHomologicalComplex α (ComplexShape.up ℤ)).app (roosF.obj X) ≫ roosAdditiveComparison L X",
+  "branch": "sheaf-dag",
+  "by": "Q140",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-910f4e72d",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Re-delivery after the d0147e80 C6/H2 RETURN. The import of IntegralOperationsScalarComparisons and the stray def-sf-additive-roos-map stmt_dep are removed; stmt_deps equal the live base and only lean differs. kappa = mappingCocone.lift(F(fst)≫piComparison, (snd.map F)∘ofHom piComparison): real data. The lift condition is true (cocone identity, δ_map, additivity, product-comparison square with 1-s). The coordinate theorem matches the node's biprodComparison ≫ biprod.map c^p c^{p+1} (roosLift_χ sign check). Naturality, the horizontal equation for arbitrary α : F⋙G ⟶ L, IsIso under PreservesLimitsOfShape (Discrete ℕ) (implied by the node hypothesis), the identity clause via mapHomologicalComplexIdIso and the augmentation clause (0, F q_n) are all correct. Independent universes, statement verbatim, no collisions, docstrings carry source, blueprint id and DAG steps 1-7, all proofs sorry. Advisory: scalarRoosMap duplicates kappa in a downstream module. Not compiled: no file changed; worker scompile clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261022T144048-L-1491447",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.roosAdditiveComparison_augmentation",
+   "CategoryTheory.roosAdditiveComparison_coordinates",
+   "CategoryTheory.roosAdditiveComparison_id",
+   "CategoryTheory.roosAdditiveComparison_isIso",
+   "CategoryTheory.roosAdditiveComparison_lift_condition",
+   "CategoryTheory.roosAdditiveComparison_natural",
+   "CategoryTheory.roosComparison_horizontal_coherence"
+  ],
+  "sorry_after": []
+ }
+}

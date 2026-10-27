@@ -1,0 +1,250 @@
+{
+ "id": "lem-pd-internal-oplax-resolving-components",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "kind": "statement",
+ "title": "Actual internal oplax components on K-flat resolving models",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For a scheme $T$ use its small pro-étale site, small relative to module sheaves [def-weil-pbc-proetale-site], the pulled-back ring object $R_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and its reconstructed section-ring sheaf, and the fixed exact internal/section module equivalence $E_T$ [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Use the ordinary operations and universe convention of [def-pd-section-module-operations-data]. Let $q_T^{\\mathrm i},q_T^{\\mathrm s}$ denote the internal and section homotopy-to-derived localizations [def-weil-abstract-derived-category], and write $\\mathcal P_T^{\\mathrm i},\\mathcal P_T^{\\mathrm s}$ for the full subcategories of K-flat complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules], with the corresponding exact-tensor and acyclic-total-tensor tests internally. All total tensors below are signed direct-sum cochain totals [def-pc-tensor-complex-sheaves], and all derived tensors are relative to $R_T$ [sk-def-sfb-derived-tensor-hom]. Let $f:X\\to Y$ be a scheme morphism, $F=f^*_{\\mathrm{sec}}$, and $LF$ the specified total derived section pullback with comparison $\\epsilon_A:LF(q_Y^{\\mathrm s}A)\\to q_X^{\\mathrm s}(FA)$ of [def-pd-section-derived-realization]. Use the derived pullback comparison $\\gamma:D(E_X)Lf^*_{\\mathrm{int}}\\cong LF D(E_Y)$ of [lem-pd-section-derived-pushpull-normalization], compatible with these resolution transformations, and the normalized $\\theta_T,e_T$ of [lem-pd-section-kflat-tensor-comparison]. Write $F_{\\mathrm i}=f^*_{\\mathrm{int}}$ and $L_{\\mathrm i}=Lf^*_{\\mathrm{int}}$, with resolution transformation $\\eta_A:L_{\\mathrm i}q_Y^{\\mathrm i}A\\to q_X^{\\mathrm i}F_{\\mathrm i}A$ [sk-def-sfb-module-derived-pushpull]. Let $b^{\\mathrm i}_{A,B}:F_{\\mathrm i}\\operatorname{Tot}(A\\otimes B)\\to\\operatorname{Tot}(F_{\\mathrm i}A\\otimes F_{\\mathrm i}B)$ and $u^{\\mathrm i}:F_{\\mathrm i}(R_Y[0])\\to R_X[0]$ be the actual total tensor and unit arrows of [def-pd-proetale-section-module-functors]. Let $\\delta^{\\mathrm i}$ and $v^{\\mathrm i}$ be their already specified localized transformations, using the internal tensor localization and total derived pullback; they are not newly chosen transformations. For $A,B\\in\\mathcal P_Y^{\\mathrm i}$, $F_{\\mathrm i}A,F_{\\mathrm i}B$ belong to $\\mathcal P_X^{\\mathrm i}$ and all three $\\eta_A,\\eta_B,\\eta_{\\operatorname{Tot}(A\\otimes B)}$ are invertible. With the internal K-flat representative maps $r_T^{\\mathrm i}$, put\n$$a^{\\mathrm i}_{A,B}=\\eta_{\\operatorname{Tot}(A\\otimes B)}\\,L_{\\mathrm i}((r_Y^{\\mathrm i})^{-1}),\\qquad c^{\\mathrm i}_{A,B}=(r_X^{\\mathrm i})^{-1}(\\eta_A\\otimes^{\\mathbf L}\\eta_B).$$\nThese maps are invertible and the components of the specified lift satisfy\n$$c^{\\mathrm i}_{A,B}\\delta^{\\mathrm i}_{q_Y^{\\mathrm i}A,q_Y^{\\mathrm i}B}=q_X^{\\mathrm i}(b^{\\mathrm i}_{A,B})a^{\\mathrm i}_{A,B},\\qquad v^{\\mathrm i}=q_X^{\\mathrm i}(u^{\\mathrm i})\\eta_{R_Y[0]}.$$\nThe regular degree-zero unit is resolving. The displayed equations are natural in both homotopy-category variables and remain valid after inversion of their quasi-isomorphisms. They concern the actual localized internal arrows and impose no boundedness or flatness on the coefficient map.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), K-flat total representative construction; Tag 0G7E (lemma-pullback-K-flat). Agent refinement of old lem-pd-section-derived-representative-square Steps 1–2, 5 and the internal part of 6. The specialized comparison identities are agent statements, not verbatim Stacks assertions."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pd-section-module-operations-data",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pd-section-derived-realization",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-pd-section-kflat-tensor-comparison",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-pd-proetale-section-module-functors",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pd-section-total-oplax-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the acyclic right-total-tensor test in internalResolving with homotopy K-flatness using HomotopyCategory.kFlat_iff_preserves_acyclic, the quotient acyclicity criterion and braiding. Conversely, the same criterion recovers the acyclic test from K-flatness. The module-object inverse image preserves K-flatness by [lem-sfb-proetale-internal-pullback-kflat]. Extension along the actual condensed coefficient pullback is an equivalence, so the existing monoidal-equivalence K-flat preservation theorem and the termwise composition isomorphism give K-flatness for the full internal pullback. Its PreservesFlat instance transports term flatness; braiding identifies the two exact-tensor tests. Thus the full pullback preserves internalResolving.",
+   "uses": [
+    "lem-sfb-proetale-internal-pullback-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4; agent calculation using the existing generic left-derived monoidal comparison and internal pro-etale pullback K-flatness."
+   }
+  },
+  {
+   "text": "Apply the existing generic isIso_leftDerivedFunctorCounit_app_of_kFlat theorem to each resolving homotopy object and to the tensor of two such objects. Homotopy K-flat objects are closed under tensor. The generic localization tensor comparison is invertible when one factor is K-flat. Expand the two existing derived tensor counits: comparisonA is the image of that localization tensor map followed by the pullback counit, and comparisonC is the tensor of the factor counits followed by the localization tensor map at their pullbacks. The preceding K-flatness statements make both comparisons invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4; agent calculation using the existing generic left-derived monoidal comparison and internal pro-etale pullback K-flatness."
+   }
+  },
+  {
+   "text": "The specified mate monoidal structure agrees with the canonical structure: apply Monoidal.toOplaxMonoidal_injective to internalPullOplax_eq_canonical from [def-pd-proetale-section-module-functors]. After this identification the definition of internalDelta is exactly the existing leftDerivedTensorComparison. Its proved leftDerivedTensorComparison_app_app_comp_counit equation, uncurried, is the required component equation. The regular complex is resolving by the regular-unit clause of [lem-pd-section-kflat-tensor-comparison]. Unfold the specified leftDerivedUpperStarUnitIso and actualInternalTotalUnit and remove the identity mapHomotopyCategoryFactors comparison: their homs are the same pullback counit followed by the homotopy quotient and derived localization of the degree-zero ordinary unit comparison.",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "lem-pd-section-kflat-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4; agent calculation using the existing generic left-derived monoidal comparison and internal pro-etale pullback K-flatness."
+   }
+  },
+  {
+   "text": "For a resolving pair quasi-isomorphism s, both derived bifunctors invert its components since Qh inverts quasi-isomorphisms. Naturality and the invertible endpoint comparisonA and comparisonC components transfer invertibility to the two homotopy total functors. For each of the four natural transformations, choose asIso of its actual functor images of s. Cancel the source image from the naturality equation and compose with the target inverse to obtain the inverse square. This proves the four inverse-square assertions without any new localized transformation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4; agent calculation using the existing generic left-derived monoidal comparison and internal pro-etale pullback K-flatness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proetale-internal-pullback-kflat",
+  "def-pd-proetale-section-module-functors",
+  "lem-pd-section-kflat-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E, 07A2, 07A4; agent calculation using the existing generic left-derived monoidal comparison and internal pro-etale pullback K-flatness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On K-flat resolving complexes the actual localized internal pullback oplax tensor and unit maps satisfy their representative component equations",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Localization.Monoidal.triangle_aux₂\", \"CategoryTheory.Localization.Monoidal.triangle_aux₃\", \"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app'\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.W₁_ι_app\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor_map\"], \"note\": \"\", \"digest\": \"fbee4aa9cfe52531\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: liftNatTrans_app and lift₂NatTrans_app_app give generic component formulas, but do not supply resolving preservation, internal pullback/tensor model factors, or identify these specified actual internal constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|liftNatTrans_app|fullyFaithfulWhiskeringLeft",
+   "results": "{\"n_hits\": 22, \"top\": [\"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Preadditive.lean\", \"Mathlib/CategoryTheory/Localization/Preadditive.lean\", \"Mathlib/CategoryTheory/Localization/Preadditive.lean\"], \"note\": \"\", \"digest\": \"5fc234547a62291a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: liftNatTrans_app and lift₂NatTrans_app_app give generic component formulas, but do not supply resolving preservation, internal pullback/tensor model factors, or identify these specified actual internal constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The actual internal derived module pullback tensor comparison has component equal to the localized total arrow conjugated by K-flat resolution comparisons",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Limits.pullbackComparison\", \"SheafOfModules.pullbackComp\", \"LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm\", \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"CategoryTheory.Over.tensorHom_left\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\"], \"note\": \"\", \"digest\": \"391fea963179b1d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: liftNatTrans_app and lift₂NatTrans_app_app give generic component formulas, but do not supply resolving preservation, internal pullback/tensor model factors, or identify these specified actual internal constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "{\"n_hits\": 10, \"top\": [\"CategoryTheory.Localization.liftNatTrans\", \"CategoryTheory.Localization.liftNatTrans_id\", \"CategoryTheory.Localization.liftNatIso_hom\", \"CategoryTheory.Localization.liftNatIso_inv\", \"CategoryTheory.Localization.comp_liftNatTrans\", \"CategoryTheory.Localization.comp_liftNatTrans_assoc\", \"CategoryTheory.Localization.liftNatTrans_app\", \"CategoryTheory.NatTrans.CommShift.liftNatTrans\"], \"note\": \"\", \"digest\": \"cef4c5c3c9975579\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: liftNatTrans_app and lift₂NatTrans_app_app give generic component formulas, but do not supply resolving preservation, internal pullback/tensor model factors, or identify these specified actual internal constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute a localized natural transformation in two resolving K-flat variables and on the regular unit using the universal derived pullback counit",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.leftDerivedNatTrans\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.Functor.leftDerivedNatTrans_app\", \"CategoryTheory.Functor.leftDerivedNatTrans_fac\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"CategoryTheory.NatTrans.leftDerived\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Adjunction.derivedε_fac_app\"], \"note\": \"\", \"digest\": \"57dbeb5f34a0bbd8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: liftNatTrans_app and lift₂NatTrans_app_app give generic component formulas, but do not supply resolving preservation, internal pullback/tensor model factors, or identify these specified actual internal constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On resolving K-flat complexes compute the component of the actual localized derived pullback oplax tensor map from the pullback counit and tensor comparison",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"PresheafOfModules.pullbackComp\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app'\", \"CategoryTheory.Tor'_obj_map\"], \"note\": \"\", \"digest\": \"0226cc8aaaa06cb1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the generic localization component formulas are already covered by lem-weil-pbc-localization-universal-property; they do not supply internal resolving preservation, total closure, or the normalization of these specified internal functors."
+  },
+  {
+   "tool": "grep",
+   "query": "lift₂NatTrans_app_app|liftNatTrans_app|fullyFaithfulWhiskeringLeft",
+   "results": "{\"n_hits\": 13, \"top\": [\"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Trifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Equivalence.lean\"], \"note\": \"\", \"digest\": \"02fa3a9fc750fea9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the generic localization component formulas are already covered by lem-weil-pbc-localization-universal-property; they do not supply internal resolving preservation, total closure, or the normalization of these specified internal functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift₂NatTrans_app_app",
+   "results": "{\"n_hits\": 1, \"top\": [\"CategoryTheory.Localization.lift₂NatTrans_app_app\"], \"note\": \"\", \"digest\": \"c1d0f5f173e312ef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the generic localization component formulas are already covered by lem-weil-pbc-localization-universal-property; they do not supply internal resolving preservation, total closure, or the normalization of these specified internal functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localized natural transformation is computed on resolving objects by conjugating the original component with the specified localization isomorphisms",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Localization.lift₂NatTrans_app_app\", \"CategoryTheory.Localization.Construction.natTransExtension\", \"CategoryTheory.Localization.liftNatTrans_app\", \"CategoryTheory.Localization.liftNatTrans\", \"CategoryTheory.Localization.Construction.NatTransExtension.app\", \"CategoryTheory.Adjunction.Localization.η\", \"CategoryTheory.Localization.liftNatIso\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.inverse_map_app\"], \"note\": \"\", \"digest\": \"1d4c921b40fdcd1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the generic localization component formulas are already covered by lem-weil-pbc-localization-universal-property; they do not supply internal resolving preservation, total closure, or the normalization of these specified internal functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a natural map of two-variable functors computes its components as the original map conjugated by the two lifting isomorphisms",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Localization.lift₂NatTrans_app_app\", \"CategoryTheory.Localization.liftNatTrans_app\", \"CategoryTheory.Localization.lift₂NatTrans\", \"CategoryTheory.Localization.lift₂_iso_hom_app_app₂\", \"CategoryTheory.Localization.lift₂_iso_hom_app_app₁\", \"CategoryTheory.Localization.lift₂NatIso_hom\", \"CategoryTheory.Localization.liftNatTrans\", \"CategoryTheory.Localization.lift₂NatIso\"], \"note\": \"\", \"digest\": \"64506d169f5eedc5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the generic localization component formulas are already covered by lem-weil-pbc-localization-universal-property; they do not supply internal resolving preservation, total closure, or the normalization of these specified internal functors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-derived-representative-square",
+  "date": "2026-10-24",
+  "group": "NN"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Seeded nt-target-poincare-isiso Step 2, through lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Steps 4–5: actual internal representative square, regular unit and cochain constraints. Old representative-square proof: Steps 1–2 and internal/unit localization in Steps 5–6.",
+   "via": [
+    "lem-pd-section-derived-representative-square",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pd-internal-oplax-resolving-components",
+  "worker": "stage1",
+  "summary": "Checked the actual internal component and unit formulas by resolving localization. Reused preservation, total closure, exact section comparisons and the existing Mathlib localization leaf. No new nodes, no new choice of derived tensor-pullback transformation, and no additional hypotheses.",
+  "blueprint": "Seeded nt-target-poincare-isiso Step 2, through lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Steps 4–5: actual internal representative square, regular unit and cochain constraints. Old representative-square proof: Steps 1–2 and internal/unit localization in Steps 5–6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Only its flat-term K-flat preservation clause is used through the fixed section equivalence; it does not replace any Verdier-exchange unit argument."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Only the canonical ordinary internal/section pullback comparison is used to identify resolving classes. The unit does not state this categorical comparison."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic closure of flat-term K-flat ringed complexes under unbounded total tensor; used through the fixed equivalence, not as a purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "why": "Generic counit invertibility for the specified ringed derived pullback with independent universes; transported by the already specified resolution-compatible comparison."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-5bf58db94",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-5bf58db94 (reviewer sub-agent of L); spot-checked: Fresh split of an unsplit item; it creates no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the side-live base, and the transitive dependency closure does not contain the item or its three ancestors (no cycle). Meaning of delta^i: the parent lem-pd-section-derived-representative-square defines delta_f as the localization of the actual internal total arrow b^i via the internal derived-tensor localization and Lf^*_int, so Step 4 computes the lift by clause (2) of the Mathlib leaf lem-weil-pbc-localization-universal-property. Its hypotheses hold: the resolving localization and pair full-faithfulness come from lem-pd-section-kflat-tensor-comparison, and H1, H2 invert W because a and c are natural isomorphisms. Step 1: the kflat comparison node (E_T reflects the resolving class; regular unit is resolving), the ringed tensor-pullback node (pullback preserves K-flat complexes with flat terms; f^*_sec has the u^* form), operations-transport (E_X f^*_int ≅ f^*_sec E_Y termwise) and lem-pur-kflat-total-tensor-model (unbounded Tot). Note: that node says 'small site' and is used with the chapter's 'small relative to module sheaves' convention; accepted. Step 2: epsilon is invertible on models by computation-universes, and the resolution-compatible gamma square of pushpull-normalization plus reflection by the equivalence G_X makes eta invertible on A, B, Tot(A⊗B) and R_Y[0]. Steps 3, 5 and 6 are genuinely elementary; I checked the types of a and c. Sources: Stacks 07A4 (l.3684), 0G7E (l.3508) and 07A2 in sites-cohomology.tex, tags checked; the proof of 07A4 is this K-flat route, and proof_origin is correctly 'agent'. No SGA. Edge cases: f=id, zero complex, unit only, nonflat Z→Z/2, unbounded complexes. Duplicate grep finds only the parent and the section-side sibling conjugation-identities node. Accepted the four declared off-unit tool_uses (ringed-topoi-derived-tensor-pullback, internal-module-operations-transport, kflat-total-tensor-model, kflat-tensor-pullback-computation-universes). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InternalOplaxResolvingComponents",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internal_oplax_resolving_components",
+  "declarations": [
+   "CategoryTheory.Functor.ResolvingInverseSquares",
+   "CategoryTheory.Functor.resolvingComparisonA",
+   "CategoryTheory.Functor.resolvingComparisonC",
+   "CategoryTheory.Functor.resolvingTotalArrow",
+   "CategoryTheory.Functor.resolvingDelta",
+   "CategoryTheory.Functor.resolvingPairArrows",
+   "CategoryTheory.Functor.ResolvingOplaxComponents",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internal_oplax_resolving_components"
+  ],
+  "file": "lean/Sheaf/Paper/InternalOplaxResolvingComponents.lean",
+  "statement": "theorem internal_oplax_resolving_components {X Y : Scheme.{u}} (f : X ⟶ Y) : Functor.ResolvingOplaxComponents (CondensedRing.upperStar Λ f) (KFlatSectionComparison.internalResolving Λ Y) (KFlatSectionComparison.internalResolving Λ X) (internalDelta Λ f) ∧ KFlatSectionComparison.internalResolving Λ Y (𝟙_ (CochainComplex (internalModules Λ Y) ℤ)) ∧ (CondensedRing.leftDerivedUpperStarUnitIso Λ f).hom = (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (𝟙_ (CochainComplex (internalModules Λ Y) ℤ))) ≫ DerivedCategory.Q.map (actualInternalTotalUnit Λ f)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Generic predicates package precisely the existing derived counit composites and the specified internalDelta, retaining naturality as natural-transformation types and explicitly asserting the inverse quasi-isomorphism squares. The actual ordinary total unit and the already specified derived unit are compared directly. No arbitrary lift, replacement tensor, additional flatness or boundedness assumption is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0e6cae12",
+  "group": "NA",
+  "result": "pass",
+  "note": "Diff vs side-live: lean record plus appended stmt_dep def-pd-section-total-oplax-comparison-data (owner of actualInternalTotalUnit, on base, no cycle); statement/proof/source unchanged; lean.statement verbatim. All clauses checked: delta = recorded internalDelta (= leftDerivedTensorComparison); a/c = uncurried upstream leftDerivedDerivedTensorCounit / derivedTensorLeftDerivedCounit, components L(muQh) then counit and (eta⊗eta) then muQh, matching the node's formulas; total arrow = Qh of mapHomotopyCategoryδNatTrans (actual signed-total mapBifunctorComparison); global monoidal_upperStar instance shared with internalDelta and actualInternalTotalUnit; unit equation true via leftDerivedUpperStarUnitIso_hom_eq and eta = eps^-1; regular unit resolving; IsIso clauses for eta on resolving A, B and A⊗B; inverse squares over quasi-iso resolving pairs with pinned forward maps. No extra flatness/boundedness/universe restriction; helpers non-hollow with source+blueprint docstrings; six-step proof docstring; only sorry is the theorem; no name clash; report has Worker report and Second reading by NA sections. Stacks 07A2/0G7E/07A4 labels verified. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T023158-L-529610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

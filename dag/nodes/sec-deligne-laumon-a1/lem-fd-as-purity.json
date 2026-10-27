@@ -64,7 +64,46 @@
   "def-fd-artin-schreier-sheaf"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier",
+     "module": "WeilConjectures.WeilSheaf.ArtinSchreierPurity",
+     "lines": [
+      209,
+      223
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-some-weight",
  "split_report": {
@@ -100,5 +139,26 @@
   "date": "2026-10-18",
   "existing": true,
   "note": "Existing upstream purity theorem for the canonical adic Weil Artin–Schreier sheaf. Specialize the character to the fixed nondegenerate trace character, a to the value of the specified unit, and ι to iota.toRingHom. The theorem is valid for all characters and scalars; this records the existing theorem rather than strengthening the DAG statement. Its punctual predicate is the upstream adic Weil-heart encoding of the same closed-point eigenvalue condition; the newer Sf predicate uses the common-stage heart, with the comparison left to stage 3."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $k_0=\\mathbf F_q$ and fix\na field embedding $\\iota:\\Qlb\\hookrightarrow\\mathbf C$ as in\n[def-weil-punctual-weights]. The Artin–Schreier sheaf\n$\\mathcal L_{\\psi,ax}$ on $\\mathbf A^1_{k_0}$ is punctually\n$\\iota$-pure of weight $0$.",
+  "proof": [
+   {
+    "text": "By [lem-fd-as-lisse] the sheaf is lisse of rank one, so at every\nclosed point $u$ its unique local Frobenius eigenvalue is the trace\nvalue $t_{\\mathcal L_{\\psi,ax}}(u)$ of [lem-fd-as-trace], namely\n$\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(au))$: a root of unity,\nof modulus one by [lem-tw-root-of-unity-modulus]. Hence every\nlocal eigenvalue satisfies $|\\iota(\\alpha)|=1=q_u^{0/2}$, which is the\npunctual $\\iota$-purity of weight $0$ of\n[def-weil-punctual-weights].",
+    "uses": [
+     "lem-fd-as-lisse",
+     "lem-fd-as-trace",
+     "lem-tw-root-of-unity-modulus",
+     "def-weil-punctual-weights"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

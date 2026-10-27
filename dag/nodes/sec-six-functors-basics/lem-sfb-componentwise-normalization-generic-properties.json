@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-componentwise-normalization-generic-properties",
+ "kind": "statement",
+ "title": "Basic properties of componentwise normalization of a locally Noetherian scheme",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], and write $\\nu_X:X^\\nu\\to X$ for its componentwise normalization [def-weil-pbc-reduced-normalization]. Then every local ring of $X^\\nu$ is an integrally closed domain [def-weil-pbc-normal-ring], and $\\nu_X$ is integral [def-weil-finite-integral-morphism] and surjective [def-weil-surjective-morphism]. The map $\\nu_X$ induces a bijection between the generic points of irreducible components of $X^\\nu$ and of $X$ [def-sc-generic-point, def-weil-irreducible-components], and for each generic point $\\eta$ of an irreducible component of $X$ the fibre $X^\\nu\\times_X\\operatorname{Spec}\\kappa(\\eta)$ [def-pc-fibre-product, def-weil-residue-field] is canonically isomorphic to $\\operatorname{Spec}\\kappa(\\eta)$ over $\\kappa(\\eta)$. No finiteness of $\\nu_X$, excellence or reducedness of $X$ is assumed; the empty scheme is allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035Q, lemma-normalization-normal (1) and (2); Tag 0CDV, lemma-normalization-in-terms-of-components (componentwise description agrees with the normalization when every quasi-compact open has finitely many irreducible components, true for locally Noetherian X); Tag 0BXC, lemma-normalization-birational, proof (generic local rings of X_red and X^nu agree), applied on affine opens; Tag 035P, lemma-description-normalization."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-pc-fibre-product",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $X^\\nu=\\coprod_iY_i$, with $Z_i$ the reduced components and $Y_i=Z_i^\\nu$ as in [def-weil-pbc-reduced-normalization]. By [lem-sc-locnoeth-components-locally-finite], an affine $U=\\operatorname{Spec}A$ meets only finitely many components: its quasi-compactness gives a finite subcover by neighbourhoods meeting finitely many. By [lem-sc-components-open-injection], the nonempty intersections are distinct components of $U$; they exhaust them because they cover $U$ and an irreducible subset of a finite closed cover lies in one member. Thus [lem-weil-pbc-spec-irreducible-components-minimal-primes] and [lem-weil-pbc-reduced-induced-closed-subscheme] identify the reduced intersections with $W_i=\\operatorname{Spec}(A/\\mathfrak p_i)$ for all minimal primes $\\mathfrak p_i$ of $A$. For integral $Z_i$, let $\\eta_i$ be its unique generic point by [lem-weil-pbc-scheme-sober] and put $K_i=\\kappa(\\eta_i)$. The canonical map of [lem-weil-pbc-spec-local-ring-canonical-morphism], composed with $\\operatorname{Spec}K_i\\to\\operatorname{Spec}\\mathcal O_{Z_i,\\eta_i}$ from the residue quotient, gives $h_i:\\operatorname{Spec}K_i\\to Z_i$. It is quasi-compact (the inverse image of an affine open is empty or a point), and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence], since its source is affine. Its pushforward structure sheaf has sections $K_i$ on every nonempty open, since each contains the generic point; hence its relative normalization is the function-field normalization [def-sc-normalization] defining $Y_i$. Apply [lem-weil-pbc-relative-normalization](iii) to $h_i$ and the affine open $W_i$ of $Z_i$. This gives $Y_i\\times_XU=\\operatorname{Spec}B_i$, with $B_i$ the integral closure of $A/\\mathfrak p_i$ in $K_i=\\operatorname{Frac}(A/\\mathfrak p_i)$; the field identification is [lem-weil-pbc-prime-residue-field-algebra]. Components missing $U$ have empty inverse image.",
+   "uses": [
+    "def-weil-pbc-reduced-normalization",
+    "lem-sc-locnoeth-components-locally-finite",
+    "lem-sc-components-open-injection",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0CDV (lemma-normalization-in-terms-of-components), 035P (lemma-description-normalization); componentwise affine construction, applied to reduced components even when X is nonreduced. Generic-point morphism: Schemes Tag 01J6 (lemma-morphism-from-spec-local-ring) and Equation 02NA (equation-canonical-morphism)."
+   }
+  },
+  {
+   "text": "For each $i$, the source $\\operatorname{Spec}K_i$ of $h_i$ is integral and its only local ring is the field $K_i$, an integrally closed domain. The quasi-compactness and quasi-separatedness needed for relative normalization were checked in step 1. Apply [lem-weil-pbc-normalization-normal-stalks] to $h_i$ to obtain that all local rings of $Y_i$ are integrally closed domains. Also [lem-weil-pbc-relative-normalization](iv) says $Y_i$ is integral. By [lem-weil-pbc-scheme-coproduct-family], every summand embeds as an open and closed subscheme; therefore the local ring at a point of $X^\\nu$ is exactly its local ring in its unique summand. This proves the asserted normality without assuming that any $Y_i$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-normalization-normal-stalks",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035L (lemma-normal-normalization), integral-source case; Tag 035Q (lemma-normalization-normal), proof of (1)."
+   }
+  },
+  {
+   "text": "For any affine $U=\\operatorname{Spec}A$, step 1 gives finitely many affine inverse-image summands $\\operatorname{Spec}B_i$. By [lem-weil-pbc-finite-affine-coproduct-spectrum], their union is $\\operatorname{Spec}(\\prod_iB_i)$. Each $B_i$ is integral over $A/\\mathfrak p_i$. For $b=(b_i)$ choose a monic equation for each $b_i$ and lift its coefficients to $A$, obtaining $P_i\\in A[T]$. Then the monic polynomial $\\prod_iP_i$ annihilates $b$, since its $i$-th coordinate has the zero factor $P_i(b_i)$. Hence $A\\to\\prod_iB_i$ is integral, proving integrality of $\\nu_X$ by [def-weil-finite-integral-morphism]. For a point represented by $\\mathfrak q\\subset A$, choose a component $V(\\mathfrak p_i)$ containing it. The integral inclusion $A/\\mathfrak p_i\\hookrightarrow B_i$ has a prime above $\\mathfrak q/\\mathfrak p_i$ by [lem-weil-pbc-integral-injective-lying-over], giving a point above $\\mathfrak q$. Thus $\\nu_X$ is surjective. If $U$ is empty, $A=0$ and its inverse image is $\\operatorname{Spec}0$; the empty product ring is $0$, integral over $0$ since its only element satisfies the monic polynomial $T$. Surjectivity onto the empty set is vacuous.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q (lemma-normalization-normal), (2), with the affine construction of 035P; Algebra Tag 00GQ (lemma-integral-overring-surjective)."
+   }
+  },
+  {
+   "text": "Let $\\eta_i$ be the generic point of $Z_i$. By [lem-weil-pbc-relative-normalization](ii), the factor $\\operatorname{Spec}K_i\\to Y_i$ of $h_i$ is dominant. Its one-point image therefore has closure all of $Y_i$, so that point is the unique generic point $\\xi_i$ of the integral scheme $Y_i$; uniqueness is [lem-weil-pbc-scheme-sober]. The factorization of $h_i$ sends $\\xi_i$ to $\\eta_i$. By [lem-weil-pbc-scheme-coproduct-family], the $Y_i$ are pairwise disjoint, open and closed, and cover $X^\\nu$. Any irreducible subset meets at most one of these clopen summands (otherwise its intersections with a summand and its complement separate it); since each $Y_i$ is itself irreducible, these are exactly the irreducible components of $X^\\nu$. The distinct $Z_i$ are the components of $X$ by definition, so $\\xi_i\\mapsto\\eta_i$ is the required bijection.",
+   "uses": [
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q (lemma-normalization-normal), (2), via the dominant generic-point maps of Tag 035I (lemma-characterize-normalization)."
+   }
+  },
+  {
+   "text": "Fix $\\eta_j\\in U=\\operatorname{Spec}A$ and put $K=\\kappa(\\eta_j)=\\operatorname{Frac}(A/\\mathfrak p_j)$ by [lem-weil-pbc-prime-residue-field-algebra]. Steps 1 and 3 and [lem-weil-pbc-fibre-product-affine-spectra] identify the fibre with $\\operatorname{Spec}((\\prod_iB_i)\\otimes_AK)$. By [lem-weil-pbc-tensor-finite-product], the map $\\Phi:(\\prod_iB_i)\\otimes_AK\\to\\prod_i(B_i\\otimes_AK)$, $(b_i)\\otimes c\\mapsto(b_i\\otimes c)_i$, is a module isomorphism. It is a $K$-algebra map: $\\Phi(1\\otimes c)=(1\\otimes c)_i$, and both $\\Phi(((b_i)\\otimes c)((d_i)\\otimes e))$ and $\\Phi((b_i)\\otimes c)\\Phi((d_i)\\otimes e)$ equal $(b_id_i\\otimes ce)_i$; extend by additivity. For $i\\ne j$, choose $s\\in\\mathfrak p_i\\setminus\\mathfrak p_j$, possible because distinct minimal primes are incomparable. Its action on $B_i$ is zero and on $K$ is invertible; thus every pure tensor $b\\otimes c=(sb)\\otimes(c/s)$ is zero. The other factors are therefore zero rings, with empty spectra. For $i=j$, both actions factor through $R=A/\\mathfrak p_j$. The identity on pure tensors gives inverse maps between $B_j\\otimes_AK$ and $B_j\\otimes_RK$: every $r\\in R$ lifts to $a\\in A$, so the $R$-balancing relation is already an $A$-balancing relation, independently of the lift. Multiplication $b\\otimes c\\mapsto bc$ has inverse $c\\mapsto1\\otimes c$: if $b=a/s\\in B_j\\subset K$ with $a,s\\in R$, $s\\ne0$, then $b\\otimes c=(sb)\\otimes(c/s)=1\\otimes bc$. Hence the fibre ring is canonically $K$ as a $K$-algebra, so the whole fibre is canonically $\\operatorname{Spec}K$ over $K$. The isomorphism is the inverse of the structure map $K\\to(\\prod_iB_i)\\otimes_AK$, which is intrinsic and hence independent of the affine neighbourhood. This calculation uses $A/\\mathfrak p_j$, never the false claim that $A_{\\mathfrak p_j}$ is a field for nonreduced $A$. For empty $X$ there are no generic points to check.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), affine component factors; Tag 0BXC (lemma-normalization-birational), generic calculation; Schemes lemma-fibre-product-affines."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-reduced-normalization",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sc-components-open-injection",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-sc-normalization",
+  "lem-weil-pbc-normalization-normal-stalks",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-tensor-finite-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035L, 035Q(1)-(2), 0CDV and 035P, expanded on componentwise affine charts with an explicit generic-fibre tensor calculation; no reuse of the dropped per node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "componentwise|irreducibleComponents.*normaliz|normaliz.*irreducibleComponent; declaration list of Mathlib/AlgebraicGeometry/Normalization.lean",
+   "results": "Mathlib/AlgebraicGeometry: no hits for the first pattern; Normalization.lean defines only the relative normalization f.normalization of a supplied qcqs morphism f (IsIntegralHom fromNormalization, IsReduced/IsIntegral instances, normalizationPullback), not the absolute componentwise normalization of a scheme nor its generic-fibre property.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib has only relative normalization of a morphism; the absolute componentwise normalization and its generic-fibre/normality properties are not stated."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|normalisation",
+   "results": "{\"t\": \"2026-10-22T05:41:22Z\", \"tool\": \"grep\", \"query\": \"normalization|normalisation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"d3a37eb2d6b30722\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied qcqs morphism is not the asserted absolute componentwise-normalization theorem; no hit supplies all clauses in one-line specializations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a locally Noetherian scheme is normal and integral surjective with unchanged generic residue fields",
+   "results": "{\"t\": \"2026-10-22T05:41:22Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of a locally Noetherian scheme is normal and integral surjective with unchanged generic residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"6d0f3ff51caed60a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied qcqs morphism is not the asserted absolute componentwise-normalization theorem; no hit supplies all clauses in one-line specializations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"generic\"",
+   "results": "{\"t\": \"2026-10-22T05:41:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"generic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied qcqs morphism is not the asserted absolute componentwise-normalization theorem; no hit supplies all clauses in one-line specializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The componentwise normalization of a locally Noetherian scheme is normal integral surjective and has a single rational point over each generic point",
+   "results": "{\"t\": \"2026-10-22T05:41:30Z\", \"tool\": \"leanfinder\", \"query\": \"The componentwise normalization of a locally Noetherian scheme is normal integral surjective and has a single rational point over each generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"ea272f9656c340f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied qcqs morphism is not the asserted absolute componentwise-normalization theorem; no hit supplies all clauses in one-line specializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization as the disjoint union of integral closures of irreducible components has unchanged fibres at minimal primes",
+   "results": "{\"t\": \"2026-10-22T05:41:39Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization as the disjoint union of integral closures of irreducible components has unchanged fibres at minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom_assoc\"], \"digest\": \"e300e684a2438d1d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied qcqs morphism is not the asserted absolute componentwise-normalization theorem; no hit supplies all clauses in one-line specializations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-componentwise-normalization-smooth-pullback",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: integrality, normality and generic fibres of the componentwise normalization of the target, as used in Stacks 07TD (normalization birational, 0BXC).",
+   "via": [
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-componentwise-normalization-generic-properties",
+  "worker": "stage1",
+  "summary": "Repaired the landing refusal at f54d055a187 against the current unsplit live DAG. Retained the statement, five-step proof route, provenance, searches and all 23 verbatim citation pairs; re-read every current statement/proof dependency. Step 3 now proves integrality also on the empty affine chart via the zero ring and a monic polynomial. Step 5 explicitly constructs inverse tensor comparison maps over A and A/p by lifting scalars, justifying the coefficient-ring change used in the generic fibre. No new nodes or Mathlib leaves; eighteen proof dependencies. The delivery tool rebases these split-owned fields onto its freshly fetched current base.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: integrality, normality and generic fibres of the componentwise normalization of the target, as used in Stacks 07TD (normalization birational, 0BXC). This is the live generic-normalization prerequisite; the five steps prove its algebraic content directly from live generic tools, without Artin-Gabber or SGA.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Local finiteness of components of a locally Noetherian scheme, needed to obtain finite affine component charts. The current unit has no separate version of this generic tool; it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme-theoretic construction of Spec of a stalk and its residue-field quotient mapping to the original point. Used only to define h_i in step 1, not to replace a step of the constructibility unit; the unit has no separate version of this generic scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-a21baf507",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-a21baf507 (reviewer sub-agent of L); spot-checked: This is the sixth delivery. c6d43fdb was RETURNed for citing the dropped per node. 77cc, c1b1, f284 and f54d were each PASSed on content, but their landings were refused because the side completion was not promoted. The live item is still unsplit with an empty proof, so it has not been superseded. Diff against the f54d055a187e snapshot: only proof and split_report changed. The statement, stmt_deps, the 18 proof_deps, source and provenance are identical. Step 3 now handles an empty affine chart: A=0, the inverse image is Spec 0 (the empty product), 0 is integral over 0 via the monic polynomial T, and surjectivity onto the empty set is vacuous. This is correct. Step 5 now justifies B_j⊗_A K = B_j⊗_R K for R=A/p_j: the identity on pure tensors is inverse in both directions, because each R-balancing relation is an A-balancing relation through any lift, and the choice of lift does not matter since p_j kills B_j and K. This is correct. I reread all five steps in full. Step 1: finitely many components on U, W_i=Spec(A/p_i), h_i: Spec K_i -> Z_i is qcqs with constant pushforward K_i, and relative normalization (iii) gives B_i, the integral closure of A/p_i in Frac(A/p_i). Step 2: the normal-stalks hypotheses hold, (iv) makes Y_i integral, and the summands are clopen. Step 3: the product of lifted monic polynomials gives integrality, and lying-over is applied to the injective map A/p_i -> B_i. Step 4: dominance and sobriety give the generic point, and the clopen summands are the components. Step 5: an element s in p_i minus p_j kills factor i, and b⊗c = 1⊗bc gives B_j⊗K ≅ K; A_p is never used as a field. All 25 deps exist and have the same statements as on f54d; none is merged and none is on route-pivot-dropped.txt. Source: Stacks morphisms.tex l.14504, Tag 035Q (1)-(2); its finite-components hypothesis holds for locally Noetherian X. Edge cases checked: empty X, k[eps]/eps^2, k[x,y]/(xy), and a non-Noetherian B_i. Every step is at most 2000 characters. No SGA source is used; the only SGA string is the unchanged 'without Artin-Gabber or SGA'. Accepted tool_uses: lem-sc-locnoeth-components-locally-finite and lem-weil-pbc-spec-local-ring-canonical-morphism, both generic. No fixes. Maintainer note: the repeated refusals are promotion faults; lem-weil-pbc-normalization-normal-stalks remains unsplit with its own obligation."
+ }
+}

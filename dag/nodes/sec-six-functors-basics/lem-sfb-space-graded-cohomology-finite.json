@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-space-graded-cohomology-finite",
+ "kind": "statement",
+ "title": "Finite graded cohomology over a finite type algebra on a proper algebraic space",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $B=\\bigoplus_{k\\geq0}B_k$ be a commutative unital graded $A$-algebra: $B_k$ are $A$-submodules, $B_kB_l\\subseteq B_{k+l}$, $1\\in B_0$, and $A\\to B$ lands in $B_0$. Assume $B$ is a finite type $A$-algebra [def-weil-pbc-finite-type-algebra]. Let $f:X\\to\\operatorname{Spec}A$ be a proper morphism of algebraic spaces [def-pc-scheme, def-weil-affine-spectrum, def-trf-algebraic-space, def-sfb-space-morphism-properties]. Put $\\mathcal B=f^*\\widetilde B=\\bigoplus_{k\\geq0}\\mathcal B_k$ with $\\mathcal B_k=f^*\\widetilde{B_k}$, where $\\widetilde B$ is the quasi-coherent algebra associated to $B$ on the affine base, and $f^*$ is tensor pullback on the small etale ringed topoi [def-trf-space-etale-module-functors, lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Let $\\mathcal G=\\bigoplus_{r\\geq0}\\mathcal G_r$ be a graded $\\mathcal B$-module whose pieces are quasi-coherent $\\mathcal O_X$-modules on the small etale site [def-trf-space-quasi-coherent-module, def-weil-sheaf-of-modules-category]. Here grading means restriction-compatible $\\mathcal O_X$-bilinear maps $\\mathcal B_k\\times\\mathcal G_r\\to\\mathcal G_{r+k}$ obeying the unit and associativity laws; the direct sums are in module sheaves. Assume $\\mathcal G$ is of finite type over $\\mathcal B$: etale locally there are finitely many homogeneous sections $s_i$ of degrees $d_i$ such that every homogeneous section is locally a finite sum of products $b_i s_i$ with $b_i\\in\\mathcal B_{r-d_i}$ in degree $r\\geq d_i$. For $b\\in B_k$, let $\\mu_{k,r}(b):\\mathcal G_r\\to\\mathcal G_{r+k}$ be multiplication by its pulled-back section. For every $q\\geq0$, using right derived global sections of underlying additive sheaves [def-weil-pbc-sites-and-cohomology], the additive group $\\bigoplus_{r\\geq0}H^q(X,\\mathcal G_r)$ is a finitely generated $B$-module [def-weil-finitely-generated-module] with action\n$$\\left(\\sum_k b_k\\right)(x_r)_r=\\left(\\sum_{k+r=d}H^q(X,\\mu_{k,r}(b_k))(x_r)\\right)_{d\\geq0}.$$\nBoth inputs have finite support, and the degree-zero action of $a\\in A$ is the cohomology map induced by multiplication by $f^\\sharp(a)$ on each piece.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AT, lemma-graded-finiteness; the graded cohomology action is written explicitly. Its direct-sum interpretation follows from Tag 073E (lemma-colimits), applied to finite partial sums, since a proper space over an affine scheme is quasi-compact and quasi-separated."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-finitely-generated-module",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal G=\\bigoplus_r\\mathcal G_r$, forgetting the grading temporarily. By [lem-sfb-space-qcoh-kernels-colimits], this module sheaf is quasi-coherent. The stipulated multiplication maps give the $\\mathcal B$-action: sheafifying the bilinear maps from finite partial sums gives the action on the direct sums, and the given equations give its unit and associativity. On an etale neighbourhood with homogeneous generators $s_1,\\ldots,s_n$, the map $\\mathcal B^{\\oplus n}\\to\\mathcal G$, $(b_i)\\mapsto\\sum_i b_i s_i$, is locally surjective. Indeed a section of a module-sheaf direct sum is locally a finite sum of homogeneous sections, and each is locally generated as in the hypothesis. Thus $\\mathcal G$ is finite type over $\\mathcal B$ as an ungraded module.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AT, lemma-graded-finiteness, quasi-coherent graded module viewed without grading"
+   }
+  },
+  {
+   "text": "Set $T=\\operatorname{Spec}B$ and $Y=X\\times_{\\operatorname{Spec}A}T$, with projections $p:Y\\to X$ and $h:Y\\to T$. The algebra $B$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], and $h$ is proper by [lem-sfb-space-proper-base-change]. Properness as defined in [def-sfb-space-morphism-properties] gives finite type and separatedness. For each etale scheme chart of $Y$ its composite to $T$ is locally of finite type, so [pqf-lem-locnoeth-lft] makes it locally Noetherian. Thus $Y$ is locally Noetherian. Properness over an affine base also gives quasi-compactness and quasi-separatedness of both $Y$ and $X$: the base is quasi-compact, and their absolute diagonals are composites of closed relative diagonals with base changes of the affine base's quasi-compact diagonal.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-space-proper-base-change",
+    "def-sfb-space-morphism-properties",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AT, first paragraph; algebra.tex Tag 00FN (lemma-Noetherian-permanence); spaces-morphisms.tex Tag 04WP (lemma-base-change-proper), with local Noetherianity tested on charts"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-relative-spec-correspondence] and its arbitrary base-change clause, $Y$ over $X$ is the affine space associated to $f^*\\widetilde B=\\mathcal B$, and $p_*\\mathcal O_Y\\cong\\mathcal B$ as algebras. Apply [lem-sfb-space-affine-module-correspondence] to the quasi-coherent underlying module from step 1 and this algebra action. It supplies a quasi-coherent $\\mathcal O_Y$-module $F$ and an isomorphism $p_*F\\cong\\mathcal G$ of $\\mathcal B$-modules. In particular the isomorphism respects the multiplication maps by each section of $\\mathcal B$.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-affine-module-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AT, relative spectrum identification and module correspondence; spaces-morphisms.tex Tags 081V and 08AI"
+   }
+  },
+  {
+   "text": "Here is the finite-type verification omitted in 08AT. Refine the neighbourhoods of the generators in step 1 to affine etale charts $U\\to X$. The epimorphism $\\mathcal B_U^{\\oplus n}\\to\\mathcal G_U$ corresponds under [lem-sfb-space-affine-module-correspondence], compatible with this etale restriction, to an epimorphism $\\mathcal O_{Y_U}^{\\oplus n}\\to F|_{Y_U}$. To check epimorphisms it suffices to take their cokernel: the equivalence preserves cokernels, and these are the sheaf cokernels because they remain quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]. Thus $F$ is locally finitely generated on an etale cover of $Y$. On each scheme chart of $Y$, finite type and quasi-coherence imply coherence by [pqf-lem-coherent-ft-locnoeth], since the chart is locally Noetherian by step 2. The coherence criterion in [lem-sfb-space-qcoh-groupoid-equivalence] then makes $F$ coherent on $Y$.",
+   "uses": [
+    "lem-sfb-space-affine-module-correspondence",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AT, omitted finite-type verification; Tag 07UB (lemma-coherent-Noetherian), etale chart criterion"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-proper-coherent-higher-images], $R^qh_*F$ is coherent on $T$. In the affine chart $T\\to T$ its section module is therefore finite over $B$, by the explicit coherence convention of that cited statement. Since $h$ is qcqs, [lem-sfb-space-affine-base-higher-image-sections] identifies this module with module-derived $H^q(Y,F)$, naturally in $F$. Multiplication by each $b\\in B$ commutes with this comparison. Finally [lem-sfb-ringed-site-global-module-abelian-cohomology] identifies module-derived cohomology with the cohomology of the underlying additive sheaf, naturally and linearly over global functions. Hence $H^q(Y,F)$ in the convention of the item is a finite $B$-module for every $q\\ge0$.",
+   "uses": [
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-sfb-ringed-site-global-module-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AS, lemma-proper-over-affine-cohomology-finite, as used in the last sentence of 08AT; Tag 03FD for the module/additive comparison"
+   }
+  },
+  {
+   "text": "Since $p$ is affine, [lem-sfb-space-affine-cohomology] gives $H^q(X,p_*F)\\cong H^q(Y,F)$. This comparison commutes with multiplication by every $b\\in B$: the module Leray spectral sequence [lem-sfb-ringed-site-leray-spectral-sequence] is natural in module maps, and [lem-sfb-space-affine-module-higher-image-vanishing] kills its positive rows, so its edge commutes with the endomorphism $b:F\\to F$. The natural module/additive comparison [lem-sfb-ringed-site-global-module-abelian-cohomology] gives the same assertion in underlying-additive cohomology. Under $p_*F\\cong\\mathcal G$, the endomorphism $p_*(b)$ is multiplication by the pulled-back section of $\\mathcal B$. Consequently $H^q(X,\\mathcal G)$, with this action, is isomorphic as a $B$-module to the finite module of step 5.",
+   "uses": [
+    "lem-sfb-space-affine-cohomology",
+    "lem-sfb-ringed-site-leray-spectral-sequence",
+    "lem-sfb-space-affine-module-higher-image-vanishing",
+    "lem-sfb-ringed-site-global-module-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AT, affine cohomology comparison; sites-cohomology.tex Tag 0732 (lemma-Leray), naturality"
+   }
+  },
+  {
+   "text": "The finite subsets $E\\subset\\mathbb N$ form a small filtered poset, and $\\mathcal G$ is the colimit of $\\bigoplus_{r\\in E}\\mathcal G_r$. By [lem-weil-pbc-module-sheaves-colimits-forgetful] the same colimit description holds after forgetting to abelian sheaves. Apply [lem-sfb-space-cohomology-filtered-colimit], since $X$ is qcqs by step 2. Cohomology is additive on finite direct sums, so the resulting canonical map is an isomorphism $$\\Phi:\\bigoplus_{r\\ge0}H^q(X,\\mathcal G_r)\\xrightarrow{\\sim}H^q(X,\\mathcal G).$$ It is characterized on the $r$th summand by the cohomology map induced by the sheaf injection $\\iota_r:\\mathcal G_r\\to\\mathcal G$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-space-cohomology-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073E (lemma-colimits), applied to finite partial sums; direct-sum interpretation of 08AT"
+   }
+  },
+  {
+   "text": "For homogeneous $b\\in B_k$, its multiplication $m_b$ on $\\mathcal G$ obeys $m_b\\iota_r=\\iota_{r+k}\\mu_{k,r}(b)$. Apply the additive cohomology functor: $$H^q(m_b)\\Phi\\iota_r=\\Phi\\iota_{r+k}H^q(\\mu_{k,r}(b)).$$ Every $b\\in B$ and every element of the cohomology direct sum have finite homogeneous support. Expanding both as finite sums therefore gives exactly the convolution formula in the statement, and proves that $\\Phi$ is $B$-linear for that formula. The unit and associativity laws follow by applying functoriality to $m_1=\\mathrm{id}$ and $m_bm_c=m_{bc}$; additivity gives the distributive laws. If $b$ is the image of $a\\in A$, its action on each piece is the cohomology map of multiplication by $f^\\sharp(a)$, by the given scalar-action hypothesis. Finally a finite generating set for the module of step 6 pulls back through $\\Phi$ to a finite generating set of the displayed graded module, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AT, conclusion with the homogeneous cohomology action made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-space-proper-base-change",
+  "def-sfb-space-morphism-properties",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-sfb-space-affine-module-correspondence",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sfb-space-qcoh-groupoid-equivalence",
+  "lem-sfb-space-proper-coherent-higher-images",
+  "lem-sfb-space-affine-base-higher-image-sections",
+  "lem-sfb-ringed-site-global-module-abelian-cohomology",
+  "lem-sfb-space-affine-cohomology",
+  "lem-sfb-ringed-site-leray-spectral-sequence",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-space-cohomology-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AT (lemma-graded-finiteness), with its omitted finite-type verification expanded and its direct-sum interpretation from Tag 073E (lemma-colimits)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "graded.*cohomology|cohomology.*graded|IsProper.*Module.Finite",
+   "results": "Read returned hits: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Rees finite type, local cohomology, finite scheme maps, or sheaf generators; none states coherent cohomology finiteness on proper algebraic spaces.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a finite type graded quasi-coherent module on a proper algebraic space is finite over a finitely generated graded base algebra",
+   "results": "Read returned hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, RingHom.FiniteType, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, SheafOfModules.QuasicoherentData.IsFinitePresentation, Module.Finite.finiteType, AlgebraicGeometry.IsProper.instOfIsFinite. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Rees finite type, local cohomology, finite scheme maps, or sheaf generators; none states coherent cohomology finiteness on proper algebraic spaces.",
+   "digest": "541e0f81ebdd507a"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H, Module.Finite",
+   "results": "Read returned hits: none. loogle: unknown identifier 'Sheaf.H'",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Rees finite type, local cohomology, finite scheme maps, or sheaf generators; none states coherent cohomology finiteness on proper algebraic spaces.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper algebraic space over a Noetherian ring, cohomology of a finite type quasi-coherent graded module over a pulled back finite type graded algebra is a finite module over that algebra",
+   "results": "Read returned hits: AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Rees finite type, local cohomology, finite scheme maps, or sheaf generators; none states coherent cohomology finiteness on proper algebraic spaces.",
+   "digest": "c100a2746929a8f4"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward finiteness of coherent sheaves after base change to the spectrum of a graded algebra gives finite graded cohomology",
+   "results": "Read returned hits: AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, HomogeneousLocalization.Away.finiteType, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Rees finite type, local cohomology, finite scheme maps, or sheaf generators; none states coherent cohomology finiteness on proper algebraic spaces.",
+   "digest": "2ff7e7370a7196bc"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"finite\"",
+   "results": "Read returned hits: Rep.FiniteCyclicGroup.groupCohomologyIsoOdd, Rep.FiniteCyclicGroup.groupCohomologyIsoEven, Rep.FiniteCyclicGroup.groupCohomologyπOdd, Rep.FiniteCyclicGroup.groupCohomologyIso₀, Rep.FiniteCyclicGroup.groupCohomologyπEven, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff, Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Rees finite type, local cohomology, finite scheme maps, or sheaf generators; none states coherent cohomology finiteness on proper algebraic spaces.",
+   "digest": "b3162e0ffd9c11e1"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of finite type graded quasi coherent modules on a proper algebraic space is finite over the graded base algebra",
+   "results": "Returned AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, AlgebraicGeometry.IsFinite.finite_app",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "e6b26a7c38a1e232"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"finite\"",
+   "results": "Returned Rep.FiniteCyclicGroup.groupCohomologyIsoOdd, Rep.FiniteCyclicGroup.groupCohomologyIsoEven, Rep.FiniteCyclicGroup.groupCohomologyπOdd, Rep.FiniteCyclicGroup.groupCohomologyIso₀, Rep.FiniteCyclicGroup.groupCohomologyπEven, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff, Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "b3162e0ffd9c11e1"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*cohomology|cohomology.*graded|AlgebraicSpace",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of a finite type graded module on an algebraic space has finitely generated cohomology",
+   "results": "Returned SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, SheafOfModules.pushforwardComp, PresheafOfModules.pushforward_map_app_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "161c0b7c950dd235"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness of coherent cohomology for proper morphisms and graded algebras on algebraic spaces",
+   "results": "Returned AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.Scheme.Hom.finite_app",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "887c865be62d680a"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-cohomology-powers-rees-finite",
+  "date": "2026-10-23",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3A: the Noetherian stage of the ampleness spreading argument, after schematic and ample fibre descent. First paragraph of the proof of 0D3A: lifting the chosen fibre coordinates by 0D39. Supporting input to 0D39: Tag 08AY (lemma-ML-cohomology-powers-ideal), part (3) at p = 0 and I = m, specialized to a line module; Situation 08AV. Proper over a Noetherian affine base makes Z Noetherian, so the line module is coherent. Supporting estimate used in the proof of 08AY(3): 08AX(2), decay of the map on cohomology of the submodules J^(n+m)F into J^nF. Supporting input: Tag 08AW, finite Rees module of ideal-power cohomology, used at the beginning of the proof of Tag 08AX. Supporting input: Tag 08AT (lemma-graded-finiteness), applied in the proof of Tag 08AW to the graded ideal-power module.",
+   "via": [
+    "lem-sfb-space-cohomology-powers-rees-finite",
+    "lem-sfb-space-ideal-power-cohomology-image-bound",
+    "lem-sfb-space-infinitesimal-section-image-stabilization",
+    "lem-sfb-space-ample-fibre-section-lifting",
+    "lem-sfb-space-noetherian-ample-neighbourhood",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-graded-cohomology-finite",
+  "worker": "stage1",
+  "summary": "NH checked 08AT against its full local source proof, retained the algebraic-space and additive-cohomology conventions, supplied one statement-only affine module correspondence prerequisite, expanded the omitted finite-type verification, and proved finiteness and the explicit graded action using existing space cohomology nodes. No statement correction or Lean writing.",
+  "blueprint": "Lower-level prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/moduli/ampleness/ideal-powers chain: Tag 08AT used in Tag 08AW. Latest direct-images proof (3) read. Steps 1–6 realize 08AT via affine base change; steps 7–8 realize the imported direct-sum/action interpretation. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic commutative algebra finiteness-to-Noetherianity, applied to B; this unit has no separate ring-theoretic input."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Scheme-chart local Noetherianity under a locally finite type morphism; this is a general chart tool, not the abelian-variety proof route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherent iff quasi-coherent finite type on locally Noetherian scheme charts; used to verify the space-module coherence hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General module-sheaf colimit/forgetting interface needed to apply the existing abelian-sheaf filtered-colimit theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-a2c1b49b1",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a2c1b49b1 (reviewer sub-agent of L); spot-checked: I read Stacks 08AT (lemma-graded-finiteness, the statement and the full proof) and 08AI (lemma-affine-equivalence-modules). The item statement and stmt_deps are byte-identical to the base (live). Steps 1-8 follow the 08AT route and cite each node for what its statement says: 03M1 for qcoh direct sums; 00FN, 04WP and the 01T6 chart test for local Noetherianity, with the qcqs argument written out; 081V base change for Y=Spec_X(B) and p_*O_Y≅B; the new 08AI node plus its moreover clause for F with p_*F≅G B-linearly. Step 4 writes out the 'details omitted' finite-type check: étale-local epi transported through the chart and free clauses, sheaf cokernel via 03M1, then 01XZ on charts and the 07UB groupoid criterion. Then 08AR coherence, 08EX sections and 03FD module/abelian comparison give B-finiteness. Module Leray is natural, and 073H vanishes in positive rows, so the action is b-equivariant. 03DA with 073E over the filtered finite subsets gives Φ; step 8 is the elementary convolution and A-action check. Advisory only: steps 4-5 move from the groupoid coherence notion to the f.g.-chart convention; both are the 07UB notion. New node lem-sfb-space-affine-module-correspondence: statement-only and self-contained; it is 08AI plus chart, étale and free-module consequences, all true. Tested on p=id, empty Y, Spec R[t]→Spec R and non-Noetherian rings. Not a duplicate: 01SB/0897 are scheme/Zariski, 081V covers algebras only, and 07U8, 03M3 and the stack relative-Spec node state no module equivalence (rg -L 08AI and keyword searches over all of dag/nodes). Batch-5 flags: the def-trf space/module definitions and the space cohomology lemmas reach sec-trace-formula only through generic algebraic-space and module foundations. The closure contains no trace-formula or Poincaré theorem and no nt-assume or sk-thm-trace-transport node, so the flags are generic and not a RETURN. No SGA. The tool_uses (00FN, 01T6, 01XZ, 03DA) are generic and accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGradedCohomologyFinite",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_graded_cohomology_finite",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.gradedCohomologyPiece",
+   "AlgebraicGeometry.AlgebraicSpace.space_graded_cohomology_finite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGradedCohomologyFinite.lean",
+  "statement": "theorem space_graded_cohomology_finite {A B : Type u} [CommRing A] [CommRing B] [Algebra A B] [IsNoetherianRing A] [Algebra.FiniteType A B] (graded : ℕ → Submodule A B) (hgrading : DirectSum.IsInternal graded) (hunit : (1 : B) ∈ graded 0) (hmul : ∀ (k l : ℕ) {b c : B}, b ∈ graded k → c ∈ graded l → b * c ∈ graded (k + l)) (hscalar : ∀ a : A, algebraMap A B a ∈ graded 0) {S : Scheme.{u}} (Y : Over S) (e : Y.left ≅ Spec (.of A)) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y) (hf : MapIsProper f) (G : ℕ → X.Modules) (hG : ∀ r : ℕ, (G r).IsQuasicoherent) (mu : ∀ r k : ℕ, graded k → (G r ⟶ G (r + k))) (hadd : ∀ (r k : ℕ) (b c : graded k), mu r k (b + c) = mu r k b + mu r k c) (hassoc : ∀ (r k l : ℕ) (b : graded k) (c : graded l), HEq (mu r l c ≫ mu (r + l) k b) (mu r (k + l) ⟨b.val * c.val, hmul k l b.property c.property⟩)) (hbase : ∀ (r : ℕ) (a : A) (U : X.EtaleSite) (s : (G r).val.obj (op U)), HEq ((mu r 0 ⟨algebraMap A B a, hscalar a⟩).val.app (op U) s) ((((Scheme.ΓSpecIso (.of A)).inv ≫ Scheme.Γ.map (((yoneda.preimage (U.obj.hom ≫ f.hom.hom)).left ≫ e.hom).op)).hom a) • s)) (hfinite : ∀ U : X.EtaleSite, ∃ R : Sieve U, R ∈ X.etaleTopology U ∧ ∀ (V : X.EtaleSite) (i : V ⟶ U), R i → ∃ (n : ℕ) (d : Fin n → ℕ) (s : ∀ j : Fin n, (G (d j)).val.obj (op V)), ∀ (W : X.EtaleSite) (j : W ⟶ V) (r : ℕ) (t : (G r).val.obj (op W)), ∃ T : Sieve W, T ∈ X.etaleTopology W ∧ ∀ (Z : X.EtaleSite) (h : Z ⟶ W), T h → (G r).val.map h.op t ∈ Submodule.span (X.structureSheaf.obj.obj (op Z)) {z | ∃ a : Fin n, d a ≤ r ∧ ∃ b : graded (r - d a), HEq z ((mu (d a) (r - d a) b).val.app (op Z) ((G (d a)).val.map (h ≫ j).op (s a)))}) (q : ℕ) : ∃ mod : Module B (DirectSum ℕ (fun r ↦ gradedCohomologyPiece X (G r) q)), (∀ (K R : Finset ℕ) (b : ∀ k : ℕ, graded k) (x : ∀ r : ℕ, gradedCohomologyPiece X (G r) q), @SMul.smul B _ mod.toDistribMulAction.toMulAction.toSemigroupAction.toSMul (∑ k ∈ K, (b k).val) (∑ r ∈ R, DirectSum.of (fun t ↦ gradedCohomologyPiece X (G t) q) r (x r)) = ∑ k ∈ K, ∑ r ∈ R, DirectSum.of (fun t ↦ gradedCohomologyPiece X (G t) q) (r + k) (Sheaf.H.map ((X.smallModuleRestriction ⋙ SheafOfModules.toSheaf X.smallStructureRings).map (mu r k (b k))) q (x r))) ∧ @Module.Finite B _ _ _ mod",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The homogeneous O-linear constant-section action is the universal-property encoding of a module over f^*(B tilde); its product and A-scalar laws give precisely the balanced tensor extension, and the covering-sieve local spans express finite homogeneous generation. The conclusion supplies the B-action together with its full finite-sum cohomology convolution formula and finiteness. Underlying-additive cohomology is Mathlib Sheaf.H on the published small affine etale model, with unchanged section universe. Two existing definition dependencies are added for the representable scheme target and canonical small-model restriction; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a18329187",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Clause-by-clause match. A Noetherian, B finite type, internal ℕ-grading with hmul/hunit/hscalar; f: X→schemeSpace Y with Y≅Spec A and MapIsProper; G_r quasi-coherent on the small étale ringed site. The f^*B̃-module is encoded by O_X-linear mu with hadd/hassoc and hbase pinned to the actual f^♯(a) via Γ-pullback along U→Y≅Spec A; this is equivalent to a module over O_X⊗f⁻¹B̃ because B̃_k is quasi-coherent on an affine base, and hassoc with degree-0 scalars plus hbase gives A-linearity. hfinite is étale-local homogeneous generation through O-spans of mu(b)s_a with d_a≤r. H^q is Sheaf.H on the recorded small affine model (Tag 039Z equivalence, universe u, transparent abbrev, not hollow). The conclusion gives ∃ Module B on the direct sum with the finite-sum convolution formula, which determines the action, plus Module.Finite; the degree-0 A-action follows from the formula with hbase. Edge cases checked: zero ring, empty X, zero G, n=0, q=0, B in degree 0, empty supports. The two added stmt_deps (def-trf-scheme-algebraic-space, def-sfb-space-small-ringed-model) are definition nodes landed on the base and used in the statement. Docstrings and all 8 proof steps present; sorry only; report sections present; lean.statement verbatim. Not recompiled per instructions; worker reports a clean compile and dry run. No fixes."
+ }
+}

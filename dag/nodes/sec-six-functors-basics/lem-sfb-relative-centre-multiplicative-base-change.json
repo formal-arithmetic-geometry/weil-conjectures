@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-relative-centre-multiplicative-base-change",
+ "kind": "statement",
+ "title": "Relative reductive centre over an arbitrary ring",
+ "statement": "Let $A$ be a nonzero commutative ring and put $S=\\operatorname{Spec}A$. Let $G$ be a reductive $S$-group scheme, with the group-scheme and reductivity conventions of [def-sfb-pinned-split-root-realization], without a splitness, pinning or maximal-torus hypothesis. Thus $G$ is smooth affine and finitely presented over $S$, with connected reductive geometric fibres. For an $A$-algebra $B$, define $Z_G(B)$ to consist of the $z\\in G(B)$ such that for every $B$-algebra $C$ and every $g\\in G(C)$ the images of $z$ and $g$ commute. This subgroup functor is represented by a closed subgroup scheme $Z_G\\hookrightarrow G$ [def-weil-closed-immersion]. It is of multiplicative type of finite presentation: locally for fppf coverings [def-pc-fppf-site], it is isomorphic to $D_U(M)=\\operatorname{Spec}_U\\mathcal O_U[M]$ for a finitely generated abelian group $M$, with the group-algebra Hopf operations of [def-sfb-ring-diagonalizable-group]. The morphism $Z_G\\to S$ is affine, flat [def-weil-flat-morphism] and finitely presented. For every $A$-algebra $A'$, the canonical map $(Z_G)_{A'}\\to Z_{G_{A'}}$ is an isomorphism. Neither Noetherianity or reducedness of $A$ nor smoothness of $Z_G$ is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Theorem 3.3.4 and proof, printed pp.98--100, with Definition 3.3.3 and the base-change discussion preceding it, pp.97--98. Read online; WANTED local archive as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this structural group-scheme result."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-weil-closed-immersion",
+  "def-pc-fppf-site",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}C$. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $A\\to C$ is smooth. Apply [lem-weil-pbc-smooth-algebra-finite-type-model] to obtain a subring $A_b\\subseteq A$ finitely generated over $\\mathbf Z$ and a smooth $A_b$-algebra $C_b$ with $A\\otimes_{A_b}C_b\\simeq C$. Let $I$ be the set of finitely generated subrings of $A$ containing $A_b$, ordered by inclusion. It is small and directed (adjoin the union of two finite generating sets), and its union is $A$. Its members are nonzero since their unit is that of $A$. Put $S_i=\\operatorname{Spec}A_i$ and $X_i=\\operatorname{Spec}(A_i\\otimes_{A_b}C_b)$. The affine limit formula in [lem-weil-pbc-limit-affine-transition] identifies $S$ with $\\varprojlim_iS_i$. The $S_i$ are quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], and their transition maps are affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Each $X_i/S_i$ is smooth by [lem-pc-proper-base-change](2) and the affine smoothness equivalence just cited.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-algebra-finite-type-model",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TP, lemma-finite-presentation-fs-Noetherian; affine passage by 01V6/02H6, limits by 01YW, smooth base change by 02H2."
+   }
+  },
+  {
+   "text": "Descend the group operations, not just the underlying scheme. The coordinate algebras of $X_i$, $X_i\\times_{S_i}X_i$ and $X_i^3$ are finitely presented: use [lem-weil-pbc-tensor-product-finitely-presented-algebras] and [lem-weil-pbc-fibre-product-affine-spectra]. Such affine schemes are locally of finite presentation by [def-sbc-locally-finite-presentation] and of finite presentation by [lem-weil-pbc-affine-scheme-qcqs] and [lem-weil-pbc-qcqs-morphism-permanence](1). By clause (2) of [thm-pd-spreading-out], the multiplication $G\\times_SG\\to G$, inverse $G\\to G$ and identity $S\\to G$ descend to one common index $i$. Clause (3) descends the associativity equality on $X_i^3$, the two unit equalities on $X_i$, and the two inverse equalities on $X_i$. There are only finitely many equalities, so directedness gives one index where all hold. Thus $X_i$ is a smooth affine finitely presented group $G_i$, and its base change is isomorphic to $G$ as a group. Later models are obtained by base change, with the same properties; finite presentation persists by [lem-weil-pbc-qcqs-morphism-permanence](3).",
+   "uses": [
+    "lem-weil-pbc-tensor-product-finitely-presented-algebras",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation, clauses (2),(3), applied to the three operations and the finite group-diagram equalities."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reductivity-eventual-ring-colimit] to this directed system and the smooth affine finitely presented group $G_i$. Its limit is the given reductive $G$, so for some later index the group $G_0$ is reductive over the entire $\\operatorname{Spec}A_0$, not merely over points hit by $\\operatorname{Spec}A$. Here $A_0\\subseteq A$ is nonzero and finitely generated over $\\mathbf Z$. The ring $\\mathbf Z$ is Noetherian: a nonzero ideal has a least positive element, and division with remainder proves that element generates the ideal; the zero ideal is generated by zero. Consequently [lem-weil-pbc-finite-type-algebra-noetherian] makes $A_0$ Noetherian. We have obtained a reductive Noetherian model $G_0$ with a specified group isomorphism $(G_0)_A\\simeq G$, without choosing a torus or pinning.",
+   "uses": [
+    "lem-sfb-reductivity-eventual-ring-colimit",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.1.11 and proof, printed pp.88--89; Noetherian permanence is Stacks Tag 00FN, lemma-Noetherian-permanence."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-reductive-centre-weight-kernel] over $A_0$. Its hypotheses hold: $A_0$ is nonzero Noetherian, and $G_0$ is smooth affine of finite type with connected reductive geometric fibres. It gives a closed centre $Z_0\\hookrightarrow G_0$, flat over $A_0$, locally of the form $D_U(N)$ for finitely generated abelian $N$, and compatible with arbitrary base change. Also $Z_0$ is affine and finitely presented over $A_0$: write $G_0=\\operatorname{Spec}C_0$; the affine characterization in [def-weil-closed-immersion] writes $Z_0=\\operatorname{Spec}(C_0/J)$. A finite set of algebra generators of $C_0$ maps to generators of $C_0/J$. Apply [lem-weil-pbc-finite-type-noetherian-finite-presentation] to this finite-type $A_0$-algebra. Its spectrum is locally of finite presentation by [def-sbc-locally-finite-presentation], and then of finite presentation by [lem-weil-pbc-affine-scheme-qcqs] and [lem-weil-pbc-qcqs-morphism-permanence](1). The structural map is affine by [lem-weil-pbc-morphism-affine-schemes-affine].",
+   "uses": [
+    "lem-sfb-relative-reductive-centre-weight-kernel",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.3.4, centre portion of the proof, printed pp.98--99; finite presentation from Stacks Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation, and Tag 01TP."
+   }
+  },
+  {
+   "text": "Set $Z=Z_0\\times_{A_0}A$ and use $(G_0)_A\\simeq G$ for its inclusion. The arbitrary-base-change clause of [lem-sfb-relative-reductive-centre-weight-kernel], applied to $A_0\\to A$, says exactly that this represents the functor $Z_G$ of the statement on every $A$-algebra. Its inclusion is closed by [lem-weil-pbc-closed-immersion-base-change]. Its structural map is flat by [lem-weil-pbc-flat-morphism-base-change] and finitely presented by [lem-weil-pbc-qcqs-morphism-permanence](3). If $Z_0=\\operatorname{Spec}Q_0$, then [lem-weil-pbc-fibre-product-affine-spectra] gives $Z=\\operatorname{Spec}(A\\otimes_{A_0}Q_0)$, so [lem-weil-pbc-morphism-affine-schemes-affine] also gives the required affineness over $S$. All group operations are the base changes of those of $Z_0$.",
+   "uses": [
+    "lem-sfb-relative-reductive-centre-weight-kernel",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.3.4, printed pp.98--99; arbitrary base change of the centre as already stated by the cited Noetherian theorem; Stacks Tags 01U9 and 01TS."
+   }
+  },
+  {
+   "text": "Take an fppf cover $\\{U_j\\to\\operatorname{Spec}A_0\\}$ on which $Z_0$ is $D_{U_j}(N_j)$, as supplied by [lem-sfb-relative-reductive-centre-weight-kernel]. Pulling it back to $S$ gives an fppf cover by [lem-trf-fppf-covering-base-change]. On an affine chart $U_j=\\operatorname{Spec}R$, base change to $\\operatorname{Spec}R\\prime$ carries $R[N_j]$ to $R\\prime[N_j]$: the maps $r\\prime\\otimes\\sum a_n e_n\\mapsto\\sum r\\prime a_n e_n$ and $\\sum b_n e_n\\mapsto\\sum b_n\\otimes e_n$ are inverse. They preserve multiplication, coproduct, counit and antipode on each basis element by [def-sfb-ring-diagonalizable-group]; [lem-weil-pbc-fibre-product-affine-spectra] identifies the corresponding group schemes. These formulas restrict to the same formulas on smaller affine charts, so give the same identification over a general $U_j$. Hence $Z$ is fppf locally $D(N_j)$ with the same finitely generated character groups. Torsion in $N_j$ has not been removed.",
+   "uses": [
+    "lem-sfb-relative-reductive-centre-weight-kernel",
+    "lem-trf-fppf-covering-base-change",
+    "def-sfb-ring-diagonalizable-group",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Definition 3.3.3 and Theorem 3.3.4, printed pp.98--99; Appendix B.1, printed p.280; Stacks Tag 021O, lemma-fppf, part (3)."
+   }
+  },
+  {
+   "text": "Finally let $A\\to A\\prime$ be arbitrary. Apply the arbitrary-base-change assertion of [lem-sfb-relative-reductive-centre-weight-kernel] directly to the composite $A_0\\to A\\prime$. Both $(Z_G)_{A\\prime}$ and $Z_{G_{A\\prime}}$ identify with $(Z_0)_{A\\prime}$ as subgroup functors of $(G_0)_{A\\prime}$. Explicitly, on every $A\\prime$-algebra $B$, both consist of precisely those $z\\in G_0(B)$ commuting with every $g\\in G_0(C)$ for every $B$-algebra $C$; the $B$-algebras in the two descriptions are identical. The comparison therefore sends a point to that same point of $G_0(B)$ and is bijective naturally in $B$. These representable functors give the canonical group-scheme isomorphism, and its naturality also proves compatibility with successive base changes. If $A\\prime$ is the zero ring, both schemes are empty over the empty base and the same assertion holds. No step required $A$ or $A\\prime$ to be reduced or Noetherian, or $Z$ to be smooth.",
+   "uses": [
+    "lem-sfb-relative-reductive-centre-weight-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.3.4, functorial-centre identification in the first part of the proof, printed p.99; canonical arbitrary-base-change comparison written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-algebra-finite-type-model",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-tensor-product-finitely-presented-algebras",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "thm-pd-spreading-out",
+  "lem-sfb-reductivity-eventual-ring-colimit",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-relative-reductive-centre-weight-kernel",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-trf-fppf-covering-base-change",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly of the existing Noetherian centre theorem using Corollary 3.1.11 (pp.88--89) and the centre portion of Theorem 3.3.4 (pp.98--99). Online PDF read; local literature archive WANTED. The Stacks finite-presentation reduction is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The centre of a reductive group scheme over an arbitrary base ring is a finitely presented group of multiplicative type and commutes with base change",
+   "results": "8 hits: SpecialLinearGroup.centerEquivRootsOfUnity, SpecialLinearGroup.center_eq_bot_of_finrank_le_one, SpecialLinearGroup.centerEquivRootsOfUnity_apply, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, SpecialLinearGroup.mem_center_iff, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity, SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GroupScheme\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|Reductive|central.isogen|Isogeny",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Centre of a reductive group scheme is of multiplicative type over any base scheme",
+   "results": "8 hits: Subgroup.center, Subgroup.center.isMulCommutative, SpecialLinearGroup.mem_center_iff, Set.center, Subalgebra.center, Set.mem_center_iff, Subring.instCommRingSubtypeMemCenter, AddSubgroup.centerCharacteristic",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic centre of a smooth affine reductive group is an fppf local diagonalizable group compatible with arbitrary scalar extension",
+   "results": "8 hits: AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, SpecialLinearGroup.centerEquivRootsOfUnity, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.AffineSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The centre of a reductive group scheme over an arbitrary ring is flat of multiplicative type and commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T11:21:27Z\", \"tool\": \"leanfinder\", \"query\": \"The centre of a reductive group scheme over an arbitrary ring is flat of multiplicative type and commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"Subgroup.center.isMulCommutative\", \"Algebra.TensorProduct.includeLeft_map_center_le\", \"ConjAct.fixedPoints_eq_center\", \"Algebra.TensorProduct.includeRight_map_center_le\"], \"digest\": \"4b959af3b12a92b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: displayed signatures concern abstract special linear group centres, ordinary affine schemes or smooth-algebra models; none states the reductive relative-centre theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|multiplicative.type|schematic.center",
+   "results": "{\"t\": \"2026-10-24T11:21:48Z\", \"tool\": \"grep\", \"query\": \"reductive|multiplicative.type|schematic.center\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: displayed signatures concern abstract special linear group centres, ordinary affine schemes or smooth-algebra models; none states the reductive relative-centre theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic centre of a reductive group is an fppf local diagonalizable group scheme over any ring",
+   "results": "{\"t\": \"2026-10-24T11:21:48Z\", \"tool\": \"leansearch\", \"query\": \"Schematic centre of a reductive group is an fppf local diagonalizable group scheme over any ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\"], \"digest\": \"32a8e9f74377a79c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: displayed signatures concern abstract special linear group centres, ordinary affine schemes or smooth-algebra models; none states the reductive relative-centre theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"center\"",
+   "results": "{\"t\": \"2026-10-24T11:21:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"center\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: displayed signatures concern abstract special linear group centres, ordinary affine schemes or smooth-algebra models; none states the reductive relative-centre theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group scheme of finite presentation over a ring descends to a reductive group scheme over a finitely generated subring of the integers",
+   "results": "{\"t\": \"2026-10-24T11:22:33Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group scheme of finite presentation over a ring descends to a reductive group scheme over a finitely generated subring of the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced.of_forall_fg\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Algebra.SubmersivePresentation\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.FiniteType.of_finitePresentation\"], \"digest\": \"051dd498af88f943\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: displayed signatures concern abstract special linear group centres, ordinary affine schemes or smooth-algebra models; none states the reductive relative-centre theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group scheme has an fppf locally diagonalizable closed centre whose formation is compatible with extension of scalars",
+   "results": "{\"t\": \"2026-10-24T11:24:24Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group scheme has an fppf locally diagonalizable closed centre whose formation is compatible with extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.mem_center_iff\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\"], \"digest\": \"766356a7ea3719b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: displayed signatures concern abstract special linear group centres, ordinary affine schemes or smooth-algebra models; none states the reductive relative-centre theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fibral-central-isogeny-recognition",
+  "date": "2026-10-24",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Recognition of a central isogeny from geometric fibres.; supporting Conrad, Theorem 3.3.4 and proof, printed pp.98--100, with Definition 3.3.3 and the base-change discussion preceding it, pp.97--98.",
+   "via": [
+    "lem-sfb-fibral-central-isogeny-recognition",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-centre-multiplicative-base-change",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse the existing Noetherian centre theorem and eventual-reductivity theorem. Descend the underlying smooth algebra, the group operations and their identities, obtain a reductive Noetherian model, and transfer its centre with explicit finite-presentation and canonical base-change arguments. No new nodes: existing inputs suffice. All cited statements read; citations.json contains exact extracts.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3), along its recorded alteration/invariant-theory/reductive-model prerequisite chain. The current blueprint unit and direct-image proof were read. blueprint_refs.py ancestor returns None for this created chain; preserve from.node=null and the exact inherited place/via, with same_as=[] after whole-blueprint centre/reductive searches. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "General finite-presentation, affine-limit or smooth-base-change tool for the Noetherian reduction; used only for its stated scheme-theoretic assertion, which no node of this unit supplies."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "General finite-presentation, affine-limit or smooth-base-change tool for the Noetherian reduction; used only for its stated scheme-theoretic assertion, which no node of this unit supplies."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "General finite-presentation, affine-limit or smooth-base-change tool for the Noetherian reduction; used only for its stated scheme-theoretic assertion, which no node of this unit supplies."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "General finite-presentation, affine-limit or smooth-base-change tool for the Noetherian reduction; used only for its stated scheme-theoretic assertion, which no node of this unit supplies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-pc-proper-base-change",
+  "thm-pd-spreading-out"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-a0c353eb2",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-a0c353eb2 (reviewer sub-agent of L); spot-checked: The statement is byte-identical to the live and side-live copies and is true (Conrad Thm 3.3.4). I tested it on: the trivial group; G_m^r; SL_n with centre mu_n, which is not smooth over F_p when p divides n; and the zero A' case. The delivery has no new nodes. Step 1: Stacks 00TP (smooth-algebra finite-type model) checked verbatim; the index set of finitely generated subrings is small, directed, has union A and only nonzero members; S = lim S_i by 01YW. Step 2: thm-pd-spreading-out (01ZM) clauses 2 and 3 have all hypotheses supplied (finitely presented models, quasi-compact quasi-separated bases, affine transitions). The group operations and the five group identities descend to one index. Step 3: every hypothesis of the eventual-reductivity theorem (lem-sfb-reductivity-eventual-ring-colimit) is met. A_0 is Noetherian by 00FN. Steps 4-7: the hypotheses and centre definition of the weight-kernel theorem (lem-sfb-relative-reductive-centre-weight-kernel) match the item exactly. Finite presentation of Z_0 follows from 00FP. Closed immersion, flatness, finite presentation and affineness all base change. Its faithfully flat finitely presented coverings are fppf coverings and pull back by 021O. The base-change comparison is the identity on points of (G_0)_{A'}. No cycle. No duplicate: the near matches are the field-only and Noetherian-quotient theorems. Batch-5 flags: the weight-kernel closure reaches trace-formula and Poincare chapters only through general nodes: Artin approximation (via lem-sfb-geometric-torus-fppf-lift), the Galois/lisse dictionaries, constructible truncations and roots-of-unity lemmas. It reaches no nt-assume leaf, no trace-transport node and no batch-4 target. lem-trf-fppf-covering-base-change is a general site fact (021O). Both are accepted as outside the assumed statements. The tool_uses are accepted. No SGA is cited."
+ }
+}

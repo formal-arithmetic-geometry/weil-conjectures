@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-relative-sl2-central-extension-splitting",
+ "kind": "statement",
+ "title": "Gabber splitting of relative central extensions of SL2",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $Z$ a separated commutative $S$-group scheme: a group object over $S$ with commutative multiplication and closed diagonal [def-weil-closed-immersion]. Let $E$ be a sheaf of groups for the fppf topology on $S$-schemes, whose coverings are faithfully flat finitely presented jointly surjective families. Suppose there is a central exact sequence of fppf sheaves $$1\\longrightarrow Z\\xrightarrow{i}E\\xrightarrow{p}\\operatorname{SL}_{2,S}\\longrightarrow1.$$ Exact means that $i$ identifies $Z$ with the kernel of $p$ and sections of the target lift fppf-locally; central means that $i(Z)$ commutes with all sections of $E$ after every base change. For an $S$-scheme $U$, $\\operatorname{SL}_{2,S}(U)$ is the determinant-one $2\\times2$ matrices in $\\Gamma(U,\\mathcal O_U)$. There exists a unique homomorphism of sheaves $s:\\operatorname{SL}_{2,S}\\to E$ with $p\\circ s=\\mathrm{id}$. The map $(z,g)\\mapsto i(z)s(g)$ is an isomorphism $Z\\times_S\\operatorname{SL}_{2,S}\\simeq E$. In particular $E$ is represented by an $S$-scheme, and when $E$ is already represented the splitting is a morphism of $S$-group schemes. No smoothness of $Z$ or $E$ and no assumption that $2$ is invertible is required.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Proposition 4.3.1 (Gabber) and proof, printed pp.126--131. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative structural theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-sl2-presheaf",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=\\operatorname{SL}_{2,S}$, with $x(u),y(v),h(t)$ as in the cited root-relation lemma, and $D=h(\\mathbf G_m)$. Let $D',U',V'$ be the inverse images in $E$ of $D,x(\\mathbf G_a),y(\\mathbf G_a)$. For $a,b\\in D$ choose fppf-local lifts $A,B\\in D'$ and define $c(a,b)=[A,B]$. The commutator lies in $Z$; replacing either lift by a central element does not change it, so these local sections glue. Because all these commutators are central, $[AA',B]=[A,B][A',B]$ and $[A,BB']=[A,B][A,B']$. Thus $c:D\\times D\\to Z$ is multiplicative in each variable. This natural transformation is a scheme morphism since both its source and target are represented. Apply the torus-pairing vanishing lemma through $h:\\mathbf G_m\\simeq D$. Hence every such commutator is one and $D'$ is commutative.",
+   "uses": [
+    "lem-sfb-relative-torus-bimultiplicative-vanishing",
+    "lem-sfb-sl2-lifted-root-gauss-relations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.3.1, p.127, preimages of D,U,V and commutativity of D-prime."
+   }
+  },
+  {
+   "text": "Conjugation by a local lift of $g\\in G$ is independent of its lift, because any two differ by a central element of $Z$; local lifts therefore give an action of $G$ on $E$. Its restriction to $D$ preserves $U'$ and $V'$ and fixes $Z$. Direct multiplication of determinant-one matrices gives $h(t)x(u)h(t)^{-1}=x(t^2u)$ and $h(t)y(v)h(t)^{-1}=y(t^{-2}v)$. The weighted-additive lemma applies to $U'\\to\\mathbf G_a$ with $k=2$ and to $V'\\to\\mathbf G_a$ with $k=-2$. Obtain equivariant homomorphisms $x',y':\\mathbf G_a\\to E$ lifting $x,y$. No representability of $U',V'$ is assumed here.",
+   "uses": [
+    "lem-sfb-weighted-additive-central-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.3.1, pp.127--128 and Lemma 4.3.2."
+   }
+  },
+  {
+   "text": "Define $g'(t)=y'(-t^{-1})x'(t)y'(-t^{-1})$ and $h'(t)=g'(t)g'(1)^{-1}$. Step 1 verifies the commutative-preimage hypothesis of the lifted-root lemma; Step 2 verifies both equivariant homomorphism hypotheses. It follows that $h'$ is a homomorphism lifting $h$, and that the two Gauss relations of that lemma hold whenever $1+uv$ is invertible. In particular its inverse-form relation is available even when either additive parameter is zero or a nonunit.",
+   "uses": [
+    "lem-sfb-sl2-lifted-root-gauss-relations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.3.3 and equation (4.3.1), pp.128--130."
+   }
+  },
+  {
+   "text": "On the open cell $\\Omega$ of the extension lemma define $\\sigma(x(u)h(s)y(v))=x'(u)h'(s)y'(v)$. The coordinates are unique: if the matrix entries are $a,b,c,d$ and $d$ is invertible, they are $s=d^{-1},u=b/d,v=c/d$. Thus this formula is a natural map, lifts the inclusion of $\\Omega$ into $G$, and sends $1$ to $1$. To check partial multiplicativity, take two coordinate triples $(u,s,v)$ and $(a,t,b)$, and put $w=1+va$. Their matrix product lies in $\\Omega$ exactly when $w$ is a unit, since its bottom-right entry is $s^{-1}wt^{-1}$. The inverse-form Gauss relation rewrites its lifted middle factors as $y'(v)x'(a)=x'(a/w)h'(w)^{-1}y'(v/w)$. Conjugating by the diagonal lifts and combining adjacent additive and multiplicative factors gives\n$$\\sigma(x(u)h(s)y(v))\\sigma(x(a)h(t)y(b))=x'(u+s^2a/w)h'(st/w)y'(b+t^2v/w).$$\nThe identical matrix multiplication yields the coordinates $(u+s^2a/w,st/w,b+t^2v/w)$ downstairs. This proves the required equality whenever the product remains in $\\Omega$.",
+   "uses": [
+    "lem-sfb-sl2-lifted-root-gauss-relations",
+    "lem-sfb-sl2-open-cell-sheaf-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.3.1, p.130: partial multiplication on the open cell; reordering written explicitly."
+   }
+  },
+  {
+   "text": "Apply the open-cell extension lemma with $H=E$ and the map $\\sigma$ just constructed. It gives a homomorphism $s:G\\to E$. The two homomorphisms $p\\circ s$ and $\\mathrm{id}_G$ have the same restriction to $\\Omega$, so uniqueness in the same lemma, now with $H=G$, gives $p\\circ s=\\mathrm{id}_G$.",
+   "uses": [
+    "lem-sfb-sl2-open-cell-sheaf-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.3.1, pp.130--131: extension to a splitting."
+   }
+  },
+  {
+   "text": "If $s_1,s_2:G\\to E$ are splittings, their ratio $s_2(g)s_1(g)^{-1}$ lies in $Z$. Centrality shows by multiplying two such expressions that this ratio defines a homomorphism $f:G\\to Z$. Commutativity of $Z$ makes $f$ invariant under conjugation by $D$. Consequently $f\\circ x$ is invariant for weight $2$, and $f\\circ y$ for weight $-2$; the final assertion of the weighted-additive lemma makes both trivial. Matrix multiplication gives $g(t)=y(-t^{-1})x(t)y(-t^{-1})$ and $h(t)=g(t)g(1)^{-1}$, so $f\\circ h=1$ also. Thus $f=1$ on $\\Omega$, and uniqueness in the open-cell extension lemma with $H=Z$ makes $f=1$ on all of $G$. Hence $s_1=s_2$.",
+   "uses": [
+    "lem-sfb-weighted-additive-central-extension",
+    "lem-sfb-sl2-open-cell-sheaf-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.3.1, pp.126--127, uniqueness, using equivariant additive vanishing instead of schematic-density reduction."
+   }
+  },
+  {
+   "text": "The natural map $Z\\times_SG\\to E$, $(z,g)\\mapsto i(z)s(g)$, is a homomorphism by centrality. Its inverse sends $e$ to $(z,p(e))$, where $i(z)=e\\,s(p(e))^{-1}$; the kernel identification supplies a unique such section $z$, compatibly with restriction. Substitution checks both composites are identities. The product $Z\\times_SG$ is an $S$-scheme, so this is a representation of $E$. If $E$ was already represented, a natural map $G\\to E$ is a morphism of $S$-schemes: evaluate the transformation at the identity point of $G$ to obtain that morphism, and naturality identifies its value on every $T$-point. Its homomorphism identities make it a morphism of group schemes. The arguments used neither smoothness of $Z,E$ nor inversion of $2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.3.1, p.126, representability consequence; explicit inverse and functor-of-points verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-torus-bimultiplicative-vanishing",
+  "lem-sfb-sl2-lifted-root-gauss-relations",
+  "lem-sfb-weighted-additive-central-extension",
+  "lem-sfb-sl2-open-cell-sheaf-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Explicit assembly after reading Proposition 4.3.1 and Lemmas 4.3.2--4.3.3 online, pp.126--131. Local PDF WANTED. Uniqueness uses the equivariant-vanishing assertion of the additive lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every central extension of the SL2 group sheaf by a separated commutative group scheme has a unique splitting",
+   "results": "{\"t\": \"2026-10-24T07:09:41Z\", \"tool\": \"leanfinder\", \"query\": \"Every central extension of the SL2 group sheaf by a separated commutative group scheme has a unique splitting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.Extension.oneCochainOfTwoSplitting_apply\", \"GroupExtension.Splitting.mk.inj\", \"AddGroupExtension.IsConj\", \"LieAlgebra.Extension.oneCochainOfTwoSplitting\", \"GroupExtension.Splitting\", \"GroupExtension.IsConj\", \"GroupExtension.IsConj.refl\", \"AddGroupExtension.IsConj.refl\"], \"digest\": \"255e78e4328ff3a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"CommGroup\"",
+   "results": "{\"t\": \"2026-10-24T07:09:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\", \\\"CommGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "central.?extension|CentralExtension|SpecialLinearGroup.*(split|lift)|SL2",
+   "results": "{\"t\": \"2026-10-24T07:09:30Z\", \"tool\": \"grep\", \"query\": \"central.?extension|CentralExtension|SpecialLinearGroup.*(split|lift)|SL2\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber unique splitting central extensions of SL2 over an arbitrary base scheme",
+   "results": "{\"t\": \"2026-10-24T07:09:31Z\", \"tool\": \"leansearch\", \"query\": \"Gabber unique splitting central extensions of SL2 over an arbitrary base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupExtension.Splitting.noConfusionType\", \"GroupExtension.Splitting.mk.inj\", \"GroupExtension.Splitting.mk\", \"GroupExtension.Splitting\", \"GroupExtension.Splitting.mk.noConfusion\", \"GroupExtension.Splitting.mk.injEq\", \"GroupExtension.Splitting.noConfusion\", \"GroupExtension.Splitting.noConfusionType\"], \"digest\": \"8bdd67461a446ab6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every fppf central extension of the special linear group scheme SL2 over any scheme by a separated commutative group scheme has exactly one splitting",
+   "results": "{\"t\": \"2026-10-24T07:59:23Z\", \"tool\": \"leanfinder\", \"query\": \"Every fppf central extension of the special linear group scheme SL2 over any scheme by a separated commutative group scheme has exactly one splitting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"GroupExtension.Splitting\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"GroupExtension.Splitting.mk.inj\", \"GroupExtension.IsConj.refl\"], \"digest\": \"20827994560ea9ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension section data, not the existence or uniqueness of a section of the relative group-sheaf extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique section of a central extension of relative SL2 by a separated commutative group scheme Gabber",
+   "results": "{\"t\": \"2026-10-24T07:59:22Z\", \"tool\": \"leansearch\", \"query\": \"Unique section of a central extension of relative SL2 by a separated commutative group scheme Gabber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Section.mk.sizeOf_spec\", \"GroupExtension.Splitting.toSection\", \"GroupExtension.Section\", \"GroupExtension.Section.noConfusion\", \"GroupExtension.Section.exists_eq_inl_mul\", \"AddGroupExtension.Section.mk.injEq\", \"GroupExtension.Section.noConfusionType\", \"AddGroupExtension.Section.noConfusion\"], \"digest\": \"567422db18c1b628\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension section data, not the existence or uniqueness of a section of the relative group-sheaf extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"Splitting\"",
+   "results": "{\"t\": \"2026-10-24T07:59:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\", \\\"Splitting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension section data, not the existence or uniqueness of a section of the relative group-sheaf extension."
+  },
+  {
+   "tool": "grep",
+   "query": "central.?extension|Gabber|SpecialLinearGroup",
+   "results": "{\"t\": \"2026-10-24T07:59:22Z\", \"tool\": \"grep\", \"query\": \"central.?extension|Gabber|SpecialLinearGroup\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension section data, not the existence or uniqueness of a section of the relative group-sheaf extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-rank-one-local-matrix-model",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: unique splitting of the central extension of SL2 in both centre cases. This split realizes Conrad Proposition 4.3.1 by its torus preimage, equivariant root lifts, lifted Gauss law and open-cell extension argument.",
+   "via": [
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-sl2-central-extension-splitting",
+  "worker": "stage1",
+  "summary": "Constructed normalized additive lifts, their diagonal lift and a partially multiplicative open-cell section, extended the section to the whole group sheaf, and proved uniqueness and representability. Four strictly smaller statement-only prerequisites; no statement change and no field or smoothness restriction.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor confirms this). The recorded route is the relative rank-one input to det-thm-sf-ctf-stability-direct-images proof (3). Steps 1--7 provide its Conrad Proposition 4.3.1 prerequisite for both centre cases, without altering the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-89cfde07c",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-89cfde07c (reviewer sub-agent of L); spot-checked: Conrad is not in the local literature, so I fetched luminysga3smf.pdf and ran pdftotext on it. I read §4.3 in full, printed pp.125-131: Prop. 4.3.1 with the uniqueness, D' commutator and U' commutativity paragraphs, Lemmas 4.3.2 and 4.3.3, (4.3.1) with its unit removal and inverse form, and the open-cell word argument (4.3.2). The item statement matches Prop. 4.3.1 exactly and is not weakened. Each of the four new nodes is one strictly smaller sub-result: torus pairing p.127, weighted-additive extension pp.127-128 + Lemma 4.3.2, lifted Gauss relations Lemma 4.3.3 + (4.3.1), open-cell sheaf extension pp.130-131. All are statement-only, self-contained, searched, with correct blueprint fields, and none restates the item. I recomputed: the SL2 relations x(u)y(v)=y(v/w)h(w)x(u/w) and y(v)x(u)=x(u/w)h(w)^{-1}y(v/w); the cell coordinates s=1/d, u=b/d, v=c/d; the product's bottom-right entry w/(st); the step-4 lifted product x'(u+s^2a/w)h'(st/w)y'(b+t^2v/w); and g(t)g(1)^{-1}=h(t). Every hypothesis of every cited node is supplied: D' commutativity from step 1, U' and V' as central weight ±2 extensions from step 2, and for step 6 the D-invariance of f=s2 s1^{-1} by commutativity of Z. Step 6 gets uniqueness from equivariant additive vanishing plus open-cell uniqueness instead of Conrad's schematic density; this is valid. I checked characteristic 2, nonreduced bases, nonunit parameters and non-representable E. No duplicates in the DAG: I read central-extension-of-tori, multiplicative-extension-action-rigidity, torus-torsion-joint-injectivity and relative-block-gauss-chart (an LDU chart on GL_E). All citations are in the unit, so no tool_uses. Minor: the report (not any node) says to translate by y(1); the correct translate is x(1), and the node statement is unaffected. Step 1 cites the Gauss node only for notation, which is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeSL2CentralExtensionSplitting",
+  "declaration": "AlgebraicGeometry.relativeSL2_central_extension_splitting",
+  "declarations": [
+   "AlgebraicGeometry.relativeSL2_central_extension_splitting"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeSL2CentralExtensionSplitting.lean",
+  "statement": "theorem relativeSL2_central_extension_splitting {S : Scheme.{u}} (Z : Grp (Over S)) [IsCommMonObj Z.X] [IsClosedImmersion (pullback.diagonal Z.X.hom)] (E : Sheaf (Scheme.fppfTopology.over S) GrpCat.{max u v}) (i : (yonedaGrp.obj Z ⋙ GrpCat.uliftFunctor.{v, u}) ⟶ E.obj) (p : E.obj ⟶ relativeSL2Presheaf S ⋙ GrpCat.uliftFunctor.{v, u}) (hi : ∀ U : (Over S)ᵒᵖ, Function.Injective (i.app U)) (hker : ∀ (U : (Over S)ᵒᵖ) (e : E.obj.obj U), p.app U e = 1 ↔ ∃ z, i.app U z = e) (hp : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over S) p) (hcentral : ∀ (U : (Over S)ᵒᵖ) (z : (yonedaGrp.obj Z ⋙ GrpCat.uliftFunctor.{v, u}).obj U) (e : E.obj.obj U), i.app U z * e = e * i.app U z) : ∃ s : (relativeSL2Presheaf S ⋙ GrpCat.uliftFunctor.{v, u}) ⟶ E.obj, s ≫ p = 𝟙 _ ∧ (∀ s' : (relativeSL2Presheaf S ⋙ GrpCat.uliftFunctor.{v, u}) ⟶ E.obj, s' ≫ p = 𝟙 _ → s' = s) ∧ (∀ U : (Over S)ᵒᵖ, ∃ e : ((yonedaGrp.obj Z ⋙ GrpCat.uliftFunctor.{v, u}).obj U × (relativeSL2Presheaf S ⋙ GrpCat.uliftFunctor.{v, u}).obj U) ≃* E.obj.obj U, ∀ z g, e (z, g) = i.app U z * s.app U g) ∧ (E.obj ⋙ forget GrpCat).IsRepresentable ∧ (∀ (G H : Grp (Over S)) (α : (yonedaGrp.obj G ⋙ GrpCat.uliftFunctor.{v, u}) ≅ relativeSL2Presheaf S ⋙ GrpCat.uliftFunctor.{v, u}) (β : (yonedaGrp.obj H ⋙ GrpCat.uliftFunctor.{v, u}) ≅ E.obj), ∃ t : G ⟶ H, Functor.whiskerRight (yonedaGrp.map t) GrpCat.uliftFunctor.{v, u} ≫ β.hom = α.hom ≫ s)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3992c4fb",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Clause-by-clause match with Conrad Prop 4.3.1 node: arbitrary S, Z : Grp (Over S) commutative with IsClosedImmersion diagonal, E fppf sheaf in GrpCat.{max u v} (v free), hi+hker kernel identification, IsLocallySurjective p, centrality at every U; conclusions unique splitting, per-U MulEquiv pinned to i(z)s(g) (hence natural), IsRepresentable over S, Yoneda group-scheme morphism for any representations. Universe check: GrpCat.uliftFunctor.{v,u} = GrpCat.{u} to GrpCat.{max u v} (Basic.lean universe u v); RepresentableBy allows Type (max u v). New def-sfb-relative-sl2-presheaf has real data (Over.forget op, Gamma, SpecialLinearGroup.map), only functor laws sorried with proof docstrings; no Mathlib/project duplicate (project SL is field-only). Node diff vs live: only stmt_deps (+fppf site, +SL2 presheaf def) and lean. Statements verbatim, docstrings and source/blueprint present, report sections present. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-condensed-tensor-extension",
+ "kind": "statement",
+ "title": "Existence of a sheafified balanced tensor extension",
+ "statement": "Fix R,P,H and a tensor presheaf B as in [def-sfb-condensed-tensor-induction-data], with sheafification data D. For every H-equivariant morphism f:M to Res_H^P(N), there exists a P-equivariant internal-module map F:D.functor(M) to N such that F(eta([p] tensor m))=p f(m) for every profinite S, p in C(S,P), and m in M(S). This is existence only; no uniqueness, inverse identities, or naturality is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Agent-formulated induction argument below paragraph (3); Existence of a sheafified balanced tensor extension. External reference WANTED, as for the parent."
+ },
+ "stmt_deps": [
+  "def-sfb-condensed-tensor-induction-data"
+ ],
+ "proof": [
+  {
+   "text": "On finite sums send a[p] tensor m to a times p f(m). Linearity kills the additive and scalar relations, and H-equivariance of f kills balancing, since (ph)f(m)=p f(hm). Thus this descends to each concrete quotient. The restriction formula and naturality make it a presheaf map, and left multiplication makes it P-equivariant.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "def-sfb-condensed-action-module",
+    "lem-sfb-condensed-tensor-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction step 6, balanced presheaf formula"
+   }
+  },
+  {
+   "text": "Apply the ordinary module-sheafification Hom equivalence to the balanced natural map. Transport across D.comparison and full faithfulness of the section-module equivalence. On the sheafification unit the resulting internal morphism is the original presheaf map. To prove P-equivariance on an arbitrary sheaf section x, cover by local preimages of x along that unit. Restrict the group element as well. Naturality of the action and morphism, D.induced_action, and presheaf equivariance prove equality on this cover; separatedness of the target sheaf proves equality globally. The unit formula gives the required pure-tensor normalization.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction step 6, sheafified extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-tensor-induction-data",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-tensor-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Induction proof steps specified in the Lean docstring and inherited from the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal balanced group algebra tensor presheaf and equivariant module sheafification",
+   "results": "PresheafOfModules.sheafify, sheafifyMap, sheafification, toSheafify, Sheafify.module, and toSheaf_map_sheafificationHomEquiv_symm.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary module sheafification is used; none states balanced induction over varying section rings with internal continuous group action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of balanced group algebra tensor induction is left adjoint to restriction of internal group actions on sheaves of modules",
+   "results": "PresheafOfModules.sheafificationAdjunction; Rep.indResAdjunction; fixed-ring restriction adjoints. Loogle Rep.indResAdjunction confirms the abstract fixed-ring statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; use the ordinary sheafification API and prove the balanced-generator argument."
+  },
+  {
+   "tool": "grep",
+   "query": "indResAdjunction|TensorInductionPresheaf|Equivariant.*sheafif",
+   "results": "Mathlib.RepresentationTheory.Induced, the item, CondensedSplitCosetInduction, and EquivariantModuleSheafificationReflector.",
+   "date": "2026-10-26",
+   "verdict": "Split-coset induction has a stronger hypothesis and is unproved; the proved reflector supplies the sheafification step, not the tensor presheaf or normalized Frobenius transposes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CondensedTensorInductionAdjunction",
+  "group": "E2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), induction argument: Existence of a sheafified balanced tensor extension",
+   "via": [
+    "lem-sfb-condensed-tensor-induction-adjunction",
+    "lem-sfb-condensed-split-coset-induction",
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CondensedTensorInductionExtension",
+  "file": "lean/Sheaf/CategoryTheory/CondensedTensorInductionExtension.lean",
+  "declaration": "Profinite.CondensedAction.tensorInductionExtension_exists",
+  "statement": "theorem tensorInductionExtension_exists (B : TensorInductionPresheaf R P H)\n    (D : TensorInductionSheafData B) (M : ActionModule R H.toSubgroup)\n    (N : ActionModule R P)\n    (f : M ⟶ (inflate (inductionSubgroupInclusion P H)).obj N) :\n    ∃ F : D.functor.obj M ⟶ N,\n      ∀ (S : Profinite.{u}) (p : C(S, P)) (m : sectionModule R M.module S),\n        ((F.val.hom.hom.app (op S)).hom)\n            (B.sheafTensor D.functor D.comparison M S p m) =\n          N.act S p ((f.val.hom.hom.app (op S)).hom m)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "independent cc review: moved data block vs clone item (byte-identical), item theorem statement vs clone, item/new node lean records and proof_deps vs Lean, ActionModule definition vs the two sorried statements"
+ }
+}

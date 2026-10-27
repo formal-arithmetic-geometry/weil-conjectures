@@ -19,99 +19,93 @@
  ],
  "proof": [
   {
-   "text": "Reduce first to coefficients $A_1=\\mathbf F_\\ell$. Fix the original pair and work where $c$ is constant. For the actual supported maps $\\eta_r$, use the cones $C_r$ of [lem-per-gysin-coefficient-cone-triangles]. Suppose $C_1=0$. Induct on $r$: for $r\\geq2$ the supplied distinguished triangle is $C_{r-1}\\to C_r\\to C_1\\to C_{r-1}[1]$. Assuming $C_{r-1}=0$, apply [lem-weil-pbc-hom-into-triangle-exact](ii) with $W=C_r$ and $a=1_{C_r}$. Its composite to $C_1=0$ vanishes, so the identity factors through $C_{r-1}=0$ and is zero. Thus $C_r$ is a zero object. By [lem-kun-distinguished-cone-zero] on the cone triangle of $\\eta_r$, this is equivalent to $\\eta_r$ being an isomorphism. The same criterion at $r=1$ starts the induction from purity over $\\mathbf F_\\ell$. This uses compatible representatives of the supported maps; it does not assume that exceptional pullback commutes with a derived change of coefficient rings.",
+   "text": "Work first with $A=\\mathbf F_\\ell$. Let $S$ be any complete strictly henselian mixed-characteristic trait with $\\ell$ invertible and let $V$ be integral regular, flat and quasi-projective of finite type over $S$. Apply [lem-per-trait-prime-to-ell-log-alteration] to obtain $f:Y\\to V$ and a finite trait extension $T\\to S$ with $Y$ integral regular, quasi-projective of finite type over both bases, log smooth over $T$, and $f$ projective dominant generically finite etale of degree $d$ prime to $\\ell$. The finite-type Noetherian criterion makes $Y$ and $V$ Noetherian, since $S,T$ are spectra of Noetherian discrete valuation rings. Log-smooth punctual purity makes $Y$ punctually pure. Projective implies proper, so proper invertible-degree descent applies to $f$ over $S$, with both source and target integral regular and quasi-projective of finite type over that same complete trait. Since $d$ is prime to $\\ell$, it is invertible in $A$. It follows that $V$ is punctually pure; no flatness of $f$ has been used.",
    "uses": [
-    "lem-per-gysin-coefficient-cone-triangles",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-kun-distinguished-cone-zero"
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-log-smooth-trait-punctual-purity",
+    "lem-kun-projective-implies-proper",
+    "lem-per-punctual-purity-proper-degree-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI Proposition 3.3.2, p.245."
+    "place": "XVI 3.7, printed pp.254--255; Theorem 3.6.2 and Proposition 3.5.7"
    }
   },
   {
-   "text": "We now prove punctual purity over $\\mathbf F_\\ell$ for every regular Noetherian scheme with $\\ell$ invertible. By [lem-per-punctual-purity-trait-test], it suffices to treat an integral regular scheme $V$ flat and quasi-projective of finite type over a complete strictly henselian mixed-characteristic trait $S$ with $\\ell$ invertible. This reduction includes completion and the equal-characteristic case; it does not require the original $X$ or $Z$ to be excellent. Fix such $S,V$.",
+   "text": "Step 1 verifies the premise of the mixed-characteristic trait test for every such $S,V$, with the fixed prime $\\ell$. Apply [lem-per-punctual-purity-trait-test]: every regular Noetherian scheme with $\\ell$ invertible is punctually pure for $A$. In particular both $X$ and $Z$ in the item are punctually pure. The test imposes no excellence hypothesis on these schemes.",
    "uses": [
     "lem-per-punctual-purity-trait-test"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI section 3.7, first paragraph, p.254, with Propositions 3.2.4--3.2.5."
+    "place": "XVI 3.7, first paragraph, printed p.254"
    }
   },
   {
-   "text": "Apply [lem-per-trait-prime-to-ell-log-alteration] to $V/S$. It gives a finite trait extension $T/S$ and a projective dominant generically finite etale map $f:Y\\to V$ of degree $d>0$ prime to $\\ell$, with $Y$ integral regular and quasi-projective of finite type over $S$, carrying an fs log structure log smooth over $T$. Since $\\ell$ is a unit on $S$, it remains a unit on $T$. The log-smooth purity theorem [lem-per-log-smooth-trait-punctual-purity] therefore makes $Y$ punctually pure over $\\mathbf F_\\ell$. We use the geometric alteration theorem here, without assuming purity of $V$ or of any non-log-smooth alteration.",
+   "text": "Apply the punctual two-of-three statement to $i:Z\\hookrightarrow X$: conditions (b) and (c) hold by Step 2, hence condition (a) holds. Thus the actual Kummer-supported morphism $\\eta_{i,1}:A_Z\\to i_1^!A_X(c)[2c]$ is an isomorphism. This is the class named in the item, not an unspecified isomorphism. The statement is local for the locally constant codimension, so it applies componentwise.",
    "uses": [
-    "lem-per-trait-prime-to-ell-log-alteration",
-    "lem-per-log-smooth-trait-punctual-purity"
+    "lem-per-punctual-purity-two-of-three"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI section 3.7, pp.254--255, and Theorem 3.6.2."
+    "place": "XVI Proposition 3.2.3, printed p.244; application in 3.7"
    }
   },
   {
-   "text": "Use [lem-per-punctual-purity-proper-degree-descent] for $f:Y\\to V$ over $S$. Both schemes are integral regular, finite type and quasi-projective over $S$ by the alteration statement; its projective map is proper by [lem-pc-projective-proper], its generic degree is $d$, and $d$ is invertible in $\\mathbf F_\\ell$ since $\\ell\\nmid d$. The lemma requires no flatness of $f$. It follows that $V$ is punctually pure. This verifies the entire test family of Step 2, so [lem-per-punctual-purity-trait-test] gives punctual purity for every regular Noetherian scheme with $\\ell$ invertible.",
+   "text": "For the fixed pair, choose cones $C_r$ of its actual prime-power Kummer maps using [lem-per-gysin-coefficient-cone-triangles]. Step 3 says $C_1=0$. Induct on $r\\geq1$: the supplied distinguished triangle $C_r\\to C_{r+1}\\to C_1\\to C_r[1]$ has zero outer objects if $C_r=0$. Its cohomology long exact sequence gives $H^q(C_{r+1})=0$ for every integer $q$; cohomology detects derived isomorphisms, so $C_{r+1}=0$. This proves $C_n=0$ for every $n\\geq1$, and hence the specified $\\eta_{i,n}$ is an isomorphism. The cone lemma supplies compatibility of actual coefficient classes, not merely a reduction of their abstract isomorphism types.",
    "uses": [
-    "lem-per-punctual-purity-proper-degree-descent",
-    "lem-per-punctual-purity-trait-test",
-    "lem-per-trait-prime-to-ell-log-alteration",
-    "lem-pc-projective-proper"
+    "lem-per-gysin-coefficient-cone-triangles",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI section 3.7, last paragraph, p.255; Proposition 3.5.7."
+    "place": "XVI Proposition 3.3.2 and proof, printed p.245"
    }
   },
   {
-   "text": "Return to $i:Z\\hookrightarrow X$. Step 4 applies separately to $X$ and to $Z$, so they satisfy conditions (c) and (b) of [lem-per-punctual-purity-two-of-three]. That statement gives condition (a): the actual Kummer class $\\eta_{i,1}:\\mathbf F_{\\ell,Z}\\to i_1^!\\mathbf F_{\\ell,X}(c)[2c]$ is an isomorphism. Its pointwise classes and its composition convention are exactly those of [lem-per-regular-immersion-class-calculus], the class used in the item. Step 1 now gives the desired $\\eta_{i,n}$ for the original exponent $n$. No field-of-definition or smoothness-over-a-field assumption has entered.",
+   "text": "First commute $i_n^!$ with the twist. The closed immersion $i$ is proper ([lem-kun-projective-implies-proper]: closed immersions are proper) and of finite type, so the trivial compactification $(1_Z,i)$ gives $Ri_!=Ri_*$ [def-amb-etale-compact-support] with right adjoint $i_n^!$ [thm-amb-etale-exceptional-adjoint]. The finite Tate lines are locally free of rank one, their pullbacks are the Tate lines of $Z$ and their negative twists are their duals, with evaluation isomorphisms $L\\otimes L^{-1}\\cong\\Lambda_n$ [lem-asd-etale-finite-twist-pullback]; so $-\\otimes L$ is an autoequivalence with inverse $-\\otimes L^{-1}$. For $L=\\Lambda_{n,X}(c)$, $K\\in D(X_{\\mathrm{et}},\\Lambda_n)$ and every $M$ on $Z$, adjunction, this inverse and the proper projection formula [lem-amb-proper-coproducts-projection] for $i$ give natural bijections $\\operatorname{Hom}(M,i_n^!(K\\otimes L))\\cong\\operatorname{Hom}(Ri_*M,K\\otimes L)\\cong\\operatorname{Hom}(Ri_*M\\otimes L^{-1},K)\\cong\\operatorname{Hom}(Ri_*(M\\otimes i^*L^{-1}),K)\\cong\\operatorname{Hom}(M\\otimes i^*L^{-1},i_n^!K)\\cong\\operatorname{Hom}(M,i_n^!K\\otimes i^*L)$. By Yoneda, $i_n^!(\\Lambda_{n,X}(c))\\cong(i_n^!\\Lambda_{n,X})\\otimes\\Lambda_{n,Z}(c)$. Now tensor the isomorphism of Step 4 with $\\Lambda_{n,Z}(-c)$ and shift by $[-2c]$; evaluation (on a local basis $a\\otimes b\\mapsto ab$) cancels the twist and gives $i_n^!\\Lambda_{n,X}\\simeq\\Lambda_{n,Z}(-c)[-2c]$, with cohomology only in degree $2c$, since tensor by a locally free line is exact, as checked in local bases. The empty immersion has zero objects throughout; in codimension zero the class is the open-and-closed restriction identity by [lem-per-regular-immersion-class-calculus].",
    "uses": [
-    "lem-per-punctual-purity-two-of-three",
+    "lem-kun-projective-implies-proper",
+    "def-amb-etale-compact-support",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-proper-coproducts-projection",
     "lem-per-regular-immersion-class-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI Proposition 3.2.3, p.244; section 3.7, first paragraph; Proposition 3.3.2."
-   }
-  },
-  {
-   "text": "For $A=\\Lambda_n$ and $m=\\ell^n$, [lem-asd-etale-finite-twist-pullback] says the signed Tate sheaves on $Z$ are locally free of rank one, with compatible evaluation. Thus $\\Lambda_{n,Z}(c)\\otimes\\Lambda_{n,Z}(-c)\\to\\Lambda_{n,Z}$ is an isomorphism: on a trivialization it is the ordinary rank-one evaluation. Tensoring with the inverse line and shifting by $[-2c]$ gives $i_n^!\\Lambda_{n,X}\\simeq\\Lambda_{n,Z}(-c)[-2c]$. With the cochain convention, $\\mathcal H^q(K[m])=\\mathcal H^{q+m}(K)$, so the right side has only $\\mathcal H^{2c}=\\Lambda_{n,Z}(-c)$. All constructions commute with open restriction by [lem-per-regular-immersion-class-calculus], so different locally constant values of $c$ are treated on their respective components. For $c=0$ its specified class is the open-and-closed restriction map, including the identity as $1$; on the empty subscheme all assertions are vacuous.",
-   "uses": [
-    "lem-per-regular-immersion-class-calculus",
-    "def-weil-pbc-derived-categories",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI Theorem 3.1.1 and Definition 2.3.1; cohomological shift convention."
+    "place": "XVI Theorem 3.1.1 and Definition 2.3.1; untwisting the conclusion (twist commutation of i^! by the projection formula)"
    }
   }
  ],
  "proof_deps": [
-  "lem-per-gysin-coefficient-cone-triangles",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-kun-distinguished-cone-zero",
-  "lem-per-punctual-purity-trait-test",
   "lem-per-trait-prime-to-ell-log-alteration",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-per-log-smooth-trait-punctual-purity",
+  "lem-kun-projective-implies-proper",
   "lem-per-punctual-purity-proper-degree-descent",
-  "lem-pc-projective-proper",
+  "lem-per-punctual-purity-trait-test",
   "lem-per-punctual-purity-two-of-three",
-  "lem-per-regular-immersion-class-calculus",
-  "def-weil-pbc-derived-categories",
-  "lem-asd-etale-finite-twist-pullback"
+  "lem-per-gysin-coefficient-cone-triangles",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-proper-coproducts-projection",
+  "lem-per-regular-immersion-class-calculus"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose XVI, proof of Theorem 3.1.1, section 3.7, pp.254--255; reductions in Propositions 3.2.3 and 3.3.2."
+  "place": "XVI 3.7, pp.254--255, with 3.2.3 and coefficient reduction 3.3.2"
  },
  "mathlib_searches": [
   {
@@ -176,6 +170,34 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsIntegralClosure.isTorsionFree\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \"[Module R A] [IsScalarTower R A B] [IsTorsionFree R B] : IsTorsionFree R A\", \"doc\": \"If $ B $ is the integral closure of $ A $ over $ R $, and $ B $ is torsion-free as an $ R $-module with a compatible scalar tower structure $ R \\\\to A \\\\to B $, then $ A $ is also torsion-free as an $ R\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"PerfectClosure.mk_eq_iff\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"(x y : ℕ × K) : mk K p x = mk K p y ↔ ∃ z, (frobenius K p)^[y.1 + z] x.2 = (frobenius K p)^[x.1 + z] y.2\", \"doc\": \"For any two pairs $(n, a)$ and $(m, b)$ in $\\\\mathbb{N} \\\\times K$, their images in the perfect closure of a field $K$ of characteristic $p$ are equal if and only if there exists a natural number $z$ su\"}\n  {\"name\": \"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Jacobson\", \"type\": \"[IsNoetherianRing R] [IsJacobsonRing R] (x : PrimeSpectrum R) :\\n  List.TFAE [IsOpen { x }, IsClopen { x }, IsClosed { x } ∧ StableUnderGeneralization { x }]\", \"doc\": \"In a Noetherian Jacobson ring $ R $, for any prime ideal $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, the following are equivalent: (1) the singleton set $ \\\\{x\\\\} $ is open in the Zariski to\"}\n  {\"name\": \"PerfectClosure.r_iff\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"∀ (K : Type u) [inst : CommRing K] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : CharP K p] (a a_1 : ℕ × K),\\n  PerfectClosure.R K p a a_1 ↔ ∃ n x, a = (n, x) ∧ a_1 = (n + 1, (frobenius K p) x)\", \"doc\": \"For a commutative ring $ K $ of prime characteristic $ p $, two pairs $ (n, x) $ and $ (m, y) $ in $ \\\\mathbb{N} \\\\times K $ satisfy the perfect closure relation $ R $ if and only if there exists $ n \\\\i\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Homeomorph\", \"type\": \"[IsPurelyInseparable k K] : IsHomeomorph (comap <| algebraMap R (R ⊗[k] K))\", \"doc\": \"Let $ k \\\\to K $ be a purely inseparable field extension and $ R $ a commutative semiring equipped with a $ k $-algebra structure. The induced map on prime spectra given by preimage under the canonical\"}\n  {\"name\": \"IsPurelyInseparable.isPRadical\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \"[IsPurelyInseparable K L] : IsPRadical (algebraMap K L) p\", \"doc\": \"For any purely inseparable field extension $ L $ over $ K $, the canonical algebra homomorphism from $ K $ to $ L $ satisfies the $ p $-radical condition for some prime power $ p $. This means that th\"}\n  {\"name\": \"PerfectClosure.instNontrivialOfIsReduced\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"[CommRing K] [IsReduced K] (p : ℕ) [Fact p.Prime] [CharP K p] [Nontrivial K] : Nontrivial (PerfectClosure K p)\", \"doc\": \"If $ K $ is a nontrivial, reduced commutative ring of prime characteristic $ p $, then its perfect closure is also nontrivial.\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: inspected actual hits; no absolute etale purity theorem for regular Noetherian pairs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber absolute cohomological purity for regular Noetherian closed pairs with finite prime power torsion coefficients",
+   "results": "8 actual hits: BDeRhamPlus, BDeRham, localCohomology.isoSelfLERadical, Submodule.exists_isInternal_prime_power_torsion, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern coefficient rings, commutative algebra, closed immersion geometry, or compiler purity; none states finite-coefficient etale absolute purity"
+  },
+  {
+   "tool": "grep",
+   "query": "absolute.?purity|cohomological.?purity|Gysin",
+   "results": "3 actual hits: Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern coefficient rings, commutative algebra, closed immersion geometry, or compiler purity; none states finite-coefficient etale absolute purity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Gysin morphism for a closed immersion between regular Noetherian schemes is an isomorphism with finite torsion coefficients",
+   "results": "8 actual hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern coefficient rings, commutative algebra, closed immersion geometry, or compiler purity; none states finite-coefficient etale absolute purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 actual hits: Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern coefficient rings, commutative algebra, closed immersion geometry, or compiler purity; none states finite-coefficient etale absolute purity"
   }
  ],
  "mathlib_match": null,
@@ -203,34 +225,73 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-gabber-regular-pair-purity",
   "worker": "stage1",
-  "summary": "Preserved the full Noetherian regular-pair and prime-power statement. Followed ILO XVI 3.7 through six statement-only inputs: coefficient cone triangles; the two-of-three punctual criterion; complete mixed-characteristic trait testing; punctual purity for regular log-smooth trait schemes; geometric prime-to-ell log alteration; proper invertible-degree descent. Applied those inputs with every hypothesis explicit, and wrote the coefficient induction and final twist/shift calculation. No completed project Lean declaration or exact Mathlib match found. Resumption repaired explicit citations for triangle exactness, the cone-zero criterion, projective properness, and signed finite etale Tate-line evaluation. Reused all prior logged searches.",
-  "blueprint": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. This split realizes the finite-coefficient absolute regular-pair input to that local duality model by ILO XVI 3.7. The perverse unit and chapter are unchanged.",
+  "summary": "Repaired the returned delivery under the scoped maintenance decision coord/changes/20261024-Q84-gabber-purity-inputs.md. Independently checked the retained five-step ILO XVI finite-coefficient assembly against all twelve current cited statements and the source. The six exact purity inputs and two definition dependencies are now unsplit stage-1 interfaces with their obsolete proofs withdrawn. Their 249-node statement closure has no excluded or missing node. Preserved statement, source, stmt_deps and blueprint provenance exactly; reused citations and real logged searches. No new nodes, Mathlib leaves or Lean files; submitted for independent review, without restoring the discarded Artin-Gabber or arbitrary-field adic route. Maintainer FIX (cc review): Step 5 now proves the commutation of i^! with the Tate twist by adjunction, the proper projection formula and the inverse line, instead of tensoring silently.",
+  "blueprint": "Retains the inherited Step 3 finite-torsion regular-pair input provenance; reconstructs only ILO XVI absolute purity, not the discarded Artin-Gabber or arbitrary-field adic argument.",
   "tool_uses": [
    {
-    "node": "lem-pc-projective-proper",
-    "why": "Step 4 uses only projective implies proper to satisfy the proper-degree descent hypothesis; this is a general scheme tool, not a replacement of the perverse-unit route."
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic finite-torsion derived or scheme tool used for the ILO XVI absolute-purity assembly; the inherited curve unit does not state this input."
    },
    {
     "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Step 6 uses local rank-one signed finite etale Tate lines and evaluation to untwist; the perverse unit has no general Noetherian finite-coefficient version."
+    "why": "Generic finite-torsion derived or scheme tool used for the ILO XVI absolute-purity assembly; the inherited curve unit does not state this input."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Ordinary etale exceptional right adjoint i^! used in the Step 5 Yoneda twist commutation; the perverse unit supplies no adjoint-existence statement."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Proper projection formula for the closed immersion, used to commute i^! with the invertible Tate line in Step 5 (same use as accepted in lem-per-absolute-gysin-purity)."
    }
   ]
  },
  "tool_uses": [
-  "lem-pc-projective-proper",
-  "lem-asd-etale-finite-twist-pullback"
+  "lem-kun-projective-implies-proper",
+  "lem-asd-etale-finite-twist-pullback",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-proper-coproducts-projection"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q53-9a82e2798",
-  "group": "Q53",
+  "reviewer": "NT-cc-Q84-ef6331ffc",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-9a82e2798 (reviewer sub-agent of L); spot-checked: I read the item, all six new nodes and every cited statement against ILO XVI pp.233-255, and made no fixes. The item is ILO Thm 3.1.1 restricted to Z/l^n (enough by 3.3.1), with the Kummer class of class-calculus (Def 2.3.1); its statement is unchanged and no excellence or field hypothesis is added. Step 1 is the 3.3.2 cone induction: the triangle C_{r-1}->C_r->C_1 with Hom-exactness (ii) and W=C_r, id=0, then cone-zero gives eta_r iso; the induction is set up correctly. Steps 2-4 follow 3.7. The alteration node gives a regular, log-smooth-over-T, projective alteration of degree [G:H] prime to l, so Y is punctually pure by 3.6.2. Proper-degree descent (3.5.7) applies: I checked every hypothesis, projective implies proper is cited and no flatness is needed. The trait test then closes the reduction, and this is not circular. Step 5 is two-of-three (3.2.3) with (b) and (c). Step 6's untwisting and shift sign are correct. The six new nodes are statement-only, self-contained, sourced to ILO 3.3.2/3.2.3/3.7+3.2.4-5/3.6.2/3.7/3.5.7, and true. None restates the item or a clause of it, and none duplicates an existing node: lem-trf-plurinodal-alteration, the uniformization and regular-cover nodes, and the absolute-purity nodes (which depend on this item) state different things. The trait test's added 'complete' strengthens the implication; it is provable by completion and Cohen structure. Accepted tool uses: lem-pc-projective-proper and lem-asd-etale-finite-twist-pullback. There is no SGA citation. Batch 5: both log nodes cite def-trf-fs-log-blowup, a pure definition (fs log structures, charts, log blowups). Its 66-node closure is only general definitions and generic module lemmas, with no step of the trace-formula or Poincare-duality proofs, so it is a general definition and accepted. Advisories: Fujiwara 2002 is not in literature/, so the trait-test split must mark it WANTED or write the argument as an agent. Later splits of the descent and log-smooth nodes must replace ILO's SGA 4 / SGA 4 1/2 inputs (3.4.4, 3.5.1, 3.5.2, 3.5.9) to keep the route lock. Step 6 implicitly uses i^!(K(c)) = (i^!K)(c) for an etale-locally trivial line, which is elementary."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-ef6331ffc (reviewer sub-agent of L); spot-checked: Read the whole item, the 12 cited statements, def-per-punctual-purity and the source, ILO XVI (3.1.1, 3.2.3–3.2.5, 3.3.1–3.3.2, §3.7 pp.254–255). Route: coord/changes/20261024-Q84-gabber-purity-inputs.md re-admits the six ILO inputs. None of the 12 proof_deps is on the live route-pivot-dropped list, and the 254-node statement closure does not meet it. No cycle, no SGA, no new nodes. Statement, stmt_deps, source and blueprint are byte-equal to live, so nothing is weakened. No duplicate: thm-pur-regular-immersion-purity needs smoothness over a field, the regular-gysin nodes add excellence and cite this item. Steps 1–4 check out against their inputs: alteration over T, log-smooth purity for Y, proper-degree descent over the same S, trait test, two-of-three with (b)+(c)⇒(a) componentwise, then the cone induction C_r→C_{r+1}→C_1 with LES and the cohomology criterion. One fault, Step 5 (C-type missing citation): the class is the Ri_*⊣i^! transpose, so the twist sits inside i^!. The step 'tensors locally' without proving i^!(Λ(c))≅(i^!Λ)(c). The FIX rewrites Step 5 with the Yoneda chain from adjunction, the inverse Tate line and the proper projection formula, the same argument the parent lem-per-absolute-gysin-purity uses. It adds def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint and lem-amb-proper-coproducts-projection to uses and proof_deps, and declares the two statements in tool_uses. Edge cases checked: empty Z, c=0, n=1, varying codimension, and Spec F_p⊂Spec Z[1/ℓ].; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberRegularPairPurity",
+  "declaration": "AlgebraicGeometry.Etale.gabber_regular_pair_purity",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberRegularPairPurity.lean",
+  "statement": "theorem gabber_regular_pair_purity (ell : ℕ) (h : ell.Prime) (g : RegularClassFamily.{u} ell) (hg : IsRegularImmersionClassSystem ell h g) (n : ℕ) (hn : 0 < n) {Z X : Scheme.{u}} [IsNoetherian Z] [IsNoetherian X] (hZ : IsRegularScheme Z) (hX : IsRegularScheme X) (i : Z ⟶ X) [IsClosedImmersion i] (c : ℕ) (hi : IsStalkRegularClosedImmersion i c) (hell : IsUnit (ell : Γ(X, ⊤))) (G : DerivedCategoryModule (regularClassCoefficient ell n) X ⥤ DerivedCategoryModule (regularClassCoefficient ell n) Z) (adj : ordinaryFinitePushforward (regularClassCoefficient ell n) i ⊣ G) : IsIso ((adj.homEquiv (ordinaryFiniteUnit (regularClassCoefficient ell n) Z) _) (regularClassRealization (regularClassCoefficient ell n) (ell ^ n) (regularClassAnnihilator ell n) i c (g n hn i c hi hell))) ∧ Nonempty (((_root_.DerivedCategory.homologyFunctor _ ((2 * c : ℕ) : ℤ)).obj (G.obj (ordinaryFiniteUnit (regularClassCoefficient ell n) X))) ≅ Scheme.finiteEtaleTateSheaf (regularClassCoefficient ell n) (ell ^ n) Z (regularClassAnnihilator ell n) (-(c : ℤ))) ∧ ∀ q : ℤ, q ≠ ((2 * c : ℕ) : ℤ) → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj (G.obj (ordinaryFiniteUnit (regularClassCoefficient ell n) X)))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d63096052",
+  "group": "NW",
+  "result": "pass",
+  "note": "Read item node (only lean differs from live), report (Worker report + Second reading by NW), module, all stmt_dep Lean (class calculus ∃g ∧ continuity; RegularImmersionClassSystem laws; regularClassRealization Ri_*Λ_Z→Λ_X(c)[2c]; IsStalkRegularClosedImmersion; IsRegularScheme; ordinaryFinitePushforward/Unit), ILO XVI 3.1.1/2.3.1. Every hypothesis matches (prime ℓ, n≥1, Λ=ULift ZMod ℓ^n, Noetherian regular Z,X, closed immersion, constant-c stalk-regular ideal, ℓ unit on X ⇒ on Z, no excellence/field). i^! as G with adj : Ri_*⊣G covers all choices; IsIso of adj transpose of the class-calculus realization for every g with IsRegularImmersionClassSystem is faithful, since the laws pin g locally and the iso is local. Cohomology clauses (Nonempty H^{2c}≅Λ_Z(-c), others zero) accompany the derived iso; degree and sign checked. Edge cases: empty Z, c=0, n=1, ℓ=2, varying codim (reduces to open-closed pieces of Z). No defs, sorry only, docstrings with source and proof, statement verbatim, lines ≤100, proof-dep imports plain as brief §3 requires, no existing duplicate. Advisory: class-system/stalk-regular/p1-arrow owner defs reached via cited class-calculus stmt_deps, not cited directly (H2 forbids adding them). No compile (no change)."
+ }
 }

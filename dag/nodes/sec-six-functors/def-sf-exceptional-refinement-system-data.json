@@ -1,0 +1,118 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemmas 5.13 and 5.22, Constructions 5.15 and 5.20, Proposition 5.24; original refinement proof steps 1--8."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemmas 5.13 and 5.22, Constructions 5.15 and 5.20, Proposition 5.24; original refinement proof steps 1--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized left compactification refinement comparisons commute with coefficient localization common finite field inclusions and shifts",
+   "results": "OK 8 hits, including CategoryTheory.NatTrans.commShift_iso_hom_of_localization; remaining hits concern algebraic normalization.",
+   "date": "2026-10-27",
+   "verdict": "No normalized geometric left refinement or strict-system realization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of left adjoints induces conjugate natural isomorphism of right adjoints commuting with unit counit and shifts",
+   "results": "OK 8 hits including CategoryTheory.Adjunction.RightAdjointCommShift.iso and LeftAdjointCommShift.iso; adjunction shift component formulas.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate and shift tools apply to the proved assembly, but do not construct the geometric comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*refinement|refinement.*compactification",
+   "results": "OK 0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib geometric refinement construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRefinementMates",
+  "date": "2026-10-27",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Normalized exceptional refinement construction, retained steps 20--21; original refinement proof steps 1--8.",
+   "via": [
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "def-sf-exceptional-refinement-system-data",
+ "kind": "definition",
+ "title": "Actual system refinement words and prescribed total-limit realization",
+ "statement": "With l, Omega, D, X,Y,f, c,d, a refinement r and fixed Transport and Mates records A,B,P as in the refinement data, reducedInput is the ring-stage inclusion followed by the existing reconstruction reduction. systemSupport is this functor followed by open extension and proper image in the supplied operation model o. realizationComponent is the supplied proper realization, followed by proper image of the open realization and then by the inverse reconstruction unit on a Good input. SystemRealization retains a natural inverse to the actual system refinement word, Good inputs and open intermediates, the normalized primitive realization isomorphisms, their equation identifying the total-limit image with P.left, the termwise shift square and prescribed Roos realization shift square. Shifts on inclusions, reduction, open extension and direct image are the existing inherited and adjoint shifts.",
+ "stmt_deps": [
+  "def-sf-exceptional-refinement-left-data",
+  "def-sf-integral-system-realization-data",
+  "def-pur-integral-operation-shift-data",
+  "def-pur-system-projection-formula-maps",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-coef-ringed-sequence-site",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Form exactly the displayed composites of the published functors and primitive comparison maps. Obtain reduction shift from the given reconstruction adjunction, and compose it with the canonical full inclusion shift. Obtain the support shift by composing open extension and the adjoint direct-image shifts. The record fixes realization by the actual primitive maps; it asserts no existence result and leaves no proof or data hole.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRefinementSystemData",
+  "file": "lean/Sheaf/Paper/ExceptionalRefinementSystemData.lean",
+  "declaration": "WeilConjectures.ExceptionalRefinement.SystemRealization",
+  "declarations": [
+   "WeilConjectures.ExceptionalRefinement.reducedInput",
+   "WeilConjectures.ExceptionalRefinement.reducedInputShift",
+   "WeilConjectures.ExceptionalRefinement.systemSupport",
+   "WeilConjectures.ExceptionalRefinement.systemSupportShift",
+   "WeilConjectures.ExceptionalRefinement.realizationComponent",
+   "WeilConjectures.ExceptionalRefinement.SystemRealization"
+  ],
+  "statement": "structure SystemRealization (A : Transport.{u, v} l Ω D hl c) (B : Transport.{u, v} l Ω D hl d) (r : c.Refinement d) (P : Mates.{u, v} l Ω D hl A B r) (E : FieldStage.{max u v} l) (o : Operations l E.carrier) (R : Realizations l E.carrier D o)",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "independent cc review: item exceptional_refinement_mates assembly vs node lem-sf-exceptional-refinement-mates; new sorry statements and Transport repair vs change record, the λ(field)-conjugation counterexample and the existing commonTransitionNatural practice; new node stmt_deps vs owners of the definitions used"
+ }
+}

@@ -1,0 +1,342 @@
+{
+ "id": "lem-sf-locally-finite-adic-compact-support-realization",
+ "kind": "statement",
+ "title": "Actual compact supports commute with ordinary constructible coefficient realization",
+ "statement": "Fix a finite field $k_0$, its algebraic closure $k$, and $\\ell\\ne\\operatorname{char}(k_0)$. Write $\\Omega=\\overline{\\mathbf Q}_\\ell$. For each finite-type $k$-scheme $T$, on its small pro-etale site put $B_T=\\Omega_T^{\\mathrm{lf}}$, the sheaf of continuous $\\Omega$-valued functions whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-space. Put $\\mathcal A_T=\\operatorname{Mod}(B_T)$, with the internal-module convention of [def-sf-native-weil-derived-framework], and let $\\mathcal C_T\\subset D(\\mathcal A_T)$ be the full subcategory with bounded constructible cohomology: each cohomology sheaf is locally finite free on every member of a finite locally closed stratification, locally on $T$. Let $\\mathcal C^{\\mathrm{stage}}_{T,\\Omega}=D^b_{ctf}(T,\\Omega)$ be the ordinary common finite coefficient-field category of [def-weil-algebraically-closed-coefficients, def-weil-finite-tor-amplitude]: objects are represented over one finite $E/\\mathbf Q_\\ell$ in $\\Omega$, and morphisms are the filtered colimit of the scalar-extended Hom groups over common finite extensions. At $E$ use raw rationalization of derived-complete integral constructible complexes [def-weil-rationalization-karoubi]. Use the scalar-extension realization $J_T$ of [lem-sf-locally-finite-adic-constructible-realization]. Let $f:X\\to Y$ be separated of finite type, with $X,Y$ finite-type over $k$ but not necessarily separated over $k$. Choose a compactification $c=(j:X\\hookrightarrow Z,p:Z\\to Y)$ [def-weil-compactifications-refinements]. Let $F^{\\mathrm{stage}}=Rf_{!,\\Omega}$ be the common-stage compact-support functor [def-weil-integral-rational-qbar-compact-support], and $F^c=Rp_*D(j_!)$ the actual module-sheaf derived functor. The canonical scalar-extension comparison is a natural isomorphism of ordinary derived functors\n$$\\alpha_c:J_YF^{\\mathrm{stage}}\\xrightarrow{\\sim}F^cJ_X.$$\nIt is the composite of the open-extension comparison $J_Zj_!^{\\mathrm{stage}}\\to j_!J_X$ and the proper comparison $J_YRp_*^{\\mathrm{stage}}\\to Rp_*J_Z$, restricted to these constructible inputs. The formula specifies its action on localized derived morphisms, not just cohomology groups. In particular $F^c$ carries $\\mathcal C_X$ into $\\mathcal C_Y$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Common-field comparisons in the final paragraph. Bhatt–Scholze §6.8, Remark 6.8.15, for actual injective computations of the operations. Agent-formulated native-coefficient comparison; it asserts only the left-functor comparison, no exceptional adjoint and no enhanced realization."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-rationalization-karoubi",
+  "lem-sf-locally-finite-adic-constructible-realization",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-compactifications-refinements",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-locally-finite-adic-compact-support-data"
+ ],
+ "proof": [
+  {
+   "text": "Use native_compact_support_geometry to choose the exact native section transport.",
+   "uses": [
+    "lem-sf-native-compact-support-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use locally_finite_compact_support_stage_action to construct the rational action with exactly the specified P finite functors and q.",
+   "uses": [
+    "lem-sf-locally-finite-compact-support-stage-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use native_compact_support_finite_comparison for these data. This supplies the compatible coefficient maps and normalized isomorphisms on each rational finite stage, with their isoToStage compatibility.",
+   "uses": [
+    "lem-sf-native-compact-support-finite-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a pair A=(E,K), define alpha_A by the E-stage isomorphism on K. Every arrow has a representative u at a common stage L. Factor it as isoToStage(A), inclusion_L(u), and inverse isoToStage(B). The transition equations give naturality on the two outer factors; the finite-stage isomorphism gives naturality on the middle one. Cancel the transition isomorphisms to prove naturality on the representative. NatIso.ofComponents gives the natural isomorphism on the original common-stage category. Every component is definitionally its prescribed finite-stage component. Apply the finite comparison normalization certificate to these component equalities, yielding the unchanged IntegralNormalization predicate and its six-arrow equation on every integral representative.",
+   "uses": [
+    "lem-sf-stage-comparison-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a native bounded constructible K, the source realization image clause supplies A and an isomorphism source.J(A) ≅ K. Then alpha_A followed by actual.mapIso of this isomorphism identifies target.J(stage.functor(A)) with actual(K). The target image clause therefore proves native bounded constructibility of actual(K). This also applies to zero objects and empty schemes; no absolute separatedness is introduced.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-locally-finite-compact-support-stage-action",
+  "lem-sf-native-compact-support-finite-comparison",
+  "lem-sf-native-compact-support-geometry",
+  "lem-sf-stage-comparison-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "C7 Lean proof: componentwise descent along the actual StageSystem representatives and transfer of essential image; the native transport and finite-stage scalar comparison are separate lemmas. The original statement and all normalization data are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar realization of constructible l adic coefficient complexes commutes naturally with chosen compactification compact support direct image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.hom_naturality_apply\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] {X Y : CondensedMod R} (f : X ⟶ Y) {S T : CompHausᵒᵖ} (g : S ⟶ T)\\n  (x : ↑(X.val.obj S)),\\n  (CategoryTheory.ConcreteCategory.hom (f.val.app T)) ((CategoryTheory.ConcreteCategory.hom (X.val.map g)) x) =\\n    (CategoryTheory.ConcreteCategory.hom (Y.val.map g)) ((Cat\", \"doc\": \"For any morphism $ f : X \\to Y $ between condensed modules over a ring $ R $, and for any morphism $ g : S \\to T $ in the opposite category of compact Hausdorff spaces, the diagram commutes: applying $ \"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"LightCondMod.hom_naturality_apply\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] {X Y : LightCondMod R} (f : X ⟶ Y) {S T : LightProfiniteᵒᵖ} (g : S ⟶ T)\\n  (x : ↑(X.val.obj S)),\\n  (CategoryTheory.ConcreteCategory.hom (f.val.app T)) ((CategoryTheory.ConcreteCategory.hom (X.val.map g)) x) =\\n    (CategoryTheory.ConcreteCategory.hom (Y.val.map g)) ((Cat\", \"doc\": \"For any morphism $ f: X \\to Y $ in the category of light condensed $ R $-modules and any morphism $ g: S \\to T $ in the opposite category of light profinite spaces, the following naturality condition ho\"}\n  {\"name\": \"AdicCompletion.val_smul_eq_evalₐ_smul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (n : ℕ) (r : AdicCompletion I R) (x : M ⧸ I ^ n • ⊤), ↑r n • x = (AdicCompletion.evalₐ I n) r • x\", \"doc\": \"For any natural number $n$, any element $r$ in the $I$-adic completion of $R$, and any element $x$ in the quotient module $M / I^nM$, the scalar multiplication of $r$'s valuation at $n$ with $x$ is eq\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n), AdicCompletion.transitionMap I M hmn ∘ₗ AdicCompletion.eval I M n = AdicCompletion.eval I M m\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the transition map $M/I^nM \\\\to M/I^mM$ with the evaluation map at level $n$ equals the evaluation map at level $m$. In other words, projecting an ele\"}\n  {\"name\": \"AdicCompletion.eval_comp_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (n : ℕ), AdicCompletion.eval I M n ∘ₗ AdicCompletion.of I M = (I ^ n • ⊤).mkQ\", \"doc\": \"For each natural number $n$, the composition of the evaluation map from the $I$-adic completion of $M$ to $M/I^nM$ and the canonical linear map from $M$ to its $I$-adic completion equals the canonical\"}\n  {\"name\": \"AdicCompletion.val_smul_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : SMul S R] [inst_4 : SMul S M] [inst_5 : IsScalarTower S R M] (s : S)\\n  (f : AdicCompletion I M) (n : ℕ), ↑(s • f) n = s • ↑f n\", \"doc\": \"Let $R$ be a commutative ring, $I$ an ideal of $R$, and $M$ an $R$-module. Let $S$ be a semiring with compatible scalar actions on $R$ and $M$ that form a scalar tower. An element $f$ of the $I$-adic \"}\n  {\"name\": \"AdicCompletion.smul_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (n : ℕ) (r : AdicCompletion I R) (x : AdicCompletion I M), ↑(r • x) n = ↑r n • ↑x n\", \"doc\": \"For each natural number $ n $, the $ n $-th component of the scalar multiplication $ r \\\\cdot x $ in the $ I $-adic completion of $ M $ equals the scalar multiplication of the $ n $-th components of $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"NatIso\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]ealization.*[Ll]owerShriek|[Ll]owerShriek.*[Rr]ealization|adic.*[Cc]ompact",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"326\", \"text\": \"lemma Scheme.zeroLocus_eq_univ_iff_subset_nilradical_of_isCompact {X : Scheme.{u}} {U : X.Opens}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"337\", \"text\": \"  zeroLocus_eq_univ_iff_subset_nilradical_of_isCompact (U := ⊤) (CompactSpace.isCompact_univ) s\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/ProperSpace.lean\", \"line\": \"20\", \"text\": \"- `PadicInt.compactSpace` : The set of p-adic integers `ℤ_[p]` is a compact topological space.\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/ProperSpace.lean\", \"line\": \"54\", \"text\": \"/-- The set of p-adic integers `ℤ_[p]` is a compact topological space. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/ProperSpace.lean\", \"line\": \"69\", \"text\": \"  simpa only [isCompact_iff_compactSpace] using! PadicInt.compactSpace p\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/IsManifold/ExtChartAt.lean\", \"line\": \"37\", \"text\": \"  modelled on a locally compact field (such as ℝ, ℂ or the `p`-adic numbers) is locally compact\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/IsManifold/ExtChartAt.lean\", \"line\": \"901\", \"text\": \"(such as ℝ, ℂ or the `p`-adic numbers) is locally compact. -/\"}\n  {\"file\": \"Mathlib/Topology/Category/Compactum.lean\", \"line\": \"65\", \"text\": \"- `join : Ultrafilter (Ultrafilter X) → Ultrafilter X` is the monadic join for `X : Compactum`.\"}\n  {\"file\": \"Mathlib/Topology/Category/Compactum.lean\", \"line\": \"487\", \"text\": \"of an equivalence with the monadic functor `forget Compactum`.\"}\n  {\"file\": \"Mathlib/Topology/Compactness/CountablyCompact.lean\", \"line\": \"229\", \"text\": \"  -- We prove by contradiction. If `E` is not sequentially compact, then there exists a sequence\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common coefficient field realization intertwines Rp star j shriek on bounded constructible adic complexes including derived morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletionIntegers\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(r : R) (x : v.adicCompletionIntegers K) : (↑(r • x) : v.adicCompletion K) = r • (x : v.adicCompletion K)\", \"doc\": \"Let $R$ be a Dedekind domain, $K$ its field of fractions, and $v$ a height-one prime ideal of $R$. Let $\\\\hat{K}_v$ be the adic completion of $K$ with respect to the valuation associated with $v$, and \"}\n  {\"name\": \"LaurentSeries.LaurentSeriesAlgEquiv\", \"module\": \"Mathlib.RingTheory.LaurentSeries\", \"type\": \": K⸨X⸩ ≃ₐ[K] RatFuncAdicCompl K\", \"doc\": \"For any field $ K $, this is the algebra equivalence between the ring of formal Laurent series $ K((X)) $ and the $ X $-adic completion of the rational function field $ K(X) $, constructed from the un\"}\n  {\"name\": \"RCLike.restrict_toContinuousMap_eq_toContinuousMapStar_restrict\", \"module\": \"Mathlib.Analysis.RCLike.BoundedContinuous\", \"type\": \"{A : StarSubalgebra 𝕜 (E →ᵇ 𝕜)} :\\n  ((A.restrictScalars ℝ).comap (AlgHom.compLeftContinuousBounded ℝ ofRealAm lipschitzWith_ofReal)).map\\n      (toContinuousMapₐ ℝ) =\\n    ((A.map (toContinuousMapStarₐ 𝕜)).restrictScalars ℝ).comap (ofRealAm.compLeftContinuous ℝ continuous_ofReal)\", \"doc\": \"For a star subalgebra $ A $ of bounded continuous functions from a space $ E $ to a real closed-like field $ \\\\mathbb{K} $, the subalgebra obtained by restricting scalars to $ \\\\mathbb{R} $ through real\"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \": functor R ⊣ underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"PadicComplex.instAlgebraPadic\", \"module\": \"Mathlib.NumberTheory.Padics.Complex\", \"type\": \": Algebra ℚ_[p] ℂ_[p]\", \"doc\": \"The field of p-adic complex numbers $\\\\mathbb{C}_p$, defined as the completion of the algebraic closure of $\\\\mathbb{Q}_p$, is equipped with a canonical algebra structure over $\\\\mathbb{Q}_p$. This struc\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib.Condensed.Light.Monoidal\", \"type\": \": (presheafToSheaf (coherentTopology LightProfinite.{u}) (ModuleCat.{u} R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"IntermediateField.coe_smul\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Basic\", \"type\": \"{R} [SMul R K] [SMul R L] [IsScalarTower R K L] (r : R) (x : S) : ↑(r • x : S) = (r • (x : L))\", \"doc\": \"For any scalar $ r \\\\in R $ and element $ x \\\\in S $, the coercion of $ r \\\\cdot x $ from the intermediate field $ S $ to the larger field $ L $ satisfies $ \\\\iota(r \\\\cdot x) = r \\\\cdot \\\\iota(x) $, where $\"}\n  {\"name\": \"ContDiffMapSupportedIn.toBoundedContinuousFunctionLM_eq_of_scalars\", \"module\": \"Mathlib.Analysis.Distribution.ContDiffMapSupportedIn\", \"type\": \"(𝕜' : Type*) [NontriviallyNormedField 𝕜'] [NormedSpace 𝕜' F] [SMulCommClass ℝ 𝕜' F] :\\n  (toBoundedContinuousFunctionLM 𝕜 : 𝓓^{n}_{K}(E, F) → _) = toBoundedContinuousFunctionLM 𝕜'\", \"doc\": \"Given normed vector spaces $ E $ and $ F $ over $ \\\\mathbb{R} $, a compact set $ K \\\\subseteq E $, and two scalar fields $ \\\\mathbb{R} $ and $ \\\\mathbb{K}' $ with commuting scalar multiplications on $ F $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient realization comparison for proper direct image and open extension by zero composes to the derived compact support comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompactlySupportedContinuousMap.compLinearMap\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"{β : Type u_3} →\\n  {γ : Type u_4} →\\n    {δ : Type u_5} →\\n      [inst : TopologicalSpace β] →\\n        [inst_1 : TopologicalSpace γ] →\\n          [inst_2 : TopologicalSpace δ] →\\n            [inst_3 : AddCommMonoid δ] →\\n              [inst_4 : ContinuousAdd δ] →\\n                {R : Type u_6} →\\n        \", \"doc\": \"Given a cocompact continuous map $ g : \\\\beta \\\\to \\\\gamma $, this constructs an $ R $-linear map from the space of compactly supported continuous functions $ C_c(\\\\gamma, \\\\delta) $ to $ C_c(\\\\beta, \\\\delta\"}\n  {\"name\": \"CompactlySupportedContinuousMap.comp\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"{β : Type u_3} →\\n  {γ : Type u_4} →\\n    {δ : Type u_5} →\\n      [inst : TopologicalSpace β] →\\n        [inst_1 : TopologicalSpace γ] →\\n          [inst_2 : TopologicalSpace δ] →\\n            [inst_3 : Zero δ] →\\n              CompactlySupportedContinuousMap γ δ → CocompactMap β γ → CompactlySupportedCont\", \"doc\": \"Given a compactly supported continuous map $ f : \\\\gamma \\\\to \\\\delta $ and a cocompact continuous map $ g : \\\\beta \\\\to \\\\gamma $, their composition $ f \\\\circ g : \\\\beta \\\\to \\\\delta $ is a compactly supporte\"}\n  {\"name\": \"HasCompactSupport.tsupport_extend_zero\", \"module\": \"Mathlib/Topology/Algebra/Support\", \"type\": \"∀ {α : Type u_2} {α' : Type u_3} {β : Type u_4} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace α']\\n  [inst_2 : Zero β] {f : α → β} [T2Space α'],\\n  HasCompactSupport f →\\n    ∀ {g : α → α'}, Continuous g → Function.Injective g → tsupport (Function.extend g f 0) = g '' tsupport f\", \"doc\": \"If $ f : X \\\\to \\\\alpha $ has compact support and $ g : X \\\\to X' $ is a continuous injective function, then the topological support of the function $ \\\\text{extend}_g(f, 0) : X' \\\\to \\\\alpha $ (extended by\"}\n  {\"name\": \"HasCompactSupport.extend_zero\", \"module\": \"Mathlib/Topology/Algebra/Support\", \"type\": \"∀ {α : Type u_2} {α' : Type u_3} {β : Type u_4} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace α']\\n  [inst_2 : Zero β] {f : α → β} [T2Space α'],\\n  HasCompactSupport f → ∀ {g : α → α'}, Continuous g → HasCompactSupport (Function.extend g f 0)\", \"doc\": \"Let $\\\\alpha$ and $\\\\alpha'$ be topological spaces, $\\\\beta$ a type with a zero element, $f : \\\\alpha \\\\to \\\\beta$ a function with compact support, and $g : \\\\alpha \\\\to \\\\alpha'$ a continuous function. Then t\"}\n  {\"name\": \"CompactlySupportedContinuousMap.compLeft\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"{α : Type u_2} →\\n  {β : Type u_3} →\\n    [inst : TopologicalSpace α] →\\n      [inst_1 : TopologicalSpace β] →\\n        [inst_2 : Zero β] →\\n          {γ : Type u_5} →\\n            [inst_3 : TopologicalSpace γ] →\\n              [inst_4 : Zero γ] → C(β, γ) → CompactlySupportedContinuousMap α β → CompactlySu\", \"doc\": \"The function $\\\\text{compLeft}$ takes a continuous map $g : \\\\beta \\\\to \\\\gamma$ and a compactly supported continuous map $f : \\\\alpha \\\\to \\\\beta$, and returns a compactly supported continuous map $\\\\alpha \\\\\"}\n  {\"name\": \"HasCompactSupport.tsupport_extend_zero_subset\", \"module\": \"Mathlib/Topology/Algebra/Support\", \"type\": \"∀ {α : Type u_2} {α' : Type u_3} {β : Type u_4} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace α']\\n  [inst_2 : Zero β] {f : α → β} [T2Space α'],\\n  HasCompactSupport f → ∀ {g : α → α'}, Continuous g → tsupport (Function.extend g f 0) ⊆ g '' tsupport f\", \"doc\": \"If a function $ f : X \\\\to \\\\alpha $ has compact support and $ g : X \\\\to X' $ is a continuous map between topological spaces, then the topological support of the extended function $ \\\\text{extend}_g(f, 0\"}\n  {\"name\": \"AbstractCompletion.compare_comp_eq_compare\", \"module\": \"Mathlib/Topology/UniformSpace/AbstractCompletion\", \"type\": \"∀ {α : Type uα} [inst : UniformSpace α] (pkg : AbstractCompletion.{vα, uα} α) (pkg' : AbstractCompletion.{vα', uα} α)\\n  (γ : Type uγ) [inst_1 : TopologicalSpace γ] [T3Space γ] {f : α → γ},\\n  Continuous f →\\n    (∀ (a : pkg.space), Filter.Tendsto f (Filter.comap pkg.coe (nhds a)) (nhds (⋯.extend f a))\", \"doc\": \"Given a continuous function $ f : \\\\alpha \\\\to \\\\gamma $ where $ \\\\gamma $ is a T3 space, the composition of the extension of $ f $ with the comparison map between abstract completions equals the extensio\"}\n  {\"name\": \"hasCompactSupport_comp_left\", \"module\": \"Mathlib/Topology/Algebra/Support\", \"type\": \"∀ {α : Type u_2} {β : Type u_4} {γ : Type u_5} [inst : TopologicalSpace α] [inst_1 : Zero β] [inst_2 : Zero γ]\\n  {g : β → γ} {f : α → β}, (∀ {x : β}, g x = 0 ↔ x = 0) → (HasCompactSupport (g ∘ f) ↔ HasCompactSupport f)\", \"doc\": \"Let $ f : \\\\alpha \\\\to \\\\beta $ and $ g : \\\\beta \\\\to \\\\gamma $ be functions, where $ \\\\alpha $ is a topological space and $ \\\\beta, \\\\gamma $ have zero elements. If $ g $ satisfies $ g(x) = 0 \\\\iff x = 0 $, th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyFinite.*[Cc]onstructible|adic.*[Cc]ompactSupport|[Cc]ompactSupport.*[Rr]ealization",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient realization of derived complete constructible complexes respects the compactification formula R p star j shriek",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Perfection.coeff_map\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"(φ : R →+* S) (f : Ring.Perfection R p) (n : ℕ) : coeff S p n (map p φ f) = φ (coeff R p n f)\", \"doc\": \"For any ring homomorphism $\\\\varphi: R \\\\to S$ between commutative semirings of prime characteristic $p$, and for any $p$-perfect sequence $f$ in the perfection of $R$, the $n$-th coefficient of the ima\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_C\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Chevalley\", \"type\": \"{s : Set (PrimeSpectrum (Polynomial R))} (hs : IsConstructible s) : IsConstructible (comap Polynomial.C '' s)\", \"doc\": \"For any commutative semiring $ R $, if a set $ s $ in the prime spectrum of the polynomial ring $ R[X] $ is constructible, then the preimage of $ s $ under the constant polynomial embedding $ R \\to R[X\"}\n  {\"name\": \"MvPolynomial.coeff\", \"module\": \"Mathlib.Algebra.MvPolynomial.Basic\", \"type\": \"(m : σ →₀ ℕ) (p : MvPolynomial σ R) : R\", \"doc\": \"The coefficient of the monomial $ m $ in the multivariate polynomial $ p $, obtained by applying the canonical function-like structure of $ p $ (which maps finite support functions $ \\\\sigma \\\\to₀ \\\\math\"}\n  {\"name\": \"Polynomial.coeff\", \"module\": \"Mathlib.Algebra.Polynomial.Basic\", \"type\": \": R[X] → ℕ → R\", \"doc\": \"The function that maps a polynomial over a semiring $ R $ and a natural number $ n $ to the coefficient of $ X^n $ in the polynomial.\"}\n  {\"name\": \"Polynomial.coeff_map_eq_comp\", \"module\": \"Mathlib.Algebra.Polynomial.Eval.Coeff\", \"type\": \"(p : R[X]) (f : R →+* S) : (p.map f).coeff = f ∘ p.coeff\", \"doc\": \"For any polynomial $ p $ over a semiring $ R $ and any ring homomorphism $ f : R \\\\to S $, the coefficient function of the polynomial obtained by applying $ f $ to each coefficient of $ p $ is equal to\"}\n  {\"name\": \"MvPolynomial.image_comap_C_basicOpen\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Polynomial\", \"type\": \"(f : MvPolynomial σ R) : comap (C (σ := σ)) '' basicOpen f = (zeroLocus (Set.range f.coeff))ᶜ\", \"doc\": \"The image of the basic open set $ D(f) $ in the prime spectrum of the multivariate polynomial ring $ R[\\\\sigma] $ under the preimage of the constant polynomial embedding $ C : R \\\\to R[\\\\sigma] $ is equa\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_2 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCateg\", \"doc\": \"For a ring $ R $ and a compact Hausdorff-like predicate $ P $ with explicit finite coproducts and pullbacks, and where effective epimorphisms are surjective on underlying sets, the underlying presheaf\"}\n  {\"name\": \"Polynomial.image_comap_C_basicOpen\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Polynomial\", \"type\": \"(f : R[X]) : comap C '' basicOpen f = (zeroLocus (Set.range f.coeff))ᶜ\", \"doc\": \"For a polynomial $ f \\\\in R[X] $, the image of the preimage of the basic open set $ D(f) $ under the constant polynomial embedding $ C : R \\\\to R[X] $ in the Zariski topology is equal to the complement \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of constructible l adic complexes commutes with compact support pushforward computed as proper pushforward after extension by zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"SheafOfModules.pushforward_map_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\phi : S \\\\to F_*R$ between \"}\n  {\"name\": \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (\", \"doc\": \"For functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, a presheaf of rings $ R : \\\\mathcal{E}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and natural transformations $ \\\\phi: R \\\\to \"}\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical coefficient change mate for derived proper direct image composed with scalar extension and open extension by zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\alpha: F \\\\Rightarrow G$, a\"}\n  {\"name\": \"PresheafOfModules.pushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {R : CategoryTheory.Functor Dᵒᵖ RingCat} →\\n            {S : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n           \", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, a presheaf of rings $ R : \\\\mathcal{D}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and a natural transformation $ \\\\phi: R \\\\to S $ between presheaves of rings, \"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"PresheafOfModules.pushforward_obj_map_apply'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  (φ : S ⟶ F.op.comp R) (M : PresheafOfModules R) {X Y : Cᵒᵖ} (\", \"doc\": \"For a presheaf of modules $\\\\mathcal{M}$ over a presheaf of rings $R$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : R \\\\to S$ between presheaves of rings, the pushfo\"}\n  {\"name\": \"PresheafOfModules.pushforward_obj_map_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  (φ : S ⟶ F.op.comp R) (M : PresheafOfModules R) {X Y : Cᵒᵖ} (\", \"doc\": \"For a presheaf of modules $\\\\mathcal{M}$ over a presheaf of rings $R$, a morphism $f : X \\to Y$ in the opposite category $\\\\mathcal{C}^{\\text{op}}$, and an element $m$ in the restricted scalar module, the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-weil-compact-direct-image-right-adjoint",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supplied anchor lem-a1-local-boundary-duality, steps 1–2: exceptional adjunction; current cor-coef-verdier-weil-equivariance, final paragraph: Common-field comparisons in the final paragraph. Bhatt–Scholze §6.8, Remark 6.8.15, for actual injective computations of the operations. Agent-formulated native-coefficient comparison; it asserts only the left-functor comparison, no exceptional adjoint and no enhanced realization.",
+   "via": [
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-locally-finite-adic-compact-support-realization",
+  "worker": "stage1",
+  "summary": "No new nodes. Identified locally finite native coefficients with the finite-subextension sheaf colimit, used the existing coherent integral compactification realization and bounded-below proper scalar-change comparisons, constructed the open map on K-flat representatives, and checked fractions/common finite fields and preservation. Statement unchanged; absolute separatedness never added. Maintainer-reader repair (2026-10-22): step 10 now cites the coefficient construction record and its coherence for the stage scalar comparisons of the common-stage functor, which the single-coefficient system realization does not give; step 11 cites the definition D^b_ctf = D^b_c at field stages instead of lem-weil-field-tor-amplitude.",
+  "blueprint": "Supplied native exceptional-adjunction anchor through thm-sf-weil-compact-direct-image-right-adjoint; realizes the ordinary left-operation/common-field comparison underlying the last paragraph of cor-coef-verdier-weil-equivariance.proof.md. The source paragraph itself does not prove this native comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 1; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 8; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 3; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 2, 7; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 8; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 11; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 5, 6, 10; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 5, 6; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 4, 8; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sf-open-finite-constructibility-interval",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 4; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sf-ringed-open-total-tensor-kflat",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 8; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 3; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 3; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sfb-localized-direct-image-comparison",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 6; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sfb-pasted-mates-counit-normalization",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 7, 10; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 10; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 7, 10; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qbar-bounded-push",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 7; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 4, 6; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 7; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 7; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 5, 6, 10; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Generic coefficient, ringed-site, finiteness or localization tool used at its stated hypotheses in proof steps 2; it does not replace the unit route or assert exceptional adjunction."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-coefficient-construction",
+    "why": "Step 10: the stage scalar comparisons q through which the common-stage compact-support functor acts across finite fields, and their realization as the proper/open scalar mate; the same record the parent's adjunction step uses. No node of the unit gives it."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-coefficient-coherence",
+    "why": "Step 10: the closed-coefficient law expressing the common-stage functor on pair-category transitions through these q. No node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-pc-kflat-resolution",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-localized-direct-image-comparison",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-condensed-qbar-bounded-push",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-direct-image-limits",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-sf-constructible-exceptional-coefficient-construction",
+  "lem-sf-constructible-exceptional-coefficient-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-3f661574d",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-3f661574d (reviewer sub-agent of L); spot-checked: Read the item (11 steps, statement unchanged, no new nodes), every cited statement, and Bhatt–Scholze Def 6.7.6, Lemma 6.7.7, Prop 6.8.14 and Rem 6.8.15. Steps 1–9 check out. Step 1: geometry via Noetherian/dimension leaves, with no absolute separatedness used. Step 2: B_T = colim_E E_T through lem-per-continuous-rational-derived-realization, sk-prop-sfb-qlbar-colimit-x and the finite-subextension condensed ring. Step 3: internal/section transport. Step 4: L = j_!K is complete and constructible, by the open reduction comparison, the open interval lemma and the stratified-perfect characterization. Step 5: δ from the system realization and prop-weil-pbc-direct-image-limits (O_E Noetherian, residue field torsion, P_n perfect). Step 6: lem-sfb-localized-direct-image-comparison applies (p qcqs, M bounded below). Step 7: lem-weil-pbc-condensed-qbar-bounded-push applies (p proper, bounded-below input, finite-subextension coefficients), with the mate normalization by the pasted-mates lemma. Step 8: γ through lem-sf-ringed-open-total-tensor-kflat. Step 9: fractions handled correctly. Repair 1 (C4/E5), step 10: the delivered step claimed that the single-coefficient lem-sf-integral-compactification-system-realization identifies the scalar comparisons defining F^stage across E⊂L, which it does not say; def-weil-integral-rational-qbar-compact-support defines F^stage on objects only. Step 10 now cites lem-sf-constructible-exceptional-coefficient-construction, the record the parent's adjunction uses, with no absolute separatedness: clause (1) integral realization = δ, clause (3) realized integral q = proper/open scalar mate, clause (4) rational q is the localization of the integral q and the common-field q is the identity. It also cites the closed-coefficient law of lem-sf-constructible-exceptional-coefficient-coherence; the delivered associator and pasted-mate computations then close the argument. Repair 2, step 11: replaced lem-weil-field-tor-amplitude by def-weil-finite-tor-amplitude, since D^b_ctf(Y,Ω) := D^b_c(Y,Ω) by definition. tool_uses and proof_deps updated; no cycle; nothing in the closure is in side-live route-pivot-dropped.txt; the item is still unsplit in side-live. Batch-5 flags: lem-pd-section-derived-pushpull-normalization (generic internal/section module transport), and the closure paths to lem-trf-geometric-inverse-image-exact, lem-pod-derived-exact-square-composition and lem-trf-site-functorial-flat-resolution, are generic topos and homological facts, not trace-formula or Poincaré-duality steps, so accepted. Advisory: the statement names F^stage only by an objects-only definition; stage 2 should bind it to the same construction record as the parent.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocallyFiniteAdicCompactSupportRealization",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.locally_finite_adic_compact_support_realization",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.locally_finite_adic_compact_support_realization"
+  ],
+  "file": "lean/Sheaf/Paper/LocallyFiniteAdicCompactSupportRealization.lean",
+  "statement": "theorem locally_finite_adic_compact_support_realization : ∃ G : NativeGeometry.{u} l, @Nonempty (CompactSupportComparison l D hl P c (G := G))",
+  "branch": "sheaf-dag",
+  "by": "Q47",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Ordinary derived natural isomorphism, with canonical scalar-mate normalization on integral representatives, raw fractions and common-field transitions. Uses the published native realization, raw finite stages, coefficient construction and qcqs compact-support realization; no absolute separatedness hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc0a7b0ec",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Re-delivery of e23996c5 (cc PASS 2026-10-22; its landing was refused by a batch-wide transient reach error on def-sf-constructible-exceptional-coefficient-construction-data that also hit 4 other groups). Delta vs e23996c5: Lean adds only `set_option allowUnsafeReducibility true in` and `attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem in` around structure StageAction, which changes elaboration only (stageSystem is an abbrev; option used in 26 project files); StageAction, IntegralNormalization and CompactSupportComparison are unchanged; lean.date only in the item and new-node records; report adds a self-check section, both required sections present. lean.statement verbatim; single sorry; no long lines. Node records identical to side-live except the item's stmt_deps and lean and the absent new def node; def-weil-finite-tor-amplitude drift = side-live. Reach re-checked on side-live with the snapshot overlay: item at distance 16, def node at 17, both reached. H3 re-read: no absolute separatedness; alpha J_Y Fstage ≅ F^c J_X pinned by the six-arrow proper/open scalar mate; StageAction pins Morphism Φ and β (coh is a Prop); NativeGeometry fields pinned; preserves clause present. Released S1 re-split note concerns the proof only. No compile (no file changed; worker module-mode compile 35.9–37.6 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4750d",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261027T021303-L-2752918",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules/nodes + verbatim Data split (diff vs clone) + Brown adaptation timed (published orig 75 s main / 76 s vs delivery, adapted 8.9 s) + axioms + 6 importers OK"
+ }
+}

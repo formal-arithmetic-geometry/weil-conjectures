@@ -1,0 +1,120 @@
+{
+ "id": "def-pur-system-singleton-scalar-comparisons",
+ "kind": "definition",
+ "title": "Canonical singleton and scalar comparison constructions",
+ "statement": "For an essentially small site C in coefficient universe w, an inverse ring-sheaf sequence B, a second sequence D, a natural ring map a : B → D, normalized scalar assignment S and tensor coherence T [def-pur-system-level-left-extension-basic], construct the ordinary singleton on the ringed sequence site [lem-pur-system-ringed-sequence-site], its derived functor and transported adjunction [lem-pur-system-single-derived-extension], and the scalar comparisons for a normalized sequence scalar model A [lem-pur-system-scalar-model]. Ordinary and derived scalar comparisons are the left-adjoint uniqueness isomorphisms for the identity-on-sections evaluation/restriction square. The cochain source and target comparisons compose the respective universal comparison maps; lower-singleton maps are transposes of the specified derived below-level evaluation isomorphism [lem-pur-system-single-derived-evaluation]; the scalar square is composed from normalized scalar associators [lem-pur-system-scalar-coherence]. These are exactly the existing fixed constructions, with their unchanged types and bodies, extracted from the parent module.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent singleton/scalar argument: definitions preceding Steps 1--9; Stacks 03DA, 03D7, 03EK, 0FND, 06YT and Zheng Construction 4.1."
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-system-scalar-model",
+  "lem-pur-system-single-derived-evaluation",
+  "lem-pur-system-scalar-coherence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of left adjoints and composition of normalized derived adjunctions",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc; CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-26",
+   "verdict": "Mathlib supplies leftAdjointUniq, used directly in these constructions; it does not name the project singleton/scalar comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-26",
+   "verdict": "The Mathlib uniqueness construction is used; the specified sequence and level models are project data."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|mapDerivedCategoryFactors|IsKFlat",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-26",
+   "verdict": "Found adjoint uniqueness and exact derived factors; no ringed-sequence singleton package. Also rg over Sheaf and WeilConjectures found only the original item constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemSingletonScalarExtension",
+  "date": "2026-10-26",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 of thm-pur-rational-and-qbar-purity: independence of finite coefficient extension; sk-thm-sf-compatibility clause (7). Extracted from quotient-diagram-projection-evaluation, old proof step 4, compose the singleton adjunction with scalar extension and compare the actual tensor transposes. This node extracts Parent singleton/scalar argument: definitions preceding Steps 1--9; Stacks 03DA, 03D7, 03EK, 0FND, 06YT and Zheng Construction 4.1.",
+   "via": [
+    "lem-pur-system-singleton-scalar-extension",
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemSingletonScalarBasic",
+  "file": "lean/Sheaf/CategoryTheory/SystemSingletonScalarBasic.lean",
+  "declaration": "SheafOfModules.singletonSequenceRingMap",
+  "declarations": [
+   "SheafOfModules.singletonSequenceRingMap",
+   "SheafOfModules.singletonSequenceFunctorAdditive",
+   "SheafOfModules.singletonSequenceInverseAdditive",
+   "SheafOfModules.singletonSequenceOrdinary",
+   "SheafOfModules.singletonSequenceOrdinaryAdjunction",
+   "SheafOfModules.singletonSequenceDerived",
+   "SheafOfModules.singletonSequenceDerivedAdjunction",
+   "SheafOfModules.singletonSequenceComparison",
+   "SheafOfModules.singletonSequenceRestriction",
+   "SheafOfModules.singletonLevelRestriction",
+   "SheafOfModules.singletonRestrictionEvaluation",
+   "SheafOfModules.singletonScalarOrdinaryIso",
+   "SheafOfModules.singletonDerivedRestrictionEvaluation",
+   "SheafOfModules.singletonScalarDerivedIso",
+   "SheafOfModules.singletonScalarSourceComparison",
+   "SheafOfModules.singletonScalarTargetComparison",
+   "SheafOfModules.singletonLowerMap",
+   "SheafOfModules.singletonScalarSquare"
+  ],
+  "statement": "def singletonSequenceRingMap {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D) :\n    systemSequenceRing B ⟶ systemSequenceRing D",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8be55",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T102348-L-345827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8be55",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T102348-L-345827",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (identical); SystemSingletonScalarBasic vs the clone item's 18 constructions (verbatim except blueprint tags); 3 new sorry statements vs their nodes and library normalization lemmas; 3 direct importers compiled against delivered modules (all OK); axioms of singletonScalarExtension"
+ }
+}

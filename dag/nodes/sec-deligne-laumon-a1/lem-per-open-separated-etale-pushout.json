@@ -1,0 +1,326 @@
+{
+ "id": "lem-per-open-separated-etale-pushout",
+ "kind": "statement",
+ "title": "Pushouts along an open immersion and a separated etale map",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $Z,V$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $j:W\\hookrightarrow Z$ be an open subspace [def-a1-space-open-subspace], and let $q:W\\to V$ be an $S$-morphism which is etale in the chartwise sense [def-sfb-space-chartwise-etale-morphism] and separated: its diagonal is representable and becomes a closed immersion after every scheme base change [def-weil-closed-immersion]. There exist an algebraic space $Y/S$ and $S$-morphisms $a:Z\\to Y$, $b:V\\to Y$ such that $aj=bq$, $b$ identifies $V$ with an open subspace of $Y$, $a$ is chartwise etale, and the canonical map $W\\to Z\\times_YV$ is an isomorphism [lem-trf-space-fibre-products-etale-covers]. If $T\\hookrightarrow Y$ is the reduced closed subspace supported on $|Y|\\setminus|V|$, with the atlas topology [def-a1-space-point-topology, lem-sfb-space-reduced-closed-support], then $Z\\times_YT\\to T$ is an isomorphism. The square is a pushout in algebraic spaces over $S$: for every algebraic space $H/S$, compatible maps $Z\\to H$ and $V\\to H$ agreeing on $W$ factor uniquely through $Y$. No affineness, Noetherian, quasi-compactness, or finite type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), full statement; the conditions of an elementary distinguished square are written out."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-sfb-space-chartwise-etale-morphism",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=W\\times_VW$. Its projections to $W$ are chartwise etale by base change of $q$. The diagonal $\\delta:W\\to P$ is a monomorphism of sheaves, and is chartwise etale: both $W\\to W$ and $P\\to W$ are chartwise etale, so apply etale permanence to this morphism over $W$. The etale-monomorphism lemma makes $\\delta$ an open immersion. The hypothesis on $q$ also makes it a closed immersion. Consequently $E=P\\setminus\\delta(W)$ is an open subspace, and $P=\\delta(W)\\amalg E$. This is a statement about subfunctors: on a scheme test the two inverse images are complementary clopen subschemes. Form the algebraic spaces $A=V\\amalg Z$ and $R=V\\amalg W\\amalg W\\amalg Z\\amalg E$. These are finite coproducts; finite coproducts of their scheme atlases are within the fixed universes. Their coprojections are open immersions by the clopen-partition description of sheaf coproducts. Define $(s,t):R\\to A\\times_S A$ on its five summands by $(v,v)$, $(q(w),j(w))$, $(j(w),q(w))$, $(z,z)$, and $(j(w_1),j(w_2))$, respectively.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open",
+    "def-weil-closed-immersion",
+    "def-a1-space-open-subspace",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-fppf-sheaf-coproduct-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), quotient construction and verification"
+   }
+  },
+  {
+   "text": "Check the relation on a clopen cover of a test scheme where each section has a fixed $V$- or $Z$-label. In the $VV$ component it is equality. In the $VZ$ component it consists of pairs $(q(w),j(w))$, and in $ZV$ of the reversed pairs. In $ZZ$ it is equality on $Z$, together with unequal pairs of points of $W$ having the same $q$-image. The last assertion uses $P=\\delta(W)\\amalg E$: even for a family that is equal on only part of the test scheme, that part and its complement are clopen. Each pair thus has at most one representing relation section. Reflexivity is the $V$ and $Z$ diagonal summands, and symmetry exchanges the two $W$ summands and the coordinates of $E$. For transitivity, a chain meeting a $V$-label has all its $Z$-labels in $W$ and all its $V$-labels equal to their common $q$-image; its endpoints are therefore related. A chain wholly in $Z$ either contains an equality, or has all entries in $W$ with a common $q$-image, so has related endpoints as well. Uniqueness lets the local relation sections glue. Hence $(s,t)$ is monic and $R(H)$ is an equivalence relation on $A(H)$ for every test scheme $H$.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), quotient construction and verification"
+   }
+  },
+  {
+   "text": "The maps $s,t$ are chartwise etale. On the five summands their maps to the relevant component of $A$ are identities, $q$, $j$, or $E\\to P\\to W\\xrightarrow{j}Z$. Open immersions are chartwise etale by the open-chart test, and the two projections $P\\to W$ are base changes of $q$. Thus all these component maps are chartwise etale by permanence. To check the finite union assertion rather than assume it, take a representable etale scheme chart $B\\to R$. The clopen-partition lemma decomposes $B$ into five clopen schemes $B_i$. Each $B_i\\to R_i$ is a representable etale chart, by base change and composition with the open coprojection. Thus $B_i\\to A$ is representable etale. On any scheme test $C\\to A$, the pullback of $B\\to A$ is the finite scheme coproduct of the etale schemes $C\\times_A B_i$; the finite-coproduct etale lemma makes its map to $C$ etale. This verifies exactly the definition of chartwise etaleness for $s,t$.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-a1-space-open-chart-tests",
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-sc-etale-coproduct-etale",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-sfb-space-chartwise-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), quotient construction and verification"
+   }
+  },
+  {
+   "text": "Apply the effective etale-relation quotient theorem to $R\\rightrightarrows A$. Its hypotheses were checked in Steps 2 and 3. Obtain the algebraic space $Y=A/R$ and the chartwise etale quotient map $p:A\\to Y$, with etale-local lifts and $A\\times_Y A=R$. Write $b=p|_V$ and $a=p|_Z$. The two $W$ components of the kernel pair give $bq=aj$. This is the actual sheafified quotient of the explicitly constructed relation, not an arbitrary choice of an algebraic space.",
+   "uses": [
+    "lem-per-space-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), quotient construction and verification"
+   }
+  },
+  {
+   "text": "The coprojections $V,Z\\to A$ are open, hence chartwise etale by the open-chart test. Composing with $p$ shows that both $a,b$ are chartwise etale. Restricting the kernel-pair isomorphism to the $VV$ component gives $V\\times_YV=V$ with both projections the identity. Thus $b$ is a monomorphism of sheaves, and the etale-monomorphism lemma makes $b$ an open immersion. Restricting instead to the $ZV$ component gives $Z\\times_YV=W$, with projections $j,q$. In particular this is the canonical map $W\\to Z\\times_YV$, not merely an unspecified isomorphism of spaces.",
+   "uses": [
+    "lem-per-space-etale-relation-quotient",
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-a1-space-open-chart-tests",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), quotient construction and verification"
+   }
+  },
+  {
+   "text": "Let $T\\hookrightarrow Y$ be the reduced closed subspace with support $|Y|\\setminus|V|$, supplied by the reduced-closed-support theorem. The point-space pullback formula shows $V\\times_YT$ has no points, so it is empty (a nonempty scheme atlas would have a point). The same holds for $W\\times_YT$, since $aj=bq$. Pulling the quotient's etale-local lifts back to a scheme over $T$ therefore gives local lifts to $Z\\times_YT$: the $V$-label is impossible. In the $ZZ$ part of the kernel relation, the $E$ summand vanishes after this base change because its endpoints factor through $W$; only the diagonal $Z$ summand remains. Hence $Z\\times_YT\\to T$ is monic and every scheme-test section lifts etale locally. These local lifts are unique and agree on overlaps, so the sheaf condition glues them to a unique global lift. This constructs an inverse as a natural transformation, proving $Z\\times_YT\\simeq T$. The argument works over any space disjoint from $V$; it does not assume that a base change of $T$ remains reduced.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-a1-space-point-open-calculus",
+    "lem-per-space-etale-relation-quotient",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), quotient construction and verification"
+   }
+  },
+  {
+   "text": "For an algebraic space $H/S$, let $g:Z\\to H$ and $h:V\\to H$ satisfy $gj=hq$. The coproduct map $u=h\\amalg g:A\\to H$ equalizes $s,t$: on the $V,Z$ diagonals this is tautological, on each $W$ summand it is the given compatibility, and on $E$ one has $gj(w_1)=hq(w_1)=hq(w_2)=gj(w_2)$ because $q(w_1)=q(w_2)$. The quotient universal property therefore supplies a unique map $Y\\to H$ restricting to $g,h$. Conversely every such map gives the compatibility since $aj=bq$. All maps and quotients were taken over $S$, so this proves the required pushout in algebraic spaces over $S$.",
+   "uses": [
+    "lem-per-space-etale-relation-quotient",
+    "lem-trf-algebraic-space-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), quotient construction and verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-sfb-space-chartwise-etale-morphism",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "lem-a1-space-open-chart-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-per-space-etale-relation-quotient",
+  "lem-sc-etale-coproduct-etale",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 0DVJ (lemma-construct-elementary-distinguished-square), explicit relation construction; omitted elementary-distinguished-square checks expanded in Steps 5 and 6, and the pushout checked directly using the quotient universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given an open subspace of an algebraic space and a separated etale map to another space, construct their pushout as an elementary distinguished square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst : AlgebraicGeometry.IsOpenImmersion g],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (CategoryTheory.Limits.limit.π (CategoryTheory.Limits.cospan f g) CategoryTheory.Limits.WalkingCospan.one)\", \"doc\": \"The projection from the fiber product of a morphism $ f $ and an open immersion $ g $ to the target scheme $ Y $ is an open immersion. Specifically, given an open immersion $ g: Z \\to Y $ and any morph\"}\n  {\"name\": \"AlgebraicGeometry.instMonoObjWalkingSpanCompSchemeSpanForgetNoneWalkingPairSomeMapInitOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {U X Y : AlgebraicGeometry.Scheme} (f : U ⟶ X) (g : U ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f]\\n  [AlgebraicGeometry.IsOpenImmersion g] (i : CategoryTheory.Limits.WalkingPair),\\n  CategoryTheory.Mono\\n    (((CategoryTheory.Limits.span f g).comp AlgebraicGeometry.Scheme.forget).map\\n      (CategoryTh\", \"doc\": \"Given schemes $U,X,Y$ with open immersions $f:U\\\\to X$ and $g:U\\\\to Y$, the morphism induced by the span diagram $U\\\\rightrightarrows X,Y$ through the forgetful functor to types is a monomorphism. Specif\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMapWalkingSpanSchemeSpan\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {U X Y : AlgebraicGeometry.Scheme} (f : U ⟶ X) (g : U ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f]\\n  [AlgebraicGeometry.IsOpenImmersion g] {i j : CategoryTheory.Limits.WalkingSpan} (t : i ⟶ j),\\n  AlgebraicGeometry.IsOpenImmersion ((CategoryTheory.Limits.span f g).map t)\", \"doc\": \"Given open immersions $ f: U \\to X $ and $ g: U \\to Y $ between schemes, the morphisms induced by the walking span category's structure maps in the span diagram $ U \\rightrightarrows X, Y $ are also open\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme gluing along open isomorphisms does not construct this algebraic-space pushout"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue algebraic spaces by identifying an open subspace through a separated etale morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.glued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"Given gluing data $ D $ for schemes, the glued scheme is defined as the colimit (multicoequalizer) of the diagram constructed from $ D $, which identifies overlapping open subsets via specified isomor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isOpenImmersion\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"∀ (D : AlgebraicGeometry.LocallyRingedSpace.GlueData) (i : D.J),\\n  AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (D.ι i)\", \"doc\": \"For each object $ i $ in the indexing category $ J $ of the gluing data $ D $, the canonical inclusion morphism $ ι_i: U(i) → D.\\\\text{glued} $ from the local piece $ U(i) $ to the glued locally ringed\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.GlueData.f_open\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (self : AlgebraicGeometry.SheafedSpace.GlueData C)\\n  (i j : self.J), AlgebraicGeometry.SheafedSpace.IsOpenImmersion (self.f i j)\", \"doc\": \"For any category $\\\\mathcal{C}$ and gluing data $\\\\text{self}$ over $\\\\mathcal{C}$, and for all objects $i, j$ in the indexing category $J$, the morphism $\\\\text{self}.f(i,j)$ is an open immersion of shea\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.f_open\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"∀ (self : AlgebraicGeometry.LocallyRingedSpace.GlueData) (i j : self.J),\\n  AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (self.f i j)\", \"doc\": \"For each pair of objects $i,j$ in the indexing category $J$ of the gluing data, the morphism $f(i,j)$ from $V(i,j)$ to $U(i)$ is an open immersion in the category of locally ringed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.ι\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → (i : D.J) → D.U i ⟶ D.glued\", \"doc\": \"For each object $ i $ in the indexing category $ J $, this morphism maps $ U(i) $ to the glued scheme $ D.\\\\text{glued} $, constructed as the canonical projection from the object diagram to the colimit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.f_open\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme.GlueData) (i j : self.J), AlgebraicGeometry.IsOpenImmersion (self.f i j)\", \"doc\": \"For any gluing data for schemes, and for all objects $i, j$ in the indexing category $J$, the morphism $f(i, j)$ from $V(i, j)$ to $U(i)$ is an open immersion, meaning it is a topological open embeddi\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme gluing along open isomorphisms does not construct this algebraic-space pushout"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme gluing along open isomorphisms does not construct this algebraic-space pushout"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of algebraic space pushouts along an open immersion and a separated etale morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": HasPullback f g\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes and a morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": HasPullback g f\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes and any morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \": MorphismProperty.HasPullbacks IsOpenImmersion\", \"doc\": \"For any two open immersions $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ in the category of schemes, there exists a pullback of $ f $ and $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": HasPullback g f\", \"doc\": \"If $ f $ is an open immersion of presheafed spaces and $ g $ is a morphism with codomain matching that of $ f $, then the pullback of $ g $ along $ f $ exists in the category of presheafed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackFstOfRight\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": IsOpenImmersion (pullback.fst g f)\", \"doc\": \"If $ f $ is an open immersion of presheafed spaces and $ g $ is a morphism with codomain matching that of $ f $, then the pullback of $ g $ along $ f $ exists in the category of presheafed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": HasPullback f g\", \"doc\": \"In the category of locally ringed spaces, if one of the morphisms in a cospan diagram is an open immersion, then the pullback of the diagram exists.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackToBaseIsOpenImmersion\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"[IsOpenImmersion g] : IsOpenImmersion (limit.π (cospan f g) WalkingCospan.one)\", \"doc\": \"If $ f $ is an open immersion of presheafed spaces and $ g $ is a morphism with codomain matching that of $ f $, then the pullback of $ g $ along $ f $ exists in the category of presheafed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": HasPullback f g\", \"doc\": \"For any cospan diagram in the category of presheafed spaces where the left morphism is an open immersion, the pullback of the diagram exists. This means that given morphisms $f : X \\to Z$ (an open imme\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme gluing along open isomorphisms does not construct this algebraic-space pushout"
+  },
+  {
+   "tool": "grep",
+   "query": "elementary.distinguished|separated.*etale.*pushout|pushout.*[Ii]sEtale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme gluing along open isomorphisms does not construct this algebraic-space pushout"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushout of algebraic spaces along an open immersion and a separated etale morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.HasPullbacks\", \"doc\": \"For any two open immersions $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ in the category of schemes, there exists a pullback of $ f $ and $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.Limits.HasPullback g f\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes and any morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.Limits.HasPullback f g\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes and a morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst : AlgebraicGeometry.IsOpenImmersion g],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (CategoryTheory.Limits.limit.π (CategoryTheory.Limits.cospan f g) CategoryTheory.Limits.WalkingCospan.one)\", \"doc\": \"The projection from the fiber product of a morphism $ f $ and an open immersion $ g $ to the target scheme $ Y $ is an open immersion. Specifically, given an open immersion $ g: Z \\to Y $ and any morph\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f], CategoryTheory.Limits.HasPullback g f\", \"doc\": \"In the category of locally ringed spaces, if $ f: X \\\\to Y $ is an open immersion (a morphism whose underlying continuous map is an open embedding and whose sheaf morphism induces isomorphisms on stalk\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f], CategoryTheory.Limits.HasPullback f g\", \"doc\": \"In the category of locally ringed spaces, if one of the morphisms in a cospan diagram is an open immersion, then the pullback of the diagram exists.\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMapWalkingSpanSchemeSpan\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {U X Y : AlgebraicGeometry.Scheme} (f : U ⟶ X) (g : U ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f]\\n  [AlgebraicGeometry.IsOpenImmersion g] {i j : CategoryTheory.Limits.WalkingSpan} (t : i ⟶ j),\\n  AlgebraicGeometry.IsOpenImmersion ((CategoryTheory.Limits.span f g).map t)\", \"doc\": \"Given open immersions $ f: U \\to X $ and $ g: U \\to Y $ between schemes, the morphisms induced by the walking span category's structure maps in the span diagram $ U \\rightrightarrows X, Y $ are also open\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct an elementary distinguished Nisnevich square by gluing algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → CategoryTheory.GlueData AlgebraicGeometry.Scheme\", \"doc\": \"The function maps the inductive type representing gluing data for schemes (involving open subsets and isomorphisms) to the categorical gluing data structure for the category of schemes, enabling the u\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) → AlgebraicGeometry.Scheme.Gl\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → AlgebraicGeometry.Scheme.GlueData\", \"doc\": \"This definition constructs gluing data for schemes using an open cover $\\\\mathcal{U}$ of a scheme $X$. It specifies: (1) an index set $I_0$ for the cover, (2) a functor assigning each index to a scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  (𝒰 : S.OpenCover) →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] → Type (max (max (u + 1) u_1) u_2)\", \"doc\": \"Given a scheme $S$, an open cover $\\\\mathcal{U}$ of $S$, a category structure on the zeroth component $\\\\mathcal{U}_0$, and a locally directed cover structure on $\\\\mathcal{U}$, this defines the type of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n          [Quiver.IsThin J]\", \"doc\": \"A structure ensuring compatibility when gluing schemes via open immersions, defined by directed unions of open subsets and coherence conditions involving pullbacks and isomorphisms between overlapping\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → (i : D.J) × ↥(D.U i) → (i : D.J) × ↥(D.U i) → Prop\", \"doc\": \"A binary relation on the disjoint union of carrier sets of objects $U(i)$ in the gluing data diagram, where two elements $(i,a)$ and $(j,b)$ are related if there exists an element $x$ in the intersect\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout along an open immersion and a separated etale map of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": HasPullback g f\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes and any morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": HasPullback f g\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes and a morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \": MorphismProperty.HasPullbacks IsOpenImmersion\", \"doc\": \"For any two open immersions $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ in the category of schemes, there exists a pullback of $ f $ and $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": HasPullback g f\", \"doc\": \"If $ f $ is an open immersion of presheafed spaces and $ g $ is a morphism with codomain matching that of $ f $, then the pullback of $ g $ along $ f $ exists in the category of presheafed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": HasPullback f g\", \"doc\": \"In the category of locally ringed spaces, if one of the morphisms in a cospan diagram is an open immersion, then the pullback of the diagram exists.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackFstOfRight\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": IsOpenImmersion (pullback.fst g f)\", \"doc\": \"If $ f $ is an open immersion of presheafed spaces and $ g $ is a morphism with codomain matching that of $ f $, then the pullback of $ g $ along $ f $ exists in the category of presheafed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackToBaseIsOpenImmersion\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"[IsOpenImmersion g] : IsOpenImmersion (limit.π (cospan f g) WalkingCospan.one)\", \"doc\": \"If $ f $ is an open immersion of presheafed spaces and $ g $ is a morphism with codomain matching that of $ f $, then the pullback of $ g $ along $ f $ exists in the category of presheafed spaces.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "elementary.distinguished|separated.*etale.*pushout|pushout.*IsEtale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-nilpotent-etale-neighbourhood-pushout-lift",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Assembling quotient algebraizations into a principal-complete model. Supporting subargument: Tag 0AKA (lemma-approximate), proof from “We claim that we may choose” through the application of lemma-lift-approximation, before “By construction”. Supporting input: 0AKA claim paragraph, final application of lemma-lift-approximation to C-prime_m and the already chosen C_(m-1). In Tag 0ALT, the open/etale pushout construction and its comparison after base change.",
+   "via": [
+    "lem-per-nilpotent-etale-neighbourhood-pushout-lift",
+    "lem-per-rig-etale-compatible-model-tower",
+    "lem-per-rig-etale-principal-reduction",
+    "lem-per-rig-etale-jacobian-algebraization",
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-open-separated-etale-pushout",
+  "worker": "stage1",
+  "summary": "Read Tag 0DVJ and its omitted checks; constructed its five-piece etale relation and checked equivalence on arbitrary scheme tests, retaining clopen partitions for mixed labels and diagonal membership. Added one general algebraic-space etale-relation quotient input because the existing quotient theorem is restricted to schemes. Proved the open embedding, cartesian square, complement isomorphism and pushout from the explicit kernel relation; no statement change or finiteness hypothesis.",
+  "blueprint": "Supporting geometry for lem-per-artin-gabber-affine-curve through the existing local-duality/Elkik/principal-reduction chain recorded in blueprint.from: precisely the Tag 0ALT open/etale pushout used by lem-per-nilpotent-etale-neighbourhood-pushout-lift. The unit route and all target statements are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   },
+   {
+    "node": "lem-sc-etale-coproduct-etale",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   },
+   {
+    "node": "lem-sfb-space-etale-monomorphism-open",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   },
+   {
+    "node": "lem-sfb-space-reduced-closed-support",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   },
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-coproduct-partition",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space or etale-scheme geometry used in the explicit 0DVJ relation construction, not a replacement of any perverse-duality unit step; this unit has no corresponding geometry theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-open-chart-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-sc-etale-coproduct-etale",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-4b17ffd0b",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-4b17ffd0b (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps), the new node lem-per-space-etale-relation-quotient, every cited statement, and the sources Stacks 0DVJ, its preceding pushout lemma, 04S6(1) and 046O. The item statement is byte-identical to the base (checked against the NL snapshot) and is the full 0DVJ statement, conditions included, not weakened. The steps follow Stacks' five-summand relation. Step 1: diagonal open by the etale-monomorphism lemma and closed by separatedness, P=δ(W)⊔E, coproducts algebraic. Step 2 (marked elementary, the source's 'immediately verified'): monic and an equivalence relation, checked by clopen pieces; this is justified. Step 3: s,t chartwise etale through the clopen split of a chart and the finite scheme-coproduct etale lemma. Steps 4-7: the open embedding and the canonical iso W≅Z×_YV come from the kernel pair; Z×_YT≅T because V×_YT, W×_YT and E×_YT are empty, with gluing of etale-local lifts; the pushout comes from the quotient's universal property and u equalizes s,t, including on E. The new node is true: 04S6(1); 046O plus monicity gives the kernel pair; p is representable and etale; etale-local lifting holds. It was tested on R=A, A=∅ and the scheme case. It is not a duplicate: lem-trf-etale-relation-quotient and the related trf/sfb quotient nodes are for schemes only, and the bootstrap nodes start from a given sheaf. It does not restate an item clause. Batch-5: the cited trf/a1/sfb nodes are general definitions and foundational facts about algebraic spaces (fibre products, coproducts, partition of sheaf coproducts, etale permanence, open charts, point images, etale monomorphisms open), outside the trace-formula and Poincaré-duality statements and not steps of their proofs. Accepted. Tool uses of generic geometry from units sk-p-real-rankin, sk-thm-sf-ctf-stability, sk-i-curve-zero and sk-prop-h2 accepted. No SGA citation. Minor: the report mentions a citations.json that is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenSeparatedEtalePushout",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_openSeparatedEtalePushout",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSeparatedEtalePushout.lean",
+  "statement": "theorem exists_openSeparatedEtalePushout {S : Scheme.{u}} (W Z V : AlgebraicSpace S) (j : W ⟶ Z) (q : W ⟶ V) (hj : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom) (hq : IsChartwiseEtale q) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal q.hom.hom)) : ∃ (Y : AlgebraicSpace S) (a : Z ⟶ Y) (b : V ⟶ Y), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) b.hom.hom ∧ IsChartwiseEtale a ∧ IsPullback j.hom q.hom a.hom b.hom ∧ (∀ C : ClosedSubspace Y, IsReduced (C.val : AlgebraicSpace S) → pointImage C.val.arrow.hom.hom = (pointImage b.hom.hom)ᶜ → IsIso (Limits.pullback.snd a.hom C.val.arrow.hom)) ∧ ∀ (H : AlgebraicSpace S) (g : Z ⟶ H) (h : V ⟶ H), j ≫ g = q ≫ h → ∃! t : Y ⟶ H, a ≫ t = g ∧ b ≫ t = h",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86646fa19",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read node, Stacks 0DVJ, all stmt_dep declarations (IsRepresentableWith, OpenSubspace, IsChartwiseEtale, pointImage, ClosedSubspace, IsReduced, exists_unique_reduced_closed_subspace, fibreProduct_isAlgebraicSpace) and the delivered module. Every clause matches: open j as the OpenSubspace predicate on a morphism; chartwise-etale q; separatedness as closed-immersion representability of the relative diagonal pullback.diagonal q; IsPullback j q a b gives aj=bq and the canonical W≅Z×_YV; b open; a chartwise etale; ∀ reduced closed C with pointImage = complement of pointImage b, pullback.snd a C is iso (equivalent by existence and uniqueness); pushout as ∃! t with a≫t=g ∧ b≫t=h. No extra hypotheses or universe restriction; edge cases (empty W/Z/V, identities, empty complement) covered. lean.statement verbatim; node changed only in lean; docstrings and sorry-only proof fine. Advisory: hsep inlines MapIsSeparated (def-sfb-space-morphism-properties not cited, node spells it out); ClosedSubspace/IsReduced owners reached only through stmt_dep lem-sfb-space-reduced-closed-support. Not recompiled; no file changed."
+ }
+}

@@ -1,0 +1,167 @@
+{
+ "id": "lem-a1-pulled-koszul-tower-normalized-iso",
+ "kind": "statement",
+ "title": "Normalized ordinary tensor and action-unitor comparison of principal Koszul towers",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with valuation ring $A$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be any morphism of schemes [def-weil-scheme-morphism-properties]. Write $R_W=\\varprojlim_n(A/t^{n+1})_W$ for the actual completed integral coefficient sheaf [def-weil-completed-integral-coefficients], and use its projection-induced structural map to define the ordinary pullback $G$ on modules and termwise on unbounded cochain complexes [def-a1-integral-completed-tower-pullback-universes]. Use the sheaf tensor and direct-sum total cochain tensor [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves]. Let $Q_{W,n}=[R_W\\xrightarrow{t^{n+1}}R_W]$ in degrees $-1,0$, with the adjacent transition $(t,1)$, and put $H_W(P)=(P\\otimes Q_{W,n})_{n\\in\\mathbf N}$ [def-a1-principal-completed-koszul-towers]. Use the actual cone basis vectors and adjunction-unit generators of [def-a1-pulled-koszul-tower-normalization].\n\nThere is a family of isomorphisms of strict towers of cochain complexes $\\theta_P:G(H_Y(P))\\xrightarrow{\\sim}H_X(GP)$, for every unbounded $R_Y$-complex $P$. Each isomorphism satisfies the specified KoszulNormalization equation: on either basis vector $e_i$, $i=-1,0$, in each total summand it sends $b\\cdot G(x\\otimes e_i)$ to $(b\\cdot Gx)\\otimes e'_i$, at every base-changed site object and for every local scalar $b$. For every chain map $f:P\\to P'$ the strict tower maps satisfy $G(H_Y(f))\\,\\theta_{P'}=\\theta_P\\,H_X(Gf)$, in diagrammatic composition order. No goodness, boundedness, flatness or invertibility assumption on the completed structural map is imposed. This is only the ordinary tensor/action-unitor comparison; it asserts neither preservation of good complexes nor any quasi-isomorphism of augmentations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, ordinary total-complex constituents; sites-modules.tex Tag 03EL, lemma-tensor-product-pullback; principal-basis and strict-transition specialization of parent steps 2--4."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-a1-principal-completed-koszul-towers",
+  "def-a1-pulled-koszul-tower-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\widetilde t$ for the inverse-image section of the completed uniformizer on $Y$. For every $m$, the composite $g^{-1}R_T\\xrightarrow{c_g}R_{X}\\xrightarrow{\\pi_{X,m}}S_{X,m}$ is the inverse image of $\\pi_{Y,m}$ followed by the constant coefficient map. That constant map sends the residue of $t$ to the same residue of $t$. Thus $c_g(\\widetilde t)$ and $t$ have the same projection at every $m$; uniqueness of a map to the inverse limit gives $c_g(\\widetilde t)=t$, hence $c_g(\\widetilde t^n)=t^n$. The action unitor $GR_T\\cong R_{X}$ sends $a\\otimes b$ to $c_g(a)b$, with inverse $b\\mapsto1\\otimes b$. Under it $G(t^n)$ sends $c_g(a)b$ to $c_g(\\widetilde t^na)b=t^nc_g(a)b$. This proves the required scalar normalization. Here Q_{W,n} uses exponent n+1; preservation of all powers applies to this positive exponent as well.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-proetale-inverse-image",
+    "def-sp-completed-uniformizer-section",
+    "def-pur-sheaf-tensor-product",
+    "def-a1-integral-completed-tower-pullback-universes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, action unitor; coefficient projections and constant sections are the cited definitions."
+   }
+  },
+  {
+   "text": "Present the specified pullback by algebraic inverse image followed by scalar extension along the completed structural map. The supplied adjunction and uniqueness of left adjoints identify this presentation with CompletedTowerIndependent.pull. Transport the normalized ordinary tensor comparison along that isomorphism; its adjunction-unit equation identifies insertion of 1 with the generator used in KoszulNormalization. Use the ordinary cochain tensor comparison for the given completed ringed morphism. It gives $G(P\\otimes Q_{Y,n})\\cong GP\\otimes GQ_{Y,n}$, naturally in both complexes, with the signed direct-sum total differential. Define $\\phi_n:GQ_{Y,n}\\to Q_{X,n}$ on both terms by $(ae_i)\\otimes b\\mapsto c_g(a)b e_i\\prime$, with inverse $be_i\\prime\\mapsto e_i\\otimes b$. These are mutually inverse balanced module maps. Step 1 gives the chain equation $c_g(\\widetilde t^{n+1}a)b=t^{n+1}c_g(a)b$, so $\\phi_n$ is a chain isomorphism. Compose the cochain comparison with $1_{GP}\\otimes\\phi_n$ to define $\\theta_{P,n}$. In the coefficient-last convention of the item its value is $((x\\otimes e_i)\\otimes b)\\mapsto(x\\otimes b)\\otimes e_i\\prime$: the cochain comparison inserts $1$ into the second factor and $\\phi_n$ takes that basis to $e_i\\prime$. The degree-zero coefficient $b$ passes no nonzero-degree factor. Explicitly, for $x\\in P^p$ the two differential contributions on either path are $(d x\\otimes b)\\otimes e_i\\prime$ and $(-1)^p(x\\otimes b)\\otimes d(e_i\\prime)$. Thus there is no additional sign.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-a1-principal-completed-koszul-towers",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-a1-integral-completed-tower-pullback-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, proof: isomorphism of total complexes; Tag 03EL for its ordinary constituents. The two-term unitor and sign calculation are explicit."
+   }
+  },
+  {
+   "text": "For the adjacent Koszul transition, $\\phi_nG(t,1)$ and $(t,1)\\phi_{n+1}$ agree in degree $-1$ by $c_g(\\widetilde t a)b=t c_g(a)b$, and in degree zero both send $a\\otimes b$ to $c_g(a)b$. Naturality of the cochain tensor comparison in its second argument therefore gives $\\theta_{P,n}G(1_P\\otimes(t,1))=(1_{GP}\\otimes(t,1))\\theta_{P,n+1}$. Every arrow of the inverse sequence indexed by n >= 0, with exponent n+1 is a composite of adjacent arrows, so these are isomorphisms of strict towers. For a chain map $f:P\\to P\\prime$, naturality in the first argument gives the other square; on a local generator both paths send $((x\\otimes e_i)\\otimes b)$ to $(g^{-1}f(x)\\otimes b)\\otimes e_i\\prime$. Hence the strict tower isomorphisms are natural for all the stipulated chain maps. No goodness or invertibility assumption was used in steps 1--3; the resulting family is defined on every unbounded complex.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-a1-principal-completed-koszul-towers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, naturality of the cochain comparison; principal adjacent-transition equation calculated here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-pullback",
+  "def-weil-proetale-inverse-image",
+  "def-sp-completed-uniformizer-section",
+  "def-pur-sheaf-tensor-product",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-a1-principal-completed-koszul-towers",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, ordinary total-complex constituents; sites-modules.tex Tag 03EL, lemma-tensor-product-pullback; principal-basis and strict-transition specialization of parent steps 2--4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism between pullback of the principal Koszul tensor tower and tensor with the target principal Koszul tower with unit basis normalization",
+   "results": "CategoricalPullback.mkNatIso and CatCommSqOver.e; SheafOfModules.freeFunctorCompPullbackIso (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree); HomologicalComplex.rightUnitor' (Mathlib.Algebra.Homology.Monoidal); PresheafOfModules.pullbackComp. Read PullbackFree and the existing cochain comparison interfaces: none includes both concrete Koszul basis formulas and strict completed-coefficient tower maps.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive ringed sheaf pullback identifies principal Koszul towers naturally and preserves flat K flat complexes",
+   "results": "SheafOfModules.pullbackObjFreeIso and pullback_map_ιFree_comp_pullbackObjFreeIso_hom, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree; geometric flat base-change instances and ModuleCat.preservesFiniteLimits_extendScalars_of_flat. Read PullbackFree: it supplies ordinary free-module pullback, not the normalized two-term cochain and tower comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Kk]oszul|[Kk]oszul.*pullback|pullbackObjFreeIso",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:27,118,125,126,128. Read the source at 100--146: free-module and free-map comparisons, not the concrete completed principal Koszul tower. Local rg also read the existing PulledKoszulTowerNormalization, CochainTensorCoherenceData and CochainPullbackTensorCoherence signatures; the balanced finite comparison is downstream and cannot be used.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PulledKoszulTowerChainComparison",
+  "date": "2026-10-26",
+  "group": "R4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph of lem-a1-finite-map-purity, geometric-stalk restriction by finite-map pullback, through the recorded completed-pullback refinement. More precisely: steps 2--4 of lem-a1-pulled-koszul-tower-chain-comparison, preservation of the completed uniformizer and the ordinary tensor/action-unitor comparison on both Koszul terms, with strict transitions and chain-map naturality.",
+   "via": [
+    "lem-a1-pulled-koszul-tower-chain-comparison",
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "summary": "Extracts only the ordinary tensor/basis subargument (parent steps 2--4). The parent separately proves preservation of goodness and the target augmentation assertions.",
+  "blueprint": "Preserves the existing finite-map-pullback route; below-unit ordinary Koszul tensor calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Uses the general ordinary cochain tensor comparison and its naturality as a black box, as already approved in the parent node; does not replace the geometric unit route."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PulledKoszulTowerNormalizedIso",
+  "file": "lean/Sheaf/Paper/PulledKoszulTowerNormalizedIso.lean",
+  "declaration": "WeilConjectures.pulled_koszul_tower_normalized_iso",
+  "statement": "theorem pulled_koszul_tower_normalized_iso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{t}} (g : X ⟶ Y) :\n    ∃ θ : ∀ P : CochainComplex (CompletedTowerIndependent.Modules l E Y) ℤ,\n        (diagramPull l E g).obj (H l E Y P) ≅ H l E X ((G l E g).obj P),\n      (∀ P, KoszulNormalization l E g P (θ P)) ∧\n      (∀ {P P' : CochainComplex (CompletedTowerIndependent.Modules l E Y) ℤ}\n        (f : P ⟶ P'),\n        Functor.whiskerRight (sourceTowerMap l E Y f) (G l E g) ≫ (θ P').hom =\n          (θ P).hom ≫ sourceTowerMap l E X ((G l E g).map f))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T070802-L-3657613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T070802-L-3657613",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

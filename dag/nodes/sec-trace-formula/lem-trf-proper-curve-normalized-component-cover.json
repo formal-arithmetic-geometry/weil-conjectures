@@ -1,0 +1,408 @@
+{
+ "id": "lem-trf-proper-curve-normalized-component-cover",
+ "kind": "statement",
+ "title": "Finite normalized-component cover of a proper scheme of dimension at most one",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ a scheme [def-pc-scheme] proper over $k$ [def-weil-proper-morphism] with $\\dim X\\le1$ [def-kun-topological-krull-dimension]. Its irreducible components [def-weil-irreducible-components] admit finite enumerations $C_1,\\ldots,C_t$ of the one-dimensional components and $P_1,\\ldots,P_r$ of the zero-dimensional components, each given its reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme]. These schemes are integral [def-pc-integral-scheme] and proper over $k$; each $P_j$ has a singleton underlying space, open and closed in $X$, and the component images cover $X$. For each $i$, the normalization $\\nu_i:\\widetilde C_i\\to C_i$ [def-sc-normalization] is finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism], and $\\widetilde C_i$ is integral and proper over $k$ of dimension one. Let $Z=(\\coprod_{i=1}^t\\widetilde C_i)\\amalg(\\coprod_{j=1}^rP_j)$ be the scheme coproduct [lem-weil-pbc-scheme-coproduct-family], and let $f:Z\\to X$ be induced by the normalization maps followed by the component inclusions and by the inclusions of the $P_j$. Then $f$ is finite and surjective and $Z$ is proper over $k$. Both index sets are empty exactly when $X$ is empty, in which case $Z$ is empty as well.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components, proof: finite surjective component cover (details omitted); replace each curve component by its normalization using Tag 0BXR, lemma-normalization-locally-algebraic."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "def-sc-normalization",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof": [
+  {
+   "text": "A field has only the ideals $0$ and $k$, generated respectively by the empty set and $1$, so it is Noetherian. The one-point affine scheme $\\operatorname{Spec}k$ is therefore locally Noetherian and quasi-compact. Properness includes finite type; apply [lem-weil-pbc-finite-type-over-noetherian] to obtain that $X$ is Noetherian. By [lem-weil-pbc-noetherian-finitely-many-components] and [lem-sc-irreducible-components-cover], its components form a finite covering family. Each component is nonempty and closed; every chain of irreducible closed subsets in it is also a chain in $X$. Thus its dimension is either $0$ or $1$. Partition and enumerate the finite family as $P_1,\\ldots,P_r$ and $C_1,\\ldots,C_t$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-irreducible-components-cover",
+    "def-weil-irreducible-components",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 0BA8, lemma-Noetherian-irreducible-components; Topology Tag 004W, lemma-irreducible. These supply the finiteness omitted in Varieties Tag 0B5Y."
+   }
+  },
+  {
+   "text": "For each component $D$, [lem-weil-pbc-reduced-induced-closed-subscheme] supplies its reduced induced closed subscheme and inclusion $i_D:D\\hookrightarrow X$, with underlying space precisely the component. It is nonempty and irreducible, so reducedness makes it integral by the equivalence in [def-pc-integral-scheme]. The inclusion is finite by [lem-weil-pbc-closed-immersion-finite] and $D$ is proper over $k$ by [lem-weil-pbc-closed-immersion-proper](c). In particular its structure map is of finite type, so [lem-weil-pbc-finite-type-over-noetherian] over $\\operatorname{Spec}k$ also makes $D$ Noetherian.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 and 01J4, lemma-reduced-closed-subscheme and definition-reduced-induced-scheme; Morphisms Tags 035C and 01W5, lemma-closed-immersion-finite and lemma-closed-immersion-proper; Tag 01T6."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-zero-dim-noetherian-finite-discrete] to each $P_j$. A nonempty irreducible discrete space has exactly one point: two points would separate it into a singleton and its complement, both closed and proper. Write $|P_j|=\\{p_j\\}$. If another component contained $p_j$, it would contain $|P_j|$, contradicting maximality of $P_j$ as an irreducible subset. Since the components cover $X$, the complement of $\\{p_j\\}$ is exactly the union of the other components. This is a finite union of closed subsets. Thus $\\{p_j\\}$ is open, and it is closed because it is a component.",
+   "uses": [
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAX, lemma-locally-Noetherian-dimension-0; the singleton and open-and-closed assertions then follow from component maximality and the finite covering family (Topology Tag 004W)."
+   }
+  },
+  {
+   "text": "For each $C_i$, the finite-type integral normalization theorem [lem-sc-normalization-exists] applies by Step 2. It gives that $\\nu_i$ is finite and surjective, that $\\widetilde C_i$ is proper over $k$, and that $\\dim\\widetilde C_i=\\dim C_i=1$. To verify integrality as well, apply [lem-weil-pbc-normalization-in-residue-field-extension] with $X=C_i$, its unique generic point $x$ from [lem-sc-scheme-sober], and the degree-one extension $K=\\kappa(x)$. Here $C_i$ is separated over $k$, hence quasi-separated by [lem-weil-pbc-qcqs-over-affine], and $K$ is its function field by [def-sc-function-field]. The normalization in $\\operatorname{Spec}K$ described in that node is exactly [def-sc-normalization]: both are the relative spectrum of the integral closure of $\\mathcal O_{C_i}$ in the constant function field. Its conclusion (a) therefore gives that $\\widetilde C_i$ is integral. No perfectness or algebraic closure of $k$ is used.",
+   "uses": [
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "def-sc-normalization",
+    "def-weil-proper-morphism",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR, lemma-normalization-locally-algebraic; Morphisms Tag 035L, lemma-normal-normalization, applied to the generic field; normalization dimension and properness as in the cited existing normalization theorem."
+   }
+  },
+  {
+   "text": "Form $Z$ and its map $f$ by [lem-weil-pbc-scheme-coproduct-family]. Each map $\\widetilde C_i\\to X$ is the composite of the finite map $\\nu_i$ and the finite component inclusion, hence finite by [lem-weil-pbc-finite-composition]; each $P_j\\to X$ is finite by Step 2. Induct on the number $t+r$ of summands: the empty map $\\varnothing\\to X$ is finite, since over any affine $\\operatorname{Spec}A$ it is $\\operatorname{Spec}0\\to\\operatorname{Spec}A$ and the zero algebra is a finite $A$-module. Adding a summand preserves finiteness by the binary statement [lem-weil-pbc-finite-coproduct]. The iterated binary coproduct and the displayed $Z$ agree by their universal property, with their maps to $X$. Hence $f$ is finite, including for zero summands.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-coproduct",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WK and 0CYI, lemma-composition-finite and lemma-finite-union-finite; the latter is stated for any finite number of summands, here derived from the cited binary node by induction. Schemes Tags 01JB and 01JC supply the coproduct."
+   }
+  },
+  {
+   "text": "Every point of $X$ is on a component by Step 1. On a curve component it lifts along the surjection $\\nu_i$ of Step 4; on a point component it is already in the image of $P_j$. The corresponding coprojection into $Z$ then supplies a preimage under $f$, so $f$ is surjective. Since $f$ is finite, [lem-weil-pbc-finite-proper] makes it proper; compose with the proper structure map of $X$ using [lem-weil-pbc-proper-composition] to obtain that $Z$ is proper over $k$. Finally, all components are nonempty and their images cover $X$: the two index sets are empty if and only if $X$ is empty. When they are empty, the union-of-images assertion for scheme coproducts says $Z=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components, omitted finite surjective cover; Morphisms Tags 01WN and 01W3, lemma-finite-proper and lemma-composition-proper."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "def-sc-normalization",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-sc-function-field",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-coproduct",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Fills in the details omitted in Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components, and replaces curve components by their normalizations via Tag 0BXR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalization.*(component|surjective|finite)|component.*normalization",
+   "results": "3 hits; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; hits provide relative normalization, finiteness/properness or supplied-cover surjectivity, not this finite enumeration with isolated points, proper integral dimension-one normalizations, and their cover.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite surjective cover of a proper curve by normalized irreducible components and isolated points",
+   "results": "8 hits; AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.Surjective, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.instSurjectiveDescI₀SchemeF, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Cover.mkOfCovers; hits provide relative normalization, finiteness/properness or supplied-cover surjectivity, not this finite enumeration with isolated points, proper integral dimension-one normalizations, and their cover.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.normalization, AlgebraicGeometry.IsFinite",
+   "results": "0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.Scheme.normalization'; hits provide relative normalization, finiteness/properness or supplied-cover surjectivity, not this finite enumeration with isolated points, proper integral dimension-one normalizations, and their cover.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme of dimension at most one over an arbitrary field has a finite surjective cover by normalizations of its one dimensional reduced irreducible components and its isolated reduced point components",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; hits provide relative normalization, finiteness/properness or supplied-cover surjectivity, not this finite enumeration with isolated points, proper integral dimension-one normalizations, and their cover.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Surjective",
+   "results": "1 hits; AlgebraicGeometry.Scheme.Hom.one_le_finrank_iff_surjective; hits provide relative normalization, finiteness/properness or supplied-cover surjectivity, not this finite enumeration with isolated points, proper integral dimension-one normalizations, and their cover.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme over a field of dimension at most one the disjoint union of the integral normalizations of its curve components and spectra of the residue fields of isolated points is finite surjective and proper",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc; hits provide relative normalization, finiteness/properness or supplied-cover surjectivity, not this finite enumeration with isolated points, proper integral dimension-one normalizations, and their cover.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite surjective cover of a proper scheme of dimension at most one by normalizations of its irreducible curve components and isolated reduced points",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instUniqueI₀SchemeCover, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; inspected the hits: relative normalization, supplied-cover surjectivity, finite implies proper, or component finiteness alone; no declaration gives every clause of this item. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(component|surjective|finite)|component.*normalization",
+   "results": "3 hits; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; inspected the hits: relative normalization, supplied-cover surjectivity, finite implies proper, or component finiteness alone; no declaration gives every clause of this item. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite surjective proper cover by normalized curve components and isolated points",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Cover.mkOfCovers, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.Scheme.Cover.LocallyDirected, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ, AlgebraicGeometry.Scheme.Cover.Over.casesOn, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.OpenCover; inspected the hits: relative normalization, supplied-cover surjectivity, finite implies proper, or component finiteness alone; no declaration gives every clause of this item. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Surjective",
+   "results": "1 hits; AlgebraicGeometry.Scheme.Hom.one_le_finrank_iff_surjective; inspected the hits: relative normalization, supplied-cover surjectivity, finite implies proper, or component finiteness alone; no declaration gives every clause of this item. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian scheme of dimension at most one decomposes into reduced integral curve components and isolated closed point components and their finite normalization cover",
+   "results": "8 hits; AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; inspected the hits: relative normalization, supplied-cover surjectivity, finite implies proper, or component finiteness alone; no declaration gives every clause of this item. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*IsProper|instOfIsFinite|instIsProperOfIsFinite",
+   "results": "5 hits; 69, 90, 91, 98, 99; inspected the hits: relative normalization, supplied-cover surjectivity, finite implies proper, or component finiteness alone; no declaration gives every clause of this item. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fibre-degree-ample-criterion",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting finite normalized-component cover (returned proof Steps 1-3, before ampleness descent).",
+   "via": [
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-proper-curve-normalized-component-cover",
+  "worker": "stage1",
+  "summary": "Filled in the omitted component-cover argument of Stacks 0B5Y using existing DAG results only. Established isolated point components, integral proper dimension-one normalizations, finite coproduct assembly, surjectivity and the empty case. No statement change and no new nodes. The closed regular-cover theorem in CurveRegularCover.lean omits clauses and is not an attachment.",
+  "blueprint": "Realizes the finite normalized-component-cover input in the fibrewise ampleness-to-projectivity branch of lem-trf-local-term-locality, through the exact ancestor chain already recorded in blueprint.from; expands the component-cover details omitted in Stacks 0B5Y before ampleness descent.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-noetherian-ring",
+    "why": "Generic noetherian ring used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic locally noetherian schemes used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic separated, universally closed and proper morphisms used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic a scheme of finite type over a noetherian scheme is noetherian (stacks 01t6) used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic a noetherian scheme has finitely many irreducible components used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Generic every irreducible subset lies in an irreducible component; the components cover the space used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "def-weil-irreducible-components",
+    "why": "Generic irreducible components used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "def-kun-topological-krull-dimension",
+    "why": "Generic krull dimension of a topological space used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced induced closed subscheme structure on a closed subset: existence and uniqueness used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "def-pc-integral-scheme",
+    "why": "Generic integral scheme used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic closed immersions are finite used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic closed immersions are proper used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic a noetherian zero-dimensional scheme has finite discrete underlying space used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic existence and finiteness of the normalization used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic the normalization of a scheme in a finite extension of a residue field is a normal integral scheme, integral over the base, with the extension as generic point used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "def-sc-normalization",
+    "why": "Generic normalization in the function field used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic schemes are sober used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic a scheme separated and of finite type over an affine scheme is quasi-compact and quasi-separated used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "def-sc-function-field",
+    "why": "Generic the function field of a curve used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic coproducts of schemes: open coprojections with disjoint images covering used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Generic composition of finite morphisms used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-coproduct",
+    "why": "Generic a disjoint union of finite morphisms is finite used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic finite and integral morphisms of schemes used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic finite morphisms are proper used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic properness is stable under composition used in the component-cover construction; the trace-formula unit supplies no replacement for this scheme/topology tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "def-sc-normalization",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-sc-function-field",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-coproduct",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-53959a27a",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-53959a27a (reviewer sub-agent of L); spot-checked: First split of an unsplit item, with no proof and no new nodes. The statement is byte-identical to base; live and side-live still show it unsplit; no re-split note exists. Source checked: Stacks varieties.tex 0B5Y (l.10070), whose proof leaves the finite surjective component cover as 'details omitted', and 0BXR (l.4903). All six steps read against the cited statements. Step 1: 01T6 over the Noetherian Spec k, then 0BA8 and 004W; each component has dimension 0 or 1. Step 2: 01J3 reduced structure, integral by the equivalence in def-pc-integral-scheme, finite by 035C, proper by closed-immersion-proper (c). Step 3: 0AAX plus irreducibility gives one point. Openness in X comes from the complement being a finite union of the other closed components, using maximality. Step 4: lem-sc-normalization-exists gives finite, surjective, proper and dim 1. Integrality comes from the residue-field-extension node: generic point, K = κ(η), quasi-separated via qcqs-over-affine. h_*O_{Spec K} is the constant sheaf K, so its normalization is def-sc-normalization. Step 5: induction from the empty map (Spec 0) with the binary 0CYI node. Step 6: surjectivity is lifted pointwise; finite ⇒ proper, then composed; empty case from the coproduct union clause. Edge cases tested: X empty, Spec k[ε], a curve plus a non-reduced point, two meeting P¹, a cuspidal curve over an imperfect field. No duplicate: normalization-projective-components needs projective input and has different clauses. CurveRegularCover.exists_isFinite_isRegular_cover is only partial, so it is correctly not an attachment. No cycle and no SGA. The 25 tool_uses equal proof_deps; all are generic scheme tools, accepted. No changes made."
+ }
+}

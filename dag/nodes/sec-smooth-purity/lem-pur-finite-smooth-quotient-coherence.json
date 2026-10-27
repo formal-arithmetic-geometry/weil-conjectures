@@ -14,32 +14,40 @@
  ],
  "proof": [
   {
-   "text": "First prove the ordinary compact-support quotient cocycle on the chosen compactification. Both open scalar comparisons are identity on the open and zero outside. Direct and successive proper comparisons transpose to the same proper counit tensored with the final coefficient ring: both balancing maps send (x tensor b) tensor c to x tensor bc. Adjunction bijectivity and faithful restriction of scalars give equality. Paste with the open equality, also for identity quotients. scalar extension is left adjoint to restriction. Transpose its comparisons through these adjunctions; direct and successive scalar maps both restrict to the same multiplication map. This proves pullback/tensor/unit/shift associativity with the specified quotient associator. The root power maps compose and agree on all scalar/root generators, giving the twist cocycle, then its ordered tensor powers. The tensor and pullback comparisons yield the purity-source cocycle. The compact-support cocycle and the exceptional counit identities give the exceptional cocycle by transposition, using naturality to move each comparison past the next compact-support map. Finally the canonical comparison/scalar mates and the actual origin counits have the same associative transposes. Substitute their formulas in the pro comparisons, cancel inverse origin counits on the constructible domain, and apply the ordinary cocycles. The compact-support case also cancels the two inverse open/proper site comparisons. This proves all five pro cocycles, including equal levels; no choice of origin or of root generators enters an equation.",
+   "text": "Prove ordinary pullback quotient coherence by reusing scalarPullback_chain from the existing finite direct-image proof. Invert its equality of canonical isomorphisms and cancel the target scalar associator. The explicitly proved equality of the three quotient ring homomorphisms transports the composite-map formula to literal quotient levels.",
+   "uses": [
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary compact-support quotient cocycle theorem. Apply the ordinary twisted-source theorem to the proved pullback cocycle; this gives the root-tensor cocycle and the ordinary finiteLambda cocycle.",
+   "uses": [
+    "lem-pur-finite-smooth-compact-quotient-cocycle",
+    "lem-pur-finite-smooth-ordinary-twisted-cocycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exceptional_naturality_and_cocycle with the established compact-support cocycle and intermediate lower bound 1 <= n <= m. Its second conclusion gives the ordinary exceptional cocycle at every positive triple. Supply all five ordinary cocycles to the site-transport theorem and assemble its five pro-etale conclusions with the four ordinary conclusions.",
    "uses": [
     "lem-pur-exceptional-coefficient-comparison",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-amb-proper-coproducts-projection",
-    "lem-weil-pbc-extension-by-zero-stalks",
-    "lem-weil-pbc-extension-by-zero-exact"
+    "lem-pur-finite-smooth-pro-quotient-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-coef-finite-direct-image",
+  "lem-pur-finite-smooth-compact-quotient-cocycle",
+  "lem-pur-finite-smooth-ordinary-twisted-cocycles",
   "lem-pur-exceptional-coefficient-comparison",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-amb-proper-coproducts-projection",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-extension-by-zero-exact"
+  "lem-pur-finite-smooth-pro-quotient-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-  "place": "All quotient coherence, including its ordinary compact-support starting cocycle. The latter is a conclusion rather than an assumption; finite-root site realization is proved separately."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "K1 reduction: prove ordinary pullback coherence from existing scalarPullback_chain; derive the ordinary exceptional cocycle from the existing counit-mate theorem; isolate compact support, ordinary twisted sources, and pro-etale transport as three proper subarguments."
  },
  "mathlib_searches": [
   {
@@ -84,7 +92,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
@@ -108,12 +127,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261020T051002-L-1519603",
+  "landing": "20261027T094430-L-225251",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

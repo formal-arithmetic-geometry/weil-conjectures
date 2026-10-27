@@ -1,0 +1,292 @@
+{
+ "id": "lem-weil-sections-scalar-cochain-coherence",
+ "kind": "statement",
+ "title": "Cochain sections comparisons for arbitrary coefficient-ring towers",
+ "statement": "Let $\\mathcal C$ be a site small relative to its module universe, with terminal object $s$. Let $R_0\\to R_1\\to R_2\\to R_3$ be a tower of sheaves of commutative rings and $A_0\\to A_1\\to A_2\\to A_3$ a tower of commutative rings. Fix ring maps $\\lambda_i:A_i\\to\\Gamma(s,R_i)$ commuting with every tower map. Use sheaves of modules [def-weil-sheaf-of-modules-category], sheafified tensors [def-pur-sheaf-tensor-product] and unbounded cochain complexes [def-pc-cochain-complex-modules]. Write $G_i(C)=\\Gamma(s,C)$ termwise, regarded as an $A_i$-complex through $\\lambda_i$, $T_{ij}C=C\\otimes_{R_i}R_j$, and $t_{ij}N=N\\otimes_{A_i}A_j$, for $i\\le j$, with diagonal coefficient maps the identities. For all these pairs define the balanced sections comparison\n$$\\theta_{ij,C}:t_{ij}G_i(C)\\longrightarrow G_j(T_{ij}C),\\qquad n\\otimes a\\longmapsto n\\otimes\\lambda_j(a).$$\nLet $u_{ijk,C}:T_{jk}T_{ij}C\\xrightarrow{\\sim}T_{ik}C$ denote the balanced sheaf scalar associator, with local formulas $((x\\otimes a)\\otimes b)\\mapsto x\\otimes ab$ and inverse $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$. Let $a_{ijk}$ be the identical scalar associator for ordinary module complexes, and let $m_i:T_{ii}C\\to C$ and $\\mu_i:t_{ii}N\\to N$ be the action maps $x\\otimes r\\mapsto rx$ and $n\\otimes a\\mapsto an$.\n\nThe displayed balanced maps are well-defined natural chain maps, and $u$, $a$, $m$ and $\\mu$ are natural chain isomorphisms with the indicated associator inverses and with unit inverses given by insertion of $1$. For every $i\\le j\\le k$ and every $R_i$-complex $C$,\n$$G_k(u_{ijk,C})\\circ\\theta_{jk,T_{ij}C}\\circ t_{jk}(\\theta_{ij,C})=\\theta_{ik,C}\\circ a_{ijk,G_i(C)}.$$\nBoth sides send $((n\\otimes a)\\otimes b)$ to $n\\otimes\\lambda_k(ab)$. For every $i$,\n$$G_i(m_i)\\circ\\theta_{ii,C}=\\mu_i.$$\nFor the four-stage tower,\n$$u_{023,C}\\circ T_{23}(u_{012,C})=u_{013,C}\\circ u_{123,T_{01}C}.$$\nThe corresponding module associators obey the same equation. Every composite of the three sections comparisons and these associators from $t_{23}t_{12}t_{01}G_0(C)$ to $G_3(T_{03}C)$ agrees; it sends $(((n\\otimes a)\\otimes b)\\otimes c)$ to $n\\otimes\\lambda_3(abc)$. These equations are natural for all chain maps, including repeated stages and zero complexes. No exactness of $G_i$ or scalar extension, and no invertibility of $\\theta$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product, sheafified tensor and bilinear universal property; agent refinement of the ordinary sections, unit and iterated calculations in returned steps 2, 4, 7, 8 of lem-weil-point-derived-tensor-tower-coherence, supporting the final paragraph of def-weil-finite-coefficient-point"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Construct the extension functor using the existing changeOfRingsPresheaf on objects, sectionwise ModuleCat.extendScalars on maps, and PresheafOfModules.sheafification. Its object and map equations are definitionally the prescribed changeOfRings and changeOfRingsHom. Use the ordinary extension/restriction Hom equivalence sectionwise, checking restriction compatibility on 1 tensor x, followed by the module sheafification adjunction [def-weil-presheaf-modules-sheafification]. This works with independent site and coefficient universes, whereas the specialized ringed-tensor calculus uses a common universe. Maps out of the sheafified scalar extension [def-pur-sheaf-tensor-product] are determined by the images of 1 tensor x over every site object. Restricting the codomain scalars and composing insertion maps gives the corresponding double and triple insertion extensionality statements. These are tests of sheaf morphisms, never assertions that global pure tensors generate all global sections.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03CY, lemma-sheafification-presheaf-modules. Agent-written balanced calculations."
+   }
+  },
+  {
+   "text": "The map $n\\otimes a\\mapsto n\\otimes\\lambda_j(a)$ defining $\\theta_{ij,M}$ is additive in both inputs and balanced over $A_i$: for $c\\in A_i$, $(\\lambda_i(c)n)\\otimes\\lambda_j(a)=n\\otimes f_{ij}(\\lambda_i(c))\\lambda_j(a)=n\\otimes\\lambda_j(h_{ij}(c)a)$. Thus the ordinary tensor presentation gives an $A_j$-linear map. Here the sheaf pure tensor is the sheafification-unit image specified by [def-pur-sheaf-tensor-product] and [def-weil-presheaf-modules-sheafification], evaluated at $s$. For a module map $v$, both routes of the naturality square send $n\\otimes a$ to $v(n)\\otimes\\lambda_j(a)$; ordinary tensors generate its source. This constructs the comparison without assuming that its target is generated by global pure tensors.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03CY, lemma-sheafification-presheaf-modules. Agent-written balanced calculations."
+   }
+  },
+  {
+   "text": "Use step 1 to extend the insertion $M\\to\\operatorname{Res}_{ij}T_{ik}M$ first along $f_{ij}$, then along $f_{jk}$. The resulting $R_k$-linear map $u:T_{jk}T_{ij}M\\to T_{ik}M$ sends $(x\\otimes r)\\otimes t$ to $x\\otimes f_{jk}(r)t$. In the other direction extend the double insertion $M\\to\\operatorname{Res}_{ik}T_{jk}T_{ij}M$ along $f_{ik}$, giving $v(x\\otimes t)=(x\\otimes1)\\otimes t$. These insertions are linear over the required restricted rings since $f_{ik}=f_{jk}f_{ij}$. The composites $uv$ and $vu$ fix the single and double insertions respectively, so step 1 gives $uv=1$ and $vu=1$. Naturality follows by testing the same insertions: both routes for a map $M\\to M'$ send $x$ to the insertion of its image.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03CY, lemma-sheafification-presheaf-modules. Agent-written balanced calculations."
+   }
+  },
+  {
+   "text": "The action $m_i:T_{ii}M\\to M$ is the extension, under the adjunction of step 1, of $1_M$. It sends $x\\otimes r$ to $rx$. Its inverse is $x\\mapsto x\\otimes1$, which is $R_i$-linear because the coefficient map is the identity. One composite fixes $x$; the other fixes the insertion, hence is the identity by step 1. This also proves naturality. For ordinary modules the balanced tensor presentation gives exactly the same constructions of $a_{ijk}$ and $\\mu_i$, with inverses inserting $1$; the two composite formulas reduce to $(na)\\otimes b=n\\otimes h_{jk}(a)b$ and $n\\otimes a=a(n\\otimes1)$. In Lean the ordinary scalar associator is constructed from TensorProduct.AlgebraTensorModule.cancelBaseChange, and the ordinary identity action from TensorProduct.lid. Their values and inverses on tensors follow from these linear equivalences.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03CY, lemma-sheafification-presheaf-modules. Agent-written balanced calculations."
+   }
+  },
+  {
+   "text": "Apply these module maps in each degree of a cochain complex. All tensor differentials are $x\\otimes r\\mapsto dx\\otimes r$, so $d^2=0$. Each naturality square already proved, applied to a differential, is the chain-map equation of [def-pc-cochain-complex-modules]. In particular $d\\theta(n\\otimes a)=dn\\otimes\\lambda_j(a)=\\theta(dn\\otimes a)$. The inverse maps of steps 3 and 4 also commute with $d$, so the resulting maps are chain isomorphisms. Applying the degreewise naturality equations to each component of an arbitrary chain map proves their naturality on complexes. The private module construction passes its concrete maps and proved laws directly to the combining argument; Mathlib termwise natural transformations and isomorphisms give the cochain maps without extra composition transports.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03CY, lemma-sheafification-presheaf-modules. Agent-written balanced calculations."
+   }
+  },
+  {
+   "text": "For $i\\le j\\le k$, evaluate the two sides of the comparison equation on $((n\\otimes a)\\otimes b)$ in each degree. The left route gives $(n\\otimes\\lambda_j(a))\\otimes\\lambda_k(b)$, then $n\\otimes f_{jk}(\\lambda_j(a))\\lambda_k(b)$. The right route gives $n\\otimes\\lambda_k(h_{jk}(a)b)$. These agree by compatibility of $\\lambda$ with the tower and multiplicativity of $\\lambda_k$. Such double ordinary tensors generate the source, proving the equation. For the unit equation both routes on $n\\otimes a$ give $\\lambda_i(a)n=an$, with the last equality the defined $A_i$-action. Again ordinary tensor generation gives equality.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03CY, lemma-sheafification-presheaf-modules. Agent-written balanced calculations."
+   }
+  },
+  {
+   "text": "For the sheaf four-stage equation, apply the adjunction of step 1 three times. Both routes have domain $T_{23}T_{12}T_{01}M$ and codomain $T_{03}M$; they agree on the triple insertion, since each sends $x$ to $x\\otimes1$. Thus they are equal. On an arbitrary iterated local pure tensor both send $(((x\\otimes r)\\otimes t)\\otimes v)$ to $x\\otimes f_{13}(r)f_{23}(t)v$, by step 3 and multiplicativity of the ring maps. The ordinary-module equation follows from the same computation on generating ordinary triple tensors, replacing $f$ by $h$. Apply this in each degree.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03CY, lemma-sheafification-presheaf-modules. Agent-written balanced calculations."
+   }
+  },
+  {
+   "text": "Finally, starting with $(((n\\otimes a)\\otimes b)\\otimes c)$, any application of a binary sections comparison replaces a coefficient by its $\\lambda$-image, and any associator multiplies adjacent coefficients after mapping them to the last ring. Steps 6 and 7 permit either binary grouping and either sheaf reassociation. Equivalently, direct substitution gives the common image $n\\otimes\\lambda_3(h_{13}(a)h_{23}(b)c)$ for every route from $t_{23}t_{12}t_{01}G_0(C)$ to $G_3(T_{03}C)$. Ordinary triple tensors generate this source in every degree. This proves the last coherence clause, with $abc$ in the statement understood through the tower maps. Every calculation also applies when stages repeat, when an input or a complex is zero, or when a coefficient ring is the zero ring: it uses only additive and unital multiplicative identities, with no cancellation, exactness or inverse for $\\theta$. The equality of the five displayed routes is a categorical argument using naturality of theta, the binary comparison equation, and the sheaf four-stage equation. The common tensor value is computed for the final route using the ordinary scalar associators and then the sections comparison. In Lean apply the abstract route equality to the component in each degree, using module-level compatibility and four-stage equations, then use the two ordinary associator formulas and the comparison formula for the common tensor value.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03CY, lemma-sheafification-presheaf-modules. Agent-written balanced calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03CZ, 03CY; the existing eight-step argument implemented using the sectionwise scalar adjunction, module sheafification, ordinary scalar associators, and termwise natural transformations.",
+  "group": "J4",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Γ.*(tensor|pullback)|(tensor|pullback).*Γ|extendScalarsComp_hom_app",
+   "results": "OK: 5 hits; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; digest 6a3ae75bc06d4dc9; subdirectory Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback associators and presheaf tensor formulas do not state the sections comparison equations for an arbitrary compatible ring-and-sheaf tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "OK: 5 hits; SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv; digest 6d62dd74aaeb25fe",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback associators and presheaf tensor formulas do not state the sections comparison equations for an arbitrary compatible ring-and-sheaf tower"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections extension of scalars comparison is compatible with scalar tower associativity and multiplication unit for sheaves of modules",
+   "results": "OK: 8 hits; PresheafOfModules.Sheafify.mul_smul, TensorProduct.CompatibleSMul.isScalarTower, LinearMap.IsScalarTower.compatibleSMul', LinearMap.IsScalarTower.compatibleSMul, ModuleCat.Algebra.instIsScalarTowerCarrier, Algebra.Extension.instIsScalarTowerRing, PresheafOfModules.Sheafify.SMulCandidate.h, Algebra.Extension.instIsScalarTowerCotangent; digest 09c314a0667fb66d",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback associators and presheaf tensor formulas do not state the sections comparison equations for an arbitrary compatible ring-and-sheaf tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On cochain complexes of sheaf modules the global sections scalar tensor comparison commutes with the balanced scalar tower associator and units",
+   "results": "OK: 8 hits; SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.ιFree_mapFree_inv_assoc, PresheafOfModules.Sheafify.mul_smul, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; digest ccb3a47891c573b5",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback associators and presheaf tensor formulas do not state the sections comparison equations for an arbitrary compatible ring-and-sheaf tower"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullback_assoc|pullbackId",
+   "results": "OK: 5 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; digest 0552f105c532e33e; subdirectory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback associators and presheaf tensor formulas do not state the sections comparison equations for an arbitrary compatible ring-and-sheaf tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections balanced tensor maps intertwine sheaf coefficient associators and action unitors termwise with coherent iterated scalar multiplication",
+   "results": "OK: 8 hits; PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.unitHomEquiv_symm_comp, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.unitHomEquiv_comp_apply, PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalLightCondSetLightCondModFree; digest b43942e2193e9a3a",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback associators and presheaf tensor formulas do not state the sections comparison equations for an arbitrary compatible ring-and-sheaf tower"
+  },
+  {
+   "tool": "grep",
+   "query": "sections.*tensor|tensor.*sections|extendScalarsComp_hom_app",
+   "results": "OK: 5 hits; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; digest 6a3ae75bc06d4dc9; subdirectory Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved scalar adjunction, ordinary module associators and pullback coherence do not state the arbitrary compatible global-sections comparison with its chain, unit and tower equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections tensor change of rings comparison is compatible with composition of ring homomorphisms and units",
+   "results": "OK: 8 hits; IsBaseChange.of_comp, AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc, AlgebraicGeometry.StructureSheaf.comap_comp, SheafOfModules.unitHomEquiv_comp_apply, TensorProduct.congr_trans, SheafOfModules.sectionsMap_comp, Algebra.TensorProduct.map_id_comp, TensorProduct.map; digest c9c79bcbe868e2eb",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved scalar adjunction, ordinary module associators and pullback coherence do not state the arbitrary compatible global-sections comparison with its chain, unit and tower equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "OK: 5 hits; SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv; digest 6d62dd74aaeb25fe",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved scalar adjunction, ordinary module associators and pullback coherence do not state the arbitrary compatible global-sections comparison with its chain, unit and tower equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections comparison for extension of scalars of sheaf module complexes respects associators and unit maps",
+   "results": "OK: 8 hits; SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; digest ad3a85d9827bb0b3",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved scalar adjunction, ordinary module associators and pullback coherence do not state the arbitrary compatible global-sections comparison with its chain, unit and tower equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For compatible rings mapped to global ring sheaf sections the natural map from extended global sections to global sections of extended modules satisfies the scalar composition cocycle and unit equations",
+   "results": "OK: 8 hits; PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.SMulCandidate.x, PresheafOfModules.Sheafify.map_smul_eq, ModuleCat.Tilde.toOpen, PresheafOfModules.Sheafify.SMulCandidate, ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType, PresheafOfModules.Sheafify.one_smul, ModuleCat.tilde; digest dac3471545659f47",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved scalar adjunction, ordinary module associators and pullback coherence do not state the arbitrary compatible global-sections comparison with its chain, unit and tower equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-derived-tensor-tower-coherence",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "def-weil-finite-coefficient-point, final paragraph: stagewise point evaluation followed by the common finite-stage colimit; ordinary scalar and sections coherence extracted via lem-weil-point-sections-scalar-extension and lem-weil-point-derived-tensor-tower-coherence; returned steps 2, 4, 7, 8 and the termwise calculation of step 3",
+   "via": [
+    "lem-weil-point-derived-tensor-tower-coherence",
+    "lem-weil-point-sections-scalar-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-sections-scalar-cochain-coherence",
+  "worker": "stage1",
+  "group": "Q70",
+  "summary": "Kept the statement and all original searches. Proved the balanced comparison, scalar associators, units, chain naturality and four-stage coherence by existing scalar-extension adjunction and ordinary tensor generators. No new nodes; crucially no global generation assertion for sheaf tensors.",
+  "blueprint": "Realizes the ordinary sections/scalar compatibility required by the final paragraph of def-weil-finite-coefficient-point, via the cochain part of lem-weil-point-derived-tensor-tower-coherence; its unit and four-stage calculations are retained explicitly.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ringed-tensor-section-calculus",
+    "why": "Generic scalar-extension/restriction adjunction, insertion unit and sheaf tensor formulas on a small site; it supplies no sections comparison coherence and replaces no step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-256d869fd",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-256d869fd (reviewer sub-agent of L); spot-checked: I read the item in full. It has 8 elementary steps and 0 new nodes. The statement, stmt_deps, source and blueprint are unchanged against live, where the item is still unsplit with no repair note, so it is not superseded and the 2026-10-21 re-split rules do not apply. I checked the cited statements: def-weil-pbc-ringed-tensor-section-calculus (pure tensors, the sheafified T_c ⊣ restriction adjunction, the unit inserting 1), def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product (change of rings) and def-pc-cochain-complex-modules. I checked Stacks 03EK section-tensor-product, 03CZ lemma-adjointness-tensor-restrict (line 933) and 03CY in the tags file; no SGA is cited. Hand computations: theta is balanced via Gamma(f_ij)∘lambda_i = lambda_j∘h_ij and is A_j-linear. Both sides of the triple equation give n⊗lambda_k(h_jk(a)b). The unit equation gives a·n. u is derived as the iterated adjunct and sends (x⊗r)⊗t to x⊗f_jk(r)t; its inverse is the double insertion, linear because f_ik = f_jk f_ij. Both sides of the four-stage equation agree on the triple insertion, by applying step 1 three times. The final clause is checked on generators of the ordinary triple tensor. No step claims that global sheaf sections are generated by pure tensors. Edge cases checked: repeated stages, zero complex, zero ring A_3, and non-flat Z→Z/2; no exactness and no invertibility of theta is assumed. The citer lem-weil-point-derived-tensor-tower-coherence step uses the item exactly as stated. The duplicate search found no match (lem-trf-scalar-model-associativity, the point-sections nodes and lem-weil-point-composite-comparison-tower all differ). I accept the declared tool use of the off-unit def calculus node as a notion or tool. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionsScalarCochainCoherence",
+  "declaration": "CategoryTheory.SectionsScalarCochain.coherence",
+  "declarations": [
+   "CategoryTheory.SectionsScalarCochain.modules",
+   "CategoryTheory.SectionsScalarCochain.onComplexes",
+   "CategoryTheory.SectionsScalarCochain.sections",
+   "CategoryTheory.SectionsScalarCochain.G",
+   "CategoryTheory.SectionsScalarCochain.t",
+   "CategoryTheory.SectionsScalarCochain.ordinaryPure",
+   "CategoryTheory.SectionsScalarCochain.pure",
+   "CategoryTheory.SectionsScalarCochain.coherence"
+  ],
+  "file": "lean/Sheaf/Paper/SectionsScalarCochainCoherence.lean",
+  "statement": "theorem coherence [EssentiallySmall.{r} C] (s : C) (_hs : IsTerminal s) (R : Fin 4 ⥤ Sheaf J CommRingCat.{r}) (A : Fin 4 ⥤ CommRingCat.{r}) (lam : ∀ i, A.obj i →+* (R.obj i).obj.obj (op s)) (compat : ∀ {i j : Fin 4} (f : i ⟶ j), ((R.map f).hom.app (op s)).hom.comp (lam i) = (lam j).comp (A.map f).hom) : ∃ (E : ∀ {i j : Fin 4} (f : i ⟶ j), modules (R.obj i) ⥤ modules (R.obj j)) (e : ∀ {i j : Fin 4} (f : i ⟶ j) M, (E f).obj M = SheafOfModules.changeOfRings (R.map f) M) (add : ∀ {i j : Fin 4} (f : i ⟶ j), (E f).Additive), (∀ {i j : Fin 4} (f : i ⟶ j) {M N : modules (R.obj i)} (v : M ⟶ N), (E f).map v = eqToHom (e f M) ≫ SheafOfModules.changeOfRingsHom (R.map f) M v ≫ eqToHom (e f N).symm) ∧ ∃ (theta : ∀ {i j : Fin 4} (f : i ⟶ j), G s (R.obj i) (A.obj i) (lam i) ⋙ t (A.map f) ⟶ onComplexes (E f) (add f) ⋙ G s (R.obj j) (A.obj j) (lam j)) (u : ∀ {i j k : Fin 4} (f : i ⟶ j) (g : j ⟶ k), onComplexes (E f) (add f) ⋙ onComplexes (E g) (add g) ≅ onComplexes (E (f ≫ g)) (add (f ≫ g))) (a : ∀ {i j k : Fin 4} (f : i ⟶ j) (g : j ⟶ k), t (A.map f) ⋙ t (A.map g) ≅ t (A.map (f ≫ g))) (m : ∀ i : Fin 4, onComplexes (E (𝟙 i)) (add (𝟙 i)) ≅ 𝟭 _) (mu : ∀ i : Fin 4, t (A.map (𝟙 i)) ≅ 𝟭 _), (∀ {i j : Fin 4} (f : i ⟶ j) (K : CochainComplex (modules (R.obj i)) ℤ) (q : ℤ) (n : (K.X q).val.obj (op s)) (b : A.obj j), ((theta f).app K).f q (b ⊗ₜ[A.obj i, (A.map f).hom] n) = pure (R.map f) (E f) (e f) (K.X q) (op s) (lam j b) n) ∧ (∀ {i j k : Fin 4} (f : i ⟶ j) (g : j ⟶ k) (K : CochainComplex (modules (R.obj i)) ℤ) (q : ℤ) (W : Cᵒᵖ) (x : (K.X q).val.obj W) (b : (R.obj j).obj.obj W) (c : (R.obj k).obj.obj W), (((u f g).hom.app K).f q).val.app W (pure (R.map g) (E g) (e g) ((E f).obj (K.X q)) W c (pure (R.map f) (E f) (e f) (K.X q) W b x)) = pure (R.map (f ≫ g)) (E (f ≫ g)) (e (f ≫ g)) (K.X q) W ((R.map g).hom.app W b * c) x) ∧ (∀ {i j k : Fin 4} (f : i ⟶ j) (g : j ⟶ k) (K : CochainComplex (modules (R.obj i)) ℤ) (q : ℤ) (W : Cᵒᵖ) (x : (K.X q).val.obj W) (c : (R.obj k).obj.obj W), (((u f g).inv.app K).f q).val.app W (pure (R.map (f ≫ g)) (E (f ≫ g)) (e (f ≫ g)) (K.X q) W c x) = pure (R.map g) (E g) (e g) ((E f).obj (K.X q)) W c (pure (R.map f) (E f) (e f) (K.X q) W 1 x)) ∧ (∀ {i j k : Fin 4} (f : i ⟶ j) (g : j ⟶ k) (N : CochainComplex (ModuleCat.{r} (A.obj i)) ℤ) (q : ℤ) (n : N.X q) (b : A.obj j) (c : A.obj k), ((a f g).hom.app N).f q (c ⊗ₜ[A.obj j, (A.map g).hom] (b ⊗ₜ[A.obj i, (A.map f).hom] n)) = ((A.map g b * c) ⊗ₜ[A.obj i, (A.map (f ≫ g)).hom] n)) ∧ (∀ {i j k : Fin 4} (f : i ⟶ j) (g : j ⟶ k) (N : CochainComplex (ModuleCat.{r} (A.obj i)) ℤ) (q : ℤ) (n : N.X q) (c : A.obj k), ((a f g).inv.app N).f q (c ⊗ₜ[A.obj i, (A.map (f ≫ g)).hom] n) = c ⊗ₜ[A.obj j, (A.map g).hom] ((1 : A.obj j) ⊗ₜ[A.obj i, (A.map f).hom] n)) ∧ (∀ (i : Fin 4) (K : CochainComplex (modules (R.obj i)) ℤ) (q : ℤ) (W : Cᵒᵖ) (x : (K.X q).val.obj W) (b : (R.obj i).obj.obj W), (((m i).hom.app K).f q).val.app W (pure (R.map (𝟙 i)) (E (𝟙 i)) (e (𝟙 i)) (K.X q) W b x) = b • x) ∧ (∀ (i : Fin 4) (K : CochainComplex (modules (R.obj i)) ℤ) (q : ℤ) (W : Cᵒᵖ) (x : (K.X q).val.obj W), (((m i).inv.app K).f q).val.app W x = pure (R.map (𝟙 i)) (E (𝟙 i)) (e (𝟙 i)) (K.X q) W 1 x) ∧ (∀ (i : Fin 4) (N : CochainComplex (ModuleCat.{r} (A.obj i)) ℤ) (q : ℤ) (n : N.X q) (b : A.obj i), ((mu i).hom.app N).f q (ordinaryPure (A.map (𝟙 i)) (N.X q) b n) = b • n) ∧ (∀ (i : Fin 4) (N : CochainComplex (ModuleCat.{r} (A.obj i)) ℤ) (q : ℤ) (n : N.X q), ((mu i).inv.app N).f q n = (1 : A.obj i) ⊗ₜ[A.obj i, (A.map (𝟙 i)).hom] n) ∧ (∀ {i j k : Fin 4} (f : i ⟶ j) (g : j ⟶ k) (K : CochainComplex (modules (R.obj i)) ℤ), (t (A.map g)).map ((theta f).app K) ≫ (theta g).app ((onComplexes (E f) (add f)).obj K) ≫ (G s (R.obj k) (A.obj k) (lam k)).map ((u f g).hom.app K) = (a f g).hom.app ((G s (R.obj i) (A.obj i) (lam i)).obj K) ≫ (theta (f ≫ g)).app K) ∧ (∀ (i : Fin 4) (K : CochainComplex (modules (R.obj i)) ℤ), (theta (𝟙 i)).app K ≫ (G s (R.obj i) (A.obj i) (lam i)).map ((m i).hom.app K) = (mu i).hom.app ((G s (R.obj i) (A.obj i) (lam i)).obj K)) ∧ (∀ {i j k l : Fin 4} (f : i ⟶ j) (g : j ⟶ k) (h : k ⟶ l) (K : CochainComplex (modules (R.obj i)) ℤ), (onComplexes (E h) (add h)).map ((u f g).hom.app K) ≫ (u (f ≫ g) h).hom.app K = (u g h).hom.app ((onComplexes (E f) (add f)).obj K) ≫ (u f (g ≫ h)).hom.app K) ∧ (∀ {i j k l : Fin 4} (f : i ⟶ j) (g : j ⟶ k) (h : k ⟶ l) (N : CochainComplex (ModuleCat.{r} (A.obj i)) ℤ), (t (A.map h)).map ((a f g).hom.app N) ≫ (a (f ≫ g) h).hom.app N = (a g h).hom.app ((t (A.map f)).obj N) ≫ (a f (g ≫ h)).hom.app N) ∧ (∀ {i j k l : Fin 4} (f : i ⟶ j) (g : j ⟶ k) (h : k ⟶ l) (K : CochainComplex (modules (R.obj i)) ℤ), ∀ v ∈ [ (t (A.map h)).map ((t (A.map g)).map ((theta f).app K)) ≫ (t (A.map h)).map ((theta g).app ((onComplexes (E f) (add f)).obj K)) ≫ (theta h).app ((onComplexes (E g) (add g)).obj ((onComplexes (E f) (add f)).obj K)) ≫ (G s (R.obj l) (A.obj l) (lam l)).map ((onComplexes (E h) (add h)).map ((u f g).hom.app K)) ≫ (G s (R.obj l) (A.obj l) (lam l)).map ((u (f ≫ g) h).hom.app K), (t (A.map h)).map ((t (A.map g)).map ((theta f).app K)) ≫ (t (A.map h)).map ((theta g).app ((onComplexes (E f) (add f)).obj K)) ≫ (theta h).app ((onComplexes (E g) (add g)).obj ((onComplexes (E f) (add f)).obj K)) ≫ (G s (R.obj l) (A.obj l) (lam l)).map ((u g h).hom.app ((onComplexes (E f) (add f)).obj K)) ≫ (G s (R.obj l) (A.obj l) (lam l)).map ((u f (g ≫ h)).hom.app K), (t (A.map h)).map ((t (A.map g)).map ((theta f).app K)) ≫ (a g h).hom.app ((G s (R.obj j) (A.obj j) (lam j)).obj ((onComplexes (E f) (add f)).obj K)) ≫ (theta (g ≫ h)).app ((onComplexes (E f) (add f)).obj K) ≫ (G s (R.obj l) (A.obj l) (lam l)).map ((u f (g ≫ h)).hom.app K), (t (A.map h)).map ((a f g).hom.app ((G s (R.obj i) (A.obj i) (lam i)).obj K)) ≫ (t (A.map h)).map ((theta (f ≫ g)).app K) ≫ (theta h).app ((onComplexes (E (f ≫ g)) (add (f ≫ g))).obj K) ≫ (G s (R.obj l) (A.obj l) (lam l)).map ((u (f ≫ g) h).hom.app K), (t (A.map h)).map ((a f g).hom.app ((G s (R.obj i) (A.obj i) (lam i)).obj K)) ≫ (a (f ≫ g) h).hom.app ((G s (R.obj i) (A.obj i) (lam i)).obj K) ≫ (theta ((f ≫ g) ≫ h)).app K], v = (t (A.map h)).map ((a f g).hom.app ((G s (R.obj i) (A.obj i) (lam i)).obj K)) ≫ (a (f ≫ g) h).hom.app ((G s (R.obj i) (A.obj i) (lam i)).obj K) ≫ (theta ((f ≫ g) ≫ h)).app K ∧ ∀ (q : ℤ) (n : (K.X q).val.obj (op s)) (b : A.obj j) (c : A.obj k) (d : A.obj l), (v.f q) (d ⊗ₜ[A.obj k, (A.map h).hom] (c ⊗ₜ[A.obj j, (A.map g).hom] (b ⊗ₜ[A.obj i, (A.map f).hom] n))) = pure (R.map ((f ≫ g) ≫ h)) (E ((f ≫ g) ≫ h)) (e ((f ≫ g) ≫ h)) (K.X q) (op s) (lam l (A.map (g ≫ h) b * A.map h c * d)) n)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c790bbd8",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Only the lean field differs from live; lean.statement is byte-equal to the file signature and the declaration list matches the file. All clauses are rendered: theta (NatTrans, fixed on ordinary pure tensors b⊗n ↦ pure(λ_j b,n)); u, a, m, mu (NatIsos, hom and inverse fixed by local or ordinary pure-tensor formulas at every W, so determined, not hollow); scalar extension fixed to upstream changeOfRings/changeOfRingsHom; triple, unit and four-stage sheaf and module equations; five-route clause with common value λ_l(h(g b)·h(c)·d), route 1 checked by hand. pure = real toSheafify unit of changeOfRingsPresheaf, consistent with PresheafOfModules.sheafification. Sheaf instances follow from EssentiallySmall.{r} via Mathlib and are Props. Site universes independent; A shares module universe r, as the citer does. RingedTensor.pure in the proof dependency is the internal tensor, a different notion, so no H4 duplicate. Edge cases (repeated stages, zero ring or complex, non-flat maps, unbounded ℤ) covered. Docstrings, 8-step plan and sorry-only gates pass. Nothing compiled: no file changed. Advisory: EssentiallySmall not needed for typing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-d9615",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261024T190135-L-3958391",
+  "kind": "interface",
+  "note": "independent cc review: delivered SectionsScalarCochainCoherence.lean vs clone (statement changed in form only; new pure proved equal to old formula in scratch; #print axioms coherence = propext/choice/Quot.sound), node proof/proof_deps/proof_origin/tool_uses vs Lean route and brief-stage3 rules, change records vs import/pure diffs; no direct importers"
+ }
+}

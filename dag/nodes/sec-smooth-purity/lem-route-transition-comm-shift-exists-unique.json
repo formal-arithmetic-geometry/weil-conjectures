@@ -1,0 +1,186 @@
+{
+ "id": "lem-route-transition-comm-shift-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "via": [],
+   "place": "Imported ancestor def-weil-algebraically-closed-coefficients, statement: finite coefficient transitions are exact; the integral-image normalization of the rational transition shift used in that clause. Current blueprint def-sf-setting, Integral and rational coefficients point 2, supplies the tensor-Hom comparison context."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The rational transition shift is uniquely fixed by localizing the normalized integral shift.",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, finite intermediate coefficient fields $E\\subseteq L\\subseteq\\Omega$ [def-weil-finite-subextension-directed-set], and an arbitrary scheme $Y$. No finite-type, separatedness, or invertibility assumption on $Y$ is imposed. Write $\\mathcal I_F=D^b_c(Y,\\mathcal O_F)$ for the intrinsic integral category [def-weil-derived-complete-integral-detailed], $\\mathcal R_F=\\mathcal I_F[1/\\varpi_F]$ and $Q_F:\\mathcal I_F\\to\\mathcal R_F$ for its raw rationalization [def-weil-rationalization-karoubi]. Use the fixed induced integer shifts on these categories [def-weil-triangulated-category, lem-weil-linear-scalar-localization-triangulated], whose degree-one functor is scalar extension of the integral shift and whose degree-one comparison for $Q_F$ is the identity [def-weil-linear-scalar-localization]. Let $T:\\mathcal I_E\\to\\mathcal I_L$ be the restricted completed integral scalar extension [def-weil-integral-scalar-extension, lem-weil-integral-scalar-extension-constructible], with the fixed ordinary-to-completed normalized coherent integer-shift structure of [lem-route-integral-transition-comm-shift-exists-unique]; denote its components by $t_{n,K}:T(K[n])\\xrightarrow{\\sim}(TK)[n]$. Let $F:\\mathcal R_E\\to\\mathcal R_L$ be the specified rational scalar transition of [def-weil-rationalization-karoubi], so that $F(Q_EK)=Q_L(TK)$ and $F(f\\otimes a)=T(f)\\otimes\\iota(a)$ for the inclusion $\\iota:E\\hookrightarrow L$.\n\nThere exists exactly one coherent integer-shift structure $c$ on this fixed functor $F$ whose degree-one hom component satisfies\n$$\n c_{1,Q_EK}=Q_L(t_{1,K})\\qquad(K\\in\\mathcal I_E).\n$$\nThe equality is after the displayed object identifications and the fixed degree-one shift identifications (equivalently, it is the heterogeneous equality in the recorded Lean signature). Here a coherent integer-shift structure means natural isomorphisms $c_n:F(-[n])\\xrightarrow{\\sim}(F-)[n]$ for all $n\\in\\mathbf Z$, with the canonical degree-zero comparison and the shift-addition equation. Explicitly, if $A^{\\mathcal R}_{n,m}:[n+m]\\xrightarrow{\\sim}[n][m]$ denotes the fixed shift-addition isomorphism, the equation at $X$ is\n$$\n c_{n+m,X}=F(A^{\\mathcal R_E}_{n,m,X})\\,;\\,c_{m,X[n]}\\,;\\,[m](c_{n,X})\\,;\\,(A^{\\mathcal R_L}_{n,m,FX})^{-1},\n$$\nwhere semicolons denote composition in the order written. Uniqueness is equality of the entire coherent structure, not only of the degree-one components. Every rational object is literally $Q_EK$; no idempotent completion is used.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+  "place": "def-weil-algebraically-closed-coefficients: the Lean of this node (its module Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients imports Sheaf.Paper.SfAlgebraicallyClosedCoefficients (1 step)) reaches WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique, a sorry on the sorry route of batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/SfAlgebraicallyClosedCoefficients.lean, declaration WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique (module Sheaf.Paper.SfAlgebraicallyClosedCoefficients, lines 157-176, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-triangulated-category",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-linear-scalar-localization",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-route-integral-transition-comm-shift-exists-unique"
+ ],
+ "proof": [
+  {
+   "text": "Use the fixed degree-one rational shift formula from the triangulation datum and the object and pure-tensor formulas specifying the rational scalar functor. Its composite with the source shift and its composite with the target shift are additive extensions of the two integral composites. Their pure-tensor formulas have the same coefficient map.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-integral-constructible-linear",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the normalized integral degree-one natural isomorphism and its inverse by applying the target localization at each integral object and inserting equality isomorphisms for the fixed object formulas. Naturality on pure tensors is integral naturality with its common coefficient; tensor induction handles sums. The inverse equations follow by functoriality. Thus the resulting degree-one rational isomorphism has precisely the required HEq components. This direct tensor argument uses the actual specified functor and no arbitrary exact-functor witness.",
+   "uses": [
+    "lem-route-integral-transition-comm-shift-exists-unique",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved generic integer-shift extension theorem Functor.exists_commShift_of_one to the degree-one natural isomorphism. Its specified value at one gives the required integral-image normalization. For uniqueness, equal normalized components give equality at one. Regard the identity natural transformation between the two shift structures as a degree-one CommShiftCore. Extend its compatibility to all integers: use the zero and addition laws for nonnegative shifts, and cancellation after shifting to obtain the negative generator and negative induction. Equality of all natural isomorphisms and proof irrelevance give equality of the full CommShift structures.",
+   "uses": [
+    "lem-sc-integer-shift-from-one",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-linear-scalar-localization",
+  "lem-route-integral-transition-comm-shift-exists-unique",
+  "lem-sc-integer-shift-from-one",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D4",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-sf-setting.md",
+  "place": "Integral and rational coefficients point 2. Direct pure-tensor naturality, existing degree-one integer-shift extension, and uniqueness from coherent integer induction; actual normalized integral and rational transitions are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'transitionCommShift_existsUnique' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, Int",
+   "results": "12 hits: HomotopyCategory.commShiftQuotient, HomotopyCategory.instCommShiftIntUpMapHomotopyCategory, CategoryTheory.Functor.commShiftMapCochainComplex, CategoryTheory.Functor.mapTriangle, CategoryTheory.Functor.instFaithfulTriangleMapTriangle, CategoryTheory.Functor.instFullTriangleMapTriangleOfFaithful, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.instAdditive",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic rational transition with integral-image degree-one normalization and uniqueness; general shift/localization tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on rationalized categories inherits a unique coherent integer shift comparison by tensoring an integral shift isomorphism, determined by its component at one",
+   "results": "8 hits: CategoryTheory.HasShift.Induced.add, CategoryTheory.Functor.CommShift.ofInduced, CategoryTheory.Functor.ShiftSequence.induced.shiftIso, CategoryTheory.Quotient.LiftCommShift.iso, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.HasShift.induced, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_eq, CategoryTheory.SingleFunctors.shiftIso",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic rational transition with integral-image degree-one normalization and uniqueness; general shift/localization tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*(ext|ofInt)|commShiftOfLocalization|commShiftIso.*one|commShift.*int",
+   "results": "19 hits: Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic rational transition with integral-image degree-one normalization and uniqueness; general shift/localization tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor between categories with integer shifts has a unique compatible shift structure extending a natural isomorphism at shift one",
+   "results": "8 hits: CategoryTheory.SingleFunctors.mk, CategoryTheory.Functor.CommShift.iso, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.Functor.CommShift.commShiftIso, CategoryTheory.Functor.CommShift.isoAdd, CategoryTheory.Functor.CommShift.mk, CategoryTheory.Functor.FullyFaithful.hasShift, CategoryTheory.HasShift.induced",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic rational transition with integral-image degree-one normalization and uniqueness; general shift/localization tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutation with shifts descends along a categorical localization functor commShiftOfLocalization",
+   "results": "8 hits: CategoryTheory.Functor.CommShift.localized, CategoryTheory.MorphismProperty.commShift_Q', CategoryTheory.Functor.commShiftOfLocalization, CategoryTheory.LocalizerMorphism.instCommShiftLocalizedFunctor, CategoryTheory.LocalizerMorphism.instCommShiftLocalizationHomFunctorIsoFunctorQLocalizedFunctor, CategoryTheory.LocalizerMorphism.commShift, CategoryTheory.NatTrans.commShift_iso_hom_of_localization, CategoryTheory.MorphismProperty.commShift_Q",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic rational transition with integral-image degree-one normalization and uniqueness; general shift/localization tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
+  "file": "lean/Sheaf/Paper/SfAlgebraicallyClosedCoefficients.lean",
+  "declaration": "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique",
+  "declarations": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique"
+  ],
+  "statement": "theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :\n    ∃! c : (transition D l hl Ω Y E L h).CommShift ℤ,\n      (fun [commInst : (transition D l hl Ω Y E L h).CommShift ℤ] ↦\n        ∀ K : Stage D l hl Ω Y E,\n          HEq (((transition D l hl Ω Y E L h).commShiftIso (1 : ℤ)).hom.app K)\n            ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) Y).map\n              (((sfConstructibleIntegralScalarExtension D.p l hl\n                (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)\n                (coefficientInclusion l Ω E L h) Y).commShiftIso (1 : ℤ)).hom.app K.obj)))\n        (commInst := c) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-transition-comm-shift-exists-unique",
+  "worker": "stage1",
+  "summary": "Replaced the machine-made Lean/docstring placeholder by its quantified natural-language proposition. Reused the normalized integral transition node and existing semilinear-localization interface: checked scalar invertibility and semilinearity, identified the specified transition, localized the coherent comparisons, computed the degree-one normalization, and proved uniqueness by integer induction and inverse shifts. No new nodes; no Lean changes.",
+  "blueprint": "Realizes the exact finite scalar-transition clause of imported ancestor def-weil-algebraically-closed-coefficients. The current latest blueprint no longer contains that raw-model definition; its def-sf-setting, Integral and rational coefficients point 2, describes tensor-Hom rationalization as a comparison with native coefficients. This delivery proves the retained technical raw-model obligation and asserts no identification with the native condensed model.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic semilinear scalar-localization lemma (unit sk-thm-purity-transport), used as a black box in steps 2-3 for the unique extension of T and of natural isomorphisms/equations; sk-def-sf-operations has no node extending semilinear functors and transformations to raw localizations."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-91535a63a",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-91535a63a (reviewer sub-agent of L); spot-checked: Read the item in full (no new nodes) against the master blueprint def-weil-algebraically-closed-coefficients (transition K⊗_E L on the raw rationalized stages of def-weil-rationalization-karoubi) and the Lean in SfAlgebraicallyClosedCoefficients.lean:98-176. The words statement matches the signature. The integral normalization is the chosen instance integralTransitionCommShift (lines 144-150), and the item cites it correctly as the fixed structure of lem-route-integral-transition-comm-shift-exists-unique. The base-change functor and the coefficient category agree with the source. Step 1: φ(ϖ_E) is a unit in L, so the hypotheses of the semilinear lemma hold, also for ramified L/E and for E=L. Step 2: correct use of the uniqueness clause of lem-pur-semilinear-scalar-localization. Step 4: Q∘[1]=[1]∘Q from def-weil-linear-scalar-localization makes the outer factors identities, and the HEq endpoints coincide. Step 5: the uniqueness induction is complete (zero axiom; (n,1) for positive degrees; (r,-r) plus naturality along Z≅(Z[-r])[r] for negative degrees). Edge cases checked: E=L, ramified extensions, empty Y, torsion. No cycle. Two faults, both fixed in fixes/dag/nodes/sec-smooth-purity/lem-route-transition-comm-shift-exists-unique.json. (1) C2/E5: step 3 asserted coherence from whiskering preservation without converting the localized integral addition isomorphisms to the fixed rational ones. The step now writes out the CommShift add equation of the exact localization Q_F (lem-weil-linear-scalar-localization-triangulated, already cited) and the cancellation of the q-factors. (2) C8: lem-pur-semilinear-scalar-localization is in unit sk-thm-purity-transport, off the route of sk-def-sf-operations (its uses are []). The report's claim that all dependencies are in the same unit is wrong. I accept it as a generic black-box tool (Lean CategoryTheory.ScalarLocalization.existsUnique_semilinear_extension) and added it to split_report.tool_uses. The statement is unchanged and not weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T135059-L-3664847",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionIso_commShift"
+  ],
+  "sorry_after": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionIso_commShift"
+  ]
+ }
+}

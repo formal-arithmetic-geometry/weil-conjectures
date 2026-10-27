@@ -1,0 +1,121 @@
+{
+ "id": "def-trf-simplicial-derived-colimit-computation-data",
+ "kind": "definition",
+ "title": "Canonical comparison data for simplicial derived-colimit computations",
+ "statement": "Fix the universes of [def-weil-size-convention] and a category-colimit bar system $B$ [def-trf-derived-colimit-bar-system]. For any small category $\\mathcal E$, ring $R$, and simplicial object $Q$ of $\\mathcal E^{op}$ [def-weil-pbc-simplicial-object], call $Q$ a resolution when every simplicial set $\\operatorname{Hom}_{\\mathcal E^{op}}(T,Q_\\bullet)$ is homotopy equivalent to a singleton (allowing finite zigzags of cylinder homotopies). Define $s_Q(F)$ for $F:\\mathcal E^{op}\\to\\operatorname{Mod}_R$ by alternating faces in nonpositive cochain degrees, extending by zero in positive degrees. Define $\\mathbf H(F)=B_{\\mathcal E,R}.L(F[0])$ in the derived category [def-weil-abstract-derived-category], and its semilinear reindexing maps by the bar-system maps and their scalar-restriction localization identifications. Comparison data consist, simultaneously for all these objects, of isomorphisms $a_{Q,F}:s_Q(F)\\cong\\mathbf H(F)$ for resolutions $Q$, and the following specifications. Each $F$ has a bounded-above projective resolution $P\\to F[0]$. For every such resolution the comparison is the roof from the total double complex $P^p(Q_q)$: the evaluation map is the resolution augmentation on the $p=0$ edge and zero off that edge, while the colimit map is the colimit cocone on the $q=0$ edge and zero off that edge; both are quasi-isomorphisms. The comparison composed with the derived resolution comparison equals the inverse evaluation map followed by the colimit map. The bar coordinates are first-vertex coordinates, obtained from the opposite-category coordinates by the sign $(-1)^{n(n+1)/2}$, with their alternating differential and semilinear generator formulas. For every functor $u:\\mathcal E\\to\\mathcal D$, ring map $\\rho:R\\to S$, natural map $t:F\\to\\operatorname{Res}_\\rho(G\\circ u^{op})$, and simplicial map $k:uQ\\to Q'$, supply the evaluation chain map whose degree $-n$ sends $x$ to $G(k_n)(t(x))$. When $Q,Q'$ are resolutions its localized map commutes with $a_{Q,F},a_{Q',G}$ and the bar reindexing map, with degreewise scalar restriction. These derived maps preserve identities and composition under the canonical restriction identifications. No resolution condition is imposed on the intermediate $uQ$. This defines the data and their coherence conditions, without asserting that such data exist.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-trf-derived-colimit-bar-system",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08Q9 lemma-compute-by-cosimplicial-resolution, canonical projective-resolution roof; Tags 08PG, 08PH and 08PD for bar maps and restriction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical simplicial resolution computation derived colimit comparison data",
+   "results": "8 hits on simplicial splittings, dimension bounds under colimits, short-complex colimits and truncated simplicial colimits.",
+   "date": "2026-10-23",
+   "verdict": "No comparison-data match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical simplicial resolution computation derived colimit comparison data",
+   "results": "8 hits on model-category cofibrant resolutions, localization derivability structures and simplicial splitting colimits.",
+   "date": "2026-10-23",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsResolution|ResolutionRoof|SimplicialDerivedColimit",
+   "results": "Mathlib: one unrelated silent misresolution text hit. Project: Sheaf.CategoryTheory.SimplicialDerivedColimitComputation defines the exact data. DAG declaration search: no definition node for Computation. blueprint_refs search derived colimit: no matching definition.",
+   "date": "2026-10-23",
+   "verdict": "Use exact existing project data, no copied definition."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polynomial-presentation-homology",
+  "date": "2026-10-23",
+  "group": "Q82"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Re-split: small polynomial presentation category, generator fibres and derived homology (old Steps 4–6).",
+   "via": [
+    "lem-trf-polynomial-presentation-homology",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialDerivedColimitComputation",
+  "declaration": "CategoryTheory.SimplicialDerivedColimit.Computation",
+  "declarations": [
+   "CategoryTheory.SimplicialDerivedColimit.IsResolution",
+   "CategoryTheory.SimplicialDerivedColimit.evaluationComplex",
+   "CategoryTheory.SimplicialDerivedColimit.evaluationTerm",
+   "CategoryTheory.SimplicialDerivedColimit.resolutionDoubleComplex",
+   "CategoryTheory.SimplicialDerivedColimit.derivedColimit",
+   "CategoryTheory.SimplicialDerivedColimit.forwardGenerator",
+   "CategoryTheory.SimplicialDerivedColimit.derivedMap",
+   "CategoryTheory.SimplicialDerivedColimit.ResolutionRoof",
+   "CategoryTheory.SimplicialDerivedColimit.Computation"
+  ],
+  "statement": "structure Computation (B : CategoryColimitBarSystem.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition attachment to the exact existing comparison data and helper constructions. Excludes computation_exists, which remains owned by lem-trf-simplicial-derived-colimit-computation. No copy and no theorem selected as data."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f83c642c",
+  "group": "Q82",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f83c642c",
+  "group": "Q82",
+  "result": "fix",
+  "note": "Item statement verified clause by clause against the node and Stacks 08PS/08QI/08Q9: polynomial presentation category = AsSmall.{v} of CotangentSites.Presentations (all Type u variable sets, no surjectivity); generator-coordinate iso pinned by its projections; trivial Kan map to singleton; IsResolution homotopy-equivalence form; comparison natural iso fixed by normalization to Computation.comparison (ResolutionRoof-pinned, first-vertex bar); naturalityResolution a_{Q'} s(F(h)) = a_Q in the right direction. Edge cases: empty/infinite E, B=0, F=0, non-surjective augmentations; universes u and max (u+1) v; lean.statement verbatim. New def nodes use existing:true ownership (accepted). F1 (H4/H13): the delivery recreates the deleted module Sheaf.AlgebraicTopology.TrivialKanFibration with a fresh def SSet.Enhanced.trivialKanFibration, a duplicate of the node's Mathlib match SSet.modelCategoryQuillen.I.rlp, which every live user takes, including the step-4 theorem exists_section_homotopy_equivalence. Fix: fixes/TrivialKanFibration.lean keeps the same name and module as abbrev := SSet.modelCategoryQuillen.I.rlp p; the item module is unchanged. nt_compile --json of the fix plus the unchanged item: 1.1 s and 23.2 s, rc 0, clean. Advisory: CotangentLowerShriek.Site uses AsSmall.{0} vs the item's AsSmall.{v}."
+ }
+}

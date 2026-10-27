@@ -1,0 +1,147 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), pullback and twist preserve the tower category; finite-level part of lem-sp-purity-conjugates-tower-reduction, Step 1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a finite evaluation of the ordered Tate line shifted by twice its degree preserves constructibility and translates Tor amplitude",
+   "results": "8 hits, including t-structure shift inequalities and DerivedCategory.instLinearShiftFunctorInt; none handles the evaluated ordered Tate line.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image and tensor with a rank one Tate line shifted by twice the relative dimension preserve constructibility and translate Tor amplitude",
+   "results": "8 hits: categorical Tor functors and bounded derived representatives. No ordered Tate-line preservation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]or|[Tt]or.*[Tt]wist",
+   "results": "25 Mathlib hits, ordinary pullback and unrelated torsors. Local search found sf_pullback_torAmplitude for uniformizer quotients and twist_preserves_finiteness for a different finite-twist model; neither gives the evaluated ordered-line calculation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityPullbackLevelBounds",
+  "date": "2026-10-25",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "gamma proof (3), one-level constructibility and Tor bounds, separated into finite pullback and ordered-line tensor",
+   "via": [
+    "lem-sp-purity-pullback-level-bounds",
+    "lem-sp-purity-conjugates-tower-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sp-ordered-line-level-bounds",
+ "title": "Tensor with the evaluated ordered Tate line translates finite Tor bounds",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne\\operatorname{char}(D.k)$ and finite $E/\\mathbf Q_\\ell$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $T$ be Noetherian separated finite type over $D.k$. Use a prescribed system tensor calculus $b$ [det-sp-tower-shriek-levels] and actual strict Tate towers $w$ [def-coefficient-twists-detailed]. For $d,n\\ge0$, put $R_n=\\mathcal O_E/\\ell^{n+1}$ and let $L_d$ be the ordered d-fold tensor of the positive Tate tower shifted by two, with $L_0$ the coefficient unit [def-sp-chart-tate-tower-data, def-sp-tower-class-systems]. Let $M\\in D(T_{\\mathrm{proet}},R_n)$ be bounded constructible of finite Tor amplitude [sk-def-sp-normalized-towers] with specified Tor interval $[a,z]$ [def-weil-proetale-tor-amplitude]. Then $M\\otimes^L (L_d)_n$, using the given finite-level tensor, has constructible cohomology in all degrees and Tor amplitude $[a-2d,z-2d]$. No scheme morphism, tower lift of M, normalization, or global tower bounds are assumed.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "det-sp-tower-shriek-levels",
+  "def-coefficient-twists-detailed",
+  "sk-def-sp-normalized-towers",
+  "def-weil-proetale-tor-amplitude",
+  "def-sp-chart-tate-tower-data",
+  "def-sp-tower-class-systems"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate L_d recursively using the tensorEvaluation isomorphism. Evaluation of the coefficient unit gives the finite coefficient unit at d=0. Evaluation commutes with the shift by two and with the single functor in each successor factor. The given w.level comparison identifies the degree-zero factor with the actual positive ell-power Tate line.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "def-coefficient-twists-detailed",
+    "def-sp-chart-tate-tower-data",
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal equality ell^(n+1)=varpi^(e(n+1)) identifies the finite coefficient line with the positive uniformizer-level Tate line. It is locally free of rank one. On a trivializing cover, tensoring with it is the identity, so it is exact, preserves constructibility, and preserves every specified Tor interval; transport through the coefficient comparison.",
+   "uses": [
+    "sk-def-sp-coefficient-towers",
+    "prop-weil-twist-preserves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every degree-zero test module use derived tensor associativity and the shift formula H^i(C[2])=H^(i+2)(C). Thus a successor factor subtracts two from both Tor endpoints; constructibility shifts to the corresponding degree. Induct on d, reassociating tensor and transporting along the evaluation comparisons, to obtain [a-2d,z-2d]. The unit case, first coefficient level, coincident endpoints and zero complexes are included.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-shriek-levels",
+  "def-coefficient-twists-detailed",
+  "def-sp-chart-tate-tower-data",
+  "def-sp-tower-class-systems",
+  "sk-def-sp-coefficient-towers",
+  "prop-weil-twist-preserves",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), pullback and twist preserve the tower category; finite-level part of lem-sp-purity-conjugates-tower-reduction, Step 1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedLineLevelBounds",
+  "file": "lean/Sheaf/Paper/OrderedLineLevelBounds.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpPurityReduction.ordered_line_level_bounds",
+  "statement": "theorem ordered_line_level_bounds\n    (D : FiniteFieldDatum.{u}) [CharP D.k D.p] (hne : l ≠ D.p)\n    (T : Scheme.{u}) [IsNoetherian T] [T.Over (Spec (.of D.k))]\n    [IsSeparated (T ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))]\n    (w : SpChartAdmissibility.Twists l E T) (d n : ℕ)\n    (M : proEtaleDerivedCategory T (SpTowerShriek.R l E n))\n    (hM : spFiniteConstructibleTor T (SpTowerShriek.R l E n) M)\n    (a z : ℤ)\n    (hTor : HasProEtaleTorAmplitude T (SpTowerShriek.R l E n) M a z) :\n    let N := ((b.calculus T).levelClosed n).tensor.obj\n      (M, (SpTowerShriek.Ev l E T n).obj (SpTowerGamma.orderedLine l E b T w d))\n    (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf T (SpTowerShriek.R l E n)\n      ((DerivedCategory.homologyFunctor\n        (proEtaleRingModules T (proEtaleConstantRing T (SpTowerShriek.R l E n))) i).obj N)) ∧\n      HasProEtaleTorAmplitude T (SpTowerShriek.R l E n) N\n        (a - 2 * d) (z - 2 * d)",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T164321-L-997519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T164321-L-997519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

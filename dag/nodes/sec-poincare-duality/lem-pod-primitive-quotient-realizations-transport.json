@@ -1,0 +1,131 @@
+{
+ "id": "lem-pod-primitive-quotient-realizations-transport",
+ "kind": "statement",
+ "title": "Transport of normalized primitive realizations between reduction calculi",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, and an algebra map $\\iota:E\\to L$ [def-weil-l-adic-coefficient-extension]. Let $f:V\\to W$ be any scheme morphism [def-weil-scheme-morphism-properties]. In the ambient derived categories [def-weil-abstract-derived-category], let $S,T$ be two whole-system reduction calculi on $(E,W)$ with their actual adjunctions to the same total-limit functor $\\mathcal L_{E,W}$ [def-coef-derived-system-calculus-data]. Write $a:S.\\mathcal R\\xrightarrow\\sim T.\\mathcal R$ for the canonical uniqueness isomorphism of left adjoints. Use the specified derived whole-system pullback $U_f$ and scalar extension $S_\\iota$ [def-trf-integral-comparison-sequence-systems]. Fix normalized Roos models $\\rho$ on $(E,V)$ and $\\sigma$ on $(L,W)$, a normalized primitive pullback model $U$ for $f$ with reduction calculus $T$ and Roos model $\\rho$, and a normalized primitive scalar model $B$ for $\\iota$ with reduction calculus $T$ and Roos model $\\sigma$ [def-trf-integral-comparison-realization-models]. Then both assertions hold: (1) for every primitive pullback model $M$ normalized for $S,\\rho$ and every ambient derived object $K$ on $(E,W)$, $b_{M,K};\\mathcal L_{E,V}(U_f(a_K))=b_{U,K}$; (2) for every primitive scalar model $M$ normalized for $S,\\sigma$ and every such $K$, $b_{M,K};\\mathcal L_{L,W}(S_\\iota(a_K))=b_{B,K}$. These are equalities of whole-system realization morphisms, with all quotient transitions retained. No completeness, constructibility, isomorphism condition on $f$, or flatness of finite quotient coefficient maps is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, pullback and tensor identifications, via prop-weil-operations; agent-extracted adjunction-transport sublemma of the explicit scalar cone word normalization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-abstract-derived-category",
+  "def-coef-derived-system-calculus-data",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "The two reduction evaluation comparisons are compatible with a. Transpose their difference by the finite reduction adjunction. The calculus unit-projection equations, naturality of the system projection and unit_leftAdjointUniq_hom_app identify the transposes. Injectivity of the finite Hom equivalence proves the evaluation equality. Hence a strict quotient presentation for S transports to T by a inverse followed by the same presentation, retaining the same finite strict isomorphisms and generator formulas.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coherence equation of a whole-system presentation transports as well. Expand it as the constant-tower image of the adjunction unit followed by the total-limit image of the presentation and the actual tower counit. Functoriality and unit_leftAdjointUniq_hom_app identify this unit/presentation composite for T with that for S. Reuse the same strict augmentation witness.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the normalized T pullback and scalar models back to S by postcomposing their realization isomorphisms with the system-operation/limit image of a inverse. For each S-presentation use the corresponding T-presentation from the preceding steps. The normalization field of the T-model supplies the same strict quotient-system isomorphism and generator formula; functoriality gives its required Roos realization equation. These are honest constructed normalized S-models. Apply primitiveQuotientRealizations_unique to identify any supplied S-model realization with the constructed one.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-primitive-quotient-realizations-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate each realization equality at K and postcompose with the total-limit image of the appropriate operation applied to a_K. The canonical comparison from T to S followed by that from S to T is the identity (leftAdjointUniq_trans_app and leftAdjointUniq_refl). Functoriality and the identity law cancel these factors. This gives both stated morphism equations. For S=T this is identity transport; the same proof includes zero objects, identity morphisms and ramified coefficients.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-primitive-quotient-realizations-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, pullback and tensor identifications, via prop-weil-operations; agent-extracted adjunction-transport sublemma of the explicit scalar cone word normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized realization of pullback or change of coefficients is unchanged when the reduction left adjoint is replaced using the canonical uniqueness isomorphism of adjoints.",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, unit_leftAdjointUniq_hom_app, leftAdjointUniq_hom_counit and their reassociated forms.",
+   "date": "2026-10-27",
+   "verdict": "Useful categorical transport identities, but no normalized quotient/Roos primitive realization transport theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 results including leftAdjointUniq, leftAdjointUniq_refl, leftAdjointUniq_inv_app, leftAdjointUniq_trans_app and the unit/counit comparison identities.",
+   "date": "2026-10-27",
+   "verdict": "These Mathlib identities are used in the proof; the sheaf primitive-model normalization step is supplied by the existing project uniqueness theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "primitiveQuotientRealizations_transport|leftAdjointUniq_hom_app_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean:71, leftAdjointUniq_hom_app_counit.",
+   "date": "2026-10-27",
+   "verdict": "No existing Mathlib theorem about normalized primitive quotient realizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExplicitScalarConeWordCoordinates",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "lem-pod-explicit-scalar-cone-word-coordinates",
+   "place": "Transport of arbitrary supplied normalized primitive realizations to one simultaneous comparison system, proof step 2.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PrimitiveQuotientRealizationsTransport",
+  "file": "lean/Sheaf/Paper/PrimitiveQuotientRealizationsTransport.lean",
+  "declaration": "WeilConjectures.PrimitiveReductionTransport.realizations_transport",
+  "statement": "theorem realizations_transport\n    {V W : AlgebraicGeometry.Scheme.{u}} (f : V ⟶ W)\n    (S T : CoefficientDerivedSystemCalculus l E W)\n    (ρ : IntegralComparisonRoosModel l E V) (σ : IntegralComparisonRoosModel l L W)\n    (U : IntegralComparisonPullbackModel l E f T ρ)\n    (B : IntegralComparisonScalarModel l E L ι W T σ) :\n    (∀ (M : IntegralComparisonPullbackModel l E f S ρ)\n      (K : DerivedCategory (integralTowerModules l E W)),\n      M.realization.hom.app K ≫ (coefficientSequenceLimit l E V).map\n          ((integralComparisonDerivedSequencePullback l E f).map\n            ((S.adjunction.leftAdjointUniq T.adjunction).hom.app K)) =\n        U.realization.hom.app K) ∧\n    (∀ (M : IntegralComparisonScalarModel l E L ι W S σ)\n      (K : DerivedCategory (integralTowerModules l E W)),\n      M.realization.hom.app K ≫ (coefficientSequenceLimit l L W).map\n          ((integralComparisonDerivedSequenceScalar l E L ι W).map\n            ((S.adjunction.leftAdjointUniq T.adjunction).hom.app K)) =\n        B.realization.hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261027T103435-L-1078680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261027T103435-L-1078680",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

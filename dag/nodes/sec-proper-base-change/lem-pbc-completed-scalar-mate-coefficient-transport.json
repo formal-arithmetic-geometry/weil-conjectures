@@ -1,0 +1,144 @@
+{
+ "id": "lem-pbc-completed-scalar-mate-coefficient-transport",
+ "kind": "statement",
+ "title": "Transport the normalized scalar mate to literal inverse-image coefficients",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism and $d$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Put $R_T=\\widehat A_T$, $R_T^0$ its constant-system presentation, and $b_T:R_T^0\\cong R_T$ [def-weil-pbc-bounded-constructible-tower]. Assume $c_f:f^{-1}R_Y\\to R_X$ is invertible [def-weil-pbc-completed-pullback]. Choose arbitrary ring sheaves $S_Y,S_X$, maps $\\varphi_T:R_T\\to S_T$, and $c:f^{-1}S_Y\\cong S_X$ satisfying $c_f;\\varphi_X=f^{-1}(\\varphi_Y);c$. Let $F^{ab},G^{ab}$ be additive ordinary functors equal to the canonical ringed direct images for these two coefficient identifications [def-weil-pbc-proetale-operations], and write $F=R(F^{ab}),G=R(G^{ab})$. Let $U_T,E_T$ be exact restriction and derived extension along $\\varphi_T$. Suppose $i:U_X^{ab};F^{ab}\\cong G^{ab};U_Y^{ab}$ is identity on underlying sections, and $e:U_X;F\\cong G;U_Y$ is normalized on every complex $C$ by $u_F(U_X C);F(\\rho_X^{-1}(C));e_{QC}=Q(i_C);\\rho_Y^{-1}(G^{\\bullet}C);U_Y(u_G(C))$, with $u$ the universal derived units and $\\rho$ the exact-restriction localization comparisons. Put $\\chi=b_Y;\\varphi_Y$, $K^0=\\operatorname{Res}_{b_X}K$ and $K^i=\\operatorname{Res}_{c_f^0}K^0$, for $K\\in D(R_X)$, where $c_f^0:f^{-1}R_Y^0\\cong R_X^0$ is the canonical completed coefficient identification [lemma-weil-pbc-perfect-projection-formula]. For literal inverse-image rings use $H_A=Rf_{*,A}$ and the canonical scalar mate $\\beta_\\chi:E_\\chi H_{R_Y^0}\\to H_{S_Y}E_{f^{-1}\\chi}$ defined by the geometric counit [lem-sfb-derived-scalar-mate-thick-locus]. There are isomorphisms $s:\\operatorname{Res}_{b_Y}U_YE_YF(K)\\cong U_\\chi E_\\chi H_{R_Y^0}(K^i)$ and $t:\\operatorname{Res}_{b_Y}U_YGE_X(K)\\cong U_\\chi H_{S_Y}E_{f^{-1}\\chi}(K^i)$ such that $\\operatorname{Res}_{b_Y}U_Y(\\sigma_K);t=s;U_\\chi(\\beta_{\\chi,K^i})$, where $\\sigma_K$ is the $E_Y\\dashv U_Y$ transpose of $F(\\eta_X(K));e_{E_XK}$. This statement concerns only scalar and geometric adjunctions and asserts no tensor identification or invertibility of a projection.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-operations",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-sfb-derived-scalar-mate-thick-locus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6; ring-change compatibility in Tags 0D6D and 0D6E, extracted coefficient-isomorphism specialization of the scalar adjunction construction."
+ },
+ "proof": [
+  {
+   "text": "Prove the completed coefficient square by applying limit hom extensionality. At each quotient, the definition of completedFiniteCoefficientMap cancels the inverse of the constant-system comparison. This identifies the inverse-image source restriction with CompletedProjection.inverseObject.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lemma-weil-pbc-perfect-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exact coefficient restriction equivalences and inverse mates to construct the X and Y scalar extension comparisons with their unit normalizations. Construct p and z explicitly from the existing canonical direct-image coefficient comparisons, and use the normalized coefficient square for their compatibility equation.",
+   "uses": [
+    "lem-pbc-scalar-coefficient-equivalence",
+    "lem-pbc-normalized-coefficient-direct-image-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the literal beta transpose identity by the two mate counit equations and the scalar mate unit equation. The canonical direct-image comparison is its geometric mate by the coefficient-change adjunction theorem.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-derived-scalar-mate-thick-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct s and t by composing the restriction, scalar and direct-image comparisons. Apply injectivity of the scalar Hom equivalence. The X unit normalization, the direct-image square, and naturality of p and d identify the two transposes. Finally transport the input from restriction along the composite ring map to the prescribed inverseObject using the restriction composition isomorphism and naturality of beta.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pbc-scalar-coefficient-equivalence",
+    "lem-pbc-normalized-coefficient-direct-image-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pbc-normalized-coefficient-direct-image-square",
+  "lem-pbc-scalar-coefficient-equivalence",
+  "lem-sfb-derived-scalar-mate-thick-locus",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lemma-weil-pbc-perfect-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6D and 0D6E; explicit unit/counit calculation and coefficient comparison by F6. Only the restriction/direct-image normalized square remains a separate obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport of the adjunction mate of scalar extension and derived direct image through isomorphisms of coefficient ring sheaves",
+   "results": "Eight hits: ordinary sheaf pullback adjunction, ordinary module change-of-scalars adjunctions and CategoryTheory.mateEquiv. No unbounded ring-sheaf transport normalization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula morphism is natural under an isomorphism of the coefficient ring sheaf",
+   "results": "Eight hits concerning ordinary free-module pullback, presheaf isomorphism components and section Hom naturality; none states the derived coefficient transport.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|restrict)|(scalar|restrict).*projection",
+   "results": "Nine unrelated Mathlib linear/geometric projection results. Local source search finds DerivedScalarMateThickLocus for the arbitrary ring-sheaf normalization in literal inverse-image coefficients; it does not transport the completed presentations.",
+   "date": "2026-10-27",
+   "verdict": "reuse the existing normalization; transport still needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedScalarProjectionTensorComparison",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Finite-level scalar projection comparison in the landed direct-image formalization: Transport the normalized scalar mate to literal inverse-image coefficients.",
+   "via": [
+    "lem-pbc-completed-scalar-projection-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarMateCoefficientTransport",
+  "file": "lean/Sheaf/Paper/CompletedScalarMateCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedScalarMateCoefficientTransport",
+  "statement": "theorem completedScalarMateCoefficientTransport\n    {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) [IsIso (completedCoefficientMap f d)]\n    (SY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (SX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (φY : pbcAdicCompletion Y d ⟶ SY) (φX : pbcAdicCompletion X d ⟶ SX)\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj SY ≅ SX)\n    (hc : completedCoefficientMap f d ≫ φX =\n      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map φY ≫ c.hom)\n    (F : pbcModules X (pbcAdicCompletion X d) ⥤ pbcModules Y (pbcAdicCompletion Y d))\n    [F.Additive]\n    (hF : F = proEtaleRingModuleDirectImage f (pbcAdicCompletion Y d)\n      (pbcAdicCompletion X d) (asIso (completedCoefficientMap f d)))\n    (G : pbcModules X SX ⥤ pbcModules Y SY) [G.Additive]\n    (hG : G = proEtaleRingModuleDirectImage f SY SX c)\n    (i : pbcRestrict φX ⋙ F ≅\n      G ⋙ pbcRestrict φY)\n    (hi : ∀ (M : pbcModules X SX) (U : Y.ProEtᵒᵖ),\n      HEq (fun x ↦ (i.hom.app M).val.app U x)\n        (fun x : ((proEtaleRingModuleDirectImage f SY SX c).obj M).val.obj U ↦ x))\n    (e : pbcDerivedRestrict φX ⋙ F.rightDerivedFunctor ≅\n      G.rightDerivedFunctor ⋙ pbcDerivedRestrict φY)\n    (he : ∀ C : CochainComplex (pbcModules X SX) ℤ,\n      F.rightDerivedFunctorUnitQ\n          (((pbcRestrict φX).mapHomologicalComplex (.up ℤ)).obj C) ≫\n        F.rightDerivedFunctor.map\n          ((pbcRestrict φX).mapDerivedCategoryFactors.inv.app C) ≫\n        e.hom.app (DerivedCategory.Q.obj C) =\n      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex i.hom (.up ℤ)).app C) ≫\n        (pbcRestrict φY).mapDerivedCategoryFactors.inv.app\n          ((G.mapHomologicalComplex (.up ℤ)).obj C) ≫\n        (pbcDerivedRestrict φY).map (G.rightDerivedFunctorUnitQ C))\n    (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) :\n    let χ := (pbcCompletedComparison Y d).hom ≫ φY\n    let K₀ := (pbcDerivedRestrict (pbcCompletedComparison X d).hom).obj K\n    let Kᵢ := CompletedProjection.inverseObject f d K₀\n    ∃ (s : (pbcDerivedRestrict (pbcCompletedComparison Y d).hom).obj\n          ((pbcDerivedRestrict φY).obj\n            ((pbcDerivedExtend φY).obj (F.rightDerivedFunctor.obj K))) ≅\n        ((DerivedScalarMate.push f (PerfectProjection.ring d Y) ⋙\n          proEtaleRingDerivedExtension χ) ⋙\n          (DerivedScalarMate.restriction χ).mapDerivedCategory).obj Kᵢ)\n      (t : (pbcDerivedRestrict (pbcCompletedComparison Y d).hom).obj\n          ((pbcDerivedRestrict φY).obj\n            (G.rightDerivedFunctor.obj ((pbcDerivedExtend φX).obj K))) ≅\n        ((proEtaleRingDerivedExtension (DerivedScalarMate.inverseMap f χ) ⋙\n          DerivedScalarMate.push f SY) ⋙\n          (DerivedScalarMate.restriction χ).mapDerivedCategory).obj Kᵢ),\n      (pbcDerivedRestrict (pbcCompletedComparison Y d).hom).map\n          ((pbcDerivedRestrict φY).map\n            (((pbcDerivedScalarAdjunction φY).homEquiv _ _).symm\n              (F.rightDerivedFunctor.map\n                  ((pbcDerivedScalarAdjunction φX).unit.app K) ≫\n                e.hom.app ((pbcDerivedExtend φX).obj K)))) ≫ t.hom =\n        s.hom ≫ (DerivedScalarMate.restriction χ).mapDerivedCategory.map\n          ((DerivedScalarMate.beta f χ).app Kᵢ)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletedProjection.inverseObject",
+   "AlgebraicGeometry.Scheme.completedScalarMateCoefficientTransport"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T012934-L-2350014",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T034639-L-3669835",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

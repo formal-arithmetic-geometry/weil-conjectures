@@ -1,0 +1,254 @@
+{
+ "id": "lem-sf-finite-exceptional-compositor-coefficients",
+ "kind": "statement",
+ "title": "Finite coefficient compatibility of exceptional composition",
+ "statement": "Fix the finite-field and coefficient datum of [sk-def-sf-setting]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$. Let $X,Y,Z$ be separated finite-type $k$-schemes and let $f:X\\to Y$, $g:Y\\to Z$ be separated finite-type $k$-morphisms; put $x=g\\circ f$. Use the constructible finite-Tor categories $\\mathcal C_{T,\\Lambda}=\\Dctf(T,\\Lambda)$ and the specified operations of [sk-def-sf-operations], with derived-complete integral, raw rationalized and common-finite-stage coefficients. Write $F_{h,\\Lambda}=Rh_{!,\\Lambda}$, $G_{h,\\Lambda}=Rh^!_\\Lambda$ and $\\epsilon_{h,\\Lambda}$ for the counits of their constructible adjunctions $F_{h,\\Lambda}\\dashv G_{h,\\Lambda}$ at every stage [lem-sf-constructible-exceptional-adjunction-coefficients], for $h=f,g,x$. For a finite extension $E\\subset E'$ the same notation at the target coefficient stages uses $E'$ in place of $E$, as in that node.\n\nWrite $\\alpha_\\Lambda:F_{g,\\Lambda}F_{f,\\Lambda}\\xrightarrow{\\sim}F_{x,\\Lambda}$ for the canonical compactification compositor: at finite level the composition isomorphism of [thm-sf-comp-composition], restricted to the finite-Tor constructible categories, and at the integral, rational and common stages its completed integral form and its rationalized/common-stage forms. Let $c_\\Lambda:G_{f,\\Lambda}G_{g,\\Lambda}\\to G_{x,\\Lambda}$ denote the conjugate of $\\alpha_\\Lambda^{-1}$ under the composite adjunction and $F_{x,\\Lambda}\\dashv G_{x,\\Lambda}$, in the sense of [def-weil-pbc-adjunction-conjugate].\n\nConsider a finite quotient $A=A_n\\to B=A_m$ with $1\\le m\\le n$, or a finite-free change $A=A_n\\to B=R'/\\varpi^nR'$ where $E\\subset E'$ is finite and $R'=\\mathcal O_{E'}$, and any subsequent positive quotient of this $B$. Write $C_T=-\\otimes^L_{A_T}B_T$. For each $h:U\\to V$ among $f,g,x$ let $q_h:C_VF_{h,A}\\xrightarrow{\\sim}F_{h,B}C_U$ be the canonical compact-support coefficient comparison and $b_h:C_UG_{h,A}\\xrightarrow{\\sim}G_{h,B}C_V$ its counit-normalized exceptional comparison of [lem-sf-constructible-exceptional-adjunction-coefficients], that is the transpose of $C_V(\\epsilon_{h,A})\\circ q_{h,G_{h,A}}^{-1}$. Put $q_{g,f}=(F_{g,B}q_f)\\circ(q_gF_{f,A})$.\n\nThe exceptional composition comparisons satisfy\n$$b_{x,L}\\circ C_X(c_{A,L})=c_{B,C_ZL}\\circ G_{f,B}(b_{g,L})\\circ b_{f,G_{g,A}L}\\qquad(L\\in\\mathcal C_{Z,A}).$$\nMore precisely, if $U_L=G_{f,A}G_{g,A}L$ and $\\beta_{A,L}=\\epsilon_{g,A,L}\\circ F_{g,A}(\\epsilon_{f,A,G_{g,A}L})$, both sides of this equation have the same $F_{x,B}\\dashv G_{x,B}$ transpose\n$$C_Z(\\beta_{A,L})\\circ q_{g,f,U_L}^{-1}\\circ\\alpha_{B,C_XU_L}^{-1}:F_{x,B}C_XU_L\\longrightarrow C_ZL.$$\nThis is an equality of natural transformations on the finite-Tor constructible domains, using the specified compactification maps on the small pro-etale sites. They include ramified extensions: if $e=e(E'/E)$, then $R'/\\varpi^nR'=A_{E',en}$ under $(\\varpi^n)=(\\varpi_{E'}^{en})$. No flatness of the finite quotient is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Final compatibility sentence: finite geometric composition square and counit transposes; returned proof steps 5-6; agent-expanded obligation, not a verbatim theorem of Stacks"
+ },
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "sk-def-sf-operations",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "thm-sf-comp-composition",
+  "def-sf-finite-exceptional-compositor-maps"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-finite-compact-support-coefficient-square] to the normalized scalar presentations and q maps. The allowed-change evidence is obtained directly from FiniteChange: quotient and extension are constructors of Allowed; extension followed by quotient is its comp constructor with the retained map equality. This gives the LEFT coefficient square on the actual finite-Tor categories.",
+   "uses": [
+    "lem-sf-finite-compact-support-coefficient-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Final coefficient-compatibility sentence; Step 1 of lem-sf-finite-exceptional-compositor-coefficients, left compact-support square"
+   }
+  },
+  {
+   "text": "Fix $L$ and abbreviate $V=G_{g,A}L$, $U=G_{f,A}V$. By [def-weil-pbc-composite-adjunction] the counit for $F_{g,A}F_{f,A}\\dashv G_{f,A}G_{g,A}$ is $\\beta_{A,L}=\\epsilon_{g,A,L}\\circ F_{g,A}(\\epsilon_{f,A,V})$. The definition of conjugation [def-weil-pbc-adjunction-conjugate], together with the transpose characterization [def-weil-pbc-adjunction-mate], says that the transpose of $c_{A,L}$ is $\\beta_{A,L}\\circ\\alpha_{A,U}^{-1}$. Consequently\n$$\\epsilon_{x,A,L}\\circ F_{x,A}(c_{A,L})=\\beta_{A,L}\\circ\\alpha_{A,U}^{-1}.$$\nThe identical formula holds at $B$. These formulas use the given adjunctions, not an ambient exceptional-adjoint datum.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Final compatibility sentence, expanded by the worker into the left coefficient square and two explicit counit transposes"
+   }
+  },
+  {
+   "text": "Let $a=b_{x,L}\\circ C_X(c_{A,L})$. Its $F_{x,B}\\dashv G_{x,B}$ transpose is $\\epsilon_{x,B,C_ZL}\\circ F_{x,B}(a)$ [def-weil-pbc-adjunction-mate]. The counit equation of [lem-sf-constructible-exceptional-adjunction-coefficients] for $x$, followed by naturality of $q_x^{-1}$ at $c_{A,L}$, gives\n$$a^\\flat=C_Z(\\epsilon_{x,A,L})\\circ q_{x,G_{x,A}L}^{-1}\\circ F_{x,B}C_X(c_{A,L})\n=C_Z(\\epsilon_{x,A,L}\\circ F_{x,A}(c_{A,L}))\\circ q_{x,U}^{-1}.$$\nUse step 2, then the inverse form of the square in step 1,\n$$C_Z(\\alpha_{A,U}^{-1})\\circ q_{x,U}^{-1}=q_{g,f,U}^{-1}\\circ\\alpha_{B,C_XU}^{-1},$$\nto obtain $a^\\flat=C_Z(\\beta_{A,L})\\circ q_{g,f,U}^{-1}\\circ\\alpha_{B,C_XU}^{-1}$, exactly the displayed transpose in the statement.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Final compatibility sentence, expanded by the worker into the left coefficient square and two explicit counit transposes"
+   }
+  },
+  {
+   "text": "Put $r=G_{f,B}(b_{g,L})\\circ b_{f,V}$ and $d=c_{B,C_ZL}\\circ r$. By step 2 at $B$ and naturality of $\\alpha_B^{-1}$, its transpose is\n$$d^\\flat=\\beta_{B,C_ZL}\\circ F_{g,B}F_{f,B}(r)\\circ\\alpha_{B,C_XU}^{-1}.$$\nNaturality of $\\epsilon_{f,B}$ at $b_{g,L}:C_YV\\to G_{g,B}C_ZL$ changes the factor before $\\alpha_B^{-1}$ to\n$$\\epsilon_{g,B,C_ZL}\\circ F_{g,B}(b_{g,L})\\circ F_{g,B}(\\epsilon_{f,B,C_YV}\\circ F_{f,B}(b_{f,V})).$$\nApply the counit equations of [lem-sf-constructible-exceptional-adjunction-coefficients] first for $f$ and then for $g$. This factor becomes\n$$C_Z(\\epsilon_{g,A,L})\\circ q_{g,V}^{-1}\\circ F_{g,B}C_Y(\\epsilon_{f,A,V})\\circ F_{g,B}(q_{f,U}^{-1}).$$\nNaturality of $q_g^{-1}$ at $\\epsilon_{f,A,V}:F_{f,A}U\\to V$ makes it\n$$C_Z(\\epsilon_{g,A,L}\\circ F_{g,A}(\\epsilon_{f,A,V}))\\circ q_{g,F_{f,A}U}^{-1}\\circ F_{g,B}(q_{f,U}^{-1})=C_Z(\\beta_{A,L})\\circ q_{g,f,U}^{-1}.$$\nAppending $\\alpha_{B,C_XU}^{-1}$ therefore gives the same transpose as step 3. This is just counit naturality and the two given counit equations; no coefficient/exceptional composition compatibility has been presumed.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Final compatibility sentence, expanded by the worker into the left coefficient square and two explicit counit transposes"
+   }
+  },
+  {
+   "text": "The transposition map is injective, since it is the inverse of the adjunction Hom bijection [def-weil-pbc-adjunction-mate]. The equality of the transposes computed in steps 3 and 4 gives $a=d$, the required equation. All constituent maps are natural transformations on the stated constructible categories, so the component equality for every $L$ is their equality as natural transformations. The quotient argument never invokes exact underived scalar extension; all coefficient functors are derived tensor. In particular the argument includes $m=n$, identity geometric morphisms, zero complexes, and the ramified level $en$ followed by any positive quotient.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Final compatibility sentence, expanded by the worker into the left coefficient square and two explicit counit transposes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-compact-support-coefficient-square",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "F9: explicit categorical counit transposes, with the geometric left square isolated as the strictly smaller Step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotient and ramified scalar extension commute with the canonical composition of exceptional inverse image functors",
+   "results": "Ideal.ramificationIdx_tower; Ideal.ramificationIdxIn_mul_ramificationIdxIn; Ideal.Quotient.algebraMap_quotient_of_ramificationIdx_neZero; Ideal.quotientRangePowQuotSuccInclusionEquiv; Ideal.ramificationIdx_algebra_tower; Ideal.Quotient.algebraQuotientOfRamificationIdxNeZero; Ideal.Quotient.algebraMap_quotient_pow_ramificationIdx; Ideal.Quotient.algebraQuotientPowRamificationIdx",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit normalized coefficient change for composed extraordinary pullbacks of constructible sheaves",
+   "results": "CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.Adjunction.CoreUnitCounit.counit; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; CompHausLike.LocallyConstant.counit; CompHausLike.LocallyConstant.counit_app_val; CategoryTheory.constantSheafAdj_counit_w; CategoryTheory.PullbackShift.adjunction_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|conjugateEquiv_mateEquiv_vcomp|shriek.*[Cc]oeff",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:209: theorem mateEquiv_hcomp (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K) :; Mathlib/CategoryTheory/Adjunction/Mates.lean:252:   simp only [mateEquiv_hcomp] at vcomp; Mathlib/CategoryTheory/Adjunction/Mates.lean:505: theorem conjugateEquiv_mateEquiv_vcomp {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : A ⥤ B} {R₂ : B ⥤ A}; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:115:   have vcomp2 := conjugateEquiv_mateEquiv_vcomp; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:274: theorem mateEquiv_hcomp (α : g ≫ l₂ ⟶ l₁ ≫ h) (β : h ≫ l₄ ⟶ l₃ ≫ k) :; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:373:   have hcomp1 := mateEquiv_hcomp adj₁ adj₃ adj₂ adj₄ α β; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:374:   have hcomp2 := mateEquiv_hcomp adj₃ adj₅ adj₄ adj₆ γ δ; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:489:   have := mateEquiv_hcomp adj₁ adj₁ adj₂ adj₂' ((λ_ _).hom ≫ (ρ_ _).inv); Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:504:   have := mateEquiv_hcomp adj₁ adj₁' adj₂ adj₂",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactification composition scalar comparison square implies the right adjoint composition coefficient square",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; GaloisConnection.l_comm_iff_u_comm; GaloisConnection.u_comm_of_l_comm; GaloisConnection.l_comm_of_u_comm; CategoryTheory.Monad.left_comparison; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CompHausLike.LocallyConstant.adjunction_left_triangle; CategoryTheory.Adjunction.rightAdjointUniq_trans",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|conjugateEquiv_mateEquiv_vcomp|shriek.*[Cc]oeff",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category or ordinary module infrastructure does not establish the specified geometric left compositor square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient extension preserves right adjoint composition mates of compact support functors",
+   "results": "CategoryTheory.Functor.ranCompIsoOfPreserves; CategoryTheory.Functor.RightExtension.precomp; CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves; CategoryTheory.Functor.PreservesRightKanExtension.mk; CategoryTheory.Functor.hasRightKanExtension_of_preserves; CategoryTheory.Functor.hasPointwiseRightKanExtension_of_preserves; CategoryTheory.Functor.RightExtension.precomp_obj_right; CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtensionAt.postcompose",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category or ordinary module infrastructure does not establish the specified geometric left compositor square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category or ordinary module infrastructure does not establish the specified geometric left compositor square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient change commutes with the canonical compositor of exceptional inverse image functors on constructible sheaves",
+   "results": "CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso; PrimeSpectrum.BasicConstructibleSetData.map_g; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; LightCondensed.ihomPoints_symm_comp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; PrimeSpectrum.ConstructibleSetData.map_comp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category or ordinary module infrastructure does not establish the specified geometric left compositor square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A counit normalized scalar square for composite left adjoints induces the compatible square on right adjoint conjugates",
+   "results": "CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_counit_symm; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app; CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app; CategoryTheory.Adjunction.leftAdjointCompNatTrans_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category or ordinary module infrastructure does not establish the specified geometric left compositor square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-sf-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-verdier-exchange",
+   "place": "Final compatibility sentence: finite geometric composition square and counit transposes; returned proof steps 5-6",
+   "via": []
+  },
+  "same_as": [
+   "det-sfb-coefficient-comparisons-exceptional",
+   "det-prop-scalar-six-exceptional"
+  ],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-exceptional-compositor-coefficients",
+  "worker": "stage1",
+  "summary": "Reused existing finite-quotient and finite-free compact-support compositor squares; pasted them for further quotients and calculated both exceptional transposes explicitly using only counit naturality. No new nodes or changed statements.",
+  "blueprint": "Expands the final compatibility sentence of sk-thm-sf-verdier-exchange for the composition mate in step 1, specifically finite reduction and scalar extension.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-compact-coefficient-composition",
+    "why": "Generic finite quotient square for the specified compactification compositor, not supplied by this unit."
+   },
+   {
+    "node": "lem-coef-finite-free-compact-composition",
+    "why": "Generic ramified finite-free coefficient square for the same compactification compositor."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "why": "Constructible domains, normalized counit equations and coefficient cocycles, used for f, g and gf independently; no exceptional compositor compatibility taken from it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-011119a14",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-011119a14 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes and its statement is unchanged. It is still unsplit in the live clone, it is not on the drop list and it has no re-split note. I recomputed every step. Step 1: the quotient square is lem-sf-compact-coefficient-composition (levels m≥n there are n→m here) and the extension square is lem-coef-finite-free-compact-composition (its γ is our α and its α is our q). For extension followed by a quotient, I checked that the composition cocycle of lem-sf-constructible-exceptional-adjunction-coefficients plus naturality of q_g^D gives the square. Step 2: the conjugate of α^{-1} (L_2=F_x, L_1=F_gF_f) has transpose ε_comp∘α^{-1}, so the direction is correct. Step 3: the counit equation for x, naturality of q_x^{-1} at c, and the inverted square give C_Z(β_A)q_{g,f}^{-1}α_B^{-1}. Step 4: naturality of ε_f at b_g, the f and g counit equations, and naturality of q_g^{-1} at ε_f give the same map. Step 5: the transpose is injective. Hypotheses (separated finite-type schemes and morphisms, D^b_ctf domains, A_{E',en}) are covered by the cited statements. Edge cases checked: m=n, identity f or g, ramified e, zero objects. Duplicate search over the whole DAG: det-sp-composition-comparisons covers only smooth morphisms, the pur scalar node is rational and smooth only, the closed-transpose node covers closed immersions only, and the det-prop/det-sfb blueprint nodes are already in same_as. No cycle. Batch-5 finding: both cited nodes are already in the batch-5 closure without this item, which adds only itself. The reached lem-trf-site-functorial-flat-resolution only gives generic functorial flat resolutions of module sheaves, not a step of the trace formula or Poincaré duality proofs, so I accept both citations. I accept the three tool_uses as generic coefficient-square and adjunction inputs."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteExceptionalCompositorCoefficients",
+  "declaration": "WeilConjectures.FiniteExceptionalCompositorCoefficients.finiteExceptionalCompositorCoefficients",
+  "declarations": [
+   "WeilConjectures.FiniteExceptionalCompositorCoefficients.FiniteChange",
+   "WeilConjectures.FiniteExceptionalCompositorCoefficients.leftMap",
+   "WeilConjectures.FiniteExceptionalCompositorCoefficients.rightMap",
+   "WeilConjectures.FiniteExceptionalCompositorCoefficients.commonTranspose",
+   "WeilConjectures.FiniteExceptionalCompositorCoefficients.Compatibility",
+   "WeilConjectures.FiniteExceptionalCompositorCoefficients.finiteExceptionalCompositorCoefficients"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteExceptionalCompositorCoefficients.lean",
+  "statement": "theorem finiteExceptionalCompositorCoefficients {D : FiniteFieldDatum.{u}} (B : D.CoefficientDatum) {X Y Z : SixFunctorSpace D} [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] [IsSeparated Z.obj.hom] (f : X ⟶ Y) (g : Y ⟶ Z) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] (P : System.{u} B.l B.Qbar D B.different (f := f.hom.left)) (Q : System.{u} B.l B.Qbar D B.different (f := g.hom.left)) (R : System.{u} B.l B.Qbar D B.different (f := (f ≫ g).hom.left)) (cf : Compactification f.hom.left) (cg : Compactification g.hom.left) (cx : Compactification (f ≫ g).hom.left) (E L : FieldStage.{u} B.l) (n m : ℕ+) (S : SixFunctorOperationDatum D B E.carrier n n.pos) (S' : SixFunctorOperationDatum D B L.carrier m m.pos) (a : PurCompactSupport.Change ((RingStage.finite E n).coefficients B.l) ((RingStage.finite L m).coefficients B.l)) (_ha : FiniteChange B.l (s := .finite E n) (t := .finite L m) a) (TX : Scalar.{u} B.l B.Qbar a X.obj.left) (TY : Scalar.{u} B.l B.Qbar a Y.obj.left) (TZ : Scalar.{u} B.l B.Qbar a Z.obj.left) (df : @Comparison.{u} B.l _ B.Qbar _ _ _ X.obj.left Y.obj.left (.finite E n) (.finite L m) (P.ring.operation cf (.finite E n)) (P.ring.operation cf (.finite L m)) TX.functor TY.functor TX.commShift TY.commShift) (dg : @Comparison.{u} B.l _ B.Qbar _ _ _ Y.obj.left Z.obj.left (.finite E n) (.finite L m) (Q.ring.operation cg (.finite E n)) (Q.ring.operation cg (.finite L m)) TY.functor TZ.functor TY.commShift TZ.commShift) (dx : @Comparison.{u} B.l _ B.Qbar _ _ _ X.obj.left Z.obj.left (.finite E n) (.finite L m) (R.ring.operation cx (.finite E n)) (R.ring.operation cx (.finite L m)) TX.functor TZ.functor TX.commShift TZ.commShift) (_hf : QNormalized.{u} B.l B.Qbar cf a TX TY (P.ring.left cf (.finite E n)) (P.ring.left cf (.finite L m)) df) (_hg : QNormalized.{u} B.l B.Qbar cg a TY TZ (Q.ring.left cg (.finite E n)) (Q.ring.left cg (.finite L m)) dg) (_hx : QNormalized.{u} B.l B.Qbar cx a TX TZ (R.ring.left cx (.finite E n)) (R.ring.left cx (.finite L m)) dx) : @Compatibility D B X.obj.left Y.obj.left Z.obj.left (.finite E n) (.finite L m) (P.ring.operation cf (.finite E n)) (Q.ring.operation cg (.finite E n)) (R.ring.operation cx (.finite E n)) (P.ring.operation cf (.finite L m)) (Q.ring.operation cg (.finite L m)) (R.ring.operation cx (.finite L m)) TX.functor TY.functor TZ.functor TX.commShift TY.commShift TZ.commShift df dg dx (finiteAlpha B f g P Q R E n S cf cg cx) (finiteAlpha B f g P Q R L m S' cf cg cx)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the four existing constructions owned by def-sf-finite-exceptional-compositor-maps, without using the constructible exceptional compositor theorem. Compatibility records the component square and each of its two explicit common counit transposes. The finite coefficient list retains quotient, ramified level en and any subsequent positive quotient, with actual derived scalar and normalized compactification maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d10f841f8",
+  "group": "N9",
+  "result": "pass",
+  "note": "Fixes the earlier H2 return (Q123 05dc, N9 f98d): new existing:true definition node def-sf-finite-exceptional-compositor-maps owns finiteInclusion/finiteLeft/finiteAlpha/exceptionalIso in Sheaf.Paper.ConstructibleExceptionalCompositor; all four exist with real constructions; its lean.statement equals the finiteAlpha signature and its prose describes all four correctly; no other definition node owns the module in side-live 9a9a239. Item node differs from live only in lean and stmt_deps (theorem replaced by the definition node); statement, proof and proof_deps byte-identical; lean.statement is verbatim in the file; owner module publicly imported; only proof is sorry. Re-read the statement: alpha = finiteAlpha, c = conjugate of alpha^-1, coefficient changes are quotient / ramified extension at level e*n / extension then quotient with pinned maps, q canonical and b counit-normalized, main display plus both transpose equalities; no added flatness or smoothness; edge cases m=n, n=1, identity maps, empty schemes, zero objects covered; single universe u. Report has Worker report and Second reading by N9 (standard direct-delivery notice, advisory). Changed no file, so no compile; worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T002508-L-3116557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

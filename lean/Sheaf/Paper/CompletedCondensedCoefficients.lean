@@ -23,7 +23,6 @@ import all Sheaf.Paper.FiniteDiscreteSchemeRing
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import all Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
-import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 import Sheaf.Paper.ContinuousIntegralCoefficients
 
 /-!

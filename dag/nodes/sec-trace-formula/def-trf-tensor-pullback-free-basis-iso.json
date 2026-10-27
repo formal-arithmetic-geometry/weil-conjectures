@@ -1,0 +1,113 @@
+{
+ "id": "def-trf-tensor-pullback-free-basis-iso",
+ "kind": "definition",
+ "title": "Basis-normalized tensor pullback of a free module sheaf",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes and $I$ a set. Write $g^*$ for tensor-formula module pullback with its canonical adjunction [def-pc-module-pullback], and let $\\epsilon_g:g^*\\mathcal O_Y\\to\\mathcal O_X$ be the pinned structure-sheaf map [def-sfb-tensor-pullback-structure-sheaf-map]. Define the basis-normalized isomorphism $c_{g,I}:g^*(\\mathcal O_Y^{\\oplus I})\\xrightarrow{\\sim}\\mathcal O_X^{\\oplus I}$ as the inverse of the coproduct comparison induced by $\\epsilon_g^{-1}$, using that $g^*$ is a left adjoint. Thus on the summand indexed by $i\\in I$ its forward map is $g^*\\mathcal O_Y\\xrightarrow{\\epsilon_g}\\mathcal O_X\\xrightarrow{\\iota_i}\\mathcal O_X^{\\oplus I}$: $g^*\\iota_i\\,;\\,c_{g,I}=\\epsilon_g\\,;\\,\\iota_i$. This fixes the actual map and its inverse, including when $I$ is empty; no arbitrary isomorphism is chosen.",
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-sfb-tensor-pullback-structure-sheaf-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+  "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules, and Tag 01C8, lemma-pullback-locally-free; the explicit free-module comparison sends c tensor e_i to c e_i."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|mapFreeIso",
+   "results": "{\"t\": \"2026-10-24T16:16:47Z\", \"tool\": \"grep\", \"query\": \"pullbackObjFreeIso|mapFreeIso\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"90c69602f96a273e\"}",
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib mapFreeIso and the pinned upstream structure map. The existing picardTensorFreeIso has the same construction but no definition node owns that notion; the return explicitly requests a definition module with this interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical basis normalized isomorphism between tensor pullback of a free sheaf and the free sheaf on the source scheme",
+   "results": "{\"t\": \"2026-10-24T16:16:47Z\", \"tool\": \"leansearch\", \"query\": \"Canonical basis normalized isomorphism between tensor pullback of a free sheaf and the free sheaf on the source scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"dualTensorHomEquivOfBasis\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso\", \"Algebra.TensorProduct.basisAux\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"882b4be97a25c34b\"}",
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib mapFreeIso and the pinned upstream structure map. The existing picardTensorFreeIso has the same construction but no definition node owns that notion; the return explicitly requests a definition module with this interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.mapFreeIso",
+   "results": "{\"t\": \"2026-10-24T16:16:48Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.mapFreeIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"SheafOfModules.mapFreeIso\", \"SheafOfModules.mapFreeIso_hom\", \"SheafOfModules.ιFree_mapFreeIso_hom\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.map_ιFree_mapFreeIso_inv\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.ιFree_mapFreeIso_hom_assoc\", \"SheafOfModules.map_ιFree_mapFreeIso_inv_assoc\"], \"digest\": \"8cda502586b555df\"}",
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib mapFreeIso and the pinned upstream structure map. The existing picardTensorFreeIso has the same construction but no definition node owns that notion; the return explicitly requests a definition module with this interface."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "picardTensorFreeIso|tensorPullbackFreeIso|tensorPullbackFreeBasisIso in dag/nodes, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search pullback free",
+   "results": "No blueprint node matches pullback free; no existing definition node owns this normalized isomorphism. PicardTensorFrameCoordinates.lean:31 defines the same normalized comparison inside a theorem-owned module. The private LocalKoszul implementation is not used. No tensorPullbackFreeBasisIso declaration exists in the project or upstream naming records.",
+   "date": "2026-10-24",
+   "verdict": "The return requests a new def-trf node and its own module; this gives a definition-owned interface built from the existing pinned map and Mathlib construction, with no arbitrary choices of comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-free-sequence-transform-flatness",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Expansion of Stacks 0815: Tag 0815, theorem-flatten-module, proof paragraph 3, displayed sequence of strict transforms and flatness equivalence; Tag 05I3, lemma-induction-step; divisors.tex Tag 080W, lemma-strict-transform-universally-injective. Free-term identification in the strict-transform exact sequence: the ordinary pullback of a free sheaf has its same labelled basis.",
+   "via": [
+    "lem-trf-smooth-free-sequence-transform-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackFreeBasisIso",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullbackFreeBasisIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackFreeBasisIso.lean",
+  "statement": "def tensorPullbackFreeBasisIso {X Y : Scheme.{u}} (g : X ⟶ Y) (I : Type u) : (tensorPullback g).obj (SheafOfModules.free (R := Y.ringCatSheaf) I) ≅ SheafOfModules.free (R := X.ringCatSheaf) I",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definition module explicitly requested by H2 of the returned item. Uses Mathlib mapFreeIso with the pinned tensorPullbackObjUnitToUnit and its already established isomorphism property; the canonical adjunction supplies colimit preservation. This is the same basis normalization as the preexisting theorem-module helper picardTensorFreeIso, without a statement edge to its unrelated theorem. No postponed proof or data choice is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56925d25d",
+  "group": "Q49",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56925d25d",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery of 2f2ba59f814d repairs H2: theorem stmt_deps lem-sc-picard-tensor-frame-map and lem-trf-module-admissible-blowup-calculus removed; the strict-transform quotient is inlined as cokernel.π (kernel.ι (moduleStrictTransformRestriction ...)) (def-trf-module-strict-transform); the free comparison is now the new def node def-trf-tensor-pullback-free-basis-iso (tensorPullbackFreeBasisIso = (mapFreeIso (tensorPullback g) I (asIso ε_g).symm).symm, so g^*ι_i ≫ c = ε_g ≫ ι_i for all I incl. empty; real data; sources Tags 0096/01C8; no competing def node). Diff vs 2f2b: only imports and names, so the earlier clause-by-clause check (0815 ¶3, 05I3, 080W) and edge cases r=0, empty S, U=S, U=∅ stand. Item JSON differs from live only in lean/stmt_deps; both lean.statement fields verbatim; both report sections present; single sorry, docstring proof steps. Advisories: the new def body uses Prop-only theorem facts (tensorPullbackObjUnitToUnit_isIso, IsLeftAdjoint via choose of exists_tensorPullbackAdjunction) that its node does not cite; picardTensorFreeIso could later become an abbrev of it. No compile run (no changes)."
+ }
+}

@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-abelian-kernel-abelian-part",
+ "kind": "statement",
+ "title": "The abelian part of a homomorphism kernel over its ground field",
+ "statement": "Let $k$ be any field [def-weil-field], let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety], and let $f:A\\to B$ be a $k$-group-scheme homomorphism [def-sc-group-scheme]. The scheme-theoretic kernel $K=\\ker f$ contains a closed $k$-subgroup scheme $D\\hookrightarrow K\\hookrightarrow A$ which is an abelian variety over $k$ and satisfies $\\dim D=\\dim K$. In particular, if $\\dim K=0$, then $K$ is finite over $k$, including when $K$ is nonreduced. This statement does not identify $D$ with the reduction of $K$ over an imperfect field.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, discussion following Remark 10.2 and footnote 11, printed p.43: the abelian-subvariety part of a kernel. The arbitrary-field smoothness/descent issue explicitly left to be checked in that footnote is retained as this prerequisite, not assumed from perfect-field reduction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-kernel-subgroup], $K=A\\times_{B,f,e_B}\\operatorname{Spec}k$ is a closed subgroup scheme of $A$. Since $A$ is proper [def-sc-abelian-variety], [lem-weil-pbc-closed-immersion-proper] makes $K$ proper, in particular of finite type [def-weil-proper-morphism]. It is nonempty because its unit is a $k$-point.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-sc-abelian-variety",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "A.65 and Chapter 1; kernel as a fibre product, and closed subschemes of proper schemes."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $\\Omega/k$ [def-weil-algebraic-closure]. By [lem-sfb-abelian-field-extension], $A_\\Omega$ is an abelian variety. The base change $K_\\Omega\\hookrightarrow A_\\Omega$ is closed by [lem-weil-pbc-closed-immersion-base-change]; its group operations are the base changes of those on $K$, and its functor of points is the kernel of $f_\\Omega$, by the fibre-product property [def-pc-base-change]. Apply [lem-sfb-abelian-closed-subgroup-reduced-component] to get $C=((K_\\Omega)_{\\mathrm{red}})^0\\hookrightarrow K_\\Omega$, a closed abelian subgroup of $A_\\Omega$ with $\\dim C=\\dim K_\\Omega$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-abelian-field-extension",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-base-change",
+    "lem-sfb-abelian-closed-subgroup-reduced-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.39 and Proposition 1.34; existing geometric reduced-component lemma, applied only over the algebraically closed field."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-abelian-subvariety-separable-definition] to $C\\hookrightarrow A_\\Omega$. Obtain a finite Galois $E/k$ inside $\\Omega$ and a closed abelian subvariety $C_E\\hookrightarrow A_E$ with $(C_E)_\\Omega=C$. This is the additional input needed over an imperfect field; no reduction over $k$ is asserted.",
+   "uses": [
+    "lem-sfb-abelian-subvariety-separable-definition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1 footnote 10 and discussion after Remark 10.2 footnote 11; separable-definition prerequisite as stated in Milne 2022 Section 12, p.19."
+   }
+  },
+  {
+   "text": "For $\\sigma\\in\\operatorname{Aut}_k(E)$, [lem-weil-pbc-normal-subextension-automorphism-extends] extends $\\sigma$ to a $k$-automorphism of $\\Omega$. It induces a semilinear automorphism of $K_\\Omega$, since $K$ is defined over $k$. Such an automorphism preserves nilpotents, hence its reduction, and preserves the identity, hence the connected component containing it. Therefore it preserves $C$ as a closed subscheme. Consequently $\\sigma_A(C_E)$ and $C_E$ have equal base changes to $\\Omega$. They are equal already over $E$: on any affine chart of $A_E$, if $I,J$ are their ideals, then $I\\otimes_E\\Omega=J\\otimes_E\\Omega$ implies $I=J$, since $(R/J)\\to(R/J)\\otimes_E\\Omega$ is injective (extend $1$ to an $E$-basis of $\\Omega$), and likewise with $I,J$ reversed. Thus $C_E$ satisfies the invariance hypothesis of [lem-sfb-galois-closed-subscheme-descent].",
+   "uses": [
+    "lem-weil-pbc-normal-subextension-automorphism-extends",
+    "lem-sfb-galois-closed-subscheme-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.65, uniqueness of a closed subscheme from its scalar extension; fields.tex Tag 0BME, lemma-lift-maps, part (2)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-galois-closed-subscheme-descent] there is a closed $k$-subgroup $D\\hookrightarrow A$ with $D_E=C_E$, hence $D_\\Omega=C$. Since $C_E$ is proper, smooth, connected and finite type, [thm-pd-fpqc-local-properties] along the finite extension $E/k$ gives these same properties for $D$. Thus $D$ is an abelian variety [def-sc-abelian-variety]. Moreover $D\\hookrightarrow A$ factors through $K$: locally the ideal of $K$ has zero image in the coordinate ring of $D$ after tensoring with $\\Omega$, because $C\\subseteq K_\\Omega$; injectivity into that tensor product, as in step 4, makes its image zero before tensoring. The induced $D\\to K$ is a closed immersion: on each affine chart of $A$, it is the quotient map $R/I_K\\to R/I_D$ with $I_K\\subseteq I_D$. Its group compatibility follows by composing with the monomorphism $K\\hookrightarrow A$.",
+   "uses": [
+    "lem-sfb-galois-closed-subscheme-descent",
+    "thm-pd-fpqc-local-properties",
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.65–A.66 and finite-field-extension descent; Stacks descent.tex Tag 02VL, lemma-descending-property-smooth."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-dimension-extension] separately to the finite-type $k$-schemes $D$ and $K$: $\\dim D=\\dim D_\\Omega=\\dim C=\\dim K_\\Omega=\\dim K$. The dimensions are the chain-of-irreducible-closed-subsets dimensions [def-kun-topological-krull-dimension], equally the $\\kundim$ of that lemma. If $\\dim K=0$, then [lem-pc-scheme-dimension-local-rings] gives dimension zero in the local-ring sense too. Apply [lem-pc-dim-zero-finite-over-field] to the nonempty proper scheme $K$ from step 1. It is finite over $k$, with no reducedness assumption.",
+   "uses": [
+    "lem-kun-dimension-extension",
+    "def-kun-topological-krull-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-dim-zero-finite-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY, lemma-dimension-fibre-after-base-change; varieties.tex Tag 06LH, lemma-algebraic-scheme-dim-0; properties.tex Tag 04MU, lemma-dimension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change",
+  "def-sc-abelian-variety",
+  "def-weil-algebraic-closure",
+  "def-weil-proper-morphism",
+  "lem-kun-dimension-extension",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-abelian-closed-subgroup-reduced-component",
+  "lem-sfb-abelian-field-extension",
+  "lem-sfb-abelian-subvariety-separable-definition",
+  "lem-sfb-galois-closed-subscheme-descent",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-normal-subextension-automorphism-extends",
+  "thm-pd-fpqc-local-properties"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I pp.42–43, footnotes 10–11, expanded using geometric reduced component, separable definition, finite Galois descent, and dimension invariance. Newer Milne 2022 Section 12 article is WANTED; no unproved descent is assumed elementary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Kk]ernel|identityComponent",
+   "results": "0 hits; ; logged results: ; Mathlib/AlgebraicGeometry/Group",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf kernels and abstract group kernels do not construct a smooth proper connected subgroup of the kernel over its ground field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"kernel\", \"Smooth\"",
+   "results": "0 hits; ; logged results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf kernels and abstract group kernels do not construct a smooth proper connected subgroup of the kernel over its ground field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A kernel of a homomorphism of abelian varieties has an abelian subvariety of its dimension even over an imperfect field",
+   "results": "8 hits; ; logged results: AddCon.ker, AddMonoidHom.mker, RingHom.ker, AddMonoidHom.ker, AlgebraicGeometry.Scheme.Hom.ker, AddMonoidHom.decidableMemKer, MonoidHom.mker, MonoidHom.ker",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf kernels and abstract group kernels do not construct a smooth proper connected subgroup of the kernel over its ground field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a homomorphism of abelian varieties over any field contains an abelian subvariety of the same dimension",
+   "results": "8 hits; ; logged results: AddSubgroup.ker_saturated, IsDedekindDomain.selmerGroup.fromUnit_ker, QuotientAddGroup.ker_le_range_iff, AddSubgroup.relIndex_map_map, AddSubgroup.index_ker, AddSubgroup.relIndex_ker, AlgebraicGeometry.Scheme.Hom.ker_comp, AddSubgroup.index_map",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf kernels and abstract group kernels do not construct a smooth proper connected subgroup of the kernel over its ground field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest abelian subvariety in the kernel of an abelian variety morphism has finite quotient in the kernel",
+   "results": "8 hits; ; logged results: AddGroup.fintypeOfDomOfCoker, AddGroup.fintypeOfKerLeRange, Group.fintypeOfDomOfCoker, AddGroup.fintypeOfKerOfCodom, AddSubgroup.finiteIndex_ker, Subgroup.finiteIndex_ker, AddGroup.fintypeOfKerEqRange, AddMonoidHom.finite_iff_finite_ker_range",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf kernels and abstract group kernels do not construct a smooth proper connected subgroup of the kernel over its ground field"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAbelianVariety|abelianVariety|subvariety",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry/Group",
+   "date": "2026-10-23",
+   "verdict": "no match: group and ideal-sheaf kernels are not a ground-field abelian subvariety of a scheme-theoretic kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a homomorphism of abelian varieties over any field contains an abelian subvariety of the same dimension",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.le_ker_comp, AddSubgroup.ker_saturated, AlgebraicGeometry.Scheme.Hom.ker_comp, IsDedekindDomain.selmerGroup.fromUnit_ker, AddSubgroup.index_ker, NumberField.Units.dirichletUnitTheorem.logEmbedding_ker, AddSubgroup.finiteIndex_ker, AddCommGrpCat.kernelIsoKer",
+   "date": "2026-10-23",
+   "verdict": "no match: group and ideal-sheaf kernels are not a ground-field abelian subvariety of a scheme-theoretic kernel"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A kernel of a homomorphism of abelian varieties contains a smooth connected closed subgroup of the same dimension",
+   "results": "8 hits; AddMonoidHom.ker, AddMonoidHom.decidableMemKer, MonoidHom.ker, AddMonoidHom.mker, AddCon.ker, MonoidHom.mker, NormedAddGroupHom.isClosed_ker, NormedAddGroupHom.ker",
+   "date": "2026-10-23",
+   "verdict": "no match: group and ideal-sheaf kernels are not a ground-field abelian subvariety of a scheme-theoretic kernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"kernel\", \"Smooth\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: group and ideal-sheaf kernels are not a ground-field abelian subvariety of a scheme-theoretic kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of abelian varieties has a maximal connected smooth subgroup inside its scheme theoretic kernel over an imperfect field",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.Hom.le_ker_comp, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, Algebra.Extension.Hom.subToKer, AlgebraicGeometry.Scheme.Hom.ker_comp, AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AddSubgroup.ker_saturated",
+   "date": "2026-10-23",
+   "verdict": "no match: group and ideal-sheaf kernels are not a ground-field abelian subvariety of a scheme-theoretic kernel"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simple-isogeny-decomposition",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The abelian part of a homomorphism kernel over its ground field.",
+   "via": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-kernel-abelian-part",
+  "worker": "stage1",
+  "group": "NU",
+  "summary": "Preserved the arbitrary-field statement. Six-step assembly constructs the geometric reduced identity component, uses a separate finite separable definition input, proves Galois invariance and descends a closed subgroup, then checks abelian-variety properties, dimension, and the nonreduced finite-kernel case. Two new statement-only lemmas. No perfect-field reduction over k and no use of simple-factor decomposition, which depends on this item.",
+  "blueprint": "Inherited from.place: det-thm-sf-ctf-stability-direct-images proof (3), level rigidity via Milne simple-factor argument. Read latest blueprint main-20261023-1620 proof (3). The ancestor utility reports None, retained; new via lists prepend this item. Whole-blueprint subvariet, finite separable.*abelian, Galois.*subgroup, and closed-subscheme searches find no equivalent. Auxiliary proofs below the unit are refined; the unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic kernel fibre-product tool; the unit has no separate kernel construction."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic properness of a closed subscheme, applied to the kernel."
+   },
+   {
+    "node": "thm-pd-fpqc-local-properties",
+    "why": "Finite-extension descent of properness, smoothness and connectedness; its finite-degree hypothesis is satisfied by E/k."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Generic finite-type scheme dimension invariance under field extension; applies separately to D and K."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Identifies the two dimension conventions before the finite zero-dimensional theorem."
+   },
+   {
+    "node": "lem-pc-dim-zero-finite-over-field",
+    "why": "Generic finiteness of a proper zero-dimensional scheme, allowing nilpotents."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kernel-subgroup",
+  "lem-weil-pbc-closed-immersion-proper",
+  "thm-pd-fpqc-local-properties",
+  "lem-kun-dimension-extension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-dim-zero-finite-over-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-db6d43001",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-db6d43001 (reviewer sub-agent of L); spot-checked: Read the source, the item, both new nodes and all 17 cited statements. Source: Milne AV I Prop 10.1 fn 10 (p.42) and after Rem 10.2 fn 11 (p.43). The footnotes leave the imperfect-field case open; the split fills it geometrically, takes C=((K_Omega)_red)^0, and never claims D equals the reduction over k. Steps: (1) K is a closed subgroup, proper and nonempty. (2) Over Omega, A_Omega is abelian and K_Omega is a closed subgroup; the reduced-component lemma applies over the algebraically closed Omega and gives dim C = dim K_Omega. (3) The new separable-definition node gives a finite Galois E and C_E. (4) sigma extends to tau on Omega (Omega/k and E/k normal); tau_A preserves the reduction and identity component, so C is tau-stable. Equal base changes follow from p∘tau_A = sigma_A∘p, and an explicit ideal argument gives equality over E. (5) The Galois descent node gives D; thm-pd-fpqc-local-properties applies because E/k is finite; D is an abelian variety, and D⊆K by vanishing of ideal images plus injectivity. (6) lem-kun-dimension-extension gives the dimension equality; lem-pc-scheme-dimension-local-rings converts conventions; lem-pc-dim-zero-finite-over-field gives the nonreduced finite case. New nodes: the separable-definition node is true (homomorphisms of abelian varieties over k^s and kbar agree, C is an image of an endomorphism, then finite stage and normal closure). The descent node is true by Milne iAG A.64-A.66 (pp.580-581), keeps nilpotents, and its subgroup clause holds by faithfully flat detection. Neither restates a clause of the item. Duplicate search over the DAG: galois-invariant-closed-subset-descends (subsets only), descent-finite-flat-closed-subschemes (fixed degree only), galois-fpqc-affine-descent-effective (generic affine descent) and the sfb abelian nodes; no duplicate. No cycle, statement unchanged, no SGA (hits are only Mathlib IsGalois names), not superseded on live or side-live. tool_uses accepted: six generic tools. Advisory only: step 6 identifies \\kundim with the topological Krull dimension without citing def-kun-dimension; the two definitions are word-for-word the same. Small cases: f=0, f=id, a product projection, and [p] in char p (nonreduced K, D=Spec k)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.KernelAbelianPart",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_closed_subgroup_ker_same_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/KernelAbelianPart.lean",
+  "statement": "theorem IsAbelianVariety.exists_closed_subgroup_ker_same_dimension {k : Type u} [Field k] {A B : Over (Spec (.of k))} [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] (f : A ⟶ B) [IsMonHom f] : (∃ (D : Over (Spec (.of k))) (_ : GrpObj D) (_ : IsAbelianVariety D) (i : D ⟶ GrpObj.ker f), IsClosedSubgroupScheme i ∧ topologicalKrullDim D.left = topologicalKrullDim (GrpObj.ker f).left) ∧ (topologicalKrullDim (GrpObj.ker f).left = 0 → IsFinite (GrpObj.ker f).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9808f334",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Clause-by-clause check of IsAbelianVariety.exists_closed_subgroup_ker_same_dimension against the node: any field k (universe u, no extra assumptions); A,B with GrpObj+IsAbelianVariety; f with IsMonHom; kernel = canonical GrpObj.ker f (pullback along η); ∃ D, GrpObj D, IsAbelianVariety D, i : D ⟶ ker f with IsClosedSubgroupScheme i (group law fixed by IsMonHom on mono i; closed in A via the isClosedSubgroupScheme_kerι instance); topologicalKrullDim equality; dim K = 0 → IsFinite (ker f).hom, nonreduced kernel allowed, same convention as IsIsogeny; no claim D = K_red. Edge cases (f=0, f=id, inseparable isogeny, imperfect k, empty kernel impossible) all fine. Statement field verbatim; node changes only in lean; no existing or parallel declaration; no new defs; sorry-only proof; source/blueprint docstrings and six proof steps present; public imports = statement deps, plain imports = recorded proof-dep modules; report has Worker report and Second reading sections. Not recompiled (no change). No findings."
+ }
+}

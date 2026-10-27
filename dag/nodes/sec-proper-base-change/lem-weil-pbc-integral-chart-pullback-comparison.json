@@ -1,0 +1,118 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-integral-chart-pullback-comparison",
+ "kind": "statement",
+ "title": "Integral chart isomorphisms determine ordinary datum pullback isomorphisms",
+ "statement": "For an adic coefficient datum d, a scheme morphism g:S→T and a pro-etale chart U of S, an isomorphism between the integralLocalDerived restrictions of two arbitrary complexes K,L over d.completedRing T gives an isomorphism between their ordinary datum pullbacks along U.hom followed by g. No immersion, Noetherian scheme or perfect model hypothesis is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the given slice isomorphism by scalar restriction along the inverse-image coefficient isomorphism. The pro-etale slice equivalence is fully faithful on derived categories. Apply its inverse on isomorphisms and the datum pullback compositor to obtain an isomorphism between the two ordinary datum pullbacks to U.left. This comparison needs no pullback compatibility of constant realization.",
+   "uses": [
+    "lem-weil-pbc-perfect-chart-tensor-comparison",
+    "def-weil-pbc-integral-stratified-perfect-models",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-completed-ordinary-comparisons",
+    "lem-weil-pbc-integral-pullback-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-perfect-chart-tensor-comparison",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-completed-ordinary-comparisons",
+  "lem-weil-pbc-integral-pullback-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between sheaves of modules on a slice site and the scheme pro-etale site",
+   "results": "IsDenseSubsite.sheafEquiv, Equivalence.sheafCongr, SheafOfModules.over and Zariski comparison hits; none is the integral derived scalar-normalized assertion.",
+   "date": "2026-10-27",
+   "verdict": "Use the project slice and scalar equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.preimageIso",
+   "results": "0 hits; the bare name was not recognized by the search index.",
+   "date": "2026-10-27",
+   "verdict": "The existing project proofs already use the fully faithful functor API."
+  },
+  {
+   "tool": "grep",
+   "query": "integralLocalDerived|proEtale.*slice.*[Ii]so",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "Project-specific comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPerfectChartComplete",
+  "date": "2026-10-27",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The scalar and slice equivalence part of the single integral chart comparison.",
+   "via": [
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "lem-weil-pbc-integral-perfect-chart-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralChartPullbackComparison",
+  "file": "lean/Sheaf/Paper/IntegralChartPullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralLocalDerived_pullbackIso",
+  "statement": "theorem integralLocalDerived_pullbackIso {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) {T S : Scheme.{u}} (g : S ⟶ T) (U : S.ProEt)\n    (K L : d.derived T)\n    (h : integralLocalDerived g (pbcAdicCompletion T d) U K ≅\n      integralLocalDerived g (pbcAdicCompletion T d) U L) :\n    Nonempty ((d.pull (U.hom ≫ g)).obj K ≅ (d.pull (U.hom ≫ g)).obj L)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T012920-L-2347218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T012920-L-2347218",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

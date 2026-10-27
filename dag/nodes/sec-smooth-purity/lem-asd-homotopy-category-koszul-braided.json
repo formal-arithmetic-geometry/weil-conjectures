@@ -1,0 +1,264 @@
+{
+ "id": "lem-asd-homotopy-category-koszul-braided",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "the Lean proof of thm-asd-smooth-tensor's declarations uses (or, for the batch import closure, sits beside) HomotopyCategory.MonoidalCategory.braidedCategory (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the canonical symmetry of the derived tensor product used in the smooth duality map (descended from the Koszul braiding of complexes)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The homotopy category of a braided category is braided (Koszul braiding)",
+ "statement": "Let $C$ be a preadditive category [def-weil-preadditive-category] with a zero object and a monoidal structure [def-sfb-monoidal-category], additive in each tensor variable, and a braiding $\\beta$ (natural isomorphisms satisfying both hexagon identities). Let $I$ be an additive commutative monoid with decidable equality. A complex shape $c$ is a relation on $I$ with at most one successor and at most one predecessor at each index. Assume its relation is preserved by adding an index, and fix a homomorphism $\\varepsilon:I\\to\\{1,-1\\}$ with $\\varepsilon(p')=-\\varepsilon(p)$ whenever $c(p,p')$. A $c$-complex has objects $X^p$ and maps $d_X^{p,p'}$ zero off $c(p,p')$, with consecutive differentials composing to zero. Its maps commute with differentials. A homotopy from $f$ to $f'$ is a family $h^{i,j}:X^i\\to X'^j$ zero unless $c(j,i)$ and satisfying $f-f'=d_{X'}h+hd_X$; the sums here have at most two terms at each index.\n\nAssume the usual total tensor monoidal structure on $\\operatorname{Ch}_c(C)$ is defined: $(X\\otimes Y)^n=\\bigoplus_{p+q=n}X^p\\otimes Y^q$, with summand differential $d_X\\otimes1+\\varepsilon(p)1\\otimes d_Y$, unit $\\mathbf1[0]$, unsigned associator induced by that of $C$ and reindexing triple coproducts, and unitors induced by those of $C$. The iterated tensor coproducts used here have their usual universal properties (in particular triple-summand inclusions detect equality). This is the total/graded tensor availability hypothesis, not a finite-coproduct assertion for unbounded integer complexes.\n\nFix signs $\\sigma:I\\times I\\to\\{1,-1\\}$ satisfying\n$$\\sigma(p',q)=\\varepsilon(q)\\sigma(p,q)\\quad(c(p,p')),\\qquad \\sigma(p,q')=\\varepsilon(p)\\sigma(p,q)\\quad(c(q,q')),$$\nand the two coherence identities\n$$\\sigma(p,q+r)=\\sigma(p,q)\\sigma(p,r),\\qquad\\sigma(p+q,r)=\\sigma(p,r)\\sigma(q,r).$$\nThen the summand formula $\\sigma(p,q)\\beta_{X^p,Y^q}$ defines a natural chain isomorphism $B_{X,Y}:X\\otimes Y\\xrightarrow{\\sim}Y\\otimes X$. It induces a braiding on $K_c(C)$, the category with the same complexes as objects and chain maps modulo homotopy as morphisms, for its total tensor monoidal structure: both hexagon identities hold, and the quotient functor sends $B_{X,Y}$ to this braiding. For $I=\\mathbf Z$, $c(p,p')\\iff p'=p+1$, $\\varepsilon(p)=(-1)^p$ and $\\sigma(p,q)=(-1)^{pq}$, this is exactly the Koszul braiding. Symmetry of $C$ is not required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
+  "place": "thm-asd-smooth-tensor: the canonical symmetry of the derived tensor product used in the smooth duality map (descended from the Koszul braiding of complexes); Lean: upstream file lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean, declaration HomotopyCategory.MonoidalCategory.braidedCategory (module WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided, lines 243-244, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [
+  {
+   "text": "First define $[f]\\otimes[g]=[f\\otimes g]$ on the homotopy quotient. Apply [lem-pur-shape-total-tensor-homotopies] separately in the two variables: replacing $f$ by $f'$ changes the tensor by a homotopy, and then replacing $g$ by $g'$ does so again. Add the two homotopies. Composition respects homotopy because composing $f-f'=dh+hd$ with a chain map $u$ gives the homotopy $uh$ or $hu$, respectively. Identity and composition for the tensor therefore follow from those on complexes. Use the classes of the already given complex associators and unitors as constraints; their inverse, naturality, pentagon and triangle equations are preserved by $Q(fg)=Q(f)Q(g)$. All objects of the quotient are complexes and all its morphisms are represented by chain maps, so these equations hold on every object and morphism. This gives the total tensor monoidal structure on $K_c(C)$ with $Q$ preserving tensor and constraints. Only preadditivity and the assumed total tensor availability are used; no abelian or K-flat hypotheses enter.",
+   "uses": [
+    "lem-pur-shape-total-tensor-homotopies",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GWP, lemma-symmetric-monoidal-homotopy-category, proof using lemma-derived-tor-homotopy; agent generalization to c-complexes, with the general homotopy fact cited explicitly."
+   }
+  },
+  {
+   "text": "For each $p+q=n$, map the source summand to the target summand indexed by $(q,p)$ by $\\sigma(p,q)\\beta_{X^p,Y^q}$. The coproduct universal property assembles these into $B^n$. Its degreewise inverse uses $\\sigma(p,q)\\beta_{X^p,Y^q}^{-1}$ on that target summand. Indeed both composites are identity since $\\sigma(p,q)^2=1$; the inverse uses the inverse braiding, not a symmetry assumption. For a differential arrow $p\\to p'$, the coefficients of the two composites in the chain-map square are $\\sigma(p',q)$ and $\\varepsilon(q)\\sigma(p,q)$. For $q\\to q'$, they are $\\varepsilon(p)\\sigma(p,q')$ and $\\sigma(p,q)$. The assumed differential sign equations make each pair equal, while naturality of the underlying braiding identifies the unsigned maps. Off the shape relation both maps are zero. Hence $B$ is a chain map, and its degreewise inverse commutes with differentials by multiplying this square by the inverses. The construction is therefore a chain isomorphism.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section section-symmetric-monoidal immediately before Tag 0FNI (lemma-symmetric-monoidal-cat-complexes): explicit chain-map sign calculation, generalized from (-1)^(pq) to sigma."
+   }
+  },
+  {
+   "text": "For chain maps $f:X\\to X'$ and $g:Y\\to Y'$, apply [lem-sfb-braiding-naturality] in $C$ to $f^p$ and $g^q$. Multiply the equality by $\\sigma(p,q)$ and then include its target into the $(q,p)$ coproduct summand. Coproduct uniqueness yields $B_{X',Y'}\\circ(f\\otimes g)=(g\\otimes f)\\circ B_{X,Y}$. This proves naturality in both variables, with inverse naturality following by composing with $B^{-1}$.",
+   "uses": [
+    "lem-sfb-braiding-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section section-symmetric-monoidal and Tag 0FNI; componentwise naturality for the braided generalization."
+   }
+  },
+  {
+   "text": "For the hexagon involving $B_{X,Y\\otimes Z}$, test on $X^p\\otimes(Y^q\\otimes Z^r)$, inserting the specified unsigned associators to compare the two parenthesizations. The path that swaps $X$ with $Y\\otimes Z$ has coefficient $\\sigma(p,q+r)$; the path that first swaps it with $Y$ and then with $Z$ has coefficient $\\sigma(p,q)\\sigma(p,r)$. These are equal by the first coherence hypothesis. After removing this common scalar, the equality is the formula for $\\beta_{A,B\\otimes D}$ in [lem-sfb-braiding-hexagon], with $A=X^p$, $B=Y^q$, $D=Z^r$. Tensor additivity ensures that the signs multiply under the two successive tensor maps. Triple-summand inclusions detect equality by hypothesis, so this proves the hexagon as an equality of chain maps.",
+   "uses": [
+    "lem-sfb-braiding-hexagon"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNI, lemma-symmetric-monoidal-cat-complexes, omitted diagram verification: first hexagon supplied explicitly by the sigma(p,q+r) calculation."
+   }
+  },
+  {
+   "text": "For the other hexagon, test on $(X^p\\otimes Y^q)\\otimes Z^r$. Swapping $X\\otimes Y$ with $Z$ contributes $\\sigma(p+q,r)$; swapping $Y$ with $Z$ and then $X$ with $Z$ contributes $\\sigma(q,r)\\sigma(p,r)$. The second coherence hypothesis and commutativity of the sign group identify these coefficients. The unsigned equality is precisely the formula for $\\beta_{A\\otimes B,D}$ in [lem-sfb-braiding-hexagon], with $A=X^p$, $B=Y^q$, $D=Z^r$. Again the given associators carry no sign, and triple-summand uniqueness proves equality on the total complexes. No equality $\\beta_{B,A}\\beta_{A,B}=1$ is used.",
+   "uses": [
+    "lem-sfb-braiding-hexagon"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNI, lemma-symmetric-monoidal-cat-complexes, omitted diagram verification: second hexagon supplied explicitly by the sigma(p+q,r) calculation."
+   }
+  },
+  {
+   "text": "Set $\\overline B_{X,Y}=Q(B_{X,Y})$, with inverse $Q(B_{X,Y}^{-1})$. The inverse equations survive under $Q$. By step 1, a morphism in either variable is represented by a chain map and the quotient tensor is its tensor class; applying $Q$ to the naturality equation in step 3 proves naturality for every quotient morphism. Applying $Q$ to the two equalities in steps 4 and 5 gives exactly the two quotient hexagons, since step 1 defined the quotient associators and tensor on maps as their images. Thus $\\overline B$ is a braiding on the specified monoidal category $K_c(C)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GWP, lemma-symmetric-monoidal-homotopy-category: passage of the constraint equations to homotopy classes, written out."
+   }
+  },
+  {
+   "text": "For integer cochain complexes, $\\varepsilon(p+1)=-\\varepsilon(p)$ and the differential sign equations are $(p+1)q=pq+q$ and $p(q+1)=pq+p$ modulo $2$. The two coherence equations follow from $p(q+r)=pq+pr$ and $(p+q)r=pr+qr$. Therefore the canonical signs $(-1)^{pq}$ satisfy all the hypotheses, for negative integers as well as positive ones, and the summand formula in step 2 is exactly the claimed Koszul formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section section-symmetric-monoidal, displayed differential calculation before Tag 0FNI; integer specialization of the two explicit coherence identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-shape-total-tensor-homotopies",
+  "def-sfb-monoidal-category",
+  "def-weil-preadditive-category",
+  "lem-sfb-braiding-naturality",
+  "lem-sfb-braiding-hexagon"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section section-symmetric-monoidal, Tags 0FNI and 0GWP; explicit braided complex-shape generalization and correction of the missing sign coherence, using Mathlib BifunctorHomotopy."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homotopy category of complexes in a braided monoidal category is braided, Koszul sign braiding hexagon",
+   "results": "GradedObject.Monoidal.hexagon_forward (Mathlib.CategoryTheory.GradedObject.Braiding), BraidedCategory.ofBifunctor (Mathlib.CategoryTheory.Monoidal.Braided.Multifunctor), BraidedCategory.hexagon_forward: graded objects and generic API only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory (HomotopyCategory _ _)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'BraidedCategory \\(HomotopyCategory|SymmetricCategory \\(DerivedCategory|BraidedCategory \\(DerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy category of complexes over a braided monoidal category has the Koszul braiding satisfying hexagon identities",
+   "results": "Localization.Monoidal.map_hexagon_forward/reverse and GradedObject.braidedCategory: localization or unsigned graded braiding, not the signed complex/homotopy statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A braiding on homological complexes and on their homotopy category from Koszul signs",
+   "results": "GradedObject.Monoidal.braiding; BraidedCategory.ofBifunctor; generic braiding axioms; no Koszul homotopy braiding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyCategory\", \"braid\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"braid\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sign-valued bicharacter times a braiding gives the Koszul braiding on complexes and descends to the chain homotopy quotient",
+   "results": "ComplexShape.sigma/differential compatibility declarations and HasTensor; no hexagon theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyCategory.*[Bb]raid|[Bb]raid.*HomotopyCategory|[Bb]raid.*HomologicalComplex",
+   "results": "No hits in Mathlib/Algebra/Homology.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "braid|hexagon",
+   "results": "No hits in Mathlib/Algebra/Homology/Monoidal.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "HomotopyCategory.MonoidalCategory.braidedCategory"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "HomotopyCategory.MonoidalCategory.braidedCategory",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided",
+     "lines": [
+      240,
+      244
+     ],
+     "kind": "instance",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean",
+  "declaration": "HomotopyCategory.MonoidalCategory.braidedCategory",
+  "declarations": [
+   "HomotopyCategory.MonoidalCategory.braidedCategory"
+  ],
+  "statement": "noncomputable instance braidedCategory : BraidedCategory (HomotopyCategory C c) :=\n  .ofBifunctor (braiding C c) sorry sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; the upstream sorry is the two hexagon identities; a sorry-free braiding on HomotopyCategory C (up ℤ) exists upstream in WeilConjectures.Algebra.Homology.HomotopyCategory.Braided and SHEAF has homotopySymmetric (Sheaf.Algebra.Homology.RingedDerivedTensorNative), built on that one"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-asd-homotopy-category-koszul-braided",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the general-shape upstream instance assumes only differential-compatible flip signs, which need not satisfy hexagons; negated canonical signs fail already in degree zero over Q. Corrected the general statement with both multiplicativity identities and used sigma for a general additive index monoid, retaining the integer Koszul case. Wrote construction, both scalar hexagon checks and quotient argument. One new Mathlib leaf supplies shape-general tensor homotopies. Removed the unrelated etale derived-tensor definition dependency.",
+  "blueprint": "thm-asd-smooth-tensor.proof.md in main-20261015/sec-six-functors-basics/sk-prop-cohsm: opening displayed projection formula in the transpose construction uses the canonical derived tensor constraints; this item supplies their ordinary-complex and homotopy-category braided prerequisite, without changing the smooth-duality route. Existing blueprint.from is preserved. The ancestor command returns null for new nodes because this audit-created item has created.item=null; the new leaf records that exact output and describes the known ancestor in from.place.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O3-7f175a656",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-7f175a656 (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, the four cited statements, the upstream Braided.lean (lines 174-244), Mathlib ComplexShapeSigns (TensorSigns 117-126, the TotalComplexShape c c c instance 158-166, TotalComplexShapeSymmetry 290-302) and BifunctorHomotopy (hypotheses 28-37, declarations at lines 178 and 190), plus Stacks 0FNI, 0GWP and lemma-derived-tor-homotopy. The STATEMENT-DISPUTED correction is right. The upstream general instance assumes only σ_ε₁ and σ_ε₂. For the (c,c,c) shape these are exactly the item's two differential equations, and they still hold when σ is replaced by −σ. With −σ the hexagon on ℚ[0] would need −1 = 1, and degree-0 complexes have no homotopies, so the general upstream statement is false and the added multiplicativity hypotheses are needed. The integer Koszul case is kept exactly (step 7), and that is the only case the citer thm-asd-smooth-tensor needs. Dropping the stmt_dep def-kun-derived-tensor is correct because it was unused. I recomputed the step-2 chain-map coefficients: σ(p',q) against ε(q)σ(p,q), and ε(p)σ(p,q') against σ(p,q). The inverse uses β⁻¹, not β_{Y,X}. The hexagon scalars are σ(p,q+r) against σ(p,q)σ(p,r), and σ(p+q,r) against σ(q,r)σ(p,r). I type-checked both formulas of lem-sfb-braiding-hexagon against Mathlib's hexagon_forward and hexagon_reverse. The (c,c,c) associator is unsigned, and triple-summand detection is an explicit hypothesis. The new leaf is an exact one-declaration-per-clause specialisation (F = curriedTensor) and is strictly smaller than the item. It is not a duplicate of lem-sfb-total-tensor-homotopy, which covers only integer cochains in an abelian category with all colimits. Its blueprint.from.node is null, which matches what blueprint_refs.ancestor_for_item returns for this maintainer-created item. No SGA source is used and no changes were made. Stage 2 must deal with the false general Lean instance."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261024T185335-L-3513497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "DerivedCategory.symmetricCategory"
+  ],
+  "sorry_after": []
+ }
+}

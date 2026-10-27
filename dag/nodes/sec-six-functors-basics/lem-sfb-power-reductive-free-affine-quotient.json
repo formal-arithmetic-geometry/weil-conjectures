@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-power-reductive-free-affine-quotient",
+ "kind": "statement",
+ "title": "Universal invariant power lifting makes a free affine quotient affine",
+ "statement": "Let $R$ be a commutative ring, $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and let $G$ be a flat affine finitely presented $S$-group scheme [def-sc-group-scheme, def-weil-flat-morphism, pqf-def-affine-morphism, def-sbc-locally-finite-presentation], with group-object diagrams over $S$. Finite presentation means locally finite presentation, quasi-compactness and quasi-separatedness. Assume the following universal power-lifting property. For every commutative $R$-algebra $R'$, every equivariant surjection $E\\twoheadrightarrow F$ of arbitrary commutative $R'$-algebras with $G_{R'}$-actions, and every invariant $b\\in F^{G_{R'}}$, some $b^N$, $N\\geq1$, is the image of an invariant of $E$. Here actions are algebra coactions $\\rho:E\\to E\\otimes_{R'}\\Gamma(G_{R'},\\mathcal O)$ satisfying counit and coassociativity, invariants satisfy $\\rho(e)=e\\otimes1$, and equivariance means commuting with coactions. Let $X$ be an affine $S$-scheme with a right $G$-action free on every test $S$-scheme: $xg=x$ implies $g=1$. Form the fppf sheaf quotient $Y=X/G$, the sheafification of right orbits [def-pc-fppf-site, def-weil-pbc-sheafification]. Suppose $Y$ is an algebraic space [def-trf-algebraic-space], $q:X\\to Y$ has fppf local sections, and $(x,g)\\mapsto(x,xg)$ identifies $X\\times_SG$ with $X\\times_YX$ as sheaves. Then $Y$ is represented by an affine $S$-scheme, and $q$ is an affine finitely presented morphism. No finite-type hypothesis on $X\\to S$ is imposed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Alper, Adequate moduli spaces and geometrically reductive group schemes, Proposition 9.7.8, printed p.528, with Lemma 9.2.5(3) and Theorem 4.3.1 (power-lifting formulation of geometric reductivity and the adequate Serre criterion). The assertion that q is affine finitely presented is fppf descent from the trivial torsor projection. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-weil-flat-morphism",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale map $h_V\\to Y$ from a scheme $V$ [def-trf-algebraic-space]. Since $q$ has fppf local sections, the point $V\\to Y$ lifts to $X$ fppf locally: there are an fppf covering $\\{U_i\\to V\\}$ of schemes [def-pc-fppf-site] and sections $s_i\\in X(U_i)$ over the composites $U_i\\to Y$. By [lem-sfb-space-fppf-covering-calculus] (1), (4) and (3), the composites form an fppf family $\\{U_i\\to Y\\}$ of algebraic spaces. The torsor isomorphism gives, for each $T\\to U_i$ and $x\\in X(T)$ over $T\\to U_i\\to Y$, a unique $g\\in G(T)$ with $x=s_i|_Tg$: apply its inverse to $(s_i|_T,x)\\in(X\\times_YX)(T)$. Consequently $(u,g)\\mapsto(s_i(u)g,u)$, which lies over $Y$ because $q$ is invariant, identifies $U_i\\times_SG$ with $X\\times_YU_i$. The inverse sends $(x,u)$ to $(u,g)$ using this unique $g$. These formulas commute with all test maps and are mutually inverse, so the identification is an isomorphism of sheaves over $U_i$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Proposition 9.7.8: principal homogeneous space hypothesis, explicit local trivialization"
+   }
+  },
+  {
+   "text": "The identity section makes $G\\to S$ surjective; it is flat and locally finitely presented by hypothesis, hence a single fppf covering. By [lem-sfb-space-fppf-covering-calculus], each $U_i\\times_SG\\to U_i$ is fppf. Use [lem-weil-pbc-scheme-coproduct-family] to form $U=\\coprod_i U_i$. Its components are disjoint open subschemes. Flatness and local finite presentation are local on these source opens by their local definitions, so $U\\to Y$ is flat, locally finitely presented and surjective. The local models of Step 1 glue over these disjoint opens, giving $X\\times_YU\\simeq U\\times_SG$. The projection is flat and locally finitely presented by fppf base change. Apply [lem-sfb-representable-flat-lfp-fppf-descent] to the single surjective cover $U\\to Y$: $q$ is flat and locally finitely presented. Its local sections give surjectivity, so $\\{q\\}$ is itself an fppf cover. The same local models are affine by base change of $G\\to S$, using [lem-sfb-space-four-property-fppf-descent]; descent in that node makes $q$ affine. On every scheme test, [lem-weil-pbc-affine-morphism-permanence] makes an affine map quasi-compact and separated, hence quasi-separated. Thus $q$ is quasi-compact, quasi-separated and locally finitely presented, which is precisely finite presentation. All these assertions concern morphisms, and require no finite-type assumption on $X\\to S$.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-representable-flat-lfp-fppf-descent",
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Fppf locality of affineness and local finite presentation; torsor local models"
+   }
+  },
+  {
+   "text": "Since $X$ is affine it is quasi-compact, and $q$ is surjective. Apply [lem-sfb-algebraic-stack-quasicompact-surjection], regarding spaces as discrete stacks, to get quasi-compactness of $Y$. To check quasi-separatedness take the absolute diagonal $\\Delta_Y:Y\\to Y\\times_{\\operatorname{Spec}\\mathbf Z}Y$. The map $q\\times q$ to its target is fppf: factor it as two base changes of $q$ and use [lem-sfb-space-fppf-covering-calculus]. Its pullback of $\\Delta_Y$ is the map $X\\times_YX\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$. The source is $X\\times_SG$ and the target is $X\\times_{\\operatorname{Spec}\\mathbf Z}X$; both are affine by [lem-weil-pbc-fibre-product-affine-spectra]. A map of affine schemes is the spectrum of its homomorphism of global rings [def-weil-affine-spectrum], hence affine. By [lem-sfb-space-four-property-fppf-descent] the diagonal $\\Delta_Y$ is affine. On affine tests [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact. This is the quasi-separatedness of $Y$.",
+   "uses": [
+    "lem-sfb-algebraic-stack-quasicompact-surjection",
+    "lem-sfb-space-fppf-covering-calculus",
+    "def-weil-affine-spectrum",
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Proposition 9.7.8: qcqs prerequisite for Theorem 4.3.1, verified by the affine torsor relation"
+   }
+  },
+  {
+   "text": "Take any surjection $\\mathcal B\\twoheadrightarrow\\mathcal C$ of arbitrary quasi-coherent commutative algebras on $Y$, and $c\\in\\Gamma(Y,\\mathcal C)$. By [lem-sfb-affine-torsor-algebra-invariants] and Step 2 it pulls back to an equivariant surjection $E_{\\mathcal B}\\twoheadrightarrow E_{\\mathcal C}$ of $R$-algebras, with $c$ corresponding to an invariant $\\bar c$. Apply the assumed universal power-lifting property with $R'=R$: obtain $N>0$ and $e\\in E_{\\mathcal B}^G$ mapping to $\\bar c^N$. The natural invariant-section isomorphisms in the cited node give a section $b\\in\\Gamma(Y,\\mathcal B)$ whose image is $c^N$. The algebras quantified over here need not have finite type or descend from the base. Thus $Y$ has the global algebra-surjection power-lifting property.",
+   "uses": [
+    "lem-sfb-affine-torsor-algebra-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Proposition 9.7.8, power-lifting argument underlying Theorem 9.1.4 and Lemma 9.2.5(3)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-power-lifting-affineness] to $Y/S$: Step 3 gives both required compactness conditions and Step 4 gives power lifting for every quasi-coherent algebra surjection. Hence $Y$ is represented by an affine scheme. Its given structure map to $S=\\operatorname{Spec}R$ is a map between affine schemes, so it is affine by the spectrum description [def-weil-affine-spectrum]. This proves the asserted affine $S$-representability; the affine finite-presentation assertion for $q$ was established in Step 2.",
+   "uses": [
+    "lem-sfb-space-power-lifting-affineness",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Proposition 9.7.8, final adequate-Serre step; Lemma 4.1.8 and Theorem 4.3.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-representable-flat-lfp-fppf-descent",
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sfb-algebraic-stack-quasicompact-surjection",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-affine-torsor-algebra-invariants",
+  "lem-sfb-space-power-lifting-affineness",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Agent-written direct power-lifting assembly of Proposition 9.7.8, using Lemma 4.1.8 and Theorem 4.3.1; journal PDF read online, local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "adequate|geometric.*quotient|quotient.*affine",
+   "results": "{\"t\": \"2026-10-24T04:57:49Z\", \"tool\": \"grep\", \"query\": \"adequate|geometric.*quotient|quotient.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\"], \"digest\": \"a3207cb1c25a8a55\"}; Affine-space and affine-scheme instances, closed immersions from ring quotients and topological quotient maps do not give affineness of an fppf group-action quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fppf quotient of an affine scheme by a free geometrically reductive group scheme action is affine",
+   "results": "{\"t\": \"2026-10-24T04:57:49Z\", \"tool\": \"leansearch\", \"query\": \"The fppf quotient of an affine scheme by a free geometrically reductive group scheme action is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.isAffine_of_isAffineHom\", \"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.AffineScheme.of\"], \"digest\": \"8ccf72eed188155d\"}; Affine-space and affine-scheme instances, closed immersions from ring quotients and topological quotient maps do not give affineness of an fppf group-action quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T04:57:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec\"], \"digest\": \"89e96788b3d05575\"}; Affine-space and affine-scheme instances, closed immersions from ring quotients and topological quotient maps do not give affineness of an fppf group-action quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free action of a flat affine finitely presented group scheme satisfying universal invariant power lifting on an affine scheme has affine fppf quotient algebraic space",
+   "results": "{\"t\": \"2026-10-24T04:57:50Z\", \"tool\": \"leanfinder\", \"query\": \"A free action of a flat affine finitely presented group scheme satisfying universal invariant power lifting on an affine scheme has affine fppf quotient algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"e4f8d4f40a678792\"}; Affine-space and affine-scheme instances, closed immersions from ring quotients and topological quotient maps do not give affineness of an fppf group-action quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space with an affine torsor under a geometrically reductive affine group scheme is affine by the adequate Serre criterion",
+   "results": "{\"t\": \"2026-10-24T04:59:10Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space with an affine torsor under a geometrically reductive affine group scheme is affine by the adequate Serre criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.isAffine_Spec\"], \"digest\": \"418c76ab0dbe5f44\"}; Affine-space and affine-scheme instances, closed immersions from ring quotients and topological quotient maps do not give affineness of an fppf group-action quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adequate|geometric.*quotient|quotient.*affine",
+   "results": "{\"t\": \"2026-10-24T07:10:46Z\", \"tool\": \"grep\", \"query\": \"adequate|geometric.*quotient|quotient.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\"], \"digest\": \"a3207cb1c25a8a55\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine torsor under a geometrically reductive group over any commutative ring has affine quotient",
+   "results": "{\"t\": \"2026-10-24T07:10:47Z\", \"tool\": \"leansearch\", \"query\": \"An affine torsor under a geometrically reductive group over any commutative ring has affine quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddTorsor.noConfusion\", \"AffineSubspace.mk.noConfusion\", \"Rep.quotientToInvariantsFunctor_obj_V\", \"AddTorsor\", \"AffineSubspace.ctorIdx\", \"AddTorsor.mk\", \"AffineEquiv.noConfusionType\", \"AffineEquiv.noConfusion\"], \"digest\": \"caf0d0dea8be18ec\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T07:10:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec\"], \"digest\": \"89e96788b3d05575\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free affine group scheme action with universal invariant power lifting has affine fppf quotient without finite type assumptions",
+   "results": "{\"t\": \"2026-10-24T07:10:51Z\", \"tool\": \"leanfinder\", \"query\": \"A free affine group scheme action with universal invariant power lifting has affine fppf quotient without finite type assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.instIsAffine\"], \"digest\": \"ea4dcffb7a5bbaf6\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-dvr-reductive-linear-affine-quotient",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Proposition 9.7.8, printed p.528, with Lemma 9.2.5(3) and Theorem 4.3.1 (power-lifting formulation of geometric reductivity and the adequate Serre criterion). The assertion that q is affine finitely presented is fppf descent from the trivial torsor projection. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf.",
+   "via": [
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-power-reductive-free-affine-quotient",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-base, arbitrary-algebra statement. Five-step torsor-descent/power-lifting proof; two statement-only prerequisites, no Mathlib matches. Existing field-only adequate-moduli lemmas cannot be specialized here. No finite-type or Noetherian assumptions introduced.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Proposition 9.7.8, printed p.528, with Lemma 9.2.5(3) and Theorem 4.3.1 (power-lifting formulation of geometric reductivity and the adequate Serre criterion). The assertion that q is affine finitely presented is fppf descent from the trivial torsor projection. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Steps 1-3 verify torsor geometry and qcqs; Steps 4-5 realize the power-lifting/adequate-Serre input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic affineness/base-change permanence on scheme tests; verifies the torsor geometry without replacing any constructible-direct-image route step."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic existence of scheme coproducts with disjoint open components, used to replace a trivializing family by a single surjective fppf map for the cited descent lemma."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic tensor-product formula for affine scheme fibre products; used only to check the absolute diagonal after the torsor cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-7a9986307",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-7a9986307 (reviewer sub-agent of L); spot-checked: Read the item, both new unsplit nodes, every cited statement, and Alper (journal PDF fetched online, read via pdftotext): Def 3.1.1 p.494, Lemma 4.1.8(3)⇒(2) pp.502-503, Thm 4.3.1 pp.505-506 (qcqs spaces, no Noetherian or finite-type hypothesis), Lemma 9.2.5 p.522, Prop 9.7.8 p.528. Also read Stacks 04W8 and 01IB; both tag/label pairs checked. The item statement is identical to live (unsplit, no proof); this is not a re-split. lem-sfb-space-power-lifting-affineness = Alper 4.1.8 + 4.3.1 with Y=Spec Z; it is true and no field-free duplicate exists (serre-affineness is the H^1 criterion; affine-target-adequacy, global-power-lifting-adequacy and adequately-affine are field-only). lem-sfb-affine-torsor-algebra-invariants is true by fppf descent along q on affine X: coaction from the descent iso, invariants as the equalizer, surjectivity from right exactness of pullback and exactness of Γ on affine X. Existing groupoid/action algebra-descent nodes are over a field, so it is not a duplicate. Neither new node restates a clause of the item. Steps 2-5 check: flat lfp descent along the coproduct U→Y; affineness by four-property descent; pullback of Δ_Y along q×q is X×_Y X→X×X, recomputed (affine to affine); quasi-compact surjection; power lifting with R'=R; then the new criterion. FIX (one fault): Step 1 assumed an fppf covering {U_i→Y} 'as assumed', but the item only gives fppf local sections. Rewrote Step 1 to take an etale atlas V→Y, lift on an fppf covering of V, and make the composites fppf by covering calculus (1),(4),(3). Cites def-trf-algebraic-space, def-pc-fppf-site and lem-sfb-space-fppf-covering-calculus; elementary set to false; proof_deps extended. Batch-5 flags: all are general definitions or fppf-descent/quasi-compactness lemmas for spaces and stacks; none is part of the trace formula or Poincare duality, so accepted. The three tool_uses (lem-weil-pbc-affine-morphism-permanence, lem-weil-pbc-scheme-coproduct-family, lem-weil-pbc-fibre-product-affine-spectra) are generic Mathlib scheme facts; accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PowerReductiveFreeAffineQuotient",
+  "declaration": "AlgebraicGeometry.power_reductive_free_affine_quotient",
+  "declarations": [
+   "AlgebraicGeometry.affineRightOrbitPresheaf",
+   "AlgebraicGeometry.affineRightQuotient",
+   "AlgebraicGeometry.affineRightQuotientMap",
+   "AlgebraicGeometry.power_reductive_free_affine_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PowerReductiveFreeAffineQuotient.lean",
+  "statement": "theorem power_reductive_free_affine_quotient (R : CommRingCat.{u}) (G : Scheme.{u}) [G.Over (Spec R)] [GrpObj (G.asOver (Spec R))] [IsAffine G] [Flat (G ↘ Spec R)] [LocallyOfFinitePresentation (G ↘ Spec R)] [QuasiCompact (G ↘ Spec R)] [QuasiSeparated (G ↘ Spec R)] (hpower : ∀ (R' : Type u) [CommRing R'] [Algebra R R'] (E F : Type u) [CommRing E] [CommRing F] [Algebra R' E] [Algebra R' F] (ρE : E →ₐ[R'] E ⊗[R'] (R' ⊗[R] Γ(G, ⊤))) (ρF : F →ₐ[R'] F ⊗[R'] (R' ⊗[R] Γ(G, ⊤))), (TensorProduct.rid R' E).toLinearMap ∘ₗ (Coalgebra.counit (R := R') (A := R' ⊗[R] Γ(G, ⊤))).lTensor E ∘ₗ ρE.toLinearMap = LinearMap.id → (TensorProduct.assoc R' E (R' ⊗[R] Γ(G, ⊤)) (R' ⊗[R] Γ(G, ⊤))).toLinearMap ∘ₗ ρE.toLinearMap.rTensor (R' ⊗[R] Γ(G, ⊤)) ∘ₗ ρE.toLinearMap = (Coalgebra.comul (R := R') (A := R' ⊗[R] Γ(G, ⊤))).lTensor E ∘ₗ ρE.toLinearMap → (TensorProduct.rid R' F).toLinearMap ∘ₗ (Coalgebra.counit (R := R') (A := R' ⊗[R] Γ(G, ⊤))).lTensor F ∘ₗ ρF.toLinearMap = LinearMap.id → (TensorProduct.assoc R' F (R' ⊗[R] Γ(G, ⊤)) (R' ⊗[R] Γ(G, ⊤))).toLinearMap ∘ₗ ρF.toLinearMap.rTensor (R' ⊗[R] Γ(G, ⊤)) ∘ₗ ρF.toLinearMap = (Coalgebra.comul (R := R') (A := R' ⊗[R] Γ(G, ⊤))).lTensor F ∘ₗ ρF.toLinearMap → ∀ f : E →ₐ[R'] F, Function.Surjective f → f.toLinearMap.rTensor (R' ⊗[R] Γ(G, ⊤)) ∘ₗ ρE.toLinearMap = ρF.toLinearMap ∘ₗ f.toLinearMap → ∀ b : F, ρF b = b ⊗ₜ[R'] (1 : R' ⊗[R] Γ(G, ⊤)) → ∃ (N : ℕ) (e : E), 1 ≤ N ∧ ρE e = e ⊗ₜ[R'] (1 : R' ⊗[R] Γ(G, ⊤)) ∧ f e = b ^ N) (X : Over (Spec R)) [IsAffine X.left] (a : X ⊗ G.asOver (Spec R) ⟶ X) (hunit : ∀ (T : Over (Spec R)) (x : T ⟶ X), lift x 1 ≫ a = x) (hmul : ∀ (T : Over (Spec R)) (x : T ⟶ X) (g h : T ⟶ G.asOver (Spec R)), lift (lift x g ≫ a) h ≫ a = lift x (g * h) ≫ a) (hfree : ∀ (T : Over (Spec R)) (x : T ⟶ X) (g : T ⟶ G.asOver (Spec R)), lift x g ≫ a = x → g = 1) (Y : AlgebraicSpace (Spec R)) (q : yoneda.obj X ⟶ Y.obj.obj) (equot : (affineRightQuotient (G.asOver (Spec R)) X a).obj ≅ Y.obj.obj ⋙ uliftFunctor.{u + 1, u}) (hq : Functor.whiskerRight q uliftFunctor.{u + 1, u} = affineRightQuotientMap (G.asOver (Spec R)) X a ≫ equot.hom) (hsections : ∀ (T : Over (Spec R)) (y : Y.obj.obj.obj (op T)), ∃ K : Sieve T, K ∈ (Scheme.fppfTopology.over (Spec R)) T ∧ ∀ (V : Over (Spec R)) (b : V ⟶ T), K b → ∃ x : V ⟶ X, q.app (op V) x = Y.obj.obj.map b.op y) (htorsor : IsPullback (yoneda.map (fst X (G.asOver (Spec R)))) (yoneda.map a) q q) : ∃ (U : Over (Spec R)) (_ : IsAffine U.left) (e : yoneda.obj U ≅ Y.obj.obj) (f : X ⟶ U), yoneda.map f ≫ e.hom = q ∧ IsAffineHom f.left ∧ LocallyOfFinitePresentation f.left ∧ QuasiCompact f.left ∧ QuasiSeparated f.left",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The universal power-lifting hypothesis is expanded into arbitrary algebra coactions, their counit/coassociativity equations, equivariance and invariant positive-power lifting. R' tensor_R Gamma(G,O) has the canonical base-changed Hopf structure. Quotient helpers construct the orbit coequalizer and its fppf sheafification with its unit; equot and hq identify it with Y and q. Right action laws and freeness quantify over all test schemes. The conclusion gives an affine representing scheme and the actual representing arrow of q with affine, lfp, qc and qs properties. IsAffine G is equivalent to affineness of its structure map because Spec R is affine. No finite-type restriction on X or test algebras."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-124bebd36",
+  "group": "NA",
+  "result": "pass",
+  "note": "Only change: item lean record + new module PowerReductiveFreeAffineQuotient.lean; lean.statement verbatim. Clause-by-clause match with node (Alper Prop 9.7.8): G affine (IsAffine G ≡ IsAffineHom over affine Spec R) flat lfp+qc+qs GrpObj; hpower over arbitrary R',E,F (universe u restriction is in a hypothesis only), base-changed Hopf R'⊗Γ(G) from Mathlib Group/Affine instance, counit/coassoc equations identical to field-only HopfAction.Counital/Coassociative; equivariant surjection, invariant b, N≥1; right action laws (xg)h=x(gh), freeness on all tests; Y/q pinned to actual coequalizer+presheafToSheaf via equot/hq; fppf local sections; IsPullback torsor square; conclusion affine U, representing f affine+LFP+QC+QS; no finite-type hypothesis. stmt_dep records checked (tensor product dep is mathlib-status TensorProduct). No hollow defs, sorry only, source/blueprint docstrings with 5-step proof. Note: quotient helpers parallel FreeFlatGroupSpaceQuotient's groupSpaceQuotient (theorem-owned, left sheaf action), so not reusable; accepted. Not recompiled (no file changed)."
+ }
+}

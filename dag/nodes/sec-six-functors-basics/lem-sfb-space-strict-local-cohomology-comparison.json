@@ -1,0 +1,353 @@
+{
+ "id": "lem-sfb-space-strict-local-cohomology-comparison",
+ "kind": "statement",
+ "title": "Strict-local coherent cohomology comparison for algebraic spaces",
+ "statement": "Let $Y$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], let $f:X\\to Y$ be a separated morphism of finite type from an algebraic space [def-trf-algebraic-space, lem-sfb-space-flat-proper-fp-locality], and let $F$ be coherent on $X$. Coherent means quasi-coherent [def-trf-space-quasi-coherent-module] and, on an affine etale cover by spectra of Noetherian rings, associated to finitely generated modules [def-weil-pbc-noetherian-ring, def-weil-finitely-generated-module]. Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point [def-weil-geometric-point], and put $A=\\mathcal O_{Y,\\bar y}$, the geometric stalk of the structure sheaf [def-weil-pbc-geometric-stalks]. Let $c:\\operatorname{Spec}A\\to Y$ be the canonical morphism obtained from the compatible maps $\\Gamma(U,\\mathcal O_U)\\to A$ for affine pointed etale neighbourhoods $U$ of $\\bar y$. Put $X_A=X\\times_Y\\operatorname{Spec}A$, with projections $h:X_A\\to X$ and $f_A:X_A\\to\\operatorname{Spec}A$ [lem-trf-space-fibre-products-etale-covers, def-weil-affine-spectrum], and $F_A=h^*F$. All module sheaves, tensor pullbacks and direct images are on the small etale ringed sites [def-trf-space-etale-module-functors]; $R^qf_*$ and $H^q$ are computed by injective resolutions in all structure-sheaf module sheaves [def-sp-injective-resolutions]. Then $A$ is a Noetherian local ring, $c$ is flat, $X_A$ is locally Noetherian, and $F_A$ is coherent. For every $q\\geq0$ there is a canonical $A$-linear isomorphism, natural in $F$,\n$$(R^qf_*F)_{\\bar y}\\xrightarrow{\\sim}H^q(X_A,F_A).$$\nIt is the comparison induced by flat base change along $c$ and the closed-geometric-point sections comparison on the strictly henselian local base $\\operatorname{Spec}A$; its map from a pointed neighbourhood is the usual cohomological pullback along $X_A\\to X\\times_Y U$. No properness assumption is imposed on $f$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08B1 (lemma-formal-functions-stalk), proof, strict-local reduction before formal functions; Tag 073K (lemma-flat-base-change-cohomology); spaces-properties.tex Tag 08AH (lemma-Noetherian-local-ring-Noetherian), locally on Y. The same reduction only needs separated finite type, not properness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-trf-space-etale-module-functors",
+  "def-sp-injective-resolutions",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-affine-spectrum",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-space-geometric-stalk-models",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-sfb-space-strict-local-flatness",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Noetherian affine open $W=\\operatorname{Spec}R\\subset Y$ containing the image $y$ of $\\bar y$. By [lem-weil-pbc-etale-local-ring-triples] the ring $A$ and its maps from pointed neighbourhoods are the residue-triple colimit over $W$. By [lem-weil-pbc-strict-henselization-triples] this is the strict henselization of $R_{\\mathfrak p}$ and is strictly henselian local, with the specified lift $\\bar s:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}A$ of $\\bar y$ over the closed point. The ring $R_{\\mathfrak p}$ is Noetherian: every ideal is the extension of its contraction to $R$, so generators of that contraction generate the localized ideal. Now [lem-sc-strict-henselization-noetherian] gives that $A$ is Noetherian. The canonical $R\\to A$ is flat by [lem-sbc-affine-strict-henselization-structural-flat]. Since $c$ factors through $W$, the affine flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] proves that $c$ is flat.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08B1 first reduction; Tag 08AH; etale-cohomology.tex Tag 04HX; more-algebra.tex Tags 06LJ and 07QM."
+   }
+  },
+  {
+   "text": "The definition of finite type makes $f$ quasi-compact; its separatedness implies quasi-separatedness by [lem-sfb-space-quasiseparated-test-calculus]. Base change preserves quasi-compactness by [lem-sfb-space-quasicompact-fppf-local] and quasi-separatedness by the former node, so $f_A$ is qcqs. To check local Noetherianity and coherence, start from the affine etale cover $\\{V_i\\to X\\}$ of the coherence hypothesis, with $\\Gamma(V_i,\\mathcal O)$ Noetherian and $F|_{V_i}$ associated to a finitely generated module $M_i$. The preimage of $W$ in $V_i$ is open; cover it by principal affine opens $V=D(s)\\subset V_i$. On each, $F|_V$ is associated to $(M_i)_s$, still finitely generated, and these $V$ are affine etale charts over the fixed affine open $W$ of Step 1 covering $f^{-1}W$. Their maps $V\\to W$ are locally of finite type by the chart definition. The base-changed charts $V\\times_W\\operatorname{Spec}A$ have coordinate rings generated over $A$ by the images of finitely many generators of the coordinate ring of $V$ over that of $W$. They are locally of finite type over $\\operatorname{Spec}A$, hence locally Noetherian by [pqf-lem-locnoeth-lft]; cover each by affine opens with Noetherian coordinate rings, as in the definition of local Noetherianity, and restrict to them. These affine schemes are etale over $X_A$ by base change and cover $X_A=f^{-1}W\\times_W\\operatorname{Spec}A$. By [lem-sfb-space-module-pullback-quasicoherent], $F_A$ is quasi-coherent. On each such chart $F_A$ is associated to the base change of $(M_i)_s$, and then to its restriction to the smaller affine open; finite generating lists tensor to finite generating lists, so $F_A$ is coherent in the stated chartwise sense.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-quasiseparated-test-calculus",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08B1 strict-local reduction; spaces-morphisms.tex Tags 03HF, 03KL, 03KK; morphisms.tex Tag 01T6; spaces-properties.tex Tag 03GA."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-flat-higher-image-base-change] to $g=c$, using the flatness of Step 1 and the qcqs hypothesis verified in Step 2. For each $q\\geq0$ it gives the canonical natural isomorphism $c^*R^qf_*F\\simeq R^q(f_A)_*F_A$. Apply [lem-sfb-space-affine-base-higher-image-sections] to $f_A$ and $F_A$ to identify $\\Gamma(\\operatorname{Spec}A,R^q(f_A)_*F_A)$ with $H^q(X_A,F_A)$. All hypotheses here are qcqs and quasi-coherence; properness is unnecessary.",
+   "uses": [
+    "lem-sfb-space-flat-higher-image-base-change",
+    "lem-sfb-space-affine-base-higher-image-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 073K (lemma-flat-base-change-cohomology) and 08EX (lemma-quasi-coherence-higher-direct-images-application)."
+   }
+  },
+  {
+   "text": "Put $N=R^qf_*F$ and $T=\\operatorname{Spec}A$. Apply [lem-weil-pbc-strictly-henselian-sections-stalk] to the underlying abelian sheaf of $c^*N$: the germ $\\Gamma(T,c^*N)\\to(c^*N)_{\\bar s}$ is an isomorphism. Apply the same result to $\\mathcal O_T$. Its germ identifies $(\\mathcal O_T)_{\\bar s}$ with $\\Gamma(T,\\mathcal O_T)=A$. Under this identification the structural stalk map $A=(\\mathcal O_Y)_{\\bar y}\\to(\\mathcal O_T)_{\\bar s}=A$ is the identity: for each pointed affine neighbourhood it sends its section to exactly its structural image in the defining colimit $A$. The pullback-stalk formula [lem-sfb-ringed-topos-pullback-stalk] now gives $(c^*N)_{\\bar s}=N_{\\bar y}\\otimes_A A\\cong N_{\\bar y}$. Invert the germ isomorphism and compose with Step 3. This gives the required $A$-linear isomorphism $N_{\\bar y}\\to H^q(X_A,F_A)$.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-sfb-ringed-topos-pullback-stalk",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08B1 strict-local sections paragraph; etale-cohomology.tex Tag 03QO; sites-modules.tex Tag 05V5."
+   }
+  },
+  {
+   "text": "For an affine pointed neighbourhood $U$, use [lem-sc-etale-triple-strict-henselization-identification] on its etale algebra after localizing an affine base chart at $y$. It identifies the strict henselization at its lifted point with $A$, compatibly with the maps from $U$. Thus $T\\to U$ is flat by the structural-flat argument of Step 1. Both $U\\to Y$ and $T\\to U$ are flat, so successive-flat-base-change compatibility in [lem-sfb-space-flat-higher-image-base-change] identifies exchange along $c$ with exchange first to $U$ and then to $T$. Its affine cohomology formula sends $a\\otimes1$ to pullback of $a$ along $X_A\\to X\\times_YU$. The germ maps of Step 4 send a representative to its class in the pointed-neighbourhood colimit. This proves exactly the asserted formula. Affine pointed neighbourhoods compute the stalk by [lem-weil-pbc-etale-local-ring-triples]; for a general $U$, restriction to an affine neighbourhood of its marked point gives the same formula by functoriality of pullback. Every component is natural in $F$ and linear over its structure ring, so the resulting isomorphism is natural and $A$-linear.",
+   "uses": [
+    "lem-sfb-space-flat-higher-image-base-change",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-sc-etale-triple-strict-henselization-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K canonical map; sites-cohomology.tex Tag 0E47 (remark-compose-base-change-horizontal); etale-cohomology.tex Tag 04HX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-quasiseparated-test-calculus",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-flat-higher-image-base-change",
+  "lem-sfb-space-affine-base-higher-image-sections",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-sfb-ringed-topos-pullback-stalk",
+  "def-weil-pbc-geometric-stalks",
+  "lem-sc-etale-triple-strict-henselization-identification",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08B1 (lemma-formal-functions-stalk), strict-local reduction, using Tags 073K, 08EX and 03QO; properness is not used in this reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact separated finite type algebraic space over a locally Noetherian scheme, coherent cohomology over the strict localization equals the geometric stalk of the higher direct image",
+   "results": "OK: 8 hits; AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective, AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.isLocalization_basicOpen_of_qcqs; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary scheme stalks, stalkwise flatness or sections on scheme limits; none computes higher coherent cohomology on an algebraic space over a geometric strict localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\", \"stalk\"",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary scheme stalks, stalkwise flatness or sections on scheme limits; none computes higher coherent cohomology on an algebraic space over a geometric strict localization"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*local.*cohom|cohom.*strict.*local|AlgebraicSpace",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary scheme stalks, stalkwise flatness or sections on scheme limits; none computes higher coherent cohomology on an algebraic space over a geometric strict localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent higher direct image geometric stalk equals cohomology over the strict henselization for algebraic spaces",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom_assoc, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply, AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary scheme stalks, stalkwise flatness or sections on scheme limits; none computes higher coherent cohomology on an algebraic space over a geometric strict localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change to the strictly henselian local ring computes the geometric stalk of coherent higher direct images on algebraic spaces",
+   "results": "OK: 8 hits; AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.stalkMap_toStalk_apply, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary scheme stalks, stalkwise flatness or sections on scheme limits; none computes higher coherent cohomology on an algebraic space over a geometric strict localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change for higher direct images of quasi coherent modules on quasi compact quasi separated algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T21:17:23Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change for higher direct images of quasi coherent modules on quasi compact quasi separated algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat\"], \"digest\": \"89bbca56cabc7f45\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T21:18:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"higherDirectImage\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*base.*change.*cohom|cohom.*flat.*base.*change",
+   "results": "{\"t\": \"2026-10-23T21:20:31Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|flat.*base.*change.*cohom|cohom.*flat.*base.*change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher quasi coherent cohomology commutes with flat base change for algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T21:20:31Z\", \"tool\": \"leansearch\", \"query\": \"Higher quasi coherent cohomology commutes with flat base change for algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\"], \"digest\": \"f2b99accc098eb62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a quasi coherent sheaf on an algebraic space over an affine ring commutes with flat scalar extension",
+   "results": "{\"t\": \"2026-10-23T21:22:21Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a quasi coherent sheaf on an algebraic space over an affine ring commutes with flat scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"94e1d77daddf93ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-formal-functions-geometric-stalk",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces. Supporting input in the proof of Tag 0A4T: the completed geometric stalk is computed by infinitesimal-fibre cohomology (Tag 08B1). Supporting input: Tag 08B1 first reduction, canonical strict-local base change before completion.",
+   "via": [
+    "lem-sfb-space-formal-functions-geometric-stalk",
+    "lem-sfb-noetherian-space-fibre-cohomology-bound",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-strict-local-cohomology-comparison",
+  "worker": "stage1",
+  "group": "Q30",
+  "summary": "Kept the statement and its nonproper scope. Read Stacks 08B1, 073K, 08AH, 08EX, 03QO and the strict-henselization inputs. Added only the general higher flat-base-change input: the existing flat-direct-image node covers degree zero and the derived flat-space theorem assumes flatness of f. Proved the geometric-stalk identification by the explicit identity structural stalk map and verified the neighbourhood pullback formula.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability direct-images proof (3), below the inherited moduli/formal-functions prerequisite chain: the strict-local reduction preceding completion in Tag 08B1. No chapter or unit route is changed. Whole-blueprint searches for strict local, flat base change, cohomology base change and 073K found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic The etale local ring at a geometric point as a colimit over etale algebras with a point used for the strict-local coherent cohomology reduction; this is a foundational tool, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic The colimit over etale algebras with a point and a residue embedding is strictly henselian used for the strict-local coherent cohomology reduction; this is a foundational tool, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Strict henselization preserves Noetherianity of local rings used for the strict-local coherent cohomology reduction; this is a foundational tool, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-sbc-affine-strict-henselization-structural-flat",
+    "why": "Generic Flatness of the canonical affine strict henselization structural ring map used for the strict-local coherent cohomology reduction; this is a foundational tool, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic Flatness of a scheme morphism on affine charts used for the strict-local coherent cohomology reduction; this is a foundational tool, not a replacement for a unit step."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic Finite type over a locally Noetherian base used for the strict-local coherent cohomology reduction; this is a foundational tool, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Generic Global sections over a strictly henselian local scheme are the stalk at the closed point used for the strict-local coherent cohomology reduction; this is a foundational tool, not a replacement for a unit step."
+   },
+   {
+    "node": "def-weil-pbc-geometric-stalks",
+    "why": "Generic Geometric stalks used for the strict-local coherent cohomology reduction; this is a foundational tool, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-sc-etale-triple-strict-henselization-identification",
+    "why": "Generic etale-neighbourhood invariance of the algebraic strict henselization, needed to verify flatness of the factor T to U; it does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "def-weil-pbc-geometric-stalks",
+  "lem-sc-etale-triple-strict-henselization-identification"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-03d889a81",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-03d889a81 (reviewer sub-agent of L); spot-checked: Read in full. Statement and stmt_deps are unchanged from base. Source checks: Stacks 08B1's strict-local reduction (proof l.4320-4345) uses no properness, and 073K (l.1704-1790) assumes only g flat and f qcqs. Step checks: Step 1 gives A=(R_p)^sh via the triples nodes; A is Noetherian by lem-sc-strict-henselization-noetherian; c is flat via the structural-flat node with A=H by initiality. Step 2: qcqs follows from the fp-locality, qsep-calculus and qc-fppf nodes. Step 3: the new 073K node gives c^*R^q ≅ R^q f_A*, and affine-base sections gives Γ = H^q. Step 4: the sections-stalk node applies to c^*N and O_T; the identity structural stalk map was verified via the section T→T×_Y U; pullback-stalk gives N_ȳ⊗_A A. Step 5: U→Y is étale hence flat, T→U is flat, and the composition and affine a⊗1 clauses give the pullback formula. New node lem-sfb-space-flat-higher-image-base-change matches 073K(1),(2)+0E47 exactly. Small cases checked: g=id, q=0, f=id, Y′ open, Y′=∅, affine q=0. It is not a duplicate: the q=0 073K node covers degree zero only, the 08IR node needs f flat, the 0A1K node needs G flat over Y, the Künneth and 0APJ nodes do not apply. It is strictly smaller than the item. Batch-5: all listed citations are general definitions or foundations (algebraic spaces, fibre products, QCoh, étale module functors, qcqs calculus, affine Leray, ringed-topos stalks), reaching sec-trace-formula only via def-trf-algebraic-space or def-trf-geometric-morphism. They are not steps of the trace formula or Poincaré duality, so accepted. All nine tool uses accepted as generic. FIXes: (1) E1, item step 2 took arbitrary charts over W and used finite generation of F there, but coherence gives it only on the hypothesis cover. Charts are now principal opens D(s) of that cover over W, refined to Noetherian affine opens; pqf-def-locnoeth added to step-2 uses and proof_deps. (2) B3, new node's 'derived exchange' now cites def-weil-abstract-derived-category in the statement and stmt_deps. Note for its splitter: split through a derived-form flat-g base-change node (per-degree rule of 2026-10-21).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceStrictLocalCohomologyComparison",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.derived_comparison",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.point",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.ringIso",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.base",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.baseMap",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.space",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.projection",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.structureMap",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.stalk",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.sections",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.neighbourhoodMap",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.OrdinaryFormula",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.ordinary_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.ordinary",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.source",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.target",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.imageComplex",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.sectionsComplex",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.ResolutionFormula",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.resolutionMap",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.derived_comparison",
+   "AlgebraicGeometry.AlgebraicSpace.StrictLocalCoherent.comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceStrictLocalCohomologyComparison.lean",
+  "statement": "theorem derived_comparison [IsLocallyNoetherian Y.left] (hsep : MapIsSeparated f) (hft : MapIsFiniteType f) [HasDerivedCategory.{w} (ModuleCat.{u} (Scheme.strictHenselizationRing t))] (M : X.Modules) (hqc : M.IsQuasicoherent) (hfin : M.IsFiniteType) (I : InjectiveResolution (X.smallModuleRestriction.obj M)) (J : InjectiveResolution ((smallModuleTensorPullback (projection Y t f)).obj (X.smallModuleRestriction.obj M))) (a : ((smallModuleTensorPullback (projection Y t f)).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ J.cocomplex) (ha : (smallModuleTensorPullback (projection Y t f)).map (I.ι.f 0) ≫ a.f 0 = J.ι.f 0) : IsIso (DerivedCategory.Q.map (HomologicalComplex.extendMap (resolutionMap Y t f I.cocomplex J.cocomplex a) ComplexShape.embeddingUpNat))",
+  "branch": "sheaf-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Derived comparison is the localization of the actual section-pullback map on arbitrary injective resolutions. comparison states the natural A-linear per-degree isomorphisms and all geometric/coherence conclusions. OrdinaryFormula fixes every pointed-chart germ and tensor-unit projection; ResolutionFormula fixes every cocycle class. All constructions use recorded small-site equivalences, canonical structural maps and germ-normalized stalks. Added statement dependencies are landed interfaces; no statement correction or new notion is required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-829b1b063",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Re-delivery of d092 (returned for H2 only). The Lean is byte-identical (SHA 8b70c6ff…); the node changes only by adding the 5 requested definition owners to stmt_deps (def-trf-scheme-algebraic-space, def-sfb-space-sheaf-fibre-product, def-sfb-space-small-ringed-model, def-sfb-space-derived-module-calculus, def-sfb-space-morphism-properties); the dep records are identical to side-live. An independent owner audit by full-name match finds every project declaration used now owned by a cited definition node; only Mathlib-status owner records (Flat, HasDerivedCategory) are uncited, an advisory. Mechanical theorem-stmt_dep finding: ringIso is the .choose of the ∃! theorem strictLocalChartComparison, i.e. the unique germ-preserving ring iso constructed by lem-sfb-space-strict-local-flatness, so PASS on that point. Mathematics re-checked clause by clause: locally Noetherian Y; separated+finite-type f with no properness; QC∧finite type = coherent; A, c, X_A, h, f_A, F_A; derived functors in all modules; the 5 geometric conclusions; natural A-linear per-degree iso pinned by ResolutionFormula/OrdinaryFormula; derived_comparison IsIso with independent w; edge cases q=0, empty X, nonproper f, empty Y. No hollow defs, 4 sorry-only theorems, docstrings complete, statement verbatim. Advisory: stalk_additive not in lean.declarations. No compile (nothing changed)."
+ }
+}

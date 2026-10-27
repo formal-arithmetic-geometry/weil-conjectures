@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-finite-image-nowhere-dense",
+ "kind": "statement",
+ "title": "Finite morphisms preserve closed nowhere dense subsets",
+ "statement": "Let $f:Y\\to X$ be a finite morphism of schemes [def-pc-scheme], [def-weil-finite-integral-morphism]. Let $T\\subseteq|Y|$ be closed and nowhere dense, meaning that the interior of its closure in $|Y|$ is empty. Then $f(T)\\subseteq|X|$ is closed and nowhere dense. No surjectivity, reducedness, integrality, Noetherianity or flatness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HX, morphisms-lemma-image-nowhere-dense-finite, statement and proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-closed-map-finite-fibres], $f(T)$ is closed. Choose an affine open cover $X=\\bigcup V_\\alpha$. By [lem-weil-pbc-finite-morphism-permanence](a) the restriction $f^{-1}(V_\\alpha)\\to V_\\alpha$ is finite. The subset $T\\cap f^{-1}(V_\\alpha)$ is closed in this open subspace and has empty interior: any open contained in it would also be open in $Y$ and contained in $T$. Its image is $f(T)\\cap V_\\alpha$. It therefore suffices to prove the result for affine $X$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, first paragraph; Tag 03HP local assertion expanded directly."
+   }
+  },
+  {
+   "text": "Assume $X$ affine. Apply [lem-weil-pbc-finite-affine-section-cover]: write $b:X\\prime\\to X$ for its surjective finite locally free cover, $a:Y\\prime=Y\\times_X X\\prime\\to Y$ for the other projection, and $f\\prime:Y\\prime\\to X\\prime$ for the base-changed map. It gives a closed immersion $j:Y\\prime\\hookrightarrow W$ and a finite locally free $q:W\\to X\\prime$ with $qj=f\\prime$, where finitely many closed subschemes of $W$ cover it and each maps isomorphically to $X\\prime$.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-section-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, second paragraph, applying Tag 03HW (lemma-massage-finite)."
+   }
+  },
+  {
+   "text": "Finite locally free means finite, flat and locally of finite presentation [def-pc-finite-locally-free]; thus $a$ and $b$ are open by [lem-weil-pbc-flat-lfp-open]. Put $T\\prime=a^{-1}(T)$. It is closed by continuity. If an open $O\\subseteq Y\\prime$ lies in $T\\prime$, its open image $a(O)$ lies in $T$, so $O=\\varnothing$. Hence $T\\prime$ is nowhere dense (Tag 03HR). A closed immersion is a homeomorphism onto a closed subset [def-weil-closed-immersion], so $A=j(T\\prime)$ is closed in $W$; any open of $W$ contained in $A$ has empty inverse image under $j$, hence is empty itself. Thus $A$ is nowhere dense (Tag 03HQ).",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, second paragraph; Topology Tags 03HR and 03HQ, with their elementary arguments written out."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nowhere-dense-section-cover-image] to $q:W\\to X\\prime$, its finite closed section cover from step 2, and the closed nowhere dense $A$ of step 3. It gives that $q(A)=f\\prime(T\\prime)$ is closed and nowhere dense in $X\\prime$.",
+   "uses": [
+    "lem-sfb-nowhere-dense-section-cover-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, final paragraph (finite closed section-cover case)."
+   }
+  },
+  {
+   "text": "The actual scheme-point identity [lem-weil-pbc-base-change-image], applied to $Y\\prime=Y\\times_X X\\prime$ and $T\\subseteq|Y|$, gives $f\\prime(T\\prime)=b^{-1}(f(T))$. If $U\\subseteq X$ is open and contained in $f(T)$, then $b^{-1}(U)$ is open and contained in this nowhere dense set, hence empty. Surjectivity of $b$ gives $U=\\varnothing$. Since $f(T)$ is closed, this proves it is nowhere dense on the affine base.",
+   "uses": [
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, second paragraph, displayed image equality and descent through b; Topology Tag 03HR."
+   }
+  },
+  {
+   "text": "Return to the original affine cover. Step 5 applied to each restriction of step 1 shows that $f(T)\\cap V_\\alpha$ has empty interior in $V_\\alpha$. Any open $U\\subseteq X$ contained in $f(T)$ has $U\\cap V_\\alpha=\\varnothing$ for every $\\alpha$, hence $U=\\varnothing$. Together with closedness from step 1 this is exactly the desired closed nowhere dense conclusion. The argument also covers an empty source or empty target.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, first paragraph; Topology Tag 03HP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-affine-section-cover",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-weil-closed-immersion",
+  "lem-sfb-nowhere-dense-section-cover-image",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HX, lemma-image-nowhere-dense-finite, full proof; elementary topology expanded from Tags 03HP, 03HQ and 03HR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism of schemes maps a closed nowhere dense subset to a closed nowhere dense subset",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] {s : Set ↥Y},\\n  s.Finite → (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s).Finite\", \"doc\": \"Let $f : X \\\\to Y$ be a finite morphism of schemes. For any finite subset $S \\\\subseteq Y$, the preimage $f^{-1}(S)$ is a finite subset of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] (y : ↥Y),\\n  (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' {y}).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [JacobsonSpace ↥Y] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  closedPoints ↥X ⊆ ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' closedPoints ↥Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsClosedMap)\", \"doc\": \"The property that a scheme morphism is a closed map (in the topological sense) is Zariski local at the target.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [JacobsonSpace ↥Y],\\n  JacobsonSpace ↥X\", \"doc\": \"If $ Y $ is a Jacobson space and $ f: X \\to Y $ is a morphism locally of finite type, then $ X $ is also a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsClosedMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes that is universally closed is also a closed map, meaning the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: closedness of finite morphisms and finiteness of fibres omit preservation of nowhere density. IsInducing.isNowhereDense_image assumes a topological inducing map, which a finite etale map need not be."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a closed nowhere dense subset under a finite morphism is closed and nowhere dense",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Topology.IsInducing.isNowhereDense_image\", \"module\": \"Mathlib.Topology.GDelta.Basic\", \"type\": \"[TopologicalSpace Y] {f : X → Y} (hf : Topology.IsInducing f) {s : Set X} (h : IsNowhereDense s) :\\n  IsNowhereDense (f '' s)\", \"doc\": \"Suppose $ f : X \\\\to Y $ is a function inducing the topology on $ X $, meaning a subset $ U \\\\subseteq X $ is open if and only if $ f(U) $ is open in $ Y $. If $ s \\\\subseteq X $ is a nowhere dense set (\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [UniversallyClosed f] : IsClosedMap f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes that is universally closed is also a closed map, meaning the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"IsClosed.relImage_of_finite\", \"module\": \"Mathlib.Topology.UniformSpace.Basic\", \"type\": \"[TopologicalSpace α] [TopologicalSpace β] {s : SetRel α β} (hs : IsClosed s) {t : Set α} (ht : t.Finite) :\\n  IsClosed (s.image t)\", \"doc\": \"In topological spaces $\\\\alpha$ and $\\\\beta$, if $R \\\\subseteq \\\\alpha \\\\times \\\\beta$ is a closed relation and $t \\\\subseteq \\\\alpha$ is a finite set, then the image of $t$ under $R$ (i.e., the set $\\\\{b \\\\in \"}\n  {\"name\": \"IsClosedMap\", \"module\": \"Mathlib.Topology.Defs.Basic\", \"type\": \"(f : X → Y) : Prop\", \"doc\": \"A function $ f : X \\\\to Y $ is a closed map if the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $. Formally, for every closed set $ U \\\\subseteq X $, the set $ f(U) = \\\\{ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [JacobsonSpace Y] [LocallyOfFiniteType f] : closedPoints X ⊆ f ⁻¹' closedPoints Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.map\", \"module\": \"Mathlib.Topology.Sets.Closeds\", \"type\": \"(f : β → α) (hf : Continuous f) (c : IrreducibleCloseds β) : IrreducibleCloseds α\", \"doc\": \"For a continuous function $ f : \\\\beta \\\\to \\\\alpha $ and an irreducible closed subset $ c \\\\subseteq \\\\beta $, this constructs the irreducible closed subset of $ \\\\alpha $ whose underlying set is the closu\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: closedness of finite morphisms and finiteness of fibres omit preservation of nowhere density. IsInducing.isNowhereDense_image assumes a topological inducing map, which a finite etale map need not be."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, IsClosed",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: closedness of finite morphisms and finiteness of fibres omit preservation of nowhere density. IsInducing.isNowhereDense_image assumes a topological inducing map, which a finite etale map need not be."
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]owhere[Dd]ense|nowhere_dense|nowhere dense",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: closedness of finite morphisms and finiteness of fibres omit preservation of nowhere density. IsInducing.isNowhereDense_image assumes a topological inducing map, which a finite etale map need not be."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphisms preserve nowhere density of closed subsets so any dense open in the source contains the inverse image of a dense open in the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] {s : Set ↥Y},\\n  s.Finite → (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s).Finite\", \"doc\": \"Let $f : X \\\\to Y$ be a finite morphism of schemes. For any finite subset $S \\\\subseteq Y$, the preimage $f^{-1}(S)$ is a finite subset of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"Topology.IsInducing.isNowhereDense_image\", \"module\": \"Mathlib/Topology/GDelta/Basic\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y},\\n  Topology.IsInducing f → ∀ {s : Set X}, IsNowhereDense s → IsNowhereDense (f '' s)\", \"doc\": \"Suppose $ f : X \\\\to Y $ is a function inducing the topology on $ X $, meaning a subset $ U \\\\subseteq X $ is open if and only if $ f(U) $ is open in $ Y $. If $ s \\\\subseteq X $ is a nowhere dense set (\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U V : X.Opens},\\n  Dense ↑U → ∀ (hU' : U ≤ V), AlgebraicGeometry.IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: closedness of finite morphisms and finiteness of fibres omit preservation of nowhere density. IsInducing.isNowhereDense_image assumes a topological inducing map, which a finite etale map need not be."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphisms of schemes send closed nowhere dense subsets to closed nowhere dense subsets",
+   "results": {
+    "t": "2026-10-23T22:59:52Z",
+    "tool": "leanfinder",
+    "query": "Finite morphisms of schemes send closed nowhere dense subsets to closed nowhere dense subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.finite_preimage",
+     "AlgebraicGeometry.IsFinite.finite_preimage_singleton",
+     "AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints",
+     "AlgebraicGeometry.IsFinite.instOfIsClosedImmersion",
+     "AlgebraicGeometry.finite_appTop_of_universallyClosed",
+     "AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget",
+     "AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion"
+    ],
+    "digest": "e01e66f627a9e9f5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: closed-map and finite-fibre results omit nowhere density; an inducing map is not an arbitrary finite morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, IsNowhereDense",
+   "results": {
+    "t": "2026-10-23T22:59:51Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsFinite, IsNowhereDense",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: closed-map and finite-fibre results omit nowhere density; an inducing map is not an arbitrary finite morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a nowhere dense closed set by a finite scheme morphism is nowhere dense",
+   "results": {
+    "t": "2026-10-23T22:59:51Z",
+    "tool": "leansearch",
+    "query": "The image of a nowhere dense closed set by a finite scheme morphism is nowhere dense",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Topology.IsInducing.isNowhereDense_image",
+     "IsNowhereDense",
+     "IsNowhereDense.mono",
+     "AlgebraicGeometry.Scheme.Hom.denseRange",
+     "AlgebraicGeometry.Scheme.Hom.finite_preimage",
+     "AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints",
+     "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+     "AlgebraicGeometry.Scheme.Hom.isClosedMap"
+    ],
+    "digest": "0f1123650bec78d8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: closed-map and finite-fibre results omit nowhere density; an inducing map is not an arbitrary finite morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "nowhere.?dense|isNowhereDense",
+   "results": {
+    "t": "2026-10-23T22:59:51Z",
+    "tool": "grep",
+    "query": "nowhere.?dense|isNowhereDense",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: closed-map and finite-fibre results omit nowhere density; an inducing map is not an arbitrary finite morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite closed section cover of a finite locally free morphism sends a closed nowhere dense subset to a nowhere dense image",
+   "results": {
+    "t": "2026-10-23T23:07:48Z",
+    "tool": "leansearch",
+    "query": "A finite closed section cover of a finite locally free morphism sends a closed nowhere dense subset to a nowhere dense image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Topology.IsInducing.isNowhereDense_image",
+     "IsNowhereDense",
+     "IsNowhereDense.mono",
+     "IsNowhereDense.image_val",
+     "IsClosedMap.isCoveringMapOn_of_openPartialHomeomorph",
+     "IsNowhereDense.closure",
+     "AlgebraicGeometry.Scheme.Hom.isClosedMap",
+     "IsNowhereDense.subset_of_closed_isNowhereDense"
+    ],
+    "digest": "b05e245db0120f21"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: closed-map and finite-fibre results omit nowhere density; an inducing map is not an arbitrary finite morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-translated-cartier-parameter-family",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity. Supporting input: Point-avoidance step: for a fixed h the bad set W minus W-prime is closed nowhere dense; its finite image can be removed from V to obtain an entire good fibre.",
+   "via": [
+    "lem-sfb-translated-cartier-parameter-family",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-image-nowhere-dense",
+  "worker": "stage1",
+  "summary": "Statement unchanged; follows Stacks 03HX using the existing 03HW finite affine section cover, existing finite closed-map, flat-lfp-open and base-change-image Mathlib nodes, and one new statement-only finite section-cover sublemma. Topological pullback, embedding and local arguments are explicit elementary steps. An initially drafted duplicate image/preimage leaf was removed after the final whole-DAG declaration search found the exact existing node.",
+  "blueprint": "Supports the point-avoidance clause of lem-sfb-translated-cartier-parameter-family through the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry. Whole-blueprint searches found no equivalent node. ancestor returns None for this non-imported ancestry; retained as returned. Steps follow Stacks 03HX: affine localization, 03HW replacement, nowhere-density transfer, closed-section case, image equality and open-surjective descent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-affine-section-cover",
+    "why": "Generic Stacks 03HW finite-morphism construction required by the 03HX proof; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic finite base-change permanence for affine localization; the unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-affine-section-cover",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-90f5f5a3e",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-90f5f5a3e (reviewer sub-agent of L); spot-checked: I read Stacks 03HW (massage-finite) and 03HX (image-nowhere-dense-finite) in full, plus the item, the new node, all 9 cited statements and the citer. The item statement is unchanged from live and has exactly the 03HX hypotheses. Live and side-live still hold the item unsplit and there is no repair note, so nothing supersedes this delivery. Step 1 uses the closed-map clause of finite-closed-map-finite-fibres and permanence (a) for the affine reduction. Step 2 matches every piece of lem-weil-pbc-finite-affine-section-cover (surjective finite locally free cover of the base and of Y, closed immersion over X', finite locally free W with a finite closed section cover). Step 3 gets openness of a and b from flat-lfp-open, and the transfers of 03HR and 03HQ are written out correctly. Step 5 uses the arbitrary-subset form of base-change-image with the right projection order, then surjectivity of b. Step 6 is the gluing of 03HP. The new node lem-sfb-nowhere-dense-section-cover-image is the final 03HX paragraph, statement-only and strictly smaller than the item. I re-derived its shrinking argument (V open in W, by injectivity of q on each good section) and checked it with 0 or 1 sections and with coincident sections. Its five searches are logged and the DAG holds no duplicate. I accept both declared tool uses: 03HW as a generic construction, and permanence, which is a Mathlib leaf. No SGA is cited. I made no fixes. coord/dag-sync.md is absent from the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteImageNowhereDense",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isClosed_isNowhereDense_image_of_isFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteImageNowhereDense.lean",
+  "statement": "theorem Scheme.Hom.isClosed_isNowhereDense_image_of_isFinite {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] (T : Set Y) (hT : IsClosed T) (hnow : IsNowhereDense T) : IsClosed (f '' T) ∧ IsNowhereDense (f '' T)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d956b5d9",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Statement matches Stacks 03HX and the node exactly: IsFinite f, T closed and IsNowhereDense (interior (closure T) = ∅, as the node glosses it); conclusion IsClosed (f '' T) ∧ IsNowhereDense (f '' T). Single declared universe u, no extra assumptions. lean.statement is verbatim the file signature; node unchanged from side-live apart from the new lean record. No duplicate in Mathlib or the project Lean trees. Proof is exactly sorry; docstrings carry the source place, the blueprint id and the six proof steps; imports exist in live. Report has a real Worker report and the standard second-reading note. Edge cases (empty T, empty source/target, T = univ) are covered. Not compiled here (no file changed); the worker reports a clean compile."
+ }
+}

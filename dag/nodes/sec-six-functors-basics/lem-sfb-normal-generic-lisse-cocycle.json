@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-normal-generic-lisse-cocycle",
+ "kind": "statement",
+ "title": "Fully faithful generic restriction and Galois cocycles for lisse normed coefficients",
+ "statement": "Let $X$ be a nonempty connected normal Noetherian scheme [def-pc-scheme, def-weil-connected-scheme, pqf-def-locnoeth], where Noetherian means locally Noetherian and quasi-compact, where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Then $X$ is integral [def-pc-integral-scheme]. Write $k=\\mathcal O_{X,\\eta}$ for its function field, choose a separable closure $k^s/k$ [def-pd-separable-closure], and put $G_k=\\operatorname{Aut}_k(k^s)$ with its profinite Krull topology. For any nonarchimedean normed field $A$ (a field with a multiplicative absolute value satisfying $|a+b|\\leq\\max(|a|,|b|)$), put $R_{A,T}=p_T^*\\underline A$, where $\\underline A(S)=C(S,A)$ for profinite $S$ [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients]. All module objects and lisse modules are those of [sk-def-sfb-module-objects, def-sfb-lisse-coefficient-module] on the small pro-etale site [def-weil-pbc-proetale-site]. Use all continuous functions with the norm topology. Restriction $j^*$ along $j:\\operatorname{Spec}k\\to X$ is $A$-linear and fully faithful on lisse $R_A$-modules and reflects isomorphisms. Every such module $L$ has a single finite rank $n\\geq0$, equal to the dimension of\n$$V_A(L)=\\Gamma((\\operatorname{Spec}k^s)_{\\mathrm{proet}},L|_{k^s})$$\nover $A$. Every nonempty affine pro-etale object of $X$ has nonempty generic fibre. In any basis of $V_A(L)$, the descent isomorphism over $\\operatorname{Spec}k^s\\times_k\\operatorname{Spec}k^s$ is an invertible matrix $c_L\\in\\operatorname{GL}_n(C(G_k,A))$; evaluation gives a continuous homomorphism $\\sigma_L:G_k\\to\\operatorname{GL}_n(A)$ with $\\sigma_L(gh)=\\sigma_L(g)\\sigma_L(h)$. For lisse $L,M$, restriction identifies $\\operatorname{Hom}_{R_A}(L,M)$ with exactly the constant matrices $T:V_A(L)\\to V_A(M)$ satisfying $T\\sigma_L(g)=\\sigma_M(g)T$ for every $g\\in G_k$. Changing a basis gives the usual conjugation and change-of-coordinate isomorphisms. Thus $L\\mapsto(V_A(L),\\sigma_L)$ is an $A$-linear fully faithful functor to continuous finite-dimensional $G_k$-representations, with arrows all equivariant linear maps. The regular module has $V=A$ and cocycle $1$; direct sums have direct-sum vector spaces and block-sum cocycles. Rank zero and rectangular matrices with an empty dimension are included. Every nonarchimedean normed field is totally disconnected, with balls of radius smaller than the distance separating distinct points both open and closed. The specified pulled-back coefficient ring has the canonical continuous-function realization $R_{A,X}(U)=C(|U|,A)$ [lem-weil-pbc-condensed-field-continuous-realization].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent expansion of Lemma 7.4.10 and the descent framework of Lemma 7.4.7, pp. 70–71; uses the separately recorded normal generic-section and separable-Cech inputs."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-pc-integral-scheme",
+  "def-pd-separable-closure",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-sfb-field-separable-cech-nerve",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-continuous-ring-canonical-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The minimal-closed-subset statement implies the descending chain condition on closed subsets (apply it to the set of terms of a strictly descending chain). Thus the underlying space of $X$ is Noetherian. The normal-component lemma makes $X$ a finite disjoint union of clopen normal integral schemes. Since $X$ is nonempty and connected there is exactly one component. Hence $X$ is integral, and its generic local ring is its function field $k$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-trf-normal-topologically-noetherian-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OZ, lemma-Noetherian-topology, and 0357, lemma-normal-locally-finite-nr-irreducibles"
+   }
+  },
+  {
+   "text": "For distinct $a,b\\in A$, put $r=|a-b|>0$. The ball $B(a,r)=\\{x:|x-a|<r\\}$ contains $a$ and excludes $b$. It is open by the metric topology. Its complement is open: if $x\\notin B(a,r)$ and $|y-x|<r$, the ultrametric inequality applied both ways gives $|y-a|=|x-a|\\geq r$. Thus these balls are clopen and separate distinct points, so every connected subset of $A$ is a singleton. Apply the coefficient-realization lemma to this totally disconnected normed field: $R_{A,T}$ is canonically the continuous-function ring sheaf on every scheme $T$, including all the slice objects used below. Pulling back the coefficient ring and a free module means restricting this sheaf and its standard basis; the identification $f^{-1}p_T^*\\underline A=p_{T'}^*\\underline A$ is the composition identification for inverse images, since $p_Tf=p_{T'}$.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p. 6; explicit ultrametric separation and composition of inverse images"
+   }
+  },
+  {
+   "text": "The generic-section lemma applies because $X$ is normal, integral and locally Noetherian. It gives natural ring bijections $R_A(U)\\to R_A(U_\\eta)$ for every affine pro-etale $U\\to X$. If $U$ is nonempty its two constant functions $0,1$ are distinct. If $U_\\eta$ were empty its section ring would have just one element, contradicting this bijection. Thus every nonempty affine object has nonempty generic fibre. In particular this argument also applies to every nonempty affine refinement of an overlap of two objects; no affineness of the overlap itself is required.",
+   "uses": [
+    "lem-sfb-normal-generic-continuous-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent generic-section argument using the previously split continuous-section lemma; normal generic-point framework of Lemma 7.4.10"
+   }
+  },
+  {
+   "text": "Take lisse modules $L,M$. By their definition choose a common affine covering $\\{U_i\\to X\\}$ trivializing both (refine the fibre products of their two trivializing coverings by affine opens). Let their ranks on $U_i$ be $n_i,m_i$. On the slice over $U_i$, the free-matrix lemma identifies module maps with $m_i\\times n_i$ matrices over $R_A(U_i)$. Given $t:j^*L\\to j^*M$, its restriction to $(U_i)_\\eta$ therefore has such a matrix with entries in $R_A((U_i)_\\eta)$. Extend each entry uniquely by Step 3, obtaining a local map $t_i$. On any affine object $W$ over $U_i\\times_XU_j$, express both maps in one pair of pulled-back bases. Their generic restrictions agree, and injectivity of the entry restriction for $W$ implies equality. These affine objects cover the overlap, so equality holds there by sheaf separatedness. For a section of $L$ on any object $T$, restrict to $T\\times_XU_i$, apply $t_i$, and glue the resulting matching sections of $M$. Uniqueness of gluing gives a map natural in $T$, additive and $R_A$-linear, restricting to $t$. The same entrywise injectivity proves uniqueness. Thus $j^*$ induces bijections on Hom sets. These are $A$-linear, since all entry restrictions preserve sums and multiplication by constants. If $j^*t$ is invertible, extend its inverse; faithfulness makes both composites identities. Hence $j^*$ reflects isomorphisms.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "lem-sfb-normal-generic-continuous-sections",
+    "def-weil-pbc-topos",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix extension and sheaf-gluing argument; Lemma 7.4.7 descent framework, not an assertion quoted from that lemma"
+   }
+  },
+  {
+   "text": "By the separable-Cech lemma, $v:\\operatorname{Spec}k^s\\to\\operatorname{Spec}k$ is a cover and $L|_{k^s}\\cong R_A^n$ for some finite $n$. Its global sections are $A^n$, so $V_A(L)$ has dimension $n$. Each nonempty $U_i$ in a trivializing affine cover has nonempty generic fibre by Step 3. Its base change $T_i=(U_i)_\\eta\\times_k k^s$ is nonempty: a field extension is faithfully flat, as seen by choosing a $k$-basis of a nonzero affine coordinate algebra and observing that tensoring it with $k^s$ is nonzero. On $T_i$ the two trivializations give inverse rectangular matrices of continuous $A$-valued functions, by the free-matrix lemma and Step 2. Evaluate at any topological point of $T_i$ to obtain inverse matrices over the field $A$. Row reduction then forces $n_i=n$. The same reasoning applies to any other nonempty trivializing object after affine refinement. This proves the asserted single finite rank; it includes $n=0$.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10 and the separately split separable-Cech coordinates; agent rank detection by evaluated inverse matrices"
+   }
+  },
+  {
+   "text": "Choose a basis of $V_A(L)$ and use the corresponding free trivialization over $k^s$. Pull it back along both projections of $k^s\\times_k k^s$. Comparing these two bases is an isomorphism, hence by the free-matrix lemma gives a matrix with a matrix inverse over the overlap section ring. The separable-Cech lemma identifies that ring with $C(G_k,A)$, and the triple-overlap ring with $C(G_k^2,A)$, with the face convention $c(gh)=c(g)c(h)$. Comparison of the first and third pulled-back bases equals the composite comparisons through the second, so the descent identity is exactly this equation. Evaluation gives invertible matrices $\\sigma_L(g)$ satisfying $\\sigma_L(gh)=\\sigma_L(g)\\sigma_L(h)$. The entries are continuous by membership in $C(G_k,A)$. Equivalently this is continuity into $\\operatorname{GL}_n(A)$ with its subspace topology in $M_n(A)$: a map into a subspace is continuous precisely when its composite with the inclusion is. Also $\\sigma_L(1)=1$, since this matrix is invertible and equals its square.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, group Cech nerve; explicit basis-comparison cocycle calculation in the convention of the cited coordinates lemma"
+   }
+  },
+  {
+   "text": "Over $k^s$, a map $L\\to M$ is exactly a constant rectangular matrix $T$ by the separable-Cech lemma. It comes from a map over $k$ precisely when its two pullbacks agree after the descent identifications, namely $Tc_L=c_MT$ in $M_{m\\times n}(C(G_k,A))$. Indeed necessity is functoriality of restriction. Conversely, for a section over any object of $(\\operatorname{Spec}k)_{\\mathrm{proet}}$, apply $T$ after pulling it back to the covering obtained from $v$. The displayed compatibility makes the images match on the double overlap; the sheaf axiom glues them uniquely. Uniqueness gives naturality, addition and scalar compatibility, hence a module map. Evaluation identifies the displayed equality of continuous functions with $T\\sigma_L(g)=\\sigma_M(g)T$ for every $g$. Step 4 now identifies these maps over $k$ with the maps on $X$.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "def-weil-pbc-topos",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.7 descent framework and Example 4.1.10; explicit equalizer argument for morphisms only, without invoking effective object descent"
+   }
+  },
+  {
+   "text": "If a basis is replaced by one whose column vectors are obtained using $P\\in\\operatorname{GL}_n(A)$, coordinates become $P^{-1}v$ and the cocycle becomes $P^{-1}c_LP$. For bases changed by $P$ on $L$ and $Q$ on $M$, the arrow matrix becomes $Q^{-1}TP$; substituting gives the same intertwining equation. Thus the action on the vector space of sections is independent of coordinates, and restrictions give a functor. On arrows its identities and composition are $I$ and matrix multiplication, and its linear combinations are the usual ones, so it is $A$-linear and fully faithful by Step 7. For the regular module the standard basis pulls back to the same unit section along both projections, giving $V=A$ and $c=1$. On direct sums concatenate bases: sections are $V_L\\oplus V_M$ and the cocycle is $\\operatorname{diag}(c_L,c_M)$. For rank zero there is one empty square matrix, its identity is its inverse, and every rectangular matrix with an empty dimension is the unique zero map. All formulas above therefore include these cases.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent coordinate, regular-module, direct-sum and empty-matrix calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sfb-normal-generic-continuous-sections",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-ringed-site-free-matrix-scalar-extension",
+  "def-weil-pbc-topos",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-field-separable-cech-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit generic matrix extension and Cech descent assembly from existing normal generic-section and separable-Cech inputs; Lemmas 7.4.7 and 7.4.10 are the framework, not exact normed-field statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generic restriction of locally finite free continuous coefficient module sheaves on a normal integral locally Noetherian scheme is fully faithful and gives continuous Galois cocycles",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules; AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules; LightCondMod.LocallyConstant.fullyFaithfulFunctor; LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; SheafOfModules.fullyFaithfulForget; CondensedMod.LocallyConstant.fullyFaithfulFunctor; LightCondMod.LocallyConstant.instFullModuleCatFunctor; CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend matrices of morphisms of lisse pro etale sheaves uniquely from the function field and identify generic descent with continuous representations of the absolute Galois group",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Cover.hom_ext; AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.Scheme.hom_ext_of_forall; AlgebraicGeometry.Scheme.Modules.hom_ext; AlgebraicGeometry.Scheme.Modules.hom_ext_iff; StandardEtalePair.hom_ext; CategoryTheory.RanIsSheafOfIsCocontinuous.hom_ext",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic restriction of lisse normed field coefficient sheaves on a normal scheme is fully faithful",
+   "results": "[leansearch] OK 8 hit(s); LightCondSet.LocallyConstant.functorFullyFaithful; CondensedSet.LocallyConstant.functorFullyFaithful; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; CategoryTheory.fullyFaithfulSheafToPresheaf; CategoryTheory.fullyFaithfulSheafCompose; SheafOfModules.fullyFaithfulForget; AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules; CategoryTheory.fullyFaithfulSheafComposeCompSheafToPresheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"FullyFaithful\"",
+   "results": "[loogle] OK 11 hit(s); CategoryTheory.fullyFaithfulSheafToPresheaf; CategoryTheory.fullyFaithfulSheafCompose; CategoryTheory.fullyFaithfulSheafComposeCompSheafToPresheaf; SheafOfModules.fullyFaithfulForget; SheafOfModules.fullyFaithfulForget_preimage_val; AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace; AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace_preimage_hom; AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules; AlgebraicGeometry.SpecModulesToSheafFullyFaithful; CategoryTheory.GrothendieckTopology.IsLocalSite.fullyFaithfulConstantSheaf; CategoryTheory.GrothendieckTopology.IsLocalSite.fullyFaithfulCoconstantSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(generic|functionField).*(lisse|[Ff]ullyFaithful)|(lisse|proetale).*cocycle",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(generic|functionField).*(lisse|FullyFaithful)|(lisse|proetale).*cocycle",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf forgetful full faithfulness, discrete condensed modules, etale algebra extension and Galois topology do not assert this generic lisse-module statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic restriction of finite locally free pro etale continuous coefficient modules and continuous absolute Galois group representations",
+   "results": "8 hits: ContinuousLinearMap.continuous_restrictScalars, ContinuousLinearMap.restrictScalars, InfiniteGalois.restrictNormalHom_continuous, InfiniteGalois.mulEquivToLimit_symm_continuous, Rep.instPreservesProjectiveObjectsActionModuleCatSubtypeMemSubgroupResSubtype, InfiniteGalois.profiniteGalGrp, ContinuousCohomology.I_obj_V_isModule, ModuleCat.Tilde.toOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf forgetful full faithfulness, discrete condensed modules, etale algebra extension and Galois topology do not assert this generic lisse-module statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"FullyFaithful\"",
+   "results": "11 hits: CategoryTheory.fullyFaithfulSheafToPresheaf, CategoryTheory.fullyFaithfulSheafCompose, CategoryTheory.fullyFaithfulSheafComposeCompSheafToPresheaf, SheafOfModules.fullyFaithfulForget, SheafOfModules.fullyFaithfulForget_preimage_val, AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace, AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace_preimage_hom, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf forgetful full faithfulness, discrete condensed modules, etale algebra extension and Galois topology do not assert this generic lisse-module statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic restriction of lisse modules over continuous nonarchimedean field coefficients on a normal integral scheme is fully faithful and gives Galois matrix cocycles",
+   "results": "8 hits: LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, LightCondSet.LocallyConstant.functorFullyFaithful, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondMod.LocallyConstant.instFullModuleCatFunctor, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, CondensedMod.LocallyConstant.instFullModuleCatFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf forgetful full faithfulness, discrete condensed modules, etale algebra extension and Galois topology do not assert this generic lisse-module statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend morphisms of finite locally free pro etale sheaves uniquely from the function field using extension of continuous matrix entries",
+   "results": "8 hits: StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.hom_ext, AlgebraicGeometry.Scheme.Etale, StandardEtalePair.hom_ext_iff, AlgebraicGeometry.Spec.basicOpen_hom_ext, StandardEtalePair.homEquiv, AlgebraicGeometry.Scheme.instCategoryEtale, StandardEtalePair.homEquiv_apply_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf forgetful full faithfulness, discrete condensed modules, etale algebra extension and Galois topology do not assert this generic lisse-module statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-continuous-algcl-monodromy",
+  "date": "2026-10-22",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; old proof Steps 2–3: matrix extension, rank detection and separable-closure cocycles",
+   "via": [
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-generic-lisse-cocycle",
+  "worker": "stage1",
+  "summary": "Reused existing generic continuous-section, separable-Cech, free-matrix and component lemmas; explicit matrix extension/gluing, generic rank detection and descent equalizer arguments prove all clauses without new nodes. All-continuous coefficients, incomplete fields and empty matrix dimensions retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; old proof Steps 2–3: matrix extension, rank detection and separable-closure cocycles",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic tool: supplies Noetherian topology from the scheme hypothesis; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic tool: supplies the clopen integral-component decomposition; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Generic tool: realizes the actual all-continuous coefficient ring for arbitrary normed A; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic tool: allows sectionwise construction and gluing of internal-module maps; no replacement of the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-300da21d5",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-300da21d5 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, no new nodes, statement unchanged from base. Not superseded: the item is unsplit and unreviewed in side-live and in the live DAG. Not dropped: absent from route-pivot-dropped. There is no repair note. Read every cited statement (noetherian-closed-subsets leaf, trf components 0357, condensed-field realization, normal-generic-continuous-sections, lisse def, free-matrix lemma, field-separable-Cech, topos def, internal-module equivalence) and Bhatt–Scholze 7.4.7 and 7.4.10 on pp. 70–71; the proof is correctly marked as an agent strengthening of them. Step 1: minimal elements give the DCC, then clopen integral components, so connected X is integral. Step 2: ultrametric balls of any radius r>0 are clopen, so A is totally disconnected and the realization lemma applies. Step 3: C(nonempty,A) has 0≠1 while C(∅,A) is a singleton, so generic fibres are nonempty. Step 4: j is affine (η lies in every nonempty affine open), so (U_i)_η is affine. Generic matrix entries extend uniquely; overlaps are handled by affine refinement and injectivity, then sheaf gluing, giving full faithfulness and reflection of isomorphisms. Step 5: on T_i=(U_i)_η⊗k^s, which is nonempty, inverse rectangular matrices evaluated at a point force n_i=n. Step 6: the cocycle in GL_n(C(G,A)) uses the lemma's face convention; σ is continuous and σ(1)=1. Step 7: constant T descends exactly when Tc_L=c_MT, by gluing along v. Step 8: change of basis, regular module, sums and rank 0. Tested Spec k, trivial norm, incomplete A, rank 0, empty charts. The only off-route statement is the declared tool use trf-normal-topologically-noetherian-components, accepted. Batch-5 finding: the same node, lem-trf-normal-topologically-noetherian-components, is the generic Stacks 0357 component decomposition. Its closure has no trace-formula or Poincaré content (it is its own only sec-trace-formula node; no trace-transport or batch-4 targets), so it is genuinely outside the assumptions and accepted. Minor non-faults: review_split.py reports false 'no such node' errors because the chapter directories are symlinks; the composition-of-inverse-images remark in Step 2 is subsumed by the realization lemma."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalGenericLisseCocycle",
+  "declaration": "AlgebraicGeometry.ProEtale.normal_generic_lisse_cocycle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.genericMap",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.genericModule",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.geometricSections",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.automorphism_over",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.automorphism",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.RestrictionAssertions",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.FiberFunctor",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.FiberFunctor.IsNormalized",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.RankAssertions",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.HomAssertions",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.coefficientSections",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.sectionAction",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.HasDescentMatrix",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.CocycleAssertions",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.BasisChangeAssertions",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.UnitSumAssertions",
+   "AlgebraicGeometry.ProEtale.NormalGenericLisse.Assertions",
+   "AlgebraicGeometry.ProEtale.normal_generic_lisse_cocycle"
+  ],
+  "file": "lean/Sheaf/Paper/NormalGenericLisseCocycle.lean",
+  "statement": "theorem normal_generic_lisse_cocycle (X : Scheme.{u}) [ConnectedSpace X] [IsNoetherian X] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) : IsIntegral X ∧ ∀ hX : IsIntegral X, @NormalGenericLisse.Assertions.{u} X hX",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main conjunction first proves integrality, then quantifies over its proof to name the actual function field without assuming integrality. Assertions expands every node clause. The existing lisse/representation categories and constant scalar action are reused. The normalized fibre functor is identified with actual sections on the closure object, and its action and arrows are fixed by actual restriction maps; the descent matrix is fixed by the two Cech vertex restrictions and the adjoint-normalized coefficient ring coordinates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53d4d2977",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Re-delivery of the fd0bc2a3e42e H2 RETURN; the repair is exactly as instructed. New def node def-sfb-field-separable-cech-nerve is existing:true on the unchanged Sheaf.Paper.FieldSeparableCechCoordinates and owns closureObject/closureArrow/object/power/cumulative/testPoint/AreCoordinates. All seven exist in side-live; the statement matches lines 108-110 verbatim; the TeX matches the Lean (Cech nerve, Fin q powers, take-j cumulative products, ev_g test points, both AreCoordinates conjuncts) and asserts no existence. Its fields match the def-sfb-continuous-set-presheaf precedent, and its 5 stmt_deps are def nodes present live and side-live. The item now cites the def node instead of the theorem, which stays in proof_deps. The item Lean file is byte-identical (sha256 614810…) to the returned delivery; the item node differs from side-live only in stmt_deps and lean; all dependency records are identical to side-live. No competing owner exists live or side-live. Independent re-read of all 357 lines: hypotheses exact (ConnectedSpace, IsNoetherian, normal stalks); integrality conjunct; RestrictionAssertions; RankAssertions; nonempty generic fibres; V pinned to sections at Spec Ω; θ/c/σ pinned to the actual descent and test points; Hom = intertwining matrices; basis change; unit/sum pinned via biproduct projections; clopen balls; IsIso canonical comparison. Edge cases covered: rank 0, empty matrices, empty scheme, trivial norm, incomplete A. Advisory only: BasisChangeAssertions is a linear-algebra identity; base-era theorem stmt_dep on the condensed-field realization. No compile run (no file changed)."
+ }
+}

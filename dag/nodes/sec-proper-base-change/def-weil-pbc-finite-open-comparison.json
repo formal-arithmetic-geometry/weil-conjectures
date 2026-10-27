@@ -97,7 +97,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.finiteOpenComparison"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.finiteOpenComparison",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+     "lines": [
+      157,
+      173
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -124,9 +149,13 @@
   "note": "beta written as an explicit composite following Stacks 0GJ1; Lean attached (closed). Noted for the users: isIso_finiteOpenComparison (lines 240-243, sorry-free) gives the isomorphism and naturality of lemma-weil-pbc-finite-pushforward-extension-zero but not its compatibilities; isIso_finiteOpenComparison_app (216-230) gives the existence of the inverse of lemma-weil-pbc-finite-open-comparison-inverse, not its description; both to be attached only if those nodes are narrowed at their split"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Consider a Cartesian square\n\n$$\n\\begin{CD}\nU @>{j_X}>> X\\\\\n@V{v}VV @VV{\\bar v}V\\\\\nV @>{j_Y}>> Y\n\\end{CD}\n$$\n\nwith $j_X,j_Y$ open immersions and $\\bar v$ finite. For an abelian sheaf\n$G$ on $U_{\\mathrm{et}}$, define\n\n$$\n\\beta_{\\bar v,j_Y,G}:(j_Y)_!v_*G\\longrightarrow\n\\bar v_*(j_X)_!G\n$$\n\nas the morphism adjoint to\n\n$$\nv_*G\\xrightarrow{\\sim}\nj_Y^{-1}\\bar v_*(j_X)_!G.\n$$\n\nThe displayed isomorphism is finite base change\n$j_Y^{-1}\\bar v_*\\cong v_*j_X^{-1}$ followed by\n$j_X^{-1}(j_X)_!G\\cong G$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Consider a Cartesian square\n\n$$\n\\begin{CD}\nU @>{j_X}>> X\\\\\n@V{v}VV @VV{\\bar v}V\\\\\nV @>{j_Y}>> Y\n\\end{CD}\n$$\n\nwith $j_X,j_Y$ open immersions and $\\bar v$ finite. Let $\\mathcal A$ be a\nGrothendieck abelian coefficient category as in\n[lemma-weil-pbc-finite-exchange] (concrete, with forgetful functor reflecting\nisomorphisms, preserving filtered colimits and compatible with\nsheafification; for instance abelian groups or $\\Lambda$-modules). For an\n$\\mathcal A$-valued sheaf $G$ on $U_{\\mathrm{et}}$, define\n\n$$\n\\beta_{\\bar v,j_Y,G}:(j_Y)_!v_*G\\longrightarrow\n\\bar v_*(j_X)_!G\n$$\n\nas the morphism adjoint to\n\n$$\nv_*G\\xrightarrow{\\sim}\nj_Y^{-1}\\bar v_*(j_X)_!G.\n$$\n\nThe displayed isomorphism is $v_*$ of the unit isomorphism\n$G\\xrightarrow{\\sim}j_X^{-1}(j_X)_!G$, followed by the inverse of the finite\nbase change isomorphism $j_Y^{-1}\\bar v_*\\cong v_*j_X^{-1}$ of\n[lemma-weil-pbc-finite-exchange]. The construction is natural in $G$, so\n$\\beta$ is a natural transformation $(j_Y)_!v_*\\to\\bar v_*(j_X)_!$.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

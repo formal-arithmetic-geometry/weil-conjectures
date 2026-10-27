@@ -1,0 +1,22 @@
+# Report: lem-sfb-root-tower-profinite-base-change
+
+Files written:
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-root-tower-profinite-base-change.json` — item, split; no new nodes and no Mathlib leaves.
+- `citations.json` — 23 verbatim statement quotations, one for every node cited by every proof step.
+
+Attachments: none. No existing Lean declaration in `WeilConjectures/` carries the blueprint tag or the full statement, and no slopmaster2 declaration was found for this item.
+
+WANTED: none.
+
+The item was already present as an unsplit statement. I retained its hypotheses and conclusion. The proof is an explicit universal-property argument. Step 1 identifies maps out of each polynomial quotient and then out of the directed colimit with compatible labelled roots. Step 2 constructs the scalar-extension comparison and its inverse from those labelled roots. Step 3 checks identity and composite base-change coherence on generators. Step 4 applies the affine fibre-product and basic-open pullback statements to obtain the principal-open comparison. Step 5 identifies the profinite test chart with `Spec (R tensor_Z LC(P,Z))`, checks its weak-etale and affine properties, and applies Step 2 over that ring. Step 6 uses preservation of finite limits by the existing profinite test-object functor to identify iterated test objects with the product parameter. Step 7 checks naturality on coefficients, parameter maps, roots, projections and opens, and explicitly checks zero rings, empty parameter sets, `r = 0`, and `I = empty`.
+
+## Review by Q57
+
+I read the item node, the chapter `sec-six-functors-basics`, the unit `sk-thm-sf-ctf-stability`, and the source paragraph named in the node. I also read every cited node used below: `def-weil-pbc-mv-polynomial-ring`, `def-weil-pbc-algebra-hom-quotient`, `def-weil-pbc-category-colimit`, `def-sfb-full-parameter-root-tower`, `lem-weil-pbc-algebra-tensor-pushout-universal-property`, `lem-weil-pbc-fibre-product-affine-spectra`, `lem-weil-pbc-basic-open-pullback`, `def-pc-fibre-product`, `def-sfb-profinite-test-objects`, `lem-sfb-lc-weakly-etale`, `lem-weil-pbc-weakly-etale-composition-base-change`, `lem-weil-pbc-morphism-affine-schemes-affine`, `def-weil-pbc-proetale-site`, `lem-sfb-profinite-to-proetale-finite-limits`, `def-sfb-profinite-to-proetale`, and `def-sfb-profinite-product-maps`. Each quotation in `citations.json` is copied verbatim from the cited statement and is the exact fact taken from it.
+
+Step 1 uses the polynomial-ring evaluation property, quotient map, colimit universal property, and the root-tower definition; these statements provide respectively evaluation, descent to the quotient, compatible-family factorization, and the labelled generators. Step 2 uses only the tensor pushout universal property; it supplies both maps and the uniqueness arguments proving their composites are identities. Step 3 again uses tensor pushout uniqueness for the identity and composite coherence. Step 4 uses the affine spectrum fibre-product identification, the basic-open pullback equality, and the fibre-product universal property; the hypotheses are arbitrary commutative rings and arbitrary subsets of parameters, exactly as required. Step 5 uses the profinite test-object construction, weak-etale preservation under base change, the affine-morphism fact for affine schemes, the pro-etale site definition, and tensor pushout; the ring map is `Z -> LC(P,Z)` and no flatness or nonzero hypothesis is introduced. Step 6 uses the existing finite-limit theorem and the test-object and fibre-product definitions, so both iterated projections and the product projection are the same. Step 7 uses only the product-map definition and the tensor and fibre-product uniqueness statements to establish all naturality claims.
+
+I tested the edge cases in the proof text: `r = 0` gives the base ring, `I = empty` gives the whole principal open, empty profinite parameters give the zero ring and empty schemes, and zero base rings remain valid because every construction is by universal properties. The recorded Mathlib searches (LeanFinder, Loogle, LeanSearch, and grep) found only general presentation/tensor results or single-root declarations; none states the full compatible-root, puncture, profinite and naturality assertion, so the item remains a split non-Mathlib statement. No source error or duplicate node was found.
+
+No new node was created, so there are no new-node source or Mathlib reviews to report.

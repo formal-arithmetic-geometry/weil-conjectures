@@ -1,0 +1,264 @@
+{
+ "id": "lem-trf-canonical-affine-charts-qc-open-immersion",
+ "kind": "statement",
+ "title": "Canonical affine charts give a quasi-compact open immersion",
+ "statement": "Let $X,Y,S$ be schemes [def-pc-scheme], let $f:X\\to S$ and $\\pi:Y\\to S$ be morphisms, and let $c:X\\to Y$ satisfy $\\pi\\circ c=f$. Assume that $\\pi$ is affine [pqf-def-affine-morphism]. For every affine open $U\\subseteq S$, write $X_U=f^{-1}(U)$, $Y_U=\\pi^{-1}(U)$ and let $c_U:X_U\\to Y_U$ be the restriction of $c$. Assume that $X_U$ is quasi-affine, meaning isomorphic to a quasi-compact open subscheme of an affine scheme (quasi-compact means that every open covering has a finite subcover). Suppose that for each such $U$ there is an isomorphism $h_U:Y_U\\xrightarrow{\\sim}\\operatorname{Spec}\\Gamma(X_U,\\mathcal O_{X_U})$ [def-weil-affine-spectrum] with $h_U\\circ c_U=j_{X_U}$, where $j_{X_U}$ is the morphism corresponding to the identity of $\\Gamma(X_U,\\mathcal O_{X_U})$ under [lem-weil-pbc-morphism-into-affine-scheme]. Then $c$ is an open immersion [def-weil-open-immersion] and is quasi-compact as a morphism [def-weil-finite-type-morphism]. No quasi-compactness or separation hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final two sentences: canonical affine restrictions are quasi-compact open immersions, and so is can"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open cover $S=\\bigcup_{i\\in I}U_i$ and put $W_i=f^{-1}(U_i)$ and $V_i=\\pi^{-1}(U_i)$. Inverse images of open sets are open, so the $W_i$ cover $X$ and the $V_i$ cover $Y$. Each $V_i$ is affine by the definition of the affine morphism $\\pi$. The equality $\\pi\\circ c=f$ gives $c^{-1}(V_i)=W_i$: a point $x$ belongs to the left side exactly when $\\pi(c(x))=f(x)$ belongs to $U_i$. Thus $c_i:W_i\\to V_i$ is exactly the restriction of $c$ over the target open $V_i$.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final two sentences"
+   }
+  },
+  {
+   "text": "For each $i$, the hypothesis makes $W_i$ a quasi-affine scheme. Apply [lem-trf-quasi-affine-canonical-affine-embedding] to $W_i$: it is quasi-compact and its canonical map $j_i:W_i\\to\\operatorname{Spec}\\Gamma(W_i,\\mathcal O_{W_i})$ is an open immersion. The given identity $h_i\\circ c_i=j_i$ and the inverse of the isomorphism $h_i$ yield $c_i=h_i^{-1}\\circ j_i$. In the definition of open immersion, an isomorphism identifies the open image and its restricted structure sheaf with their images under that isomorphism. Consequently $c_i$ is an open immersion and hence injective on points.",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01P9, lemma-quasi-affine, forward implication; applied as in Tag 01SM, proof (2) implies (4)"
+   }
+  },
+  {
+   "text": "To check injectivity of $c$, suppose $c(x)=c(x\\prime)$. Then $f(x)=\\pi(c(x))=\\pi(c(x\\prime))=f(x\\prime)$. Choose $U_i$ containing this common point of $S$. Both $x$ and $x\\prime$ belong to $W_i$, and injectivity of $c_i$ gives $x=x\\prime$. For every $x\\in X$ some $W_i$ contains $x$. Its inclusion $W_i\\hookrightarrow X$ is an open immersion, and its composite with $c$ is the open immersion $c_i$ followed by $V_i\\hookrightarrow Y$. This composite is an open immersion directly from the definition: an open subset of the open subset $V_i$ is open in $Y$, and restriction of $\\mathcal O_Y$ first to $V_i$ and then to that subset is its direct restriction. Thus all hypotheses of [lem-weil-pbc-open-immersion-injective-local-source] hold for $c$. That node gives that $c$ is an open immersion.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-injective-local-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final two sentences"
+   }
+  },
+  {
+   "text": "Each $V_i$ is affine, so [lem-weil-pbc-affine-scheme-qcqs] makes it quasi-separated. The source $W_i$ is quasi-compact by step 2. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence], applied with source $W_i$, target $V_i$ and morphism $c_i$, therefore gives that $c_i$ is quasi-compact. The quasi-separatedness required here belongs to the affine chart $V_i$; no separation hypothesis on $S$ or $Y$ is used.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 03GI, lemma-quasi-compact-permanence, applied over Spec Z; Tag 01KN, lemma-affine-separated; as used for the chart quasi-compactness in Tag 01SM"
+   }
+  },
+  {
+   "text": "The opens $V_i$ cover $Y$ and $c^{-1}(V_i)=W_i$ by step 1, so step 4 proves quasi-compactness of every target restriction $c^{-1}(V_i)\\to V_i$. Apply [lem-pc-quasi-compact-local-on-target] to this open cover to conclude that $c$ is quasi-compact. Together with step 3 this proves both assertions. This locality theorem allows an arbitrary open cover; we have taken no finite subcover of $S$ or $Y$.",
+   "uses": [
+    "lem-pc-quasi-compact-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KG, lemma-quasi-compact-local, (6) implies (1), specialized to schemes; the local-to-global conclusion of Tag 01SM, proof (2) implies (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-injective-local-source",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-quasi-compact-local-on-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final two sentences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isOpenImmersion.*toSpec|isOpenImmersion.*[Rr]estrict|quasiCompact.*[Rr]estrict|[Oo]pen.*[Ii]mmersion.*[Aa]ffine",
+   "results": "{\"t\": \"2026-10-22T06:04:37Z\", \"tool\": \"grep\", \"query\": \"isOpenImmersion.*toSpec|isOpenImmersion.*[Rr]estrict|quasiCompact.*[Rr]estrict|[Oo]pen.*[Ii]mmersion.*[Aa]ffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\"], \"digest\": \"dd04e02ff433c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:46 gives the absolute canonical open immersion; other hits give general locality or compactness tools, not this relative chart-identification criterion with both global conclusions. Its assembly is an extracted argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine chart criterion for an S morphism to be a quasi compact open immersion using quasi affine source canonical affinization maps",
+   "results": "{\"t\": \"2026-10-22T06:04:38Z\", \"tool\": \"leansearch\", \"query\": \"Affine chart criterion for an S morphism to be a quasi compact open immersion using quasi affine source canonical affinization maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\"], \"digest\": \"0281597c3cbeff80\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:46 gives the absolute canonical open immersion; other hits give general locality or compactness tools, not this relative chart-identification criterion with both global conclusions. Its assembly is an extracted argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.QuasiCompact",
+   "results": "{\"t\": \"2026-10-22T06:04:38Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.QuasiCompact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"704d9ac90a7e2d3d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:46 gives the absolute canonical open immersion; other hits give general locality or compactness tools, not this relative chart-identification criterion with both global conclusions. Its assembly is an extracted argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An S morphism into an affine S scheme which on each affine base chart identifies with the canonical map of a quasi affine scheme to the spectrum of its global sections is a quasi compact open immersion",
+   "results": "{\"t\": \"2026-10-22T06:04:48Z\", \"tool\": \"leanfinder\", \"query\": \"An S morphism into an affine S scheme which on each affine base chart identifies with the canonical map of a quasi affine scheme to the spectrum of its global sections is a quasi compact open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\"], \"digest\": \"862065213773d901\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:46 gives the absolute canonical open immersion; other hits give general locality or compactness tools, not this relative chart-identification criterion with both global conclusions. Its assembly is an extracted argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecΓ|[Zz]ariskiLocalAtTarget.*[Ii]ff|of_forall_source_exists_preimage",
+   "results": "{\"t\": \"2026-10-22T06:05:02Z\", \"tool\": \"grep\", \"query\": \"toSpecΓ|[Zz]ariskiLocalAtTarget.*[Ii]ff|of_forall_source_exists_preimage\", \"sub\": \"AlgebraicGeometry/QuasiAffine.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"35\", \"43\", \"46\", \"47\", \"48\"], \"digest\": \"adb2336cd745c522\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:46 gives the absolute canonical open immersion; other hits give general locality or compactness tools, not this relative chart-identification criterion with both global conclusions. Its assembly is an extracted argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion of schemes into an affine scheme over S can be proved on affine opens of S by identifying restrictions with quasi affine canonical embeddings; quasi compactness follows from compact sources on those charts",
+   "results": "{\"t\": \"2026-10-22T06:05:13Z\", \"tool\": \"leanfinder\", \"query\": \"Open immersion of schemes into an affine scheme over S can be proved on affine opens of S by identifying restrictions with quasi affine canonical embeddings; quasi compactness follows from compact sources on those charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"AlgebraicGeometry.isAffineOpen_opensRange\", \"AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\"], \"digest\": \"2aa90b71c2720b47\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:46 gives the absolute canonical open immersion; other hits give general locality or compactness tools, not this relative chart-identification criterion with both global conclusions. Its assembly is an extracted argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecΓ|of_forall_source_exists|of_iSup_eq_top|quasiCompact_of_compactSpace",
+   "results": "{\"t\": \"2026-10-22T06:53:42Z\", \"tool\": \"grep\", \"query\": \"toSpecΓ|of_forall_source_exists|of_iSup_eq_top|quasiCompact_of_compactSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"7312e34b91a52807\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide the absolute canonical open immersion or general locality/compactness tools. The item requires chart identification, global injectivity/local-source assembly, and local quasi-compactness before target locality, rather than a one-line specialization. The needed tools are already existing Mathlib-leaf nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism is a quasi compact open immersion if its restrictions over an affine base cover are canonical embeddings of quasi affine schemes into their global sections spectra",
+   "results": "{\"t\": \"2026-10-22T06:53:42Z\", \"tool\": \"leansearch\", \"query\": \"A morphism is a quasi compact open immersion if its restrictions over an affine base cover are canonical embeddings of quasi affine schemes into their global sections spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.QuasiCompact.mk\"], \"digest\": \"282cbfdea0bc54e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide the absolute canonical open immersion or general locality/compactness tools. The item requires chart identification, global injectivity/local-source assembly, and local quasi-compactness before target locality, rather than a one-line specialization. The needed tools are already existing Mathlib-leaf nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.QuasiCompact",
+   "results": "{\"t\": \"2026-10-22T06:53:42Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.QuasiCompact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"704d9ac90a7e2d3d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide the absolute canonical open immersion or general locality/compactness tools. The item requires chart identification, global injectivity/local-source assembly, and local quasi-compactness before target locality, rather than a one-line specialization. The needed tools are already existing Mathlib-leaf nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An S morphism into an affine S scheme which identifies on affine base charts with the canonical affinization map of a quasi affine scheme is a quasi compact open immersion",
+   "results": "{\"t\": \"2026-10-22T06:53:52Z\", \"tool\": \"leanfinder\", \"query\": \"An S morphism into an affine S scheme which identifies on affine base charts with the canonical affinization map of a quasi affine scheme is a quasi compact open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\"], \"digest\": \"792cab9ab7af20af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide the absolute canonical open immersion or general locality/compactness tools. The item requires chart identification, global injectivity/local-source assembly, and local quasi-compactness before target locality, rather than a one-line specialization. The needed tools are already existing Mathlib-leaf nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "of_forall_source_exists|of_iSup_eq_top|quasiCompact_of_compactSpace",
+   "results": "{\"t\": \"2026-10-22T06:54:16Z\", \"tool\": \"grep\", \"query\": \"of_forall_source_exists|of_iSup_eq_top|quasiCompact_of_compactSpace\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean\"], \"digest\": \"fbd56ed16d64676d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide the absolute canonical open immersion or general locality/compactness tools. The item requires chart identification, global injectivity/local-source assembly, and local quasi-compactness before target locality, rather than a one-line specialization. The needed tools are already existing Mathlib-leaf nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion and quasi compactness of a scheme morphism can be checked on a cover of the target by affine opens with quasi compact inverse images",
+   "results": "{\"t\": \"2026-10-22T06:54:27Z\", \"tool\": \"leanfinder\", \"query\": \"Open immersion and quasi compactness of a scheme morphism can be checked on a cover of the target by affine opens with quasi compact inverse images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.of_isOpenMap\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\"], \"digest\": \"e6da7ac9cb05f077\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide the absolute canonical open immersion or general locality/compactness tools. The item requires chart identification, global injectivity/local-source assembly, and local quasi-compactness before target locality, rather than a one-line specialization. The needed tools are already existing Mathlib-leaf nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-quasi-affine-relative-spec-embedding",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the geometric quotient presentation in lem-trf-local-term-locality, through its Tag 0247 quasi-affine descent lemma: Tag 01SO, lemma-base-change-quasi-affine; the relative-spectrum characterization Tag 01SM used in the first and last sentences of the Tag 01SO proof; Tag 01SM proof (2) implies (4), passage from canonical affine restrictions to global quasi-compact open immersion; old item steps 4 and 5",
+   "via": [
+    "lem-trf-quasi-affine-relative-spec-embedding",
+    "lem-trf-quasi-affine-base-change",
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-canonical-affine-charts-qc-open-immersion",
+  "worker": "stage1",
+  "summary": "Expanded the final chart-to-global argument of Stacks Tag 01SM into five steps, using only existing definition nodes and Mathlib leaves. Proved the preimage identity, transported each canonical open immersion along its specified chart isomorphism, verified global injectivity before applying the local-source open-immersion criterion, and checked quasi-compactness on the affine target charts before using target locality. Kept the statement and its hypotheses unchanged; no new nodes.",
+  "blueprint": "Support for the geometric quotient presentation in lem-trf-local-term-locality, through its Tag 0247 quasi-affine descent lemma: Tag 01SO, lemma-base-change-quasi-affine; the relative-spectrum characterization Tag 01SM used in the first and last sentences of the Tag 01SO proof; Tag 01SM proof (2) implies (4), passage from canonical affine restrictions to global quasi-compact open immersion; old item steps 4 and 5; realizes the chart-to-global subargument, not a replacement of the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-d59e516e6",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-d59e516e6 (reviewer sub-agent of L); spot-checked: The statement is unchanged from base and there are no new nodes. The item is the last sentence of the proof of (2)⇒(4) of Stacks morphisms.tex Tag 01SM (lemma-characterize-quasi-affine), read at that place: the canonical affine restrictions are quasi-compact open immersions, so can is too. Step 1 (elementary): V_i=π^{-1}(U_i) is affine by pqf-def-affine-morphism, and c^{-1}(V_i)=W_i follows from π∘c=f. Step 2: the leaf lem-trf-quasi-affine-canonical-affine-embedding gives W_i quasi-compact and j_i an open immersion, so c_i=h_i^{-1}∘j_i is an open immersion. Step 3: global injectivity holds because two points with the same image under c lie in one W_i. The local hypothesis uses W_i↪X with composite (V_i↪Y)∘c_i. Both hypotheses of lem-weil-pbc-open-immersion-injective-local-source (IsOpenImmersion.of_forall_source_exists) are met. Step 4: V_i is affine, hence quasi-separated, and qcqs-permanence clause (1) applies to the affine target only. Step 5: lem-pc-quasi-compact-local-on-target over the cover V_i. Every cited lemma is a Mathlib leaf and the definitions are notions, so there is no route issue, no tool_uses and no cycle. Edge cases tried: empty S, A^2∖{0}⊂A^2, and a non-separated S with an infinite cover. None of the four neighbours found under 01SM duplicates it (lem-a1-quasi-affine-target-locality, lem-a1-ind-quasi-affine-permanence, lem-trf-qcqs-relative-affinization-map, lem-trf-qcqs-affine-preimage-criterion). No repair note exists for this item, so the re-split rule does not apply."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CanonicalAffineChartsQcOpenImmersion",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_and_quasiCompact_of_canonical_affine_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalAffineChartsQcOpenImmersion.lean",
+  "statement": "theorem isOpenImmersion_and_quasiCompact_of_canonical_affine_charts {X Y S : Scheme.{u}} (f : X ⟶ S) (π : Y ⟶ S) (c : X ⟶ Y) (hc : c ≫ π = f) [IsAffineHom π] (hqa : ∀ U : S.Opens, IsAffineOpen U → (f ⁻¹ᵁ U).toScheme.IsQuasiAffine) (hcharts : ∀ U : S.Opens, IsAffineOpen U → ∃ h : (π ⁻¹ᵁ U).toScheme ≅ Spec Γ((f ⁻¹ᵁ U).toScheme, ⊤), c.resLE (π ⁻¹ᵁ U) (f ⁻¹ᵁ U) ((congrArg (fun g : X ⟶ S ↦ g ⁻¹ᵁ U) hc).symm.le) ≫ h.hom = (f ⁻¹ᵁ U).toScheme.toSpecΓ) : IsOpenImmersion c ∧ QuasiCompact c",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a70ddea1",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read item node, 6 stmt_dep records, Stacks 01SM (2)=>(4) source, Mathlib IsQuasiAffine/resLE/toSpecΓ. Clause match exact: Scheme.{u} arbitrary, hc : c ≫ π = f, [IsAffineHom π], ∀ affine U hqa (IsQuasiAffine ≡ qc open of affine), canonical resLE restriction with correct containment from hc, ∃ iso h with resLE ≫ h.hom = toSpecΓ (adjunction unit = id correspondent), conclusion IsOpenImmersion c ∧ QuasiCompact c; no assumption on S. Node differs from live only in lean (first delivery, no new nodes, not superseded). sorry-only, no defs, docstrings with source/blueprint/proof steps, verbatim statement, report has Worker report and Second reading sections. Advisory: proof-only non-public imports unused under sorry. No compile run (no FIX); relied on the worker's clean compile and passing dry run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261023T104941-L-3467909",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.isOpenImmersion_and_quasiCompact_of_canonical_affine_charts"
+  ],
+  "sorry_after": []
+ }
+}

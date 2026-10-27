@@ -1,0 +1,277 @@
+{
+ "id": "lem-trf-polynomial-power-series-monoid-completion",
+ "kind": "statement",
+ "title": "Polynomial versus power-series coefficients in a formal monoid completion",
+ "statement": "Let $L$ be a field or a Cohen ring [def-weil-pbc-cohen-ring], let $\\mathfrak m_L$ be its maximal ideal ($0$ for a field, $pL$ for a Cohen ring with uniformizer $p$), let $P$ be a fine saturated sharp additive monoid [def-trf-fs-log-blowup], and let $n\\ge0$. Here sharp means that $0$ is the only invertible element. Put $D=L[[T_1,\\ldots,T_n]]$ [def-weil-pbc-multivariate-power-series] and $\\mathfrak m_D=\\mathfrak m_LD+(T_1,\\ldots,T_n)D$. For any coefficient ring $V$, $V[P]$ is the finite-sum ring with basis $z^q$, $q\\in P$, and product $z^qz^{q'}=z^{q+q'}$. Set $E=L[P][T_1,\\ldots,T_n]$, $\\mathfrak a=(\\mathfrak m_L,z^q\\ (q\\ne0),T_1,\\ldots,T_n)E$ and $\\mathfrak b=(\\mathfrak m_D,z^q\\ (q\\ne0))D[P]$. The natural inclusion $E\\to D[P]$, sending $c,z^q,T_i$ to the same coefficient, monomial and variable, induces for every $j\\ge1$ an isomorphism of rings $E/\\mathfrak a^j\\xrightarrow{\\sim}D[P]/\\mathfrak b^j$. These isomorphisms commute with reduction from $j+1$ to $j$. Consequently they induce a continuous isomorphism of complete local $L$-algebras $\\Psi:B=\\varprojlim_j E/\\mathfrak a^j\\xrightarrow{\\sim}H=\\varprojlim_j D[P]/\\mathfrak b^j$ [def-weil-pbc-adic-completion]. It fixes every $z^q$ and $T_i$, carries $N_B=(z^q:q\\ne0)B$ onto $N_H=(z^q:q\\ne0)H$, and the induced identification $B/N_B\\cong H/N_H\\cong D$ fixes $L$ and all $T_i$. The truncations and completion comparison include the trivial monoid and the empty list of variables.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70, interpretation of the displayed formal monoid models; agent-supplied comparison, extracted from old completed-chart Step 3. The separate task is to identify the finite quotients of polynomial versus power-series coefficient rings and their compatible inverse limits, including the monomial quotient. It does not restate the dimension or normality theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-sharp-fs-orthant-embedding], identify $P$ with a submonoid of $\\mathbf N^r$ inside $\\mathbf Z^r$; the sum of coordinates is strictly positive on nonzero elements. Apply [lem-trf-positive-monoid-adic-filtration] to this embedding and write $\\nu(q)$ for its finite maximum decomposition length. Also apply it to $Q=P\\times\\mathbf N^n\\subset\\mathbf Z^{r+n}$, with the sum-of-coordinates weight. Its decomposition length at $(q,e)$ is $\\nu(q)+|e|$: split $(q,0)$ into a longest decomposition and $(0,e)$ into $|e|$ coordinate generators for the lower bound; in any decomposition at most $\\nu(q)$ terms have nonzero $P$ component and at most $|e|$ remaining terms have a nonzero variable component. Under $E=L[Q]$, its combined ideal is exactly $\\mathfrak a$. Hence for a polynomial $F=\\sum_{q,e}c_{q,e}z^qT^e$,\n$$F\\in\\mathfrak a^j\\ \\Longleftrightarrow\\ c_{q,e}\\in\\mathfrak m_L^{\\max(j-\\nu(q)-|e|,0)}\\quad\\hbox{for every }(q,e).$$",
+   "uses": [
+    "lem-trf-sharp-fs-orthant-embedding",
+    "lem-trf-positive-monoid-adic-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; agent-supplied finite-quotient comparison of the displayed formal monoid models."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-positive-monoid-adic-filtration] with coefficient ring $D$, ideal $\\mathfrak m_D$, and monoid $P$. For a finite sum $G=\\sum_q f_q(T)z^q\\in D[P]$, it gives\n$$G\\in\\mathfrak b^j\\ \\Longleftrightarrow\\ f_q\\in\\mathfrak m_D^{\\max(j-\\nu(q),0)}\\quad\\hbox{for every }q.$$\nFor a positive exponent $k$, [lem-weil-pbc-power-series-combined-ideal-coefficients], applied over $L$ with $J=\\mathfrak m_L$, says precisely that $f_q\\in\\mathfrak m_D^k$ iff its coefficient at each $e$ of degree $|e|<k$ belongs to $\\mathfrak m_L^{k-|e|}$. For $k=0$ there is no restriction. Thus the criterion for $G\\in\\mathfrak b^j$ is the coefficient criterion of Step 1, now allowing power-series coefficients. In particular $E\\cap\\mathfrak b^j=\\mathfrak a^j$, so the natural map $E/\\mathfrak a^j\\to D[P]/\\mathfrak b^j$ is well-defined and injective.",
+   "uses": [
+    "lem-trf-positive-monoid-adic-filtration",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; agent-supplied finite-quotient comparison of the displayed formal monoid models."
+   }
+  },
+  {
+   "text": "Given $G=\\sum_{q\\in S}f_q(T)z^q$ with finite $S$, replace every $f_q$ by its polynomial truncation $f_q^{<j}=\\sum_{|e|<j}c_{q,e}T^e$. This is a polynomial since there are finitely many variables. The omitted series has zero coefficients below degree $j$, so [lem-weil-pbc-power-series-combined-ideal-coefficients] puts it in $\\mathfrak m_D^j$. Therefore $G-\\sum_{q\\in S}f_q^{<j}z^q\\in\\mathfrak b^j$. This proves surjectivity and hence the required ring isomorphism $e_j$. Each $e_j$ is induced by the same inclusion $E\\to D[P]$; reducing a representative from level $j+1$ to $j$ therefore gives the same class in either order.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; agent-supplied finite-quotient comparison of the displayed formal monoid models."
+   }
+  },
+  {
+   "text": "By [lem-trf-adic-inverse-limit-iso], the compatible $e_j$ induce a ring isomorphism $\\Psi:B\\to H$, whose $j$th component is $e_j$ applied to the $j$th component of its input. It is an $L$-algebra map and fixes $z^q$ and $T_i$, since this is true at every level. The inverse has components $e_j^{-1}$, so both maps preserve the kernels of level projections. They are therefore continuous for the inverse-limit adic topologies.",
+   "uses": [
+    "lem-trf-adic-inverse-limit-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; agent-supplied finite-quotient comparison of the displayed formal monoid models."
+   }
+  },
+  {
+   "text": "For completeness in the ideal-adic sense, choose a finite list of nonzero generators $g_1,\\ldots,g_s$ of $P$, deleting any zero generators. Every nonzero $q$ is $g_i+q'$ for some $i$ and $q'\\in P$; thus $(z^q:q\\ne0)$ is generated by the $z^{g_i}$. Consequently $\\mathfrak a$ and $\\mathfrak b$ are finitely generated: use these monomials, the $T_i$, and $p$ in the Cohen case. Apply [lem-weil-pbc-module-completion-complete] to each ring as a module over itself. Its conclusion gives completeness and identifies each level-projection kernel with the corresponding extended ideal power. In a commutative completion ring this module-generated ideal power equals the power of the extended ideal, by expanding products of generators. Thus the topologies in Step 4 are also the topologies of these extended ideals.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; agent-supplied finite-quotient comparison of the displayed formal monoid models."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-power-series-field-cohen-regular-complete], $D$ is a nonzero Noetherian local ring, complete and separated for $\\mathfrak m_D$. Together with the lattice embedding and positive weight of Step 1, these are exactly the hypotheses of [lem-trf-formal-monoid-residue-domain] with coefficient ring $D$ and monoid $P$. It gives that $H$ is local and that its constant-$P$-coefficient homomorphism $c_H:H\\to D$ is surjective with kernel $N_H$, and is a $D$-algebra map. Since $\\Psi$ fixes each monomial and is surjective, it carries the ideal generated by those monomials, $N_B$, onto $N_H$. Hence $B$ is local as well, and $c_H\\Psi$ induces $B/N_B\\cong H/N_H\\cong D$. This identification fixes $L$ and every $T_i$: their images under $\\Psi$ are the same coefficient elements in $H$, on which $c_H$ is the identity.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-trf-formal-monoid-residue-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; agent-supplied finite-quotient comparison of the displayed formal monoid models."
+   }
+  },
+  {
+   "text": "All constructions allow $P=\\{0\\}$: take the empty monoid generating list, $\\nu(0)=0$, and $N_B=N_H=0$. For $n=0$, the only variable exponent is $e=0$, the truncation in Step 3 retains each coefficient, and $D=L$. These conventions also apply when both are trivial; no step assumes a positive monoid rank or a nonempty variable list.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; agent-supplied finite-quotient comparison of the displayed formal monoid models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-sharp-fs-orthant-embedding",
+  "lem-trf-positive-monoid-adic-filtration",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-trf-adic-inverse-limit-iso",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-trf-formal-monoid-residue-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI 1.6(i)--(ii), printed p. 70; agent-supplied finite-quotient comparison of the displayed formal monoid models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completing L[P][t] at the coefficient maximal ideal monomials and variables equals completing L[[t]][P] at the coefficient maximal ideal and monomials, compatibly at each finite quotient.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LaurentSeries.powerSeriesAlgEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    PowerSeries K ≃ₐ[K] ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"There is an algebra isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X\"}\n  {\"name\": \"LaurentSeries.powerSeriesRingEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    PowerSeries K ≃+* ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"There is a ring isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X $. \"}\n  {\"name\": \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] {x : LaurentSeries.RatFuncAdicCompl K},\\n  x ∈ IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K) →\\n    ∃ F, (LaurentSeries.LaurentSeriesRingEquiv K) ((HahnSeries.ofPowerSeries ℤ K) F) = x\", \"doc\": \"For any element $ x $ in the adic completion of the integers with respect to the ideal generated by $ X $ in the field of rational functions $ K $, there exists a power series $ F $ such that the Laur\"}\n  {\"name\": \"LaurentSeries.coe_X_compare\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K],\\n  (LaurentSeries.ratfuncAdicComplRingEquiv K) ↑RatFunc.X = (HahnSeries.ofPowerSeries ℤ K) PowerSeries.X\", \"doc\": \"Under the ring equivalence between the adic completion of rational functions over $ K $ and Laurent series over $ K $, the image of the formal variable $ X $ (viewed as a rational function and adic-co\"}\n  {\"name\": \"LaurentSeries.mem_integers_of_powerSeries\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (F : PowerSeries K),\\n  (LaurentSeries.LaurentSeriesRingEquiv K) ((HahnSeries.ofPowerSeries ℤ K) F) ∈\\n    IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K)\", \"doc\": \"Every power series over a field $ K $, when converted to a Laurent series via the canonical equivalence, belongs to the adic completion of the ring of integers in the field of rational functions $ K(X\"}\n  {\"name\": \"LaurentSeries.ratfuncAdicComplRingEquiv_apply\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (x : LaurentSeries.RatFuncAdicCompl K),\\n  (LaurentSeries.ratfuncAdicComplRingEquiv K) x =\\n    LaurentSeries.ratfuncAdicComplPkg.compare (LaurentSeries.LaurentSeriesPkg K) x\", \"doc\": \"For any field $ K $, the adic completion of the rational function field $ K(X) $ with respect to the $ X $-adic valuation is ring-isomorphic to the ring of Laurent series $ K((X)) $. This equivalence \"}\n  {\"name\": \"LaurentSeries.ratfuncAdicComplRingEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → LaurentSeries.RatFuncAdicCompl K ≃+* LaurentSeries K\", \"doc\": \"For any field $ K $, the adic completion of the rational function field $ K(X) $ with respect to the $ X $-adic valuation is ring-isomorphic to the ring of Laurent series $ K((X)) $. This equivalence \"}\n  {\"name\": \"LaurentSeries.powerSeries_ext_subring\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K],\\n  Subring.map (LaurentSeries.LaurentSeriesRingEquiv K).toRingHom (LaurentSeries.powerSeries_as_subring K) =\\n    (IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K)).toSubring\", \"doc\": \"The image of the power series subring under the canonical embedding into the Laurent series ring equals the subring obtained by completing the polynomial ring $ K[X] $ with respect to the ideal genera\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Truncated polynomial and power series rings with monoid algebra coefficients have identical quotients by powers of the maximal monomial ideal and hence isomorphic adic completions.",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MvPowerSeries, MonoidAlgebra",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(MvPowerSeries|AdicCompletion)|(MvPowerSeries|AdicCompletion).*(MonoidAlgebra|AddMonoidAlgebra)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic completion commutes with replacing polynomial coefficients by formal power series in finitely many variables for a finitely generated positive monoid algebra.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] {x : LaurentSeries.RatFuncAdicCompl K},\\n  x ∈ IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K) →\\n    ∃ F, (LaurentSeries.LaurentSeriesRingEquiv K) ((HahnSeries.ofPowerSeries ℤ K) F) = x\", \"doc\": \"For any element $ x $ in the adic completion of the integers with respect to the ideal generated by $ X $ in the field of rational functions $ K $, there exists a power series $ F $ such that the Laur\"}\n  {\"name\": \"LaurentSeries.powerSeriesAlgEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    PowerSeries K ≃ₐ[K] ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"There is an algebra isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X\"}\n  {\"name\": \"AdicCompletion.instAlgebraAdicCauchySequence\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Algebra R (AdicCompletion.AdicCauchySequence I R)\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, the type of $ I $-adic Cauchy sequences in $ R $ is equipped with an algebra structure over $ R $, where the canonical algebra map sends each element o\"}\n  {\"name\": \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (n : ℕ) (x : AdicCompletion I S),\\n  (Ideal.Quotient.mk (I ^ n • ⊤)) ((AdicCompletion.ofAlgEquiv I).symm x) = (AdicCompletion.eval I S n) x\", \"doc\": \"For a commutative ring $ S $, an ideal $ I $, and any natural number $ n $, the evaluation map at level $ n $ of an element $ x $ in the $ I $-adic completion of $ S $ satisfies $ \\\\text{quotient}_{I^n\"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"LaurentSeries.powerSeriesRingEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    PowerSeries K ≃+* ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"There is a ring isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X $. \"}\n  {\"name\": \"LaurentSeries.mem_integers_of_powerSeries\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (F : PowerSeries K),\\n  (LaurentSeries.LaurentSeriesRingEquiv K) ((HahnSeries.ofPowerSeries ℤ K) F) ∈\\n    IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K)\", \"doc\": \"Every power series over a field $ K $, when converted to a Laurent series via the canonical equivalence, belongs to the adic completion of the ring of integers in the field of rational functions $ K(X\"}\n  {\"name\": \"AdicCompletion.mkₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → AdicCompletion.AdicCauchySequence I R →ₐ[R] AdicCompletion I R\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, this constructs the canonical $ S $-algebra homomorphism from $ R $ to its $ I $-adic complet\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(MvPowerSeries|AdicCompletion)|(MvPowerSeries|AdicCompletion).*(MonoidAlgebra|AddMonoidAlgebra)",
+   "results": "0 hits: ; read relevant hits. Quotient by a distinguished univariate polynomial, ordinary adic completeness and polynomial embeddings do not give the mixed monoid comparison. Grep subdirectory: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial versus power series coefficients in completed positive monoid algebras preserve all finite adic quotient rings.",
+   "results": "8 hits: Polynomial.coeff_coe, Polynomial.coeToPowerSeries.ringHom, Polynomial.toPowerSeries, Polynomial.coeToPowerSeries, Polynomial.coeToPowerSeries.ringHom_apply, Polynomial.IsDistinguishedAt.algEquivQuotient_apply, Polynomial.IsDistinguishedAt.algEquivQuotient, MvPolynomial.coeff_coe; read relevant hits. Quotient by a distinguished univariate polynomial, ordinary adic completeness and polynomial embeddings do not give the mixed monoid comparison. Grep subdirectory: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial and formal power series coefficient rings in a finitely generated sharp monoid algebra have the same quotients by powers of the maximal monomial and variable ideal.",
+   "results": "8 hits: Polynomial.IsDistinguishedAt.algEquivQuotient, Polynomial.IsDistinguishedAt.algEquivQuotient_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient, Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply, MvPolynomial.quotientEquivQuotientMvPolynomial; read relevant hits. Quotient by a distinguished univariate polynomial, ordinary adic completeness and polynomial embeddings do not give the mixed monoid comparison. Grep subdirectory: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MvPowerSeries, AddMonoidAlgebra",
+   "results": "0 hits: ; read relevant hits. Quotient by a distinguished univariate polynomial, ordinary adic completeness and polynomial embeddings do not give the mixed monoid comparison. Grep subdirectory: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "algEquivQuotient|coeff_coe",
+   "results": "21 hits: Mathlib/RingTheory/PowerSeries/Binomial.lean, Mathlib/RingTheory/PowerSeries/Derivative.lean, Mathlib/RingTheory/PowerSeries/Derivative.lean, Mathlib/RingTheory/PowerSeries/Derivative.lean, Mathlib/RingTheory/PowerSeries/Trunc.lean, Mathlib/RingTheory/PowerSeries/Trunc.lean, Mathlib/RingTheory/PowerSeries/Trunc.lean, Mathlib/RingTheory/PowerSeries/Trunc.lean; read relevant hits. Quotient by a distinguished univariate polynomial, ordinary adic completeness and polynomial embeddings do not give the mixed monoid comparison. Grep subdirectory: RingTheory/PowerSeries",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncTotal|coeToMvPowerSeries|coeff_coe",
+   "results": "25 hits: Mathlib/RingTheory/MvPowerSeries/Derivative.lean, Mathlib/RingTheory/MvPowerSeries/Derivative.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Substitution.lean; read relevant hits. Quotient by a distinguished univariate polynomial, ordinary adic completeness and polynomial embeddings do not give the mixed monoid comparison. Grep subdirectory: RingTheory/MvPowerSeries",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic completion of a monoid algebra over polynomial coefficients equals the completion over multivariate formal power series coefficients including the augmentation quotient.",
+   "results": "8 hits: AdicCompletion.ofAlgEquiv_apply, AdicCompletion.instAlgebra, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.ofAlgEquiv, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ, LaurentSeries.powerSeriesAlgEquiv, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.instAlgebraAdicCauchySequence; read relevant hits. Quotient by a distinguished univariate polynomial, ordinary adic completeness and polynomial embeddings do not give the mixed monoid comparison. Grep subdirectory: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-completed-chart",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-cycle duality alteration ancestry through trace specialization; Expose VI 1.6 displayed formal models. In lem-trf-log-regular-completed-chart, former Step 3: comparison of polynomial and power-series coefficient completions before applying the existing model dimension lemma.",
+   "via": [
+    "lem-trf-log-regular-completed-chart",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-power-series-monoid-completion",
+  "worker": "stage1",
+  "summary": "Prove finite-level injectivity by the mixed monomial coefficient criteria on P and P times N^n, prove surjectivity by finite total-degree truncation, and take compatible inverse limits. Establish ideal-adic completeness and the actual monomial quotient using existing generic tools. Statement unchanged; no new nodes and no Lean writing.",
+  "blueprint": "lem-trf-local-term-locality proof (1)--(2), nearby-cycle duality alteration ancestry, ILO VI 1.6 formal models: realizes the polynomial/power-series completion comparison extracted from former Step 3 of lem-trf-log-regular-completed-chart.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Steps 2--3 need the general coefficient criterion for powers of the mixed coefficient/variable ideal; the unit has no replacement for this generic power-series tool."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Step 6 needs that D over a field or Cohen ring is complete Noetherian local, to apply the unit's monoid constant-coefficient theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-bf3036e6f",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-bf3036e6f (reviewer sub-agent of L); spot-checked: Ordinary first split (no repair note); 0 new nodes, no fixes. The item's statement, stmt_deps, source and blueprint are byte-identical to live, where the item is unsplit. ILO VI 1.6 on PDF p.76 shows the models k[[P]][[t]] and C(k)[[P]][[t]]/(f); the comparison itself is agent-supplied and marked by=agent. Step 1: the orthant embedding needs fg, integral, saturated and sharp, all available; the filtration lemma is applied to P and to Q=P×N^n with I=m_L (the field case m_L=0 is fine). I checked nu_Q(q,e)=nu(q)+|e| in both directions, and the combined ideal of L[Q] equals a. Step 2: the filtration lemma on D[P] with I=m_D, together with combined-ideal-coefficients (Lambda=L, J=m_L, d=n), gives the same criterion as Step 1, so E∩b^j=a^j. Step 3: truncation at |e|<j leaves a remainder in m_D^j, inside b^j. Step 4: adic-inverse-limit-iso says exactly what is used. Step 5: a and b are finitely generated (z^{g_i}, T_i, and p in the Cohen case); module-completion-complete (1)+(2) gives completeness and the kernels a^nB. Step 6: field-cohen-regular-complete (1)(3) gives the hypotheses of formal-monoid-residue-domain with A=D, whose B is exactly H; it gives H local and kernel of c = N_H, an actual ideal and not its closure; Psi fixes the monomials, so Psi(N_B)=N_H, and c_H is D-linear, so L and the T_i are fixed. Step 7: P={0} and n=0 are covered by the cited nodes. No cycle (closure of 108 nodes). DAG search for D[P], [[P]], L[P][T: no duplicate. The two sk-thm-p1 tool_uses are generic power-series algebra; accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialPowerSeriesMonoidCompletion",
+  "declaration": "AddMonoidAlgebra.polynomial_power_series_monoid_completion",
+  "declarations": [
+   "AddMonoidAlgebra.polynomialPowerSeriesMonoidInclusion",
+   "AddMonoidAlgebra.polynomial_power_series_monoid_completion"
+  ],
+  "file": "lean/Sheaf/RingTheory/PolynomialPowerSeriesMonoidCompletion.lean",
+  "statement": "theorem polynomial_power_series_monoid_completion (L : Type u) [CommRing L] [IsLocalRing L] (hL : IsField L ∨ ∃ p : ℕ, IsCohenRing p L) (P : Type v) [AddCommMonoid P] (hP : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : P, IsUnit (Multiplicative.ofAdd q) → q = 0) (n : ℕ) (a : Ideal (MvPolynomial (Fin n) (AddMonoidAlgebra L P))) (ha : a = Ideal.map (algebraMap L (MvPolynomial (Fin n) (AddMonoidAlgebra L P))) (IsLocalRing.maximalIdeal L) ⊔ (Ideal.span {x | ∃ q : P, q ≠ 0 ∧ x = MvPolynomial.C (single q (1 : L))} ⊔ Ideal.span (Set.range (MvPolynomial.X : Fin n → MvPolynomial (Fin n) (AddMonoidAlgebra L P))))) (b : Ideal (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P)) (hb : b = Ideal.map (algebraMap (MvPowerSeries (Fin n) L) (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P)) (Ideal.map (MvPowerSeries.C : L →+* MvPowerSeries (Fin n) L) (IsLocalRing.maximalIdeal L) ⊔ Ideal.span (Set.range (MvPowerSeries.X : Fin n → MvPowerSeries (Fin n) L))) ⊔ Ideal.span {x | ∃ q : P, q ≠ 0 ∧ x = single q (1 : MvPowerSeries (Fin n) L)}) (NB : Ideal (AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)))) (hNB : NB = Ideal.span {x | ∃ q : P, q ≠ 0 ∧ x = AdicCompletion.of a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)) (MvPolynomial.C (single q (1 : L)))}) (NH : Ideal (AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P))) (hNH : NH = Ideal.span {x | ∃ q : P, q ≠ 0 ∧ x = AdicCompletion.of b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P) (single q (1 : MvPowerSeries (Fin n) L))}) : ∃ e : ∀ j : ℕ, 0 < j → (MvPolynomial (Fin n) (AddMonoidAlgebra L P) ⧸ a ^ j) ≃+* (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P ⧸ b ^ j), (∀ (j : ℕ) (hj : 0 < j) (F : MvPolynomial (Fin n) (AddMonoidAlgebra L P)), e j hj (Ideal.Quotient.mk (a ^ j) F) = Ideal.Quotient.mk (b ^ j) (polynomialPowerSeriesMonoidInclusion L P n F)) ∧ (∀ (j : ℕ) (hj : 0 < j) (x : MvPolynomial (Fin n) (AddMonoidAlgebra L P) ⧸ a ^ (j + 1)), Ideal.Quotient.factorPow b (Nat.le_succ j) (e (j + 1) (Nat.succ_pos j) x) = e j hj (Ideal.Quotient.factorPow a (Nat.le_succ j) x)) ∧ IsLocalRing (AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P))) ∧ IsLocalRing (AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P)) ∧ IsAdicComplete (Ideal.map (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra L P)) (AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)))) a) (AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P))) ∧ IsAdicComplete (Ideal.map (algebraMap (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P) (AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P))) b) (AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P)) ∧ ∃ Ψ : AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)) ≃ₐ[L] AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P), (∀ (j : ℕ) (hj : 0 < j) (x : AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P))), AdicCompletion.evalₐ b j (Ψ x) = e j hj (AdicCompletion.evalₐ a j x)) ∧ (∀ F : MvPolynomial (Fin n) (AddMonoidAlgebra L P), Ψ (AdicCompletion.of a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)) F) = AdicCompletion.of b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P) (polynomialPowerSeriesMonoidInclusion L P n F)) ∧ @Continuous _ _ (Ideal.map (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra L P)) (AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)))) a).adicTopology (Ideal.map (algebraMap (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P) (AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P))) b).adicTopology Ψ ∧ @Continuous _ _ (Ideal.map (algebraMap (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P) (AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P))) b).adicTopology (Ideal.map (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra L P)) (AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)))) a).adicTopology Ψ.symm ∧ Ideal.map Ψ.toRingEquiv.toRingHom NB = NH ∧ ∃ g : (AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)) ⧸ NB) ≃ₐ[L] (AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P) ⧸ NH), (∀ x : AdicCompletion a (MvPolynomial (Fin n) (AddMonoidAlgebra L P)), g (Ideal.Quotient.mk NB x) = Ideal.Quotient.mk NH (Ψ x)) ∧ ∃ d : (AdicCompletion b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P) ⧸ NH) ≃ₐ[L] MvPowerSeries (Fin n) L, ∀ F : MvPowerSeries (Fin n) L, d (Ideal.Quotient.mk NH (AdicCompletion.of b (AddMonoidAlgebra (MvPowerSeries (Fin n) L) P) (single 0 F))) = F",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coefficient inclusion is constructed using Mathlib eval₂Hom and mapRingHom. The equation ha explicitly spells out the coefficient, nonzero-monomial, and variable generators of a, so no theorem node is added to stmt_deps. Named ideal parameters have equations fixing exactly the ideals of the node. Repairs H2 of returned head b96f5d8ee52e."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40f454268",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Re-delivery repairs H2 of b96f5d8e. The theorem stmt_dep lem-trf-log-regular-saturation-normality and its public import are removed. ha now spells out map(algebraMap L E) m_L ⊔ (span{C(single q 1)|q≠0} ⊔ span X), identical to localModelCompletionIdeal (LogRegularSaturationNormality.lean:49). The node differs from side-live/live only in lean; lean.statement is verbatim in the file. Re-read clause by clause: hL field-or-Cohen, fs+sharp P, independent universes u/v; b, NB, NH pinned; real eval₂Hom inclusion; e_j tied to the inclusion and compatible under factorPow; B and H local and adic-complete; Ψ ≃ₐ[L] matches evalₐ, fixes the images of all polynomials, is continuous both ways and maps NB onto NH; g and d canonical. Edge cases P={0}, n=0, j=1 covered. Only sorry; docstrings carry source, blueprint and 7 steps; no duplicate in side-live. No file changed, so no compile; worker reports a clean scompile."
+ }
+}

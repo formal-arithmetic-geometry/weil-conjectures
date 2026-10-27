@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-unipotent-matrix-group-fixed-vector",
+ "kind": "statement",
+ "title": "Common fixed vector for a group of unipotent matrices",
+ "statement": "Let $K$ be any field [def-weil-field] and let $d\\geq1$ be an integer. Let $H\\subseteq\\operatorname{GL}_d(K)$ be a subgroup of the group of invertible $d\\times d$ matrices over $K$ (so $H$ contains $I_d$ and is closed under matrix multiplication and inversion). Suppose that for each $h\\in H$ there exists an integer $N_h\\geq1$ such that $(h-I_d)^{N_h}=0$. Then there exists a column vector $v\\in K^d$ such that $v\\ne0$ and $hv=v$ for every $h\\in H$. No finiteness, commutativity, algebraicity or connectedness assumption is made on $H$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.1, printed pp.279--280 (an abstract group acting unipotently on a nonzero finite-dimensional vector space has a nonzero common fixed vector), specialized to a subgroup of GL_d(K)."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $L$ of $K$ using [lem-pc-algebraic-closure-exists-unique], and identify $K$ with its image in $L$. View each $h\\in H$ as a matrix over $L$. Its inverse over $K$ remains its inverse over $L$, and its given equation $(h-I_d)^{N_h}=0$ remains true entry by entry. Thus the same abstract group $H$ acts on the nonzero space $L^d$ by unipotent operators. We will descend a fixed vector at the end; there is no assumption that $H$ is finite.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1, printed p.279: replacement of the base field by its algebraic closure; footnote 1."
+   }
+  },
+  {
+   "text": "Among the nonzero $H$-stable $L$-subspaces of $L^d$ choose $W$ of smallest dimension: these dimensions form a nonempty set of positive integers, since $L^d$ itself is allowed. A nonzero proper stable subspace of $W$ would have smaller dimension (extend its basis to one of $W$), so none exists. Put $r_h=h|_W$. Since $h^{-1}$ also preserves $W$, these are invertible and $r_{gh}=r_g r_h$. Restricting the polynomial equation to $W$ gives $(r_h-I_W)^{N_h}=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1, printed p.279: replacement of the representation by a simple submodule."
+   }
+  },
+  {
+   "text": "Put $A=\\operatorname{span}_L\\{r_h:h\\in H\\}\\subseteq\\operatorname{End}_L(W)$. This span is a unital subalgebra: $r_1=I_W$ and $r_g r_h=r_{gh}$ show closure under products of finite sums. An $A$-stable subspace is $H$-stable and conversely; hence $W$ is a faithful simple left $A$-module. By [lem-sfb-simple-algebra-scalar-endomorphisms], $C=\\operatorname{End}_A(W)$ consists exactly of the scalar maps from $L$. An $L$-basis of $W$ therefore generates $W$ as a $C$-module. Apply [lem-sfb-finite-simple-double-centralizer] to $(A,W)$: any $L$-linear endomorphism $f$ is additive and commutes with every scalar map, so is $C$-linear, and the cited surjectivity gives $a\\in A$ acting as $f$. Since $A$ acts by its inclusion in $\\operatorname{End}_L(W)$, this says $A=\\operatorname{End}_L(W)$.",
+   "uses": [
+    "lem-sfb-simple-algebra-scalar-endomorphisms",
+    "lem-sfb-finite-simple-double-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1, printed pp.279–280: double-centralizer theorem and scalar endomorphisms, giving A=End_k(V)."
+   }
+  },
+  {
+   "text": "Let $J=\\operatorname{span}_L\\{r_h-I_W:h\\in H\\}\\subseteq A$. It is a two-sided ideal: for $g,h\\in H$, $$r_g(r_h-I_W)=(r_{gh}-I_W)-(r_g-I_W),\\qquad (r_h-I_W)r_g=(r_{hg}-I_W)-(r_g-I_W),$$ and bilinearity extends these inclusions to all of $A$ and $J$. By [lem-pc-finite-dimensional-nilpotent-trace], each $r_h-I_W$ has trace zero, since its power $N_h$ is zero and $W$ is finite-dimensional. Trace is the sum of diagonal entries by [def-weil-endomorphism-trace], so finite linear combinations also have trace zero. Choose a basis of $W$; since $\\dim_L W\\geq1$, the matrix unit $E_{11}\\in A$ has trace $1\\ne0$. Hence $J\\ne A$.",
+   "uses": [
+    "lem-pc-finite-dimensional-nilpotent-trace",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1, printed p.280: the span J is an ideal and every element of J has trace zero."
+   }
+  },
+  {
+   "text": "We show directly that a proper two-sided ideal $J$ of $A=\\operatorname{End}_L(W)$ must be zero. Otherwise choose $x\\in J$ with a nonzero matrix entry $x_{ij}$. For every pair of basis indices $a,b$, matrix multiplication gives $E_{ai}xE_{jb}=x_{ij}E_{ab}\\in J$. Scaling by $x_{ij}^{-1}$ puts every $E_{ab}$ in $J$; these matrices span $A$, contradicting $J\\ne A$. Consequently $J=0$. Since $r_h-I_W\\in J$, all $r_h$ are $I_W$. Any nonzero $w\\in W\\subseteq L^d$ is therefore fixed by every $h\\in H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1, printed p.280: simplicity of the full matrix algebra; the matrix-unit calculation supplies the elementary argument."
+   }
+  },
+  {
+   "text": "It remains to descend the fixed vector $w=(w_1,\\ldots,w_d)\\ne0$. Choose a $K$-basis $c_1,\\ldots,c_t$ of the $K$-span in $L$ of its finitely many coordinates, and write $w=\\sum_{j=1}^t c_j v_j$ with $v_j\\in K^d$. For every $h\\in H$, $0=(h-I_d)w=\\sum_j c_j(h-I_d)v_j$. The entries of $(h-I_d)v_j$ lie in $K$, so independence of the $c_j$ gives $(h-I_d)v_j=0$ for every $j$. Some $v_j$ is nonzero, because $w\\ne0$. Fixing such a $j$ gives a single nonzero vector in $K^d$ fixed by all of $H$. This coefficient comparison works simultaneously for arbitrarily many $h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1, printed p.279, footnote 1: fixed vectors descend under scalar extension; explicit finite coordinate-span argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-sfb-simple-algebra-scalar-endomorphisms",
+  "lem-sfb-finite-simple-double-centralizer",
+  "lem-pc-finite-dimensional-nilpotent-trace",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.1, printed pp.279–280, including footnote 1; minimal-dimension, matrix-unit and coefficient-comparison details written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every subgroup of invertible matrices consisting of unipotent matrices has a nonzero common fixed vector",
+   "results": "8 hits: fixedPoints_subgroup_iSup, Representation.le_comap_invariants, Subgroup.HasDetOne, Subgroup.HasDetOne.casesOn, Subgroup.instHasDetPlusMinusOneOfHasDetOne, Subgroup.periods, Representation.invariants, Subgroup.HasDetOne.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant subspaces and subgroup fixed-point intersections are definitions or identities, not nonvanishing; nil-regular and kernel-stabilization results concern a single linear operator; Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean:31 defines a particular line subgroup, not this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kolchin fixed vector theorem: an abstract group acts by unipotent endomorphisms on a nonzero finite dimensional vector space",
+   "results": "8 hits: LinearMap.exists_isNilRegular, LinearMap.exists_isNilRegular_of_finrank_le_card, FixedPoints.finrank_le_card, FixedPoints.rank_le_card, FixedPoints.finrank_eq_card, LinearMap.IsNilRegular, Module.End.exists_ker_pow_eq_ker_pow_succ, LieModule.exists_isRegular_of_finrank_le_card",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant subspaces and subgroup fixed-point intersections are definitions or identities, not nonvanishing; nil-regular and kernel-stabilization results concern a single linear operator; Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean:31 defines a particular line subgroup, not this theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant subspaces and subgroup fixed-point intersections are definitions or identities, not nonvanishing; nil-regular and kernel-stabilization results concern a single linear operator; Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean:31 defines a particular line subgroup, not this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|Kolchin|common.*fixed|fixed.*vector",
+   "results": "3 hits in Mathlib/LinearAlgebra: Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant subspaces and subgroup fixed-point intersections are definitions or identities, not nonvanishing; nil-regular and kernel-stabilization results concern a single linear operator; Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean:31 defines a particular line subgroup, not this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subgroup of GL of a nonzero finite dimensional vector space consisting of unipotent operators has a common nonzero fixed vector",
+   "results": "8 hits: Matrix.GeneralLinearGroup.parabolicFixedPoint, LinearMap.exists_isNilRegular, Matrix.GeneralLinearGroup.IsParabolic.smul_eq_self_iff, Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero, Matrix.instNonemptyTransvectionStructOfNontrivial, LinearMap.exists_isNilRegular_of_finrank_le_card, Matrix.GeneralLinearGroup.fixpointPolynomial_eq_zero_iff, Matrix.GeneralLinearGroup.IsParabolic",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, two-dimensional parabolic fixed points and nil-regular operators do not state the common fixed-vector theorem for arbitrary unipotent matrix groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kolchin fixed point theorem for groups all of whose elements are unipotent matrices",
+   "results": "8 hits: Matrix.GeneralLinearGroup.parabolicFixedPoint, Matrix.GeneralLinearGroup.fixpointPolynomial_eq_zero_iff, Matrix.GeneralLinearGroup.IsParabolic.parabolicFixedPoint_pow, Matrix.GeneralLinearGroup.IsParabolic.smul_eq_self_iff, Matrix.GeneralLinearGroup.fixpointPolynomial_aeval_eq_zero_iff, LinearMap.exists_isNilRegular, Subgroup.mem_strictPeriods_iff, Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, two-dimensional parabolic fixed points and nil-regular operators do not state the common fixed-vector theorem for arbitrary unipotent matrix groups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abstract group acting by unipotent linear maps on a finite dimensional nonzero vector space has nonzero invariants",
+   "results": "8 hits: Representation.le_comap_invariants, Representation.averageMap_invariant, Representation.invariants_eq_top, Representation.invariants, Representation.mem_invariants, Rep.instInjective, Rep.invariantsFunctor_obj_carrier, Representation.invariants_eq_inter",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, two-dimensional parabolic fixed points and nil-regular operators do not state the common fixed-vector theorem for arbitrary unipotent matrix groups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, two-dimensional parabolic fixed points and nil-regular operators do not state the common fixed-vector theorem for arbitrary unipotent matrix groups"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|Kolchin|common.*fixed|fixed.*vector",
+   "results": "3 hits: Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, two-dimensional parabolic fixed points and nil-regular operators do not state the common fixed-vector theorem for arbitrary unipotent matrix groups"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-rational-representation-fixed-vector",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Example 19.19, printed p.401, with Corollary 19.18 and Lemma 19.16; Section 2.42, printed p.53 (connectedness). Fixed-vector input in Milne 19.16: a nonzero rational representation of a unipotent group has nonzero invariants; made precise using 14.3 and 14.12. Linear-algebra prerequisite for the fixed-vector input: Milne Proposition 14.1, applied after showing all matrices in the image of the requested representation are unipotent.",
+   "via": [
+    "lem-sfb-unipotent-rational-representation-fixed-vector",
+    "lem-sfb-general-linear-reductive",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unipotent-matrix-group-fixed-vector",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 14.1 and supplied its double-centralizer/trace proof in six steps, including explicit coefficient descent for infinite H and matrix units for simplicity. Created only the scalar-Schur and finite double-centralizer Mathlib leaves; reused algebraic-closure existence and nilpotent trace. Statement unchanged. No Lean written or compiled.",
+  "blueprint": "The ancestor command returns null for the inherited created-item chain; preserved its null from.node and inherited via list. Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3): the current unit assembles proper and open images by compactification. This split is strictly below the inherited alteration/GIT input recorded in from.place. The six steps realize Milne 14.1, the linear-algebra prerequisite of the inherited fixed-vector input; no unit step or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-92011db8d",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-92011db8d (reviewer sub-agent of L); spot-checked: Read Milne Prop 14.1 at printed pp.279-280, including the displayed double-centralizer theorem and footnote 1. The six steps follow it exactly: algebraic closure via lem-pc-algebraic-closure-exists-unique (Mathlib leaf); a minimal stable W (elementary); A=End_L(W) via the two new leaves, with simplicity, faithfulness, C=L and C-finite generation each checked; J is a two-sided ideal with trace 0 by lem-pc-finite-dimensional-nilpotent-trace plus def-weil-endomorphism-trace, and E_11 has trace 1 in every characteristic; the matrix-unit simplicity calculation gives J=0; explicit coefficient descent works for infinite H. Checked the new leaves against Mathlib source. IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed (AlgebraRepresentation/Basic.lean:22-32) is an exact match. Module.Finite.toModuleEnd_moduleEnd_surjective (SimpleModule/Basic.lean:565, 581-592, with the simple-to-semisimple instance at line 68) is a one-line specialization; its faithfulness hypothesis is extra but harmless. Both are statement-only, self-contained and searched. Tested the new nodes on M_n(K) acting on K^n, Z acting on Z/p and C over R, and the item on d=1, the unitriangular group and the order-p unipotent group in characteristic p. No duplicate found in the snapshot or the live clones: lem-wf-schur-scalar is only for Qbar_l, and the Lie-Kolchin node is about group schemes. All off-unit citations are Mathlib leaves, so no tool_uses and no SGA. Live: the item is unsplit with no repair note, so the delivery is not superseded. Both citers' uses match the unchanged statement."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.UnipotentMatrixGroupFixedVector",
+  "declaration": "Matrix.GeneralLinearGroup.exists_ne_zero_fixedVec_of_unipotent",
+  "file": "lean/Sheaf/LinearAlgebra/UnipotentMatrixGroupFixedVector.lean",
+  "statement": "theorem exists_ne_zero_fixedVec_of_unipotent {K : Type u} [Field K] {d : ℕ} (hd : 1 ≤ d) (H : Subgroup (Matrix.GeneralLinearGroup (Fin d) K)) (hH : ∀ h ∈ H, ∃ N : ℕ, 1 ≤ N ∧ ((h : Matrix (Fin d) (Fin d) K) - 1) ^ N = 0) : ∃ v : Fin d → K, v ≠ 0 ∧ ∀ h ∈ H, Matrix.mulVec (h : Matrix (Fin d) (Fin d) K) v = v",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-001a14f74",
+  "group": "NP",
+  "result": "fix",
+  "note": "Lean statement exact vs node and Milne Prop 14.1: Field K at universe u, 1 ≤ d, Subgroup of GeneralLinearGroup (Fin d) K, per-h N ≥ 1 with matrix-ring (h-1)^N = 0, ∃ v ≠ 0 before ∀ h with mulVec. No extra assumptions. Edge cases d=0 (excluded), d=1, trivial H, infinite unitriangular group, char p OK. statement field verbatim; node differs from live only in lean; stmt_dep def-weil-field = Field; no defs; sorry-only; docstring has source, blueprint id and the 6-step proof; no duplicate in Mathlib or lean/Sheaf. Sole fault H11: the worker's own reread was given as the second reading → FIX fixes/lem-sfb-unipotent-matrix-group-fixed-vector.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean changed, so no compile run."
+ }
+}

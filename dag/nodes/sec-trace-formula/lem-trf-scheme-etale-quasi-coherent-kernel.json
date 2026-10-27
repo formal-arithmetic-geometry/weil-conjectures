@@ -38,19 +38,18 @@
  ],
  "proof": [
   {
-   "text": "By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], choose quasi-coherent Zariski $\\mathcal O_T$-modules $F,G$ and isomorphisms $F_{\\mathrm{et}}\\simeq M$, $G_{\\mathrm{et}}\\simeq N$. Full faithfulness gives a morphism $\\psi:F\\to G$ whose associated morphism corresponds to $\\varphi$. The morphism formula in [lem-trf-zariski-etale-tensor-sections] identifies its component at $u:U\\to T$ with $\\Gamma(U,u^*\\psi)$. Thus it suffices to identify the kernel of $\\psi_{\\mathrm{et}}$; conjugating by the chosen isomorphisms gives the kernel of $\\varphi$.",
+   "text": "Restrict M and N to quasi-coherent Zariski modules F and G using the specified restriction functor in [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], and let f be the restriction of phi. The counit is an isomorphism at M and N and its naturality identifies the extension of f with phi. The same theorem supplies natural section isomorphisms from the extension of every quasi-coherent Zariski module H to U |-> Gamma(U,u^*H), including compatibility with every morphism used below.",
    "uses": [
-    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
-    "lem-trf-zariski-etale-tensor-sections"
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 0GNB (lemma-properties-quasi-coherent), proof of (3): write a = b^a; Tag 03DX (proposition-equivalence-quasi-coherent), (2), and Tag 03FH (remark-change-topologies-ringed-sites)."
+    "place": "Tag 0GNB(3), via the left-exactness argument of Tag 06VE(5)."
    }
   },
   {
-   "text": "Form the Zariski module kernel $i:K=\\ker\\psi\\to F$. By [lem-weil-pbc-quasi-coherent-module-kernel], $K$ is quasi-coherent. The same equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] therefore makes $K_{\\mathrm{et}}$ a quasi-coherent module on $T_{\\mathrm{et}}$. Applying the association to $i$ gives a morphism $i_{\\mathrm{et}}:K_{\\mathrm{et}}\\to F_{\\mathrm{et}}$.",
+   "text": "Let K=ker(f) with inclusion i. By [lem-weil-pbc-quasi-coherent-module-kernel], K is quasi-coherent. Its etale extension is therefore quasi-coherent by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Restriction is additive directly on components, so its left adjoint extension is additive and the extended kernel pair is a short complex.",
    "uses": [
     "lem-weil-pbc-quasi-coherent-module-kernel",
     "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
@@ -58,52 +57,51 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 0GNB (lemma-properties-quasi-coherent), proof of (3); Zariski kernel closure is schemes.tex Tag 01LB (item-kernel), affine case Tag 01IC (lemma-kernel-cokernel-quasi-coherent)."
+    "place": "Tag 0GNB(3), via the left-exactness argument of Tag 06VE(5)."
    }
   },
   {
-   "text": "Fix any object $u:U\\to T$ of the small etale site. By [def-weil-etale-morphism] it is flat; by [def-weil-flat-morphism] every stalk map $\\mathcal O_{T,u(x)}\\to\\mathcal O_{U,x}$ is flat. Use the tensor pullback $P=u^*$ of [lem-pc-module-pullback-adjunction], with its specified action $h\\mapsto 1\\otimes u^{-1}h$. This action is additive: on a local tensor $b\\otimes m$, the map for $h+h'$ sends it to $b\\otimes(h(m)+h'(m))=b\\otimes h(m)+b\\otimes h'(m)$, and the map for zero is zero. The object and map formulas are exactly those required by [lem-sc-stalk-flat-tensor-pullback-kernels], which shows that $u^*i$ is a kernel of $u^*\\psi$. Now [lem-sc-global-sections-left-exact], applied to the scheme $U$, shows that $\\Gamma(U,u^*i)$ identifies $\\Gamma(U,u^*K)$ with $\\ker(\\Gamma(U,u^*\\psi))$. This uses preservation of kernels only; global sections need not preserve epimorphisms.",
+   "text": "For an etale object u:U->T, etaleness implies flatness ([def-weil-etale-morphism], [def-weil-flat-morphism]). The tensor pullback is additive by its adjunction [lem-pc-module-pullback-adjunction], and preserves finite limits by the already proved [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective]. Thus it preserves the kernel fork of f. Global sections preserve that kernel fork by [lem-sc-global-sections-left-exact]. The resulting section complex Gamma(U,u^*K)->Gamma(U,u^*F)->Gamma(U,u^*G) is exact with monic first arrow.",
    "uses": [
     "def-weil-etale-morphism",
     "def-weil-flat-morphism",
     "lem-pc-module-pullback-adjunction",
-    "lem-sc-stalk-flat-tensor-pullback-kernels",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
     "lem-sc-global-sections-left-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 06VE (lemma-equivalence-quasi-coherent-limits), proof of (5), left exactness because etale morphisms are flat; morphisms.tex lemma-etale-flat; modules.tex Tag 01AH (lemma-limits-colimits), (1)."
+    "place": "Tag 0GNB(3), via the left-exactness argument of Tag 06VE(5)."
    }
   },
   {
-   "text": "By Step 1 and the same morphism formula applied to $i$, the component of $i_{\\mathrm{et}}$ at $U$ is precisely the map $\\Gamma(U,u^*i)$ of Step 3. Hence $i_{\\mathrm{et}}$ is injective on each object and its image there is $\\ker((\\psi_{\\mathrm{et}})_U)$. The sectionwise module-limit statement [lem-weil-pbc-module-sheaves-limits-sectionwise], for the finite diagram $(\\psi_{\\mathrm{et}},0)$, identifies these kernels with a module sheaf and the categorical kernel. Explicitly, the factorization $K_{\\mathrm{et}}\\to\\ker\\psi_{\\mathrm{et}}$ has at $U$ the bijection induced by $\\Gamma(U,u^*i)$; it commutes with restrictions because $i_{\\mathrm{et}}$ does, and the inverse bijections commute with restrictions by uniqueness of preimages. It is therefore an isomorphism of module sheaves. Since $K_{\\mathrm{et}}$ is quasi-coherent by Step 2, so is $\\ker\\psi_{\\mathrm{et}}$ and thus $\\ker\\varphi$. The same cited sectionwise-limit statement gives the formula $(\\ker\\varphi)(U)=\\ker\\varphi_U$ in the item.",
+   "text": "The section isomorphisms and morphism compatibility from [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identify the evaluated extended complex with the complex of Step 3. Transport exactness and monicity through this isomorphism. Object evaluations jointly reflect limits of presheaves, and forgetting a sheaf of modules to its additive presheaf reflects limits, as in [lem-weil-pbc-module-sheaves-limits-sectionwise]. Hence the extended inclusion is a categorical kernel of the extended f. Uniqueness of kernels and the counit isomorphisms of Step 1 identify the extension of K with ker(phi). Quasi-coherence is invariant under this isomorphism; sheafification on each slice is available by the equivalence of the etale slice over U and the small etale site of U. Finally evaluation of the actual kernel fork of phi preserves its limit, giving injectivity and Function.Exact on every object as asserted.",
    "uses": [
-    "lem-trf-zariski-etale-tensor-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
     "lem-weil-pbc-module-sheaves-limits-sectionwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 0GNB (lemma-properties-quasi-coherent), proof of (3): Ker(a) = Ker(b)^a; sites-modules.tex Tag 03DB (lemma-limits-colimits), limits paragraph."
+    "place": "Tag 0GNB(3), via the left-exactness argument of Tag 06VE(5)."
    }
   }
  ],
  "proof_deps": [
   "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
-  "lem-trf-zariski-etale-tensor-sections",
   "lem-weil-pbc-quasi-coherent-module-kernel",
   "def-weil-etale-morphism",
   "def-weil-flat-morphism",
   "lem-pc-module-pullback-adjunction",
-  "lem-sc-stalk-flat-tensor-pullback-kernels",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
   "lem-sc-global-sections-left-exact",
   "lem-weil-pbc-module-sheaves-limits-sectionwise"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 0GNB (lemma-properties-quasi-coherent), proof of (3), with the kernel-preservation argument of Tag 06VE (lemma-equivalence-quasi-coherent-limits), proof of (5), expanded objectwise."
+  "place": "Tag 0GNB(3) and Tag 06VE(5), implemented using the existing Zariski-etale section comparison and the proved finite-limit preservation of flat tensor pullback instead of a separate stalkwise kernel argument."
  },
  "mathlib_searches": [
   {
@@ -195,7 +193,18 @@
  },
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "lem-trf-scheme-etale-quasi-coherent-kernel",
@@ -223,7 +232,6 @@
  },
  "tool_uses": [
   "lem-pc-module-pullback-adjunction",
-  "lem-sc-stalk-flat-tensor-pullback-kernels",
   "lem-sc-global-sections-left-exact",
   "lem-weil-pbc-module-sheaves-limits-sectionwise"
  ],
@@ -252,5 +260,15 @@
   "group": "Q83",
   "result": "pass",
   "note": "Clause-by-clause match: Scheme T arbitrary universe u; smallEtaleModuleRing T = actual Γ(U,O_U) ring sheaf on T.smallEtaleTopology; M N : ringedSiteModules.{u} (rfl = SmallEtaleModules T); Mathlib SheafOfModules.IsQuasicoherent = def-trf-space-quasi-coherent-module predicate; conclusion (kernel φ).IsQuasicoherent plus sectionwise injectivity and Function.Exact of the canonical kernel.ι, rendering (ker φ)(U)=ker φ_U. No extra hypotheses; edge cases (empty T, φ=0, id, zero modules) covered. Only the lean field changed and its statement is verbatim; no defs, sorry proof, docstrings with source and blueprint and Steps 1-4, proof_dep imports private, no line over 100 chars. nt_compile --json clean 2.6 s; a broken-copy control fails. Advisories: smallEtaleModuleRing and its instances come from theorem lem-trf-scheme-zariski-etale-quasi-coherent-equivalence's module (proof_dep, not stmt_dep; no def node owns them) — suggest an existing:true def node; the worker self-reported a direct read-only git show and a byte-identical restore of the item node file in the shared checkout."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T092917-L-3479512",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

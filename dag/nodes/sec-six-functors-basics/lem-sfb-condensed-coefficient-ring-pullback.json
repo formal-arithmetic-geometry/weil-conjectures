@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-condensed-coefficient-ring-pullback",
+ "kind": "statement",
+ "title": "Invertibility of the reconstructed condensed coefficient ring adjunct",
+ "statement": "For any scheme morphism f:Y→X and any commutative condensed ring Λ, reconstruct the actual coefficient morphism eta_f as a morphism of commutative-ring sheaves on coefficient-sized sites, using [lem-sfb-internal-module-operations-transport] and [def-sfb-integral-models-stacks-data]. Its adjunct under the commutative-ring sheaf inverse-image/direct-image adjunction of [def-weil-proetale-inverse-image] is an isomorphism. The map is the explicitly defined condensedSmallRingMap. No coordinate ring k, coordinate c, module, slice, nonemptiness or finiteness hypothesis occurs.",
+ "stmt_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "def-sfb-integral-models-stacks-data",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites Tag 00YV; Modules on Sites Tag 03D2; the actual alpha_f and eta_f in coefficient transport."
+ },
+ "proof": [
+  {
+   "text": "Apply spCoefficientIso_existsUnique from the existing cartesian coefficient theorem to obtain the ring-sheaf inverse-image isomorphism c on the original small pro-etale sites, with adjunct equal to condensedPushforwardHom on every section. This is the already proved ring reconstruction of alpha_f, not a new existence assumption.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the original ring inverse-image/direct-image adjunction through the strict AsSmall sheaf equivalences. By restrictFullyFaithful and its unit equation, the transported unit is whiskerLeft AsSmall.down.op of the original unit. Compare this left adjoint with the constructed coefficient-model inverse image via leftAdjointUniq, whose unit equation identifies the units. Composing this comparison with the transported c gives an isomorphism d on the coefficient-sized models.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the adjunct of d.hom under the constructed model adjunction. The two unit equations reduce its section value to the adjunct normalization of c. By coefficientMap_existsUnique this equals the chosen InternalModuleOperations.coefficientMap on sections, hence exactly condensedSmallRingMap. Injectivity of the adjunction Hom equivalence identifies the displayed adjunct inverse with d.hom, which is an isomorphism.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-integral-models-stacks-data",
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proposition-functoriality-algebraic-structures-topoi (00YV), lemma-pullback-module (03D2); the proved spCoefficientIso_existsUnique in Sheaf.Paper.CartesianCoefficientTwists; Mathlib Adjunction.restrictFullyFaithful and Adjunction.leftAdjointUniq, with their unit equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant ring sheaf inverse image isomorphism compatible with constant sections and Cartesian coefficient ring",
+   "date": "2026-10-26",
+   "results": "Search of the Mathlib interfaces for constant sheaves and inverse image. Project searches also read ProEtaleConstantRingMap, SheafPullbackForgetComparison and the actual condensed coefficient maps.",
+   "verdict": "The generic adjunction and constant comparisons are available; no theorem states transport of arbitrary coordinates for this reconstructed condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Sheaf",
+   "date": "2026-10-26",
+   "results": "12 hits, including Equivalence.sheafCongr and dense-subsite sheaf equivalences.",
+   "verdict": "Use sheafCongr for the slice; it does not itself provide the specified inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|sheafPushforwardContinuousComp|constantCommuteCompose",
+   "date": "2026-10-26",
+   "results": "25 hits, including Sites.Equivalence, Sites.Continuous and Sites.ConstantSheaf.",
+   "verdict": "These supply the proved site transport and constant-sheaf comparison used in the new fixed-scalar localization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantSliceModuleEncoding",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-constant-coefficient-pullback-coordinates",
+   "place": "Invertibility of the ring-sheaf adjunct of eta_f, prior to introducing arbitrary constant coordinates.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedCoefficientRingPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedCoefficientRingPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.condensedSmallRingMap_pullback_isIso",
+  "statement": "theorem condensedSmallRingMap_pullback_isIso\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] :\n    IsIso (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (Scheme.coefficientProEtaleModelBaseChange.{u, u} f) CommRingCat.{u + 1}\n      (Scheme.coefficientProEtaleModelTopology.{u, u} X)\n      (Scheme.coefficientProEtaleModelTopology.{u, u} Y)).homEquiv _ _).symm\n        (condensedSmallRingMap f Λ))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T152628-L-1143618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T181642-L-3477918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-torus-normalized-simple-submodule",
+ "kind": "statement",
+ "title": "A torus-normalized operator algebra has a torus-stable simple submodule",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $T$ be a $k$-group scheme [def-sc-group-scheme] isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(R)=R^\\times$ for every commutative $k$-algebra $R$. Let $M\\ne0$ be a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace], and let $\\tau:T\\to\\operatorname{GL}(M)$ be a rational representation, meaning a group-scheme homomorphism with $\\operatorname{GL}(M)(R)=\\operatorname{Aut}_R(M\\otimes_kR)$. Let $B\\subseteq\\operatorname{End}_k(M)$ be a unital $k$-subalgebra. Suppose for every commutative $k$-algebra $R$ and $t\\in T(R)$ that $\\tau_R(t)(B\\otimes_kR)\\tau_R(t)^{-1}=B\\otimes_kR$. Then there is a nonzero $k$-linear subspace $U\\subseteq M$ such that $BU\\subseteq U$, the only $B$-stable $k$-linear subspaces of $U$ are $0,U$, and $\\tau_R(t)(U\\otimes_kR)=U\\otimes_kR$ for every commutative $k$-algebra $R$ and $t\\in T(R)$. No semisimplicity assumption on the $B$-module $M$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent auxiliary lemma from the Grassmannian and projectivity in Propositions 7.29--7.30, printed p.146, and Borel fixed point Corollary 17.3, printed p.353: apply the latter to the closed locus of submodules of the least positive possible dimension. The precise operator-algebra statement is not a verbatim theorem in Milne."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-dimensional-subspace",
+  "def-sfb-tori-multiplicative-type",
+  "def-wf-algebraic-representations",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=\\dim_k M>0$. The set of dimensions of nonzero $B$-stable subspaces of $M$ is a nonempty subset of $\\{1,\\ldots,n\\}$, since $M$ itself belongs to it. Let $d$ be its least element and choose a $B$-stable subspace $W$ of dimension $d$. Every $B$-stable subspace of $M$ of dimension $d$ is simple: any nonzero proper subspace stable under $B$ would have dimension strictly between $0$ and $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent auxiliary argument from Propositions 7.29--7.30, printed p.146, and Corollary 17.3, printed p.353."
+   }
+  },
+  {
+   "text": "Choose a basis $M\\simeq k^n$. Apply [lem-sfb-free-quotient-grassmann-projective] with base $\\operatorname{Spec}k$ and quotient rank $n-d$. Its projective scheme $G$ parametrizes rank-$(n-d)$ locally free quotients of $M\\otimes_k\\mathcal O_Y$ on every $k$-scheme $Y$. Write $q:M\\otimes_k\\mathcal O_G\\twoheadrightarrow\\mathcal Q$ for its universal quotient, and $\\mathcal S=\\ker q$. Locally trivialize $\\mathcal Q$ and restrict to the locus where a chosen $(n-d)$-minor of the surjection matrix is invertible. After changing its target frame that matrix is $[I\\ A]$; its kernel consists of $(-Av,v)$, with $v$ in a free module of rank $d$. Thus $\\mathcal S$ is locally free of rank $d$, the surjection is locally split, and its split exact sequence remains exact under every base change. Conversely a rank-$d$ locally direct summand gives such a quotient. Thus $G$ also parametrizes those subbundles, including $d=n$, where $G=\\operatorname{Spec}k$.",
+   "uses": [
+    "lem-sfb-free-quotient-grassmann-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent auxiliary argument from Propositions 7.29--7.30, printed p.146, and Corollary 17.3, printed p.353."
+   }
+  },
+  {
+   "text": "The algebra $B$ is finite-dimensional, since it is a linear subspace of $\\operatorname{End}_k(M)$. Choose a basis $b_1,\\ldots,b_s$ of $B$ and form the bundle map $D:\\mathcal S\\to\\mathcal Q^{\\oplus s}$ with components $q\\circ b_j|_{\\mathcal S}$. On an affine open where both bundles are free, [lem-sc-affine-free-map-zero-locus] represents the condition $h^*D=0$ by the closed subscheme cut out by the finitely many matrix entries. Vanishing of a sheaf morphism is local on the source, so [lem-sc-local-closed-locus-gluing] glues these loci to a closed immersion $X\\hookrightarrow G$, locally of finite presentation. Its functor on every $k$-scheme $Y$ is precisely the rank-$d$ locally direct summands $L\\subseteq M\\otimes_k\\mathcal O_Y$ with $b_jL\\subseteq L$ for all $j$. These conditions are equivalent to $B\\otimes_k\\mathcal O_Y$ preserving $L$, since the $b_j$ span $B$. This is a scheme-theoretic zero locus, not just a closed set of rational points.",
+   "uses": [
+    "lem-sc-affine-free-map-zero-locus",
+    "lem-sc-local-closed-locus-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent auxiliary argument from Propositions 7.29--7.30, printed p.146, and Corollary 17.3, printed p.353."
+   }
+  },
+  {
+   "text": "By [lem-pc-projective-proper], $G$ is proper over $k$. A closed immersion is proper and composites of proper morphisms are proper by [lem-weil-pbc-proper-fp-permanence], hence $X$ is proper over $k$. In particular it is of finite type, by [def-weil-proper-morphism]. The subspace $W$ selected in step 1 gives a $k$-point of $X$, so $X$ is nonempty. We make no assertion that $X$ is reduced, smooth, or connected.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent auxiliary argument from Propositions 7.29--7.30, printed p.146, and Corollary 17.3, printed p.353."
+   }
+  },
+  {
+   "text": "The representation defines an action on $G$: on a commutative $k$-algebra $R$, send a locally direct summand $L\\subseteq M\\otimes_kR$ to $gL$, where $g=\\tau_R(t)$. Its quotient is identified with the original quotient by $g^{-1}$, so its rank is unchanged. These assignments commute with scalar extension, and the representing property in [lem-sfb-free-quotient-grassmann-projective] gives the action morphism (equivalently apply the construction to the universal automorphism and subbundle on $T\\times_kG$). If $L$ is $B_R$-stable, then for $b\\in B_R$, $\\ell\\in L$ one has $b(g\\ell)=g((g^{-1}bg)\\ell)\\in gL$, since the normalization hypothesis gives $g^{-1}bg\\in B_R$. This holds over every $R$, and locally over every $k$-scheme; the universal map on $T\\times_kX$ therefore has zero pulled-back $D$. The factorization criterion of [lem-sc-local-closed-locus-gluing] factors it through $X$. The identity and multiplication identities follow from those of $\\tau$ and uniqueness of this factorization. We have constructed an action of $T$ on the scheme $X$, with its full possible nonreduced structure.",
+   "uses": [
+    "lem-sfb-free-quotient-grassmann-projective",
+    "lem-sc-local-closed-locus-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent auxiliary argument from Propositions 7.29--7.30, printed p.146, and Corollary 17.3, printed p.353."
+   }
+  },
+  {
+   "text": "The split torus $T$ is smooth and connected by the clause \"Every torus is smooth and connected\" in [lem-sfb-multiplicative-type-largest-subtorus]. It is affine and of finite type: the coordinate description of $\\mathbf G_m$ in [def-sc-gm-ga] gives $T\\simeq\\operatorname{Spec}k[x_1,y_1,\\ldots,x_r,y_r]/(x_iy_i-1:1\\leq i\\leq r)$. It is commutative, so its first commutator subgroup is trivial and it is solvable. All hypotheses of [lem-sfb-solvable-proper-fixed-point] now hold for its action on the nonempty proper finite-type scheme $X$. Obtain $x\\in X(k)$ fixed scheme-theoretically: $t\\cdot x_R=x_R$ for every commutative $k$-algebra $R$ and $t\\in T(R)$. This also covers $r=0$.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "def-sc-gm-ga",
+    "lem-sfb-solvable-proper-fixed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent auxiliary argument from Propositions 7.29--7.30, printed p.146, and Corollary 17.3, printed p.353."
+   }
+  },
+  {
+   "text": "Let $U\\subseteq M$ be the subspace classified by $x$. By step 3 it is $B$-stable and has dimension $d>0$. It is simple by the minimality argument in step 1. Since equality of points of $X(R)$ means equality of the corresponding subbundles of $M\\otimes_kR$, the fixed-point identity in step 6 is exactly $\\tau_R(t)(U\\otimes_kR)=U\\otimes_kR$. This proves every clause, without using semisimplicity of $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent auxiliary argument from Propositions 7.29--7.30, printed p.146, and Corollary 17.3, printed p.353."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-free-quotient-grassmann-projective",
+  "lem-sc-affine-free-map-zero-locus",
+  "lem-sc-local-closed-locus-gluing",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-proper-morphism",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "def-sc-gm-ga",
+  "lem-sfb-solvable-proper-fixed-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent auxiliary argument from Propositions 7.29--7.30, printed p.146, and Corollary 17.3, printed p.353. The normalized-operator-algebra lemma is not stated verbatim in the book; the matrix-zero-locus and universal-family argument above is supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split torus normalizing a unital algebra of endomorphisms of a finite dimensional vector space stabilizes some simple submodule without assuming semisimplicity",
+   "results": "8 hits: jacobson_density, IsSemisimpleModule.exists_end_algEquiv, IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end, Module.End.IsSemisimple.of_mem_adjoin_singleton, IsSemisimpleModule.exists_end_ringEquiv, Module.End.IsSemisimple.of_mem_adjoin_pair, Module.End.exists_isNilpotent_isSemisimple, IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_end",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract semisimple endomorphisms or set-theoretic projectivization, not a rational torus normalizing an operator algebra and a scheme-theoretically stable simple submodule."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*fixed|submodule.*Grassmannian|torus.*simple",
+   "results": "0 hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: no matching theorem in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torus action normalizing an endomorphism algebra fixes a minimal nonzero invariant subspace",
+   "results": "8 hits: Module.End.span_orbit_mem_invtSubmodule, Algebra.IsInvariant.mk, Representation.invariants, isMinimal_iff_isClosed_smul_invariant, Algebra.isInvariant_iff, Algebra.IsInvariant, Representation.le_comap_invariants, Algebra.IsInvariant.rec",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give invariant subspaces for abstract group actions or invariant subalgebras, not the stated existence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.invtSubmodule, IsSimpleModule",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the combined invariant-submodule and simple-module query returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel fixed point theorem on the projective variety of submodules of smallest positive dimension",
+   "results": "8 hits: Projectivization.submodule, Submodule.exists_dual_map_eq_bot_of_lt_top, Projectivization.submodule_mk'', Submodule.exists_forall_notMem_of_forall_ne_top, Projectivization.mk''_submodule, Projectivization.instFiniteDimensionalSubtypeMemSubmoduleSubmodule, Projectivization.submodule_eq, Projectivization.mk''",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract semisimple endomorphisms or set-theoretic projectivization, not a rational torus normalizing an operator algebra and a scheme-theoretically stable simple submodule."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalized-algebra-weight-line-simple",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Section 22(e), statement 22.54, printed p.481, infinitesimally simple representations in characteristic p. The displayed coefficients there must be coefficients of fundamental weights, equivalently pairings with simple coroots, not coefficients of simple roots. See report.md Source error. Corroboration read online: J. C. Jantzen, Moment graphs and representations, Sem. Congres 24 (2010), sections 5.1--5.2, printed pp.302--303, Curtis theorem, https://math.au.dk/~jantzen/grnbl.pdf. Full book reference WANTED: Jantzen (2003), Part II, sections 3.14--3.15. Supporting input to infinitesimal simplicity: Agent formulation of the normalized-algebra variant of Clifford theory, Exercise 4-2 (printed p.97), combined with the Grassmannian construction in 7.29, torus weight decomposition in Theorem 12.12 (printed pp.234--235), and Borel fixed point Corollary 17.3 (printed p.353). This precise operator-algebra formulation is an agent lemma, not a verbatim theorem of Milne. Supporting input: A torus-normalized operator algebra has a torus-stable simple submodule.",
+   "via": [
+    "lem-sfb-normalized-algebra-weight-line-simple",
+    "lem-sfb-restricted-module-infinitesimal-simplicity",
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-normalized-simple-submodule",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and reused the existing Grassmannian, affine zero-locus and gluing, properness, torus smoothness, and Borel fixed-point nodes. Wrote the closed B-submodule locus and its action over every coefficient algebra explicitly; minimal positive dimension supplies simplicity. No new nodes.",
+  "blueprint": "Read the current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), the inherited alteration/representation-theory prerequisite chain, and Milne 7.29--7.30 and 17.3. Steps 1--7 realize the parent auxiliary lemma by minimal-dimensional submodule Grassmannian and Borel fixed point. blueprint_refs.py ancestor returns None, an inherited broken ancestor chain; retain the existing from.node, via and precise from.place without inventing an ancestor. Whole-blueprint Grassmannian, Borel, fixed point, submodule and torus searches found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-free-map-zero-locus",
+    "why": "Generic affine matrix-zero-locus representability, used on local frames of the universal subbundle and quotient; no unit node states this tool."
+   },
+   {
+    "node": "lem-sc-local-closed-locus-gluing",
+    "why": "Generic local-to-global closed-locus representability, used for the vanishing condition and its universal factorization; no unit node states it."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic implication projective implies proper, needed for the Grassmannian; no same-unit node replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic closed immersions are proper and proper morphisms compose, used for the closed submodule locus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-free-map-zero-locus",
+  "lem-sc-local-closed-locus-gluing",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-88e784e58",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-88e784e58 (reviewer sub-agent of L); spot-checked: PASS, no fixes, no new nodes; full review in review.md. The statement is unchanged and true: a Lie–Kolchin-style argument (Milne 17.4) applying Borel's fixed-point theorem to minimal B-stable subspaces. I checked Milne iAG2017 7.29–7.30 (printed p.146) and 17.1–17.3 (printed p.353) in the PDF. It matches how the parent lem-sfb-normalized-algebra-weight-line-simple uses it in its step 4. Live and side-live still show the item unsplit and unreviewed, there is no repair note, and the DAG has no duplicate. Steps: (1) the least positive dimension d of a B-stable subspace exists and every d-dimensional one is simple, which is elementary. (2) The Grassmann node gives the quotient Grassmannian of rank n−d; the [I A] minor chart shows the kernel S is locally free of rank d and split, so it commutes with base change. (3) The zero locus of D=(q∘b_j|S)_j is built with the affine free-map zero-locus node on free affine opens and glued with the gluing node, whose locality hypotheses hold; it is scheme-theoretic. (4) Projective implies proper, plus closed immersion and composition, gives X proper and of finite type; W gives a k-point. (5) The T-action is q↦q∘τ(t)^{-1}, and b(gℓ)=g((g^{-1}bg)ℓ) holds over every R, so it factors through X by the gluing node's universal property. (6) Every hypothesis of the solvable fixed-point node holds: T is a torus, hence smooth and connected; it is affine of finite type by def-sc-gm-ga; it is commutative, hence solvable; X is nonempty, proper and of finite type. (7) The fixed point x gives a simple U with τ_R(t)(U⊗R)=U⊗R. Small cases checked: n=1; B=k (X=P(M)); d=n; r=0; the nonreduced k[N] example, whose locus a^2=0 is preserved by a↦a/t. Accepted tool uses: affine-free-map-zero-locus, local-closed-locus-gluing, pc-projective-proper and the proper-permanence Mathlib leaf, all generic. Batch-5 check: multiplicative-type-largest-subtorus reaches lem-trf-smooth-fpqc-base-descent, and solvable-proper-fixed-point reaches lem-trf-fppf-covering-base-change. Both are generic Mathlib leaves (fpqc descent of smoothness; base change of fppf coverings). Neither is part of the trace formula or Poincaré duality nor given by those assumptions, so both are accepted. No SGA citation. Maintainer note: blueprint.from.node is null, inherited from the ancestor chain (Q03 creation); this is a base-node fault, not this delivery's."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusNormalizedSimpleSubmodule",
+  "declaration": "AlgebraicGeometry.exists_torus_stable_simple_submodule",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusNormalizedSimpleSubmodule.lean",
+  "statement": "theorem exists_torus_stable_simple_submodule {k : Type u} [Field k] [IsAlgClosed k] (T : Scheme.{u}) [T.Over (Spec (.of k))] [GrpObj (T.asOver (Spec (.of k)))] (r : ℕ) (hT : Nonempty (Grp.mk (T.asOver (Spec (.of k))) ≅ MultiplicativeType.splitTorus k r)) (M : Type u) [AddCommGroup M] [Module k M] [FiniteDimensional k M] [Nontrivial M] (τ : GeneralLinearGroup.RationalHom (T.asOver (Spec (.of k))) (ULift.{u} (Fin (Module.finrank k M)))) [IsMonHom τ] (B : Subalgebra k (Module.End k M)) (hnormalizes : ∀ (R : Type u) [CommRing R] [Algebra k R] (t : points (T.asOver (Spec (.of k))) R), (Submodule.span R (Set.range (fun b : B ↦ (b : Module.End k M).baseChange R))).map ((Matrix.GeneralLinearGroup.toLin' (((Module.finBasis k M).reindex Equiv.ulift.symm).baseChange R) (τ.points R t)).toLinearEquiv).conj.toLinearMap = Submodule.span R (Set.range (fun b : B ↦ (b : Module.End k M).baseChange R))) : ∃ U : Submodule k M, U ≠ ⊥ ∧ (∀ (b : B) (m : M), m ∈ U → (b : Module.End k M) m ∈ U) ∧ (∀ W : Submodule k M, W ≤ U → (∀ (b : B) (m : M), m ∈ W → (b : Module.End k M) m ∈ W) → W = ⊥ ∨ W = U) ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (t : points (T.asOver (Spec (.of k))) R), (U.baseChange R).map ((Matrix.GeneralLinearGroup.toLin' (((Module.finBasis k M).reindex Equiv.ulift.symm).baseChange R) (τ.points R t)).toLinearEquiv).toLinearMap = U.baseChange R",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair H2: tau is the existing GeneralLinearGroup.RationalHom with IsMonHom, using the canonical finite basis reindexed by ULift. Its points act on R tensor M through Matrix.GeneralLinearGroup.toLin'. The statement cites the definition nodes def-wf-algebraic-representations and def-sc-general-linear-group; the theorem-node dependency and NaturalRepresentation interface are removed. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39c2dad49",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery fixes the H2 return of 8cc78e346ca9: the theorem stmt_dep lem-sfb-rational-representation-comodule-dictionary and NaturalRepresentation are removed; tau is GeneralLinearGroup.RationalHom with IsMonHom, acting on R⊗M through the canonical finBasis reindexed by ULift and Matrix.GeneralLinearGroup.toLin', citing def-wf-algebraic-representations and def-sc-general-linear-group (same interface as the landed lem-sfb-chevalley-character-cancellation). The node differs from side-live only in lean and stmt_deps; lean.statement is verbatim. Clauses checked: algebraically closed field; group-scheme iso over k to splitTorus k r (r=0 trivial); M nonzero and finite-dimensional; unital subalgebra B; normalization as an equality of the R-span of B with its conj-image for all R and t; conclusion gives a nonzero, B-stable, simple U whose base change is τ-stable for all R and t. Edge cases checked: r=0, dim M=1, U=M, B=k, B=End M, non-semisimple B, char p, zero or non-reduced R; single universe u. No new defs, sorry only, docstrings carry source, blueprint id and 7 steps, no duplicate. No files changed and no compile run."
+ }
+}

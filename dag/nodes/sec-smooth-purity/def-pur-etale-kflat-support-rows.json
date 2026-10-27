@@ -1,0 +1,112 @@
+{
+ "id": "def-pur-etale-kflat-support-rows",
+ "kind": "definition",
+ "title": "Families of actual tensor support rows",
+ "statement": "For categories C,D with zero morphisms in D, RowFamily C D is a function assigning a short complex in D to each object of C, together with a map of short complexes for every arrow of C. For two such families S,T, a predicate R(I,m) on their connecting maps, and m:S(I)→T(I), DiagramNatural S T R I m means that S(f) followed by every m' satisfying R(I',m') equals m followed by T(f). For ordinary etale support data [def-pur-etale-kflat-support-data] on a closed-open pair i:Z→P,j:U→P, supportSequenceFamily assigns the actual support sequence and its existing map. Given a complex Q and an endofunctor F, topSequenceFamily assigns the support row tensored by Q; bottomSequenceFamily assigns the support row of F(Q⊗I). Their arrow assignments are respectively tensor of the given support arrow and the support arrow induced by F(Q⊗f). These are existing constructions packaged as data, with no additional axioms or chosen witnesses. The generic tensorRow and tensorRowMap apply the supplied tensor-left functor. IsComparison says that the second and third components are heterogeneously equal to eta and the canonical OpenSupport.rightMap; the endpoints are definitionally the same complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, actual support sequence; Stacks 012Z, functorial maps of short exact sequences."
+ },
+ "stmt_deps": [
+  "def-pur-etale-kflat-support-data",
+  "lem-pur-flat-support-chain-diagram"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Packaging the existing actual support constructions, with no new mathematical construction."
+ },
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleKFlatSupportComparison",
+  "date": "2026-10-25",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Locality, actual support diagram and its naturality",
+   "via": [
+    "lem-pur-etale-kflat-support-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES",
+   "results": "12 hits: DerivedCategory.triangleOfSES; DerivedCategory.triangleOfSES_distinguished; DerivedCategory.triangleOfSES_obj₁; DerivedCategory.triangleOfSES_obj₂; DerivedCategory.triangleOfSES_obj₃; DerivedCategory.triangleOfSES_mor₃; DerivedCategory.triangleOfSESIso; DerivedCategory.triangleOfSES_mor₁",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the morphism of support exact sequences after tensor with a flat complex",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; Module.Flat.lTensor_exact; Module.FaithfullyFlat.range_le_ker_of_exact_rTensor; Module.Flat.iff_rTensor_exact'",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ_naturality",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural strict diagram between short exact sequences of sheaf complexes tensor with a flat complex",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact; Module.Flat.lTensor_exact; Module.Flat.rTensor_exact; Module.Flat.rTensor_shortComplex_exact; Module.FaithfullyFlat.rTensor_exact_iff_exact; CategoryTheory.ShortComplex.homMk; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.FaithfullyFlat.lTensor_exact_iff_exact",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleKFlatSupportRows",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleKFlatSupportRows.lean",
+  "declarations": [
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.tensorRow",
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.tensorRowMap",
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.RowFamily",
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.supportSequenceFamily",
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.DiagramNatural",
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.topSequenceFamily",
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.bottomSequenceFamily",
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.IsComparison"
+  ],
+  "statement": "structure RowFamily (C D : Type*) [Category C] [Category D] [HasZeroMorphisms D]",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-25",
+  "declaration": "AlgebraicGeometry.Etale.KFlatSupportComparison.RowFamily"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-23ebf",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261025T124418-L-2006284",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-23ebf",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261025T124418-L-2006284",
+  "kind": "interface",
+  "note": "independent cc review: new etale_kflat_support_comparison vs old statement from the change record (old proved from new + support_rightMap_iff in a scratch compile); strict/projection sorries vs their nodes, the support-sequence and chain-diagram lemmas, and the old normalization clause"
+ }
+}

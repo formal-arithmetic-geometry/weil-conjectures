@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-compatible-coefficient-source-presentation",
+ "kind": "statement",
+ "title": "Compatible coefficient fields and a source Cohen presentation",
+ "statement": "Let $f:(A,\\mathfrak m,K)\\to(B,\\mathfrak n,L)$ be a local homomorphism of nonzero commutative Noetherian local $\\mathbf Q$-algebras [def-weil-pbc-noetherian-ring], where local means $f(\\mathfrak m)\\subseteq\\mathfrak n$, $K=A/\\mathfrak m$, $L=B/\\mathfrak n$, and $\\iota:K\\hookrightarrow L$ is the induced field inclusion. Suppose $A$ and $B$ are complete for their maximal ideals [def-weil-pbc-adically-complete-ring]. There exist residue-field sections $a:K\\to A$ and $b:L\\to B$, an integer $e\\geq0$, elements $x_1,\\ldots,x_e\\in\\mathfrak m$ generating $\\mathfrak m$, and a continuous surjective local homomorphism $q:R=K[[X_1,\\ldots,X_e]]\\twoheadrightarrow A$ [def-weil-pbc-multivariate-power-series] such that\n$$b\\circ\\iota=f\\circ a,\\qquad q(c)=a(c)\\ (c\\in K),\\qquad q(X_i)=x_i.$$\nWriting $\\mathfrak r=(X_1,\\ldots,X_e)R$ and $I=\\ker q$, one has $I\\subseteq\\mathfrak r$, and the induced map $R/I\\xrightarrow{\\sim}A$ is an isomorphism of complete local $K$-algebras for the structure given by $a$. No flatness, regularity, or finite type hypothesis on $f$ or on $L/K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-formulated compatible-section and source-presentation input: Tag 032A (theorem-cohen-structure-theorem), characteristic-zero coefficient-field construction and final proof paragraph; more-algebra.tex Tag 07NJ (lemma-lift-continuous) applied to the unrestricted residue extension. Extracted from original steps 3--4 of lem-trf-relative-cohen-flat-presentation; compatibility is a refinement, not quoted verbatim from 032A."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\rho_A:A\\to K$ and $\\rho_B:B\\to L$ for the residue maps. The nonzero $\\mathbf Q$-algebra $K$ has characteristic zero. Apply the residue-section theorem to $A$ to choose $a:K\\to A$ with $\\rho_Aa=1_K$. Then $h=fa:K\\to B$ satisfies $\\rho_Bh=\\iota$, so it makes $B$ a $K$-algebra and its residue algebra is $L$ with structure map $\\iota$.",
+   "uses": [
+    "lem-weil-pbc-coefficient-residue-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032A, theorem-cohen-structure-theorem, characteristic-zero paragraph"
+   }
+  },
+  {
+   "text": "The extension $L/K$ is formally smooth, since $K$ has characteristic zero; there is no algebraicity or finite-generation restriction. Apply the complete-target lifting theorem with base $K$, source $L$, source ideal $0$, target $B$, ideals $I=J=\\mathfrak n$, $t=r=1$, and residue map $g=1_L:L\\to B/\\mathfrak n$. Here $J^t\\subseteq I$ and $\\bigcap_{s\\ge1}(J+I^s)=\\mathfrak n=J$; $g(0)=0$. The target is $I$-adically complete by hypothesis. Thus there is a $K$-algebra map $b:L\\to B$ with $\\rho_Bb=1_L$. Its $K$-linearity gives $b\\iota=h=fa$.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NJ, lemma-lift-continuous, with Algebra Tag 0322, proposition-characterize-separable-field-extensions"
+   }
+  },
+  {
+   "text": "Noetherianity makes $\\mathfrak m$ finitely generated; choose generators $x_1,\\ldots,x_e$, allowing $e=0$. Apply the fixed-section generator-presentation theorem with field $K$, target $A$, residue identification $1_K$ and section $a$. It gives a continuous surjective $K$-algebra map $q:K[[X_1,\\ldots,X_e]]\\to A$, restricting to $a$ on constants and sending $X_i$ to $x_i$, with $q^{-1}(\\mathfrak m)=\\mathfrak r$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-trf-coefficient-field-generator-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C52, lemma-complete-local-ring-structure-as-algebra, final paragraph, with Algebra Tag 0315"
+   }
+  },
+  {
+   "text": "The power-series local-ring theorem over $K$ makes $R$ local. Every variable has zero constant term, so $\\mathfrak r$ is contained in its maximal ideal. Conversely any $F$ outside $\\mathfrak r=q^{-1}(\\mathfrak m)$ has $q(F)$ a unit of $A$. To identify the maximal ideal without assuming units lift, note that a series $F$ with zero constant term lies in $(X_1,\\ldots,X_e)$: assign each nonconstant monomial to its first variable with positive exponent, obtaining $F=\\sum_iX_iF_i$. Thus the maximal ideal is exactly $\\mathfrak r$, so $q$ is local. Also $I=\\ker q\\subseteq q^{-1}(\\mathfrak m)=\\mathfrak r$.",
+   "uses": [
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-trf-coefficient-field-generator-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032A, theorem-cohen-structure-theorem, final paragraph; power-series unit criterion"
+   }
+  },
+  {
+   "text": "Put $I=\\ker q$. The map $\\bar q:R/I\\to A$, $[F]\\mapsto q(F)$, is well-defined and injective by the definition of $I$, and surjective because $q$ is. It is a $K$-algebra isomorphism since $q(c)=a(c)$. Moreover $q(\\mathfrak r^s)=\\mathfrak m^s$: both sides are generated by products of $s$ chosen generators and $q$ is surjective. Thus $\\bar q$ identifies $(\\mathfrak r/I)^s$ with $\\mathfrak m^s$ for every $s$, making both directions continuous and identifying all adic quotients. Completeness of $A$ therefore gives completeness of $R/I$; its unique maximal ideal is $\\mathfrak r/I$. This proves the asserted isomorphism of complete local $K$-algebras.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032A, theorem-cohen-structure-theorem, quotient conclusion; Tag 0317, definition-complete"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coefficient-residue-section",
+  "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "def-weil-pbc-noetherian-ring",
+  "lem-trf-coefficient-field-generator-presentation",
+  "lem-weil-pbc-power-series-local-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of existing nodes following Tag 032A, characteristic-zero and final paragraphs; relative lift is more-algebra.tex Tag 07NJ; fixed-section presentation is varieties.tex Tag 0C52."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficient.?field|cohen.?structure|residue.?section",
+   "results": "{\"t\": \"2026-10-22T06:44:12Z\", \"tool\": \"grep\", \"query\": \"coefficient.?field|cohen.?structure|residue.?section\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field maps and Weierstrass results do not construct compatible sections and the source presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible coefficient field sections for a local homomorphism of complete local rings in characteristic zero",
+   "results": "{\"t\": \"2026-10-22T06:44:12Z\", \"tool\": \"leansearch\", \"query\": \"Compatible coefficient field sections for a local homomorphism of complete local rings in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.liftRingHom\", \"IsLocalRing.ResidueField.map\", \"IsLocalRing.instIsLocalHomResidueFieldRingHomResidue\", \"IsLocalRing.ResidueField.instIsScalarTower\", \"IsLocalRing.ResidueField.map_comp\", \"IsLocalRing.ResidueField.instAlgebra.congr_simp\", \"RingHom.EssFiniteType.residueFieldMap\", \"IsLocalRing.instIsScalarTowerResidueField\"], \"digest\": \"872b27afd6d71399\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field maps and Weierstrass results do not construct compatible sections and the source presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, RingHom.Surjective",
+   "results": "{\"t\": \"2026-10-22T06:44:13Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, RingHom.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'RingHom.Surjective'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "query error: loogle: unknown identifier 'RingHom.Surjective'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an arbitrary characteristic zero residue field extension to a coefficient field compatibly with a prescribed coefficient field in a complete local ring",
+   "results": "{\"t\": \"2026-10-22T06:44:24Z\", \"tool\": \"leanfinder\", \"query\": \"Lift an arbitrary characteristic zero residue field extension to a coefficient field compatibly with a prescribed coefficient field in a complete local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.lift\", \"IsLocalRing.ResidueField.lift_residue_apply\", \"Ideal.ResidueField.lift\", \"Ideal.ResidueField.liftₐ\", \"PowerSeries.residueFieldOfPowerSeries\", \"Ideal.ResidueField.lift_algebraMap\", \"Field.henselian\", \"Algebra.instFormallyUnramifiedResidueField_1\"], \"digest\": \"4bbeb4befa4c805a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field maps and Weierstrass results do not construct compatible sections and the source presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible residue field sections of a local homomorphism of complete noetherian local rings of characteristic zero and a surjective power series presentation of its source",
+   "results": "{\"t\": \"2026-10-22T06:44:24Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible residue field sections of a local homomorphism of complete noetherian local rings of characteristic zero and a surjective power series presentation of its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"Ideal.ResidueField.lift\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.residueFieldOfPowerSeries\", \"HenselianLocalRing\", \"IsLocalRing.ResidueField.lift\", \"Ideal.surjectiveOnStalks_residueField\"], \"digest\": \"b8a023a02d0d2d89\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field maps and Weierstrass results do not construct compatible sections and the source presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Function.Surjective",
+   "results": "{\"t\": \"2026-10-22T06:44:54Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.C_surjective\"], \"digest\": \"7ec2fd5cc6ef8166\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field maps and Weierstrass results do not construct compatible sections and the source presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.?field|cohen.?structure|residue.?section",
+   "results": "{\"t\": \"2026-10-23T12:34:37Z\", \"tool\": \"grep\", \"query\": \"coefficient.?field|cohen.?structure|residue.?section\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field factorization maps, empty-variable C_surjective, or Weierstrass results do not provide compatible sections and the required presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible residue field sections of complete local rings over the rational numbers",
+   "results": "{\"t\": \"2026-10-23T12:34:38Z\", \"tool\": \"leansearch\", \"query\": \"Compatible residue field sections of complete local rings over the rational numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField\", \"IsLocalRing.instInhabitedResidueField\", \"IsLocalRing.instCommRingResidueField\", \"PowerSeries.residueFieldOfPowerSeries\", \"Valued.ResidueField\", \"IsLocalRing.instIsScalarTowerResidueField\", \"IsLocalRing.residue\", \"IsLocalRing.ResidueField.instIsScalarTower\"], \"digest\": \"0254d0e1e88acacc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field factorization maps, empty-variable C_surjective, or Weierstrass results do not provide compatible sections and the required presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Function.Surjective",
+   "results": "{\"t\": \"2026-10-23T12:34:38Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.C_surjective\"], \"digest\": \"7ec2fd5cc6ef8166\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field factorization maps, empty-variable C_surjective, or Weierstrass results do not provide compatible sections and the required presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible coefficient field sections for a local homomorphism of complete local rings of characteristic zero and a power series presentation of the source",
+   "results": "{\"t\": \"2026-10-23T12:34:43Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible coefficient field sections for a local homomorphism of complete local rings of characteristic zero and a power series presentation of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.IsWeierstrassFactorization\"], \"digest\": \"98e4810e2d55df3b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field factorization maps, empty-variable C_surjective, or Weierstrass results do not provide compatible sections and the required presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a given coefficient field embedding to a residue field section in a complete local algebra of characteristic zero",
+   "results": "{\"t\": \"2026-10-23T12:35:15Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a given coefficient field embedding to a residue field section in a complete local algebra of characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.lift\", \"PowerSeries.residueFieldOfPowerSeries\", \"IsLocalRing.ResidueField.lift_residue_apply\", \"Ideal.ResidueField.liftₐ\", \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"Ideal.ResidueField.lift\", \"IsLocalRing.ResidueField.map\", \"IsLocalRing.ResidueField.lift_comp_residue\"], \"digest\": \"584dac1474e625a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field factorization maps, empty-variable C_surjective, or Weierstrass results do not provide compatible sections and the required presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|theorem lift|C_surjective",
+   "results": "{\"t\": \"2026-10-23T12:50:56Z\", \"tool\": \"grep\", \"query\": \"def lift|theorem lift|C_surjective\", \"sub\": \"RingTheory/LocalRing/ResidueField\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/ResidueField/Basic.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Basic.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Basic.lean\"], \"digest\": \"1631c42dc77505d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned residue-field factorization maps, empty-variable C_surjective, or Weierstrass results do not provide compatible sections and the required presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-cohen-flat-presentation",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Tangent cone and minimal-prime dimensions of an essentially smooth local extension. Supporting relative Cohen presentation of completed flat local maps with regular closed fibre. Re-split: original relative Cohen proof steps 3--4 (compatible coefficient fields and source evaluation surjection).",
+   "via": [
+    "lem-trf-relative-cohen-flat-presentation",
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-compatible-coefficient-source-presentation",
+  "worker": "stage1",
+  "summary": "Reused the characteristic-zero residue section, arbitrary characteristic-zero field formal smoothness, complete-target lifting, and fixed-section generator presentation. Verified all lifting ideals and quotient topologies explicitly; no new nodes and no statement changes.",
+  "blueprint": "Historical supporting commutative algebra under lem-trf-local-term-locality through the recorded via chain: relative Cohen presentation, original steps 3--4. Current latest blueprint local-term proof was read; no change to its route is proposed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fs-adic-lift-into-complete",
+    "why": "Generic complete-target lifting over K constructs a residue section preserving the prescribed K-embedding; this unit has no arbitrary-extension lifting theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fs-adic-lift-into-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-eabbfef11",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-eabbfef11 (reviewer sub-agent of L); spot-checked: I read the item in full: an unchanged statement, a new 5-step split, no new nodes and no fixes. I also read every cited statement, the parent relative-cohen node (step 3 needs exactly b|_K=f̂a and a K-linear R/I≅Â with I⊆(X)), and Stacks 032A (char-0 paragraph, algebra.tex l.44955), 07NJ (more-algebra.tex l.9257), 0322(3), 0C52 and 0317. Step 1: the Lean-closed residue-section node applies to complete local A with char-0 residue field; ρ_B f a=ι. Step 2: the char-0 formal-smoothness leaf is the 𝔫=0 case of def-weil-pbc-formally-smooth-adic (the condition g(0^k)=0 is vacuous). For fs-adic-lift I checked: base K, source L, target B as a K-algebra via fa, I=J=𝔫, t=1, J closed, B complete, g=1_L K-linear because ρ_B fa=ι. The lift b gives bι=fa. Step 3: coefficient-field-generator-presentation with F=K, ρ=1, σ=a and generators x_i; every hypothesis holds. Step 4: power-series-local-ring(b) plus the first-variable decomposition gives max ideal =𝔯, so q is local and I⊆𝔯. Step 5: elementary quotient and transport of completeness via q(𝔯^s)=𝔪^s. Edge cases checked: e=0, B a field, non-flat f, transcendental L/K. There is no cycle. The off-unit tool use of lem-weil-pbc-fs-adic-lift-into-complete is declared as a generic lifting black box and accepted. No SGA is cited. The duplicate candidates (equicharacteristic-complete-local-presentation, separable-residue-coefficient-section, equivariant-cohen-coefficient-lift, prime-field-complete-coordinate-model) do not state the item. Searches cover all three kinds."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompatibleCoefficientSourcePresentation",
+  "declaration": "IsLocalRing.exists_compatible_coefficient_source_presentation",
+  "file": "lean/Sheaf/RingTheory/CompatibleCoefficientSourcePresentation.lean",
+  "statement": "theorem exists_compatible_coefficient_source_presentation (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] [Algebra ℚ A] [Algebra ℚ B] [IsAdicComplete (maximalIdeal A) A] [IsAdicComplete (maximalIdeal B) B] (f : A →+* B) [IsLocalHom f] : ∃ (a : ResidueField A →+* A) (b : ResidueField B →+* B), (residue A).comp a = RingHom.id (ResidueField A) ∧ (residue B).comp b = RingHom.id (ResidueField B) ∧ b.comp (ResidueField.map f) = f.comp a ∧ ∃ (e : ℕ) (x : Fin e → A) (q : MvPowerSeries (Fin e) (ResidueField A) →+* A), (∀ i : Fin e, x i ∈ maximalIdeal A) ∧ Ideal.span (Set.range x) = maximalIdeal A ∧ Function.Surjective q ∧ IsLocalHom q ∧ @Continuous _ A (Ideal.span (Set.range (MvPowerSeries.X : Fin e → MvPowerSeries (Fin e) (ResidueField A)))).adicTopology (maximalIdeal A).adicTopology q ∧ (∀ c : ResidueField A, q (MvPowerSeries.C c) = a c) ∧ (∀ i : Fin e, q (MvPowerSeries.X i) = x i) ∧ RingHom.ker q ≤ Ideal.span (Set.range (MvPowerSeries.X : Fin e → MvPowerSeries (Fin e) (ResidueField A))) ∧ ∃ E : (MvPowerSeries (Fin e) (ResidueField A) ⧸ RingHom.ker q) ≃+* A, (∀ F : MvPowerSeries (Fin e) (ResidueField A), E (Ideal.Quotient.mk (RingHom.ker q) F) = q F) ∧ IsAdicComplete ((maximalIdeal A).comap E.toRingHom) (MvPowerSeries (Fin e) (ResidueField A) ⧸ RingHom.ker q)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b960c1335",
+  "group": "O2",
+  "result": "fix",
+  "note": "Lean exact against node, 032A/07NJ/0C52 and stmt_dep records: IsLocalRing/IsNoetherianRing/Algebra ℚ/IsAdicComplete(maximalIdeal) hyps, IsLocalHom f, sections with residue∘s=id, b.comp (ResidueField.map f) = f.comp a, e:ℕ + x:Fin e→A in m spanning m, q on MvPowerSeries (Fin e) K surjective+local+continuous ((X)-adic→m-adic), q∘C=a, q X_i=x_i, ker q ≤ (X), E pinned by E[F]=qF, IsAdicComplete of R/I for comap m; e=0/field/non-flat/transcendental edge cases covered; universes u,v free; statement verbatim; no Mathlib/project duplicate; private imports exist as module files; docstrings with source+blueprint+5 steps; sorry only. Sole fault H11: 'Second reading by O2' is a self-reading → fixes/lem-trf-compatible-coefficient-source-presentation.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean change, no compile."
+ }
+}

@@ -1,0 +1,332 @@
+{
+ "id": "lem-pur-supported-class-evaluation-comparison",
+ "kind": "statement",
+ "title": "Counit-normalized supported classes and degree-zero exceptional sections",
+ "statement": "Fix the finite-field and coefficient datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ finite, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. Let $Z,X$ be finite-type $k$-schemes and $i:Z\\hookrightarrow X$ a closed immersion with quasi-compact open complement $j:V\\hookrightarrow X$ [def-weil-finite-type-morphism, def-weil-closed-immersion, def-weil-open-immersion]. Work with ordinary constant-$A$ module sheaves on their small pro-etale sites [def-weil-pbc-proetale-modules]. Let $K\\in D^+(X_{\\mathrm{proet}},A)$; let $B_0=Ri^!_0K$ be the bounded-below right derived functor of $M\\mapsto i^{-1}\\ker(M\\to j_*j^*M)$ [def-pur-flasque-support], with support counit $\\epsilon_0:i_*B_0\\to K$ of the support adjunction of [lem-pur-support-localization-triangle]. Assume $C_0=B_0[2]$ is isomorphic to $A_Z[0]$ in the derived category and belongs to $D^b_{ctf}(Z,A)$ [def-weil-finite-tor-amplitude]. Set $B=Ri^!K$ for the finite-level transported exceptional value of [def-weil-exceptional-inverse-image] at compactification $(\\mathrm{id}_Z,i)$, and put $C=B[2]$.\n\nThere is a canonical isomorphism $\\phi:B_0\\xrightarrow{\\sim}B$ satisfying $\\epsilon\\circ i_*\\phi=\\epsilon_0$, where $\\epsilon$ is the counit of the relative exceptional adjunction of [thm-sf-ambient-adjoint-class](2) at the compactification $(\\mathrm{id}_Z,i)$. It identifies the support adjunction with the relative exceptional adjunction on every bounded-below test object of etale origin (an object isomorphic to the exact comparison pullback of an etale derived object [def-weil-pbc-etale-origin-witness]). In particular $\\phi[2]$ identifies $C_0$ with $C$ and carries its degree-zero concentration, constant rank-one cohomology and finite-Tor constructibility to $C$.\n\nWrite $\\chi:H^2_Z(X,K)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(X,A)}(i_*A_Z,K[2])$ for the supported-Hom identification of [lem-pur-supported-hom] with $a=2$, where support cohomology is the cohomology of the derived kernel of restriction [def-pur-support-cohomology]. There is a canonical isomorphism\n$$\\eta:H^2_Z(X,K)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(Z,A)}(A_Z,C).$$\nIts formula is $\\chi$, followed by the canonical shift identification with $\\operatorname{Hom}_X(i_*(A_Z[-2]),K)$, the support adjunction to $\\operatorname{Hom}_Z(A_Z[-2],B_0)$, shifting to $\\operatorname{Hom}_Z(A_Z,C_0)$, and postcomposition with $\\phi[2]$. It agrees with the relative exceptional adjunction on the test object $A_Z[-2]$.\n\nEvaluation $m\\mapsto\\mathcal H^0(m)(1)$, using the canonical degree-zero cohomology identification of $A_Z[0]$, is an isomorphism\n$$\\mathrm{ev}:\\operatorname{Hom}_{D(Z,A)}(A_Z,C)\\xrightarrow{\\sim}\\Gamma(Z,\\mathcal H^0(C))$$\n[def-weil-derived-cohomology-sheaves]. Under the canonical truncation $C\\cong\\mathcal H^0(C)[0]$, the inverse of evaluation takes a section $v$ to the module-sheaf map $a\\mapsto a\\,v|_W$ on each site object $W$, followed by the inverse truncation isomorphism. Consequently $(\\mathrm{ev}\\eta)^{-1}$ is a canonical isomorphism from these global sections to $H^2_Z(X,K)$. For every $\\alpha\\in H^1(V,j^*K)$ and its boundary $\\beta=\\partial\\alpha$ in the support long exact sequence [thm-pur-with-support-exactness], the morphism $m=\\eta(\\beta)$ satisfies $\\mathrm{ev}(m)=\\mathrm{ev}\\eta(\\beta)$ and $(\\mathrm{ev}\\eta)^{-1}(\\mathrm{ev}(m))=\\beta$. This assertion uses no ambient exceptional adjunction on arbitrary pro-etale inputs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-modules",
+  "def-pur-flasque-support",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-etale-origin-witness",
+  "def-pur-support-cohomology",
+  "def-weil-derived-cohomology-sheaves",
+  "thm-pur-with-support-exactness",
+  "lem-pur-support-localization-triangle",
+  "thm-sf-ambient-adjoint-class",
+  "lem-pur-supported-hom",
+  "lem-pur-supported-hom-pullback",
+  "def-pur-closed-support-compact-identification",
+  "def-pur-good-truncation-normalization"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-proper], $i$ is proper, separated and finite type, so $(\\mathrm{id}_Z,i)$ is the stated compactification. By [lem-kun-dimension-finite-type] its proper part has a finite dimension bound (choose $d=0$ if $Z$ is empty). Thus [thm-sf-ambient-adjoint-class](2) gives $B\\in D^+(Z,A)$ and the natural relative bijections $T_H:\\operatorname{Hom}_X(i_*H,K)\\cong\\operatorname{Hom}_Z(H,B)$ for bounded-below etale-origin $H$. In this identity-open compactification $P_c=i_*$, since the latter is exact by [lem-pur-support-localization-triangle]. That lemma also gives the support adjunction on all bounded-below tests, with counit $\\epsilon_0$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-kun-dimension-finite-type",
+    "thm-sf-ambient-adjoint-class",
+    "lem-pur-support-localization-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9."
+   }
+  },
+  {
+   "text": "Both representing objects are in the test class. Indeed $B_0\\cong A_Z[-2]$ by hypothesis, and [lem-sf-comparison-pullback-exact](1),(3) gives an etale origin for this shifted constant object. Write $D=i_c^\\times R\\nu_{X,*}K$, so $B=\\nu_Z^*D$ by [def-weil-exceptional-inverse-image]. Choose a lower bound $a$ for $B$. For $r<a$, exact comparison gives $\\nu_Z^*\\mathcal H^r(D)\\cong\\mathcal H^r(B)=0$. Comparison reflects zero sheaves: [thm-weil-pbc-site-comparison] is faithful on their degree-zero singles, so the identity of such a single is zero if its pullback is zero. Hence $\\mathcal H^r(D)=0$ for $r<a$. Thus $D\\in D^+$ is an origin witness for $B$. No origin for $K$ is required.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "def-weil-exceptional-inverse-image",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9."
+   }
+  },
+  {
+   "text": "Define $\\epsilon=T_B^{-1}(1_B)$ and $\\phi=T_{B_0}(\\epsilon_0)$. Naturality of $T$ in the test object gives $\\epsilon\\circ i_*\\phi=\\epsilon_0$. Let $\\psi:B\\to B_0$ be the support-adjunction transpose of $\\epsilon$, so $\\epsilon_0\\circ i_*\\psi=\\epsilon$. Consequently $\\epsilon_0\\circ i_*(\\psi\\phi)=\\epsilon_0$ and $\\epsilon\\circ i_*(\\phi\\psi)=\\epsilon$. The support bijection on test $B_0$ makes the first equality imply $\\psi\\phi=1_{B_0}$; the relative bijection on test $B$ makes the second imply $\\phi\\psi=1_B$. These tests are legitimate by step 2. Thus $\\phi$ is an isomorphism, uniquely determined by the counit equation since $T_{B_0}$ is injective. For any allowed $H$ and $u:H\\to B_0$, that equation gives $\\epsilon\\circ i_*(\\phi u)=\\epsilon_0\\circ i_*u$; taking relative transposes shows that postcomposition by $\\phi$ identifies the two adjunction bijections. This also proves canonicity without an adjunction on arbitrary pro-etale tests.",
+   "uses": [
+    "lem-pur-support-localization-triangle",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9."
+   }
+  },
+  {
+   "text": "Apply the shift equivalence to $\\phi$ to obtain $C_0\\cong C$. Applying cohomology carries degree-zero concentration and the constant rank-one sheaf to $C$. Finite-Tor constructibility is invariant under derived isomorphism: constructible cohomology is unchanged, and tensoring an isomorphism with any degree-zero module sheaf preserves each cohomological vanishing bound. Thus $C\\in D^b_{ctf}(Z,A)$, by the defining condition of [def-weil-finite-tor-amplitude].",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-supported-hom] to the bounded-below $K$ with $a=2$. Exact termwise $i_*$ commutes with shifts, giving $\\operatorname{Hom}_X(i_*A_Z,K[2])\\cong\\operatorname{Hom}_X(i_*(A_Z[-2]),K)$. Apply the support adjunction of [lem-pur-support-localization-triangle], shift both arguments, and postcompose with $\\phi[2]$. Every map in this chain is a bijection, yielding precisely $\\eta$ with the formula in the statement. The object $A_Z[-2]$ has the etale origin exhibited in step 2, so the agreement of adjunctions proved in step 3 applies to this test. Therefore this formula is also the relative exceptional transpose.",
+   "uses": [
+    "lem-pur-supported-hom",
+    "lem-pur-support-localization-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-good-truncation-exact-normalization] in the abelian category of $A_Z$-module sheaves to $A_Z[0]$ and $C$, both concentrated in degree zero by step 4. It gives the canonical $t_C:C\\xrightarrow{\\sim}\\mathcal H^0(C)[0]$ and the bijection $m\\mapsto\\mathcal H^0(m)$ from derived morphisms to module-sheaf maps $A_Z\\to\\mathcal H^0(C)$. Evaluation at $1$ is a bijection on these sheaf maps: its inverse sends $v\\in\\Gamma(Z,\\mathcal H^0(C))$ to $f_{v,W}(a)=a\\,v|_W$ on every site object $W$. Restrictions commute with multiplication, so this is a module-sheaf map; $f_{v,Z}(1)=v$, and any module map $f$ satisfies $f_W(a)=a f_W(1)=a f_Z(1)|_W$. Hence the inverse of $\\mathrm{ev}$ is $v\\mapsto t_C^{-1}\\circ f_v[0]$, exactly as asserted. This elementary evaluation calculation uses the module morphisms of [def-weil-sheaf-of-modules-category]; the derived-to-sheaf passage uses the cited truncation theorem.",
+   "uses": [
+    "lem-pur-good-truncation-exact-normalization",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9."
+   }
+  },
+  {
+   "text": "By [thm-pur-with-support-exactness], $\\beta=\\partial\\alpha$ lies in $H^2_Z(X,K)$. For $m=\\eta(\\beta)$, substitution gives $\\mathrm{ev}(m)=(\\mathrm{ev}\\circ\\eta)(\\beta)$. The two maps are bijective by steps 5 and 6, so applying their composite inverse gives $(\\mathrm{ev}\\eta)^{-1}(\\mathrm{ev}(m))=\\beta$. Inverting this composite is the claimed canonical isomorphism from global sections to supported cohomology.",
+   "uses": [
+    "thm-pur-with-support-exactness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-kun-dimension-finite-type",
+  "thm-sf-ambient-adjoint-class",
+  "lem-pur-support-localization-triangle",
+  "lem-sf-comparison-pullback-exact",
+  "def-weil-exceptional-inverse-image",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-supported-hom",
+  "lem-pur-good-truncation-exact-normalization",
+  "def-weil-sheaf-of-modules-category",
+  "thm-pur-with-support-exactness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "Second paragraph: explicit support-to-relative-exceptional Yoneda comparison and degree-zero evaluation; canonical truncation follows Stacks Tags 0118 and 06XS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exceptionalInverseImage|upperShriek|supportedClass|supportCohomology",
+   "results": "{\"t\": \"2026-10-22T06:46:20Z\", \"tool\": \"grep\", \"query\": \"exceptionalInverseImage|upperShriek|supportedClass|supportCohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic truncation, homology, sheaf adjunction or scheme immersion results do not give the counit-normalized support/transported-exceptional comparison and evaluation formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion support cohomology agrees with global sections of exceptional cohomology via counit adjunction evaluation at one",
+   "results": "{\"t\": \"2026-10-22T06:46:21Z\", \"tool\": \"leansearch\", \"query\": \"Closed immersion support cohomology agrees with global sections of exceptional cohomology via counit adjunction evaluation at one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"CompHausLike.LocallyConstant.counit\", \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.IsOpenImmersion.ΓIsoTop\"], \"digest\": \"92e3d1dcf4ab5ae0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic truncation, homology, sheaf adjunction or scheme immersion results do not give the counit-normalized support/transported-exceptional comparison and evaluation formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"hom\"",
+   "results": "{\"t\": \"2026-10-22T06:46:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.OverPresheafAux.unitAuxAuxAux_hom\", \"CategoryTheory.OverPresheafAux.unitAuxAux_hom_app\", \"CategoryTheory.OverPresheafAux.counitAuxAux_hom\", \"CategoryTheory.OverPresheafAux.counitAux_hom\", \"CategoryTheory.OverPresheafAux.unitAux_hom_left\", \"CategoryTheory.OverPresheafAux.map_mkPrecomp_eqToHom\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan\"], \"digest\": \"47d6155f186fdd94\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic truncation, homology, sheaf adjunction or scheme immersion results do not give the counit-normalized support/transported-exceptional comparison and evaluation formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion and a bounded below complex whose support inverse image is a shifted constant sheaf, evaluation at one canonically identifies supported degree two cohomology with sections of exceptional cohomology",
+   "results": "{\"t\": \"2026-10-22T06:46:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed immersion and a bounded below complex whose support inverse image is a shifted constant sheaf, evaluation at one canonically identifies supported degree two cohomology with sections of exceptional cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\"], \"digest\": \"5105c2f7cf106eb1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic truncation, homology, sheaf adjunction or scheme immersion results do not give the counit-normalized support/transported-exceptional comparison and evaluation formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit compatible comparison between the closed support adjoint and transported exceptional inverse image identifies supported cohomology with morphisms and global sections when the support object is concentrated in degree two",
+   "results": "{\"t\": \"2026-10-22T06:46:32Z\", \"tool\": \"leanfinder\", \"query\": \"Counit compatible comparison between the closed support adjoint and transported exceptional inverse image identifies supported cohomology with morphisms and global sections when the support object is concentrated in degree two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.singleFunctorCompHomologyFunctorIso\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"3b599fb665ac0261\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic truncation, homology, sheaf adjunction or scheme immersion results do not give the counit-normalized support/transported-exceptional comparison and evaluation formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms in the derived category between two objects concentrated in degree zero are precisely morphisms between their zeroth cohomology objects",
+   "results": "{\"t\": \"2026-10-22T07:58:51Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms in the derived category between two objects concentrated in degree zero are precisely morphisms between their zeroth cohomology objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mk₀_hom\", \"CategoryTheory.Abelian.Ext.mk₀\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.Abelian.Ext.homEquiv\", \"CategoryTheory.Abelian.Ext.hom\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.Abelian.Ext.hom'\", \"CategoryTheory.Abelian.Ext\"], \"digest\": \"a92f82d30c8272d1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulSingleFunctor|fullyFaithful_singleFunctor|singleFunctor.*[Ff]ull|singleFunctor.*[Ff]aithful|singleFunctorCompHomologyFunctorIso",
+   "results": "{\"t\": \"2026-10-22T08:05:19Z\", \"tool\": \"grep\", \"query\": \"fullyFaithfulSingleFunctor|fullyFaithful_singleFunctor|singleFunctor.*[Ff]ull|singleFunctor.*[Ff]aithful|singleFunctorCompHomologyFunctorIso\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\"], \"digest\": \"901c89f8fcb89891\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "isoSingle|singleFunctor.*[Ii]so|isIso.*trunc|homology.*[Ff]ull",
+   "results": "{\"t\": \"2026-10-22T08:06:11Z\", \"tool\": \"grep\", \"query\": \"isoSingle|singleFunctor.*[Ii]so|isIso.*trunc|homology.*[Ff]ull\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\"], \"digest\": \"7f7d6fd945bcce22\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The single functor from an abelian category to its derived category is fully faithful",
+   "results": "{\"t\": \"2026-10-22T08:06:11Z\", \"tool\": \"leansearch\", \"query\": \"The single functor from an abelian category to its derived category is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.fullyFaithfulInducedFunctor\", \"DerivedCategory.instFaithfulSingleFunctor\", \"CategoryTheory.Functor.FullyFaithful.full\", \"CategoryTheory.Functor.FullyFaithful.ctorIdx\", \"DerivedCategory.instFullSingleFunctor\", \"CategoryTheory.Functor.FullyFaithful\", \"CategoryTheory.Functor.Full\", \"HasDerivedCategory\"], \"digest\": \"2d175cc8155f9a6f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "{\"t\": \"2026-10-22T08:06:12Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.singleFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctor\", \"DerivedCategory.instAdditiveSingleFunctor\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.singleFunctorIsoCompQh\", \"DerivedCategory.Q_obj_single_obj\", \"DerivedCategory.singleFunctorIsoCompQ_hom_app\", \"DerivedCategory.singleFunctorIsoCompQ_inv_app\", \"DerivedCategory.Q_map_single_map\"], \"digest\": \"706f07ceec20447c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The embedding of an abelian category as complexes supported in one degree is fully faithful and taking cohomology in that degree is its inverse on morphisms",
+   "results": "{\"t\": \"2026-10-22T08:06:48Z\", \"tool\": \"leanfinder\", \"query\": \"The embedding of an abelian category as complexes supported in one degree is fully faithful and taking cohomology in that degree is its inverse on morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instFullSingleFunctor\", \"DerivedCategory.singleFunctorCompHomologyFunctorIso\", \"CochainComplex.instFullIntSingleFunctor\", \"HomologicalComplex.instFullSingle\", \"DerivedCategory.singleFunctorIsoCompQ\", \"CategoryTheory.Functor.mapCochainComplexSingleFunctor\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\"], \"digest\": \"2d8e4fc8e91f39db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptionalInverseImage|upperShriek|supportedClass|supportCohomology",
+   "results": "{\"t\": \"2026-10-22T08:07:27Z\", \"tool\": \"grep\", \"query\": \"exceptionalInverseImage|upperShriek|supportedClass|supportCohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported cohomology of a closed immersion equals sections of the degree zero cohomology of a shifted exceptional inverse image with counit compatible comparison",
+   "results": "{\"t\": \"2026-10-22T08:07:27Z\", \"tool\": \"leansearch\", \"query\": \"Supported cohomology of a closed immersion equals sections of the degree zero cohomology of a shifted exceptional inverse image with counit compatible comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc\", \"AlgebraicGeometry.Scheme.Hom.appIso\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.IsOpenImmersion.ΓIso\"], \"digest\": \"f1b727e9d35e3157\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exceptional\", \"counit\"",
+   "results": "{\"t\": \"2026-10-22T08:07:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"exceptional\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion and bounded below complex, compare the support right adjoint with the etale transported exceptional functor using counits, and identify supported classes with evaluation at one after a degree two shift",
+   "results": "{\"t\": \"2026-10-22T08:20:44Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed immersion and bounded below complex, compare the support right adjoint with the etale transported exceptional functor using counits, and identify supported classes with evaluation at one after a degree two shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"HomologicalComplex.isSupported_iff\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"45eb9067f21bf80c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; single-functor hits cover only the existing degree-zero Hom tool, not the support/transported-exceptional comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-gysin-structure",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-gysin-structure",
+   "place": "Second paragraph, supported cohomology, Hom and global sections, with the first-paragraph support-to-exceptional comparison; returned steps 7-9.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-supported-class-evaluation-comparison",
+  "worker": "stage1",
+  "summary": "Q128: split with no new nodes. Construct the counit-normalized comparison by two transpose maps on their verified etale-origin tests, assemble supported Hom and shifts, and prove evaluation and boundary formulas explicitly. Retain the statement and finite-level domains.",
+  "blueprint": "lem-pur-gysin-structure: first-paragraph identification of support with exceptional inverse image, and second-paragraph supported cohomology/Hom/global-sections identification and boundary correspondence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic geometric input validating the identity-open compactification; does not replace any Kummer calculation."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic dimension bound needed to instantiate the given relative exceptional theorem."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic site comparison for constants and cohomology, used to verify origin witnesses."
+   },
+   {
+    "node": "lem-pur-good-truncation-exact-normalization",
+    "why": "Generic canonical derived-to-sheaf Hom theorem; supplies the heart calculation, not the affine-line cohomology computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-comparison-pullback-exact",
+  "lem-pur-good-truncation-exact-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-c2a503f53",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-c2a503f53 (reviewer sub-agent of L); spot-checked: Ordinary stage-1 split, not a re-split: there is no repair note, and the delivery adds no new nodes. The statement and stmt_deps are identical to the version installed by the Q159 FIX of lem-pur-gysin-structure; only the proof, proof_deps, proof_origin and split_report change. The source is the main-20261015 lem-pur-gysin-structure.proof.md, first and second paragraphs. The blueprint only names the support-to-exceptional comparison, so the proof is correctly marked agent-written. Step 1: thm-sf-ambient-adjoint-class(2) is checked hypothesis by hypothesis. The closed immersion is proper, so separated and finite type (Mathlib leaf), and (id_Z,i) is a compactification. lem-kun-dimension-finite-type gives the dimension bound (d=0 for empty Z). The tests are on Z, so K needs no étale origin. P_c is the exact i_* of lem-pur-support-localization-triangle, which needs quasi-compact j, and the item assumes it. Step 2: the shift sign B0≅A_Z[-2] is correct. A_Z[-2] has an étale origin by lem-sf-comparison-pullback-exact(1),(3). B=ν*D with D=i^×Rν_*K, and D is bounded below because thm-weil-pbc-site-comparison is faithful on D+, which reflects zero sheaves; the def node's own D+ typing gives this too. Step 3: I verified the transpose algebra: ε∘i_*φ=ε0 by naturality and injectivity of T_{B0}; ψφ=1 by the support bijection at B0; φψ=1 by the relative bijection at B; the two adjunctions agree on every étale-origin test. No unbounded or non-origin adjunction is used. Step 4: D^b_ctf is invariant under isomorphism (def-weil-finite-tor-amplitude), so the step is genuinely elementary. Step 5: lem-pur-supported-hom with a=2, a termwise shift, and the support adjunction at A_Z[-2]; this equals the relative transpose by step 3. Step 6: the generic good-truncation lemma gives the H^0 bijection for objects concentrated in degree 0, and evaluation at 1 for A_Z-module maps is written out correctly, including for disconnected W. Step 7: thm-pur-with-support-exactness covers the pro-étale site with D+ and torsion coefficients. There is no cycle: the item is not in the closure of its deps (13,095 nodes). Edge cases checked: Z empty, Z=X, disconnected Z, K unbounded above, α=0. Accepted off-route generic tools: closed-immersion-proper, kun-dimension-finite-type, thm-sf-ambient-adjoint-class (already a stmt_dep), sf-comparison-pullback-exact, def-weil-exceptional-inverse-image, pbc-site-comparison, good-truncation-exact-normalization. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedClassEvaluationComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.supportedClassEvaluationComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportedEvaluationChi",
+   "AlgebraicGeometry.ProEtale.supportedEvaluation",
+   "AlgebraicGeometry.ProEtale.supportedEvaluationSectionMap",
+   "AlgebraicGeometry.ProEtale.supportedEvaluationShiftSource",
+   "AlgebraicGeometry.ProEtale.supportedEvaluationAdjunction",
+   "AlgebraicGeometry.ProEtale.supportedEvaluationEta",
+   "AlgebraicGeometry.ProEtale.supportedClassEvaluationComparisonProperty",
+   "AlgebraicGeometry.ProEtale.supportedClassEvaluationComparison"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedClassEvaluationComparison.lean",
+  "statement": "theorem supportedClassEvaluationComparison (P : WeilConjectures.PurityFiniteSetting.{u}) {Z X V : Scheme.{u}} (aZ : Z ⟶ Spec (.of P.field.k)) (aX : X ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] [LocallyOfFiniteType aX] [QuasiCompact aX] (i : Z ⟶ X) [IsClosedImmersion i] (_hi : i ≫ aX = aZ) (j : V ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (hPair : IsCompl (Set.range i) (Set.range j)) : supportedClassEvaluationComparisonProperty P aZ aX i j hPair",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repairs return L at 39d14b165f14: plain closed-support and truncation helper definitions are cited through their new owning definition nodes; the coefficient-finiteness-only theorem dependency and import are removed. The property constructs the standard coefficient finiteness inline, with no new main-theorem hypothesis. The normalized supported-Hom choice remains attached to lem-pur-supported-hom-pullback as approved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b35712f5b",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 39d14b. All three H2 points repaired as instructed. (1) lem-pur-closed-support-exceptional-comparison replaced by new def node def-pur-closed-support-compact-identification (existing:true on closedSupportIdentityExtension/closedSupportCompactIso; signature verbatim; TeX matches the leftAdjointUniq/mapDerivedCategory/rightDerivedFunctorIsoMapDerivedCategory construction; def stmt_deps only). (2) lem-pur-good-truncation-exact-normalization replaced by def-pur-good-truncation-normalization (existing:true on goodTruncationNormalization, which is the .choose of lem-amb-derived-degree-zero-normalization's uniqueness theorem, a genuine dep). (3) adjunction-transpose dep and import dropped; Finite P.Coefficient built inline via Padic.finite_coefficientExtensionRing (owner def-weil-l-adic-coefficient-extension, in the def-pur-conventions closure) + ULift; no new hypothesis. Mechanical finding on lem-pur-supported-hom-pullback: genuine, supportedEvaluationChi is the .choose of the supportedHom_pullback existential with Identification pinned by naturality+cocycle normalization, so PASS on that point. Lean otherwise identical to the version passed clause by clause at 39d14b (hypotheses, phi counit equation, adjunction agreement on all etale-origin tests, C properties, eta/ev/ev.symm formulas, boundary clause; edge cases and universes fine). lean.statement verbatim; one sorry; no hollow defs; docstrings fine. No compile run (no FIX)."
+ }
+}

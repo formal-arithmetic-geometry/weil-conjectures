@@ -155,7 +155,18 @@
   "prop-pod-biduality-at-the-point"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-poincare-duality",
  "unit": "sk-thm-derived-duality",
  "split_report": {
@@ -191,5 +202,27 @@
    "DerivedCategory.nonempty_iso_homology_ihom"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.CategoryTheory.DerivedCategory.Perfect: the blueprint item lem-pod-cohomology-of-dual-over-field's upstream Lean declarations, proved in live (sweep of the propagation)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $\\Lambda\\in\\{E,\\Qlb\\}$ be one of the field coefficient rings, let $C$ be a bounded complex of finite-dimensional $\\Lambda$-vector spaces, and let $C^\\vee =R\\operatorname {Hom}_\\Lambda(C,\\Lambda)$. The canonical evaluation $C\\otimes _\\Lambda^LC^\\vee \\to \\Lambda$ induces perfect pairings\n\n$$\nH^i(C)\\times H^{-i}(C^\\vee )\\longrightarrow \\Lambda \\qquad (i\\in \\mathbf Z),\n$$\n\nand the canonical comparison $C\\to C^{\\vee \\vee }$ is an isomorphism; equivalently\n\n$$\nH^{-i}(C^\\vee )\\xrightarrow {\\  \\sim \\  }H^i(C)^\\vee \\qquad (i\\in \\mathbf Z).\n$$",
+  "proof": [
+   {
+    "text": "Step 1: split the complex. Since $\\Lambda\\in\\{E,\\Qlb\\}$ is a field, every finite-dimensional $\\Lambda$-vector space is projective and injective. Let $C=(C^\\bullet ,d^\\bullet )$ be a bounded complex of finite-dimensional $\\Lambda$-vector spaces and write $Z^j=\\ker d^j$, $B^{j+1}=\\operatorname {im}d^j$. Choose splittings $C^j=B^{j+1}\\oplus Z^j$ of the short exact sequence $0\\to Z^j\\to C^j\\xrightarrow {d^j}B^{j+1}\\to 0$ and $Z^j=B^j\\oplus H^j(C)$ of $0\\to B^j\\to Z^j\\to H^j(C)\\to 0$ (all of them split because the quotients are vector spaces). In the resulting decomposition $C^j=B^{j+1}\\oplus B^j\\oplus H^j(C)$, the differential sends $B^{j+1}$ onto $B^{j+1}$ (the coordinate $B^{j+1}\\subset C^{j+1}$ via the chosen splitting) and kills $B^j\\oplus H^j(C)$, so $C$ is the direct sum of the complexes $B^j\\oplus B^j$ with the identity differential (contractible, hence zero in the derived category) and $H^j(C)$ with zero differential. Therefore\n\n$$\nC\\cong \\bigoplus _jH^j(C)[-j]\n$$\n\nin the derived category. Step 2: the dual. By [def-pod-perfect-point-complex] (the field stage of [def-weil-finite-coefficient-point]) $C$ is a perfect point complex, so by [def-weil-derived-pullback-tensor-hom]\n\n$$\nC^\\vee =R\\operatorname {Hom}_\\Lambda(C,\\Lambda)\\cong \\bigoplus _jH^j(C)^\\vee [j],\n$$\n\nthe direct sum of the finite-dimensional duals in the shifted degrees. Step 3: the pairings and the double dual. From Step 2,\n\n$$\nH^{-i}(C^\\vee )=H^i(C)^\\vee ,\n$$\n\nand the evaluation is the sum of the canonical evaluations $H^j(C)\\otimes H^j(C)^\\vee \\to \\Lambda$, which are perfect pairings of finite-dimensional vector spaces; the canonical comparison $C\\to C^{\\vee \\vee }$ is an isomorphism by the biduality of [prop-pod-biduality-at-the-point], $C$ being a perfect point complex (Step 2), and under the decomposition of Step 1 it is the sum of the canonical isomorphisms $H^j(C)\\to H^j(C)^{\\vee \\vee }$, each an isomorphism because a finite-dimensional vector space is reflexive. This proves all the claims, [def-weil-finite-coefficient-point] providing the identification of the derived dual over the field with the termwise dual complex.",
+    "uses": [
+     "def-pod-perfect-point-complex",
+     "def-weil-finite-coefficient-point",
+     "def-weil-derived-pullback-tensor-hom",
+     "prop-pod-biduality-at-the-point"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

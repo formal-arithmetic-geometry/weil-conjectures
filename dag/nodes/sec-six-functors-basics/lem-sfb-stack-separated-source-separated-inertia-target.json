@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-stack-separated-source-separated-inertia-target",
+ "kind": "statement",
+ "title": "Separated-source cancellation for a finite-inertia target",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks in groupoids, Deligne--Mumford stacks, representability by algebraic spaces, and 2-fibre products have the meanings in [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. For a stack $\\mathcal A$, its inertia $I_{\\mathcal A}(T)$ has objects $(a,\\alpha)$ with $a\\in\\mathcal A(T)$ and $\\alpha\\in\\operatorname{Aut}(a)$, and arrows $v:(a,\\alpha)\\to(b,\\beta)$ with $v\\alpha=\\beta v$. The projection forgets $\\alpha$. Finite inertia means that every scheme base change of this projection is a scheme finite over its base [def-weil-finite-integral-morphism]. Let $f:\\mathcal A\\to\\mathcal B$ be a morphism of Deligne--Mumford stacks over $S$. Suppose that $\\mathcal A$ is absolutely separated, meaning that $\\Delta_{\\mathcal A/\\operatorname{Spec}\\mathbf Z}$ is proper, and that $\\mathcal B$ has finite inertia. Then $f$ is separated: the relative diagonal $\\Delta_f:\\mathcal A\\to\\mathcal A\\times_{\\mathcal B}\\mathcal A$ is proper. Properness of these representable diagonals is tested on scheme charts [def-weil-proper-morphism]. No separatedness hypothesis on $S$ or on $\\mathcal B$ itself is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050M (lemma-compose-after-separated), part (3), applied to the composite to Spec Z; Tag 0CL0 (lemma-diagonal-diagonal), part (1), makes the absolute target diagonal separated from its separated (in particular finite) inertia. This is the final separatedness argument of stacks-more-morphisms.tex Tag 0DUE."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For every scheme $T\\to\\mathcal B$, the inertia pullback $I_{\\mathcal B}\\times_{\\mathcal B}T\\to T$ is finite by hypothesis and therefore proper by [lem-weil-pbc-finite-proper]. It is separated by the definition of properness in [def-weil-proper-morphism]. Thus the representable map $I_{\\mathcal B}\\to\\mathcal B$ is separated. Apply [lem-sfb-stack-inertia-separated-diagonal] over $\\operatorname{Spec}\\mathbf Z$ to conclude that $\\Delta_{\\mathcal B/\\mathbf Z}$ is separated.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-stack-inertia-separated-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0 (1); finite-proper input: morphisms.tex Tag 01WN"
+   }
+  },
+  {
+   "text": "Put $P=\\mathcal A\\times_{\\mathcal B}\\mathcal A$ and $R=\\mathcal A\\times_{\\operatorname{Spec}\\mathbf Z}\\mathcal A$. By [lem-sfb-stack-fibre-product-separated-comparison], $j:P\\to R$ is representable by algebraic spaces and separated. The composite $j\\circ\\Delta_f$ is the absolute diagonal $\\Delta_{\\mathcal A/\\mathbf Z}$: on an object $a$, both send it to $(a,a)$ with identity comparison. This is proper by the hypothesis.",
+   "uses": [
+    "lem-sfb-stack-fibre-product-separated-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 050H (3) and 050M (3), diagonal factorization"
+   }
+  },
+  {
+   "text": "Fix any scheme $T\\to P$ and compose it with $j$ to obtain $T\\to R$. Set $E=\\mathcal A\\times_R T$ and $Q=P\\times_R T$. The map $E\\to T$ is proper, since it is the scheme test of the assumed proper absolute diagonal; $Q\\to T$ is separated, by the scheme-test conclusion of [lem-sfb-stack-fibre-product-separated-comparison]. Both are algebraic spaces. The factorization of the preceding step gives $E\\to Q\\to T$. Apply [lem-sfb-space-proper-cancellation] with $X=E,Y=Q,Z=T$: its composite is proper and its second map separated, so $E\\to Q$ is proper.",
+   "uses": [
+    "lem-sfb-stack-fibre-product-separated-comparison",
+    "lem-sfb-space-proper-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050M (3), algebraic spaces A and B in the proof; spaces-morphisms.tex Tag 04NX (2)"
+   }
+  },
+  {
+   "text": "The original map $T\\to P$ gives a section $s:T\\to Q=P\\times_R T$. Pull back the proper map $E\\to Q$ along $s$; [lem-sfb-space-proper-base-change] makes $E\\times_Q T\\to T$ proper. Associativity of $2$-fibre products identifies $E\\times_Q T$ with $\\mathcal A\\times_P T$: a point of the left is an object $a$ with a comparison in $R$ whose image in $P\\times_R T$ is identified with the specified section, equivalently a comparison $\\Delta_f(a)\\simeq t$ in $P$. The projections to $T$ agree. Thus every scheme base change of $\\Delta_f$ is proper, which is precisely separatedness of $f$. All products over $R$ used the absolute base, so no separatedness of $S$ or of $\\mathcal B$ was used.",
+   "uses": [
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050M (3), final pullback along T to B; spaces-morphisms.tex Tag 04WP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-stack-inertia-separated-diagonal",
+  "lem-sfb-stack-fibre-product-separated-comparison",
+  "lem-sfb-space-proper-cancellation",
+  "lem-sfb-space-proper-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0CL0 (1) and 050M (3), the full scheme-test factorization argument; final application in stacks-more-morphisms.tex Tag 0DUE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a separated algebraic stack to a stack with separated inertia is separated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are separated morphisms of schemes, then their composition $ g \\\\circ f:\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is multiplicative; that is, the composition of two separated morphisms is again a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g)], AlgebraicGeometry.IsSeparated f\", \"doc\": \"If the composition of two morphisms of schemes is separated, then the first morphism is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsIntegralHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is an integral morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsSeparated f\", \"doc\": \"If $ g $ is a separated morphism of schemes, then the composition $ f \\\\circ g $ is separated if and only if $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a composite stack morphism has proper diagonal and the second morphism has separated diagonal then the first has proper diagonal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsProper f\", \"doc\": \"If the composition of a morphism $ f: X \\\\to Y $ with a separated morphism $ g: Y \\\\to Z $ is proper, then $ f $ is a proper morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsProper f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f: X \\\\to Z $ is a proper morphism and $ g $ is a separated morphism, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are separated morphisms of schemes, then their composition $ g \\\\circ f:\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "stack.*separated|separated.*inertia|diagonal.diagonal",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Kronecker.lean\", \"line\": \"138\", \"text\": \"theorem kroneckerMap_diagonal_diagonal [Zero α] [Zero β] [Zero γ] [DecidableEq m] [DecidableEq n]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Kronecker.lean\", \"line\": \"162\", \"text\": \"  (kroneckerMap_diagonal_diagonal _ hf₁ hf₂ _ _).trans <| by simp only [hf₃, diagonal_one]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Kronecker.lean\", \"line\": \"326\", \"text\": \"  kroneckerMap_diagonal_diagonal _ zero_mul mul_zero _ _\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Kronecker.lean\", \"line\": \"502\", \"text\": \"  kroneckerMap_diagonal_diagonal _ (zero_tmul _) (tmul_zero _) _ _\"}\n  {\"file\": \"Mathlib/Data/Matrix/Block.lean\", \"line\": \"376\", \"text\": \"theorem blockDiagonal_diagonal [DecidableEq m] (d : o → m → α) :\"}\n  {\"file\": \"Mathlib/Data/Matrix/Block.lean\", \"line\": \"386\", \"text\": \"    rw [blockDiagonal_diagonal]\"}\n  {\"file\": \"Mathlib/Data/Matrix/Composition.lean\", \"line\": \"83\", \"text\": \"theorem comp_diagonal_diagonal [DecidableEq I] [DecidableEq J] [Zero R] (d : I → J → R) :\"}\n  {\"file\": \"Mathlib/Data/Matrix/Composition.lean\", \"line\": \"99\", \"text\": \"  (comp I I J J R).symm_apply_eq.2 <| (comp_diagonal_diagonal fun i j => d (i, j)).symm\"}\n  {\"file\": \"Mathlib/Data/Matrix/Composition.lean\", \"line\": \"180\", \"text\": \"  commutes' _ := comp_diagonal_diagonal _\"}\n  {\"file\": \"Mathlib/Topology/Constructible.lean\", \"line\": \"335\", \"text\": \"@[stacks 0069 \\\"Iff form of (2). Note that Stacks doesn't define quasi-separated spaces.\\\"]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"line\": \"69\", \"text\": \"      (IsPrestack.isSheaf _ _ _)).isSeparated _ this).ext ?_\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"line\": \"283\", \"text\": \"    (IsPrestack.isSheaf J (D₁.obj i₁) (D₂.obj i₁)) _ H).isSeparatedFor.ext ?_\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated algebraic stack maps separatedly to every algebraic stack with separated inertia",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [IsSeparated f] : IsSeparated (f.resLE V U e)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is separated, then the restriction of $ f $ to an open subset $ U $ of $ X $ and an open subset $ V $ of $ Y $ is also separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_of_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(hf : Function.Injective f) : IsSeparated f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is injective, then it is separated.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from an absolutely separated Deligne Mumford stack to a finite inertia stack is separated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are separated morphisms of schemes, then their composition $ g \\\\circ f:\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsIntegralHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is an integral morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is multiplicative; that is, the composition of two separated morphisms is again a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of a morphism of schemes being separated is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is separated, then for any Zariski covering sieve $ S $ on $ Y $, ther\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper relative diagonal of a map of algebraic stacks from proper absolute diagonal and separated target inertia",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"@AlgebraicGeometry.QuasiSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsProper f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f: X \\\\to Z $ is a proper morphism and $ g $ is a separated morphism, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated source finite inertia target morphism of algebraic stacks separated",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_of_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(hf : Function.Injective f) : IsSeparated f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is injective, then it is separated.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace X] : QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are separated morphisms of schemes, then their composition $ g \\\\circ f:\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|separated.*inertia|inertia.*diagonal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-local-affine-covers",
+  "date": "2026-10-23",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Separated-source cancellation for a finite-inertia target.",
+   "via": [
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-separated-source-separated-inertia-target",
+  "worker": "stage1",
+  "summary": "Retained the absolute statement and gave the 050M scheme-test proof. Finite inertia gives separated absolute target diagonal; a separated comparison and algebraic-space properness cancellation prove the relative diagonal proper. Created three strictly smaller statement-only inputs; reused finite-proper and proper base change. Scheme-only and field-only nodes were not applied outside their hypotheses.",
+  "blueprint": "Supporting separatedness argument of Tag 0DUE along the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli branch; latest blueprint proof (3). The ancestor command returns None because the inherited created.item chain terminates at a module name; preserve its from.node and explicit from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-space-proper-base-change",
+    "why": "Generic algebraic-space proper base change, used for E to Q along its section; this is the existing library statement of Tag 04WP."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-space-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-c299d452e",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-c299d452e (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full, against Stacks 050M(3) (stacks-morphisms.tex 715-845), 0CL0(1) (1372-1386), 050H (550-592), 04NX(2) (spaces-morphisms.tex 7953-7991) and the closing sentence of the 0DUE proof (stacks-more-morphisms.tex 3627-3632). In live and side-live the item is still unsplit with the same statement, so nothing supersedes it. The proof is correct. Step 1: finite inertia gives proper scheme tests (Mathlib leaf), hence I_B→B is separated, and the new 0CL0 node over Spec Z gives Δ_{B/Z} separated. Inertia is the same category whether the stack is seen over S or over Spec Z, so S need not be separated. Step 2: the new 050H node over Spec Z (X=Y=A, Z=B) makes j: A×_B A→A×_Z A representable and separated, and j∘Δ_f = Δ_{A/Z} is proper by hypothesis. Step 3: E→Q→T, with E→T proper, Q→T separated, and the new 04NX node making E→Q proper. Step 4: pull back along the section T→Q with the same-unit space proper-base-change node; E×_Q T ≅ A×_P T by pasting of 2-fibre products. I confirm the reported source typo: the 050M(3) proof says 'quasi-separated' where the hypothesis is 'separated'. Edge cases checked: BG, the doubled-origin line as target, non-separated S, empty stacks. No duplicates: lem-sfb-separated-source-finite-inertia-target works over a field, and 050K/050M(4)/04XY/0462/04YS/0CL0(4) are different nodes; no parallel duplicate in live or side-live. Batch-5 flags (def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, def-sfb-stable-pointed-moduli-groupoids reaching def-trf-projective-bundle-morphism, lem-sfb-space-proper-base-change): all are generic definitions or foundational algebraic-space calculus, not steps of the trace formula or Poincaré duality, so no citation of an assumption leaf is needed. The declared tool use of lem-sfb-space-proper-base-change is in the item's own unit, so it is redundant; accepted. No SGA is cited. FIX, all B3, mathematical content unchanged: (1) lem-sfb-space-proper-cancellation gains the point-space topology [def-a1-space-point-topology] and a definition of quasi-compact space morphisms via [def-weil-pbc-quasi-compact-scheme]; (2) the comparison and inertia nodes lose an unused 'proper/universally closed' sentence that had no topology cited, with def-weil-proper-morphism and def-weil-finite-type-morphism dropped from their stmt_deps. The item is unchanged.; 3 file(s) fixed by the reviewer"
+ }
+}

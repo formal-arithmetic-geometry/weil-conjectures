@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-fermat-kummer-relative-curve",
+ "kind": "statement",
+ "title": "Relative Fermat curve realizing the two-root Kummer cover",
+ "statement": "Let $U$ be a normal integral scheme of finite type over a field and let $\\ell\\geq5$ be a prime invertible on $U$. Assume $\\Gamma(U,\\mathcal O_U)$ contains a primitive $\\ell$th root of unity, meaning an element of multiplicative order $\\ell$. Let $C_\\ell\\subset\\mathbf P^2_U$ be the closed subscheme with homogeneous equation $A^\\ell-B^\\ell=C^\\ell$. The formula $[A:B:C]\\mapsto[A^\\ell:C^\\ell]$ defines a finite surjective morphism $\\rho:C_\\ell\\to\\mathbf P^1_U$. The scheme $C_\\ell$ is normal integral, and $C_\\ell\\to U$ is smooth H-projective with geometrically integral curve fibres. Each geometric fibre has genus $(\\ell-1)(\\ell-2)/2\\geq2$. With $x$ the affine coordinate of $\\mathbf P^1_U$, the function field of $C_\\ell$ is $k(U)(x)(a,b)$ where $a^\\ell=x$ and $b^\\ell=x-1$. The finite map $\\rho$ identifies $C_\\ell$ with the normalization of $\\mathbf P^1_U$ in that field.\n\nThe notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-sbc-smooth-morphisms], [def-pc-geometrically-irreducible], [def-kun-projective], [def-sc-function-field], [def-pc-field-extension], [def-fin-normalization-extension], [def-pc-genus], [def-nagata-projective-space-base-change]. Normal means that every local ring is an integrally closed domain. A finite separable extension is a finite-dimensional field extension whose elements have separable minimal polynomials. Group actions on schemes and fields may be nonfaithful and semilinear on the ground field.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-kun-projective",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-fin-normalization-extension",
+  "def-pc-genus",
+  "def-nagata-projective-space-base-change",
+  "def-pc-zero-scheme",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-fermat-finite-chart-cover] with $S=U$ and $n=\\ell$. It gives $\\rho$ with exactly the required homogeneous formula, finite and surjective, together with both monic chart presentations and their base-change identifications.",
+   "uses": [
+    "lem-sfb-fermat-finite-chart-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Reassembly of returned proof steps 1--9 via the four independently queued arguments; Returned proof steps 1--3: degree-zero Proj fractions, two-chart gluing, two monic bases and lifting all residue-field points; step 5: coefficient base change of the hypersurface."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-binomial-chart-smooth-relative-dimension] to $(\\alpha,\\beta,\\gamma)=(1,-1,-1)$ and $n=\\ell$. Its hypotheses hold because $\\ell$ is invertible on $U$. Thus $C_\\ell\\to U$ is smooth H-projective of relative dimension one, including after extension to any fibre field.",
+   "uses": [
+    "lem-sfb-binomial-chart-smooth-relative-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Reassembly of returned proof steps 1--9 via the four independently queued arguments; Returned proof step 4: two localized Jacobian presentations, affine smoothness, open localization, coefficient base change and fibre dimension."
+   }
+  },
+  {
+   "text": "For every field-valued point $\\operatorname{Spec}L\\to U$, the base-change charts of [lem-sfb-fermat-finite-chart-cover] identify the fibre with the plane hypersurface of $A^\\ell-B^\\ell-C^\\ell$, a nonzero homogeneous polynomial of degree $\\ell$. The smooth dimension-one conclusion of step 2 permits [lem-sfb-smooth-plane-hypersurface-geometric-genus]: this fibre is geometrically integral and geometrically connected and has genus $(\\ell-1)(\\ell-2)/2$. In particular this holds for every geometric fibre; since $\\ell\\geq5$, the genus is at least $4\\cdot3/2=6\\geq2$.",
+   "uses": [
+    "lem-sfb-fermat-finite-chart-cover",
+    "lem-sfb-smooth-plane-hypersurface-geometric-genus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Reassembly of returned proof steps 1--9 via the four independently queued arguments; Returned proof steps 5--7: H0, nonemptiness, idempotents over all field extensions, the field-base application of the smooth normal-integral core and the genus formula."
+   }
+  },
+  {
+   "text": "The section $[1:0:1]$ makes $C_\\ell$ nonempty, since $U$ is integral and hence nonempty. Apply [lem-sbc-smooth-connected-generic-geometry-core] to $C_\\ell\\to U$: its base is integral with integrally closed local rings by hypothesis, smoothness is step 2, and geometrically connected fibres are step 3. Thus $C_\\ell$ is integral with integrally closed local rings.",
+   "uses": [
+    "lem-sbc-smooth-connected-generic-geometry-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Reassembly of returned proof steps 1--9 via the four independently queued arguments; Returned proof steps 8--9: localization to K, two field generators, target integrality, Noetherian normal affine sections, equality with the integral closure and overlap gluing."
+   }
+  },
+  {
+   "text": "Now apply [lem-sfb-two-root-normal-model-function-field] to $Y=C_\\ell$, $q=\\rho$, $n=\\ell$. Step 1 supplies its finite surjective map, its two presentations and all overlap compatibilities; step 4 supplies the normal integral source; $U$ is integral of finite type over the given field. It identifies the function field, including its embedding of $k(U)(x)$ and the specified generators $a,b$, and identifies $\\rho$ over $\\mathbf P^1_U$ with its normalization in that field. These are the remaining assertions.",
+   "uses": [
+    "lem-sfb-two-root-normal-model-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Reassembly of returned proof steps 1--9 via the four independently queued arguments; Returned proof steps 8--9: localization to K, two field generators, target integrality, Noetherian normal affine sections, equality with the integral closure and overlap gluing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fermat-finite-chart-cover",
+  "lem-sfb-binomial-chart-smooth-relative-dimension",
+  "lem-sfb-smooth-plane-hypersurface-geometric-genus",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-sfb-two-root-normal-model-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Section 0BYA and Lemma 0BYD; Q55 reassembly of the existing explicit relative argument, whose complete nine original steps are retained in report.md. Relative charts and normalization are agent-supplied, not attributed as verbatim Stacks assertions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Fermat curve a to the power l minus b to the power l equals c to the power l is smooth projective of genus (l-1)(l-2)/2 when l is invertible and maps finitely to the projective line by a^l/c^l",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"fermatLastTheoremWith'_polynomial\", \"module\": \"Mathlib/NumberTheory/FLT/Polynomial\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {n : ℕ}, 3 ≤ n → ↑n ≠ 0 → FermatLastTheoremWith' (Polynomial k) n\", \"doc\": \"Let $k$ be a field and let $n \\\\ge 3$ be an integer. If the characteristic of $k$ does not divide $n$, then any solution to the equation $a^n + b^n = c^n$ in non-zero polynomials $a, b, c \\\\in k[X]$ is \"}\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"Type u → Type u\", \"doc\": \"The type of Weierstrass curves over a given type $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Projective R → (Fin 3 → R) → Prop\", \"doc\": \"A point $ P = [X:Y:Z] $ in projective space over a ring $ R $ is nonsingular if it satisfies the homogeneous cubic equation defining the projective Weierstrass curve $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - \"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"{F : Type u_2} → [inst : Field F] → [DecidableEq F] → Inhabited { W // W.IsElliptic }\", \"doc\": \"For any field $ F $ with decidable equality, there exists an elliptic Weierstrass curve over $ F $ with j-invariant $ 37 $. This curve is constructed explicitly using the standard form for j-invariant\"}\n  {\"name\": \"WeierstrassCurve.Projective.Equation\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Projective R → (Fin 3 → R) → Prop\", \"doc\": \"The condition that a point $ P = [X:Y:Z] $ in projective space satisfies the homogeneous cubic equation defining a projective Weierstrass curve, i.e., $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - a_2X^2Z - a_4XZ\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fermat\", \"genus\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Fermat.*(genus|[Ss]mooth)|genus.*Fermat|fermatCurve",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal covering of the projective line obtained by adjoining lth roots of x and x minus one has smooth geometric fibres of genus at least two",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsNormalClosure.adjoin_rootSet\", \"module\": \"Mathlib.FieldTheory.Normal.Closure\", \"type\": \"∀ {F : Type u_1} {K : Type u_2} {L : Type u_3} {inst : Field F} {inst_1 : Field K} {inst_2 : Field L}\\n  {inst_3 : Algebra F K} {inst_4 : Algebra F L} [self : IsNormalClosure F K L],\\n  ⨆ x, IntermediateField.adjoin F ((minpoly F x).rootSet L) = ⊤\", \"doc\": \"If $ L $ is a normal closure of the field extension $ K $ over $ F $, then the field generated by adjoining all roots of the minimal polynomials of elements in $ K $ (with roots taken in $ L $) is equ\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"IntermediateField.AdjoinDouble.normal_algebraicClosure\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \"{x y : L} (hx : IsIntegral K x) (hy : IsIntegral K y) : Normal K (AlgebraicClosure K⟮x, y⟯)\", \"doc\": \"For any elements $x$ and $y$ in a field $L$ that are integral over a field $K$, the algebraic closure of the field extension $K(x, y)$ is a normal extension of $K$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over.over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    {inst : P.IsStableUnderBaseChange} →\\n      {inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P} →\\n        {X : AlgebraicGeometry.Scheme} →\\n          {inst_2 : X.Over S} →\\n          \", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this function maps each element of the zeroth c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    {inst : P.IsStableUnderBaseChange} →\\n      {inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P} →\\n        {X : AlgebraicGeometry.Scheme} →\\n          {inst_2 : X.Over S} →\\n          \", \"doc\": \"A function that, given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, a scheme $ X $ over $ S $, and a cover $ \\\\mathcal{U} $ of $ X\"}\n  {\"name\": \"Algebra.IsAlgebraic.normalClosure_eq_iSup_adjoin_of_splits\", \"module\": \"Mathlib.FieldTheory.Normal.Closure\", \"type\": \": normalClosure F K L = ⨆ x : K, IntermediateField.adjoin F ((minpoly F x).rootSet L)\", \"doc\": \"Given that the minimal polynomial of each element $ x $ in $ K $ splits in $ L $, the normal closure of $ K $ in $ L $ over $ F $ is equal to the supremum (join) in the lattice of intermediate fields \"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": X.OpenCover\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \": W.Cover (precoverage P)\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, the cover of $ X $ is defined by the precoverag\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Fermat.*(genus|[Ss]mooth)|genus.*Fermat|fermatCurve",
+   "results": "0 hits; inspected: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth projective Fermat curve of degree n has genus (n-1)(n-2)/2",
+   "results": "8 hits; inspected: WeierstrassCurve.Projective.polynomial, WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_preΨ', FermatLastTheorem, WeierstrassCurve.coeff_preΨ', WeierstrassCurve.natDegree_ΨSq, Polynomial.flt, Nat.fermatNumber",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fermat\", \"genus\"",
+   "results": "0 hits; inspected: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Fermat plane curve over a normal integral scheme is smooth projective and is the normalization of the two root Kummer extension of the projective line",
+   "results": "8 hits; inspected: WeierstrassCurve.Projective, WeierstrassCurve.toProjective, WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve, WeierstrassCurve.Jacobian, WeierstrassCurve.Affine, WeierstrassCurve.Projective.nonsingular_some",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj constructions, elliptic curves, group/cotangent cohomology or etale cohomology; none computes the coherent cohomology of a plane hypersurface or states the relative Fermat assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-equivariant-cover",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.",
+   "via": [
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-fermat-kummer-relative-curve",
+  "worker": "stage1",
+  "summary": "Q55 repaired the mandated re-split without changing the statement: four new statement-only unsplit nodes distribute all nine original arguments, and five short steps assemble them with the existing normal-family core. Original arguments and their cited inputs are retained verbatim in report.md. New nodes have actual logged searches, no proof steps and no proof dependencies.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; explicit Fermat subargument split: old steps 1--3 and fibre identification -> finite-chart-cover; old step 4 -> binomial smooth atlas; old steps 5--7 over fields -> smooth-plane geometry/genus; old steps 8--9 -> normal two-root model; total-family normality stays as a direct application of the existing core.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "The generic normal-integral smooth-family theorem supplies normality and integrality of the total space; no theorem in this unit replaces that geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-sbc-normal-sections-finite-product",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-1df721688",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-1df721688 (reviewer sub-agent of L); spot-checked: Re-split check passes. Old steps 1-3 and the step-5 base change go to lem-sfb-fermat-finite-chart-cover. Old step 4 goes to lem-sfb-binomial-chart-smooth-relative-dimension. Old steps 5-7 go to lem-sfb-smooth-plane-hypersurface-geometric-genus, except the core application over U, which stays as item step 4 and is one citation of the existing lem-sbc-smooth-connected-generic-geometry-core. Old steps 8-9 go to lem-sfb-two-root-normal-model-function-field. The four nodes are of comparable size, the assembly is about 1950 characters in 5 steps, and the statement and stmt_deps match live. The live item is still the NH 9-step split. Nothing involved is in route-pivot-dropped and no SGA is cited. Maths checked. Charts: a^n-b^n=1 with x=a^n gives b^n=x-1, and the A-chart gives u^n=1-y with y=v^n and overlap v=1/a, u=b/a, y=1/x. The rings have free bases a^i b^j, so the map is finite, and n-th roots plus [1:1:0] give surjectivity. Jacobians: det[[λns^{n-1},0],[z,s]]=λns^n and μnt^n, with D(s),D(t) covering because ν is a unit; this matches Stacks 0BYA. Node 3 follows from the plane-hypersurface H0=L result, idempotents, smooth+connected⇒integral and 0BYD's genus formula. Node 4 follows from finite-type ⇒ Noetherian normal domain charts plus the two integral-closure inclusions. Small cases n=1, d=1,2,3 and char|n (vacuous for node 4) were checked. Not duplicates of lem-pc-h0-geom-connected, prop-pc-xk-integral or lem-sbc-normal-sections-finite-product. The off-unit core tool_use is accepted. FIX: lem-sfb-two-root-normal-model-function-field claimed that S_C/S_A is an integrally closed domain with fraction field k(Y) for every affine open V, which is false for V=∅ (R=0, S_C=0). The conclusion is now restricted to nonempty affine opens, which the old proof also assumed; the hypotheses are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFermatKummerCurve",
+  "declaration": "AlgebraicGeometry.RelativeFermatCurve.exists_finite_kummer_cover",
+  "declarations": [
+   "AlgebraicGeometry.RelativeFermatCurve.equation",
+   "AlgebraicGeometry.RelativeFermatCurve.ideal",
+   "AlgebraicGeometry.RelativeFermatCurve.curve",
+   "AlgebraicGeometry.RelativeFermatCurve.ι",
+   "AlgebraicGeometry.RelativeFermatCurve.π",
+   "AlgebraicGeometry.RelativeFermatCurve.exists_finite_kummer_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFermatKummerCurve.lean",
+  "statement": "theorem exists_finite_kummer_cover (k : Type u) [Field k] (U : Scheme.{u}) [IsIntegral U] (p : U ⟶ Spec (.of k)) [LocallyOfFiniteType p] [QuasiCompact p] (hnormal : ∀ z : U, IsDomain (U.presheaf.stalk z) ∧ IsIntegrallyClosed (U.presheaf.stalk z)) (l : ℕ) (hl : Nat.Prime l) (hl5 : 5 ≤ l) (hinv : IsUnit (l : Γ(U, ⊤))) (hroot : ∃ ζ : Γ(U, ⊤), IsPrimitiveRoot ζ l) : ∃ (_ : IsIntegral (curve U l)) (_ : IsIntegral (ProjectiveSpace (ULift.{u} (Fin 2)) U)) (ρ : curve U l ⟶ ProjectiveSpace (ULift.{u} (Fin 2)) U) (hC : ρ ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) U ⟨1⟩ = ι U l ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 3)) U ⟨2⟩) (hA : ρ ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) U ⟨0⟩ = ι U l ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 3)) U ⟨0⟩), ρ ≫ ProjectiveSpace (ULift.{u} (Fin 2)) U ↘ U = π U l ∧ IsFinite ρ ∧ Surjective ρ ∧ (∀ z : curve U l, IsDomain ((curve U l).presheaf.stalk z) ∧ IsIntegrallyClosed ((curve U l).presheaf.stalk z)) ∧ Smooth (π U l) ∧ IsHProjective (π U l) ∧ GeometricallyIntegral (π U l) ∧ SmoothOfRelativeDimension 1 (π U l) ∧ ρ.appLE (ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) U ⟨1⟩) (ι U l ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 3)) U ⟨2⟩) hC.ge (ProjectiveSpace.coordRatio (ULift.{u} (Fin 2)) U ⟨1⟩ ⟨0⟩) = ((ι U l).app _ (ProjectiveSpace.coordRatio (ULift.{u} (Fin 3)) U ⟨2⟩ ⟨0⟩)) ^ l ∧ ρ.appLE (ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) U ⟨0⟩) (ι U l ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 3)) U ⟨0⟩) hA.ge (ProjectiveSpace.coordRatio (ULift.{u} (Fin 2)) U ⟨0⟩ ⟨1⟩) = ((ι U l).app _ (ProjectiveSpace.coordRatio (ULift.{u} (Fin 3)) U ⟨0⟩ ⟨2⟩)) ^ l ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ U), @Scheme.arithmeticGenus Ω _ (pullback (π U l) s) ⟨pullback.snd (π U l) s⟩ = (l - 1) * (l - 2) / 2 ∧ 2 ≤ @Scheme.arithmeticGenus Ω _ (pullback (π U l) s) ⟨pullback.snd (π U l) s⟩) ∧ ∃ (_ : Nonempty (ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) U ⟨1⟩)) (_ : Nonempty (ι U l ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 3)) U ⟨2⟩)) (e : RatFunc U.functionField ≃+* (ProjectiveSpace (ULift.{u} (Fin 2)) U).functionField) (_ : Algebra (ProjectiveSpace (ULift.{u} (Fin 2)) U).functionField (curve U l).functionField), e RatFunc.X = (ProjectiveSpace (ULift.{u} (Fin 2)) U).germToFunctionField _ (ProjectiveSpace.coordRatio (ULift.{u} (Fin 2)) U ⟨1⟩ ⟨0⟩) ∧ Spec.map (CommRingCat.ofHom e.symm.toRingHom) ≫ (ProjectiveSpace (ULift.{u} (Fin 2)) U).fromSpecFunctionField ≫ ProjectiveSpace (ULift.{u} (Fin 2)) U ↘ U = Spec.map (CommRingCat.ofHom (algebraMap U.functionField (RatFunc U.functionField))) ≫ U.fromSpecFunctionField ∧ Spec.map (CommRingCat.ofHom (algebraMap (ProjectiveSpace (ULift.{u} (Fin 2)) U).functionField (curve U l).functionField)) ≫ (ProjectiveSpace (ULift.{u} (Fin 2)) U).fromSpecFunctionField = (curve U l).fromSpecFunctionField ≫ ρ ∧ FiniteDimensional (ProjectiveSpace (ULift.{u} (Fin 2)) U).functionField (curve U l).functionField ∧ (∃ a b : (curve U l).functionField, a = (curve U l).germToFunctionField _ ((ι U l).app _ (ProjectiveSpace.coordRatio (ULift.{u} (Fin 3)) U ⟨2⟩ ⟨0⟩)) ∧ b = (curve U l).germToFunctionField _ ((ι U l).app _ (ProjectiveSpace.coordRatio (ULift.{u} (Fin 3)) U ⟨2⟩ ⟨1⟩)) ∧ a ^ l = algebraMap _ _ (e RatFunc.X) ∧ b ^ l = algebraMap _ _ (e RatFunc.X - 1) ∧ IntermediateField.adjoin (ProjectiveSpace (ULift.{u} (Fin 2)) U).functionField {a, b} = ⊤) ∧ ∃ E : curve U l ≅ (ProjectiveSpace (ULift.{u} (Fin 2)) U).normalizationIn (curve U l).functionField, E.hom ≫ (ProjectiveSpace (ULift.{u} (Fin 2)) U).fromNormalizationIn (curve U l).functionField = ρ",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Specific Fermat-equation helpers give the actual zero scheme and its structure map. The two added, already recorded definition dependencies provide the zero scheme and O(1); no general notion is redefined. The cover is specified by both standard-chart identities, and the function-field algebra and normalization are constrained over the specified projective line."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586deaad6",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Statement matches lem-sfb-fermat-kummer-relative-curve clause by clause. Hypotheses: field k; U integral, LocallyOfFiniteType+QuasiCompact over Spec k; stalkwise normal; l prime >=5, IsUnit l in Γ(U); primitive l-th root; nothing stronger. C_l is the real zeroLocus of T0^l-T1^l-T2^l in O(1)^{⊗l}, not radicalized. coordRatio i j = T_j/T_i, so the hC/hA appLE identities give x=(A/C)^l and y=(C/A)^l and pin rho uniquely, with rho ≫ str = π. Finite, surjective, normal integral, Smooth, IsHProjective, GeometricallyIntegral, relative dimension 1. arithmeticGenus of every geometric fibre (actual pullback.snd Over structure) = (l-1)(l-2)/2 >= 2. e : RatFunc k(U) ≃ k(P1) and Algebra k(P1) k(C) pinned by Spec-map equalities; a=A/C, b=B/C with a^l=x, b^l=x-1 (sign correct), adjoin = ⊤, finite-dimensional. normalizationIn iso commuting with rho. lean.statement verbatim; node diff vs live = lean + two genuine stmt_deps (def-pc-zero-scheme, def-pc-projective-space-twist). Helpers are real defs with source/blueprint docstrings; proof sorry only; nine proof steps in docstring; report has Worker report and Second reading by Q05. Advisory: IdealSheafData.subscheme owner def-weil-pbc-scheme-reduction not cited. No compile run (no file changed)."
+ }
+}

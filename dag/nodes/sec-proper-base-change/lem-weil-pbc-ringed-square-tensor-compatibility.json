@@ -24,32 +24,50 @@
  },
  "proof": [
   {
-   "text": "On module sheaves the canonical tensor comparison sends s tensor (v tensor w) to (s tensor v) tensor (1 tensor w). Apply the insertion equation of the specified square to the two factors. Naturality of its sheaf-of-sets comparison preserves the pair of generalized sections, while linearity of its module comparison moves the remaining scalars across the balanced tensor product. Consequently splitting the tensor before or after the module square multiplies the same nested scalars. Scalar-extension generators and the universal property of sheafified tensor products imply equality of module sheaf maps. This works for arbitrary structural ring maps, including nonflat ones and the zero ring.",
+   "text": "Use the ordinary total-complex square for the specified module comparison, before localization. Its proof is the degreewise coproduct extension of ordinary module-sheaf tensor compatibility.",
    "uses": [
-    "def-weil-pbc-ringed-tensor-square-presentation",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+    "lem-weil-pbc-ringed-square-ordinary-tensor-compatibility"
    ],
    "elementary": false
   },
   {
-   "text": "Apply that equality in every bidegree of the signed total tensor of P and Q. The comparisons preserve both degrees, so they introduce no permutation sign. Flat K-flat complexes and their pullbacks remain flat K-flat; the total tensor is K-flat by reassociating an acyclic test tensor and applying K-flatness twice. Its terms are direct sums of tensor products of flat modules. A tensor product of flat modules is flat because its tensor functor is the composition of two exact functors; direct sums stay flat by exactness of sums and the tensor-colimit comparison. Thus the representative characterization of θ applies also to the total tensor. Substitute the canonical representative equations for the four edge tensor comparisons and θ at P, Q, and their total tensor. Naturality of the representative identifications cancels the intermediate corner models and yields precisely the displayed derived equality at Q(P),Q(Q). More explicitly, write r_A(P,Q):q(T(P,Q))≅A.tensor(qP,qQ), C_e for the edge comparison, and d_e for the inverse totalIso. The edge equation is e(r_A);t_e;tensor(C_eP,C_eQ)=C_e(T(P,Q));q(d_e);r_B. Precompose the desired equation with GK(r_Y), and postcompose with tensor(H(C_fP);C_h(fP),H(C_fQ);C_h(fQ)). These are isomorphisms, so they can be cancelled. Naturality and the four edge equations, together with the assumed θ equations at P,Q and T(P,Q), reduce both sides to q of gamma_T;h*(d_f);d_h=k*(d_g);d_k;T(gamma_P,gamma_Q). That is precisely the ordinary total-complex equality in the preceding step.",
+   "text": "Pullback preserves flat-term K-flat representatives. The total tensor of two such representatives is again flat-term K-flat. The canonical complex-to-derived comparisons are isomorphisms on these representatives.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-kflat-tensor-pullback-computation-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the representative equation from the unique characterization of each canonical edge tensor comparison. For two composable edges, use naturality of the second tensor comparison, apply the two edge equations successively, and use naturality of its complex-to-derived comparison to combine the two ordinary total comparisons.",
+   "uses": [
+    "lem-weil-pbc-ringed-tensor-edge-representative-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the desired equality with the inverse-image of the source representative identification, and postcompose with the target tensor of the two composite complex-to-derived comparisons. These are invertible by the preceding steps. Naturality of theta and its assumed representative equations at P,Q and their total tensor convert both composites to the ordinary total square localized by Q. Apply the ordinary total square and naturality of the final representative identification; cancel the invertible pre- and post-compositions.",
+   "uses": [
+    "lem-weil-pbc-ringed-square-ordinary-tensor-compatibility",
+    "lem-weil-pbc-ringed-tensor-edge-representative-equation",
+    "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "lem-pur-kflat-total-tensor-model"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-ringed-tensor-square-presentation",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+  "lem-weil-pbc-ringed-square-ordinary-tensor-compatibility",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+  "lem-weil-pbc-ringed-tensor-edge-representative-equation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Representative-only part of Step 2 of lem-weil-pbc-ringed-exchange-tensor-coherence, using 07A4 and 0D6D to expand the verification omitted at 0E48"
+  "place": "F3: explicit two-edge representative equations and categorical conjugation of the ordinary module tensor square; Stacks 07A4 and 0D6D, tensor verification omitted in 0E48"
  },
  "mathlib_searches": [
   {
@@ -105,14 +123,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261018T071202-L-1671754",
+  "landing": "20261026T222642-L-678572",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

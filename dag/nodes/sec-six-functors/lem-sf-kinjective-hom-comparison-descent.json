@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-kinjective-hom-comparison-descent",
+ "kind": "statement",
+ "title": "Descent of a chain comparison through natural K-injective representative models",
+ "statement": "Let B and A be abelian categories with unbounded derived categories [def-weil-abstract-derived-category], and suppose B has K-injective resolutions [def-pur-kinjective-complex]. Let U:B→A be exact additive and preserve K-injective complexes. Let HB and HA be bifunctors on cochain complexes, and DB and DA bifunctors on their derived categories. Suppose each has specified representative isomorphisms DB(QK,QI)≅Q HB(K,I) and DA(QK,QI)≅Q HA(K,I), for arbitrary K and K-injective I, natural in both complex variables. Given a natural chain isomorphism HB followed by termwise U ≅ HA after termwise U in both variables, there exists a natural isomorphism DB followed by D(U) ≅ DA after D(U) in both variables. On every pair of K-injectives its comparison, followed by the two canonical D(U) localization factors and the target representative map, equals D(U) of the source representative map followed by the localization factor on HB and Q of the given chain comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sections 0A8X and 08J7, Lemma 0A95; componentwise and localization assembly from steps 4–5 of lem-sf-ringed-forget-two-injective-hom."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Restrict both complex variables to the full category of K-injective complexes. Its localization functor L=ι⋙Q is a localization at quasi-isomorphisms; the opposite product P=Lᵒᵖ×L is also a localization. These are the existing KInjectives and localization APIs, using the K-injective comparison of homotopy classes.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source representative maps form a natural isomorphism eB over P. The target representative maps evaluated on U of the two K-injective complexes similarly form eA, since U preserves K-injectives. Combine eB, the localization factor for U, the given chain isomorphism, inverse eA, and inverse factors in both variables to obtain an isomorphism P⋙(DB⋙D(U)) ≅ P⋙((D(U)ᵒᵖ×D(U))⋙DA).",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition by a localization is fully faithful on functor categories. Take the preimage of the preceding natural isomorphism. The map-preimage identity gives its value on every pair of K-injectives. Cancel the inverse target representative isomorphism and the inverse two-variable factor to obtain precisely the asserted representative equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Formal categorical assembly of the product-total Hom and K-injective models in Sections 0A8X and 08J7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "A natural isomorphism of bifunctors on K-injective complexes descends to the derived category",
+   "results": [
+    "Functor.leftDerivedNatIso",
+    "Functor.mapHomologicalComplexUpToQuasiIsoFactorsh"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Infrastructure only; not the projection-normalized two-variable statement."
+  },
+  {
+   "tool": "LeanFinder / Loogle",
+   "query": "An exact additive functor preserving products and internal Hom commutes with derived internal Hom; IsLimit.conePointUniqueUpToIso",
+   "results": [
+    "Functor.mapDerivedCategory",
+    "IsLimit.conePointUniqueUpToIso",
+    "IsLimit.conePointUniqueUpToIso_hom_comp"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Use the product-limit and localization APIs; no existing complete comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(Iso|iso); bifunctor.*[Cc]omp; whiskerLeft.*Full; preimageIso; KInjectives",
+   "results": [
+    "homComplexIsLimit",
+    "homComplex_d_π",
+    "homComplexFunctor_map_f_π",
+    "Localization.fullyFaithfulWhiskeringLeft",
+    "CochainComplex.KInjectives.ι ⋙ DerivedCategory.Q is a localization"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Existing component and localization APIs provide the proof ingredients; no duplicate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTwoInjectiveHom",
+  "date": "2026-10-27",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom comparison paragraph of cor-coef-verdier-weil-equivariance.proof.md, via steps 4–5 of lem-sf-ringed-forget-two-injective-hom.",
+   "via": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KInjectiveHomComparisonDescent",
+  "file": "lean/Sheaf/Algebra/Homology/KInjectiveHomComparisonDescent.lean",
+  "declaration": "CategoryTheory.kInjectiveHomComparisonDescent",
+  "statement": "theorem kInjectiveHomComparisonDescent :\n    ∃ derived : DB ⋙ U.mapDerivedCategory ≅\n        (U.mapDerivedCategory.op.prod U.mapDerivedCategory) ⋙ DA,\n      ∀ (K I : CochainComplex B ℤ) [K.IsKInjective] [I.IsKInjective],\n        derived.hom.app (op (DerivedCategory.Q.obj K), DerivedCategory.Q.obj I) ≫\n            DA.map\n              (X := (op (U.mapDerivedCategory.obj (DerivedCategory.Q.obj K)),\n                U.mapDerivedCategory.obj (DerivedCategory.Q.obj I)))\n              (Y := (op (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj K)),\n                DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj I)))\n              ((U.mapDerivedCategoryFactors.inv.app K).op,\n                U.mapDerivedCategoryFactors.hom.app I) ≫\n            (ρA ((U.mapHomologicalComplex (.up ℤ)).obj K)\n              ((U.mapHomologicalComplex (.up ℤ)).obj I)).hom =\n          U.mapDerivedCategory.map (ρB K I).hom ≫\n            U.mapDerivedCategoryFactors.hom.app (HB.obj (op K, I)) ≫\n            DerivedCategory.Q.map (chain.hom.app (op K, I))",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-35fba",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222544-L-667647",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-35fba",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222544-L-667647",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered Lean files vs clone item (pure relocation, identical bodies/signatures), new theorem statements vs their nodes, item node proof_deps vs step uses; both direct importers compiled against delivered files"
+ }
+}

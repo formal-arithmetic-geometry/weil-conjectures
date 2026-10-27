@@ -1,0 +1,286 @@
+{
+ "id": "lem-per-ind-etale-height-one-valuation",
+ "kind": "statement",
+ "title": "Height-one valuation comparison for Noetherian ind-etale domains",
+ "statement": "Let $A$ and $B$ be commutative Noetherian normal domains [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring], and let $\\varphi:A\\to B$ be ind-etale [def-weil-pbc-ind-etale-algebra], meaning a filtered colimit of etale $A$-algebras of finite presentation. Then $\\varphi$ is flat [def-weil-pbc-flat-ring-map] and injective. For each prime $\\mathfrak q\\subset B$, put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. The local map $A_{\\mathfrak p}\\to B_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] satisfies\n$$\\dim A_{\\mathfrak p}=\\dim B_{\\mathfrak q},\\qquad \\mathfrak pB_{\\mathfrak q}=\\mathfrak qB_{\\mathfrak q}.$$\nHere dimension is the supremum of lengths of strict chains of prime ideals. In particular, if $\\mathfrak q$ has height one, so does $\\mathfrak p$; both local rings are discrete valuation rings [def-sc-discrete-valuation-ring], a uniformizer of $A_{\\mathfrak p}$ maps to a uniformizer of $B_{\\mathfrak q}$, and, for the induced embedding of fraction fields,\n$$v_{\\mathfrak q}(\\varphi(f))=v_{\\mathfrak p}(f)\\qquad(f\\in\\operatorname{Frac}(A)^\\times).$$\nThe valuations are normalized to assign value one to a uniformizer. No finiteness of $B$ as an $A$-module, excellence, or henselian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent-extracted local algebra consequence of Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres): its reduced zero-dimensional fibres, together with flatness and going down, give the dimension and maximal-ideal comparisons; the DVR assertion is their codimension-one consequence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-ind-etale-stability], $\\varphi$ is weakly etale, hence flat by [def-weil-pbc-ind-etale-algebra]. For $0\\ne a\\in A$, the sequence $0\\to A\\xrightarrow{a}A$ is exact because $A$ is a domain. Applying [lem-weil-pbc-flat-tensor-exact] with the flat $A$-module $B$ shows that multiplication by $\\varphi(a)$ on $B$ is injective. If $\\varphi(a)=0$, this sends both $0$ and $1$ to zero, contradicting $0\\ne1$ in the domain $B$. Thus $\\ker\\varphi=0$, and the induced fraction-field map is the embedding $a/b\\mapsto\\varphi(a)/\\varphi(b)$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097N (lemma-ind-etale-implies); Algebra Tag 00HD (lemma-flat), tensor exactness; injectivity argument written out"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q\\subset B$ and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Put $R=A_{\\mathfrak p}$ and $S=B_{\\mathfrak q}$. By [lem-weil-pbc-flat-local-ring-maps], $R\\to S$, $a/s\\mapsto\\varphi(a)/\\varphi(s)$, is flat and local and both rings are Noetherian. By [lem-weil-pbc-localization-normal-domain] both are normal domains, with fraction fields $\\operatorname{Frac}(A)$ and $\\operatorname{Frac}(B)$ respectively. The map is injective: its composite into $\\operatorname{Frac}(B)$ is the fraction-field embedding of Step 1 restricted to $R$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT (lemma-flat-localization), 00FN (lemma-Noetherian-permanence), and 00GY (lemma-localize-normal-domain)"
+   }
+  },
+  {
+   "text": "Choose the filtered presentation of $B$ by finitely presented etale $A$-algebras supplied by the ind-etale hypothesis. Since $B$ is Noetherian, [lem-weil-pbc-henselization-finite-separable-fibres] applies to this presentation and to $\\mathfrak p$: the canonical map identifies $C=B\\otimes_A\\kappa(\\mathfrak p)$ with $\\prod_{j=1}^r\\kappa(\\mathfrak q_j)$, where the $\\mathfrak q_j$ are precisely the primes of $B$ contracting to $\\mathfrak p$. Our chosen $\\mathfrak q$ is one of them, say $\\mathfrak q_j$, so $r\\ge1$. Write $Q$ for the kernel of projection $C\\to\\kappa(\\mathfrak q)$, a prime of $C$.",
+   "uses": [
+    "lem-weil-pbc-henselization-finite-separable-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres)"
+   }
+  },
+  {
+   "text": "We spell out the local fibre. Let $T=\\varphi(A\\setminus\\mathfrak p)$ and $B_{\\mathfrak p}=T^{-1}B$. By [def-weil-pbc-localization-at-prime], $C=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$. By [lem-weil-pbc-fibre-ring-primes-residue-fields], $Q$ corresponds to $\\mathfrak q$. Apply [lem-weil-pbc-localization-at-prime-of-quotient] to $B_{\\mathfrak p}$, its ideal $\\mathfrak pB_{\\mathfrak p}$, and $Q$. Its inverse image is $\\mathfrak qB_{\\mathfrak p}$: membership of $b/t$ is equivalent to $b\\in\\mathfrak q$, since $t\\notin\\mathfrak q$. Moreover $(B_{\\mathfrak p})_{\\mathfrak qB_{\\mathfrak p}}=S$: the fraction $(b/t)/(c/u)$ goes to $bu/(tc)$, and the inverse sends $b/c$ to $(b/1)/(c/1)$. The cited quotient isomorphism therefore gives $S/\\mathfrak pS\\cong C_Q$. In the product of Step 3, the idempotent $e_j$ with coordinate $1$ at $j$ and $0$ elsewhere lies outside $Q$; inverting it kills all other factors. The remaining factor is already a field, so $C_Q\\cong\\kappa(\\mathfrak q)$. Thus $S/\\mathfrak pS$ is a field. Since $S$ is local and $\\mathfrak pS\\subseteq\\mathfrak qS$, its unique maximal ideal is $\\mathfrak pS=\\mathfrak qS$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E6 (remark-fundamental-diagram), 0H9M (remark-local-ring-fibre), 00CT (proposition-localize-quotient), and 00OL (definition-fibre); explicit fraction and product calculations"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-height-formula] to the flat map of Noetherian rings $A\\to B$ at $\\mathfrak q$. It gives $\\dim S=\\dim R+\\dim(S/\\mathfrak pS)$. The quotient in Step 4 is a nonzero field, whose only prime is $(0)$, so its dimension is zero. Hence $\\dim R=\\dim S$. The same cited statement identifies these dimensions with the heights of $\\mathfrak p$ and $\\mathfrak q$ respectively, proving all the dimension assertions, including that height one of $\\mathfrak q$ implies height one of $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total), flat case; field dimension computed directly"
+   }
+  },
+  {
+   "text": "Now suppose $\\mathfrak q$ has height one. Step 2 gives Noetherian normal local domains $R,S$, and Step 5 gives dimension one for both. Applying [lem-sc-normal-dim1-dvr] to each proves that both are discrete valuation rings. If $\\pi$ is a uniformizer of $R$, then $\\mathfrak pR=\\pi R$ by [def-sc-discrete-valuation-ring]. Extending this ideal along $R\\to S$ and using Step 4 gives $\\mathfrak qS=\\mathfrak pS=\\varphi(\\pi)S$, where $\\varphi$ here denotes the localized map. Thus $\\varphi(\\pi)$ is a uniformizer of $S$.",
+   "uses": [
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), equivalence of (1) and (5); definition-uniformizer"
+   }
+  },
+  {
+   "text": "For $f\\in\\operatorname{Frac}(A)^\\times=\\operatorname{Frac}(R)^\\times$, write $f=a/b$ with $a,b\\in R\\setminus\\{0\\}$. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], $a=u\\pi^m$ and $b=w\\pi^n$ with $u,w\\in R^\\times$ and $m,n\\ge0$. A ring map sends units to units: $\\varphi(u)\\varphi(u^{-1})=1$, and likewise for $w$. For a normalized DVR valuation, units have value zero (both the unit and its inverse lie in the valuation ring and have nonnegative values), while a uniformizer has value one. Step 6 makes $\\varphi(\\pi)$ a uniformizer, so $v_{\\mathfrak p}(f)=m-n$ and $v_{\\mathfrak q}(\\varphi(f))=v_{\\mathfrak q}(\\varphi(u)/\\varphi(w))+(m-n)v_{\\mathfrak q}(\\varphi(\\pi))=m-n$. This proves the asserted equality also for negative exponents. The only hypotheses used were those of the statement.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final factorization assertion and proof extending v(a/b)=v(a)-v(b)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Local algebra assembly of Tags 0AH1, 097N, 00HD, 00HT, 00FN, 00GY, 00CT, 00ON and 00PD; fraction and product calculations written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ind etale map of Noetherian normal domains preserves heights of prime ideals and normalized discrete valuations in codimension one",
+   "results": "{\"t\": \"2026-10-24T01:30:35Z\", \"tool\": \"leanfinder\", \"query\": \"An ind etale map of Noetherian normal domains preserves heights of prime ideals and normalized discrete valuations in codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt.comp\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"StandardEtalePair.HasMap.map\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\"], \"digest\": \"7be9fd4c8863dba3\"}; The first Loogle pattern has an unknown identifier, corrected in the second. The ramification-index theorem in Mathlib/NumberTheory/RamificationInertia/Unramified.lean assumes EssFiniteType; it does not apply to arbitrary ind-etale extensions. Other hits are etale loci or definitions, not the asserted height and DVR comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an ind etale extension at a height one prime is an unramified extension of discrete valuation rings of ramification index one",
+   "results": "{\"t\": \"2026-10-24T01:32:07Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of an ind etale extension at a height one prime is an unramified extension of discrete valuation rings of ramification index one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified.ofLocalizationPrime\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Algebra.IsUnramifiedAt\", \"Algebra.IsEtaleAt\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.Unramified.of_isLocalization_Away\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\"], \"digest\": \"0f147e292fdf60f5\"}; The first Loogle pattern has an unknown identifier, corrected in the second. The ramification-index theorem in Mathlib/NumberTheory/RamificationInertia/Unramified.lean assumes EssFiniteType; it does not apply to arbitrary ind-etale extensions. Other hits are etale loci or definitions, not the asserted height and DVR comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ind etale ring homomorphism local maximal ideal generated dimension equality",
+   "results": "{\"t\": \"2026-10-24T01:30:26Z\", \"tool\": \"leansearch\", \"query\": \"ind etale ring homomorphism local maximal ideal generated dimension equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\", \"RingHom.Etale\", \"RingHom.Etale.propertyIsLocal\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"AlgebraicGeometry.IsEtale\", \"RingHom.FormallyEtale\"], \"digest\": \"d42069da4291ead9\"}; The first Loogle pattern has an unknown identifier, corrected in the second. The ramification-index theorem in Mathlib/NumberTheory/RamificationInertia/Unramified.lean assumes EssFiniteType; it does not apply to arbitrary ind-etale extensions. Other hits are etale loci or definitions, not the asserted height and DVR comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsEtale, Ideal.height",
+   "results": "{\"t\": \"2026-10-24T01:30:26Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsEtale, Ideal.height\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The first Loogle pattern has an unknown identifier, corrected in the second. The ramification-index theorem in Mathlib/NumberTheory/RamificationInertia/Unramified.lean assumes EssFiniteType; it does not apply to arbitrary ind-etale extensions. Other hits are etale loci or definitions, not the asserted height and DVR comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Ideal.height",
+   "results": "{\"t\": \"2026-10-24T01:32:04Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, Ideal.height\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The first Loogle pattern has an unknown identifier, corrected in the second. The ramification-index theorem in Mathlib/NumberTheory/RamificationInertia/Unramified.lean assumes EssFiniteType; it does not apply to arbitrary ind-etale extensions. Other hits are etale loci or definitions, not the asserted height and DVR comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsIndEtale|IsEtale).*(height|valuation)|([Hh]eight|[Vv]aluation).*([Ii]nd[Ee]tale|IsEtale)",
+   "results": "{\"t\": \"2026-10-24T01:30:25Z\", \"tool\": \"grep\", \"query\": \"(IsIndEtale|IsEtale).*(height|valuation)|([Hh]eight|[Vv]aluation).*([Ii]nd[Ee]tale|IsEtale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The first Loogle pattern has an unknown identifier, corrected in the second. The ramification-index theorem in Mathlib/NumberTheory/RamificationInertia/Unramified.lean assumes EssFiniteType; it does not apply to arbitrary ind-etale extensions. Other hits are etale loci or definitions, not the asserted height and DVR comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IndEtale|ind.?etale",
+   "results": "{\"t\": \"2026-10-24T01:32:03Z\", \"tool\": \"grep\", \"query\": \"IndEtale|ind.?etale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The first Loogle pattern has an unknown identifier, corrected in the second. The ramification-index theorem in Mathlib/NumberTheory/RamificationInertia/Unramified.lean assumes EssFiniteType; it does not apply to arbitrary ind-etale extensions. Other hits are etale loci or definitions, not the asserted height and DVR comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IndEtale|ind.?etale",
+   "results": "{\"t\": \"2026-10-24T01:59:17Z\", \"tool\": \"grep\", \"query\": \"IndEtale|ind.?etale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: etale-locus and height-definition declarations do not give this ind-etale comparison. Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Mathlib/NumberTheory/RamificationInertia/Unramified.lean:34-36, requires EssFiniteType, absent here. No whole-item match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ind etale ring homomorphism local maximal ideal generated dimension equality",
+   "results": "{\"t\": \"2026-10-24T01:59:18Z\", \"tool\": \"leansearch\", \"query\": \"ind etale ring homomorphism local maximal ideal generated dimension equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\", \"RingHom.Etale\", \"RingHom.Etale.propertyIsLocal\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"AlgebraicGeometry.IsEtale\", \"RingHom.FormallyEtale\"], \"digest\": \"d42069da4291ead9\"}; Read returned hits: etale-locus and height-definition declarations do not give this ind-etale comparison. Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Mathlib/NumberTheory/RamificationInertia/Unramified.lean:34-36, requires EssFiniteType, absent here. No whole-item match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Ideal.height",
+   "results": "{\"t\": \"2026-10-24T01:59:18Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, Ideal.height\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: etale-locus and height-definition declarations do not give this ind-etale comparison. Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Mathlib/NumberTheory/RamificationInertia/Unramified.lean:34-36, requires EssFiniteType, absent here. No whole-item match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ind etale map of Noetherian normal domains preserves heights of prime ideals and normalized discrete valuations in codimension one",
+   "results": "{\"t\": \"2026-10-24T01:59:21Z\", \"tool\": \"leanfinder\", \"query\": \"An ind etale map of Noetherian normal domains preserves heights of prime ideals and normalized discrete valuations in codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt.comp\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"StandardEtalePair.HasMap.map\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\"], \"digest\": \"7be9fd4c8863dba3\"}; Read returned hits: etale-locus and height-definition declarations do not give this ind-etale comparison. Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Mathlib/NumberTheory/RamificationInertia/Unramified.lean:34-36, requires EssFiniteType, absent here. No whole-item match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsIndEtale|IsEtale).*(height|valuation)|([Hh]eight|[Vv]aluation).*([Ii]nd[Ee]tale|IsEtale)",
+   "results": "{\"t\": \"2026-10-24T01:59:54Z\", \"tool\": \"grep\", \"query\": \"(IsIndEtale|IsEtale).*(height|valuation)|([Hh]eight|[Vv]aluation).*([Ii]nd[Ee]tale|IsEtale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: etale-locus and height-definition declarations do not give this ind-etale comparison. Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Mathlib/NumberTheory/RamificationInertia/Unramified.lean:34-36, requires EssFiniteType, absent here. No whole-item match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an ind etale extension at a height one prime is an unramified extension of discrete valuation rings of ramification index one",
+   "results": "{\"t\": \"2026-10-24T01:59:58Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of an ind etale extension at a height one prime is an unramified extension of discrete valuation rings of ramification index one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified.ofLocalizationPrime\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Algebra.IsUnramifiedAt\", \"Algebra.IsEtaleAt\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.Unramified.of_isLocalization_Away\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\"], \"digest\": \"0f147e292fdf60f5\"}; Read returned hits: etale-locus and height-definition declarations do not give this ind-etale comparison. Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Mathlib/NumberTheory/RamificationInertia/Unramified.lean:34-36, requires EssFiniteType, absent here. No whole-item match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-weil-divisor-strict-local-cartier-test",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-pair modification input: ILO VIII 5.3.8, printed p.125, assertion that the quotient Weil boundary is Q-Cartier, checked etale-locally; Height-one valuation comparison for Noetherian ind-etale domains.",
+   "via": [
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-ind-etale-height-one-valuation",
+  "worker": "stage1",
+  "summary": "Q35: unchanged statement, seven-step local algebra proof using existing nodes only. Proved injectivity by flat tensor exactness; computed the localized fibre from the canonical finite-field product; used the flat height formula and the normal dimension-one DVR theorem, then evaluated numerator and denominator factorizations. Checked every cited statement and preserved the prior searches. No new nodes.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3, the existing absolute-purity/regular-pair modification branch leading to the strict-local Cartier test: this local algebra tool justifies its height-one valuation comparison; no unit or chapter change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic ring-theoretic implication ind-etale implies weakly etale supplies flatness; the perverse unit has no replacement for this local algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-finite-separable-fibres",
+    "why": "Generic Tag 0AH1 theorem supplies the canonical product-of-residue-fields fibre of a Noetherian ind-etale algebra; this is a black box for the strict-local divisor test."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Generic fibre prime correspondence identifies the prime of the fibre at the chosen q; no perverse-unit node supplies this algebraic dictionary."
+   },
+   {
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "Generic quotient/localization isomorphism computes the local fibre, with the iterated fractions written explicitly; no change of the perverse-unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-localization-at-prime-of-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-98aaf29c7",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-98aaf29c7 (reviewer sub-agent of L); spot-checked: I read all seven steps and every cited statement, and the delivery is sound; no fixes were needed. It changes only the item and its report: no new nodes, and the statement and statement dependencies are the same as live, where the item is still unsplit (not superseded, no repair note). The statement holds on the small cases I tested: A a field, p=(0), a localization A to A_s, and ramified DVR extensions, which the ind-etale hypothesis excludes because their fibre is not reduced. Step 1: ind-etale implies weakly etale implies flat (097N); flat tensor exactness on 0->A->A (multiplication by a) plus B nonzero gives injectivity. Step 2: the flat local-ring-maps node (00HT/00FN) and the localization-normal-domain node (00GY) apply with A minus p not containing 0. Step 3: the 0AH1 node is stated for any filtered colimit of etale algebras with B Noetherian; its etale notion is the same as the one in the ind-etale definition, and its j-th component is psi_q. Step 4: the canonical fibre identification, the fibre-prime correspondence and the quotient localization (00CT) give S/pS = C_Q = kappa(q), hence pS = qS; the fraction calculations are written out, so marking it elementary is acceptable. Step 5: the 00ON flat height formula, with the fibre a field. Step 6: lem-sc-normal-dim1-dvr is Lean-closed in slopmaster2, so it is a tool, not a route citation; Steps 2 and 5 supply all its hypotheses, and pS = phi(pi)S. Step 7: unit times uniformizer-power factorization of numerator and denominator. I checked every Stacks tag in tags/tags and read 0AH1, 097N and 00ON in the tex. There is no SGA citation. The declared tool_uses (ind-etale stability, 0AH1 fibres, fibre primes, quotient localization) are generic commutative-algebra black boxes and I accept them. The only citer, lem-per-weil-divisor-strict-local-cartier-test, uses only clauses the item states. My duplicate search found only related nodes: lem-sfb-etale-stalk-invariants, lem-sfb-space-codimension-one-cycle-descent and lem-weil-pbc-filtered-etale-fiber-structure, none of which states the item."
+ }
+}

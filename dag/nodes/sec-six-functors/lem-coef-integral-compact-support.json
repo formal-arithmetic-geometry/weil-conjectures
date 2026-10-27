@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "By [lem-coef-normalized-dvr-effectivity], the derived limit $M$ of this tower is derived complete and its projection-adjoint counit maps $M\\otimes^L_{\\widehat R_Y}B_{Y,n}\\to M_n$ are coherent isomorphisms. By [def-weil-integral-rational-qbar-compact-support] this is the defining limit $Rf_!K$. Step 2 identifies the actual transition maps, so these counit maps are the specified compact-support comparisons. Their coherence is the required compatibility with successive reductions.",
+   "text": "Transport the specified Roos triangle through the evaluation and finite-level realization isomorphisms of [lem-coef-compact-support-normalized-realization]. The restriction comparison is the identity on sections, so adjacent transitions agree exactly. Apply [lem-coef-normalized-dvr-effectivity]. Naturality of the tensor/restriction Hom equivalence identifies its invertible counit followed by the finite-level realization with the specified projection adjunct. The adjacent projection equation follows from the first two arrows of a distinguished triangle composing to zero; transposing it under the two scalar adjunctions proves the successive-reduction compatibility.",
    "uses": [
     "lem-coef-normalized-dvr-effectivity",
     "def-weil-integral-rational-qbar-compact-support"
@@ -60,10 +60,12 @@
    }
   },
   {
-   "text": "Steps 1 and 3 give constructible reductions of $Rf_!K$ with Tor interval $[a,b+2d]$. In [def-weil-finite-tor-amplitude], test against the degree-zero coefficient module $B_{Y,n}$ itself: the tensor-unit identification is $x\\otimes u\\mapsto ux$, with inverse $x\\mapsto x\\otimes1$, on a K-flat model. Thus every reduction has cohomology zero outside that same interval. Derived completeness and these uniformly bounded constructible reductions are exactly [def-weil-derived-complete-integral-detailed], proving $Rf_!K\\in D^b_c(Y,R)$ and the asserted reduction Tor bounds.",
+   "text": "Steps 1 and 3 give constructible reductions of $Rf_!K$ with Tor interval $[a,b+2d]$. In [def-weil-finite-tor-amplitude], test against the degree-zero coefficient module $B_{Y,n}$ itself: the tensor-unit identification is $x\\otimes u\\mapsto ux$, with inverse $x\\mapsto x\\otimes1$, on a K-flat model. Thus every reduction has cohomology zero outside that same interval. Derived completeness and these uniformly bounded constructible reductions are exactly [def-weil-derived-complete-integral-detailed], proving $Rf_!K\\in D^b_c(Y,R)$ and the asserted reduction Tor bounds. Transport intrinsic constructibility across the comparison isomorphisms using [lem-weil-proetale-dbc-triangulated], and translate the effectivity completeness predicate using [lem-sf-derived-complete-legacy-comparison].",
    "uses": [
     "def-weil-finite-tor-amplitude",
-    "def-weil-derived-complete-integral-detailed"
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-proetale-dbc-triangulated"
    ],
    "elementary": true,
    "source": {
@@ -78,12 +80,14 @@
   "lem-coef-compact-support-normalized-realization",
   "lem-coef-normalized-dvr-effectivity",
   "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-proetale-dbc-triangulated"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-compact-support.md",
-  "place": "Both Proof paragraphs, assembled from two extracted statement-only lemmas and normalized-DVR effectivity; detailed original arguments preserved in report.md."
+  "by": "G1 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Canonical coefficient comparison and finite-level Tor argument; normalized tower/effectivity implements the completed-sheaf defining-limit presentation. The finite Tor bound is the recorded dense-refinement lemma."
  },
  "mathlib_searches": [
   {
@@ -152,7 +156,18 @@
   "thm-sf-direct-image-tor-amplitude"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -236,5 +251,46 @@
   "group": "Q131",
   "result": "pass",
   "note": "Read the node, all 9 statement deps and their recorded Lean, the item module, the report and delivery-errors §H, plus the side-clone declarations used (sfCompactSupportTerm/Transition/ReductionTransition, sfIntegralCompactSupportValue, IsDerivedLimitTriangle with 1-shift, HasProEtaleTorAmplitude, sfDerivedReductionUnit, FiniteFieldDatum). Every hypothesis matches the node: D with l≠D.p, E finite over Q_l, completed-coefficient pro-etale categories, finite-type X/Y over D.k, separated finite-type k-morphism f, compactification c fixed as in the def, topologicalKrullDim X ≤ d, a≤b, sfIntegralConstructible K, a common HasProEtaleTorAmplitude [a,b] on reductions. Rf_!K is any Roos realization (M,p,δ) of the def's exact tower. Conclusions: integral constructibility, IsIso of the canonical adjunct comparison of p≫π_n, Tor [a,b+2d] on every reduction, and successive-reduction compatibility (checked by hand from p≫(1-shift)=0 and the restriction identifications). Helpers are real data with source/blueprint docstrings; sorry only in the theorem, whose docstring has all 9 steps. Only the lean field changed; statement verbatim; no lines over 100. Edge cases: empty schemes, d=0, a=b, K=0, all exponents ≥1, universes u-consistent. nt_compile.py --json: rc 0, item 3.8 s, no errors. Non-blocking: two proof-only imports omitted for a reported upstream name clash; the Q131 second reading is a disclosed self-check."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R=\\mathcal O_E$, $A_n=A_{E,n}=\\mathcal O_E/\\pi_E^n$, and write\n$K_n=K\\otimes^{\\mathbf L}_{R}A_n$. Let $f:X\\to Y$ be separated of finite type,\nwith $\\dim X\\leq d$, and let $Rf_!=R\\bar f_*\\circ j_!$ be the compact-support\ndirect image of $R_X$-modules for a compactification $f=\\bar f\\circ j$\n([det-def-sf-operations], [sk-def-sfb-module-derived-lower-shriek]). For\n$K\\in D^b_c(X,R)$ with reduction Tor interval $[a,b]$,\n\n$$\nRf_!K\\in D^b_c(Y,R),\\qquad\n(Rf_!K)\\otimes_R^L A_n\\cong Rf_{!,n}K_n.\n$$\n\nOne uniform reduction Tor interval is $[a,b+2d]$. These are the\ncanonical compact-support coefficient comparisons.",
+  "proof": [
+   {
+    "text": "The input reductions have a common Tor interval by\n[lem-coef-integral-residue-tor]. The functor $Rf_!$ sends\n$D^b_c(X,R)=D^b_{ctf}(X,R)$ into $D^b_c(Y,R)$ ([sk-thm-existence], (2)). The\ncanonical coefficient comparison\n$(Rf_!K)\\otimes^{\\mathbf L}_RA_n\\to Rf_{!,n}K_n$ along $R\\to A_n$ is an\nisomorphism ([sk-prop-scalar-six]). Alternatively, membership in\n$D^b_c(Y,R)$ follows from the integral criterion\n[sk-prop-integral-criterion]. $Rf_!K$ is derived complete [def-pe-derived-complete], because $R\\bar f_*$\nand $j_!$ commute with $R\\varprojlim$ and $K\\simeq R\\varprojlim_nK_n$. Its\nreduction modulo $\\pi_E$ is $Rf_{!,1}K_1$, which is bounded constructible.",
+    "uses": [
+     "lem-coef-integral-residue-tor",
+     "sk-thm-existence",
+     "def-pe-derived-complete"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the Tor interval, compute at finite level. On a compactification\n$f=\\bar f j$, replace the compactifying scheme by the\nscheme-theoretic closure of $X$. Its dimension is at most\n$d$. Extension by zero preserves constructibility and the\nTor interval. The proper direct-image theorem\n[thm-sf-direct-image-tor-amplitude], with the bound of\n[lem-sf-etale-direct-image-vanishing], therefore gives\n$[a,b+2d]$ for $R\\bar f_*j_!K_n$.\nThe finite compact-support site comparison is\n[thm-cbc-finite-level-proetale]. The comparisons for the different $n$ are\ncompatible with the finite reductions $A_n\\to A_m$\n([lem-fix-compact-support-coefficient-change]), since all of them are\ninstances of the coefficient comparison of [sk-prop-scalar-six], which\nrespects composition.",
+    "uses": [
+     "thm-sf-direct-image-tor-amplitude",
+     "lem-sf-etale-direct-image-vanishing",
+     "thm-cbc-finite-level-proetale",
+     "lem-fix-compact-support-coefficient-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c38a",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T101016-L-3648469",
+  "kind": "interface",
+  "note": "independent cc review: delivered IntegralCompactSupportPrescribedReductions.lean and node JSON vs clones/live 329f79d; 10 direct importers compiled with the delivered module (all OK); #print axioms (sorryAx only from cited compactSupport_normalized_realization); transitive reach of the 3 flagged unit-route modules"
  }
 }

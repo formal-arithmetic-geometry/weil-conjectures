@@ -56,6 +56,26 @@ theorem isOpen_section_component_of_flat_of_geometricallyReduced_fibers
     [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T)
     (hred : ∀ t : T, GeometricallyReduced (g.fiberToSpecResidueField t)) :
     IsOpen {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))} := by
-  sorry
+  let C : Set P := {p | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))}
+  have hcons : Topology.IsLocallyConstructible C :=
+    isLocallyConstructible_section_component g σ hσ
+  have hgen : StableUnderGeneralization C :=
+    stableUnderGeneralization_section_component_of_flat_of_geometricallyReduced_fibers
+      g σ hσ hred
+  apply isOpen_iff_mem_nhds.mpr
+  intro p hp
+  obtain ⟨q, hq⟩ := P.affineCover.covers p
+  let j := P.affineCover.f (P.affineCover.idx p)
+  have hpre : IsOpen (j ⁻¹' C) :=
+    PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible
+      (hgen.preimage j.continuous)
+      (hcons.preimage_of_isOpenEmbedding j.isOpenEmbedding).isConstructible
+  have hopen : IsOpen (j '' (j ⁻¹' C)) := j.isOpenEmbedding.isOpenMap _ hpre
+  have hmem : p ∈ j '' (j ⁻¹' C) := by
+    refine ⟨q, ?_, hq⟩
+    change j q ∈ C
+    rw [show j q = p from hq]
+    exact hp
+  exact Filter.mem_of_superset (hopen.mem_nhds hmem) (Set.image_preimage_subset j C)
 
 end AlgebraicGeometry

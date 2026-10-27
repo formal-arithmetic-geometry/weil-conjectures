@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-total-tensor-comparison",
+ "kind": "statement",
+ "title": "Pure-tensor normalized comparison of ordinary slice restriction and total tensor",
+ "statement": "Let J be a Grothendieck topology on a category C with object universe c and morphism universe v. Let A be a commutative ring sheaf with values in max(c,v,u), with module sheafification and locally bijective sheafification equivalences, and let U be an object of C. Write R for termwise exact slice restriction [def-sfb-ringed-slice-comparison-model] and Tot for coefficientTotalTensor [def-coef-ringed-tensor-hom-model]. There is a natural chain isomorphism gamma: Tot followed by R isomorphic to (R product R) followed by the slice Tot. For arbitrary complexes P,Q, integers p,q,k with p+q=k, an object V over U and sections x of P^p and y of Q^q over V.left, gamma in degree k over V takes coefficientTensorGenerator(P,Q,p,q,k,x,y) to coefficientTensorGenerator(RP,RQ,p,q,k,x,y). No K-flatness, flat terms, derived category or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product (ordinary total-complex step); Modules on Sites Tag 03EL and slice-sheafification compatibility."
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-slice-comparison-model",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the canonical site tensor restriction comparison with the proved native-to-site tensor isomorphisms. Their pure-section formulas imply that the inverse comparison sends x tensor y to x tensor y; pure sections detect equality and prove naturality in both arguments.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "def-sfb-sheaf-tensor-pure-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Modules on Sites Tag 03EL; the native and site sheafified tensor presentations."
+   }
+  },
+  {
+   "text": "Restriction of abelian sheaves to the slice is also a left adjoint and preserves coproducts. Reflect colimit preservation through the module forgetful functor using its colimit and reflection APIs. Assemble the native module tensor comparisons as a curried natural transformation. Apply HomologicalComplex.mapBifunctorComparison, its invertibility instance, and its naturality theorem to obtain a natural isomorphism of total tensor complexes. Its coprojection equation, evaluated on each actual sheafified pure section, proves precisely the coefficientTensorGenerator formula. The construction uses the same unbounded coproducts for zero or arbitrary unbounded complexes.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-total-bifunctor-comparison-iso",
+    "def-pc-tensor-complex-sheaves",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, ordinary total-complex comparison; Modules on Sites Tag 03EL."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-sheaf-tensor-pure-section",
+  "lem-pc-total-bifunctor-comparison-iso",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product (ordinary total-complex step); Modules on Sites Tag 03EL. B2, 2026-10-26: prove the existing ordinary comparison by native tensor conjugation, colimit preservation and the proved total-bifunctor comparison API; recover and adapt the concrete tensor portion of the archived D4 construction. No new assertion or unit-route change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a slice site commutes with total tensor complexes and preserves pure tensor generators",
+   "results": "service unavailable: error code: 502 ",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from restriction of total tensor complexes of sheaves of modules to total tensor of restrictions, preserving pure tensors",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObj, HomologicalComplex.ιTensorObj, PresheafOfModules.Monoidal.tensorObj_obj, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.sheafToPresheaf_μ, PresheafOfModules.Monoidal.tensorHom",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotalIso|hom.*[Rr]estrict|tensor.*[Rr]estrict",
+   "results": "25 hits: Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/Subalgebra/Operations.lean, Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean, Mathlib/Algebra/Algebra/Epi.lean, Mathlib/Algebra/Algebra/Subalgebra/Tower.lean, Mathlib/Algebra/Algebra/Subalgebra/Tower.lean, Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean, Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "The termwise tensor restriction and totalization step in the tensor-restriction comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-slice-normalized-comparisons",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceTotalTensorComparison",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceTotalTensorComparison.lean",
+  "declaration": "CategoryTheory.ringedSlice_totalTensorComparison_exists",
+  "statement": "theorem ringedSlice_totalTensorComparison_exists (U : C) :\n    ∃ γ : coefficientTotalTensor.{u, c, v} J A ⋙\n        ringedSliceComplexRestriction.{c, v, u} J A U ≅\n      ((ringedSliceComplexRestriction.{c, v, u} J A U).prod\n        (ringedSliceComplexRestriction.{c, v, u} J A U)) ⋙\n          coefficientTotalTensor.{u, max c v, v} (J.over U) (A.over U),\n      ∀ (P Q : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J (forget₂\n        CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)\n        (p q k : ℤ) (h : p + q = k) (V : Over U)\n        (x : (P.X p).val.obj (op V.left)) (y : (Q.X q).val.obj (op V.left)),\n        ((γ.hom.app (P, Q)).f k).val.app (op V)\n          (coefficientTensorGenerator.{u, c, v} J A P Q p q k h (op V.left) x y) =\n        coefficientTensorGenerator.{u, max c v, v} (J.over U) (A.over U)\n          ((ringedSliceComplexRestriction.{c, v, u} J A U).obj P)\n          ((ringedSliceComplexRestriction.{c, v, u} J A U).obj Q) p q k h (op V) x y",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T135527-L-4040856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e6e7",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261026T154307-L-1630540",
+  "kind": "interface",
+  "note": "independent cc review: three delivered theorem signatures vs clone (identical); the two closed holes vs their nodes and change record; #print axioms of both newly proved theorems (clean); proof_deps/uses vs imports and declarations used"
+ }
+}

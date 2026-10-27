@@ -1,0 +1,111 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectionRefinementDescent",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Refinement and compactification independence; lem-sf-projection-refinement-descent",
+   "via": [
+    "lem-sf-projection-refinement-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]efinement|[Rr]efinement.*projection",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"refinement\"",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula natural transformation compatible with proper refinements of compactifications",
+   "results": "8 hits: CategoryTheory.Abelian.LeftResolution.π_naturality, CategoryTheory.CategoryOfElements.map_π, CategoryTheory.Abelian.LeftResolution.π_naturality_assoc, CategoryTheory.Abelian.LeftResolution.π, CategoryTheory.Abelian.LeftResolution.karoubi.π', CategoryTheory.SmallObject.πObj_naturality, isProperMap_snd_of_compactSpace, CategoryTheory.Limits.Pi.map_π",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  }
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "U1 proof using existing declarations and the explicitly described normalization step.",
+  "by": "agent"
+ },
+ "id": "lem-sf-projection-refinement-square",
+ "kind": "statement",
+ "title": "Witnessed projection square along one proper refinement",
+ "statement": "Let D be a finite-field datum, C its coefficient datum, E/Q_C.l a finite extension, and n>=0. Let X,Y be finite-type quasi-compact schemes over D.k, and f:X->Y a separated finite-type quasi-compact morphism over D.k. For compactifications c,d of f, any proper refinement r:c→d, boundedConstructible K on X and finiteTor L on Y, refinementLaw holds: for every retained origin presentation e of K and eT of T=K tensor Lf*L, PF_c(K,L) followed by theta(r,T,eT) equals (theta(r,K,e) tensor identity_L) followed by PF_d(K,L). The refinement square need not be Cartesian and no projection morphism is inverted.",
+ "stmt_deps": [
+  "def-sf-projection-refinement-domains"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Definitions and proof steps 4--7"
+ },
+ "proof": [
+  {
+   "text": "Apply the finite clause of refinementProjectionCounit on the bundled finite-type schemes. It gives the square for the directed comparison on all unbounded inputs.",
+   "uses": [
+    "lem-sf-refinement-projection-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At K and tensorInput, normalized_refinement_inverse identifies the directed comparison with the inverse witnessed theta. The native_component_eq reflexivity lemma writes the exact native projections in their explicit tensor coordinates. At a generic coefficient ring, precompose the desired equation with the tensor of theta_K.inv. Use the directed equation, postcompose with theta_T.hom, and cancel the two inverse pairs by functoriality. Specialize this proved categorical cancellation lemma to the specified coefficient quotient. No projection arrow is inverted.",
+   "uses": [
+    "lem-sf-projection-refinement-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-refinement-projection-counit",
+  "lem-sf-projection-refinement-normalization"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectionRefinementSquare",
+  "file": "lean/Sheaf/SixFunctors/ProjectionRefinementSquare.lean",
+  "declaration": "WeilConjectures.ProjectionRefinementDescent.refinement_square",
+  "statement": "theorem refinement_square\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra ℚ_[C.l] E] [FiniteDimensional ℚ_[C.l] E]\n    (n : ℕ) {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c d : Compactification f) (r : c.Refinement d)\n    (K : (boundedConstructible C.l E n X).FullSubcategory)\n    (L : (finiteTor C.l E n Y).FullSubcategory) :\n    refinementLaw C.l E n c d r K L",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "independent cc review: finite_descent proof, the moved ProjectionRefinementData declarations (spellings that unfold to the old ones) and the new hole normalized_refinement_inverse, against node lem-sf-projection-refinement-descent, the change record, the 5 new nodes and the published clone; importers FiniteProjectionFromDescent and FiniteProjectionCompactificationSquare compiled OK against the delivered modules"
+ }
+}

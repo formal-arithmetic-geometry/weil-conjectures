@@ -1,0 +1,359 @@
+{
+ "id": "lem-sf-verdier-hom-chain-composition",
+ "kind": "statement",
+ "title": "Verdier hom chain composition",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. Use the small pro-etale coefficient categories and the specified six operations of [def-fix-six-functor-datum]. Finite inputs used for compact support carry compatible etale-origin witnesses; integral inputs are derived complete with compatible witnessed finite reductions, rational operations are raw localization, and algebraically closed coefficients are represented at a common finite coefficient field. All operations below are restricted to their stated constructible domains; tensor factors and comparisons have their stated finite-Tor hypotheses. Let $X\\xrightarrow fY\\xrightarrow gZ$ be separated finite-type maps of separated finite-type $k$-schemes. Assume $f,g,gf$ and the structure morphisms $a_X,a_Y,a_Z$ are exceptionally admissible as in [def-weil-exceptional-adjoint-admissibility]. Set $F_f=Rf_!$, $P_f=Lf^*$, $H_X=R\\mathcal Hom_X$, $\\omega_X=Ra_X^!\\Lambda$, and $D_X=H_X(-,\\omega_X)$, and similarly on $Y,Z$. For $M\\in D^b_{ctf}(X,\\Lambda)$ and $N\\in D^b_{ctf}(Y,\\Lambda)$ the canonical tensor-Hom exchange of [fix-lem-tensor-adjunction] is represented, on finite-Tor constructible tests $T$, by the natural chain\n$$\\operatorname{Hom}(T,H_Y(F_fM,N))\\cong\\operatorname{Hom}(F_fM\\otimes T,N)\\cong\\operatorname{Hom}(F_f(M\\otimes P_fT),N)\\cong\\operatorname{Hom}(M\\otimes P_fT,f^!N)\\cong\\operatorname{Hom}(T,Rf_*H_X(M,f^!N)).$$\nThe middle bijection is induced by the inverse of the projection isomorphism $\\operatorname{PF}_f$ of [fix-prop-projection-formula]. All representing objects and tests lie in the common constructible finite-Tor categories; thus the identity of a representing object is an allowed test. Specialization to $N=\\omega_Y$ and the conjugate identification $f^!\\omega_Y\\cong\\omega_X$ gives exactly the Verdier comparison of [fix-cor-verdier-exchange], $\\varepsilon_{f,M}:D_YF_fM\\cong Rf_*D_XM$. For $gf$, the Hom chain agrees on every input arrow with the successive chains for $g$ and $f$, after substituting the projection associativity pentagon, the pasted exceptional counit $\\epsilon_g(F_g\\epsilon_fG_g)$ and the canonical pullback/direct-image compositors. Consequently\n$$\\varepsilon_{gf,M}=Rg_*(\\varepsilon_{f,M})\\circ\\varepsilon_{g,Rf_!M},\\qquad\\varepsilon_{\\mathrm{id},M}=1,$$\nwith canonical composition coordinates understood. Evaluation-defined finite and integral Hom comparisons and unit/counit-preserving exceptional coefficient comparisons intertwine this entire chain term by term, so the composition equation is preserved by the stated coefficient changes. No exchange of Verdier duality with arbitrary pullback is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Agent-formulated sub-obligation for Verdier exchange: typed representing Hom chain on the preserved finite-Tor domain; returned proof steps 11,12"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-exceptional-adjoint-admissibility",
+  "fix-lem-tensor-adjunction",
+  "fix-prop-projection-formula",
+  "fix-cor-verdier-exchange",
+  "def-sf-verdier-exchange-data",
+  "def-sf-coefficient-gamma-representatives",
+  "def-sf-tensor-hom-chain-data",
+  "def-pod-ctf-pairing-maps"
+ ],
+ "proof": [
+  {
+   "text": "Work first at finite or integral coefficients, on the full common finite-Tor domains of [lem-pod-hom-chain-ctf-domains], which places every object of the chain in $D^b_{ctf}$. Put $G_f=f^!$, $Q_f=Rf_*$, $A_f=Q_fH_X(M,G_fN)$ and $B_f=H_Y(F_fM,N)$. The counit-formula node supplies the natural bijection $\\Phi^N_T:\\operatorname{Hom}(T,A_f)\\to\\operatorname{Hom}(T,B_f)$, with precisely the five transpositions in the question in reverse order: its projection arrow is precomposition with $\\operatorname{PF}_{f,M,T}$. Consequently its inverse is the displayed chain, with precomposition by $\\operatorname{PF}^{-1}$. All these bijections use the specified ordinary and exceptional adjunctions; no ambient exceptional adjoint or extra site-perfectness is needed. The same node states that $\\Phi^N_T(u)=b_f\\circ u$, where $b_f=\\operatorname{curry}(p_N)$ and $p_N$ is its explicit counit/evaluation/projection composite. Thus this is the canonical tensor-Hom exchange, in the direction of [fix-lem-tensor-adjunction].",
+   "uses": [
+    "lem-pod-hom-chain-counit-formula",
+    "fix-prop-adjunctions",
+    "fix-prop-projection-formula",
+    "fix-lem-tensor-adjunction",
+    "lem-pod-hom-chain-ctf-domains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Tensor-Hom chain underlying the sentence taking adjoint mates"
+   }
+  },
+  {
+   "text": "For completeness the representation of the inverse does not require tests outside the stated domain. Define $a_f=(\\Phi^N_{B_f})^{-1}(1_{B_f})$. Then $b_fa_f=1_{B_f}$. Naturality gives $\\Phi^N_{A_f}(a_fb_f)=b_fa_fb_f=b_f=\\Phi^N_{A_f}(1_{A_f})$, so injectivity gives $a_fb_f=1_{A_f}$. Naturality of the inverse now gives $(\\Phi^N_T)^{-1}(v)=a_fv$. Here $A_f$ and $B_f$ are allowed tests: [lem-pod-hom-chain-ctf-domains] states that $A_N,B_N\\in D^b_{ctf}(Y,\\Lambda)$, and that $Rf^!N$, $L_N$, $Lf^*T$ and $M\\otimes^LLf^*T$ lie in $D^b_{ctf}(X,\\Lambda)$, on which all five bijections are defined. This proves the assertion of the statement that all representing objects and tests lie in the common constructible finite-Tor categories. Equality of such represented maps can therefore be checked on every input arrow and finally on the identity test. Stage-3 Lean proof: apply the supplied test naturality of Phi to the identity and to a_f. Its inverse law gives Phi(a_f)=1_B; injectivity gives both inverse identities and Phi^{-1}(v)=v;a_f. Applying Phi to both sides and using its second-variable naturality also proves the representing-map naturality square. These arguments are implemented in representing_chain and chain_naturality, without new obligations.",
+   "uses": [
+    "lem-pod-hom-chain-counit-formula",
+    "lem-pod-hom-chain-ctf-domains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Representing objects and identity tests"
+   }
+  },
+  {
+   "text": "Let $N\\in D^b_{ctf}(Z,\\Lambda)$; then $G_gN\\in D^b_{ctf}(Y,\\Lambda)$ by [lem-pod-hom-chain-ctf-domains] for $g$, so the chain for $f$ applies with $G_gN$ in place of $N$. Let $v:T\\to Q_gQ_fH_X(M,G_fG_gN)$. Under the ordinary adjunction for the composite, followed by uncurrying, let its image be $b:M\\otimes P_fP_gT\\to G_fG_gN$. The pasted ordinary counit in [fix-prop-adjunctions](3) identifies this with successive ordinary transposition. Apply $\\Phi_f^{G_gN}$ inside $Q_g$, then $\\Phi_g^N$. By the counit formula and naturality, the resulting arrow $T\\to H_Z(F_gF_fM,N)$ uncurries to\n$$\\epsilon_g\\circ F_g(\\epsilon_f)\\circ F_gF_f(b)\\circ F_g(\\operatorname{PF}_{f,M,P_gT})\\circ\\operatorname{PF}_{g,F_fM,T}.$$\nThe component of $\\epsilon_f$ is at $G_gN$, and that of $\\epsilon_g$ is at $N$. This follows simply by substituting the formula $\\epsilon_hF_h(-)$ for exceptional inverse transposition twice. The ordinary transpositions and the tensor reassociations are inserted in their canonical coordinates.",
+   "uses": [
+    "lem-pod-hom-chain-counit-formula",
+    "fix-prop-adjunctions",
+    "lem-pod-hom-chain-ctf-domains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Pasting the two tensor-Hom chains: explicit inverse-chain formula"
+   }
+  },
+  {
+   "text": "Use lem-sf-verdier-ordinary-tensor-transport for the inverse ordinary and tensor transposes. Apply lem-sf-verdier-projection-exceptional-paste to the resulting b. Test naturality of counit_formula identifies the f inverse chain inside g direct image. The shared Y tensor inverse cancels its transpose. This gives reverse_chain_paste. Invert the two Hom bijections and cancel the direct image of the f exchange isomorphism to prove ChainComposition on every input arrow. The final cancellation uses a generic proved functor-image isomorphism cancellation lemma; Verdier specialization uses a generic proved naturality paste with the identity test and second-variable naturality.",
+   "uses": [
+    "lem-sf-verdier-ordinary-tensor-transport",
+    "lem-sf-verdier-projection-exceptional-paste",
+    "lem-pod-hom-chain-counit-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Projection diamonds and associativity; taking adjoint mates gives the corresponding equations for Verdier exchange."
+   }
+  },
+  {
+   "text": "Write $x=gf$, $\\alpha:F_gF_f\\cong F_x$, and $c:G_fG_g\\cong G_x$ for the canonical conjugate. In the same coordinates, the one-map chain for $x$ uncurries to $\\epsilon_xF_x(cb)\\operatorname{PF}_x$. The exceptional-compositor equation says\n$$\\epsilon_xF_x(c)\\alpha_{G_fG_gN}=\\epsilon_gF_g(\\epsilon_f).$$\nThe projection associativity pentagon says that $\\operatorname{PF}_x$, transported through $\\alpha$ and $P_x\\cong P_fP_g$, is $F_g(\\operatorname{PF}_f)\\operatorname{PF}_g$. Substitute these two equalities in the one-map expression and use naturality of $\\alpha$ with $b$. The result is exactly the expression in step 3. Injectivity of uncurrying and ordinary transposition gives equality on the original $v$. Inverting these equal bijections proves equality of the forward Hom chains, not merely existence of two isomorphisms. The projection/exceptional calculation is isolated as lem-sf-verdier-projection-exceptional-paste, strictly a part of the chain, while the ordinary/tensor calculation is proved separately.",
+   "uses": [
+    "lem-sf-verdier-projection-exceptional-paste",
+    "lem-sf-verdier-ordinary-tensor-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Projection pentagon and pasted exceptional counit"
+   }
+  },
+  {
+   "text": "Take $N=\\omega_Z$. The exceptional mate cocycles, applied to $f,g,a_Z$, identify the single structure comparison $G_x\\omega_Z\\cong\\omega_X$ with $G_fG_g\\omega_Z\\to G_f\\omega_Y\\to\\omega_X$. Thus the equality of step 4, after this substitution, is the composition equation for the Verdier arrows as defined in [def-sf-verdier-exchange-data]; [fix-cor-verdier-exchange] identifies these arrows with its canonical isomorphisms. Apply the identity test from step 2 to get the stated equality of morphisms. For the identity map use [lem-sf-verdier-identity-projection] only for the normalized pullback unit and its tensor projection triangle. For any reverse-chain input z, ordinary inverse transposition becomes p_T;z;r, exceptional inverse transposition becomes q;b;e, and source naturality of tensor transposition moves p_T outside. Substitute the projection triangle. Evaluation naturality in the first Hom input and inverse braiding naturality identify the final tensor transpose with postcomposition by H(q_M,1). The two tensor transposes cancel. Apply this identity to the forward representative, whose reverse transpose is identity, then cancel H(q_M,1) by its inverse. Naturality of r identifies the resulting arrow with epsilon followed by identityDirect. All of these adjunction and tensor calculations are proved in Lean; only the tensor projection triangle is split off. For stage_specialization, use projection naturality in its test object. In Lean, expand the inverse tensor-Hom map as tensor(v,1) followed by evaluation, move v across projection with this law, and use source naturality of the exceptional, tensor-Hom and ordinary adjunctions. At identity the chain is inverseComponent by the tensor-Hom counit law. Conclusion.components identifies the published exchange, and target naturality moves the dualizing comparison past the last two transposes.",
+   "uses": [
+    "lem-sf-constructible-exceptional-mate-cocycles",
+    "def-sf-verdier-exchange-data",
+    "fix-cor-verdier-exchange",
+    "fix-prop-projection-formula",
+    "fix-prop-adjunctions",
+    "lem-sf-verdier-identity-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Taking adjoint mates gives the Verdier composition and unit equations"
+   }
+  },
+  {
+   "text": "For the individual ordinary and exceptional coefficient transposes, apply the inverse Hom equivalence to each proposed equation. Expanding inverse transposition gives left-adjoint image followed by counit. The supplied counit comparison and naturality of the inverse left comparison give identical arrows; the Hom inverse law cancels the original transpose. The same argument applies to each tensor comparison, which need not be invertible on the Hom side. The projection equation is literally the field Comparison.projection. For the forward-chain square use the reverse-chain square of [lem-sf-tensor-hom-coefficient-transposes] at z=Phi^{-1}(v); injectivity of the changed Phi gives the desired forward equation. This proves coefficient_transposes. For composition_after_change, apply TZ to the original ChainComposition equation, postcompose with the inverse source coordinate, substitute that forward coefficient square, and postcompose with the changed source coordinate. Functoriality and the coordinate inverse identity cancel the inserted pair. These statements are implemented in Lean with no new obligations; the coefficient dependency retains the underlying finite/integral evaluation and unit/counit calculations.",
+   "uses": [
+    "lem-sf-tensor-hom-coefficient-transposes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons: evaluation, adjunctions and projection, term by term"
+   }
+  },
+  {
+   "text": "Finally use the rational and common-stage clause of [lem-sf-tensor-hom-coefficient-transposes]. It sends the integral $\\Gamma$ bijections, their representing inverse maps, and their composition equations to the localized Hom groups. The exceptional rational comparisons preserve evaluations, units and counits by [lem-coef-rational-operations], while the mate cocycles identify the rationalized structure comparisons. At algebraically closed coefficients choose one common finite coefficient field for the finitely many inputs, arrows and equalities in the calculation; the same clause makes the result independent of enlargement and of representatives. This proves the Hom-chain, Verdier and coefficient assertions at the two field stages as well. This passage uses actual localization and common-stage maps, not reduction of a field object to a finite quotient.",
+   "uses": [
+    "lem-sf-tensor-hom-coefficient-transposes",
+    "lem-coef-rational-operations",
+    "lem-sf-constructible-exceptional-mate-cocycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Raw rationalization and common-finite-stage coefficient passage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-verdier-exchange-data",
+  "fix-cor-verdier-exchange",
+  "fix-lem-tensor-adjunction",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-coef-rational-operations",
+  "lem-pod-hom-chain-counit-formula",
+  "lem-pod-hom-chain-ctf-domains",
+  "lem-sf-constructible-exceptional-mate-cocycles",
+  "lem-sf-tensor-hom-coefficient-transposes",
+  "lem-sf-verdier-identity-projection",
+  "lem-sf-verdier-ordinary-tensor-transport",
+  "lem-sf-verdier-projection-exceptional-paste"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Projection diamonds and associativity; taking adjoint mates gives the corresponding equations for Verdier exchange. N3: ordinary/tensor transport, inverse-chain assembly and Verdier specialization. Projection/exceptional paste remains a separate obligation; identity_exchange remains open. Q6: identity exchange reduced by a complete adjunction/tensor calculation to the strictly smaller normalized identity projection triangle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Vv]erdier|dual.*shriek|shriek.*dual",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"line\": \"24\", \"text\": \"complexes. Here, we follow the original definitions in [Verdier's thesis, I.3][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"line\": \"29\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"line\": \"28\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/Basic.lean\", \"line\": \"19\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/Cycles.lean\", \"line\": \"35\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean\", \"line\": \"19\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"line\": \"20\", \"text\": \"Verdier's thesis (I 1.2.3/1.2.4), although the language is different. (In Verdier's thesis,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"line\": \"27\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/Differentials.lean\", \"line\": \"20\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"86\", \"text\": \"instance : (HomotopyCategory.plus C).IsVerdierRightLocalizing\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"line\": \"56\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"38\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"line\": \"21\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"16\", \"text\": \"`IsVerdierRightLocalizing` and `IsVerdierLeftLocalizing`)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"19\", \"text\": \"the functor from the Verdier quotient `A/(A ⊓ B)` to `C/B` is fully\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"23\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"24\", \"text\": \"  Proposition 2.3.5, Chapitre II][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"line\": \"43\", \"text\": \"see `isVerdierRightLocalizing_iff` for a characterization which\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/SpectralObject.lean\", \"line\": \"27\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"line\": \"33\", \"text\": \"* [Alexander Grothendieck and Jean-Louis Verdier, *Exposé I : Préfaisceaux*,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean\", \"line\": \"24\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean\", \"line\": \"18\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"45\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean\", \"line\": \"28\", \"text\": \"in [Verdier's thesis, p. 96][verdier1996] which would require that the triangle\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean\", \"line\": \"35\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism D Rf shriek equals Rf star D associative for composable morphisms via projection pentagon and pasted counit with coefficient comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.HasWeakShea\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^{\\\\text{op}} $ with values in $ \\\\mathcal{A} $ and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, the natural isomorphism between $ \\\\text{sheafify}_J(P \\\\circ F) $ a\"}\n  {\"name\": \"CategoryTheory.sheafComposeIso_hom_fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.HasWeakShea\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$, functors $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $ and $ P : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A} $, and a morphism $ h : \\\\text{sheafify}_\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G, F$ forming an adjunction $G \\\\dashv F$, with localizations $L_1, L_2$ respecting a morphism property $W_2$\"}\n  {\"name\": \"CategoryTheory.sheafComposeNatIso\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {A : Type u_1} →\\n        {B : Type u_2} →\\n          [inst_1 : CategoryTheory.Category.{v_1, u_1} A] →\\n            [inst_2 : CategoryTheory.Category.{v_2, u_2} B] →\\n              (F : \", \"doc\": \"A natural isomorphism between the composition of the whiskered right functor with $ G_2 $ and the composition of $ G_1 $ with the sheaf composition functor. It is defined using the adjunction unit and\"}\n  {\"name\": \"CategoryTheory.sheafComposeIso_hom_fac\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.HasWeakShea\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^\\\\text{op} $ with values in $ \\\\mathcal{A} $ and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, there exists a natural isomorphism between the sheafification of the\"}\n  {\"name\": \"CategoryTheory.sheafComposeIso_inv_fac\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.HasWeakShea\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^{\\\\text{op}} $ with values in $ \\\\mathcal{A} $ and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, the composition of the whiskered unit natural transformation $ \\\\et\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality exchange composition coherence from tensor Hom projection formula and exceptional adjunction representing Hom chain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (X Y Y' Z : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y ⟶ Z) ≃\\n            (X ⟶ CategoryTheory.MonoidalCategor\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and dual objects $Y$ and $Y'$, this equivalence establishes a natural bijection between morphisms $X \\\\otimes Y \\\\to Z$ and morphisms $X \\\\to Z \\\\otimes Y'$. The eq\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_tensor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X X' Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\\n  (f : X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Z Y') (g : X' ⟶ Z'),\\n  (CategoryTheory.tensorRightHomEquiv (CategoryT\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and dual objects $Y$ and $Y'$, there is a natural bijection between morphisms $X \\\\otimes Y \\\\to Z$ and morphisms $X \\\\to Z \\\\otimes Y'$. This equivalence is constr\"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (X Y Y' Z : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj Y' X ⟶ Z) ≃\\n            (X ⟶ CategoryTheory.MonoidalCatego\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given objects $X,Z$ and dual objects $Y,Y'$ (with an exact pairing), there is a natural equivalence between the hom-set $\\\\text{Hom}(Y' \\\\otimes X, Z)$ and $\\\\\"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X X' Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\\n  (f : X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Y Z) (g : X' ⟶ Z'),\\n  (CategoryTheory.tensorLeftHomEquiv (CategoryThe\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given objects $X,X',Z,Z'$ and dual objects $Y,Y'$ with an exact pairing, the natural equivalence between $\\\\text{Hom}(Y' \\\\otimes X, Z)$ and $\\\\text{Hom}(X, Y \"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {Y Y' Z : C}\\n  [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : Y' ⟶ Z),\\n  (CategoryTheory.tensorLeftHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C) Y Y' Z).symm\\n      (CategoryTheo\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, for dual objects $Y, Y'$ with an exact pairing and any morphism $f : Y' \\\\to Z$, the composition of the coevaluation map $\\\\eta : I \\\\to Y' \\\\otimes Y$ with the\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_symm_naturality\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X X' Y Y' Z : C} [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : X ⟶ X')\\n  (g : X' ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Z Y'),\\n  (CategoryTheory.tensorRightHomEquiv X Y Y' Z).sym\", \"doc\": \"For a monoidal category $\\\\mathcal{C}$ with dual objects $Y$ and $Y'$, and morphisms $f : X \\\\to X'$ and $g : X' \\\\to Z \\\\otimes Y'$, the inverse of the tensor-hom equivalence satisfies $(\\\\Phi_{X,Y,Y',Z})\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {Y Y' Z : C}\\n  [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : Y ⟶ Z),\\n  (CategoryTheory.tensorRightHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C) Y Y' Z).symm\\n      (CategoryTheo\", \"doc\": \"For dual objects $Y$ and $Y'$ in a monoidal category $\\\\mathcal{C}$, the symmetric tensor-hom equivalence maps the composition of the coevaluation morphism $\\\\eta_{Y,Y'}: I \\\\to Y \\\\otimes Y'$ and the rig\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {X Y : C}\\n  [inst_2 : CategoryTheory.HasLeftDual X] [inst_3 : CategoryTheory.HasLeftDual Y] (f : X ⟶ Y),\\n  (CategoryTheory.tensorRightHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C)\", \"doc\": \"In a monoidal category with dual objects, applying the inverse of the tensor-hom equivalence to the composition of the coevaluation map with the left whiskering of a morphism $ f: X \\to Y $ yields the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality exchange composition coherence from tensor Hom projection formula and exceptional adjunction representing Hom chain",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.comp\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[adj.IsTriangulated] [adj'.IsTriangulated] : (adj.comp adj').IsTriangulated\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and triangulated adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $H \\\\dashv I$ between $\\\\mathcal{D}$ and $\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the homomorphism associated to the pseudofunctor's composition of pullback-pushforward adjunctions equals\"}\n  {\"name\": \"map_dualTensorHom\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \"(f : Module.Dual R M) (p : P) (g : Module.Dual R N) (q : Q) :\\n  TensorProduct.map (dualTensorHom R M P (f ⊗ₜ[R] p)) (dualTensorHom R N Q (g ⊗ₜ[R] q)) =\\n    dualTensorHom R (M ⊗[R] N) (P ⊗[R] Q) (dualDistrib R M N (f ⊗ₜ g) ⊗ₜ[R] (p ⊗ₜ[R] q))\", \"doc\": \"For modules $M,N$ over a commutative semiring $R$, the composition of tensor product maps induced by dualTensorHom agrees with the dualTensorHom applied to the dualDistrib isomorphism. Specifically, t\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"CategoryTheory.mateEquiv_square\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"(α : TwoSquare G₁ L₁ L₃ H₁) (β : TwoSquare H₁ L₂ L₄ K₁) (γ : TwoSquare G₂ L₃ L₅ H₂) (δ : TwoSquare H₂ L₄ L₆ K₂) :\\n  (mateEquiv (adj₁.comp adj₂) (adj₅.comp adj₆)) ((α ≫ᵥ β) ≫ₕ (γ ≫ᵥ δ)) =\\n    ((mateEquiv adj₂ adj₄ β) ≫ₕ (mateEquiv adj₁ adj₃ α)) ≫ᵥ ((mateEquiv adj₄ adj₆ δ) ≫ₕ (mateEquiv adj₃ adj₅ γ))\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, and compatible two-square diagrams between functors, the mate equivalence for the composition of adjunctions and vertically-horizontal composed squares equa\"}\n  {\"name\": \"BotHom.symm_dual_comp\", \"module\": \"Mathlib.Order.Hom.Bounded\", \"type\": \"(g : TopHom βᵒᵈ γᵒᵈ) (f : TopHom αᵒᵈ βᵒᵈ) :\\n  BotHom.dual.symm (g.comp f) = (BotHom.dual.symm g).comp (BotHom.dual.symm f)\", \"doc\": \"For top-preserving homomorphisms $ g : \\\\beta^{\\\\mathrm{op}} \\\\to \\\\gamma^{\\\\mathrm{op}} $ and $ f : \\\\alpha^{\\\\mathrm{op}} \\\\to \\\\beta^{\\\\mathrm{op}} $, the inverse of the canonical duality equivalence applied\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_tensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \"{X X' Y Y' Z Z' : C} [ExactPairing Y Y'] (f : X ⟶ Z ⊗ Y') (g : X' ⟶ Z') :\\n  (tensorRightHomEquiv (X' ⊗ X) Y Y' (Z' ⊗ Z)).symm ((g ⊗ₘ f) ≫ (α_ _ _ _).inv) =\\n    (α_ _ _ _).hom ≫ (g ⊗ₘ (tensorRightHomEquiv X Y Y' Z).symm f)\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and dual objects $Y$ and $Y'$, there is a natural bijection between morphisms $X \\\\otimes Y \\\\to Z$ and morphisms $X \\\\to Z \\\\otimes Y'$. This equivalence is constr\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  {R : CategoryTheory.ProjectiveResolution X} {X' : C} {R' : CategoryTheory.ProjectiveResolution X'} {f : X ⟶ X'}\\n  (φ : R.Hom R' f) {Z : CochainComplex C ℤ} (h : (CochainComplex.singleFunctor C 0).o\", \"doc\": \"For projective resolutions $ R $ and $ R' $ of objects $ X $ and $ X' $ in an abelian category $ \\\\mathcal{C} $, and a morphism $ f: X \\\\to X' $, the composition of the extended chain map $ \\\\phi.\\\\text{h\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yoneda",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.yoneda\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.Functor C (CategoryTheory.Functor Cᵒᵖ (Type v₁))\", \"doc\": \"The Yoneda embedding, as a functor from `C` into presheaves on `C`.\"}\n  {\"name\": \"CategoryTheory.Yoneda.fullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.yoneda.FullyFaithful\", \"doc\": \"The Yoneda embedding is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Yoneda.yoneda_faithful\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.yoneda.Faithful\", \"doc\": \"The Yoneda embedding is faithful.\"}\n  {\"name\": \"CategoryTheory.Yoneda.yoneda_full\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.yoneda.Full\", \"doc\": \"The Yoneda embedding is full.\"}\n  {\"name\": \"CategoryTheory.Functor.instIsRepresentableObjOppositeTypeYoneda\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} : (CategoryTheory.yoneda.obj X).IsRepresentable\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.RepresentableBy.yoneda\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (X : C) : (CategoryTheory.yoneda.obj X).RepresentableBy X\", \"doc\": \"`yoneda.obj X` is represented by `X`.\"}\n  {\"name\": \"CategoryTheory.uliftYonedaIsoYoneda\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{max w v₁, u₁} C] : CategoryTheory.uliftYoneda.{w, max v₁ w, u₁} ≅ CategoryTheory.yoneda\", \"doc\": \"If `C` is a category with `[Category.{max w v₁} C]`, this is the isomorphism\\n`uliftYoneda.{w} (C := C) ≅ yoneda`.\"}\n  {\"name\": \"CategoryTheory.yoneda_obj_obj\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (X : C) (Y : Cᵒᵖ) : (CategoryTheory.yoneda.obj X).obj Y = (Opposite.unop Y ⟶ X)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsRepresentable.mk'\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {F : CategoryTheory.Functor Cᵒᵖ (Type v₁)} {X : C} (e : CategoryTheory.yoneda.obj X ≅ F) : F.IsRepresentable\", \"doc\": \"Alternative constructor for `F.IsRepresentable`, which takes as an input an\\nisomorphism `yoneda.obj X ≅ F`.\"}\n  {\"name\": \"CategoryTheory.Functor.RepresentableBy.toIso\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {F : CategoryTheory.Functor Cᵒᵖ (Type v₁)} {Y : C} (e : F.RepresentableBy Y) : CategoryTheory.yoneda.obj Y ≅ F\", \"doc\": \"The isomorphism `yoneda.obj Y ≅ F` induced by `e : F.RepresentableBy Y`.\"}\n  {\"name\": \"CategoryTheory.Functor.representableByEquiv\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {F : CategoryTheory.Functor Cᵒᵖ (Type v₁)} {Y : C} : F.RepresentableBy Y ≃ (CategoryTheory.yoneda.obj Y ≅ F)\", \"doc\": \"The obvious bijection `F.RepresentableBy Y ≃ (yoneda.obj Y ≅ F)`\\nwhen `F : Cᵒᵖ ⥤ Type v₁` and `[Category.{v₁} C]`.\"}\n  {\"name\": \"CategoryTheory.Functor.reprW\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (F : CategoryTheory.Functor Cᵒᵖ (Type v₁)) [F.IsRepresentable] : CategoryTheory.yoneda.obj F.reprX ≅ F\", \"doc\": \"An isomorphism between a representable `F` and a functor of the\\nform `C(-, F.reprX)`.  Note the components `F.reprW.app X`\\ndefinitionally have type `(X.unop ⟶ F.reprX) ≅ F.obj X`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality exchange composition from projection formula and adjunction Hom bijections",
+   "date": "2026-10-22",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.tensorRightHomEquiv, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.coev_expComparison",
+   "verdict": "no match: categorical composition/closed-structure primitives do not state the geometric four-stage Verdier chain and coefficient compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugate.*comp|comp.*conjugate|homEquiv.*comp",
+   "date": "2026-10-22",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "verdict": "no match: categorical composition/closed-structure primitives do not state the geometric four-stage Verdier chain and coefficient compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.MonoidalClosed",
+   "date": "2026-10-22",
+   "results": "1 hits: CategoryTheory.frobeniusMorphism_mate",
+   "verdict": "no match: categorical composition/closed-structure primitives do not state the geometric four-stage Verdier chain and coefficient compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition compatibility of Verdier duality exchange using tensor Hom adjunction and the projection formula",
+   "date": "2026-10-22",
+   "results": "8 hits: map_dualTensorHom, CategoryTheory.Adjunction.isMonoidal_comp, TopHom.dual_comp, CategoryTheory.Dial.tensorHom_comp_tensorHom, AugmentedSimplexCategory.tensorHom_comp_tensorHom, CategoryTheory.Adjunction.IsTriangulated.comp, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp",
+   "verdict": "no match: categorical composition/closed-structure primitives do not state the geometric four-stage Verdier chain and coefficient compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom exchange for a composite of two functors with right adjoints and coherent projection isomorphisms",
+   "date": "2026-10-22",
+   "results": "8 hits: CategoryTheory.expComparison, CategoryTheory.MonoidalClosed.FunctorCategory.adj, CategoryTheory.MonoidalClosed.pre_comm_ihom_map, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_three, CategoryTheory.expComparison_ev, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two, CategoryTheory.uncurry_expComparison, CategoryTheory.ParametrizedAdjunction.homEquiv_symm_naturality_three_assoc",
+   "verdict": "no match: categorical composition/closed-structure primitives do not state the geometric four-stage Verdier chain and coefficient compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-coherence",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: Taking adjoint mates gives the corresponding equations for [fix-cor-verdier-exchange].",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-verdier-hom-chain-composition",
+  "worker": "stage1",
+  "summary": "No completed project declaration or exact Mathlib match found. Reused existing counit Hom-chain, projection pentagon, constructible exceptional compositor and coefficient transposition nodes. Wrote the inverse-chain calculation on an arbitrary test arrow, identity-test representation, dualizing specialization and coefficient transport. No new nodes and no statement change.",
+  "blueprint": "fix-prop-coherence.proof.md: taking adjoint mates gives the corresponding equations for Verdier exchange; subsequent evaluation and unit/counit coefficient-comparison sentences.",
+  "tool_uses": [
+   {
+    "node": "fix-cor-verdier-exchange",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "fix-lem-tensor-adjunction",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "lem-coef-integral-finite-extension",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "lem-coef-integral-hom-reduction",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "lem-coef-rational-operations",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "lem-pod-hom-chain-counit-formula",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-compositor",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "lem-sf-tensor-hom-coefficient-transposes",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   },
+   {
+    "node": "thm-coef-finite-hom",
+    "why": "Generic specified-operation Hom, projection, adjunction or coefficient tool used in the explicit tensor-Hom paste; it does not replace the compatibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-cor-verdier-exchange",
+  "fix-lem-tensor-adjunction",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-coef-rational-operations",
+  "lem-pod-hom-chain-counit-formula",
+  "lem-sf-constructible-exceptional-compositor",
+  "lem-sf-tensor-hom-coefficient-transposes"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-cca1f63d2",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-cca1f63d2 (reviewer sub-agent of L); spot-checked: Read the whole item: 7 steps, no new nodes, statement unchanged. Checked it against fix-prop-coherence.proof.md (main-20261015): the sentence 'taking adjoint mates gives the corresponding equations for [fix-cor-verdier-exchange]' and the coefficient paragraph. Also read unit sk-thm-sf-compatibility clause (4) and every cited statement. Step checks: (1) the five bijections of lem-pod-hom-chain-counit-formula, run in reverse with PF^{-1}, agree in direction with PF: Rf_!K⊗L→Rf_!(K⊗Lf^*L). (2) Re-derived the representation argument: ba=1 and ab=1 from Φ_A(ab)=bab=Φ_A(1). (3) Re-did the uncurrying to ε_gF_g(ε_f)F_gF_f(b)F_g(PF_f)PF_g, using naturality of PF and the composite ordinary counit of fix-prop-adjunctions(3). (4) Substituted the compositor equation ε_xF_x(c)α=ε_gF_g(ε_f) and the PF pentagon; the two expressions agree. (5) def-sf-verdier-exchange-data defines ε_M by exactly this chain, and it is a stmt_dep of fix-cor-verdier-exchange, so C3 holds. The mate cocycles for (f,g,a_Z) give G_xω_Z→ω_X. Identity case: PF_id=PF_id² gives PF_id=1. (6-7) thm-coef-finite-hom (no site-perfect hypothesis), the integral Hom reduction and finite-extension nodes, the Γ equation of lem-sf-tensor-hom-coefficient-transposes, and its rational/common-stage clause. No duplicate found: the only other statement of this law is sk-thm-sf-package (6), proved inline in its step 15. FIX (one fault): step 2 called A_f, B_f ∈ D^b_ctf 'the hypothesis of the item', but the statement asserts it, so this was circular. Steps 1-3 now cite lem-pod-hom-chain-ctf-domains, which states A_N, B_N, f^!N, L_N ∈ D^b_ctf; it also gives G_gN in step 3. Added to proof_deps; step 2 is no longer marked elementary. Batch-5: lem-pod-closed-uncurry-laws is a Mathlib leaf of generic monoidal-closed curry laws, not part of the Poincaré duality proof; the counit node adds 17 nodes to the closure of the base stmt_deps, none in trf or pod. Accepted. lem-trf-finite-structural-maps-commshift is generic shift compatibility of the structural maps. The compositor is already a proof_dep of the base stmt_dep fix-cor-verdier-exchange and adds 0 nodes. Accepted. The declared tool_uses lie in units the unit cites (or lem-fix-operation-reduction, named in the source proof); accepted. Advisory: the compositor uses the counits of lem-sf-constructible-exceptional-adjunction-coefficients and the counit node those of fix-prop-adjunctions(2). G is the same functor and the conjugate characterization is formal, so this is not a fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.VerdierHomChainComposition",
+  "declaration": "WeilConjectures.VerdierHomChainComposition.verdier_hom_chain_composition",
+  "declarations": [
+   "WeilConjectures.VerdierHomChainComposition.representing_chain",
+   "WeilConjectures.VerdierHomChainComposition.chain_naturality",
+   "WeilConjectures.VerdierHomChainComposition.exchange",
+   "WeilConjectures.VerdierHomChainComposition.structureAdmissible",
+   "WeilConjectures.VerdierHomChainComposition.verdier_hom_chain_composition",
+   "WeilConjectures.VerdierHomChainComposition.stageModel",
+   "WeilConjectures.VerdierHomChainComposition.stageChain",
+   "WeilConjectures.VerdierHomChainComposition.stage_specialization",
+   "WeilConjectures.VerdierHomChainComposition.identityDirect",
+   "WeilConjectures.VerdierHomChainComposition.identitySupport",
+   "WeilConjectures.VerdierHomChainComposition.identityExceptional",
+   "WeilConjectures.VerdierHomChainComposition.identity_exchange",
+   "WeilConjectures.VerdierHomChainComposition.coefficient_transposes",
+   "WeilConjectures.VerdierHomChainComposition.composition_after_change"
+  ],
+  "file": "lean/Sheaf/Paper/VerdierHomChainComposition.lean",
+  "statement": "theorem verdier_hom_chain_composition\n    {X Y Z : SixFunctorSpace D}\n    [IsSeparated (sixFunctorStructure X).hom.left]\n    [IsSeparated (sixFunctorStructure Y).hom.left]\n    [IsSeparated (sixFunctorStructure Z).hom.left]\n    (f : X ⟶ Y) (g : Y ⟶ Z)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left]\n    [IsSeparated (f ≫ g).hom.left] [LocallyOfFiniteType (f ≫ g).hom.left]\n    [QuasiCompact (f ≫ g).hom.left]\n    (cf : Compactification f.hom.left) (cg : Compactification g.hom.left)\n    (cx : Compactification (f ≫ g).hom.left)\n    (cX : Compactification (sixFunctorStructure X).hom.left)\n    (cY : Compactification (sixFunctorStructure Y).hom.left)\n    (cZ : Compactification (sixFunctorStructure Z).hom.left)\n    (_hf : Admissible S s f cf) (_hg : Admissible S s g cg)\n    (_hx : Admissible S s (f ≫ g) cx)\n    (_haX : structureAdmissible S s X cX)\n    (_haY : structureAdmissible S s Y cY)\n    (_haZ : structureAdmissible S s Z cZ)\n    (Rf : Domain S s f cf) (Rg : Domain S s g cg) (Rx : Domain S s (f ≫ g) cx)\n    (_closedX : Rf.closedX = Rx.closedX) (_closedY : Rf.closedY = Rg.closedX)\n    (_closedZ : Rg.closedY = Rx.closedY)\n    (_tensorX : HEq Rf.tensorX Rx.tensorX) (_tensorY : HEq Rf.tensorY Rg.tensorX)\n    (_tensorZ : HEq Rg.tensorY Rx.tensorY)\n    (_naturalX : TensorPresentationNatural S s X Rf.closedX Rf.tensorX)\n    (_naturalY : TensorPresentationNatural S s Y Rf.closedY Rf.tensorY)\n    (_naturalZ : TensorPresentationNatural S s Z Rg.closedY Rg.tensorY) :\n    ChainComposition S s f g cf cg cx Rf Rg Rx ∧\n      VerdierComposition S s f g cf cg cx Rf Rg Rx",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Repair of c6c1bd517ddd, H3/H2: universal restricted presentations with equality of the entire shared closed data and heterogeneous equality of the shared tensor comparisons on X,Y,Z, natural in both tensor variables; identity law universally quantified with the same sharing conditions. The reverse representative is homEquiv on identity. Statement dependencies cite the definition owners of chain, pairing and coefficient data; composite geometric instances are explicit binders. No natural-language statement or proof change. Y7 stage-3: stage_specialization now explicitly requires projection naturality in the test object, which arbitrary StageData does not contain; main composition and identity statement signatures are unchanged. See coord/changes/Y7-verdier-stage-projection-naturality.md. N3 stage-3: canonical coordinate definitions move verbatim to the publicly imported data module and are attached to def-sf-verdier-hom-composition-coordinates; composition is assembled from ordinary tensor transport and the strictly smaller projection exceptional paste, while identity_exchange remains open."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6a4f0690",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Re-delivery of c6c1 fixes all three returned faults. H3: the main law is now for all Rf, Rg, Rx, with the closed data on X, Y, Z equal, tensor comparisons equal (HEq) and first-factor naturality (TensorPresentationNatural). Checked against PodCtfAdjunctionData and PodCtfPairing.projectionIso: a natural twist of the comparisons cancels across the chains for f, g, gf; without naturality an object-dependent twist would break the law, so the hypothesis is needed and is not stronger than the source. Identity law also for all R; the existential p is fixed by the identity compositor. H2: statement now cites the definition owners def-sf-tensor-hom-chain-data, def-pod-ctf-pairing-maps and def-sf-coefficient-gamma-representatives; homEquiv on the identity replaces curriedPairing; theorem modules no longer imported; composite instances are explicit binders. H11: independent second-reading section present; the Second reading by Q14 line is the standard direct-delivery line (advisory). Node differs from live only in stmt_deps and lean; lean.statement matches the file verbatim; chain direction (homEquiv inverse, PF inverse) and the ChainComposition/VerdierComposition coordinates match eps_gf = Rg_*(eps_f) o eps_g. No hollow definitions, every theorem is sorry, source path exists. No compile (no file changed). Advisory: composition_after_change follows from the last coefficient square."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T002305-L-73272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

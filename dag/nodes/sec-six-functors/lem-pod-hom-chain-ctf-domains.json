@@ -1,0 +1,227 @@
+{
+ "id": "lem-pod-hom-chain-ctf-domains",
+ "kind": "statement",
+ "title": "Finite-Tor domains and Hom bijections for the tensor–Hom chain",
+ "statement": "Fix the scheme and four coefficient-stage conventions of [def-fix-six-functor-datum]. Let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes, with the exceptional adjunction supplied as in [fix-prop-adjunctions]. Let $M\\in D^b_{ctf}(X,\\Lambda)$ and $N\\in D^b_{ctf}(Y,\\Lambda)$. Use the derived operations [def-weil-derived-pullback-tensor-hom], the chosen restricted tensor–Hom adjunction [det-thm-sf-ctf-stability-adjunctions], and the projection isomorphism [fix-prop-projection-formula] with its map specified in [def-exchange-projection]. Put\n$$C=Rf_!M,\\qquad L_N=R\\mathcal Hom_X(M,Rf^!N),\\qquad A_N=Rf_*L_N,\\qquad B_N=R\\mathcal Hom_Y(C,N).$$\nIntegral pullback and tensor are completed; field operations use rationalization and common finite coefficient stages. For every $T\\in D^b_{ctf}(Y,\\Lambda)$, the objects $C$, $A_N$, $B_N$ lie in $D^b_{ctf}(Y,\\Lambda)$, and $Rf^!N$, $L_N$, $Lf^*T$, $M\\otimes^LLf^*T$ lie in $D^b_{ctf}(X,\\Lambda)$. In particular $P_{A_N}$ is defined and is an isomorphism. The following are bijections of Hom sets on these full subcategories:\n$$\\operatorname{Hom}_Y(T,A_N)\\simeq\\operatorname{Hom}_X(Lf^*T,L_N)\\simeq\\operatorname{Hom}_X(M\\otimes^LLf^*T,Rf^!N)\\simeq\\operatorname{Hom}_Y(Rf_!(M\\otimes^LLf^*T),N)\\simeq\\operatorname{Hom}_Y(C\\otimes^LT,N)\\simeq\\operatorname{Hom}_Y(T,B_N).$$\nThe first and third are respectively the inverse ordinary and exceptional adjunction bijections; the second is inverse tensor–Hom adjunction with left factor $M$; the fourth is precomposition with $P_T$; the fifth is tensor–Hom adjunction with left factor $C$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1: domain and bijection argument of the creating item, formerly step 1; reversed Hom chain"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "fix-prop-adjunctions",
+  "def-weil-derived-pullback-tensor-hom",
+  "det-thm-sf-ctf-stability-adjunctions",
+  "fix-prop-projection-formula",
+  "def-exchange-projection",
+  "def-pod-ctf-pairing-maps",
+  "def-sf-ctf-coefficient-stage-selectors"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied PodCtfAdjunctionData R of [det-thm-sf-ctf-stability-adjunctions]. Every displayed object is already an object of the indicated finite-Tor full subcategory: support, direct, exceptional and pull return objects of those categories; the restricted Hom functors of [def-pod-ctf-pairing-maps] and the chosen tensor do likewise. Extract the property field of each of the seven objects. This uses the supplied preservation data, rather than re-proving stability at each coefficient stage.",
+   "uses": [
+    "det-thm-sf-ctf-stability-adjunctions",
+    "def-pod-ctf-pairing-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, reversed Hom chain on the supplied restricted categories"
+   }
+  },
+  {
+   "text": "The map P at A_N is by definition the hom of PodCtfPairing.projectionIso from [def-pod-ctf-pairing-maps], hence is an isomorphism. For the first, second and third Hom maps use bijectivity of the inverse equivalences R.ordinaryAdjunction.homEquiv, (R.tensorAdjunctionX M).homEquiv and R.exceptionalAdjunction.homEquiv, evaluated at exactly the displayed objects. For the fifth use bijectivity of (R.tensorAdjunctionY (R.support.obj M)).homEquiv in its forward direction. These are the specified fully faithful restricted adjunctions of [det-thm-sf-ctf-stability-adjunctions].",
+   "uses": [
+    "def-pod-ctf-pairing-maps",
+    "det-thm-sf-ctf-stability-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, reversed Hom chain on the supplied restricted categories"
+   }
+  },
+  {
+   "text": "For the fourth map let p=PodCtfPairing.projectionIso at (M,T), so the specified map is v ↦ p.hom ≫ v. If two images agree, precompose that equality with p.inv and use associativity and p.inv ≫ p.hom = 1 to recover equality of the inputs. Given v in the target, its preimage is p.inv ≫ v; associativity and p.hom ≫ p.inv = 1 prove that its image is v. Combine this bijectivity with the preceding seven memberships, isomorphism and four bijections by conjunction introduction.",
+   "uses": [
+    "def-pod-ctf-pairing-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, reversed Hom chain on the supplied restricted categories"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-thm-sf-ctf-stability-adjunctions",
+  "def-pod-ctf-pairing-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1; M1 Lean proof using the supplied restricted functors, adjunction equivalences and canonical projectionIso"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor bounded constructible sheaves are closed under pullback tensor internal Hom direct image and exceptional adjunction at finite integral and rational adic coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic restricted adjunctions and condensed module structures do not establish the four-stage finite-Tor memberships and the specified five bijections"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"If `C` is a full subcategory of `C'` and `D` is a full subcategory of `D'`, then we can restrict\\nan adjunction `L' ⊣ R'` where `L' : C' ⥤ D'` and `R' : D' ⥤ C'` to `C` and `D`.\\nThe construction here i\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic restricted adjunctions and condensed module structures do not establish the four-stage finite-Tor memberships and the specified five bijections"
+  },
+  {
+   "tool": "grep",
+   "query": "ctf|finite.Tor|constructible",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"line\": \"14\", \"text\": \"`Adjunction.restrictFullyFaithful` shows that an adjunction can be restricted along fully faithful\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"line\": \"42\", \"text\": \"noncomputable def restrictFullyFaithful : L ⊣ R :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"line\": \"63\", \"text\": \"lemma map_restrictFullyFaithful_unit_app (X : C) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"line\": \"64\", \"text\": \"    iC.map ((adj.restrictFullyFaithful hiC hiD comm1 comm2).unit.app X) =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"line\": \"66\", \"text\": \"  simp [restrictFullyFaithful]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"402\", \"text\": \"  (Over.mapPullbackAdj f).restrictFullyFaithful (fullyFaithfulForget X) (fullyFaithfulForget Y)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"509\", \"text\": \"  ((Over.mapPullbackAdj f).comp imageForgetAdj).restrictFullyFaithful\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"line\": \"120\", \"text\": \"lemma extremalEpi_coproductFrom\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"line\": \"121\", \"text\": \"    (hP : IsStrongGenerator P) (X : C) [HasCoproduct (P.coproductFromFamily X)] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"line\": \"122\", \"text\": \"    ExtremalEpi (P.coproductFrom X) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"line\": \"123\", \"text\": \"  toEpi := hP.isSeparating.epi_coproductFrom X\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"line\": \"124\", \"text\": \"  isIso p i fac _ := hP.isIso_of_mono _ (fun G hG f ↦ ⟨P.ιCoproductFrom f hG ≫ p, by simp [fac]⟩)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"349\", \"text\": \"of this family is the source of the morphism `P.coproductFrom X`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"350\", \"text\": \"abbrev coproductFromFamily (X : C) (i : CostructuredArrow P.ι X) : C := i.left.obj\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"354\", \"text\": \"variable [HasCoproduct (P.coproductFromFamily X)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"358\", \"text\": \"noncomputable abbrev coproductFrom : ∐ (P.coproductFromFamily X) ⟶ X :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"line\": \"362\", \"text\": \"/-- The inclusion morphisms to `∐ (P.coproductFromFamily X)`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Basic.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Indization.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.Algebra.Category.Grp.LeftExactFunctor\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Indization.lean\", \"line\": \"29\", \"text\": \"  .ofFullyFaithful (((Ind.leftExactFunctorEquivalence C).trans\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Indization.lean\", \"line\": \"30\", \"text\": \"    (AddCommGrpCat.leftExactFunctorForgetEquivalence _).symm).fullyFaithfulFunctor.comp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Limits.ExactFunctor\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"line\": \"324\", \"text\": \"lemma leftExactFunctor_le_additiveFunctor :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"line\": \"325\", \"text\": \"    leftExactFunctor C D ≤ additiveFunctor C D :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"line\": \"327\", \"text\": \"    simp only [leftExactFunctor_iff] at h\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic restricted adjunctions and condensed module structures do not establish the four-stage finite-Tor memberships and the specified five bijections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Well defined tensor Hom exceptional direct image adjunction chain on bounded constructible finite Tor adic sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"ModuleCat.monoidalClosedHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed\", \"type\": \"(M N P : ModuleCat.{u} R) :\\n  ((MonoidalCategory.tensorLeft M).obj N ⟶ P) ≃ (N ⟶ ((linearCoyoneda R (ModuleCat R)).obj (op M)).obj P)\", \"doc\": \"Let $R$ be a commutative ring. For any $R$-modules $M, N, P$, there is a canonical equivalence between the set of $R$-linear maps from the tensor product $M \\\\otimes_R N$ to $P$, and the set of $R$-lin\"}\n  {\"name\": \"CategoryTheory.ihom.adjunction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \": tensorLeft A ⊣ ihom A\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the left tensoring functor $- \\\\otimes A$ is left adjoint to the internal hom functor $[A, -]$. This establishes a natural isomorphism b\"}\n  {\"name\": \"CategoryTheory.exp.adjunction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (A : C) →\\n        [inst_2 : CategoryTheory.Closed A] → CategoryTheory.MonoidalCategory.tensorLeft A ⊣ CategoryTheory.ihom A\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the left tensoring functor $- \\\\otimes A$ is left adjoint to the internal hom functor $[A, -]$. This establishes a natural isomorphism b\"}\n  {\"name\": \"lTensorHomEquivHomLTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": P ⊗[R] (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] P ⊗[R] Q\", \"doc\": \"Let $R$ be a commutative semiring, and let $P, Q$ be $R$-modules and $M$ be a free $R$-module. There is a canonical $R$-linear isomorphism: $$ P \\\\otimes_R \\\\text{Hom}_R(M, Q) \\\\cong \\\\text{Hom}_R(M, P \\\\o\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"CategoryTheory.FunctorToTypes.adj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.FunctorToTypes\", \"type\": \": tensorLeft F ⊣ rightAdj F\", \"doc\": \"The functor tensoring with $ F $ on the left is left adjoint to the Hom-functor from $ F $, establishing the Hom-tensor adjunction in the category of functors from $ \\\\mathcal{C} $ to $ \\\\mathrm{Type}\\\\,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic restricted adjunctions and condensed module structures do not establish the four-stage finite-Tor memberships and the specified five bijections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula and restricted tensor Hom adjunction give five Hom bijections for constructible derived sheaves over all adic coefficient stages",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A B : LightCondMod R) →\\n      (S : LightProfinite) →\\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic restricted adjunctions and condensed module structures do not establish the four-stage finite-Tor memberships and the specified five bijections"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteTor|finite.Tor|Constructible|constructible",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"117\", \"text\": \"/-- **Chevalley's Theorem**: The image of a locally constructible set under a\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"118\", \"text\": \"morphism of finite presentation is locally constructible. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"121\", \"text\": \"nonrec lemma Scheme.Hom.isLocallyConstructible_image (f : X ⟶ Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"123\", \"text\": \"    {s : Set X} (hs : IsLocallyConstructible s) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"124\", \"text\": \"    IsLocallyConstructible (f '' s) := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic restricted adjunctions and condensed module structures do not establish the four-stage finite-Tor memberships and the specified five bijections"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|finiteTor|finite.Tor",
+   "results": "Successful search; 0 hits. Top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunctions, ordinary sheaf operations and condensed module instances do not state the four-stage finite-Tor domain assertions and specified chain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula gives Hom bijections between extraordinary direct image and internal Hom of bounded constructible sheaves",
+   "results": "Successful search; 8 hits. Top results: SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.sheafHom', CategoryTheory.Sheaf.Hom, CategoryTheory.Sheaf.ΓHomEquiv, CategoryTheory.sheafHom, CategoryTheory.sheafHom'Iso, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, CategoryTheory.Sheaf.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunctions, ordinary sheaf operations and condensed module instances do not state the four-stage finite-Tor domain assertions and specified chain"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Successful search; 12 hits. Top results: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunctions, ordinary sheaf operations and condensed module instances do not state the four-stage finite-Tor domain assertions and specified chain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible finite Tor sheaves at finite integral and rational adic coefficients are stable under the six operations and have tensor Hom adjunctions",
+   "results": "Successful search; 8 hits. Top results: LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, CondensedMod.IsSolid, Condensed.instAB4StarCondensedMod, LightCondensed.instMonoidalCategoryLightCondMod, Condensed.instAB4CondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunctions, ordinary sheaf operations and condensed module instances do not state the four-stage finite-Tor domain assertions and specified chain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pushforward projection formula and closed monoidal adjunction give five Hom set equivalences on constructible derived categories",
+   "results": "Successful search; 8 hits. Top results: CategoryTheory.Adjunction.derived, CategoryTheory.bijection, CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.ExponentiableMorphism.homEquiv_symm_apply_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunctions, ordinary sheaf operations and condensed module instances do not state the four-stage finite-Tor domain assertions and specified chain"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-hom-chain-counit-formula",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph: the map t is pulled back, composed with the ordinary counit, evaluated, pushed forward and composed with the exceptional counit. Step 1: domain and bijection argument of the creating item, formerly step 1; reversed Hom chain",
+   "via": [
+    "lem-pod-hom-chain-counit-formula",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-hom-chain-ctf-domains",
+  "worker": "stage1",
+  "summary": "Checked the chosen restricted functors give every finite-Tor membership, applied the projection formula also at A_N, and wrote all five Hom bijections with their directions. No new nodes: functor-type bookkeeping and precomposition with an isomorphism are steps, and all adjunction and projection inputs already exist. The four-stage conventions and supplied exceptional adjunction are retained.",
+  "blueprint": "Realizes the domain and adjunction bookkeeping underlying thm-pod-identification-of-the-comparison, third paragraph, through lem-pod-global-duality-map-identification and lem-pod-hom-chain-counit-formula; expands Step 1 of fix-lem-tensor-adjunction.proof.md in reverse.",
+  "tool_uses": [
+   {
+    "node": "det-thm-sf-ctf-stability-adjunctions",
+    "why": "Uses the stipulated restricted adjunctions as generic functor and Hom-bijection data; this supplies domain bookkeeping for the existing Hom-chain route, without replacing any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-thm-sf-ctf-stability-adjunctions"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-afb1f7252",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-afb1f7252 (reviewer sub-agent of L); spot-checked: Read the item in full, all six cited statements, thm-sf-ctf-stability (i)-(vii), lem-sf-integral-direct-image-constructible, the source main-20261015 sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md Step 1 (the five-arrow chain, reversed here), the sfb unit sk-thm-sf-ctf-stability-adjunctions.md, and the parent's old step 1 (NJ snapshot and the Q02 8f03574b PASS review). Status: the item is still unsplit in live and side-live, there is no repair note, and the statement and stmt_deps are byte-identical to side-live. All citations are on the transitive route of sk-thm-sf-package, there is no cycle and no SGA. The five bijections are correct in type and direction: inverse Lf*-|Rf_* at (T,L_N); inverse tensor-Hom with left factor M; inverse Rf_!-|Rf^!; precomposition with P_T (fix-prop-projection-formula, K=M in D^b_c, L=T or A_N in ctf), with explicit inverse; forward tensor-Hom with left factor C. Edge cases checked: f=id, X empty, M=0, N=0, T=0, field stages. I found three faults, all repaired in fixes/dag/nodes/sec-six-functors/lem-pod-hom-chain-ctf-domains.json. (1) Steps 1-3 took every ctf membership (Lf*, Rf_*, Rf_!, Rf^!, tensor, internal Hom) from det-thm-sf-ctf-stability-adjunctions, which is about the condensed sfb categories with uncompleted f^*. That silently identified them with the def-fix-six-functor-datum categories (completed integral, Karoubi rational, common-stage Q̄ℓ); the statement stipulates det-thm only for the tensor-Hom adjunction. (2) lem-sf-integral-direct-image-constructible and the coefficient passage of (vii), used for A_N at O_E/E/Q̄ℓ in the parent's argument, were dropped. (3) Step 4 took the ordinary adjunction from det-thm(1) instead of fix-prop-adjunctions(1), which is the one the source cites. The repaired steps follow the source and the parent's validated argument. C and Rf^!N come from fix-prop-adjunctions(2), plus (iv) and (v) at the finite stage. At A the memberships come from ctf-stability (i)-(iii), using the general internal Hom with no site-perfect hypothesis. At O_E they come from the completed pullback and tensor (def-weil-derived-pullback-tensor-hom), from (vii) giving D^b_c=D^b_ctf and internal Hom/Rf^! preservation, and from lem-sf-integral-direct-image-constructible for A_N. E and Q̄ℓ follow by the passage clause of (vii). Step 4 now uses fix-prop-adjunctions(1) and (2) plus the stipulated tensor-Hom adjunction. proof_deps equals the union of the uses, and every step is under 2000 characters. There are no new nodes and no duplicates: lem-pd-condensed-hom-chain-realization is the sfb/condensed analogue, a different model. Maintainer note: det-thm(2) is written with right factor (-⊗K -| cHom(K,-)), while the inherited statement uses left factor M/C, so the two differ by the braiding (Koszul sign). The tool_use det-thm is accepted (on route).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodHomChainCtfDomains",
+  "declaration": "WeilConjectures.PodHomChainDomains.domains_and_bijections",
+  "declarations": [
+   "WeilConjectures.PodHomChainDomains.localHom",
+   "WeilConjectures.PodHomChainDomains.directHom",
+   "WeilConjectures.PodHomChainDomains.supportHom",
+   "WeilConjectures.PodHomChainDomains.tensorX",
+   "WeilConjectures.PodHomChainDomains.tensorY",
+   "WeilConjectures.PodHomChainDomains.domains_and_bijections"
+  ],
+  "file": "lean/Sheaf/Paper/PodHomChainCtfDomains.lean",
+  "statement": "theorem domains_and_bijections [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (M : (PodCoefficientStage.domain S s X).FullSubcategory) (N T : (PodCoefficientStage.domain S s Y).FullSubcategory) : PodCoefficientStage.domain S s Y (R.support.obj M).obj ∧ PodCoefficientStage.domain S s Y (directHom S s f c R M N).obj ∧ PodCoefficientStage.domain S s Y (supportHom S s f c R M N).obj ∧ PodCoefficientStage.domain S s X (R.exceptional.obj N).obj ∧ PodCoefficientStage.domain S s X (localHom S s f c R M N).obj ∧ PodCoefficientStage.domain S s X (R.pull.obj T).obj ∧ PodCoefficientStage.domain S s X (((tensorX S s f c R).obj M).obj (R.pull.obj T)).obj ∧ IsIso (PodCtfPairing.projection S s f c R M (directHom S s f c R M N)) ∧ Function.Bijective ((R.ordinaryAdjunction.homEquiv T (localHom S s f c R M N)).symm : (T ⟶ directHom S s f c R M N) → (R.pull.obj T ⟶ localHom S s f c R M N)) ∧ Function.Bijective (((R.tensorAdjunctionX M).homEquiv (R.pull.obj T) (R.exceptional.obj N)).symm : (R.pull.obj T ⟶ localHom S s f c R M N) → (((tensorX S s f c R).obj M).obj (R.pull.obj T) ⟶ R.exceptional.obj N)) ∧ Function.Bijective ((R.exceptionalAdjunction.homEquiv (((tensorX S s f c R).obj M).obj (R.pull.obj T)) N).symm : (((tensorX S s f c R).obj M).obj (R.pull.obj T) ⟶ R.exceptional.obj N) → (R.support.obj (((tensorX S s f c R).obj M).obj (R.pull.obj T)) ⟶ N)) ∧ Function.Bijective (fun v : R.support.obj (((tensorX S s f c R).obj M).obj (R.pull.obj T)) ⟶ N ↦ PodCtfPairing.projection S s f c R M T ≫ v) ∧ Function.Bijective ((R.tensorAdjunctionY (R.support.obj M)).homEquiv T N : (((tensorY S s f c R).obj (R.support.obj M)).obj T ⟶ N) → (T ⟶ supportHom S s f c R M N))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b29e5af2",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_deps, PodCtfAdjunctions (PodCtfAdjunctionData, restricted functors/adjunctions, tensorAdjunctionX/Y), PodCtfPairingMaps (projection/projectionIso/homX/homY) and landed sibling PodHomChainCounitFormula. Setting matches node (separated+LOFT+QC f, all four stages, M,N,T in selected ctf domains, R binder as in landed siblings). Seven membership conjuncts in node order (C, A_N, B_N, Rf^!N, L_N, Lf^*T, M⊗Lf^*T); IsIso P_{A_N}; five bijections correct in map and direction: inverse ordinary adjunction, inverse left-factor tensor-Hom with M, inverse exceptional adjunction, precomposition with forward P_T, forward tensor-Hom with left factor C; type ascriptions give the exact six Hom sets. Item node differs from side-live only in lean and two added existing on-base def owners in stmt_deps; lean.statement verbatim; docstrings/source/blueprint/proof steps present; sorry only; no hollow def; lines <=100. Advisories: memberships trivial given R (interface design, same as landed siblings); unused imports FiniteTorStability/SfIntegralDirectImageConstructible (proof-dep modules) and Etale.Derived.Adjunctions; NZ second reading thin but specific. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261025T123259-L-1852327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

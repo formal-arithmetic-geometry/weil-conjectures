@@ -16,9 +16,43 @@
   "document": "literature/stacks-project/algebraization.tex",
   "place": "Tag 099F, canonical internal-Hom construction and unit; sites-cohomology.tex Section 08J7"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define each evaluation component directly as the zero-source-degree product projection, followed by the single-complex identification with the ring sheaf and evaluation at one. This is definitionally the original homComplexUnitEvaluation; ringedHomUnitEvaluationMap_eq records that equality.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-sc-hom-complex-unit-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport invertibility and differential compatibility across the component equality. Construct the chain isomorphism by isoOfComponents with these actual projection maps; equality of forward components certifies equality with the previous isomorphism. Keep the derived unit, completion functor and completion unit constructions unchanged.",
+   "uses": [
+    "lem-sc-hom-complex-unit-evaluation-is-iso",
+    "lem-sc-hom-complex-unit-evaluation-comm"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Preserve the current-main named small-site sheaf-composition instance and the three evaluation component/projection/naturality lemmas. The two component equations follow from ringedHomUnitEvaluationMap_eq and the unchanged evaluation definition; naturality follows degreewise from homComplex_unit_evaluation_naturality, with the original naturality proof retained.",
+   "uses": [
+    "lem-sc-hom-complex-unit-evaluation-naturality",
+    "def-sc-hom-complex-unit-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "def-sc-hom-complex-unit-evaluation",
+  "lem-sc-hom-complex-unit-evaluation-is-iso",
+  "lem-sc-hom-complex-unit-evaluation-comm",
+  "lem-sc-hom-complex-unit-evaluation-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "E6: representation-only refactor of canonical evaluation at one (Stacks, sites-cohomology.tex Section 08J7); equality to the previous isomorphism proved in Lean, 2026-10-26. The functor presentation is the same isomorphism with its source expressed by homComplexFunctor; its inverse equality and forward-component equation are proved by reflexivity. E6: retain the existing evaluation component formula and its reflexivity certificate, and expose the formula without identity precomposition at literal zero through the proved ringedHomUnitEvaluationMap_normalized API. The whole-isomorphism equality certificate remains proved. Returned-packet rebase: retain all current-main evaluation and sheaf-composition declarations and their Lean attachments; adapt the two component proofs to the named evaluation API, and retain the original naturality proof."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -76,17 +110,40 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
   "module": "Sheaf.CategoryTheory.RingedCompletionUnit",
   "declaration": "CategoryTheory.ringedCechCompletionUnit",
   "declarations": [
+   "CategoryTheory.ringedHomUnitEvaluationMap",
+   "CategoryTheory.ringedHomUnitEvaluationMap_eq",
+   "CategoryTheory.ringedHomUnitEvaluationMap_normalized",
+   "CategoryTheory.ringedHomUnitEvaluationMap_isIso",
+   "CategoryTheory.ringedHomUnitEvaluationMap_comm",
    "CategoryTheory.ringedHomUnitEvaluationIso",
+   "CategoryTheory.ringedHomUnitFunctorEvaluationIso",
+   "CategoryTheory.ringedHomUnitFunctorEvaluationIso_inv_eq",
+   "CategoryTheory.ringedHomUnitFunctorEvaluationIso_hom_f",
    "CategoryTheory.ringedDerivedHomUnit",
    "CategoryTheory.ringedCechCompletionFunctor",
-   "CategoryTheory.ringedCechCompletionUnit"
+   "CategoryTheory.ringedCechCompletionUnit",
+   "CategoryTheory.ringedHomUnitEvaluationIso_hom_f_projection",
+   "CategoryTheory.ringedCompletionHasSheafCompose",
+   "CategoryTheory.ringedHomUnitEvaluationIso_hom_f",
+   "CategoryTheory.ringedHomUnitEvaluationIso_naturality"
   ],
   "file": "lean/Sheaf/CategoryTheory/RingedCompletionUnit.lean",
   "statement": "def ringedCechCompletionUnit (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O) (E : ringedSiteDerived O) : E ⟶ (ringedCechCompletionFunctor O K).obj E",
@@ -110,5 +167,15 @@
   "group": "NE",
   "result": "pass",
   "note": "Wrote review.md. Checked source correspondence, all dependencies and eight Lean modules, canonical constructions, edge cases, universes, records and docstrings. Immutable files match the commit; server-only compilation passed. No delivery errors found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe431",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261026T111828-L-1744881",
+  "kind": "interface",
+  "note": "independent cc review: re-delivered files against the fcfa9 run (files+fixes): only RingedCompletionUnit/node/change record/report differ and they carry the reviewer's T9-restore fixes; ringedHomUnitEvaluationIso signature delivered vs published (#check identical); UnitPowerCompleteness delivered vs published concurrently; 13 transitive users of the changed names compiled against the delivered set"
  }
 }

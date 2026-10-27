@@ -1,0 +1,200 @@
+{
+ "id": "lem-sfb-stack-big-etale-higher-image-base-change",
+ "kind": "statement",
+ "title": "Big etale higher direct images commute with stack base change",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. For a scheme $S$ [def-pc-scheme] and an algebraic stack $\\mathcal Z/S$ [def-sfb-algebraic-moduli-stack], its big etale site has all objects and arrows of the fibred category in [def-sfb-stack-quasi-coherent-algebra], with coverings lying over jointly surjective etale scheme maps. Its structure sheaf is $\\mathcal O_{\\mathcal Z}(z)=\\Gamma(U,\\mathcal O_U)$ for $z$ over $U$. Use module sheaves [def-weil-sheaf-of-modules-category]. For $h:\\mathcal A\\to\\mathcal Z$, direct image has value $(h_*N)(z)=\\Gamma(\\mathcal A\\times_{\\mathcal Z}U,N|_{\\mathcal A\\times_{\\mathcal Z}U})$; restrictions are induced by base change, and pullback of a module along a stack morphism means precomposition. Higher direct images are computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. Let $f:\\mathcal X\\to\\mathcal Y$ and $b:\\mathcal Y^{\\prime}\\to\\mathcal Y$ be arbitrary morphisms of algebraic stacks over $S$. Form $\\mathcal X^{\\prime}=\\mathcal Y^{\\prime}\\times_{\\mathcal Y}\\mathcal X$, with projections $a:\\mathcal X^{\\prime}\\to\\mathcal X$ and $f^{\\prime}:\\mathcal X^{\\prime}\\to\\mathcal Y^{\\prime}$, using [def-sfb-stable-pointed-moduli-groupoids]. For every module sheaf $F$ on $\\mathcal X$, placed in degree zero, for every $i\\geq0$ the canonical comparison $b^*R^if_*F\\xrightarrow{\\sim}R^if^{\\prime}_*(a^*F)$ is an isomorphism. Here all sheaves remain on the big etale sites, and both pullbacks are precomposition. No representability, smoothness, flatness, qcqs or quasi-coherence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075H, lemma-base-change-higher-direct-images, cohomology sheaves of the canonical derived comparison."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-big-etale-module-calculus",
+  "def-sfb-stack-big-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-stack-big-etale-derived-base-change] to the given $2$-Cartesian square and $F[0]$. Its hypotheses are exactly the big etale module-site conventions in the statement. It gives the canonical natural isomorphism $\\beta:b^*Rf_*F\\xrightarrow{\\sim}Rf^{\\prime}_*(a^*F)$ and states that $b^*$ and $a^*$ are exact and act termwise on complexes.",
+   "uses": [
+    "lem-sfb-stack-big-etale-derived-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075H, lemma-base-change-higher-direct-images, etale module case"
+   }
+  },
+  {
+   "text": "Fix $i\\geq0$. For a complex $K$ of modules on $\\mathcal Y$, put $Z^i=\\ker d_K^i$ and $B^i=\\operatorname{im}d_K^{i-1}$. Exactness of $b^*$ from [lem-sfb-stack-big-etale-derived-base-change] identifies the cycles and boundaries of the termwise complex $b^*K$ with $b^*Z^i$ and $b^*B^i$, and identifies its quotient with $b^*(Z^i/B^i)$. Hence $b^*H^i(K)\\cong H^i(b^*K)$, compatibly with maps of complexes. This also holds on derived objects: the formula sends quasi-isomorphisms to quasi-isomorphisms, so it can be computed on any representing complex. Apply this to $K=Rf_*F$. By the injective-resolution definition, $H^i(Rf_*F)=R^if_*F$ and $H^i(Rf^{\\prime}_*(a^*F))=R^if^{\\prime}_*(a^*F)$. Thus $H^i(\\beta)$, preceded by the displayed cohomology identification, is precisely the canonical comparison $b^*R^if_*F\\to R^if^{\\prime}_*(a^*F)$. It is invertible: applying the cohomology functor to $\\beta^{-1}$ gives the inverse of $H^i(\\beta)$. This proves the assertion in every degree, without any further geometric hypothesis.",
+   "uses": [
+    "lem-sfb-stack-big-etale-derived-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075H, lemma-base-change-higher-direct-images, passage from the derived comparison to its cohomology sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-big-etale-derived-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075H, lemma-base-change-higher-direct-images; cohomology of its derived isomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images on big etale sites of algebraic stacks commute with arbitrary stack base change when inverse image is precomposition",
+   "results": "{\"t\": \"2026-10-23T19:58:08Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images on big etale sites of algebraic stacks commute with arbitrary stack base change when inverse image is precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"SheafOfModules.pushforwardNatTrans_comp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\"], \"digest\": \"7a9f49206b46b555\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale base-change stability and sheaf functor composition do not give higher direct image base change on big stack sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-23T19:58:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale base-change stability and sheaf functor composition do not give higher direct image base change on big stack sites"
+  },
+  {
+   "tool": "grep",
+   "query": "higher.*direct.*image.*stack|stack.*higher.*direct.*image|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T19:58:20Z\", \"tool\": \"grep\", \"query\": \"higher.*direct.*image.*stack|stack.*higher.*direct.*image|AlgebraicStack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale base-change stability and sheaf functor composition do not give higher direct image base change on big stack sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images on big etale sites of algebraic stacks commute with arbitrary stack base change when inverse image is precomposition",
+   "results": "{\"t\": \"2026-10-23T19:58:42Z\", \"tool\": \"leansearch\", \"query\": \"Higher direct images on big etale sites of algebraic stacks commute with arbitrary stack base change when inverse image is precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pushforwardForgetIso\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"Algebra.Etale.baseChange\"], \"digest\": \"e395a49ac9316540\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale base-change stability and sheaf functor composition do not give higher direct image base change on big stack sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For categories fibred in groupoids over schemes the sheaf R i f star commutes with base change by precomposition",
+   "results": "{\"t\": \"2026-10-23T19:59:22Z\", \"tool\": \"leanfinder\", \"query\": \"For categories fibred in groupoids over schemes the sheaf R i f star commutes with base change by precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackIso\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\"], \"digest\": \"1752577e2bd1f576\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale base-change stability and sheaf functor composition do not give higher direct image base change on big stack sites"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|stack.*higherDirectImage|higherDirectImage.*stack",
+   "results": "{\"t\": \"2026-10-23T21:10:27Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|stack.*higherDirectImage|higherDirectImage.*stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underived pullback/pushforward composition and etale morphisms, not higher direct image base change for arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images on big etale ringed sites of algebraic stacks commute with arbitrary stack base change by exact precomposition",
+   "results": "{\"t\": \"2026-10-23T21:10:27Z\", \"tool\": \"leansearch\", \"query\": \"Higher direct images on big etale ringed sites of algebraic stacks commute with arbitrary stack base change by exact precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardComp\", \"SheafOfModules.pullbackComp\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"ecc6fe49af0c0918\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underived pullback/pushforward composition and etale morphisms, not higher direct image base change for arbitrary algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-23T21:10:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underived pullback/pushforward composition and etale morphisms, not higher direct image base change for arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images on big etale ringed sites of algebraic stacks commute with arbitrary stack base change by exact precomposition",
+   "results": "{\"t\": \"2026-10-23T21:10:31Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images on big etale ringed sites of algebraic stacks commute with arbitrary stack base change by exact precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"SheafOfModules.pushforward_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"SheafOfModules.pushforwardComp_hom_app_val_app\"], \"digest\": \"486d10be4bea6641\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underived pullback/pushforward composition and etale morphisms, not higher direct image base change for arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For categories fibred in groupoids over schemes the higher direct image sheaf R i f star commutes with base change by restriction to objects",
+   "results": "{\"t\": \"2026-10-23T21:10:48Z\", \"tool\": \"leanfinder\", \"query\": \"For categories fibred in groupoids over schemes the higher direct image sheaf R i f star commutes with base change by restriction to objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pullbackIso\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"ed333b44f71aae38\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underived pullback/pushforward composition and etale morphisms, not higher direct image base change for arbitrary algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-descent-higher-image-criterion",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Per-degree consequence of the derived big-etale base-change input, used to localize the target by smooth affine charts.",
+   "via": [
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-big-etale-higher-image-base-change",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 075H in stacks-sheaves.tex and retained the statement unchanged. Apply the existing derived big-etale base-change node and spell out the elementary cycles/boundaries argument giving its per-degree consequence; only that derived node is a proof dependency. No new nodes or Mathlib leaves. Required fresh Mathlib searches and project attachment searches found no matching theorem.",
+  "blueprint": "The inherited from.place locates this input in the direct-image stability proof (3), through smooth descent for stack higher images. Steps 1-2 realize precisely its last sentence: the per-degree consequence of derived big-etale base change used to localize the target by smooth affine charts. The current latest blueprint direct-images.proof.md (3) was read; no unit route or statement was changed. blueprint_refs.py ancestor returns None for this imported ancestry, so its pre-existing null from.node and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-d5ec1c745",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-d5ec1c745 (reviewer sub-agent of L); spot-checked: I read the whole item and it is correct; no fixes, no new nodes. Statement, stmt_deps, source, proof_deps and blueprint are byte-identical to side-live, and the item is still unsplit in live and side-live, so nothing supersedes it and no target was weakened. It matches Stacks stacks-sheaves.tex Tag 075H (lemma-base-change-higher-direct-images; the proof ends with 'induced map g^{-1}R^if_*F → R^if'_*(g')^{-1}F is an isomorphism'), étale module case: arbitrary 2-cartesian square, any module F, no representability, flatness or qcqs assumption. Pullback is plain precomposition because O(z)=Γ(U,O_U). The item has the shape the 2026-10-21 per-degree convention prescribes: its only proof dependency is lem-sfb-stack-big-etale-derived-base-change, same unit sk-thm-sf-ctf-stability, so no tool_uses. That node has the same preamble, square and coefficient category (module sheaves on the big étale sites), and asserts exactness of b^*, a^*, termwise action and the derived isomorphism β. Step 1 uses exactly that statement. Step 2 is the elementary exact-functor argument (cycles, boundaries, quotient; well defined on D; H^i(Rf_*F)=R^if_*F by injective resolutions; H^i(β^{-1}) is the inverse), so elementary=true is correct. Edge cases checked: i=0, F=0 or empty source, b=id, non-flat b, unbounded i; the citer smooth-descent-higher-image-criterion step 1 is a special case. No duplicate: rg -L for 075H finds only the derived node, the citer, and the representable-restriction and flat-comparison nodes, which state different things. No SGA. Maintainer note: when the derived node is split along Stacks' per-degree route (lemma-pushforward-restriction), it must not cite this item, or the DAG gets a 2-cycle (C6)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackBigEtaleHigherImageBaseChange",
+  "declaration": "CategoryTheory.isIso_moduliBigEtaleHigherBaseChange",
+  "declarations": [
+   "CategoryTheory.isIso_moduliBigEtaleHigherBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackBigEtaleHigherImageBaseChange.lean",
+  "statement": "theorem isIso_moduliBigEtaleHigherBaseChange {S : AlgebraicGeometry.Scheme.{u}} {X Y Y' : BasedCategory.{v, w} (Over S)} (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (hY' : IsAlgebraicModuliStack Y') (f : BasedFunctor X Y) (b : BasedFunctor Y' Y) (M : ModuliBigEtaleModules X hX.1.1) (i : ℕ) : IsIso ((moduliBigEtaleHigherBaseChange hX.1.1 hY.1.1 hY'.1.1 f b i).app M)",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cba7231b",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Re-delivery of 55c2118c3 (passed 10-24, sent back at landing only because def-sfb-stack-big-etale-module-functors had landed via Q57). All 3 Lean modules are byte-identical to 55c2; only the functors node record and the report changed. The functors record differs from live only in lean (16 live declarations kept, 8 Wide added); in the module file live lines 1-184 are identical with the 8 Wide declarations appended. The parent d87e7a20 is the side-live head and contains the Q22 node; the module path is unchanged since the base. Maths reread against Stacks 075H: arbitrary BasedFunctors f,b on IsAlgebraicModuliStack X,Y,Y' with no extra hypotheses; X' = moduliTwoFiberProduct b f, a = Comma.snd, f' = moduliTwoFiberFst; every M and every i : ℕ. The square is pinned by ∃! with component M.map(α.op) : M(f x) → M(b y'); its symm is the θ that exchangeRight needs, giving b^*f_* → f'_*a^*; rightDerivedBaseChange (G=f_*, γ=b^*, β=a^*, G'=f'_*) uses exactness, enough-injectives and additivity instances supplied by the delivery. Per-degree companion of the derived proof_dep. Item text unchanged; only stmt_deps and lean added; lean.statement verbatim; calculus node has real data and sorry-only proofs; report has real worker and second-reading sections. Nothing compiled (no change). ADVISORY: NY e45f (derived base change, passed, unlanded) declares the same names moduliBigEtalePrecomposition_additive/_limits/_colimits, has moduliBigEtaleProjection* with the same bodies as moduliBigEtaleWide*, and duplicates the pinned square and product fibredness. Whichever of NY e45f and Q09 lands second must be returned (H4) to rebind onto the first; Q01 b36e's OfSize append has disjoint names."
+ }
+}

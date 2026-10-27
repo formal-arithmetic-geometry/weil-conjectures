@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-ringed-pullback-cochain-presentation",
+ "kind": "statement",
+ "title": "Universal cochain presentation of independent-universe ringed pullback",
+ "statement": "Let C and D be sites small relative to a coefficient universe r, with topologies J_C and J_D, and let R on C and S,R_I on D be sheaves of commutative rings in that universe. Use their actual categories A and B of module sheaves [def-weil-sheaf-of-modules-category] and chosen unbounded derived categories in a common universe w [def-weil-abstract-derived-category]. Let uInv be a finite-limit-preserving left adjoint between sheaves of sets, I an algebraic inverse image of R to R_I over uInv [def-weil-pbc-algebraic-inverse-image], and c:R_I → S. Let T:A → B be additive and be presented, on objects and morphisms, by I.modules followed by scalar extension along c. There exist F:D(A) → D(B) and a cochain counit ε: F Q_A → Q_B T^c such that F is the right Kan extension of Q_B T^c along Q_A with counit ε. For every flat-term K-flat complex P [def-pc-kflat-complex, def-pc-flat-sheaf-modules], ε_P is invertible. No equality between site and coefficient universes is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; agent-written combination with universal homotopy-to-cochain counit transport (lem-weil-pbc-cochain-universal-counit-transport)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Apply the independent-universe ringed derived pullback theorem to the specified inverse-image and scalar-extension presentation of T. Keep the resulting derived functor F, its universal homotopy counit, and its invertibility on flat-term K-flat complexes. Its left-derived property supplies the homotopy right Kan property.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; agent-written combination with universal homotopy-to-cochain counit transport (lem-weil-pbc-cochain-universal-counit-transport)."
+   }
+  },
+  {
+   "text": "Apply universal cochain counit transport to T, F and the homotopy counit. Take the transported cochain counit. The transport theorem gives its right Kan universality; its componentwise IsIso equivalence carries the resolving-class computation to every flat-term K-flat cochain complex. The underlying module-sheaf categories are Mathlib categories, so no semilinear implementation abbreviation or instance is required in the public interface.",
+   "uses": [
+    "lem-weil-pbc-cochain-universal-counit-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; agent-written combination with universal homotopy-to-cochain counit transport (lem-weil-pbc-cochain-universal-counit-transport)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cochain-universal-counit-transport",
+  "lem-weil-pbc-ringed-topoi-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; agent-written combination with universal homotopy-to-cochain counit transport (lem-weil-pbc-cochain-universal-counit-transport).",
+  "note": "A proved interface combination of existing declared results. The additional module isolates the semilinear proof import for import-all downstream compatibility, not compilation timing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A universal derived ringed pullback counit on cochain complexes is invertible on flat term K flat complexes",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, HomologicalComplex₂.flipEquivalenceCounitIso_inv_app_f_f, CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_inv, CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_hom, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.counitIso_inv, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplex₂.flipEquivalenceCounitIso, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.counitIso",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem supplies the ringed cochain pullback presentation. Existing project declarations ringedTopoiDerivedPullbackIndependent and cochainUniversalCounitTransport combine to prove this interface; no new unproved lemma is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor of scalar extension on sheaves of modules with independent universe and cochain counit",
+   "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.sheafificationAdjunction",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem supplies the ringed cochain pullback presentation. Existing project declarations ringedTopoiDerivedPullbackIndependent and cochainUniversalCounitTransport combine to prove this interface; no new unproved lemma is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "ringed.*[Dd]erived|cochainUniversalCounitTransport",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem supplies the ringed cochain pullback presentation. Existing project declarations ringedTopoiDerivedPullbackIndependent and cochainUniversalCounitTransport combine to prove this interface; no new unproved lemma is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralAmbientOperationModels",
+  "date": "2026-10-26",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'. Ambient completion presentations for integral pullback and tensor; ambient derived pullback computation on flat-term K-flat cochains",
+   "via": [
+    "lem-pur-integral-ambient-operation-models",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedPullbackCochainPresentation",
+  "file": "lean/Sheaf/CategoryTheory/RingedPullbackCochainPresentation.lean",
+  "declaration": "SheafOfModules.ringedPullbackCochainPresentation",
+  "statement": "theorem ringedPullbackCochainPresentation\n    (uInv : Sheaf JC (Type r) ⥤ Sheaf JD (Type r))\n    (uPush : Sheaf JD (Type r) ⥤ Sheaf JC (Type r))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)\n    (uStar : SheafOfModules.{r} ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R) ⥤\n      SheafOfModules.{r} ((sheafCompose JD (forget₂ CommRingCat.{r} RingCat.{r})).obj S))\n    (hobj : ∀ M : SheafOfModules.{r}\n          ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R),\n      uStar.obj M = changeOfRings c (I.modules.obj M))\n    (hmap : ∀ {M N : SheafOfModules.{r}\n          ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)}\n      (a : M ⟶ N), uStar.map a =\n        eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫\n          eqToHom (hobj N).symm)\n    [uStar.Additive]\n    [HasDerivedCategory.{w} (SheafOfModules.{r}\n          ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]\n    [HasDerivedCategory.{w} (SheafOfModules.{r}\n          ((sheafCompose JD (forget₂ CommRingCat.{r} RingCat.{r})).obj S))] :\n    ∃ (F : DerivedCategory (SheafOfModules.{r}\n          ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⥤\n        DerivedCategory (SheafOfModules.{r}\n          ((sheafCompose JD (forget₂ CommRingCat.{r} RingCat.{r})).obj S)))\n      (ε : DerivedCategory.Q (C := SheafOfModules.{r}\n          ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⋙ F ⟶\n        uStar.mapHomologicalComplex (.up ℤ) ⋙\n          DerivedCategory.Q (C := SheafOfModules.{r}\n          ((sheafCompose JD (forget₂ CommRingCat.{r} RingCat.{r})).obj S))),\n      F.IsRightKanExtension ε ∧\n        ∀ P : CochainComplex (SheafOfModules.{r}\n          ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ,\n          P.IsKFlatIndependentCoefficients →\n          (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) →\n          IsIso (ε.app P)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-26",
+  "note": "Fully proved; zero sorry. Public signature uses actual Mathlib module-sheaf categories. Semilinear implementation and universal counit transport are proof-only imports."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-127c0",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261026T111926-L-1778770",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-127c0",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261026T111926-L-1778770",
+  "kind": "interface",
+  "note": "independent cc review: new integralAmbientOperationModels/tensorRepresentative statements vs published originals (wrapper bodies via #print, ambientPackage_eq, CoefficientTensorModels.iso = comparison.app, unit/tower maps = pull/tensorOperationUnit); new RingedPullbackCochainPresentation vs its node; 3 direct importers compiled against delivered files"
+ }
+}

@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-translate-bad-tuple-dimension",
+ "kind": "statement",
+ "title": "Constructibility and dimension bound for bad translate tuples",
+ "statement": "Let $T$ be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], $p:H\\to T$ a smooth separated group algebraic space of finite presentation, and $V\\subseteq H$ a quasi-compact open subspace meeting every geometric fibre. Suppose every geometric fibre of $p$ is integral of the same dimension $d\\geq0$. For algebraic spaces [def-trf-algebraic-space], smoothness and local finite presentation are tested on etale scheme charts [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]; finite presentation also requires quasi-compactness and quasi-separatedness, and separatedness means that the diagonal is a closed immersion. A group algebraic space is an algebraic space with multiplication, inverse and identity morphisms over its base satisfying the group identities, without a commutativity assumption. A geometric fibre is the base change to an algebraically closed field at a point of the base; integral means reduced, irreducible and nonempty. Give point spaces the atlas topology [def-a1-space-point-topology], and use topological Krull dimension [def-kun-topological-krull-dimension], with the empty subset of dimension $-\\infty$. For an integer $n\\geq1$ put $X=H^{\\times_T n}$. In $H\\times_TX$ let $E_n$ be the closed subspace cut out by the conditions $g_j^{-1}x\\notin V$ for $j=1,\\ldots,n$, with the reduced induced closed structure. Let $Z_n\\subseteq|X|$ be its image under projection. Then $Z_n$ is constructible [def-weil-constructible-subset]. For every geometric point $t:\\operatorname{Spec}k\\to T$, its inverse image in $|X_t|$ is exactly the set of tuples for which $H_t\\ne\\bigcup_jg_jV_t$, where this condition at any geometric tuple is tested after extending to an algebraically closed field containing its residue field. The Zariski closure of this inverse image in $|X_t|$ has dimension at most $nd-n+d$. The morphism $X\\to T$ is smooth and separated of finite presentation with nonempty pure $nd$-dimensional geometric fibres. In particular, if $d=0$, then $E_n$ and $Z_n$ are empty.",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 4.6, printed p.144: bad tuples Z, fibrewise codimension at least n-g. Incidence description: over an algebraically closed field, with C=H minus V, E_n has the same underlying closed set as H times C^n via (x,c_j) -> (x,g_j=x c_j^{-1}). Supporting constructibility: Stacks spaces-morphisms.tex Tag 0ECX (theorem-chevalley); product dimensions: varieties.tex Tag 0B2M (lemma-dimension-product-locally-algebraic), applied on etale charts. Local Deligne PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-a1-space-open-subspace",
+  "pqf-def-locnoeth",
+  "def-a1-space-point-topology",
+  "def-kun-topological-krull-dimension",
+  "def-weil-constructible-subset",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-smooth-integral-group-space",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-reduced-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Put $P_r=H^{\\times_T r}$ for $r\\geq1$ and $M=H\\times_TX$. Induct on $r$: $P_1\\to T$ is the given $p$, and $P_{r+1}\\to P_r$ is the base change of $p$. Smoothness under base change and composition follows from [lem-sfb-fibred-groupoid-representable-smooth-calculus], applied to algebraic spaces viewed as discrete fibred groupoids. Separation and finite presentation follow in the same induction from [lem-sfb-space-flat-proper-fp-locality, lem-sfb-space-separated-fp-composition]. Thus $X\\to T$ and $M\\to T$ are smooth separated and of finite presentation. By [lem-sfb-space-fp-qcqs-source] they are qcqs, since the Noetherian scheme $T$ is qcqs. Their etale scheme charts are locally of finite type over $T$ (smoothness is tested on these charts), hence locally Noetherian by [pqf-lem-locnoeth-lft]. In particular $X$ and $M$ are Noetherian algebraic spaces in the sense used by the Chevalley tool below.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-fp-qcqs-source",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03ZD, 03ZE, 03XR, 03KL, 03KQ, 03XQ, 06G5; Noetherianity on scheme charts uses Morphisms Tag 01T6."
+   }
+  },
+  {
+   "text": "For each $j$ the morphism $a_j:M\\to H$ is $(x,g_1,\\ldots,g_n)\\mapsto g_j^{-1}x$. Continuity of point maps [lem-a1-space-point-open-calculus] makes $F=\\bigcap_j a_j^{-1}(|H|\\setminus|V|)$ closed. By [lem-sfb-space-reduced-closed-support] it has the reduced closed subspace $E_n$ specified in the statement. Its projection $q:E_n\\to X$ is separated and of finite type: on every etale scheme chart it is a closed subscheme of $H\\times_TX\\to X$, so its coordinate algebras are quotients of finite-type algebras; it is quasi-compact since over an affine test the ambient base change is quasi-compact and its closed subset is quasi-compact. Its relative diagonal is the pullback of the closed relative diagonal of $H\\times_TX\\to X$ along $E_n\\times_XE_n\\to (H\\times_TX)\\times_X(H\\times_TX)$, hence is closed [def-weil-closed-immersion]. Apply [lem-sfb-noetherian-space-chevalley-image] to $q$ and the constructible subset $|E_n|$ of itself. Step 1 supplies its Noetherian target hypothesis, so $Z_n=q(|E_n|)$ is constructible.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-reduced-closed-support",
+    "def-weil-closed-immersion",
+    "lem-sfb-noetherian-space-chevalley-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ECX (theorem-chevalley); spaces-properties.tex Tag 03IQ for the reduced support, and decent-spaces.tex Tag 0ECZ for topological constructibility."
+   }
+  },
+  {
+   "text": "Let $t:\\operatorname{Spec}k\\to T$ be geometric. The image/base-change equality of [lem-a1-space-point-open-calculus] gives $Z_n\\times_{|X|}|X_t|=\\operatorname{im}(|(E_n)_t|\\to|X_t|)$, where the left side means inverse image. The support clause of [lem-sfb-space-reduced-closed-support] says that a point of $(E_n)_t$ is exactly an incidence point satisfying all $g_j^{-1}x\\notin V_t$; it does not assert that $(E_n)_t$ is reduced. Apply the same image/base-change equality at a tuple represented over an algebraically closed extension $\\Omega/k$ containing its residue field. Its membership is equivalent to the existence of a point of $H_\\Omega$ outside every $g_jV_\\Omega$, because $g_j^{-1}x\\notin V_\\Omega$ is exactly $x\\notin g_jV_\\Omega$. This is the asserted failure to cover. Nonemptiness is unchanged by extending the tuple field again, by the same point-surjectivity statement.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian); Tag 03IQ (lemma-reduced-closed-subspace), support after base change."
+   }
+  },
+  {
+   "text": "Fix this geometric $t$ and write $G=H_t$. As the base change of $p$ along $t$, $G\\to\\operatorname{Spec}k$ is separated [lem-sfb-space-separated-fp-composition] and of finite presentation [lem-sfb-space-flat-proper-fp-locality], with group operations base changed from those of $H$. This separated finite-type group space $G/k$ is a separated scheme by [lem-sfb-locally-separated-group-space-scheme]: its closed diagonal is in particular an immersion. Its dimension is $d$ and it is integral by hypothesis. Let $C\\hookrightarrow G$ be the reduced closed complement of the nonempty open $V_t$ [lem-sfb-space-reduced-closed-support]. It is a finite-type $k$-scheme, since on affine charts its rings are quotients of the coordinate rings of $G$. Every strict chain of irreducible closed subsets of $C$ is also such a chain in $G$; appending the proper larger irreducible closed subset $G$ increases its length by one. Thus, by [def-kun-topological-krull-dimension], if $C$ is nonempty then $d\\geq1$ and $\\dim C\\leq d-1$. In particular $d=0$ forces $C$ empty. This chain argument needs no smoothness, properness, or commutativity.",
+   "uses": [
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-space-reduced-closed-support",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 08BH and 0B8F for schematic group spaces; dimension drop is the written chain argument from the definition, matching the incidence description in Deligne Lemma 4.6 (local PDF unavailable)."
+   }
+  },
+  {
+   "text": "On the scheme $G\\times_kG^n$ consider the automorphism $\\alpha(x,g_j)=(x,g_j^{-1}x)$ with inverse $\\beta(x,c_j)=(x,xc_j^{-1})$. The two composites are the identity because $(xc_j^{-1})^{-1}x=c_j$ and $x(g_j^{-1}x)^{-1}=g_j$, without interchanging any factors. Under this automorphism the underlying closed support of $(E_n)_t$ becomes that of $G\\times_kC^n$. The support/base-change assertion [lem-sfb-space-reduced-closed-support] justifies this even though reduction need not commute with base change. Both $(E_n)_t$ and $G^n=X_t$ are schemes: the former is closed in the scheme $G\\times_kG^n$. Homeomorphic spaces have the same Krull dimension [lem-weil-pbc-homeomorphism-krull-dimension]. If $C$ is empty, $n\\geq1$ makes $(E_n)_t$ empty. Otherwise put $e=\\dim C\\leq d-1$ and induct on $r$ for $G\\times_kC^r$, starting with $r=0$. The binary product formula [lem-sfb-scheme-product-dimension] gives dimension $d+re$ at each stage; [lem-pc-scheme-dimension-local-rings] converts its local-ring dimension convention to topological dimension. Each value is nonnegative, so each successive product is nonempty, as required for the next application. Consequently $\\dim(E_n)_t=d+ne\\leq d+n(d-1)$. Apply [lem-zl-finite-type-fibre-image-dimension-bounds] to the $k$-morphism $(E_n)_t\\to X_t$ between finite-type schemes. Its image is the inverse image of $Z_n$ by step 3, and hence the dimension of that image's closure is at most $d+n(d-1)=nd-n+d$. The empty case gives the same inequality with dimension $-\\infty$.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "lem-sfb-scheme-product-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-zl-finite-type-fibre-image-dimension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2M (lemma-dimension-product-locally-algebraic), clause (2); Tag 0B2L (lemma-dimension-fibres-locally-algebraic), image-closure inequality; explicit incidence automorphism supplied by the agent."
+   }
+  },
+  {
+   "text": "It remains to check purity of the tuple fibres, not just their global dimension. The integral finite-type scheme $G$ has one irreducible component of dimension $d$. Applying [lem-sbc-equidimensional-open-local-dimension] with $O=G$ gives $\\dim_xG=d$ at every point. Smoothness of $G\\to\\operatorname{Spec}k$ is inherited from $p$ by base change along $t$ [lem-sfb-fibred-groupoid-representable-smooth-calculus], and $G$ is a scheme by step 4, so it is smooth of relative dimension $d$ by [def-sbc-smooth-morphisms]. Inductively $G^r\\to\\operatorname{Spec}k$ is smooth of relative dimension $rd$: the case $r=1$ has just been checked; the projection $G^{r+1}\\to G^r$ is a base change of $G\\to\\operatorname{Spec}k$, and composing this relative-dimension-$d$ map with the relative-dimension-$rd$ map proves the next case by [lem-sbc-smooth-relative-dimension-permanence]. Thus every point of $X_t=G^n$ has local topological dimension $nd$. It is locally Noetherian, being a finite-type scheme over a field [pqf-lem-locnoeth-lft]. Apply [lem-sbc-constant-local-dimension-components] with $O=X_t$ to conclude that every irreducible component has dimension $nd$. The identity section supplies a point of $X_t$, so the fibre is nonempty. Together with step 1 this proves all the asserted properties of $X\\to T$.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "pqf-lem-locnoeth-lft",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), parts (3),(5), and Morphisms Tags 02G1, 02G2 for fixed smooth relative dimension; the finite-product induction is written out."
+   }
+  },
+  {
+   "text": "If $d=0$, step 4 makes $C$ empty on every geometric fibre, and step 5 makes every geometric fibre of $E_n\\to T$ empty. If $E_n$ had a point, choose an algebraic closure of the residue field of its image in $T$. The point-surjectivity of the fibre-product map [lem-a1-space-point-open-calculus] would lift that point to this geometric fibre, a contradiction. Thus $E_n$ is empty and its image $Z_n$ is empty. This also covers an empty base $T$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), applied to a point of the alleged nonempty incidence space and a geometric point above its image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-fp-qcqs-source",
+  "pqf-lem-locnoeth-lft",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-reduced-closed-support",
+  "def-weil-closed-immersion",
+  "lem-sfb-noetherian-space-chevalley-image",
+  "lem-sfb-locally-separated-group-space-scheme",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-sfb-scheme-product-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "def-sbc-smooth-morphisms",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Incidence automorphism from the item source description of Deligne Lemma 4.6, expanded by the agent; Stacks Tags 0B2M, 0B2L, 0ECX, 0ECZ and the cited scheme-chart calculus. The local Deligne PDF is unavailable and requested in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The constructible bad tuples of n translates of a dense open in a d dimensional algebraic group have dimension at most nd minus n plus d",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → [inst : CommSemiring R] → PrimeSpectrum.ConstructibleSetData (Polynomial R) → ℕ\", \"doc\": \"For a constructible set data $ S $, the function $ \\\\text{degBound} $ computes the supremum over all basic constructible set data $ C $ in $ S $ of the sum over indices $ i $ of the degree of the polyn\"}\n  {\"name\": \"Besicovitch.multiplicity_le\", \"module\": \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [FiniteDimensional ℝ E],\\n  Besicovitch.multiplicity E ≤ 5 ^ Module.finrank ℝ E\", \"doc\": \"In a finite-dimensional real vector space $ E $, the Besicovitch multiplicity is bounded above by $ 5 $ raised to the power of the dimension of $ E $, i.e., $ \\\\text{multiplicity}(E) \\\\leq 5^{\\\\dim(E)} $\"}\n  {\"name\": \"Besicovitch.goodτ\", \"module\": \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace\", \"type\": \"(E : Type u_1) → [inst : NormedAddCommGroup E] → [inst_1 : NormedSpace ℝ E] → [FiniteDimensional ℝ E] → ℝ\", \"doc\": \"The parameter $ \\\\tau = 1 + \\\\frac{\\\\delta}{4} $, where $ \\\\delta $ is the good $ \\\\delta $ for Besicovitch covering, used in the Besicovitch covering theorem for normed vector spaces.\"}\n  {\"name\": \"Besicovitch.one_lt_goodτ\", \"module\": \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace\", \"type\": \"∀ (E : Type u_1) [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E],\\n  1 < Besicovitch.goodτ E\", \"doc\": \"The parameter $ \\\\tau = 1 + \\\\frac{\\\\delta}{4} $, where $ \\\\delta $ is the good $ \\\\delta $ for Besicovitch covering in normed vector spaces, satisfies $ 1 < \\\\tau $. This inequality establishes that the sc\"}\n  {\"name\": \"Besicovitch.goodδ_lt_one\", \"module\": \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace\", \"type\": \"∀ (E : Type u_1) [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E],\\n  Besicovitch.goodδ E < 1\", \"doc\": \"The good δ for Besicovitch covering in a normed vector space $ E $ satisfies $ \\\\delta < 1 $.\"}\n  {\"name\": \"Besicovitch.goodδ\", \"module\": \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace\", \"type\": \"(E : Type u_1) → [inst : NormedAddCommGroup E] → [inst_1 : NormedSpace ℝ E] → [FiniteDimensional ℝ E] → ℝ\", \"doc\": \"A real number $\\\\delta \\\\in (0, 1)$ chosen via the existence theorem `exists_goodδ`, which ensures that for any finite subset $S$ of a normed vector space $E$ satisfying $\\\\|c\\\\| \\\\leq 2$ for all $c \\\\in S$\"}\n  {\"name\": \"Besicovitch.card_le_multiplicity_of_δ\", \"module\": \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {s : Finset E},\\n  (∀ c ∈ s, ‖c‖ ≤ 2) →\\n    (∀ c ∈ s, ∀ d ∈ s, c ≠ d → 1 - Besicovitch.goodδ E ≤ ‖c - d‖) → s.card ≤ Besicovitch.multiplicity E\", \"doc\": \"In a normed vector space $ E $, any finite subset $ S $ satisfying $ \\\\|c\\\\| \\\\leq 2 $ for all $ c \\\\in S $ and $ \\\\|c - d\\\\| \\\\geq 1 - \\\\delta $ for distinct $ c, d \\\\in S $ (where $ \\\\delta \\\\in (0, 1) $ is a \"}\n  {\"name\": \"Besicovitch.le_multiplicity_of_δ_of_fin\", \"module\": \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E] {n : ℕ}\\n  (f : Fin n → E),\\n  (∀ (i : Fin n), ‖f i‖ ≤ 2) →\\n    (Pairwise fun i j => 1 - Besicovitch.goodδ E ≤ ‖f i - f j‖) → n ≤ Besicovitch.multiplicity E\", \"doc\": \"There exists a real number $\\\\delta \\\\in (0, 1)$ such that for any finite set of vectors $\\\\{v_1, \\\\dots, v_n\\\\}$ in a normed vector space $E$ satisfying $\\\\|v_i\\\\| \\\\leq 2$ for all $i$ and $\\\\|v_i - v_j\\\\| \\\\ge\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: finite coset covers, compact topological groups, vector-space ranks and graph incidences do not state constructibility or algebraic-space fibre dimension bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Incidence variety dimension bound for tuples of translates not covering an algebraic group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddSubgroup.exists_index_le_card_of_leftCoset_cover\", \"module\": \"Mathlib.GroupTheory.CosetCover\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {ι : Type u_2} {H : ι → AddSubgroup G} {g : ι → G} {s : Finset ι},\\n  ⋃ i ∈ s, g i +ᵥ ↑(H i) = Set.univ → ∃ i ∈ s, (H i).FiniteIndex ∧ (H i).index ≤ s.card\", \"doc\": \"If a finite union of left cosets $g_i + H_i$ for $i \\\\in s$ covers the entire additive group $G$, then there exists an index $i \\\\in s$ such that the subgroup $H_i$ has finite index in $G$ and its index\"}\n  {\"name\": \"MeasureTheory.Measure.haar.index_defined\", \"module\": \"Mathlib.MeasureTheory.Measure.Haar.Basic\", \"type\": \"{K V : Set G} (hK : IsCompact K) (hV : (interior V).Nonempty) :\\n  ∃ n : ℕ, n ∈ Finset.card '' {t : Finset G | K ⊆ ⋃ g ∈ t, (fun h => g * h) ⁻¹' V}\", \"doc\": \"For any compact set $ K $ and any set $ V $ with non-empty interior in a topological group $ G $, there exists a finite set $ t $ such that $ K $ is contained in the union of the left translates of $ \"}\n  {\"name\": \"MeasureTheory.Measure.haar.addIndex\", \"module\": \"Mathlib.MeasureTheory.Measure.Haar.Basic\", \"type\": \"{G : Type u_1} → [AddGroup G] → Set G → Set G → ℕ\", \"doc\": \"A function that, given two subsets $S$ and $T$ of an additive group $G$, returns a natural number representing the minimal number of additive translates of $S$ required to cover $T$, or a related comb\"}\n  {\"name\": \"MeasureTheory.Measure.haar.index_elim\", \"module\": \"Mathlib.MeasureTheory.Measure.Haar.Basic\", \"type\": \"{K V : Set G} (hK : IsCompact K) (hV : (interior V).Nonempty) :\\n  ∃ t : Finset G, (K ⊆ ⋃ g ∈ t, (fun h => g * h) ⁻¹' V) ∧ Finset.card t = index K V\", \"doc\": \"For any compact set $ K $ and set $ V $ with non-empty interior in a topological group $ G $, there exists a finite set $ t $ such that $ K $ is contained in the union of the left translates of $ V $ \"}\n  {\"name\": \"compact_covered_by_add_left_translates\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : AddGroup G] [IsTopologicalAddGroup G] {K V : Set G},\\n  IsCompact K → (interior V).Nonempty → ∃ t, K ⊆ ⋃ g ∈ t, (fun x => g + x) ⁻¹' V\", \"doc\": \"In a topological additive group $ G $, if $ K $ is a compact subset and the interior of $ V $ is non-empty, then there exists a finite set $ t $ such that $ K $ is contained in the union of the left t\"}\n  {\"name\": \"AddSubgroup.index_le_of_leftCoset_cover_const\", \"module\": \"Mathlib.GroupTheory.CosetCover\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {ι : Type u_2} {s : Finset ι} {H : AddSubgroup G} {g : ι → G},\\n  ⋃ i ∈ s, g i +ᵥ ↑H = Set.univ → H.index ≤ s.card\", \"doc\": \"Let $ G $ be an additive group and $ H $ an additive subgroup of $ G $. If there exists a finite set $ s $ of indices and a function $ g : s \\\\to G $ such that the union of the left cosets $ g_i + H $ \"}\n  {\"name\": \"MeasureTheory.Measure.haar.index\", \"module\": \"Mathlib.MeasureTheory.Measure.Haar.Basic\", \"type\": \"(K V : Set G) : ℕ\", \"doc\": \"The infimum of the cardinalities of all finite subsets $ t $ of $ G $ such that the compact set $ K $ is contained in the union of the preimages $ g^{-1}V $ for $ g $ in $ t $. Formally, this is the g\"}\n  {\"name\": \"finrank_vectorSpan_range_add_one_le\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional\", \"type\": \"[Fintype ι] [Nonempty ι] (p : ι → P) : finrank k (vectorSpan k (Set.range p)) + 1 ≤ Fintype.card ι\", \"doc\": \"For any non-empty finite set of points $\\\\{p_i\\\\}_{i \\\\in I}$ in an affine space $P$ over a division ring $k$, the finite rank of the vector subspace spanned by all differences $p_i - p_j$ satisfies $\\\\di\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: finite coset covers, compact topological groups, vector-space ranks and graph incidences do not state constructibility or algebraic-space fibre dimension bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dimension\", \"image\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"finiteDimensional_vectorSpan_image_of_finite\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional\", \"type\": \" (k : Type u_1) {V : Type u_2} {P : Type u_3} {ι : Type u_4} [DivisionRing k] [AddCommGroup V] [Module k V] [AddTorsor V P] [Finite ι] (p : ι → P) (s : Set ι) : FiniteDimensional k ↥(vectorSpan k (p '' s))\", \"doc\": \"The `vectorSpan` of a subset of a family indexed by a `Fintype`\\nis finite-dimensional.\"}\n  {\"name\": \"finiteDimensional_direction_affineSpan_image_of_finite\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional\", \"type\": \" (k : Type u_1) {V : Type u_2} {P : Type u_3} {ι : Type u_4} [DivisionRing k] [AddCommGroup V] [Module k V] [AddTorsor V P] [Finite ι] (p : ι → P) (s : Set ι) : FiniteDimensional k ↥(affineSpan k (p '' s)).direction\", \"doc\": \"The direction of the affine span of a subset of a family indexed\\nby a `Fintype` is finite-dimensional.\"}\n  {\"name\": \"Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet\", \"module\": \"Mathlib.FieldTheory.CardinalEmb\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [Algebra.IsAlgebraic F E] (i : (Module.rank F E).ord.ToType) : FiniteDimensional ↥(IntermediateField.adjoin F (⇑(Field.Emb.Cardinal.wellOrderedBasis F E) ∘ Field.Emb.Cardinal.leastExt F\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: finite coset covers, compact topological groups, vector-space ranks and graph incidences do not state constructibility or algebraic-space fibre dimension bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ad[Tt]uple|[Ii]ncidence|AlgebraicSpace",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Data/Set/Card.lean\", \"line\": \"57\", \"text\": \"finiteness arguments; they are true by coincidence due to junk values.\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Inverse.lean\", \"line\": \"280\", \"text\": \"/-! ### Coincidence of the left and the right inverse -/\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/Defs.lean\", \"line\": \"217\", \"text\": \"and in particular by coincidence `writtenInExtChartAt I I' x f` could be differentiable, while\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/Defs.lean\", \"line\": \"246\", \"text\": \"and in particular by coincidence `writtenInExtChartAt I I' x f` could be differentiable, while\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/Defs.lean\", \"line\": \"296\", \"text\": \"and in particular by coincidence `writtenInExtChartAt I I' x f` could be differentiable, while\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/Defs.lean\", \"line\": \"311\", \"text\": \"and in particular by coincidence `writtenInExtChartAt I I' x f` could be differentiable, while\"}\n  {\"file\": \"Mathlib/Combinatorics/Hypergraph/Basic.lean\", \"line\": \"94\", \"text\": \"/-! ## Vertex-Hyperedge Incidence -/\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"line\": \"72\", \"text\": \"    G.edgeSet \\\\ G.incidenceSet t ∪ (s(·, t)) '' (G.neighborSet s) := by\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"line\": \"74\", \"text\": \"  simp only [replaceVertex, mem_edgeSet, Set.mem_union, Set.mem_sdiff, mk'_mem_incidenceSet_iff]\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"line\": \"78\", \"text\": \"    (G.edgeSet \\\\ G.incidenceSet t ∪ (s(·, t)) '' (G.neighborSet s)) \\\\ {s(t, t)} := by\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"line\": \"80\", \"text\": \"  simp only [replaceVertex, mem_edgeSet, Set.mem_union, Set.mem_sdiff, mk'_mem_incidenceSet_iff]\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"line\": \"88\", \"text\": \"    G.edgeFinset \\\\ G.incidenceFinset t ∪ (G.neighborFinset s).image (s(·, t)) := by\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Connectivity/EdgeConnectivity.lean\", \"line\": \"99\", \"text\": \"  rw [← card_incidenceSet_eq_degree, ← ENat.natCast_lt_natCast, Set.coe_fintypeCard] at hh\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/DeleteEdges.lean\", \"line\": \"24\", \"text\": \"* `SimpleGraph.deleteIncidenceSet G v` is the simple graph `G` with the incidence set of `v`\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/DeleteEdges.lean\", \"line\": \"116\", \"text\": \"section DeleteIncidenceSet\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/DeleteEdges.lean\", \"line\": \"119\", \"text\": \"def deleteIncidenceSet (G : SimpleGraph V) (x : V) : SimpleGraph V :=\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/DeleteEdges.lean\", \"line\": \"120\", \"text\": \"  G.deleteEdges (G.incidenceSet x)\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/DeleteEdges.lean\", \"line\": \"122\", \"text\": \"lemma deleteIncidenceSet_adj {G : SimpleGraph V} {x v₁ v₂ : V} :\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Extremal/TuranDensity.lean\", \"line\": \"73\", \"text\": \"    simpa [edgeFinset_deleteIncidenceSet_eq_filter]\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Extremal/TuranDensity.lean\", \"line\": \"74\", \"text\": \"      using! card_edgeFinset_deleteIncidenceSet_le_extremalNumber h v\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Extremal/Basic.lean\", \"line\": \"185\", \"text\": \"/-- If `G` is `H.Free`, then `G.deleteIncidenceSet v` is also `H.Free` and has at most\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Extremal/Basic.lean\", \"line\": \"187\", \"text\": \"theorem card_edgeFinset_deleteIncidenceSet_le_extremalNumber\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Extremal/Basic.lean\", \"line\": \"189\", \"text\": \"    #(G.deleteIncidenceSet v).edgeFinset ≤ extremalNumber (card V - 1) H := by\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Basic.lean\", \"line\": \"31\", \"text\": \"* `SimpleGraph.incidenceSet` is the `Set` of edges containing a given vertex.\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Basic.lean\", \"line\": \"744\", \"text\": \"/-! ### Incidence set -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: finite coset covers, compact topological groups, vector-space ranks and graph incidences do not state constructibility or algebraic-space fibre dimension bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "badTuple|bad_tuple|[Tt]ranslate.*[Dd]im|[Dd]im.*[Tt]ranslate|[Ii]ncidence",
+   "results": "{\"t\": \"2026-10-23T16:20:59Z\", \"tool\": \"grep\", \"query\": \"badTuple|bad_tuple|[Tt]ranslate.*[Dd]im|[Dd]im.*[Tt]ranslate|[Ii]ncidence\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Haar covering-index facts, affine vector-space dimension inequalities, and smooth relative-dimension permanence do not give this incidence constructibility and fibrewise dimension theorem. No relevant incidence declaration was returned by the algebraic-geometry grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The incidence variety parametrizing a point outside n translates of a dense open in a d dimensional algebraic group has dimension at most d plus n times d minus one",
+   "results": "{\"t\": \"2026-10-23T16:20:59Z\", \"tool\": \"leansearch\", \"query\": \"The incidence variety parametrizing a point outside n translates of a dense open in a d dimensional algebraic group has dimension at most d plus n times d minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rank_le_card_isVisible\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"finrank_vectorSpan_range_add_one_le\", \"finrank_vectorSpan_range_le\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instIsDominantιCoborderRange\"], \"digest\": \"390d76c526281c04\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Haar covering-index facts, affine vector-space dimension inequalities, and smooth relative-dimension permanence do not give this incidence constructibility and fibrewise dimension theorem. No relevant incidence declaration was returned by the algebraic-geometry grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"dim\"",
+   "results": "{\"t\": \"2026-10-23T16:20:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"dim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Haar covering-index facts, affine vector-space dimension inequalities, and smooth relative-dimension permanence do not give this incidence constructibility and fibrewise dimension theorem. No relevant incidence declaration was returned by the algebraic-geometry grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility and fibrewise dimension bound for tuples of translates of a nonempty open subset failing to cover an algebraic group",
+   "results": "{\"t\": \"2026-10-23T16:21:00Z\", \"tool\": \"leanfinder\", \"query\": \"Constructibility and fibrewise dimension bound for tuples of translates of a nonempty open subset failing to cover an algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.Measure.haar.addIndex_defined\", \"MeasureTheory.Measure.haar.index_defined\", \"MeasureTheory.Measure.haar.addIndex_elim\", \"MeasureTheory.Measure.haar.index_elim\", \"MeasureTheory.Measure.haar.index\", \"MeasureTheory.Measure.haar.addIndex_pos\", \"MeasureTheory.Measure.haar.prehaar_le_index\", \"MeasureTheory.Measure.haar.le_index_mul\"], \"digest\": \"386da549bca210c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Haar covering-index facts, affine vector-space dimension inequalities, and smooth relative-dimension permanence do not give this incidence constructibility and fibrewise dimension theorem. No relevant incidence declaration was returned by the algebraic-geometry grep."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-finite-translate-cover",
+  "date": "2026-10-23",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Constructibility and dimension bound for bad translate tuples.",
+   "via": [
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-translate-bad-tuple-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded the incidence automorphism with correct noncommutative factor order; proved exact fibre images via point-class base change; separated reduced supports from nonreduced base changes; derived the dimension bound from scheme product and image bounds after schematic group-space representation; proved pure tuple fibres by explicit fixed-relative-dimension induction. Added one general algebraic-space Chevalley tool, with actual recorded Mathlib searches. Deligne Lemma 4.6 remains WANTED, so the proof is marked agent-written.",
+  "blueprint": "Serves the inherited null-ancestor chain at det-thm-sf-ctf-stability-direct-images, proof (3), the plurinodal alteration prerequisite and its auxiliary finite-translate argument. Current latest/sk-thm-sf-ctf-stability direct-images proof (3) was read; it contains no further translate-tuple lemma. The item is a created auxiliary node, not a unit key node; unit realization fields are unchanged.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Finite-type scheme charts over a Noetherian base are locally Noetherian; this is used only to check Noetherianity hypotheses."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Point images commute with base change; continuity and geometric-point lifting are coefficient-free algebraic-space tools for this incidence argument."
+   },
+   {
+    "node": "lem-weil-pbc-homeomorphism-krull-dimension",
+    "why": "The explicit incidence automorphism gives a homeomorphism of supports, so Krull dimensions agree."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Converts the existing binary-product theorem from its local-ring dimension convention to topological Krull dimension."
+   },
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "Only the generic inequality dim closure f(Y) <= dim Y for finite-type schemes is used; no unit-specific geometric argument is replaced."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Converts the integral fibre of known dimension to constant local topological dimension, to invoke smooth relative-dimension permanence."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "The generic base-change and composition rules for fixed relative dimension assemble the pure dimension of the finite product."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Converts the established constant local dimension of a Noetherian tuple fibre into purity of its irreducible components."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-aad10f339",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-aad10f339 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the new node lem-sfb-noetherian-space-chevalley-image and the statement of every cited node. Source checks: Stacks 0ECX (spaces-morphisms theorem-chevalley) and 0ECZ (decent-spaces lemma-locally-constructible). The Deligne Gabber PDF is absent, so the proof is correctly agent-written. The item statement is unchanged from live; the only stmt_dep added is the generic fibre-product node. Every step checks out: the noncommutative incidence α/β identities are recomputed; the dimension bound d+n(d-1) comes from the support homeomorphism, the product induction and the image-closure lemma; the d=0 and empty cases are handled. The new Chevalley node is true (Y qs, so 0ECZ, then 0ECX, then 0ECZ on Z, and |Z| is Noetherian), has no duplicate in the DAG (rg -L for 0ECX, 0ECZ, Chevalley and constructible images), and is not a restatement of the item. Batch-5 flags: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, the a1 point topology/calculus and the sfb space-permanence nodes are all generic algebraic-space foundations; none is part of the trace formula or PD, so they are accepted. The off-unit geometric tool_uses are generic and accepted. FIX for C1: step 4 used separated/fp base change of p to the geometric fibre without a citation; added lem-sfb-space-separated-fp-composition and lem-sfb-space-flat-proper-fp-locality. Step 6 said smoothness of G came from step 1, which only treats X and M over T; it now cites lem-sfb-fibred-groupoid-representable-smooth-calculus for base change. proof_deps is unchanged. Note: from.node null is inherited from the item's ancestry, not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TranslateBadTupleDimension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.translate_bad_tuple_dimension",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.tuples",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.tail",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.difference",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.fibre",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.fibreProjection",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.geometricBad",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.geometricBadPoints",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.incidenceSupport",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.locus",
+   "AlgebraicGeometry.AlgebraicSpace.TranslateBadTuple.translate_bad_tuple_dimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TranslateBadTupleDimension.lean",
+  "statement": "theorem translate_bad_tuple_dimension {S : Scheme.{u}} [IsNoetherian S] (H : AlgebraicSpace S) (F : (Over S)ᵒᵖ ⥤ GrpCat.{u}) (e : F ⋙ forget GrpCat ≅ H.obj.obj) (hH : IsSmoothIntegralGroupSpace H) (V : OpenSubspace H) (hVqc : IsCompact (pointImage V.val.ι)) (hV : ∀ (K : Type u) [Field K] [IsAlgClosed K] (s : Spec (.of K) ⟶ S), Nonempty (V.val.obj (op (Over.mk s)))) (d : ℕ) (hd : ∀ (K : Type u) [Field K] [IsAlgClosed K] (s : Spec (.of K) ⟶ S), topologicalKrullDim (Point (fibre H s)) = (d : WithBot ℕ∞)) (n : ℕ) (hn : 1 ≤ n) : ∃ (X M : AlgebraicSpace S) (eX : X.obj.obj ≅ tuples (F ⋙ forget GrpCat) n) (eM : M.obj.obj ≅ tuples (F ⋙ forget GrpCat) (n + 1)) (E : ClosedSubspace M), IsReduced (E.val : AlgebraicSpace S) ∧ pointImage E.val.arrow.hom.hom = incidenceSupport F e V n M eM ∧ Topology.IsConstructible (locus F n eX eM E) ∧ MapIsLocally (@Smooth) (groupSpaceProjection X) ∧ MapIsSeparated (groupSpaceProjection X) ∧ MapIsLocallyOfFinitePresentation (groupSpaceProjection X) ∧ (∀ (T : Over S) (a : yoneda.obj T ⟶ (groupSpaceBase S).obj.obj), IsAffine T.left → CompactSpace (Point (Limits.pullback (groupSpaceProjection X).hom.hom a))) ∧ (∀ (T : Over S) (a : yoneda.obj T ⟶ Limits.pullback (groupSpaceProjection X).hom.hom (groupSpaceProjection X).hom.hom), IsAffine T.left → CompactSpace (Point (Limits.pullback (pullback.diagonal (groupSpaceProjection X).hom.hom) a))) ∧ (∀ (K : Type u) [Field K] [IsAlgClosed K] (s : Spec (.of K) ⟶ S), Nonempty (Point (fibre X s)) ∧ (∀ C ∈ irreducibleComponents (Point (fibre X s)), topologicalKrullDim C = (n * d : WithBot ℕ∞)) ∧ (∀ a : PointRepresentative (fibre X s), (Quot.mk _ (a.map (fibreProjection X s)) : Point X.obj.obj) ∈ locus F n eX eM E ↔ (Quot.mk _ (a.map (fibreProjection X s ≫ eX.hom)) : Point (tuples (F ⋙ forget GrpCat) n)) ∈ geometricBadPoints F e V n) ∧ topologicalKrullDim (closure {q : Point (fibre X s) | ∃ a : PointRepresentative (fibre X s), (Quot.mk _ a : Point (fibre X s)) = q ∧ (Quot.mk _ (a.map (fibreProjection X s)) : Point X.obj.obj) ∈ locus F n eX eM E}) + (n : WithBot ℕ∞) ≤ (n * d + d : WithBot ℕ∞)) ∧ (d = 0 → IsEmpty (Point (E.val : AlgebraicSpace S).obj.obj) ∧ locus F n eX eM E = ∅)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The group is an arbitrary GrpCat-valued functor, naturally isomorphic to H; no commutativity assumption. Tuple products are realized by natural isomorphisms on all test schemes. The reduced incidence closed subspace is specified by reducedness and its exact support. The dimension inequality dim+n <= nd+d retains the empty dimension bottom when d=0. Reviewer fix (stage 2): mapPoint and MapIsQuasiCompact are owned by def-sfb-proper-curve-moduli, which is not a stmt_dep; the inverse images under point maps are read on field-valued representatives (PointRepresentative.map, def-a1-space-point-topology) and the two quasi-compactness conjuncts are written out over affine tests, with the same meaning.",
+  "fixed_by": "NT-stage2-cc-bda06646a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bda06646a",
+  "group": "NU",
+  "result": "fix",
+  "note": "I read every clause against the node and all stmt_deps: the GrpCat lift of H's functor of points (noncommutative, no group-space owner exists), IsSmoothIntegralGroupSpace, qc V meeting geometric fibres, the g_j^{-1}x incidence order, reduced E fixed by its support, constructible Z_n, the bad-tuple identification over an algebraically closed extension, dim+n<=nd+d (correct at d=0), smooth/separated/fp X with pure nd fibres, and emptiness at d=0. Mathematics and edge cases are correct. H2: the statement used mapPoint and MapIsQuasiCompact, both owned by def-sfb-proper-curve-moduli, which is not a stmt_dep. FIX rewrites the point preimages through PointRepresentative.map (def-a1-space-point-topology) and inlines the qc/qs bodies, with the same meaning. The new statement is in the lean-record override. nt_compile of the fixed module: clean, 3.2 s; refit_record: no refusals."
+ }
+}

@@ -1,0 +1,378 @@
+{
+ "id": "lem-sfb-space-flat-deformation-properties",
+ "kind": "statement",
+ "title": "Isomorphisms and proper finite presentation under flat deformation",
+ "statement": "Use algebraic spaces over a scheme $S$ and their small etale sites and structure sheaves [def-trf-algebraic-space, def-pc-scheme], in the universes of [def-weil-size-convention]. A first order thickening $Z\\hookrightarrow Z\\prime$ means a representable closed immersion whose ideal sheaf has square zero and whose underlying closed subset is all of $Z\\prime$; closed immersion is tested after every scheme base change, closed immersions of schemes being [def-weil-closed-immersion]. Let $B\\hookrightarrow B\\prime$ be a first order thickening. Let $P\\prime\\to B\\prime$ and $Q\\prime\\to B\\prime$ be algebraic spaces over $B\\prime$, with $P\\prime$ flat over $B\\prime$, and let $h\\prime:P\\prime\\to Q\\prime$ be a $B\\prime$-morphism. Put $P=B\\times_{B\\prime}P\\prime$, $Q=B\\times_{B\\prime}Q\\prime$ and $h=h\\prime|_P:P\\to Q$ [lem-trf-space-fibre-products-etale-covers]. Then $h\\prime$ is an isomorphism if and only if $h$ is; $h\\prime$ is proper if and only if $h$ is; and $h\\prime$ is finitely presented if and only if $h$ is. Here flat and locally of finite presentation are tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Finitely presented means quasi-compact, quasi-separated and locally of finite presentation. Proper means separated, quasi-compact, locally of finite type on etale charts, and universally closed. Quasi-separated means the diagonal is quasi-compact; separated means the diagonal is a closed immersion; universally closed means closed after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]).",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CG6 (lemma-deform-property), parts (3), (5), (7), (14), (21); the finite presentation assertion is (5)+(7)+(14)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sfb-space-square-zero-extension-data",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas $U\\prime\\to B\\prime$, then a surjective etale scheme atlas $V\\prime\\to Q\\prime\\times_{B\\prime}U\\prime$, and then $W\\prime\\to P\\prime\\times_{Q\\prime}V\\prime$. The cited fibre-product and representable-etale permanence statements make $W\\prime\\to P\\prime\\times_{B\\prime}U\\prime$, and hence $W\\prime\\to P\\prime$, surjective etale. Put $U,V,W$ for their pullbacks to $B$. Since flatness is preserved by base change, $P\\prime\\times_{B\\prime}U\\prime\\to U\\prime$ is flat; the chart test, with target chart the identity of $U\\prime$, gives flatness of $W\\prime\\to U\\prime$. The same chart test detects local finite type and local finite presentation of $h\\prime$ on $W\\prime\\to V\\prime$, and of $h$ on $W\\to V$. Work affine-locally in these schemes, writing the compatible coordinate maps as $R\\prime\\to A\\prime\\to C\\prime$. The square-zero base ideal $I\\subseteq R\\prime$ gives $R=R\\prime/I$, $A=A\\prime/IA\\prime$, $C=C\\prime/IC\\prime$ by the quotient base-change statement. Moreover $C\\prime$ is flat over $R\\prime$ by the affine flatness criterion. These choices may be refined at every point, so no quasi-compact atlas is assumed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CG6 (lemma-deform-property), choice of U prime, V prime, W prime; affine coordinate reduction as in Tag 06AG, general remark (I)."
+   }
+  },
+  {
+   "text": "The maps $P\\to P\\prime$ and $Q\\to Q\\prime$ are thickenings by base change of $B\\to B\\prime$. Also $P=Q\\times_{Q\\prime}P\\prime$: on a test scheme both sides consist of a point of $P\\prime$ together with its lift of the base point to $B$. Thus the square $(h,h\\prime)$ is a morphism of thickenings. Apply the topological-properties statement separately to quasi-compactness, quasi-separatedness, separation and universal closedness. Each holds for $h$ if and only if it holds for $h\\prime$. The first-order condition needed later holds on every scheme chart since $(IA\\prime)^2=I^2A\\prime=0$, and likewise for $C\\prime$; it needs no flatness of $Q\\prime$.",
+   "uses": [
+    "lem-sfb-space-thickening-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-thickening-topological-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 09ZX (lemma-base-change-thickening); Tag 09ZY (lemma-thicken-property-morphisms), parts (3), (4), (6)."
+   }
+  },
+  {
+   "text": "Apply the cartesian finite-order thickening local-finite-type statement to $W\\prime\\to V\\prime$ and its pullback $W\\to V$. The target thickening $V\\to V\\prime$ is first order, and $W=V\\times_{V\\prime}W\\prime$ by the preceding cartesian identification. It follows that $W\\prime\\to V\\prime$ is locally of finite type exactly when $W\\to V$ is. Applying the chart test to the two pairs of atlases gives the same equivalence for $h\\prime$ and $h$.",
+   "uses": [
+    "lem-weil-pbc-thickening-lft-cartesian",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 09ZZ (lemma-thicken-property-morphisms-cartesian), part (2), reduction to schemes; scheme result Tag 09ZW, part (2)."
+   }
+  },
+  {
+   "text": "On the affine refinements in step 1, the relative finite-presentation lifting lemma applies to $R\\prime\\to A\\prime\\to C\\prime$: $I^2=0$ and $C\\prime$ is $R\\prime$-flat. It equates finite presentation of $A\\prime\\to C\\prime$ with that of $A\\to C$. For a locally finitely presented scheme morphism its ring map on every compatible pair of affine opens is finitely presented, by the cited affine-opens statement. Consequently local finite presentation of $W\\to V$ implies it for $W\\prime\\to V\\prime$ on all the affine refinements; conversely local finite presentation of $W\\prime\\to V\\prime$ implies it for $W\\to V$ using the reverse implication of the same algebra lemma. The affine definition and the chart test then give $h\\prime$ locally of finite presentation if and only if $h$ is. The argument does not assume $A\\prime$ flat over $R\\prime$.",
+   "uses": [
+    "lem-sfb-relative-flat-algebra-fp-lift",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CG6, clause (14), source-and-target etale-chart reduction to Tag 06AG, clause (13)."
+   }
+  },
+  {
+   "text": "Combine step 2 with step 3: the four conditions in the stated definition of properness (separated, quasi-compact, locally of finite type and universally closed) are each equivalent for $h$ and $h\\prime$. Their conjunction proves the properness equivalence. Combine step 2 with step 4: quasi-compactness, quasi-separatedness and local finite presentation are each equivalent, so their conjunction proves the finite-presentation equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CG6, clause (21), and clauses (5), (7), (14); definitions of proper and finitely presented in the item."
+   }
+  },
+  {
+   "text": "Assume now that $h$ is an isomorphism. Then $P\\times_QV\\cong V$, so $W\\to V$ is etale by the representable scheme-test statement. In particular it is flat and locally of finite presentation. Step 4, applied on these charts, gives local finite presentation of $W\\prime\\to V\\prime$. On every affine refinement as in step 1, $C$ is flat over $A$ by the affine flatness criterion. Apply the nilpotent-fibre module criterion with base ring $R\\prime$, intermediate ring $A\\prime$, module $C\\prime$, and ideal $I$: $C\\prime$ is $R\\prime$-flat by step 1, and $C\\prime/IC\\prime=C$ is flat over $A\\prime/IA\\prime=A$. Thus $C\\prime$ is flat over $A\\prime$. The affine criterion gives flatness of $W\\prime\\to V\\prime$.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sfb-nilpotent-fibre-flat-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CG6, etale-chart argument for clause (20), then clause (3); flatness input algebra.tex Tag 06A5."
+   }
+  },
+  {
+   "text": "For any $v\\prime\\in V\\prime$, the square-zero ideal of $V\\subseteq V\\prime$ vanishes in the field $\\kappa(v\\prime)$: the square of the image of each of its elements is zero in a field. Hence $\\operatorname{Spec}\\kappa(v\\prime)\\to V\\prime$ factors through $V$. The cartesian square identifies the fibre of $W\\prime\\to V\\prime$ there with the base change of $W\\to V$ to this field. It is etale by the cited etale base-change statement. Apply the flat-fibre etale-neighbourhood criterion to $W\\prime\\to V\\prime$, which is flat and locally of finite presentation by step 6. Every point of $W\\prime$ has an open neighbourhood etale over $V\\prime$. Etale source locality then gives that $W\\prime\\to V\\prime$ is etale.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GM (lemma-etale-flat-etale-fibres); etale locality descent.tex Tags 04R1, 04R3."
+   }
+  },
+  {
+   "text": "The composite $W\\prime\\to V\\prime\\to Q\\prime$ is representable etale by step 7 and representable-etale composition. Since $W\\prime\\to P\\prime$ is a representable surjective etale atlas (step 1), the source-atlas detection statement makes $h\\prime$ chartwise etale. Its pullback by the thickening $Q\\to Q\\prime$ is exactly $h$, by step 2, so the etale-thickening detection statement makes $h\\prime$ an isomorphism. Conversely, if $h\\prime$ is an isomorphism, pulling back its inverse along $Q\\to Q\\prime$ gives the inverse of $h$, since the two inverse equations are preserved by the fibre-product universal property.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-etale-source-atlas-detection",
+    "lem-sfb-space-etale-thickening-detects-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CG6, clause (3), using etaleness and surjectivity; equivalent final detection by Tag 05ZH (theorem-topological-invariance)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sfb-space-thickening-base-change",
+  "lem-sfb-space-thickening-topological-properties",
+  "lem-weil-pbc-thickening-lft-cartesian",
+  "lem-sfb-relative-flat-algebra-fp-lift",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "lem-sfb-nilpotent-fibre-flat-module",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-trf-space-etale-source-atlas-detection",
+  "lem-sfb-space-etale-thickening-detects-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CG6, proof of clauses (3), (5), (7), (14), (21); use Tag 06A5 for the flatness chart argument and Tag 05ZH for the final etale-isomorphism test."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Properness finite presentation and being an isomorphism are preserved under flat deformation over a nilpotent thickening for algebraic spaces",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme base-change stability and fpqc descent do not give lifting of properties across nilpotent bases for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift proper finite presentation along a square zero base extension for a flat algebraic space",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.IsStableUnderBaseChange @RingHom.FormallySmooth\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally smooth, then the base changed homomorphism $ R' \\\\t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme base-change stability and fpqc descent do not give lifting of properties across nilpotent bases for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme base-change stability and fpqc descent do not give lifting of properties across nilpotent bases for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|deform|thickening",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"189\", \"text\": \"With `X ⟶ Y` formally unramified and `Z' ⟶ Z` an infinitesimal thickening, there exists at most\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme base-change stability and fpqc descent do not give lifting of properties across nilpotent bases for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness finite presentation and being an isomorphism are preserved under flat deformation over a nilpotent thickening for algebraic spaces",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme base-change stability and fpqc descent do not give lifting of properties across nilpotent bases for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism properness and finite presentation of a morphism of algebraic spaces lift across a square zero base thickening when its source is flat",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat descent and base-change stability do not lift algebraic-space morphism properties along a square-zero base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nilpotent base change reflects proper finitely presented morphisms and isomorphisms for flat deformations of algebraic spaces",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat descent and base-change stability do not lift algebraic-space morphism properties along a square-zero base"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat descent and base-change stability do not lift algebraic-space morphism properties along a square-zero base"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|deform|thickening",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"189\", \"text\": \"With `X ⟶ Y` formally unramified and `Z' ⟶ Z` an infinitesimal thickening, there exists at most\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat descent and base-change stability do not lift algebraic-space morphism properties along a square-zero base"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms and proper finitely presented morphisms of algebraic spaces under flat square zero deformation",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.RespectsIso @IsProper\", \"doc\": \"Every isomorphism of schemes is a proper morphism.\"}\n  {\"name\": \"RingHom.Flat.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": RespectsIso Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, then composing $ f $ with a ring isomorphism on either the source or target preserves the flatness property. Specifically, for\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsIso f] : IsAffineHom f\", \"doc\": \"Every isomorphism between schemes is an affine morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat descent and base-change stability do not lift algebraic-space morphism properties along a square-zero base"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-square-zero-effectivity",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0CG6 (lemma-deform-property), parts (3), (5), (7), (14), (21); the finite presentation assertion is (5)+(7)+(14).",
+   "via": [
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-flat-deformation-properties",
+  "worker": "stage1",
+  "summary": "Read Stacks 0CG6 and its scheme/algebra inputs. Reused thickening topology, chart tests and etale detection. Added only the nilpotent fibre flat-module criterion and the relative base-flat algebra presentation lift; kept all three clauses and all original hypotheses. No project declaration states the item.",
+  "blueprint": "Supporting deformation input below det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/curve-moduli chain: 0CG6 isomorphism, properness, and finite-presentation assertions. Latest blueprint proof (3) was read; this split stays below that unit route.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-thickening-lft-cartesian",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "Generic scheme/space chart, affine algebra or etale criterion used in the Stacks 0CG6 proof; no replacement of the constructibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-thickening-lft-cartesian",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-50ad0dfbd",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-50ad0dfbd (reviewer sub-agent of L); spot-checked: I read the delivery in full and it passes with no changes. Shape: first split of the item (clones/live has it unsplit with no proof; no repair note). The statement and stmt_deps are unchanged against live; only proof fields, proof_deps and split_report were added. No SGA anywhere; all steps under 2000 characters. New node lem-sfb-nilpotent-fibre-flat-module is exactly Stacks 06A5 (algebra.tex) with S=S'=A, same hypotheses. The other 06A5 hits in the DAG are Kerodon tags. There is no DAG or Mathlib duplicate. New node lem-sfb-relative-flat-algebra-fp-lift is the 06AG Ad(11)/(13) argument: lift generators, exact kernel reduction because C' is R'-flat, then nilpotent Nakayama. It needs only R-flatness of C. It generalises lem-sfb-flat-deformation-lfp (the case A=R), which cannot be applied because A' need not be R'-flat. Neither new node restates a clause of the item. Steps: (1) chart chain U',V',W' and W'->U' flat via base change plus the chart test, giving C' flat over R'. (2) P = Q x_{Q'} P'; qc/qs/separated/universally closed from 09ZY, which needs no cartesian square. (3) lft from 09ZW with W = V x_{V'} W'. (4) lfp from 01TQ plus the new fp-lift node. (5) definitional assembly of proper and fp. (6) when h is an isomorphism, W->V is etale; 06A5 then gives C' flat over A'. (7) fibres agree because kappa(v') kills the square-zero ideal; 02GM plus source locality make W'->V' etale. (8) atlas detection makes h' chartwise etale and 05ZH-detect turns that into an isomorphism; the converse is by base change. Edge cases checked: I=0, empty spaces, non-quasi-compact charts. Batch-5: the trf representable-etale-scheme-tests and etale-source-atlas-detection citations, and the three sfb nodes that reach def-trf-algebraic-space, are generic algebraic-space foundations (03EC/03FS, a definition), not trace-formula or Poincare steps, so all are accepted. The declared tool_uses are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatDeformationProperties",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.flat_deformation_properties",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.flatDeformationMap",
+   "AlgebraicGeometry.AlgebraicSpace.flat_deformation_properties"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatDeformationProperties.lean",
+  "statement": "theorem flat_deformation_properties {S : Scheme.{u}} {B B' : AlgebraicSpace S} (i : B ⟶ B') (hi : IsSpaceFirstOrderThickening i) {P' Q' : Over B'} (h' : P' ⟶ Q') (hflat : MapIsFlat P'.hom) : (IsIso h'.left ↔ IsIso (flatDeformationMap i h')) ∧ (MapIsProper h'.left ↔ MapIsProper (flatDeformationMap i h')) ∧ ((MapIsLocallyOfFinitePresentation h'.left ∧ MapIsQuasiCompact h'.left.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal h'.left.hom.hom)) ↔ (MapIsLocallyOfFinitePresentation (flatDeformationMap i h') ∧ MapIsQuasiCompact (flatDeformationMap i h').hom.hom ∧ MapIsQuasiCompact (pullback.diagonal (flatDeformationMap i h').hom.hom)))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The slice morphism encodes precisely a B-prime morphism. flatDeformationMap is its concrete map of sheaf pullbacks, induced by the identity of B and the given morphism; finite presentation is expanded as lfp, quasi-compact and quasi-compact diagonal. Reuses the landed definition owners def-sfb-space-square-zero-extension-data, def-sfb-space-morphism-properties, def-sfb-space-sheaf-fibre-product and def-sfb-proper-curve-moduli without defining another notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41bbf1618",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery of returned 480214d3dd72 (H2). The Lean file is byte-identical; only stmt_deps and lean.note change. stmt_deps swap theorem lem-trf-space-enlarged-etale-ringed-site-model for def-sfb-space-sheaf-fibre-product (owner of enlargedFibreProduct) and add def-sfb-proper-curve-moduli (owner of MapIsQuasiCompact), both landed. Matches Stacks 0CG6 (3,5,7,14,21) in the first-order case with no extra hypotheses (only P' flat). IsSpaceFirstOrderThickening is representable IsClosedImmersion with ker^2=0. flatDeformationMap is the canonical pullback.map (identity on B, h' on the other factor), not hollow. MapIsProper is separated, finite type (qc plus chartwise lft) and universally closed. Finite presentation is lfp, qc and qc presheaf diagonal. Statement field verbatim; sorry-only proof; docstrings present; one owner per notion; edge cases (zero ideal, empty spaces, non-flat Q', non-qc charts) fine. No compile (no file changed)."
+ }
+}

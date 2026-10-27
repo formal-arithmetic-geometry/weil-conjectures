@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-space-dual-effective-line-triviality",
+ "kind": "statement",
+ "title": "Two opposite effective line classes on a proper integral algebraic space",
+ "statement": "Let $k$ be a field and $X$ an algebraic space over $\\operatorname{Spec}k$ [def-pc-scheme, def-trf-algebraic-space]. Assume $X\\to\\operatorname{Spec}k$ is proper, meaning separated, of finite type and universally closed, and $X$ is integral, meaning nonempty, reduced and irreducible. Let $L$ be a line module on its small etale structure sheaf, that is, an $\\mathcal O_X$-module etale locally isomorphic to $\\mathcal O_X$ [def-trf-algebraic-space]. Write $L^{-1}=\\mathcal H om_{\\mathcal O_X}(L,\\mathcal O_X)$, with its local evaluation identification $L\\otimes L^{-1}\\simeq\\mathcal O_X$. If both $\\Gamma(X,L)$ and $\\Gamma(X,L^{-1})$ contain nonzero sections, then $L\\simeq\\mathcal O_X$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0DMZ, lemma-characterize-trivial-pic-integral"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-sfb-reduced-algebraic-space",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Choose nonzero $s\\in\\Gamma(X,L)$ and $t\\in\\Gamma(X,L^{-1})$. The dual $L^{-1}$ is again a line module: on an etale chart $U$ with $L|_U\\simeq\\mathcal O_U$ as in [def-trf-algebraic-space], $L^{-1}|_U\\simeq\\mathcal H om_{\\mathcal O_U}(\\mathcal O_U,\\mathcal O_U)=\\mathcal O_U$, and a local basis $e$ of $L$ gives the dual local basis $e^\\vee$ of $L^{-1}$ with $e^\\vee(e)=1$. Properness includes separatedness and finite type, so [lem-sfb-space-generic-line-section-injectivity] applies to $M=L$ and to $M=L^{-1}$. At a geometric generic point $\\bar\\eta$ its injectivity makes both germs $s_{\\bar\\eta}$, $t_{\\bar\\eta}$ nonzero. Its field stalk $F$ makes $L_{\\bar\\eta}$ a one-dimensional vector space; taking $e$ on a trivializing chart through which $\\bar\\eta$ factors, $s_{\\bar\\eta}=a e$ and $t_{\\bar\\eta}=b e^\\vee$ with $a,b\\in F\\setminus\\{0\\}$, so the germ of the evaluation $c=t(s)\\in\\Gamma(X,\\mathcal O_X)$ is $ab\\ne0$. Consequently $c$ is nonzero, since the germ of a zero section is zero.",
+   "uses": [
+    "lem-sfb-space-generic-line-section-injectivity",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMZ, lemma-characterize-trivial-pic-integral"
+   }
+  },
+  {
+   "text": "An irreducible nonempty point space is connected: a disconnection would express it as the union of two proper closed subsets. Thus $X$ is proper, reduced, nonempty and connected, exactly the hypotheses of [lem-sfb-space-proper-connected-function-field]. This gives a field $K=\\Gamma(X,\\mathcal O_X)$. Since $c\\ne0$, choose its multiplicative inverse $d=c^{-1}\\in K$. There is no claim that $K=k$, and no geometric connectedness assumption is used.",
+   "uses": [
+    "lem-sfb-space-proper-connected-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMZ, lemma-characterize-trivial-pic-integral"
+   }
+  },
+  {
+   "text": "The section $s$ defines $u:\\mathcal O_X\\to L$, and $v=d\\,t:L\\to\\mathcal O_X$ is a sheaf-module morphism. On every etale chart trivializing $L$ as in [def-trf-algebraic-space], write $s=a e$, $t=b e^\\vee$. The two maps have coefficients $a$ and $db$, and both composites have coefficient $dab=dc=1$. Hence $vu=1$ and $uv=1$ on the charts and therefore on the sheaves, by uniqueness in the sheaf axiom. Thus $u$ and $v$ are inverse isomorphisms, proving $L\\simeq\\mathcal O_X$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMZ, lemma-characterize-trivial-pic-integral"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-generic-line-section-injectivity",
+  "lem-sfb-space-proper-connected-function-field",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0DMZ, lemma-characterize-trivial-pic-integral"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]rivial.*[Pp]ic|[Pp]ic.*[Tt]rivial|nonzero.*[Ss]ection.*[Dd]ual",
+   "results": "19 hits; top: Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/Algebra/Tropical/Basic.lean, Mathlib/LinearAlgebra/QuadraticForm/Basic.lean, Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, spectra, ring Picard groups or topological bundles; none states the required algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"IsIntegral\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, spectra, ring Picard groups or topological bundles; none states the required algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on a proper integral space is trivial if it and its inverse have a nonzero global section",
+   "results": "8 hits; top: Bundle.Trivial.trivialization_symm_apply, Bundle.Trivial.trivialization.isLinear, Bundle.Trivial.symmₗ_trivialization, Bundle.Trivial.contMDiffVectorBundle, Bundle.Trivial.trivialization_source, Bundle.Trivial.trivialization_baseSet, Pretrivialization.symmₗ, Bundle.Trivial.symmL_trivialization",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, spectra, ring Picard groups or topological bundles; none states the required algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a proper integral algebraic space is trivial when both the sheaf and its dual have nonzero global sections",
+   "results": "8 hits; top: AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, CommRing.Pic.subsingleton_iff, CommRing.Pic.subsingleton_iffₛ, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.IsIntegral.component_integral, CommRing.Pic.instSubsingletonOfIsLocalRing",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, spectra, ring Picard groups or topological bundles; none states the required algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle with effective sections in both it and its inverse on a proper integral space is isomorphic to the structure sheaf",
+   "results": "8 hits; top: AlgebraicGeometry.StructureSheaf.isIso_to_global, AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen, AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.StructureSheaf.const_mul_rev, AlgebraicGeometry.StructureSheaf.const_self, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, spectra, ring Picard groups or topological bundles; none states the required algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]rivial.*[Pp]ic|[Pp]ic.*[Tt]rivial|nonzero.*[Ss]ection.*[Dd]ual",
+   "results": "19 hits; top: Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/Topology/Algebra/Valued/LocallyCompact.lean, Mathlib/Algebra/Tropical/Basic.lean, Mathlib/Topology/Algebra/Module/Star.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle and its inverse both have sections on a proper integral algebraic space so the line bundle is trivial",
+   "results": "8 hits; top: Bundle.Trivial.trivialization_symm_apply, Trivialization.symm, Trivialization.Prod.invFun', Trivialization.Prod.left_inv, Bundle.Trivial.symmₗ_trivialization, Trivialization.symmₗ.congr_simp, AlgebraicGeometry.LocallyRingedSpace.component_nontrivial, Trivialization.symmL",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"IsIntegral\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf with nonzero global sections in both opposite Picard classes on a proper integral space is trivial",
+   "results": "8 hits; top: CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, CommRing.Pic.subsingleton_iff, CommRing.Pic.instSubsingletonOfIsLocalRing, CommRing.Pic.subsingleton_iffₛ, CommRing.Pic.mk_eq_one_iff, CommRing.Pic.mk_eq_one, CommRing.relPic_eq_top, CommRing.Pic.instFreeOfSubsingleton",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line module on a proper integral algebraic space is trivial if it and its dual both have nonzero global sections",
+   "results": "8 hits; top: AlgebraicGeometry.IsIntegral.nonempty, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.instSubsingletonCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensBot, AlgebraicGeometry.AffineSpace.not_isIntegralHom",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-valuation-line-triviality",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Valuation-ring triviality used to establish uniqueness for two rigidified classes, before applying the valuative criterion. Field-fibre input: Two opposite effective line classes on a proper integral algebraic space.",
+   "via": [
+    "lem-sfb-space-valuation-line-triviality",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-dual-effective-line-triviality",
+  "worker": "stage1",
+  "summary": "Read Stacks 0DMZ and 0DMY(1)--(3), with 0ABV for the generic-point input. Kept the statement unchanged, extracted the independent generic-injectivity and proper-connected-global-field inputs as statement-only nodes, and supplied the explicit inverse d t. Checked source and DAG/blueprint/Lean/Mathlib searches and the distinction between connectedness and geometric connectedness.",
+  "blueprint": "The inherited ancestor command returns None, retained with the complete existing via chain. Supports the field-fibre line-triviality input to valuation-ring uniqueness in the rigidified Picard route. Current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) is the enclosing direct-image preservation context; this supporting lemma follows its recorded Stacks source 0DMZ. Steps realize the generic nonvanishing, field of global functions, and final trivialization of that source."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-7a844b926",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-7a844b926 (reviewer sub-agent of L); spot-checked: The proof follows Stacks 0DMZ: I read the statement and the whole proof, and checked the statement and all three steps against it. The item statement is unchanged against live (still unsplit there, with the same stmt_deps); there is no repair note and no supersession. Step 1 applies lem-sfb-space-generic-line-section-injectivity (proper gives separated and finite type; integral matches the node's hypotheses) to get germs at the geometric generic point eta-bar, a field F there and ab≠0, so c≠0. Step 2: irreducible implies connected, and lem-sfb-space-proper-connected-function-field makes K a field, with no claim that K=k. Step 3 is an elementary local inverse: dab=1 on charts. FIX: step 1 applied the injectivity node to L^{-1} without saying that L^{-1} is a line module or where its dual basis comes from. Repaired from def-trf-algebraic-space (Hom(O_U,O_U)=O_U); def-trf-algebraic-space was added to the step-1 uses, and proof_deps is unchanged. Generic-injectivity node: true by the first half of 0DMZ plus 0ABV (minimal prime of a reduced chart lies over eta; the local ring there is a field and so is its strict henselization; any eta-bar lifts through u). Small cases: nodal/cuspidal OK; xy=0 shows irreducibility is needed; k[eps] shows reducedness is needed. Proper-connected field node: true by 0DMY(1)-(3). Small cases: Spec k' gives k'≠k; two P^1 meeting in a point give k; k×k and the empty space are excluded. No duplicates: I checked lem-sfb-space-proper-field-global-functions (geometric hypotheses, concludes =k), lem-pc-h0-proper-variety, lem-weil-pbc-proper-reduced-algclosed-global-sections-product, lem-sc-global-functions, lem-sfb-space-generic-freeness and the meromorphic chart node (regular only). Both new nodes are statement-only, self-contained, in the same unit, and not item clauses. No SGA is cited. Batch-5 flags: def-trf-algebraic-space, def-sfb-space-morphism-properties and def-a1-space-point-topology are general definitions, not steps of the trace formula or Poincaré duality, so all six are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDualEffectiveLineTriviality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.lineModule_trivial_of_dual_effective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDualEffectiveLineTriviality.lean",
+  "statement": "theorem lineModule_trivial_of_dual_effective (k : Type u) [Field k] (X : AlgebraicSpace (Spec (CommRingCat.of k))) (f : X ⟶ schemeSpace (Over.mk (𝟙 (Spec (CommRingCat.of k))))) (hf : MapIsProper f) (hred : X.IsReduced) [IrreducibleSpace (Point X.obj.obj)] (L : X.Modules) (hL : X.IsLineModule L) (hs : ∃ s : SheafOfModules.unit X.structureSheaf ⟶ L, s ≠ 0) (ht : ∃ t : L ⟶ SheafOfModules.unit X.structureSheaf, t ≠ 0) : Nonempty (L ≅ SheafOfModules.unit X.structureSheaf)",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00f53d234",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read node, Stacks 0DMZ, module, report and dependency declarations (structureSheaf/Modules/IsLineModule, MapIsProper = sep∧ft∧uc, IsReduced chartwise, Point + final étale topology, schemeSpace owned by def-trf-scheme-algebraic-space existing:true). Every clause matches: Γ(L) as unit⟶L, Γ(Hom(L,O)) as L⟶unit, nonempty+irreducible via IrreducibleSpace, conclusion Nonempty(L≅O_X); f to schemeSpace of the terminal over-object is unique, so not extra data. No stronger hypotheses, universes bound, empty space excluded, K≠k admitted. Node diff vs live = only 4 landed definition stmt_deps added; lean.statement verbatim; sorry only; docstrings carry source, blueprint id and 3 proof steps; no parallel landing, no repair note. Advisory: Point owner reached transitively via def-a1-space-point-topology; Mathlib.Topology.Irreducible import probably redundant. Not recompiled (no file changed)."
+ }
+}

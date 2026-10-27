@@ -26,51 +26,51 @@
  ],
  "proof": [
   {
-   "text": "Let J=Ann_R(M). By [lem-weil-pbc-finite-module-support-annihilator], the support hypothesis says that every prime containing J is the maximal ideal m, i.e. V(J) is contained in {m}. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], the radical of J is the intersection of the primes in V(J), hence contains m. The ideal m is finitely generated because R is Noetherian; [lem-weil-pbc-fg-ideal-radical-power] therefore gives N>=1 with m^N contained in J, hence m^N M=0.",
+   "text": "Let J be the annihilator of M. For each prime p of R/J, its inverse image in R contains J, so belongs to Supp(M) by [lem-weil-pbc-finite-module-support-annihilator]. The support hypothesis identifies this inverse image with the maximal ideal. Since the quotient map is integral, p is maximal as well. Ring.krullDimLE_zero_iff therefore gives Krull dimension at most zero for R/J.",
    "uses": [
-    "lem-weil-pbc-finite-module-support-annihilator",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-    "lem-weil-pbc-fg-ideal-radical-power"
+    "lem-weil-pbc-finite-module-support-annihilator"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00L5 proof, first paragraph"
+    "place": "Tag 00L5, lemma-support-point; alternate annihilator quotient argument using Tag 00KH and Tag 00JB"
    }
   },
   {
-   "text": "The powers filtration $M \\supset \\mathfrak mM \\supset \\cdots \\supset \\mathfrak m^N M=0$ has finitely many terms. Each quotient $\\mathfrak m^i M/\\mathfrak m^{i+1}M$ is naturally a finite-dimensional vector space over the residue field $R/\\mathfrak m$: it is finite as an $R$-module because $\\mathfrak m^iM$ is a submodule of the finite module $M$ over the Noetherian ring $R$ [lem-weil-pbc-noetherian-submodule-finite], and $\\mathfrak m$ acts by zero on the quotient. A finite-dimensional vector space has a finite flag by subspaces, hence finite length as an $R/\\mathfrak m$-module and therefore as an $R$-module. Applying [lem-weil-pbc-length-additive-short-exact] successively to the short exact sequences of adjacent filtration quotients gives finite length for $M$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-weil-pbc-length-additive-short-exact"
-   ],
+   "text": "The quotient R/J is Noetherian by Mathlib Ideal.Quotient.isNoetherianRing. Mathlib IsNoetherianRing.isArtinianRing_of_krullDimLE_zero applied to its Krull-dimension bound gives IsArtinianRing (R ⧸ J).",
+   "uses": [],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00L5 proof, filtration by powers of the maximal ideal"
+    "place": "Tag 00L5, lemma-support-point; alternate annihilator quotient argument using Tag 00KH and Tag 00JB"
    }
   },
   {
-   "text": "Since $M$ is nonzero, the strict inclusion $0\\subsetneq M$ is a chain of length one in the definition of $\\mathrm{length}_R(M)$ [def-weil-pbc-module-length]. Thus its finite length is positive.",
+   "text": "Use Mathlib Module.quotientAnnihilator for the canonical R/J-action on M. The existing finite generating set over R also generates over R/J by Module.Finite.of_restrictScalars_finite. Mathlib isArtinian_of_fg_of_artinian' gives IsArtinian (R/J) M. The bijective semilinear identity along the surjective quotient map, via LinearMap.isArtinian_iff_of_bijective, gives IsArtinian R M.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00L5, lemma-support-point; alternate annihilator quotient argument using Tag 00KH and Tag 00JB"
+   }
+  },
+  {
+   "text": "M is Noetherian because R is Noetherian and M is finite. Module.length_ne_top now makes its length finite and Module.length_pos makes it positive. Take the natural number given by ENat.toNat, using ENat.natCast_toNat and ENat.toNat_pos.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00L5 conclusion"
+    "place": "Tag 00L5, lemma-support-point; alternate annihilator quotient argument using Tag 00KH and Tag 00JB"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-module-support-annihilator",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "lem-weil-pbc-fg-ideal-radical-power",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-length-additive-short-exact"
+  "lem-weil-pbc-finite-module-support-annihilator"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00L5 proof"
+  "place": "Tag 00L5, lemma-support-point; alternate annihilator quotient argument using Mathlib Hopkins-Levitzki and Artinian module results"
  },
  "mathlib_searches": [
   {
@@ -143,11 +143,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-length-additive-short-exact",
-  "lem-weil-pbc-finite-module-support-annihilator",
-  "lem-weil-pbc-fg-ideal-radical-power"
+  "lem-weil-pbc-finite-module-support-annihilator"
  ],
  "reviewed": {
   "date": "2026-10-10",
@@ -199,5 +195,26 @@
    "def-weil-pbc-module-length"
   ]
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261023T105235-L-3529973",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

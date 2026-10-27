@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-local-colimit-residue-field",
+ "kind": "statement",
+ "title": "Locality and residue fields of a directed local-ring colimit",
+ "statement": "Let $I$ be a nonempty small directed poset and $(A_i,u_{ij})_{i\\le j}$ a direct system of commutative local rings, where local means having a unique maximal ideal $\\mathfrak m_i$. Suppose $u_{ij}^{-1}(\\mathfrak m_j)=\\mathfrak m_i$ for every $i\\le j$. Let $(A,(\\alpha_i))$ be its colimit in commutative rings [def-weil-pbc-category-colimit]. Then $M:=\\bigcup_i\\alpha_i(\\mathfrak m_i)$ is the unique maximal ideal of $A$, and $\\alpha_i^{-1}(M)=\\mathfrak m_i$ for every $i$; in particular $A$ and all $\\alpha_i$ are local. Write $k_i=A_i/\\mathfrak m_i$ and $k=A/M$. The transition maps $[x]\\mapsto[u_{ij}(x)]$ on the $k_i$ and the maps $\\rho_i:k_i\\to k$, $[x]\\mapsto[\\alpha_i(x)]$, are well-defined field homomorphisms. Each $\\rho_i$ is injective, and $(k,(\\rho_i))$ is a colimit of the residue-field diagram in commutative rings. No injectivity, surjectivity, flatness or finiteness assumption on the $u_{ij}$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GI, lemma-colimit-henselian, proof: omitted argument that the ring colimit is local and its residue field is the colimit of the stage residue fields."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The nonempty directed poset is filtered. Use the concrete filtered-colimit representation and eventual-equality theorems in [lem-pc-filtered-colimit-commrings-elementwise]. For a stage element x whose image is a unit, represent an inverse at another stage and move both to a common stage k. Their product maps to 1, so eventual equality makes that product equal to 1 at a later stage. Thus the image of x there is a unit. Reflect units along the two local transition maps to conclude that x is a unit. Every cocone leg is therefore local.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: expansion of the omitted locality and residue-field colimit argument; elementary ideal and quotient-ring calculations."
+   }
+  },
+  {
+   "text": "The colimit is nonzero: otherwise 0 at any stage would have unit image and hence be a unit, contradicting that stage being local. Represent any colimit element x at a stage. At that local stage either its representative or 1 minus the representative is a unit; mapping this alternative to the colimit proves locality. By the local-unit criterion [lem-weil-pbc-local-ring-unit-criterion], or equivalently the definition of the maximal ideal as nonunits, every local cocone leg contracts the maximal ideal to the stage maximal ideal. Element representation now proves that the colimit maximal ideal equals the union of their images.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: expansion of the omitted locality and residue-field colimit argument; elementary ideal and quotient-ring calculations."
+   }
+  },
+  {
+   "text": "Use Mathlib maximalIdeal_comap for the contraction formula. The canonical maps on residue fields exist for local maps and commute with the quotient maps. Each is injective because it is a unital ring homomorphism from a field to the nonzero residue field of the colimit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: expansion of the omitted locality and residue-field colimit argument; elementary ideal and quotient-ring calculations."
+   }
+  },
+  {
+   "text": "For any commutative ring B, compose the compatible maps from the stage residue fields with the stage quotient maps. Their compatibility gives a cocone on the original diagram. The colimit universal property [def-weil-pbc-category-colimit] gives t from the original colimit to B. If z lies in its maximal ideal, choose a representative x at a stage; contraction shows that x is in the stage maximal ideal, so t(z)=0. Factor t through the quotient by the maximal ideal with Ideal.Quotient.lift. Surjectivity of each stage quotient proves the required residue-map composites.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: expansion of the omitted locality and residue-field colimit argument; elementary ideal and quotient-ring calculations."
+   }
+  },
+  {
+   "text": "For uniqueness, represent an arbitrary residue class by an element of the colimit, and that element by a stage element. The asserted composite of any candidate map with that stage residue map determines its value on the class, so it agrees with the constructed map. This works for arbitrary B, including the zero ring.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI, lemma-colimit-henselian, proof: expansion of the omitted locality and residue-field colimit argument; elementary ideal and quotient-ring calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GI, lemma-colimit-henselian, omitted locality and residue-field-colimit argument; M9 Lean proof uses unit reflection and the one-minus-unit characterization of local rings to avoid constructing a separate ideal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A directed colimit of commutative local rings along local homomorphisms is local and its residue field is the ring colimit of the residue fields",
+   "results": "8 hits: Ring.DirectLimit.commRing, Ring.DirectLimit, Ring.DirectLimit.ring, IsLocalRing.instCommRingResidueField, AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit, CommRingCat.Colimits.colimit, CommRingCat.Colimits.colimitIsColimit, AlgebraicGeometry.LocallyRingedSpace.instHasColimits",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-colimit constructions and induced residue maps do not prove locality of an arbitrary ring colimit or the residue-field colimit universal property"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, DirectLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-colimit constructions and induced residue maps do not prove locality of an arbitrary ring colimit or the residue-field colimit universal property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a directed system of local rings with local maps, the maximal ideal of the colimit is the union of the maximal ideal images and the residue field is the colimit",
+   "results": "8 hits: IsLocalRing.ResidueField, IsLocalRing.isLocalHom_residue, IsLocalRing.instInhabitedResidueField, IsLocalRing.instIsLocalHomResidueFieldRingHomResidue, DirectLimit.instFieldOfRingHomClass, IsLocalRing.residue, IsLocalRing.residue_def, IsLocalRing.instCommRingResidueField",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-colimit constructions and induced residue maps do not prove locality of an arbitrary ring colimit or the residue-field colimit universal property"
+  },
+  {
+   "tool": "grep",
+   "query": "(colimit|DirectLimit|directLimit).*(local|residue)|(local|residue).*(colimit|DirectLimit|directLimit)",
+   "results": "0 hits: ; source subdirectory RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-colimit constructions and induced residue maps do not prove locality of an arbitrary ring colimit or the residue-field colimit universal property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The residue field functor commutes with directed limits of local rings and local ring homomorphisms",
+   "results": "8 hits: IsLocalRing.ResidueField.map_comp_residue, IsLocalRing.ResidueField.map_residue, IsLocalRing.ResidueField.map, IsLocalRing.ResidueField.map_map, IsLocalRing.ResidueField.map_comp, IsLocalRing.ResidueField.algebraMap_residue, AlgebraicGeometry.Scheme.residue_descResidueField, Ideal.ResidueField.map",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-colimit constructions and induced residue maps do not prove locality of an arbitrary ring colimit or the residue-field colimit universal property"
+  },
+  {
+   "tool": "grep",
+   "query": "def map |map_comp_residue|map_residue",
+   "results": "4 hits: 96, 116, 121, 190; source subdirectory RingTheory/LocalRing/ResidueField/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-colimit constructions and induced residue maps do not prove locality of an arbitrary ring colimit or the residue-field colimit universal property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed colimit of commutative local rings along local homomorphisms is local and its residue field is the colimit of the residue fields",
+   "results": "8 hits: IsLocalRing.instIsLocalHomResidueFieldRingHomResidue, RingHom.EssFiniteType.residueFieldMap, IsLocalRing.isLocalHom_residue, IsLocalRing.ResidueField, IsLocalRing.instCommRingResidueField, IsLocalRing.ResidueField.lift, IsLocalRing.ResidueField.map, IsLocalRing.ResidueField.map_residue",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps and filtered ring-colimit constructions do not give locality with the specified maximal ideal or the residue-field colimit universal property"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, DirectLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps and filtered ring-colimit constructions do not give locality with the specified maximal ideal or the residue-field colimit universal property"
+  },
+  {
+   "tool": "grep",
+   "query": "(colimit|DirectLimit|directLimit).*(local|residue)|(local|residue).*(colimit|DirectLimit|directLimit)",
+   "results": "0 hits: ; source subdirectory RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps and filtered ring-colimit constructions do not give locality with the specified maximal ideal or the residue-field colimit universal property"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The residue field of a filtered colimit of local rings and local ring homomorphisms is the colimit of residue fields",
+   "results": "8 hits: IsLocalRing.ResidueField, IsLocalRing.instCommRingResidueField, IsLocalRing.ResidueField.map, IsLocalRing.instInhabitedResidueField, CommRingCat.FilteredColimits.colimit, RingCat.FilteredColimits.colimit, IsLocalRing.residue, CommRingCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps and filtered ring-colimit constructions do not give locality with the specified maximal ideal or the residue-field colimit universal property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct limit of a directed system of local rings with local maps has maximal ideal equal to the union of maximal ideal images",
+   "results": "8 hits: map_nonunit, OfLocalizationMaximal, LocalSubring.map_maximalIdeal_eq_top_of_isMax, IsLocalization.AtPrime.map_eq_maximalIdeal, IsLocalRing.maximalIdeal.isMaximal, IsLocalRing.PrimeSpectrum.asIdeal_top, Ring.DirectLimit, IsLocalization.AtPrime.isMaximal_map",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps and filtered ring-colimit constructions do not give locality with the specified maximal ideal or the residue-field colimit universal property"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalRing|localRing|local_ring",
+   "results": "0 hits: ; source subdirectory Algebra/Colimit",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field maps and filtered ring-colimit constructions do not give locality with the specified maximal ideal or the residue-field colimit universal property"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-filtered-colimit-strictly-henselian-local",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. Local-ring permanence input at a compatible family of closed points: Stacks Tag 04GI. Tag 04GI, lemma-colimit-henselian, proof: omitted argument that the ring colimit is local and its residue field is the colimit of the stage residue fields.",
+   "via": [
+    "lem-sfb-filtered-colimit-strictly-henselian-local",
+    "lem-sfb-indfinite-contractible-base-wstrict",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-local-colimit-residue-field",
+  "worker": "stage1",
+  "summary": "Expanded the omitted Tag 04GI argument into eight steps: contraction of maximal ideals using eventual equality, ideal closure and units, quotient fields and canonical maps, and the ring-colimit universal property. Reused existing Mathlib leaves for the two substantive inputs; no new nodes and no statement changes. No exact project attachment or Mathlib theorem was found.",
+  "blueprint": "Current blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), ordinary open direct image, through the recorded tame-root-tower dependency chain. This auxiliary algebra input fills exactly the omitted locality/residue-field assertion of Tag 04GI. The inherited blueprint.from.node is null because the created.item chain ends at a Lean-module-created node; the existing precise place and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-d7c81fd56",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-d7c81fd56 (reviewer sub-agent of L); spot-checked: The item's statement and stmt_deps are byte-identical to the live unsplit node. No new nodes are created. proof_deps equal the union of the steps' uses. The delivery writes out the argument that Stacks Tag 04GI (lemma-colimit-henselian, algebra.tex) omits ('R is local … residue field is colim κ_i (argument omitted)'), which is what D5 asks for. I read all three cited statements: def-weil-pbc-category-colimit (says a nonempty directed poset is filtered; universal property), lem-pc-filtered-colimit-commrings-elementwise (clauses (1)/(2) hold for any CRing colimit) and lem-weil-pbc-local-ring-unit-criterion. Steps: step 1 uses clause (1). Step 2 gets the contraction from clause (2) together with u_{jℓ}(m_j)⊆m_ℓ and u_{iℓ}^{-1}(m_ℓ)=m_i. Step 3 proves M is an ideal and 1∉M. Step 4 gets units from the unit criterion at A_i, which gives M maximal and unique and the α_i local. Step 5 proves the quotients are fields. Step 6 proves the maps are well defined and injective by the kernel argument. Steps 7–8 prove existence and uniqueness of the factorization for any ring B via the cocone h_i q_i and surjectivity of q. All are correct; the steps marked elementary really are short. Edge cases: one-element I; a system of fields; Z/4→F_2 (allowed); Z_(p)→Q (excluded); empty I (excluded, needed so M is an ideal). The parent's step 1 uses exactly the item's clauses. rg -L searches for 04GI and for colimits of local rings found no duplicate or generalization. All dependencies are generic Mathlib leaves, so there is no route or cycle issue and no tool_uses. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalColimitResidueField",
+  "declaration": "CommRingCat.local_colimit_residue_field",
+  "file": "lean/Sheaf/RingTheory/LocalColimitResidueField.lean",
+  "statement": "theorem local_colimit_residue_field {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [∀ i : I, IsLocalRing (F.obj i)] [∀ (i j : I) (f : i ⟶ j), IsLocalHom (F.map f).hom] (c : Cocone F) (hc : IsColimit c) : ∃ (_ : IsLocalRing c.pt) (_ : ∀ i : I, IsLocalHom (c.ι.app i).hom), (IsLocalRing.maximalIdeal c.pt : Set c.pt) = ⋃ i : I, (c.ι.app i).hom '' (IsLocalRing.maximalIdeal (F.obj i) : Set (F.obj i)) ∧ (∀ i : I, (IsLocalRing.maximalIdeal c.pt).comap (c.ι.app i).hom = IsLocalRing.maximalIdeal (F.obj i)) ∧ (∀ i : I, Function.Injective (IsLocalRing.ResidueField.map (R := F.obj i) (S := c.pt) (c.ι.app i).hom)) ∧ (∀ (B : CommRingCat.{u}) (h : ∀ i : I, IsLocalRing.ResidueField (F.obj i) →+* B), (∀ (i j : I) (f : i ⟶ j), (h j).comp (IsLocalRing.ResidueField.map (F.map f).hom) = h i) → ∃! g : IsLocalRing.ResidueField c.pt →+* B, ∀ i : I, g.comp (IsLocalRing.ResidueField.map (R := F.obj i) (S := c.pt) (c.ι.app i).hom) = h i)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f4aea1a0",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement verbatim equals the file signature. Every node clause matches: nonempty directed poset (I : Type u, the project size convention, same as the parent); local rings; IsLocalHom transitions, equivalent to u_ij^{-1}(m_j)=m_i; arbitrary IsColimit cocone; Prop-only existentials for locality of A and the legs; maximal ideal = raw union of images; comap = m_i; injective ResidueField.map legs; full ∃! universal property over any B : CommRingCat.{u}, including zero B. Mathlib ResidueField/ResidueField.map reused, no hollow defs, sorry only, docstrings give Tag 04GI and the blueprint id with the 8-step proof, proof deps imported privately. Edge cases checked: empty I excluded (needed), singleton, fields, Z/4→F2, Z_(p)→Q excluded, zero B. No duplicate in Mathlib (only the IsLimit version, Constructions.lean:380) or in the project trees. Report has Worker report and Second reading sections. No change made, so no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T051916-L-655",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

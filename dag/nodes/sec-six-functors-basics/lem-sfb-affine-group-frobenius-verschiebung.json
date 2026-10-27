@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-affine-group-frobenius-verschiebung",
+ "kind": "statement",
+ "title": "Frobenius and Verschiebung on affine commutative groups",
+ "statement": "Let $k$ be a field [def-weil-field] of characteristic $p>0$, and let $G$ be a commutative affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Write $C=k[G]$ with coordinate Hopf maps $\\Delta,\\epsilon,S$ [lem-sfb-affine-group-coordinate-hopf], and put $\\sigma(c)=c^p$, $C^{(p)}=C\\otimes_{k,\\sigma}k$, $G^{(p)}=\\operatorname{Spec}C^{(p)}$ [def-weil-affine-spectrum], with the base-changed group operations. Tensor products are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Relative Frobenius is the group homomorphism $F_G:G\\to G^{(p)}$ with coordinate map $f_C:C^{(p)}\\to C$, $a\\otimes c\\mapsto ca^p$. There is a canonical group homomorphism $V_G:G^{(p)}\\to G$, defined by the following construction on coordinates. Let $\\Delta_p:C\\to C^{\\otimes p}$ be iterated comultiplication, and let $\\mathfrak S_p$ act by permuting tensor factors. Choose any $k$-basis $B$ of $C$. The invariant space $(C^{\\otimes p})^{\\mathfrak S_p}$ has a basis consisting of the sums of the distinct basis tensors in each permutation orbit. Define $\\lambda_C:(C^{\\otimes p})^{\\mathfrak S_p}\\to C^{(p)}$ by sending the singleton orbit $b^{\\otimes p}$ to $b\\otimes1$ and every non-singleton orbit sum to zero. This map is independent of $B$; the image of $\\Delta_p$ is invariant, and $v_C=\\lambda_C\\Delta_p:C\\to C^{(p)}$ is a Hopf algebra homomorphism, in the sense of a $k$-algebra map preserving comultiplication, counit and antipode [lem-sfb-hopf-spectrum-functor], defining $V_G$. These maps satisfy $V_G\\circ F_G=[p]_G$, where $[p]_G$ sums $p$ copies on every algebra-valued point. No connectedness or perfection hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 11.39 and Proposition 11.40(a), printed pp.224-225. The basis-orbit description spells out the canonical linear map in the diagram of Definition 11.39."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-hopf-spectrum-functor",
+  "def-sfb-coordinate-hopf-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Use the coordinate Hopf maps of [lem-sfb-affine-group-coordinate-hopf]. Commutativity of the group law in [def-sc-group-scheme] gives $s\\Delta=\\Delta$ by pulling back $m\\circ s=m$. Coassociativity gives all bracketings of $\\Delta_p$ the same value. Swapping any adjacent outputs is then insertion of $s\\Delta=\\Delta$ into that iterated map, so $\\Delta_p(C)\\subset I_p(C)$. Iterating the algebra-map identity for $\\Delta$ also gives $\\Delta_p(ab)=\\Delta_p(a)\\Delta_p(b)$ and $\\Delta_p(1)=1^{\\otimes p}$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, comultiplication into invariant tensors"
+   }
+  },
+  {
+   "text": "The Frobenius map is well-defined: $(ra)\\otimes c=a\\otimes r^pc$ has the same image $cr^pa^p$. The binomial expansion gives $(a+b)^p=a^p+b^p$, since $p$ divides every intermediate binomial coefficient; products and units are preserved directly. Thus $f_C(a\\otimes c)=ca^p$ is a $k$-algebra map. Scalar extension [def-weil-module-base-change] and the tensor multiplication [lem-weil-pbc-algebra-tensor-pushout-universal-property] give, for $\\Delta(a)=\\sum a_i\\otimes b_i$, $(f_C\\otimes f_C)\\Delta^{(p)}(a\\otimes c)=c\\sum a_i^p\\otimes b_i^p=\\Delta(ca^p)$. Likewise $\\epsilon f_C(a\\otimes c)=c\\epsilon(a)^p=\\epsilon^{(p)}(a\\otimes c)$ and $S f_C=f_C S^{(p)}$. Hence the spectrum functor gives the stated group homomorphism $F_G$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, Frobenius coordinate map and reference to 2.28"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-symmetric-invariant-frobenius-projection] with $M=C$. It gives exactly the orbit basis, basis-independent map $\\lambda_C$, naturality, and tensor compatibility required here. Define $v=\\lambda_C\\Delta_p$. For invariant $x,y$, apply naturality to $\\mu:C\\otimes C\\to C$ and then tensor compatibility: $\\lambda_C(xy)=\\mu^{(p)}\\kappa(\\lambda_C(x)\\otimes\\lambda_C(y))=\\lambda_C(x)\\lambda_C(y)$. With $x=\\Delta_p(a),y=\\Delta_p(b)$, step 1 implies $v(ab)=v(a)v(b)$. Naturality for $k\\to C$ and the unit clause give $v(1)=1$ and $v(r)=1\\otimes r$. Thus $v$ is a $k$-algebra map.",
+   "uses": [
+    "lem-sfb-symmetric-invariant-frobenius-projection",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39, printed p.224, the invariant-tensor arrow and coordinate homomorphism"
+   }
+  },
+  {
+   "text": "Write $\\tau$ for interleaving two blocks of $p$ factors. The Hopf identities give\n$$\\Delta^{\\otimes p}\\Delta_p=\\tau(\\Delta_p\\otimes\\Delta_p)\\Delta.$$\nIndeed both sides are $2p$-fold iterated comultiplication: coassociativity removes brackets and cocommutativity, as in step 1, allows the interleaving permutation. Apply naturality of $\\lambda$ to $\\Delta:C\\to C\\otimes C$, then its tensor formula to the right-hand side. Under $\\kappa$ this yields $\\Delta^{(p)}v=(v\\otimes v)\\Delta$. Applying naturality to $\\epsilon$ and $S$ similarly gives $\\epsilon^{(p)}v=\\epsilon$ and $S^{(p)}v=vS$: the input identities are $\\epsilon^{\\otimes p}\\Delta_p(a)=\\epsilon(a)1^{\\otimes p}$ (iterate the counit identity), and $S^{\\otimes p}\\Delta_p=\\Delta_pS$ (pull back the elementary group identity $(g_1\\cdots g_p)^{-1}=g_1^{-1}\\cdots g_p^{-1}$ in a commutative group). Thus $v$ preserves all three Hopf maps. By [lem-sfb-hopf-spectrum-functor], it defines the canonical group homomorphism $V_G$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-sc-group-scheme",
+    "lem-sfb-symmetric-invariant-frobenius-projection",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 11.39 and its functoriality/product properties, printed pp.224-225"
+   }
+  },
+  {
+   "text": "Let $\\mu_p:C^{\\otimes p}\\to C$ multiply the factors. For a singleton orbit $b^{\\otimes p}$, both $f_C\\lambda_C$ and $\\mu_p$ give $b^p$. For a nonconstant orbit with multiplicities $n_1,\\ldots,n_r<p$ summing to $p$, its size is $p!/(n_1!\\cdots n_r!)$, divisible by $p$ because the denominator is prime to $p$. All its tensors have the same product. Consequently $\\mu_p(s_O)=0=f_C\\lambda_C(s_O)$. The orbit basis gives $f_C\\lambda_C=\\mu_p$ on $I_p(C)$, hence $f_Cv=\\mu_p\\Delta_p$. On $R$-points the last map sends $a$ to the value of $a$ on the product of $p$ copies of that point, by the definition of the coordinate comultiplication. It is therefore the pullback of $[p]_G$. Contravariance of spectrum identifies $f_Cv$ with $V_G\\circ F_G$, proving the identity. No cancellation of Frobenius, reducedness, connectedness or inverse of $\\sigma$ was used.",
+   "uses": [
+    "lem-sfb-symmetric-invariant-frobenius-projection",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-sc-group-scheme",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.40(a), printed p.225, commuting coordinate square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-sc-group-scheme",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-hopf-spectrum-functor",
+  "lem-sfb-symmetric-invariant-frobenius-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 11.39 and Proposition 11.40(a), printed pp.224-225; explicit Hopf verification supplied by Q43."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"verschiebung\"",
+   "results": "12 hits; WittVector.verschiebungPoly, WittVector.verschiebungFun, WittVector.verschiebungFun_isPoly, WittVector.verschiebungFun_coeff_succ, WittVector.verschiebungFun_coeff_zero, WittVector.verschiebungPoly_zero, WittVector.verschiebungFun_coeff, WittVector.verschiebung",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector Verschiebung and Frobenius identities concern Witt vectors, not arbitrary finite-type affine group schemes or their relative Frobenius."
+  },
+  {
+   "tool": "grep",
+   "query": "verschiebung|relativeFrobenius|relative_frobenius|frobenius.*faithfullyFlat",
+   "results": "25 hits; Mathlib/RingTheory/WittVector/MulP.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean, Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector Verschiebung and Frobenius identities concern Witt vectors, not arbitrary finite-type affine group schemes or their relative Frobenius."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth commutative affine group scheme over a field of characteristic p the relative Frobenius is faithfully flat and its composite with Verschiebung is multiplication by p",
+   "results": "8 hits; WittVector.frobenius_verschiebung, WittVector.iterate_verschiebung_iterate_frobenius, WittVector.verschiebung_frobenius_comm, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.frobeniusEquiv_apply, frobeniusEquiv_symm_comp_frobenius, WittVector.Isocrystal.frobenius, WittVector.frobenius_eq_map_frobenius",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector Verschiebung and Frobenius identities concern Witt vectors, not arbitrary finite-type affine group schemes or their relative Frobenius."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verschiebung factors multiplication by p for commutative algebraic group schemes and relative Frobenius of a smooth group is faithfully flat",
+   "results": "8 hits; RingHom.FaithfullyFlat, WittVector.verschiebung_frobenius, WittVector.verschiebung_mul_frobenius, Module.FaithfullyFlat.faithfulSMul, WittVector.frobenius_verschiebung, Module.FaithfullyFlat, WittVector.verschiebung_frobenius_comm, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector Verschiebung and Frobenius identities concern Witt vectors, not arbitrary finite-type affine group schemes or their relative Frobenius."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Verschiebung on an arbitrary commutative algebraic group scheme is dual to symmetrized iterated comultiplication and satisfies V composed with relative Frobenius equals p",
+   "results": "8 hits; WittVector.verschiebung_frobenius_comm, WittVector.verschiebung_frobenius, WittVector.iterate_verschiebung_iterate_frobenius, WittVector.frobenius_verschiebung, WittVector.iterate_verschiebung_mul_left, WittVector.verschiebung_mul_frobenius, WittVector.iterate_verschiebung_mul, WittVector.verschiebung",
+   "date": "2026-10-24",
+   "verdict": "no match: WittVector Verschiebung and Frobenius identities concern Witt vectors, not arbitrary finite-type affine group schemes or their relative Frobenius."
+  },
+  {
+   "tool": "grep",
+   "query": "verschiebung|relativeFrobenius|relative_frobenius",
+   "results": "25 hits: Mathlib/RingTheory/WittVector/MulP.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/Complete.lean, Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean, Mathlib/RingTheory/WittVector/DiscreteValuationRing.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector operators and a general antipode identity do not construct Verschiebung on arbitrary commutative affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verschiebung of a commutative group scheme factors multiplication by p through relative Frobenius",
+   "results": "8 hits: WittVector.frobenius_verschiebung, WittVector.verschiebung_zmod, WittVector.verschiebung_frobenius, WittVector.verschiebung, WittVector.verschiebung_mul_frobenius, WittVector.verschiebung_frobenius_comm, WittVector.ghostComponent_verschiebung, WittVector.verschiebung_isPoly",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector operators and a general antipode identity do not construct Verschiebung on arbitrary commutative affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verschiebung\"",
+   "results": "12 hits: WittVector.verschiebungPoly, WittVector.verschiebungFun, WittVector.verschiebungFun_isPoly, WittVector.verschiebungFun_coeff_succ, WittVector.verschiebungFun_coeff_zero, WittVector.verschiebungPoly_zero, WittVector.verschiebungFun_coeff, WittVector.verschiebung",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector operators and a general antipode identity do not construct Verschiebung on arbitrary commutative affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative affine group scheme in characteristic p construct Verschiebung by symmetric invariant tensor comultiplication and prove V composed with relative Frobenius equals multiplication by p",
+   "results": "8 hits: WittVector.verschiebung_frobenius, WittVector.verschiebung_frobenius_comm, WittVector.frobenius_verschiebung, WittVector.verschiebung_mul_frobenius, WittVector.iterate_verschiebung_iterate_frobenius, WittVector.verschiebung, WittVector.iterate_verschiebung_mul_left, WittVector.iterate_verschiebung_mul",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector operators and a general antipode identity do not construct Verschiebung on arbitrary commutative affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocommutative commutative Hopf algebra over a field of characteristic p has a Verschiebung map to its Frobenius scalar twist whose composite with Frobenius is iterated comultiplication followed by multiplication",
+   "results": "8 hits: WittVector.verschiebung_frobenius_comm, WittVector.iterate_verschiebung_iterate_frobenius, WittVector.iterate_verschiebung_mul_left, WittVector.iterate_verschiebung_mul, WittVector.verschiebung_frobenius, WittVector.verschiebung_mul_frobenius, WittVector.frobenius_verschiebung, HopfAlgebra.mul_antipode_lTensor_comul",
+   "date": "2026-10-24",
+   "verdict": "no match: Witt-vector operators and a general antipode identity do not construct Verschiebung on arbitrary commutative affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-p-torsion-additive-embedding",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Definition 11.39 and Proposition 11.40(a), printed pp.224-225: canonical Verschiebung construction and the identity V composed with F equals multiplication by p.",
+   "via": [
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-group-frobenius-verschiebung",
+  "worker": "stage1",
+  "summary": "Checked Milne invariant-tensor construction and separated its natural linear projection into one general vector-space lemma; verified the Hopf diagrams explicitly and proved the multiplication-by-p identity by orbit cardinalities. No statement correction.",
+  "blueprint": "Realizes the existing supporting-input chain in blueprint.from.place, ending in Milne Definition 11.39 and Proposition 11.40(a); the current latest direct-image proof paragraph (3) contains no Verschiebung statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-07c1830f0",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-07c1830f0 (reviewer sub-agent of L); spot-checked: The item statement and stmt_deps are byte-identical to the base (clones/live); only the proof, status, proof_deps, split_report and searches changed. The item is still unsplit live and there is no repair note, so it is neither superseded nor a re-split. Source read: Milne iAG2017 §11(i), printed pp.224-225 (PDF 236-237), Def. 11.39 and Prop. 11.40(a). Milne's λ_A sends x(a⊗…⊗a) to a⊗x, and f_A sends a⊗x to x a^p; both match the item. New node lem-sfb-symmetric-invariant-frobenius-projection: it is true, and I checked it independently. A non-singleton orbit sum equals Σ_{S_p}(t)/∏n_i!, and Σ(b^{⊗p}) = p! b^{⊗p} = 0. So ker λ = Im Σ and λ is the canonical map I_p(M)/Im Σ ≅ M^{(p)}. This gives basis independence, naturality, the τ/κ tensor formula and the unit clause. Tested for p=2 with b'=b+d and with scaling over an imperfect k, and for infinite bases. The node is self-contained (B1-B3), cites the tensor and base-change definitions, and is general linear algebra rather than a restated item clause. The DAG grep (Verschiebung, invariant/symmetric tensors, S_p, orbit sums) and the Mathlib search (SymmetricPower is coinvariants) found no duplicate. Steps checked: 1, cocommutativity from m∘s=m, coassociativity and multiplicativity of Δ_p; 2, f_C well defined via the balancing relation and the p-th power map, compatible with the Hopf maps, then the Hopf spectrum functor applies; 3, λ(xy)=μ^{(p)}κ(λx⊗λy) by naturality for μ plus the tensor formula, with unit by naturality for u; 4, Δ^{⊗p}Δ_p equals τ(Δ_p⊗Δ_p)Δ up to permutation, which with naturality gives the Δ, ε and S compatibilities; 5, f_Cλ_C=μ_p because p divides |O| for non-singleton orbits, so f_C v = μ_pΔ_p = [p]^*. Small groups tested: G_m, G_a, α_p, μ_p. No SGA source, no tool_uses needed. review_split's 'no such node' output is a snapshot symlink artifact. The inherited null blueprint from.node comes from the base metadata. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupFrobeniusVerschiebung",
+  "declaration": "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.frobenius_verschiebung",
+  "declarations": [
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.twist",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.twistAlgebra",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.first",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.pure",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.invariants",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.orbit",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.orbitSum",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.projectionForBasis",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.projection",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.invariantProjection",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.iteratedComul",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.twistedComulGenerator",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.GroupMaps",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.Maps",
+   "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.frobenius_verschiebung"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupFrobeniusVerschiebung.lean",
+  "statement": "theorem frobenius_verschiebung (G : Scheme.{u}) [G.Over (Spec (CommRingCat.of k))] [IsAffine G] [GrpObj (G.asOver (Spec (CommRingCat.of k)))] [IsCommMonObj (G.asOver (Spec (CommRingCat.of k)))] [LocallyOfFiniteType (G ↘ Spec (CommRingCat.of k))] [QuasiCompact (G ↘ Spec (CommRingCat.of k))] : (∀ (J : Type u) (B : Module.Basis J k Γ(G, ⊤)), ∃ OB : Module.Basis (Set.range (orbit (J := J) p)) k (invariants k p Γ(G, ⊤)), ∀ t, (OB ⟨orbit p t, Set.mem_range_self t⟩).val = orbitSum k p B t) ∧ (∀ (J : Type u) (B : Module.Basis J k Γ(G, ⊤)) (t : Fin p → J), ((∀ i, t i = t ⟨0, (Fact.out : p.Prime).pos⟩) → projectionForBasis k p B (orbitSum k p B t) = first k p Γ(G, ⊤) (B (t ⟨0, (Fact.out : p.Prime).pos⟩))) ∧ ((¬ ∀ i, t i = t ⟨0, (Fact.out : p.Prime).pos⟩) → projectionForBasis k p B (orbitSum k p B t) = 0)) ∧ (∀ (J : Type u) (B : Module.Basis J k Γ(G, ⊤)), (projectionForBasis k p B).comp (invariants k p Γ(G, ⊤)).subtype = invariantProjection k p Γ(G, ⊤)) ∧ (∀ a, iteratedComul k Γ(G, ⊤) p a ∈ invariants k p Γ(G, ⊤)) ∧ Maps k p G",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem includes the orbit basis and orbit-value specification, basis independence, invariant iterated coproduct, both coordinate maps and their Hopf compatibility, and the specified spectrum group maps with F ≫ V = [p]. Real-data helpers in the same module give the Frobenius pushout, tensor invariants, orbit sums, coordinate projection and iterated coproduct. Maps and GroupMaps expand the clauses, fixing all three base-changed group operations. HopfAction.coordinateHopfAlgebra is reused through the existing-declaration definition node def-sfb-coordinate-hopf-algebra; the coaction-linearization theorem is not a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb1ea8d02",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 96741b6f8055. The item module is byte-identical to the previous head (sha256 bcd22c8c), whose mathematics was reviewed in full and is correct (twist pushout, orbit basis, λ projection, iterated comultiplication, pinned D/E/S/GrpObj, F≫V=𝟙^p). The H2 fault is repaired as prescribed: lem-sfb-hopf-coaction-linearization is removed from stmt_deps and replaced by the new definition node def-sfb-coordinate-hopf-algebra. That node's existing:true record on the unchanged module Sheaf.AlgebraicGeometry.HopfCoactionLinearization, declaration HopfAction.coordinateHopfAlgebra, has a statement verbatim with live lines 35-38; its body is Mathlib's canonical instance (inferInstance), so it is neither hollow nor a duplicate. Against the live item only lean and stmt_deps differ. There is no supersession and no collision with lem-sfb-symmetric-invariant-frobenius-projection (no Lean record yet). The report has Worker report and Second reading by NY sections. No compile was run because no file changed. Advisories: the landed docstrings of the instance still name lem-sfb-hopf-coaction-linearization as their blueprint node; the future symmetric-invariant projection node should reuse twist, invariants and orbitSum."
+ }
+}

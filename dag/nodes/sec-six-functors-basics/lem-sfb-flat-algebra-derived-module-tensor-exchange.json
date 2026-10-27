@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+ "kind": "statement",
+ "title": "Derived module tensor exchange over a flat algebra",
+ "statement": "Let $R\\to S$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map], let $K^\\bullet$ be any cochain complex of $S$-modules, and let $N$ be an $R$-module. Use ordinary tensor products [def-weil-pbc-module-tensor-product], derived categories with localization functors $Q_R,Q_S$ [def-weil-abstract-derived-category], and total tensor with differential $d(x\\otimes y)=dx\\otimes y+(-1)^{\\deg x}x\\otimes dy$ [def-pc-tensor-complex-sheaves]. Let $F^\\bullet\\to N[0]$ be any free $R$-module resolution [def-weil-pbc-free-module], with $F^i=0$ for $i>0$. Derived tensor is computed on K-flat resolutions [def-pc-module-kflat-complex]. There is a canonical isomorphism in $D(S)$\n$$Q_S\\operatorname{Tot}(K^\\bullet\\otimes_R F^\\bullet)\\ \\xrightarrow{\\sim}\\ Q_S(K^\\bullet)\\otimes_S^{\\mathbf L}(S\\otimes_R N)[0],$$\nwhere the left side has its $S$-action on $K^\\bullet$. On forgetting to $D(R)$ its source represents $\\operatorname{Res}_{R\\to S}Q_S(K^\\bullet)\\otimes_R^{\\mathbf L}N[0]$. The isomorphism is natural in $K^\\bullet$, in $N$, and in maps between augmented free resolutions. Its composite with the canonical derived-to-ordinary map and the ordinary balancing isomorphism\n$$Q_S(K^\\bullet)\\otimes_S^{\\mathbf L}(S\\otimes_R N)[0]\\longrightarrow Q_S\\operatorname{Tot}(K^\\bullet\\otimes_S(S\\otimes_R N)[0])\\xrightarrow{\\sim}Q_S\\operatorname{Tot}(K^\\bullet\\otimes_R N[0])$$\nis the localization of the augmentation $1_K\\otimes(F^\\bullet\\to N[0])$. No boundedness of $K^\\bullet$, Noetherian hypothesis or finite-generation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0661, lemma-base-change-comparison, free-resolution computation; its module-coefficient version, explicitly used in examples-defos.tex Tag 0DZ2, lemma-lift-equivalence-module, footnote resolving I by free A-modules."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-module-kflat-complex",
+  "def-weil-pbc-free-module",
+  "def-pc-mixed-total-tensor",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=S\\otimes_R F$ and $M=(S\\otimes_R N)[0]$, with augmentation $e=1_S\\otimes\\epsilon:G\\to M$. Flat tensor exactness [lem-weil-pbc-flat-tensor-exact] applied to the augmented resolution shows that $e$ is a quasi-isomorphism. A basis $(f_i)$ of $F^q$ gives the basis $(1\\otimes f_i)$ of $G^q$: the inverse coordinate maps send $s\\otimes\\sum r_if_i$ to the finitely supported family $(sr_i)$. Free modules are flat directly: tensoring with a free module is a direct sum of copies, and a direct sum of injective maps is injective by its finite-support coordinates. Thus both $F$ over $R$ and $G$ over $S$ are bounded-above complexes of flat modules, hence K-flat by [lem-pc-module-bounded-flat-kflat]. Neither assertion involves $K$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0661 (lemma-base-change-comparison), free-resolution argument; 064K (lemma-derived-tor-quasi-isomorphism); flat exactness Tag 00HD"
+   }
+  },
+  {
+   "text": "In every bidegree define $b:K\\otimes_R F\\to K\\otimes_S G$ by $x\\otimes f\\mapsto x\\otimes(1\\otimes f)$. Its inverse is $x\\otimes(s\\otimes f)\\mapsto sx\\otimes f$. The tensor relations make both maps well-defined and $S$-linear, and their composites are the identity on pure tensors. They preserve bidegrees and commute with both differentials, since $d_K(sx)=s\\,d_Kx$ and $d_G(s\\otimes f)=s\\otimes d_Ff$. Hence they commute with $d_K\\otimes1+(-1)^p1\\otimes d_F$ on bidegree $(p,q)$ and give inverse maps on each direct-sum total degree. This proves a natural chain isomorphism $b:\\operatorname{Tot}(K\\otimes_R F)\\cong\\operatorname{Tot}(K\\otimes_S G)$, using the same $S$-action on $K$ throughout.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661, middle balancing equality in the proof of lemma-base-change-comparison; module-coefficient version of the same calculation"
+   }
+  },
+  {
+   "text": "Use the one-object site of [lem-trf-one-point-derived-ring-identification] for each coefficient ring. Every presheaf on this site is a sheaf, so sheafification is the additive identity and the sheafification hypotheses hold. Write $\\mu_{U,V}:QU\\otimes^{\\mathbf L}QV\\to Q\\operatorname{Tot}(U\\otimes V)$ for the canonical natural lax tensorator of [lem-sf-ringed-derived-native-tensor]. Its invertibility when either factor is K-flat applies to $(K,G)$ by step 1. Define the required isomorphism in $D(S)$ by $\\alpha=(1\\otimes^{\\mathbf L}Q_Se)\\,\\mu_{K,G}^{-1}\\,Q_Sb$. All three factors are invertible: $Q_Se$ is invertible by localization and step 1. After forgetting to $R$, the source is literally $Q_R\\operatorname{Tot}((\\operatorname{Res}K)\\otimes_R F)$. The same K-flat comparison over $R$, followed by $Q_R\\epsilon$, identifies it with $(\\operatorname{Res}Q_SK)\\otimes_R^{\\mathbf L}N[0]$. Restriction preserves cohomology because kernels and images of module maps are unchanged on underlying abelian groups, so it induces the asserted functor on derived categories.",
+   "uses": [
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 064M (definition-derived-tor), 0661 (lemma-base-change-comparison); canonical localization tensor comparison, sites-cohomology.tex Tag 0FPT"
+   }
+  },
+  {
+   "text": "For a cochain map $a:K\\to K_1$ and an augmented resolution map $u:F\\to F_1$ over $v:N\\to N_1$, balancing gives $b_1(a\\otimes u)=(a\\otimes(1_S\\otimes u))b$, and augmentedness gives $e_1(1_S\\otimes u)=(1_S\\otimes v)e$. Naturality of $\\mu$ therefore gives naturality of $\\alpha$ for these maps. Every $v$ admits such a $u$ by [lem-weil-pbc-free-complex-maps-to-resolution], reindexing $F^i$ as $F_{-i}$. Two lifts of $v$ are homotopic by [new-t4-augmented-resolution-lift-homotopy]; its projectivity hypothesis holds since a map out of a free module lifts through a surjection by lifting the images of its basis. Total tensor respects homotopies by [lem-sfb-total-tensor-homotopy], so the resulting maps in $D(S)$ agree. Taking $v=1_N$ in both directions gives mutually inverse canonical comparisons between different free resolutions: their composites lift $1_N$ and hence are homotopic to identities. This proves independence of resolution and naturality in $N$ as well as in all specified augmented resolution maps.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-weil-pbc-free-complex-maps-to-resolution",
+    "new-t4-augmented-resolution-lift-homotopy",
+    "lem-sfb-total-tensor-homotopy",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LS (lemma-compare-resolutions), parts (1),(2); total tensor on homotopy classes: more-algebra.tex lemma-derived-tor-homotopy; naturality of the construction in Tag 0661"
+   }
+  },
+  {
+   "text": "The canonical derived-to-ordinary map in the statement is $\\mu_{K,M}$. Its naturality for $e:G\\to M$ says $\\mu_{K,M}(1\\otimes^{\\mathbf L}Q_Se)=Q_S(1_K\\otimes e)\\mu_{K,G}$. Let $c:\\operatorname{Tot}(K\\otimes_S M)\\to\\operatorname{Tot}(K\\otimes_R N[0])$ be ordinary balancing, $x\\otimes(s\\otimes n)\\mapsto sx\\otimes n$. Substitution of the formula for $\\alpha$ cancels $\\mu_{K,G}$ and gives $Q_Sc\\,\\mu_{K,M}\\alpha=Q_S(c(1_K\\otimes e)b)$. The chain composite on the right takes $x\\otimes f$ to $x\\otimes\\epsilon(f)$, and is therefore exactly the stated tensor augmentation. This calculation uses naturality of the specified tensorator, not an arbitrary isomorphism between its endpoints. Infinite free bases and unbounded $K$ cause no convergence issue: each element of a total degree has finite support in the direct sum.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-trf-one-point-derived-ring-identification",
+    "def-weil-pbc-module-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661, resolution computation with its augmentation; examples-defos.tex Tag 0DZ2 (lemma-lift-equivalence-module), footnote resolving I; localization tensorator in sites-cohomology.tex Tag 0FPT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-tensor-complex-sheaves",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-free-complex-maps-to-resolution",
+  "new-t4-augmented-resolution-lift-homotopy",
+  "lem-sfb-total-tensor-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0661 free-resolution argument, extended to module coefficients as in examples-defos.tex Tag 0DZ2 footnote; explicit tensorator naturality proves all compatibility clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat algebra S over a commutative ring R, a module complex K over S and an R-module N, derived tensor K over R with N equals derived tensor over S with S tensor R N",
+   "results": "8 hits: Module.Flat.instTensorProduct, Module.Flat.baseChange, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.FaithfullyFlat.instTensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: cancellation and extension-of-scalars associators are ordinary module isomorphisms, not the derived isomorphism with its augmentation compatibility. Read Mathlib/LinearAlgebra/TensorProduct/Tower.lean:431-455 and CategoryTheory/Monoidal/Tor.lean:12-22,42-62."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ii]so|[Ii]so.*baseChange|[Ff]lat.*[Dd]erived|[Dd]erived.*[Ff]lat",
+   "results": "25 hits in Mathlib/CategoryTheory: Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: cancellation and extension-of-scalars associators are ordinary module isomorphisms, not the derived isomorphism with its augmentation compatibility. Read Mathlib/LinearAlgebra/TensorProduct/Tower.lean:431-455 and CategoryTheory/Monoidal/Tor.lean:12-22,42-62."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: cancellation and extension-of-scalars associators are ordinary module isomorphisms, not the derived isomorphism with its augmentation compatibility. Read Mathlib/LinearAlgebra/TensorProduct/Tower.lean:431-455 and CategoryTheory/Monoidal/Tor.lean:12-22,42-62."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat algebra S over R and an R module N, derived tensor over S with S tensor R N equals derived tensor over R with N",
+   "results": "8 hits: TensorProduct.AlgebraTensorModule.cancelBaseChange, Module.Flat.of_flat_tensorProduct, TensorProduct.AlgebraTensorModule.distribBaseChange, IsLocalization.moduleLid, Module.Flat.iff_flat_tensorProduct, Algebra.TensorProduct.rid, Module.Flat.tensorSubmoduleAlgebraEquivMul, Module.FaithfullyFlat.instTensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: cancellation and extension-of-scalars associators are ordinary module isomorphisms, not the derived isomorphism with its augmentation compatibility. Read Mathlib/LinearAlgebra/TensorProduct/Tower.lean:431-455 and CategoryTheory/Monoidal/Tor.lean:12-22,42-62."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars across a Tor independent cartesian square of commutative rings commutes with restriction of scalars",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', CommRingCat.KaehlerDifferential.map, KaehlerDifferential.tensorKaehlerEquiv_left_inv, KaehlerDifferential.moduleBaseChange', Algebra.IsPushout.cancelBaseChange_tmul, ModuleCat.extendScalars_assoc, KaehlerDifferential.isBaseChange, ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: cancellation and extension-of-scalars associators are ordinary module isomorphisms, not the derived isomorphism with its augmentation compatibility. Read Mathlib/LinearAlgebra/TensorProduct/Tower.lean:431-455 and CategoryTheory/Monoidal/Tor.lean:12-22,42-62."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|baseChange.*[Dd]erived|[Dd]erived.*baseChange|derivedTensor",
+   "results": "25 hits: Mathlib/LinearAlgebra/Dimension/Localization.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: cancellation and extension-of-scalars associators are ordinary module isomorphisms, not the derived isomorphism with its augmentation compatibility. Read Mathlib/LinearAlgebra/TensorProduct/Tower.lean:431-455 and CategoryTheory/Monoidal/Tor.lean:12-22,42-62."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cancelBaseChange\"",
+   "results": "12 hits: TensorProduct.AlgebraTensorModule.cancelBaseChange_self_eq_lid, TensorProduct.AlgebraTensorModule.cancelBaseChange, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul, TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm, TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange, Algebra.TensorProduct.cancelBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: cancellation and extension-of-scalars associators are ordinary module isomorphisms, not the derived isomorphism with its augmentation compatibility. Read Mathlib/LinearAlgebra/TensorProduct/Tower.lean:431-455 and CategoryTheory/Monoidal/Tor.lean:12-22,42-62."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat algebra derived tensor exchange for modules: for R to S flat and an R module N, K tensor derived over S with S tensor R N is canonically isomorphic in D(S) to the total tensor of K and an R free resolution of N",
+   "results": "8 hits: Module.Flat.instTensorProduct, Module.Flat.baseChange, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, Module.Flat.ker_lTensor_eq, LinearMap.tensorKerEquiv, Module.Flat.lTensor_exact, Module.Flat.rTensor_exact",
+   "date": "2026-10-23",
+   "verdict": "no match: cancellation and extension-of-scalars associators are ordinary module isomorphisms, not the derived isomorphism with its augmentation compatibility. Read Mathlib/LinearAlgebra/TensorProduct/Tower.lean:431-455 and CategoryTheory/Monoidal/Tor.lean:12-22,42-62."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and base-change associators do not state the derived module comparison with arbitrary K and augmentation. Read TensorProduct/Tower.lean:431-458 and ModuleCat/ChangeOfRings.lean:1000-1045."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensor|[Kk][Ff]lat|[Kk]Flat",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and base-change associators do not state the derived module comparison with arbitrary K and augmentation. Read TensorProduct/Tower.lean:431-458 and ModuleCat/ChangeOfRings.lean:1000-1045."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product computed by a bounded above free resolution with flat extension of scalars",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, Algebra.TensorProduct.instFree",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and base-change associators do not state the derived module comparison with arbitrary K and augmentation. Read TensorProduct/Tower.lean:431-458 and ModuleCat/ChangeOfRings.lean:1000-1045."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor exchange for a flat ring homomorphism R to S: an arbitrary S complex K tensor over R with a free resolution of an R module N computes K derived tensor over S with S tensor R N",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact'",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and base-change associators do not state the derived module comparison with arbitrary K and augmentation. Read TensorProduct/Tower.lean:431-458 and ModuleCat/ChangeOfRings.lean:1000-1045."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of derived extension of scalars with module coefficients, retaining the action of a flat algebra and compatibility with resolution augmentation",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendScalars.map'_comp, ModuleCat.extendScalars_comp_id_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and base-change associators do not state the derived module comparison with arbitrary K and augmentation. Read TensorProduct/Tower.lean:431-458 and ModuleCat/ChangeOfRings.lean:1000-1045."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cancelBaseChange\"",
+   "results": "12 hits: TensorProduct.AlgebraTensorModule.cancelBaseChange_self_eq_lid, TensorProduct.AlgebraTensorModule.cancelBaseChange, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul, TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm, TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange, Algebra.TensorProduct.cancelBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and base-change associators do not state the derived module comparison with arbitrary K and augmentation. Read TensorProduct/Tower.lean:431-458 and ModuleCat/ChangeOfRings.lean:1000-1045."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|extendScalars_assoc|derivedTensor|[Kk]Flat",
+   "results": "25 hits: Mathlib/LinearAlgebra/Dimension/Localization.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and base-change associators do not state the derived module comparison with arbitrary K and augmentation. Read TensorProduct/Tower.lean:431-458 and ModuleCat/ChangeOfRings.lean:1000-1045."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-module-derived-lift-criterion",
+  "date": "2026-10-23",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Existence-only comparison before the tangent action adjusts the chosen completed lift. Square-zero linear deformation comparison used in the polynomial-presentation proof of Stacks 0DZ3 (correct square-zero portion of 0DZ2). The translation between module liftability and derived liftability at the start of the square-zero argument of Stacks 0DZ2, including its kernel-tensor calculation. Supporting input: the derived scalar exchange used in 0DZ1 in both directions and in the free-A-resolution footnote of 0DZ2; arbitrary module coefficients, with the algebra action retained.",
+   "via": [
+    "lem-sfb-flat-module-derived-lift-criterion",
+    "lem-sfb-flat-module-lift-formal-neighbourhood",
+    "lem-sfb-completion-reflects-flat-liftability",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+  "worker": "stage1",
+  "summary": "Retained the full statement and the algebra action; added the missing free-module definition reference. Reused existing flat exactness, bounded-above K-flatness, terminal-site and natural localization-tensor facts. Wrote the balancing chain isomorphism and the augmentation naturality equation explicitly. No new nodes.",
+  "blueprint": "The inherited ancestor command returns null; this auxiliary lemma serves the recorded det-thm-sf-ctf-stability-direct-images proof (3) deformation branch through Stacks 0DZ1/0DZ2. Steps realize the free-resolution tensor exchange, without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic algebra/derived localization tool: Bounded-above flat module complexes are K-flat. It supplies the tensor-model or resolution input; it does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-one-point-derived-ring-identification",
+    "why": "Generic algebra/derived localization tool: Terminal-site evaluation identifies ordinary modules and derived scalar extension. It supplies the tensor-model or resolution input; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic algebra/derived localization tool: Native symmetric derived tensor and one-K-flat localization comparisons. It supplies the tensor-model or resolution input; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-free-complex-maps-to-resolution",
+    "why": "Generic algebra/derived localization tool: A complex of free modules over M maps to any resolution of N over a map M -> N. It supplies the tensor-model or resolution input; it does not replace the unit route."
+   },
+   {
+    "node": "new-t4-augmented-resolution-lift-homotopy",
+    "why": "Generic algebra/derived localization tool: Augmented lifts from a projective resolution into an exact complex are homotopic. It supplies the tensor-model or resolution input; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sfb-total-tensor-homotopy",
+    "why": "Generic algebra/derived localization tool: Monoidal total tensor on the homotopy category. It supplies the tensor-model or resolution input; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-free-complex-maps-to-resolution",
+  "new-t4-augmented-resolution-lift-homotopy",
+  "lem-sfb-total-tensor-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-ebbfecddf",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-ebbfecddf (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full. There are no new nodes. The statement is the same as on the base except for the added [def-weil-pbc-free-module] reference, now also in stmt_deps; nothing is weakened. The source matches Stacks more-algebra.tex l.14955 (Tag 0661: free resolution, Tor-independent base change, then Tot(K⊗_A(F⊗A)) = Tot(K⊗_R F)) and the examples-defos 0DZ2 footnote (P⊗_A F is a free resolution of IP because A→P is flat). Step checks: (1) flat exactness (00HD) makes e a quasi-isomorphism; F and G are bounded above with free terms, so they are K-flat by 064K, which is not applied to the unbounded K. (2) The balancing chain isomorphism has no extra sign and lives in the direct-sum total. (3) α=(1⊗Qe)μ^{-1}Qb: μ is invertible because G is K-flat (lem-sf-ringed-derived-native-tensor on the one-point site, where sheafification is the identity). (4) Lifts exist by 00LS(1) and are unique up to homotopy by new-t4 (free source is projective, target exact, chains reindexed); total tensor respects homotopy (lem-sfb-total-tensor-homotopy); comparisons for different resolutions are mutually inverse. (5) Naturality of μ gives Qc·μ_{K,M}·α = Q(c(1⊗e)b), which is x⊗f↦x⊗ε(f). Small cases checked: ℤ, K=N=ℤ/2; K=0 or N=0; S=R. The non-flat case ℤ→ℤ/2 fails, so the flatness hypothesis is needed. The citer lem-sfb-flat-module-derived-lift-criterion uses only stated clauses. No duplicates: I compared lem-pc-affine-derived-base-change-comparison-map, lem-pc-tor-independent-scalar-augmentation, def-pc-ring-tensor-cohomology and lem-trf-site-derived-tensor-restriction (a different projection formula for an S-module in degree zero, not a complex K). Batch 5: lem-trf-one-point-derived-ring-identification is a general one-object-site/module identification. Its proof deps are generic, neither assumed statement gives it and it is not a step of the trace-formula or Poincaré-duality proofs, so I accept it. The base node lem-weil-pbc-singleton-site-module-comparison would serve equally well. tool_uses accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatAlgebraDerivedModuleTensorExchange",
+  "declaration": "CategoryTheory.flat_algebra_derived_module_tensor_exchange",
+  "file": "lean/Sheaf/Algebra/Homology/FlatAlgebraDerivedModuleTensorExchange.lean",
+  "statement": "theorem flat_algebra_derived_module_tensor_exchange {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) (_hf : RingHom.Flat f) [HasDerivedCategory.{wR} (ModuleCat.{u} R)] [HasDerivedCategory.{wS} (ModuleCat.{u} S)] : ∃ b : ∀ (K : CochainComplex (ModuleCat.{u} S) ℤ) (F : CochainComplex (ModuleCat.{u} R) ℤ), ((ModuleCat.mixedTotalTensor f).obj K).obj F ≅ K ⊗ (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj F), (∀ (K : CochainComplex (ModuleCat.{u} S) ℤ) (F : CochainComplex (ModuleCat.{u} R) ℤ) (p q n : ℤ) (h : p + q = n), CochainComplex.ιMapBifunctor K F (ModuleCat.mixedTensor f) p q n h ≫ (b K F).hom.f n = CochainComplex.ιMapBifunctor K (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj F) (curriedTensor (ModuleCat.{u} S)) p q n h) ∧ ∃ α : ∀ (K : CochainComplex (ModuleCat.{u} S) ℤ) (N : ModuleCat.{u} R) (F : CochainComplex (ModuleCat.{u} R) ℤ) (ε : F ⟶ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N), (∀ i : ℤ, Module.Free R (F.X i)) → (∀ i : ℤ, 0 < i → IsZero (F.X i)) → QuasiIso ε → (DerivedCategory.Q.obj (((ModuleCat.mixedTotalTensor f).obj K).obj F) ≅ DerivedCategory.Q.obj K ⊗ DerivedCategory.Q.obj (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N))), (∀ (K : CochainComplex (ModuleCat.{u} S) ℤ) (N : ModuleCat.{u} R) (F : CochainComplex (ModuleCat.{u} R) ℤ) (ε : F ⟶ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N) (hfree : ∀ i : ℤ, Module.Free R (F.X i)) (hbound : ∀ i : ℤ, 0 < i → IsZero (F.X i)) (hres : QuasiIso ε), Functor.LaxMonoidal.μ (DerivedCategory.Q (C := ModuleCat.{u} S)) K (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj F) ≫ DerivedCategory.Q.map (b K F).inv ≫ (α K N F ε hfree hbound hres).hom = 𝟙 (DerivedCategory.Q.obj K) ⊗ₘ DerivedCategory.Q.map (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).map ε)) ∧ (∀ (K K' : CochainComplex (ModuleCat.{u} S) ℤ) (N N' : ModuleCat.{u} R) (F F' : CochainComplex (ModuleCat.{u} R) ℤ) (ε : F ⟶ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N) (ε' : F' ⟶ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N') (hfree : ∀ i : ℤ, Module.Free R (F.X i)) (hfree' : ∀ i : ℤ, Module.Free R (F'.X i)) (hbound : ∀ i : ℤ, 0 < i → IsZero (F.X i)) (hbound' : ∀ i : ℤ, 0 < i → IsZero (F'.X i)) (hres : QuasiIso ε) (hres' : QuasiIso ε') (a : K ⟶ K') (v : N ⟶ N') (t : F ⟶ F'), t ≫ ε' = ε ≫ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).map v → DerivedCategory.Q.map (((ModuleCat.mixedTotalTensor f).map a).app F ≫ ((ModuleCat.mixedTotalTensor f).obj K').map t) ≫ (α K' N' F' ε' hfree' hbound' hres').hom = (α K N F ε hfree hbound hres).hom ≫ (DerivedCategory.Q.map a ⊗ₘ DerivedCategory.Q.map (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).map ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).map v)))) ∧ (∀ (K : CochainComplex (ModuleCat.{u} S) ℤ) (N : ModuleCat.{u} R) (F : CochainComplex (ModuleCat.{u} R) ℤ) (ε : F ⟶ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N) (hfree : ∀ i : ℤ, Module.Free R (F.X i)) (hbound : ∀ i : ℤ, 0 < i → IsZero (F.X i)) (hres : QuasiIso ε), (α K N F ε hfree hbound hres).hom ≫ Functor.LaxMonoidal.μ (DerivedCategory.Q (C := ModuleCat.{u} S)) K (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N)) = DerivedCategory.Q.map (((ModuleCat.mixedTotalTensor f).obj K).map ε ≫ (b K ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N)).hom)) ∧ (∀ (K : CochainComplex (ModuleCat.{u} S) ℤ) (N : ModuleCat.{u} R) (F : CochainComplex (ModuleCat.{u} R) ℤ) (ε : F ⟶ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N), (∀ i : ℤ, Module.Free R (F.X i)) → (∀ i : ℤ, 0 < i → IsZero (F.X i)) → QuasiIso ε → Nonempty ((ModuleCat.restrictScalars f).mapDerivedCategory.obj (DerivedCategory.Q.obj (((ModuleCat.mixedTotalTensor f).obj K).obj F)) ≅ (ModuleCat.restrictScalars f).mapDerivedCategory.obj (DerivedCategory.Q.obj K) ⊗ DerivedCategory.Q.obj ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj N)))",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing mixed total tensor to retain the S-action. The balancing family is characterized on total-degree summands; the exchange family is normalized by the localization tensorator, natural for all augmented free-resolution maps, augmentation-compatible, and gives the restricted D(R) representative. The target uses extension of the degree-zero complex, canonically (S tensor_R N)[0]."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-357687c5f",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read item node, all 8 stmt_deps, ModuleCat.mixedTensor/mixedTotalTensor source (bidegree K^p ⊗_S (S⊗_R F^q), def-pc-mixed-total-tensor), Stacks 0661/0DZ2, report, module; lean.statement verbatim in file, single sorry; node diff vs base only adds the used stmt_deps def-pc-mixed-total-tensor/def-weil-module-base-change plus lean record. Hypotheses exact: RingHom.Flat f, arbitrary K, free F with IsZero above 0 and QuasiIso ε; independent wR/wS. b pinned on every ιMapBifunctor summand; α pinned by μ_{K,G}≫Q b⁻¹≫α = 𝟙⊗Q(ext ε) with μ invertible since G is K-flat (step 3); joint naturality in K, N and augmented maps t over v; augmentation clause α≫μ_{K,M}=Q(mixed(K,ε)≫b_M) matches the node's composite; clauses mutually consistent via b-naturality. Restriction clause is Nonempty: node says 'represents', citer lem-sfb-flat-module-derived-lift-criterion only takes H^{-1} → accepted. Target ext(single N) is canonically (S⊗N)[0], noted. Edge cases f=id, K=0, N=0, zero rings, infinite rank, unbounded K covered; flatness needed. No duplicate found (scalarExtension, balancedDerivedTensorModel, transitivity differ). Docstrings, blueprint tags and proof steps present; no hollow defs. No fix, no compile by reviewer."
+ }
+}

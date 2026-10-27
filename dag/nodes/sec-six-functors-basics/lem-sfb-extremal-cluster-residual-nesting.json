@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-extremal-cluster-residual-nesting",
+ "kind": "statement",
+ "title": "Generic residual nesting for a strict negative extremal Clifford cluster",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure] and let $X$ be a nonempty connected projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-connected-scheme, def-weil-pure-dimension]. Assume $X$ is smooth except at ordinary nodes, meaning that at every singular closed point its completed local $k$-algebra is $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Write $h^i(X,F)=\\dim_kH^i(X,F)$ for Zariski module cohomology [def-sc-ringed-space-module-cohomology]. Assume that for every decomposition $X=A\\cup B$ into nonempty reduced unions of components with no common component, $\\dim_k\\Gamma(A\\times_XB,\\mathcal O_{A\\times_XB})\\ge2$ [def-weil-irreducible-components, def-pc-fibre-product]. Put $p_a(X)=1-\\chi(X,\\mathcal O_X)$ [def-pc-euler-characteristic]. Let $S\\subseteq X$ be a subcanonical zero-dimensional closed subscheme, with ideal $I_S$ and splitting index $r(S)$ in [def-sfb-subcanonical-splitting-index]. Write $F_S=I_S\\otimes\\omega_X$, $V_S=H^0(X,F_S)$, $\\ell(S)=\\dim_k\\Gamma(S,\\mathcal O_S)$ and $c(S)=2p_a(X)-\\ell(S)-2\\dim_kV_S$. Regard $V_S$ as a subspace of $H^0(X,\\omega_X)$. Fix $R\\in\\mathbf N$. Assume $r(S)\\le R$, $c(S)<0$, and that for every subcanonical cluster $U\\subseteq X$ with $r(U)\\le R$ one has $c(S)\\le c(U)$; among the clusters with $r(U)\\le R$ and $c(U)=c(S)$ assume $\\ell(S)\\ge\\ell(U)$. Let $s\\in V_S$ be nonzero at every component generic point, let $S^*$ be its residual [lem-sfb-subcanonical-residual-duality], and let $U=S\\cup S^*$ denote the scheme-theoretic union, defined by $I_U=I_S\\cap I_{S^*}$ [def-sbc-closed-immersion-ideal-sheaf]. Assume explicitly that $U$ is subcanonical and $r(U)\\le R$. Then $S^*\\subseteq S$ as closed subschemes. No condition on $r(S^*)$ or on the splitting index of $S\\cap S^*$ is imposed; $s$ need not be general once the union hypothesis holds. No Cartier condition on $S$ is assumed.",
+ "source": {
+  "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+  "place": "Lemma 3.1, printed pp.234--235, strict branch, with the missing union-stratum hypothesis explicit. Agent correction: the union and intersection are mutually residual, so their Clifford indices coincide and only the union needs extremal comparison. No use of Remark 2.18. Local PDF WANTED; author-hosted primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/clifford.pdf"
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-pc-euler-characteristic",
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-smooth-morphisms",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sfb-subcanonical-splitting-index",
+  "def-weil-algebraic-closure",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension",
+  "lem-sfb-subcanonical-residual-duality"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=S^*$, $D=S\\cap T$ with $I_D=I_S+I_T$, and $v(Z)=h^0(X,I_Z\\otimes\\omega_X)$. The residual-duality theorem applies to $S$ with the specified generically nonzero section $s$: it gives that $T$ is subcanonical and that taking its residual with the same $s$ gives $S$. The inclusion $F_S\\hookrightarrow\\omega_X$ is a section of $\\mathcal Hom(F_S,\\omega_X)$ whose value at $s$ is $s$; therefore $s\\in V_T$. Consequently $s\\in V_U\\subseteq V_D$ and is generically nonzero in both. Thus $D$ is subcanonical, and all four clusters admit residuals with respect to this same $s$. Their section spaces and lengths are finite by the same theorem.",
+   "uses": [
+    "lem-sfb-subcanonical-residual-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Lemma 3.1, printed p.235: union/intersection argument, specialized to a single residual pair; elementary details supplied by the agent."
+   }
+  },
+  {
+   "text": "We check directly that the residual of $D$ is $U$. Work locally, trivializing the invertible module $\\omega_X$. The identities $F_D=F_S+F_T$ and $F_U=F_S\\cap F_T$ follow by adding and intersecting the defining ideals. A map $F_D\\to\\omega_X$ restricts to maps on $F_S,F_T$ with the same value at $s$, so its evaluation lies in the intersection of their evaluation images. Conversely, let $y$ belong to both images, with maps $\\phi:F_S\\to\\omega_X$ and $\\psi:F_T\\to\\omega_X$ evaluating to $y$. Their restrictions to $F_U$ agree: their difference evaluates to zero at $s$, and the residual theorem for the subcanonical cluster $U$ says evaluation on $\\mathcal Hom(F_U,\\omega_X)$ is injective. Hence $a+b\\mapsto\\phi(a)+\\psi(b)$ is a well-defined map on $F_D=F_S+F_T$ evaluating to $y$. The local descended maps agree on overlaps because evaluation for $D$ is injective as well. The evaluation image for $D$ is therefore the intersection of the images for $S,T$, namely $F_T\\cap F_S=F_U$, by residual involutivity. Uniqueness in the residual theorem identifies $D^*=U$.",
+   "uses": [
+    "lem-sfb-subcanonical-residual-duality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Lemma 3.1, printed p.235: union/intersection argument, specialized to a single residual pair; elementary details supplied by the agent."
+   }
+  },
+  {
+   "text": "The addition map $V_S\\oplus V_T\\to V_D$, $(a,b)\\mapsto a+b$, has kernel $\\{(a,-a):a\\in V_U\\}$, since $F_U=F_S\\cap F_T$. Rank-nullity gives $v(S)+v(T)\\le v(U)+v(D)$; it does not assert surjectivity onto $V_D$. Residual duality for the pairs $(S,T)$ and $(D,U)$ gives\n$$\\ell(S)+\\ell(T)=2p_a(X)-2=\\ell(D)+\\ell(U),\\qquad c(T)=c(S),\\qquad c(D)=c(U).$$\nSubstitution in $c(Z)=2p_a(X)-\\ell(Z)-2v(Z)$ yields $2c(U)=c(U)+c(D)\\le c(S)+c(T)=2c(S)$. Thus $c(U)\\le c(S)$.",
+   "uses": [
+    "lem-sfb-subcanonical-residual-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Lemma 3.1, printed p.235: union/intersection argument, specialized to a single residual pair; elementary details supplied by the agent."
+   }
+  },
+  {
+   "text": "The assumed subcanonicity and bound $r(U)\\le R$ permit the extremal comparison with $U$, giving $c(S)\\le c(U)$. Together with the previous step this gives equality. The maximal-length assumption among minimizers then gives $\\ell(U)\\le\\ell(S)$. Neither comparison involves $r(T)$ or $r(D)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Lemma 3.1, printed p.235: union/intersection argument, specialized to a single residual pair; elementary details supplied by the agent."
+   }
+  },
+  {
+   "text": "For the final length comparison, $X$ is Noetherian: projectivity implies properness, hence finite type over $k$, and the finite-type Noetherian theorem applies to $\\operatorname{Spec}k$ (a field is Noetherian since its only ideals are $0$ and $k$). A closed subscheme of $X$ is Noetherian: locally its ring is a quotient of a Noetherian ring and its underlying space is a closed subspace of the Noetherian space. In particular $U$ is Noetherian. The zero-dimensional Noetherian theorem makes $|U|$ finite discrete. On this space a sheaf is the product of its sections on the finitely many singleton opens, each such section module being the stalk. The closed inclusion $S\\subseteq U$ gives a surjection on every structure-sheaf stalk, hence a surjection\n$$\\Gamma(U,\\mathcal O_U)\\twoheadrightarrow\\Gamma(S,\\mathcal O_S).$$\nBoth are finite-dimensional, so $\\ell(S)\\le\\ell(U)$.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-zero-dim-noetherian-finite-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAX, lemma-locally-Noetherian-dimension-0; finite-discrete sections computed directly. Finite type over a Noetherian base is morphisms.tex Tag 01T6, lemma-finite-type-noetherian; projective proper is Tag 01WC, lemma-locally-projective-proper."
+   }
+  },
+  {
+   "text": "We have $\\ell(S)=\\ell(U)$. The preceding surjection of finite-dimensional $k$-spaces is therefore an isomorphism. In the singleton-open decomposition, each stalk kernel is zero; thus the ideal $I_S/I_U$ on $U$ is zero. It follows that $I_U=I_S$, so $U=S$ as closed subschemes. Since $T\\subseteq U$ by the defining ideal intersection, $S^*=T\\subseteq S$. This uses equality of ideals, including nilpotents, and imposes no Cartier condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Lemma 3.1, printed p.235: union/intersection argument, specialized to a single residual pair; elementary details supplied by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-subcanonical-residual-duality",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-zero-dim-noetherian-finite-discrete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+  "place": "Lemma 3.1, pp.234--235, read in the author-hosted primary PDF at https://pagine.dm.unipi.it/franciosi/lavori/clifford.pdf; direct same-section residual-pair argument with the stated union-stratum hypothesis. Local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Minimal Clifford index and maximal length subcanonical cluster has a generic residual contained in it unless the Clifford index is zero",
+   "results": "{\"t\": \"2026-10-23T14:43:11Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal Clifford index and maximal length subcanonical cluster has a generic residual contained in it unless the Clifford index is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AmpleSet.of_one_lt_codim\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"CliffordAlgebra.iSup_ι_range_eq_top\"], \"digest\": \"592492b5b87952b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extremal subcanonical clusters residual intersection dichotomy on a two connected Gorenstein curve",
+   "results": "{\"t\": \"2026-10-23T14:43:12Z\", \"tool\": \"leanfinder\", \"query\": \"Extremal subcanonical clusters residual intersection dichotomy on a two connected Gorenstein curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal.val_Δ_maximal\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsGoodReduction\"], \"digest\": \"f9132d38002144f5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"residual\"",
+   "results": "{\"t\": \"2026-10-23T14:43:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"residual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "residual|Clifford|subcanonical",
+   "results": "{\"t\": \"2026-10-23T14:43:07Z\", \"tool\": \"grep\", \"query\": \"residual|Clifford|subcanonical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"501cbe182c492303\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residual nesting of maximal degree minimal Clifford index clusters",
+   "results": "{\"t\": \"2026-10-23T14:43:07Z\", \"tool\": \"leansearch\", \"query\": \"Residual nesting of maximal degree minimal Clifford index clusters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CliffordAlgebra.instAlgebra'\", \"instRingCliffordAlgebra\", \"instInhabitedCliffordAlgebra\", \"CliffordAlgebra\", \"ExteriorAlgebra.liftAlternating_apply_ιMulti\", \"CliffordAlgebra.evenOdd\", \"CliffordAlgebra.ι_mem_evenOdd_one\", \"CliffordAlgebra.adjoin_range_ι\"], \"digest\": \"fccd0a5266baa486\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern elliptic-curve ideals and reduction, Clifford algebras, general scheme rank/residue fields, sites, or unrelated splitting and rank formulas; none states this canonical-cluster theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "residual.*cluster|subcanonical.*union|Clifford.*index",
+   "results": "{\"t\": \"2026-10-23T16:16:11Z\", \"tool\": \"grep\", \"query\": \"residual.*cluster|subcanonical.*union|Clifford.*index\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits describe affine zero loci, covers, transition limits, or unrelated dual cones; none gives residual-cluster Clifford extremality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residual intersection union duality for zero dimensional subschemes of a Gorenstein curve and extremal Clifford index",
+   "results": "{\"t\": \"2026-10-23T16:16:12Z\", \"tool\": \"leansearch\", \"query\": \"Residual intersection union duality for zero dimensional subschemes of a Gorenstein curve and extremal Clifford index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zeroLocus_inf\", \"ProjectiveSpectrum.zeroLocus_union\", \"AlgebraicGeometry.Scheme.zeroLocus_iUnion\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf_of_nonempty\", \"PrimeSpectrum.zeroLocus_union\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf\", \"AlgebraicGeometry.Scheme.zeroLocus_biInf\", \"ProperCone.dual_union\"], \"digest\": \"837ee52c21cf04ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits describe affine zero loci, covers, transition limits, or unrelated dual cones; none gives residual-cluster Clifford extremality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"intersection\"",
+   "results": "{\"t\": \"2026-10-23T16:16:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"intersection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected_f\"], \"digest\": \"b66e5fb50acff51d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits describe affine zero loci, covers, transition limits, or unrelated dual cones; none gives residual-cluster Clifford extremality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A minimal Clifford index maximal length subcanonical cluster contains its residual when their scheme theoretic union has splitting index at most R",
+   "results": "{\"t\": \"2026-10-23T16:16:13Z\", \"tool\": \"leanfinder\", \"query\": \"A minimal Clifford index maximal length subcanonical cluster contains its residual when their scheme theoretic union has splitting index at most R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_J\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_I₀\", \"AlgebraicGeometry.sigmaOpenCover_I₀\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_I₀\", \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_I₀\", \"AlgebraicGeometry.Scheme.Cover.mkOfCovers_I₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\"], \"digest\": \"d967475bec1caa8f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits describe affine zero loci, covers, transition limits, or unrelated dual cones; none gives residual-cluster Clifford extremality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For residual finite subschemes S and S star in a canonical divisor, their union and intersection are residual and Clifford indices agree, so extremality forces nesting if the union stays in the splitting stratum",
+   "results": "{\"t\": \"2026-10-23T16:17:23Z\", \"tool\": \"leanfinder\", \"query\": \"For residual finite subschemes S and S star in a canonical divisor, their union and intersection are residual and Clifford indices agree, so extremality forces nesting if the union stays in the splitting stratum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.union_C0C1_eq\", \"Combinatorics.Subspace.proper\", \"Profinite.NobelingProof.GoodProducts.union\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"AmpleSet.of_one_lt_codim\", \"Profinite.NobelingProof.GoodProducts.union_succ\", \"RootPairing.exist_set_root_not_disjoint_and_le_ker_coroot'_of_invtSubmodule\"], \"digest\": \"10bda39f629b664a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits describe affine zero loci, covers, transition limits, or unrelated dual cones; none gives residual-cluster Clifford extremality"
+  },
+  {
+   "tool": "grep",
+   "query": "subcanonical|residual.*cluster|Clifford.*index",
+   "results": "{\"t\": \"2026-10-23T18:00:12Z\", \"tool\": \"grep\", \"query\": \"subcanonical|residual.*cluster|Clifford.*index\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"23a3dff09e13a2a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; the semantic hits concern Nobeling sets, elliptic-curve point ideals, or topological zero loci, and grep finds subcanonical sites only. None concerns residual subcanonical clusters or Clifford-index extremality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extremal canonical zero dimensional subscheme residual nesting union intersection Clifford index",
+   "results": "{\"t\": \"2026-10-23T18:00:13Z\", \"tool\": \"leansearch\", \"query\": \"Extremal canonical zero dimensional subscheme residual nesting union intersection Clifford index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.zeroLocus_union\", \"AlgebraicGeometry.Scheme.zeroLocus_inf\", \"AlgebraicGeometry.Scheme.zeroLocus_iUnion\", \"ProjectiveSpectrum.zeroLocus_iUnion\", \"PrimeSpectrum.zeroLocus_union\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf_of_nonempty\", \"PrimeSpectrum.zeroLocus_iUnion\", \"PrimeSpectrum.zeroLocus_iUnion₂\"], \"digest\": \"55a0b7e997f61e11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; the semantic hits concern Nobeling sets, elliptic-curve point ideals, or topological zero loci, and grep finds subcanonical sites only. None concerns residual subcanonical clusters or Clifford-index extremality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"residual\"",
+   "results": "{\"t\": \"2026-10-23T18:00:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"residual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; the semantic hits concern Nobeling sets, elliptic-curve point ideals, or topological zero loci, and grep finds subcanonical sites only. None concerns residual subcanonical clusters or Clifford-index extremality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A minimal Clifford index maximal length subcanonical cluster contains its residual if their union stays in the same splitting stratum",
+   "results": "{\"t\": \"2026-10-23T18:00:14Z\", \"tool\": \"leanfinder\", \"query\": \"A minimal Clifford index maximal length subcanonical cluster contains its residual if their union stays in the same splitting stratum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.CC'₁\", \"Profinite.NobelingProof.CC'₀\", \"Profinite.NobelingProof.union_C0C1_eq\", \"ShrinkingLemma.PartialRefinement.mem_find_carrier_iff\", \"Profinite.NobelingProof.GoodProducts.maxTail_isGood\", \"Besicovitch.TauPackage.mem_iUnionUpTo_lastStep\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"Profinite.NobelingProof.GoodProducts.union_succ\"], \"digest\": \"092f0a36ac4d418d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; the semantic hits concern Nobeling sets, elliptic-curve point ideals, or topological zero loci, and grep finds subcanonical sites only. None concerns residual subcanonical clusters or Clifford-index extremality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The involution residual to a fixed canonical section exchanges union and intersection of finite subschemes on a Gorenstein curve and preserves their Clifford index",
+   "results": "{\"t\": \"2026-10-23T18:00:38Z\", \"tool\": \"leanfinder\", \"query\": \"The involution residual to a fixed canonical section exchanges union and intersection of finite subschemes on a Gorenstein curve and preserves their Clifford index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"AlgebraicGeometry.Scheme.zeroLocus_biInf\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf\"], \"digest\": \"02391d4777a04e5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; the semantic hits concern Nobeling sets, elliptic-curve point ideals, or topological zero loci, and grep finds subcanonical sites only. None concerns residual subcanonical clusters or Clifford-index extremality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-subcanonical-splitting-clifford-bound",
+  "date": "2026-10-23",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Supporting input: Theorem 3.7, inequality (9), printed pp.242--246, specialized to reduced nodal curves; numerical two-connectedness is boundary-node length; Lemma 3.1 and Theorem 3.7 proof Step 1, p.243: generic residual nesting, strict-negative-index branch (the disjoint branch has index zero).",
+   "via": [
+    "lem-sfb-subcanonical-splitting-clifford-bound",
+    "lem-sfb-nodal-two-connected-clifford",
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-extremal-cluster-residual-nesting",
+  "worker": "stage1",
+  "summary": "Complete same-section residual argument: use injective evaluation to glue maps on the ideal sum, identify the union/intersection as residuals, use the section-space kernel inequality and numerical duality, then extremality and finite-discrete length detection. No new nodes: Hom gluing and linear algebra are written out from the cited residual theorem. Fixed doubled TeX escapes only; all mathematical hypotheses retained.",
+  "blueprint": "Supporting curve input in det-thm-sf-ctf-stability-direct-images (3), via the inherited alteration/moduli/linear-series chain; Franciosi--Tenni Lemma 3.1, strict branch. The latest blueprint has no residual-cluster or Clifford node. Ancestor command returns null, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-to-proper tool, used only to verify finite type for the finite-discrete length argument; no alteration or curve route is replaced."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic zero-dimensional Noetherian topology tool, needed to detect equality of nested finite clusters by total length; the unit contains no such topology statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-sc-zero-dim-noetherian-finite-discrete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-3bee9420e",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-3bee9420e (reviewer sub-agent of L); spot-checked: PASS. I read the item and all six steps in full, with no fixes needed. The delivery has no new nodes, and its statement matches the live unsplit statement apart from the TeX backslash normalization. There is no repair note and the item is not superseded; proof_deps is the union of the step uses, and there is no cycle. Step 1: the inclusion F_S into omega_X, evaluated at s, gives s in V_T, so s lies in V_U and V_D and is generically nonzero; the residual theorem therefore applies to T, U and D. Step 2: maps on I_S+I_T glue because evaluation is injective on Hom(F_U,omega_X); the involution T*=S gives image F_T∩F_S=F_U, so D*=U. Step 3: the kernel of V_S⊕V_T→V_D is V_U, so v(S)+v(T)≤v(U)+v(D); with ℓ(S)+ℓ(T)=ℓ(D)+ℓ(U)=2p_a−2, c(T)=c(S) and c(D)=c(U) this gives c(U)≤c(S), in the right direction. Step 4: the extremality hypotheses give c(U)=c(S) and ℓ(U)≤ℓ(S). Steps 5 and 6: projective ⇒ proper ⇒ finite type ⇒ Noetherian, so the zero-dimensional U is finite discrete; the stalkwise surjection O_U→O_S gives ℓ(S)≤ℓ(U), and equality forces I_S=I_U, so S*⊆S. The Stacks tags 01T6, 01WC and 0AAX are verified. I checked small cases by hand: a smooth point t^a against t^n, (u+v):(u,v)=(u,v) on the node, and (u⁴+v⁴):(u,v³)=(u⁴,v²) with lengths 3+5=8, whose sum and intersection are mutually residual. D=∅ is covered because the residual theorem allows ℓ=0. The hypothesis c(S)<0 is unused but stays in the statement, as it must. I accept the declared generic tool_uses lem-kun-projective-implies-proper and lem-sc-zero-dim-noetherian-finite-discrete. No duplicate exists: lem-sfb-extremal-cluster-moving-component has a different conclusion, and no SGA source is cited. Franciosi–Tenni is not in the local literature, so I judged the agent-marked proof on its own merits, and it is complete."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExtremalClusterResidualNesting",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.extremal_cluster_residual_nesting",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExtremalClusterResidualNesting.lean",
+  "statement": "theorem extremal_cluster_residual_nesting (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsHProjective (X ↘ Spec (.of k))] [ConnectedSpace X] [IsReduced X] (hTwoConnected : ∀ (A B : Scheme.{u}) (a : A ⟶ X) (b : B ⟶ X), IsClosedImmersion a → IsClosedImmersion b → IsReduced A → IsReduced B → Nonempty A → Nonempty B → (∃ P Q : Set (Set X), P ⊆ irreducibleComponents X ∧ Q ⊆ irreducibleComponents X ∧ Disjoint P Q ∧ P ∪ Q = irreducibleComponents X ∧ Set.range a = ⋃₀ P ∧ Set.range b = ⋃₀ Q) → 2 ≤ Module.finrank k (scalarCohomology (CategoryTheory.Limits.pullback.fst a b ≫ a ≫ X ↘ Spec (.of k)) (unit (CategoryTheory.Limits.pullback a b)) 0)) (S : Scheme.{u}) (i : S ⟶ X) [IsClosedImmersion i] (D : SubcanonicalClusterData k X S i) (hSsub : IsSubcanonicalCluster i D.dualizing) (R : ℕ) (hSplitting : subcanonicalSplittingIndex D ≤ R) (c : ℤ) (hc : c = 2 * (1 - eulerChar k (unit X)) - (Module.finrank k (scalarCohomology (i ≫ X ↘ Spec (.of k)) (unit S) 0) : ℤ) - 2 * (Module.finrank k (scalarCohomology (X ↘ Spec (.of k)) (subcanonicalModule i D.dualizing) 0) : ℤ)) (hNegative : c < 0) (hExtremal : ∀ (T : Scheme.{u}) (j : T ⟶ X) [IsClosedImmersion j] (E : SubcanonicalClusterData k X T j), E.dualizing = D.dualizing → IsSubcanonicalCluster j E.dualizing → subcanonicalSplittingIndex E ≤ R → c ≤ 2 * (1 - eulerChar k (unit X)) - (Module.finrank k (scalarCohomology (j ≫ X ↘ Spec (.of k)) (unit T) 0) : ℤ) - 2 * (Module.finrank k (scalarCohomology (X ↘ Spec (.of k)) (subcanonicalModule j E.dualizing) 0) : ℤ) ∧ (c = 2 * (1 - eulerChar k (unit X)) - (Module.finrank k (scalarCohomology (j ≫ X ↘ Spec (.of k)) (unit T) 0) : ℤ) - 2 * (Module.finrank k (scalarCohomology (X ↘ Spec (.of k)) (subcanonicalModule j E.dualizing) 0) : ℤ) → Module.finrank k (scalarCohomology (j ≫ X ↘ Spec (.of k)) (unit T) 0) ≤ Module.finrank k (scalarCohomology (i ≫ X ↘ Spec (.of k)) (unit S) 0))) (s : Γ(subcanonicalModule i D.dualizing, ⊤)) (hs : ∀ C : irreducibleComponents X, TopCat.Presheaf.germ (subcanonicalModule i D.dualizing).presheaf ⊤ (genericPoints.ofComponent C).val (Set.mem_univ _) s ≠ 0) (J : X.IdealSheafData) (hJdim : topologicalKrullDim J.subscheme ≤ 0) (hResidual : imageSubobject (subcanonicalEvaluation (subcanonicalModule i D.dualizing) D.dualizing s) = imageSubobject (subcanonicalModuleInclusion J.subschemeι D.dualizing)) (DU : SubcanonicalClusterData k X (i.ker ⊓ J).subscheme (i.ker ⊓ J).subschemeι) (hUnionDualizing : DU.dualizing = D.dualizing) (hUnionSubcanonical : IsSubcanonicalCluster (i.ker ⊓ J).subschemeι DU.dualizing) (hUnionSplitting : subcanonicalSplittingIndex DU ≤ R) : i.ker ≤ J",
+  "branch": "sheaf-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The residual is specified by the recorded canonical evaluation-image characterization. The union is the subscheme of i.ker inf J; the conclusion is the reverse ideal inclusion i.ker ≤ J, retaining nilpotents. Competitors and union data retain the same specified dualizing module. No statement change or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c50a7149c",
+  "group": "Q105",
+  "result": "pass",
+  "note": "First stage-2 delivery: only the lean field differs from live; statement verbatim; one sorry (the proof). Read in side-live the splitting-index module (SubcanonicalClusterData, subcanonicalModule, IsSubcanonicalCluster, subcanonicalSplittingIndex, which depends only on dualizing) and the residual-duality module (subcanonicalEvaluation, subcanonical_residual_duality). Each clause matches the node: hTwoConnected, pure-dimension and nodal fields of D, c fixed by hc in Z, hNegative kept, hExtremal over all competitors with the same omega (c and r depend only on omega), the generic-germ condition on s, S* as the unique J with evaluation image J·omega, U as the subscheme of i.ker ⊓ J with explicit subcanonicity and splitting bound, conclusion i.ker ≤ J (S* ⊆ S with nilpotents). No extra hypotheses. Edge cases: empty clusters, R=0, irreducible X. Source and blueprint docstrings with six steps. Report has Worker report and Second reading by Q105 (same-session per dispatcher). No compile: no file changed."
+ }
+}

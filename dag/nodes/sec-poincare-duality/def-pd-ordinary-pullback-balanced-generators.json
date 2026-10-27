@@ -1,0 +1,125 @@
+{
+ "id": "def-pd-ordinary-pullback-balanced-generators",
+ "kind": "definition",
+ "title": "Ordinary module pullback balanced generators",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], $X,Y$ schemes with their small pro-etale sites [def-weil-pbc-proetale-site], and $f:X\\to Y$. Write $R_T=p_T^*\\Lambda$ for the coefficient rings [sk-def-sfb-pulled-back-coefficients]. Use the internal and section module categories, fixed section equivalences and local pure tensors of [def-pd-section-module-operations-data], and the specified monoidal pullback structures of [def-pd-proetale-section-module-functors]. Define $I_f(M)=f^{-1}M$, an internal $f^{-1}R_Y$-module. For every source-site object $W$ and $x\\in I_f(M)(W)$, $y\\in I_f(N)(W)$, define $\\tau_f(x,y)\\in I_f(M\\otimes_{R_Y}N)(W)$ by the inverse-image lax tensor comparison applied to the balanced pure tensor of $x,y$. For $s\\in R_X(W)$ define $\\sigma_f(s,x)\\in(f^*M)(W)$ as the image of $s\\otimes x$ under the ambient sheaf tensor map followed by the scalar-extension coequalizer projection for $f^{-1}R_Y\\to R_X$. Retain as named maps the specified internal oplax tensor $\\delta_{M,N}$, its strong-structure lax inverse $\\mu_{M,N}$, and internal oplax unit $\\eta$, and their specified section-module oplax tensor and unit maps. These are the existing constructions, with no further choices or asserted normalization equations.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pd-section-module-operations-data",
+  "def-pd-proetale-section-module-functors"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03EK and 03EL (lemma-tensor-product-pullback): inverse image, scalar-extension balanced generators and tensor comparison; used in sites-cohomology Tag 07A4"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local balanced generators for inverse image and scalar extension of modules on a ringed site",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.LocalGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.ctorIdx\", \"SheafOfModules.LocalGeneratorsData.generators\", \"PresheafOfModules.pullback\", \"SheafOfModules.LocalGeneratorsData.X\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.mk\"], \"note\": \"\", \"digest\": \"39ec537b4ebdcd5d\"}",
+   "date": "2026-10-23",
+   "verdict": "existing: the exact pro-etale generators are the plain definitions in Sheaf.Paper.SectionOrdinaryOplaxNormalization; the Mathlib hits do not specialize these constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of modules followed by extension of scalars local balanced pure tensor generator",
+   "results": "{\"n_hits\": 8, \"top\": [\"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"IsLocalization.moduleTensorEquiv\", \"IsLocalizedModule.rTensor\", \"LinearMap.extendScalarsOfIsLocalizationEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"IsLocalization.moduleLid\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"Submodule.exists_fg_of_baseChange_eq_zero\"], \"note\": \"\", \"digest\": \"0c6d9410a94a43ce\"}",
+   "date": "2026-10-23",
+   "verdict": "existing: the exact pro-etale generators are the plain definitions in Sheaf.Paper.SectionOrdinaryOplaxNormalization; the Mathlib hits do not specialize these constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationInverseImage|normalizationScalarTensor|extendπ",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "existing: the exact pro-etale generators are the plain definitions in Sheaf.Paper.SectionOrdinaryOplaxNormalization; the Mathlib hits do not specialize these constructions"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-oplax-total-comparison",
+  "date": "2026-10-23",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The local balanced-generator formulas in the actual total oplax comparison, used by seeded nt-target-poincare-isiso Step 2 via module/ringed derived comparison Step 3.",
+   "via": [
+    "lem-pd-section-oplax-total-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "module": "Sheaf.Paper.SectionOrdinaryOplaxNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationScalarTensor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInverseImage",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInverseImageTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationScalarTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInternalTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInternalTensorInv",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationInternalUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationSectionTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.normalizationSectionUnit"
+  ],
+  "statement": "def normalizationScalarTensor {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (M : internalModules Λ Y) (W : X.ProEtᵒᵖ) (s : (ring Λ X).obj.obj W)\n    (m : ((normalizationInverseImage Λ f).obj M).X.obj.obj W) :\n    ((CondensedRing.upperStar Λ f).obj M).X.obj.obj W",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "H2 requested definition ownership of the already landed plain defs/abbrevs. These eight definitions have full data independent of section_ordinary_oplax_normalization; none uses that theorem or a choice from it. Retain their existing location, with no source move or duplication. The specified pullOplax and CondensedRing.monoidal_upperStar structures are supplied through def-pd-proetale-section-module-functors, and ordinary module/pure-tensor data through def-pd-section-module-operations-data."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb282e2a8",
+  "group": "Q42",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb282e2a8",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after the bea2 landing refusal (name clash with live SectionDerivedRealization.totalPullComparison). Diff vs bea2: the only Lean change is the rename to termwisePullComparison (termwise lift of the fixed operation comparison on one internal complex, not the two-complex tensor comparison) plus 4 uses, node declarations and lean.note, and the report section. Grep of side-live Sheaf and WeilConjectures for all 21 delivered names: no collisions. New advisory (H4/H12): sectionTotalIso is the same map as live totalPullComparison. Reuse is impossible without adding [∀ X, HasDerivedCategory.{u+1} (modules Λ X)] (a FIX attempt failed to synthesize it, so it was discarded). A probe proved (sectionTotalIso Λ f P Q).hom = totalPullComparison Λ f P Q by unfold+simp, clean (data module 26.2 s, probe 9.2 s). Re-checked all 12 clauses against the node: conjugated hom and inv with TotalMapAgreement, summands, local formulas 5/6/8, unit, naturality, associator and unitors. Unrestricted ℤ-complexes, signed coproduct total, HasDerivedCategory.{u+1} on X only, no universe equality. Edge cases f=id, empty schemes, Λ=0, zero complexes, R[0], negative and odd degrees all within the binders. Both lean.statement fields verbatim; only sorry is the theorem proof; docstrings carry source and blueprint. Advisories: data-module docstring mentions a nonexistent proposition; public priority-3000 instance aliases; unused inherited stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261023T231648-L-3630234",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_ordinary_oplax_normalization"
+  ],
+  "sorry_after": []
+ }
+}

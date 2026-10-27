@@ -1,0 +1,341 @@
+{
+ "id": "lem-pod-completion-unit-scalar-intertwining",
+ "kind": "statement",
+ "title": "Identify the actual coefficient quotient-cone comparison with completion exchange",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, a prime $\\ell\\ne\\operatorname{char}k$, and finite coefficient fields inside a fixed $\\overline{\\mathbf Q}_\\ell$, with valuation rings, uniformizers and finite quotients as in [def-weil-finite-coefficient-point]. For a field $F$ write $R_F=\\widehat{\\mathcal O}_{F,s}=\\lim_n B_{F,n}$ and $B_{F,n}=(\\mathcal O_F/\\varpi_F^n)_s$ [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded derived categories of module sheaves on the small pro-etale site of $s$, with the coefficient universes of [lem-coef-derived-system-evaluation-calculus]. Put $H_F=\\mathcal L_s^F\\mathcal R_s^F$, with actual unit $u^F$ of [lem-coef-derived-system-evaluation-calculus], normalized by [lem-trf-completion-unit-strict-quotient-model]. On the full derived-complete subcategory [def-weil-derived-complete] write $v^F=(u^F)^{-1}$, using [lem-pur-normalized-reconstruction-adjunction-calculus].\n\nLet $E\\subset L$, set $R=R_E$, $S=R_L$, $t=\\varpi_E$, $w=\\varpi_L$, and $T=-\\otimes_R^L S$ [lem-pur-derived-change-of-rings]. Write $\\widehat T$ for the specified strict-tower integral scalar extension [lem-weil-integral-scalar-extension-well-defined] and $\\chi: T\\xrightarrow{\\sim}\\widehat T$ on complete objects for [lem-weil-finite-free-completed-scalar-comparison]. Let $C\\in D(R)$ be derived complete. For a flat-term K-flat representative $P\\to C$, use the normalized Roos cones [def-pc-kflat-complex, lem-weil-strict-roos-comparison].\n\nThe projection $R_F\\to B_{F,n}$ identifies $R_F/\\varpi_F^nR_F$ with $B_{F,n}$, compatibly with all quotient transitions, for $F=E,L$. Under these identifications the strict sheaf-quotient completions of [lem-pur-finite-free-completion-exchange] are naturally $H_E,H_L$, and their augmentations are the actual $u^E,u^L$. The multiplication identification\n$$ (P\\otimes_R S)\\otimes_S B_{L,n}\\longrightarrow P\\otimes_R B_{L,n},\\quad (p\\otimes a)\\otimes b\\longmapsto p\\otimes ab $$\nidentifies $\\widehat TC$ with $H_L(TC)$ in $D(S)$ and carries $\\chi_C$ to $u^L_{TC}$; this is natural in complete $C$, including $C$ replaced by $H_EC$.\n\nDefine $b_C:T(H_EC)\\to H_L(TC)$ by the canonical tensor/product comparison and the map on both Roos product coordinates induced at index $n$ by\n$$ (p\\otimes\\bar a)\\otimes z\\longmapsto p\\otimes\\iota_n(\\bar a)\\bar z, $$\nwhere $\\iota_n:\\mathcal O_E/t^n\\to\\mathcal O_L/w^n$ is the quotient map of [lem-weil-integral-scalar-extension-well-defined]. This specifies a natural derived map independent of representatives. For complete $C$ it equals the exchange $\\epsilon_C$ of [lem-pur-finite-free-completion-exchange], after the preceding quotient identifications; thus this assertion compares the same-index quotient map with the arithmetic-subsequence exchange, rather than choosing a comparison by an equation. The specified completed comparison\n$$ \\beta_{L/E,C}=H_L(\\chi_C)\\,b_C\\,\\chi_{H_EC}^{-1}:\\widehat T(H_EC)\\xrightarrow{\\sim}H_L(\\widehat TC) $$\nsatisfies the equality of actual derived morphisms\n$$ v^L_{\\widehat TC}\\,\\beta_{L/E,C}=\\widehat T(v^E_C). $$\nThis holds for ramified extensions as well, with no boundedness, constructibility or finite-Tor assumption on $C$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "First sentence, 'for f=id_s the functor Rf_! is the identity': the coefficient-sheaf quotient and tower identifications, equality of the same-index scalar comparison with completion exchange on complete inputs, and completed conjugation (old steps 5-7).",
+  "external": [
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 3.5.2-3.5.3, Lemma 3.5.7 and Lemma 6.8.2(1). Agent-formulated comparison and descent calculation extracted from the returned proof, not a verbatim theorem of this source."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-coefficient-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "def-weil-derived-complete",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-finite-free-completion-exchange",
+  "def-pc-kflat-complex",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The completed_exact theorem supplies invertibility of both actual quotient comparisons. Cancel their cokernel projections to prove adjacent transition compatibility, then apply the single-complex functor. This is the private quotientTransitions proof.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing counit-normalized completed scalar cochain model; its ordinary and derived functors give hE and sigma by reflexivity. Finite freeness and the ramification relation from the completed scalar comparison proof instantiate finiteFreeQuotientRoosComparison. Apply the existing exchangeFromCochains construction to obtain CR, CS, epsilon and their entire unit equation, retaining the prescribed arithmetic representative formulas.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-finite-free-quotient-roos-comparison",
+    "lem-pur-finite-free-completion-exchange",
+    "det-pe-products-exact",
+    "lem-pur-principal-quotient-completion-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized quotient-adjunction realization to CR and CS, and multiplication realization to F and CS. These supply A,B,ME,ML,NE,NL,alpha,gamma,c and the complete normalization equations required in the statement. Apply same-index descent to F,CR,CS to obtain b with its representative formula and entire unit equation.",
+   "uses": [
+    "lem-pod-quotient-adjunction-realization",
+    "lem-pod-scalar-multiplication-realization",
+    "lem-pod-same-index-unit-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For complete K, normalized reconstruction gives completeness of H_E K and invertibility of its actual unit. Finite-free scalar comparison gives completeness of T K and invertibility of chi at K and H_E K. Naturality of the target unit along chi_K makes the target unit at widehat T K invertible. The normalized quotient-unit criterion transfers this to actual completeness. Apply the same criterion to CR at K; cancel F.T.map(CR.unit_K) in the two whole-unit equations to prove b_K=epsilon_K.",
+   "uses": [
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-completed-integral-principal-unit-criterion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the b unit equation along alpha, gamma and sigma; their naturality and inverse equations give T(actual source unit) followed by actualSameIndex equals the actual target unit. Set beta=widehat T(uK inverse) followed by uX. After left composition with chi_H, naturality of chi at uK inverse and of the target unit at chi_K proves exactly the requested conjugation expression. Right composition with uX inverse then cancels uX and proves the final derived-morphism identity. The private sameIndex_actual_unit and conjugated_unit proofs carry out these cancellations explicitly.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-finite-free-quotient-roos-comparison",
+  "lem-pur-finite-free-completion-exchange",
+  "det-pe-products-exact",
+  "lem-pur-principal-quotient-completion-exists",
+  "lem-pod-quotient-adjunction-realization",
+  "lem-pod-scalar-multiplication-realization",
+  "lem-pod-same-index-unit-descent",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-weil-completed-integral-principal-unit-criterion",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Opening sentence, coefficient normalization; implements the existing nine-step comparison argument using three strictly smaller construction/descent lemmas and explicit categorical cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite free completed coefficient extension intertwines derived completion units by a quotient induced Roos cone map",
+   "results": "[leanfinder] OK 8 hit(s); IsAdicComplete.StrictMono.of_comp_lift [Mathlib/RingTheory/AdicCompletion/Basic] ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f; IsAdicComplete.of_lift [Mathlib/RingTheory/AdicCompletion/Basic] ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow; IsAdicComplete.StrictMono.of_lift [Mathlib/RingTheory/AdicCompletion/Basic] ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f; IsAdicComplete.of_comp_lift [Mathlib/RingTheory/AdicCompletion/Basic] ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow; IsAdicComplete.of_liftRingHom [Mathlib/RingTheory/AdicCompletion/RingHom] ∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (x : R),\n  (AdicCompletion.of I S) ((IsAdicComplete.li; IsAdicComplete.ofAlgEquiv_comp_liftRingHom [Mathlib/RingTheory/AdicCompletion/RingHom] ∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m),\n  (↑(AdicCompletion.ofAlgEquiv I)).comp (IsAdicComple; AdicCompletion.map_of [Mathlib/RingTheory/AdicCompletion/Functoriality] ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) (x : M),\n  (AdicCompletion.map I f) ((AdicCompletion.of I M) x) = (AdicCompletion.of I N) (f x); Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq [Mathlib/RingTheory/Smooth/AdicCompletion] ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, ordinary-module completion, or unrelated support results; no identity compact-support strict-system/unit normalization or actual derived scalar-cone intertwining theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "[loogle] OK 3 hit(s); CategoryTheory.Adjunction.unit_naturality [Mathlib.CategoryTheory.Adjunction.Basic]  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {X Y : C} (f : X ⟶ Y) : CategoryTheory.CategoryStruct.comp (adj.unit.app X) (G.map (F.map f)) = CategoryTheory.Catego; CategoryTheory.LiftRightAdjoint.unitEqualises [Mathlib.CategoryTheory.Adjunction.Lifting.Right]  {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {U : CategoryTheory.Functor A B} {F : CategoryTheory.Functor B A} (adj₁ : F ⊣ U) (h : (X : B) → CategoryTheory.RegularMono (adj₁.unit.app X)) (X : B) : CategoryTheory.Limits.IsLimit (CategoryTheory; CategoryTheory.LiftRightAdjoint.unitEqualizes [Mathlib.CategoryTheory.Adjunction.Lifting.Right]  {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {U : CategoryTheory.Functor A B} {F : CategoryTheory.Functor B A} (adj₁ : F ⊣ U) (h : (X : B) → CategoryTheory.RegularMono (adj₁.unit.app X)) (X : B) : CategoryTheory.Limits.IsLimit (CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, ordinary-module completion, or unrelated support results; no identity compact-support strict-system/unit normalization or actual derived scalar-cone intertwining theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[cC]ompletion.*([sS]calar|[tT]ensor|[uU]nit)|[Rr]oos.*[tT]ensor",
+   "results": "[grep] OK 20 hit(s); Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:339 variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:355 variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:357 /-- Assume that `w.Completion` forms an algebra over `v.Completion` with continuous scalar action,; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:413 variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]; Mathlib/Topology/Algebra/Valued/ValuedField.lean:564     simp_rw [← closure_coe_completion_v_lt, Units.coe_map]; Mathlib/RingTheory/Smooth/AdicCompletion.lean:84       ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f := by; Mathlib/RingTheory/Smooth/AdicCompletion.lean:98   refine ⟨AlgHom.comp ((AdicCompletion.ofAlgEquiv I).symm.toAlgHom.restrictScalars R) g, ?_⟩; Mathlib/RingTheory/Smooth/Flat.lean:8 public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:16 # Adic completion as tensor product; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:288     (0 : AdicCompletion I R ⊗[R] M →ₗ[AdicCompletion I R] Unit); Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:289     (0 : _ →ₗ[AdicCompletion I R] Unit); Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:292     (0 : _ →ₗ[AdicCompletion I R] Unit); Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:293     (0 : _ →ₗ[AdicCompletion I R] Unit); Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean:162   simp only [isUnit_iff_ne_zero, adicCompletionIntegers.isUnit_iff_valued_eq_one, exists_prop,; Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean:169     adicCompletionIntegers.mem_units_iff_valued_eq_one.1 h; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean:965 instance adicCompletion.instIsScalarTower' :; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean:1003 theorem adicCompletionIntegers.isUnit_iff_valued_eq_one {a : v.adicCompletionIntegers K} :; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean:1007 theorem adicCompletionIntegers.mem_units_iff_valued_eq_one {a : (v.adicCompletion K)ˣ} :; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean:1008     a ∈ (v.adicCompletionIntegers K).units ↔ Valued.v a.1 = 1 := by; Mathlib/RingTheory/AdicCompletion/Algebra.lean:485     (AdicCompletion.evalOneₐ <| RingHom.ker f).restrictScalars R",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, ordinary-module completion, or unrelated support results; no identity compact-support strict-system/unit normalization or actual derived scalar-cone intertwining theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free scalar extension commutes with countable products and completion unit maps of complexes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary to completed adic scalar comparison sends tensor of completion unit to the completion unit",
+   "results": "[leanfinder] OK 8 hit(s); AdicCompletion.ofTensorProduct_tmul [Mathlib/RingTheory/AdicCompletion/AsTensorProduct] ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x; AdicCompletion.tensor_map_id_left_eq_map [Mathlib/RingTheory/AdicCompletion/AsTensorProduct] ∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\n  TensorProduct.Alge; AdicCompletion.ofTensorProduct [Mathlib/RingTheory/AdicCompletion/AsTensorProduct] {R : Type u_1} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (M : Type u_2) →\n        [inst_1 : AddCommGroup M] →\n          [inst_2 : Module R M] → TensorProduct R (AdicCompletion I R) M →ₗ[AdicCompletion I R] AdicCompletion I M; AdicCompletion.ofTensorProductEquivOfPiFintype [Mathlib/RingTheory/AdicCompletion/AsTensorProduct] {R : Type u_1} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (ι : Type u_4) →\n        [Fintype ι] →\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R); AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of [Mathlib/RingTheory/AdicCompletion/AsTensorProduct] ∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x; AdicCompletion.ofTensorProduct_naturality [Mathlib/RingTheory/AdicCompletion/AsTensorProduct] ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\n    AdicCompletion.ofTensorProduct I N ; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian [Mathlib/RingTheory/AdicCompletion/AsTensorProduct] {R : Type u} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (M : Type u) →\n        [inst_1 : AddCommGroup M] →\n          [inst_2 : Module R M] →\n            [IsNoetherianRing R] →\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I ; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply [Mathlib/RingTheory/AdicCompletion/AsTensorProduct] ∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, ordinary-module completion, or unrelated support results; no identity compact-support strict-system/unit normalization or actual derived scalar-cone intertwining theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "same index quotient cone scalar comparison equals finite free derived completion exchange on complete complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.congr_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M ≃ₗ[R] N) (x : AdicCompletion I M),\\n  (AdicCompletion.congr I f) x = (AdicCompletion.map I ↑f) x\", \"doc\": \"For any linear equivalence $ f : M \\\\simeq_R N $ between $ R $-modules $ M $ and $ N $, and for any element $ x $ in the $ I $-adic completion of $ M $, the congruence-induced linear map $ \\\\mathrm{cong\"}\n  {\"name\": \"AdicCompletion.piEquivFin\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) → (n : ℕ) → AdicCompletion I (Fin n → R) ≃ₗ[AdicCompletion I R] Fin n → AdicCompletion I R\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a natural number $ n $, this constructs a linear equivalence between the $ I $-adic completion of the product $ \\\\prod_{i=1}^n R $ (viewed as functions\"}\n  {\"name\": \"AdicCompletion.piEquivOfFintype_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {ι : Type u_6} (M : ι → Type u_7)\\n  [inst_1 : (i : ι) → AddCommGroup (M i)] [inst_2 : (i : ι) → Module R (M i)] [inst_3 : DecidableEq ι]\\n  [inst_4 : Fintype ι] (x : AdicCompletion I ((j : ι) → M j)),\\n  (AdicCompletion.piEquivOfFintype I M) x = (Adic\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\} $, there exists a linear equivalence between the $ I $-adic completion of the pro\"}\n  {\"name\": \"AdicCompletion.congr\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M ≃ₗ[R] N) → AdicCompletion I M ≃ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, an $ R $-linear equivalence between $ M $ and $ N $ induces a linear equivalence between their $ I $-adic completions\"}\n  {\"name\": \"AdicCompletion.piEquivOfFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [DecidableEq ι] →\\n                [Fintype ι] → AdicCompletion I ((j : \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\} $, this constructs a linear equivalence between the $ I $-adic completion of the \"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n) (x : AdicCompletion I M), (AdicCompletion.transitionMap I M hmn) (↑x n) = ↑x m\", \"doc\": \"For natural numbers $ m \\\\leq n $ and any element $ x $ in the $ I $-adic completion of an $ R $-module $ M $, applying the transition map from $ M/I^nM $ to $ M/I^mM $ to the $ n $-th component of $ x\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the canonical factor map $M/I^nM \\\\to M/I^mM$ (induced by $I^nM \\\\subseteq I^mM$) with the linear map $f_n$ equals the linear map $f_m$, where $I$ is a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module or topological completions; none identifies the project coefficient quotient towers, actual unit and arithmetic-subsequence exchange with the specified completed conjugation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.IsIso",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module or topological completions; none identifies the project coefficient quotient towers, actual unit and arithmetic-subsequence exchange with the specified completed conjugation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completed coefficient extension conjugates scalar exchange of derived completion units",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"UniformSpace.Completion.map_smul_eq_mul_coe\", \"module\": \"Mathlib.Topology.Algebra.UniformRing\", \"type\": \"(r : R) : Completion.map (r • ·) = ((algebraMap R A r : Completion A) * ·)\", \"doc\": \"For any scalar $ r $ in a commutative semiring $ R $ and an algebra $ A $ over $ R $, the scalar multiplication by $ r $ on the completion of $ A $ coincides with multiplication by the image of $ r $ \"}\n  {\"name\": \"ContinuousLinearMap.coe_completion\", \"module\": \"Mathlib.Topology.Algebra.LinearMapCompletion\", \"type\": \"(f : α →SL[σ] β) : f.completion = Completion.map f\", \"doc\": \"Given modules $\\\\alpha$ and $\\\\beta$ over semirings $R_1$ and $R_2$ with a ring homomorphism $\\\\sigma: R_1 \\\\to R_2$, and a continuous linear map $f: \\\\alpha \\\\to \\\\beta$, there exists a unique continuous li\"}\n  {\"name\": \"ContinuousLinearMap.completion\", \"module\": \"Mathlib.Topology.Algebra.LinearMapCompletion\", \"type\": \"(f : α →SL[σ] β) : Completion α →SL[σ] Completion β\", \"doc\": \"Given modules $\\\\alpha$ and $\\\\beta$ over semirings $R_1$ and $R_2$ with a ring homomorphism $\\\\sigma: R_1 \\\\to R_2$, and a continuous linear map $f: \\\\alpha \\\\to \\\\beta$, this constructs the unique extensio\"}\n  {\"name\": \"UniformSpace.Completion.coe_smul\", \"module\": \"Mathlib.Topology.Algebra.UniformMulAction\", \"type\": \"(c : M) (x : X) : (↑(c • x) : Completion X) = c • (x : Completion X)\", \"doc\": \"For any scalar $ c $ in a monoid $ M $ and element $ x $ in a uniform space $ X $, the canonical embedding of the scalar product $ c \\\\cdot x $ into the completion of $ X $ equals the scalar product of\"}\n  {\"name\": \"ContinuousLinearMap.completion_apply_coe\", \"module\": \"Mathlib.Topology.Algebra.LinearMapCompletion\", \"type\": \"(f : α →SL[σ] β) (a : α) : f.completion a = f a\", \"doc\": \"For any continuous linear map $ f : \\\\alpha \\\\to \\\\beta $ and any element $ a \\\\in \\\\alpha $, the extension of $ f $ to the completion of $ \\\\alpha $ evaluated at $ a $ is equal to $ f(a) $.\"}\n  {\"name\": \"ConjAct.unitsSMulCommClass'\", \"module\": \"Mathlib.GroupTheory.GroupAction.ConjAct\", \"type\": \"[SMul α M] [SMulCommClass M α M] [IsScalarTower α M M] : SMulCommClass (ConjAct Mˣ) α M\", \"doc\": \"The conjugation action of the group of units $M^\\times$ on a monoid $M$ commutes with another scalar multiplication $\\\\bullet : \\\\alpha \\\\times M \\\\to M$, given the compatibility conditions of scalar tower\"}\n  {\"name\": \"UniformSpace.Completion.smul_def\", \"module\": \"Mathlib.Topology.Algebra.UniformMulAction\", \"type\": \"(c : M) (x : Completion X) : c • x = Completion.map (c • ·) x\", \"doc\": \"For a monoid $ M $ acting on a uniform space $ X $, the completion $ \\\\hat{X} $ of $ X $ inherits a scalar multiplication by $ M $. This action is defined by extending the original scalar multiplicatio\"}\n  {\"name\": \"UniformSpace.Completion.instSMul\", \"module\": \"Mathlib.Topology.Algebra.UniformMulAction\", \"type\": \": SMul M (Completion X)\", \"doc\": \"The completion of a uniform space $ X $ inherits a scalar multiplication by a monoid $ M $ from the scalar multiplication on $ X $. This scalar multiplication on the completion is defined by extending\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module or topological completions; none identifies the project coefficient quotient towers, actual unit and arithmetic-subsequence exchange with the specified completed conjugation"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]oos|[Cc]ompletion.*[Ee]xchange|[Cc]ompleted.*[Ss]calar",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/LSeries/ZMod.lean\", \"line\": \"320\", \"text\": \"The completed L-function of a function `ZMod 1 → ℂ` is a scalar multiple of the completed Riemann\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module or topological completions; none identifies the project coefficient quotient towers, actual unit and arithmetic-subsequence exchange with the specified completed conjugation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "same index scalar extension of quotient Roos cones commutes with the derived completion unit",
+   "results": "8 hits: AdicCompletion.eval_comp_of, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.of_comp_lift, IsAdicComplete.of_lift, AdicCompletion.ofTensorProduct_naturality, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.StrictMono.extend_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: hits state ordinary module completion, ordinary scalar adjunction, or unrelated algebraic facts, not this strict derived coefficient-system/unit and ramified comparison theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free derived scalar extension commutes with the unit of derived quotient completion",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, IsAdicComplete.StrictMono.of_comp_lift, Algebra.TensorProduct.instFree, AdicCompletion.instModuleOfIsScalarTower.congr_simp, AdicCompletion.instIsScalarTower_1, UniformSpace.Completion.map_smul_eq_mul_coe, AdicCompletion.module, AdicCompletion.val_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: hits state ordinary module completion, ordinary scalar adjunction, or unrelated algebraic facts, not this strict derived coefficient-system/unit and ramified comparison theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit of reductions tensor finite free coefficient sheaf natural comparison with ramified scalar extension",
+   "results": "8 hits: Algebra.FormallyUnramified.sec, Algebra.Extension.tensorCotangentInvFun, Algebra.Extension.tensorH1Cotangent, Algebra.Extension.tensorCotangent, Algebra.FormallyUnramified.elem, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype",
+   "date": "2026-10-22",
+   "verdict": "no match: hits state ordinary module completion, ordinary scalar adjunction, or unrelated algebraic facts, not this strict derived coefficient-system/unit and ramified comparison theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-identity-compact-support-normalization",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "First sentence, 'for f=id_s the functor Rf_! is the identity': the coefficient-sheaf quotient and tower identifications, equality of the same-index scalar comparison with completion exchange on complete inputs, and completed conjugation (old steps 5-7).",
+   "via": [
+    "lem-pod-identity-compact-support-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-completion-unit-scalar-intertwining",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Identified coefficient sheaf quotients and actual units through existing strict models, constructed and descended the same-index map, checked its entire augmentation, compared with the specified ramified exchange by cancellation on complete inputs, and computed the completed conjugation.",
+  "blueprint": "Realizes the coefficient/unit/scalar compatibility implicit in the first sentence of lem-pod-point-dualizing-complex.proof.md, 'for f=id_s the functor Rf_! is the identity'; follows the extracted parent steps 5–7.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-principal-koszul-strict-replacement",
+    "why": "Uses its exact sequence for the actual completed coefficient projection; the present unit has no replacement for this generic quotient fact."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Uses exact products on the pro-etale site to compute the unbounded Roos cones."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic statement used for its explicitly stated computation; no replacement in this unit."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Uses functorial strict-cone realization, including augmentation normalization."
+   },
+   {
+    "node": "lem-trf-completion-unit-strict-quotient-model",
+    "why": "Uses the normalization theorem for the actual adjunction unit, including the zero shifted coordinate."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings-all-independent",
+    "why": "Uses preservation of K-flatness to compute target derived reduction on the scalar-extended representative."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "Uses the specified same-index maps and strict-tower functor; definitions alone do not establish descent."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Uses the specified natural scalar comparison and completeness after scalar extension."
+   },
+   {
+    "node": "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "why": "Uses invertibility and naturality of the actual unit on the full complete subcategory."
+   },
+   {
+    "node": "lem-weil-completed-integral-finite-free",
+    "why": "Uses finite freeness of the actual coefficient sheaves to apply completion exchange."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Uses the DVR power decomposition to verify the ramification hypothesis of exchange."
+   },
+   {
+    "node": "lem-pur-finite-free-completion-exchange",
+    "why": "Uses the existing generic exchange and its unit equation, with all hypotheses verified."
+   },
+   {
+    "node": "lem-pur-finite-free-quotient-roos-comparison",
+    "why": "Uses exactness of finite-free scalar extension and its strict tensor/cone computation."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Uses quasi-isomorphism invariance on K-flat representatives for quotient tensors."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Uses its K-flat localization equivalence to descend the explicitly constructed comparison."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Uses full faithfulness for natural transformations to descend the cone calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-strict-roos-comparison",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-weil-completed-integral-finite-free",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pur-finite-free-completion-exchange",
+  "lem-pur-finite-free-quotient-roos-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-a79782f5d",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-a79782f5d (reviewer sub-agent of L); spot-checked: I read the whole item. No new nodes, statement unchanged, no repair note (so the re-split rule does not apply). All 9 steps check out against the cited statements. Steps 1-2 use the a1 exact sequence 0→R→^{t^n}R→B_n→0 for the quotient identifications, and the evaluation calculus, strict Roos and trf unit model to make H_F the exchange node's C_{R_F}, with augmentation equal to the actual u^F as entire morphisms. Step 3: P⊗S is flat-term and K-flat, the multiplication identification gives Ť C≅H_L(TC) and χ_C↦u^L_{TC}, and H_E C≅C is complete. Step 4: every hypothesis of finite-free-completion-exchange is verified: d=[L:E], t and w injective, t=a w^e with e≥1 from DVR clause (5) and |t|_L<1, exact products. Step 5: the same-index b is a balanced, S-linear, transition- and cone-compatible chain map, independent of basis. Step 6: descent through K-flat change of rings, Roos descent, exactness of ⊗S, the K-flat localization equivalence and the localization UP. Step 7: b T(u^E)=u^L_{TC}. Step 8: cancelling the invertible T(u^E_C) gives b=ε. Step 9: domains checked; the naturality of u^L and χ gives β=u^L_X Ť(v^E_C). Edge cases: C=0; E=L; ramified t=w^2, where the level-2 map is not injective but is never inverted; f>1; unbounded C. The duplicate candidates (ramified-coefficient-quotient-comparison, finite-free-completion-transport, exchange-coherence and others) do not state this identity. Batch-5 flag: a1-principal-koszul → lem-pod-completed-integral-scalar-regular only states injectivity of ϖ^m on sections of the completed coefficient sheaf. That is elementary coefficient algebra, created for prop-cohomological-finiteness, and not a step of the proof of Poincaré duality or of the trace formula, so it is outside the assumptions. The other closure hit, trf-localization-essentially-surjective, is reached only through a definition and is a generic localization lemma. The trf unit model is an inherited stmt_dep and a generic normalization. The declared tool_uses are acceptable. Maintainer note: in step 4, the equality ι(t)=a w^e in S(1) is left as a one-line projection check, which is acceptable as written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodCompletionUnitScalarIntertwining",
+  "declaration": "WeilConjectures.PodCompletionScalar.completionUnitScalarIntertwining",
+  "declarations": [
+   "WeilConjectures.PodCompletionScalar.point",
+   "WeilConjectures.PodCompletionScalar.completion",
+   "WeilConjectures.PodCompletionScalar.quotientModel",
+   "WeilConjectures.PodCompletionScalar.scalarModel",
+   "WeilConjectures.PodCompletionScalar.QuotientRealization",
+   "WeilConjectures.PodCompletionScalar.QuotientTransitions",
+   "WeilConjectures.PodCompletionScalar.SameIndexFormula",
+   "WeilConjectures.PodCompletionScalar.MultiplicationFormula",
+   "WeilConjectures.PodCompletionScalar.actualSameIndex",
+   "WeilConjectures.PodCompletionScalar.completionUnitScalarIntertwining"
+  ],
+  "file": "lean/Sheaf/Paper/PodCompletionUnitScalarIntertwining.lean",
+  "statement": "theorem completionUnitScalarIntertwining (_hl : l ≠ D.p) : (∀ n : ℕ, IsIso (PrincipalKoszulStrictReplacement.quotientComparison l E (point D) n) ∧ IsIso (PrincipalKoszulStrictReplacement.quotientComparison l L (point D) n)) ∧ QuotientTransitions D l E ∧ QuotientTransitions D l L ∧ ∃ (A : CoefficientDerivedSystemCalculus l E (point D)) (B : CoefficientDerivedSystemCalculus l L (point D)) (ME : CompletionUnit.OrdinaryModel l E (point D)) (ML : CompletionUnit.OrdinaryModel l L (point D)) (NE : CompletionUnit.DerivedModel l E (point D) A ME) (NL : CompletionUnit.DerivedModel l L (point D) B ML) (CR : quotientModel D l E) (CS : quotientModel D l L) (α : CR.completion ≅ completion D l E A) (γ : CS.completion ≅ completion D l L B) (F : scalarModel D l E L ι) (hE : F.E = completedOrdinaryScalarExtension l E L ι (point D)) (σ : F.T ≅ completedDerivedScalarExtension l E L ι (point D)) (c : F.T ⋙ CS.completion ≅ integralScalarExtensionOfUniverses l E L ι (point D)) (b : CR.completion ⋙ F.T ⟶ F.T ⋙ CS.completion) (ε : CR.completion ⋙ F.T ≅ F.T ⋙ CS.completion) (e : ℕ), QuotientRealization D l E A ME NE CR α ∧ QuotientRealization D l L B ML NL CS γ ∧ (∀ P : CochainComplex (integralTowerModules l E (point D)) ℤ, σ.hom.app (DerivedCategory.Q.obj P) ≫ completedScalarCounit l E L ι (point D) P = F.ε.app P ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (eqToIso hE) (.up ℤ)).hom.app P)) ∧ (∀ P : (integralOperationsGoodComplex l E (point D)).FullSubcategory, MultiplicationFormula D l E L ι F hE CS c P) ∧ (∀ K : DerivedCategory (integralTowerModules l E (point D)), (completedScalarComparison l E L ι (point D)).app K = σ.inv.app K ≫ CS.unit.app (F.T.obj K) ≫ c.hom.app K) ∧ (∀ P : (integralOperationsGoodComplex l E (point D)).FullSubcategory, SameIndexFormula D l E L ι F CR CS b P.obj) ∧ (∀ K : DerivedCategory (integralTowerModules l E (point D)), F.T.map (CR.unit.app K) ≫ b.app K = CS.unit.app (F.T.obj K)) ∧ 1 ≤ e ∧ (∀ P : (integralOperationsGoodComplex l E (point D)).FullSubcategory, Nonempty (@CategoryTheory.PrincipalQuotientCompletion.RepresentativeComparison.{t + 1, t, max u (t + 1), max u (t + 1) + 1, max u (t + 1) + 1} (point D).ProEt inferInstance (essentiallySmallSelf.{u} _) (Scheme.ProEt.topology (point D)) inferInstance (integralCoefficientAbSheafify.{t, u} (point D)) (integralCoefficientAbLocallyBijective.{t, u} (point D)) (completedIntegralCommRingSheafUnrestricted l E (point D)) (completedIntegralCommRingSheafUnrestricted l L (point D)) (completedCoefficientMap l E L ι (point D)) (integralTowerHasDerivedCategory l E (point D)) (integralTowerHasDerivedCategory l L (point D)) F (PrincipalKoszulStrictReplacement.uniformizer l E (point D)) (PrincipalKoszulStrictReplacement.uniformizer l L (point D)) e CR CS ε P.obj)) ∧ (∀ K : DerivedCategory (integralTowerModules l E (point D)), F.T.map (CR.unit.app K) ≫ ε.hom.app K = CS.unit.app (F.T.obj K)) ∧ ∀ (K : DerivedCategory (integralTowerModules l E (point D))) (_hK : IntegralOnSlice.IsComplete l E (point D) none K), b.app K = ε.hom.app K ∧ IntegralOnSlice.IsComplete l E (point D) none ((completion D l E A).obj K) ∧ IntegralOnSlice.IsComplete l L (point D) none ((completedDerivedScalarExtension l E L ι (point D)).obj K) ∧ IntegralOnSlice.IsComplete l L (point D) none ((integralScalarExtensionOfUniverses l E L ι (point D)).obj K) ∧ ∃ (uK : K ≅ (completion D l E A).obj K) (χK : (completedDerivedScalarExtension l E L ι (point D)).obj K ≅ (integralScalarExtensionOfUniverses l E L ι (point D)).obj K) (χH : (completedDerivedScalarExtension l E L ι (point D)).obj ((completion D l E A).obj K) ≅ (integralScalarExtensionOfUniverses l E L ι (point D)).obj ((completion D l E A).obj K)) (uX : (integralScalarExtensionOfUniverses l E L ι (point D)).obj K ≅ (completion D l L B).obj ((integralScalarExtensionOfUniverses l E L ι (point D)).obj K)) (β : (integralScalarExtensionOfUniverses l E L ι (point D)).obj ((completion D l E A).obj K) ≅ (completion D l L B).obj ((integralScalarExtensionOfUniverses l E L ι (point D)).obj K)), uK.hom = A.adjunction.unit.app K ∧ χK.hom = (completedScalarComparison l E L ι (point D)).app K ∧ χH.hom = (completedScalarComparison l E L ι (point D)).app ((completion D l E A).obj K) ∧ uX.hom = B.adjunction.unit.app ((integralScalarExtensionOfUniverses l E L ι (point D)).obj K) ∧ β.hom = χH.inv ≫ (actualSameIndex D l E L ι A B F σ CR CS α γ b).app K ≫ (completion D l L B).map χK.hom ∧ β.hom ≫ uX.inv = (integralScalarExtensionOfUniverses l E L ι (point D)).map uK.inv",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing completion, cochain change-of-rings and arithmetic-subsequence exchange models are used at independent site/coefficient universes. The three formula predicates pin quotient transitions, multiplication on tensors, and both coordinates of the same-index cone map before localization. The theorem supplies their compatible normalized realizations and the final equality of actual derived morphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33bf8830b",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Stmt verbatim; only the item lean field changed; one sorry; docstrings complete with 9 steps; no hollow defs. All existentials pinned: α/γ by QuotientRealization (unit + K-flat θ/Roos formula), σ by counit, c by MultiplicationFormula, b by SameIndexFormula (epi same-index quotient maps, product map, both cone coords, counit eq), ε by RepresentativeComparison (e forced to the ramification index). χ = σ⁻¹≫CS.unit≫c matches the dependency's proof. β = χH⁻¹≫actualSameIndex≫H_L(χK) and β≫uX⁻¹ = T̂(uK⁻¹) have the node's domains and order. Extra clauses (b unit eq, completeness of H_E K/TK/T̂K) are proved in steps 3/7/9. No boundedness/Tor/universe restriction; ramified case allowed. Advisory: decls from uncited def nodes (uniformizer, quotientComparison/residueStep, principalReductionTransition, Model, DerivedChangeOfRingsCochainModel); OrdinaryDerivedChangeOfRings import redundant; short second-reading section."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T205945-L-3425099",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

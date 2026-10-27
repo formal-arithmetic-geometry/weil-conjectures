@@ -24,7 +24,7 @@
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
-  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged. U3 factors the same explicit five-arrow homotopy formula through normalizationHomotopyComponent to avoid repeated concrete sheaf-instance normalization; no data or equation is changed."
  },
  "mathlib_searches": [
   {
@@ -98,14 +98,28 @@
    "AlgebraicGeometry.Etale.refinementOpenCompactification",
    "AlgebraicGeometry.Etale.identityEtaleCompactSupportComparison",
    "AlgebraicGeometry.Etale.EtaleCompactSupportCore",
-   "AlgebraicGeometry.Etale.EtaleCompactSupportCoherence"
+   "AlgebraicGeometry.Etale.EtaleCompactSupportCoherence",
+   "AlgebraicGeometry.Etale.normalizationHomotopyComponent",
+   "AlgebraicGeometry.Etale.normalizationHomotopyTransformation",
+   "AlgebraicGeometry.Etale.normalizationHomotopyTransformation_app"
   ],
   "statement": "def compactSupportDerivedComparison\n    (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]\n    (c : Compactification f)\n    (a : etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance ⟶\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g) :\n    (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategory ⟶\n      rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c",
   "branch": "sheaf-dag",
   "by": "J4",
   "date": "2026-10-18"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -117,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-03b35",
-  "group": "J4",
+  "reviewer": "COMPILER",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261018T091405-L-3255847",
+  "landing": "20261024T191343-L-315095",
   "kind": "interface",
-  "note": "independent cc review: 03b351f vs passed head 30a0f75ae: the 7 Lean modules and 7 nodes are identical, plus the bundled F7 EtaleCompactificationGraphMap.lean (byte-identical to the F7 source compiled in the 30a0f review) and the re-created def-f7 node (lean.statement = def signature); all 8 modules + importer EtaleAmbientAdjointLocality compile (lcompile --all, exit 0); sorryAx only via the 3 stated holes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

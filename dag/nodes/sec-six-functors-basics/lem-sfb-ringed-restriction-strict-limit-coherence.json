@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-ringed-restriction-strict-limit-coherence",
+ "kind": "statement",
+ "title": "Actual sections restriction commutes with normalized strict derived limits",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in a common universe, with terminal objects [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Let $h:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ be a geometric morphism, let $B$ be a commutative ring sheaf on $\\mathcal C$, and put $B'=h^{-1}B$, with the identity structural map [def-weil-pbc-ringed-topos-morphism]. Use module sheaves and their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Assume that countable products of $B$-modules and of $B'$-modules are exact and the exact module inverse image $h^*$ preserves countable products.\nWrite $L_B,L_{B'},L_{\\mathbf Z}$ for total right derived inverse limit on strict inverse sequences of module sheaves or abelian groups [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Put $H_B=R\\Gamma_{\\mathcal C,B}:D(B)\\to D(\\mathbf{Ab})$ and $H_{B'}=R\\Gamma_{\\mathcal D,B'}$, with actual module-derived sections: the right derived functor [def-sfb-right-derived-functor] of the functor sending a module sheaf to the abelian group of sections of its underlying abelian sheaf at the terminal object. For every $K\\in D(B)$ let\n$$\\rho_K:H_BK\\longrightarrow H_{B'}h^*K$$\nbe the actual restriction: the derived adjunction unit $K\\to Rh_*h^*K$ followed by the canonical sections/direct-image composition isomorphism. On strict towers use the analogous actual derived tower adjunction to define\n$$\\rho^{\\operatorname{Tow}}:H_B^{\\operatorname{Tow}}\\longrightarrow H_{B'}^{\\operatorname{Tow}}h^{*,\\operatorname{Tow}},$$\nwhere $H^{\\operatorname{Tow}}$ is the total right derived functor of termwise sections; evaluation gives $\\rho_{K_n}$, including every tower transition.\nUse the normalized inverse-image comparison $\\lambda_K:h^*L_BK\\cong L_{B'}h^{*,\\operatorname{Tow}}K$ of [lem-cbc-exact-product-functor-strict-limit], and the canonical direct-image comparisons\n$$a_{B,K}:H_BL_BK\\xrightarrow{\\sim}L_{\\mathbf Z}H_B^{\\operatorname{Tow}}K,\\qquad\na_{B',h^*K}:H_{B'}L_{B'}h^{*,\\operatorname{Tow}}K\\xrightarrow{\\sim}L_{\\mathbf Z}H_{B'}^{\\operatorname{Tow}}h^{*,\\operatorname{Tow}}K$$\nof [lem-weil-ringed-tower-pushforward-limit-comparison], applied to the global-sections ringed morphisms. Then for every strict tower complex $K$,\n$$a_{B',h^*K}\\circ H_{B'}(\\lambda_K)\\circ\\rho_{L_BK}\n=L_{\\mathbf Z}(\\rho^{\\operatorname{Tow}}_K)\\circ a_{B,K}.$$\nThis equality is natural in $D(\\operatorname{Tow}(B))$ and respects all strict augmentations, using the normalized Roos augmentation with zero shifted-product coordinate. No boundedness is imposed, and no assertion that any individual $\\rho_K$ is an isomorphism is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: compatibility of the integral finite-level comparison with the actual closed restriction arrow Agent-formulated general lemma extracted from the integral comparison argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-sfb-right-derived-functor",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "def-weil-strict-roos-model",
+  "def-pur-tower-derived-localization-comparisons",
+  "def-sbc-tower-derived-evaluation-interchange",
+  "def-coef-tower-derived-evaluation-transition",
+  "def-sfb-exact-ringed-module-inverse-image",
+  "def-sfb-strict-tower-limit-functor",
+  "def-sfb-abelian-tower-kinjective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary sections comparison from maps out of the terminal singleton sheaf. The inverse-image functor preserves the terminal singleton. The set adjunction gives a natural bijection on sections; ring_one and module_linear prove additivity. Its defining adjunction equation is IsSectionsComparison.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 01FT and 0D6E: sections as maps from the terminal sheaf and the geometric adjunction."
+   }
+  },
+  {
+   "text": "Package the existing cochain right-derived units as natural transformations. The K-injective derivability criterion gives their universal property. Descend the ordinary restriction transformation H(unit) followed by the direct-image/sections comparison. Its factorization holds on every complex, hence implies the stated K-injective normalization.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, derived pushforward composition; derived.tex Tag 070I, K-injective representatives and universal right derived functors."
+   }
+  },
+  {
+   "text": "Package the specified exact derived evaluations and transitions as a tower-valued functor. Apply the existing universal derived evaluation comparison to that functor. Naturality inside the tower proves every transition equation; evaluation of the restriction unit equation and the exact-localization interchange equation give compatibility with restriction.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-tower-derived-evaluation-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940/0941, strict towers; exact derived evaluation normalization and the unit computation at each level."
+   }
+  },
+  {
+   "text": "For an additive functor between the Grothendieck categories in use, resolve a K-injective source tower by a K-injective tower with injective terms. Its transitions split. Their images split, and the Roos kernel short exact sequence shows that the target inverse-limit unit is invertible on the image tower. Homotopy equivalence transports this property back. This is the proof of the coefficient-sequence sections acyclicity helper, generalized locally to the independent derived-category universe and to the exact-product target category.",
+   "uses": [
+    "lem-coef-sequence-sections-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, derived inverse limit of direct images; Tag 0941, split inverse sequences and the Roos complex."
+   }
+  },
+  {
+   "text": "Apply the universal comparison for two derived composites to ordinary sections/limit and inverse-image/limit. Sections preserves limits by forgetting to underlying sets. Exact inverse image preserves countable inverse limits by the countable-product/equalizer construction. The common-underived-composite unit equations produce aR, aS and lambda, and give the stronger normalization on all complexes.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, derived pushforward commutes with derived inverse limit; universal derived composite comparisons."
+   }
+  },
+  {
+   "text": "Check the ordinary restriction/limit equation degreewise and projectionwise, using naturality of the adjunction unit and the ordinary sections comparison. On a K-injective tower cancel the units for limit and sections, substitute the preceding normalized equations, and use naturality of the abelian derived-limit unit at the restriction chain map. Equality of natural transformations on K-injective representatives gives the main square everywhere.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, the naturality calculation for the universal derived inverse-limit unit; derived.tex Tag 070I."
+   }
+  },
+  {
+   "text": "Use strictRoosDerivation and uniqueness of the right derived functor to obtain theta and thetaS for the prescribed inverse-limit functors. Transport between the limit of complexes and the complex of degreewise limits. The universal unit factorization proves Q(limitInclusion) followed by theta equals the prescribed unit on every complex. The existing ordinary-limit-of-complexes isomorphism from the Roos resolution normalization supplies this transport.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-cbc-exact-product-functor-roos-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940/0941, Roos realization of derived inverse limit and its normalized unit."
+   }
+  },
+  {
+   "text": "Factor an arbitrary strict Roos augmentation through the ordinary inverse limit. Its projections determine the inverse-image factorization. The all-complex lambda normalization and the Roos unit factorization identify its two derived augmentation maps. Naturality of rho and the main square give the final augmentation equation with the same fixed choices.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, strict Roos augmentation and naturality of derived inverse limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-coef-sequence-sections-limit-comparison",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-strict-roos-derivation",
+  "lem-cbc-exact-product-functor-roos-resolution",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940, 0941, 0A07 and 0D6E. E2 uses universal derived-unit factorizations on all complexes, the existing composite/evaluation APIs and a local universe-general form of the proved split-transition acyclicity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an exact product preserving inverse image between ringed topoi derived global sections restriction commutes naturally with total derived inverse limit on strict towers",
+   "results": "{\"t\": \"2026-10-23T21:50:14Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact product preserving inverse image between ringed topoi derived global sections restriction commutes naturally with total derived inverse limit on strict towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes_map_assoc\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"CategoryTheory.Sheaf.ΓRes_map\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"CategoryTheory.Sheaf.ΓRes_naturality\"], \"digest\": \"bbc21059ca7883f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary right-derived naturality and limit preservation do not assert the normalized compatibility of actual derived sections restriction with total inverse limits of strict towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction arrow on global sections of a homotopy inverse limit is the homotopy inverse limit of the restriction arrows",
+   "results": "{\"t\": \"2026-10-23T21:50:14Z\", \"tool\": \"leansearch\", \"query\": \"Derived restriction arrow on global sections of a homotopy inverse limit is the homotopy inverse limit of the restriction arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes\", \"TopCat.Presheaf.restrictOpen\", \"TopCat.Presheaf.restrict\", \"CategoryTheory.Sheaf.ΓRes_naturality\", \"CategoryTheory.Sheaf.coneΓ_π_app\", \"AlgebraicGeometry.preservesLimit_rightOp_Γ\", \"PresheafOfModules.limitPresheafOfModules_map\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app\"], \"digest\": \"68933052a8b9eac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary right-derived naturality and limit preservation do not assert the normalized compatibility of actual derived sections restriction with total inverse limits of strict towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimitsOfShape\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-23T21:50:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"PreservesLimitsOfShape\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary right-derived naturality and limit preservation do not assert the normalized compatibility of actual derived sections restriction with total inverse limits of strict towers"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(limit|naturality)|derived.*(roos|inverse.?limit)|strictRoos",
+   "results": "{\"t\": \"2026-10-23T21:50:13Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*(limit|naturality)|derived.*(roos|inverse.?limit)|strictRoos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"870c056e92ddf621\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary right-derived naturality and limit preservation do not assert the normalized compatibility of actual derived sections restriction with total inverse limits of strict towers"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(limit|unit)|strictRoos|roos.*naturality",
+   "results": "{\"t\": \"2026-10-23T22:27:59Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*(limit|unit)|strictRoos|roos.*naturality\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\"], \"digest\": \"9e796396d4059ec3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide underived sheaf restriction, generic derived natural transformations/adjunction units, or exact-functor localization. None identifies the prescribed unbounded ringed-module sections restriction with the normalized strict-tower limit comparison in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural restriction map on derived global sections commutes with derived inverse limit of strict towers by K-injective resolutions",
+   "results": "{\"t\": \"2026-10-23T22:28:00Z\", \"tool\": \"leansearch\", \"query\": \"The natural restriction map on derived global sections commutes with derived inverse limit of strict towers by K-injective resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes_map\", \"CategoryTheory.Sheaf.ΓRes_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\", \"CategoryTheory.Sheaf.ΓRes\"], \"digest\": \"b360eae16b0e4f3a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide underived sheaf restriction, generic derived natural transformations/adjunction units, or exact-functor localization. None identifies the prescribed unbounded ringed-module sections restriction with the normalized strict-tower limit comparison in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"NatTrans\"",
+   "results": "{\"t\": \"2026-10-23T22:28:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"NatTrans\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedNatTrans_id\", \"CategoryTheory.Functor.rightDerivedNatTrans\", \"CategoryTheory.Functor.rightDerivedNatTrans_fac\", \"CategoryTheory.Functor.rightDerivedNatTrans_app\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc\", \"CategoryTheory.Functor.rightDerivedNatTrans_app_assoc\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\"], \"digest\": \"1d7c0add468667a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide underived sheaf restriction, generic derived natural transformations/adjunction units, or exact-functor localization. None identifies the prescribed unbounded ringed-module sections restriction with the normalized strict-tower limit comparison in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived adjunction unit for exact inverse image commutes with the canonical comparison between derived sections and derived inverse limits of strict towers",
+   "results": "{\"t\": \"2026-10-23T22:28:01Z\", \"tool\": \"leanfinder\", \"query\": \"The derived adjunction unit for exact inverse image commutes with the canonical comparison between derived sections and derived inverse limits of strict towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"76ff4649a9c57faf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide underived sheaf restriction, generic derived natural transformations/adjunction units, or exact-functor localization. None identifies the prescribed unbounded ringed-module sections restriction with the normalized strict-tower limit comparison in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma derivedη_fac_app|lemma derived_unit|lemma rightDerivedNatTrans_(app|fac|comp)",
+   "results": "{\"t\": \"2026-10-23T22:29:09Z\", \"tool\": \"grep\", \"query\": \"lemma derivedη_fac_app|lemma derived_unit|lemma rightDerivedNatTrans_(app|fac|comp)\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"da2ebc5ee226cb03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide underived sheaf restriction, generic derived natural transformations/adjunction units, or exact-functor localization. None identifies the prescribed unbounded ringed-module sections restriction with the normalized strict-tower limit comparison in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product preserving exact functor commutes with homotopy inverse limits and the actual derived global sections restriction unit is compatible with this comparison",
+   "results": "{\"t\": \"2026-10-23T22:30:40Z\", \"tool\": \"leanfinder\", \"query\": \"A product preserving exact functor commutes with homotopy inverse limits and the actual derived global sections restriction unit is compatible with this comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.GrothendieckTopology.diagramCompIso\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc\", \"localCohomology.diagramComp\", \"CategoryTheory.sheafComposeIso_inv_fac\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\"], \"digest\": \"0d1d94c493cfa289\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide underived sheaf restriction, generic derived natural transformations/adjunction units, or exact-functor localization. None identifies the prescribed unbounded ringed-module sections restriction with the normalized strict-tower limit comparison in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-integral-model-restriction-tower",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: compatibility of the integral finite-level comparison with the actual closed restriction arrow",
+   "via": [
+    "lem-sfb-supported-integral-model-restriction-tower",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-restriction-strict-limit-coherence",
+  "worker": "stage1",
+  "summary": "Kept the statement. Gave an eight-step proof on strict K-injective tower resolutions: actual unit representatives, ordinary-limit transpose calculation, inverse-limit acyclicity for sections, and naturality of the right-derived-limit unit. Checked localization naturality and constant-tower/strict Roos augmentation normalization separately. Reused all prerequisites; no new nodes or Mathlib leaves.",
+  "blueprint": "Fills the actual-restriction/strict-limit compatibility in the integral refinement-isomorphism argument of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2) and lem-sfb-supported-integral-model-restriction-tower; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Small strict diagram site and module equivalence, to apply the existing site resolution theorem to towers. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Functorial unbounded K-injective resolutions on the given small ringed sites and their strict diagram sites. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Exactness of constant towers and evaluations; no unit-specific substitute exists. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "K-injectivity for inverse limits, direct images with exact inverse image, and constant towers. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Actual chain-level adjunct formula, to retain the actual restriction map rather than a chosen isomorphism. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Computing the canonical derived adjunction and comparison on the chosen K-injectives. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Normalized sections/direct-image composition for general ringed topoi, including the ringed point. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "why": "Actual tower adjunction agrees with ambient adjunctions, including transitions. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Specified resolution formula and strict augmentation normalization for the exact product-preserving inverse image. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Ordinary module direct images preserve tower limits, used before localization. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-acyclic",
+    "why": "Inverse-limit acyclicity of sections of K-injective towers; sections are not assumed to preserve K-injectives. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Canonical sections/strict-limit comparison normalized by the underived common direct image. This is a generic categorical tool and does not replace the unit's refinement argument."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Specified zero shifted-product coordinate for strict augmentations. This is a generic categorical tool and does not replace the unit's refinement argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-7d64fdbb0",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-7d64fdbb0 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged; 8 steps; no new nodes), the statements of all 22 cited nodes, Stacks 0A07 (lemma-Rf-commutes-with-Rlim, first proof via the tower-site square and 0941), the tags 0940/0941/08BJ/070I/0FND/09T5/0D6E/079P, the blueprint det-sf-comp-coherence-refinement proof and the parent's citing step. Statement: the types match; the hypotheses of λ (exact-product node: B'=h^{-1}B commutative, h^* exact, products preserved) and of a (pushforward-limit-comparison applied to the sections morphism to (pt,Z)) hold. Small cases: for h=id both sides are a; K=0; constant towers; zero transitions. Duplicate candidates: pur-tower-limit-transpose-normalization (constant Noetherian A), pbc-direct-image-roos-normalization and constant-tower-pushforward-normalization (need f^{-1}R_Y≅R_X, which fails for sections to Z), sf-roos-adjunction-unit-coherence (needs exact G with invertible unit). None is the item. Steps checked: step 1 K-injectivity of lim I, lim J, GJ, G lim J via exact left adjoints, without claiming Γ preserves K-injectives; step 2 the unit t=G(v)η, and κ=1 via the identity resolution; step 3 the projection computation for the transpose of w=(lim v)β (correct), H(λ)ρ represented by lim r; step 4 a=u_A, u_C, invertible by limit-acyclicity; step 5 naturality of the derived-limit unit; steps 7–8 ev_1⊣Δ, the partial-sum section of 1-s, and the Roos zero-coordinate and λ augmentation clauses. The 13 tool_uses are generic tools and accepted. FIX: step 2 asserted that evaluation preserves K-injectives without reason or citation (C1); added the exact left adjoint of e_n (M in levels ≤n, 0 above) and cited lem-weil-tower-category-levelwise-abelian and lem-weil-pbc-right-adjoint-preserves-kinjective (both already in proof_deps). In step 4, 'in the question' becomes 'in the statement'. Advisory: 'ΓG=Γ'' is really a canonical natural isomorphism, which is harmless.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedRestrictionStrictLimitCoherence",
+  "declaration": "CategoryTheory.RingedRestrictionLimit.ringedRestrictionStrictLimitCoherence",
+  "declarations": [
+   "CategoryTheory.RingedRestrictionLimit.sections",
+   "CategoryTheory.RingedRestrictionLimit.sectionsAdditive",
+   "CategoryTheory.RingedRestrictionLimit.singleton",
+   "CategoryTheory.RingedRestrictionLimit.sectionMap",
+   "CategoryTheory.RingedRestrictionLimit.IsSectionsComparison",
+   "CategoryTheory.RingedRestrictionLimit.tower",
+   "CategoryTheory.RingedRestrictionLimit.limitFunctor",
+   "CategoryTheory.RingedRestrictionLimit.limitMap",
+   "CategoryTheory.RingedRestrictionLimit.unit",
+   "CategoryTheory.RingedRestrictionLimit.IsLimitComparison",
+   "CategoryTheory.RingedRestrictionLimit.restrictionMap",
+   "CategoryTheory.RingedRestrictionLimit.IsRestriction",
+   "CategoryTheory.RingedRestrictionLimit.IsInverseLimitComparison",
+   "CategoryTheory.RingedRestrictionLimit.limitInclusion",
+   "CategoryTheory.RingedRestrictionLimit.IsRoosComparison",
+   "CategoryTheory.RingedRestrictionLimit.evaluate",
+   "CategoryTheory.RingedRestrictionLimit.IsEvaluationComparison",
+   "CategoryTheory.RingedRestrictionLimit.ringedRestrictionStrictLimitCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/RingedRestrictionStrictLimitCoherence.lean",
+  "statement": "theorem ringedRestrictionStrictLimitCoherence (_commR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (_commS : ∀ (U : Dᵒᵖ) (a b : S.obj.obj U), a * b = b * a) (x : UnboundedExactTower.ExactMorphism S R) [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u} R)] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u} S)] [PreservesLimitsOfShape (Discrete ℕ) x.inverse] : ∃ (c : x.ringed.modules ⋙ sections R ≅ sections S) (rho : (sections R).rightDerivedFunctor ⟶ x.inverse.mapDerivedCategory ⋙ (sections S).rightDerivedFunctor) (rhoT : (tower (sections R)).rightDerivedFunctor ⟶ (tower x.inverse).mapDerivedCategory ⋙ (tower (sections S)).rightDerivedFunctor) (lambda : (limitFunctor (ringedSiteModules.{u} R)).rightDerivedFunctor ⋙ x.inverse.mapDerivedCategory ≅ (tower x.inverse).mapDerivedCategory ⋙ (limitFunctor (ringedSiteModules.{u} S)).rightDerivedFunctor) (aR : (limitFunctor (ringedSiteModules.{u} R)).rightDerivedFunctor ⋙ (sections R).rightDerivedFunctor ≅ (tower (sections R)).rightDerivedFunctor ⋙ (limitFunctor AddCommGrpCat.{u}).rightDerivedFunctor) (aS : (limitFunctor (ringedSiteModules.{u} S)).rightDerivedFunctor ⋙ (sections S).rightDerivedFunctor ≅ (tower (sections S)).rightDerivedFunctor ⋙ (limitFunctor AddCommGrpCat.{u}).rightDerivedFunctor) (eR : ∀ n : ℕᵒᵖ, (tower (sections R)).rightDerivedFunctor ⋙ evaluate n ≅ evaluate n ⋙ (sections R).rightDerivedFunctor) (eS : ∀ n : ℕᵒᵖ, (tower (sections S)).rightDerivedFunctor ⋙ evaluate n ≅ evaluate n ⋙ (sections S).rightDerivedFunctor) (theta : roosF ⋙ DerivedCategory.Q.{w} ≅ DerivedCategory.Q.{w} ⋙ (limitFunctor (ringedSiteModules.{u} R)).rightDerivedFunctor) (thetaS : roosF ⋙ DerivedCategory.Q.{w} ≅ DerivedCategory.Q.{w} ⋙ (limitFunctor (ringedSiteModules.{u} S)).rightDerivedFunctor), IsSectionsComparison x.ringed c ∧ IsRestriction x.inverse x.ringed.modules x.adjunction (sections R) (sections S) c rho ∧ IsRestriction (tower x.inverse) (tower x.ringed.modules) (x.adjunction.whiskerRight ℕᵒᵖ) (tower (sections R)) (tower (sections S)) (NatIso.ofComponents (fun T ↦ NatIso.ofComponents (fun n ↦ c.app (T.obj n)) (fun t ↦ c.hom.naturality (T.map t))) (fun t ↦ by apply NatTrans.ext; funext n; exact c.hom.naturality (t.app n))) rhoT ∧ IsInverseLimitComparison x.inverse lambda ∧ IsLimitComparison (sections R) aR ∧ IsLimitComparison (sections S) aS ∧ IsEvaluationComparison (sections R) eR ∧ IsEvaluationComparison (sections S) eS ∧ (∀ (M : DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} R)) (n : ℕᵒᵖ), (evaluate n).map (rhoT.app M) ≫ (eS n).hom.app ((tower x.inverse).mapDerivedCategory.obj M) ≫ (sections S).rightDerivedFunctor.map ((towerDerivedEvaluationInterchange x.inverse n).hom.app M) = (eR n).hom.app M ≫ rho.app ((evaluate n).obj M)) ∧ IsRoosComparison theta ∧ IsRoosComparison thetaS ∧ (∀ M : DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} R), rho.app ((limitFunctor (ringedSiteModules.{u} R)).rightDerivedFunctor.obj M) ≫ (sections S).rightDerivedFunctor.map (lambda.hom.app M) ≫ aS.hom.app ((tower x.inverse).mapDerivedCategory.obj M) = aR.hom.app M ≫ (limitFunctor AddCommGrpCat.{u}).rightDerivedFunctor.map (rhoT.app M)) ∧ (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{u} R) ℤ) (P : CochainComplex (ringedSiteModules.{u} R) ℤ) (gamma : ∀ n : ℕ, P ⟶ X.asFunctor.obj (op n)) (hgamma : ∀ n : ℕ, gamma (n + 1) ≫ X.asFunctor.map (homOfLE (Nat.le_succ n)).op = gamma n), rho.app (DerivedCategory.Q.obj P) ≫ (sections S).rightDerivedFunctor.map (x.inverse.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map (roosAugment (X := ((tower x.inverse).mapHomologicalComplex (.up ℤ)).obj X) (fun n ↦ (x.inverse.mapHomologicalComplex (.up ℤ)).map (gamma n)) (fun n ↦ by change (x.inverse.mapHomologicalComplex (.up ℤ)).map (gamma (n + 1)) ≫ (x.inverse.mapHomologicalComplex (.up ℤ)).map (X.asFunctor.map (homOfLE (Nat.le_succ n)).op) = _ rw [← Functor.map_comp, hgamma n])) ≫ thetaS.hom.app (((tower x.inverse).mapHomologicalComplex (.up ℤ)).obj X) ≫ (limitFunctor (ringedSiteModules.{u} S)).rightDerivedFunctor.map ((tower x.inverse).mapDerivedCategoryFactors.inv.app X)) ≫ aS.hom.app ((tower x.inverse).mapDerivedCategory.obj (DerivedCategory.Q.obj X)) = (sections R).rightDerivedFunctor.map (DerivedCategory.Q.map (roosAugment gamma hgamma) ≫ theta.hom.app X) ≫ aR.hom.app (DerivedCategory.Q.obj X) ≫ (limitFunctor AddCommGrpCat.{u}).rightDerivedFunctor.map (rhoT.app (DerivedCategory.Q.obj X)))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of immutable head 53acb150f1c5: theorem-only dependencies used merely for definitions are replaced by existing:true definition owners of ExactMorphism, module/tower resolutions, towerLimit and its additive instance. cochainUnit and derived evaluation interchange/transitions cite their existing definition nodes. The abelian tower K-injective instance is reused from CoefDerivedSystemEvaluationCalculus; the duplicate local proof is removed. The main theorem signature and all canonical-map normalization predicates are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-857ba918a",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery of 53acb150 (RETURN on H2/H4 records only; earlier review found the maths correct). Theorem signature and all helper defs byte-identical (diffed snapshots); only change: +public imports TowerDerivedEvaluationNormalization and CoefDerivedSystemEvaluationCalculus, removed copied abelianTowerResolutions proof. stmt_deps drop lem-sbc-unbounded-exact-adjunction-square and lem-pur-tower-limit-transpose-normalization; add live def owners (strict-roos-model, pur-tower-derived-localization-comparisons for cochainUnit, sbc-tower-derived-evaluation-interchange, coef-tower-derived-evaluation-transition) and 3 existing:true new def nodes: exact-ringed-module-inverse-image (ExactMorphism/moduleResolutions/towerResolutions, fields read and match prose), strict-tower-limit-functor (towerLimit=lim, additive instance), abelian-tower-kinjective-resolutions (coefficientAbTowersKInjectives, Grothendieck construction). Field rule OK; three kinds of search recorded; no live def node already owns these decls; lean.statement verbatim; no line >100; only main theorem sorry; item still split live with no lean record (not superseded); oleans of new imports published. No change, so no compile; worker reports clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261024T184948-L-3287187",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

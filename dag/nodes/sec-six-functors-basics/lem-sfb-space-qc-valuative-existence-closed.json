@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-space-qc-valuative-existence-closed",
+ "kind": "statement",
+ "title": "Valuative existence implies universal closedness for quasi-compact algebraic-space morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and point topology [def-a1-space-point-topology]. Assume $f$ is quasi-compact: for every affine scheme $T\\to Y$, the point space $|X\\times_YT|$ is quasi-compact. Suppose that for every valuation ring $A$ with fraction field $K$ [def-trf-valuation-ring] and every commutative square $u:\\operatorname{Spec}K\\to X$, $v:\\operatorname{Spec}A\\to Y$ with $fu=v|_{\\operatorname{Spec}K}$, there are a field extension $K\\subset K'$, a valuation ring $A'\\subset K'$ with fraction field $K'$ containing and dominating $A$, and $w:\\operatorname{Spec}A'\\to X$ such that $fw=v\\circ\\operatorname{Spec}(A\\to A')$ and $w|_{\\operatorname{Spec}K'}=u\\circ\\operatorname{Spec}(K\\to K')$. Dominating means $\\mathfrak m_{A'}\\cap A=\\mathfrak m_A$. Then $f$ is universally closed: for every algebraic space $Y'\\to Y$, the induced map $|X\\times_Y Y'|\\to|Y'|$ is closed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03KA (lemma-quasi-compact-existence-universally-closed); existence with field extension as in Tag 03IX (definition-valuative-criterion)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-trf-valuation-ring",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine scheme $T\\to Y$ and put $P=X\\times_YT$, with projection $p:P\\to T$. The sheaf fibre product exists by [lem-trf-space-fibre-products-etale-covers]. The hypothesis on quasi-compactness gives that $|P|$ is quasi-compact. The existence hypothesis also holds for $p$: compose a valuation square for $p$ with $P\\to X$ and $T\\to Y$, apply the hypothesis to $f$, and pair the resulting map $\\operatorname{Spec}A\\prime\\to X$ with the prescribed composite $\\operatorname{Spec}A\\prime\\to\\operatorname{Spec}A\\to T$. Their composites to $Y$ agree, so the fibre-product universal property gives a map to $P$; on the fraction field its two components are precisely the original generic map after extension.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KA, first paragraph; base-change existence argument of Tag 03IY (lemma-base-change-valuative-criteria)."
+   }
+  },
+  {
+   "text": "Choose an affine scheme $U=\\operatorname{Spec}B$ and a surjective etale atlas $a:U\\to P$ using [lem-sfb-qc-space-affine-etale-atlas]. For a closed subset $C\\subseteq|P|$, the subset $D=|a|^{-1}(C)$ is closed because $|a|$ is continuous [lem-a1-space-affine-etale-cover]. Write $T=\\operatorname{Spec}R$. The composite $g=p a:U\\to T$ is the spectrum of a ring map $R\\to B$ [def-weil-affine-spectrum]. Surjectivity gives $g(D)=p(C)$: a point of $C$ has a preimage in $U$, and every point of $D$ maps into $C$. It remains to show that this common image is stable under specialization.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-a1-space-affine-etale-cover",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KA, affine etale atlas and inverse image of a closed subset."
+   }
+  },
+  {
+   "text": "Let $y\\prime\\in p(C)$ specialize to $y\\in T$. Choose $x\\prime\\in C$ over $y\\prime$ and a representative $u:\\operatorname{Spec}K\\to P$ of this point; representatives and invariance under common field extension are [def-a1-algebraic-space-point-classes]. Apply [lem-sfb-scheme-specialization-prescribed-field-probe] to the scheme morphism $p u:\\operatorname{Spec}K\\to T$ and $y$. It gives a valuation subring $A\\subseteq K$ and $v:\\operatorname{Spec}A\\to T$ with special point $y$ and generic restriction $p u$. Step 1 supplies $K\\subseteq K\\prime$, a dominating valuation ring $A\\prime$ and $w:\\operatorname{Spec}A\\prime\\to P$ extending $u$. If $s\\prime=\\mathfrak m_{A\\prime}$, domination means that its image in $\\operatorname{Spec}A$ is $\\mathfrak m_A$, so $p(w(s\\prime))=y$. In the spectrum of the domain $A\\prime$, $(0)\\subseteq\\mathfrak m_{A\\prime}$ says that the generic point specializes to $s\\prime$ [def-weil-affine-spectrum]. Continuity of $|w|$ [lem-a1-space-affine-etale-cover] makes $w(s\\prime)$ a specialization of $x\\prime$; the generic image is still $x\\prime$ by field-point equivalence. Since $C$ is closed, $w(s\\prime)\\in C$. Thus $y\\in p(C)$.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-sfb-scheme-specialization-prescribed-field-probe",
+    "def-weil-affine-spectrum",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KA, second paragraph: valuation domination and specialization lifting, using Tag 01J8 to package the local-ring construction."
+   }
+  },
+  {
+   "text": "By step 3, $g(D)=p(C)$ is stable under specialization, and $D$ is closed by step 2. Apply [lem-sfb-affine-spectrum-specialization-stable-image-closed] to the ring map $R\\to B$ and $D$. It follows that $p(C)$ is closed for every closed $C\\subseteq|P|$. As the affine test $T\\to Y$ was arbitrary, [lem-sfb-space-universally-closed-affine-tests] now proves that $f$ is universally closed.",
+   "uses": [
+    "lem-sfb-affine-spectrum-specialization-stable-image-closed",
+    "lem-sfb-space-universally-closed-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KA, conclusion using Tag 00HY; affine test criterion Tag 03IT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-a1-space-affine-etale-cover",
+  "def-weil-affine-spectrum",
+  "def-a1-algebraic-space-point-classes",
+  "lem-sfb-scheme-specialization-prescribed-field-probe",
+  "lem-sfb-affine-spectrum-specialization-stable-image-closed",
+  "lem-sfb-space-universally-closed-affine-tests"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03KA (lemma-quasi-compact-existence-universally-closed), using the closed-subset Mathlib form of Tag 00HY and the prescribed-field form of Tag 01J8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "UniversallyClosed.of_valuativeCriterion|AlgebraicSpace|ValuativeCriterion.Existence",
+   "results": "{\"t\": \"2026-10-23T18:42:30Z\", \"tool\": \"grep\", \"query\": \"UniversallyClosed.of_valuativeCriterion|AlgebraicSpace|ValuativeCriterion.Existence\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"dbf5d8ae2487104c\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250: the valuative declarations have scheme objects; none gives the stated algebraic-space result.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact map of algebraic spaces satisfying the existence part of the valuative criterion is universally closed",
+   "results": "{\"t\": \"2026-10-23T18:42:30Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact map of algebraic spaces satisfying the existence part of the valuative criterion is universally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\"], \"digest\": \"ef67fd16059de2e2\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250: the valuative declarations have scheme objects; none gives the stated algebraic-space result.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"UniversallyClosed\"",
+   "results": "{\"t\": \"2026-10-23T18:42:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"UniversallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250: the valuative declarations have scheme objects; none gives the stated algebraic-space result.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact morphism of algebraic spaces admitting lifts for every valuation ring and its fraction field is universally closed",
+   "results": "{\"t\": \"2026-10-23T18:42:31Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasi compact morphism of algebraic spaces admitting lifts for every valuation ring and its fraction field is universally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.universallyClosed_iff\"], \"digest\": \"587111e3ccad1c02\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250: the valuative declarations have scheme objects; none gives the stated algebraic-space result.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map between sheaves represented by algebraic spaces is universally closed if it is quasi compact and every map from the spectrum of a valuation field extends over the valuation ring compatibly with the base",
+   "results": "{\"t\": \"2026-10-23T18:43:14Z\", \"tool\": \"leanfinder\", \"query\": \"A map between sheaves represented by algebraic spaces is universally closed if it is quasi compact and every map from the spectrum of a valuation field extends over the valuation ring compatibly with the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\"], \"digest\": \"5d3e11c19590a566\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250: the valuative declarations have scheme objects; none gives the stated algebraic-space result.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact morphism of algebraic spaces is universally closed if every valuation square has a lift after extending its fraction field and choosing a dominating valuation ring",
+   "results": "{\"t\": \"2026-10-23T18:44:47Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact morphism of algebraic spaces is universally closed if every valuation square has a lift after extending its fraction field and choosing a dominating valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\"], \"digest\": \"73f6d6da1af17503\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250: the valuative declarations have scheme objects; none gives the stated algebraic-space result.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact morphism of algebraic spaces satisfying valuative existence after field extension is universally closed",
+   "results": "{\"t\": \"2026-10-23T19:48:34Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact morphism of algebraic spaces satisfying valuative existence after field extension is universally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\"], \"digest\": \"6928d15150de7a24\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact morphism of algebraic spaces satisfying valuative existence after field extension is universally closed",
+   "results": "{\"t\": \"2026-10-23T19:48:35Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact morphism of algebraic spaces satisfying valuative existence after field extension is universally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"f52ffddaf4996ee3\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"ValuativeCriterion\"",
+   "results": "{\"t\": \"2026-10-23T19:48:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyClosed\\\", \\\"ValuativeCriterion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.UniversallyClosed.eq_valuativeCriterion\"], \"digest\": \"81e1db67363c7e78\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversallyClosed.of_valuativeCriterion|AlgebraicSpace|ValuativeCriterion.Existence",
+   "results": "{\"t\": \"2026-10-23T19:48:36Z\", \"tool\": \"grep\", \"query\": \"UniversallyClosed.of_valuativeCriterion|AlgebraicSpace|ValuativeCriterion.Existence\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"dbf5d8ae2487104c\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness for maps of etale sheaves algebraic spaces from valuation ring lifting with dominating extension",
+   "results": "{\"t\": \"2026-10-23T19:48:44Z\", \"tool\": \"leanfinder\", \"query\": \"Universal closedness for maps of etale sheaves algebraic spaces from valuation ring lifting with dominating extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\"], \"digest\": \"8d7e9177c40205a2\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-valuative-separatedness",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Convert valuative uniqueness for the represented Picard group into separatedness; its diagonal is quasi-compact by 0DNI. In the diagonal argument of Tag 03KV: the quasi-compact diagonal satisfies valuative existence, so Tag 03KA gives universal closedness.",
+   "via": [
+    "lem-sfb-space-valuative-separatedness",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qc-valuative-existence-closed",
+  "worker": "stage1",
+  "summary": "Read Tags 03KA and 03IX, retained the statement including fraction-field extensions and domination, and wrote the base-change, affine-atlas and specialization-lifting argument. Added a prescribed-field valuation probe, an exact Mathlib closed-image leaf and an affine-test criterion, reusing the existing quasi-compact affine atlas. No Lean declaration proves the item.",
+  "blueprint": "The inherited creation chain has no blueprint ancestor (blueprint_refs.py ancestor returns None); retain its full via chain and the det-thm-sf-ctf-stability-direct-images proof (3) prerequisite location. This split supplies Tag 03KA in the diagonal argument of Tag 03KV, serving that recorded alteration/Picard prerequisite. Whole-blueprint searches found no equal node.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic point-topology continuity of scheme maps and etale atlases, used for closed inverse images and specialization; no finite-type or separatedness assumption is introduced."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Step 1 takes only the existence of the sheaf fibre product X×_Y T as an algebraic space and its universal property (pairing two maps with equal composites to Y); this is generic algebraic-space foundations, already a statement dependency of the item, and no node of sk-thm-sf-ctf-stability supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-526d8fccd",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-526d8fccd (reviewer sub-agent of L); spot-checked: I read the whole delivery against the sources: Stacks 03KA (statement and proof), 03IX, 03IT (3)⇒(1), 01J8(1)-(2) with its proof, 00HY, and Mathlib PrimeSpectrum.isClosed_image_of_stableUnderSpecialization at Topology.lean:865-874. The item statement is unchanged. Its quasi-compactness is the affine-test form (03HF), not the topological convention, and its existence hypothesis is the 03IX one. Step 1 (elementary base change through the fibre-product universal property) is correct. Step 2: the affine atlas needs no quasi-separatedness; continuity gives D closed, and point surjectivity gives g(D)=p(C). Step 3: the new probe applied to p∘u gives a valuation square for p; step 1 gives w; domination sends the closed point to y; continuity plus the field-class equivalence give w(s') in C. The case y'=y is covered by A=K. Step 4: the Mathlib leaf (exact match) and the 03IT node give universal closedness, worded exactly as the item's conclusion. New nodes: (1) The probe is true by the 01J8 proof (v factors through Spec O_{Y,y}, so v|K=u). It is not a duplicate: it generalizes lem-trf-valuation-ring-specialization-lift (advisory), and lem-sc-picard-valuation-probe-specializes is weaker. (2) The closed-image leaf is exact and has no duplicate. (3) The 03IT affine-test node is not a duplicate of the 0512/03XD scheme-test node or the 083R/041O nodes. None of the three restates the item. Batch-5: def-trf-valuation-ring, def-trf-algebraic-space and def-a1-space-point-topology are general definitions; lem-sfb-qc-space-affine-etale-atlas, lem-a1-space-affine-etale-cover and def-a1-algebraic-space-point-classes reach sec-trace-formula only through the algebraic-space definition; lem-trf-space-fibre-products-etale-covers is foundational fibre-product existence. None of these is part of the trace-formula or Poincaré proofs. No SGA. FIX: lem-trf-space-fibre-products-etale-covers (unit sk-i-curve-zero, not finished) is used in step 1 but was not declared. I added it to split_report.tool_uses as an accepted generic tool use; corrected item file in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceValuativeExistenceClosed",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.universallyClosed_of_quasiCompact_of_valuativeExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceValuativeExistenceClosed.lean",
+  "statement": "theorem universallyClosed_of_quasiCompact_of_valuativeExistence {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hqc : MapIsQuasiCompact f.hom.hom) (hex : ∀ (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A] (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K] (s : Spec (CommRingCat.of A) ⟶ S) (a : yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ s)) ⟶ X.obj.obj) (b : yoneda.obj (Over.mk s) ⟶ Y.obj.obj), a ≫ f.hom.hom = yoneda.map (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap A K))) rfl) ≫ b → ∃ (K' : Type u) (_ : Field K') (A' : Type u) (_ : CommRing A') (_ : IsDomain A') (_ : ValuationRing A') (_ : Algebra A' K') (_ : IsFractionRing A' K') (i : A →+* A') (e : K →+* K'), Function.Injective i ∧ IsLocalHom i ∧ ∃ (j : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A' K')) ≫ (Spec.map (CommRingCat.ofHom i) ≫ s)) ⟶ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ s)), j.left = Spec.map (CommRingCat.ofHom e) ∧ j.left ≫ Spec.map (CommRingCat.ofHom (algebraMap A K)) = Spec.map (CommRingCat.ofHom (algebraMap A' K')) ≫ Spec.map (CommRingCat.ofHom i) ∧ ∃ w : yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom i) ≫ s)) ⟶ X.obj.obj, w ≫ f.hom.hom = yoneda.map (Over.homMk (Spec.map (CommRingCat.ofHom i)) rfl) ≫ b ∧ yoneda.map (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap A' K'))) rfl) ≫ w = yoneda.map j ≫ a) : MapIsUniversallyClosed f",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5fdba32d9",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read item node vs Stacks 03KA/03IX, all stmt_dep records and the landed Lean defs (MapIsQuasiCompact ProperCurveModuli.lean:55, mapPoint :43, MapIsUniversallyClosed AlgebraicSpaceMorphismProperties.lean:69). hqc = affine-test qc; hex = 03IX existence exactly (e field emb, i injective + IsLocalHom = domination, j forced = Spec e with compatibility square, w with both triangles); conclusion = all algebraic-space base changes closed. No extra assumptions, single universe u as in landed defs; edge cases (A field, trivial extension, empty X/test) ok. Added stmt_deps def-sfb-proper-curve-moduli/def-sfb-space-morphism-properties are landed owners; statement text unchanged; lean.statement verbatim; sorry-only; docstrings with source/blueprint/4 proof steps; no duplicate. No fixes, no recompile."
+ }
+}

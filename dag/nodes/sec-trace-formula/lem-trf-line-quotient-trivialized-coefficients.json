@@ -1,0 +1,145 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA and 01O9, graded extension of an invertible quotient and homogeneous coefficient construction."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientGeometry",
+  "date": "2026-10-23",
+  "group": "X5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-projective-bundle-quotient-geometry",
+   "place": "The affine coefficient step identifying the quotient canonical map with the graded canonical map."
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-trf-line-quotient-trivialized-coefficients",
+ "title": "Trivialized homogeneous coefficients of an invertible symmetric-algebra quotient",
+ "statement": "Let S,T be schemes, h:T→S, E a quasi-coherent module on S, L an invertible module on T and q:h*E→L an epimorphism. Let ψ be a graded line map for the canonical symmetric algebra that extends q in degree one. For affine opens V⊆S and W⊆h⁻¹(V), and every trivialization e of L pulled back to the scheme W, there exists a unital ring map α:Sym(E(V))→Γ(W,O). It fixes scalars via h and the open inclusion, sends each symmetric generator m to the coefficient of q(1 tensor m) in e, sends every degree-n homogeneous element to the coefficient of ψ.evaluate in trivializedPower e n, and maps the irrelevant ideal to the unit ideal. No Proj map, classification, uniqueness, separatedness or compatibility is asserted. Uses schemes [def-pc-scheme], quasi-coherent modules [pqf-def-coherent], invertible modules [def-sc-invertible-module], tensor pullback and its sections [def-pc-module-pullback], the canonical algebra [def-trf-canonical-symmetric-graded-algebra], the relative graded line map and its chart evaluation [def-trf-relative-graded-line-map], the trivialized tensor powers [def-trf-space-line-module-proj-input] and the extension predicate [lem-trf-line-quotient-homogeneous-fraction-map].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-trf-relative-graded-line-map",
+  "def-trf-space-line-module-proj-input",
+  "lem-trf-line-quotient-homogeneous-fraction-map"
+ ],
+ "proof": [
+  {
+   "text": "On the chart W let M be the actual tensor pullback of L. For every n compose chart evaluation with trivializedPower e n and unitSectionsEquiv inverse to obtain an additive coefficient map. The inverse image of 1 under e is a global free generator. Its recursively defined tensor powers map to 1 under trivializedPower. Expressing arbitrary homogeneous sections as multiples of these frame powers and using tensorPowLocalSection_mul proves that coefficients preserve tensor multiplication. The already proved evaluate_one and evaluate_mul helpers for the relative graded line map supply the evaluation unit and product equations. DirectSum.toSemiring composed with the canonical symmetric grading decomposition now gives alpha and its homogeneous formula. The scalar axiom and degree-zero unit prove its scalar equation.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "def-sc-invertible-section-ring",
+    "def-trf-relative-graded-line-map",
+    "def-sc-tensor-pullback-power-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the monoidal pullback structure along boundaryPullbackComparison. Its right-unit equation, with the canonical monoidal unit normalization, identifies boundaryPullbackPowIso in degree one followed by the right unitor with pullback of the right unitor. The same right-unit naturality identifies trivializedPower e 1 with the given trivialization after the right unitor. Naturality of the normalized adjunction unit and ExtendsLineQuotient therefore give exactly the degree-one coefficient formula. Naturality with restriction changes the formula over the full preimage of V to the displayed formula over W.",
+   "uses": [
+    "lem-sc-pullback-monoidal-unit-comparison",
+    "def-sc-tensor-pullback-power-comparison",
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The section-normalized unit of pullback along the open inclusion W is bijective on W: transport it through boundaryPullbackComparison to the ordinary pullback unit, which is bijective for an open immersion on an open in its image. Restricting the preimage of W to the top open is an isomorphism. Hence the coefficient map from L(W) to O_W(W) is surjective. Since q is an epimorphism of quasi-coherent modules its map on affine W sections is surjective. Lift a section whose coefficient is 1 through q and through the affine tensor-section comparison. Tensor induction shows that the coefficient of q of each tensor belongs to the mapped irrelevant ideal: this is zero for zero tensors, additive for sums, and for a pure tensor m tensor r it is the scalar r times the coefficient alpha(iota(m)). Each iota(m) is homogeneous of positive degree and lies in the irrelevant ideal. Thus 1 belongs to the mapped ideal, which is top. The argument also applies to empty W and zero rings.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-sc-invertible-section-ring",
+  "def-trf-relative-graded-line-map",
+  "def-sc-tensor-pullback-power-comparison",
+  "lem-sc-pullback-monoidal-unit-comparison",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA (section-projective-bundle) and 01O9 (lemma-invertible-map-into-relative-proj), affine coefficient construction. The proof realizes the original two-step route; the unit-ideal step uses affine exactness and tensor induction instead of passing through maximal ideals. Private evaluation helpers are reused from GradedImmersionAmpleCriterion, and tensor-frame multiplication from InvertibleSectionRing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Trivializing an invertible sheaf converts a graded symmetric algebra map into a ring homomorphism whose irrelevant ideal has unit image",
+   "results": "Proj.awayι and Proj localization constructions; no coefficient theorem.",
+   "date": "2026-10-23",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra.lift",
+   "results": "SymmetricAlgebra.lift and lift_ι_apply construct an algebra hom from a linear map, but do not normalize tensor pullback coefficients or prove the irrelevant-ideal condition.",
+   "date": "2026-10-23",
+   "verdict": "useful algebra API only"
+  },
+  {
+   "tool": "grep",
+   "query": "trivializedPower|RelativeGradedLineMap.evaluate",
+   "results": "msearch grep found no Mathlib result. Local rg found the definitions in SpaceLineModuleProjInput and GradedImmersionAmpleCriterion, with no evaluation product or ring-map existence theorem.",
+   "date": "2026-10-23",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trivializing an invertible sheaf converts a graded symmetric algebra map to a ring homomorphism",
+   "results": "8 hits: IsSymmetricAlgebra.lift, SymmetricAlgebra.lift, Proj.basicOpenToSpec_app_top, SymmetricAlgebra.algebraMapInv, HomogeneousLocalization.awayMapₐ_apply, HomogeneousLocalization.fromZeroRingHom, Proj.awayToSection, StructureSheaf.comap_id'. The lift constructs the algebra map but supplies neither normalized pullback coefficients nor the irrelevant-ideal equation.",
+   "date": "2026-10-23",
+   "verdict": "no exact match; useful symmetric algebra API"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LineQuotientTrivializedCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/LineQuotientTrivializedCoefficients.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.line_quotient_trivialized_coefficients",
+  "statement": "theorem line_quotient_trivialized_coefficients {S T : Scheme.{u}} (h : T ⟶ S)\n    (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible]\n    (q : (tensorPullback h).obj E ⟶ L) [Epi q]\n    (ψ : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) L)\n    (hψ : ψ.ExtendsLineQuotient h E L q)\n    (V : S.affineOpens) (W : T.affineOpens) (hWV : W.1 ≤ h ⁻¹ᵁ V.1)\n    (e : (tensorPullback W.1.ι).obj L ≅ SheafOfModules.unit W.1.toScheme.ringCatSheaf) :\n    ∃ α : (SymmetricAlgebraSheaf.gradedAlgebraData E).obj V →+*\n        Γ(W.1.toScheme, ⊤),\n      (∀ r : Γ(S, V.1), α (algebraMap Γ(S, V.1)\n        ((SymmetricAlgebraSheaf.gradedAlgebraData E).obj V) r) =\n          W.1.ι.appLE W.1 ⊤ (by simp) (h.appLE V.1 W.1 hWV r)) ∧\n      (∀ m : E.val.obj (op V.1),\n        α (SymmetricAlgebra.ι Γ(S, V.1) (E.val.obj (op V.1)) m) =\n          (Scheme.Modules.unitSectionsEquiv ⊤).symm\n            (e.hom.app ⊤\n              (((Scheme.Modules.tensorPullback W.1.ι).obj L).presheaf.map\n                (homOfLE (show (⊤ : W.1.toScheme.Opens) ≤ W.1.ι ⁻¹ᵁ W.1 by simp)).op\n                (Scheme.Modules.tensorPullbackSection W.1.ι L W.1\n                  (L.presheaf.map (homOfLE hWV).op\n                    (q.app (h ⁻¹ᵁ V.1)\n                      (Scheme.Modules.tensorPullbackSection h E V.1 m))))))) ∧\n      (∀ (n : ℕ) (a : (SymmetricAlgebraSheaf.gradedAlgebraData E).grading V n),\n        α a = (Scheme.Modules.unitSectionsEquiv ⊤).symm\n          ((AlgebraicSpace.trivializedPower e n).hom.app ⊤\n            (ψ.evaluate W.1.ι V\n              (by simpa only [W.1.ι_preimage_self] using W.1.ι.preimage_mono hWV) n a))) ∧\n      Ideal.map α (HomogeneousIdeal.irrelevant\n        ((SymmetricAlgebraSheaf.gradedAlgebraData E).grading V)).toIdeal = ⊤",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-df49b",
+  "group": "X5",
+  "result": "fix",
+  "landing": "20261023T152134-L-454072",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T112334-L-1572701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

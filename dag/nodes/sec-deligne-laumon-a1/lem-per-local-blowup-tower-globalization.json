@@ -1,0 +1,478 @@
+{
+ "id": "lem-per-local-blowup-tower-globalization",
+ "kind": "statement",
+ "title": "Globalizing synchronized local ordinary blowup towers",
+ "statement": "Let $X$ be Noetherian [pqf-def-locnoeth], $S$ a finite set of pairwise incomparable points with $\\dim\\mathcal O_{X,s}=r\\ge1$ for every $s\\in S$, and $p:P\\to X$ proper [def-weil-proper-morphism], with $P$ reduced Noetherian [def-pc-reduced-scheme]. Noetherian means having a finite affine cover by spectra of Noetherian rings; dimension is the supremum of lengths of prime chains. Put $P_s=P\\times_X\\operatorname{Spec}\\mathcal O_{X,s}$ [def-pc-fibre-product]. Suppose on $\\coprod_{s\\in S}P_s$ a finite ordered tower of ordinary blowups with coherent reduced nowhere dense centers is given [def-nagata-global-blowup, pqf-def-coherent], and each center is supported over the closed points of these local bases. Nowhere dense means that its underlying closed subset contains no nonempty open subset. Empty centers on individual components are allowed.\n\nThere is a canonical tower on $P$: at each stage its center is the schematic closure of the union of the corresponding local centers in the current ambient scheme, meaning the smallest closed subscheme through which those centers map [def-nagata-scheme-theoretic-image]. Its restriction to every $P_s$ is the given tower, with its empty stages; it is independent of auxiliary open neighbourhoods used to spread the local centers. Every nonempty global center is reduced, nowhere dense, and its image in $X$ is a union of closures of members of $S$, with pure codimension $r$ (every generic point of the image has local-ring dimension $r$). The inverse image of the generic points of this image is schematically dense in the center: functions are determined by their restrictions to the corresponding local schemes. If $P=W$ is a closed subscheme of a Noetherian ambient $X$-scheme $M$ [def-weil-closed-immersion], the same closure centers may instead be blown up in $M$; the resulting strict transform of $W$ restricts over each $s$ to its given iterated blowup [def-nagata-strict-transform].\n\nFor a flat base change $f:X'\\to X$ between Noetherian schemes [def-weil-flat-morphism], taking the schematic images of the full pulled-back local centers, on $P_s\\times_X X'$, gives exactly the scheme-theoretic pullback of the global tower, including its center ideals. The same holds for the ambient construction. No reduction of a pulled-back ideal is made. If instead the tower, or its ambient construction in $M\\times_XX'$, is reconstructed from the local schemes at the finite set $S'$ of generic points of $f^{-1}(\\bigcup_{s\\in S}\\overline{\\{s\\}})$, it agrees with that pullback provided the inverse image of $S'$ is schematically dense in every pulled-back global center. It suffices for this extra condition that all those pulled-back centers are reduced. In either comparison, only empty centers may be contracted. General flat pullback alone does not assert reducedness or preservation of the integer $r$.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "§2.2.7 (pushforward by schematic closure), Lemma 2.1.2, §4.2.1 and Lemmas 4.2.4--4.2.5, printed pp.7,10--11,28--29; simultaneous centers rather than separately ordered local towers; Temkin arXiv:0904.1592v2, read online 2026-10-24; archival copy WANTED. No Stacks tag states this combined assertion."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "def-pc-reduced-scheme",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "def-nagata-strict-transform",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-closed-immersion",
+  "def-trf-ordinary-resolution-rule",
+  "def-per-ordinary-tower-cartesian-map",
+  "def-per-codimension-resolution-prefix"
+ ],
+ "proof": [
+  {
+   "text": "We construct the tower by induction on its given finite length $N$, retaining all stages. Write $T=P_i$ and $D_s\\subset T_s=T\\times_X\\operatorname{Spec}\\mathcal O_{X,s}$ for the next given center, using the inductively supplied identification with the local tower. At $i=0$ this identification is the definition of $P_s$. The canonical map $T_s\\to T$ is a monomorphism: on a base affine $\\operatorname{Spec}A$ containing $s$ it is localization by $A\\setminus\\mathfrak p_s$, and a map into this localization has at most one lift because all these denominators must be units. It is flat by localization-flatness and stability under base change. All $T_s$ and $D_s$ are Noetherian: on each of the finitely many affine charts of $T$, localization preserves finite generation of ideals (an ideal is the extension of its contraction); quotients do also. Consequently $D=\\coprod_sD_s$ is Noetherian. The map $D\\to T$ is quasi-compact, since the inverse image of an affine open is an open subset of a Noetherian space.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "Let $C=\\operatorname{SIm}(D\\to T)$. The quasi-compact image theorem makes this a closed subscheme defined by the kernel of restriction of functions to $D$, with injective restriction from $\\mathcal O_C$ to the pushforward of $\\mathcal O_D$. On an affine chart $\\operatorname{Spec}B$ its ideal $I$ is finitely generated because $B$ is Noetherian. Kernels of maps from finite free $B$-modules to $I$ are submodules of finite free Noetherian modules and hence finitely generated. Thus this quasi-coherent ideal is coherent in the stated sense. Since $D$ is reduced, the reduced-image theorem identifies $C$ with the reduced induced structure on $\\overline{D}$. In particular it is reduced, and it is empty exactly when every $D_s$ is empty.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "pqf-def-locnoeth",
+    "pqf-def-coherent",
+    "lem-trf-reduced-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "For $t\\in S$, apply flat base change of schematic images to $D\\to T$ and $T_t\\to T$. The $s=t$ summand of $D\\times_TT_t$ is $D_t$, since $T_t\\to T$ is a monomorphism. Every other summand is empty. Indeed a point in the $s$ summand maps to $s\\in X$, whereas every point of $T_t$ maps to a generalization of $t$; this would say that $s$ generalizes $t$, contrary to incomparability. A scheme with empty underlying space is empty. Hence $C\\times_TT_t$ is the schematic image of the closed immersion $D_t\\hookrightarrow T_t$, namely $D_t$, with its full scheme structure.",
+   "uses": [
+    "lem-sfb-scheme-image-flat-base-change",
+    "lemma-nagata-scheme-image-of-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "Define $P_{i+1}=\\operatorname{Bl}_C(T)$. Flat base change for ordinary blowups and the preceding equality identify its restriction to each local base with the prescribed blowup in $D_s$, including the empty-center identity stage. The reduced-Noetherian blowup lemma preserves the induction's hypothesis on $T$. Each blowup is proper because its coherent ideal is of finite type, and proper composition shows that every $P_i\\to X$ is proper. Repeat this induction for $i=0,\\ldots,N-1$. It terminates after exactly $N$ stages.",
+   "uses": [
+    "thm-nagata-blowup-flat-base-change",
+    "lem-per-reduced-noetherian-blowup-geometry",
+    "lemma-nagata-blowup-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0805 (lemma-flat-base-change-blowing-up), 0808 (lemma-blow-up-reduced-scheme); morphisms.tex Tag 01W3 (lemma-composition-proper)"
+   }
+  },
+  {
+   "text": "Here is the support calculation at one induction stage. By finiteness of Noetherian components and scheme sobriety, write each $D_s$ as a finite union of irreducible components with generic points $d_{sj}$. Each $d_{sj}$ maps to $s$. Its image in $T$ has irreducible closure $E_{sj}$; its own point is the generic point of that closure, because continuous maps preserve the specialization relation. The underlying set of $C$ is the finite union of these $E_{sj}$. Thus every irreducible component $E$ of $C$ equals one of the maximal $E_{sj}$, and its generic point maps to a member of $S$. Conversely each nonempty $D_s$ contributes points over $s$.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-scheme-sober",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "The image of $C$ in $X$ is closed, since $P_i\\to X$ is proper and $C$ is closed in $P_i$. It is contained in $\\bigcup_{D_s\\ne\\varnothing}\\overline{\\{s\\}}$: that closed inverse image already contains $D$ and hence its closure. It contains each such $s$, hence also its closure. This proves equality. Incomparability makes precisely these $s$ its component-generic points, so its pure codimension is $r$ by hypothesis. The map from the disjoint union of the restrictions of $C$ to their local bases has schematic image $C$, because it is exactly $D\\to C$, whose restriction on functions is injective by the image-kernel theorem. This is the required schematic density, and includes the assertion that a local function vanishing on all those local restrictions vanishes.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "To check nowhere-density, suppose $C$ contained a nonempty open of $T$. By the component cover and sobriety, that open contains a generic point $\\eta$ of an irreducible component $F$ of $T$. Since $C$ is closed, $F\\subset C$, and maximality of $F$ makes it an irreducible component of $C$. Step 5 gives $p_i(\\eta)=s\\in S$. Localizing the base at $s$ preserves this generic point and its local ring: every inverted base function is already a unit there. The preimage of $F$ is a component of $T_s$ and is contained in $D_s=C\\times_TT_s$. A Noetherian scheme has finitely many components; removing its other components leaves a nonempty open subset of this component. Thus $D_s$ contains a nonempty open of $T_s$, a contradiction. Hence $C$ is nowhere dense.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "The kernel description also proves canonicity and independence. A center obtained as the schematic closure of the given $D_s$ must have ideal $\\ker(\\mathcal O_T\\to\\mathcal O_D)$ and therefore equals $C$. Applying this observation at each stage identifies the next blowup and then its prescribed local centers. In particular spreading on auxiliary neighborhoods, followed by taking closures, gives this same tower whenever it gives the prescribed local centers schematically densely. There is no uniqueness assertion for extensions with additional components supported away from the specified local bases.",
+   "uses": [
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "For the ambient assertion induct on the same stage index. Initially $W=P$ is closed in $M$. If its current strict transform is identified with $P_i$, the maps of the $D_s$ into the ambient scheme factor through that closed subscheme. Their schematic image in the ambient scheme is exactly $C$ with its composite closed immersion: on affine rings the kernel of $A\\to B\\to\\Gamma(D,\\mathcal O_D)$ is the inverse image of the kernel in $B$, where $A\\twoheadrightarrow B$ defines $P_i$. Thus the ambient center restricts to precisely $C$ on $P_i$. The strict-transform-is-blowup theorem now identifies the next strict transform with $\\operatorname{Bl}_C(P_i)=P_{i+1}$, as a closed subscheme of the next ambient blowup and compatibly with its projection. This proves the assertion for the entire finite tower.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "def-weil-closed-immersion",
+    "thm-nagata-strict-transform-is-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E (lemma-strict-transform), part (1); kernel description from morphisms.tex Tag 01R8"
+   }
+  },
+  {
+   "text": "Let $X'\\to X$ be flat. At a stage already identified with the pullback of $P_i$, the map $P_i\\times_XX'\\to P_i$ is flat. Flat base change of schematic images says that the image of the full $D\\times_XX'$ is $C\\times_XX'$, with ideal $I_C\\mathcal O_{P_i\\times_XX'}$. Flat base change of blowups identifies the next stage. Induction proves the assertion for the whole tower. The argument does not replace $D\\times_XX'$ by its reduction or by restrictions to selected generic points. Applied to the ambient centers it proves the same identity there; strict-transform-is-blowup then gives the comparison on $W$. Empty centers give identity stages and may be deleted in their existing order.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-sfb-scheme-image-flat-base-change",
+    "thm-nagata-blowup-flat-base-change",
+    "thm-nagata-strict-transform-is-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "If one reconstructs from the new local bases at $S'$, the stated schematic-density hypothesis says precisely that the image of the union of the restricted center maps into $C'=C\\times_XX'$ is all of $C'$. Composing with its closed immersion into $P_i\\times_XX'$ gives schematic image $C'$ again: the kernels of restriction to these local centers and to $C'$ coincide. Therefore the newly reconstructed center is $C'$ at every stage. Induction using flat blowup base change gives the desired comparison, retaining all nonempty ideals. For the ambient construction, with $M_i$ the $i$-th ambient blowup of Step 9, the local centers map into $M_i\\times_XX'$ through the closed subscheme $P_i\\times_XX'$, so by the kernel computation of Step 9 their schematic image there is $C'$ with its composite closed immersion; strict-transform-is-blowup then identifies the next strict transform of $W\\times_XX'$ with $\\operatorname{Bl}_{C'}(P_i\\times_XX')$, and induction gives the ambient comparison.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "thm-nagata-blowup-flat-base-change",
+    "thm-nagata-strict-transform-is-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); local-spectrum calculation"
+   }
+  },
+  {
+   "text": "Finally assume every $C'=C\\times_XX'$ is reduced. Let $Z\\subset X$ be the reduced image of $C\\to X$. Step 5 shows $C\\to Z$ is maximally dominant: all component-generic points go to the generic points of $Z$, which are the active members of $S$. The flat-maximal-dominance lemma applied to $Z'=Z\\times_XX'\\to Z$ shows that every generic point of $C'$ maps to a generic point of $Z'$. These belong to $S'$: flat maximal dominance also makes their images in $Z$ generic, so they map to an active $s$; such a point cannot lie in the inverse image of an inactive point closure, by incomparability. Thus active components remain components in the full union. The finite union of restrictions of $C'$ to the local bases at $S'$ thus has topologically dense image in $C'$. Its source is Noetherian, so this morphism is quasi-compact and quasi-separated. Reducedness of $C'$ and the reduced-dense-image theorem promote topological density to schematic density. This proves the stated sufficient condition without claiming reducedness under arbitrary flat pullback.",
+   "uses": [
+    "lem-trf-reduced-scheme-image",
+    "lem-per-flat-maximal-dominance-base-change",
+    "lemma-nagata-reduced-dense-image-schematic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced); generic-point argument of existing lem-per-flat-maximal-dominance-base-change; reduced-dense-image criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "pqf-def-locnoeth",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "pqf-def-coherent",
+  "lem-trf-reduced-scheme-image",
+  "lem-sfb-scheme-image-flat-base-change",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-per-reduced-noetherian-blowup-geometry",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-scheme-sober",
+  "def-weil-proper-morphism",
+  "lem-sc-irreducible-components-cover",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-closed-immersion",
+  "thm-nagata-strict-transform-is-blowup",
+  "lem-per-flat-maximal-dominance-base-change",
+  "lemma-nagata-reduced-dense-image-schematic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Explicit assembly from Tags 081I, 01R8, 056B and the cited blowup interfaces; follows Temkin schematic-closure route, whose archival copy is WANTED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-local-blowup-tower-globalization: Blowup sequences supported over finite generic points spread to ordinary blowup sequences with reduced equicodimensional centers",
+   "results": "{\"t\": \"2026-10-24T02:51:51Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-local-blowup-tower-globalization: Blowup sequences supported over finite generic points spread to ordinary blowup sequences with reduced equicodimensional centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints.ofComponent\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"genericPoints.isGenericPoint\", \"isGenericPoint_iff_specializes\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"genericPoint_specializes\", \"AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal\"], \"digest\": \"852ee67a381460e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up.*(spread|closure|local)|schematicClosure",
+   "results": "{\"t\": \"2026-10-24T02:51:51Z\", \"tool\": \"grep\", \"query\": \"blow.?up.*(spread|closure|local)|schematicClosure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-blowup-tower-globalization: Extend finite blowup towers over local schemes by schematic closure and merge centers over finitely many points",
+   "results": "{\"t\": \"2026-10-24T02:51:54Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-local-blowup-tower-globalization: Extend finite blowup towers over local schemes by schematic closure and merge centers over finitely many points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"bf20c577b2bcf244\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-blowup-tower-globalization: Blowup sequences supported over finite generic points spread to ordinary blowup sequences with reduced equicodimensional centers",
+   "results": "{\"t\": \"2026-10-24T02:51:55Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-local-blowup-tower-globalization: Blowup sequences supported over finite generic points spread to ordinary blowup sequences with reduced equicodimensional centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"Algebra.ZariskisMainProperty.trans\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\"], \"digest\": \"588c794630cbabe8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-blowup-tower-globalization: globalize a finite synchronized tower of blowups from local schemes by taking schematic closures of centers",
+   "results": "{\"t\": \"2026-10-24T03:39:15Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-local-blowup-tower-globalization: globalize a finite synchronized tower of blowups from local schemes by taking schematic closures of centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"031458ee890933de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned normalization/spreading or flatness facts do not state the ordered schematic-closure blowup construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTheoreticImage\"",
+   "results": "{\"t\": \"2026-10-24T03:39:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"schemeTheoreticImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned normalization/spreading or flatness facts do not state the ordered schematic-closure blowup construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-local-blowup-tower-globalization: schematic closure extends local blowup centers and blowup towers compatibly with flat pullback",
+   "results": "{\"t\": \"2026-10-24T03:39:54Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-local-blowup-tower-globalization: schematic closure extends local blowup centers and blowup towers compatibly with flat pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsLeftSchemeOfIsStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.comp\"], \"digest\": \"32183eb24a888986\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned normalization/spreading or flatness facts do not state the ordered schematic-closure blowup construction"
+  },
+  {
+   "tool": "grep",
+   "query": "schematicClosure|schemeTheoreticImage|blow.?up.*(closure|local)",
+   "results": "{\"t\": \"2026-10-24T03:39:54Z\", \"tool\": \"grep\", \"query\": \"schematicClosure|schemeTheoreticImage|blow.?up.*(closure|local)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned normalization/spreading or flatness facts do not state the ordered schematic-closure blowup construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-blowup-tower-globalization: globalize a finite synchronized tower of blowups from local schemes by taking schematic closures of centers",
+   "results": "{\"t\": \"2026-10-24T03:39:15Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-local-blowup-tower-globalization: globalize a finite synchronized tower of blowups from local schemes by taking schematic closures of centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"031458ee890933de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned normalization/spreading or flatness facts do not state the ordered schematic-closure blowup construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTheoreticImage\"",
+   "results": "{\"t\": \"2026-10-24T03:39:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"schemeTheoreticImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned normalization/spreading or flatness facts do not state the ordered schematic-closure blowup construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-local-blowup-tower-globalization: schematic closure extends local blowup centers and blowup towers compatibly with flat pullback",
+   "results": "{\"t\": \"2026-10-24T03:39:54Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-local-blowup-tower-globalization: schematic closure extends local blowup centers and blowup towers compatibly with flat pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsLeftSchemeOfIsStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.comp\"], \"digest\": \"32183eb24a888986\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned normalization/spreading or flatness facts do not state the ordered schematic-closure blowup construction"
+  },
+  {
+   "tool": "grep",
+   "query": "schematicClosure|schemeTheoreticImage|blow.?up.*(closure|local)",
+   "results": "{\"t\": \"2026-10-24T03:39:54Z\", \"tool\": \"grep\", \"query\": \"schematicClosure|schemeTheoreticImage|blow.?up.*(closure|local)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned normalization/spreading or flatness facts do not state the ordered schematic-closure blowup construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-codimension-resolution-improvement",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, through ordinary characteristic-zero resolution and codimension-resolution-improvement: synchronized local centers extended by schematic image; Temkin Lemma 2.2.1 and section 4.3, Extension n+1, printed pp.11,30--31.",
+   "via": [
+    "lem-per-codimension-resolution-improvement",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-local-blowup-tower-globalization",
+  "worker": "stage1",
+  "summary": "Direct twelve-step induction using existing image, blowup, component and maximal-dominance nodes; zero new nodes. Corrected false generic-point flat-base-change assertion by distinguishing full pulled local schemes from generic-local reconstruction and adding the necessary schematic-density condition, with reduced pulled centers as a proved sufficient condition. Explicit reduced-total-space counterexample in report. Schematic images, local recovery, nowhere-density, ambient strict transforms and exact center ideals checked.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3 via the recorded ordinary resolution branch: codimension successor, synchronized local centers, schematic closure and ambient pushing forward. Latest blueprint searched; no duplicate statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Localization flatness supplies local-base flatness; generic commutative algebra tool. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Flatness is stable under scheme base change; generic scheme geometry tool. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Kernel and image factorization describe schematic closure; generic scheme geometry tool. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Reduced sources have reduced schematic image; generic scheme geometry tool. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-scheme-image-flat-base-change",
+    "why": "Exact scheme-theoretic image pullback supplies local recovery and global compatibility. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-of-closed-immersion",
+    "why": "Identifies the local image of the given closed center with the center itself. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-irreducible-components",
+    "why": "Finite components allow the support and nowhere-density arguments. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Component generic points are unique and exist for scheme closed subsets. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Every point lies on an irreducible component; used in the nowhere-density contradiction. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Properness of coherent-center blowups makes center images closed over X. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "The iterated composite remains proper. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Ordinary blowups restrict and pull back with the exact extended ideal. No statement of the Fourier/perverse unit supplies this general tool."
+   },
+   {
+    "node": "thm-nagata-strict-transform-is-blowup",
+    "why": "The ambient strict transform is the ordinary blowup of the closed subscheme. No statement of the Fourier/perverse unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-trf-reduced-scheme-image",
+  "lem-sfb-scheme-image-flat-base-change",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-scheme-sober",
+  "lem-sc-irreducible-components-cover",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-strict-transform-is-blowup"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-c3d524899",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-c3d524899 (reviewer sub-agent of L); spot-checked: I read all 12 steps and the cited statements. Stacks morphisms 081I (l.4965) and 056B (l.977) were read at the source. 1) The worker's counterexample to the base flat-base-change clause is correct. B=k[a,b,c,d]/(ac,ad,bc,bd) with t=a+c is reduced and flat over k[t], and C'=B/(t) has an embedded point. Rebuilding from the generic points S' gives the ideal (a,c) instead of (a+c), and Bl_(a,c) is the normalization (two disjoint planes) while Bl_(a+c) is the identity. So the base statement was false, and the correction (exact comparison for the full pulled-back centers; reconstruction only under a schematic-density hypothesis, with reduced pulled-back centers proved sufficient at step 12) is an honest E7 correction, not a weakening. 2) FIX: the corrected statement dropped the ambient construction from the reconstruction comparison, which the base covered and which the parent lem-per-codimension-resolution-improvement uses (steps 5 and 9). I restored it in the statement and added the step 9 kernel argument and thm-nagata-strict-transform-is-blowup to step 11 (fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-local-blowup-tower-globalization.json). Maintainer note: the parent's step 9 must now check that the pulled-back centers are reduced under a regular h; this is true but needs a sentence and a citation there. 3) Batch-5 citation lem-trf-reduced-scheme-image: this is Stacks 056B, generic scheme geometry and no part of the trace formula or Poincare duality; accepted. 4) Dropped-route node lem-per-flat-maximal-dominance-base-change, used at step 12: it is a generic topological fact from ILO Expose II 1.1.3/1.1.5 (not SGA), already split, with an elementary closure and none of the forbidden Qbar/Gabber/alteration content. This item is not the Artin-Gabber node or one of its three children; accepted. 5) No new nodes, and no re-split note applies to this item. Steps are under 1,100 characters, and the 13 tool_uses are generic and accepted. No duplicate found (the closest are local-normalized-blowups-globalize, normalized-tower-support-recovery and blowup-sequence-insertion, which state different things). Edge cases checked: S empty, empty centers, N=0, non-integral P, non-reduced pullback.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalBlowupTowerGlobalization",
+  "declaration": "AlgebraicGeometry.exists_localBlowupTower_globalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.localSpectrumPullback",
+   "AlgebraicGeometry.Scheme.localSpectrumPullbackMap",
+   "AlgebraicGeometry.Scheme.genericSupportPoints",
+   "AlgebraicGeometry.OrdinaryBlowupTower.LocalClosure",
+   "AlgebraicGeometry.OrdinaryBlowupTower.RecoveredFromLocalSpectra",
+   "AlgebraicGeometry.OrdinaryBlowupTower.CentersSchematicallyDenseOver",
+   "AlgebraicGeometry.OrdinaryBlowupTower.AmbientLift",
+   "AlgebraicGeometry.OrdinaryBlowupTower.LocalReconstruction",
+   "AlgebraicGeometry.OrdinaryBlowupTower.FullCenterImageBaseChange",
+   "AlgebraicGeometry.exists_localBlowupTower_globalization",
+   "AlgebraicGeometry.localBlowupTower_globalization_ambient",
+   "AlgebraicGeometry.localBlowupTower_globalization_flat",
+   "AlgebraicGeometry.localBlowupTower_globalization_ambient_flat"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalBlowupTowerGlobalization.lean",
+  "statement": "theorem exists_localBlowupTower_globalization {X P : Scheme.{u}} [IsNoetherian X] [IsNoetherian P] [IsReduced P] (p : P ⟶ X) [IsProper p] (S : Set X) (hS : S.Finite) (hinc : S.Pairwise (fun s t ↦ ¬ s ⤳ t ∧ ¬ t ⤳ s)) (r : ℕ) (hr : 1 ≤ r) (hdim : ∀ s ∈ S, ringKrullDim (X.presheaf.stalk s) = (r : WithBot ℕ∞)) (L : OrdinaryBlowupTower (Scheme.localSpectrumPullback p S)) (hcoh : ∀ i : Fin L.length, RingedSpace.IsCoherent (L.level i.castSucc).toRingedSpace (L.center i).toModules) (hred : ∀ i : Fin L.length, IsReduced (L.center i).subscheme) (hnd : ∀ i : Fin L.length, IsNowhereDense ((L.center i).support : Set (L.level i.castSucc))) (hsupp : ∀ i : Fin L.length, Set.range (L.centerToBase i ≫ Scheme.localSpectrumPullbackMap p S ≫ p) ⊆ S) : ∃ G : OrdinaryBlowupTower P, Nonempty (LocalClosure p S L G) ∧ (∀ i : Fin G.length, RingedSpace.IsCoherent (G.level i.castSucc).toRingedSpace (G.center i).toModules ∧ IsReduced (G.center i).subscheme ∧ IsNowhereDense ((G.center i).support : Set (G.level i.castSucc)) ∧ Set.range (G.centerToBase i ≫ p) = ⋃ s ∈ S ∩ Set.range (G.centerToBase i ≫ p), closure ({s} : Set X) ∧ (∀ z : Set.range (G.centerToBase i ≫ p), z ∈ genericPoints (Set.range (G.centerToBase i ≫ p)) → ringKrullDim (X.presheaf.stalk z.1) = (r : WithBot ℕ∞))) ∧ CentersSchematicallyDenseOver p S G ∧ (∀ H : OrdinaryBlowupTower P, LocalClosure p S L H → Nonempty (OrdinaryTowerCartesianMap (𝟙 P) G H) ∧ Subsingleton (OrdinaryTowerCartesianMap (𝟙 P) G H))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four theorem declarations jointly state the globalization, ambient realization, full flat-base-change comparison and conditional generic-local reconstruction clauses. Auxiliary declarations specify canonical local maps and comparison properties with actual data. OrdinaryBlowupTower and OrdinaryResolutionComparison use def-trf-ordinary-resolution-rule; the uncontracted OrdinaryTowerCartesianMap is owned by def-per-ordinary-tower-cartesian-map. H13 repair: the theorem lem-per-normalized-tower-regular-pullback is no longer a statement dependency or import. Repair of return on 8f78e91a8c8c: removed the duplicate centerToBase definition; publicly import its owner Sheaf.AlgebraicGeometry.CodimensionResolutionPrefix and cite def-per-codimension-resolution-prefix. Reuse G.centerToBase i followed by p, and the analogous composite for L; these are the same center-to-X maps as before. No replacement definition or renaming."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc3603c4a",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery after landing RETURN of 8f78 (duplicate OrdinaryBlowupTower.centerToBase). Diff vs 8f78: local centerToBase removed; public import of Sheaf.AlgebraicGeometry.CodimensionResolutionPrefix; def-per-codimension-resolution-prefix (present in the base snapshot) added to stmt_deps; all uses rewritten to G.centerToBase i ≫ p and L.centerToBase i ≫ localSpectrumPullbackMap p S ≫ p, equal to the old maps by associativity, so no meaning change. Full independent reading against the node: hypotheses exact (IsNoetherian X/P, IsReduced P, IsProper p, finite two-sided incomparable S, stalk ringKrullDim = r ≥ 1; hsupp equivalent to support over the local closed points). LocalClosure = uncontracted cartesian restriction plus schematic-image centers (Hom.ker). Unique comparison is true because blowups are monomorphisms. Coherent/reduced/nowhere-dense centers, image = union of closures of active s, pure codimension r, schematic density (all-S form equivalent by incomparability). AmbientLift is tied to strictTransform over both projections. Flat clauses keep full ideals; reconstruction at S' only under density, with reduced centers sufficient; unit-only contraction. Edge cases S empty, length 0, empty schemes/centers, r=0 excluded by the node; single universe u. lean.statement verbatim; 13 declarations present; no name collision in side-live; 19 imports exist; no hollow defs; 4 sorry theorems only; docstrings carry source, blueprint id and steps 1-12; Worker report and Second reading sections present. No compile (no file changed); worker reports a clean 3.3 s compile. Advisory: main density clause could use SchematicallyDenseOverGenericImage (equivalent)."
+ }
+}

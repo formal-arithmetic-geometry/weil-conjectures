@@ -1,0 +1,233 @@
+{
+ "id": "lem-sc-module-surjectivity-field-extension-neighbourhood",
+ "kind": "statement",
+ "title": "Module surjectivity on a principal open descends near its image under field extension",
+ "statement": "Let $k$ be a field, $K/k$ a field extension [def-pc-field-extension], $C$ a commutative $k$-algebra, and $\\varphi:M\\to N$ a $C$-linear map of arbitrary $C$-modules. Put $C_K=C\\otimes_k K$ and $\\varphi_K=\\varphi\\otimes_k\\mathrm{id}_K$ [def-weil-pbc-module-tensor-product]. Let $v\\in C_K$ and let $P\\subset C_K$ be a prime ideal with $v\\notin P$, and put $\\mathfrak p=\\{c\\in C:c\\otimes1\\in P\\}$. If $(\\varphi_K)_v:(M\\otimes_k K)_v\\to(N\\otimes_k K)_v$ is surjective, then there exists $c\\in C\\setminus\\mathfrak p$ such that $\\varphi_c:M_c\\to N_c$ is surjective. Here a subscript $a$ denotes localization at $1,a,a^2,\\ldots$ [def-weil-pbc-module-localization]. No finite-generation hypothesis on either module or on $C$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C4Y (varieties-lemma-change-fields-flat), assertion (1), together with Tag 0383 (morphisms-lemma-scheme-over-field-universally-open): auxiliary module consequence of faithful flatness of the local maps and openness, not a verbatim Stacks statement"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=C\\otimes_kK$ and let $\\pi:\\operatorname{Spec}S\\to\\operatorname{Spec}C$ be contraction. The affine fibre-product comparison identifies $\\pi$ with the base change of $\\operatorname{Spec}K\\to\\operatorname{Spec}k$. Universal openness over a field therefore makes $U=\\pi(D(v))$ open. Since $P\\in D(v)$ and $\\pi(P)=\\mathfrak p$, the basic-open basis supplies $c\\notin\\mathfrak p$ with $D(c)\\subseteq U$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-scheme-over-field-universally-open",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y (lemma-change-fields-flat), assertion (1), combined with Morphisms Tag 0383 (lemma-scheme-over-field-universally-open); agent-written module consequence"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q\\in D(c)$. Choose $Q\\in D(v)$ contracting to $\\mathfrak q$, as permitted by $D(c)\\subseteq\\pi(D(v))$. The field-extension map $C\\to S$ is faithfully flat, hence flat. Localization at these corresponding primes gives a flat local homomorphism $A=C_{\\mathfrak q}\\to B=S_Q$. In particular it is faithfully flat and reflects surjectivity of module maps after tensoring with $B$. No finite-presentation hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y (lemma-change-fields-flat), assertion (1), combined with Morphisms Tag 0383 (lemma-scheme-over-field-universally-open); agent-written module consequence"
+   }
+  },
+  {
+   "text": "For any $C$-module $E$ there is a natural $B$-linear identification $(E\\otimes_kK)_Q\\cong E_{\\mathfrak q}\\otimes_A B$. Explicitly, $(e\\otimes\\lambda)/t\\mapsto(e/1)\\otimes((1\\otimes\\lambda)/t)$, for $t\\in S\\setminus Q$. The inverse is $(e/s)\\otimes b\\mapsto b\\,(e\\otimes1)/(s\\otimes1)$, for $s\\in C\\setminus\\mathfrak q$. The denominators are invertible because $Q$ contracts to $\\mathfrak q$; the formulas respect fraction equality and the tensor balancing relations. Their composites fix the displayed generators, so they are inverse. Replacing $e$ by $\\varphi(e)$ shows that these identifications carry $(\\varphi_K)_Q$ to $\\varphi_{\\mathfrak q}\\otimes_A1_B$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y (lemma-change-fields-flat), assertion (1), combined with Morphisms Tag 0383 (lemma-scheme-over-field-universally-open); agent-written module consequence"
+   }
+  },
+  {
+   "text": "Surjectivity of $(\\varphi_K)_v$ implies surjectivity of $(\\varphi_K)_Q$. Indeed, given $y/t$ in $(N\\otimes_kK)_Q$, represent a preimage of $y/1$ in the $v$-localization by $x/v^a$. Equality there says $v^b(v^a y-\\varphi_K(x))=0$ for some $b\\geq0$. Since $v\\notin Q$, this yields $\\varphi_K(x)/(v^at)=y/t$ in the $Q$-localization. Thus the map identified in Step 3 is surjective. Faithfully flat reflection from Step 2 now gives surjectivity of $\\varphi_{\\mathfrak q}$ for every $\\mathfrak q\\in D(c)$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y (lemma-change-fields-flat), assertion (1), combined with Morphisms Tag 0383 (lemma-scheme-over-field-universally-open); agent-written module consequence"
+   }
+  },
+  {
+   "text": "Put $T=N/\\varphi(M)$. Localization exactness applied to $M\\to N\\to T\\to0$ and the preceding surjectivity gives $T_{\\mathfrak q}=0$ for all $\\mathfrak q\\in D(c)$. Every maximal ideal $\\mathfrak n$ of $C_c$ contracts to such a $\\mathfrak q$, by the spectrum-of-localization comparison. Moreover $(T_c)_{\\mathfrak n}\\cong T_{\\mathfrak q}$: the fraction map sends $(e/c^a)/(r/c^b)$ to $c^b e/(c^a r)$, with inverse $e/s\\mapsto(e/1)/(s/1)$. Hence every maximal localization of $0\\to T_c$ is bijective. The cited maximal-localization criterion gives $T_c=0$. Finally localization exactness in $M_c\\to N_c\\to T_c\\to0$ gives surjectivity of $\\varphi_c$, with $c\\notin\\mathfrak p$ as required.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y (lemma-change-fields-flat), assertion (1), combined with Morphisms Tag 0383 (lemma-scheme-over-field-universally-open); agent-written module consequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C4Y (lemma-change-fields-flat), assertion (1), combined with Morphisms Tag 0383 (lemma-scheme-over-field-universally-open); agent-written module consequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surjective.*([Tt]ensor|[Ll]ocal)|([Tt]ensor|[Ll]ocal).*surjective",
+   "results": "Hits: Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Rank.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjectivity of a module map on a neighbourhood descends along field extension",
+   "results": "Hits: Submodule.map_surjective_of_surjective, surjective_of_localized_span, IsLocalizedModule.map_surjective, LinearMap.submoduleComap_surjective_of_surjective, surjective_of_localized_maximal, IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective, LocalizedModule.map_surjective, IsLocalizedModule.fromLocalizedModule.surj; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective, LocalizedModule",
+   "results": "Hits: IsLocalizedModule.fromLocalizedModule.surj, LocalizedModule.map_surjective, IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective, LinearMap.localizedMap_surjective_iff_subsingleton_localized_coker, surjective_of_localized_maximal, surjective_of_localized_span, Module.exists_localizedMap_away_surjective_of_localizedMap_atPrime_surjective; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a module homomorphism becomes surjective on a principal open after extension of the ground field, it is surjective after localization on a neighbourhood of the image prime",
+   "results": "Hits: IsLocalization.mapₐ_surjective_of_surjective, surjective_of_localized_span, surjective_of_isLocalized_span, IsLocalizedModule.map_surjective, surjective_of_localized_maximal, surjective_of_isLocalized_maximal, IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective, IsLocalization.Away.mapₐ_surjective_of_surjective; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(surjective|[Ss]ubsingleton)|surjective.*[Ff]aithfully",
+   "results": "Hits: 26, 222, 233, 239, 241; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an arbitrary module cokernel vanishing on an open subset after field extension vanishes on an open neighbourhood of its image",
+   "results": "Hits: AlgebraicGeometry.Scheme.zero_of_zero_cover, ModuleCat.Tilde.exists_const, SheafOfModules.generatorsOfIsCokernelFree_I, AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, SheafOfModules.generatorsOfIsCokernelFree_s, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.generatorsOfIsCokernelFree_π, AlgebraicGeometry.exists_of_res_zero_of_qcqs; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of an arbitrary module homomorphism on a principal open after extension of the ground field descends to a neighbourhood of its image prime",
+   "results": "surjective_of_isLocalized_span; surjective_of_localized_maximal; surjective_of_isLocalized_maximal; AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective; IsLocalizedModule.map_surjective; surjective_of_localized_span; surjective_of_isLocalization_isMaximal; LocalizedModule.map_surjective; no exact neighbourhood theorem. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective, LocalizedModule",
+   "results": "IsLocalizedModule.fromLocalizedModule.surj; LocalizedModule.map_surjective; IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective; LinearMap.localizedMap_surjective_iff_subsingleton_localized_coker; surjective_of_localized_maximal; surjective_of_localized_span; Module.exists_localizedMap_away_surjective_of_localizedMap_atPrime_surjective; no exact neighbourhood theorem. The away-surjectivity lemma requires Module.Finite on its target; unavailable here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.*[Ff]aithfully|exists_localizedMap_away_surjective|[Ii]sOpenMap.*[Tt]ensor",
+   "results": "Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Finiteness/Descent.lean; Mathlib/RingTheory/Flat/LocallyFree.lean; no exact neighbourhood theorem. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjectivity on an open neighbourhood descends along extension of the ground field for arbitrary modules",
+   "results": "LinearEquiv.extendScalarsOfSurjective; Submodule.map_surjective_of_surjective; IsModuleTopology.isOpenQuotientMap_of_surjective; AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange; IsModuleTopology.isOpenQuotientMap_of_surjectiveₛₗ; AlgEquiv.extendScalarsOfSurjective; IsModuleTopology.isOpenMap_of_surjectiveₛₗ; LinearMap.extendScalarsOfSurjective; no exact neighbourhood theorem. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of the vanishing locus of an arbitrary module along a field extension by openness of the map on prime spectra",
+   "results": "AlgebraicGeometry.Scheme.Opens.toSpecΓ_preimage_zeroLocus; PrimeSpectrum.exists_image_comap_of_finite_of_free; MvPolynomial.pointToPoint_zeroLocus_le; PrimeSpectrum.mem_image_comap_zeroLocus_sdiff; AlgebraicGeometry.Scheme.toSpecΓ_preimage_zeroLocus; AlgebraicGeometry.LocallyRingedSpace.toΓSpec_preimage_zeroLocus_eq; Polynomial.isOpen_image_comap_of_monic; AlgebraicGeometry.Spec_zeroLocus_eq_zeroLocus; no exact neighbourhood theorem. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-lfp-field-extension-pointwise-descent",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-ntorsion-etale",
+ "blueprint": {
+  "from": {
+   "node": "lem-sc-mult-n-etale-kernel",
+   "place": "The original reduction to an algebraic closure for etaleness: the pointwise finite-presentation descent argument, auxiliary module-surjectivity descent used for generators and relations. The current main-20261015 ancestor states the same etaleness result by reference to Tag 0BFH.",
+   "via": [
+    "lem-sc-lfp-field-extension-pointwise-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sc-module-surjectivity-field-extension-neighbourhood",
+  "worker": "stage1",
+  "summary": "Proved the arbitrary-module neighbourhood assertion using openness of field-extension projection, corresponding-prime flat local maps and faithfully flat reflection, followed by exact localization and maximal-localization zero detection. Read every cited statement; reused existing Mathlib leaves and created no nodes. Wrote explicit tensor/localization and repeated-localization fraction identifications and checked arbitrary-module and zero-ring edge cases. Preserved the statement and inherited search history.",
+  "blueprint": "Generic algebraic tool below the original algebraic-closure reduction for etaleness in lem-sc-mult-n-etale-kernel, via lem-sc-lfp-field-extension-pointwise-descent. The current latest blueprint proof Step 2 uses faithfully flat descent of geometric-fibre etaleness; this auxiliary module argument does not change that unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-0594ca291",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-0594ca291 (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps in full. The delivery adds no new nodes, and the statement, source and stmt_deps are unchanged from base; there is no re-split note. The statement is true as stated: openness of Spec(C⊗K)→Spec C, flat local maps C_q→S_Q, faithfully flat reflection of surjectivity, and cokernel vanishing at maximal ideals of C_c. Edge cases checked: K=k, v a unit, C=0 or v nilpotent (vacuous), modules that are not finitely generated. Step 1: fibre-product-affine-spectra makes π the contraction, scheme-over-field-universally-open (0383, read in morphisms.tex) makes it open, and the basic-open basis gives c∉p with D(c)⊆π(D(v)). Step 2: field-extension-base-change-faithfully-flat has no finiteness hypothesis; flat-local-ring-maps and local-flat-faithful-flat-reflects-surjective (00HR) are used within their hypotheses. Step 3: both maps for (E⊗K)_Q≅E_q⊗_A B are written explicitly; I checked balancing and well-definedness on fractions. Step 4: the v^b clearing argument is correct. Step 5: localization exactness, the D(c) homeomorphism and the maximal-localization bijectivity criterion (00HN) give T_c=0. Every cited node is a Mathlib leaf, so no tool_uses are needed. Source 0C4Y(1) was read in varieties.tex; proof_origin=agent is correct; no SGA. The citer lem-sc-finite-type-field-extension-neighbourhood uses the item in exactly this form. A recursive DAG grep (0C4Y, 00DK, 00DL, surjective plus an open-neighbourhood existential) found no duplicate or generalization."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ModuleSurjectivityFieldExtensionNeighbourhood",
+  "declaration": "LinearMap.exists_localizedMap_away_surjective_of_fieldExtension",
+  "file": "lean/Sheaf/RingTheory/ModuleSurjectivityFieldExtensionNeighbourhood.lean",
+  "statement": "theorem exists_localizedMap_away_surjective_of_fieldExtension {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] {C : Type w} [CommRing C] [Algebra k C] {M : Type x} {N : Type y} [AddCommGroup M] [AddCommGroup N] [Module C M] [Module C N] (φ : M →ₗ[C] N) (v : C ⊗[k] K) (P : Ideal (C ⊗[k] K)) [P.IsPrime] (hv : v ∉ P) (hφ : Function.Surjective (LocalizedModule.map (Submonoid.powers v) (φ.baseChange (C ⊗[k] K)))) : ∃ c : C, algebraMap C (C ⊗[k] K) c ∉ P ∧ Function.Surjective (LocalizedModule.map (Submonoid.powers c) φ)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The canonical scalar-extension model (C ⊗[k] K) ⊗[C] M represents M ⊗[k] K via (c ⊗ λ) ⊗ m ↦ (c • m) ⊗ λ; under this identification LinearMap.baseChange is φ ⊗ id_K. No finiteness assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81d2f883a",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause H3 match: field k; K/k as [Field K][Algebra k K] (def-pc-field-extension); C a commutative k-algebra; arbitrary C-modules with no finiteness; C_K = C ⊗[k] K; φ_K as φ.baseChange (C⊗K) on the canonical model (C⊗K)⊗[C]M ≅ M⊗[k]K, documented, not arbitrary; v ∉ P with P prime; hypothesis LocalizedModule.map (powers v), conclusion ∃ c, algebraMap c = c⊗1 ∉ P ∧ LocalizedModule.map (powers c) φ surjective. Five independent universes. The statement is true; edge cases K=k, v a unit, M or N zero, C=0 or v nilpotent (vacuous), infinitely generated modules all covered. Mathlib's exists_localizedMap_away_surjective_* needs Module.Finite, so it is no match; no duplicate in the project or Mathlib. lean.statement is verbatim the file signature; single sorry; docstrings carry the source place 0C4Y(1)/0383, the blueprint id and 5 steps; node unchanged except lean; stmt_deps are Mathlib leaves; no new nodes or repairs; report sections present. Not recompiled (no change); worker compile clean, dry run OK."
+ }
+}

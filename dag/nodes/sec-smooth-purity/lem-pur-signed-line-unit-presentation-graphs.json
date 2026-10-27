@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-signed-line-unit-presentation-graphs",
+ "kind": "statement",
+ "title": "Signed line unit presentation graphs",
+ "statement": "Let p,q,r be unit presentations [def-pur-signed-line-pullback-unit-presentation]. Suppose a binary operation on their target sheaves agrees on unit sections with a source operation. For any sheaf Z and source sections x:Z→S, y:Z→S′, z:Z→S″ satisfying z=op(x,y), their transported maps from L(Z) satisfy the corresponding target operation equation. Likewise a target constant agreeing with the source constant on units carries every source constant graph to that target constant graph.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pur-signed-line-pullback-unit-presentation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "Use the canonical presentation of the test sheaf inverse image and its hom_ext. Both transported graph maps have the same value on every unit section by map_unit and the assumed binary or constant normalization.",
+   "uses": [
+    "lem-pur-signed-line-pullback-unit-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-signed-line-pullback-unit-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedLineSheafPullbackUnitPresentation",
+  "file": "lean/Sheaf/CategoryTheory/SignedLineSheafPullbackUnitPresentation.lean",
+  "declaration": "CategoryTheory.SignedLinePullbackConstruction.SheafPullbackUnitPresentation.binary_graph",
+  "declarations": [
+   "CategoryTheory.SignedLinePullbackConstruction.SheafPullbackUnitPresentation.binary_graph",
+   "CategoryTheory.SignedLinePullbackConstruction.SheafPullbackUnitPresentation.constant_graph"
+  ],
+  "statement": "theorem binary_graph\n    (p : SheafPullbackUnitPresentation (F := F) S T)\n    (q : SheafPullbackUnitPresentation (F := F) S' T')\n    (r : SheafPullbackUnitPresentation (F := F) S'' T'')\n    (op : ∀ V, S.obj.obj V → S'.obj.obj V → S''.obj.obj V)\n    (b : T ⊗ T' ⟶ T'')\n    (hu : ∀ V x y, b.hom.app (F.op.obj V)\n      (p.unit.hom.app V x, q.unit.hom.app V y) = r.unit.hom.app V (op V x y))\n    (Z : Sheaf J (Type (max u v w))) (x : Z ⟶ S) (y : Z ⟶ S') (z : Z ⟶ S'')\n    (hz : ∀ V a, z.hom.app V a = op V (x.hom.app V a) (y.hom.app V a)) :\n    (sheafPullback F (Type (max u v w)) J K).map z ≫ r.iso.inv =\n      CartesianMonoidalCategory.lift\n        ((sheafPullback F (Type (max u v w)) J K).map x ≫ p.iso.inv)\n        ((sheafPullback F (Type (max u v w)) J K).map y ≫ q.iso.inv) ≫ b",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

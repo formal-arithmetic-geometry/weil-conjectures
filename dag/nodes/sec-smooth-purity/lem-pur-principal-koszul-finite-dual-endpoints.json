@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-principal-koszul-finite-dual-endpoints",
+ "kind": "statement",
+ "title": "Supported finite dual transitions and the degree-zero unit",
+ "statement": "Under the hypotheses of [def-pur-principal-koszul-dual-terms], its explicit isomorphisms c_m^q intertwine the principal cone successor transition and the strict dual singleton successor transition for q=0 and q=-1. In addition the degree-zero component of the cone inclusion R[0] -> Q_m followed by c_m^0 is the specified ringedKoszulDualUnit in degree zero. These are only equations for fixed, explicitly constructed graded maps; no chain isomorphism, tensor coefficient complex, tower isomorphism or transposition is asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, proof of lemma-derived-completion-koszul, identification of the dual positive Koszul complex with the negative Koszul complex; singleton calculation in the parent proof step 1."
+ },
+ "stmt_deps": [
+  "def-pur-principal-koszul-dual-terms"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of the total-tensor right unitor to remove the positive diagram's constant unit, including its forward map. That map is (1,a) in degrees (0,1). The Hom product projection formula makes its dual (a,1) in degrees (-1,0); evaluation at one identifies precomposition by a with multiplication by a. The principal cone transition has these same entries by the mapping-cone map formula. Conjugate by c_m to obtain the two displayed transition equations. For the unit, the positive projection is identity in degree zero, so its dual takes r to the functional with value r at one. This is exactly inverse evaluation in ringedKoszulDualUnit and the degree-zero cone inclusion under c_m. Naturality of the right unitor and equality of the two unit constraints on the tensor unit identify the singleton tensor projection. Zero rings, zero or invertible a and empty sites satisfy the same formulas. The private proved scalar-transposition calculation in the differential module is reused; the differential theorem itself is not assumed to establish the transition and unit equations.",
+   "uses": [
+    "lem-pur-principal-koszul-finite-dual-differential",
+    "def-weil-pbc-ringed-completion-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-principal-koszul-finite-dual-differential",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T9",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, proof of lemma-derived-completion-koszul, identification of the dual positive Koszul complex with the negative Koszul complex; singleton calculation in the parent proof step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The dual of a two term Koszul complex into the unit complex has the negative two term differential and reverses the transition components",
+   "results": "HomologicalComplex.unop_d, CochainComplex.ConnectData.d_negSucc, HomologicalComplex.op_d, HomologicalComplex.unop; no internal-Hom Koszul comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison. Use the existing Hom product projections and rank-one evaluation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom dual of a two term complex into the tensor unit is isomorphic to the negative two term complex",
+   "results": "HomologicalComplex.rightUnitor, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId; Loogle HomologicalComplex.double returns the double-complex construction and its term isomorphisms.",
+   "date": "2026-10-26",
+   "verdict": "The right unitor and double term isomorphisms provide explicit component infrastructure, not the signed scalar and transition equations."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*single|single.*homComplex|dual.*Koszul",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean. Additional local rg searches found HomComplexSingle, HomComplexComponents and the proved RingedSiteBoundedDual projection and differential helpers.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the proved projection isomorphism. The two new lemmas isolate concrete finite matrix equations; no coefficient complex or tensor totalization remains in them."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrincipalKoszulDualTowerComparison",
+  "date": "2026-10-26",
+  "group": "T9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Singleton finite dual comparison: Supported finite dual transitions and the degree-zero unit.",
+   "via": [
+    "lem-pur-principal-koszul-dual-tower-comparison",
+    "lem-pur-principal-koszul-roos-presentation-comparison",
+    "lem-pur-regular-quotient-completion-unit",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrincipalKoszulDualEndpoints",
+  "file": "lean/Sheaf/Paper/PrincipalKoszulDualEndpoints.lean",
+  "declaration": "CategoryTheory.PrincipalKoszulDualTerms.finiteDualTerm_transition_unit",
+  "declarations": [
+   "CategoryTheory.PrincipalKoszulDualTerms.finiteDualTerm_transition_unit"
+  ],
+  "statement": "theorem finiteDualTerm_transition_unit :\n    (∀ (m : ℕ) (q : ℤ), q = 0 ∨ q = -1 →\n      (principalKoszulTransition R a m).f q ≫ (finiteDualTerm R a m q).hom =\n        (finiteDualTerm R a (m + 1) q).hom ≫\n          ((ringedKoszulDualTower R 1 (fun _ ↦ ⟨a.val, a.property⟩)).map\n            (homOfLE (Nat.le_succ m)).op).f q) ∧\n    (∀ m : ℕ, (CochainComplex.mappingCone.inr (scalarComplex R a m)).f 0 ≫\n        (finiteDualTerm R a m 0).hom =\n      (ringedKoszulDualUnit R 1 (fun _ ↦ ⟨a.val, a.property⟩) m).f 0)",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ec731",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261026T092722-L-3459472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ec731",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261026T092722-L-3459472",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone statement (identical); new nodes vs Lean signatures; adapted unclaimed modules vs change records; 94-module consistent sandbox build (delivery + import chains to FiniteFreeCompletionTransport, KoszulRoosProjectionComparison, principalKoszul users, import-all users) all compiled; axioms of main/new lemmas = propext, Classical.choice, Quot.sound"
+ }
+}

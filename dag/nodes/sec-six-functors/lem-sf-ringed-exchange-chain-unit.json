@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-ringed-exchange-chain-unit",
+ "kind": "statement",
+ "title": "Ringed derived exchange commutes with the cochain units",
+ "statement": "For a chosen Cartesian scheme square and coherent coefficient rings r [def-weil-pbc-strict-tower-operations], let Ex be its specified ambient derived exchange [def-weil-pbc-ambient-ringed-exchange]. For every complex K, not assumed K-injective, pullback of the canonical comparison Q(p_*K) → Rp_*(QK) [def-sfb-right-derived-functor], followed by Ex and the upper exact-localization factorization, equals the lower exact-localization factorization followed by Q [def-weil-abstract-derived-category] of the ordinary termwise counit mate of the specified module adjunctions [def-weil-pbc-proetale-operations] and the target canonical comparison. The equality retains the actual ordinary module adjunctions and the chosen ringed square. The existing ordinary operations, chosen exchange and canonical chainComparison are carried verbatim in this lower module so both statements use identical declaration names.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K and 09T5; the cochain-unit part of step 3 of lem-sf-ringed-restriction-exchange-open-descent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-tower-operations",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Identify the chosen ambient inverse-image square with exact localization of exchangeModuleSquare using ambientSquare_localization. The ordinary and derived exchange transformations are definitionally the counit mates of the specified module adjunctions.",
+   "uses": [
+    "lem-weil-pbc-ringed-square-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply localized_mate_cochain_normalization for the exact inverse-image square. Its cochainUnit equals chainComparison because the additional mapHomotopyCategoryFactors component is the identity on quotient objects. Precompose with the inverse lower localization factorization and cancel that isomorphism to obtain the required equation.",
+   "uses": [
+    "lem-sbc-unbounded-exact-adjunction-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the general calculation first to the specified pro-etale module categories with arbitrary six functors, retaining their native instances, and then substitute the actual ringed operations, the ordinary mate and the chosen derived exchange. All equalities hold for arbitrary complexes and make no resolution choice.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-square-localization",
+  "lem-sbc-unbounded-exact-adjunction-square"
+ ],
+ "proof_origin": {
+  "by": "worker G9",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K and 09T5; apply the existing localized_mate_cochain_normalization, identify the canonical cochain units, and cancel the lower localization factorization. The module-category specialization preserves the native instances before inserting the concrete functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived mate of an exact square commutes with canonical cochain right derived functor units",
+   "results": "8 hits: Adjunction.derived_unit, derived'_unit, derivedη_fac_app, derivedε_fac_app and reassociated variants; no specialized normalization",
+   "date": "2026-10-25",
+   "verdict": "No exact match; use the existing project cochain mate calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"derived\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "localized_mate_cochain|rightDerivedFunctorUnitQ",
+   "results": "msearch 0 hits; local rg finds the existing generic private localized_mate_cochain and rightDerivedFunctorUnitQ definitions",
+   "date": "2026-10-25",
+   "verdict": "Generic calculation exists; the actual ambient-square specialization and unit conversion remain to be formalized."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedRestrictionExchangeOpenDescent",
+  "date": "2026-10-25",
+  "group": "G8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ringed-restriction-exchange-open-descent",
+   "place": "Step 3: cochain-unit normalization before choosing resolutions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RingedExchangeChainUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedExchangeChainUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.RingedRestrictionExchange.exchange_chainUnit",
+  "statement": "theorem exchange_chainUnit (r : StrictTowerRingedSquare sq)\n    (K : CochainComplex (proEtaleRingModules X r.RX) ℤ) :\n    (basePull r).mapDerivedCategory.map (chainComparison (verticalPush r) K) ≫\n        (exchange r).app (DerivedCategory.Q.obj K) ≫\n        (targetPush r).rightDerivedFunctor.map\n          ((upperPull r).mapDerivedCategoryFactors.hom.app K) =\n      (basePull r).mapDerivedCategoryFactors.hom.app\n          (((verticalPush r).mapHomologicalComplex (.up ℤ)).obj K) ≫\n        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (ordinary r) (.up ℤ)).app K) ≫\n        chainComparison (targetPush r)\n          (((upperPull r).mapHomologicalComplex (.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.verticalPull",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.verticalPush",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.basePull",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.upperPull",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.targetPull",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.targetPush",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.ordinary",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.exchange",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.chainComparison",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.exchange_chainUnit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a20b7",
+  "group": "G8",
+  "result": "fix",
+  "landing": "20261025T162514-L-465568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T001700-L-22063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

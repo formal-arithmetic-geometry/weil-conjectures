@@ -1,0 +1,453 @@
+{
+ "id": "lem-sfb-pd-colour-profile-coefficients",
+ "kind": "statement",
+ "title": "Two-colour profile convolution for uniform partition coefficients",
+ "statement": "Let $n\\geq0$ and $m\\geq1$ be integers, and let $a,b\\geq0$ satisfy $a+b=nm$. Define the finite set\n$$R_{n,m,a}=\\{(r_0,\\ldots,r_m)\\in\\mathbb N^{m+1}:\\sum_{i=0}^m r_i=n,\\ \\sum_{i=0}^m i r_i=a\\}.$$\nFor $r\\in R_{n,m,a}$ put\n$$C_{a,b}(r)=\\frac{a!b!}{\\prod_{i=0}^m r_i!(i!)^{r_i}((m-i)!)^{r_i}}\\in\\mathbb Q.$$\nEach $C_{a,b}(r)$ is a nonnegative integer, and\n$$\\sum_{r\\in R_{n,m,a}}C_{a,b}(r)=\\frac{(nm)!}{n!(m!)^n}.$$\nHere $0!=1$, empty sums and products have their usual values, and all quotients are computed in the rational field $\\mathbb Q$ [def-weil-field]; the assertion includes integrality of the displayed sum.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 07GP (lemma-check-on-generators), proof of (5) for x+y, universal coefficients c_ij in the last display; explicit arithmetic refinement of the rational-polynomial comparison."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $n=0$, then $a=b=0$ and every $r_i=0$; there is exactly one profile, its coefficient is $1$, and the right side is $1$. Hence assume $n>0$. Choose disjoint labelled sets $U,V$ of cardinalities $a,b$, and let $E=U\\sqcup V$. Let $\\mathcal P$ be the finite set of partitions of $E$ into $n$ unordered blocks of size $m$: a partition is a collection of pairwise disjoint nonempty subsets whose union is $E$. For $P\\in\\mathcal P$, let $r_i(P)$ be the number of blocks containing exactly $i$ elements of $U$. Counting blocks and then elements of $U$ gives $\\sum r_i(P)=n$ and $\\sum i r_i(P)=a$. Thus $\\rho(P)=(r_i(P))$ belongs to $R_{n,m,a}$. This profile set is finite since $0\\leq r_i\\leq n$. Write $\\mathcal P_r=\\{P:\\rho(P)=r\\}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP (lemma-check-on-generators), proof of (5) for x+y, final universal coefficient comparison; explicit combinatorial refinement written by Q36."
+   }
+  },
+  {
+   "text": "Fix $r\\in R_{n,m,a}$. Make slots $(i,h)$ with $0\\leq i\\leq m$ and $1\\leq h\\leq r_i$, in lexicographic order. There are $n$ slots; their red capacities are $i$ and their blue capacities are $m-i$. These total $a$ and $\\sum(m-i)r_i=mn-a=b$. Let $\\mathcal L$ consist of pairs of lists, one listing each element of $U$ exactly once and one listing each element of $V$ exactly once. Fix reference lists: permuting their labels gives bijections from $\\operatorname{Perm}(U)$ and $\\operatorname{Perm}(V)$ to the respective list sets. By [lem-sfb-finite-permutation-cardinality], $|\\mathcal L|=a!b!$. Cut the red list into successive chunks with the red slot capacities, and the blue list with the blue capacities. In each slot unite its two chunks and forget their order and the slot labels. This defines $q_r:\\mathcal L\\to\\mathcal P_r$: the resulting blocks are disjoint, cover $E$, and have size $m\\geq1$, so they are nonempty and distinct.",
+   "uses": [
+    "lem-sfb-finite-permutation-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP (lemma-check-on-generators), proof of (5) for x+y, final universal coefficient comparison; explicit combinatorial refinement written by Q36."
+   }
+  },
+  {
+   "text": "For any fixed $P\\in\\mathcal P_r$, a list pair over $P$ is specified uniquely as follows. For each $i$, biject the $r_i$ slots of type $i$ with the $r_i$ blocks of $P$ of that type; then choose a linear order of the red part and of the blue part of every assigned block. Concatenating those ordered parts in slot order recovers the two lists. Conversely cutting any list pair over $P$ recovers exactly these assignments and orders, so these constructions are inverse. There are $r_i!$ assignments (fix one assignment and compose with permutations), and $i!$ and $(m-i)!$ orders in each such block, by [lem-sfb-finite-permutation-cardinality]. Independent choices therefore give\n$$|q_r^{-1}(P)|=D_r:=\\prod_{i=0}^{m}r_i!(i!)^{r_i}((m-i)!)^{r_i}.$$\nThis is positive; empty colour parts have one order, since $0!=1$. In particular every $P$ has a preimage. The factor $r_i!$ permutes whole blocks, including the pure-colour blocks; no empty block is being counted.",
+   "uses": [
+    "lem-sfb-finite-permutation-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP (lemma-check-on-generators), proof of (5) for x+y, final universal coefficient comparison; explicit combinatorial refinement written by Q36."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-fibre-cardinality-sum] to $q_r$, with finite source $\\mathcal L$ and target $\\mathcal P_r$. Every fibre has size $D_r$, hence\n$$a!b!=|\\mathcal L|=\\sum_{P\\in\\mathcal P_r}D_r=|\\mathcal P_r|D_r.$$\nThe source is nonempty (choose any two orders), so the equality also rules out an empty $\\mathcal P_r$. Since $D_r>0$, division in $\\mathbb Q$ gives $C_{a,b}(r)=|\\mathcal P_r|$. This proves the nonnegative-integrality assertion for every profile.",
+   "uses": [
+    "lem-sfb-finite-fibre-cardinality-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP (lemma-check-on-generators), proof of (5) for x+y, final universal coefficient comparison; explicit combinatorial refinement written by Q36."
+   }
+  },
+  {
+   "text": "Now let $\\mathcal O$ be the set of lists of all elements of $E$, each occurring once. Its cardinality is $(nm)!$ by [lem-sfb-finite-permutation-cardinality], using a reference list as above. Cut such a list into $n$ consecutive chunks of length $m$ and forget orders to obtain $q:\\mathcal O\\to\\mathcal P$. For any $P\\in\\mathcal P$, its preimages are specified uniquely by an ordering of its $n$ blocks and, independently, an ordering of the $m$ elements of every block: concatenate these lists to reconstruct the preimage. The cited permutation count gives $n!(m!)^n$ such choices. Applying [lem-sfb-finite-fibre-cardinality-sum] to this map yields\n$$(nm)!=|\\mathcal P|n!(m!)^n,\\qquad |\\mathcal P|=\\frac{(nm)!}{n!(m!)^n}$$\nin $\\mathbb Q$. Both maps land in their stated finite targets by their explicit cutting constructions; no surjectivity or partition-count formula has been assumed.",
+   "uses": [
+    "lem-sfb-finite-permutation-cardinality",
+    "lem-sfb-finite-fibre-cardinality-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP (lemma-check-on-generators), proof of (5) for x+y, final universal coefficient comparison; explicit combinatorial refinement written by Q36."
+   }
+  },
+  {
+   "text": "Finally apply [lem-sfb-finite-fibre-cardinality-sum] to $\\rho:\\mathcal P\\to R_{n,m,a}$. Its fibres are exactly $\\mathcal P_r$ by definition, and step 1 verified the target condition. Substituting step 4, then step 5, gives\n$$\\sum_{r\\in R_{n,m,a}}C_{a,b}(r)=\\sum_{r\\in R_{n,m,a}}|\\mathcal P_r|=|\\mathcal P|=\\frac{(nm)!}{n!(m!)^n}.$$\nThe common value is a cardinality and hence a nonnegative integer. This completes both assertions, with the empty case supplied in step 1.",
+   "uses": [
+    "lem-sfb-finite-fibre-cardinality-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP (lemma-check-on-generators), proof of (5) for x+y, final universal coefficient comparison; explicit combinatorial refinement written by Q36."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-permutation-cardinality",
+  "lem-sfb-finite-fibre-cardinality-sum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 07GP (lemma-check-on-generators), proof of (5) for x+y, final universal coefficient comparison; explicit combinatorial refinement written by Q36."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "uniformBell|uniform.*partition|colou?red.*partition",
+   "results": {
+    "t": "2026-10-24T01:32:44Z",
+    "tool": "grep",
+    "query": "uniformBell|uniform.*partition|colou?red.*partition",
+    "sub": "Combinatorics",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Combinatorics/SimpleGraph/Regularity/Lemma.lean",
+     "Mathlib/Combinatorics/SimpleGraph/Regularity/Lemma.lean",
+     "Mathlib/Combinatorics/SimpleGraph/Regularity/Increment.lean",
+     "Mathlib/Combinatorics/SimpleGraph/Regularity/Increment.lean",
+     "Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean",
+     "Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean",
+     "Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean",
+     "Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean"
+    ],
+    "digest": "e88be2fa744f2204"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Combinatorics/Enumerative/Bell.lean, in particular Nat.uniformBell_mul_eq at lines 178-188 and Nat.uniformBell_eq_div at lines 190-195. These prove the single factorial quotient formula, not the two-colour profile convolution or integrality of individual colour-profile coefficients. Other hits concern integer partitions. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sum over colour profiles of partitions into equal sized blocks weighted by factorial quotients equals uniform Bell number",
+   "results": {
+    "t": "2026-10-24T01:32:44Z",
+    "tool": "leansearch",
+    "query": "Sum over colour profiles of partitions into equal sized blocks weighted by factorial quotients equals uniform Bell number",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Nat.uniformBell_eq_div",
+     "Nat.uniformBell",
+     "Nat.bell",
+     "Nat.bell_succ",
+     "Nat.uniformBell_mul_eq",
+     "Multiset.bell_eq",
+     "Nat.Partition.genFun",
+     "Multiset.bell"
+    ],
+    "digest": "30089da29ffb2902"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Combinatorics/Enumerative/Bell.lean, in particular Nat.uniformBell_mul_eq at lines 178-188 and Nat.uniformBell_eq_div at lines 190-195. These prove the single factorial quotient formula, not the two-colour profile convolution or integrality of individual colour-profile coefficients. Other hits concern integer partitions. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uniformBell\"",
+   "results": {
+    "t": "2026-10-24T01:32:44Z",
+    "tool": "loogle",
+    "query": "\"uniformBell\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Nat.uniformBell",
+     "Nat.uniformBell_one_left",
+     "Nat.uniformBell_one_right",
+     "Nat.uniformBell_zero_left",
+     "Nat.uniformBell_zero_right",
+     "Nat.uniformBell_eq_div",
+     "Nat.uniformBell_mul_eq",
+     "Nat.uniformBell_eq"
+    ],
+    "digest": "fca45a7361a760c2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Combinatorics/Enumerative/Bell.lean, in particular Nat.uniformBell_mul_eq at lines 178-188 and Nat.uniformBell_eq_div at lines 190-195. These prove the single factorial quotient formula, not the two-colour profile convolution or integrality of individual colour-profile coefficients. Other hits concern integer partitions. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a red and b blue labelled elements partitioned into n unordered blocks each of size m, summing a! b! divided by product of r_i! (i!)^r_i ((m-i)!)^r_i over block colour profiles r gives (nm)! divided by n! (m!)^n",
+   "results": {
+    "t": "2026-10-24T01:32:46Z",
+    "tool": "leanfinder",
+    "query": "For a red and b blue labelled elements partitioned into n unordered blocks each of size m, summing a! b! divided by product of r_i! (i!)^r_i ((m-i)!)^r_i over block colour profiles r gives (nm)! divided by n! (m!)^n",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Nat.uniformBell_eq_div",
+     "Nat.uniformBell_mul_eq",
+     "Nat.uniformBell",
+     "Nat.stirlingSecond",
+     "Nat.binomial_spec",
+     "Nat.uniformBell_eq",
+     "Multiset.bell_eq",
+     "Nat.multinomial"
+    ],
+    "digest": "67a8e6392fee9783"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Combinatorics/Enumerative/Bell.lean, in particular Nat.uniformBell_mul_eq at lines 178-188 and Nat.uniformBell_eq_div at lines 190-195. These prove the single factorial quotient formula, not the two-colour profile convolution or integrality of individual colour-profile coefficients. Other hits concern integer partitions. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Convolution identity for bivariate exponential generating functions and equal block set partitions with prescribed numbers of each colour",
+   "results": {
+    "t": "2026-10-24T01:32:47Z",
+    "tool": "leanfinder",
+    "query": "Convolution identity for bivariate exponential generating functions and equal block set partitions with prescribed numbers of each colour",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Nat.Partition.genFun_eq_tprod",
+     "Nat.Partition.genFun",
+     "Nat.Partition.hasProd_genFun",
+     "Nat.Partition.coeff_genFun",
+     "Nat.Partition.powerSeriesMk_card_countRestricted_eq_tprod",
+     "Nat.Partition.hasProd_powerSeriesMk_card_countRestricted",
+     "Nat.Partition.powerSeriesMk_card_restricted_eq_tprod",
+     "Nat.Partition.powerSeriesMk_card_restricted_eq_powerSeriesMk_card_countRestricted"
+    ],
+    "digest": "b64e59d50c8ef7f1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Combinatorics/Enumerative/Bell.lean, in particular Nat.uniformBell_mul_eq at lines 178-188 and Nat.uniformBell_eq_div at lines 190-195. These prove the single factorial quotient formula, not the two-colour profile convolution or integrality of individual colour-profile coefficients. Other hits concern integer partitions. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformBell|bell_eq|colour|color",
+   "results": {
+    "t": "2026-10-24T01:33:42Z",
+    "tool": "grep",
+    "query": "uniformBell|bell_eq|colour|color",
+    "sub": "Combinatorics/Enumerative/Bell.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "23",
+     "28",
+     "29",
+     "31",
+     "103"
+    ],
+    "digest": "74d5d6d6d8aaf3e3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Combinatorics/Enumerative/Bell.lean, in particular Nat.uniformBell_mul_eq at lines 178-188 and Nat.uniformBell_eq_div at lines 190-195. These prove the single factorial quotient formula, not the two-colour profile convolution or integrality of individual colour-profile coefficients. Other hits concern integer partitions. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformBell|colour|color",
+   "results": {
+    "t": "2026-10-24T01:56:43Z",
+    "tool": "grep",
+    "query": "uniformBell|colour|color",
+    "sub": "Combinatorics/Enumerative",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Combinatorics/Enumerative/Bell.lean",
+     "Mathlib/Combinatorics/Enumerative/Bell.lean",
+     "Mathlib/Combinatorics/Enumerative/Bell.lean",
+     "Mathlib/Combinatorics/Enumerative/Bell.lean",
+     "Mathlib/Combinatorics/Enumerative/Bell.lean"
+    ],
+    "digest": "59c9a431d7a0c917"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Nat.uniformBell_mul_eq (Bell.lean:178-188) proves only the uncoloured factorial quotient; Nat.multinomial_spec gives a multinomial factorial identity. Neither states the colour-profile summation or individual integrality, nor specializes to both in one line. Bell.lean explicitly leaves the set-partition interpretation as a TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uniformBell\"",
+   "results": {
+    "t": "2026-10-24T01:56:43Z",
+    "tool": "loogle",
+    "query": "\"uniformBell\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Nat.uniformBell",
+     "Nat.uniformBell_one_left",
+     "Nat.uniformBell_one_right",
+     "Nat.uniformBell_zero_left",
+     "Nat.uniformBell_zero_right",
+     "Nat.uniformBell_eq_div",
+     "Nat.uniformBell_mul_eq",
+     "Nat.uniformBell_eq"
+    ],
+    "digest": "fca45a7361a760c2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Nat.uniformBell_mul_eq (Bell.lean:178-188) proves only the uncoloured factorial quotient; Nat.multinomial_spec gives a multinomial factorial identity. Neither states the colour-profile summation or individual integrality, nor specializes to both in one line. Bell.lean explicitly leaves the set-partition interpretation as a TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two colour profile convolution for partitions into equal sized blocks factorial quotients are integers",
+   "results": {
+    "t": "2026-10-24T01:56:44Z",
+    "tool": "leanfinder",
+    "query": "Two colour profile convolution for partitions into equal sized blocks factorial quotients are integers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Nat.uniformBell_eq_div",
+     "Nat.uniformBell_mul_eq",
+     "Nat.uniformBell",
+     "SzemerediRegularity.card_aux₂",
+     "Nat.Partition.countRestricted_two",
+     "Nat.stirlingSecond",
+     "Nat.uniformBell_eq",
+     "SzemerediRegularity.card_aux₁"
+    ],
+    "digest": "0e5aa9b86b04c995"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Nat.uniformBell_mul_eq (Bell.lean:178-188) proves only the uncoloured factorial quotient; Nat.multinomial_spec gives a multinomial factorial identity. Neither states the colour-profile summation or individual integrality, nor specializes to both in one line. Bell.lean explicitly leaves the set-partition interpretation as a TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cardinality of finite partitions with prescribed red blue block counts factorial convolution identity",
+   "results": {
+    "t": "2026-10-24T01:57:23Z",
+    "tool": "leansearch",
+    "query": "Cardinality of finite partitions with prescribed red blue block counts factorial convolution identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Nat.multinomial",
+     "Nat.multinomial_spec",
+     "Finsupp.multinomial",
+     "SzemerediRegularity.card_aux₁",
+     "Fintype.card_numbering",
+     "Equiv.Perm.card_of_cycleType_mul_eq",
+     "OrderedFinpartition",
+     "OrderedFinpartition.mk.sizeOf_spec"
+    ],
+    "digest": "79228674e6940256"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Nat.uniformBell_mul_eq (Bell.lean:178-188) proves only the uncoloured factorial quotient; Nat.multinomial_spec gives a multinomial factorial identity. Neither states the colour-profile summation or individual integrality, nor specializes to both in one line. Bell.lean explicitly leaves the set-partition interpretation as a TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sum of a factorial b factorial over multiplicities r_i with sum r_i n and sum i r_i a divided by r_i factorial i factorial and m minus i factorial powers",
+   "results": {
+    "t": "2026-10-24T01:57:24Z",
+    "tool": "leanfinder",
+    "query": "Sum of a factorial b factorial over multiplicities r_i with sum r_i n and sum i r_i a divided by r_i factorial i factorial and m minus i factorial powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Nat.uniformBell_eq_div",
+     "Nat.multinomial",
+     "Nat.binomial_spec",
+     "Nat.binomial_eq",
+     "Multiset.bell_eq",
+     "Nat.uniformBell_mul_eq",
+     "Nat.multinomial_spec",
+     "Finsupp.multinomial"
+    ],
+    "digest": "94226bf91e5ad29f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Nat.uniformBell_mul_eq (Bell.lean:178-188) proves only the uncoloured factorial quotient; Nat.multinomial_spec gives a multinomial factorial identity. Neither states the colour-profile summation or individual integrality, nor specializes to both in one line. Bell.lean explicitly leaves the set-partition interpretation as a TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pd-check-generators",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tags 09PG (definition-divided-powers-graded), 09PJ (definition-divided-powers-dga), and 09PH/09PI (example-adjoining-odd/even); homological conventions in section-tate Immediate notion: the adjunctions of exterior and divided-power variables of Stacks 09PH/09PI and 0F4I that define the polynomial graded divided-power algebras of the item; the notions supporting the 09PU Tate-resolution argument below the direct-image branch (3). Supporting argument: Tag 07H5 (lemma-divided-power-polynomial-algebra), existence, uniqueness and universal property; the algebra and augmentation ideal are the explicit construction in section-divided-power-polynomial-ring. Supporting input to Tag 07H5: Tag 07GQ (lemma-two-ideals), both assertions and the displayed gluing formula in the proof. Immediate supporting input: Tag 07GQ proof, after the addition calculation: apply Tag 07GP (lemma-check-on-generators) to the generating set U union V. Supporting arithmetic in Tag 07GP proof of (5) for x+y: identify the universal integer coefficients c_ij by the two-colour block-profile sum.",
+   "via": [
+    "lem-sfb-pd-check-generators",
+    "lem-sfb-pd-glue-ideals",
+    "lem-sfb-ordinary-pd-polynomial-extension",
+    "lem-sfb-divided-power-variable-adjunction",
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pd-colour-profile-coefficients",
+  "worker": "stage1",
+  "summary": "Proved the two-colour coefficients by two explicit finite-list fibre counts and decomposition by colour profile. Both counting inputs are exact Mathlib leaves; no profile-counting theorem is assumed. Checked zero blocks and empty colour classes.",
+  "blueprint": "The inherited ancestor command returns None: retain from.node=null and the existing via chain. Supplies the arithmetic coefficient comparison of Stacks 07GP below direct-image branch (3) of det-thm-sf-ctf-stability-direct-images. Read the latest unit and direct-image proof; no unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-1babb4bea",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-1babb4bea (reviewer sub-agent of L); spot-checked: Read the item's 6 steps in full, both new Mathlib leaves, parent lem-sfb-pd-check-generators steps 5-6, and dpa.tex 07GP proof of (5) for x+y. Stacks gets the c_ij from the identity in Q[x,y] and never states the coloured profile sum, so proof_origin=agent is correct. Statement unchanged; it matches the parent's use (C_{a,b}(r) and the sum equal to B(n,m) for n,m>=1, a+b=nm). Exact rational test (my own script): every n<=6, m<=6, a<=nm gives nonnegative integer C and the right sum, 0 failures. Brute-force partition enumeration (n,m<=3) confirms C(r)=|P_r|, the claim of step 4. Steps: (1) profile equations, elementary; (2) |L|=a!b! by the Perm leaf, capacities sum to a and b, blocks nonempty and distinct since m>=1, q_r lands in P_r; (3) fibre = prod r_i! slot-to-block bijections x i!(m-i)! internal orders, inverse constructions correct, single r_i! factor; (4) fibre-sum leaf gives a!b!=|P_r|D_r; (5) (nm)!=|P| n!(m!)^n without Mathlib's uniformBell formula; (6) fibre sum over rho. proof_deps = union of uses. New leaves: Fintype.card_perm at Perm.lean:155-156 and Finset.card_eq_sum_card_fiberwise at BigOperators/Group/Finset/Basic.lean:985-987 (MapsTo = f(S)⊆T) are exact. Each has 4 search kinds, from.via = item + item's via, same_as []. Both are generic and strictly smaller than the item, not restated clauses. No duplicate in the snapshot, clones/live or clones/side-live; item still unsplit live, no repair note. Unit route fine (Mathlib leaves are tools), no SGA. Null from.node is inherited, not this delivery's fault. Edge cases n=0, m=1, a=0/b=0 and pure-colour blocks checked. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Combinatorics.ColourProfileCoefficients",
+  "declaration": "Nat.colourProfile_coefficients",
+  "file": "lean/Sheaf/Combinatorics/ColourProfileCoefficients.lean",
+  "statement": "theorem colourProfile_coefficients (n m a b : ℕ) (hm : 1 ≤ m) (hab : a + b = n * m) : (∀ r ∈ (Finset.Nat.antidiagonalTuple (m + 1) n).filter (fun r ↦ ∑ i : Fin (m + 1), (i : ℕ) * r i = a), ∃ c : ℕ, ((a.factorial * b.factorial : ℕ) : ℚ) / ((∏ i : Fin (m + 1), (r i).factorial * (i : ℕ).factorial ^ r i * (m - (i : ℕ)).factorial ^ r i : ℕ) : ℚ) = (c : ℚ)) ∧ (∑ r ∈ (Finset.Nat.antidiagonalTuple (m + 1) n).filter (fun r ↦ ∑ i : Fin (m + 1), (i : ℕ) * r i = a), ((a.factorial * b.factorial : ℕ) : ℚ) / ((∏ i : Fin (m + 1), (r i).factorial * (i : ℕ).factorial ^ r i * (m - (i : ℕ)).factorial ^ r i : ℕ) : ℚ)) = (((n * m).factorial : ℕ) : ℚ) / ((n.factorial * m.factorial ^ n : ℕ) : ℚ)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ac1d24b5",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Nat.colourProfile_coefficients matches the node clause by clause: n a b : ℕ, hm : 1 ≤ m, hab : a+b=n*m; R_{n,m,a} = antidiagonalTuple (m+1) n filtered by ∑ i*r i = a (mem_antidiagonalTuple); C as ℕ-cast quotient in ℚ with (r_i)!(i!)^{r_i}((m-i)!)^{r_i}, m-i exact since i ≤ m; per-profile ∃ c : ℕ (integral and nonnegative) ∧ sum = (nm)!/(n!(m!)^n); sum integrality follows from the first conjunct. stmt_dep def-weil-field fits ℚ; proof_deps are plain Mathlib imports; lean record verbatim, existing:false; only the lean field changed vs side-live. Edge cases n=0, a=0/b=0, m=1 covered; exact rational check n,m ≤ 4 gave 0 failures. No name clash, no supersession (live still split, no lean), docstrings carry dpa.tex 07GP + blueprint id + six proof steps, sorry only, report has both sections. Citer lem-sfb-pd-check-generators steps 4-5 served. No compile needed (no file changed); no findings."
+ }
+}

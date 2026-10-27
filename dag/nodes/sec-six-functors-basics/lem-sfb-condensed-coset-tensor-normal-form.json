@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-condensed-coset-tensor-normal-form",
+ "kind": "statement",
+ "title": "Natural finite-support normal form from a continuous coset section",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring] on the small coherent site of profinite sets [def-weil-size-convention]. For a profinite group $J$, let $\\mathcal A_J(A)$ denote internal $A$-modules with $A$-linear condensed $J$-action [def-sfb-condensed-action-module]. Let $P$ be a profinite group and $H$ a closed subgroup. For each profinite test set $S$ put $P_S=C(S,P)$ and $H_S=C(S,H)$. The group algebra $A(S)[P_S]$ consists of finite formal sums with multiplication $[p][p']=[pp']$. For $M\\in\\mathcal A_H(A)$ put $B_M(S)=A(S)[P_S]\\otimes_{A(S)[H_S]}M(S)$.\n\nGive $X=\\{pH:p\\in P\\}$ its quotient topology. Assume $X$ is profinite and $q:P\\to X$ has a continuous section $s:X\\to P$ with $qs=1_X$. Put $X_S=C(S,X)$. For $p\\in P_S$ define $x_p=q\\circ p$ and $h_p=(s\\circ x_p)^{-1}p$, a continuous map $S\\to H$. The maps $p\\mapsto(x_p,h_p)$ and $(x,h)\\mapsto(s\\circ x)h$ are inverse bijections $P_S\\cong X_S\\times H_S$, natural under precomposition of test sets.\n\nLet $D_M(S)=\\bigoplus_{x\\in X_S}M(S)$ denote the module of finitely supported families, with $e_x(m)$ the family supported at $x$ having coefficient $m$. Restriction along $t:T\\to S$ sends $e_x(m)$ to $e_{x\\circ t}(t^*m)$; coefficients are added when indices become equal. Give $B_M$ the restriction $[p]\\otimes m\\mapsto[p\\circ t]\\otimes t^*m$. Then the formulas\n$$\\alpha_{M,S}([p]\\otimes m)=e_{x_p}(h_p\\cdot m),\\qquad\\beta_{M,S}(e_x(m))=[s\\circ x]\\otimes m$$\ndefine inverse $A(S)$-linear maps. They commute with restrictions along every map $T\\to S$ and with every equivariant coefficient map $u:M\\to M'$, where $D_u(e_x(m))=e_x(u(m))$. Thus they give an isomorphism of $A$-module presheaves $B_M\\cong D_M$ natural in $M$. There is no normality, finite-index or discreteness hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Returned induction proof steps 6--8: continuous coset factorization, balanced tensor/direct-sum inverse maps, and naturality in tests and coefficients. Agent-formulated input below paragraph (3); external reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof": [
+  {
+   "text": "For $p:S\\to P$, equality $q(s(q(p(z))))=q(p(z))$ says $s(q(p(z)))^{-1}p(z)\\in H$ for every $z\\in S$. Hence $h_p$ takes values in $H$; it is continuous into the subspace $H$, since inversion, multiplication, $s$, $q$ and $p$ are continuous. For $x:S\\to X$ and $h:S\\to H$, right multiplication by $h(z)$ fixes the right coset, so $x_{(s\\circ x)h}=x$ and $h_{(s\\circ x)h}=h$. Conversely $(s\\circ x_p)h_p=p$. These prove the inverse bijections, and substitution gives $x_{p\\circ t}=x_p\\circ t$ and $h_{p\\circ t}=h_p\\circ t$ for every $t:T\\to S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated sectionwise normal-form input to exact condensed induction; explicit elementary argument below, not an assertion made in the source paragraph."
+   }
+  },
+  {
+   "text": "Fix $S$ and abbreviate $R=A(S)$, $G=P_S$, $K=H_S$, $V=M(S)$. The action definition gives $R$-linear $K$-operators on $V$, hence the group-ring action $(\\sum b_k[k])v=\\sum b_k(kv)$. Unpack the balanced tensor using symbols $[g]\\otimes v$: they generate over $R$, are additive and $R$-linear in $v$, and satisfy $[gk]\\otimes v=[g]\\otimes kv$. These relations present $R[G]\\otimes_{R[K]}V$: a linear symbol map $F(g,v)$ extends to $(\\sum a_g[g],v)\\mapsto\\sum a_gF(g,v)$, and its $R[K]$-balancing is precisely $F(gk,v)=F(g,kv)$, by expansion of finite sums in both group rings. Thus specifying such symbol values defines a unique map out of the tensor; equality can also be checked on these generators.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated sectionwise normal-form input to exact condensed induction; explicit elementary argument below, not an assertion made in the source paragraph."
+   }
+  },
+  {
+   "text": "The module $D_M(S)$ is, by definition, the finitely supported families of coefficients in $M(S)$. Every family $v$ is the finite sum $\\sum_{x\\in\\operatorname{supp}(v)}e_x(v_x)$. Consequently $R$-linear maps $f_x:M(S)\\to W$ extend uniquely by $v\\mapsto\\sum_x f_x(v_x)$. More generally, for a ring map $\\phi:R\\to R'$, a $\\phi$-semilinear $f:V\\to V'$ and an index map $r:I\\to I'$, the finite-sum formula $\\sum_i e_i(v_i)\\mapsto\\sum_i e_{r(i)}(f(v_i))$ is well defined and semilinear. Its coefficient at $j$ is $\\sum_{r(i)=j}f(v_i)$ over the finite support; no injectivity of $r$ is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated sectionwise normal-form input to exact condensed induction; explicit elementary argument below, not an assertion made in the source paragraph."
+   }
+  },
+  {
+   "text": "Put $F(p,m)=e_{x_p}(h_p m)$. This is $R$-linear in $m$. For $k\\in H_S$, the right-coset identities give $x_{pk}=x_p$ and $h_{pk}=h_pk$. Therefore $F(pk,m)=e_{x_p}(h_p(km))=F(p,km)$ by the group-action law. The symbol presentation in step 2 defines $\\alpha_{M,S}$ with the claimed formula. The finite-sum construction in step 3 defines $\\beta_{M,S}$ by the linear maps $m\\mapsto[s\\circ x]\\otimes m$.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated sectionwise normal-form input to exact condensed induction; explicit elementary argument below, not an assertion made in the source paragraph."
+   }
+  },
+  {
+   "text": "Since $q s=1_X$, one has $x_{s\\circ x}=x$ and $h_{s\\circ x}=1$, so $\\alpha\\beta(e_x(m))=e_x(m)$. In the other order the balanced relation gives $\\beta\\alpha([p]\\otimes m)=[s\\circ x_p]\\otimes(h_pm)=[(s\\circ x_p)h_p]\\otimes m=[p]\\otimes m$. Finite-sum generation from steps 2 and 3 now proves both inverse identities on all elements, not just generators.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated sectionwise normal-form input to exact condensed induction; explicit elementary argument below, not an assertion made in the source paragraph."
+   }
+  },
+  {
+   "text": "For $t:T\\to S$, the maps $A(S)\\to A(T)$ and $M(S)\\to M(T)$ are compatible with scalars and satisfy $t^*(km)=(k\\circ t)t^*m$ by the action definition. Hence the proposed restriction on $B_M$ respects additivity, scalar relations and balancing: both $[pk]\\otimes m$ and $[p]\\otimes km$ restrict to $[p\\circ t]\\otimes (k\\circ t)t^*m$. The restriction on $D_M$ is exactly step 3 with index map $x\\mapsto x\\circ t$; its formula sums coefficients when this map is not injective. On generators the identity and composition laws reduce to those of restriction on $A,M$ and of precomposition. Thus these formulas define the stated module presheaves.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated sectionwise normal-form input to exact condensed induction; explicit elementary argument below, not an assertion made in the source paragraph."
+   }
+  },
+  {
+   "text": "The restriction of $\\alpha_{M,S}([p]\\otimes m)$ to $T$ equals $e_{x_p\\circ t}(t^*(h_pm))=e_{x_{p\\circ t}}((h_p\\circ t)t^*m)$, which is $\\alpha_{M,T}$ applied to the restriction of $[p]\\otimes m$. For $\\beta$, restriction of $[s\\circ x]\\otimes m$ is $[s\\circ(x\\circ t)]\\otimes t^*m$. Finally, an equivariant coefficient map satisfies $u_S(h_pm)=h_pu_S(m)$, so $D_u\\alpha_M=\\alpha_{M'}B_u$ on $[p]\\otimes m$, and $B_u\\beta_M=\\beta_{M'}D_u$ on $e_x(m)$. Finite sums prove these identities even when restricted indices coincide. The inverse maps therefore form the required presheaf isomorphism, natural in $M$.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated sectionwise normal-form input to exact condensed induction; explicit elementary argument below, not an assertion made in the source paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-action-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated sectionwise normal-form input to exact condensed induction; explicit elementary argument below, not an assertion made in the source paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous section of a profinite right coset projection gives a natural finite support direct sum normal form for sectionwise balanced tensor induction, compatible with restrictions that merge indices",
+   "results": "8 hits: Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single, Rep.finsuppToCoinvariantsTensorFree_single, Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single, Rep.finsuppToCoinvariantsTensorFree, Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_right, Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_left, Representation.ofCoinvariantsTprodLeftRegular, Rep.coinvariantsTensorFreeToFinsupp",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.coinvariantsTensorFreeLEquiv (Coinvariants.lean:504) handles abstract representations and a fixed index type. It does not give continuous coset factorization, the internal coefficient tensor presheaf, or naturality under semilinear restrictions with merging indices."
+  },
+  {
+   "tool": "grep",
+   "query": "(coset|quotient|Quotient|Finsupp|DirectSum|Tensor)",
+   "results": "5 hits: 37, 52, 61, 67, 72 [subdirectory: RepresentationTheory/Induced.lean]",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.coinvariantsTensorFreeLEquiv (Coinvariants.lean:504) handles abstract representations and a fixed index type. It does not give continuous coset factorization, the internal coefficient tensor presheaf, or naturality under semilinear restrictions with merging indices."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.indEquivTensor",
+   "results": "0 hits: . loogle: unknown identifier 'Rep.indEquivTensor'",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.coinvariantsTensorFreeLEquiv (Coinvariants.lean:504) handles abstract representations and a fixed index type. It does not give continuous coset factorization, the internal coefficient tensor presheaf, or naturality under semilinear restrictions with merging indices."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous coset section identifies induced module tensor presheaf with finite support sums indexed by continuous coset maps naturally under pullback",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso.congr_simp, CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstantModule.functorToPresheaves, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback, PresheafOfModules.sectionsMk, SheafOfModules.sheafificationCompPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.coinvariantsTensorFreeLEquiv (Coinvariants.lean:504) handles abstract representations and a fixed index type. It does not give continuous coset factorization, the internal coefficient tensor presheaf, or naturality under semilinear restrictions with merging indices."
+  },
+  {
+   "tool": "grep",
+   "query": "coinvariantsTensorFree|finsuppToCoinvariantsTensorFree|IndV|indResAdjunction",
+   "results": "25 hits: Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean [subdirectory: RepresentationTheory]",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.coinvariantsTensorFreeLEquiv (Coinvariants.lean:504) handles abstract representations and a fixed index type. It does not give continuous coset factorization, the internal coefficient tensor presheaf, or naturality under semilinear restrictions with merging indices."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.coinvariantsTensorFreeToFinsupp",
+   "results": "3 hits: Rep.coinvariantsTensorFreeToFinsupp, Rep.coinvariantsTensorFreeLEquiv_apply, Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.coinvariantsTensorFreeLEquiv (Coinvariants.lean:504) handles abstract representations and a fixed index type. It does not give continuous coset factorization, the internal coefficient tensor presheaf, or naturality under semilinear restrictions with merging indices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of rings and profinite groups, a split right subgroup torsor yields a tensor module presheaf isomorphism to a direct sum of coefficient sections, natural in both test spaces and equivariant coefficients",
+   "results": "8 hits: LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', Rep.leftRegularTensorTrivialIsoFree_inv_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.coinvariantsTensorFreeLEquiv (Coinvariants.lean:504) handles abstract representations and a fixed index type. It does not give continuous coset factorization, the internal coefficient tensor presheaf, or naturality under semilinear restrictions with merging indices."
+  },
+  {
+   "tool": "grep",
+   "query": "coset|quotient|Finsupp|Tensor",
+   "results": "5 hits: 37, 52, 61, 67, 72 [subdirectory: RepresentationTheory/Induced.lean]",
+   "date": "2026-10-22",
+   "verdict": "no match: read Rep.coinvariantsTensorFreeLEquiv in Mathlib/RepresentationTheory/Coinvariants.lean:503–512. It concerns diagonal coinvariants of an abstract representation tensor a free representation, not the subgroup balanced tensor or its changing test rings and index-merging restrictions. Ordinary TensorProduct.directSumLeft/finsuppLeft also do not state this presheaf normal form."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Balanced tensor induction for a subgroup with chosen continuous coset representatives is naturally the direct sum of copies of the coefficient module as a presheaf",
+   "results": "8 hits: TensorProduct.directSumLeft, TensorProduct.finsuppLeft, Rep.coindToInd.congr_simp, Rep.coinvariantsTensorIndInv_mk_tmul_indMk, TensorProduct.directSumRight, Rep.finsuppTensorLeft_inv_hom, Rep.resIndAdjunction_homEquiv_symm_apply, Rep.coindResAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: read Rep.coinvariantsTensorFreeLEquiv in Mathlib/RepresentationTheory/Coinvariants.lean:503–512. It concerns diagonal coinvariants of an abstract representation tensor a free representation, not the subgroup balanced tensor or its changing test rings and index-merging restrictions. Ordinary TensorProduct.directSumLeft/finsuppLeft also do not state this presheaf normal form."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.coinvariantsTensorFreeLEquiv",
+   "results": "3 hits: Rep.coinvariantsTensorFreeLEquiv, Rep.coinvariantsTensorFreeLEquiv_symm_apply, groupHomology.inhomogeneousChains.d_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: read Rep.coinvariantsTensorFreeLEquiv in Mathlib/RepresentationTheory/Coinvariants.lean:503–512. It concerns diagonal coinvariants of an abstract representation tensor a free representation, not the subgroup balanced tensor or its changing test rings and index-merging restrictions. Ordinary TensorProduct.directSumLeft/finsuppLeft also do not state this presheaf normal form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous section of a profinite coset projection identifies sectionwise induced modules with finite support coefficient families, naturally under restrictions that merge indices",
+   "results": "8 hits: Profinite.NobelingProof.iso_map, Profinite.NobelingProof.πJ, Profinite.NobelingProof.πs, Profinite.NobelingProof.coe_πs', Profinite.NobelingProof.GoodProducts.square_commutes, Profinite.NobelingProof.πs', Profinite.NobelingProof.Nobeling_aux, Profinite.NobelingProof.Linear_CC'₁",
+   "date": "2026-10-22",
+   "verdict": "no match: read Rep.coinvariantsTensorFreeLEquiv in Mathlib/RepresentationTheory/Coinvariants.lean:503–512. It concerns diagonal coinvariants of an abstract representation tensor a free representation, not the subgroup balanced tensor or its changing test rings and index-merging restrictions. Ordinary TensorProduct.directSumLeft/finsuppLeft also do not state this presheaf normal form."
+  },
+  {
+   "tool": "grep",
+   "query": "coinvariantsTensorFreeLEquiv|tensor.*[Cc]oset|[Cc]oset.*tensor|[Bb]alanced",
+   "results": "8 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean [subdirectory: RepresentationTheory]",
+   "date": "2026-10-22",
+   "verdict": "no match: read Rep.coinvariantsTensorFreeLEquiv in Mathlib/RepresentationTheory/Coinvariants.lean:503–512. It concerns diagonal coinvariants of an abstract representation tensor a free representation, not the subgroup balanced tensor or its changing test rings and index-merging restrictions. Ordinary TensorProduct.directSumLeft/finsuppLeft also do not state this presheaf normal form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group algebra induced module with subgroup coset representatives has a unique finite sum normal form via balanced tensors",
+   "results": "8 hits: Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single, Rep.finsuppToCoinvariantsTensorFree_single, Rep.coinvariantsTensorFreeLEquiv_apply, Rep.coinvariantsTensorFreeLEquiv_symm_apply, Rep.finsuppToCoinvariantsTensorFree, Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single, Rep.coinvariantsTensorFreeToFinsupp, Representation.free_single_single",
+   "date": "2026-10-22",
+   "verdict": "no match: read Rep.coinvariantsTensorFreeLEquiv in Mathlib/RepresentationTheory/Coinvariants.lean:503–512. It concerns diagonal coinvariants of an abstract representation tensor a free representation, not the subgroup balanced tensor or its changing test rings and index-merging restrictions. Ordinary TensorProduct.directSumLeft/finsuppLeft also do not state this presheaf normal form."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-split-coset-induction",
+  "date": "2026-10-22",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), formal open-normal-kernel quotient input to the tame-boundary calculation: restriction to the kernel must preserve K-injective resolutions; exact induction supplies its exact left adjoint. Returned induction proof steps 6--8: continuous coset factorization, balanced tensor/direct-sum inverse maps, and naturality in tests and coefficients. Agent-formulated input below paragraph (3); external reference WANTED.",
+   "via": [
+    "lem-sfb-condensed-split-coset-induction",
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-coset-tensor-normal-form",
+  "worker": "stage1",
+  "summary": "Checked the live statement, its three definition dependencies, current blueprint paragraph (3), the upstream library and Mathlib candidates. No statement correction. Seven elementary steps expand continuous right-coset factorization, balanced-symbol presentation, finite-support sums, inverse maps and both naturalities, explicitly allowing merging indices; no auxiliary node is needed. The source paragraph does not state this agent-formulated algebra input; external reference remains WANTED.",
+  "blueprint": "The current direct-image stability proof, paragraph (3), motivates exact induction below the open-immersion input; these steps supply the sectionwise normal-form argument required in step 3 of lem-sfb-condensed-split-coset-induction. The recorded ancestor is null, as blueprint_refs.py ancestor confirms; no imported blueprint node states this input."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N8-deeead5e3",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-deeead5e3 (reviewer sub-agent of L); spot-checked: I read the item in full. It is the only file delivered: no new nodes, with the statement, stmt_deps and blueprint fields unchanged from live. Live still has the item unsplit with an empty proof, so the delivery is not superseded. There is no repair note, so this is not a re-split order. Source checked: main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) does not contain this algebra, and the item is correctly marked proof_origin=agent with WANTED; no SGA is cited. The statement matches what consumer lem-sfb-condensed-split-coset-induction step 3 uses (same B_M, restriction, coefficientwise B_u, merging indices), and there is no cycle. Steps 1-7 checked: (1) right cosets give h_p in H, continuous into the closed subgroup H, with the inverse bijection and its naturality checked; (2) R[K]-balancing reduces to [gk]⊗v=[g]⊗kv; (3) the finite-support semilinear index change works for non-injective index maps; (4) x_{pk}=x_p and h_{pk}=h_p k make alpha well defined; (5) alpha·beta=1 uses h_{s x}=1, and beta·alpha=1 uses the balancing relation; (6) the restriction on B_M respects scalars and balancing because the action from def-sfb-condensed-action-module is natural and the section-module restrictions are semilinear; (7) both naturality squares, and u_S(hm)=h u_S(m). Elementary flags are justified and proof_deps equals the union of uses; the only dependency is a definition, so it is not route and no tool_uses are needed. Small cases: H=1, H=P with an arbitrary s(*), merging indices at two points, S empty. Duplicate search found only the adjunction node and the consumer, neither of which states the normal form. Mathlib searches are recorded with all three kinds, and Rep.coinvariantsTensorFreeLEquiv is correctly rejected. No fixes."
+ }
+}

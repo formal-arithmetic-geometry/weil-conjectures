@@ -17,9 +17,51 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), dense-lattice input: agent-formulated formal restriction and cup-product infrastructure. Bhatt-Scholze section 4.3 and the Stacks right-derived construction provide context, not this entire internal-ring statement; exact reference WANTED."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Partial stage-3 proof: trivialAdditive and restrictionAdditive hold because both functors retain the original morphisms and their addition. The private forgetReflects lemma constructs the inverse of an equivariant isomorphism from its underlying inverse, using equivariance and the two inverse equations on every section. Given forgetExact, forgetting reflects finite limits and colimits; the composites of trivial action and group restriction with forgetting are respectively the identity and the original forgetful functor. Apply preservesFiniteLimits_of_reflects_of_preserves and its colimit analogue. For scalarExact use ScalarAction.underlying to identify the composite with forgetting followed by exact internal scalar restriction. This proves trivialLimits, trivialColimits, restrictionLimits, restrictionColimits and scalarExact.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct invariantRestrictionExist by restricting the normalized G-invariant adjunction counit along v and transposing through the H-invariant adjunction. Naturality is naturality of the G-counit and the H-hom equivalence. The normalized transpose equation identifies its composite with the H-inclusion with the G-inclusion. For uniqueness apply the inverse H-hom equivalence and the normalized untranspose formula; the prescribed inclusion equation then forces the same underlying equivariant arrow.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing functorial flat-resolution instance for sheaves to abelian groups on the coherent profinite site; abelian groups have the flat separator Z. This closes sheafFlatResolution. The existing additive and canonical-shift instances for the total right derived functor give derivedProperties.",
+   "uses": [
+    "lem-sfb-sheaf-functorial-flat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For groupMapShift, the canonical derived adjunctions for trivial action and invariants commute with shifts. Their right-derived computation units therefore commute with shifts. The pullback auxiliary transformation is a composite of termwise natural transformations, signed-shift-compatible factorization comparisons and the H-computation unit, so commutes with shifts. The universal right-derived factorization identifies this transformation with the G-unit followed by the localized group map. The G-unit is invertible on K-injectives, which represent every derived object; NatTrans.CommShift.of_comp_whiskerLeft_Qh therefore proves shift compatibility of groupMap. The exact computation-unit equality groupMapNormalization is the existing rightDerivedFunctorUnitQ_rightDerivedPullback_app theorem.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct identityActionExist with NatIso.ofComponents of identity maps: precomposition of the action by the identity continuous monoid homomorphism is the original action. Any other comparison with the prescribed underlying components equals it by Iso.ext, natural-transformation extensionality and Subtype.ext.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Still open in this partial delivery: actionAbelianData, actionGrothendieck, forgetExact, invariantsExist, degreeZero, scalarActionExist, scalarInvariantsExist, scalarComparisonExist, scalarGroupExist and scalarComparisonShift. Their unchanged theorem docstrings give the original action-site, fixed-submodule, scalar, degree-zero and derived comparison arguments. No step is replaced by a renamed hypothesis or a new sorry.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sp-canonical-right-derived-adjunction-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Formal internal-action auxiliary infrastructure previously recorded at paragraph (3); partial proof by existing adjunction, exact-functor, total-right-derived and flat-resolution APIs. The latest blueprint paragraph no longer states the old dense-lattice expansion."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -233,10 +275,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -319,5 +365,15 @@
   "group": "NI",
   "result": "fix",
   "note": "Read the item, 11 stmt_deps, 5 new def nodes and all 6 modules against the node. Every clause is rendered faithfully: exact forget/inflation/restriction/scalar, Grothendieck structure, b_u = rightDerivedPullback of the unique invariant inclusion with unit normalization, CommShift, degree zero, identity case, c_J via a unique unit-normalized scalarComparison (no flatness), coefficientSquare, the unital cup algebra as the mate of the K-flat-pinned strong trivial tensor, the unique UnipotentAction on R⊞R, and the class/product formulas for restriction and coefficient change. Mathlib's cone differential makes singleδ = +snake δ, so [a] has cocycle +a as required. All choices are pinned; no hollow defs; records match; item statement unchanged; stmt_deps only gained new def nodes. Only fault, H8: 5 of 6 modules had no module docstring. FIX adds docstrings only (the item's includes the 12-step proof outline) plus an item lean-record override keeping the statement verbatim. nt_compile --json twice timed out at 60 s on the unchanged sibling CondensedDerivedInvariants at load 153-162; changes are comment-only; the worker compiled all six clean (46.0 s). Notes: overlap with Q02's profinite-only def-sfb-condensed-derived-inflation-arrows (not a duplicate); the new cup def node cites theorem lem-derived-right-exact-tensor-comparison for a plain Prop predicate (advisory); proof-dep imports are not in the item module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261026T092044-L-3397843",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

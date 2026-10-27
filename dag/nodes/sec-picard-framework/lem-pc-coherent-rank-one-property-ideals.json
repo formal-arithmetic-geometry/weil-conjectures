@@ -1,0 +1,308 @@
+{
+ "id": "lem-pc-coherent-rank-one-property-ideals",
+ "kind": "statement",
+ "title": "Transfer from a generic rank-one witness to integral ideal pushforwards",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]. Let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion] from an integral scheme $Z$ [def-pc-integral-scheme], let $\\eta$ be its generic point [def-weil-irreducible-components], and put $T=i(Z)$ and $\\xi=i(\\eta)$. For a module $F$ [def-weil-sheaf-of-modules-category] put $\\operatorname{Supp}(F)=\\{x\\in X:F_x\\ne0\\}$, with module stalks as in [def-weil-pbc-module-stalk]. Let $\\mathcal P$ be an isomorphism-invariant property of coherent $\\mathcal O_X$-modules [pqf-def-coherent] supported in $T$. Suppose $\\mathcal P(0)$; suppose that in every short exact sequence of coherent modules supported in $T$, if two terms have $\\mathcal P$ then so does the third; and suppose that every coherent $Q$ with $\\operatorname{Supp}(Q)\\subseteq T$ and $Q_\\xi=0$ has $\\mathcal P$. Suppose there is a coherent module $G$ with $\\operatorname{Supp}(G)=T$ and $\\mathcal P(G)$ such that its stalk $G_\\xi$ is killed by the maximal ideal $\\mathfrak m_\\xi\\subseteq\\mathcal O_{X,\\xi}$ and is one-dimensional over the residue field $\\kappa(\\xi)$ [def-weil-residue-field], with scalar multiplication induced by $\\mathcal O_{X,\\xi}\\to\\kappa(\\xi)$. Then for every quasi-coherent ideal $J\\subseteq\\mathcal O_Z$, including $J=0$, $\\mathcal P(i_*J)$ holds, where $i_*$ is module pushforward [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YH, label lemma-property-irreducible, proof: third and fourth proof paragraphs: rank-one ideal inclusion into G and the two exact intersection sequences"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "pqf-def-coherent",
+  "def-weil-residue-field",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For any quasi-coherent ideal $L\\subseteq\\mathcal O_Z$, the coherent pushforward ideal lemma gives coherence of $i_*L$, since $X$ is locally Noetherian, $i$ is closed, and $Z$ is integral. Closed-pushforward stalks vanish outside $T=i(Z)$, so $\\operatorname{Supp}(i_*L)\\subseteq T$. If $J=0$, the sectionwise formula $(i_*0)(V)=0(i^{-1}V)=0$ identifies $i_*0$ with zero, and isomorphism invariance and $\\mathcal P(0)$ give the conclusion. Henceforth take $J\\ne0$.",
+   "uses": [
+    "lem-pc-r2-coherent-pushforward-ideal",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YH, label lemma-property-irreducible, third and fourth proof paragraphs"
+   }
+  },
+  {
+   "text": "Apply the rank-one generic ideal inclusion lemma to the given $G$. Its hypotheses are exactly the Noetherian condition, the integral closed immersion, coherence of $G$, and the scalar-compatible residue-field line at $\\xi$. It gives a nonzero quasi-coherent ideal $I\\subseteq\\mathcal O_Z$ and a monomorphism $\\alpha:i_*I\\to G$ with $\\alpha_\\xi$ an isomorphism. Let $Q=\\operatorname{Coker}(\\alpha)$. Coherent kernel/cokernel closure makes $Q$ coherent. Stalk exactness gives $Q_x=G_x/\\alpha_x((i_*I)_x)$, so $Q_\\xi=0$, and $Q_x=0$ outside $T$ because $G_x=0$ there. Thus $\\mathcal P(Q)$ by the small-support hypothesis. In the short exact sequence $0\\to i_*I\\xrightarrow{\\alpha}G\\to Q\\to0$, all terms are coherent and supported in $T$ by step 1 and the hypotheses. Since $\\mathcal P(G)$ and $\\mathcal P(Q)$ hold, two out of three gives $\\mathcal P(i_*I)$.",
+   "uses": [
+    "lem-pc-r2-rank-one-generic-ideal-inclusion",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YH, label lemma-property-irreducible, third and fourth proof paragraphs"
+   }
+  },
+  {
+   "text": "The isomorphism $\\alpha_\\xi$ to the one-dimensional nonzero stalk $G_\\xi$ shows that $i_*I$ is nonzero. Apply the common generic lattice lemma to $I$ and the nonzero ideal $J$. It yields a coherent module $K$ and monomorphisms $d:K\\to i_*I$ and $b:K\\to i_*J$, both isomorphisms at $\\xi$. Put $Q_I=\\operatorname{Coker}(d)$ and $Q_J=\\operatorname{Coker}(b)$. Step 1 supplies coherence of both ideal pushforwards, so coherent kernel/cokernel closure makes $Q_I,Q_J$ coherent. By stalk exactness, $K_x$ injects into $(i_*I)_x=0$ when $x\\notin T$, hence $K_x=0$ there. Likewise $(Q_I)_x$ and $(Q_J)_x$ are quotients of zero outside $T$, while $(Q_I)_\\xi=(Q_J)_\\xi=0$ because $d_\\xi,b_\\xi$ are isomorphisms. Consequently $K,Q_I,Q_J$ are all supported in $T$, and the hypothesis gives $\\mathcal P(Q_I)$ and $\\mathcal P(Q_J)$.",
+   "uses": [
+    "lem-pc-r2-integral-ideals-common-generic-lattice",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YH, label lemma-property-irreducible, third and fourth proof paragraphs"
+   }
+  },
+  {
+   "text": "Use two out of three on $0\\to K\\xrightarrow{d}i_*I\\to Q_I\\to0$. Step 2 gives $\\mathcal P(i_*I)$ and step 3 gives $\\mathcal P(Q_I)$, hence $\\mathcal P(K)$. Then use it on $0\\to K\\xrightarrow{b}i_*J\\to Q_J\\to0$ to obtain $\\mathcal P(i_*J)$ from $\\mathcal P(K)$ and $\\mathcal P(Q_J)$. Steps 1 and 3 verified coherence and support for every term, so both applications are within the stated domain of $\\mathcal P$. Together with the zero-ideal case this proves the assertion for every $J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YH, label lemma-property-irreducible, third and fourth proof paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-r2-coherent-pushforward-ideal",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-pc-r2-rank-one-generic-ideal-inclusion",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-r2-integral-ideals-common-generic-lattice"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YH, label lemma-property-irreducible, third and fourth proof paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian scheme rank one generic residue field stalk coherent witness Serre property all ideals integral closed subscheme",
+   "results": "AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian; AlgebraicGeometry.Scheme.functionField; AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; AlgebraicGeometry.instFieldCarrierFunctionField; AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField; AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two out of three coherent modules generic line nonzero ideal intersection proper support quotient property transfer",
+   "results": "Module.support_quotient; Module.support_quotSMulTop; Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes; Module.supportDim_le_supportDim_quotSMulTop_succ; Module.stableUnderSpecialization_support; Module.support_of_exact; Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal; Module.notMem_support_iff'. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf two out of three property rank one generic stalk integral ideal pushforward",
+   "results": "TopCat.Sheaf.pushforward_sheaf_of_sheaf; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; SheafOfModules.pushforwardSections; SheafOfModules.pushforward_obj_val; SheafOfModules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; AlgebraicGeometry.Scheme.Modules.pushforwardComp. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, \"stalk\"",
+   "results": "No hits. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(rank|ideal)|ideal.*generic|coherent.*property",
+   "results": "Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre property of coherent sheaves containing one generic line contains all ideal pushforwards from an integral closed subscheme",
+   "results": {
+    "t": "2026-10-24T00:42:51Z",
+    "tool": "leansearch",
+    "query": "Serre property of coherent sheaves containing one generic line contains all ideal pushforwards from an integral closed subscheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ObjectProperty.IsSerreClass.mk",
+     "CategoryTheory.ObjectProperty.IsSerreClass.recOn",
+     "CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects",
+     "CategoryTheory.ObjectProperty.IsSerreClass.casesOn",
+     "CategoryTheory.ObjectProperty.IsSerreClass",
+     "Algebra.ZariskisMainProperty",
+     "CategoryTheory.ObjectProperty.IsSerreClass.rec",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_map"
+    ],
+    "digest": "c9a8f4070d0312cb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give Noetherian instances, affine module exactness, or Serre-class definitions, not the coherent-sheaf rank-one witness transfer"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*property|rank.one.*ideal|generic.*ideal.*inclusion",
+   "results": {
+    "t": "2026-10-24T00:42:51Z",
+    "tool": "grep",
+    "query": "coherent.*property|rank.one.*ideal|generic.*ideal.*inclusion",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give Noetherian instances, affine module exactness, or Serre-class definitions, not the coherent-sheaf rank-one witness transfer"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"stalk\"",
+   "results": {
+    "t": "2026-10-24T00:42:52Z",
+    "tool": "loogle",
+    "query": "\"IsCoherent\", \"stalk\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give Noetherian instances, affine module exactness, or Serre-class definitions, not the coherent-sheaf rank-one witness transfer"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian scheme coherent sheaves two out of three property generic rank one witness implies property for all integral closed subscheme ideals",
+   "results": {
+    "t": "2026-10-24T00:42:52Z",
+    "tool": "leanfinder",
+    "query": "Noetherian scheme coherent sheaves two out of three property generic rank one witness implies property for all integral closed subscheme ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian",
+     "AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian",
+     "AlgebraicGeometry.IsLocallyNoetherian",
+     "AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian",
+     "AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+     "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top"
+    ],
+    "digest": "bf0dbfcf8a486f64"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give Noetherian instances, affine module exactness, or Serre-class definitions, not the coherent-sheaf rank-one witness transfer"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two out of three exact sequence property for coherent modules supported on integral closed subset propagated from residue field generic line using common ideal lattice",
+   "results": {
+    "t": "2026-10-24T00:43:28Z",
+    "tool": "leanfinder",
+    "query": "Two out of three exact sequence property for coherent modules supported on integral closed subset propagated from residue field generic line using common ideal lattice",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.support_of_exact",
+     "exact_of_localized_maximal",
+     "exact_of_isLocalized_maximal",
+     "exact_of_localized_span",
+     "Profinite.NobelingProof.succ_exact",
+     "exact_of_isLocalized_span",
+     "associatedPrimes.subset_union_of_exact",
+     "IsLocalizedModule.map_exact"
+    ],
+    "digest": "ac6af2805c8f20a6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give Noetherian instances, affine module exactness, or Serre-class definitions, not the coherent-sheaf rank-one witness transfer"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-coherent-property-irreducible",
+  "date": "2026-10-23",
+  "group": "Q63"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "blueprint": {
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "third and fourth proof paragraphs: rank-one ideal inclusion into G and the two exact intersection sequences",
+   "via": [
+    "lem-pc-coherent-property-irreducible",
+    "lem-pc-coherent-property-devissage"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pc-coherent-rank-one-property-ideals",
+  "worker": "stage1",
+  "summary": "Preserved the full imported statement. Realized the rank-one inclusion and the two intersection comparison exact sequences of Stacks 01YH using existing DAG lemmas; explicitly checked coherence, ambient support and generic cokernel vanishing, including the zero ideal. No new nodes.",
+  "blueprint": "The ancestor lem-pc-coherent-hi proof invokes Noetherian induction on support in its general proper coherence argument; this item supplies the rank-one-to-ideal transfer inside the 01YH devissage subargument already assigned by blueprint.from. Steps 2 and 3-4 realize respectively the third and fourth proof paragraphs of 01YH; step 1 supplies coherence, support and the zero case.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic closure of coherent modules under cokernels is used to form the three quotients; no local-unit node states this closure theorem. It supplies algebra of coherent sheaves, not an alternative proper-coherence route."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic exactness of module stalks identifies the cokernel stalks and detects support of a monomorphic source. No local-unit node states these general stalk facts."
+   },
+   {
+    "node": "lem-weil-pbc-closed-pushforward-stalks",
+    "why": "The zero stalks of a closed pushforward outside the closed image supply support of ideal pushforwards. No local-unit node supplies this general closed-pushforward stalk statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-ae9865c2d",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-ae9865c2d (reviewer sub-agent of L); spot-checked: I read the whole proof of Stacks 01YH (coherent.tex lemma-property-irreducible). Steps 2-4 of the item carry out its third and fourth paragraphs. The small-support property, P(0) and isomorphism invariance are hypotheses, and the parent lem-pc-coherent-property-irreducible discharges them in its steps 1-2. Statement and stmt_deps are byte-identical to the live and side-live copies, where the item is still unsplit; there are no new nodes. Step 1: lem-pc-r2-coherent-pushforward-ideal gives coherence (X Noetherian, Z integral closed); closed-pushforward-stalks (1) gives support in T; i_*0=0 sectionwise. Step 2: every hypothesis of the rank-one node is in the item; Coker(alpha) is coherent by kernel-cokernel-locnoeth (1); its stalk at xi is 0 by stalk-exact (3); it vanishes off T because Supp G=T; two-out-of-three gives P(i_*I). Step 3: i_*I is nonzero because its xi-stalk is isomorphic to G_xi, and J is nonzero after step 1; the lattice node gives K, d and b; K and both cokernels are supported in T (stalk-exact (1),(3)) and vanish at xi. Step 4: two-out-of-three twice, genuinely elementary. Edge cases J=0, J=O_Z, Z a point and X=Z=A^1 with G=O all check. The closest existing nodes (pc-a2 common submodule, pc-v3 comparison filtrations, pc devissage) are not duplicates. The six proof_deps do not depend on the item, so there is no cycle. No SGA citation. I accept the three generic sk-thm-p1 tool_uses (coherent cokernels, stalk exactness, closed-pushforward stalks): the local r2 nodes explicitly exclude cokernel conclusions."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentRankOnePropertyIdeals",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_rank_one_property_ideals",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentRankOnePropertyIdeals.lean",
+  "statement": "theorem coherent_rank_one_property_ideals (X : Scheme.{u}) [IsNoetherian X] (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z] (P : X.Modules → Prop) (hiso : ∀ (F H : X.Modules), RingedSpace.IsCoherent X.toRingedSpace F → RingedSpace.IsCoherent X.toRingedSpace H → {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ⊆ Set.range i.base → {x : X | ¬ Subsingleton (H.presheaf.stalk x)} ⊆ Set.range i.base → ∀ (_ : F ≅ H), P F ↔ P H) (hzero : P (0 : X.Modules)) (hshort : ∀ S : ShortComplex X.Modules, S.ShortExact → RingedSpace.IsCoherent X.toRingedSpace S.X₁ → RingedSpace.IsCoherent X.toRingedSpace S.X₂ → RingedSpace.IsCoherent X.toRingedSpace S.X₃ → {x : X | ¬ Subsingleton (S.X₁.presheaf.stalk x)} ⊆ Set.range i.base → {x : X | ¬ Subsingleton (S.X₂.presheaf.stalk x)} ⊆ Set.range i.base → {x : X | ¬ Subsingleton (S.X₃.presheaf.stalk x)} ⊆ Set.range i.base → ((P S.X₁ ∧ P S.X₂) → P S.X₃) ∧ ((P S.X₁ ∧ P S.X₃) → P S.X₂) ∧ ((P S.X₂ ∧ P S.X₃) → P S.X₁)) (hsmall : ∀ Q : X.Modules, RingedSpace.IsCoherent X.toRingedSpace Q → {x : X | ¬ Subsingleton (Q.presheaf.stalk x)} ⊆ Set.range i.base → Subsingleton (Q.presheaf.stalk (i.base (genericPoint Z))) → P Q) (hG : ∃ G : X.Modules, RingedSpace.IsCoherent X.toRingedSpace G ∧ {x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base ∧ P G ∧ (∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk (i.base (genericPoint Z))), ∀ v : (RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint Z))).obj G, a • v = 0) ∧ (∃ inst : Module (X.residueField (i.base (genericPoint Z))) ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint Z))).obj G), (∀ (a : X.presheaf.stalk (i.base (genericPoint Z))) (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint Z))).obj G), a • v = (X.residue (i.base (genericPoint Z))) a • v) ∧ @Module.finrank (X.residueField (i.base (genericPoint Z))) ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint Z))).obj G) _ _ inst = 1)) : ∀ J : Z.IdealSheafData, P ((pushforward i).obj J.toModules)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a87c011b4",
+  "group": "Q108",
+  "result": "pass",
+  "note": "The statement matches node lem-pc-coherent-rank-one-property-ideals clause by clause: [IsNoetherian X]; closed immersion with integral Z in one universe u; T = Set.range i.base and xi = i.base(genericPoint Z); project-standard Subsingleton-stalk support; hiso restricted to coherent modules supported in T; P(0); hshort with all three directions and coherence/support for every term; hsmall; hG with support equality, annihilation, residue-compatible ∃ Module inst and finrank 1 for that inst; conclusion ∀ J : Z.IdealSheafData, P((pushforward i).obj J.toModules), including J = 0. toModules is the kernel ideal, not the quotient. hG matches the form of rank_one_generic_ideal_inclusion exactly; the common-lattice lemma's hypotheses are derivable; the encodings agree with the parent coherent_property_irreducible. The node differs from live only in lean; the statement is verbatim in the file; no other landing or duplicate. Edge cases J = ⊥, J = ⊤, Z a point, empty Z excluded, G = 0 impossible. Docstrings carry the source place 01YH and the 4 proof steps; sorry only; no defs; report sections present (the second reading is a self-audit). Advisory: toModules and genericPoint come from non-stmt_dep modules (project standard); redundant public imports. No file changed, so nothing compiled."
+ }
+}

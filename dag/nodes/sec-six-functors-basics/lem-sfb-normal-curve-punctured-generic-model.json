@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-normal-curve-punctured-generic-model",
+ "kind": "statement",
+ "title": "A punctured normal curve realizing a prescribed finite generic field extension",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $T$ be an integral affine scheme of finite type over $k$, with generic point $\\eta$, and let $y\\in T$ be a closed point satisfying $\\dim\\mathcal O_{T,y}=1$ [def-pc-scheme, def-pc-integral-scheme, def-weil-finite-type-morphism, def-weil-pbc-krull-dimension-ring]. Put $K=\\kappa(\\eta)$ [def-weil-residue-field] and let $L/K$ be any finite field extension. Let $Y$ and $W$ be schemes locally of finite type over $k$, let $i:T\\to Y$ and $f:W\\to Y$ be $k$-morphisms, and let $u:\\operatorname{Spec}L\\to W$ be a $k$-morphism such that $fu$ equals $\\operatorname{Spec}L\\to\\operatorname{Spec}K\\to T\\xrightarrow{i}Y$ [def-weil-affine-spectrum, def-pc-scheme-fibre]. There exist an integral scheme $C$ of finite type over $k$, a $k$-morphism $p:C\\to T$, a closed point $c\\in C$, and a $k$-morphism $a:C\\setminus\\{c\\}\\to W$ such that every local ring of $C$ is an integrally closed domain [def-weil-pbc-normal-ring], $p(c)=y$, $\\dim\\mathcal O_{C,c}=1$, and $fa=i p$ on $C\\setminus\\{c\\}$. Moreover there is an identification $\\kappa(\\eta_C)=L$ respecting $K$, under which the generic restriction of $p$ is the specified map $\\operatorname{Spec}L\\to T$ and the generic restriction of $a$ is exactly $u$. No separability hypothesis on $L/K$ and no separatedness hypothesis on $W$ or $Y$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, final paragraph: normalization of T in the finite generic field, choice of c, rational-map representative and removal of Sigma. Uses Morphisms Tag 0BX8 (morphisms-lemma-rational-map-finite-presentation) for spreading the generic map."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $T=\\operatorname{Spec}A$, where $A$ is a finitely generated $k$-algebra and a domain. By [lem-sc-integral-function-field-affine-fraction], the given $K=\\kappa(\\eta)$ is the fraction field of $A$. Form $B=\\overline A^{\\,L}\\subset L$ and $N=\\operatorname{Spec}B$, with $p_N:N\\to T$, as in [def-fin-normalization-extension]. This is also the relative normalization of $T$ in $\\operatorname{Spec}L$ of [lem-weil-pbc-relative-normalization]: by its clause (iii) for the affine open $U=T$, its ring of global sections is the integral closure of $A$ in $\\Gamma(\\operatorname{Spec}L,\\mathcal O)=L$, which is $B$, compatibly with $A\\to B\\subset L$. The map $\\operatorname{Spec}L\\to T$ is affine, hence quasi-compact and quasi-separated. Its source is integral with local ring the field $L$, which is integrally closed. Thus [lem-weil-pbc-normalization-normal-stalks] makes every local ring of $N$ an integrally closed domain. Also $B$ is a nonzero subring of $L$, so $N$ is integral. By [lem-fin-normalization-extension-finite] and [def-weil-finite-integral-morphism], $B$ is a finite $A$-module.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-normalization-normal-stalks",
+    "lem-fin-normalization-extension-finite",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, final paragraph of proof (normalization and punctured representative); explicit affine-curve version of the shrinking argument."
+   }
+  },
+  {
+   "text": "Choose finite $k$-algebra generators of $A$ and finite $A$-module generators of $B$. Together their images generate $B$ as a $k$-algebra: every element of $B$ is an $A$-linear combination of the chosen module generators. Hence $N$ is affine of finite type over $k$. The closed point $y$ corresponds to a maximal ideal $\\mathfrak m$ of $A$; [lem-weil-pbc-finite-type-domain-dimension-local-ring] gives $\\dim A=\\dim A_{\\mathfrak m}=1$. The inclusion $A\\hookrightarrow B$ is integral by the construction of $B$, so [lem-weil-pbc-integral-injective-dimension-equal] gives $\\dim B=1$. Moreover [lem-wf-affine-noetherian-components] shows that $N$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, final paragraph of proof (normalization and punctured representative); explicit affine-curve version of the shrinking argument."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-integral-injective-lying-over], choose $\\mathfrak n\\subset B$ over $\\mathfrak m$. It is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal], and therefore defines a closed point $c\\in N$ with $p_N(c)=y$. Applying [lem-weil-pbc-finite-type-domain-dimension-local-ring] to the finitely generated $k$-domain $B$ gives $\\dim\\mathcal O_{N,c}=\\dim B=1$. By [lem-sbc-normalization-generic-field], identify the function field of $N$ with the prescribed $L$, with the canonical generic map $\\operatorname{Spec}L\\to N$ and its composition with $p_N$ agreeing with the specified map to $T$. In particular this identification respects $K$.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-sbc-normalization-generic-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, final paragraph of proof (normalization and punctured representative); explicit affine-curve version of the shrinking argument."
+   }
+  },
+  {
+   "text": "The morphism $f:W\\to Y$ is locally of finite type. Indeed, take any affine opens $V\\subseteq Y$ and $D\\subseteq W$ with $f(D)\\subseteq V$. Applying [lem-weil-pbc-lft-affine-pairs] to $W\\to\\operatorname{Spec}k$ shows that $\\mathcal O_W(D)$ is finitely generated over $k$. The same generators generate it over $\\mathcal O_Y(V)$, since the composite $k\\to\\mathcal O_Y(V)\\to\\mathcal O_W(D)$ is its given $k$-algebra structure. The reverse direction of that same criterion now proves the assertion about $f$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, final paragraph of proof (normalization and punctured representative); explicit affine-curve version of the shrinking argument."
+   }
+  },
+  {
+   "text": "By Step 2, $N=\\operatorname{Spec}B$ with $B$ Noetherian, so $N$ is locally Noetherian [pqf-def-locnoeth] (the one-member affine cover). Let $\\eta_N$ be its generic point; $\\mathcal O_{N,\\eta_N}$ is the function field of $N$. By Step 3 there is an isomorphism $e:\\operatorname{Spec}L\\cong\\operatorname{Spec}\\mathcal O_{N,\\eta_N}$ such that the canonical map $\\alpha:\\operatorname{Spec}L\\to N$ is $c_{\\eta_N}\\circ e$, where $c_{\\eta_N}$ is the canonical morphism, and $p_N\\alpha$ is the specified map $\\operatorname{Spec}L\\to T$. Apply [lem-sfb-local-ring-map-spread] with $S=Y$, $T=N$, $a=i p_N$, $Z=W$, $g=f$ (locally of finite type by Step 4), $t=\\eta_N$ and $\\varphi=u\\circ e^{-1}$. Its hypothesis holds: $f\\varphi=fue^{-1}=ip_N\\alpha e^{-1}=ip_Nc_{\\eta_N}$, using the assumption that $fu$ is $\\operatorname{Spec}L\\to T\\xrightarrow{i}Y$. Obtain an open $V\\subseteq N$ containing $\\eta_N$ and $b:V\\to W$ with $fb=ip_N|_V$ and $b\\circ c_{\\eta_N,V}=\\varphi$, i.e. $b$ composed with the generic map $\\operatorname{Spec}L\\to V$ of Step 3 is exactly $u$. This is a $k$-morphism: compose $fb=ip_N|_V$ with $Y\\to\\operatorname{Spec}k$ and use that $f,i,p_N$ are $k$-morphisms.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-sfb-local-ring-map-spread"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, final paragraph of proof (normalization and punctured representative); explicit affine-curve version of the shrinking argument."
+   }
+  },
+  {
+   "text": "Replace $V$ by $V\\setminus\\{c\\}$ and restrict $b$. It still contains the generic point since $\\dim\\mathcal O_{N,c}=1$. Put $E=N\\setminus V$, a proper closed subset containing $c$. By [lem-sc-noetherian-closed-subset-finite-components] it has finitely many irreducible components, and [lem-sc-scheme-sober] gives a generic point for each. Such a generic point corresponds to a nonzero prime of the domain $B$, since $E$ excludes the generic point of $N$. Every nonzero prime of $B$ is maximal: otherwise $0\\subsetneq\\mathfrak p\\subsetneq\\mathfrak q$ would contradict $\\dim B=1$. Thus each component is a single closed point. It follows that $\\Sigma=E\\setminus\\{c\\}$ is a finite set of closed points disjoint from $c$. For each $z\\in\\Sigma$ choose $s_z\\in\\mathfrak m_z\\setminus\\mathfrak n$, possible because the two maximal ideals are distinct, and put $s=\\prod_zs_z$ (the empty product is $1$). Then $s\\notin\\mathfrak n$ and $s\\in\\mathfrak m_z$ for all $z\\in\\Sigma$. Consequently $C=D(s)\\subseteq N$ contains $c$, avoids $\\Sigma$, and satisfies $C\\setminus\\{c\\}\\subseteq V$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, final paragraph of proof (normalization and punctured representative); explicit affine-curve version of the shrinking argument."
+   }
+  },
+  {
+   "text": "Take $p=p_N|_C$ and $a=b|_{C\\setminus\\{c\\}}$. Since $s\\notin\\mathfrak n$, $C=\\operatorname{Spec}B_s$ is nonempty and integral, and $B_s=B[t]/(st-1)$ is finitely generated over $k$. Thus $C$ is of finite type over $k$. By the open-subscheme identification of [def-weil-open-immersion], local rings on $C$ are the same as those on $N$; hence they are integrally closed domains and $\\dim\\mathcal O_{C,c}=1$. The point $c$ stays closed and $p(c)=y$. The generic point belongs to $C$, its local ring is unchanged, and the identification with $L$ from Step 3 still respects $K$. All generic restrictions are therefore the prescribed ones, in particular $a|_{\\operatorname{Spec}L}=u$. Restricting the equality in Step 5 gives $fa=ip$.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, final paragraph of proof (normalization and punctured representative); explicit affine-curve version of the shrinking argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-normalization-normal-stalks",
+  "lem-fin-normalization-extension-finite",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-sbc-normalization-generic-field",
+  "lem-weil-pbc-lft-affine-pairs",
+  "pqf-def-locnoeth",
+  "lem-sfb-local-ring-map-spread",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, final paragraph of proof (normalization and punctured representative); explicit affine-curve version of the shrinking argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of the function field of an integral curve has a normal finite type curve model with a point over a specified closed point and a prescribed generic morphism defined off that point",
+   "results": "{\"t\": \"2026-10-23T19:17:34Z\", \"tool\": \"leanfinder\", \"query\": \"A finite extension of the function field of an integral curve has a normal finite type curve model with a point over a specified closed point and a prescribed generic morphism defined off that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.Affine.FunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"WeierstrassCurve.exists_isIntegral\"], \"digest\": \"536348493c6121cf\"}; No match. RationalMap.ofFunctionField and fromFunctionField_ofFunctionField (current Birational/RationalMap.lean:516,520) supply only a rational map on an already constructed integral source. Normalization.fromNormalization supplies an integral morphism, without the required finite-type normal curve, chosen codimension-one point and punctured representative. Read these sources; these are candidates for later splitting, not one-line proofs of this node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"functionField\"",
+   "results": "{\"t\": \"2026-10-23T19:17:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"functionField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match. RationalMap.ofFunctionField and fromFunctionField_ofFunctionField (current Birational/RationalMap.lean:516,520) supply only a rational map on an already constructed integral source. Normalization.fromNormalization supplies an integral morphism, without the required finite-type normal curve, chosen codimension-one point and punctured representative. Read these sources; these are candidates for later splitting, not one-line proofs of this node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalMap.*[Ff]inite|fromFunctionField|normalization.*[Ff]inite|normalizationIn",
+   "results": "{\"t\": \"2026-10-23T19:17:31Z\", \"tool\": \"grep\", \"query\": \"rationalMap.*[Ff]inite|fromFunctionField|normalization.*[Ff]inite|normalizationIn\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"6064f3b31b236e77\"}; No match. RationalMap.ofFunctionField and fromFunctionField_ofFunctionField (current Birational/RationalMap.lean:516,520) supply only a rational map on an already constructed integral source. Normalization.fromNormalization supplies an integral morphism, without the required finite-type normal curve, chosen codimension-one point and punctured representative. Read these sources; these are candidates for later splitting, not one-line proofs of this node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spread a prescribed function field morphism over a punctured normal curve by normalization in a finite field extension",
+   "results": "{\"t\": \"2026-10-23T19:17:32Z\", \"tool\": \"leansearch\", \"query\": \"Spread a prescribed function field morphism over a punctured normal curve by normalization in a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"f4f02af6e0f2d64f\"}; No match. RationalMap.ofFunctionField and fromFunctionField_ofFunctionField (current Birational/RationalMap.lean:516,520) supply only a rational map on an already constructed integral source. Normalization.fromNormalization supplies an integral morphism, without the required finite-type normal curve, chosen codimension-one point and punctured representative. Read these sources; these are candidates for later splitting, not one-line proofs of this node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize an integral finite type curve in a finite field extension and extend a generic point map to the complement of one chosen closed point after shrinking",
+   "results": "{\"t\": \"2026-10-23T19:18:26Z\", \"tool\": \"leanfinder\", \"query\": \"Normalize an integral finite type curve in a finite field extension and extend a generic point map to the complement of one chosen closed point after shrinking\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Affine.Point.map\", \"WeierstrassCurve.exists_isIntegral\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"73ce680666858ba1\"}; No match. RationalMap.ofFunctionField and fromFunctionField_ofFunctionField (current Birational/RationalMap.lean:516,520) supply only a rational map on an already constructed integral source. Normalization.fromNormalization supplies an integral morphism, without the required finite-type normal curve, chosen codimension-one point and punctured representative. Read these sources; these are candidates for later splitting, not one-line proofs of this node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-curve-universal-closedness-test",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Testing properness of affine finite-type morphisms by formal arcs. Supporting input: reduce the properness test to local rings at closed points of normal integral finite-type curves (Stacks 0GWX over a field), before completion. Proof of this prerequisite: Tag 0GWX reduces to Tag 0GWV, applied both to f and to its diagonal; this node is the universal-closedness criterion, including its affine-space test formulation. Supporting input: Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, final paragraph: normalization of T in the finite generic field, choice of c, rational-map representative and removal of Sigma. Uses Morphisms Tag 0BX8 (morphisms-lemma-rational-map-finite-presentation) for spreading the generic map.",
+   "via": [
+    "lem-sfb-normal-curve-universal-closedness-test",
+    "lem-sfb-properness-normal-curve-local-test",
+    "lem-sfb-affine-properness-formal-arc-test",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-curve-punctured-generic-model",
+  "worker": "stage1",
+  "summary": "Q25 checked Stacks 0GWV and 0BX8, retained the statement and inherited searches, and wrote the finite-normalization, dimension-one, exact generic spreading and principal-open shrinking argument. All inputs are existing DAG nodes; the generic spreading of Step 5 is the existing same-unit Mathlib leaf lem-sfb-local-ring-map-spread (N is Noetherian), so no new node is created. Reviewer FIX (cc reader, 2026-10-24): dropped the duplicate new leaf lem-sfb-generic-morphism-open-extension (same Mathlib theorem spread_out_of_isGermInjective') in favour of lem-sfb-local-ring-map-spread, and cited lem-weil-pbc-relative-normalization (iii) for the identification in Step 1.",
+  "blueprint": "The inherited provenance chain serves det-thm-sf-ctf-stability-direct-images proof (3), through the properness test. Within that prerequisite this realizes exactly Tag 0GWV final paragraph: normalization, point above y, rational-map representative, removal of the other missing points. tools/blueprint_refs.py ancestor reports None for this inherited chain; the null ancestor and its existing via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic algebraic-geometric input: Function field of an integral scheme is the fraction field of an affine open. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "def-fin-normalization-extension",
+    "why": "Generic algebraic-geometric input: Normalization in a finite extension. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-normal-stalks",
+    "why": "Generic algebraic-geometric input: The normalization of a scheme in a normal integral scheme has integrally closed local rings. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-fin-normalization-extension-finite",
+    "why": "Generic algebraic-geometric input: Finiteness of normalization in a finite extension. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic algebraic-geometric input: Finite and integral morphisms of schemes. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "why": "Generic algebraic-geometric input: A finite type domain over a field has the dimension of each of its local rings at maximal ideals. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic algebraic-geometric input: An injective integral extension preserves Krull dimension. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic algebraic-geometric input: Affine schemes of finite type are Noetherian with finitely many components. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-lying-over",
+    "why": "Generic algebraic-geometric input: Lying over for an injective integral ring map. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "why": "Generic algebraic-geometric input: Under an integral ring map, a prime lying over a maximal ideal is maximal. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-sbc-normalization-generic-field",
+    "why": "Generic algebraic-geometric input: Generic field of normalization in an algebraic extension. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic algebraic-geometric input: Locally of finite type is checked on all pairs of affine opens. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic algebraic-geometric input: A closed subset of a Noetherian scheme has finitely many irreducible components. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic algebraic-geometric input: Schemes are sober. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Generic algebraic-geometric input: Open immersion of schemes. It supports the normalization-and-punctured-model step of the inherited properness-test route; no node of this unit gives this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-normalization-normal-stalks",
+  "lem-fin-normalization-extension-finite",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-sbc-normalization-generic-field",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "def-weil-open-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-6d8a1c874",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-6d8a1c874 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node, all 15 cited statements, Stacks 0GWV final paragraph (limits.tex:4300-4370), 0BX8 (morphisms.tex:12609-12640) and Mathlib SpreadingOut.lean:160-167 and 366-392. The statement is unchanged against the base (only status/proof/proof_deps/proof_origin/split_report differ). The proof follows 0GWV step by step: finite normalization B of A in L; dim B = 1 via the local-dimension and integral-dimension nodes; c from lying-over plus maximality; the generic field from lem-sbc-normalization-generic-field; f locally of finite type by lem-weil-pbc-lft-affine-pairs; spreading over Y; then removing c and the finite set Σ of closed points by a principal open D(s). Steps 4, 6 and 7 are correctly marked elementary. I tested A=k[t] with L=K and Σ empty, an inseparable L, a nodal curve with two points over y, and a non-separated W; the equality over Y comes from the spreading leaf, so no separatedness is used. Accepted the generic tool_uses (normalization and commutative-algebra nodes of other units). Fault 1 (C5 duplicate): the new node lem-sfb-generic-morphism-open-extension restates the existing same-unit Mathlib leaf lem-sfb-local-ring-map-spread (same declaration spread_out_of_isGermInjective', locally Noetherian source), which applies because N is Noetherian by Step 2. Step 5 is rewritten to cite it together with pqf-def-locnoeth, with t = η_N, φ = u∘e⁻¹ and the hypothesis check written out; the new node is dropped. Fault 2 (C3/C1): Step 1 identified the normalization of lem-weil-pbc-normalization-normal-stalks with B without citing lem-weil-pbc-relative-normalization (iii); the citation is added. proof_deps is recomputed and split_report.summary records the FIX. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalCurvePuncturedGenericModel",
+  "declaration": "AlgebraicGeometry.exists_normal_curve_punctured_generic_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalCurvePuncturedGenericModel.lean",
+  "statement": "theorem exists_normal_curve_punctured_generic_model {k : Type u} [Field k] (T : Scheme.{u}) [IsAffine T] [IsIntegral T] (t : T ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType t] [QuasiCompact t] (η : T) (hη : IsGenericPoint η Set.univ) (y : T) (hy : IsClosed ({y} : Set T)) (hdy : ringKrullDim (T.presheaf.stalk y) = 1) (L : Type u) [Field L] [Algebra (T.residueField η) L] [FiniteDimensional (T.residueField η) L] (Y W : Scheme.{u}) (s : Y ⟶ Spec (CommRingCat.of k)) (w : W ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType s] [LocallyOfFiniteType w] (i : T ⟶ Y) (f : W ⟶ Y) (hi : i ≫ s = t) (hf : f ≫ s = w) (uL : Spec (CommRingCat.of L) ⟶ W) (huL : uL ≫ w = Spec.map (CommRingCat.ofHom (algebraMap (T.residueField η) L)) ≫ T.fromSpecResidueField η ≫ t) (hfu : uL ≫ f = Spec.map (CommRingCat.ofHom (algebraMap (T.residueField η) L)) ≫ T.fromSpecResidueField η ≫ i) : ∃ (C : Scheme.{u}) (q : C ⟶ Spec (CommRingCat.of k)) (p : C ⟶ T) (c : C), IsIntegral C ∧ LocallyOfFiniteType q ∧ QuasiCompact q ∧ p ≫ t = q ∧ IsClosed ({c} : Set C) ∧ (∀ x : C, IsDomain (C.presheaf.stalk x) ∧ IsIntegrallyClosed (C.presheaf.stalk x)) ∧ p c = y ∧ ringKrullDim (C.presheaf.stalk c) = 1 ∧ ∃ (U : C.Opens) (a : U.toScheme ⟶ W), (U : Set C) = ({c} : Set C)ᶜ ∧ a ≫ w = U.ι ≫ q ∧ a ≫ f = U.ι ≫ p ≫ i ∧ ∃ ηC : C, IsGenericPoint ηC Set.univ ∧ ∃ (e : C.residueField ηC ≅ CommRingCat.of L) (g : Spec (CommRingCat.of L) ⟶ U.toScheme), g ≫ U.ι = Spec.map e.hom ≫ C.fromSpecResidueField ηC ∧ (Spec.map e.hom ≫ C.fromSpecResidueField ηC) ≫ p = Spec.map (CommRingCat.ofHom (algebraMap (T.residueField η) L)) ≫ T.fromSpecResidueField η ∧ g ≫ a = uL",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4955c77ee",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Node diff vs live: lean only; statement field verbatim in module. All 9 stmt_dep records read (all mathlib, conventions used: LocallyOfFiniteType∧QuasiCompact, ringKrullDim, IsDomain∧IsIntegrallyClosed, residueField/fromSpecResidueField, Spec.map). Clause check vs node and Stacks 0GWV final paragraph (limits.tex:4238ff): T affine integral finite type, closed y with dim 1, arbitrary finite L/K, Y/W lft over k without separatedness, k-morphisms, fu = generic composite; conclusion C integral finite type, p a k-morphism, c closed, all stalks normal domains, p c = y, dim O_{C,c}=1, U exactly {c}ᶜ, a a k-morphism with fa = ip, e : κ(ηC)≅L compatible with K via the Spec-field point equation, g unique (U.ι mono) with g≫a=uL. huL is redundant (from hfu, hf, hi), not stronger. Edge cases L=K, inseparable L, empty Σ, nonempty puncture, any characteristic all covered. No helpers or hollow defs, proof sorry, docstrings carry source and blueprint tag and the 7 proof steps, imported dependency modules exist, report sections present. No compile run (no file changed); worker's scompile clean."
+ }
+}

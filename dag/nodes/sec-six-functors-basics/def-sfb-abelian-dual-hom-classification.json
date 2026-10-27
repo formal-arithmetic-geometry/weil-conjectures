@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-abelian-dual-hom-classification",
+ "kind": "definition",
+ "title": "Rigidified Poincare classification of dual abelian homomorphisms",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $A,B$ be abelian varieties [def-sc-abelian-variety] with group-scheme structures [def-sc-group-scheme], and let $D_A,D_B$ be normalized dual Poincare data [def-sfb-abelian-dual-poincare-datum], with universal invertible modules $P_A,P_B$ [def-sc-invertible-module] and identity-axis rigidifications $r_A,r_B$. For morphisms $f:A\\to B$ and $g:D_B\\to D_A$, define $\\operatorname{ClassifiesAbelianDualHom}(D_A,D_B,f,g)$ to mean that there is an equality of morphisms $(f\\times1)\\circ e_{A,D_B}=e_{B,D_B}$ and an isomorphism $(1\\times g)^*P_A\\simeq(f\\times1)^*P_B$ whose restriction to the identity axis, followed by the pullback of $r_B$, is the pullback of $r_A$ along $g$. Here $e_{A,T}=(0_A,1_T)$; all pullbacks are module inverse images [def-pc-module-pullback]. The pullback of a rigidification across any specified commutative square is defined by composing the canonical pullback composition comparison, transport along the square equality, the inverse composition comparison, the pullback of the given rigidification, and the pullback-of-unit comparison. The equality witness and isomorphism are existentially quantified: this is a predicate on the given maps, not an existence or uniqueness theorem for a dual map.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Section 9 opening paragraph, printed p.41: dual maps are pullback on Pic^0; I Section 8, p.37, normalization of Poincare families."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Dual homomorphism of abelian varieties classified by rigidified Poincare pullback",
+   "results": "8 hits; logged top results: LatticeHom.dual_apply_toFun, LinearEquiv.dualMap, IsBaseChange.toDual_apply, LinearMap.dualMap_eq_lcomp, FDRep.dualTensorIsoLinHom, CharacterModule.dual, LatticeHom.dual_symm_apply_toFun, sInfHom.dual_apply_toFun",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for rigidified Poincare classification of dual abelian-variety maps; reuse the existing project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dual homomorphism of abelian varieties classified by rigidified Poincare pullback",
+   "results": "8 hits; logged top results: CharacterModule.dual_apply, CharacterModule.dual, RootPairing.Hom.weight_coweight_transpose_apply, CharacterModule.dual_rTensor_conj_homEquiv, CharacterModule.dual_comp, AddChar.coe_doubleDualEquiv, CharacterModule.homEquiv_symm_apply_apply_apply, AddChar.doubleDualEquiv",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for rigidified Poincare classification of dual abelian-variety maps; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "ClassifiesAbelianDualHom|poincareRigidificationBaseChange|Poincare in Mathlib/AlgebraicGeometry",
+   "results": "0 hits; logged top results: ",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for rigidified Poincare classification of dual abelian-variety maps; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg ClassifiesAbelianDualHom|poincareRigidificationBaseChange in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search dual hom classification",
+   "results": "No WeilConjectures match. Both plain definitions exist in Sheaf/AlgebraicGeometry/AbelianVariety/PoincareBiduality.lean, lines 44 and 127. DAG search finds their attachment to the biduality theorem node, but no separate definition owner. Blueprint search returns 0 matches. No def-sfb-abelian-dual-hom-classification node exists.",
+   "date": "2026-10-24",
+   "verdict": "Add the definition ownership record requested by immutable-head H2 return; do not move, copy or redefine Lean declarations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polarized-abelian-automorphisms-finite",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Definition of the rigidified dual pullback predicate used in the polarization-preservation equation.",
+   "via": [
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.PoincareBiduality",
+  "declaration": "AlgebraicGeometry.ClassifiesAbelianDualHom",
+  "declarations": [
+   "AlgebraicGeometry.poincareRigidificationBaseChange",
+   "AlgebraicGeometry.ClassifiesAbelianDualHom"
+  ],
+  "statement": "def ClassifiesAbelianDualHom {k : Type u} [Field k]\n    {A B : Over (Spec (.of k))} [GrpObj A] [GrpObj B]\n    (D : AbelianDualPoincareDatum A) (F : AbelianDualPoincareDatum B)\n    (f : A ⟶ B) (fDual : F.dual ⟶ D.dual) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by immutable-head H2 review of 01b666ae132f. These are plain definitions in the unchanged published PoincareBiduality module; no choice from poincare_biduality and no use of that theorem. The classification predicate and its canonical rigidification base-change helper are neither moved nor copied."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d5e3194c",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d5e3194c",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery of 01b666 (returned R1/H2: theorem node lem-sfb-abelian-poincare-biduality cited for the plain def ClassifiesAbelianDualHom). The Lean file is byte-identical (sha c4f4edde), so the prior H3 clause table holds: alg-closed k, GrpObj+IsAbelianVariety A, supplied AbelianDualPoincareDatum, ample invertible L, ClassifiesAbelianDifference λ, IsMonHom iso a, rigidified ∃ aDual, a≫λ≫aDual=λ, Finite subtype. The item diff is only the stmt_dep swap to the new def-sfb-abelian-dual-hom-classification; nothing is lost relative to live. The new def node is existing:true on the unchanged PoincareBiduality module, owning poincareRigidificationBaseChange and ClassifiesAbelianDualHom; its statement is verbatim in the file and its text matches the bodies (variance g:D_B→D_A, axis equality h, iso i, rigidification compatibility, base-change composite). No clash, no move or copy, no cycle; deps are all landed defs. Gates OK (sorry only, docstrings, no stronger assumptions, single universe). Advisory: the reused defs' docstrings carry the biduality blueprint tag by design. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-etale-graph-open-tower",
+ "kind": "statement",
+ "title": "Graph composition through the open leg",
+ "statement": "Let A be a finite commutative ring and use ordinary small-etale module sheaves and their unbounded derived categories [def-weil-pbc-derived-categories]. Let f:X→Y and v′:X′→X be separated finite-type morphisms between Noetherian schemes, v′ etale, and supply compactifications of f, v′ and v′f. Fix c=(j,p), a compactification of f. Let j′:X′→Z′ be open, b:Z′→c.Z separated etale, and v′j=j′b, with Z′ Noetherian. Put r=v′j, choose any compactification e of r, and supply a compactification of rp. Let S denote exact derived etale sum extension, J and J′ derived open extension, and P=Rp_*. Set a:J′S_b→S_v′J to the conjugate composite-left-adjoint comparison of the exact inverse-image square. Set s:J′S_b→S_r to the conjugate of the exact inverse-image compositor U_r→U_b U_j′. Let d_v′:F_v′→S_v′ be the canonical graph comparison transported to the chosen model [lem-asd-compact-support-graph-derived-isomorphism]. Let l:S_v′F_f→F_rp be d_v′ inverse, then the specified compact-support compositor, then congruence for v′f=rp [lem-amb-unbounded-compact-support-comparisons]. Let k:S_rP→F_rp be the inverse canonical graph comparison for e whiskered by P, the functor associator, the canonical proper direct-image compositor, and the model-to-chosen comparison for e.postcomp p. For every derived M on X′, t_c.hom at S_v′M followed by l.hom at M equals P(a.inv at M), followed by P(s.hom at M), followed by k.hom at M. Only the etale-first composition occurs; no proper/etale interchange or second compact-support composition is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), its every-tower normalization, combined with the explicit graph of etale-cohomology.tex Tag 0F4L; parent steps 1, 2, 4 and 5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pc-fibre-product",
+  "def-weil-compactifications-refinements",
+  "def-weil-etale-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-noetherian-ring",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-kun-unbounded-exchange",
+  "lem-asd-compact-support-graph-derived-isomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Expand the etale-first compact-support composition on the tower e over c using the every-tower formula. Its etale model is e.restrict. Replace its comparison by the canonical graph-derived comparison; compare the terminal model c.comp e with e.postcomp p under the equality v′f = (v′c.i)p.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-compact-support-graph-derived-isomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each lift summand, extending by zero from the graph of v′ and then along the open c.i yields the same section as extension from the graph of r=v′c.i. Both sections vanish on the complement. Sheaf gluing and the universal property of sum sheafification identify these maps. Transpose through the sum/open composite adjunctions: the comparison of factorizations is precisely a inverse followed by s.",
+   "uses": [
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the sheaf equality degreewise and compose with the derived direct-image units. The graph-derived component formula identifies the maps on every homotopy representative. Naturality of the units and the unit equation for derived direct-image composition give equality there; homotopy localization gives equality on all inputs. Graph refinement coherence and normalized proper-refinement comparison cancel the auxiliary tower, leaving the explicit k built from e and p.",
+   "uses": [
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "lem-asd-compact-support-graph-coherence",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-graph-open-tower-factor"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J; cancellation of the factorized graph tower identity with the terminal comparison.",
+  "by": "worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical graph compactification comparison respects composition with an open immersion and proper direct image",
+   "results": "Eight matches about Scheme.Modules.restrictFunctorComp, open ranges and open immersion composition; none about etale graph compact support.",
+   "date": "2026-10-27",
+   "verdict": "No match for the geometric normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_symm_comp",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates supplies the abstract conjugate composition and mate identities. It has no etale proper-support or graph functors.",
+   "date": "2026-10-27",
+   "verdict": "Formal tools only, not this geometric equation."
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*[Cc]omp|[Cc]omp.*[Gg]raph|shriek.*[Pp]roper in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites",
+   "results": "No matches. Project and blueprint searches found the existing parent and related graph refinement/base-change statements, but no separate open-composition or proper/etale graph normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "No existing statement of this step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleHorizontalSupportTower",
+  "date": "2026-10-27",
+  "group": "P7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Tag 0F7J (lemma-shriek-composition), its every-tower normalization, combined with the explicit graph of etale-cohomology.tex Tag 0F4L; parent steps 1, 2, 4 and 5.",
+   "via": [
+    "lem-pur-etale-horizontal-support-tower",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-etale-horizontal-support-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphOpenTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphOpenTower.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraph_open_tower",
+  "statement": "theorem etaleGraph_open_tower\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X X' Y Z' : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Z']\n    {f : X ⟶ Y} {v' : X' ⟶ X}\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [Etale v'] [IsSeparated v'] [QuasiCompact v']\n    [HasCompactification f] [HasCompactification v']\n    [HasCompactification (v' ≫ f)] [QuasiCompact (v' ≫ f)]\n    (c : Compactification f) (j' : X' ⟶ Z') [IsOpenImmersion j']\n    (b : Z' ⟶ c.Z) [Etale b] [IsSeparated b]\n    (osq : CommSq v' j' c.i b)\n    (e : Compactification (v' ≫ c.i))\n    [HasCompactification ((v' ≫ c.i) ≫ c.g)]\n    (M : DerivedCategoryModule A X') :\n    let r := v' ≫ c.i\n    let p := c.g\n    let va := derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v' inferInstance\n    let ba := derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance\n    let ja := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i\n    let j'a := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j'\n    let a := (conjugateIsoEquiv (va.comp ja) (j'a.comp ba)).symm\n      (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) osq.flip)\n    let s := (conjugateIsoEquiv\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) r inferInstance)\n      (j'a.comp ba)).symm\n      (Functor.mapDerivedCategoryNatIso\n        (upperStarComp (ModuleCat.{u + 1} A) j' b r osq.w) ≪≫\n        Functor.mapDerivedCategoryCompIso _ _)\n    let dv' := (rightDerivedLowerShriekIso A\n      (HasCompactification.compactification v')).symm ≪≫\n      canonicalEtaleCompactSupportComparison A v' (HasCompactification.compactification v')\n    let w : v' ≫ f = r ≫ p :=\n      (congrArg (fun h : X ⟶ Y ↦ v' ≫ h) c.comm).trans (Category.assoc _ _ _).symm\n    let l := Functor.isoWhiskerRight dv'.symm\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f) ≪≫\n      unboundedEtaleLowerShriekCompIso A v' f ≪≫ unboundedEtaleLowerShriekCongr A w\n    let k := Functor.isoWhiskerRight\n      (canonicalEtaleCompactSupportComparison A r e).symm\n      (rightDerivedLowerStar (ModuleCat.{u + 1} A) p) ≪≫\n      Functor.associator _ _ _ ≪≫\n      Functor.isoWhiskerLeft\n        (openImmersionLowerShriek (ModuleCat.{u + 1} A) e.i).mapDerivedCategory\n        (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) e.g p) ≪≫\n      rightDerivedLowerShriekIso A (e.postcomp p)\n    (rightDerivedLowerShriekIso A c).hom.app\n        ((etaleLowerShriek (ModuleCat.{u + 1} A) v' inferInstance).mapDerivedCategory.obj M) ≫\n      l.hom.app M =\n      (rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (a.inv.app M) ≫\n      (rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (s.hom.app M) ≫ k.hom.app M",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261027T021346-L-2761416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T050625-L-246324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

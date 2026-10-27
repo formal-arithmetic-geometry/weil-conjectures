@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-etale-open-scalar-projection",
+ "kind": "lemma",
+ "title": "Scalar compatibility of the open projection and pullback compositor",
+ "statement": "Let A and B be commutative rings, φ:A→B a unital map, and D_R(T) the ordinary unbounded derived category of constant R-module sheaves on the small etale site of a scheme T [def-weil-pbc-derived-categories]. Write Q_T for scalar extension, δ_T for its normalized tensor comparison [def-pur-exceptional-coefficient-normalizations], L_R(p) for geometric derived pullback, a_p:Q_Y;L_B(p)≅L_A(p);Q_X for scalarPullbackIso, and χ_p for its counit mate scalarMate [lem-pur-etale-scalar-mate-projection]. Semicolon composes in application order. Put τ_p(K,E)=δ_X(L_A(p)K,E);(a_p(K)⁻¹⊗id), a map Q_X(L_A(p)K⊗E)→L_B(p)Q_YK⊗Q_XE. Let c=(j:X↪Z,p:Z→Y) be a compactification of f:X→Y [def-asd-compactifiable]. Write J_R=j_!, β_j:Q_Z;J_A≅J_B;Q_X for the normalized open scalar map, and ω_R(c;K,M):L_R(p)K⊗J_R M→J_R(L_R(f)K⊗M) for the inverse signed swap, the inverse canonical open projection, J_R of tensoring with the pullback compositor L_R(j)L_R(p)≅L_R(f), and J_R of the final signed swap [lem-pur-etale-open-derived-tensor, lem-kun-tensor-sym]. This is precisely compactOpenProjection; β_j is ExceptionalCoefficients.openIso. For every K∈D_A(Y), M∈D_A(X), Q_Z(ω_A(c;K,M));β_j(L_A(f)K⊗M);J_B(τ_f(K,M)) = τ_p(K,J_AM);(id⊗β_j(M));ω_B(c;Q_YK,Q_XM). No coefficient finiteness, flatness, boundedness or additional geometric hypotheses occur.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-pur-etale-scalar-mate-projection",
+  "def-asd-compactifiable",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-tensor-sym",
+  "def-pur-open-coefficient-normalizations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings and preceding projection lemma; agent extraction of the open tensor scalar square from parent proof step 2; tensor normalization in sites-cohomology.tex Tag 07A4"
+ },
+ "proof": [
+  {
+   "text": "Factor compactOpenProjection as orderedOpenProjection at Lg*K followed by open extension of tensoring the canonical compactification pullback compositor in the first variable. This is naturality of the signed tensor symmetry. Apply the local scalar/open square at Lg*K and M.",
+   "uses": [
+    "lem-pur-etale-ordered-open-projection-scalar",
+    "lem-kun-tensor-sym",
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport scalarPullback_composition from exact inverse image to left-derived inverse image. Expand the derived compositors as the exact compositors conjugated by leftDerivedUpperStarIsoMapDerivedCategory; naturality and inverse cancellation give Q of the compactification compositor followed by inverse scalarPullbackIso for f equals inverse scalarPullbackIso for j, Lj* of inverse scalarPullbackIso for g, and the B-compositor. This argument is written out in scalarPullback_compactification.",
+   "uses": [
+    "lem-pur-etale-scalar-pullback-compactification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the scalar/open comparison to move Q of the tensor compositor through the open coefficient map, and naturality of tensorIso in its first variable to move it through the tensor comparison. Substitute the pullback-compositor scalar identity from the previous step. Paste the local square with this identity. Naturality of orderedOpenProjection in its ambient derived input and naturality of the curried tensor functor move inverse scalarPullbackIso for g to the source. Functoriality and associativity give exactly the stated equality.",
+   "uses": [
+    "def-pur-exceptional-coefficient-normalizations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-kun-tensor-sym",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-ordered-open-projection-scalar",
+  "lem-pur-etale-scalar-pullback-compactification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U4",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 and preceding projection lemma: local open square pasted with scalar/pullback composition; categorical transport written by U4"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension commutes with projection formula for compactly supported derived direct image",
+   "results": "Eight unrelated hits (compactly supported continuous maps and presheaf pushforward); no derived scalar/projection square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "mateEquiv, mateEquiv_counit, mateEquiv_vcomp and related generic mate identities.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical tools only; canonical scalar and tensor normalization still need transport."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Pp]rojection|[Pp]rojection.*scalar",
+   "results": "Mathlib/Analysis/CStarAlgebra/Projection.lean only. Local project search found FieldProjectionProperSquare and FieldProjectionOpenSquare for pro-etale field coefficient systems, and ProjectionScalarSquare for pro-etale ring sheaves; these do not state the ordinary-etale constant-coefficient squares.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate in the required categories. Blueprint search scalar projection found det-cor-sf-direct-image-ctf-open-tor, a Tor-bound result rather than either coherence equation."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactScalarCoherence",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing; Scalar compatibility of the open projection and pullback compositor",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleOpenScalarProjection",
+  "file": "lean/Sheaf/Paper/EtaleOpenScalarProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenScalarProjection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactOpenProjection",
+   "AlgebraicGeometry.Etale.etaleOpenScalarProjection"
+  ],
+  "statement": "theorem etaleOpenScalarProjection\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (K : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :\n    (scalarExtension φ c.Z).map (compactOpenProjection A c K M) ≫\n      (ExceptionalCoefficients.openIso φ c.i).hom.app\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj\n          ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)).obj M) ≫\n      (openImmersionLowerShriek (ModuleCat.{u + 1} B) c.i).mapDerivedCategory.map\n        ((ExceptionalCoefficients.tensorIso φ X).hom.app\n            ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K, M) ≫\n          ((derivedTensor (ModuleCat.{u + 1} B) X).map\n            ((scalarPullbackIso φ f).inv.app K)).app ((scalarExtension φ X).obj M)) =\n    (ExceptionalCoefficients.tensorIso φ c.Z).hom.app\n        ((upperStar (ModuleCat.{u + 1} A) c.g).leftDerivedFunctor.obj K,\n          (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj M) ≫\n      ((derivedTensor (ModuleCat.{u + 1} B) c.Z).map\n        ((scalarPullbackIso φ c.g).inv.app K)).app\n          ((scalarExtension φ c.Z).obj\n            ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj M)) ≫\n      ((derivedTensor (ModuleCat.{u + 1} B) c.Z).obj\n        ((upperStar (ModuleCat.{u + 1} B) c.g).leftDerivedFunctor.obj\n          ((scalarExtension φ Y).obj K))).map\n            ((ExceptionalCoefficients.openIso φ c.i).hom.app M) ≫\n      compactOpenProjection B c ((scalarExtension φ Y).obj K)\n        ((scalarExtension φ X).obj M)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T002529-L-95931",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T094526-L-239262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

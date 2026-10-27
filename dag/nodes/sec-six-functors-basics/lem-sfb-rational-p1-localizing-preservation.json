@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-rational-p1-localizing-preservation",
+ "kind": "statement",
+ "title": "Rational projective-line preservation of constructible localizing categories",
+ "statement": "Fix distinct primes $\\ell,p$, a field $k$ of characteristic $p$, and a separated finite-type $k$-scheme $Y$ as in [sk-def-sfb-dc-setting]. Fix $\\overline{\\mathbf Q}_\\ell$ and a finite intermediate extension $E/\\mathbf Q_\\ell$. Let $\\Lambda=\\underline E$ or the finite-subextension-valued $\\underline{\\overline{\\mathbf Q}}_\\ell$ of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed], with pulled-back coefficients [sk-def-sfb-pulled-back-coefficients]. Put $P=\\mathbf P^1_Y$, $W=P\\times_Y P$, $q:P\\to Y$, $p_1,p_2:W\\to P$, and $\\Delta:P\\to W$, using [def-nagata-projective-space-base-change]. Write $D(Z)=D(\\operatorname{Mod}_{\\Lambda_Z})$ for the ordinary unbounded category, with the derived functors of [sk-def-sfb-module-derived-pushpull] and tensor of [sk-def-sfb-derived-tensor-hom]. Let $\\mathcal L_Z=\\Loc(\\Dbc(Z,\\Lambda))$, where $\\Dbc$ means bounded cohomology with finite constant local models as in [sk-def-sfb-constructible], and $\\Loc$ is the full replete triangulated closure under all small ambient coproducts [sk-def-localizing-closure]. Use the positive Tate line $L_Z=\\Lambda_Z(1)$ [sk-def-sp-tate-twist] and $T_Z(A)=(A\\otimes^{\\mathbf L}L_Z)[2]$ [def-sfb-tate-twisted-projection-comparison]. The schemes $Y,P,W$ are Noetherian and qcqs; $q,p_1,p_2,\\Delta$ are proper, $\\Delta$ is closed, its complementary open immersion $j:W\\setminus\\Delta(P)\\to W$ is quasi-compact, and $\\ell$ is invertible on these schemes. All schemes and arrows satisfy the standing setting. Each pullback and proper pushforward along $q,p_1,p_2,\\Delta$ preserves the corresponding $\\mathcal L$ and is exact. The coefficient unit and $L_Z$ belong to $\\Dbc(Z,\\Lambda)$, $\\mathcal L_Z$ is tensor-closed, and $T_Z$ preserves $\\mathcal L_Z$. In particular $Rq_*:\\mathcal L_P\\to\\mathcal L_Y$ and $T_Pq^*:\\mathcal L_Y\\to\\mathcal L_P$ are well-defined exact functors. The preservation pair is the obligation named $\\mathrm{localizingPreservation}$; the additional geometry and intermediate-functor assertions record its hypothesis checks.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (1)--(3): domains of the localizing functors; old parent steps 1--5 and exactness part of step 12",
+  "note": "Construction material retained from the earlier split. The following proof-in-words was previously attached to this node. It is preserved here verbatim as source material for the worker who will prove the corresponding Lean declaration; this stage-1 node intentionally has no proof steps.\n\nFormer proof step 1:\nProperness and Noetherianity. By [lemma-nagata-projective-space-base-change-proper], $q$ is proper, and so are $p_1,p_2$, since each is the projective-line projection over $P$ (with the factors interchanged for $p_1$). By [def-weil-proper-morphism] they are separated and of finite type; thus the diagonal $\\Delta$ of $q$ is closed. Clause (a) of [lem-weil-pbc-closed-immersion-proper] makes $\\Delta$ proper. A field is Noetherian because its only ideals are $0$ and the whole field. Apply [lem-weil-pbc-finite-type-over-noetherian] successively to $Y\\to\\operatorname{Spec}k$, $q$ and $p_1$: $Y,P,W$ are Noetherian, hence locally Noetherian and quasi-compact.\n\nFormer uses: [\"lemma-nagata-projective-space-base-change-proper\", \"def-weil-proper-morphism\", \"lem-weil-pbc-closed-immersion-proper\", \"lem-weil-pbc-finite-type-over-noetherian\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1): proper projections, closed diagonal; existing geometric tools'}\n\nFormer proof step 2:\nQuasi-separatedness and the open complement. The existing Mathlib leaf [lem-weil-pbc-locally-noetherian-quasi-separated] applies to each of the locally Noetherian schemes $Y,P,W$ from Step 1. Together with their quasi-compactness it proves they are qcqs. Put $j:W\\setminus\\Delta(P)\\hookrightarrow W$. For any affine open $V\\subseteq W$, the open subscheme $V\\setminus\\Delta(P)$ of the Noetherian scheme $W$ is Noetherian, hence quasi-compact, by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. This subscheme is $j^{-1}(V)$. Therefore $j$ is a quasi-compact morphism by [def-weil-finite-type-morphism]. These cited leaves supply the topological subclaims formerly proved inline, including the exact hypothesis required for open--closed exactness.\n\nFormer uses: [\"lem-weil-pbc-locally-noetherian-quasi-separated\", \"lem-weil-pbc-noetherian-open-subscheme-noetherian\", \"def-weil-finite-type-morphism\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1): qcqs and quasi-compact complement; Stacks 01OY and 01OW/01OZ/0052/04ZA through the existing leaves'}\n\nFormer proof step 3:\nStanding geometric setting. The structure map $a_Y:Y\\to\\operatorname{Spec}k$ is separated and of finite type by hypothesis. Clause (e) of [lem-weil-pbc-proper-fp-permanence] applied to $q,a_Y$, and then to $p_1,a_Yq$, makes $a_P=a_Yq$ and $a_W=a_Yqp_1$ separated and locally of finite type. Both maps are quasi-compact: the only opens of $\\operatorname{Spec}k$ are empty and the whole space, and their inverse images are empty or the quasi-compact schemes $P,W$ from Step 1. Thus both maps are of finite type by [def-weil-finite-type-morphism]. Consequently $Y,P,W$ satisfy the separated-finite-type standing hypothesis in the later rational theorems; all displayed arrows are $k$-morphisms by the fibre-product construction. This argument does not require $Y$ proper over $k$.\n\nFormer uses: [\"lem-weil-pbc-proper-fp-permanence\", \"def-weil-finite-type-morphism\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1)--(3): standing hypotheses; Stacks 01KU and 01T3 composition clauses'}\n\nFormer proof step 4:\nCoefficient convention. The integer $\\ell$ is a unit on $Y,P,W$ and the open complement: its image is nonzero in the field $k$ of characteristic $p\\ne\\ell$, and structural ring maps carry units to units. This verifies the Tate-twist invertibility hypothesis. The fixed $E$ is a finite subextension of $\\Qlb$, whose coefficient ring uses the finite-subextension-valued convention in the statement. The Cartesian-coefficient theorem [sk-prop-sfb-cartesian-coefficients] identifies inverse images of these pulled-back condensed coefficient sheaves, and their Tate twists, with the corresponding coefficient sheaves. It also states that module pullback is exact inverse image. These are the coefficients used throughout the construction.\n\nFormer uses: [\"sk-prop-sfb-cartesian-coefficients\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1)--(3): Cartesian condensed coefficient system and twist hypotheses'}\n\nFormer proof step 5:\nDomains of the functors. The category $\\Dbc$ in this statement uses the finite constant local models of [sk-def-sfb-constructible]: on each stratum its cohomology is locally obtained from a finitely presented scalar module by extension to the coefficient sheaf, and cohomology vanishes outside a finite interval. For these constant-model categories, [det-def-localizing-closure-ctf-equals-bc] identifies $\\Dctf$ with $\\Dbc$ and their localizing closures. Its qcqs hypothesis holds for $Y,P,W$ by the preceding geometric and coefficient steps. Thus these are precisely the categories $\\Loc(\\Dctf)$ used in the enclosing unit. Pullbacks preserve these closures and are exact by [det-proper-base-change-unbounded-pullback]. Proper pushforwards preserve them and are exact by [det-proper-image-localizing-proper], including $Rq_*,Rp_{i*},R\\Delta_*$. Closure under derived tensor is [det-thm-sf-pf-field-tensor]. The coefficient sheaf is a rank-one free module, and the Tate sheaf is locally free of rank one by [sk-def-sp-tate-twist], so each has the finite constant local model with scalar module $\\Lambda(*)$ on a single stratum in [sk-def-sfb-constructible]: on a trivializing cover the model is $\\Lambda_U\\otimes_{\\Lambda(*)}\\Lambda(*)\\simeq\\Lambda_U$. The scalar module $\\Lambda(*)$ is free of rank one over itself, hence finitely presented. Concentrated in degree zero, they therefore belong to $\\Dbc$. Consequently tensoring by the Tate sheaf and shifting also preserve these closures. This checks the domain of each object in the diagonal, exchange and trace constructions, including unbounded objects in the localizing closure.\n\nFormer uses: [\"det-def-localizing-closure-ctf-equals-bc\", \"det-proper-base-change-unbounded-pullback\", \"det-proper-image-localizing-proper\", \"det-thm-sf-pf-field-tensor\", \"sk-def-sp-tate-twist\", \"sk-def-sfb-constructible\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1)--(3): restriction to the localizing categories'}\n\nFormer proof step 6:\nThe preceding restrictions are exact triangulated functors. Derived tensor is exact in each variable by [lem-weil-pbc-ringed-projection-mate-exact], and the shift [2] is exact in [sk-def-sfb-derived-categories]. Thus the composite q^* followed by tensor with the positive Tate line and [2] is exact as well. Its underlying object formula is precisely the fixed twist of [def-sfb-tate-twisted-projection-comparison]; no adjunction with Rq_* is asserted here.\n\nFormer uses: [\"lem-weil-pbc-ringed-projection-mate-exact\", \"sk-def-sfb-derived-categories\", \"def-sfb-tate-twisted-projection-comparison\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1)--(3): exactness of the restricted functors'}\n"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-nagata-projective-space-base-change",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-def-sp-tate-twist",
+  "def-sfb-tate-twisted-projection-comparison"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For rational condensed coefficients E or Qbar_l the derived projective line pushforward and pullback followed by Tate twist and shift preserve the localizing closure of bounded constructible internal modules",
+   "results": "{\"t\": \"2026-10-27T06:10:28Z\", \"tool\": \"leanfinder\", \"query\": \"For rational condensed coefficients E or Qbar_l the derived projective line pushforward and pullback followed by Tate twist and shift preserve the localizing closure of bounded constructible internal modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"6fe27a0128de4a0d\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state preservation of these rational pro-etale constructible localizing categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.localizingClosure",
+   "results": "{\"t\": \"2026-10-27T06:10:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.localizingClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.localizingClosure'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state preservation of these rational pro-etale constructible localizing categories"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingPreservation|constantModelBoundedConstructible|rationalLocalizingCategory",
+   "results": "{\"t\": \"2026-10-27T06:10:17Z\", \"tool\": \"grep\", \"query\": \"localizingPreservation|constantModelBoundedConstructible|rationalLocalizingCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state preservation of these rational pro-etale constructible localizing categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived proper direct image and Tate twisted inverse image preserve the localizing closure of constructible complexes",
+   "results": "{\"t\": \"2026-10-27T06:10:18Z\", \"tool\": \"leansearch\", \"query\": \"Derived proper direct image and Tate twisted inverse image preserve the localizing closure of constructible complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"DerivedCategory.isGE_Q_obj_iff\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsLeftSchemeOfIsStableUnderBaseChange\", \"CategoryTheory.Functor.IsRightDerivedFunctor.mk\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderCompositionSchemeOfIsStableUnderBaseChange\", \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits\"], \"digest\": \"0e9fc5b384262a45\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not state preservation of these rational pro-etale constructible localizing categories"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingPreservation|rationalLocalizingCategory|constantModelBoundedConstructible",
+   "results": "{\"t\": \"2026-10-27T07:23:58Z\", \"tool\": \"grep\", \"query\": \"localizingPreservation|rationalLocalizingCategory|constantModelBoundedConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned declarations do not state the rational pro-etale localizing preservation assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward for a proper morphism preserves localizing closure of constructible sheaves",
+   "results": "{\"t\": \"2026-10-27T07:23:59Z\", \"tool\": \"leansearch\", \"query\": \"Derived pushforward for a proper morphism preserves localizing closure of constructible sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuous\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"TopCat.Sheaf.pushforward_map\", \"SheafOfModules.pushforwardSections\"], \"digest\": \"cb0fa829095105f1\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned declarations do not state the rational pro-etale localizing preservation assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.Localizing",
+   "results": "{\"t\": \"2026-10-27T07:23:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Triangulated.Localizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Triangulated.Localizing'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned declarations do not state the rational pro-etale localizing preservation assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image and Tate twisted inverse image preserve the localizing closure of bounded constructible pro-etale complexes with rational condensed coefficients",
+   "results": "{\"t\": \"2026-10-27T07:24:01Z\", \"tool\": \"leanfinder\", \"query\": \"Proper direct image and Tate twisted inverse image preserve the localizing closure of bounded constructible pro-etale complexes with rational condensed coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"AlgebraicGeometry.sourceLocalClosure.le\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsRightScheme\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.IsSolid\", \"CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\"], \"digest\": \"1c81883b46c597db\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned declarations do not state the rational pro-etale localizing preservation assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between triangulated categories preserving coproducts maps the localizing subcategory generated by a class into the localizing subcategory generated by its image",
+   "results": "{\"t\": \"2026-10-27T07:24:20Z\", \"tool\": \"leanfinder\", \"query\": \"An exact functor between triangulated categories preserving coproducts maps the localizing subcategory generated by a class into the localizing subcategory generated by its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Triangulated.Localization.pretriangulated\", \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"CategoryTheory.Functor.IsTriangulated.map_distinguished\", \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\"], \"digest\": \"e04d7ae5787c7336\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned declarations do not state the rational pro-etale localizing preservation assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-unit-counit",
+  "date": "2026-10-27",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.ProEtale.RationalP1.localizingPreservation",
+   "module": "Sheaf.Paper.RationalP1UnitCounit",
+   "kind": "theorem",
+   "sorry": true,
+   "note": "Reassign this declaration to lem-sfb-rational-p1-localizing-preservation; intended separate module Sheaf.Paper.RationalP1LocalizingPreservation. Binding from the explicit 2026-10-27 repair order, not a claim to have inspected the missing source. The stage-1 delivery overlay preserves this candidate; the maintainer owns lean metadata."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "Well-definedness (1)--(3): domains of the localizing functors; old parent steps 1--5 and exactness part of step 12",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "proof": [
+  {
+   "text": "The projective-line projection is proper, and both self-product projections are proper by base change. Its relative diagonal is closed and hence proper. Finite type over Spec k makes Y, P and W locally Noetherian; quasi-compactness makes them Noetherian. Their open complement is quasi-compact. Compositions give all standing separated finite-type structure maps. Distinct primes make ell a unit in k and hence in every residue field by the structural ring maps. These are exactly the fields of the unchanged geometry package.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localizing closure existence theorem gives the inherited triangulated structures. An ambient exact functor that preserves the underlying object predicates lifts to an exact functor on the full subcategories by Mathlib ObjectProperty.isTriangulated_lift. The existential shift structures in LocalizingFunctorChecks are the same structures used to prove ambient exactness. Composition combines preservation and ambient exactness, and the same lifting theorem supplies the exact restriction.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the chosen finite-extension or finite-subextension-valued closure coefficient, Dctf and Dbc have equal localizing closures. Apply the existing unbounded pullback theorem, and transport its localizing object assertion through this equality. For each proper map, the coefficient-specific proper-image theorem supplies constructibility and sum preservation; the general proper localizing restriction theorem supplies preservation. Ambient derived pushforward is triangulated. The preceding lifting argument produces LocalizingFunctorChecks in each case.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-proper-base-change-unbounded-pullback",
+    "det-proper-image-localizing-proper",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing rank-one regular scalar model proves bounded constructibility of the coefficient unit. The positive Tate-line generator theorem gives bounded constructibility of the line using the common-root cover and finite scalar models. The field tensor theorem gives tensor closure. The line therefore belongs to the localizing closure, so tensor with it preserves that closure, as does shift by two. Use the native derived tensor shift and triangulated instances and the lifting argument to obtain exact twist restrictions.",
+   "uses": [
+    "lem-sfb-rational-p1-line-from-preservation",
+    "lem-sfb-rational-p1-positive-line-constructible",
+    "det-thm-sf-pf-field-tensor",
+    "det-def-localizing-closure-existence",
+    "def-weil-triangulated-subcategory",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the pullback and proper-pushforward checks to q, the two projections, and the diagonal, with their actual structural maps and IsOver equations. Specialize the object checks to Y, P and W. Compose pullback along q with the positive twist on P, then assemble the unchanged ProjectiveLineLocalizingChecks structure.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "det-def-localizing-closure-existence",
+  "def-weil-triangulated-subcategory",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-proper-base-change-unbounded-pullback",
+  "det-proper-image-localizing-proper",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-rational-p1-line-from-preservation",
+  "lem-sfb-rational-p1-positive-line-constructible",
+  "det-thm-sf-pf-field-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (1)--(3); direct Lean assembly from existing preservation APIs and the common-root-cover generator argument",
+  "group": "M1",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-rational-p1-localizing-preservation",
+  "worker": "stage1",
+  "summary": "ND checked the live source theorem (sorry) and the latest blueprint; assembled preservation from existing statements, verified the proper/noetherian/standing hypotheses and finite constant local models of the coefficient unit and positive Tate line, and made the exactness of the restrictions explicit. No new nodes and no statement change.",
+  "blueprint": "det-prop-p1-adjunction-rational-unit-counit, Well-definedness (1)--(3): geometry of the diagonal and proper projection, domains of the localizing operations, and exactness in the final sentence. The original parent geometry and domain steps retained in source.note are now eight checked steps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Basic scheme permanence checks the projective diagonal setting; no alternate adjunction route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Basic scheme geometry checks qcqs for rational localizing preservation."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Basic scheme geometry checks the complementary open is quasi-compact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only its generic exactness of derived tensor is used; not an alternative projective-line adjunction proof."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Identifies the finite constant local model Dbc used here with Dctf of the cited localizing preservation statements."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Identifies the coefficient ring and twist under inverse image, and its exact module pullback; no change of coefficient model."
+   },
+   {
+    "node": "sk-def-sp-tate-twist",
+    "why": "Provides the positive Tate line and its stated local rank-one trivializations."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Uses the finite constant local model definition rather than arbitrary local finite presentation."
+   },
+   {
+    "node": "det-proper-image-localizing-proper",
+    "why": "Its general proper-image preservation statement supplies the well-definedness premise used explicitly by the projective-line unit; this is a domain check, not an alternate adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-proper-image-localizing-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-ND-99d880039",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-99d880039 (reviewer sub-agent of L); spot-checked: I read the item in full: 8 new steps, no new nodes, statement unchanged. I compared them with the former proof-in-words in source.note (former steps 1-6); every argument is still there and expanded, none dropped. Each cited statement was checked against the hypotheses it is used under. (1) Nagata P(n;S) is proper; permanence lemma (b) makes p_i proper as base changes and (c) makes the closed-immersion diagonal proper. (2) finite type over Noetherian gives Noetherian; locally Noetherian gives quasi-separated. (3) clause (e) composition, with quasi-compactness over the one-point Spec k and def-weil-finite-type-morphism, gives the standing setting; the complement is quasi-compact via noetherian-open-subscheme; qc-open-immersion-finite-type applies; empty cases are handled. (4) sk-prop-sfb-cartesian-coefficients (1) and its exactness sentence apply; l is invertible since p is not l. (5) det-def-localizing-closure-ctf-equals-bc (qcqs, E/Qlb) bridges the item's Loc(Dbc) to Loc(Dctf). det-proper-base-change-unbounded-pullback applies to k-morphisms of separated finite-type k-schemes. The last paragraph of det-proper-image-localizing-proper discharges both of its hypotheses for E and Qlb. (6) sk-def-sp-tate-twist states Lambda_X(1) is pro-etale locally free of rank one, so a single stratum with P=Lambda(*) satisfies sk-def-sfb-constructible; tested on E, Qlb and the empty scheme. (7) det-thm-sf-pf-field-tensor clause 2 gives tensor closure of Loc(Dbc); [2] stays in the triangulated closure. (8) ringed-projection-mate-exact states derived tensor is exact in each variable, [2] is exact, and restriction to triangulated subcategories gives the exact pair. Coefficient category D(Mod_{Lambda_Z}) and the base-change functors Lg*/Rp_* match the parent unit. No SGA is cited and no duplicate was found. Batch-5 flags: all three citations are general six-functor prerequisites that neither the assumed trace formula nor Poincare duality gives, and none is a step of either proof. Their closures reach only generic leaves filed in those chapters: lem-trf-localization-essentially-surjective (status mathlib: localizations are essentially surjective), lem-trf-fully-faithful-ess-surj-equivalence (status mathlib) and lem-pod-finite-qc-proetale-abelian-detection (a generic detection lemma). So the citations stand. All 9 tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalP1LocalizingPreservation",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.localizingPreservationChecks",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.LocalizingFunctorChecks",
+   "AlgebraicGeometry.ProEtale.RationalP1.ProjectiveLineLocalizingObjectChecks",
+   "AlgebraicGeometry.ProEtale.RationalP1.ProjectiveLineLocalizingGeometry",
+   "AlgebraicGeometry.ProEtale.RationalP1.ProjectiveLineLocalizingChecks",
+   "AlgebraicGeometry.ProEtale.RationalP1.localizingPreservationChecks"
+  ],
+  "file": "lean/Sheaf/Paper/RationalP1LocalizingPreservation.lean",
+  "statement": "theorem localizingPreservationChecks (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l)) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] : ProjectiveLineLocalizingChecks l c (k := k) Y",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "The old localizingPreservation in RationalP1UnitCounit states only the final preservation pair. This full package also states every geometric, intermediate preservation, constructibility, tensor and exactness clause of this node. A distinct theorem name avoids redeclaring the still-imported assembly theorem. The four auxiliary Prop structures only group this node’s clauses and use existing objects and canonical full-subcategory lifts."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d033f7de1",
+  "group": "NG",
+  "result": "pass",
+  "note": "Only lean changed. localizingPreservationChecks matches every node clause: primes l≠p, char-p field, Y separated finite type with no properness, Option E/Qbar coefficients; Noetherian/qcqs Y,P,W; q,p1,p2,Δ proper; closed Δ; quasi-compact openComplement.ι; l a unit at all residue fields of Y,P,W,U; standing setting of P,W,U; 8 pull/push LocalizingFunctorChecks (preserves + ∃CommShift with ambient and lift IsTriangulated); unit and Tate line in Dbc; tensor closure; T_Z; pushQ/twistedPullQ = old pair. Edge cases (empty schemes, E=Ql, l or p=2, unbounded) and universes OK. Prop-only helper structures, single sorry, docstrings with 8 steps, statement verbatim, imports per rule. Advisories: parent still owns old localizingPreservation (corollary); coefficient/line owner def-sfb-rational-tate-pullback-comparison not in stmt_dep closure (thin selector, same as parent); ∃CommShift convention as in parent unitCounit_exact; T_Z exactness is a true extra clause; second reading by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-63ff7",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T123504-L-2307154",
+  "kind": "interface",
+  "note": "independent cc review: item RationalP1LocalizingPreservation + new RationalP1PositiveLineConstructible vs clone 786ba78d644, unit sk-prop-p1-adjunction-rational (realized empty), node proof_deps vs Lean uses, #print axioms on scratch copy"
+ }
+}

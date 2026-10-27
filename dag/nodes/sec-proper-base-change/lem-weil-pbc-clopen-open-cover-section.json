@@ -158,7 +158,32 @@
   "item": "lem-weil-pbc-gabber-h1-absolutely-algebraically-closed",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_section_of_finite_clopen_open_cover"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_section_of_finite_clopen_open_cover",
+     "module": "WeilConjectures.AlgebraicGeometry.FiniteClopenOpenCoverSection",
+     "lines": [
+      31,
+      128
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lead_note": " L 2026-10-10: unreachable flag cleared; now cited by lem-weil-pbc-gabber-finite-etale-section step 5.",
@@ -206,5 +231,34 @@
   "landing": "20261012T135325-L-1696276",
   "kind": "interface",
   "note": "independent Codex review: Delivered proof and node match the unchanged theorem statement; all files compile, and the sole direct importer compiles with the private Limits import."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $Z$ be a scheme [def-pc-scheme] and let $p:V\\to Z$ be a finite surjective morphism. Suppose that $V=\\coprod_{i=1}^nV_i$ is a finite disjoint union of open and closed subschemes such that every restriction $p_i:V_i\\to Z$ is an open immersion. Then $p$ has a section $s:Z\\to V$ with $p\\circ s=\\mathrm{id}_Z$.",
+  "proof": [
+   {
+    "text": "*The images are open, closed and cover $Z$ (Stacks: 'As $V\\to Z$ is finite we see that $V_i\\to Z$ is also closed. Let $U_i\\subset Z$ be the image').* For $i=1,\\dots,n$ let $k_i:V_i\\to V$ be the inclusion of the open subscheme $V_i$, so that $p_i=p\\circ k_i$, and let $U_i=p(V_i)=p_i(V_i)\\subseteq Z$. Since $p_i$ is an open immersion, $U_i$ is open in $Z$. Since $p$ is finite it is a closed map, and $V_i$ is closed in $V$, so $U_i=p(V_i)$ is closed in $Z$. Since $p$ is surjective, every $z\\in Z$ is $p(v)$ for some $v\\in V=\\bigcup_iV_i$, say $v\\in V_i$, and then $z\\in U_i$; so $Z=U_1\\cup\\dots\\cup U_n$.\n\n*The strata (Stacks: the decomposition $Z=\\coprod_{(A,B)}\\bigcap_{i\\in A}U_i\\cap\\bigcap_{i\\in B}U_i^c$ over $\\{1,\\dots,n\\}=A\\amalg B$ with $A\\neq\\emptyset$; 'each of the strata is contained in a single $U_i$').* For a nonempty subset $A\\subseteq\\{1,\\dots,n\\}$ put $Z_A=\\bigcap_{i\\in A}U_i\\cap\\bigcap_{i\\notin A}(Z\\setminus U_i)$. Each $U_i$ and each $Z\\setminus U_i$ is open and closed in $Z$ (step 1), so $Z_A$, a finite intersection of open and closed subsets, is open and closed. For $z\\in Z$ let $A(z)=\\{i: z\\in U_i\\}$, which is nonempty by step 1; by definition $z\\in Z_A$ if and only if $A=A(z)$. Hence the $Z_A$ ($A\\neq\\emptyset$) are pairwise disjoint and cover $Z$. Put $i(A)=\\min A$; then $Z_A\\subseteq U_{i(A)}$. (Some $Z_A$ may be empty; nothing below needs them nonempty.)",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The section on one stratum (Stacks: 'we find our section').* Fix $A\\neq\\emptyset$, write $i=i(A)$, and let $j_{Z_A}:Z_A\\to Z$ and $j_{U_i}:U_i\\to Z$ be the inclusions of the open subschemes on $Z_A$ and $U_i$ (step 1, step 2) [def-pc-scheme]. By the identification of an open immersion with the inclusion of its image, applied to the open immersion $p_i:V_i\\to Z$, whose image is $U_i$, there is an isomorphism $\\varphi_i:V_i\\to U_i$ with $j_{U_i}\\circ\\varphi_i=p_i$. Since $j_{Z_A}(Z_A)=Z_A\\subseteq U_i$, the universal property of the open immersion $j_{U_i}$ gives a morphism $\\iota_A:Z_A\\to U_i$ with $j_{U_i}\\circ\\iota_A=j_{Z_A}$. Put $s_A=k_i\\circ\\varphi_i^{-1}\\circ\\iota_A:Z_A\\to V$. Then $p\\circ s_A=p_i\\circ\\varphi_i^{-1}\\circ\\iota_A=j_{U_i}\\circ\\varphi_i\\circ\\varphi_i^{-1}\\circ\\iota_A=j_{U_i}\\circ\\iota_A=j_{Z_A}$.",
+    "uses": [
+     "def-pc-scheme"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Gluing the local sections.* By step 2 the open subschemes $Z_A$, $A$ running over the nonempty subsets of $\\{1,\\dots,n\\}$, form an open covering of $Z$. The morphisms $s_A:Z_A\\to V$ of step 3 agree on overlaps: for $A\\neq B$ the overlap $Z_A\\cap Z_B$ is empty (step 2), and a scheme with empty underlying space has exactly one morphism to $V$ (the empty map of spaces, and on structure sheaves the map to $\\mathcal O_{\\emptyset}(\\emptyset)=0$, the zero ring), so $s_A$ and $s_B$ restrict to the same morphism there; for $A=B$ there is nothing to check. By gluing of morphisms on an open covering there is a morphism $s:Z\\to V$ with $s\\circ j_{Z_A}=s_A$ for every $A$. Then for every $A$, $(p\\circ s)\\circ j_{Z_A}=p\\circ s_A=j_{Z_A}=\\mathrm{id}_Z\\circ j_{Z_A}$ (step 3), so $p\\circ s$ and $\\mathrm{id}_Z$ have the same restriction to every member of the covering, and by the uniqueness of glued morphisms $p\\circ s=\\mathrm{id}_Z$: $s$ is a section of $p$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

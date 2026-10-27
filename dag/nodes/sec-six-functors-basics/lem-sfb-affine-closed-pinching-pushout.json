@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-affine-closed-pinching-pushout",
+ "kind": "statement",
+ "title": "Affine pinching by a surjective ring map",
+ "statement": "Let $A,D,T$ be commutative rings with identity (zero rings allowed), let $\\alpha:A\\twoheadrightarrow D$ be a surjective ring homomorphism, and let $\\beta:T\\to D$ be any ring homomorphism. Define the commutative ring\n$$P=A\\times_D T=\\{(a,t)\\in A\\times T:\\alpha(a)=\\beta(t)\\},$$\nwith componentwise operations. Put $E=\\operatorname{Spec}D$, $Y=\\operatorname{Spec}A$, $W=\\operatorname{Spec}T$ and $Q=\\operatorname{Spec}P$ [def-weil-affine-spectrum]. The canonical morphisms $E\\to Y$, $E\\to W$, $Y\\to Q$ and $W\\to Q$ form a pushout square in the category of schemes [def-weil-pbc-category-colimit]. Explicitly, for every scheme $Z$ and maps $Y\\to Z$ and $W\\to Z$ agreeing on $E$, there is a unique compatible map $Q\\to Z$. No finiteness, Noetherianity or nonzero-ring assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0ET0, lemma-basic-example-pushout, statement. This affine lemma is stronger than the finite-map special case used here; it is not the additional global gluing statement of Tag 0E25."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\pi_A:P\\to A$ and $\\pi_T:P\\to T$ for the projections. Give $A,T,D$ their $P$-module structures through these maps and their common composite. The sequence $0\\to P\\xrightarrow{(\\pi_A,\\pi_T)}A\\oplus T\\xrightarrow{\\delta}D$ is exact, where $\\delta(a,t)=\\alpha(a)-\\beta(t)$: the first arrow is injective, and its image is exactly the pairs on which $\\delta$ vanishes, by the displayed definition of $P$. The equality $\\alpha\\pi_A=\\beta\\pi_T$ also proves commutativity of the asserted scheme square by contravariant functoriality of spectra.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 01Z8, lemma-diagram-localize, first displayed exact sequence; elementary kernel computation"
+   }
+  },
+  {
+   "text": "Fix $p=(a,t)\\in P$ and put $d=\\alpha(a)=\\beta(t)$. Localize the sequence of step 1 at $1,p,p^2,\\ldots$. Exactness of module localization gives an injection $P_p\\to(A\\oplus T)_p$ with image the kernel of $(A\\oplus T)_p\\to D_p$. Here $A_p=A_a$, $T_p=T_t$, $D_p=D_d$. Also $(A\\oplus T)_p=A_a\\oplus T_t$: pairs of fractions admit a common denominator by multiplying each numerator by the missing power, and the same common-denominator calculation detects equality. Consequently the canonical ring map\n$$P_p\\longrightarrow A_a\\times_{D_d}T_t$$\nis bijective. It is a ring map because both components are the localized projections and all operations in the fibre product are componentwise. In particular, $P_p\\to A_a\\times T_t$ is injective. No nonzero denominator assumption was used.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 01Z8, lemma-diagram-localize, proof by exactness of localization (Tag 00CS)"
+   }
+  },
+  {
+   "text": "Let $f:Y\\to Z$ and $g:W\\to Z$ agree on $E$, with $Z$ any scheme. Apply [lem-sfb-fibre-product-spectrum-topology] to their underlying continuous maps. It gives a unique continuous map $h:|Q|\\to|Z|$ restricting to $|f|$ and $|g|$, and the two maps into $Q$ are jointly surjective. For each $q\\in Q$ choose an affine open $V=\\operatorname{Spec}B\\subseteq Z$ containing $h(q)$. The principal-open basis of $Q$ gives $p\\in P$ with $q\\in D(p)\\subseteq h^{-1}(V)$. All such pairs $(p,V)$ form an open cover of $Q$. The affine-open basis theorem supplies $V$, and does not assume intersections of affine opens are affine.",
+   "uses": [
+    "lem-sfb-fibre-product-spectrum-topology",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0, lemma-basic-example-pushout, underlying topological pushout; affine-open realization of its sheaf argument"
+   }
+  },
+  {
+   "text": "For a pair $(p,V)$ of step 3, write $p=(a,t)$ and $d=\\alpha(a)=\\beta(t)$. The inverse images of $D(p)$ in $Y,W,E$ are respectively $D(a),D(t),D(d)$, since a prime contains the image of $p$ precisely when its contraction contains $p$. The principal-localization open immersions identify these open subschemes with $\\operatorname{Spec}A_a$, $\\operatorname{Spec}T_t$, $\\operatorname{Spec}D_d$, and $D(p)=\\operatorname{Spec}P_p$. Restricting $f$ and $g$ gives maps into $V$ (restriction to an open target is a restriction of the same locally ringed space map). By the affine spectrum correspondence these give ring maps $B\\to A_a$ and $B\\to T_t$. Their maps to $D_d$ agree because $f$ and $g$ agree on $E$. Sending $b$ to the pair of its images, followed by the inverse of step 2, gives a ring map $B\\to P_p$. Its spectrum is a morphism $h_{p,V}:D(p)\\to V\\to Z$ with the prescribed restrictions on $D(a)$ and $D(t)$. Joint surjectivity of $Y,W\\to Q$ then shows its underlying map is $h|_{D(p)}$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion",
+    "lem-sfb-fibre-product-spectrum-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0, lemma-basic-example-pushout, structure sheaf identification and induced ringed-space map, realized on the principal affine basis"
+   }
+  },
+  {
+   "text": "We record the local uniqueness needed for gluing. For any $r=(a_r,t_r)\\in P$ and any affine target $V=\\operatorname{Spec}B$, two morphisms $D(r)\\to V$ agreeing after precomposition from $D(a_r)$ and $D(t_r)$ are equal: their ring maps $B\\to P_r$ have equal composites to $A_{a_r}$ and $T_{t_r}$, so they are equal by the injection in step 2, and the affine spectrum correspondence gives equality of the morphisms. This is only injectivity on a principal affine chart with affine target; it does not assert the pushout property for arbitrary target schemes.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0, lemma-basic-example-pushout, uniqueness of the induced sheaf map; elementary affine-coordinate calculation using step 2"
+   }
+  },
+  {
+   "text": "The morphisms $h_{p,V}$ agree on overlaps. At a point $q$ of $D(p)\\cap D(p')$, choose an affine open $V''$ containing $h(q)$ inside $V\\cap V'$; this is possible by local affineness, without claiming $V\\cap V'$ affine. Choose a principal neighbourhood $D(r)$ of $q$ contained in $D(p)\\cap D(p')\\cap h^{-1}(V'')$. Both constructed maps restrict to morphisms $D(r)\\to V''$, because their underlying maps are $h$. Their composites with $D(a_r)$ and $D(t_r)$ are the restrictions of $f$ and $g$, respectively, so step 5 makes them equal on $D(r)$. Such opens cover the overlap. The uniqueness clause of scheme-morphism gluing makes the maps equal on the whole overlap; its existence clause now glues the $h_{p,V}$ to a morphism $\\widetilde h:Q\\to Z$. Its composites with $Y$ and $W$ equal $f$ and $g$ by the same uniqueness clause on the inverse-image open covers.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JA, section-glueing-schemes, mapping property in lemma-glue; Tag 04TN, sheaves-lemma-glue-maps; Tag 01IT, lemma-basis-affine-opens; principal-affine realization of Tag 0ET0"
+   }
+  },
+  {
+   "text": "If $k:Q\\to Z$ is any other compatible scheme morphism, the topological uniqueness in [lem-sfb-fibre-product-spectrum-topology] gives $|k|=h$. Hence, on every pair $(p,V)$ of step 3, $k|_{D(p)}$ factors through $V$. It agrees with $h_{p,V}$ on the two inverse-image principal opens, since both extend $f$ and $g$. Step 5 yields equality on $D(p)$; scheme-morphism gluing yields $k=\\widetilde h$. Thus every compatible pair has exactly one extension, which is precisely the colimit universal property for the finite span defining the pushout. If $Q$ is empty the open cover is empty and the same gluing statement supplies existence and uniqueness. All the preceding arguments allow zero rings and require neither finiteness nor Noetherianity.",
+   "uses": [
+    "lem-sfb-fibre-product-spectrum-topology",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0, lemma-basic-example-pushout, universal property and uniqueness; local affine realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-sfb-fibre-product-spectrum-topology",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0ET0, lemma-basic-example-pushout: principal-affine version of its ringed-space argument, using Tag 01Z8 for localized matching rings and Tag 0B7J for topology. The affine-neighbourhood gluing details are written out by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective ring map A to D and a finite ring map T to D the spectrum of A fiber product over D with T is the scheme pushout",
+   "results": "{\"t\": \"2026-10-22T04:47:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a surjective ring map A to D and a finite ring map T to D the spectrum of A fiber product over D with T is the scheme pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\"], \"digest\": \"f5bf9076c02234b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback; gluing along open immersions also does not give this closed pinching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-22T04:47:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsLocallyDirectedWidePushoutShapeCompForgetOfIsOpenImmersionMap\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPushout_appTop_of_isPullback\", \"AlgebraicGeometry.pushoutSection\", \"AlgebraicGeometry.isIso_pushoutSection_of_isAffineOpen\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\"], \"digest\": \"30f267eaf9553171\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback; gluing along open immersions also does not give this closed pinching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|Pushout",
+   "results": "{\"t\": \"2026-10-22T04:47:57Z\", \"tool\": \"grep\", \"query\": \"pushout|Pushout\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\"], \"digest\": \"f41ef52f40bf879b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback; gluing along open immersions also does not give this closed pinching theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pushout of an affine closed immersion along a finite map is the spectrum of the ring fiber product",
+   "results": "{\"t\": \"2026-10-22T04:47:57Z\", \"tool\": \"leansearch\", \"query\": \"The pushout of an affine closed immersion along a finite map is the spectrum of the ring fiber product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.IsFinite.recOn\"], \"digest\": \"ac61a530fb977fbc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback; gluing along open immersions also does not give this closed pinching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ferrand pinching affine schemes along a finite map and a closed immersion is an affine scheme",
+   "results": "{\"t\": \"2026-10-22T04:47:59Z\", \"tool\": \"leanfinder\", \"query\": \"Ferrand pinching affine schemes along a finite map and a closed immersion is an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback\"], \"digest\": \"7d76f7b74e061f0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback; gluing along open immersions also does not give this closed pinching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of a fiber product of commutative rings over a surjective map is a pushout of schemes",
+   "results": "{\"t\": \"2026-10-22T05:15:34Z\", \"tool\": \"leanfinder\", \"query\": \"The spectrum of a fiber product of commutative rings over a surjective map is a pushout of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\"], \"digest\": \"268a8aa559fa3db0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "grep",
+   "query": "pinch|pushout|IsPushout",
+   "results": "{\"t\": \"2026-10-22T05:15:42Z\", \"tool\": \"grep\", \"query\": \"pinch|pushout|IsPushout\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\"], \"digest\": \"c86439a56d82696d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, \"pushout\"",
+   "results": "{\"t\": \"2026-10-22T05:15:42Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum, \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CommRingCat.finrank_eq_of_isPushout\", \"Algebra.rankAtStalk_eq_of_isPushout\"], \"digest\": \"3ec127173516ec94\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective ring map A to D the topological spectrum of A fiber product over D with T is the pushout of prime spectra",
+   "results": "{\"t\": \"2026-10-22T05:15:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a surjective ring map A to D the topological spectrum of A fiber product over D with T is the pushout of prime spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\"], \"digest\": \"01e95f377416ef4d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjection of commutative rings gives a pushout of spectra for any fiber product of rings",
+   "results": "{\"t\": \"2026-10-22T05:15:53Z\", \"tool\": \"leansearch\", \"query\": \"A surjection of commutative rings gives a pushout of spectra for any fiber product of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"PrimeSpectrum.isEmbedding_comap_of_surjective\", \"PrimeSpectrum.specComap_injective_of_surjective\", \"PrimeSpectrum.isClosedEmbedding_comap_of_surjective\", \"RingHom.strictMono_specComap_of_surjective\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.Spec.map\", \"AlgebraicGeometry.Spec.map_surjective\"], \"digest\": \"57e1598878805d10\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fiberProduct|fibreProduct|IsPushout",
+   "results": "{\"t\": \"2026-10-22T05:15:53Z\", \"tool\": \"grep\", \"query\": \"pullback|fiberProduct|fibreProduct|IsPushout\", \"sub\": \"RingTheory/Spectrum\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\"], \"digest\": \"7b2921e02b43e7d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime spectrum of a pullback of commutative rings with one surjective map is a topological pushout or quotient space",
+   "results": "{\"t\": \"2026-10-22T05:16:33Z\", \"tool\": \"leanfinder\", \"query\": \"Prime spectrum of a pullback of commutative rings with one surjective map is a topological pushout or quotient space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.Spec.map_surjective\", \"PrimeSpectrum.comap_isInducing_of_surjective\", \"PrimeSpectrum.isEmbedding_comap_of_surjective\"], \"digest\": \"1ad9da2e493ee0a8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prime spectrum of a ring fiber product over a surjective homomorphism is a pushout of topological spaces",
+   "results": "{\"t\": \"2026-10-22T05:16:33Z\", \"tool\": \"leansearch\", \"query\": \"The prime spectrum of a ring fiber product over a surjective homomorphism is a pushout of topological spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"PrimeSpectrum.isEmbedding_comap_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"AlgebraicGeometry.Spec.topMap\", \"PrimeSpectrum.specComap_injective_of_surjective\", \"PrimeSpectrum.comap_injective_of_surjective\", \"AlgebraicGeometry.Spec.topObj\"], \"digest\": \"77a7a42ff0296835\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.?product|fibre.?product|pinch",
+   "results": "{\"t\": \"2026-10-22T05:16:50Z\", \"tool\": \"grep\", \"query\": \"fiber.?product|fibre.?product|pinch\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/PullbackCone.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"Mathlib/Data/Set/Prod.lean\", \"Mathlib/Data/Set/Prod.lean\", \"Mathlib/Data/Set/Prod.lean\", \"Mathlib/Data/Set/Prod.lean\"], \"digest\": \"2bef5b978830c8bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T05:16:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"PrimeSpectrum\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-persistent-node-normalization",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. affine conductor-square pushout.",
+   "via": [
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-affine-closed-pinching-pushout",
+  "worker": "stage1",
+  "group": "NO",
+  "summary": "Kept the unrestricted surjective-map statement of Stacks 0ET0. Reduced to one statement-only topological lemma (0B7J), proved localized matching-ring identities from the existing exact-localization leaf, and constructed and uniquely glued actual scheme morphisms on principal affine charts. Checked empty spectra and arbitrary non-affine targets; no finite-map assumption was reintroduced.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. affine conductor-square pushout. Steps 1–7 realize the affine conductor-square prerequisite by the topology, matching-section and gluing argument of Stacks 0ET0.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NO-3df45a279",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-3df45a279 (reviewer sub-agent of L); spot-checked: Live item, still unsplit on side-live; neither it nor its citer persistent-node-normalization is on the 2026-10-19 drop list, and there is no re-split note. The statement is faithful to Stacks 0ET0 (more-morphisms l.4101) with A'=A, A=D, B=T, B'=P, unchanged, and needs no finiteness. The one new unsplit node, lem-sfb-fibre-product-spectrum-topology, is exactly 0B7J (more-algebra l.543, Situation l.525), stated as the topological universal property plus joint surjectivity, which is the first paragraph of the 0B7J proof. It is self-contained, has 8 recorded searches and the blueprint fields, and is true on the small cases D=0 (disjoint union), α an isomorphism, A=0 and T=0. It is not a duplicate: lem-sfb-ferrand-scheme-pushout's affine clause needs j integral, while the item allows any β. Nor is it a restated clause of the item, which is about scheme morphisms. Steps: (1) the kernel P of A⊕T→D is elementary. (2) Exact localization (a Mathlib leaf) gives P_p≅A_a×_{D_d}T_t and its injection, including nilpotent p. (3) The new node gives h; the affine-open basis and the D(p) basis give the cover. (4) The open immersions for D(a), D(t), D(d), D(p), the affine Spec correspondence and step 2 give B→P_p, and joint surjectivity shows the underlying map is h. (5) Uniqueness on a chart follows from the injection. (6) A smaller affine V'' inside V∩V' (no affine-intersection assumption) and step 5 give agreement on overlaps; scheme-morphism gluing gives existence and the composites. (7) |k|=h from the topological uniqueness, then step 5 and gluing; Q=∅ is the empty cover. All cited nodes other than the new one are Mathlib leaves, so tool_uses=[] is correct. proof_deps equals the union of the step uses. No SGA. No changes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineClosedPinchingPushout",
+  "declaration": "AlgebraicGeometry.isPushout_spec_pullbackCone_of_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineClosedPinchingPushout.lean",
+  "statement": "theorem isPushout_spec_pullbackCone_of_surjective {A D T : CommRingCat.{u}} (α : A ⟶ D) (β : T ⟶ D) (hα : Function.Surjective α.hom) : IsPushout (Spec.map α) (Spec.map β) (Spec.map (CommRingCat.pullbackCone α β).fst) (Spec.map (CommRingCat.pullbackCone α β).snd)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f546dd231",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Lean statement faithful to node and Stacks 0ET0 clause by clause (more-morphisms.tex l.4100): CommRingCat.{u} rings with zero rings allowed, only α surjective, β arbitrary; P = Mathlib's concrete CommRingCat.pullbackCone α β (eqLocus subring of A×T, coordinate projections; Constructions.lean:447-460); IsPushout of Spec.map α, Spec.map β, Spec.map fst/snd in Scheme.{u}, arrow order correct, arbitrary target. No extra hypotheses or universe restriction; autoImplicit off. Edge cases D=0, A=0, T=0, α iso, all zero covered. No existing Mathlib/project declaration (grep IsPushout in AlgebraicGeometry, project trees). Statement verbatim in file; lines <=100; public imports = stmt-dep modules + Ring.Constructions, plain imports = proof_deps mathlib_match modules (the unsplit topology node has no Lean record yet). Docstrings give Tag 0ET0, blueprint id and the 7 proof steps; sorry only; report has both sections. Node differs from live only in lean; not dropped, no repair note, live item still without lean. Not recompiled (no file changed). No findings."
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation; composite diagonal, deformation and integration comparison"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "S7",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation; complete Lean proof by normalized factorization, square pasting and inverse cancellation"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteOrientationReduction",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (1) finite orientations and (3) coefficient compatibility",
+   "via": [
+    "lem-sp-finite-orientation-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sp-finite-normalized-orientation-scalar",
+ "title": "Scalar compatibility of normalized finite smooth orientations at divisible exponents",
+ "statement": "Let A and B be finite commutative rings with a unital map φ:A→B. Let N,M>0, M dividing N, N A=0 and M B=0. Let X,Y be Noetherian schemes and f:X→Y a separated quasi-compact compactifiable smooth map of pure dimension d. Assume N invertible on X and Y and M invertible on X. Supply the coefficient-independent closed-diagonal Geometry witness [lem-trf-finite-ring-section-deformation]. Let α_A:ω_(f,A)≅A_X(d)[2d] at exponent N and α_B:ω_(f,B)≅B_X(d)[2d] at exponent M have OrientationNormalized witnesses, meaning the diagonal-factor, normalized Rees-specialization and normal-bundle integration equations of [def-pur-finite-smooth-canonical-maps]. Let t be a CoefficientLineComparison, with the N/M root power and its generator and derived-counit normalizations [def-pur-finite-smooth-coefficient-arrows]. Then Q_X(α_A.inv) ≫ dualizingScalarMap φ f = (t.tensorPower d).hom ≫ α_B.inv. The exceptional scalar map is the specified unit-normalized mate of [def-pur-exceptional-coefficient-tensor-maps].",
+ "stmt_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-exceptional-coefficient-tensor-maps"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the two OrientationNormalized witnesses as κ, normalized at one, the Cartesian cone-to-bundle squares, and the defining equations. normalSectionMap_isIso and bundleAdjoint_isIso make their final composite invertible. Cancel that composite and apply integratedSpecialization_normalization to write α_A.hom = diagonalFactor_A ≫ ψ_A and α_B.hom = diagonalFactor_B ≫ ψ_B.",
+   "uses": [
+    "lem-sp-finite-section-integrated-specialization-base-change",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mapping N A=0 along φ gives N B=0. Apply finiteSmoothDiagonalScalar at the common annihilator N, and integratedSpecialization_scalar at N,M with the supplied normalized κ maps, cone squares and t. Functor.map_comp and associativity paste their two squares, giving c_f ≫ α_B.hom = Q_X(α_A.hom) ≫ (t.tensorPower d).hom.",
+   "uses": [
+    "lem-sp-finite-smooth-diagonal-scalar",
+    "lem-sp-finite-section-integrated-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the desired inverse equation with α_B.hom, an isomorphism. Substitute the forward equation, use functoriality to combine Q_X(α_A.inv) and Q_X(α_A.hom), and cancel both inverse-hom composites. This establishes precisely the displayed equation without needing invertibility of the exceptional coefficient mate.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-section-integrated-specialization-base-change",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-sp-finite-smooth-diagonal-scalar",
+  "lem-sp-finite-section-integrated-scalar"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized finite smooth purity orientations commute with a finite coefficient ring map and a divisible change of Tate exponent",
+   "results": "Eight hits: ordinary linear orientations, smooth algebra base change and unrelated normalization. No etale purity statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical normalized finite smooth purity orientation commutes with change of coefficient ring",
+   "results": "Eight hits, on smooth ring maps, basis orientations and ordinary base change; no derived finite smooth orientation compatibility.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "OrientationNormalized|orientation.*reduction",
+   "results": "Mathlib search returned zero hits. Project search found the single-exponent reductionOrientation and the prime-ring two-level reduction. Neither accepts the supplied arbitrary finite-ring normalized orientations at two exponents.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteNormalizedOrientationScalar",
+  "file": "lean/Sheaf/Paper/FiniteNormalizedOrientationScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.normalizedOrientation_scalar",
+  "statement": "theorem normalizedOrientation_scalar\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (hMN : M ∣ N)\n    (hA : (N : A) = 0) (hB : (M : B) = 0)\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (hY : IsUnit (N : Γ(Y, ⊤))) (f : X ⟶ Y)\n    [HasCompactification f] [IsSeparated f] [QuasiCompact f]\n    (d : ℕ) [SmoothOfRelativeDimension d f]\n    (geometry : FiniteRingSectionDeformation.Geometry d\n      (pullback.fst f f) (pullback.diagonal f))\n    (hX : IsUnit (N : Γ(X, ⊤))) (hX' : IsUnit (M : Γ(X, ⊤)))\n    (alphaN : dualizingComplex (ModuleCat.{u + 1} A) f ≅ line A N hA X d)\n    (alphaM : dualizingComplex (ModuleCat.{u + 1} B) f ≅ line B M hB X d)\n    (_hn : OrientationNormalized A N hN hA f d geometry hX alphaN)\n    (_hm : OrientationNormalized B M hM hB f d geometry hX' alphaM)\n    (t : CoefficientLineComparison φ N M hA hB X) :\n    (ordinaryScalar φ X).map alphaN.inv ≫ ExceptionalCoefficients.dualizingScalarMap φ f =\n      (t.tensorPower d).hom ≫ alphaM.inv",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T034742-L-3681791",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T034742-L-3681791",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,362 @@
+{
+ "id": "lem-sf-native-weil-shriek-triangulated",
+ "kind": "statement",
+ "title": "Preservation and triangulation for native compactly supported Weil image",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the categories $\\mathrm{WC}^{\\mathrm{der}}(-)$ and the actual equivariant derived operations $h^*,Rh_*,Rh_{0!}$ of [def-sf-native-weil-derived-framework]. Let $h:V\\to W$ be a separated quasi-compact locally finite-type morphism of $k_0$-schemes, with $W$ quasi-compact, quasi-separated [def-weil-quasi-separated-morphism] and locally of finite type over $k_0$. Then the ambient construction $Rh_{0!}$ carries bounded objects with constructible cohomology to bounded objects with constructible cohomology. The full categories $\\mathrm{WC}^{\\mathrm{der}}(V)$ and $\\mathrm{WC}^{\\mathrm{der}}(W)$ with their inherited shifts and distinguished triangles are triangulated, and the restricted functor\n$$Rh_{0!}:\\mathrm{WC}^{\\mathrm{der}}(V)\\longrightarrow\\mathrm{WC}^{\\mathrm{der}}(W)$$\nis triangulated: it has its derived shift comparison $Rh_{0!}(L[1])\\cong (Rh_{0!}L)[1]$ and sends distinguished triangles, including the last arrow through this comparison, to distinguished triangles.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/LowerShriek.lean",
+  "place": "WeilComplex.objectProperty_rightDerivedLowerShriek, lines 115-142; CommShift and IsTriangulated instances, lines 201-217; WeilSheaf/Category.lean lines 217-247 for the inherited triangulation. All proofs are present in the project source; this is not a finite-coefficient Mathlib specialization."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-triangulated-category",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The structure morphism of $W$ is finite type, since it is locally of finite type and quasi-compact. Finite-type composition makes $V\\to\\operatorname{Spec}k_0$ finite type. Apply Nagata to the separated finite-type map $h$ and the quasi-compact quasi-separated target $W$: $h$ is compactifiable. Take the compactification used in the native framework, $V\\xrightarrow{j}Z\\xrightarrow{p}W$; by the definition of compactification used there, $j$ is an open immersion, $p$ is proper and $pj=h$. Give $Z$ its $k_0$-structure through $p$. Properness includes finite type, so finite-type composition makes $Z$ finite type over $k_0$. Both legs are over $k_0$, since $pj=h$. The chosen compactification is not required to have a quasi-compact first leg, so this is checked: $\\operatorname{Spec}k_0$ is Noetherian, hence $Z$, of finite type over it, is Noetherian by the finite-type-over-Noetherian lemma. Every open subset of the Noetherian space $|Z|$ is quasi-compact, and $j$ is a homeomorphism onto an open subset, so the inverse image under $j$ of every open of $Z$ is quasi-compact: $j$ is a quasi-compact open immersion. In particular the locally finite-type and quasi-compactness assumptions needed below hold for $V,Z,W$ and $j$; no absolute separatedness of these schemes is inferred.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "thm-nagata-compactification",
+    "def-nagata-compactification",
+    "def-weil-compactifications-refinements",
+    "def-weil-open-immersion",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriek.lean",
+    "place": "objectProperty_rightDerivedLowerShriek and ambient/restricted CommShift and IsTriangulated instances, lines 115-217; proof expanded through native heart finiteness and bounded truncations"
+   }
+  },
+  {
+   "text": "Use the current framework's coefficient sheaf on the whole underlying topological space and its constructibility condition, whose finite rank may depend on each pro-etale covering member. For each $T=V,Z,W$, let $\\mathcal C_T\\subset\\mathcal W_T$ consist of the constructible native Weil sheaves. The native abelian lemma supplies a Grothendieck abelian ambient category and exactly the zero, isomorphism, kernel, cokernel and extension closure hypotheses on $\\mathcal C_T$. The weak-Serre cohomology lemma, including its bounded intersection clause, therefore gives the inherited triangulated structure on $D^b_{\\mathcal C_T}(\\mathcal W_T)=\\mathrm{WC}^{\\mathrm{der}}(T)$. The equality here is the definition in the framework. Grothendieck K-injective existence gives K-injective resolutions in each ambient category, so the total right derived functors used below have the hypotheses required by the unbounded triangulated right-derived-functor lemma.",
+   "uses": [
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriek.lean",
+    "place": "objectProperty_rightDerivedLowerShriek and ambient/restricted CommShift and IsTriangulated instances, lines 115-217; proof expanded through native heart finiteness and bounded truncations"
+   }
+  },
+  {
+   "text": "Let $K\\in\\mathrm{WC}^{\\mathrm{der}}(V)$ and put $J=D(j_{0!})K$, the termwise functor induced on derived categories by the exact functor $j_{0!}$ (exact-functor derived-triangulation lemma). The native open-extension lemma makes $j_{0!}$ exact and constructible-preserving. The exact-functor cohomology comparison applied to a complex representing $K$ gives $H^n(J)\\cong j_{0!}H^n(K)$. Because an additive exact functor sends zero to zero, every cohomological interval for $K$ is also an interval for $J$. Each displayed cohomology sheaf is constructible by the same native lemma. Thus $J\\in\\mathrm{WC}^{\\mathrm{der}}(Z)$. This calculation takes place in the derived categories of the equivariant abelian categories.",
+   "uses": [
+    "lem-sf-native-weil-open-exact-constructible",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriek.lean",
+    "place": "objectProperty_rightDerivedLowerShriek and ambient/restricted CommShift and IsTriangulated instances, lines 115-217; proof expanded through native heart finiteness and bounded truncations"
+   }
+  },
+  {
+   "text": "Write $P=Rp_{0*}$. The proper-heart finiteness lemma supplies the additive left-exact functor $p_{0*}$. Apply the unbounded right-derived-functor lemma, using the K-injectives from step 2: $P$ commutes with integer shifts and is triangulated on the ambient categories. Define $Q(M)$ to mean that $P(M)$ belongs to $\\mathrm{WC}^{\\mathrm{der}}(W)$. This property contains zero, is invariant under isomorphism and is closed under extensions in distinguished triangles, by triangulation of $P$ and step 2. Choose a finite interval containing the cohomology of $J$. For every integer $q$ and every $M\\in\\mathcal C_Z$, proper-heart finiteness applied to $M$ gives $P(M[0])\\in\\mathrm{WC}^{\\mathrm{der}}(W)$; the shift comparison of $P$ and shift closure of that category give $Q(M[0][-q])$. This is the devissage hypothesis; by step 3 each $H^q(J)$ lies in $\\mathcal C_Z$. Apply bounded degreewise truncation devissage with $P_q=\\mathcal C_Z$ to conclude $Q(J)$. Its hypotheses hold also for an empty interval, when $J$ is zero. Hence $Rp_{0*}D(j_{0!})K=Rh_{0!}K$ is bounded with constructible cohomology.",
+   "uses": [
+    "lem-sf-native-weil-proper-sheaf-finiteness",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sfb-degreewise-bounded-devissage",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriek.lean",
+    "place": "objectProperty_rightDerivedLowerShriek and ambient/restricted CommShift and IsTriangulated instances, lines 115-217; proof expanded through native heart finiteness and bounded truncations"
+   }
+  },
+  {
+   "text": "The exact-functor derived-triangulation lemma makes $D(j_{0!})$ triangulated on the ambient derived categories. Together with the preceding triangulation of $P$, this makes $F=P\\circ D(j_{0!})$ triangulated: apply the first functor and then the second to a distinguished triangle. Its shift comparison is the composite $F(L[1])\\to P(D(j_{0!})L[1])\\to F(L)[1]$, first applying $P$ to the exact termwise shift comparison and then using the derived shift comparison of $P$. The last arrow of the resulting triangle is precisely the image of the original last arrow followed by this composite. The native framework defines the ambient $Rh_{0!}$ as this very composite.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriek.lean",
+    "place": "objectProperty_rightDerivedLowerShriek and ambient/restricted CommShift and IsTriangulated instances, lines 115-217; proof expanded through native heart finiteness and bounded truncations"
+   }
+  },
+  {
+   "text": "Step 4 shows that $F$ restricts to the two full bounded constructible categories from step 2. Its shift comparisons have source and target in the target full subcategory, so they are isomorphisms there with the same inverses. A distinguished triangle in the source is an ambient distinguished triangle with its vertices in the source full subcategory. Step 5 sends it, with the stated last arrow, to an ambient distinguished triangle; step 4 puts all three vertices in the target full subcategory. By the inherited definition this is a distinguished triangle there. Thus the restricted $Rh_{0!}$ has exactly the claimed shift comparison and triangulated-functor property.",
+   "uses": [
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriek.lean",
+    "place": "objectProperty_rightDerivedLowerShriek and ambient/restricted CommShift and IsTriangulated instances, lines 115-217; proof expanded through native heart finiteness and bounded truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "thm-nagata-compactification",
+  "def-nagata-compactification",
+  "def-weil-compactifications-refinements",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-weil-constructible-abelian",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sf-native-weil-open-exact-constructible",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-native-weil-proper-sheaf-finiteness",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-degreewise-bounded-devissage",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/WeilSheaf/LowerShriek.lean",
+  "place": "objectProperty_rightDerivedLowerShriek and ambient/restricted CommShift and IsTriangulated instances, lines 115-217; proof expanded through native heart finiteness and bounded truncations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "direct image with compact support preserves bounded constructible cohomology and distinguished triangles of Weil complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.map_isStrictlySupported\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3} {D : Type u_4}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Category.{v_2, u_4} D]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] [inst_3 : CategoryTheory.Limits.HasZeroMorp\", \"doc\": \"Given a category $\\\\mathcal{W}_1$ with zero morphisms, a zero-preserving functor $F : \\\\mathcal{W}_1 \\\\to \\\\mathcal{W}_2$, and a homological complex $K$ in $\\\\mathcal{W}_1$ that is strictly supported by an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"Topology.IsConstructible.image_of_isOpenEmbedding\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} {Y : Type u_3} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y} {s : Set X},\\n  Topology.IsOpenEmbedding f →\\n    IsRetrocompact (Set.range f) → Topology.IsConstructible s → Topology.IsConstructible (f '' s)\", \"doc\": \"If $ f : \\\\alpha \\\\to \\\\beta $ is an open embedding whose image is retrocompact, and $ s \\\\subseteq \\\\alpha $ is a constructible set, then the image $ f(s) \\\\subseteq \\\\beta $ is also a constructible set.\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (X : LightCondSet)\\n  (h :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.val.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.IsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Triangulated\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Preadditive C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] : Prop\", \"doc\": \"A triangulated category is a pretriangulated category which satisfies\\nthe octahedron axiom (TR 4).\"}\n  {\"name\": \"CategoryTheory.IsTriangulated.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Triangulated\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Preadditive C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (octahedron_axiom : ∀ {X₁ X₂ X₃ Z₁₂ Z₂₃ Z₁₃ : C} {u₁₂\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsTriangulated.octahedron_axiom\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Triangulated\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Preadditive C} {inst✝² : CategoryTheory.Limits.HasZeroObject C} {inst✝³ : CategoryTheory.HasShift C ℤ} {inst✝⁴ : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive} {inst✝⁵ : CategoryTheory.Pretriangulated C} \", \"doc\": \"the octahedron axiom (TR 4)\"}\n  {\"name\": \"CategoryTheory.IsTriangulated.mk'\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Triangulated\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Preadditive C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (h : ∀ ⦃X₁' X₂' X₃' : C⦄ (u₁₂' : X₁' ⟶ X₂') (u₂₃' : X\", \"doc\": \"Constructor for `IsTriangulated C` which shows that it suffices to obtain an octahedron\\nfor a suitable isomorphic diagram instead of the given diagram.\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instId\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] : (CategoryTheory.Functor.id C).IsTriangulated\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"A functor which commutes with the shift by `ℤ` is triangulated if\\nit sends distinguished triangles to distinguished triangles.\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Prea\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isTriangulated_of_iso\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Prea\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isTriangulated_iff_of_iso\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Prea\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedLowerShriek|rightDerivedLowerShriek|IsTriangulated",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"18\", \"text\": \"we introduce a typeclass `P.IsTriangulated` to express that `P`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"29\", \"text\": \"In the definition of `P.IsTriangulated`, we do not assume that the predicate\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"63\", \"text\": \"class IsTriangulatedClosed₁ : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"69\", \"text\": \"class IsTriangulatedClosed₂ : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"line\": \"75\", \"text\": \"class IsTriangulatedClosed₃ : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"90\", \"text\": \"instance (L : C ⥤ D) (F : D ⥤ A) [L.CommShift ℤ] [L.IsTriangulated] [F.IsHomological] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"117\", \"text\": \"instance : F.homologicalKernel.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"122\", \"text\": \"  toIsTriangulatedClosed₂ :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"123\", \"text\": \"    ObjectProperty.IsTriangulatedClosed₂.mk' (fun T hT h₁ h₃ n ↦\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"157\", \"text\": \"    [L.CommShift ℤ] [L.IsTriangulated] [L.mapArrow.EssSurj] (F : D ⥤ A)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean\", \"line\": \"43\", \"text\": \"instance (P : ObjectProperty C) [P.IsTriangulatedClosed₂] : P.op.IsTriangulatedClosed₂ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean\", \"line\": \"46\", \"text\": \"    obtain ⟨X, hX, ⟨e⟩⟩ := P.ext_of_isTriangulatedClosed₂' _ hT h₃ h₁\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean\", \"line\": \"49\", \"text\": \"instance (P : ObjectProperty Cᵒᵖ) [P.IsTriangulatedClosed₂] : P.unop.IsTriangulatedClosed₂ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean\", \"line\": \"51\", \"text\": \"    obtain ⟨X, hX, ⟨e⟩⟩ := P.ext_of_isTriangulatedClosed₂' _ (op_distinguished _ hT) h₃ h₁\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean\", \"line\": \"54\", \"text\": \"instance (P : ObjectProperty C) [P.IsTriangulated] : P.op.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"line\": \"56\", \"text\": \"instance : P.rightOrthogonal.IsTriangulatedClosed₂ :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"line\": \"61\", \"text\": \"instance : P.leftOrthogonal.IsTriangulatedClosed₂ :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"line\": \"66\", \"text\": \"instance [P.IsStableUnderShift ℤ] : P.rightOrthogonal.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"line\": \"68\", \"text\": \"instance [P.IsStableUnderShift ℤ] : P.leftOrthogonal.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"line\": \"70\", \"text\": \"example [P.IsTriangulated] : P.rightOrthogonal.IsTriangulated := inferInstance\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"246\", \"text\": \"scoped instance functor_isTriangulated_op [F.IsTriangulated] : F.op.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"259\", \"text\": \"lemma isTriangulated_of_op [F.op.IsTriangulated] : F.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"272\", \"text\": \"lemma op_isTriangulated_iff : F.op.IsTriangulated ↔ F.IsTriangulated :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"line\": \"273\", \"text\": \"  ⟨fun _ ↦ F.isTriangulated_of_op, fun _ ↦ inferInstance⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Triangulated.lean\", \"line\": \"305\", \"text\": \"class IsTriangulated : Prop where\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactification open extension by zero and right derived proper pushforward defines an exact triangulated functor on equivariant constructible complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an abelian category $\\\\mathcal{A}$, a triangulated functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that commutes with integer-indexed shifts,\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological.mk'\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"A functor $ F : C \\to A $ between a pretriangulated category $ C $ (with integer shifts, zero object, and preadditive structure) and an abelian category $ A $ is homological if it preserves zero morphi\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological.exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} {inst : CategoryTheory.Category.{v_1, u_1} C} {inst_1 : CategoryTheory.HasShift C ℤ}\\n  {inst_2 : CategoryTheory.Category.{v_3, u_3} A} {F : CategoryTheory.Functor C A}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject C} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5\", \"doc\": \"For a homological functor $ F : C \\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, the image under $ F $\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"{C : Type u_1} →\\n  {A : Type u_3} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.HasShift C ℤ] →\\n        [inst_2 : CategoryTheory.Category.{v_3, u_3} A] →\\n          CategoryTheory.Functor C A →\\n            [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n     \", \"doc\": \"A functor $ F : C \\\\to A $ is homological if it satisfies the conditions required for homological functors between a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadd\"}\n  {\"name\": \"CategoryTheory.Functor.mapExactFunctor_smul\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}^n(F(X), F(Y)\"}\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"Given an additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories is triangulated. This means it commu\"}\n  {\"name\": \"CategoryTheory.Functor.map_distinguished_exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : C \\\\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, and for any distingu\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor between pretriangulated categories (commuting with integer-parameterized shifts, preserving preadditive structure, and respecting zero \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported direct image is a triangulated functor on Weil complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.HasShift C ℤ] →\\n          [inst_3 : CategoryTheory.HasShift D ℤ] →\\n            (F : CategoryTheory.Functor C D) →\\n         \", \"doc\": \"A functor $ F : C \\to D $ between pretriangulated categories that commutes with the integer-parameterized shift operation, preserves the preadditive structure, and respects the pretriangulated category\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasShift C ℤ]\\n  [inst_3 : CategoryTheory.HasShift D ℤ] {F : CategoryTheory.Functor C D} [inst_4 : F.CommShift ℤ]\\n  [inst_5 : CategoryTheory.Limits.\", \"doc\": \"If a functor $ F : C \\to D $ between pretriangulated categories maps every distinguished triangle in $ C $ to a distinguished triangle in $ D $, then $ F $ is a triangulated functor.\"}\n  {\"name\": \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated\", \"type\": \"(G : C ⥤ D) [G.Additive] : (G.mapHomotopyCategory (ComplexShape.up ℤ)).IsTriangulated\", \"doc\": \"Given an additive functor $ G : C \\to D $ between preadditive categories $ C $ and $ D $, the induced functor between their homotopy categories of integer-indexed cochain complexes is triangulated. Thi\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \"[F.IsTriangulated] : F.Additive\", \"doc\": \"Any triangulated functor between pretriangulated categories is additive, meaning it preserves the addition of morphisms. Specifically, if $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor \"}\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \": F.mapDerivedCategory.IsTriangulated\", \"doc\": \"Given an additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories is triangulated. This means it commu\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.rec\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.HasShift C ℤ] →\\n          [inst_3 : CategoryTheory.HasShift D ℤ] →\\n            {F : CategoryTheory.Functor C D} →\\n         \", \"doc\": \"For any property $ P $ of triangulated functors $ F : C \\to D $, if $ P $ holds for all functors that map distinguished triangles in $ C $ to distinguished triangles in $ D $, then $ P $ holds for all \"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instComp\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \"[F.IsTriangulated] [G.IsTriangulated] : (F ⋙ G).IsTriangulated\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and triangulated functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, their composition $G \\\\circ F$ i\"}\n  {\"name\": \"CategoryTheory.Functor.mapTriangulatedSpectralObject\", \"module\": \"Mathlib.CategoryTheory.Triangulated.SpectralObject\", \"type\": \"(F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] (ι : Type*) [Category* ι] :\\n  Triangulated.SpectralObject C ι ⥤ Triangulated.SpectralObject D ι\", \"doc\": \"Given a triangulated functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between pretriangulated categories and an indexing category $ \\\\iota $, this constructs a functor from the category of spectral objects \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported direct image preserves bounded constructible native derived Weil complexes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.IsConstructible.image_of_isClosedEmbedding, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.preimage, chevalley_mvPolynomial_mvPolynomial, rieszContentAux_image_nonempty, Topology.IsConstructible.preimage_of_isClosedEmbedding",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|WeilComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived compact support functor on Frobenius equivariant adic complexes is triangulated",
+   "results": "8 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.op_isTriangulated_iff, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.isTriangulated_of_op, DerivedCategory.instIsTriangulated, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.IsTriangulated.instAdditive",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-compact-image-localization-triangle",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package clause 3, applying compact support to the localization triangle: the native derived realization of lem-zl-morphism-open-closed-reduction. The created.item chain ends at the maintainer seed, so blueprint_refs.py ancestor returns None. The steps implement exact j!, bounded proper-image heart finiteness followed by finite truncations, and restriction of the ambient triangulated composite.",
+   "via": [
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-shriek-triangulated",
+  "worker": "stage1",
+  "summary": "Replaced the rejected attachment by a six-step split of the actual native equivariant derived construction: Nagata geometry, weak-Serre inherited triangulation, exact open extension, proper-heart finiteness and bounded truncation devissage, then restriction. Three smaller statement-only native sheaf lemmas expose the unresolved ingredients; no hypothesis or conclusion changed. The source description no longer claims transitive sorry-freeness. Repair of the landing return: re-read the current native framework, explicitly retain its covering-member-dependent ranks, and revalidate all four uses of that definition against its current statement; refreshed their verbatim citation excerpts. The delivery tool rebases this overlay on current origin/sheaf-dag.",
+  "blueprint": "prop-functor-package clause 3, applying compact support to the localization triangle: the native derived realization of lem-zl-morphism-open-closed-reduction. The created.item chain ends at the maintainer seed, so blueprint_refs.py ancestor returns None. Realizes prop-functor-package clause 3 at the application of compact support, following its compactification and finiteness route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic geometry or derived-category tool used to verify the native compactification construction; it does not replace any unit-level six-functor step."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic geometry or derived-category tool used to verify the native compactification construction; it does not replace any unit-level six-functor step."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic geometry or derived-category tool used to verify the native compactification construction; it does not replace any unit-level six-functor step."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic geometry or derived-category tool used to verify the native compactification construction; it does not replace any unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic geometry or derived-category tool used to verify the native compactification construction; it does not replace any unit-level six-functor step."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic geometry or derived-category tool used to verify the native compactification construction; it does not replace any unit-level six-functor step."
+   },
+   {
+    "node": "lem-sfb-degreewise-bounded-devissage",
+    "why": "Generic geometry or derived-category tool used to verify the native compactification construction; it does not replace any unit-level six-functor step."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic geometry or derived-category tool used to verify the native compactification construction; it does not replace any unit-level six-functor step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-type-composition-base-change",
+  "thm-nagata-compactification",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-degreewise-bounded-devissage",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-7c3f9a924",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-7c3f9a924 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, the current framework def (split and reviewed by Q13) and Lean Compactification/Defs.lean 59-81 and LowerShriek.lean 118-133. The statement and stmt_deps are unchanged from base, where the item is unsplit; it is still unsplit in clones/live and clones/side-live. There is no repair note and no SGA. This re-delivery after the changed-dependency return lost the earlier FIX of run 8ba04657 (the three new nodes are unchanged, but item steps 1 and 3 reverted). C4/E1, step 1: it takes 'j quasi-compact open immersion' from def-nagata-compactification. The framework's compactification is def-weil-compactifications-refinements, i.e. Lean Compactification, whose docstring says i need not be quasi-compact, and the main-20261015 blueprint_update drops quasi-compactness too. The open node needs j quasi-compact. Re-fixed: Z is finite type over k0, so Noetherian (lem-weil-pbc-finite-type-over-noetherian), so every open is quasi-compact and j is quasi-compact (as in LowerShriek.lean 125-133). C1, step 3: added lem-sf-exact-functor-derived-triangulated for D(j0!). Step 4: the dévissage hypothesis is now stated for every M in C_Z, not only H^q(J). proof_deps recomputed. Steps 2, 5 and 6 are correct against the current framework (variable ranks, WC^der = D^b_C, Rh0! = Rp̄_* ∘ termwise ā_!). The new nodes are true, self-contained, statement-only, not duplicates and strictly smaller than the item, so this is not a relabelling. Tested: zero, empty open, identity, J=0, and the disjoint union of P^n that shows target quasi-compactness is needed. I accept the 8 generic tool_uses. Advisory: item source.place still claims all proofs are present, though the report says it was corrected (not split-owned).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.LowerShriek",
+  "declaration": "AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerShriek",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerShriek",
+   "AlgebraicGeometry.instIsTriangulatedWeilComplex",
+   "AlgebraicGeometry.instCommShiftWeilComplexDerivedLowerShriekInt",
+   "AlgebraicGeometry.instIsTriangulatedWeilComplexDerivedLowerShriek"
+  ],
+  "statement": "theorem WeilComplex.objectProperty_rightDerivedLowerShriek (f : X ⟶ Y)\n    [f.IsOver (Spec (CommRingCat.of k₀))] [hf : HasCompactification f]\n    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]\n    (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X))\n    (hK : WeilComplex.objectProperty k₀ l X K) :\n    WeilComplex.objectProperty k₀ l Y ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f\n      (HasCompactification.compactification f)).obj K)",
+  "branch": "slopmaster2",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "The existing declarations jointly give every clause: preservation (LowerShriek.lean:115), inherited triangulation (Category.lean:245), the canonical derived shift comparison (LowerShriek.lean:201), and preservation of distinguished triangles with that comparison (LowerShriek.lean:210). The source locally-finite-type hypothesis in the last instance follows by composition from f and the target structure map, using comp_over. HasCompactification in the preservation theorem is supplied by hasCompactification_of_over under exactly the stated geometry. No duplicate module or additional hypothesis is introduced. All four declaration names and this specialization were compiled on the live server."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-feb6a8b93",
+  "group": "ND",
+  "result": "pass",
+  "note": "Existing attachment to WeilConjectures.WeilSheaf.LowerShriek; snapshot differs from side-live only in lean. objectProperty_rightDerivedLowerShriek (LowerShriek.lean:115-142) gives ambient preservation for the actual extensionByZero.mapDerivedCategory ⋙ lowerStar.rightDerivedFunctor with the same chosen compactification (HasCompactification is a Prop; matches derivedLowerShriek via hasCompactification_of_over). instIsTriangulatedWeilComplex (Category.lean:243-247) is the inherited FullSubcategory triangulation; the CommShift (201-207) and IsTriangulated (210-217) lift instances give the shift comparison and triangle preservation, and mapTriangle's mor3 sends the last arrow through commShiftIso 1. Hypotheses: h sep/qc/lft and W qc/qs/lft over k0; the X-lft instance argument follows by comp_over, so nothing stronger is assumed. All 4 names are in the published oleans; lean.statement is verbatim with LowerShriek.lean. No other node owns these declarations. Edge cases checked: empty scheme, K=0, identity, all shifts, varying ranks, universe u, ⊔P^n counterexample excluded. Advisories: the H11 second-reading section is policy text; item source.place still says 'all proofs present' (stage-1 field). No fixes, no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerShriek",
+    "AlgebraicGeometry.instIsTriangulatedWeilComplex",
+    "AlgebraicGeometry.instCommShiftWeilComplexDerivedLowerShriekInt",
+    "AlgebraicGeometry.instIsTriangulatedWeilComplexDerivedLowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerShriek",
+     "module": "WeilConjectures.WeilSheaf.LowerShriek",
+     "lines": [
+      107,
+      142
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.instIsTriangulatedWeilComplex",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      243,
+      246
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.instCommShiftWeilComplexDerivedLowerShriekInt",
+     "module": "WeilConjectures.WeilSheaf.LowerShriek",
+     "lines": [
+      201,
+      207
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.instIsTriangulatedWeilComplexDerivedLowerShriek",
+     "module": "WeilConjectures.WeilSheaf.LowerShriek",
+     "lines": [
+      209,
+      217
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": true
+    }
+   ]
+  }
+ }
+}

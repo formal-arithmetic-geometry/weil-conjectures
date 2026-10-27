@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-space-fixed-base-eventually-separated",
+ "kind": "statement",
+ "title": "Eventual separatedness over a fixed quasi-separated algebraic-space base",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme. A morphism is quasi-compact if its pullback to every affine scheme has quasi-compact source; quasi-separated means that its diagonal is quasi-compact, and a space is quasi-separated when its absolute diagonal is quasi-compact. A closed immersion is representable and is a closed immersion on each scheme test [def-weil-closed-immersion]; separated means that the relative diagonal is a closed immersion. A morphism is affine if its pullback to every affine scheme is an affine scheme. Let $Y$ be a quasi-separated algebraic space, let $I$ be a small nonempty directed partially ordered set, and let $(X_a\\to Y)_{a\\in I}$ be an inverse system of quasi-compact quasi-separated algebraic spaces with affine transition morphisms $X_b\\to X_a$ for $a\\le b$. Let a cone $X\\to X_a$ exhibit $X=\\varprojlim_a X_a$ in algebraic spaces over $Y$. If $X\\to Y$ is separated, there exists $a_0\\in I$ such that $X_a\\to Y$ is separated for every $a\\ge a_0$. No finite-presentation hypothesis on the stage morphisms and no quasi-compactness hypothesis on $Y$ are imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 086X (lemma-eventually-separated)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose $o\\in I$ and an affine surjective etale atlas $U_o\\to X_o$ by [lem-trf-space-qc-finite-affine-atlas-refinement]. Apply [lem-sfb-space-fixed-base-atlas-relation-tower] to $(X_a\\to Y)$. Retain its notation $U_a,U,R_a,R,s_a,t_a,s,t,j_a,u_{ba}$. In particular all mixed products used below are quasi-compact separated schemes, the relation projections are of finite type, and the atlas tower has limit $U$. This uses quasi-separatedness of $Y$, not quasi-compactness or finite presentation over $Y$.",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-sfb-space-fixed-base-atlas-relation-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 086X (lemma-eventually-separated), reduction to Tag 084T (lemma-descend-separated); Tag 084T first paragraph, applied directly to relative mixed products over Y."
+   }
+  },
+  {
+   "text": "The map $j=(s,t):R\\to U\\times_YU$ is the scheme test of the closed relative diagonal of $X\\to Y$, so is a closed immersion. Indeed on every test scheme the pullback of the diagonal consists of pairs of atlas sections with equal image in $X$, precisely the sections of $R$; these identifications commute with restriction and preserve both projections. Fix the index $o$ and consider $V_a=U_a\\times_YU$ over the scheme $U$ by its second projection. The helper gives affine transitions, quasi-compact stages and limit $U\\times_YU$ (use its arbitrary affine $W$ clause with $W=U$, and interchange factors). Since $R\\to U$ is of finite type, [pqf-lem-limit-immersion-descends] applied to $j$ gives $a\\ge o$ such that\n$$h_{a,\\infty}:R\\longrightarrow U_a\\times_YU,\\qquad r\\longmapsto(u_a s(r),t(r))$$\nis a closed immersion. Here $u_a:U\\to U_a$ is the limit projection.",
+   "uses": [
+    "lem-sfb-space-fixed-base-atlas-relation-tower",
+    "pqf-lem-limit-immersion-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), sentence applying limits.tex Tag 081B (lemma-finite-type-eventually-closed), clause (1), with relative products over Y."
+   }
+  },
+  {
+   "text": "Fix this $a$. Over the affine scheme $U_a$ using the second coordinate, take the tower $U_b$ for $b\\ge a$ with limit $U$. The helper identifies the morphisms $h_{a,b}:R_b\\to U_a\\times_YU_b$ with the base changes of $j_a:R_a\\to U_a\\times_YU_a$ along $U_b\\to U_a$, and its limit base change with $h_{a,\\infty}$. The schemes $U_a$, $R_a$, and $U_a\\times_YU_a$ are quasi-compact and quasi-separated; $j_a$ is locally of finite type. Thus every hypothesis of [lem-weil-pbc-descend-closed-immersion] holds. Obtain $b\\ge a$ such that $h_{a,b}$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-space-fixed-base-atlas-relation-tower",
+    "lem-weil-pbc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), application of limits.tex Tag 01ZP (lemma-descend-closed-immersion-finite-presentation)."
+   }
+  },
+  {
+   "text": "Let $q:U_b\\times_YU_b\\to U_a\\times_YU_b$ be $(u_{ba},1)$. It is affine by base change of the affine morphism $u_{ba}$ [lem-sfb-space-affine-locality], and consequently separated as a scheme morphism [lem-weil-pbc-affine-morphism-permanence]. Since $q\\circ j_b=h_{a,b}$ is a closed immersion, [lem-weil-pbc-closed-immersion-from-composite] gives that $j_b:R_b\\to U_b\\times_YU_b$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-from-composite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), final sentence; separated cancellation for closed immersions spells out the inference."
+   }
+  },
+  {
+   "text": "The scheme map $U_b\\times_YU_b\\to X_b\\times_YX_b$ is surjective etale: factor it as the base change of the atlas on the first factor followed by its base change on the second factor, using [lem-trf-space-fibre-products-etale-covers]. Representable etale maps are tested on schemes [def-trf-algebraic-space], and composition is etale by [lem-weil-pbc-etale-composition-cancellation]. The pullback of $\\Delta_{X_b/Y}$ by this atlas is $j_b$: both sheaves on a test scheme consist of pairs of atlas sections with equal image in $X_b$. Apply [lem-sfb-space-closed-immersion-atlas-locality] to this diagonal to conclude that it is a closed immersion. Hence $X_b\\to Y$ is separated.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-space-closed-immersion-atlas-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 084T and 086X, descent of the closed diagonal from an etale scheme cover; spaces-morphisms.tex Tag 03M4 (lemma-closed-immersion-local)."
+   }
+  },
+  {
+   "text": "For every $c\\ge b$, the affine transition $X_c\\to X_b$ is separated by [lem-sfb-space-affine-locality]. Compose it with the separated morphism $X_b\\to Y$ using [lem-sfb-space-separated-fp-composition]. Thus $X_c\\to Y$ is separated for all $c\\ge b$, and $a_0=b$ has the required property.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 086X (lemma-eventually-separated), all sufficiently large stages; spaces-morphisms.tex Tags 03KQ (lemma-composition-separated) and 03WH (lemma-composition-affine)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-sfb-space-fixed-base-atlas-relation-tower",
+  "pqf-lem-limit-immersion-descends",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-sfb-space-affine-locality",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-from-composite",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-space-closed-immersion-atlas-locality",
+  "lem-sfb-space-separated-fp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tags 086X and 084T: write the proof of 084T directly with relative mixed products over the quasi-separated Y; this expands the source affine-base reduction without introducing a finite-presentation hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of quasi compact quasi separated algebraic spaces with affine transition maps separated over a quasi separated fixed base has eventually separated stages",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {j \", \"doc\": \"Given a cofiltered or empty category $\\\\mathcal{I}$ and a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes where all transition morphisms are affine, let $j$ be an object in $\\\\mathcal{I}$. Suppose fo\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X],\\n  AlgebraicGeometry.QuasiCompact\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any quasi-separated scheme $ X $, the diagonal morphism $ X \\to X \\times X $ (constructed as the product of the identity morphism with itself) is quasi-compact. This follows from the definition of q\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separatedness descends to a stage in a directed inverse system of algebraic spaces with affine transition morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Presieve.IsSeparatedFor\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} (P : CategoryTheory.Functor Cᵒᵖ (Type w)) (R : CategoryTheory.Presieve X) : Prop\", \"doc\": \"A presheaf is separated for a presieve if there is at most one amalgamation.\"}\n  {\"name\": \"CategoryTheory.Presieve.IsSheafFor.isSeparatedFor\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X : C} {R : CategoryTheory.Presieve X} : CategoryTheory.Presieve.IsSheafFor P R → CategoryTheory.Presieve.IsSeparatedFor P R\", \"doc\": \"If `P` is a sheaf for `R`, it is separated for `R`.\"}\n  {\"name\": \"CategoryTheory.Presieve.isSeparatedFor_iff_generate\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X : C} {R : CategoryTheory.Presieve X} : CategoryTheory.Presieve.IsSeparatedFor P R ↔ CategoryTheory.Presieve.IsSeparatedFor P (CategoryTheory.Sieve.generate R).arrows\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presieve.isSeparatedFor_iso\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X : C} {R : CategoryTheory.Presieve X} {P' : CategoryTheory.Functor Cᵒᵖ (Type w)} (i : P ≅ P') (hP : CategoryTheory.Presieve.IsSeparatedFor P R) : CategoryTheory.Presieve.IsSeparatedFor P' R\", \"doc\": \"The property of being separated for some presieve is preserved under isomorphisms.\"}\n  {\"name\": \"CategoryTheory.Presieve.IsSeparatedFor.of_singleton_comp\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X Y S : C} (p : Y ⟶ X) (f : X ⟶ S) (h : CategoryTheory.Presieve.IsSeparatedFor P (CategoryTheory.Presieve.singleton (CategoryTheory.CategoryStruct.comp p f))) : CategoryTheory.Presieve.IsSeparatedFor P (Ca\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presieve.IsSeparatedFor.isSheafFor\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X : C} {R : CategoryTheory.Presieve X} (t : CategoryTheory.Presieve.IsSeparatedFor P R) : (∀ (x : CategoryTheory.Presieve.FamilyOfElements P R), x.Compatible → ∃ t, x.IsAmalgamation t) → CategoryTheory.Pre\", \"doc\": \"If `P` is separated for `R` and every family has an amalgamation, then `P` is a sheaf for `R`.\"}\n  {\"name\": \"CategoryTheory.Presieve.isSeparatedFor_and_exists_isAmalgamation_iff_isSheafFor\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X : C} {R : CategoryTheory.Presieve X} : (CategoryTheory.Presieve.IsSeparatedFor P R ∧ ∀ (x : CategoryTheory.Presieve.FamilyOfElements P R), x.Compatible → ∃ t, x.IsAmalgamation t) ↔ CategoryTheory.Presiev\", \"doc\": \"`P` is a sheaf for `R` iff it is separated for `R` and there exists an amalgamation.\"}\n  {\"name\": \"CategoryTheory.Presieve.IsSeparatedFor.of_mono\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P Q : CategoryTheory.Functor Cᵒᵖ (Type w)} {X : C} {R : CategoryTheory.Presieve X} (f : P ⟶ Q) [CategoryTheory.Mono f] (h : CategoryTheory.Presieve.IsSeparatedFor Q R) : CategoryTheory.Presieve.IsSeparatedFor P R\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presieve.isSeparatedFor_top\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} (P : CategoryTheory.Functor Cᵒᵖ (Type w)) : CategoryTheory.Presieve.IsSeparatedFor P ⊤\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presieve.isSeparatedFor_singleton\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X Y : C} {f : X ⟶ Y} : CategoryTheory.Presieve.IsSeparatedFor P (CategoryTheory.Presieve.singleton f) ↔ Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (P.map f.op))\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presieve.IsSeparatedFor.ext\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {P : CategoryTheory.Functor Cᵒᵖ (Type w)} {X : C} {R : CategoryTheory.Presieve X} (hR : CategoryTheory.Presieve.IsSeparatedFor P R) {t₁ t₂ : P.obj (Opposite.op X)} (h : ∀ ⦃Y : C⦄ ⦃f : Y ⟶ X⦄, R f → (CategoryTheory.ConcreteCategory.hom (P.map f.op))\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presieve.IsSeparated\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafOfTypes\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (P : CategoryTheory.Functor Cᵒᵖ (Type w)) : Prop\", \"doc\": \"A presheaf is separated for a topology if it is separated for every sieve in the topology.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|exists_isSeparated|eventually.*separated",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Eventual relative separatedness in an inverse limit of algebraic spaces over a fixed quasi separated base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [hY : QuasiSeparatedSpace Y] [QuasiSeparated f] : QuasiSeparatedSpace X\", \"doc\": \"If $ Y $ is a quasi-separated topological space and the morphism $ f: X \\\\to Y $ of schemes is quasi-separated, then the underlying topological space of $ X $ is also quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiSeparated f ↔ QuasiSeparatedSpace ↥X\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is quasi-separated, then a morphism $f: X \\\\to Y$ is quasi-separated if and only if $X$ is a quasi-separated topological space.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of quasi compact quasi separated algebraic spaces with affine transition maps separated over a quasi separated fixed base has eventually separated stages",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {j \", \"doc\": \"Given a cofiltered or empty category $\\\\mathcal{I}$ and a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes where all transition morphisms are affine, let $j$ be an object in $\\\\mathcal{I}$. Suppose fo\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X],\\n  AlgebraicGeometry.QuasiCompact\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any quasi-separated scheme $ X $, the diagonal morphism $ X \\to X \\times X $ (constructed as the product of the identity morphism with itself) is quasi-compact. This follows from the definition of q\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme affine-limit results or scheme morphism properties; no algebraic-space eventual separatedness theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative separatedness over a quasi separated algebraic space descends to a stage in an affine inverse system without finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [hY : QuasiSeparatedSpace Y] [QuasiSeparated f] : QuasiSeparatedSpace X\", \"doc\": \"If $ Y $ is a quasi-separated topological space and the morphism $ f: X \\\\to Y $ of schemes is quasi-separated, then the underlying topological space of $ X $ is also quasi-separated.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme affine-limit results or scheme morphism properties; no algebraic-space eventual separatedness theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|exists_isSeparated|eventually.*separated",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme affine-limit results or scheme morphism properties; no algebraic-space eventual separatedness theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-separated-finite-type-fp-envelope",
+  "date": "2026-10-23",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, final sentence: separatedness of one closed finite-presentation stage",
+   "via": [
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fixed-base-eventually-separated",
+  "worker": "stage1",
+  "group": "Q119",
+  "summary": "Statement unchanged. Read 086X and 084T and both scheme closed-immersion inputs. Gave the atlas proof directly over Y using its quasi-separated diagonal; one new statement-only atlas-relation helper records the genuinely geometric finiteness and mixed comparison. Reused 081B(1), 01ZP, affine permanence, closed-immersion cancellation and atlas descent. In particular did not misapply 0851, which assumes finite presentation in its current DAG node.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor reports None); preserve that live ancestry. This is the 086X prerequisite of the 0873 separated finite-presentation envelope below the direct-image alteration/moduli branch described in blueprint.from.place. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3); this is a supporting geometric lemma, not a change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "pqf-lem-limit-immersion-descends",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "lem-sfb-space-affine-locality",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-from-composite",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "lem-sfb-space-closed-immersion-atlas-locality",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   },
+   {
+    "node": "lem-sfb-space-separated-fp-composition",
+    "why": "Generic algebraic-space atlas, affine-morphism or scheme closed-immersion tool used exactly in the proof step; no competing construction in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "pqf-lem-limit-immersion-descends",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-sfb-space-affine-locality",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-from-composite",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-space-closed-immersion-atlas-locality",
+  "lem-sfb-space-separated-fp-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-42c3a6610",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-42c3a6610 (reviewer sub-agent of L); spot-checked: I read Stacks 086X and 084T, limits 081B(1) and 01ZP (lft form, Situation 081D) and 07SF, and checked the item's statement against 086X hypothesis by hypothesis: it matches and is not weakened. The statement and stmt_deps equal those on live and side-live, where the item is still unsplit with no repair note, so this is not superseded. Steps checked: (1) atlas refinement gives an affine atlas because X_o is qc. (2) j is the pullback of Δ_{X/Y}, so it is closed; 081B(1) applies over base U with stages U_a×_Y U (qc, affine transitions, limit U×_Y U) and t of finite type. (3) 01ZP applies over (U_b)_{b≥a}, S_0=U_a: R_b ≅ R_a×_{t_a,U_a}U_b and (U_a×_Y U_a)×_{U_a}U_b = U_a×_Y U_b, so f_b = h_{a,b} and f = h_{a,∞}; j_a is lft. (4) q = u_{ba}×1 is affine, hence separated, and q∘j_b = h_{a,b}, so closed-from-composite applies. (5) U_b×_Y U_b → X_b×_Y X_b is surjective étale as two base changes of the atlas; the pullback of the diagonal is j_b; atlas locality gives a closed diagonal. (6) Affine implies separated, and separated morphisms compose. The new helper lem-sfb-space-fixed-base-atlas-relation-tower is true: mixed products are schemes, qc and separated, via the representable qc Δ_Y into an affine product, and the isomorphisms hold on sections. I tested it on Z_o empty, a constant tower, Y = Spec Z, a non-qc Y and a nonseparated Z_a. It is self-contained and statement-only; it does not restate the item, since all descent work stays in the item's steps. It duplicates none of 0851, 01ZQ, 0850, 07SF or 03HK (no 084T node exists). The h_{a,∞} identification is one line from the helper's limit isomorphism that 'preserves the displayed maps', so no fix was needed. Advisory only: 'separated scheme' carries no citation. Batch-5: the def-trf-algebraic-space and 02X2/03H6 trf nodes are generic algebraic-space foundations and the three sfb nodes reach trf only through the definition, so none is a step of the trace formula or Poincaré duality; accepted. The eleven tool_uses are accepted as generic tools and the unit's route is unchanged. The null blueprint.from.node is inherited from the base node. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFixedBaseEventuallySeparated",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.eventually_separated_over_fixed_base_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFixedBaseEventuallySeparated.lean",
+  "statement": "theorem eventually_separated_over_fixed_base_of_isLimit (Y : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (hY : IsAbsolutelyQuasiSeparated Y) {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Over Y) (c : Cone D) (hc : IsLimit c) (hqc : ∀ i : I, ∃ (U : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (a : yoneda.obj U ⟶ (D.obj (op i)).left.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : ∀ i : I, IsAbsolutelyQuasiSeparated (D.obj (op i)).left) (haff : ∀ (i j : I) (h : i ≤ j), MapIsAffine (D.map (homOfLE h).op).left) (hsep : MapIsSeparated c.pt.hom) : ∃ a₀ : I, ∀ a : I, a₀ ≤ a → MapIsSeparated (D.obj (op a)).hom",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c44db954",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Item lean record + one sorry-theorem module; stmt_deps add the landed defs IsAbsolutelyQuasiSeparated, MapIsAffine, MapIsSeparated. Clause-by-clause vs node and Stacks 086X (spaces-limits l.1324): absolutely quasi-separated Y; small nonempty directed poset I; D : Iᵒᵖ ⥤ Over Y with correct transition direction; quasi-compact as the node's explicit qc-scheme surjective étale atlas; absolutely quasi-separated stages; MapIsAffine transitions; IsLimit in Over Y; MapIsSeparated hypothesis and conclusion; ∃a₀ ∀a≥a₀. No fp and no qc-of-Y hypothesis; edge cases (empty, constant, non-qc Y) admitted; universes consistent. lean.statement verbatim in file; docstrings carry the source tag, blueprint tag and 6 proof steps; plain imports = proof_dep modules. Advisory: PartialOrder follows the node wording (brief prefers Preorder); second reading is a direct-delivery placeholder. Not recompiled per instruction."
+ }
+}

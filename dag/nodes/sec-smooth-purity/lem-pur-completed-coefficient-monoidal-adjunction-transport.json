@@ -1,0 +1,271 @@
+{
+ "id": "lem-pur-completed-coefficient-monoidal-adjunction-transport",
+ "kind": "statement",
+ "title": "Constant/completed coefficient transport preserves completed tensor and adjunction normalization",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A$, a uniformizer $t$, and $A_n=A/(t^n)$, $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be any morphism of schemes on which $\\ell$ is invertible, using small pro-etale sites [def-weil-scheme-morphism-properties, def-weil-pbc-proetale-site]. Put $R_W=\\lim_n(A_n)_W$ and let $\\underline A_W$ be the constant ring sheaf [def-weil-completed-integral-coefficients, def-weil-pbc-constant-sheaf]. Work in ordinary unbounded module-sheaf derived categories, with exact coefficient restriction $U_W:D(R_W)\\to D(\\underline A_W)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-pc-sheaf-restrict-scalars]. Let $C^R_W,C^A_W$ be the Koszul derived-completion reflectors with their actual units $\\eta^R,\\eta^A$; identify them with total limit of the strict finite-reduction towers by [lem-weil-pbc-ringed-koszul-completion-reflector, lem-weil-pbc-constant-completion-equivalence]. Write $\\widehat\\otimes_R,\\widehat f_R^*$ for the quotient-tower tensor and pullback [def-pur-integral-derived-operations]; on constant coefficients put $M\\widehat\\otimes_A N=C^A_W(M\\otimes^L_{\\underline A_W}N)$ and $\\widehat f_A^*=C^A_Xf^{-1}$. Ordinary direct images are $F_R=Rf_{*,R}$ and $F_A=Rf_{*,\\underline A}$, and $\\kappa:U_YF_R\\xrightarrow{\\sim}F_AU_X$ is the canonical derived-composition comparison [lem-pur-completed-coefficient-pushforward-comparison]. Completed adjunctions use the ordinary adjunction followed by the completion-reflector Hom bijection [lem-sbc-reflector-adjunction-unit-formulas].\n\nOn derived-complete inputs there are specified natural isomorphisms\n$$a_{M,N}:U_W(M\\widehat\\otimes_R N)\\xrightarrow{\\sim}U_WM\\widehat\\otimes_A U_WN,\\qquad b_H:\\widehat f_A^*U_YH\\xrightarrow{\\sim}U_X\\widehat f_R^*H.$$\nThey are induced on the whole strict quotient systems by derived tensor reassociation, the finite change-of-rings comparisons and the scalar-unit map $x\\mapsto1\\otimes x$, respectively, before total limit; their iterated versions are the substitution comparisons of [lem-pur-completed-operation-tower-substitution]. The maps $a$ identify the completed tensor associators, unitors and symmetry, and $b$ respects tensor/pullback comparisons and composition of pullbacks. Both identify the actual completion units under $U$.\n\nThe comparisons $b,\\kappa$ identify the specified completed adjunctions, not just the two pairs of functors. Explicitly, if $\\varepsilon_R^c,\\varepsilon_A^c$ are their counits, for every complete $M\\in D(R_X)$ one has\n$$U_X(\\varepsilon^c_{R,M})\\circ b_{F_RM}=\\varepsilon^c_{A,U_XM}\\circ\\widehat f_A^*(\\kappa_M).$$\nThe corresponding Hom bijections and units agree under $U$. The ordinary comparison underlying $b$ is the map $\\tau:f^{-1}U_Y\\to U_XLf_R^*$ of [lem-pur-ringed-coefficient-restriction-counit]; the equality is normalized by $\\varepsilon^c\\circ\\eta_{Lf^*M}=\\varepsilon$, so that it refers to these counits. No boundedness, constructibility or Tor-amplitude hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099I (lemma-restriction-derived-complete-equivalence) and 099K (lemma-pushforward-derived-complete-adjoint); agent refinement identifying the quotient-system monoidal comparisons and the actual completed counits, extracted from original item steps 7-8.",
+  "note": "The combined normalized transport assertion is agent-formulated; it is not the verbatim statement of either tag."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pur-integral-derived-operations",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-sbc-reflector-adjunction-unit-formulas",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "def-pur-completed-coefficient-tensor-transport-models",
+  "def-pur-completed-coefficient-adjunction-transport-models",
+  "def-pur-completed-coefficient-transport-expressions",
+  "def-pur-completed-coefficient-system-transport",
+  "def-pur-completed-operation-model-data",
+  "def-pur-completed-operation-comparison-data",
+  "def-pur-integral-operation-complex-models",
+  "def-pur-completed-coefficient-family-transport-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized construction theorem to obtain Transport with ExpressionSystemLaw and ExpressionSystemStructuralLaw, retaining its actual completion-unit and adjunction normalizations.",
+   "uses": [
+    "lem-pur-completed-coefficient-normalized-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove substitution by induction on expressions: identities give inputs and units; tensorator naturality combines the tensor cases; naturality of b gives pullback. Prove structural coherence by induction on StructuralMap: monoidal associativity and unitality, the braided square and b_composition handle generators; functoriality, naturality and cancellation of invertible maps handle contexts, composites and inverses. Combine these two identities with the constructed system laws.",
+   "uses": [
+    "def-pur-completed-coefficient-transport-expressions",
+    "def-pur-completed-coefficient-family-transport-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-coefficient-normalized-transport",
+  "def-pur-completed-coefficient-transport-expressions",
+  "def-pur-completed-coefficient-family-transport-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099I and 099K; construction separated from elementary expression induction, S4 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.?[Cc]omplet|[Cc]omplet.*[Cc]ounit|[Cc]omplet.*[Aa]djunction",
+   "results": "0 hits; ; inspected returned types: ordinary sheaf/category/module or classical completion results do not state the coherent derived-completion comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalFunctor",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.MonoidalFunctor'; inspected returned types: ordinary sheaf/category/module or classical completion results do not state the coherent derived-completion comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant to completed coefficient equivalence on derived complete sheaves preserves completed tensor and the derived pullback direct image adjunction with its counit",
+   "results": "8 hits; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.Sheaf.adjunction_counit_app_val, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CompHausLike.LocallyConstant.counit_app_val; inspected returned types: ordinary sheaf/category/module or classical completion results do not state the coherent derived-completion comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from completed adic coefficient sheaves to constant coefficients identifies completed tensor products, completed derived pullbacks, and the canonical adjunction counits via the quotient tower completion units",
+   "results": "8 hits; AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; inspected returned types: ordinary sheaf/category/module or classical completion results do not state the coherent derived-completion comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion|IsAdicComplete|DerivedCategory.*[Mm]onoidal|[Mm]onoidal.*DerivedCategory",
+   "results": "25 hits; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; inspected returned types: ordinary sheaf/category/module or classical completion results do not state the coherent derived-completion comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Equivalence",
+   "results": "2 hits; CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Adjunction.toEquivalence; inspected returned types: ordinary sheaf/category/module or classical completion results do not state the coherent derived-completion comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion restriction of scalars monoidal tensor pullback comparison compatible with adjunction counits",
+   "results": "8 hits: CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit, ModuleCat.RestrictionCoextensionAdj.counit', CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit_app, CategoryTheory.PullbackShift.adjunction_counit, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app;  Ordinary sheaf adjunctions, abstract categorical adjunctions, and classical finite-module adic completion do not state this unbounded completed-coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from completed coefficient ring sheaves to constant coefficients preserves completed derived tensor and pullback and the unit normalized pullback pushforward adjunction",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj;  Ordinary sheaf adjunctions, abstract categorical adjunctions, and classical finite-module adic completion do not state this unbounded completed-coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete module sheaves equivalence under flat coefficient extension with identical finite quotients is compatible with completed tensor and normalized adjunction",
+   "results": "8 hits: AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProductEquivOfPiFintype;  Ordinary sheaf adjunctions, abstract categorical adjunctions, and classical finite-module adic completion do not state this unbounded completed-coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_restrictFullyFaithful_counit_app|instIsMonoidalCounit|homEquiv_pullbackObjUnitToUnit|def ofTensorProduct|theorem ofTensorProductEquivOfFiniteNoetherian",
+   "results": "9 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean;  Ordinary sheaf adjunctions, abstract categorical adjunctions, and classical finite-module adic completion do not state this unbounded completed-coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-compactification-completed-realization",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-operation-reduction",
+   "place": "Final paragraph: all comparisons preserve tensor associativity maps and adjunction units/counits; original compactification-realization steps 7-8.",
+   "via": [
+    "lem-fix-compactification-completed-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-completed-coefficient-monoidal-adjunction-transport",
+  "worker": "stage1",
+  "summary": "Constructed the tensor and pullback comparisons on entire strict quotient systems, checked structural maps on common representatives, and proved compatibility of the specified completed adjunctions by the ordinary counit identity and injectivity of the actual reflector unit. Reused existing DAG lemmas throughout; no new nodes and no statement change.",
+  "blueprint": "Realizes the final paragraph of lem-fix-operation-reduction.proof.md (tensor associativity and transported units/counits), with its first paragraph tensor reassociation. This is the completion/coefficient step extracted through lem-fix-compactification-completed-realization; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Flat coefficient extension, finite quotients, their complete equivalence and preservation of actual completion units; foundational scalar comparison not supplied by the projection-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "The actual completion-unit Hom bijection, used to cancel that unit into a complete target; the projection-formula unit does not construct a completion reflector."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat representatives of arbitrary unbounded module-sheaf complexes; this is a generic resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "why": "Restriction of K-flat representatives along the flat constant-to-completed coefficient map; the unit route does not prove a scalar-restriction resolution theorem."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Unbounded direct-sum total tensor remains a good K-flat representative, including for nested expressions; this is the generic tensor model tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed derived pullback preserves good representatives and commutes with derived tensor, used for finite reduction and quotient pullback."
+   },
+   {
+    "node": "def-pur-integral-derived-operations",
+    "why": "The specified strict quotient-tower definitions of completed tensor and pullback, required to identify the constructed maps with the operations in the item."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Representative independence of the actual quotient tensor/pullback construction; used to descend the explicit comparison to natural derived maps."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Coherent counit recovery from normalized unbounded systems, a reconstruction tool for iterating the comparisons."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Whole-system expression substitution and its structural-map normalization; used as the already specified model of iterated comparisons."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "The prescribed K-injective coefficient restriction comparison and preservation of complete objects, needed to use completed adjunctions."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-restriction-counit",
+    "why": "The ordinary scalar-unit/counit identity with the same derived-composition comparison; this is the ambient adjunction input to the reflector calculation."
+   },
+   {
+    "node": "lem-sbc-reflector-adjunction-unit-formulas",
+    "why": "Actual unit and counit formulas for an adjunction restricted through a completion reflector; generic categorical tool applied to both coefficient presentations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-sbc-reflector-adjunction-unit-formulas"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-b9e0e399f",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-b9e0e399f (reviewer sub-agent of L); spot-checked: I read the item and all 11 steps in full, plus the statement of each of the 13 cited nodes. The delivery has no new nodes. Statement, stmt_deps, source and blueprint match the node as Q67 created it, so nothing was weakened. proof_deps equals the union of the step uses, and there is no cycle and no SGA citation. The Stacks tags 099I/099K (algebraization.tex:1427/1481), 0A0E, 099M, 093M and 07A4 all resolve. I also read the final paragraph of the main-20261015 lem-fix-operation-reduction proof, which is where this item comes from. Hypotheses check out: the constant-completion equivalence needs a small site, a Noetherian ring and a finitely generated ideal, and here A=O_E with I=(t) on the small pro-étale site satisfies all three. Flat-restriction K-flatness needs the ring map to be flat, and the flatness of Â over A comes from step 1 in the right direction. I checked θ_n on representatives: (UP⊗_A UQ)⊗A_n = (P/t^n)⊗_{B_n}(Q/t^n). This holds because R/t^nR = B_n, even though P⊗_A Q and P⊗_R Q differ before reduction. In step 5 the direction of b and the identity b·η^A = U(η^R)·τ follow from the pullback clause of the equivalence node, whose finite reductions are the inverses of the isomorphisms it displays. In step 8 the hypotheses of the ringed counit lemma (any A-algebras, the same κ normalization, x↦1⊗x) match exactly. The prime p in the pushforward node is used nowhere, so it can be chosen different from ℓ. In step 9 the reflector-adjunction formula applies: the Koszul reflector supplies the universal property, and both F_R and F_A preserve complete objects. In step 10 the unit cancellation is correct: the source is exactly C^A(Q_A U F_R M) and the target U_X M is complete. Step 11 then gives the Hom bijections and units. One minor remark, not a fault: the statement does not spell out the constant-side associator. Step 6 fixes it on the same systems, and since every map is unit-compatible, that choice agrees with the canonical one characterized by the completion units. I found no duplicate after searching the cbc/sf/pur constant-coefficient nodes. All declared tool_uses are generic and accepted. Edge cases tested: empty X, f=id, n=1, zero inputs, the unit system, and complexes unbounded in both directions."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedCoefficientMonoidalAdjunctionTransport",
+  "declaration": "WeilConjectures.CompletedCoefficientTransport.completedCoefficientMonoidalAdjunctionTransport",
+  "declarations": [
+   "WeilConjectures.CompletedCoefficientTransport.completedCoefficientMonoidalAdjunctionTransport"
+  ],
+  "statement": "theorem completedCoefficientMonoidalAdjunctionTransport {S : Type s} (W : S → Scheme.{t}) (_hl : ∀ (a : S) (x : W a), IsUnit (l : (W a).residueField x)) : ∃ T : Transport.{t, u, s, i, j} l E W, ExpressionSystemLaw l E T ∧ ExpressionSystemStructuralLaw l E T ∧ ExpressionSubstitutionLaw l E T ∧ ExpressionStructuralLaw l E T",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-22",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/CompletedCoefficientMonoidalAdjunctionTransport.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9891fb2b5",
+  "group": "Q97",
+  "result": "fix",
+  "note": "Previous RETURN (14a8da545e9b) repaired. H3: valueRIdentification (recursion on the pinned r_tensor.tensor/unit, Arrow.pullback, system_unit) plus ExpressionSystemLaw now tie e_P to CompletedOperations.comparison through constantSystemComparison. That comparison is built from pinned balancing/tau, eta^R, tensorComparison/pullbackComparison and reflectConstant, without a/b. Tensor and pullback vertices reduce to UnitNormalization/b_unit, so the law is consistent. ExpressionSystemStructuralLaw gives the limit and reduction squares, and its unitor case pins system_unit. H12/H2: existing:true owners def-pur-completed-operation-model-data, -comparison-data and def-pur-integral-operation-complex-models are verbatim in unchanged live modules and cited instead of the theorem nodes. FIX (new-node JSON only, no Lean change, no compile): F1 model-data cited theorem lem-coef-derived-system-evaluation-calculus for CoefficientDerivedSystemCalculus; re-cited def-coef-derived-system-calculus-data and added def-coef-ringed-sequence-site. F2 complex-models re-owned integralOperationsPullbackTowerFunctor (owned by def-a1-integral-finite-pullback-tower); dropped it and cited that node. F3 adjunction-transport-models uses those complexes, finite-pullback level/generator and tower functor without citing their owners; added def-pur-integral-operation-complex-models, def-a1-integral-finite-pullback-tower and def-pur-integral-finite-pullback. Universes t+1/t independent of u, no bounds, statements verbatim, one sorry, lines <=100, docstrings and both report sections present. Advisory: GoodComplex/scalarReductionSource owners are only transitively cited."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261025T051939-L-20772",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,539 @@
+{
+ "id": "lem-sfb-truncated-simplex-presentation",
+ "kind": "statement",
+ "title": "Recognition of truncated simplicial objects by faces and degeneracies",
+ "statement": "Let $N\\geq0$, let $\\mathcal C$ be a category, and let $\\Delta_{\\leq N}$ be the category of finite ordinals $[r]=\\{0<\\cdots<r\\}$, $0\\leq r\\leq N$, and order-preserving maps [def-weil-pbc-simplicial-coskeleton]. Give objects $U_0,\\ldots,U_N$, maps $d_i:U_r\\to U_{r-1}$ for $1\\leq r\\leq N$, $0\\leq i\\leq r$, and maps $s_i:U_r\\to U_{r+1}$ for $0\\leq r<N$, $0\\leq i\\leq r$. Assume all the following identities whenever every degree occurring is between $0$ and $N$:\n$$d_i d_j=d_{j-1}d_i\\ (i<j),\\qquad d_i s_j=s_{j-1}d_i\\ (i<j),\\qquad d_j s_j=1=d_{j+1}s_j,$$\n$$d_i s_j=s_j d_{i-1}\\ (i>j+1),\\qquad s_i s_j=s_{j+1}s_i\\ (i\\leq j).$$\nThere is a unique functor $U:\\Delta_{\\leq N}^{\\mathrm{op}}\\to\\mathcal C$ with these objects and these maps as its coface and codegeneracy operators. Here $\\delta_i:[r-1]\\to[r]$ omits $i$, $\\sigma_i:[r+1]\\to[r]$ repeats $i$, and composition in the displayed formulas is read right to left. Every arrow of $\\Delta_{\\leq N}$ is a composite of these cofaces and codegeneracies with intermediate degrees at most $N$; every surjective arrow is a composite of codegeneracies with intermediate degrees at most $N$. For any two such functors, a family of component maps is a natural transformation if and only if it commutes with every displayed face and degeneracy operator.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tags 0166 (lemma-face-degeneracy), 0168 (lemma-face-degeneracy-category), and 016B (lemma-characterize-simplicial-object), bounded-degree form for Definition 0180 (definition-truncated-simplicial-object): the normal form first decreases then increases the ordinal degree and stays within the maximum endpoint degree."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-coskeleton"
+ ],
+ "proof": [
+  {
+   "text": "Work in the full subcategory $\\Delta_{\\leq N}$ of [def-weil-pbc-simplicial-coskeleton]. Construct a word for $\\alpha:[a]\\to[b]$ by induction on $a+b$. If a value $i$ is missing, necessarily $b>0$; define $\\psi(x)=\\alpha(x)$ below $i$ and $\\psi(x)=\\alpha(x)-1$ above $i$. Then $\\alpha=\\delta_i\\psi$ and the induction applies to $[a]\\to[b-1]$. Otherwise $\\alpha$ is surjective. If it is not injective, monotonicity gives an adjacent equality $\\alpha(j)=\\alpha(j+1)$; delete the second entry to obtain $\\psi:[a-1]\\to[b]$ and $\\alpha=\\psi\\sigma_j$, again decreasing $a+b$. A bijective monotone map between finite ordinals is the identity. All intermediate degrees stay below $\\max(a,b)\\leq N$. Starting with a surjection, the second reduction remains surjective, so it yields a word consisting only of codegeneracies.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0166 (lemma-face-degeneracy), explicit induction; Definition 0180 (definition-truncated-simplicial-object)."
+   }
+  },
+  {
+   "text": "Read any generator word in execution order from source to target, with all its vertex degrees in $[0,N]$ [def-weil-pbc-simplicial-coskeleton]. At an adjacent coface followed by a codegeneracy, replace $\\sigma_j\\delta_i$ by $\\delta_i\\sigma_{j-1}$ if $i<j$, by the empty word if $i=j$ or $j+1$, and by $\\delta_{i-1}\\sigma_j$ if $i>j+1$. These are exactly the opposites of the assumed mixed identities. A noncancelling replacement lowers the peak degree by two, preserving its endpoints. When the endpoints have degree zero only the cancelling cases are possible, so no negative degree is introduced. Termination follows lexicographically from word length and the number of pairs in which a coface precedes a codegeneracy: cancellation decreases length, and exchange decreases the latter count by one. The result executes all codegeneracies first and all cofaces second, thus has composite $D\\circ S$ with $S$ surjective and $D$ injective, entirely in the retained degrees.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), omitted mixed-word reduction, supplied here using the relations of Tag 0167 (lemma-relations-face-degeneracy) (2)-(4)."
+   }
+  },
+  {
+   "text": "Take two retained-degree words with the same value $\\alpha:[a]\\to[b]$, and reduce each as in the preceding step to $D\\circ S$ and $D^{\\prime}\\circ S^{\\prime}$. Their middle ordinal is the ordered image of $\\alpha$: surjectivity of $S$ makes the image of $D$ equal to that image, and an increasing injection is uniquely determined by its image. Thus both middle degrees are $|\\operatorname{im}\\alpha|-1$, $D=D^{\\prime}$ as ordered-set maps, and injectivity of $D$ gives $S=S^{\\prime}$. Apply [lem-sfb-pure-coface-word-relations] to the two coface blocks and [lem-sfb-pure-codegeneracy-word-relations] to the two codegeneracy blocks. Their transformations use only degrees between their respective endpoints, hence at most $N$. Combining them with the two mixed reductions gives a derivation between the original words using only the retained-degree relations.",
+   "uses": [
+    "lem-sfb-pure-coface-word-relations",
+    "lem-sfb-pure-codegeneracy-word-relations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), completeness via the ordered-image factorization and the pure-block relations."
+   }
+  },
+  {
+   "text": "For $\\alpha:[a]\\to[b]$, choose the word of step 1 and evaluate it contravariantly, replacing $\\delta_i$ by $d_i$, $\\sigma_i$ by $s_i$, and the empty word by $1$. Every replacement in steps 2 and 3 preserves this value by precisely the identities assumed in the statement, including their contexts by associativity. Hence the value is independent of the chosen word. Concatenation of words gives $U(\\beta\\alpha)=U(\\alpha)U(\\beta)$; the empty word gives $U(1)=1$. These values define the required functor [def-weil-pbc-simplicial-coskeleton] and have the specified generator values. Any other such functor agrees on every word, so step 1 gives uniqueness.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B (lemma-characterize-simplicial-object) (2), evaluation argument restricted to Definition 0180."
+   }
+  },
+  {
+   "text": "For functors $U,V$ and a family $\\eta_r:U_r\\to V_r$, the equation $\\eta_aU(\\alpha)=V(\\alpha)\\eta_b$ for $\\alpha:[a]\\to[b]$ is automatic for identities. If it holds for $\\alpha$ and $\\beta:[b]\\to[c]$, then $\\eta_aU(\\alpha)U(\\beta)=V(\\alpha)\\eta_bU(\\beta)=V(\\alpha)V(\\beta)\\eta_c$. Thus commuting with all generators implies this equation for every word, hence every arrow by step 1. Conversely naturality gives it on each generator. This is exactly the definition of a morphism of truncated simplicial objects [def-weil-pbc-simplicial-coskeleton]. For $N=0$ the sole arrow is the identity, so the same argument covers the empty generator family.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B (lemma-characterize-simplicial-object) (3), naturality on composites; Definition 0180."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-coskeleton",
+  "lem-sfb-pure-coface-word-relations",
+  "lem-sfb-pure-codegeneracy-word-relations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tags 0166, 0168, 016B and Definition 0180. The source omits the presentation proof; this bounded-degree reduction and assembly are supplied by Q29."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Truncated\", \"Splitting\"",
+   "results": {
+    "t": "2026-10-23T13:56:21Z",
+    "tool": "loogle",
+    "query": "\"Truncated\", \"Splitting\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a truncated simplicial object from face maps and degeneracy maps satisfying simplicial identities",
+   "results": {
+    "t": "2026-10-23T14:10:47Z",
+    "tool": "leansearch",
+    "query": "Construct a truncated simplicial object from face maps and degeneracy maps satisfying simplicial identities",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.Truncated",
+     "SSet.Truncated",
+     "SimplexCategory.Truncated.δ",
+     "CategoryTheory.SimplicialObject.σ",
+     "CategoryTheory.SimplicialObject.truncation",
+     "CategoryTheory.SimplicialObject.δ",
+     "SimplexCategory.Truncated",
+     "CategoryTheory.SimplicialObject.instCategoryTruncated"
+    ],
+    "digest": "caa142a64fb7970a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplexCategoryGenRel\"",
+   "results": {
+    "t": "2026-10-23T14:10:47Z",
+    "tool": "loogle",
+    "query": "\"SimplexCategoryGenRel\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel",
+     "instCategorySimplexCategoryGenRel",
+     "SimplexCategoryGenRel.len",
+     "SimplexCategoryGenRel.mk",
+     "SimplexCategoryGenRel.degeneracies",
+     "SimplexCategoryGenRel.faces",
+     "SimplexCategoryGenRel.generators",
+     "SimplexCategoryGenRel.toSimplexCategory"
+    ],
+    "digest": "42d65056a8c33bf7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Truncated\", \"mk\"",
+   "results": {
+    "t": "2026-10-23T14:10:48Z",
+    "tool": "loogle",
+    "query": "\"Truncated\", \"mk\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "SimplexCategory.Truncated.mkNotation",
+     "CategoryTheory.CosimplicialObject.Truncated.mkNotation",
+     "CategoryTheory.SimplicialObject.Truncated.mkNotation",
+     "SimplexCategory.Truncated.instEpiFullSubcategoryLeNatLenHomMk",
+     "SimplexCategory.Truncated.instMonoFullSubcategoryLeNatLenHomMk",
+     "SSet.Truncated.Edge.mk'",
+     "SSet.Truncated.Edge.mk'_edge",
+     "SSet.Truncated.Edge.mk"
+    ],
+    "digest": "6af746b45e59de68"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from the truncated simplex category is determined by face and degeneracy maps satisfying the simplicial identities in the retained degrees",
+   "results": {
+    "t": "2026-10-23T14:10:49Z",
+    "tool": "leanfinder",
+    "query": "A functor from the truncated simplex category is determined by face and degeneracy maps satisfying the simplicial identities in the retained degrees",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.Truncated",
+     "CategoryTheory.SimplicialObject.Truncated.trunc",
+     "CategoryTheory.CosimplicialObject.Truncated",
+     "SimplexCategory.Truncated.inclusion",
+     "SimplexCategory.Truncated.incl",
+     "SSet.Truncated.trunc",
+     "CategoryTheory.SimplicialObject.Truncated.trunc_obj_obj",
+     "CategoryTheory.SimplicialObject.Truncated.sk"
+    ],
+    "digest": "6ea500e184b76ed3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "Truncated|def.*equiv|def.*equivalence|def.*lift|def.*mk",
+   "results": {
+    "t": "2026-10-23T14:16:54Z",
+    "tool": "grep",
+    "query": "Truncated|def.*equiv|def.*equivalence|def.*lift|def.*mk",
+    "sub": "AlgebraicTopology/SimplexCategory/GeneratorsRelations",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean"
+    ],
+    "digest": "b14285b53a9b4d49"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "toSimplexCategory|Truncated|isEquivalence|equivalence|equiv|Functor",
+   "results": {
+    "t": "2026-10-23T14:17:42Z",
+    "tool": "grep",
+    "query": "toSimplexCategory|Truncated|isEquivalence|equivalence|equiv|Functor",
+    "sub": "AlgebraicTopology/SimplexCategory/GeneratorsRelations",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean"
+    ],
+    "digest": "c3f8930f92362ae5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "(truncat.*(relation|present|generat))|((relation|present|generat).*truncat)",
+   "results": {
+    "t": "2026-10-23T14:17:42Z",
+    "tool": "grep",
+    "query": "(truncat.*(relation|present|generat))|((relation|present|generat).*truncat)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+     "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+     "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/CompStructTruncated.lean"
+    ],
+    "digest": "2846b8ffd7400a30"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Truncated simplex category presentation by generators and relations reconstruct a truncated simplicial object",
+   "results": {
+    "t": "2026-10-23T14:17:43Z",
+    "tool": "leansearch",
+    "query": "Truncated simplex category presentation by generators and relations reconstruct a truncated simplicial object",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategory.Truncated",
+     "SimplexCategoryGenRel",
+     "instCategorySimplexCategoryGenRel",
+     "SimplexCategoryGenRel.mk",
+     "CategoryTheory.SimplicialObject.Truncated",
+     "SSet.Truncated",
+     "SimplexCategoryGenRel.δ",
+     "SimplexCategoryGenRel.generators"
+    ],
+    "digest": "2cfba7ea11528ba7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "truncat|generator|relation",
+   "results": {
+    "t": "2026-10-23T14:19:28Z",
+    "tool": "grep",
+    "query": "truncat|generator|relation",
+    "sub": "AlgebraicTopology/SimplexCategory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/Truncated.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/Truncated.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/Truncated.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/Truncated.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/Truncated.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/MorphismProperty.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/MorphismProperty.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/MorphismProperty.lean"
+    ],
+    "digest": "96a078bf71cc142e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Truncated\", \"face\"",
+   "results": {
+    "t": "2026-10-23T14:19:29Z",
+    "tool": "loogle",
+    "query": "\"Truncated\", \"face\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated functor definitions and unbounded SimplexCategoryGenRel presentation are present, but the bounded recognition/presentation theorem is not; read Basic.lean, EpiMono.lean, NormalForms.lean and Truncated.lean. NormalForms still lists uniqueness of face normal forms as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "Truncated|equivalence|Faithful|normal_form",
+   "results": {
+    "t": "2026-10-23T18:43:45Z",
+    "tool": "grep",
+    "query": "Truncated|equivalence|Faithful|normal_form",
+    "sub": "AlgebraicTopology/SimplexCategory/GeneratorsRelations",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean"
+    ],
+    "digest": "90a4af09c1581b97"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated object and restriction definitions only; the mixed simplex presentation does not establish presentation relations confined to the truncation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct truncated simplicial objects from face and degeneracy maps and the simplicial relations",
+   "results": {
+    "t": "2026-10-23T18:43:45Z",
+    "tool": "leansearch",
+    "query": "Construct truncated simplicial objects from face and degeneracy maps and the simplicial relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.Truncated",
+     "SSet.Truncated",
+     "SimplexCategory.Truncated",
+     "CategoryTheory.SimplicialObject.truncation",
+     "SSet.truncation",
+     "CategoryTheory.SimplicialObject.Truncated.trunc",
+     "CategoryTheory.SimplicialObject.Truncated.trunc_obj_obj",
+     "CategoryTheory.SimplicialObject.instCategoryTruncated"
+    ],
+    "digest": "c6ac4783738481c2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated object and restriction definitions only; the mixed simplex presentation does not establish presentation relations confined to the truncation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplexCategory\", \"Truncated\"",
+   "results": {
+    "t": "2026-10-23T18:43:45Z",
+    "tool": "loogle",
+    "query": "\"SimplexCategory\", \"Truncated\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "SimplexCategory.Truncated.mkNotation",
+     "SimplexCategory.Truncated.tacticTrunc",
+     "SimplexCategory.Truncated",
+     "SimplexCategory.Truncated.instInhabited",
+     "SimplexCategory.Truncated.inclusion",
+     "SimplexCategory.Truncated.incl",
+     "SimplexCategory.Truncated.inclusion.fullyFaithful",
+     "SimplexCategory.Truncated.inclCompInclusion"
+    ],
+    "digest": "89d8b1e84a1a628e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated object and restriction definitions only; the mixed simplex presentation does not establish presentation relations confined to the truncation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from a truncated simplex category is determined by face and degeneracy operators satisfying the simplicial identities in degrees at most N",
+   "results": {
+    "t": "2026-10-23T18:43:47Z",
+    "tool": "leanfinder",
+    "query": "A functor from a truncated simplex category is determined by face and degeneracy operators satisfying the simplicial identities in degrees at most N",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.Truncated",
+     "CategoryTheory.CosimplicialObject.Truncated",
+     "CategoryTheory.SimplicialObject.Truncated.trunc",
+     "SimplexCategory.Truncated.inclusion",
+     "SimplexCategory.Truncated.incl",
+     "SSet.Truncated.hom_ext_iff",
+     "SimplexCategory.Truncated.Hom.ext",
+     "SSet.Truncated.trunc"
+    ],
+    "digest": "12461ca4f18700c6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated object and restriction definitions only; the mixed simplex presentation does not establish presentation relations confined to the truncation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presentation of the bounded simplex category with generators cofaces codegeneracies and relations entirely inside the degree bound",
+   "results": {
+    "t": "2026-10-23T18:43:48Z",
+    "tool": "leanfinder",
+    "query": "Presentation of the bounded simplex category with generators cofaces codegeneracies and relations entirely inside the degree bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.mk",
+     "SimplexCategory.Truncated",
+     "SimplexCategoryGenRel.generators",
+     "SimplexCategoryGenRel",
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SimplexCategoryGenRel.generators.δ",
+     "SimplexCategoryGenRel.generators.σ",
+     "SimplexCategoryGenRel.P_δ.δ"
+    ],
+    "digest": "de94967c0ce8235d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: truncated object and restriction definitions only; the mixed simplex presentation does not establish presentation relations confined to the truncation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-polynomial-boundary-attachment",
+  "date": "2026-10-23",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). Tag 08PX (proposition-polynomial), inductive polynomial replacement of the next degree; repaired compatible-degeneracy form using the split indexing of simplicial.tex Tag 017P (definition-split). Arbitrary independent lifts of degeneracies in the printed proof do not establish their identities; the new statement isolates the polynomial boundary attachment that supplies compatible lifts. Supporting categorical input: recognition of a truncated simplicial object from the face and degeneracy identities; bounded-degree version of Stacks 0168 and 016B.",
+   "via": [
+    "lem-sfb-split-polynomial-boundary-attachment",
+    "lem-sfb-finite-polynomial-simplicial-resolution",
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-truncated-simplex-presentation",
+  "worker": "stage1",
+  "summary": "Retained the statement. Wrote bounded generation, terminating mixed-word reduction, ordered-image comparison, contravariant evaluation and naturality explicitly. Isolated the two genuinely smaller pure-word relation-completeness inputs as statement-only nodes; checked Mathlib candidates and the existing unbounded presentation. No Lean written or compiled.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). Tag 08PX (proposition-polynomial), inductive polynomial replacement of the next degree; repaired compatible-degeneracy form using the split indexing of simplicial.tex Tag 017P (definition-split). Arbitrary independent lifts of degeneracies in the printed proof do not establish their identities; the new statement isolates the polynomial boundary attachment that supplies compatible lifts. Supporting categorical input: recognition of a truncated simplicial object from the face and degeneracy identities; bounded-degree version of Stacks 0168 and 016B. Steps 1-5 supply the bounded recognition prerequisite of the polynomial boundary attachment without changing the unit route; newest blueprint direct-images proof (3) was read. The ancestor tool reports null, retained as inherited."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-8b9915f12",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-8b9915f12 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, and Stacks simplicial.tex 0166 (with its proof), 0167(1)-(5), 0168 and 016B/0180; the tag/label pairs match. Item statement unchanged and true: its five identities are exactly the contravariant forms of 0167(1)-(5) with correct index ranges. The citer split-polynomial-boundary-attachment uses only clauses the statement contains. Step 1 follows the proof of 0166: b>0 in the missing-value branch, a+b decreases, degrees stay ≤N, and the surjective branch stays surjective. Step 2 mixed rewrites checked against 0167(2)-(4): r=0 forces the cancelling cases, so no negative degree appears; the (length, inversion count) measure terminates. Step 3: D=D' by the ordered image, then S=S' by injectivity of D; the pure lemmas keep degrees within their endpoints. Steps 4-5 are elementary evaluation and naturality, including N=0. New nodes are statement-only and self-contained, with correctly typed relations δ_j^{r+1}δ_i^r=δ_i^{r+1}δ_{j-1}^r (r≥1, i<j≤r+1) and σ_j^rσ_i^{r+1}=σ_i^rσ_{j+1}^{r+1} (i≤j≤r). Small cases checked: [0]→[2] for cofaces gives all three value classes, each related by one relation; [2]→[0] for codegeneracies uses i=j=0. Each new node records five searches. Mathlib's NormalForms.lean:33 leaves the unique P_δ normal form as a TODO; exists_normal_form_P_σ and Truncated.morphismProperty_eq_top concern the mixed quotient or generation only. Duplicate search over the whole DAG found only unbounded or mixed nodes (trf presentation-unique-lifts, word-evaluation-descent, operators-reconstruction; sc godement faithful; generators leaf) and single-relation or factorization leaves; nothing is restated. Same-unit citations, no SGA, proof_deps = union of uses, no cycle, no tool_uses. Advisory: step 1 could also cite the Mathlib leaves lem-weil-pbc-simplex-face-factorization and lem-weil-pbc-simplex-degeneracy-factorization, but it writes the factorizations out explicitly, so this is not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.TruncatedSimplexPresentation",
+  "declaration": "CategoryTheory.SimplicialObject.Truncated.truncated_simplex_presentation",
+  "file": "lean/Sheaf/AlgebraicTopology/TruncatedSimplexPresentation.lean",
+  "statement": "theorem truncated_simplex_presentation {C : Type u} [Category.{v} C] (N : ℕ) (U : (SimplexCategory.Truncated N)ᵒᵖ → C) (d : ∀ (n : ℕ) (hn : n + 1 ≤ N) (_i : Fin (n + 2)), U (op ⟨SimplexCategory.mk (n + 1), hn⟩) ⟶ U (op ⟨SimplexCategory.mk n, by change n ≤ N; omega⟩)) (s : ∀ (n : ℕ) (hn : n + 1 ≤ N) (_i : Fin (n + 1)), U (op ⟨SimplexCategory.mk n, by change n ≤ N; omega⟩) ⟶ U (op ⟨SimplexCategory.mk (n + 1), hn⟩)) (hdd : ∀ (n : ℕ) (hn : n + 2 ≤ N) (i j : Fin (n + 2)), i ≤ j → d (n + 1) hn j.succ ≫ d n (by omega) i = d (n + 1) hn i.castSucc ≫ d n (by omega) j) (hds_lt : ∀ (n : ℕ) (hn : n + 2 ≤ N) (i : Fin (n + 2)) (j : Fin (n + 1)), i ≤ j.castSucc → s (n + 1) hn j.succ ≫ d (n + 1) hn i.castSucc = d n (by omega) i ≫ s n (by omega) j) (hds_self : ∀ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 1)), s n hn i ≫ d n hn i.castSucc = 𝟙 _) (hds_succ : ∀ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 1)), s n hn i ≫ d n hn i.succ = 𝟙 _) (hds_gt : ∀ (n : ℕ) (hn : n + 2 ≤ N) (i : Fin (n + 2)) (j : Fin (n + 1)), j.castSucc < i → s (n + 1) hn j.castSucc ≫ d (n + 1) hn i.succ = d n (by omega) i ≫ s n (by omega) j) (hss : ∀ (n : ℕ) (hn : n + 2 ≤ N) (i j : Fin (n + 1)), i ≤ j → s n (by omega) j ≫ s (n + 1) hn i.castSucc = s n (by omega) i ≫ s (n + 1) hn j.succ) : (∃! F : SimplicialObject.Truncated C N, F.obj = U ∧ (∀ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 2)), HEq (F.map (SimplexCategory.Truncated.δ N i (by change n ≤ N; omega) hn).op) (d n hn i)) ∧ (∀ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 1)), HEq (F.map (SimplexCategory.Truncated.σ N i hn (by change n ≤ N; omega)).op) (s n hn i))) ∧ (∀ (a b : SimplexCategory.Truncated N) (f : a ⟶ b), MorphismProperty.multiplicativeClosure (fun _ _ g ↦ (∃ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 2)), Arrow.mk g = Arrow.mk (SimplexCategory.Truncated.δ N i (by change n ≤ N; omega) hn)) ∨ (∃ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 1)), Arrow.mk g = Arrow.mk (SimplexCategory.Truncated.σ N i hn (by change n ≤ N; omega)))) f) ∧ (∀ (a b : SimplexCategory.Truncated N) (f : a ⟶ b), Function.Surjective f.hom.toOrderHom → MorphismProperty.multiplicativeClosure (fun _ _ g ↦ ∃ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 1)), Arrow.mk g = Arrow.mk (SimplexCategory.Truncated.σ N i hn (by change n ≤ N; omega))) f) ∧ (∀ (F G : SimplicialObject.Truncated C N) (η : ∀ a, F.obj a ⟶ G.obj a), (∀ (a b : (SimplexCategory.Truncated N)ᵒᵖ) (f : a ⟶ b), F.map f ≫ η b = η a ≫ G.map f) ↔ (∀ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 2)), F.map (SimplexCategory.Truncated.δ N i (by change n ≤ N; omega) hn).op ≫ η (op ⟨SimplexCategory.mk n, by change n ≤ N; omega⟩) = η (op ⟨SimplexCategory.mk (n + 1), hn⟩) ≫ G.map (SimplexCategory.Truncated.δ N i (by change n ≤ N; omega) hn).op) ∧ (∀ (n : ℕ) (hn : n + 1 ≤ N) (i : Fin (n + 1)), F.map (SimplexCategory.Truncated.σ N i hn (by change n ≤ N; omega)).op ≫ η (op ⟨SimplexCategory.mk (n + 1), hn⟩) = η (op ⟨SimplexCategory.mk n, by change n ≤ N; omega⟩) ≫ G.map (SimplexCategory.Truncated.σ N i hn (by change n ≤ N; omega)).op))",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-927825f01",
+  "group": "Q45",
+  "result": "pass",
+  "note": "I checked the statement field: it matches the file verbatim. The only stmt_dep is def-weil-pbc-simplicial-coskeleton (Mathlib SimplicialObject.Truncated). I read the Mathlib signatures of SimplexCategory.Truncated.δ/σ; their bound-argument orders are used correctly. I reindexed all six identity hypotheses by hand: hdd, hds_lt, hds_self, hds_succ, hds_gt and hss equal Mathlib's δ_comp_δ, δ_comp_σ_of_le, the two retraction identities, δ_comp_σ_of_gt and σ_comp_σ. Each covers the full index range, applies exactly when all degrees are in [0,N], and adds no stronger assumption. Conclusions: a single (not nested) ∃! functor with F.obj = U and HEq on the generators; generation by δ/σ in multiplicativeClosure inside Truncated N; surjections generated by σ alone; naturality iff commuting with the generators, endpoints oriented correctly. Edge cases N=0, N=1, boundary indices, empty C and independent universes are covered. No definitions, no hollow data, sorry-only proof. Docstrings carry the source place, the blueprint id and the five proof steps. The private import of the proof dep PureCofaceWordRelations is harmless. No compile, since no file was changed."
+ }
+}

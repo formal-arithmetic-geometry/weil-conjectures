@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-finite-torsion-hom-parameter",
+ "kind": "statement",
+ "title": "Finite constant parameter scheme for homomorphisms from torus torsion",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq1$ and $r,s\\geq0$ integers. Put $H=(\\mu_n)^r$ and $T=(\\mathbf G_m)^s$ with their product group structures [def-sc-gm-ga, def-sc-group-scheme], including the trivial group for a zero exponent. Put $M=(\\mathbf Z/n\\mathbf Z)^{\\{1,\\ldots,s\\}\\times\\{1,\\ldots,r\\}}$ and let $C=\\coprod_{m\\in M}\\operatorname{Spec}k$ be the finite constant scheme. For every $k$-scheme $X$ [def-pc-scheme, def-weil-scheme-over-base], there is a bijection, natural in $k$-morphisms $X'\\to X$, between $k$-morphisms $X\\to C$ and $k$-morphisms $\\phi:X\\times_kH\\to T$ which are group homomorphisms in the $H$ variable: for every commutative $k$-algebra $A$ [def-weil-pbc-algebra-hom-quotient] and $x\\in X(A)=\\operatorname{Hom}_k(\\operatorname{Spec}A,X)$, the map $h\\mapsto\\phi(x,h)$ is a homomorphism $H(A)\\to T(A)$, naturally in $A$. Products are fibre products [def-pc-fibre-product]. On the component labelled by $m=(m_{ji})$, the corresponding family is $\\phi(x,(h_i))=(\\prod_i h_i^{m_{ji}})_j$; exponents are independent of their lifts to $\\mathbf Z$ because $h_i^n=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 12.35, printed p.243; its finite split diagonalizable case, with the explicit character labels from Lemma 12.4 and Theorem 12.9(a), printed pp.232--233."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-scheme-over-base",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=(\\mathbf Z/n\\mathbf Z)^r$. Write $A[N]=\\bigoplus_{v\\in N}Ae^v$, with $e^ve^w=e^{v+w}$. On an affine open $U=\\operatorname{Spec}A\\subseteq X$, the open-fibre-product lemma identifies $U\\times_kH$ with the open subscheme $p^{-1}(U)$ of $X\\times_kH$, $p$ the first projection, and the affine fibre-product formula identifies $U\\times_kH$ with $\\operatorname{Spec}A[N]$. Explicitly, the coordinate algebra of $H$ is the tensor product of $r$ copies of $k[t]/(t^n-1)$; its mutually inverse maps with $k[N]$ send $t_i$ to $e^{\\bar e_i}$ and $e^v$ to $\\prod_i t_i^{\\tilde v_i}$. These are well-defined multiplicative maps since $t_i^n=1$, and are inverse on the generators. Tensoring these maps with $A$ gives the displayed identification: $a\\otimes e^v\\mapsto ae^v$, with inverse $ae^v\\mapsto a\\otimes e^v$. The group operations become $\\Delta(e^v)=e^v\\otimes e^v$ and $\\varepsilon(e^v)=1$ by their formulas on each $t_i$. The tensor product $A[N]\\otimes_AA[N]$ has basis $e^v\\otimes e^w$: the inverse to the coefficient expansion is given by the products of the coordinate projections.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.3 and Remark 12.6, printed pp.231--232; affine base change by Stacks Tag 01I4 (schemes-lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "Let $\\phi$ be a family in the statement. On $U\\times H$, pull back the $j$-th multiplicative coordinate to a unit $u_j\\in A[N]$. The hypothesis gives $\\varepsilon(u_j)=1$ and $\\Delta(u_j)=u_j\\otimes u_j$. These equations follow on universal points, not merely on field-valued points: use the universal $A$-valued point of $U$ and the identity of $H$ for the first equation; for the second use the $A[N\\oplus N]$-valued point whose $U$ coordinate is the structure map and whose two $H$ coordinates send $t_i$ to $e^{(\\bar e_i,0)}$ and $e^{(0,\\bar e_i)}$. The asserted group-homomorphism identity at this commutative $k$-algebra is exactly the second equation.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.35 and the family condition in Theorem 12.36, printed p.243; coordinate argument extending Lemma 12.4."
+   }
+  },
+  {
+   "text": "Write uniquely $u_j=\\sum_{v\\in N}a_{jv}e^v$. Comparing the coefficients of $e^v\\otimes e^w$ in the preceding equation gives $a_{jv}^2=a_{jv}$ and $a_{jv}a_{jw}=0$ for $v\\ne w$; the counit equation gives $\\sum_va_{jv}=1$. Conversely these three coefficient relations imply both equations by expansion. This uses no domain or reducedness assumption on $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, printed p.232: its comparison of coefficients gives a complete set of orthogonal idempotents; retain the idempotents over the base ring."
+   }
+  },
+  {
+   "text": "Regard $m\\in M$ as a tuple $(m_1,\\ldots,m_s)\\in N^s$ of rows, and set $b_m=\\prod_{j=1}^sa_{j,m_j}$. These are idempotents, $b_mb_{m'}=0$ if $m\\ne m'$, and $\\sum_mb_m=\\prod_j(\\sum_va_{jv})=1$. Also $\\sum_{m:m_j=v}b_m=a_{jv}$. By the idempotent--clopen bijection, the opens $U_m=D(b_m)$ form a disjoint clopen partition of $U$. On $U_m$, $b_m=1$, hence $a_{j,m_j}=1$ (multiply $b_m$ by this idempotent), and every other coefficient in row $j$ is zero by orthogonality. Thus $u_j=e^{m_j}$ on $U_m\\times H$. Conversely a clopen partition of $U$ gives its indicator idempotents $b_m$ and the coefficients $a_{jv}=\\sum_{m:m_j=v}b_m$, recovering the same partition and units.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE (lemma-disjoint-decomposition), combined with the explicit coefficient comparison of Milne Lemma 12.4."
+   }
+  },
+  {
+   "text": "The coproduct-of-copies lemma, with base $\\operatorname{Spec}k$ and label set $M$, identifies such partitions with $k$-morphisms $U\\to C$. The construction commutes with every homomorphism of $k$-algebras $A\\to B$: its coefficients are sent to their images, as are $b_m=\\prod_ja_{j,m_j}$, and the clopen loci pull back because $D(b_m)$ pulls back to $D(b_m\\text{ in }B)$. In particular the partitions constructed on two affine opens of $X$ agree on their overlap: cover that overlap by affine opens $W$, compare the two coefficient expansions after restriction to $W$, and use their uniqueness. No intersection of affine opens is assumed affine. The pieces therefore define a global $M$-indexed clopen partition $(X_m)$ of $X$, and hence a unique map $f_\\phi:X\\to C$ by the same coproduct-of-copies lemma.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03YW (example-constant-group): locally constant maps as the functor of points of a constant scheme; affine overlap comparison is the explicit coefficient argument above."
+   }
+  },
+  {
+   "text": "Conversely let $f:X\\to C$ and let $(X_m)$ be its clopen partition. The scheme idempotent--clopen bijection gives indicator sections $c_m\\in\\Gamma(X,\\mathcal O_X)$. Put $Y=X\\times_kH$ and also write $c_m$ for their pullbacks to $Y$. Let $h_i\\in\\Gamma(Y,\\mathcal O_Y)^\\times$ be the pullbacks of the coordinate units of $H$. Define $u_j=\\sum_mc_m\\prod_i h_i^{\\tilde m_{ji}}$. Its inverse is $\\sum_mc_m\\prod_i h_i^{-\\tilde m_{ji}}$, since the $c_m$ are orthogonal and sum to $1$. By the affine fibre-product formula, $T=\\operatorname{Spec}\\bigotimes_{j=1}^sk[t_j,t_j^{-1}]$; by the tensor universal property, sending the $j$-th Laurent coordinate $t_j$ of $T$ to $u_j$ gives a $k$-algebra map to $\\Gamma(Y,\\mathcal O_Y)$ (send a Laurent monomial to the corresponding product of these units). The natural affine-target adjunction gives a unique $k$-morphism $\\phi_f:Y\\to T$. On $X_m\\times H$ this is precisely the stated monomial formula. The relations $h_i^n=1$ show independence of lifts; multiplication of these monomials shows the group-homomorphism condition after every $k$-algebra base change.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "def-sc-gm-ga",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine); indicator sections from Tag 00EE (algebra-lemma-disjoint-decomposition), extended to schemes; monomial labels from Milne Lemma 12.4."
+   }
+  },
+  {
+   "text": "These constructions are inverse. Starting from $f$, on each $X_m$ its coordinate expansion has coefficient $1$ exactly in row position $m_j$, so the extracted partition is the original one. Starting from $\\phi$, step 4 shows on every affine open that the reconstructed units $\\sum_mb_me^{m_j}$ equal $\\sum_va_{jv}e^v=u_j$. The opens $U\\times_kH=p^{-1}(U)$, $U$ running over the affine opens of $X$, cover $Y$ by the open-fibre-product lemma. The two maps to the affine scheme $T$ therefore have identical coordinate sections on this open cover of $Y$; the structure sheaf makes these equal globally, and the affine-target adjunction makes the morphisms equal. For any $g:X'\\to X$, the indicator sections become $g^\\sharp(c_m)$ and their loci become $g^{-1}(X_m)$ by the scheme idempotent--clopen lemma. The monomial formula consequently pulls back to the same formula on $X'\\times H$. Since the constructions are inverse, this proves naturality of both directions for every $k$-morphism $g$, not only for affine source or target.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine), naturality; Tag 00EE (algebra-lemma-disjoint-decomposition), indicator sections and inverse images."
+   }
+  },
+  {
+   "text": "Finally $M$ is finite since $n\\geq1$ and both index sets are finite. If $s=0$, then $M$ is a singleton, $T$ is the trivial group, and both sets of maps are singletons; in the construction $b_m$ is the empty product $1$. If $r=0$ or $n=1$, then $N$ and $M$ are singletons; the identity equation forces every $u_j=1$. For $X=\\varnothing$ both maps are unique and all partition pieces are empty. Thus the formulas include all stated zero-exponent and empty-scheme cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.35, finite split case; empty-product conventions in the statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-open-fibre-product",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-scheme-clopen-idempotent",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 12.35, printed p.243; explicit arbitrary-base coefficient proof based on Lemma 12.4, printed p.232, with Stacks Tags 01I1, 01I4, 00EE and 03YW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The functor of homomorphisms from a finite diagonalizable group scheme to a split torus is represented by a finite constant etale scheme",
+   "results": "{\"t\": \"2026-10-23T11:43:10Z\", \"tool\": \"leanfinder\", \"query\": \"The functor of homomorphisms from a finite diagonalizable group scheme to a split torus is represented by a finite constant etale scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonalHomEquiv_apply\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"Rep.diagonalHomEquiv\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"AlgebraicGeometry.AffineSpace\", \"TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp\", \"TannakaDuality.FiniteGroup.ofRightFDRep_hom\"], \"digest\": \"a07c332ec1251a0a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract representations or univariate Laurent embeddings, not the stated scheme family or joint quotient detection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms of finite diagonalizable groups to a multiplicative group scheme are represented by the constant Cartier dual",
+   "results": "{\"t\": \"2026-10-23T11:45:24Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms of finite diagonalizable groups to a multiplicative group scheme are represented by the constant Cartier dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonalHomEquiv_apply\", \"Rep.diagonalHomEquiv\", \"Rep.diagonalHomEquiv_symm_apply\", \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"CommGrpCat.forget_isCorepresentable\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\"], \"digest\": \"26a2e602e4cf8cb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract representations or univariate Laurent embeddings, not the stated scheme family or joint quotient detection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"GroupLike\"",
+   "results": "{\"t\": \"2026-10-23T11:45:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"GroupLike\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract representations or univariate Laurent embeddings, not the stated scheme family or joint quotient detection"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|[Dd]iagonalizable|[Gg]roup[Ll]ike|[Mm]ultiplicative[Gg]roup",
+   "results": "{\"t\": \"2026-10-23T11:45:21Z\", \"tool\": \"grep\", \"query\": \"Cartier|[Dd]iagonalizable|[Gg]roup[Ll]ike|[Mm]ultiplicative[Gg]roup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract representations or univariate Laurent embeddings, not the stated scheme family or joint quotient detection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homomorphism scheme from powers of mu_n to powers of G_m is a finite constant scheme",
+   "results": "{\"t\": \"2026-10-23T11:45:21Z\", \"tool\": \"leansearch\", \"query\": \"The homomorphism scheme from powers of mu_n to powers of G_m is a finite constant scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"Pi.constMulHom\", \"powersHom_apply\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"modularCyclotomicCharacter\", \"powersMulHom\", \"zpowersHom_apply\"], \"digest\": \"0ff323b212c1c5d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract representations or univariate Laurent embeddings, not the stated scheme family or joint quotient detection"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|CartierDual|homScheme|characterScheme",
+   "results": "{\"t\": \"2026-10-23T13:01:03Z\", \"tool\": \"grep\", \"query\": \"diagonalizable|CartierDual|homScheme|characterScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no scheme-theoretic character or Hom-scheme construction in the searched AlgebraicGeometry directory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme of homomorphisms from mu_n to the multiplicative group is represented by the constant scheme Z/nZ",
+   "results": "{\"t\": \"2026-10-23T13:01:04Z\", \"tool\": \"leansearch\", \"query\": \"The scheme of homomorphisms from mu_n to the multiplicative group is represented by the constant scheme Z/nZ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCyclic.monoidHomMulEquivRootsOfUnityOfGenerator\", \"IsPrimitiveRoot.coe_autToPow_apply\", \"modularCyclotomicCharacter.toFun_spec\", \"ZMod.rootsOfUnityAddChar.congr_simp\", \"modularCyclotomicCharacter.toFun\", \"modularCyclotomicCharacter\", \"modularCyclotomicCharacter'\", \"ZMod.lift\"], \"digest\": \"ff11c5b974f5920c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cyclotomic or abstract character/representation results do not represent scheme families over arbitrary rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGroupLikeElem\", \"MonoidAlgebra\"",
+   "results": "{\"t\": \"2026-10-23T13:01:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGroupLikeElem\\\", \\\"MonoidAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.isGroupLikeElem_single_one\", \"MonoidAlgebra.isGroupLikeElem_single_one\", \"MonoidAlgebra.isGroupLikeElem_of\", \"AddMonoidAlgebra.span_isGroupLikeElem\", \"MonoidAlgebra.span_isGroupLikeElem\", \"AddMonoidAlgebra.isGroupLikeElem_of\", \"AddMonoidAlgebra.isGroupLikeElem_iff_mem_range_single_one\", \"MonoidAlgebra.isGroupLikeElem_iff_mem_range_single_one\"], \"digest\": \"5cf69ca9caa3bac9\"}",
+   "date": "2026-10-23",
+   "verdict": "partial only: group-like classification assumes IsDomain R, absent for an arbitrary affine parameter ring; it cannot prove this item in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Families of group scheme homomorphisms from powers of roots of unity to split tori are parametrized by a finite constant scheme",
+   "results": "{\"t\": \"2026-10-23T13:01:05Z\", \"tool\": \"leanfinder\", \"query\": \"Families of group scheme homomorphisms from powers of roots of unity to split tori are parametrized by a finite constant scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"modularCyclotomicCharacter.spec\", \"modularCyclotomicCharacter'\", \"modularCyclotomicCharacter\", \"CommGroup.monoidHom_mulEquiv_of_hasEnoughRootsOfUnity\", \"modularCyclotomicCharacter'.unique'\", \"modularCyclotomicCharacter.toFun_unique'\", \"modularCyclotomicCharacter.unique\", \"modularCyclotomicCharacter.toFun_unique\"], \"digest\": \"73f49d96035c1254\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cyclotomic or abstract character/representation results do not represent scheme families over arbitrary rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cartier dual of a finite diagonalizable group scheme is a constant etale group scheme representing its character functor over arbitrary base schemes",
+   "results": "{\"t\": \"2026-10-23T13:01:06Z\", \"tool\": \"leanfinder\", \"query\": \"The Cartier dual of a finite diagonalizable group scheme is a constant etale group scheme representing its character functor over arbitrary base schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.coe_doubleDualEquiv\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"AddChar.doubleDualEmb_bijective\", \"AddChar.doubleDualEquiv\", \"CategoryTheory.PreGaloisCategory.AutGalois\", \"CategoryTheory.PreGaloisCategory.autGaloisSystem\", \"FDRep.instRightRigidCategory\", \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\"], \"digest\": \"2aa8f7149b38ac2d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cyclotomic or abstract character/representation results do not represent scheme families over arbitrary rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-action-torus-rigidity",
+  "date": "2026-10-23",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Rigidity of actions of connected algebraic groups on tori. Supporting input: Lemma 12.35, printed p.243; its finite split diagonalizable case, with the explicit character labels from Lemma 12.4 and Theorem 12.9(a), printed pp.232--233.",
+   "via": [
+    "lem-sfb-connected-action-torus-rigidity",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-torsion-hom-parameter",
+  "worker": "stage1",
+  "summary": "Expanded the finite split Cartier-dual argument into coordinate and idempotent calculations over arbitrary base rings, then constructed and checked the global natural bijection using existing affine and clopen nodes. No new nodes, no statement changes. The field-only group-like Mathlib leaf is deliberately not applied over a general parameter ring.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Rigidity of actions of connected algebraic groups on tori. Supporting input: Lemma 12.35, printed p.243; its finite split diagonalizable case, with the explicit character labels from Lemma 12.4 and Theorem 12.9(a), printed pp.232--233.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine-scheme or clopen-partition tool for the explicit finite-character parameter construction; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic affine-scheme or clopen-partition tool for the explicit finite-character parameter construction; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "Generic affine-scheme or clopen-partition tool for the explicit finite-character parameter construction; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Generic affine-scheme or clopen-partition tool for the explicit finite-character parameter construction; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-clopen-idempotent",
+    "why": "Generic affine-scheme or clopen-partition tool for the explicit finite-character parameter construction; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-a1-locally-ringed-space-affine-adjunction",
+    "why": "Generic affine-scheme or clopen-partition tool for the explicit finite-character parameter construction; it does not replace any six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-scheme-clopen-idempotent",
+  "lem-a1-locally-ringed-space-affine-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-679ab9461",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-679ab9461 (reviewer sub-agent of L); spot-checked: Read the whole item, every cited statement, and Milne iAG Lemma 12.35, Theorem 12.36 (p.243) and Lemma 12.4 (p.232); no SGA source is used. The statement is correct: it is the Cartier-dual Hom((mu_n)^r, G_m^s) parametrized by the constant scheme on (Z/n)^{s×r}, and it is unchanged. Small cases I tested: n=1, r=0, s=0, X empty, k×k, k[eps]/eps^2, and char p with n=p. Steps 1-8 are correct. The universal A[N⊕N]-valued point gives Delta(u)=u⊗u over an arbitrary parameter ring. The coefficient idempotents b_m are orthogonal and sum to 1. The gluing uses affine covers of intersections only. In the inverse check b_m equals c_m by orthogonality. I found no duplicate; the group-like basis node is field-only, and the constant-group-scheme clopen node is étale-site only. The tool uses of the coproduct-clopen and scheme-clopen-idempotent nodes are accepted as generic. FIX (C1, missing citations): steps 1 and 7 identify U×_kH with the open p^{-1}(U) and cover Y by these opens without a citation, so both now cite the existing Mathlib leaf lem-weil-pbc-open-fibre-product. Step 6 used T=Spec of the tensor of Laurent rings and built the algebra map out of it without citations, so it now cites lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-algebra-tensor-pushout-universal-property. proof_deps is again the union of the uses. The corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-torsion-hom-parameter.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTorsionHomParameter",
+  "declaration": "AlgebraicGeometry.finite_torsion_hom_parameter",
+  "declarations": [
+   "AlgebraicGeometry.finiteTorsionParameterScheme",
+   "AlgebraicGeometry.finiteTorsionFamilyValue",
+   "AlgebraicGeometry.IsFiniteTorsionFamily",
+   "AlgebraicGeometry.finite_torsion_hom_parameter"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTorsionHomParameter.lean",
+  "statement": "theorem finite_torsion_hom_parameter (k : Type u) [Field k] (n r s : ℕ) [NeZero n] : ∃ e : ∀ X : Over (Spec (.of k)), (X ⟶ finiteTorsionParameterScheme k n r s) ≃ {φ : X ⨯ (∏ᶜ fun _ : Fin r ↦ roots k n) ⟶ ∏ᶜ fun _ : Fin s ↦ multiplicative k // IsFiniteTorsionFamily φ}, (∀ (X X' : Over (Spec (.of k))) (g : X' ⟶ X) (f : X ⟶ finiteTorsionParameterScheme k n r s), (e X' (g ≫ f)).val = prod.map g (𝟙 _) ≫ (e X f).val) ∧ (∀ (X : Over (Spec (.of k))) (f : X ⟶ finiteTorsionParameterScheme k n r s) (A : Type u) [CommRing A] [Algebra k A] (x : affine k A ⟶ X) (m : Fin s → Fin r → ZMod n), x ≫ f = (Over.homMk (affine k A).hom) ≫ Sigma.ι (fun _ : Fin s → Fin r → ZMod n ↦ Over.mk (𝟙 (Spec (.of k)))) m → ∀ (a : Fin s → Fin r → ℤ), (∀ j i, (a j i : ZMod n) = m j i) → ∀ (h : Fin r → (affine k A ⟶ roots k n)) (j : Fin s), finiteTorsionFamilyValue (e X f).val x h j = (List.ofFn (fun i : Fin r ↦ (h i ≫ rootsInclusion k n) ^ (a j i))).prod)",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three explicit helpers belong to the parameter scheme and family notion of this node. The theorem includes naturality for every parameter morphism and the monomial formula for every integer lift, not just a chosen representative."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-342e80d4d",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Statement matches node and Milne Lemma 12.35 clause by clause: H, T are products over Spec k from StandardGroupSchemes (roots/multiplicative/rootsInclusion read live); C is Mathlib's coproduct of copies of Spec k in Over; the hom condition is checked on all A-points (A : Type u), no extra hypotheses; naturality holds for every g : X' → X; the monomial formula holds for every integer lift, which pins the canonical bijection. Edge cases s=0, r=0, n=1, empty X, char k | n covered. lean.statement verbatim; node differs from live only in lean; stmt_deps match. Helpers are real data with source/blueprint docstrings; only proof is sorry; no pro-etale content. def-weil-pbc-constant-group-scheme exists but is not cited and its group law is unused; the helper names Mathlib's coproduct, not a competing notion. No compile (no file changed); worker reports clean scompile."
+ }
+}

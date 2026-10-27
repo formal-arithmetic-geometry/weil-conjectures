@@ -1,0 +1,234 @@
+{
+ "id": "lem-sf-sequence-tensor-augmentation-unit",
+ "kind": "statement",
+ "title": "Strict tensor augmentation is the actual sequence adjunction unit",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], $A$ a sheaf of commutative rings, and $B_1\\leftarrow B_2\\leftarrow\\cdots$ an inverse sequence of sheaves of commutative $A$-algebras with $A$-linear transition maps. Let $\\mathscr S(B)$ be the category of strict semilinear module systems, equivalently modules over $B$ on the sequence site [lem-pur-system-ringed-sequence-site]. Use module sheaves and ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $p$ be the sequence projection with underlying inverse image the constant sequence $\\Delta$, coefficient map $A\\to B_n$, and canonical derived adjunction $\\mathcal R=Lp^*\\dashv Rp_*$ of [lem-coef-sequence-projection-derived-adjunction]. Let $U$ restrict each $B_n$-action to $A$, and transport this adjunction along the specified K-injective comparison $Rp_*\\cong\\mathcal L=R\\lim U$ of [lem-coef-sequence-pushforward-limit-projections]. Write $u$ for its actual unit and $v:\\mathrm{id}\\to R\\lim\\Delta$ for the canonical derived constant-tower/limit unit [lem-coef-derived-tower-counit-projections].\n\nFor $P\\in D(A)$, choose one flat-term K-flat representative $Q\\to P$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules, lem-pc-kflat-resolution]. Put $F(Q)_n=\\operatorname{Res}_{A\\to B_n}(Q\\otimes_A B_n)$, using sheafified tensor [def-pur-sheaf-tensor-product], with strict transitions $1\\otimes b_{m,n}$. The canonical identification $F(Q)=U\\mathcal R(P)$ in the derived strict tower category identifies their augmentations $\\alpha_P:\\Delta P\\to U\\mathcal R(P)$ with the single strict chain map $\\alpha_Q:x\\mapsto x\\otimes1$. Then the following equality holds in $D(A)$, naturally in $P$:\n$$u_P=R\\lim(\\alpha_P)\\circ v_P.$$\nMore precisely, under the same K-flat computation, both sides equal localization of the ordinary compatible-family map $h_Q:Q\\to\\lim F(Q)$, $x\\mapsto(x\\otimes1)_n$, followed by the universal comparison $\\lim F(Q)\\to R\\lim F(Q)$. The identifications are independent of $Q$ and are identities of the whole derived augmentation and its total limit. No flatness or surjectivity of $A\\to B_n$, no boundedness of $P$, and no exactness of countable products is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 (lemma-adjoint) and Tag 0941 (lemma-derived-limit-is-ok); agent normalization of the whole strict tensor augmentation on the ringed sequence site, extracted from old Steps 3-4 of lem-sf-open-quotient-koszul-completeness."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-coef-derived-tower-counit-projections",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Take the entire normalized ordinary and derived presentation, including every existing projection, counit and triangle equation, from pushforwardLimitProjections. Retain all witnesses and clauses unchanged.",
+   "uses": [
+    "lem-coef-sequence-pushforward-limit-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+   }
+  },
+  {
+   "text": "The coefficient-universe Grothendieck theorem for module sheaves, Grothendieck abelianness of their countable towers, and Grothendieck abelianness of strict systems supply K-injective resolutions in both categories. Instantiate the abstract normalized augmentation theorem with these resolutions, the supplied cochain Hom normalization, and the second component of the supplied K-injective c comparison.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-coefficient-universe",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pur-system-grothendieck",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-sf-sequence-tensor-augmentation-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+   }
+  },
+  {
+   "text": "For the abstract ordinary property take the exact tensor-section equation. The component formula for beta, followed by uEval and the fLim projection identity, is the ordinary sequence unit followed by the nth projection. Apply the supplied tensor-transpose equation to that unit, the identity of G(M), and scalar 1. The adjunction identity and one_smul give exactly x mapped to 1 tensor x. Choose the two arbitrary complex predicates to be K-flatness and flat terms. The abstract theorem then supplies all new augmentation and total-limit clauses. Append these clauses after the original eleven normalized equations using the proved logical conjunction wrapper; its public predicate unfolds definitionally to the original expanded statement, with every equation in its original order.",
+   "uses": [
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-sf-sequence-tensor-augmentation-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-pur-system-grothendieck",
+  "lem-sf-sequence-tensor-augmentation-normalization",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0941; literature/stacks-project/derived.tex Tags 09T5 and 0FND. Agent generalization of the strict tensor-augmentation normalization to abstract abelian categories. Concrete sheaf specialization and unchanged conjunction assembly; A6, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site the unit of derived tensor with an inverse system of quotient ring sheaves and derived inverse limit is the total derived strict tensor augmentation on a K-flat representative",
+   "results": "{\"t\": \"2026-10-22T06:18:50Z\", \"tool\": \"leanfinder\", \"query\": \"On a small ringed site the unit of derived tensor with an inverse system of quotient ring sheaves and derived inverse limit is the total derived strict tensor augmentation on a K-flat representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"AdicCompletion.ofTensorProduct_naturality\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"AdicCompletion.tensor_map_id_left_eq_map\"], \"digest\": \"862a64c443c9517e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; generic derived adjunction formulas and ordinary module completion do not give the ringed strict-system augmentation identity."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*augmentation|augmentation.*strict|quotient.*adjunction|adjunction.*quotient",
+   "results": "{\"t\": \"2026-10-22T06:19:38Z\", \"tool\": \"grep\", \"query\": \"strict.*augmentation|augmentation.*strict|quotient.*adjunction|adjunction.*quotient\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; generic derived adjunction formulas and ordinary module completion do not give the ringed strict-system augmentation identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a ringed site derived tensor with a strict tower of ring sheaves is left adjoint to total derived inverse limit and its unit is the strict tensor augmentation",
+   "results": "{\"t\": \"2026-10-22T06:19:39Z\", \"tool\": \"leansearch\", \"query\": \"On a ringed site derived tensor with a strict tower of ring sheaves is left adjoint to total derived inverse limit and its unit is the strict tensor augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη\", \"SheafOfModules.PullbackConstruction.adjunction\", \"TensorProduct.directLimitRight\", \"TensorProduct.fromDirectLimit\", \"SheafOfModules.pullback\", \"SheafOfModules.hasLimit\", \"SheafOfModules.instIsRightAdjointPushforward\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\"], \"digest\": \"cc928dbb26db653e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; generic derived adjunction formulas and ordinary module completion do not give the ringed strict-system augmentation identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Adjunction\", \"derivedη\"",
+   "results": "{\"t\": \"2026-10-22T06:19:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.Adjunction\\\", \\\"derivedη\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\"], \"digest\": \"626afddfa1303a63\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; generic derived adjunction formulas and ordinary module completion do not give the ringed strict-system augmentation identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse limit of a strict tensor augmentation agrees with the unit of the derived pullback pushforward adjunction on a ringed sequence site",
+   "results": "{\"t\": \"2026-10-22T06:19:49Z\", \"tool\": \"leanfinder\", \"query\": \"The derived inverse limit of a strict tensor augmentation agrees with the unit of the derived pullback pushforward adjunction on a ringed sequence site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\"], \"digest\": \"b2fdd4f20b5dc195\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; generic derived adjunction formulas and ordinary module completion do not give the ringed strict-system augmentation identity."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|constLimAdj|tensor.*[Aa]ugmentation",
+   "results": "{\"t\": \"2026-10-22T07:14:12Z\", \"tool\": \"grep\", \"query\": \"derivedη_fac_app|constLimAdj|tensor.*[Aa]ugmentation\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\"], \"digest\": \"15f5c115df0ffb44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is the abstract derived-unit formula, constLimAdj is ordinary, and ModuleCat scalar-unit formulas do not identify the sheaf strict-system unit with the total derived strict-tower augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη",
+   "results": "{\"t\": \"2026-10-22T07:14:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derivedη\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\"], \"digest\": \"1853c24a4379cff6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is the abstract derived-unit formula, constLimAdj is ordinary, and ModuleCat scalar-unit formulas do not identify the sheaf strict-system unit with the total derived strict-tower augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived adjunction unit is represented by the ordinary adjunction unit followed by the right derived functor comparison on a left acyclic representative",
+   "results": "{\"t\": \"2026-10-22T07:14:13Z\", \"tool\": \"leansearch\", \"query\": \"A derived adjunction unit is represented by the ordinary adjunction unit followed by the right derived functor comparison on a left acyclic representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.CoreUnitCounit.unit\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedη_fac_app\"], \"digest\": \"a21ffb0462227fcb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is the abstract derived-unit formula, constLimAdj is ordinary, and ModuleCat scalar-unit formulas do not identify the sheaf strict-system unit with the total derived strict-tower augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of derived extension of scalars to a strict inverse sequence of ring sheaves and total derived inverse limit equals derived limit of the tensor augmentation composed with the constant tower unit",
+   "results": "{\"t\": \"2026-10-22T07:14:24Z\", \"tool\": \"leanfinder\", \"query\": \"The unit of derived extension of scalars to a strict inverse sequence of ring sheaves and total derived inverse limit equals derived limit of the tensor augmentation composed with the constant tower unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc\"], \"digest\": \"d3ce603d73193fe4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is the abstract derived-unit formula, constLimAdj is ordinary, and ModuleCat scalar-unit formulas do not identify the sheaf strict-system unit with the total derived strict-tower augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules extension of scalars to a tower of algebras is adjoint to inverse limit of restricted scalars and the derived unit is x maps to the compatible family x tensor one",
+   "results": "{\"t\": \"2026-10-22T07:17:12Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of modules extension of scalars to a tower of algebras is adjoint to inverse limit of restricted scalars and the derived unit is x maps to the compatible family x tensor one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"SheafOfModules.unitToPushforwardObjUnit\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.RestrictionCoextensionAdj.unit'\"], \"digest\": \"a07ac7fb62f2745d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is the abstract derived-unit formula, constLimAdj is ordinary, and ModuleCat scalar-unit formulas do not identify the sheaf strict-system unit with the total derived strict-tower augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-quotient-koszul-completeness",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open factor, strict quotient representative and whole-augmentation comparison (returned item Steps 3-4).",
+   "via": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-sequence-tensor-augmentation-unit",
+  "worker": "stage1",
+  "summary": "Reuse existing chain-transpose and restricted-resolution statements; compare both maps in one K-injective tower model, retaining the original statement and proving the whole-map identity without exact products or projection detection. No new nodes.",
+  "blueprint": "fix-prop-coherence coefficient/unit compatibility, via the inherited integral compactification and open quotient nodes: explicit normalization of the strict tensor augmentation as the actual sequence adjunction unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive-adjunction Hom transpose on complexes; used for the constant-tower unit calculation."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalization of the derived Hom transpose; needed to identify the constant-tower adjunction unit with its chain representative."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "K-injective existence for module sheaves on the small sequence sites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N0-85e8acf37",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-85e8acf37 (reviewer sub-agent of L); spot-checked: I read the item, all 11 cited statements and the Stacks tags 07A6, 0D6E, 0941, 09T5 and 070I. The delivery has 0 new nodes and the statement and stmt_deps are unchanged from base. There is no SGA source, no cycle (BFS over 550 nodes does not reach the item) and no dropped-list entry or repair note. Steps 1, 3, 4 and 5 are correct. Step 1: x↦x⊗1 is a strict tower map whose adjunct is h_Q. Step 3: u = [lim j][t] = [lim b][h_Q] because t = (lim U_0a)h_Q. Step 4: the target J is K-injective and Δ is exact, so the resolving normalization gives the derived transpose as [lim b][h_Q] in the same [lim J] model; I accept the declared tool_uses. One fault, fixed: Step 2 claimed the 'specified' comparison Rp_*≅R lim U of lem-coef-sequence-pushforward-limit-projections is [lim j], but that node's statement does not say so, and projections do not detect maps into R lim. The fix rewrites Step 2 to identify the comparison as κ_{g,r} for p = g∘r (restricted-resolution lemma) and cites lem-weil-pbc-ringed-topoi-derived-pushforward-composition for [g_*j] = [lim j]; that node is added to the step's uses and to proof_deps. Edge cases checked: P = 0, constant B_n = A, non-flat ℤ→ℤ/2; no surjectivity, boundedness or product exactness is used. Duplicate search (sequence-adjoint-resolution-shifts, derived-system-evaluation-calculus, open-roos-unit-adjunction, cbc-completed-pullback-unit-tower): only specialized versions exist. Maintainer note: lem-coef-sequence-pushforward-limit-projections should name its comparison as κ_{g,r} in its statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SequenceTensorAugmentationUnit",
+  "declaration": "SheafOfModules.SequenceProjection.sequenceTensorAugmentationUnit",
+  "file": "lean/Sheaf/CategoryTheory/SequenceTensorAugmentationUnit.lean",
+  "statement": "theorem sequenceTensorAugmentationUnit (A : Sheaf J CommRingCat.{w}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) [HasDerivedCategory.{d} (Modules A)] [HasDerivedCategory.{d} (StrictRingSystem B)] [HasDerivedCategory.{d} (ℕᵒᵖ ⥤ Modules A)] [∀ n : ℕ, HasDerivedCategory.{d} (systemLevel B n)] : ∃ (G : Modules A ⥤ StrictRingSystem B) (F : StrictRingSystem B ⥤ Modules A) (_ : G.Additive) (_ : F.Additive) (e : ∀ (M : Modules A) (n : ℕ), (G.obj M).level n ≅ changeOfRings (α.app (op n)) M) (π : ∀ (N : StrictRingSystem B) (n : ℕ), F.obj N ⟶ (restriction A B α n).obj (N.level n)) (adj : G ⊣ F), (∀ {M M' : Modules A} (f : M ⟶ M') (n : ℕ), (G.map f).app n ≫ (e M' n).hom = (e M n).hom ≫ changeOfRingsHom (α.app (op n)) M f) ∧ (∀ (M : Modules A) {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : M.val.obj U), ((G.obj M).transition h).val.app U ((e M n).inv.val.app U (tensorSection (α.app (op n)) M U b x)) = (e M m).inv.val.app U (tensorSection (α.app (op m)) M U ((B.map (homOfLE h).op).hom.app U b) x)) ∧ (∀ {N N' : StrictRingSystem B} (f : N ⟶ N') (n : ℕ), F.map f ≫ π N' n = π N n ≫ (restriction A B α n).map (f.app n)) ∧ (∀ (N : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : (F.obj N).val.obj U), (π N m).val.app U x = (N.transition h).val.app U ((π N n).val.app U x)) ∧ (∀ (M : Modules A) (N : StrictRingSystem B) (f : ∀ n : ℕ, M ⟶ (restriction A B α n).obj (N.level n)), (∀ {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : M.val.obj U), (f m).val.app U x = (N.transition h).val.app U ((f n).val.app U x)) → ∃! h : M ⟶ F.obj N, ∀ n : ℕ, h ≫ π N n = f n) ∧ (∀ (M : Modules A) (N : StrictRingSystem B) (h : M ⟶ F.obj N) (n : ℕ) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : M.val.obj U), (((adj.homEquiv M N).symm h).app n).val.app U ((e M n).inv.val.app U (tensorSection (α.app (op n)) M U b x)) = @SMul.smul ((B.obj (op n)).obj.obj U) ((N.level n).val.obj U) inferInstance b ((π N n).val.app U (h.val.app U x))) ∧ ∃ (L : DerivedCategory.{d} (Modules A) ⥤ DerivedCategory.{d} (StrictRingSystem B)) (R : DerivedCategory.{d} (StrictRingSystem B) ⥤ DerivedCategory.{d} (Modules A)) (ε : DerivedCategory.Q ⋙ L ⟶ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ R) (derivedAdj : L ⊣ R), L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (Modules A) (.up ℤ)) ∧ R.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (StrictRingSystem B) (.up ℤ)) ∧ (∀ (Q : CochainComplex (Modules A) ℤ), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → IsIso (ε.app Q)) ∧ (∀ (I : CochainComplex (StrictRingSystem B) ℤ), I.IsKInjective → IsIso (η.app I)) ∧ (∀ (P Q : CochainComplex (Modules A) ℤ) (q : Q ⟶ P), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → QuasiIso q → ∃ c : L.obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj Q), L.map (DerivedCategory.Q.map q) ≫ c.hom = ε.app Q) ∧ (∀ (Q : CochainComplex (Modules A) ℤ) (I : CochainComplex (StrictRingSystem B) ℤ) (f : (G.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I), derivedAdj.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I) (ε.app Q ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv Q I f) ≫ η.app I) ∧ ∃ (U0 : StrictRingSystem B ⥤ (ℕᵒᵖ ⥤ Modules A)) (_ : U0.Additive) (_ : PreservesFiniteLimits U0) (_ : PreservesFiniteColimits U0) (uObj : ∀ (N : StrictRingSystem B) (n : ℕ), (U0.obj N).obj (op n) = (restriction A B α n).obj (N.level n)) (uEval : ∀ n : ℕ, U0 ⋙ (CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n) ≅ systemEvaluation B n ⋙ restriction A B α n) (πOrd : ∀ n : ℕ, F ⟶ systemEvaluation B n ⋙ restriction A B α n) (fLim : F ≅ U0 ⋙ (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A)) (RL : DerivedCategory.{d} (ℕᵒᵖ ⥤ Modules A) ⥤ DerivedCategory.{d} (Modules A)) (etaLim : (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RL) (piLim : ∀ n : ℕ, RL ⟶ ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategory) (xi : ∀ n : ℕ, U0.mapDerivedCategory ⋙ ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategory ≅ (systemEvaluation B n).mapDerivedCategory ⋙ (restriction A B α n).mapDerivedCategory) (c : R ≅ U0.mapDerivedCategory ⋙ RL) (levelAdj : ∀ n : ℕ, G ⋙ systemEvaluation B n ⊣ restriction A B α n) (derivedLevelAdj : ∀ n : ℕ, L ⋙ (systemEvaluation B n).mapDerivedCategory ⊣ (restriction A B α n).mapDerivedCategory), (∀ {N N' : StrictRingSystem B} (f : N ⟶ N') (n : ℕ), (U0.map f).app (op n) ≫ eqToHom (uObj N' n) = eqToHom (uObj N n) ≫ (restriction A B α n).map (f.app n)) ∧ (∀ (N : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (V : Cᵒᵖ) (x : (N.level n).val.obj V), ((U0.obj N).map (homOfLE h).op).val.app V ((eqToHom (uObj N n).symm).val.app V x) = (eqToHom (uObj N m).symm).val.app V ((N.transition h).val.app V x)) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), (uEval n).hom.app N = eqToHom (uObj N n)) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), (πOrd n).app N = π N n) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), fLim.hom.app N ≫ limit.π (U0.obj N) (op n) ≫ (uEval n).hom.app N = π N n) ∧ RL.IsRightDerivedFunctor etaLim (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ Modules A) (.up ℤ)) ∧ (∀ (T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ), T.IsKInjective → IsIso (etaLim.app T)) ∧ augmentedDerivedLimitProperties G F U0 (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A) (fun n ↦ (CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)) (systemEvaluation B) (restriction A B α) uEval πOrd fLim (fun n ↦ lim.π (op n)) L R ε η derivedAdj RL etaLim (fun levelAdj ↦ ∀ (n : ℕ) (M : Modules A) (K : systemLevel B n) (h : M ⟶ (restriction A B α n).obj K) (V : Cᵒᵖ) (b : (B.obj (op n)).obj.obj V) (x : M.val.obj V), (((levelAdj n).homEquiv M K).symm h).val.app V ((e M n).inv.val.app V (tensorSection (α.app (op n)) M V b x)) = @SMul.smul ((B.obj (op n)).obj.obj V) (K.val.obj V) (by set_option backward.isDefEq.respectTransparency.types false in exact inferInstance) b (h.val.app V x)) piLim xi c levelAdj derivedLevelAdj (∃ (beta : (Functor.const ℕᵒᵖ : Modules A ⥤ ℕᵒᵖ ⥤ Modules A) ⟶ G ⋙ U0) (towerAdj : (Functor.const ℕᵒᵖ : Modules A ⥤ ℕᵒᵖ ⥤ Modules A).mapDerivedCategory ⊣ RL) (augmentation : (Functor.const ℕᵒᵖ : Modules A ⥤ ℕᵒᵖ ⥤ Modules A).mapDerivedCategory ⟶ L ⋙ U0.mapDerivedCategory), (∀ (M : Modules A) (n : ℕ) (V : Cᵒᵖ) (x : M.val.obj V), (eqToHom (uObj (G.obj M) n)).val.app V (((beta.app M).app (op n)).val.app V x) = (e M n).inv.val.app V (tensorSection (α.app (op n)) M V 1 x)) ∧ (∀ Q : CochainComplex (Modules A) ℤ, towerAdj.unit.app (DerivedCategory.Q.obj Q) ≫ RL.map ((Functor.const ℕᵒᵖ : Modules A ⥤ ℕᵒᵖ ⥤ Modules A).mapDerivedCategoryFactors.hom.app Q) = DerivedCategory.Q.map (((constLimAdj : (Functor.const ℕᵒᵖ : Modules A ⥤ ℕᵒᵖ ⥤ Modules A) ⊣ lim).mapHomologicalComplex (.up ℤ)).unit.app Q) ≫ etaLim.app (((Functor.const ℕᵒᵖ : Modules A ⥤ ℕᵒᵖ ⥤ Modules A).mapHomologicalComplex (.up ℤ)).obj Q)) ∧ (∀ (P : DerivedCategory.{d} (Modules A)), (derivedAdj.ofNatIsoRight c).unit.app P = towerAdj.unit.app P ≫ RL.map (augmentation.app P)) ∧ (∀ (Q : CochainComplex (Modules A) ℤ), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → (augmentation.app (DerivedCategory.Q.obj Q) ≫ U0.mapDerivedCategory.map (ε.app Q) ≫ U0.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj Q) = (Functor.const ℕᵒᵖ : Modules A ⥤ ℕᵒᵖ ⥤ Modules A).mapDerivedCategoryFactors.hom.app Q ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex beta (.up ℤ)).app Q)) ∧ ((derivedAdj.ofNatIsoRight c).unit.app (DerivedCategory.Q.obj Q) ≫ RL.map (U0.mapDerivedCategory.map (ε.app Q) ≫ U0.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj Q)) = DerivedCategory.Q.map (((constLimAdj : (Functor.const ℕᵒᵖ : Modules A ⥤ ℕᵒᵖ ⥤ Modules A) ⊣ lim).mapHomologicalComplex (.up ℤ)).homEquiv Q ((U0.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj Q)) ((NatTrans.mapHomologicalComplex beta (.up ℤ)).app Q)) ≫ etaLim.app ((U0.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj Q)))))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63741e64f",
+  "group": "NR",
+  "result": "pass",
+  "note": "Only the item's lean record changed (no new nodes or fixes); lean.statement matches the file verbatim. The statement repeats the landed pushforwardLimitProjections conclusion verbatim (machine-checked) and adds beta (x↦1⊗x on every section), towerAdj (derived constant/limit unit fixed by its derivedη_fac formula through etaLim, hence unique), and augmentation (fixed on flat-term K-flat Q through ε, which is an isomorphism there). Main clause: unit of derivedAdj.ofNatIsoRight c at every P = towerAdj.unit ≫ RL(augmentation), i.e. u = R lim(α)∘v. Final clause: the unit after the target identification = Q(constLimAdj.homEquiv beta_Q = h_Q) ≫ etaLim. Every object is pinned; no assumption on flatness/surjectivity of A→B_n, boundedness or exact products; universes independent. Edge cases P=0, B=A, ℤ→ℤ/2, zero rings and non-surjective transitions checked. Docstrings carry the source places, blueprint tag and 5-step plan. Advisory: unused plain proof-dep imports. Maintainer note: name κ_{g,r} in lem-coef-sequence-pushforward-limit-projections."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f619a",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222545-L-667952",
+  "kind": "interface",
+  "note": "independent cc review: sequenceTensorAugmentationUnit factored statement vs original published statement (scratch client proved by exact, compiled; axioms clean); node lem-sf-sequence-tensor-augmentation-unit + new lem-sf-sequence-tensor-augmentation-normalization vs Lean"
+ }
+}

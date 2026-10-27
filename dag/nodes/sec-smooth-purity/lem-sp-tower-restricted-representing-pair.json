@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-tower-restricted-representing-pair",
+ "kind": "statement",
+ "title": "Restriction of a tower representing pair",
+ "statement": "Fix the coefficient, field, separated finite-type scheme, ordinary derived tower, and open-operation setting of [sk-def-sfb-dc-setting], [def-weil-l-adic-coefficient-extension], [sk-def-sp-coefficient-towers], [det-sp-coefficient-towers-abelian], [sk-def-sp-normalized-towers], [def-weil-proetale-constructible-sheaf], [def-weil-proetale-tor-amplitude], [det-sp-tower-shriek-levels], [lem-sp-coefficient-tower-shriek-calculus] and [lem-sp-tower-binary-ctf-fibre]. Use the unchanged open-counit definitions of [def-sp-tower-binary-open-counit-data]. For h:Z→Y, compactification c, an open U in Z, an object K on Y and a good object P on U, suppose eU:F_U(P)→K represents Hom(F_U(-),K) on all good tests on U. For every open D≤U, restriction of P to D is good, and represents Hom(F_D(-),K) with the counit restrictedCounit(c,D≤U,P,K,eU), using the actual nested open adjunction map.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "lem-sp-tower-binary-ctf-fibre",
+  "def-sp-tower-binary-open-counit-data"
+ ],
+ "proof": [
+  {
+   "text": "Let $i:D\\hookrightarrow U$ be open, and let $t_i:i_!i^*P\\to P$ be its adjunction counit. By the exact open adjunction and open composition normalization of [lem-sp-coefficient-tower-shriek-calculus], for every $N\\in\\mathcal C_D$ there are bijections\n$$\\operatorname{Hom}_D(N,i^*P)\\simeq\\operatorname{Hom}_U(i_!N,P)\\simeq\\operatorname{Hom}_Y(F_Ui_!N,K)=\\operatorname{Hom}_Y(F_DN,K).$$\nThe first sends $b$ to $t_i\\circ i_!b$, and the second is the assumed representing bijection of $P$. Thus their composite is $b\\mapsto\\epsilon_U\\circ F_U(t_i)\\circ F_D(b)$, exactly the asserted restricted counit. The calculus preserves $\\mathcal C$ under restriction and open extension, so every test object used here lies in the required category. Apply this also inside $V$ and to nested restrictions to $W$.",
+   "uses": [
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-coefficient-tower-shriek-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A representing counit remains representing after restriction to a smaller open using the open extension adjunction; compatible local counits factor through a signed Mayer Vietoris triangle; exact five term contravariant Hom rows with outer maps bijective by open adjunction",
+   "results": "Ordinary sheaf restriction and scalar adjunctions, Opens.mayerVietorisSquare, and homological-functor exact-row APIs found. None states the strict coefficient-tower restriction, lift, or local outer comparison.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; retain the geometric steps as separate named theorems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of representing counits on derived sheaves through exact open extension adjunction; compatible local representing counits on a binary open cover lift across the signed open cover distinguished triangle; bijective middle comparison in exact additive-group rows",
+   "results": "Sheaf adjunction formulas and ordinary sheaf gluing found. The additive five lemma is AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective in Mathlib.Algebra.FiveLemma; it is used directly to close the central bijection. No tower-specific match.",
+   "date": "2026-10-25",
+   "verdict": "Use Mathlib for the five lemma and leave only geometric steps."
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*represent|represent.*counit|five_lemma|bijective.*exact|exact.*bijective; HomFiveExact|ImageHomFiveExact|OuterBijective in Mathlib, Sheaf, WeilConjectures, and DAG; blueprint_refs.py search representing and counit",
+   "results": "Existing main item is the only binary tower theorem. EvaluatedRepresentability is a downstream finite-level theorem and cannot be imported. Mathlib.Algebra.FiveLemma has the additive group result. No distinct existing DAG node realizes the three extracted steps; the old node proof explicitly contains each.",
+   "date": "2026-10-25",
+   "verdict": "Reuse all existing definitions unchanged; extract the three actual proof steps, not a renamed main statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerBinaryCounitRepresentability",
+  "date": "2026-10-25",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Gluing paragraph: restriction pairs, compatible counit lift and five-term Hom comparison",
+   "via": [
+    "lem-sp-tower-binary-counit-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerRestrictedRepresentingPair",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerRestrictedRepresentingPair.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerBinaryCounit.restricted_representing_pair",
+  "statement": "theorem restricted_representing_pair\n    (p : ℕ) (hp : 0 < p) (hlp : l ≠ p)\n    (k : Type u) [Field k] [CharP k p]\n    (Z Y : Over (Spec (CommRingCat.of k)))\n    [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (h : Z ⟶ Y) (c₀ : Compactification h.left)\n    (U : Z.left.Opens) (K : D l E Y.left) (P : D l E U.toScheme)\n    (hP : good l E b q U.toScheme P)\n    (eU : (support l E b o c₀ U).obj P ⟶ K)\n    (hU : Represents l E b q (support l E b o c₀ U) P K eU) :\n    (∀ (D₀ : Z.left.Opens) (i : D₀ ≤ U),\n      good l E b q D₀.toScheme ((restrictionBetween l E b o i).obj P) ∧\n      Represents l E b q (support l E b o c₀ D₀)\n        ((restrictionBetween l E b o i).obj P) K\n        (restrictedCounit l E b o c₀ i P K eU))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-728da",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261025T163655-L-767613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-728da",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261025T163655-L-767613",
+  "kind": "interface",
+  "note": "independent cc review: item stmt + 17 relocated defs byte-identical vs clone; 3 new sorry lemmas vs item clauses (restricted pair = conjunct 1; lift & open comparison checked, no hidden need for dropped hyps); importer EvaluatedRepresentability compiled against delivered modules; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

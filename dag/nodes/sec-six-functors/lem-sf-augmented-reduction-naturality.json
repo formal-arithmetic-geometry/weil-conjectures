@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-augmented-reduction-naturality",
+ "kind": "statement",
+ "title": "Naturality of augmented quotient presentations",
+ "statement": "Let S be a coefficient derived-system calculus on W. Let Q,R be integral cochain complexes, C,D strict coefficient-system cochain complexes, and eC,eD and kappaC,kappaD be augmented reduction presentations. If h:Q→R and f:C→D are chain maps whose finite components satisfy evaluation(f) followed by kappaD = kappaC followed by scalarExtension(h), then S.reduction(Q(h)) followed by eD equals eC followed by Q(f), in the entire system derived category. No flatness, boundedness or detection of derived arrows by evaluation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Scalar-extension adjunction and ordinary open extension (Tags 03CZ and 03DJ), with sites-cohomology.tex Tags 06YY and 0941; ordinary and augmentation steps of lem-sf-open-restriction-counit-on-good-complexes."
+ },
+ "stmt_deps": [
+  "def-sf-integral-open-operations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Transport each augmentation component through the equality identifying restricted evaluation with finite scalar restriction. The prescribed section formula identifies it with the scalar-adjunction unit followed by inverse kappa.",
+   "uses": [
+    "def-sf-integral-open-operations",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite component square and scalar-unit naturality to prove the equality constant(h) followed by aD = aC followed by restriction(f), as strict chain-tower maps.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize this equality. Naturality of the two exact-functor factorization isomorphisms gives the equality after transposition along the constant-tower adjunction. Apply the augmented normalization equations and injectivity of the reduction adjunction hom equivalence.",
+   "uses": [
+    "def-sf-integral-open-operations",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-open-operations",
+  "def-trf-integral-comparison-realization-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "B8: explicit ordinary-system assembly, scalar-unit naturality and equivalence counit algebra for the existing restriction-counit argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an exact adjunction counit on chain complexes; counit naturality and adjunction mate compatibility",
+   "results": "Found localization_counit_app and derived counit APIs. They provide formal localization but no coefficient-presentation statement.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left; CategoryTheory.Equivalence.functor_unitIso_comp",
+   "results": "Found both standard categorical identities; used in the proof. No strict quotient-presentation assembly theorem.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "AugmentedPresentation|localization_counit_app|counit_evaluation; systemIsoOfEvaluation_exists",
+   "results": "Existing semilinear system isomorphism assembly supplies an ordinary model for the construction; scalar-unit augmented naturality and transported coefficient counit require the explicit calculations here.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenRestrictionCounitOnGoodComplexes",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-restriction-counit-on-good-complexes",
+   "place": "The ordinary counit and strict augmentation calculation in proof steps 1–3."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AugmentedReductionNaturality",
+  "file": "lean/Sheaf/Paper/AugmentedReductionNaturality.lean",
+  "declaration": "WeilConjectures.CanonicalOpenRestriction.augmentedReductionNaturality",
+  "statement": "theorem augmentedReductionNaturality\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (Q R : CochainComplex (scalarReductionSource l E W) ℤ)\n    (C D : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (eC : S.reduction.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj C)\n    (eD : S.reduction.obj (DerivedCategory.Q.obj R) ≅ DerivedCategory.Q.obj D)\n    (κC : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q)\n    (κD : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj D ≅\n        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj R)\n    (hC : AugmentedPresentation l E W S Q C eC κC)\n    (hD : AugmentedPresentation l E W S R D eD κD)\n    (h : Q ⟶ R) (f : C ⟶ D)\n    (hf : ∀ (n : ℕ) (i : ℤ),\n      (coefficientSequenceEvaluation l E W n).map (f.f i) ≫ (κD n).hom.f i =\n        (κC n).hom.f i ≫ (scalarReductionExtension l E W n).map (h.f i)) :\n    S.reduction.map (DerivedCategory.Q.map h) ≫ eD.hom =\n      eC.hom ≫ DerivedCategory.Q.map f",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T021257-L-2752118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T021257-L-2752118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

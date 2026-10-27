@@ -1,0 +1,147 @@
+{
+ "id": "lem-pe-coefficient-open-closed-kernel",
+ "kind": "statement",
+ "title": "Open extension identifies the coefficient-sized closed-unit kernel",
+ "statement": "Let $X$ be affine and $i:Z\\hookrightarrow X$, $j:U\\hookrightarrow X$ complementary closed and quasi-compact open immersions. Let $A$ be any commutative ring in universe $\\max(v,u+1)$ and let $F$ be a pro-etale $A$-module sheaf on the coefficient-sized model [def-weil-proetale-inverse-image]. Let $\\eta_F$ be the unit of its canonical fixed-coefficient pullback/direct-image adjunction [lem-pe-coefficient-fixed-closed-unit-epi]. For the explicitly constructed open extension [lem-pe-coefficient-open-extension], there is an isomorphism $j_!j^*F\\cong\\ker(\\eta_F)$. This statement has no etale-origin hypothesis and no conclusion about the comparison essential image.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, the kernel assertion"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-pe-coefficient-fixed-closed-unit-epi",
+  "lem-pe-coefficient-open-extension"
+ ],
+ "proof": [
+  {
+   "text": "Work on the original pro-etale sites with coefficients ModuleCat in max(v,u+1). Construct sheafification using the coefficient-sized AsSmall site and construct the required Kan extensions using essentially small comma categories. The composition/base-change site adjunction induces restriction left adjoint to direct image. Uniqueness of left adjoints identifies this restriction with the sheafified Kan pullback. Its left adjoint is the sheafified Kan extension along open composition. The adjoint triple implies that the open-extension unit is invertible.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pe-coefficient-open-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the closed-site adjunction for an affine quotient, whose unit is invertible. Opposites and precomposition make the presheaf direct image fully faithful. Restriction to affine pro-etale bases is fully faithful, so the sheaf direct image is fully faithful. Identify a closed immersion into affine X with a quotient immersion after the isomorphism X = Spec Gamma(X). Composition with these scheme isomorphisms preserves full faithfulness. Thus its closed sheaf counit is invertible with the independent coefficient universe.",
+   "uses": [
+    "lem-exc-closed-site-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullbacks along finitely many jointly surjective quasi-compact morphisms jointly detect sections. A section killed by a pullback unit vanishes locally in the Kan extension because sheafification is locally injective. Flatness makes its comma categories filtered; the forgetful functor of modules preserves the relevant filtered colimits, so equality with zero lifts to a site morphism where the original section vanishes. The quasi-compact cover composition-factor lemma combines these local morphisms into a covering family of the original site object. Separatedness gives zero. Naturality of the units detects zero maps; applying this to the identity detects zero objects. AB5 at the size of these comma categories proves finite-limit preservation by the Kan pullback.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Open pullback of closed direct image is zero, since each of its section objects is evaluated on an empty fibre product. Adjunction implies that closed pullback of open extension is zero and that the open counit followed by the closed unit vanishes. The resulting short complex becomes short exact under closed pullback, by its invertible counit and triangle identity, and under open pullback, by the invertible open unit and triangle identity. Exact pullbacks preserve the kernel of its first map, the cokernel of its second map, and homology. Each of these vanishes on both pieces; joint detection therefore proves short exactness. Its first map is a kernel of the closed unit.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Transport the kernel through the AsSmall sheaf equivalence on X. Conjugate the raw closed pullback adjunction by the sheaf equivalences on X and Z; its right adjoint is definitionally the specified coefficient-sized direct image. The unit equation for leftAdjointUniq gives the commuting isomorphism square with the fixed canonical unit, and kernel.mapIso gives the corresponding kernel isomorphism. Uniqueness of left adjoints similarly identifies the transported open pullback and extension with the specified coefficient-sized constructions. Compose these isomorphisms. Empty open, empty closed, and zero coefficient ring require no exceptions.",
+   "uses": [
+    "lem-pe-coefficient-fixed-closed-unit-epi",
+    "lem-pe-coefficient-open-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-exc-closed-site-adjunction",
+  "lem-pe-coefficient-fixed-closed-unit-epi",
+  "lem-pe-coefficient-open-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open; Tag 09BK, lemma-closed-immersion-affines. The proof adapts the existing module-valued section-detection and open-closed short-complex arguments to independent coefficient universes, followed by adjunction-compatible AsSmall transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero identifies kernel of unit to complementary closed subscheme for sheaves of modules",
+   "results": "Eight hits, including Scheme.kerAdjunction_unit_app and ideal-sheaf kernels; none concern pro-etale sheaf localization.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel closed immersion unit extension by zero sheaves modules complementary open",
+   "results": "Eight hits on ideal sheaves and closed-immersion lifts; no open-closed sequence for coefficient-sized sheaves.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*(counit|unit)|IsLimit.*KernelFork",
+   "results": "Generic kernel-fork APIs, notably Mathlib/CategoryTheory/ObjectProperty/Kernels.lean and Limits/Preserves/Shapes/Kernels.lean; no geometric localization.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientFixedLocalizationKernelComparison",
+  "date": "2026-10-26",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Constructible comparison induction: identify the open endpoint of the localization sequence and commute open extension with etale comparison.",
+   "via": [
+    "lem-pe-coefficient-fixed-kernel-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientOpenClosedKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientOpenClosedKernel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientOpenClosedKernelIso",
+  "statement": "theorem coefficientOpenClosedKernelIso\n    (A : Type (max v (u + 1))) [CommRing A]\n    {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)\n    [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]\n    (hU : Set.range j = (Set.range i)ᶜ)\n    (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    [HasKernel (C := Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A)) ((coefficientFixedCanonicalAdj.{u, v} A i).unit.app F)] :\n    Nonempty\n      ((coefficientOpenProEtaleExtension.{u, v} A j).obj\n          ((Scheme.coefficientProEtaleFixedModulePullback.{u, v} j A).obj F) ≅\n        kernel (C := Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n          (ModuleCat.{max v (u + 1)} A))\n          ((coefficientFixedCanonicalAdj.{u, v} A i).unit.app F))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T065250-L-2776723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T092204-L-3408356",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

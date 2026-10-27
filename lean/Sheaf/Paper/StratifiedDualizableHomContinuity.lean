@@ -33,6 +33,7 @@ import Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftRight
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Mathlib.CategoryTheory.Sites.LocalSite
 
 /-! # Hom continuity for stratified dualizable condensed complexes
 

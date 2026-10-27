@@ -1,0 +1,243 @@
+{
+ "id": "lem-trf-algebraic-diagonal-class-normalization",
+ "kind": "statement",
+ "title": "Polynomial comparison model and normalization of algebraic diagonal classes",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of commutative Noetherian rings [def-weil-pbc-flat-ring-map], [def-weil-pbc-finitely-presented-algebra], [def-weil-pbc-noetherian-ring]. Work in the ordinary module derived categories $D(A),D(B)$ [def-weil-abstract-derived-category], using derived tensor products computed by flat resolutions and derived Hom [def-pur-derived-internal-hom] on the one-point ringed site. Put $B=A\\otimes_R A$, $p_1(a)=a\\otimes1$, and make $A$ a $B$-module by multiplication $\\delta:B\\to A$ [def-trf-affine-diagonal-module-data]. Choose a polynomial presentation $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ [def-weil-pbc-mv-polynomial-ring] and set $C=R\\operatorname{Hom}_P(A,P)[n]\\in D(A)$ with its derived-coinduction $A$-action [def-trf-derived-coinduction]. For $T\\in D(A)$ write $T_1=T\\otimes_{A,p_1}^{\\mathbf L}B$. Then $C$ is pseudo-coherent over $A$ [def-pc-ring-pseudo-coherent-complex], has finite Tor amplitude over $R$, and $R\\operatorname{Hom}_B(A,C_1)\\cong A$ in $D(B)$. Let $M,N\\in D(A)$ be pseudo-coherent, each with finite Tor amplitude over $R$, and let $\\gamma:A\\to M_1$ and $\\theta:A\\to N_1$ be morphisms in $D(B)$ for which multiplication gives isomorphisms $A\\to R\\operatorname{Hom}_B(A,M_1)$ and $A\\to R\\operatorname{Hom}_B(A,N_1)$. Here finite $R$-Tor amplitude means that for each such $T$ there are integers $a_T\\le b_T$ with $H^i(T\\otimes_R^{\\mathbf L}Q)=0$ for every $R$-module $Q$ and $i\\notin[a_T,b_T]$. Multiplication by a class is the transpose of the derived multiplication of the diagonal algebra followed by that class. There are isomorphisms $M\\cong C\\cong N$ in $D(A)$, and the scalar maps $A\\to R\\operatorname{Hom}_A(T,T)$ for $T=M,N$ are isomorphisms. The groups $\\operatorname{Hom}_{D(B)}(A,M_1)$ and $\\operatorname{Hom}_{D(B)}(A,N_1)$ are free rank-one $A$-modules with bases $\\gamma$ and $\\theta$. There is exactly one isomorphism $a:M\\to N$ with $(a\\otimes^{\\mathbf L}_{A,p_1}B)\\gamma=\\theta$. Moreover $\\operatorname{Hom}_{D(A)}(T,T[i])=0$ for $T=M,N$ and every $i<0$.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0BZW (lemma-relative-dualizing-algebraic), 0E2E (lemma-relative-dualizing-noetherian), and 0E2D (lemma-uniqueness-relative-dualizing); generator normalization as in duality.tex, lemma-uniqueness-relative-dualizing."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-trf-affine-diagonal-module-data",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-derived-coinduction",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-algebraic-shriek-relative-perfect] to the chosen polynomial presentation: a finitely presented algebra is finite type. Its object $K$ is exactly $C$ with the specified coinduction action. Thus $C$ is pseudo-coherent, has finite $R$-Tor amplitude, and its scalar map $A\\to R\\operatorname{Hom}_A(C,C)$ is an isomorphism.",
+   "uses": [
+    "lem-trf-algebraic-shriek-relative-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW, lemma-relative-dualizing-algebraic, (1)(a)--(c) and (2)(a)."
+   }
+  },
+  {
+   "text": "Put $p_2(a)=1\\otimes a$. If $x_j$ generate $A/R$, then $x_j\\otimes1$ generate $B$ over $p_2(A)$, so [lem-weil-pbc-finite-type-algebra-noetherian] makes $B$ Noetherian. Write $\\varphi:R\\to A$. Flat base change (iii) of [lem-trf-algebraic-shriek-calculus], with base map $\\varphi$ and input $R[0]$, gives $C_1\\cong p_2^!(A[0])$ in $D(B)$; the original algebra factor is the first tensor factor. The multiplication $\\delta:B\\twoheadrightarrow A$ is a finite-type map and $\\delta p_2=1_A$. Parts (i)--(ii) of that same node give $\\delta^!p_2^!(A[0])\\cong A[0]$ in $D(A)$, since the input is bounded below. Part (i) identifies $\\delta^!$ with derived coinduction along the surjection $\\delta$. By [lem-trf-derived-coinduction-adjunction], restricting $\\delta^!C_1$ along $\\delta$ gives $R\\operatorname{Hom}_B(A,C_1)$. Restricting the displayed isomorphism therefore gives the required isomorphism with the diagonal module $A$ in $D(B)$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2E, lemma-relative-dualizing-noetherian, entire proof; Tags 0BZN, 0BZT, 0A71 for the three comparisons."
+   }
+  },
+  {
+   "text": "The hypotheses on $M,N$ and steps 1--2 put each of the pairs $(M,C)$ and $(C,N)$ under [lem-trf-algebraic-relative-dualizing-isomorphism]. Hence $M\\cong C\\cong N$. For $T=M,N$ choose an isomorphism $b:T\\to C$. Conjugation $f\\mapsto bfb^{-1}$ identifies the derived endomorphism objects by functoriality of [def-pur-derived-internal-hom]; it sends $r\\,1_T$ to $r\\,1_C$ for every $r\\in A$, since $b$ is $A$-linear. It consequently identifies the scalar map for $T$ with that for $C$. The latter is invertible by step 1, proving the claimed scalar-map isomorphisms.",
+   "uses": [
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2D, lemma-uniqueness-relative-dualizing; Tag 0BZW, scalar endomorphisms. Conjugation is the elementary naturality argument."
+   }
+  },
+  {
+   "text": "On the one-point ringed site global sections are the identity. A shift of a K-injective complex is K-injective: shift an acyclic source in its defining null-homotopy test. Apply [lem-pur-rhom-into-kinjective-local] to a representative $L$ and a K-injective representative $I$ of $U[i]$. Degree-zero Hom cocycles modulo boundaries are derived morphisms. Since $\\operatorname{Hom}^\\bullet(L,I_U[i])=\\operatorname{Hom}^\\bullet(L,I_U)[i]$ (both differentials are $(-1)^i d_{I_U}f-(-1)^j f d_L$ in degree $j$), [def-pur-derived-internal-hom] gives $H^iR\\operatorname{Hom}(L,U)=\\operatorname{Hom}_{D}(L,U[i])$. In particular step 3 gives $\\operatorname{End}_{D(A)}(T)=A$, with $r$ acting as $r1_T$, and $\\operatorname{Hom}_{D(A)}(T,T[i])=0$ for $i<0$.",
+   "uses": [
+    "lem-pur-rhom-into-kinjective-local",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A94, lemma-RHom-into-K-injective; shift formula on the Hom complex. Tag 08JA, lemma-section-RHom-over-U, is the corresponding derived-Hom formulation."
+   }
+  },
+  {
+   "text": "Apply the degree-zero identification of step 4 over $B$ to the given isomorphism $m_\\gamma:A\\to R\\operatorname{Hom}_B(A,M_1)$. Its map on $H^0$ is $A\\to\\operatorname{Hom}_{D(B)}(A,M_1)$, $r\\mapsto r\\gamma$: under transpose, evaluation at the derived unit gives $m_\\gamma(1)=\\gamma$, because multiplication by $1$ on the diagonal algebra is the identity. The same calculation applies to $\\theta$. The identifications are $A$-linear: precomposing by multiplication by $r$ on $A$ equals postcomposing by multiplication by $p_1(r)$ on the target, by $B$-linearity. Thus these two Hom modules are free on $\\gamma$ and $\\theta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, lemma-uniqueness-relative-dualizing, paragraph beginning Suppose we have an isomorphism; unit calculation from the stated multiplication transpose."
+   }
+  },
+  {
+   "text": "Choose an isomorphism $b:M\\to N$ from step 3. Postcomposition by $b_1=b\\otimes_{A,p_1}^{\\mathbf L}B$ is an $A$-linear bijection between the two Hom modules. Write $b_1\\gamma=u\\theta$ and $(b_1^{-1})\\theta=v\\gamma$. Substitution and the basis property give $uv=vu=1$. Then $a=u^{-1}b$ is an isomorphism and $a_1\\gamma=\\theta$. If $a\\prime$ is another such isomorphism, step 4 says $a\\prime a^{-1}=s1_N$ for a unique $s\\in A$. Its action on $\\theta$ is $s\\theta=\\theta$, so the basis property forces $s=1$ and $a\\prime=a$. This proves existence and uniqueness without choosing an orientation of $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, lemma-uniqueness-relative-dualizing, scalar-unit normalization paragraph; affine algebra specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-algebraic-shriek-calculus",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-algebraic-relative-dualizing-isomorphism",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-into-kinjective-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0BZW, 0E2E and 0E2D; normalization from duality.tex Tag 0E2W, with Hom identification from sites-cohomology.tex Tag 0A94 (and its derived-Hom formulation 08JA)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented Noetherian algebra has a polynomial relative dualizing model; pseudo coherent complexes with a diagonal generator have scalar derived endomorphisms and a unique generator preserving isomorphism",
+   "results": "8 hits; top=['Algebra.Smooth.flat_of_isNoetherianRing', 'Algebra.Smooth.flat', 'Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing', 'Algebra.Smooth.exists_finiteType', 'Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg', 'Algebra.Smooth.exists_subalgebra_fg', 'Algebra.Smooth', 'Algebra.smooth_iff']; note=; digest=4f3337091c00ff47",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complex algebra polynomial presentation RHom diagonal normalization of an isomorphism by a scalar unit",
+   "results": "8 hits; top=['Polynomial.algEquivCMulXAddC', 'CochainComplex.HomComplex.δ_units_smul', 'polyEquivTensor_symm_apply_tmul_eq_smul', 'CochainComplex.HomComplex.Cocycle.coe_units_smul', 'CochainComplex.HomComplex.δ_smul', \"polyEquivTensor'\", 'polyEquivTensor', 'IsLocalization.Away.mvPolynomialQuotientEquiv']; note=; digest=e7f2d2d675a710b5",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.End",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?dualiz|semidualiz|diagonal.{0,30}dualiz",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of rigid relative dualizing complexes for a flat Noetherian ring map via the polynomial shriek model and rank one diagonal Hom module",
+   "results": "8 hits; top=['Module.Flat.iff_characterModule_injective', 'Module.Flat.injective_characterModule_iff_rTensor_preserves_injective_linearMap', 'Module.Flat.iff_characterModule_baer', 'FGModuleCat.rightRigidCategory', 'Module.FaithfullyFlat', 'Module.FaithfullyFlat.iff_flat_and_lTensor_reflects_triviality', 'Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality', 'Module.Flat.tfae_equational_criterion']; note=; digest=0092db3ead813ef6",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?dualiz|semidualiz|diagonal.{0,30}dualiz",
+   "results": "0 hits; top=[]; directory=Mathlib/RingTheory; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: no relative dualizing, semidualizing or diagonal duality declaration in RingTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?dualiz|semidualiz|diagonal.{0,30}dualiz",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern basic Hom/Ext, flatness, or finite-dimensional rigidity; none states the polynomial relative dualizing model and its diagonal-generator normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.End",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern basic Hom/Ext, flatness, or finite-dimensional rigidity; none states the polynomial relative dualizing model and its diagonal-generator normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing polynomial complex RHom P A P shift diagonal class scalar endomorphisms unique normalization",
+   "results": "8 hits; top=['HomologicalComplex.evalCompCoyonedaCorepresentative', 'DerivedCategory.instLinearSingleFunctor', 'CategoryTheory.Abelian.Ext.homLinearEquiv', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'CategoryTheory.Abelian.Ext.linearEquiv₀', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply', 'CategoryTheory.Abelian.Ext.mk₀_linearEquiv₀_apply']; note=; digest=8658a2dc2b43e7ef",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern basic Hom/Ext, flatness, or finite-dimensional rigidity; none states the polynomial relative dualizing model and its diagonal-generator normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complexes over a flat finitely presented ring map have scalar derived endomorphisms and a unique isomorphism preserving diagonal generators",
+   "results": "8 hits; top=['RingHom.Flat', 'ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat', 'RingHom.FaithfullyFlat', 'ModuleCat.preservesFiniteLimits_extendScalars_of_flat', 'IsSMulRegular.of_flat_of_isBaseChange', 'Algebra.FormallyUnramified.flat_of_restrictScalars', 'KaehlerDifferential.endEquiv', 'RingHom.FaithfullyFlat.flat']; note=; digest=d8bde9d85214f6bd",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern basic Hom/Ext, flatness, or finite-dimensional rigidity; none states the polynomial relative dualizing model and its diagonal-generator normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of rigid dualizing complexes over noetherian algebras via generators of derived Hom on the diagonal",
+   "results": "8 hits; top=['FGModuleCat.rightRigidCategory', \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", 'CategoryTheory.HasProjectiveDimensionLT.subsingleton', 'instHasExtModuleCatOfSmall', 'CategoryTheory.projective_iff_subsingleton_ext_one', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", 'CategoryTheory.HasInjectiveDimensionLT.subsingleton', 'CategoryTheory.Abelian.Ext.linearEquiv₀']; note=; digest=438c952795b19950",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern basic Hom/Ext, flatness, or finite-dimensional rigidity; none states the polynomial relative dualizing model and its diagonal-generator normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-dualizing-pair-rigidity",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Re-split of supplied-pair rigidity: Old steps 2, algebraic part of 3, and algebraic normalization and negative-Ext computation of 4.",
+   "via": [
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-algebraic-diagonal-class-normalization",
+  "worker": "stage1",
+  "summary": "Used existing polynomial relative-perfectness, algebraic shriek calculus, and unnormalized isomorphism nodes. Proved the diagonal comparison with the correct p1/p2 orientation, transported the scalar map by conjugation, and wrote out the Hom basis and scalar-unit normalization. No new nodes or statement changes. Repair of returned head e8dc317912c: compared the retained split with the current unsplit item, re-read every current statement and proof dependency, verified all eight verbatim citation quotes, made the surjective-shriek/coinduction link and K-injective shift argument explicit, and corrected the primary Hom-computation source to Tag 0A94. Delivery is rebased by deliver.py against the current server DAG.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Re-split of supplied-pair rigidity: Old steps 2, algebraic part of 3, and algebraic normalization and negative-Ext computation of 4. This split realizes the algebraic normalization part of that inherited auxiliary route: polynomial model, diagonal comparison, scalar endomorphisms, and class-preserving isomorphism. The current ancestor itself is a local-term statement, not an independent coherent-duality theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-into-kinjective-local",
+    "why": "Generic computation of derived Hom by degree-zero cocycles, applied to the one-point ringed site and shifted target; the curve-local-term unit has no replacement for this homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Hilbert-basis/quotient result verifies that the tensor-product algebra B is Noetherian before applying polynomial shriek calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-into-kinjective-local",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-3ba40a8c7",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-3ba40a8c7 (reviewer sub-agent of L); spot-checked: This is a re-delivery of e8dc3179, which passed review; L returned it only because the side completion was never promoted. The item is still unsplit in both live and side-live. Its statement and stmt_deps are identical to side-live, it adds 0 new nodes, proof_deps equals the union of step uses, every step is under 2000 characters and nothing cites SGA. All 7 cited statements are unchanged between the two snapshots. The diff against e8dc changes only three things. (1) Step 2 now says that part (i) of lem-trf-algebraic-shriek-calculus makes delta^! derived coinduction for the surjection delta; this matches the node's text. (2) Step 4 adds that a shifted K-injective complex is K-injective, because shifting an acyclic source keeps it acyclic; this is correct and settles the earlier I/I_U wording advisory. (3) The source place moves from 08JA to 0A94; the tags file and sites-cohomology.tex:8720 confirm 0A94 is lemma-RHom-into-K-injective. I re-read all six steps. Step 1 is Stacks 0BZW. Step 2 is 0E2E: (iii) with input R[0] gives C1 = p2^!(A), (ii) with delta p2 = id on A[0] gives delta^! p2^! A = A, and (i) plus the coinduction adjunction give RHom_B(A,C1) = A in D(B). Step 3 conjugates the unnormalized isomorphisms. Step 4 checks the shift sign. Steps 5-6 are the elementary rank-one normalization of 0E2W. Edge cases R=A, A=0, k[x] and singular flat k[x,y]/(x,y)^2 are fine. I accept the tool uses rhom-into-kinjective-local (generic) and finite-type-noetherian (Mathlib leaf). No fixes."
+ }
+}

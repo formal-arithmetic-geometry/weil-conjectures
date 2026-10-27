@@ -17,115 +17,57 @@
  ],
  "proof": [
   {
-   "text": "Put $M=I/I^2$, $N=I_K/I_K^2$, and let $\\gamma:P\\to P_K$ be coefficient extension. Applying [lem-weil-pbc-presentation-base-change] to the identity presentation $P\\to P$ (no relations) and swapping the tensor factors gives a $P$-algebra isomorphism $P\\otimes_k K\\simeq P_K$ sending $p\\otimes\\lambda$ to $\\lambda\\gamma(p)$. Its inverse sends $x_i$ to $x_i\\otimes1$ and a coefficient $\\lambda$ to $1\\otimes\\lambda$; the two composites fix coefficients and variables, hence are identities by [def-weil-pbc-mv-polynomial-ring]. For the original quotient presentation, the identification $C_K=P_K/I_K$ in the statement is compatible with $C\\to C_K$ and $\\gamma$ on generators.",
+   "text": "Use MvPolynomial.algebraTensorAlgEquiv and the tensor factor swap to identify P_K as a P-algebra with P tensor_k K, where p maps to p tensor 1. The field extension K is a free k-module, so its base change is a free, hence flat, P-module. Transport flatness across the algebra equivalence. This uses only flatness, rather than faithful flatness or the quotient presentation.",
    "uses": [
-    "lem-weil-pbc-presentation-base-change",
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SI (lemma-lci-field-change-local), first proof paragraph, polynomial presentations; Tag 05G3 base change."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-field-extension-base-change-faithfully-flat] to $k\\to K$ and $D=P$. It makes $P\\to P\\otimes_k K$ faithfully flat, and hence flat by [def-weil-pbc-faithfully-flat-ring-map]. Under the $P$-algebra isomorphism of step 1 this is $\\gamma:P\\to P_K$. Thus the flat hypothesis needed for conormal base change holds for this very coefficient-extension map.",
-   "uses": [
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "def-weil-pbc-faithfully-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SI, $I_K=K\\otimes_k I$; flat field extension and base change, Tags 00HB and 00HI."
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] with $A=P$, $B=P_K$, and $J=I_K$, the map $\\phi:M\\otimes_P P_K\\to N$, $[f]\\otimes b\\mapsto b[\\gamma(f)]$, is an isomorphism. It is $P_K$-linear. Both modules are annihilated by $I_K$, so it is also $C_K$-linear: if $i\\in I$ then $m\\otimes\\gamma(i)b=(im)\\otimes b=0$. There is a canonical isomorphism $M\\otimes_C C_K\\to M\\otimes_P P_K$ sending $m\\otimes[b]$ to $m\\otimes b$. It is well defined because every element of $I_K$ is a sum of multiples of images of elements of $I$, which annihilate the latter tensor product as just checked. Its inverse is $m\\otimes b\\mapsto m\\otimes[b]$; balancing over $C=P/I$ follows by lifting a scalar to $P$. The two composites are the identity on pure tensors by [def-weil-pbc-module-tensor-product]. Compose to get $\\Theta:M\\otimes_C C_K\\simeq N$, with $\\Theta([f]\\otimes[b])=b[\\gamma(f)]$.",
-   "uses": [
-    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+    "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-module-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0473 (lemma-conormal-functorial-flat), affine proof; this supplies the conormal identity used in Tag 00SI and explicitly stated in Tag 00SJ."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $F=\\kappa(\\mathfrak q)$ and $L=\\kappa(\\mathfrak q_K)$. The composite $C\\to C_K\\to L$ kills $\\mathfrak q$ and takes $s\\notin\\mathfrak q$ to a nonzero element of $L$, since $\\mathfrak q$ is the contraction of $\\mathfrak q_K$. It therefore gives the map $C_{\\mathfrak q}\\to L$, $c/s\\mapsto\\bar c/\\bar s$, killing $\\mathfrak q C_{\\mathfrak q}$, and hence a unital field map $F\\to L$ by [def-weil-pbc-localization-at-prime]. This field map is injective: its kernel is an ideal in the field $F$ and cannot contain $1$. These are exactly the residue-field structures in the statement.",
+   "text": "Apply the existing proved Algebra.flat_cotangent_bijective from WeilConjectures.RingTheory.StrictHenselizationCotangentDimension, imported with import all because it is private. For the flat map gamma and J = I.map gamma it gives bijectivity of P_K tensor_P I.Cotangent to J.Cotangent. This is the general ring-map form of Mathlib flat conormal base change; no duplicate cotangent transport helpers are declared. The map sends b tensor [f] to b times [gamma(f)].",
+   "uses": [
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the residue-field homomorphism F to L supplied by Ideal.ResidueField.map for the contraction qP = qPK.comap gamma. Give L its P-algebra structure by the composite P to P_K to L. Ideal.ResidueField.map_algebraMap verifies that this also equals the composite through F. Explicitly register the associated modules to avoid the unrelated residue-field module instance.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SI, corresponding primes and residue-field maps in the displayed identity; localization/residue fields as in Tags 00CO and 07BH."
-   }
+   "elementary": true
   },
   {
-   "text": "The fraction and tensor relations [def-weil-pbc-module-localization, def-weil-pbc-module-tensor-product] give the canonical isomorphisms $M_{\\mathfrak q}\\otimes_{C_{\\mathfrak q}}F\\simeq M\\otimes_C F$ and $N_{\\mathfrak q_K}\\otimes_{(C_K)_{\\mathfrak q_K}}L\\simeq N\\otimes_{C_K}L$. In the first case the forward map is $(m/s)\\otimes a\\mapsto m\\otimes(a/\\bar s)$ and the inverse is $m\\otimes a\\mapsto(m/1)\\otimes a$; in the second case use the same formulas with $C_K,N,L$. Fractions have equal images because an annihilating denominator becomes invertible in the residue field. The tensor balancing relations hold by multiplication of the displayed scalars, and the composites are identities since $(m/s)\\otimes a=(m/1)\\otimes(a/\\bar s)$. Thus these identifications are proved directly for the modules at hand.",
+   "text": "For either prime q and any module M, LocalizedModule.equivTensorProduct and TensorProduct.AlgebraTensorModule.cancelBaseChange identify kappa(q) tensor_(P_q) M_q with kappa(q) tensor_P M. The identification sends a tensor (m/1) to a tensor m. Extend the first such equivalence from F to L, cancel F, insert scalar extension to P_K, apply the flat conormal isomorphism tensored with L, and apply the inverse second localization equivalence. This constructs the required L-linear equivalence. Evaluate every component on the relation class f using the pure-tensor formulas; the image is exactly the localized class of gamma(f).",
    "uses": [
     "def-weil-pbc-module-localization",
     "def-weil-pbc-module-tensor-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SI, displayed tensor fibre identity; explicit fractions as in module localization Tag 07JZ and tensor-localization Tag 00DK."
-   }
+   "elementary": true
   },
   {
-   "text": "Tensor balancing also gives $ (M\\otimes_C F)\\otimes_F L\\simeq M\\otimes_C L$, $(m\\otimes a)\\otimes\\lambda\\mapsto m\\otimes a\\lambda$, with inverse $m\\otimes\\lambda\\mapsto(m\\otimes1)\\otimes\\lambda$. Likewise $(M\\otimes_C C_K)\\otimes_{C_K}L\\simeq M\\otimes_C L$ sends $(m\\otimes b)\\otimes\\lambda$ to $m\\otimes\\bar b\\lambda$ and has inverse $m\\otimes\\lambda\\mapsto(m\\otimes1)\\otimes\\lambda$. Each pair is inverse on pure tensors and respects the scalar relations [def-weil-pbc-module-tensor-product]. Tensoring $\\Theta$ from step 3 with $L$ has inverse obtained by tensoring $\\Theta^{-1}$. Compose these maps and the maps of step 5 to obtain the asserted $L$-linear isomorphism. On $([f]/1\\otimes1)\\otimes\\lambda$ it gives $([\\gamma(f)]/1)\\otimes\\lambda$, so it is precisely the canonical coefficient-extension map, with all denominators governed by step 5.",
+   "text": "The Hilbert basis theorem makes the finite polynomial ring P Noetherian. Its ideal I and quotient I.Cotangent are finite modules. Scalar extension to F is finite, and the localization-cancellation equivalence therefore proves finite dimensionality of the first fibre. Scalar extension from F to L and the constructed equivalence give finite dimensionality of the second fibre. Finally combine LinearEquiv.finrank_eq with Module.finrank_baseChange. These arguments include the zero-dimensional and zero-variable cases.",
    "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-module-tensor-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SI, displayed equalities in the conormal-fibre calculation; Tag 00SJ, conormal identity $I\\prime/(I\\prime)^2=(I/I^2)\\otimes_C C_K$."
-   }
-  },
-  {
-   "text": "The ring $P$ is Noetherian by [lem-weil-pbc-polynomial-ring-field-regular-ring], so $I=(f_1,\\ldots,f_r)$ for some finite family by [def-weil-pbc-noetherian-ring]. Their classes generate $M$ over $C$: write any $f\\in I$ as $\\sum p_i f_i$ and reduce each $p_i$ modulo $I$. Hence their localized classes generate $M_{\\mathfrak q}$, and their residue classes span $V=M_{\\mathfrak q}\\otimes_{C_{\\mathfrak q}}F$. In particular $V$ is finite dimensional.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-field-regular-ring",
-    "def-weil-pbc-noetherian-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SI, final comparison of finite generator numbers; Noetherian polynomial ring Tag 00OQ and definition Tag 00FM."
-   }
-  },
-  {
-   "text": "Select a basis $v_1,\\ldots,v_d$ of $V$ from the finite spanning family of step 7 by repeatedly discarding a vector in the span of the others. The vectors $v_i\\otimes1$ span $V\\otimes_F L$. They are independent: the coordinate functionals $\\ell_j:V\\to F$ extend by $v\\otimes\\lambda\\mapsto\\ell_j(v)\\lambda$ to $L$-linear maps [def-weil-pbc-module-tensor-product], and applying the $j$th map to $\\sum a_i(v_i\\otimes1)=0$ gives $a_j=0$. Thus extension of scalars preserves $d$, including $d=0$. Step 6 identifies $V\\otimes_F L$ with the right conormal fibre, proving the finite-dimension conclusion over the respective residue fields.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SI, equality of residue-field dimensions following the displayed isomorphism."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization",
   "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
-  "lem-weil-pbc-polynomial-ring-field-regular-ring",
-  "lem-weil-pbc-presentation-base-change"
+  "lem-weil-pbc-ideal-cotangent-flat-base-change-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00SI (lemma-lci-field-change-local), displayed fibre identity, with the conormal quotient formulation explicitly in Tag 00SJ and flat conormal base change in morphisms.tex Tag 0473; fraction and tensor identifications written out."
+  "place": "Tag 00SI, displayed fibre calculation and finite generator comparison; morphisms.tex Tag 0473 for flat conormal base change. D2 uses the existing proved Algebra.flat_cotangent_bijective via import all WeilConjectures.RingTheory.StrictHenselizationCotangentDimension, then Mathlib tensor, localization, Hilbert basis and finrank APIs. The duplicate local cotangent helpers from returned delivery 854c5e90cb9 are removed."
  },
  "mathlib_searches": [
   {
@@ -308,5 +250,26 @@
   "result": "fix",
   "note": "Statement checked clause by clause against the node and Stacks 00SI (algebra.tex 36203-36259): presentation, coefficient extension, base-changed presentation aeval(1⊗π(X i)), qP equals the contraction q' (pi_K∘γ = includeRight∘π), conormal fibres at q'/q_K' in the polynomial rings (as the source computes; same as over C at q since I⊆q'), σ = ResidueField.map from γ, ∃ L-linear equivalence with the value on relation classes (determines e), both finite-dimensional with equal finrank; no extra hypotheses, no hollow def, sorry-only proof, the Module instance is the intended one (rfl test). Edge cases n=0, zero fibre, K=k, C=0 are covered. Fixes: F1 (H3) C:Type u forced into k's universe, now Type w; F2 (H8) nine helpers had no docstrings and the theorem docstring lacked the node's proof steps, now added with source place and blueprint; F3 (H4) the alias lciCoefficientExtension replaced by MvPolynomial.map and the unused lciBaseChangePrime/lciSourcePrime/lciExtendedKernel removed; F4 lean.declarations added. nt_compile: delivered file clean (3.9 s); fixed file clean, no warnings (4.4 s). Fix files: fixes/LciConormalFibreFieldChange.lean, fixes/lem-trf-lci-conormal-fibre-field-change.lean-record.json, fixes/lem-trf-lci-conormal-fibre-field-change.report.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261023T134949-L-2818856",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

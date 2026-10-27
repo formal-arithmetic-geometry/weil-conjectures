@@ -1,0 +1,150 @@
+{
+ "id": "lem-sfb-closed-test-scalar-model-squares",
+ "kind": "statement",
+ "title": "Scalar squares for supplied closed-test models",
+ "statement": "Let $\\Lambda,S$ be commutative condensed rings and $c:\\Lambda\\to S$ a morphism of ring objects [sk-def-sfb-condensed-ring, sk-def-sfb-coefficient-morphisms]. Use the specified exact restriction of scalars, universal right-derived comparisons and section arrows [def-sfb-closed-test-scalar-comparison-maps] and the specified models and comparison maps [def-sfb-closed-test-scalar-model-diagrams]. Assume UniversalCoherence(c) and SectionCoherence(c). Let $A$ be a commutative ring, $a\\subseteq A$ an ideal, $X$ affine, $f:X\\to\\operatorname{Spec}A$, and $(h:X_Z\\to X,f_Z:X_Z\\to\\operatorname{Spec}(A/a))$ the pullback of $f$ along the closed immersion [def-pc-fibre-product, def-weil-closed-immersion]. Let $V$ be an affine pro-etale test over $\\operatorname{Spec}(A/a)$ such that both $V$ and its specified closed-site lift are w-contractible [def-exc-closed-site-lift, sk-def-pe-wlocal]. For every bounded-below derived $S_X$-module $N$, TestModel $M$ of $N$ over $S$ and TestModel $P$ of $\\operatorname{Res}_X N$ over $\\Lambda$, ModelCoherence(c,A,a,f,h,f_Z,w,V,N,M,P) holds. All eight specified model arrows are isomorphisms, and the five specified scalar squares for source, target, chain restriction and localization commute. Only model and closed-unit isomorphisms are inverted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y, 09T5; sites-cohomology.tex Tags 07A6, 0D6F, 0FPI; proetale.tex Tag 09BL. Parent argument specialized to this step."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-closed-test-scalar-comparison-maps",
+  "def-sfb-closed-test-scalar-model-diagrams",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-exc-closed-site-lift",
+  "sk-def-pe-wlocal"
+ ],
+ "proof": [
+  {
+   "text": "Use the K-injective section-model theorem for N and its scalar restriction, which is bounded below by exactness of restriction. Identify sourceModel with the inverse of the specified closed-unit inverse followed by the inverse direct-image section identity. Identify targetModel with the inverse of the right section identity followed by its computation-unit inverse. These give the first four IsIso clauses. Each localizationModel is the composite of an evaluation computation-unit iso on a K-injective complex, a derived localization iso, and the functor image of its representative iso, giving the remaining four. Restriction preserves the actual closed-unit section and its inverse. The assumed section and universal computation-unit equations, pasted with those section-model identities, give the source and target scalar squares. Only closed-unit and model isomorphisms are inverted.",
+   "uses": [
+    "lem-sfb-closed-test-unit-evaluation",
+    "lem-sfb-closed-test-kinjective-section-models",
+    "def-sfb-right-derived-functor",
+    "lem-sfb-unbounded-sections-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL (lemma-closed-immersion-affines-apply) (1)--(2); sites-cohomology.tex Tag 0D6F for the normalized localized models."
+   }
+  },
+  {
+   "text": "Identify the normalized exchanged arrow with Q of the actual unit section followed by j on the fibre, using the chain-mate restriction theorem. Paste the source and target scalar squares around the exchange square in the assumed UniversalCoherence. Cancel the normalized model isomorphisms to obtain exactly the chainRestriction square. The degreewise localization identity commutes with restriction; its computation-unit normalization and the same representative calculation give both localization squares, with the specified derived pullback/scalar compositor in the target.",
+   "uses": [
+    "lem-sfb-closed-test-chain-mate-restriction",
+    "lem-sfb-closed-test-kinjective-section-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL, with derived.tex Tag 09T5 and sites-cohomology.tex Tags 0D6E--0D6F; paste the normalized model squares."
+   }
+  },
+  {
+   "text": "The universal, section and exchange equations used in the pasting are the assumed UniversalCoherence and SectionCoherence. A new Lambda-K-injective resolution of the restricted complex is used; restriction is never assumed to preserve K-injectives.",
+   "uses": [
+    "def-sfb-closed-test-scalar-comparison-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-test-unit-evaluation",
+  "lem-sfb-closed-test-kinjective-section-models",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-unbounded-sections-localization",
+  "lem-sfb-closed-test-chain-mate-restriction",
+  "def-sfb-closed-test-scalar-comparison-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y and 09T5; assembly of parent proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with universal derived comparison units and section models",
+   "results": "8 hits: RestrictScalars, AlgHom.restrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, Submodule.restrictScalars, ModuleCat.RestrictScalars.obj', LinearMap.restrictScalarsₗ, PresheafOfModules.restrictScalars",
+   "date": "2026-10-25",
+   "verdict": "No normalized closed-test derived comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib total derived computation-unit API. The source library has the API used here."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars",
+   "results": "25 hits, primarily scalar towers and linear maps in number theory, no closed-test models.",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Additional rg of Sheaf and WeilConjectures found the normalized-model predicates and rightDerivedPullback calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClosedTestScalarModelCoherence",
+  "date": "2026-10-25",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 10, 11: Universal coefficient comparison for closed-test models; Scalar squares for supplied closed-test models",
+   "via": [
+    "lem-sfb-closed-test-scalar-model-coherence",
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedTestScalarModelSquares",
+  "file": "lean/Sheaf/Paper/ClosedTestScalarModelSquares.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestScalarModelCoherence.closed_test_scalar_model_squares",
+  "statement": "theorem closed_test_scalar_model_squares (hc : UniversalCoherence c) (hs : SectionCoherence c)\n    (A : Type u) [CommRing A] (a : Ideal A)\n    {X XZ : Scheme.{u}} [IsAffine X] (f : X ⟶ Spec (.of A))\n    (h : XZ ⟶ X) (fZ : XZ ⟶ Spec (.of (A ⧸ a)))\n    (w : IsPullback h fZ f (closedMap A a))\n    (V : (Spec (.of (A ⧸ a))).AffineProEt)\n    [IsWContractibleRing Γ(V.left, ⊤)]\n    [IsWContractibleRing Γ((liftedTest A a V).left, ⊤)]\n    (N : DerivedCategory.Plus\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X)))\n    (M : TestModel S h N.obj) (P : TestModel Λ h ((restrict c X).obj N.obj)) :\n    ModelCoherence c A a f h fZ w V N.obj M P",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

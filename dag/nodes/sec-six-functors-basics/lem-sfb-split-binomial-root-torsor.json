@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-split-binomial-root-torsor",
+ "kind": "statement",
+ "title": "Separable split binomial roots form a scalar torsor",
+ "statement": "Let $F$ be a field [def-weil-field], $n\\geq1$ an integer invertible in $F$, and suppose $X^n-1$ splits over $F$. Fix an algebraic closure $\\Omega/F$ [def-weil-algebraic-closure]. Write $\\mu_n(F)=\\{\\zeta\\in F^\\times:\\zeta^n=1\\}$, with multiplication inherited from $F$. This is a finite group of cardinality $n$. For every $a\\in F^\\times$, the monic polynomial $X^n-a\\in F[X]$ [def-weil-polynomial-ring] is separable [def-pc-separable-polynomial]. If $\\alpha\\in\\Omega$ satisfies $\\alpha^n=a$, then $\\alpha\\ne0$, and multiplication by $\\alpha$ defines a bijection\n$$\\mu_n(F)\\xrightarrow{\\sim}\\{\\beta\\in\\Omega:\\beta^n=a\\},\\qquad\\zeta\\longmapsto\\alpha\\zeta.$$\nMoreover,\n$$X^n-a=\\prod_{\\zeta\\in\\mu_n(F)}(X-\\alpha\\zeta)\\quad\\text{in }\\Omega[X].$$\nFor $a=1$ and $\\alpha=1$ this includes $X^n-1=\\prod_{\\zeta\\in\\mu_n(F)}(X-\\zeta)$. No irreducibility of $X^n-a$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I6, section-Kummer, opening paragraph; the roots-of-unity and binomial-splitting input to the one-root Kummer construction, without irreducibility; extracted from returned proof steps 2, 4 and the scaling calculation of step 5"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial"
+ ],
+ "proof": [
+  {
+   "text": "For $b\\in F^\\times$ put $f_b=X^n-b$. Since $n\\geq1$, this is monic of degree $n$ and $f_b'=nX^{n-1}$. Both $b$ and $n$ are invertible. The identity $-b^{-1}f_b+(nb)^{-1}Xf_b'=1$ proves separability by the Bezout definition [def-pc-separable-polynomial]. This applies to $b=a$ and $b=1$, without irreducibility.",
+   "uses": [
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph; explicit elementary root-scaling argument supplied by Q24. Separability uses Tag 09H1 (definition-separable) with the displayed Bezout identity; distinct-root input is the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-separable-polynomial-distinct-roots-alg-closed] to the two monic separable polynomials $f_a,f_1$ over $F$ in its algebraic closure $\\Omega$. Each has exactly $n$ distinct roots, and each equals the product of $X-\\rho$ over its roots in $\\Omega$. All hypotheses follow from step 1 and the given algebraic closure.",
+   "uses": [
+    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph; explicit elementary root-scaling argument supplied by Q24. Separability uses Tag 09H1 (definition-separable) with the displayed Bezout identity; distinct-root input is the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "The splitting hypothesis writes $f_1=\\prod_{i=1}^n(X-c_i)$ with $c_i\\in F$. Evaluation at any $\\gamma\\in\\Omega$ satisfying $\\gamma^n=1$ gives $\\prod_i(\\gamma-c_i)=0$, hence $\\gamma=c_i$ for some $i$, since $\\Omega$ is a field. Thus all the $n$ roots counted in step 2 lie in $F$. They are nonzero, since $0^n=0\\ne1$. Their group is precisely $\\mu_n(F)$: $1^n=1$, $(uv)^n=u^nv^n=1$, and $(u^{-1})^n=(u^n)^{-1}=1$. Consequently this is a finite group of cardinality $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph; explicit elementary root-scaling argument supplied by Q24. Separability uses Tag 09H1 (definition-separable) with the displayed Bezout identity; distinct-root input is the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "If $\\alpha^n=a$, then $\\alpha\\ne0$ since $a\\ne0$ and $n\\geq1$. For $\\zeta\\in\\mu_n(F)$, $(\\alpha\\zeta)^n=a$. Conversely, if $\\beta^n=a$, then $(\\beta/\\alpha)^n=\\beta^n/\\alpha^n=1$. Step 3 places $\\beta/\\alpha$ in $F^\\times$ and hence in $\\mu_n(F)$. The formulas $\\alpha(\\beta/\\alpha)=\\beta$ and $(\\alpha\\zeta)/\\alpha=\\zeta$ show that these two maps are mutual inverses, proving the claimed bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph; explicit elementary root-scaling argument supplied by Q24. Separability uses Tag 09H1 (definition-separable) with the displayed Bezout identity; distinct-root input is the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "The factorization from [lem-pc-separable-polynomial-distinct-roots-alg-closed], applied to $f_a$ as in step 2, is indexed by its distinct roots in $\\Omega$. Reindex this finite product by the bijection of step 4 to obtain $X^n-a=\\prod_{\\zeta\\in\\mu_n(F)}(X-\\alpha\\zeta)$. Substituting $a=1$ and $\\alpha=1$ gives the last asserted factorization.",
+   "uses": [
+    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph; explicit elementary root-scaling argument supplied by Q24. Separability uses Tag 09H1 (definition-separable) with the displayed Bezout identity; distinct-root input is the cited Mathlib leaf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-separable-polynomial",
+  "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I6 (section-Kummer), opening paragraph; explicit elementary root-scaling argument supplied by Q24. Separability uses Tag 09H1 (definition-separable) with the displayed Bezout identity; distinct-root input is the cited Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "separable_X_pow_sub_C|card_rootsOfUnity|roots_X_pow_sub_C|splits_X_pow_sub_C",
+   "results": "10 hits; Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/Separable.lean, Mathlib/FieldTheory/Separable.lean, Mathlib/FieldTheory/Separable.lean, Mathlib/FieldTheory/Separable.lean; Mathlib/FieldTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: separability, primitive-root factorizations and root cardinalities are separate results; none is a one-line specialization giving the full root-torsor statement under the splitting hypothesis, without choosing a primitive root."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The roots of X^n minus a are the scalar multiples of one root by all nth roots of unity and the binomial is separable",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, Polynomial.X",
+   "results": "12 hits; Polynomial.separable_X, Polynomial.separable_X_add_C, Polynomial.separable_X_sub_C, Polynomial.Separable.injective_of_prod_X_sub_C, Polynomial.nodup_of_separable_prod, Polynomial.Separable.inj_of_prod_X_sub_C, Polynomial.X_pow_sub_one_separable_iff, Polynomial.separable_prod_X_sub_C_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: separability, primitive-root factorizations and root cardinalities are separate results; none is a one-line specialization giving the full root-torsor statement under the splitting hypothesis, without choosing a primitive root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a field with n invertible and X^n-1 split, the polynomial X^n-a is separable and its roots are alpha times the n distinct roots of unity",
+   "results": "8 hits; X_pow_sub_C_splits_of_isPrimitiveRoot, rootOfSplitsXPowSubC, X_pow_sub_C_eq_prod, Polynomial.X_pow_sub_one_splits, rootOfSplitsXPowSubC_pow, IsPrimitiveRoot.nthRoots_eq, IsPrimitiveRoot.card_nthRoots, Polynomial.nthRoots",
+   "date": "2026-10-22",
+   "verdict": "no match: separability, primitive-root factorizations and root cardinalities are separate results; none is a one-line specialization giving the full root-torsor statement under the splitting hypothesis, without choosing a primitive root."
+  },
+  {
+   "tool": "grep",
+   "query": "X_pow_sub_C_eq_prod|card_rootsOfUnity|card_rootsOfUnity_eq|rootsOfUnity.*[Cc]ard|nthRoots_one",
+   "results": "24 hits; Mathlib/RingTheory/RootsOfUnity/Lemmas.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean, Mathlib/RingTheory/RootsOfUnity/Basic.lean, Mathlib/RingTheory/RootsOfUnity/Basic.lean, Mathlib/RingTheory/RootsOfUnity/Basic.lean, Mathlib/RingTheory/RootsOfUnity/Basic.lean; Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: separability, primitive-root factorizations and root cardinalities are separate results; none is a one-line specialization giving the full root-torsor statement under the splitting hypothesis, without choosing a primitive root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scaling the roots of X^n-1 by a nonzero nth root of a gives every root of X^n-a, with n distinct roots lying in any extension field containing that nth root",
+   "results": "8 hits; IsPrimitiveRoot.nthRoots_eq, autAdjoinRootXPowSubC_root, Polynomial.nthRoots, IsPrimitiveRoot.card_nthRoots, AdjoinRootXPowSubCEquivToRootsOfUnity, rootOfSplitsXPowSubC_pow, autAdjoinRootXPowSubCEquiv_root, Polynomial.nthRootsFinset",
+   "date": "2026-10-22",
+   "verdict": "no match: separability, primitive-root factorizations and root cardinalities are separate results; none is a one-line specialization giving the full root-torsor statement under the splitting hypothesis, without choosing a primitive root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an extension of a field where X^n-1 splits and n is nonzero, for each nonzero a and alpha^n=a, multiplying by alpha bijects the base nth roots of unity with all roots of X^n-a and gives its factorization",
+   "results": "8 hits; AdjoinRootXPowSubCEquivToRootsOfUnity, autAdjoinRootXPowSubC_root, autAdjoinRootXPowSubCEquiv_root, autEquivRootsOfUnity_apply_rootOfSplit, adjoinRootXPowSubCEquiv_symm_eq_root, adjoinRootXPowSubCEquiv_root, autAdjoinRootXPowSubCEquiv, IsPrimitiveRoot.nthRoots_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: separability, primitive-root factorizations and root cardinalities are separate results; none is a one-line specialization giving the full root-torsor statement under the splitting hypothesis, without choosing a primitive root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a field with n nonzero and X^n-1 split, multiplication by one nonzero nth root of a bijects the nth roots of unity with the roots of X^n-a",
+   "results": "{\"t\": \"2026-10-23T04:10:17Z\", \"tool\": \"leanfinder\", \"query\": \"Over a field with n nonzero and X^n-1 split, multiplication by one nonzero nth root of a bijects the nth roots of unity with the roots of X^n-a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRootXPowSubCEquivToRootsOfUnity\", \"autAdjoinRootXPowSubCEquiv\", \"autAdjoinRootXPowSubCEquiv_root\", \"autAdjoinRootXPowSubC_root\", \"IsPrimitiveRoot.nthRoots_eq\", \"adjoinRootXPowSubCEquiv_root\", \"adjoinRootXPowSubCEquiv_symm_eq_root\", \"autAdjoinRootXPowSubC\"], \"digest\": \"1859ac3d30021479\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: separable_X_pow_sub_C gives separability alone; card_rootSet_eq_natDegree gives a root count; rootsOfUnityEquivNthRoots identifies roots of one only; IsPrimitiveRoot.nthRoots_eq and X_pow_sub_C_eq_prod require a primitive root and use power indexing. Kummer automorphism equivalences concern irreducibility. The base-field root descent and scalar bijection still require the explicit argument."
+  },
+  {
+   "tool": "grep",
+   "query": "separable_X_pow_sub_C|rootsOfUnityEquivNthRoots|X_pow_sub_C_eq_prod|nthRoots_one",
+   "results": "{\"t\": \"2026-10-23T04:10:47Z\", \"tool\": \"grep\", \"query\": \"separable_X_pow_sub_C|rootsOfUnityEquivNthRoots|X_pow_sub_C_eq_prod|nthRoots_one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/IsSepClosed.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\"], \"digest\": \"847e179406e67768\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: separable_X_pow_sub_C gives separability alone; card_rootSet_eq_natDegree gives a root count; rootsOfUnityEquivNthRoots identifies roots of one only; IsPrimitiveRoot.nthRoots_eq and X_pow_sub_C_eq_prod require a primitive root and use power indexing. Kummer automorphism equivalences concern irreducibility. The base-field root descent and scalar bijection still require the explicit argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, Polynomial.X",
+   "results": "{\"t\": \"2026-10-23T04:10:48Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Separable, Polynomial.X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Polynomial.separable_X\", \"Polynomial.separable_X_add_C\", \"Polynomial.separable_X_sub_C\", \"Polynomial.Separable.injective_of_prod_X_sub_C\", \"Polynomial.nodup_of_separable_prod\", \"Polynomial.Separable.inj_of_prod_X_sub_C\", \"Polynomial.X_pow_sub_one_separable_iff\", \"Polynomial.separable_prod_X_sub_C_iff\"], \"digest\": \"88d9f9b74a5d054c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: separable_X_pow_sub_C gives separability alone; card_rootSet_eq_natDegree gives a root count; rootsOfUnityEquivNthRoots identifies roots of one only; IsPrimitiveRoot.nthRoots_eq and X_pow_sub_C_eq_prod require a primitive root and use power indexing. Kummer automorphism equivalences concern irreducibility. The base-field root descent and scalar bijection still require the explicit argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The roots of a separable split binomial X^n-a are one root times the nth roots of unity",
+   "results": "{\"t\": \"2026-10-23T04:10:50Z\", \"tool\": \"leansearch\", \"query\": \"The roots of a separable split binomial X^n-a are one root times the nth roots of unity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rootOfSplitsXPowSubC\", \"Polynomial.nthRoots\", \"X_pow_sub_C_splits_of_isPrimitiveRoot\", \"Polynomial.nthRootsFinset\", \"rootOfSplitsXPowSubC.congr_simp\", \"Polynomial.nodup_roots_iff_of_splits\", \"Polynomial.card_rootSet_eq_natDegree\", \"IsPrimitiveRoot.nthRoots_eq\"], \"digest\": \"ebcc9a5abf8bcd58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: separable_X_pow_sub_C gives separability alone; card_rootSet_eq_natDegree gives a root count; rootsOfUnityEquivNthRoots identifies roots of one only; IsPrimitiveRoot.nthRoots_eq and X_pow_sub_C_eq_prod require a primitive root and use power indexing. Kummer automorphism equivalences concern irreducibility. The base-field root descent and scalar bijection still require the explicit argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All nth roots of a nonzero field element are alpha times roots of unity, with inverse beta divided by alpha",
+   "results": "{\"t\": \"2026-10-23T04:10:56Z\", \"tool\": \"leanfinder\", \"query\": \"All nth roots of a nonzero field element are alpha times roots of unity, with inverse beta divided by alpha\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.nthRoots_eq\", \"autAdjoinRootXPowSubC_root\", \"rootsOfUnityEquivNthRoots\", \"Polynomial.nthRoots\", \"rootsOfUnityEquivNthRoots_symm_apply\", \"rootsOfUnityEquivNthRoots_apply\", \"AdjoinRootXPowSubCEquivToRootsOfUnity\", \"Polynomial.nthRootsFinset\"], \"digest\": \"af4dc481f623b04a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: separable_X_pow_sub_C gives separability alone; card_rootSet_eq_natDegree gives a root count; rootsOfUnityEquivNthRoots identifies roots of one only; IsPrimitiveRoot.nthRoots_eq and X_pow_sub_C_eq_prod require a primitive root and use power indexing. Kummer automorphism equivalences concern irreducibility. The base-field root descent and scalar bijection still require the explicit argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiradical-galois-degree",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, adjoining finitely many roots; prime-to-characteristic degree is needed in the residue calculation.; the roots-of-unity and binomial-splitting input to the one-root Kummer construction, without irreducibility; extracted from returned proof steps 2, 4 and the scaling calculation of step 5",
+   "via": [
+    "lem-sfb-multiradical-galois-degree",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-split-binomial-root-torsor",
+  "worker": "stage1",
+  "summary": "Proved separability by an explicit Bezout identity, reused the existing distinct-root factorization Mathlib leaf, and wrote splitting descent, the group laws and both inverse identities explicitly. No new nodes, no statement changes, and no irreducibility hypothesis. Read the source and checked n=1, reducible binomials and the excluded bad-characteristic cases. Repair of the live-DAG promotion return: rebased the retained split onto the current live unsplit node, reread both cited Mathlib leaves and all statement dependencies, preserved the exact statement, sources and logged searches, and corrected derivative notation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, adjoining finitely many roots; prime-to-characteristic degree is needed in the residue calculation.; the roots-of-unity and binomial-splitting input to the one-root Kummer construction, without irreducibility; extracted from returned proof steps 2, 4 and the scaling calculation of step 5",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-27965de9c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-27965de9c (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes and its statement is unchanged. Compared with the prior push 36a7, the only change is the derivative notation f_b' in step 1. Sources read: Stacks fields.tex section-Kummer (09I6, l.3215) for the root-scaling paragraph; definition-separable and lemma-recognize-separable are present. Steps: (1) I checked the Bezout identity -b^{-1}(X^n-b)+(nb)^{-1}X*nX^{n-1}=1; it uses b≠0, n∈F^× and n≥1, against def-pc-separable-polynomial. (2) and (5): the cited Mathlib leaf lem-pc-separable-polynomial-distinct-roots-alg-closed is applied to the monic, separable, degree-n polynomials f_a and f_1 in Ω, with all hypotheses met. (3) Splitting descent by evaluating ∏(γ-c_i) in the field Ω; the group laws are written out, and the cardinality n follows from step 2. (4) α≠0, β/α lies in μ_n(F) by step 3, and the two maps are mutually inverse. Elementary flags are justified. Small cases checked: n=1; F_7 with n=3 and a=3 (irreducible, roots α{1,2,4}); the reducible case a=1, n=2; the excluded cases char|n and a=0. Searched for duplicates: lem-exc-kummer-binomial-splitting-field (assumes irreducibility), lem-sbc-strict-local-roots-of-unity and root-torsor-properties (strictly henselian rings), lem-exc-tame-root-extension (DVR); none is a duplicate. The citer lem-sfb-multiradical-galois-degree has the same hypotheses. No SGA, no tool_uses, search records honest (leansearch recorded as unavailable)."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SplitBinomialRootTorsor",
+  "declaration": "Polynomial.split_binomial_root_torsor",
+  "file": "lean/Sheaf/FieldTheory/SplitBinomialRootTorsor.lean",
+  "statement": "theorem split_binomial_root_torsor (F : Type u) [Field F] (n : ℕ) [NeZero n] (hn : IsUnit (n : F)) (hsplit : (X ^ n - 1 : F[X]).Splits) (Ω : Type v) [Field Ω] [Algebra F Ω] [IsAlgClosure F Ω] : Nat.card (rootsOfUnity n F) = n ∧ (∀ a : Fˣ, (X ^ n - C (a : F)).Monic ∧ (X ^ n - C (a : F)).Separable ∧ ∀ α : Ω, α ^ n = algebraMap F Ω (a : F) → α ≠ 0 ∧ (∃ e : rootsOfUnity n F ≃ {β : Ω // β ^ n = algebraMap F Ω (a : F)}, ∀ ζ : rootsOfUnity n F, (e ζ : Ω) = α * algebraMap F Ω ((ζ : Fˣ) : F)) ∧ (X ^ n - C (algebraMap F Ω (a : F)) : Ω[X]) = ∏ ζ ∈ @Finset.univ (rootsOfUnity n F) (Fintype.ofFinite _), (X - C (α * algebraMap F Ω ((ζ : Fˣ) : F)))) ∧ (X ^ n - 1 : Ω[X]) = ∏ ζ ∈ @Finset.univ (rootsOfUnity n F) (Fintype.ofFinite _), (X - C (algebraMap F Ω ((ζ : Fˣ) : F)))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-212954269",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps, Stacks 09I6, module, report. Every clause matches: Field F; NeZero n (n≥1); IsUnit (n:F); (X^n-1).Splits over F (Mathlib Splits.lean:36); IsAlgClosure F Ω with independent universe v; μ_n(F)=rootsOfUnity n F with Nat.card = n (Mathlib Finite instance); ∀ a:Fˣ, X^n-C a Monic and Separable; α^n=a → α≠0, ∃ equiv pinned pointwise to ζ↦αζ, factorization in Ω[X] over the whole group; a=1,α=1 conjunct; no irreducibility. Edge cases n=1, reducible binomials, p∤n covered; n=0, a=0, p|n excluded as in the node. No defs, only sorry, docstrings carry source and blueprint, lean.statement verbatim, node differs from side-live only in lean record, no name clash with Mathlib or side-live. Not recompiled (no change). Note: the second reading is by the same worker; it is substantive."
+ }
+}

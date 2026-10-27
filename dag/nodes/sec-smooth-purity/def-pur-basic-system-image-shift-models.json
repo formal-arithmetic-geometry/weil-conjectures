@@ -1,0 +1,120 @@
+{
+ "id": "def-pur-basic-system-image-shift-models",
+ "kind": "definition",
+ "title": "Resolution computation and shift-model predicate for whole-system direct image",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, a supplied simultaneous operation package $o$, and an arbitrary scheme morphism $p:X\\to Y$ [def-sf-integral-system-operations]. Write $S_p$ for its actual total derived direct image of strict systems, and $p_*^0$ for the ordinary sequence-site direct image. For unbounded complexes $M,I$ of strict-system modules and a quasi-isomorphism $a:M\\to I$ [def-pc-quasi-iso-modules] into a K-injective complex [def-pur-kinjective-complex], define $c_a:S_p(QM)\\xrightarrow{\\sim}Q(p_*^0I)$ to be $S_p(Qa)$ followed by the inverse of the actual derived-unit component on $I$. Here $Q$ is localization to the ordinary unbounded derived category [def-weil-abstract-derived-category]. Use the prescribed mate shift $\\sigma_p$ of [def-pur-integral-operation-shift-data]. Define the predicate BasicSystemImageShiftModels to require, for every such $M,I,a$ and every $r\\in\\mathbf Z$, that $I[r]$ is K-injective, $a[r]$ is a quasi-isomorphism, and the following entire-system derived square commutes. The route $S_p(Q(M[r]))\\to S_p((QM)[r])\\to (S_p(QM))[r]\\to (Q(p_*^0I))[r]$, using the localization shift, $\\sigma_p$, and $c_a[r]$, equals the route $S_p(Q(M[r]))\\xrightarrow{c_{a[r]}}Q(p_*^0(I[r]))\\to Q((p_*^0I)[r])\\to (Q(p_*^0I))[r]$, using the termwise direct-image shift and localization shift. This is a definition of a property of the fixed maps, not an existence or shift-compatibility assertion. No K-injectivity of individual evaluated or scalar-restricted systems is required.",
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-pc-quasi-iso-modules",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "def-pur-integral-operation-shift-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used coefficient-comparison sentence; item proof step 1: shifted simultaneous direct-image resolution. Stacks 011G, 070I, 079P and 07A6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict finite coefficient tensor tower, signed right tensor shift formula, Roos cone coordinate shift formula, and simultaneous direct image resolution shift models",
+   "results": "8 hits: CochainComplex.instAdditiveIntShiftFunctor; CochainComplex.HomComplex.Cochain.leftShift_rightShift_eq_negOnePow_rightShift_leftShift; CochainComplex.HomComplex.Cochain.rightUnshift; CochainComplex.instLinearIntShiftFunctor; CochainComplex.instLinearHomologicalComplexIntUpShiftFunctor; CochainComplex.mappingCone.shiftIso; CochainComplex.HomComplex.Cochain.δ_rightUnshift; CochainComplex.mappingCone.shiftTriangleIso.",
+   "date": "2026-10-24",
+   "verdict": "Generic shift and cone tools only; reuse the existing project definition, without its module theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict finite coefficient tensor tower, signed right tensor shift formula, Roos cone coordinate shift formula, and simultaneous direct image resolution shift models",
+   "results": "8 hits: HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; CategoryTheory.CommShift₂Setup.int_z; CategoryTheory.Tor; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; CategoryTheory.Tor'; CategoryTheory.CommShift₂Setup.int_ε; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X.",
+   "date": "2026-10-24",
+   "verdict": "No exact finite quotient tower or representative normalization interface; reuse the existing project definition."
+  },
+  {
+   "tool": "grep",
+   "query": "BasicSystemImageShiftModels|integralOperationsTensorTowerFunctor|integralCompletedTensorFiniteShiftFormula|RoosConeCalculus",
+   "results": "msearch.py: 0 Mathlib hits. rg in lean/WeilConjectures: no declarations. rg in lean/Sheaf: exact definitions in BasicSystemShiftResolutionCalculus.lean, IntegralOperationsWellDefined.lean, CompletedTensorShiftRight.lean, and RoosConeCalculus.lean. Declaration-ownership scan of all dag/nodes/*/def-*.json: no definition node owns these four interfaces. blueprint_refs.py searches for BasicSystemImageShiftModels, integralOperationsTensorTowerFunctor, RoosConeCalculus and integralCompletedTensorFiniteShiftFormula each returned 0 blueprint matches.",
+   "date": "2026-10-24",
+   "verdict": "Existing plain project definitions have only theorem-node ownership; add definition-only existing:true records as requested by the maintainer."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-basic-realization-shift-square",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Maps-used coefficient-comparison sentence; item proof step 1: shifted simultaneous direct-image resolution. Stacks 011G, 070I, 079P and 07A6.",
+   "via": [
+    "lem-pur-basic-realization-shift-square",
+    "lem-pur-integral-basic-operation-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.BasicSystemShiftResolutionCalculus",
+  "declaration": "WeilConjectures.IntegralSystemRealization.BasicSystemImageShiftModels",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.basicSystemImageResolutionIso",
+   "WeilConjectures.IntegralSystemRealization.BasicSystemImageShiftModels"
+  ],
+  "statement": "def BasicSystemImageShiftModels (o : Operations l E) {X Y : Scheme.{u}} (p : X ⟶ Y) :\n    Prop",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only ownership of existing published plain declarations, requested in the independent H2 return of 0b498621b411. No Lean source is copied or changed, no existence theorem conclusion is invoked to state the consumer, and no new data is selected."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-943cc42f7",
+  "group": "Q05",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-943cc42f7",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Re-delivery after H2 return 0b49: Lean byte-identical (sha d84082b1), item changes only stmt_deps. Three theorem stmt_deps (basic-system-shift-resolution-calculus, open-semilinear-tensor-model, pe-roos-cone-calculus) are replaced by def-sf-open-semilinear-tensor-model-data, def-a1-flat-term-kflat-complex, def-a1-integral-finite-pullback-tower and four new existing:true def owners (basic-system-image-shift-models, roos-coordinate-shift-formula, integral-finite-tensor-tower, integral-finite-tensor-right-shift-formula). Each new node's TeX matches the published Lean body (c_a = S_p(Qa) then inverse derived unit with 3-conjunct predicate; (b,a)->(b,(-1)^r a); R/t^{n+1} total tensor with unique generator transition; (-1)^{ri} with (i,j)->(i,j+r)). All declarations resolve, no live def owner duplicates them, all stmt_deps exist. FIX: def-pur-roos-coordinate-shift-formula lean.statement was truncated at ':=' ('def ShiftFormula (cs : (roosF (A'); fixes/def-pur-roos-coordinate-shift-formula.json gives the verbatim signature 'def ShiftFormula (cs : (roosF (A := A)).CommShift ℤ) : Prop', no other change. Item mathematics re-read: all clauses and edge cases OK; proper conjunct d=𝟙 advisory only. No compile (JSON-only fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T180418-L-3988453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.IntegralSystemRealization.basicSystemShiftResolutionCalculus"
+  ],
+  "sorry_after": []
+ }
+}

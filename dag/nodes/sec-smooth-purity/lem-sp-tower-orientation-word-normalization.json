@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-tower-orientation-word-normalization",
+ "kind": "statement",
+ "title": "Unit normalization of a finite tower orientation word",
+ "statement": "Fix a prime ell, a finite coefficient extension E, ordinary strict-tower coordinates b,o,q, a factorization X --j--> V --p--> Y, and its supplied bounded-category right adjoint G, adjunction, level data lv and coefficient-unit membership hU [def-sp-tower-gamma-data]. Fix a finite level n (exponent n+1), an isomorphism ui from the retained finite input origin to the ordinary coefficient unit, a level word K on X, a tower map f from K.tower to the exceptional image of that unit, and a finite map g from K.etale to the actual finite dualizing complex. Suppose f is compared, between K and targetWord(unit), with g followed by the inverse finite right-adjoint comparison at the derived unit and by lv.right applied to ui.inv. Then f is compared with g between the same K and the prescribed dualizingWord(ui) [def-sp-tensor-transpose-evaluation-words]. Both endpoint comparisons are invertible. No purity record, diagonal normalization or purity composition theorem is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "(1), tower paragraph; tower-gamma (1), coefficient-unit normalization of the finite orientation comparison"
+ },
+ "stmt_deps": [
+  "def-sp-tower-gamma-data",
+  "def-sp-tensor-transpose-evaluation-words"
+ ],
+ "proof": [
+  {
+   "text": "For any two level words whose arrows are compared, precompose the target comparison with nu applied to an invertible finite map t. The endpoint comparisons remain invertible. Functor.map_comp and associativity identify the old square for g followed by t with the new square for g. This is ordinary pasting in the finite evaluated category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the dualizing word, t is the exceptional functor applied to the inverse unit comparison, followed by the inverse finite right-adjoint comparison and the right functor applied to ui.inv. First use naturality of the inverse finite right-adjoint comparison to move the exceptional image of the unit inverse to the right. The source-library identity Etale.singleFunctorObjUnitIso_inv says that this inverse unit comparison is an identity. Map_id removes its image. Identify the derived tensor unit with the single coefficient unit. The given targetWord square is then exactly the square from step 1, and dualizingWord is its target by definition.",
+   "uses": [
+    "def-sp-tower-gamma-data",
+    "def-sp-tensor-transpose-evaluation-words"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-gamma-data",
+  "def-sp-tensor-transpose-evaluation-words"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "(1), tower paragraph; tower-gamma (1), coefficient-unit normalization of the finite orientation comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality comparison square remains commuting after precomposing its target comparison with an invertible map; identify derived tensor unit with single functor unit",
+   "results": "8 hits on unit naturality for monoidal functors, unitOfTensorIsoUnit, and NatTrans.IsMonoidal.unit. None concerns the fixed tower words.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; routine word change is proved directly"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits including the exact functor composition law, which is used in the private general word-change proof.",
+   "date": "2026-10-27",
+   "verdict": "general law reused; no tower-word theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep singleFunctorObjUnitIso_inv|tower_orientation_word_normalized|word_precompose; rg in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "msearch gives no hits. The source ProjectionFormula.Unit supplies singleFunctorObjUnitIso_inv. The DAG single-unit naturality theorem is about tensor unitor naturality, not changing a targetWord to dualizingWord. No duplicate tower-word normalization statement.",
+   "date": "2026-10-27",
+   "verdict": "reuse the proved source identity and prove the word conversion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerOrientationEvaluation",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "(1), tower paragraph; tower-gamma (1), coefficient-unit normalization of the finite orientation comparison",
+   "via": [
+    "lem-sp-tower-orientation-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerOrientationWordNormalization",
+  "file": "lean/Sheaf/Paper/TowerOrientationWordNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCompositionFactors.tower_orientation_word_normalized",
+  "statement": "theorem tower_orientation_word_normalized {X V Y : Scheme.{u}}\n    (j : X ⟶ V) [IsOpenImmersion j] (p : V ⟶ Y) [IsProper p]\n    [QuasiCompact (j ≫ p)] [HasCompactification (j ≫ p)]\n    (hF : ∀ M : SpTowerCalculus.C l E b q X,\n      spConstructibleTorTowers l E Y (q.abelian Y)\n        ((SpTowerCalculus.F l E b o q (SpTowerGamma.factorization j p)).obj M.obj))\n    (G : SpTowerCalculus.C l E b q Y ⥤ SpTowerCalculus.C l E b q X)\n    (adj : SpTowerGluing.support l E b o q (SpTowerGamma.factorization j p) hF ⊣ G)\n    (lv : SpTowerGluing.Levels l E b o q (SpTowerGamma.factorization j p) hF G adj)\n    (hU : spConstructibleTorTowers l E Y (q.abelian Y)\n      (SpTowerGamma.originalUnit l E b q Y))\n    (n : ℕ)\n    (ui : (SpTowerGamma.inputWord l E b o q (SpTowerGamma.factorization j p)\n      hF G adj lv n ⟨SpTowerGamma.originalUnit l E b q Y, hU⟩).etale ≅\n        Etale.ordinaryFiniteUnit (SpTowerP1.levelRing l E n) Y)\n    (K : SpTowerP1.LevelWord l E n X)\n    (f : K.tower ⟶ (SpTowerGamma.exceptional l E b q G).obj\n      ⟨SpTowerGamma.originalUnit l E b q Y, hU⟩)\n    (g : K.etale ⟶\n      Etale.dualizingComplex (ModuleCat.{u + 1} (SpTowerP1.levelRing l E n)) (j ≫ p))\n    (ha : SpTowerP1.WordComparison l E n K\n      (SpTowerGamma.targetWord l E b o q (SpTowerGamma.factorization j p)\n        hF G adj lv n ⟨SpTowerGamma.originalUnit l E b q Y, hU⟩) f\n      (g ≫ (SpTowerGamma.finiteRightComparison (SpTowerShriek.R l E n) j p\n        (lv.finite_closed n) (lv.right n) (lv.adjunction n) (lv.realization n)).inv.app\n          (MonoidalCategory.tensorUnit _) ≫ (lv.realization n).right.map ui.inv)) :\n    SpTowerP1.WordComparison l E n K\n      (SpTensorTranspose.dualizingWord l E b o q j p hF G adj lv hU n ui) f g",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sp-tower-orientation-evaluation",
+  "worker": "stage3",
+  "summary": "Proved normalization substep extracted after profiling the original extraction proof; no new hole.",
+  "blueprint": "(1), tower paragraph; tower-gamma (1), coefficient-unit normalization of the finite orientation comparison",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

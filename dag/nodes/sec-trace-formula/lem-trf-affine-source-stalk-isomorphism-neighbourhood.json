@@ -1,0 +1,341 @@
+{
+ "id": "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+ "kind": "statement",
+ "title": "An affine source with matching stalks yields a common affine neighbourhood",
+ "statement": "Let $f:T\\to X$ be a morphism of schemes [def-pc-scheme]. Let $T^0$ and $X^0$ be the sets of generic points [def-sc-generic-point] of their irreducible components [def-weil-irreducible-components]. Assume that $T$ is affine [def-weil-affine-spectrum], that $X$ is quasi-separated [def-weil-quasi-separated-morphism], that $X^0$ is finite, and that $f(T^0)\\subseteq X^0$ with the induced map $T^0\\to X^0$ injective. Let $t_1,\\ldots,t_m\\in T$ be finitely many points, with $x_j=f(t_j)$. Suppose the maps of local rings $\\mathcal O_{X,x_j}\\to\\mathcal O_{T,t_j}$ induced by $f$ are isomorphisms [def-weil-pbc-module-stalk]. Then there is an affine open subscheme of $X$ containing all the $x_j$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NI (varieties-lemma-points-in-affine), statement; applied in the last sentence of Tag 09NJ, proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-affine-spectrum",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "If $m=0$, take the empty open, which is $\\operatorname{Spec}(0)$ and is affine. Henceforth $m>0$. Replace $f$ by $f_{\\mathrm{red}}:T_{\\mathrm{red}}\\to X_{\\mathrm{red}}$: quotienting sections by nilpotents gives this morphism, since ring maps preserve nilpotents [def-weil-pbc-scheme-reduction]. The reduction maps identify underlying spaces and are surjective closed immersions [lem-weil-pbc-reduction-universal-homeomorphism], so generic points and their injectivity are unchanged. $T_{\\mathrm{red}}$ is affine: on the affine $T=\\operatorname{Spec}R$ its reduction is $\\operatorname{Spec}(R/\\sqrt{0})$. On affine charts use [lem-weil-pbc-affine-open-stalk-localization]: reduction commutes with localization because if $(a/s)^n=0$, some denominator $u$ kills $a^n$, whence $(ua)^n=0$ and $a/s=(ua)/(us)$. Thus the reduced stalk is the original stalk modulo nilpotents, and each given isomorphism induces an isomorphism on these quotients. To see that $X_{\\mathrm{red}}$ is quasi-separated, reduce an affine cover of $X$: the reduced affine charts have the same spaces and the same quasi-compact intersections; apply [lem-weil-pbc-quasi-separated-affine-cover-criterion] in both directions. Conversely an affine open $W$ of $X_{\\mathrm{red}}$ containing the selected images defines an open $V$ of $X$ with $W\\to V$ a surjective closed immersion. By [lem-weil-pbc-thickening-affine-scheme], $V$ is affine. It therefore suffices to prove the result for reduced $T,X$.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-thickening-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI, first paragraph (omitted reduction details), using 06AD instead of its generalization 05YU."
+   }
+  },
+  {
+   "text": "The affine source is quasi-compact and quasi-separated [lem-weil-pbc-affine-scheme-qcqs]. Cover $X$ by affine opens [lem-weil-pbc-affine-opens-basis]. Their inverse images cover the quasi-compact $T$, so finitely many suffice. Their union $X_1$ contains all of $f(T)$ and is quasi-compact. Its indicated affine cover has quasi-compact intersections by [lem-weil-pbc-quasi-separated-affine-cover-criterion], so $X_1$ is quasi-separated. It is reduced because its stalks are stalks of $X$. The components of $X_1$ are the nonempty intersections with the finitely many components of $X$: these intersections are irreducible and remain pairwise incomparable since each is dense in its original component. Thus their generic points are the original generic points lying in $X_1$. All images $f(T^0)$ lie there. Restrict the target to $X_1$ and rename it $X$; the selected local rings and the desired conclusion are unchanged. In particular $T^0$ is finite, since it injects into the finite $X^0$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI, preparation for the application of relative approximation; explicit qcqs target shrinking as in Tag 09MV proof."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-qcqs-relative-finite-presentation-approximation] to $T\\to X$. Both schemes are now quasi-compact and quasi-separated, so its stages $T_i$ are qcqs and its transitions are affine. Since the limit $T$ is affine, [lem-weil-pbc-limit-affine-stage] supplies an index $i$ with $T_i$ affine. Write $T_i=\\operatorname{Spec}R_i$ and $T=\\operatorname{Spec}R$, and let $v:R_i\\to R$ be the ring map corresponding to the projection. The projection followed by $T_i\\to X$ is the original $f$, as stipulated by the approximation statement.",
+   "uses": [
+    "lem-trf-qcqs-relative-finite-presentation-approximation",
+    "lem-weil-pbc-limit-affine-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI, second paragraph, first four sentences; Tags 09MV and 01Z6."
+   }
+  },
+  {
+   "text": "Put $B=\\operatorname{im}(v)\\subseteq R$ and $Y=\\operatorname{Spec}B$. The factorization $R_i\\twoheadrightarrow B\\hookrightarrow R$ gives $T\\xrightarrow{h}Y\\xrightarrow{k}T_i$ and $g:Y\\xrightarrow{k}T_i\\to X$ with $f=g\\circ h$ [def-weil-affine-spectrum]. The quotient $B=R_i/\\ker(v)$ makes $k$ a closed immersion [def-weil-closed-immersion]. Thus $Y$ is affine, and $B$ is reduced since it is a subring of the reduced $R$. The morphism $g$ is of finite type: let $V\\subseteq X$ be an affine open. As $T_i\\to X$ is of finite presentation, it is quasi-compact, so its inverse image of $V$ is covered by finitely many affine opens $U$; and since it is locally of finite presentation, [lem-weil-pbc-lfp-affine-opens-finite-presentation] makes each $\\mathcal O_X(V)\\to\\mathcal O_{T_i}(U)$ of finite presentation, in particular finitely generated. Pulling these charts back along $k$ replaces each ring by a quotient, still generated by the images of its finitely many algebra generators. These quotient charts form a finite affine cover of $g^{-1}(V)$, as required by [def-weil-finite-type-morphism]. Also $g$ is separated by [lem-weil-pbc-affine-source-morphism-separated], since its source $Y$ is affine.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI, second paragraph, construction of the image subring and the affine reduced finite-type factor; separatedness required for 09NG made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-reduced-affine-injective-factor-stalk-comparison] to the inclusion $B\\hookrightarrow R$ and $g:Y\\to X$. The two rings are reduced; $T^0$ is finite; and $g\\circ h=f$ maps $T^0$ injectively into $X^0$. It follows that $h:T^0\\to Y^0$ is bijective and $g:Y^0\\to X^0$ is injective. Put $y_j=h(t_j)$. For each $j$, the composite $\\mathcal O_{X,x_j}\\to\\mathcal O_{Y,y_j}\\to\\mathcal O_{T,t_j}$ is the given isomorphism. The same comparison gives that both its factors are isomorphisms, in particular $\\mathcal O_{X,x_j}\\cong\\mathcal O_{Y,y_j}$ via $g$. This step uses the stated stalk assertion of the comparison, rather than inferring stalk injectivity merely from global ring injectivity.",
+   "uses": [
+    "lem-trf-reduced-affine-injective-factor-stalk-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI, middle paragraph, the generic-point and three-local-ring argument."
+   }
+  },
+  {
+   "text": "For every $j$, [lem-trf-finite-type-stalk-isomorphism-open-neighbourhood] applies to $g$ at $y_j$: $g$ is finite type, $X$ is reduced with finitely many irreducible components, and the required stalk map is an isomorphism. Obtain open neighbourhoods $V_j\\subseteq Y$ on which $g$ is an open immersion. Put $U=\\bigcup_jV_j$. This gives an open cover of $U$ by open immersions into $X$. The morphism $g|_U$ is separated: its diagonal is the restriction of the closed diagonal of $g$ to $U\\times_XU$. Since $Y^0$ is finite, the components of $U$ are precisely the nonempty intersections of $U$ with the components of $Y$, as in step 2. Its generic points are therefore a subset of $Y^0$, on which $g$ is injective. Apply [lem-trf-separated-local-isomorphism-generic-injectivity] to conclude that $g|_U:U\\to X$ is an open immersion.",
+   "uses": [
+    "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+    "def-weil-proper-morphism",
+    "lem-trf-separated-local-isomorphism-generic-injectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI, final paragraph, applications of Tags 09NH and 09NG; finite-component and separatedness hypotheses verified."
+   }
+  },
+  {
+   "text": "We need an affine open inside $U$, not just inside $Y=\\operatorname{Spec}B$. Let $C=Y\\setminus U=V(J)$ for an ideal $J\\subseteq B$, using the definition of the Zariski topology [def-weil-affine-spectrum]. Let $\\mathfrak p_j$ be the prime of $y_j$. Since $y_j\\in U$, $J\\not\\subseteq\\mathfrak p_j$ for all $j$. There are $m\\geq1$ such primes, so [lem-weil-pbc-prime-avoidance] gives $a\\in J$ lying in none of them. Hence all $y_j$ lie in $D(a)$, and $D(a)\\subseteq U$ since $a\\in J$. By [lem-weil-pbc-affine-open-section-vanishing-prime](b), $W=D(a)$ is affine. The open immersion $g|_U$ identifies $W$ with an affine open $g(W)$ in $X$. It contains each $x_j=g(y_j)$. Undoing the target restriction and the reduction of step 1 gives the required affine open in the original $X$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NI, last two sentences; direct prime-avoidance proof of the open-of-affine case of Tag 01ZY."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-qcqs-relative-finite-presentation-approximation",
+  "lem-weil-pbc-limit-affine-stage",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-trf-reduced-affine-injective-factor-stalk-comparison",
+  "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+  "def-weil-proper-morphism",
+  "lem-trf-separated-local-isomorphism-generic-injectivity",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NI (lemma-points-in-affine), with reduction details, qcqs-target shrinking, and the prime-avoidance proof of the final affine shrinking written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme mapping to a quasi separated scheme with finitely many irreducible components injectively on generic points and inducing isomorphisms at finitely many local rings gives a common affine neighbourhood of those image points",
+   "results": "{\"t\": \"2026-10-23T09:49:32Z\", \"tool\": \"leanfinder\", \"query\": \"An affine scheme mapping to a quasi separated scheme with finitely many irreducible components injectively on generic points and inducing isomorphisms at finitely many local rings gives a common affine neighbourhood of those image points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\"], \"digest\": \"65eba31b738d65ef\"}; No match: affine neighbourhood bases treat one point, while spreading-out lemmas require finite-type data and do not give this finite-set criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite.*(point|set).*affine|affine.*(finite.*point|stalk.*iso)|generic.*affine)",
+   "results": "{\"t\": \"2026-10-23T09:52:17Z\", \"tool\": \"grep\", \"query\": \"(finite.*(point|set).*affine|affine.*(finite.*point|stalk.*iso)|generic.*affine)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"1430c4341dd73993\"}; No match: affine neighbourhood bases treat one point, while spreading-out lemmas require finite-type data and do not give this finite-set criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.IsOpenImmersion",
+   "results": "{\"t\": \"2026-10-23T09:52:18Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsAffine, AlgebraicGeometry.IsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isAffine_affineOpenCover\", \"AlgebraicGeometry.isAffineOpen_opensRange\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"AlgebraicGeometry.instIsAffineXSchemeCoverOfIsIsoIsOpenImmersionId\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"AlgebraicGeometry.HasAffineProperty.of_isPullback\"], \"digest\": \"5b9a6794b113996f\"}; No match: affine neighbourhood bases treat one point, while spreading-out lemmas require finite-type data and do not give this finite-set criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine neighbourhood of finitely many image points from an affine scheme when local rings are isomorphic and the map is injective on generic points",
+   "results": "{\"t\": \"2026-10-23T09:53:29Z\", \"tool\": \"leansearch\", \"query\": \"Affine neighbourhood of finitely many image points from an affine scheme when local rings are isomorphic and the map is injective on generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\", \"AlgebraicGeometry.isAffine_affineScheme\"], \"digest\": \"e95cbca8f7ea004a\"}; No match: affine neighbourhood bases treat one point, while spreading-out lemmas require finite-type data and do not give this finite-set criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a map from an affine scheme to a quasi separated scheme injective on generic points and isomorphisms of stalks at selected points, their images lie together in an affine open",
+   "results": "{\"t\": \"2026-10-23T09:54:24Z\", \"tool\": \"leanfinder\", \"query\": \"Given a map from an affine scheme to a quasi separated scheme injective on generic points and isomorphisms of stalks at selected points, their images lie together in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.IsAffineOpen.stalkMap_injective\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\", \"AlgebraicGeometry.Scheme.exists_le_and_germ_injective\"], \"digest\": \"6a029c2889ea82e0\"}; No match: affine neighbourhood bases treat one point, while spreading-out lemmas require finite-type data and do not give this finite-set criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme mapping injectively on generic points to a quasi separated scheme with finitely many generic points and inducing stalk isomorphisms at finitely many points gives a common affine open of their images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y] (x : ↥X),\\n  (∀ (g : ↑(Y.presheaf.obj (Opposite.op ⊤))),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n            ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.Γgerm ((Category\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f : X \\to Y$ be a morphism of schemes. If $Y$ is affine and for every germ $g$ in the stalk of $Y$'s structure sheaf at $f(x)$, the condition $f_{\\text{stalk}}(x)(g)\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, AlgebraicGeometry.IsAffineOpen U → IsQuasiSeparated ↑U\", \"doc\": \"Every affine open subset $ U $ of a scheme $ X $ is quasi-separated, meaning that the intersection of any two quasi-compact open subsets of $ U $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.stalkMap_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U : TopologicalSpace.Opens ↥Y},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x : ↥X) (hx : (CategoryTheory.ConcreteCategory.hom f.base) x ∈ U),\\n      (∀ (g : ↑(Y.presheaf.obj (Opposite.op U))),\\n          (CategoryTheory.ConcreteCategory.hom (AlgebraicGe\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $x$ be a point in $X$. Let $U$ be an affine open subset of $Y$ containing the point $f(x)$. Let $f^\\\\#_x: \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x}$ \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every affine scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is itself quasi-compact.\"}\n\nNo match: single-point affine charts and conditional stalk-injectivity/spreading-out results do not give the common finite-set affine neighbourhood criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.Scheme.Hom.stalkMap",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y] (x : ↥X) (h : ∀ (g : ↑(Y.presheaf.obj (Opposite.op ⊤))), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)) ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.Γgerm (f x))) g) = 0 → (CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f : X ⟶ Y} [CompactSpace ↥X] (hfopen : IsOpenMap ⇑f) (hfinj₁ : Function.Injective ⇑f) (hfinj₂ : Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))) (x : ↥X) : Function.Injective ⇑(Categor\", \"doc\": \"If `f : X ⟶ Y` is open, injective, `X` is quasi-compact and `Y` is affine, then `f` is stalkwise\\ninjective if it is injective on global sections.\"}\n\nNo match: single-point affine charts and conditional stalk-injectivity/spreading-out results do not give the common finite-set affine neighbourhood criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "points.*affine|affine.*neighbou?rhood|generic.*stalk",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"line\": \"111\", \"text\": \"lemma pointsPi_surjective_of_isAffine [IsAffine X] : Function.Surjective (pointsPi R X) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"line\": \"129\", \"text\": \"  have (j₀ : _) := pointsPi_surjective_of_isAffine (ι := { i // j i = j₀ }) (R ·) (𝒰.X j₀)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"11\", \"text\": \"# Negation and addition formulae for nonsingular points in affine coordinates\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"34\", \"text\": \"including slopes of non-vertical lines. The actual group law on nonsingular points in affine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"line\": \"15\", \"text\": \"We set up the endomorphism of `ℙ²` that on affine points with affine sum is equal to\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"line\": \"143\", \"text\": \"/-- This map sends a pair `P`, `Q` of nonsingular points in affine coordinates on `W`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"14\", \"text\": \"# Nonsingular points and the group law in affine coordinates\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"17\", \"text\": \"affine coordinates. The type of nonsingular points in affine coordinates is an inductive, consisting\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"34\", \"text\": \"This file defines the group law on nonsingular points in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"50\", \"text\": \"* `WeierstrassCurve.Affine.Point.instAddCommGroup`: the type of nonsingular points in affine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"474\", \"text\": \"/-! ## Nonsingular points in affine coordinates -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"20\", \"text\": \"affine coordinates. The group law on the actual type of nonsingular points in affine coordinates\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"27\", \"text\": \"  relative dimension `n` if for each `x : X` there exists an affine open neighborhood `V` of `x`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"28\", \"text\": \"  and an affine open neighborhood `U` of `f.base x` with `V ≤ f ⁻¹ᵁ U` such that the induced\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"34\", \"text\": \"  if and only if for each `x : X` there exists an affine open neighborhood `V` of `x`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"35\", \"text\": \"  and an affine open neighborhood `U` of `f.base x` with `V ≤ f ⁻¹ᵁ U` such that the induced\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"81\", \"text\": \"neighborhood `V` of `x` and an affine open neighborhood `U` of `f.base x` with `V ≤ f ⁻¹ᵁ U`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean\", \"line\": \"17\", \"text\": \"the nonsingular points in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean\", \"line\": \"31\", \"text\": \"  nonsingular Jacobian points with the type of nonsingular points in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean\", \"line\": \"48\", \"text\": \"Jacobian points using `WeierstrassCurve.Jacobian.Point.toAffineLift`. Conversely, a nonsingular\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean\", \"line\": \"570\", \"text\": \"Weierstrass curve `W` and the type of nonsingular points in affine coordinates. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"196\", \"text\": \"open affine neighborhoods of `x` (resp. `f.base x`), then `P` also holds for `f`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point.lean\", \"line\": \"17\", \"text\": \"with the nonsingular points in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point.lean\", \"line\": \"31\", \"text\": \"  nonsingular projective points with the type of nonsingular points in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point.lean\", \"line\": \"48\", \"text\": \"projective points using `WeierstrassCurve.Projective.Point.toAffineLift`. Conversely, a nonsingular\"}\n\nNo match: single-point affine charts and conditional stalk-injectivity/spreading-out results do not give the common finite-set affine neighbourhood criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite set of points lies in one affine open if lifted to an affine scheme with isomorphic local rings and injective map on generic points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsIntegral X] : X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(X : LocallyRingedSpace.{u})\\n  (h :\\n    ∀ x : X,\\n      ∃ (R : CommRingCat) (f : Spec.toLocallyRingedSpace.obj (op R) ⟶ X),\\n        (x ∈ Set.range f.base :) ∧ LocallyRingedSpace.IsOpenImmersion f) :\\n  Scheme\", \"doc\": \"A locally ringed space $ X $ is a scheme if every point $ x \\\\in X $ is contained in the image of an open immersion from the spectrum of some commutative ring $ R $. This establishes that $ X $ is loca\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": IsOpenImmersion hU.fromSpec\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, the morphism from $ \\\\operatorname{Spec}(\\\\Gamma(U)) $ to $ X $ constructed by composing the canonical isomorphism $ \\\\operatorname{Spec}(\\\\Gamma(U)) \\\\co\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"{x : X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A)\\n  (φRX : R ⟶ Γ(X, U)) (hφRA : RingHom.FiniteType φRA.hom) (e : φRA ≫ φ = φRX ≫ X.presheaf.germ U x hxU) :\\n  ∃ (V : X.Opens) (hxV : x ∈ V) (φ' : A ⟶ Γ(X, V)) (i : V ≤ U),\\n    IsAffineOpen V ∧ φ = φ'\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": HasAffineProperty @IsFinite (fun X _ f _ ↦ IsAffine X ∧ RingHom.Finite (f.appTop).hom)\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} [self : X.IsGermInjectiveAt x],\\n  ∃ U,\\n    ∃ (hx : x ∈ U),\\n      AlgebraicGeometry.IsAffineOpen U ∧\\n        Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx))\", \"doc\": \"For any scheme $X$ and point $x$ in its underlying topological space, if $X$ satisfies the germ injectivity condition at $x$, then there exists an affine open neighborhood $U$ of $x$ such that the can\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isoSpec_hom_apply\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(x : U) : hU.isoSpec.hom x = Spec.map (X.presheaf.germ U x x.2) (closedPoint _)\", \"doc\": \"For any affine open subset $U$ of a scheme $X$, the canonical isomorphism between $U$ and the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(U))$ maps each point $x \\\\in U$ to the image of the germ of the s\"}\n\nNo match: single-point affine charts and conditional stalk-injectivity/spreading-out results do not give the common finite-set affine neighbourhood criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Common affine neighbourhood criterion using a map from an affine scheme and isomorphisms of local rings with injective generic point images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A predicate asserting that a property of morphisms with affine target is local on the target scheme.\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    ∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n      AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $Q$ be a property of ring homomorphisms that is respected by isomorphisms. The property that $f$ is 'locally affine and $Q$ on the target' holds if a\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.IsZariskiLocalAtTarget P\", \"doc\": \"The property of morphisms of schemes with affine targets is Zariski local at the target. Specifically, if a morphism $ f : X \\to Y $ satisfies this property and $ S $ is a Zariski covering sieve on $ Y\"}\n\nNo match: single-point affine charts and conditional stalk-injectivity/spreading-out results do not give the common finite-set affine neighbourhood criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-integral-codimension-one-affine-neighbourhood",
+  "date": "2026-10-23",
+  "group": "Q106"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 09NN proof, last sentence: the integral case; this is the componentwise reduction supporting the finite-pinching affine-neighbourhood hypothesis in the ancestor contraction paragraph. Supporting 09NJ proof: Tag 09NI (varieties-lemma-points-in-affine), statement; applied in the last sentence of Tag 09NJ, proof.",
+   "via": [
+    "lem-trf-integral-codimension-one-affine-neighbourhood",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+  "worker": "stage1",
+  "summary": "Verified Tag 09NI against the statement and expanded its reduction, finite-type affine factor, selected stalk comparison and final prime-avoidance argument. Reused reduction/thickening, qcqs, affine-stage, separatedness and prime-avoidance nodes. Created four searched statement-only intermediate lemmas (09MV, the generic/stalk comparison in 09NI, 09NH and 09NG). No statement change or attachment.",
+  "blueprint": "The existing from/via chain runs through the integral codimension-one affine-neighbourhood lemma, the pinching and contraction dependencies, to lem-trf-local-term-locality. This item realizes its cited supporting Tag 09NI, not a new route for the unit. Read the current latest ancestor statement/proof and unit; the latest ancestor has no literal 09NI paragraph, so the exact supporting source places are recorded in each new node and proof step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for Stalk of a scheme at a point of an affine open: the canonical open immersion and the localization."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for The reduction of a scheme is reduced and a universal homeomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for Quasi-separatedness from affine-open intersections."
+   },
+   {
+    "node": "lem-weil-pbc-thickening-affine-scheme",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for A thickening of an affine scheme is affine."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for Affine schemes are quasi-compact and quasi-separated."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for The affine opens of a scheme form a basis of its topology (Stacks 01IT)."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-stage",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for If a limit of qcqs schemes with affine transition maps is affine, so are the late stages."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for A morphism with affine source is separated."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for Prime avoidance."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for Sections over an affine open: vanishing at a point iff membership in its prime; basic opens are affine with ring the localization."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic scheme/algebra tool used only with its stated hypotheses in the Tag 09NI proof; this unit supplies no replacement for: a locally finitely presented morphism induces finitely presented ring maps on every pair of affine opens (Stacks 01TQ)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-limit-affine-stage",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-625f5b601",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-625f5b601 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the four new statement-only nodes, every cited statement, and the sources (Stacks varieties.tex 09NI, 09NH, 09NG with the use in 09NJ, and limits.tex 09MV). This is a first split, not a re-split: there is no repair note, the item is still unsplit with no proof on live and side-live, its statement is identical to live, and no parallel group has landed these ids or the tags 09NH/09NG/09MV. The item statement matches 09NI hypothesis by hypothesis. Stacks writes x_r where it means x_m, and its proof says assumption (3) where (4) is meant; the comparison node correctly uses (4). Step 1 spells out the reduction Stacks omits: stalk localization, the (ua)^n=0 computation, quasi-separatedness in both directions, and the thickening lift with no finite-order hypothesis. Step 2 shrinks to a quasi-compact target; components of an open are the traces of the components, so (3) and (4) persist and T^0 is finite. Step 3: the new 09MV node, specialised to a qcqs base, gives qcqs finite-presentation stages with affine transitions, which are exactly the hypotheses of 01Z6 (limit-affine-stage). Step 5 applies the comparison node. I checked its proof: minimal primes lift along an injective ring map, injectivity forces h(T^0)=Y^0, every minimal prime of O_{Y,y} is a contraction from O_{T,t}, and O_{Y,y} is reduced, so the map is injective and both maps are isomorphisms. Small cases: B=R; k[x] into k[x]×k fails (4), as it should; R=0 is vacuous. The extra finiteness hypothesis is harmless. Step 6: the 09NH node applies at each point because the target is reduced with finitely many components; the restriction to U is separated, the generic points of U lie in Y^0, and the 09NG node then makes U→X an open immersion. Step 7: prime avoidance with m≥1, D(a)⊆U, and D(a) is affine by clause (b) of section-vanishing-prime; this replaces 01ZY correctly. The four new nodes are true, self-contained (B1–B7), strictly smaller than the item, and not duplicated anywhere in the DAG, live or side-live. Their searches are recorded. All declared tool_uses are generic tools and are accepted. FIX (C1/C4): step 4 claimed finitely presented charts over an arbitrary affine V straight from the pointwise definition def-sbc-locally-finite-presentation. That needs Stacks 01TQ, which is the existing Mathlib leaf lem-weil-pbc-lfp-affine-opens-finite-presentation. I rewrote that sentence of step 4 (finitely many charts from quasi-compactness, each chart map finitely presented by that node) and added the node to the step's uses, proof_deps and split_report.tool_uses in fixes/dag/nodes/sec-trace-formula/lem-trf-affine-source-stalk-isomorphism-neighbourhood.json. No statement changed and no other step changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSourceStalkIsomorphismNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_of_affine_source_stalkMap_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSourceStalkIsomorphismNeighbourhood.lean",
+  "statement": "theorem exists_isAffineOpen_of_affine_source_stalkMap_isIso {T X : Scheme.{u}} (f : T ⟶ X) [IsAffine T] [QuasiSeparatedSpace X] (hfinite : (genericPoints X).Finite) (hgeneric : Set.MapsTo f (genericPoints T) (genericPoints X)) (hinjective : Set.InjOn f (genericPoints T)) (m : ℕ) (t : Fin m → T) (hstalk : ∀ j : Fin m, IsIso (f.stalkMap (t j))) : ∃ U : X.Opens, IsAffineOpen U ∧ ∀ j : Fin m, f (t j) ∈ U",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e529d8723",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_dep records, Stacks varieties.tex 09NI (line 8952), the delivered module and report. Lean matches the source clause by clause: IsAffine T, QuasiSeparatedSpace X (equivalent to the recorded QuasiSeparated; advisory), (genericPoints X).Finite, MapsTo plus InjOn on genericPoints (Mathlib: closure {x} ∈ irreducibleComponents), m and t : Fin m → T, IsIso (f.stalkMap (t j)) (actual induced map, correct direction); conclusion ∃ U, IsAffineOpen U ∧ ∀ j, f (t j) ∈ U. No extra hypotheses, single universe u, edge cases m=0, empty T or X and repeated points covered. Node differs from side-live only in lean (first delivery, not superseded); statement record verbatim; proof is sorry only; source and blueprint docstrings plus the 7-step proof docstring present; plain imports are proof-dep modules; stalks are the Mathlib TopCat.Presheaf.stalk of the module-stalk mathlib_match. Second reading done by the worker itself (disclosed). No fixes, no compile needed."
+ }
+}

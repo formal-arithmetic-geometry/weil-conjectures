@@ -1,0 +1,155 @@
+{
+ "id": "def-weil-frobenius-cohomology-realization-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "The ordinary and compact-support cohomology complexes in the two displayed Frobenius composites: their canonical coefficient-stage realization and coefficient enlargement.",
+   "via": [
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical coefficient-stage cohomology realization data",
+ "statement": "For the finite-field datum [def-weil-finite-field-fiber], a prime ell distinct from p, a separated finite-type scheme Y0, a retained compactification and an algebraic closure Omega of Q_ell, use the rational ordinary or compact operation, followed by the point fibre and the specified scalar-and-size extension into D(Omega). At each coefficient stage E this is R_E. For a Pair object K and K.stage <= L, define B(K,L): R_K.stage(K.obj) ~= R_L(K.toStage) as the composite of the coefficient embedding equality, inverse balanced tensor tower, localized operation scalar mate, point scalar comparison and inverse operation-stage transition. Every map and associator is the specified one of [def-weil-operation-exchange-coefficient-descent], [def-weil-rationalization-karoubi] and [def-weil-finite-coefficient-point]. This is the existing construction, with no changed data or added choices.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.10)-(1.1.14), coefficient localization and transport of cohomology; extracted coefficient-realization step of the parent."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-operation-exchange-coefficient-descent",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "For the coefficient-realization tower used in the common-stage formula, equip the lifted fields with the conjugated coefficient homomorphisms. Mathlib TensorProduct.AlgebraTensorModule.uliftEquiv identifies the lifted inner tensor product; AlgebraTensorModule.congr and cancelBaseChange give the actual linear equivalence. Its pure-tensor formula is a tensor b tensor m sent to a psi(b) tensor m. Double tensor induction proves naturality and uniqueness, including zero modules and identity embeddings. This proves frobeniusCoefficientModulesTower_existsUnique without a new obligation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For frobeniusCohomologyStageEmbedding_comp, apply ring-hom extensionality and cancel Shrink.algEquiv with its inverse. Taking the value in the larger intermediate field and then its subtype value gives the original embedding. This includes equality of the two stages.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For frobeniusCohomologyRationalOperationScalar_existsUnique, localize the specified integral operation scalar isomorphism. The rational direct and compact functors map a pure tensor a tensor f to a tensor F(f), and rational scalar extension maps it to phi(a) tensor S(f). Conjugate the localized integral components by the stated object equalities. Integral naturality proves the rational naturality square on pure tensors; tensor induction and additivity extend it to every arrow. The prescribed component formula forces uniqueness by natural-transformation extensionality. Specialize the construction to the geometric-fiber structure map with the recorded direct or compact support model. No new obligation or object is chosen.",
+   "uses": [
+    "def-weil-operation-exchange-coefficient-descent",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10)-(1.1.11), coefficient localization; agent-written tensor-localization assembly of the specified integral scalar comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-operation-exchange-coefficient-descent",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "U9: explicit assembly of the canonical scalar comparisons and common-stage quotient recipe."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor out of a filtered colimit of categories is uniquely determined by compatible functors on its stages.",
+   "results": "General filtered colimit preservation, Ind.lim and Types.FilteredColimit universal properties; no result about the prescribed operation and point-fibre realization maps.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible scalar extension comparisons, tower identity and invariance at a larger common stage",
+   "results": "ModuleCat.extendScalars_assoc and extendScalarsComp prove the module tensor tower; no match for the specified derived operation and point-fibre composites.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id_assoc",
+   "results": "Mathlib.CategoryTheory.Iso: cancellation of endpoint comparisons; no coefficient-coherence result.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "NatIso.*(coherence|trans)|scalar.*tower|tower.*scalar",
+   "results": "General scalar-tower lemmas; no specified cohomology representative formula. Local library search found stageBeta_coherence for operation-stage targets, not the point realization in D(Omega).",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FrobeniusCohomologyTransportIso",
+  "date": "2026-10-26",
+  "group": "U9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FrobeniusCohomologyRealization",
+  "file": "lean/Sheaf/SixFunctors/FrobeniusCohomologyRealization.lean",
+  "declaration": "WeilConjectures.frobeniusCohomologyRealizedComparison",
+  "statement": "def frobeniusCohomologyRealizedComparison (c₀ : Compactification Y₀.hom) (compact : Bool)\n    (K : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left)\n    (L : Index l Ω) (h : K.stage ≤ L) :\n    (frobeniusCohomologyRealizedStage D l hl Y₀ Ω c₀ compact K.stage).obj K.obj ≅\n      (frobeniusCohomologyRealizedStage D l hl Y₀ Ω c₀ compact L).obj (K.toStage h)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.frobeniusCoefficientLiftHom",
+   "WeilConjectures.frobeniusCoefficientModules",
+   "WeilConjectures.frobeniusCoefficientModulesTower_existsUnique",
+   "WeilConjectures.frobeniusCoefficientTower",
+   "WeilConjectures.frobeniusCohomologyRationalFunctor",
+   "WeilConjectures.frobeniusCohomologyRationalOperation",
+   "WeilConjectures.frobeniusCohomologyIntegralScalar",
+   "WeilConjectures.frobeniusCohomologyRationalOperationScalar_existsUnique",
+   "WeilConjectures.frobeniusCohomologyRationalOperationScalar",
+   "WeilConjectures.frobeniusCohomologyRationalScalar",
+   "WeilConjectures.frobeniusCohomologyStageEmbedding",
+   "WeilConjectures.frobeniusCohomologyStageEmbedding_comp",
+   "WeilConjectures.frobeniusCohomologyRealizedStage",
+   "WeilConjectures.frobeniusCohomologyRealizedComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-71887",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T203421-L-2813352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-71887",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T203421-L-2813352",
+  "kind": "interface",
+  "note": "independent cc review: the 14 moved declarations against the published item module (verbatim diff), the new transport lemma against the parent existsUnique statement (it follows from it), and 10 direct importers compiled against the delivered modules (all OK)"
+ }
+}

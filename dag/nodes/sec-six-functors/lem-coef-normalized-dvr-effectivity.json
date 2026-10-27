@@ -143,7 +143,18 @@
   "prop-weil-pbc-roos-triangle"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -208,25 +219,24 @@
   "module": "Sheaf.Paper.NormalizedDVREffectivity",
   "declaration": "WeilConjectures.normalizedDVRTower_effectivity",
   "declarations": [
-   "WeilConjectures.normalizedDVRIntegralAdjunction",
-   "WeilConjectures.normalizedDVRReductionTransition",
    "WeilConjectures.normalizedDVRCounitComparison",
    "WeilConjectures.normalizedDVRTower_effectivity"
   ],
   "file": "lean/Sheaf/Paper/NormalizedDVREffectivity.lean",
   "statement": "theorem normalizedDVRTower_effectivity (T : NormalizedDVRTower l E X D hl) (M : completedIntegralDerivedCategory l E X D hl) [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)] (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) (δ : (∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) ⟶ M⟦(1 : ℤ)⟧) (hc : IsDerivedLimitTriangle (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower) M p δ) : (∀ n : ℕ, IsIso (normalizedDVRCounitComparison l E X D hl T M p n)) ∧ (∀ {m n : ℕ} (h : n ≤ m), normalizedDVRCounitComparison l E X D hl T M p m ≫ T.tau h = normalizedDVRReductionTransition l E X D hl h M ≫ (normalizedDVRRes l E X h).map (normalizedDVRCounitComparison l E X D hl T M p n)) ∧ IsDerivedComplete l E X D hl M",
   "branch": "newtargets-dag",
-  "by": "Q28",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Returned-delivery ownership repair: the two plain canonical definitions were owned only by this theorem node. They have been moved unchanged to Sheaf.Paper.IntegralReductionTransitions, owned by def-pur-integral-reduction-transitions; this module publicly imports them. This record now owns only its counit comparison and effectivity theorem. All existing theorem statements and proofs are preserved."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-05a6587fa",
-  "group": "Q28",
-  "result": "pass",
-  "note": "Reviewed node, source, dependencies, Lean declarations, edge cases, docstrings, searches, and all nine scompile.py checks; no findings."
+  "reviewer": "NT-stage2-cc-80e6e565c",
+  "group": "NP",
+  "result": "fix",
+  "note": "80e6e565 is byte-identical to the PASSed 30374169 except blueprint-index. That head's landing was refused by the nt_parallel2 intra-delivery-move false positive ('IntegralReductionTransitions declares names ... also in NormalizedDVREffectivity'); the tool is unchanged since Oct 19, so this head would be refused again. Substance re-checked: all six conjuncts match the node (U in D^b_ctf; r,s,a,b quantified before n with -2d shifts; IsIso of the actual purAdicSourceReduction; direct-quotient square for all n<=m; unit/composition cocycles), no extra hypotheses or arbitrary maps, universes kept, statement verbatim (check_lean_text []). New def node matches the two live definitions. FIX in the landed Q14 735d / Q97 c6be shape: fixes/NormalizedDVREffectivity.lean = live text byte-identical; fixes/IntegralReductionTransitions.lean = public re-export + abbrev integralQuotientReductionTransition := normalizedDVRReductionTransition (docstrings with source/blueprint); fixes/def-pur-integral-reduction-transitions.json lean-only (abbrev primary, 2 re-exported names, existing:false, note; check_lean_text []); report + reviewer-fix section. Item module/record/stmt_deps unchanged. nt_compile --json rc 0: def 1.9 s, item 14.4 s clean. Maintainer: land with --revert-nodes lem-coef-normalized-dvr-effectivity (delivered record describes the move); add def-pur-integral-reduction-transitions to that node's stmt_deps; fix the nt_parallel2 index bug."
  },
  "reviewed_proof": {
   "date": "2026-10-20",
@@ -237,5 +247,45 @@
   "landing": "20261020T211832-L-3509084",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $E/\\Ql$ be finite, $T$ a scheme, and $\\pi_E\\in\\{\\pi_E,\\ell\\}$; put\n$A_n=\\mathcal O_E/\\pi_E^n$, so that $(A_n)_T=\\mathcal O_{E,T}/\\pi_E^n$. Let\n$(M_n)_n$ be a tower of complexes $M_n\\in D(T_{\\mathrm{proét}},A_n)$, given as an\nobject of the derived category of towers of\n[det-sp-coefficient-towers-abelian], whose reduction maps\n\n$$\nM_m\\otimes^{\\mathbf L}_{A_m}A_n\\longrightarrow M_n\\qquad(m\\geq n)\n$$\n\nare isomorphisms; this is the normalization condition of\n[sk-def-sp-normalized-towers], without its constructibility and boundedness\nconditions. Put $M=R\\varprojlim_mM_m\\in D(T_{\\mathrm{proét}},\\mathcal O_E)$, the\nderived limit of [sk-prop-pe-milnor] with each $M_m$ regarded as an\n$\\mathcal O_{E,T}$-module. Then the canonical maps\n\n$$\nM\\otimes^{\\mathbf L}_{\\mathcal O_{E,T}}A_n\\xrightarrow{\\ \\sim\\ }M_n\n\\qquad(n\\geq1)\n$$\n\nare isomorphisms, compatible with the reduction maps. In particular $M$ is\nderived $\\pi_E$-complete in the sense of [def-pe-derived-complete], and\n$(M_n)_n$ is isomorphic to the tower of reductions of $M$. No\nconstructibility or boundedness is required for this effectivity assertion.",
+  "proof": [
+   {
+    "text": "Fix $n$, and discard the finitely many indices $m<n$.\nThe coefficient complex\n\n$$\nC_{m,n}=A_m\\otimes^{\\mathbf L}_{\\mathcal O_E} A_n\n=[A_m\\xrightarrow{\\pi_E^n}A_m]\n$$\n\nis in degrees $[-1,0]$. Its augmentation to $A_n$ has\nfiber $(\\pi_E^{m-n}A_m)[1]\\cong A_n[1]$, as an object of\n$D(A_m)$, because $\\mathcal O_E$ is $\\pi_E$-torsion free. This identification uses multiplication by\n$\\pi_E^{m-n}$; its inverse on the fiber is determined by the\nsingle nonzero cohomology module. For $m'\\geq m\\geq n$,\ncoefficient reduction sends the generator $\\pi_E^{m'-n}$ to\n$\\pi_E^{m'-m}\\pi_E^{m-n}$. Thus the fiber transition, expressed\nin these copies of $A_n[1]$, is multiplication by\n$\\pi_E^{m'-m}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Tensor this coefficient triangle with $M_m$ over $A_m$.\nThe normalization isomorphisms, which are compatible with composition because\nthey are induced by the transition maps of one object of the tower category,\ngive a tower of triangles\n\n$$\nM_n[1]\\longrightarrow M_m\\otimes^{\\mathbf L}_{A_m} C_{m,n}\n\\longrightarrow M_n\\longrightarrow .\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The right-hand tower is constant, with identity transitions. The\nleft-hand transition for $m'\\to m$ is multiplication by\n$\\pi_E^{m'-m}$: this follows by tensoring the just computed\ncoefficient map and using the same normalization isomorphisms. The\ncalculation is made in strict coefficient complexes and their\nderived tensor products, so these are compatible triangles of\ntowers, not independently chosen cones.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Every $n$ successive left-hand transitions compose to zero.\nIn the defining triangle\n$R\\varprojlim\\to\\prod\\xrightarrow{1-s}\\prod$ of [sk-prop-pe-milnor], the\nshift $s$ on the derived product therefore satisfies $s^n=0$.\nThe inverse of $1-s$ is $1+s+\\cdots+s^{n-1}$, so this\nfiber tower has zero derived limit. The quotient $A_n$ has\nthe bounded finite-free $\\mathcal O_{E,T}$-resolution\n$[\\mathcal O_{E,T}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,T}]$, and\n$M_m\\otimes^{\\mathbf L}_{\\mathcal O_{E,T}}A_n\\simeq M_m\\otimes^{\\mathbf L}_{A_m}C_{m,n}$. Tensoring with this resolution commutes\nwith derived products and fibers, hence with the derived limit\nin that triangle. Taking limits in the displayed triangles\nnow proves\n\n$$\nM\\otimes^{\\mathbf L}_{\\mathcal O_{E,T}} A_n\n\\cong R\\varprojlim_m(M_m\\otimes^{\\mathbf L}_{\\mathcal O_{E,T}} A_n)\n\\xrightarrow{\\sim}M_n.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Every map is induced by the tower projections and coefficient\naugmentations, so these isomorphisms have the stated cocycle.\nThey identify the original tower with the quotient tower of\n$M$; its limit is $M$, so $M$ is derived $\\pi_E$-complete\n([def-pe-derived-complete]).\nFor the coefficient tower itself, $(A_n)_T$ with the quotient maps, the\nderived limit is $\\mathcal O_{E,T}$ in degree zero: the ordinary limit is\n$\\mathcal O_{E,T}$ by [sk-prop-sfb-qlbar-colimit-x], and\n$R^1\\varprojlim$ vanishes because on a weakly contractible quasi-compact\npro-étale basis object sections are exact and the transition maps are\nsurjective on sections.",
+    "uses": [
+     "def-pe-derived-complete",
+     "sk-prop-sfb-qlbar-colimit-x"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

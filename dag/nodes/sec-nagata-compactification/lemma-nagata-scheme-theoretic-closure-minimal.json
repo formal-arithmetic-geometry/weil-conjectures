@@ -77,7 +77,55 @@
   "lemma-nagata-scheme-image-of-closed-immersion"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.ker_le_ker_iff_existsUnique_fac",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion",
+     "lines": [
+      119,
+      130
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.IsClosedImmersion.lift"
+   ],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.ker_le_ker_iff_existsUnique_fac",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion",
+     "lines": [
+      162,
+      173
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsClosedImmersion.lift",
+     "module": "Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion",
+     "lines": [
+      0,
+      0
+     ],
+     "kind": "def",
+     "sorry": false,
+     "library": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-closure",
  "lean": {
@@ -91,5 +139,24 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $g\\colon T\\to Y$ be a morphism of schemes and let\n$z\\colon Z\\hookrightarrow Y$ be a closed immersion with ideal sheaf\n$\\mathcal I_Z$. Then $\\mathcal I_Z\\subseteq\\ker(g)$, i.e.\n$\\operatorname{SIm}(g)\\subseteq Z$, if and only if $g$ factors through $z$,\nand the factorization $T\\to Z$ is then unique. Thus $\\operatorname{SIm}(g)$\nis the smallest closed subscheme of $Y$ through which $g$ factors; in\nparticular the scheme-theoretic closure of a locally closed subscheme is the\nsmallest closed subscheme containing it.",
+  "proof": [
+   {
+    "text": "If $\\mathcal I_Z\\subseteq\\ker(g)$, then\n[lemma-nagata-scheme-image-universal] gives the comparison\n$c_{g,Z}\\colon\\operatorname{SIm}(g)\\to Z$ with\n$z\\circ c_{g,Z}=g_{\\mathrm{im}}$, so $h=c_{g,Z}\\circ g^{\\mathrm{im}}$\nsatisfies $z\\circ h=g_{\\mathrm{im}}\\circ g^{\\mathrm{im}}=g$. Conversely, if\n$z\\circ h=g$, every local section of $\\mathcal I_Z$ maps to zero in\n$z_*\\mathcal O_Z$, hence in $g_*\\mathcal O_T$; since $\\mathcal I_Z$ is\nquasi-coherent and $\\ker(g)$ is the largest quasi-coherent ideal in the\nkernel of $\\mathcal O_Y\\to g_*\\mathcal O_T$, we get\n$\\mathcal I_Z\\subseteq\\ker(g)$. Uniqueness of the factorization holds\nbecause the closed immersion $z$ is a monomorphism.",
+    "uses": [
+     "lemma-nagata-scheme-image-universal"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

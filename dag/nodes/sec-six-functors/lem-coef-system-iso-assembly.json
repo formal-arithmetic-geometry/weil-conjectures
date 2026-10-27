@@ -1,0 +1,128 @@
+{
+ "id": "lem-coef-system-iso-assembly",
+ "kind": "statement",
+ "title": "Assembly of compatible coefficient-level isomorphisms",
+ "statement": "variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n\n\ntheorem systemIsoOfEvaluation_exists\n    {M N : Systems.{c, v, max c v r} J B τ}\n    (δ : ∀ n : ℕ, (evaluation.{c, v, max c v r} J B τ n).obj M ≅\n      (evaluation.{c, v, max c v r} J B τ n).obj N)\n    (ht : ∀ {m n : ℕ} (h : n ≤ m),\n      (transition.{c, v, max c v r} J B τ h).app M ≫\n          (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h)).map (δ n).hom =\n        (δ m).hom ≫ (transition.{c, v, max c v r} J B τ h).app N) :\n    ∃ e : M ≅ N, ∀ n : ℕ,\n      (evaluation.{c, v, max c v r} J B τ n).map e.hom = (δ n).hom",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D1, morphisms of sheaves of modules; Zheng Construction 4.1, systems as module sheaves on the product site."
+ },
+ "proof": [
+  {
+   "text": "Undo the evaluation ring identification using its inverse ring isomorphism. A linear map after restriction along a ring isomorphism is linear for the original ring; its underlying function is unchanged. This constructs maps on the actual component modules.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The given component morphisms are vertically natural. The actual transition normalization converts the assumed horizontal square into horizontal naturality. Factor any arrow of the product category as a vertical arrow followed by a horizontal arrow to obtain a module-sheaf morphism. Its evaluation has exactly the prescribed component map.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluations are jointly faithful by sectionwise extensionality. On the abelian category of systems they therefore jointly reflect isomorphisms: they jointly reflect monomorphisms and epimorphisms, and the category is balanced. The assembled map is invertible since every component is an isomorphism.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D1, morphisms of sheaves of modules; Zheng Construction 4.1, systems as module sheaves on the product site.",
+  "note": "G3: complete Lean proof; caches scalar conversions with irreducible private helpers and uses an ordinary function square for transition compatibility."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricOrdinaryTensor",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Normalized tensor localization for fixed ordinary geometric operations. Substep: Ordinary tensor comparison and resolving-class preservation for geometric systems. Assembly of already compatible ordinary tensor component isomorphisms.",
+   "via": [
+    "lem-coef-semilinear-geometric-ordinary-tensor",
+    "lem-coef-semilinear-geometric-tensor-localization",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible coefficient-level isomorphisms of sheaves of modules assemble to an isomorphism on the product sequence site",
+   "results": "8 hits including PresheafOfModules.isoMk, IsCoverDense.sheafIso, Pi.mapIso, and isomorphisms of topological sheaf-condition diagrams.",
+   "date": "2026-10-26",
+   "verdict": "isoMk requires naturality on all product arrows; the present lemma proves it from vertical naturality and the normalized semilinear transition square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of isomorphisms on the slices of a product category commuting with horizontal transitions assembles to a presheaf of modules isomorphism",
+   "results": "8 hits including PresheafOfModules.isoMk and its component formulas, restrictScalarsCompToPresheaf, mk.inj and map_id.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the specified coefficient-system evaluation and transition maps."
+  },
+  {
+   "tool": "grep",
+   "query": "isoMk|ofComponents|JointlyFaithful in Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, ModuleCat/Sheaf and CategoryTheory/Functor/ReflectsIso/Jointly.lean",
+   "results": "PresheafOfModules.isoMk; sheaf-pushforward component isomorphisms; JointlyFaithful.jointlyReflectsIsomorphisms.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing reflection lemma; the scalar conversion and product-arrow compatibility remain to be proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearSystemIsoAssembly",
+  "file": "lean/Sheaf/Paper/SemilinearSystemIsoAssembly.lean",
+  "declaration": "WeilConjectures.SemilinearSections.systemIsoOfEvaluation_exists",
+  "statement": "theorem systemIsoOfEvaluation_exists\n    {M N : Systems.{c, v, max c v r} J B τ}\n    (δ : ∀ n : ℕ, (evaluation.{c, v, max c v r} J B τ n).obj M ≅\n      (evaluation.{c, v, max c v r} J B τ n).obj N)\n    (ht : ∀ {m n : ℕ} (h : n ≤ m),\n      (transition.{c, v, max c v r} J B τ h).app M ≫\n          (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h)).map (δ n).hom =\n        (δ m).hom ≫ (transition.{c, v, max c v r} J B τ h).app N) :\n    ∃ e : M ≅ N, ∀ n : ℕ,\n      (evaluation.{c, v, max c v r} J B τ n).map e.hom = (δ n).hom",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.systemIsoOfEvaluation_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T114145-L-2269142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T114145-L-2269142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

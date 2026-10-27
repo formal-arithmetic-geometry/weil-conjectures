@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-finite-exact-complex-derived-model",
+ "kind": "statement",
+ "title": "Normalized derived comparison from a finite exact cochain model",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], with $\\mathcal A$ having enough injectives [def-sp-injective-resolutions]. Assume their ordinary derived categories [def-weil-abstract-derived-category] and the total right derived functor $RG$ [def-sfb-right-derived-functor] below exist and that bounded-below injective resolutions compute it. Let $G:\\mathcal A\\to\\mathcal B$ be additive and left exact [def-sp-left-exact-additive]. Fix $r\\geq0$, an additive functor $F:\\mathcal A\\to\\operatorname{Ch}^{[0,r]}(\\mathcal B)$ whose degree functors $F^a$ are exact, and a natural chain map $e_X:G(X)[0]\\to F(X)$ that is a quasi-isomorphism for every injective $X$.\n\nFor every nonnegative injective resolution $s:X[0]\\to I^\\bullet$, form $B_s^{a,b}=F^a(I^b)$ and use the total convention [def-sp-double-complex-total] $d_{\\mathrm{Tot}}=d_F+(-1)^a d_I$. Let $c_s:F(X)\\to\\operatorname{Tot}B_s$ be induced by $s$ along the $b=0$ row, and let $b_s:G(I^\\bullet)\\to\\operatorname{Tot}B_s$ be induced by $e_{I^b}$ along the $a=0$ column. Both maps are quasi-isomorphisms. If $\\rho_s:RG(X[0])\\xrightarrow{\\sim}QG(I^\\bullet)$ is the resolution comparison normalized by the derived unit $\\eta$, then\n$$\\lambda_X=\\rho_s^{-1}\\circ Q(b_s)^{-1}\\circ Q(c_s):QF(X)\\xrightarrow{\\sim}RG(X[0])$$\nis independent of $s$, natural in $X$, and satisfies $\\lambda_X\\circ Q(e_X)=\\eta_{X[0]}$. Here $Q$ denotes localization at quasi-isomorphisms. The transpose of $B_s$, with its analogous total convention, is identified with $\\operatorname{Tot}B_s$ by multiplication by $(-1)^{ab}$ in bidegree $(a,b)$; the comparison is the identity on both axes. If $g_1,g_2:I^\\bullet\\to J^\\bullet$ are chain maps and $h$ is a chain homotopy between them, then the maps of these total complexes have chain homotopy with bidegree $(a,b)\\to(a,b-1)$ component $(-1)^aF^a(h^b)$. When $r=0$, $\\mathcal A=\\mathcal B$, $F=G=\\mathrm{id}$ and $e=1$, $\\lambda$ is the canonical identity on $X[0]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic discrete-lattice input to the tame-boundary calculation; returned lattice proof steps 5-7 and rank-zero case of step 10; homology.tex Tag 0133 (lemma-double-complex-gives-resolution), derived.tex Tags 013P (lemma-morphisms-lift) and 05TH (lemma-injective-acyclic)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-sp-double-complex-total",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Write $h=d_F$ and $v=d_I$ on $B_s^{a,b}=F^a(I^b)$. Naturality of the differential of the complex-valued functor gives $hv=vh$. With [def-sp-double-complex-total], every degree of the total is a finite biproduct: $0\\leq a\\leq\\min(r,n)$ and $b=n-a$. For the transposed bicomplex the differential is $v+(-1)^b h$. The map $\\tau$ with component $(-1)^{ab}$ from the original total to the transposed total is a chain map: for an $h$-arrow the coefficients are $(-1)^{(a+1)b}=(-1)^{ab+b}$, and for a $v$-arrow they are $(-1)^a(-1)^{a(b+1)}=(-1)^{ab}$. Its inverse has the same components. On $a=0$ and $b=0$ it is the identity. This proves the claimed transpose comparison and lets us apply an axis-augmentation result with either index as resolution index.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Total complex convention; signed interchange of the two indices"
+   }
+  },
+  {
+   "text": "For each $a$, $F^a(s):F^a(X)[0]\\to F^a(I^\\bullet)$ is a quasi-isomorphism. Indeed put $Z^0=X$, $Z^{b+1}=\\operatorname{im}(I^b\\to I^{b+1})$; the resolution gives $0\\to Z^b\\to I^b\\to Z^{b+1}\\to0$. Exactness of $F^a$ preserves these short exact sequences, so the augmented complex $0\\to F^aX\\to F^aI^0\\to F^aI^1\\to\\cdots$ is exact. The components $F^a(s)$ commute with $d_F$ by naturality and are killed by $d_I$. They therefore form the chain map $c_s$ with precisely the stated $b=0$ components. Apply [lem-sc-first-quadrant-column-augmentation], taking resolution index $b$ and remaining index $a$, to the transpose of $B_s$. Its hypotheses are the just-proved degreewise quasi-isomorphisms, nonnegativity and the vanishing of the outgoing differential on the augmentation. Step 1 identifies the resulting total map with $c_s$, because the signed transpose is the identity on $b=0$. Thus $c_s$ is a quasi-isomorphism.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-double-complex-total",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), applied with the second index as resolution degree"
+   }
+  },
+  {
+   "text": "Set $A^\\bullet=G(I^\\bullet)$. Naturality of $e$ for $d_I^b$ gives $F^0(d_I^b)e_{I^b}=e_{I^{b+1}}G(d_I^b)$, so its components give a chain map $A\\to B_s^{0,\\bullet}$. Since $e_{I^b}$ is a chain map from a degree-zero complex, $d_F^0 e_{I^b}=0$; hence its total inclusion is $b_s$. For each $b$, the required augmentation from $G(I^b)[0]$ to the $a$-complex $F(I^b)$ is exactly $e_{I^b}$, a quasi-isomorphism by the hypothesis that $I^b$ is injective. Apply [lem-sc-first-quadrant-column-augmentation] with resolution index $a$ and remaining index $b$. This proves that $b_s$ is a quasi-isomorphism; the sign on $a=0$ is $+1$, so its source differential is exactly $G(d_I)$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-double-complex-total",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), variant involving the other index"
+   }
+  },
+  {
+   "text": "Suppose $g_1-g_2=d_Jh+hd_I$. Define $H^{a,b}=(-1)^aF^a(h^b)$ from bidegree $(a,b)$ to $(a,b-1)$, with zero components outside the quadrant. Additivity gives $F^a(g_1^b)-F^a(g_2^b)=F^a(d_Jh+hd_I)^b$. In $d_{\\mathrm{Tot}}H+Hd_{\\mathrm{Tot}}$, the two vertical contributions have coefficient $(-1)^a(-1)^a=1$, while the horizontal contributions cancel: their coefficients are $(-1)^a$ and $(-1)^{a+1}$ and naturality gives $d_F F^a(h)=F^{a+1}(h)d_F$. Thus $dH+Hd=\\operatorname{Tot}F(g_1)-\\operatorname{Tot}F(g_2)$. The same additivity calculation without the total signs gives a homotopy $G(h)$ between $G(g_1)$ and $G(g_2)$. Homotopic maps have equal images under $Q$, since [def-weil-abstract-derived-category] also defines the localization through the homotopy category.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Total differential and degree-minus-one homotopy calculation"
+   }
+  },
+  {
+   "text": "Use the assumed injective computation with its specified unit normalization, not an arbitrary isomorphism of derived objects: $\\rho_s=\\eta_I^{-1}RG(Qs)$. The unit is invertible on the bounded-below injective complex $I$ by the computation hypothesis. Naturality of the unit [def-sfb-right-derived-functor] gives $\\rho_s\\eta_{X[0]}=QG(s)$. Steps 2 and 3 and localization [def-weil-abstract-derived-category] make every factor of $\\lambda_s=\\rho_s^{-1}Q(b_s)^{-1}Q(c_s)$ invertible. Naturality of $e$ gives the strict identity $c_s e_X=b_sG(s)$, whose only nonzero source component is in total degree zero. Consequently $\\lambda_s Q(e_X)=\\rho_s^{-1}QG(s)=\\eta_{X[0]}$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Unit-normalized injective computation assumed in the statement; naturality of the derived unit"
+   }
+  },
+  {
+   "text": "Let $u:X\\to Y$, let $s:X[0]\\to I$ and $t:Y[0]\\to J$ be the prescribed nonnegative injective resolutions. By [lem-weil-pbc-injective-resolution-lift-exists] choose a chain map $g:I\\to J$ with $gs=tu[0]$ strictly. The maps $F^a(g^b)$ commute with both differentials, giving $T_g:\\operatorname{Tot}B_s\\to\\operatorname{Tot}B_t$. Functoriality and naturality of $e$ give the strict squares $T_gc_s=c_tF(u)$ and $T_gb_s=b_tG(g)$. If $g'$ is another lift, [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] applies with $\\alpha=s$, target $J$, and $gs=g's$. Its hypotheses hold because $s$ is a quasi-isomorphism and $J$ is bounded below termwise injective. It gives $g\\sim g'$; step 4 then gives $Q(T_g)=Q(T_{g'})$ and $QG(g)=QG(g')$.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift), part (2); Tag 013S (lemma-morphisms-equal-up-to-homotopy)"
+   }
+  },
+  {
+   "text": "The definition of $\\rho$ and naturality of $\\eta$ on $g$ give\n$$\\rho_t RG(Qu[0])=\\eta_J^{-1}RG(Qt)RG(Qu[0])=\\eta_J^{-1}RG(Qg)RG(Qs)=QG(g)\\rho_s.$$\nApply $Q$ to both squares in step 6 and substitute this equation. Cancelling only the isomorphisms $Q(b_s),Q(b_t),\\rho_s,\\rho_t$ gives\n$$\\lambda_t QF(u)=\\rho_t^{-1}Q(b_t)^{-1}Q(T_g)Q(c_s)=\\rho_t^{-1}QG(g)Q(b_s)^{-1}Q(c_s)=RG(Qu[0])\\lambda_s.$$\nFor $u=1_X$ and any two resolutions this says $\\lambda_t=\\lambda_s$ in the same Hom set $\\operatorname{Hom}_{D(\\mathcal B)}(QF(X),RG(X[0]))$. For arbitrary $u$ it proves naturality of that resolution-independent isomorphism. This uses naturality of the derived unit [def-sfb-right-derived-functor] and composition in the derived localization [def-weil-abstract-derived-category], and no uniqueness assertion for a map merely commuting with $e_X$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Unit naturality and cancellation of the two augmentation comparisons"
+   }
+  },
+  {
+   "text": "When $r=0$, $F=G=\\mathrm{id}$ and $e=1$, the augmentation $e_X$ is $1_{X[0]}$. Step 5 gives $\\lambda_X=\\eta_{X[0]}$. The identity functor on $D(\\mathcal A)$ with identity unit is the right derived functor of the identity on complexes followed by $Q$. Under the unique unit-compatible identification of derived functors in [def-sfb-right-derived-functor], $\\eta$ is the identity. Therefore $\\lambda_X$ is the canonical identity, including for an arbitrary chosen injective resolution; no injectivity of $X$ is needed.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Identity right derived functor and uniqueness of its unit-compatible identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "lem-sc-first-quadrant-column-augmentation",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0133 (lemma-double-complex-gives-resolution), using the existing axis-augmentation node; derived.tex Tags 013P and 013S for resolution comparison. Agent assembly and explicit sign and unit calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of exact additive functors with an augmentation from a left exact functor that is a quasi isomorphism on injectives computes its derived functor naturally",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n           \", \"doc\": \"Given an additive functor $ F : C \\\\to D $ between abelian categories and a natural number $ n $, the $ n $-th right-derived functor is constructed by first taking injective resolutions in $ C $, apply\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this constructs the induced functor between the derived categories o\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasProjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n          \", \"doc\": \"The n-th left-derived functor of an additive functor $ F : C \\to D $, constructed as the composition of the left-derived functor to the homotopy category of chain complexes in $ D $ followed by the n-t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedNatIso and exact-functor localization require derived-functor or invertibility hypotheses; they do not construct the two finite-total comparisons or their normalized homotopies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"rightDerived\", \"iso\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_2} H] {F F' : CategoryTheory.Functor C H} (e : F ≅ F') (W : CategoryTheory.MorphismProperty C) : F.HasRightDerivedFunctor W ↔ F'.HasRightDerivedFunctor W\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_3} {D : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_1} D] [CategoryTheory.Category.{v_3, u_2} H] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (W : CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"The natural isomorphism `RF ≅ RF'` on right derived functors that is\\ninduced by a natural isomorphism `F ≅ F'`.\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso_hom\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso_inv\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] {RF RF' : CategoryTheory.Functor D H} {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F ⟶ L.c\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived\", \"type\": \" {C : Type u₁} {D : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} H] {L : CategoryTheory.Functor C D} {W : CategoryTheory.MorphismProperty C} [L.IsLocalization W] {F : CategoryTheory.Functor C H} (RF : CategoryTheor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"If `Φ` is a localizer morphism from `W₁ : MorphismProperty C₁` to\\n`W₂ : MorphismProperty C₂`, if `L₁ : C₁ ⥤ D₁` and `L₂ : C₂ ⥤ D₂` are\\nlocalization functors for `W₁` and `W₂`, if `F : C₂ ⥤ H` is a fun\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedNatIso and exact-functor localization require derived-functor or invertibility hypotheses; they do not construct the two finite-total comparisons or their normalized homotopies"
+  },
+  {
+   "tool": "grep",
+   "query": "(exact.*complex.*functor|complex.*exact.*functor|derived.*total.*comparison)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Basic.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Basic.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedNatIso and exact-functor localization require derived-functor or invertibility hypotheses; they do not construct the two finite-total comparisons or their normalized homotopies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two comparisons from a complex valued exact functor and a functor applied to injective resolutions to a double total complex are quasi isomorphisms natural up to homotopy",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite exact cochain functor model of derived functor with invariant augmentation normalization via row and column total complex comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n           \", \"doc\": \"Given an additive functor $ F : C \\\\to D $ between abelian categories and a natural number $ n $, the $ n $-th right-derived functor is constructed by first taking injective resolutions in $ C $, apply\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedNatIso and exact-functor localization require derived-functor or invertibility hypotheses; they do not construct the two finite-total comparisons or their normalized homotopies"
+  },
+  {
+   "tool": "grep",
+   "query": "(exact.*complex.*functor|complex.*exact.*functor|derived.*total.*comparison)",
+   "results": "Hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/ConcreteCategory.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization, individual derived cohomology naturality and universal derived-functor comparisons do not construct the two axis spans with the displayed signs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of exact functors quasi isomorphic to a left exact functor on injectives gives a natural normalized derived comparison",
+   "results": "Hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; ",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization, individual derived cohomology naturality and universal derived-functor comparisons do not construct the two axis spans with the displayed signs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"rightDerived\", \"iso\"",
+   "results": "Hits: CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc, CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerivedNatIso_hom, CategoryTheory.Functor.rightDerivedNatIso_inv, CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; ",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization, individual derived cohomology naturality and universal derived-functor comparisons do not construct the two axis spans with the displayed signs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of exact functors augmented by a left exact functor and quasi isomorphic on injectives computes the total right derived functor",
+   "results": "Hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.toRightDerivedZero; ",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization, individual derived cohomology naturality and universal derived-functor comparisons do not construct the two axis spans with the displayed signs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite exact cochain functor model of derived functor with invariant augmentation normalization via row and column total complex comparisons",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.Q, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom; ",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization, individual derived cohomology naturality and universal derived-functor comparisons do not construct the two axis spans with the displayed signs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-discrete-lattice-koszul-resolution",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic discrete-lattice input to the tame-boundary calculation; returned lattice proof steps 5-7 and rank-zero case of step 10; homology.tex Tag 0133 (lemma-double-complex-gives-resolution), derived.tex Tags 013P (lemma-morphisms-lift) and 05TH (lemma-injective-acyclic).",
+   "via": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-exact-complex-derived-model",
+  "worker": "stage1",
+  "summary": "Proved both axis quasi-isomorphisms using the existing first-quadrant augmentation theorem, then computed transpose and homotopy signs and derived-unit normalization. Lifted object morphisms to specified resolutions; derived-unit naturality and strict augmentation squares prove independence and naturality before cohomology. No new nodes or changed statement.",
+  "blueprint": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md, the algebraic discrete-lattice input beneath tame-boundary calculation; realizes the parent lattice split step 2 and its rank-zero normalization. The existing created.item chain has no imported ancestor (blueprint_refs.py ancestor returns None); retained its precise source place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "General first-quadrant axis-augmentation quasi-isomorphism, used for both axes; the unit has no such purely homological tool. The proof uses only abelianness and finite diagonals, without countable coproducts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-4d01ced21",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-4d01ced21 (reviewer sub-agent of L); spot-checked: FIX for one missing citation; I recomputed all eight steps and found them correct. The fault (B3): the statement says G is 'additive and left exact' without citing a definition. I added [def-sp-left-exact-additive], which defines it and which both citers cite, to the statement and to stmt_deps; the meaning is unchanged. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-exact-complex-derived-model.json. Context: no new nodes, no repair note (first split), no SGA. Step 1: the transpose sign (-1)^{ab} is a chain isomorphism and the identity on both axes. Step 2: lem-sc-first-quadrant-column-augmentation, applied to the transpose K^{b,a}=F^a(I^b), gives that c_s is a quasi-isomorphism. Its hypotheses hold: a≫K.d01=F(d_I^0 s^0)=0, and the columns are quasi-isomorphisms because F^a is exact. Step 3: the same lemma applied to B_s directly gives b_s, using d_F^0 e=0 and e_{I^b} a quasi-isomorphism since I^b is injective. Step 4: the homotopy (-1)^aF^a(h^b) works; cross terms cancel by naturality and the vertical terms give F^a(dh+hd). Step 5: c_s e_X=b_s G(s) in degree 0, so λQ(e)=η. Step 6: the lift-exists node (Mathlib leaf) and the lift-unique node (closed) apply with α=s and J injective. Step 7: ρ_t RG(Qu)=QG(g)ρ_s follows from naturality of η, which gives independence and naturality. Step 8: in the identity case λ=η, which is the identity under the unique unit-compatible identification. Edge cases checked: X=0, X injective, r=0, b=0, characteristic 2. Sources read: Stacks homology.tex Tag 0133 (lemma-double-complex-gives-resolution); derived.tex Tags 013P, 013S and 05TH. Duplicate check: none of the cosimplicial/Grothendieck sfb totalization nodes (injective-finite-total, nonnegative-derived-totalization, resolved-total-augmentation-square, exact-unit-derived-total-square), the additive-derived-plus normalization node or the sc total-column comparison restates the item. Accepted tool use: lem-sc-first-quadrant-column-augmentation, a generic bicomplex augmentation lemma; no node of sk-thm-sf-ctf-stability gives it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteExactComplexDerivedModel",
+  "declaration": "CategoryTheory.FiniteExactComplex.finite_exact_complex_derived_model",
+  "declarations": [
+   "CategoryTheory.FiniteExactComplex.bicomplexFunctor",
+   "CategoryTheory.FiniteExactComplex.hasTotal",
+   "CategoryTheory.FiniteExactComplex.total",
+   "CategoryTheory.FiniteExactComplex.inclusion",
+   "CategoryTheory.FiniteExactComplex.totalMap",
+   "CategoryTheory.FiniteExactComplex.transposedTotal",
+   "CategoryTheory.FiniteExactComplex.transposedInclusion",
+   "CategoryTheory.FiniteExactComplex.transpose",
+   "CategoryTheory.FiniteExactComplex.transpose_components",
+   "CategoryTheory.FiniteExactComplex.total_homotopy",
+   "CategoryTheory.FiniteExactComplex.resolutionComparison",
+   "CategoryTheory.FiniteExactComplex.finite_exact_complex_derived_model",
+   "CategoryTheory.FiniteExactComplex.identity_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteExactComplexDerivedModel.lean",
+  "statement": "theorem finite_exact_complex_derived_model [EnoughInjectives A] (G : A ⥤ B) [G.Additive] [PreservesFiniteLimits G] (RG : DerivedCategory A ⥤ DerivedCategory B) (η : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RG) [RG.IsRightDerivedFunctor η (HomologicalComplex.quasiIso A (.up ℤ))] (hη : ∀ (I : CochainComplex A ℤ), (∃ a : ℤ, ∀ b : ℤ, b < a → IsZero (I.X b)) → (∀ b : ℤ, Injective (I.X b)) → IsIso (η.app I)) (r : ℕ) (F : A ⥤ CochainComplex B ℤ) [F.Additive] (hF : ∀ (X : A) (a : ℤ), a < 0 ∨ (r : ℤ) < a → IsZero ((F.obj X).X a)) (hExact : ∀ a : ℤ, PreservesFiniteLimits (F ⋙ HomologicalComplex.eval B (.up ℤ) a) ∧ PreservesFiniteColimits (F ⋙ HomologicalComplex.eval B (.up ℤ) a)) (e : G ⋙ HomologicalComplex.single B (.up ℤ) 0 ⟶ F) (he : ∀ (X : A) [Injective X], QuasiIso (e.app X)) : ∃ comparison : F ⋙ DerivedCategory.Q ≅ DerivedCategory.singleFunctor A 0 ⋙ RG, (∀ X : A, DerivedCategory.Q.map (e.app X) ≫ comparison.hom.app X = DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).inv.app X) ≫ η.app ((HomologicalComplex.single A (.up ℤ) 0).obj X)) ∧ (∀ (X : A) (I : CochainComplex A ℤ) (hI : ∀ b : ℤ, b < 0 → IsZero (I.X b)) (hInj : ∀ b : ℤ, Injective (I.X b)) (s : (HomologicalComplex.single A (.up ℤ) 0).obj X ⟶ I) [QuasiIso s], ∃ (c : F.obj X ⟶ total F r hF I hI) (b : (G.mapHomologicalComplex (.up ℤ)).obj I ⟶ total F r hF I hI), (∀ n : ℤ, c.f n = (F.map ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 X).inv ≫ s.f 0)).f n ≫ inclusion F r hF I hI n 0 n) ∧ (∀ n : ℤ, b.f n = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (G.obj (I.X n))).inv ≫ (e.app (I.X n)).f 0 ≫ inclusion F r hF I hI 0 n n) ∧ QuasiIso c ∧ QuasiIso b ∧ comparison.hom.app X ≫ (resolutionComparison G RG η s (hη I ⟨0, hI⟩ hInj)).hom ≫ DerivedCategory.Q.map b = DerivedCategory.Q.map c)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem gives the same natural derived isomorphism for every nonnegative injective resolution; each of the two canonical axis maps is characterized in every degree and asserted to be a quasi-isomorphism. The resolution formula is written after multiplication by the invertible comparison factors. The auxiliary declarations provide the actual Mathlib total constructions, signed transpose, specified total homotopy, and unit-compatible rank-zero identity. RG and its unit are parameterized by the existing universal-property class so that no unbounded K-injective-resolution hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c6e6f392",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Only the item lean record changed; dep records identical to live; statement verbatim; 13 declarations match. Clause check: abelian/enough-injectives/HasDerivedCategory independent universes; arbitrary RG with Mathlib IsRightDerivedFunctor = def-sfb universal property (no extra K-injective assumption); hη = bounded-below injective computation; G additive+PreservesFiniteLimits; F additive with [0,r] support, exact degree functors; e natural, qis on injectives. Bicomplex orientation gives d_F+(-1)^a d_I; c_s/b_s pinned degreewise and asserted qis; resolutionComparison = RG(Qs)≫η_I^{-1}; one NatIso comparison satisfies comparison≫ρ_s≫Q b = Q c for every resolution (independence+naturality, uniquely pinned); unit clause via singleMapHomologicalComplex. transpose = totalFlipIso.symm with σ=(-1)^{ab}; homotopy sign (-1)^a recomputed; identity_normalization unique unit-compatible δ:RG≅𝟭. No hollow defs, all theorems sorry, docstrings with source/blueprint and proof steps. Advisory: unused public import of RightDerivedFunctorOfQuasiIsoResolutions; citers using the recorded Qh-based pair need a small IsRightDerivedFunctor bridge."
+ }
+}

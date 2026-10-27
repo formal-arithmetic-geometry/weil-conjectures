@@ -1,0 +1,91 @@
+{
+ "id": "lem-sfb-monomial-index-cardinality",
+ "kind": "statement",
+ "title": "Cardinality of monomial exponent vectors",
+ "statement": "Let $I$ be a nonempty set. Write $\\mathcal M(I)$ for the monomial exponent set of the polynomial-ring definition [def-weil-pbc-mv-polynomial-ring], namely the set of maps $e:I\\to\\mathbf N$ with finite support, meaning that $\\{i\\in I:e(i)\\ne0\\}$ is finite. Then $|\\mathcal M(I)|=\\max(|I|,\\aleph_0)$. In particular, if $I$ is infinite, $|\\mathcal M(I)|=|I|$. Cardinal comparisons are taken in a common universe.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00FU (theorem-uncountable-nullstellensatz), proof, first paragraph on the number of monomials; the nonempty-set formula is the Mathlib generalization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an infinite set I the cardinality of finitely supported functions I to natural numbers is the cardinality of I",
+   "results": "{\"t\": \"2026-10-23T18:55:35Z\", \"tool\": \"leanfinder\", \"query\": \"For an infinite set I the cardinality of finitely supported functions I to natural numbers is the cardinality of I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Cardinal.mk_finsupp_of_infinite'\", \"Cardinal.mk_finsupp_of_infinite\", \"Cardinal.mk_finsupp_nat\", \"Cardinal.mk_finsupp_lift_of_infinite\", \"Cardinal.mk_finsupp_lift_of_infinite'\", \"Finsupp.infinite_of_left\", \"Finsupp.infinite_of_right\", \"Cardinal.mk_finsupp_of_fintype\"], \"digest\": \"02aa83911d6c2982\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Cardinal.mk_finsupp_nat; source signature read at Mathlib/SetTheory/Cardinal/Finsupp.lean:59"
+  },
+  {
+   "tool": "loogle",
+   "query": "Cardinal.mk_finsupp_nat",
+   "results": "{\"t\": \"2026-10-23T18:55:35Z\", \"tool\": \"loogle\", \"query\": \"Cardinal.mk_finsupp_nat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Cardinal.mk_finsupp_nat\"], \"digest\": \"a60a69cc91e5ab1d\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Cardinal.mk_finsupp_nat; source signature read at Mathlib/SetTheory/Cardinal/Finsupp.lean:59"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cardinality of the set of monomials in infinitely many variables equals the cardinality of the variables",
+   "results": "{\"t\": \"2026-10-23T18:55:35Z\", \"tool\": \"leansearch\", \"query\": \"Cardinality of the set of monomials in infinitely many variables equals the cardinality of the variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.cardinalMk_of_fintype\", \"MvPolynomial.rank_eq_lift\", \"MvPolynomial.infinite_of_infinite\", \"MvPolynomial.cardinalMk_le_max_lift\", \"Polynomial.cardinalMk_le_max\", \"MvPolynomial.infinite_of_nonempty\", \"MvPolynomial.cardinalMk_eq_max\", \"Polynomial.cardinalMk_eq_max\"], \"digest\": \"2b0ccd1f0471ab1d\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Cardinal.mk_finsupp_nat; source signature read at Mathlib/SetTheory/Cardinal/Finsupp.lean:59"
+  },
+  {
+   "tool": "grep",
+   "query": "mk_finsupp_nat|mk_finsupp_lift_of_infinite",
+   "results": "{\"t\": \"2026-10-23T18:55:34Z\", \"tool\": \"grep\", \"query\": \"mk_finsupp_nat|mk_finsupp_lift_of_infinite\", \"sub\": \"SetTheory/Cardinal/Finsupp.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"29\", \"47\", \"54\", \"59\", \"67\"], \"digest\": \"25bd3d8652c7c1a8\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Cardinal.mk_finsupp_nat; source signature read at Mathlib/SetTheory/Cardinal/Finsupp.lean:59"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Cardinal.mk_finsupp_nat",
+  "file": "Mathlib/SetTheory/Cardinal/Finsupp.lean",
+  "line": 59,
+  "how": "exact for the main formula: Cardinal.mk_finsupp_nat at line 59. The infinite case specializes in one line by max_eq_left (Cardinal.aleph0_le_mk I); no ring or field hypotheses are needed. Read lines 29-59."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cardinal-generator-nullstellensatz",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: geometric: Tag 0B8F proof, first input 0B8E; schemeness after algebraic closure before descent. Auxiliary input: Tag 0B8E: choose a sufficiently large algebraically closed extension for an arbitrary etale scheme atlas. Supporting input: Nullstellensatz for an algebra with fewer generators than the cardinality of the field. Supporting step in Stacks 00FU: Tag 00FU (theorem-uncountable-nullstellensatz), proof, first paragraph on the number of monomials; the nonempty-set formula is the Mathlib generalization.",
+   "via": [
+    "lem-sfb-cardinal-generator-nullstellensatz",
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "lem-sfb-separated-group-space-geometric-scheme",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

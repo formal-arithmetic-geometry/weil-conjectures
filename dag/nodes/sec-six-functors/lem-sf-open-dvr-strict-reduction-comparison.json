@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-open-dvr-strict-reduction-comparison",
+ "kind": "statement",
+ "title": "Strict DVR quotient transport before total derived coefficient limit",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, an adic datum d on its valuation ring, a scheme T, the canonical coefficient model C of [def-sf-open-quotient-koszul-models], and a normalized reduction/limit calculus S of [lem-coef-derived-system-evaluation-calculus]. There is a natural isomorphism from completed-adic reduction after C.derived to scalar-restricted S.reduction followed by C.towers. For each flat-term K-flat Q, a single strict tensor tower B and augmentation a from the constant Q admit the comparisons kappa, e and tau of OpenDvrStrictReductionComparison. They satisfy the ordinary unit equation, the reduction-counit equation, identification of the strict augmentation with unrestrictedTowerUnit at all levels, and the total-limit formula identifying S.adjunction.unit with localization of the ordinary compatible-family map followed by the universal right-derived comparison. These are exactly the tower and representative fields of OpenDvrStrictReductionComparison. No derived coefficient-limit comparison is supplied and no reconstruction-completion-unit identity is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0941 (lemma-derived-limit-is-ok); strict tensor transport step of lem-sf-open-dvr-augmented-reduction-comparison."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-derived-complete",
+  "prop-weil-pbc-koszul-reconstruction",
+  "def-sf-open-quotient-koszul-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Take the existing ordinary model M and the normalized left-derived comparison epsilon for the specified S from ordinaryModel_exists and fixedDerivedComparison, using the canonical termwise limit comparison and canonical right-derived unit. Apply ordinary DVR tensor transport to M, giving the ordinary natural tensor comparison nu and strict tower identification kappa.",
+   "uses": [
+    "lem-sf-open-dvr-ordinary-tensor-transport",
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-trf-completion-unit-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved openDvrDerivedTowerComparison to nu and epsilon. Its comparison on flat-term K-flat resolutions supplies the natural tower isomorphism t and its exact representative counit square. In the representative take e to be exact restriction of epsilon followed by its localization factor, and tau to be nu on complexes; their hom maps are definitionally those of that square.",
+   "uses": [
+    "lem-sf-open-dvr-derived-tower-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For Q choose the actual termwise tensor complex I=M.quotient Q, its exact restricted tower complex B, and the explicitly constructed ordinary constant/limit adjunct a. The derived representative is exact restriction of epsilon followed by mapDerivedCategoryFactors. Take tau from nu on complexes and kappa from ordinary transport. Their ordinary-unit and unrestrictedTowerUnit equations hold by construction. The normalized Hom equation of fixedDerivedComparison, evaluated on identity of I, is the S.unit formula. Compose it with the exact restriction localization factor; the inverse factor in systemLimitUnit cancels. The ordinary limit projection identities identify M.limitComparison with the termwise comparison after the composite-functor comparison. Apply the const/limit Hom equivalence to a, then cancel the termwise comparison against its inverse in the canonical limit unit. The resulting equation is exactly localization of the ordinary compatible-family map followed by derivedLimitComplexComparison. Apply C.derived.functor and its map_comp equation. This proves the last representative clause without using derived-limit projections to detect equality. The already proved openDvrScalarUnitFormula packages the ordinary adjunction and localization cancellations in a separate module.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-trf-completion-unit-canonical-models",
+    "lem-sf-open-dvr-ordinary-tensor-transport",
+    "lem-sf-open-dvr-scalar-unit-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-dvr-ordinary-tensor-transport",
+  "lem-trf-completion-unit-fixed-calculus-models",
+  "lem-trf-completion-unit-ordinary-adjunction",
+  "lem-sf-open-dvr-derived-tower-comparison",
+  "lem-trf-completion-unit-canonical-models",
+  "lem-sf-open-dvr-scalar-unit-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0941, using the already formalized normalized completion-unit models and the comparison on a resolving class; Q8 derived assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completion.*unit|derivedCompletionModelUnit",
+   "results": "{\"t\": \"2026-10-26T19:59:06Z\", \"tool\": \"grep\", \"query\": \"completion.*unit|derivedCompletionModelUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\"], \"digest\": \"85b9ea34549be731\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module completion and scalar adjunction facts do not supply the normalized strict sheaf quotient tower comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"naturality\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-26T19:59:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"NatTrans\\\", \\\"naturality\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module completion and scalar adjunction facts do not supply the normalized strict sheaf quotient tower comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence transports derived quotient tensor towers and their completion units",
+   "results": "{\"t\": \"2026-10-26T19:59:08Z\", \"tool\": \"leanfinder\", \"query\": \"An exact equivalence transports derived quotient tensor towers and their completion units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop\", \"TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mk\", \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor\"], \"digest\": \"4e97c27267cf7208\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module completion and scalar adjunction facts do not supply the normalized strict sheaf quotient tower comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of categories of modules over isomorphic ring sheaves transports the derived strict quotient tensor augmentation and its adjunction unit",
+   "results": "{\"t\": \"2026-10-26T20:03:53Z\", \"tool\": \"leansearch\", \"query\": \"An exact equivalence of categories of modules over isomorphic ring sheaves transports the derived strict quotient tensor augmentation and its adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.restrictScalarsEquivalenceOfRingEquiv\", \"ModuleCat.restrictScalars_isEquivalence_of_ringEquiv\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"CategoryTheory.Equivalence.transportIsoSheafToPresheaf\"], \"digest\": \"2b87684ece0f94db\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module completion and scalar adjunction facts do not supply the normalized strict sheaf quotient tower comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenDvrAugmentedReductionComparison",
+  "date": "2026-10-27",
+  "group": "F6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”: strict quotient tensor transport before derived coefficient-limit transport",
+   "via": [
+    "lem-sf-open-dvr-augmented-reduction-comparison",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrStrictReductionComparison",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrStrictReductionComparison.lean",
+  "declaration": "WeilConjectures.openDvrStrictReductionComparison",
+  "declarations": [
+   "WeilConjectures.openDvrStrictReductionComparison",
+   "WeilConjectures.OpenDvrStrictReductionComparison"
+  ],
+  "statement": "theorem openDvrStrictReductionComparison\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E T) :\n    Nonempty (OpenDvrStrictReductionComparison l E C S)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T222644-L-679123",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T021353-L-2762671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

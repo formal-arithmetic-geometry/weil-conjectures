@@ -25,73 +25,53 @@
  ],
  "proof": [
   {
-   "text": "Write $U_i=\\operatorname{Spec}(A_i)$. Since $\\mathcal F|_{U_i}$ is quasi-coherent, the counit of the affine tilde/global-sections adjunction identifies $\\mathcal F|_{U_i}$ with $\\widetilde{M_i}$, and the inclusion $N_i\\hookrightarrow M_i$ induces $\\widetilde{N_i}\\to\\widetilde{M_i}\\cong\\mathcal F|_{U_i}$. By the tilde-sections lemma its component over $D(f)$ is the localized inclusion $(N_i)_f\\to(M_i)_f$, which is injective because localization is exact (Algebra, Tag 00CS); a map of sheaves injective on the basis of principal opens is injective (elementary). So $\\mathcal K_i:=\\widetilde{N_i}$ is an $\\mathcal O_{U_i}$-submodule of $\\mathcal F|_{U_i}$ with $\\mathcal K_i(D(f))=N_i[f]$ for every $f\\in A_i$.",
+   "text": "Construct each local subsheaf as the abelian image of the finite free map into F restricted to U_i induced by a finite spanning set of N_i. This is a real categorical construction, with no data taken from an unproved existence statement. The free module and image are quasi-coherent. Surjectivity of the image factorization on affine sections and the finite free coordinate formula show that its section image on U_i is exactly N_i. By quasi-coherence this image construction is the usual affine sheaf of N_i, so on principal opens its image is the localized submodule. The Lean helper affine_local_realization proves the mono, quasi-coherence and section-range clauses.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "pqf-lem-coherent-ft-locnoeth"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-finite-type-affine-capture"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02OL, proof of Lemma 31.5.8; affine construction using Algebra Tag 02M6"
-   }
+   "elementary": false
   },
   {
-   "text": "On an overlap $U_i\\cap U_j$, every point has an open neighbourhood $V$ principal in both $U_i$ and $U_j$, $V=D(f)=D(g)$ with $f\\in A_i$, $g\\in A_j$. By step 1 and the hypothesis, $\\mathcal K_i(V)=N_i[f]=N_j[g]=\\mathcal K_j(V)$, so the subsheaves $\\mathcal K_i|_{U_i\\cap U_j}$ and $\\mathcal K_j|_{U_i\\cap U_j}$ of $\\mathcal F|_{U_i\\cap U_j}$ agree on an open cover and hence are equal (sheaf axiom, elementary); the identity maps are therefore isomorphisms satisfying the cocycle condition. The sheaf-gluing lemma for modules produces an $\\mathcal O_X$-module $\\mathcal K$ with $\\mathcal K|_{U_i}\\cong\\mathcal K_i$, and the local inclusions $\\mathcal K_i\\hookrightarrow\\mathcal F|_{U_i}$ agree on overlaps, so the morphism-gluing clause gives a global inclusion $\\mathcal K\\hookrightarrow\\mathcal F$, with image the subsheaf of sections locally in the $\\mathcal K_i$; this subsheaf is unique since a subsheaf is determined by its restrictions to an open cover.",
+   "text": "For each open W in an overlap and x in W, first choose a principal open of U_i inside W. Apply the common-principal-open lemma to this affine principal open and U_j, then rewrite the resulting nested principal open as a principal open of U_i. Thus the opens principal in both charts form a basis of the overlap. Section-range equality on that basis makes each inclusion followed by the other cokernel projection zero there. Sheaf separation for the cokernel makes this composite zero on every open. Each mono is the kernel of its cokernel, so Abelian.monoLift factors the two inclusions through one another, identifying their subobjects. The resulting isomorphisms commute with inclusions, and their cocycle identity follows by cancellation of a monomorphism. Glue sheaves and inclusions by the module-sheaf gluing theorem. Local injectivity and sheaf separation show that the global map is a monomorphism.",
    "uses": [
     "lem-sc-affine-inter-principal-both",
     "lem-weil-pbc-glue-sheaves-of-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02OL, proof of Lemma 31.5.8; Schemes Tag 01HR for opens principal in two affines; Sheaves Tags 00AL and 04TN for gluing"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $\\mathcal K_i=\\widetilde{N_i}$ is quasi-coherent, and its sections over $U_i$ form the finite $A_i$-module $N_i$. The affine finite-type criterion makes $\\mathcal K_i$ of finite type. Since these properties are local on the cover, $\\mathcal K$ is quasi-coherent and of finite type on $X$; local Noetherianity of $X$ and the coherence criterion then imply that $\\mathcal K$ is coherent.",
+   "text": "The glued module is quasi-coherent because it is so after restriction to the covering opens. Pass to the associated subobject of F. On a locally Noetherian scheme, a quasi-coherent submodule of a coherent module is coherent; apply the existing coherent-submodule criterion.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "pqf-lem-coherent-ft-locnoeth",
-    "pqf-def-locnoeth"
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02OL, proof of Lemma 31.5.8; Cohomology of Schemes Tag 01XZ"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\mathcal Q=\\operatorname{Coker}(\\mathcal K\\hookrightarrow\\mathcal F)$. Restriction to an open immersion preserves cokernels, so $\\mathcal Q|_{U_i}$ is the cokernel of $\\mathcal K_i\\hookrightarrow\\mathcal F|_{U_i}$. On every affine member of the cover, the affine cokernel formula identifies its sections with $\\mathcal F(U_i)/N_i$, exactly the local affine quotient. Hence these local quotients agree on overlaps and are the restrictions of the single quotient sheaf $\\mathcal Q=\\mathcal F/\\mathcal K$.",
+   "text": "Local range equality and affine_local_realization identify the global inclusion image on U_i with N_i. Apply the affine cokernel formula to identify its cokernel sections with Gamma(F,U_i)/N_i. Finally any other candidate has the same section ranges on the affine covering; module_subobject_eq_on_cover identifies it with the constructed subobject.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-glue-sheaves-of-modules"
+    "new-module-subobject-eq-on-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02OL, proof of Lemma 31.5.8; Schemes Tags 01IC and 01IB"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-glue-sheaves-of-modules",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "pqf-lem-coherent-ft-locnoeth",
-  "pqf-def-locnoeth",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-sc-affine-inter-principal-both"
+  "lem-weil-pbc-module-finite-type-affine-capture",
+  "lem-sc-affine-inter-principal-both",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "new-module-subobject-eq-on-cover"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "V7",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 02OL (Lemma 31.5.8), affine construction and gluing paragraph"
+  "place": "Tag 02OL, lemma-remove-embedded-points; affine finite free image construction and module descent"
  },
  "mathlib_searches": [
   {
@@ -149,16 +129,31 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-epg2603 (reviewer sub-agent of L); spot-checked: Read packet whole; checked citer lem-sc-hilbert-embedded-points step 2/3 (cover by all affines, compatibility on principal localizations) against the item; node concerns only gluing, no associated/embedded points are defined or used, no affine denominator-module content restated. FIX more, RETURN less: (1) E/C4 statement: hypothesis referred to an undefined 'prescribed submodule N_V' -- rewritten precisely as agreement N_i[f]=N_j[g] on opens principal in both U_i and U_j (what the citer supplies), conclusion made explicit (K(D(f))=N_i[f], (F/K)(U_i)=M_i/N_i); (2) C1 step 2: covering U_i cap U_j by opens principal in both (Schemes Tag 01HR) was uncited -- new node lem-sc-affine-inter-principal-both, Mathlib match exists_basicOpen_le_affine_inter recorded; (3) C1 step 1: injectivity of N_i~ -> F|U_i and K_i(D(f))=(N_i)_f were uncited -- now cites lem-weil-pbc-spec-module-tilde-sections with exactness of localization (Tag 00CS) as elementary; dropped the meaningless 'refine the cover'. Steps 3-4 checked, valid.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lead_note": "2026-10-10 L (R-epg2603): new node lem-sc-affine-inter-principal-both (Tag 01HR) is exactly Mathlib AlgebraicGeometry.exists_basicOpen_le_affine_inter (AffineScheme.lean:764); merge script requires reviewer nodes unsplit, so it is left unsplit with the match recorded in mathlib_searches: make it a leaf",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.HilbertEmbeddedPointsGluing",
   "declaration": "AlgebraicGeometry.Scheme.Modules.existsUnique_coherent_submodule_of_affine_cover",
   "file": "lean/Sheaf/AlgebraicGeometry/HilbertEmbeddedPointsGluing.lean",
-  "statement": "theorem existsUnique_coherent_submodule_of_affine_cover (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (I : Type u) (U : I → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : ∀ x : X, ∃ i, x ∈ U i) (N : ∀ i, Submodule (Γ(X, U i)) (Γ(F, U i))) (hN : ∀ i, Module.Finite (Γ(X, U i) : Type u) (N i)) (Nloc : ∀ (i : I) (V : X.Opens), Submodule (Γ(X, V)) (Γ(F, V))) (hNloc : ∀ i, Nloc i (U i) = N i) (hcompat : ∀ (i j : I) (V : X.Opens), V ≤ U i → V ≤ U j → Nloc i V = Nloc j V) : ∃! K : Subobject F, (RingedSpace.IsCoherent X.toRingedSpace (K : X.Modules) ∧ (∀ (i : I) (V : X.Opens), (AddSubgroup.map (K.arrow.app V).hom (Submodule.toAddSubgroup (⊤ : Submodule (Γ(X, V)) (Γ((K : X.Modules), V)))) = (Nloc i V).toAddSubgroup)) ∧ (∀ i, Nloc i (U i) = N i) ∧ (∀ i, Nonempty (Γ((cokernel K.arrow : X.Modules), U i) ≃ₗ[Γ(X, U i)] (Γ(F, U i) ⧸ N i))))",
+  "statement": "theorem existsUnique_coherent_submodule_of_affine_cover\n    (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)\n    (hF : RingedSpace.IsCoherent X.toRingedSpace F)\n    (I : Type u) (U : I → X.Opens) (hU : ∀ i, IsAffineOpen (U i))\n    (hcover : ∀ x : X, ∃ i, x ∈ U i)\n    (N : ∀ i, Submodule Γ(X, U i) Γ(F, U i))\n    (hN : ∀ i, Module.Finite Γ(X, U i) (N i))\n    (hcompat : ∀ (i j : I) (W : X.Opens) (hi : W ≤ U i) (hj : W ≤ U j),\n      (∃ (f : Γ(X, U i)) (g : Γ(X, U j)),\n        W = X.basicOpen f ∧ W = X.basicOpen g) →\n      Set.range ((affineSectionSubmodule X F (U i) (N i) (hN i)).2.val.app\n        (op (Over.mk (homOfLE hi)))) =\n      Set.range ((affineSectionSubmodule X F (U j) (N j) (hN j)).2.val.app\n        (op (Over.mk (homOfLE hj))))) :\n    ∃! K : Subobject F,\n      RingedSpace.IsCoherent X.toRingedSpace (K : X.Modules) ∧\n      (∀ (i : I) (W : X.Opens) (hi : W ≤ U i),\n        Set.range (K.arrow.app W) =\n          Set.range ((affineSectionSubmodule X F (U i) (N i) (hN i)).2.val.app\n            (op (Over.mk (homOfLE hi))))) ∧\n      (∀ i, LinearMap.range (K.arrow.val.app (op (U i))).hom = N i) ∧\n      (∀ i, Nonempty (Γ((cokernel K.arrow : X.Modules), U i) ≃ₗ[Γ(X, U i)]\n        (Γ(F, U i) ⧸ N i)))",
   "branch": "sheaf-dag",
   "by": "T1",
   "date": "2026-10-12",
-  "existing": false
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineSectionSubmodule",
+   "AlgebraicGeometry.Scheme.Modules.existsUnique_coherent_submodule_of_affine_cover"
+  ]
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -167,5 +162,15 @@
   "group": "T1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-b49ec",
+  "group": "V7",
+  "result": "fix",
+  "landing": "20261024T021113-L-2711930",
+  "kind": "interface",
+  "note": "independent cc review: Delivered existsUnique_coherent_submodule_of_affine_cover (repaired, fully proved, axioms clean) against node lem-sc-hilbert-embedded-points-gluing statement, change record, and live clone (no importers, no citers)"
  }
 }

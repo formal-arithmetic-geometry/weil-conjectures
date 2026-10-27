@@ -1,0 +1,120 @@
+{
+ "id": "def-trf-free-log-chart-coordinates",
+ "kind": "definition",
+ "title": "Actual free-chart functions and their ordered nonunit indices",
+ "statement": "Let W be a scheme and N an etale log structure [def-trf-fs-log-blowup]. For a monoid map beta from the multiplicative free additive monoid (ULift(Fin r) -> N) to N(W), define coordinate(i) as the structural image of beta of the i-th standard basis vector. Its ordinaryCoordinate at w is its Zariski germ. Its strictCoordinate at a geometric point t is its pointed etale ring germ [def-trf-log-regular-pair] carried through the canonical strict-local ring comparison [def-trf-log-etale-restriction-stalk-comparison]. Define nonunitIndices as the list of the ULift lifts of 0,...,r-1 filtered by noninvertibility of ordinaryCoordinate at w. These constructions retain the actual chart values, their multiplicities and their increasing index order; r=0 gives the empty list.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.2 and 1.6--1.7, printed pp. 69--70; characteristic faces and descent of free chart parameters, extracted from returned proof steps 7--8."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-log-regular-pair",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-trf-log-etale-restriction-stalk-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the structural map and the ordinary or pointed geometric germ to the stated standard generator; transport the latter through the prescribed comparison. Form List.ofFn on Fin r and filter by the stated predicate. Every construction is explicit and needs no theorem choosing data.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-trf-log-regular-pair",
+    "def-trf-log-etale-restriction-stalk-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-log-regular-pair",
+  "def-trf-log-etale-restriction-stalk-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.2 and 1.6--1.7, printed pp. 69--70; characteristic faces and descent of free chart parameters, extracted from returned proof steps 7--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a log regular scheme with a free monoid chart, the nonunit coordinates extend to a regular system of parameters in each ordinary local ring",
+   "results": "8 hits, including Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal and RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem. These concern smooth algebras or regular sequences, not logarithmic charts or descent of prescribed parameter sublists.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "12 hits. Inspected IsRegularLocalRing.of_spanFinrank_maximalIdeal_le, IsRegularLocalRing.of_ringEquiv, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, and isRegularLocalRing_iff. These establish regularity from generators or transport through an isomorphism; none supplies the free log chart presentation, etale restriction, or specified strict-local parameter descent.",
+   "date": "2026-10-26",
+   "verdict": "individual tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularSystemOfParameters; etaleRestrict|IsLogRegular|trivialityLocus; strictHenselization.*parameter|parameters.*strictHenselization",
+   "results": "msearch grep returned zero hits for the combined parameter search. Local rg inspected FineSaturatedLogBlowup, LogConditionFineChartLocality, LogEtaleRestrictionStalkComparison, the strict-henselization regularity and cotangent comparison modules, RegularLocalQuotientKernelParameters, and Mathlib RegularLocalRing/Defs. No existing theorem gives any of the three exact intermediate conclusions. The definitions of the four chart functions occur only in the assigned item and are moved verbatim to their definition module.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; existing ingredients retained"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define global coordinate functions of a free logarithmic chart their ordinary germs and the ordered list of nonunit indices",
+   "results": "8 hits: Filter.Germ.valueₗ, Manifold.LocalPresentationAt.ctorIdx, NumberField.Units.dirichletUnitTheorem.logSpace, NumberField.Units.logEmbedding, TopCat.Presheaf.Γgerm, Filter.Germ.instMulZeroOneClass, AlgebraicGeometry.AffineSpace.coord, NumberField.Units.basisUnitLattice. Inspected returned types; none supplies this exact statement. The parameter queries return regular-sequence, characteristic-p, character or henselian structure results; the coordinate query also returns TopCat.Presheaf.Γgerm, which supplies only the ordinary germ, and unrelated affine-space coordinates.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FreeLogChartOrdinaryParameters",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-free-log-chart-ordinary-parameters",
+   "place": "Steps of the ordinary-parameter proof, factored without changing its statement or the unit route."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FreeLogChartCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeLogChartCoordinates.lean",
+  "declaration": "AlgebraicGeometry.FreeLogChart.coordinate",
+  "statement": "def coordinate {W : Scheme.{u}} (N : EtaleLogStructure W) {r : ℕ}\n    (β : Multiplicative (ULift.{u} (Fin r) → ℕ) →*\n      N.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 W))))\n    (i : ULift.{u} (Fin r)) : Γ(W, ⊤)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.FreeLogChart.ordinaryCoordinate",
+   "AlgebraicGeometry.FreeLogChart.strictCoordinate",
+   "AlgebraicGeometry.FreeLogChart.nonunitIndices"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone + node lean.statement (byte-identical); moved FreeLogChart.* defs vs clone (verbatim, re-exported, 0 importers/users); 3 new sorry statements vs FineSaturatedLogBlowup defs, ILO VI 1.1-1.2/1.6-1.7 and Stacks 06LN/07QM; node stmt_deps vs declaration owners"
+ }
+}

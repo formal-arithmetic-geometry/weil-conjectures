@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-space-naive-cotangent-coherent",
+ "kind": "statement",
+ "title": "Coherent naive cotangent cohomology over a locally Noetherian base",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Suppose $Y$ is locally Noetherian, meaning it admits a surjective etale cover by schemes with affine open covers by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Suppose $f$ is locally of finite presentation, tested on etale scheme charts [def-sbc-locally-finite-presentation]. Then $X$ is locally Noetherian, $\\mathcal O_X$ is coherent, and $\\mathrm{NL}_{X/Y}$ [def-sfb-space-naive-cotangent-complex] has coherent cohomology sheaves, zero outside degrees $-1,0$. Coherent here means that on every Noetherian affine etale chart the module sheaf is associated to a finitely generated module; association on an affine chart $\\operatorname{Spec}R$ sends a module $N$ to the etale sheaf with value $B\\otimes_RN$ on affine etale charts $\\operatorname{Spec}B\\to\\operatorname{Spec}R$. Thus $\\mathrm{NL}_{X/Y}$ and $\\mathcal O_X[0]$ belong to $D^b_{\\mathrm{Coh}}(\\mathcal O_X)$, the full subcategory of $D(\\mathcal O_X)$ [def-weil-abstract-derived-category] consisting of complexes with coherent cohomology vanishing in all but finitely many degrees.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-naive-cotangent-complex",
+  "def-weil-abstract-derived-category",
+  "def-sfb-space-morphism-properties",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose a locally Noetherian scheme atlas $V\\to Y$ and any scheme atlas $U_0\\to X$. The fibre product $U=U_0\\times_YV$ is a scheme by representability of the diagonal of $Y$ [def-trf-algebraic-space]. The projection $U\\to U_0$ is surjective etale, hence $U\\to X$ is a surjective etale chart. The induced scheme map $U\\to V$ is locally of finite presentation by the chart hypothesis [def-sbc-locally-finite-presentation]. Finite algebra presentations give finite generating sets, so it is locally of finite type. Apply [pqf-lem-locnoeth-lft] to $U\\to V$: $U$ is locally Noetherian. Its surjective etale map to $X$ proves that $X$ is locally Noetherian in precisely the sense of the statement.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sbc-locally-finite-presentation",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04ZK, lemma-locally-finite-type-locally-noetherian, chart proof."
+   }
+  },
+  {
+   "text": "Take the cover and derived isomorphisms in [lem-sfb-space-naive-cotangent-finite-local-model]. Refine its charts $U_i$ by $U_i\\times_XU$, with $U$ from step 1. These are schemes by the representable diagonal of $X$, and they are etale over the locally Noetherian scheme $U$. An etale scheme map is locally of finite presentation [def-weil-etale-morphism], hence locally of finite type; [pqf-lem-locnoeth-lft] makes each refined chart locally Noetherian. Refine further by Noetherian affine opens $W=\\operatorname{Spec}R$. Restriction to a chart is localization of the small etale site and is exact by [lem-pur-site-restriction-module-adjunction-exact], so its degreewise application commutes with kernels, cokernels and cohomology. It therefore takes quasi-isomorphisms to quasi-isomorphisms and induces restriction on the derived localization [def-weil-abstract-derived-category], preserving the displayed derived isomorphisms. It also restricts local presentations. On $W$ the model is still $[F^{-1}\\xrightarrow d F^0]$ with the stated finiteness. Its cohomology is $\\ker d$ in degree $-1$, $\\operatorname{coker}d$ in degree $0$, and zero elsewhere.",
+   "uses": [
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0Z, lemma-netherlander-fp; restriction and two-term cohomology."
+   }
+  },
+  {
+   "text": "Use [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] to write these terms as $A_W(G^{-1})$ and $A_W(G^0)$ and the differential as $A_W(e)$. The finite presentation of $F^0$ includes a finite free epimorphism, so both terms are of finite type. By [lem-sfb-scheme-etale-module-exact-finiteness-comparison], $G^{-1}$ and $G^0$ are finite-type Zariski quasi-coherent modules and this comparison is exact in ambient module sheaves. By [lem-weil-pbc-quasi-coherent-finite-type-affine], their section modules $M^{-1},M^0$ over $R$ are finitely generated. The unit and counit of [lem-weil-pbc-affine-tilde-gamma-adjunction] identify $G^j=\\widetilde{M^j}$ and $e=\\widetilde v$ for an $R$-linear map $v:M^{-1}\\to M^0$. The associated-sheaf functor preserves kernels by [lem-sc-tilde-preserves-finite-limits] and cokernels by the colimit clause of that adjunction. Exactness of $A_W$ therefore identifies the two cohomology sheaves with $A_W(\\widetilde{\\ker v})$ and $A_W(\\widetilde{\\operatorname{coker}v})$.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sc-tilde-preserves-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DX, 06VE (5), 05VG; affine module comparison and exact associated sheaves."
+   }
+  },
+  {
+   "text": "Since $R$ is Noetherian and $M^{-1}$ is finitely generated, [lem-trf-noetherian-submodule-finitely-presented] gives finite generation of $\\ker v$. Images in $\\operatorname{coker}v$ of any finite generating set of $M^0$ generate that quotient. Thus both cohomology sheaves on $W$ are quasi-coherent and of finite type by the affine criterion and the finiteness comparison cited in step 3. This is the only place Noetherianness is needed for the kernel; no projectivity of differentials or regularity of $f$ has been assumed.",
+   "uses": [
+    "lem-trf-noetherian-submodule-finitely-presented",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation; finite generation of kernels."
+   }
+  },
+  {
+   "text": "The finite-type and quasi-coherent conclusions glue as site-local properties: for an arbitrary chart $T\\to X$, pull back the covering charts $W\\to X$, and then use their local presentations. Composing covering families gives local presentations on $T$; this is exactly the quasi-coherent predicate [def-trf-space-quasi-coherent-module] and the finite-type predicate in the local-model statement. Exact chart restriction from step 2 identifies these restrictions with the cohomology of $\\mathrm{NL}_{X/Y}$. Let $u:T=\\operatorname{Spec}R'\\to X$ be any Noetherian affine etale chart and $H$ one of these cohomology sheaves. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], $H|_{T_{\\mathrm{et}}}\\simeq A_T(G)$ for a quasi-coherent Zariski module $G$; by [lem-sfb-scheme-etale-module-exact-finiteness-comparison] $G$ is of finite type, so $N=G(T)$ is a finitely generated $R'$-module by [lem-weil-pbc-quasi-coherent-finite-type-affine], and $G\\simeq\\widetilde N$ by the counit of [lem-weil-pbc-affine-tilde-gamma-adjunction]. For an affine etale chart $a:\\operatorname{Spec}B\\to T$, [lem-sc-affine-top-tensor-sections] gives $A_T(\\widetilde N)(\\operatorname{Spec}B)=\\Gamma(\\operatorname{Spec}B,a^*\\widetilde N)\\simeq N\\otimes_{R'}B$. This is association to a finitely generated module, exactly the stipulated meaning of coherent. Vanishing outside $-1,0$ also follows from the two-term definition [def-sfb-space-naive-cotangent-complex].",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-sfb-space-naive-cotangent-complex",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sc-affine-top-tensor-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "section-properties-modules, site-local properties (j),(k); etale covering transitivity."
+   }
+  },
+  {
+   "text": "On a Noetherian affine chart $\\operatorname{Spec}R$, the structure sheaf of [def-trf-algebraic-space] is the sheaf associated to the cyclic module $R$ by the formula $B\\otimes_RR=B$. Hence $\\mathcal O_X$ is coherent in the stated sense. The only cohomology of $\\mathcal O_X[0]$ is this sheaf in degree zero, and the only possible nonzero cohomology of $\\mathrm{NL}_{X/Y}$ is the coherent cohomology in degrees $-1,0$ proved above. Both objects therefore satisfy the definition of $D^b_{\\mathrm{Coh}}(\\mathcal O_X)$ given in the statement.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0D0Y, 0D0Z, Noetherian consequence; definition of bounded coherent cohomology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-space-naive-cotangent-finite-local-model",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-etale-morphism",
+  "def-weil-abstract-derived-category",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-naive-cotangent-complex",
+  "lem-sc-affine-top-tensor-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D0Z, lemma-netherlander-fp, combined with Tag 04ZK and the Noetherian finite-module consequence (as used in quot.tex Tag 0D1K)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The naive cotangent complex of a locally finitely presented algebraic space over a field has coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme Noetherian instances and ring H1Cotangent finiteness do not give coherent cohomology of the algebraic-space naive cotangent complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebraic space over a noetherian ring is locally noetherian and its naive cotangent complex is bounded coherent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsLocalRing R] [IsNoetherianRing R],\\n  FiniteDimensional (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)\", \"doc\": \"For any Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is finite-dimensional as a vector space over the \"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme Noetherian instances and ring H1Cotangent finiteness do not give coherent cohomology of the algebraic-space naive cotangent complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite\", \"H1Cotangent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme Noetherian instances and ring H1Cotangent finiteness do not give coherent cohomology of the algebraic-space naive cotangent complex."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oherent|[Nn]oetherian|[Cc]otangent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"29\", \"text\": \"Show that it suffices to check discrete valuation rings when the base is Noetherian.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Noetherian\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"123\", \"text\": \"This is typically satisfied when `X` is integral or locally Noetherian.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"170\", \"text\": \"instance (priority := 100) [IsLocallyNoetherian X] : X.IsGermInjective := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"171\", \"text\": \"  suffices ∀ (R : CommRingCat.{u}) (_ : IsNoetherianRing R), (Spec R).IsGermInjective by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"173\", \"text\": \"    exact isLocallyNoetherian_Spec.mp\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Noetherian\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"27\", \"text\": \"* `AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology`: A scheme is\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"28\", \"text\": \"  locally Artinian if and only if it is LocallyNoetherian and it has the discrete topology.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"30\", \"text\": \"* `AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology`: A scheme is Artinian\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"31\", \"text\": \"  if and only if it is Noetherian and has the discrete topology.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"22\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"24\", \"text\": \"  over an integral locally noetherian scheme, then `X` is also integral.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"91\", \"text\": \"lemma GeometricallyIntegral.isIntegral_of_isLocallyNoetherian\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"93\", \"text\": \"    [IsIntegral S] [IsLocallyNoetherian S] : IsIntegral X := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"96\", \"text\": \"    GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian f⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Spectrum.Prime.Noetherian\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"14\", \"text\": \"# Noetherian and Locally Noetherian Schemes\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"16\", \"text\": \"We introduce the concept of (locally) Noetherian schemes,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"21\", \"text\": \"* `AlgebraicGeometry.IsLocallyNoetherian`: A scheme is locally Noetherian\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"22\", \"text\": \"  if the components of the structure sheaf at each affine open are Noetherian rings.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"23\", \"text\": \"- `AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"24\", \"text\": \"  If `X` is geometrically reduced and flat over a reduced and locally noetherian scheme,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"27\", \"text\": \"  reduced and locally noetherian scheme is reduced (by `infer_instance`).\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"30\", \"text\": \"Get rid of the noetherian assumption.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme Noetherian instances and ring H1Cotangent finiteness do not give coherent cohomology of the algebraic-space naive cotangent complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of the naive cotangent complex for a locally finitely presented morphism of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \": Function.Injective P.toExtension.cotangentComplex\", \"doc\": \"The cotangent complex map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ is injective for a submersive presentation of an $R$-algebra $S$.\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Function.Exact P.cotangentComplex P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(f : Hom P P') (x) : CotangentSpace.map f (P.cotangentComplex x) = P'.cotangentComplex (.map f x)\", \"doc\": \"For any algebra extension homomorphism $ f : P \\\\to P' $, the induced linear map on cotangent spaces satisfies $ \\\\text{CotangentSpace.map}(f) \\\\circ \\\\text{cotangentComplex}_P = \\\\text{cotangentComplex}_{\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"[FinitePresentation R S] [Module.Projective S Ω[S⁄R]] : Module.Finite S (H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P : Extension R A) [FormallySmooth R P.Ring] :\\n  Function.Injective P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme Noetherian instances and ring H1Cotangent finiteness do not give coherent cohomology of the algebraic-space naive cotangent complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-tangent-finiteness",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K.",
+   "via": [
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-naive-cotangent-coherent",
+  "worker": "stage1",
+  "summary": "Separated the finite local derived model and the exact finite-type topology comparison. Proved coherence by affine kernels and cokernels over Noetherian rings, reusing existing scheme Noetherian and module finiteness nodes. No statement change. Repair of the side-completion promotion return: reread current dependency statements; made finite-presentation-to-finite-type explicit and added direct citations for the final chart equivalence and structure-sheaf formula. Retained both auxiliary statements and all logged searches. Current landing-return repair (returned head 3260c4f5a9f): compared every cited node against the current DAG; none changed. Made exact restriction on the derived localization explicit and cited the affine counit where arbitrary-chart coherence is assembled. Both prerequisites and all logged searches retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. The proof realizes the tangent-finiteness coherence input through the etale local model and Noetherian kernel finiteness.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction to a slice site computes the cohomology on etale charts; this generic ringed-site tool is not a change in the unit route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Identifies chart modules and chart differentials with Zariski quasi-coherent modules; no node in this unit supplies this generic topology comparison."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Converts finite-type Zariski chart modules into finite section modules; this is a generic affine module tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Supplies the affine module equivalence and preservation of cokernels; this is a generic affine module tool."
+   },
+   {
+    "node": "lem-sc-tilde-preserves-finite-limits",
+    "why": "Supplies preservation of kernels by the affine associated-sheaf functor; this is a generic affine module tool."
+   },
+   {
+    "node": "lem-sc-affine-top-tensor-sections",
+    "why": "Computes sections of the pullback of an affine quasi-coherent module as a tensor product, giving the stipulated value of coherence on affine etale charts; a generic affine module tool, not a change in the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-sc-affine-top-tensor-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-dd09beec1",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-dd09beec1 (reviewer sub-agent of L); spot-checked: Third delivery of this split. The FIX given to heads 1836c51c and 3260c4f5, which made step 5 cite lem-sc-affine-top-tensor-sections, was lost at landing again. On this head step 5 again states the coherence value A_T(Ñ)(Spec B) = N⊗_R B with no citation and marks the step elementary. Re-applied: step 5 restored to the accepted text citing lem-sc-affine-top-tensor-sections (Stacks 01I9, generic tool from sk-prop-h2), elementary set to false, and the node added to proof_deps and split_report.tool_uses. The worker's new edits are kept: the step-2 derived-localization sentence and the step-5 counit citation. Source checks: the local-model node is exactly Stacks 0D0Z (spaces-more-morphisms l.5426), lfp only, no Noetherian hypothesis, so it does not restate the item. The comparison node is 06VE(5) for the small étale site only, avoiding the big-site failure in 06VE(6), plus 05VG for finite type and finite presentation. Both new statements are true. Duplicate search over netherlander/0D0Z/06VE/05VG found only distinct nodes: trf etale-qc-kernel, the trf equivalence, the invertible comparison and descent nodes, lci-naive-cotangent-model and the pbc ring NL nodes. Step 1 follows the 04ZK chart proof: representable diagonal, lfp implies lft, then 01T6 on a scheme map. Step 2 gets locally Noetherian refined charts because étale implies lfp, and exact slice restriction carries the derived isomorphism. Step 3 uses the equivalence, the comparison node, 01PB(a), the unit and counit of 01I7/01HV, and tilde preserving kernels and cokernels. Step 4 uses Noetherianness only for ker v, through 00FP. Step 6 uses O_X(Spec B) = B. Edge cases: empty X, the zero ring, f = id and a singular lci with H^{-1} ≠ 0 are all fine. Batch-5 citations: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is generic algebraic-space module infrastructure (I checked its closure for trace formula and Poincaré duality nodes and found none). lem-trf-noetherian-submodule-finitely-presented is commutative algebra (00FP). def-trf-space-quasi-coherent-module and def-trf-algebraic-space are definitions. None of these lies inside either assumption, so all are accepted. No SGA source anywhere. Statement unchanged, no node dropped, worker's tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceNaiveCotangentCoherent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.naiveCotangent_coherent_of_locallyOfFinitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceNaiveCotangentCoherent.lean",
+  "statement": "theorem naiveCotangent_coherent_of_locallyOfFinitePresentation {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) [HasDerivedCategory.{w} X.SmallModules] (hY : ∃ V : Y.EtaleSite, IsSurjective V.obj.hom ∧ IsLocallyNoetherian (Y.etaleForget.obj V)) (hf : MapIsLocallyOfFinitePresentation f) : (∃ U : X.EtaleSite, IsSurjective U.obj.hom ∧ IsLocallyNoetherian (X.etaleForget.obj U)) ∧ (SheafOfModules.unit X.smallStructureRings).IsFinitePresentation ∧ (∀ n : ℤ, ((DerivedCategory.homologyFunctor X.SmallModules n).obj (naiveCotangent f)).IsFinitePresentation) ∧ (∀ n : ℤ, n ≠ -1 → n ≠ 0 → IsZero ((DerivedCategory.homologyFunctor X.SmallModules n).obj (naiveCotangent f))) ∧ (∀ K : X.DerivedModules, K = naiveCotangent f ∨ K = X.derivedStructure → (∀ n : ℤ, ((DerivedCategory.homologyFunctor X.SmallModules n).obj K).IsFinitePresentation) ∧ ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor X.SmallModules n).obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Coherence is the existing small-site finite-presentation predicate, equivalent over locally Noetherian spaces to the stipulated finite-module association on every Noetherian affine etale chart (Stacks 07UB). The final conjunct unfolds bounded coherent cohomology for each of the two named derived objects, without introducing a duplicate category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28b02ced0",
+  "group": "Q04",
+  "result": "pass",
+  "note": "First S2 delivery; node diff vs side-live = lean record + 3 landed def stmt_deps (morphism-properties, module-finite-type-presentation, derived-module-calculus); statement verbatim. Hypotheses: arbitrary S, X, Y; hY = surjective étale locally Noetherian atlas (AlgebraicSpace.IsSurjective on the yoneda arrow); hf = MapIsLocally LocallyOfFinitePresentation on étale chart pairs, exactly the node's test, no extra assumptions. Conclusions: X has a locally Noetherian atlas; unit of smallStructureRings finitely presented; all H^n(naiveCotangent f) finitely presented; vanishing outside -1,0; D^b_Coh membership of NL and derivedStructure (= O_X[0]) spelled out with existential bounds. Finite presentation = node's chartwise coherence on locally Noetherian X (Stacks 07UB), same convention as landed AlgebraicSpaceCoherentAbelian; no duplicate notion; IsFinitePresentation index universe fixed by the site. Universes u, w bound. Edge cases (empty space, f = id, singular H^-1) fine. Docstrings, sorry-only proof, report sections OK. Advisory only: uncited def-node owners pqf-def-locnoeth (IsLocallyNoetherian) and def-sfb-space-small-ringed-model (transitive). No compile: no file changed."
+ }
+}

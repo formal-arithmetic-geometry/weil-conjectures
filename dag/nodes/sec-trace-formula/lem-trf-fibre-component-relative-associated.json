@@ -86,62 +86,29 @@
  "mathlib_match": null,
  "proof": [
   {
-   "text": "Put $T=X_t$ and $K=\\kappa(t)$. By the fibre definition, $T\\to\\operatorname{Spec}K$ is the base change of $f$ along $\\operatorname{Spec}K\\to S$. The locally-finite-type base-change lemma therefore makes this morphism locally of finite type. A field has only the ideals $(0)$ and $(1)$, both finitely generated, so $K$ is Noetherian and its one-point spectrum is locally Noetherian. Applying the locally-Noetherian finite-type lemma gives that $T$ is locally Noetherian. Neither this argument nor the remaining steps require any Noetherian hypothesis on $S$.",
+   "text": "Put $T=X_t$. Apply [lem-trf-fibre-component-noetherian-affine-chart] to $f,t,C,y$, where $C$ is the component in the hypothesis. Its local-finite-type, component and generic-point hypotheses are supplied by the item. Choose the resulting affine open $U$ containing $y$ and put $A=\\mathcal O_T(U)$. Then $T$ is locally Noetherian, $A$ is Noetherian, and the prime $\\mathfrak p_y$ corresponding to $y$ under $U\\cong\\operatorname{Spec}A$ is minimal. This uses no Noetherian hypothesis on $S$.",
    "uses": [
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-lft-base-change",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-affine-spectrum",
-    "pqf-def-locnoeth",
-    "pqf-lem-locnoeth-lft"
+    "lem-trf-fibre-component-noetherian-affine-chart"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T4 (lemma-base-change-finite-type) and Tag 01T6 (lemma-finite-type-noetherian); Properties Tag 01OV (definition-noetherian)"
+    "place": "Tag 01T6 (lemma-finite-type-noetherian), applied to the fibre over the residue field; Algebra Tag 00ES (lemma-irreducible), closure and minimal-prime description in an affine chart."
    }
   },
   {
-   "text": "Let $B$ be the component of $T$ with generic point $y$. Choose from the locally Noetherian affine cover an affine neighbourhood $U=\\operatorname{Spec}A$ of $y$ with $A$ Noetherian, and let $\\mathfrak p\\subset A$ be its prime corresponding to $y$ under the affine-open point identification. We check directly that $\\mathfrak p$ is minimal. In the Zariski topology $\\overline{\\{\\mathfrak p\\}}=V(\\mathfrak p)$: a closed set $V(I)$ contains $\\mathfrak p$ exactly when $I\\subseteq\\mathfrak p$, so every such closed set contains $V(\\mathfrak p)$. Also $B\\cap U=\\overline{\\{y\\}}^{\\,U}=V(\\mathfrak p)$; the equality of closures follows because $U$ is an open neighbourhood of $y$. If a prime $\\mathfrak q\\subsetneq\\mathfrak p$ existed, its point $z\\in U$ would specialize to $y$, since $\\mathfrak p\\in V(\\mathfrak q)$. Thus the closure of $z$ in $T$ contains $B$. That closure is irreducible (a singleton is irreducible, and its closure remains irreducible directly by the closed-set definition), so maximality of the component $B$ makes it equal to $B$. But $z\\notin B\\cap U=V(\\mathfrak p)$ because $\\mathfrak p\\nsubseteq\\mathfrak q$, a contradiction. This proves minimality without assuming $T$ irreducible or reduced.",
+   "text": "Apply [lem-trf-affine-minimal-prime-stalk-annihilator] to $T,U,y$ and this same section ring $A$. Step 1 supplies its affine-neighbourhood, Noetherian-ring and minimal-prime hypotheses. It gives $w\\in\\mathcal O_{T,y}$ with $\\operatorname{Ann}_{\\mathcal O_{T,y}}(w)=\\mathfrak m_y$, and its final assertion gives $y\\in\\operatorname{Ass}_T(\\mathcal O_T)$, proving the first conclusion.",
    "uses": [
-    "pqf-def-locnoeth",
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-affine-spectrum",
-    "def-sc-generic-point",
-    "def-weil-irreducible-components"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00ES (lemma-irreducible), elementary closure/minimal-prime argument written out; Properties Tag 01OV for the affine neighbourhood"
-   }
-  },
-  {
-   "text": "Apply the Noetherian minimal-prime associated-prime lemma to $A$ and $\\mathfrak p$. Step 1 and the choice in Step 2 give precisely its Noetherian hypothesis; Step 2 gives its minimal-prime hypothesis. It supplies $a\\in A$ with $\\operatorname{Ann}_A(a)=\\mathfrak p$. Thus $\\mathfrak p$ is an associated prime of $A$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-minimal-prime-associated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05BV (lemma-ass-minimal-prime-support), specialized to M=A"
-   }
-  },
-  {
-   "text": "The associated-prime localization lemma, applied to this Noetherian ring $A$ and its associated prime $\\mathfrak p$, says that the maximal ideal $\\mathfrak pA_{\\mathfrak p}$ is associated to $A_{\\mathfrak p}$. By the affine-open stalk-localization theorem, the germ map identifies $\\mathcal O_{T,y}$ with $A_{\\mathfrak p}$. Under this ring isomorphism maximal ideals correspond, and an annihilator equality corresponds because $rb=0$ is preserved and reflected by a ring isomorphism. Consequently the maximal ideal of $\\mathcal O_{T,y}$ is the annihilator of an element of that ring. By the definition of associated points, $y\\in\\operatorname{Ass}_T(\\mathcal O_T)$.",
-   "uses": [
-    "lem-weil-pbc-associated-prime-localization-depth-zero",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "def-sc-associated-points"
+    "lem-trf-affine-minimal-prime-stalk-annihilator"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02OJ (definition-associated) and Tag 02OK (lemma-associated-affine-open), with Algebra Tag 05BZ (lemma-localize-ass) and Schemes Tag 01HV (lemma-spec-sheaves)"
+    "place": "Tag 02OK (lemma-associated-affine-open), forward implication for the structure sheaf, with Algebra Tag 05BV (lemma-ass-minimal-prime-support) applied to the ring as a module over itself."
    }
   },
   {
-   "text": "In the union defining $\\operatorname{Ass}_{X/S}(\\mathcal O_X)$ in the statement, take the index $s=t$. The preceding step places $y$ in its summand $\\operatorname{Ass}_{X_t}(\\mathcal O_{X_t})$. Regard this point as a point of $X$ by the fibre projection, whose underlying map identifies $X_t$ with $f^{-1}(t)$. Thus $y\\in\\operatorname{Ass}_{X/S}(\\mathcal O_X)$, as required.",
+   "text": "Write $i_s:X_s\\to X$ for the first fibre projection and put $x=i_t(y)$. By [def-pc-scheme-fibre], $i_t$ identifies the fibre with $f^{-1}(t)$, so $x$ is the total-space point corresponding to the given fibre point $y$. Step 2 gives $y\\in\\operatorname{Ass}_{X_t}(\\mathcal O_{X_t})$. Hence $y$ witnesses $x\\in i_t(\\operatorname{Ass}_{X_t}(\\mathcal O_{X_t}))$, and $t$ witnesses $x\\in\\bigcup_{s\\in S}i_s(\\operatorname{Ass}_{X_s}(\\mathcal O_{X_s}))$. This union of fibrewise images is the relative assassin defined in the statement, proving the second conclusion.",
    "uses": [
     "def-pc-scheme-fibre"
    ],
@@ -153,24 +120,14 @@
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-lft-base-change",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-affine-spectrum",
-  "pqf-def-locnoeth",
-  "pqf-lem-locnoeth-lft",
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-sc-generic-point",
-  "def-weil-irreducible-components",
-  "lem-weil-pbc-noetherian-minimal-prime-associated",
-  "lem-weil-pbc-associated-prime-localization-depth-zero",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "def-sc-associated-points"
+  "lem-trf-fibre-component-noetherian-affine-chart",
+  "lem-trf-affine-minimal-prime-stalk-annihilator",
+  "def-pc-scheme-fibre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Affine expansion of Tag 05AH (lemma-minimal-support-in-ass), using 02OK and Algebra Tags 00ES, 05BV, 05BZ; fibrewise conclusion is Definition 05AT"
+  "place": "Affine expansion of Tag 05AH (lemma-minimal-support-in-ass), via the Noetherian affine chart and stalk-annihilator lemmas; the relative-assassin conclusion is Definition 05AT."
  },
  "created": {
   "by": "worker",
@@ -198,20 +155,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-fibre-component-relative-associated",
   "worker": "stage1",
-  "summary": "Kept the statement and all its hypotheses, proved local Noetherianity of the fibre, wrote out the elementary generic-point/minimal-prime argument, and reused the existing minimal-prime, associated-prime localization, and affine stalk-localization Mathlib leaves. The final relative-assassin assertion is union membership. No new nodes; no Lean attachment.",
-  "blueprint": "Realizes the component-closure input in the inherited nearby-cycle/specialization branch of lem-trf-local-term-locality, proof (1)--(2); no change to the contracting-correspondence unit route.",
+  "summary": "Repair after the landing/promotion return at d040b1010eb. Rebuilt the item from the current shared DAG while retaining the two searched statement-only children, their citations and all original arguments in the report. The assembly now explicitly chooses A=O_T(U), applies the stalk lemma to the same chart ring, and distinguishes the fibre point y from its image x=i_t(y), with separate image and union witnesses. Re-read all current inputs and documented the newly detected 00ES overlap with lem-sfb-closed-component-stalk-calculus, which neither supplies a Noetherian fibre chart nor applies to arbitrary nonreduced locally Noetherian fibres. Statement, hypotheses, statement dependencies and maintainer metadata are unchanged.",
+  "blueprint": "Realizes the component-closure input in the inherited nearby-cycle/specialization branch of lem-trf-local-term-locality, proof (1)--(2); no change to the contracting-correspondence unit route. The two new nodes divide the inherited fibre-component argument into chart/minimality and algebra-to-stalk arguments.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q64-e58c320ff",
-  "group": "Q64",
+  "reviewer": "NT-cc-Q27-40a3a3d05",
+  "group": "Q27",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-e58c320ff (reviewer sub-agent of L); spot-checked: PASS: I read the item and all its proof steps in full; it creates no new nodes. Statement: its inline relative assassin matches Divisors 05AT (definition-relative-assassin) with F = O_X, and its notion of associated point matches 02OJ (definition-associated). The fibrewise claim is 05AH (lemma-minimal-support-in-ass) applied to the fibre X_t, which needs X_t to be locally Noetherian. Flat and locally-finite-type hypotheses are kept; nothing is weakened or added. Step 1: the fibre is a base change, so it is locally of finite type by lem-weil-pbc-lft-base-change (01T4). A field is Noetherian, so Spec K is locally Noetherian, and pqf-lem-locnoeth-lft (01T6) makes X_t locally Noetherian. No hypothesis on S is needed. Step 2 (marked elementary): I checked the closure and maximality argument that p is a minimal prime of a Noetherian affine A; it does not assume a reduced or irreducible fibre. Step 3: lem-weil-pbc-noetherian-minimal-prime-associated (05BV with M = A); both hypotheses are supplied by steps 1 and 2. Step 4: lem-weil-pbc-associated-prime-localization-depth-zero (05BZ), then clause (c) of lem-weil-pbc-affine-open-stalk-localization; the annihilator is moved along a ring isomorphism. Step 5: membership in the union. proof_deps equals the union of the step uses. Small cases tested: empty fibre, Spec K, K[e]/(e^2), K[u,v]/(uv), K[x,y]/(x^2,xy). Duplicate search with rg (05AH, 05AT, relative assassin, generic point with associated) found no scheme-level duplicate; the module version lem-weil-pbc-minimal-support-prime-associated is correctly replaced by its M = R leaf. Every cited statement is a Mathlib leaf or a definition, so there is no route departure, no tool_uses and no SGA citation. LeanFinder, LeanSearch, Loogle and grep searches are recorded. No fixes. For maintenance only: the existing node def-sc-associated-points has source tag 02OZ, which should be 02OJ (02OZ is lemma-regular-meromorphic-section-exists). Its statement is correct."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-40a3a3d05 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item and both new nodes in full. This answers the released batch5 re-split note (3122 characters, old steps 556/1212/315/665/374). In clones/live and side-live the item is still split with the old 5-step proof and neither child exists, so nothing has superseded it. Heads 9bdd992d6, dac3aba47 and d040b1010 were each PASSed, then refused at promotion ('completed in this project's DAG but not in the li[ve]', logs/svc.log). That is a tooling loop, not a mathematical fault. Against d040 the two children are byte-identical; only the text of item steps 1-3 and split_report changed. Step 1 names A=O_T(U), step 2 applies the child to the same A, and step 3 separates y from x=i_t(y) with the witnesses y and s=t. I judged this head on its own merits. Fidelity: old steps 1-2 (01T4 base change, field Noetherian, 01T6, then the 00ES closure/maximality minimality argument) are the statement of lem-trf-fibre-component-noetherian-affine-chart. Old steps 3-4 (05BV with M=A, localization, A_p=O_{T,y}, annihilator transport; the forward direction of Divisors 02OK(1), divisors.tex l.68-78 read) are the statement of lem-trf-affine-minimal-prime-stalk-annihilator. Old step 5 is the new step 3. Nothing was dropped, and the report's retained old texts match the live base verbatim. The children are separate tasks of comparable size and neither restates the item: the chart node never mentions associated points, and the stalk node is general for any scheme and affine chart. Both are true with no hypothesis on S and no flatness, reducedness or irreducibility. The Noetherian hypothesis is necessary and kept. Small cases checked: empty fibre, Spec K, K[e]/(e^2), K[u,v]/(uv), and K[x,y]/(x^2,xy) at (x) with w=1. Tags 01T6/00ES/02OK/05BV/05AT/05AH/02OJ verified in tags/tags. The parent assembly is 1430 characters, its step hypotheses chain exactly, and proof_deps equals the union of uses. stmt_deps are complete. The statement and metadata are unchanged. rg -L over dag/nodes found no duplicate: 02OK appears only in this delivery, the nearby nodes are algebraic leaves (noetherian-minimal-prime-associated, associated-prime-localize-at-prime, sc-associated-localization-fg), and Ass=WeakAss, lem-sfb-closed-component-stalk-calculus (Noetherian ambient, reduced) and the relative-assassin base-change and specialization nodes are different statements. Mathlib searches of all three kinds are present; the rate-limited LeanSearch is honestly marked unavailable. No SGA, no route change, no tool_uses. Maintainer notes: this is the fourth equivalent PASSed delivery, so the promotion/landing path needs attention. Pre-existing: def-sc-associated-points cites tag 02OZ; it should be 02OJ."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.FibreComponentRelativeAssociated",
@@ -231,5 +188,16 @@
   "result": "pass",
   "note": "Statement matches the node and source (Stacks 05AT/02OJ/05AH/01T6): [Flat f], [LocallyOfFiniteType f], t : S, C ∈ irreducibleComponents (f.fiber t), IsGenericPoint y C; conclusion y ∈ associatedPoints (f.fiber t) ∧ f.fiberι t y ∈ ⋃ s, fiberι s '' associatedPoints (f.fiber s) is the node's relative assassin. No added hypotheses; the single universe is forced by Mathlib's pullback fibre. The statement is true. Edge cases checked: empty fibre, Spec K, K[e]/(e^2), K[u,v]/(uv). Dependency declarations read: associatedPoints = IsAssociatedPrime of the stalk maximal ideal; Mathlib fiber, fiberι, range_fiberι, IsGenericPoint, irreducibleComponents. Proof is sorry only; docstrings carry the source tags and blueprint id; no new definitions or duplicates; node copy differs from the clones only in the lean field and lean.statement matches the file signature. nt_compile.py --json on the snapshot file: clean, 4.2 s, exit 0 (a deliberately broken copy did report an error). Second-reading section is the post-2026-10-17 workflow note, accepted. Maintenance only: def-sc-associated-points cites tag 02OZ, should be 02OJ."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,396 @@
+{
+ "id": "lem-sfb-point-pullback-derived-hom",
+ "kind": "statement",
+ "title": "Condensed-point pullback preserves unbounded derived internal Hom",
+ "statement": "Let $X$ be any scheme with its small pro-etale site and compatible coefficient universes [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $\\Lambda$ be any commutative condensed ring [sk-def-sfb-condensed-ring]. Let $p_X$ be the condensed-point morphism with exact symmetric monoidal inverse image [lem-weil-pbc-profinite-point-pullback], and put $B=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Use internal module categories [sk-def-sfb-module-objects], their ordinary uncompleted unbounded derived categories [sk-def-sfb-derived-categories], derived relative tensor and internal Hom [sk-def-sfb-derived-tensor-hom], and the K-injective ringed-site description [def-pur-derived-internal-hom, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. For arbitrary $K,L\\in D(\\operatorname{Mod}_{\\Lambda})$, the evaluation-adjoint comparison\n$$\\beta_{X,K,L}:p_X^*R\\mathcal Hom_{\\Lambda}(K,L)\\longrightarrow R\\mathcal Hom_B(p_X^*K,p_X^*L)$$\nis an isomorphism. The morphism is specified before asserting invertibility: its tensor-Hom transpose is\n$$p_X^*R\\mathcal Hom_{\\Lambda}(K,L)\\otimes_B^{\\mathbf L}p_X^*K\\cong p_X^*(R\\mathcal Hom_{\\Lambda}(K,L)\\otimes_{\\Lambda}^{\\mathbf L}K)\\xrightarrow{p_X^*\\mathrm{ev}}p_X^*L.$$\nIt is natural contravariantly in $K$ and covariantly in $L$. For every pro-etale test $W\\to X$, restriction to the localized ringed site [def-pur-localized-ringed-site], with the canonical derived tensor, Hom and coefficient comparisons, identifies $\\beta_{X,K,L}|_W$ with $\\beta_{W,K,L}$ as a derived morphism. No boundedness, finite generation, dualizability, discrete coefficient or completeness assumption is imposed on $K,L,\\Lambda$.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1) and (4.1): agent globalization along the geometrically w-contractible affine basis, with slice restriction of derived internal Hom."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "lem-weil-pbc-profinite-point-pullback",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-localized-ringed-site",
+  "def-sfb-condensed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the internal-module/section-ring equivalence, which leaves underlying sheaves and morphisms unchanged. On the scheme and its slices, the module-object derived comparison identifies the native relative derived tensor and internal Hom with the ringed-site ones and carries evaluation to evaluation. On the condensed point, use the same section-ring presentation on the site of profinite sets: the internal-section tensor comparison, valid on any site whose abelian sheafification has monoidal local equivalences, identifies the relative tensor of internal $\\Lambda$-modules with the ringed-site tensor over the section-ring sheaf and preserves and reflects K-flat complexes, so the native derived relative tensor over $\\Lambda$ is the ringed-site K-flat derived tensor; the derived-internal-Hom sections model identifies the right adjoint defining internal Hom with the K-injective model. Thus it suffices to prove the assertion in these ringed-site presentations, with their specified evaluation maps; all coefficient rings remain the original pulled-back condensed rings.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, section-internal-hom; K-injective model and uniqueness of the tensor right adjoint; Hemo–Richarz–Scholbach Section 3, ordinary unbounded coefficient categories"
+   }
+  },
+  {
+   "text": "Put $H=R\\mathcal Hom_\\Lambda(K,L)$. The derived tensor pullback theorem gives $p_X^*H\\otimes_B^{\\mathbf L}p_X^*K\\cong p_X^*(H\\otimes_\\Lambda^{\\mathbf L}K)$. Compose this with $p_X^*\\mathrm{ev}$ and take its transpose under the derived tensor-Hom adjunction. This defines exactly $\\beta_{X,K,L}$ in the statement. Naturality of evaluation and of that adjunction shows that the transposes commute with precomposition in $K$ and postcomposition in $L$, proving both requested naturalities before invertibility is used. Exactness of the inverse image means its derived functor is its termwise functor, so there is no boundedness restriction in this construction.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 08J9, lemma-internal-hom and equation-internal-hom"
+   }
+  },
+  {
+   "text": "Let $j:W\\to X$ be any object of $X_{\\mathrm{proet}}$, and write $r$ for restriction to $X_{\\mathrm{proet}}/W$. The site-equivalence clause of weakly-etale localization identifies this slice with $W_{\\mathrm{proet}}$. Under this identification the abelian inverse image along $j$ is restriction to the localized site, and the coefficient isomorphism $j^*B\\cong p_W^*\\Lambda$ is the canonical one, by the coefficient-sections localization lemma. Hence the condensed-point composition comparison identifies $r p_X^*$ with $p_W^*$, including on coefficient rings, modules and their termwise derived categories. Restriction of derived internal Hom identifies the target of $r\\beta_X$ with $R\\mathcal Hom_{p_W^*\\Lambda}(p_W^*K,p_W^*L)$. More precisely, the slice evaluation-transpose theorem says that the transpose of this transported $r\\beta_X$ is $r$ of the defining map in step 2, followed by the inverse tensor restriction comparison. Its evaluation equation identifies this map with $p_W^*\\mathrm{ev}$ after the tensor comparison. The composition comparisons are monoidal, so these are the same tensor comparison and coefficient identification as for $p_W^*$. Uniqueness under the adjunction therefore gives $r\\beta_{X,K,L}=\\beta_{W,K,L}$ as derived morphisms. This proves the entire restriction clause, for arbitrary tests, independently of the local calculation below.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-coefficient-sections-localization",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08FI (lemma-restrict-K-injective-to-open) and 07A4; site localization uses 094T and 0951 as recorded in the cited localization node"
+   }
+  },
+  {
+   "text": "Now let $W$ be a w-contractible affine test, put $S=\\pi_0(W)$ and use $p_W=q_S\\pi_W$. The functor $q_S^*$ is precisely restriction from the profinite site to its localized site $\\operatorname{Prof}/S$, with ring $\\Lambda_S=q_S^*\\Lambda$. Consequently the ringed-site restriction theorem gives an isomorphism $a:q_S^*R\\mathcal Hom_\\Lambda(K,L)\\xrightarrow{\\sim}R\\mathcal Hom_{\\Lambda_S}(q_S^*K,q_S^*L)$. The slice evaluation-transpose theorem says specifically that $a$ is the comparison whose transpose is $q_S^*\\mathrm{ev}$ with the tensor restriction comparison; it is not an arbitrarily chosen isomorphism of objects.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equation (4.1) and the paragraph preceding Proposition 4.3; profinite slice restriction is Stacks 08JB with the evaluation normalization of 08J9"
+   }
+  },
+  {
+   "text": "Apply the w-contractible component derived-Hom theorem to $q_S^*K,q_S^*L$. Its evaluation-adjoint comparison $b:\\pi_W^*R\\mathcal Hom_{\\Lambda_S}(q_S^*K,q_S^*L)\\xrightarrow{\\sim}R\\mathcal Hom_{p_W^*\\Lambda}(\\pi_W^*q_S^*K,\\pi_W^*q_S^*L)$ is invertible. Under $p_W^*\\cong\\pi_W^*q_S^*$, the composite $b\\circ\\pi_W^*a$ is $\\beta_W$: its tensor-Hom transpose is first $\\pi_W^*$ of the transpose of $a$, then evaluation after pullback, hence is $(\\pi_W^*q_S^*)\\mathrm{ev}$ with the composite tensor comparison. This is the defining transpose of $\\beta_W$ from step 2. Therefore $\\beta_W$ is a composite of two isomorphisms. The component theorem applies to arbitrary unbounded objects over an arbitrary condensed ring; in particular no perfectness or discrete-coefficient hypothesis was needed.",
+   "uses": [
+    "lem-sfb-wcontractible-component-derived-hom",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), preservation of inner homomorphisms, combined with factorization (4.1); the composite comparison is identified by the tensor-Hom counit formula"
+   }
+  },
+  {
+   "text": "Take a cone $C$ of $\\beta_X$. Restriction is induced termwise by an exact module functor, so it commutes with cohomology and carries this cone triangle to the cone triangle of the restricted map. By steps 3 and 5, $C|_W=0$ for every w-contractible affine test $W$. Hence $H^n(C)|_W=0$ for every integer $n$ and every such $W$. Every object of $X_{\\mathrm{proet}}$ has a covering by these affines; a section of $H^n(C)$ restricts to zero on that covering and is therefore zero by separatedness of a sheaf. Thus every $H^n(C)$ is zero, so $C=0$ in the ordinary unbounded derived category and $\\beta_X$ is invertible. No passage through a completed or bounded subcategory has occurred. For the empty scheme the same assertion holds in the zero module category; zero objects and shifts of arbitrary unbounded objects require no modification.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "sk-thm-pe-weakly-contractible-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, w-contractible affine covering basis; globalization of Proposition 4.3(1) by slice restriction; Stacks 098F, proetale-lemma-w-contractible-proetale-cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-coefficient-sections-localization",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-zl-component-relative-profinite-site",
+  "lem-sfb-wcontractible-component-derived-hom",
+  "def-weil-pbc-ringed-derived-restriction",
+  "sk-thm-pe-weakly-contractible-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1) and factorization (4.1), globalized using Stacks 08JB; all maps identified by their evaluation transposes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback from condensed modules to the pro etale site of any scheme preserves unbounded derived internal Hom for arbitrary complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {R : CategoryTheory.Functor Dᵒᵖ RingCat} →\\n            {S : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n           \", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary sheaf pullback adjunctions or light condensed monoidal structures, not preservation of unbounded derived internal Hom by the scheme condensed-point inverse image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ihomComparison\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary sheaf pullback adjunctions or light condensed monoidal structures, not preservation of unbounded derived internal Hom by the scheme condensed-point inverse image."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|ProEtale).*(ihomComparison|derivedHom|rightDerived)|(ihomComparison|derivedHom).*(Condensed|ProEtale)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary sheaf pullback adjunctions or light condensed monoidal structures, not preservation of unbounded derived internal Hom by the scheme condensed-point inverse image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The condensed point inverse image to a scheme commutes with derived internal Hom checked on w contractible affine covers",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme point inverse image is a closed monoidal functor on unbounded derived categories of condensed coefficient modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalClosedLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalClosed (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"LightCondensed.instMonoidalCategoryLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalCategory (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] → CategoryTheory.MonoidalClosed (CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of functors from the opposite category of light profinite spaces to the category of left $ R $-modules forms a monoidal closed category. This structure is \"}\n  {\"name\": \"instMonoidalClosedCondensedSet\", \"module\": \"Mathlib/Condensed/CartesianClosed\", \"type\": \"CategoryTheory.MonoidalClosed CondensedSet\", \"doc\": \"The category of condensed sets, defined as sheaves on compact Hausdorff spaces with the coherent Grothendieck topology, is cartesian closed. This means it admits finite products and exponential object\"}\n  {\"name\": \"instMonoidalClosedLightCondSet\", \"module\": \"Mathlib/Condensed/Light/CartesianClosed\", \"type\": \"CategoryTheory.MonoidalClosed LightCondSet\", \"doc\": \"The category of light condensed sets is equipped with a monoidal closed structure, where the tensor product is given by the categorical product of sheaves and the internal hom is defined via sheaf exp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary sheaf pullback adjunctions or light condensed monoidal structures, not preservation of unbounded derived internal Hom by the scheme condensed-point inverse image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"ihomComparison\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary sheaf pullback adjunctions or light condensed monoidal structures, not preservation of unbounded derived internal Hom by the scheme condensed-point inverse image."
+  },
+  {
+   "tool": "grep",
+   "query": "(wContractible|weaklyContractible).*(Hom|hom)|(pointPull|upperStarFromPoint).*(ihom|derived)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary sheaf pullback adjunctions or light condensed monoidal structures, not preservation of unbounded derived internal Hom by the scheme condensed-point inverse image."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|ProEtale).*(derivedHom|ihomComparison)|(derivedHom|ihomComparison).*(Condensed|ProEtale)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe underived light condensed Hom, ordinary sheaf pullback adjunctions or monoidal structures, not this scheme condensed-point unbounded derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ihom\"",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihomPoints_apply\"], \"digest\": \"ed01e2d53d4a8e34\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe underived light condensed Hom, ordinary sheaf pullback adjunctions or monoidal structures, not this scheme condensed-point unbounded derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Condensed point pullback preserves derived internal Hom for arbitrary unbounded complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_apply\", \"instHasLimitsOfShapeCondensed\", \"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_symm_comp\", \"Condensed.instPreservesFiniteProductsOppositeCompHausVal\", \"Condensed.underlying\", \"LightCondensed.ihomPoints_symm_apply\"], \"digest\": \"3f2ff7ec8f4142c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe underived light condensed Hom, ordinary sheaf pullback adjunctions or monoidal structures, not this scheme condensed-point unbounded derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback from condensed modules to the pro etale site of a scheme preserves unbounded derived internal Hom",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullback\"], \"digest\": \"8ba1ac49836e7737\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe underived light condensed Hom, ordinary sheaf pullback adjunctions or monoidal structures, not this scheme condensed-point unbounded derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(pointUpperStar|upperStarFromPoint|wContractible).*(ihom|internalHom|Hom)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe underived light condensed Hom, ordinary sheaf pullback adjunctions or monoidal structures, not this scheme condensed-point unbounded derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackId\", \"PresheafOfModules.pullbackObjIsDefined\", \"PresheafOfModules.pullback\", \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackComp\", \"PresheafOfModules.pullback_comp_id\"], \"digest\": \"83751ccd8310f3d5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe underived light condensed Hom, ordinary sheaf pullback adjunctions or monoidal structures, not this scheme condensed-point unbounded derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image functor from condensed coefficient modules to a scheme is closed monoidal on unbounded derived categories",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedLightCondMod\", \"instMonoidalClosedLightCondSet\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"instMonoidalClosedCondensedSet\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\"], \"digest\": \"c8eb7f34502ba78e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe underived light condensed Hom, ordinary sheaf pullback adjunctions or monoidal structures, not this scheme condensed-point unbounded derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-constant-derived-functions",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: profinite parameter functions on the closed stratum, independently of a root tower or a normal crossings boundary; evaluation-adjoint internal-Hom comparison on the w-contractible basis (returned proof steps 4–5)",
+   "via": [
+    "lem-sfb-profinite-constant-derived-functions",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-point-pullback-derived-hom",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Split through profinite slice restriction, existing w-contractible component-Hom preservation, and sheaf-local detection of the cone; prove equality of the canonical evaluation-adjoint comparisons under every pro-etale restriction.",
+  "blueprint": "The inherited creation chain terminates without a blueprint_kind ancestor (blueprint_refs.py ancestor reports None). Retain its null ancestor rather than invent an imported id. The source place is paragraph (3), open direct image, of det-thm-sf-ctf-stability-direct-images: the profinite-parameter Hom comparison used in lem-sfb-profinite-constant-derived-functions, returned steps 4–5.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "def-weil-pbc-ringed-derived-restriction",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "sk-thm-pe-weakly-contractible-basis",
+    "why": "Generic coefficient, localization, tensor-Hom or covering-basis tool used in the stated step; the direct-image unit does not restate this ringed-site infrastructure, and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Step 1, condensed point: identifies the internal relative tensor over Lambda with the ringed-site tensor over its section-ring sheaf on an arbitrary site; no node of the direct-image unit gives this coefficient infrastructure."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "Step 3: the abelian inverse image along a pro-etale object is restriction to the localized site, with the canonical coefficient isomorphism; generic localization tool not restated in the direct-image unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-zl-component-relative-profinite-site",
+  "def-weil-pbc-ringed-derived-restriction",
+  "sk-thm-pe-weakly-contractible-basis",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-coefficient-sections-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-c6731903a",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c6731903a (reviewer sub-agent of L); spot-checked: Read the item in full, all 24 cited nodes, and the source Hemo–Richarz–Scholbach, arXiv 2305.18131, (4.1) and Prop. 4.3(1) with its proof via (4.2). There are zero new nodes. The statement is byte-identical to its creation by Q08, and live still has the item unsplit. The globalization of 4.3(1) over the w-contractible covering basis is correct: steps 2–6 define beta by its evaluation transpose; the slice evaluation-transpose node identifies r(beta_X) with beta_W as a morphism; the component node gives b for arbitrary unbounded objects, with b∘pi^*a = beta_W; the cone is killed by sheaf separatedness. Checked small cases: empty X, Spec k, zero inputs, shifts, unbounded complexes. Two missing citations were fixed (C4/C1). (1) Step 1 needs lem-pe-internal-section-tensor-comparison to identify the native derived tensor of internal Lambda-modules on the condensed point with the ringed-site tensor; the module-object comparison node covers schemes only. (2) Step 3 needs lem-sfb-coefficient-sections-localization: the inverse image along W->X is restriction to the localized site, with the canonical coefficient isomorphism. Weakly-etale localization gives only the site equivalence, and the point-pullback composition comparison is stated for the inverse image. The whole item is in fixes/: citations and one sentence in each of the two steps, proof_deps set to the union of the step uses, two tool_uses entries added. Batch-5: def-trf-geometric-morphism is a general definition, and lem-trf-geometric-inverse-image-exact is generic exactness of inverse images; neither is part of the trace formula or Poincare duality statements or proofs, so both are accepted. The added citations reach neither sec-trace-formula nor sec-poincare-duality and create no cycle. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointPullbackDerivedHom",
+  "declaration": "AlgebraicGeometry.ProEtale.PointDerivedHom.point_pullback_derived_hom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.uniqueChoice",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.exactTensor",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pull",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pointLimits",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pointColimits",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pointBraided",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pullLimits",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pullColimits",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pullAdditive",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pullMonoidal",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.derivedPull",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pullLeftAdjoint",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.pullFlat",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.tensorComparison",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.HomComparisonFamily",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.evaluationComparison",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.exactEvaluation",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.PreservesHom",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.RestrictsHom",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.comparison",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.PointCompositionFamily",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.PointCompositionNormalization",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.restrictionComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.DerivedCompositionFamily",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.localizeComposition",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.restrictionComparison",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.derivedRestrictionComparison",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.restrictionHom",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.ExactPreservesHom",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.ExactRestrictsHom",
+   "AlgebraicGeometry.ProEtale.PointDerivedHom.point_pullback_derived_hom"
+  ],
+  "file": "lean/Sheaf/Paper/PointPullbackDerivedHom.lean",
+  "statement": "theorem point_pullback_derived_hom (X : Scheme.{u}) : ExactPreservesHom (pull Λ X) (comparison Λ X) ∧ ∀ W : X.ProEt, ExactRestrictsHom (C := Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ) (D := CondensedRing.supportModules Λ X) (E := CondensedRing.supportModules Λ W.left) (pull Λ X) (pull Λ W.left) (CondensedRing.supportPullback Λ W.hom) (derivedRestrictionComparison Λ W.hom) (comparison Λ X) (comparison Λ W.left) (restrictionHom Λ W.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The comparison is the explicit evaluation transpose, defined before its invertibility theorem. Its derived tensor map is the existing canonical K-flat tensor comparison transported to exact termwise pullback. The ordinary point-composition isomorphism is selected only from its unique underlying-sheaf specification. The main theorem asserts both naturalities and equality under every pro-etale test restriction, using the recorded canonical coefficient and tensor comparisons."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85530b7b6",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Only the item changed (lean plus stmt_deps gaining landed def-sfb-condensed-pullback-tensor-comparison, which the brief allows); statement byte-identical to live; lean.statement verbatim. Every clause rendered: beta = curry of canonical exact derived tensor comparison inverse then pulled-back ev (left-closed convention, same map via symmetry); IsIso for all K,L; contravariant pre and covariant ihom.map naturality; for all W : X.ProEt, restricted beta equals beta_W through canonical comparisons (unique-spec module lift of upperStarFromPointComp, evaluation transpose with supportDerivedTensorComparison). No extra hypotheses or universe restriction; edge cases covered. No hollow defs; only 3 theorem sorries; restrictionComparison_existsUnique and pullFlat true. Docstrings and imports OK. Not compiled (no change). Advisories: localized-site restriction rendered as inverse image along W.hom (node proof step 3 identification); description-route stmt_deps imported but unused in signatures; pullFlat has no own DAG node; second reading is placeholder."
+ }
+}

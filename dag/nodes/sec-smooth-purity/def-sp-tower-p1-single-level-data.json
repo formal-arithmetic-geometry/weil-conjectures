@@ -1,0 +1,117 @@
+{
+ "id": "def-sp-tower-p1-single-level-data",
+ "kind": "definition",
+ "title": "Single-level realization and normalized finite-word interfaces",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a level $n+1$, and a scheme $T$. For the coefficient towers [sk-def-sp-coefficient-towers], a SingleLevelRealization is an additive exact functor from fixed-scalar pro-etale $B_{n+1}$-module sheaves to towers, equipped with its level-n coordinate, zero other levels, zero adjacent transitions, and bounded-below etale-origin range after comparison and localization. Its derived lift is $J$, with the specified evaluation isomorphism and retained input origin. Given a projective-line presentation and its etale-origin comparisons [lem-sp-tower-p1-etale-origin-comparisons], SingleLevelComparisons consists of the realizations at $S$ and $P=\\mathbf P^1_S$, the recorded projective coordinates and four compatibility fields, and natural push and pull isomorphisms pinned componentwise to the recursively defined words. The ordinary $F_n,G_n,\\eta_n,\\varepsilon_n$ are the existing direct-image, pullback-line, diagonal and splitting-trace formulas; singleLevelTrianglesStatement packages existence of these comparisons and conditional reflection of the two tower triangles. No object is chosen from a mere existence theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levels, single-level realization and evaluation of the finite triangle words"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-etale-origin-witness",
+  "def-nagata-projective-space-base-change",
+  "det-sp-tower-classes",
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "sk-prop-sf-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functor embedding sheaves into a single level of an inverse system with zero transitions and reflecting triangle identities",
+   "results": "CategoryTheory.Functor.IsHomological.mk; ComplexShape.Embedding.truncLEFunctor and truncGEFunctor; CategoryTheory.fullyFaithfulSheafToPresheaf. None constructs this varying-ring single-level comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embed a sheaf at a single level of an inverse system with all other levels zero, then reflect adjunction triangle identities through a faithful functor",
+   "results": "CategoryTheory.constantSheafAdj_counit_w; constant sheaf adjunction and condensed sheaf comparison declarations. None states the single-level construction or its normalized composite-word squares.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleLevel|singleton|triangle.*reflect",
+   "results": "msearch: unrelated singleton-set and subsingleton hits. Local rg finds the assigned item and SystemSingletonScalarExtension; the latter is nonzero at lower levels, so does not supply the zero-off-n singleton.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerP1SingleLevelTriangles",
+  "date": "2026-10-25",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Levels, single-level realization and evaluation of the finite triangle words",
+   "via": [
+    "lem-sp-tower-p1-single-level-triangles"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1SingleLevelData",
+  "file": "lean/Sheaf/Paper/TowerP1SingleLevelData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.SingleLevelRealization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.SingleLevelRealization",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.SingleLevelRealization.J",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.SingleLevelRealization.evaluation",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.SingleLevelRealization.origin",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelF",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelG",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelEta",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelEpsilon",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.SingleLevelComparisons",
+   "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelTrianglesStatement"
+  ],
+  "statement": "structure SingleLevelRealization (b : SpTowerShriek.Base l E) (T : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-95075",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T164647-L-1048928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-95075",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T164647-L-1048928",
+  "kind": "interface",
+  "note": "independent cc review: delivered TowerP1SingleLevelData/Construction/Transport/Triangles + 4 nodes vs clone 919a934 item module and node; moved decls byte-identical, item signature identical; new sorries checked against FormulaLevelComparisons/levelComparisons/pushWord/originWord; sandbox run_set build rc 0, #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

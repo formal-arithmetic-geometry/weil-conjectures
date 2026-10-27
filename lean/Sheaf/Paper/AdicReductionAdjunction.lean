@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Scheme
 
 -- The imported adjunction specializes its site-size instance to another coefficient universe.
 -- Keep that instance out of this proof; the site here already has size t + 1.
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars is exact, also when the small site's object and morphism
@@ -101,7 +100,6 @@ noncomputable def adicReductionDerivedUnit (X : Scheme.{t}) {Λ : Type t} [CommR
     (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
       (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) N.complex)).inv
 
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 set_option linter.style.haveILetI false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

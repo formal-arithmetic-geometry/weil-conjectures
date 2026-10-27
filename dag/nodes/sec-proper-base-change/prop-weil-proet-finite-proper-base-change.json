@@ -156,7 +156,18 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -193,7 +204,11 @@
   "note": "Statement, dependencies, sources, universes, edge cases, docstrings, and report sections checked. Verbatim signature confirmed; immutable module passed server-only compilation in 2.9 seconds. No repairs needed."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nbe cartesian [def-weil-pbc-cartesian-square] with $f$ proper. For every\ntorsion sheaf $F$ on $X_{\\Et}$,\n\n$$\n \\Ex_{\\square,F}:g^{-1}Rf_*F\n \\xrightarrow{\\sim}Rf'_*g'^{-1}F\n$$\n\nis an isomorphism in $\\Dplus(Y'_{\\Et})$, where $\\Ex_{\\square,F}$ is the\nderived exchange morphism [def-weil-pbc-derived-exchange]. These\nisomorphisms are natural in $F$, equal the identity for identity squares,\nand commute with horizontal and vertical pasting.",
   "proof": [
    {
@@ -205,12 +220,14 @@
     "elementary": false
    },
    {
-    "text": "The torsion assembly proves the isomorphism in every cohomological degree for\nthe map constructed in S0. A morphism in $D^+$ is an isomorphism exactly when\nall its cohomology sheaf maps are isomorphisms. Naturality, identity, and\npasting are the corresponding S0 coherence equations and survive each\ndevissage step. This is the expanded endpoint whose source locator is Tag\n`095T`; that tag is not used as a proof leaf.",
-    "uses": [],
-    "elementary": null
+    "text": "The exchange morphisms $\\Ex_{\\square,F}$ are the components at $F[0]$ of the\nnatural transformation $\\Ex_\\square$, hence natural in $F$. For an identity\nsquare the derived exchange morphism is the identity, since the units and\ncounits of the identity adjunctions are identities, and the derived\nexchange morphism of a horizontally or vertically pasted square is the\ncomposite of those of the two squares\n[lemma-weil-pbc-derived-exchange-coherence]; evaluating at $F[0]$ gives the\nremaining assertions.",
+    "uses": [
+     "lemma-weil-pbc-derived-exchange-coherence"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "reviewed_proof": {
   "date": "2026-10-21",

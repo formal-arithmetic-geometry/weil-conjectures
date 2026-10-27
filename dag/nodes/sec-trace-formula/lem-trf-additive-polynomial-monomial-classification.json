@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-additive-polynomial-monomial-classification",
+ "kind": "statement",
+ "title": "Monomial classification of homogeneous additive polynomials",
+ "statement": "Let $k$ be a field [def-weil-field], let $n\\ge0$, and let $P=k[Z_1,\\ldots,Z_n]$ be the polynomial ring [def-weil-pbc-mv-polynomial-ring] with the grading by total degree [def-pc-standard-graded-algebra]. Let $d>0$ and let $0\\ne f\\in P_d$. Say that $f$ is additive if the identity $f(Z+W)=f(Z)+f(W)$ holds in the polynomial ring over $k$ on the two disjoint tuples $Z,W$. Write $\\operatorname{char}k$ for the characteristic of $k$ [def-pc-field-characteristic]. If $\\operatorname{char}k=0$, then $f$ is additive if and only if $d=1$ and $f=\\sum_{j=1}^n a_jZ_j$ for coefficients $a_j\\in k$. If $\\operatorname{char}k=p>0$, then $f$ is additive if and only if $d=p^a$ for some integer $a\\ge0$ and $f=\\sum_{j=1}^n a_jZ_j^{p^a}$ for coefficients $a_j\\in k$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Supporting external source read online: Dietel, A refinement of Hironaka’s additive group schemes for an extended invariant (2014), Proposition 3.3.5, printed pp.40–41, https://d-nb.info/1068056037/34; positive-characteristic notation in Definition 1.4.1, p.17. Archival copy WANTED. ILO VIII 2.3.13 is the ancestor motivation only; no Stacks tag states this polynomial classification."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-pc-field-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Assume additivity. By the polynomial-ring definition, substitution into the identity is an algebra homomorphism. Put $V_j=(0,\\ldots,0,Z_j,0,\\ldots,0)$. Starting from $f(0)=0$ (substitute $Z=W=0$), apply the identity successively to $V_1+\\cdots+V_{j-1}$ and $V_j$; induction on $j$ gives $f(Z)=\\sum_j f(V_j)$. Homogeneity in total degree means that each surviving monomial in $f(V_j)$ is $Z_j^d$, so $f=\\sum_j a_jZ_j^d$. Since $f\\ne0$, some $a_j\\ne0$. If $n=0$, the sum is empty and contradicts $f\\ne0$, disposing of that case.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficient proof supporting Dietel (2014), Proposition 3.3.5, printed pp.40–41, read online at https://d-nb.info/1068056037/34; archival copy WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+   }
+  },
+  {
+   "text": "Fix $j$ with $a_j\\ne0$, and substitute $Z=Xe_j$, $W=Ye_j$ into additivity. The result is $a_j((X+Y)^d-X^d-Y^d)=0$ in $k[X,Y]$. Apply [lem-pur-commutative-ring-binomial-expansion] and compare the coefficient of $X^rY^{d-r}$, for $0<r<d$. By the unique monomial coefficients in the polynomial-ring definition it is $a_j\\binom dr=0$. Multiplication by $a_j^{-1}$ in the field gives $\\binom dr\\cdot1_k=0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-field",
+    "lem-pur-commutative-ring-binomial-expansion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficient proof supporting Dietel (2014), Proposition 3.3.5, printed pp.40–41, read online at https://d-nb.info/1068056037/34; archival copy WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}k=0$ and $d>1$, take $r=1$ in the preceding coefficient equation to get $d\\cdot1_k=0$, contradicting characteristic zero; thus $d=1$. If $\\operatorname{char}k=p>0$, then $p$ is prime: a nontrivial factorization of the least positive integer killing $1_k$ would give two nonzero elements of a field whose product is zero. For an integer $N\\ge0$, $N\\cdot1_k=0$ is equivalent to $p\\mid N$ by [def-pc-field-characteristic]. Hence $p\\mid\\binom dr$ for all $0<r<d$. Apply [lem-trf-binomial-vanishing-prime-power] to obtain $d=p^a$ with $a\\ge0$; together with step 1 this proves necessity in both characteristics.",
+   "uses": [
+    "def-weil-field",
+    "def-pc-field-characteristic",
+    "lem-trf-binomial-vanishing-prime-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficient proof supporting Dietel (2014), Proposition 3.3.5, printed pp.40–41, read online at https://d-nb.info/1068056037/34; archival copy WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+   }
+  },
+  {
+   "text": "Conversely, linear forms satisfy the identity by distributivity. In characteristic $p>0$, apply [def-weil-ring-frobenius] to the commutative ring $k[Z_1,\\ldots,Z_n,W_1,\\ldots,W_n]$, in which $p\\cdot1=0$. Its $a$-fold Frobenius iterate is the ring homomorphism $b\\mapsto b^{p^a}$, so $(Z_j+W_j)^{p^a}=Z_j^{p^a}+W_j^{p^a}$. Multiply each equality by $a_j$ and sum over $j$ to obtain $f(Z+W)=f(Z)+f(W)$. The iterate for $a=0$ is the identity, including degree one.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficient proof supporting Dietel (2014), Proposition 3.3.5, printed pp.40–41, read online at https://d-nb.info/1068056037/34; archival copy WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-field",
+  "lem-pur-commutative-ring-binomial-expansion",
+  "lem-trf-binomial-vanishing-prime-power",
+  "def-weil-ring-frobenius",
+  "def-pc-field-characteristic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent coefficient proof supporting Dietel (2014), Proposition 3.3.5, printed pp.40–41, read online at https://d-nb.info/1068056037/34; archival copy WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "additive|Additive|isAddHom",
+   "results": "{\"t\": \"2026-10-23T22:16:45Z\", \"tool\": \"grep\", \"query\": \"additive|Additive|isAddHom\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no hits. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A multivariate homogeneous polynomial satisfying f(X+Y)=f(X)+f(Y) is a sum of scalar multiples of pure characteristic power monomials",
+   "results": "{\"t\": \"2026-10-23T22:16:45Z\", \"tool\": \"leansearch\", \"query\": \"A multivariate homogeneous polynomial satisfying f(X+Y)=f(X)+f(Y) is a sum of scalar multiples of pure characteristic power monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize_add\", \"Polynomial.homogenize\", \"MvPolynomial.IsHomogeneous\", \"MvPolynomial.as_sum\", \"MvPolynomial.homogeneousComponent_apply\", \"MvPowerSeries.IsHomogeneous\", \"LinearMap.toMvPolynomial_add\", \"Polynomial.addHom_ext'\"], \"digest\": \"a0a92bb220b77846\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Polynomial.homogenize_add; Polynomial.homogenize; MvPolynomial.IsHomogeneous; MvPolynomial.as_sum; MvPolynomial.homogeneousComponent_apply; MvPowerSeries.IsHomogeneous; LinearMap.toMvPolynomial_add; Polynomial.addHom_ext'. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdditive\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-23T22:16:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAdditive\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no hits. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsAdditive\"",
+   "results": "{\"t\": \"2026-10-23T22:16:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"IsAdditive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no hits. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous additive polynomial over a field has only linear monomials in characteristic zero and pure p power monomials in characteristic p",
+   "results": "{\"t\": \"2026-10-23T22:16:47Z\", \"tool\": \"leanfinder\", \"query\": \"A homogeneous additive polynomial over a field has only linear monomials in characteristic zero and pure p power monomials in characteristic p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous\", \"Polynomial.isHomogeneous_homogenize\", \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\", \"MvPolynomial.homogeneousComponent\", \"Polynomial.homogenize\", \"MvPolynomial.IsHomogeneous.inj_right\", \"Polynomial.homogenize_monomial_of_lt\", \"Polynomial.coeff_homogenize\"], \"digest\": \"c62a5a1ed49ab330\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.IsHomogeneous; Polynomial.isHomogeneous_homogenize; MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree; MvPolynomial.homogeneousComponent; Polynomial.homogenize; MvPolynomial.IsHomogeneous.inj_right; Polynomial.homogenize_monomial_of_lt; Polynomial.coeff_homogenize. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "additive.*polynomial|polynomial.*additive|IsAdditive|isAdditive",
+   "results": "{\"t\": \"2026-10-23T22:19:57Z\", \"tool\": \"grep\", \"query\": \"additive.*polynomial|polynomial.*additive|IsAdditive|isAdditive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/MonoidAlgebra/Defs.lean\", \"Mathlib/Algebra/MonoidAlgebra/Division.lean\", \"Mathlib/Algebra/Polynomial/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/WittVector/IsPoly.lean\"], \"digest\": \"f6d23d6d149a7eeb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/Algebra/SkewPolynomial/Basic.lean; Mathlib/Algebra/SkewPolynomial/Basic.lean; Mathlib/Algebra/MonoidAlgebra/Defs.lean; Mathlib/Algebra/MonoidAlgebra/Division.lean; Mathlib/Algebra/Polynomial/Basic.lean; Mathlib/RingTheory/MvPolynomial/Homogeneous.lean; Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean; Mathlib/RingTheory/WittVector/IsPoly.lean. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial satisfying the identity f(X+Y)=f(X)+f(Y) has only pure prime power monomials in positive characteristic and linear monomials in characteristic zero",
+   "results": "{\"t\": \"2026-10-23T22:19:57Z\", \"tool\": \"leansearch\", \"query\": \"A polynomial satisfying the identity f(X+Y)=f(X)+f(Y) has only pure prime power monomials in positive characteristic and linear monomials in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.addHom_ext\", \"Polynomial.addHom_ext'\", \"Polynomial.addHom_ext'_iff\", \"WittVector.idIsPoly\", \"WittVector.IsPoly.instInhabitedId\", \"Polynomial.sum_add\", \"PolynomialLaw.toFun_add_apply\", \"WittVector.idIsPolyI'\"], \"digest\": \"84a9adf78a14647d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Polynomial.addHom_ext; Polynomial.addHom_ext'; Polynomial.addHom_ext'_iff; WittVector.idIsPoly; WittVector.IsPoly.instInhabitedId; Polynomial.sum_add; PolynomialLaw.toFun_add_apply; WittVector.idIsPolyI'. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Polynomial\", \"expand\", \"CharP\"",
+   "results": "{\"t\": \"2026-10-23T22:19:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"Polynomial\\\", \\\"expand\\\", \\\"CharP\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no hits. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classification of additive multivariate polynomials over a field as sums of pure p power monomials, and linear forms in characteristic zero",
+   "results": "{\"t\": \"2026-10-23T22:19:59Z\", \"tool\": \"leanfinder\", \"query\": \"Classification of additive multivariate polynomials over a field as sums of pure p power monomials, and linear forms in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.R\", \"MvPolynomial.instExpChar\", \"MvPolynomial.psum\", \"MvPolynomial.as_sum\", \"wittPolynomial\", \"MvPolynomial.monomial_add_induction_on\", \"MvPolynomial.instInhabitedR\", \"MvPolynomial.sum_monomial_eq\"], \"digest\": \"36057603c86b9ee7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: MvPolynomial.R; MvPolynomial.instExpChar; MvPolynomial.psum; MvPolynomial.as_sum; wittPolynomial; MvPolynomial.monomial_add_induction_on; MvPolynomial.instInhabitedR; MvPolynomial.sum_monomial_eq. Returned signatures concern polynomial expansions, homogeneous components, additive maps out of polynomial rings, Witt polynomials, or algebraic independence; none classifies polynomial identities of additivity or constructs the projective order coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "choose.*(prime|Prime|pow|dvd)|(?:prime|Prime|pow|dvd).*choose",
+   "results": "{\"t\": \"2026-10-23T22:50:53Z\", \"tool\": \"grep\", \"query\": \"choose.*(prime|Prime|pow|dvd)|(?:prime|Prime|pow|dvd).*choose\", \"sub\": \"Data/Nat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Data/Nat/Multiplicity.lean\", \"Mathlib/Data/Nat/Multiplicity.lean\", \"Mathlib/Data/Nat/Multiplicity.lean\", \"Mathlib/Data/Nat/Multiplicity.lean\", \"Mathlib/Data/Nat/Multiplicity.lean\", \"Mathlib/Data/Nat/Choose/Factorization.lean\", \"Mathlib/Data/Nat/Choose/Factorization.lean\", \"Mathlib/Data/Nat/Choose/Factorization.lean\"], \"digest\": \"63f9ea85d0c0796e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give homogeneous polynomial operations, binomial arithmetic, or Frobenius power additivity, not classification of homogeneous multivariate additive polynomials."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nat.choose, Nat.Prime",
+   "results": "{\"t\": \"2026-10-23T22:50:54Z\", \"tool\": \"loogle\", \"query\": \"Nat.choose, Nat.Prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Nat.factorization_choose_prime_pow\", \"Nat.factorization_choose_prime_pow_add_factorization\", \"Nat.factorization_choose'\", \"Nat.factorization_choose\", \"Nat.Prime.emultiplicity_le_emultiplicity_choose_add\", \"Nat.Prime.dvd_choose_pow\", \"Nat.Prime.dvd_choose_pow_iff\", \"Nat.Prime.emultiplicity_choose_prime_pow\"], \"digest\": \"69ac4f69140389e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give homogeneous polynomial operations, binomial arithmetic, or Frobenius power additivity, not classification of homogeneous multivariate additive polynomials."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exponent n is a power of p if the polynomial (1+X)^n equals 1+X^n in characteristic p",
+   "results": "{\"t\": \"2026-10-23T22:51:53Z\", \"tool\": \"leanfinder\", \"query\": \"The exponent n is a power of p if the polynomial (1+X)^n equals 1+X^n in characteristic p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"add_pow_char_pow\", \"add_pow_expChar_pow\", \"add_pow_eq_mul_pow_add_pow_div_expChar\", \"add_pow_eq_mul_pow_add_pow_div_char\", \"sub_pow_char_pow\", \"sub_pow_eq_mul_pow_sub_pow_div_char\", \"sub_pow_eq_mul_pow_sub_pow_div_expChar\", \"sub_pow_expChar_pow\"], \"digest\": \"f8e8729592763943\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give homogeneous polynomial operations, binomial arithmetic, or Frobenius power additivity, not classification of homogeneous multivariate additive polynomials."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous, MvPolynomial.aeval",
+   "results": "{\"t\": \"2026-10-23T22:55:14Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.IsHomogeneous, MvPolynomial.aeval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous.aeval\", \"Polynomial.homogenize_eq_of_isHomogeneous\"], \"digest\": \"047217080d92859b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give homogeneous polynomial operations, binomial arithmetic, or Frobenius power additivity, not classification of homogeneous multivariate additive polynomials."
+  },
+  {
+   "tool": "grep",
+   "query": "additive|IsAdditive|isAdditive",
+   "results": "{\"t\": \"2026-10-23T22:55:14Z\", \"tool\": \"grep\", \"query\": \"additive|IsAdditive|isAdditive\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give homogeneous polynomial operations, binomial arithmetic, or Frobenius power additivity, not classification of homogeneous multivariate additive polynomials."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of homogeneous polynomials satisfying the formal identity f(X+Y)=f(X)+f(Y) over a field",
+   "results": "{\"t\": \"2026-10-23T22:55:14Z\", \"tool\": \"leansearch\", \"query\": \"Classification of homogeneous polynomials satisfying the formal identity f(X+Y)=f(X)+f(Y) over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize\", \"Polynomial.homogenize_add\", \"MvPolynomial.IsHomogeneous\", \"Polynomial.hilbertPoly_add_left\", \"MvPolynomial.IsHomogeneous.mul\", \"Polynomial.addHom_ext\", \"MvPolynomial.IsHomogeneous.sum_X_mul_pderiv\", \"Polynomial.addHom_ext'\"], \"digest\": \"10d38428a0d941c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give homogeneous polynomial operations, binomial arithmetic, or Frobenius power additivity, not classification of homogeneous multivariate additive polynomials."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous additive polynomials over a field are linear forms in characteristic zero and sums of pure p power monomials in characteristic p",
+   "results": "{\"t\": \"2026-10-23T22:55:19Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous additive polynomials over a field are linear forms in characteristic zero and sums of pure p power monomials in characteristic p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous\", \"Polynomial.isHomogeneous_homogenize\", \"Polynomial.homogenize\", \"LinearMap.toMvPolynomial_isHomogeneous\", \"Polynomial.homogenize_eq_of_isHomogeneous\", \"Polynomial.homogenizeLM_apply\", \"MvPolynomial.homogeneousComponent\", \"Polynomial.homogenizeLM\"], \"digest\": \"edeea9982329b314\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give homogeneous polynomial operations, binomial arithmetic, or Frobenius power additivity, not classification of homogeneous multivariate additive polynomials."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-order-triangular-coordinates",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Proposition 21(i),(ii), p.181, using the order algebra of section 13, p.168, and the chart convention on p.169; the case of equal degree sequences satisfies its non-strict lexicographic hypothesis. The proposition follows from Lemma 20, pp.175–181; Q63 refinement: the inductive correction of a single index in Hironaka Lemma 20, pp.176–181, used to assemble Proposition 21, p.181. Q33 refinement: Hironaka (1970), Lemma 18, pp.174–175, including its two particular consequences. Q51 refinement: section 13, (13.2), p.168; polynomial normal expansion at the start of Lemma 18, p.174. Q63 coordinate split: characteristic-dependent description of the homogeneous additive generators in Hironaka (13.2).",
+   "via": [
+    "lem-trf-projective-order-triangular-coordinates",
+    "lem-trf-projective-order-homogeneous-approximation",
+    "lem-trf-permissible-standard-basis-one-step",
+    "lem-trf-permissible-adapted-standard-basis",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-additive-polynomial-monomial-classification",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Dietel Proposition 3.3.5 and the current blueprint ancestor; supplied variable separation, coefficient comparison, both characteristic cases and the converse. Reused existing polynomial, field, grading, binomial-expansion and Frobenius nodes; introduced only the exact Mathlib arithmetic leaf. No Lean attachment was found and no compiler was run.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, as tracked by the inherited from/via chain; this lower item supplies the characteristic-dependent additive-generator description in Hironaka (13.2). The latest blueprint ancestor now states contracting local terms and no longer contains that historical resolution proof. This split preserves the assigned lower statement and adds no claim about the new geometric route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-b1fb411a3",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-b1fb411a3 (reviewer sub-agent of L); spot-checked: Read the item, the new leaf and every cited statement in full. Fixed one missing citation (B3/C1): 'char k' appeared in the item statement with no node, and step 3 argued 'N·1_k=0 iff p|N' inline, although the existing Mathlib leaf def-pc-field-characteristic states it. The corrected item cites that node in the statement, stmt_deps, step 3 (text and uses) and proof_deps; it depends only on def-weil-field, so there is no cycle. Steps: 1 (one variable at a time via substitution homomorphisms, homogeneity gives f=Σa_jZ_j^d, n=0 excluded) is correct. 2 (Z=Xe_j, W=Ye_j, binomial expansion, unique coefficients, a_j invertible) is correct. 3 (char 0: r=1; char p: p prime because a field has no zero divisors, then the new leaf) is correct. 4 (the a-fold Frobenius iterate is a ring map on k[Z,W] by def-weil-ring-frobenius) is correct. Small cases: d=1; char 0 d=2 not additive (2XY); char 2 d=2 additive; char 2 d=3 not additive (3X^2Y); char 3 d=6 not additive (binom(6,3)=20). New leaf lem-trf-binomial-vanishing-prime-power is true (p=2: d=4 yes, d=6 fails via binom(6,2)=15) and matches Mathlib Choose.eq_pow_multiplicity_of_choose_modEq_zero_nat at Lucas.lean:154 ([Fact p.Prime], 0<n, Icc 1 (n-1), MOD p), a one-line specialization. No duplicates found (rg -L over additive polynomial, choose_modEq, Lucas, f(Z+W)); the new node is not a clause of the item. The citer triangular-coordinates uses the statement as written. ILO (the source.document) does not state the classification and is motivation only; Dietel Prop. 3.3.5 is WANTED and was not read here, but the agent proof is complete and elementary. Not a 2026-10-21 re-split. No SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomogeneousAdditivePolynomial",
+  "declaration": "MvPolynomial.homogeneous_additive_monomial_classification",
+  "file": "lean/Sheaf/RingTheory/HomogeneousAdditivePolynomial.lean",
+  "statement": "theorem homogeneous_additive_monomial_classification {k : Type u} [Field k] (n d : ℕ) (f : MvPolynomial (Fin n) k) (hd : 0 < d) (hf : f ≠ 0) (hhom : f.IsHomogeneous d) : (ringChar k = 0 → ((aeval (fun j : Fin n ↦ (X (Sum.inl j) : MvPolynomial (Fin n ⊕ Fin n) k) + X (Sum.inr j)) f = aeval (fun j : Fin n ↦ (X (Sum.inl j) : MvPolynomial (Fin n ⊕ Fin n) k)) f + aeval (fun j : Fin n ↦ (X (Sum.inr j) : MvPolynomial (Fin n ⊕ Fin n) k)) f) ↔ d = 1 ∧ ∃ a : Fin n → k, f = ∑ j : Fin n, C (a j) * X j)) ∧ (∀ p : ℕ, 0 < p → ringChar k = p → ((aeval (fun j : Fin n ↦ (X (Sum.inl j) : MvPolynomial (Fin n ⊕ Fin n) k) + X (Sum.inr j)) f = aeval (fun j : Fin n ↦ (X (Sum.inl j) : MvPolynomial (Fin n ⊕ Fin n) k)) f + aeval (fun j : Fin n ↦ (X (Sum.inr j) : MvPolynomial (Fin n ⊕ Fin n) k)) f) ↔ ∃ e : ℕ, d = p ^ e ∧ ∃ a : Fin n → k, f = ∑ j : Fin n, C (a j) * X j ^ (p ^ e)))",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-796fa500d",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Clause-by-clause match of node and Lean: Field k at universe u; n>=0 via Fin n with n=0 vacuous; IsHomogeneous d with 0<d and f≠0; additivity as a formal aeval identity in MvPolynomial (Fin n ⊕ Fin n) k; char-0 case ↔ d=1 ∧ linear form; 0<p=ringChar k case ↔ ∃e, d=p^e ∧ Σ C(a j)*X j^(p^e). Parentheses checked. The statement is true; edge cases checked: char2 d=2/3, char3 d=6, char0 d=2, finite fields. lean.statement verbatim in the file; proof sorry only; no definitions; source and blueprint docstrings plus 4-step proof docstring; imports public/plain correct and all exist. Only the lean field differs from live. No duplicate notion in Mathlib or the project. Citers use it only as a proof dependency. The second reading was written by the delivering worker (dispatcher forbade another agent): substantive, noted only. No compile needed (no file changed)."
+ }
+}

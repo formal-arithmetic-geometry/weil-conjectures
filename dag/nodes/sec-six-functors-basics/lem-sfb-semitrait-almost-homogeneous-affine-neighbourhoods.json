@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+ "kind": "statement",
+ "title": "Affine neighbourhoods on separated almost homogeneous schemes over a semi-trait",
+ "statement": "A semi-trait here is $S=\\operatorname{Spec}R$, where $R$ is a Noetherian [def-weil-pbc-noetherian-ring] normal domain [def-weil-pbc-normal-ring] of Krull dimension one (every strict chain of prime ideals has length at most one, and a chain of length one exists) with finitely many maximal ideals; in particular a trait is allowed. A group sheaf takes values in groups, not necessarily commutative. A group scheme has multiplication, identity and inverse morphisms satisfying the group identities. Let $G\\to S$ be a separated flat group scheme of finite type [def-weil-finite-type-morphism], and let $X\\to S$ be a separated flat scheme of finite presentation with a $G$-action. Flatness is [def-weil-flat-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Suppose $X$ is a finite union of $G$-invariant open subschemes $X_j$ such that $(g,x)\\mapsto(gx,x)$ from $G\\times_S X_j$ to $X_j\\times_S X_j$ is surjective as a morphism of fppf sheaves: any pair of sections over a test scheme becomes of this form on an fppf covering [def-pc-fppf-site]. Empty fibres of $X_j$ are allowed. Then $X$ has property (FA). Property (FA) means that every finite subset of the underlying point set is contained in an affine open subscheme.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Proposition 4.2.2 and Definition 4.0.1, printed pp.53-54 and 57-59; almost homogeneous separated schemes, including the non-smooth case via Proposition 4.2.3. The assertion for components supported only on the generic fibre is the field case in 4.1. Local archive WANTED; primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-almost-homogeneous-potential-smooth-cover] to $S,G,X$ and the given finite invariant cover. Obtain $T,H,Y$ and $q:Y\\to X$ with the stated smoothness, geometric orbit decomposition, integrality, surjectivity and finite fibres. In particular $T$ is the spectrum of a Noetherian normal dimension-one domain. The finite-presentation hypothesis on $X\\to S$ includes finite type; hence [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian, so it is a locally Noetherian target for the later neighbourhood-transfer lemma. We will not require $q$ to be flat or finite.",
+   "uses": [
+    "lem-sfb-almost-homogeneous-potential-smooth-cover",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2.2, reduction to 4.2.3 and 4.1.3, printed pp.57–59"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dedekind-smooth-fibre-dense-affine] to the smooth separated finite-type map $Y\\to T$. It gives an affine open $U\\subseteq Y$ whose pullback is dense in every geometric fibre of $Y\\to T$. These hypotheses hold for the ring of $T$ by step 1. We use only the affine open and geometric density, not the additional Cartier divisor supplied by that lemma.",
+   "uses": [
+    "lem-sfb-dedekind-smooth-fibre-dense-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2.2 smooth-case proof, printed p.57, affine open containing fibre-maximal points; existing BLR fibre-dense-affine input"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-connected-action-affine-saturation-ample] to $H,Y,U$ over the affine normal Noetherian base $T$. Its group and scheme are smooth, separated and of finite type by step 1, and the fibres of $H$ are geometrically connected. Thus $W=H.U$ is open and admits an ample invertible module. In fact $W=Y$. To check this, pass to any geometric fibre. Every nonempty orbit in that fibre is open by step 1, so density of $U$ forces it to meet $U$. Given a geometric point $y$ in this orbit, take a point of the nonempty intersection after extending the algebraically closed field if necessary. The orbit clause in step 1 supplies $h$ carrying that point of $U$ to $y$ over a common algebraically closed extension. Hence $y$ lies in the image of $H\\times_TU\\to Y$ on points. Every point of $Y$ has a geometric lift, so all points lie in $W$. Equality of underlying open sets identifies their open subschemes. Consequently the ample module on $W$ is an ample module on $Y$. The same argument covers a fibre with several orbits and is vacuous on an empty fibre.",
+   "uses": [
+    "lem-sfb-connected-action-affine-saturation-ample",
+    "lem-sfb-almost-homogeneous-potential-smooth-cover",
+    "lem-sfb-dedekind-smooth-fibre-dense-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2.2 smooth-case proof, printed p.57, equality of the neutral-component saturation with the whole space and the quoted ampleness proposition"
+   }
+  },
+  {
+   "text": "Fix an arbitrary finite subset $E\\subseteq|X|$. Because each underlying fibre of $q$ is finite, $E'=q^{-1}(E)$ is a finite union of finite sets and hence finite. Step 3 gives an ample invertible module on $Y$. By [lem-sc-ample-finite-set-affine], there exists an affine open $V\\subseteq Y$ containing all of $E'$, not just a chosen lift of each member of $E$.",
+   "uses": [
+    "lem-sc-ample-finite-set-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2.2 smooth-case conclusion quasi-projective, printed p.57; finite-set consequence Stacks Tag 01ZY (properties-lemma-ample-finite-set-in-affine)"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer] for $q:Y\\to X$ and $E$. The target is locally Noetherian by step 1; integrality, surjectivity and finite fibres are supplied by the potential-smooth-cover statement. Step 4 supplies precisely its inverse-image neighbourhood hypothesis. Therefore $E$ lies in an affine open of $X$. Since $E$ was arbitrary, this is property (FA), including the empty-set case.",
+   "uses": [
+    "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+    "lem-sfb-almost-homogeneous-potential-smooth-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2.2 final reduction via 4.1.3, printed pp.55,57–59"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-almost-homogeneous-potential-smooth-cover",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-dedekind-smooth-fibre-dense-affine",
+  "lem-sfb-connected-action-affine-saturation-ample",
+  "lem-sc-ample-finite-set-affine",
+  "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "4.2.2 proof, printed pp.57–59; local archive WANTED, primary scan read online. Assembly follows the published proof with the existing BLR fibre-dense-affine lemma, and spells out orbit saturation and finite inverse images."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated flat finite type scheme almost homogeneous under a flat finite type group scheme over a semilocal Dedekind domain has an affine open containing every finite set of points",
+   "results": "{\"t\": \"2026-10-24T11:44:58Z\", \"tool\": \"leanfinder\", \"query\": \"A separated flat finite type scheme almost homogeneous under a flat finite type group scheme over a semilocal Dedekind domain has an affine open containing every finite set of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"d77354b300b4c46d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine covers and single-point affine neighbourhoods do not place an arbitrary finite subset in one affine open; topological and valuation-ring hits concern other objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Almost homogeneous separated schemes over a trait have the AF property every finite subset lies in an affine open",
+   "results": "{\"t\": \"2026-10-24T11:44:53Z\", \"tool\": \"leansearch\", \"query\": \"Almost homogeneous separated schemes over a trait have the AF property every finite subset lies in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.HasAffineProperty.mk\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"100e00350d7fef6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine covers and single-point affine neighbourhoods do not place an arbitrary finite subset in one affine open; topological and valuation-ring hits concern other objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-24T11:44:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine covers and single-point affine neighbourhoods do not place an arbitrary finite subset in one affine open; topological and valuation-ring hits concern other objects"
+  },
+  {
+   "tool": "grep",
+   "query": "almostHomogeneous|almost.homogeneous|affine.*finite.*subset|finite.*subset.*affine",
+   "results": "{\"t\": \"2026-10-24T11:44:54Z\", \"tool\": \"grep\", \"query\": \"almostHomogeneous|almost.homogeneous|affine.*finite.*subset|finite.*subset.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine covers and single-point affine neighbourhoods do not place an arbitrary finite subset in one affine open; topological and valuation-ring hits concern other objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Anantharaman finite affine neighbourhood property of separated homogeneous spaces over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T11:44:59Z\", \"tool\": \"leanfinder\", \"query\": \"Anantharaman finite affine neighbourhood property of separated homogeneous spaces over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\"], \"digest\": \"aff849436922e5c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine covers and single-point affine neighbourhoods do not place an arbitrary finite subset in one affine open; topological and valuation-ring hits concern other objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated almost homogeneous scheme over a semilocal Dedekind domain has an affine open containing every finite subset",
+   "results": "{\"t\": \"2026-10-24T12:37:55Z\", \"tool\": \"leanfinder\", \"query\": \"A separated almost homogeneous scheme over a semilocal Dedekind domain has an affine open containing every finite subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\"], \"digest\": \"7d4a324df53d0581\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: single-point affine bases, Proj charts and topological group actions do not give an affine neighbourhood of an arbitrary finite set in an almost homogeneous semi-trait scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite set of points on a separated flat almost homogeneous scheme over a discrete valuation ring has a common affine neighbourhood",
+   "results": "{\"t\": \"2026-10-24T12:37:55Z\", \"tool\": \"leansearch\", \"query\": \"Every finite set of points on a separated flat almost homogeneous scheme over a discrete valuation ring has a common affine neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.AffineCover.covers\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\"], \"digest\": \"3e7a5a588efed89b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: single-point affine bases, Proj charts and topological group actions do not give an affine neighbourhood of an arbitrary finite set in an almost homogeneous semi-trait scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-24T12:37:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: single-point affine bases, Proj charts and topological group actions do not give an affine neighbourhood of an arbitrary finite set in an almost homogeneous semi-trait scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "almostHomogeneous|almost.homogeneous|affine.*finite.*subset|finite.*subset.*affine",
+   "results": "{\"t\": \"2026-10-24T12:37:56Z\", \"tool\": \"grep\", \"query\": \"almostHomogeneous|almost.homogeneous|affine.*finite.*subset|finite.*subset.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: single-point affine bases, Proj charts and topological group actions do not give an affine neighbourhood of an arbitrary finite set in an almost homogeneous semi-trait scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Anantharaman AF property for homogeneous spaces over a trait",
+   "results": "{\"t\": \"2026-10-24T12:38:04Z\", \"tool\": \"leanfinder\", \"query\": \"Anantharaman AF property for homogeneous spaces over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj\", \"ProperlyDiscontinuousSMul\"], \"digest\": \"f209d1af8602d235\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: single-point affine bases, Proj charts and topological group actions do not give an affine neighbourhood of an arbitrary finite set in an almost homogeneous semi-trait scheme"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-flat-group-fpqc-effectivity",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait group descent; Anantharaman 4.2.2 proof, printed pp.57–59; finite-presentation almost-homogeneous affine-neighbourhood input used by lem-sfb-trait-flat-group-fpqc-effectivity",
+   "via": [
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Followed Anantharaman 4.2.2 via potential smooth equivariant normalization, a fibre-dense affine open, the connected-action ampleness theorem and integral finite-fibre neighbourhood transfer. Added three statement-only inputs; reused the existing smooth Dedekind fibre-dense affine and ample finite-set nodes. Checked empty fibres, generic-only pieces, noncommutative groups and nonexcellent bases.",
+  "blueprint": "Read latest blueprint det-thm-sf-ctf-stability-direct-images proof (3). This realizes the inherited strict-local trait descent affine-neighbourhood input. blueprint_refs ancestor returns None: retain the historical null ancestor and full via chain; prepend this item for the new nodes. Searches of the whole blueprint found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-dedekind-smooth-fibre-dense-affine",
+    "why": "Generic smooth separated Dedekind-scheme fibre-dense affine open, giving the affine seed used in the published Anantharaman route; no unit-specific cohomological result is substituted."
+   },
+   {
+    "node": "lem-sc-ample-finite-set-affine",
+    "why": "Generic ample-line finite-set affine neighbourhood theorem, Stacks Tag 01ZY; applies to the smooth cover after ampleness, with no curve hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian permanence verifies the target hypothesis in integral neighbourhood transfer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-dedekind-smooth-fibre-dense-affine",
+  "lem-sc-ample-finite-set-affine",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-4c4d5024f",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-4c4d5024f (reviewer sub-agent of L); spot-checked: Read in full: the item, all 3 new nodes, the cited statements (dedekind-smooth-fibre-dense-affine, sc-ample-finite-set-affine 01ZY, finite-type-over-noetherian) and the unit. Source: the Anantharaman MSMF 33 Numdam scan, read via its OCR text layer. New nodes against source: 4.1.3 (OCR 4.1.5, p.55) matches the transfer node verbatim; it has no flatness hypothesis, so it is not a duplicate of the flat integral-fpqc-descent node. Raynaud V.3.10 as quoted on p.57 (locally Noetherian normal S, smooth group with connected fibres, smooth X, U quasi-affine, O(D) S-ample on G.U) implies the saturation node's specialization: affine U over an affine base gives an absolutely ample module, and W is open because the action is smooth. 4.2.3 (i),(ii) and its last paragraph (pp.58-59) give the cover node with H=G1^0 and Y=X1. Krull-Akizuki gives a semilocal Noetherian R' with finite fibres; q is a finite normalization composed with an integral base change, so it is integral, surjective with finite fibres. The geometric orbit clause follows from fppf almost-homogeneity under the connected H_Omega. Steps: 1, the hypotheses and local Noetherianity of X hold. 2, only the fibre-dense affine is used, matching the source's affine open containing the fibre-maximal points. 3, G0.U = X is written out correctly from orbit openness and density. 4, E' is finite and 01ZY applies. 5, 4.1.3 applies to the whole inverse image. Edge cases checked: empty X, empty or generic-only fibres, several orbits, the non-smooth alpha_p/mu_p cases, and non-flat thickenings. No node restates the item. Batch-5: lem-trf-normal-topologically-noetherian-components (reached via the dedekind node) is Stacks 0357, a general fact about normal Noetherian-space components; it is neither assumption nor a step of their proofs, so the citation is accepted. Tool uses accepted: dedekind (same unit), 01ZY (generic, other unit), finite-type-over-noetherian (Mathlib leaf). No SGA. FIX, B3: 'geometrically connected fibres' cited only def-weil-connected-scheme. Added an inline meaning (every fibre H_Omega over a field is connected) to lem-sfb-almost-homogeneous-potential-smooth-cover and lem-sfb-connected-action-affine-saturation-ample, whole files in fixes/dag/nodes/sec-six-functors-basics/. The local Anantharaman archive is still WANTED.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemitraitAlmostHomogeneousAffineNeighbourhoods",
+  "declaration": "AlgebraicGeometry.exists_affineOpen_of_semitrait_almostHomogeneous",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemitraitAlmostHomogeneousAffineNeighbourhoods.lean",
+  "statement": "theorem exists_affineOpen_of_semitrait_almostHomogeneous (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (hdim : ringKrullDim R = 1) (hmax : Set.Finite {m : Ideal R | m.IsMaximal}) (G X : Over (Spec (CommRingCat.of R))) [GrpObj G] [ModObj G X] [IsSeparated G.hom] [Flat G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsSeparated X.hom] [Flat X.hom] [LocallyOfFinitePresentation X.hom] [QuasiCompact X.hom] [QuasiSeparated X.hom] (n : ℕ) (U : Fin n → X.left.Opens) (hcover : ⨆ j, U j = ⊤) (hinvariant : ∀ j : Fin n, (snd G X).left ⁻¹ᵁ U j ≤ (ModObj.smul (M := G) (X := X)).left ⁻¹ᵁ U j) (hhomogeneous : ∀ (j : Fin n) (T : Over (Spec (CommRingCat.of R))) (x y : T ⟶ X), Set.range x.left ⊆ (U j : Set X.left) → Set.range y.left ⊆ (U j : Set X.left) → ∃ 𝒰 : Scheme.Cover.{u} Scheme.fppfPrecoverage T.left, ∀ i : 𝒰.I₀, ∃ g : Over.mk (𝒰.f i ≫ T.hom) ⟶ G, g • ((Over.homMk (𝒰.f i) rfl : Over.mk (𝒰.f i ≫ T.hom) ⟶ T) ≫ x) = (Over.homMk (𝒰.f i) rfl : Over.mk (𝒰.f i ≫ T.hom) ⟶ T) ≫ y) (E : Set X.left) (hE : E.Finite) : ∃ V : X.left.Opens, IsAffineOpen V ∧ E ⊆ (V : Set X.left)",
+  "branch": "sheaf-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89309554d",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Read the item node, all 12 stmt_dep records, the delivered module and the report. Checked every clause against the Lean: Spec R with IsDomain+IsNoetherianRing+IsIntegrallyClosed, ringKrullDim R = 1, finitely many maximal ideals; GrpObj G and ModObj G X in Over (Spec R); G separated/flat/LocallyOfFiniteType/QuasiCompact; X separated/flat/LFP/QC/QS; finite Fin n open cover with action-invariance as a preimage inclusion; fppf local lifting g•x|=y|, matching surjectivity of (g,x)↦(gx,x) on fppf sheaves (checked against Mathlib fppfPrecoverage and Mod hom-set SMul); conclusion is (FA). No extra assumptions, nothing missing. Edge cases n=0, empty pieces or fibres, E=∅ and generic-only pieces are covered; single universe u throughout. No new definitions or copies, sorry only, docstrings have the source and blueprint id and all 5 proof steps, lean.statement equals the signature, and the report has a Worker report and a Second reading. No findings; no compile because nothing changed."
+ }
+}

@@ -30,14 +30,23 @@
  ],
  "proof": [
   {
-   "text": "Compose PresheafOfModules.freeAdjunction with the module sheafification adjunction [def-weil-presheaf-modules-sheafification]. Its right adjoint is faithful: it forgets the sheaf condition, restricts scalars along the identity, and forgets to presheaves of sets. For two module-sheaf maps agreeing after every map from a sheafified free lifted representable, adjunction naturality gives equality after every map from a lifted representable into the underlying presheaf. Mathlib hom_ext_uliftYoneda then gives equality. This proves that precisely the family in the Lean statement is separating, without identifying the object and morphism universes.",
+   "text": "The forgetful functor from commutative rings to rings preserves every existing limit of the site-indexing size. The free-commutative-ring adjunction makes the forgetful functor to types preserve such a limit. Its cone gives a small type of compatible sections, so the same diagram of rings has its explicitly constructed limit; forgetting rings to types preserves this particular limit and reflects isomorphisms, hence reflects the limit cone. Apply the general sheaf-composition theorem. This proves hasSheafCompose_commRingToRing without any inequality between the site and coefficient universes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Section on sheaves of algebraic structures; preservation of covering-diagram limits"
+   }
+  },
+  {
+   "text": "For a presheaf of modules M and a section m at U, construct a map from the sectionwise lift of the extension-by-zero presheaf of the localized unit to M: the coefficient t in the summand indexed by phi:V→U is sent to t times the restriction of m along phi. Direct-sum induction proves naturality, using semilinearity and composition of restrictions. Apply the sheafification adjunction [def-weil-presheaf-modules-sheafification]. If two sheaf morphisms agree after every map from these sheafifications, apply the adjunction, evaluate at V=U and the lifted coefficient 1 in the identity-arrow summand, and recover equality on every section. Thus exactly the family in the statement is separating, with coefficient universe r and section universe max c v r independent.",
    "uses": [
     "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EW, generator argument; free-module and sheafification adjunctions"
+    "place": "Tag 03EW, the maps indexed by (U,s) in the proof of lemma-module-quotient-flat; sheafification universal property"
    }
   },
   {
@@ -73,7 +82,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 07A5 and Injectives Theorem 079P; source-library ModuleCat/Sheaf/Abelian.lean argument generalized using lifted Yoneda and composite adjunction naturality by J3, 2026-10-18"
+  "place": "Section 07A5, with Modules on Sites Tag 03EW and Injectives Theorem 079P; direct sectionwise generator argument formalized by C9, 2026-10-25. The exact-colimit and resolution assembly follows the existing RingedSiteKInjectiveResolutionsOfUniverses proof."
  },
  "mathlib_searches": [
   {
@@ -127,7 +136,32 @@
   "item": "def-pur-derived-internal-hom",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions",
+     "module": "WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions",
+     "lines": [
+      36,
+      83
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -149,35 +183,37 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kre3012 (reviewer sub-agent of L); spot-checked: Item statement vs sheaf-dag: only citations added (E7 ok); small-site hypothesis honest (07A5, 079P); split is real (Grothendieck clause + generic 079P), no cycle; class b checked: lem-weil-pbc-kinjective-functorial-existence lacks injective terms, lem-weil-pbc-module-sheaves-grothendieck-abelian is etale-only, so both new nodes are not duplicates; class c: Mathlib grep IsGrothendieckAbelian/KInjective finds only bounded-below K-injectives, no SheafOfModules Grothendieck instance. FIX more, RETURN less: (1) C4/B3 lem-pur-kinjective-degreewise-existence cited module-only definitions (def-pc-cochain-complex-modules, def-pc-quasi-iso-modules, def-pur-kinjective-complex) for an arbitrary Grothendieck category A: restated with explicit meanings 'as in [..] with A in place of Mod(O)'; (2) C4 item and lem-pur-ringed-site-grothendieck-abelian cited the abelian-group def-weil-pbc-site-extension-by-zero-presheaf for the O-module j_{U!}O_U: now cite def-pur-localized-ringed-site, def-weil-extension-by-zero-presheaf and def-weil-presheaf-modules-sheafification, stmt_deps updated; Mathlib grep recorded on the generic node.; 3 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses",
-  "declaration": "SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses",
+  "module": "Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsMixedUniverses",
+  "declaration": "SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsMixedUniverses",
   "declarations": [
-   "SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses"
+   "CategoryTheory.hasSheafCompose_commRingToRing",
+   "PresheafOfModules.sectionUniverseLift",
+   "SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsMixedUniverses"
   ],
-  "file": "lean/Sheaf/CategoryTheory/RingedSiteKInjectiveResolutionsOfUniverses.lean",
-  "statement": "theorem grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J CommRingCat.{max c v r}) : IsGrothendieckAbelian.{max c v r} (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ∧ IsSeparator (∐ fun U : C ↦ (PresheafOfModules.sheafification.{max c v r} (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj)).obj ((PresheafOfModules.free ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).obj).obj (uliftYoneda.{max c v r}.obj U))) ∧ ∃ (I : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ ⥤ CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) (η : 𝟭 (CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) ⟶ I), ∀ M : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ, QuasiIso (η.app M) ∧ (I.obj M).IsKInjective ∧ ∀ n : ℤ, Injective ((I.obj M).X n)",
-  "branch": "newtargets-dag",
-  "by": "Q05",
-  "date": "2026-10-15",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteKInjectiveResolutionsMixedUniverses.lean",
+  "statement": "theorem grothendieckAbelian_and_functorial_kInjective_resolutionsMixedUniverses {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] (R : Sheaf J CommRingCat.{r}) : IsGrothendieckAbelian.{max c v r} (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ∧ IsSeparator (∐ fun U : C ↦ (PresheafOfModules.sheafification.{max c v r} (𝟙 ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj)).obj ((PresheafOfModules.sectionUniverseLift (((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj)).obj ((extensionByZeroPresheaf ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R) U).obj (unit (((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).over U))))) ∧ ∃ (I : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ ⥤ CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (η : 𝟭 (CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) ⟶ I), ∀ M : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ, QuasiIso (C := SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (η.app M) ∧ (I.obj M).IsKInjective ∧ ∀ n : ℤ, Injective ((I.obj M).X n)",
+  "branch": "sheaf-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "§1(B): the recorded theorem fixes the site, ring, and module universes to u. This companion retains that interface and states all its clauses in max c v r with independent site universes: Grothendieck abelianness, the coproduct of free sheafified representables as the same localized-unit extension generator, and functorial K-injective resolutions with injective terms. Added as an already landed statement dependency of the item to support the internal Hom repair."
+  "note": "Section 1(B): the old interface forces coefficient rings into max(site objects, site arrows, sections). Here the unchanged rings may live in r, with section universe max c v r. All clauses are retained: Grothendieck abelianness, the specified coproduct of sheafified localized-unit extensions as generator, and functorial K-injective resolutions with injective terms. The generator uses the already recorded extensionByZeroPresheaf followed by canonical sectionwise ULift. The old interface remains re-exported."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-06c02526a",
-  "group": "Q05",
+  "reviewer": "NT-stage2-cc-65038eda5",
+  "group": "Q140",
   "result": "pass",
-  "note": "Statement, dependencies, constructions, docstrings, edge cases, universes, source alignment, report sections, and server compiler evidence checked; no fixes required."
+  "note": "Item matches the corrected node clause by clause: IsNoetherianRing; pair property (∀i Module.Finite H^i E, ∃b upper bound for E, ∃a lower bound for F, no finiteness on F); genuine sectionwise ULift (smallEtaleModuleSectionLift, down/up equivalence); a pinned up to iso by Q ⋙ a ≅ termwise; Nonempty NatIso of functors on the full pair category with correct variance. c is a Prop-only context. Statement verbatim (both records). The §1(C) ULift size correction is source-equivalent; citer lem-sfb-space-coherent-derived-internal-hom holds. §1(B) mixed-universe companions (rings r, sections max c v r) for def-pur-derived-internal-hom and prop-pur-kinjective-resolutions-exist use the same Hom complex, K-injective replacement and localization, have real data, sorry only on theorems, publicly re-export the old proved modules, and both live dep records are unchanged since base. Edge cases (A=0, zero complexes, any bounds) covered; no universe equalities. Maintainer notes: (1) the delivered prop-pur-kinjective record drops the landed proved grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses from declarations (still re-exported and used by 10+ modules); please re-add it, since a reviewer fix cannot change a dep record; (2) both dep nodes now have sorried primary companions (_inverts/_comparison/_obj_iso, the MixedUniverses resolution theorem, hasSheafCompose_commRingToRing) for stage 3. No compile: no file changed."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "C9",
   "result": "pass",
-  "landing": "20261018T145104-L-3641429",
-  "kind": "interface",
+  "landing": "20261024T214326-L-588048",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

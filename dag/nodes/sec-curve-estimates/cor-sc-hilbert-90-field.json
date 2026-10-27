@@ -52,21 +52,61 @@
   "AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.Hilbert90",
+     "lines": [
+      355,
+      370
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-hilbert90",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $K$ be a field. Then $H^1(\\operatorname{Spec}K_{\\Et},\\mathbf G_m)=0$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $K$ be a field. Then $H^1(\\operatorname{Spec}K_{\\Et},\\mathbf G_m)=0$.\nEquivalently, every $\\mathbf G_m$-torsor ([def-sc-gm-torsor]) on\n$\\operatorname{Spec}K_{\\Et}$ is trivial: for every short exact sequence\n$0\\to\\mathbf G_m\\to E\\to Q\\to0$ of abelian sheaves on\n$\\operatorname{Spec}K_{\\Et}$, the map $\\Gamma(E)\\to\\Gamma(Q)$ is surjective.",
   "proof": [
    {
-    "text": "By [thm-sc-hilbert-90] with $X=\\operatorname{Spec}K$, the group\n$H^1(\\operatorname{Spec}K_{\\Et},\\mathbf G_m)$ is isomorphic to the group of isomorphism classes of invertible\n$\\mathcal O_X$-modules. The underlying space of $X$ is a point, so a\nquasi-coherent $\\mathcal O_X$-module is a $K$-vector space and an\ninvertible one is a one-dimensional $K$-vector space, i.e. isomorphic\nto $K=\\mathcal O_X$. Hence the group is trivial.",
+    "text": "By [lem-sc-torsor-h1], $H^1(\\operatorname{Spec}K_{\\Et},\\mathbf G_m)=\n\\operatorname{Ext}^1(\\mathbf Z,\\mathbf G_m)$, and the class of an extension\n$0\\to\\mathbf G_m\\to E\\xrightarrow{\\pi}\\mathbf Z\\to0$ vanishes as soon as the\nglobal section $1$ of $\\mathbf Z$ lifts to $E$ (the fibre $\\pi^{-1}(1)$ is the\ncorresponding torsor, and a torsor with a global section is trivial,\n[lem-sc-torsor-h1](a)). So it suffices to prove the surjectivity of\n$\\Gamma(E)\\to\\Gamma(Q)$ for every short exact sequence\n$0\\to\\mathbf G_m\\to E\\xrightarrow{\\pi}Q\\to0$; we do this by Galois descent.",
     "uses": [
-     "thm-sc-hilbert-90"
+     "lem-sc-torsor-h1"
     ],
     "elementary": false
+   },
+   {
+    "text": "Let $q\\in\\Gamma(Q)$. Since $\\pi$ is an epimorphism of sheaves, $q$ lifts\nétale locally, and every étale covering of $\\operatorname{Spec}K$ is refined by\n$\\operatorname{Spec}L\\to\\operatorname{Spec}K$ for a finite separable extension\n$L/K$. So there is $e\\in E(\\operatorname{Spec}L)$ with $\\pi(e)=q|_L$. Let\n$p_1,p_2\\colon\\operatorname{Spec}(L\\otimes_KL)\\to\\operatorname{Spec}L$ be the\ntwo projections. The difference $p_1^*e-p_2^*e$ maps to $0$ in $Q$, so it is a\nsection of $\\mathbf G_m$, i.e. a unit $c$ of $L\\otimes_KL$, and it satisfies\nthe cocycle identity $c_{13}=c_{12}c_{23}$ in $L\\otimes_KL\\otimes_KL$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "By Hilbert 90 for the Amitsur complex, $c=p_1^*w\\cdot(p_2^*w)^{-1}$ for a\nunit $w\\in L^\\times$: the cocycle $c$ is a descent datum on the one-dimensional\n$L$-vector space $L$ along the faithfully flat map $K\\to L$, so it descends to\na one-dimensional $K$-vector space, and $w$ comes from a basis vector of it.\nReplacing $e$ by $e-w$ (the group law of $E$ written additively, $w$ viewed as\na section of $\\mathbf G_m\\subseteq E$ over $\\operatorname{Spec}L$) gives a lift of $q|_L$ with $p_1^*e=p_2^*e$. Then the\npullbacks of $e$ along any two morphisms from an étale $K$-scheme to\n$\\operatorname{Spec}L$ agree, so by the sheaf property $e$ descends to a global\nsection of $E$ lifting $q$.",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

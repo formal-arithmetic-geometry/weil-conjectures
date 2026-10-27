@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-open-projection-iso-coefficient-change",
+ "kind": "statement",
+ "title": "Coefficient change commutes with the open projection isomorphism",
+ "statement": "For coefficients R,S, a compatible change, an open immersion j:U→V, normalized tensor models on U and V, and M over U and Q over V, scalar extension commutes with the open projection isomorphism, the open coefficient mate, and the scalar/pullback comparison. This is the target open factor with the compactification compositor omitted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0E8I and 07A6, open-unit tensor step"
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sfb-proetale-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Use proEtaleRingSheafChangeAdjunction to identify scalarPull.hom with the scalar-adjunction inverse mate of the inverse identified-coefficient restriction/pullback square. Transpose the mate under the composite geometric/scalar adjunction; its unit equation is precisely the unit equation for the left-adjoint-uniqueness map defining scalarPull.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact_localization_inverse_mate to the two ordinary open adjunctions and the inverse scalar-restriction/pullback square. This identifies openRestriction.hom with the inverse mate of the derived restriction square. Iterating scalar and open mates identifies openComparison with the conjugate isomorphism between the composite left adjoints. The unit-mate formula now gives the adjunct of its inverse, using the scalarPull identification from step 1.",
+   "uses": [
+    "lem-sf-exact-localization-inverse-mate",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert scalarPull_tensor_coefficient_coherence to obtain the equation for the inverse scalar tensorators and inverse geometric tensorators. Compare the inverses of the two desired composite isomorphisms under the S-open Hom equivalence. Substitute the open coefficient adjunct from step 2 and the defining adjuncts of openProjectionInverse; the latter are the inverses of openProjectionIso by the existing open-projection invertibility theorem. Naturality moves the coefficient comparison and scalar tensorator across the open unit. Apply the inverted tensor-coherence equation, cancel scalarPull.hom with scalarPull.inv in the second tensor factor, and use naturality of the S-restriction tensorator. The two adjuncts agree. Injectivity gives equality of inverse isomorphisms, and taking inverses gives the asserted forward equation.",
+   "uses": [
+    "lem-sf-scalar-pull-tensor-coefficient-coherence",
+    "lem-sp-intrinsic-open-projection-invertible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sf-exact-localization-inverse-mate",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-sf-scalar-pull-tensor-coefficient-coherence",
+  "lem-sp-intrinsic-open-projection-invertible"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "Q7",
+  "date": "2026-10-27",
+  "note": "Lean mate calculation from the already stated sheaf-change adjunction, exact-localization inverse-mate theorem and scalar/pullback tensor coherence. The tensor calculation adapts the generic private tensor_square proof in Sheaf.SixFunctors.OpenScalarTensorNormalization to objectwise projection isomorphisms and arbitrary coefficient sheaves. No new statement or split."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient change commutes with the projection isomorphism for extension by zero along an open immersion",
+   "results": "8 hits: groupCohomology.π_comp_H0Iso_hom_apply, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_fst, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.ProjectiveResolution.Hom.hom_f_zero_comp_π_f_zero, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion",
+   "date": "2026-10-26",
+   "verdict": "No theorem for these arbitrary ring-sheaf coefficient systems and normalized derived tensor models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open extension by zero projection isomorphism commutes with change of coefficient rings and composition of pullback",
+   "results": "8 hits: ModuleCat.extendScalarsComp, ModuleCat.homEquiv_extendScalarsComp, BoundedContinuousFunction.extend_comp, LocallyConstant.comapₗ_apply_apply, ExteriorAlgebra.toTrivSqZeroExt_comp_map, LocallyConstant.comapₐ_apply_apply, Finsupp.lmapDomain_comp, IsAdicComplete.StrictMono.factorPow_comp_extend",
+   "date": "2026-10-26",
+   "verdict": "No theorem for these arbitrary ring-sheaf coefficient systems and normalized derived tensor models."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*scalar|scalar.*projection",
+   "results": "1 hits: Mathlib/Analysis/CStarAlgebra/Projection.lean",
+   "date": "2026-10-26",
+   "verdict": "No theorem for these arbitrary ring-sheaf coefficient systems and normalized derived tensor models."
+  },
+  {
+   "tool": "grep",
+   "query": "rg scalarPull.*tensor|tensor.*scalarPull|extension.*zero.*tensor|tensor.*extension.*zero in Mathlib/CategoryTheory and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "No matching declaration. Repository search found only fixed constant-coefficient specializations and the existing restricted-domain projection factor statement.",
+   "date": "2026-10-26",
+   "verdict": "No generic coefficient-sheaf result with these canonical normalized maps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenProjectionFactorCoefficientChange",
+  "date": "2026-10-27",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Actual-map coefficient reduction, step 3: the open-unit tensor identity and pullback-compositor pasting",
+   "via": [
+    "lem-pur-compact-support-projection-coefficient-change",
+    "lem-sf-concrete-integral-projection-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenProjectionIsoCoefficientChange",
+  "file": "lean/Sheaf/Paper/OpenProjectionIsoCoefficientChange.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.openProjectionIso_coefficient_change",
+  "statement": "theorem openProjectionIso_coefficient_change {R S : Coefficients.{u}} (a : Change R S) {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] (aU : ProEtaleTensorModel U (R.ring U)) (aV : ProEtaleTensorModel V (R.ring V)) (bU : ProEtaleTensorModel U (S.ring U)) (bV : ProEtaleTensorModel V (S.ring V)) (M : DerivedCategory (pbcModules U (R.ring U))) (Q : DerivedCategory (pbcModules V (R.ring V))) : (pbcDerivedExtend (a.map V)).map (openProjectionIso R j aU aV M Q).hom ≫ (openComparison a j).app (aU.tensor.obj (M, (pull R j).obj Q)) ≫ (openExtension S j).mapDerivedCategory.map ((scalarTensor (a.map U) aU bU).hom.app (M, (pull R j).obj Q) ≫ bU.tensor.map (Prod.mkHom (𝟙 _) ((scalarPull a j).hom.app Q))) = (scalarTensor (a.map V) aV bV).hom.app ((openExtension R j).mapDerivedCategory.obj M, Q) ≫ bV.tensor.map (Prod.mkHom ((openComparison a j).app M) (𝟙 _)) ≫ (openProjectionIso S j bU bV ((pbcDerivedExtend (a.map U)).obj M) ((pbcDerivedExtend (a.map V)).obj Q)).hom",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T235843-L-1461170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T021352-L-2762543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

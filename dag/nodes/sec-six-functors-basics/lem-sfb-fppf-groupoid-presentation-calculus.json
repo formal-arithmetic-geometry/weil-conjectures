@@ -1,0 +1,188 @@
+{
+ "id": "lem-sfb-fppf-groupoid-presentation-calculus",
+ "kind": "statement",
+ "title": "Base change of finite locally free groupoid quotient stacks",
+ "statement": "Work over a field $k$ [def-weil-field], with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space], algebraic stacks [def-sfb-algebraic-moduli-stack], and the $2$-fibre products of [def-sfb-stable-pointed-moduli-groupoids]. Representable means representable by algebraic spaces. Properties of representable morphisms are tested after scheme base change on etale scheme charts. For a groupoid scheme $(P,Q,s,t,e,i,c)$ [def-a1-scheme-groupoid-laws], write $[P/Q]$ for the fppf stackification [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description] of the groupoid with objects $P(T)$ and arrows $Q(T)$ on every test scheme $T$. Assume $s,t:Q\\to P$ are finite locally free [def-pc-finite-locally-free]. For any map $P\\to B$ to an algebraic space that is invariant under $Q$ (its composites with $s$ and $t$ agree), and any algebraic-space map $B'\\to B$, quotient formation commutes with this base change: $[P_{B'}/Q_{B'}]\\simeq[P/Q]\\times_B B'$. The base-changed objects $P_{B'},Q_{B'}$ may be algebraic spaces; their quotient means the fppf stackification of their groupoid of test-scheme points, by the same definition.",
+ "source": {
+  "document": "literature/stacks-project/groupoids-quotients.tex",
+  "place": "Tag 0DTG (lemma-base-change-quotient-stack), for a groupoid with finite locally free source and target."
+ },
+ "stmt_deps": [
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-scheme-groupoid-quotient-presentation",
+  "def-sfb-space-groupoid-quotient-presentation",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Regard the $k$-schemes $P,Q$ as their actual representable fppf sheaves, hence as algebraic spaces, by [def-trf-scheme-algebraic-space]. This retains $P(T),Q(T)$ and all their structure maps on every test scheme. Thus the functorial groupoid laws of [def-a1-scheme-groupoid-laws] give the same groupoid in algebraic spaces over $\\operatorname{Spec}k$. Write $a:P\\to B$. The given equality $as=at$ is exactly invariance of $a$. On test schemes the base-changed objects are pairs $(p,b')$ and $(q,b')$ with $a(p)=g(b')$ and $as(q)=g(b')$ respectively; all groupoid operations retain the second coordinate. The source, target, unit, inverse and composition laws therefore remain the original laws in the first coordinate. These are precisely the base changes appearing in the existing invariant-base-change theorem.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids-quotients.tex",
+    "place": "Tag 0DTG (lemma-base-change-quotient-stack), hypotheses; scheme-as-space convention of Tags 025Y and 03G1 in def-trf-scheme-algebraic-space."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-quotient-stack-invariant-base-change] with $S=\\operatorname{Spec}k$, $(U,R)=(P,Q)$, $X=B$ and $X_1=B'$. Step 1 verifies its groupoid and invariance hypotheses; $B,B'$ and $g:B'\\to B$ are the algebraic spaces and map required there. Its quotient notation is the fppf stackification of the same test-scheme groupoids used in this statement, including when $P_{B'}$ and $Q_{B'}$ are only algebraic spaces. The resulting 2-cartesian square has top row $[P_{B'}/Q_{B'}]\\to[P/Q]$ and bottom row $B'\\to B$, so its universal comparison is exactly $[P_{B'}/Q_{B'}]\\simeq[P/Q]\\times_B B'$. The cited theorem has no finiteness or flatness hypothesis, so the assumed finite local freeness of $s,t$ imposes no additional verification for this application.",
+   "uses": [
+    "lem-sfb-quotient-stack-invariant-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids-quotients.tex",
+    "place": "Tag 0DTG (lemma-base-change-quotient-stack), applied with S = Spec k, U = P, R = Q, X = B and X′ = B′."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-scheme-groupoid-laws",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-quotient-stack-invariant-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids-quotients.tex",
+  "place": "Tag 0DTG (lemma-base-change-quotient-stack), applied with S = Spec k, U = P, R = Q, X = B and X′ = B′."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free surjective scheme cover of an algebraic stack presents the stack as its quotient groupoid with invariant open substacks and quotient stack formation commuting with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.JointlySurjective\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on precoverages of the category of schemes, asserting that for every scheme $X$, the covering sieves assigned to $X$ consist of families of morphisms with codomain $X$ whose images cover $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The precoverage on the category of schemes induced by the forgetful functor to types, where a family of morphisms is covering if their images in the underlying sets form a jointly surjective family.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"Given a precoverage $K$ on the category of schemes, the cover associated to $K$ is the zero hypercover defined by $K$, which consists of a collection of covering sieves for each scheme in the category\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.Scheme.JointlySurjective (AlgebraicGeometry.Scheme.precoverage P)\", \"doc\": \"The precoverage on the category of schemes, defined as the intersection of the jointly surjective precoverage and the precoverage generated by a morphism property $ P $, satisfies the jointly surjecti\"}\n  {\"name\": \"AlgebraicGeometry.instUniqueI₀SchemeCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {X S : AlgebraicGeometry.Scheme} →\\n    (f : X ⟶ S) →\\n      (hf : P f) → [inst : AlgebraicGeometry.Surjective f] → Unique (AlgebraicGeometry.Scheme.Hom.cover f hf).I₀\", \"doc\": \"Let $P$ be a property of morphisms between schemes, and let $f: X \\\\to S$ be a surjective morphism of schemes that satisfies property $P$. The cover generated by the single morphism $f$ has a zeroth in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.precoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The precoverage on the category of schemes is defined as the intersection of the jointly surjective precoverage (where a family of morphisms is covering if their images form a jointly surjective famil\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.cover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] (x : PUnit.{v + 1}), (AlgebraicGeometry.Scheme.Hom.cover f hf).X x = X\", \"doc\": \"For a surjective morphism $ f: X \\to S $ of schemes satisfying a morphism property $ P $, the $ X $-component of the covering sieve $\\\\{f\\\\}$ in the precoverage defined by jointly surjective families and\"}\n  {\"name\": \"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X),\\n  AlgebraicGeometry.Surjective (CategoryTheory.Limits.Sigma.desc fun i => 𝒰.f i)\", \"doc\": \"For any scheme $ X $ and a cover $ \\\\mathcal{U} $ of $ X $ defined by a precoverage $ P $, the morphism obtained by taking the coproduct (disjoint union) of the morphisms $ \\\\mathcal{U}.f(i) $ in the co\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract categorical groupoids, manifolds or representation invariants; none supplies the asserted algebraic-stack or finite-flat-groupoid result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf quotient stacks of groupoid schemes have the original groupoid as kernel pair and invariant opens correspond to open substacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib.CategoryTheory.Galois.EssSurj\", \"type\": \"(V : OpenSubgroup (Aut F)) : ∃ (X : C), Nonempty ((functorToAction F).obj X ≅ Aut F ⧸ₐ V.toSubgroup)\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.ker\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \": Subgroupoid C\", \"doc\": \"Given a functor $\\\\phi : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between groupoids, the kernel subgroupoid of $\\\\phi$ is the subgroupoid of $\\\\mathcal{C}$ consisting of all morphisms $f$ such that $\\\\phi(f)$ is an i\"}\n  {\"name\": \"Rep.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [inst_2 : S.Normal] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative semiring $ k $, group $ G $, $ k $-module $ V $ with representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S \\\\trianglelefteq G $, this constructs the representa\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor_obj_V\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] (X : Rep k G),\\n  ((Rep.quotientToInvariantsFunctor k S).obj X).V =\\n    ModuleCat.of k ↥(Representation.invariants (MonoidHom.comp X.ρ S.subtype))\", \"doc\": \"For a commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $X$ of $G$, the underlying module of the quotient-to-invariants functor applied to $X$ is t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": Opens Y\", \"doc\": \"The open subset of $ Y $ consisting of points where the section induced by the coequalizer morphism $ \\\\pi : Y \\\\to \\\\text{Coequalizer}(f, g) $ is a unit in the stalk of the structure sheaf. This is cons\"}\n  {\"name\": \"QuotientGroup.discreteTopology_iff\", \"module\": \"Mathlib.Topology.Algebra.Group.Quotient\", \"type\": \": DiscreteTopology (G ⧸ N) ↔ IsOpen (N : Set G)\", \"doc\": \"The quotient group $ G/N $ has the discrete topology if and only if the subgroup $ N $ is open in $ G $.\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : Group G] → (S : Subgroup G) → [inst_2 : S.Normal] → CategoryTheory.Functor (Rep k G) (Rep k (G ⧸ S))\", \"doc\": \"A functor from the category of representations of a group $ G $ over a commutative ring $ k $ to the category of representations of the quotient group $ G/S $, where $ S \\trianglelefteq G $ is a normal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) : IdealSheafData Y\", \"doc\": \"For a morphism of schemes $f : X \\\\to Y$, the kernel of $f$ is the ideal sheaf data on $Y$ constructed from the kernels of the ring homomorphisms on sections over affine open sets. Specifically, for ea\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract categorical groupoids, manifolds or representation invariants; none supplies the asserted algebraic-stack or finite-flat-groupoid result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Groupoid\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract categorical groupoids, manifolds or representation invariants; none supplies the asserted algebraic-stack or finite-flat-groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.stack|invariant.open.substack|fppf.*groupoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms, abstract categorical groupoids, manifolds or representation invariants; none supplies the asserted algebraic-stack or finite-flat-groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.stack|stackification|fppf.*groupoid",
+   "results": "{\"t\": \"2026-10-23T11:46:25Z\", \"tool\": \"grep\", \"query\": \"quotient.stack|stackification|fppf.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: stack-to-prestack implications, descent-condition definitions, scheme module pseudofunctor coherence, and morphism-property stability do not assert base change of fppf quotient stacks.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fppf stackification of a groupoid after base change is the two fiber product of its quotient stack with the new base",
+   "results": "{\"t\": \"2026-10-23T11:46:26Z\", \"tool\": \"leansearch\", \"query\": \"The fppf stackification of a groupoid after base change is the two fiber product of its quotient stack with the new base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\"], \"digest\": \"d388c19bd3f2ace7\"}; Read the returned signatures: stack-to-prestack implications, descent-condition definitions, scheme module pseudofunctor coherence, and morphism-property stability do not assert base change of fppf quotient stacks.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T11:46:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Stack\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: stack-to-prestack implications, descent-condition definitions, scheme module pseudofunctor coherence, and morphism-property stability do not assert base change of fppf quotient stacks.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient stack of a groupoid in algebraic spaces commutes with base change along an invariant morphism",
+   "results": "{\"t\": \"2026-10-23T11:46:27Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient stack of a groupoid in algebraic spaces commutes with base change along an invariant morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.comp_c\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.comp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\"], \"digest\": \"391dbd582d3207ae\"}; Read the returned signatures: stack-to-prestack implications, descent-condition definitions, scheme module pseudofunctor coherence, and morphism-property stability do not assert base change of fppf quotient stacks.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Descent of each overlap of the chosen affine groupoid charts, with cartesian squares and their uniform categorical properties. Supporting input to Tag 0DUS: Tag 0DTG (lemma-base-change-quotient-stack), for a groupoid with finite locally free source and target.",
+   "via": [
+    "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-groupoid-presentation-calculus",
+  "worker": "stage1",
+  "summary": "Reused the already existing, strictly more general 0DTG node instead of adding a duplicate or reproving its descent argument. Verified the scheme-as-space interpretation and every specialization hypothesis. Normalized doubled TeX backslashes without changing the mathematical statement. No new nodes.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), inherited alteration/moduli prerequisite through the Keel--Mori local comparison. This item realizes only the 0DTG supporting input named in its existing from.place. ancestor returns None for this inherited support chain; retained the existing null ancestor, exact place and full via chain. Whole-blueprint searches for quotient stack, stackification and 0DTG found no imported equivalent.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-b791b3548",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-b791b3548 (reviewer sub-agent of L); spot-checked: I read Stacks 0DTG (groupoids-quotients.tex lemma-base-change-quotient-stack, l.165) with its proof. The item is Stacks' lemma with S=B=Spec k, U,R schemes and an extra hypothesis that s,t are finite locally free. That hypothesis is kept although the proof does not use it. The statement is byte-identical to live, so the target is not weakened, and live still has the item unsplit with an empty proof, so no other group has superseded it. Step 1 is correctly marked elementary: it regards P,Q as algebraic spaces through h_T (def-trf-scheme-algebraic-space), gets the groupoid laws from def-a1-scheme-groupoid-laws, and checks invariance as=at and the T-points of the base changes, (p,b') and (q,b'). Step 2 applies the existing same-unit node lem-sfb-quotient-stack-invariant-base-change (NW, unsplit, proof_deps empty, no cycle) with S=Spec k, (U,R)=(P,Q), X=B, X_1=B'. That node states 0DTG faithfully. Its quotients are the same fppf stackifications and its 2-fibre products come from the same definition node, and its 2-cartesian square gives exactly the item's equivalence. Only the cited statement is used, not its proof. The citer lem-sfb-etale-stabilizer-preserving-affine-moduli uses the item for an invariant map U→M and an étale N_i→M, which the item covers. Edge cases pass: empty P, B'=B, the trivial groupoid, a finite group acting on a point (automorphisms are kept), and a non-flat B'. There are no new nodes. grep 0DTG finds only the item, the general node and its two creators/citers. The item is a strict specialization of the existing general node, which is legitimate reuse rather than D1/D2. Maintainer note: merging the item into lem-sfb-quotient-stack-invariant-base-change, both created 2026-10-23 for the same tag, could be considered. The route stays inside unit sk-thm-sf-ctf-stability, tool_uses are empty, there is no SGA source, and blueprint from/same_as are filled. Batch 5: the newly cited def-trf-scheme-algebraic-space is only the general definition of a scheme as an algebraic space, outside the trace-formula and Poincaré-duality statements and their proofs, so it is acceptable. Four Mathlib searches are recorded and none matched. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfGroupoidPresentationBaseChange",
+  "declaration": "CategoryTheory.fppf_groupoid_presentation_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfGroupoidPresentationBaseChange.lean",
+  "statement": "theorem fppf_groupoid_presentation_baseChange (k : Type u) [Field k] {U R : Over (Spec (.of k))} (s t : R ⟶ U) (e : U.left ⟶ R.left) (i : R.left ⟶ R.left) (c : pullback s.left t.left ⟶ R.left) [s.left.IsFiniteLocallyFree] [t.left.IsFiniteLocallyFree] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (aF : BasedFunctor (discreteModuli (yoneda.obj U)) F) (hF : SchemeGroupoidQuotientPresentation s t e i c F aF) (B : AlgebraicSpace (Spec (.of k))) (a : yoneda.obj U ⟶ B.obj.obj) (ha : yoneda.map s ≫ a = yoneda.map t ≫ a) : ∃ f : BasedFunctor F (discreteModuli B.obj.obj), Nonempty (ModuliTwoIso (aF.comp f) (discreteModuliMap a)) ∧ ∀ (B' U' R' : AlgebraicSpace (Spec (.of k))) (g : B'.obj.obj ⟶ B.obj.obj) (p : U'.obj.obj ⟶ yoneda.obj U) (b : U'.obj.obj ⟶ B'.obj.obj) (q : R'.obj.obj ⟶ yoneda.obj R) (d : R'.obj.obj ⟶ B'.obj.obj), IsPullback p b a g → IsPullback q d (yoneda.map s ≫ a) g → ∃ (s' t' : R'.obj.obj ⟶ U'.obj.obj) (e' : U'.obj.obj ⟶ R'.obj.obj) (i' : R'.obj.obj ⟶ R'.obj.obj) (c' : pullback s' t' ⟶ R'.obj.obj) (a' : BasedFunctor (discreteModuli U'.obj.obj) (moduliTwoFiberProduct f (discreteModuliMap g))), s' ≫ p = q ≫ yoneda.map s ∧ t' ≫ p = q ≫ yoneda.map t ∧ s' ≫ b = d ∧ t' ≫ b = d ∧ e' ≫ d = b ∧ i' ≫ d = d ∧ c' ≫ d = pullback.fst s' t' ≫ d ∧ (∀ (T : Over (Spec (.of k))) (x : yoneda.obj T ⟶ U'.obj.obj), (yoneda.preimage (x ≫ e' ≫ q)).left = (yoneda.preimage (x ≫ p)).left ≫ e) ∧ (∀ (T : Over (Spec (.of k))) (r : yoneda.obj T ⟶ R'.obj.obj), (yoneda.preimage (r ≫ i' ≫ q)).left = (yoneda.preimage (r ≫ q)).left ≫ i) ∧ (∀ (T : Over (Spec (.of k))) (z : yoneda.obj T ⟶ pullback s' t') (z₀ : T.left ⟶ pullback s.left t.left), z₀ ≫ pullback.fst s.left t.left = (yoneda.preimage (z ≫ pullback.fst s' t' ≫ q)).left → z₀ ≫ pullback.snd s.left t.left = (yoneda.preimage (z ≫ pullback.snd s' t' ≫ q)).left → (yoneda.preimage (z ≫ c' ≫ q)).left = z₀ ≫ c) ∧ ∃ (h' : SpaceGroupoidQuotientPresentation s' t' e' i' c' (moduliTwoFiberProduct f (discreteModuliMap g)) a') (ε : ModuliTwoIso (a'.comp (moduliTwoFiberFst f (discreteModuliMap g))) ((discreteModuliMap p).comp aF)), (∀ (T : Over (Spec (.of k))) (x y : yoneda.obj T ⟶ U'.obj.obj) (r' : {r : yoneda.obj T ⟶ R'.obj.obj // r ≫ s' = x ∧ r ≫ t' = y}) (r₀ : {r : yoneda.obj T ⟶ yoneda.obj R // r ≫ yoneda.map s = x ≫ p ∧ r ≫ yoneda.map t = y ≫ p}), r'.val ≫ q = r₀.val → (moduliTwoFiberFst f (discreteModuliMap g)).map (spaceGroupoidPresentationArrow s' t' a' h'.arrows x y r') ≫ ε.val.hom.app (CostructuredArrow.mk y) = ε.val.hom.app (CostructuredArrow.mk x) ≫ schemeGroupoidPresentationArrow s t aF hF.arrows (x ≫ p) (y ≫ p) r₀) ∧ Nonempty (ModuliTwoIso (a'.comp (moduliTwoFiberSnd f (discreteModuliMap g))) (discreteModuliMap b))",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The actual 2-fibre product is characterized as a quotient presentation of the actual presheaf-pullback groupoid. Both projections and the original arrow identification are retained. Quantification over pullback realizations specifies base change without choosing schemes for objects that may only be algebraic spaces. Added existing landed definition owners for the two quotient presentation interfaces and the second 2-fibre projection; no mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4df95e133",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read node, Stacks 0DTG (groupoids-quotients.tex l.165), item module, report, and the cited SchemeGroupoidQuotientPresentation, SpaceGroupoidQuotientPresentation, moduliTwoFiberProduct/Fst/Snd and IsPresheafGroupoid. lean.statement verbatim; proof sorry only; no new nodes; stmt_deps additions are the landed owners of declarations used. Every hypothesis matches the node (field, IsGroupoid via hF, finite locally free s,t, invariant a, arbitrary g, algebraic-space pullback realizations), with no extra assumption. Conclusion: the product is a quotient presentation of the base-changed groupoid; s',t',e',i',c' are pinned on both coordinates with c orientation matching IsGroupoid; f is unique (discrete target); ε plus the arrow clause plus snd≅b fix the canonical comparison. Edge cases ok (B'=∅, g=id, Q=P, BG, non-flat g); universes v,w,u free. General node lem-sfb-quotient-stack-invariant-base-change has no lean record. Advisory only: docstring wrongly calls the last clause an objectwise equality."
+ }
+}

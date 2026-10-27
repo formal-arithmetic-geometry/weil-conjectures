@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-space-groupoid-quotient-presentation",
+ "kind": "definition",
+ "title": "Presentation of the fppf quotient stack of an algebraic-space groupoid",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] with universes as in [def-weil-size-convention], and $U,R$ algebraic spaces over $S$ [def-trf-algebraic-space]. Write $h_U,h_R$ for their underlying presheaves. Suppose natural transformations $s,t:h_R\\to h_U$, $e:h_U\\to h_R$, $i:h_R\\to h_R$, and $c:h_R\\times_{s,h_U,t}h_R\\to h_R$ satisfy the test-scheme groupoid laws [def-sfb-algebraic-space-groupoid], with $c(q,r)=q\\circ r$. Let $F$ be a category over $\\mathit{Sch}/S$ and $a:h_U\\to F$ a functor over that base, using the discrete fibred-groupoid and vertical 2-isomorphism conventions of [def-sfb-stable-pointed-moduli-groupoids]. A quotient presentation consists of the following data and properties: $F$ is an fppf stack [def-sfb-fppf-stackification]; a vertical natural isomorphism $\\eta:a\\circ s\\cong a\\circ t$; for every test scheme $T/S$, points $x,y\\in U(T)$, and vertical arrow $\\beta:a(x)\\to a(y)$, there is exactly one $r\\in R(T)$ with $s(r)=x$, $t(r)=y$ and $\\eta_r=\\beta$, after transporting by the endpoint equalities; every object $z$ of $F$ over $T$ has a covering sieve $V$ in the big fppf topology [def-pc-fppf-site] such that for every $f:T'\\to T$ in $V$ there are $x\\in U(T')$ and an arrow $a(x)\\to z$ over $f$; and $\\eta_r$ followed by $\\eta_q$ equals $\\eta_{c(q,r)}$ for every composable pair. These conditions express that $F$ with this map and arrow comparison is the fppf stackification $[U/R]$; no stackification object, atlas or groupoid flatness is chosen.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-fppf-stackification",
+  "def-pc-fppf-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tags 044Q, 044R and 044T (definition-quotient-stack, lemma-quotient-stack-arrows, lemma-quotient-stack-cocycle); stacks.tex, Tags 02ZP and 0436, local description and universal property."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Presentation of the quotient stack of a groupoid in algebraic spaces by fully faithful arrows and local objects",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData; CategoryTheory.Groupoid.ofFullyFaithfulToGroupoid; CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff; LightCondSet.LocallyConstant.functorFullyFaithful; CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; CategoryTheory.Quotient.groupoid; CategoryTheory.Functor.FullyFaithful.autMulEquivOfFullyFaithful.",
+   "date": "2026-10-24",
+   "verdict": "no match: general category or descent facts, not this presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic space groupoid quotient stack presentation",
+   "results": "[leanfinder] OK 8 hit(s): hasGroupoid_model_space; CategoryTheory.Pseudofunctor.IsStack.toIsPrestack; Pregroupoid.groupoid; CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor; CategoryTheory.Pseudofunctor.IsStack.of_isStackFor; CategoryTheory.Pseudofunctor.IsStack; CategoryTheory.Pseudofunctor.isStackFor'; CategoryTheory.Pseudofunctor.IsStackFor.",
+   "date": "2026-10-24",
+   "verdict": "no match: manifolds or general stack predicates"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpaceGroupoidQuotientPresentation|spaceGroupoidPresentationArrow",
+   "results": "[grep] OK 0 hit(s). Direct rg of lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json also returned no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "blueprint_refs.py search; DAG search",
+   "query": "groupoid quotient presentation",
+   "results": "0 blueprint nodes match 'groupoid quotient presentation'. DAG definition-title inspection found def-sfb-scheme-groupoid-quotient-presentation, which requires U and R to be schemes; def-sfb-algebraic-space-groupoid supplies laws but no quotient presentation.",
+   "date": "2026-10-24",
+   "verdict": "no existing node for the algebraic-space presentation"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-classifying-stack-flatness",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison. Supporting neutral-section input for the smooth atlas argument (06QG(3)). In the neutral-section proof: Tag 06QG invokes the converse direction of criteria Lemma 06PL after identifying the stack with the trivial-action quotient. The groupoid stackification used in the statement needs its algebraic-space quotient presentation, including arrows and local objects.",
+   "via": [
+    "lem-sfb-algebraic-classifying-stack-flatness",
+    "lem-sfb-neutral-gerbe-section-fppf",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGroupoidQuotientPresentation",
+  "declaration": "CategoryTheory.SpaceGroupoidQuotientPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGroupoidQuotientPresentation.lean",
+  "statement": "structure SpaceGroupoidQuotientPresentation {S : Scheme.{u}} {U R : AlgebraicSpace S} (s t : R.obj.obj ⟶ U.obj.obj) (e : U.obj.obj ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : pullback s t ⟶ R.obj.obj) (F : BasedCategory.{v, w} (Over S)) (a : BasedFunctor (discreteModuli U.obj.obj) F)",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.spaceGroupoidPresentationArrow",
+   "CategoryTheory.SpaceGroupoidQuotientPresentation"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25d6db84d",
+  "group": "NX",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25d6db84d",
+  "group": "NX",
+  "result": "pass",
+  "note": "Unchanged after the stopped background search (it found only the stage-1 Q43 run, no competing definition). Live and side-live contain only the scheme presentation from Q50. Item and new def node match the source and the records; sorry-only proof; no files changed or compiled."
+ }
+}

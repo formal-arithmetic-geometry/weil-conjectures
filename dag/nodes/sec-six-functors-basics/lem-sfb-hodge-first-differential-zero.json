@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-hodge-first-differential-zero",
+ "kind": "statement",
+ "title": "The first Hodge differential vanishes in characteristic zero",
+ "statement": "Let $F$ be a field of characteristic zero [def-weil-field] and let $W$ be a smooth projective $F$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-projective-morphism]. No connectedness or geometric integrality is assumed. Let $\\Omega^1_{W/F}$ be the sheaf of Kähler differentials obtained by gluing $\\Omega_{A/F}$ on affine opens [def-weil-pbc-kahler-differentials], and let $d:\\mathcal O_W\\to\\Omega^1_{W/F}$ be the universal $F$-linear derivation. For every $q\\geq0$ the induced map\n$$H^q(W,d):H^q(W,\\mathcal O_W)\\longrightarrow H^q(W,\\Omega^1_{W/F})$$\nis zero. The induced map is formed in Zariski sheaves of $F$-vector spaces; their cohomology on these sheaves agrees canonically with ordinary module sheaf cohomology [pqf-def-cohomology]. In particular this does not regard $d$ as an $\\mathcal O_W$-linear map. The field $F$ need not admit an embedding into $\\mathbf C$.",
+ "source": {
+  "document": "literature/popa-kodaira-dimension.pdf",
+  "place": "WANTED locally: Popa, Kodaira dimension of algebraic varieties, proof of Theorem 1.6.6, printed pp.26--27 (Hodge-to-de Rham degeneration and harmonic forms); section 1.6 opening paragraph, p.22, characteristic-zero scope. Read online at https://people.math.harvard.edu/~mpopa/271/Kodaira-posted.pdf. Arbitrary characteristic-zero field formulation is the algebraic form of that Hodge input, obtained by finite-field-of-definition descent and extension of scalars."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-weil-pbc-kahler-differentials",
+  "pqf-def-cohomology",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply the field-model lemma to obtain $k\\subseteq F$, $X_0/k$ and $\\sigma:k\\hookrightarrow\\mathbf C$, with $X_0\\times_kF\\cong W$. Put $Y=X_0\\times_{k,\\sigma}\\mathbf C$. Both schemes to which complex comparison will be applied are smooth projective; no geometric integrality or connectedness is used.",
+   "uses": [
+    "lem-sfb-smooth-projective-complex-field-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation), 01ZP (lemma-descend-closed-immersion-finite-presentation), 0C0C (lemma-descend-smooth), applied to the directed union of finitely generated subfields of F. The complex embedding clause is the elementary transcendence-basis/algebraic-extension argument, expanded in report.md."
+   }
+  },
+  {
+   "text": "Fix $q\\geq0$ and $a\\in H^q(Y,\\mathcal O_Y)$. The comparison lemma identifies it with a Dolbeault class $c_{0,q}(a)$ on $M=Y^{\\mathrm{an}}$. Choose the harmonic representative $\\alpha$ supplied by the harmonic-representative lemma. That lemma gives $d_{\\mathrm{an}}\\alpha=0$. Since $d_{\\mathrm{an}}\\alpha=\\partial\\alpha+\\bar\\partial\\alpha$ and the two summands have distinct types, $\\partial\\alpha=0$. The comparison formula is $c_{1,q}(H^q(Y,d_Y)(a))=[(-1)^q\\partial\\alpha]=0$. Injectivity of $c_{1,q}$ shows $H^q(Y,d_Y)(a)=0$. As $a$ was arbitrary, $H^q(Y,d_Y)=0$. This works on the finite union of components, including the empty union.",
+   "uses": [
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-projective-harmonic-representatives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "WANTED locally: Popa, proof of Theorem 1.6.6, printed pp.26--27, algebraic cohomology identified with forms of types (0,j) and (1,j). Read online https://people.math.harvard.edu/~mpopa/271/Kodaira-posted.pdf. The comparison here makes explicit the GAGA and Dolbeault compatibility used there."
+   }
+  },
+  {
+   "text": "Write $u_0=H^q(X_0,d_{X_0})$. Apply the scalar-extension square to $k\\xrightarrow{\\sigma}\\mathbf C$. Its isomorphisms and step 2 show $u_0\\otimes_k\\mathrm{id}_{\\mathbf C}=0$. Scalar extension of vector spaces along a field embedding detects zero maps: if $v=u_0(x)\\ne0$, extend $v$ to a basis of its target and let $\\lambda$ be the $k$-linear coordinate functional with $\\lambda(v)=1$; then $(\\lambda\\otimes\\mathrm{id})(v\\otimes1)=1$, contradicting $v\\otimes1=0$. Hence $u_0=0$. The coordinate functional uses only elementary linear algebra.",
+   "uses": [
+    "lem-sfb-derivation-cohomology-scalar-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tag 02KH, coherent-lemma-flat-base-change-cohomology, separated-case Cech proof; Tag 01F1, cohomology-lemma-modules-abelian. Differential compatibility is the scalar formula d(a tensor lambda)=da tensor lambda and the universal differential base-change isomorphism of lem-weil-pbc-kahler-differentials-base-change; report.md spells out the Cech argument."
+   }
+  },
+  {
+   "text": "Apply the same square to $k\\hookrightarrow F$. It gives $H^q(X_0\\times_kF,d)\\circ\\beta^q_0=\\beta^q_1\\circ(u_0\\otimes\\mathrm{id}_F)=0$. Surjectivity of $\\beta^q_0$ makes $H^q(X_0\\times_kF,d)=0$. Under the model isomorphism with $W$, the universal derivations agree: on an affine chart a ring isomorphism sends $da$ to the differential of its image, by the universal property. Functoriality of right-derived global sections therefore identifies this zero map with $H^q(W,d)$. Since $q$ was arbitrary this proves the statement; no embedding of $F$ into $\\mathbf C$ was chosen.",
+   "uses": [
+    "lem-sfb-derivation-cohomology-scalar-square",
+    "def-weil-pbc-kahler-differentials",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tag 02KH, coherent-lemma-flat-base-change-cohomology, separated-case Cech proof; Tag 01F1, cohomology-lemma-modules-abelian. Differential compatibility is the scalar formula d(a tensor lambda)=da tensor lambda and the universal differential base-change isomorphism of lem-weil-pbc-kahler-differentials-base-change; report.md spells out the Cech argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-projective-complex-field-model",
+  "lem-sfb-algebraic-dolbeault-derivative-comparison",
+  "lem-sfb-projective-harmonic-representatives",
+  "lem-sfb-derivation-cohomology-scalar-square",
+  "def-weil-pbc-kahler-differentials",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/popa-kodaira-dimension.pdf",
+  "place": "Theorem 1.6.6, printed pp.26--27, harmonic-form argument, read online; local PDF WANTED. Agent expansion of field descent and the two scalar squares using Stacks 01ZM, 01ZP, 0C0C, 02KH, 01F1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exterior derivative induces zero on sheaf cohomology of differential forms on a smooth projective variety over a characteristic zero field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"extDeriv_extDeriv\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F}, ContDiff 𝕜 r ω → minSmoothness 𝕜 2 ≤ r → \", \"doc\": \"For a continuously differentiable differential form $\\\\omega$ of degree $n$ over a nontrivially normed field $\\\\mathbb{K}$, if the smoothness order $r$ satisfies $\\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2) \\\\l\"}\n  {\"name\": \"extDeriv_extDeriv_apply\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {x : E}, ContDiffAt 𝕜 r ω x → minSmoothnes\", \"doc\": \"If $\\\\omega$ is a differential form of degree $n$ that is continuously differentiable of order $r$ at a point $x$, where $r$ is at least the minimal smoothness required for the field $\\\\mathbb{K}$, then\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $ x $ in the kernel $ Q.\\\\text{ker} $ with proof $ hx $, the connecting homomorphism $ \\\\delta $ applied to the quotient element $ \\\\langle x, hx \\\\rangle $ equals the auxiliary map $ \\\\del\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence is constructed via the Snake Lemma from the commutative diagram of cotangent complexes as\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern cotangent exactness, d squared zero on smooth manifolds, or de Rham period rings; none proves the induced sheaf-cohomology map vanishes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"deRham\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib.RingTheory.Perfectoid.BDeRham\", \"type\": \" (R : Type u) [CommRing R] (p : ℕ) [Fact (Nat.Prime p)] [Fact ¬IsUnit ↑p] [IsAdicComplete (Ideal.span {↑p}) R] : Type u\", \"doc\": \"The de Rham period ring $\\\\mathbb{B}_{dR}$ for general perfectoid ring.\\nIt is defined as $\\\\mathbb{B}_{dR}^+$ inverting the generators of the ideal `ker θ`.\\nMathematically, this is equivalent to inverti\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib.RingTheory.Perfectoid.BDeRham\", \"type\": \" (R : Type u) [CommRing R] (p : ℕ) [Fact (Nat.Prime p)] [Fact ¬IsUnit ↑p] [IsAdicComplete (Ideal.span {↑p}) R] : Type u\", \"doc\": \"The de Rham period ring $\\\\mathbb{B}_{dR}^+$ for general perfectoid ring.\\nIt is the completion of `𝕎 R♭` inverting `p` with respect to the kernel of\\nthe Fontaine's θ map. When $R = \\\\mathcal{O}_{\\\\mathbb\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib.RingTheory.Perfectoid.BDeRham\", \"type\": \" (R : Type u_1) [CommRing R] (p : ℕ) [Fact (Nat.Prime p)] [Fact ¬IsUnit ↑p] [IsAdicComplete (Ideal.span {↑p}) R] : CommRing (BDeRhamPlus R p)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern cotangent exactness, d squared zero on smooth manifolds, or de Rham period rings; none proves the induced sheaf-cohomology map vanishes."
+  },
+  {
+   "tool": "grep",
+   "query": "Hodge|deRham|de.Rham|harmonic.*form",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/Int.lean\", \"line\": \"14\", \"text\": \"The nth Harmonic number is not an integer. We formalize the proof using\"}\n  {\"file\": \"Mathlib/ModelTheory/Fraisse.lean\", \"line\": \"62\", \"text\": \"- [W. Hodges, *A Shorter Model Theory*][Hodges97]\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"line\": \"14\", \"text\": \"# The de Rham Period Ring $\\\\mathbb{B}_{dR}^+$ and $\\\\mathbb{B}_{dR}$\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"line\": \"16\", \"text\": \"In this file, we define the de Rham period ring $\\\\mathbb{B}_{dR}^+$ and\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"line\": \"17\", \"text\": \"the de Rham ring $\\\\mathbb{B}_{dR}$. We define a generalized version of\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"line\": \"19\", \"text\": \"of `ℂₚ` (`PadicComplexInt`), they coincide with the classical de Rham period rings.\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"line\": \"23\", \"text\": \"* `BDeRhamPlus` : The period ring $\\\\mathbb{B}_{dR}^+$.\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"35\", \"text\": \"Fontaine's theta map, perfectoid theory, p-adic Hodge theory\"}\n  {\"file\": \"Mathlib/Data/Fin/Parity.lean\", \"line\": \"19\", \"text\": \"which can be used to prove `d ∘ d = 0` for de Rham cohomologies.\"}\n  {\"file\": \"Mathlib/Analysis/Complex/JensenFormula.lean\", \"line\": \"202\", \"text\": \"  `Mathlib/Analysis/Complex/Harmonic/Poisson` for the classic Poisson Integral Formula, for harmonic\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern cotangent exactness, d squared zero on smooth manifolds, or de Rham period rings; none proves the induced sheaf-cohomology map vanishes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hodge to de Rham degeneration implies the map from cohomology of structure sheaf to cohomology of Kahler differentials is zero in characteristic zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Subsingleton Ω[S⁄R]\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is zero.\"}\n  {\"name\": \"KaehlerDifferential.kerTotal_mkQ_single_algebraMap\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(x y) : (y𝖣algebraMap R S x) = 0\", \"doc\": \"For any elements $x \\\\in R$ and $y \\\\in S$, the application of $y$ to the differential of the algebra map $R \\\\to S$ evaluated at $x$ is zero. This establishes that the differentials of elements in the b\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Function.Exact P.cotangentComplex P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"KaehlerDifferential.derivationQuotKerTotal\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Derivation R S ((S →₀ S) ⧸ KaehlerDifferential.kerTotal R S)\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, this is the universal derivation from $ S $ to the module of Kähler differentials $ \\\\Omega_{S/R} $, constructed as the quotient of th\"}\n  {\"name\": \"Derivation.liftKaehlerDifferential.congr_simp\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {M : Type u_1}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [inst_6 : IsScalarTower R S M]\\n  (D D_1 : Derivation R S M), D = D_1 → D.liftKaehlerDifferential = D_1.liftKaehlerDiffer\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, and an $ S $-module $ M $ equipped with compatible $ R $-module structure and scalar tower, if two derivations $ D $ and $ D_1 $ from\"}\n  {\"name\": \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \"[FinitePresentation R S] [Subsingleton (H1Cotangent R S)] {I : Type*} (b : Module.Basis I S (Ω[S⁄R]))\\n  (hb : Set.range b ⊆ Set.range (D R S)) : IsStandardSmooth R S\", \"doc\": \"If $ S $ is finitely presented over $ R $, the first cohomology group $ H^1 $ of the cotangent complex of $ S $ over $ R $ is trivial, and there exists a basis for the module of Kähler differentials $\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton Ω[A⁄R]\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., contains at most one element).\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern cotangent exactness, d squared zero on smooth manifolds, or de Rham period rings; none proves the induced sheaf-cohomology map vanishes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first differential on the Hodge spectral sequence vanishes for smooth proper schemes in characteristic zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"CochainComplex.ConnectData.d₀_comp\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Connect\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : ChainComplex C ℕ} {L : CochainComplex C ℕ} (self : CochainComplex.ConnectData K L),\\n  CategoryTheory.CategoryStruct.comp self.d₀ (L.d 0 1) = 0\", \"doc\": \"In a category $\\\\mathcal{C}$ with zero morphisms, for a chain complex $K$ and cochain complex $L$ indexed by $\\\\mathbb{N}$ with connecting data, the composition of the zeroth connecting morphism $d_0 : \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern cotangent exactness, d squared zero on smooth manifolds, or de Rham period rings; none proves the induced sheaf-cohomology map vanishes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kollar-smooth-divisor-injectivity",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover.",
+   "via": [
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-hodge-first-differential-zero",
+  "worker": "stage1",
+  "summary": "Preserved the statement, including arbitrary characteristic-zero field, disconnected and empty smooth projective schemes, and vector-sheaf cohomology. Four statement-only supporting inputs isolate the embeddable field model, algebraic/Dolbeault arrow comparison, harmonic representatives, and scalar-extension square. The assembly computes the derivative of a harmonic form and uses faithful scalar extension twice. No exact Lean or Mathlib match. Popa read online; local copy WANTED.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Realizes the Popa Hodge input by the harmonic representative argument and finite field-model descent.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-cohomology",
+    "why": "Only the definition and functoriality of right-derived global sections; it does not supply the non-linear comparison, which is explicitly in the new scalar-square node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-482a5ae9d",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-482a5ae9d (reviewer sub-agent of L); spot-checked: I read the delivery in full; nothing needed fixing. First split of the item: live is still unsplit with no repair note, and the statement and stmt_deps are unchanged. Source: there is no local copy of Popa, so I fetched the author's PDF read-only into /tmp and read §1.6 p.22 and the proof of Thm 1.6.6 on pp.26-27. Popa identifies the two cohomology spaces with forms of types (0,j) and (1,j), takes a harmonic representative and uses that it is d-closed. The split carries exactly this: the comparison node (GAGA + Dolbeault, with H^q(d) corresponding to (-1)^q∂) and the harmonic node (Hodge theory + Kähler identity). I checked that the (-1)^q∂ chain map is a genuine chain map. The extension from C to any char-0 field is the agent's own addition and is marked by=agent. It goes through the field-model node (01ZM/01ZP/0C0C plus a complex embedding of k) and is applied twice through the scalar-square node (02KH plus d(a⊗λ)=da⊗λ), along k→C (β_1 injective, then the coordinate-functional faithfulness argument) and k→F (β_0 surjective, then transport along the isomorphism by the universal property). Each step uses only what the cited statements say. All four new nodes are statement-only, true, and fit their hypotheses; I tested the empty, disconnected, P^1, elliptic-curve and big-transcendence-degree cases, and none asserts the zero map. None is a duplicate: rg over the snapshot and the live/side-live clones for Dolbeault, harmonic, GAGA, Kähler and field-model terms found only the delivery's own nodes and its parent chain, and the existing tag nodes are only generic descent or base-change pieces. The only off-unit citation is the definition pqf-def-cohomology, declared in tool_uses. No SGA source is used. Non-blocking: from.node is null, inherited from the item's chain; the Popa PDF remains WANTED locally."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HodgeFirstDifferentialZero",
+  "declaration": "AlgebraicGeometry.hodge_first_differential_zero",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.fieldLinearUniversalDifferential",
+   "AlgebraicGeometry.Scheme.Modules.fieldLinearUniversalDifferentialCohomology",
+   "AlgebraicGeometry.hodge_first_differential_zero"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HodgeFirstDifferentialZero.lean",
+  "statement": "theorem hodge_first_differential_zero (F : Type u) [Field F] [CharZero F] (W : Scheme.{u}) (f : W ⟶ Spec (CommRingCat.of F)) [Smooth f] [IsProjective f] (q : ℕ) : AlgebraicGeometry.Scheme.Modules.fieldLinearUniversalDifferentialCohomology f q = 0",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Bundles the existing universal derivation as an F-linear sheaf morphism and transports its Ext postcomposition through the existing canonical scalarCohomologyExtEquiv. Helpers have explicit data and are part of the map named in this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75ceb0fca",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item lem-sfb-hodge-first-differential-zero: [Field F][CharZero F], W : Scheme.{u}, f : W ⟶ Spec F, [Smooth f][IsProjective f], all q : ℕ; conclusion fieldLinearUniversalDifferentialCohomology f q = 0. Matches every clause; empty/disconnected/q=0/non-embeddable-field cases covered; shared universe u is forced by the recorded KSheaf/scalarCohomology interface. Helper fieldLinearUniversalDifferential: components are literally relativeDifferentialsDerivation.d, F-linearity proved from d_mul + d(scalarMap r)=0, naturality from d_map. Helper fieldLinearUniversalDifferentialCohomology: postcomposition on Ext from the constant sheaf, conjugated by the landed scalarCohomologyExtEquiv, so canonical with real data. Only lean and stmt_deps changed; the two added stmt_deps are landed def nodes; the 8 dependency files are identical to side-live; lean.statement verbatim; docstrings, conventions and report sections OK; theorem is sorry; nothing pro-etale. Did not recompile, per instructions; worker reports clean compiles. Non-blocking: the PQFCohomology import (a stmt_dep's recorded module) is not used by any term. Maintainer note: the unstated siblings derivation-cohomology-scalar-square and algebraic-dolbeault-derivative-comparison need the same map; move it to a def node then to avoid an import cycle."
+ }
+}

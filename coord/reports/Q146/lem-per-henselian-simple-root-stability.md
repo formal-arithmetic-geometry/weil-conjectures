@@ -1,0 +1,61 @@
+# Stage-1 report: lem-per-henselian-simple-root-stability
+
+## Files written
+
+- dag/nodes/sec-deligne-laumon-a1/lem-per-henselian-simple-root-stability.json — statement, split; no exact Mathlib match. Five explicit proof steps, using one existing root-lifting theorem. No new nodes and no new Mathlib leaves.
+- citations.json — the literal statement clause used at step 4.
+- searches.jsonl — unmodified command-generated search log; the new searches are appended to the item's preserved earlier searches.
+
+## Attachments
+
+None for the item. Searching lean/WeilConjectures by its blueprint tag, removed declaration name, simple-root terminology and the FieldTheory/RingTheory concepts found no project theorem stating arbitrary-rank coefficient perturbation. The recorded removed Sheaf module is historical deletion evidence only. The cited existing node lem-weil-pbc-henselian-local-root-lifting already records IsLocalRing.idempotent_lifting_iff_monic_simple_root_lifting, whose live statement I read at lean/WeilConjectures/RingTheory/HenselianLocalRootLifting.lean:148; I do not change that attachment or its node.
+
+## Sources and WANTED
+
+Read ILO, Travaux de Gabber, XX 4.4, printed p.374 (PDF p.380): its paragraph invokes forms of Krasner's lemma for dense embeddings of henselian valued fields and refers to Bourbaki VI section 8 exercises 12 and 14(a). This motivates the present interface but does not give its proof. Read Stacks algebra.tex Tag 04GG, lemma-characterize-henselian, especially (2), and the existing node's monic formulation, together with Mathlib/RingTheory/Henselian.lean:94–153. No SGA source is used.
+
+WANTED: Bourbaki, Commutative Algebra VI section 8, exercises 12 and 14(a), for the recorded provenance of lem-per-henselian-simple-root-stability. Its text is not present among the supplied literature. The proof delivered here is explicitly marked agent reconstruction from Stacks' root-lifting input, not attributed to unread Bourbaki text.
+
+Read the current latest blueprint's unit, ancestor statement and ancestor proof. The ancestor's Step 3 concerns the duality/local-model input; the more specific strict-completion reconstruction is the recorded provenance of this reopened interface. The current latest blueprint does not separately state the valued-field result. Read the released repair note and Q112 strict-completion boundary; no excluded historical purity or completion comparison is cited.
+
+## Corrections and scope
+
+The interface's statement, source, statement dependencies, prior searches, blueprint ancestry and other preserved metadata are unchanged. There was no current proof to retain. The reconstruction replaces the withdrawn historical proof rather than attempting to reattach the removed module. No statement dispute was found.
+
+A potentially incorrect shortcut would be to apply the existing root-lifting node directly to H: its statement requires a monic polynomial, whereas H reduces to X but need not be monic. The delivered step 4 explicitly constructs a monic Q by a reciprocal substitution, so every hypothesis of the actual cited statement holds. Another invalid shortcut for higher rank would be to take large powers of one chosen small element; the scale is instead chosen beyond a finite maximum of values. Neither rank one, completeness nor excellence is assumed.
+
+## Not duplicates
+
+No new nodes are created. Whole-DAG and whole-blueprint searches for simple roots, henselian roots and coefficient perturbation, together with the source/tag search for 04GG, found the existing monic root-lifting node. It supplies the only non-elementary input. The new calculations are steps of this item, not separate nodes restating the item or a clause of it. There are no new-node/existing-node tag pairs.
+
+## Returned exclusion-conflict repair
+
+The return asks to resolve the no-excellence completion-route exclusion conflict. I read the released stage-1 repair note, Q112's explicit 16-interface boundary, the Q84 boundary addendum and the later Q150 semilocal-withdrawal note. Q112 names this exact interface and withdraws its historical proof and attachment; it does not authorize the previous completion graph. Q150's historical list of queue removals also mentions this id, but the current operative coord/route-pivot-dropped.txt contains neither this id nor the sole proof dependency lem-weil-pbc-henselian-local-root-lifting. The item's released repair note still names Q112 as its route decision. The required initial server dry run passed with the retained reconstruction. Thus this repair uses the exact released interface, rather than attempting to restore an excluded completion theorem.
+
+The preserved blueprint.from.via contains lem-per-punctual-strict-completion-test, which remains excluded. This is historical ancestry, not a cited assertion: neither it nor any completion/purity comparison occurs in proof_deps or a proof step. I preserved that provenance exactly as the release requires. The only proof dependency is the existing local-ring root-lifting equivalence, read at its statement and its live Lean declaration; no excellence, completeness, rank-one assumption, or SGA statement enters the argument.
+
+I retained the prior proof, source, report and search log. This is not an unchanged re-push: step 1 now writes the actual ordered-group inequality for the scaled higher coefficients, and step 3 writes all three normalized coefficient formulas, including the n=1 convention E_n=0. These expose exactly why H reduces to X before invoking monic root lifting. The statement, statement dependencies, source and blueprint metadata agree with the current repository; the prior Mathlib searches are preserved and their recorded hits were read rather than rerun for an unchanged question. No new node or new search was necessary for these finite algebraic calculations.
+
+## Repair of landing refusal at d4a6a303afe
+
+The 2026-10-24 10:36 UTC return says the reader approved the mathematics, but landing refused the completion because the project's DAG completion had not been promoted into the live DAG read by the queue. This is a landing-state refusal, not a failed proof or compilation. I retained the delivered proof, report, citations and logged searches, reread the current released repair note, and rebased the sandbox node by taking the current read-only DAG node as the base and overlaying only the stage-1 fields. All current maintainer-owned fields and blueprint provenance come from that base. The current item is unsplit with an empty proof, whereas the returned sandbox has the five-step split; its statement, source and statement dependencies agree. The current delivery command packages the result on the latest server branch. The initial rebase dry run passed at 0518d87d97d.
+
+I re-read all four dependency statements on this retry: lem-weil-pbc-henselian-local-root-lifting still states exactly the monic simple-residue-root lifting equivalence used by step 4; def-trf-valuation-ring still gives the fraction-field inverse criterion; def-weil-pbc-henselian-terminology still gives the finite-algebra idempotent-lifting formulation; def-weil-polynomial-ring still defines the coefficient polynomial ring. Their statements agree with the previous reading, so no hypothesis or citation was replaced. The root-lifting node still records the closed declaration IsLocalRing.idempotent_lifting_iff_monic_simple_root_lifting, and its current source declaration is at line 148. The step-4 quote remains verbatim in the current node.
+
+To make this a concrete proof repair as well as a fresh-base delivery, step 4 now spells out the leading coefficient sum H(1), proves that it is a unit by its residue 1, and concludes explicitly that H(1)^{-1}P lies in the valuation-ring polynomial ring before calling the monic root-lifting interface. This uses step 3's proved unit criterion, not a new lemma. In particular the n=1 case still gives the same monic linear Q. The five steps, sole proof dependency, edge-case checks, route restrictions and search results are preserved. There are no new nodes or new Mathlib searches.
+
+The refusal itself specifies that L promotes side completions. This worker changes no completion flags, live-DAG configuration, review record or promotion tool. The refreshed delivery is submitted through the required delivery command for the maintainer to land and promote; passing preflight is not represented here as successful landing.
+
+## Review by Q146
+
+I checked B through E of delivery-errors.md against the actual packet and the sources above. For B, there are no new statement-only nodes to audit; the item is self-contained and its existing definition dependencies are retained. All new TeX is written once. Each new Mathlib record is the exact tool/query from this sandbox's command log; both semantic phrasings were run and their hits read. HenselianLocalRing only supplies monic lifting, p-adic Hensel is restricted to p-adic integers, and Polynomial.isCoveringMapOn_eval assumes a proper normed field, so none is the requested arbitrary-rank theorem. The historical searches have not been rewritten.
+
+For C and D I read the statement of lem-weil-pbc-henselian-local-root-lifting, rather than using its proof as an interface. Its (i) is exactly the idempotent-lifting henselian hypothesis in the item's definition node, and its (ii) gives a root reducing to any simple residue root of a monic polynomial. Step 4 constructs precisely such a monic polynomial over the valuation ring, with residue root 1 and derivative 1. citations.json copies the entire (ii) clause verbatim. This is the only non-elementary invocation. I also opened all three statement-definition nodes: valuation ring, henselian terminology, and polynomial ring. The algebraic lifting input is a declared generic tool from another unit; it does not replace the perverse-heart unit's argument.
+
+Step 1 uses no cited theorem: expand f(a+Z), then choose s beyond finitely many valuation bounds. The nondiscrete case ensures such nonzero s exists; the discrete case has the singleton coefficient neighbourhood and is finished separately. This also covers an oversized ambient value group whose valuation topology happens to be discrete. Step 2 writes every coefficient error and a single finite maximum defining an open product V; the valuation inequality for each summand proves the required bounds. These are direct finite binomial and ordered-group calculations, not an implicit continuity/comparison lemma. Step 3 now writes H_0, H_1 and each H_j explicitly and uses precisely these bounds to show H has integral coefficients and reduces to X; it also writes why the positive-valued elements are the unique maximal ideal, by the inverse-value test for units. Step 4 is the cited non-elementary lifting described above, with the reciprocal construction fully written; this retry also verifies explicitly that its normalizing factor H(1) is a unit and hence that Q has integral coefficients. Step 5 evaluates that construction at y, writes b=a+sz, verifies the ball bound, and differentiates the actual polynomial identity to check simplicity. It does not merely assert that simplicity is preserved by transport.
+
+For E I tested degree one (the reciprocal reduction is Y-1 and no higher coefficients exist), a=0 (zero binomial multipliers are omitted), a polynomial with vanishing intermediate coefficients, z=0 (infinite value), residue characteristic dividing n (the derivative of Y^(n-1)(Y-1) at 1 is still 1), and higher-rank groups (only finite inequalities are used). The unperturbed coefficients belong to V and recover a root as required. No statement assumes a Noetherian ring or an excellent valuation ring. The proof graph has a single old dependency, a closed root-lifting node, so it cannot reconstruct the withdrawn completion graph. All steps are below 2000 characters; the longer elementary steps are explicit finite calculations, with no separately assumed sublemma. No remaining mathematical obligation was hidden in a new node.
+
+## Unfinished
+
+No unfinished part of this one-level split. The cited node already exists; this delivery adds no new queue items. The separate Bourbaki text remains WANTED as provenance, and is not needed for the explicitly marked reconstruction.

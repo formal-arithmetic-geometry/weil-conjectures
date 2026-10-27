@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-projective-coordinate-koszul-sequence",
+ "kind": "statement",
+ "title": "Exact coordinate Koszul sequence of projective twists",
+ "statement": "Let $A$ be a commutative ring, $n\\geq0$, $X=\\operatorname{Proj}(A[x_0,\\ldots,x_n])$, and $a\\in\\mathbf Z$. Use the invertible twists $\\mathcal O_X(d)$ of [def-pc-projective-space-twist] in the abelian category of $\\mathcal O_X$-module sheaves [def-weil-sheaf-of-modules-category]. There is an exact complex of vector bundles\n$$0\\longrightarrow\\mathcal O_X(a)\\longrightarrow\\mathcal O_X(a+1)^{\\oplus\\binom{n+1}{1}}\\longrightarrow\\cdots\\longrightarrow\\mathcal O_X(a+i)^{\\oplus\\binom{n+1}{i}}\\longrightarrow\\cdots\\longrightarrow\\mathcal O_X(a+n+1)\\longrightarrow0.$$\nIts maps are the signed coordinate Koszul maps, defined as follows. For $d\\in\\mathbf Z$ and $0\\leq j\\leq n$, let $x_j:\\mathcal O_X(d)\\to\\mathcal O_X(d+1)$ be the $\\mathcal O_X$-linear map given on $U_k=D_+(x_k)$ by $e_k^{(d)}\\mapsto(x_j/x_k)\\,e_k^{(d+1)}$ (these local maps agree on overlaps by the transition rule). Index the summands of $\\mathcal O_X(a+i)^{\\oplus\\binom{n+1}{i}}$ by the subsets $I\\subseteq\\{0,\\ldots,n\\}$ with $|I|=i$, the summand of $I$ being a copy $\\mathcal O_X(a+i)\\,\\varepsilon_I$. The differential from degree $i$ to degree $i+1$ sends the summand of $I$ to the summands of $I\\cup\\{j\\}$, $j\\notin I$, by $(-1)^{\\#\\{k\\in I:\\,k<j\\}}x_j$ (exterior multiplication by $\\sum_j x_j\\varepsilon_j$).",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BQS, perfect-lemma-construct-the-next-one."
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $r=n+1$ and $E^i=\\bigoplus_{|I|=i}\\mathcal O_X(a+i)\\varepsilon_I$ for $0\\leq i\\leq r$, and $E^i=0$ otherwise. The opens $U_k$ cover $X$: a point of Proj is a homogeneous prime not containing $S_+=(x_0,\\ldots,x_n)$, so it misses some $x_k$. Each $E^i|_{U_k}$ is free with basis $b_{k,I}=e_k^{(a+i)}\\varepsilon_I$, hence is a vector bundle of rank $\\binom r i$. The coordinate maps in the statement glue: on $U_k\\cap U_l$, the transition rule gives\n$$(x_j/x_k)e_k^{(d+1)}=(x_k/x_l)^d(x_j/x_l)e_l^{(d+1)}.$$\nThus the local image of $e_k^{(d)}$ agrees with the image of $(x_k/x_l)^d e_l^{(d)}$. The coefficients commute with restriction, so these are module-sheaf morphisms. Finite matrices of these maps define the stated $\\delta^i:E^i\\to E^{i+1}$. This constructs exactly the requested maps, including every integer twist.",
+   "uses": [
+    "def-pc-proj",
+    "def-pc-projective-space-twist",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQS, perfect-lemma-construct-the-next-one; direct chart verification of the signed maps."
+   }
+  },
+  {
+   "text": "Write $N_I(j)=\\#\\{l\\in I:l<j\\}$. On $U_k$ put $t_j=x_j/x_k$, so $t_k=1$. Then\n$$\\delta b_{k,I}=\\sum_{j\\notin I}(-1)^{N_I(j)}t_j b_{k,I\\cup\\{j\\}}.$$\nIn $\\delta^2 b_{k,I}$ the term indexed by $I\\cup\\{j,l\\}$, with $j<l$ outside $I$, occurs twice. Inserting $j$ then $l$ has sign exponent $N_I(j)+N_I(l)+1$, while inserting $l$ then $j$ has exponent $N_I(l)+N_I(j)$. Their coefficients are the same $t_jt_l=t_lt_j$, so they cancel. There are no other terms. Thus $\\delta^{i+1}\\delta^i=0$ on every chart and hence globally, since equality of sheaf morphisms is local by the sheaf axiom. This also holds in characteristic two, where a term plus its additive inverse is still zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQS, perfect-lemma-construct-the-next-one; direct chart verification of the signed maps."
+   }
+  },
+  {
+   "text": "Fix $k$. In the chart bases define $\\mathcal O_{U_k}$-linear maps $h^i:E^i|_{U_k}\\to E^{i-1}|_{U_k}$ by\n$$h^i(b_{k,I})=\\begin{cases}(-1)^{N_I(k)}b_{k,I\\setminus\\{k\\}}&k\\in I,\\\\0&k\\notin I.\\end{cases}$$\nTake $h^0=0$ and zero maps outside the displayed degrees. These finite matrices commute with restrictions on all opens of $U_k$. We check $\\delta^{i-1}h^i+h^{i+1}\\delta^i=1$ on each basis element. If $k\\notin I$, then $\\delta h(b_{k,I})=0$ and only the $j=k$ term of $h\\delta(b_{k,I})$ survives; it is $(-1)^{2N_I(k)}t_k b_{k,I}=b_{k,I}$. If $k\\in I$, the $j=k$ term of $\\delta h(b_{k,I})$ is again $b_{k,I}$. For each $j\\notin I$, the other contribution of $\\delta h$ has sign exponent $N_I(k)+N_{I\\setminus\\{k\\}}(j)$, whereas the matching contribution of $h\\delta$ has exponent $N_I(j)+N_{I\\cup\\{j\\}}(k)$. The second exponent minus the first is $1$: use $N_{I\\cup\\{j\\}}(k)=N_I(k)+[j<k]$ and $N_{I\\setminus\\{k\\}}(j)=N_I(j)-[k<j]$. These two terms have the same coefficient $t_j$ and cancel. This proves the identity, including degree zero (the first case) and degree $r$ (the second case with no off-diagonal terms). The $h^i$ need only exist on this chart and are not asserted to glue.",
+   "uses": [
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQS, perfect-lemma-construct-the-next-one; direct chart verification of the signed maps."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq X$ be open and let $s\\in E^i(W)$ satisfy $\\delta^i(s)=0$. On the covering $W_k=W\\cap U_k$, the identity just proved gives\n$$s|_{W_k}=\\delta^{i-1}\\bigl(h^i(s|_{W_k})\\bigr).$$\nFor $1\\leq i\\leq r$ these are the local lifts required by clause (2) of [lem-weil-pbc-ringed-space-module-exactness-local-lifting], applied to the complex $E^{i-1}\\to E^i\\to E^{i+1}$ on the ringed space $(X,\\mathcal O_X)$. This proves exactness at every such $E^i$, including $E^r$ since $E^{r+1}=0$. At $E^0$, the same identity has $h^0=0$, so a section killed by $\\delta^0$ restricts to zero on every $W_k$ and is zero by the sheaf axiom. Thus the same local-lifting criterion for $0\\to E^0\\to E^1$ proves exactness at $E^0$ as well. Exactness at the exterior zero terms is immediate. No exactness of global sections, flatness, regularity, or Noetherian hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01AF (modules-section-kernels) and 01AG (modules-lemma-abelian); local lifting formulation in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BQS (perfect-lemma-construct-the-next-one), statement; explicit local signed contraction instead of the source proof via graded sheafification. The finite-matrix identity is proved here on the actual chart bases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact Koszul sequence of twists O(a) through O(a+n+1) on projective space over a ring",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.exact_succ, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Generators.H1Cotangent.exact_map_δ, CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ, CategoryTheory.ProjectiveResolution.complex_exactAt_succ",
+   "date": "2026-10-23",
+   "verdict": "no match: projective resolutions and cotangent sequences do not give the coordinate Koszul sequence of line bundles on projective space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\", \"exact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: projective resolutions and cotangent sequences do not give the coordinate Koszul sequence of line bundles on projective space."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*exact|exact.*Koszul|construct_the_next|koszul.*twist",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: projective resolutions and cotangent sequences do not give the coordinate Koszul sequence of line bundles on projective space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective space coordinate Koszul exact sequence of line bundles",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.exact₀, LinearAlgebra.Projectivization.termℙ, CategoryTheory.ProjectiveResolution.exact_succ, CategoryTheory.exact_d_f, Projectivization.Subspace.noConfusionType, Projectivization, AlgebraicGeometry.Proj.ext, Projectivization.Subspace",
+   "date": "2026-10-23",
+   "verdict": "no match: projective resolutions and cotangent sequences do not give the coordinate Koszul sequence of line bundles on projective space."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*exact|exact.*Koszul|koszul.*twist|twist.*koszul",
+   "results": "{\"t\": \"2026-10-23T13:13:31Z\", \"tool\": \"grep\", \"query\": \"Koszul.*exact|exact.*Koszul|koszul.*twist|twist.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no exact projective-coordinate Koszul sequence or twist-Koszul declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact Koszul complex of the homogeneous coordinates on projective space",
+   "results": "{\"t\": \"2026-10-23T13:13:31Z\", \"tool\": \"leansearch\", \"query\": \"Exact Koszul complex of the homogeneous coordinates on projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ExactAt\", \"CategoryTheory.ProjectiveResolution.exact₀\", \"CategoryTheory.exact_d_f\", \"CategoryTheory.ProjectiveResolution.exact_succ\", \"HomologicalComplex.Acyclic\", \"CategoryTheory.ShortComplex.Exact.mk\", \"HomologicalComplex.exactAt_iff_isZero_homology\", \"CategoryTheory.ProjectiveResolution.complex_exactAt_succ\"], \"digest\": \"6782d5979b2c38d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent and projective-resolution exactness do not state the coordinate projective-space sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\", \"exact\"",
+   "results": "{\"t\": \"2026-10-23T13:13:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"KoszulComplex\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration with both KoszulComplex and exact."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coordinate Koszul complex of line bundles O(a+i) on projective space over a commutative ring",
+   "results": "{\"t\": \"2026-10-23T13:13:33Z\", \"tool\": \"leanfinder\", \"query\": \"Exact coordinate Koszul complex of line bundles O(a+i) on projective space over a commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"CategoryTheory.ProjectiveResolution.exact_succ\", \"CategoryTheory.ProjectiveResolution.exact₀\", \"CategoryTheory.ProjectiveResolution.complex_exactAt_succ\"], \"digest\": \"b7fb626655a466ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent and projective-resolution exactness do not state the coordinate projective-space sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|KoszulComplex",
+   "results": "{\"t\": \"2026-10-23T13:15:53Z\", \"tool\": \"grep\", \"query\": \"koszul|KoszulComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"5e548c7bfc0de882\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only local-cohomology TODO, differential-geometric Koszul connections and regular-sequence TODO; no Koszul complex implementation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Koszul complex is contractible if one of the coefficients is a unit, by contraction with a basis covector",
+   "results": "{\"t\": \"2026-10-23T13:15:55Z\", \"tool\": \"leanfinder\", \"query\": \"A Koszul complex is contractible if one of the coefficients is a unit, by contraction with a basis covector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CliffordAlgebra.contractRight_one\", \"CliffordAlgebra.contractLeft_one\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"CliffordAlgebra.contractLeft_contractLeft\", \"CliffordAlgebra.contractRight_contractRight\", \"CliffordAlgebra.contractRight_algebraMap\", \"CliffordAlgebra.contractLeft_algebraMap\", \"ExteriorAlgebra.isUnit_algebraMap\"], \"digest\": \"4fe5b87a6459bb31\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Clifford-algebra contraction identities and alternating constant complexes are not the signed coordinate complex of sheaf twists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-negative-twists-generator",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQS, lemma-construct-the-next-one.",
+   "via": [
+    "lem-sfb-projective-negative-twists-generator",
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-coordinate-koszul-sequence",
+  "worker": "stage1",
+  "summary": "Statement retained exactly. Constructed and glued the signed coordinate maps, checked their square-zero relation, wrote the signed chart contraction and verified its identity in both subset cases and at the endpoints. Applied the existing ringed-space local-lifting exactness criterion. No new nodes: the finite-matrix and sign calculations are written as elementary steps, and the only non-elementary exactness theorem already exists and is Lean-closed. ProjectiveLine.koszul_shortExact covers only n=1, so is not an attachment. Six fresh logged Mathlib searches find no match for the full item.",
+  "blueprint": "Prerequisite to lem-sfb-projective-negative-twists-generator: Stacks 0BQU uses 0A9V, whose input is the coordinate sequence of 0BQS. This serves the inherited direct-images paragraph (3) prerequisite chain under det-thm-sf-ctf-stability-direct-images. The latest blueprint was read. ancestor returns None for the inherited non-blueprint creation chain; the existing from.node and via metadata are preserved, and from.place already specifies this exact prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "why": "Closed generic local-lifting criterion for exactness of module sheaves on a ringed space; used only to turn the explicit chart lifts into exactness, with no alternative direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-a2ee3ead0",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-a2ee3ead0 (reviewer sub-agent of L); spot-checked: I read every step and recomputed it; no fixes. Statement unchanged from the base and matches Stacks perfect.tex 0BQS lemma-construct-the-next-one (any ring A, n>=0, a in Z, ranks C(n+1,i)); the item also pins the signed Koszul maps, so nothing is weakened. Twist rule e_i=(x_i/x_j)^d e_j matches the node and its main-20261015 blueprint_update. Step 1: U_k cover by def-pc-proj; the gluing identity holds for every integer d. Step 2: sign exponents N_I(j)+N_I(l)+1 vs N_I(l)+N_I(j), so delta^2=0 in any characteristic. Step 3: the chart contraction h gives delta h+h delta=1 in both cases k in I and k not in I (exponent difference [j<k]+[k<j]=1); my own integer test over r=1..6, every k and every I passed. Step 4: clause (2) of lem-weil-pbc-ringed-space-module-exactness-local-lifting applies with cover W_k and lifts h(s); E^r and E^0 are handled correctly. That node is Lean-closed (slopmaster2, sorry-free), so it is a generic tool, not route; I accept the split_report tool_uses entry. Edge cases n=0 and A=0 are fine. No duplicates: rg -L for 0BQS/0A9V/Koszul over the DAG and the main-20261015 blueprint find none. B10: project Lean has only n=1 or P^1_k Koszul results (koszul_shortExact, koszul_resolution, koszulTensor_exact), nothing to attach. No repair note, so the re-split rule does not apply. No SGA. Inherited mismatch: unit record chapter sec-six-functors vs node directory sec-six-functors-basics, not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCoordinateKoszulSequence",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_exact_coordinateKoszulSequence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateKoszulSequence.lean",
+  "statement": "theorem exists_exact_coordinateKoszulSequence (A : Type u) [CommRing A] (n : ℕ) (a : ℤ) : ∃ E : CochainComplex (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A))).Modules ℤ, ∃ e : ∀ i : ℤ, E.X i ≅ ∐ fun _ : {I : Finset (ULift.{u} (Fin (n + 1))) // (I.card : ℤ) = i} ↦ twist (ULift.{u} (Fin (n + 1))) (Spec (.of A)) (a + i), E.Acyclic ∧ (∀ i : ℤ, (E.X i).IsFiniteLocallyFree) ∧ ∀ (i : ℤ) (I : {I : Finset (ULift.{u} (Fin (n + 1))) // (I.card : ℤ) = i}), Sigma.ι (fun _ : {I : Finset (ULift.{u} (Fin (n + 1))) // (I.card : ℤ) = i} ↦ twist (ULift.{u} (Fin (n + 1))) (Spec (.of A)) (a + i)) I ≫ (e i).inv ≫ E.d i (i + 1) ≫ (e (i + 1)).hom = ∑ J : {J : Finset (ULift.{u} (Fin (n + 1))) // (J.card : ℤ) = i + 1}, ∑ j : ULift.{u} (Fin (n + 1)), if j ∉ I.val ∧ insert j I.val = J.val then ((-1 : ℤ) ^ (I.val.filter (fun k ↦ k.down < j.down)).card) • (twistMulX (ULift.{u} (Fin (n + 1))) (Spec (.of A)) j (a + i) ≫ eqToHom (congrArg (twist (ULift.{u} (Fin (n + 1))) (Spec (.of A))) (add_assoc a i 1)) ≫ Sigma.ι (fun _ : {J : Finset (ULift.{u} (Fin (n + 1))) // (J.card : ℤ) = i + 1} ↦ twist (ULift.{u} (Fin (n + 1))) (Spec (.of A)) (a + (i + 1))) J) else 0",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b668eb5f",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BQS (perfect.tex 4109-4119). Any CommRing A, n:ℕ, a:ℤ. ℙ(ULift (Fin (n+1)); Spec A) is the recorded twist model. Terms are coproducts of twist (a+i) indexed by size-i Finsets, so terms are zero outside 0..n+1. Acyclic covers all ℤ degrees. IsFiniteLocallyFree for vector bundles. The differential is fully pinned through e as Σ_J Σ_j [j∉I ∧ insert j I = J] (-1)^#{k∈I,k<j} • twistMulX j ≫ eqToHom ≫ ι_J, which is exterior multiplication by Σ x_j ε_j. twistMulX (pullback of multiplication by X_j) sends x_k^d to (x_j/x_k)x_k^{d+1}, consistent with the twist transition rule. The existential e does not make it hollow. Edge cases fine: n=0, A=0, char 2, negative degrees, arbitrary universe. Statement field verbatim; stmt_deps unchanged; docstrings have source, blueprint id and 4 proof steps; proof is sorry only; private import of the proof_dep module is required; item not yet landed in side-live; only n=1 koszul_shortExact exists, so no attachment. Advisory: IsFiniteLocallyFree (owner def-sc-finite-locally-free-sheaf) and twistMulX (no owner) are not in stmt_deps, which S2 cannot add. H9 advisory: ringedSiteModules import unused, Finset.Powerset likely redundant. Compile not reproduced per instructions; no files changed."
+ }
+}

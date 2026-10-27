@@ -95,9 +95,16 @@ class PreflightGraph(unittest.TestCase):
         self.delivery["corrected"] = True
         self.assertEqual(self.findings(), [])
 
-    def test_inherited_cycle_through_touched_node_still_blocks(self):
+    def test_inherited_cycle_through_touched_node_does_not_block(self):
+        # 2026-10-25 (deliverfix; the human): a cycle the delivery did not create never blocks it
         self.before[ITEM]["stmt_deps"].append(COMPARISON)
-        self.assertTrue(self.findings())
+        self.assertEqual(self.findings(), [])
+
+    def test_dependency_edge_that_closes_cycle_is_rejected(self):
+        # 2026-10-25 (deliverfix): delivered dependency-node edges are part of the checked graph
+        self.delivery["deps"] = {FOUNDATION: {"node": dict(node(FOUNDATION), lean={}),
+                                              "dep_fields": {"stmt_deps": [ITEM]}}}
+        self.assertTrue(any(f.startswith("cycles:") for f in self.findings()))
 
     def test_new_helper_that_closes_cycle_is_rejected(self):
         helper = "def-maint-yoneda-helper"

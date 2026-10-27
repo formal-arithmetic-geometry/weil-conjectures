@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+ "kind": "statement",
+ "title": "Orthogonal decomposition of smooth Dolbeault forms",
+ "statement": "All vector spaces below are over the complex field $\\mathbf C$ [def-weil-field]. Let $M$ be a compact complex manifold without boundary of complex dimension $n\\geq0$, with a smooth positive definite Hermitian metric on its complex tangent bundle. For integers $p,q$, write $A^{p,q}(M)$ for the complex vector space of smooth complex differential forms of type $(p,q)$, with this space zero unless $0\\leq p,q\\leq n$. The type decomposition of the exterior derivative is $d=\\partial+\\bar\\partial$, where $\\bar\\partial:A^{p,q}\\to A^{p,q+1}$ and $\\bar\\partial^2=0$. Equip smooth forms with the $L^2$ inner product obtained by integrating the pointwise metric against its volume form. Let $\\bar\\partial^*:A^{p,q+1}\\to A^{p,q}$ be its formal adjoint, characterized by $\\langle\\bar\\partial u,v\\rangle_{L^2}=\\langle u,\\bar\\partial^*v\\rangle_{L^2}$ for smooth forms of these types. Put $\\Delta_{\\bar\\partial}=\\bar\\partial\\bar\\partial^*+\\bar\\partial^*\\bar\\partial$. There is an orthogonal direct sum of spaces of smooth forms $$A^{p,q}(M)=\\ker(\\Delta_{\\bar\\partial}|_{A^{p,q}(M)})\\ \\mathbin{\\oplus^{\\perp}}\\ \\bar\\partial A^{p,q-1}(M)\\ \\mathbin{\\oplus^{\\perp}}\\ \\bar\\partial^* A^{p,q+1}(M).$$ The summands are actual images on smooth forms, without taking closures.",
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "WANTED locally: Wenrui Kong, Notes on Complex Geometry (April 9, 2025), §6.2, Theorem 6.7, printed pp.23--24; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. The Dolbeault orthogonal decomposition, not its subsequent cohomology corollary."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-hermitian-dolbeault-data"
+ ],
+ "proof": [
+  {
+   "text": "If $p$ or $q$ is outside $[0,n]$, all three subspaces in the asserted equality lie in the zero space $A^{p,q}$ and the equality follows. If $M$ is empty it is equally immediate. When $n=0$, a compact zero-dimensional manifold is a finite discrete set; only $A^{0,0}$ can be nonzero, all differentials vanish, and the harmonic space is all of $A^{0,0}$. Hence assume $n\\geq1$ and $0\\leq p,q\\leq n$. Write $D=\\bar\\partial$ and $P=DD^*+D^*D$ on this type.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Theorem 6.7, printed pp.23--24; edge cases written out by Q53."
+   }
+  },
+  {
+   "text": "By [lem-sfb-dolbeault-laplacian-elliptic], $D^*$ preserves smoothness and $P$ is an elliptic differential operator on $E^{p,q}$, also after realification. Adjointness gives $\\langle Pa,b\\rangle=\\langle D^*a,D^*b\\rangle+\\langle Da,Db\\rangle=\\langle a,Pb\\rangle$. Regard $E^{p,q}$ as a real bundle with fibre metric $\\operatorname{Re}\\langle-,-\\rangle$ and $M$ as its oriented real manifold of dimension $2n$; holomorphic charts preserve its complex orientation. The real $L^2$ pairing is the real part of the Hermitian pairing. Thus $P$ is its own formal real adjoint. Apply [lem-sfb-elliptic-smooth-fredholm-decomposition] with $E=F$ this real bundle and $k=2$. For every smooth $a\\in A^{p,q}$ it gives smooth $h,w\\in A^{p,q}$ with $Ph=0$ and $a=h+Pw=h+D(D^*w)+D^*(Dw)$. The two displayed primitives have types $(p,q-1)$ and $(p,q+1)$; at the boundary a primitive in a zero type is zero.",
+   "uses": [
+    "lem-sfb-dolbeault-laplacian-elliptic",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Lemmas 6.2, 6.4 and Theorem 6.5(4), printed pp.21,23, applied to the type bundle; assembly for Theorem 6.7."
+   }
+  },
+  {
+   "text": "For $Ph=0$, adjointness gives $0=\\langle Ph,h\\rangle=\\|D^*h\\|_{L^2}^2+\\|Dh\\|_{L^2}^2$. Nonnegativity implies $D^*h=Dh=0$. Indeed a nonzero smooth form has strictly positive pointwise squared norm on some coordinate neighbourhood, whose smooth positive metric volume makes its integral positive. Thus zero $L^2$ norm forces the form itself to be zero. Consequently $\\langle Du,h\\rangle=\\langle u,D^*h\\rangle=0$ and $\\langle h,D^*v\\rangle=\\langle Dh,v\\rangle=0$ for arbitrary smooth primitives $u,v$. Harmonic forms are orthogonal to both images for the complex Hermitian pairing.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "§6.1 after Lemma 6.2, kernel identity; Theorem 6.7, orthogonality argument written out."
+   }
+  },
+  {
+   "text": "For arbitrary $u\\in A^{p,q-1}$ and $v\\in A^{p,q+1}$, $\\langle Du,D^*v\\rangle=\\langle D(Du),v\\rangle=0$ by $D^2=0$. Hence the two smooth images are orthogonal. Step 2 shows that the three subspaces span $A^{p,q}$ with actual smooth primitives $u=D^*w$ and $v=Dw$. To prove directness, if $h+x+y=0$ with $h$ harmonic, $x\\in\\operatorname{im}D$ and $y\\in\\operatorname{im}D^*$, pair this equation separately with $h,x,y$. Pairwise orthogonality gives $\\|h\\|^2=\\|x\\|^2=\\|y\\|^2=0$, so all vanish by step 3. Subtracting two decompositions gives uniqueness of their three summand components. This proves the asserted complex orthogonal direct sum without any closure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Theorem 6.7, printed pp.23--24; exact/coexact orthogonality and directness written out by Q53."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dolbeault-laplacian-elliptic",
+  "lem-sfb-elliptic-smooth-fredholm-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Kong Theorem 6.7 via Lemmas 6.2,6.4 and Theorem 6.5(4), read online; local source WANTED. Q53 writes out the assembly and realification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth complex differential forms on a compact Hermitian manifold are the orthogonal sum of Dolbeault harmonic forms bar partial exact forms and bar partial coexact forms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.isHilbertSumOrthogonal\", \"module\": \"Mathlib/Analysis/InnerProductSpace/l2Space\", \"type\": \"∀ {𝕜 : Type u_2} [inst : RCLike 𝕜] {E : Type u_3} [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  [inst_3 : CompleteSpace E] (K : Submodule 𝕜 E) [hK : CompleteSpace ↥K],\\n  IsHilbertSum 𝕜 (fun b => ↥(bif b then K else Kᗮ)) fun b => (bif b then K else Kᗮ).subtypeₗᵢ\", \"doc\": \"For a complete submodule $ K $ of a Hilbert space $ E $ over a real closed-like field $ \\\\mathbb{K} $, the direct sum of $ K $ and its orthogonal complement $ K^\\\\perp $ forms a Hilbert sum. This means \"}\n  {\"name\": \"Submodule.toLinearEquiv_orthogonalDecomposition_symm\", \"module\": \"Mathlib/Analysis/InnerProductSpace/ProdL2\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_4} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  (K : Submodule 𝕜 E) [inst_3 : K.HasOrthogonalProjection],\\n  K.orthogonalDecomposition.symm.toLinearEquiv = WithLp.linearEquiv 2 𝕜 (↥K × ↥Kᗮ) ≪≫ₗ K.prodEquivOfIsCompl Kᗮ ⋯\", \"doc\": \"In an inner product space $ E $ over a real closed-like field $ \\\\mathbb{K} $, for any submodule $ K $ admitting an orthogonal projection, the inverse of the orthogonal decomposition map $ K \\\\times K^\\\\\"}\n  {\"name\": \"Submodule.toLinearEquiv_orthogonalDecomposition\", \"module\": \"Mathlib/Analysis/InnerProductSpace/ProdL2\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_4} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  (K : Submodule 𝕜 E) [inst_3 : K.HasOrthogonalProjection],\\n  K.orthogonalDecomposition.toLinearEquiv =\\n    (K.prodEquivOfIsCompl Kᗮ ⋯).symm ≪≫ₗ (WithLp.linearEquiv 2 𝕜 (↥K × ↥Kᗮ)).symm\", \"doc\": \"In an inner product space $ E $ over a real closed-like field $ \\\\mathbb{K} $, for any submodule $ K $ admitting an orthogonal projection, there exists an isometric linear equivalence between $ E $ and\"}\n  {\"name\": \"OrthogonalFamily.decomposition\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Projection/FiniteDimensional\", \"type\": \"{𝕜 : Type u_1} →\\n  {E : Type u_2} →\\n    [inst : RCLike 𝕜] →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : InnerProductSpace 𝕜 E] →\\n          {ι : Type u_4} →\\n            [inst_3 : DecidableEq ι] →\\n              [Fintype ι] →\\n                {V : ι → Submodule 𝕜 E} →\\n                  [∀ \", \"doc\": \"Given a finite orthogonal family of complete submodules $\\\\{V_i\\\\}$ in an inner product space $E$ over a real closed field $\\\\mathbb{K}$, where the direct sum of the submodules equals the entire space ($\"}\n  {\"name\": \"Submodule.orthogonalDecomposition_symm_apply\", \"module\": \"Mathlib/Analysis/InnerProductSpace/ProdL2\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_4} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  (K : Submodule 𝕜 E) [inst_3 : K.HasOrthogonalProjection] (a : WithLp 2 (↥K × ↥Kᗮ)),\\n  K.orthogonalDecomposition.symm a = ↑a.fst + ↑a.snd\", \"doc\": \"For any real closed-like field $\\\\mathbb{K}$, inner product space $E$, and submodule $K \\\\subseteq E$ with orthogonal projection, the inverse of the isometric linear equivalence $E \\\\cong K \\\\times K^\\\\per\"}\n  {\"name\": \"Submodule.coe_orthogonalDecomposition_symm\", \"module\": \"Mathlib/Analysis/InnerProductSpace/ProdL2\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_4} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  (K : Submodule 𝕜 E) [inst_3 : K.HasOrthogonalProjection],\\n  ↑K.orthogonalDecomposition.symm.toContinuousLinearEquiv =\\n    (K.subtypeL.coprod Kᗮ.subtypeL).comp ↑(WithLp.prodContinuousL\", \"doc\": \"The inverse of the isometric linear equivalence between an inner product space $ E $ and the $ L^2 $-normed product space $ K \\\\times K^\\\\perp $ is constructed by composing the product continuous linear\"}\n  {\"name\": \"StarModule.decomposeProdAdjointL_apply\", \"module\": \"Mathlib/Topology/Algebra/Module/Star\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : Semiring R] [inst_1 : StarMul R] [inst_2 : TrivialStar R]\\n  [inst_3 : AddCommGroup A] [inst_4 : Module R A] [inst_5 : StarAddMonoid A] [inst_6 : StarModule R A]\\n  [inst_7 : Invertible 2] [inst_8 : TopologicalSpace A] [inst_9 : IsTopologicalAddGroup A] [inst_10\", \"doc\": \"Let $R$ be a semiring with a trivial star operation (i.e., $r^* = r$) in which $2$ is invertible. Let $A$ be a topological star $R$-module with continuous algebraic operations. Let $f$ be the continuo\"}\n  {\"name\": \"Submodule.coe_orthogonalDecomposition\", \"module\": \"Mathlib/Analysis/InnerProductSpace/ProdL2\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_4} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  (K : Submodule 𝕜 E) [inst_3 : K.HasOrthogonalProjection],\\n  ↑K.orthogonalDecomposition.toContinuousLinearEquiv =\\n    (↑(WithLp.prodContinuousLinearEquiv 2 𝕜 ↥K ↥Kᗮ).symm).comp (K.orth\", \"doc\": \"In an inner product space $ E $ over a real closed-like field $ \\\\mathbb{K} $, for any submodule $ K $ admitting an orthogonal projection, the orthogonal decomposition map $ E \\\\to K \\\\times K^{\\\\perp} $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hilbert-space orthogonal decompositions and finite-dimensional symmetric operators do not give smooth Dolbeault exact/coexact decompositions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Harmonic\", \"orthogonal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Hilbert-space orthogonal decompositions and finite-dimensional symmetric operators do not give smooth Dolbeault exact/coexact decompositions."
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|HodgeDecomposition|Hodge.decomposition|elliptic.*operator|harmonic.*forms",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Hilbert-space orthogonal decompositions and finite-dimensional symmetric operators do not give smooth Dolbeault exact/coexact decompositions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Orthogonal decomposition of smooth forms on compact Hermitian manifolds for the Dolbeault Laplacian",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Submodule.sup_orthogonal_of_completeSpace\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Projection.Submodule\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  {K : Submodule 𝕜 E} [K.HasOrthogonalProjection], K ⊔ Kᗮ = ⊤\", \"doc\": \"For any submodule $K$ of a complete inner product space $E$ over a real closed-like field $\\\\mathbb{K}$, the direct sum of $K$ and its orthogonal complement $K^\\\\perp$ equals the entire space $E$, i.e.,\"}\n  {\"name\": \"Submodule.orthogonalDecomposition_symm_apply\", \"module\": \"Mathlib.Analysis.InnerProductSpace.ProdL2\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_4} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  (K : Submodule 𝕜 E) [inst_3 : K.HasOrthogonalProjection] (a : WithLp 2 (↥K × ↥Kᗮ)),\\n  K.orthogonalDecomposition.symm a = ↑a.fst + ↑a.snd\", \"doc\": \"For any real closed-like field $\\\\mathbb{K}$, inner product space $E$, and submodule $K \\\\subseteq E$ with orthogonal projection, the inverse of the isometric linear equivalence $E \\\\cong K \\\\times K^\\\\per\"}\n  {\"name\": \"Submodule.exists_add_mem_mem_orthogonal\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Projection.Basic\", \"type\": \"[K.HasOrthogonalProjection] (v : E) : ∃ y ∈ K, ∃ z ∈ Kᗮ, v = y + z\", \"doc\": \"In an inner product space $E$ over a real closed-like field $\\\\mathbb{K}$, every vector $v \\\\in E$ can be expressed as the sum of a vector $y$ in a submodule $K$ and a vector $z$ in the orthogonal compl\"}\n  {\"name\": \"LineDeriv.laplacianCLM_eq_sum\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \"[Fintype ι] (v : OrthonormalBasis ι ℝ E) (f : V₁) : laplacianCLM ℝ E V₁ f = ∑ i, ∂_{v i} (∂_{v i} f)\", \"doc\": \"For a finite-dimensional real inner product space $ E $ with orthonormal basis $\\\\{v_i\\\\}_{i \\\\in \\\\iota}$, the Laplacian operator $\\\\Delta$ applied to a function $ f $ satisfies $\\\\Delta f = \\\\sum_{i \\\\in \\\\i\"}\n  {\"name\": \"Submodule.fst_orthogonalDecomposition_apply\", \"module\": \"Mathlib.Analysis.InnerProductSpace.ProdL2\", \"type\": \": (K.orthogonalDecomposition x).fst = K.orthogonalProjection x\", \"doc\": \"For any vector $x$ in an inner product space $E$ over a real closed-like field $\\\\mathbb{K}$, the first component of the orthogonal decomposition of $x$ with respect to a submodule $K$ is equal to the \"}\n  {\"name\": \"OrthogonalFamily.decomposition\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional\", \"type\": \"[DecidableEq ι] [Fintype ι] {V : ι → Submodule 𝕜 E} [∀ i, CompleteSpace (V i)]\\n  (hV : OrthogonalFamily 𝕜 (fun i => V i) fun i => (V i).subtypeₗᵢ) (h : iSup V = ⊤) : DirectSum.Decomposition V\", \"doc\": \"Given a finite orthogonal family of complete submodules $\\\\{V_i\\\\}$ in an inner product space $E$ over a real closed field $\\\\mathbb{K}$, where the direct sum of the submodules equals the entire space ($\"}\n  {\"name\": \"IsHilbertSum.mkInternal\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \"[∀ i, CompleteSpace <| F i] (hFortho : OrthogonalFamily 𝕜 (fun i => F i) fun i => (F i).subtypeₗᵢ)\\n  (hFtotal : ⊤ ≤ (⨆ i, F i).topologicalClosure) : IsHilbertSum 𝕜 (fun i => F i) fun i => (F i).subtypeₗᵢ\", \"doc\": \"If each subspace $F_i$ is complete, the family forms an orthogonal set under linear isometries, and the closure of their direct sum equals the entire space, then the family satisfies the Hilbert sum c\"}\n  {\"name\": \"InnerProductSpace.laplacian_eq_iteratedFDeriv_orthonormalBasis\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \"{ι : Type*} [Fintype ι] (v : OrthonormalBasis ι ℝ E) : Δ f = fun x ↦ ∑ i, iteratedFDeriv ℝ 2 f x ![v i, v i]\", \"doc\": \"For any orthonormal basis $\\\\{v_i\\\\}$ of an inner product space $E$ over $\\\\mathbb{R}$, the Laplacian operator $\\\\Delta f$ evaluated at a point $x$ is equal to the sum of the second iterated Fréchet deriv\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hilbert-space orthogonal decompositions and finite-dimensional symmetric operators do not give smooth Dolbeault exact/coexact decompositions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The space of smooth p q forms is the orthogonal direct sum of kernel of bar partial Laplacian image of bar partial and image of its formal adjoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LineDeriv.laplacianCLM_eq_sum\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"∀ {ι : Type u_1} {E : Type u_6} {V₁ : Type u_11} {V₂ : Type u_12} {V₃ : Type u_13} [inst : LineDeriv E V₁ V₂]\\n  [inst_1 : LineDeriv E V₂ V₃] [inst_2 : AddCommGroup V₁] [inst_3 : AddCommGroup V₂] [inst_4 : AddCommGroup V₃]\\n  [inst_5 : NormedAddCommGroup E] [inst_6 : InnerProductSpace ℝ E] [inst_7 : F\", \"doc\": \"For a finite-dimensional real inner product space $ E $ with orthonormal basis $\\\\{v_i\\\\}_{i \\\\in \\\\iota}$, the Laplacian operator $\\\\Delta$ applied to a function $ f $ satisfies $\\\\Delta f = \\\\sum_{i \\\\in \\\\i\"}\n  {\"name\": \"StarModule.decomposeProdAdjointL\", \"module\": \"Mathlib/Topology/Algebra/Module/Star\", \"type\": \"(R : Type u_1) →\\n  (A : Type u_2) →\\n    [inst : Semiring R] →\\n      [inst_1 : StarMul R] →\\n        [inst_2 : TrivialStar R] →\\n          [inst_3 : AddCommGroup A] →\\n            [inst_4 : Module R A] →\\n              [inst_5 : StarAddMonoid A] →\\n                [inst_6 : StarModule R A] →\\n             \", \"doc\": \"Given a semiring $ R $ with trivial star structure and invertible $ 2 $, and a topological star module $ A $ over $ R $ with continuous additive group operations, continuous star operation, and contin\"}\n  {\"name\": \"extDeriv_extDeriv\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F}, ContDiff 𝕜 r ω → minSmoothness 𝕜 2 ≤ r → \", \"doc\": \"For a continuously differentiable differential form $\\\\omega$ of degree $n$ over a nontrivially normed field $\\\\mathbb{K}$, if the smoothness order $r$ satisfies $\\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2) \\\\l\"}\n  {\"name\": \"LinearMap.IsSymmetric.direct_sum_isInternal\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Spectrum\", \"type\": \"∀ {𝕜 : Type u_1} [inst : RCLike 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  {T : E →ₗ[𝕜] E} [FiniteDimensional 𝕜 E],\\n  T.IsSymmetric → DirectSum.IsInternal fun μ => Module.End.eigenspace T (↑T 1 μ)\", \"doc\": \"For a symmetric linear map $ T $ on an inner product space, the direct sum of the eigenspaces corresponding to each eigenvalue of $ T $ forms an internal direct sum decomposition of the space. This me\"}\n  {\"name\": \"LinearMap.IsSymmetric.directSumDecomposition\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Spectrum\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : RCLike 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : InnerProductSpace 𝕜 E] →\\n          {T : E →ₗ[𝕜] E} →\\n            [FiniteDimensional 𝕜 E] →\\n              [hT : Fact T.IsSymmetric] → DirectSum.Decomposition fun μ => Module.End.eigen\", \"doc\": \"For a symmetric linear operator $ T $ on a finite-dimensional inner product space $ E $ over a real closed field $ \\\\mathbb{K} $, the eigenspace corresponding to any eigenvalue $ \\\\mu $ of $ T $ is a co\"}\n  {\"name\": \"Submodule.coe_orthogonalDecomposition_symm\", \"module\": \"Mathlib/Analysis/InnerProductSpace/ProdL2\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_4} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  (K : Submodule 𝕜 E) [inst_3 : K.HasOrthogonalProjection],\\n  ↑K.orthogonalDecomposition.symm.toContinuousLinearEquiv =\\n    (K.subtypeL.coprod Kᗮ.subtypeL).comp ↑(WithLp.prodContinuousL\", \"doc\": \"The inverse of the isometric linear equivalence between an inner product space $ E $ and the $ L^2 $-normed product space $ K \\\\times K^\\\\perp $ is constructed by composing the product continuous linear\"}\n  {\"name\": \"LinearMap.IsSymmetric.directSum_decompose_apply\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Spectrum\", \"type\": \"∀ {𝕜 : Type u_1} [inst : RCLike 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E]\\n  {T : E →ₗ[𝕜] E} [inst_3 : FiniteDimensional 𝕜 E] [_hT : Fact T.IsSymmetric] (x : E) (μ : Module.End.Eigenvalues T),\\n  ((DirectSum.decompose fun μ => Module.End.eigenspace T (↑T 1 μ)) \", \"doc\": \"For a symmetric linear operator $ T $ on a finite-dimensional inner product space $ E $ over a real closed field, the decomposition of any vector $ x \\\\in E $ into the direct sum of eigenspaces of $ T \"}\n  {\"name\": \"extDeriv_extDeriv_apply\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {x : E}, ContDiffAt 𝕜 r ω x → minSmoothnes\", \"doc\": \"If $\\\\omega$ is a differential form of degree $n$ that is continuously differentiable of order $r$ at a point $x$, where $r$ is at least the minimal smoothness required for the field $\\\\mathbb{K}$, then\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hilbert-space orthogonal decompositions and finite-dimensional symmetric operators do not give smooth Dolbeault exact/coexact decompositions."
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|HodgeDecomposition|harmonic.*form|orthogonal.*decomposition",
+   "results": "[grep] OK 11 hit(s); returned top names/files: Mathlib/Analysis/InnerProductSpace/ProdL2.lean, Mathlib/Analysis/InnerProductSpace/ProdL2.lean, Mathlib/Analysis/InnerProductSpace/ProdL2.lean, Mathlib/Analysis/InnerProductSpace/ProdL2.lean, Mathlib/Analysis/InnerProductSpace/ProdL2.lean, Mathlib/Analysis/InnerProductSpace/PiL2.lean, Mathlib/Analysis/InnerProductSpace/PiL2.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean; digest 12ad99059fd42dab; Mathlib subdirectory Analysis/",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract orthogonal projections assume projection/closed-range hypotheses and do not establish smooth Dolbeault decomposition. The unquoted Orthogonal query was invalid (unknown identifier); the quoted orthogonalDecomposition query was then run successfully."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Orthogonal decomposition of smooth Dolbeault forms on compact Hermitian manifold",
+   "results": "[leansearch] OK 8 hit(s); returned top names/files: Submodule.starProjection_add_starProjection_orthogonal, Submodule.sup_orthogonal_of_completeSpace, LinearMap.BilinForm.span_singleton_sup_orthogonal_eq_top, OrthogonalFamily.decomposition, Submodule.exists_add_mem_mem_orthogonal, Submodule.fst_orthogonalDecomposition_apply, Submodule.orthogonalDecomposition_symm_apply, Submodule.snd_orthogonalDecomposition_apply; digest 1eed2ebc58fd2012",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract orthogonal projections assume projection/closed-range hypotheses and do not establish smooth Dolbeault decomposition. The unquoted Orthogonal query was invalid (unknown identifier); the quoted orthogonalDecomposition query was then run successfully."
+  },
+  {
+   "tool": "loogle",
+   "query": "Orthogonal, IsHilbertSum, Laplacian",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Orthogonal'; returned top names/files: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract orthogonal projections assume projection/closed-range hypotheses and do not establish smooth Dolbeault decomposition. The unquoted Orthogonal query was invalid (unknown identifier); the quoted orthogonalDecomposition query was then run successfully."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Orthogonal decomposition of smooth Dolbeault forms on compact Hermitian manifold",
+   "results": "[leanfinder] OK 8 hit(s); returned top names/files: Submodule.orthogonalDecomposition, Submodule.orthogonalDecomposition_symm_apply, Submodule.toLinearEquiv_orthogonalDecomposition, Submodule.orthogonalDecomposition_apply, Submodule.toLinearEquiv_orthogonalDecomposition_symm, Submodule.coe_orthogonalDecomposition, Submodule.coe_orthogonalDecomposition_symm, OrthogonalFamily.decomposition; digest 907de91c3cea5117",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract orthogonal projections assume projection/closed-range hypotheses and do not establish smooth Dolbeault decomposition. The unquoted Orthogonal query was invalid (unknown identifier); the quoted orthogonalDecomposition query was then run successfully."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orthogonalDecomposition\"",
+   "results": "[loogle] OK 11 hit(s); returned top names/files: Submodule.orthogonalDecomposition, Submodule.fst_orthogonalDecomposition_apply, Submodule.snd_orthogonalDecomposition_apply, Submodule.orthogonalDecomposition_apply, Submodule.orthogonalDecomposition_symm_apply, Submodule.fstL_comp_coe_orthogonalDecomposition, Submodule.sndL_comp_coe_orthogonalDecomposition, Submodule.toLinearEquiv_orthogonalDecomposition_symm; digest 8953a3821714e9ba",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract orthogonal projections assume projection/closed-range hypotheses and do not establish smooth Dolbeault decomposition. The unquoted Orthogonal query was invalid (unknown identifier); the quoted orthogonalDecomposition query was then run successfully."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hodge decomposition into harmonic exact and coexact smooth differential forms of a compact complex manifold",
+   "results": "[leanfinder] OK 8 hit(s); returned top names/files: extDeriv_extDeriv, extDeriv_extDeriv_apply, extDerivWithin_extDerivWithin_eqOn, extDerivWithin_extDerivWithin_apply, InnerProductSpace.HarmonicAt.comp_CLM, StarModule.decomposeProdAdjointL_apply, StarModule.decomposeProdAdjointL, InnerProductSpace.harmonicOnNhd_comp_CLE_iff; digest 03129006c0168293",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract orthogonal projections assume projection/closed-range hypotheses and do not establish smooth Dolbeault decomposition. The unquoted Orthogonal query was invalid (unknown identifier); the quoted orthogonalDecomposition query was then run successfully."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-harmonic-representatives",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion",
+   "via": [
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+  "worker": "stage1",
+  "summary": "Kept the exact smooth-form statement. Split the analytic prerequisites into smooth Dolbeault ellipticity and the general real elliptic kernel-image theorem, then proved spanning, pairwise complex orthogonality and uniqueness by adjoint calculations. Checked empty, zero-dimensional and out-of-range types. Retained the inherited null blueprint ancestor required by the authoritative ancestor command; the full existing via-chain identifies the route.",
+  "blueprint": "The current latest direct-images proof paragraph (3), ordinary direct-image constructibility, via the inherited alteration/moduli/Kempf/Kodaira/harmonic-representative chain. These steps refine only the analytic Hodge prerequisite to that chain; they do not change the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-8c9f0b0b4",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-8c9f0b0b4 (reviewer sub-agent of L); spot-checked: Item statement and stmt_deps are byte-identical to live and side-live (still unsplit there). No repair note exists, so this is a first split and the re-split rule does not apply. Neither new id exists in live or side-live. I read the Kong PDF online (printed pp.21-24); the local copy is WANTED. Theorem 6.7, first display, is exactly the item. Lemmas 6.2 and 6.4 give new node lem-sfb-dolbeault-laplacian-elliptic: a smooth first-order formal adjoint −∗∂∗ and an elliptic Δ_∂̄ for a Hermitian (not Kähler) metric. The symbol check iξ^{0,1}∧ against its contraction adjoint gives |ξ^{0,1}|² ≠ 0, and an invertible complex symbol stays invertible after realification. Theorem 6.5(4) gives lem-sfb-elliptic-smooth-fredholm-decomposition: real bundles of equal rank with metrics, compact oriented base without boundary, Γ(E) = ker P ⊕⊥ P*Γ(F) with the actual image. I tested it on the circle with d/dt, on rank 0 and on disconnected bases; it fails on (0,1), so compactness is needed. Both new nodes are self-contained, statement-only, cite def-weil-field, are not clauses of the item and have no duplicate in the DAG (rg for elliptic, Fredholm, symbol, adjoint, harmonic, Laplacian; kahler-laplacian-identity is a different statement). Mathlib has no matching declaration. Steps: (1) the n=0, empty and out-of-range types are correct and needed, since the nodes assume n,m ≥ 1. (2) The item's adjoint equals node 1's D* by uniqueness. P is self-adjoint, also for the real part of the pairing, and node 2 applies with E=F the realified type bundle and k=2 to give smooth h,w and the primitives D*w, Dw. (3) and (4) are elementary norm and orthogonality algebra using D²=0. There is no cycle and no SGA, no tool_uses are needed, and I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HermitianDolbeaultOrthogonalDecomposition",
+  "declaration": "ComplexManifold.hermitian_dolbeault_orthogonal_decomposition",
+  "file": "lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean",
+  "statement": "theorem hermitian_dolbeault_orthogonal_decomposition (n : ℕ) (M : Type u) [TopologicalSpace M] [ChartedSpace (Model n) M] [IsManifold (𝓘(ℂ, Model n)) ∞ M] [T2Space M] [CompactSpace M] [MeasurableSpace M] [BorelSpace M] (g : HermitianMetric n M) (μ : MetricVolume g) (D : DolbeaultOperators g μ) (p q : ℤ) : (D.harmonic p q ⊔ D.exact p q ⊔ D.coexact p q = typeForms p q) ∧ (∀ (h : D.harmonic p q) (a : D.exact p q), l2Pair g μ h.val a.val = 0) ∧ (∀ (h : D.harmonic p q) (b : D.coexact p q), l2Pair g μ h.val b.val = 0) ∧ (∀ (a : D.exact p q) (b : D.coexact p q), l2Pair g μ a.val b.val = 0) ∧ ∀ α : typeForms (n := n) (M := M) p q, ∃! c : D.harmonic p q × D.exact p q × D.coexact p q, α.val = c.1.val + c.2.1.val + c.2.2.val",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The original Hermitian-manifold statement and accepted four-step split are preserved. The added definition node constructs the smooth form spaces and metric pairing in holomorphic coordinates and specifies the canonical operators by exterior derivative and adjoint identities."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a2106c77",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean + stmt_deps (+def-sfb-hermitian-dolbeault-data); statement and proof steps unchanged; lean.statement verbatim; first delivery, no repair note. Clause check vs Kong Thm 6.7: complex manifold (ChartedSpace Fin n→ℂ, IsManifold 𝓘(ℂ) ∞, T2, Compact), n:ℕ with no positivity, Hermitian metric positive and smooth in every chart, typeForms = J-derivation eigenspace i(p−q) in degree p+q (exactly type (p,q)), ⊥ out of range; L² = (1/k!) inverse-Gram contraction (matches alternatizeUncurryFin convention) integrated against a chart-characterized sqrt det volume; DolbeaultOperators pinned uniquely by bidegree laws + chart extDerivWithin sum + formal adjoint (no arbitrary maps); harmonic/exact/coexact are actual images; conclusion = sup + 3 orthogonalities + ∃! components. Edge cases empty, n=0, out-of-range, q=0/n covered. No existing DAG def node, project Lean or Mathlib declaration for these notions (side-live DAG, lean/Sheaf, lean/WeilConjectures, Mathlib). Def module has no sorry/opaque/axiom/choice; docstrings carry source + blueprint id; report sections present. No file changed, so no compile. Advisory: square_zero field is redundant."
+ }
+}

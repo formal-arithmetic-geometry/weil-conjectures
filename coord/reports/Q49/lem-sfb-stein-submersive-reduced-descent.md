@@ -1,0 +1,52 @@
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-stein-submersive-reduced-descent.json: item split; no mathematical statement change. Replaced its indirect definition citation for algebraic stack by the actual definition node, and explicitly cited the structure-sheaf/direct-image definition.
+- dag/nodes/sec-six-functors-basics/lem-sfb-stack-schematic-image-qc.json: statement-only input; no Mathlib match (scheme image declarations do not cover a stack source).
+- dag/nodes/sec-six-functors-basics/lem-sfb-separated-space-homeomorphism-affine.json: statement-only input; no Mathlib match (scheme integrality theorems do not establish representability for algebraic spaces).
+- citations.json: verbatim statements for every proof-step citation. search-results.json retains the full new-node search responses; searches.jsonl is the search command's unmodified log.
+
+## Attachments
+
+None. Searched the whole project WeilConjectures source by the item's blueprint tag and by weak normality, schematic dominance, universal submersiveness, Stein and descent vocabulary. No declaration states the item or either new input. The nearby scheme theorems do not apply to algebraic stacks or arbitrary algebraic spaces.
+
+## WANTED
+
+WANTED: Jarod Alper, Adequate moduli spaces and geometrically reductive group schemes, arXiv:1005.2398v3, Proposition 7.1.1 proof, printed p.36, for lem-sfb-stein-submersive-reduced-descent. Read online at https://arxiv.org/pdf/1005.2398v3; the repository's named PDF is absent.
+
+WANTED: David Rydh, Submersions and effective descent of etale morphisms, author version 2010-03-03, Theorem (7.4), pp.28--29, Proposition (1.7) pp.6--7, and Corollary (5.22) pp.24--25, for the item and lem-sfb-separated-space-homeomorphism-affine. Read online at https://davidrydh.se/papers/submersion20100305.pdf; the local PDF is absent. No download or repository edit was made.
+
+## Findings and proof route
+
+The source's Hom-exactness assertion is correct under the item's hypotheses; the geometric-fibre condition of Alper Proposition 7.1.1 is used only later to establish compatibility and is not needed here. Rather than create another node restating this exactness theorem, I expanded the graph proof of Rydh (7.4). Compatibility on the reduced relation makes both the graph and its diagonal neighbourhood saturated. Quotient topology descends an open neighbourhood where the graph is closed. Its schematic image W gives a separated universal homeomorphism W to V. Affineness and the Stein identity then force its coordinate ring to equal that of V. This proves effectivity and preserves the nonreduced source information. Uniqueness is a separate explicit equalizer-immersion calculation.
+
+Rydh's theorem is stated for algebraic spaces. The item's proof does not apply it directly to a stack atlas (a smooth atlas need not be Stein). Instead the stack-compatible schematic-image theorem is isolated as an input, and the topological descent and closed graph calculations are written directly on smooth charts. No extra flatness, finite type, reduced base, noetherianity, or geometric-fibre condition is added. No statement dispute arose.
+
+The inherited blueprint ancestry is already broken at lem-sfb-admissible-direct-image: blueprint_refs ancestor returns None. The item and new nodes retain that null ancestor and the full inherited via chain. I read the newest latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and direct-images proof. This input remains a supporting lemma on the existing alteration/moduli route; it makes no change to chapter or unit realization. The item is not the unit's key statement.
+
+## Not duplicates
+
+lem-sfb-stack-schematic-image-qc vs lemma-nagata-scheme-image-ideal-qc: the existing theorem has schemes as source and target; the new input permits an algebraic stack source and algebraic space target, and supplies flat base change.
+lem-sfb-stack-schematic-image-qc vs lem-weil-pbc-scheme-image-qc-kernel: the existing theorem is for schemes and does not give the stack image construction or its flat-base-change property.
+lem-sfb-stack-schematic-image-qc vs lemma-nagata-dense-flat-pullback: the existing statement has schemes and starts with an already schematically dense map; it does not construct a stack's schematic image.
+lem-sfb-separated-space-homeomorphism-affine vs lem-trf-universally-homeomorph-integral: the existing statement assumes a morphism of schemes; the new theorem's substantive conclusion is scheme representability of a separated morphism of algebraic spaces.
+lem-sfb-separated-space-homeomorphism-affine vs lem-sfb-stein-submersive-reduced-descent: the input contains no Stein assumption, reduced kernel pair, or descent of maps; it establishes representability and affineness of a given separated universal homeomorphism.
+
+DAG keyword and source-tag searches found no existing node with either new statement. Blueprint searches for submersive, universally submersive, separated universal homeomorphism, schematic image, and scheme theoretic image found no matching blueprint node. The general universal-homeomorphism search found scheme and etale-topos results; these do not supply the new representability theorem. New-node searches used LeanFinder, LeanSearch, Loogle and grep, with a second phrasing and relevant source inspection. I read Mathlib IdealSheaf/Basic.lean:845 (Hom.support_ker), IdealSheaf/Subscheme.lean:662 (Hom.image), Morphisms/FlatDescent.lean:48 (fpqc universally-closed descent), and Morphisms/Integral.lean:35 (scheme IsIntegralHom); all have scheme domains and none supplies the missing stack/space input. All recorded searches were actually run through msearch.py. The additional submersive-reflection searches were exploratory: no node with that name was created, since the topological argument is written in step 5.
+
+## Review by Q49
+
+I read Alper Proposition 7.1.1 and its proof before its geometric-point argument, and Rydh (7.4)'s closed-graph and locally separated cases. I checked the two new inputs against their sources separately: stacks-morphisms.tex Tags 0CPU (existence), 0CMK (flat base change), 0CML (underlying closure), plus spaces-morphisms.tex Tags 082X/082Z for the kernel description on affine charts; and Rydh Corollary (5.22) for representability and integrality. Rydh assumes quasi-separated spaces in his terminology paragraph (printed p.4). For the new input, this causes no extra hypothesis: after etale base change to an affine scheme T in Y, the source is quasi-compact (a universal homeomorphism is universally closed) and separated over T. It is therefore quasi-separated, and Rydh (5.22) applies; scheme representability and integrality are etale local on the target. I recorded this local reduction in source.place. The latter really needs separatedness: the bug-eyed universal homeomorphism in spaces-morphisms.tex is not a counterexample because it is not separated. I did not cite a scheme theorem for an algebraic-space conclusion.
+
+For C1/C4 I read the complete statements of all cited nodes. Step 4 uses exactly the new image theorem's existence, kernel injection, and underlying closure clauses. Its map g is quasi-compact by step 3; the target A is an open algebraic subspace. Step 6 uses exactly the separated-space theorem's representability/affineness conclusion and the image theorem's etale-base-change dominance assertion. The base change W_T to W is etale because T to V is, so its hypothesis is checked. B1 maps injectively into the functions on U_T, and the Stein condition applies because T is an object of V's small etale site. The ring calculation explicitly proves the two maps inverse; it does not infer an isomorphism merely from a retraction.
+
+Steps 1, 2, 3, 5, and 7 use only the hypotheses and written chart/quotient calculations, rather than an uncited effective-descent theorem. In step 1 a surjective immersion is closed, but is an isomorphism only after the ideal is killed by the injective structure map; reducedness of V is never assumed. Step 2 uses equality on R only for geometric point values, where a field kills nilpotents. Step 3 pulls back the diagonal's closed-in-open factorization explicitly and descends only saturated opens and closed sets by the quotient criterion. Step 4's closed section is surjective on points, and remains so after arbitrary base change because on charts its ideal consists of nilpotents. Step 5 proves universal closedness by taking the inverse image of r_T(C) under the quotient map U_T to T; geometric fibres show universal injectivity, and the immersive diagonal then becomes closed. Thus it does not presume that an arbitrary universally submersive morphism descends arbitrary locally closed subsets. Step 7 writes the descended map and verifies both implications of the compatibility criterion.
+
+I checked B1--B9 (standalone statements, actual definition citations or inline meanings, single TeX escapes, exact sources, real searches), C1--C8 (all non-elementary inputs have nodes; no proof-of-node citation or off-route substitution), D1--D5 (neither child restates the descent assertion; the item carries saturation, graph construction and Stein algebra argument), and E1--E7 (all hypotheses, exact objects, maps and compositions). Small cases: p the identity on a nonreduced V; empty V (then U empty by surjectivity); maps to an affine space; disconnected fibres; and inseparable finite maps. The nontrivial Frobenius map of a reduced affine line is excluded by the structure-sheaf-isomorphism hypothesis, not mistakenly accepted as Stein. A surjective closed immersion into a nonreduced scheme need not be an isomorphism, so that step always includes the ideal-injectivity argument. All steps are shorter than 2000 characters. New nodes remain statement-only, with no hidden proofs or proof dependencies. No agents, Lean code, compiler, Lake, git command in the shared repository, or forbidden source was used.
+
+## Unfinished work
+
+The two new statement-only inputs remain stage-1 queue work, as required by a one-level split. No portion of the item's argument is left unstated.
+
+## Validation
+
+The first complete deliver.py --no-push exited successfully: OK (not pushed), preflight passed at 3267ca3f588. Following it I added only the source-scope explanation for Rydh and source-inspection details in this report. The final dry run is rerun on those final files before the direct push.

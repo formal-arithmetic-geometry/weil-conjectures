@@ -1,0 +1,192 @@
+{
+ "id": "lem-sp-tower-fibre-projections",
+ "kind": "statement",
+ "title": "Counit projections of an ordinary coefficient-tower fibre are locally invertible",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, the actual ell-power quotient rings A_n=O_E/(ell^(n+1)), and the published ordinary derived categories D(T) of strict semilinear varying-coefficient systems [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Let b:Base ell E and o:Operations ell E b be the normalized geometric operations of [det-sp-tower-shriek-levels]. For an arbitrary scheme Z and opens U,V, put W=U intersection V. Write r_D for the specified derived inverse image along D -> Z, R_D for its right derived direct image, and r_UD,r_VD for the inverse images to W. Use the comparisons r_W isomorphic to r_U followed by r_UW and r_V followed by r_VW obtained from o.comp and the equalities of the actual inclusion maps. For P in D(U), Q in D(V) and c:r_UW(P) isomorphic to r_VW(Q), form d=(res_U followed by R_W(c),-res_V), where res_D is the adjunction mate of the restriction of the D-counit. Given ANY distinguished triangle G --f--> R_U(P) direct-sum R_V(Q) --d--> R_W(r_VW(Q)) --> G[1], both maps r_U(f) followed by r_U(projection_1) and the U-counit, and r_V(f) followed by r_V(projection_2) and the V-counit, are invertible. No open-cover, finite-type, constructibility, cohomological or Tor hypotheses are imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Gluing paragraph, the two restricted fibre projections; retained proof steps 1--2"
+ },
+ "stmt_deps": [
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-tower-shriek-levels",
+  "def-sp-ringed-topos-binary-descent-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary ringed sequence-site presentation of strict varying-coefficient towers. Localize at the constant representable open subterminal for each of U,V,U intersection V. The slice equivalence identifies the base site with the small pro-etale site of the open subscheme. The coefficient ring comparisons fix constant sections and hence every quotient transition; consequently the resulting system module categories and ordinary restrictions are exactly the specified geometric ones.",
+   "uses": [
+    "lem-pur-sequence-site-open-extension",
+    "lem-weil-proetale-weakly-etale-localization",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing: sequence-topos localization, retained steps 1--2"
+   }
+  },
+  {
+   "text": "Localize the additive exact module comparisons termwise. The universal properties of right adjoints identify direct images and their counits with those in Operations.geometry. The comp_termwise field fixes the comparison as the localization of ordinaryComp. The comp_evaluation equation fixes its ordinary components at every coefficient level to the canonical constant-section pullback composition; ordinary system morphisms are determined by their level components, so these are the actual nested restriction comparisons.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing: normalized ordinary geometric and derived adjunctions"
+   }
+  },
+  {
+   "text": "Apply ringedTopos_fibre_restriction after the preceding identifications, transporting the given triangle. On U the second component of its middle map becomes -1; on V the first component is invertible after applying the overlap isomorphism. In either case the arrow is split epic, the connecting map is zero, and the fibre is the graph of the remaining component. Projection to the other summand and the invertible open counit therefore give exactly the two asserted invertible maps. This calculation does not require that the opens cover Z.",
+   "uses": [
+    "lem-sp-ringed-topos-fibre-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG, lemma-glue: restricted fibre calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-site-open-extension",
+  "lem-weil-proetale-weakly-etale-localization",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-tower-shriek-levels",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sp-ringed-topos-fibre-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Gluing paragraph, the two restricted fibre projections; retained proof steps 1--2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived gluing over two open subsets preserves constructibility and Tor amplitude",
+   "results": "AlgebraicGeometry.Scheme.Cover.gluedCover; AlgebraicGeometry.Scheme.GlueData.toGlueData; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor; AlgebraicGeometry.Scheme.GlueData.gluedScheme; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor; AlgebraicGeometry.Scheme.GlueData; AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The results concern scheme gluing, topological constructibility or module finite presentation, not the specified derived coefficient-tower projections or intrinsic finite-coefficient bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "binary.*(descent|restriction)|torAmplitude.*local",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The results concern scheme gluing, topological constructibility or module finite presentation, not the specified derived coefficient-tower projections or intrinsic finite-coefficient bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible cohomology bounded Tor amplitude of a derived sheaf is local on a finite open cover",
+   "results": "Topology.IsLocallyConstructible.of_isOpenCover; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover; Topology.IsLocallyConstructible.of_isOpenCover'; Topology.IsLocallyConstructible.iff_of_isOpenCover; TopCat.Presheaf.IsSheafOpensLeCover; TopCat.Sheaf.forget; SheafOfModules.QuasicoherentData.mk; TopCat.Presheaf.IsSheaf",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The results concern scheme gluing, topological constructibility or module finite presentation, not the specified derived coefficient-tower projections or intrinsic finite-coefficient bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projections from a homotopy fibre of derived open direct images restrict to isomorphisms on both open subsets",
+   "results": "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict; AlgebraicGeometry.morphismRestrictOpensRange; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc; AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The results concern scheme gluing, topological constructibility or module finite presentation, not the specified derived coefficient-tower projections or intrinsic finite-coefficient bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary distinguished fibre triangle from two open direct images has invertible counit projections on each open",
+   "results": "AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; TopCat.Presheaf.generateEquivalenceOpensLe_counitIso; AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso; TopologicalSpace.Opens.overEquivalence_counitIso_inv_app; TopologicalSpace.Opens.adjunction_counit_map_functor; TopologicalSpace.Opens.adjunction_counit_app_self; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; TopologicalSpace.Opens.overEquivalence_counitIso_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The results concern scheme gluing, topological constructibility or module finite presentation, not the specified derived coefficient-tower projections or intrinsic finite-coefficient bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite ring, a derived proetale sheaf is constructible with bounded cohomology and Tor amplitude if it has those properties on two covering opens",
+   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover; SheafOfModules.IsFiniteType; AlgebraicGeometry.Scheme.etaleTopology; Algebra.FormallyEtale.instForallOfFinite; LightProfinite.instWEqualsLocallyBijectiveCoherentTopology; SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The results concern scheme gluing, topological constructibility or module finite presentation, not the specified derived coefficient-tower projections or intrinsic finite-coefficient bounds."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerBinaryCtfFibre",
+  "date": "2026-10-25",
+  "group": "J4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Gluing paragraph, the two restricted fibre projections; retained proof steps 1--2",
+   "via": [
+    "lem-sp-tower-binary-ctf-fibre"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerFibreProjections",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerFibreProjections.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.tower_fibre_projections",
+  "statement": "theorem tower_fibre_projections\n    (Z : Scheme.{u}) (U V : Z.Opens)\n    (P : D l E U.toScheme) (Q : D l E V.toScheme)\n    (c : (pull l E b (o.geometry (Z.homOfLE (inf_le_left : U ⊓ V ≤ U)))).obj P ≅\n      (pull l E b (o.geometry (Z.homOfLE (inf_le_right : U ⊓ V ≤ V)))).obj Q) :\n    let compU := (o.comp (Z.homOfLE (inf_le_left : U ⊓ V ≤ U)) U.ι ≪≫\n      eqToIso (congrArg (fun f ↦ pull l E b (o.geometry f))\n        (Z.homOfLE_ι (inf_le_left : U ⊓ V ≤ U)))).symm\n    let compV := (o.comp (Z.homOfLE (inf_le_right : U ⊓ V ≤ V)) V.ι ≪≫\n      eqToIso (congrArg (fun f ↦ pull l E b (o.geometry f))\n        (Z.homOfLE_ι (inf_le_right : U ⊓ V ≤ V)))).symm\n    let d := biprod.desc\n      (restrictionAdjunctionMap (adjunction l E b (o.geometry U.ι))\n        (adjunction l E b (o.geometry (U ⊓ V).ι)) compU P ≫\n          (push l E b (o.geometry (U ⊓ V).ι)).map c.hom)\n      (-restrictionAdjunctionMap (adjunction l E b (o.geometry V.ι))\n        (adjunction l E b (o.geometry (U ⊓ V).ι)) compV Q)\n    ∀ (G : D l E Z)\n      (f : G ⟶ (push l E b (o.geometry U.ι)).obj P ⊞\n        (push l E b (o.geometry V.ι)).obj Q)\n      (δ : (push l E b (o.geometry (U ⊓ V).ι)).obj\n        ((pull l E b (o.geometry (Z.homOfLE (inf_le_right : U ⊓ V ≤ V)))).obj Q) ⟶\n          (shiftFunctor _ (1 : ℤ)).obj G),\n      Triangle.mk f d δ ∈ distTriang _ →\n        IsIso ((pull l E b (o.geometry U.ι)).map f ≫\n          (pull l E b (o.geometry U.ι)).map biprod.fst ≫\n            (adjunction l E b (o.geometry U.ι)).counit.app P) ∧\n        IsIso ((pull l E b (o.geometry V.ι)).map f ≫\n          (pull l E b (o.geometry V.ι)).map biprod.snd ≫\n            (adjunction l E b (o.geometry V.ι)).counit.app Q)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sp-tower-fibre-projections",
+  "worker": "stage3",
+  "summary": "Strictly simpler source step separated from the explicit fibre-and-overlap assembly; the statement has no global gluing existence conclusion.",
+  "blueprint": "Gluing paragraph, the two restricted fibre projections; retained proof steps 1--2",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sequence-site-open-extension",
+    "why": "Generic site, coefficient encoding, exactness or finite-cover locality tool used only to identify the existing ordinary geometric operations and finite-level predicates. It does not replace the smooth-purity tower gluing route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site, coefficient encoding, exactness or finite-cover locality tool used only to identify the existing ordinary geometric operations and finite-level predicates. It does not replace the smooth-purity tower gluing route."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Generic site, coefficient encoding, exactness or finite-cover locality tool used only to identify the existing ordinary geometric operations and finite-level predicates. It does not replace the smooth-purity tower gluing route."
+   },
+   {
+    "node": "det-sp-tower-shriek-levels",
+    "why": "Generic site, coefficient encoding, exactness or finite-cover locality tool used only to identify the existing ordinary geometric operations and finite-level predicates. It does not replace the smooth-purity tower gluing route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic site, coefficient encoding, exactness or finite-cover locality tool used only to identify the existing ordinary geometric operations and finite-level predicates. It does not replace the smooth-purity tower gluing route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T143455-L-1026402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T143455-L-1026402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

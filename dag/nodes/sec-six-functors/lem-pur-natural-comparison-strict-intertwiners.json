@@ -1,0 +1,219 @@
+{
+ "id": "lem-pur-natural-comparison-strict-intertwiners",
+ "kind": "statement",
+ "title": "Strict structures and intertwining arrows under a natural comparison",
+ "statement": "Let $\\mathcal C$ be a category [def-nagata-category], let $F,G:\\mathcal C\\to\\mathcal C$ be endofunctors, and let $\\kappa:F\\xrightarrow{\\sim}G$ be a natural isomorphism. Thus, for each $h:M\\to N$, $G(h)\\circ\\kappa_M=\\kappa_N\\circ F(h)$. Give $M,N\\in\\mathcal C$ morphisms $\\varphi_M:G(M)\\to M$ and $\\varphi_N:G(N)\\to N$, and set $u_M=\\varphi_M\\circ\\kappa_M$ and $u_N=\\varphi_N\\circ\\kappa_N$. Then\n$$h\\circ\\varphi_M=\\varphi_N\\circ G(h)\\quad\\Longleftrightarrow\\quad h\\circ u_M=u_N\\circ F(h).$$\nThe lower arrow in both squares is the same $h$; the upper arrows are $G(h)$ and $F(h)$ respectively. If $\\varphi_M$ is invertible, then $u_M$ is invertible with\n$$u_M^{-1}=\\kappa_M^{-1}\\circ\\varphi_M^{-1},\\qquad u_M^{-1}\\circ u_M=\\mathrm{id}_{F(M)},\\qquad u_M\\circ u_M^{-1}=\\mathrm{id}_M.$$\nThe same assertion holds for $N$. Consequently these formulas send strict $G$-fixed pairs and their intertwining arrows to strict $F$-fixed pairs and their intertwining arrows [def-weil-endofunctor-fixed-pair-category], without changing any underlying object or arrow.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
+  "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof": [
+  {
+   "text": "For the forward implication, assume $h\\circ\\varphi_M=\\varphi_N\\circ G(h)$. Substitution of $u_M,u_N$, associativity [def-nagata-category], and the stated naturality equation give\n$$h\\circ u_M=(h\\circ\\varphi_M)\\circ\\kappa_M=\\varphi_N\\circ G(h)\\circ\\kappa_M=\\varphi_N\\circ\\kappa_N\\circ F(h)=u_N\\circ F(h).$$\nBoth sides are maps $F(M)\\to N$; only the upper arrow has changed from $G(h)$ to $F(h)$, while the lower arrow is $h$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
+    "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
+   }
+  },
+  {
+   "text": "Conversely assume $h\\circ u_M=u_N\\circ F(h)$. Substituting the definitions and the stated naturality equation yields\n$$(h\\circ\\varphi_M)\\circ\\kappa_M=(\\varphi_N\\circ G(h))\\circ\\kappa_M.$$\nPrecompose both sides with $\\kappa_M^{-1}:G(M)\\to F(M)$. Associativity and $\\kappa_M\\circ\\kappa_M^{-1}=\\mathrm{id}_{G(M)}$ reduce this equality to $h\\circ\\varphi_M=\\varphi_N\\circ G(h)$. This is an explicit cancellation using the inverse given by the natural isomorphism, not an assumption on $h$ or on either $\\varphi$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
+    "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
+   }
+  },
+  {
+   "text": "If $\\varphi_M$ is invertible, put $v_M=\\kappa_M^{-1}\\circ\\varphi_M^{-1}:M\\to F(M)$. Associativity and the defining inverse equations give\n$$v_M\\circ u_M=\\kappa_M^{-1}\\circ(\\varphi_M^{-1}\\circ\\varphi_M)\\circ\\kappa_M=\\kappa_M^{-1}\\circ\\kappa_M=\\mathrm{id}_{F(M)},$$\n$$u_M\\circ v_M=\\varphi_M\\circ(\\kappa_M\\circ\\kappa_M^{-1})\\circ\\varphi_M^{-1}=\\varphi_M\\circ\\varphi_M^{-1}=\\mathrm{id}_M.$$\nThus $v_M=u_M^{-1}$. Replacing $M$ by $N$ in these same two equations proves the assertion for $N$ whenever $\\varphi_N$ is invertible.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
+    "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
+   }
+  },
+  {
+   "text": "By [def-weil-endofunctor-fixed-pair-category], a strict $G$-fixed pair is precisely $(M,\\varphi_M)$ with invertible structure map, and an arrow between two such pairs is an underlying $h$ satisfying the left-hand intertwiner equation. Step 3 gives a strict $F$-fixed pair $(M,u_M)$; steps 1 and 2 identify exactly the allowed underlying arrows. Assign $(M,\\varphi_M)\\mapsto(M,u_M)$ and $h\\mapsto h$. Identities and composites in each fixed-pair category are those in $\\mathcal C$, so this assignment preserves them literally. The objects of $\\mathcal C$ and the underlying arrows are unchanged.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
+    "place": "Entire proof: comparison of the two pullbacks, compatibility with pullback-composition and f, and preservation of the squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-scheme-frobenius.proof.md",
+  "place": "Expansion of the final sentence: precomposing the vertical maps preserves commutativity; inverse equations and converse written explicitly by Q126"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra.functorOfNatTrans",
+   "results": "12 hits; CategoryTheory.Endofunctor.Algebra.functorOfNatTrans; CategoryTheory.Endofunctor.Algebra.functorOfNatTransId; CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_a; CategoryTheory.Endofunctor.Algebra.equivOfNatIso_functor; CategoryTheory.Endofunctor.Algebra.equivOfNatIso_inverse; CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq; CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_str; CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp. Read the relevant Mathlib source; these are ingredients, not the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "partial categorical ingredients; no single declaration or one-line specialization for the complete stated comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between endofunctors transports invertible algebra structure maps and equivariant morphisms by precomposition with its components",
+   "results": "8 hits; CategoryTheory.Endofunctor.Algebra.isoMk; CategoryTheory.Monad.algebraEquivOfIsoMonads_functor; CategoryTheory.Endofunctor.Algebra.isoMk_hom_f; CategoryTheory.Monad.algebraEquivOfIsoMonads; CategoryTheory.Endofunctor.Algebra.iso_of_iso; CategoryTheory.Monad.Algebra.isoMk; CategoryTheory.Functor.mapActionCongr; CategoryTheory.Functor.mapActionCongr_hom. Read the relevant Mathlib source; these are ingredients, not the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "partial categorical ingredients; no single declaration or one-line specialization for the complete stated comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "functorOfNatTrans|equivOfNatIso|isIso_comp",
+   "results": "25 hits; Mathlib/CategoryTheory/Adhesive/Basic.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean; Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean. Read the relevant Mathlib source; these are ingredients, not the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "partial categorical ingredients; no single declaration or one-line specialization for the complete stated comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between endofunctors identifies invertible algebra structure maps and gives an if and only if between their equivariant morphism equations",
+   "results": "8 hits; CategoryTheory.NatIso.isIso_map_iff; CategoryTheory.MonadIso.toNatIso; CategoryTheory.Endofunctor.Algebra.isoMk_hom_f; CategoryTheory.Endofunctor.Algebra.isoMk; CategoryTheory.Cat.Hom.instIsIsoFunctorαCategoryToNatTransHomHom; CategoryTheory.Endofunctor.Algebra.iso_of_iso; CategoryTheory.Endofunctor.Algebra.functorOfNatTransId; CategoryTheory.NatIso.hom_app_isIso. Read the relevant Mathlib source; these are ingredients, not the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "partial categorical ingredients; no single declaration or one-line specialization for the complete stated comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For invertible maps phi from G M to M and a natural isomorphism kappa from F to G the inverse of phi composed with kappa is kappa inverse composed with phi inverse and the same arrow intertwines both structures if and only if",
+   "results": "8 hits; CategoryTheory.Iso.isoCompInverse_inv_app; CategoryTheory.Iso.compInverseIso_hom_app; CategoryTheory.Iso.isoFunctorOfIsoInverse_inv_app; CategoryTheory.Iso.compInverseIso_inv_app; CategoryTheory.Iso.isoInverseOfIsoFunctor_inv_app; CategoryTheory.Iso.isoInverseOfIsoFunctor_hom_app; CategoryTheory.Iso.isoCompInverse_hom_app; CategoryTheory.NatIso.inv_map_inv_app. Read the relevant Mathlib source; these are ingredients, not the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "partial categorical ingredients; no single declaration or one-line specialization for the complete stated comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "functorOfNatTrans|equivOfNatIso|isIso_comp",
+   "results": "OK 25 hits: Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean. Read Endofunctor/Algebra.lean lines 151–200 and NatIso.lean lines 45–145; hits give transport, naturality or cancellation ingredients, not the complete iff and specified strict inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no exact match for complete statement; partial categorical ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between endofunctors transports invertible algebra structures and gives an equivalence of the equations for equivariant arrows",
+   "results": "OK 8 hits: CategoryTheory.MonadIso.toNatIso, CategoryTheory.Endofunctor.Algebra.isoMk, CategoryTheory.NatIso.isIso_app_of_isIso, CategoryTheory.Cat.Hom.instIsIsoFunctorαCategoryToNatTransHomHom, CategoryTheory.NatIso.hom_app_isIso, CategoryTheory.Arrow.isoOfNatIso, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans, CategoryTheory.Endofunctor.Algebra.functorOfNatTransId. Read Endofunctor/Algebra.lean lines 151–200 and NatIso.lean lines 45–145; hits give transport, naturality or cancellation ingredients, not the complete iff and specified strict inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no exact match for complete statement; partial categorical ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra.functorOfNatTrans",
+   "results": "OK 12 hits: CategoryTheory.Endofunctor.Algebra.functorOfNatTrans, CategoryTheory.Endofunctor.Algebra.functorOfNatTransId, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_a, CategoryTheory.Endofunctor.Algebra.equivOfNatIso_functor, CategoryTheory.Endofunctor.Algebra.equivOfNatIso_inverse, CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq, CategoryTheory.Endofunctor.Algebra.functorOfNatTrans_obj_str, CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp. Read Endofunctor/Algebra.lean lines 151–200 and NatIso.lean lines 45–145; hits give transport, naturality or cancellation ingredients, not the complete iff and specified strict inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no exact match for complete statement; partial categorical ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between endofunctors identifies the equations for morphisms intertwining their algebra structures and preserves invertible structure maps",
+   "results": "OK 8 hits: CategoryTheory.Endofunctor.Algebra.isoMk, CategoryTheory.Endofunctor.Algebra.isoMk_hom_f, CategoryTheory.Endofunctor.Algebra.iso_of_iso, CategoryTheory.Monad.Algebra.isoMk, CategoryTheory.Endofunctor.Algebra.isoMk_inv_f, CategoryTheory.Monad.Algebra.isoMk_hom_f, CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq, CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq_inv_app_f. Read Endofunctor/Algebra.lean lines 151–200 and NatIso.lean lines 45–145; hits give transport, naturality or cancellation ingredients, not the complete iff and specified strict inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no exact match for complete statement; partial categorical ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a natural isomorphism kappa from F to G and maps phi from G X to X, an arrow commutes with phi if and only if it commutes with phi composed with kappa; the inverse structure map is kappa inverse composed with phi inverse",
+   "results": "OK 8 hits: CategoryTheory.NatIso.cancel_natIso_inv_right_assoc, CategoryTheory.NatIso.cancel_natIso_inv_right, CategoryTheory.NatIso.naturality_2, CategoryTheory.NatIso.naturality_1, CategoryTheory.Iso.inv_hom_id_app_assoc, CategoryTheory.NatIso.naturality_2', CategoryTheory.ComposableArrows.map'_inv_eq_inv_map', CategoryTheory.NatIso.naturality_1'. Read Endofunctor/Algebra.lean lines 151–200 and NatIso.lean lines 45–145; hits give transport, naturality or cancellation ingredients, not the complete iff and specified strict inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no exact match for complete statement; partial categorical ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "cancel_natIso_inv_right|naturality_1|naturality_2|inv_hom_id_app",
+   "results": "OK 5 hits: 65, 73, 82, 119, 134. Read Endofunctor/Algebra.lean lines 151–200 and NatIso.lean lines 45–145; hits give transport, naturality or cancellation ingredients, not the complete iff and specified strict inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no exact match for complete statement; partial categorical ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-weil-equivariance-scheme-frobenius",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Endofunctor.Algebra.functorOfNatTrans",
+  "file": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+  "how": "Lines 156–160 give forward transport for arbitrary structure morphisms. Lines 194–200 give an equivalence for unrestricted algebras. The stated iff, invertible-structure restriction and specified two inverse equations still require assembling naturality and inverse identities; not recorded as an exact leaf."
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-scheme-frobenius",
+   "place": "Proof, sentence \"precomposing the vertical maps preserves the commutativity of the squares\"; old expanded steps 1–2: naturality, intertwiner calculation, and inverse of each precomposed strict datum",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-natural-comparison-strict-intertwiners",
+  "worker": "stage1",
+  "summary": "Expanded the natural-comparison argument into forward naturality, inverse-component cancellation, both inverse equations for each strict structure, and the unchanged-arrow functor. Every step is elementary from the stated data and the two existing definitions. No statement change and no new nodes. Read source and all cited statements; searched project, DAG, whole blueprint and Mathlib.",
+  "blueprint": "prop-pur-weil-equivariance-scheme-frobenius.proof.md, final sentence: precomposing the vertical maps preserves commutativity of the squares. Steps 1–2 prove the square comparison; step 3 proves strictness; step 4 realizes it for fixed pairs."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-54bd03d3c",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-54bd03d3c (reviewer sub-agent of L); spot-checked: Read the delivery in full. It has one commit containing the item and the report, and creates no new nodes. Compared with the base copy (from the sibling Q125 run snapshot, where the item is unsplit with no proof), the statement, stmt_deps, blueprint, created and mathlib_candidate are unchanged. The delivery adds only the proof, proof_deps, proof_origin, split_report, status split and 6 new searches, and keeps all 5 base searches. The item is still unsplit with no proof and no reviewed record in clones/live and side-live, so it is not superseded. It was created on 2026-10-22, so it cannot be on the 10-19 dropped list, and no repair note exists for it. Source: main-20261015 prop-pur-weil-equivariance-scheme-frobenius.proof.md, a one-sentence proof ('precomposing the vertical maps preserves the commutativity'). The item states the abstract part of that sentence in both directions, which does not weaken it, and no SGA source is used. Every type checks: u_M=φ_Mκ_M:F(M)→M, naturality G(h)κ_M=κ_NF(h), and the inverse κ_M^{-1}φ_M^{-1}:M→F(M). Step 1 (⇒): the chain hu_M=hφ_Mκ_M=φ_NG(h)κ_M=φ_Nκ_NF(h) is correct. Step 2 (⇐): the equation hφ_Mκ_M=φ_NG(h)κ_M is right-cancelled by κ_M^{-1}, which the natural-isomorphism hypothesis supplies. Step 3: both inverse identities are checked. Step 4 matches the statement of def-weil-endofunctor-fixed-pair-category (status mathlib): objects need an isomorphism θ:T(X)≅X, arrows are the intertwiner equation, and identities and composition are those of C, so h↦h preserves them. Associativity comes from def-nagata-category (status mathlib). All steps are correctly marked elementary, proof_deps equals the union of the uses lists, and there are no off-route statements and no tool_uses. Small cases tested: κ=id, a terminal category, non-invertible φ (the inverse clause is conditional), non-invertible h, and the empty category. The citer prop-pur-weil-equivariance-scheme-frobenius (steps 1–3) uses exactly the ⇒ direction and the inverse formula. The sibling lem-pur-natural-comparison-functor-transport (transport along L) is not a duplicate. The Mathlib candidate is accurate: functorOfNatTrans and equivOfNatIso in Endofunctor/Algebra.lean ll.152–196 give the forward transport and an equivalence of unrestricted algebra categories. Neither states the iff with the inverse formulas, so keeping the node split with the candidate recorded is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NaturalComparisonStrictIntertwiners",
+  "declaration": "CategoryTheory.Endofunctor.Algebra.naturalComparisonStrictIntertwiners",
+  "file": "lean/Sheaf/CategoryTheory/NaturalComparisonStrictIntertwiners.lean",
+  "statement": "theorem naturalComparisonStrictIntertwiners {C : Type u} [Category.{v} C] (F G : C ⥤ C) (kappa : F ≅ G) (M N : C) (phiM : G.obj M ⟶ M) (phiN : G.obj N ⟶ N) (h : M ⟶ N) : ((phiM ≫ h = G.map h ≫ phiN) ↔ ((kappa.hom.app M ≫ phiM) ≫ h = F.map h ≫ (kappa.hom.app N ≫ phiN))) ∧ (∀ (_hM : IsIso phiM), IsIso (kappa.hom.app M ≫ phiM) ∧ inv (kappa.hom.app M ≫ phiM) = inv phiM ≫ kappa.inv.app M ∧ (kappa.hom.app M ≫ phiM) ≫ (inv phiM ≫ kappa.inv.app M) = 𝟙 (F.obj M) ∧ (inv phiM ≫ kappa.inv.app M) ≫ (kappa.hom.app M ≫ phiM) = 𝟙 M) ∧ (∀ (_hN : IsIso phiN), IsIso (kappa.hom.app N ≫ phiN) ∧ inv (kappa.hom.app N ≫ phiN) = inv phiN ≫ kappa.inv.app N ∧ (kappa.hom.app N ≫ phiN) ≫ (inv phiN ≫ kappa.inv.app N) = 𝟙 (F.obj N) ∧ (inv phiN ≫ kappa.inv.app N) ≫ (kappa.hom.app N ≫ phiN) = 𝟙 N) ∧ (∃ T : ObjectProperty.FullSubcategory (fun A : Algebra G ↦ IsIso A.str) ⥤ ObjectProperty.FullSubcategory (fun A : Algebra F ↦ IsIso A.str), T ⋙ ObjectProperty.ι (fun A : Algebra F ↦ IsIso A.str) = ObjectProperty.ι (fun A : Algebra G ↦ IsIso A.str) ⋙ functorOfNatTrans kappa.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-625115b64",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Every clause matches the Lean in diagrammatic order: phiM≫h=G.map h≫phiN ↔ (κ_M≫phiM)≫h=F.map h≫(κ_N≫phiN); conditional IsIso, inv = inv phiM≫κ.inv.app M and both identity equations for M and, independently, for N. The fixed-pair clause is ∃T on the full subcategories of algebras with IsIso str (the recorded specialization of def-weil-endofunctor-fixed-pair-category), with T⋙ι = ι⋙functorOfNatTrans κ.hom. Read Mathlib's functorOfNatTrans (α:G⟶F): Algebra F⥤Algebra G with str α.app≫A.str and map f.1, so the objects and arrows are unchanged and T is pinned, not arbitrary. Universes u, v bound independently; no extra assumptions. lean.statement occurs verbatim in the file. Docstrings give the source place, the blueprint id and steps 1-4; one sorry theorem, no definitions, Mathlib-only imports. The non-lean node fields equal the side-live node, which has no lean/reviewed_lean (not superseded); no name clash; the sibling FunctorTransport is distinct. Edge cases: κ=id, non-invertible φ and h, empty C. No FIX, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261022T143959-L-1467023",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Endofunctor.Algebra.naturalComparisonStrictIntertwiners"
+  ],
+  "sorry_after": []
+ }
+}

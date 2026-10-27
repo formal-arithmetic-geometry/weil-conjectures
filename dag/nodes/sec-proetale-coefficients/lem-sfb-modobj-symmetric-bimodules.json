@@ -192,7 +192,122 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-10272e598 (reviewer sub-agent of L); spot-checked: Read all five nodes, cited statements, current blueprint route, and Mathlib source locations. All five proof steps and four new leaves check out; nonsymmetric braided small-case tests pass. No duplicates, missing dependencies, cycles, or target weakening found. Report’s missing-metadata warning is stale. Full findings written to review.md; no repairs required."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.fullyFaithfulToBimod",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      93,
+      95
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Mod.toBimodObj",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      52,
+      76
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Mod.toBimod",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      79,
+      88
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Bimod.IsSymmetric",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      139,
+      142
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Bimod.isSymmetric_toBimodObj",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      167,
+      167
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.fullyFaithfulToBimod",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      93,
+      95
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Mod.toBimodObj",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      52,
+      76
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Mod.toBimod",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      79,
+      88
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Bimod.IsSymmetric",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      139,
+      142
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Bimod.isSymmetric_toBimodObj",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
+     "lines": [
+      167,
+      167
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.ModuleObjects.Bimod",
   "declaration": "CategoryTheory.Mod.fullyFaithfulToBimod",
@@ -217,5 +332,26 @@
   "group": "Q149",
   "result": "pass",
   "note": "existing:true binding to WeilConjectures.CategoryTheory.ModuleObjects.Bimod (CategoryTheory.Mod.fullyFaithfulToBimod, named by the source blueprint itself). Clause by clause: BraidedCategory with no symmetry assumption; MonObj+IsCommMonObj R; Mathlib Mod C R (= sk-def-sfb-module-objects record); actRight = β ≫ γ; Bimod (Mon.mk R) (Mon.mk R) with all five laws proved; toBimod keeps f.hom; FullyFaithful with explicit preimage; Bimod.IsSymmetric is exactly the node's definition; isSymmetric_toBimodObj needs no coequalizer instances (that section closes first). lean.statement is verbatim from line 94. Node differs from live only in lean. nt_compile --json probe: #check of all 5 declarations clean in 4.5 s, axioms propext/choice/Quot.sound only. Not dropped. Report sections present. Stale lean_not_found import flag is not a fault."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal C$ be a braided monoidal category with braiding $\\beta$, and let\n$\\mathcal R$ be a commutative monoid object of $\\mathcal C$. Let $M$ be an\n$\\mathcal R$-module object ([det-def-sfb-module-objects-definition]). Then the left action $\\gamma_M$\nand the right action\n$$\n\\rho_M:=\\gamma_M\\circ\\beta_{M,\\mathcal R}\\colon M\\otimes\\mathcal R\\to M\n$$\nmake $M$ an $\\mathcal R$-$\\mathcal R$-bimodule. Call a bimodule *symmetric* if its right\naction is the braiding followed by its left action. The functor\n$M\\mapsto(M,\\gamma_M,\\rho_M)$ from $\\Mod_{\\mathcal R}(\\mathcal C)$ to\n$\\mathcal R$-$\\mathcal R$-bimodules is fully faithful, and its values are symmetric\nbimodules.",
+  "proof": [
+   {
+    "text": "The right unit law says that $\\rho_M(M\\otimes\\eta)$ is the right unitor of $M$. It\nfollows from naturality of $\\beta$, which gives\n$\\beta_{M,\\mathcal R}(M\\otimes\\eta)=(\\eta\\otimes M)\\beta_{M,\\mathbf 1}$, together with the\nleft unit law and the fact that braiding with $\\mathbf 1$ is the unitor identification. Right associativity and the compatibility of the two actions\nfollow from naturality of $\\beta$ and the hexagon identities. These reduce both sides to\nthe action of $\\mathcal R\\otimes\\mathcal R$ on $M$, up to the order of the two factors of\n$\\mathcal R$. The two orders agree because $\\mathcal R$ is commutative:\n$\\mu\\beta_{\\mathcal R,\\mathcal R}=\\mu$, so\n$\\gamma_M(\\mu\\beta_{\\mathcal R,\\mathcal R}\\otimes M)=\\gamma_M(\\mu\\otimes M)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "A morphism of module objects commutes with the right actions by naturality of $\\beta$.\nA morphism of bimodules is in particular a morphism of left modules. Morphisms in both\ncategories are morphisms of $\\mathcal C$, so the functor is fully faithful. The values are\nsymmetric by the definition of $\\rho_M$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,257 @@
+{
+ "id": "lem-pur-exact-derived-cohomology-coherence",
+ "kind": "statement",
+ "title": "Normalized derived cohomology comparisons for exact functors and their composites",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C$ be abelian categories [def-sp-abelian], and let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal C$ be exact functors (additive and preserving finite limits and finite colimits). Use ordinary unbounded derived categories, defined by localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category], and write $H^a$ for the induced cohomology functors, $a\\in\\mathbf Z$. Let $DF,DG,D(GF)$ be their termwise induced derived functors [lem-sf-exact-functor-derived-triangulated]. There is a canonical isomorphism\n$$ \\theta^a_{F,K}:F(H^aK)\\xrightarrow{\\sim}H^a(DFK) $$\nfor every $K\\in D(\\mathcal A)$, natural for every morphism of the derived category. On each cochain complex representative its map is the inverse of the comparison induced by preservation of kernels, images and quotients, transported through the localization factorizations. In particular, it is independent of the representative. Let $c_K:D(GF)K\\xrightarrow{\\sim}DG(DFK)$ be the derived compositor induced by the termwise identity. Then\n$$ H^a(c_K)\\circ\\theta^a_{GF,K}=\\theta^a_{G,DFK}\\circ G(\\theta^a_{F,K}). $$\nMore generally, for an exact $L:\\mathcal A\\to\\mathcal C$ and a natural isomorphism $\\eta:GF\\xrightarrow{\\sim}L$, let $d:DG\\circ DF\\xrightarrow{\\sim}DL$ be the natural isomorphism $d_K=(D\\eta)_K\\circ c_K^{-1}$, the inverse of the compositor followed by $D\\eta$. The same normalized comparisons satisfy\n$$ H^a(d_K)\\circ\\theta^a_{G,DFK}\\circ G(\\theta^a_{F,K})=\\theta^a_{L,K}\\circ\\eta_{H^aK}. $$\nAll assertions hold for arbitrary unbounded complexes, with no resolution or boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, lemma-right-derived-exact-functor, termwise exact derived functor; canonical cohomology and compositor coherence from Homology and localization. Agent-formulated coherence strengthening; full old Steps 5--6 and the map-uniqueness argument are retained in report.md."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "Fix $a\\in\\mathbf Z$. For a cochain complex $C$ write $i_C:Z_C=\\ker d_C^a\\hookrightarrow C^a$ and $p_C:Z_C\\twoheadrightarrow H^a(C)$. By [lem-sp-exact-functor-preserves-homology], exactness gives the kernel isomorphism $z_{F,C}:FZ_C\\xrightarrow{\\sim}Z_{FC}$ with $i_{FC}z_{F,C}=F(i_C)$, and the inverse homology comparison $t_{F,C}:FH^a(C)\\xrightarrow{\\sim}H^a(FC)$ characterized by\n$$t_{F,C}F(p_C)=p_{FC}z_{F,C}.$$\nIt is natural for cochain maps by clause (c) of that node. In particular, for a quasi-isomorphism $u$, $H^a(Fu)=t_{F,C'}F(H^a(u))t_{F,C}^{-1}$ is invertible, for every $a$. This checks the quasi-isomorphism hypothesis needed below, without boundedness.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, kernel/cokernel proof; its homology consequence in lem-sp-exact-functor-preserves-homology (c)."
+   }
+  },
+  {
+   "text": "Let $Q_{\\mathcal A},Q_{\\mathcal B}$ be the complex localizations of [def-weil-abstract-derived-category], and write $\\lambda_{\\mathcal A,C}:H^a(Q_{\\mathcal A}C)\\xrightarrow{\\sim}H^a(C)$ for the cohomology factorization. The termwise derived functor of [lem-sf-exact-functor-derived-triangulated] has its localization comparison $\\sigma_{F,C}:DF(Q_{\\mathcal A}C)\\xrightarrow{\\sim}Q_{\\mathcal B}(FC)$. The two functors $H^a(DF(-))$ and $F(H^a(-))$, restricted along $Q_{\\mathcal A}$, are identified with the two cochain functors of Step 1. Clause (2) of [lem-weil-pbc-localization-universal-property] therefore lifts $t_F$ uniquely to a natural isomorphism $\\theta_F^a$, with\n$$\\theta^a_{F,Q_{\\mathcal A}C}=H^a(\\sigma_{F,C})^{-1}\\lambda_{\\mathcal B,FC}^{-1}t_{F,C}F(\\lambda_{\\mathcal A,C}).$$\nBoth restricted functors invert quasi-isomorphisms by Step 1 and the definition of $H^a$. The uniqueness is among natural transformations on the entire derived category. Thus naturality holds for all derived morphisms and the formula is independent of any representative or representing isomorphism. Apply the same construction to $G,GF,L$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, termwise unbounded descent; agent-written normalized natural-transformation lift using the cited localization node."
+   }
+  },
+  {
+   "text": "The cochain composition equation follows directly from Step 1. The two maps from $GFZ_C$ to $Z_{GFC}$ satisfy\n$$i_{GFC}z_{GF,C}=GF(i_C)=i_{GFC}z_{G,FC}G(z_{F,C}),$$\nso cancel the kernel monomorphism to get $z_{GF,C}=z_{G,FC}G(z_{F,C})$. Consequently\n$$t_{GF,C}GF(p_C)=p_{GFC}z_{GF,C}=t_{G,FC}G(t_{F,C})GF(p_C).$$\nCancel the epimorphism $GF(p_C)$, which is epic by [lem-sp-exact-functor-preserves-homology] (a) applied successively to $F$ and $G$. This gives $t_{GF,C}=t_{G,FC}G(t_{F,C})$. Lean implementation: apply the existing proved source-library ShortComplex.mapHomologyIso_comp to the short complex in degree a, identify its hom with mapHomologicalComplexHomologyIso_hom_app_eq, and take inverses. The cited composition lemma proves precisely this kernel-mono and homology-epi cancellation.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; elementary uniqueness of the kernel map and cancellation of the preserved quotient epimorphism."
+   }
+  },
+  {
+   "text": "The termwise identity $(GF)C=G(FC)$ lifts by clause (2) of [lem-weil-pbc-localization-universal-property] to the compositor $c:D(GF)\\xrightarrow{\\sim}DG\\circ DF$, characterized by\n$$\\sigma_{G,FC}\\,DG(\\sigma_{F,C})\\,c_{Q_{\\mathcal A}C}=\\sigma_{GF,C}.$$\nConsider the two natural transformations $H^a(c)\\theta^a_{GF}$ and $\\theta^a_{G,DF(-)}G(\\theta^a_F)$. On $Q_{\\mathcal A}C$, substitute the formula of Step 2 and the displayed characterization of $c$; naturality of $\\theta_G$ for $\\sigma_{F,C}$ moves its evaluation from $DF(Q_{\\mathcal A}C)$ to $Q_{\\mathcal B}(FC)$. Cancelling the adjacent $\\sigma$ and $\\lambda$ isomorphisms reduces their equality to $t_{GF,C}=t_{G,FC}G(t_{F,C})$, proved in Step 3. Clause (3) of the cited localization node now gives their equality on $D(\\mathcal A)$. Lean implementation: use mapDerivedCategoryCompIso_fac, cancel the termwise identity, solve for sigma_GF inverse followed by c by cancelling the other factorization isomorphisms, and use mapDerivedCategoryHomologyFunctorIso_hom_app_Q. Apply naturality of theta_G along sigma_F inverse, cancel lambda_B inverse followed by lambda_B, and use Step 3. Localization.natTrans_ext supplies clause (3).",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; agent-written compositor normalization and localization equality argument."
+   }
+  },
+  {
+   "text": "For $\\eta:GF\\xrightarrow{\\sim}L$, let $\\eta_C:(GF)C\\to LC$ be the termwise cochain map. Naturality of $\\eta$ for $i_C$ and cancellation of $i_{LC}$ give\n$$Z(\\eta_C)z_{GF,C}=z_{L,C}\\eta_{Z_C}.$$\nHere $Z(\\eta_C)$ is the map induced on kernels; its defining equation is $i_{LC}Z(\\eta_C)=\\eta_{C^a}i_{GFC}$. By the definition of the induced homology map, $H^a(\\eta_C)p_{GFC}=p_{LC}Z(\\eta_C)$. Hence\n$$H^a(\\eta_C)t_{GF,C}GF(p_C)=p_{LC}z_{L,C}\\eta_{Z_C}=t_{L,C}L(p_C)\\eta_{Z_C}=t_{L,C}\\eta_{H^a(C)}GF(p_C).$$\nThe middle equality is Step 1 for $L$, and the last is naturality of $\\eta$ for $p_C$. Cancel the epic $GF(p_C)$, using [lem-sp-exact-functor-preserves-homology] (a). This proves the cochain natural-isomorphism equation, with the specified comparison rather than an arbitrary isomorphism.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; elementary kernel and quotient universal properties and naturality of eta."
+   }
+  },
+  {
+   "text": "Clause (2) of [lem-weil-pbc-localization-universal-property] lifts the termwise $\\eta_C$ to $D\\eta:D(GF)\\xrightarrow{\\sim}DL$, with\n$$\\sigma_{L,C}(D\\eta)_{Q_{\\mathcal A}C}=Q_{\\mathcal C}(\\eta_C)\\sigma_{GF,C}.$$\nSubstitute the Step 2 formulas for $\\theta_{GF}$ and $\\theta_L$ on $Q_{\\mathcal A}C$. The displayed equation cancels the derived-functor factors, naturality of $\\lambda_{\\mathcal C}$ replaces $H^a(Q_{\\mathcal C}(\\eta_C))$ by $H^a(\\eta_C)$, and naturality of $\\eta$ for $\\lambda_{\\mathcal A,C}$ replaces the input coefficient factor. The remaining equality is exactly $H^a(\\eta_C)t_{GF,C}=t_{L,C}\\eta_{H^a(C)}$ from Step 5. Clause (3) gives\n$$H^a((D\\eta)_K)\\theta^a_{GF,K}=\\theta^a_{L,K}\\eta_{H^aK}$$\nfor all derived $K$. Lean implementation: the existing proved source-library mapDerivedCategoryHomologyFunctorIso_hom_app_naturality already performs the cochain calculation and this descent for any natural isomorphism between exact functors. Specialize it to eta : F followed by G isomorphic to L.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; agent-written descent of the explicitly proved natural-isomorphism equation."
+   }
+  },
+  {
+   "text": "By Step 4, $\\theta^a_{G,DFK}G(\\theta^a_{F,K})=H^a(c_K)\\theta^a_{GF,K}$. Since $d_K=(D\\eta)_Kc_K^{-1}$, functoriality of $H^a$ and $c_K^{-1}c_K=1$ give\n$$H^a(d_K)\\theta^a_{G,DFK}G(\\theta^a_{F,K})=H^a((D\\eta)_K)\\theta^a_{GF,K}=\\theta^a_{L,K}\\eta_{H^aK},$$\nwhere the last equality is Step 6. Every construction used only the three consecutive terms defining $H^a$ and the unbounded localization; no resolution or boundedness condition was introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; elementary assembly and cancellation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-abstract-derived-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, lemma-right-derived-exact-functor, strengthened by explicit kernel/quotient uniqueness and the natural-transformation universal property of localization. Lean proof by D9 (2026-10-23) reuses the proved source-library ShortComplex.mapHomologyIso_comp and mapDerivedCategoryHomologyFunctorIso_hom_app_naturality for Steps 3 and 5--6; the representative cancellation and localization extensionality of Step 4 are written in the item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors on abelian categories induce unbounded derived functors naturally commuting with cohomology coherently under composition",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor.  mapDerivedCategory and its Factors declarations supply the derived functor and representative factorization; homologyFunctorFactors supplies cohomology descent. mapHomologicalComplexCompIso is a complex-level compositor. None of the hits states the normalized derived cohomology comparison together with its compositor and natural-isomorphism coherence. Ext.mapExactFunctor_hom concerns Ext of degree-zero objects. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived cohomology isomorphism for a composite of exact functors equals the composite of the cohomology comparison isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app.  mapDerivedCategory and its Factors declarations supply the derived functor and representative factorization; homologyFunctorFactors supplies cohomology descent. mapHomologicalComplexCompIso is a complex-level compositor. None of the hits states the normalized derived cohomology comparison together with its compositor and natural-isomorphism coherence. Ext.mapExactFunctor_hom concerns Ext of degree-zero objects. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "12 hits: DerivedCategory.homologyFunctor, DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt, DerivedCategory.instIsHomologicalHomologyFunctor, DerivedCategory.shift_homologyFunctor, DerivedCategory.HomologySequence.δ, DerivedCategory.isIso_iff, DerivedCategory.homologyFunctorFactors, DerivedCategory.HomologySequence.exact₁.  mapDerivedCategory and its Factors declarations supply the derived functor and representative factorization; homologyFunctorFactors supplies cohomology descent. mapHomologicalComplexCompIso is a complex-level compositor. None of the hits states the normalized derived cohomology comparison together with its compositor and natural-isomorphism coherence. Ext.mapExactFunctor_hom concerns Ext of degree-zero objects. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Hh]omology|[Hh]omology.*mapDerivedCategory|mapHomologicalComplexCompIso",
+   "results": "2 hits: Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean.  mapDerivedCategory and its Factors declarations supply the derived functor and representative factorization; homologyFunctorFactors supplies cohomology descent. mapHomologicalComplexCompIso is a complex-level compositor. None of the hits states the normalized derived cohomology comparison together with its compositor and natural-isomorphism coherence. Ext.mapExactFunctor_hom concerns Ext of degree-zero objects. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category exact functor homology comparison composition coherence",
+   "results": "8 hits: DerivedCategory.homologyFunctorFactorsh, HomologicalComplex.opcyclesMap_comp, HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh, CategoryTheory.ShortComplex.homologyMap_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.ShortComplex.LeftHomologyMapData.comp, CategoryTheory.ShortComplex.HomologyMapData.comp.  mapDerivedCategory and its Factors declarations supply the derived functor and representative factorization; homologyFunctorFactors supplies cohomology descent. mapHomologicalComplexCompIso is a complex-level compositor. None of the hits states the normalized derived cohomology comparison together with its compositor and natural-isomorphism coherence. Ext.mapExactFunctor_hom concerns Ext of degree-zero objects. No full match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functors commute with cohomology of cochain complexes naturally and compatibly with composition",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CochainComplex.HomComplex.Cochain.map_comp, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor. Read candidate sources: ShortComplex.mapHomologyIso and its naturality concern cochain-level homology; Localization.natTrans_ext concerns descent. No declaration in Mathlib found asserting the full derived compositor equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplexHomologyIso",
+   "results": "0 hits: . loogle: unknown identifier 'Functor.mapHomologicalComplexHomologyIso'. Read candidate sources: ShortComplex.mapHomologyIso and its naturality concern cochain-level homology; Localization.natTrans_ext concerns descent. No declaration in Mathlib found asserting the full derived compositor equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomology|mapHomologyIso_comp|homologyComparison.*comp",
+   "results": "5 hits: Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean. Read candidate sources: ShortComplex.mapHomologyIso and its naturality concern cochain-level homology; Localization.natTrans_ext concerns descent. No declaration in Mathlib found asserting the full derived compositor equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology commutes with an exact functor on unbounded derived categories with natural composition comparison",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapCochainComplexSingleFunctor, CategoryTheory.ShortComplex.opcyclesFunctorIso, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc. Read candidate sources: ShortComplex.mapHomologyIso and its naturality concern cochain-level homology; Localization.natTrans_ext concerns descent. No declaration in Mathlib found asserting the full derived compositor equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology comparison isomorphism for two composite exact functors equals iterated homology comparisons",
+   "results": "8 hits: CategoryTheory.ShortComplex.map_leftRightHomologyComparison', CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.ShortComplex.homologyFunctorIso, CategoryTheory.ShortComplex.mapHomologyIso', CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality_assoc. Read candidate sources: ShortComplex.mapHomologyIso and its naturality concern cochain-level homology; Localization.natTrans_ext concerns descent. No declaration in Mathlib found asserting the full derived compositor equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso",
+   "results": "9 hits: CategoryTheory.ShortComplex.mapHomologyIso, CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso, CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality_assoc, CategoryTheory.NatTrans.app_homology. Read candidate sources: ShortComplex.mapHomologyIso and its naturality concern cochain-level homology; Localization.natTrans_ext concerns descent. No declaration in Mathlib found asserting the full derived compositor equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapHomologyIso|mapHomologyIso_hom_naturality|homologyMap_mapNatTrans|fullyFaithfulWhiskeringLeft|natTrans_ext",
+   "results": "25 hits: Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Center/Localization.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean. Read candidate sources: ShortComplex.mapHomologyIso and its naturality concern cochain-level homology; Localization.natTrans_ext concerns descent. No declaration in Mathlib found asserting the full derived compositor equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-open-cover-cohomology-detection",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Canonical cohomology restriction and its nested-open compatibility in inverse-diagonal map gluing; inherited Steps 5--6 of lem-pur-open-cover-cohomology-detection.",
+   "via": [
+    "lem-pur-open-cover-cohomology-detection",
+    "lem-pur-degree-zero-derived-map-gluing",
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-exact-derived-cohomology-coherence",
+  "worker": "stage1",
+  "summary": "Q61: constructed the normalized cochain comparison from the existing exact-homology leaf, lifted it through the existing localization leaf, and proved composition and natural-isomorphism coherence by explicit kernel and quotient cancellation. No new nodes, statement changes, Lean edits or compilation. Existing project Lean covers existence and natural-isomorphism naturality but no declaration found covers the compositor law.",
+  "blueprint": "The inherited from.place tracks inverse-diagonal gluing in the proof of cor-pur-dualizing-object-purity, through vector-integration-site-comparison, degree-zero-derived-map-gluing and open-cover-cohomology-detection. Steps 1--2 realize the canonical cohomology comparison in the old open-cover Steps 5--6; Steps 3--7 realize nested-open and natural-isomorphism coherence. The current main-20261015 ancestor proof is the three-arrow purity composite, unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-8f59e5891",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-8f59e5891 (reviewer sub-agent of L); spot-checked: Q61 delivers a 7-step split of lem-pur-exact-derived-cohomology-coherence with no new nodes and the inherited statement. The item comes from Q127 and has no 2026-10-21 re-split note. The proof cites four existing Mathlib leaves: exact-functor-preserves-homology (a),(c), abstract-derived-category, exact-functor-derived-triangulated, and localization-universal-property (2),(3). All four statements say what the steps take from them. I recomputed every step myself. Step 2: applying the lift with phi1=F(lambda_A), phi2=lambda_B H(sigma_F) gives the displayed theta formula. Step 3: z_GF = z_G G(z_F), then cancelling the epi GF(p) gives t_GF = t_G G(t_F). Step 4: the characterization of c follows from (2), and using naturality of theta_G along sigma_F reduces the compositor identity exactly to Step 3. Steps 5 and 6: the Z(eta) and H(eta) cancellations work, and the lambda and eta naturalities reduce the D-eta identity to Step 5. Step 7 is assembly with the correct orientation of c^{-1}. Steps 3, 5 and 7 are marked elementary and are genuinely elementary; GF exact is used implicitly and is trivial. No boundedness or resolutions are used. I tested single-degree complexes, zero and acyclic complexes, identity functors and eta=id. Source: Stacks derived.tex Tag 015F (lemma-right-derived-exact-functor) says 'Details omitted', and the delivery writes those details out with the proof marked as agent-written. No SGA is used. Duplicate check: lem-weil-pbc-exact-functor-bounded-below (unit sk-def-exchange) already states theta's existence and formula. Steps 1-2 re-derive this from leaves instead of citing that node; this is acceptable because citing it would need a tool_use. No existing node states the compositor or eta coherence clauses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactDerivedCohomologyCoherence",
+  "declaration": "CategoryTheory.Functor.exactDerivedCohomologyCoherence",
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedCohomologyCoherence.lean",
+  "statement": "theorem exactDerivedCohomologyCoherence (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : ℤ) : (∀ K : DerivedCategory A, (@mapDerivedCategoryHomologyFunctorIso A C _ _ _ _ _ _ (F ⋙ G) _ (comp_preservesFiniteLimits F G) (comp_preservesFiniteColimits F G) a).hom.app K ≫ (DerivedCategory.homologyFunctor C a).map ((mapDerivedCategoryCompIso F G).hom.app K) = G.map ((F.mapDerivedCategoryHomologyFunctorIso a).hom.app K) ≫ (G.mapDerivedCategoryHomologyFunctorIso a).hom.app (F.mapDerivedCategory.obj K)) ∧ (∀ (L : A ⥤ C) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] (eta : F ⋙ G ≅ L) (K : DerivedCategory A), G.map ((F.mapDerivedCategoryHomologyFunctorIso a).hom.app K) ≫ (G.mapDerivedCategoryHomologyFunctorIso a).hom.app (F.mapDerivedCategory.obj K) ≫ (DerivedCategory.homologyFunctor C a).map (((mapDerivedCategoryCompIso F G).symm ≪≫ @mapDerivedCategoryNatIso A C _ _ _ _ _ _ (F ⋙ G) L _ _ (comp_preservesFiniteLimits F G) (comp_preservesFiniteColimits F G) _ _ eta).hom.app K) = eta.hom.app ((DerivedCategory.homologyFunctor A a).obj K) ≫ (L.mapDerivedCategoryHomologyFunctorIso a).hom.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba6bce67f",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Theorem exactDerivedCohomologyCoherence matches the node clause by clause. It reuses the existing upstream theta (mapDerivedCategoryHomologyFunctorIso, whose _hom_app_Q is the node's Step-2 formula), c (mapDerivedCategoryCompIso, _fac = Step 4) and D eta (mapDerivedCategoryNatIso). Conjunct 1 is theta_GF ≫ H(c) = G(theta_F) ≫ theta_G for all K; conjunct 2 is for all exact L, eta : F⋙G ≅ L and K, with d = c.symm ≪≫ D eta; orientations and evaluation points checked. Exactness = Additive + finite limits + finite colimits, not stronger; universes independent; unbounded; edge cases (a≤0, zero, identity, eta = refl) covered. lean.statement verbatim, one sorry, docstrings with source, blueprint id and 7 steps, max line 92, stmt_deps unchanged, real Worker report and Second reading sections. No duplicate found in Mathlib or the side-live Lean. Advisories: theta is owned by lem-weil-pbc-exact-functor-bounded-below, which is not a stmt_dep (an S2 fix cannot add it); one proof-only import (MapDerivedCategoryHomologyNatIso) is unused by the statement, the other two are redundant. No compile: no FIX file."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261023T102539-L-2922640",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

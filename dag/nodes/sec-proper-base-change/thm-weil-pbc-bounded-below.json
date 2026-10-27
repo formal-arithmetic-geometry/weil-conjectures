@@ -188,7 +188,123 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper",
+     "lines": [
+      93,
+      116
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper",
+     "lines": [
+      118,
+      132
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+     "lines": [
+      223,
+      231
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+     "lines": [
+      270,
+      282
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+     "lines": [
+      19,
+      25
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-grothendieck-k-injective",
+      "sk-def-sfb-derived-categories"
+     ],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+     "lines": [
+      164,
+      170
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-sheaf-flat-separator"
+     ],
+     "below": true
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper",
+     "lines": [
+      124,
+      157
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper",
+     "lines": [
+      159,
+      175
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "target": false,
  "blueprint_lean": [
   "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper",
@@ -224,5 +340,40 @@
   "sorry_free": false,
   "note": "Upstream sync 2026-10-13: PR 1413 and reviewer fix adopted per human decision 2026-10-12. Main statement is now D+(Ab) with torsion cohomology (Stacks 0DDE); former module statement is isIso_baseChange_of_isProper_of_torsionHomology. See coord/target-migration.md.",
   "upstream_commit": "ffb7b906069b754b60fc5d090a85e9ae4209561e"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "For a cartesian square [def-weil-pbc-cartesian-square] with $f$ proper and\nevery $K\\in\\Dplus(X_{\\Et})$ with torsion cohomology,\n\n$$\n \\Ex_{\\square,K}:g^{-1}Rf_*K\n \\xrightarrow{\\sim}Rf'_*g'^{-1}K\n$$\n\nis an isomorphism in $\\Dplus(Y'_{\\Et})$.",
+  "proof": [
+   {
+    "text": "*Step 1: sheaves killed by a prime.* Let $r$ be a prime and $E$ an abelian\nsheaf on $X_{\\Et}$ with $rE=0$, that is, a sheaf of $\\mathbf F_r$-modules.\nRestriction of scalars along $\\mathbf Z\\to\\mathbf F_r$ is exact and\nconservative, commutes with the inverse images $g^{-1},g'^{-1}$ and the direct\nimages $f_*,f'_*$, and also with $Rf_*,Rf'_*$, because an injective sheaf of\n$\\mathbf F_r$-modules has no higher direct images as an abelian sheaf. It\ntherefore carries the derived exchange morphism\n[def-weil-pbc-derived-exchange] with $\\mathbf F_r$-coefficients to the one\nwith $\\mathbf Z$-coefficients. By [lemma-weil-pbc-prime-proper-base-change]\nfor $\\Lambda=\\mathbf F_r$, $\\Ex_{\\square,E}$ is an isomorphism, i.e. the\ndegreewise exchange maps $g^{-1}R^qf_*E\\to R^qf'_*g'^{-1}E$ are isomorphisms\nfor all $q$.",
+    "uses": [
+     "def-weil-pbc-derived-exchange",
+     "lemma-weil-pbc-prime-proper-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2: torsion sheaves.* The proper morphism $f$ is quasi-compact and\nquasi-separated, so by Step 1 and the prime-torsion dévissage\n[lemma-weil-pbc-prime-torsion-devissage] the degreewise exchange maps are\nisomorphisms at every torsion sheaf $F$ on $X_{\\Et}$; equivalently\n$\\Ex_{\\square,F}$ is an isomorphism in $\\Dplus(Y'_{\\Et})$.",
+    "uses": [
+     "lemma-weil-pbc-prime-torsion-devissage"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: bounded below complexes.* Let $K\\in\\Dplus(X_{\\Et})$ have torsion\ncohomology, with $\\mathcal H^q(K)=0$ for $q<a$, and fix $n$. Both functors\n$g^{-1}Rf_*$ and $Rf'_*g'^{-1}$ send objects with no cohomology below $m$ to\nobjects with no cohomology below $m$, so by the truncation criterion\n[sbc-lem-bounded-below-truncation-criterion] and naturality of the exchange\nmorphism in $\\tau_{\\leq n}K\\to K$, $\\mathcal H^n(\\Ex_{\\square,K})$ is\nidentified with $\\mathcal H^n(\\Ex_{\\square,\\tau_{\\leq n}K})$. The complex\n$\\tau_{\\leq n}K$ is obtained from $\\tau_{\\leq a-1}K=0$ by the finitely many\ntruncation triangles\n$\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K\\to\\mathcal H^q(K)[-q]\\to$, $a\\leq q\\leq n$\n[lem-weil-pbc-truncation-triangle]. The exchange morphism is natural and\ncommutes with shifts, so it maps each of these triangles to a morphism of the\nimage triangles, and on the third terms it is the shift by $-q$ of\n$\\Ex_{\\square,\\mathcal H^q(K)}$, an isomorphism by Step 2 since\n$\\mathcal H^q(K)$ is torsion. Induction on $q$, using the long exact\ncohomology sequences of the image triangles and the five lemma\n[lem-weil-pbc-five-lemma], shows that $\\Ex_{\\square,\\tau_{\\leq q}K}$ is an\nisomorphism for all $q\\leq n$. Hence $\\mathcal H^n(\\Ex_{\\square,K})$ is an\nisomorphism for every $n$, and $\\Ex_{\\square,K}$ is an isomorphism in\n$\\Dplus(Y'_{\\Et})$.",
+    "uses": [
+     "sbc-lem-bounded-below-truncation-criterion",
+     "lem-weil-pbc-truncation-triangle",
+     "lem-weil-pbc-five-lemma"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

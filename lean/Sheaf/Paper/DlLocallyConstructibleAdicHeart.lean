@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Widesubcategory
 public import Mathlib.CategoryTheory.Pi.Basic
 import Mathlib.Algebra.CharP.CharAndCard
 import Mathlib.Algebra.CharP.Invertible
+import all Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 
 /-! # Locally constructible adic sheaves as compatible local heart objects
 
@@ -24,9 +25,11 @@ coefficient fields. Morphisms commute with every restriction identification.
 -/
 
 @[expose] public noncomputable section
+set_option Elab.async false
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
@@ -141,12 +144,14 @@ theorem dlAdicLocalCompatible_multiplicative :
     (dlAdicLocalCompatible D c T).IsMultiplicative := by
   refine { id_mem := ?_, comp_mem := ?_ }
   · intro F U V h
-    simp
+    change (F.restriction h).hom ≫ 𝟙 _ =
+      (dlAdicOpenPull D c T h).map (𝟙 _) ≫ (F.restriction h).hom
+    rw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
   · intro F G H f g hf hg U V h
     dsimp [dlAdicLocalCompatible] at hf hg ⊢
     change (F.restriction h).hom ≫ ((f.hom U).hom ≫ (g.hom U).hom) = _
     rw [← Category.assoc, hf h, Category.assoc, hg h]
-    simp [Functor.map_comp, Category.assoc]
+    simp only [CategoryTheory.Functor.map_comp, Category.assoc]
 
 /-- The preceding closure proof supplies the category laws for compatible arrows.
 Source: BS 6.8, descent (blueprint: def-dl-a1-locally-constructible-adic-heart). -/
@@ -159,6 +164,34 @@ are the explicit cartesian local data above. No global finite-stage condition is
 Source: BS 6.8.4(5), 6.8.6 and 6.8.14
 (blueprint: def-dl-a1-locally-constructible-adic-heart). -/
 abbrev DlLocallyConstructibleAdicHeart := WideSubcategory (dlAdicLocalCompatible D c T)
+
+section ZeroCompatibility
+
+-- Keep the coefficient models abstract while rewriting their representative formula.
+attribute [local irreducible] rationalDerivedPullback commonStagePullbackComparison
+  HasDerivedCategory.standard ScalarLocalization.category
+  ObjectProperty.FullSubcategory.category
+
+private theorem eq_zero_of_heq_zero {C : Type*} [Category C] [HasZeroMorphisms C]
+    {P P' Q Q' : C} (hP : P = P') (hQ : Q = Q') {f : P ⟶ Q}
+    (hf : HEq f (0 : P' ⟶ Q')) : f = 0 := by
+  cases hP
+  cases hQ
+  exact eq_of_heq hf
+
+private theorem map_zero_of_stage_formula
+    {C D R S : Type*} [Category C] [Category D] [Category R] [Category S]
+    [HasZeroMorphisms C] [HasZeroMorphisms D]
+    [HasZeroMorphisms R] [HasZeroMorphisms S]
+    (F : C ⥤ D) (G : R ⥤ S) [G.PreservesZeroMorphisms]
+    {A B : C} {A' B' : D} {U V : R} {U' V' : S}
+    (i : (U ⟶ V) → (A ⟶ B)) (j : (U' ⟶ V') → (A' ⟶ B'))
+    (a : U' ⟶ G.obj U) (b : G.obj V ⟶ V')
+    (hi : i 0 = 0) (hj : j 0 = 0) (hA : F.obj A = A') (hB : F.obj B = B')
+    (h : HEq (F.map (i 0)) (j (a ≫ G.map (0 : U ⟶ V) ≫ b))) :
+    F.map (0 : A ⟶ B) = 0 := by
+  rw [hi, G.map_zero, zero_comp, comp_zero, hj] at h
+  exact eq_zero_of_heq_zero hA hB h
 
 /-- The zero family commutes with all restriction maps.
 Source: BS Remark 6.8.15 (blueprint: def-dl-a1-locally-constructible-adic-heart).
@@ -173,17 +206,8 @@ theorem dlAdicLocalCompatible_zero (F G : DlAdicLocalRaw D c T) :
         (L : AlgebraicallyClosedCoefficients.Index c.l c.Qbar)
         (hA : A.stage ≤ L) (hB : B.stage ≤ L) :
         GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB 0 = 0 := by
-      apply (GeneralAlgebraicallyClosedCoefficients.homCoordinates A B).injective
-      have hcoord :=
-        (GeneralAlgebraicallyClosedCoefficients.homCoordinates_existsUnique A B).exists.choose_spec
-          L hA hB 0
-      change (GeneralAlgebraicallyClosedCoefficients.homCoordinates A B)
-        (GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB 0) = _ at hcoord
-      rw [hcoord]
-      change GeneralAlgebraicallyClosedCoefficients.colimitOf A B L hA hB 0 =
-        (GeneralAlgebraicallyClosedCoefficients.homCoordinates A B)
-          ((GeneralAlgebraicallyClosedCoefficients.homCoordinates A B).symm 0)
-      simp [GeneralAlgebraicallyClosedCoefficients.colimitOf]
+      exact GeneralAlgebraicallyClosedCoefficients.mkHom_zero
+        (l := c.l) (Ω := c.Qbar) (Y := S) (A := A) (B := B) (L := L) hA hB
     intro U V h
     let := dlAdicBaseResidueInvertible D c U.val.toScheme
     let := dlAdicBaseResidueInvertible D c V.val.toScheme
@@ -192,29 +216,38 @@ theorem dlAdicLocalCompatible_zero (F G : DlAdicLocalRaw D c T) :
     obtain ⟨L, hA, hB⟩ := exists_ge_ge A.stage B.stage
     let : (rationalDerivedPullback c.l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} c.l c.Qbar L)
-        (T.left.homOfLE h)).Additive :=
-      (rationalDerivedPullback_existsUnique c.l
+        (T.left.homOfLE h)).Additive := by
+      unfold rationalDerivedPullback
+      exact (rationalDerivedPullback_existsUnique c.l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} c.l c.Qbar L)
         (T.left.homOfLE h)).exists.choose_spec.1
     have he := (commonStageDerivedPullback_existsUnique c.l c.Qbar
-      (T.left.homOfLE h)).exists.choose_spec.2 A B L hA hB 0
-    rw [hz] at he
-    simp only [Functor.map_zero, comp_zero, zero_comp, hz] at he
-    have hez {P P' Q Q' : generalAlgebraicallyClosedConstructibleCategory
-        c.l c.Qbar U.val.toScheme} (hP : P = P') (hQ : Q = Q') :
-        HEq (0 : P ⟶ Q) (0 : P' ⟶ Q') := by
-      subst P'
-      subst Q'
-      rfl
+      (T.left.homOfLE h)).exists.choose_spec.2 A B L hA hB
+      (0 : GeneralAlgebraicallyClosedCoefficients.StageHom A B ⟨L, hA, hB⟩)
     have hm : (dlAdicOpenPull D c T h).map (0 : A ⟶ B) = 0 :=
-      eq_of_heq (he.trans (hez
+      map_zero_of_stage_formula (dlAdicOpenPull D c T h)
+        (rationalDerivedPullback c.l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} c.l c.Qbar L)
+          (T.left.homOfLE h))
+        (fun a ↦ GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB a)
+        (fun a ↦ GeneralAlgebraicallyClosedCoefficients.ofHom
+          (commonStagePullbackObject c.l c.Qbar (T.left.homOfLE h) A)
+          (commonStagePullbackObject c.l c.Qbar (T.left.homOfLE h) B) L hA hB a)
+        (commonStagePullbackComparison c.l c.Qbar (T.left.homOfLE h) A L hA).hom
+        (commonStagePullbackComparison c.l c.Qbar (T.left.homOfLE h) B L hB).inv
+        (hz V.val.toScheme A B L hA hB)
+        (hz U.val.toScheme
+          (commonStagePullbackObject c.l c.Qbar (T.left.homOfLE h) A)
+          (commonStagePullbackObject c.l c.Qbar (T.left.homOfLE h) B) L hA hB)
         ((commonStageDerivedPullback_existsUnique c.l c.Qbar
-          (T.left.homOfLE h)).exists.choose_spec.1 A).symm
+          (T.left.homOfLE h)).exists.choose_spec.1 A)
         ((commonStageDerivedPullback_existsUnique c.l c.Qbar
-          (T.left.homOfLE h)).exists.choose_spec.1 B).symm))
+          (T.left.homOfLE h)).exists.choose_spec.1 B) he
     change (F.restriction h).hom ≫ 0 =
       (dlAdicOpenPull D c T h).map (0 : A ⟶ B) ≫ (G.restriction h).hom
     rw [hm, comp_zero, zero_comp]
+
+end ZeroCompatibility
 
 /-- The chosen zero is the literal componentwise zero family.
 Source: BS 6.8.7 (blueprint: def-dl-a1-locally-constructible-adic-heart). -/

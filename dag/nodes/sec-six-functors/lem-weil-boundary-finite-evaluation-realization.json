@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-boundary-finite-evaluation-realization",
+ "kind": "statement",
+ "title": "Boundary realization after the finite-Tor comparison step",
+ "statement": "Fix a finite-field datum, a prime $\\ell$ different from its characteristic, a finite extension $E/\\mathbf Q_\\ell$ and $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $i:Z\\hookrightarrow T$ be a closed immersion of separated finite-type schemes over this field. Use the four published finite-Tor constructible predicates [def-weil-finite-tor-amplitude] and the exact canonical functors and dualizing objects in the finite-site data [def-weil-boundary-finite-site-data]. Assume EtaleHypotheses at this datum. Then BasicRemainder and EvaluationAt hold. BasicRemainder asserts bounded-below Hom bijectivity, Noetherianity, a natural-number dimension bound, direct-image mate invertibility, and the specified counit/projection comparisons with invertible components. EvaluationAt is the original canonical EvaluationConclusion: the dualizing objects belong to their four predicates; the specified inverse images, exceptional images and duals preserve them; the canonical origin, evaluation and dualizing-composition comparisons have their prescribed normalizations; a natural pro-etale q family agrees on etale representatives with the ordinary-counit Hom transpose; and the literal evaluation-defined alpha and beta have the displayed comparison squares and transport the boundary composite identity and invertibility, including all pro-etale finite-Tor inputs. This statement omits the two finite-Tor subcategory equivalences, both Tor-interval comparison clauses and both etale-representative clauses, which are proved separately.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Second paragraph: adjointing through tensor-Hom and the exceptional adjunction; evaluation and double-dual compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-boundary-finite-site-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing boundary projection comparison for the Hom, mate, counit and projection clauses. The assumed exceptional preservation supplies constructibility. Boundary etale adjunction restriction evaluated at the identity-open proper compactification supplies Noetherianity and finite dimension. Finite proper projection makes the etale projection invertible; the inverse comparison square makes its pro-etale component invertible. Use the proved finite-Tor comparison separately for both schemes to supply the representatives needed below.",
+   "uses": [
+    "lem-weil-boundary-proetale-projection-comparison",
+    "lem-weil-boundary-etale-adjunction-restriction",
+    "lem-etale-proper-projection-formula-finite",
+    "lem-weil-boundary-finite-tor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the invertible comparison unit on D+ for the canonical exceptional-origin isomorphism, and the pullback square for inverse-image comparison. Etale representatives in BasicConclusion and the assumed etale preservation transfer both preservation assertions to the actual pro-etale functors.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite coefficient unit has Tor interval [0,0]. Closed monoidal unitors identify its dual with omega_T, so assumed dual preservation gives omega_T and assumed exceptional preservation gives G omega_T. The canonical dualizing composition compares this to the specified omega_Z,p with its pasted-counit normalization.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-boundary-dualizing-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite-duality site comparison to these dualizing objects and all restrictions and iterated duals. It supplies evaluation-normalized chi, the normalized ambient duality pairings, and double-dual compatibility. Transfer preservation of duals along the supplied etale representatives.",
+   "uses": [
+    "lem-weil-finite-duality-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose inverse projection followed by the normalized exceptional counit through the supplied bijective Hom transport to construct q on representatives. Naturality of each factor and full faithfulness descend it to all finite-Tor objects. Boundary q compatibility identifies it with assembleProQ and comparedEtaleQ. The finite compact-support projection formula and representative transport make the required pro-etale projection components invertible.",
+   "uses": [
+    "lem-weil-boundary-proetale-q-compatibility",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the q/evaluation identities through tensor-Hom to get the alpha and beta squares in their displayed factor order. Apply comparison to CompositeIdentity, substitute double-dual and transpose compatibility, and cancel comparison isomorphisms. Conjugate images of inverse maps for invertibility; naturality and the supplied etale representatives extend it to all inputs.",
+   "uses": [
+    "lem-weil-boundary-proetale-q-compatibility",
+    "lem-weil-finite-duality-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-etale-proper-projection-formula-finite",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-boundary-dualizing-composition",
+  "lem-weil-boundary-etale-adjunction-restriction",
+  "lem-weil-boundary-finite-tor-comparison",
+  "lem-weil-boundary-proetale-projection-comparison",
+  "lem-weil-boundary-proetale-q-compatibility",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Second paragraph: adjointing through tensor-Hom and the exceptional adjunction; evaluation and double-dual compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Monoidal closed functor comparison preserves evaluation double dual morphisms and tensor Hom transposes",
+   "results": "MonoidalClosedFunctor.comparison_iso and functor-category closed structures; these do not assemble the ordinary site functors or boundary q.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.toIhomIhom",
+   "results": "0 hits; unknown identifier in the remote Loogle index. Local library contains this map.",
+   "date": "2026-10-25",
+   "verdict": "unavailable for this identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "EvaluationTransport|BoundaryFiniteSite|finiteRing_constructibleDerived_origin",
+   "results": "Remote grep zero hits. Local rg finds EvaluationTransport only in the item, BoundaryQTransport and BoundaryProEtaleQCompatibility supply pairing transport, and FiniteDualitySiteComparison supplies evaluation normalization.",
+   "date": "2026-10-25",
+   "verdict": "existing ingredients but no assembled evaluation realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BoundaryFiniteSiteRealization",
+  "date": "2026-10-25",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Second paragraph: adjointing through tensor-Hom and the exceptional adjunction; evaluation and double-dual compatibility.",
+   "via": [
+    "lem-weil-boundary-finite-site-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundaryFiniteEvaluationRealization",
+  "file": "lean/Sheaf/Paper/BoundaryFiniteEvaluationRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryFiniteSite.boundary_finite_evaluation_realization",
+  "statement": "theorem boundary_finite_evaluation_realization (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {Z T : Scheme.{u}} (i : Z ⟶ T) [Z.Over (Spec (.of D.k))] [T.Over (Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))] [IsSeparated (T ↘ Spec (.of D.k))] [i.IsOver (Spec (.of D.k))] [IsClosedImmersion i] : letI : Finite (Padic.coefficientExtensionRing l E n) := Padic.finite_coefficientExtensionRing l E n hn letI : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of D.k)) let A := Padic.coefficientExtensionRing l E n let C := BoundaryComparison.coefficients A let a := T ↘ Spec (.of D.k) let G := BoundaryComparisonOfCoefficients.etaleExceptional (ULift.{u + 1, u} A) i let W := Etale.dualizingComplex C a letI : BraidedCategory (DerivedCategory (Sheaf T.smallEtaleTopology C)) := DerivedCategory.braidedCategory' _ letI : BraidedCategory (DerivedCategory (Sheaf Z.smallEtaleTopology C)) := DerivedCategory.braidedCategory' _ EtaleHypotheses ((Etale.upperStar C i).leftDerivedFunctor) G W (G.obj W) (WeilConjectures.finiteTorConstructibleEtale l E n hn T) (WeilConjectures.finiteTorConstructibleEtale l E n hn Z) → BasicRemainder A i a (WeilConjectures.finiteTorConstructibleEtale l E n hn T) (WeilConjectures.finiteTorConstructibleEtale l E n hn Z) (WeilConjectures.finiteTorConstructibleProEtaleModule l E n hn T) (WeilConjectures.finiteTorConstructibleProEtaleModule l E n hn Z) ∧ EvaluationAt A i a (WeilConjectures.finiteTorConstructibleEtale l E n hn T) (WeilConjectures.finiteTorConstructibleEtale l E n hn Z) (WeilConjectures.finiteTorConstructibleProEtaleModule l E n hn T) (WeilConjectures.finiteTorConstructibleProEtaleModule l E n hn Z)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7ef3",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261025T122649-L-1794345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7ef3",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261025T122649-L-1794345",
+  "kind": "interface",
+  "note": "independent cc review: delivered BoundaryFiniteSiteData vs clone BoundaryFiniteSiteRealization (9 bodies verbatim, BasicRemainder/EvaluationAt definitional factoring, signatures unchanged); sorry statement = item conclusion minus the six proved finite-Tor clauses; tor-comparison axioms clean; node proof_deps vs Lean declarations used"
+ }
+}

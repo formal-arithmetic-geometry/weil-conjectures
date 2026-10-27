@@ -1,0 +1,115 @@
+{
+ "id": "lem-zl-raw-heart-adic-strata-bridge",
+ "kind": "statement",
+ "title": "Raw adic finite classical strata transport",
+ "statement": "Fix D, prime l different from D.p, an algebraic closure Omega, and the comparison interfaces [def-zl-raw-heart-adic-lisse-data]. Let a, c, b, S, r be supplied families with HeartComparison on each geometric base. Fix a separated finite-type geometric base X, a finite coefficient stage i, a finite sf heart object N at i, a continuous rational module F with an explicit finite locally closed lisse-partition witness, and an isomorphism from the r-realization of S(N) to F[0]. There is a finite reduced locally closed partition of X with separated finite-type geometric bases and their correct structure maps, and on each stratum a classical finite-free raw rational system at the same stage i whose b-realization is isomorphic to the actual finite derived restriction of N. The statement chooses neither a common-stage representative nor a Weil structure nor a frontier.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Lemma 6.8.2, Proposition 6.8.4(1),(4), Proposition 6.8.14(2), Remark 6.8.15; blueprint latest thm-zl-real-mixed-by-curves proof paragraphs 6-7, agent interface transport."
+ },
+ "stmt_deps": [
+  "def-zl-raw-heart-adic-lisse-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied finite-stage heart object N and its specified continuous constructible realization F in degree zero. Apply the stratified-lattice theorem to its finite lisse-partition witness. It gives a finite reduced refinement and lisse integral lattices whose localizations are the restrictions of F, all at E. Give each stratum the structure map induced from X; an immersion into a separated finite-type scheme over a field is separated finite type. These are the bases and the base_map equations. The completed-system comparison takes each lattice to its ordinary finite-free etale quotient tower. Regard that tower as the object of RawRational with the canonical ULift coefficient identification. The normalized continuous pullback comparison carries N restricted to the stratum to F there. The specified lattice-localization isomorphism and the comparison for b identify the two continuous derived images. Lift this isomorphism through the fully faithful continuous realization and the identity sf/PBC equivalence, orienting it from the raw restriction to the classical realization. This is the restriction field of the conclusion. No common-stage representative is selected here. On the empty scheme the partition is empty, and zero local ranks use zero towers; no extension of E or assertion about derived reductions of a torsion representative is needed.",
+   "uses": [
+    "lem-zl-continuous-constructible-stratified-lattices",
+    "lem-zl-classical-system-raw-lisse-realization",
+    "lem-zl-sf-pbc-normalized-heart-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, Lemma 6.8.2, Proposition 6.8.4(1),(4), Proposition 6.8.14(2), Remark 6.8.15; blueprint latest thm-zl-real-mixed-by-curves proof paragraphs 6-7, agent interface transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-continuous-constructible-stratified-lattices",
+  "lem-zl-classical-system-raw-lisse-realization",
+  "lem-zl-sf-pbc-normalized-heart-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Lemma 6.8.2, Proposition 6.8.4(1),(4), Proposition 6.8.14(2), Remark 6.8.15; blueprint latest thm-zl-real-mixed-by-curves proof paragraphs 6-7, agent interface transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free etale inverse systems realize fully faithfully in an adic constructible heart preserving scalar extension and geometric point fibres",
+   "results": "8 hits: LightCondSet.LocallyConstant.functorFullyFaithful, CondensedSet.LocallyConstant.functorFullyFaithful, Algebra.FormallyEtale.of_restrictScalars, Scheme.Etale.forgetFullyFaithful, CondensedMod.LocallyConstant.fullyFaithfulFunctor, Algebra.Etale.formallyEtale, Algebra.Etale.exists_subalgebra_fg, comonadicExtendScalars.",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these do not construct normalized classical adic realizations, reduced strata or Weil/frontier extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible adic heart sheaf has a finite stratification by classical lisse sheaves with integral lattices",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite, localGeneratorsData finiteness and existence declarations.",
+   "date": "2026-10-25",
+   "verdict": "No exact match: finite generation and presentation do not provide classical lisse adic systems or these comparison functors."
+  },
+  {
+   "tool": "grep",
+   "query": "raw_heart_adic_lisse|classical_system_raw_lisse|stratified_lattices",
+   "results": "msearch: zero Mathlib hits. Project rg finds the four planned dependency declarations with different interfaces, and the original theorem; no RawHeartAdic comparison bridges. Blueprint searches normalized raw lisse and raw heart stratification return zero nodes.",
+   "date": "2026-10-25",
+   "verdict": "No existing bridge or duplicate extraction node found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.RawHeartAdicLisseStratification",
+  "date": "2026-10-25",
+  "group": "C8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 6-7; finite lisse partition over one coefficient stage",
+   "via": [
+    "lem-zl-raw-heart-adic-lisse-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.RawHeartAdicStrataBridge",
+  "file": "lean/Sheaf/DeligneLaumon/RawHeartAdicStrataBridge.lean",
+  "declaration": "WeilConjectures.RawHeartAdic.raw_heart_adic_strata_bridge",
+  "declarations": [
+   "WeilConjectures.RawHeartAdic.raw_heart_adic_strata_bridge"
+  ],
+  "statement": "theorem raw_heart_adic_strata_bridge (a : LisseRealization.Family D l hl) (c : ProEtale.CompletedLisse.System.{u} l) (b : ClassicalFamily D l hl a c) (S : FdCoefficientComparisonSystem.{u} l Ω) (r : ContinuousRational.Family.{u} l) (hheart : ∀ Y : PerAdic.Base D.k, Nonempty (HeartComparison D l hl Ω a S r Y (hDim := baseDimension D l hl Y) (hInv := basePrimeUnit D l hl Y))) (X : PerAdic.Base D.k) (i : AlgebraicallyClosedCoefficients.Index l Ω) (N : sfRationalHeart l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) X.scheme) (F : pbcModules X.scheme (rationalCoefficientSheaf l X.scheme (pbcFiniteField.{u} l Ω i))) (hF : ∃ t : Scheme.FiniteLocallyClosedStratification X.scheme, ∀ j : Fin t.n, ((proEtaleModuleInverseImage (t.immersion j) (rationalCoefficientSheaf l X.scheme (pbcFiniteField.{u} l Ω i))).obj F).IsFiniteLocallyFree) (hreal : letI := baseDimension D l hl X letI := basePrimeUnit D l hl X Nonempty (((r.realization (pbcFiniteField.{u} l Ω i) (continuousBase D l hl X)).J.obj (((S.coefficients X.scheme).stage i).rational.functor.obj N.obj)) ≅ (DerivedCategory.singleFunctor _ 0).obj F)) : ∃ (partition : Scheme.FiniteLocallyClosedStratification X.scheme), (∀ ν : Fin partition.n, IsReduced (partition.domain ν)) ∧ ∃ (bases : Fin partition.n → PerAdic.Base D.k) (domain : ∀ ν : Fin partition.n, (bases ν).scheme = partition.domain ν), (∀ ν : Fin partition.n, eqToHom (domain ν) ≫ partition.immersion ν ≫ (X.scheme ↘ Spec (.of D.k)) = ((bases ν).scheme ↘ Spec (.of D.k))) ∧ ∃ model : ∀ ν : Fin partition.n, ClassicalStage D l hl Ω (bases ν) i, ∀ ν : Fin partition.n, Nonempty ((@rationalDerivedPullback l _ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) _ _ _ _ _ (eqToHom (domain ν) ≫ partition.immersion ν) (baseInvertible D l hl (bases ν)) (baseInvertible D l hl X)).obj N.obj ≅ (b.finite (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) (bases ν)).realization.obj (model ν))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c600",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T100843-L-3630032",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c600",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T100843-L-3630032",
+  "kind": "interface",
+  "note": "independent cc review: 37 moved declarations byte-identical to the published item module; theorem signature byte-identical; public imports kept through the data module (unit route kept); 3 bridge statements checked true against the pinned J/ClassicalAt fields; item node proof_deps match the 8 declarations invoked"
+ }
+}

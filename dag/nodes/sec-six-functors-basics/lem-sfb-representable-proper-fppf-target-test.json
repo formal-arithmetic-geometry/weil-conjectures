@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-representable-proper-fppf-target-test",
+ "kind": "statement",
+ "title": "Properness of representable stack maps is tested on an fppf target cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes [def-weil-size-convention]. An algebraic stack means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; stack, representability and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids], algebraic spaces use [def-trf-algebraic-space], and smoothness uses [def-sbc-smooth-morphisms] on scheme charts. Let $f:\\mathcal X\\to\\mathcal Y$ be a morphism of algebraic stacks representable by algebraic spaces. Let $W$ be a scheme and $p:W\\to\\mathcal Y$ a representable surjective flat locally finitely presented morphism. Surjectivity means surjectivity on point spaces after scheme base change, and flatness and local finite presentation are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Put $V=\\mathcal X\\times_{\\mathcal Y}W$. Then $f$ is proper if and only if $V\\to W$ is proper. Proper for a representable stack map means that every scheme base change $\\mathcal X\\times_{\\mathcal Y}T\\to T$ is a proper morphism of algebraic spaces, and similarly for $V\\to W$. A morphism of algebraic spaces is proper when it is separated (its diagonal is a closed immersion after every scheme base change [def-weil-closed-immersion]), of finite type (quasi-compact, and locally of finite type on etale scheme charts [def-weil-finite-type-morphism]) and universally closed (closed on point spaces after every algebraic-space base change); for morphisms of schemes this is properness as in [def-weil-proper-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XD, lemma-check-property-covering, for P = proper in Section 04XB; arbitrary scheme base S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "If $f$ is proper, its defining scheme test at $p:W\\to\\mathcal Y$ says that $V\\to W$ is proper as an algebraic-space map. Every further scheme base change of this map is proper by [lem-sfb-space-proper-base-change]. Thus it also satisfies the scheme-test interpretation of properness for $V\\to W$ in the statement.",
+   "uses": [
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD, lemma-check-property-covering, proof specialized to properness and a scheme cover W."
+   }
+  },
+  {
+   "text": "Conversely suppose $V\\to W$ is proper, and fix an arbitrary scheme map $t:T\\to\\mathcal Y$. Put $A=\\mathcal X\\times_{\\mathcal Y}T$ and $B=W\\times_{\\mathcal Y}T$. Both are algebraic spaces by the representability hypotheses on $f$ and $p$. By [def-trf-algebraic-space], choose a representable surjective etale scheme atlas $a:U\\to B$. Write $q:B\\to T$, $h=q a:U\\to T$ and $w:U\\to W$ for the projections. The map to $B$ supplies an isomorphism $\\beta:p(w)\\xrightarrow{\\sim}t(h)$. All choices are in the stipulated universes.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD, lemma-check-property-covering, proof specialized to properness and a scheme cover W."
+   }
+  },
+  {
+   "text": "The scheme test of the hypotheses on $p$ at $T$ makes $q$ surjective, flat and locally of finite presentation. The atlas $a$ is etale and surjective also as a representable map of fibred groupoids by [lem-sfb-fibred-groupoid-representable-smooth-calculus]. By [lem-sfb-stack-chartwise-smooth-etale-calculus], etale implies smooth, hence flat and locally of finite presentation; these properties and surjectivity are preserved by composition. Consequently the scheme map $h:U\\to T$ is surjective, flat and locally of finite presentation. By [def-pc-fppf-site], $\\{h\\}$ is an fppf scheme covering of $T$. In particular no quasi-compactness of $p$, $B$ or $U$ was assumed.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD, lemma-check-property-covering, proof specialized to properness and a scheme cover W."
+   }
+  },
+  {
+   "text": "There is an isomorphism over $U$, $A\\times_TU\\simeq V\\times_WU$. Indeed, on a test scheme $D$, an object of the left side can be written $(x,u,\\alpha:f(x)\\xrightarrow{\\sim}t(h(u)))$. Send it to $(x,w(u),\\beta(u)^{-1}\\alpha,u)$ on the right. The inverse composes the isomorphism $f(x)\\to p(w(u))$ with $\\beta(u)$. These operations are inverse on objects and on compatible arrows, commute with pullback in $D$, and preserve $u$. This is precisely the 2-fibre-product definition in [def-sfb-stable-pointed-moduli-groupoids]. Both sides are spaces: their sheaf fibre products exist by [lem-trf-space-fibre-products-etale-covers]; their associated discrete fibred groupoids therefore give an isomorphism of spaces, not just a bijection on field points.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD, lemma-check-property-covering, proof specialized to properness and a scheme cover W."
+   }
+  },
+  {
+   "text": "The right side of step 4 is the algebraic-space base change of the proper map $V\\to W$ along $w:U\\to W$, so its projection to $U$ is proper by [lem-sfb-space-proper-base-change]. Use step 4 to identify it with $A\\times_TU\\to U$. Properness is unchanged by this identification: the diagonals correspond, chartwise finite type and quasi-compactness correspond under isomorphism, and the point maps after every base change are conjugate by homeomorphisms. Apply the properness clause of [lem-sfb-space-flat-proper-fp-locality] to $A\\to T$ and the singleton fppf covering $\\{U\\to T\\}$ of step 3. It gives properness of $A\\to T$. Since $T\\to\\mathcal Y$ was arbitrary, this is exactly the definition of properness of $f$.",
+   "uses": [
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD, lemma-check-property-covering, proof specialized to properness and a scheme cover W."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XD, lemma-check-property-covering, proof specialized to properness and a scheme cover W."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Properness of representable morphisms of algebraic stacks can be tested after a surjective flat locally finitely presented morphism from a scheme to the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "grep",
+   "query": "[pP]roper.*(fpqc|fppf)|(fpqc|fppf).*[pP]roper",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"50\", \"text\": \"  grind [fppfPrecoverage, precoverage, precoverage, MorphismProperty.precoverage_inf]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"15\", \"text\": \"# Properties of morphisms satisfying fpqc descent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"17\", \"text\": \"In this file we show some global properties satisfy fpqc descent.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"14\", \"text\": \"# Local properties satisfying fpqc descent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"16\", \"text\": \"In this file we provide instances that show that the following local properties satisfy fpqc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable algebraic stack morphism is proper if its pullback to an fppf scheme cover of the target is proper",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"(f : X ⟶ Y) [UniversallyClosed f] : IsProperMap f\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": MorphismProperty D\", \"doc\": \"A morphism $ f : X \\to Y $ in category $ \\\\mathcal{D} $ is relatively representable with respect to a functor $ F : \\\\mathcal{C} \\to \\\\mathcal{D} $ if for every object $ a $ in $ \\\\mathcal{C} $ and every mo\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsProper (f ≫ g)] [IsSeparated g] : IsProper f\", \"doc\": \"If the composition of a morphism $ f: X \\\\to Y $ with a separated morphism $ g: Y \\\\to Z $ is proper, then $ f $ is a proper morphism of schemes.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper representable morphism of algebraic stacks is local on target for faithfully flat locally finitely presented covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of a representable morphism of algebraic stacks is detected by a surjective flat locally finitely presented scheme target cover",
+   "results": "IsProper and base-change/fppf descent instances on Scheme; no assertion for algebraic stacks.",
+   "date": "2026-10-23",
+   "verdict": "no match: statements are about ordinary schemes, not representable maps of algebraic stacks or general algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"Flat\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: statements are about ordinary schemes, not representable maps of algebraic stacks or general algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "[pP]roper.*(fpqc|fppf)|(fpqc|fppf).*[pP]roper",
+   "results": "Five hits: Sites/Fpqc.lean:50, Morphisms/LocalFlatDescent.lean:14,16, Morphisms/FlatDescent.lean:15,17; these are ordinary scheme descent files.",
+   "date": "2026-10-23",
+   "verdict": "no match: statements are about ordinary schemes, not representable maps of algebraic stacks or general algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness descends along fppf covers of the target for representable morphisms of algebraic stacks",
+   "results": "IsLocalAtTarget.descendsAlong, IsZariskiLocalAtTarget.descendsAlong, IsProper instances and isProper_iff, all for Scheme.",
+   "date": "2026-10-23",
+   "verdict": "no match: statements are about ordinary schemes, not representable maps of algebraic stacks or general algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stack representable proper morphism faithfully flat target descent algebraic spaces",
+   "results": "Flat, descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact and other scheme descent instances; no assertion for algebraic stacks.",
+   "date": "2026-10-23",
+   "verdict": "no match: statements are about ordinary schemes, not representable maps of algebraic stacks or general algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Invariant-ring quotient of a stack with a finite flat affine cover. Supporting input: Properness of representable stack maps is tested on an fppf target cover.",
+   "via": [
+    "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-representable-proper-fppf-target-test",
+  "worker": "stage1",
+  "summary": "Followed Stacks 04XD for properness. Reused the existing algebraic-space base-change and fppf-locality nodes and the chartwise cover calculus; no new nodes. Wrote the pullback identification explicitly on triples and refined the algebraic-space target cover to a singleton scheme fppf cover. The statement and its hypotheses are unchanged.",
+  "blueprint": "Ancestor search returns None, agreeing with the inherited null ancestor and via chain. The inherited place traces this to det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisites. The latest blueprint direct-images proof (3) is compactification and proper-image preservation; this is its inherited supporting geometric descent input, not a replacement of the unit route. Steps 1-5 realize the properness target-test prerequisite named in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of sheaf fibre products of spaces, used only in the explicit comparison of pullbacks. It does not replace a trace-formula or unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-4d3269949",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-4d3269949 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement, stmt_deps and blueprint fields are unchanged from the base. The item is still unsplit in live and side-live, and there is no repair note. The proof follows Stacks 04XD (stacks-properties.tex l.466, after lemma-property-spaces-too). The source writes the fppf cover as {T×_𝒴 V → T}, which is a typo for T×_𝒴 W → T. The delivery uses T×_𝒴 W and refines it by an étale scheme atlas to a singleton fppf scheme cover {h: U→T}, which is correct and needed because lem-sfb-space-flat-proper-fp-locality descends along fppf scheme covers. Steps: (1) the forward direction is the definition at T=W plus lem-sfb-space-proper-base-change. (2) A and B are spaces by the two representability hypotheses, and the atlas comes from def-trf-algebraic-space. (3) h is surjective, flat and lfp by the chart bridge of lem-sfb-fibred-groupoid-representable-smooth-calculus and the composition and étale⇒smooth⇒flat+lfp clauses of lem-sfb-stack-chartwise-smooth-etale-calculus; no quasi-compactness is used. (4) The explicit triple isomorphism A×_T U ≃ V×_W U via β(u)⁻¹α has the right orientation. (5) Base change along w, transport across the isomorphism, then the properness clause of lem-sfb-space-flat-proper-fp-locality (each property separate, so flatness of A is not needed). Edge cases checked: empty T, empty 𝒳, nonempty 𝒴 forcing nonempty W, and automorphisms kept in β. I searched the DAG for duplicates: the existing 04XD nodes cover affine, finite type, quasi-finite and separated over a field; flat, lfp, étale and open immersion; unramified; or scheme-representable maps. None states properness for maps representable by algebraic spaces over an arbitrary S. The item's closure is acyclic and proof_deps equals the union of step uses. The tool use lem-trf-space-fibre-products-etale-covers (generic fibre products of spaces) is accepted. Batch-5: the four lem-sfb citations reach the trace-formula chapter only through def-trf-algebraic-space, a general definition. The trf fibre-product lemma is a generic fact about algebraic spaces, not a step of the trace formula or of Poincaré duality. All five are outside the assumed statements. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableProperFppfTargetTest",
+  "declaration": "CategoryTheory.representable_proper_fppf_target_test",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableProperFppfTargetTest.lean",
+  "statement": "theorem representable_proper_fppf_target_test {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (f : BasedFunctor X Y) (hf : IsRepresentableByAlgebraicSpaces f) (W : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj W)) Y) (hp : IsRepresentableByAlgebraicSpaces p) (hs : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) Y), ∃ (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange p T t Z a ∧ SpaceMapIsSurjective Z T a) (hflat : ModuliSpaceTest @Flat p) (hlfp : ModuliSpaceTest @LocallyOfFinitePresentation p) : (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) Y), ∃ (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T t Z a ∧ MapIsProper (ObjectProperty.homMk ⟨a⟩ : Z ⟶ schemeSpace T)) ↔ (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (discreteModuli (yoneda.obj W))), ∃ (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliTwoFiberFst p f) T t Z a ∧ MapIsProper (ObjectProperty.homMk ⟨a⟩ : Z ⟶ schemeSpace T))",
+  "branch": "sheaf-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Properness on both sides is expanded as proper algebraic-space projections in every actual scheme 2-base change, using HasSpaceBaseChange and MapIsProper. Flatness and local finite presentation reuse ModuliSpaceTest; surjectivity is SpaceMapIsSurjective on every scheme base change. The four added statement dependencies own the already-landed algebraic-stack, chart-test, algebraic-space properness and represented-scheme declarations; no definitions or theorem statements are replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02cd86b92",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Q117 lem-sfb-representable-proper-fppf-target-test 02cd86b9: one theorem module; proof is sorry only. Clause check against Stacks 04XD (stacks-properties.tex l.466-496) and side-live dependency sources: IsAlgebraicModuliStack for X and Y; IsRepresentableByAlgebraicSpaces for f and p; SpaceMapIsSurjective on every scheme base change; ModuliSpaceTest Flat/LocallyOfFinitePresentation on étale charts, no quasi-compactness; V->W is moduliTwoFiberFst p f (iso-comma, factor order swapped, projection to W). Both sides of the iff are scheme tests: exists (Z,a) with HasSpaceBaseChange and MapIsProper (separated, finite type, universally closed after every algebraic-space base change), as the node states; the presentation is unique up to isomorphism, so exists is harmless. Node diff against live: only lean and stmt_deps change, adding four landed definition owners (algebraic-moduli-stack, dm-stack-morphism-properties, space-morphism-properties, trf-scheme-algebraic-space); no theorem stmt_dep. lean.statement is verbatim in the file; docstrings carry source, blueprint and steps 1-5; public/plain imports follow the rules; no line over 100 characters. No duplicate representable-proper predicate or theorem exists. Edge cases (empty W, T or X; non-quasi-compact cover; stabilisers; non-scheme base changes) are all covered. No compile: no file changed. Advisory: the SpaceMapIsProper/MapIsProper duplication in the dependency modules predates this delivery."
+ }
+}

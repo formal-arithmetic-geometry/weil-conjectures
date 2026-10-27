@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-connected-reduced-scalar-field-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness of the scalar-field integral closure on a connected reduced scheme",
+ "statement": "Let $X$ be a nonempty connected reduced scheme [def-pc-scheme, def-weil-connected-scheme, def-pc-reduced-scheme]. Let $k_1,k_2$ be fields [def-weil-field], and let $a_i:X\\to\\operatorname{Spec}k_i$ be morphisms [def-weil-affine-spectrum] that are both locally of finite type [def-weil-finite-type-morphism]. Write $A=\\Gamma(X,\\mathcal O_X)$ and $\\rho_i:k_i\\to A$ for the induced ring maps; these are injective. For $i=1,2$, let $C_i\\subseteq A$ be the subring of elements satisfying a monic polynomial with coefficients in $\\rho_i(k_i)$ (the integral closure of $\\rho_i(k_i)$ in $A$). Then $C_1=C_2$, and this common subring is a field.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04MK (proposition-unique-base-field), equality of the two integral closures, together with Tag 04MI (lemma-integral-closure-ground-field), asserting each integral closure is a field; nonemptiness made explicit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Choose a point $x\\in X$. The ring $A$ is nonzero: the germ of its identity at $x$ is the nonzero identity of the local ring $\\mathcal O_{X,x}$. Each unital map $\\rho_i:k_i\\to A$ is injective, since if a nonzero scalar vanished, multiplication by its image inverse would give $1=0$. Identify the fields with their images. The reducedness definition makes $A$ reduced, and [lem-pc-scheme-connected-iff-idempotents] makes every idempotent of $A$ equal to zero or one.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-field",
+    "def-pc-reduced-scheme",
+    "lem-pc-scheme-connected-iff-idempotents"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MI (lemma-integral-closure-ground-field), reducedness and connectedness; scalar injectivity made explicit."
+   }
+  },
+  {
+   "text": "For either scalar field $k=k_i$, let $C$ be its integral closure in $A$, a subring containing $k$. For $0\\ne c\\in C$, [lem-sfb-reduced-integral-polynomial-generalized-inverse] gives $y=q(c)$ with $c^2y=c$. Since $y$ is a polynomial in $c$ with coefficients in $k$, it lies in $C$. The element $e=cy$ satisfies $e^2=e$. If $e=0$, then $c=ce=0$, a contradiction; hence $e=1$, and $y$ is the inverse of $c$ in $C$. Thus each $C_i$ is a field. This argument holds for every nonempty connected reduced scheme over any field, without a finite-type assumption.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-sfb-reduced-integral-polynomial-generalized-inverse",
+    "lem-pc-scheme-connected-iff-idempotents",
+    "def-weil-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MI (lemma-integral-closure-ground-field), field conclusion, via the isolated polynomial inverse input."
+   }
+  },
+  {
+   "text": "Each $C_i$ is integrally closed in $A$: if $z\\in A$ is integral over $C_i$, apply [lem-sfb-integral-element-tower-descent] to $k_i\\to C_i\\to A$ to obtain integrality over $k_i$, hence $z\\in C_i$. The inclusion $C_i\\to A$ defines a morphism $X\\to\\operatorname{Spec}C_i$ by [lem-weil-pbc-morphism-into-affine-scheme]. It is locally of finite type: choose an affine cover on which the original $k_i$-structure has finitely generated coordinate algebras; on each chart the same generators generate over $C_i$, since the chart map factors through its sections and the coefficients already contain the image of $k_i$. The new morphism composes to the original one, by the same affine-target bijection.",
+   "uses": [
+    "lem-sfb-integral-element-tower-descent",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), quasi-compact paragraph: replacement of k_i by its integral closure, with finite type checked on the original charts."
+   }
+  },
+  {
+   "text": "First suppose $X$ is quasi-compact. It is finite type over $k_1$, so [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-noetherian-finitely-many-components] give finitely many irreducible components (the one affine chart of $\\operatorname{Spec}k_1$ is quasi-compact and Noetherian, since a field has only the zero and unit ideals). Apply [lem-sfb-relatively-closed-constants-units-fg] with each new scalar field $C_i$: both $A^\\times/C_i^\\times$ are finitely generated. Put $F=C_1\\cap C_2$, a field since inverses in either subfield agree in $A$. By [lem-sfb-subfield-units-quotient-finite], applied in both orders, each $C_i/F$ is finite. Thus every $c\\in C_2$ satisfies a monic polynomial over $F\\subseteq C_1$, so $c\\in C_1$ by the relative integral closedness just proved. The reversed argument gives $C_1\\subseteq C_2$. This proves equality in the quasi-compact case.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sfb-relatively-closed-constants-units-fg",
+    "lem-sfb-subfield-units-quotient-finite",
+    "def-weil-pbc-integral-closure",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), final quasi-compact paragraph, through the two inclusions; correct final equality is C_1=C_2 (and here also F)."
+   }
+  },
+  {
+   "text": "For general $X$, choose the affine cover by finitely generated $k_1$-algebras in the local finite-type definition. Each chart $V$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], hence finite type over $k_1$. By [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], its topology is Noetherian. By [lem-sfb-noetherian-connected-components-open], its nonempty connected components are open, and by [lem-sfb-noetherian-space-compact-subsets] they are quasi-compact. These components, with their open subscheme structures, form an open cover $(U_j)$ of $X$ by nonempty connected reduced quasi-compact schemes. The two scalar structures remain locally finite type on these opens by [lem-weil-pbc-lft-affine-pairs]: every affine open of an open subscheme is an affine open of $X$, so the stated coordinate-algebra condition is inherited. Apply the quasi-compact case to $U_j$: its two closures coincide in a field $K_j\\subseteq\\Gamma(U_j,\\mathcal O_X)$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), first paragraph: cover by connected quasi-compact opens. Intersections need not be affine, and their quasi-compactness is not needed in the propagation argument below."
+   }
+  },
+  {
+   "text": "Let $f\\in C_1$ and write $f_j=f|_{U_j}$. Restrict a monic $k_1$-equation for $f$ to see $f_j\\in K_j$. Choose any index $j_0$; it exists since $X$ is nonempty and the opens cover it. As $K_{j_0}$ is also the closure of $k_2$, choose one monic polynomial $P\\in k_2[T]$ with $P(f_{j_0})=0$. Let $J$ be the indices $j$ with $P(f_j)=0$. For any nonempty overlap $W=U_j\\cap U_h$, the restriction maps $K_j\\to\\Gamma(W,\\mathcal O_X)$ and $K_h\\to\\Gamma(W,\\mathcal O_X)$ are injective: their target has $1\\ne0$, as is seen at a point of $W$, and a unital map from a field to a nonzero ring is injective by the inverse argument of step 1. The restrictions of $P(f_j)$ and $P(f_h)$ agree, since restriction preserves coefficients and polynomial evaluation.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-polynomial-ring",
+    "def-weil-field",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), first paragraph after the kernel display: choose a monic polynomial on one open and compare its evaluations on overlaps."
+   }
+  },
+  {
+   "text": "If $j\\in J$ and $U_j\\cap U_h\\ne\\varnothing$, the equality of restrictions in step 6 and injectivity for $K_h$ imply $P(f_h)=0$, hence $h\\in J$. Here $P(f_h)\\in K_h$ because $k_2\\subseteq K_h$. Thus the two opens $\\bigcup_{j\\in J}U_j$ and $\\bigcup_{j\\notin J}U_j$ are disjoint, cover $X$, and the first contains $U_{j_0}$. Connectedness forces the second to be empty. Every $U_h$ is nonempty, so every index belongs to $J$.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), propagation along a chain of overlapping opens, equivalently expressed by the open-and-closed union of successful indices."
+   }
+  },
+  {
+   "text": "The section $P(f)$ restricts to zero on every $U_j$; uniqueness in the structure-sheaf gluing axiom gives $P(f)=0$ on $X$. Its polynomial is monic with coefficients in $k_2$, so $f\\in C_2$. This gives $C_1\\subseteq C_2$. Reversing the roles of the fields gives $C_2\\subseteq C_1$. Together with step 2 this proves equality and the common-field assertion for all $X$ in the statement.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), sheaf condition and propagation of the same monic polynomial. The source phrase f in k_1 here means f in its integral closure k_1'."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-pc-reduced-scheme",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "def-weil-pbc-integral-closure",
+  "lem-sfb-reduced-integral-polynomial-generalized-inverse",
+  "lem-sfb-integral-element-tower-descent",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sfb-relatively-closed-constants-units-fg",
+  "lem-sfb-subfield-units-quotient-finite",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-polynomial-ring",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 04MI (lemma-integral-closure-ground-field) and 04MK (proposition-unique-base-field); polynomial refinement of 04MI isolated as a new algebra lemma. The 04MK overlap-propagation argument is written using injectivity on any nonempty overlap rather than decomposing the overlap into components."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a nonempty connected reduced scheme locally of finite type over two fields the integral closures of the two fields in global sections coincide and are fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"IsIntegralClosure.isField\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic\", \"type\": \"∀ {R : Type u_1} (A : Type u_2) {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R B] [inst_4 : Algebra A B] [IsIntegralClosure A R B] [inst_6 : Algebra R A] [IsScalarTower R A B]\\n  [IsDomain A], IsField R → IsField A\", \"doc\": \"Let $ R $ be a field, $ A $ an integral domain, and $ B $ the integral closure of $ A $ over $ R $. If there exists a scalar tower structure $ R \\to A \\to B $, then $ A $ must itself be a field.\"}\n  {\"name\": \"integralClosure.isFractionRing_of_finite_extension\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"∀ {A : Type u_3} (K : Type u_4) [inst : CommRing A] (L : Type u_5) [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra A K] [IsFractionRing A K] [IsDomain A] [inst_6 : Algebra A L] [inst_7 : Algebra K L]\\n  [IsScalarTower A K L] [FiniteDimensional K L], IsFractionRing (↥(integralClosure A L)) L\", \"doc\": \"Let $ A $ be a domain, $ L $ a finite-dimensional $ K $-algebra, and $ A \\\\to K \\\\to L $ a scalar tower. Then the integral closure of $ A $ in $ L $ has $ L $ as its fraction field.\"}\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(R : CommRingCat) → [inst : IsDomain ↑R] → Algebra ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the function field of the scheme $ \\\\operatorname{Spec}(R) $ (defined as the stalk of the structure sheaf at the generic point of $ \\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any integral scheme $X$, the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain. This follows from the property that an integral scheme is both irreducible and reduced, ensur\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralClosure.isField assumes an integral domain, absent for a connected reduced scheme; Proper.lean assumes integral source and universal closedness, absent here; neither compares two independent scalar fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of the algebraic closure of the ground field inside the global functions of a connected reduced variety with two scalar structures",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(R : CommRingCat) → [inst : IsDomain ↑R] → Algebra ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the function field of the scheme $ \\\\operatorname{Spec}(R) $ (defined as the stalk of the structure sheaf at the generic point of $ \\\\operatorn\"}\n  {\"name\": \"AlgebraicClosure\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure\", \"type\": \"(k : Type u) → [Field k] → Type u\", \"doc\": \"The algebraic closure of a field $ k $ is constructed as the quotient of the multivariate polynomial ring $ k[\\text{Vars}(k)] $ (where $ \\text{Vars}(k) $ indexes variables for each monic polynomial and \"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"FunctionField\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"(Fq : Type u_1) → (F : Type u_2) → [inst : Field Fq] → [inst_1 : Field F] → [Algebra (RatFunc Fq) F] → Prop\", \"doc\": \"Given a field $ F_q $, the proposition that a field $ F $ is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $. This asserts that $ F $ is a finite extension of the\"}\n  {\"name\": \"AlgebraicClosure.instField\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure\", \"type\": \"(k : Type u) → [inst : Field k] → Field (AlgebraicClosure k)\", \"doc\": \"For any field $ k $, its algebraic closure is a field. This is constructed as the quotient of the multivariate polynomial ring $ k[\\\\text{Vars}(k)] $ by a maximal ideal, ensuring every non-constant pol\"}\n  {\"name\": \"functionField_iff\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"∀ (Fq : Type u_1) (F : Type u_2) [inst : Field Fq] [inst_1 : Field F] (Fqt : Type u_3) [inst_2 : Field Fqt]\\n  [inst_3 : Algebra (Polynomial Fq) Fqt] [IsFractionRing (Polynomial Fq) Fqt] [inst_5 : Algebra (RatFunc Fq) F]\\n  [inst_6 : Algebra Fqt F] [inst_7 : Algebra (Polynomial Fq) F] [IsScalarTower (\", \"doc\": \"A field $ F $ is a function field over $ F_q $ if and only if it is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $.\"}\n  {\"name\": \"IsAlgClosure\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"(R : Type u) →\\n  (K : Type v) → [inst : CommRing R] → [inst_1 : Field K] → [inst_2 : Algebra R K] → [Module.IsTorsionFree R K] → Prop\", \"doc\": \"Given a commutative ring $ R $ and a field $ K $ equipped with an $ R $-algebra structure and torsion-free as an $ R $-module, this proposition asserts that $ K $ is an algebraic closure of $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isScalarTower\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : IrreducibleSpace ↥X] (U : X.Opens) (x : ↥U) [inst_1 : Nonempty ↥↑U],\\n  IsScalarTower ↑(X.presheaf.obj (Opposite.op U)) ↑(X.presheaf.stalk ↑x) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, the ring of sections $\\\\Gamma(X, U)$ over $U$ is equipped with an algebra structure over the function field of $X$. This structure \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralClosure.isField assumes an integral domain, absent for a connected reduced scheme; Proper.lean assumes integral source and universal closedness, absent here; neither compares two independent scalar fields"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"integralClosure\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralClosure.isField assumes an integral domain, absent for a connected reduced scheme; Proper.lean assumes integral source and universal closedness, absent here; neither compares two independent scalar fields"
+  },
+  {
+   "tool": "grep",
+   "query": "unique.base.field|integral.closure.ground.field|integralClosure.*global|global.*integralClosure",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralClosure.isField assumes an integral domain, absent for a connected reduced scheme; Proper.lean assumes integral source and universal closedness, absent here; neither compares two independent scalar fields"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral closure of a field in global sections of a connected reduced scheme is a field and independent of locally finite type scalar structure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"minpoly.instIsScalarTowerSubtypeMemSubringSubalgebraIntegralClosure\", \"module\": \"Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed\", \"type\": \": IsScalarTower A ((integralClosure A L)) L\", \"doc\": \"The integral closure of $ A $ in $ L $ is equipped with a canonical $ A $-algebra structure, where scalar multiplication is inherited from the algebra structure on $ L $.\"}\n  {\"name\": \"IsIntegralClosure.isField\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \"[Algebra R A] [IsScalarTower R A B] [IsDomain A] (hR : IsField R) : IsField A\", \"doc\": \"Let $ R $ be a field, $ A $ an integral domain, and $ B $ the integral closure of $ A $ over $ R $. If there exists a scalar tower structure $ R \\to A \\to B $, then $ A $ must itself be a field.\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ (Spec <| .of K)) [IsIntegral X] [UniversallyClosed f] : IsField Γ(X, ⊤)\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"Ring.NormalClosure\", \"module\": \"Mathlib.RingTheory.NormalClosure\", \"type\": \": Type _\", \"doc\": \"The subalgebra of $ E $ consisting of all elements integral over the subring $ S $, i.e., elements satisfying a monic polynomial equation with coefficients in $ S $. This subalgebra is closed under ad\"}\n  {\"name\": \"IsIntegralClosure.of_isIntegrallyClosed\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \"[IsIntegrallyClosed R] [Algebra S R] [Algebra S K] [IsScalarTower S R K] [Algebra.IsIntegral S R] :\\n  IsIntegralClosure R S K\", \"doc\": \"If $ R $ is integrally closed in its fraction ring, and $ R $ is an $ S $-algebra that is integral over $ S $, then $ R $ is the integral closure of $ S $ in any $ S $-algebra $ K $ extending $ R $ un\"}\n  {\"name\": \"integralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \": Subalgebra R A\", \"doc\": \"The subalgebra of $ A $ consisting of all elements integral over the subring $ R $, i.e., elements satisfying a monic polynomial equation with coefficients in $ R $. This subalgebra is closed under ad\"}\n  {\"name\": \"IsIntegrallyClosed.instIsIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \"[iic : IsIntegrallyClosed R] : IsIntegralClosure R R K\", \"doc\": \"If $ R $ is a commutative ring that is integrally closed in its fraction ring $ K $, then $ R $ is the integral closure of itself over $ R $ in $ K $. This instance asserts that the integral closure o\"}\n  {\"name\": \"instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \": IsIntegrallyClosedIn (integralClosure R A).toSubring A\", \"doc\": \"The integral closure of a subring $ R $ in a commutative ring $ A $ is integrally closed in $ A $. This means that every element of $ A $ which is integral over the integral closure of $ R $ in $ A $ \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsIntegralClosure.isField assumes an integral domain, absent for a connected reduced scheme; Proper.lean assumes integral source and universal closedness, absent here; neither compares two independent scalar fields"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-stabilizer-dimension",
+  "date": "2026-10-23",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Dimension input in the field-groupoid calculation: replace the arrow-space dimension by the stabilizer dimension (Stacks 06FF). Supporting input: Stacks 06FF, middle paragraph: identify k_a=k_b inside the global sections of the connected reduced chart T, and use that this ring is a field to inject it into the residue field at v.",
+   "via": [
+    "lem-sfb-field-groupoid-stabilizer-dimension",
+    "lem-sfb-field-groupoid-identity-finite-relation",
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-connected-reduced-scalar-field-uniqueness",
+  "worker": "stage1",
+  "summary": "Q54: retained the statement and earlier searches; established the field clause through a polynomial generalized inverse, proved the quasi-compact comparison through unit quotients and subfield intersection finiteness, and propagated a single monic equation over a connected quasi-compact open cover. Four new nodes, one exact Mathlib leaf. Documented the missing prime in the source in its integrality conclusion, expanded its final inclusions, and recorded the inherited null blueprint ancestor.",
+  "blueprint": "Current latest blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), supporting the inherited alteration/moduli/groupoid chain named in blueprint.from.place. This scalar-field input realizes Stacks 06FF via 04MK; the inherited creation chain returns null from tools/blueprint_refs.py ancestor, so null is retained faithfully. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-connected-iff-idempotents",
+    "why": "Generic connectedness/idempotent criterion, used only to turn a polynomial generalized inverse into an inverse; no same-unit node states it."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic topological component theorem used on a Noetherian affine chart to build the connected open cover; it is the source route, not a substitute for any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-sfb-noetherian-connected-components-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-7f1f7149c",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-7f1f7149c (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, all 4 new nodes and every cited statement, against Stacks varieties.tex 04MI (lemma-integral-closure-ground-field), 04MK (proposition-unique-base-field) and 04L7 (proposition-units-general, alternative 1), and Mathlib isIntegral_trans at IsIntegralClosure/Basic.lean:479. The item statement is 04MK plus 04MI's field clause, with nonempty made explicit; nothing is weakened and it is enough for the groupoid-stabilizer citer. Step 1: A is nonzero, the scalar maps are injective, A is reduced, and its only idempotents are 0 and 1. Step 2: the field clause follows from the generalized inverse, since e=cy is idempotent and c≠0 forces e=1. Step 3: the elementwise tower lemma makes C_i integrally closed in A, and X→Spec C_i is locally of finite type because the same generators work over C_i. Step 4: in the quasi-compact case X is Noetherian with finitely many components, so the 04L7 node applies with k:=C_i. The subfield node, applied both ways, makes C_1 and C_2 finite over F=C_1∩C_2, and integral closedness gives both inclusions. Step 5: the cover by connected components of Noetherian affine charts is correctly cited; the minimal condition on closed sets gives ACC on opens by complements. Steps 6-8: propagating one monic P over nonempty overlaps, using injectivity from a field into a nonzero ring and the clopen-union argument, is correct and avoids the source's unjustified finite decomposition of overlaps. I confirm the source typo: 'f in k_1' should be 'f in k_1''. Each new node is true, self-contained and not a clause of the item. Generalized inverse: tested on B=0 and on k×k with x=(1,0), proved by factoring p=T^m r and Bezout. Subfield node: the kernel is (K∩L)^×, then Laurent generators and Zariski's lemma; tested on K=L and on k(t). Units node: exact 04L7(1). Tower leaf: exact match with isIntegral_trans. Duplicate searches found nothing (04MK/04MI/04L7, units fg, absolutely flat, x^2y=x). I accept the tool uses lem-pc-scheme-connected-iff-idempotents and lem-sfb-noetherian-connected-components-open as generic black boxes. No SGA citation and no cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConnectedReducedScalarFieldUniqueness",
+  "declaration": "AlgebraicGeometry.Scheme.connected_reduced_scalar_field_integralClosure_unique",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedReducedScalarFieldUniqueness.lean",
+  "statement": "theorem connected_reduced_scalar_field_integralClosure_unique (X : Scheme.{u}) [ConnectedSpace X] [IsReduced X] (k₁ k₂ : Type u) [Field k₁] [Field k₂] (a₁ : X ⟶ Spec (CommRingCat.of k₁)) (a₂ : X ⟶ Spec (CommRingCat.of k₂)) [LocallyOfFiniteType a₁] [LocallyOfFiniteType a₂] : Function.Injective (((ΓSpecIso (CommRingCat.of k₁)).inv ≫ a₁.appTop).hom) ∧ Function.Injective (((ΓSpecIso (CommRingCat.of k₂)).inv ≫ a₂.appTop).hom) ∧ (@Subalgebra.toSubring k₁ Γ(X, ⊤) _ _ (((ΓSpecIso (CommRingCat.of k₁)).inv ≫ a₁.appTop).hom.toAlgebra) (@integralClosure k₁ Γ(X, ⊤) _ _ (((ΓSpecIso (CommRingCat.of k₁)).inv ≫ a₁.appTop).hom.toAlgebra))) = (@Subalgebra.toSubring k₂ Γ(X, ⊤) _ _ (((ΓSpecIso (CommRingCat.of k₂)).inv ≫ a₂.appTop).hom.toAlgebra) (@integralClosure k₂ Γ(X, ⊤) _ _ (((ΓSpecIso (CommRingCat.of k₂)).inv ≫ a₂.appTop).hom.toAlgebra))) ∧ IsField (@Subalgebra.toSubring k₁ Γ(X, ⊤) _ _ (((ΓSpecIso (CommRingCat.of k₁)).inv ≫ a₁.appTop).hom.toAlgebra) (@integralClosure k₁ Γ(X, ⊤) _ _ (((ΓSpecIso (CommRingCat.of k₁)).inv ≫ a₁.appTop).hom.toAlgebra)))",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b04e8db32",
+  "group": "NY",
+  "result": "pass",
+  "note": "Checked the node, all 7 stmt_dep records (Mathlib leaves Scheme/ConnectedSpace/IsReduced/Field/Spec/LocallyOfFiniteType/integralClosure) and Stacks varieties.tex 04MI (l.5319) and 04MK (l.5965) against the Lean. ConnectedSpace includes Nonempty; ρᵢ = (ΓSpecIso).inv ≫ aᵢ.appTop is canonical; integralClosure and toSubring take the same explicit ρᵢ.toAlgebra; conclusion = both injectivities ∧ literal Subring equality ∧ IsField; no extra hypotheses; universe u is forced by X ⟶ Spec kᵢ. Edge cases: empty X excluded as in the source; reducible connected X allowed; k₁=k₂ fine. lean.statement is verbatim in the file; the node differs from live only in lean (no prior record, not a rebind); one sorry, no definitions, docstrings carry source, blueprint and 8 proof steps; all imports exist live; report has Worker report and Second reading by NY. No change, so no compile. No findings."
+ }
+}

@@ -58,7 +58,54 @@
   "def-sc-picard-group"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.picardPresheaf_map_mem_picardFunctorNormalized",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+     "lines": [
+      413,
+      422
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-picard-pic"
+ "unit": "sk-def-picard-pic",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be a morphism of schemes and $\\sigma:S\\to X$ a section\nof $f$ (for instance $S=\\operatorname{Spec}(k)$ for a field $k$ and\n$\\sigma\\in X(k)$ a $k$-rational point, [def-pc-rational-point]). Then the\nassignment\n\n$$\nT\\longmapsto\\operatorname{Ker}\\Bigl(\\sigma_T^*:\\operatorname{Pic}(X_T)\n\\longrightarrow\\operatorname{Pic}(T)\\Bigr)\n$$\n\nof [def-pc-pic-sigma-functor] is a\nsubfunctor of the\nPicard presheaf on the category of\nschemes over $S$.",
+  "proof": [
+   {
+    "text": "The sets $\\operatorname{Ker}(\\sigma_T^*)$ are subsets of\n$\\operatorname{Pic}(X_T)$ by [def-pc-pic-sigma-functor], and\n$\\operatorname{Pic}(X_T)$ with its pullback maps is the Picard presheaf of\n[def-pc-picard-presheaf]; it remains to check the condition of\n[def-pc-subfunctor]. Let $u:T'\\to T$ be a morphism of schemes over\n$S$, write $u_X:X_{T'}\\to X_T$ for the base change of $u$\n([def-pc-base-change]) and let\n$[\\mathcal L]\\in\\operatorname{Ker}(\\sigma_T^*)$. The base-changed\nsections are $\\sigma_T=(\\sigma\\circ t,\\mathrm{id}_T):T\\to X\\times_ST$ and\n$\\sigma_{T'}=(\\sigma\\circ t',\\mathrm{id}_{T'})$, where $t:T\\to S$ and\n$t'=t\\circ u$ are the structure morphisms (for $S=\\operatorname{Spec}(k)$\nthese are the sections of [def-pc-rational-point]); under the identification\n$X_{T'}=X_T\\times_TT'$ of [def-pc-base-change] the composites\n$u_X\\circ\\sigma_{T'}$ and $\\sigma_T\\circ u$ are therefore both the\nmorphism $T'\\to X_T=X\\times_ST$ with components $\\sigma\\circ t'$ and $u$.\nPullback of invertible modules\nis contravariant and compatible with composition\n([def-sc-picard-group]), so\n$\\sigma_{T'}^*\\circ u_X^*=u^*\\circ\\sigma_T^*$ as maps on Picard groups, and\ntherefore\n\n$$\n\\sigma_{T'}^*(u_X^*\\mathcal L)\\cong u^*(\\sigma_T^*\\mathcal L)\n\\cong u^*\\mathcal O_T\\cong\\mathcal O_{T'},\n$$\n\nbecause $\\sigma_T^*\\mathcal L\\cong\\mathcal O_T$. Hence\n$u_X^*\\mathcal L\\in\\operatorname{Ker}(\\sigma_{T'}^*)$, which is exactly\nthe subfunctor condition.",
+    "uses": [
+     "def-pc-pic-sigma-functor",
+     "def-pc-picard-presheaf",
+     "def-pc-subfunctor",
+     "def-pc-base-change",
+     "def-pc-rational-point",
+     "def-sc-picard-group"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

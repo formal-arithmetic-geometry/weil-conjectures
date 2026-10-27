@@ -1,0 +1,352 @@
+{
+ "id": "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+ "kind": "statement",
+ "title": "Effective strict-henselian descent of a locally finite-type group datum",
+ "statement": "Let $R$ be a discrete valuation ring, $D=R^{\\mathrm{sh}}$ a chosen strict henselization, $K=\\operatorname{Frac}R$ and $F=\\operatorname{Frac}D$ [def-sc-discrete-valuation-ring, def-sc-ring-strict-henselization, def-weil-affine-spectrum]. Let $H$ be a smooth separated commutative $D$-group scheme locally of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; its multiplication, identity and inverse satisfy the commutative group identities, and separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Suppose $H_F$ is of finite type and every finite subset of $|H|$ lies in an affine open subscheme [def-weil-open-immersion]. Suppose $H$ has a descent datum $\\alpha:p_0^*H\\simeq p_1^*H$ over $\\operatorname{Spec}(D\\otimes_RD)$ satisfying the cocycle on $\\operatorname{Spec}(D\\otimes_RD\\otimes_RD)$ [def-pd-descent-datum]. Assume $\\alpha$ respects the multiplication, identity and inverse, and its restriction after inverting a uniformizer of $R$ is the canonical datum of a specified smooth separated finite-type commutative $K$-group $V$ under an identification $H_F\\simeq V_F$ [def-pc-base-change]. Then the datum is effective in smooth separated commutative group schemes: there exist a smooth separated commutative $R$-group scheme $G$ and an isomorphism $G_D\\simeq H$ inducing $\\alpha$ and the specified generic identification $G_K\\simeq V$. Neither $H$ nor $G$ is required to be quasi-compact. No Néron mapping property is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.5 Theorem 1 and Corollary 3 proof, printed pp.157–159 (PDF pp.163–165), and the lft descent invoked in 10.1 Proposition 7 proof, printed p.293 (PDF p.299). Agent formulation of the lft effectivity input with finite-affine-neighbourhood and finite generic-fibre hypotheses explicit; not an assertion that finite-type group descent alone covers a non-quasi-compact group. Local PDF WANTED; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf. Agent formulation where explicitly indicated."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-sc-ring-strict-henselization",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pd-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}R$, $S'=\\operatorname{Spec}D$, and $p:S'\\to S$. By [lem-sc-strict-henselization-faithfully-flat], $R\\to D$ is faithfully flat. Its map on spectra is surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Apply [lem-weil-pbc-flat-morphism-affine-criterion] to the affine charts (equivalently the single full affine chart) to obtain that $p$ is flat. A morphism between affine schemes is affine; hence $p$ is quasi-compact by [lem-weil-pbc-affine-morphism-permanence]. Thus $p$ is a flat quasi-compact surjection, with no finite-presentation assertion about $p$.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QM, faithful flatness of strict henselization; algebra.tex Tag 00HP and morphisms.tex affine flatness and affine quasi-compactness."
+   }
+  },
+  {
+   "text": "Choose a geometric closed point $\\bar s$ of $S$ realizing the residue separable closure used to choose $D$. Apply [lem-exc-affine-strict-local-ring-comparison] to the full affine open $S=\\operatorname{Spec}R$: since $R$ is local, its localization at the closed point is $R$ itself. This identifies the chosen algebraic $D$ with $\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ as an $R$-algebra, including the structural map, and shows that $D$ is strictly henselian. Thus [lem-sc-strict-henselization-dvr] applies and makes $D$ a DVR and $R\\to D$ an injective local map. Fix a uniformizer $\\pi$ of $R$. Its image is nonzero and in the maximal ideal of $D$. By [lem-sc-local-domain-dim-one-principal-localization-fraction-field], $R[1/\\pi]=K$ and $D[1/\\pi]=F$. Tensor/localization compatibility follows from the universal property of inverting $\\pi$: maps out of either side are pairs of agreeing maps with $\\pi$ invertible. In particular the generic restriction of the Cech datum is precisely the specified datum over $F/K$.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-dvr",
+    "lem-sc-local-domain-dim-one-principal-localization-fraction-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 04HX/04GW, the affine-ring comparison; Tag 0AP3, preservation of a DVR; localization universal property."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-trait-special-neutral-finite-type-open] to $H/D$. It gives the open subgroup $U=H\\setminus(H_s\\setminus H_s^0)$, with the entire generic fibre $U_F=H_F$ and only the special identity component. Crucially $U$ is of finite type, although $H$ need not be. Since $\\alpha$ is a group isomorphism, the same lemma makes $U$ stable under $\\alpha$ on the full double overlap. Its restricted datum still satisfies the cocycle. Since $D$ is strictly henselian, the set-indexed opens $U_\\lambda=\\lambda U$, for $\\lambda\\in H(D)$, cover $H$. Each is a smooth separated finite-type scheme, by its translation isomorphism with $U$.",
+   "uses": [
+    "lem-sfb-trait-special-neutral-finite-type-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-specialisation-foncteur-picard.pdf",
+    "place": "(3.2)(d), (3.3.4), and the smooth translate-cover argument following (3.3.3), printed pp.40-42."
+   }
+  },
+  {
+   "text": "Now apply [lem-sfb-smooth-group-field-trait-descent] to the faithfully flat map of DVRs $R\\to D$ and the finite-type group $U$, with its restricted group-compatible datum. Obtain a smooth separated finite-type $R$-group $G_0$ and a datum-compatible group isomorphism $\\theta_0:(G_0)_D\\simeq U$. All finite-type hypotheses of that theorem hold here. This use of BLR descends the finite-type subgroup, rather than applying its theorem to the whole locally finite-type $H$.",
+   "uses": [
+    "lem-sfb-smooth-group-field-trait-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.5 Theorem 1, printed p.157 (PDF p.163); its invariant ample-divisor/quasi-projective proof is used through the existing finite-type descent node."
+   }
+  },
+  {
+   "text": "For each $\\lambda\\in H(D)$, let $v_\\lambda\\in V(F)$ be its generic point under the specified comparison $\\beta:H_F\\simeq V_F$. Apply [lem-sfb-strict-local-generic-point-etale-approximation] to obtain an etale local DVR neighbourhood $T_\\lambda=\\operatorname{Spec}A_\\lambda\\to S$, a faithfully flat local injection $A_\\lambda\\to D$, and $a_\\lambda\\in V(\\operatorname{Frac}A_\\lambda)$ pulling back to $v_\\lambda$. Thus $p$ factors as $S'\\xrightarrow{q_\\lambda}T_\\lambda\\xrightarrow{r_\\lambda}S$; $q_\\lambda$ is flat and surjective by the same affine criteria as step 1 and is quasi-compact because it is affine. No claim that the translating points are already $K$-valued is made.",
+   "uses": [
+    "lem-sfb-strict-local-generic-point-etale-approximation",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 Proposition 7, printed p.293 (PDF p.299), translation construction; generic points become defined over etale local neighbourhoods by the cited approximation lemma."
+   }
+  },
+  {
+   "text": "The two pullbacks of $\\lambda$, compared using $\\alpha$, agree generically on $B=D\\otimes_{A_\\lambda}D$: via $\\beta$ both are the pullback of $a_\\lambda$. They agree everywhere. Indeed $\\pi$ is a nonzerodivisor on $D$, and tensoring its multiplication injection with the flat $A_\\lambda$-module $D$ keeps it injective on $B$ [def-weil-pbc-flat-ring-map]. As $H$ is separated, pulling back its diagonal by the pair of sections gives a closed immersion by [lem-weil-pbc-closed-immersion-base-change]; thus their equalizer is a closed subscheme of $\\operatorname{Spec}B$ [def-weil-closed-immersion]; its ideal $I$ satisfies $I[1/\\pi]=0$. Every element of $I$ is killed by a power of $\\pi$, so injectivity gives $I=0$. Because $U$ is stable and $\\alpha$ respects multiplication, $U_\\lambda$ is consequently stable for the datum over $S'/T_\\lambda$, and translation gives a compatible isomorphism\n$$\\theta_\\lambda:(G_0)_{A_\\lambda}\\times_{T_\\lambda}S'\\xrightarrow{\\theta_0}U\\xrightarrow{t_\\lambda}U_\\lambda.$$\nThe compatibility equation is $\\alpha(t_{p_0^*\\lambda}(p_0^*u))=t_{p_1^*\\lambda}(\\alpha(p_0^*u))$, since the two sections have just been proved equal. Thus these finite-type pieces have effective data over the etale neighbourhoods.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 Proposition 7 translation/gluing argument, printed p.293; elementary separated-equalizer argument over the pi-torsion-free overlap. No source theorem is used to extend a section across the closed fibre."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-etale-effective-open-chart-descent] with $Y=H$, the covering $\\{U_\\lambda\\}$ of step 3, the factorizations $p=r_\\lambda q_\\lambda$ of step 5, and the models $Z_\\lambda=(G_0)_{A_\\lambda}$ and isomorphisms of step 6. It produces an algebraic space $X/S$, an isomorphism $\\theta:X_D\\simeq H$ inducing $\\alpha$, and an etale atlas given by these descended finite-type pieces. Its functor of points is exactly the compatible-section equalizer displayed in that lemma. The extra chart hypotheses are verified before this application; separated locally finite presentation alone is not being treated as an fpqc effectivity criterion.",
+   "uses": [
+    "lem-sfb-etale-effective-open-chart-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Agent effective-open-chart gluing criterion, from Tags 023Q, 02L3, 02VN and bootstrap.tex Tag 04S6; applied only after construction of the effective etale-local charts."
+   }
+  },
+  {
+   "text": "For each $T/S$, the compatible sections of step 7 form a subgroup of $H(T\\times_S S')$: if $y,z$ are compatible, then $\\alpha(m(y,z))=m(\\alpha(y),\\alpha(z))=m(p_1^*y,p_1^*z)$, with all terms pulled to the double overlap; likewise $\\alpha(e)=e$ and $\\alpha(i(y))=i(\\alpha(y))$. Thus multiplication, identity and inverse restrict to these subsets and commute with every pullback in $T$. By [def-trf-algebraic-space], natural transformations are morphisms of spaces; these operations therefore define $m_X:X\\times_S X\\to X$, $e_X:S\\to X$, and $i_X:X\\to X$. Each commutative group identity holds pointwise in the ambient group of sections of $H$, and hence on $X$. The restriction identification in [lem-sfb-etale-effective-open-chart-descent] makes $\\theta$ a group isomorphism, since all operations were obtained by restricting those of $H$.",
+   "uses": [
+    "lem-sfb-etale-effective-open-chart-descent",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q compatible-section construction; elementary restriction of group operations to the equalizer."
+   }
+  },
+  {
+   "text": "The single map $p$ is an fpqc covering: it is flat, quasi-compact and surjective by step 1. Its pullback of $X\\to S$ is the separated locally finite-type morphism $H\\to S'$. The separatedness clause of [lem-sfb-space-fpqc-qc-separated-descent] gives that $X\\to S$ is separated, and the fpqc-locality clause of [lem-sfb-space-lft-smooth-fpqc-locality] gives that it is locally of finite type. Apply [lem-sfb-trait-group-space-schematicity] to this group algebraic space over the given DVR $R$. Choose a representing $S$-scheme $G$. Transport $m_X,e_X,i_X$ along the representing isomorphism; these are scheme morphisms and satisfy the same commutative group identities. We now have a separated locally finite-type commutative $R$-group scheme with $G_D\\simeq H$ inducing $\\alpha$.",
+   "uses": [
+    "lem-sfb-space-fpqc-qc-separated-descent",
+    "lem-sfb-space-lft-smooth-fpqc-locality",
+    "lem-sfb-trait-group-space-schematicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-specialisation-foncteur-picard.pdf",
+    "place": "Raynaud, Specialisation du foncteur de Picard, Publications Mathematiques IHES 38 (1970), Theoreme 3.3.1, printed p.40 (PDF p.15); specialization of the locally Noetherian normal dimension-one base to a DVR. This theorem says locally of finite type, not finite type. Local PDF WANTED; primary scan read at https://numdam.org/item/PMIHES_1970__38__27_0.pdf."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-smooth-fpqc-base-descent] to $G\\to S$ and $p:S'\\to S$. The latter is flat, quasi-compact and surjective by step 1, and the base change of the former is $H\\to S'$, which is smooth by hypothesis. It follows that $G\\to S$ is smooth. This application imposes no quasi-compactness on $G$ and no finite presentation on $p$.",
+   "uses": [
+    "lem-trf-smooth-fpqc-base-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VL, smoothness is fpqc local on the base."
+   }
+  },
+  {
+   "text": "Apply [lem-pd-morphisms-descend] over $\\operatorname{Spec}F\\to\\operatorname{Spec}K$ to the compatible isomorphism $(G_K)_F\\simeq H_F\\xrightarrow{\\beta}V_F$ of step 2. Both data are effective already, with descended schemes $G_K$ and $V$. This is a legitimate fpqc application: $F/K$ is a nonzero field extension, hence tensoring is exact and faithful (choose a $K$-basis of $F$ containing $1$), and its affine spectrum map is surjective and quasi-compact. Descend the inverse map as well. Uniqueness in the same lemma makes both composites the identity, since this is true after extension to $F$. It likewise shows that the descended isomorphism respects multiplication, identity and inverse: the two maps in each group diagram agree after extension to $F$ and are therefore equal. This gives the required $G_K\\simeq V$ with exactly the prescribed base change $\\beta$. The effective charts cover all of $H$, so no component has been discarded.",
+   "uses": [
+    "lem-pd-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W0, full faithfulness of fpqc descent for morphisms, applied to an isomorphism and its inverse."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-dvr",
+  "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+  "lem-sfb-trait-special-neutral-finite-type-open",
+  "lem-sfb-smooth-group-field-trait-descent",
+  "lem-sfb-strict-local-generic-point-etale-approximation",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-etale-effective-open-chart-descent",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-fpqc-qc-separated-descent",
+  "lem-sfb-space-lft-smooth-fpqc-locality",
+  "lem-sfb-trait-group-space-schematicity",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-pd-morphisms-descend"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Repair following BLR 10.1 Proposition 7 translation/gluing and finite-type 6.5 Theorem 1, with Raynaud (3.3.4) special-neutral subgroup and (3.3.1) schematicity. The etale-local translating-point and chart-gluing details are supplied explicitly; missing local PDFs are WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Neron|descent.*group|group.*descent",
+   "results": "{\"t\": \"2026-10-24T08:03:05Z\", \"tool\": \"grep\", \"query\": \"Neron|descent.*group|group.*descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Descent.lean\", \"Mathlib/GroupTheory/Descent.lean\", \"Mathlib/GroupTheory/Descent.lean\", \"Mathlib/GroupTheory/Descent.lean\", \"Mathlib/GroupTheory/Descent.lean\"], \"digest\": \"2eb8650c8c128f81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat strict henselization descent of smooth separated group schemes locally of finite type",
+   "results": "{\"t\": \"2026-10-24T08:03:06Z\", \"tool\": \"leansearch\", \"query\": \"Faithfully flat strict henselization descent of smooth separated group schemes locally of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"RingHom.FaithfullyFlat\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.FaithfullyFlat.flat\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\"], \"digest\": \"425d18880e4738fb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"IsSeparated\"",
+   "results": "{\"t\": \"2026-10-24T08:03:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"IsSeparated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of smooth separated locally finite type group schemes over discrete valuation rings with no quasi compactness assumption",
+   "results": "{\"t\": \"2026-10-24T08:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"Effective descent of smooth separated locally finite type group schemes over discrete valuation rings with no quasi compactness assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"bb53e425751755be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type smooth separated group over a valuation ring with compatible cocycle descends as a scheme",
+   "results": "{\"t\": \"2026-10-24T08:03:08Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type smooth separated group over a valuation ring with compatible cocycle descends as a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\"], \"digest\": \"8c082a7f48260f59\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-strict-local-descent-base-change",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited alteration/trait-extension prerequisite; BLR 6.5 Theorem 1 and Corollary 3 proof, printed pp.157–159 (PDF pp.163–165), and the lft descent invoked in 10.1 Proposition 7 proof, printed p.293 (PDF p.299). Agent formulation of the lft effectivity input with finite-affine-neighbourhood and finite generic-fibre hypotheses explicit; not an assertion that finite-type group descent alone covers a non-quasi-compact group.",
+   "via": [
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+  "worker": "Q88 stage1 direct delivery",
+  "summary": "Repaired the returned unsupported fpqc effectivity route: withdrew its node, descended only the finite-type special-neutral subgroup using the existing BLR theorem, spread each translating point to a local etale trait, proved translate-data compatibility on the torsion-free overlap and glued effective charts to a space. Retained Raynaud schematicity and the accepted group/property/generic-identification arguments. Added the affine strict-local comparison before using the DVR theorem. Statement unchanged.",
+  "blueprint": "Preserves the item's current inherited from.node=null/via provenance and its det-thm-sf-ctf-stability-direct-images proof (3) place. Whole blueprint searches for descent, effective descent, fpqc, group algebraic and schematicity, and whole-DAG/source searches, found no equivalent to either new node. This supplies an inherited alteration/trait-extension input, without changing the direct-image stability route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Faithful flatness of strict henselization establishes the cover; this is local algebra, not another six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Spectrum surjectivity of a faithfully flat ring map establishes the cover; no statement of the current unit replaces this generic algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "The affine ring/scheme flatness dictionary establishes flatness of Spec D to Spec R."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Only quasi-compactness of the affine cover morphism is used; no quasi-compactness of the group is deduced."
+   },
+   {
+    "node": "lem-trf-smooth-fpqc-base-descent",
+    "why": "Generic fpqc descent of smoothness is used after representability; it is independent of the trace formula route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Preservation of a DVR and the injective local map identify the generic restriction of the cover."
+   },
+   {
+    "node": "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+    "why": "Generic localization of a one-dimensional local domain identifies D[1/pi] with Frac D; no different route is involved."
+   },
+   {
+    "node": "lem-pd-morphisms-descend",
+    "why": "Only full faithfulness for morphisms between already descended schemes is used to recover the specified generic group isomorphism, not projective object descent."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic strict-local comparison, ring/scheme descent or morphism-property tool, used with its full stated hypotheses; no finite-type group descent or constructibility route is replaced."
+   },
+   {
+    "node": "def-weil-pbc-flat-ring-map",
+    "why": "Generic strict-local comparison, ring/scheme descent or morphism-property tool, used with its full stated hypotheses; no finite-type group descent or constructibility route is replaced."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic strict-local comparison, ring/scheme descent or morphism-property tool, used with its full stated hypotheses; no finite-type group descent or constructibility route is replaced."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic strict-local comparison, ring/scheme descent or morphism-property tool, used with its full stated hypotheses; no finite-type group descent or constructibility route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic closed-immersion permanence used to make the equalizer of the two sections a closed subscheme; the subsequent pi-torsion argument is written out."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sc-strict-henselization-dvr",
+  "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+  "lem-pd-morphisms-descend",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-closed-immersion",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-734d0ed85",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-734d0ed85 (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged, md5 01e262b5; 11 steps), all four new nodes and every cited statement, with sources: BLR 10.1 Prop.7 p.293 ('by means of descent G(s) over R^sh is already defined over R', now written out), Raynaud Thm 3.3.1 (locally noetherian normal dim-1 base; separated lft group space is a scheme), and Stacks 01ZM, 023Q, 02L3, 02VN and 04S6(4). Previous return repaired. E2/E1: the general fpqc-in-spaces node is withdrawn. C7/D1: the route now follows BLR. It descends the finite-type U=H∖(H_s∖H_s^0) by the existing BLR 6.5 node, defines each translate λU over a local étale DVR A_λ, proves compatibility on D⊗_{A_λ}D (π-torsion-free; the closed equalizer contains the generic part, so its ideal is 0), and glues effective charts. C4: step 2 now applies lem-exc-affine-strict-local-ring-comparison before lem-sc-strict-henselization-dvr. Checked true: the subgroup node (U is open; it is quasi-compact from finitely many affines covering H_s^0 plus quasi-compact H_F; it is datum-stable because a faithfully flat DVR map is local, so special points go to special points and group isomorphisms keep identity components; translates cover via rational points of smooth components over a separably closed field plus Hensel lifting). Checked true: the approximation node (colimit stage, then the normal component, then principal localization to a 2-point normal domain, which is an étale finite-presentation DVR with A→D local, injective, faithfully flat). Checked true: the chart-gluing node (the descended fpqc sheaf; invariant opens descend because fpqc maps are submersive; representable étale surjective atlas, then 04S6). It needs the supplied effective charts and does not restate the item. Raynaud schematicity matches 3.3.1. Steps 8–11 are checked: separated and lft by fpqc locality, smoothness by 02VL, morphisms-descend in its BU faithfully-flat quasi-compact form for F/K. No duplicates found (rg over dag/nodes: relative-neutral-open, neutral-action-saturation, Néron neutral chart, single-cover space descent, polarized fpqc effectivity, fppf datum realization). Batch-5 flags all accepted as generic: def-trf-algebraic-space is a definition; lem-trf-smooth-fpqc-base-descent is Stacks 02VL (Mathlib leaf); the space separated/lft descent nodes and BLR group descent reach trf only through these. None is part of the trace formula or Poincaré duality. The 13 declared tool_uses are accepted. No fixes."
+ }
+}

@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-normal-generic-chart-clopens",
+ "kind": "statement",
+ "title": "Normal generic affine charts and lifting their clopens",
+ "statement": "Let $X$ be a nonempty integral locally Noetherian scheme [def-pc-integral-scheme, pqf-def-locnoeth], and assume every local ring of $X$ is a domain integrally closed in its fraction field [def-weil-pbc-normal-ring]. Let $\\eta$ be its generic point, $k=\\mathcal O_{X,\\eta}$ its function field, and $j:\\operatorname{Spec}k\\to X$ the generic inclusion. Let $u:U\\to X$ be an object of the small pro-etale site [def-weil-pbc-proetale-site]. For an open subscheme $W\\subseteq U$ put $W_\\eta=W\\times_X\\operatorname{Spec}k$ and let $i_W:W_\\eta\\to W$ be the projection [def-pc-fibre-product]. The affine opens $W=\\operatorname{Spec}B\\subseteq U$ whose images lie in some nonempty affine open $V=\\operatorname{Spec}R\\subseteq X$ form an open basis of $|U|$ [def-weil-affine-spectrum]. For every such pair $(W,V)$, $R$ is an integrally closed domain, the germ map identifies $\\operatorname{Frac}(R)$ with $k$, and the induced ring map $R\\to B$ is weakly etale (flat with flat multiplication $B\\otimes_RB\\to B$) [def-weil-pbc-ind-etale-algebra]. There is a canonical isomorphism $W_\\eta\\cong\\operatorname{Spec}D$, where $D=B\\otimes_Rk\\cong(R\\setminus\\{0\\})^{-1}B$, under which $i_W$ is induced by $b\\mapsto b\\otimes1$. This ring map $B\\to D$ is injective and induces a bijection on idempotents (elements $e$ satisfying $e^2=e$). Consequently inverse image gives a bijection $i_W^{-1}:\\operatorname{Clop}(W)\\to\\operatorname{Clop}(W_\\eta)$, where $\\operatorname{Clop}(T)$ denotes the open and closed subsets of $|T|$. Empty $U$ and empty chart $W$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 092W, lemma-normality-goes-up; agent chart and idempotent deduction from the returned parent proof steps 1-2. Clopen correspondence: literature/stacks-project/algebra.tex, Tag 00EE, lemma-disjoint-decomposition."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-proetale-site",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Given $x\\in O\\subseteq |U|$ with $O$ open, choose an affine open $V\\subseteq X$ containing $u(x)$. It is nonempty. Apply the affine-basis statement again to $x\\in O\\cap u^{-1}(V)$ to choose an affine open $W$ inside this intersection. Thus the specified chart pairs form a basis; no intersection of two affine opens is asserted affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens, applied on X and U"
+   }
+  },
+  {
+   "text": "For each such nonempty $V=\\operatorname{Spec}R$, the function-field lemma gives that $R$ is a domain, $\\eta\\in V$, and the germ map makes $k$ a fraction field of $R$. At every maximal ideal $\\mathfrak m$ the affine stalk identification gives $R_{\\mathfrak m}\\cong\\mathcal O_{X,\\mathfrak m}$, which is an integrally closed domain by hypothesis (restriction to an open leaves this stalk unchanged). The local-normality criterion therefore makes $R$ integrally closed in its fraction field.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-normal-domain-of-local-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030B, lemma-normality-is-local; affine stalks: schemes.tex Tag 01HV, lemma-spec-sheaves; function field: morphisms.tex Tag 01RV, lemma-integral-scheme-rational-functions"
+   }
+  },
+  {
+   "text": "An object $u:U\\to X$ of the stated site is weakly etale by its definition. Clause 4 of the affine-chart comparison, applied to the actual containment $u(W)\\subseteq V$, gives flatness of $R\\to B$ and of multiplication $B\\otimes_R B\\to B$. This is precisely the weakly etale ring-map condition, with the chart-induced $R$-algebra structure on $B$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "det-pe-morphisms-etale-comparison",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 094S, lemma-weakly-etale-characterize, (1) implies (2)"
+   }
+  },
+  {
+   "text": "Since $\\eta\\in V$ and $V\\to X$ is an open inclusion, the generic inclusion factors through $V$. A pair of maps to $W$ and $\\operatorname{Spec}k$ agreeing over $X$ agrees over $V$, since an open inclusion is a monomorphism. The fibre-product universal property therefore identifies $W_\\eta$ with $W\\times_V\\operatorname{Spec}k$. The affine fibre-product statement gives $\\operatorname{Spec}D$, $D=B\\otimes_R k$, and identifies its projection with $b\\mapsto b\\otimes1$. Put $S=R\\setminus\\{0\\}$. The tensor/localization identification is explicit: $b\\otimes(a/s)\\mapsto ab/s$ and $b/s\\mapsto b\\otimes(1/s)$. The first is induced by the $R$-balanced pairing and the second by the localization universal property, since $s\\otimes1$ is a unit; they are inverse ring maps on the displayed generators. Thus $D\\cong S^{-1}B$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; elementary universal-property identification of tensoring with Frac(R) and localization"
+   }
+  },
+  {
+   "text": "The injection $R\\hookrightarrow k$ is $R$-linear, and $B$ is flat over $R$ by step 3. Apply flat tensor preservation of injections to $B\\otimes_R R\\to B\\otimes_R k$. Under $B\\otimes_R R\\cong B$, $b\\otimes r\\mapsto rb$ (inverse $b\\mapsto b\\otimes1$), this is exactly $B\\to D$. Hence this map is injective, including when $B=0$.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Flat/Basic.lean",
+    "place": "Module.Flat.lTensor_preserves_injective_linearMap, line 131 (the existing Mathlib leaf lem-trf-flat-tensor-preserves-injection)"
+   }
+  },
+  {
+   "text": "Apply weakly etale integral closure to the integrally closed domain $R$, its fraction field $k$, and $B$ from step 3. It gives that $B$ is integrally closed in $D$. If $d\\in D$ is idempotent, it satisfies the monic polynomial $T^2-T\\in B[T]$, hence is integral over $B$ and lies in its image: $d=e\\otimes1$ for some $e\\in B$. Injectivity from step 5 gives $e^2-e=0$ and uniqueness of $e$. Conversely every idempotent of $B$ maps to one of $D$ because the map is a ring homomorphism. This proves the asserted bijection of idempotents without assuming that $B$ is a domain or Noetherian.",
+   "uses": [
+    "lem-weil-pbc-weak-etale-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092W, lemma-normality-goes-up; the monic-polynomial deduction is elementary"
+   }
+  },
+  {
+   "text": "Use the clopen-idempotent correspondence for $B$ and $D$. For each prime $\\mathfrak q\\subset D$, the inverse image map on spectra sends it to its contraction in $B$; thus $e$ is absent from that contraction exactly when $e\\otimes1$ is absent from $\\mathfrak q$. Consequently $i_W^{-1}(D_B(e))=D_D(e\\otimes1)$. The bijection from step 6 therefore gives precisely the required inverse-image bijection on clopens. If $W$ is empty, $B=D=0$, each ring has its single idempotent and each spectrum has its single clopen subset. If $U$ is empty the basis assertion is vacuous and all permitted empty charts are covered by the same argument.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE, lemma-disjoint-decomposition, and elementary contraction of prime ideals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "def-weil-pbc-proetale-site",
+  "det-pe-morphisms-etale-comparison",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-weak-etale-integral-closure",
+  "lem-weil-pbc-spec-clopen-idempotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 092W (lemma-normality-goes-up), with algebra.tex Tags 030B and 00EE, schemes.tex Tags 01IT, 01HV and 01I4, morphisms.tex Tag 01RV, and more-morphisms.tex Tag 094S; agent assembly and explicit idempotent deduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal integral scheme every affine weakly etale chart has a bijection of clopen subsets with its generic fibre by lifting idempotents",
+   "results": "[leanfinder] OK 8 hit(s); PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm [Mathlib/RingTheory/Spectrum/Prime/Topology]; PrimeSpectrum.mulZeroAddOneEquivClopens [Mathlib/RingTheory/Spectrum/Prime/Topology]; PrimeSpectrum.isIdempotentElemEquivClopens [Mathlib/RingTheory/Spectrum/Prime/Topology]; PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen [Mathlib/RingTheory/Spectrum/Prime/Topology]; PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen [Mathlib/RingTheory/Spectrum/Prime/Topology]; PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply [Mathlib/RingTheory/Spectrum/Prime/Topology]; PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens [Mathlib/RingTheory/Spectrum/Prime/Topology]; PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen [Mathlib/RingTheory/Spectrum/Prime/Topology]",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the clopen-idempotent correspondence, localization, normalization or etale algebra facts, but not the normal-scheme chart basis together with injective generic localization and idempotent lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeaklyEtale\", \"Idempotent\"",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the clopen-idempotent correspondence, localization, normalization or etale algebra facts, but not the normal-scheme chart basis together with injective generic localization and idempotent lifting."
+  },
+  {
+   "tool": "grep",
+   "query": "(WeaklyEtale|weaklyEtale).*(idempotent|IsClopen)|idempotent.*(tensorProduct|fraction|localiz)",
+   "results": "[grep] OK 2 hit(s); Mathlib/RingTheory/Localization/FractionRing.lean:157 /-- Taking fraction ring is idempotent: a fraction ring of a fraction ring of `R` is; Mathlib/RingTheory/Localization/Away/Basic.lean:386     (e : R) (he : IsIdempotentElem e) [IsLocalization.Away e S] :",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the clopen-idempotent correspondence, localization, normalization or etale algebra facts, but not the normal-scheme chart basis together with injective generic localization and idempotent lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly etale algebra over an integrally closed domain embeds into its generic localization and has exactly the same idempotents and clopen spectrum subsets",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq [Mathlib/RingTheory/Etale/QuasiFinite]; Algebra.basicOpen_subset_etaleLocus_iff [Mathlib/RingTheory/Etale/Locus]; Algebra.etaleLocus [Mathlib/RingTheory/Etale/Locus]; Algebra.mem_etaleLocus_iff [Mathlib/RingTheory/Etale/Locus]; RingHom.etale_algebraMap [Mathlib/RingTheory/RingHom/Etale]; Algebra.Etale.exists_subalgebra_fg [Mathlib/RingTheory/Smooth/NoetherianDescent]; RingHom.Etale.ofLocalizationSpanTarget [Mathlib/RingTheory/RingHom/Etale]; RingHom.Etale.ofLocalizationSpan [Mathlib/RingTheory/RingHom/Etale]",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the clopen-idempotent correspondence, localization, normalization or etale algebra facts, but not the normal-scheme chart basis together with injective generic localization and idempotent lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal integral scheme weakly etale affine charts and generic fibre have bijective clopen restriction",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.affineOpensRestrict [Mathlib.AlgebraicGeometry.AffineScheme]; AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc [Mathlib.AlgebraicGeometry.Normalization]; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral [Mathlib.AlgebraicGeometry.SpreadingOut]; AlgebraicGeometry.IsIntegralHom.instMorphismRestrict [Mathlib.AlgebraicGeometry.Morphisms.Integral]; AlgebraicGeometry.IsIntegralHom.hasAffineProperty [Mathlib.AlgebraicGeometry.Morphisms.Integral]; AlgebraicGeometry.Scheme.Hom.toNormalization [Mathlib.AlgebraicGeometry.Normalization]; AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization [Mathlib.AlgebraicGeometry.Normalization]; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom [Mathlib.AlgebraicGeometry.Normalization]",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the clopen-idempotent correspondence, localization, normalization or etale algebra facts, but not the normal-scheme chart basis together with injective generic localization and idempotent lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeaklyEtale\", \"Idempotent\"",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full affine-chart, normal generic localization and idempotent/clopen assertion; partial clopen and function-field facts are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal integral scheme weakly etale affine charts have injective generic localization and bijective idempotents and clopen subsets",
+   "results": "8 hits: AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsIntegral; AlgebraicGeometry.Scheme.IsGermInjective.Spec; AlgebraicGeometry.Scheme.exists_germ_injective; AlgebraicGeometry.IsEtale; AlgebraicGeometry.reduce_to_affine_nbhd; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full affine-chart, normal generic localization and idempotent/clopen assertion; partial clopen and function-field facts are reused through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "(WeaklyEtale|weaklyEtale).*(idempotent|IsClopen)|idempotent.*(tensorProduct|fraction|localiz)",
+   "results": "2 hits: Mathlib/RingTheory/Localization/FractionRing.lean; Mathlib/RingTheory/Localization/Away/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full affine-chart, normal generic localization and idempotent/clopen assertion; partial clopen and function-field facts are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal integral scheme generic fibre of a weakly etale affine chart has the same clopen subsets",
+   "results": "8 hits: AlgebraicGeometry.Scheme.affineOpens; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage; AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc; PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.Scheme.Hom.toNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full affine-chart, normal generic localization and idempotent/clopen assertion; partial clopen and function-field facts are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotents of the generic fibre of a weakly etale algebra over an integrally closed domain extend uniquely to the algebra",
+   "results": "8 hits: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; StandardEtalePresentation.lift_bijective; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; StandardEtalePair.hom_ext; Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective; Algebra.FormallyEtale.iff_of_surjective; Algebra.FormallyEtale.localization_map; StandardEtalePair.hom_ext_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full affine-chart, normal generic localization and idempotent/clopen assertion; partial clopen and function-field facts are reused through existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-generic-continuous-sections",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Generic restriction of continuous coefficient sections on a normal scheme; returned proof steps 1-2: normal affine chart geometry, generic localization and unique idempotent/clopen lifting",
+   "via": [
+    "lem-sfb-normal-generic-continuous-sections",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-generic-chart-clopens",
+  "worker": "stage1",
+  "group": "NZ",
+  "summary": "Statement unchanged. Split the affine-basis and generic-localization argument into seven steps using only existing nodes. Normal affine sections are obtained from affine stalks and the maximal-localization criterion; weakly etale integral closure is the already existing Tag 092W node. Wrote out monic-polynomial idempotent lifting, injectivity and contraction naturality; checked empty charts. No new nodes or Lean files.",
+  "blueprint": "Preserves the inherited det-thm-sf-ctf-stability-direct-images paragraph (3) route through the parent normal generic continuous-section argument: steps 1-4 are the normal chart/generic-fibre geometry, steps 5-7 its generic clopen lifting. This is a created auxiliary node with no imported blueprint ancestor (blueprint_refs.py ancestor reports None); its inherited from.place and via are retained, and same_as=[] after searches.",
+  "tool_uses": [
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Clause 4 is the generic affine-chart criterion for weak etaleness needed for the pro-etale chart ring. It is a geometry tool, not a replacement of any direct-image or coefficient step; the unit has no other criterion."
+   },
+   {
+    "node": "lem-weil-pbc-weak-etale-integral-closure",
+    "why": "Tag 092W supplies integral closure of the weakly etale chart ring in its generic tensor product; this generic commutative algebra tool proves the monic-polynomial lifting step, and the item unit contains no such algebra assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-morphisms-etale-comparison",
+  "lem-weil-pbc-weak-etale-integral-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-3c6fb3e87",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-3c6fb3e87 (reviewer sub-agent of L); spot-checked: This is a first split, not a 2026-10-21 re-split (no repair note), with no new nodes. The statement and stmt_deps are unchanged, the statement is true, and the steps cite 12 existing nodes; I read each one's statement. Sources checked: Stacks 092W lemma-normality-goes-up (more-algebra.tex l.30728) matches lem-weil-pbc-weak-etale-integral-closure exactly. Stacks 094S lemma-weakly-etale-characterize (1)<=>(2) supports clause 4 of det-pe-morphisms-etale-comparison as used in step 3. Steps: (1) two applications of the affine basis, with no affine-intersection claim; (2) the fraction-field lemma, the affine stalk R_m = O_{X,m} and the local-to-global normality criterion; (3) the chart criterion and the definition of weakly etale ring maps; (4) the fibre product over X equals the one over the open V because an open immersion is a monomorphism, then Spec(B tensor_R k) with projection b -> b tensor 1, and the explicit S^-1 B identification; (5) flat tensoring of the germ injection; (6) 092W integral closure, where T^2-T lifts each idempotent and injectivity makes the lift idempotent and unique (no E4 fault); (7) clopen-idempotent correspondence with the contraction computation. Small cases tested: X = Spec of a field, W empty, B = R_s, B = R x R, Z[1/2] x Z[1/3] over Z, non-Noetherian B. Tool uses accepted: det-pe-morphisms-etale-comparison clause 4 and lem-weil-pbc-weak-etale-integral-closure, both generic black boxes that replace no unit step. Batch-5 flag on lem-trf-flat-tensor-preserves-injection: it is the Mathlib leaf Module.Flat.lTensor_preserves_injective_linearMap, general commutative algebra that neither assumption gives and that is no step specific to their proofs; no non-trf node states it, so it is accepted and not a RETURN. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalGenericChartClopens",
+  "declaration": "AlgebraicGeometry.ProEtale.normal_generic_chart_clopens",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalGenericChartClopens.lean",
+  "statement": "theorem normal_generic_chart_clopens (X : Scheme.{u}) [IsIntegral X] [IsLocallyNoetherian X] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (U : X.ProEt) : Opens.IsBasis {W : U.left.Opens | IsAffineOpen W ∧ ∃ V : X.Opens, IsAffineOpen V ∧ Nonempty V ∧ W ≤ U.hom ⁻¹ᵁ V} ∧ (∀ (V : X.Opens) (_hV : IsAffineOpen V) [Nonempty V] (W : U.left.Opens) (hW : IsAffineOpen W) (hWV : W ≤ U.hom ⁻¹ᵁ V), IsDomain Γ(X, V) ∧ IsIntegrallyClosed Γ(X, V) ∧ IsFractionRing Γ(X, V) X.functionField ∧ (fun (_a : Algebra Γ(X, V) Γ(U.left, W)) ↦ Algebra.WeaklyEtale Γ(X, V) Γ(U.left, W) ∧ IsLocalization ((nonZeroDivisors Γ(X, V)).map (algebraMap Γ(X, V) Γ(U.left, W))) (Γ(U.left, W) ⊗[Γ(X, V)] X.functionField) ∧ (∃ e : pullback (W.ι ≫ U.hom) (X.fromSpecStalk (genericPoint X)) ≅ Spec (CommRingCat.of (Γ(U.left, W) ⊗[Γ(X, V)] X.functionField)), e.inv ≫ pullback.fst _ _ = Spec.map (CommRingCat.ofHom (algebraMap Γ(U.left, W) (Γ(U.left, W) ⊗[Γ(X, V)] X.functionField))) ≫ hW.isoSpec.inv ∧ e.inv ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : X.functionField →ₐ[Γ(X, V)] Γ(U.left, W) ⊗[Γ(X, V)] X.functionField).toRingHom)) ∧ Function.Injective (algebraMap Γ(U.left, W) (Γ(U.left, W) ⊗[Γ(X, V)] X.functionField)) ∧ Set.BijOn (algebraMap Γ(U.left, W) (Γ(U.left, W) ⊗[Γ(X, V)] X.functionField)) {e | IsIdempotentElem e} {e | IsIdempotentElem e}) (U.hom.appLE V W hWV).hom.toAlgebra ∧ Function.Bijective (fun C : Clopens W.toScheme ↦ (⟨(pullback.fst (W.ι ≫ U.hom) (X.fromSpecStalk (genericPoint X))) ⁻¹' (C : Set _), C.isClopen.preimage (pullback.fst (W.ι ≫ U.hom) (X.fromSpecStalk (genericPoint X))).continuous⟩ : Clopens ↥(pullback (C := Scheme.{u}) (W.ι ≫ U.hom) (X.fromSpecStalk (genericPoint X))))))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7d07c9fa",
+  "group": "NF",
+  "result": "pass",
+  "note": "Node changed only in lean; lean.statement verbatim. All clauses match the node: IsIntegral/IsLocallyNoetherian/normal stalks; X.ProEt (recorded Mathlib site); IsBasis of affine W ≤ u⁻¹V with V nonempty affine; IsDomain+IsIntegrallyClosed Γ(X,V); IsFractionRing via germ algebra; WeaklyEtale under the appLE algebra; generic-fibre iso pinned by both projections (unique, verified true via SpecMap_appLE/fromSpecStalk factorization); IsLocalization at image of R⁰; injectivity; BijOn idempotents; bijective clopen preimage. No extra hypotheses or universe restriction; empty U and W covered. Docstrings with source+blueprint+7 proof steps; sorry only; no hollow defs. Second reading written by the same worker (disclosed). No compile run (no file changed)."
+ }
+}

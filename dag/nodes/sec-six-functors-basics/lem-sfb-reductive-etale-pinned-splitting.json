@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-reductive-etale-pinned-splitting",
+ "kind": "statement",
+ "title": "Reductive groups admit pinned split realizations etale locally",
+ "statement": "Let $A$ be any nonzero commutative ring and $G$ a reductive group over $\\operatorname{Spec}A$, with reductivity and pinned split realizations defined in [def-sfb-pinned-split-root-realization]. There exist a set $J$, nonzero commutative $A$-algebras $C_j$, and etale morphisms $\\operatorname{Spec}C_j\\to\\operatorname{Spec}A$ [def-weil-etale-morphism] whose images jointly cover $\\operatorname{Spec}A$, such that $G\\times_A C_j$ [def-pc-fibre-product] admits a pinned split realization of a finite reduced based root datum $\\mathcal R_j$ for every $j\\in J$. The lattice, rank and based datum may vary with $j$. Neither $A$ nor $C_j$ is required to be Noetherian. No finiteness of $J$ and no integral model is asserted.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods Read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-maximal-torus-parameter-scheme] to $G/A$. Its representing scheme $Q\\to S$ is a smooth surjection. By [lem-sfb-smooth-space-cover-etale-sections], applied to this scheme regarded as an algebraic space by its representable sheaf with the identity etale atlas [def-trf-scheme-algebraic-space] (so $Q\\to S$ is smooth on that chart and surjective on field-valued point classes), take an etale covering $U_i\\to S$ and lifts $U_i\\to Q$. The representing bijection gives a maximal $U_i$-torus in $G_{U_i}$. Apply [lem-sfb-torus-etale-trivialization] to each of these tori, and refine the resulting sources by nonempty affine open neighborhoods. By [lem-weil-pbc-etale-composition-cancellation], open inclusions and the successive etale maps compose to etale maps. We obtain an affine etale covering $\\operatorname{Spec}B_i\\to S$ with specified split maximal tori $D_{B_i}(M_i)\\hookrightarrow G_{B_i}$. All indices range over sets. Each $B_i$ is nonzero since its spectrum is nonempty.",
+   "uses": [
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-sfb-torus-etale-trivialization",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 5.1.3, first two sentences of proof, p.137; Corollary 3.2.7, p.95; Proposition B.3.4, pp.291-292."
+   }
+  },
+  {
+   "text": "Every group obtained by the base changes and open refinements used here remains reductive. Indeed smoothness is preserved by [lem-pc-proper-base-change], affineness by [lem-weil-pbc-affine-morphism-permanence], and finite presentation by [lem-weil-pbc-qcqs-morphism-permanence]. For any chart algebra $B$ and homomorphism $B\\to\\Omega$ to an algebraically closed field, $(G_B)_\\Omega=G\\times_A\\operatorname{Spec}\\Omega$ for the composite $A\\to B\\to\\Omega$. This is one of the geometric fibres required to be connected reductive by [def-sfb-pinned-split-root-realization]. Thus all subsequent applications of the relative reductive-group input have the required hypotheses. A split maximal torus pulls back to a closed subgroup by [lem-pc-closed-imm-base-change], and its fibrewise maximality pulls back to the corresponding geometric fibres.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sfb-pinned-split-root-realization",
+    "lem-pc-closed-imm-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 5.1.3, p.137, passage to base changes; definition of reductivity, Definition 3.1.1."
+   }
+  },
+  {
+   "text": "Fix one chart $\\operatorname{Spec}B$ with lattice $M$, choosing a basis $M\\simeq\\mathbf Z^r$. By [lem-sfb-arbitrary-base-root-lines-coroots] its tangent module is finite projective, its zero-weight module is $\\operatorname{Lie}(T)$, and each nonzero weight has fibre dimension zero or one. Its dual-number module agrees with [def-sfb-pinned-split-root-realization]: the Hopf counit identities make first-order terms add under group multiplication, and $\\epsilon\\mapsto a\\epsilon$ scales their derivations by $a$. The coaction weight condition $\\rho(v)=v\\otimes e^m$ implies $\\operatorname{Ad}(t)(v_R)=\\chi_m(t)v_R$ by evaluation at each algebra point $t:B[M]\\to R$. Conversely use $R=B[M]$ and the universal torus point given by its identity map; the tangent base-change comparison identifies that equality with the coaction equation. Thus these are exactly the full-torus weight modules in the current definition. Apply [lem-sfb-relative-torus-bundle-weights] to its conjugation coaction: there are only finitely many nonzero weight summands, and their ranks are simultaneously locally constant. Around each point shrink to an affine open on which all these ranks are constant. Let $\\Phi\\subset M\\setminus\\{0\\}$ be those of rank one there; the other nonzero weight modules vanish. Applying [lem-weil-pbc-finite-projective-prime-local-free] to each of the finitely many rank-one summands and intersecting the resulting neighborhoods makes all $\\mathfrak g_\\alpha$ free of rank one. The decomposition is now $\\mathfrak g=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak g_\\alpha$. Each shrinking still contains its chosen point, so these choices cover the original chart.",
+   "uses": [
+    "lem-sfb-arbitrary-base-root-lines-coroots",
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 5.1.3, middle sentence of proof, p.137; Section 4 introduction, pp.107-108; choose trivializations as required in Definition 5.1.1(2)."
+   }
+  },
+  {
+   "text": "For each $\\alpha\\in\\Phi$, [lem-sfb-arbitrary-base-root-lines-coroots] provides a relative coroot $\\alpha^\\vee:\\mathbf G_m\\to T$. By [lem-sfb-relative-split-torus-matrix-sheaf] its exponent vector is locally constant with values in $M^\\vee$. At any point intersect the constancy neighborhoods for the finitely many $\\alpha$, and choose a nonempty affine neighborhood inside the intersection. Then every coroot is a constant monomial cocharacter on this neighborhood. The root modules remain free with the previous generators restricted. Their base-change compatibility identifies the roots in every geometric fibre with the same $\\Phi$, and the coroots with the same vectors $\\alpha^\\vee\\in M^\\vee$. We have not assumed that any neighborhood or the original base is connected.",
+   "uses": [
+    "lem-sfb-arbitrary-base-root-lines-coroots",
+    "lem-sfb-relative-split-torus-matrix-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 5.1.3, final sentence of proof, p.137; Definition 5.1.1(3), p.136."
+   }
+  },
+  {
+   "text": "On one final nonempty affine chart choose a geometric point. The prescribed split torus becomes a maximal torus $T$ over its algebraically closed field. By [lem-sfb-reductive-borel-pair-structure] choose a Borel pair $(T_0,B_0)$ in this fibre. By [lem-sfb-borel-maximal-torus-conjugacy] conjugate $T_0$ to $T$, thereby obtaining a Borel subgroup containing $T$. The root-datum and simple-base assertions of [lem-sfb-reductive-borel-pair-structure] identify the lattice, roots and canonical coroots at this point with a finite reduced root datum and supply a base $\\Delta\\subseteq\\Phi$. The geometric coroots used here are the rank-one $\\operatorname{SL}_2$ coroots of [lem-sfb-reductive-rank-one-reflections], which states their diagonal formula and uniqueness for the rank-one reflection, exactly as the current realization definition requires. All its root-datum identities, including the reflection and reducedness conditions, are identities in the fixed integer lattices. Step 4 identifies the same vectors at every geometric point. Hence this one fibre verifies those identities for the constant data on the whole chart. No constancy of the residue characteristic is needed. The empty-root case gives $\\Delta=\\varnothing$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.6, first sentence of proof, p.138; Definition 6.1.1, p.186."
+   }
+  },
+  {
+   "text": "For each $\\alpha\\in\\Delta$ choose a generator $X_\\alpha$ of the already free rank-one module $\\mathfrak g_\\alpha$. The torus, constant roots and coroots, decomposition and these generators satisfy exactly [def-sfb-pinned-split-root-realization], so they give a pinned split realization of the based datum from step 5. Let $J$ index all the nonempty affine neighborhoods used in the preceding refinements, with coordinate rings $C_j$. The refinements cover every source chart; their composites cover $S$ and are etale by [lem-weil-pbc-etale-composition-cancellation]. Each $C_j$ is a nonzero commutative $A$-algebra. This gives the asserted family, allowing a different lattice and datum on each chart; the construction imposes no Noetherian condition and produces no integral model.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Definition 6.1.1 and following paragraph, p.186; affine refinements of Lemma 5.1.3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-maximal-torus-parameter-scheme",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-sfb-torus-etale-trivialization",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-arbitrary-base-root-lines-coroots",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-sfb-relative-split-torus-matrix-sheaf",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-reductive-rank-one-reflections",
+  "def-trf-scheme-algebraic-space",
+  "lem-pc-closed-imm-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly following Conrad Lemma 5.1.3, Proposition 5.1.6 and Definition 6.1.1, read online; local PDF WANTED. Structural inputs exposed as statement-only nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group scheme becomes split etale locally over an arbitrary base scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardEtale R S], Algebra.Etale R S\", \"doc\": \"Every standard étale algebra over a commutative ring is an étale algebra. Specifically, if an algebra $ S $ over a commutative ring $ R $ is isomorphic to a localization of a polynomial ring over $ R \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local maximal torus with constant roots coroots and trivial root spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system associated with a Lie algebra over a field via its non-degenerate Killing form is reduced. Specifically, for a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a Cartan subalgebra $\\\\ma\"}\n  {\"name\": \"LieSubalgebra.root\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} → [inst_4 : H.IsCartanSubalgebra] → Finset (LieModule.Weight K (↥H) L)\", \"doc\": \"The finite set of non-zero weights $\\\\alpha \\\\in \\\\text{Weight}(K, \\\\mathfrak{h}, \\\\mathfrak{g})$ associated with the Lie subalgebra $\\\\mathfrak{h}$, where each weight $\\\\alpha$ satisfies $\\\\alpha \\\\neq 0$ (i.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"LieAlgebra.corootSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {H : LieSubalgebra R L} →\\n            [LieRing.IsNilpotent ↥H] → [H.IsCartanSubalgebra] → [IsNoetherian R L] → (↥H → R) → LieIdeal R ↥H\", \"doc\": \"The coroot space associated to a weight $\\\\alpha : \\\\mathfrak{h} \\\\to R$ is the image of the composition of maps from the tensor product of root spaces $\\\\mathfrak{g}_\\\\alpha \\\\otimes_R \\\\mathfrak{g}_{-\\\\alph\"}\n  {\"name\": \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L) [inst_6 : H.IsCartanSubalgebra]\\n  [LieModule.IsTriangularizable K (↥H) L], ⨆ α, ⨆ (_ : α.IsNonZero), LieA\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a Cartan subalgebra $\\\\mathfrak{h}$ and non-degenerate Killing form, the supremum (sum) of all coroot spaces $\\\\mathrm{corootSpace}(\\\\alpha)$ associ\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"LieAlgebra.rootSpace_zero_eq\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : H.IsCartanSubalgebra] [IsNoetherian R L],\\n  LieAlgebra.rootSpace H 0 = H.toLieSubmodule\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $\\\\mathfrak{g}$ is Noetherian as an $R$-module, then the root space of $\\\\mat\"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"{K : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : Field K] →\\n      [CharZero K] →\\n        [inst_2 : LieRing L] →\\n          [inst_3 : LieAlgebra K L] →\\n            [LieAlgebra.IsKilling K L] →\\n              [inst_5 : FiniteDimensional K L] →\\n                (H : LieSubalgebra K L) →\\n                  [\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Torus\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive.*split|split.*reductive|maximal.*torus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive group scheme etale local splitting",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(q : Ideal A) [q.IsPrime] : Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductive group scheme becomes pinned split etale locally over an arbitrary commutative ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instEtaleOfIsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardEtale R S], Algebra.Etale R S\", \"doc\": \"Every standard étale algebra over a commutative ring is an étale algebra. Specifically, if an algebra $ S $ over a commutative ring $ R $ is isomorphic to a localization of a polynomial ring over $ R \"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyEtale R A], Algebra.FormallyUnramified R A\", \"doc\": \"For any commutative ring $ R $ and $ R $-algebra $ A $, if $ A $ is formally étale over $ R $, then $ A $ is formally unramified over $ R $. This instance asserts that formal étaleness implies formal \"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cover of base with constant roots coroots and free simple root lines for a reductive group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.h'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the element $ h'(i) $ is the matrix $ h(i) $ constructed from $ P $, which belongs to the Cartan subalg\"}\n  {\"name\": \"RootPairing.Base.mk'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [Finite ι] →\\n          [inst : AddCommGroup M] →\\n            [inst_1 : AddCommGroup N] →\\n              [inst_2 : Field R] →\\n                [CharZero R] →\\n                  [inst_4 : Module R M] →\\n               \", \"doc\": \"Given a crystallographic root system over a field of characteristic zero, if a finite subset $ S $ of the index set has linearly independent roots and every root (or its negative) lies in the additive\"}\n  {\"name\": \"RootPairing.nonempty_base\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced], Nonempty P.Base\", \"doc\": \"The base of the root pairing $ P $ is non-empty, i.e., there exists at least one element in $ P.\\\\text{Base} $.\"}\n  {\"name\": \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (f : M →+ ℚ),\\n  (\", \"doc\": \"Given a root pairing $ P $ between $ R $-modules $ M $ and $ N $, additive monoid homomorphisms $ f : M → ℚ $ and $ g : N → ℚ $ that are non-vanishing on all roots $ P.\\text{root}(i) $ and coroots $ P.\"}\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.IsG2.toEmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → [P.IsG2] → P.EmbeddedG\", \"doc\": \"Given a root pairing $ P $ satisfying the G2 root system axioms, this constructs the corresponding embedded $ G_2 $ root system by selecting two roots $ \\\\text{long} $ and $ \\\\text{short} $ such that th\"}\n  {\"name\": \"RootPairing.mk''\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"{ι : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_4} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [Finite ι] →\\n            {k : Type u_5} →\\n              [inst_3 : Field k] →\\n                [CharZero k] →\\n                  [inst_5 : Module k M] →\\n               \", \"doc\": \"Given a perfect pairing between $ k $-modules $ M $ and $ N $, injective functions $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iota \\\\to N $ satisfying $ p(\\\\text{root}\\\\, i, \\\\text{coroot}\\\\, i) = \"}\n  {\"name\": \"RootPairing.EmbeddedG2.indexEquivAllRoots\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  (P : RootPairing\", \"doc\": \"The equivalence establishing a bijection between the index set $\\\\iota$ and the finite set of all roots (including their negatives) in the embedded $G_2$ root system constructed from the root pairing $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Reductive\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive.*split|split.*reductive|pinned.*group",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive group schemes admit etale local pinned splittings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"GroupExtension.IsConj\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"(s s' : S.Splitting) : Prop\", \"doc\": \"Two splittings $ s $ and $ s' $ of the group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $ are conjugate if there exists an element $ n \\\\in N $ such that $ s(g) = \\\\text{inl}(n) \\\\cdot s'(g) \\\\cdot \\\\text{inl}(\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AddGroupExtension.IsConj.refl\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : AddGroup N] [inst_1 : AddGroup G] {E : Type u_3} [inst_2 : AddGroup E]\\n  (S : AddGroupExtension N E G) (s : S.Splitting), S.IsConj s s\", \"doc\": \"For any additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ and any splitting $s : G \\\\to E$, the splitting $s$ is conjugate to itself. This holds because the identity automorphism $\\\\phi = \\\\text{id}_E\"}\n  {\"name\": \"AddGroupExtension.IsConj\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] →\\n        [inst_1 : AddGroup E] → [inst_2 : AddGroup G] → (S : AddGroupExtension N E G) → S.Splitting → S.Splitting → Prop\", \"doc\": \"The proposition that two splittings $s, t : G \\\\to E$ of an additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ are conjugate, meaning there exists an automorphism $\\\\phi : E \\\\to E$ preserving $N$ (i.e\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-etale-integral-models",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods",
+   "via": [
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-etale-pinned-splitting",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary nonzero ring statement. Expanded the etale-local torus construction, local finite-projective root trivializations and coroot-constancy refinements, then checked root datum axioms on one geometric fibre and chose generators. Created three strictly smaller relative structural inputs; no Lean attachment or Mathlib match. Repair of returned head a4a77962c2e: re-read the current pinned-realization definition and all current cited statements; replaced the stale reductivity quote, checked the explicit dual-number and all-algebra-point weight conventions, and fixed the coroot reference to the precise rank-one construction. The target statement and six-step route are unchanged.",
+  "blueprint": "Current main-20261024 sk-thm-sf-ctf-stability-direct-images proof (3), existing alteration-route supporting input, via the inherited chain. No imported blueprint ancestor exists: blueprint_refs.py ancestor returns None. This split preserves the inherited Conrad Lemma 5.1.3 route and realizes its torus, root-line and coroot-localization sentences; Definition 6.1.1 supplies the final pinning.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only the generic smooth-base-change clause verifies reductivity on the new charts."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affineness of a reductive structural morphism survives base change."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Its finite-presentation base-change clause verifies reductivity on the charts."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Generic finite-projective local freeness trivializes finitely many root line modules without a Noetherian assumption."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic open-inclusion and composition statements keep all successive refinements etale."
+   },
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Generic base change of the closed torus immersion to every etale chart (Stacks 01JY); no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-pc-closed-imm-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-689cf4af7",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-689cf4af7 (reviewer sub-agent of L); spot-checked: Read the item, its 3 new nodes and every cited statement in full. Read Conrad 'Reductive group schemes' (local text copy of the online PDF) at Thm 3.2.6, Cor 3.2.7, Thm 4.2.6, Def 5.1.1, Ex 5.1.2, Lemma 5.1.3, Prop 5.1.6 and Prop B.3.4. The six steps follow the proof of Lemma 5.1.3 step by step: a maximal torus étale-locally (3.2.7), splitting by B.3.4, Zariski localization of the weights with local freeness by 00NX, coroot-constancy shrinking (Ex 5.1.2), root-datum identities checked on one geometric fibre (5.1.6), and choice of generators. The statement is unchanged and nothing is weakened. The repair after the landing refusal of a4a7 is correct: step 2 now uses the definition's current G_Ω wording, step 3 proves that coaction weights equal Ad weights over every algebra point (via the universal point B[M]), and the coroots are now the rank-one SL2 coroots, which agree with the root-datum coroots by uniqueness. Checked: arbitrary nonzero ring, nonreduced and disconnected bases, empty roots, G=1 or a torus, GL2 (coroot (1,-1)), SL2 in characteristic 2 (root 2, coroot 1). New nodes: (1) the maximal-torus parameter scheme is Conrad Thm 3.2.6 specialized to reductive G and is true; (2) the étale trivialization of a torus is B.3.4 and holds for the empty base and rank 0; (3) the root-line and coroot statement over an arbitrary ring follows §4 and Thm 4.2.6. It generalizes the Noetherian node relative-opposite-root-reflection-map, which the arbitrary-A item needs. None of the three duplicates an existing node or restates the item (D1). Batch-5 flags: every path ends at a generic Stacks tool (02VL and 021O, both Mathlib leaves, and the algebraic-space definition 025Y). None is a step of the trace formula or of Poincaré duality, so all are accepted. FIX (three citation repairs, written to fixes/dag/nodes/sec-six-functors-basics/): (a) step 1 regards Q as an algebraic space without citing anything; it now cites the existing def-trf-scheme-algebraic-space. (b) Step 2 pulls the closed torus immersion back without a node (C1); it now cites lem-pc-closed-imm-base-change (Stacks 01JY), with a tool_uses entry. (c) The two new nodes that define 'torus' inline now cite the owning definition def-sfb-relative-torus in their statements and stmt_deps. All three nodes are on the base. proof_deps are updated, and every step is still under 2000 characters.; 3 file(s) fixed by the reviewer"
+ }
+}

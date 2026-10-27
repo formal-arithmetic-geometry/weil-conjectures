@@ -1,0 +1,384 @@
+{
+ "id": "lem-sfb-fine-chart-logification-thickening",
+ "kind": "statement",
+ "title": "Integral chart logification on arbitrary schemes and strict first-order restriction",
+ "statement": "Let $T$ be any scheme [def-pc-scheme], not necessarily locally Noetherian, and let $P$ be a finitely generated integral commutative monoid: it has a finite generating set and embeds in its group completion. Let $\\beta:P\\to\\Gamma(T,\\mathcal O_T)$ be a monoid homomorphism, with multiplication on functions. A log structure here means a sheaf of commutative monoids $L$ on $T_{\\mathrm{Et}}$ [def-weil-pbc-etale-site] with a map $\\alpha:L\\to(\\mathcal O_T,\\cdot)$ inducing an isomorphism $\\alpha^{-1}(\\mathcal O_T^\\times)\\simeq\\mathcal O_T^\\times$. It is integral if all geometric stalk monoids embed in their group completions, and fine if etale locally it has a chart by a finitely generated integral monoid.\n\nFor etale $U\\to T$, put $E_U=\\beta_U^{-1}(\\Gamma(U,\\mathcal O_U)^\\times)$. Sheafify the presheaf $U\\mapsto P\\oplus_{E_U}\\Gamma(U,\\mathcal O_U)^\\times$ as a commutative-monoid sheaf [lem-trf-commutative-monoid-sheafification]; the pushout identifies $(pe,v)$ with $(p,\\beta_U(e)v)$. Denote the resulting sheaf by $L_T(P,\\beta)$, with structural map $[p,v]\\mapsto\\beta(p)v$. It is an integral fine log structure. At each geometric point $\\bar t$, with $A=\\mathcal O_{T,\\bar t}$ [def-weil-pbc-geometric-stalks], it is canonically $P\\oplus_{\\beta^{-1}(A^\\times)}A^\\times$.\n\nFor every scheme map $a:S\\to T$ and every log structure $K$ on $S$, homomorphisms of sheaves $a^{-1}L_T(P,\\beta)\\to K$ compatible with the structural maps and the ring map of $a$ correspond bijectively to monoid homomorphisms $v:P\\to\\Gamma(S,K)$ satisfying $\\alpha_Kv=a^\\sharp\\beta$. Thus chart-compatible scheme maps have a unique compatible log map specified by their maps on $P$. Restriction of $L_T(P,\\beta)$ to an etale $U$ is canonically $L_U(P,\\beta_U)$.\n\nLet $j:T_0\\hookrightarrow T$ be a first order thickening with ideal sheaf $\\mathcal I$ [def-sbc-first-order-thickening], and give $T_0$ the associated log structure $L_{T_0}(P,\\beta_0)$ for the reduced chart $\\beta_0=j^\\sharp\\beta$. At corresponding geometric points the map $L_{T,\\bar t}\\to L_{T_0,\\bar t}$ identifies the latter monoid with $L_{T,\\bar t}\\oplus_{A^\\times}(A/\\mathcal I_{\\bar t})^\\times$; in this sense the thickening is strict. Every fiber of this stalk map is a nonempty torsor under $1+\\mathcal I_{\\bar t}$: given any two lifts $m,m'$ of one log element, there is exactly one $v\\in\\mathcal I_{\\bar t}$ with $m'=m(1+v)$. The same assertion is sheaf-local on the etale site, and multiplication on $1+\\mathcal I$ corresponds to addition on $\\mathcal I$ since $\\mathcal I^2=0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1, printed p.69, associated-log and chart conventions referring to Kato (1988), section 1. Agent-formulated general chart-construction input for the infinitesimal tests in XVI Proposition 3.6.3, p.252; the general construction and strict-thickening assertion are not stated in ILO. WANTED: Kato (1988), Logarithmic structures of Fontaine--Illusie, section 1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "lem-trf-commutative-monoid-sheafification",
+  "def-weil-pbc-geometric-stalks",
+  "def-sbc-first-order-thickening",
+  "def-trf-fs-log-blowup",
+  "def-trf-fine-log-etale-descent-datum",
+  "def-trf-fine-log-scheme-morphisms",
+  "def-per-associated-log-presentation",
+  "def-trf-log-regular-pair"
+ ],
+ "proof": [
+  {
+   "text": "Work in a common enlarged universe and on small skeletons as in [def-weil-size-convention], so the monoid sheafification theorem applies. Write $Q(U)=P\\oplus_{E_U}\\mathcal O(U)^\\times$. This is concretely the quotient of $P\\times\\mathcal O(U)^\\times$ by the displayed generating relations. Restriction sends $E_U$ into $E_V$ and preserves those relations, so defines a presheaf of commutative monoids. The maps $[p,u]\\mapsto\\beta_U(p)u$ also preserve the relations and restrictions. Units form a sheaf: glue the units and their inverses separately in the structure ring sheaf. By [lem-trf-commutative-monoid-sheafification], $L=Q^\\#$ is a monoid sheaf whose underlying set sheaf is the set sheafification, and the structural map extends uniquely. Set $\\iota(p)=\\eta([p,1])$ and $j(u)=\\eta([1,u])$; thus $\\alpha j(u)=u$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-trf-commutative-monoid-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YR, section-sheaves-algebraic-structures (alpha)--(epsilon); explicit presheaf quotient and unit-sheaf verification by NN."
+   }
+  },
+  {
+   "text": "To verify the log axiom, let $l\\in L(U)$ have unit image $a$. The local-representatives theorem [lem-weil-pbc-site-sheafification-sections-local] writes $l$ locally as $\\eta([p,u])$. There $\\beta(p)=a/u$ is a unit, so $p\\in E$ and $[p,u]=[1,\\beta(p)u]=[1,a]$. Therefore $l=j(a)$ locally and globally. Conversely $\\alpha j(a)=a$ proves that $j$ is injective and identifies precisely the inverse image of the units. This is the log axiom in the stated inline definition, without any Noetherian assumption.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK, lemma-sections-sheafification; explicit log-axiom verification by NN."
+   }
+  },
+  {
+   "text": "Fix a geometric point and put $A=\\mathcal O_{T,\\bar t}$. By [def-weil-pbc-geometric-stalks] this is the ring of germs of functions. The cofilteredness in [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] implies that finitely many representatives and finitely many equalities of germs can be realized on one pointed refinement: a colimit equality is a finite chain of restriction relations, and a common source with equalized parallel maps realizes that chain. In particular a unit $a\\in A^\\times$ is represented by a unit on a neighbourhood: represent $a,a^{-1}$ together and refine until their product is $1$. Also $\\beta_{\\bar t}(e)$ is a unit exactly when $e\\in E_U$ on some pointed neighbourhood, by the same inverse-and-equation argument.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PQ, lemma-cofinal-etale; explicit common-refinement and unit-germ argument by NN."
+   }
+  },
+  {
+   "text": "Let $E=\\beta_{\\bar t}^{-1}(A^\\times)$. The colimit of $Q(U)$ maps to $P\\oplus_E A^\\times$ by $[p,u]\\mapsto[p,u_{\\bar t}]$. Conversely represent a unit $a\\in A^\\times$ on a pointed neighbourhood and send $(p,a)$ to the germ of $[p,u]$. Step 3 makes this independent of the representative. For each relation $(pe,a)\\sim(p,\\beta(e)a)$ in the target refine until $e\\in E_U$; the relation then already holds in $Q(U)$. Thus this inverse descends through the generated congruence, and both composites fix represented pairs. Products are computed on common refinements, so these maps are monoid maps. Finally [lem-weil-pbc-sets-sheafification-geometric-stalk] and the underlying-set clause of [lem-trf-commutative-monoid-sheafification] identify the colimit of $Q(U)$ with $L_{\\bar t}$. This proves the stated canonical stalk formula, including its maps from $P$ and from $A^\\times$.",
+   "uses": [
+    "lem-weil-pbc-sets-sheafification-geometric-stalk",
+    "lem-trf-commutative-monoid-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT, lemma-stalk-exact (2), and Sites Tag 00YR; explicit quotient comparison on germs by NN."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-monoid-unit-pushout] to $P$, the submonoid $E$, the abelian group $A^\\times$, and $f=\\beta|_E$. Step 4 identifies its $M$ with $L_{\\bar t}$; the embedding of $M$ in a group proves that every such stalk is integral. No injectivity of $\\beta|_E$ is required. The global chart $\\iota:P\\to L(T)$ is the chart used to construct $L$, so it is a chart by the finitely generated integral monoid $P$ already on $T$. Consequently $L$ is fine in the stated definition.",
+   "uses": [
+    "lem-sfb-integral-monoid-unit-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p.98, conventions only; agent application of the stated integral-monoid pushout lemma to the chart stalk."
+   }
+  },
+  {
+   "text": "Let $a:S\\to T$ and $v:P\\to K(S)$ have $\\alpha_Kv=a^\\sharp\\beta$. On an etale $U\\to T$ put $S_U=S\\times_TU$. For $u\\in\\mathcal O(U)^\\times$ let $a_U^\\sharp u$ be its unit pullback. Define\n$$Q(U)\\longrightarrow K(S_U),\\qquad [p,u]\\longmapsto v(p)|_{S_U}\\,j_K(a_U^\\sharp u),$$\nwhere $j_K$ is the inverse of the units isomorphism in the log axiom. For $e\\in E_U$, $\\alpha_K(v(e)|_{S_U})=a_U^\\sharp\\beta_U(e)$ is a unit, so $v(e)|_{S_U}=j_K(a_U^\\sharp\\beta_U(e))$. This proves that the displayed formula respects every generating relation. It is natural in $U$ and gives a monoid-presheaf map $Q\\to a_*K$. Direct image is a sheaf (the inverse-image/direct-image adjunction of [lem-weil-pbc-etale-inverse-image-algebraic-structures]); hence [lem-trf-commutative-monoid-sheafification] extends it uniquely to $L\\to a_*K$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-trf-commutative-monoid-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00X1, definition-morphism-sites; 00X6, proposition-get-morphism; 00YR, section-sheaves-algebraic-structures; explicit formula on chart and units by NN."
+   }
+  },
+  {
+   "text": "The set-sheaf adjunction and finite-product preservation in [lem-weil-pbc-etale-inverse-image-algebraic-structures](1) lift to monoids: inverse image sends the multiplication and identity diagrams to those for $a^{-1}L$, and an adjoint map preserves these operations exactly when its transpose does, by naturality of the adjunction. Transpose Step 6 to obtain $a^{-1}L\\to K$. The structural compatibility is checked on each $[p,u]$, where both sides equal $(a^\\sharp\\beta(p))a^\\sharp u$, and extends by sheafification uniqueness. Conversely a structurally compatible map, transposed to $L\\to a_*K$, determines $v$ on $\\iota(P)$. Its value on $j(u)$ is forced to be $j_K(a^\\sharp u)$ by the log axiom of $K$. As $\\eta([p,u])=\\iota(p)j(u)$, its restriction to $Q$ is precisely Step 6. Sheafification uniqueness proves that these constructions are inverse. This gives the asserted bijection and uniqueness of a chart-specified log map.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-trf-commutative-monoid-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00X1, definition-morphism-sites; 00X6, proposition-get-morphism; explicit monoid adjunction and inverse maps by NN."
+   }
+  },
+  {
+   "text": "For etale $U\\to T$, the small etale site of $U$ is the slice over $U$ of that of $T$: composition and cancellation are [lem-weil-pbc-etale-composition-cancellation], and coverings are the same jointly surjective families by [def-weil-pbc-etale-site]. The presheaf $Q_T$ restricted to this slice is exactly $Q_U$, with identical functions and relations. Restriction of $L_T$ is a sheaf; $Q_U\\to L_T|_U$ is locally surjective and locally injective by [lem-weil-pbc-site-sheafification-sections-local], since every refinement over an object of the slice still lies in the slice. By [lem-cbc-set-presheaf-sheafification-local-bijection] this identifies $L_T|_U$ with the set sheafification of $Q_U$. The underlying-set assertion of [lem-trf-commutative-monoid-sheafification] identifies this with $L_U$. The identification preserves multiplication, chart and structural map since it does so on all local pairs. This proves the claimed canonical restriction isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "lem-trf-commutative-monoid-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GN, lemma-composition-etale and 02GW, lemma-etale-permanence; Sites Tag 00WK, lemma-sections-sheafification; elementary slice comparison by NN, followed by the cited local-bijection criterion."
+   }
+  },
+  {
+   "text": "For $j:T_0\\hookrightarrow T$, fix a corresponding geometric point. The affine pointed neighbourhoods compute the stalk by [lemma-weil-pbc-affine-neighbourhood-cofinal], so the ring $A$ is the strict-local ring colimit of [def-weil-pbc-strict-henselization-limit]. The quotient statement of [lem-trf-closed-immersion-strict-localization-cartesian] identifies the stalk ring of $T_0$ with $A/J$, where $J=\\mathcal I_{\\bar t}$. Indeed, on an affine chart with ideal $I$, the kernel is $IA$ by that node; germs of the ideal sheaf are exactly finite sums of elements of $I$ times germs of functions, so are $IA$. By [def-sbc-first-order-thickening], $I^2=0$ on affine charts and hence $J^2=0$. These results impose no Noetherian condition and keep the nilpotents of $T_0$.",
+   "uses": [
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WS, lemma-quotient-strict-henselization; More on Morphisms Tag 04EX, definition-thickening; identification of the defining-ideal germs by NN."
+   }
+  },
+  {
+   "text": "For any commutative ring $A$ and square-zero ideal $J$, reduction $A^\\times\\to(A/J)^\\times$ is surjective: lift $\\bar a$ and $\\bar a^{-1}$ to $a,b$, write $ab=1+c$ with $c\\in J$, and use $a\\,b(1-c)=1$. In particular an element of $A$ is a unit if and only if its reduction is. The kernel consists exactly of $1+c$, $c\\in J$; each has inverse $1-c$. Moreover $(1+c)(1+d)=1+c+d$ since $cd=0$, and equality $1+c=1+d$ gives $c=d$. These calculations apply to Step 9 and show that the submonoid $E\\subseteq P$ is identical before and after reduction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent elementary square-zero unit calculation; associated-log conventions are Expose VI 1.1, printed p.69."
+   }
+  },
+  {
+   "text": "The chart $P\\to L_{T_0}(T_0)$ and Step 7 define the restriction log map. On stalks it sends $[p,u]\\mapsto[p,\\bar u]$, by its formula on charts and units. Step 4 on $T$ and on $T_0$, together with the equality of $E$ in Step 10, therefore gives $M=P\\oplus_E A^\\times$ and $M_0=P\\oplus_E(A/J)^\\times$. By [lem-weil-pbc-sets-etale-inverse-image-stalk-germ], the source of the sheaf pullback map has stalk $L_{T,\\bar t}$, with these exact germs. The canonical identification\n$$M\\oplus_{A^\\times}(A/J)^\\times\\simeq M_0$$\nis obtained by $[[p,u],b]\\mapsto[p,\\bar u b]$ with inverse $[p,b]\\mapsto[[p,1],b]$. Both formulas respect the pushout relations, and their composites fix each represented pair. This proves the stated strictness and its compatibility with the structural maps.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (3); explicit associativity comparison of the two unit pushouts by NN."
+   }
+  },
+  {
+   "text": "Every $[p,b]\\in M_0$ lifts to $[p,u]\\in M$, by the surjectivity on units in Step 10. If $m=[p,u]$ and $m'=[p',u']$ have the same image, apply the equality criterion of [lem-sfb-integral-monoid-unit-pushout] with $G=(A/J)^\\times$. It gives $e,e'\\in E$ with $pe'=p'e$ and $\\bar u\\,\\overline{\\beta(e)}=\\bar u'\\,\\overline{\\beta(e')}$. Put $c=\\beta(e)$, $d=\\beta(e')$, units in $A$. The defining relations give $m=[pe',u/d]$ and $m'=[p'e,u'/c]$, so $m'=mw$ for $w=u'd/(uc)$. The displayed reduced equality says $\\bar w=1$, hence $w=1+v$ for a unique $v\\in J$. The free unit action in the same cited node proves that no other $w$ can satisfy $m'=mw$, so this $v$ is unique. Thus each nonempty fiber is a torsor under $1+J$, and surjectivity shows that every fiber is nonempty.",
+   "uses": [
+    "lem-sfb-integral-monoid-unit-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent calculation using the equality criterion and free action of the stated integral-monoid pushout lemma; associated-log conventions are Expose VI 1.1, printed p.69."
+   }
+  },
+  {
+   "text": "Use [sbc-lem-thickening-etale-site] to identify the small etale sites by $U\\mapsto U_0=U\\times_TT_0$. In this identification put $N(U)=L_{T_0}(U_0)$, a sheaf on $T_{\\mathrm{Et}}$. Its stalk at $\\bar t$ is $M_0$ of Step 11: the equivalence of pointed neighbourhoods identifies the colimits and their germ maps. Every germ of $N$ has a lift in $L_T$ by Step 12. Representing the lift and its equality with a given local section on a pointed neighbourhood gives local surjectivity, hence such neighbourhoods cover. Consider the map of sheaves\n$$(1+\\mathcal I)\\times L_T\\longrightarrow L_T\\times_NL_T,\\qquad(w,m)\\longmapsto(m,mw).$$\nIts stalk maps are bijective by Step 12: finite tuples and their equations are represented on common pointed refinements as in Step 3. Apply [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] to conclude this is an isomorphism. Thus any two lifts of the same local section differ by a unique local section of $1+\\mathcal I$; the sheaf axiom glues the unique differences. Finally $(1+v)(1+w)=1+v+w$ on each object since $\\mathcal I^2=0$, compatibly with restriction. This identifies $1+\\mathcal I$ with the additive ideal sheaf. No surjectivity on global sections is asserted.",
+   "uses": [
+    "sbc-lem-thickening-etale-site",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI, proposition-topological-invariance, and Tag 03PU, theorem-exactness-stalks; explicit local-lift and torsor-map construction by NN."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-trf-commutative-monoid-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-sets-sheafification-geometric-stalk",
+  "lem-sfb-integral-monoid-unit-pushout",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-etale-site",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "sbc-lem-thickening-etale-site",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1, printed p.69, supplies etale log/chart conventions only and assumes locally Noetherian schemes by default. The arbitrary-scheme construction and strict square-zero proof are supplied explicitly by NN using the generic Stacks facts cited in each step; no theorem from the dropped artin-gabber route is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associated log structure of a fine integral monoid chart on an arbitrary scheme and strict square zero reduction",
+   "results": "{\"t\": \"2026-10-22T05:09:30Z\", \"tool\": \"leansearch\", \"query\": \"Associated log structure of a fine integral monoid chart on an arbitrary scheme and strict square zero reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DividedPowers.OfSquareZero.dividedPowers\", \"AlgebraicGeometry.Scheme.nilradical\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.Scheme.nilradical_eq_bot\", \"derivationToSquareZeroEquivLift\", \"liftOfDerivationToSquareZero\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_bot\"], \"digest\": \"ffbf7b5afb2bbf40\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ogification|[Pp]re[Ll]og|[Ll]og[Ss]tructure",
+   "results": "{\"t\": \"2026-10-22T05:09:38Z\", \"tool\": \"grep\", \"query\": \"[Ll]ogification|[Pp]re[Ll]og|[Ll]og[Ss]tructure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-22T05:09:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logification of a prelog structure has a unit pushout stalk formula and universal property for maps of log schemes",
+   "results": "{\"t\": \"2026-10-22T05:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"Logification of a prelog structure has a unit pushout stalk formula and universal property for maps of log schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"AlgebraicGeometry.stalkMap_toStalk\", \"AlgebraicGeometry.stalkMap_toStalk_apply\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\"], \"digest\": \"ad9b785e03d2c5c3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fine monoid chart on a scheme yields an integral log structure and pulling back across a nilpotent closed immersion is strict",
+   "results": "{\"t\": \"2026-10-22T05:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"A fine monoid chart on a scheme yields an integral log structure and pulling back across a nilpotent closed immersion is strict\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.SpecMap_iff\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"d695ffec06f17509\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated log structure of an integral monoid chart on an arbitrary scheme and strict square zero restriction with unit torsor fibers",
+   "results": "{\"t\": \"2026-10-22T05:30:06Z\", \"tool\": \"leanfinder\", \"query\": \"Associated log structure of an integral monoid chart on an arbitrary scheme and strict square zero restriction with unit torsor fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\"], \"digest\": \"9100892eff34f3f7\"}. Read returned hits: ordinary scheme etale/normalization/spreading results, monoid localization, categorical localization and smooth manifold sheaves do not state associated logarithmic structures or their strict square-zero torsor fibers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|logification|associatedLog",
+   "results": "{\"t\": \"2026-10-22T05:30:12Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|logification|associatedLog\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned hits: ordinary scheme etale/normalization/spreading results, monoid localization, categorical localization and smooth manifold sheaves do not state associated logarithmic structures or their strict square-zero torsor fibers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Logification of a fine integral monoid chart has a universal mapping property and strict infinitesimal restriction",
+   "results": "{\"t\": \"2026-10-22T05:30:13Z\", \"tool\": \"leansearch\", \"query\": \"Logification of a fine integral monoid chart has a universal mapping property and strict infinitesimal restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submonoid.LocalizationMap.lift_eq\", \"MonCat.HasLimits.limitConeIsLimit\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.lift\", \"CategoryTheory.Localization.strictUniversalPropertyFixedTargetQ\", \"ContMDiffMonoidMorphism.toMonoidHom\", \"CategoryTheory.Localization.instInhabitedStrictUniversalPropertyFixedTargetLocalizationQ\", \"ContMDiffMap.restrictMonoidHom\"], \"digest\": \"6a3232cf5d82c4ff\"}. Read returned hits: ordinary scheme etale/normalization/spreading results, monoid localization, categorical localization and smooth manifold sheaves do not state associated logarithmic structures or their strict square-zero torsor fibers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-22T05:30:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned hits: ordinary scheme etale/normalization/spreading results, monoid localization, categorical localization and smooth manifold sheaves do not state associated logarithmic structures or their strict square-zero torsor fibers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic monoid sheaf associated to a chart has integral stalks and square zero ideal gives free transitive action of one plus ideal on lifts",
+   "results": "{\"t\": \"2026-10-22T05:30:24Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic monoid sheaf associated to a chart has integral stalks and square zero ideal gives free transitive action of one plus ideal on lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instNontrivialStalkPresheafSmoothSheaf\", \"IsManifold.locallyRingedSpace\", \"smoothSheafCommRing.ι_forgetStalk_hom\", \"smoothSheafCommRing.ι_forgetStalk_inv_apply\", \"smoothSheafCommRing.ι_forgetStalk_inv\", \"smoothSheafCommRing.ι_forgetStalk_hom_apply\", \"instNontrivialCarrierStalkCommRingCatPresheafSmoothSheafCommRing\", \"smoothSheafCommRing.ι_forgetStalk_inv_assoc\"], \"digest\": \"16020fb95732330a\"}. Read returned hits: ordinary scheme etale/normalization/spreading results, monoid localization, categorical localization and smooth manifold sheaves do not state associated logarithmic structures or their strict square-zero torsor fibers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fs-log-infinitesimal-criterion",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Infinitesimal characterization of logarithmic chart smoothness used in the two-stage lifting proof of composition and the strict pullback proof. Supporting input: Integral chart logification on arbitrary schemes and strict first-order restriction.",
+   "via": [
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-fine-chart-logification-thickening",
+  "worker": "stage1",
+  "summary": "Repair of C1/C4, D1/D2 and F: removed the sole citation of the dropped integral-chart theorem and put the complete 13-step construction in this live item. Created one statement-only sfb algebra lemma for integral mixed monoid pushouts, with fresh recorded searches; all other inputs are live generic pbc/sbc/cbc/trf nodes. Statement unchanged. Checked cited statements, all hypothesis ranges, and absence of dropped nodes in the dependency closure. The earlier report incorrectly treated a dropped theorem as reusable because it had an old pass review; that conclusion is withdrawn.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Infinitesimal characterization of logarithmic chart smoothness used in the two-stage lifting proof of composition and the strict pullback proof. Supporting input: Integral chart logification on arbitrary schemes and strict first-order restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives and local equality for set sheafification, used to prove the log axiom and etale restriction. No same-unit result supplies this generic input; it replaces no geometric or cohomological route step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Set-sheaf inverse-image adjunction and preservation of finite products for an arbitrary scheme morphism; the monoid extension is written out. No same-unit result supplies this generic input; it replaces no geometric or cohomological route step."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Affine pointed etale neighbourhoods compute the geometric stalk ring. No same-unit result supplies this generic input; it replaces no geometric or cohomological route step."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "A closed immersion gives the quotient of strict-local rings by its defining ideal, without Noetherian hypotheses. No same-unit result supplies this generic input; it replaces no geometric or cohomological route step."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "Generic set-sheaf geometric-stalk criterion used for the explicit torsor comparison. No same-unit result supplies this generic input; it replaces no geometric or cohomological route step."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Etale-site equivalence under a square-zero thickening, used only to express the local torsor on a common site. No same-unit result supplies this generic input; it replaces no geometric or cohomological route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "sbc-lem-thickening-etale-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NN-9efaa3f9c",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-9efaa3f9c (reviewer sub-agent of L); spot-checked: PASS. This re-delivery answers the 604315a8 RETURN as asked. It no longer cites either dropped per node (route-pivot-dropped l.1653 and l.1655). The item's closure has 428 nodes and none is dropped. Steps 1-4, 6-11 and 13 are the dropped per proof verbatim, and they cite only live generic pbc/sbc/cbc/trf nodes. I checked each against its actual statement; all of them work on arbitrary schemes or sites. Steps 5 and 12 now cite the new unsplit lem-sfb-integral-monoid-unit-pushout. The item statement and stmt_deps are unchanged and still equal the live node, which is still unsplit. There is no re-split note for this item. Mathematics: the log axiom comes from local representatives (00WK). The stalk formula uses refinements on cofiltered pointed neighbourhoods. The universal property is the monoid lift of the set inverse-image adjunction, with the value on units forced by K's log axiom. Etale restriction uses the slice site and the local-bijection criterion. Step 9 uses Stacks 05WS: the strict henselization of the quotient has kernel I·O^sh, and I²=0. Units lift because ab=1+c gives a·b(1−c)=1. I re-derived the strictness isomorphism M⊕_{A^×}(A/J)^×≅M_0 in both directions. For the torsor, w=u'd/(uc) has reduction 1, and uniqueness comes from the free A^×-action. The sheaf-level statement follows from the stalk criterion on the fibre product. The new node is true. The relation ∃e,e' with pe'=p'e and gf(e)=g'f(e') is exactly the generated congruence: it contains the generators, it is transitive via e1'e2' and e1e2, and it is multiplicative. Cancellativity then follows from integrality of P, and the G-action is free. I tested E={1}, E=P=ℕ with G trivial, and P=ℕ with E=2ℕ (which gives ℤ/2). It is pure monoid algebra, not a clause of the item. No live node duplicates it; the trf associated-log-universal-stalks, chart-spreading and face nodes say something different. Sources: ILO VI 1.1 (p.69) and VIII 3.1.2 (p.98) are conventions only, and both nodes say so honestly, with Kato 1988 / Ogus I.1.3 listed as WANTED. No SGA is used. Batch-5 flags: lem-trf-closed-immersion-strict-localization-cartesian is Stacks 05WS commutative algebra, and its closure contains no other trace-formula or Poincaré-duality node. def-trf-abelian-group-presentation is a general definition (00JC). Both are outside the assumptions; accepted as generic. The six declared off-unit tool_uses are generic and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralChartLogificationThickening",
+  "declaration": "AlgebraicGeometry.integralChartLogificationThickening",
+  "statement": "theorem integralChartLogificationThickening (T : Scheme.{max u v})\n    (P : Type v) [CommMonoid P] (hfg : Monoid.FG P)\n    (hint : Function.Injective (Algebra.GrothendieckGroup.of (M := P)))\n    (β : P →* Γ(T, ⊤)) :\n    ∃ (L : EtaleLogStructure T) (η : associatedLogPresheaf β ⟶ L.monoidSheaf.obj),\n      IsAssociatedLogPresentation β L η ∧\n      (∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T),\n        Function.Injective\n          (Algebra.GrothendieckGroup.of (M := L.toEtalePrelogStructure.stalk t))) ∧\n      L.IsFine ∧ L.IsChart (Scheme.Etale.mk (𝟙 T)) (associatedLogIota β L η) ∧\n      IntegralChartStalkPresentation β L η ∧\n      (∀ (S : Scheme.{max u v}) (a : S ⟶ T) (K : EtaleLogStructure S),\n        Function.Injective (integralChartCompose β L η K a) ∧\n        Set.range (integralChartCompose β L η K a) =\n          {c | (K.alpha.app (op (Scheme.Etale.mk (𝟙 S)))).hom.comp c =\n            associatedLogDownChart (a.appTop.hom.toMonoidHom.comp β)}) ∧\n      IntegralChartEtaleRestriction β L η ∧\n      ∀ (T₀ : Scheme.{max u v}) (j : T₀ ⟶ T), IsFirstOrderThickening j →\n        ∃ (L₀ : EtaleLogStructure T₀)\n          (η₀ : associatedLogPresheaf (j.appTop.hom.toMonoidHom.comp β) ⟶ L₀.monoidSheaf.obj)\n          (H : L₀.HomAlong L j),\n          IsAssociatedLogPresentation (j.appTop.hom.toMonoidHom.comp β) L₀ η₀ ∧\n          integralChartCompose β L η L₀ j H =\n            associatedLogIota (j.appTop.hom.toMonoidHom.comp β) L₀ η₀ ∧\n          IntegralChartThickeningStalks j L L₀ H ∧ IntegralChartThickeningLocal j L L₀ H",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing statement attached to lem-per-integral-chart-logification-thickening (Q73, reviewed 2026-10-24). The two DAG statement strings are byte-for-byte identical. The declaration covers arbitrary schemes, integral fine logification, normalized stalk and etale-restriction presentations, arbitrary-map chart universality, and strict first-order restriction with stalk and sheaf-local additive-ideal torsors. No new module or duplicate notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8366b21b1",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Re-delivery of 686f6eb0 H2 RETURN. Item diff vs returned head: only stmt_deps, which add def-per-associated-log-presentation, def-trf-fs-log-blowup, def-trf-fine-log-etale-descent-datum, def-trf-fine-log-scheme-morphisms and def-trf-log-regular-pair; the set equals the twin's 10. All five are landed definition nodes whose declarations own associatedLog*, EtaleLogStructure/IsChart/stalk/unitsIn, IsFine, HomAlong and strictLocalRing/Germ/divisorialChart*. None is dropped, there is no cycle, and stage2_delivery accepts them as gained landed deps. The lean record is byte-identical to the returned head; its multi-line statement is verbatim in the live IntegralChartLogificationThickening.lean, and check_existing gives ([],[]). Statement text is unchanged and equal to the twin. Maths is unchanged from the earlier full readings (Injective+range universal property, pinned η/H/r/q/ρ, ker-r torsor, sheaf-local clause, no Noetherian hypothesis). The report has Worker report and Second reading sections. No file was changed, so no compile. Maintainer note: the module docstrings name the dropped per twin as blueprint."
+ }
+}

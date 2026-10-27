@@ -15,102 +15,60 @@
  ],
  "proof": [
   {
-   "text": "For clause (1), choose $q:T\\to V$ and $(t_k^-,t_k^+)$ from [lem-sfb-countable-split-profinite-cover]. Thus every nonempty open subset of $T$ contains both points of some double fibre with arbitrarily large index, and the two oriented off-diagonal points of each such fibre are clopen in $R=T\\times_VT$. These are the exact topological properties used below; no continuous section of $q$ is assumed.",
+   "text": "Choose $q:T\\to V$ and $t_k^\\pm$ from [lem-sfb-countable-split-profinite-cover]. Apply [lem-sfb-algcl-countable-closed-finite-cover] with $E=\\mathbf Q_\\ell$ to obtain increasing closed finite intermediate fields $F_k$ exhausting $\\Omega$. These choices retain the nonempty metrizable profinite spaces and all the clopen-pair and tail-density properties.",
    "uses": [
-    "lem-sfb-countable-split-profinite-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample: choose the purely topological cover."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-algcl-countable-closed-finite-cover] with the finite intermediate field $E=\\mathbf Q_\\ell$. It gives increasing closed intermediate fields $F_k\\subseteq\\Omega$, finite over $\\mathbf Q_\\ell$, with $\\Omega=\\bigcup_kF_k$. In particular $F_j\\subseteq F_k$ whenever $j\\leq k$, and for any continuous $g:T\\to\\Omega$ the subsets $g^{-1}(F_j)$ are closed and cover $T$.",
-   "uses": [
+    "lem-sfb-countable-split-profinite-cover",
     "lem-sfb-algcl-countable-closed-finite-cover"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stanford-weil2-seminar/L19.pdf",
-    "place": "Proposition 1.1.9, first bullet, p. 3: countability of finite subextensions. The cited node supplies the increasing closed cover, not a finite-stage factorization of a continuous function."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Repair assembly, step 1"
    }
   },
   {
-   "text": "For each $k$, apply [lem-weil-l-adic-extension-integers-dvr] to the finite extension $F_k$ with the restricted norm and choose a uniformizer $\\pi_k$. Its conclusions give $0<|\\pi_k|<1$, units of norm $1$, and $x=u\\pi_k^m$ for $x\\in F_k^\\times$, $m\\in\\mathbf Z$. By algebraic closedness [def-weil-algebraic-closure] choose $b_k\\in\\Omega$ with $b_k^2=\\pi_k$. It is outside $F_k$: otherwise $|b_k|=|\\pi_k|^m$ for an integer $m$, so $|\\pi_k|^{2m}=|\\pi_k|$, forcing $2m=1$. By [def-weil-l-adic-numbers], $|\\ell|=\\ell^{-1}<1$. Choose an integer $M_k\\geq0$ with $|\\ell|^{M_k}|b_k|\\leq\\ell^{-k}$, and put $a_k=\\ell^{M_k}b_k$. Then $|a_k|\\leq\\ell^{-k}$, hence $a_k\\to0$, while $a_k\\notin F_k$ because the nonzero scalar $\\ell^{M_k}$ and its inverse belong to $F_k$.",
+   "text": "By [lem-sfb-algcl-small-escaping-sequence] choose $a_k\\notin F_k$ with $|a_k|\\leq\\ell^{-k}$ and $a_k\\to0$. Take $A=(\\Omega,+)$ with norm $|\\cdot|$ and $H_k=(F_k,+)$: the extended norm is ultrametric, and each closed field contains zero and is closed under differences. Step 1 supplies the remaining hypotheses of [lem-sfb-double-fibre-null-cocycle-obstruction]. Its function $f$ is continuous, satisfies $d^1f=0$, and has no continuous $g:T\\to\\Omega$ with $g(y)-g(x)=f(x,y)$. The coordinate homeomorphism $T_V^1\\to T$, $(t_0)\\mapsto t_0$, with inverse $t\\mapsto(t)$, identifies this last equation with $d^0g=f$. This proves (1).",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "def-weil-algebraic-closure",
-    "def-weil-l-adic-numbers"
+    "lem-sfb-algcl-small-escaping-sequence",
+    "lem-sfb-double-fibre-null-cocycle-obstruction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample: explicit small coefficients escaping the increasing finite fields, using the uniformizer decomposition."
+    "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Repair assembly, step 2"
    }
   },
   {
-   "text": "Define $f:R\\to\\Omega$ by $f(x,x)=0$, $f(t_k^-,t_k^+)=a_k$ and $f(t_k^+,t_k^-)=-a_k$. The fibre classification in [lem-sfb-countable-split-profinite-cover] exhausts $R$, so this defines an actual function. For each $N$, the function $f_N$ with these values for $k<N$ and zero elsewhere is continuous: its finitely many nonzero loci are clopen singletons. Given $\\epsilon>0$, choose $N$ with $\\ell^{-N}<\\epsilon$. Around any $z\\in R$ choose an open neighbourhood where $f_N$ is constant. On that neighbourhood the ultrametric inequality gives\n$$|f(y)-f(z)|\\leq\\max(|f(y)-f_N(y)|,|f(z)-f_N(z)|)\\leq\\ell^{-N}<\\epsilon.$$\nThis proves continuity into $\\Omega$ itself; no infinite sum is used to define $f$.",
+   "text": "For a continuous section $\\sigma$ of $q$, apply [lem-sfb-split-topological-cech-homotopy] to the additive topological group $\\Omega$. For $d^nf=0$ its identity gives $d^{n-1}(h_nf)=f$. Its formula for $h_n$ is exactly the displayed $g$ in (2), with continuity included.",
    "uses": [
-    "lem-sfb-countable-split-profinite-cover"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample: direct epsilon-neighbourhood proof of continuity, avoiding completion."
-   }
-  },
-  {
-   "text": "Every tuple in $T_V^3$ lies in a fibre of cardinality one or two. On a singleton fibre put $u=0$. On the fibre $\\{t_k^-,t_k^+\\}$ put $u(t_k^-)=0$ and $u(t_k^+)=a_k$. On each individual fibre $f(x,y)=u(y)-u(x)$, so\n$$f(y,z)-f(x,z)+f(x,y)=(u(z)-u(y))-(u(z)-u(x))+(u(y)-u(x))=0.$$\nHence $d^1f=0$. These fibrewise functions $u$ are used only for this algebraic identity; no global continuity of them is claimed.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample: verify the cocycle equation on every possible fibre triple."
-   }
-  },
-  {
-   "text": "Suppose a continuous $g:T\\to\\Omega$ satisfied $g(y)-g(x)=f(x,y)$. The closed sets $A_j=g^{-1}(F_j)$ cover the nonempty compact Hausdorff space $T$ by [lem-sfb-algcl-countable-closed-finite-cover]. Apply [lem-sfb-baire-closed-cover-interior] to $Y=X=T$ and $I=\\mathbf N$: a compact Hausdorff space is locally compact, since the whole space is a compact neighbourhood of every point. Thus some $A_j$ contains a nonempty open subset $U$ of $T$. By [lem-sfb-countable-split-profinite-cover], choose $k\\geq j$ with $t_k^-,t_k^+\\in U$. Then\n$$a_k=f(t_k^-,t_k^+)=g(t_k^+)-g(t_k^-)\\in F_j\\subseteq F_k,$$\ncontradicting step 3. This proves clause (1), with equality of cochains rather than any statement about closures.",
-   "uses": [
-    "lem-sfb-algcl-countable-closed-finite-cover",
-    "lem-sfb-baire-closed-cover-interior",
-    "lem-sfb-countable-split-profinite-cover"
+    "lem-sfb-split-topological-cech-homotopy"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0CQN (lemma-baire-category-locally-compact), closed-cover consequence; agent application to the arithmetic cover and the split Cantor relation."
-   }
-  },
-  {
-   "text": "For clause (2), suppose $q\\sigma=\\mathrm{id}_V$. The map\n$$(t_0,\\ldots,t_{n-1})\\longmapsto(\\sigma(q(t_0)),t_0,\\ldots,t_{n-1})$$\nis continuous into $T_V^{n+1}$: its coordinates are continuous and the equal-image equations follow from $q\\sigma=\\mathrm{id}_V$. Thus the displayed $g$ is continuous. Apply $d^nf=0$ to $(\\sigma(v),t_0,\\ldots,t_n)$, where $v=q(t_i)$ for every $i$. Its first summand is $f(t_0,\\ldots,t_n)$; the remaining summands give\n$$0=f(t_0,\\ldots,t_n)-\\sum_{j=0}^n(-1)^jf(\\sigma(v),t_0,\\ldots,\\widehat{t_j},\\ldots,t_n)=f-d^{n-1}g.$$\nThe equality uses $\\sigma(q(t_i))=\\sigma(v)$ for every face, including deletion of $t_0$. It works for $n=1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Correct local replacement: explicit extra-coordinate contraction for a split cover."
+    "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Repair assembly, step 3"
    }
   },
   {
-   "text": "For any $q$, [lem-sfb-finite-quotient-fiber-product] applied to $T\\to V\\leftarrow T$ makes $T\\times_VT$ profinite. The projection $q':T\\times_VT\\to T$ is continuous and has the continuous diagonal section $s\\mapsto(s,s)$, so is surjective. Its $(n+1)$-fold fibre product over $T$ consists of $(s;t_0,\\ldots,t_n)$ with all $q$-images equal; the tuple maps in both directions are coordinate maps and are continuous for the subspace topologies. Pullback sends $f$ to $(s;t_0,\\ldots,t_n)\\mapsto f(t_0,\\ldots,t_n)$ and commutes with each coordinate deletion, hence preserves the cocycle equation. Step 7 with the diagonal section gives exactly\n$$h(s;t_0,\\ldots,t_{n-1})=f(s,t_0,\\ldots,t_{n-1})$$\nand $d^{n-1}h=q^*f$. If $T=V=\\varnothing$, all these function groups are zero, and the same formulas are the unique zero functions. This completes clause (2).",
+   "text": "For arbitrary $q$, [lem-sfb-finite-quotient-fiber-product] makes $P=T\\times_VT$ profinite with its subspace topology. The first projection $q':P\\to T$ has the continuous diagonal section $s\\mapsto(s,s)$, hence is surjective. A tuple over $q'$ is $((s,t_0),\\ldots,(s,t_n))$, identified with $(s;t_0,\\ldots,t_n)$ where all $q$-images agree. Both identifications are continuous coordinate maps. The coordinate map forgetting $s$ pulls $f$ back to $F(s;t_0,\\ldots,t_n)=f(t_0,\\ldots,t_n)$; deletion of any $t_j$ commutes with it, so $dF=0$. Applying [lem-sfb-split-topological-cech-homotopy] to $q'$ and its diagonal section gives $h(s;t_0,\\ldots,t_{n-1})=f(s,t_0,\\ldots,t_{n-1})$ and $dh=F$. If $T=V=\\varnothing$, every positive-length tuple space is empty and the same formulas are the unique zero functions. This proves the base-change assertion of (2).",
    "uses": [
-    "lem-sfb-finite-quotient-fiber-product"
+    "lem-sfb-finite-quotient-fiber-product",
+    "lem-sfb-split-topological-cech-homotopy"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 08ZY (lemma-profinite) and 0A2P (lemma-describe-limits), the fibre-product input as stated in the cited node; extra-coordinate contraction after base change."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Repair assembly, step 4"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-algebraic-closure",
-  "def-weil-l-adic-numbers",
   "lem-sfb-algcl-countable-closed-finite-cover",
-  "lem-sfb-baire-closed-cover-interior",
+  "lem-sfb-algcl-small-escaping-sequence",
   "lem-sfb-countable-split-profinite-cover",
+  "lem-sfb-double-fibre-null-cocycle-obstruction",
   "lem-sfb-finite-quotient-fiber-product",
-  "lem-weil-l-adic-extension-integers-dvr"
+  "lem-sfb-split-topological-cech-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
@@ -394,17 +352,13 @@
   "date": "2026-10-22",
   "item": "lem-sfb-norm-algcl-profinite-cech-exact",
   "worker": "stage1",
-  "group": "NI",
-  "summary": "STATEMENT-DISPUTED: disprove the imported universal exactness assertion by a continuous degree-one cocycle on a countably split profinite cover; repair the statement explicitly to the counterexample and the valid split-cover/local contraction. Reuse the existing countable closed finite-field cover, Baire leaf, DVR theorem, and profinite fibre-product theorem. One new statement-only pure-topology input, with a full construction in the report. No coefficient completion or finite-stage replacement.",
+  "group": "Q46",
+  "summary": "Repair the landing refusal of returned head 5df49922d6f against the current DAG. Preserve the current statement and statement dependencies, re-read every cited statement and verify all retained citation quotes, and retain the three independent statement-only arithmetic, analytic and homotopy nodes. Make the ultrametric/additive-subgroup hypotheses and the degree-zero coordinate homeomorphism explicit in the 2100-character assembly. The report preserves all prior proof guidance and search results.",
   "blueprint": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. The item is an agent-created auxiliary, not the unit statement. Its created.item chain terminates at the module name Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs.py ancestor reports None; preserve that inherited provenance and give the exact motivating paragraph here.",
   "tool_uses": [
    {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "The arithmetic uniformizer decomposition proves that each finite subfield omits an arbitrarily small element of Omega; it is a generic local-field input, not a replacement of a six-functor unit step."
-   },
-   {
     "node": "lem-sfb-finite-quotient-fiber-product",
-    "why": "Step 8 uses only the stated conclusion that the fibre product T x_V T of profinite sets with the subspace topology is compact Hausdorff totally disconnected; a generic profinite-topology lemma of unit sk-def-sfb-pullback-from-point, used as a black box, not a replacement of a six-functor unit step."
+    "why": "Only the stated compact Hausdorff totally disconnected property and subspace topology of the pullback are used as a generic topology tool in the diagonal base-change assembly."
    }
   ]
  },
@@ -413,12 +367,12 @@
   "lem-sfb-finite-quotient-fiber-product"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NI-2dfde744e",
-  "group": "NI",
+  "reviewer": "NT-cc-Q46-d7ecd3202",
+  "group": "Q46",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-2dfde744e (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement and the old item statement (NC snapshot). The old global claim is false: every positive-degree Cech cocycle in C(T_V^{n+1},Omega) for noncomplete Omega = algebraic closure of Q_l was said to have a continuous primitive. I checked the counterexample independently. The cover is the graph closure over Cantor space with eventually-alternating sequences split in two. Over v not in D the fibres are singletons, because the lexicographic comparisons are locally constant. Over v_k there are exactly two points, since v_k is approached from both sides by eventually constant sequences. The oriented pairs are clopen in R by a kth-bit condition, and tail density holds via B = V minus q(T minus U). The cocycle f with values a_k, |a_k| <= l^-k, is a uniform limit of continuous f_N, and d^1 f = 0 holds through a fibrewise potential. No continuous primitive g exists: Baire on g^-1(F_j) gives a_k in F_j, contained in F_k. a_k is not in F_k: if b_k^2 = pi_k with b_k in F_k, then 2m = 1. Clause (2) contraction signs checked, including the t_0 face, n=1, the base change via the diagonal section of q', and the empty case. The correction is legitimate under brief-stage1 section 1 and E7, is named in the report, and no target or unit statement is touched. The new node is self-contained topology, not a restated clause, with no duplicate found by rg -L over dag/nodes. Batch-5: lem-sfb-algcl-countable-closed-finite-cover reaches lem-trf-irreducible-separable-derivative (irreducible f is separable iff f' != 0). That is general field algebra outside both assumptions, so I accept it. FIX: step 8 cites lem-sfb-finite-quotient-fiber-product, whose unit sk-def-sfb-pullback-from-point is outside the route, without a tool_uses entry. I added one in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-norm-algcl-profinite-cech-exact.json. Maintainer: the parent lem-sfb-norm-algcl-bar-augmentation, step 3, relies on the disproved global exactness and must be reopened. Also rename the item's title.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-d7ecd3202 (reviewer sub-agent of L); spot-checked: This is a rebase after a landing refusal of the PASSed head 5df49922d6f; the refusal was 'side completion never promoted', coord/returns/Q46.md:40-42. Live is still the NI 8-step split, the human re-split note is still released, and none of the 3 new ids is live, so the delivery is not superseded. The item statement is identical to live. The 3 new node JSONs are byte-identical to the prior head; the only change is assembly step 2, which now states A=(Omega,+) with its ultrametric norm, H_k=(F_k,+) closed subgroups, and the coordinate homeomorphism T_V^1=T that turns g(y)-g(x)=f(x,y) into d^0g=f. That change is correct. Re-split: every old step has an owner and all 8 are kept verbatim in the report. Steps 1-2 are the existing cover and exhaustion nodes (statements read). Step 3 is lem-sfb-algcl-small-escaping-sequence: true, since Omega has infinite degree over Q_l and multiplying by l^M keeps an element outside F_k; the root-of-uniformizer route also works. Steps 4-6 are lem-sfb-double-fibre-null-cocycle-obstruction, which is conditional and generic in A, not a restated clause. Continuity holds as a uniform limit of locally constant truncations, with no completion. The cocycle identity holds through fibrewise potentials, with the sign matching d^1. No primitive exists, by Baire (Stacks 0CQN, topology.tex:2044) applied to the closed sets g^-1(H_j) together with tail density. Step 7 is lem-sfb-split-topological-cech-homotopy. I recomputed dh+hd=id for n>=1: deleting t_0 is fine because all q-images agree, and the n=1 and empty cases are covered. Step 8 is assembly step 4: h(s;t)=f(s,t) through the diagonal section; the fibre-product tool_use is accepted (only profiniteness is used). The parent is about 2100 characters in 4 steps. No duplicates: I checked normed-scalar-profinite-cech-exact, finite-valued-cech-cocycle-descent, and the pbc free-resolution and homotopy nodes. No SGA is cited. Maintainer note: lem-sfb-norm-algcl-bar-augmentation still relies on the refuted global exactness; this is outside this item."
  },
  "lean": {
   "module": "Sheaf.Topology.NormAlgclProfiniteCechExact",
@@ -447,5 +401,17 @@
   "group": "NF",
   "result": "pass",
   "note": "Re-delivery after the H2 RETURN of 1704e764: the theorem stmt_dep lem-sfb-normed-scalar-profinite-cech-exact is replaced by the new def node def-sfb-profinite-cech-tuples (existing:true on the unchanged NormedScalarProfiniteCechExact module, owning scalarCechTuples/scalarCechDelete; statement matches the live abbrev/def including r=0 and succAbove deletion; header verbatim; H12 fields present; no other owner in side-live). Lean module byte-identical to the previously reviewed head, whose mathematics was checked correct (IsAlgClosure Padic with norm extension, no completion; clause (1) nonempty metrizable counterexample; split and diagonal-base-change contractions for all degrees n+1; empty case). Item JSON differs from live only in lean and stmt_deps. Report sections present. Not recompiled per instruction. Maintainer notes: possible later unification with def-sfb-set-cech-nerve; parent bar-augmentation step 3 still relies on the disproved exactness."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-finite-ring-tensor-transpose-assembly",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose; Categorical assembly of projection and integration transpose transport",
+   "via": [
+    "lem-pur-finite-ring-site-tensor-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Categorical assembly of projection and integration transpose transport",
+ "statement": "Let E:C→C′ and H:D→D′ be fully faithful functors of monoidal categories, C,C′ braided, whose images equal object properties PX,PY. Given F:C→D, F′:C′→D′, pullback functors P,P′, b:F⋙H≅E⋙F′, tensor/unit/pullback identifications tX,tY,u,pb [def-pur-finite-ring-site-tensor-transport-data], assume pf is invertible, the projection square commutes, H respects evaluation at u, and E respects braiding under tX. Then for arbitrary chosen adjunctions F⊣R and restricted F′⊣G, the unique counit-normalized right-adjoint comparison exists; the projection maps on comparison images are invertible; and both tensor orders of the integration-transpose identities hold. This is a purely categorical implication, with the image and canonical-map identities as hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose"
+ },
+ "stmt_deps": [
+  "def-pur-finite-ring-site-tensor-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Lift E,H to the image subcategories; full faithfulness and essential surjectivity make them equivalences. Apply the proved counit-normalized transport and transpose identity.",
+   "uses": [
+    "lem-pur-finite-ring-adjoint-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The commuting projection square expresses the pro projection as a composite of isomorphisms. Set both projection isomorphisms to asIso of the specified maps. The tensor/pullback comparison exhibits tensor closure. Invert the square, use the evaluation identity, and use adjunction naturality to prove the integration formula. Precompose it by the braiding, use braided coherence and braiding naturality to obtain the opposite order.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-ring-adjoint-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose; factored into the precise categorical or canonical-map step recorded below."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image commutes with the tensor unit and the signed braiding and with compact support projection maps",
+   "results": "8 hits: braiding_inv_tensorUnit_right, braiding_inv_tensorUnit_left_assoc, braiding_inv_tensorUnit_right_assoc, braiding_inv_tensorUnit_left, HomologicalComplex.rightUnitor_inv, Comon.monoidal_tensorUnit_comon_comul, MonoidalCategory.tensor_ε, leftUnitor_inv_braiding.",
+   "date": "2026-10-25",
+   "verdict": "General monoidal identities only; no equality for the named site comparisons or compact-support projection maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived inverse image tensor comparison preserves the tensor unit and braiding; compact support projection formula comparison between sites",
+   "results": "8 hits including SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, GrothendieckTopology.W.transport_isMonoidal, and ordinary sheaf pushforward isomorphisms.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary sheaf results do not state the named unbounded-derived identities; generic categorical results are used in the proved transport helper."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comparison|comparison.*projection",
+   "results": "0 hits in the Mathlib search service. Local source search finds the named canonical maps in the project; none proves the two new site identities.",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib theorem; use project canonical comparisons and split only their required equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingSiteTensorTranspose",
+  "date": "2026-10-25",
+  "group": "S3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingTensorTransposeAssembly",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingTensorTransposeAssembly.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteRingTensorTransposeAssembly",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteRingTensorTransposeAssembly"
+  ],
+  "statement": "theorem finiteRingTensorTransposeAssembly {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [BraidedCategory C] {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] {C' : Type u₃} [Category.{v₃} C'] [MonoidalCategory C'] [BraidedCategory C'] {D' : Type u₄} [Category.{v₄} D'] [MonoidalCategory D'] (E : C ⥤ C') (H : D ⥤ D') [E.Full] [E.Faithful] [H.Full] [H.Faithful] (F : C ⥤ D) (F' : C' ⥤ D') (P : D ⥤ C) (P' : D' ⥤ C') (PX : ObjectProperty C') (PY : ObjectProperty D') (hX : ∀ M, PX (E.obj M)) (hY : ∀ K, PY (H.obj K)) (hx : ∀ N, E.essImage N ↔ PX N) (hy : ∀ N, H.essImage N ↔ PY N) (b : F ⋙ H ≅ E ⋙ F') (tx : ∀ M N, E.obj (M ⊗ N) ≅ E.obj M ⊗ E.obj N) (ty : ∀ M N, H.obj (M ⊗ N) ≅ H.obj M ⊗ H.obj N) (uy : H.obj (𝟙_ D) ≅ 𝟙_ D') (pb : ∀ K, E.obj (P.obj K) ≅ P'.obj (H.obj K)) (pf : ∀ M K, F.obj M ⊗ K ⟶ F.obj (M ⊗ P.obj K)) (pf' : ∀ M K, F'.obj M ⊗ K ⟶ F'.obj (M ⊗ P'.obj K)) (hi : ∀ M K, IsIso (pf M K)) (hc : ∀ M K, H.map (pf M K) ≫ b.hom.app (M ⊗ P.obj K) ≫ F'.map (finiteRingTensorPullbackComparison E P P' H tx pb M K).hom = (ty (F.obj M) K).hom ≫ (b.hom.app M ⊗ₘ 𝟙 (H.obj K)) ≫ pf' (E.obj M) (H.obj K)) (hu : ∀ (Z K : D) (e : Z ⟶ 𝟙_ D), H.map ((e ⊗ₘ 𝟙 K) ≫ (λ_ K).hom) = (ty Z K).hom ≫ ((H.map e ≫ uy.hom) ⊗ₘ 𝟙 (H.obj K)) ≫ (λ_ (H.obj K)).hom) (hb : ∀ M N, E.map (β_ M N).hom ≫ (tx N M).hom = (tx M N).hom ≫ (β_ (E.obj M) (E.obj N)).hom) : finiteRingSiteTensorTransposeStatement E H F F' P P' PX PY (fun M ↦ b.hom.app M) tx ty uy pb inferInstance inferInstance pf pf'",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pur-finite-ring-site-tensor-transpose",
+  "worker": "S3",
+  "summary": "Categorical assembly of projection and integration transpose transport",
+  "blueprint": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1067",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T123735-L-1895222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1067",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T123735-L-1895222",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved defs, Data module vs clone item module, verbatim; theorem signature byte-identical; FiniteGeneralRing importer compiled against the delivered modules (37 s ok); #print axioms: main theorem sorryAx only via the two split-off statements, helpers clean; projection square = the item's own Statement conjunct"
+ }
+}

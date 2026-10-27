@@ -317,16 +317,13 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-c164a5c75 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and its report, with no new nodes. I also read every cited statement (5 stmt_deps, 23 proof_deps) and the sources: Stacks 0GL0 (more-etale.tex l.4711, which needs only qcqs schemes, a separated finite-presentation map and a Noetherian torsion Λ), 095U (etale-cohomology.tex l.18786, any torsion abelian sheaf, no invertibility or Noetherian hypothesis) and 0A3V (morphisms.tex l.5488). The statement is true and unweakened: proper f between Noetherian schemes, finite commutative A, ordinary constant-A étale module sheaves, Rf_* sends D^b_c to D^b_c. def-weil-pbc-direct-image includes the module-sheaf Rf_*. Step 1 is correct: quasi-compact via the finite affine cover; quasi-separated via locally Noetherian; lft→lfp over a locally Noetherian base plus separated→quasi-separated gives finite presentation (01TP). Step 2 is correct: the identity compactification is explicitly allowed, (1_Y)_! is the identity since the presheaf is already a sheaf, and lem-weil-pbc-etale-compactification-constructibility applies to L in D^+ with constructible cohomology. Step 3: the 0A3V bound needs only a quasi-compact S. Step 4: finite A is torsion; 095U bounds the abelian direct images; the forget comparison holds for any q and any Λ including the zero ring; negative vanishing comes from the Grothendieck-abelian and left-exact nodes. Step 5 is a properly stated finite induction (r=a..b) on the truncation triangles in D^+, using the triangulated Rf_* with its shift isomorphism and the long exact sequence, giving amplitude [a,b+2d]. Edge cases checked: f=id, finite f (d=0), empty fibres, A=0, p-torsion A in characteristic p, L=0, a=b. No cycle: no cited node's closure reaches the item. No duplicates: the existing proper-finiteness nodes all add finite dimension or invertibility, require a base field, or are adic/pro-étale or oriented; lem-per-quasi-excellent-etale-direct-image-finiteness would create a cycle. Batch-5: both flagged citations are finiteness inputs (constructibility of Rf_!, proper cohomological dimension), outside the trace-formula and Poincaré-duality statements and not steps of their proofs. The flagged paths end in generic nodes: lem-trf-bounded-below-derived-adjunction (abstract D^+ adjunction) and lem-pod-lisse-module-sheaves-as-module-objects (lisse sheaves as module objects of finite locally constant sheaves). Both accepted. The declared tool_uses are generic and accepted. No fixes."
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/ProperFiniteCoefficientBoundedPreservation.lean",
   "module": "Sheaf.AlgebraicGeometry.ProperFiniteCoefficientBoundedPreservation",
   "declaration": "AlgebraicGeometry.Etale.isBoundedConstructible_rightDerivedLowerStar_of_isProper_of_noetherian",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProperFiniteCoefficientBoundedPreservation.lean",
-  "statement": "theorem isBoundedConstructible_rightDerivedLowerStar_of_isProper_of_noetherian (A : Type (u + 1)) [CommRing A] [Finite A] {Y S : Scheme.{u}} [IsNoetherian Y] [IsNoetherian S] (f : Y ⟶ S) [IsProper f] (L : DerivedCategoryModule A Y) (hL : DerivedCategory.isBoundedConstructible A Y L) : DerivedCategory.isBoundedConstructible A S ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj L)",
-  "branch": "newtargets-dag",
-  "by": "NH",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.ProperFiniteCoefficientBoundedPreservation deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -336,5 +333,16 @@
   "result": "pass",
   "note": "Read node, 5 stmt_deps, Stacks 0GL0/095U, delivered module, report. Lean: IsProper f, IsNoetherian Y/S (≡ finite affine Noetherian cover), A : Type (u+1) CommRing Finite (u+1 forced by recorded predicate), rightDerivedLowerStar of recorded lowerStar on ordinary étale ModuleCat sheaves, full isBoundedConstructible conclusion; no dimension/invertibility/Nontrivial hypotheses; edge cases A=0, empty schemes, f=id, char-p coefficients, infinite Krull dim covered. Node copy differs from live only in lean; dep records identical; lean.statement verbatim; sole theorem := by sorry; docstrings carry source places, blueprint tag, 5 proof steps; report has both required sections. H4: lem-fin-proper-bounded-constructible (field+smooth-base-change coefficients) and quasi-excellent node (finite field; its closure reaches this item, so a cycle) are not duplicates. nt_compile --json clean 15 s; control without [Finite A] fails. Advisory only: unbounded R on bounded input, the established convention."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

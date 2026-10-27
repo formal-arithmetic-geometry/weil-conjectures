@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-homogeneous-injective-total-target",
+ "kind": "statement",
+ "title": "Compatible equivariant injective resolution and homogeneous injective total target",
+ "statement": "Let $A$ be a commutative condensed ring on a small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], and let $G$ be a profinite group, with $\\underline G(S)=C(S,G)$. Let $\\mathcal E$ be internal $G$-equivariant $A$-modules, $\\mathcal M$ internal $A$-modules, $U:\\mathcal E\\to\\mathcal M$ the forgetful functor, and $F=\\Gamma_G$ invariants [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Use ordinary cochain derived categories [def-weil-abstract-derived-category] and injective resolutions [def-sp-injective-resolutions].\n\nFor every profinite parameter $P$, the free internal module $A[\\underline P]$ is the sheafification of $V\\mapsto\\bigoplus_{V\\to P}A(V)$, equivalently extension by zero of $A|_P$ along the slice projection, and is flat (tensoring with it is exact). The translation-action functor $L(M)=A[\\underline G]\\otimes_A M$ is an exact left adjoint of $U$; the adjunction sends $h:M\\to UJ$ to $[g]\\otimes m\\mapsto g\\cdot h(m)$, with inverse evaluation at $[1]$. The functor $U$ is exact and preserves injectives.\n\nFor every equivariant module $N$, there exists a nonnegative equivariant injective resolution $s:N[0]\\to I^\\bullet$; for every such resolution $Us$ is an injective resolution in $\\mathcal M$, and $I$ is K-injective (every map from an acyclic complex to $I$ is null-homotopic). Form the first-quadrant double complex\n$$T^{p,q}=\\underline{\\operatorname{Hom}}_A(A[\\underline G^{p+1}],UI^q),\\qquad p,q\\geq0,$$\nusing the underived internal Hom and free modules of [def-sfb-condensed-equivariant-bar-data, def-sfb-condensed-homogeneous-functions]. Its action is $(g\\cdot f)(h_0,\\ldots,h_p)=g\\cdot_{I^q}f(g^{-1}h_0,\\ldots,g^{-1}h_p)$, its horizontal differential is the alternating sum of coordinate deletions, and its vertical differential is postcomposition with $d_I$. These differentials commute and are equivariant. The finite-diagonal total $T$ has $T^n=\\bigoplus_{p+q=n}T^{p,q}$ and differential $d_h+(-1)^p d_I$ [def-sp-double-complex-total]. Every $T^{p,q}$ and every $T^n$ is equivariantly injective, and $T$ vanishes below zero. Constants in bidegree $(0,q)$ define an equivariant cochain map $\\delta:I\\to T$. All action and adjunction formulas hold after every profinite base change.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 1-3 (compatible injectives, free induction, homogeneous total target). Flatness and adjoint tools: Stacks 03EV lemma-j-shriek-flat; 015Z lemma-adjoint-preserve-injectives. Exact independent internal-bar reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-homogeneous-functions",
+  "def-sfb-condensed-free-module-generators",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-condensed-free-linearization-tensor] on the coherent profinite site with finite jointly surjective covers, with the represented condensed set $\\underline P$: under the section-module equivalence, $A[\\underline P]$ is the sheafification of $V\\mapsto\\bigoplus_{V\\to P}A(V)$. This is precisely the module $j_{P!}A_P$ described in [lem-pc-sites-modules-j-shriek-flat]. Its flatness follows from that node, with $\\mathcal C$ the chosen small coherent profinite site, $\\mathcal O$ the section-ring sheaf of $A$, and $U=P$. The exact tensor comparison and reflection of flatness in [lem-pe-internal-section-tensor-comparison] transfer this conclusion to internal $A$-modules. Thus $A[\\underline P]\\otimes_A-$ is exact for every allowed profinite $P$, including $G$ and all its finite powers.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EV, label lemma-j-shriek-flat, clause (2) and displayed direct-sum formula; internal transfer is the cited tensor-comparison node."
+   }
+  },
+  {
+   "text": "Construct $L(M)=A[\\underline G]\\otimes_A M$ with $k([g]\\otimes m)=[kg]\\otimes m$. Use the canonical generalized generators of the fixed free adjunction in the current linearization statement. Its free-generator universal property of [lem-sfb-condensed-free-linearization-tensor] and the tensor universal property of [lem-pc-sheaf-modules-tensor-closed] extend this formula to the sheaf tensor, so it is not an assertion of sectionwise freeness after sheafification. For variable $k$ use its restriction on every slice $T\\to S$; multiplication in $G$ commutes with restriction. The identities $1g=g$ and $k(lg)=(kl)g$ give the action laws of [def-sfb-condensed-action-module]. A linear map $h:M\\to UJ$ gives $\\widetilde h([g]\\otimes m)=g h(m)$; this is balanced, natural on every slice and equivariant since $\\widetilde h([kg]\\otimes m)=k\\widetilde h([g]\\otimes m)$. Conversely an equivariant $b:L(M)\\to J$ gives $h(m)=b([1]\\otimes m)$. Then $b([g]\\otimes m)=g b([1]\\otimes m)$ shows the two operations are inverse, and pre- and postcomposition commute with the formulas. They give the stated natural adjunction $L\\dashv U$.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written resolution normalization helper; internal induction and homogeneous double-complex construction."
+   }
+  },
+  {
+   "text": "By [lem-sfb-condensed-action-injective-infrastructure], the action and underlying module categories are abelian, and forgetting creates sectionwise kernels and sheafified sectionwise cokernels and detects exactness. Hence $U$ is exact. The underlying functor of $L$ is the exact tensor functor of Step 1 with $P=G$; detection of exactness by $U$ makes $L$ exact in the action category. Apply [lem-sp-right-adjoint-preserves-injectives] to this exact additive $L$ and its right adjoint $U$ from Step 2: $U$ preserves injectives. No inference from exactness of $U$ alone is used.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written resolution normalization helper; internal induction and homogeneous double-complex construction."
+   }
+  },
+  {
+   "text": "The action category is Grothendieck abelian by [lem-sfb-condensed-action-injective-infrastructure], so [lem-sp-grothendieck-enough-injectives] gives enough injectives. Explicitly set $C^0=N$, choose monomorphisms $i_q:C^q\\hookrightarrow I^q$ into injectives, put $C^{q+1}=\\operatorname{coker}i_q$ with quotient $\\pi_q:I^q\\to C^{q+1}$, and set $d_I^q=i_{q+1}\\pi_q$. These choices exist recursively by enough injectives. Since $\\pi_{q+1}i_{q+1}=0$, $d_I^{q+1}d_I^q=0$; monicity of $i_{q+1}$ and epimorphicity of $\\pi_{q-1}$ give $\\ker d_I^q=\\operatorname{im}i_q=\\operatorname{im}d_I^{q-1}$ for $q>0$ and $\\ker d_I^0=i_0(N)$. Extend by zero below zero: this is the desired resolution in the sense of [def-sp-injective-resolutions]. For ANY such nonnegative injective resolution, Step 3 makes every $UI^q$ injective and makes $Us$ a quasi-isomorphism, hence an underlying injective resolution. The general bounded-below-injectives theorem [lem-weil-pbc-bounded-below-injectives-kinjective] applies in the abelian action category with lower bound zero and gives that $I$ is K-injective.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written resolution normalization helper; internal induction and homogeneous double-complex construction."
+   }
+  },
+  {
+   "text": "For each $q\\geq0$, Step 3 gives injectivity of $UI^q$. Apply [lem-sfb-internal-homogeneous-functions-injective] with $J=I^q$ and $n=p$. It supplies the internal homogeneous function object $T^{p,q}$ with exactly the displayed diagonal action and proves that it is equivariantly injective. Its hypothesis is underlying injectivity, now verified, and it allows arbitrary profinite $G$ and arbitrary commutative condensed $A$. All evaluations and its action are internal, after every profinite base change.",
+   "uses": [
+    "lem-sfb-internal-homogeneous-functions-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written resolution normalization helper; internal induction and homogeneous double-complex construction."
+   }
+  },
+  {
+   "text": "Define $D_i:T^{p,q}\\to T^{p+1,q}$ by precomposition with deletion of coordinate $i$, using the canonical generator-preserving functorial free maps of [lem-sfb-condensed-free-linearization-tensor], and set $d_h=\\sum_{i=0}^{p+1}(-1)^iD_i$. Set $d_v(f)=d_I^q\\circ f$. These are maps of the actual slice Homs of [def-sfb-condensed-homogeneous-functions]. Deleting a coordinate commutes with simultaneous left translation, so each $D_i$ is equivariant for their stated action; equivariance of $d_I^q$ gives the same for $d_v$. In $d_h^2$, deleting positions $i<j$ occurs twice: delete $j$ then $i$ with sign $(-1)^{i+j}$, or delete $i$ then position $j-1$ with sign $(-1)^{i+j-1}$. The terms cancel, so $d_h^2=0$. Also $d_v^2=0$, and postcomposition with $d_I$ commutes with every precomposition $D_i$, giving $d_hd_v=d_vd_h$. The formulas are natural under restriction of the test object, so these are equalities of internal equivariant maps.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor",
+    "def-sfb-condensed-homogeneous-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written resolution normalization helper; internal induction and homogeneous double-complex construction."
+   }
+  },
+  {
+   "text": "Totalize by [def-sp-double-complex-total]. On the $(p,q)$ summand the differential is $d_h+(-1)^pd_v$; its mixed terms are $(-1)^{p+1}d_vd_h$ and $(-1)^pd_hd_v$, which cancel by Step 6. In degree $n\\geq0$ there are just $n+1$ summands, all injective by Step 5. To check their biproduct is injective, let $X\\hookrightarrow Y$ be monic and $a:X\\to\\bigoplus_{p+q=n}T^{p,q}$. Project $a$ to each summand, extend each component to $Y$ by [def-sp-injective-resolutions], and combine the finitely many extensions using the biproduct projections and inclusions. The resulting map extends $a$. Thus $T^n$ is injective. For $n<0$ the sum is empty, so $T^n=0$ (also injective).",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written resolution normalization helper; internal induction and homogeneous double-complex construction."
+   }
+  },
+  {
+   "text": "Define $c_q:I^q\\to T^{0,q}$ by $c_q(m)(h)=m$ on every profinite slice, with $m$ restricted to that slice. Free linear extension followed by the tensor--Hom adjunction [lem-pc-sheaf-modules-tensor-closed] makes this an internal linear map. The action formula of [def-sfb-condensed-homogeneous-functions] gives $(g\\cdot c_q(m))(h)=g m=c_q(gm)(h)$, so it is equivariant. Its horizontal differential is $c_q(m)(h_1)-c_q(m)(h_0)=0$, and $d_vc_q(m)(h)=d_I(m)=c_{q+1}(d_I m)(h)$. Therefore its coprojection to the $(0,q)$ summand of the total of [def-sp-double-complex-total] defines $\\delta:I\\to T$ with $d_T\\delta=\\delta d_I$: the vertical sign there is $(-1)^0=1$. Every formula in this construction, including those of Step 2, uses only restricted sections, continuous multiplication or inversion, the internal action and internal linear maps; these commute with every profinite base change. This proves the required normalization of all formulas.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-sfb-condensed-homogeneous-functions",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written resolution normalization helper; internal induction and homogeneous double-complex construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-free-linearization-tensor",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sfb-internal-homogeneous-functions-injective",
+  "def-sfb-condensed-homogeneous-functions",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: internal-bar helper assembled from the existing homogeneous-function theorem, exact induction and Stacks 03EV/015Z. The blueprint itself does not supply this internal construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preservesInjectiveObjects|isKInjective.*bounded|IsKInjective.*bounded",
+   "results": "{\"t\": \"2026-10-22T06:04:26Z\", \"tool\": \"grep\", \"query\": \"preservesInjectiveObjects|isKInjective.*bounded|IsKInjective.*bounded\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\"], \"digest\": \"87d304282e567fee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions and adjoint preservation do not construct the internal profinite homogeneous injective total target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A profinite group action on condensed modules admits an injective resolution whose homogeneous function double complex total has equivariantly injective terms",
+   "results": "{\"t\": \"2026-10-22T06:04:26Z\", \"tool\": \"leansearch\", \"query\": \"A profinite group action on condensed modules admits an injective resolution whose homogeneous function double complex total has equivariantly injective terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.of\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.mk\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.InjectiveResolution.mk.noConfusion\"], \"digest\": \"04a3856b6aee635e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions and adjoint preservation do not construct the internal profinite homogeneous injective total target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"total\"",
+   "results": "{\"t\": \"2026-10-22T06:04:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Injective\\\", \\\"total\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Function.Injective.isStrictTotalOrder_onFun\", \"MvPolynomial.weightedTotalDegree_rename_of_injective\", \"Bundle.TotalSpace.mk_injective\"], \"digest\": \"087e9ee0eb2d82da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions and adjoint preservation do not construct the internal profinite homogeneous injective total target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a condensed ring a profinite group equivariant injective resolution remains injective after forgetting the action and its homogeneous internal function double complex has injective finite total terms",
+   "results": "{\"t\": \"2026-10-22T06:04:36Z\", \"tool\": \"leanfinder\", \"query\": \"Over a condensed ring a profinite group equivariant injective resolution remains injective after forgetting the action and its homogeneous internal function double complex has injective finite total terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CategoryTheory.InjectiveResolution.injective\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.InjectiveResolution.self\", \"CategoryTheory.InjectiveResolution.of_def\"], \"digest\": \"2553eaa01775c8e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions and adjoint preservation do not construct the internal profinite homogeneous injective total target."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesInjectiveObjects",
+   "results": "{\"t\": \"2026-10-22T06:05:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.PreservesInjectiveObjects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesInjectiveObjects\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence\", \"CategoryTheory.Functor.injective_obj\", \"CategoryTheory.Functor.injective_obj_of_injective\", \"CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj\", \"CategoryTheory.Functor.PreservesInjectiveObjects.mk\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects\"], \"digest\": \"730e0f5e7e4a2643\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions and adjoint preservation do not construct the internal profinite homogeneous injective total target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from internal continuous group actions on module sheaves preserves injective objects by the exact free induction adjunction; homogeneous internal Hom forms an injective total complex",
+   "results": "{\"t\": \"2026-10-22T06:05:25Z\", \"tool\": \"leanfinder\", \"query\": \"The forgetful functor from internal continuous group actions on module sheaves preserves injective objects by the exact free induction adjunction; homogeneous internal Hom forms an injective total complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesInjectiveObjects\", \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatFunctor\", \"PresheafOfModules.injective_of_mono\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"Module.injective_object_of_injective_module\"], \"digest\": \"0832c789df6e8777\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions and adjoint preservation do not construct the internal profinite homogeneous injective total target."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|coinduc|injective",
+   "results": "{\"t\": \"2026-10-22T11:20:45Z\", \"tool\": \"grep\", \"query\": \"homogeneous|coinduc|injective\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\"], \"digest\": \"83a6366eb0748b68\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply general adjoint/injective-resolution facts or fixed ordinary-ring condensed constructions, not this internal equivariant homogeneous total construction; existing DAG nodes for the applicable general facts are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact free induction functor for internal profinite group actions on condensed modules makes forgetting preserve injectives and gives a homogeneous injective double complex",
+   "results": "{\"t\": \"2026-10-22T11:20:45Z\", \"tool\": \"leansearch\", \"query\": \"An exact free induction functor for internal profinite group actions on condensed modules makes forgetting preserve injectives and gives a homogeneous injective double complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.exact_iff_exact_map_forget₂\", \"Condensed.freeForgetAdjunction\", \"CategoryTheory.injectiveResolutions\", \"Condensed.free\", \"LightCondensed.freeForgetAdjunction\", \"Profinite.forget_preservesLimits\", \"Condensed.setAbAdjunction\", \"ProfiniteGrp.instPreservesLimitsProfiniteForget₂\"], \"digest\": \"da7a651ab82bf7c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply general adjoint/injective-resolution facts or fixed ordinary-ring condensed constructions, not this internal equivariant homogeneous total construction; existing DAG nodes for the applicable general facts are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesInjectiveObjects",
+   "results": "{\"t\": \"2026-10-22T11:20:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.PreservesInjectiveObjects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesInjectiveObjects\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence\", \"CategoryTheory.Functor.injective_obj\", \"CategoryTheory.Functor.injective_obj_of_injective\", \"CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj\", \"CategoryTheory.Functor.PreservesInjectiveObjects.mk\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects\"], \"digest\": \"730e0f5e7e4a2643\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply general adjoint/injective-resolution facts or fixed ordinary-ring condensed constructions, not this internal equivariant homogeneous total construction; existing DAG nodes for the applicable general facts are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal modules over a condensed ring with profinite group action, free induction is exact and preserves underlying injectivity, and homogeneous functions on an injective resolution give an injective total complex",
+   "results": "{\"t\": \"2026-10-22T11:20:54Z\", \"tool\": \"leanfinder\", \"query\": \"For internal modules over a condensed ring with profinite group action, free induction is exact and preserves underlying injectivity, and homogeneous functions on an injective resolution give an injective total complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"Profinite.NobelingProof.succ_mono\", \"CategoryTheory.InjectiveResolution.injective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\"], \"digest\": \"97dad3ebc65fe3c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply general adjoint/injective-resolution facts or fixed ordinary-ring condensed constructions, not this internal equivariant homogeneous total construction; existing DAG nodes for the applicable general facts are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous equivariant internal function modules on profinite powers are injective and form a first quadrant double complex with finite injective total terms over any condensed ring",
+   "results": "{\"t\": \"2026-10-22T11:21:21Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous equivariant internal function modules on profinite powers are injective and form a first quadrant double complex with finite injective total terms over any condensed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.instAB5CondensedMod\", \"Profinite.NobelingProof.succ_mono\", \"CondensedMod.IsSolid\", \"CondensedMod.ofSheafProfinite\", \"Profinite.NobelingProof.succ_exact\"], \"digest\": \"fb07da9b3bffc8ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply general adjoint/injective-resolution facts or fixed ordinary-ring condensed constructions, not this internal equivariant homogeneous total construction; existing DAG nodes for the applicable general facts are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-resolution-bar-normalization",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 1-3 (compatible injectives, free induction, homogeneous total target). Flatness and adjoint tools: Stacks 03EV lemma-j-shriek-flat; 015Z lemma-adjoint-preserve-injectives. Exact independent internal-bar reference WANTED.",
+   "via": [
+    "lem-sfb-equivariant-resolution-bar-normalization",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homogeneous-injective-total-target",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Reused the existing free-linearization, internal-to-section tensor comparison, flat extension-by-zero, action-category infrastructure and homogeneous-functions injectivity nodes. Wrote induction and its adjunction explicitly on generalized generators, checked exactness before applying the injectivity theorem, constructed a nonnegative resolution, and checked deletion cancellation, finite-total injectivity and the constant augmentation with signs. No new nodes. Repair of returned head eb1a8ea214b: rebased onto the current unsplit item; reread every cited statement. Updated steps 1, 2 and 6 to use the current coherent-site and fixed-generator normalization, and refreshed the five stale citation entries for free linearization and action infrastructure. The latter now explicitly quantifies continuous group homomorphisms; no arbitrary continuous-map restriction is used.",
+  "blueprint": "Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, open direct-image input: the compatible injective resolution, free induction and homogeneous total target extracted as old resolution-normalization steps 1-3. The ancestor tool returns None; the inherited from.node and via chain are retained. Whole-blueprint searches homogeneous, coinduction, free flat and injective give no exact statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Generic flatness of extension by zero along a slice, applied to the represented profinite parameter; the unit has no other statement of this ringed-site tool."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact tensor comparison between internal module objects and section-module sheaves; needed to apply ringed-site flatness in this coefficient category."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic sheaf tensor universal property and tensor-Hom adjunction used to construct internal induction and the constant internal-Hom maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-75c0b79f6",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-75c0b79f6 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, along with every cited statement. The delivery is the item JSON plus the report, with no new nodes; the statement and stmt_deps are unchanged and proof_deps equals the union of the step uses. There is no repair note and no re-split order. This is a re-delivery after return L (side completion not promoted). Diffing it against the earlier f191eba0 head, which was reviewed PASS, shows wording changes only, in steps 1, 2 and 6 (coherent site, canonical generators of the fixed free adjunction). Two cited statements changed: the infrastructure node's restriction is now along a continuous group homomorphism, which the item never uses, and the linearization node gained citation tags only. Step checks: (1) with X=P represented, F_X(V) is the sum over V->P of A(V), which is the j_{P!}A_P presheaf (Stacks 03EV, sites-modules.tex:4389-4419, clause 2); the internal/section comparison reflects flatness, so A[P] is flat. (2) h~([g]⊗m)=g·h(m) is balanced and equivariant, and its inverse is evaluation at [1]; I checked both composites. (3) U is exact and detects exactness, and UL=A[G]⊗-, so L is exact; Stacks 015Z (homology.tex:7269-7301, (b)⇒(c)) then shows U preserves injectives. (4) The successive-cokernel resolution is correct, and the bounded-below K-injectivity leaf gives null-homotopy. (5) The homogeneous-functions node needs only UI^q injective, and its action is exactly the item's with n=p. (6) For i<j the two deletion orders carry signs (-1)^{i+j} and (-1)^{i+j-1}, so d_h^2=0. (7) The cross terms cancel under the def-sp-double-complex-total convention; injectivity of the finite biproduct is proved directly, and T^n=0 for n<0. (8) The constants are equivariant, d_h c=0, and the vertical sign at p=0 is +1. Edge cases checked: G=1, P empty, p=q=0, A=0, infinite or non-abelian G. I accept the three tool uses (j-shriek-flat, internal-section tensor comparison, tensor-closed) as generic. Batch-5: lem-trf-free-module-sheaf-universal-property, reached via free-linearization, is the generic universal property of the sheafified free module. It is neither the trace formula nor Poincare duality nor a step of their proofs, so it is accepted. Maintainer note: the now-split N5 node lem-sfb-condensed-action-injective-restriction states the item's paragraphs 2-3 with H=1. The parent fixed the item's statement on the same day, so this is not a delivery duplicate; I recommend cross-citing. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomogeneousInjectiveTotalTarget",
+  "declaration": "CategoryTheory.CondensedBar.homogeneous_injective_total_target",
+  "declarations": [
+   "CategoryTheory.CondensedBar.homogeneousSectionRings",
+   "CategoryTheory.CondensedBar.homogeneousFreeSheaf",
+   "CategoryTheory.CondensedBar.homogeneousParameterGenerator",
+   "CategoryTheory.CondensedBar.HomogeneousFreeInduction",
+   "CategoryTheory.CondensedBar.homogeneousTargetValue",
+   "CategoryTheory.CondensedBar.HomogeneousInjectiveTotal",
+   "CategoryTheory.CondensedBar.HomogeneousInjectiveTargetData",
+   "CategoryTheory.CondensedBar.homogeneous_injective_total_target"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HomogeneousInjectiveTotalTarget.lean",
+  "statement": "theorem homogeneous_injective_total_target : Nonempty (HomogeneousInjectiveTargetData A G)",
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The conclusion supplies ActionAbelian for the fixed additive category, exact normalized free induction, free-module presentation and flatness, existence and compatibility of every nonnegative injective resolution, and homogeneous injective total data. All maps and actions retain their slice formulas. No object is chosen from this existence theorem. Three already-landed definition dependencies are added for the fixed free-adjunction generators, the extension-by-zero presheaf and module sheafification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa0ef8b9f",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Item JSON differs from side-live only in lean and 3 added stmt_deps (landed def nodes free-module-generators/extension-by-zero-presheaf/presheaf-modules-sheafification, all used); 12 dep records byte-identical; statement verbatim. Clauses: flat A[P] all P; HomogeneousFreeInduction pins translation k[g]=[kg], untranspose g·h(m), transpose eval at [1] on generalized generators (scaling underlying only rescales the model); U exact + PreservesInjectiveObjects; resolutions exist, ∀ resolution underlying injective/quasiIso/IsKInjective; T^{p,q} via recorded HomogeneousFunctions (diagonal action), horizontal Σ(-1)^i deletion, vertical d_I∘, Mathlib total d_h+(-1)^p d_v, injective terms/totals, zero below 0, δ pinned by constants into (0,q). ActionAbelian as Prop-field conclusion data with fixed preadditive. Edge cases P=∅, G=1, A=0, p=q=0, n<0 covered; no universe restriction; only theorem sorried; docstrings/8 steps present. Advisory: onSections/pureTensor owned only by theorem lem-sfb-condensed-internal-bar-resolution and uncited (same as ≥5 landed nodes; needs existing:true def owner); sectionRingSheaf/Mod monoidal def owners uncited; freePresentation is an unpinned Nonempty iso (no citer uses it beyond flatness); second reading is a self-review. No file changed, no compile."
+ }
+}

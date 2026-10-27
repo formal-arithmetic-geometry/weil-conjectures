@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-constructible-reduction-good",
+ "kind": "statement",
+ "title": "Constructible integral reduction has the full system domain",
+ "statement": "Let D be a finite-field datum, l a prime different from its characteristic, and E a finite extension of Q_l. For any scheme X over Spec D.k and any derived-complete bounded constructible integral object K on X, the actual strict quotient reduction of K is Good: normalized, with uniform constructible cohomology and Tor intervals and a compatible Origins witness for its actual quotient transitions. No finite-type condition on X is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Parent completed-shriek composition node, proof steps 7 and 8; Stacks 0941, 0F10, 0GL1 and 0E8I, as detailed in the declaration docstring."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Apply the recorded calculus reduction_normalized field. For its reductionEvaluation isomorphism, transport constructibility and cohomological support from the common interval in sfIntegralConstructible. Apply integral_residue_tor to the residue interval, using residue-field invertibility transported from the finite-field base. Transport the resulting common Tor interval through reductionEvaluation. This gives LevelBounds with the same cohomology and Tor interval.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-integral-residue-tor",
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-weil-structure-direct-images-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteRing_constructibleDerived_origin to every evaluated bounded constructible level. Retain the resulting bounded constructible etale objects, and use their actual comparison images as the fixed-scalar levels. The derived realization equivalence and the returned origin isomorphisms give evaluation isomorphisms to the actual system levels.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the actual adjacent system transition by the evaluation isomorphisms and by the canonical realization/restriction comparison, including originRestrictionEquality. Fullness of the derived realization equivalence gives the fixed-scalar transition, and map_preimage proves transitionSquare. Restriction of scalars is exact, so the restriction of the retained bounded-below etale target is bounded below. Apply the comparison Hom bijection to lift the fixed transition conjugated by the retained origin isomorphisms and pbcDerivedComparisonRestrict. Its image equation and isomorphism cancellation prove originSquare. Assemble Origins and then all three conjuncts of Good. No normalization cocycle or equality detection by evaluation is used.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
+    "def-weil-pbc-witness-compatibility",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-weil-structure-direct-images-constructible",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "def-weil-pbc-witness-compatibility",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-compare-derived and lemma-compare-constructible-derived; direct bounded-below Hom descent of adjacent restriction maps, combined with the existing coefficient calculus and residue-Tor theorem."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructible derived complete integral coefficients normalized reductions with uniform Tor bounds preserved by proper pushforward and extension by zero",
+   "results": "{\"t\": \"2026-10-25T13:33:56Z\", \"tool\": \"leansearch\", \"query\": \"Constructible derived complete integral coefficients normalized reductions with uniform Tor bounds preserved by proper pushforward and extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"Condensed.instAB4CondensedMod\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.IsIntegralHom.recOn\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"f73f45118e53480f\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized coefficient sequences with uniform constructible cohomology and Tor bounds have compatible etale origins",
+   "results": "{\"t\": \"2026-10-25T13:33:58Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized coefficient sequences with uniform constructible cohomology and Tor bounds have compatible etale origins\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instEtaleRing\", \"Algebra.Etale.comp\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"913071b33a85af25\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedCoefficientSequence|LevelBounds|sfIntegralConstructible",
+   "results": "{\"t\": \"2026-10-25T13:33:58Z\", \"tool\": \"grep\", \"query\": \"IsNormalizedCoefficientSequence|LevelBounds|sfIntegralConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompletedShriekCompositionLaws",
+  "date": "2026-10-25",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The common-bounds and coefficient-comparison argument; parent node proof steps 7 and 8.",
+   "via": [
+    "lem-sf-completed-shriek-composition-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ConstructibleReductionGood",
+  "file": "lean/Sheaf/SixFunctors/ConstructibleReductionGood.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.constructibleReduction_good",
+  "statement": "theorem constructibleReduction_good (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (X : Over (Spec (CommRingCat.of D.k))) (K : Integral l E X.left)\n    (hK : sfIntegralConstructible l E X.left K) :\n    Good l E X.left ((calculus l E X.left).reduction.obj K)",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T164514-L-1027766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261025T203716-L-2843405",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

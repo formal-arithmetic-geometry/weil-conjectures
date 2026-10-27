@@ -1,0 +1,258 @@
+{
+ "id": "lem-pur-coherent-reduction-kflat",
+ "kind": "statement",
+ "title": "Coherent reduction preserves independent-coefficient K-flatness",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and schemes in a universe $u$ [def-pc-scheme]. For a scheme $W$, use its small pro-etale ringed sequence site $\\mathbf N\\times W_{\\mathrm{proet}}$, whose index $n\\geq0$ means $B_{W,n}=(\\mathcal O_E/\\varpi^{n+1})_W$, with actual quotient ring maps; put $A_W=\\lim_nB_{W,n}$ and let $\\mathscr S_W$ be its category of module sheaves, equivalently strict quotient-semilinear systems [def-coef-ringed-sequence-site]. Write $e_{W,n}$ for exact evaluation, $\\operatorname{Res}_{W,n}$ for restriction along $A_W\\to B_{W,n}$ and $U_W:\\mathscr S_W\\to\\operatorname{Tow}(\\operatorname{Mod}(A_W))$ for their simultaneous exact scalar restriction. Use ordinary unbounded integer-indexed cochain and derived categories, with localization $q_W$ for $A_W$-modules, $q^s_W$ for sequence modules and $q^t_W$ for towers [def-weil-abstract-derived-category]. Use the fixed derived adjunction $\\mathcal R_W\\dashv\\mathcal L_W$, with $\\mathcal L_W=R\\lim\\circ D(U_W)$, and the specified derived tensor and cochain tensor models on the sequence site [lem-coef-derived-system-evaluation-calculus]. A good integral complex is K-flat with flat terms; K-flat means that its direct-sum total tensor with every acyclic module complex is acyclic [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. All comparisons below use the actual chosen adjunctions, not arbitrary isomorphisms between their objects. No boundedness, constructibility, completeness of inputs, or invertibility of $\\ell$ on the schemes is assumed. Write $L^0_W=\\lim\\circ U_W$ and $r_W=\\operatorname{leftAdjoint}(L^0_W)$ for ordinary coherent reduction, equipped with its specified adjunction $r_W\\dashv L^0_W$ and unit $\\eta^0_W$; concretely its components are quotient extension $B_{W,n}\\otimes_{A_W}M$ and its transitions are induced by the actual quotient maps. A superscript $c$ means termwise application to cochain complexes. For a coherent complex $C$, let $\\lambda_C:q_W((L^0_W)^c C)\\to\\mathcal L_W(q^s_WC)$ be the canonical right-derived limit unit, with the exact-restriction/localization factorization inserted (the map named pullbackTensorLimitUnit). For every good integral complex $P$, $r_W^cP$ is K-flat as a complex of module sheaves on the actual ringed sequence site. Explicitly, for every acyclic complex $Z$ of sequence modules,\n$$\\operatorname{Tot}(Z\\otimes r_W^cP)\\text{ is acyclic}.$$\nThe predicate is IsKFlatIndependentCoefficients with sequence-site object universe $u+1$, morphism universe $u$ and module universe $u+1$; it quantifies over all such acyclic $Z$, not just levelwise normalized systems. This is pullbackTensorReductionGood. The input has flat terms because it is good; no extra termwise-flatness condition is imposed on any test complex or any output datum.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E (lemma-pullback-K-flat), Tag 0941 (ringed sequence-site construction); independent-universe K-flatness on the whole sequence ringed site.",
+  "lean_module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "lean_file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+  "lean_line": 272,
+  "declaration": "WeilConjectures.pullbackTensorReductionGood"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For every n use pullbackTensorReductionEvaluationComplex to identify evaluation of the ordinary reduction of P with scalarReductionExtension applied degreewise to P. The first clause of coefficientTensorModelPreservation preserves K-flatness under this scalar extension for every K-flat P, with no flatness assumption on the quotient ring. Transport along the stated cochain isomorphism. In particular it applies to P.property.1 for each good P.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YN, 07A4 and 0941; assembly of the existing Lean declarations named in this step."
+   }
+  },
+  {
+   "text": "Fix an arbitrary acyclic sequence complex Z. Exact evaluation gives an acyclic complex Z_n for every n. The uniquely specified coefficientEvaluationTensorIso identifies evaluation of Tot(Z tensor rP) with Tot(Z_n tensor (rP)_n). K-flatness from the first step makes the latter acyclic. The componentwise-exactness field of semilinearDerivedSections.systems, applied to each short complex of Tot(Z tensor rP), then gives acyclicity of the sequence complex itself. This tests every Z in coefficient universe u+1, so proves precisely IsKFlatIndependentCoefficients at the displayed universes. No condition on Z or on its horizontal transitions is imposed.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YN, 07A4 and 0941; assembly of the existing Lean declarations named in this step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YN, 07A4 and 0941; M3 Lean proof from the existing normalized coefficient calculus, componentwise exactness and resolving-representative descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlat",
+   "results": "{\"t\": \"2026-10-27T06:10:12Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CochainComplex.IsKFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat",
+   "results": "{\"t\": \"2026-10-27T06:10:12Z\", \"tool\": \"grep\", \"query\": \"IsKFlat|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlat",
+   "results": "{\"t\": \"2026-10-27T06:10:20Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CochainComplex.IsKFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat",
+   "results": "{\"t\": \"2026-10-27T06:10:20Z\", \"tool\": \"grep\", \"query\": \"IsKFlat|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary coherent quotient reduction of a flat-term K-flat complex of completed coefficient module sheaves is K-flat on the ringed sequence site",
+   "results": "{\"t\": \"2026-10-27T06:10:21Z\", \"tool\": \"leansearch\", \"query\": \"Ordinary coherent quotient reduction of a flat-term K-flat complex of completed coefficient module sheaves is K-flat on the ringed sequence site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"RingHom.Flat\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"SheafOfModules.IsQuasicoherent.recOn\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"Module.Flat.localizedModule\"], \"digest\": \"dfc4a4a985e5c9f5\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary coherent quotient reduction of a flat-term K-flat complex of completed coefficient module sheaves is K-flat on the ringed sequence site",
+   "results": "{\"t\": \"2026-10-27T06:10:26Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary coherent quotient reduction of a flat-term K-flat complex of completed coefficient module sheaves is K-flat on the ringed sequence site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Module.flat_of_isLocalized_span\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.of_flat_tensorProduct\", \"AdicCompletion.flat_of_isNoetherian\", \"CategoryTheory.compatiblePreservingOfFlat\", \"Module.Flat.of_forall_exists_factorization\"], \"digest\": \"dff639e388757506\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars from a completed ring to the quotient ring sheaf on the sequence site preserves independent coefficient K-flatness",
+   "results": "{\"t\": \"2026-10-27T06:10:26Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars from a completed ring to the quotient ring sheaf on the sequence site preserves independent coefficient K-flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.Flat.of_forall_exists_factorization\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.flat_of_localized_span\", \"Module.Flat.iff_forall_exists_factorization\", \"Module.FaithfullyFlat\", \"Module.flat_of_localized_maximal\", \"Module.flat_iff_of_isLocalization\"], \"digest\": \"96972778ffdb61b4\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of sheaves of modules along each quotient of a ring sequence sends K-flat complexes to K-flat complexes on the whole sequence site",
+   "results": "{\"t\": \"2026-10-27T07:14:46Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars of sheaves of modules along each quotient of a ring sequence sends K-flat complexes to K-flat complexes on the whole sequence site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.trans\"], \"digest\": \"740f603ef8c6b48e\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits give module flatness, projective resolutions, abstract total tensor constructions or light condensed structures, not whole-sequence-site independent-coefficients K-flatness of ordinary coherent quotient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat|k_flat",
+   "results": "{\"t\": \"2026-10-27T07:15:04Z\", \"tool\": \"grep\", \"query\": \"IsKFlat|KFlat|k_flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits give module flatness, projective resolutions, abstract total tensor constructions or light condensed structures, not whole-sequence-site independent-coefficients K-flatness of ordinary coherent quotient reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of sheaves on an inverse sequence of ringed sites is K-flat when each level is K-flat and evaluation commutes with tensor products",
+   "results": "{\"t\": \"2026-10-27T07:15:04Z\", \"tool\": \"leansearch\", \"query\": \"A complex of sheaves on an inverse sequence of ringed sites is K-flat when each level is K-flat and evaluation commutes with tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"RingHom.Flat\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"RingHom.Flat.comp\"], \"digest\": \"3eba8727a3e0a344\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits give module flatness, projective resolutions, abstract total tensor constructions or light condensed structures, not whole-sequence-site independent-coefficients K-flatness of ordinary coherent quotient reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, SheafOfModules",
+   "results": "{\"t\": \"2026-10-27T07:15:04Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex, SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits give module flatness, projective resolutions, abstract total tensor constructions or light condensed structures, not whole-sequence-site independent-coefficients K-flatness of ordinary coherent quotient reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor products and acyclicity of sheaf complexes are computed levelwise on the category of inverse systems with varying coefficient rings",
+   "results": "{\"t\": \"2026-10-27T07:15:05Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor products and acyclicity of sheaf complexes are computed levelwise on the category of inverse systems with varying coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"HomologicalComplex.instHasTensorOfHasTensorX\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"286bb01d1ac43f10\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits give module flatness, projective resolutions, abstract total tensor constructions or light condensed structures, not whole-sequence-site independent-coefficients K-flatness of ordinary coherent quotient reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-completed-pullback-tower-realizations",
+  "date": "2026-10-27",
+  "group": "NF"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.pullbackTensorReductionGood",
+   "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+   "file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+   "line": 272,
+   "statement": "theorem pullbackTensorReductionGood (W : Scheme.{u})\n    (P : (integralOperationsGoodComplex l E W).FullSubcategory) :\n    @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (ℕ × W.ProEt) (inferInstance : Category.{u} (ℕ × W.ProEt))\n      (pullbackTensorSequenceSmall W)\n      (coefficientSequenceTopology (ProEt.topology W))\n      (coefficientSequenceCommRingSheaf l E W)\n      (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P.obj)",
+   "proposed_module": "Sheaf.Paper.CoherentReductionKflat",
+   "note": "Existing local declaration ownership for the released stage-1 re-split, not a closed-proof attachment. Current module is authoritative; proposed module is a future stage-2/3 extraction only."
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-coherent-reduction-kflat",
+  "worker": "stage1",
+  "summary": "NB: proved coherent reduction K-flat by independent-universe scalar extension at every quotient, ordinary evaluation/tensor comparison and componentwise detection of acyclicity. All facts are existing nodes, so no new nodes are needed; all acyclic sequence-module tests, chosen ordinary reduction maps and coefficient universes are retained.",
+  "blueprint": "Latest def-weil-frobenius-coefficient-twists, sentence that actions commute with finite reduction and scalar extension; this extracted technical obligation supplies the good reduction representatives. The inherited broken created.item ancestry is retained and documented, not replaced by a fabricated ancestor.",
+  "retained_arguments_status": "Unverified inherited argument, not an accepted proof. Kept verbatim to satisfy the repair order; further splitting must justify every non-elementary inference.",
+  "retained_arguments": [
+   {
+    "old_step": 12,
+    "step": {
+     "text": "pullbackTensorReductionGood: extension to the sequence ring preserves K-flatness by the tensor/restriction\nadjunction, since restriction preserves acyclic complexes. Apply the independent\ncoefficient characterization at the explicitly sized sequence site.",
+     "uses": [
+      "lem-coef-derived-system-evaluation-calculus",
+      "def-coef-ringed-sequence-site",
+      "def-sf-strict-roos-functor",
+      "def-weil-derived-pullback-tensor-hom",
+      "lem-weil-pbc-resolving-representative-whiskering",
+      "lem-pc-kflat-resolution"
+     ],
+     "elementary": false
+    }
+   }
+  ],
+  "blueprint_ancestry_note": "The documented blueprint.from.node=null represents the broken created.item chain. The parent’s historical from.node association and exact declaration obligation remain in from.place; parent provenance fields are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-tensor-evaluation",
+    "why": "Generic ordinary evaluation/tensor comparison for the actual sequence-site and fiber tensor models, used on each bidegree before totalization; the unit provides no such ordinary tensor comparison and its finite-reduction route is unchanged."
+   },
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Existence of a CoefficientClosedStructure and CoefficientTensorModels on the sequence ringed site and on each level site, needed to instantiate the hypotheses of lem-coef-semilinear-tensor-evaluation; the unit's route gives no such existence statement. Added by the maintainer review."
+   }
+  ]
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The computed created.item ancestry is broken at the parent module name; blueprint_refs.py ancestor returns None. Documentary association retained from the parent: def-weil-frobenius-coefficient-twists, The coefficient twists commute with finite reduction and scalar extension; the coherent reduction and strict tower normalizations are the data used in the completed tensor/pullback comparison. Extracted obligation: pullbackTensorReductionGood.",
+   "via": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NB-d9a3c6db0",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-d9a3c6db0 (reviewer sub-agent of L); spot-checked: I read the item, all 9 nodes it cites and Stacks sites-cohomology.tex Tag 0G7E (lemma-pullback-K-flat, l.3508). The statement is unchanged and true: coherent reduction is pullback along (N×W_proet, B_•)→(W_proet, A_W), so a K-flat complex with flat terms stays K-flat. Universes (objects u+1, morphisms u, modules u+1) and arbitrary acyclic test complexes Z are kept. There are no new nodes. This is not a compressed re-split: the old proof was one unverified paragraph, kept under retained_arguments.\n\nStep 1: lem-pur-kflat-change-of-rings-independent applies to A_W→B_{W,n} on the small pro-étale site, which is essentially small in u+1, and does not need B_n flat over A_W. Step 2: an exact evaluation (lem-pur-system-evaluation-topos), through the equivalence of lem-pur-system-ringed-sequence-site, sends acyclic Z to acyclic Z_n.\n\nStep 3 had one fault (C3/E1). lem-coef-semilinear-tensor-evaluation assumes chosen Closed structures and Models on the sequence site and on (J,B_n), and the step never supplied them. FIX: Step 3 and proof_deps now also cite lem-sf-ringed-derived-tensor-hom-adjunction, which provides a CoefficientClosedStructure and CoefficientTensorModels on any ringed site; it is also added to split_report.tool_uses. It does not lead back to the item, so there is no cycle. With that, the step is an elementary sum of ordinary isomorphisms, with evaluation preserving the coproducts (lem-pur-system-coproducts) and the sign (−1)^p checked.\n\nStep 4: def-pc-kflat-complex, then the last clause of lem-pur-system-derived-evaluation (a quasi-isomorphism is detected componentwise) applied to T→0.\n\nThe duplicate search found no node stating the item; I read lem-pur-quotient-expression-strict-kflat-towers, lem-pur-varying-ring-tensor-comparison, lem-pur-system-ordinary-tensor-reduction and lem-pur-quotient-reduction-tensor-evaluation. I accept the worker's tool_use of lem-coef-semilinear-tensor-evaluation. Edge cases checked: P=0, Z=0, unbounded complexes, level n=0, Z supported on a single level or not normalized, empty W. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-pur-coherent-reduction-kflat.json; only proof, proof_deps and split_report change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "declaration": "WeilConjectures.pullbackTensorReductionGood",
+  "statement": "theorem pullbackTensorReductionGood (W : Scheme.{u})\n    (P : (integralOperationsGoodComplex l E W).FullSubcategory) :\n    @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (ℕ × W.ProEt) (inferInstance : Category.{u} (ℕ × W.ProEt))\n      (pullbackTensorSequenceSmall W)\n      (coefficientSequenceTopology (ProEt.topology W))\n      (coefficientSequenceCommRingSheaf l E W)\n      (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P.obj)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing declaration, read in the live server source with scompile.py --source. The good input is the full subcategory of independent-coefficients K-flat complexes with flat terms; the conclusion uses ordinary coherent reduction and all acyclic sequence-module test complexes at object/morphism/module universes u+1/u/u+1. This is a stage-2 attachment only; the existing theorem proof remains sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-230af5ae8",
+  "group": "NF",
+  "result": "pass",
+  "note": "Existing:true attachment of WeilConjectures.pullbackTensorReductionGood (CompletedPullbackTowerRealizations:272); only the item's lean field changed (node diff vs side-live); statement verbatim in file; proof sorry. Clauses checked: good P = IsKFlatIndependentCoefficients plus termwise IsFlatOnSite over the completed ring at u+1; r_W = (coefficientSequenceRestriction ⋙ lim).leftAdjoint as the node defines; conclusion is IsKFlatIndependentCoefficients.{u+1,u,u+1} on (ℕ×W.ProEt, coefficientSequenceTopology, coefficientSequenceCommRingSheaf), i.e. all acyclic tests with no normalization or flatness; no extra binders. Mathematics true (levelwise Z_n⊗_A P), node proof sound and cites the ringed tensor-hom adjunction. Advisory: docstring blueprint tag is the parent def node (deferred to the planned extraction); owners of integralOperationsGoodComplex and pullbackTensorOrdinaryReduction uncited but defined inline in the node (precedent). No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T112410-L-1579585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

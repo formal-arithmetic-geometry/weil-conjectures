@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-affine-diagonal-dnc-coordinate-identity",
+ "kind": "statement",
+ "title": "Normalized DNC identity in geometric section coordinates",
+ "statement": "For P in the finite setting and Y separated finite type over k, let X be ordered affine d-space over Y, p its projection, W=X×_Y X, s its diagonal, and delta the uniquely normalized DNC comparison [thm-pur-dnc-invariance]. For every homogeneous-normalized Rees comparison q, let S and N be the source and normal ordinary-etale geometric section coordinates [def-pur-affine-diagonal-section-coordinates]. Then delta.hom followed by normalComparison.hom and nu*(N.hom) equals sourceComparison.hom followed by nu*(S.hom). This statement contains no integration transpose, Tate orientation, or annihilating exponent.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "stmt_deps": [
+  "def-pur-affine-diagonal-section-coordinates",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof": [
+  {
+   "text": "The difference-coordinate isomorphism carries the diagonal pair to the standard affine pair. Apply extended Rees to the isomorphism of pairs. The polynomial formula is y_i-x_i=t*v_i. At one the map is difference coordinates; at zero it is the homogeneous normal-coordinate map, because the normalized Rees comparison preserves each degree-one generator. This identifies the whole family with the standard constant family, including its actual section.",
+   "uses": [
+    "def-pur-affine-diagonal-integration-constructions",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical exceptional mate for this family isomorphism and mate pasting with the two fibre squares. Its sectionRestrictionIso readings are the two geometric section comparisons. Apply the normalization equation of the unique DNC arrow at the identity base change, and cancel identity-pullback comparisons. The resulting equality is exactly the displayed equation. Empty lists and empty schemes satisfy the same identities.",
+   "uses": [
+    "def-pur-affine-diagonal-section-coordinates",
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "lem-pur-dnc-section-geometry",
+  "def-pur-affine-diagonal-section-coordinates",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Deformation to the normal cone affine space section invariant normalization",
+   "results": "Eight results concerning scheme normalization and normalized factors; none concerns the DNC section invariant.",
+   "date": "2026-10-26",
+   "verdict": "no match; uses project section geometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal cone standard affine pair section invariant integration transpose two fibre restrictions",
+   "results": "Eight results: affine-space reindexing, homOfVector projection and normalization morphisms. None concerns etale dualizing sections or DNC normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affineDiagonal.*Coordinates|sectionRestrictionIso|affineDiagonalPresentedTranspose",
+   "results": "msearch grep returned OK 0 hits. Local rg separately found and read AffineDiagonalIntegrationConstructions, PurityDncComparisons, PurityDncInvariance, TraceTransposeBaseChange, AffineTranslationTrace, DiagonalDncChartNormalization and FiniteRingSectionDeformation. No existing declaration gives the two global ordered section-coordinate compatibility equations. Blueprint search for diagonal section coordinates, restricted transposes, and dnc coordinate identity returned no matches.",
+   "date": "2026-10-26",
+   "verdict": "new geometric coordinates and separate compatibility steps needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalDncNormalization",
+  "group": "U2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC",
+   "via": [
+    "lem-pur-affine-diagonal-dnc-normalization",
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalDncCoordinateIdentity",
+  "file": "lean/Sheaf/Paper/AffineDiagonalDncCoordinateIdentity.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalDncCoordinateIdentity",
+  "statement": "theorem affineDiagonalDncCoordinateIdentity (P : PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))\n    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (d : ℕ) :\n    let p := affineDiagonalProjection Y d\n    let s := pullback.diagonal p\n    let aX := p ≫ aY\n    letI := affineDiagonalProjection_smooth Y d\n    letI := SmoothOfRelativeDimension.smooth d p\n    letI := Dnc.compactifiable P p aY\n    let δ := (Dnc.existsUnique_dncInvariance P d (pullback.fst p p) aX s\n      (pullback.diagonal_fst p)).exists.choose\n    let C := (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} P.Coefficient) (affineDiagonalSpace Y d)).mapDerivedCategory\n    ∀ (q : s.ker.normalCone ≅ PurityNormalBundle.normalCone s)\n      (hq : Etale.FiniteSmoothPurity.ReesConeNormalized s q),\n      δ.hom ≫ (Dnc.normalComparison P d (pullback.fst p p) aX s\n          (pullback.diagonal_fst p)).hom ≫\n        C.map (P.affineDiagonalNormalSectionCoordinates Y aY d q hq).hom =\n      (Dnc.sourceComparison P d (pullback.fst p p) aX s).hom ≫\n        C.map (P.affineDiagonalSourceCoordinates Y aY d).hom",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T203320-L-2803393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T203320-L-2803393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

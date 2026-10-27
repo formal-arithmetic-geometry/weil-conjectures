@@ -1,0 +1,203 @@
+{
+ "id": "lem-sfb-supported-finite-image-classical-origin",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph, descendant finite-coefficient affine heart bound: Classical torsion origin of supported finite-coefficient images.",
+   "via": [
+    "lem-sfb-supported-image-torsion-reductions-cd",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Classical torsion origin of supported finite-coefficient images",
+ "statement": "Let A be a finite discrete commutative topological ring, and A_S its normalized condensed coefficient object [def-pe-finite-discrete-presentation-encoding]. Let X,S,U be schemes [def-pc-scheme], let tree be a finite qcqs open-closed tree on X, p its path to S [def-sfb-qcqs-open-closed-tree], and v:U→X any scheme morphism. Let L,M be internal A_S-modules [sk-def-sfb-module-objects], each having a finite constant scalar local model [sk-def-sfb-constructible], and let f:L→M. There exists a torsion abelian sheaf G on U_et [def-weil-pbc-etale-site] with nu_U^*G ≅ (v^*p.extension(image f))_Ab as pro-etale abelian sheaves [def-weil-pbc-site-comparison-morphism,def-weil-pbc-proetale-site,def-sfb-module-upper-star]. The image is the actual abelian image. Neither v pro-etale nor any cohomological bound or Noetherianity is assumed.",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-qcqs-open-closed-tree",
+  "sk-def-sfb-constructible",
+  "def-sfb-module-upper-star",
+  "def-pe-finite-discrete-presentation-encoding"
+ ],
+ "proof": [
+  {
+   "text": "Apply encoding_constructibility to each normalized Encoding and the two given finite constant local models. For an ordinary local model use its same scheme cover, lifted to the site universe. Base-change coverings give CoversTop of the weakly etale site objects. The localization pullback comparison and constantCommuteCompose show the underlying set sheaf is locally constant. Apply proEtale_locallyClassical_etaleCover, then proEtaleClassicalSheavesImage and proEtaleClassicalSheavesModules, to obtain ordinary etale module antecedents separately for L and M. No common cover is needed.",
+   "uses": [
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "det-pe-classical-sheaves-image",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+   }
+  },
+  {
+   "text": "Full faithfulness of the exact comparison inverse image descends the conjugated morphism to the etale module category. PreservesImage.iso and im.mapIso identify its pulled-back image with the actual image of the encoded f. PreservesImage.iso for the encoding equivalence then identifies this with the encoding of image f. Thus the actual internal image has an etale module antecedent.",
+   "uses": [
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+   }
+  },
+  {
+   "text": "Induct on the actual Path. The root extension is the identity. For an open edge compose the ordinary etale extension-by-zero comparison with the mapped antecedent isomorphism and the inverse of the proved private encodingOpenShriekIso from FiniteDiscreteEncodingCompactification. For a closed edge use IsClosedImmersion to obtain QuasiSeparated and use the edge QuasiCompact instance. The existing source theorem isIso_lowerStarComparisonUpperStarBaseChange gives the underived direct-image comparison; compose it with the mapped antecedent isomorphism and the inverse of the proved private encodingPushforwardNatIso from FiniteDiscreteEncodingPullbackFixed. The comparisons have exactly the internal path functors of the statement. No derived direct-image theorem is required.",
+   "uses": [
+    "lem-sf-finite-discrete-encoding-compactification",
+    "lem-pe-finite-discrete-encoding-pullback-fixed",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+   }
+  },
+  {
+   "text": "For arbitrary v, pull the antecedent back on the etale site and compose comparisonUpperStarCompUpperStarIso, the pulled-back path isomorphism, and encoding_pullback_fixed. Forget to abelian sheaves using sheafComposeForget₂CompComparisonUpperStarIso and the identity-on-underlying-sections isomorphism for the normalized Encoding. Each etale section group is a module over the finite ring ULift A; IsAddTorsion.module_of_finite and Sheaf.IsTorsion.of_forall_isAddTorsion prove the required torsion property. This covers zero rings, zero images, empty schemes and root paths.",
+   "uses": [
+    "lem-pe-finite-discrete-encoding-pullback-fixed",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-sheaves-image",
+  "det-pe-classical-sheaves-modules",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pe-finite-discrete-encoding-pullback-fixed",
+  "lem-sf-finite-discrete-encoding-compactification",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology. Q7, 2026-10-25: complete Lean proof using normalized encoding, exact fully faithful image descent, induction over actual path constructors, and the existing underived comparison; no new obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological dimension bounds derived sections of a bounded below complex with torsion cohomology concentrated in nonpositive degrees",
+   "results": "{\"t\": \"2026-10-25T06:30:51Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomological dimension bounds derived sections of a bounded below complex with torsion cohomology concentrated in nonpositive degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.isZero_of_isGE\"], \"digest\": \"28e21a4af6371cd5\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE",
+   "results": "{\"t\": \"2026-10-25T06:32:31Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.IsLE\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"DerivedCategory.IsLE\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"5b7ac447ee679c9d\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|isZero.*rightDerived",
+   "results": "{\"t\": \"2026-10-25T06:32:32Z\", \"tool\": \"grep\", \"query\": \"cohomologicalDimension|isZero.*rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"40e4f45cebbc571e\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite coefficient module image supported by open extension by zero and closed direct image is a classical etale sheaf",
+   "results": "{\"t\": \"2026-10-25T06:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite coefficient module image supported by open extension by zero and closed direct image is a classical etale sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.finitePresentation\", \"RingHom.Etale.ofLocalizationSpan\", \"StandardEtalePair.instEtaleRing\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\"], \"digest\": \"8d04539dbc135b0a\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|comparisonUpperStar",
+   "results": "{\"t\": \"2026-10-25T06:57:32Z\", \"tool\": \"grep\", \"query\": \"sheafPullback|comparisonUpperStar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"27429d7560154069\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|sheafCompose|essImage",
+   "results": "{\"t\": \"2026-10-25T07:17:23Z\", \"tool\": \"grep\", \"query\": \"rightDerived|sheafCompose|essImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Epi.lean\", \"Mathlib/Condensed/Epi.lean\", \"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Module.lean\"], \"digest\": \"97830744e7953185\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-25T07:17:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf\", \"CategoryTheory.Sheaf.terminal\", \"CategoryTheory.sheafOver\", \"CategoryTheory.Sheaf.isTerminalTerminal\", \"CategoryTheory.sheafToPresheaf\", \"CategoryTheory.fullyFaithfulSheafToPresheaf\", \"CategoryTheory.instInhabitedSheafBotGrothendieckTopologyType\", \"CategoryTheory.sheafSections\"], \"digest\": \"00c5ef3d9ef86c36\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageTorsionReductionsCd",
+  "date": "2026-10-25",
+  "group": "E1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedFiniteImageClassicalOrigin",
+  "file": "lean/Sheaf/Paper/SupportedFiniteImageClassicalOrigin.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.supported_finite_image_classical_origin",
+  "statement": "theorem supported_finite_image_classical_origin\n    (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]\n    [DiscreteTopology A] [Finite A]\n    {X S : Scheme.{u}} (tree : QcqsOpenClosedTree X) (p : tree.Path S)\n    (L M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})\n      (condensedRingObj (FiniteDiscreteOrdinary.coefficient A) S)) (f : L ⟶ M)\n    (hL : HasFiniteConstantLocalModel (FiniteDiscreteOrdinary.coefficient A) S L)\n    (hM : HasFiniteConstantLocalModel (FiniteDiscreteOrdinary.coefficient A) S M)\n    {U : Scheme.{u}} (v : U ⟶ X) :\n    ∃ G : Sheaf U.smallEtaleTopology Ab.{u + 1}, G.IsTorsion ∧\n      Nonempty ((comparisonUpperStar Ab.{u + 1} U).obj G ≅\n        ((CondensedRing.upperStar (FiniteDiscreteOrdinary.coefficient A) v).obj\n          ((p.extension (FiniteDiscreteOrdinary.coefficient A)).obj (image f))).X)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T095052-L-3288606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T164151-L-963866",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

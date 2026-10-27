@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-proper-open-dense-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A proper dense open immersion is an isomorphism",
@@ -12,23 +12,106 @@
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-near-closure/lemma-nagata-proper-open-dense-iso.md",
   "place": "node lemma-nagata-proper-open-dense-iso, order 256"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-trf-schematically-dense-open"
+ ],
  "proof": [
   {
-   "text": "A proper immersion is a closed immersion. Thus the image is both open and\nclosed. Its closed complement has structure sheaf supported away from the\ndense open; scheme-theoretic density forces that complement to be empty.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $V=q(Z)\\subseteq X$, and choose the scheme-theoretically dense open $U\\subseteq X$ contained in $V$. The image $V$ is closed by [lem-weil-pbc-proper-closed-image], applied to the given proper morphism $q$. It is open because $q$ is an open immersion [def-weil-open-immersion]. Therefore $W=X\\setminus V$ is open and $W\\cap U=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-proper-closed-image",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1, definition-proper; blueprint proof, the image is both open and closed"
+   }
+  },
+  {
+   "text": "By [def-trf-schematically-dense-open], restriction from the sections on W to the sections on W intersect U is injective. Step 1 makes this intersection empty, so its ring of sections is a subsingleton by the empty-cover sheaf axiom. Injectivity implies 0 = 1 in the sections on W. If x lies in W, the germ map from these sections to the local ring at x implies that the sections on W are nontrivial: Mathlib implements this consequence of [def-pc-scheme] as LocallyRingedSpace.component_nontrivial. This contradicts 0 = 1. Thus W is empty and V is all of X. No quasi-compactness assumption on U is used.",
+   "uses": [
+    "def-trf-schematically-dense-open",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01RB (definition-scheme-theoretically-dense) and 01RE (lemma-characterize-scheme-theoretically-dense); schemes.tex Tag 01IJ (definition-scheme, a scheme is a locally ringed space); elementary stalk argument for the empty complement"
+   }
+  },
+  {
+   "text": "By the equivalent description in [def-weil-open-immersion], $q$ induces an isomorphism from $Z$ to the open subscheme $(V,\\mathcal O_X|_V)$. Since Step 2 gives $V=X$, this open subscheme is $X$ itself, with its original structure sheaf. Consequently $q:Z\\to X$ is an isomorphism.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HE (definition-immersion-locally-ringed-spaces) and 01IO (definition-immersion), part (1); apply the open-subscheme description with the entire target"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-proper-closed-image",
+  "def-weil-open-immersion",
+  "def-trf-schematically-dense-open",
+  "def-pc-scheme"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-near-closure/lemma-nagata-proper-open-dense-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-near-closure/lemma-nagata-proper-open-dense-iso.proof.md",
+  "place": "Open-and-closed image argument. For the existing stronger statement without quasi-compactness, prove the empty-complement assertion directly using injective restriction and LocallyRingedSpace.component_nontrivial, then apply isIso_of_isOpenImmersion_of_opensRange_eq_top. Formalized by Q3 on 2026-10-23."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper open immersion with dense image is an isomorphism",
+   "results": "Eight hits: isIso_of_isOpenImmersion_of_opensRange_eq_top; isomorphisms_eq_isOpenImmersion_inf_surjective; isIso_iff_isOpenImmersion_and_surjective; isIso_iff_isOpenImmersion; IsOpenImmersion.isIso; IsOpenImmersion.to_iso; isIso_iff_isOpenImmersion_and_epi_base; LocallyRingedSpace.IsOpenImmersion.to_iso. Read Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean:24-26. These require surjectivity, not just the hypotheses of this item.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsProper",
+   "results": "OK 0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Dd]ense|[Dd]ense.*isIso|IsOpenImmersion.*Surjective|IsProper.*IsOpenImmersion",
+   "results": "15 hits in AlgebraicGeometry: isIso_iff_isOpenImmersion_and_surjective at Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean:24-25, plus applications and unrelated descent/stalk facts. No proper schematic-density criterion.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper open immersion with dense image is an isomorphism",
+   "results": "Eight hits: IsOpenImmersion.to_iso, isIso_of_isOpenImmersion_of_opensRange_eq_top, IsOpenImmersion.isIso, Scheme.Hom.isoOpensRange, isoOpensRange_hom_ι, isoImage, IsClosedImmersion.instIsIsoSchemeToImage, PresheafedSpace.IsOpenImmersion.mk. Only the final open-immersion identification, no complete match.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.*[Dd]ominant|[Dd]ominant.*surjective|isClosedMap|denseRange",
+   "results": "25 hits in AlgebraicGeometry/Morphisms, including Scheme.Hom.isClosedMap at UniversallyClosed.lean:49-50 and scheme-theoretic dominance implies dominance at SchemeTheoreticallyDominant.lean:48. No full item; schematic-density interpretation for a non-quasi-compact open cannot be silently replaced by the kernel-ideal predicate.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally closed dominant morphism of schemes is surjective",
+   "results": "Eight hits: Surjective.of_universallyClosed_of_isDominant, surjective_of_isDominant_of_isClosed_range, instIsDominantOfSurjective, Surjective, Surjective.surj, UniversallyClosed.out, UniversallyClosed.of_comp_surjective, surjective_iff. These need dominance; the elementary complement argument in Step 2 supplies the missing density content.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -44,19 +127,79 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-near-closure",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $q\\colon Z\\to X$ be both proper and an open immersion. If its image\ncontains a scheme-theoretically dense open subscheme of $X$, then $q$ is an\nisomorphism.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $q\\colon Z\\to X$ be both proper and an open immersion. If its image\ncontains an open subscheme $D\\subseteq X$ whose inclusion $D\\hookrightarrow X$\nis quasi-compact and scheme-theoretically dense, then $q$ is an isomorphism.",
   "proof": [
    {
-    "text": "A proper immersion is a closed immersion. Thus the image is both open and\nclosed. Its closed complement has structure sheaf supported away from the\ndense open; scheme-theoretic density forces that complement to be empty.",
+    "text": "The image of $q$ is open, and it is closed because $q$ is proper, hence\nuniversally closed. Since $D\\hookrightarrow X$ is quasi-compact and\nscheme-theoretically dense, $D$ is topologically dense, so the closed set\n$q(Z)\\supseteq D$ contains $\\overline D=X$. Thus $q$ is a surjective open\nimmersion, i.e. an isomorphism.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lemma-nagata-proper-open-dense-iso",
+  "worker": "stage1",
+  "group": "NC",
+  "summary": "Statement unchanged. Reused the existing proper-closed-image Mathlib leaf and the definitions of schemes, open immersion and schematic density without a quasi-compactness hypothesis. Expanded the empty-complement argument through the stalks of the locally ringed space X (reviewer repair: the affine neighbourhood inside W is not given by the definition of a scheme). No new nodes or new Mathlib leaves. No exact project attachment or Mathlib match.",
+  "blueprint": "The single current blueprint proof paragraph: open-and-closed image (Step 1), empty complement by schematic density (Step 2), and isomorphism onto the whole open image (Step 3). The intermediate assertion that a proper immersion is a closed immersion is unnecessary because the existing proper-closed-image leaf already gives the topological closedness used by that paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NC-6848a7dfa",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-6848a7dfa (reviewer sub-agent of L); spot-checked: I read the whole item. The statement matches the main-20261015 blueprint (sk-lem-nagata-sketch-near-closure) verbatim. I checked Stacks 01RB/01RE (morphisms.tex l.1030/1100), 01W1 and 01IJ. Step 1 is correct: lem-weil-pbc-proper-closed-image is the Mathlib leaf Scheme.Hom.isClosedMap, its 'proper' resolves to def-weil-proper-morphism like the item's, and def-weil-open-immersion gives openness of the image. Step 2 has a C4 fault: it claims 'the definition of a scheme' gives an affine neighbourhood of x inside W, but 01IJ/def-pc-scheme only gives one in X, and shrinking it into W needs principal-open or open-subscheme facts that no cited node states. I repaired Step 2 with a stalk argument: for every open A in W, A∩U is empty and O_X(empty)=0, so injectivity gives O_X(A)=0; opens inside W are cofinal, so the stalk at x is 0, which contradicts def-pc-scheme (a scheme is a locally ringed space). Uses are now def-trf-schematically-dense-open and def-pc-scheme, and def-weil-affine-spectrum is dropped from proof_deps. Step 3 is correct and uses the stated 'equivalently' clause of def-weil-open-immersion. Choosing def-trf-schematically-dense-open (no quasi-compactness) over def-nagata-scheme-theoretically-dense-open is correct and does not weaken the item, since every citer's dense open satisfies it. Batch-5 finding: def-trf-schematically-dense-open is a general definition (01RB/01RE) whose stmt_deps are only def-pc-scheme and def-weil-open-immersion, with no proof_deps and no part in the trace-formula or Poincaré-duality proofs, so I accept it. It may need a maintainer tool_use as a cross-unit definition. Edge cases tested: X empty, U empty, nonreduced X, a clopen component (correctly excluded), and D(t) in A^1 showing properness is needed. There are no new nodes, no SGA citation, and the item is not in route-pivot-dropped.txt. The fix file is fixes/dag/nodes/sec-nagata-compactification/lemma-nagata-proper-open-dense-iso.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Compactification.ProperOpenDenseIso",
+  "declaration": "AlgebraicGeometry.isIso_of_isProper_of_isOpenImmersion_of_schematicallyDenseOpen",
+  "file": "lean/Sheaf/Compactification/ProperOpenDenseIso.lean",
+  "statement": "theorem isIso_of_isProper_of_isOpenImmersion_of_schematicallyDenseOpen {X Z : Scheme.{u}} (q : Z ⟶ X) [IsProper q] [IsOpenImmersion q] (U : X.Opens) (hU : SchematicallyDenseOpen U) (hUq : U ≤ q.opensRange) : IsIso q",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c7134775",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Clauses match the node: Scheme.{u} X Z, q : Z ⟶ X, [IsProper q], [IsOpenImmersion q], U : X.Opens with SchematicallyDenseOpen U (the recorded def-trf definition, injective restriction on every open, no quasi-compactness) and U ≤ q.opensRange, conclusion IsIso q. No extra assumptions; lean.statement matches the file verbatim. Snapshot node identical to live except the new lean record; the live node has no lean record yet. No Mathlib or project duplicate; the upstream isIso_of_isProper_of_isOpenImmersion also needs QuasiCompact and IsSchemeTheoreticallyDominant, so existing:true would be wrong. Edge cases (empty X or U, clopen component, D(t), nonreduced X) hold. Docstrings have the source and blueprint tag, the proof docstring follows the node's steps, proof is sorry only. Not recompiled: no file changed. Advisory: the OpenImmersion import is probably redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261023T103211-L-3073111",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

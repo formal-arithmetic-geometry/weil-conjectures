@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-finite-discrete-serre-heart-cd",
+ "kind": "statement",
+ "title": "Finite discrete Serre heart modules satisfy the torsion étale cohomological bound",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Let A be a finite commutative discrete topological ring in the scheme universe, killed by a power of a prime ℓ. Let X be affine [def-pc-scheme] with torsion étale cohomological dimension at most d [def-sc-etale-torsion-cd]. Use normalized condensed coefficients [def-pe-finite-discrete-presentation-encoding] and actual module-derived sections [def-sfb-condensed-module-sections] on the small pro-étale site [def-weil-pbc-proetale-site, def-weil-size-convention]. If an internal coefficient module M lies in the weak Serre coproduct closure [sk-def-localizing-closure] of finite constant scalar-model constructible modules [sk-def-sfb-constructible], then R^q Γ(X,M)=0 for every natural q>d. No Noetherian hypothesis is used; zero rings and empty schemes are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement (2), first paragraph, finite discrete subcase; Stacks Tags 03SA(3), 099Y and 09B1, and exact étale/pro-étale comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-torsion-cd",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Choose the normalized exact ordinary encoding. Identify finite scalar-model constructibility with fixed-coefficient constructibility, reindexing its covers between the prescribed universes. The étale comparison essential image is weak Serre and coproduct closed, so minimality puts the encoded M in this essential image. Choose an étale antecedent F. Extension closure is the existing etaleOrigin_of_shortExact theorem, proved using bounded-below derived comparison full faithfulness; exact fully faithful pullback gives kernel and cokernel closure and its left adjoint property gives coproduct closure.",
+   "uses": [
+    "lem-sf-finite-discrete-normalized-encoding",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The common ℓ-power annihilator of A annihilates every section of the underlying abelian étale sheaf F. It is therefore torsion. The assumed torsion dimension kills its cohomology above d. Exact coefficient forgetting identifies this with the underlying group of module cohomology. The canonical terminal-object sections comparison identifies it with classical right-derived evaluation.",
+   "uses": [
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Étale/pro-étale derived sections comparison transfers this vanishing to the comparison pullback F. The exact encoding equivalence preserves injectives and its composite with ordinary evaluation and exact module forgetting is the internal-module sections functor. Classical derived-composite isomorphisms and reflection of zero objects give the assertion.",
+   "uses": [
+    "src-weil-pbc-comparison-global-sections-vanishing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "def-sc-etale-torsion-cd",
+  "src-weil-pbc-comparison-global-sections-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement (2), first paragraph, finite discrete subcase; Stacks Tags 03SA(3), 099Y and 09B1, and exact étale/pro-étale comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform torsion etale cohomological dimension bounds proetale cohomology of topological coefficient sheaves in a weak Serre coproduct hull",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.instForallOfFinite, Algebra.formallyEtale_iff, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.FormallyEtale.pi_iff",
+   "date": "2026-10-25",
+   "verdict": "No exact theorem found; use the library coefficient encoding and étale comparison APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.weakSerreCoproductClosure",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact theorem found; use the library coefficient encoding and étale comparison APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "torsionCd|cohomologicalDimension|weakSerreCoproductClosure",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact theorem found; use the library coefficient encoding and étale comparison APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite discrete weak Serre module sheaves satisfy a torsion etale cohomological dimension bound on an affine scheme",
+   "results": "8 hits: CondensedMod.isDiscrete_tfae, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFiniteType.mk",
+   "date": "2026-10-25",
+   "verdict": "No exact bound; these are discrete condensed-module characterizations and finite-type sheaf definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionCdTopologicalSerreTransfer",
+  "date": "2026-10-25",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-torsion-cd-topological-serre-transfer",
+   "place": "Finite discrete coefficient branch, direct étale-origin argument",
+   "via": [
+    "lem-sfb-finite-coefficient-serre-cd"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteSerreHeartCd",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteSerreHeartCd.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteDiscrete_serreHeart_cohomology_vanishes",
+  "statement": "theorem finiteDiscrete_serreHeart_cohomology_vanishes\n    (ℓ : ℕ) [Fact ℓ.Prime] (htors : ∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0)\n    (X : Scheme.{u}) [IsAffine X] (d : ℕ)\n    (hcd : X.HasTorsionEtaleCohomologicalDimensionLE d)\n    (M : Internal A X)\n    (hM : ObjectProperty.weakSerreCoproductClosure.{u + 1}\n      (IsConstantModelConstructible (coefficient A) X) M)\n    (q : ℕ) (hq : d < q) :\n    IsZero (((condensedModuleSections (coefficient A) X).rightDerived q).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T095225-L-3327305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T095225-L-3327305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

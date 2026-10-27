@@ -1,0 +1,196 @@
+{
+ "id": "lem-a1-integral-roos-finite-tower-realization",
+ "kind": "statement",
+ "title": "The integral Roos pullback realizes the derived limit of its normalized finite derived pair",
+ "statement": "Fix ell,E,X,Y,g as in [def-pod-integral-completed-comparison-data] and a normalized finite strict-tower comparison C [lem-a1-finite-pullback-strict-tower-comparison]. Define H=derived_Y ⋙ C.B.functor ⋙ Rlim_X, with Rlim the actual total right derived limit on strict towers of completed integral module sheaves. For a complex P in the published completed coefficients, define H's nth computation projection by applying Rlim to C.B's counit after the exact coefficient-restriction computation isomorphism, followed by the actual derived-limit projection and the exact evaluation computation isomorphism. Given shifts c,d satisfying ShiftCoordinates and ShiftDescent, there is a natural isomorphism a:integral→H on the entire derived category, such that a_QP followed by each of these projections is exactly integralProjection(P,hP,n) for every good transported representative P. The isomorphism a commutes with the composite exact-coefficient, retained finite-pair and actual derived-limit shifts, with d on the integral side. No intrinsic-completeness hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 0941, normalized strict-model comparison; derived.tex Tags 011G and 014E for signed integer shifts."
+ },
+ "stmt_deps": [
+  "def-pod-integral-completed-comparison-data",
+  "lem-a1-finite-pullback-strict-tower-comparison",
+  "def-fd-integral-pullback-shift-coordinates",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "The counit of C.B computes the strict finite pullback tower on good representatives. Exact countable products make the normalized strict Roos comparison an isomorphism from its product mapping fibre to the actual total right derived limit. The universal right-derived pair identifies this limit with the existing completedRlim.",
+   "uses": [
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the Roos comparison with the inverse of Rlim of the computation counit. All maps are natural. The fully faithful good resolving localization descends the resulting isomorphism, using the actual integral pullback comparison.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The K-injective normalization fixes every limit projection as the first mapping-cocone coordinate followed by the nth product leg. Retain both exact coefficient and evaluation computation factors to obtain the stated representative equation. The normalized Roos shift identity, finite-pair shift descent and given ShiftDescent identify the two descended shifts and prove the CommShift equation.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-a1-normalized-roos-shift-comparison",
+    "lem-a1-finite-pullback-strict-tower-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-finite-pullback-strict-tower-comparison",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-pur-integral-operations-well-defined",
+  "lem-a1-normalized-roos-shift-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), strict-model and coefficient-transport details expanded from the parent comparison proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral derived pullback agrees with completed pullback on derived complete objects via strict tower and Roos comparison",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; PresheafOfModules.pullbackComp; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.Functor.leftDerived_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "grep",
+   "query": "strictRoosComparison|integralPullback_completedComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocalization",
+   "results": "12 hits: CategoryTheory.Functor.instIsLocalizationIdIsomorphisms; CategoryTheory.Functor.IsLocalization; CategoryTheory.Functor.q_isLocalization; CategoryTheory.Localization.essSurj; CategoryTheory.Localization.inverts; CategoryTheory.Functor.IsLocalization.inverts; CategoryTheory.Localization.equivalenceFromModel; CategoryTheory.Localization.isGroupoid",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorNatTrans|rightDerivedNatIso|CommShift.ofIso",
+   "results": "4 hits: Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedNatIso\"",
+   "results": "3 hits: CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.Functor.rightDerivedNatIso_hom; CategoryTheory.Functor.rightDerivedNatIso_inv",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport of right derived inverse limits and their projection maps along an exact equivalence",
+   "results": "8 hits: CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π_assoc; CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π; CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π; CategoryTheory.HasExactLimitsOfShape.of_codomain_equivalence; CategoryTheory.Limits.hasLimit_equivalence_comp; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctorSymmOfInverse; InverseSystem.invLimEquiv_apply_coe; CategoryTheory.createsLimitsOfShapeOfEquiv",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Roos mapping fibre of a countable tower identifies with the total right derived inverse limit and its canonical projections",
+   "results": "8 hits: InverseSystem.piLTLim; InverseSystem.pEquivOnLim; LightProfinite.lightToProfinite_map_proj_eq; InverseSystem.invLimEquiv_apply_coe; InverseSystem.invLimEquiv; InverseSystem.globalEquiv_naturality; CategoryTheory.SmallObject.πFunctorObj_eq; CategoryTheory.Functor.leftDerived_map_eq",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an integral pullback comparison is naturally isomorphic to a completed pullback with finite projection compatibility and shifts",
+   "results": "8 hits: CategoryTheory.NatTrans.PullbackShift.natIsoComp; CategoryTheory.Functor.commShiftPullback; CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp; CategoryTheory.Functor.commShiftPullback_iso_eq; CategoryTheory.pullbackShiftIso; CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoId; CategoryTheory.Limits.instIsIsoPullbackComparison; CategoryTheory.Limits.map_lift_pullbackComparison",
+   "date": "2026-10-25",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "grep",
+   "query": "coconeCommShift|productCommShift|descentShift",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent integer shifts on a signed mapping cocone descend through the resolving localization of K-flat complexes",
+   "results": "8 hits: CochainComplex.shiftFunctor; CochainComplex.instAdditiveIntShiftFunctor; CochainComplex.mappingCone.shiftIso; CochainComplex.HomComplex.Cochain.shift; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; DerivedCategory.instCommShiftCochainComplexIntQ; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CochainComplex.mappingCone.shiftTrianglehIso",
+   "date": "2026-10-25",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent signed shift of a product mapping fibre descends along a resolving localization",
+   "results": "8 hits: CategoryTheory.Functor.commShiftOfLocalization; CategoryTheory.Functor.commShiftOfLocalization.iso; CategoryTheory.MorphismProperty.commShift_Q'; CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app; CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app; CategoryTheory.LocalizerMorphism.smallShiftedHomMap_mk; CategoryTheory.NatTrans.commShift_iso_hom_of_localization; CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app_assoc",
+   "date": "2026-10-25",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural identification of the Roos mapping fibre of a countable tower with the total right derived inverse limit preserving all limit projections and integer shifts",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv; CategoryTheory.instIsIsoFunctorToRightDerivedZero; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.toRightDerivedZero; InverseSystem.invLimEquiv; InverseSystem.invLimEquiv_apply_coe; CategoryTheory.Functor.rightDerivedZeroIsoSelf; TensorProduct.directLimitRight_symm_of_tmul",
+   "date": "2026-10-25",
+   "verdict": "No exact match; generic localization, shift and limit lemmas are used through the existing library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackCompletedComparison",
+  "date": "2026-10-25",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- restriction of $\\mathcal F$ to the geometric fibre, computed by the integral pullback, is the completed pullback whose exactness and immersion behaviour are known.",
+   "via": [
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackRoosFiniteTower",
+  "file": "lean/Sheaf/Paper/IntegralPullbackRoosFiniteTower.lean",
+  "declaration": "WeilConjectures.IntegralCompletedComparison.integralPullback_roosFiniteTower",
+  "statement": "theorem integralPullback_roosFiniteTower\n    (C : FinitePullbackStrictTower.Comparison.{u, u} l E g)\n    (c : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ)\n    (hc : ShiftCoordinates l E g c)\n    (d : (integralDerivedPullback.{u, u} l E g).CommShift ℤ)\n    (hd : ShiftDescent l E g c d) :\n    ∃ a : integral l E g ≅ finiteTowerLimit l E g C,\n      (∀ (P : CochainComplex\n          (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E))) ℤ)\n        (hP : integralOperationsGoodComplex.{u, u} l E Y ((complexes l E Y).obj P))\n        (n : ℕ),\n        a.hom.app (DerivedCategory.Q.obj P) ≫ finiteTowerLimitProjection l E g C P n =\n          integralProjection l E g P hP n) ∧\n      (fun [_d : (integralDerivedPullback.{u, u} l E g).CommShift ℤ] ↦\n        NatTrans.CommShift a.hom ℤ) (_d := d)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-48c08",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261025T124343-L-1983617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-48c08",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261025T124343-L-1983617",
+  "kind": "interface",
+  "note": "independent cc review: item lem-a1-integral-pullback-completed-comparison (Nonempty Comparison) assembled from finite_pullback_strict_tower_comparison + proved integralPullback_signedShift + sorried integralPullback_roosFiniteTower / completedIntegral_finiteTowerTransport (read against their new nodes, true); moved interface type hashes compared old olean vs sandbox build; 12 direct importers compiled rc 0 against sandbox"
+ }
+}

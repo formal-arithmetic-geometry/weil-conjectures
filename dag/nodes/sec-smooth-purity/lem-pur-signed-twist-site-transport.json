@@ -1,0 +1,316 @@
+{
+ "id": "lem-pur-signed-twist-site-transport",
+ "kind": "statement",
+ "title": "Evaluation-normalized signed extension of the fixed finite Tate comparison",
+ "statement": "Fix $k,\\ell,E,n,A=A_{E,n}$ of [def-pur-conventions], put $m=\\ell^n$, $R=\\mathbf Z/m$, and let $X$ be any $k$-scheme [def-pc-scheme]. Set $L_X=\\mu^{e}_{m,X}\\otimes_R A_X$ on its small etale site; let $L_X(r)$ be the integer tensor/dual powers of [lem-asd-etale-finite-twist-pullback]. Let $A_X(r)$ be the specified pro-etale twists [def-coefficient-twists-detailed], and $\\nu_X$ the site comparison [def-weil-pbc-site-comparison-morphism]. Let $c_{m,X}$ be the same-root map of [lem-amb-finite-root-site-comparison] and $\\theta_X:A_X(1)\\cong\\mu^{p}_{m,X}\\otimes_R A_X$ the projection-induced identification of [def-pur-frame-class]. For $r\\geq0$ fix the comparison $q^+_{X,r}:\\nu_X^*L_X(r)\\cong A_X(r)$ of [lem-amb-finite-tate-site-descent], with $q^+_{X,1}=\\theta_X^{-1}(c_{m,X}\\otimes1)$ and the coefficient-unit map in degree zero.\n\nFor $d>0$ let $q_{X,-d}$ be the evaluation-normalized dual extension of $q^+_{X,d}$, as in [lem-pur-signed-line-derived-base-change]. Thus, using sheaf tensor and Hom [def-pur-sheaf-tensor-product, def-pur-sheaf-hom], it is characterized by\n$$\\operatorname{ev}_{A_X(d)}(q_{X,-d}\\otimes q^+_{X,d})=\\nu_X^*(\\operatorname{ev}_{L_X(d)})$$\nafter tensor and coefficient-unit comparison. Put $q_{X,r}=q^+_{X,r}$ for $r\\geq0$.\n\nThis dual extension is compatible with the specified mixed-sign multiplication of the Tate twists: for every $r,s\\in\\mathbf Z$, with $h^e,h^p$ their ordered multiplication maps,\n$$q_{X,r+s}\\nu_X^*h^e_{r,s}=h^p_{r,s}(q_{X,r}\\otimes q_{X,s}).$$\nFor every scheme map $v:X'\\to X$, write $\\tau^e_{v,r},\\tau^p_{v,r}$ for root-induced geometric pullback, using dual evaluation for negative powers, and let $k_v:v_p^*\\nu_X^*\\cong\\nu_{X'}^*v_e^*$ be [lem-weil-pbc-comparison-pullback]. The fixed nonnegative pullback square extends to negative integers with precisely these dual maps:\n$$\\tau^p_{v,r}v_p^*q_{X,r}=q_{X',r}\\nu_{X'}^*(\\tau^e_{v,r})k_v\\qquad(r<0).$$\nThe extended squares respect identities, composition and dual evaluation. Finally the $r=1$ coefficient map $z\\mapsto z\\otimes1_A$ is carried by $q_{X,1}$ to the precise $\\sigma_Xc_{m,X}$ of [def-pur-frame-class], where $\\sigma_X(z)=\\theta_X^{-1}(z\\otimes1_A)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; root-normalized signed refinement of lem-pur-supported-cup-functoriality Step 1 and the inverse-limit coefficient identification in def-pur-frame-class; agent formulation, not a claim that 07A4 states Tate descent."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-scheme",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-amb-finite-root-site-comparison",
+  "def-pur-frame-class",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-signed-line-derived-base-change",
+  "lem-weil-pbc-comparison-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-sf-signed-line-product-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-signed-twist-evaluation-extension] to b and its normalization. Retain its unique family q and evaluation equation. This is a strict dual-extension result, with none of the product, geometric or theta conclusions.",
+   "uses": [
+    "lem-pur-signed-twist-evaluation-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-signed-twist-product-compatibility] to this same q and the assumed normalized intrinsic products mu.",
+   "uses": [
+    "lem-pur-signed-twist-product-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-signed-twist-geometric-compatibility] to q to obtain the geometric family with all four laws and its canonical negative square.",
+   "uses": [
+    "lem-pur-signed-twist-geometric-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the precise root coefficient equation directly. The projection from the infinite root tower is locally surjective by [lem-amb-root-tower-finite-tensor]. For a Cartier image of an etale root, pass to its image covering sieve and choose a local root-tower lift. The same-root comparison [lem-amb-finite-root-site-comparison] identifies its projection with the restricted etale root. The hypothesis hb in degree one then computes b on the etale tensor generator, and the hypothesis htheta computes theta on that pro-etale generator. Naturality and separatedness descend the equality. Apply theta inverse and its inverse identity. Agreement q(1)=b(1) proves exactly SignedSiteRootCoefficient.",
+   "uses": [
+    "lem-amb-root-tower-finite-tensor",
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the five conjunctions. Any other family satisfying them has the same prescribed nonnegative components and evaluation equation, so the uniqueness clause of the first result gives equality of the families.",
+   "uses": [
+    "lem-pur-signed-twist-evaluation-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-signed-twist-evaluation-extension",
+  "lem-pur-signed-twist-product-compatibility",
+  "lem-pur-signed-twist-geometric-compatibility",
+  "lem-amb-root-tower-finite-tensor",
+  "lem-amb-finite-root-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Steps 2, 3 and 4 separated as strictly smaller source-backed results; Step 5 proved directly from local root lifts, naturality and separatedness in Lean by A6, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale Tate root line and all positive and negative tensor powers compare with proetale twists compatibly with evaluation and arbitrary scheme pullback",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq [Mathlib/RingTheory/Etale/QuasiFinite]; StandardEtalePair.homEquiv [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePair.homEquiv_apply_coe [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePair.homEquiv_symm_apply [Mathlib/RingTheory/Etale/StandardEtale]; Algebra.Etale.exists_subalgebra_fg [Mathlib/RingTheory/Smooth/NoetherianDescent]; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale [Mathlib/RingTheory/Etale/Kaehler]; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply [Mathlib/RingTheory/Etale/Kaehler]; StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x [Mathlib/RingTheory/Etale/StandardEtale]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale rings, ordinary free-sheaf pullback or general sheaf monoidal structure, not root-normalized comparison of all signed Tate twists"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a finite locally constant invertible sheaf commutes with dual tensor powers and normalized roots of unity coefficient maps",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.unitHomEquiv_symm_comp [Mathlib/Algebra/Category/ModuleCat/Sheaf]; LightCondensed.ihomPoints_symm_comp [Mathlib/Condensed/Light/InternallyProjective]; SheafOfModules.ιFree_mapFree_inv [Mathlib/Algebra/Category/ModuleCat/Sheaf/Free]; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; AlgebraicGeometry.Scheme.Modules.inv_app [Mathlib/AlgebraicGeometry/Modules/Sheaf]; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map [Mathlib/Condensed/Discrete/Module]; SheafOfModules.pullbackObjFreeIso_hom_naturality [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; ModuleCat.Tilde.res_const [Mathlib/AlgebraicGeometry/Modules/Tilde]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale rings, ordinary free-sheaf pullback or general sheaf monoidal structure, not root-normalized comparison of all signed Tate twists"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.MonoidalCategory",
+   "results": "[loogle] OK 9 hit(s); CategoryTheory.Sheaf.monoidalCategory [Mathlib.CategoryTheory.Sites.Monoidal]; CategoryTheory.Sheaf.braidedCategory [Mathlib.CategoryTheory.Sites.Monoidal]; CategoryTheory.Sheaf.symmetricCategory [Mathlib.CategoryTheory.Sites.Monoidal]; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf [Mathlib.CategoryTheory.Sites.Monoidal]; CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf [Mathlib.CategoryTheory.Sites.Monoidal]; CategoryTheory.GrothendieckTopology.W.transport_isMonoidal [Mathlib.CategoryTheory.Sites.Monoidal]; CategoryTheory.GrothendieckTopology.Point.instMonoidalSheafSheafFiber [Mathlib.CategoryTheory.Sites.Point.Monoidal]; CategoryTheory.GrothendieckTopology.Point.instIsMonoidalFunctorOppositeHomPresheafToSheafCompSheafFiberIso [Mathlib.CategoryTheory.Sites.Point.Monoidal]; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat [Mathlib.Condensed.Light.Monoidal]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale rings, ordinary free-sheaf pullback or general sheaf monoidal structure, not root-normalized comparison of all signed Tate twists"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|rootsOfUnity.*(proetale|proEtale)|proetale.*twist",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale rings, ordinary free-sheaf pullback or general sheaf monoidal structure, not root-normalized comparison of all signed Tate twists"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tate twist etale proetale comparison respects negative powers and evaluation",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend the finite etale to proetale Tate comparison from nonnegative tensor powers to negative dual powers preserving evaluation and the root coefficient map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (x : S), ∃ p n, x * (Polynomial.aeval P.x) P.g ^ n = (Polynomial.aeval P.x) p\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be an $R$-algebra. Given a standard étale presentation $P$ of $S$ over $R$, which specifies an element $x_P \\\\in S$ and a polynomial $g \\\\in R[X]$, then\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are general dual-module, rigid-category or affine-scheme tensor facts; none identifies the specified finite Tate site comparison, mixed-sign multiplication and frame-class coefficient map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed positive Tate line site comparison extends uniquely to signed invertible tensor powers with dual evaluation and geometric pullback coherence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} → {T₁ T₂ : AlgebraicGeometry.Scheme.Pullback.Triplet f g} → T₁ = T₂ → (T₁.tensor ≅ T₂.tensor)\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then their associated tensor pushouts in the category of commutative rings are isomo\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e ≪≫ AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e' =\\n    AlgebraicGeometry.Scheme.Pullba\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any equalities $e:x=y$ and $e':y=z$ between pullback triplets, the composition of isomorphisms $\\\\text{tensorCongr}(e) \\\\circ \\\\text{te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x : AlgebraicGeometry.Scheme.Pullback.Triplet f g},\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯ = CategoryTheory.Iso.refl x.tensor\", \"doc\": \"For any pullback triplet $T$ in the category of schemes, applying the tensor congruence construction to the reflexive equality $T = T$ yields the identity isomorphism on the associated tensor pushout \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).inv =\\n    (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯).hom\", \"doc\": \"For any two pullback triplets $x$ and $y$ with an equality $e : x = y$, the inverse of the isomorphism $\\\\text{tensorCongr}(e)$ between their tensor pushouts is equal to the isomorphism $\\\\text{tensorCo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z) {Z : CommRingCat} (h : z.tensor ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (CategoryTheo\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and three equal pullback triplets $x=y=z$, the composition of the tensor congruence homomorphisms $T_1.tensor \\\\to T_2.tensor$ and $T_2.t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).symm =\\n    AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then the inverse of the isomorphism between their tensor pushouts is equal to the te\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are general dual-module, rigid-category or affine-scheme tensor facts; none identifies the specified finite Tate site comparison, mixed-sign multiplication and frame-class coefficient map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"tensor\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.hasLeftDualTensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.HasLeftDual X] [CategoryTheory.HasLeftDual Y] : CategoryTheory.HasLeftDual (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y)\", \"doc\": \"The tensor product of two objects with left duals has a left dual,\\ngiven by the tensor product of the duals in the opposite order.\"}\n  {\"name\": \"CategoryTheory.hasRightDualTensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.HasRightDual X] [CategoryTheory.HasRightDual Y] : CategoryTheory.HasRightDual (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y)\", \"doc\": \"The tensor product of two objects with right duals has a right dual,\\ngiven by the tensor product of the duals in the opposite order.\"}\n  {\"name\": \"CategoryTheory.leftDualTensorIso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] (X Y : C) [CategoryTheory.HasLeftDual X] [CategoryTheory.HasLeftDual Y] [CategoryTheory.HasLeftDual (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y)] : ᘁ(CategoryTheory.MonoidalCategoryStruct.tensorObj X Y) \", \"doc\": \"The left dual of a tensor product is isomorphic to the reversed tensor product of\\nthe left duals.\"}\n  {\"name\": \"CategoryTheory.rightDualTensorIso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] (X Y : C) [CategoryTheory.HasRightDual X] [CategoryTheory.HasRightDual Y] [CategoryTheory.HasRightDual (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y)] : (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y\", \"doc\": \"The right dual of a tensor product is isomorphic to the reversed tensor product of\\nthe right duals.\"}\n  {\"name\": \"TensorProduct.dualDistrib\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \" (R : Type u_1) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] : TensorProduct R (Module.Dual R M) (Module.Dual R N) →ₗ[R] Module.Dual R (TensorProduct R M N)\", \"doc\": \"The canonical linear map from `Dual M ⊗ Dual N` to `Dual (M ⊗ N)`,\\nsending `f ⊗ g` to the composition of `TensorProduct.map f g` with\\nthe natural isomorphism `R ⊗ R ≃ R`.\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.dualDistrib\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \" (R : Type u_1) (A : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [CommSemiring A] [Algebra R A] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module A M] [Module R N] [IsScalarTower R A M] : TensorProduct R (Module.Dual A M) (Module.Dual R N) →ₗ[A] Module.Dual A (TensorProduct R M N\", \"doc\": \"Heterobasic version of `TensorProduct.dualDistrib`\"}\n  {\"name\": \"TensorProduct.dualDistrib_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \" {R : Type u_1} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] (f : Module.Dual R M) (g : Module.Dual R N) (m : M) (n : N) : ((TensorProduct.dualDistrib R M N) (f ⊗ₜ[R] g)) (m ⊗ₜ[R] n) = f m * g n\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.dualDistrib_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \" {R : Type u_1} (A : Type u_2) {M : Type u_3} {N : Type u_4} [CommSemiring R] [CommSemiring A] [Algebra R A] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module A M] [Module R N] [IsScalarTower R A M] (f : Module.Dual A M) (g : Module.Dual R N) (m : M) (n : N) : ((TensorProduct.AlgebraTensorMod\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.dualDistrib_apply_comm\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \" {R : Type u_1} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] (w : TensorProduct R (Module.Dual R N) (Module.Dual R M)) (z : TensorProduct R M N) : ((TensorProduct.dualDistrib R N M) w) ((TensorProduct.comm R M N) z) = ((TensorProduct.du\", \"doc\": \"Simultaneously swapping both the ordering of the applied duals and the ordering of the\\ntensor product argument preserves evaluation.\"}\n  {\"name\": \"dualTensorHom\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] : TensorProduct R (Module.Dual R M) N →ₗ[R] M →ₗ[R] N\", \"doc\": \"The natural map associating a linear map to the tensor product of two modules.\"}\n  {\"name\": \"dualTensorHomEquivOfBasis\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [DecidableEq ι] [Fintype ι] (b : Module.Basis ι R M) : TensorProduct R (Module.Dual R M) N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"If `M` is free, the natural linear map $M^* ⊗ N → Hom(M, N)$ is an equivalence. This function\\nprovides this equivalence in return for a basis of `M`.\"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] : TensorProduct R (Module.Dual R M) N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"If `M` is finite projective, the natural map $M^* ⊗ N → Hom(M, N)$ is an equivalence.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are general dual-module, rigid-category or affine-scheme tensor facts; none identifies the specified finite Tate site comparison, mixed-sign multiplication and frame-class coefficient map"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|proetale.*dual|proEtale.*dual",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: these are general dual-module, rigid-category or affine-scheme tensor facts; none identifies the specified finite Tate site comparison, mixed-sign multiplication and frame-class coefficient map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Negative Tate twist dual evaluation compatibility of etale proetale finite line comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Dual.eval_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"(v : M) (a : Dual R M) : eval R M v a = a v\", \"doc\": \"For all $ v \\\\in M $ and $ a \\\\in \\\\text{Dual}\\\\, R\\\\, M $, it holds that $ \\\\text{eval}(v)(a) = a(v) $.\"}\n  {\"name\": \"IsBaseChange.toDualBaseChange_tmul\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(a : A) (f : Dual R V) (v : V) : (ibc.toDualBaseChange (a ⊗ₜ[R] f)) (j v) = a * algebraMap R A (f v)\", \"doc\": \"For an $ R $-algebra $ A $, dual module $ V^* = \\\\text{Dual}_R V $, and base-changed module $ W = A \\\\otimes_R V $, the linear equivalence $ \\\\text{toDualBaseChange}: A \\\\otimes_R V^* \\\\to \\\\text{Dual}_A W \"}\n  {\"name\": \"Module.Dual.eval\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \": M →ₗ[R] Dual R (Dual R M)\", \"doc\": \"The evaluation map sends each element $ m \\\\in M $ to the linear functional on the dual module $ \\\\text{Dual}\\\\, R\\\\, M $ defined by evaluating at $ m $, i.e., $ \\\\text{eval}(m)(f) = f(m) $ for all $ f \\\\in\"}\n  {\"name\": \"LinearMap.IsPerfPair.dualEval\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"[IsReflexive R M] : IsPerfPair (Dual.eval R M)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $, if $ M $ is reflexive (i.e., the canonical evaluation map $ M \\to (M^*)^* $ is an isomorphism), then this evaluation map defines a perfect pairin\"}\n  {\"name\": \"Module.Dual.eval_naturality\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"(f : M₁ →ₗ[R] M₂) : f.dualMap.dualMap ∘ₗ eval R M₁ = eval R M₂ ∘ₗ f\", \"doc\": \"For any $ R $-linear map $ f: M_1 \\\\to M_2 $, the composition of the double dual map $ f^{\\\\vee\\\\vee} $ with the evaluation map $ \\\\text{eval}_{R, M_1} $ equals the composition of the evaluation map $ \\\\te\"}\n  {\"name\": \"Module.Dual.congr_apply_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] (e : V ≃ₗ[R] W) (a : V →ₗ[R] R) (a_1 : W),\\n  ((Module.Dual.congr e) a) a_1 = a (e.symm a_1)\", \"doc\": \"Let $R$ be a commutative semiring, and let $V$ and $W$ be $R$-modules. Let $e: V \\\\to W$ be an $R$-linear equivalence, $a$ be a linear functional on $V$ (an element of the dual module $\\\\text{Dual}_R V$\"}\n  {\"name\": \"LinearEquiv.trans_dualMap_symm_flip\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \": e.trans e.flip.symm.dualMap = Dual.eval R N\", \"doc\": \"For any linear equivalence $ e $ between $ R $-modules $ M $ and $ N $, the composition of $ e $ with the dual map of the inverse of the flipped equivalence $ e $ results in the canonical evaluation m\"}\n  {\"name\": \"Module.Dual.eval_comp_comp_evalEquiv_eq\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"{M' : Type*} [AddCommMonoid M'] [Module R M'] {f : M →ₗ[R] M'} :\\n  Dual.eval R M' ∘ₗ f ∘ₗ (evalEquiv R M).symm = f.dualMap.dualMap\", \"doc\": \"The canonical evaluation map provides an $ R $-linear equivalence between a reflexive module $ M $ and its double dual $ (M^*)^* $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are general dual-module, rigid-category or affine-scheme tensor facts; none identifies the specified finite Tate site comparison, mixed-sign multiplication and frame-class coefficient map"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|proetale.*twist|signed.*[Pp]ower",
+   "results": "1 hits; Mathlib/Combinatorics/Enumerative/Partition/GenFun.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general sheaf, duality or invertible-module facts do not state the specified finite Tate site comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback comparison of finite Tate twist sheaves preserves tensor duality and evaluation",
+   "results": "8 hits; CategoryTheory.Limits.pullbackComparison, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, transpose_dualTensorHom, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general sheaf, duality or invertible-module facts do not state the specified finite Tate site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalFunctor, CategoryTheory.HasRightDual",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.MonoidalFunctor'",
+   "date": "2026-10-22",
+   "verdict": "no match: rejected identifier in query; no result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to proetale comparison of finite Tate twist sheaves extends from tensor powers to dual powers preserving evaluation and pullback",
+   "results": "8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, Condensed.profiniteSolidCounit, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general sheaf, duality or invertible-module facts do not state the specified finite Tate site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual, CategoryTheory.Functor.Monoidal",
+   "results": "1 hits; CategoryTheory.hasRightDualOfEquivalence",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general sheaf, duality or invertible-module facts do not state the specified finite Tate site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison of invertible module sheaves extends uniquely to integer tensor powers by dual evaluation with compatible multiplication",
+   "results": "8 hits; SheafOfModules.ιFree_mapFree_inv, CommRing.Pic.mk_tensor, CommRing.Pic.AsModule, CommRing.Pic.mk, CommRing.Pic.mul_eq_tensor, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, CommRing.Pic.ext_iff, CommRing.Pic.mk_eq_mk_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general sheaf, duality or invertible-module facts do not state the specified finite Tate site comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-supported-cup-functoriality",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Proof 'Unit multiples': the coefficient normalization of the Kummer class; proof 'Permutations': canonical tensor and evaluation identification of its twist.",
+   "via": [
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-signed-twist-site-transport",
+  "worker": "stage1",
+  "summary": "Retained the statement and all fixed nonnegative normalizations. Constructed negative comparisons as evaluation transposes, checked every sign combination on basis tensors, proved scheme-pullback and composition by evaluation uniqueness, and computed the exact root coefficient map. No new nodes: the existing finite-line and site-duality results supply all non-elementary inputs.",
+  "blueprint": "Realizes the coefficient normalization required by lem-pur-frame-independence, proof 'Unit multiples', and the ordered tensor/evaluation identification required by 'Permutations'; through lem-pur-supported-cup-functoriality. No purity or orientation theorem is used.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-finite-tate-site-descent",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-amb-finite-root-site-comparison",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-pur-signed-line-derived-base-change",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-pur-ringed-site-finite-free-dual-pullback",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-amb-tate-root-projection-reduction",
+    "why": "Projection-induced theta and its scheme-pullback equation, needed to identify the item's specified degree-one map and its pullback square from statements; Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Only clause (1): the etale-to-proetale inverse image of the constant ring is the constant ring, the ring-isomorphism hypothesis of the signed-line base-change node; Generic finite-line, site comparison, or sheaf tensor/duality tool used only to normalize coefficient maps; it replaces no geometric step of the affine-line/Kummer unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-finite-tate-site-descent",
+  "lem-amb-finite-root-site-comparison",
+  "lem-pur-signed-line-derived-base-change",
+  "lem-pur-ringed-site-finite-free-dual-pullback",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-tate-root-projection-reduction",
+  "lem-sf-comparison-pullback-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-051e06c33",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-051e06c33 (reviewer sub-agent of L); spot-checked: FIX: I read the whole item: its statement is unchanged and it adds no new nodes. Fault 1 (C3), Step 1: the step took the degree-one map θ^{-1}(c⊗1) and its pullback squares from lem-amb-finite-tate-site-descent, but that node's statement only gives 'a canonical isomorphism'; the formula β=θ^{-1}σ appears only in its proof. Repair: Step 1 now cites lem-amb-tate-root-projection-reduction with r=n. Its θ_{n,X} has the same generator formula as θ_X of def-pur-frame-class, and it satisfies θ'b_v=(c^v⊗1)v^*θ. The root-site square for σ=c⊗1 (lem-amb-finite-root-site-comparison) then gives b_v v^*q^+_1=q^+_1' ν^*(e^v)κ_v. Tensor powers are taken through the natural lem-weil-pbc-ringed-topoi-module-pullback-tensor comparison, and Step 4 now refers to this Step 1 square. Fault 2 (C1/C4), Step 2: it needs ν^{-1}A_et≅A_proet as the ring hypothesis of lem-pur-signed-line-derived-base-change, and the site-comparison definition does not state it. Repair: Step 2 now cites lem-sf-comparison-pullback-exact(1). Both added nodes are declared in split_report.tool_uses, and neither reaches the item or its parent, so there is no cycle. proof_deps is now the union of the steps' uses. Checks: in Step 2, q_{-d}=(t^{-1})^∨δ has the right direction and gives the evaluation equation. Step 3's basis calculation gives e_r⊗e_s↦e_{r+s}; I checked (2,-1), (1,-2), (-1,-1), (1,-1), zero exponents and reversed orders. A basis change scales both sides by u^{r+s}, and there are no Koszul signs, so ℓ=2 is fine. In Step 4 both negative routes send e_d^∨ to (f'_d)^∨. Step 5 matches the definition of σ_X. Edge cases: empty X, n=1, and ramified E with e∤n. Sources read: Stacks 03EL, 0GMX, 0FNY and 03EO (sites-modules.tex) and 07A4 (sites-cohomology.tex). No SGA is used. Duplicate search found nothing: signed-line-derived-base-change, sheaf-line-evaluation-inverse-pair, integral-line-power-comparisons and the supported-twist definitions all differ. I accept the 9+2 generic tool_uses. Maintainer note: the statement's 'specified mixed-sign multiplication' has no defining stmt_dep. It is inherited from base, and Step 3 pins it down without ambiguity.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SignedTwistSiteTransport",
+  "declaration": "WeilConjectures.PurityFiniteSetting.signedTwistSiteTransport",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.signedTwistSiteTransport"
+  ],
+  "file": "lean/Sheaf/Paper/SignedTwistSiteTransport.lean",
+  "statement": "theorem signedTwistSiteTransport (P : PurityFiniteSetting.{u}) (n : ℕ) (hlevel : P.level = n + 1) (hA : ((P.coefficients.l ^ (n + 1) : ℕ) : P.signedSiteCoefficient n) = 0) (b : ∀ (X : Scheme.{u}) (_a : X ⟶ Spec (.of P.field.k)) (k : ℕ), (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (P.signedSiteCoefficient n)) X).obj (P.signedSiteEtale n hA X (k : ℤ)) ≅ P.signedSitePro n X (k : ℤ)) (hb : ∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (k : ℕ), IsFiniteTateSiteComparison P.coefficients.l P.extension n X n hA k (b X a k)) (θ : P.SignedSiteTheta n hA) (hθ : P.SignedSiteThetaNormalized n hA θ) (μ : P.SignedSiteProducts n) (hμ : ∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)), SheafOfModules.SignedLineProductNormalized.{u + 1, u, u + 1} (R := integralCoefficientCommRingSheaf P.coefficients.l P.extension X n) (purTwistFiniteOne X P.coefficients.l P.extension n) (μ X a)) : ∃! q : ∀ (X : Scheme.{u}) (_a : X ⟶ Spec (.of P.field.k)) (r : ℤ), (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (P.signedSiteCoefficient n)) X).obj (P.signedSiteEtale n hA X r) ≅ P.signedSitePro n X r, (∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (k : ℕ), q X a k = b X a k) ∧ P.SignedSiteEvaluation n hA q ∧ P.SignedSiteMultiplication n hlevel hA μ q ∧ (∃ τ : P.SignedSiteGeometric n, P.SignedSiteGeometricLaws n τ ∧ P.SignedSitePullbackSquare n hlevel hA τ q) ∧ P.SignedSiteRootCoefficient n hlevel hA θ q",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the actual signed etale Tate sheaves and intrinsic finite pro-etale coefficient twists, via the published constant-scalar restriction. Cites the landed definition node def-sf-signed-line-product-normalization-data for the existing SignedLineProductNormalized and SignedLineBasisPowers predicates of ordered mixed-sign multiplication; no theorem existence result or chosen object is used for these predicates. Repairs the H2 dependency-ownership return on ecc9bea628a4; the Lean module is byte-identical. All local equations test arbitrary restrictions; no trivialization or root is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f10c9c796",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN of ecc9bea628a4. The theorem stmt_dep lem-pur-signed-line-scalar-tensor-tower is replaced by the landed owning definition node def-sf-signed-line-product-normalization-data (existing:true, Q51, record identical to side-live, on the base per the blueprint-index of 2026-10-23 04:33 UTC). It owns SignedLineProductNormalized, the only declaration hμ uses; no .choose and no constructed object. Only stmt_deps and lean.note changed in the item. The statement equals base and live (item unlanded). The Lean module is byte-identical (sha256 a87151bf…). All 12 other stmt_dep records equal live. The report has Worker report, Second reading by Q19 and a repair section. Re-read of the theorem confirms the prior clause-by-clause check: b pinned incl. degree 0, θ projection formula, evaluation determines negative degrees, multiplication for all r,s via normalized μ, ∃τ pinned by laws, k_v orientation, degree-one σ_X c, ∃!. Edge cases level 1, empty X, ℓ=2, ramified E, zero exponents. One sorry; docstrings carry source and blueprint id. No file changed, so no compile; the worker's scompile passed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "independent cc review: delivered SignedTwistSiteTransportData defs vs clone a25e16ef939 SignedTwistSiteTransport lines 44-284 (byte-identical); theorem signature byte-identical; 3 new sorry statements = item conjuncts (node lean.statement = signature ×3); root_normalized compiled in scratch against live defs, axioms propext/Classical.choice/Quot.sound; 0 importers"
+ }
+}

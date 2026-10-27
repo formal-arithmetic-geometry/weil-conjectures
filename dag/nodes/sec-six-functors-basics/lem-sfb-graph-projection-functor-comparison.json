@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-graph-projection-functor-comparison",
+ "kind": "statement",
+ "title": "Functor comparison and universal evaluation from first-projection open loci",
+ "statement": "Let $Z\\to S$ and $X\\to S$ be morphisms of schemes [def-pc-scheme], put $Z_T=Z\\times_ST$, $X_T=X\\times_ST$ [def-pc-fibre-product], and write $\\mathcal M(T)=\\operatorname{Hom}_T(Z_T,X_T)$ [def-sfb-relative-morphisms-presheaf]. Let $F$ be a presheaf of sets on $S$-schemes such that $F(T)$ is a collection of closed subschemes $j_D:D\\hookrightarrow Z_T\\times_TX_T$ [def-weil-closed-immersion], with restriction maps given by pullback of closed subschemes. Assume that assigning the actual graph $\\Gamma_f=(\\mathrm{id},f)$ gives a natural transformation $\\gamma:\\mathcal M\\to F$. Write $k_D=\\operatorname{pr}_1\\circ j_D$ and $l_D=\\operatorname{pr}_2\\circ j_D$. Then $\\gamma_T$ is injective and $D$ is in its image exactly when $k_D$ is an isomorphism; the unique inverse-image morphism is $l_D\\circ k_D^{-1}$. For every $D\\in F(T)$, with $h_T(T')=\\operatorname{Hom}_S(T',T)$ [def-pc-representable-functor], the functor $h_T\\times_F\\mathcal M$ is naturally identified with the functor of maps $h:T'\\to T$ for which $k_{D_{T'}}$ is an isomorphism. Suppose, in addition, that for every $D\\in F(T)$ an open subscheme $U_D\\subseteq T$ [def-weil-open-immersion] satisfies, for every $h:T'\\to T$, that $k_{D_{T'}}$ is an isomorphism if and only if $h$ factors through $U_D$. Then $h_T\\times_F\\mathcal M\\cong h_{U_D}$ over $h_T$, so $\\gamma$ is representable by open immersions [def-pc-open-subfunctor]. If $H$ represents $F$, with universal closed family $D_H$, then $M=U_{D_H}\\subseteq H$ represents $\\mathcal M$ and its inclusion represents $\\gamma$. The evaluation $Z_M\\to X_M$ is $l_{D_M}\\circ k_{D_M}^{-1}$, where $D_M=D_H\\times_HM$. Every $a:T\\to M$ pulls this evaluation back to the morphism classified by $a$. Under every $T_0\\to T$, one has $U_{D_{T_0}}=T_0\\times_TU_D$ as open subschemes and $(k_D^{-1})_{T_0}=(k_{D_{T_0}})^{-1}$ wherever these inverses exist; hence these identifications and evaluation commute with arbitrary base change.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb (last proof paragraph) and quot-lemma-Mor-into-Hilb-open (graph criterion and final representability inference): formal comparison for any pullback-stable collection of closed families containing graphs, and representing-family/evaluation consequence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sfb-relative-morphisms-presheaf",
+  "def-weil-closed-immersion",
+  "def-pc-representable-functor",
+  "def-weil-open-immersion",
+  "def-pc-open-subfunctor"
+ ],
+ "proof": [
+  {
+   "text": "For an actual graph $\\Gamma_f=(\\mathrm{id},f)$ the first projection restricted to the graph is the identity of $Z_T$, and the second is $f$, by the defining equations of the fibre product. Thus its first projection is invertible and $f=l_{\\Gamma_f}\\circ k_{\\Gamma_f}^{-1}$. Equality of two closed graph subschemes identifies their inclusions and projections over $Z_T\\times_TX_T$, so this formula recovers the same morphism from either. This proves injectivity of $\\gamma_T$.",
+   "uses": [
+    "def-sfb-relative-morphisms-presheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb, last proof paragraph, and quot-lemma-Mor-into-Hilb-open, graph criterion; explicit functorial consequences."
+   }
+  },
+  {
+   "text": "Conversely, if $k_D:D\\to Z_T$ is invertible, set $f=l_D\\circ k_D^{-1}$. This is a $T$-morphism, since both projections of $j_D$ are over $T$. The morphisms $j_D\\circ k_D^{-1}$ and $(\\mathrm{id},f)$ to $Z_T\\times_TX_T$ have the same first projection $\\mathrm{id}$ and the same second projection $f$, so they are equal by the fibre-product universal property. Hence $k_D^{-1}$ identifies the inclusion of $D$ with the actual graph of $f$, as closed subschemes, not just as sets. This proves the image criterion and, with step 1, uniqueness.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-relative-morphisms-presheaf",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb, last proof paragraph, and quot-lemma-Mor-into-Hilb-open, graph criterion; explicit functorial consequences."
+   }
+  },
+  {
+   "text": "Fix $D\\in F(T)$. The element $D$ defines $\\delta_D:h_T\\to F$ by $\\delta_D(h)=h^*D$; the Yoneda bijection identifies this with the map corresponding to $D$. On an $S$-scheme $T\\prime$, the set pullback $h_T\\times_F\\mathcal M$ consists exactly of pairs $(h,f)$ with $h:T\\prime\\to T$ and $\\Gamma_f=h^*D$. Under further pullback $u:T\\prime\\prime\\to T\\prime$ it sends $(h,f)$ to $(h\\circ u,u^*f)$, by the assumed naturality of $\\gamma$. Steps 1 and 2 show that forgetting $f$ is a bijection onto the maps $h$ for which $k_{h^*D}$ is invertible, with inverse $h\\mapsto(h,l_{h^*D}\\circ k_{h^*D}^{-1})$. Forgetting commutes with restrictions by the displayed formula, so its bijective inverse is natural too.",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-pc-representable-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb, last proof paragraph, and quot-lemma-Mor-into-Hilb-open, graph criterion; explicit functorial consequences."
+   }
+  },
+  {
+   "text": "An open inclusion $i:U\\hookrightarrow T$ is a monomorphism: the underlying map of spaces is injective and the structure sheaf on $U$ is the restriction of that on $T$, so a map to $U$ over a fixed map to $T$ has its continuous map and its sheaf map uniquely prescribed. Thus $\\operatorname{Hom}_S(T\\prime,U)\\to\\operatorname{Hom}_S(T\\prime,T)$ identifies its source with the maps factoring through $U$. Apply this with $U=U_D$. The assumed universal property of $U_D$ identifies this image with exactly the image in step 3. The resulting bijections $h_{U_D}\\cong h_T\\times_F\\mathcal M$ are natural and preserve the map to $h_T$. Identifying $\\mathcal M$ with its image by injectivity, this is precisely representability by open immersions in the cited definition.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-representable-functor",
+    "def-pc-open-subfunctor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb, last proof paragraph, and quot-lemma-Mor-into-Hilb-open, graph criterion; explicit functorial consequences."
+   }
+  },
+  {
+   "text": "Choose the representing isomorphism $h_H\\cong F$ and let $D_H$ be the image of $\\mathrm{id}_H$. Naturality (equivalently the Yoneda formula) says that $b:T\\to H$ corresponds to $b^*D_H$. Put $i:M=U_{D_H}\\hookrightarrow H$. Step 4 with $T=H$ gives $h_M\\cong h_H\\times_F\\mathcal M$. Projection from the latter pullback to $\\mathcal M$ is an isomorphism: on each test scheme its inverse sends $f$ to $(b_f,f)$, where $b_f$ is the unique map corresponding under $h_H\\cong F$ to $\\gamma(f)$. These formulas commute with restrictions. Consequently $M$ represents $\\mathcal M$, and the induced map $h_M\\to F$ is the one represented by its inclusion into $H$.",
+   "uses": [
+    "def-pc-representable-functor",
+    "lem-pc-yoneda",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb, last proof paragraph, and quot-lemma-Mor-into-Hilb-open, graph criterion; explicit functorial consequences."
+   }
+  },
+  {
+   "text": "The inclusion $i:M\\to H$ factors through $U_{D_H}$, so the hypothesis applied to $i$ says that $k_{D_M}$ is an isomorphism, where $D_M=i^*D_H$. Step 2 recovers the morphism $e=l_{D_M}\\circ k_{D_M}^{-1}:Z_M\\to X_M$ with graph $D_M$. Under the isomorphism in step 5, the element $\\mathrm{id}_M\\in h_M(M)$ corresponds to this $e$: its graph is the family classified by $i$, and injectivity of $\\gamma_M$ ensures equality. For $a:T\\to M$, naturality of this representing isomorphism therefore gives precisely $a^*e$ as the morphism classified by $a$.",
+   "uses": [
+    "def-sfb-relative-morphisms-presheaf",
+    "def-pc-representable-functor",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb, last proof paragraph, and quot-lemma-Mor-into-Hilb-open, graph criterion; explicit functorial consequences."
+   }
+  },
+  {
+   "text": "For completeness the inverse-projection formula itself commutes with arbitrary pullback. If $k_D$ is invertible and $h:T_0\\to T$, form the induced morphisms $k_{D,T_0}$ and $(k_D^{-1})_{T_0}$ using the fibre-product universal property. Their two composites have the same two projections as the appropriate identity maps: on the first projections they are the pullbacks of $k_Dk_D^{-1}=\\mathrm{id}$ or $k_D^{-1}k_D=\\mathrm{id}$, and on the base projection they are identities. Uniqueness in the universal property makes both composites identities. Thus $(k_D^{-1})_{T_0}=(k_{D_{T_0}})^{-1}$ under the canonical identifications. The same uniqueness shows that pullback preserves composition, whence $(l_D\\circ k_D^{-1})_{T_0}=l_{D_{T_0}}\\circ(k_{D_{T_0}})^{-1}$. For two successive base changes the canonical identifications agree, since their composites with every projection agree.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb, last proof paragraph, and quot-lemma-Mor-into-Hilb-open, graph criterion; explicit functorial consequences."
+   }
+  },
+  {
+   "text": "Let $h:T_0\\to T$, $V=U_{D_{T_0}}$, and $W=T_0\\times_TU_D$, with projection $w:W\\to T_0$. By the fibre-product universal property, maps to $W$ over $T_0$ are exactly maps whose composite to $T$ factors through $U_D$. Equivalently, $W$ is the restriction of $T_0$ to $h^{-1}|U_D|$, with its restricted structure sheaf, hence is an open subscheme. For any $g:R\\to T_0$, the presheaf pullback law identifies $g^*D_{T_0}$ with $(h\\circ g)^*D$. The assumed universal properties therefore say $g$ factors through $V$ if and only if $h\\circ g$ factors through $U_D$, if and only if $g$ factors through $W$. Taking $g$ first to be the inclusion of $V$ and then $w$ produces maps $V\\to W$ and $W\\to V$ over $T_0$. Their composites are identities by uniqueness of factorization through an open inclusion, proved in step 4. Thus these opens coincide as open subschemes. Together with step 7 and the explicit pair/factorization maps in steps 3--6, this proves all the claimed base-change compatibilities.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb, last proof paragraph, and quot-lemma-Mor-into-Hilb-open, graph criterion; explicit functorial consequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-morphisms-presheaf",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "lem-pc-yoneda",
+  "def-pc-representable-functor",
+  "def-weil-open-immersion",
+  "def-pc-open-subfunctor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D1A and 0D1B, graph recovery and image criterion; Q21 expands the formal functor-of-points and evaluation consequences under the item's explicit assumptions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "graph|presheaf.*[Oo]pen|[Ee]valuation|[Rr]epresentableBy",
+   "results": "{\"t\": \"2026-10-22T05:59:00Z\", \"tool\": \"grep\", \"query\": \"graph|presheaf.*[Oo]pen|[Ee]valuation|[Rr]epresentableBy\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"0c9bd8ed468877ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability data, gluing open charts, and categorical pullback lifts do not establish graph recovery, the comparison for a closed-family presheaf, and evaluation with the stated inverse-projection formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"RepresentableBy\"",
+   "results": "{\"t\": \"2026-10-22T05:59:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor\\\", \\\"RepresentableBy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CorepresentableBy.id\", \"CategoryTheory.Functor.CorepresentableBy\", \"CategoryTheory.Functor.RepresentableBy\", \"CategoryTheory.Functor.CorepresentableBy.isCorepresentable\", \"CategoryTheory.Functor.corepresentableBy\", \"CategoryTheory.Functor.RepresentableBy.isRepresentable\", \"CategoryTheory.Functor.representableBy\", \"CategoryTheory.Functor.CorepresentableBy.ofIsoObj\"], \"digest\": \"23df94fda8446a75\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability data, gluing open charts, and categorical pullback lifts do not establish graph recovery, the comparison for a closed-family presheaf, and evaluation with the stated inverse-projection formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a presheaf of closed subschemes containing graphs, identify the relative Hom functor by invertibility of the first projection and construct universal evaluation on a representing open scheme",
+   "results": "{\"t\": \"2026-10-22T05:59:11Z\", \"tool\": \"leanfinder\", \"query\": \"Given a presheaf of closed subschemes containing graphs, identify the relative Hom functor by invertibility of the first projection and construct universal evaluation on a representing open scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\"], \"digest\": \"90a7d3376a802b89\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability data, gluing open charts, and categorical pullback lifts do not establish graph recovery, the comparison for a closed-family presheaf, and evaluation with the stated inverse-projection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "graph|[Ee]valuation|presheaf.*[Oo]pen",
+   "results": "{\"t\": \"2026-10-22T05:59:16Z\", \"tool\": \"grep\", \"query\": \"graph|[Ee]valuation|presheaf.*[Oo]pen\", \"sub\": \"CategoryTheory/MorphismProperty\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean\", \"Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean\", \"Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean\", \"Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean\", \"Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean\"], \"digest\": \"f060e8118c031c48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability data, gluing open charts, and categorical pullback lifts do not establish graph recovery, the comparison for a closed-family presheaf, and evaluation with the stated inverse-projection formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme of a product is a graph exactly when its first projection is an isomorphism, naturally in the base",
+   "results": "{\"t\": \"2026-10-22T05:59:23Z\", \"tool\": \"leansearch\", \"query\": \"A closed subscheme of a product is a graph exactly when its first projection is an isomorphism, naturally in the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\"], \"digest\": \"d6822ce0f5f5f33b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability data, gluing open charts, and categorical pullback lifts do not establish graph recovery, the comparison for a closed-family presheaf, and evaluation with the stated inverse-projection formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recovering morphisms from graphs gives a natural bijection with invertible first-projection families, and evaluation of a universal family commutes with all base changes",
+   "results": "{\"t\": \"2026-10-22T05:59:26Z\", \"tool\": \"leanfinder\", \"query\": \"Recovering morphisms from graphs gives a natural bijection with invertible first-projection families, and evaluation of a universal family commutes with all base changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_inv\", \"CategoryTheory.Functor.relativelyRepresentable.lift'_fst\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_inv_isHomLift\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom_isHomLift\", \"CategoryTheory.Functor.relativelyRepresentable.isomorphisms_le\", \"CategoryTheory.Functor.relativelyRepresentable.lift_snd\", \"CategoryTheory.Functor.relativelyRepresentable.lift'_snd\", \"CategoryTheory.Functor.IsStronglyCartesian.domainIsoOfBaseIso\"], \"digest\": \"9af164a8b8565672\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability data, gluing open charts, and categorical pullback lifts do not establish graph recovery, the comparison for a closed-family presheaf, and evaluation with the stated inverse-projection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "graph|representable.*open|universal.*evaluation",
+   "results": "{\"t\": \"2026-10-23T04:09:36Z\", \"tool\": \"grep\", \"query\": \"graph|representable.*open|universal.*evaluation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\"], \"digest\": \"e99ad781c7509cf0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give fibre-product projection identities, ideal-sheaf pullback comparison, or local representability by gluing; none states the full graph/open-functor comparison and universal evaluation. "
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor of morphisms from Z to X is the open subfunctor of closed subschemes in Z times X whose first projection is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T04:09:37Z\", \"tool\": \"leansearch\", \"query\": \"The functor of morphisms from Z to X is the open subfunctor of closed subschemes in Z times X whose first projection is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.opensFunctor\", \"AlgebraicGeometry.Scheme.Hom.opensFunctor\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor\", \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"AlgebraicGeometry.opensDiagram\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.IsOpenImmersion.instFstScheme\"], \"digest\": \"fd5bcbc7d788708f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give fibre-product projection identities, ideal-sheaf pullback comparison, or local representability by gluing; none states the full graph/open-functor comparison and universal evaluation. "
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"lift\", \"fst\"",
+   "results": "{\"t\": \"2026-10-23T04:09:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"lift\\\", \\\"fst\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PullbackCone.IsLimit.lift_fst\", \"CategoryTheory.Limits.PullbackCone.IsLimit.lift_fst_assoc\", \"CategoryTheory.Limits.pullback.lift_fst_snd\", \"CategoryTheory.Limits.pullback.lift_fst\", \"CategoryTheory.Limits.pullback.lift_fst_assoc\", \"CategoryTheory.IsPullback.lift_fst\", \"CategoryTheory.IsPullback.lift_fst_assoc\", \"CategoryTheory.MorphismProperty.pullbackLift_fst_snd\"], \"digest\": \"82de11cc299dff4e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give fibre-product projection identities, ideal-sheaf pullback comparison, or local representability by gluing; none states the full graph/open-functor comparison and universal evaluation. "
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme of a fibre product whose first projection is an isomorphism is the graph of a unique morphism; an open isomorphism locus represents the Hom functor with universal evaluation",
+   "results": "{\"t\": \"2026-10-23T04:09:46Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subscheme of a fibre product whose first projection is an isomorphism is the graph of a unique morphism; an open isomorphism locus represents the Hom functor with universal evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.exists_preimage\", \"AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.hy\"], \"digest\": \"3d4bf5ef86581385\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give fibre-product projection identities, ideal-sheaf pullback comparison, or local representability by gluing; none states the full graph/open-functor comparison and universal evaluation. "
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative representability of a subfunctor by open immersions and recovery of a map from its graph using the inverse first projection",
+   "results": "{\"t\": \"2026-10-23T04:10:33Z\", \"tool\": \"leanfinder\", \"query\": \"Relative representability of a subfunctor by open immersions and recovery of a map from its graph using the inverse first projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.morphismRestrictOpensRange\", \"AlgebraicGeometry.IsOpenImmersion.lift_app\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom\"], \"digest\": \"a9cebad6aa46fcc7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give fibre-product projection identities, ideal-sheaf pullback comparison, or local representability by gluing; none states the full graph/open-functor comparison and universal evaluation. "
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graphs-open-in-hilbert",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb (last proof paragraph) and quot-lemma-Mor-into-Hilb-open (graph criterion and final representability inference): formal comparison for any pullback-stable collection of closed families containing graphs, and representing-family/evaluation consequence.",
+   "via": [
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-graph-projection-functor-comparison",
+  "worker": "stage1",
+  "summary": "Rebased the retained eight-step graph comparison on the current unsplit DAG item for the returned side-completion delivery. Re-read every dependency statement and checked all 19 retained quotations; statement and statement dependencies agree with current DAG. Made step 8 a direct pair of inverse open-factorization maps, avoiding an implicit residue-field-point construction. Preserved the graph recovery, functor pullback, representing family, universal evaluation and arbitrary-base-change arguments, citations and logged searches; no new nodes or statement change.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite, through de Jong 3.9 passage from Hilbert to morphisms and evaluation: supplies exactly the formal comparison following the separately supplied universal isomorphism-open locus. The ancestor search returns None; inherited from.node and via retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-81e753766",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-81e753766 (reviewer sub-agent of L); spot-checked: I read the whole item: all 8 steps, the 8 cited statements, Stacks quot.tex 0D1A/0D1B (lines 3139-3196) and the parent's step 3. The only change from the previously passed head b18b9b3f is the text of step 8, plus the split_report summary. In the live and side-live DAGs the item is still unsplit with an empty proof, and there is no repair note, so it is not superseded and not a re-split order. The statement, stmt_deps, source, blueprint and import_flags are byte-identical to live, so nothing is weakened. Step 8 now sets W=T0×_T U_D and V=U_{D_T0}. Through g^*D_T0=(hg)^*D, both opens represent the same subfunctor of h_T0: g factors through V iff hg factors through U_D iff g factors through W. The inclusion of V and the projection w give maps V→W and W→V over T0. Their composites are identities because open inclusions are monomorphisms (step 4), so V=W as open subschemes. This is correct and uses no flatness or finiteness hypothesis. Steps 1-7 still hold. Graph recovery l∘k^{-1} and the image criterion come from fibre-product uniqueness; D is closed by hypothesis, so no separatedness is needed. Steps 3-6 give the pullback pairs (Yoneda), open factorization (matching def-pc-open-subfunctor), M=U_{D_H} representing the morphism functor with inverse f↦(b_f,f), and the evaluation e. Step 7 gives preservation of inverses under base change. The parent lem-sfb-graphs-open-in-hilbert step 3 uses exactly these hypotheses. Small cases tested: Spec k with D=∅ (U=∅), Z=∅, X=∅, empty test schemes and non-reduced T. No duplicate: hilbert-graph-family-base-change, universal-isomorphism-open, projective-curve-isom-graphs, bounded-double-graph-hilbert-locus, projective-hom-graph-parameter. No SGA, no cycle, proof_deps equal the union of uses, and Mathlib searches of all three kinds are recorded. Route: the only cited statement outside the unit is lem-pc-yoneda, a Mathlib leaf, so no tool_uses are needed. Maintainer note: the inherited blueprint.from.node is null across the created chain; that is a base-node fault, not this delivery's."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GraphProjectionFunctorComparison",
+  "declaration": "AlgebraicGeometry.graph_projection_functor_comparison",
+  "declarations": [
+   "AlgebraicGeometry.RelativeGraphComparison.first",
+   "AlgebraicGeometry.RelativeGraphComparison.second",
+   "AlgebraicGeometry.graph_projection_functor_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GraphProjectionFunctorComparison.lean",
+  "statement": "theorem graph_projection_functor_comparison {Z X S : Scheme.{u}} (z : Z ⟶ S) (x : X ⟶ S) (F : (Over S)ᵒᵖ ⥤ Type u) (I : ∀ T : Over S, F.obj (op T) → (pullback (pullback.fst z x ≫ z) T.hom).IdealSheafData) (hinj : ∀ T : Over S, Function.Injective (I T)) (hI : ∀ (T T' : Over S) (h : T' ⟶ T) (D : F.obj (op T)), I T' (F.map h.op D) = (I T D).comap (baseChangeMap (pullback.fst z x ≫ z) h)) (γ : relativeMorphismsPresheaf z x ⟶ F) (hγ : ∀ (T : Over S) (f : (relativeMorphismsPresheaf z x).obj (op T)), IsClosedImmersion (relativeMorphismGraph z x T f) ∧ I T (γ.app (op T) f) = (relativeMorphismGraph z x T f).ker) : (∀ T : Over S, Function.Injective (γ.app (op T))) ∧ (∀ (T : Over S) (D : F.obj (op T)), (∃ f, γ.app (op T) f = D) ↔ IsIso (first z x T (I T D))) ∧ (∀ (T : Over S) (D : F.obj (op T)) (e : (I T D).subscheme ≅ pullback T.hom z), e.hom = first z x T (I T D) → ∃! f : (relativeMorphismsPresheaf z x).obj (op T), γ.app (op T) f = D ∧ f.left = e.inv ≫ second z x T (I T D)) ∧ (∀ (T : Over S) (D : F.obj (op T)), ∃ L : Subfunctor (yoneda.obj T), (∀ (T' : Over S) (h : T' ⟶ T), h ∈ L.obj (op T') ↔ IsIso (first z x T' (I T' (F.map h.op D)))) ∧ ∃ e : pullback (yonedaEquiv.symm D) γ ≅ L.toFunctor, e.hom ≫ L.ι = pullback.fst (yonedaEquiv.symm D) γ) ∧ (∀ (T : Over S) (D : F.obj (op T)) (e : (I T D).subscheme ≅ pullback T.hom z), e.hom = first z x T (I T D) → ∀ (T₀ : Over S) (h : T₀ ⟶ T), ∃ (e₀ : (I T₀ (F.map h.op D)).subscheme ≅ pullback T₀.hom z) (d : (I T₀ (F.map h.op D)).subscheme ⟶ (I T D).subscheme), e₀.hom = first z x T₀ (I T₀ (F.map h.op D)) ∧ d ≫ (I T D).subschemeι = (I T₀ (F.map h.op D)).subschemeι ≫ baseChangeMap (pullback.fst z x ≫ z) h ∧ e₀.inv ≫ d = ((Over.pullback z).map h).left ≫ e.inv ∧ e₀.inv ≫ second z x T₀ (I T₀ (F.map h.op D)) = ((Over.pullback z).map h).left ≫ e.inv ≫ second z x T (I T D)) ∧ (∀ U : ∀ T : Over S, F.obj (op T) → T.left.Opens, (∀ (T : Over S) (D : F.obj (op T)) (T' : Over S) (h : T' ⟶ T), IsIso (first z x T' (I T' (F.map h.op D))) ↔ ∃ a : T'.left ⟶ (U T D).toScheme, a ≫ (U T D).ι = h.left) → (∀ (T : Over S) (D : F.obj (op T)), ∃ e : pullback (yonedaEquiv.symm D) γ ≅ yoneda.obj (Over.mk ((U T D).ι ≫ T.hom)), e.hom ≫ yoneda.map (Over.homMk (U T D).ι rfl) = pullback.fst (yonedaEquiv.symm D) γ) ∧ ((@IsOpenImmersion : MorphismProperty Scheme.{u}).over (X := S)).presheaf γ ∧ (∀ (H : Over S) (eH : F.RepresentableBy H), ∃ (M : Over S) (i : M ⟶ H) (eM : (relativeMorphismsPresheaf z x).RepresentableBy M), IsOpenImmersion i.left ∧ Set.range i.left = (U H (eH.homEquiv (𝟙 H)) : Set H.left) ∧ (∀ (T : Over S) (a : T ⟶ M), eH.homEquiv (a ≫ i) = γ.app (op T) (eM.homEquiv a)) ∧ ∃ e : (I M (F.map i.op (eH.homEquiv (𝟙 H)))).subscheme ≅ pullback M.hom z, e.hom = first z x M (I M (F.map i.op (eH.homEquiv (𝟙 H)))) ∧ (eM.homEquiv (𝟙 M)).left = e.inv ≫ second z x M (I M (F.map i.op (eH.homEquiv (𝟙 H)))) ∧ (∀ (T : Over S) (a : T ⟶ M), (eM.homEquiv a).left = ((Over.pullback z).map a).left ≫ (eM.homEquiv (𝟙 M)).left)) ∧ (∀ (T T₀ : Over S) (h : T₀ ⟶ T) (D : F.obj (op T)), U T₀ (F.map h.op D) = h.left ⁻¹ᵁ U T D))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69c2d70c8",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read item, 7 stmt_deps, RelativeMorphismsPresheaf/Representability/PicardFunctor.baseChangeMap/Mathlib comap+over+presheaf, parent graphs_open_in_hilbert, quot.tex 0D1A/0D1B. Snapshot differs from side-live only in lean (first statement, no rebind). F encoded by injective I into IdealSheafData; hI = comap along canonical baseChangeMap; hγ pins γ to graph ker plus closed-immersion (implied by node). All conjuncts checked for truth: injectivity, iso-criterion, ∃! recovery l∘k⁻¹ (∃! harmless), subfunctor comparison pinned over h_T, open-locus iso over h_T, IsOpenImmersion.over.presheaf γ (= recorded relative notion), representing open M with range=U, i represents γ, evaluation k⁻¹≫l and pullback, U base change, inverse base-change via mono-pinned d. Edge cases (empty Z/X/D/T/S, nonreduced, nonflat, U=⊥/⊤) fine; universe u; lean.statement verbatim; no hollow defs; one sorry; docstrings with source/blueprint/8 steps; lines ≤100. Advisories: Sites.Representability import unused by statement; baseChangeMap outside stmt_deps. No compile (no file changed)."
+ }
+}

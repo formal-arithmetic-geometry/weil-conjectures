@@ -1,0 +1,113 @@
+{
+ "id": "def-sp-purity-reduction-comparisons",
+ "kind": "definition",
+ "title": "Canonical purity tower evaluation comparisons",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, the strict coefficient tower operations and evaluation coordinates [def-sp-coefficient-tower-shriek-interfaces], a morphism f:X→Y and its compactification. The constructible finite-Tor tower categories are those of [sk-def-sp-normalized-towers]. Given a Tate tower w [def-sp-chart-tate-tower-data], define pullbackTower(K) as the inverse realization of the levelwise pullback tensored with the ordered d-fold shifted positive Tate line. Given the finite origins and right-adjoint comparisons of [det-sp-tower-gluing], root-line identifications [def-sp-coordinate-right-comparisons], coefficient, tensor and geometric coordinates [def-sp-p1-coefficient-coordinates, def-sp-p1-tensor-derived-coordinates, def-sp-p1-geometric-coordinates], define sourceWord by the pullWord and tensorWord constructors [def-sp-p1-level-words]. Define sourceComparison by this word comparison followed by the realization counit and levelComparison; define targetComparison by the finite right-realization inverse, inverse gluing comparison and the level comparisons. These four definitions are moved verbatim from PurityConjugatesTowerReduction, retaining names, universes, bodies and all normalizations. There is no existence assertion and no purity theorem is used.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), actual pullback and exceptional reductions and coefficient compatibility"
+ },
+ "stmt_deps": [
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "sk-def-sp-normalized-towers",
+  "def-sp-chart-tate-tower-data",
+  "det-sp-tower-gluing",
+  "def-sp-coordinate-right-comparisons",
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-p1-tensor-derived-coordinates",
+  "def-sp-p1-geometric-coordinates",
+  "def-sp-p1-level-words"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical coefficient reduction commutes with pullback tensor Tate lines and finite smooth purity",
+   "results": "Eight results concerning coefficientwise module tactics, scheme point tensors and ordinary algebraic tensors; none concerns derived coefficient-tower reduction or exceptional purity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite smooth purity conjugates coefficient tower reductions by naturality and coefficient compatibility",
+   "results": "Eight results concerning smooth algebra descent and standard smooth presentations; no derived tower reduction or exceptional comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*reduction|exceptional.*reduction|coefficient.*purity in Mathlib/CategoryTheory and Mathlib/Algebra/Homology; source and Sheaf finite smooth modules",
+   "results": "No Mathlib match. Existing Sheaf ReductionCompatibilities and FiniteOrientationReduction provide finite scalar/orientation tools, not the transported actual tower equations. FiniteSmoothTwoLevelReduction uses prime-ring levels, rather than the arbitrary ramified extension quotients and the specified tower realizations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityConjugatesTowerReduction",
+  "date": "2026-10-25",
+  "group": "B3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (3), Canonical purity tower evaluation comparisons",
+   "via": [
+    "lem-sp-purity-conjugates-tower-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityTowerReductionComparisons",
+  "file": "lean/Sheaf/Paper/PurityTowerReductionComparisons.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpPurityReduction.pullbackTower",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpPurityReduction.pullbackTower",
+   "AlgebraicGeometry.ProEtale.SpPurityReduction.sourceWord",
+   "AlgebraicGeometry.ProEtale.SpPurityReduction.sourceComparison",
+   "AlgebraicGeometry.ProEtale.SpPurityReduction.targetComparison"
+  ],
+  "statement": "def pullbackTower {X Y : Scheme.{u}} (f : X ⟶ Y) (w : SpChartAdmissibility.Twists l E X) (d : ℕ) (K : SpTowerCalculus.C l E b q Y)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50a02",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261025T201344-L-2447557",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50a02",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261025T201344-L-2447557",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); moved defs vs clone bodies (identical); two sorried transport statements vs item conclusion clauses and pinned structures CoefficientLineComparison/OrientationNormalized; node proof fields vs Lean proof"
+ }
+}

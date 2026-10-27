@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-moduli-stack-properties",
+ "kind": "definition",
+ "title": "Smooth finite-type atlases and proper diagonals for Deligne--Mumford moduli stacks",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], put $S=\\operatorname{Spec}k$ [def-pc-scheme], and let $\\mathcal F$ be a Deligne--Mumford stack on $\\mathit{Sch}/S$ in the conventions of [def-sfb-stable-pointed-moduli-groupoids]. A smooth finite-type atlas means an $S$-scheme $U$ and a representable surjective etale morphism $h_U\\to\\mathcal F$ such that $U\\to S$ is smooth [def-sbc-smooth-morphisms], locally of finite type and quasi-compact [def-weil-finite-type-morphism]. On DM stacks over a field, existence of such an atlas expresses smoothness and finite type, including quasi-compactness. For a scheme $S$ and a DM stack $\\mathcal F$ over $S$, a proper diagonal means the following scheme-test condition: for every pair of $S$-schemes $T,U$ and maps $a:h_T\\to\\mathcal F$, $b:h_U\\to\\mathcal F$, the 2-fibre product $h_T\\times_{\\mathcal F}h_U$ is equivalent over $\\mathit{Sch}/S$ to $h_R$ for an $S$-scheme $R$, compatibly with both projections $p:R\\to T$ and $q:R\\to U$, and the induced morphism $R\\to T\\times_S U$ [def-pc-fibre-product] is proper [def-weil-proper-morphism]. Compatibility means natural isomorphisms over identity base maps, not merely equivalences of abstract categories. On DM stacks this is exactly separatedness: a proper unramified diagonal is finite and therefore representable by schemes. These predicates do not assert that any particular moduli stack has an atlas or a proper diagonal.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Definitions definition-separated, definition-smooth, definition-locally-finite-type; Section section-finite-type; for the DM scheme-test form also spaces-more-morphisms.tex, lemma-characterize-finite, and spaces-morphisms.tex, lemma-locally-quasi-finite-separated-representable."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Deligne Mumford stack is separated if its diagonal is proper and smooth of finite type if it has a finite type smooth atlas",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"isSeparatedMap_iff_isClosed_diagonal\", \"module\": \"Mathlib.Topology.SeparatedMap\", \"type\": \"{f : X → Y} : IsSeparatedMap f ↔ IsClosed f.pullbackDiagonal\", \"doc\": \"A function $ f: X \\\\to Y $ is a separated map if and only if the diagonal subset of the pullback of $ f $ with itself is closed in the product topology.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No matching moduli-stack definition: results are scheme or topological properties, or no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModuliStack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No matching moduli-stack definition: results are scheme or topological properties, or no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "ModuliStack|ProperModuliDiagonal|SmoothFiniteTypeAtlas",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No matching moduli-stack definition: results are scheme or topological properties, or no hits."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-level-coarse-moduli",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The separatedness, smoothness and finite type assertions in lem-sfb-abelian-level-coarse-moduli; atlas testing and proper-diagonal conventions.",
+   "via": [
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuliStackProperties",
+  "declaration": "CategoryTheory.HasSmoothFiniteTypeModuliAtlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuliStackProperties.lean",
+  "statement": "def HasSmoothFiniteTypeModuliAtlas {k : Type u} [Field k] (F : BasedCategory.{v, w} (Over (AlgebraicGeometry.Spec (.of k)))) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.HasSmoothFiniteTypeModuliAtlas",
+   "CategoryTheory.HasProperModuliDiagonal"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-461461400",
+  "group": "Q10",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-461461400",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Item node changes only by adding the new definition node def-sfb-moduli-stack-properties to stmt_deps plus the lean record; statement unchanged and lean.statement verbatim. Every clause matches: k a field, g>=2, AbelianLevelPrime (on Spec k this is exactly a prime >=3 nonzero in k), the recorded AbelianLevelModuli.forget groupoid in every conjunct, IsDeligneMumfordModuliStack, HasProperModuliDiagonal (equivalent to a separated DM stack: proper DM diagonal is finite so scheme-representable; both projections pinned over identity base maps), HasSmoothFiniteTypeModuliAtlas (etale surjective atlas, smooth + LFT + QC over k; equivalent to smooth finite type for DM stacks), IsCoarseModuliScheme with the given c, and C separated + LFT + QC. No extra hypotheses or conclusions. New node has the required fields and its definitions are real, not hollow; no duplicate predicate in live Sheaf or sibling deliveries (unpointed-stable theorem writes its atlas inline the same way). Docstrings carry source, blueprint id and 7 proof steps; one sorry; proof-dependency imports are the recorded modules; lines <=100; universes bound. Edge cases g=2, l=3, char 0 or char != l, empty test schemes checked. Advisory: Smooth is imported only transitively. No file changed, so no compile."
+ }
+}

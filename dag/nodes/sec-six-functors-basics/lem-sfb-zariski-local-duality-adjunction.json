@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-zariski-local-duality-adjunction",
+ "kind": "statement",
+ "title": "Zariski local criterion for a trace-defined derived adjunction",
+ "statement": "Let $f:X\\to S$ be a quasi-compact separated morphism of arbitrary schemes [def-pc-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism]. Work on unbounded derived categories of modules with quasi-coherent cohomology [def-pc-derived-category], [def-pc-derived-direct-image]. Supply $K\\in D_{\\mathrm{QCoh}}(X)$ and a trace $\\tau:Rf_*K\\to\\mathcal O_S$. Set $G(M)=Lf^*M\\otimes^{\\mathbf L}K$, using [def-pc-derived-pullback], [def-pc-scheme-derived-tensor-structure]. Give $G$ its trace-defined natural transformation $\\epsilon_M:Rf_*G(M)\\simeq M\\otimes^{\\mathbf L}Rf_*K\\xrightarrow{1\\otimes\\tau}M$ via the projection formula. Suppose for every affine open $V\\subset S$ the analogous functor $G_V$ on $X_V=f^{-1}V$ is right adjoint to $Rf_{V,*}$ with exactly the restricted trace-defined counit. Then composition with $\\epsilon$ gives natural bijections\n$$\\operatorname{Hom}_{D(X)}(E,G(M))\\xrightarrow{\\sim}\\operatorname{Hom}_{D(S)}(Rf_*E,M)$$\nfor all $E\\in D_{\\mathrm{QCoh}}(X)$ and $M\\in D_{\\mathrm{QCoh}}(S)$. No qcqs hypothesis on the individual schemes $S,X$, finite cover, or boundedness of $E,M$ is required.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Agent local-to-global consequence of the trace-adjunction construction, section-trace, equations equation-sheafy-trace and equation-global-hom; internal-Hom restriction: cohomology.tex Tag 08DL; projection formula: perfect.tex Tag 08EU (lemma-cohomology-base-change)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pur-derived-internal-hom",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-base-change-map",
+  "def-pc-affine-global-hom-base-change-map",
+  "lem-sc-mixed-hom-tensor-pullback-iso",
+  "lem-pc-canonical-pullback-tensor-monoidal-realization"
+ ],
+ "proof": [
+  {
+   "text": "The morphism $f$ is separated, so it is quasi-separated: a separated morphism, whose diagonal is a closed immersion, has quasi-compact diagonal [lem-pc-separated-quasi-separated]. The quasi-coherent pullback/tensor theorem makes $G(M)$ quasi-coherent, and the direct-image theorem makes $Rf_*E$ and $Rf_*K$ quasi-coherent. Apply the unbounded projection formula to $K,M$, with symmetry of the tensor factors, to form the stated counit $\\epsilon_M$. These results assume only that the morphism is quasi-compact and quasi-separated, not that its source or target is quasi-compact.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-quasi-separated-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08D5 (perfect-lemma-quasi-coherence-direct-image), 08EU (perfect-lemma-cohomology-base-change)"
+   }
+  },
+  {
+   "text": "Fix $E,M$ and write $N=G(M)$, $A=Rf_*R\\mathcal Hom_X(E,N)$ and $B=R\\mathcal Hom_S(Rf_*E,M)$ in the full module derived category of $S$. Form $a:A\\to B$ as the evaluation-mate direct-image comparison followed by $R\\mathcal Hom_S(Rf_*E,\\epsilon_M)$. For an open $V$ put $U=f^{-1}V$, $g=f|_U$. The comparison-on-open-Ext lemma, the open Ext/hypercohomology identification and its naturality in the second variable together with the open-restriction isomorphisms $(Rf_*E)|_V\\cong Rg_*(E|_U)$ and $(Rf_*N)|_V\\cong Rg_*(N|_U)$ of the restriction-of-direct-image lemma, identify $H^q(V,a)$ with\n$$u\\longmapsto (\\epsilon_M|_V)[q]\\circ Rg_*u,$$\nfrom $\\operatorname{Hom}_U(E|_U,N|_U[q])$ to $\\operatorname{Hom}_V((Rf_*E)|_V,M|_V[q])$. This also identifies the formula for $V=S$, without affineness. All these identifications commute with smaller-open restriction.",
+   "uses": [
+    "lem-sfb-direct-image-hom-open-ext",
+    "lem-trf-open-ext-hypercohomology-comparison",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B69 (cohomology-remark-projection-formula-for-internal-hom), Tag 08DK (cohomology-lemma-section-RHom-over-U)"
+   }
+  },
+  {
+   "text": "For affine $V$, restriction of derived pullback and tensor identifies $N|_U$ with $G_V(M|_V)$; restriction of direct image identifies $(Rf_*E)|_V$ with $Rg_*(E|_U)$. The hypothesis says precisely that the restricted $\\epsilon$ is the local adjunction counit. Hence the formula of step 2 is bijective for every $q$: use the local adjunction on $E|_U[-q]$ and $M|_V$, then shift the Hom groups. Exact restriction preserves quasi-coherent cohomology, so these are objects of the categories in the hypothesis. No assertion that an arbitrary Hom presheaf is a sheaf has been used.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-pc-derived-tensor-open-restriction-natural",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DW, 06YH, 08FE (cohomology-lemma-restrict-direct-image-open)"
+   }
+  },
+  {
+   "text": "Apply the unbounded direct-image/section-presheaf theorem to the identity of $S$: the sheafification of $V\\mapsto H^q(V,A)$ is $\\mathcal H^q(A)$, naturally, and likewise for $B$. Step 3 gives bijections on every affine open. These opens are a neighbourhood basis at every point, so on each stalk the induced map is a bijection: a germ has an affine representative, and both equality of germs and its preimage can be tested after shrinking to an affine neighbourhood. Thus every $\\mathcal H^q(a)$ is an isomorphism. By the defining quasi-isomorphism criterion for the derived category, $a$ is an isomorphism. Apply the functor $H^0(S,-)$ to it. The section-presheaf theorem and the open Ext comparison identify its source with $\\operatorname{Hom}_X(E,N)$ and its target with $\\operatorname{Hom}_S(Rf_*E,M)$. Step 2 identifies this bijection as $u\\mapsto\\epsilon_M\\circ Rf_*u$. Functoriality of the comparisons and naturality of $\\epsilon$ give naturality in $E,M$. The stalk argument uses all affine neighbourhoods and requires no finite cover.",
+   "uses": [
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "lem-trf-open-ext-hypercohomology-comparison",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D5X (cohomology-lemma-unbounded-describe-higher-direct-images), 08DK (cohomology-lemma-section-RHom-over-U)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-projection-formula",
+  "lem-sfb-direct-image-hom-open-ext",
+  "lem-trf-open-ext-hypercohomology-comparison",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-tensor-open-restriction-natural",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "equation-sheafy-trace and Tag 0B6I (lemma-iso-global-hom); local-to-global argument using cohomology.tex Tags 08DK, 0D5X. The existing adjunction in 0B6I is not assumed globally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A global trace and derived pullback tensor a quasi coherent complex define a right adjoint to pushforward if the counit gives that adjunction on every affine open of the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C D : Type u} [inst : CategoryTheory.SmallCategory C] [inst_1 : CategoryTheory.SmallCategory D]\\n  {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  (φ : S ⟶ F.op.comp R), (PresheafOfModules.pushforward φ).IsRightAdjoint\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, a presheaf of rings $ R : \\\\mathcal{D}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and a natural transformation $ \\\\phi: R \\\\to S $ between presheaves of rings, \"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {R : CategoryTheory.Functor Dᵒᵖ RingCat} →\\n            {S : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n           \", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction of an existing abstract adjunction does not construct a scheme derived adjunction from local counits; localization adjunction hits require a prior global adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski local criterion for adjunction using sheafified derived Hom and trace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"Given a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a sheafified ring $ R $, the sheafification functor for presheaves of modules over $ R_0 $ is left\"}\n  {\"name\": \"CategoryTheory.Sheaf.adjunction\", \"module\": \"Mathlib/CategoryTheory/Sites/Adjunction\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {E : Type u_1} →\\n            [inst_2 : CategoryTheory.Category.{v_1, u_1} E] →\\n              {F : \", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$ and functors $G \\\\dashv F$ between categories $\\\\mathcal{D}$ and $\\\\mathcal{E}$, this constructs an adjunction between the functor obtained\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.plusPlusAdjunction\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (D : Type w) →\\n        [inst_1 : CategoryTheory.Category.{w', w} D] →\\n          {FD : D → D → Type u_1} →\\n            {CD : D → Type t} →\\n              [inst_2 : (X Y : D) → FunLike (\", \"doc\": \"The sheafification functor (double plus construction) for presheaves on a category equipped with a Grothendieck topology forms an adjunction with the inclusion functor from sheaves to presheaves, wher\"}\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For any presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a sheaf of modules $ F $ over the sheafified ring $ R $, there \"}\n  {\"name\": \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The sheafification functor for presheaves of modules over a presheaf of rings is a left adjoint to the inclusion functor from the category of sheaves of modules to the category of presheaves of module\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W_adj_unit_app\", \"module\": \"Mathlib/CategoryTheory/Sites/Localization\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {A : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} A]\\n  {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (CategoryTheory.Sheaf J A)}\\n  (adj : G ⊣ CategoryTheory.sheafToPres\", \"doc\": \"For any presheaf $P$ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, the unit of the adjunction between a functor $G$ and the inclusion functor from sheaves to presheaves (with respect to a \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction of an existing abstract adjunction does not construct a scheme derived adjunction from local counits; localization adjunction hits require a prior global adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"restrict\"",
+   "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"If `C` is a full subcategory of `C'` and `D` is a full subcategory of `D'`, then we can restrict\\nan adjunction `L' ⊣ R'` where `L' : C' ⥤ D'` and `R' : D' ⥤ C'` to `C` and `D`.\\nThe construction here i\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Restriction is right adjoint to pushforward.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules) (U : Y.Opens) : AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U = M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules) (U : X.Opens) : AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U = M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction of an existing abstract adjunction does not construct a scheme derived adjunction from local counits; localization adjunction hits require a prior global adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction.*[Ll]ocal|[Ll]ocal.*[Aa]djunction|[Tt]race.*[Aa]djunction",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Localization.CalculusOfFractions.OfAdjunction\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Localization.Adjunction\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"line\": \"14\", \"text\": \"# Localization of adjunctions\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"line\": \"22\", \"text\": \"induced adjunction `Adjunction.localization L₁ W₁ L₂ W₂ G' F' : G' ⊣ F'`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"line\": \"47\", \"text\": \"/-- Auxiliary definition of the unit morphism for the adjunction `Adjunction.localization` -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"line\": \"65\", \"text\": \"/-- Auxiliary definition of the counit morphism for the adjunction `Adjunction.localization` -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"line\": \"87\", \"text\": \"and `G' : D₁ ⥤ D₂` on the localized categories, then the adjunction `adj`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"line\": \"479\", \"text\": \"    exact (Adjunction.ofIsRightAdjoint W.isLocal.ι).isCardinalLocallyPresentable κ\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"112\", \"text\": \"  e.toAdjunction.isCardinalLocallyPresentable κ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"658\", \"text\": \"  ΓSpec.locallyRingedSpaceAdjunction.homEquiv (Proj| pbo f) (op (CommRingCat.of <| A⁰_ f))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"714\", \"text\": \"  Eq.trans (by rfl) <| ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app _ U\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"165\", \"text\": \"    refine Eq.trans ?_ (ΓSpec.locallyRingedSpaceAdjunction.homEquiv_apply _ _ _).symm\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"56\", \"text\": \"* `CompHausLike.LocallyConstant.adjunction`: the functor described above is left adjoint to the\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"386\", \"text\": \"  (LocallyConstant.adjunction _ _).leftAdjointUniq (discreteUnderlyingAdj _)\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"390\", \"text\": \"  (LocallyConstant.adjunction.{u, u + 1} _ _).fullyFaithfulLOfIsIsoUnit\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"420\", \"text\": \"  (LocallyConstant.adjunction _ _).leftAdjointUniq (LightCondensed.discreteUnderlyingAdj _)\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"424\", \"text\": \"  (LocallyConstant.adjunction _ _).fullyFaithfulLOfIsIsoUnit\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"69\", \"text\": \"noncomputable abbrev LocallyConstant.adjunction :\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"71\", \"text\": \"  CompHausLike.LocallyConstant.adjunction _ _\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"82\", \"text\": \"    , IsIso (CondensedSet.LocallyConstant.adjunction.counit.app X)\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"129\", \"text\": \"    , IsIso ((CondensedMod.LocallyConstant.adjunction R).counit.app M)\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"190\", \"text\": \"noncomputable abbrev LocallyConstant.adjunction :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Localization.Adjunction\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"line\": \"209\", \"text\": \"/-! ### Bousfield localization and adjunctions -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"164\", \"text\": \"attribute [local simp] Adjunction.homEquiv_counit\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction of an existing abstract adjunction does not construct a scheme derived adjunction from local counits; localization adjunction hits require a prior global adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction for derived quasi coherent sheaves checked locally on base affine opens",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction of an existing abstract adjunction does not construct a scheme derived adjunction from local counits; localization adjunction hits require a prior global adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski local criterion trace defined adjunction derived quasicoherent sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.isQuasicoherent, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.localGeneratorsData, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pullback-pushforward adjunctions and derived adjunction from a prior adjunction do not establish this Zariski local criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, AlgebraicGeometry.Scheme",
+   "results": "6 hits: AlgebraicGeometry.Scheme.Hom.opensFunctorAdjunction, AlgebraicGeometry.ΓSpec.adjunction, AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.algΓAlgSpecAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pullback-pushforward adjunctions and derived adjunction from a prior adjunction do not establish this Zariski local criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "duality|Dualizing|local.*adjunction",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pullback-pushforward adjunctions and derived adjunction from a prior adjunction do not establish this Zariski local criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction for derived quasi coherent sheaves checked locally on affine open subsets of the base",
+   "results": "8 hits: CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.constantSheafΓAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.Adjunction.derivedε",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pullback-pushforward adjunctions and derived adjunction from a prior adjunction do not establish this Zariski local criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to pushforward is pullback tensor dualizing complex from local traces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsLeftAdjointPullback, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pullback-pushforward adjunctions and derived adjunction from a prior adjunction do not establish this Zariski local criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Zariski local criterion for a trace-defined derived adjunction.",
+   "via": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-zariski-local-duality-adjunction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved the affine criterion by the sheafy comparison on all shifted Hom groups, sheafification on an affine basis and global hypercohomology; reused existing restriction and quasi-coherence results. One new statement-only node isolates the evaluation-mate comparison on open Ext groups. No global qcqs, boundedness, finite-cover or perfectness hypothesis is introduced.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Zariski local criterion for a trace-defined derived adjunction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-pullback-tensor-qcoh",
+    "why": "Generic unbounded derived-module comparison or quasi-coherence/projection tool; the present unit supplies no coherent-module version."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic unbounded derived-module comparison or quasi-coherence/projection tool; the present unit supplies no coherent-module version."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Generic unbounded derived-module comparison or quasi-coherence/projection tool; the present unit supplies no coherent-module version."
+   },
+   {
+    "node": "lem-trf-open-ext-hypercohomology-comparison",
+    "why": "Generic unbounded derived-module comparison or quasi-coherence/projection tool; the present unit supplies no coherent-module version."
+   },
+   {
+    "node": "lem-pc-derived-pullback-open-restriction-universes",
+    "why": "Generic unbounded derived-module comparison or quasi-coherence/projection tool; the present unit supplies no coherent-module version."
+   },
+   {
+    "node": "lem-pc-derived-tensor-open-restriction-natural",
+    "why": "Generic unbounded derived-module comparison or quasi-coherence/projection tool; the present unit supplies no coherent-module version."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic unbounded derived-module comparison or quasi-coherence/projection tool; the present unit supplies no coherent-module version."
+   },
+   {
+    "node": "lem-trf-unbounded-direct-image-section-presheaf",
+    "why": "Generic unbounded derived-module comparison or quasi-coherence/projection tool; the present unit supplies no coherent-module version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-projection-formula",
+  "lem-trf-open-ext-hypercohomology-comparison",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-tensor-open-restriction-natural",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-trf-unbounded-direct-image-section-presheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-3ffe17ec0",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-3ffe17ec0 (reviewer sub-agent of L); spot-checked: Item statement and stmt_deps unchanged from live (unsplit, empty proof); this is not a re-split. The mathematics is correct. Step 1: projection formula 08EU on (K,M). Step 2: c on H^q(V,-) is u↦Rg_*u (Stacks 0B69/0G7A), composed with ε through the second-variable naturality of open Ext 08DK. Step 3: the local adjunction applied to E|_U[-q] on affine V, with restriction isos 08FE. Step 4: sheafification of V↦H^q(V,-) is 𝓗^q; affines are cofinal, so stalks are bijective, a is an isomorphism, and H^0(S,-) gives u↦ε∘Rf_*u. The new node lem-sfb-direct-image-hom-open-ext is true (checked u=id, V=∅), statement-only, strictly smaller than the item, and no duplicate was found (checked against pc-sheaf-rhom-projection-formula, qcqs-sheaf-rhom-adjunction, global-hom-shifted-hypercohomology, global-hom-pullback-counit, trf open-ext). Batch 5: lem-trf-open-ext-hypercohomology-comparison (closure: only its own def-trf) and lem-trf-unbounded-direct-image-section-presheaf (closure: only itself) are generic ringed-space tools; they reach no trace/Poincaré theorem or assumption leaf, and existing sfb/pbc nodes already cite them, so they are accepted. FIX (C1/C5): step 1 now cites the Mathlib leaf lem-pc-separated-quasi-separated instead of the uncited inline 'closed subscheme of affine is affine'; step 2 now cites lem-pc-restrict-derived-direct-image-open for the (Rf_*E)|_V≅Rg_*(E|_U) and (Rf_*N)|_V≅Rg_*(N|_U) identifications; proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiLocalDualityAdjunction",
+  "declaration": "AlgebraicGeometry.zariskiLocalDualityAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.zariskiTraceTensorFunctor",
+   "AlgebraicGeometry.zariskiTraceProjectionMap",
+   "AlgebraicGeometry.zariskiTracePullbackUnitIso",
+   "AlgebraicGeometry.zariskiLocalDualityAdjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiLocalDualityAdjunction.lean",
+  "statement": "theorem zariskiLocalDualityAdjunction {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [IsSeparated f] (K : schemeDerivedQCohCategory X) (τ : (schemeDerivedDirectImage f).obj K.obj ⟶ 𝟙_ (schemeDerivedCategory S)) (ε : (schemeDerivedQCohProperty S).ι ⋙ zariskiTraceTensorFunctor f K.obj ⋙ schemeDerivedDirectImage f ⟶ (schemeDerivedQCohProperty S).ι) (hε : ∀ M : schemeDerivedQCohCategory S, zariskiTraceProjectionMap f M.obj K.obj ≫ ε.app M = M.obj ◁ τ ≫ (ρ_ M.obj).hom) (hlocal : ∀ V : S.Opens, IsAffineOpen V → ∃ (τV : (schemeDerivedDirectImage (f ∣_ V)).obj ((derivedPullback (f ⁻¹ᵁ V).ι).obj K.obj) ⟶ 𝟙_ (schemeDerivedCategory V.toScheme)) (εV : (schemeDerivedQCohProperty V.toScheme).ι ⋙ zariskiTraceTensorFunctor (f ∣_ V) ((derivedPullback (f ⁻¹ᵁ V).ι).obj K.obj) ⋙ schemeDerivedDirectImage (f ∣_ V) ⟶ (schemeDerivedQCohProperty V.toScheme).ι), schemeDerivedBaseChangeMap f (f ∣_ V) V.ι (f ⁻¹ᵁ V).ι (morphismRestrict_ι f V).symm K.obj ≫ τV = (derivedPullback V.ι).map τ ≫ (zariskiTracePullbackUnitIso V.ι).hom ∧ (∀ M : schemeDerivedQCohCategory V.toScheme, zariskiTraceProjectionMap (f ∣_ V) M.obj ((derivedPullback (f ⁻¹ᵁ V).ι).obj K.obj) ≫ εV.app M = M.obj ◁ τV ≫ (ρ_ M.obj).hom) ∧ ∀ (E : schemeDerivedQCohCategory (f ⁻¹ᵁ V).toScheme) (M : schemeDerivedQCohCategory V.toScheme), Function.Bijective (fun a : E.obj ⟶ (zariskiTraceTensorFunctor (f ∣_ V) ((derivedPullback (f ⁻¹ᵁ V).ι).obj K.obj)).obj M.obj ↦ (schemeDerivedDirectImage (f ∣_ V)).map a ≫ εV.app M)) : ∀ (E : schemeDerivedQCohCategory X) (M : schemeDerivedQCohCategory S), Function.Bijective (fun a : E.obj ⟶ (zariskiTraceTensorFunctor f K.obj).obj M.obj ↦ (schemeDerivedDirectImage f).map a ≫ ε.app M)",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The counit is supplied with its defining equality after precomposition with the canonical projection mate; by the unbounded quasi-coherent projection formula this uniquely specifies inverse projection followed by tensoring with the trace. Locally the trace is specified after the canonical open base-change isomorphism, with the unit belonging to the same normalized tensorator. The local adjunction is encoded by bijectivity of composition with its normalized natural counit for every pair of quasi-coherent derived objects. Canonical helper interfaces already landed in the DAG are added to stmt_deps. No statement correction or finiteness/boundedness hypothesis is introduced. Return R1 repaired: the canonical adjunction is now canonicalPullbackAdjunction, owned by the definition node def-pc-affine-global-hom-base-change-map, rather than the unrelated global Hom theorem. Both adjunction definitions have identical normalized construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31e19d394",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Re-delivery after R1 RETURN (e4ed): Lean diff = only schemeHomPullbackAdjunction→canonicalPullbackAdjunction (identical Classical.choose body) + import of Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap + H9 removal of 2 unused imports; stmt_dep lem-pc-global-hom-adjunction replaced by def node def-pc-affine-global-hom-base-change-map, whose lean.declarations own canonicalPullbackAdjunction (R1 resolved; unused ModuleCat section instance not in its type). Theorem stmt_deps genuine (PASS on point): mixedHomTensorPullbackIso = choose of lem-sc-mixed-hom-tensor-pullback-iso's theorem with choose_spec used; unit iso = choose of canonicalPullbackTensor_monoidal_realization. Substance rechecked: qc+separated morphism only, no qcqs/finite-cover/boundedness; ε pinned by canonical projection mate (08EU); τV pinned via schemeDerivedBaseChangeMap with morphismRestrict_ι.symm (orientation checked, 08FE); local/global Hom bijections for all QCoh pairs; edge cases empty/zero kept; no hollow defs, sorry only, docstrings OK; live node delta only lean+stmt_deps, not superseded. Advisory: stage-1 stmt_deps def-pur-derived-internal-hom/def-weil-finite-type-morphism unused by the Lean. No compile (no file changed); worker reports clean compiles and OK dry run."
+ }
+}

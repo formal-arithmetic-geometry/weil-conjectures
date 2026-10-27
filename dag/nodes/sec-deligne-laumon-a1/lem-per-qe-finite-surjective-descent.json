@@ -1,0 +1,260 @@
+{
+ "id": "lem-per-qe-finite-surjective-descent",
+ "kind": "statement",
+ "title": "Quasi-excellence descends through finite surjective affine maps",
+ "statement": "Let $f:A\\to B$ be a homomorphism of commutative Noetherian rings [def-weil-pbc-noetherian-ring]. Assume $B$ is a finitely generated $A$-module [def-weil-finitely-generated-module] and that for every prime ideal $\\mathfrak p\\subset A$ there is a prime ideal $\\mathfrak q\\subset B$ with $f^{-1}(\\mathfrak q)=\\mathfrak p$. If $B$ is quasi-excellent [def-exc-excellent-ring], then $A$ is quasi-excellent.",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1 Step 1 (1-3), printed p.8, invocation of Greco, Two theorems on excellent rings, Theorem 3.1; the finite-surjective descent statement, not descent of excellence."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [def-exc-excellent-ring], $B$ is a G-ring and is J-2. Fix a prime $\\mathfrak p\\subset A$, put $R=A_{\\mathfrak p}$, $\\widehat R$ its maximal-ideal completion, $C=R\\otimes_AB$ and $D=\\widehat R\\otimes_AB$. Localization and completion are Noetherian by [lem-weil-pbc-localization-noetherian, lem-weil-pbc-adic-completion-noetherian]. If $b_1,\\ldots,b_t$ generate $B$ as an $A$-module, their images $1\\otimes b_i$ generate $C$ over $R$ and $D$ over $\\widehat R$: expand each tensor using $b=\\sum a_i b_i$. A module generating list also generates the algebra. Thus $C,D$ are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. The map $R\\to\\widehat R$ is flat by [lem-weil-pbc-local-completion-faithfully-flat].",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Greco Proposition 1.3 (ii) implies (i), and Theorem 3.1(i), printed pp.140,143; explicit finite-completion decomposition from Stacks Tag 07N9."
+   }
+  },
+  {
+   "text": "The map $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is surjective: it is the base change of the assumed surjective map $\\operatorname{Spec}B\\to\\operatorname{Spec}A$, by [lem-weil-pbc-surjective-base-change, lem-weil-pbc-fibre-product-affine-spectra]. By [lem-weil-pbc-completion-finite-extension] there is a compatible $C$-algebra identification $D\\cong\\prod_{\\mathfrak q\\cap A=\\mathfrak p}\\widehat{B_{\\mathfrak q}}$, with finitely many factors. On the $\\mathfrak q$ factor, $C\\to D$ is the map through $B_{\\mathfrak q}\\to\\widehat{B_{\\mathfrak q}}$. This last map is regular because $B$ is a G-ring [def-weil-pbc-g-ring]. To check $C\\to D$ is regular use [lem-weil-pbc-regular-local-maximal]. A prime of the finite product selects exactly one factor, since its prime quotient sends exactly one of the orthogonal idempotents summing to $1$ to $1$. Its local ring is the localization of that factor. If its contraction to $C$ is $\\mathfrak r$, then $(B_{\\mathfrak q})_{\\mathfrak r B_{\\mathfrak q}}=C_{\\mathfrak r}$ by the universal property of localization. Consequently its local map is a localization of $B_{\\mathfrak q}\\to\\widehat{B_{\\mathfrak q}}$, regular by the same cited local criterion. That criterion gives regularity of $C\\to D$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-completion-finite-extension",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-local-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Greco Proposition 1.3 (ii) implies (i), and Theorem 3.1(i), printed pp.140,143; explicit finite-completion decomposition from Stacks Tag 07N9."
+   }
+  },
+  {
+   "text": "The canonical tensor associativity identification $\\widehat R\\otimes_R C\\cong D$ sends $h\\otimes(r\\otimes b)$ to $hr\\otimes b$, with inverse $h\\otimes b\\mapsto h\\otimes(1\\otimes b)$. Thus the regular map $C\\to D$ is precisely the base change of the flat map $R\\to\\widehat R$. Apply [lem-per-regular-map-finite-surjective-detection] with source ring $R$ and finite covering algebra $C$. Its Noetherian, finite-module and spectrum-surjectivity assumptions were checked above. It follows that $A_{\\mathfrak p}\\to\\widehat{A_{\\mathfrak p}}$ is regular. Since $\\mathfrak p$ was arbitrary and $A$ is Noetherian, [def-weil-pbc-g-ring] says that $A$ is a G-ring.",
+   "uses": [
+    "lem-per-regular-map-finite-surjective-detection",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Greco Proposition 1.3 (ii) implies (i), and Theorem 3.1(i), printed pp.140,143; explicit finite-completion decomposition from Stacks Tag 07N9."
+   }
+  },
+  {
+   "text": "For the J-2 assertion let $T$ be any commutative $A$-algebra finite as an $A$-module and let $\\mathfrak t$ be a prime of $T$. Set $E=B\\otimes_AT$. This is finite as a $B$-module and as a $T$-module, using tensor images of finite generating lists for $T/A$ and $B/A$, respectively. The map $\\operatorname{Spec}E\\to\\operatorname{Spec}T$ is surjective by [lem-weil-pbc-surjective-base-change, lem-weil-pbc-fibre-product-affine-spectra], so choose a prime $\\mathfrak e$ contracting to $\\mathfrak t$. Put $F=E/\\mathfrak e$. The map $T/\\mathfrak t\\to F$ is injective, since its kernel consists exactly of classes whose representatives map into $\\mathfrak e$. Both rings are domains; $F$ is finite type over $T/\\mathfrak t$ and over $B$ by the displayed generating lists followed by quotient. All these rings are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Since $B$ is J-2, the regular locus of $F$ is open [def-exc-excellent-ring]. It is nonempty: at the zero prime the localization is its fraction field, of dimension zero with maximal ideal generated by the empty list [def-weil-regular-scheme]. Now [lem-exc-j0-finite-type-domain-descent] applied to $T/\\mathfrak t\\hookrightarrow F$ gives a nonempty open regular subset of $\\operatorname{Spec}(T/\\mathfrak t)$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-exc-excellent-ring",
+    "def-weil-regular-scheme",
+    "lem-exc-j0-finite-type-domain-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Greco Corollary 2.4 proof, printed p.142; Stacks Tags 07PA (lemma-J-0-goes-down), 07PC (lemma-J-2)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\subset A$ be a prime and $L/\\kappa(\\mathfrak p)$ a finite purely inseparable extension, with $\\kappa(\\mathfrak p)$ the fraction field of the domain $A/\\mathfrak p$. Choose a $\\kappa(\\mathfrak p)$-basis $y_1,\\ldots,y_n$ of $L$ and, for each $j$, a monic $P_j=x^{m_j}+c_{j,1}x^{m_j-1}+\\cdots+c_{j,m_j}\\in\\kappa(\\mathfrak p)[x]$, $m_j\\ge1$, with $P_j(y_j)=0$. Choose a nonzero $d\\in A/\\mathfrak p$ with $dc_{j,i}\\in A/\\mathfrak p$ for all $j,i$ (a product of denominators). Multiplying $P_j(y_j)=0$ by $d^{m_j}$ gives $(dy_j)^{m_j}+\\sum_{i=1}^{m_j}d^{i}c_{j,i}(dy_j)^{m_j-i}=0$, a monic equation with coefficients $d^{i-1}(dc_{j,i})\\in A/\\mathfrak p$. Put $T=(A/\\mathfrak p)[dy_1,\\ldots,dy_n]\\subseteq L$. By these equations every monomial in the $dy_j$ is an $A/\\mathfrak p$-combination of the finitely many monomials whose exponent of $dy_j$ is below $m_j$, so $T$ is an $A$-subalgebra of $L$ finite as an $A$-module, and a domain. Its fractions exhaust $L$: if $\\ell=\\sum_j(a_j/s)y_j$ with $a_j,s\\in A/\\mathfrak p$, $s\\ne0$, then $\\ell=(\\sum_ja_j\\,dy_j)/(ds)$. Step 4 applied to this $T$ and its zero prime $\\mathfrak t=0$ (so $T/\\mathfrak t=T$) gives a nonempty open subset of $\\operatorname{Spec}T$ at whose points $T$ is regular local. These are the hypotheses of [lem-exc-j2-residue-field-criterion], so $A$ is J-2. We have proved that $A$ is Noetherian, a G-ring and J-2, hence quasi-excellent by [def-exc-excellent-ring].",
+   "uses": [
+    "lem-exc-j2-residue-field-criterion",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Greco Theorem 3.1(i), printed p.143; Corollary 2.4, printed p.142; Stacks Tags 07PC (lemma-J-2, implication (4) implies (1); the finite domain model is the denominator-clearing construction written out), 07QT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-completion-finite-extension",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-per-regular-map-finite-surjective-detection",
+  "def-weil-regular-scheme",
+  "lem-exc-j0-finite-type-domain-descent",
+  "lem-exc-j2-residue-field-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+  "place": "Expanded proof of Greco Theorem 3.1(i) using Proposition 1.2, the completion argument in Proposition 1.3 and the domain argument in Corollary 2.4. Greco and Kurano–Shimomoto are absent from local literature/; WANTED recorded. Primary text read online, with all local Stacks inputs read directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi excellence descends along a finite surjective morphism of Noetherian affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat descent and quasi-finite ring maps, not descent of quasi-excellence; the grep hits for Greco are incidental substrings of strongRecOn"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat descent and quasi-finite ring maps, not descent of quasi-excellence; the grep hits for Greco are incidental substrings of strongRecOn"
+  },
+  {
+   "tool": "grep",
+   "query": "Greco|quasi.?excellent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"line\": \"330\", \"text\": \"  induction d using Nat.strongRecOn generalizing F with\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/Injectivity.lean\", \"line\": \"162\", \"text\": \"      induction n using Nat.strongRecOn with | ind n ih =>\"}\n  {\"file\": \"Mathlib/NumberTheory/LegendreSymbol/JacobiSymbol.lean\", \"line\": \"530\", \"text\": \"  induction a using Nat.strongRecOn generalizing b flip with | ind a IH =>\"}\n  {\"file\": \"Mathlib/NumberTheory/LegendreSymbol/JacobiSymbol.lean\", \"line\": \"571\", \"text\": \"  induction b using Nat.strongRecOn with | ind b IH =>\"}\n  {\"file\": \"Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean\", \"line\": \"168\", \"text\": \"    induction i using Nat.strongRecOn with | ind i hi => ?_\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"line\": \"154\", \"text\": \"  induction n using Nat.strongRecOn generalizing M with | ind n ih => ?_\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Base.lean\", \"line\": \"646\", \"text\": \"  induction N using Nat.strongRecOn generalizing i with\"}\n  {\"file\": \"Mathlib/Algebra/Group/Defs.lean\", \"line\": \"557\", \"text\": \"  induction k using Nat.strongRecOn with\"}\n  {\"file\": \"Mathlib/Algebra/Group/Defs.lean\", \"line\": \"568\", \"text\": \"  induction k using Nat.strongRecOn with\"}\n  {\"file\": \"Mathlib/Algebra/Group/Defs.lean\", \"line\": \"577\", \"text\": \"  induction k using Nat.strongRecOn with\"}\n  {\"file\": \"Mathlib/Order/KrullDimension.lean\", \"line\": \"969\", \"text\": \"  induction n using Nat.strongRecOn with | ind n ih =>\"}\n  {\"file\": \"Mathlib/Data/List/Shortlex.lean\", \"line\": \"157\", \"text\": \"  induction len_a : a.length using Nat.caseStrongRecOn generalizing a with\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Decomposition.lean\", \"line\": \"86\", \"text\": \"  induction n using Nat.strongRecOn with | _ n hi\"}\n  {\"file\": \"Mathlib/Order/Monotone/Basic.lean\", \"line\": \"730\", \"text\": \"  induction h : f 0 using Nat.strongRecOn generalizing f with\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"359\", \"text\": \"  induction m using Nat.caseStrongRecOn generalizing x with\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\", \"line\": \"206\", \"text\": \"  induction n using Nat.strongRecOn with | ind n IH => ?_\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\", \"line\": \"225\", \"text\": \"  induction n using Nat.strongRecOn with | ind n ih => ?_\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\", \"line\": \"273\", \"text\": \"  induction n using Nat.strongRecOn with | ind n H => ?_\"}\n  {\"file\": \"Mathlib/Data/Set/Finite/Basic.lean\", \"line\": \"760\", \"text\": \"  set u : ℕ → γ := fun n ↦ Nat.strongRecOn n f\"}\n  {\"file\": \"Mathlib/Data/Set/Finite/Basic.lean\", \"line\": \"764\", \"text\": \"  exact Nat.strongRecOn_eq f n\"}\n  {\"file\": \"Mathlib/Data/WSeq/Relation.lean\", \"line\": \"388\", \"text\": \"  induction n using Nat.strongRecOn with | _ n IH\"}\n  {\"file\": \"Mathlib/GroupTheory/SchurZassenhaus.lean\", \"line\": \"268\", \"text\": \"  induction n using Nat.strongRecOn with | ind n ih => ?_\"}\n  {\"file\": \"Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean\", \"line\": \"414\", \"text\": \"  induction m using Nat.strongRecOn generalizing 𝒜 with | ind m ih => _\"}\n  {\"file\": \"Mathlib/Combinatorics/Enumerative/Catalan/Basic.lean\", \"line\": \"106\", \"text\": \"  induction n using Nat.caseStrongRecOn with\"}\n  {\"file\": \"Mathlib/Data/Nat/Init.lean\", \"line\": \"226\", \"text\": \"@[deprecated (since := \\\"2026-03-05\\\")] alias strongRecOn' := Nat.strongRec\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat descent and quasi-finite ring maps, not descent of quasi-excellence; the grep hits for Greco are incidental substrings of strongRecOn"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi excellence descends along a finite surjective morphism of Noetherian affine schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[HasRingHomProperty P Q] (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"(p : Ideal S) [p.IsPrime] [QuasiFiniteAt R p] (f : S →ₐ[R] T) (hf : f.SurjectiveOnStalks) (q : Ideal T) [q.IsPrime]\\n  (hq : p = q.comap f.toRingHom) : QuasiFiniteAt R q\", \"doc\": \"Let $ R $, $ S $, and $ T $ be commutative rings with a ring homomorphism $ f : S \\\\to T $ that is surjective on stalks. If $ \\\\mathfrak{p} \\\\subseteq S $ is a prime ideal that is quasi-finite over $ R $\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyOpen (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat descent and quasi-finite ring maps, not descent of quasi-excellence; the grep hits for Greco are incidental substrings of strongRecOn"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring with a module finite algebra surjective on prime spectra is quasi excellent if that algebra is quasi excellent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] (p : Ideal S)\\n  [inst_7 : p.IsPrime] [Algebra.QuasiFiniteAt R p],\\n  (algebraMap S T).SurjectiveO\", \"doc\": \"If the algebra homomorphism from $ S $ to $ T $ is surjective on stalks and $ q $ is a prime ideal in $ T $ lying over a prime ideal $ p $ in $ S $ that is quasi-finite over $ R $, then $ q $ is also \"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] (p : Ideal S) [inst_5 : p.IsPrime] [Algebra.QuasiFiniteAt R p]\\n  (f : S →ₐ[R] T),\\n  f.SurjectiveOnStalks → ∀ (q : Ideal T) [inst_7 : q.IsPrim\", \"doc\": \"Let $ R $, $ S $, and $ T $ be commutative rings with a ring homomorphism $ f : S \\\\to T $ that is surjective on stalks. If $ \\\\mathfrak{p} \\\\subseteq S $ is a prime ideal that is quasi-finite over $ R $\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.QuasiFinite.iff_finite_primesOver\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FiniteType R S], Algebra.QuasiFinite R S ↔ ∀ (I : Ideal R), I.IsPrime → (I.primesOver S).Finite\", \"doc\": \"A finite type $ R $-algebra $ S $ is quasi-finite over $ R $ if and only if, for every prime ideal $ I $ in $ R $, the set of prime ideals in $ S $ lying over $ I $ is finite.\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_primeSpectrum\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Finite (PrimeSpectrum R)] [Algebra.QuasiFinite R S], Finite (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring with a finite prime spectrum and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum of $ S $ is also f\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_le\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P Q : Ideal S}\\n  [inst_3 : P.IsPrime] [inst_4 : Q.IsPrime], P ≤ Q → ∀ [Algebra.QuasiFiniteAt R Q], Algebra.QuasiFiniteAt R P\", \"doc\": \"Given prime ideals $ P $ and $ Q $ in a commutative ring $ S $ such that $ P \\\\subseteq Q $, if the localization of $ S $ at $ Q $ forms a quasi-finite algebra over $ R $ (i.e., $ S_Q $ is finitely gen\"}\n  {\"name\": \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"∀ {R : Type u_6} {S : Type u_7} {T : Type u_8} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  {f : R →+* S},\\n  f.IsIntegral → ∀ {g : S →+* T}, g.IsStandardOpenImmersion → (g.comp f).FiniteType → (g.comp f).QuasiFinite\", \"doc\": \"If $ f : R \\\\to S $ is an integral ring homomorphism, $ g : S \\\\to T $ is a standard open immersion, and the composition $ g \\\\circ f $ is of finite type, then $ g \\\\circ f $ is quasi-finite. This means t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat descent and quasi-finite ring maps, not descent of quasi-excellence; the grep hits for Greco are incidental substrings of strongRecOn"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi excellence descends along finite surjective homomorphisms of Noetherian rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFinite.of_surjective_algHom\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.QuasiFinite R S] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.QuasiFinite R T\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ f : S \\\\to T $ is a surjective algebra homomorphism to another $ R $-algebra $ T $, then $ T $ is also quasi-finite over $ R $. A \"}\n  {\"name\": \"RingHom.QuasiFinite.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.QuasiFinite\", \"doc\": \"The property of a ring homomorphism between commutative rings being quasi-finite is local, meaning it can be checked on a cover or via localization.\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] (p : Ideal S)\\n  [inst_7 : p.IsPrime] [Algebra.QuasiFiniteAt R p],\\n  (algebraMap S T).SurjectiveO\", \"doc\": \"If the algebra homomorphism from $ S $ to $ T $ is surjective on stalks and $ q $ is a prime ideal in $ T $ lying over a prime ideal $ p $ in $ S $ that is quasi-finite over $ R $, then $ q $ is also \"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] (p : Ideal S) [inst_5 : p.IsPrime] [Algebra.QuasiFiniteAt R p]\\n  (f : S →ₐ[R] T),\\n  f.SurjectiveOnStalks → ∀ (q : Ideal T) [inst_7 : q.IsPrim\", \"doc\": \"Let $ R $, $ S $, and $ T $ be commutative rings with a ring homomorphism $ f : S \\\\to T $ that is surjective on stalks. If $ \\\\mathfrak{p} \\\\subseteq S $ is a prime ideal that is quasi-finite over $ R $\"}\n  {\"name\": \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.QuasiFinite\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is quasi-finite, then any base change of $ f $ remains quasi-finite. Specifically, given compatible algebra structures and scalar tower conditions on commutative\"}\n  {\"name\": \"Algebra.EssFiniteType.of_surjective\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → ∀ [Algebra.EssFiniteType R S], Algebra.EssFiniteType R T\", \"doc\": \"Let $ R $, $ S $, and $ T $ be commutative rings with $ S $ and $ T $ equipped with the structure of $ R $-algebras. If $ S $ is of essential finite type over $ R $ (i.e., finitely generated as an $ R\"}\n  {\"name\": \"RingHom.QuasiFinite.of_comp\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"∀ {T : Type u_3} [inst : CommRing T] {R : Type u_4} {S : Type u_5} [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  {f : S →+* T} {g : R →+* S}, (f.comp g).QuasiFinite → f.QuasiFinite\", \"doc\": \"If the composition of ring homomorphisms $f: S \\\\to T$ and $g: R \\\\to S$ is quasi-finite (i.e., $T$ is finitely generated as an $R$-module via the composition), then $f$ is quasi-finite (i.e., $T$ is fi\"}\n  {\"name\": \"RingHom.QuasiFinite.of_finite\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"∀ {T : Type u_3} [inst : CommRing T] {S : Type u_5} [inst_1 : CommRing S] {f : S →+* T}, f.Finite → f.QuasiFinite\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ between commutative rings is finite (i.e., $ S $ is finitely generated as an $ R $-module under the algebra structure induced by $ f $), then $ f $ is quasi-fini\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-finite algebras, flat descent and Noetherian finite-type algebras do not state quasi-excellence; the grep hits concern infinite descent in FLT."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Excellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-finite algebras, flat descent and Noetherian finite-type algebras do not state quasi-excellence; the grep hits concern infinite descent in FLT."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|finite.?descent|formal.?fib(re|er)",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/FLT/Polynomial.lean\", \"line\": \"30\", \"text\": \"The proof uses the Mason-Stothers theorem (Polynomial ABC theorem) and infinite descent\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Polynomial.lean\", \"line\": \"168\", \"text\": \"    -- set up infinite descent\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-finite algebras, flat descent and Noetherian finite-type algebras do not state quasi-excellence; the grep hits concern infinite descent in FLT."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian ring is quasi excellent when a finite algebra surjective on spectra is quasi excellent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFinite.recOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure and satisfying the quasi-finite condition, meaning $ S $ is finitely generated\"}\n  {\"name\": \"IsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Noetherian.Defs\", \"type\": \"(R) [Semiring R]\", \"doc\": \"A semiring $ R $ is a Noetherian ring if every ideal of $ R $ is finitely generated.\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R} [CommRing R] [IsNoetherianRing R] : IsNoetherian <| Spec <| .of R\", \"doc\": \"The spectrum of a Noetherian commutative ring is a Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R : CommRingCat} : IsNoetherian (Spec R) ↔ IsNoetherianRing R\", \"doc\": \"For a commutative ring $ R $, the scheme $ \\\\operatorname{Spec}(R) $ is Noetherian if and only if $ R $ is a Noetherian ring.\"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}\n  {\"name\": \"RingHom.QuasiFinite\", \"module\": \"Mathlib.RingTheory.RingHom.QuasiFinite\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\to S $ between commutative rings is quasi-finite if the commutative ring $ S $, equipped with the $ R $-algebra structure induced by $ f $, is finitely generated as an $ R \"}\n  {\"name\": \"Algebra.FiniteType.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.FiniteType\", \"type\": \"(R S : Type*) [CommRing R] [CommRing S] [Algebra R S] [h : Algebra.FiniteType R S] [IsNoetherianRing R] :\\n  IsNoetherianRing S\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ S $ is a commutative ring that is finitely generated as an $ R $-algebra, then $ S $ is also a Noetherian ring.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R : CommRingCat} : IsLocallyNoetherian (Spec R) ↔ IsNoetherianRing R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-finite algebras, flat descent and Noetherian finite-type algebras do not state quasi-excellence; the grep hits concern infinite descent in FLT."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "G ring and J2 property descend along finite surjective morphisms of affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-finite algebras, flat descent and Noetherian finite-type algebras do not state quasi-excellence; the grep hits concern infinite descent in FLT."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-normal-counterexample-reduction",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, invocation of Greco, Two theorems on excellent rings, Theorem 3.1; the finite-surjective descent statement, not descent of excellence.",
+   "via": [
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-qe-finite-surjective-descent",
+  "worker": "stage1",
+  "summary": "Expanded Greco finite descent into the compatible finite-completion product argument for formal fibres and the prime-quotient J-0 descent argument for J-2. Reused the existing completion decomposition, J-0 descent and the residue-field J-2 criterion (Stacks 07PC (4)=>(1)), reached through an explicit finite domain model of each purely inseparable residue extension; created only the generic regular-map finite-surjective detection lemma (Greco Proposition 1.2). Verified exact cited statements and hypotheses, searched whole DAG/current blueprint/project Lean and recorded genuine Mathlib queries. Statement retained.",
+  "blueprint": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, invocation of Greco, Two theorems on excellent rings, Theorem 3.1; the finite-surjective descent statement, not descent of excellence. This split supplies that auxiliary finite descent input; it does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra tool: The completion of a Noetherian ring is Noetherian. Used in the finite-surjective descent invocation on the existing quasi-excellence completion route; no lemma of this perverse-sheaf unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Generic commutative-algebra tool: Completion of a finite algebra at the primes over a prime. Used in the finite-surjective descent invocation on the existing quasi-excellence completion route; no lemma of this perverse-sheaf unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-maximal",
+    "why": "Generic commutative-algebra tool: Regularity of a ring map is local on the target. Used in the finite-surjective descent invocation on the existing quasi-excellence completion route; no lemma of this perverse-sheaf unit replaces it."
+   },
+   {
+    "node": "lem-exc-j0-finite-type-domain-descent",
+    "why": "Generic commutative-algebra tool: A nonempty regular open descends along a dominant finite type map of domains. Used in the finite-surjective descent invocation on the existing quasi-excellence completion route; no lemma of this perverse-sheaf unit replaces it."
+   },
+   {
+    "node": "lem-exc-j2-residue-field-criterion",
+    "why": "Generic commutative-algebra tool: J-2 from J-0 finite domain models of the purely inseparable residue extensions (Stacks 07PC (4)=>(1)). Used in step 5 of the finite-surjective descent invocation on the existing quasi-excellence completion route, replacing the dropped lem-per-j2-finite-algebra-criterion; no lemma of this perverse-sheaf unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-exc-j0-finite-type-domain-descent",
+  "lem-exc-j2-residue-field-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-d7de41500",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-d7de41500 (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps, every cited statement and the new node in full; Stacks sources checked in literature/stacks-project (07QT, 07N9, 07PA, 07P9, 07PC lemma-J-2, algebra lemma-geometrically-regular-descent); Greco and Kurano–Shimomoto are not local (WANTED recorded). Statement retained, true as Greco Thm 3.1(i). Step 1 (Noetherianity of C and D, flatness of R→R̂), step 2 (surjectivity by base change; D≅∏(B_q)^ from completion-finite-extension; C→D regular via regular-local-maximal) and step 3 (C→D is the base change of R→R̂; the new lemma makes A a G-ring) all check. Step 4: T/t→F=E/e is injective, Reg(F) is open by B J-2 and nonempty at (0), and j0-finite-type-domain-descent applies with every hypothesis. New node lem-per-regular-map-finite-surjective-detection (Greco Prop 1.2) is true: the fibre Λ⊗κ(p′) is faithfully flat over Λ⊗κ(p), and geometric regularity descends. It is self-contained, not a restated clause and has no duplicate (regular-permanence and regular-base-change differ). Mechanical artin-gabber finding: step 5 cited dropped lem-per-j2-finite-algebra-criterion (drop list line 1654). FIX: step 5 now cites the live lem-exc-j2-residue-field-criterion (07PC (4)⇒(1); no dropped node in its closure), with an explicit finite domain model T=(A/p)[dy_j]⊆L (denominators cleared in full) fed to step 4 with t=0. proof_deps (minus regular-locus-open-from-prime-quotients and the dropped node), tool_uses and summary updated. Batch-5 findings: lem-trf-regular-sequence-dimension-formula is a generic local dimension formula, not part of the trace formula or Poincaré duality, so acceptable. Maintainer note: the item and both its citers (qe- and gabber-normal-counterexample-reduction) are unreached once the drop list is excluded; there is no twin statement. Consider withdrawing the item from dispatch.; 1 file(s) fixed by the reviewer"
+ }
+}

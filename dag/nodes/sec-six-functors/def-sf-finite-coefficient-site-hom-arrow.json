@@ -15,9 +15,32 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
   "place": "last paragraph: transport the specified internal-Hom comparison to the pro-etale site; Stacks 00YV, 06YN, 07A4, 08J9"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the resolving tensor presentation on the full subcategory of complexes with intrinsically K-flat inverse images. It gives fully faithful restriction on pairs, a source representative comparison, and the natural chain tensor comparison. The target intrinsic tensor-model comparison and exact-localization factorization are the existing specified ones.",
+   "uses": [
+    "lem-sf-finite-coefficient-site-tensor-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensor comparison descent along fully faithful restriction. On each pair of representatives, cancel the invertible source and target localization comparisons to convert its equation into FiniteHomNuModelSquareAux. This equivalence of normalization equations transfers existence and uniqueness. Keep the specified source model map and chain comparison behind heterogeneous equality certificates through coefficient specialization. Existence uses the source and chain components; uniqueness identifies both certified witnesses with those components by eq_of_heq, so the square is precisely the original normalization.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-coefficient-site-tensor-presentation",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y7",
+  "date": "2026-10-22",
+  "note": "Representative descent with explicit cancellation of localization comparison isomorphisms. The specified chain comparison is retained via a pointwise native isomorphism and a heterogeneous equality certificate, equivalent by substitution to the original square; uniqueness compares the native witnesses in the abstract categories."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -122,7 +145,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "lean": {
@@ -134,7 +168,8 @@
    "WeilConjectures.finiteHomNuTensor_existsUnique",
    "WeilConjectures.finiteHomNuTensor",
    "WeilConjectures.finiteHomSiteHom",
-   "WeilConjectures.FiniteHomNuModelSquareAux"
+   "WeilConjectures.FiniteHomNuModelSquareAux",
+   "WeilConjectures.FiniteHomNuTensorNormalizationAux"
   ],
   "file": "lean/Sheaf/Paper/FiniteCoefficientSiteHomArrow.lean",
   "statement": "def finiteHomSiteHom (n : ℕ)",
@@ -142,7 +177,7 @@
   "by": "Q59",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Repair of returned delivery: canonical site internal-Hom transpose with explicit small pro-etale K-flat universe witnesses; tensor comparison remains fixed on local pure tensors and intrinsic localization."
+  "note": "Repair of returned delivery: canonical site internal-Hom transpose with explicit small pro-etale K-flat universe witnesses; tensor comparison remains fixed on local pure tensors and intrinsic localization. Y7: share representative normalization data before specializing and prove uniqueness by representative descent."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -159,5 +194,15 @@
   "group": "Q59",
   "result": "pass",
   "note": "Read all 5 modules, all 5 node records (chain-tensor node missing from snapshot; read from commit 5470a8b8 by read-only git show), dependency declarations and blueprint source. All node clauses rendered on both sites, ends checked: evaluation-defined v (étale etaleFiniteHomCanonical and pro-étale finiteIntrinsicReductionHom unfold to coefficientBaseChangeHom with the uniqueness clause's data), both ends in ctf plus IsIso, FiniteHomEvaluation identity and uniqueness, CoefficientEvaluationCompatible, both r<=m cocycles, beta/nu site square. Hypotheses exact (separated finite type over k, l != p, n>=m>=1 via n+1, m+1); single universe; edge cases (empty X, n=m, residue field, zero objects) covered. No sorry data in defs, no Nonempty.some, published étale and intrinsic pro-étale categories used, new files only; records, verbatim statements, declaration lists, H12 fields, report sections OK. nt_compile.py on all 5 files: exit 0, no messages (EtaleFiniteCoefficientHomArrow 42-49 s, near the 60 s limit). Notes: snapshot omitted the chain-tensor node; stage 3 needs a lemma identifying the thick-locus lemma's tensor comparison with ExceptionalCoefficients.tensorIso."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 91a912d9 vs prior FIXed head 4ada08f3 (cmp: all Lean/node files identical, only change record status + report differ) and live (CoefficientRingedTensorHomModel and importer IntegralTensorReductionTowerComparison unchanged); fixed set of 10 modules compiled with run_set, exit 0; checker rule stage3_delivery.py:602-606 (Status must start with open)"
  }
 }

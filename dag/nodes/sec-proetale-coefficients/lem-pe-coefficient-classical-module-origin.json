@@ -1,0 +1,130 @@
+{
+ "id": "lem-pe-coefficient-classical-module-origin",
+ "kind": "lemma",
+ "title": "Ordinary classical module descent on coefficient-sized sites",
+ "statement": "Let X be a scheme in universe u, A a commutative ring in max(v,u+1), and F an intrinsic module over its constant ring on the coefficient-sized pro-etale site of [lem-pe-coefficient-comparison-data]. Suppose that every affine-presentation continuity map of [det-pe-classical-definition-continuity-map] for the fixed-scalar realization of F is invertible. Then there is an intrinsic constant-A module G on the coefficient-sized etale site with L(G) isomorphic to F. No boundedness, derived category, Noetherianity, constructibility or qcqs hypothesis occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+  "place": "Final paragraph, essential image: a classical module has invertible linear comparison counit."
+ },
+ "stmt_deps": [
+  "lem-pe-coefficient-comparison-data",
+  "det-pe-classical-definition-continuity-map"
+ ],
+ "proof": [
+  {
+   "text": "Restriction along the constant-section unit is fully faithful by local surjectivity of that unit. Extend a fixed-scalar sheaf by module sheafification; the underlying additive sheaf is unchanged, giving essential surjectivity. The constant-section equation for constructibleComparisonRingMap identifies intrinsic and fixed-scalar direct images. Uniqueness of left adjoints identifies their inverse images. These are proved private constructions; no arbitrary ring map or unproved existence witness is chosen.",
+   "uses": [
+    "lem-pe-coefficient-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed-scalar pro-etale module sheaf F, consider the canonical comparison counit. At every affine etale stage of an AffinePresentation, the comparison unit is the left Kan extension unit followed by the sheafification unit. The former is invertible since the inclusion is fully faithful, and the latter is invertible by lem-pe-coefficient-comparison-presentation-sheafification. The right triangle identity therefore makes the counit invertible at each stage.",
+   "uses": [
+    "lem-pe-coefficient-comparison-presentation-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An affine ind-etale basis object has a pro-affine-etale presentation. Enlarge its cofiltered index from u to u+1, lift its affine etale stages to X.ProEt, and reflect its scheme limit into the over category to obtain the required AffinePresentation with that exact vertex. The source of the counit has a colimit restriction cocone by lem-pe-coefficient-comparison-continuity. The hypothesis that continuityMap is invertible makes the target restriction cocone a colimit as well. The stagewise invertible counit is a natural isomorphism of the diagrams. Uniqueness of their colimits makes its vertex component invertible. The scheme-general source-library affine-basis restriction declaration attached to lem-weil-pbc-ind-etale-basis, together with the AsSmall equivalence, reflects isomorphisms, so the counit is invertible as a sheaf morphism.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "det-pe-classical-definition-continuity-map",
+    "lem-pe-coefficient-comparison-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the fixed-scalar direct image as antecedent, and use its invertible counit. Choose its preimage under the proved etale constant-scalar equivalence. Compose the inverse-image comparison with the equivalence counit and the fixed-scalar origin isomorphism, then lift this isomorphism through the fully faithful pro-etale constant-scalar functor. This gives the intrinsic antecedent. All constructions allow the zero ring, zero module, and empty scheme.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-coefficient-comparison-data",
+  "lem-pe-coefficient-comparison-presentation-sheafification",
+  "lem-weil-pbc-ind-etale-basis",
+  "det-pe-classical-definition-continuity-map",
+  "lem-pe-coefficient-comparison-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+  "place": "Essential-image paragraph, implemented directly with module-valued affine restriction colimits; the coefficient-sized continuity and sheafification statements replace the original-site set counit criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A proetale module sheaf with invertible affine continuity maps descends to an etale module sheaf over a constant ring",
+   "results": "Eight generic pullback/pushforward hits and CondensedMod.isDiscrete_tfae, which concerns condensed modules rather than scheme sites.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for intrinsic coefficient-sized comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "classical module sheaf etale proetale essential image inverse image constant ring coefficients",
+   "results": "Eight hits concerning StandardEtalePair ring algebra; no module descent theorem.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for intrinsic coefficient-sized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "continuityMap|constantRingModule|proEtale.*[Cc]lassic",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for intrinsic coefficient-sized comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientBoundedClassicalDescent",
+  "date": "2026-10-26",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "Derived conclusion: classical derived comparison and bounded truncation; det-pe-classical-sheaves-modules: Final paragraph: essential image of ordinary module inverse image.",
+   "via": [
+    "lem-pe-coefficient-bounded-classical-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientClassicalModuleOrigin",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientClassicalModuleOrigin.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientClassicalModule_origin",
+  "statement": "theorem coefficientClassicalModule_origin (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (F : ConstantCompletion.Mod (ConstantCompletion.constant\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X) A))\n    (hF : ∀ {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]\n      (P : AffinePresentation X I),\n      IsIso (continuityMap P\n        ((AsSmall.up : X.ProEt ⥤ Scheme.coefficientProEtaleSiteModel.{u, v} X).op ⋙\n          ((coefficientModelFixedScalars _ A).obj F).obj))) :\n    ∃ G, Nonempty ((constructibleComparisonPullback X A).obj G ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T201637-L-2594403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T001718-L-23730",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

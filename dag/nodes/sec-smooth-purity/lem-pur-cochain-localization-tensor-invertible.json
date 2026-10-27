@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-cochain-localization-tensor-invertible",
+ "kind": "lemma",
+ "title": "K-flat invertibility of the cochain localization tensorator",
+ "status": "split",
+ "statement": "For a commutative ring A and a scheme T, the native cochain localization tensorator mu of QA from cochain sheaves of A-modules on the pro-etale site of T to their derived category is invertible whenever its right input is K-flat. Use the native derived tensor structure [lem-sfb-derived-monoidal] and fixed sheaf coefficient categories [def-pur-finite-tensor-reduction-data]. Write the actual native localization tensorator with its explicit source and target as cochainLocalizationTensor, then state invertibility of this same map; no map is changed.",
+ "stmt_deps": [
+  "lem-sfb-derived-monoidal",
+  "def-pur-finite-tensor-reduction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: finite reduction is derived scalar tensor and its compatibility with invertible twists follows from derived tensor associativity; Stacks Tags 07A4 and 0FPT."
+ },
+ "proof": [
+  {
+   "text": "Write the actual native localization tensorator as cochainLocalizationTensor with its explicit morphism type. For its invertibility, pass K-flatness through the quotient into the homotopy category. The native Qh tensor counit is invertible with K-flat right input. Q is the monoidal transport of the composite of the strong monoidal quotient and Qh. Its tensorator is therefore a composite of functorial isomorphisms and that invertible Qh tensorator. The generic argument is a proved private helper; the public theorem gives the concrete sheaf instance for the explicitly typed same map.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof_origin": "J2, 2026-10-26: expose this proved native property as a public named API because the actual certified scalar diagram definition must refer to named proved theorems, not private proof helpers. No sorry is introduced. The public API is specialized to actual sheaf module categories; the generic localization argument is a proved private helper. This avoids repeating the expensive concrete monoidal-instance specialization inside every data constructor. Its native tensorator has an explicit typed map definition, shared by the diagram constructor and this property theorem, to avoid expansion of the lax-monoidal instance merely to compare map types.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor counit representative diagram source isomorphism K-flat localization scalar extension",
+   "results": "8 unrelated ordinary module flatness results; no diagram record or scalar cochain representative source theorem. Local source search finds the native derived localization counit isomorphism, cochain oplax tensor isomorphism, and exact-right-adjoint K-flat representative theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use proved native ingredients; add a typed diagram interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ, IsIso",
+   "results": "0 hits; service does not resolve the qualified identifier. Local Mathlib/source inspection supplies the monoidal localization structure.",
+   "date": "2026-10-26",
+   "verdict": "No exact interface."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorRepresentativeData|isIso_cochainTranspose_of_kFlat|isIso_μ_Qh_of_kFlat",
+   "results": "0 Mathlib service hits; repository source search finds the latter two native APIs, but no typed record sealing the scalar diagram.",
+   "date": "2026-10-26",
+   "verdict": "Use existing isomorphism ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison and scalar extension derived adjunction counit commute on cochain representatives; localization tensorators and scalar counits are isomorphisms on K-flat complexes.",
+   "results": "8 hits, including Adjunction.localization_counit_app and ordinary module extension/restriction counits; no exact fixed-derived-scalar representative tensor square or K-flat source certificate.",
+   "date": "2026-10-26",
+   "verdict": "Use the proved native derived APIs and actual typed scalar diagram."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorSignedReduction",
+  "date": "2026-10-26",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: derived scalar reduction and tensor/twist compatibility",
+   "via": [
+    "def-pur-finite-signed-reduction-comparisons",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CochainLocalizationTensorIso",
+  "file": "lean/Sheaf/Paper/CochainLocalizationTensorIso.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.cochainLocalizationTensor_isIso",
+  "statement": "theorem cochainLocalizationTensor_isIso\n    {A : Type (u + 1)} [CommRing A] (T : AlgebraicGeometry.Scheme.{u})\n    (C D : CochainComplex\n      (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) ℤ)\n    (hD : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat D) :\n    IsIso (cochainLocalizationTensor T C D)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.cochainLocalizationTensor",
+   "WeilConjectures.PurityFiniteSetting.cochainLocalizationTensor_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered Lean files + 5 change records + 15 node files against clone 3dda50f; FiniteTensorCoreNormalized/LineComparison predicates unfolded against finiteTensorBinaryRepresentativeSquare and old HEq bodies; new sorry against native leftDerivedTensorComparison_app_app_comp_tensorHom and the derivedAdjunction counit; 13 direct importers compiled in a sandbox with the delivery (all pass, max 46 s); #print axioms checked"
+ }
+}

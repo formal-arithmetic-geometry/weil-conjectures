@@ -1,0 +1,122 @@
+{
+ "id": "lem-z8-etale-section-unit-normalization",
+ "kind": "statement",
+ "title": "Etale Section Unit Normalization",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem sectionPullback_unit {X Y : Scheme.{u}}\n    (s : Y ⟶ X) (p : X ⟶ Y) (h : s ≫ p = 𝟙 Y) :\n    (upperStar B s).leftDerivedFunctor.map (leftDerivedUpperStarUnitIso B p).hom ≫\n        (leftDerivedUpperStarUnitIso B s).hom =\n      (leftDerivedUpperStarCompSectionIso B s p h).hom.app (𝟙_ _)\n\ntheorem pullback_singleUnit_hom {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (upperStar B f).leftDerivedFunctor.map (singleFunctorObjUnitIso B Y).hom ≫\n        (leftDerivedUpperStarUnitIso B f).hom =\n      (leftDerivedUpperStarSingleConstantSheafIso B f (𝟙_ B)).hom ≫\n        (singleFunctorObjUnitIso B X).hom\n\ntheorem sectionPullback_singleUnit {X Y : Scheme.{u}}\n    (s : Y ⟶ X) (p : X ⟶ Y) (h : s ≫ p = 𝟙 Y) :\n    (upperStar B s).leftDerivedFunctor.map\n        (leftDerivedUpperStarSingleConstantSheafIso B p (𝟙_ B)).hom ≫\n      (leftDerivedUpperStarSingleConstantSheafIso B s (𝟙_ B)).hom =\n      (leftDerivedUpperStarCompSectionIso B s p h).hom.app\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((constantSheaf Y.smallEtaleTopology B).obj (𝟙_ B)))\n\ntheorem derivedConstantUnit_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (M : B) :\n    Adjunction.derivedSingleUnit (upperStarLowerStarAdjunction B f)\n      ((constantSheaf Y.smallEtaleTopology B).obj M)\n      ((constantSheaf X.smallEtaleTopology B).obj M)\n      ((Scheme.upperStarConstantSheafIso B f).hom.app M) =\n    (derivedUpperStarLowerStarAdjunction B f).unit.app\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((constantSheaf Y.smallEtaleTopology B).obj M)) ≫\n      (lowerStar B f).rightDerivedFunctor.map\n        (leftDerivedUpperStarSingleConstantSheafIso B f M).hom\n\ntheorem constantUnitPullback_unit {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (upperStar B f).leftDerivedFunctor.map (singleFunctorObjUnitIso B Y).hom ≫\n        (leftDerivedUpperStarUnitIso B f).hom =\n      (constantSinglePullbackIso B f (𝟙_ B)).hom ≫\n        (singleFunctorObjUnitIso B X).hom\n\ntheorem constantSingleSectionUnits_eq {X Y : Scheme.{u}}\n    (s : Y ⟶ X) (p : X ⟶ Y) (h : s ≫ p = 𝟙 Y) :\n    constantSingleSectionUnits B s p (𝟙_ B) =\n      (derivedSectionPushIso B s p h).hom.app\n        (constantSingle B Y (𝟙_ B))\n\ntheorem projectiveLineDiagonalAlpha_eq (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u}) (a : Bool) :\n    projectiveLineDiagonalAlpha A S a =\n      (derivedSectionPushIso (ModuleCat.{u + 1} A)\n        (pullback.diagonal (ProjectiveLine S ↘ S)) (projectiveLineDiagonalProjection S a)\n        (by cases a <;> simp [projectiveLineDiagonalProjection])).hom.app\n        (ordinaryFiniteUnit A (ProjectiveLine S))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-derived-single-unit",
+  "def-z8-projective-line-diagonal-alpha",
+  "lem-z8-etale-diagonal-section-coherence",
+  "lem-z8-etale-single-pullback-comparisons",
+  "lem-z8-etale-tensor-trace-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Tensor compatibility and the unit law identify the section inverse-image comparison on the monoidal unit. The single-complex unit comparison and the canonical constant-sheaf pullback comparison identify the same equation on the constant complex. Expand the named supported derived units and paste them using adjunction-unit naturality; the section comparison identifies their composite with the conjugate section isomorphism.",
+   "uses": [
+    "def-asd-derived-single-unit",
+    "def-z8-projective-line-diagonal-alpha",
+    "lem-z8-etale-diagonal-section-coherence",
+    "lem-z8-etale-single-pullback-comparisons",
+    "lem-z8-etale-tensor-trace-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-derived-single-unit",
+  "def-z8-projective-line-diagonal-alpha",
+  "lem-z8-etale-diagonal-section-coherence",
+  "lem-z8-etale-single-pullback-comparisons",
+  "lem-z8-etale-tensor-trace-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha_eq",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sectionPullback_unit",
+   "AlgebraicGeometry.Etale.pullback_singleUnit_hom",
+   "AlgebraicGeometry.Etale.sectionPullback_singleUnit",
+   "AlgebraicGeometry.Etale.derivedConstantUnit_eq",
+   "AlgebraicGeometry.Etale.constantUnitPullback_unit",
+   "AlgebraicGeometry.Etale.constantSingleSectionUnits_eq",
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha_eq"
+  ],
+  "statement": "theorem projectiveLineDiagonalAlpha_eq (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u}) (a : Bool) :\n    projectiveLineDiagonalAlpha A S a =\n      (derivedSectionPushIso (ModuleCat.{u + 1} A)\n        (pullback.diagonal (ProjectiveLine S ↘ S)) (projectiveLineDiagonalProjection S a)\n        (by cases a <;> simp [projectiveLineDiagonalProjection])).hom.app\n        (ordinaryFiniteUnit A (ProjectiveLine S))",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

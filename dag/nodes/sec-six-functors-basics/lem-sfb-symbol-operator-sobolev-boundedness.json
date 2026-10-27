@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-symbol-operator-sobolev-boundedness",
+ "kind": "statement",
+ "title": "Sobolev boundedness of bundle symbol operators",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $N$ be a compact oriented smooth manifold without boundary of dimension $m\\geq1$, with a smooth Riemannian metric and positive volume form. Let $B,C$ be smooth finite-rank real vector bundles with smooth positive definite fibre metrics; their ranks need not agree. For $j\\geq0$, let $H^j(B)$ be the subspace of measurable square-integrable sections modulo almost-everywhere equality whose local frame coefficients have distributional derivatives of order at most $j$ locally in $L^2$, and similarly for $C$. Use norms obtained from fixed finite smooth coordinate trivializations and subordinate smooth partitions with compact support in the charts: sum the squared Euclidean $L^2$ norms of all localized derivatives through order $j$ and take the square root. For $j=0$ use the usual integrated $L^2$ norm. Regard these sections as distributions by integration against tests. Let $r\\in\\mathbf Z$ and $A\\in\\Psi^r(B,C)$ in the sense of [def-sfb-symbol-pseudodifferential-operators]. For every integer $t\\geq0$ with $t-r\\geq0$, the distributional restriction of $A$ is a bounded real-linear map $$A:H^t(B)\\longrightarrow H^{t-r}(C).$$ In particular, there is $M_{A,t}>0$, depending only on the operator, the geometry, the chosen norms and $t$, such that $$Au\\in H^{t-r}(C),\\qquad\\|Au\\|_{H^{t-r}(C)}\\leq M_{A,t}\\|u\\|_{H^t(B)}\\quad(u\\in H^t(B)).$$ The output in this assertion is the distributional action of the original $A$ on $u$, rather than an unrelated extension from smooth sections.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Part I section 3.B, Theorem 3.6 and the smooth-kernel paragraph, printed p.13 (PDF page 25); nonnegative integral Sobolev indices and weak-derivative realization; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Put $s=t-r\\geq0$ and $\\langle\\xi\\rangle=(1+|\\xi|^2)^{1/2}$. For a smooth compactly supported complex vector function $f$, apply the two Schwartz Fourier identities repeatedly in the coordinate directions. They give $\\|f\\|_{W^{j,2}}^2=\\int p_j(\\xi)|\\widehat f(\\xi)|^2\\,d\\xi$, where $p_j(\\xi)=\\sum_{|\\alpha|\\leq j}(2\\pi)^{2|\\alpha|}\\xi^{2\\alpha}$. Expanding $(1+\\sum\\xi_k^2)^j$ shows that $p_j$ is bounded above and below by positive constant multiples of $\\langle\\xi\\rangle^{2j}$. Thus $\\|f\\|_{W^{j,2}}$ and $\\|\\langle\\xi\\rangle^j\\widehat f\\|_2$ are equivalent, also for $j=0$. Smooth compactly supported functions are Schwartz because each derivative is bounded on its compact support and vanishes off that support.",
+   "uses": [
+    "lem-sfb-schwartz-fourier-l2-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean",
+    "place": "SchwartzMap.integral_norm_sq_fourier, line 318; SchwartzMap.fourier_lineDerivOp_eq, line 205."
+   }
+  },
+  {
+   "text": "In one localized term $L_i=\\chi_i\\operatorname{Re}\\operatorname{Op}(a_i)\\psi_i$ of the current defining representation, keep both spatial cutoffs. Absorb the output cutoff into the symbol and extend by zero to get $b(x,\\zeta)=\\chi_i(x)a_i(x,\\zeta)$. Its support in $x$ lies in one compact set; Leibniz and the defining local symbol bounds give all global symbol bounds required by the compact-symbol frequency-kernel lemma. For smooth compactly supported $f=\\psi_i u$ that lemma identifies the actual localized quantization with $T_bf$ and its Fourier transform. Set $h(\\xi)=\\langle\\xi\\rangle^t\\widehat f(\\xi)$. The weighted output transform is the integral operator with matrix kernel $G(\\eta,\\xi)=\\langle\\eta\\rangle^s\\widehat b_x(\\eta-\\xi,2\\pi\\xi)\\langle\\xi\\rangle^{-t}$. Its norm is at most $C_L(1+|\\eta-\\xi|)^{-L+s}$, since $r-t=-s$ and $\\langle\\eta\\rangle/\\langle\\xi\\rangle\\leq2(1+|\\eta-\\xi|)$. Choose an integer $L>m+s$. The majorant has finite integral $I$: on $2^k\\leq|z|<2^{k+1}$ its integral is at most a fixed multiple of $2^{k(m-L+s)}$, a convergent geometric series, and on the unit ball it is bounded. Translation invariance gives both Schur marginal bounds $C_L I$. The Schur node and step 1 therefore give $\\|\\chi_i\\operatorname{Op}(a_i)f\\|_{W^{s,2}}\\leq C\\|f\\|_{W^{t,2}}$. The compact-symbol lemma also gives smooth compactly supported output. For real $f$, take its real part: each real derivative has norm at most that of the corresponding complex derivative, so the same estimate holds for $\\chi_i\\operatorname{Re}\\operatorname{Op}(a_i)f$.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-symbol-frequency-kernel",
+    "lem-sfb-schur-l2-matrix-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "Write the fixed input partition as $(\\theta_j)$. For every smooth section $u$, $\\psi_i u=\\sum_j\\psi_i(\\theta_j u)$. Apply the chart-overlap node at order $t$, with $K=\\operatorname{supp}\\theta_j$ in its source chart and target cutoff $\\psi_i$. It bounds the coordinate $W^{t,2}$ norm of each summand by a fixed multiple of that of $\\theta_j u$. There are finitely many pairs, so $\\|\\psi_i u\\|_{W^{t,2}}\\leq C_i\\|u\\|_{H^t}$. Each output from step 2 is supported in $\\operatorname{supp}\\chi_i$. Apply the same node at order $s$ to each fixed output-partition cutoff to bound its global $H^s$ norm by its coordinate $W^{s,2}$ norm. At order zero the coordinate and integrated norms are equivalent: the smooth positive volume density and fibre-metric eigenvalues have positive minima and finite maxima on each compact support. Thus, summing the finitely many estimates from step 2, the symbol part $A_0$ satisfies $\\|A_0u\\|_{H^s}\\leq C_0\\|u\\|_{H^t}$ on smooth sections.",
+   "uses": [
+    "lem-sfb-sobolev-chart-overlap-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "Treat the smooth-kernel term $R_K$ separately. In an output frame, for any localized coefficient and multi-index $\\alpha$ the expected derivative is $\\int_N \\partial_x^\\alpha(\\rho(x)K(x,y))u(y)\\,dV(y)$, where $\\rho$ is its fixed output cutoff. Apply the dominated-integral derivative node inductively in $x$, taking the measure space $N$ and the finite-dimensional real target coefficient space. On a compact output neighbourhood all derivatives of the localized kernel are bounded by constants in operator norm relative to the input metric. The dominating function is $C|u(y)|$, integrable since $\\int|u|\\leq\\operatorname{vol}(N)^{1/2}\\|u\\|_0$. The integrands and derivative integrands are measurable; their initial integrals exist by the same bound. This verifies every hypothesis for every differentiation. For smooth $u$ the resulting smooth coefficients have classical, hence distributional, derivatives equal to these integrals. Cauchy–Schwarz gives $|\\partial^\\alpha(\\rho R_Ku)(x)|\\leq C_\\alpha\\operatorname{vol}(N)^{1/2}\\|u\\|_0$. Integrate the square over the compact output support and sum the finitely many coefficients and $|\\alpha|\\leq s$. Consequently $\\|R_Ku\\|_{H^s}\\leq C_K\\|u\\|_0$. Each input localization controls its integrated $L^2$ norm by its order-$t$ norm, and $u=\\sum\\theta_j u$, so $\\|u\\|_0\\leq C_t\\|u\\|_{H^t}$. The defining decomposition and the triangle inequality now give $\\|Au\\|_{H^s}\\leq C\\|u\\|_{H^t}$ for every smooth $u$.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-dominated-integral-frechet-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "Pass to an arbitrary section $u\\in H^t(B)$ using the existing weak-Sobolev realization of bundle completions. That node identifies the completion with exactly the weak-derivative subspace in this item, supplies density of smooth sections and completeness, for the same norms up to equivalence. Its metric volume is allowed here: the given positive volume differs from it by a smooth strictly positive function, bounded above and below on compact $N$, so its integrated $L^2$ norm and the embedding into distributions agree up to equivalence. The localized higher-order norms are the same. For $t=0$ use the node's $L^2$ completion and measurable-section identification; for $s=0$ use the corresponding complete $L^2(C)$. The norms agree, not only the subspaces: if smooth $w_n$ converge in the completion to $w$, each localized derivative $\\partial^\\alpha(\\theta_jw_n)$ is Cauchy in $L^2(\\mathbf R^m)$, hence converges to some $g$; since $\\theta_jw_n\\to\\theta_j j(w)$ in $L^2$, pairing with tests shows that $g$ is the distributional derivative $\\partial^\\alpha(\\theta_j j(w))$. So the item's norm of $j(w)$ is the limit of the norms of $w_n$, the completion norm of $w$; smooth sections are dense in the item's $H^t(B)$ and $H^s(C)$ is complete for the item's norm. Choose smooth $u_n\\to u$ in $H^t$. Step 4 applied to $u_n-u_k$ makes $Au_n$ Cauchy in $H^s(C)$, hence convergent to some $v$. Passing to limits in its norm estimate gives $\\|v\\|_{H^s}\\leq C\\|u\\|_{H^t}$.",
+   "uses": [
+    "lem-sfb-bundle-sobolev-rellich"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "It remains to identify $v$ with $Au$ in distributions. Input Sobolev convergence implies $L^2$ convergence by the continuous inclusion in the bundle-realization node (for $t=0$, by definition). For every smooth test section $\\varphi$ of the dual bundle tensored with densities, Cauchy–Schwarz bounds $|\\langle u_n-u,\\varphi\\rangle|$ by $C_\\varphi\\|u_n-u\\|_0$, so $u_n\\to u$ as distributions; the same reasoning gives $Au_n\\to v$ as distributions from output Sobolev convergence. For a bounded set $S$ of tests in the current test-density definition, finitely many compact chart sets covering $N$ give uniform bounds on its order-zero coefficient seminorms, hence $\\sup_{\\varphi\\in S}C_\\varphi<\\infty$. Thus both convergences hold uniformly on every such $S$, exactly the strong dual topology now specified in the symbol definition. The defining continuity $A:\\mathcal D'(B)\\to\\mathcal D'(C)$ gives $Au_n\\to Au$. Distributions are functionals on tests, so limits are unique and $Au=v$. The injective distributional realization of $L^2$ sections makes this equality an equality with the claimed Sobolev output class. The restriction is real-linear because $A$ is; the norm estimate proves boundedness. Taking $M_{A,t}=1+C$ makes the bound strictly positive, including zero operators and rank-zero bundles.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-bundle-sobolev-rellich",
+    "def-sfb-smooth-bundle-test-distributions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-schwartz-fourier-l2-identities",
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-compact-symbol-frequency-kernel",
+  "lem-sfb-schur-l2-matrix-kernel",
+  "lem-sfb-sobolev-chart-overlap-bound",
+  "lem-sfb-dominated-integral-frechet-derivative",
+  "lem-sfb-bundle-sobolev-rellich",
+  "def-sfb-smooth-bundle-test-distributions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Agent Fourier-kernel/Schur proof of Part I §3.B, Theorem 3.6; source WANTED locally and unavailable online in this session."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Sobolev|pseudodifferential|smooth.*kernel",
+   "results": "{\"t\": \"2026-10-24T03:04:36Z\", \"tool\": \"grep\", \"query\": \"Sobolev|pseudodifferential|smooth.*kernel\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/Distribution/DerivNotation.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"10724567e4bf3a48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Bessel-potential membership and constant-coefficient Fourier multipliers do not give variable-x pseudodifferential mapping bounds on bundles; Gagliardo–Nirenberg estimates assume differentiability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Negative order pseudodifferential operators improve L2 weak derivative regularity with a Sobolev norm estimate",
+   "results": "{\"t\": \"2026-10-24T03:04:37Z\", \"tool\": \"leansearch\", \"query\": \"Negative order pseudodifferential operators improve L2 weak derivative regularity with a Sobolev norm estimate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.derivCLM\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_le\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv\", \"TemperedDistribution.derivCLM\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"SchwartzMap.decay_neg_aux\", \"MvPowerSeries.order_neg\"], \"digest\": \"24e2b7448e2e40ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Bessel-potential membership and constant-coefficient Fourier multipliers do not give variable-x pseudodifferential mapping bounds on bundles; Gagliardo–Nirenberg estimates assume differentiability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sobolev\"",
+   "results": "{\"t\": \"2026-10-24T03:04:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sobolev\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TemperedDistribution.MemSobolev\", \"TemperedDistribution.MemSobolev.mono\", \"TemperedDistribution.memSobolev_fun_zero\", \"TemperedDistribution.MemSobolev.lineDerivOp\", \"TemperedDistribution.MemSobolev.laplacian\", \"TemperedDistribution.MemSobolev.neg\", \"TemperedDistribution.MemSobolev.sub\", \"TemperedDistribution.MemSobolev.add\"], \"digest\": \"9f33c41d8fc07c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Bessel-potential membership and constant-coefficient Fourier multipliers do not give variable-x pseudodifferential mapping bounds on bundles; Gagliardo–Nirenberg estimates assume differentiability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudodifferential operator of order r maps Sobolev Hs boundedly to H(s-r), and a smooth integral kernel maps L2 into every Sobolev space",
+   "results": "{\"t\": \"2026-10-24T03:04:39Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudodifferential operator of order r maps Sobolev Hs boundedly to H(s-r), and a smooth integral kernel maps L2 into every Sobolev space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.integralCLM\", \"SchwartzMap.mkLM\", \"SchwartzMap.toLpCLM\", \"SchwartzMap.mkCLM\", \"SchwartzMap.norm_toLp_le_seminorm\", \"SchwartzMap.bilinLeftCLM\", \"SchwartzMap.evalCLM\", \"SchwartzMap.toLpCLM_apply\"], \"digest\": \"6dd41ec8572e752d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Bessel-potential membership and constant-coefficient Fourier multipliers do not give variable-x pseudodifferential mapping bounds on bundles; Gagliardo–Nirenberg estimates assume differentiability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudodifferential operators with compactly supported symbols map Sobolev Ht into H(t-r) boundedly",
+   "results": "{\"t\": \"2026-10-24T03:27:15Z\", \"tool\": \"leanfinder\", \"query\": \"Pseudodifferential operators with compactly supported symbols map Sobolev Ht into H(t-r) boundedly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffMapSupportedIn.seminorm_postcompLM_le\", \"SchwartzMap.mkLM\", \"SchwartzMap.compCLM\", \"ContDiffMapSupportedIn.structureMapLM\", \"SchwartzMap.mkCLM\", \"SchwartzMap.norm_toLp_le_seminorm\", \"HasCompactSupport.toSchwartzMap\", \"SchwartzMap.compCLMOfAntilipschitz\"], \"digest\": \"d16e19d4b401fda5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: MemSobolev and constant-coefficient Fourier multiplier results do not state mapping estimates for variable symbols on compact bundles."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sobolev\"",
+   "results": "{\"t\": \"2026-10-24T03:27:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sobolev\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TemperedDistribution.MemSobolev\", \"TemperedDistribution.MemSobolev.mono\", \"TemperedDistribution.memSobolev_fun_zero\", \"TemperedDistribution.MemSobolev.lineDerivOp\", \"TemperedDistribution.MemSobolev.laplacian\", \"TemperedDistribution.MemSobolev.neg\", \"TemperedDistribution.MemSobolev.sub\", \"TemperedDistribution.MemSobolev.add\"], \"digest\": \"9f33c41d8fc07c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: MemSobolev and constant-coefficient Fourier multiplier results do not state mapping estimates for variable symbols on compact bundles."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|Schur.?test|MemSobolev|convolution.*eLpNorm",
+   "results": "{\"t\": \"2026-10-24T03:27:14Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|Schur.?test|MemSobolev|convolution.*eLpNorm\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"8e3039ccf1188539\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: MemSobolev and constant-coefficient Fourier multiplier results do not state mapping estimates for variable symbols on compact bundles."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Plancherel characterizes integer Sobolev spaces by weighted L2 Fourier transforms",
+   "results": "{\"t\": \"2026-10-24T03:27:51Z\", \"tool\": \"leansearch\", \"query\": \"Plancherel characterizes integer Sobolev spaces by weighted L2 Fourier transforms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.norm_fourierTransformCLM_toL2_eq\", \"SchwartzMap.inner_fourierTransformCLM_toL2_eq\", \"MeasureTheory.Lp.inner_fourier_eq\", \"SchwartzMap.integral_norm_sq_fourier\", \"MeasureTheory.Lp.norm_fourier_eq\", \"MeasureTheory.Lp.fourierTransformₗᵢ\", \"SchwartzMap.norm_fourier_toL2_eq\", \"MeasureTheory.Lp.instFourierTransform.congr_simp\"], \"digest\": \"69c573a984d0c9c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: MemSobolev and constant-coefficient Fourier multiplier results do not state mapping estimates for variable symbols on compact bundles."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weak-garding-sobolev-estimate",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Sobolev boundedness of bundle symbol operators.",
+   "via": [
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symbol-operator-sobolev-boundedness",
+  "worker": "stage1",
+  "summary": "O2: retained the statement, proved the smooth-input bound via a compact-symbol frequency kernel and weighted Schur estimate, handled smoothing by a Mathlib differentiation-under-integral leaf, and used existing chart-overlap and weak-Sobolev realization nodes to pass to weak sections and identify the original distributional output. Four new nodes, two Mathlib leaves; no Lean written or compiled. Demailly source remains WANTED; the proof is agent-written. Repair of the returned delivery: re-read the current symbol definition and its explicit test-density conventions, retained both spatial cutoffs in step 2, and verified strong-dual convergence in step 6 using the bounded-test seminorms; refreshed every citation against the current DAG. The item statement and four prerequisite statements are unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Sobolev boundedness of bundle symbol operators. This is the finite-order Sobolev mapping input in the existing parametrix route; no unit or chapter route was changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-fa9f4e039",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-fa9f4e039 (reviewer sub-agent of L); spot-checked: This is a re-delivery after landing refused f3ae6c83, my earlier FIX, because the definition def-sfb-symbol-pseudodifferential-operators had changed. The worker rebuilt the item from their sandbox, which lost my step-5 repair. I compared the snapshot JSON of both runs. The four new nodes and lem-sfb-bundle-sobolev-rellich are byte-identical to the earlier delivery. lem-sfb-sobolev-chart-overlap-bound changed only its status. The item statement and stmt_deps are unchanged. I read the current definition and def-sfb-smooth-bundle-test-distributions in full: they now specify the strong dual topology and transposition with both cutoffs kept. Step 2's both-cutoff L_i matches the new definition. Step 6's new strong-topology argument is correct and better than before: finitely many compact chart sets bound the order-zero seminorms on each bounded set S of tests, so convergence is uniform on S and continuity of A gives Au=v. Steps 1, 3 and 4 are unchanged and correct: Plancherel and the line-derivative leaf (Fourier.lean l.205, l.318), the 2π convention, Peetre's inequality with s>=0, an integrable majorant for L>m+s, both Schur marginals, the chart-overlap hypotheses, and the dominated-derivative leaf (ParametricIntegral l.210). The new nodes were re-read: the compact-symbol and Schur statements are correct, neither restates the item, and the rg search found no duplicates. There is no cycle and no SGA citation. Demailly Thm 3.6 is WANTED and the proof is agent-written, so I checked the mathematics directly. FIX (E5/C4): step 5 again asserts 'same norms up to equivalence', but the Rellich node identifies only the subspaces. I re-applied the f3ae closure argument verbatim. It shows that the completion norm equals the item's weak-derivative norm, which gives density of smooth sections in H^t(B) and completeness of H^s(C). The corrected item is in fixes/dag/nodes/sec-six-functors-basics/ and only step 5's text differs from the delivered item.; 1 file(s) fixed by the reviewer"
+ }
+}

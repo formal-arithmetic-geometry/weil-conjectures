@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-space-coherent-tangent-finite",
+ "kind": "statement",
+ "title": "Finite tangent and infinitesimal automorphism spaces of coherent families",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $f:X\\to B$ be a finitely presented morphism of algebraic spaces over $S$ [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For an $S$-scheme $T$, let $\\mathcal C(T)$ be the groupoid of pairs $(b:T\\to B,M)$, where $M$ is a finitely presented quasi-coherent $\\mathcal O_{X\\times_BT}$-module, flat over $T$, with support proper over $T$. Here finite presentation means etale locally a cokernel of a map between finite rank free modules; flatness is stalkwise flatness over base local rings on etale charts [def-pc-scheme-module-flat-over]; proper support means $M\\simeq i_*N$ for a closed immersion $i:Z\\hookrightarrow X\\times_BT$ with $Z\\to T$ proper and $N$ finite type quasi-coherent [def-sfb-space-proper-quot-functor]. Modules and tensor pullback use [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Arrows over $v:T\\to T_1$ are isomorphisms $v_X^*M_1\\simeq M$ with $b=b_1v$; composition uses canonical pullback composition isomorphisms. Assume $S$ is locally Noetherian (it has an affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]) and $B\\to S$ is locally of finite presentation [def-sbc-locally-finite-presentation]. For every field $k$ with a finite type map $\\operatorname{Spec}k\\to S$ and every $x_0\\in\\mathcal C(k)$, the following two $k$-vector spaces are finite dimensional: the tangent space of isomorphism classes of pairs $(x,\\alpha)$ with $x\\in\\mathcal C(k[\\epsilon]/(\\epsilon^2))$ and $\\alpha:x|_k\\simeq x_0$, and the infinitesimal automorphism space of automorphisms of the pullback of $x_0$ to $k[\\epsilon]/(\\epsilon^2)$ which restrict to the identity over $k$. Vector-space operations are the usual deformation operations induced by scalar multiplication of $\\epsilon$ and gluing first-order extensions along their common special fibre [def-weil-field, def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08W8 (lemma-coherent-tangent-space), Situation 08KB (situation-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-field",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $s$ be the image of $\\operatorname{Spec}k$ in $S$ and choose an affine Noetherian neighbourhood $U=\\operatorname{Spec}R$ of $s$. Every $\\operatorname{Spec}(k\\oplus V)$ for finite-dimensional $V$ has the same single underlying point as $\\operatorname{Spec}k$, hence every deformation test map factors uniquely through $U$. Restrict $B$ and $X$ to $U$. This changes neither objects, markings, arrows nor any scalar or addition operation under consideration. The local finite-presentation hypotheses are unchanged on this open restriction, and $k$ is a finite type $R$-algebra. We may therefore work over $S=\\operatorname{Spec}R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W8 (lemma-coherent-tangent-space)"
+   }
+  },
+  {
+   "text": "Local finite presentation on spaces is stable under base change: take etale scheme charts of source and target, tensor each chart presentation $A[t_1,\\ldots,t_r]/(h_1,\\ldots,h_m)$ with the new affine base ring, and use [lem-weil-pbc-finite-presentation-base-change-composition] and [lem-sfb-space-local-properties-chart-test]. The base-changed charts cover by [lem-trf-space-fibre-products-etale-covers]; [lem-sfb-scheme-etale-source-target-properties] permits etale chart refinement. Consequently $X_0=X\\times_{B,b_0}\\operatorname{Spec}k\\to\\operatorname{Spec}k$ is locally of finite presentation. It is also quasi-compact and quasi-separated: each affine test of it, or of its relative diagonal, is the corresponding base-change test for $f$, or for its diagonal. Thus $X_0/k$ is of finite presentation, with the convention of [def-sfb-space-proper-quot-functor]. Also every $B\\times_ST\\to T$ is locally of finite presentation. Apply [lem-sfb-stack-representable-source-algebraic] to $B\\to S$, viewing the scheme $S$ as an algebraic stack with identity atlas. Its base changes are algebraic spaces, so $B$ is an algebraic stack locally of finite presentation over $S$, meaning it admits a smooth surjective scheme atlas locally finitely presented over $S$. That atlas is locally of finite type because each ring presentation has finitely many generators. Thus [lem-sfb-algebraic-stack-tangent-finite] gives a finite-dimensional space $T_{b_0}B$ of $S$-maps $\\operatorname{Spec}(k[\\epsilon])\\to B$ extending $b_0$. This is a set of maps, with no nonidentity automorphisms.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-stack-representable-source-algebraic",
+    "lem-sfb-algebraic-stack-tangent-finite",
+    "def-sfb-space-proper-quot-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W8, reduction to the fixed fibre; artin.tex Tag 07X1 (lemma-finite-dimension)."
+   }
+  },
+  {
+   "text": "For $A_1\\to A\\leftarrow A_2$ in the test category with $A_2\\to A$ surjective, the kernel is nilpotent, so $\\operatorname{Spec}A\\to\\operatorname{Spec}A_2$ is a thickening, and $\\operatorname{Spec}A\\to\\operatorname{Spec}A_1$ is affine. By [lem-sfb-scheme-affine-thickening-pushout] the scheme pushout $P$ exists and $\\operatorname{Spec}A_1\\to P$ is a thickening, hence a homeomorphism; thus $P$ has one point, and its nonempty affine open is all of $P$. Taking $X,Y$ to be the identities in [lem-sfb-infinitesimal-pushout-affine-charts], with $P_0=P$, the canonical map identifies $P$ with $\\operatorname{Spec}(A_1\\times_AA_2)$. So [lem-sfb-space-coherent-pushout] applies to these spectra of Artinian ring fibre products; retain the special-fibre marking. The resulting equivalence remains fully faithful and essentially surjective after marking: an isomorphism of restrictions induces precisely the same identification with $x_0$. It gives (RS) for the marked predeformation category over $R$ of [def-sfb-artin-deformation-test-category]. Its fibre over $k$ has one object up to a unique marked arrow. Hence [lem-sfb-artin-rs-tangent-tensor] makes its tangent set $T$ a $k$-vector space. Apply the same statements with base $\\operatorname{Spec}k$ and the morphism $X_0\\to\\operatorname{Spec}k$: its coherent-family tangent space $T_0$ is a vector space as well. The ring fibre product $k[\\epsilon]\\times_k k[\\epsilon]$ is $k\\oplus k^2$, with square-zero ideal $k^2$; the sum map is $(a,b,c)\\mapsto a+(b+c)\\epsilon$. Thus these vector operations are exactly the scalar pullbacks and gluing operations in the item.",
+   "uses": [
+    "lem-sfb-scheme-affine-thickening-pushout",
+    "lem-sfb-infinitesimal-pushout-affine-charts",
+    "lem-sfb-space-coherent-pushout",
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-rs-tangent-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W8, first paragraph, with quot.tex Tag 08LQ and formal-defos.tex Tag 06IH."
+   }
+  },
+  {
+   "text": "Forgetting the module defines $d:T\\to T_{b_0}B$. It preserves scalar multiplication by functorial pullback. It preserves addition because the glued pair has the unique base map restricting to the two given base maps, and both sums pull it back along the same map $k\\oplus k^2\\to k[\\epsilon]$. This uniqueness follows directly from [lem-sfb-space-coherent-pushout]: apply it to the identity morphism $B\\to B$ and the two zero modules. Prescribed compatible base maps then glue uniquely, since the zero module has only its identity isomorphism. A class lies in $\\ker d$ exactly when its base map is the constant lift $b_0\\circ(\\operatorname{Spec}(k[\\epsilon])\\to\\operatorname{Spec}k)$. For that map the source is canonically $X_0\\times_k\\operatorname{Spec}(k[\\epsilon])$, and its module, marking and arrows are precisely a marked object for $X_0/k$. Thus $T_0\\to T$ is injective and identifies $T_0$ with $\\ker d$; there are no extra base isomorphisms because $B$ is set-valued. This map is $k$-linear. On $k[\\epsilon]$ and $k\\oplus k^2$, with their $k$-algebra structures, it keeps the module and replaces the structure map by its composite with $b_0$, and it commutes with pullback along $k$-algebra maps. Scalar multiplication is such a pullback. A glued object over $k\\oplus k^2$ for $X_0/k$ is sent to an object with the two given restrictions. By the uniqueness in (RS) from step 3, it is the gluing used for the sum in $T$. Both sums then pull back along the same map $k\\oplus k^2\\to k[\\epsilon]$.",
+   "uses": [
+    "lem-sfb-space-coherent-pushout"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W8, reduction paragraph; direct kernel calculation of the special case of artin.tex Tag 07X2."
+   }
+  },
+  {
+   "text": "Write $M_0$ for the module in $x_0$. Apply [lem-sfb-space-proper-support-module-ext-finite] to $X_0/k$ and $M=N=M_0$. Step 2 supplies local finite presentation of $X_0/k$. The other hypotheses are exactly the finite-presentation, quasi-coherence and proper-support hypotheses on the given object $x_0$: the closed proper subspace is the one in its proper-support datum. We obtain finite-dimensional vector spaces $E^1=\\operatorname{Ext}^1_{\\mathcal O_{X_0}}(M_0,M_0)$ and $E^0=\\operatorname{Ext}^0_{\\mathcal O_{X_0}}(M_0,M_0)$. Properness of $X_0$ is not used.",
+   "uses": [
+    "lem-sfb-space-proper-support-module-ext-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W8, final paragraph; proper-support repair using spaces-perfect.tex Tags 0D0S and 0D0R."
+   }
+  },
+  {
+   "text": "Forget finite presentation, quasi-coherence and proper support in a marked fixed-base deformation. This is a full inclusion into the groupoid of all module lifts on $X_0\\times_k\\operatorname{Spec}(k[\\epsilon])$ flat over $k[\\epsilon]$: both categories have all module isomorphisms commuting with the marking. The chart flatness agrees with geometric-stalk flatness by [lem-sfb-space-module-flat-chart-test]. By [lem-sfb-space-module-split-deformation-ext], forgetting gives an injection $j:T_0\\hookrightarrow E^1$. It preserves zero since both origins are the trivial module lift, and scalars since both operations use the same base pullback. For addition, the coherent gluing of [lem-sfb-space-coherent-pushout] becomes a gluing in all flat modules; uniqueness of that gluing in [lem-sfb-space-module-split-deformation-ext] identifies it with the ambient sum. Hence $j$ is linear. It is unnecessary to assert that every flat lift has finite presentation or proper support.",
+   "uses": [
+    "lem-sfb-space-module-flat-chart-test",
+    "lem-sfb-space-module-split-deformation-ext",
+    "lem-sfb-space-coherent-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W8, fixed-fibre module deformation paragraph, using defos.tex Tag 08VW; full inclusion suffices instead of Tag 08W7."
+   }
+  },
+  {
+   "text": "The infinitesimal automorphisms in the item are exactly the marked automorphisms of the trivial module lift in step 6. The base map of that object is fixed, and an algebraic space has no nonidentity base automorphisms. Removing the conditions on objects does not change automorphisms of this same object. Thus [lem-sfb-space-module-split-deformation-ext] identifies this space with $E^0$, respecting composition as addition and scalar pullback. It is finite dimensional by step 5.",
+   "uses": [
+    "lem-sfb-space-module-split-deformation-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W8, displayed Ext^0 formula; defos.tex Tag 08VW(3)."
+   }
+  },
+  {
+   "text": "The linear injection $j$ and finiteness of $E^1$ imply that $T_0$ has a finite basis: an independent list in $T_0$ maps to an independent list in $E^1$, so adjoining vectors outside the span stops after at most $\\dim E^1$ steps. The image of $d$ is likewise finite dimensional inside $T_{b_0}B$. Choose a basis of $\\ker d=T_0$ and lift every vector of a basis of $\\operatorname{im}d$ to $T$. These finitely many vectors span $T$: subtracting the lifted image coordinates from any vector leaves an element of the kernel. Thus $\\dim T\\leq\\dim E^1+\\dim T_{b_0}B<\\infty$. Step 7 gives the other finiteness assertion. Every operation used was the specified deformation operation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W8 (lemma-coherent-tangent-space)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-stack-representable-source-algebraic",
+  "lem-sfb-algebraic-stack-tangent-finite",
+  "def-sfb-space-proper-quot-functor",
+  "lem-sfb-space-coherent-pushout",
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-rs-tangent-tensor",
+  "lem-sfb-space-proper-support-module-ext-finite",
+  "lem-sfb-space-module-flat-chart-test",
+  "lem-sfb-space-module-split-deformation-ext",
+  "lem-sfb-scheme-affine-thickening-pushout",
+  "lem-sfb-infinitesimal-pushout-affine-charts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08W8 (lemma-coherent-tangent-space), with the proper-support Ext argument completed using spaces-perfect.tex Tags 0D0S and 0D0R."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tangent and infinitesimal automorphism spaces of flat coherent families with proper support are finite dimensional over a finite type field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"KaehlerDifferential.finite\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S], Module.Finite S Ω[S⁄R]\", \"doc\": \"If $ S $ is a commutative ring that is finitely generated as an $ R $-algebra (essential finite type) over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitel\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.Extension.Cotangent.finite\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, P.ker.FG → Module.Finite S P.Cotangent\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if the kernel $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $ is finitely generated as an ideal, then t\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional deformation space of a coherent sheaf with proper support on a finite presentation algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a presentation $ p $ of a sheaf of modules $ M $ over a ring sheaf $ R $, if the generators of $ p $ are finitely generated (of finite type) and the index set of relations in $ p $ is finite, th\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsFiniteType\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteDimensional\", \"Ext\"",
+   "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"FiniteDimensional.complexToReal\", \"module\": \"Mathlib.LinearAlgebra.Complex.FiniteDimensional\", \"type\": \" (E : Type u_1) [AddCommGroup E] [Module ℂ E] [FiniteDimensional ℂ E] : FiniteDimensional ℝ E\", \"doc\": \"\"}\n  {\"name\": \"ContinuousLinearMap.exist_extension_of_finiteDimensional_range\", \"module\": \"Mathlib.Analysis.LocallyConvex.HahnBanach\", \"type\": \" {𝕜 : Type u_1} {E : Type u_2} [AddCommGroup E] [NormedField 𝕜] [IsRCLikeNormedField 𝕜] [TopologicalSpace E] [Module 𝕜 E] [PolynormableSpace 𝕜 E] {F : Type u_3} [AddCommGroup F] [TopologicalSpace F] [IsTopologicalAddGroup F] [Module 𝕜 F] [ContinuousSMul 𝕜 F] [T2Space F] {S : Submodule 𝕜 E} (f : ↥S →\", \"doc\": \"Corollary of the polynormable **Hahn-Banach theorem**: if `f : S → F` is a continuous\\nlinear map with finite-dimensional range, then `f` extends to a continuous linear map on the whole\\nspace.\"}\n  {\"name\": \"IsCyclotomicExtension.finiteDimensional\", \"module\": \"Mathlib.NumberTheory.Cyclotomic.Basic\", \"type\": \" (S : Set ℕ) (K : Type w) [Field K] (C : Type z) [Finite ↑S] [CommRing C] [Algebra K C] [IsDomain C] [IsCyclotomicExtension S K C] : FiniteDimensional K C\", \"doc\": \"If `S` is finite and `IsCyclotomicExtension S K A`, then `finiteDimensional K A`.\"}\n  {\"name\": \"exteriorPower.instNormedAddCommGroupSubtypeExteriorAlgebraRealMemSubmoduleExteriorPowerOfFiniteDimensional\", \"module\": \"Mathlib.Analysis.InnerProductSpace.ExteriorPower\", \"type\": \" {n : ℕ} {E : Type u_1} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] : NormedAddCommGroup ↥(⋀[ℝ]^n E)\", \"doc\": \"\"}\n  {\"name\": \"exteriorPower.instCoreRealSubtypeExteriorAlgebraMemSubmoduleExteriorPowerOfFiniteDimensional\", \"module\": \"Mathlib.Analysis.InnerProductSpace.ExteriorPower\", \"type\": \" {n : ℕ} {E : Type u_1} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] : InnerProductSpace.Core ℝ ↥(⋀[ℝ]^n E)\", \"doc\": \"\"}\n  {\"name\": \"spectralNorm_extends_of_finiteDimensional\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \" (K : Type u_2) [NormedField K] (L : Type u_3) [Field L] [Algebra K L] [h_fin : FiniteDimensional K L] [hn : Normal K L] [IsUltrametricDist K] (x : K) : spectralNorm K L ((algebraMap K L) x) = ‖x‖\", \"doc\": \"The spectral norm extends the norm on `K` when `L/K` is finite and normal.\\nSee also `spectralNorm_extends` for a more general result.\"}\n  {\"name\": \"Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet\", \"module\": \"Mathlib.FieldTheory.CardinalEmb\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [Algebra.IsAlgebraic F E] (i : (Module.rank F E).ord.ToType) : FiniteDimensional ↥(IntermediateField.adjoin F (⇑(Field.Emb.Cardinal.wellOrderedBasis F E) ∘ Field.Emb.Cardinal.leastExt F\", \"doc\": \"\"}\n  {\"name\": \"FiniteField.instFiniteDimensionalZModExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \" (k : Type u_1) [Field k] (p : ℕ) [Fact (Nat.Prime p)] [CharP k p] (n : ℕ) : FiniteDimensional (ZMod p) (FiniteField.Extension k p n)\", \"doc\": \"\"}\n  {\"name\": \"FunctionField.finiteDimensional_of_constantExtension\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \" {F : Type u_1} (K : Type u_2) [Field F] [Field K] [Algebra (Polynomial F) K] [FaithfulSMul (Polynomial F) K] [FunctionField F K] {E : Type u_3} [Field E] [Algebra F E] [Algebra (Polynomial E) K] [FaithfulSMul (Polynomial E) K] [IsScalarTower (Polynomial F) (Polynomial E) K] [Algebra.IsAlgebraic F E\", \"doc\": \"Let `K` be a function field over `F`. If `E` is an algebraic extension of `F` which is\\ncontained in `K` then it is finite over `F`.\"}\n  {\"name\": \"FunctionField.finiteDimensional_ratFunc_of_constantExtension\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \" {F : Type u_1} (K : Type u_2) [Field F] [Field K] [Algebra (Polynomial F) K] [FaithfulSMul (Polynomial F) K] [FunctionField F K] {E : Type u_3} [Field E] [Algebra F E] [Algebra (Polynomial E) K] [FaithfulSMul (Polynomial E) K] [IsScalarTower (Polynomial F) (Polynomial E) K] : FiniteDimensional (Rat\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*tangent|Cohstack|infinitesimal.*automorphism",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tangent space and infinitesimal automorphisms of coherent sheaves with proper support finite dimensional",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.CotangentSpace.map P.toInfinitesimal)\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the linear map from the cotangent space of $ P $ to the cotangent space of its infinitesimal extension $ P/I^2 \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring cotangent modules, scheme formal unramifiedness and manifold tangents do not state coherent-family deformation finiteness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional deformation tangent space of a flat coherent sheaf on an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TangentSpace.vectorBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Tangent\", \"type\": \": VectorBundle 𝕜 E (TangentSpace I : M → Type _)\", \"doc\": \"The tangent space at each point of a manifold $ M $ modeled on a normed vector space $ E $ forms a vector bundle over $ M $, where each fiber is canonically isomorphic to $ E $. This structure is indu\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"instTopologicalSpaceTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The topology on the tangent space $ T_xM $ at a point $ x $ of a charted space $ M $ modeled on a normed vector space $ E $, induced by the normed vector space structure of $ E $ through the model wit\"}\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : FiniteDimensional (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is finite-dimensional as a vector space over the \"}\n  {\"name\": \"TangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type u} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {H : Type*}\\n  [TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type*} [TopologicalSpace M] [ChartedSpace H M] (_x : M) :\\n  Type u\", \"doc\": \"The tangent space at a point $ x $ on a charted space $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is identified with the normed vector space $ E $ itself. This definiti\"}\n  {\"name\": \"TangentSpace.fiberBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Tangent\", \"type\": \": FiberBundle E (TangentSpace I : M → Type _)\", \"doc\": \"The tangent space at each point of a manifold $ M $ modeled on a normed vector space $ E $ forms a fiber bundle over $ M $, where each fiber is canonically isomorphic to $ E $. This structure is induc\"}\n  {\"name\": \"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Module (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any commutative local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is equipped with a canonical module structure ov\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring cotangent modules, scheme formal unramifiedness and manifold tangents do not state coherent-family deformation finiteness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteDimensional\", \"Ext\"",
+   "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"FiniteDimensional.complexToReal\", \"module\": \"Mathlib.LinearAlgebra.Complex.FiniteDimensional\", \"type\": \" (E : Type u_1) [AddCommGroup E] [Module ℂ E] [FiniteDimensional ℂ E] : FiniteDimensional ℝ E\", \"doc\": \"\"}\n  {\"name\": \"ContinuousLinearMap.exist_extension_of_finiteDimensional_range\", \"module\": \"Mathlib.Analysis.LocallyConvex.HahnBanach\", \"type\": \" {𝕜 : Type u_1} {E : Type u_2} [AddCommGroup E] [NormedField 𝕜] [IsRCLikeNormedField 𝕜] [TopologicalSpace E] [Module 𝕜 E] [PolynormableSpace 𝕜 E] {F : Type u_3} [AddCommGroup F] [TopologicalSpace F] [IsTopologicalAddGroup F] [Module 𝕜 F] [ContinuousSMul 𝕜 F] [T2Space F] {S : Submodule 𝕜 E} (f : ↥S →\", \"doc\": \"Corollary of the polynormable **Hahn-Banach theorem**: if `f : S → F` is a continuous\\nlinear map with finite-dimensional range, then `f` extends to a continuous linear map on the whole\\nspace.\"}\n  {\"name\": \"IsCyclotomicExtension.finiteDimensional\", \"module\": \"Mathlib.NumberTheory.Cyclotomic.Basic\", \"type\": \" (S : Set ℕ) (K : Type w) [Field K] (C : Type z) [Finite ↑S] [CommRing C] [Algebra K C] [IsDomain C] [IsCyclotomicExtension S K C] : FiniteDimensional K C\", \"doc\": \"If `S` is finite and `IsCyclotomicExtension S K A`, then `finiteDimensional K A`.\"}\n  {\"name\": \"exteriorPower.instNormedAddCommGroupSubtypeExteriorAlgebraRealMemSubmoduleExteriorPowerOfFiniteDimensional\", \"module\": \"Mathlib.Analysis.InnerProductSpace.ExteriorPower\", \"type\": \" {n : ℕ} {E : Type u_1} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] : NormedAddCommGroup ↥(⋀[ℝ]^n E)\", \"doc\": \"\"}\n  {\"name\": \"exteriorPower.instCoreRealSubtypeExteriorAlgebraMemSubmoduleExteriorPowerOfFiniteDimensional\", \"module\": \"Mathlib.Analysis.InnerProductSpace.ExteriorPower\", \"type\": \" {n : ℕ} {E : Type u_1} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] : InnerProductSpace.Core ℝ ↥(⋀[ℝ]^n E)\", \"doc\": \"\"}\n  {\"name\": \"spectralNorm_extends_of_finiteDimensional\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \" (K : Type u_2) [NormedField K] (L : Type u_3) [Field L] [Algebra K L] [h_fin : FiniteDimensional K L] [hn : Normal K L] [IsUltrametricDist K] (x : K) : spectralNorm K L ((algebraMap K L) x) = ‖x‖\", \"doc\": \"The spectral norm extends the norm on `K` when `L/K` is finite and normal.\\nSee also `spectralNorm_extends` for a more general result.\"}\n  {\"name\": \"Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet\", \"module\": \"Mathlib.FieldTheory.CardinalEmb\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [Algebra.IsAlgebraic F E] (i : (Module.rank F E).ord.ToType) : FiniteDimensional ↥(IntermediateField.adjoin F (⇑(Field.Emb.Cardinal.wellOrderedBasis F E) ∘ Field.Emb.Cardinal.leastExt F\", \"doc\": \"\"}\n  {\"name\": \"FiniteField.instFiniteDimensionalZModExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \" (k : Type u_1) [Field k] (p : ℕ) [Fact (Nat.Prime p)] [CharP k p] (n : ℕ) : FiniteDimensional (ZMod p) (FiniteField.Extension k p n)\", \"doc\": \"\"}\n  {\"name\": \"FunctionField.finiteDimensional_of_constantExtension\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \" {F : Type u_1} (K : Type u_2) [Field F] [Field K] [Algebra (Polynomial F) K] [FaithfulSMul (Polynomial F) K] [FunctionField F K] {E : Type u_3} [Field E] [Algebra F E] [Algebra (Polynomial E) K] [FaithfulSMul (Polynomial E) K] [IsScalarTower (Polynomial F) (Polynomial E) K] [Algebra.IsAlgebraic F E\", \"doc\": \"Let `K` be a function field over `F`. If `E` is an algebraic extension of `F` which is\\ncontained in `K` then it is finite over `F`.\"}\n  {\"name\": \"FunctionField.finiteDimensional_ratFunc_of_constantExtension\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \" {F : Type u_1} (K : Type u_2) [Field F] [Field K] [Algebra (Polynomial F) K] [FaithfulSMul (Polynomial F) K] [FunctionField F K] {E : Type u_3} [Field E] [Algebra F E] [Algebra (Polynomial E) K] [FaithfulSMul (Polynomial E) K] [IsScalarTower (Polynomial F) (Polynomial E) K] : FiniteDimensional (Rat\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring cotangent modules, scheme formal unramifiedness and manifold tangents do not state coherent-family deformation finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*tangent|infinitesimal.*automorphism|Cohstack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ring cotangent modules, scheme formal unramifiedness and manifold tangents do not state coherent-family deformation finiteness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-stack-general",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W8 (lemma-coherent-tangent-space), Situation 08KB (situation-coherent).",
+   "via": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-coherent-tangent-finite",
+  "worker": "stage1",
+  "summary": "Checked Stacks 08W8 and 08KB against the statement, with no statement change. Wrote the fixed-base tangent kernel argument explicitly, reused the existing coherent pushout and algebraic-stack tangent results, and added only two independent inputs: split module-deformation Ext classification and proper-support module Ext finiteness. Corrected the source proof application of 0D0T to a possibly nonproper fibre; used a full inclusion of coherent lifts into all flat lifts so no finite-presentation or proper-support lifting lemma is assumed.",
+  "blueprint": "Newest blueprint (latest, 7284bb09): sk-thm-sf-ctf-stability.proof.md, paragraph beginning Proper direct image, and compactification f=pj. This is the inherited coherent-moduli input to the alteration chain under that direct-image argument. The computed nearest imported blueprint ancestor is null, as in the live item, and its via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic presentation/base-change or chart criterion used to verify the hypotheses in step 2; this does not replace the inherited coherent-moduli proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-389487d69",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-389487d69 (reviewer sub-agent of L); spot-checked: Read quot 08W8/08KB, defos 08VW, and spaces-perfect 0D0S/0D0R/0D0T plus lemma-direct-image-coherent. Item statement and stmt_deps match live and the source. There is no repair note and no parallel landing. The Source-error claim is correct: 0D0T needs X proper, and the skyscraper on A^1 shows Ext over the support differs. New node proper-support-module-ext-finite is true via 0D0S plus 0D0R with S=Y=Spec k: RHom vanishes off Z, so the supports of its cohomology are proper, and 0D0R needs no properness or quasi-separatedness of X. New node module-split-deformation-ext is true by 08VW for the strict split thickening X in X_D over k in D, for any O_X-module: torsor under Ext^1(M,M), Aut^0 equal to Ext^0. The gluing exists and is unique, and the identification is linear. Neither new node duplicates an existing one (rg over 08VW, 0D0T and 0D0R; the proper-space/scheme Ext nodes need X proper), and neither restates the item. Steps 1, 2 and 5-8 were checked against the cited statements; the coherent-pushout trick with id_B and zero modules in step 4 is valid. Two repairs were made in the item. C1, step 3: (RS) needs nilpotent-kernel Artinian pushouts, but coherent-pushout's 'in particular' clause covers only square-zero ones. Step 3 now cites lem-sfb-scheme-affine-thickening-pushout and lem-sfb-infinitesimal-pushout-affine-charts (same unit, no cycle): P is a one-point scheme, hence affine, and P = Spec(A_1 x_A A_2). E5, step 4: T_0 -> ker d was identified only as sets, yet step 8 takes a basis; added k-linearity via pullback compatibility and (RS) gluing uniqueness. Both ids are added to proof_deps. Batch 5: every flagged citation is a generic definition (algebraic space, modules, morphism properties) or foundational (space fibre products, smooth composition), not part of the trace formula or Poincare duality; accepted, as is the tool_use of lem-trf-space-fibre-products-etale-covers.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCoherentTangentFinite",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.coherent_tangent_finite",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.Marked",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.Classes",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.classOf",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.PullsBack",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.Tangent",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.IsZeroClass",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.IsScalarClass",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.IsSumClass",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.TrivialLift",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.InfAut",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.IsAutScalar",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Deformation.coherent_tangent_finite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCoherentTangentFinite.lean",
+  "statement": "theorem coherent_tangent_finite (hfp : ProperQuotFinitePresentation f) [IsLocallyNoetherian S] (hB : ∀ U : B.EtaleSite, LocallyOfFinitePresentation U.obj.left.hom) [LocallyOfFiniteType a] [QuasiCompact a] : ∃ (_ : AddCommGroup (Tangent f a x)) (_ : Module k (Tangent f a x)), FiniteDimensional k (Tangent f a x) ∧ (∀ t : Tangent f a x, IsZeroClass f a x t ↔ t = 0) ∧ (∀ (c : k) (t s : Tangent f a x), IsScalarClass f a x c t s ↔ s = c • t) ∧ (∀ t s r : Tangent f a x, IsSumClass f a x t s r ↔ r = t + s) ∧ ∃ Y : TrivialLift f a x, ∃ (_ : AddCommGroup (InfAut f a x Y)) (_ : Module k (InfAut f a x Y)), FiniteDimensional k (InfAut f a x Y) ∧ (∀ g : InfAut f a x Y, g = 0 ↔ g.val = Iso.refl _) ∧ (∀ g h : InfAut f a x Y, (g + h).val = g.val ≪≫ h.val) ∧ ∀ (c : k) (g h : InfAut f a x Y), IsAutScalar f a x Y c g h ↔ h = c • g",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the existing CoherentModuli category, modules and tensor-pullback arrows from SpaceCoherentStackGeneral, without using its algebraicity theorem or imposing separatedness. Helpers only spell out this node's marked quotient, canonical operation relations and trivial-lift automorphisms over an arbitrary scheme base; no construction has sorry data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15ab388ed",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 08KB/08W8 clause by clause. CoherentModuli category = C(T) (fp, qcoh, chart-flat, closed-carrier proper support, cartesian tensor-pullback arrows); hfp = proper-quot fp convention, no separatedness; IsLocallyNoetherian S; hB étale-chart lfp test on B→S is equivalent, not stronger; a lft+qc. Marked/Classes keep the marking; zero/scalar/sum relations pinned (directions checked, c=0, (RS) uniqueness for the k⊕k² gluing); InfAut over the identity base, restricting to id over k, projection to x₀ not fixed; zero=refl, +=composition, scalar via cartesian scaling arrow. Edge cases (M0=0, X/S/B empty, nonproper X, any char, universe u) covered. Item changed only in lean, statement verbatim, 12 decls present, docstrings with steps 1-8, no hollow defs, lines ≤100. Local general-S helpers are not H4 (StackDeformation.* is affine-only). No fix, no compile. Advisory M1: CoherentModuli is owned by parent theorem lem-sfb-space-coherent-stack-general (its proof_deps cite the item), so stage 3 has an import cycle (rule 7 listed); move the defs to a def-node module. M2: def-sfb-marked-curve-deformations and def-sfb-proper-curve-moduli used but not cited in stmt_deps; maintainer may add."
+ }
+}

@@ -31,9 +31,8 @@
  ],
  "proof": [
   {
-   "text": "Use the small representatives stipulated in the statement. The category of ordinary $A_X$-module sheaves is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], applied to the constant ring sheaf on either small site. It therefore has enough injectives by [lem-sp-grothendieck-enough-injectives]. All subsequent derivations take place in this module-sheaf category, with values in abelian groups; no assertion that forgetting the $A$-action preserves injectives is needed.",
+   "text": "Use the small representatives stipulated in the statement. The ordinary category of sheaves valued in ModuleCat A is Grothendieck abelian by the Mathlib sheaf-category instance and hence has enough injectives. No equivalence with SheafOfModules and no preservation of injectives by forgetting coefficients is required.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
     "lem-sp-grothendieck-enough-injectives"
    ],
    "elementary": false,
@@ -67,12 +66,12 @@
    }
   },
   {
-   "text": "On the etale site apply [lem-weil-pbc-open-closed-short-exact] to $A_X$; its maps are the open counit $\\epsilon$ and the closed unit $\\rho$. The canonical constant-ring pullback identification of [prop-weil-pbc-inverse-image-modules-exact](1) gives $i^{-1}A_X=A_Z$ and identifies this unit with the stated constant restriction. On the pro-etale site [lem-pur-proetale-supported-constant-presentation] states directly that the same $\\rho$ is a cokernel of $\\epsilon$. For $s\\in S(M)$, the preceding steps give a unique $g_s:A_X\\to M$ with $g_s(1)=s$, and $g_s\\epsilon=0$ because its adjunct evaluates to $s|_U=0$. The cokernel property gives a unique $f_s:P\\to M$ with $f_s\\rho=g_s$. Conversely $f\\rho\\epsilon=0$ implies $(f\\rho)(1)|_U=0$. These constructions are inverse, proving $\\theta$. Uniqueness of factorization proves additivity and naturality: $f_{s+t}=f_s+f_t$ and $f_{S(u)s}=u f_s$. Hence this is the specified kernel isomorphism, rather than an unspecified natural automorphism of $S$.",
+   "text": "On the etale site apply [lem-weil-pbc-open-closed-short-exact] to $A_X$; its maps are the open counit $\\epsilon$ and the closed unit $\\rho$. The existing canonical upperStarConstantSheafIso identifies the pullback of the ordinary constant module with the ordinary constant module. Naturality of the constant-sheaf and open adjunctions identifies the transported maps with the specified counit and constant restriction. The coefficient ring is finite by finite_coefficientExtensionRing of [def-weil-l-adic-coefficient-extension]. On the pro-etale site [lem-pur-proetale-supported-constant-presentation] states directly that the same $\\rho$ is a cokernel of $\\epsilon$. For $s\\in S(M)$, the preceding steps give a unique $g_s:A_X\\to M$ with $g_s(1)=s$, and $g_s\\epsilon=0$ because its adjunct evaluates to $s|_U=0$. The cokernel property gives a unique $f_s:P\\to M$ with $f_s\\rho=g_s$. Conversely $f\\rho\\epsilon=0$ implies $(f\\rho)(1)|_U=0$. These constructions are inverse, proving $\\theta$. Uniqueness of factorization proves additivity and naturality: $f_{s+t}=f_s+f_t$ and $f_{S(u)s}=u f_s$. Hence this is the specified kernel isomorphism, rather than an unspecified natural automorphism of $S$.",
    "uses": [
     "lem-weil-pbc-open-closed-short-exact",
     "lem-pur-proetale-supported-constant-presentation",
     "def-pur-support-cohomology",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "def-weil-l-adic-coefficient-extension"
    ],
    "elementary": true,
    "source": {
@@ -129,14 +128,10 @@
    }
   },
   {
-   "text": "For the etale cone comparison set $E=I(X)$, $B=I(U)$ and $r:E\\to B$ equal to restriction. By [lem-weil-pbc-open-closed-short-exact], $\\epsilon:j_!A_U\\to A_X$ is a monomorphism. For each injective $I^q$, its defining extension property [def-sp-injective-resolutions] makes $\\operatorname{Hom}(A_X,I^q)\\to\\operatorname{Hom}(j_!A_U,I^q)$ surjective. Steps 2--4 identify this map with $r^q$, and its kernel with $S(I^q)=v(I^q)$. Moreover $j^{-1}I^q$ is injective: $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact]; for a monomorphism $N\\to N'$ on $U$, apply $j_!$, extend a map $j_!N\\to I^q$ to $j_!N'$, then transpose by [lem-weil-pbc-extension-by-zero-adjunction]. The exactness assertion of [prop-weil-pbc-inverse-image-modules-exact](3) ensures $j^{-1}e$ is a quasi-isomorphism. Consequently the bounded-below complexes $E$ and $B$ compute respectively $R\\Gamma(X,F)$ and $R\\Gamma(U,j^{-1}F)$ by [lem-weil-pbc-right-derived-plus-injective]. The comparison arrow $r$ is their actual derived restriction, since it is restriction in every degree.",
+   "text": "For the etale cone clause, restriction of any injective ModuleCat-valued sheaf along a monomorphism of site objects is epic. Indeed sheafification is exact, so its right adjoint sends an injective sheaf to an injective presheaf. Apply its extension property to the monomorphism between the free module presheaves on the two representables. Evaluation at the identity section gives an extension of every section. Thus the support-kernel inclusion and actual restriction form a degreewise short exact sequence of complexes; the exact forgetful functor to abelian groups preserves it. This argument does not require open restriction to preserve injectives or a comparison of ordinary derived sections.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
     "def-sp-injective-resolutions",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "def-pur-support-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -145,11 +140,9 @@
    }
   },
   {
-   "text": "Now apply [lem-weil-degreewise-epi-kernel-cocone-qis] to $r:E\\to B$. Its specified comparison is $\\kappa:S(I)\\to\\operatorname{Cone}(r)[-1]$, $s\\mapsto(0,s)$, and it is a quasi-isomorphism. Thus the cone realization of $R\\operatorname{Hom}(P,F)$ in [lem-amb-closed-support-hom] is, on this resolution, the map $v(I)\\xrightarrow{\\theta_I}S(I)\\xrightarrow{\\kappa}\\operatorname{Cone}(r)[-1]$. To see the normalization, realize the Hom triangle by the short exact sequence of complexes from Step 9. Its canonical map to the shifted cone is inclusion in the shifted source summand: in degree $q$ it sends $f:P\\to I^q$ to $(0,(f\\rho)(1))$. Steps 2--4 identify this with $\\kappa\\theta_I$. This computes the comparison itself, rather than inferring it merely from its composite to $E$. A supported cocycle is represented there by $(0,s)$; applying the inverse comparison and then the roof comparison gives $f_s$ and the roof of Step 7. The shifted cone differential is $(y,x)\\mapsto(-d_By-r(x),d_Ex)$ as specified in the kernel-cone lemma, so $(0,s)$ has exactly the asserted sign. This identifies the etale restriction-cone normalization with the same $\\chi$. Only the etale argument used that $\\epsilon$ is monic; the pro-etale evaluation and roof arguments used just the cokernel presentation, which explicitly requires no quasi-compactness of $U$. No other finiteness or purity hypothesis has entered.",
+   "text": "Apply closedConeLift_quasiIso from [lem-amb-closed-support-hom] to the degreewise short exact sequence of Step 9. The canonical lift of the actual support inclusion into the shifted restriction cone is therefore a quasi-isomorphism. Its composite with the termwise natural evaluation isomorphism is again a quasi-isomorphism, proving exactly ConeAgreement. The lift is the existing signed map, sending a supported section s to (0,s). The evaluation and derived-cocycle clauses were proved in Steps 2--8 independently of this predicate. No quasi-compactness, constructibility, finite-Tor or purity assumption enters.",
    "uses": [
-    "lem-weil-degreewise-epi-kernel-cocone-qis",
-    "lem-amb-closed-support-hom",
-    "lem-sc-p1-rhom-hom-derived-roof"
+    "lem-amb-closed-support-hom"
    ],
    "elementary": false,
    "source": {
@@ -159,7 +152,6 @@
   }
  ],
  "proof_deps": [
-  "lem-pur-ringed-site-grothendieck-abelian",
   "lem-sp-grothendieck-enough-injectives",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-constant-sheaf",
@@ -168,20 +160,18 @@
   "lem-weil-pbc-open-closed-short-exact",
   "lem-pur-proetale-supported-constant-presentation",
   "def-pur-support-cohomology",
-  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-right-derived-plus-injective",
   "lem-weil-pbc-bounded-below-injectives-kinjective",
   "lem-sc-p1-rhom-hom-derived-roof",
   "def-sp-injective-resolutions",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-degreewise-epi-kernel-cocone-qis",
   "lem-amb-closed-support-hom"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-  "place": "Section 9, Example 9.5 and Ext proof of Theorem 9.4, pp. 66--67; agent-written ordinary module and bounded-below normalization, using the listed Stacks and existing DAG comparisons"
+  "place": "Section 9, Example 9.5 and Ext proof of Theorem 9.4, pp. 66--67; agent-written ordinary module and bounded-below normalization, using the listed Stacks and existing DAG comparisons; F2 2026-10-25 implements ordinary ModuleCat-valued evaluation, cohomological right-derived uniqueness and the free-presheaf injective restriction argument"
  },
  "mathlib_searches": [
   {
@@ -334,13 +324,25 @@
   "note": "Statement field verbatim; all 19 declarations present; single sorry. θ pinned by evaluation (kernel.ι monic) as (constantSheafAdj.homEquiv (ρ≫f)) 1; χ is a ≃+ on supportHypercohomologyFunctor (derived module-valued kernel functor), pinned on every class by SupportedHomChiCocycle (∀ bounded-below injective I, qis e, a, cycle x: θ f = iCycles x, transport through supportSequenceModelIso with the actual derived unit, value ShiftedHom.map(fromSingleMk f) Q ≫ quotientCompQhIso⁻¹[a] ≫ ι(resIso⁻¹)[a], directions checked) plus naturality, so the ∃ is effectively unique. Étale/pro-étale ρ, open constant maps and counits are canonical sheafified/adjoint maps (upperStarConstantSheafIso, proEtaleConstantDirectImageMap, proEtaleFixedOpenConstantMap); the open-evaluation clauses are the right true statements. No extra hypotheses or universe equalities; edge cases Z=∅, Z=X, a<0, non-qc U ok; no duplicate (supported_*_hom are Nonempty only; pullback is downstream). Advisory: étale ConeAgreement (qis of closedConeLift and of κ∘θ_I) is implied by closedConeLift_quasiIso and does not relate χ to Etale.closedSupportHom's e, which is existential with an existential α in the dependency; the only citer (supported-hom-pullback) does not use it. Maintainer note: a §1(B) repair exposing α = θ ≫ kernel inclusion would make it substantive. Compile not reproduced per instruction; no fixes."
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-7efe4",
-  "group": "B8",
+  "reviewer": "COMPILER",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261022T025316-L-1272250",
+  "landing": "20261025T201837-L-2629535",
   "kind": "interface",
-  "note": "independent cc review: supportedHom_pullback proof and new moduleSupportedHom_transport vs node lem-pur-supported-hom-pullback and new node; 8 change records vs live definitions (all unfold to the old bodies); 4 delivered modules + 6 direct importers compiled in a sandbox; #print axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

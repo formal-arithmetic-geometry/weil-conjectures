@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-restricted-coefficient-mate-projection",
+ "kind": "statement",
+ "title": "Restricted coefficient push mate is the regular-coefficient projection map",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$, with $p\\ne\\ell$, and separated finite-type $k$-schemes $X,Y$ [sk-def-sfb-dc-setting]. Let $f:X\\to Y$ be a $k$-morphism. Let $a:R\\to S$ be a morphism of commutative condensed rings such that extension of scalars is exact on every scheme [sk-def-sfb-condensed-ring, sk-def-sfb-coefficient-change]. Write $R_Z=p_Z^*R$, $S_Z=p_Z^*S$ for $Z=X,Y$, with the canonical compatible coefficient inverse-image isomorphisms [sk-def-sfb-coefficient-morphisms]. Work in the ordinary unbounded internal-module derived categories, identified with sheaf-module derived categories by [lem-pd-module-ringed-topos-derived-comparison]. Put $T_Z=S_Z\\otimes^L_{R_Z}-$ and let $U_Z$ be exact scalar restriction; put $L_R=Lf_R^*$, $L_S=Lf_S^*$, $G_R=Rf_{R*}$, $G_S=Rf_{S*}$, with their specified scalar and geometric adjunctions [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-extension-of-scalars]. Set $C=U_YS_Y$, $B=U_XS_X$, considered in degree zero, and let $\\rho:L_RC\\xrightarrow{\\sim}B$ be the canonical restricted-regular pullback identification. Let $e_Z(M):U_ZT_ZM\\xrightarrow{\\sim}M\\otimes^L_{R_Z}U_ZS_Z$ be the canonical balanced scalar-tensor identification, using symmetry to put the coefficient on the right [lem-sfb-internal-scalar-pullback-normalization].\nLet $\\gamma:T_YG_R\\to G_ST_X$ be the coefficient mate [def-sfb-derived-push-hom], and let $d:U_YG_S\\xrightarrow{\\sim}G_RU_X$ be [def-sfb-derived-comap-lower-star-iso]. For every $K\\in D(R_X)$ define the specified restricted map\n$$h_K=G_R(e_X(K))\\circ d_{T_XK}\\circ U_Y(\\gamma_K)\\circ e_Y(G_RK)^{-1}:\nG_RK\\otimes^L C\\longrightarrow G_R(K\\otimes^L B).$$\nThen its $L_R\\dashv G_R$ transpose is exactly\n$$(\\varepsilon^R_K\\otimes1_B)\\circ(1\\otimes\\rho)\\circ\\mu_{G_RK,C}.$$\nConsequently $h_K=G_R(1_K\\otimes\\rho)\\circ\\delta_{K,C}$, where $\\delta_{K,C}:G_RK\\otimes^L C\\to G_R(K\\otimes^L L_RC)$ is the canonical projection map, defined as the adjunct of $(\\varepsilon^R_K\\otimes1)\\circ\\mu_{G_RK,C}$ [lem-weil-pbc-ringed-projection-mate-exact]. This equality is natural in $K$. No boundedness, qcqs, constructibility, filtered diagram, stage projection isomorphism or invertibility of $h_K$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (1), canonical scalar comparison: its restricted geometric transpose and projection identification (returned item step 5)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-sfb-derived-push-hom",
+  "def-sfb-derived-comap-lower-star-iso",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-internal-scalar-pullback-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib iterated_mateEquiv_conjugateEquiv_symm to the specified geometric and scalar adjunctions and the inverse of the actual derivedComapLowerStarIso. Applying the geometric mate equivalence identifies actual derivedPushHom with rho of flatScalarTheta; this is scalarMate_eq.",
+   "uses": [
+    "lem-trf-iterated-square-mates",
+    "def-sfb-derived-push-hom",
+    "def-sfb-derived-pull-iso",
+    "def-sfb-conjugate-pull-iso",
+    "def-sfb-mate-push-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use flat_coefficient_square_normalization for its actual direct-image identification and PullNormalized clause. Apply internal_scalar_mate_projection to that normalized theta and the supplied normalized tensor presentations. Cancel the tensor-presentation isomorphism to obtain restrictedMap = scalarProjection, together with naturality.",
+   "uses": [
+    "lem-sfb-flat-coefficient-square-normalization",
+    "lem-sfb-internal-scalar-mate-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the two regular-coefficient pullback isomorphisms. Cancel scalarRestrictionPull and pullback of scalarCoefficientUnit, use naturality of the exact-localization comparison, and the exact-functor composition and natural-isomorphism compatibilities with degree zero. The ordinary comapUpperStarIso cancels its inverse. The derived unit is the exact-functor single comparison followed by the ordinary unit map, by the defining left-derived counit and localization naturality.",
+   "uses": [
+    "def-sfb-scalar-restriction-tensor-comparison-data",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mate-induced ordinary pullback monoidal structure equals the canonical one by uniqueness of the normalized pushforward pairing and injectivity of Monoidal.toOplaxMonoidal. Apply leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison. Thus internalProjection and moduleObjectProjectionMap have identical counit transposes, and scalarProjection is the displayed projection followed by direct image of identity tensor regularPullback.",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "new-proetale-derived-module-pullback-monoidal",
+    "def-sfb-module-object-projection-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the equality using naturality of the adjunction hom equivalence. Cancel homEquiv with its inverse and use naturality of the tensor bifunctor in the regular-coefficient pullback. This gives the first clause; the previous equality gives the second, and the naturality clause of internal_scalar_mate_projection gives the third.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sfb-internal-scalar-mate-projection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pd-proetale-section-module-functors",
+  "def-sfb-conjugate-pull-iso",
+  "def-sfb-derived-pull-iso",
+  "def-sfb-derived-push-hom",
+  "def-sfb-mate-push-hom",
+  "def-sfb-module-object-projection-map",
+  "def-sfb-scalar-restriction-tensor-comparison-data",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sfb-flat-coefficient-square-normalization",
+  "lem-sfb-internal-scalar-mate-projection",
+  "lem-trf-iterated-square-mates",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "new-proetale-derived-module-pullback-monoidal",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "S7 proof: actual iterated mates, existing internal scalar mate normalization, exact-localization degree-zero coherence, and tensor naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived scalar extension pushforward mate restricted to the original ring is the projection formula morphism with the restricted regular coefficient module",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.counit; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar counits and general monoidal adjunction structures do not identify this derived coefficient push mate with the geometric projection map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting the canonical flat change of rings direct image mate gives the counit tensor projection morphism for any unbounded complex",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.rightUnitor, HomologicalComplex.rightUnitor', ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit_app; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar counits and general monoidal adjunction structures do not identify this derived coefficient push mate with the geometric projection map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar counits and general monoidal adjunction structures do not identify this derived coefficient push mate with the geometric projection map"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPushHom|pushHomOfComapIso|projection.*[Mm]ate",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar counits and general monoidal adjunction structures do not identify this derived coefficient push mate with the geometric projection map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat scalar extension direct image mate equals the projection formula map for the restricted coefficient ring in unbounded module sheaf derived categories",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendScalars.map', PresheafOfModules.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, PresheafOfModules.pushforward, SheafOfModules.instAdditiveRestrictScalars; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar counits and general monoidal adjunction structures do not identify this derived coefficient push mate with the geometric projection map"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Mm]ate|derivedPushHom|pushHomOfComapIso",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, sheaf maps or abstract monoidal adjunctions, not the specified unbounded coefficient mate and tensor presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The flat coefficient change pushforward mate equals the derived projection map with the coefficient ring",
+   "results": "8 hits: SheafOfModules.pushforward_map_val, PresheafOfModules.pushforward₀, SheafOfModules.pushforwardNatTrans_app_val_app, AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk, PresheafOfModules.pushforward₀_obj, AlgebraicGeometry.Scheme.Modules.pushforward, PresheafOfModules.pushforward_obj_obj, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, sheaf maps or abstract monoidal adjunctions, not the specified unbounded coefficient mate and tensor presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, sheaf maps or abstract monoidal adjunctions, not the specified unbounded coefficient mate and tensor presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting derived scalar extension of direct image gives the tensor projection formula morphism",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, PresheafOfModules.restrictScalarsCompToPresheaf, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, SheafOfModules.restrictScalars_map_val, PresheafOfModules.restrictScalars_map_app; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, sheaf maps or abstract monoidal adjunctions, not the specified unbounded coefficient mate and tensor presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A mate along scalar extension adjunctions equals the geometric adjunct of the conjugate pullback isomorphism followed by the counit",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.mateEquiv, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.conjugateEquiv_adjunction_id_symm; ",
+   "date": "2026-10-22",
+   "verdict": "related: iterated_mateEquiv_conjugateEquiv is the formal tool already recorded by lem-trf-iterated-square-mates; it alone does not state the derived tensor normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coefficient-push-filtered-legs",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "paragraph (1), canonical scalar comparison: its restricted geometric transpose and projection identification (returned item step 5)",
+   "via": [
+    "lem-sfb-coefficient-push-filtered-legs"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-restricted-coefficient-mate-projection",
+  "worker": "stage1",
+  "summary": "Identified the actual scalar mate with the geometric mate of the actual conjugate using the existing Mathlib iterated-square-mates leaf. Applied the existing flat coefficient square and restriction-adjunction normalization to compute the exact transpose and hence the projection equality. No new nodes; corrected residue-only citation for the generic scalar-tensor presentation without changing any mathematical assertion.",
+  "blueprint": "det-thm-sfb-proper-base-change-rational, proof paragraph (1): the canonical coefficient direct-image comparison underlying scalar extension and rationalization; makes its precise projection normalization explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic restriction/geometric adjunction compatibility on ring sheaves, used for its explicit Hom-transpose clause; this is a formal tool, not a replacement of the rational coefficient proof route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-06b08d7d9",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-06b08d7d9 (reviewer sub-agent of L); spot-checked: First S1 split of the Q32-created item, 4 steps and no new nodes; this is not a 2026-10-21 re-split, and no repair note exists for the item. I diffed it against the Q32 5e31da93 snapshot. The only statement change replaces the residue-specific e citations (new-integral-residue-tensor-presentation and def-weil-pbc-integral-residue-tensor-pull-presentation) with lem-sfb-internal-scalar-pullback-normalization. The new node covers any commutative condensed a and gives s⊗x ↦ x⊗s, so this repairs the citation scope and weakens nothing. Step 1: θ is the inverse of derived-pull-iso, so its conjugate is d^{-1}. Substituting into lem-trf-iterated-square-mates (A..D = D(R_Y),D(R_X),D(S_Y),D(S_X); L1=L_R, L2=L_S, F1=T_Y, F2=T_X) type-checks against Mathlib iterated_mateEquiv_conjugateEquiv (Mates.lean 438–467). The composite in def-sfb-mate-push-hom is the inverse second mate, so γ is the geometric mate of θ, and its transpose is T_X(ε)θ_{G_RK}. Step 2: the transpose clause of ring-sheaf-change-adjunction applies with M=T_YG_RK, N=T_XK, t=t_K, t♯=γ_K. Its coefficient-square hypothesis holds for coefficients pulled back from the point, and the flat-square node identifies d. I type-checked h_K and its factor-by-factor transpose. Step 3: naturality of e_X at ε, plus the flat-square final equation at M=G_RK, gives exactly the remaining four factors. Step 4: δ_{K,C} comes from ringed-projection-mate-exact, followed by bifunctor interchange, injectivity of the transpose bijection, and naturality in E. Small cases: f=id, a=id, K=0 and S=0 all work, and nothing needs boundedness. Batch-5: lem-trf-iterated-square-mates is a status-mathlib general mate/conjugate identity whose closure is only adjunction-mate and composite-adjunction. It is neither of the two assumptions nor a step of their proofs, so I accept the citation. Duplicates: lem-sfb-internal-scalar-projection-mate and lem-sfb-internal-scalar-mate-projection use an adjunct-defined γ/ρ, and lem-sfb-coefficient-projection-square is a different square. This is overlap, not a restatement. Sources: the blueprint main-20261015 rational proof paragraph (1); Stacks 07A4, 07A6, 0B56; no SGA. The tool use of ring-sheaf-change-adjunction is accepted. Maintainer notes: the unsplit sibling lem-sfb-flat-coefficient-square-normalization still cites the residue e nodes and needs the same citation correction; its overlap with lem-sfb-internal-scalar-projection-mate could be merged later. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RestrictedCoefficientMateProjection",
+  "declaration": "AlgebraicGeometry.ProEtale.RestrictedCoefficientMate.restricted_coefficient_mate_projection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RestrictedCoefficientMate.scalarMate",
+   "AlgebraicGeometry.ProEtale.RestrictedCoefficientMate.restrictionPushIso",
+   "AlgebraicGeometry.ProEtale.RestrictedCoefficientMate.projection",
+   "AlgebraicGeometry.ProEtale.RestrictedCoefficientMate.tensorPull",
+   "AlgebraicGeometry.ProEtale.RestrictedCoefficientMate.restrictedMap",
+   "AlgebraicGeometry.ProEtale.RestrictedCoefficientMate.restricted_coefficient_mate_projection"
+  ],
+  "file": "lean/Sheaf/Paper/RestrictedCoefficientMateProjection.lean",
+  "statement": "theorem restricted_coefficient_mate_projection (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hne : p ≠ ℓ) {X Y : Over (Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (eX : TensorNormalization a X.left) (eY : TensorNormalization a Y.left) (_heX : TensorNormalized a X.left eX) (_heY : TensorNormalized a Y.left eY) : (∀ K : DerivedCategory (Modules R X.left), ((adj R f.left).homEquiv _ _).symm (restrictedMap a f.left eX eY K) = tensorPull (R := R) f.left ((F R f.left).obj K) (B a Y.left) ≫ ((CondensedRing.derivedTensor R X.left).obj ((L R f.left).obj ((F R f.left).obj K))).map (regularPullback a f.left).hom ≫ ((CondensedRing.derivedTensor R X.left).map ((adj R f.left).counit.app K)).app (B a X.left)) ∧ (∀ K : DerivedCategory (Modules R X.left), restrictedMap a f.left eX eY K = projection (R := R) f.left K (B a Y.left) ≫ (F R f.left).map (((CondensedRing.derivedTensor R X.left).obj K).map (regularPullback a f.left).hom)) ∧ (∀ (K K' : DerivedCategory (Modules R X.left)) (q : K ⟶ K'), ((CondensedRing.derivedTensor R Y.left).map ((F R f.left).map q)).app (B a Y.left) ≫ restrictedMap a f.left eX eY K' = restrictedMap a f.left eX eY K ≫ (F R f.left).map (((CondensedRing.derivedTensor R X.left).map q).app (B a X.left)))",
+  "branch": "sheaf-dag",
+  "by": "Q129",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two regularPullback definitions are re-exported from RestrictedCoefficientPullbackData, owned by def-sfb-restricted-regular-pullback-data. The completed projection-mate proof is preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-416111d5e",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim. All clauses match: field/char/prime binders; Over Spec k sep+LFT+QC; arbitrary commutative condensed R,S with a; exactness = ∀T PreservesFiniteLimits extendScalars (the derivedPushHom hypothesis, no stronger); γ = derivedPushHom, d = derivedComapLowerStarIso (typed unfold aliases); e = normalized TensorNormalization (unique; existence via internal_scalar_pullback_normalization); ρ = genuine regularPullback (exact-pullback comparison + single + comapUpperStarIso/εIso); h_K = node's 4 factors in order; clause 1 transpose = μ≫(1⊗ρ)≫(ε⊗1); clause 2 = internalProjection (adjunct of μ then ε⊗1) ≫ G(1⊗ρ); clause 3 naturality square. No extra hypotheses or universe restrictions; edge cases K=0, S=0, a=id, f=id, empty schemes covered; docstrings with source/blueprint and the 4 proof steps; sorry only. Advisories: D/L/F/adj/B/TensorNormalization owned by def-sfb-internal-derived-scalar-comparisons (not a stmt_dep, re-exported); mate-exact reached via lem-pd projection_comparison; redundant Mates import; flat-square proof_dep lacks Lean. Not compiled (2026-10-21 rule); worker reports clean 19.9 s / 7.5 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-80d0c",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T033928-L-171853",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules + 4 unclaimed adapted modules vs published clone (verbatim def moves diffed), node stmt/proof records vs Lean, new sorry transport statement vs TensorNormalized/SectionScalarNormalized pinning; sandbox --all build plus 11 direct importers compiled clean; axioms sorryAx only pre-existing or from declared sorry statements"
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "stage3-pur-extension-ordinary-strict-tensor",
+ "kind": "statement",
+ "title": "Ordinary strict finite scalar tensor system",
+ "statement": "Fix a prime l, finite extensions E,L of Q_l, an embedding iota:E→L and a scheme W. Over the completed E-coefficient sheaf consider the category of flat-term K-flat complexes. There exists a functor direct from that category to complexes of actual L-coefficient systems, with natural finite evaluations isomorphic to the specified ordinary integralScalarFiniteComplex at every level. Those evaluation isomorphisms identify the actual successor transitions of direct with the published quotient tensor transitions on all local sections, namely IsCoefficientExtensionStrictTransition of [stage3-pur-extension-reduction-data]. This assertion constructs only ordinary complexes and their evaluation isomorphisms; it contains neither a comparison with any derived extension functor nor a normalization claim.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Proof of stage3-pur-extension-strict-representatives, step 1, ordinary tensor construction and quotient-transition equation; Stacks 03EK, 03D7 and 0941."
+ },
+ "stmt_deps": [
+  "stage3-pur-extension-reduction-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Construct the cone with components integralScalarRho using the existing integralScalarRho_transition theorem, itself proved from the limit cone equations and coefficientExtensionQuotient_naturality. Apply the existing ordinary sequence-projection extension and strictSystemToSequenceFunctor. Compare the finite evaluation ring maps and fix the resulting evaluation functor type in private definitional wrappers. A generic lemma, proved by equality induction, shows that whiskering the equality isomorphism is heterogeneous identity on sections. Compose this with the identity-on-sections strict-system equivalence unit, extensionIso, and integralScalarReductionIso.symm to obtain the natural finite evaluation isomorphisms.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary functor is additive; apply it degreewise and restrict to flat-term K-flat complexes. Mathlib mapHomologicalComplexCompIso, whiskered by the good-subcategory inclusion, gives a natural isomorphism of cochain functors; the complex and naturality equations are the ordinary naturality equations in each degree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Forget to sheaves of abelian groups and conjugate the actual coefficientSequenceTransition by the finite evaluation isomorphisms. A generic equality-induction lemma removes the abelian equality transports from its defining horizontal-restriction formula, identifying it with the transition of the ordinary sequence-projection extension. Normalize inverse finite evaluations to systemModelTmul generators using linearity of the sheafification unit and extensionIso_tensor. The existing transition_tmul formula sends s tensor x to red(s) tensor x, exactly as integralScalarTransition_existsUnique specifies. Carry the generator equation as HEq between native and restricted section types, and apply the restricted evaluation morphism before cancelling its inverse. Precompose both abelian sheaf maps with the inverse of integralScalarReductionIso, apply sheafify_hom_ext, and use TensorProduct.induction_on: zero and addition follow from additivity, and pure tensors from the calculated formula. Cancel the two evaluation isomorphisms and convert equality on sections to the required HEq.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Ordinary tensor construction and quotient-transition equation, expanded using the existing constructions and sheafification universal property.",
+  "group": "T7",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars preserves K-flat complexes and associativity identifies successive change of rings",
+   "results": "ModuleCat.extendScalars_assoc, extendScalars_assoc' and moduleCatExtendScalarsPseudofunctor; ordinary module results only.",
+   "date": "2026-10-26",
+   "verdict": "No strict coefficient-system derived comparison or normalization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient tensor systems representing derived extension of scalars, with evaluation and normalized transitions",
+   "results": "Module.Presentation.tensor and TensorProduct; ordinary algebraic presentations only.",
+   "date": "2026-10-26",
+   "verdict": "No matching derived system statement."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientExtensionStrict|IsCoefficientExtensionStrictTransition|scalarCoefficientEvaluation; mapHomologicalComplexCompIso",
+   "results": "Project item has the joint unproved existence statement and private ordinary constructors. CoefficientExtensionRestrictedTower only restricts an already supplied strict model. Mathlib Algebra/Homology/Additive.lean supplies mapHomologicalComplexCompIso.",
+   "date": "2026-10-26",
+   "verdict": "Existing ingredients do not state this separate step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionStrictRepresentatives",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension to Qlbar: Strict normalized representatives of coefficient extension; ordinary tensor construction",
+   "via": [
+    "stage3-pur-extension-strict-representatives",
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientExtensionOrdinaryStrictTensor",
+  "file": "lean/Sheaf/Paper/CoefficientExtensionOrdinaryStrictTensor.lean",
+  "declaration": "WeilConjectures.coefficientExtensionOrdinaryStrictTensor_exists",
+  "statement": "theorem coefficientExtensionOrdinaryStrictTensor_exists :\n    ∃ (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤\n        CochainComplex (coefficientSequenceModules l L W) ℤ)\n      (directEvaluation : ∀ n : ℕ,\n        direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅\n          (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n),\n      IsCoefficientExtensionStrictTransition l E L ι W direct directEvaluation",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T023904-L-612625",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261026T092712-L-3454742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

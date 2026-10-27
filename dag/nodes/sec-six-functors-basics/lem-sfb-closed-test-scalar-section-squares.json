@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-closed-test-scalar-section-squares",
+ "kind": "statement",
+ "title": "Scalar compatibility of section restriction and evaluation",
+ "statement": "Let $\\Lambda,S$ be commutative condensed rings and $c:\\Lambda\\to S$ a morphism of ring objects [sk-def-sfb-condensed-ring, sk-def-sfb-coefficient-morphisms]. Use the specified exact restriction of scalars, universal right-derived comparisons and section arrows [def-sfb-closed-test-scalar-comparison-maps] and the specified models and comparison maps [def-sfb-closed-test-scalar-model-diagrams]. For every scheme morphism $b:X\\to Y$, site objects $W$ over $Y$ and $W_1$ over $X$, and site arrow $t:W_1\\to b^*W$, the ordinary section arrow commutes with scalar restriction and the pullback/scalar isomorphism. The derived section arrow satisfies the corresponding square with forward gamma. The direct-image evaluation isomorphism at $W$ commutes with forward gamma at $W,b^*W$ and the direct-image scalar comparison. These are precisely the last three clauses of SectionCoherence; its computation-unit clause is not part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y, 09T5; sites-cohomology.tex Tags 07A6, 0D6F, 0FPI; proetale.tex Tag 09BL. Parent argument specialized to this step."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-closed-test-scalar-comparison-maps",
+  "def-sfb-closed-test-scalar-model-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "On underlying sections scalar restriction preserves the actual adjunction-unit section and its presheaf restriction. Transport the scalar adjunction and its unit through the section equivalence to prove the ordinary square.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply rightDerivedPullback composition to the ordinary square. The two paths have the same equation against the computation unit on every complex. Universal uniqueness gives the derived square with the canonical exact pullback/scalar compositor.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-pd-section-derived-pushpull-normalization",
+    "lem-sfb-exact-square-right-derived-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For direct-image evaluation both paths are induced by the literal identity (b_*F)(W)=F(b^*W). Their equations against computation units agree; universal uniqueness identifies them.",
+   "uses": [
+    "lem-sfb-exact-square-right-derived-unit",
+    "lem-sfb-unbounded-sections-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "def-sfb-right-derived-functor",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-sfb-exact-square-right-derived-unit",
+  "lem-sfb-unbounded-sections-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y and 09T5; assembly of parent proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with universal derived comparison units and section models",
+   "results": "8 hits: RestrictScalars, AlgHom.restrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, Submodule.restrictScalars, ModuleCat.RestrictScalars.obj', LinearMap.restrictScalarsₗ, PresheafOfModules.restrictScalars",
+   "date": "2026-10-25",
+   "verdict": "No normalized closed-test derived comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib total derived computation-unit API. The source library has the API used here."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars",
+   "results": "25 hits, primarily scalar towers and linear maps in number theory, no closed-test models.",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Additional rg of Sheaf and WeilConjectures found the normalized-model predicates and rightDerivedPullback calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClosedTestScalarModelCoherence",
+  "date": "2026-10-25",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 10, 11: Universal coefficient comparison for closed-test models; Scalar compatibility of section restriction and evaluation",
+   "via": [
+    "lem-sfb-closed-test-scalar-model-coherence",
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedTestScalarSectionSquares",
+  "file": "lean/Sheaf/Paper/ClosedTestScalarSectionSquares.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestScalarModelCoherence.closed_test_scalar_section_squares",
+  "statement": "theorem closed_test_scalar_section_squares :\n(∀ {X Y : Scheme.{u}} (b : X ⟶ Y) (W : Y.ProEt) (W' : X.ProEt)\n      (t : W' ⟶ testFibre b W)\n      (F : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj S Y)),\n    (sectionArrow S b W W' t).app F ≫\n        (evaluation Λ W').map ((CondensedRing.comapUpperStarIso c b).hom.app F) =\n      (sectionArrow Λ b W W' t).app ((restriction c Y).obj F)) ∧\n  (∀ {X Y : Scheme.{u}} (b : X ⟶ Y) (W : Y.ProEt) (W' : X.ProEt)\n      (t : W' ⟶ testFibre b W)\n      (N : DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj S Y))),\n    (derivedSectionArrow S b W W' t).app N ≫\n        (gamma c W').app ((CondensedRing.upperStar S b).mapDerivedCategory.obj N) ≫\n        (evaluation Λ W').rightDerivedFunctor.map\n          ((CondensedRing.derivedComapUpperStarIso c b).hom.app N) =\n      (gamma c W).app N ≫\n        (derivedSectionArrow Λ b W W' t).app ((restrict c Y).obj N)) ∧\n  (∀ {X Y : Scheme.{u}} (b : X ⟶ Y) (W : Y.ProEt)\n      (N : DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X))),\n    (derivedPushEvaluation S b W).hom.app N ≫ (gamma c (testFibre b W)).app N =\n      (gamma c W).app ((CondensedRing.moduleObjectDerivedPushforward S b).obj N) ≫\n        (evaluation Λ W).rightDerivedFunctor.map ((restrictPush c b).app N) ≫\n        (derivedPushEvaluation Λ b W).hom.app ((restrict c X).obj N))",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

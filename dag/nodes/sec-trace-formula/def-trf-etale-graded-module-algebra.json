@@ -1,0 +1,122 @@
+{
+ "id": "def-trf-etale-graded-module-algebra",
+ "kind": "definition",
+ "title": "Homogeneous commutative algebras in small etale module sheaves",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ with its small etale ringed site and module sheaves [def-trf-algebraic-space]. For a family $B_d$ of module sheaves, a commutative unital graded algebra structure consists of additive-in-each-variable homogeneous products $B_m(V)\\times B_n(V)\\to B_{m+n}(V)$ linear over $\\mathcal O_X(V)$ in both variables, commuting with every chart restriction, associative, ordinarily commutative, and with a module map $\\mathcal O_X\\to B_0$ satisfying both unit laws. These are equivalently sheaf tensor products [def-pur-sheaf-tensor-product]. A homogeneous algebra homomorphism is a family of module maps preserving products and the unit. The total object is the coproduct of the $B_d$ in module sheaves; the homogeneous products determine its products by bilinearity and sheafification. No assertion that sections commute with infinite coproducts is included. This is the small-etale analogue of the Zariski notion [def-weil-pbc-graded-sheaf-structures].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-graded-sheaf-structures"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C, lemma-descending-property-ample, the graded section algebra and maps psi_d; sites-modules.tex Section 03EK, homogeneous bilinear sheaf operations."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "commutative graded algebra sheaves of modules on a site",
+   "results": "8 hits; GradedTensorProduct.comm, SheafOfModules, SheafOfModules.mk, GradedAlgebra, SheafOfModules.noConfusionType, DirectSum.GAlgebra.commutes, AlgebraicGeometry.Scheme.Modules, PresheafOfModules.Sheafify.module; ",
+   "date": "2026-10-23",
+   "verdict": "General graded-object and module-sheaf APIs only; no homogeneous commutative algebra on the small etale site. Reuse Mathlib module sheaves and coproducts; add this site specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GradedObject",
+   "results": "12 hits; CategoryTheory.GradedObject, CategoryTheory.inhabitedGradedObject, CategoryTheory.GradedObject.categoryOfGradedObjects, CategoryTheory.GradedObject.HasMap, CategoryTheory.GradedObject.CofanMapObjFun, CategoryTheory.GradedObject.eval, CategoryTheory.GradedObject.hasZeroMorphisms, CategoryTheory.GradedObject.total; ",
+   "date": "2026-10-23",
+   "verdict": "General graded-object and module-sheaf APIs only; no homogeneous commutative algebra on the small etale site. Reuse Mathlib module sheaves and coproducts; add this site specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "structure.*Graded.*Algebra|Graded.*Sheaf",
+   "results": "1 hits; Mathlib/Algebra/Algebra/ZMod.lean; ",
+   "date": "2026-10-23",
+   "verdict": "General graded-object and module-sheaf APIs only; no homogeneous commutative algebra on the small etale site. Reuse Mathlib module sheaves and coproducts; add this site specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleGradedModuleAlgebra|graded.*algebra|GradedSheafAlgebra in lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search graded and rg in dag/nodes",
+   "results": "The only homogeneous sheaf algebra is AlgebraicGeometry.GradedSheafAlgebra, specialized to Scheme.Modules and Zariski opens. AlgebraicSpace modules provide no graded operations. RelativeProj.GradedAlgebraData and scheme-test line maps are different notions. No DAG node states this site specialization.",
+   "date": "2026-10-23",
+   "verdict": "Add the missing algebraic-space etale homogeneous operations; keep all existing Zariski notions unchanged."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-graded-evaluation-zariski-etale-comparison",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Graded homogeneous operations needed for the section algebra and evaluation in Stacks 0D3C; the historical polarized-descent branch recorded by the item.",
+   "via": [
+    "lem-trf-graded-evaluation-zariski-etale-comparison",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.EtaleGradedModuleAlgebra",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.EtaleGradedModuleAlgebra",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.EtaleGradedModuleAlgebra",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleGradedModuleAlgebra.Hom",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleGradedModuleAlgebra.total"
+  ],
+  "file": "lean/Sheaf/TraceFormula/EtaleGradedModuleAlgebra.lean",
+  "statement": "structure EtaleGradedModuleAlgebra (B : ℕ → X.Modules)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be794a164",
+  "group": "NK",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be794a164",
+  "group": "NK",
+  "result": "fix",
+  "note": "Checked every hypothesis and clause of all three theorems against the node and the stmt_dep records, the new node def-trf-etale-graded-module-algebra (correct, genuinely missing, no duplicate in live) and the H5/H6/H8/H9 gates. H3 fault fixed: in graded_evaluation_ordinary_scheme the graded structure AG on A_d was a bare existential tied to HG only through the isomorphism d, so the clauses identifying the products and units were trivially true. Fix: new Prop def IsEvaluationSectionAlgebra (the four compatible-section clauses, verbatim), used in graded_evaluation_zariski_etale (definitional refactor) and added to the scheme theorem as ∃ CG, IsEvaluationSectionAlgebra T (evaluationSchemeMap a) B BG CG AG. The item lean-record.json has the new verbatim statement and declarations; stmt_deps unchanged. Compiled three times with nt_compile --json: inline form hit a heartbeat timeout, def only in the scheme theorem took 59.7 s, final form clean at 51.4 s (new-node module 58.0 s under load). Advisory: the final line-power clause is only a Nonempty isomorphism (the pinned e_n carry the content); proof-only use of representable_etale_scheme_tests."
+ }
+}

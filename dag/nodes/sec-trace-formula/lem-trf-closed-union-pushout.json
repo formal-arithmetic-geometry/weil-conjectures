@@ -14,9 +14,84 @@
   "def-pc-fibre-product",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an affine open $U=\\operatorname{Spec}R\\subseteq X$ and write $Y_U=Y\\times_XU$, and likewise $Z_U,W_U,E_U$. By [def-weil-closed-immersion], $Y_U=\\operatorname{Spec}(R/I)$ and $Z_U=\\operatorname{Spec}(R/J)$ for ideals $I,J\\subseteq R$. By [lem-weil-pbc-scheme-theoretic-union], $W_U=\\operatorname{Spec}(R/(I\\cap J))$, with the closed inclusions from $Y_U,Z_U$. Their affine ring maps are the canonical quotients: the composite $R\\to R/(I\\cap J)\\to R/I$ is $R\\to R/I$, and $R\\to R/(I\\cap J)$ is surjective, so it determines $R/(I\\cap J)\\to R/I$ uniquely; the same applies to $R/J$. The pullback universal property [def-pc-fibre-product] identifies $E_U$ with $Y_U\\times_UZ_U$: both represent pairs of maps into $Y,Z$ with equal composites into $X$ and a common factorization into $U$. By [lem-weil-pbc-fibre-product-affine-spectra], this is $\\operatorname{Spec}((R/I)\\otimes_R(R/J))$. Identify this tensor product with $R/(I+J)$ by $[a]\\otimes[b]\\mapsto[ab]$, with inverse $[r]\\mapsto[r]\\otimes1$. The inverse is well-defined because $I$ kills the first factor and $[j]\\otimes1=1\\otimes[j]=0$ for $j\\in J$; the balancing relation shows both composites are identities. Under this identification the projections from $E_U$ are induced by $R/I\\to R/(I+J)$ and $R/J\\to R/(I+J)$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-scheme-theoretic-union",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0C4J (lemma-scheme-theoretic-union), affine chart, and 0C4I (lemma-scheme-theoretic-intersection), its tensor-quotient calculation."
+   }
+  },
+  {
+   "text": "The canonical ring homomorphism $\\theta:R/(I\\cap J)\\to (R/I)\\times_{R/(I+J)}(R/J)$ sends $[r]$ to $([r],[r])$. Its kernel is zero since a representative mapping to zero lies in both $I$ and $J$. Given a compatible pair $([a],[b])$, write $a-b=i+j$ with $i\\in I$, $j\\in J$. Then $c=a-i=b+j$ maps to that pair, proving surjectivity. Thus $\\theta$ is a ring isomorphism. It commutes with both projections by its displayed formula, proving the ring-identity clause with its canonical maps. This calculation also applies when a quotient is the zero ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4J, lemma-scheme-theoretic-union, displayed affine exact sequence: the kernel and surjectivity calculation."
+   }
+  },
+  {
+   "text": "Let $T$ be any scheme and $f:Y\\to T$, $g:Z\\to T$ agree on $E$. Set $A=R/I$, $D=R/(I+J)$, $B=R/J$ and $P=A\\times_D B$. Apply [lem-sfb-affine-closed-pinching-pushout] with its ring named $T$ equal to $B$, and its target scheme named $Z$ equal to our $T$. The required map $A\\twoheadrightarrow D$ is surjective: every class $[r]$ in $D$ is the image of $[r]$ in $A$. The other map $B\\to D$ is the canonical quotient, allowed by the cited statement without any extra condition. Step 2 gives $R/(I\\cap J)\\cong P$, commuting with both projections; functoriality in [def-weil-affine-spectrum] gives the compatible isomorphism $W_U\\cong\\operatorname{Spec}P$. Step 1 identifies the overlap and its two maps with $\\operatorname{Spec}D\\to\\operatorname{Spec}A,\\operatorname{Spec}B$. Thus the cited universal property in all schemes gives a unique $h_U:W_U\\to T$ extending $f|_{Y_U},g|_{Z_U}$. This works for every affine open $U\\subseteq X$, including empty charts and zero quotient rings.",
+   "uses": [
+    "lem-sfb-affine-closed-pinching-pushout",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0, lemma-basic-example-pushout, applied to the affine charts in Tag 0C4J; supplies affine lifting and uniqueness for arbitrary target schemes."
+   }
+  },
+  {
+   "text": "The opens $W_U$ for affine opens $U\\subseteq X$ cover $W$, by [lem-weil-pbc-affine-opens-basis]. Here $W_U$ is the inverse image of $U$ under the closed immersion $W\\to X$, so the covering assertion follows by taking inverse images of the affine-open cover of $X$. Given two such opens from $U,V$, cover $U\\cap V$ by affine opens $B\\subseteq U\\cap V$, using that same basis statement; no affineness of $U\\cap V$ is assumed. Taking inverse images gives $W_U\\cap W_V=W\\times_X(U\\cap V)=\\bigcup_B W_B$. The analogous inverse-image identities for $Y,Z$ identify their restrictions inside every $W_B$ with $Y_B,Z_B$. On $W_B$, both $h_U|_{W_B}$ and $h_V|_{W_B}$ have the prescribed restrictions $f|_{Y_B}$ and $g|_{Z_B}$. Uniqueness in Step 3, applied to the affine open $B$ of $X$, makes the two morphisms equal. The $W_B$ cover $W_U\\cap W_V$, so [lem-weil-pbc-scheme-morphism-gluing] makes $h_U,h_V$ agree on that whole overlap. Applying the existence assertion of this gluing lemma to the open cover $(W_U)_U$ gives a morphism $h:W\\to T$ restricting to every $h_U$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4J, lemma-scheme-theoretic-union: construction is affine-local on the union; Schemes Tags 01IT (lemma-basis-affine-opens) and 01JB (lemma-glue), mapping property."
+   }
+  },
+  {
+   "text": "Take the global closed inclusions $a:Y\\to W$ and $b:Z\\to W$ supplied by [lem-weil-pbc-scheme-theoretic-union]. Their affine restrictions are the quotient-induced inclusions of Step 1. On every $E_U$, the two composites into $W$ agree: their ring maps send $[r]\\in R/(I\\cap J)$ to the same $[r]\\in R/(I+J)$. The opens $E_U$ cover $E$, so [lem-weil-pbc-scheme-morphism-gluing] gives the global cocone condition. The composites $h\\circ a$ and $f$ agree on every $Y_U$ by Step 3; those opens cover $Y$, so the same equality criterion gives $h\\circ a=f$. Likewise $h\\circ b=g$ on the cover $(Z_U)_U$. For any other extension $h':W\\to T$, Step 3 gives $h'|_{W_U}=h_U$ on every affine chart, and gluing uniqueness gives $h'=h$. These are exactly the cocone and universal properties of the colimit of the finite span [def-weil-pbc-category-colimit]. No reducedness, Noetherianity or separatedness was used; zero rings and empty covers include the empty cases.",
+   "uses": [
+    "lem-weil-pbc-scheme-theoretic-union",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4J, lemma-scheme-theoretic-union, existence and uniqueness of the extension; Schemes Tag 01JB, lemma-glue, mapping property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-scheme-theoretic-union",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4J (lemma-scheme-theoretic-union), affine-local construction and uniqueness; affine step supplied by existing Tag 0ET0 (more-morphisms.tex, lemma-basic-example-pushout)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +120,59 @@
    "results": "8 hits; top=['AlgebraicGeometry.instIsAffineCoprodScheme', 'AlgebraicGeometry.coprodSpec', 'AlgebraicGeometry.instMonoCoprodScheme', 'AlgebraicGeometry.isPullback_opens_inf', 'CommRingCat.closure_range_union_range_eq_top_of_isPushout', 'AlgebraicGeometry.isCompl_opensRange_inl_inr', 'AlgebraicGeometry.Scheme.Pullback.Triplet.tensor', 'AlgebraicGeometry.coprodMk']; note=; digest=cf1ddc78d25d3d4e. Read the returned signatures: none states the finite closed-point pinching or closed-subscheme union theorem; coproducts and gluing along opens do not apply to closed intersections. Grep subdirectory: all Mathlib.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scheme.?[Tt]heoretic.?[Uu]nion|[Uu]nion.*[Pp]ushout|[Pp]ushout.*[Uu]nion",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures. Spec sends ring pushouts to scheme pullbacks; coproduct and open gluing results do not state a closed-union pushout. Quotient-injection results do not give the scheme universal property. Grep subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme union is the categorical pushout of its two components over their fibre product",
+   "results": "8 hits; top=['AlgebraicGeometry.instMonoCoprodScheme', 'AlgebraicGeometry.isPullback_opens_inf', 'AlgebraicGeometry.instIsAffineCoprodScheme', 'AlgebraicGeometry.isCompl_opensRange_inl_inr', 'AlgebraicGeometry.instHasFiniteCoproductsScheme', 'AlgebraicGeometry.IsAffineOpen.sup_of_disjoint', 'AlgebraicGeometry.Scheme.Pullback.Triplet.tensor', 'CommRingCat.closure_range_union_range_eq_top_of_isPushout']; note=; digest=53a7efcd1a2e7ca8. Read the returned signatures. Spec sends ring pushouts to scheme pullbacks; coproduct and open gluing results do not state a closed-union pushout. Quotient-injection results do not give the scheme universal property.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPushout\", AlgebraicGeometry.IsClosedImmersion",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures. Spec sends ring pushouts to scheme pullbacks; coproduct and open gluing results do not state a closed-union pushout. Quotient-injection results do not give the scheme universal property.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic union of two closed subschemes is a pushout over their intersection",
+   "results": "8 hits; top=['AlgebraicGeometry.isPullback_opens_inf', 'AlgebraicGeometry.isPullback_SpecMap_pushout', 'AlgebraicGeometry.isPullback_Spec_map_pushout', 'AlgebraicGeometry.isPullback_Spec_map_isPushout', 'AlgebraicGeometry.isPullback_SpecMap_of_isPushout', 'AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl', 'AlgebraicGeometry.isPullback_opens_inf_le', 'AlgebraicGeometry.Scheme.GlueData.gluedScheme']; note=; digest=53e6e163a210cd40. Read the returned signatures. Spec sends ring pushouts to scheme pullbacks; coproduct and open gluing results do not state a closed-union pushout. Quotient-injection results do not give the scheme universal property.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout|isPushout",
+   "results": "25 hits; top=['Mathlib/AlgebraicGeometry/Pullbacks.lean', 'Mathlib/AlgebraicGeometry/Pullbacks.lean', 'Mathlib/AlgebraicGeometry/Pullbacks.lean', 'Mathlib/AlgebraicGeometry/Pullbacks.lean', 'Mathlib/AlgebraicGeometry/PullbackCarrier.lean', 'Mathlib/AlgebraicGeometry/PullbackCarrier.lean', 'Mathlib/AlgebraicGeometry/QuasiAffine.lean', 'Mathlib/AlgebraicGeometry/QuasiAffine.lean']; note=; digest=6cf281899ce90586. Read the returned signatures. Spec sends ring pushouts to scheme pullbacks; coproduct and open gluing results do not state a closed-union pushout. Quotient-injection results do not give the scheme universal property. Grep subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Spec, \"IsPushout\"",
+   "results": "1 hits; top=['AlgebraicGeometry.isPullback_SpecMap_of_isPushout']; note=; digest=91ea034a25705514. Read the returned signatures. Spec sends ring pushouts to scheme pullbacks; coproduct and open gluing results do not state a closed-union pushout. Quotient-injection results do not give the scheme universal property.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ideals I J of a commutative ring the spectrum of R modulo I intersect J is the pushout of the two quotient spectra over R modulo I plus J",
+   "results": "8 hits; top=['PrimeSpectrum.sigmaToPi_asIdeal', 'PrimeSpectrum.primeSpectrumProd_symm_inr_asIdeal', 'PrimeSpectrum.primeSpectrumProdOfSum', 'PrimeSpectrum.primeSpectrumProd_symm_inl_asIdeal', 'Ideal.quotientInfToPiQuotient_mk', \"Ideal.quotientInfToPiQuotient_mk'\", 'AlgebraicGeometry.isPullback_Spec_map_pushout', 'AlgebraicGeometry.isPullback_SpecMap_pushout']; note=; digest=9184a1caf8901652. Read the returned signatures. Spec sends ring pushouts to scheme pullbacks; coproduct and open gluing results do not state a closed-union pushout. Quotient-injection results do not give the scheme universal property.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-exceptional-contraction-diamond",
@@ -80,5 +204,67 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-closed-union-pushout",
+  "worker": "stage1",
+  "summary": "Retained the statement and five-step affine-to-global proof: affine intersection models, the explicit quotient fibre-product identity, the existing arbitrary-target affine closed-pinching pushout, overlap compatibility, and global existence/uniqueness. Rebased the retained returned delivery through the required current-server dry run (6aeb9103aa3), compared all immutable item fields with the current unsplit live item, and re-read all ten current statement/proof dependency statements and all eleven verbatim citation quotes. This repair makes the inverse-image cover and restriction identities in Step 4 explicit, so its overlap gluing uses precisely the current basis and morphism-gluing statements. No new nodes, changed hypotheses, new searches or Lean edits.",
+  "blueprint": "Preserves inherited from.place: Appendix B contraction paragraph behind lem-trf-local-term-locality and exceptional-contraction-diamond branch. Steps 1–3 give the closed-union affine pushout and ring identity; Steps 4–5 glue globally, the reconstruction input for that paragraph. Whole-blueprint searches for pushout and scheme-theoretic union found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-union",
+    "why": "Existing closed-union construction supplies its affine chart and canonical closed inclusions, a general scheme-theoretic tool with no counterpart in the local-term unit."
+   },
+   {
+    "node": "lem-sfb-affine-closed-pinching-pushout",
+    "why": "Arbitrary-target universal property for an affine ring fibre product supplies the affine step of Stacks 0C4J; the trace unit has no such generic scheme gluing tool. The global argument and quotient calculation remain explicit here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-theoretic-union",
+  "lem-sfb-affine-closed-pinching-pushout"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-578375d07",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-578375d07 (reviewer sub-agent of L); spot-checked: Fourth delivery of this item. The three earlier ones (603e, 1d40, fcc1) all passed review, and each landing was refused because the item is complete in the side project's DAG but not in the live DAG. In clones/live and clones/side-live the item is still unsplit with an empty proof, and there is no repair note. The delivery adds no new nodes. Compared field by field with the fcc1 snapshot, only the Step 4 text and split_report changed. The new Step 4 sentences say that W_U is the inverse image of U under W→X and that W_U∩W_V = W×_X(U∩V) = ⋃_B W_B, with the same identities for Y and Z. Both are correct identities of open subschemes. I re-read all five steps and the nine cited statements. Step 1: the chart models come from closed-immersion, union clause (b), fibre product and the affine tensor node; (R/I)⊗(R/J)≅R/(I+J) is correct, and the inclusion's ring map is the quotient map because R→R/(I∩J) is surjective. Step 2: θ is injective, and surjective by taking c=a−i=b+j. Step 3: substitute into the current affine-closed-pinching-pushout statement (β arbitrary, any target scheme, zero rings allowed) with A=R/I, D=R/(I+J), its T=R/J; α is surjective. Step 4: U∩V is covered by affine opens B, uniqueness from Step 3 gives agreement on each W_B, and the gluing node gives a global morphism. Step 5: the cocone condition holds on each E_U, h∘a=f and h∘b=g hold on covers, and the extension is unique. The statement matches Stacks morphisms.tex:554 (Tag 0C4J), including the affine exact sequence. Edge cases: k[x,y] with (x),(y); ℤ with (2),(3); I=J; I=0; J=R; R=0; k[e]/(e³) with (e),(e²). No cycle: proof_deps are unchanged. Both tool_uses are accepted. No SGA source is used. Maintainer note: four passes so far; what blocks this item is promotion into the live DAG, not the mathematics."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedUnionPushout",
+  "declaration": "AlgebraicGeometry.isPushout_scheme_theoretic_union",
+  "declarations": [
+   "AlgebraicGeometry.isPushout_scheme_theoretic_union",
+   "CommRingCat.isPullback_quotient_inf_sup"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedUnionPushout.lean",
+  "statement": "theorem isPushout_scheme_theoretic_union {X Y Z : Scheme.{u}} (i : Y ⟶ X) (j : Z ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j] : ∃ (a : Y ⟶ (i.ker ⊓ j.ker).subscheme) (b : Z ⟶ (i.ker ⊓ j.ker).subscheme), a ≫ (i.ker ⊓ j.ker).subschemeι = i ∧ b ≫ (i.ker ⊓ j.ker).subschemeι = j ∧ IsPushout (pullback.fst i j) (pullback.snd i j) a b",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5881ef53d",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read node (identical to side-live except lean; item promoted live 2026-10-23, lean null), Stacks 0C4J, 5 stmt_deps records, module, report (Worker report + Second reading by Q11). isPushout_scheme_theoretic_union: IsClosedImmersion i,j only; W=(i.ker ⊓ j.ker).subscheme as in scheme_theoretic_union; E=pullback i j; a,b pinned by factorization through mono subschemeι; IsPushout gives commutativity + unique extension to every T in Scheme.{u}. CommRingCat.isPullback_quotient_inf_sup: canonical Ideal.Quotient.factor square R/(I⊓J), R/I, R/J, R/(I⊔J), no coprimality, arbitrary R equivalent via Spec R. Edge cases R=0, J=⊤, I=J, I=⊥, disjoint (2),(3), nonreduced, nonseparated covered. Names fresh (Mathlib + side-live grep), no defs, sorry-only, docstrings with source/blueprint, statement verbatim, proof imports exist. No compile (no change). No findings."
+ }
 }

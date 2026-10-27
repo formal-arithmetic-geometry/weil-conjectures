@@ -1,0 +1,199 @@
+{
+ "id": "lem-zl-finite-restriction-integral-assembly",
+ "kind": "statement",
+ "title": "Integral normalized geometry and actual-arrow assembly",
+ "statement": "Fix finite-field data D [def-weil-finite-field-fiber], a prime ell different from D.p, an algebraic closure Omega of Q_ell, a finite morphism f:X->Y of separated finite-type D.k-schemes, and y:Spec D.k->Y. There exist Geometry G [def-zl-finite-restriction-geometric-comparisons], IntegralComparisons I [def-zl-finite-restriction-integral-diagram], Endpoints N, and GeometricArrows J [def-zl-finite-restriction-geometric-arrows] for f,y such that G.Normalized, I.Laws, I.Coherent, N.ScalarNormalized, J.Normalized and N.ArrowsNormalized J hold. The normalizations are those of [def-zl-finite-restriction-normalization]. TowerAgreement holds for f and the fibre projection h, and TensorRestrictionFormula holds for every strict counit component: scalar extension sends a tensor m to a tensor its restriction to the chosen lift. Thus the integral part is constructed before any rational descent. The finite fan includes the zero object for an empty fibre. The notions are exactly those of the cited definition nodes.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-geometric-point",
+  "def-pc-base-change",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "def-weil-finite-coefficient-point",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure",
+  "def-zl-finite-restriction-integral-diagram",
+  "def-zl-finite-restriction-geometric-comparisons",
+  "def-zl-finite-restriction-normalization",
+  "def-zl-finite-restriction-finite-data",
+  "def-zl-finite-restriction-geometric-arrows"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Integral normalized geometry and actual-arrow assembly; Proposition 6.8.14 and Remark 6.8.15, finite restriction descent steps."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-zl-finite-completed-image-comparison] to $f$ and its finite base change $h$. It supplies noetherianity, finite dimension, exact ambient module direct image, constructible preservation and the projection-normalized comparison $\\Theta_f$ with the prescribed tower image (and likewise $\\Theta_h$). For the pullbacks use [lem-pur-integral-operations-preserve-constructible]. Its hypotheses hold since every scheme is over $k$ and $\\ell\\ne p$. In particular all the displayed composite functors have the stated integral constructible domains. [lem-zl-finite-rational-heart-comparison] identifies these integral and raw rational categories with the PBC conventions, including their completed rings and reductions; no change of coefficient category is implicit.",
+   "uses": [
+    "lem-zl-finite-completed-image-comparison",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-zl-finite-rational-heart-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite stalk step: domains and normalization before coefficient passage."
+   }
+  },
+  {
+   "text": "Use [prop-weil-pbc-scalar-extension] for $f,h$ and for every displayed $g$. Step 1 checks its noetherian finite-dimensional hypotheses; $\\ell$ is invertible throughout. Conjugate its ambient direct-image comparison by $C_Y\\Theta_f$ and $\\Theta_{f,L}C_X$ (respectively the comparisons for $h$). This gives the required comparison for the prescribed tower direct image. The pullback comparisons restrict by Step 1. [lem-pur-integral-operations-scalar-extension] says integral coefficient extension itself preserves constructibility. [lem-weil-finite-free-completed-scalar-comparison] identifies its strict-tower realization with ordinary derived completed-ring extension. It makes $R_{L,W}$ finite free over $R_{E,W}$ and identifies the comparison with the actual completion map, also for ramified extensions. Thus no equality of the two chosen uniformizer exponents is needed.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sf-strict-direct-image-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite stalk step: finite coefficient extension at completed integral coefficients."
+   }
+  },
+  {
+   "text": "Put $M=Lv^*K$, write $P_F=Lh_F^*$, $F_F=Rh_{*,F}$, and denote the Step 2 comparisons by $a:C_SP_E\\simeq P_LC_s$, $b:C_sF_E\\simeq F_LC_S$. Apply the inverse-adjunct equation of [lem-pur-ordinary-adjunction-scalar-compatibility] with input $F_EM$ and $v=\\operatorname{id}_{F_EM}$. Since the inverse adjunct of the identity is the counit, it gives the equality of derived morphisms\n$$\\varepsilon_{L,C_SM}\\,P_L(b_M)=C_S(\\varepsilon_{E,M})\\,a_{F_EM}^{-1}.$$\nThis uses precisely the normalized comparisons of Step 2, rather than arbitrary isomorphisms between the same objects. The node supplies the completed adjunction on all complete objects, so no exactness of ordinary ringed pullback is assumed. For the first restriction map use the exchange clause of [prop-weil-pbc-scalar-extension] on the cartesian square $(f,h,y,v)$: it identifies its scalar extension with the exchange at $L$, including the completion comparison.",
+   "uses": [
+    "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite stalk step: actual exchange and ordinary completed counit, before point sections."
+   }
+  },
+  {
+   "text": "Use the Step 1 comparison $\\Theta_h$ to transport the ordinary counit to the prescribed tower direct image. By definition its restriction to the $x$-summand is $Li_x^*\\varepsilon_M$, with the composition identifications $L i_x^*Lh^*\\cong L(hi_x)^*=1$ and $Li_x^*Lv^*\\cong Lx^*$. Pull back the counit equation of Step 3 along $i_x$. Pullback composition and coefficient composition of [prop-weil-pbc-scalar-extension] identify its two sides with the $x$-components of the scalar square for this restriction. Hence the square commutes: scalar extension is additive and a map into a finite biproduct is determined by its projections. On strict finite-coefficient tensor representatives, [lem-zl-finite-counit-restriction-towers] specifies this counit component as restriction to $i_x$. Its scalar tensor sends $a\\otimes m$ to $a\\otimes(m|_{i_x})$; balancing is respected because restriction is coefficient-linear. The equality of integral arrows was proved by the adjunction equation itself, before using this coefficient-level description; it is not inferred from equality of separate reduction projections. When $P_y$ is empty the target and both arrows to it are zero.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-zl-finite-counit-restriction-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite stalk step: individual counit restrictions, finite sum and empty fibre."
+   }
+  },
+  {
+   "text": "Retain the normalized cochain adjunctions, compositors and identity maps when reconstructing completed arrows. On good flat-term K-flat representatives compare the strict derived mate with that completed mate, then descend by the resolving localization universal property. This yields Endpoints.ArrowsNormalized, not merely scalar compatibility; normalization forbids a middle/projection sign twist. The point target fan is limiting, and its empty case is zero. The projection-normalized completed-image comparison yields TowerAgreement for both f and h. The identity and tower scalar squares use the balanced associator, so give IntegralComparisons.Laws and Coherent.",
+   "uses": [
+    "lem-zl-finite-completed-image-comparison",
+    "lem-zl-finite-counit-restriction-towers",
+    "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-finite-completed-image-comparison",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-zl-finite-rational-heart-comparison",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-strict-direct-image-scalar-comparison",
+  "lem-pur-ordinary-adjunction-scalar-compatibility",
+  "lem-zl-finite-counit-restriction-towers"
+ ],
+ "proof_origin": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent-written elaboration of finite restriction coefficient descent: Integral normalized geometry and actual-arrow assembly",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite diagrams and distinguished triangles in a directed colimit of triangulated categories descend to one stage",
+   "results": "Eight results on distinguished triangles, truncation triangles, and octahedra; no normalized finite coefficient restriction assembly.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible functors between directed systems of categories descend to the common stage category and preserve t-exactness",
+   "results": "Eight results on derived exact functors and localization. No assembly of the fixed completed integral and rational coefficient comparisons. Existing project StageSystem interfaces are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*descent|scalar.*counit|counit.*scalar",
+   "results": "Eleven Mathlib hits on algebraic scalar adjunction counits and affine groups. None states normalized geometric coefficient descent. Project rg also found the existing StageSystem quotient and strict direct-image comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRestrictionCoefficientDescent",
+  "date": "2026-10-25",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "Integral normalized geometry and actual-arrow assembly in finite coefficient restriction descent",
+   "via": [
+    "lem-zl-finite-restriction-coefficient-descent",
+    "lem-zl-finite-adic-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRestrictionIntegralAssembly",
+  "file": "lean/Sheaf/Paper/FiniteRestrictionIntegralAssembly.lean",
+  "declaration": "WeilConjectures.FiniteRestrictionCoefficient.finiteRestrictionIntegralAssembly",
+  "declarations": [
+   "WeilConjectures.FiniteRestrictionCoefficient.finiteRestrictionIntegralAssembly"
+  ],
+  "statement": "theorem finiteRestrictionIntegralAssembly\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsFinite f]\n    (y : Spec (.of D.k) ⟶ Y) :\n    ∃ (G : Geometry l Ω f y) (I : IntegralComparisons l f y Ω)\n      (N : Endpoints l Ω f y G I) (J : GeometricArrows l Ω f y G),\n      G.Normalized ∧ I.Laws ∧ I.Coherent ∧ N.ScalarNormalized ∧\n      J.Normalized l Ω f y ∧ N.ArrowsNormalized l Ω f y J ∧\n      TowerAgreement l Ω f ∧ TowerAgreement l Ω (pullback.snd f y) ∧\n      TensorRestrictionFormula l Ω f y",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-77b39",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T122609-L-1789509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-77b39",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T122609-L-1789509",
+  "kind": "interface",
+  "note": "independent cc review: item finiteRestrictionCoefficientDescent (unchanged signature) proved from finitePoints + 4 private proofs + 2 new sorry'd assembly statements (integral = integral conjuncts of item; rational = ∃R, DirectImageDescent ∧ HeartExactDescent, true via HasComparisonLaws pinning); 5 defs moved verbatim to FiniteRestrictionCoefficientDescentData with change record and public re-export; no importers; nodes checked against Lean"
+ }
+}

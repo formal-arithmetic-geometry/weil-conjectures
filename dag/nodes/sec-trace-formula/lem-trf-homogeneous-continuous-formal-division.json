@@ -1,0 +1,447 @@
+{
+ "id": "lem-trf-homogeneous-continuous-formal-division",
+ "kind": "statement",
+ "title": "Continuous supported division from homogeneous division",
+ "statement": "Let $L$ be a field [def-weil-field], $A=L[[X_1,\\ldots,X_n]]$ and $\\mathfrak m=(X)$ [def-weil-pbc-multivariate-power-series]. Fix finitely many distinct ordered orthant vertices $\\alpha_i$, put $D=\\bigcup_i(\\alpha_i+\\mathbf N^n)$, $d_i=|\\alpha_i|$, and $\\Delta_i=\\{\\beta:\\alpha_i+\\beta\\notin\\bigcup_{j<i}(\\alpha_j+\\mathbf N^n)\\}$. Let $f_i\\in A$ have order $d_i$, and let $H_i$ be their degree-$d_i$ homogeneous parts. Assume that in every degree $t$ the indexed family\n$$\\{X^\\beta H_i:\\beta\\in\\Delta_i,\\ |\\beta|+d_i=t\\}\\ \\amalg\\ \\{X^\\gamma:\\gamma\\notin D,\\ |\\gamma|=t\\}$$\nis an $L$-basis of the degree-$t$ homogeneous polynomials. Then every $f\\in A$ has a unique division\n$$f=\\sum_i q_i(f)f_i+r(f),\\qquad \\operatorname{supp}q_i(f)\\subseteq\\Delta_i,\\quad \\operatorname{supp}r(f)\\subseteq\\mathbf N^n\\setminus D.$$\nThe maps $q_i,r$ are $L$-linear and continuous for the $\\mathfrak m$-adic filtrations; $f\\in\\mathfrak m^t$ implies $q_i(f)\\in\\mathfrak m^{\\max(0,t-d_i)}$ and $r(f)\\in\\mathfrak m^t$. In particular the space of supported sums $\\sum_iq_if_i$ is the closed subspace $\\ker r$. For any ideal $I\\subseteq A$ containing all the $f_i$, use vector-space dimension [def-weil-vector-space-dimension] and put $H_I(t)=\\dim_L A/(I+\\mathfrak m^{t+1})$ and $H_D(t)=\\#\\{\\gamma\\notin D:|\\gamma|\\le t\\}$. Then $H_I(t)\\le H_D(t)$ for every $t$, and $H_I=H_D$ if and only if $r(f)=0$ for all $f\\in I$. These assertions also hold for every degree prefix with its own orthant diagram and quotient supports whose initial forms satisfy the same basis hypothesis in every degree, and for the empty vertex family.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Lemma 7.3, Corollary 7.4 and Lemma 7.5, printed p.263; continuity is the order estimate of Lemma 7.3. Supporting route: ILO VIII 2.3.11--2.3.13, printed pp.93--94. No Stacks tag states this formal division result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-vector-space-dimension",
+  "def-trf-supported-homogeneous-division",
+  "def-trf-formal-initial-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Use the coefficient-family and finite-convolution definition [def-weil-pbc-multivariate-power-series]. The exponents of degree at most $k$ form a finite set, since all coordinates are at most $k$. Write $g_{[k]}$ for the finite polynomial consisting of the degree-$k$ coefficients of $g$. A series lies in $\\mathfrak m^k$ exactly when its coefficients of degree below $k$ vanish: one implication follows by multiplying $k$ variables; for the other, assign each exponent $\\gamma$ of degree at least $k$ a fixed subexponent $\\delta\\le\\gamma$ of degree $k$ and group its term into $X^\\delta h_\\delta$. There are finitely many such $\\delta$, so this is an actual finite expression in the generators of $\\mathfrak m^k$. For $k=0$ take $\\delta=0$; for $n=0,k>0$ there are no such exponents and the series is zero.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "For each $k$, the assumed indexed basis gives unique homogeneous polynomials $u_{i,k}$ and $v_k$ for any homogeneous polynomial $P$ of degree $k$, with $P=\\sum_i u_{i,k}H_i+v_k$, $u_{i,k}$ supported in $\\Delta_i$ and homogeneous of degree $k-d_i$, and $v_k$ supported outside $D$ and homogeneous of degree $k$. Set $u_{i,k}=0$ if $k<d_i$. Indeed take the basis coordinates of $P$ and group the finitely many coordinates indexed by $(i,\\beta)$ into $u_{i,k}$; group the other coordinates into $v_k$. Uniqueness is exactly uniqueness of coordinates in this indexed basis. No leading-monomial assumption or division theorem is being inferred here.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Define $E_0=f$. At stage $k$, apply Step 2 to $(E_k)_{[k]}$, obtaining $u_{i,k},v_k$, and define\n$$E_{k+1}=E_k-\\sum_i u_{i,k}f_i-v_k.$$\nThe induction invariant is $E_k\\in\\mathfrak m^k$ and $E_k=f-\\sum_{s<k}(\\sum_i u_{i,s}f_i+v_s)$. It holds at $k=0$, with the sum empty. Thus the prescription is ordinary recursion on $\\mathbf N$, using only a finite coordinate calculation at each stage.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "To verify the inductive step, $f_i-H_i$ has no coefficients in degrees at most $d_i$. By the convolution formula [def-weil-pbc-multivariate-power-series], $u_{i,k}(f_i-H_i)$ has no coefficients in degrees at most $k$. Hence $\\sum_i u_{i,k}f_i+v_k$ has no terms below $k$, and its degree-$k$ component is $\\sum_i u_{i,k}H_i+v_k=(E_k)_{[k]}$. Subtraction gives $E_{k+1}\\in\\mathfrak m^{k+1}$. The other invariant follows by appending the new finite summand. This proves both invariants for every $k$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Define $q_i$ and $r$ as coefficient families [def-weil-pbc-multivariate-power-series]: the coefficient of $q_i$ at $\\beta$ is the coefficient of $u_{i,|\\beta|+d_i}$ there, and the coefficient of $r$ at $\\gamma$ is that of $v_{|\\gamma|}$ there. These definitions require no infinite-sum existence theorem: a formal series is precisely an arbitrary coefficient family. They give $\\operatorname{supp}q_i\\subseteq\\Delta_i$ and $\\operatorname{supp}r\\subseteq\\mathbf N^n\\setminus D$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Fix a degree bound $N$. A component $u_{i,k}f_i$ has no terms below $k$, so components with $k>N$ do not affect any coefficient of degree at most $N$. More explicitly, in the convolution for the coefficient at $\\gamma$, a nonzero factor from $f_i$ has degree at least $d_i$, so the factor from $q_i$ has degree at most $|\\gamma|-d_i$ and comes from $u_{i,k}$ with $k\\le|\\gamma|$. Thus $\\sum_iq_if_i+r$ agrees through degree $N$ with $\\sum_{k\\le N}(\\sum_i u_{i,k}f_i+v_k)$. The invariant says the latter agrees with $f$ through degree $N$. Coefficient equality for all $N$ gives $f=\\sum_iq_if_i+r$ by [def-weil-pbc-multivariate-power-series].",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "For uniqueness subtract two supported divisions, writing $0=\\sum_i a_i f_i+b$. If this tuple is nonzero, its nonzero coefficients give a nonempty set of natural-number weights: $|\\beta|+d_i$ for a coefficient of $a_i$ and $|\\gamma|$ for one of $b$. Let $k$ be the least weight. Write $g^{(j)}$ for the degree-$j$ homogeneous part. In the degree-$k$ convolution [def-weil-pbc-multivariate-power-series], a homogeneous component $(a_i)^{(e)}$ vanishes if $e+d_i<k$, while $(f_i)^{(k-e)}$ vanishes if $e+d_i>k$. Thus only $e=k-d_i\\ge0$ contributes, and the equation is $0=\\sum_{i:d_i\\le k}(a_i)^{(k-d_i)}H_i+b^{(k)}$. Its coordinates are those of the assumed degree-$k$ indexed basis because the tuple has the prescribed supports. Independence makes every such coordinate zero, although the definition of $k$ supplies a nonzero one. This contradiction proves that the tuple is zero. The argument includes $d_i=0$ and needs neither finite support of a series nor an actual least monomial equal to $\\alpha_i$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Adding the supported divisions of $f$ and $g$ gives a supported division of $f+g$, since the support constraints are preserved by addition. Multiplying the supported division of $f$ by $c\\in L$ gives one of $cf$. Uniqueness therefore implies $q_i(f+g)=q_i(f)+q_i(g)$, $q_i(cf)=cq_i(f)$ and the analogous identities for $r$, including $q_i(0)=r(0)=0$. These are $L$-linear maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Suppose $f\\in\\mathfrak m^t$. For $k<t$, induction in the recursion gives $E_k=f$ and $u_{i,k}=v_k=0$: the degree-$k$ component of $f$ is zero, whose coordinates in a basis are all zero. Consequently $r$ has no terms below $t$ and $q_i$ has no term $X^\\beta$ with $|\\beta|+d_i<t$. By Step 1 these assertions say $r(f)\\in\\mathfrak m^t$ and $q_i(f)\\in\\mathfrak m^{\\max(0,t-d_i)}$, with no restriction needed when $t\\le d_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "The $\\mathfrak m$-adic topology has basic neighbourhoods $g+\\mathfrak m^a$. For a target exponent $a$, the preceding bounds give $r(\\mathfrak m^a)\\subseteq\\mathfrak m^a$ and $q_i(\\mathfrak m^{a+d_i})\\subseteq\\mathfrak m^a$. Linearity then gives the same containments for differences at every $g$. Thus the maps are continuous for exactly the filtrations in the statement, including a constant divisor with $d_i=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Let $S$ be the space of sums $\\sum_i a_if_i$ with $\\operatorname{supp}a_i\\subseteq\\Delta_i$. Such a tuple with remainder zero is a supported division, so uniqueness gives $S\\subseteq\\ker r$. Conversely the division of an element of $\\ker r$ expresses it as such a sum; hence $S=\\ker r$. This is a closed subspace: if $r(g)\\ne0$, choose a nonzero coefficient of degree $b$; for $h-g\\in\\mathfrak m^{b+1}$ the order bound makes that coefficient of $r(h)-r(g)$ zero. The open neighbourhood $g+\\mathfrak m^{b+1}$ therefore avoids $\\ker r$. Linearity supplies the subspace assertion. No closedness of an arbitrary ideal is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Let $V_t$ have the finite monomial basis $X^\\gamma$ for $\\gamma\\notin D$, $|\\gamma|\\le t$, of cardinality $N=H_D(t)$. Its natural map $p_t:V_t\\to A/(I+\\mathfrak m^{t+1})$ is surjective: division gives $f-r(f)\\in I$ because every $f_i\\in I$, and truncating $r(f)$ beyond degree $t$ changes it by an element of $\\mathfrak m^{t+1}$. Thus its $N$ indexed monomial images span the quotient. To obtain a basis, if the current finite list has a nontrivial relation, choose a nonzero coefficient and invert it by [def-weil-field]; solve for that image in terms of the others and delete it. The remaining list still spans and has one fewer entry. Induction on the list length ends at an independent spanning list, including the empty list for the zero space. Both spaces are therefore finite-dimensional before applying [def-weil-vector-space-dimension]; it gives $\\dim V_t=N$ and defines $H_I(t)$ as the quotient basis cardinality. Apply [lem-sfb-independent-family-spanning-cardinality] to that basis and the original spanning set of at most $N$ images to obtain $H_I(t)\\le H_D(t)$.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-vector-space-dimension",
+    "lem-sfb-independent-family-spanning-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "If $H_I(t)=N$, then $p_t$ is injective. Otherwise a nonzero element of its kernel gives a nontrivial relation between the $N$ indexed monomial images. Choose a nonzero coefficient; it is invertible by [def-weil-field], so that image is a combination of the other $N-1$ images. Those images span the quotient. Apply [lem-sfb-independent-family-spanning-cardinality] to a basis and this spanning set, obtaining $H_I(t)\\le N-1$, a contradiction (dimension counts basis elements by [def-weil-vector-space-dimension]). If $N=0$, $V_t=0$ is already injective and there is no nonzero kernel vector to choose.",
+   "uses": [
+    "def-weil-field",
+    "lem-sfb-independent-family-spanning-cardinality",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Assume $H_I(t)=H_D(t)$ for all $t$ and take $f\\in I$. Its division gives $r(f)=f-\\sum_iq_i(f)f_i\\in I$. Let $r_{\\le t}$ be its truncation through degree $t$. It belongs to $V_t$ and to $I+\\mathfrak m^{t+1}$, since $r(f)-r_{\\le t}\\in\\mathfrak m^{t+1}$. Step 13 therefore makes $r_{\\le t}=0$. For any exponent $\\gamma$ take $t=|\\gamma|$; its coefficient in $r(f)$ is zero. Thus $r(f)=0$ for every $f\\in I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "Conversely suppose $r$ vanishes on $I$. For $v\\in V_t$ the tuple with every quotient zero and remainder $v$ is a supported division, so $r(v)=v$. If $p_t(v)=0$, write $v=h+w$ with $h\\in I$ and $w\\in\\mathfrak m^{t+1}$. Linearity and the order bound yield $v=r(v)=r(w)\\in\\mathfrak m^{t+1}$. But $v$ is a polynomial of degree at most $t$, so Step 1 forces $v=0$. Thus the $N$ monomial images are independent as well as spanning; by [def-weil-vector-space-dimension] they are a basis and $H_I(t)=N=H_D(t)$ for every $t$.",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  },
+  {
+   "text": "For a degree prefix, replace the finite vertex family, $D$ and the $\\Delta_i$ by those of that prefix. Under its separately stated homogeneous basis hypothesis, Steps 1--15 apply verbatim: none used a vertex outside the chosen family. This does not infer the prefix hypothesis from the full-family hypothesis. For an empty family $D=\\varnothing$, the recursion has $v_k=f_{[k]}$, so $r=\\mathrm{id}$ and $S=0$. The same finite-jet arguments show $H_I=H_D$ exactly when $I=0$: if $I$ contains a nonzero series, choose a nonzero coefficient of degree $t$; its truncation through degree $t$ is a nonzero vector in $V_t$ killed by $p_t$, contradicting Step 13 under equality. Conversely $I=0$ leaves all finite monomial jets independent. For $n=0$ there is only the degree-zero monomial: the empty family gives $r=\\mathrm{id}_L$; a nonempty distinct vertex family can contain only $\\alpha=0$, and its basis hypothesis gives a nonzero scalar divisor, $q=f/f_1$, $r=0$, and $I=L$. These verify all degenerate cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-field",
+  "def-weil-vector-space-dimension",
+  "lem-sfb-independent-family-spanning-cardinality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only); agent-written homogeneous coefficient recursion and finite-jet argument. BM 1997, Lemma 7.3, Corollary 7.4 and Lemma 7.5, p.263, is WANTED, not read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "division|remainder|standardBasis",
+   "results": "{\"t\": \"2026-10-22T04:38:05Z\", \"tool\": \"grep\", \"query\": \"division|remainder|standardBasis\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Basic.lean\"], \"digest\": \"82fc8b87fd4599ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial division in Mathlib/RingTheory/MvPolynomial/Groebner.lean:134 and univariate Weierstrass division do not provide the prescribed multivariate formal quotient supports, continuous remainder map and Hilbert criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-supported-formal-division: formal multivariate division with monomial support restrictions and closed image",
+   "results": "{\"t\": \"2026-10-22T04:38:05Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-supported-formal-division: formal multivariate division with monomial support restrictions and closed image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.divMonomial\", \"MvPolynomial.divMonomial_add_modMonomial\", \"MvPolynomial.restrictSupport\", \"MvPolynomial.modMonomial_add_divMonomial\", \"MonomialOrder.div_single\", \"MonomialOrder.div\", \"MonomialOrder.div_set\", \"MvPolynomial.add_divMonomial\"], \"digest\": \"a3dac0f3a933dcfa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial division in Mathlib/RingTheory/MvPolynomial/Groebner.lean:134 and univariate Weierstrass division do not provide the prescribed multivariate formal quotient supports, continuous remainder map and Hilbert criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-22T04:38:05Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial division in Mathlib/RingTheory/MvPolynomial/Groebner.lean:134 and univariate Weierstrass division do not provide the prescribed multivariate formal quotient supports, continuous remainder map and Hilbert criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-formal-division: a finite multivariate formal power series family whose initial homogeneous forms admit unique division with prescribed monomial supports admits unique continuous formal division and a Hilbert function criterion for zero remainders",
+   "results": "{\"t\": \"2026-10-22T04:38:10Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-supported-formal-division: a finite multivariate formal power series family whose initial homogeneous forms admit unique division with prescribed monomial supports admits unique continuous formal division and a Hilbert function criterion for zero remainders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.IsWeierstrassDivision.elim\", \"MvPowerSeries.X_pow_dvd_iff\"], \"digest\": \"14946f4db56d72f0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial division in Mathlib/RingTheory/MvPolynomial/Groebner.lean:134 and univariate Weierstrass division do not provide the prescribed multivariate formal quotient supports, continuous remainder map and Hilbert criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-formal-division: continuous isomorphism of formal power series spaces from prescribed quotient supports and remainder supports when every homogeneous division matrix is invertible",
+   "results": "{\"t\": \"2026-10-22T04:38:26Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-supported-formal-division: continuous isomorphism of formal power series spaces from prescribed quotient supports and remainder supports when every homogeneous division matrix is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.divXPowOrderHom\"], \"digest\": \"3b947f4329edeca1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial division in Mathlib/RingTheory/MvPolynomial/Groebner.lean:134 and univariate Weierstrass division do not provide the prescribed multivariate formal quotient supports, continuous remainder map and Hilbert criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "division|remainder|standardBasis",
+   "results": {
+    "t": "2026-10-22T06:43:42Z",
+    "tool": "grep",
+    "query": "division|remainder|standardBasis",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Basic.lean"
+    ],
+    "digest": "82fc8b87fd4599ae"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: coefficient maps, polynomial Groebner division and one-variable Weierstrass division do not give this finite multivariate supported division with arbitrary invertible homogeneous blocks and its Hilbert criterion; filtered-algebra structure hits do not invert the operator"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multivariate formal power series division from a basis of the initial homogeneous forms",
+   "results": {
+    "t": "2026-10-22T06:43:42Z",
+    "tool": "leansearch",
+    "query": "Multivariate formal power series division from a basis of the initial homogeneous forms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.weierstrassDiv",
+     "PowerSeries.term_/ʷ_",
+     "PowerSeries.isWeierstrassDivisionAt_iff",
+     "PowerSeries.IsWeierstrassDivisorAt.div",
+     "PowerSeries.IsWeierstrassDivisionAt.mk",
+     "PowerSeries.IsWeierstrassDivision",
+     "PowerSeries.IsWeierstrassDivisionAt",
+     "MvPolynomial.divMonomial"
+    ],
+    "digest": "d0616098d122eb4d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: coefficient maps, polynomial Groebner division and one-variable Weierstrass division do not give this finite multivariate supported division with arbitrary invertible homogeneous blocks and its Hilbert criterion; filtered-algebra structure hits do not invert the operator"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, LinearMap",
+   "results": {
+    "t": "2026-10-22T06:43:43Z",
+    "tool": "loogle",
+    "query": "MvPowerSeries, LinearMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "MvPowerSeries.coeff",
+     "MvPowerSeries.monomial",
+     "MvPowerSeries.coeff_apply",
+     "MvPowerSeries.monomial_def",
+     "MvPowerSeries.coeff_comp_monomial",
+     "MvPowerSeries.X_def",
+     "MvPowerSeries.coeff_index_single_self_X",
+     "MvPowerSeries.coeff_zero"
+    ],
+    "digest": "2829b4be16904768"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: coefficient maps, polynomial Groebner division and one-variable Weierstrass division do not give this finite multivariate supported division with arbitrary invertible homogeneous blocks and its Hilbert criterion; filtered-algebra structure hits do not invert the operator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series division with prescribed monomial quotient supports from invertible homogeneous degree blocks, continuous remainder and Hilbert function equality",
+   "results": {
+    "t": "2026-10-22T06:43:52Z",
+    "tool": "leanfinder",
+    "query": "Formal power series division with prescribed monomial quotient supports from invertible homogeneous degree blocks, continuous remainder and Hilbert function equality",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.isWeierstrassDivisionAt_iff",
+     "PowerSeries.IsWeierstrassDivisorAt.coeff_div",
+     "PowerSeries.IsWeierstrassDivisorAt.div",
+     "PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem",
+     "PowerSeries.IsWeierstrassDivisorAt.seq",
+     "PowerSeries.IsWeierstrassDivisionAt",
+     "PowerSeries.IsWeierstrassDivisorAt.divCoeff",
+     "PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod"
+    ],
+    "digest": "ac11071c20d0df92"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: coefficient maps, polynomial Groebner division and one-variable Weierstrass division do not give this finite multivariate supported division with arbitrary invertible homogeneous blocks and its Hilbert criterion; filtered-algebra structure hits do not invert the operator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered linear operator on products of homogeneous polynomial spaces with invertible diagonal blocks has a unique filtration preserving inverse by recursive lifting",
+   "results": {
+    "t": "2026-10-22T06:44:03Z",
+    "tool": "leanfinder",
+    "query": "A filtered linear operator on products of homogeneous polynomial spaces with invertible diagonal blocks has a unique filtration preserving inverse by recursive lifting",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsModuleFiltration.mk_int",
+     "IsRingFiltration.toGradedMonoid",
+     "IsRingFiltration.mk_int",
+     "IsModuleFiltration.toGradedSMul",
+     "Ideal.Filtration.mem_submodule",
+     "Ideal.Filtration.submodule",
+     "Ideal.Filtration.Stable.bounded_difference",
+     "Ideal.Filtration.ext"
+    ],
+    "digest": "1fbb24043eaca56e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: coefficient maps, polynomial Groebner division and one-variable Weierstrass division do not give this finite multivariate supported division with arbitrary invertible homogeneous blocks and its Hilbert criterion; filtered-algebra structure hits do not invert the operator"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWeierstrassDivision|exists_isWeierstrassDivision|theorem div_set",
+   "results": {
+    "t": "2026-10-22T06:44:03Z",
+    "tool": "grep",
+    "query": "IsWeierstrassDivision|exists_isWeierstrassDivision|theorem div_set",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPolynomial/Groebner.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+     "Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean"
+    ],
+    "digest": "dde303c483b0150e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: coefficient maps, polynomial Groebner division and one-variable Weierstrass division do not give this finite multivariate supported division with arbitrary invertible homogeneous blocks and its Hilbert criterion; filtered-algebra structure hits do not invert the operator"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-coefficient-transform-criterion",
+  "date": "2026-10-22",
+  "group": "Q69"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Formal coefficient strata and one-step blowup formulas; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Theorem 7.14, Theorems 7.20--7.21, and the proof of Theorem 9.4; Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this formal transform criterion. Refinement: Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Lemma 7.3, Corollary 7.4 and Lemma 7.5, printed p.263; continuity is the order estimate of Lemma 7.3.",
+   "via": [
+    "lem-trf-formal-coefficient-transform-criterion",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-homogeneous-continuous-formal-division",
+  "worker": "stage1",
+  "summary": "Q18 supplies explicit homogeneous-degree recursion, finite-convolution verification, least-weight uniqueness, filtration bounds, a direct closed-kernel proof and both directions of the finite-jet Hilbert criterion. No new nodes; the general independent-family/spanning-cardinality bound is an existing Mathlib leaf. The mathematical statement is unchanged; field and dimension definitions are explicitly cited. BM 1997 is WANTED and the proof is agent-written. Repair of the 2026-10-22 11:43 UTC promotion return at 9a12a24559b: compared the retained delivery against the current unsplit read-clone node, re-read every cited statement, and expanded Step 12 into finite-list induction with explicit use of field inverses. The report records the comparison and repeated dry run on the current DAG. Repair of the 2026-10-22 16:18 UTC return at 1fc2b49f9da: rechecked the current unsplit DAG, all four cited statements and all twelve quotes; expanded the empty-family Hilbert criterion in Step 16 using a nonzero finite truncation. No statement or dependency changed. Repair of the current promotion return (2026-10-23): rebuilt against the current unsplit DAG, re-read all four cited statements and the unchanged source context, checked all twelve verbatim quotations, and expanded Step 7 into the explicit homogeneous convolution calculation at the least nonzero weight. Statement and dependencies remain unchanged; no new nodes.",
+  "blueprint": "Historical local-presentation branch below lem-trf-local-term-locality through the existing via chain, specifically the homogeneous division, closed supported sums and Hilbert-criterion input to lem-trf-formal-coefficient-transform-criterion, steps 1, 9, 10 and 13. The current main-20261015 locality/unit proof uses contracting correspondences; this lower-input split changes neither that statement nor its route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-2f128f81a",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-2f128f81a (reviewer sub-agent of L); spot-checked: I read the whole item, all 16 steps, and each of the four cited statements in full: power-series coefficient families and convolution, field inverses, basis-count dimension, and the independent-vs-spanning cardinality bound. This is the fourth push in a promotion loop. The earlier heads c422, 9a12 and 1fc2 were read and passed, then refused at landing. The live and side-live clones still have the item unsplit, and there is no repair note. Compared with 1fc2, only Step 7 (the explicit least-weight convolution) and Step 16 (the empty-family Hilbert criterion spelled out) changed. Compared with live, the statement is identical apart from the def-weil-field and def-weil-vector-space-dimension citations. Source, created, unit and blueprint fields are unchanged, and no hypothesis was weakened. Every step is correct. The recursion E_{k+1}=E_k−Σu_{i,k}f_i−v_k gives existence through the truncation bound k≤|γ|. In Step 7, only e=k−d_i contributes at the least weight, which gives uniqueness, including d_i=0. The order bounds give continuity. ker r is closed. Surjectivity of p_t gives H_I≤H_D. Injectivity at equality, applied to truncations of r(f)∈I, needs no assumption that I is closed; the converse uses r(v)=v. Small cases: x^2+x^3 in one variable; I=(x) versus (x^2); H=x+y with vertex (1,0), which is a basis in every degree but is not the deg-lex least exponent, so lem-trf-supported-formal-division cannot replace this item; the empty family; n=0. No new nodes. The rg -L duplicate search found related nodes (supported-formal-division, initial-diagram-stabilization, formal-hilbert-stratum-minors, jet-diagram-hilbert-control) but none states this result. The parent steps 1, 9, 10 and 13 use only clauses of the unchanged statement. No SGA is cited; BM 1997 is WANTED and the proof is marked agent-written. No tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomogeneousContinuousFormalDivision",
+  "declaration": "MonomialDiagram.exists_continuous_supported_formal_division",
+  "file": "lean/Sheaf/RingTheory/HomogeneousContinuousFormalDivision.lean",
+  "statement": "theorem exists_continuous_supported_formal_division {L : Type u} [Field L] {n : ℕ} {ι : Type} [Fintype ι] [LinearOrder ι] (α : ι → Fin n →₀ ℕ) (hα : Function.Injective α) (f : ι → MvPowerSeries (Fin n) L) (horder : ∀ i : ι, (f i).order = ((α i).degree : ℕ∞)) (hbasis : ∀ t : ℕ, LinearIndependent L (divisionFamily (generated α) α (fun i ↦ MvPowerSeries.truncTotal ((α i).degree + 1) (MvPowerSeries.homogeneousComponent (α i).degree (f i))) t) ∧ SpansDegree (generated α) α (fun i ↦ MvPowerSeries.truncTotal ((α i).degree + 1) (MvPowerSeries.homogeneousComponent (α i).degree (f i))) t) : ∃ (q : ι → MvPowerSeries (Fin n) L →ₗ[L] MvPowerSeries (Fin n) L) (r : MvPowerSeries (Fin n) L →ₗ[L] MvPowerSeries (Fin n) L), (∀ g : MvPowerSeries (Fin n) L, g = (∑ i : ι, q i g * f i) + r g ∧ (∀ i : ι, Function.support (q i g) ⊆ quotientSupport α i) ∧ Function.support (r g) ⊆ (generated α)ᶜ ∧ ∀ (a : ι → MvPowerSeries (Fin n) L) (b : MvPowerSeries (Fin n) L), g = (∑ i : ι, a i * f i) + b → (∀ i : ι, Function.support (a i) ⊆ quotientSupport α i) → Function.support b ⊆ (generated α)ᶜ → a = (fun i ↦ q i g) ∧ b = r g) ∧ (∀ i : ι, @Continuous _ _ (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))).adicTopology (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))).adicTopology (q i)) ∧ @Continuous _ _ (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))).adicTopology (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))).adicTopology r ∧ (∀ (t : ℕ) (g : MvPowerSeries (Fin n) L), g ∈ (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))) ^ t → (∀ i : ι, q i g ∈ (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))) ^ (t - (α i).degree)) ∧ r g ∈ (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))) ^ t) ∧ {g : MvPowerSeries (Fin n) L | ∃ a : ι → MvPowerSeries (Fin n) L, (∀ i : ι, Function.support (a i) ⊆ quotientSupport α i) ∧ g = ∑ i : ι, a i * f i} = (LinearMap.ker r : Set (MvPowerSeries (Fin n) L)) ∧ @IsClosed _ (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))).adicTopology (LinearMap.ker r : Set (MvPowerSeries (Fin n) L)) ∧ (∀ I : Ideal (MvPowerSeries (Fin n) L), (∀ i : ι, f i ∈ I) → (∀ t : ℕ, FiniteDimensional L (truncation I t)) ∧ (∀ t : ℕ, Module.finrank L (truncation I t) ≤ hilbertCount (generated α) t) ∧ ((∀ t : ℕ, Module.finrank L (truncation I t) = hilbertCount (generated α) t) ↔ ∀ g ∈ I, r g = 0))",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed orthant, quotient support and indexed homogeneous-family interface, and the landed finite-jet quotient and complementary monomial count. The arbitrary finite ordered index type includes every degree prefix with its separate homogeneous basis hypothesis, as well as the empty family."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cfb43e27",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Item differs from live only in lean + 2 landed def stmt_deps (supported-homogeneous-division, formal-initial-diagram); dep nodes identical to live; lean.statement verbatim; sole sorry; source/blueprint docstrings with 16-step plan; both report sections present. Clause-by-clause match: Field L, MvPowerSeries (Fin n) L, m = span X; injective vertices on finite LinearOrder ι; D = generated, d_i = degree, Δ_i = quotientSupport (exact); order f_i = d_i; H_i = truncTotal(d_i+1)(homogeneousComponent d_i f_i); hbasis = LinearIndependent ∧ SpansDegree of the indexed DivisionIndex family in every t; ∃ linear q,r with identity, supports and uniqueness against arbitrary supported (a,b); m-adic continuity; order bounds (truncated ℕ subtraction = max); supported sums = ker r, closed; for I ∋ f_i: FiniteDimensional, finrank(truncation) ≤ hilbertCount, equality ∀t ↔ r|_I = 0; prefixes and empty family via arbitrary ι. Edge cases: empty ι, n=0, d_i=0, t≤d_i, any characteristic. No added assumptions or new definitions; no compile needed (no file changed). Advisory: ι : Type inherited from dependency definitions, no loss of generality."
+ }
+}

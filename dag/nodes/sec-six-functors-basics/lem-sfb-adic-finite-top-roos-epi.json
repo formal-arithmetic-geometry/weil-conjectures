@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-adic-finite-top-roos-epi",
+ "kind": "statement",
+ "title": "Residue Tor amplitude gives the endpoint Roos epimorphism",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $A$ a commutative ring and $J\\subset A$ an ideal. On the coefficient-sized model of its pro-etale site [def-weil-pbc-proetale-site, lem-sfb-adic-finite-reduction-data], use constant coefficients [def-weil-pbc-constant-sheaf], module sheaves [def-weil-sheaf-of-modules-category] and their derived category [def-weil-abstract-derived-category]. Let $N\\in D(\\underline A)$, let $U_n$ be the underlying $A$-object of $N\\otimes_A^{\\mathbf L}A/J^{n+1}$, and let $t_n:U_{n+1}\\to U_n$ be precisely the normalized transitions of [lem-sfb-adic-finite-reduction-data]. Assume the product $P=\\prod_n U_n$ exists, and define $s:P\\to P$ by $\\pi_n s=t_n\\pi_{n+1}$. Let $a,b\\in\\mathbf Z$ and suppose the residue reduction $N\\otimes_A^{\\mathbf L}A/J$ has Tor amplitude in $[a,b]$ [def-weil-proetale-tor-amplitude]. Then $H^b(1-s):H^b(P)\\to H^b(P)$ is an epimorphism of $\\underline A$-module sheaves. Neither completeness of $N$ nor bounds on its higher reductions are assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, lemma-describe-constructible-complexes, proof of (1), surjectivity of H^b(K_(n+1)) to H^b(K_n); sites-cohomology.tex, Tag 0947, proposition-enough-weakly-contractibles (6)-(7)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-adic-finite-reduction-data",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized flat tensor short exact presentation [lem-sfb-adic-finite-transition-tensor-sequence] to every successor transition. Test the supplied residue Tor amplitude [def-weil-proetale-tor-amplitude] on its residue K-flat representative P and its residue module M at degree b+1. This test vanishes; scalar restriction preserves zero objects and the kernel homology isomorphism therefore makes H^(b+1)(S.X1) vanish. Exactness at H^b(S.X3) in the cochain long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] makes H^b(S.g) epic. The natural factorization of derived homology through Q and the normalized transition square transport this epimorphy to precisely H^b(adicFiniteTransition). This is the complete private proof top_transition_epi.",
+   "uses": [
+    "lem-sfb-adic-finite-transition-tensor-sequence",
+    "def-weil-proetale-tor-amplitude",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the coefficient-sized model ring sheaf to the actual pro-etale site along AsSmall.equiv and form the inverse sequence with the mapped successor arrows. Apply the existing epimorphic-tower theorem [det-pe-milnor-epimorphic] to this sequence. The module-sheaf equivalence is additive and preserves products. The private map_roos proof, by product projection extensionality and additivity, states E(1-shift) followed by the product comparison equals the product comparison followed by 1-mappedShift. Its comparison is invertible, and the equivalence reflects epimorphisms. Thus 1-shift is epic for every epimorphic tower on the coefficient-sized model. This is model_tower_epi.",
+   "uses": [
+    "det-pe-milnor-epimorphic",
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport exact countable products [det-pe-products-exact] through the same module-sheaf equivalence, as in model_exact_products. Exact countable products imply preservation of countable derived products by homology [lem-weil-derived-limit-products-core]. Apply model_tower_epi to the degree-b homology tower using top_transition_epi. Apply map_roos once more, now to the derived homology functor. Its product comparison is invertible. Epimorphy of 1-shift on the homology product therefore implies epimorphy of H^b of the original normalized Roos endomorphism.",
+   "uses": [
+    "det-pe-products-exact",
+    "lem-sfb-adic-finite-reduction-data",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-finite-transition-tensor-sequence",
+  "def-weil-proetale-tor-amplitude",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-sfb-adic-finite-reduction-data",
+  "det-pe-milnor-epimorphic",
+  "det-pe-products-exact",
+  "lem-weil-derived-limit-products-core"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2 (1) and sites-cohomology.tex Tag 0947 (4)-(7). K2 implements all Tor-test/long-exact-sequence, site-equivalence, product-comparison and epimorphic-tower glue in Lean; only the structural flat tensor transition sequence is isolated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a sheaf complex with residue Tor amplitude at most b the quotient reduction transitions on degree b cohomology are epimorphisms",
+   "results": "Eight hits: epimorphy of complex components, homology projections, and truncation projections; no Tor-amplitude criterion for quotient transitions.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Roos map one minus shift on the product of an epimorphic tower of module sheaves is an epimorphism",
+   "results": "Eight hits: LightCondensed product and limit epimorphisms, SequentialProduct.functorMap_epi, coherent-topology limit projections, and sheaf generating sections; no result for the normalized pro-etale reduction tower.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "towerTransitionEndomorphism|milnor.*epimorphic",
+   "results": "Zero Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicFiniteCompletionBounds",
+  "date": "2026-10-26",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof invocation of finite Tor dimension and the underlying limit of reductions; the degree-b endpoint step of the Stacks 09C2 argument used by AdicFiniteCompletionBounds.",
+   "via": [
+    "lem-sfb-adic-finite-completion-bounds",
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicFiniteTopRoosEpi",
+  "file": "lean/Sheaf/Paper/AdicFiniteTopRoosEpi.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicFiniteTop_roos_epi",
+  "statement": "theorem adicFiniteTop_roos_epi\n    (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)\n    (N : adicFiniteAmbient.{u, v} X A)\n    [HasProduct (adicFiniteUnderlying.{u, v} X J N)]\n    (a b : ℤ)\n    (hTor : HasCoefficientProEtaleTorAmplitude.{u, v} X (adicFiniteCoeff J 0)\n      (adicFiniteReduction.{u, v} X J N 0) a b) :\n    Epi ((coefficientModelCohomology\n      (constant (coefficientProEtaleModelTopology.{u, v} X) A) b).map\n        (towerTransitionEndomorphism (adicFiniteTransition.{u, v} X J N)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T111805-L-1732639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T121103-L-2749669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

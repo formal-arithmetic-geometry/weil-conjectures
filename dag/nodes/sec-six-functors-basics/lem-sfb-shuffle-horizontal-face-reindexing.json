@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-shuffle-horizontal-face-reindexing",
+ "kind": "statement",
+ "title": "Horizontal deleted-vertex reindexing of shuffle words with signs",
+ "statement": "For any set $S$, let $\\mathbf Z[S]$ be the free $\\mathbf Z$-module with basis $S$ [def-weil-pbc-free-module]; evaluated strings below can equivalently be read as basis symbols in the free module on strings of their length. Let $a,b\\geq0$, $n=a+b$, and let $W_{a,b}$ be the finite set of words $w_0\\cdots w_{n-1}$ with $a$ letters $H$ and $b$ letters $V$. Put $A_k(w)=\\#\\{r<k:w_r=H\\}$ and $B_k(w)=\\#\\{r<k:w_r=V\\}$ for $0\\leq k\\leq n$. Let $I(w)=\\#\\{(r,s):r<s,\\ w_r=V,\\ w_s=H\\}$ and $s(w)=(-1)^{I(w)}\\in\\mathbf Z$. For any sets $X,Y$ and sequences $u=(u_0,\\ldots,u_a)$ in $X$, $v=(v_0,\\ldots,v_b)$ in $Y$, write $z_{u,v}(w)=((u_{A_k(w)},v_{B_k(w)}))_{k=0}^n$ and let $d_k$ denote deletion of entry $k$ of a sequence. No distinctness of sequence entries is assumed.\n\nAssume $a>0$. Let $H_{a,b}$ consist of the labeled pairs $(w,k)$ with $w\\in W_{a,b}$ and either $k=0,w_0=H$, or $k=n,w_{n-1}=H$, or $0<k<n,w_{k-1}=w_k=H$. There is a bijection\n$$\\Phi_H:H_{a,b}\\xrightarrow{\\sim}\\{0,\\ldots,a\\}\\times W_{a-1,b}.$$\nAt an interior pair it is $(w,k)\\mapsto(i,\\bar w)$, where $i=A_k(w)$ and $\\bar w$ replaces the two neighboring $H$ letters by one; here $1\\leq i<a$. At $k=0$ it removes the initial $H$ and sets $i=0$; at $k=n$ it removes the terminal $H$ and sets $i=a$. Its inverse for $0<i<a$ splits the $i$-th $H$ of $\\bar w$ (counted from one) into two $H$ letters and marks the intervening vertex; for $i=0,a$ it prepends or appends $H$ and marks that endpoint, respectively. If $\\Phi_H(w,k)=(i,\\bar w)$, then\n$$d_kz_{u,v}(w)=z_{d_i u,v}(\\bar w),\\qquad s(w)(-1)^k=(-1)^i s(\\bar w).$$\nMore precisely, at an interior pair, $t=B_k(w)$ satisfies $k=i+t$ and $I(w)=I(\\bar w)+t$; at the initial endpoint $I(w)=I(\\bar w)$; at the terminal endpoint $I(w)=I(\\bar w)+b$ and $k=a+b$. These assertions include $a=1$ (only endpoint faces) and $b=0$. If $a=0$, the same labeled horizontal set is empty.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated combinatorial input, returned proof steps 4–5: interior horizontal collapse and both horizontal endpoints. Blueprint gives the application, not this combinatorial lemma. WANTED: Weibel, An Introduction to Homological Algebra, §8.5 (not available locally)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Define $\\Phi_H$ by the stated removals. Each removes exactly one $H$ and no $V$, so $\\bar w\\in W_{a-1,b}$. At an interior mark, the $H$ at position $k-1$ is counted by $A_k$ and the $H$ at position $k$ is not; thus $1\\leq i=A_k(w)\\leq a-1$. Endpoints have labels $0$ and $a$. Hence the map has the required codomain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only)."
+   }
+  },
+  {
+   "text": "For $0<i<a$, write $\\bar w=P H Q$ at its $i$-th $H$ (counted from one). Set $w=P H H Q$ and $k=|P|+1$. Then $0<k<n$, the neighboring letters are $H,H$, and $A_k(w)=i$ since $P$ has $i-1$ horizontal letters. Collapsing this pair returns $\\bar w$. Conversely, an interior pair has exactly $i-1$ horizontal letters before its first marked $H$, so splitting that $i$-th $H$ recovers both its word and its mark. Prepending/appending $H$ and marking $0/n$ are likewise inverse to the endpoint removals. The three label ranges $\\{0\\}$, $\\{1,\\ldots,a-1\\}$, $\\{a\\}$ are disjoint because $a>0$; these inverse identities prove bijectivity on labeled pairs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only)."
+   }
+  },
+  {
+   "text": "At an interior pair, for shorter-word vertex indices $0\\leq r<n$, direct prefix counting gives $(A_r(\\bar w),B_r(\\bar w))=(A_r(w),B_r(w))$ if $r<k$, and $(A_{r+1}(w)-1,B_{r+1}(w))$ if $r\\geq k$. In the first range $A_r(w)<i$; in the second $A_{r+1}(w)>i$, since the two marked horizontal steps straddle vertex $k$. The sequence $d_i u$ takes index $h$ to $u_h$ for $h<i$ and to $u_{h+1}$ for $h\\geq i$. Substituting the two prefix formulas shows that its evaluated vertex $r$ is the original vertex $r$ for $r<k$ and $r+1$ for $r\\geq k$, with the same vertical coordinate. This is exactly $d_k z_{u,v}(w)=z_{d_i u,v}(\\bar w)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only)."
+   }
+  },
+  {
+   "text": "At $k=0$, deleting the initial $H$ gives $(A_r(\\bar w),B_r(\\bar w))=(A_{r+1}(w)-1,B_{r+1}(w))$ for $0\\leq r<n$. Since $(d_0u)_h=u_{h+1}$, these are precisely the original vertices $1,\\ldots,n$. At $k=n$, removal of the terminal $H$ leaves $(A_r,B_r)$ unchanged for $0\\leq r<n$, and $A_r(w)\\leq a-1$ there, so $(d_a u)_{A_r(w)}=u_{A_r(w)}$. These are precisely vertices $0,\\ldots,n-1$. Thus the evaluated-sequence identity also holds at both endpoints.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only)."
+   }
+  },
+  {
+   "text": "For an interior collapse, regard the removed letter as the second of the two adjacent $H$ letters, at position $k$. The retained letters have the same relative order, so their inversion pairs correspond bijectively to those of $\\bar w$. The inversion pairs lost are exactly those whose second letter is this removed $H$ and whose first letter is an earlier $V$; there are $t=B_k(w)$ of them. Therefore $I(w)=I(\\bar w)+t$. Partitioning the first $k$ letters into horizontal and vertical letters gives $k=A_k(w)+B_k(w)=i+t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only)."
+   }
+  },
+  {
+   "text": "Removing an initial $H$ loses no inversion: no $V$ precedes it, and an $H$ cannot be the first letter of a $V,H$ inversion. Removing a terminal $H$ loses exactly $b$ inversions, one for each $V$. All retained inversion pairs preserve their order as before. Thus $I(w)=I(\\bar w)$ initially and $I(w)=I(\\bar w)+b$ terminally, where $k=n=a+b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only)."
+   }
+  },
+  {
+   "text": "In the interior the preceding formulas yield $s(w)(-1)^k=(-1)^{I(\\bar w)+t+i+t}=(-1)^i s(\\bar w)$ because $(-1)^{2t}=1$. Initially $k=i=0$ and the inversion counts agree. Terminally $i=a$ and $I(w)+k=I(\\bar w)+b+a+b=I(\\bar w)+a+2b$, giving the same sign formula. These are identities of integer powers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only)."
+   }
+  },
+  {
+   "text": "When $a=1$ no interior pair is possible, since it would require two horizontal letters; the inverse construction has only the two endpoint labels and works even when $b=0$. When $b=0$ all vertical prefix counts and inversion counts are zero, and the same formulas still apply (the unique shorter word may be empty). When $a=0$ there is no horizontal letter, so none of the horizontal marking conditions can hold; for the empty word there is no endpoint letter either. All sequence equalities above compare indices before evaluating $u$ and $v$, so repeated entries cause no identification of labeled pairs. Equal strings also determine equal basis symbols in the free module of [def-weil-pbc-free-module]; its statement gives uniqueness of finite basis expansions, without imposing distinctness on the entries within a basis string.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), universal shuffle input below the open direct-image argument; agent-written horizontal-face calculation (the blueprint states the application only). Explicit counting proof supplied by Q156; no assertion is attributed to unavailable Weibel."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal faces of a shuffle lattice path are bijective with a horizontal input face and a shorter shuffle; collapsing HH removes the number of preceding vertical inversions and gives the horizontal face sign",
+   "results": "{\"t\": \"2026-10-22T06:09:16Z\", \"tool\": \"leanfinder\", \"query\": \"Horizontal faces of a shuffle lattice path are bijective with a horizontal input face and a shorter shuffle; collapsing HH removes the number of preceding vertical inversions and gives the horizontal face sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.standardσ_simplicialInsert\", \"SimplexCategoryGenRel.lt_and_eval_eq_eval_add_one_of_mem_isAdmissible\", \"SimplexCategoryGenRel.IsAdmissible.simplicialEvalσ_succ_getElem\", \"SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible\", \"SimplexCategoryGenRel.exists_normal_form_P_σ\", \"SimplexCategoryGenRel.standardσ_cons\", \"SimplexCategoryGenRel.mem_isAdmissible_iff\", \"SSet.Path.arrow_interval\"], \"digest\": \"9ddf2e449fea7c96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplex-category degeneracy normal forms and simplicial face relations do not state the horizontal labeled-pair bijection, its endpoint cases, or its inversion and coefficient formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shuffle\", \"face\"",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"shuffle\\\", \\\"face\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplex-category degeneracy normal forms and simplicial face relations do not state the horizontal labeled-pair bijection, its endpoint cases, or its inversion and coefficient formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle.*(face|bound)|horizontal.*(face|inversion)",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"grep\", \"query\": \"shuffle.*(face|bound)|horizontal.*(face|inversion)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplex-category degeneracy normal forms and simplicial face relations do not state the horizontal labeled-pair bijection, its endpoint cases, or its inversion and coefficient formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Collapsing two horizontal steps or removing an endpoint horizontal step reindexes signed shuffle path faces",
+   "results": "{\"t\": \"2026-10-22T06:09:05Z\", \"tool\": \"leansearch\", \"query\": \"Collapsing two horizontal steps or removing an endpoint horizontal step reindexes signed shuffle path faces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Affine.Simplex.signedInfDist_reindex\", \"Affine.Simplex.range_face_reindex\", \"CategoryTheory.ComposableArrows.fourδ₄Toδ₃\", \"Affine.Simplex.range_faceOpposite_reindex\", \"Affine.Simplex.touchpointWeights_reindex\", \"Affine.Simplex.faceOppositeCentroid_reindex\", \"SSet.δ_comp_δ_apply\", \"FreeSimplexQuiver.homRel.δ_comp_δ\"], \"digest\": \"17e3a013d95a5f1c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplex-category degeneracy normal forms and simplicial face relations do not state the horizontal labeled-pair bijection, its endpoint cases, or its inversion and coefficient formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle.*(face|bound)|horizontal.*(face|inversion)",
+   "results": "{\"t\": \"2026-10-23T09:54:37Z\", \"tool\": \"grep\", \"query\": \"shuffle.*(face|bound)|horizontal.*(face|inversion)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no matching shuffle-face identity; the broader Combinatorics search returns quiver reversal and incidence-algebra Möbius inversion, which concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deleting a horizontal vertex in a shuffle path gives the shuffle of the corresponding deleted input sequence with the sign of that input face",
+   "results": "{\"t\": \"2026-10-23T09:54:37Z\", \"tool\": \"leansearch\", \"query\": \"Deleting a horizontal vertex in a shuffle path gives the shuffle of the corresponding deleted input sequence with the sign of that input face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Path.map_vertex\", \"SimpleGraph.Subgraph.deleteVerts_deleteVerts\", \"SimpleGraph.Walk.drop_zero\", \"SimpleGraph.Walk.toDeleteEdges_copy\", \"SSet.Truncated.Path.vertex\", \"SimpleGraph.Walk.toDeleteEdges_cons\", \"SimpleGraph.Subgraph.deleteEdges_deleteEdges\", \"SimpleGraph.Walk.toDeleteEdges_nil\"], \"digest\": \"8e44b77168ba2adf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: simplicial path restrictions, simplex degeneracy normal forms and graph deletions do not state the marked horizontal shuffle-face bijection with inversion counts and endpoint signs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shuffle\", \"face\"",
+   "results": "{\"t\": \"2026-10-23T09:54:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"shuffle\\\", \\\"face\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no hits for shuffle and face together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Collapsing a pair of adjacent horizontal steps in a shuffle lattice path bijects horizontal deleted vertices with a shorter shuffle and a horizontal face, preserving the boundary signs",
+   "results": "{\"t\": \"2026-10-23T09:54:47Z\", \"tool\": \"leanfinder\", \"query\": \"Collapsing a pair of adjacent horizontal steps in a shuffle lattice path bijects horizontal deleted vertices with a shorter shuffle and a horizontal face, preserving the boundary signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Path.arrow_interval\", \"SimplexCategoryGenRel.standardσ_simplicialInsert\", \"SSet.StrictSegalCore.spineToSimplex_succ\", \"SimplexCategoryGenRel.standardσ_cons\", \"SSet.StrictSegal.spineToSimplex_interval\", \"SSet.Path.interval\", \"SSet.spine_map_subinterval\", \"SimplexCategoryGenRel.IsAdmissible.simplicialEvalσ_succ_getElem\"], \"digest\": \"1022eb971c62cc55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: simplicial path restrictions, simplex degeneracy normal forms and graph deletions do not state the marked horizontal shuffle-face bijection with inversion counts and endpoint signs."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|inversion|invNum",
+   "results": "{\"t\": \"2026-10-23T09:55:24Z\", \"tool\": \"grep\", \"query\": \"shuffle|inversion|invNum\", \"sub\": \"Combinatorics\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Quiver/Path.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\", \"Mathlib/Combinatorics/Enumerative/IncidenceAlgebra.lean\"], \"digest\": \"208f658b19f94f8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no matching shuffle-face identity; the broader Combinatorics search returns quiver reversal and incidence-algebra Möbius inversion, which concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Words with a fixed number of two letters: deleting one of two adjacent equal letters gives a bijection of marked paths and an inversion count sign formula",
+   "results": "{\"t\": \"2026-10-23T09:55:31Z\", \"tool\": \"leanfinder\", \"query\": \"Words with a fixed number of two letters: deleting one of two adjacent equal letters gives a bijection of marked paths and an inversion count sign formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.wordProd_mul_getD_rightInvSeq\", \"CoxeterSystem.getD_leftInvSeq_mul_wordProd\", \"CoxeterSystem.alternatingWord\", \"DyckWord.denest_nest\", \"CoxeterSystem.getD_rightInvSeq\", \"CoxeterSystem.getElem_leftInvSeq_alternatingWord\", \"CoxeterSystem.getD_leftInvSeq\"], \"digest\": \"24598933c07dfdeb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Coxeter group word products/inverse sequences and Dyck-word nesting do not state this marked shuffle-word bijection or its sign and coordinate formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simplex-lattice-shuffle-boundary",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), universal shuffle input: returned proof steps 4–5: interior horizontal collapse and both horizontal endpoints. Nearest imported ancestor is null, inherited from the assigned item.",
+   "via": [
+    "lem-sfb-simplex-lattice-shuffle-boundary",
+    "lem-sfb-bicosimplicial-shuffle-totalization",
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-shuffle-horizontal-face-reindexing",
+  "worker": "stage1",
+  "group": "Q156",
+  "summary": "Preserved the complete statement and all inherited metadata. Supplied eight elementary counting steps: well-definedness, both inverse identities, explicit prefix counts for interior and endpoint deletion, inversion-pair counts, integer signs, and all small cases including repeated entries. No new node or non-elementary input is needed. Re-searched the project, blueprint and Mathlib, with queries recorded verbatim.",
+  "blueprint": "Latest blueprint direct-images proof paragraph (3) gives the open direct-image application, not the combinatorial lemma. This is the horizontal-face calculation in the inherited universal shuffle input (parent split steps 4–5), with nearest imported ancestor null as reported by blueprint_refs.py ancestor. Whole-blueprint searches for shuffle and horizontal face found no same-as node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-1c6ebc746",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-1c6ebc746 (reviewer sub-agent of L); spot-checked: I read the whole delivery and made no changes. Shape: an ordinary first split of a statement node that Q102 created, with no new nodes. There is no repair note, so the re-split rule does not apply. The item is still unsplit in live and side-live. Against the base copy only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed; the statement and stmt_deps are byte-identical. proof_deps equals the union of the step uses ({def-weil-pbc-free-module}, a Mathlib-leaf definition), and no step mentions SGA. Source: paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md is the same file in main-20261015 and latest. It gives only the direct-image application, so proof_origin=agent is correct. I re-derived all 8 steps. Steps 1-2: well-definedness, 1<=i<a for interior pairs, and the inverse that splits the i-th H at k=|P|+1. Steps 3-4: prefix counts (A_r<i before the mark, A_{r+1}>i after it, d_0 and d_a at the endpoints), which give d_k z(w)=z(d_i u,v)(w-bar). Steps 5-6: the inversions lost are t=B_k in the interior, none initially and b terminally, with k=i+t. Step 7: the parity arithmetic. Step 8: the edge cases a=1, b=0 and a=0. My own brute-force script (/tmp/q156chk/c.py) checked, for 1<=a<=6 and 0<=b<=6, the bijection, every count, the evaluated-string identity and the sign, with 0 failures. The item's I(w) matches the parent's sign eps(mu,nu) in lem-sfb-simplex-lattice-shuffle-boundary step 3, which uses exactly the bijection, the evaluated-string identity and the coefficient (-1)^i s(w-bar). Duplicate search over the DAG: the vertical and mixed-corner companions, cubical-partition-boundary-expansion and the categorical shuffle nodes all differ, so same_as=[] stands. The ten recorded Mathlib searches cover LeanSearch, LeanFinder, Loogle and grep. Advisory only: the step sources point at the latest symlink rather than main-20261015, but the files are identical. No tool_uses are declared."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ShuffleHorizontalFaceReindexing",
+  "declaration": "AlgebraicTopology.ShuffleHorizontalFace.horizontal_face_reindexing",
+  "declarations": [
+   "AlgebraicTopology.ShuffleHorizontalFace.Word",
+   "AlgebraicTopology.ShuffleHorizontalFace.horizontalCount",
+   "AlgebraicTopology.ShuffleHorizontalFace.verticalCount",
+   "AlgebraicTopology.ShuffleHorizontalFace.inversions",
+   "AlgebraicTopology.ShuffleHorizontalFace.sign",
+   "AlgebraicTopology.ShuffleHorizontalFace.HorizontalFace",
+   "AlgebraicTopology.ShuffleHorizontalFace.evaluate",
+   "AlgebraicTopology.ShuffleHorizontalFace.horizontal_face_reindexing"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ShuffleHorizontalFaceReindexing.lean",
+  "statement": "theorem horizontal_face_reindexing (a b : ℕ) : IsEmpty (HorizontalFace 0 b) ∧ ∃ Φ : HorizontalFace (a + 1) b ≃ Fin (a + 2) × Word a b, (∀ p : HorizontalFace (a + 1) b, (Φ p).1.val = horizontalCount p.val.1 p.val.2 ∧ (Φ p).2.val = p.val.1.val.eraseIdx (min p.val.2 (a + 1 + b - 1)) ∧ (0 < p.val.2 ∧ p.val.2 < a + 1 + b → 1 ≤ (Φ p).1.val ∧ (Φ p).1.val < a + 1 ∧ p.val.2 = (Φ p).1.val + verticalCount p.val.1 p.val.2 ∧ inversions p.val.1 = inversions (Φ p).2 + verticalCount p.val.1 p.val.2) ∧ (p.val.2 = 0 → (Φ p).1.val = 0 ∧ inversions p.val.1 = inversions (Φ p).2) ∧ (p.val.2 = a + 1 + b → (Φ p).1.val = a + 1 ∧ inversions p.val.1 = inversions (Φ p).2 + b) ∧ sign p.val.1 * (-1 : ℤ) ^ p.val.2 = (-1 : ℤ) ^ (Φ p).1.val * sign (Φ p).2) ∧ (∀ q : Fin (a + 2) × Word a b, (q.1.val = 0 → (Φ.symm q).val.1.val = false :: q.2.val ∧ (Φ.symm q).val.2 = 0) ∧ (q.1.val = a + 1 → (Φ.symm q).val.1.val = q.2.val ++ [false] ∧ (Φ.symm q).val.2 = a + 1 + b) ∧ (0 < q.1.val ∧ q.1.val < a + 1 → ∃ P Q : List Bool, q.2.val = P ++ false :: Q ∧ P.count false + 1 = q.1.val ∧ (Φ.symm q).val.1.val = P ++ false :: false :: Q ∧ (Φ.symm q).val.2 = P.length + 1)) ∧ (∀ (X : Type u) (Y : Type v) (x : Fin (a + 1 + 1) → X) (y : Fin (b + 1) → Y) (p : HorizontalFace (a + 1) b), (evaluate p.val.1 x y).eraseIdx p.val.2 = evaluate (Φ p).2 (Fin.removeNth (Φ p).1 x) y ∧ Finsupp.single ((evaluate p.val.1 x y).eraseIdx p.val.2) (1 : ℤ) = Finsupp.single (evaluate (Φ p).2 (Fin.removeNth (Φ p).1 x) y) (1 : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Literal H/V words (false/true), prefix counts, labeled horizontal faces, and evaluation are helpers for the notions introduced by this node. The theorem packages zero-degree emptiness and the positive-degree bijection, both forward and inverse word formulas, all inversion/sign formulas, and equality of evaluated strings and their free integral basis symbols. The theorem parameter a is the shorter horizontal degree, so its positive degree a+1 covers exactly the hypothesis of the node. No downstream lattice-path theorem is imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c7297f38",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Only the item's lean field changed vs side-live; lean.statement is verbatim in the file. Every node clause matches the Lean: Word, prefix counts, inversions, integer sign, HorizontalFace (Option tests correct on the empty word), forward map fully specified (label = A_k, word = eraseIdx(min k (n-1))), both endpoint inverses and the interior i-th-H split, interior/endpoint inversion formulas, sign identity, d_k z = z(removeNth i x, y) for arbitrary X:Type u, Y:Type v, and the Finsupp basis-symbol clause. a>0 rendered as degree a+1; a=0 clause is IsEmpty(HorizontalFace 0 b). Brute force of the Lean encodings for Lean a,b in 0..4: 0 failures. No hollow defs, proof is sorry only, docstrings and 8-step proof present, Mathlib-only imports. Local Word helpers are justified (downstream LatticePath would make a dependency cycle). Advisory: vertical-face sibling should reuse these defs. No compile run, no change made."
+ }
+}

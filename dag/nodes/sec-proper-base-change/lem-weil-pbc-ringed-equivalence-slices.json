@@ -12,22 +12,23 @@
  ],
  "proof": [
   {
-   "text": "Apply e.inverse to objects and arrows over A. The inverse on over-categories applies e.direct and uses the invertible adjunction unit to identify e.direct(e.inverse(A)) with A. The original unit and counit give the slice equivalence. Conjugate with the given element-site fibre equivalences. Finite-product comparisons identify the restricted ring, and the image of e.ringMap is the invertible structural map. The fibre comparison gives q and its displayed structural identity.",
+   "text": "Use the Mathlib equivalence of Over.post(e.inverse), conjugated by the supplied fibre equivalences. Identify product-over-A followed by the fibre inverse with elementSheafPullback A, and use the finite-product comparison of e.inverse to construct q. Conjugate the generalized-element ring operations along q and restrict e.ringMap; this constructs the ring data, its invertible structural map, and the required structural equation.",
    "uses": [
     "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-    "def-weil-pbc-ringed-topos-morphism"
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-pbc-ringed-topos-ring-data"
    ],
    "elementary": false
   },
   {
-   "text": "Construct the induced module direct images from these geometric ring data. Both routes around a module restriction square have the same set-sheaf functor and scalar action, by the structural identity. The fibre comparison and its inverse are therefore linear and natural. For B→A the same argument uses the fibre product over A and gives the further-restriction square.",
+   "text": "Apply ringData_inducedModules to the explicitly constructed geometric ring data to supply the induced module direct-image functor and its underlying and linearity comparisons. For any specified module equivalence with this inverse, compose its invertible adjunction unit with the underlying-direct-image comparison and the geometric counit. The resulting set-sheaf comparison preserves addition and scalar multiplication by module_linear.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "lem-weil-pbc-ringed-topos-induced-modules"
    ],
    "elementary": false
   },
   {
-   "text": "The module functor in any supplied presentation package has inverse naturally isomorphic to the induced module direct image. Uniqueness of left adjoints transports the constructed module comparisons to those supplied functors. This proves the quantified assertion for all whole and slice packages and every continuous further restriction.",
+   "text": "A structurally compatible square of inverse-image functors transports these additive and scalar-action equations across its natural isomorphism. Lift the resulting sectionwise bijections to natural module isomorphisms. Apply this first to q and the element projections. For further restriction use the fibre-of-pullback isomorphism, preservation of pullbacks by e.inverse, and the same construction. The product/fibre comparisons commute with further restriction, so the displayed ring equation holds for the further square as well.",
    "uses": [],
    "elementary": true
   }
@@ -35,12 +36,13 @@
  "proof_deps": [
   "lem-weil-pbc-ringed-sheaf-slice-adjunction",
   "def-weil-pbc-ringed-topos-morphism",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "def-weil-pbc-ringed-topos-ring-data",
+  "lem-weil-pbc-ringed-topos-induced-modules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 04IE and 04J4, applied to an equivalence; explicit comparison argument of the original nine-step presentation-transport proof"
+  "place": "Tags 04IE and 04J4; J1 explicit product, fibre, pullback and module-operation comparison proof"
  },
  "mathlib_searches": [
   {
@@ -115,14 +117,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "C-1ea02",
-  "group": "Z5",
+  "reviewer": "COMPILER",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261020T221408-L-4183112",
+  "landing": "20261023T231547-L-3617346",
   "kind": "interface",
-  "note": "independent cc review: the 16 moved declarations in RingedPresentationData against the published item module (byte-identical, re-exported); the 4 new sorry statements against their nodes and the published structure fields; the item assembly against node lem-weil-pbc-ringed-presentation-transport; importer RingedPushforwardCompletion compiled against the delivery"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

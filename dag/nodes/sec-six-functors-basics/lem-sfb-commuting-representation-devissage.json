@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-commuting-representation-devissage",
+ "kind": "statement",
+ "title": "Dimension devissage for commuting ell-adic representations",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and a finite intermediate field $E$ with its $\\ell$-adic norm topology [def-weil-l-adic-coefficient-extension]. Let $r\\geq0$ and let $L=\\mathbf Z_\\ell^r$ with its inverse-limit topology. A representation here means a finite-dimensional $E$-vector space $W$ with its usual norm topology and a jointly continuous $E$-linear action of $L$ [def-pod-l-adic-representations]. Write $T_i(W)$ for the action of $1$ in the $i$th factor, for $1\\leq i\\leq r$. Let $P$ be a property of these representations invariant under equivariant $E$-linear isomorphisms. Suppose:\n(i) $P(W)$ holds for every trivial representation, including $W=0$;\n(ii) $P(W)$ holds whenever $T_i(W)-\\mathrm{id}_W$ is invertible for at least one $i$;\n(iii) for every $L$-stable subspace $U\\subseteq W$, with the induced continuous representations on $U$ and $W/U$, the implication $P(U)\\ \\text{and}\\ P(W/U)\\Rightarrow P(W)$ holds.\nThen $P(W)$ holds for every such continuous representation $W$. This includes $r=0$, when the family of operators is empty.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice analytic input; agent expansion, returned comparison proof step 6: strong dimension induction through kernels of commuting generator differences. Agent-formulated extraction; not asserted to be a theorem stated in the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pod-l-adic-representations",
+  "def-sfb-ladic-lattice"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved Representation.continuousCoefficient_subquotients (lem-sfb-continuous-representation-subquotients) to obtain, for any stable submodule, the induced continuous actions on it and its actual quotient, with equivariant subtype and quotient maps. No choice of a vector-space model is needed.",
+   "uses": [
+    "lem-sfb-continuous-representation-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: commuting-representation dimension induction, step 1"
+   }
+  },
+  {
+   "text": "Apply strong induction to the finite dimension, simultaneously for every coefficient representation on every space in the given universe. First discharge the case of an invertible generator difference using hypothesis (ii).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: commuting-representation dimension induction, step 2"
+   }
+  },
+  {
+   "text": "If every generator difference vanishes, every standard generator acts as the identity. For one coordinate, integer multiples of the generator act trivially by the homomorphism power law. PadicInt.denseRange_intCast and the closed equalizer of the continuous orbit map with the constant vector then show every p-adic multiple acts trivially. Pi.single_induction decomposes any finite tuple as a sum of its single-coordinate tuples, so the entire lattice acts trivially. Hypothesis (i) applies. This includes rank zero and the zero vector space.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: commuting-representation dimension induction, step 3"
+   }
+  },
+  {
+   "text": "In the remaining case choose a nonzero singular generator difference A. Set U = ker A. LinearMap.isUnit_iff_ker_eq_bot proves U is nonzero, and nonzeroness of A proves U is proper. For every g, commutativity of the lattice gives T_i rho(g) v = rho(g) T_i v, so U is stable under the action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: commuting-representation dimension induction, step 4"
+   }
+  },
+  {
+   "text": "Submodule.finrank_lt gives dim U < dim V from properness. Nonzeroness of U gives dim U > 0 using Submodule.finrank_eq_zero, and Submodule.finrank_quotient_add_finrank therefore gives dim(V/U) < dim V. These are direct finite-dimensional Mathlib interfaces; an explicit extended basis is unnecessary.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: commuting-representation dimension induction, step 5"
+   }
+  },
+  {
+   "text": "Apply the subquotient interface from step 1 to U. The strong induction hypothesis gives P for each of its two continuous representations, since their dimensions are smaller. Hypothesis (iii), with the supplied equivariant canonical maps, gives P for V. The actual subspace and quotient are used, so equivariant-isomorphism invariance is not required by this proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion: commuting-representation dimension induction, step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-representation-subquotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), original agent extraction, formalized by W7 using coordinatewise p-adic density, the proved continuous subquotient interface, and strong dimension induction through a nonzero proper kernel. The current blueprint paragraph motivates the application but does not state this extraction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A property of finite dimensional continuous Z_l power r representations closed under extensions holds for all representations if it holds for trivial representations and whenever a generator minus identity is invertible",
+   "results": "8 hits: Rep.instProjective, FDRep.instProjectiveOfNeZeroCastCard, Hausdorffification.induction_on, Rep.instEnoughProjectives, Rep.FiniteCyclicGroup.moduleCatChainComplex, FDRep.instLargeCategory, Rep.FiniteCyclicGroup.subCompNormHom, groupHomology.H0_induction_on",
+   "date": "2026-10-22",
+   "verdict": "no match: kernel stabilization, finite-group projectivity and induction on quotient elements do not state this extension-closed representation criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong induction on dimension using nonzero proper kernels of commuting linear operators proves a property closed under short exact sequences from trivial and invertible operator cases",
+   "results": "8 hits: Module.End.exists_ker_pow_eq_ker_pow_succ, LinearMap.eventually_isCompl_ker_pow_range_pow, RingTheory.Sequence.IsRegular.ndrecIterModByRegularWithRing, RingTheory.Sequence.IsWeaklyRegular.ndrecWithRing, RingTheory.Sequence.IsWeaklyRegular.ndrecIterModByRegular, RingTheory.Sequence.IsWeaklyRegular.recIterModByRegular, RingTheory.Sequence.IsRegular.recIterModByRegular, RingTheory.Sequence.IsRegular.recIterModByRegularWithRing",
+   "date": "2026-10-22",
+   "verdict": "no match: kernel stabilization, finite-group projectivity and induction on quotient elements do not state this extension-closed representation criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"induction\"",
+   "results": "1 hits: Representation.Coinvariants.induction_on",
+   "date": "2026-10-22",
+   "verdict": "no match: kernel stabilization, finite-group projectivity and induction on quotient elements do not state this extension-closed representation criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "(devissage|dévissage|induct).*representation|representation.*(devissage|dévissage|induct)",
+   "results": "5 hits: Mathlib/Data/Num/Basic.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: kernel stabilization, finite-group projectivity and induction on quotient elements do not state this extension-closed representation criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Devissage for commuting continuous group representations using invariant kernel of a singular generator minus identity",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"induction\"",
+   "results": "{\"t\": \"2026-10-23T04:07:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Representation\\\", \\\"induction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Representation.Coinvariants.induction_on\"], \"digest\": \"7436708fd8862488\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits concern coinvariants, finite-group projectives, kernel stabilization or generalized eigenspaces; the padic-density grep supplies only a related elementary input, not the representation criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induction on dimension for commuting continuous representations using invariant kernels of generator differences",
+   "results": "{\"t\": \"2026-10-23T04:07:42Z\", \"tool\": \"leansearch\", \"query\": \"Induction on dimension for commuting continuous representations using invariant kernels of generator differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.Coinvariants.induction_on\", \"ContinuousCohomology.MultiInd.functor\", \"Representation.invariants\", \"Representation.Coinvariants.ker\", \"ContinuousCohomology.MultiInd.d\", \"Representation.Coinvariants.le_comap_ker\", \"Module.End.exists_ker_pow_eq_ker_pow_succ\", \"Representation.Coinvariants.mem_ker_of_eq\"], \"digest\": \"d83813af97749b50\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits concern coinvariants, finite-group projectives, kernel stabilization or generalized eigenspaces; the padic-density grep supplies only a related elementary input, not the representation criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "(devissage|dévissage|induct).*representation|representation.*(devissage|dévissage|induct)",
+   "results": "{\"t\": \"2026-10-23T04:07:42Z\", \"tool\": \"grep\", \"query\": \"(devissage|dévissage|induct).*representation|representation.*(devissage|dévissage|induct)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/Data/Num/Basic.lean\", \"Mathlib/RepresentationTheory/Continuous/Basic.lean\"], \"digest\": \"916717a78e39f472\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits concern coinvariants, finite-group projectives, kernel stabilization or generalized eigenspaces; the padic-density grep supplies only a related elementary input, not the representation criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A property of finite dimensional continuous representations of Z_p power r closed under extensions holds for all representations if it holds for trivial representations and those with an invertible generator minus identity",
+   "results": "{\"t\": \"2026-10-23T04:07:49Z\", \"tool\": \"leanfinder\", \"query\": \"A property of finite dimensional continuous representations of Z_p power r closed under extensions holds for all representations if it holds for trivial representations and those with an invertible generator minus identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instEnoughProjectives\", \"Representation.Coinvariants.induction_on\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"Rep.instProjective\", \"groupHomology.H0_induction_on\", \"Hausdorffification.induction_on\", \"FDRep.instLargeCategory\", \"Rep.free_projective\"], \"digest\": \"80e5dceabb5f1f9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits concern coinvariants, finite-group projectives, kernel stabilization or generalized eigenspaces; the padic-density grep supplies only a related elementary input, not the representation criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong induction on finite dimension through kernels of commuting linear endomorphisms for a property stable under extensions",
+   "results": "{\"t\": \"2026-10-23T04:09:02Z\", \"tool\": \"leanfinder\", \"query\": \"Strong induction on finite dimension through kernels of commuting linear endomorphisms for a property stable under extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_ker_pow_eq_ker_pow_succ\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute\", \"LinearMap.exists_isNilRegular_of_finrank_le_card\", \"Module.End.ker_pow_eq_ker_pow_finrank_of_le\", \"Module.End.ker_pow_le_ker_pow_finrank\", \"LinearMap.exists_isNilRegular\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_forall_mapsTo\", \"Module.End.IsFinitelySemisimple\"], \"digest\": \"592c141c50aa5a31\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits concern coinvariants, finite-group projectives, kernel stabilization or generalized eigenspaces; the padic-density grep supplies only a related elementary input, not the representation criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "denseRange|dense.*[Ii]nt|dense.*[Nn]at",
+   "results": "{\"t\": \"2026-10-23T04:09:40Z\", \"tool\": \"grep\", \"query\": \"denseRange|dense.*[Ii]nt|dense.*[Nn]at\", \"sub\": \"NumberTheory/Padics\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/NumberTheory/Padics/WithVal.lean\", \"Mathlib/NumberTheory/Padics/WithVal.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\"], \"digest\": \"bcef8ad4913e0622\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits concern coinvariants, finite-group projectives, kernel stabilization or generalized eigenspaces; the padic-density grep supplies only a related elementary input, not the representation criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dense-lattice-derived-invariants-comparison",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Paragraph (3), open-immersion direct-image finiteness: auxiliary dense-lattice comparison, dimension induction through kernels of commuting generator differences.",
+   "via": [
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-commuting-representation-devissage",
+  "worker": "stage1",
+  "summary": "Proved the criterion by strong dimension induction, with an explicit density argument for the trivial-generator case, kernel stability under the entire abelian group, strict dimension drops from basis extension, and explicit jointly continuous subspace/quotient actions. Reused existing Mathlib leaves; created no new nodes. Statement unchanged. Corrected the broken blueprint ancestor metadata using the recorded source and the existing ancestor node.",
+  "blueprint": "Realizes the auxiliary commuting-representation devissage in the dense-lattice input to paragraph (3) of det-thm-sf-ctf-stability-direct-images; the original paragraph invokes open-image finiteness and does not itself state the extracted lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-77eff6f08",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-77eff6f08 (reviewer sub-agent of L); spot-checked: Read in full: the item (6 steps), every cited node statement (stmt_deps: def-weil-l-adic-coefficient-extension, def-pod-l-adic-representations; proof_deps: the Mathlib leaves lem-weil-l-adic-extension-complete, lem-weil-pbc-vector-space-basis-through-vector, lem-sfb-finite-dimensional-linear-map-continuous), the caller lem-sfb-dense-lattice-derived-invariants-comparison, and paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md. The item is honestly an agent extraction (proof_origin.by=agent); there is no SGA citation and no re-split note. The delivery creates no new nodes, and the statement and stmt_deps are unchanged. The statement is true. I tested it on W=0, r=0, 1-dimensional characters, a 2x2 unipotent block (needs (iii)), diag(1,a) and two generators with T1=id. The coefficient category matches def-pod (2). Step 1: completeness and nontriviality (|ℓ|=ℓ^-1) meet the hypotheses of the linear-continuity node; the subspace topology agrees with the norm topology via both directions of a basis map; the quotient action q(ρ(g)s(x)) is continuous and independent of the section. Step 3: density of Z^r in Z_ℓ^r and closed orbit equalizers make the action trivial (elementary). Step 5: if A_i were injective, basis extension would make it invertible, so ker A_i is proper and nonzero; commutativity makes it stable under all of L. Steps 2, 4 and 6: the strong induction is explicit and non-circular, and the case split is exhaustive. proof_deps equals the union of the step uses. Setting blueprint.from to det-thm-sf-ctf-stability-direct-images is a valid provenance repair. No duplicate found by rg -L. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CommutingRepresentationDevissage",
+  "declaration": "Representation.commuting_representation_devissage",
+  "file": "lean/Sheaf/RepresentationTheory/CommutingRepresentationDevissage.lean",
+  "statement": "theorem commuting_representation_devissage (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (E : IntermediateField ℚ_[l] Ω) [FiniteDimensional ℚ_[l] E] (r : ℕ) (P : ∀ (V : Type w) [AddCommGroup V] [Module E V], (Lattice.{0} l r →* (V ≃ₗ[E] V)) → Prop) (hiso : ∀ (V W : Type w) [AddCommGroup V] [Module E V] [AddCommGroup W] [Module E W] (ρ : Lattice.{0} l r →* (V ≃ₗ[E] V)) (σ : Lattice.{0} l r →* (W ≃ₗ[E] W)), IsContinuousCoefficient l E (ProfiniteGrp.of (Lattice.{0} l r)) V ρ → IsContinuousCoefficient l E (ProfiniteGrp.of (Lattice.{0} l r)) W σ → ∀ e : V ≃ₗ[E] W, IsEquivariant E (Lattice.{0} l r) V W ρ σ e.toLinearMap → (P V ρ ↔ P W σ)) (htrivial : ∀ (V : Type w) [AddCommGroup V] [Module E V] (ρ : Lattice.{0} l r →* (V ≃ₗ[E] V)), IsContinuousCoefficient l E (ProfiniteGrp.of (Lattice.{0} l r)) V ρ → (∀ (g : Lattice.{0} l r) (v : V), ρ g v = v) → P V ρ) (hinvertible : ∀ (V : Type w) [AddCommGroup V] [Module E V] (ρ : Lattice.{0} l r →* (V ≃ₗ[E] V)), IsContinuousCoefficient l E (ProfiniteGrp.of (Lattice.{0} l r)) V ρ → (∃ i : Fin r, IsUnit ((ρ (Multiplicative.ofAdd ⟨Pi.single i (1 : ℤ_[l])⟩)).toLinearMap - LinearMap.id)) → P V ρ) (hext : ∀ (V : Type w) [AddCommGroup V] [Module E V] (ρ : Lattice.{0} l r →* (V ≃ₗ[E] V)), IsContinuousCoefficient l E (ProfiniteGrp.of (Lattice.{0} l r)) V ρ → ∀ (U : Submodule E V) (_hU : ∀ (g : Lattice.{0} l r) (v : V), v ∈ U → ρ g v ∈ U) (τ : Lattice.{0} l r →* (U ≃ₗ[E] U)) (κ : Lattice.{0} l r →* ((V ⧸ U) ≃ₗ[E] (V ⧸ U))), IsContinuousCoefficient l E (ProfiniteGrp.of (Lattice.{0} l r)) U τ → IsContinuousCoefficient l E (ProfiniteGrp.of (Lattice.{0} l r)) (V ⧸ U) κ → IsEquivariant E (Lattice.{0} l r) U V τ ρ U.subtype → IsEquivariant E (Lattice.{0} l r) V (V ⧸ U) ρ κ U.mkQ → P U τ → P (V ⧸ U) κ → P V ρ) (W : Type w) [AddCommGroup W] [Module E W] (ρ : Lattice.{0} l r →* (W ≃ₗ[E] W)) (hW : IsContinuousCoefficient l E (ProfiniteGrp.of (Lattice.{0} l r)) W ρ) : P W ρ",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60cac3a87",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Delta vs live: only the lean record plus the added landed def-node stmt_dep def-sfb-ladic-lattice (its Lattice is used); lean.statement verbatim. All clauses match: E via spectral-norm IsContinuousCoefficient, L = Lattice.{0} l r with product (= inverse-limit) topology via ProfiniteGrp.of, T_i = ofAdd ⟨Pi.single i 1⟩ (not the identity), hiso for equivariant E-isos, (i) all trivial actions incl. 0, (ii) IsUnit(T_i - id), (iii) every stable Submodule with the actual quotient and τ/κ pinned by subtype/mkQ equivariance (continuity antecedents hold by continuousCoefficient_subquotients, so not stronger). Edge cases r=0, W=0, U=0/V and universes (w free) checked. Docstrings carry source, blueprint tag and 6-step plan; sorry only; no defs; no duplicate found. No compile (no change); worker reports clean scompile (13.3 s/5.3 s). Advisory: the caller uses its own AdicLattice.{u}, so stage 3 transports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0439",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261025T052007-L-45508",
+  "kind": "interface",
+  "note": "independent cc review: Lean proof of commuting_representation_devissage (axioms clean in scratch compile) against node lem-sfb-commuting-representation-devissage statement/proof/proof_deps; removed public import CoefficientExtensionFinite against statement needs, zero importers and unit sk-thm-sf-ctf-stability realized (empty)"
+ }
+}

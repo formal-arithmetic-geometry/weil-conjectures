@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-tor-strict-henselian-detection",
+ "kind": "statement",
+ "title": "Tor vanishing detected by geometric strict henselian local rings",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings such that $X=\\operatorname{Spec}A$ is locally Noetherian [pqf-def-locnoeth]. Let $M$ be any $R$-module and $n\\ge0$. For each geometric point $\\bar x$ of $X$ [def-weil-geometric-point] with image $\\mathfrak p\\in\\operatorname{Spec}A$, set $A_{\\mathfrak p}=\\mathcal O_{X,\\mathfrak p}$ [def-weil-pbc-localization-at-prime] and $B_{\\bar x}=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$ [def-weil-pbc-strict-henselization-limit]. Give Tor its coefficient-module action as in [def-trf-tor-coefficient-module]. All $R$-actions are induced by the canonical composite $R\\to A\\to A_{\\mathfrak p}\\to B_{\\bar x}$. Tor and tensor products are those of [def-weil-pbc-tor-modules, def-weil-pbc-module-tensor-product], and localization of modules is as in [def-weil-pbc-module-localization]. The canonical coefficient map is an isomorphism\n$$\\operatorname{Tor}^{R}_n(M,A)_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}B_{\\bar x}\\;\\xrightarrow{\\sim}\\;\\operatorname{Tor}^{R}_n(M,B_{\\bar x}).$$\nMoreover,\n$$\\operatorname{Tor}^{R}_n(M,A)=0\\quad\\Longleftrightarrow\\quad\\operatorname{Tor}^{R}_n(M,B_{\\bar x})=0\\text{ for every geometric point }\\bar x\\text{ of }X.$$",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QM, lemma-dumb-properties-henselization (faithful flatness); combined with the fixed-base coefficient version of the free-resolution argument of algebra.tex, Tag 00M8, lemma-flat-base-change-tor, and localization in the coefficient ring. Re-split of the original second proof step."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "def-trf-tor-coefficient-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\bar x$ over $\\mathfrak p$, and let $K\\subset\\Omega$ be the separable algebraic closure of $\\kappa(\\mathfrak p)$ in the geometric field $\\Omega$. Since $\\Omega$ is algebraically closed, $K$ is a separable closure of $\\kappa(\\mathfrak p)$ by [def-weil-pbc-relative-separable-closure]; $\\kappa(\\mathfrak p)$ is the residue field of the local ring $A_{\\mathfrak p}$. Apply [lem-weil-pbc-strict-henselization-triples] to the ring $A_{\\mathfrak p}$, its maximal ideal $\\mathfrak pA_{\\mathfrak p}$ and $K$: the category of its etale residue triples is filtered, and its colimit $H$, with structural map $\\rho:A_{\\mathfrak p}\\to H$, is a local ring. By [lem-sc-etale-triples-colimit-is-strict-henselization] (at the closed point, with $\\chi:\\kappa(\\mathfrak p)\\to K$ the inclusion), $H$ with this cocone is an algebraic strict henselization of $A_{\\mathfrak p}$ relative to $K$. Apply [lem-exc-affine-strict-local-ring-comparison] to the identity open immersion $i:\\operatorname{Spec}A\\to X$, the point $\\bar x$, $L=A_{\\mathfrak p}$ and $L^{\\mathrm{sh}}=H$. It gives a ring isomorphism $\\theta:B_{\\bar x}\\to H$ with $\\theta\\circ a=\\rho\\circ\\lambda$, where $a:A\\to B_{\\bar x}$ is the colimit leg of the chart and $\\lambda:A\\to A_{\\mathfrak p}$ the localization map. Hence $a$ sends $A\\setminus\\mathfrak p$ to units, and the canonical map $A_{\\mathfrak p}\\to B_{\\bar x}$ is the unique ring map through which $a$ factors [lem-weil-pbc-ring-localization-universal-property]. It equals $\\theta^{-1}\\circ\\rho$, since both agree after precomposition with $\\lambda$. By [lem-sc-strict-henselization-faithfully-flat] applied to $A_{\\mathfrak p}$, $K$ and this cocone, $\\rho$ is faithfully flat. Since $\\theta$ is an isomorphism of $A_{\\mathfrak p}$-algebras, $A_{\\mathfrak p}\\to B_{\\bar x}$ is faithfully flat, and the composite from $R$ is the one in the statement.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-sc-strict-henselization-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring; algebra.tex Tag 04GW, lemma-strict-henselization-different, and Proposition Tag 00CP, proposition-universal-property-localization; more-algebra.tex Tag 07QM, lemma-dumb-properties-henselization (1)."
+   }
+  },
+  {
+   "text": "Put $T=\\operatorname{Tor}^R_n(M,A)$. By [lem-trf-tor-localization-on-spec], the canonical map $\\lambda:T_{\\mathfrak p}\\to\\operatorname{Tor}^R_n(M,A_{\\mathfrak p})$ is an isomorphism. Apply [lem-trf-tor-flat-base-change] to $R\\to A_{\\mathfrak p}\\to B_{\\bar x}$, using Step 1. Tensor $\\lambda$ with $B_{\\bar x}$ and compose with that coefficient-base-change isomorphism. This gives the displayed isomorphism. It is the canonical coefficient map: for $t\\in T$, $s\\in A\\setminus\\mathfrak p$ and $b\\in B_{\\bar x}$, it sends $(t/s)\\otimes b$ to $b\\,s^{-1}\\operatorname{Tor}^R_n(M,A\\to B_{\\bar x})(t)$. Indeed the two factors are the canonical localization and coefficient maps, so their composite has exactly this formula; these tensors generate the source.",
+   "uses": [
+    "lem-trf-tor-localization-on-spec",
+    "lem-trf-tor-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M8, lemma-flat-base-change-tor, fixed-base coefficient-resolution argument; canonical maps as in Tag 00M7, section-functoriality-tor."
+   }
+  },
+  {
+   "text": "If $T=0$, then $T_{\\mathfrak p}=0$ by the fraction construction [def-weil-pbc-module-localization]. Its tensor product with $B_{\\bar x}$ is zero: every pure tensor has first factor zero [def-weil-pbc-module-tensor-product]. Step 2 therefore gives $\\operatorname{Tor}^R_n(M,B_{\\bar x})=0$ for every geometric point.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definitions of module localization and tensor product; forward implication by the isomorphism of Step 2."
+   }
+  },
+  {
+   "text": "Conversely assume all geometric coefficient Tor groups vanish. For any prime $\\mathfrak p$, choose an algebraic closure $\\Omega$ of $\\kappa(\\mathfrak p)$ by [lem-pc-algebraic-closure-exists-unique]. The point/residue-field description in [def-weil-geometric-point] gives a geometric point over $\\mathfrak p$. Apply the faithful-flat descent clause of [lem-trf-tor-flat-base-change] to $R\\to A_{\\mathfrak p}\\to B_{\\bar x}$, faithfully flat by Step 1. It yields $\\operatorname{Tor}^R_n(M,A_{\\mathfrak p})=0$. This holds for every prime, so the final clause of [lem-trf-tor-localization-on-spec] gives $T=0$. If $A$ is the zero ring, there are no primes and $T=0$ already, since its coefficient $A$-module is zero; the cited localization criterion includes this case.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-geometric-point",
+    "lem-trf-tor-flat-base-change",
+    "lem-trf-tor-localization-on-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HN, lemma-characterize-zero-local, and fixed-base coefficient form of Tag 00M8; fields.tex Tag 09GT, theorem-existence-algebraic-closure; more-algebra.tex Tag 07QM (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-tor-localization-on-spec",
+  "lem-trf-tor-flat-base-change",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-geometric-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly of Tag 07QM (1) with etale-cohomology.tex Tag 04HX, algebra.tex Tags 04GW, 00M8 (fixed-base coefficient form), and 00HN; existing DAG lemmas carry these inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Tt]or.*[Hh]ensel|[Hh]ensel.*[Tt]or|[Tt]or.*[Ff]aithfully[Ff]lat|[Ff]aithfully[Ff]lat.*[Tt]or)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor vanishing can be checked after localization at primes and strict henselization using faithful flatness.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": HoldsForLocalizationAway Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra\", \"type\": \"[IsLocalRing A] [IsLocalRing B] [Flat A B] [IsLocalHom (algebraMap A B)] : Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be local rings. If $ A $ is flat as a $ B $-module and the algebra map $ B \\to A $ is a local homomorphism, then $ A $ is faithfully flat over $ B $.\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationPrime\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": OfLocalizationPrime Flat\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, if for every prime ideal $ J ⊆ S $ the localized homomorphism $ R_{f^{-1}(J)} → S_J $ is flat, then $ f $ itself is flat. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"Henselization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map R to A with Spec A locally Noetherian, Tor over R of M and A vanishes if and only if it vanishes with every geometric strict henselian local ring of Spec A.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"PrimeSpectrum.mem_image_comap_basicOpen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (f : A)\\n  (x : PrimeSpectrum R),\\n  x ∈ PrimeSpectrum.comap (algebraMap R A) '' ↑(PrimeSpectrum.basicOpen f) ↔\\n    ¬IsNilpotent ((algebraMap A (TensorProduct R A x.asIdeal.ResidueField)) f)\", \"doc\": \"An element $ x $ is in the image of the preimage of the basic open set $ D(f) $ under the algebra map $ R \\to A $ if and only if $ f $ is not nilpotent in the residue field of the ideal generated by $ \"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] {f : M →ₗ[R] N} [Module.Finite R M]\\n  [Module.Finite R N],\\n  Function.Injective ⇑f → Function.Injective ⇑(\", \"doc\": \"Given an injective linear map $ f : M \\\\to N $, the induced linear map $ \\\\widehat{R}_I \\\\otimes_R M \\\\to \\\\widehat{R}_I \\\\otimes_R N $ (where $ \\\\widehat{R}_I $ denotes the $ I $-adic completion of $ R $) i\"}\n  {\"name\": \"PrimeSpectrum.mem_image_comap_zeroLocus_sdiff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_2} {A : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (f : A) (s : Set A)\\n  (x : PrimeSpectrum R),\\n  x ∈ PrimeSpectrum.comap (algebraMap R A) '' (PrimeSpectrum.zeroLocus s \\\\ PrimeSpectrum.zeroLocus {f}) ↔\\n    ¬IsNilpotent ((algebraMap A (TensorProduct R (A \", \"doc\": \"An element $ x $ belongs to the image of the preimage of the algebra map applied to the set difference $ V(s) \\\\setminus V(\\\\{f\\\\}) $ in the prime spectrum if and only if $ f $ is not nilpotent in the te\"}\n  {\"name\": \"Module.free_of_lTensor_residueField_injective\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module R M] [inst_4 : Module R N] [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  (f : M →ₗ[R] N) (g : N →ₗ[R] P) [inst_7 : IsLocalRing R],\\n  Function.S\", \"doc\": \"Let $ R $ be a commutative local ring with residue field $ k $. Suppose $ 0 \\\\to M \\\\xrightarrow{f} N \\\\xrightarrow{g} P \\\\to 0 $ is an exact sequence of finitely generated $ R $-modules, where $ N $ is f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat coefficient extension and prime localization detect vanishing of Tor modules; apply to strict henselizations at all geometric points.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"RingHom.FormallyUnramified.ofLocalizationPrime\", \"module\": \"Mathlib/RingTheory/RingHom/Unramified\", \"type\": \"RingHom.OfLocalizationPrime fun {R S} [CommRing R] [CommRing S] => RingHom.FormallyUnramified\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $, and any prime ideal $ J ⊆ S $, if the induced localized homomorphism $ R_{f^{-1}(J)} → S_J $ is formally unramified, then $ f \"}\n  {\"name\": \"RingHom.FormallyUnramified.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Unramified\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.FormallyUnramified\", \"doc\": \"The property of a ring homomorphism between commutative rings being formally unramified is local, meaning it can be checked on a cover or verified through localization.\"}\n  {\"name\": \"RingHom.FormallyUnramified.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Unramified\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.FormallyUnramified\", \"doc\": \"A ring homomorphism whose target is a localization of the source ring is formally unramified, meaning there are no nontrivial derivations from the target ring to modules over the source ring.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Hh]ensel|[Hh]ensel.*Tor",
+   "results": "0 hits: . Read returned types; general flatness, faithful-flatness, or Tor projective vanishing tools, not geometric strict-local Tor detection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor vanishing detected after prime localization and strict henselization by faithfully flat coefficient base change",
+   "results": "8 hits: Module.FaithfullyFlat.instTensorProduct, RingHom.Flat.propertyIsLocal, Module.Flat.of_isLocalizedModule, Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway, RingHom.Flat.ofLocalizationPrime, RingHom.Flat.holdsForLocalizationAway, Module.rankAtStalk_baseChange, instIsTorsionFreeLocalizationAlgebraMapSubmonoidPrimeCompl_2. Read returned types; general flatness, faithful-flatness, or Tor projective vanishing tools, not geometric strict-local Tor detection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor, \"Hensel\"",
+   "results": "0 hits: . Read returned types; general flatness, faithful-flatness, or Tor projective vanishing tools, not geometric strict-local Tor detection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor modules over a fixed ring vanish if and only if they vanish with all geometric strict henselian local coefficient rings",
+   "results": "8 hits: Module.Flat.tfae_equational_criterion, Rep.isZero_Tor_succ_of_projective, IsLocalRing.subsingleton_tensorProduct, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Module.free_of_lTensor_residueField_injective, Algebra.FormallySmooth.iff_injective_lTensor_residueField, CategoryTheory.isZero_Tor'_succ_of_projective, IsDedekindDomain.flat_iff_torsion_eq_bot. Read returned types; general flatness, faithful-flatness, or Tor projective vanishing tools, not geometric strict-local Tor detection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat strict henselization detects zero Tor modules via the canonical isomorphism from localized Tor tensor the strict henselian ring",
+   "results": "8 hits: Module.FaithfullyFlat.iff_zero_iff_lTensor_zero, Module.FaithfullyFlat.one_tmul_eq_zero_iff, Module.FaithfullyFlat.zero_iff_lTensor_zero, Module.FaithfullyFlat.zero_iff_rTensor_zero, Module.FaithfullyFlat.iff_zero_iff_rTensor_zero, Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality, Module.FaithfullyFlat.of_flat_of_isLocalHom, Module.Flat.tfae_equational_criterion. Read returned types; general flatness, faithful-flatness, or Tor projective vanishing tools, not geometric strict-local Tor detection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-monomial-tor",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VIII, 3.4.1--3.4.6(i), printed pp. 110--111 (monoidal ideals and normalized-blowup comparison); 3.3.8--3.3.11, printed pp. 107--108, and Expose VI, 1.8, printed p. 70 (log regularity preserved). The triviality-locus assertion is the universal property over U and the local homomorphism on local rings outside U. Input: Expose VIII, proof of Lemma 3.4.3, printed p. 110, using Kato 1994, 6.1(ii); 3.5, printed p. 115, explicitly states the monomial Tor-independence theorem. Re-split of lem-trf-log-regular-monomial-tor: old step 2, Noetherian local rings, flat local strict henselization, faithful-flat descent and detection at all primes.",
+   "via": [
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-tor-strict-henselian-detection",
+  "worker": "stage1",
+  "summary": "Q91: assembled the existing geometric triple comparison, algebraic strict-henselization faithful flatness, Tor coefficient localization and flat coefficient base change. Wrote both implications and geometric-point existence explicitly. No new nodes and no change to mathematical hypotheses or conclusions; added the existing coefficient-action definition to make the A-module structures explicit. Reviewer FIX: Step 1 now builds (A_p)^sh from triples of A_p at its closed point and compares it with B_x̄ via lem-sc-etale-triples-colimit-is-strict-henselization and lem-exc-affine-strict-local-ring-comparison, instead of relying on the parenthetical remark in lem-weil-pbc-strict-henselization-triples; separable closure and localization universal property cited.",
+  "blueprint": "Retains the assigned ancestry from lem-trf-local-term-locality through lem-trf-log-regular-monomial-tor: its old step 2 uses strict-local faithful-flat Tor detection. Read latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md: its current contracting-correspondence argument differs from that historical ancestry. This delivery splits only the assigned algebraic auxiliary and changes no chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Identifies the residue-triple colimit at the specified prime with its local strict henselization; a generic algebraic tool."
+   },
+   {
+    "node": "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "why": "Generic algebraic tool: identifies the triple colimit of the local ring A_p at its closed point with an algebraic strict henselization; the assigned unit has no such comparison."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic geometric-to-algebraic comparison of the chosen strict local ring of Spec A at a geometric point with (A_p)^sh as A-algebras; the assigned unit has no replacement (same tool accepted for lem-trf-normality-from-completed-monoid-chart)."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic faithful flatness of a local strict henselization; the assigned unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-faithfully-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-573255498",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-573255498 (reviewer sub-agent of L); spot-checked: Read the item in full, all 14 cited statements, the five extra statements used by the fix, and Stacks 07QM(1), 04HX, 00M8, 04GW, 00HN, 00CP and 09GT. Tags were checked in tags/tags. Live has the item unsplit with no repair note, so this is a first split and not superseded. No new nodes. The only statement change is the added coefficient-action sentence plus its stmt_dep def-trf-tor-coefficient-module: a clarification that adds no hypothesis and drops none, and does not weaken the target. Steps 2-4 are correct: the localization iso, then flat coefficient base change over A_p (flatness only), the elementary forward direction, and the reverse via an algebraic closure giving a geometric point over every prime, faithfully flat descent and 00HN; A=0 is covered. Edge cases n=0, M=0, A=0, R=A=k, and Z→F_p with n=1 (both sides nonzero) all agree. One fault, C3/C4, in Step 1. It applied lem-sc-strict-henselization-faithfully-flat, which is stated for the triple colimit of a local ring at its closed point, to the colimit of triples of A at p. The bridge was only the parenthetical '(C is (R_p)^sh)' in lem-weil-pbc-strict-henselization-triples, and the step also omitted def-weil-pbc-relative-separable-closure. This is the same fault already repaired in the sibling lem-trf-normality-from-completed-monoid-chart. The FIX uses the same route: triples of A_p at its closed point, then lem-sc-etale-triples-colimit-is-strict-henselization, then lem-exc-affine-strict-local-ring-comparison with D=A and i=id giving θ: B_x̄≅H, then the localization universal property identifying the canonical A_p→B_x̄ with θ⁻¹ρ, then faithful flatness. etale-local-ring-triples is dropped; proof_deps and tool_uses are updated; there is no cycle and no SGA. Accepted tool_uses: lem-weil-pbc-strict-henselization-triples, lem-sc-etale-triples-colimit-is-strict-henselization, lem-exc-affine-strict-local-ring-comparison, lem-sc-strict-henselization-faithfully-flat. Fixed file: fixes/dag/nodes/sec-trace-formula/lem-trf-tor-strict-henselian-detection.json.; 1 file(s) fixed by the reviewer"
+ }
+}

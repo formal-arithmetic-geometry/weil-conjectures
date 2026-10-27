@@ -10,7 +10,8 @@ public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.Sets.Closeds
 public import Mathlib.Topology.Homeomorph.Defs
 import Sheaf.Topology.SpectralSpace.ConnectedComponentsProfinite
-import Mathlib.Topology.Separation.Profinite
+import Sheaf.Topology.Connected.ComponentQuotientClopenNaturality
+import Sheaf.Topology.ProfiniteClopenPullback
 
 /-!
 # Clopen inverse images and spectral connected-component spaces
@@ -65,4 +66,23 @@ theorem isHomeomorph_connectedComponentsMap_of_bijective_clopen_preimage
     IsHomeomorph hf.connectedComponentsMap ∧
       hf.connectedComponentsMap ∘ (ConnectedComponents.mk : T → ConnectedComponents T) =
         (ConnectedComponents.mk : S → ConnectedComponents S) ∘ f := by
-  sorry
+  obtain ⟨h, hnorm, _, _, _, _, hclop_iff⟩ :=
+    ConnectedComponents.clopen_descent_naturality.{u, v, u} f hf
+  obtain ⟨hTcompact, hThausdorff, hTdisconnected⟩ :=
+    spectralSpace_connectedComponents_profinite (T := T)
+  obtain ⟨hScompact, hShausdorff, hSdisconnected⟩ :=
+    spectralSpace_connectedComponents_profinite (T := S)
+  have : CompactSpace (ConnectedComponents T) := hTcompact
+  have : T2Space (ConnectedComponents T) := hThausdorff
+  have : TotallyDisconnectedSpace (ConnectedComponents T) := hTdisconnected
+  have : CompactSpace (ConnectedComponents S) := hScompact
+  have : T2Space (ConnectedComponents S) := hShausdorff
+  have : TotallyDisconnectedSpace (ConnectedComponents S) := hSdisconnected
+  obtain ⟨hinj, hsurj, _, hopen⟩ :=
+    bijective_and_isOpenMap_of_bijective_clopen_preimage h.continuous (hclop_iff.mp hclop)
+  have heq : (h : ConnectedComponents T → ConnectedComponents S) =
+      hf.connectedComponentsMap := by
+    apply ConnectedComponents.surjective_coe.injective_comp_right
+    exact hnorm
+  rw [← heq]
+  exact ⟨⟨h.continuous, hopen, hinj, hsurj⟩, hnorm⟩

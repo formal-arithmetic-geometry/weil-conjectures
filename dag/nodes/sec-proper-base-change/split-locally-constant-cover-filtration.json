@@ -85,10 +85,14 @@
   "file": "lean/WeilConjectures/ConstructibleSheaf/LocallyConstantCoverFiltrationExtension.lean",
   "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf",
   "statement": "theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf {U : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime] (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) [IsFiniteLocallyConstantSheaf G] : ∃ (V : Scheme.{u}) (v : V ⟶ U) (_ : IsFinite v) (_ : Etale v) (_ : ConnectedSpace V) (d : ℕ), ¬ ℓ ∣ d ∧ (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U), Nat.card (v.GeometricFiber s) = d) ∧ (∃ (n : ℕ) (W : ℕ → Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) (ι : ∀ i, W i ⟶ W (i + 1)), IsZero (W 0) ∧ Nonempty (W n ≅ (v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ∧ ∀ i < n, Mono (ι i) ∧ Nonempty (cokernel (ι i) ≅ (constantSheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))))",
-  "branch": "sheaf-dag",
+  "branch": "slopmaster2",
   "by": "J7",
   "date": "2026-10-21",
-  "note": "Retired the redundant Sheaf copy in favour of the exact source-library declaration in LocallyConstantCoverFiltrationExtension. Its full signature is byte-for-byte identical; all proof dependencies and parent uses remain valid."
+  "note": "Retired the redundant Sheaf copy in favour of the exact source-library declaration in LocallyConstantCoverFiltrationExtension. Its full signature is byte-for-byte identical; all proof dependencies and parent uses remain valid. | 2026-10-22 maintainer: the upstream declaration Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration (WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltration, docstring 'Blueprint: split-locally-constant-cover-filtration') states this node with proof `sorry`; it has the same signature as the sorry-free exists_finite_etale_cover_filtration_sheaf recorded here, so it is closed by `exact exists_finite_etale_cover_filtration_sheaf ℓ G`. Recorded here (branch sheaf-dag -> slopmaster2)",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf",
+   "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration"
+  ]
  },
  "created": {
   "by": "worker",
@@ -173,5 +177,27 @@
   "kind": "interface",
   "note": "independent cc review: removed Sheaf copy of exists_finite_etale_cover_filtration_sheaf vs WeilConjectures…LocallyConstantCoverFiltrationExtension:65 (same signature byte for byte, same proof, axioms clean); node diff = lean field only; importers of the retired module = 0; parent LocallyConstantReduction already imports the Extension"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration",
+     "module": "WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltration",
+     "lines": [
+      33,
+      49
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": []
+  }
+ }
 }

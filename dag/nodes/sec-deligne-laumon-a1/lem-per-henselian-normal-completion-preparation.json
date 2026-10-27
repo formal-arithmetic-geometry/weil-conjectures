@@ -467,20 +467,37 @@
   "module": "Sheaf.RingTheory.HenselianNormalCompletionPreparation",
   "declaration": "AlgebraicGeometry.henselian_normal_completion_preparation",
   "file": "lean/Sheaf/RingTheory/HenselianNormalCompletionPreparation.lean",
-  "statement": "theorem henselian_normal_completion_preparation (R : Type u) [CommRing R] [IsLocalRing R] [_root_.IsReduced R] [IsNoetherianRing R] (hR : IsQuasiExcellent R) (H : Type v) [CommRing H] [HenselianLocalRing H] [Algebra (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H] (hH : Algebra.IsHenselizationAtPrime' R (IsLocalRing.maximalIdeal R) H) : (_root_.IsReduced H ∧ IsNoetherianRing H ∧ IsExcellent H ∧ HenselianLocalRing H ∧ ringKrullDim H = ringKrullDim R ∧ ∃ (r : ℕ) (B : Fin r → CommRingCat.{v}) (f : ∀ a, H →+* B a), (∀ a, IsDomain (B a) ∧ IsIntegrallyClosed (B a) ∧ IsExcellent (B a) ∧ IsNoetherianRing (B a) ∧ HenselianLocalRing (B a) ∧ (f a).Finite ∧ ringKrullDim (B a) ≤ ringKrullDim H) ∧ (∃ e : Spec (.of (∀ a, B a)) ≅ (Spec (.of H)).reducedNormalization, sigmaSpec B ≫ e.hom ≫ (Spec (.of H)).fromReducedNormalization = Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (f a)))) ∧ IsFinite (Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (f a)))) ∧ Surjective (Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (f a)))) ∧ (∃ U : (Spec (.of H)).Opens, Dense (U : Set (Spec (.of H))) ∧ (∀ Z : irreducibleComponents (Spec (.of H)), ∀ x : Spec (.of H), IsGenericPoint x Z.1 → x ∈ U) ∧ IsIso ((Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (f a)))) ∣_ U)) ∧ (∀ Z : Set (PrimeSpectrum R), IsClosed Z → IsNowhereDense Z → IsNowhereDense (PrimeSpectrum.comap ((algebraMap (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H).comp (algebraMap R (Localization.AtPrime (IsLocalRing.maximalIdeal R)))) ⁻¹' Z) ∧ ∀ a, IsNowhereDense (PrimeSpectrum.comap ((f a).comp ((algebraMap (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H).comp (algebraMap R (Localization.AtPrime (IsLocalRing.maximalIdeal R))))) ⁻¹' Z) ∧ ∀ [IsLocalRing (B a)], IsNowhereDense (PrimeSpectrum.comap ((algebraMap (B a) (AdicCompletion (IsLocalRing.maximalIdeal (B a)) (B a))).comp ((f a).comp ((algebraMap (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H).comp (algebraMap R (Localization.AtPrime (IsLocalRing.maximalIdeal R)))))) ⁻¹' Z))) ∧ (∀ (A : Type w) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [IsDomain A], IsIntegrallyClosed A → IsExcellent A → IsIntegrallyClosed (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsDomain (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ Module.FaithfullyFlat A (AdicCompletion (IsLocalRing.maximalIdeal A) A))",
+  "statement": "theorem henselian_normal_completion_preparation (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [_root_.IsReduced R] (hR : IsQuasiExcellent R) (H : Type v) [CommRing H] [HenselianLocalRing H] [Algebra R H] [Algebra (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H] [IsScalarTower R (Localization.AtPrime (IsLocalRing.maximalIdeal R)) H] (hH : Algebra.IsHenselizationAtPrime' R (IsLocalRing.maximalIdeal R) H) : _root_.IsReduced H ∧ IsNoetherianRing H ∧ IsExcellent H ∧ HenselianLocalRing H ∧ ringKrullDim H = ringKrullDim R ∧ (∀ (B : Type w) [CommRing B] [IsLocalRing B] [IsNoetherianRing B] [IsDomain B] [IsIntegrallyClosed B], IsExcellent B → IsDomain (AdicCompletion (IsLocalRing.maximalIdeal B) B) ∧ IsIntegrallyClosed (AdicCompletion (IsLocalRing.maximalIdeal B) B) ∧ IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal B) B) ∧ IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal B) B) ∧ Module.FaithfullyFlat B (AdicCompletion (IsLocalRing.maximalIdeal B) B)) ∧ ∃ (r : ℕ) (B : ULift.{v} (Fin r) → CommRingCat.{v}) (f : ∀ a, H →+* B a) (_ : ∀ a, HenselianLocalRing (B a)), (∀ a, IsDomain (B a) ∧ IsIntegrallyClosed (B a) ∧ IsNoetherianRing (B a) ∧ IsExcellent (B a) ∧ ringKrullDim (B a) ≤ ringKrullDim H) ∧ ∃ e : (Spec (.of H)).reducedNormalization ≅ ∐ (fun a ↦ Spec (B a)), e.hom ≫ Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (f a))) = (Spec (.of H)).fromReducedNormalization ∧ (∃ eprod : (∐ (fun a ↦ Spec (B a))) ≅ Spec (.of (Π a, B a)), eprod.hom = sigmaSpec B) ∧ (RingHom.pi f).Finite ∧ IsFinite (Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (f a)))) ∧ Surjective (Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (f a)))) ∧ (∃ U : (Spec (.of H)).Opens, Dense (U : Set (Spec (.of H))) ∧ (∀ p : PrimeSpectrum H, p.asIdeal ∈ minimalPrimes H → p ∈ U) ∧ IsIso (Sigma.desc (fun a ↦ Spec.map (CommRingCat.ofHom (f a))) ∣_ U)) ∧ ∀ Z : Set (PrimeSpectrum R), IsClosed Z → IsNowhereDense Z → IsNowhereDense (PrimeSpectrum.comap (algebraMap R H) ⁻¹' Z) ∧ ∀ a, IsNowhereDense (PrimeSpectrum.comap ((f a).comp (algebraMap R H)) ⁻¹' Z) ∧ IsNowhereDense (PrimeSpectrum.comap ((algebraMap (B a) (AdicCompletion (IsLocalRing.maximalIdeal (B a)) (B a))).comp ((f a).comp (algebraMap R H))) ⁻¹' Z)",
   "branch": "newtargets-dag",
-  "by": "Q70",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.HenselianNormalCompletionPreparation deleted (dead: no target reaches it); this node is not reached either."
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-a2282781d",
-  "group": "Q70",
+  "reviewer": "NT-stage2-cc-285418d07",
+  "group": "NA",
   "result": "pass",
-  "note": "Read node, 7 stmt_dep records/declarations (IsHenselizationAtPrime', IsQuasiExcellent/IsExcellent, reducedNormalization/fromReducedNormalization, HenselianLocalRing, AdicCompletion, ringKrullDim), module, report. Every clause matches: R reduced quasi-excellent Noetherian local, no extra hypotheses (henselian instance is part of the recorded henselization def); H reduced/Noetherian/excellent/henselian/dim equal; ∃ B : Fin r → CommRingCat with domain/integrally closed/excellent/Noetherian/henselian/finite/dim ≤, pinned to the recorded reducedNormalization by an iso commuting over Spec H; IsFinite, Surjective, iso over dense open containing all generic points; independent arbitrary normal excellent local domain clause with normal Noetherian local domain completion + FaithfullyFlat; nowhere-density via canonical composites. Universes u v w bound; statement verbatim; only lean field changed; dep records identical to live; no existing module live. Docstrings carry sources, blueprint id, 13 steps. nt_compile --json rc=0, 2.9 s, no warnings. No findings."
+  "note": "Read the node, all 7 stmt_dep records/declarations (IsHenselizationAtPrime' with T in max u v, IsQuasiExcellent/IsExcellent, reducedNormalization/fromReducedNormalization, HenselianLocalRing, AdicCompletion, ringKrullDim, IsReduced ring form), module, report. Every clause matches with no stronger hypotheses: the henselian instance is an input of the recorded predicate and the R_m algebra plus scalar tower are forced since R is local. H is reduced/Noetherian/excellent/henselian with dim H = dim R. Factors B_a (CommRingCat.{v}, ULift Fin r) are domain/integrally closed/Noetherian/excellent/henselian with dim <= dim H, pinned to the recorded reducedNormalization by an iso commuting over Spec H, with the sigmaSpec product iso. The map is finite (RingHom.pi and IsFinite), Surjective, and IsIso over a dense open containing all minimal primes. The independent completion clause (universe w, no henselian input) gives a normal Noetherian local domain and faithful flatness. The nowhere-dense preimages use the canonical composites. Statement verbatim; dep records unchanged vs side-live; only the item lean record added; no new defs; single sorry; docstrings carry source, blueprint id and 13 steps; all imports exist; no name clash. Not compiled (no FIX); the worker reports a clean compile. Maintainer notes: the item is on the drop list (line 1629) and its module was earlier deleted as dead, but a side-live BFS reaches it again from nt-target-weil-conjectures via ordinary-uniformization-local-reduction and the lem-sfb-field-log-smooth-gabber-modification route, so the drop entry is stale. Proof steps 9/10 cite dropped ratliff-formal-catenarity and excellent-normalization-preparation (a proof-stage concern)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/HenselianNormalCompletionPreparation.lean",
+  "module": "Sheaf.RingTheory.HenselianNormalCompletionPreparation",
+  "declaration": "AlgebraicGeometry.henselian_normal_completion_preparation",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

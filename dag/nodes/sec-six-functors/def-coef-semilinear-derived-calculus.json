@@ -3,7 +3,7 @@
  "kind": "definition",
  "title": "Ordinary derived semilinear calculus interfaces",
  "status": "split",
- "statement": "For a small site [def-weil-pbc-sites-and-cohomology] and a strict tower of commutative ring sheaves, use its actual strict semilinear system constructions [def-coef-semilinear-system-models]. Define the ordinary derived calculus interface to consist of Grothendieck abelianness, componentwise exactness, exact conservative evaluations, normalized scalar adjunctions and their composition and reduction cocycle, the recorded closed tensor models [def-coef-ringed-tensor-hom-model], and cartesian-first-input internal Hom evaluation carrying the evaluation morphism to level evaluation. Its Hom reduction is the transpose of scalar tensor comparison, inverse cartesian reduction, evaluation and the second-input reduction. Define compatible tower scalar extension with its evaluation comparison normalized by scalar-adjunction transpose. Define localized coefficients by actual slice restriction and exact extension by zero [lem-pur-site-restriction-module-adjunction-exact], with the ordinary unit and counit component equations and the derived adjunction fixed by localization of the ordinary chain transpose. Ordinary tensor evaluation is uniquely fixed on local pure tensors. These are interfaces on the existing ordinary derived categories, with no new tensor operation and no coefficient-flatness hypothesis.",
+ "statement": "For a small site [def-weil-pbc-sites-and-cohomology] and a strict tower of commutative ring sheaves, use its actual strict semilinear system constructions [def-coef-semilinear-system-models]. Define the ordinary derived calculus interface to consist of Grothendieck abelianness, componentwise exactness, exact conservative evaluations, normalized scalar adjunctions and their composition and reduction cocycle, the recorded closed tensor models [def-coef-ringed-tensor-hom-model], and cartesian-first-input internal Hom evaluation carrying the evaluation morphism to level evaluation. Its Hom reduction is the transpose of scalar tensor comparison, inverse cartesian reduction, evaluation and the second-input reduction. Define compatible tower scalar extension with its evaluation comparison normalized by scalar-adjunction transpose. Define localized coefficients by actual slice restriction and exact extension by zero [lem-pur-site-restriction-module-adjunction-exact], with the ordinary unit and counit component equations and the derived adjunction fixed by localization of the ordinary chain transpose. Ordinary tensor evaluation is uniquely fixed on local pure tensors. These are interfaces on the existing ordinary derived categories, with no new tensor operation and no coefficient-flatness hypothesis. In OpenSystems, the ordinary restriction-evaluation comparison is the identity on every underlying section at every level; unit/counit compatibility alone does not specify this normalization.",
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
   "def-coef-semilinear-system-models",
@@ -14,9 +14,19 @@
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
   "place": "Zheng Construction 4.1, Lemma 4.10 and Proposition 4.17; Stacks 03DI--03DJ, 06YY, 07A4 and 08J7--08JB: ordinary-derived semilinear calculus and its canonical scalar/tensor comparisons."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For ordinaryEvaluationTensor_existsUnique, restrict the module sheafification unit to the nth vertical slice. The inclusion is cocontinuous directly by the definition of the vertical topology, so the restricted unit is locally bijective. Its transpose under module sheafification is an isomorphism. Identify the presheaf tensor products by the identity coefficient-ring identification and compose this with the two tensor-to-sheafification isomorphisms. Naturality of the sheafification unit proves the pure-tensor formula. To prove uniqueness, precompose with the inverse tensor-to-sheafification isomorphism followed by the constructed comparison; the sheafification hom equivalence reduces equality to presheaf tensors, where induction on zero, pure tensors and addition concludes. All other constructions and already-proved restriction lemmas remain unchanged.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": "Worker E6, 2026-10-24: formal proof using the module sheafification universal property and cocontinuous preservation of local bijectivity, following the existing docstring and Stacks Modules on Sites, tensor products and sheafification.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -73,7 +83,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "lean": {
@@ -99,7 +120,8 @@
    "WeilConjectures.SemilinearSections.OpenSystems",
    "WeilConjectures.SemilinearSections.InverseTensorPure",
    "WeilConjectures.SemilinearSections.ordinaryEvaluationTensor_existsUnique",
-   "WeilConjectures.SemilinearSections.ordinaryEvaluationTensor"
+   "WeilConjectures.SemilinearSections.ordinaryEvaluationTensor",
+   "WeilConjectures.SemilinearSections.OpenSystems.restrictionSections"
   ],
   "file": "lean/Sheaf/Paper/SemilinearDerivedCalculus.lean",
   "statement": "structure Data",
@@ -126,22 +148,360 @@
   "note": "Re-delivery after the RETURN of fae3d3347b17. Both H3 findings are repaired. (1) Data.tensorEvaluation is now pinned by tensorEvaluationModel (TensorComparisonModel for evaluation n) with tensorEvaluationModel_ordinary = ordinaryEvaluationTensor, the unique identity-on-pure-tensors map; the summand and derived equations on flat-term K-flat representatives fix it on every object, so homEvaluation and target.tensorEvaluation become canonical. (2) Data.scalarTensor is pinned by scalarTensorModel (ScalarTensorComparisonModel: pure-tensor rule (x⊗y)⊗1↦(x⊗1)⊗(y⊗1) through the model's E, summand rule, kflat preservation, localized square via scalarEpsilonIso and tensorModelIso); orientation checked against homReductionTranspose. All other modules are byte-identical to the previously reviewed version; clause table, edge cases (empty site, zero rings, equal indices, nonflat maps, constant Z tower sign test), universes (c, v independent, coefficients at max c v r) and one-definition checks pass; lean.statement is verbatim. Mechanical H8 defect: scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel lacked Source/(blueprint: def-coef-semilinear-system-models) docstrings. fixes/SemilinearSystemModels.lean is a complete replacement with docstring-only changes. nt_compile of all seven modules is clean both as delivered and with the fix (max 27.6 s per file). Maintainer note: the item's top-level source.place still mentions enhanced sections; a stage-2 FIX cannot change it."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "T7",
+  "reviewer": "C-0d913",
+  "group": "S8",
   "result": "pass",
-  "landing": "20261019T005430-L-2770396",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.SemilinearSections.openRestriction_exact",
-   "WeilConjectures.SemilinearSections.openRing",
-   "WeilConjectures.SemilinearSections.openSite_continuous",
-   "WeilConjectures.SemilinearSections.ordinaryEvaluationTensor_existsUnique"
-  ],
-  "sorry_after": [
-   "WeilConjectures.SemilinearSections.ordinaryEvaluationTensor_existsUnique"
+  "landing": "20261027T135439-L-3708468",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-sf-open-restriction-ordinary-quotient; OpenSystems.restrictionSections vs change record + def-coef-semilinear-derived-calculus statement_change; finiteRestrictionMate_isIso vs its node (true, generator-pinned); 8 NOT RUN importers compiled OK against delivered SDC"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "S8 stage 3",
+  "old_statement": "For a small site [def-weil-pbc-sites-and-cohomology] and a strict tower of commutative ring sheaves, use its actual strict semilinear system constructions [def-coef-semilinear-system-models]. Define the ordinary derived calculus interface to consist of Grothendieck abelianness, componentwise exactness, exact conservative evaluations, normalized scalar adjunctions and their composition and reduction cocycle, the recorded closed tensor models [def-coef-ringed-tensor-hom-model], and cartesian-first-input internal Hom evaluation carrying the evaluation morphism to level evaluation. Its Hom reduction is the transpose of scalar tensor comparison, inverse cartesian reduction, evaluation and the second-input reduction. Define compatible tower scalar extension with its evaluation comparison normalized by scalar-adjunction transpose. Define localized coefficients by actual slice restriction and exact extension by zero [lem-pur-site-restriction-module-adjunction-exact], with the ordinary unit and counit component equations and the derived adjunction fixed by localization of the ordinary chain transpose. Ordinary tensor evaluation is uniquely fixed on local pure tensors. These are interfaces on the existing ordinary derived categories, with no new tensor operation and no coefficient-flatness hypothesis.",
+  "what": "Add OpenSystems.restrictionSections. Without it, restrictionEvaluation and its mate extensionEvaluation may be twisted independently at each finite level while preserving both adjunction equations. For identity open, prime 3 and the coefficient ring module, twists +1 at level 0 and -1 at level 1 force incompatible components in ordinaryRestrictionQuotient. Both existing OpenSystems constructors already use the same-section comparison and now supply its proved section law.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tags 03DI–03DJ: restriction to the localized site is literal restriction on sections."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-semilinear-projection-below-factorization",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-geometric-operations",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-geometric-operations-base-existence",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-coef-semilinear-geometry-derived",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-coef-system-compact-support-data",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-tensor-comparisons",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-geometric-tensor-component-horizontal",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-geometric-coefficient-pullback-mate",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-ordinary-inverse-system",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-scalar-coherence",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-scalar-data",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-finite-free-system-scalars",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-geometric-operations-transition-existence",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-coef-cartesian-section-data",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-cartesian-projection",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-geometric-ordinary-kflat",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-system-adjunction-transpose-coherence",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-tensor-reduction",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-ordinary-geometric-realization",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-tensor-evaluation",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-pairing-finite-normalization",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-tensor-base",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sf-open-system-counit-evaluation",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-tensor-coherence",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-coef-semilinear-tensor-reduction-models",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-evaluation-tensor-horizontal-pure",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-coef-semilinear-geometry-ops",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-open-restriction-evaluation-sections",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-sf-ramified-system-scalar-realization-data",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-derived-sections",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-finite-free-system-geometry",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-scalar-systems-normalized",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-scalar-operations",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-operations-existence",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-coef-etale-system-tensor-evaluation",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-system-existence",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sf-open-coefficient-tensor-pushforward",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-coef-semilinear-geometry-base",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-scalar-evaluation-transpose",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-geometric-derived-evaluation",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-coef-etale-system-image-tensor",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-coef-semilinear-cartesian-hom-evaluation",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sfb-ringed-cocontinuous-monoidal",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-completed-module-tensor-transport",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-sp-reduction-monoidal-comparison-data",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-pur-system-ordinary-tensor-reduction",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-pur-geometric-scalar-association-cocycle",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-sp-projection-reduction-presentation",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sp-reduction-derived-monoidal-tower",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "det-sp-tower-shriek-levels",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sp-semilinear-coefficient-pullback-composition",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-pur-quotient-ordinary-models",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-sp-tower-shriek-data",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-pur-quotient-diagram-projection-evaluation",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-pur-coefficient-extension-reduction-data",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-pur-system-tensor-reduction-formula",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sp-tower-exchange-realization",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sp-semilinear-scalar-tensor-composition",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-pur-system-cochain-tensor-reduction",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sp-complete-projection-mate-descent",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "lem-sp-scalar-extension-evaluation-comparison",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "stage3-pur-scalar-cochain-evaluation",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "stage3-pur-ordinary-scalar-evaluation-unit",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-pur-system-horizontal-reduction-adjoints",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "stage3-pur-scalar-cochain-unit-descent",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-pur-quotient-diagram-projection-data",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   },
+   {
+    "id": "def-pur-compactification-reduction-models",
+    "holds": true,
+    "note": "Existing section-normalized constructions remain available. Only independently twisted evaluation data are excluded; existing projections and operations are unchanged."
+   }
   ]
  }
 }

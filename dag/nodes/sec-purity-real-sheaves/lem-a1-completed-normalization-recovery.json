@@ -1,0 +1,153 @@
+{
+ "id": "lem-a1-completed-normalization-recovery",
+ "kind": "statement",
+ "title": "Recovery of a rational realization from its normalized integral tower",
+ "statement": "Fix the completed comparison C and monodromy realization J of a base P and point p. For an integral lisse module M, a continuous rational representation V with invariant lattice B, and an isomorphism from the actual normalized etale reduction tower of M to the etale tower in the specified normalization J(V,B), there exists an isomorphism of rational coefficient modules from J(V) to scalar extension of M along C.coefficientIso.inv followed by the integral-to-field inclusion. Definitions and hypotheses are those of [def-per-lisse-completed-system-data], [def-sfb-monodromy-realization-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), pp.59-60"
+ },
+ "stmt_deps": [
+  "def-per-lisse-completed-system-data",
+  "def-sfb-monodromy-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Pull the diagram isomorphism to the proetale site and forget to abelian sheaves using the canonical forget/pullback comparison. The completed comparison unit identifies M with the limit cone of its reduction maps. The stipulated normalization is also a limit. Uniqueness of limits gives an abelian-sheaf isomorphism commuting with every projection.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar equations for both cones, naturality of the forget/pullback comparison, and joint monicity of limit projections show that the isomorphism respects constant integral scalars. Modulo any fixed uniformizer power every continuous coefficient is locally constant; on each residue fibre use a constant lift. The difference is divisible by that power, which the reduction map kills. Sheaf separatedness gives scalar compatibility modulo each power, and joint monicity gives it before reduction. Thus the inverse limit isomorphism is linear over the continuous integral coefficient sheaf.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "lem-sfb-integral-lisse-coefficient-quotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction along the coefficient isomorphism is an equivalence. Uniqueness of left adjoints identifies its composite with genuine scalar extension. Apply that extension to the integral isomorphism and compose with the specified normalization rational isomorphism. This also handles zero rank.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-lisse-completed-system-comparison",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-integral-lisse-coefficient-quotients",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "K7",
+  "date": "2026-10-24",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), pp.59-60; explicit component of integral fibre reconstruction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit finite free adic modules continuous monodromy action integral lisse sheaf",
+   "results": "Condensed.finFree ; Condensed.profiniteFree ; CompHausLike.LocallyConstantModule.functor ; LightCondMod.ofSheafLightProfinite ; LightCondMod ; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat ; CondensedMod.ofSheafProfinite ; LightCondMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"Sheaf\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|adic.*representation",
+   "results": "Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Algebra/Torsor/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(comp|Comp)|sheafFiber.*(faithful|Faithful)",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"extendScalars\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant linear isomorphism of finite locally constant module sheaf fibres uniquely lifts to a sheaf isomorphism",
+   "results": "LightCondMod.LocallyConstant.functorIsoDiscreteAux₁ ; LocallyConstant.congrRightₗ ; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂ ; CondensedMod.LocallyConstant.functorIsoDiscreteAux₁ ; CondensedMod.LocallyConstant.functorIsoDiscreteAux₂ ; CompHausLike.LocallyConstantModule.functor ; LightCondMod.LocallyConstant.functorIsoDiscrete ; CondensedMod.LocallyConstant.functorIsoDiscrete",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant linear isomorphism of finite locally constant module sheaf stalks lifts uniquely to an isomorphism of sheaves, and scalar extension of a continuous finite free integral representation is continuous",
+   "results": "LinearEquiv.canLiftContinuousLinearEquiv; LinearEquiv.extendScalarsOfSurjective_apply; LocallyConstant.congrRightₗ; LinearEquiv.extendScalarsOfIsLocalization; SeparationQuotient.liftCLM; Module.FinitePresentation.linearEquivMapExtendScalars; LocallyConstant.congrLeftₗ; LinearMap.extendScalarsOfIsLocalizationEquiv_apply",
+   "date": "2026-10-23",
+   "verdict": "No specialization supplies these normalized sheaf or representation claims. Linear algebra and topology APIs are reused in the proved construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFibreMonodromyReconstruction",
+  "date": "2026-10-24",
+  "group": "K7"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "via": [
+    "lem-a1-integral-fibre-monodromy-reconstruction"
+   ],
+   "place": "Integral fibre reconstruction in the first compact-support sentence; Proposition 6.8.4(1),(4), pp.59-60"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedNormalizationRecovery",
+  "file": "lean/Sheaf/Paper/CompletedNormalizationRecovery.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_normalization_recovery",
+  "statement": "theorem completed_normalization_recovery (l : ℕ) [Fact l.Prime] (P : Base.{u} l)\n    (p : SfMonodromyPoint P.X) (C : Comparison l P)\n    (J : SfMonodromyRealization l P.E p) (M : Integral l P)\n    (V : SfContinuousRepresentations l P.E p) (B : SfInvariantLattice l P.E V)\n    (d : (C.equivalence.functor.obj M).obj.obj ≅ (J.normalization V B).etale) :\n    Nonempty (J.functor.obj V ≅\n      (completedAdicChange P.X\n        (C.coefficientIso.inv ≫ lisseIntegerToFieldSized l P.E P.X)).obj M.obj)",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261024T190243-L-4006348",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261024T190243-L-4006348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

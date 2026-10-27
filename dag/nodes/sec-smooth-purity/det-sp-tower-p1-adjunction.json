@@ -27,224 +27,59 @@
  ],
  "proof": [
   {
-   "text": "Put $P=\\mathbf P^1_S$, $W=P\\times_SP$, $A_T=\\mathcal O_{E,T}/\\ell^\\bullet$, $F=Rq_{*,\\bullet}$ and $G=q_\\bullet^*(-)(1)[2]$. By [sk-lem-sp-tower-levels], these direct images are bounded below and evaluate to the finite direct images. The canonical comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] applies to $q,p_1,p_2,\\Delta$, which are quasi-compact and quasi-separated, and therefore their direct images preserve etale-origin levels. Pullback preserves such levels by [lem-weil-pbc-comparison-pullback]. The finite twist is a locally free rank-one sheaf, compatible with pullback, by [lem-asd-etale-finite-twist-pullback] with $N=\\ell^n$ and $A=\\mathcal O_E/\\ell^n$. Thus $F,G$ preserve the stated bounded-below etale-origin domains.",
+   "text": "Obtain Maps d and the canonical EtaleOriginComparisonsWithLine h, giving natural eta and epsilon on the prescribed full domains.",
    "uses": [
-    "sk-lem-sp-tower-levels",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-sp-tower-p1-etale-origin-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Construction: domains"
-   }
+   "elementary": false
   },
   {
-   "text": "Each of $q,p_1,p_2$ is a projective-line projection, hence proper by [lemma-nagata-projective-space-base-change-proper]. The diagonal is a closed Cartier divisor by [det-sp-tower-classes], hence proper by [lem-weil-pbc-closed-immersion-proper](a). Its complementary open is quasi-compact: over each affine open of $W$, finitely many principal opens trivialize the invertible ideal, and the complement on each is one more principal open. Thus [lem-exc-proetale-closed-exact] makes $\\Delta_*$ exact at every finite level. Exactness on towers is levelwise by [det-sp-coefficient-towers-abelian], so $R\\Delta_{*,\\bullet}=\\Delta_*$, justifying the notation in the unit formula.",
+   "text": "Obtain normalized kernel splitting k and hk. Identify the inverse-exchange projection traces with k.trace using the trace identification bridge. Then diagonalScalar h a = k.scalar a = identity for each Boolean projection.",
    "uses": [
-    "lemma-nagata-projective-space-base-change-proper",
-    "det-sp-tower-classes",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-exc-proetale-closed-exact",
-    "det-sp-coefficient-towers-abelian"
+    "lem-sp-tower-p1-kernel-scalar-normalization",
+    "lem-sp-tower-p1-projection-trace-identification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Construction: properness and exact diagonal direct image"
-   }
+   "elementary": false
   },
   {
-   "text": "Form the canonical tensor, projection, composition and exchange maps on the simultaneous section models [lem-coef-semilinear-derived-sections]. These exist in the ambient unbounded derived category and evaluate to their finite maps. At level $n$, put $B=\\mathcal O_E/\\ell^n$. On the ordinary etale site, [lem-kun-0f0g] makes the projection maps for $q,p_1,p_2,\\Delta$ invertible for these coefficients and arbitrary derived inputs. For the present etale-origin inputs, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to $\\nu^*$ transports tensor, and [lem-weil-pbc-comparison-direct-image-canonical-mate] transports the direct images of the bounded-below arguments. The canonical comparisons transport the projection map itself: both maps are the transpose of the same counit tensored with identity, so the normalization in the direct-image comparison identifies their transposes. The finite etale projection identities also show that the tensors occurring here are bounded below: their targets are respectively $Rq_*q^{-1}K(1)[2]$, $R\\Delta_*M$, or $Rp_{i*}p_i^{-1}M(1)[2]$. For the last two projection reorderings, $Rp_{i*}B_W(1)[2]$ is a sum of two shifted flat lines by [lem-sp-tower-p1-arbitrary-base-integrals], so its tensor with $M$ is bounded below. Proper exchange is invertible by [lem-kun-proper-base-change-torsion-ring], and the same counit-mate normalization transports its actual map. Hence every evaluated projection and exchange map used here is invertible. Tower evaluation detects isomorphisms by [det-sp-tower-shriek-levels](3), so the actual tower maps are invertible. This avoids applying that node's restricted finite-Tor projection clause outside its hypotheses.",
+   "text": "Apply the tower triangle factorization. Tensor of identity with identity is identity by functor.map_id, and the scalar unitors cancel. Hence both triangles are identities on the actual tower-derived categories.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-kun-0f0g",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-sp-tower-p1-arbitrary-base-integrals",
-    "lem-kun-proper-base-change-torsion-ring",
-    "det-sp-tower-shriek-levels"
+    "lem-sp-tower-p1-triangle-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Construction: canonical projection and exchange on the stated domain"
-   }
+   "elementary": false
   },
   {
-   "text": "The projection isomorphism for $\\Delta$, with $\\Delta^*p_1^*M=M$, identifies $\\Delta_*M$ with $\\Delta_*A_P\\otimes^Lp_1^*M$. Exchange identifies $Rp_{2*,\\bullet}p_1^*M$ with $q_\\bullet^*FM$, and the projection formula for $q$ identifies $FGK$ with $K\\otimes^LRq_{*,\\bullet}A_P(1)[2]$, as in step 3. Composing with the actual diagonal class and trace of [det-sp-tower-classes] gives precisely the displayed natural $\\eta$ and $\\varepsilon$. Their naturality and evaluations follow from [lem-coef-semilinear-derived-sections]. Write $t_i=\\operatorname{Tr}_{p_i,\\bullet}$. Under exchange $t_i$ is the base change of the trace for $q$: the splitting components are the unit and $c_1(\\mathcal O(1))$; pullback preserves the unit, pulls back $\\mathcal O(1)$, and commutes with the Kummer boundary. It therefore carries the splitting, its inverse, and its second projection to those on the base change. This is an identity of the actual tower constructions, not an inference of equality from evaluation.",
-   "uses": [
-    "det-sp-tower-classes",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Construction of unit and counit; base change of the splitting trace"
-   }
-  },
-  {
-   "text": "*The two scalar endomorphisms and detection.* Let $\\alpha_i:A_P\\xrightarrow{\\sim}Rp_{i*,\\bullet}\\Delta_*A_P$ be the composition identification for $p_i\\Delta=1_P$, and put $c_i=t_i\\circ Rp_{i*,\\bullet}(\\delta_\\bullet)\\circ\\alpha_i$. These are endomorphisms of $A_P[0]$. Apply [lem-weil-pbc-derived-single-fully-faithful] to the abelian tower category of [det-sp-coefficient-towers-abelian]: each $c_i$ is a unique compatible family of module-sheaf maps. If all evaluated $c_i$ are identities, their underlying families equal the identity family, so $c_i=1$. This uses equality detection only between these degree-zero objects. The composition identification is the canonical derived-direct-image comparison supplied on tower section models by [lem-coef-semilinear-derived-sections].",
-   "uses": [
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "det-sp-coefficient-towers-abelian",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Levelwise check: degree-zero detection"
-   }
-  },
-  {
-   "text": "Fix $n\\geq1$ and put $N=\\ell^n$, $B=\\mathcal O_E/\\ell^n$. This is a finite torsion ring and $N$ is invertible on $S$. Exact evaluation and the canonical direct-image comparison identify the level of $c_i$ from step 5 with the pro-etale image of the finite etale composite $t_P\\circ Rp_{i*}(\\delta_B)\\circ\\alpha_i$: [sk-lem-sp-tower-levels] and [lem-coef-semilinear-derived-sections] identify the actual direct-image and composition maps, [lem-weil-pbc-comparison-direct-image-canonical-mate] specifies the comparison, and [det-sp-tower-classes] identifies the evaluated splitting, trace and supported class. The finite identity is exactly [lem-sp-tower-p1-arbitrary-base-integrals], which assumes neither a Noetherian nor a finite-type base. Applying $\\nu_P^*$ gives $(c_i)_n=1$ for both $i$. Step 5 now gives $c_1=c_2=1$ in the ordinary derived category of towers.",
-   "uses": [
-    "sk-lem-sp-tower-levels",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "det-sp-tower-classes",
-    "lem-sp-tower-p1-arbitrary-base-integrals"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Levelwise check: finite diagonal integrals"
-   }
-  },
-  {
-   "text": "*First triangle, integrating along $p_1$.* Expand $F\\eta_M$ using its definition, replace $qp_2$ by $qp_1$, and then apply $\\varepsilon_{FM}$. With the canonical direct-image composition maps and the projection formula established in step 3 this gives\n$$FM=R(qp_1)_{*,\\bullet}\\Delta_*M\\longrightarrow R(qp_1)_{*,\\bullet}p_1^*M(1)[2]\\simeq F\\bigl(M\\otimes^LRp_{1*,\\bullet}A_W(1)[2]\\bigr)\\xrightarrow{F(1_M\\otimes t_1)}FM.$$\nHere $t_1$ is the base-changed trace identified in step 4. The first arrow is $\\delta_\\bullet\\otimes p_1^*M$. Naturality of the projection comparison identifies its pushforward along $p_1$, including the source identification $\\Delta^*p_1^*M=M$, with $1_M\\otimes Rp_{1*,\\bullet}\\delta_\\bullet$. The exchange and projection reordering is the equality in [lem-weil-pbc-ringed-exchange-tensor-coherence] on the tower-topos ring object $A_\\bullet$; [lem-coef-semilinear-derived-sections] supplies the specified composition comparisons on this model. Thus the entire composite is $F(1_M\\otimes c_1)=1_{FM}$ by step 6, rather than merely a map which becomes an identity on evaluation.",
-   "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Reduction of the triangle identities: first triangle"
-   }
-  },
-  {
-   "text": "*Second triangle, integrating along $p_2$.* Put $M=GK$. On $W$ both $p_1^*M$ and $p_2^*M$ equal $(qp_1)^*K(1)[2]$, since $qp_1=qp_2$ and the twist pulls back from $S$. Factor $p_2^*M$ out of $Rp_{2*,\\bullet}(A_W\\otimes^Lp_2^*M)(1)[2]$ using the projection formula established in step 3. The arrow induced by $\\delta_\\bullet$ becomes $1_M\\otimes Rp_{2*,\\bullet}\\delta_\\bullet$, with source $M\\otimes A_P$. Under proper exchange, $G\\varepsilon_K$ contracts the remaining factor $Rp_{2*,\\bullet}A_W(1)[2]$ by $t_2$, by step 4. The exchange/projection compatibility [lem-weil-pbc-ringed-exchange-tensor-coherence] on the same tower ringed topos verifies these are the canonical maps. Hence $G\\varepsilon_K\\circ\\eta_{GK}=1_{GK}\\otimes c_2=1_{GK}$. Only even shifts have been moved past tensor factors, so their Koszul signs are $(-1)^{2j}=1$. The interchange of the two unshifted twist lines is also the identity: locally choose a generator $e$; the symmetry sends $ae\\otimes be$ to $be\\otimes ae=ab(e\\otimes e)$ over the commutative coefficient ring. These local equalities give the stated canonical symmetry globally.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Reduction of the triangle identities: second triangle"
-   }
-  },
-  {
-   "text": "*Adjunction from the two triangles.* For a tower map $u:FM\\to K$ define $\\Phi(u)=G(u)\\circ\\eta_M$, and for $v:M\\to GK$ define $\\Psi(v)=\\varepsilon_K\\circ F(v)$. Naturality and step 7 give $\\Psi\\Phi(u)=u\\circ\\varepsilon_{FM}\\circ F\\eta_M=u$. Naturality and step 8 give $\\Phi\\Psi(v)=G\\varepsilon_K\\circ\\eta_{GK}\\circ v=v$. These operations are natural in $M,K$, so they are the Hom bijection exhibiting $F\\dashv G$ with the specified unit and counit.",
+   "text": "Use the existing etaTransformation and epsilonTransformation as the adjunction unit and counit. The full-subcategory hom extensionality transfers the actual ambient triangle equalities. This is the adjunction record; both specified component equations are reflexive.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Conclusion of the triangle identities"
-   }
+   "elementary": true
   },
   {
-   "text": "*Evaluation and restriction.* For each $n\\geq1$, exact evaluation sends $A_\\bullet$ to $(\\mathcal O_E/\\ell^n)_T$, sends $\\delta_\\bullet$ to the finite supported diagonal class, and sends the splitting inverse followed by its second projection to the finite trace, by [det-sp-tower-classes]. The specified tensor, direct-image, exchange and projection comparisons evaluate to their finite comparisons by the section models [lem-coef-semilinear-derived-sections] and the maps constructed in step 3; shifts and inverse image are termwise. Substituting these in the displayed formulas gives the finite diagonal-defined unit and splitting-trace-defined counit with the actual coefficients $B=\\mathcal O_E/\\ell^n$.",
+   "text": "For each positive level use finite-adjunction assembly from reflected single-level triangles and normalized formula comparisons. Choose its finite map data, adjunction and two component equations to fill the finite fields of AdjunctionData.",
    "uses": [
-    "det-sp-tower-classes",
-    "lem-coef-semilinear-derived-sections"
+    "lem-sp-tower-p1-finite-adjunction-assembly"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Levels: evaluation of the specified maps"
-   }
+   "elementary": false
   },
   {
-   "text": "Here is an explicit verification that these maps form the finite adjunction on bounded-below etale-origin levels. Given a bounded-below complex $L$ of etale $B$-module sheaves on a scheme $T$, put $\\nu_T^*L$ at level $n$ and the zero complex at every other level, with every transition zero. This is a bounded-below complex of towers by the componentwise definition [sk-def-sp-coefficient-towers], and is in $\\mathscr C^+(T)$. Denote its derived object by $J_nL$. Write $F_n=Rq_{*,B}$ and $G_n=q^{-1}(-)(1)[2]$ on the finite etale categories. Evaluate the first tower triangle of step 7 on $J_nM$, for arbitrary $M\\in D^+(P_{\\mathrm{et}},B)$: the specified comparisons give\n$$\\nu_S^*\\bigl(\\varepsilon_{n,F_nM}\\circ F_n(\\eta_{n,M})\\bigr)=1_{\\nu_S^*F_nM}.$$\nEvaluate the second tower triangle of step 8 on $J_nK$, for arbitrary $K\\in D^+(S_{\\mathrm{et}},B)$: they give\n$$\\nu_P^*\\bigl(G_n(\\varepsilon_{n,K})\\circ\\eta_{n,G_nK}\\bigr)=1_{\\nu_P^*G_nK}.$$\nFull faithfulness [sk-prop-sf-comparison] removes $\\nu^*$ from both equalities. Thus the finite maps satisfy both triangles for every finite bounded-below input. Explicitly the inverse Hom operations are $u\\mapsto G_n(u)\\eta_{n,M}$ and $v\\mapsto\\varepsilon_{n,K}F_n(v)$, whose composites are $u\\varepsilon_{n,F_nM}F_n\\eta_{n,M}=u$ and $G_n\\varepsilon_{n,K}\\eta_{n,G_nK}v=v$. This proves the finite adjunction over the arbitrary base using the evaluated maps.",
+   "text": "Use the uniform-domain transport theorem in presentation coordinates to fill constructible_restriction. This is the original uniform-domain theorem transported by realization counits with unchanged bounds.",
    "uses": [
-    "sk-def-sp-coefficient-towers",
-    "sk-prop-sf-comparison"
+    "lem-sp-tower-p1-uniform-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Levels: finite triangles via single-level towers"
-   }
-  },
-  {
-   "text": "Now assume the standing setting [sk-def-sfb-dc-setting]: $S$ is separated and of finite type over a field of characteristic $p>0$, with $p\\ne\\ell$. To see that the full uniformly bounded constructible finite-Tor subcategories lie in $\\mathscr C^+$, use [sk-thm-pe-constructible-comparison] locally on affine $U$ and [det-pe-classical-derived-equivalence] with [sk-prop-sf-comparison]: the classical cohomology condition is local, so the bounded-below equivalence gives a global etale-origin witness for each bounded constructible level. Uniform cohomological bounds give a bounded-below tower because tower cohomology and vanishing are levelwise [det-sp-coefficient-towers-abelian].",
-   "uses": [
-    "sk-def-sfb-dc-setting",
-    "sk-thm-pe-constructible-comparison",
-    "det-pe-classical-derived-equivalence",
-    "sk-prop-sf-comparison",
-    "det-sp-coefficient-towers-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Restriction: the standing scheme setting and etale-origin witnesses"
-   }
-  },
-  {
-   "text": "[sk-lem-sp-tower-bound], with $f=q$, preserves uniformly bounded constructible finite-Tor towers under $F$. The map $q$ is a separated finite-type morphism of the standing schemes, smooth of relative dimension one, so this application satisfies the hypotheses of [sk-lem-sp-tower-bound].",
-   "uses": [
-    "sk-lem-sp-tower-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Restriction: preservation by the proper direct image"
-   }
-  },
-  {
-   "text": "For $G$ the bounds can be checked locally over each affine open $U\\subseteq S$, where both $U$ and $\\mathbf P^1_U$ are quasi-compact and quasi-separated. With $B=\\mathcal O_E/\\ell^n$, the constructible comparison [sk-thm-pe-constructible-comparison] gives a bounded constructible etale representative $L_n$ of $K_n|_U$. The same fixed Tor interval $[a,b]$ holds for $L_n$ by [lem-exc-comparison-tor-interval]. Choose its flat representative supported in $[a,b]$ using [lem-sf-etale-flat-model]. A bounded complex of flat sheaves is K-flat: tensoring each flat term with an acyclic complex is acyclic, and the finite filtration by shifted terms gives the assertion for the complex. The termwise pullback along $q$ is K-flat with flat terms by [lem-weil-pbc-ringed-topos-kflat-pullback], and remains supported in $[a,b]$. Tensor with the locally free rank-one twist of [lem-asd-finite-etale-twist-line] and shift by $[2]$ gives a flat complex supported in $[a-2,b-2]$; its tensor with any degree-zero test sheaf has no other terms, so this is its Tor interval. Transfer the interval back to the pro-etale site by [lem-exc-comparison-tor-interval]. Exact inverse image preserves the cohomological interval, and inverse-image strata and their pulled-back finite constant trivializations show constructibility. These bounds hold for every $n$ and every $U$; vanishing is local, so they hold globally, with the shift moving both bounds by $-2$. Hence both functors preserve the full tower subcategories [sk-def-sp-normalized-towers], and the same Hom bijection restricts to them.",
-   "uses": [
-    "sk-thm-pe-constructible-comparison",
-    "lem-exc-comparison-tor-interval",
-    "lem-sf-etale-flat-model",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-asd-finite-etale-twist-line",
-    "sk-def-sp-normalized-towers"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
-    "place": "Restriction: pullback, twist, and uniform Tor bounds"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "sk-lem-sp-tower-levels",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-asd-etale-finite-twist-pullback",
-  "lemma-nagata-projective-space-base-change-proper",
-  "det-sp-tower-classes",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-exc-proetale-closed-exact",
-  "det-sp-coefficient-towers-abelian",
-  "lem-coef-semilinear-derived-sections",
-  "lem-kun-0f0g",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sp-tower-p1-arbitrary-base-integrals",
-  "lem-kun-proper-base-change-torsion-ring",
-  "det-sp-tower-shriek-levels",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "sk-def-sp-coefficient-towers",
-  "sk-prop-sf-comparison",
-  "sk-def-sfb-dc-setting",
-  "sk-thm-pe-constructible-comparison",
-  "det-pe-classical-derived-equivalence",
-  "sk-lem-sp-tower-bound",
-  "lem-exc-comparison-tor-interval",
-  "lem-sf-etale-flat-model",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-asd-finite-etale-twist-line",
-  "sk-def-sp-normalized-towers"
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "lem-sp-tower-p1-kernel-scalar-normalization",
+  "lem-sp-tower-p1-projection-trace-identification",
+  "lem-sp-tower-p1-triangle-factorization",
+  "lem-sp-tower-p1-finite-adjunction-assembly",
+  "lem-sp-tower-p1-uniform-presentation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
  },
  "mathlib_searches": [
   {
@@ -387,97 +222,21 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-tower-geometric",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "det-sp-tower-p1-adjunction",
   "worker": "stage1",
-  "summary": "Retained and audited the diagonal-kernel proof. Corrected C4: use the arbitrary-base torsion-ring projection theorem lem-kun-0f0g, canonical comparison and evaluation conservativity, rather than the restricted projection clause of det-sp-tower-shriek-levels. STATEMENT-DISPUTED: the unrestricted constructible restriction fails for an infinite disjoint union of bases with unbounded collision-stratification depth (explicit counterexample in report.md); the final restriction is now stated in the unit’s standing finite-type field setting. Extracted the genuinely separate arbitrary-base finite diagonal-integral lemma; removed three unused/restated/elementary helper nodes. Retained the detailed finite proof and old files in sandbox history.",
+  "summary": "Q12 repaired the released 2026-10-22 re-split order: five independently stated unsplit intermediate lemmas cover the canonical maps, diagonal scalar normalization, both contraction computations, single-level finite transfer, and uniform ctf domains. The statement, statement dependencies and Lean record remain verbatim. All fourteen old arguments are mapped to their new owners and retained verbatim in report.md for future workers; only formal Hom-bijection assembly remains here. Reused and read the five logged multi-service Mathlib searches rather than repeating them.",
   "blueprint": {
    "node": "det-sp-tower-p1-adjunction",
    "places": [
-    "Construction and reduction of triangle identities: steps 1-4 and 7-9.",
-    "Levelwise check and degree-zero detection: steps 5-6, using the new arbitrary-base finite integral statement.",
-    "Levels: steps 10-11.",
-    "Restriction to the uniformly bounded finite-Tor tower category of the unit, with its standing scheme hypotheses: steps 12-14."
+    "Construction and Levels: assembly step 1, comparison node (old 1-4 and 10).",
+    "Levelwise check: assembly step 2, scalar node (old 4-6).",
+    "Reduction of triangles: assembly steps 3-4, factorization node (old 7-9).",
+    "Levels: assembly step 5, single-level node (old 10-11).",
+    "Restriction in the corrected standing setting: assembly step 6, uniform-domain node (old 12-14)."
    ]
   },
-  "tool_uses": [
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Generic varying-coefficient tower tensor and direct-image section models with actual comparison maps; no assertion of faithful evaluation on general derived morphisms."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "why": "Generic compatibility of canonical projection and exchange maps on a ringed diagram topos, needed in both triangle reductions."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "Generic bounded-below etale/pro-etale comparison needed to keep etale-origin levels in the corrected domain."
-   },
-   {
-    "node": "lemma-nagata-projective-space-base-change-proper",
-    "why": "Step 2 checks properness of the projective-line projections q, p_1, p_2 used for exchange and projection."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-proper",
-    "why": "Step 2 checks properness of the diagonal closed immersion."
-   },
-   {
-    "node": "lem-exc-proetale-closed-exact",
-    "why": "Step 2: exactness of the closed diagonal direct image at every finite level, justifying R Delta_* = Delta_* in the unit formula."
-   },
-   {
-    "node": "sk-thm-pe-constructible-comparison",
-    "why": "Steps 12 and 14: bounded constructible etale representatives of the levels (domain and uniform Tor bounds); generic tool, not a replacement of the diagonal-class route."
-   },
-   {
-    "node": "lem-exc-comparison-tor-interval",
-    "why": "Step 14 transports the uniform Tor interval between etale and pro-etale levels; generic tool, not a replacement of the diagonal-class route."
-   },
-   {
-    "node": "lem-sf-etale-flat-model",
-    "why": "Step 14 chooses bounded flat etale models in the Tor interval; generic tool, not a replacement of the diagonal-class route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "why": "Step 14: pullback of the bounded flat model stays K-flat with flat terms; generic tool."
-   },
-   {
-    "node": "lem-asd-finite-etale-twist-line",
-    "why": "Finite coefficient twist is locally free of rank one on any ell-invertible base; used for domains and flatness, not a replacement geometric route."
-   },
-   {
-    "node": "sk-prop-sf-comparison",
-    "why": "Steps 11 and 12: full faithfulness of the bounded-below comparison removes nu^* from the evaluated triangles, and supplies the hypothesis of the bounded-classical equivalence."
-   },
-   {
-    "node": "lem-kun-proper-base-change-torsion-ring",
-    "why": "Step 3: arbitrary-base canonical proper exchange for the square p_1,p_2 over q,q is invertible at each finite level; used only with B killed by ell^n."
-   },
-   {
-    "node": "lem-weil-pbc-derived-single-fully-faithful",
-    "why": "Step 5: only degree-zero Hom detection for the tower scalar endomorphisms c_i."
-   },
-   {
-    "node": "det-pe-classical-derived-equivalence",
-    "why": "Step 12: places bounded constructible levels in the etale-origin domain via the local constructible comparison."
-   },
-   {
-    "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Step 1: the finite twist is locally free of rank one and compatible with pullback, so G preserves etale-origin levels."
-   },
-   {
-    "node": "lem-kun-0f0g",
-    "why": "Arbitrary-base proper projection for torsion-ring ordinary etale coefficients; the tower projection clause has narrower hypotheses."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Strong monoidal comparison inverse image, transporting the finite etale projection map to etale-origin pro-etale inputs."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Canonical etale/pro-etale pullback comparison needed for the etale-origin domains."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-coef-semilinear-derived-sections",
@@ -509,49 +268,29 @@
   "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q106-bcffde18b",
-  "group": "Q106",
+  "reviewer": "NT-cc-Q12-e152604fc",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-bcffde18b (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no mathematical fault; I repaired two small form faults in fixes/. (1) Statement change E7: the restriction to uniformly bounded ctf towers now holds only in sk-def-sfb-dc-setting. The counterexample checks out: S=⊔A^n_k with H=i_*B_D, D_n the union of the n sections t=x_j. Stalk ranks n,…,1 along a specialization chain need at least n strata, so no finite global stratification of def-weil-proetale-constructible-sheaf exists. The only citer, det-sp-tower-gluing, works in the standing setting, so it is unaffected. The C^+ domain and the arbitrary base S are unchanged. (2) C4 repair: step 3 now uses lem-kun-0f0g (Stacks 0F0G, proper map, any torsion ring, unbounded inputs, as I read in etale-cohomology.tex), lem-kun-proper-base-change-torsion-ring (0F0C) and tower conservativity shriek-levels(3). It no longer uses the restricted clause 2(a). (3) Steps 1–14 each check against their cited statements: Δ Cartier with quasi-compact complement; degree-zero full faithfulness used only on A_P[0]; δ sign matches c_{Δ}u=c_1(O(Δ)); single-level towers J_nL; sk-lem-sp-tower-bound now with all its hypotheses (q smooth of relative dimension 1, j=id); Tor interval shifted to [a−2,b−2]. (4) New node lem-sp-tower-p1-arbitrary-base-integrals is true over any base: proper base change to geometric points, and only the A_P component y=1 is claimed. It holds for A=0, N=1 and non-reduced bases. It is not a duplicate: lem-amb-p1-diagonal-integrals, thm-amb-p1-decomposition and lem-asd-ordinary-finite-p1-adjunction are Noetherian; det-sp-p1-trace is Z/ℓ^n and its arbitrary-base remark covers only clauses (1)–(2). It does not restate a clause of the item. The review suggests a shorter future route: base change from Spec Z[1/N]. (5) The five off-route uses (lem-exc-proetale-closed-exact, lem-coef-semilinear-derived-sections, lem-kun-0f0g, lem-kun-proper-base-change-torsion-ring, lem-exc-comparison-tor-interval) are declared, and I accept them as generic tools. Fixes: the new node lacked lean_audit (added none/none and moved blueprint after id); the split_report tool_uses reasons cited stale step numbers (corrected; the item is identical outside split_report). No SGA source is used.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-e152604fc (reviewer sub-agent of L); spot-checked: Q12 det-sp-tower-p1-adjunction re-split e152604f: I read the item, all five new nodes in full, the cited statements and the blueprint p1 proof. I checked the old 14-step proof against the Lean docstring of exists_towerP1Adjunction (the report quotes it word for word). Every old argument now has an owner. Steps 1-4 (construction) go to etale-origin-comparisons. Step 4 (trace base change) and steps 5-6 go to kernel-scalar-normalization, which proves c_i=1 through arbitrary-base-integrals with N=ell^n, A=O_E/ell^n, and through degree-zero full faithfulness used only on A_P[0]. Steps 7-8 go to triangle-factorization, with c_i left unevaluated. Steps 10-11 go to single-level-triangles, whose J_n puts one nonzero level with zero transitions and whose reflection is conditional on the tower triangles. Steps 12-14 go to uniform-ctf-domains, in the standing setting with the unnormalized D_ctf, cohomology in [r-2,s-2] and Tor amplitude in [a-2,b-2]. Old step 9 stays as elementary item step 4. The children run 2.4-3.3k characters and the assembly is 1908. None restates the item, and I found no duplicate: the r_n evaluation-adjoint nodes and the Noetherian finite P1 adjunction are different. Sources check: Stacks 0F0C/0F0G apply over arbitrary bases, the Delta complement is quasi-compact, and the supported-class sign agrees across det-sp-tower-classes(3) and the integrals node. Edge cases I tested: n=1, ramified E, empty S, a=b. Both batch-5 flags are accepted. det-sp-tower-classes was already in the item's stmt_deps and old proof, and its chain ends in the generic fractions lemma lem-trf-right-fraction-dense-subcategory. arbitrary-base-integrals was already cited in base steps 3 and 6, and its chain ends in the generic stalk-tensor lemma lem-pod-etale-stalk-tensor-scalar. Neither is a trace-formula or Poincare-duality step. Advisory only: the item's merge-owned tool_uses list is stale, and the uniform node bundles the f=q case of sk-lem-sp-tower-bound (as old step 13 did). No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.SmoothPurityTowerP1Adjunction",
   "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.exists_towerP1Adjunction",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.SpTowerP1.domain",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.C",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.TensorData",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.TensorData.symmetry",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.TensorData.rightUnit",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.TensorData.leftUnit",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.projection",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.F",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.G",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.trace",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.delta",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.line2Iso",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.diagonalPull",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.sourceUnit",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.exchange",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Presentation.diagonalProjection",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.Maps",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.left",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.rightRestricted",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.epsilon",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.eta",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteDomain",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteF",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteG",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.evaluation",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.FiniteMaps",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteLeft",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteRight",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.uniform",
-   "AlgebraicGeometry.ProEtale.SpTowerP1.AdjunctionData",
    "AlgebraicGeometry.ProEtale.SpTowerP1.exists_towerP1Adjunction"
   ],
   "file": "lean/Sheaf/Paper/SmoothPurityTowerP1Adjunction.lean",
@@ -568,5 +307,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Re-delivery of RETURNed 20e016916001. R1 (H2) resolved: sk-lem-sp-tower-bound replaced in stmt_deps by new existing:true def node def-sp-tower-shriek-realization; statement verbatim with live SmoothPurityTowerBound, real data def (b.realization T).mapDerivedCategory, no other owner node. R2 (H3) resolved: theorem now ∀ p : Presentation, ∃ d : Maps p, Nonempty (AdjunctionData d); only line changed in the module. Under ∀ re-checked every Presentation field is pinned: Operations/Geometry HEq to generic; comp via comp_termwise/comp_evaluation; TensorData model normalizations; unitIso HEq types agree (with_unfolding_all rfl probe compiled); identity via identity_normalization; line2 via LinePullback.normalization. Maps and AdjunctionData carry no free data. Mechanical finding: proEtaleStalkIdentityPullback is .choose of the ∃! theorem in lem-trf-proetale-pullback-stalk-coherence, an object the theorem constructs → PASS on that point. Compile: nt_compile --json exit 0, no diagnostics, 22.9 s. Report has Worker report, Second reading by NG and Returned-delivery repairs. Advisory only: SpTowerShriek.* plain defs are owned by theorem node det-sp-tower-shriek-levels."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a6ed",
+  "group": "F9",
+  "result": "fix",
+  "landing": "20261025T202024-L-2664705",
+  "kind": "interface",
+  "note": "independent cc review: SmoothPurityTowerP1Data vs the old item body (verbatim apart from explicit pullback arguments in Presentation.exchange); item proof vs ComparisonsWithLine, KernelScalarNormalization, TriangleFactorization and the new nodes; 43-module sandbox build (all 7 direct importers OK); #print axioms"
  }
 }

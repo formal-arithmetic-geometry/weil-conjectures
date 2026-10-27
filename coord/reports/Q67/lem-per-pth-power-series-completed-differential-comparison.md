@@ -1,0 +1,118 @@
+## Worker report
+
+The module `Sheaf.RingTheory.PthPowerSeriesCompletedDifferentialComparison` states
+`KaehlerDifferential.pth_power_series_completed_differential_comparison`, with one
+`sorry` and no new definitions. The node is unchanged except for `lean`.
+The previously withdrawn module is absent from both current source roots, and its
+declaration has not survived under another module. There is no repair note.
+
+Hypotheses and clauses, matched individually:
+
+- A field `F` is `(F : Type u) [Field F]`. Characteristic `p > 0` is
+  `(p : ℕ) [CharP F p] (hp : p ≠ 0)`; positivity is equivalent to nonzero for naturals.
+  No perfectness assumption is made.
+- The nonnegative number of parameters is `(r : ℕ)`, including zero, and
+  `B = F[[T_1,...,T_r]]` is `MvPowerSeries (Fin r) F`.
+- The complete Noetherian local `F`-algebra is `(C : Type v) [CommRing C]`,
+  `[IsLocalRing C] [IsNoetherianRing C] [Algebra F C]`, and
+  `[IsAdicComplete (IsLocalRing.maximalIdeal C) C]`. Its universe is independent of `F`.
+- The map `u` is `algebraMap (MvPowerSeries (Fin r) F) C`, with the corresponding
+  `Algebra` instance. `IsScalarTower F (MvPowerSeries (Fin r) F) C` asserts that it
+  is an `F`-algebra homomorphism, and `IsLocalHom` asserts locality. This is the usual
+  typeclass encoding of a specified ring map, not a restriction to an injective map.
+- `hcont` is `@Continuous` with the variables-ideal adic topology on `B` and the
+  maximal-ideal adic topology on `C`, exactly the two topologies in the node.
+- Finiteness over `B` is `[Module.Finite (MvPowerSeries (Fin r) F) C]`.
+- `B₁` is `(MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range`, an actual
+  subalgebra of `B`, with its induced algebra structure on `C`. Expansion fixes
+  coefficients and sends `T_i` to `T_i^p`. The coefficient formula
+  `coeff_expand_smul` and vanishing `coeff_expand_of_not_dvd` identify its range
+  with all series supported on exponents divisible by `p`: conversely, divide each
+  supported exponent by `p` and use its coefficient to construct the preimage series.
+  This is parameter expansion, including arbitrary coefficients in an imperfect field.
+- `Ω̂_{C/F}` is `AdicCompletion (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C)`.
+  Mathlib defines this as compatible families in `Ω / (m^n • ⊤)`, including `n = 0`.
+- The canonical completed differential on `c` is
+  `AdicCompletion.of _ _ (KaehlerDifferential.D F C c)`. The first conjunct states
+  its vanishing on the image of every `b : B₁`, using `b.val` and the map `u`.
+- The second conjunct provides a `C`-linear equivalence from `KaehlerDifferential B₁ C`
+  to that completion, normalized by `e (D B₁ C c) = of _ _ (D F C c)` for every `c`.
+  By the universal property of Kähler differentials, this uniquely specifies its
+  forward linear map as the canonical map induced by the first conjunct's derivation.
+  Thus the existential equivalence states that this canonical map is an isomorphism;
+  it does not select an arbitrary isomorphism between the underlying modules.
+
+Dependency declarations used, with their signatures and docstrings read:
+
+- `Mathlib.RingTheory.MvPowerSeries.Basic`: `MvPowerSeries` and its algebra structure.
+  `Mathlib.RingTheory.MvPowerSeries.Expand` supplies the existing `expand` algebra map,
+  and `Mathlib.RingTheory.MvPowerSeries.Inverse` its local ring instance.
+- `Mathlib.RingTheory.Noetherian.Defs`: `IsNoetherianRing`, equivalently every ideal FG.
+- `Mathlib.RingTheory.AdicCompletion.Basic`: `IsAdicComplete`, `AdicCompletion`,
+  `AdicCompletion.of`. The latter is the coordinatewise quotient map.
+- `Mathlib.RingTheory.Finiteness.Defs`: `Module.Finite`, expressing that `⊤` is FG.
+- `Mathlib.RingTheory.Kaehler.Basic`: `KaehlerDifferential`, `KaehlerDifferential.D`,
+  and `KaehlerDifferential.linearMapEquivDerivation` for the interpretation of the
+  normalization on the equivalence.
+- Proof import `WeilConjectures.RingTheory.FiniteModuleComplete`:
+  `finite_module_complete_over_complete_noetherian` (read in full, independent universes).
+  The other proof-only node `lem-per-completed-differential-finite-conormal` currently
+  has neither a Lean record nor an upstream declaration; there is no module to import.
+  Its theorem is not needed to elaborate this statement. Its five-step use is recorded
+  in the theorem docstring for stage 3.
+
+Source checked: EGA-IV-1 PDF page 176 (printed p.177), Lemma 21.9.4 and its proof.
+The source proves the comparison through continuous derivations and completeness
+of finite relative differentials. The node's module-finite assumption is its stated
+special case. The current blueprint ancestor's proof was also read. No statement
+correction or disputed mathematical clause is needed.
+
+Edge cases checked: `r = 0` gives `B₁ = B = F` and completion is an equivalence for
+the finite algebra's finite differentials; finite inseparable extensions are included.
+For `C = B` the relative and completed modules are freely generated by the parameter
+differentials. The quotient `B → F` is permitted, so injectivity was not silently added.
+For imperfect `F`, coefficients remain fixed under expansion; the base is not the
+subring of pth powers of all elements. Zero rings are excluded by `IsLocalRing`, as
+is usual for local rings. The zeroth completion quotient is zero and adds no condition.
+
+Actual searches (all via the prescribed `msearch.py Q67 <item>` wrapper unless noted):
+
+- `leanfinder`: `completed Kahler differentials finite algebra formal power series
+  characteristic p relative pth power parameters` — eight hits, including
+  `KaehlerDifferential.finite`, finite-presentation differential results, and unrelated
+  perfectoid completions; no comparison over pth-power formal parameters.
+- `loogle`: `KaehlerDifferential, AdicCompletion` — zero hits.
+- `grep`: `KaehlerDifferential.*(complete|adic)|completed.*differential` — zero hits.
+- `leansearch`: `completed Kahler differentials over a formal power series algebra
+  in characteristic p` — eight ordinary differential results, including
+  `KaehlerDifferential`, its derivation, polynomial differentials and étale base change;
+  no completed comparison.
+- Direct `rg` on `lean/WeilConjectures`, `lean/Sheaf` and upstream names, with
+  `pth_power_series_completed`, the node id, `expand.*range`, and completed-differential
+  patterns: no declaration of this statement. The required direct `grep -rn` of the
+  node id in `lean/WeilConjectures` also returned no hits.
+- Read nearby `Sheaf.RingTheory.ContinuousKaehlerDifferential` and
+  `Sheaf.RingTheory.CompletionKaehlerDifferentialComparison`: these concern inverse
+  limits of quotient differentials and a local completion of a finite-type algebra
+  with separable coefficient field, respectively. Neither states this comparison.
+
+Validation: `scompile.py` compiled both sandbox and library-path forms cleanly in
+1.3 and 1.4 seconds, respectively. Auto-implicit binding is disabled explicitly.
+
+## Second reading by Q67
+
+A separate self-audit was performed after the successful compile, reopening the node
+and statement together. No separate agent was started, as the dispatcher brief forbids it;
+the maintainer's independent review remains the external second reading.
+
+Checked the field and characteristic binders, all `C` hypotheses, the `F`-compatibility
+of `u` via the scalar tower, locality, the exact two adic topologies in `hcont`, and
+module finiteness. Checked that the subalgebra is the range of parameter expansion
+with coefficients fixed, that its action on `C` is induced by the original algebra
+map (Mathlib `Subalgebra.toAlgebra`), and that both differential modules use this
+same `C`. Checked the first conjunct's vanishing and the second conjunct's generator
+normalization against the two concluding clauses of the node. The normalization
+determines the canonical map; no arbitrary-map assumption or mere `Nonempty` replaces it.
+No mismatch was found and no signature change was needed. All theorem proofs remain
+`sorry`, all declarations have source/blueprint docstrings, and the five proof steps
+are reproduced in the declaration docstring. No extra nodes or dependency repairs.

@@ -1,0 +1,424 @@
+{
+ "id": "lem-sfb-normalized-dualizing-depth-detection",
+ "kind": "statement",
+ "title": "Normalized algebraic duality: degree bounds and depth detection for a finite module",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero commutative Noetherian local ring, meaning a commutative Noetherian ring with unique maximal ideal $\\mathfrak m$ [def-weil-pbc-noetherian-ring], and let $\\kappa=A/\\mathfrak m$. Let $K\\in D(A)$ [def-weil-abstract-derived-category] be a normalized algebraic dualizing complex, meaning that $K$ is isomorphic to a bounded complex of injective $A$-modules [def-sp-injective-resolutions], every $H^j(K)$ is finitely generated, the scalar-action map $A[0]\\to R\\operatorname{Hom}_A(K,K)$ is an isomorphism, and $R\\operatorname{Hom}_A(\\kappa[0],K)\\cong\\kappa[0]$ in $D(A)$; here $R\\operatorname{Hom}_A$ is the derived internal Hom on the one-object ringed site [def-pur-derived-internal-hom]. Let $M$ be a nonzero finitely generated $A$-module [def-weil-finitely-generated-module]. For $i\\in\\mathbf Z$ put $E^i=H^i(R\\operatorname{Hom}_A(M[0],K))$. Let $\\operatorname{Supp}_A(M)$ be the set of primes $\\mathfrak q$ with $M_{\\mathfrak q}\\ne0$ [def-weil-pbc-localization-at-prime], and let $d_M$ be its dimension, the supremum of the lengths of strict chains of primes all lying in $\\operatorname{Supp}_A(M)$ [def-weil-pbc-krull-dimension-ring]. Then: (1) if $d_M$ is finite, $E^i=0$ for $i<-d_M$ and for $i>0$; (2) $\\operatorname{depth}_{\\mathfrak m}(M)$ [def-weil-pbc-depth] is finite and equals the smallest integer $t\\geq0$ for which $E^{-t}\\ne0$. In particular, $E^{-\\operatorname{depth}_{\\mathfrak m}(M)}\\ne0$ and $E^{-t}=0$ whenever $0\\leq t<\\operatorname{depth}_{\\mathfrak m}(M)$.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (3), for nonzero finite modules (proved together by the induction on dim Supp(M) in its proof); the zero module is excluded because its depth is infinite; dualizing complex as in Tag 0A7B (definition-dualizing), normalized as in the opening paragraph of section-dualizing-local, stated inline."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-pur-derived-internal-hom",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Write $D^i(T)=H^iR\\operatorname{Hom}_A(T[0],K)$ for any finite $T$. The hypotheses on $K$ are used as written inline, without a separate dualizing-definition node. By [lem-trf-coherent-rhom-finite-injective-dimension], applied with source $T[0]$ and target $K$, every $D^i(T)$ is finite. For nonzero finite $T$, [lem-weil-pbc-depth-ext] gives finite depth. Also $\\operatorname{Ann}_A(T)$ is proper and contained in $\\mathfrak m$, so [lem-weil-pbc-finite-module-support-annihilator] puts $\\mathfrak m$ in its support. Every prime chain of its support is a prime chain of $A$; [lem-weil-pbc-noetherian-local-finite-krull-dimension] therefore gives $0\\le d_T\\le\\dim A<\\infty$. We have $D^i(0)=0$, directly from the zero Hom complex.",
+   "uses": [
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "lem-weil-pbc-depth-ext",
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0G4H (lemma-finite-ext-into-bounded-injective), 0A7U (lemma-sitting-in-degrees); algebra.tex Tags 00LW (lemma-depth-ext), 00L2 (lemma-support-closed), 00KQ (proposition-dimension)."
+   }
+  },
+  {
+   "text": "Fix a bounded injective representative $J$ of $K$. The natural derived isomorphism of [lem-trf-bounded-injective-rhom-model-support], applied to $T[0]$, computes $D^i(T)$ as $H^i\\operatorname{Hom}_A^\\bullet(T[0],J)$. For $0\\to U\\to V\\to W\\to0$, apply [lem-trf-bounded-injective-total-hom-exact] to the complexes in degree zero, then [lem-weil-pbc-complex-ses-homology-long-exact]. This gives $\\cdots\\to D^i(W)\\to D^i(V)\\to D^i(U)\\to D^{i+1}(W)\\to\\cdots$. The naturality clause of the model node identifies these arrows with the maps induced by the given module maps. If $U\\to V$ is multiplication by $f$ on $T$, its Hom-complex map is multiplication by $f$, since $\\varphi(ft)=f\\varphi(t)$ termwise; its cohomology map is consequently multiplication by $f$ as well.",
+   "uses": [
+    "lem-trf-bounded-injective-rhom-model-support",
+    "lem-trf-bounded-injective-total-hom-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), long exact sequences in the proof; Tag 0G4H, bounded injective computation; homology.tex Tag 0117."
+   }
+  },
+  {
+   "text": "For a finite-length $A$-module $L$, [lem-weil-pbc-finite-length-module-simple-filtration] gives $0=L_0\\subsetneq\\cdots\\subsetneq L_r=L$ with simple factors. Each simple factor $S$ is $\\kappa$: if $0\\ne z\\in S$, simplicity makes $a\\mapsto az$ a surjection $A\\to S$ with proper kernel $I$; a strict intermediate ideal $I\\subsetneq J\\subsetneq A$ would give a proper nonzero submodule of $S$. Thus $I$ is maximal, hence $I=\\mathfrak m$. These maps identify all factors with $\\kappa$. In particular $\\mathfrak m L_j\\subseteq L_{j-1}$, so $\\mathfrak m^r L=0$; if $L\\ne0$ then $r\\ge1$ and $L_1\\cong\\kappa$ embeds in $L$.",
+   "uses": [
+    "lem-weil-pbc-finite-length-module-simple-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U, dimension-zero case, and lemma-dualizing-finite-length, opening length induction; algebra.tex Tag 00J3 (lemma-simple-pieces), parts (2),(3)."
+   }
+  },
+  {
+   "text": "The normalization in the statement gives $D^i(\\kappa)=0$ for $i\\ne0$ and $D^0(\\kappa)\\cong\\kappa\\ne0$. Induct on $j$ in Step 3, starting with $L_0=0$. Applying Step 2 to $0\\to L_{j-1}\\to L_j\\to\\kappa\\to0$ shows $D^i(L_j)=0$ for $i\\ne0$ and gives $0\\to\\kappa\\to D^0(L_j)\\to D^0(L_{j-1})\\to0$: the outer groups needed here are $D^{-1}(L_{j-1})$ and $D^1(\\kappa)$, already zero. Thus every finite-length $L$ has dual cohomology concentrated in degree zero, and $D^0(L)\\ne0$ if $L\\ne0$. This is the elementary filtration argument, not the full Matlis-duality identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U, dimension-zero case; lemma-dualizing-finite-length, first sentence of its proof."
+   }
+  },
+  {
+   "text": "We now prove by strong induction on $d\\ge0$ that every nonzero finite $T$ with $d_T=d$ satisfies $D^i(T)=0$ for $i<-d$ or $i>0$. When $d=0$, any prime of its support distinct from $\\mathfrak m$ would give a strict length-one chain ending in $\\mathfrak m$, which belongs to the support by Step 1. Hence its support is $\\{\\mathfrak m\\}$. By [lem-sc-generic-stalk-finite-length], $T$ has finite length. Step 4 gives exactly the desired vanishing. For $d>0$ assume the bounds for every nonzero finite module of support dimension strictly below $d$; first prove the positive-depth case at dimension $d$, then the depth-zero case.",
+   "uses": [
+    "lem-sc-generic-stalk-finite-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), induction on support dimension; algebra.tex Tag 00L5 (lemma-support-point)."
+   }
+  },
+  {
+   "text": "Suppose $d_T=d>0$ and $\\operatorname{depth}(T)>0$. The supremum definition of depth gives a regular sequence of positive length; its first element $f\\in\\mathfrak m$ acts injectively on $T$. Put $Q=T/fT$. Its finite generating set is given by the images of generators of $T$, and $Q\\ne0$ by Nakayama. The nonzerodivisor clause of [lem-weil-pbc-support-dimension-quotient-element-equality] gives $d_Q+1=d_T$, so $d_Q=d-1$. The dimension induction in Step 5 applies to $Q$ and gives $D^j(Q)=0$ for $j<-(d-1)$ or $j>0$. Step 2 applies to $0\\to T\\xrightarrow{f}T\\to Q\\to0$.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-nakayama-jacobson",
+    "lem-weil-pbc-support-dimension-quotient-element-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U, positive-depth dimension induction; algebra.tex Tag 0B52 (lemma-one-equation-module), nonzerodivisor clause; Tags 00LI, 00LF, 00DV."
+   }
+  },
+  {
+   "text": "For $i<-d$ we have $i+1<-(d-1)$, and for $i>0$ we have $i+1>0$. Thus $D^{i+1}(Q)=0$ in either case by Step 6. The exact segment $D^i(T)\\xrightarrow f D^i(T)\\to D^{i+1}(Q)$ gives $fD^i(T)=D^i(T)$. The module $D^i(T)$ is finite by Step 1; the ideal $(f)$ is contained in the Jacobson radical $\\mathfrak m$. By [lem-weil-pbc-nakayama-jacobson], $D^i(T)=0$. This establishes the bounds for all positive-depth modules of dimension $d$ before any depth-zero module of dimension $d$ is considered.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U, positive-depth dimension induction and Nakayama; algebra.tex Tag 00DV (lemma-NAK)."
+   }
+  },
+  {
+   "text": "For $d_T=d>0$ with depth zero, set $N=T[\\mathfrak m^\\infty]=\\{z\\in T:\\mathfrak m^e z=0\\text{ for some }e\\ge1\\}$ and $T'=T/N$. The set $N$ is a submodule: a maximum of two annihilating exponents works for a sum, and scalar multiplication preserves the condition. By [lem-weil-pbc-noetherian-submodule-finite], $N$ is finite. Choose finitely many generators and take the maximum $e$ of their annihilating exponents, obtaining $\\mathfrak m^e N=0$ (take $e=1$ if $N=0$). At any prime $\\mathfrak q\\ne\\mathfrak m$, choose $a\\in\\mathfrak m\\setminus\\mathfrak q$; then $a^eN=0$, and $a$ acts invertibly after localization, so $N_{\\mathfrak q}=0$. Hence, if $N\\ne0$, [lem-sc-generic-stalk-finite-length] gives it finite length, and Step 4 applies. If $N=0$ its dual vanishes by Step 1.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-pbc-module-localization",
+    "lem-sc-generic-stalk-finite-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U, depth-zero reduction to maximal-ideal power torsion; algebra.tex Tags 00IK (lemma-Noetherian-basic), 00L5 (lemma-support-point)."
+   }
+  },
+  {
+   "text": "For $\\mathfrak q\\ne\\mathfrak m$, the quotient map gives an isomorphism $T_{\\mathfrak q}\\to T'_{\\mathfrak q}$, directly on fractions: it is surjective by lifting numerators, and if $z/s$ maps to zero, some $u\\notin\\mathfrak q$ has $uz\\in N$, whence $a^euz=0$ for the $a$ of Step 8, so $z/s=0$. Since $d>0$, the support of $T$ contains a prime other than $\\mathfrak m$; thus $T'\\ne0$. It is finite as a quotient. Step 1 puts $\\mathfrak m$ in both supports. The fraction isomorphisms identify their remaining support points, so $\\operatorname{Supp}(T')=\\operatorname{Supp}(T)$ and $d_{T'}=d$. This argument uses only the fraction equality and zero criterion in [def-weil-pbc-module-localization].",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U, depth-zero paragraph: dim Supp(M/N)=d; direct fraction verification of the support identification."
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak m$ is finitely generated since $A$ is Noetherian. By [lem-weil-pbc-quotient-by-power-torsion-no-torsion], $T'[\\mathfrak m]=0$. In particular no element of $T'$ has annihilator exactly $\\mathfrak m$. By [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] there is an $f\\in\\mathfrak m$ acting injectively on $T'$. Nakayama makes $T'/fT'$ nonzero, so the depth and regular-sequence definitions give $\\operatorname{depth}(T')>0$. Steps 6--7, already proved for positive depth at dimension $d$, give the bounds for $T'$. Step 2 applied to $0\\to N\\to T\\to T'\\to0$ has segment $D^i(T')\\to D^i(T)\\to D^i(N)$. For $i<-d$ or $i>0$, the first term is zero by those bounds and the last is zero by Step 4, since $i\\ne0$. Thus $D^i(T)=0$. This finishes the dimension induction and proves clause (1), without a pre-existing dualizing-bounds theorem.",
+   "uses": [
+    "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "lem-weil-pbc-nakayama-jacobson",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U, depth-zero paragraph; more-algebra.tex Tag 05EB (lemma-divide-by-torsion), part (1); algebra.tex Tags 00LL, 00DV, 00LI, 00LF."
+   }
+  },
+  {
+   "text": "We prove by induction on $n\\ge0$ that for every nonzero finite $T$ of depth $n$, $D^{-n}(T)\\ne0$ and $D^i(T)=0$ for $i>-n$. For $n=0$, no $f\\in\\mathfrak m$ can be injective on $T$: Nakayama applied to $(f)$ makes $T/fT$ nonzero, so such an $f$ would be a regular sequence of length one, contradicting the definition of depth. The contrapositive of [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] supplies $z\\in T$ with annihilator exactly $\\mathfrak m$. (Such $z$ is nonzero because the annihilator of zero is $A$.) Thus $a\\bmod\\mathfrak m\\mapsto az$ embeds $\\kappa$ into $T$. Set $W=T/Az$, a finite quotient. Step 2 gives $D^0(T)\\to D^0(\\kappa)\\to D^1(W)$. Step 10 gives $D^1(W)=0$ when $W\\ne0$, and Step 1 covers $W=0$, and normalization gives $D^0(\\kappa)\\cong\\kappa\\ne0$. The surjection onto this nonzero module proves $D^0(T)\\ne0$. Step 10 supplies the required vanishing for $i>0$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), depth-zero case, with its socle argument written directly; algebra.tex Tags 00LL (lemma-ideal-nonzerodivisor), 00DV (lemma-NAK), 00LI (definition-depth), 00LF (definition-regular-sequence)."
+   }
+  },
+  {
+   "text": "Let $n>0$ and assume the induction claim for all nonzero finite modules of depth $n-1$. If $T$ has depth $n$, the supremum defining depth contains a regular sequence of positive length; otherwise its only possible length would be zero. Its first element $f\\in\\mathfrak m$ is injective on $T$. Put $Q=T/fT$. By [lem-weil-pbc-depth-drops-by-one], $Q\\ne0$ and has depth $n-1$; it is finite since the images of any finite generating set of $T$ generate $Q$. The induction hypothesis therefore gives $D^{-(n-1)}(Q)\\ne0$ and $D^j(Q)=0$ for every $j>-(n-1)$. The short exact sequence $0\\to T\\xrightarrow{f}T\\to Q\\to0$ satisfies the hypotheses of Step 2.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-depth-drops-by-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), regular-element induction; algebra.tex Tag 090R (lemma-depth-drops-by-one)."
+   }
+  },
+  {
+   "text": "For any integer $i>-n$, we have $i+1>-(n-1)$, so $D^{i+1}(Q)=0$ by Step 12. Exactness of $D^i(T)\\xrightarrow{f}D^i(T)\\to D^{i+1}(Q)$ from Step 2 gives $fD^i(T)=D^i(T)$. The module $D^i(T)$ is finite by Step 1, and $(f)$ lies in the Jacobson radical since $A$ is local and $f\\in\\mathfrak m$. Nakayama therefore gives $D^i(T)=0$. This proves the vanishing half of the induction claim in all degrees $i>-n$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), Nakayama argument; algebra.tex Tag 00DV (lemma-NAK)."
+   }
+  },
+  {
+   "text": "The same exact sequence contains $D^{-n}(T)\\to D^{-n+1}(Q)\\to D^{-n+1}(T)$. Its middle term is nonzero by Step 12, while the last is zero by Step 13. Thus the first arrow is surjective onto a nonzero module, and $D^{-n}(T)\\ne0$. This completes the induction. Apply it with $T=M$ and its finite depth from Step 1. For $0\\le t<\\operatorname{depth}(M)=n$, the inequality $-t>-n$ gives $E^{-t}=0$, and $E^{-n}\\ne0$. Hence $n$ is precisely the smallest nonnegative integer $t$ with $E^{-t}\\ne0$, which proves clause (2).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), boundary nonvanishing and part (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-coherent-rhom-finite-injective-dimension",
+  "lem-weil-pbc-depth-ext",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-trf-bounded-injective-rhom-model-support",
+  "lem-trf-bounded-injective-total-hom-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "lem-sc-generic-stalk-finite-length",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-support-dimension-quotient-element-equality",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-weil-pbc-depth-drops-by-one"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7U (lemma-sitting-in-degrees): degree bounds proved by strong induction on support dimension, with a residue-field filtration base and the maximal-ideal power-torsion reduction at depth zero; the retained regular-element depth induction then proves part (3). No Matlis duality or dropped perverse-route bounds node is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The depth of a finite module is the smallest nonnegative integer t with nonzero Ext in degree minus t into a normalized dualizing complex",
+   "results": "{\"t\": \"2026-10-23T12:56:45Z\", \"tool\": \"leanfinder\", \"query\": \"The depth of a finite module is the smallest nonnegative integer t with nonzero Ext in degree minus t into a normalized dualizing complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim\", \"CategoryTheory.projectiveDimension\", \"CategoryTheory.injectiveDimension\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.HasProjectiveDimensionLE\", \"CategoryTheory.HasProjectiveDimensionLT\", \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"CategoryTheory.HasInjectiveDimensionLE\"], \"digest\": \"d92bfb80c1d015a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized algebraic duality detects module depth by the largest nonzero Ext degree",
+   "results": "{\"t\": \"2026-10-23T13:00:33Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized algebraic duality detects module depth by the largest nonzero Ext degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton\"], \"digest\": \"d7b0aad6dd385fca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "{\"t\": \"2026-10-23T13:01:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Abelian.Ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext\", \"CategoryTheory.Abelian.Ext.instAddCommGroup\", \"CategoryTheory.hasExt_iff_small_ext\", \"CategoryTheory.Abelian.Ext.mk₀\", \"CategoryTheory.Abelian.Ext.chgUniv\", \"CategoryTheory.Abelian.Ext.homEquiv₀\", \"CategoryTheory.Abelian.extFunctorObj_obj_coe\", \"CategoryTheory.Abelian.Ext.mk₀_bijective\"], \"digest\": \"643e62f5812dab11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|depth.*Ext|Ext.*depth",
+   "results": "{\"t\": \"2026-10-23T13:00:31Z\", \"tool\": \"grep\", \"query\": \"dualizing|dualising|depth.*Ext|Ext.*depth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The depth of a finite module is the least negative degree of nonzero cohomology of its dual with respect to a normalized dualizing complex",
+   "results": "{\"t\": \"2026-10-23T13:00:32Z\", \"tool\": \"leansearch\", \"query\": \"The depth of a finite module is the least negative degree of nonzero cohomology of its dual with respect to a normalized dualizing complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.dual_rank_eq\", \"Module.dual_finite\", \"FGModuleCat.FGModuleCatDual\", \"Module.dual_projective\", \"Module.finite_dual_iff\", \"Module.supportDim\", \"FGModuleCat.FGModuleCatDual_coe\", \"Module.nontrivial_dual_iff\"], \"digest\": \"9dde9e763f419df6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|depth.*Ext|Ext.*depth",
+   "results": "{\"t\": \"2026-10-23T13:32:24Z\", \"tool\": \"grep\", \"query\": \"dualizing|dualising|depth.*Ext|Ext.*depth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give abstract Ext dimensions, ordinary module duals, or support dimension and regular-sequence formulas, not normalized algebraic dualizing depth detection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized dualizing complexes detect the depth and support dimension of finite modules by vanishing of Ext",
+   "results": "{\"t\": \"2026-10-23T13:32:24Z\", \"tool\": \"leansearch\", \"query\": \"Normalized dualizing complexes detect the depth and support dimension of finite modules by vanishing of Ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"Module.supportDim\", \"Module.supportDim_eq_bot_iff_subsingleton\", \"support_of_supportDim_eq_zero\", \"Module.supportDim_ne_bot_iff_nontrivial\", \"Module.supportDim_quotient_eq_ringKrullDim\", \"Module.supportDim_eq_bot_of_subsingleton\"], \"digest\": \"42d6d098e14c4053\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give abstract Ext dimensions, ordinary module duals, or support dimension and regular-sequence formulas, not normalized algebraic dualizing depth detection."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.depth, CategoryTheory.Abelian.Ext",
+   "results": "{\"t\": \"2026-10-23T13:32:25Z\", \"tool\": \"loogle\", \"query\": \"Module.depth, CategoryTheory.Abelian.Ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Module.depth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give abstract Ext dimensions, ordinary module duals, or support dimension and regular-sequence formulas, not normalized algebraic dualizing depth detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Depth of a finite module is detected by the highest nonzero cohomology of its derived Hom into a normalized dualizing complex",
+   "results": "{\"t\": \"2026-10-23T13:32:29Z\", \"tool\": \"leanfinder\", \"query\": \"Depth of a finite module is detected by the highest nonzero cohomology of its derived Hom into a normalized dualizing complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.HasInjectiveDimensionLE\", \"CategoryTheory.HasProjectiveDimensionLE\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"CategoryTheory.injectiveDimension_lt_iff\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"CategoryTheory.injectiveDimension_le_iff\"], \"digest\": \"561fd54c29b06114\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give abstract Ext dimensions, ordinary module duals, or support dimension and regular-sequence formulas, not normalized algebraic dualizing depth detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest degree of nonvanishing of the dual of a finite module under local duality equals minus its depth",
+   "results": "{\"t\": \"2026-10-23T13:36:00Z\", \"tool\": \"leanfinder\", \"query\": \"The largest degree of nonvanishing of the dual of a finite module under local duality equals minus its depth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.supportDim\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.supportDim_eq_ringKrullDim_quotient_annihilator\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"Module.dual_rank_eq\", \"Module.finite_dual_iff\"], \"digest\": \"5a823a3e072ee644\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give abstract Ext dimensions, ordinary module duals, or support dimension and regular-sequence formulas, not normalized algebraic dualizing depth detection."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "{\"t\": \"2026-10-23T13:49:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Abelian.Ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext\", \"CategoryTheory.Abelian.Ext.instAddCommGroup\", \"CategoryTheory.hasExt_iff_small_ext\", \"CategoryTheory.Abelian.Ext.mk₀\", \"CategoryTheory.Abelian.Ext.chgUniv\", \"CategoryTheory.Abelian.Ext.homEquiv₀\", \"CategoryTheory.Abelian.extFunctorObj_obj_coe\", \"CategoryTheory.Abelian.Ext.mk₀_bijective\"], \"digest\": \"643e62f5812dab11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give abstract Ext dimensions, ordinary module duals, or support dimension and regular-sequence formulas, not normalized algebraic dualizing depth detection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalized-cm-local-dualizing-concentration",
+  "date": "2026-10-23",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E; 0E3E proof: duality, generic rank one and absence of finite-support submodules, and the dualizing Euler characteristic; supporting input: Tag 0AWS (lemma-apply-CM), equivalence (1)–(3) and final maximal-Cohen–Macaulay assertion; full support: Tag 0AWE (lemma-depth-dualizing-module), (1), in this Cohen–Macaulay case. Supporting input: Stacks 0A7U(1),(3), the degree bounds and depth-detection assertion used in the proof of 0B5A and hence 0AWS.",
+   "via": [
+    "lem-sfb-normalized-cm-local-dualizing-concentration",
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normalized-dualizing-depth-detection",
+  "worker": "stage1",
+  "summary": "Repair of C4/C7 and D3: remove both dropped perverse-route nodes; prove degree bounds here by support-dimension induction (finite-length residue-field filtration, 0B52 regular cut, 05EB torsion quotient), then retain the accepted depth induction with its formerly circular bounds input supplied. Statement unchanged; no new nodes, no Lean writing or compilation.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images alteration prerequisite chain, exact supporting place 0A7U(1),(3) recorded in blueprint.from.place. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md: current clause (3) is compactification assembly and no longer spells out this historic alteration prerequisite. This split proves the existing algebraic supporting item without modifying the chapter or unit route. blueprint_refs ancestor returns None because the inherited created.item chain ends at a module name; retained its logged via chain and non-unspecified place.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-coherent-rhom-finite-injective-dimension",
+    "why": "Stacks 0G4H finite cohomology of derived Hom into a bounded injective target supplies the finite modules required by Nakayama; no trace theorem is used."
+   },
+   {
+    "node": "lem-trf-bounded-injective-rhom-model-support",
+    "why": "Its natural isomorphism in D(A) supplies the bounded-injective Hom model and identifies its precomposition maps; this is generic algebra, not trace duality."
+   },
+   {
+    "node": "lem-trf-bounded-injective-total-hom-exact",
+    "why": "Its degreewise exactness of total Hom gives the short exact cochain sequence for arbitrary module short exact sequences."
+   },
+   {
+    "node": "lem-weil-pbc-depth-ext",
+    "why": "Only its finiteness of depth for a nonzero finite module is used, with no coefficient-category comparison."
+   },
+   {
+    "node": "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "why": "The contrapositive supplies a residue-field submodule at depth zero; the current unit has no associated-prime lemma."
+   },
+   {
+    "node": "lem-weil-pbc-depth-drops-by-one",
+    "why": "The regular-element depth drop supplies the induction parameter and nonzero quotient."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-support-annihilator",
+    "why": "Its support criterion shows the support of a nonzero finite module contains the unique maximal ideal."
+   },
+   {
+    "node": "lem-sc-generic-stalk-finite-length",
+    "why": "Tag 00L5 converts finite support at the unique maximal ideal to finite length, for the dimension-zero base and the torsion submodule; this is a general module theorem, not a curve theorem."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+    "why": "Tag 05EB(1) removes the maximal-ideal socle after quotienting by power torsion, allowing the dimension induction to reduce depth zero to the positive-depth subcase. No local-cohomology or duality theorem is imported."
+   },
+   {
+    "node": "lem-weil-pbc-finite-length-module-simple-filtration",
+    "why": "The generic finite-length filtration theorem supplies simple factors for the normalization base; localness identifies them with the residue field by the explicit cyclic-module argument in Step 3. This does not import a duality or trace result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-coherent-rhom-finite-injective-dimension",
+  "lem-trf-bounded-injective-rhom-model-support",
+  "lem-trf-bounded-injective-total-hom-exact",
+  "lem-weil-pbc-depth-ext",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-weil-pbc-depth-drops-by-one",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-sc-generic-stalk-finite-length",
+  "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+  "lem-weil-pbc-finite-length-module-simple-filtration"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-3b07b4d55",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-3b07b4d55 (reviewer sub-agent of L); spot-checked: This re-delivery fixes the faults that got fd7f2b48 RETURNed (C4/C7, D3). The dropped def-per-algebraic-normalized-dualizing and lem-per-algebraic-dualizing-ext-bounds are no longer cited. I checked both copies of route-pivot-dropped.txt: no dropped id appears in proof_deps, in stmt_deps, or anywhere in the 422-node closure. Clause (1) is now proved here by Stacks 0A7U's own induction on dim Supp (dualizing.tex, proof read). (a) Base case: the κ-filtration from 00J3 identifies every simple factor with κ, normalization then concentrates finite-length duals in degree 0 and gives D^0≠0, and 00L5 gives finite length when Supp={m}. This replaces the source's appeal to Matlis duality. (b) Positive depth: 0B52 (nonzerodivisor alternative) gives d_Q=d−1, then the f-sequence and Nakayama with (f)⊆Jac. (c) Depth 0: N=T[m^∞] is killed by m^e and N_q=0 for q≠m. T_q≅T'_q is checked on fractions, so d_{T'}=d. 05EB(1) gives T'[m]=0, 00LL gives an injective f, so depth T'>0. Within a dimension the positive-depth case is proved before the depth-0 case, so the induction is not circular. The depth induction (Steps 11–14) was already accepted. Its base now gets D^1(W)=0 from the completed bounds when W≠0, and from Step 1 when W=0. Every long-exact segment (Steps 4, 7, 10, 11, 14) matches the order D^i(W)→D^i(V)→D^i(U)→D^{i+1}(W), and the indices are right. Small cases: over a field, depth 0 and E^0≠0. Over a DVR with K=A[1]: A gives E^{-1}, k gives E^0, and A⊕k is consistent. Over k[ε] with K=A[0], k gives E^0. M=0 is excluded. The statement and stmt_deps are unchanged, the live node is still unsplit, and there is no repair note for this item. There are no new nodes, no SGA citation, no cycle, and proof_deps equals the union of uses. No live duplicate exists: every 0A7U/0A7V hit is the item, its parent, or a dropped node. Batch-5: the three trf cites (0G4H finite Ext, the bounded-injective RHom model with naturality, total-Hom exactness) are generic homological algebra. They are neither the trace formula nor Poincaré duality, nor steps of their proofs, so they are accepted. The closure's trf part is only the 0G4H sub-split, with no thm-trf or Poincaré-duality node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.NormalizedDualizingDepthDetection",
+  "declaration": "DerivedCategory.normalizedDualizing_degreeBounds_depthDetection",
+  "declarations": [
+   "DerivedCategory.moduleDualCohomology",
+   "DerivedCategory.normalizedDualizing_degreeBounds_depthDetection"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/NormalizedDualizingDepthDetection.lean",
+  "statement": "theorem normalizedDualizing_degreeBounds_depthDetection (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (K : DerivedCategory (ModuleCat.{u} A)) (hKinjective : ∃ J : CochainComplex (ModuleCat.{u} A) ℤ, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (J.X i)) ∧ (∀ i : ℤ, Injective (J.X i)) ∧ Nonempty (Q.obj J ≅ K)) (hKfinite : ∀ i : ℤ, Module.Finite A ((homologyFunctor (ModuleCat.{u} A) i).obj K)) (hKscalar : IsIso (MonoidalClosed.id K)) (hKnormalized : Nonempty ((ordinaryModuleDerivedInternalHom A).obj (op ((singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A (A ⧸ IsLocalRing.maximalIdeal A))), K) ≅ (singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A (A ⧸ IsLocalRing.maximalIdeal A)))) (M : ModuleCat.{u} A) [Module.Finite A M] [Nontrivial M] : (∀ d : ℕ, Module.supportDim A M = (d : WithBot ℕ∞) → ∀ i : ℤ, i < -(d : ℤ) ∨ 0 < i → IsZero (moduleDualCohomology A M K i)) ∧ (∃ n : ℕ, IsLocalRing.depth (R := A) M = (n : ℕ∞) ∧ ¬ IsZero (moduleDualCohomology A M K (-(n : ℤ))) ∧ ∀ t : ℕ, t < n → IsZero (moduleDualCohomology A M K (-(t : ℤ))))",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "States both clauses with the existing ordinaryModuleDerivedInternalHom. moduleDualCohomology is a transparent abbreviation for the E^i expression introduced in this node. The four dualizing/normalization conditions are inline hypotheses; scalar action is MonoidalClosed.id, the canonical transpose of the right unitor, whose source is the derived tensor unit A[0]. IsLocalRing includes Nontrivial A, so no overlapping instance hypothesis is required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d51ed7b01",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Every node clause is rendered. Bounded injective representative: ∃ J bounded with injective terms and Q.obj J ≅ K. Finite H^i(K): Module.Finite in each degree. Homothety: IsIso (MonoidalClosed.id K), the canonical curry of ρ, in the same closed structure as the recorded ordinaryModuleDerivedInternalHom (uncurry internalHom). Normalization: RHom(κ[0],K) ≅ κ[0] in D(A). M nonzero finite. E^i = homology of the recorded RHom (a real abbrev). (1) conditional on supportDim = d, E^i = 0 for i<-d or i>0. (2) ∃ n:ℕ with depth = n, E^{-n} ≠ 0 and E^{-t} = 0 for t<n. No extra assumptions; signs checked on field and DVR cases; M=0 excluded as in the node. lean.statement is verbatim and the node differs from live only in lean. Imports exist; docstrings carry the source, the blueprint id and the 14 steps; sorry only. Advisory: derived monoidal unit/closed instance owner not in stmt_deps (it comes via the RHom dep module); ResidueField.Basic import appears unused. Not recompiled (no change)."
+ }
+}

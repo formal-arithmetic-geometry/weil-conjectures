@@ -18,11 +18,44 @@
   "def-nagata-global-blowup",
   "def-nagata-strict-transform",
   "def-weil-irreducible-components",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-trf-hilbert-samuel-invariant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply lem-trf-strict-transform-component-closures to q=i composed with p and I. It identifies every upstairs component with T(W)=closure(pi inverse-image of (W minus C)) for an original component W meeting the complement, and gives dim T(W)=dim W. No Hilbert--Samuel hypothesis is needed here.",
+   "uses": [
+    "lem-trf-strict-transform-component-closures"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every original component W through x=pi(y), apply lem-trf-hilbert-samuel-near-component-incidence using the given local constancy and equality of functions. This gives y in T(W). It also implies W minus C is nonempty: otherwise its inverse image and its closure would both be empty.",
+   "uses": [
+    "lem-trf-hilbert-samuel-near-component-incidence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the equality of dimension sets by extensionality. An upstairs component through y is T(W) by step 1. Since W is closed and pi is continuous, T(W) is contained in pi inverse-image of W; therefore x=pi(y) belongs to W. Step 1 identifies their dimensions. Conversely, for W through x, step 2 puts y in T(W) and proves W minus C nonempty. Step 1 now makes T(W) an upstairs component of the same dimension. These two constructions prove both inclusions.",
+   "uses": [
+    "lem-trf-strict-transform-component-closures",
+    "lem-trf-hilbert-samuel-near-component-incidence",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-strict-transform-component-closures",
+  "lem-trf-hilbert-samuel-near-component-incidence",
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.13, p.94; existing five-step normal-cone argument separated into component incidence and ordinary component closures/dimensions, with complete Lean assembly by Z9 (2026-10-26)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +91,45 @@
    "results": "{\"t\": \"2026-10-18T22:54:00Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-hilbert-samuel-equality-component-rigidity: equality in Bennett Hilbert Samuel specialization and blowup inequalities preserves component dimension profile\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"Ideal.Filtration.Stable.bounded_difference\", \"PrimeSpectrum.BasicConstructibleSetData.ext\", \"ProjectiveSpectrum.mk.inj\", \"Ideal.exists_ltSeries_of_hasGoingDown\", \"PrimeSpectrum.BasicConstructibleSetData.ext_iff\", \"Ideal.Filtration.mk.inj\", \"Ideal.Filtration.ext\"], \"digest\": \"6722d9a268e01c50\"}",
    "date": "2026-10-18",
    "verdict": "no match: read the returned types; smooth presentations, flatness, ranks and Krull dimension inequalities do not give the stated tangent-cone or near-point component comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-hilbert-samuel-equality-component-rigidity: a permissible blowup with equal extended Hilbert Samuel functions preserves dimensions of all irreducible components through a point",
+   "results": "{\"t\": \"2026-10-22T04:38:05Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-hilbert-samuel-equality-component-rigidity: a permissible blowup with equal extended Hilbert Samuel functions preserves dimensions of all irreducible components through a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\"], \"digest\": \"bb786a9bd9c19086\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Krull-dimension regular-sequence formulas and general congruence lemmas do not state component rigidity for near points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Samuel\"",
+   "results": "{\"t\": \"2026-10-22T04:38:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"Samuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Krull-dimension regular-sequence formulas and general congruence lemmas do not state component rigidity for near points."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|normal.?flat|equisingular|nearPoint",
+   "results": "{\"t\": \"2026-10-22T04:38:32Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|normal.?flat|equisingular|nearPoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Krull-dimension regular-sequence formulas and general congruence lemmas do not state component rigidity for near points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality in Hilbert Samuel function comparison under a permissible blowup implies that all irreducible components through the original point survive at the near point",
+   "results": "{\"t\": \"2026-10-22T04:38:33Z\", \"tool\": \"leansearch\", \"query\": \"Equality in Hilbert Samuel function comparison under a permissible blowup implies that all irreducible components through the original point survive at the near point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.seq.congr_simp\", \"IsIrreducible.genericPoint.congr_simp\", \"AlgebraicGeometry.Scheme.residueFieldCongr\", \"AlgebraicGeometry.Scheme.germToFunctionField.congr_simp\", \"Localization.localRingHom.congr_simp\", \"AlgebraicGeometry.Scheme.noConfusion\", \"Submodule.localized₀.congr_simp\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections.congr_simp\"], \"digest\": \"dbb1439721a479f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Krull-dimension regular-sequence formulas and general congruence lemmas do not state component rigidity for near points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-hilbert-samuel-equality-component-rigidity: equality of Hilbert Samuel functions after blowing up a normally flat regular center preserves every component dimension via the linear vertex of the tangent cone",
+   "results": "{\"t\": \"2026-10-22T04:41:41Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-hilbert-samuel-equality-component-rigidity: equality of Hilbert Samuel functions after blowing up a normally flat regular center preserves every component dimension via the linear vertex of the tangent cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Ideal.Filtration.Stable.bounded_difference\"], \"digest\": \"75e2c8d815f605da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Krull-dimension regular-sequence formulas and general congruence lemmas do not state component rigidity for near points."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-hilbert-samuel-smooth-dimension-profile",
@@ -93,5 +161,67 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-hilbert-samuel-equality-component-rigidity",
+  "worker": "stage1",
+  "summary": "Preserved the statement; supplied the component argument through a flat normal-cone fibre and the characteristic-zero near-point linear vertex. Two strictly lower statement-only inputs isolate the Bennett/Hironaka normal-cone theorem and a filtered-algebra minimal-prime comparison. Reused existing Rees/strict-transform/Proj/dimension statements; no Lean written or compiled.",
+  "blueprint": "Refines the inherited historical alteration/resolution branch below lem-trf-local-term-locality, proof (1)--(2), specifically ILO VIII 2.3.13 synchronization and Step 12 of lem-trf-hilbert-samuel-smooth-dimension-profile. The current main-20261015 contracting-correspondence unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic Dimension of a finite type domain over a field equals the transcendence degree of its fraction field used only for the Noetherian, strict-transform/Proj, or dimension calculation in the normal-cone argument; this trace-formula unit has no substitute for that algebraic-geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-dc240bbe1",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-dc240bbe1 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps, both new nodes, every cited statement and ILO VIII 2.3.13 (p.94, synchronization paragraph, no proof; the agent proof is labelled; CJS, Hironaka and BMT are recorded as WANTED; no SGA). Not dropped, and not superseded in live or side-live. The statement is unchanged; Step 12 of the citer smooth-dimension-profile uses it as stated. Item checks: (1) finite type over Q gives Noetherian with finitely many components, and shrinking preserves local rings and global component dimensions; (2) components through x correspond to minimal primes of O_{X,x}, and the algebra node puts y in V_+(ker q_p) for every component; (3) the fibre computation Ī^n⊗k = Ī^n/mĪ^n = gr_Ī(R/p)_n⊗_A k checks out, using thm-nagata-strict-transform-is-blowup and arbitrary Proj base change, and a component inside C has empty Proj; (4)-(5) components of X' are closures of Z∖C, and dimensions are equal by function field and trdeg (declared tool use accepted). New near-normal-cone node = Bennett normal flatness plus Hironaka's char-0 directrix theorem. The Λ^trdeg normalization converts correctly to h_x=Λ^d h_η and Λ^δ h_y=h_x. Tested on plane∪line with C = origin (no near points) and C = line (hypothesis fails), and on xy=0 (near point on the z-axis). Its permissibility convention was checked. New algebra node: re-derived it (initial form monic in T_1 after a linear change; free G_j with injective reduction gives a nonzerodivisor; Krull intersection then contradicts minimality). Tested on a domain, I=0, e=0 and (uv) in 3 variables. Neither node is a duplicate: lem-trf-formal-coefficient-transform-criterion is the closest, a coefficient-level equality criterion, not normal flatness plus directrix; local-presentations gives only nonincrease. Neither node restates the item. FIXES: (C1) Steps 4-5 used the identity of the strict transform over X∖C without citing it; they now cite lemma-nagata-strict-transform-over-complement, which is Lean-closed in slopmaster2, and proof_deps is updated. (B2) the near node used H_{X',y} after defining H only on X; it now defines h_{W,z}, H_{W,z} for W=X or X'.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertSamuelEqualityComponentRigidity",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.component_dimensions_eq_of_function_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertSamuelEqualityComponentRigidity.lean",
+  "statement": "theorem component_dimensions_eq_of_function_eq {X Z : Scheme.{u}} (p : Z ⟶ Spec (.of (ULift.{u} ℚ))) (i : X ⟶ Z) [Smooth p] [IsImmersion i] [IsReduced X] [LocallyOfFiniteType (i ≫ p)] [QuasiCompact (i ≫ p)] (I : X.IdealSheafData) [Smooth (I.subschemeι ≫ i ≫ p)] (hconstant : IsLocallyConstant (fun c : I.subscheme ↦ function (i ≫ p) (I.subschemeι c))) (x : X) (hx : x ∈ I.support) (y : I.strictTransform (𝟙 X)) (hy : strictTransformToSource (𝟙 X) I.blowupMap I.support.compl y = x) (heq : function (strictTransformToSource (𝟙 X) I.blowupMap I.support.compl ≫ i ≫ p) y = function (i ≫ p) x) : {d : WithBot ℕ∞ | ∃ W : Set (I.strictTransform (𝟙 X)), W ∈ irreducibleComponents (I.strictTransform (𝟙 X)) ∧ y ∈ W ∧ topologicalKrullDim W = d} = {d : WithBot ℕ∞ | ∃ W : Set X, W ∈ irreducibleComponents X ∧ x ∈ W ∧ topologicalKrullDim W = d}",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing normalized HilbertSamuel.function. The scheme-theoretic strict transform of the identity in the intrinsic blowup is canonically that blowup, and the ambient strict-transform comparison is Stacks 080E. Proof fields preserved from the live Q70 node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a71534080",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Diff vs side-live: only the item lean record, one added landed stmt_dep (def-trf-hilbert-samuel-invariant) and the new sorry-only module; proof fields unchanged; all four faults of dde02b94 fixed. Clause check: IsReduced; LocallyOfFiniteType+QuasiCompact over Spec ULift ℚ; IsImmersion into a Smooth Z; center I.subscheme smooth over Q; H_X|C locally constant; hx, hy, full-sequence heq through the induced structure map; set equality of topologicalKrullDim of irreducibleComponents through each point; no exclusion of components in C. HilbertSamuel.function source read (length of stalk/m^{n+1}, inclusive sum, trdeg iterates). X' = I.strictTransform (𝟙 X) ≅ Bl_I X over X by 080E (exists_blowup_comap_iso_strictTransform), canonical and equivalent to the ambient strict transform. lean.statement verbatim; docstrings carry source, blueprint and 5 proof steps; lines ≤100; proof-dep imports match records; no H4 duplicate; both report sections present. Advisory: Noetherian/Spectrum imports stand in for three unrecorded proof deps. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261026T093140-L-3543842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

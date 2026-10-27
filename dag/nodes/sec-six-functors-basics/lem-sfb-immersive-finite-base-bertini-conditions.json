@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-immersive-finite-base-bertini-conditions",
+ "kind": "statement",
+ "title": "Geometric Bertini conditions for a system immersive away from a finite set",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $T$ be an integral separated finite-type $k$-scheme [def-pc-scheme, def-pc-integral-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism] of topological Krull dimension $d\\geq2$ [def-kun-topological-krull-dimension]. Let $S$ be a finite set of closed points of $T$ (a point is closed when its singleton is closed), possibly empty. Let $L$ be an invertible $\\mathcal O_T$-module [def-sc-invertible-module], $V$ a finite-dimensional $k$-vector space, and $\\psi:V\\to\\Gamma(T,L)$ a $k$-linear map. Suppose its sections generate $L$ on $T\\setminus S$ [def-weil-pbc-generating-sections], and the associated morphism $T\\setminus S\\to\\mathbf P(V)$ is an immersion [def-weil-pbc-morphism-to-projective-space-by-sections, def-weil-closed-immersion]. Here $\\mathbf P(V)$ means projective space with homogeneous coordinates indexed by a basis of $V$, and $H_v=Z(\\psi(v))$ is the zero scheme [def-pc-zero-scheme]. Then (a) there are $v_1,v_2,v_3\\in V$ and an irreducible component $W$ of $H_{v_2}\\cap H_{v_3}$ such that $W\\not\\subseteq H_{v_1}$ and $\\operatorname{codim}(W,T)=2$; and (b) every irreducible component $B$ of the common zero locus $\\bigcap_{v\\in V}|H_v|$ has $\\operatorname{codim}(B,T)\\geq2$. Codimension of an irreducible closed subset $C\\subset T$ is the supremum of lengths $r$ of chains $C=C_0\\subsetneq C_1\\subsetneq\\cdots\\subsetneq C_r=T$ of nonempty irreducible closed subsets. Neither smoothness nor properness nor affineness of $T$ is assumed. No conclusion about a general member is asserted.",
+ "source": {
+  "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+  "place": "Theorem 1.8, printed p.4, infinite-field projective step: agent-extracted verification of the hypotheses of irreducible Bertini, not a quotation of its conclusion. Stacks more-morphisms.tex Tag 0G4F, lemma-bertini-irreducible, conditions (3),(4); varieties.tex Tag 0A21, lemma-dimension-locally-algebraic, maximal chains. The smooth-point argument is expanded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-closed-immersion",
+  "def-pc-zero-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=T\\setminus S$. Integrality makes $T$ nonempty, reduced and irreducible. Apply the smooth affine geometric filtration to $T$ with the finite locally closed cover $\\{U,S\\}$ (omit the empty member if desired). Its length is positive since its initial scheme is nonempty and its final scheme is empty. The first piece $A=Z_0\\setminus Z_1$ is therefore a nonempty smooth connected affine open of $T$, of constant smooth relative dimension, and is contained in one cover member. A finite set of closed points has the discrete topology, so its nonempty subsets have dimension zero. But the open-dimension lemma gives $\\dim A=\\dim T=d\\ge2$; hence $A$ cannot be contained in $S$. Thus $A\\subset U$. As a nonempty open of an integral scheme, $A$ is integral: its affine opens are affine opens of $T$, and irreducibility also follows from the open-closed correspondence. Consequently $A$ has pure topological dimension $d$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-zl-smooth-affine-geometric-filtration",
+    "lem-sc-dimension-locally-algebraic",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B8X, lemma-dense-smooth-open-variety-over-perfect-field, via the existing smooth affine filtration; Tag 0A21, lemma-dimension-locally-algebraic (3)."
+   }
+  },
+  {
+   "text": "All open subschemes used here are of finite type over $k$: $T$ is Noetherian by finite type over the Noetherian one-point scheme $\\operatorname{Spec}k$; an open immersion into it is quasi-compact, hence finite type, and finite-type morphisms compose. In particular this applies to $A$ and to every affine open neighbourhood used below. Choose a basis $b$ of $V$ and restrict the sections to $A$. These basis sections generate $L|_A$: express any section from the original linear system as a $k$-linear combination of the basis sections and restrict the local generating equations. Their associated map is the restriction of the given coordinate morphism, by the uniqueness in the definition of the morphism given by sections. It is an immersion because it is the composite of the open immersion $A\\to U$ with the given immersion. Thus the restricted system satisfies the generation and immersion hypotheses on all of $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-pbc-generating-sections",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01T2 (lemma-locally-finite-type-characterize), 01T3 (lemma-composition-finite-type); properties.tex Tag 01OX (lemma-immersion-into-noetherian); schemes.tex Tag 02V0 (lemma-composition-immersion)."
+   }
+  },
+  {
+   "text": "Apply the existing finite-cover transverse-component lemma with its base scheme $X=A$, its covering scheme also $A$, covering map $\\pi=\\operatorname{id}_A$, and its exceptional finite set empty. The identity is finite and etale directly from the definitions: on affine rings it is the identity, finite free of rank one, flat, finitely presented and with identity diagonal. The scheme $A$ is smooth, connected, affine, finite type and pure of dimension $d\\ge2$ by steps 1 and 2, and the basis-section hypotheses were checked in step 2. It supplies $v_1,v_2,v_3\\in V$ and an irreducible closed subset $W_A$ maximal in the common zero locus of the last two restricted sections, of codimension two in $A$, not contained in the zero locus of the first restricted section.",
+   "uses": [
+    "lem-zl-bertini-finite-cover-transverse-component",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+    "place": "Paragraph beginning For completeness: independent differentials and the codimension-two component; Stacks more-morphisms.tex Tag 0G4F, lemma-bertini-irreducible, hypothesis (3)."
+   }
+  },
+  {
+   "text": "Let $W=\\overline{W_A}$ in $T$. Zero schemes are closed and their restrictions to an open have the same local equations, so $W\\subseteq |H_{v_2}\\cap H_{v_3}|$. The open-closed correspondence gives $W\\cap A=W_A$. If an irreducible closed subset $C$ of the common zero locus contains $W$, then $C\\cap A$ contains $W_A$, hence equals $W_A$ by its maximality; taking closures gives $C=W$. Thus $W$ is an irreducible component of the global intersection. Moreover $W\\not\\subseteq H_{v_1}$ since this already fails on $A$. Finally every irreducible closed superset of $W$ meets $A$. Intersecting any chain from $W$ to $T$ with $A$ preserves strict inclusions; conversely taking closures of any chain from $W_A$ to $A$ preserves strict inclusions and gives endpoints $W,T$. The two sets of possible chain lengths coincide. Hence $\\operatorname{codim}(W,T)=\\operatorname{codim}(W_A,A)=2$, proving (a).",
+   "uses": [
+    "lem-pc-zero-scheme-properties",
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0B7I, lemma-dimension-supremum-local-dimensions, chain restriction and closure; the cited open-closed correspondence gives the full order isomorphism."
+   }
+  },
+  {
+   "text": "Write $C=\\bigcap_{v\\in V}|H_v|$. At every $x\\in U$ the generating basis sections have at least one nonzero value in the one-dimensional fibre of $L$. The complement-of-zero-locus lemma says that $x$ is outside that basis section\\'s zero scheme. Thus $C\\cap U=\\varnothing$ and $C\\subseteq S$. The set $C$ is closed as an intersection of closed sets. Since $S$ is finite and consists of closed points, every nonempty irreducible closed subset of $C$ is a singleton closed in $T$; indeed the subspace is finite discrete and any subset with two points is the union of two proper closed subsets.",
+   "uses": [
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AM, definition-globally-generated; Tag 01CY, lemma-s-open, applied to the finite basis sections."
+   }
+  },
+  {
+   "text": "For any closed point $s\\in T$, choose an affine open $D=\\operatorname{Spec}R$ containing $s$. It is finite type by step 2; the affine finite-type lemma therefore makes $R$ a finite-type $k$-algebra, and integrality makes it a domain. The point $s$ corresponds to a maximal ideal $\\mathfrak m$, since it is closed in $D$. The affine-stalk localization lemma identifies $\\mathcal O_{T,s}$ with $R_{\\mathfrak m}$. The maximal-localization dimension lemma gives $\\dim R_{\\mathfrak m}=\\dim R$, the spectrum dimension lemma gives $\\dim R=\\dim D$, and open-dimension invariance gives $\\dim D=d$. The stalk-generalization-chain lemma now gives $\\operatorname{codim}(\\{s\\},T)=\\dim\\mathcal O_{T,s}=d$. This uses no smoothness at $s$.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OS, lemma-dimension-spell-it-out, maximal localizations of finite-type domains; Tag 00KE, definition-Krull; varieties.tex Tag 0A21 (3); properties.tex Tag 02IZ, lemma-codimension-local-ring; schemes.tex Tag 01HV, lemma-spec-sheaves."
+   }
+  },
+  {
+   "text": "By step 5 every irreducible component $B$ of $C$ is a singleton $\\{s\\}$ with $s$ closed in $T$. Step 6 gives $\\operatorname{codim}(B,T)=d\\ge2$, proving (b). If $C$ is empty there are no such components; in particular this handles $S=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4F, lemma-bertini-irreducible, hypothesis (4), verified from the finite base locus."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-zl-smooth-affine-geometric-filtration",
+  "lem-sc-dimension-locally-algebraic",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+  "def-weil-pure-dimension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-zl-bertini-finite-cover-transverse-component",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-sc-scheme-stalk-dimension-generalization-chains"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph beginning For completeness; extension to a possibly singular integral variety by a smooth affine open, using the cited existing filtration and order-isomorphism lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an immersive linear system on an integral variety of dimension at least two with finite base locus, there are three sections whose last two zero schemes have a codimension two component not contained in the first zero scheme",
+   "results": "{\"t\": \"2026-10-24T09:10:54Z\", \"tool\": \"leanfinder\", \"query\": \"For an immersive linear system on an integral variety of dimension at least two with finite base locus, there are three sections whose last two zero schemes have a codimension two component not contained in the first zero scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"ax_grothendieck_zeroLocus\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\"], \"digest\": \"06406d8d084e4ac3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-24T09:10:55Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "codimension|codim|Bertini|bertini",
+   "results": "{\"t\": \"2026-10-24T09:10:55Z\", \"tool\": \"grep\", \"query\": \"codimension|codim|Bertini|bertini\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear system defining an immersion away from finitely many closed points has a transverse codimension two intersection and base locus of codimension at least two",
+   "results": "{\"t\": \"2026-10-24T09:10:55Z\", \"tool\": \"leansearch\", \"query\": \"A linear system defining an immersion away from finitely many closed points has a transverse codimension two intersection and base locus of codimension at least two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Manifold.IsImmersionAt\", \"AlgebraicGeometry.IsImmersion.toIsPreimmersion\", \"Manifold.ImmersionAtProp\", \"AlgebraicGeometry.IsImmersion\", \"Manifold.IsImmersionAt.complement\", \"Manifold.IsImmersionAtOfComplement\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\"], \"digest\": \"eaf953984e1eea21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independent differentials of ratios of sections defining a projective immersion yield a codimension two component of an intersection of divisors",
+   "results": "{\"t\": \"2026-10-24T09:10:58Z\", \"tool\": \"leanfinder\", \"query\": \"Independent differentials of ratios of sections defining a projective immersion yield a codimension two component of an intersection of divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum.vanishingIdeal\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"AlgebraicGeometry.Proj.isSeparated\"], \"digest\": \"ba3dd5f730c54bae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; immersion factorizations, projective-spectrum charts, cycle codimension terminology and manifold immersions do not supply the two geometric Bertini conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "Bertini|bertini|codimension|codim",
+   "results": "{\"t\": \"2026-10-24T09:40:04Z\", \"tool\": \"grep\", \"query\": \"Bertini|bertini|codimension|codim\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern immersion factorizations, projective linear independence or cycle codimension, not the two conclusions for this linear system."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-24T09:40:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern immersion factorizations, projective linear independence or cycle codimension, not the two conclusions for this linear system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear system defining an immersion away from finitely many points on an integral variety of dimension at least two has a codimension two intersection of two members outside a third member",
+   "results": "{\"t\": \"2026-10-24T09:40:06Z\", \"tool\": \"leanfinder\", \"query\": \"A linear system defining an immersion away from finitely many points on an integral variety of dimension at least two has a codimension two intersection of two members outside a third member\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ax_grothendieck_zeroLocus\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"AmpleSet.of_one_lt_codim\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\"], \"digest\": \"f671c2543e105a31\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern immersion factorizations, projective linear independence or cycle codimension, not the two conclusions for this linear system."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An immersive linear system on a variety has two divisors with an irreducible component of codimension two, and a finite base locus has codimension at least two",
+   "results": "{\"t\": \"2026-10-24T09:41:02Z\", \"tool\": \"leansearch\", \"query\": \"An immersive linear system on a variety has two divisors with an irreducible component of codimension two, and a finite base locus has codimension at least two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.IsImmersion.casesOn\", \"AlgebraicGeometry.isImmersion_iff\", \"AlgebraicGeometry.IsImmersion.isLocallyClosed_range\", \"AlgebraicGeometry.IsImmersion.comp\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.IsLocallyArtinian.of_isImmersion\"], \"digest\": \"621ed42686738a81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern immersion factorizations, projective linear independence or cycle codimension, not the two conclusions for this linear system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an immersion into projective space, independent linear hyperplane equations cut a codimension two subvariety through a smooth point",
+   "results": "{\"t\": \"2026-10-24T09:41:03Z\", \"tool\": \"leanfinder\", \"query\": \"For an immersion into projective space, independent linear hyperplane equations cut a codimension two subvariety through a smooth point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.Independent\", \"Projectivization.independent_iff_iSupIndep\", \"Projectivization.exists_not_self_orthogonal\", \"Projectivization.exists_not_orthogonal_self\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat\", \"Projectivization.independent_pair_iff_ne\", \"Projectivization.Subspace\"], \"digest\": \"c04bbb41ab6a26db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern immersion factorizations, projective linear independence or cycle codimension, not the two conclusions for this linear system."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bertini-prescribed-point-dimension-cut",
+  "date": "2026-10-24",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical direct-images proof (3), parameter-curve input via lem-sfb-line-family-projective-curve-interpolation: Charles–Poonen dimension-cutting step used repeatedly to obtain a curve through the marked parameter points. Current latest direct-images proof (3) gives context, not the auxiliary Picard formula. More precisely: verify the codimension-two intersection and base-locus conditions in the infinite-field projective Bertini step.",
+   "via": [
+    "lem-sfb-bertini-prescribed-point-dimension-cut",
+    "lem-sfb-integral-variety-smooth-curve-interpolation",
+    "lem-sfb-line-family-projective-curve-interpolation",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-immersive-finite-base-bertini-conditions",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven-step proof restricts to an existing smooth affine filtration piece, applies the existing identity-cover transverse lemma, transfers components and exact codimension by the open-closed order isomorphism, and computes the finite base-locus codimension by affine maximal localization. No new nodes or Mathlib leaves.",
+  "blueprint": "Historical direct-images proof (3), parameter-curve input via lem-sfb-line-family-projective-curve-interpolation: Charles–Poonen dimension-cutting step used repeatedly to obtain a curve through the marked parameter points. Current latest direct-images proof (3) gives context, not the auxiliary Picard formula. More precisely: verify the codimension-two intersection and base-locus conditions in the infinite-field projective Bertini step. Whole-blueprint searches for immersive finite and codimension two found no equivalent statement. The latest direct-images proof (3) is historical route context only; the live ancestor command returns None and this is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-smooth-affine-geometric-filtration",
+    "why": "Generic geometry or commutative algebra tool for the smooth-open restriction, component transfer, or closed-point codimension computation; no statement of this six-functor unit supplies it. It does not replace a unit-level six-functor proof step."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic geometry or commutative algebra tool for the smooth-open restriction, component transfer, or closed-point codimension computation; no statement of this six-functor unit supplies it. It does not replace a unit-level six-functor proof step."
+   },
+   {
+    "node": "lem-zl-bertini-finite-cover-transverse-component",
+    "why": "Generic geometry or commutative algebra tool for the smooth-open restriction, component transfer, or closed-point codimension computation; no statement of this six-functor unit supplies it. It does not replace a unit-level six-functor proof step."
+   },
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "Generic geometry or commutative algebra tool for the smooth-open restriction, component transfer, or closed-point codimension computation; no statement of this six-functor unit supplies it. It does not replace a unit-level six-functor proof step."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Generic geometry or commutative algebra tool for the smooth-open restriction, component transfer, or closed-point codimension computation; no statement of this six-functor unit supplies it. It does not replace a unit-level six-functor proof step."
+   },
+   {
+    "node": "lem-weil-pbc-section-nonvanishing-zero-locus",
+    "why": "Generic geometry or commutative algebra tool for the smooth-open restriction, component transfer, or closed-point codimension computation; no statement of this six-functor unit supplies it. It does not replace a unit-level six-functor proof step."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic geometry or commutative algebra tool for the smooth-open restriction, component transfer, or closed-point codimension computation; no statement of this six-functor unit supplies it. It does not replace a unit-level six-functor proof step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+    "why": "Generic geometry or commutative algebra tool for the smooth-open restriction, component transfer, or closed-point codimension computation; no statement of this six-functor unit supplies it. It does not replace a unit-level six-functor proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-smooth-affine-geometric-filtration",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-zl-bertini-finite-cover-transverse-component",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NL-2d53e739e",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-2d53e739e (reviewer sub-agent of L); spot-checked: I read the item, all 24 nodes its proof cites, Stacks 0G4F (more-morphisms.tex l.9055, conditions (3),(4)) and 0A21 (varieties.tex (3),(4)), and the 'For completeness' paragraph of the latest blueprint proof lem-zl-bertini-finite-cover-curve (l.36-47). The statement is word-for-word the same as on live and side-live, and the stmt_deps did not change. The base proof was empty, so this is not a re-split. No new nodes, no cycle: the closure has 331 nodes and does not contain the item. Step 1: lem-zl-smooth-affine-geometric-filtration with cover {U,S} gives a first piece A that is a nonempty smooth, connected, affine open. By the 0A21 node, dim A=d>=2, so A cannot lie inside the finite set S and therefore lies in U. Step 2: finite type of opens follows from the noetherian, qc-open and composition nodes; generation is kept by expanding in a basis; immersion by clause (e) of proper-fp-permanence. Step 3: lem-zl-bertini-finite-cover-transverse-component with pi=id and S empty; every hypothesis checked. Step 4: the open/closed order isomorphism moves maximality, non-containment in H_{v1} and chain lengths from A to T. Step 5: by the fibre-generation and nonvanishing-zero-locus nodes the base locus lies in S, so its components are closed singletons. Step 6: at a closed point, local dimension equals d by the affine algebra, stalk localization, max-localization dimension, Spec dimension and stalk-chain nodes. Minor remark, not a fault: the stalk-chain node allows chains that do not end at T, but T is irreducible, so appending T makes the two suprema equal. Cases checked: d=2, S empty, singular point in S, T not affine or proper, V=0 impossible. Duplicate search (rg -L for 0G4F and 'common zero locus') finds only the smooth-affine zl Bertini nodes, which do not cover singular integral T. Batch 5: the only trace-formula-chapter node in the closure is lem-trf-smooth-composition, reached through the transverse-component node. It is a Mathlib leaf (Stacks 01VA, smooth_comp), a general scheme fact and not part of the trace formula or Poincare duality, so I accept it. tool_uses accepted: all generic geometry and commutative algebra, none replaces a step of unit sk-thm-sf-ctf-stability. No SGA cited. No changes."
+ }
+}

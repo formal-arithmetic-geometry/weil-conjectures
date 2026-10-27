@@ -1,0 +1,211 @@
+{
+ "id": "lem-sf-cbc-slice-tensor-generator-coherence",
+ "kind": "statement",
+ "title": "Generator-normalized slice tensor isomorphisms and their strict coefficient coherence",
+ "statement": "Let $\\mathcal C$ be a small Grothendieck site, $R$ a sheaf of commutative rings, and $V\\in\\mathcal C$. Put $R_V=R|_V$ on $\\mathcal C/V$ [def-pur-localized-ringed-site]. Use module sheaves [def-weil-sheaf-of-modules-category], sheaf tensor [def-pur-sheaf-tensor-product], restriction of scalars [def-pc-sheaf-restrict-scalars], and $j_{R!}M=(P_M)^\\#$, with the direct-sum presheaf $P_M(W)=\\bigoplus_{u:W\\to V}M(W,u)$ [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification]. For every unital commutative $R$-algebra sheaf $S$ there are canonical natural isomorphisms\n$$\\kappa_N:\\operatorname{Res}_{R\\to S}j_{S!}N\\xrightarrow{\\sim}j_{R!}\\operatorname{Res}_{R_V\\to S|_V}N,$$\nfor $S|_V$-modules $N$, and $S$-linear isomorphisms\n$$\\eta_{M,S}:j_{R!}M\\otimes_RS\\xrightarrow{\\sim}j_{S!}(M\\otimes_{R_V}S|_V).$$\nThe action on the source is multiplication on the second tensor factor. The map $\\kappa$ is the identity on each extension-presheaf summand and its action. After $\\kappa$, the formula for $\\eta$ is\n$$[m]_u\\otimes s\\longmapsto[m\\otimes s|_{(W,u)}]_u;$$\nits inverse is induced by $[m\\otimes s]_u\\mapsto[m]_u\\otimes s$, using $(S|_V)(W,u)=S(W)$. These formulas refer to actual presheaf generators followed by sheafification units and determine the maps uniquely.\nFor any unbounded $R_V$-cochain complex $P$ and any strict inverse tower $S_\\bullet$ of such algebras [def-weil-inverse-system], applying this formula degreewise gives a chain isomorphism of strict $R$-module towers\n$$r_P:(j_{R!}P\\otimes_RS_n)_n\\xrightarrow{\\sim}(j_{R!}(P\\otimes_{R_V}S_n|_V))_n,$$\nnatural in chain maps, with an $S_n$-linear lift at each level. With right-to-left composition its equations are\n$$r^{i+1}_{P,n}(j_{R!}(d_P^i)\\otimes1)=j_{R!}(d_P^i\\otimes1)r^i_{P,n},\\qquad j_{R!}(1_P\\otimes s_n|_V)r_{P,n+1}=r_{P,n}(1_{j_{R!}P}\\otimes s_n).$$\nFor a unital algebra-tower map $a:S_\\bullet\\to T_\\bullet$, both naturality composites take $[p]_u\\otimes s$ to $[p\\otimes a_n(s)|_{(W,u)}]_u$. In particular $[p]_u\\otimes1$ goes to $[p\\otimes1]_u$, intertwining the scalar-unit maps. All these equations hold before localization, with no flatness, boundedness or surjectivity assumptions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; Tags 03DI (lemma-extension-by-zero) and 03CY (lemma-sheafification-presheaf-modules): agent generator normalization, coefficient actions and strict coherence, returned proof Steps 4–5."
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-inverse-system",
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-localized-strict-tensor-comparison-data",
+  "lem-sp-scalar-extension-binary-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-slice-normalized-scalar-comparisons] to obtain normalized scalar-restriction and scalar-linear natural isomorphisms and their uniqueness.",
+   "uses": [
+    "lem-sf-slice-normalized-scalar-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sf-slice-normalized-tensor-transport] to the base site and again to the slice site; the same universes simplify by idempotence of max. These are the normalized tensorLift and sliceTensorLift.",
+   "uses": [
+    "lem-sf-slice-normalized-tensor-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Supply these four comparison families and their generator formulas to [lem-sf-slice-tensor-tower-assembly]. Obtain the normalized ordinary tower comparison, its uniqueness, coefficient naturality and the equation identifying its level maps with the scalar-linear composite.",
+   "uses": [
+    "lem-sf-slice-tensor-tower-assembly"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse component of the scalar-linear isomorphism to its forward generator formula, then use the hom_inv_id identity to derive linear_inverse. Specialize the ordinary generator formula to coefficient 1 to derive unit_normalized. Fill Coherence with these fields. The existing Coherence.onComplexes applies the resulting ordinary natural isomorphism degreewise, so differentials, all transitions and chain maps commute.",
+   "uses": [
+    "def-sf-localized-strict-tensor-comparison-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-slice-normalized-scalar-comparisons",
+  "lem-sf-slice-normalized-tensor-transport",
+  "lem-sf-slice-tensor-tower-assembly",
+  "def-sf-localized-strict-tensor-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "S2: normalized scalar comparisons, ordinary tensor transport, and strict tower assembly split into independent statements; inverse formula and scalar-unit specialization proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|extendByZero|lowerShriek|jShriek).*(tensor|Tensor)|(tensor|Tensor).*(extensionByZero|lowerShriek)",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary tensor maps, sheaf generators and sheafification actions, not the normalized slice extension iso with coefficient-linear strict coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj; PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj; PresheafOfModulesOfCommRing.tensorObj_obj; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight; PresheafOfModulesOfCommRing.Monoidal.tensorHom; PresheafOfModulesOfCommRing.Monoidal.tensorObjMap; PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary tensor maps, sheaf generators and sheafification actions, not the normalized slice extension iso with coefficient-linear strict coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The slice extension tensor comparison is linear over the coefficient algebra and respects its unit",
+   "results": "TensorProduct.ext'; IsLocalization.moduleLid; TensorAlgebra.Rel.smul; TensorProduct.ext; Algebra.TensorProduct.lmul'_toLinearMap; Algebra.TensorProduct.algEquivOfLinearEquivTensorProduct_apply; TensorProduct.mapOfCompatibleSMul; IsLocalization.moduleTensorEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary tensor maps, sheaf generators and sheafification actions, not the normalized slice extension iso with coefficient-linear strict coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero projection formula for sheaves of modules on slice sites with pure tensor generator normalization and coefficient linearity",
+   "results": "SheafOfModules.Presentation.mapGenerators; SheafOfModules.Presentation.map_π_eq; SheafOfModules.generatorsOfIsCokernelFree_π; SheafOfModules.Presentation.map_generators_I; SheafOfModules.Presentation.mapRelations; PresheafOfModules.Sheafify.SMulCandidate.mk'; SheafOfModules.freeHomEquiv; SheafOfModules.GeneratingSections.π",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary tensor maps, sheaf generators and sheafification actions, not the normalized slice extension iso with coefficient-linear strict coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj; PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj; PresheafOfModulesOfCommRing.tensorObj_obj; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight; PresheafOfModulesOfCommRing.Monoidal.tensorHom; PresheafOfModulesOfCommRing.Monoidal.tensorObjMap; PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: none states localized module extension with normalized tensor isomorphisms and strict coefficient, chain, tower and unit coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|extension_by_zero|jShriek).*(tensor|Tensor)|(tensor|Tensor).*(extensionByZero|extension_by_zero|jShriek)",
+   "results": "",
+   "date": "2026-10-22",
+   "verdict": "no match: none states localized module extension with normalized tensor isomorphisms and strict coefficient, chain, tower and unit coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero projection formula for sheaves of modules on a localized site natural in the coefficient algebra",
+   "results": "Function.ExtendByZero.linearMap; DFinsupp.lmk; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map; FractionalIdeal.extended_zero; AlgebraicGeometry.RingedSpace.res_zero; ModuleCat.Tilde.openToLocalization; PresheafOfModules.Sheafify.zero_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: none states localized module extension with normalized tensor isomorphisms and strict coefficient, chain, tower and unit coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of module sheaves on a slice site commutes with extension of coefficient algebras, normalized on direct sum and pure tensor generators",
+   "results": "SheafOfModules.Presentation.mapGenerators; SheafOfModules.Presentation.map_generators_I; SheafOfModules.ιFree_freeMap; SheafOfModules.ιFree_freeMap_assoc; SheafOfModules.generatorsOfIsCokernelFree_π; SheafOfModules.Presentation.map_π_eq; SheafOfModules.freeHomEquiv; SheafOfModules.map_ιFree_mapFree_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: none states localized module extension with normalized tensor isomorphisms and strict coefficient, chain, tower and unit coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint to restriction of module sheaves to the over category satisfies the tensor projection formula and commutes with scalar change",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; ModuleCat.instIsLeftAdjointRestrictScalars; SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: none states localized module extension with normalized tensor isomorphisms and strict coefficient, chain, tower and unit coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-localized-strict-tensor-descent",
+  "date": "2026-10-22",
+  "group": "NG"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 1–2: extension-by-zero identification and coefficient naturality; localized strict-tensor refinement, returned descent proof Steps 4–5",
+   "via": [
+    "lem-sf-cbc-localized-strict-tensor-descent",
+    "lem-sf-cbc-extension-zero-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cbc-slice-tensor-generator-coherence",
+  "worker": "stage1",
+  "summary": "Preserved statement; constructed scalar-restriction comparison and both tensor maps using existing bilinear/sheafification interfaces, justified local generator tests without global-lift assumptions, and checked S-linearity and every strict chain/tower/unit equation. No new nodes. Reviewer FIX (maintainer reader, 2026-10-22): the forward map, reverse map and inverse identities (old Steps 3–5) re-proved the existing reviewed node lem-sf-ringed-slice-tensor-generators (case H=Res S); they are replaced by one step citing it, composed with κ, and the following steps are renumbered.",
+  "blueprint": "fix-lem-exchanges proof Steps 1–2: extension-by-zero identification and coefficient naturality, through lem-sf-cbc-extension-zero-completion and lem-sf-cbc-localized-strict-tensor-descent. This split supplies their prescribed ordinary generator normalization, before derived localization.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Underlying-set compatibility allows the local-lift theorem to apply to module sheafification units; the unit supplies no algebraic-structure sheafification comparison."
+   },
+   {
+    "node": "lem-sf-ringed-slice-tensor-generators",
+    "why": "Generic generator-normalized ordinary projection isomorphism j_!G⊗H≅j_!(G⊗j^*H) on a localized ringed site (case G=M, H=Res S gives η and its inverse with the prescribed formulas); a reviewed existing node of sk-thm-sf-compatibility, cited instead of re-proving it, as its review note asked; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-slice-tensor-generators"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6c641d575",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6c641d575 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the sources. Stacks sites-modules 0E8I (l.4051) proves the projection formula only through a Yoneda/internal-Hom chain, so the generator normalization is the agent's own work and by=agent is right. The other sources are 03DI (l.2058), 03CY (l.815), 0GMW (l.3606), sites 00WK, and fix-lem-exchanges Steps 1-2 in the main-20261015 blueprint. No SGA source is used. The item has no repair note and is not on a drop list, so the re-split rule does not apply. The statement is unchanged and true. Edge cases checked: Hom(W,V) empty, several arrows W→V, restrictions merging summands, R=0, S=0, M=0, non-flat R→S, unbounded P. S_n sits in degree 0, so Tot of P⊗S_n has differential d⊗1. All ten steps are correct. Step 1's local-lift test rests on the interface, underlying-sets and epi-local-lifts lemmas and never assumes sections lift globally. κ comes from equal summand actions and uniqueness of the extended action. The forward and reverse maps have the right bilinearity and restriction checks, and the S-linearity, naturality, chain, tower and unit steps compare explicit formulas on generators. Fault (C5): the reviewed base node lem-sf-ringed-slice-tensor-generators (Q64, 2026-10-22) already gives ψ: j_!G⊗H→j_!(G⊗j^*H) with the same generator formulas, its inverse and uniqueness. Its review note asks this item to cite it for η (the case H=Res S) instead of re-proving it. The delivery re-proved it in Steps 3-5. FIX: Steps 3-5 are replaced by one step that identifies M⊗Res(S|_V) with Res N, applies the Q64 node with O=R, G=M, H=Res S, and sets e=κ_N^{-1}ψ and h=κ'κ_N. Old Steps 6-10 become Steps 4-8, with their Step 7 references changed to Step 5. proof_deps is recomputed. The no-longer-used bilinear-extension and tensor-universal tool uses are dropped, and the Q64 node is declared as a tool use: its unit sk-thm-sf-compatibility is not cited by sk-prop-sf-cbc, and it is generic sheaf-module algebra. Citing it creates no cycle. The underlying-sets tool use is accepted. One fault in total.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SliceTensorGeneratorCoherence",
+  "declaration": "SheafOfModules.SliceTensorGenerator.coherence_exists",
+  "declarations": [
+   "SheafOfModules.SliceTensorGenerator.Coherence",
+   "SheafOfModules.SliceTensorGenerator.Coherence.onComplexes",
+   "SheafOfModules.SliceTensorGenerator.coherence_exists"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SliceTensorGeneratorCoherence.lean",
+  "statement": "theorem coherence_exists : Nonempty (Coherence.{c, v, r} R V)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b4cb62cf",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read the item node, the report (Worker report + Second reading by Q40), the delivered module, LocalizedStrictTensorData, ScalarExtensionBinaryCoherence l.1379-1407, InvertibleTensorScalarExtensionDefinitions.scalarExtensionSection and DerivedChangeOfRingsCochainModel. Every node clause has a Lean counterpart: kappa = restrictionComparison inverse, pinned on summands and unique; eta = linear, S-linear on actual changeOfRingsOfUniverses, forward and inverse generator formulas, unique; tensorLift and sliceTensorLift pinned by pure-tensor formulas; ordinary strict-tower iso pinned (OrdinaryNormalized), unique, levelwise equal to tensorLift, Res(linear), kappa and j_R!(sliceTensorLift inverse); onComplexes = NatIso.mapHomologicalComplex gives the chain and transition equations and naturality in chain maps; coefficient_natural for arbitrary tower maps; unit clause. No flatness, boundedness or surjectivity; universe max c v r as in the landed data node. Edge cases: empty Hom(W,V), several arrows, zero R/S/M, non-flat maps, unbounded degrees. Mechanical finding on lem-sp-scalar-extension-binary-coherence: only the proved lemmas scalarExtension_map_id/comp are used, as functor laws of the helper extend, and no definitions from that module; the statement depends on the theorem's conclusion and stage 2 cannot prove the laws itself (same pattern in StrictScalarHomChain, ScalarHomOrdinaryTensorComparison, StrictPerfectCoefficientPackageOfUniverses), so PASS on this point. Dependency records byte-identical to live; the other added stmt_dep def-sf-localized-strict-tensor-comparison-data is landed and acyclic; lean.statement verbatim; no hollow definitions; only the main theorem is sorry; docstrings carry source places and the 8 steps. Advisories: scalarExtensionSection's owner def-sp-scalar-tensor-comparison-data is reached only transitively; OfSequence, BifunctorShift, PreservesSheafification and LocallySurjective imports are redundant. No file changed, so no compile; the worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fe40f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T101330-L-3683306",
+  "kind": "interface",
+  "note": "independent cc review: coherence_exists assembly vs node proof/proof_deps; Coherence/onComplexes vs clone (identical); 3 new sorried lemmas vs their nodes and docstrings (true, not restatements); moved interface defs vs change record; sandbox compile of 5 delivered modules + 3 direct importers (all compile, exit 0); #print axioms coherence_exists = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

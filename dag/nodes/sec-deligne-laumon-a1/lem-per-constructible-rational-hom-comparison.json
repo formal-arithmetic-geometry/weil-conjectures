@@ -25,66 +25,42 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical coefficient identification in [lem-per-rational-module-realization-functor]: the completed sheaf $B_X$ is the continuous-function sheaf $A_X$. Thus $K$ belongs to the same full integral category under this identification. Apply [lem-weil-pbc-integral-constructible-hom-sums] with this $X,E,A,\\varpi,K$ and the given countable family. The scheme is noetherian and finite-dimensional, $\\ell$ is invertible, and the family has the common lower bound required there. Its conclusion is exactly the first displayed map for every $q\\in\\mathbf Z$, with the same shifted coprojections, so proves the first assertion. This existing Hom-sums theorem is the passage from the global-derived-Hom continuity of Lemma 6.8.12 to ordinary shifted Hom; no continuity for families unbounded below is invoked.",
+   "text": "Choose a rational realization using lem-per-rational-module-realization-functor. Apply lem-per-completed-continuous-hom-hypotheses and its comparison field to the cofan transported by completedContinuousTransport; project the bijectivity of the completed shifted-coprojection map. This proves the first conjunct. For the generic sequential continuity predicate, reindex along ULift ℕ ≃ ℕ and check the direct-sum comparison on each generator. The same hypotheses record a lower cohomological bound for every integral object.",
    "uses": [
     "lem-per-rational-module-realization-functor",
-    "lem-weil-pbc-integral-constructible-hom-sums"
+    "lem-per-completed-continuous-hom-hypotheses"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply (i)$\\Rightarrow$(iii) of [lem-weil-pbc-integral-stratified-perfect-characterization] to $L\\in\\mathcal C_X$. All its scheme and coefficient hypotheses are those of the item, and membership includes the compatible etale-origin witnesses. It follows that $L$ is bounded, hence bounded below. The same characterization states closure under shifts, so $L[q]$ is again in $\\mathcal C_X$ whenever needed to interpret a morphism of the rational category. No projectivity or flatness of the cohomology modules of $L$ is being assumed.",
+   "text": "Apply lem-per-rational-realization-hom-transport to the given realization. Restrict its general source and target predicates to integral constructible complete objects using continuity and boundedness from step 1. Project all five fraction and coherence equations, yielding precisely ConstructibleRationalHomComparison for the chosen shift structure.",
    "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
+    "lem-per-rational-realization-hom-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-scalar-localization-derived-hom] on the small site $X_{\\mathrm{proet}}$ with the commutative ring $A$, scalar $t=\\varpi$, ring sheaf $R=B_X$ and $R_t=E_X$. Step 1 verifies precisely its countable, common-lower-bound coproduct-Hom hypothesis on $K$ for every integer shift; Step 2 verifies its bounded-below hypothesis on $L$. By [lem-per-rational-module-realization-functor], scalar localization is exact on module sheaves and its induced triangulated functor is the actual $F_X=E_X\\otimes^L_{B_X}-$ used in the item. The theorem therefore gives the natural isomorphism $\\operatorname{Hom}_{D(B_X)}(K,L[q])[1/\\varpi]\\simeq\\operatorname{Hom}_{D(E_X)}(F_XK,F_XL[q])$, with the specified image $f/\\varpi^n\\mapsto\\varpi^{-n}F_X(f)$. In particular it is the actual scalar-extension comparison, with its shift comparison, rather than an unspecified isomorphism of the two modules.",
+   "text": "Convert degree-zero shifted Homs to ordinary Homs by the zero-shift isomorphism and identify localized modules with scalar-extended tensor Homs using Mathlib IsLocalizedModule.isBaseChange. The fraction formula at denominator one identifies this linear equivalence on every pure tensor. Conjugate by the recorded object equalities R.objects. Every tensor Hom is one fraction, by LocalizedModule.equivTensorProduct and the powers-submonoid description. The canonical coefficient ring equivalence maps invSelf(varpi)^n to (varpi^n)^(-1), as follows by mapping algebraMap(varpi) * invSelf(varpi) = 1. Thus R.fractions identifies R.J.map with the resulting linear equivalence on every arrow. Its surjectivity and injectivity give Full and Faithful.",
    "uses": [
-    "lem-weil-pbc-scalar-localization-derived-hom",
-    "lem-per-rational-module-realization-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
-   }
-  },
-  {
-   "text": "For completeness, the fraction formula gives precomposition and postcomposition by $a,b$ as $\\varpi^{-n}F_X(f)F_X(a)$ and $F_X(b)\\varpi^{-n}F_X(f)$, so gives naturality. Shifting gives $\\varpi^{-n}F_X(f)[r]$ under the triangulated shift identification. The identity fraction maps to $F_X(1)=1$, and for composable fractions the formula gives $\\varpi^{-(m+n)}F_X(gf)=(\\varpi^{-m}F_X(g))(\\varpi^{-n}F_X(f))$. These equations hold for every fraction. Finally [def-weil-pbc-bounded-constructible-complete] defines $\\mathcal C_X$ as a full subcategory of $D(B_X)$, and [def-weil-pbc-rational-category] gives every object of $\\mathcal R_X$ as $QK$ and its Hom modules as the localized integral Hom modules. The $q=0$ bijections of Step 3 are therefore exactly the Hom maps of $J_X$ specified in [lem-per-rational-module-realization-functor]. They prove that $J_X$ is fully faithful into the ambient $D(E_X)$.",
-   "uses": [
-    "def-weil-pbc-bounded-constructible-complete",
     "def-weil-pbc-rational-category",
-    "lem-per-rational-module-realization-functor"
+    "def-weil-linear-scalar-localization",
+    "lem-weil-l-adic-integers-localization-uniformizer"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-per-rational-module-realization-functor",
-  "lem-weil-pbc-integral-constructible-hom-sums",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-scalar-localization-derived-hom",
-  "def-weil-pbc-bounded-constructible-complete",
-  "def-weil-pbc-rational-category"
+  "lem-per-completed-continuous-hom-hypotheses",
+  "lem-per-rational-realization-hom-transport",
+  "def-weil-pbc-rational-category",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-l-adic-integers-localization-uniformizer"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness, pp. 61-62"
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
  },
  "mathlib_searches": [
   {
@@ -182,44 +158,26 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-per-constructible-rational-hom-comparison",
   "worker": "stage1",
-  "summary": "Checked the Bhatt-Scholze full-faithfulness argument and reused the existing countable Hom-sums theorem and the abstract scalar-localization comparison. Verified the identical completed coefficient sheaf, compatible-witness integral category, boundedness of L, and the actual fraction formula; no new nodes or statement changes.",
+  "summary": "Human-ordered re-split: preserved the statement and all four retained arguments in two independent statement-only obligations, coefficient/Hom hypothesis verification and conditional raw-localization embedding. Assembly is under 3000 characters; no Lean edits. The original arguments and their exact allocation are retained in report.md.",
   "blueprint": "Nearest ancestor lem-per-smooth-pullback-t-exact: continuous-coefficient realization underlying the first pullback/cohomology paragraph, specifically the retained full-faithfulness step 4 of lem-per-continuous-rational-derived-realization.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-integral-constructible-hom-sums",
-    "why": "Generic passage from integral global derived Hom continuity to the coprojection-induced shifted Hom maps, with exactly the completed coefficient category and common-lower-bound hypothesis; no perverse-unit node supplies it."
-   },
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Generic characterization of the integral completed category provides actual boundedness and closure under shifts; no perverse-unit node supplies it."
-   },
-   {
-    "node": "lem-weil-pbc-scalar-localization-derived-hom",
-    "why": "Generic ringed-site scalar-localization theorem converts the verified Hom continuity into the actual comparison, without replacing the unit route."
-   }
-  ]
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-weil-pbc-integral-constructible-hom-sums",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-scalar-localization-derived-hom"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q143-a686c55af",
-  "group": "Q143",
+  "reviewer": "NT-cc-Q133-c75ab4b3b",
+  "group": "Q133",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-a686c55af (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement, and Bhatt–Scholze pp. 61–62 (Lemma 6.8.12 and Prop 6.8.14(2), where full faithfulness follows from 6.8.12). The proof expands exactly that implication. The delivery is one commit with no new nodes; statement, stmt_deps and blueprint are byte-identical to the unsplit live node; there is no cycle (closure of 2722 nodes); and the item is not superseded, has no repair note and is not on the drop list. Step 1: lem-weil-pbc-integral-constructible-hom-sums states the first assertion verbatim (same E, A, ϖ, noetherian finite-dimensional X with ℓ invertible, K in the complete category, small countable families with a common lower bound, every q, shifted coprojections). The coefficient identification B_X=C(|−|,A) comes from the realization-functor node through the same continuous-coefficients node. Step 2: (i)⇒(iii) of the integral stratified-perfect characterization gives L bounded, and the same node gives closure under shifts. Step 3: I checked every hypothesis of the scalar-localization theorem: small site, t=ϖ, R=B_X, R_t=E_X as the sheafified section localization, the K-hypothesis at every q from Step 1, L bounded below from Step 2, and F equal to the actual scalar localization by the realization-functor node. Its conclusion is the item's display, with naturality, shifts and composition. Step 4 is elementary: the complete category is a full subcategory of D(B_X), and the rational category has the same objects with Hom⊗E and no Karoubi envelope, so the q=0 maps are those of J_X and J_X is fully faithful. Edge cases are consistent: empty family, K=0 or L=0, negative q, and ϖ-torsion K (both sides 0). Neither the cited nodes nor the item claim anything for families unbounded below. I accept the tool_uses of the three generic pbc nodes; the parent already carries two of them. No duplicate: the condensed-e-realization node is for separated finite-type k-schemes into condensed modules, and the lisse-rational-realization node covers lisse objects only. Advisory for the maintainer: the item's first assertion restates hom-sums verbatim; that statement was written by Q115 and is unchanged by this delivery. No SGA, no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-c75ab4b3b (reviewer sub-agent of L); spot-checked: Re-split note (released 2026-10-22, ≥2 new nodes) is satisfied. The item statement is byte-identical to the base (side-live). Old steps 1-2 (hom-sums under the B_X=A_X identification; characterization (i)⇒(iii) and shift closure) become lem-per-completed-continuous-hom-hypotheses: the T_e transport along e⁻¹, with orientation checked against def-pc-sheaf-restrict-scalars; the identified shifted-coprojection isomorphisms, empty family included; L bounded and L[q]∈C_X. Old steps 3-4 (scalar-localization-derived-hom on X_proet with t=ϖ, R=B_X, R_t=E_X; fraction equations and full faithfulness of J_X) become lem-per-bounded-hom-localization-embedding, stated for a full, shift-stable, bounded-below, Hom-continuous subcategory. The two nodes are of comparable size and statement-only. The assembly is 2 steps, about 1300 characters, and every hypothesis is supplied by node 1, def-weil-pbc-bounded-constructible-complete, def-weil-pbc-rational-category and lem-per-rational-module-realization-functor. Sources checked in the Bhatt-Scholze pdf: Lemma 6.8.2(1) p.58, Prop 6.8.11(3) pp.60-61, Lemma 6.8.12 (direct sums in D^{≥0}) and Prop 6.8.14(2) proof p.61-62. No SGA. Duplicate search over dag/nodes (rg -L): lem-sfb-integral-localization-hom-colimit, lem-sf-rational-term-hom-comparison, lem-tw-lisse-rational-realization and lem-trf-filtered-bounded-localization-comparison are all different statements. The new nodes are applications of hom-sums and scalar-localization-derived-hom, not copies of them. Small cases checked: K=0 and the empty family; t=1; t nilpotent, giving A[1/t]=0; torsion K; the lower bound and shift stability are needed and kept. Batch-5 flag: the new citation of lem-per-rational-module-realization-functor is accepted. Its closure reaches lem-trf-geometric-inverse-image-exact, which only states that inverse image along a geometric morphism of topoi is exact. That is a general fact, not part of the trace formula or Poincaré duality or their proofs, and the item already cited this node on base. Maintainer notes: (1) the item's tool_uses still lists the three pbc nodes, which are now used only through the new nodes; (2) review_split.py's 'no such node' output is a symlink artifact. No fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.ConstructibleRationalHomComparison",
   "declaration": "AlgebraicGeometry.Scheme.constructibleRationalHomComparison",
   "declarations": [
-   "AlgebraicGeometry.Scheme.rationalRealizationLocalizedLinear",
    "AlgebraicGeometry.Scheme.ConstructibleRationalHomComparison",
    "AlgebraicGeometry.Scheme.constructibleRationalHomComparison"
   ],
@@ -229,7 +187,10 @@
   "by": "Q22",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The first conjunct verifies the actual shifted-coprojection map for every small countable family, including the empty family. The second specializes the published scalarLocalizationHomComparison predicate, retaining all fraction, naturality, identity, composition and simultaneous-shift equations, and asserts full faithfulness of the normalized realization into the actual ambient rational-coefficient derived category. The auxiliary linear structure restricts the realization field action along the existing canonical coefficient ring equivalence."
+  "note": "The first conjunct verifies the actual shifted-coprojection map for every small countable family, including the empty family. The second specializes the published scalarLocalizationHomComparison predicate, retaining all fraction, naturality, identity, composition and simultaneous-shift equations, and asserts full faithfulness of the normalized realization into the actual ambient rational-coefficient derived category. The auxiliary linear structure restricts the realization field action along the existing canonical coefficient ring equivalence.",
+  "supporting_modules": [
+   "Sheaf.Paper.RationalRealizationHomTransport"
+  ]
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -238,5 +199,27 @@
   "group": "Q22",
   "result": "pass",
   "note": "Item node differs from live only in the lean record; lean.statement exactly matches the signature. Hypotheses equal those of RationalModuleRealization. Conjunct 1 has the same form as integralConstructible_hom_sums: every countable I : Type (u+1), empty family allowed, common IsGE bound, every q, coprojection map under the canonical A-action. Conjunct 2 specializes scalarLocalizationHomComparison with F = pbcDerivedExtend(R.integralIso.hom ≫ R.inclusion) and P = B = PbcIsBoundedConstructibleComplete; the target action is restricted along the canonical pbcRationalCoefficientEquiv from the pinned R.moduleLinear. The existential CommShift is not hollow: the fraction formula fixes e, bijectivity does not depend on the shift choice, and the other clauses follow from the CommShift axioms. Full faithfulness is stated as R.J.Full ∧ R.J.Faithful. Helpers have real data and source/blueprint docstrings; the docstring follows the four proof steps; the proof is sorry only. Edge cases checked. No compile (no file changed). Advisories: the snapshot has the older Q20 record of def-weil-derived-cohomology-sheaves (same declaration as live Q34, not changed by the delivery); the first conjunct restates hom-sums as the node does."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a8aa7",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T122631-L-1792106",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new sorried rationalRealizationHomTransport vs scalarLocalization_derivedHom and the RationalModuleRealization normalization fields; moved rationalRealizationLocalizedLinear byte-identical vs clone; both direct importers compiled against delivered modules"
  }
 }

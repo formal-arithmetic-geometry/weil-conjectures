@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+ "kind": "statement",
+ "title": "Endomorphism span of symmetric ample lines",
+ "statement": "Let $k$ be a field [def-weil-field] and $A/k$ an abelian variety [def-sc-abelian-variety]. Call an invertible module [def-sc-invertible-module] $L$ on $A$ symmetric if $[-1]^*L\\simeq L$, with tensor inverse image [def-pc-module-pullback]. If $L$ and $M$ are symmetric ample [def-weil-pbc-ample-invertible-module] invertible modules on $A$, then there are integers $a\\geq1$ and $r\\geq1$ and endomorphisms $b_1,\\ldots,b_r\\in\\operatorname{End}_k(A)$ such that $M^{\\otimes a}\\simeq\\bigotimes_{j=1}^r b_j^*L$.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+  "place": "Proposition XI 1.14, p.170 (symmetric ample endomorphism-span statement)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-polarization-calculus-over-field] to $A,L$ and put $\\lambda=\\phi_L$, $E=\\operatorname{End}^0_k(A)$, $u=\\lambda^{-1}\\phi_M$, and $v^\\dagger=\\lambda^{-1}v^\\vee\\lambda$. Both $L$ and $M$ are ample, so [lem-sfb-ample-polarization-positive-spectrum] gives $u^\\dagger=u$ and the finite-dimensional commutative algebra $C=\\mathbf Q[u]$, together with $C\\otimes\\mathbf R\\simeq\\mathbf R^d$ in which $u$ has strictly positive coordinates.",
+   "uses": [
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-ample-polarization-positive-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent assembly of the polarization and sum-of-squares inputs; see report.md for source audit and auxiliary arguments."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-real-algebra-positive-squares] to that algebra and $x=u$, obtaining $r\\geq1$ and $q_j\\in C$ with $u=\\sum_jq_j^2$. The involution from [lem-sfb-polarization-calculus-over-field] fixes every $q_j$: write $q_j=\\sum_i a_i u^i$ with $a_i\\in\\mathbf Q$ and use $u^\\dagger=u$ and rational linearity. Hence $u=\\sum_j q_j^\\dagger q_j$.",
+   "uses": [
+    "lem-sfb-split-real-algebra-positive-squares",
+    "lem-sfb-polarization-calculus-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent assembly of the polarization and sum-of-squares inputs; see report.md for source audit and auxiliary arguments."
+   }
+  },
+  {
+   "text": "Choose a positive integer $D$ clearing the denominators of all $q_j\\in\\operatorname{End}_k(A)\\otimes_{\\mathbf Z}\\mathbf Q$ [def-weil-pbc-module-tensor-product]. Explicitly each is a finite sum $h\\otimes(a/b)$; take a common positive multiple of the finitely many denominators $b$ and combine the resulting integer multiples of $h$. This gives actual $k$-endomorphisms $b_j$ whose rational images equal $Dq_j$. Therefore $\\sum_jb_j^\\dagger b_j=D^2u$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent assembly of the polarization and sum-of-squares inputs; see report.md for source audit and auxiliary arguments."
+   }
+  },
+  {
+   "text": "Put $N=M^{\\otimes D^2}\\otimes(\\bigotimes_jb_j^*L)^{-1}$. It is symmetric: $b_j\\circ[-1]=[-1]\\circ b_j$, so the pullback composition identities [def-pc-module-pullback] and symmetry of $L,M$ give symmetry of every factor. Pullback along $[-1]$ commutes with tensor products [lem-weil-pbc-module-pullback-tensor], hence with tensor inverses of invertible modules (as $[-1]^*\\mathcal O_A\\cong\\mathcal O_A$ by the tensor-formula definition), so $N$ is symmetric. Additivity and the pullback formula of [lem-sfb-polarization-calculus-over-field] give, in rational homomorphisms,\n$$\\phi_N=D^2\\phi_M-\\sum_j b_j^\\vee\\lambda b_j=\\lambda(D^2u-\\sum_jb_j^\\dagger b_j)=0.$$\nIts symmetric-kernel assertion gives $N^{\\otimes2}\\simeq\\mathcal O_A$. Cancel the dual factors to obtain $M^{\\otimes2D^2}\\simeq\\bigotimes_j(b_j^*L)^{\\otimes2}$. Repeat each $b_j$ twice, giving $a=2D^2\\geq1$ and $2r\\geq1$ endomorphisms as required.",
+   "uses": [
+    "lem-sfb-polarization-calculus-over-field",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent assembly of the polarization and sum-of-squares inputs; see report.md for source audit and auxiliary arguments."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-polarization-calculus-over-field",
+  "lem-sfb-ample-polarization-positive-spectrum",
+  "lem-sfb-split-real-algebra-positive-squares",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I §§8–14 and II §1 Lemma 1.3 motivate the reconstruction; the originally cited Raynaud XI 1.14 PDF is absent locally. The assembly and algebraic auxiliary are by NS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For two symmetric ample line bundles L and M on an abelian variety a positive power of M is a tensor product of pullbacks of L by endomorphisms",
+   "results": "General scheme limits, pullback, Picard-group, or tensor declarations; no proposed geometric theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetric ample invertible sheaves on an abelian variety are rationally generated by endomorphism pullbacks of any fixed symmetric ample sheaf",
+   "results": "General algebraic geometry, tensor-power, or abstract-group declarations; no proposed geometric theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AbelianVariety\", \"pullback\"",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "abelian.*(ample|invertible)|symmetric.*ample|Raynaud",
+   "results": "No relevant Mathlib declarations; incidental references were read and rejected.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two symmetric ample line bundles L and M on an abelian variety a positive power of M is a tensor product of endomorphism pullbacks of L",
+   "results": "8 hits. IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, IsPurelyInseparable.exists_pow_mem_range_tensorProduct, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, TensorProduct.congr_zpow, LinearEquiv.rTensor_zpow, LinearEquiv.lTensor_zpow, TensorProduct.congr_pow; Purely inseparable tensor descent and tensor-congruence identities do not state the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetric ample invertible sheaves on an abelian variety are generated rationally by endomorphism pullbacks of a fixed polarization",
+   "results": "8 hits. RootPairing.polarizationEquiv_symm_apply_coroot, SymAlg.sym_surjective, RootPairing.polarizationEquiv_apply, RootPairing.PolarizationIn.congr_simp, LinearMap.IsSymmetric.isFinitelySemisimple, AlgebraicGeometry.Scheme.Pullback.t, QuadraticMap.associated_flip, RootPairing.CoPolarizationIn; Root-pairing polarizations, abstract symmetric operators and scheme pullback carrier maps do not state the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AbelianVariety\", \"pullback\"",
+   "results": "0 hits. ; No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "abelian.*(ample|invertible)|symmetric.*ample|Rosati",
+   "results": "0 hits. ; No hits in Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symmetric-line-power-prolongation",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary replacement for the independent power-prolongation input: generic torus quotient, rational Picard descent, generic endomorphism extension, local quasi-projectivity, and the abelian endomorphism span.",
+   "via": [
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+  "worker": "stage1",
+  "summary": "Preserved the full arbitrary-field statement. Reconstructed the argument by positive comparison of polarizations, sums of squares in Q[u], common denominator clearing in End_k(A), and the symmetric kernel of the polarization map. Created three strictly smaller statement-only auxiliaries; no finished project declaration or Mathlib match. Raynaud PDF absent: WANTED recorded and proof honestly agent-origin.",
+  "blueprint": "The inherited blueprint ancestry has node=null (confirmed by blueprint_refs.py ancestor). This refines the abelian endomorphism-span input in the five-part replacement recorded in blueprint.from.place, through the inherited power-prolongation chain; no chapter or unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NS-c3f890443",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-c3f890443 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full, against Milne AV I 8.4/8.5, §14 (14.2, 14.3) and II Lemma 1.3 (the Raynaud PDF is absent, WANTED is recorded, proof_origin is agent). The live item is unsplit with the same statement: this is the first split and nothing is weakened. The math is correct: u=φ_L^{-1}φ_M is Rosati-symmetric with positive spectrum; a totally positive element of the split-real algebra Q[u] is a sum of squares; † fixes Q[u]; clearing denominators gives Σb_j^†b_j=D^2u; φ_N=0 for symmetric N gives N^2≅O over any k (by injectivity of Pic(A)→Pic(A_kbar)); a=2D^2. Small cases checked: dim 0 gives the zero algebra; for CM elliptic curves u∈Q_{>0}; Q(√2) with x=√2 is excluded; for Q x=2 is 1+1. The three new nodes are true, strictly smaller than the item and not duplicates: the existing polarization/Rosati nodes assume k algebraically closed, and lem-sfb-abelian-space-poincare-calculus lacks the ample inverse, † and kernel clauses (noted for the next splitter). Two FIXes. (1) C1: step 4's uncited 'tensor compatibility checked in local trivializations' now cites the Lean-closed tool node lem-weil-pbc-module-pullback-tensor, which is added to uses and proof_deps. (2) B2/B3: lem-sfb-polarization-calculus-over-field used b^∨ without defining it; its statement now defines b^∨ as the map classifying (b×1)^*P_A with its rigidification. No SGA, no cycle, the route stays in unit sk-thm-sf-ctf-stability.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianSymmetricAmpleEndomorphismSpan",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.symmetric_ample_endomorphism_span",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianSymmetricAmpleEndomorphismSpan.lean",
+  "statement": "theorem IsAbelianVariety.symmetric_ample_endomorphism_span {k : Type u} [Field k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (L M : A.left.Modules) [L.IsInvertible] [M.IsInvertible] (hLsym : Nonempty ((Scheme.Modules.tensorPullback (ι[A]).left).obj L ≅ L)) (hMsym : Nonempty ((Scheme.Modules.tensorPullback (ι[A]).left).obj M ≅ M)) (hLamp : Scheme.Modules.IsAmple A.left L) (hMamp : Scheme.Modules.IsAmple A.left M) : ∃ a : ℕ, 1 ≤ a ∧ ∃ r : ℕ, 1 ≤ r ∧ ∃ b : Fin r → (A ⟶ A), (∀ j : Fin r, IsMonHom (b j)) ∧ Nonempty (M.tensorPow a ≅ (List.ofFn (fun j : Fin r ↦ (Scheme.Modules.tensorPullback (b j).left).obj L)).foldr (fun P Q ↦ P ⊗ Q) (𝟙_ A.left.Modules))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f986d122",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read the item node, all 5 stmt_dep records, the delivered module and report, and the Lean sources of IsAbelianVariety, IsInvertible/tensorPow/monoidal structure, tensorPullback (def-pc-module-pullback) and IsAmple (Stacks 01PS); ι[A] is scoped in the opened MonObj namespace. Clause by clause: field; abelian variety as Over(Spec k)+GrpObj+IsAbelianVariety; invertible L,M; symmetry as a Nonempty iso of tensorPullback along ι[A]; absolute ampleness; ∃a≥1, r≥1; b : Fin r → (A ⟶ A) with IsMonHom (End_k(A)); M.tensorPow a ≅ foldr ⊗ of the b_j pullbacks of L ending in 𝟙_ (=O_A). Quantifier order matches; no extra assumptions. Edge cases (dim 0, char 2, zero endomorphisms, universes) are fine. lean.statement is verbatim; one sorry; no defs; docstrings carry the source place, blueprint id and 4 steps; plain imports are proof_dep modules. Node copy differs from live only in lean. No existing declaration (Mathlib/upstream/Sheaf) or name clash. Raynaud PDF absent as recorded at stage 1. H11 advisory only (dispatcher no-second-reading wording). No file changed, so no compile."
+ }
+}

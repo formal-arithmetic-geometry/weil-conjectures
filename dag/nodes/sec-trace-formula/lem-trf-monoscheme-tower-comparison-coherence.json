@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-monoscheme-tower-comparison-coherence",
+ "kind": "statement",
+ "title": "Coherent smooth pullback comparisons for descended monoscheme towers",
+ "statement": "Use the monoschemes, toric realizations, centered towers and contraction of [def-trf-monoscheme-toric-realization]. Fix a rule $\\mathcal F$ assigning a finite normalized blowup tower to every $\\mathbf Q[M]$ for fine torsion-free monoschemes $M$ with finite affine cover, including their finite disjoint unions. Assume that each center is coherent and torus invariant, and that for every smooth scheme morphism between these toric schemes the rule has canonical contracted-pullback comparisons preserving ordered ideals, compatible with identities and composition. Suppose each $\\mathcal F(\\mathbf Q[M])$ has a unique centered saturated monoscheme lift $\\mathcal T(M)$ through the canonical monoid-ideal and blowup-chart identifications, with fine torsion-free intermediate monoschemes having finite affine covers. Then for every smooth monoscheme map $a:N\\to M$ there is a canonical comparison $\\mathcal T(N)\\simeq(a^*\\mathcal T(M))^c$ whose toric realization is the specified comparison for $\\mathbf Q[a]$. At each retained stage its ideal is the recursively pulled-back monoid ideal and the order is unchanged. The contracted stages correspond exactly on the toric and monoscheme sides: both the unit-center condition and the isomorphism condition are respected, so a nonidentity normalization or saturation is retained. These comparisons respect identities and composition; for $N'\\xrightarrow b N\\xrightarrow a M$, the successive comparisons agree with that for $ab$, including the identification of successive contractions with the single contracted pullback.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.2.19, second half, and Theorem 3.2.20, p.106; smoothness in Lemma 3.2.12(i), and contracted pullback in 3.1.21--3.1.23, pp.101--102. No Stacks tag states this monoscheme result."
+ },
+ "stmt_deps": [
+  "def-trf-monoscheme-toric-realization"
+ ],
+ "proof": [
+  {
+   "text": "Fix a smooth $a:N\\to M$. By [lem-trf-toric-monoid-comparison](iii), $\\mathbf Q[a]$ is smooth, so the assumed scheme comparison is available. Form the full recursive pullback $D=a^*\\mathcal T(M)$, keeping all original indices. Clause (i) identifies each extended ring center with the realization of its recursively extended monoid center; clause (ii) identifies the next normalized blowup with the next saturated blowup. This gives an induction, starting with $D_0=N$, identifying $\\mathbf Q[D]$ with the full scheme pullback tower. At each step the objects remain fine, torsion free and finitely covered by clause (ii). The stage maps to the original levels remain smooth: in the smooth product charts underlying clause (ii), a chart $P[I-c]^{\\rm sat}$ pulls back to $P[I-c]^{\\rm sat}\\oplus\\mathbf N^r\\oplus\\mathbf Z^t$. Indeed extension of $I$ adjoins the same differences $d-c$, and taking a positive multiple tests saturation separately in the two factors. Thus the next map again has the smooth stalk form of [def-trf-monoscheme-toric-realization]. The pulled ideals are coherent and nonempty: extend their finite nonempty generating sets. This justifies repeating clause (ii), rather than assuming a pullback comparison for a nonsmooth intermediate map.",
+   "uses": [
+    "lem-trf-toric-monoid-comparison",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "3.1.21--3.1.23, p.101; 3.2.12(i), 3.2.17--3.2.19, pp.104--106."
+   }
+  },
+  {
+   "text": "At every index of $D$, clause (i) of [lem-trf-toric-monoid-comparison] says that the ring center is unit if and only if the monoid center is whole. For a whole center, the chart definition [def-trf-monoscheme-toric-realization] makes the monoscheme arrow the saturation: choose the generator $0$ and obtain $P^{\\rm sat}\\to P$. Its realized arrow is normalization. By [lem-trf-affine-monoid-algebra-normalization] its ring map is the inclusion $\\mathbf Q[P]\\subset\\mathbf Q[P^{\\rm sat}]$. This is an isomorphism exactly when $P=P^{\\rm sat}$: surjectivity forces every basis monomial $e^g$, $g\\in P^{\\rm sat}$, to have exponent in $P$, and the converse is identity. The monoid saturation map is an isomorphism under the same condition, locally on each chart. Hence the two full towers delete precisely the same indices. Contracting them therefore gives canonically corresponding centered towers. This argument does not delete a nonidentity saturation/normalization with whole center, nor a proper principal center whose blowup is already an isomorphism.",
+   "uses": [
+    "lem-trf-toric-monoid-comparison",
+    "def-trf-monoscheme-toric-realization",
+    "lem-trf-affine-monoid-algebra-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "3.1.21--3.1.23, p.101; 3.2.9, p.104; 3.2.18--3.2.19, pp.105--106; contraction convention of the item."
+   }
+  },
+  {
+   "text": "Let $r_0<\\cdots<r_{s-1}$ be the retained original indices of $D$. The specified scheme comparison identifies $\\mathcal F(\\mathbf Q[N])$ with this contracted realized tower, so it has $s$ stages. Construct the desired comparison by induction on $j=0,\\ldots,s$, maintaining an isomorphism between the $j$th level of $\\mathcal T(N)$ and the corresponding level of $D^c$, realizing the specified scheme comparison there. At $j=0$ use $1_N$. At the next center the scheme comparison identifies the actual ideal of $\\mathcal F(\\mathbf Q[N])$ with the extended ideal at $r_j$. Both are realizations of coherent monoid ideals on the already identified monoscheme. Injectivity in [lem-trf-toric-monoid-comparison](i) makes these monoid ideals equal, not just their supports. Both next levels are saturated blowups along this same ideal. Apply [lem-trf-saturated-monoscheme-blowup-universal] in both directions: each source is saturated and its center becomes locally principal. Uniqueness makes the two composites identities. This defines the next centered level isomorphism over the previous one.",
+   "uses": [
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-saturated-monoscheme-blowup-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "3.2.19, second half, and 3.2.20, p.106; unique principalizing lift in 3.1.21, p.101."
+   }
+  },
+  {
+   "text": "The isomorphism just constructed realizes the specified scheme comparison, completing the inductive invariant. To verify this rather than assume fullness of toric realization, use [lem-trf-toric-realization-finite-type]: all the identified levels are reduced finite-type $\\mathbf Q$-schemes with integral components. The centers are nonzero on every component by [lem-trf-toric-monoid-comparison](i), hence their zero schemes are nowhere dense (the generic stalk of a nonzero ideal in a domain is the whole fraction field). The actual scheme comparison and the realized monoscheme comparison are two isomorphisms over the already identified previous level between the same normalized blowups, by clause (ii). Their quotient is a base automorphism of that normalized blowup, which is identity by [lem-trf-normalized-blowup-calculus]. Thus they agree. Iterating steps 3 and 4 finishes the comparison. The index $j$ corresponds exactly to $r_j$, and its center is the recursive pullback ideal proved equal in step 3. No original index has been permuted.",
+   "uses": [
+    "lem-trf-toric-realization-finite-type",
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-normalized-blowup-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "3.2.19--3.2.20, p.106; normalized blowup universal property 2.2.2--2.2.8, pp.89--91."
+   }
+  },
+  {
+   "text": "The comparison is unique with its base identity, retained index map and actual centers. At each retained stage two candidates differ by an automorphism over the preceding level of a saturated blowup. By [lem-trf-saturated-monoscheme-blowup-universal] this automorphism is identity. Induction from the base gives equality of all level maps. For $a=1_M$, step 1 pulls back every center to itself and every chart map is identity. The toric identity comparison equates the lengths of $\\mathcal F(\\mathbf Q[M])$ and its contraction; by step 2 no stage of its monoscheme lift is deleted either. Thus the constructed comparison for $1_M$ is the identity by this uniqueness. This also proves that every assigned lift is already contracted.",
+   "uses": [
+    "lem-trf-saturated-monoscheme-blowup-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "3.1.21--3.1.22, p.101; identity case of functoriality in 3.2.19--3.2.20, p.106."
+   }
+  },
+  {
+   "text": "For $N'\\xrightarrow b N\\xrightarrow a M$, compare the full successive pullback with the full pullback along $ab$. Extended ideals agree: both are generated by images of the original sections, so $b^*(a^*I)=(ab)^*I$. At the first next level, both constructions are saturated blowups of that same ideal; [lem-trf-saturated-monoscheme-blowup-universal] gives their unique isomorphism over $N'$. Inductively apply this to every next center and level. A stage deleted after the first pullback has whole ideal and an isomorphism arrow; its smooth pullback again has whole ideal and is an isomorphism, by the smooth-pullback compatibility in [lem-trf-toric-monoid-comparison](ii). Removing it before the second pullback therefore changes neither a later ideal nor a later level: the connecting isomorphism identifies that later ideal with its extension across the deleted level. Conversely every index not yet deleted is removed by the second contraction exactly when both deletion conditions hold after $ab$. Thus the successive contractions and the single contraction retain the same subsequence of original indices, with canonical identifications of all intervening levels. This includes consecutive deleted indices and length-zero towers.",
+   "uses": [
+    "lem-trf-saturated-monoscheme-blowup-universal",
+    "lem-trf-toric-monoid-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "3.1.21--3.1.23, p.101; contracted functoriality in 3.2.19--3.2.20, p.106."
+   }
+  },
+  {
+   "text": "Under the identification of step 6, the composite of the two comparisons and the comparison for $ab$ are centered ordered isomorphisms from $\\mathcal T(N')$ to $((ab)^*\\mathcal T(M))^c$, over $1_{N'}$. They have the same retained indices: the toric composition law gives the same retained scheme indices, and step 2 identifies them with the monoscheme indices. They preserve the same ideals by step 3 and the equality of extensions in step 6. The uniqueness argument of step 5, applying [lem-trf-saturated-monoscheme-blowup-universal] at each retained level, therefore makes all their maps equal. Their realizations are the prescribed scheme composite by step 4 and the assumed toric composition law. This proves the claimed composition coherence, including the identification of contractions. All arguments are componentwise and admit empty covers; on an empty input a unit saturation is identity and the identity comparison forces the assigned tower to have length zero.",
+   "uses": [
+    "lem-trf-saturated-monoscheme-blowup-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "3.1.22--3.1.23, p.101; 3.2.19--3.2.20, p.106: composition and empty-input cases made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-toric-monoid-comparison",
+  "def-trf-monoscheme-toric-realization",
+  "lem-trf-affine-monoid-algebra-normalization",
+  "lem-trf-saturated-monoscheme-blowup-universal",
+  "lem-trf-toric-realization-finite-type",
+  "lem-trf-normalized-blowup-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.1.19--3.1.23, printed p.101; 3.2.19--3.2.20, printed p.106. Expanded induction and coherence details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monoscheme-tower-comparison-coherence: Smooth base change comparisons of toric resolution towers descend center by center to monoid blowup towers, compatibly with identities composition and contraction.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpecResidueField T.x)) f =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"For a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the composition of the morphism $\\\\operatorname{Spec}(T.tensorInl)$ with the residue field morphism $X.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpecResidueField T.x)) f =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"For a pullback triplet $T$ with morphisms $f: X \\to S$ and $g: Y \\to S$ in the category of schemes, the composition of the morphism $\\\\operatorname{Spec}(T.tensorInl)$ with the residue field morphism $X.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.reindex_over_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n m : Type v} (i : m → n) (S : AlgebraicGeometry.Scheme) {Z : AlgebraicGeometry.Scheme} (h : S ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.reindex i S)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace m S ↘ S) h) =\\n    CategoryTheory.CategoryS\", \"doc\": \"For any reindexing function $i : m \\to n$, scheme $S$, and morphism $h : S \\to Z$, the composition of the reindexing morphism $\\\\mathbb{A}^n_S \\to \\\\mathbb{A}^m_S$ with the composition of the canonical mor\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).hom\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R (TensorProduct R S\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.reindex_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n m : Type v} (i : m → n) (S : AlgebraicGeometry.Scheme),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.reindex i S)\\n      (AlgebraicGeometry.AffineSpace m S ↘ S) =\\n    AlgebraicGeometry.AffineSpace n S ↘ S\", \"doc\": \"For any types $m$ and $n$, a reindexing function $i : m \\to n$, and a scheme $S$, the composition of the reindexing morphism $\\\\mathbb{A}^n_S \\to \\\\mathbb{A}^m_S$ with the canonical morphism $\\\\mathbb{A}^m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorC\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any three pullback triplets $x,y,z$ with equalities $x=y$ and $y=z$, the composition of the isomorphisms $(T_1.tensor \\\\cong T_2.tens\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_reindex\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n₁ n₂ : Type v} (i : n₁ → n₂) {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.map n₂ f)\\n      (AlgebraicGeometry.AffineSpace.reindex i T) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.reindex i S)\\n      (A\", \"doc\": \"For schemes $ S $ and $ T $, a morphism $ f: S \\\\to T $, and a reindexing function $ i: n_1 \\\\to n_2 $, the composition of the affine space map $ \\\\mathbb{A}^{n_2}_S \\\\to \\\\mathbb{A}^{n_2}_T $ followed by \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned types; scheme normalization, pullback identities and gluing lack the monoidal spaces, ordered monoid centers and centered saturated tower assertions here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-monoscheme-tower-comparison-coherence: Uniqueness of monomial ideals and canonical saturated blowup charts gives coherent pullback comparisons of monoscheme towers and ordered deletion of trivial stages.",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned types; scheme normalization, pullback identities and gluing lack the monoidal spaces, ordered monoid centers and centered saturated tower assertions here"
+  },
+  {
+   "tool": "grep",
+   "query": "monoscheme|saturated.*blowup|toric.*pullback",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned types; scheme normalization, pullback identities and gluing lack the monoidal spaces, ordered monoid centers and centered saturated tower assertions here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monoscheme-tower-comparison-coherence: For smooth maps of locally monoidal spaces, the unique monomial center lifts identify pulled back toric blowup resolutions and satisfy the identity and cocycle laws.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpecResidueField T.x)) f =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"For a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the composition of the morphism $\\\\operatorname{Spec}(T.tensorInl)$ with the residue field morphism $X.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g))\\n  {Z : AlgebraicGeometry.Scheme} (h : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t)\", \"doc\": \"For morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes, and a point $t$ in the fiber product $X \\\\times_S Y$, the composition of the canonical morphism from the spectrum of the tensor product of resi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpecResidueField T.x)) f =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"For a pullback triplet $T$ with morphisms $f: X \\to S$ and $g: Y \\to S$ in the category of schemes, the composition of the morphism $\\\\operatorname{Spec}(T.tensorInl)$ with the residue field morphism $X.\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).hom\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R (TensorProduct R S\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) {U : AlgebraicGeometry.Scheme} {i j : ι}\\n  (a \", \"doc\": \"For schemes $X_i,X_j$ in a gluing data and a scheme $U$, if morphisms $a:U\\\\to X_i$ and $b:U\\\\to X_j$ satisfy $\\\\text{Yoneda}(a)\\\\circ f_i = \\\\text{Yoneda}(b)\\\\circ f_j$ in the presheaf category, then their\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j k : ι),\\n  (AlgebraicGeometry.Scheme.Local\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $, the $ t' $ morphism in the gluing data for indices $ i,j,k $ is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorC\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any three pullback triplets $x,y,z$ with equalities $x=y$ and $y=z$, the composition of the isomorphisms $(T_1.tensor \\\\cong T_2.tens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.fst f g) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpec\", \"doc\": \"The composition of the morphism from the spectrum of the tensor product ring $\\\\operatorname{Spec}(T.tensor)$ to the pullback scheme and the first projection morphism $\\\\operatorname{pullback.fst}(f,g)$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned types; scheme normalization, pullback identities and gluing lack the monoidal spaces, ordered monoid centers and centered saturated tower assertions here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change comparisons of toric normalized blowup towers descend to ordered saturated monoscheme towers and respect composition and contraction.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"For a scheme morphism $ f $ factoring as $ f_1 $ followed by $ f_2 $, the composition of the normalization morphism $ \\\\text{normalizationDesc} $ from the normalization of $ f $ to a target scheme $ T \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n m : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [hf : AlgebraicGeometry.IsSmoothOfRelativeDimension n f] [hg : AlgebraicGeometry.IsSmoothOfRelativeDimension m g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension (n + m) (CategoryTheory.CategoryStr\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂)\\n  {Z : \", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, an integral morphism $ f_2: T \\to Y $, and a morphism $ h: Y \\to Z $, the composition of the normalization morphism $ \\text{no\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂)\\n  {Z : \", \"doc\": \"For schemes $X, Y, T, Z$ and morphisms $f: X \\to Y$, $f₁: X \\to T$, $f₂: T \\to Y$ (with $f₂$ integral), the composition of the normalization morphism $X \\to \\text{Normalization}(f)$ with the normalization \"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned signatures concern schemes, ring normalization, Proj or ordinary monoid localization; none states the saturated monoscheme blowup universal property or the centered tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparisons of recursively pulled back monoidal blowup resolutions are coherent by uniqueness of monomial ideals and universal saturated blowup charts.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the pullback isomorphism $\\\\operatorname{Spec}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the isomorphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(fg\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorC\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any three pullback triplets $x,y,z$ with equalities $x=y$ and $y=z$, the composition of the isomorphisms $(T_1.tensor \\\\cong T_2.tens\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme} (\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees $m, m' > 0$, the pullback of the inclusion morphisms $\\\\operatorname{Spec}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the inverse of the pullback isomorphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned signatures concern schemes, ring normalization, Proj or ordinary monoid localization; none states the saturated monoscheme blowup universal property or the centered tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth functoriality of saturated monoscheme blowup towers obtained from toric scheme desingularization.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and $n \\\\in \\\\mathbb{N}$. If for every point $x \\\\in X$, there exist open subsets $V \\\\subseteq X$ and $U \\\\subseteq Y$ such that $x \\\\in V$, $V \\\\subseteq f^{-1}(U)\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned signatures concern schemes, ring normalization, Proj or ordinary monoid localization; none states the saturated monoscheme blowup universal property or the centered tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"blowup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned signatures concern schemes, ring normalization, Proj or ordinary monoid localization; none states the saturated monoscheme blowup universal property or the centered tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "monoscheme|saturated.*blowup|toric.*tower",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned signatures concern schemes, ring normalization, Proj or ordinary monoid localization; none states the saturated monoscheme blowup universal property or the centered tower comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-functorial-fan-desingularization",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Re-split of lem-trf-functorial-fan-desingularization: old step 3 smooth comparison and step 4 identity/composition/contraction argument.",
+   "via": [
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoscheme-tower-comparison-coherence",
+  "worker": "stage1",
+  "summary": "Expanded smooth recursive pullback, matched both contraction conditions, constructed comparisons by an induction on the retained indices, checked the prescribed scheme maps by normalized-blowup rigidity, and proved identity and composition including successive contractions. Added only the one-step universal property of saturated monoscheme blowups. No statement change.",
+  "blueprint": "Historical alteration branch of lem-trf-local-term-locality (1)--(2), through functorial fan desingularization old steps 3--4; ILO VIII 3.2.19--3.2.20. The latest blueprint now proves the local-term ancestor by contracting correspondences; this assigned supporting item retains its recorded monoidal route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-30e53de6f",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-30e53de6f (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and the new node in full, against ILO Exposé VIII 3.1.18-3.1.23 (p.101) and 3.2.12, 3.2.14-3.2.21 (pp.104-106), and read every cited statement. The item statement is unchanged from the Q106 snapshots. proof_deps equals the union of the steps' uses. All cited nodes are in sk-i-curve-zero, so there is no route departure and no tool_uses; no SGA is used. Step 1: Q[a] is smooth by toric-monoid-comparison (iii); realization of the recursive pullback follows from (i) and (ii); I checked the product chart P[I-c]^sat+N^r+Z^t, which keeps stalk maps smooth. Step 2: unit iff whole by (i); a whole stage is P^sat->P, realized as Q[P] inside Q[P^sat], which is an isomorphism iff P=P^sat; tested on P=<2,3> (retained) and on a proper principal center (retained). Step 3: injectivity in (i) gives equal monoid ideals; the new universal property in both directions gives level isomorphisms, and its source hypotheses hold. Step 4: reduced finite-type integral components plus nonzero centers give nowhere density, so normalized-blowup rigidity (only S-automorphism is the identity) applies; the step does not assume toric realization is full. Steps 5-7: uniqueness gives identity and composition; successive and single contraction keep the same indices because whole-isomorphism stages survive smooth pullback. New node lem-trf-saturated-monoscheme-blowup-universal is a faithful precise form of ILO 3.1.19/3.1.21; tested on N^2 with (e1,e2), a whole ideal (saturation), and empty M. It is not a duplicate of saturated-fan-blowup-lift (the sharp fan version) or of the toric-comparison, tower-descent and sharpening nodes, and it does not restate the item. Searches are recorded (LeanFinder x2, LeanSearch, Loogle, grep). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonoschemeTowerComparisonCoherence",
+  "declaration": "AlgebraicGeometry.Monoscheme.TowerComparison.exists_coherentComparisons",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.TowerComparison.Input",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.SchemeTower",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.SchemeComparison",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.SchemeComparison.levelMap",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.SchemeRule",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.Lift",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.LiftIso",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.LiftRule",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.Comparison",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.Comparison.levelMap",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.CoherentComparisons",
+   "AlgebraicGeometry.Monoscheme.TowerComparison.exists_coherentComparisons"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MonoschemeTowerComparisonCoherence.lean",
+  "statement": "theorem exists_coherentComparisons (F : SchemeRule.{u}) (T : LiftRule F) : Nonempty (CoherentComparisons T)",
+  "branch": "sheaf-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Auxiliary records unpack precisely the supplied scheme rule, unique centered lifts, and coherent comparison conclusion. No desingularization or base-normality assumption. The proof-dependency legacy module closure is repaired separately in this packet, with no mathematical changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8ba74cc2",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Read node, packet, item module, stmt_dep def-trf-monoscheme-toric-realization module (Fine/Hom/Tower/PullbackTower/Contraction/Normalized*/IsRealizationMap/ringIdeal/IsTorusEquivariant) and ToricMonoidComparison. Every clause matches with no stronger assumption: smooth scheme comparisons for every smooth scheme map with identity/composition laws (SchemeRule); unique lifts up to unique centered realizing LiftIso, with levels Fine, torsion-free and finitely covered; conclusion gives unique comparisons realizing the scheme comparisons, recursive pullback ideals in unchanged order, separate unitCenter/isoStage deletion tests, identity/composition and successiveContraction isos. Edge cases checked: empty atlas, length 0, all or consecutive deleted stages; single universe u, ULift ℚ. H4: NormalizedToricComparison is theorem-owned with desingularization data, so separate records are correct; no other module states this item. The 8 dependency-file edits are module-format only (diffed against side-live); no dependency node record changed; lean.statement verbatim; docstrings carry source and blueprint; only the theorem is sorry. No compile run (no FIX). Minor: realizationSmooth repeats realizationMap_smooth as a conclusion field; LiftRule.invariant is redundant; report's claim of dependency-node lean notes is not in the snapshot (harmless).; reverted the delivery's change of existing node(s) lem-trf-affine-monoid-algebra-normalization, lem-trf-integral-support-saturation, lem-trf-integral-support-weighted-initial-degree, lem-trf-monoid-algebra-domain-fraction, lem-trf-monomial-integrality, lem-trf-saturated-monoid-algebra-normal, lem-trf-toric-realization-finite-type (--revert-nodes; kept as on sheaf-dag)"
+ }
+}

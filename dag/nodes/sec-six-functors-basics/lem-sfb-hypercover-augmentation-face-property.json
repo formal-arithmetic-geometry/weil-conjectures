@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-hypercover-augmentation-face-property",
+ "kind": "statement",
+ "title": "Augmentations and faces of a hypercover retain its covering property",
+ "statement": "Let $\\mathcal C$ be a category with finite limits. Let $P$ be a class of morphisms containing all isomorphisms and stable under composition and base change. An augmented simplicial object $U_\\bullet\\to X$ is a $P$-hypercover if $U_0\\to X$ and all matching maps $U_{n+1}\\to(\\operatorname{cosk}_n\\operatorname{sk}_nU)_{n+1}$ lie in $P$; here the matching object is the finite limit over the proper faces, and the first matching object is $U_0\\times_XU_0$. Then every augmentation component $U_n\\to X$ and every face $d_i:U_n\\to U_{n-1}$ lies in $P$. Consequently the map $U_n\\to U_m$ attached to any injective order-preserving map $[m]\\hookrightarrow[n]$ lies in $P$. In particular, for algebraic spaces over a scheme [def-trf-algebraic-space], [def-pc-scheme], if all matching maps are flat, locally finitely presented and surjective, then all augmentation components and face maps have these properties. Here flat and locally finitely presented mean those properties on etale scheme charts. For each such flat map $h:U_n\\to U_m$ of algebraic spaces, the associated morphism of ringed small etale topoi is flat: $\\mathcal O_{U_n}$ is flat over $h^{-1}\\mathcal O_{U_m}$, so module pullback $h^*=\\mathcal O_{U_n}\\otimes_{h^{-1}\\mathcal O_{U_m}}h^{-1}(-)$ [def-weil-sheaf-of-modules-category] is exact; the same holds for every $U_n\\to X$. No assertion of flatness of the degeneracy maps is made.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 0DER, remark-P-covering, using lemma-add-simplices and lemma-degeneracy-maps-coverings; specialization to flat locally finitely presented surjective morphisms as in spaces-simplicial.tex, lemma-coh-descent-qcoh-unbounded-for-fppf-hypercovering. Flatness of the ringed small etale morphisms: spaces-morphisms.tex Tag 073C (lemma-flat-morphism-sites), as invoked through lemma-flat-augmentation-modules in the proof of 0DHF."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-simplicial-object",
+  "def-galois-finite-limits-colimits",
+  "def-trf-space-etale-module-functors",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-morphism-property-hypercover",
+  "def-sfb-flat-etale-ringed-map",
+  "def-sfb-space-morphism-properties",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof": [
+  {
+   "text": "Work in $\\mathcal C/X$. It has finite limits: its terminal object is $X\\to X$, products are fibre products over $X$, and equalizers are pullbacks of diagonals. For a simplicial set $A$ with finitely many nondegenerate simplices, finite and nonempty in each degree, define $H(A)$ by the universal compatible family $(u_a:H(A)\\to U_k)_{a\\in A_k}$ over $X$, satisfying $U(\\varphi)u_a=u_{A(\\varphi)a}$. This object exists: apply [lem-weil-pbc-simplicial-index-finite-initial] to the diagram $(k,a)\\mapsto U_k$ in $\\mathcal C/X$. Its full simplex-index limit is the limit over the finite initial truncation, which exists by [def-galois-finite-limits-colimits]. For $A=\\varnothing$ set $H(A)=X$. A simplicial map $A\\to B$ induces $H(B)\\to H(A)$ by restriction of universal families, and these maps respect identities and composition by uniqueness.",
+   "uses": [
+    "lem-weil-pbc-simplicial-index-finite-initial",
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017K (lemma-exists-hom-0-from-simplicial-set-finite), representing compatible families; the family formulation removes the unused coproduct hypothesis."
+   }
+  },
+  {
+   "text": "Write $\\Delta[r]_k=\\operatorname{Hom}_{\\Delta}([k],[r])$ and let $\\partial\\Delta[r]$ consist of the nonsurjective maps. A compatible family on $\\Delta[r]$ is uniquely determined by its value at the identity: $u_\\alpha=U(\\alpha)u_{\\mathrm{id}}$. Thus $H(\\Delta[r])=U_r$. Every nonsurjective $\\alpha$ factors uniquely as a surjection followed by an injective proper face; extending a proper-face family by $u_{\\delta\\sigma}=U(\\sigma)u_\\delta$ identifies boundary families with compatible proper-face families. Compatibility follows by factoring the composite of a proper-face injection with the next order map through its image and applying functoriality of $U$. Hence $H(\\partial\\Delta[r])=M_r(U)$, the matching limit over proper faces in $\\mathcal C/X$; [lem-weil-pbc-matching-object-proper-faces] identifies its canonical map with the matching morphism. For $r=0$ this reads $H(\\varnothing)=X$ and $U_0\\to X$. Isomorphism choices do not affect membership in $P$, since $P$ contains isomorphisms and is closed under composition.",
+   "uses": [
+    "lem-weil-pbc-matching-object-proper-faces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 0177 (lemma-simplex-map), 018V (lemma-cosk-shriek); direct universal-family verification in the slice."
+   }
+  },
+  {
+   "text": "Suppose $A\\subset B$ adds a single nondegenerate $r$-simplex $b$ in the precise sense of [lem-weil-pbc-simplicial-set-glue-simplex]. That statement gives $B=A\\amalg_{\\partial\\Delta[r]}\\Delta[r]$. For every test object $T\\to X$, giving a compatible family on $B$ is exactly giving families on $A$ and $\\Delta[r]$ agreeing on the boundary: apply the stated pushout property to the simplicial set $k\\mapsto\\operatorname{Hom}_{\\mathcal C/X}(T,U_k)$. Consequently the representing objects of step 1 form the pullback square\n$$H(B)=H(A)\\times_{M_r(U)}U_r.$$\nThe map $H(A)\\to M_r(U)$ is restriction along the attaching boundary of $b$. Thus $H(B)\\to H(A)$ is a base change of the matching map $U_r\\to M_r(U)$, including $r=0$ when the base is $X$. By the hypercover assumption and base-change stability it belongs to $P$. This uses only finite limits, not coproducts in $\\mathcal C$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-glue-simplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01GM (lemma-one-more-simplex), proof; the Hom pushout calculation of simplicial.tex Tag 017N is verified by universal families."
+   }
+  },
+  {
+   "text": "For $n\\geq1$, regard each face $\\Delta[n-1]\\hookrightarrow\\Delta[n]$ as a simplicial subset. Both simplicial sets are finite and nonempty in every degree and have finitely many nondegenerate simplices: their nondegenerate simplices are exactly the injective maps into $[n-1]$ or $[n]$, respectively. Apply [lem-weil-pbc-simplicial-set-add-simplices] to obtain a finite chain $A=W^0\\subset\\cdots\\subset W^r=B$, starting at this face and ending at $\\Delta[n]$, each inclusion satisfying step 3. Every intermediate $W^j$ contains the nonempty starting face and is a subset of $\\Delta[n]$, so the finiteness/nonemptiness hypotheses of step 1 hold. By induction on $j$, $H(W^j)\\to H(W^0)$ belongs to $P$: the base is an identity, and the induction step composes a map supplied by step 3 with the induction hypothesis. At $j=r$ this is the restriction $U_n\\to U_{n-1}$, which step 2 identifies with the chosen face map. Thus all faces belong to $P$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-add-simplices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tags 01GN (lemma-add-simplices), 0DEQ (lemma-degeneracy-maps-coverings), as used in Tag 0DER (remark-P-covering)."
+   }
+  },
+  {
+   "text": "The zero augmentation $U_0\\to X$ is in $P$ by hypothesis. Inductively, $U_n\\to X$ is a face $U_n\\to U_{n-1}$ followed by the augmentation $U_{n-1}\\to X$, hence is in $P$ by step 4 and composition stability. An injective order map $[m]\\hookrightarrow[n]$ factors into the elementary injections omitting its missing vertices, successively removing one missing vertex. The associated simplicial operator is the reverse composite of those face maps; it belongs to $P$. If $m=n$ the map is the identity, which is also in $P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DER (remark-P-covering), augmentation and face conclusions; injective-map clause by composition."
+   }
+  },
+  {
+   "text": "For algebraic spaces over $S$, the fibre products of [lem-trf-space-fibre-products-etale-covers] give finite limits in the slice over $X$: terminal $X$, products over $X$, equalizers by pulling back diagonals. Let $P$ be the conjunction flat, locally finitely presented and surjective. The chartwise stability statement [lem-sfb-stack-chartwise-smooth-etale-calculus], specialized to algebraic spaces, gives stability under composition and base change. Isomorphisms have all three properties: on charts they are etale, hence smooth, hence flat and locally finitely presented by that same statement; they are surjective since every target point has its inverse image. Apply steps 1–5 to this $P$. The assumed degree-zero covering and higher matching maps give all face maps, all augmentations and all injective simplicial operators flat, locally finitely presented and surjective. No degeneracy map was used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DER (remark-P-covering); spaces-simplicial.tex Tag 0DHF (lemma-coh-descent-qcoh-unbounded-for-fppf-hypercovering), flatness of augmentation components."
+   }
+  },
+  {
+   "text": "For any one of these maps $h:Z\\to W$ (a face, an injective simplicial operator or an augmentation), its chartwise flatness from step 6 implies, by [lem-sfb-space-flat-etale-ringed-comparison], that $\\mathcal O_Z$ is flat over $h^{-1}\\mathcal O_W$ on the small etale topos. This is exactly flatness of the associated morphism of ringed topoi. The comparison applies to arbitrary algebraic spaces over $S$ and imposes no separatedness, finite type or Noetherian hypothesis, so it applies to every term of this hypercover.",
+   "uses": [
+    "lem-sfb-space-flat-etale-ringed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073C (lemma-flat-morphism-sites), applied to the maps obtained in step 6."
+   }
+  },
+  {
+   "text": "By [lem-trf-geometric-inverse-image-exact], $h^{-1}$ on modules with scalars transported to $h^{-1}\\mathcal O_W$ is exact. By [def-pc-flat-sheaf-modules], flatness in step 7 means that tensoring over $h^{-1}\\mathcal O_W$ with $\\mathcal O_Z$ is exact. Their composite is the module pullback $h^*M=\\mathcal O_Z\\otimes_{h^{-1}\\mathcal O_W}h^{-1}M$ of [def-trf-space-etale-module-functors]; thus it is exact. The same argument applies to augmentations. This proves precisely the asserted face and augmentation properties, without a claim about degeneracy maps.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "def-pc-flat-sheaf-modules",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), proof: exact inverse image followed by exact scalar extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-simplicial-index-finite-initial",
+  "def-galois-finite-limits-colimits",
+  "lem-weil-pbc-matching-object-proper-faces",
+  "lem-weil-pbc-simplicial-set-glue-simplex",
+  "lem-weil-pbc-simplicial-set-add-simplices",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-flat-etale-ringed-comparison",
+  "lem-trf-geometric-inverse-image-exact",
+  "def-pc-flat-sheaf-modules",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 0DER (remark-P-covering), via Tags 01GM, 01GN, 0DEQ; compatible-family construction verifies the finite-limit version directly. Ringed flatness: spaces-morphisms.tex Tag 073C and sites-modules.tex Tag 04JC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every augmentation and face map of a P hypercover belongs to P when P contains isomorphisms and is stable under base change and composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsGenerating\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → {J : CategoryTheory.GrothendieckTopology C} → J.OneHypercoverFamily → Prop\", \"doc\": \"A property of a family of one-step hypercovers in a site $(\\\\mathcal{C}, J)$ asserting that it generates all hypercovers through the axioms of the Grothendieck topology $J$.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.of_zeroHypercover_source\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Local\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C}\\n  {K : CategoryTheory.Precoverage C} [P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X) [𝒰.Small],\\n  (∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) → P f\", \"doc\": \"If a morphism property $ P $ is local at the source with respect to a precoverage $ K $ on a category $ \\\\mathcal{C} $, and for every morphism $ f_i $ in a zero hypercover $ \\\\mathcal{U} $ of an object \"}\n  {\"name\": \"CategoryTheory.Precoverage.IsStableUnderComposition.of_preZeroHypercoverFamily\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/ZeroFamily\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.PreZeroHypercoverFamily C},\\n  (∀ {X : C} (E : CategoryTheory.PreZeroHypercover X) (F : (i : E.I₀) → CategoryTheory.PreZeroHypercover (E.X i)),\\n      P.property E → (∀ (i : E.I₀), P.property (F i)) → P.property (E.bind F)) →\", \"doc\": \"Given a pre-zero hypercover family $ P $ in a category $ \\\\mathcal{C} $, if $ P $ is closed under the bind operation (i.e., for any pre-zero hypercover $ E $ of an object $ X $ and compatible family $ \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.of_zeroHypercover\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Local\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {P : CategoryTheory.MorphismProperty C}\\n  {K : CategoryTheory.Precoverage C} [self : P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X),\\n  (∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) → P f\", \"doc\": \"A morphism property $ P $ on a category $ \\\\mathcal{C} $ is local at the source with respect to a precoverage $ J $ if, for every morphism $ f : X \\\\to Y $ and zero hypercover $ \\\\mathcal{U} $ of $ X $, \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.of_zeroHypercover\", \"module\": \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.ObjectProperty C}\\n  {K : CategoryTheory.Precoverage C} [P.IsLocal K] {X : C} (𝒰 : K.ZeroHypercover X), (∀ (i : 𝒰.I₀), P (𝒰.X i)) → P X\", \"doc\": \"If $ P $ is a local property with respect to a precoverage $ K $ on a category $ \\\\mathcal{C} $, then for any object $ X $ in $ \\\\mathcal{C} $ and any zero hypercover $ \\\\mathcal{U} $ of $ X $, the prope\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.of_zeroHypercover_target\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Local\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C}\\n  {K : CategoryTheory.Precoverage C} [inst_1 : K.HasPullbacks] [P.IsLocalAtTarget K] {X Y : C} {f : X ⟶ Y}\\n  (𝒰 : K.ZeroHypercover Y) [𝒰.Small], (∀ (i : 𝒰.I₀), P (CategoryTheory.Limits.pullback.snd f (𝒰.\", \"doc\": \"If a morphism property $ P $ is local at the target with respect to a precoverage $ K $ with pullbacks on a category $ \\\\mathcal{C} $, then for any morphism $ f : X \\\\to Y $ in $ \\\\mathcal{C} $ and a sma\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.iff_of_zeroHypercover_source\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Local\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C}\\n  {K : CategoryTheory.Precoverage C} [P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X),\\n  P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)\", \"doc\": \"For a category $\\\\mathcal{C}$, a morphism property $P$ local at the source with respect to a precoverage $J$, and a morphism $f : X \\\\to Y$ in $\\\\mathcal{C}$, the property $P(f)$ holds if and only if for\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtTarget.of_zeroHypercover\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Local\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {P : CategoryTheory.MorphismProperty C}\\n  {K : CategoryTheory.Precoverage C} {inst_1 : K.HasPullbacks} [self : P.IsLocalAtTarget K] {X Y : C} {f : X ⟶ Y}\\n  (𝒰 : K.ZeroHypercover Y), (∀ (i : 𝒰.I₀), P (CategoryTheory.Limits.pullback.snd f (𝒰.f i\", \"doc\": \"In a category equipped with a precoverage having pullbacks, if a morphism property $P$ is local at the target, then for any morphism $f : X \\to Y$, if for every morphism in a zero hypercover $\\\\mathcal{\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern zero- or one-hypercovers and locality of properties, not arbitrary-degree matching-object hypercovers or all their face maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The component maps and face maps of an fppf hypercover of algebraic spaces are flat locally finitely presented and surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreOneHypercover.Hom.s₁\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.One\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {S : C} →\\n      {E : CategoryTheory.PreOneHypercover S} →\\n        {F : CategoryTheory.PreOneHypercover S} →\\n          (self : E.Hom F) → {i j : E.I₀} → E.I₁ i j → F.I₁ (self.s₀ i) (self.s₀ j)\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $S$ in $\\\\mathcal{C}$, and pre-one hypercovers $E$ and $F$ of $S$, this function assigns to each morphism $\\\\phi: E \\\\to F$ and elements $i,j \\\\in I_0(E)$ a map $\"}\n  {\"name\": \"CategoryTheory.PreOneHypercover.Hom.s₁'\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.One\", \"type\": \"(f : E.Hom F) (k : E.I₁') : F.I₁'\", \"doc\": \"Given a morphism $\\\\phi: E \\\\to F$ between pre-one hypercovers of an object $S$ in a category $\\\\mathcal{C}$, and an element $k \\\\in E.I_1'$ (consisting of a pair $(i,j) \\\\in I_0(E) \\\\times I_0(E)$ and an e\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) [Flat f] [Surjective f] : Epi f\", \"doc\": \"Every flat and surjective morphism of schemes is an epimorphism in the category of schemes.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": f.FaithfullyFlat ↔ f.Flat ∧ Function.Surjective (PrimeSpectrum.comap f)\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is faithfully flat if and only if it is flat and the induced map on prime spectra $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Hom.idx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {S : C} →\\n      {E : CategoryTheory.PreZeroHypercover S} → {F : CategoryTheory.PreZeroHypercover S} → E.Hom F → E.I₀ → F.I₀\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $S$ in $\\\\mathcal{C}$, and two pre-zero hypercovers $E$ and $F$ of $S$, this function assigns to each morphism $\\\\phi: E \\\\to F$ and element $x \\\\in I_0(E)$ the c\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern zero- or one-hypercovers and locality of properties, not arbitrary-degree matching-object hypercovers or all their face maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\", \"MorphismProperty\"",
+   "results": "[loogle] OK 11 hit(s)\n  {\"name\": \"CategoryTheory.Precoverage.ZeroHypercover.morphismProperty\", \"module\": \"Mathlib.CategoryTheory.Sites.MorphismProperty\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {K : CategoryTheory.Precoverage C} {X : C} {E : K.ZeroHypercover X} (i : E.I₀) : K.morphismProperty (E.f i)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X) (h : ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) : P f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.iff_of_zeroHypercover_source\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X) : P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)\", \"doc\": \"**Alias** of `CategoryTheory.MorphismProperty.IsLocalAtSource.iff_of_zeroHypercover`.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.iff_of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X) : P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.mk_of_iff_of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.RespectsIso] (H : ∀ {X Y : C} (f : X ⟶ Y) (𝒰 : K.ZeroHypercover X), P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) : P.IsLocalAtSource K\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.of_zeroHypercover_source\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X) [𝒰.Small] (h : ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) : P f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtTarget.of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtTarget K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover Y) [K.HasPullbacks] (h : ∀ (i : 𝒰.I₀), P (CategoryTheory.Limits.pullback.snd f (𝒰.f i))) : P f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.iff_of_zeroHypercover_target\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtTarget K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover Y) [K.HasPullbacks] : P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.Limits.pullback.snd f (𝒰.f i))\", \"doc\": \"**Alias** of `CategoryTheory.MorphismProperty.IsLocalAtTarget.iff_of_zeroHypercover`.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtTarget.iff_of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtTarget K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover Y) [K.HasPullbacks] : P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.Limits.pullback.snd f (𝒰.f i))\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtTarget.mk_of_iff_of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [K.HasPullbacks] [P.RespectsIso] (H : ∀ {X Y : C} (f : X ⟶ Y) (𝒰 : K.ZeroHypercover Y), P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.Limits.pullback.snd f (𝒰.f i))) : P.IsLocalAtTarge\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.of_zeroHypercover_target\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [K.HasPullbacks] [P.IsLocalAtTarget K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover Y) [𝒰.Small] (h : ∀ (i : 𝒰.I₀), P (CategoryTheory.Limits.pullback.snd f (𝒰.f i))) : P f\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern zero- or one-hypercovers and locality of properties, not arbitrary-degree matching-object hypercovers or all their face maps"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp].*[Hh]ypercover|face.*flat|[Hh]ypercover.*flat",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MorphismProperty.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.Zero\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MorphismProperty.lean\", \"line\": \"195\", \"text\": \"lemma ZeroHypercover.morphismProperty {X : C} {E : ZeroHypercover.{w} K X} (i : E.I₀) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"line\": \"198\", \"text\": \"functor preserves all `1`-hypercovers. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"line\": \"199\", \"text\": \"lemma Functor.PreservesOneHypercovers.of_coverPreserving [HasPullbacks C]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"line\": \"201\", \"text\": \"    Functor.PreservesOneHypercovers.{w} F J K := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"line\": \"203\", \"text\": \"  · simp [PreZeroHypercover.sieve₀_map, H.cover_preserve E.mem₀]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"line\": \"205\", \"text\": \"    have : HasPullback ((E.toPreOneHypercover.map F).f i₁) ((E.toPreOneHypercover.map F).f i₂) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coverage.lean\", \"line\": \"451\", \"text\": \"  obtain ⟨E₀, rfl⟩ := R.exists_eq_preZeroHypercover\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coverage.lean\", \"line\": \"459\", \"text\": \"      ← PreZeroHypercover.presieve₀_pullback₁, ← ZeroHypercover.pullback₂_toPreZeroHypercover]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Over.lean\", \"line\": \"151\", \"text\": \"lemma overEquiv_preOneHypercover_sieve₁ {X : C} {Y : Over X} (E : PreOneHypercover.{w} Y)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Over.lean\", \"line\": \"353\", \"text\": \"    (Over.forget X).PreservesOneHypercovers (J.over _) J := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Over.lean\", \"line\": \"357\", \"text\": \"    rw [dsimp% PreZeroHypercover.sieve₀_map (F := Over.forget X)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Over.lean\", \"line\": \"364\", \"text\": \"    rwa [GrothendieckTopology.mem_over_iff, Sieve.overEquiv_preOneHypercover_sieve₁] at this\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Over.lean\", \"line\": \"369\", \"text\": \"    (F : C ⥤ D) (X : C) [Functor.PreservesOneHypercovers.{w} F J K] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.SheafOfTypes\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"34\", \"text\": \"Let `E` be a pre-`0`-hypercover with pairwise pullbacks. If `∐ᵢ Eᵢ` is a universal coproduct\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"39\", \"text\": \"def PreZeroHypercover.isLimitSigmaOfIsColimitEquiv (E : PreZeroHypercover.{w} S)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"44\", \"text\": \"    [PreservesLimit (Discrete.functor fun i ↦ op (E.toPreOneHypercover.X i)) F]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"45\", \"text\": \"    [PreservesLimit (Discrete.functor fun i ↦ op (E.toPreOneHypercover.Y' i)) F] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.Homotopy\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.SheafOfTypes\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"15\", \"text\": \"Given a `0`-hypercover `E`, we define a `1`-hypercover `E.saturate`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"20\", \"text\": \"namespace CategoryTheory.PreZeroHypercover\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"26\", \"text\": \"/-- A relation on a pre-`0`-hypercover is a commutative diagram\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/JointlySurjective.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.Zero\"}\n\nDirectory: Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern zero- or one-hypercovers and locality of properties, not arbitrary-degree matching-object hypercovers or all their face maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary simplicial object with all matching maps in a morphism property has every face map in that property",
+   "results": "8 hits; CategoryTheory.SimplicialObject.δ_def, SimplexCategoryGenRel.faces, SimplexCategoryGenRel.instHasFactorizationP_σP_δ, SimplexCategoryGenRel.faces.rec, CategoryTheory.SimplicialObject, SimplexCategoryGenRel.hom_induction, FreeSimplexQuiver.Hom.casesOn, CategoryTheory.SimplicialObject.δ_naturality_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: simplicial face definitions and ordinal factorization, not the matching-map property theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-negative-ext-hyperdescent",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Augmentations and faces of a hypercover retain its covering property.",
+   "via": [
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hypercover-augmentation-face-property",
+  "worker": "stage1",
+  "summary": "Eight steps following the Stacks finite-simplex attachment proof of 0DER, with explicit compatible-family finite limits, boundary identifications and pushout universal property. Existing general simplex-index, gluing, filtration and chartwise stability statements reused. One new statement-only node supplies 073C for arbitrary maps of algebraic spaces. Exactness follows from already cited exact geometric inverse image and the definition of flat sheaf modules. Statement unchanged.",
+  "blueprint": "Supports the face-only flatness input in lem-sfb-space-negative-ext-hyperdescent, in the inherited direct-image stability prerequisite chain. The current latest blueprint direct-image proof (3) uses proper/open factorization, not the older alteration paragraph recorded in the inherited provenance; no unit route or provenance metadata is changed. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-simplicial-index-finite-initial",
+    "why": "General finite initial-index theorem constructs compatible-family limits for arbitrary target categories."
+   },
+   {
+    "node": "lem-weil-pbc-matching-object-proper-faces",
+    "why": "General matching-object limit and its projection equations, used in the slice category."
+   },
+   {
+    "node": "lem-weil-pbc-simplicial-set-glue-simplex",
+    "why": "General simplicial-set pushout for one attachment."
+   },
+   {
+    "node": "lem-weil-pbc-simplicial-set-add-simplices",
+    "why": "General finite filtration of simplicial-set inclusions."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General existence of algebraic-space fibre products."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "General exactness of geometric inverse image with transported module scalars."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-simplicial-index-finite-initial",
+  "lem-weil-pbc-matching-object-proper-faces",
+  "lem-weil-pbc-simplicial-set-glue-simplex",
+  "lem-weil-pbc-simplicial-set-add-simplices",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-geometric-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-ac5231059",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-ac5231059 (reviewer sub-agent of L); spot-checked: Read Stacks 0DER (remark-P-covering) and 073C (lemma-flat-morphism-sites). The item statement is unchanged from live (the base was unsplit with no proof); the added stmt_deps are definition nodes for notions the statement uses. Steps 1-5: compatible-family limits in C/X come from the general lem-weil-pbc-simplicial-index-finite-initial (finite, nonempty and finite-nondegenerate hypotheses checked, ∂Δ[r] is nonempty for r≥1, ∅ is treated as X). The matching object is identified by matching-object-proper-faces (2)-(3). The glue-simplex pushout, applied to Hom(T,U_•), gives H(B)=H(A)×_{M_r}U_r, so each step of the add-simplices filtration of a face Δ[n-1]⊂Δ[n] is a base change of a matching map. The intermediate W^j satisfy the finiteness hypotheses, the induction is explicit, restriction gives d_i, and augmentations and injective operators follow by composition. Step 6: algebraic-space fibre products give finite limits in the slice; the same-unit chartwise calculus, read for spaces as stacks, gives base change and composition for flat+lfp+surjective; isomorphisms qualify. Steps 7-8: the new node, which matches 073C exactly for arbitrary maps, gives flatness of O_Z over h^{-1}O_W; exact h^{-1} composed with exact tensoring by the flat O_Z is h^* by the tensor formula of def-trf-space-etale-module-functors. New node: statement-only, self-contained, B1-B5 OK; the only other node naming 073C (space-flat-direct-image-base-change, a qc-separated flat base change) is not a duplicate, and the SR(X) hypercover nodes cover a different setting; no cycle, no SGA. Batch-5: all six listed citations are definitions or foundations (fibre products, inverse-image exactness, the ringed small-etale morphism, the module-functor definition, the algebraic-space definition, generic chartwise calculus) and none is part of the trace-formula or Poincaré-duality proofs, so all are accepted. tool_uses (general simplicial and trf foundation nodes) are accepted. The null blueprint.from.node is inherited from the base. Edge cases checked: n=1, r=0, P = isomorphisms only, constant hypercover, empty terms. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HypercoverAugmentationFaceProperty",
+  "declaration": "CategoryTheory.SimplicialObject.hypercover_augmentation_face_property",
+  "file": "lean/Sheaf/AlgebraicGeometry/HypercoverAugmentationFaceProperty.lean",
+  "statement": "theorem hypercover_augmentation_face_property {C : Type u} [Category.{v} C] [HasFiniteLimits C] (P : MorphismProperty C) (hiso : ∀ {A B : C} (f : A ⟶ B), IsIso f → P f) [P.IsStableUnderComposition] [P.IsStableUnderBaseChange] {X : C} (U : SimplicialObject (Over X)) (hU : IsMorphismPropertyHypercover P U) : (∀ n : ℕ, P (U.obj (op ⦋n⦌)).hom) ∧ (∀ (n : ℕ) (i : Fin (n + 2)), P (U.δ i).left) ∧ (∀ (m n : ℕ) (φ : ⦋m⦌ ⟶ ⦋n⦌), Function.Injective φ.toOrderHom → P (U.map φ.op).left)",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SimplicialObject.hypercover_augmentation_face_property",
+   "AlgebraicGeometry.AlgebraicSpace.fppf_hypercover_augmentation_face_property"
+  ],
+  "note": "The two theorems jointly render the general morphism-property conclusion and its algebraic-space specialization, including canonical ringed flatness and exact module tensor pullback. Matching maps are universally specified in the slice, including degree zero. Surjectivity is on the existing algebraic-space point classes; representable IsSurjective is deliberately not imposed on general space maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bea4e6f73",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read the item, all 11 stmt_deps, Stacks 0DER, the 3 snapshot modules and the live declarations they use. General theorem: HasFiniteLimits (as the node says), hiso, composition and base-change instances; conclusions for augmentations (from n=0), faces Fin(n+2), and injective φ (including m=n). IsMorphismPropertyHypercover uses the canonical cone over the finite proper-face diagram in C/X (n=0 gives the augmentation, n=1 gives U0×_X U0) and does not depend on the cone because P contains isomorphisms. Space version: chartwise MapIsFlat and lfp, point surjectivity via mapPoint (same form as landed UCSurjectionSeparation), plus IsFlatEtaleRingedMap and exactFunctor(moduleTensorPullback) for augmentations, faces and injective operators; no degeneracy claim and no added hypotheses. IsFlatEtaleRingedMap is exact scalar extension along the adjoint of the ∃!-chosen enlargedStructuralMap; left adjoints are unique up to isomorphism, so it is not hollow and equals O_X flat over f^-1 O_Y (073C/03ER). No duplicates found by DAG, Lean and Mathlib greps. Statements verbatim; only lean and stmt_deps changed (4 definition nodes added); new nodes have the §5 fields; sorry-only proofs; docstrings with source and blueprint; required proof-dep imports. Advisory: mapPoint owner def-sfb-proper-curve-moduli is reached only via def-sfb-space-morphism-properties; FlatOnSite public import redundant. No file changed, no compile."
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-restricted-linear-series-image",
+ "kind": "definition",
+ "title": "Image of a restricted linear series",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $X,C$ be schemes over $k$ [def-pc-scheme], and let $i:C\\to X$ be a $k$-morphism. Let $L$ be a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] and let $V\\subseteq H^0(X,L)$ be a $k$-vector subspace, where $H^0$ is global module cohomology [def-sc-ringed-space-module-cohomology]. The restricted linear series image on $C$ is the $k$-vector subspace $\\operatorname{im}(V\\to H^0(C,i^*L))$, for the canonical section-pullback map $s\\mapsto1\\otimes s$ of the tensor pullback [def-pc-module-pullback]. Equivalently it is the $k$-span of these pullback values. No finite-dimensionality, invertibility, reducedness or closed-immersion hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+  "place": "Section 2.1, printed p.228, notation for the image of restriction of global sections; Lemma 3.3, pp.236--238. Canonical section pullback is Stacks Tag 0096; linear series restriction also appears in Tag 0B40."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of global sections of a line bundle restricted to a subscheme linear series",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.ι_app\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(V) : U.ι.app V = X.presheaf.map (homOfLE (x := U.ι ''ᵁ U.ι ⁻¹ᵁ V) (Set.image_preimage_subset _ _)).op\", \"doc\": \"For a scheme $X$ and an open subset $U \\\\subseteq X$, the sheaf morphism component of the canonical inclusion $X|_U \\\\to X$ at an open subset $V \\\\subseteq X$ corresponds to restricting sections from $V$\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict_appTop\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) :\\n  (f ∣_ U).appTop = f.app (U.ι ''ᵁ ⊤) ≫ X.presheaf.map (eqToHom (image_morphismRestrict_preimage f U ⊤)).op\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $U$ be an open subset of $Y$. We can restrict $f$ to a morphism between the corresponding open subschemes, denoted $f|_U: X|_{f^{-1}(U)} \\\\to Y|_U$. T\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.ι_appTop\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \": U.ι.appTop = X.presheaf.map (homOfLE (x := U.ι ''ᵁ ⊤) le_top).op\", \"doc\": \"For a scheme $X$ and an open subset $U$, the application of the inclusion morphism $\\\\iota: X|_U \\\\to X$ to the global sections of the structure sheaf corresponds to the restriction map from the global \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.res_apply\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U V : Opens (PrimeSpectrum.Top R)) (i : V ⟶ U) (s : (structureSheaf R).1.obj (op U)) (x : V) :\\n  ((structureSheaf R).1.map i.op s).1 x = (s.1 (i x) :)\", \"doc\": \"For open subsets $U$ and $V$ of the prime spectrum $\\\\operatorname{Spec}(R)$ with inclusion map $i: V \\\\to U$, and for any section $s$ of the structure sheaf $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}$ over \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens)\\n  (x : CategoryTheory.ToType (Y.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).hom)\\n      ((CategoryTheory.ConcreteCategory.h\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $s \\\\in \\\\Gamma(U, \\\\mathcal{O}_Y)$ be a section. The pullback of $s$ via $f$ is a section $f^\\\\#(s) \\\\in \\\\Gamma(\"}\n  {\"name\": \"AlgebraicGeometry.Proj.res_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(x) : ((Proj.structureSheaf 𝒜).1.map i s).1 x = s.1 (i.unop x)\", \"doc\": \"For the structure sheaf on the projective spectrum of a graded ring $\\\\mathcal{A}$, the restriction of a section $s$ over an open set $U$ to a smaller open subset $V \\\\subseteq U$ evaluated at a point $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib definition; reuse the exact landed project definition found by the source grep below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of a linear series under restriction of sections to a subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : ↑Y.affineOpens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.toImage f)\\n      ((TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.imageι f).base).obj ↑U) =\\n    CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Schem\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $\\\\tilde{f}: X \\\\to \\\\mathrm{im}(f)$ be the canonical morphism to its image subscheme. For any affine open subset $U \\\\subseteq Y$, the ring of sections \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom I.subschemeι.base) = ↑I.support\", \"doc\": \"The image of the canonical morphism from the closed subscheme defined by an ideal sheaf $ I $ to the original scheme $ X $ coincides with the support of $ I $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.opensRange_subschemeCover_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.Scheme.Hom.opensRange (I.subschemeCover.f U) = (TopologicalSpace.Opens.map I.subschemeι.base).obj ↑U\", \"doc\": \"For any affine open subset $U$ of a scheme $X$, the image of the morphism $f_U$ from the affine open cover of the closed subscheme defined by an ideal sheaf $\\\\mathcal{I}$ coincides with the preimage o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_map\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U V : X.Opens} (i : U ≤ V) (s : Set ↑(X.presheaf.obj (Opposite.op V))),\\n  X.zeroLocus (⇑(CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE i).op)) '' s) = X.zeroLocus s ∪ (↑U)ᶜ\", \"doc\": \"For open subsets $U$ and $V$ of a scheme $X$ with $U \\\\subseteq V$, and a set $s$ of sections over $V$, the zero locus of the image of $s$ under the restriction map from $V$ to $U$ is equal to the unio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (J : Y.IdealSheafData) (f : X ⟶ Y), J ≤ (J.comap f).map f\", \"doc\": \"For any ideal sheaf $\\\\mathcal{J}$ on a scheme $Y$ and a morphism $f: X \\\\to Y$, the ideal sheaf $\\\\mathcal{J}$ is contained in the pushforward along $f$ of the pullback of $\\\\mathcal{J}$ to $X$, i.e., $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.map_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {U V : ↑X.affineOpens} (h : U ≤ V),\\n  Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE h).op)) (I.ideal V) = I.ideal U\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and affine open subsets $U \\\\subseteq V$ of $X$, the ideal $I(U)$ in the ring of sections $\\\\mathcal{O}_X(U)$ is equal to the image of the ideal $I(V)$ in $\\\\ma\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib definition; reuse the exact landed project definition found by the source grep below."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictedLinearSeriesImage|restricted linear series",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib definition; reuse the exact landed project definition found by the source grep below."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n restrictedLinearSeriesImage|restricted linear series /home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures /home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/MovingLinearSeriesZero.lean:25:/-! # Moving zeros of a restricted linear series\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/MovingLinearSeriesZero.lean:44:/-- The image of a restricted linear series, written as the span of its actual tensor\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/MovingLinearSeriesZero.lean:49:def restrictedLinearSeriesImage (k : Type u) [Field k]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/MovingLinearSeriesZero.lean:103:    (hV : 2 ≤ Module.finrank k (restrictedLinearSeriesImage k i L V))\n",
+   "date": "2026-10-24",
+   "verdict": "Only lem-sfb-moving-linear-series-zero carries the helper; no definition node owns this notion. Attach a new definition node to that existing declaration, as the reviewer requests."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l restrictedLinearSeriesImage|restricted linear series image|image of a restricted linear series /home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-moving-linear-series-zero.json\n",
+   "date": "2026-10-24",
+   "verdict": "Only lem-sfb-moving-linear-series-zero carries the helper; no definition node owns this notion. Attach a new definition node to that existing declaration, as the reviewer requests."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-extremal-cluster-moving-component",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Supporting input: Theorem 3.7, inequality (9), printed pp.242--246, specialized to reduced nodal curves; numerical two-connectedness is boundary-node length; Lemma 3.3, pp.236--238: moving on the same component forces residual length two and p_a-1 sections; reduced nodal specialization. Definition of the two restricted canonical section images in the moving-component antecedent.",
+   "via": [
+    "lem-sfb-extremal-cluster-moving-component",
+    "lem-sfb-subcanonical-splitting-clifford-bound",
+    "lem-sfb-nodal-two-connected-clifford",
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MovingLinearSeriesZero",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.restrictedLinearSeriesImage",
+  "statement": "def restrictedLinearSeriesImage (k : Type u) [Field k]\n    {X C : Scheme.{u}} [X.Over (Spec (.of k))] [C.Over (Spec (.of k))]\n    (i : C ⟶ X) [i.IsOver (Spec (.of k))] (L : X.Modules)\n    (V : Submodule k (ProjectiveSpace.fieldSections k L)) :\n    Submodule k (ProjectiveSpace.fieldSections k ((tensorPullback i).obj L))",
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing real-data definition at MovingLinearSeriesZero.lean:49. This definition node owns the restricted-image notion without duplicating or moving the landed declaration; the theorem in the same module remains a proof prerequisite only. This existing:true option is explicitly requested by the return of 11930b02ba18."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84f244be5",
+  "group": "Q92",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84f244be5",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Re-delivery of 11930b02 (RETURN H4/H13: theorem stmt_dep lem-sfb-moving-linear-series-zero cited only for its def restrictedLinearSeriesImage). Fixed as instructed: new definition node def-sfb-restricted-linear-series-image with existing:true. Its lean.statement equals the landed def at MovingLinearSeriesZero.lean:49 (real data: span of tensorPullbackSectionAdjunction unit images); its node statement and source (FT §2.1/Lemma 3.3, Stacks 0096/0B40) match; its stmt_deps all exist; no duplicate owner. Item stmt_deps swap the theorem for the def node; the theorem stays in proof_deps. Snapshot diff: item node otherwise unchanged; module changed only by 2 docstring lines; lean.statement verbatim in the file. Maths re-checked: SubcanonicalClusterData nodal/pure-dim fields, hTwoConnected, real-data c(T) and V_T helpers, hExtremal including the empty cluster, 0<ℓ<2p_a-2, residual via evaluation image, every-basis Zariski-open conclusion and quantifier order, universes u, sorry only, docstrings, report sections present. Minor: the landed def's docstring names the theorem blueprint (acceptable for existing:true). No files changed, no compile run."
+ }
+}

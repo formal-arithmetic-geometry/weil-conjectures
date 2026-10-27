@@ -9,58 +9,11 @@ public import Sheaf.SixFunctors.CoefIntegralFiniteExtension
 public import Sheaf.Paper.QcqsCompactSupportRealization
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.FiniteStageVerdierBiduality
-import Sheaf.Paper.PullbackTorAmplitude
-import Sheaf.Paper.FiniteTensorConstructibleCohomology
-import Sheaf.Paper.FiniteCoefficientFlatModel
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
-import Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.Paper.FiniteFieldFiber
-import Sheaf.Paper.FiniteTorAmplitude
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.Paper.SfDerivedDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
-import Sheaf.Paper.SfIntegralReductionTower
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.CanonicalOriginCompactSupportComposition
-import Sheaf.CategoryTheory.AbsoluteTraceExchange
-import Sheaf.Paper.SemilinearDerivedSections
-import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
-import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
-import Sheaf.SixFunctors.IntegralVerdier
-import Sheaf.Paper.IntegralOperationsScalarComparisons
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Paper.CoefficientRingedTensorHomModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Paper.DualityPairing
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange
 public import Sheaf.Paper.OrdinaryCompletedIntegralPullback
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Paper.FiniteFreeCoefficientExtension
+import Sheaf.Paper.IntegralResidueTor
 
 /-!
 # Scalar transpose of the canonical integral exceptional formula
@@ -138,7 +91,10 @@ theorem finiteEtaleDualizing_plus (W : Scheme.{u})
     [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))]
     [IsSeparated (W ↘ Spec (.of D.k))] (n : ℕ) :
     DerivedCategory.TStructure.t.plus (finiteDualizingEtaleTerm l E D W n) := by
-  sorry
+  let := (finiteDualizingCompactification D W).hasCompactification
+  exact Etale.plus_rightDerivedUpperShriek_obj
+    (ModuleCat.{u + 1} (finiteDualizingCoeff l E n)) (W ↘ Spec (.of D.k)) _
+    (Etale.boundaryCoefficientPlus (finiteDualizingCoeff l E n) (Spec (.of D.k))).property
 
 /-- The etale-origin support comparison, in intrinsic finite coefficients.
 Source: blueprint Steps 1--2, comparison-site realization
@@ -219,6 +175,7 @@ def trace
     (wY : IntegralFiniteExtension.DualizingDatum l Y D hl E) :=
   (trace_existsUnique D l hl E f c wX wY).exists.choose
 
+set_option linter.unusedSectionVars false in
 /-- The two presentations of completed-coefficient direct image agree.
 Source: blueprint Step 2, ordinary/completed coefficient identification
 (blueprint: lem-coef-dual-formula-scalar-transpose).
@@ -232,7 +189,35 @@ theorem ordinaryPush_eq :
         ((PurCompactSupport.completed l E).ring Y)
         ((PurCompactSupport.completed l E).ring X)
         ((PurCompactSupport.completed l E).pull f) := by
-  sorry
+  have hc : proEtaleRingDirectImageMap f
+      (completedIntegralCommRingSheafUnrestricted l E Y)
+      (completedIntegralCommRingSheafUnrestricted l E X)
+      ((PurCompactSupport.completed l E).pull f) = sfCompletedCoefficientMap l E f := by
+    let adj := proEtaleSheafAdjunction f CommRingCat.{u + 1}
+    change adj.homEquiv _ _ ((adj.homEquiv _ _).symm _) = _
+    exact (adj.homEquiv _ _).apply_symm_apply _
+  have hr : ordinaryIntegralDirectRingMap l E f =
+      (sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (sfCompletedCoefficientMap l E f) := by
+    apply (ordinaryIntegralDirectRingMap_existsUnique l E f).unique
+    · exact (ordinaryIntegralDirectRingMap_existsUnique l E f).exists.choose_spec
+    · intro n
+      exact congrArg
+        ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map)
+        ((sfCompletedCoefficientMap_existsUnique l E f).exists.choose_spec n)
+  have := Scheme.ProEt.isContinuous_overPullback f
+  unfold ordinaryIntegralModulePush proEtaleRingModuleDirectImage
+  change SheafOfModules.pushforward (ordinaryIntegralDirectRingMap l E f) =
+    SheafOfModules.pushforward
+      ((sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (proEtaleRingDirectImageMap f
+            (completedIntegralCommRingSheafUnrestricted l E Y)
+            (completedIntegralCommRingSheafUnrestricted l E X)
+            ((PurCompactSupport.completed l E).pull f)))
+  rw [hc, hr]
 
 /-- Canonical comparison of the ordinary module pullback presentations, preserving
 adjunction units. Source: blueprint Step 2
@@ -500,7 +485,19 @@ map with supportScalar, including its two completion conjugations. Hence it is i
 the construction is independent of the basis. -/
 theorem supportScalar_isIso (K : sfIntegralConstructibleCategory l E X) :
     IsIso (supportScalar D l hl E f c L i K) := by
-  sorry
+  let (x : X) : Invertible (l : X.residueField x) :=
+    (by
+      simpa using (finiteFieldDatumPrimeUnit D l hl).map
+        ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) :
+          IsUnit (l : X.residueField x)).invertible
+  have hK : finiteTorConstructibleIntegral l E X K.obj := by
+    rw [← (integral_residue_tor D l hl E X).2]
+    exact K.property
+  have : IsIso ((PurCompactSupport.comparison
+      (PurCompactSupport.completedChange l E L i) c).app K.obj) :=
+    (PurCompactSupport.integralCoefficientComparison l E L i D hl f c K.obj hK).2.2.2.1
+  unfold supportScalar
+  infer_instance
 
 /-- The canonical finite-free completed support isomorphism, in the ambient realization.
 Source: blueprint definition of alpha

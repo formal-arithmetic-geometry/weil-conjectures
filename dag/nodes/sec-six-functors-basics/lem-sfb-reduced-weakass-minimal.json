@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-reduced-weakass-minimal",
+ "kind": "statement",
+ "title": "Weakly associated primes of a reduced ring are minimal",
+ "statement": "Let $R$ be a commutative ring which is reduced, meaning that $x^n=0$ for $x\\in R$ and $n\\geq1$ implies $x=0$. For $x\\in R$ write $\\operatorname{Ann}_R(x)=\\{a\\in R:ax=0\\}$. Let $\\operatorname{WeakAss}(R)$ be the set of weakly associated primes of $R$ [def-sc-weakly-associated-primes]: the prime ideals $\\mathfrak p$ such that, for some $x\\in R$, $\\mathfrak p$ is minimal among the prime ideals containing $\\operatorname{Ann}_R(x)$. Then $\\operatorname{WeakAss}(R)$ is exactly the set of minimal prime ideals of $R$ (prime ideals containing no strictly smaller prime ideal). No Noetherianity or finiteness assumption on the minimal primes is imposed; for the zero ring both sets are empty.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0EMA, label lemma-reduced-weakly-ass-minimal."
+ },
+ "stmt_deps": [
+  "def-sc-weakly-associated-primes"
+ ],
+ "proof": [
+  {
+   "text": "Fix a prime $\\mathfrak p$ and put $A=R_{\\mathfrak p}$ and $\\mathfrak m=\\mathfrak pA$ as in [def-weil-pbc-localization-at-prime]. The fraction equality there shows that $A$ is reduced: if $(a/s)^n=0$ with $n\\geq1$, some $u\\notin\\mathfrak p$ has $ua^n=0$. Then $(ua)^n=u^{n-1}(ua^n)=0$, so reducedness of $R$ gives $ua=0$, and hence $a/s=0$. Also $A\\ne0$: the equality $1/1=0$ would force some $u\\notin\\mathfrak p$ to be zero, impossible.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EMA, label lemma-reduced-weakly-ass-minimal, proof; localization criterion Tag 0566, label lemma-weakly-ass-local."
+   }
+  },
+  {
+   "text": "Now suppose $\\mathfrak p\\in\\operatorname{WeakAss}(R)$. Apply (1)$\\Rightarrow$(3) of [lem-sc-weakass-localization] with the $R$-module $M=R$. Its module localization $R_{\\mathfrak p}$ [def-weil-pbc-module-localization] identifies with $A$ by $r/s\\mapsto r/s$, with inverse the same fraction formula; the fraction relations and scalar action agree. Thus there is $x\\in A$ such that $\\sqrt{\\operatorname{Ann}_A(x)}=\\mathfrak m$. Here $\\sqrt I=\\{z:z^n\\in I\\text{ for some }n\\geq1\\}$. The ideal $\\mathfrak m$ is proper by [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-sc-weakass-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EMA, label lemma-reduced-weakly-ass-minimal, proof; localization criterion Tag 0566, label lemma-weakly-ass-local."
+   }
+  },
+  {
+   "text": "Write $x=a/s$ with $s\\notin\\mathfrak p$. If $a\\notin\\mathfrak p$, then $s/a$ is its inverse, so $\\operatorname{Ann}_A(x)=0$. Reducedness from step 1 gives $\\sqrt0=0$, hence $\\mathfrak m=0$. If $a\\in\\mathfrak p$, then $x\\in\\mathfrak pA=\\mathfrak m=\\sqrt{\\operatorname{Ann}_A(x)}$, so $x^n\\in\\operatorname{Ann}_A(x)$ for some $n\\geq1$. Thus $x^{n+1}=0$, and step 1 gives $x=0$. But then its annihilator and its radical are $A$, contradicting properness of $\\mathfrak m$. Only the first case is possible; therefore $\\mathfrak pA=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EMA, label lemma-reduced-weakly-ass-minimal, proof; localization criterion Tag 0566, label lemma-weakly-ass-local."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-primes-of-localization](1), primes of $R$ contained in $\\mathfrak p$ correspond to primes of $A$, with $\\mathfrak p$ corresponding to $\\mathfrak pA=0$. Every such prime of $A$ contains zero, and inclusion preservation makes it contained in zero; it must equal zero. Injectivity of the correspondence gives $\\mathfrak q=\\mathfrak p$ for every prime $\\mathfrak q\\subseteq\\mathfrak p$. Thus $\\mathfrak p$ is minimal. Conversely, if $\\mathfrak p$ is any minimal prime of $R$, then $\\operatorname{Ann}_R(1)=0$, so $1$ witnesses $\\mathfrak p\\in\\operatorname{WeakAss}(R)$ by [def-sc-weakly-associated-primes]. These two inclusions prove equality. In the zero ring there are no proper prime ideals, so both sets are empty.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "def-sc-weakly-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EMA, label lemma-reduced-weakly-ass-minimal, proof; localization criterion Tag 0566, label lemma-weakly-ass-local."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-sc-weakass-localization",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-primes-of-localization",
+  "def-sc-weakly-associated-primes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0EMA, label lemma-reduced-weakly-ass-minimal, proof; localization criterion Tag 0566, label lemma-weakly-ass-local."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "weaklyAssociatedPrimes",
+   "results": "{\"t\": \"2026-10-23T04:07:33Z\", \"tool\": \"loogle\", \"query\": \"weaklyAssociatedPrimes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'weaklyAssociatedPrimes'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give definitions of minimal primes or radical-annihilator associated primes, not all primes minimal over element annihilators in arbitrary reduced rings. Read Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:55-110 and Ideal/MinimalPrime/Basic.lean:40-80; the localization result found by grep assumes Noetherianity."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyAssociated|weakAss|WeakAss",
+   "results": "{\"t\": \"2026-10-23T04:07:34Z\", \"tool\": \"grep\", \"query\": \"weaklyAssociated|weakAss|WeakAss\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give definitions of minimal primes or radical-annihilator associated primes, not all primes minimal over element annihilators in arbitrary reduced rings. Read Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:55-110 and Ideal/MinimalPrime/Basic.lean:40-80; the localization result found by grep assumes Noetherianity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The weakly associated primes of a reduced commutative ring equal its minimal prime ideals",
+   "results": "{\"t\": \"2026-10-23T04:07:35Z\", \"tool\": \"leansearch\", \"query\": \"The weakly associated primes of a reduced commutative ring equal its minimal prime ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minimalPrimes\", \"associatedPrimes\", \"Ideal.minimalPrimes\", \"minimalPrimes_eq_minimals\", \"Ring.KrullDimLE.minimalPrimes_eq_setOf_isPrime\", \"IsAssociatedPrime\", \"IsDomain.minimalPrimes_eq_singleton_bot\", \"Ideal.radical_minimalPrimes\"], \"digest\": \"be430f014ef4b467\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give definitions of minimal primes or radical-annihilator associated primes, not all primes minimal over element annihilators in arbitrary reduced rings. Read Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:55-110 and Ideal/MinimalPrime/Basic.lean:40-80; the localization result found by grep assumes Noetherianity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a reduced ring the weakly associated primes of the ring are precisely its minimal primes",
+   "results": "{\"t\": \"2026-10-23T04:07:36Z\", \"tool\": \"leanfinder\", \"query\": \"In a reduced ring the weakly associated primes of the ring are precisely its minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minimalPrimes_eq_minimals\", \"IsDomain.minimalPrimes_eq_singleton_bot\", \"minimalPrimes\", \"Ring.KrullDimLE.minimalPrimes_eq_setOf_isPrime\", \"Ideal.minimalPrimes_eq_subsingleton\", \"Ideal.mem_minimalPrimes_iff_isPrime\", \"Ring.KrullDimLE.mem_minimalPrimes_iff\", \"Ideal.minimalPrimes_isPrime\"], \"digest\": \"1265120766e91cc8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give definitions of minimal primes or radical-annihilator associated primes, not all primes minimal over element annihilators in arbitrary reduced rings. Read Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:55-110 and Ideal/MinimalPrime/Basic.lean:40-80; the localization result found by grep assumes Noetherianity."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*[Rr]educed|[Rr]educed.*annihilator|associatedPrimes.*minimalPrimes",
+   "results": "{\"t\": \"2026-10-23T04:08:27Z\", \"tool\": \"grep\", \"query\": \"annihilator.*[Rr]educed|[Rr]educed.*annihilator|associatedPrimes.*minimalPrimes\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give definitions of minimal primes or radical-annihilator associated primes, not all primes minimal over element annihilators in arbitrary reduced rings. Read Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:55-110 and Ideal/MinimalPrime/Basic.lean:40-80; the localization result found by grep assumes Noetherianity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a prime ideal is minimal over the annihilator of an element of a reduced commutative ring, then it is a minimal prime of the ring",
+   "results": "{\"t\": \"2026-10-23T04:08:31Z\", \"tool\": \"leanfinder\", \"query\": \"If a prime ideal is minimal over the annihilator of an element of a reduced commutative ring, then it is a minimal prime of the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isMin_iff\", \"Ideal.mem_minimalPrimes_of_krullDimLE_zero\", \"Ideal.minimalPrimes_isPrime\", \"minimalPrimes_eq_minimals\", \"Ideal.mem_minimalPrimes_iff_isPrime\", \"Ideal.radical_minimalPrimes\", \"minimalPrimes\", \"Ring.KrullDimLE.mem_minimalPrimes_iff\"], \"digest\": \"696c993a2f0c1b5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give definitions of minimal primes or radical-annihilator associated primes, not all primes minimal over element annihilators in arbitrary reduced rings. Read Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:55-110 and Ideal/MinimalPrime/Basic.lean:40-80; the localization result found by grep assumes Noetherianity."
+  },
+  {
+   "tool": "grep",
+   "query": "IsReduced|isReduced|minimalPrimes",
+   "results": "{\"t\": \"2026-10-23T04:09:51Z\", \"tool\": \"grep\", \"query\": \"IsReduced|isReduced|minimalPrimes\", \"sub\": \"RingTheory/Ideal/AssociatedPrime\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\"], \"digest\": \"a5810e8280f12e53\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give definitions of minimal primes or radical-annihilator associated primes, not all primes minimal over element annihilators in arbitrary reduced rings. Read Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:55-110 and Ideal/MinimalPrime/Basic.lean:40-80; the localization result found by grep assumes Noetherianity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a reduced commutative ring weakly associated primes are exactly minimal primes",
+   "results": "{\"t\": \"2026-10-23T09:30:04Z\", \"tool\": \"leanfinder\", \"query\": \"In a reduced commutative ring weakly associated primes are exactly minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.minimalPrimes_eq_subsingleton\", \"Ideal.minimalPrimes_isPrime\", \"Ideal.minimalPrimes_eq_subsingleton_self\", \"minimalPrimes_eq_minimals\", \"Ring.KrullDimLE.mem_minimalPrimes_iff\", \"Ideal.radical_minimalPrimes\", \"Ideal.mem_minimalPrimes_iff_isPrime\", \"PrimeSpectrum.isMin_iff\"], \"digest\": \"8ff143a0286474f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: minimal-prime definitions and Noetherian associated-prime results do not state weak association for arbitrary reduced rings; read AssociatedPrime/Basic.lean:55-110 and MinimalPrime/Basic.lean:40-80."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyAssociated|weakAss|WeakAss|weakly associated",
+   "results": "{\"t\": \"2026-10-23T09:30:54Z\", \"tool\": \"grep\", \"query\": \"weaklyAssociated|weakAss|WeakAss|weakly associated\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: minimal-prime definitions and Noetherian associated-prime results do not state weak association for arbitrary reduced rings; read AssociatedPrime/Basic.lean:55-110 and MinimalPrime/Basic.lean:40-80."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly associated primes of a reduced ring are its minimal prime ideals",
+   "results": "{\"t\": \"2026-10-23T09:30:54Z\", \"tool\": \"leansearch\", \"query\": \"Weakly associated primes of a reduced ring are its minimal prime ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minimalPrimes\", \"associatedPrimes\", \"Ideal.minimalPrimes\", \"minimalPrimes_eq_minimals\", \"Ring.KrullDimLE.minimalPrimes_eq_setOf_isPrime\", \"Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes\", \"Ideal.minimalPrimes_isPrime\", \"IsAssociatedPrime\"], \"digest\": \"67da23c62d941f8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: minimal-prime definitions and Noetherian associated-prime results do not state weak association for arbitrary reduced rings; read AssociatedPrime/Basic.lean:55-110 and MinimalPrime/Basic.lean:40-80."
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, minimalPrimes",
+   "results": "{\"t\": \"2026-10-23T09:30:54Z\", \"tool\": \"loogle\", \"query\": \"associatedPrimes, minimalPrimes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: minimal-prime definitions and Noetherian associated-prime results do not state weak association for arbitrary reduced rings; read AssociatedPrime/Basic.lean:55-110 and MinimalPrime/Basic.lean:40-80."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*[Rr]educed|[Rr]educed.*annihilator|associatedPrimes.*minimalPrimes",
+   "results": "{\"t\": \"2026-10-23T09:32:23Z\", \"tool\": \"grep\", \"query\": \"annihilator.*[Rr]educed|[Rr]educed.*annihilator|associatedPrimes.*minimalPrimes\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: minimal-prime definitions and Noetherian associated-prime results do not state weak association for arbitrary reduced rings; read AssociatedPrime/Basic.lean:55-110 and MinimalPrime/Basic.lean:40-80."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime minimal over the annihilator of an element in a reduced commutative ring is a minimal prime",
+   "results": "{\"t\": \"2026-10-23T09:32:25Z\", \"tool\": \"leanfinder\", \"query\": \"A prime minimal over the annihilator of an element in a reduced commutative ring is a minimal prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.minimalPrimes_isPrime\", \"minimalPrimes_eq_minimals\", \"PrimeSpectrum.isMin_iff\", \"Ideal.mem_minimalPrimes_iff_isPrime\", \"minimalPrimes\", \"Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes\", \"Ring.KrullDimLE.mem_minimalPrimes_iff\", \"Ideal.minimalPrimes\"], \"digest\": \"6b56d47e921bc2d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: minimal-prime definitions and Noetherian associated-prime results do not state weak association for arbitrary reduced rings; read AssociatedPrime/Basic.lean:55-110 and MinimalPrime/Basic.lean:40-80."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalization-affine-total-fractions",
+  "date": "2026-10-23",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Universal property of componentwise normalization for a normal source. Affine construction in the proof of the normal-source lifting property: identify the target chart with integral closure in its total fraction ring. Total-fraction chart argument: supply the no-embedded-weakly-associated-prime hypothesis of the existing total-quotient product theorem from reducedness (Stacks 0EMA).",
+   "via": [
+    "lem-sfb-normalization-affine-total-fractions",
+    "lem-sfb-component-dominant-normalization-lift",
+    "lem-sfb-integral-normal-generic-recognition",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reduced-weakass-minimal",
+  "worker": "stage1",
+  "summary": "Read Stacks 0EMA and 0566. Preserved the arbitrary reduced-ring statement, including the zero ring. Reused the existing weak-association localization criterion and prime correspondence; wrote out reducedness after localization, the unit/nilpotence dichotomy, contraction, and the converse witness 1. No new nodes needed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Universal property of componentwise normalization for a normal source. Affine construction in the proof of the normal-source lifting property: identify the target chart with integral closure in its total fraction ring. Total-fraction chart argument: supply the no-embedded-weakly-associated-prime hypothesis of the existing total-quotient product theorem from reducedness (Stacks 0EMA).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-weakass-localization",
+    "why": "Generic module-localization criterion, used with M=R in the Stacks 0EMA proof; no node of this unit supplies this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-weakass-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-7f4f9039e",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-7f4f9039e (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex 0EMA (lemma-reduced-weakly-ass-minimal, l.15986), 0566 and 0547. The item statement matches 0EMA and is not weakened; the zero-ring remark is true. There are no new nodes and no re-split note; the base proof was empty. Step 1: from ua^n=0, (ua)^n=0 gives ua=0, so R_p is reduced, and R_p≠0 (elementary, from def-weil-pbc-localization-at-prime). Step 2: lem-sc-weakass-localization (1)⇒(3) with M=R, for arbitrary R; m is proper because R_p is local. Step 3 is elementary: a∉p makes x a unit, so sqrt0=0=m; a∈p gives x^{n+1}=0, so x=0 and Ann=A, a contradiction. Step 4: by lem-weil-pbc-primes-of-localization(1), qA⊆pA=0 and injectivity give q=p; the converse uses the witness 1 with Ann(1)=0 through def-sc-weakly-associated-primes. Tested on a field, the zero ring, k×k and k[u,v]/(uv); k[x,y]/(x^2,xy) shows reducedness is needed. rg -L over the DAG for 0EMA/WeakAss found no duplicate. tool_uses lem-sc-weakass-localization accepted as a generic 0566 tool. No SGA. FIX: step 2 identified the module localization R_p with the ring A without citing def-weil-pbc-module-localization; I added it to the step text, uses and proof_deps in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-reduced-weakass-minimal.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeakAssEqMinimalPrimes",
+  "declaration": "Ideal.weakAss_eq_minimalPrimes",
+  "file": "lean/Sheaf/RingTheory/WeakAssEqMinimalPrimes.lean",
+  "statement": "theorem weakAss_eq_minimalPrimes (R : Type u) [CommRing R] [IsReduced R] : WeakAss R = minimalPrimes R",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9eba1ac76",
+  "group": "NM",
+  "result": "pass",
+  "note": "Ideal.weakAss_eq_minimalPrimes (R : Type u) [CommRing R] [IsReduced R] : WeakAss R = minimalPrimes R matches node and Stacks 0EMA (algebra.tex l.15986); reuses recorded stmt_dep Ideal.WeakAss (colon-ideal minimal primes); Ideal.minimalPrimes is protected so minimalPrimes R is the root ring-level set; IsReduced is equivalent to the positive-power condition; no Noetherian/Nontrivial binders, universe free; zero ring (both empty), field, k×k and x=0 checked; only the lean field differs from live, lean.statement verbatim, stmt_dep record unchanged; docstrings carry source and blueprint tag plus the 4 proof steps; imports exist; no duplicate in Sheaf/WeilConjectures/Mathlib; report has both required sections but the NM second reading says no other worker read it; no fixes, no compile run (worker reported clean compile and preflight)."
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-bivariate-formal-exponential",
+ "kind": "definition",
+ "title": "Formal exponential of a bivariate series over a noncommutative rational algebra",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be an associative unital $\\mathbf Q$-algebra, not necessarily commutative. The ring $A[[s,t]]$ of formal series in two central commuting variables has coefficientwise addition and ordered Cauchy multiplication. For $Z\\in(s,t)A[[s,t]]$, define its formal exponential by the finite coefficient formula $[s^a t^b]\\exp(Z)=\\sum_{n=0}^{a+b}(1/n!)[s^a t^b]Z^n$. Each omitted power has zero coefficient since $Z$ has zero constant coefficient. Equivalently, this is the coefficientwise sum $\\sum_{n\\geq0} Z^n/n!$. The same finite formula defines a total extension to all series, whose exponential interpretation is asserted only for zero-constant inputs.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, equation (153), printed p.510, motivation only. Agent-stated coefficient construction for the exponential in lem-sfb-formal-class-two-exponential, its statement and proof step 8; Milne does not state this general construction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def exp|exp_add|exp_mul",
+   "results": "{\"t\": \"2026-10-24T05:46:23Z\", \"tool\": \"grep\", \"query\": \"def exp|exp_add|exp_mul\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Expand.lean\"], \"digest\": \"74071b6cd20ecdee\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching bivariate noncommutative exponential: PowerSeries.exp is the one-variable universal series, and substitution APIs require commutative coefficients; analytic and nilpotent exponentials do not apply."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, exp",
+   "results": "{\"t\": \"2026-10-24T05:46:24Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, exp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'exp'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching bivariate noncommutative exponential: PowerSeries.exp is the one-variable universal series, and substitution APIs require commutative coefficients; analytic and nilpotent exponentials do not apply."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exponential of sum of noncommuting formal power series with central pairwise commutators",
+   "results": "{\"t\": \"2026-10-24T05:46:25Z\", \"tool\": \"leanfinder\", \"query\": \"Exponential of sum of noncommuting formal power series with central pairwise commutators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedSpace.exp_sum_of_commute\", \"IsNilpotent.exp_add_of_commute\", \"NormedSpace.exp_add_of_commute_of_mem_ball\", \"Matrix.exp_sum_of_commute\", \"NormedSpace.exp_add_of_commute\", \"Commute.exp\", \"PowerSeries.exp_mul_exp_eq_exp_add\", \"NormedSpace.exp_sum\"], \"digest\": \"4f49c1a7cb4e22c9\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching bivariate noncommutative exponential: PowerSeries.exp is the one-variable universal series, and substitution APIs require commutative coefficients; analytic and nilpotent exponentials do not apply."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal exponential of multivariate formal power series with noncommutative rational algebra coefficients defined coefficientwise by finite sum of powers divided by factorials",
+   "results": "{\"t\": \"2026-10-24T05:46:54Z\", \"tool\": \"leansearch\", \"query\": \"Formal exponential of multivariate formal power series with noncommutative rational algebra coefficients defined coefficientwise by finite sum of powers divided by factorials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exp\", \"NormedSpace.exp_eq_ofScalarsSum\", \"PowerSeries.coeff_exp\", \"PowerSeries.isUnit_exp\", \"PowerSeries.exp_pow_sum\", \"PowerSeries.derivative_exp\", \"NormedSpace.expSeries\", \"NormedSpace.expSeries_apply_eq_div\"], \"digest\": \"d2af7eca545ffcc5\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching bivariate noncommutative exponential: PowerSeries.exp is the one-variable universal series, and substitution APIs require commutative coefficients; analytic and nilpotent exponentials do not apply."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l noncommutative.*exponential|noncommutative.*formal.*series|bivariate.*exponential dag/nodes lean/WeilConjectures lean/Sheaf; rg bivariateExp dag/lean_names_upstream.json; blueprint_refs.py search formal exponential",
+   "results": "DAG: the item and unrelated lem-sfb-pd-colour-profile-coefficients only. Blueprint search: prop-trace-determinant only. No bivariateExp declaration upstream or in Sheaf. def-weil-power-series-exponential covers a commutative univariate coefficient ring only. MvPowerSeries.Basic provides the noncommutative series ring and coeff; MvPowerSeries.Substitution requires CommRing on the target, lines 67-72.",
+   "date": "2026-10-24",
+   "verdict": "No existing node or declaration for the required noncommutative bivariate exponential."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-formal-class-two-exponential",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.510, admissible-lattice existence before equation (152), whose enveloping-algebra input is Kostant integral PBW. Full source WANTED: Kostant, Groups over Z (1966), integral enveloping-algebra basis theorem; also Steinberg, Lectures on Chevalley Groups, initial integral-form construction. Supporting calculation: Section 23h, Theorem 23.71, pp.508--509, supplies the normalization assumed here, but not the divided-power identity. Full source WANTED: Steinberg, Lectures on Chevalley Groups, initial integral-form construction, rank-two divided-power commutation in types A1 x A1, A2, B2 and G2; or Kostant, Groups over Z (1966), divided-power straightening calculations. Supporting calculation: Section 23h, equation (153), printed p.510, motivates formal root exponentials but does not state this identity. Agent-stated class-two formal exponential identity. WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapter II, Campbell--Hausdorff series, its central-bracket specialization. Coefficientwise definition of the bivariate formal exponential used in the class-two identity.",
+   "via": [
+    "lem-sfb-formal-class-two-exponential",
+    "lem-sfb-chevalley-rank-two-straightening",
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.MvPowerSeries.BivariateExp",
+  "declaration": "MvPowerSeries.bivariateExp",
+  "file": "lean/Sheaf/RingTheory/MvPowerSeries/BivariateExp.lean",
+  "statement": "def bivariateExp {A : Type u} [Ring A] [Algebra ℚ A] (Z : MvPowerSeries (Fin 2) A) : MvPowerSeries (Fin 2) A",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35a93ec4d",
+  "group": "Q12",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35a93ec4d",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Item lem-sfb-formal-class-two-exponential: only lean record + new §1(A) stmt_dep def-sfb-bivariate-formal-exponential added (diffed vs side-live). bivariateExp = Σ_{n≤deg d}(n!)⁻¹•coeff d (Z^n), real data, equals full coefficientwise Σ Z^n/n! for zero-constant inputs (all uses are: ΣZ_i, Z_i, commutator correction). Statement: Ring A + Algebra ℚ A (noncommutative, no extras), MvPowerSeries (Fin 2) A, hZ constantCoeff=0 ⇔ (s,t), hcentral ⁅⁅Z i,Z j⁆,Z k⁆=0, List.ofFn ordered product, right correction exp(-(1/2)•Σ_{i<j}⁅Z i,Z j⁆), correct Weyl sign; r=0/r=1/commuting/zero algebra covered. No duplicate in Mathlib (PowerSeries.exp comm, IsNilpotent.exp nilpotent) or live Sheaf/DAG. lean.statement verbatim for both nodes; only sorry is the theorem proof; docstrings with source, blueprint and 8 proof steps; report sections present; parent rank-two-straightening use in A=U matches. No findings."
+ }
+}

@@ -1,0 +1,482 @@
+{
+ "id": "lem-sfb-field-profinite-tensor-fibres",
+ "kind": "statement",
+ "title": "Geometric fibres of profinite tensor schemes over intermediate fields",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Let $k$ be a field and $\\Omega/k$ a separable closure [def-pd-separable-closure], let $G=\\operatorname{Aut}_k(\\Omega)$ with its Krull topology, and let $k\\subseteq L\\subseteq\\Omega$ be any intermediate field, including $L=k$ and $L=\\Omega$. Use [def-weil-size-convention]. Give $\\operatorname{Emb}_k(L,\\Omega)=\\operatorname{Hom}_{k\\text{-alg}}(L,\\Omega)$ the topology of restriction to finite intermediate extensions of $k$ in $L$. For a compact Hausdorff totally disconnected space $P$, let $LC(P,L)$ be the ring of locally constant functions $P\\to L$ with pointwise operations, and write $L[P]$ for the test scheme $(\\operatorname{Spec}L)[P]$ of [lem-weil-pbc-profinite-test-object-functor].\n\nThere is a canonical identification $L[P]\\cong\\operatorname{Spec}LC(P,L)\\cong\\operatorname{Spec}(\\varinjlim_i L^{P_i})$, where $P_i$ runs over the finite discrete quotient sets of $P$. The algebra $LC(P,L)$ is ind-etale over $k$ [def-weil-pbc-ind-etale-algebra]. Equip $\\operatorname{Hom}_{k\\text{-alg}}(LC(P,L),\\Omega)$ with the topology of restriction to finite etale $k$-subalgebras and with the left action by postcomposition. Evaluation gives a $G$-equivariant homeomorphism\n$$\\operatorname{Emb}_k(L,\\Omega)\\times P\\ \\xrightarrow{\\sim}\\ \\operatorname{Hom}_{k\\text{-alg}}(LC(P,L),\\Omega),\\qquad (h,p)\\longmapsto(f\\longmapsto h(f(p))),$$\nwhere $g\\cdot(h,p)=(g\\circ h,p)$. For a continuous map $v:P\\to Q$, precomposition $LC(Q,L)\\to LC(P,L)$ induces $(h,p)\\mapsto(h,v(p))$. For an inclusion $L\\subseteq M\\subseteq\\Omega$, the map induced by $LC(P,L)\\to LC(P,M)$ is $(h,p)\\mapsto(h|_L,p)$. Every $k$-algebra embedding $\\Omega\\to\\Omega$ is an automorphism, and $\\operatorname{Emb}_k(\\Omega,\\Omega)=G$ homeomorphically with the Krull topology. The empty parameter is allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Examples 4.1.9–4.1.10, pp. 27–28: tensor objects, geometric-point torsor and finite-quotient limits."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-size-convention",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Take the small directed system of all finite clopen partitions of $P$, with the empty partition when $P=\\varnothing$; two partitions have their nonempty intersections as a common refinement. By [lem-sfb-cofinal-clopen-partition-reconstruction], $P=\\varprojlim_iP_i$ homeomorphically, where $P_i$ is the finite set of blocks. These are exactly the finite discrete quotient sets up to relabelling. By [lem-weil-pbc-profinite-limit-function-factorization], every locally constant $f:P\\to L$ is pulled back from some $P_i$. Pullback $L^{P_i}\\to LC(P,L)$ is injective because $P\\to P_i$ is surjective; equality of functions from two stages is checked after their common quotient refinement. Consequently these maps exhibit $LC(P,L)=\\varinjlim_iL^{P_i}$ as an $L$-algebra: a compatible family of ring maps on the stages extends uniquely by sending a function represented at a stage to its image there. This also works for $P=\\varnothing$, whose only quotient is empty and whose function ring is the zero ring.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor",
+    "lem-weil-pbc-profinite-limit-function-factorization",
+    "lem-sfb-cofinal-clopen-partition-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9–4.1.10, pp. 27–28; explicit finite-stage evaluation calculation"
+   }
+  },
+  {
+   "text": "For each finite $P_i$, the coordinate idempotents in $L^{P_i}$ give a finite disjoint open covering of its spectrum, with each nonempty chart $D(e_a)=\\operatorname{Spec}L$ (localization at $e_a$ is the $a$th factor). Thus $\\operatorname{Spec}(L^{P_i})=\\coprod_{P_i}\\operatorname{Spec}L$, including the empty product. The transition maps are precomposition on coordinates. Apply [lem-weil-pbc-spec-small-colimit-limit] to the small ring diagram of step 1. Its spectrum is precisely the limit defining $L[P]$ in [lem-weil-pbc-profinite-test-object-functor], giving both claimed canonical scheme identifications.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-profinite-test-object-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; finite product charts as in proetale.tex Tag 097D"
+   }
+  },
+  {
+   "text": "Every finite family of values in $L$ lies in a finite separable intermediate field $K/k$: the elements are algebraic and separable because $L\\subseteq\\Omega$, and their compositum is finite separable, as in [def-pd-separable-closure]. Together with step 1, this expresses $LC(P,L)$ as the directed union of the subalgebras $K^{P_i}$, indexed by finite intermediate fields $K\\subseteq L$ and finite quotient refinements. Each $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is etale by [lem-weil-pbc-finite-separable-extension-etale], and so is the spectrum of $K^{P_i}$ by [lem-weil-pbc-etale-algebra-finite-product]. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], these are finitely presented etale $k$-algebras. Their filtered union is ind-etale by [def-weil-pbc-ind-etale-algebra]. For $P=\\varnothing$ the stages are zero, explicitly allowed by the finite-product statement.",
+   "uses": [
+    "def-pd-separable-closure",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-algebra-finite-product",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3, lemma-etale-over-field, reverse implication; Tag 00U2, lemma-etale, part (11)"
+   }
+  },
+  {
+   "text": "Assume first $P\\ne\\varnothing$. For a $k$-algebra map $\\varphi:LC(P,L)\\to\\Omega$, its kernel is prime. Since a field has just the zero prime, [lem-weil-pbc-locally-constant-prime-spectrum] gives a unique $p\\in P$ with $\\ker\\varphi=\\{f:f(p)=0\\}$. Restriction to constant functions defines a unital $k$-algebra map $h:L\\to\\Omega$, which is injective since $L$ is a field. For every $f$, the function $f-\\operatorname{const}(f(p))$ belongs to this kernel, so $\\varphi(f)=h(f(p))$. Conversely this formula defines a $k$-algebra map for every $(h,p)$. Its restriction to constants recovers $h$, and its kernel recovers $p$, proving bijectivity. If $P=\\varnothing$, no unital map from the zero ring to the field $\\Omega$ exists, so both sides are empty.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-prime-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9–4.1.10, pp. 27–28; explicit finite-stage evaluation calculation"
+   }
+  },
+  {
+   "text": "Let $B=LC(P,L)$. The stages $K^{P_i}$ of step 3 are cofinal among finite etale $k$-subalgebras of $B$: by [lem-weil-pbc-etale-algebra-over-field-product], such a subalgebra $A$ is finite-dimensional over $k$; finitely many basis functions are contained in a common stage, hence so is $A$. On $K^{P_i}$, the evaluation formula depends only on the pair $(h|_K,\\pi_i(p))$, which takes values in the product of two discrete sets. Both coordinate maps are continuous by the restriction topology on embeddings and the quotient topology on $P_i$. The induced map to the discrete set $\\operatorname{Hom}_{k\\text{-alg}}(K^{P_i},\\Omega)$ is therefore continuous. Restricting further to $A$ proves continuity for every finite etale restriction, hence continuity of the evaluation bijection.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9–4.1.10, pp. 27–28; explicit finite-stage evaluation calculation"
+   }
+  },
+  {
+   "text": "The inverse is continuous as follows. Its embedding coordinate $\\varphi\\mapsto h$ is continuous on restriction to every finite $K\\subseteq L$, since the constant functions $K$ form a finite etale subalgebra by step 3 (when $P\\ne\\varnothing$). Its point coordinate is also continuous: the map $\\varphi\\mapsto\\ker\\varphi\\in\\operatorname{Spec}B$ has inverse image of a basic open $D(f)$ equal to $\\{\\varphi:\\varphi(f)\\ne0\\}$. By step 3, $f$ lies in a finite etale stage, so this set is open in the restriction topology. Compose this continuous kernel map with the inverse of the homeomorphism in [lem-weil-pbc-locally-constant-prime-spectrum] and project to $P$. These are exactly the two coordinates of the inverse in step 4. For empty $P$ the map between empty spaces is a homeomorphism.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-prime-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9–4.1.10, pp. 27–28; explicit finite-stage evaluation calculation"
+   }
+  },
+  {
+   "text": "Postcomposition by $g\\in G$ takes $\\varphi(f)=h(f(p))$ to $g(h(f(p)))$, hence acts as $(h,p)\\mapsto(g\\circ h,p)$. For continuous $v:P\\to Q$ and $f\\in LC(Q,L)$, evaluating precomposition gives $h((f\\circ v)(p))=h(f(v(p)))$, so the map is $(h,p)\\mapsto(h,v(p))$. For $L\\subseteq M$ and $h:M\\to\\Omega$, restriction of the same formula to $LC(P,L)$ is $(h|_L,p)$. These identities prove all equivariance and naturality assertions directly, including composites and empty sources.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9–4.1.10, pp. 27–28; explicit finite-stage evaluation calculation"
+   }
+  },
+  {
+   "text": "Finally, let $a:\\Omega\\to\\Omega$ be a $k$-algebra embedding and $x\\in\\Omega$. Algebraicity from [def-pd-separable-closure] supplies a nonzero $F\\in k[T]$ with $F(x)=0$. The finite set $R=\\{y\\in\\Omega:F(y)=0\\}$ is mapped into itself by $a$ and $a$ is injective, so its restriction is a permutation of $R$. Thus $x=a(y)$ for some $y\\in R$. As $x$ was arbitrary, $a$ is surjective and therefore an automorphism. The resulting identity of embedding and automorphism sets identifies the topologies: a basic neighbourhood of $g$ on either side consists of those maps agreeing with $g$ on a finite intermediate field $K$, equivalently the coset $g\\operatorname{Aut}_K(\\Omega)$. This is precisely the Krull neighbourhood basis, so the identity is a homeomorphism.",
+   "uses": [
+    "def-pd-separable-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9–4.1.10, pp. 27–28; explicit finite-stage evaluation calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-sfb-cofinal-clopen-partition-reconstruction",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "def-pd-separable-closure",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-algebra-finite-product",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Examples 4.1.9–4.1.10, pp. 27–28; explicit finite-stage evaluation calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a field k with separable closure Omega the profinite test schemes k[P] and Omega[P] have geometric fibres P with trivial Galois action and Galois group times P with left translation naturally in P",
+   "results": {
+    "t": "2026-10-22T06:05:56Z",
+    "tool": "leanfinder",
+    "query": "For a field k with separable closure Omega the profinite test schemes k[P] and Omega[P] have geometric fibres P with trivial Galois action and Galois group times P with left translation naturally in P",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.limitToAlgEquiv",
+     "InfiniteGalois.mk_toAlgEquivAux",
+     "InfiniteGalois.toAlgEquivAux_eq_proj_of_mem",
+     "InfiniteGalois.mulEquivToLimit",
+     "InfiniteGalois.limitToAlgEquiv_apply",
+     "InfiniteGalois.algEquivToLimit",
+     "InfiniteGalois.asProfiniteGaloisGroupFunctor",
+     "InfiniteGalois.toAlgEquivAux_eq_liftNormal"
+    ],
+    "digest": "81126d557d0d8413"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for evaluation classification of algebra maps from LC(P,L) over k with its product topology and Galois action; comap and Krull-limit constructions are supporting results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"AlgHom\"",
+   "results": {
+    "t": "2026-10-22T06:05:55Z",
+    "tool": "loogle",
+    "query": "\"LocallyConstant\", \"AlgHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "LocallyConstant.coeFnAlgHom",
+     "LocallyConstant.coeFnAlgHom_apply",
+     "LocallyConstant.toContinuousMapAlgHom",
+     "LocallyConstant.separatesPoints_range_toContinuousMapAlgHom",
+     "LocallyConstant.toContinuousMapAlgHom_apply",
+     "LocallyConstant.toLinearMap_toContinuousMapAlgHom"
+    ],
+    "digest": "54717b7773f4f593"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for evaluation classification of algebra maps from LC(P,L) over k with its product topology and Galois action; comap and Krull-limit constructions are supporting results only"
+  },
+  {
+   "tool": "grep",
+   "query": "(LocallyConstant|profiniteToProEt).*(Galois|AlgHom|Spec)|(Galois|AlgHom|Spec).*(LocallyConstant|profiniteToProEt)",
+   "results": {
+    "t": "2026-10-22T06:05:55Z",
+    "tool": "grep",
+    "query": "(LocallyConstant|profiniteToProEt).*(Galois|AlgHom|Spec)|(Galois|AlgHom|Spec).*(LocallyConstant|profiniteToProEt)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/LocallyConstant/Algebra.lean",
+     "Mathlib/Topology/LocallyConstant/Algebra.lean",
+     "Mathlib/Topology/LocallyConstant/Algebra.lean"
+    ],
+    "digest": "245800b7bde5ce46"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for evaluation classification of algebra maps from LC(P,L) over k with its product topology and Galois action; comap and Krull-limit constructions are supporting results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Embeddings into a separable closure of the filtered colimit of finite products of a field form the product of the Krull Galois group and the profinite parameter set",
+   "results": {
+    "t": "2026-10-22T06:05:55Z",
+    "tool": "leansearch",
+    "query": "Embeddings into a separable closure of the filtered colimit of finite products of a field form the product of the Krull Galois group and the profinite parameter set",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebra homomorphisms from locally constant functions with values in a separable closure to that closure over the base field are parametrized by a point and a continuous Galois automorphism",
+   "results": {
+    "t": "2026-10-22T06:06:47Z",
+    "tool": "leanfinder",
+    "query": "Algebra homomorphisms from locally constant functions with values in a separable closure to that closure over the base field are parametrized by a point and a continuous Galois automorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.limitToAlgEquiv",
+     "InfiniteGalois.proj",
+     "InfiniteGalois.mk_toAlgEquivAux",
+     "InfiniteGalois.toAlgEquivAux_eq_proj_of_mem",
+     "InfiniteGalois.limitToAlgEquiv_apply",
+     "InfiniteGalois.algEquivToLimit_continuous",
+     "InfiniteGalois.algEquivToLimit",
+     "galLiftEquiv"
+    ],
+    "digest": "9e206fa9bce0ceb0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for evaluation classification of algebra maps from LC(P,L) over k with its product topology and Galois action; comap and Krull-limit constructions are supporting results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separable algebraic intermediate field L of a separable closure Omega of k algebra maps from locally constant functions P to L into Omega are evaluations at p followed by k embeddings of L into Omega with product topology and Galois action",
+   "results": {
+    "t": "2026-10-22T06:07:48Z",
+    "tool": "leanfinder",
+    "query": "For a separable algebraic intermediate field L of a separable closure Omega of k algebra maps from locally constant functions P to L into Omega are evaluations at p followed by k embeddings of L into Omega with product topology and Galois action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsSepClosed.lift",
+     "InfiniteGalois.mk_toAlgEquivAux",
+     "InfiniteGalois.toAlgEquivAux_eq_proj_of_mem",
+     "InfiniteGalois.toAlgEquivAux_eq_liftNormal",
+     "InfiniteGalois.proj_adjoin_singleton_val",
+     "InfiniteGalois.proj",
+     "InfiniteGalois.algEquivToLimit",
+     "InfiniteGalois.limitToAlgEquiv"
+    ],
+    "digest": "f6365559698d3d9f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for evaluation classification of algebra maps from LC(P,L) over k with its product topology and Galois action; comap and Krull-limit constructions are supporting results only"
+  },
+  {
+   "tool": "grep",
+   "query": "(LocallyConstant|profiniteToProEt).*(AlgHom|Spec)|(AlgHom|Spec).*(LocallyConstant|profiniteToProEt)",
+   "results": {
+    "t": "2026-10-22T10:37:59Z",
+    "tool": "grep",
+    "query": "(LocallyConstant|profiniteToProEt).*(AlgHom|Spec)|(AlgHom|Spec).*(LocallyConstant|profiniteToProEt)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/LocallyConstant/Algebra.lean",
+     "Mathlib/Topology/LocallyConstant/Algebra.lean",
+     "Mathlib/Topology/LocallyConstant/Algebra.lean"
+    ],
+    "digest": "245800b7bde5ce46"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/constant/precomposition maps and Galois inverse-limit constructions do not classify all LC(P,L) algebra maps with this product topology; continuousMap character-space results require RCLike coefficients and continuous linear functionals, not arbitrary separable algebraic fields"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The space of algebra maps from locally constant functions P to L into a separable closure is homeomorphic to the product of P and the field embeddings of L",
+   "results": {
+    "t": "2026-10-22T10:37:59Z",
+    "tool": "leansearch",
+    "query": "The space of algebra maps from locally constant functions P to L into a separable closure is homeomorphic to the product of P and the field embeddings of L",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LocallyConstant.toContinuousMapAlgHom_apply",
+     "LocallyConstant.evalₐ",
+     "LocallyConstant.constₗ",
+     "LocallyConstant.mapₐ_apply_apply",
+     "LocallyConstant.comapₐ",
+     "LocallyConstant.mapₐ",
+     "LocallyConstant.congrLeftₐ",
+     "LocallyConstant.toContinuousMap_injective"
+    ],
+    "digest": "fd250116a2194ede"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/constant/precomposition maps and Galois inverse-limit constructions do not classify all LC(P,L) algebra maps with this product topology; continuousMap character-space results require RCLike coefficients and continuous linear functionals, not arbitrary separable algebraic fields"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"AlgHom\"",
+   "results": {
+    "t": "2026-10-22T10:37:59Z",
+    "tool": "loogle",
+    "query": "\"LocallyConstant\", \"AlgHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "LocallyConstant.coeFnAlgHom",
+     "LocallyConstant.coeFnAlgHom_apply",
+     "LocallyConstant.toContinuousMapAlgHom",
+     "LocallyConstant.separatesPoints_range_toContinuousMapAlgHom",
+     "LocallyConstant.toContinuousMapAlgHom_apply",
+     "LocallyConstant.toLinearMap_toContinuousMapAlgHom"
+    ],
+    "digest": "54717b7773f4f593"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/constant/precomposition maps and Galois inverse-limit constructions do not classify all LC(P,L) algebra maps with this product topology; continuousMap character-space results require RCLike coefficients and continuous linear functionals, not arbitrary separable algebraic fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebra homomorphisms from locally constant functions on a profinite space with values in an algebraic field extension to a separable closure are evaluation followed by a field embedding",
+   "results": {
+    "t": "2026-10-22T10:38:00Z",
+    "tool": "leanfinder",
+    "query": "Algebra homomorphisms from locally constant functions on a profinite space with values in an algebraic field extension to a separable closure are evaluation followed by a field embedding",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.proj",
+     "InfiniteGalois.algEquivToLimit",
+     "LocallyConstant.evalₐ",
+     "InfiniteGalois.toAlgEquivAux_eq_proj_of_mem",
+     "InfiniteGalois.mk_toAlgEquivAux",
+     "InfiniteGalois.limitToAlgEquiv_apply",
+     "InfiniteGalois.limitToAlgEquiv",
+     "InfiniteGalois.toAlgEquivAux_eq_liftNormal"
+    ],
+    "digest": "fdf8734917404378"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/constant/precomposition maps and Galois inverse-limit constructions do not classify all LC(P,L) algebra maps with this product topology; continuousMap character-space results require RCLike coefficients and continuous linear functionals, not arbitrary separable algebraic fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism from a locally constant function ring on a compact totally disconnected space into a field factors uniquely as evaluation at a point followed by a field homomorphism",
+   "results": {
+    "t": "2026-10-22T10:38:30Z",
+    "tool": "leanfinder",
+    "query": "Every homomorphism from a locally constant function ring on a compact totally disconnected space into a field factors uniquely as evaluation at a point followed by a field homomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LocallyConstant.evalₐ",
+     "LocallyConstant.evalRingHom",
+     "WeakDual.CharacterSpace.continuousMapEval_bijective",
+     "LocallyConstant.evalRingHom_apply",
+     "LocallyConstant.evalₐ_apply",
+     "CompHausLike.LocallyConstant.componentHom",
+     "LocallyConstant.evalMonoidHom",
+     "WeakDual.CharacterSpace.homeoEval_naturality"
+    ],
+    "digest": "a6c2cdfaa644e8fa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/constant/precomposition maps and Galois inverse-limit constructions do not classify all LC(P,L) algebra maps with this product topology; continuousMap character-space results require RCLike coefficients and continuous linear functionals, not arbitrary separable algebraic fields"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-profinite-galois-site",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), separable-closure descent input below the coefficient-topology comparison: geometric field-site presentation, before any derived or coefficient assertion. Re-split of lem-sfb-field-profinite-galois-site: returned proof step 8 (test-object rings, embedding torsor, parameter maps and projection).",
+   "via": [
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-field-profinite-tensor-fibres",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved the finite-stage ring and scheme presentations, ind-etaleness, evaluation classification using the existing prime-spectrum homeomorphism, both topology directions, naturality, and the algebraic-endomorphism argument. Reused existing DAG nodes; no new nodes. All cited statements read and verbatim citations supplied.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor confirms this); retained the existing precise from.place and via chain. Realizes the geometric field-site presentation input, formerly step 8 of lem-sfb-field-profinite-galois-site, below the coefficient-topology comparison; no derived or coefficient assertions are used.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-test-object-functor",
+    "why": "Small finite-quotient presentation and test-scheme limit; it does not itself assert the general L-valued LC identification, which steps 1–2 prove. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-limit-function-factorization",
+    "why": "General finite-stage factorization of LC functions, used only for the ring presentation. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-small-colimit-limit",
+    "why": "General small affine-scheme limit theorem used for the displayed ring colimit. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Generic field-algebra tool for each finite coefficient stage. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-finite-product",
+    "why": "Generic finite-product closure, including the zero ring. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "Converts the cited scheme-etale assertions to finitely presented etale ring maps. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-prime-spectrum",
+    "why": "Generic prime-spectrum homeomorphism; the embedding factorization and topology are proved here. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic finite-etale structure theorem ensuring that finitely many basis functions suffice for cofinality. No node of this unit states this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-algebra-finite-product",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-f13c8a485",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-f13c8a485 (reviewer sub-agent of L); spot-checked: Read the item and all eight steps in full against the statements of the eleven nodes they cite. No new nodes. The statement and stmt_deps are identical to live, and the item is still unsplit on live, side-live and the live project, so it is not superseded. No repair note, no SGA. Source: Bhatt–Scholze Examples 4.1.9–4.1.10 (pp. 27–28), which give only the tensor/torsor shape; the evaluation classification, both topologies and the naturalities are agent-written (proof_origin by agent, correct). Step 1: all finite clopen partitions form a small, nonempty, directed, cofinal system, so lem-sfb-cofinal-clopen-partition-reconstruction applies; the factorization lemma then gives LC(P,L) as a directed union (also for P=∅). Step 2: idempotent splitting and lem-weil-pbc-spec-small-colimit-limit give the test-object limit with X=Spec L; the step correctly avoids that node's identification, which is over Z only. Step 3: K=k(values) is finite separable; it is étale, so is the product (n=0 allowed), and it is finitely presented; the directed union is ind-étale by definition. Step 4: the prime-spectrum homeomorphism with R=L gives ker φ=m_p and φ(f)=h(f(p)); the converse holds; both sides are empty for P=∅. Steps 5–6: every étale subalgebra is finite-dimensional (over-field-product) and lies in a stage; evaluation factors through the discrete pair (h|_K, q_i(p)); the inverse is continuous through const(K) and through ker φ via D(f) and the homeomorphism clause. Step 7: the naturality composites were recomputed and the directions are correct. Step 8: root-set permutation; a|_K=g|_K iff a lies in g·Aut_K(Ω), which is the Krull basis. Tested P empty and a point, L=k, L=Ω, and non-normal ℚ(2^{1/3}). No duplicates (rg found only the finite-limits and pointed-cover nodes, which are unrelated). No cycle. Accepted tool_uses: 8 generic pbc/curve-estimates tools."
+ }
+}

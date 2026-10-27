@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-closed-pushforward-nonpositive-free-tensor",
+ "kind": "statement",
+ "title": "Nonpositive finite free tensor preserves pseudo-coherence after a closed pushforward",
+ "statement": "Let $j:P\\hookrightarrow W$ be a closed immersion of affine schemes [def-pc-scheme, def-weil-closed-immersion]. Let $m\\in\\mathbf Z$ and $Q\\in D(\\mathcal O_P)$ [def-pc-derived-category]. Let $F^\\bullet$ be a cochain complex of $\\mathcal O_P$-modules with $F^q=0$ for $q>0$ and $F^q\\cong\\mathcal O_P^{\\oplus r_q}$ for a finite nonnegative integer $r_q$ for each $q\\leq0$; $F^\\bullet$ also denotes its image in the derived category. Suppose $Rj_*Q$ [def-pc-derived-direct-image] is $m$-pseudo-coherent on $W$ [def-sfb-m-pseudo-coherent-complex]. Then\n$$Rj_*(Q\\otimes^{\\mathbf L}_{\\mathcal O_P}F^\\bullet)$$\nis $m$-pseudo-coherent on $W$, using the derived tensor of [def-pc-scheme-derived-tensor-structure]. There is no quasi-coherence or lower cohomological bound assumption on $Q$, and $F^\\bullet$ need not be bounded below.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph, extracted as an absolute closed-pushforward lemma; replace the printed tail inequality by vanishing in degrees greater than or equal to the cutoff."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=Rj_*Q$. Work locally on $W$: for an open $U\\subset W$ put $V=j^{-1}U$ and $j_U:V\\hookrightarrow U$. This is still a closed immersion: its image is the intersection of the closed image of $j$ with $U$, and its local-ring maps are the same surjections. The exact closed-pushforward statement computes both $Rj_*$ and $Rj_{U*}$ termwise. The ordinary pushforward/open-restriction comparison, applied termwise, identifies $A|_U$ with $Rj_{U*}(Q|_V)$. Open restriction is exact and hence preserves quasi-isomorphisms; it preserves K-flatness and commutes with total tensor. Applying these last two facts to a K-flat tensor representative identifies the restriction of our target with $Rj_{U*}(Q|_V\\otimes^{\\mathbf L}F|_V)$. Thus it suffices to prove the assertion on an open cover of $W$.",
+   "uses": [
+    "lem-sfb-closed-immersion-unbounded-projection-formula",
+    "lem-pc-module-pushforward-open-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pc-kflat-open-restriction",
+    "lem-pc-open-restriction-total-tensor",
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+   }
+  },
+  {
+   "text": "Choose the cover in the definition of $m$-pseudo-coherence for $A$, and fix one member $U$ with a strictly perfect approximation $B\\to A|_U$. Choose $a\\ge m$ above all nonzero degrees of $B$. Then $H^i(A|_U)=0$ for $i>a$, since $i>m$ and the approximation is an isomorphism in that range. Exactness of $j_{U*}$ and exact-functor cohomology give $j_{U*}H^i(Q|_V)=0$ for $i>a$. Closed pushforward detects zero sheaves: each open of $V$ has the form $j_U^{-1}T$ for an open $T\\subset U$, and $(j_{U*}G)(T)=G(j_U^{-1}T)$, so $j_{U*}G=0$ implies $G=0$. Therefore $H^i(Q|_V)=0$ for $i>a$. From now on suppress $U,V$ in the notation. No global upper bound or quasi-coherence has been used.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex",
+    "lem-sfb-closed-immersion-unbounded-projection-formula",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+   }
+  },
+  {
+   "text": "Choose a cochain representative $E_0$ of the restricted $Q$ and replace it by $E=\\tau_{\\le a}E_0$. Explicitly $E^p=E_0^p$ for $p<a$, $E^a=\\ker d_{E_0}^a$, and $E^p=0$ for $p>a$. The inclusion into $E_0$ preserves cohomology in degrees $\\le a$ and both sides have zero cohomology above $a$, so it is a quasi-isomorphism. Every finite free sheaf is flat: tensoring with $\\mathcal O^{\\oplus r}$ is the finite direct-sum functor, which preserves kernels and cokernels coordinatewise. Consequently $F$, bounded above by zero with finite free terms, is K-flat. The derived-tensor definition and exact closed pushforward now identify the local target with the image of $C=j_*\\operatorname{Tot}(E\\otimes F)$. Its degree-$n$ sum has only finitely many possibly nonzero summands: $p+q=n$, $p\\le a$, $q\\le0$ imply $n-a\\le q\\le0$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-closed-immersion-unbounded-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+   }
+  },
+  {
+   "text": "For every $q\\le0$ and finite $r$, $A^{\\oplus r}[-q]$ is $m$-pseudo-coherent. Indeed, on each approximation open take the finite sum of its strictly perfect witness and shift it by $-q$. Such a complex is still bounded with finite-free-retract terms. Its map to $A^{\\oplus r}[-q]$ has cohomology the finite sum of the original map in degree $i-q$: if $i>m$ then $i-q>m$, and if $i=m$ then $m-q\\ge m$, giving an isomorphism or a surjection as required. Here $H^i(A[-q])=H^{i-q}(A)$ by the cochain shift convention. For $r=0$ use the zero complex. This proves the assertion directly from the approximation definition, rather than assuming all-degree pseudo-coherence.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+   }
+  },
+  {
+   "text": "For $c\\le0$ put $F_c=\\sigma_{\\ge c}F$ and $C_c=j_*\\operatorname{Tot}(E\\otimes F_c)$, and put $F_1=C_1=0$. The sequence $0\\to F_{c+1}\\to F_c\\to F^c[-c]\\to0$ is split in every degree, with the quotient concentrated in degree $c$. Tensor totalization has, degreewise, the corresponding direct-sum decomposition; after the additive functor $j_*$ it remains a degreewise split short exact sequence. Its quotient is isomorphic to $(j_*E)^{\\oplus r_c}[-c]$: use a basis of $F^c\\cong\\mathcal O^{\\oplus r_c}$ and in total degree $n$ multiply by $(-1)^{cn}$ to match the shifted differential $(-1)^c d_E$. All sums in a fixed degree are finite by the preceding bounds, so no assertion about infinite sums under $j_*$ is needed. The degreewise-split triangle lemma gives the distinguished triangle $C_{c+1}\\to C_c\\to A^{\\oplus r_c}[-c]\\to C_{c+1}[1]$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-closed-immersion-unbounded-projection-formula",
+    "lem-weil-pbc-degreewise-split-derived-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+   }
+  },
+  {
+   "text": "Fix any $c\\le0$. Descending finite induction from $C_1=0$ proves that $C_c$ is $m$-pseudo-coherent. The zero witness proves the base. At the step from $t+1$ to $t$, the first vertex $C_{t+1}$ has the induction property and the third vertex $A^{\\oplus r_t}[-t]$ has it by step 4, since $t\\le0$. Apply clause (2) of the ringed-site $m$-pseudo-coherent triangle lemma to the triangle of step 5 to obtain it for the middle vertex $C_t$. On the Zariski site its approximation notion is exactly our scheme notion: an open cover of the space restricts to covers of every open, and conversely one applies the site definition to the whole space. This is a finite induction to the chosen $c$, with no claim about closure under infinite filtrations.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+   }
+  },
+  {
+   "text": "Take $c=\\min(0,m-a)$, so $a+c\\le m$. Put $L=F/F_c$, whose terms vanish for $q\\ge c$. The quotient $D=C/C_c$ is $j_*\\operatorname{Tot}(E\\otimes L)$, because the inclusion splits in each total degree. A nonzero summand in degree $n$ requires $p\\le a$ and $q\\le c-1$, hence $n=p+q\\le a+c-1\\le m-1$. Thus $D^n=0$ for every $n\\ge m$, and in particular $H^n(D)=0$ there. The map from the zero strictly perfect complex to $D$ is an isomorphism on cohomology above $m$ and a surjection at $m$, so $D$ is $m$-pseudo-coherent. This is the required direction of the tail bound; no lower bound on either complex is asserted.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+   }
+  },
+  {
+   "text": "The degreewise split exact sequence $0\\to C_c\\to C\\to D\\to0$ gives a distinguished triangle by the same split-triangle lemma (the degreewise retraction and section are projection and inclusion of the retained and discarded column summands). Both end vertices are $m$-pseudo-coherent by steps 6 and 7. Clause (2) of the ringed-site triangle lemma therefore proves that $C$ is $m$-pseudo-coherent on $U$. Step 3 identifies $C$ with the local target. Repeating for the approximation cover chosen in step 2, the restriction comparison in step 1 and the open-cover definition give the stated conclusion on $W$.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-perfect-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-module-pushforward-open-restriction",
+  "lem-pc-open-restriction-total-tensor",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-closed-immersion-unbounded-projection-formula",
+  "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph; cutoff and finite induction made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If pushforward of a complex under a closed immersion is m pseudocoherent then tensoring with a nonpositive complex of finite free modules preserves this property",
+   "results": "OK: 8 hits; LightCondensed.instMonoidalLightCondSetLightCondModFree, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, LightCondensed.free_internallyProjective_iff_tensor_condition, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherence in degree m is preserved by tensor totalization with a bounded above nonpositive finite free complex and exact restriction of scalars",
+   "results": "OK: 8 hits; Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, lTensorHomEquivHomLTensor, HomologicalComplex₂.total.mapIso, Module.Flat.iff_rTensor_preserves_shortComplex_exact, ModuleCat.free_δ_freeMk, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"tensor\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher.*tensor|tensor.*pseudo.?coher",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures do not give this assertion about derived structure-module sheaves, fixed-degree pseudo-coherence and the indicated operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a nonpositive complex of finite free sheaves preserves m pseudo coherence of the closed direct image of an arbitrary complex",
+   "results": "OK: 8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_internallyProjective_iff_tensor_condition, CategoryTheory.Sheaf.tensorProd_isSheaf, LightCondensed.free_internallyProjective_iff_tensor_condition', CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures supply general monoidal, sheaf or closed-immersion infrastructure, not fixed-degree pseudo-coherence preserved by this tensor filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"tensor\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures supply general monoidal, sheaf or closed-immersion infrastructure, not fixed-degree pseudo-coherence preserved by this tensor filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion j and a complex Q with m pseudo coherent Rj pushforward, tensor Q with a bounded above nonpositive finite free complex preserves m pseudo coherence after pushforward",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, lTensorHomEquivHomLTensor, AlgebraicGeometry.IsClosedImmersion.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures supply general monoidal, sheaf or closed-immersion infrastructure, not fixed-degree pseudo-coherence preserved by this tensor filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher.*tensor|tensor.*pseudo.?coher",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures supply general monoidal, sheaf or closed-immersion infrastructure, not fixed-degree pseudo-coherence preserved by this tensor filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent complexes of modules on ringed spaces and tensor products with bounded above complexes of finite free modules",
+   "results": "OK: 8 hits; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, HomologicalComplex.HasGoodTensor₁₂, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures supply general monoidal, sheaf or closed-immersion infrastructure, not fixed-degree pseudo-coherence preserved by this tensor filtration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherent-pullback",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, first paragraph and converse refinement paragraph, invoking lemma-pull-relative-pseudo-coherent. Supporting input in Tag 09US: Tag 09US, lemma-pull-relative-pseudo-coherent, tensor-filtration paragraph, extracted as an absolute closed-pushforward lemma; replace the printed tail inequality by vanishing in degrees greater than or equal to the cutoff.",
+   "via": [
+    "lem-sfb-relative-pseudocoherent-pullback",
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-pushforward-nonpositive-free-tensor",
+  "worker": "stage1",
+  "summary": "Expanded the corrected Tag 09US tensor-filtration argument using only existing nodes: local upper bound, K-flat tensor model, explicit signed finite-column triangles, descending finite induction, and a quotient tail zero in degrees at least m. No statement change and no new nodes.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain, at the Tag 09US tensor-filtration paragraph. The ancestor command returns None; the inherited null from.node, exact place and via are retained. Current latest blueprint proof (3) was read.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "Generic sheaf/derived-category tool used in the local tensor-filtration proof of Tag 09US; this unit has no node supplying this general input, and its alteration/relative-pseudo-coherence route is unchanged."
+   },
+   {
+    "node": "lem-pc-kflat-open-restriction",
+    "why": "Generic sheaf/derived-category tool used in the local tensor-filtration proof of Tag 09US; this unit has no node supplying this general input, and its alteration/relative-pseudo-coherence route is unchanged."
+   },
+   {
+    "node": "lem-pc-module-pushforward-open-restriction",
+    "why": "Generic sheaf/derived-category tool used in the local tensor-filtration proof of Tag 09US; this unit has no node supplying this general input, and its alteration/relative-pseudo-coherence route is unchanged."
+   },
+   {
+    "node": "lem-pc-open-restriction-total-tensor",
+    "why": "Generic sheaf/derived-category tool used in the local tensor-filtration proof of Tag 09US; this unit has no node supplying this general input, and its alteration/relative-pseudo-coherence route is unchanged."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic sheaf/derived-category tool used in the local tensor-filtration proof of Tag 09US; this unit has no node supplying this general input, and its alteration/relative-pseudo-coherence route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-pushforward-stalks",
+    "why": "Generic sheaf/derived-category tool used in the local tensor-filtration proof of Tag 09US; this unit has no node supplying this general input, and its alteration/relative-pseudo-coherence route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact restriction descends to the unbounded derived category and preserves quasi-isomorphisms; general exact-functor tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-module-pushforward-open-restriction",
+  "lem-pc-open-restriction-total-tensor",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-e9a2281a8",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-e9a2281a8 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged. It is one commit with the item and the report, 0 new nodes, and the statement and stmt_deps are unchanged. The live item is still unsplit, so the delivery is not superseded. Source: I read Stacks Tag 09US lemma-pull-relative-pseudo-coherent in full. Its 'zero cohomology in degrees <= m' for q<<0 is reversed: E⊗F^q[-q] is concentrated in degrees <= a+q. The worker's Spec k counterexample holds, and the item's source field already records the correction. The statement matches the parent's use and weakens nothing; affineness is kept. Every step checks against its cited statements. Step 1: the open-restriction, exactness, K-flat restriction and Tot restriction nodes give locality. Step 2: the local upper bound a>=m follows from the strictly perfect approximation, termwise exactness of j_*, and faithfulness of j_* on objects from (j_*G)(T)=G(j^{-1}T). Step 3: the good truncation is a quasi-isomorphism; F is bounded above and flat, hence K-flat, so the tensor is Tot(E⊗F) with finitely many terms per degree. Step 4: the shift indices work (i-q>m, or m-q>=m). Step 5: the degreewise split column sequence has the correct (-1)^{cn} sign twist matching the (-1)^c d_E differential. Step 6: finite induction from F_1=0 using clause (2) of lem-sfb-ringed-site-m-pseudocoherent-triangle, the right clause and vertex. Step 7: with c=m-a the tail vanishes in degrees >=m. Step 8: a split triangle plus clause (2). Searched dag for duplicates (lem-trf-pseudocoherent-tensor-closure, lem-sfb-closed-pushforward-pseudocoherence and others): none. The 7 declared tool_uses are generic sheaf and derived-category facts and are accepted. No SGA is cited. review_split.py could not resolve any cited ids because the chapter directories are symlinks; I read each cited node directly. Advisory only: step 1 identifies Lj^* along an open immersion with restriction implicitly."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedPushforwardNonpositiveFreeTensor",
+  "declaration": "AlgebraicGeometry.isMPseudoCoherent_closedPushforward_tensor_nonpositive_free",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPushforwardNonpositiveFreeTensor.lean",
+  "statement": "theorem isMPseudoCoherent_closedPushforward_tensor_nonpositive_free (P W : Scheme.{u}) [IsAffine P] [IsAffine W] [HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings P.toRingedSpace))] [HasDerivedCategory.{wW} (SheafOfModules.{u} (moduleRings W.toRingedSpace))] [∀ U : W.Opens, HasDerivedCategory.{wW} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] (j : P ⟶ W) [IsClosedImmersion j] (m : ℤ) (Q : schemeDerivedCategory P) (F : CochainComplex (SheafOfModules.{u} (moduleRings P.toRingedSpace)) ℤ) (hF_zero : ∀ q : ℤ, 0 < q → IsZero (F.X q)) (hF_free : ∀ q : ℤ, q ≤ 0 → ∃ r : ℕ, Nonempty (F.X q ≅ SheafOfModules.free (R := moduleRings P.toRingedSpace) (ULift.{u} (Fin r)))) (hQ : Scheme.IsMPseudoCoherent W m ((schemeDerivedDirectImage j).obj Q)) : Scheme.IsMPseudoCoherent W m ((schemeDerivedDirectImage j).obj (Q ⊗ DerivedCategory.Q.obj F))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ee0da39a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Only change vs live: item lean record plus one new module (theorem, sorry); statement, stmt_deps and source unchanged. Clause-by-clause match: affine P,W; IsClosedImmersion j; arbitrary Q : schemeDerivedCategory P; F with IsZero above 0 and finite free (SheafOfModules.free on ULift (Fin r), r=0 allowed) at q<=0; hQ and conclusion use the same Scheme.IsMPseudoCoherent W m with the global K-flat derived tensor instance schemeDerivedTensorMonoidal and schemeDerivedDirectImage; separate wP/wW, no forced universe equality; no extra hypotheses. Stacks 09US tail inequality correction recorded and followed in docstring steps 5 and 7. Edge cases covered. lean.statement verbatim in file; docstrings cite source and blueprint and carry all 8 steps; imports exist; report has Worker report and Second reading by NJ. Proof dep lem-sfb-ringed-site-m-pseudocoherent-triangle has no Lean record yet, not needed to type the statement. No compile run (no file changed); worker reports clean scompile."
+ }
+}

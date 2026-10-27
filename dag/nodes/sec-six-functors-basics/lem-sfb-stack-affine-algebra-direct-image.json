@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-stack-affine-algebra-direct-image",
+ "kind": "statement",
+ "title": "Exact quasi-coherent algebra direct image for affine stack morphisms",
+ "statement": "Let $k$ be a field [def-weil-field] and let $q:\\mathcal U\\to\\mathcal X$ be a morphism of algebraic stacks over $k$ [def-sfb-algebraic-moduli-stack]. Suppose $q$ is affine, meaning that for every scheme $T\\to\\mathcal X$ the $2$-fibre product $\\mathcal U_T$ is a scheme and its projection to $T$ is affine [def-sfb-stable-pointed-moduli-groupoids, pqf-def-affine-morphism]. Quasi-coherent algebras, their surjections and global sections have the meaning of [def-sfb-stack-quasi-coherent-algebra]. Then there is a functor $q_{\\mathrm{QCoh},*}$ from quasi-coherent commutative algebras on $\\mathcal U$ to those on $\\mathcal X$, right adjoint to tensor pullback, characterized on every smooth scheme test $T\\to\\mathcal X$ by ordinary affine pushforward from $\\mathcal U_T$ to $T$. Smooth means [def-sbc-smooth-morphisms] on scheme charts. This functor takes surjections to surjections, and there are natural ring isomorphisms $$\\Gamma(\\mathcal X,q_{\\mathrm{QCoh},*}\\mathcal A)\\cong\\Gamma(\\mathcal U,\\mathcal A).$$ They commute with algebra homomorphisms, multiplication and powers. In particular a lift of a power in the left-hand global section rings corresponds to the same power lift in the right-hand rings. Moreover, if $R\\to S$ is any homomorphism of commutative $k$-algebras and $\\mathcal X\\to\\operatorname{Spec}R$ any morphism, the projection $\\mathcal X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}S\\to\\mathcal X$ is affine [def-weil-affine-spectrum]. No Noetherian, finite-type, or flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 0GQY (lemma-quasi-coherent-pushforward-affine), exactness of the quasi-coherent right adjoint; Tag 077A (proposition-direct-image-quasi-coherent) and Tag 0GQQ (lemma-direct-image-quasi-coherent-over-flat) give its adjunction and smooth-chart description. Algebra structures use Tag 0GQR (remark-direct-image-quasi-coherent-tensor); global sections use the pullback adjunction and the canonical identification of pulled-back structure sheaves. Stack affine base change: stacks-morphisms.tex Tag 0CHR (lemma-base-change-affine); scheme/algebra equivalence on affine charts: morphisms.tex Tag 01SA (lemma-affine-equivalence-algebras)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "pqf-def-affine-morphism",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "For a scheme test $x:T\\to\\mathcal X$, put $V_x=\\mathcal U\\times_{\\mathcal X}T$ and $f_x:V_x\\to T$. These are a scheme and an affine morphism by the hypothesis on $q$. Restrict $\\mathcal A$ along $V_x\\to\\mathcal U$ and use [lem-sfb-stack-quasi-coherent-scheme-restriction] to obtain an ordinary quasi-coherent algebra $A_x$ on $V_x$. The algebra operations come from the fully faithful, tensor-compatible comparison. For an arrow $x'\\to x$ over $h:T'\\to T$, the triples defining the $2$-fibre products identify $V_{x'}$ with $V_x\\times_TT'$, and the same restriction lemma identifies $A_{x'}$ with the pullback of $A_x$. All these identifications satisfy composition, since they send a triple and its isomorphism to the same triple.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06WI, 06WK, 06WH, scheme-test restriction; 2-fibre products as triples"
+   }
+  },
+  {
+   "text": "Set $M_x=(f_x)_*A_x$ as an ordinary module on $T$. By [lem-weil-pbc-affine-pushforward-base-change] it is quasi-coherent, and for every arrow $x'\\to x$ there is the canonical isomorphism $h^*M_x\\simeq M_{x'}$. Its clause (3) supplies composition compatibility; for an identity its displayed tensor formula is the identity. Apply [lem-sfb-cartesian-module-fppf-realization] to this system. It gives a quasi-coherent sheaf $B$ on $\\mathcal X$ with $B(x)=\\Gamma(T,M_x)=\\Gamma(V_x,A_x)$ and restrictions given by pullback of sections. Give $B(x)$ the ring operations of $\\Gamma(V_x,A_x)$ and its $\\Gamma(T,\\mathcal O_T)$-algebra structure via $f_x$. Restrictions preserve these operations, so this is a quasi-coherent commutative algebra. Algebra homomorphisms $\\mathcal A\\to\\mathcal A'$ induce the section maps, giving the functor $q_{\\mathrm{QCoh},*}$. On the slice over $x$, its values are exactly those associated with $M_x$, by the displayed base-change isomorphisms. Thus its ordinary restriction to $T$ is $(f_x)_*A_x$, for every scheme test and in particular every smooth test. This also specifies its algebra structure, since restrictions preserve products and the unit.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-sfb-cartesian-module-fppf-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06WK cartesian realization; coherent.tex 02KG (lemma-affine-base-change), including the canonical tensor formulas"
+   }
+  },
+  {
+   "text": "For a quasi-coherent algebra $D$ on $\\mathcal X$, tensor pullback along $q$ is precomposition: $(q^*D)(u)=D(q(u))$ by [lem-sfb-stack-quasi-coherent-scheme-restriction]. Given an algebra map $b:D\\to B$, define $c_u:D(q(u))\\to\\mathcal A(u)$ by $b_{q(u)}$ followed by restriction along the graph $T\\to V_{q(u)}$ of $u:T\\to\\mathcal U$. Conversely, from $c:q^*D\\to\\mathcal A$, define $b_x(d)$ as follows. For every $v:W\\to V_x$, restrict $d\\in D(x)$ along $f_xv:W\\to T$ and apply $c$ at the induced object $W\\to\\mathcal U$. These sections are compatible with every arrow over $V_x$, hence give a section of $A_x$ by the scheme-test comparison. The two recipes are inverse: in one direction evaluation at the graph returns $c_u(d)$; in the other, naturality of $b$ along $q(u)\\to x$ identifies its restriction to each $W\\to V_x$ with the original section $b_x(d)|_W$. They preserve addition, multiplication, the unit, and structural scalars because restriction and $c$, respectively $b$, do. The formulas also commute with maps in $D$ and $\\mathcal A$. They give the required natural algebra adjunction $q^*\\dashv q_{\\mathrm{QCoh},*}$.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06WH (pullback as precomposition), 06WI and 03DX (scheme-test comparison); explicit adjunct formulas"
+   }
+  },
+  {
+   "text": "Let $\\mathcal A\\twoheadrightarrow\\mathcal A'$ be a surjection of quasi-coherent algebras. For each $x:T\\to\\mathcal X$, scheme-test restriction gives a surjection $A_x\\twoheadrightarrow A'_x$ of ordinary quasi-coherent modules on $V_x$. Its kernel $K_x$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]. The quotient $A_x/K_x$ identifies with $A'_x$: locally a target section lifts, and any two lifts differ by $K_x$. Apply [lem-trf-affine-pushforward-quasi-coherent-quotient] to $(A_x,K_x)$ and the affine morphism $f_x$. It says that $(f_x)_*A_x\\to(f_x)_*A'_x$ is surjective. By the converse surjection criterion of [lem-sfb-stack-quasi-coherent-scheme-restriction], the map $B\\to B'$ is a sheaf surjection. In fact sections lift on affine tests $T$, since then $V_x$ is affine and the same quotient lemma gives surjectivity on $\\Gamma(V_x,-)$. This asserts no exactness of arbitrary global sections on $\\mathcal X$.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-trf-affine-pushforward-quasi-coherent-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06WI and descent.tex 06VE for surjections; schemes.tex 01IC and divisors.tex 080G affine quotient calculation"
+   }
+  },
+  {
+   "text": "A global section $s$ of $\\mathcal A$ restricts to each $V_x$ and hence gives a compatible family in $B(x)=\\Gamma(V_x,A_x)$. Conversely, from a compatible family $t_x\\in B(x)$, define its value at $u:T\\to\\mathcal U$ by restricting $t_{q(u)}$ along the graph $T\\to V_{q(u)}$. Compatibility with arrows makes this a global section of $\\mathcal A$. These maps are inverse: a restricted global section evaluates at the graph to its original value; for the other composite and each $v:W\\to V_x$, compatibility along $q(u)\\to x$, where $u:W\\to\\mathcal U$ is induced by $v$, says that graph evaluation is exactly $t_x|_W$. Sections are equal when their values at all objects are equal. By the definition of global sections as compatible families, this proves $\\Gamma(\\mathcal X,B)\\simeq\\Gamma(\\mathcal U,\\mathcal A)$. Every operation is restriction or evaluation, so the bijection is a ring isomorphism and is natural in algebra homomorphisms. In particular it sends $a^n$ to the $n$th power of the image of $a$ for every $n\\geq0$. An equation $a\\mapsto b^n$ therefore becomes exactly the same equation after applying the isomorphisms, proving the power-lift assertion.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Definition of global sections as compatible families; 06WI scheme-test comparison"
+   }
+  },
+  {
+   "text": "Finally let $R\\to S$ be as in the statement. The scheme map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine]. For any scheme $T\\to\\mathcal X$, the $2$-fibre product of $T$ with $\\mathcal X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}S$ over $\\mathcal X$ is $T\\times_{\\operatorname{Spec}R}\\operatorname{Spec}S$: on objects one forgets the redundant $\\mathcal X$ object using the specified isomorphism in the triple. It is a scheme by [def-pc-fibre-product], and its projection to $T$ is affine by clause (1) of [lem-weil-pbc-affine-morphism-permanence]. This is precisely the representable-affine condition imposed in the item. The construction and the preceding steps used neither flatness nor Noetherian or finite-type hypotheses.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-pc-fibre-product",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "stacks-morphisms.tex Tag 0CHR (lemma-base-change-affine), reduced to morphisms.tex Tags 01SH and 01SD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-sfb-cartesian-module-fppf-realization",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-trf-affine-pushforward-quasi-coherent-quotient",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Explicit scheme-test construction and adjunct/global-section formulas, using Tags 06WK, 06WI, 06WH, descent.tex 03DX/06VE and coherent.tex 02KG; reconstructs the algebra-valued consequence of stacks-cohomology.tex 077A, 0GQQ, 0GQR and 0GQY without claiming these are ordinary lisse-etale direct images."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a representable affine morphism of algebraic stacks pushforward preserves quasi coherent algebras and surjections and global sections equal global sections of pushforward",
+   "results": "OK: 8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.AffineSpace.functor_obj_map",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stack affine base change of an affine ring spectrum map has exact direct image on quasi coherent sheaves",
+   "results": "OK: 8 hits: AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.HasRingHomProperty.HasAffineProperty, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\"",
+   "results": "OK: 12 hits: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(pushforward|push.forward)|pushforward.*[Ee]xact|algebraic.stack",
+   "results": "OK: 6 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine morphism of algebraic stacks exact direct image quasi coherent algebras",
+   "results": "OK: 8 hits: AlgebraicGeometry.IsAffineHom.mk, AlgebraicGeometry.IsAffineHom, AlgebraicGeometry.isAffineHom_iff, AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.AffineTargetMorphismProperty.of, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.isAffineHom_of_isInducing, AlgebraicGeometry.targetAffineLocally_affineAnd_iff'",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|Fibred.*[Qq]uasi|[Cc]artesian.*[Qq]uasi|[Qq]uasi.*[Cc]artesian",
+   "results": "{\"t\": \"2026-10-23T12:07:23Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|Fibred.*[Qq]uasi|[Cc]artesian.*[Qq]uasi|[Qq]uasi.*[Cc]artesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"16b6bbd98402e776\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on a fibred category determined by modules on affine test schemes with tensor base change and surjections detected on each test",
+   "results": "{\"t\": \"2026-10-23T12:07:23Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent sheaves on a fibred category determined by modules on affine test schemes with tensor base change and surjections detected on each test\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.Presentation\"], \"digest\": \"803321e74fd4c996\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\"",
+   "results": "{\"t\": \"2026-10-23T12:07:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\"], \"digest\": \"84dd5f6ef412bd8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on a category fibred in groupoids are equivalent to cartesian systems of modules on affine scheme tests with tensor base change",
+   "results": "{\"t\": \"2026-10-23T12:07:24Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent modules on a category fibred in groupoids are equivalent to cartesian systems of modules on affine scheme tests with tensor base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"c7fb250a783e85a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|stack.*[Pp]ushforward|[Pp]ushforward.*stack",
+   "results": "{\"t\": \"2026-10-23T12:10:58Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|stack.*[Pp]ushforward|[Pp]ushforward.*stack\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable affine map of algebraic stacks has right adjoint direct image on quasi coherent commutative algebras preserves epimorphisms",
+   "results": "{\"t\": \"2026-10-23T12:11:04Z\", \"tool\": \"leanfinder\", \"query\": \"Representable affine map of algebraic stacks has right adjoint direct image on quasi coherent commutative algebras preserves epimorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"CategoryTheory.Functor.preservesEpimorphsisms_of_adjunction\", \"CategoryTheory.Functor.preservesEpimorphisms_of_adjunction\", \"LightCondMod.instPreservesEpimorphismsLightCondSetForget\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"LightCondMod.instReflectsEpimorphismsLightCondSetForget\"], \"digest\": \"884ec1489ea2fd3b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian presheaves of modules over the affine objects of a category fibered in groupoids uniquely extend to quasi coherent sheaves for the big fppf topology",
+   "results": "{\"t\": \"2026-10-23T12:11:05Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian presheaves of modules over the affine objects of a category fibered in groupoids uniquely extend to quasi coherent sheaves for the big fppf topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\"], \"digest\": \"82cea9fc5ca46e0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On the big fppf site of a scheme quasi coherent sheaves equal ordinary quasi coherent modules, and restriction to a scheme test preserves surjective morphisms",
+   "results": "{\"t\": \"2026-10-23T12:11:40Z\", \"tool\": \"leansearch\", \"query\": \"On the big fppf site of a scheme quasi coherent sheaves equal ordinary quasi coherent modules, and restriction to a scheme test preserves surjective morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.IsQuasicoherent.rec\"], \"digest\": \"4fa85ed33df53f91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a quasi coherent module on a category fibred in groupoids to a scheme test and recover an ordinary quasi coherent module, compatibly with pullback; surjections restrict to surjections",
+   "results": "{\"t\": \"2026-10-23T12:11:42Z\", \"tool\": \"leanfinder\", \"query\": \"Restrict a quasi coherent module on a category fibred in groupoids to a scheme test and recover an ordinary quasi coherent module, compatibly with pullback; surjections restrict to surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"SheafOfModules.QuasicoherentData.X\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.presentation\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"f99ebdecafd55e1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "IsQuasicoherent|quasicoherent|isQuasiCoherent",
+   "results": "{\"t\": \"2026-10-23T12:13:05Z\", \"tool\": \"grep\", \"query\": \"IsQuasicoherent|quasicoherent|isQuasiCoherent\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"92a665dd6563cb18\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.Modules.restrict\"",
+   "results": "{\"t\": \"2026-10-23T12:13:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme.Modules.restrict\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\"], \"digest\": \"9fc374035dbbc1a6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are generic local-presentation data, scheme-only module restriction/adjunction, or generic categorical epimorphism lemmas; no exact algebra direct image theorem for algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-moduli-etale-locality",
+  "date": "2026-10-23",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Affine pushforward is used to transfer arbitrary algebras on each affine etale base change back to the original stack in the affine criterion; it states no adequate-moduli conclusion.",
+   "via": [
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-affine-algebra-direct-image",
+  "worker": "stage1",
+  "summary": "Q136 constructs the affine algebra direct image on every scheme test using ordinary affine pushforward and its canonical arbitrary base-change comparison. Reuses the existing cartesian fppf realization, affine base change, kernel and affine quotient nodes. One new unsplit node supplies the converse scheme-test restriction comparison, including the distinction between right exactness and false big-site left exactness. Writes explicit algebra-adjunct and global-section inverses and proves the affine scalar-change clause. Statement and statement dependencies unchanged.",
+  "blueprint": "Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3). The item is a supporting prerequisite through the inherited adequate-moduli/alteration chain recorded in blueprint.from.place, not a new assertion replacing a unit clause. The current blueprint proof does not spell out this stack-affine prerequisite. Searches affine pushforward, direct image quasi coherent, flat comparison, cartesian quasi-coherent, scheme restriction, 06WK and 0H0E found no blueprint equivalent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic affine-scheme quasi-coherence and canonical arbitrary base-change coherence assemble the values on scheme tests; the unit has no replacement scheme theorem."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic quasi-coherence of kernels supplies the kernel needed by the existing affine quotient lemma."
+   },
+   {
+    "node": "lem-trf-affine-pushforward-quasi-coherent-quotient",
+    "why": "Generic affine-scheme quotient exactness, not any trace-formula result; it proves the surjection assertion on scheme tests."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme affine-base-change permanence proves representable affineness for the final scalar-change projection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-trf-affine-pushforward-quasi-coherent-quotient",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-3abbf821d",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-3abbf821d (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is a first split, not a re-split: the base item had no proof and there is no repair note. The item statement and stmt_deps are unchanged and contain no SGA citation. New node lem-sfb-stack-quasi-coherent-scheme-restriction: checked against Stacks 06WK (proof: slice = (Sch/V)_fppf plus 03DX), 06WI, 06WH and descent 06VE parts 1, 3, 4 and 7. It correctly avoids the left exactness that 06VE(6) warns is false. I checked both surjection clauses by hand: the forward one via right exactness and Q^a=0 implying Q=0, the converse via affine-local lifting on a Zariski cover. No duplicate exists; lem-sfb-cartesian-module-fppf-realization is the converse construction and is reused in step 2. The node does not restate any clause of the item. Steps: (1) V_x, A_x and cartesian identifications via the new node; (2) M_x=(f_x)_*A_x with base change and composition from pbc-affine-pushforward-base-change (1)/(3), fed into the cartesian realization to give B with B(x)=Γ(V_x,A_x), and B_x=(f_x)_*A_x by uniqueness; (3) adjunction by graph evaluation and induced objects, both composites checked via naturality; (4) surjection via the kernel lemma, the affine quotient lemma and the new node's converse; (5) global sections as compatible families, giving a ring isomorphism that preserves powers; (6) T×_X(X×_R S)=T×_R S, affine by permanence (1). Step uses equal proof_deps, and there is no cycle with the adequately-affine citers. Advisory: lem-sfb-stack-qcqs-algebra-direct-image partly generalizes the adjoint clause, but lacks the surjection, global-section and scalar-change clauses and would need an affine-implies-qcqs lemma; the direct construction is correct. Batch 5: lem-trf-affine-pushforward-quasi-coherent-quotient is a generic scheme exactness lemma, not part of the trace formula or Poincaré duality, so accepted. The def-sfb-stable-pointed-moduli-groupoids path to def-trf-projective-bundle-morphism and the def-sfb-stack-quasi-coherent-algebra path to def-trf-space-quasi-coherent-module both reach general definitions only, so accepted. I accept all four tool_uses as generic."
+ }
+}

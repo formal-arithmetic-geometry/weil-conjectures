@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-strict-law-complete-square-group",
+ "kind": "statement",
+ "title": "Completion of a strict law defined on a dense open square",
+ "statement": "Let $A$ be a Noetherian normal strictly henselian local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring, def-weil-pbc-henselian-terminology], and put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. An open $U\\subset Y$ in an $S$-scheme is $S$-dense if $U_s$ is dense in $Y_s$ for every $s\\in S$. An $S$-rational map is a morphism on an $S$-dense open, modulo agreement on an $S$-dense common open; an $S$-birational map is represented by an isomorphism between $S$-dense opens. Smoothness and finite type have the meanings of [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. A strict birational law on a smooth separated finite-type $S$-scheme $Y$ with nonempty fibres is an associative $S$-rational map $m:Y\\times_SY\\dashrightarrow Y$ for which there are opens $D,V,W\\subset Y\\times_SY$, each dense in every fibre of both projections to $Y$, such that $m$ is defined on $D$ and $(x,y)\\mapsto(x,m(x,y))$, $(x,y)\\mapsto(m(x,y),y)$ induce isomorphisms $D\\simeq V$ and $D\\simeq W$, respectively. Let $Z\\to S$ be smooth, separated and of finite type with nonempty fibres, let $n$ be a strict birational law on $Z$, and assume $Z(S)\\ne\\varnothing$. Suppose that $U\\subseteq Z$ is an $S$-dense open and $n$ has a representative on all of $U\\times_SU$. Then there are morphisms $\\mu:Z\\times_SZ\\to Z$, $\\iota:Z\\to Z$ and $e:S\\to Z$ extending $n$ and satisfying the associativity, left and right unit, and left and right inverse diagrams. They give a unique $S$-group scheme structure with this rational law. Group schemes mean these group-object diagrams, as in [def-sc-group-scheme] with base $S$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "5.3 Lemma 8, printed pp.127-128 (PDF pp.133-134), including the birational-translation functor of 5.2 Lemma 4; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-sfb-relative-birational-maps",
+  "def-sfb-strict-birational-law"
+ ],
+ "proof": [
+  {
+   "text": "Apply the graph-chart lemma to $(Z,n)$ and write $d(x,y)=x^{-1}y$ for its rational left division. Use the translation embedding $\\tau:Z(T)\\hookrightarrow B_Z(T)$ for every $S$-scheme $T$. The graph identities give $\\tau_{n(x,y)}=\\tau_x\\tau_y$ and $\\tau_{d(x,y)}=\\tau_x^{-1}\\tau_y$ on the respective maximal domains. All three graph projections are open immersions with images dense in both projection fibres; thus multiplication and division in either variable are birational on those fibres. These facts hold without any group structure on $Z$ yet.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-translation-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemmas 2-3; 5.2 Lemma 4"
+   }
+  },
+  {
+   "text": "In $Z^3$ with coordinates $(a,b,c)$, let $E$ be the open where $n(b,a)$ and $d(a,c)$ are defined and both lie in $U$. Fix any point $(b,c)$ of $Z^2$. The graph charts, after the residue-field extension at this point, make $a\\mapsto n(b,a)$ and $a\\mapsto d(a,c)$ birational maps on the fibre. Since $U$ is fibrewise dense, the inverse image of $U$ under each contains a dense open of that fibre. Their intersection is dense and nonempty. Hence $E\\to Z^2$, $(a,b,c)\\mapsto(b,c)$, is surjective. On $E$ the formula $h=n(n(b,a),d(a,c))$ is a morphism, because its two arguments lie in $U$ and $n$ is given on all of $U^2$. Where $n(b,c)$ is defined, the translation identities give $\\tau_h=\\tau_b\\tau_a(\\tau_a^{-1}\\tau_c)=\\tau_{n(b,c)}$, so injectivity identifies $h$ with the pullback of $n$. The regularity lemma applied to this open-product projection therefore extends $n$ to a morphism $\\mu:Z^2\\to Z$.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-translation-embedding",
+    "lem-sfb-relative-rational-flat-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemma 8, first paragraph, with the generic-variable formula written out"
+   }
+  },
+  {
+   "text": "Let $E'\\subset Z^3$ be the open where $d(b,a)$ and $d(a,c)$ are both defined. For fixed $(b,c)$ each condition is a dense open condition on $a$ by the two-variable birationality in the graph lemma; their intersection is nonempty. Thus $E'\\to Z^2$ is surjective. The map $h'=\\mu(d(b,a),d(a,c))$ is now a morphism on all of $E'$. On the common domain with $d(b,c)$, its translation is $(\\tau_b^{-1}\\tau_a)(\\tau_a^{-1}\\tau_c)=\\tau_b^{-1}\\tau_c=\\tau_{d(b,c)}$. Injectivity identifies the two representatives. Flat detection along $E'\\to Z^2$ gives an everywhere-defined morphism $\\delta:Z^2\\to Z$ extending $d$. The graph lemma says that its domain is the image of $q_{13}$, so this image is now all of $Z^2$; similarly the image of $q_{12}$ is all of $Z^2$. The translation identities of step 1 consequently hold for $\\mu$ and $\\delta$ on all $T$-valued pairs, for arbitrary $T$.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-translation-embedding",
+    "lem-sfb-relative-rational-flat-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemma 8, second paragraph: explicit argument for global left division"
+   }
+  },
+  {
+   "text": "Choose the assumed section $z_0:S\\to Z$. Define morphisms $e=\\delta(z_0,z_0):S\\to Z$ and $\\iota(x)=\\delta(x,e):Z\\to Z$. For every $T$, the identities already obtained yield $\\tau_{e_T}=\\tau_{z_{0,T}}^{-1}\\tau_{z_{0,T}}=1$ and $\\tau_{\\iota(x)}=\\tau_x^{-1}$. Applying injectivity of $\\tau$ to $\\tau_x\\tau_y\\tau_z$ proves associativity of $\\mu$; applying it to $1\\tau_x=\\tau_x1=\\tau_x$ proves the two unit identities, and to $\\tau_x\\tau_x^{-1}=\\tau_x^{-1}\\tau_x=1$ proves the two inverse identities. These are identities on all $T$-valued points, natural in $T$; taking universal points proves the group-object diagrams as identities of scheme morphisms. This constructs the required structure, with the base-$S$ diagrams meant in the statement.",
+   "uses": [
+    "lem-sfb-strict-law-translation-embedding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemma 8, concluding functor-of-points argument, printed pp.127-128"
+   }
+  },
+  {
+   "text": "If another group structure has the same rational law, its multiplication and $\\mu$ are two everywhere-defined representatives of that law and hence coincide by uniqueness in the regularity lemma. For one fixed multiplication any two unit sections satisfy $e'=\\mu(e',e)=e$, and any two two-sided inverses of $x$ satisfy $y=\\mu(y,\\mu(x,y'))=\\mu(\\mu(y,x),y')=y'$. Taking universal points gives equality of the unit and inverse morphisms. Thus the $S$-group scheme structure is unique.",
+   "uses": [
+    "lem-sfb-relative-rational-flat-regularity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.3 Lemma 8; elementary uniqueness of identity and inverse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-strict-law-graph-charts",
+  "lem-sfb-strict-law-translation-embedding",
+  "lem-sfb-relative-rational-flat-regularity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "5.3 Lemma 8, printed pp.127-128 (PDF pp.133-134)",
+  "note": "Primary scan read online; local PDF absent. Agent-extracted proof with the two generic-variable formulas and functorial group diagrams written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict birational group law on a smooth scheme with a section extends to a group scheme if multiplication is defined on the square of a fibrewise dense open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Jacobian F} → AddCommGroup W.Point\", \"doc\": \"For any field $ F $ and Weierstrass curve $ W $ over $ F $, the set of points on the Jacobian of $ W $ forms an additive commutative group under the defined addition operation. This operation takes tw\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Projective F} → AddCommGroup W.Point\", \"doc\": \"For any field $ F $ and projective Weierstrass curve $ W $ over $ F $, the set of points $ W(F) $ forms an additive commutative group under the curve's defined addition operation. The group has identi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{M S T : AlgebraicGeometry.Scheme} →\\n  [inst : M.Over S] →\\n    {f : T ⟶ S} →\\n      [CategoryTheory.GrpObj (M.asOver S)] → CategoryTheory.GrpObj ((CategoryTheory.Limits.pullback (M ↘ S) f).asOver T)\", \"doc\": \"Given a group object in the over category of schemes over a base scheme $ S $ and a morphism $ f : T \\to S $, the pullback of this group object along $ f $ forms a group object in the over category of \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Affine F} → [DecidableEq F] → AddCommGroup W.Point\", \"doc\": \"The set of points on an affine Weierstrass curve over a field $ F $ forms an additive commutative group under the Weierstrass group law. This structure includes the zero point as the additive identity\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: GrpObjAsOverPullback assumes a group object already exists; affine Hopf-algebra and Weierstrass point-group instances do not extend a partial scheme law. RationalMap constructors and abstract group completions do not supply the claim."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"Scheme\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \" {M S T : AlgebraicGeometry.Scheme} [M.Over S] {f : T ⟶ S} [CategoryTheory.GrpObj (M.asOver S)] : CategoryTheory.GrpObj ((CategoryTheory.Limits.pullback (M ↘ S) f).asOver T)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Group.Affine\", \"type\": \" {R : CommRingCat} {G : AlgebraicGeometry.Scheme} [G.Over (AlgebraicGeometry.Spec R)] [CategoryTheory.GrpObj (G.asOver (AlgebraicGeometry.Spec R))] [AlgebraicGeometry.IsAffine G] : HopfAlgebra ↑R ↑(G.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"The global sections of an affine group scheme over `Spec R` are a `R`-Hopf algebra.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: GrpObjAsOverPullback assumes a group object already exists; affine Hopf-algebra and Weierstrass point-group instances do not extend a partial scheme law. RationalMap constructors and abstract group completions do not supply the claim."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*group.*law|rational.*group.*law|birational.*multiplication",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: GrpObjAsOverPullback assumes a group object already exists; affine Hopf-algebra and Weierstrass point-group instances do not extend a partial scheme law. RationalMap constructors and abstract group completions do not supply the claim."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a partially defined scheme group multiplication and division to global group operations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"GroupWithZero.toDiv\", \"module\": \"Mathlib.Algebra.GroupWithZero.Defs\", \"type\": \"{G₀ : Type u} → [self : GroupWithZero G₀] → Div G₀\", \"doc\": \"The function equips a type with a division operation compatible with its group with zero structure, where division by zero is defined to return zero and follows the usual group division rules otherwis\"}\n  {\"name\": \"CommGroupWithZero.toDiv\", \"module\": \"Mathlib.Algebra.GroupWithZero.Defs\", \"type\": \"{G₀ : Type u_2} → [self : CommGroupWithZero G₀] → Div G₀\", \"doc\": \"The division operation inherent to a commutative group with zero, which provides the binary division function $ a / b $ for elements $ a, b $ in the group (with $ b \\neq 0 $).\"}\n  {\"name\": \"UniformSpace.Completion.mul\", \"module\": \"Mathlib.Topology.Algebra.UniformRing\", \"type\": \": Mul (Completion α)\", \"doc\": \"The completion of a uniform space $\\\\alpha$ is equipped with a canonical multiplication operation, defined by extending the multiplication on $\\\\alpha$ through the dense embedding $\\\\alpha \\\\to \\\\mathrm{Co\"}\n  {\"name\": \"AdicCompletion.instAddCommGroup\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → AddCommGroup (AdicCompletion I M)\", \"doc\": \"The $I$-adic completion of an $R$-module $M$ with respect to an ideal $I$ of a commutative ring $R$ is equipped with the structure of an additive commutative group. The group operations (addition, neg\"}\n  {\"name\": \"Group.toDivInvMonoid\", \"module\": \"Mathlib.Algebra.Group.Defs\", \"type\": \"{G : Type u} → [self : Group G] → DivInvMonoid G\", \"doc\": \"For any group $G$, this constructs the division inverse monoid structure on $G$ by defining division as $a / b = a \\\\cdot b^{-1}$, where $\\\\cdot$ is the group operation and $b^{-1}$ is the group inverse\"}\n  {\"name\": \"UniformSpace.Completion.instAddMonoid\", \"module\": \"Mathlib.Topology.Algebra.GroupCompletion\", \"type\": \": AddMonoid (Completion α)\", \"doc\": \"If $\\\\alpha$ is a uniform additive group with uniformly continuous addition and negation operations, then the completion of $\\\\alpha$ inherits an additive monoid structure, with addition and zero elemen\"}\n  {\"name\": \"instAddCompletion\", \"module\": \"Mathlib.Topology.Algebra.GroupCompletion\", \"type\": \"[Add α] : Add (Completion α)\", \"doc\": \"The completion of a uniform space $\\\\alpha$ is equipped with an addition operation induced by the addition on $\\\\alpha$. This instance defines how the addition structure extends from $\\\\alpha$ to its com\"}\n  {\"name\": \"UniformSpace.Completion.instSubNegMonoid\", \"module\": \"Mathlib.Topology.Algebra.GroupCompletion\", \"type\": \": SubNegMonoid (Completion α)\", \"doc\": \"If $\\\\alpha$ is a uniform additive group with uniformly continuous addition and negation operations, then the completion of $\\\\alpha$ inherits a submonoid structure closed under negation. This structure\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: GrpObjAsOverPullback assumes a group object already exists; affine Hopf-algebra and Weierstrass point-group instances do not extend a partial scheme law. RationalMap constructors and abstract group completions do not supply the claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associative rational law with birational left and right translations and a full dense open square has identity inverse and multiplication morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rat.monoid\", \"module\": \"Mathlib/Data/Rat/Defs\", \"type\": \"Monoid ℚ\", \"doc\": \"The rational numbers $\\\\mathbb{Q}$ form a monoid under multiplication, with $1$ as the identity element. This structure is inherited from the commutative monoid structure of $\\\\mathbb{Q}$ under multipli\"}\n  {\"name\": \"Rat.semigroup\", \"module\": \"Mathlib/Data/Rat/Defs\", \"type\": \"Semigroup ℚ\", \"doc\": \"The rational numbers $\\\\mathbb{Q}$ form a semigroup under multiplication, where the binary operation $\\\\cdot : \\\\mathbb{Q} \\\\times \\\\mathbb{Q} \\\\to \\\\mathbb{Q}$ is associative. This structure is inherited fr\"}\n  {\"name\": \"Rat.commGroupWithZero\", \"module\": \"Mathlib/Algebra/Ring/Rat\", \"type\": \"CommGroupWithZero ℚ\", \"doc\": \"The rational numbers $\\\\mathbb{Q}$ form a commutative group with zero under multiplication. This structure includes: (1) a distinguished zero element $0$ satisfying $a \\\\cdot 0 = 0$ and $0 \\\\cdot a = 0$ \"}\n  {\"name\": \"Rat.commSemigroup\", \"module\": \"Mathlib/Data/Rat/Defs\", \"type\": \"CommSemigroup ℚ\", \"doc\": \"The rational numbers $\\\\mathbb{Q}$ form a commutative semigroup under multiplication, where the binary operation is associative ($a \\\\cdot (b \\\\cdot c) = (a \\\\cdot b) \\\\cdot c$) and commutative ($a \\\\cdot b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.compHom\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} → X.RationalMap Y → (Y ⟶ Z) → X.RationalMap Z\", \"doc\": \"Given a rational map $ f $ from a scheme $ X $ to a scheme $ Y $ and a morphism $ g $ from $ Y $ to $ Z $, this function constructs their composition as a rational map from $ X $ to $ Z $. The composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] (f : X.PartialMap Y)\\n  [AlgebraicGeometry.Scheme.PartialMap.IsOver S f], AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap\", \"doc\": \"If a partial map $ f $ between schemes $ X $ and $ Y $ over a base scheme $ S $ is compatible with the structure maps to $ S $, then the corresponding rational map obtained by equivalence of partial m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), ∃ g, g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $, there exists a partial map $ g \\\\colon X \\\\to Y $ such that the equivalence class of $ g $ under the rational map i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: GrpObjAsOverPullback assumes a group object already exists; affine Hopf-algebra and Weierstrass point-group instances do not extend a partial scheme law. RationalMap constructors and abstract group completions do not supply the claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated scheme equipped with a strict partial group law and a dense open square of regular multiplication is a group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{M S T : AlgebraicGeometry.Scheme} →\\n  [inst : M.Over S] →\\n    {f : T ⟶ S} →\\n      [CategoryTheory.GrpObj (M.asOver S)] → CategoryTheory.GrpObj ((CategoryTheory.Limits.pullback (M ↘ S) f).asOver T)\", \"doc\": \"Given a group object in the over category of schemes over a base scheme $ S $ and a morphism $ f : T \\to S $, the pullback of this group object along $ f $ forms a group object in the over category of \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsSmooth f]\\n  [AlgebraicGeometry.IsSmooth g], AlgebraicGeometry.IsSmooth (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness instances and pullback of an existing group object do not construct group operations from a partial law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-birational-law-realization",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; 5.3 Lemma 8, extending product and division from a complete dense open square",
+   "via": [
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-law-complete-square-group",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Three statement-only inputs isolate strict graph charts, faithful birational translations, and flat detection of rational-map regularity. The item gives explicit generic-variable formulas extending multiplication and division, then constructs the identity and inverse and verifies all group diagrams on arbitrary test schemes.",
+  "blueprint": "Latest six-functors-basics chapter and sk-thm-sf-ctf-stability unit read; no imported blueprint node states this below-unit BLR prerequisite. blueprint_refs.py ancestor returns None, so the inherited null ancestor and via chain are retained. The proof realizes BLR 5.3 Lemma 8 named in from.place, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-60a3a1e4e",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-60a3a1e4e (reviewer sub-agent of L); spot-checked: I read the item and the three new nodes in full, and the neighbouring nodes realization, base-change, finite-translate-envelope, rational-group-hom-extension, relative-group-weil-extension and smooth-trait-local-rational-spreading. The BLR PDF is not in the local literature (the chain's standing WANTED), so I checked the cited places (5.3 Lemma 8, 5.3 Lemmas 2-3, 5.2 Lemma 4, 2.5 Prop 5) by proving or testing each statement rather than rereading the scan. The item statement is unchanged and is consistent with its use in step 2 of lem-sfb-strict-birational-law-realization. relative-rational-flat-regularity is true: S-dense opens are schematically dense in flat finitely presented schemes (EGA IV 11.10.10), Y is separated, and fppf descent along W' to p(W') gives the extension; the open-product projection is flat and surjective. graph-charts holds on Y=G and Y=G minus F: Gamma is closed, all q_ij are open immersions, im q12 = dom m, and birationality in each variable follows from D, V, W and their swaps being fibre-dense. In translation-embedding, tau_a is T-birational, and 'associative' as a rational map is equivalent to 'equal wherever defined' by schematic density. Item step 2: E is open, E -> Z^2 is surjective by birationality in a plus density of U_kappa, h = n(n(b,a), d(a,c)) is a morphism, tau_h = tau_{n(b,c)} gives agreement by injectivity, and the regularity node gives mu. Step 3 does the same for division, so q13 and q12 are onto Z^2. Steps 4-5 are elementary group algebra on T-points plus the regularity node's uniqueness clause. Uses equal proof_deps, there is no cycle, all nodes are in the same unit with no tool_uses, and the blueprint from/via/same_as fields are consistent with the null ancestor. I found no duplicates: no existing node states the flat-domain equality, the open graph projections or the birational-translation embedding. Note for stage 2: graph-charts cites the lemma translation-embedding in stmt_deps for tau, so tau will need inline definition data or a def node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLawCompleteSquareGroup",
+  "declaration": "AlgebraicGeometry.RelativeBirational.StrictLaw.existsUnique_group_of_complete_square",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLawCompleteSquareGroup.lean",
+  "statement": "theorem RelativeBirational.StrictLaw.existsUnique_group_of_complete_square (A : Type u) [CommRing A] [IsNoetherianRing A] [IsStrictlyHenselianLocalRing A] (hA : ∀ (p : Ideal A) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (Z : Over (Spec (CommRingCat.of A))) [Smooth Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] (hfibres : ∀ s : Spec (CommRingCat.of A), Nonempty (Z.hom.fiber s)) (n : RelativeBirational.StrictLaw Z) (hsection : Nonempty (Over.mk (𝟙 (Spec (CommRingCat.of A))) ⟶ Z)) (U : Z.left.Opens) (hU : RelativeBirational.FibrewiseDense Z.hom U) (square : RelativeBirational.PartialMap (RelativeBirational.square Z) Z) (hsquare : square.domain = (pullback.fst Z.hom Z.hom ⁻¹ᵁ U) ⊓ (pullback.snd Z.hom Z.hom ⁻¹ᵁ U)) (hn : n.mul.Agrees square) : ∃! G : GrpObj Z, ∃ (H : (RelativeBirational.square Z).left.Opens), RelativeBirational.FibrewiseDense (RelativeBirational.square Z).hom H ∧ ∃ hH : H ≤ n.mul.domain, (RelativeBirational.square Z).left.homOfLE hH ≫ n.mul.hom = H.ι ≫ (@MonObj.mul _ _ _ Z G.toMonObj).left",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84dffdc76",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause match with node (BLR 5.3 Lemma 8): Noetherian/IsStrictlyHenselianLocalRing/inline normal hA; Z: Over Spec A with Smooth, IsSeparated, LOFT+QC, nonempty fibres; n : landed Q131 StrictLaw; section as Over.mk (𝟙 S) ⟶ Z; U FibrewiseDense; representative on U×U as PartialMap with domain exactly fst⁻¹U ⊓ snd⁻¹U and Agrees n.mul (PartialMap fields automatic, no extra hypothesis). Conclusion ∃! GrpObj Z (pullback cartesian structure, (Z⊗Z).left = pullback by rfl, so it matches square Z) with μ agreeing with n.mul on a fibrewise-dense open; uniqueness of the full structure. Duplicate def node from the previous return removed; added stmt_deps to the landed owners are accepted by merge; lean.statement verbatim; one sorry theorem, no defs, source and blueprint docstrings and proof plan present; report sections present; no compile since no file changed. Advisory only: unneeded public import of BaseChangeConventions."
+ }
+}

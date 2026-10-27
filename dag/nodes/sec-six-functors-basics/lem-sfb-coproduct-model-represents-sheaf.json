@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-coproduct-model-represents-sheaf",
+ "kind": "statement",
+ "title": "A descended coproduct model represents the original pro-etale sheaf",
+ "statement": "Let $X$ be a scheme, let $p:V\\to X$ be weakly étale, flat, surjective and quasi-compact, and assume $\\{p\\}$ is an fpqc covering [def-pc-scheme, def-weil-pbc-proetale-site, def-weil-pbc-fpqc-covering, def-weil-pbc-scheme-conventions]. Let $S$ be any set in the universes of [def-weil-size-convention], put $T=\\coprod_{s\\in S}V$ [lem-weil-pbc-scheme-coproduct-family], and let $F$ be a sheaf of sets on $X_{\\mathrm{proét}}$ [def-weil-pbc-sites-and-cohomology]. Suppose natural bijections $a_W:F(W)\\xrightarrow{\\sim}\\operatorname{Hom}_V(W,T)$ are given for all weakly étale $W\\to V$. Let $\\delta:p_1^*T\\xrightarrow{\\sim}p_2^*T$ be a descent datum over $R=V\\times_XV$ [def-pc-fibre-product, def-pd-descent-datum] inducing, through these bijections, the canonical comparison between the two restrictions of $F|_V$. Let $q:Y\\to X$ be a scheme with an isomorphism $\\eta:Y\\times_XV\\xrightarrow{\\sim}T$ over $V$ inducing $\\delta$.\n\nThen $q$ is separated and étale [def-weil-proper-morphism, def-weil-etale-morphism], and is surjective if $S$ is nonempty. There are unique natural bijections $b_U:F(U)\\xrightarrow{\\sim}\\operatorname{Hom}_X(U,Y)$ for all $U\\to X$ in $X_{\\mathrm{proét}}$ whose restriction to $U_V=U\\times_XV$, followed by $\\eta$, agrees with $a_{U_V}$. Equivalently the local map $a_{U_V}(s|_{U_V})$ descends to $b_U(s)$, and the inverse bijection descends the local section associated to a pulled-back map $U\\to Y$. The étale scheme $Y$ is itself an object of the pro-étale site, and $u=b_Y^{-1}(\\mathrm{id}_Y)\\in F(Y)$ has $b_U(F(f)(u))=f$ for every $X$-morphism $f:U\\to Y$ from a site object. On $T$, this universal section corresponds to $\\mathrm{id}_T$ under $a_T$. Empty $S$ and empty $X$ are allowed (surjectivity is asserted only under the stated nonemptiness assumption).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "(2)–(3), property descent, classifying-map gluing and universal section; old proof steps 7–9; Stacks Tags 02KU (lemma-descending-property-separated), 02VN (lemma-descending-property-etale), 023Q (lemma-fpqc-universal-effective-epimorphisms)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-size-convention",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-weil-proper-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The codiagonal t is etale by Mathlib IsZariskiLocalAtSource.sigmaDesc applied to identity maps, including the empty family. For separatedness, form blocks V -> T ×_V T with projections j_i,j_k. Mathlib Scheme.Pullback.range_map identifies their ranges with the intersections of the two inverse images of component ranges. Their union for i != k is open. The component cover and disjointness identify that union with the complement of the diagonal range. Thus the diagonal range is closed; the diagonal is a preimmersion, so IsClosedImmersion.of_isPreimmersion proves t separated.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source",
+    "def-weil-etale-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2)-(3); Stacks 02KU, 02VN and 023Q; Mathlib sheaf amalgamation API"
+   }
+  },
+  {
+   "text": "Transfer separatedness and etaleness across eta to the pullback of q. Apply isSeparated_of_flat_surjective_baseChange and etale_of_fpqc_cover for the singleton family p. A chosen index of nonempty S supplies a morphism V -> Y above p, hence q is surjective. Mathlib etale_le_weaklyEtale supplies the site witnesses.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-separated",
+    "lem-galois-fpqc-descend-etale",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2)-(3); Stacks 02KU, 02VN and 023Q; Mathlib sheaf amalgamation API"
+   }
+  },
+  {
+   "text": "The object p covers the terminal object of the small pro-etale site: for each U, the projection U ×_X V -> U is weakly etale, flat, surjective and quasi-compact, and its singleton is a covering presieve. Use Mathlib singleton_mem_propQCPrecoverage and generate_mem_toGrothendieck. Weakly etale cancellation makes every lift W -> V of a site object an object over V. The presheaf Hom_X(-,Y) is a sheaf by subcanonicity of the pro-etale topology and continuity of ProEt.forget.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2)-(3); Stacks 02KU, 02VN and 023Q; Mathlib sheaf amalgamation API"
+   }
+  },
+  {
+   "text": "For a site object W with a lift f to V, identify F(W) with Hom_V(W,T) by a, composing with the identity-underlying comparison of site objects; then compose with eta inverse and the map/pullback adjunction to obtain a bijection to Hom_X(W,Y). The equations hdelta and heta imply independence from f; naturality ha gives compatibility with every restriction, even with a different lift at its source.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2)-(3); Stacks 02KU, 02VN and 023Q; Mathlib sheaf amalgamation API"
+   }
+  },
+  {
+   "text": "The proved private helper localEquivalences glues these bijections on the covering sieve of arrows whose sources map to V. For a section of either sheaf, use each local bijection (or its inverse) after restriction to define a matching family. Compatibility follows from the preceding restriction identity. Amalgamate with the sheaf axiom. Both round trips and naturality follow by separatedness on this covering sieve. Hence obtain natural equivalences b agreeing with the specified local formula at every lift.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2)-(3); Stacks 02KU, 02VN and 023Q; Mathlib sheaf amalgamation API"
+   }
+  },
+  {
+   "text": "On C=U ×_X V, apply the local formula at its second projection and naturality at its first projection. The pullback universal property and eta invertibility give exactly the required normalization. For u=b_Y inverse(id), naturality gives b_U(F(f)u)=f. Apply the local formula to T with its structure lift and the morphism eta inverse followed by the first projection; the pullback universal property gives a_T(F(r)u)=id_T. Finally, any other normalized family has the same maps after the flat, surjective, quasi-compact projection C -> U; this is an effective epi, hence an epi, so the families agree. All these steps allow empty bases and empty S; choosing an index was used only for conditional surjectivity.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2)-(3); Stacks 02KU, 02VN and 023Q; Mathlib sheaf amalgamation API"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-local-on-source",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-galois-fpqc-descend-etale",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "(2)-(3), implemented by R4 using compatible sheaf bijections on the covering sieve; Stacks 02KU, 02VN and 023Q."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf locally represented by a disjoint union of copies of the base is represented by its descended scheme which is separated etale and surjective",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf. LocalRepresentability.isRepresentable and yonedaIsoSheaf concern a sheaf on the big Zariski site with relatively representable open charts, not the small pro-etale site with a weakly etale fpqc chart. The stack equivalence requires a supplied stack and is not this conclusion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"representable\"",
+   "results": "2 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy. LocalRepresentability.isRepresentable and yonedaIsoSheaf concern a sheaf on the big Zariski site with relatively representable open charts, not the small pro-etale site with a weakly etale fpqc chart. The stack equivalence requires a supplied stack and is not this conclusion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "representab.*descen|descen.*representab|[Ee]tale.*[Cc]oproduct|[Ss]eparated.*[Cc]oproduct",
+   "results": "0 hits: . LocalRepresentability.isRepresentable and yonedaIsoSheaf concern a sheaf on the big Zariski site with relatively representable open charts, not the small pro-etale site with a weakly etale fpqc chart. The stack equivalence requires a supplied stack and is not this conclusion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fpqc descent of a local representing scheme identifies its functor of points with the original pro etale sheaf",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Sheaf.isSheaf_of_isRepresentable, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf. LocalRepresentability.isRepresentable and yonedaIsoSheaf concern a sheaf on the big Zariski site with relatively representable open charts, not the small pro-etale site with a weakly etale fpqc chart. The stack equivalence requires a supplied stack and is not this conclusion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "representab.*descen|descen.*representab|[Ee]tale.*[Cc]oproduct",
+   "results": "0 hits: . No matching declarations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf locally isomorphic to a representable functor descends along an fpqc cover to a natural isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.IsCoverDense.Types.sheafIso, CategoryTheory.Functor.IsCoverDense.sheafIso, CategoryTheory.Functor.IsCoverDense.presheafIso, CategoryTheory.Functor.IsCoverDense.Types.presheafIso, CategoryTheory.Functor.RepresentableBy.ofIso, CategoryTheory.Functor.IsCoverDense.presheafIso_hom_app, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.Functor.IsCoverDense.Types.sheafIso_inv_val. Inspected LocalRepresentability in Mathlib/AlgebraicGeometry/Sites/Representability.lean:55-58, 181-184, 210-211: big Zariski sheaf with relatively representable open charts; not an fpqc chart of a small pro-etale sheaf. Dense-subsite isomorphisms require a cover-dense locally full functor, not the stated descent datum; the other hits concern different objects. No exact or one-line specialization establishes all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"representable\"",
+   "results": "2 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy. Inspected LocalRepresentability in Mathlib/AlgebraicGeometry/Sites/Representability.lean:55-58, 181-184, 210-211: big Zariski sheaf with relatively representable open charts; not an fpqc chart of a small pro-etale sheaf. Dense-subsite isomorphisms require a cover-dense locally full functor, not the stated descent datum; the other hits concern different objects. No exact or one-line specialization establishes all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf locally represented on an fpqc weakly etale cover by a scheme is represented by its descended scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.subcanonical_zariskiTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite, AlgebraicGeometry.Scheme.etalePretopology. Inspected LocalRepresentability in Mathlib/AlgebraicGeometry/Sites/Representability.lean:55-58, 181-184, 210-211: big Zariski sheaf with relatively representable open charts; not an fpqc chart of a small pro-etale sheaf. Dense-subsite isomorphisms require a cover-dense locally full functor, not the stated descent datum; the other hits concern different objects. No exact or one-line specialization establishes all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural bijections between sections of a pro etale sheaf and morphisms to a descended etale scheme by matching equalizers on a covering",
+   "results": "8 hits: StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv_apply_coe, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq. Inspected LocalRepresentability in Mathlib/AlgebraicGeometry/Sites/Representability.lean:55-58, 181-184, 210-211: big Zariski sheaf with relatively representable open charts; not an fpqc chart of a small pro-etale sheaf. Dense-subsite isomorphisms require a cover-dense locally full functor, not the stated descent datum; the other hits concern different objects. No exact or one-line specialization establishes all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-stratified-lattice-scheme",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-stratified-lattice-scheme",
+   "place": "(2)–(3), property descent, classifying-map gluing and universal section; old proof steps 7–9; Stacks Tags 02KU (lemma-descending-property-separated), 02VN (lemma-descending-property-etale), 023Q (lemma-fpqc-universal-effective-epimorphisms)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coproduct-model-represents-sheaf",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery 98c540a378a against the current live unsplit item: retained the unchanged statement, dependencies, eight-step descent route and logged Mathlib searches; reread all 17 proof dependencies and verified every citation quote. Made the diagonal-block inverses and structure-sheaf surjection explicit, and checked both overlap projections are weakly etale over V. No new nodes.",
+  "blueprint": "Realizes the property-descent and representation sentences of det-lem-stratified-lattice-scheme.proof.md (2), and the universal-section consequence of (3); the effectiveness of the given scheme Y is a hypothesis of this item.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic fpqc descent of etaleness is the tool explicitly required by the unit at Tag 02VN; no statement in this unit supplies the general descent theorem."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Only clause 1, etale implies weakly etale, is used to put Y on the pro-etale site; this is a generic comparison of morphism properties."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic stability makes the Cech objects valid objects of the pro-etale site; it does not replace any lattice argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-descend-etale",
+  "lem-weil-pbc-weakly-etale-composition-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-cb78ba921",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-cb78ba921 (reviewer sub-agent of L); spot-checked: This is the second delivery. The first, 98c540a37, received a stage-1 PASS; its landing was then refused with 'completed in this project's DAG but not in the live DAG', a promotion refusal and not a mathematical one. clones/live and clones/side-live both still hold the item unsplit with an empty proof, so no parallel group has superseded it. Diff against the 98c5 snapshot: the statement, stmt_deps, the 17 proof_deps, source, created record and every step's uses are identical, and steps 1, 3 and 5-8 are byte-identical. Only step 2, step 4 and split_report.summary changed, and there are no new nodes. I read the full statement and all 8 steps against the full text of all 17 cited statements. Step 1: the coproduct-family node allows any index set, including the empty one; id_V is étale because its diagonal is an isomorphism; etale-local-on-source (02GJ) gives t étale. Step 2 (changed): the blocks B_{s,r}≅V are open by open-immersion base change, with inverse (j_s,j_r). Δ_t is the identity on the diagonal blocks and empty over the off-diagonal ones, so its image is clopen, and the new extension-by-zero lift of structure-sheaf sections is valid on that clopen decomposition. This gives a closed immersion, so t is separated. Step 3: η identifies q_V with t. The separated-descent node needs p flat, surjective and quasi-compact, and the 02VN étale-descent node needs the fpqc covering {p}; all are hypotheses. Surjectivity for nonempty S follows from q∘pr_Y∘η⁻¹∘j_{s0}=p. etale-comparison clause 1 puts Y on the site. Step 4 (changed): C→U is the base change of p, C→V is the base change of U→X, and d_i is the base change of C→U, so composition and base change make D→V weakly étale; the covering {C→U} comes by fpqc covering base change. Steps 5-7: m d1=m d2 via δ and η; representable descent gives existence and uniqueness; both round trips, naturality and uniqueness of b hold; the graph pullback gives a_W(v)=η(b_W(v),w). Step 8: (r,t)=η⁻¹, so a_T(F(r)u)=id_T. Edge cases checked: S empty, X empty, S singleton, S infinite. The source, blueprint main-20261015 sk-lem-stratified-lattice-scheme.proof.md (2)-(3), says 'separated and étale is fpqc local on the base (02KU, 02VN)' and that T_k is a disjoint union of isomorphisms; this matches the item. There is no SGA citation. Accepted tool_uses: lem-galois-fpqc-descend-etale (02VN is named in the unit), det-pe-morphisms-etale-comparison clause 1, and the Mathlib leaf for weakly étale composition and base change. No changes. Maintainer note: this re-delivery exists only because of the promotion refusal. If landing refuses it again for the same reason, promote the completed item rather than asking for another re-split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoproductModelRepresentsSheaf",
+  "declaration": "AlgebraicGeometry.coproductModel_represents_sheaf",
+  "declarations": [
+   "AlgebraicGeometry.coproductModelProjection",
+   "AlgebraicGeometry.coproductModel_represents_sheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoproductModelRepresentsSheaf.lean",
+  "statement": "theorem coproductModel_represents_sheaf {X V Y : Scheme.{u}} (p : V ⟶ X) [WeaklyEtale p] [Flat p] [Surjective p] [QuasiCompact p] (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage X) (S : Type v) [Small.{u} S] (F : Sheaf (Scheme.ProEt.topology X) (Type w)) (a : ∀ W : V.ProEt, F.obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale p)).obj W)) ≃ (Over.mk W.hom ⟶ Over.mk (coproductModelProjection V S))) (ha : ∀ (W W' : V.ProEt) (g : W' ⟶ W) (s : F.obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale p)).obj W))), a W' (F.obj.map ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale p)).map g).op s) = (Over.homMk g.left (MorphismProperty.Over.w g)) ≫ a W s) (δ : Over.DescentDatum p (Over.mk (coproductModelProjection V S))) (hδ : ∀ (W : Scheme.{u}) (f₁ f₂ : W ⟶ V) (hf₁ : WeaklyEtale f₁) (hf₂ : WeaklyEtale f₂) (h : f₁ ≫ p = f₂ ≫ p) (s : F.obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale p)).obj (@Scheme.ProEt.mk _ _ f₁ hf₁)))), δ.transport f₁ f₂ h (a (@Scheme.ProEt.mk _ _ f₁ hf₁) s) = a (@Scheme.ProEt.mk _ _ f₂ hf₂) (F.obj.map (MorphismProperty.Over.homMk (𝟙 W) (by change 𝟙 W ≫ (f₁ ≫ p) = f₂ ≫ p exact (Category.id_comp _).trans h)).op s)) (q : Y ⟶ X) (η : (Over.pullback p).obj (Over.mk q) ≅ Over.mk (coproductModelProjection V S)) (hη : ∀ (W : Scheme.{u}) (f₁ f₂ : W ⟶ V) (h : f₁ ≫ p = f₂ ≫ p) (c : Over.mk f₁ ⟶ Over.mk (coproductModelProjection V S)), (δ.transport f₁ f₂ h c).left ≫ η.inv.left ≫ pullback.fst q p = c.left ≫ η.inv.left ≫ pullback.fst q p) : IsSeparated q ∧ Etale q ∧ (Nonempty S → Surjective q) ∧ ∃ (hY : WeaklyEtale q) (hT : WeaklyEtale (coproductModelProjection V S)), ∃! b : ∀ U : X.ProEt, F.obj.obj (op U) ≃ ((Scheme.ProEt.forget X).obj U ⟶ Over.mk q), (∀ (U U' : X.ProEt) (g : U' ⟶ U) (s : F.obj.obj (op U)), b U' (F.obj.map g.op s) = (Scheme.ProEt.forget X).map g ≫ b U s) ∧ (∀ (U : X.ProEt) (s : F.obj.obj (op U)), (a ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ p).obj U) (F.obj.map (MorphismProperty.Over.homMk (pullback.fst U.hom p) (pullback.condition)).op s)).left = pullback.lift (pullback.fst U.hom p ≫ (b U s).left) (pullback.snd U.hom p) (by change (pullback.fst U.hom p ≫ (b U s).left) ≫ q = _ exact (Category.assoc _ _ _).trans ((congrArg (fun f : U.left ⟶ X ↦ pullback.fst U.hom p ≫ f) (Over.w (b U s))).trans pullback.condition)) ≫ η.hom.left) ∧ (∀ (U : X.ProEt) (f : U ⟶ @Scheme.ProEt.mk _ _ q hY), b U (F.obj.map f.op ((b (@Scheme.ProEt.mk _ _ q hY)).symm (𝟙 (Over.mk q)))) = (Scheme.ProEt.forget X).map f) ∧ a (@Scheme.ProEt.mk _ _ (coproductModelProjection V S) hT) (F.obj.map (MorphismProperty.Over.homMk (η.inv.left ≫ pullback.fst q p) (by change (η.inv.left ≫ pullback.fst q p) ≫ q = coproductModelProjection V S ≫ p rw [Category.assoc, pullback.condition, ← Category.assoc] exact congrArg (fun f ↦ f ≫ p) (Over.w η.inv))).op ((b (@Scheme.ProEt.mk _ _ q hY)).symm (𝟙 (Over.mk q)))) = 𝟙 (Over.mk (coproductModelProjection V S))",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the recorded Over.DescentDatum in its Yoneda-equivalent transport form. The codiagonal is a transparent abbreviation of Sigma.desc of identities; all equivalences are supplied or asserted, not chosen definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f30ebdc0",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read node, all 11 stmt_dep records, source blueprint (2)-(3), the delivered module, report, and the recorded declarations (Over.DescentDatum/IsEffective/overTransport, Mathlib ProEt/MorphismProperty.Over map/pullback/homMk, fpqcPrecoverage). Hypotheses: p WeaklyEtale/Flat/Surjective/QuasiCompact + singleton fpqc covering; S : Type v Small.{u} (empty/infinite allowed); T = Mathlib coproduct with codiagonal abbrev of Sigma.desc; F a Mathlib Sheaf on ProEt.topology X; a an Equiv to Hom_V(W,T) with naturality; hδ is exactly the overTransport canonical-datum formula (equivalent to the R-level condition by weak-étale permanence); η : pullback ≅ T over V, and hη is the IsEffective invariance clause. Conclusion: IsSeparated ∧ Etale ∧ (Nonempty S → Surjective) ∧ ∃ site witnesses, ∃! natural b normalized on U_V, plus both universal-section formulas. All match. Universes clean; lean.statement verbatim (script check); proof sorry; docstrings carry source and blueprint tag; proof-dep plain imports exist; node unchanged except lean; no parallel delivery. Advisory: universal-section clauses inside ∃! (equivalent, since any natural normalized b satisfies them); [Flat p] redundant but node-stated; second reading by the worker itself under dispatcher policy (advisory). No compile, since no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261023T131748-L-2148556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

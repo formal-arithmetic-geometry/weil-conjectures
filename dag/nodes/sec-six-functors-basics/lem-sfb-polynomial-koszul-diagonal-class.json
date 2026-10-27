@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-polynomial-koszul-diagonal-class",
+ "kind": "statement",
+ "title": "Koszul-normalized algebraic diagonal generator and scalar-extension compatibility",
+ "statement": "Let $R$ be a commutative Noetherian ring, let $R\\to B$ be flat of finite presentation [def-weil-pbc-noetherian-ring], [def-weil-pbc-flat-ring-map], [def-weil-pbc-finitely-presented-algebra], and fix a surjection $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow B$ [def-weil-pbc-mv-polynomial-ring]. Use ordinary module derived categories [def-weil-abstract-derived-category] and derived coinduction $C^T_D=R\\operatorname{Hom}_T(D,-)$ with its precomposition action [def-trf-derived-coinduction]. Put $L=\\Omega^n_{P/R}[n]$ [def-weil-pbc-kahler-differentials], [def-weil-pbc-exterior-algebra], $C=C_B^P(L)$, $A=B_1\\otimes_R B_2$, and $C_1=C\\otimes_{B,p_1}^{\\mathbf L}A$, where $p_1(b)=b\\otimes1$. Let $\\delta:A\\to B$ be multiplication. There is a specified isomorphism $\\kappa_P:C_B^A(C_1)\\xrightarrow{\\sim}B[0]$ in $D(B)$, defined as follows. Set $T=P\\otimes_R B_2$, let $q:T\\to A$ be the quotient on the first factor, and set $e=\\delta q:T\\to B_2$, $x_i\\mapsto\\bar x_i$. Flat coinduction base change identifies $C_1$ with $C_A^T(\\Omega^n_{T/B_2}[n])$. Compose coinduction for $T\\xrightarrow q A\\xrightarrow\\delta B$, using its evaluation counits, and then use the ordered graph Koszul resolution of $e$, with equations $x_i-\\bar x_i$, to obtain\n$$\\kappa_P:C_B^A(C_1)\\simeq C_B^T(\\Omega^n_{T/B_2}[n])\\simeq B.$$\nThe last map sends the dual top graph wedge tensored with $dx_1\\wedge\\cdots\\wedge dx_n$ to $1$, with the cohomological tensor signs. Let $\\xi_P:B\\to C_1$ in $D(A)$ be the coinduction adjunct of $\\kappa_P^{-1}:B\\to C_B^A(C_1)$. Multiplication by $\\xi_P$ is an isomorphism $B\\xrightarrow{\\sim}R\\operatorname{Hom}_A(B,C_1)$ [def-pur-derived-internal-hom].\n\nFor every ring map $R\\to R'$ with $R'$ Noetherian, put $P'=P\\otimes_RR'$, $B'=B\\otimes_RR'$, $A'=B'\\otimes_{R'}B'$. The evaluation-counit coinduction base-change comparison $C\\otimes_B^{\\mathbf L}B'\\simeq C_{B'}^{P'}(\\Omega^n_{P'/R'}[n])$ carries the derived pullback of $\\xi_P$ along $A\\to A'$ to $\\xi_{P'}$. These equalities respect identity and successive base changes; no flatness of $R\\to R'$ is required.\n\nThe construction also applies to $P$ localized at finitely many elements whose images in $B$ are units, using the localized graph Koszul resolution. It commutes with simultaneous localization $P\\to P_h$, $B\\to B_{\\bar h}$, and with base localization. In a polynomial refinement $Q=P[t]\\twoheadrightarrow B$, $t\\mapsto\\bar a$ for a lift $a\\in P$, the coinduction-transitivity comparison $C_B^Q(\\Omega^{n+1}_{Q/R}[n+1])\\to C$ obtained by evaluating the additional relation $t-a$ against $d(t-a)$ carries $\\xi_Q$ to $\\xi_P$. Its normalization is $\\operatorname{dual}(t-a)\\otimes d(t-a)\\mapsto1$, with the new differential last. It is independent of the lift $a$ in the derived category and compatible with scalar extension and ordered iterated refinements. These are assertions about the specified graph-evaluation maps, not about arbitrary choices of generators of a rank-one module. No proper morphism, globally chosen dualizing pair, or comparison with a proper-duality adjoint is an input.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Agent compatibility lemma: explicit graph-Koszul and evaluation-counit construction underlying Tag 0E2E (lemma-relative-dualizing-noetherian), Tags 0A70/0A71 (coinduction), and Tags 0BZI/0BZJ (top-differential normalization and polynomial refinement). Scalar-extension compatibility is an additional assertion proved by this construction, not a verbatim claim of these tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "def-trf-derived-coinduction",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "def-pur-derived-internal-hom",
+  "def-sfb-polynomial-koszul-diagonal-data",
+  "def-sfb-polynomial-koszul-diagonal-system"
+ ],
+ "proof": [
+  {
+   "text": "Finite presentation implies finite type; hence $B$ is Noetherian by the finite-type algebra lemma. Apply polynomial-quotient perfectness to $R\\to B$, so $B[0]$ admits a bounded finite-projective $P$-resolution $F$. The ordered differentials identify $\\Omega^n_{P/R}$ with the free line on $dx_1\\wedge\\cdots\\wedge dx_n$. Apply perfect coinduction exchange to $P\\to B$ and $P\\to T=P\\otimes_R B_2$. Indeed $P$ is $R$-free, and $B$ is $R$-flat, so $B\\otimes_P^{\\mathbf L}T=B\\otimes_R^{\\mathbf L}B_2=A$. The comparison is therefore an isomorphism $\\beta:C_1\\simeq C_A^T(\\Omega^n_{T/B_2}[n])$, characterized by extension of the evaluation counit. This also fixes the coprojection: the original $B$ is $B_1$, and the coefficients in $T$ are $B_2$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent explicit graph construction refining Tag 0E2E (lemma-relative-dualizing-noetherian)"
+   }
+  },
+  {
+   "text": "Compose $C_B^A(\\beta)$ with the coinduction transitivity isomorphism for $T\\to A\\to B$. The latter is the unique right-adjoint comparison whose counit is the composite of the two evaluation counits. For $e:T=B_2[x_1,\\ldots,x_n]\\to B_2$, the ordered graph Koszul complex on $f_i=x_i-\\bar x_i$ is a finite-free resolution of $B$. Apply $\\tau_f$ with its coefficient line identified by $e_i\\mapsto dx_i$. This gives precisely the specified $\\kappa_P:C_B^A(C_1)\\simeq B[0]$, including its $B$-action and its top-wedge normalization. No resolution of the possibly nonperfect diagonal module over $A$ was used.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-cat-right-adjoint-composition",
+    "lem-trf-polynomial-graph-coinduction",
+    "lem-sfb-koszul-evaluation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent explicit graph construction refining Tag 0E2E (lemma-relative-dualizing-noetherian)"
+   }
+  },
+  {
+   "text": "Define $\\xi_P$ as the adjunct of $\\kappa_P^{-1}$. The scalar morphism determined by multiplication with this class is $\\kappa_P^{-1}$ itself, after restriction along $\\delta$. In a coinduction model a $B$-linear adjunct $u$ corresponds to $b\\mapsto u(b)(1)$, with inverse $h\\mapsto(b'\\mapsto h(b'b))$. Hence the image of $b$ under the multiplication morphism is $b\\kappa_P^{-1}(1)=\\kappa_P^{-1}(b)$. This proves that it is an isomorphism, since $\\kappa_P$ is one, and identifies exactly the asserted class rather than an unspecified generator.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-trf-coinduction-total-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent explicit graph construction refining Tag 0E2E (lemma-relative-dualizing-noetherian)"
+   }
+  },
+  {
+   "text": "For $R\\to R'$ choose the same $F$. Since $P$ is $R$-flat and $B$ is $R$-flat, $F\\otimes_P^{\\mathbf L}P'=B\\otimes_R^{\\mathbf L}R'=B'[0]$. The perfect exchange lemma thus applies to $P\\to B$ and $P\\to P'$ without flatness of $R'$. It gives the stated counit-mate map $c:C\\otimes_B^{\\mathbf L}B'\\simeq C'$. Differential base change identifies its coefficient line with the ordered volume over $P'$. The same argument over $T$ gives $A\\otimes_T^{\\mathbf L}T'=A'$ and $B\\otimes_T^{\\mathbf L}T'=B'$: $A=B_1\\otimes_RB_2$ and $B$ are flat over $B_2$. The graph augmentation base changes to the graph augmentation over $B'_2$. Finally $B\\otimes_A^{\\mathbf L}A'=B'$ since $A'=A\\otimes_R^{\\mathbf L}R'$ and $B$ is $R$-flat. These verify every Tor-independence needed in pulling back the class.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent explicit graph construction refining Tag 0E2E (lemma-relative-dualizing-noetherian)"
+   }
+  },
+  {
+   "text": "The exchange maps in step 4 are mates of scalar-extended evaluation counits. Paste these counits for $T\\to A\\to B$: taking an adjunct in two stages evaluates $h$ first at $1$ and then at $1$, just as the one-stage adjunct does. Thus the exchange square for coinduction transitivity commutes. The remaining graph trace square commutes by scalar naturality of $\\tau_f$. Take adjuncts of the resulting equality for $\\kappa_P^{-1}$: it says $(c\\otimes1)\\xi_P'=\\xi_{P'}$, where $\\xi_P'$ denotes extension along $A\\to A'$. This proves compatibility of the specified classes even though no perfectness of $B$ over $A$ is assumed. Identity and successive comparisons agree because their exchange mates are the same pasted counit and their trace maps send the same ordered top wedge to $1$.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-cat-right-adjoint-composition",
+    "lem-trf-coinduction-total-hom-model",
+    "lem-sfb-koszul-evaluation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent explicit graph construction refining Tag 0E2E (lemma-relative-dualizing-noetherian)"
+   }
+  },
+  {
+   "text": "For localization of $P$ at $h$ mapping to a unit of $B$, localization is flat and $B\\otimes_PP_h=B$. The localized finite-projective resolution still resolves $B$, by exactness of localization, so perfect exchange identifies the coinduction objects. Localize the graph complex at $h(x)$; its augmentation still resolves $B$ because $h(\\bar x)$ is a unit. The trace comparison is exactly the localized $\\tau_f$. For simultaneous $B\\to B_{\\bar h}$, localize both diagonal factors, so $A$ becomes $A_{h_1h_2}$ and $T$ becomes the corresponding localization at $h(x)$ and $h(\\bar x)$ in the coefficient factor. All these maps are flat. Apply the same argument to those localizations, and to any finite list by composition. Differential localization identifies the coefficient lines; their ordered top evaluations are unchanged. Base localization is already covered by steps 4--5. Thus both the localized construction and every asserted localization compatibility use the specified maps.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-sfb-koszul-evaluation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent explicit graph construction refining Tag 0E2E (lemma-relative-dualizing-noetherian)"
+   }
+  },
+  {
+   "text": "For $Q=P[t]\\to B$, $t\\mapsto\\bar a$, use coinduction transitivity through $Q\\to P$, $t\\mapsto a$. The one-relation Koszul evaluation against $d(t-a)$ gives an isomorphism $u_a:C_Q\\simeq C_P$; this is the polynomial-refinement comparison with its orientation fixed by $\\tau_{t-a}$. In the graph ring $T[t]$, write $f_i=x_i-\\bar x_i$ and $z=t-\\bar a$. Then $t-a(x)=z-(a(x)-a(\\bar x))$. Polynomial subtraction, one variable at a time, writes $a(x)-a(\\bar x)=\\sum_i b_i(x)f_i$. Thus the graph tuples $(f,z)$ and $(f,t-a(x))$ differ by a triangular matrix with diagonal $1$. Moreover $dx_1\\wedge\\cdots\\wedge dx_n\\wedge d(t-a)=dx_1\\wedge\\cdots\\wedge dx_n\\wedge dt$, by the differential basis formula. Apply Koszul evaluation pasting to $S=T[t]$ with first tuple $(t-a(x))$, whose quotient is $T$, and second tuple $f$: the composite of the graph-ring form of $u_a$ with $\\tau_f$ is $\\tau_{(t-a(x),f)}$ under $t^{\\rm Ch}_{1,n}$ on $V_{t-a}[1]\\otimes V_f[n]$. The comparison $u_a$ writes its coefficient with the new differential last, as $V_f[n]\\otimes V_{t-a}[1]$. By the symmetry identity $\\sigma^{\\rm Ch}[n+1]\\,t^{\\rm Ch}_{n,1}=(-1)^n t^{\\rm Ch}_{1,n}\\,\\sigma^{\\rm Ch}$ for the shifted lines, the block interchange matches $t^{\\rm Ch}_{n,1}$ followed by the top exterior map of the cyclic permutation $(t-a,f)\\mapsto(f,t-a)$, which is $(-1)^n$ on ordered generators. The matrix clause of the pasting lemma for that permutation, and then for the triangular change, identifies the trace with $\\tau_{(f,z)}$ on $dx_1\\wedge\\cdots\\wedge dx_n\\wedge dt$, the normalization of $\\kappa_Q$; the extra equation and differential stay last. Pasting the evaluation counits and taking adjuncts as in step 5 proves $(u_a\\otimes1)\\xi_Q=\\xi_P$.",
+   "uses": [
+    "lem-trf-coinduction-polynomial-refinement",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-cat-right-adjoint-composition",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-sfb-koszul-evaluation-pasting",
+    "lem-pur-total-tensor-signed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent explicit graph construction refining Tag 0E2E (lemma-relative-dualizing-noetherian)"
+   }
+  },
+  {
+   "text": "The ordered-volume trivialization identifies $C_P$ and $C_Q$ with their polynomial shriek models. Polynomial relative perfectness gives pseudo-coherence, finite $R$-Tor amplitude, and the scalar isomorphism $B\\simeq R\\operatorname{Hom}_B(C_P,C_P)$. If $a'$ is another lift, step 7 proves that both $u_a$ and $u_{a'}$ carry $\\xi_Q$ to $\\xi_P$. Their ratio is therefore multiplication by some $b\\in B$ on $C_P$. Acting on $\\xi_P$ gives $b\\xi_P=\\xi_P$; under $\\kappa_P$, this is $b=1$. Hence $u_a=u_{a'}$ in $D(B)$. The same reasoning shows uniqueness of any class-preserving isomorphism between two such models. Scalar extensions and localizations preserve the maps by steps 5--7 and the naturality of $\\tau$. Ordered iterated refinements preserve the class at each step, and their composites agree by that uniqueness; the trace-pasting lemma fixes their tensor signs. For $n=0$ all graph complexes and volume lines are the unit in degree zero. For $B=0$ every comparison is the unique map of zero objects. No domain, smoothness, lci or properness hypothesis was introduced.",
+   "uses": [
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-sfb-koszul-evaluation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent explicit graph construction refining Tag 0E2E (lemma-relative-dualizing-noetherian)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cat-right-adjoint-composition",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-sfb-koszul-evaluation-pasting",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-trf-coinduction-polynomial-refinement",
+  "lem-trf-coinduction-total-hom-model",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-polynomial-graph-coinduction",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Explicit evaluation-counit and ordered graph-Koszul refinement of Tags 0E2E, 0A70, 0A71, 0BZI and 0BZJ; source states existence/up-to-isomorphism, while this proof fixes and tracks the generator."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical diagonal class on polynomial relative dualizing complex defined by ordered graph Koszul evaluation compatible with nonflat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (P : Type u_2) →\\n          (A : Type u_3) →\\n            [inst_2 : CommRing P] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : Algebra P S] →\\n                  [inst_5 : Algebra P A] →\\n  \", \"doc\": \"Let $R, P, S, A$ be commutative rings forming a tower of algebras $R \\\\to P \\\\to S \\\\to A$. This defines an $A$-linear map from $A \\\\otimes_P \\\\ker(P \\\\to S)$ to $A \\\\otimes_P \\\\Omega_{P/R}$, where $\\\\ker(P \\\\t\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux_C\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  (Q : Algebra.Generators S T ι) (r : S),\\n  (Algebra.Generators.H1Cotangent.\", \"doc\": \"For any element $ r $ in the base ring $ R $, the auxiliary linear map $ \\\\delta_{\\\\text{Aux}} $ applied to the constant polynomial $ C(r) $ yields the tensor product of $ 1 $ and the Kähler differentia\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ constructed by summing over finite supports, where each term is the tensor product of elements from $T$ and Kähler diff\"}\n  {\"name\": \"AlgebraicGeometry.diagonal_SpecMap\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  CategoryTheory.Limits.pullback.diagonal (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S))) =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.Tensor\", \"doc\": \"The diagonal morphism in the pullback of the morphism $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ induced by the $R$-algebra structure on $S$ is equal to the composition of the morphism $\\\\oper\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent connecting maps, ordinary dual base change and scheme diagonals do not construct a derived-coinduction diagonal generator or its Koszul-normalized compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative duality polynomial derived coinduction top differential form diagonal class natural scalar extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ constructed by summing over finite supports, where each term is the tensor product of elements from $T$ and Kähler diff\"}\n  {\"name\": \"Algebra.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  (S : Type u₂) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (T : Type u₃) →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] → [IsScalarTower R S T] → Algebra.H1C\", \"doc\": \"The linear map $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux_C\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  (Q : Algebra.Generators S T ι) (r : S),\\n  (Algebra.Generators.H1Cotangent.\", \"doc\": \"For any element $ r $ in the base ring $ R $, the auxiliary linear map $ \\\\delta_{\\\\text{Aux}} $ applied to the constant polynomial $ C(r) $ yields the tensor product of $ 1 $ and the Kähler differentia\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux_monomial\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  (Q : Algebra.Generators S T ι) (n : ι →₀ ℕ) (r : S),\\n  (Algebra.Generators\", \"doc\": \"For any monomial in the polynomial ring generated by $ Q $ with exponent vector $ n $ and coefficient $ r $, the auxiliary linear map $ \\\\delta_{\\\\text{Aux}} $ evaluates to the product of the generators\"}\n  {\"name\": \"KaehlerDifferential.polynomialEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Polynomial\", \"type\": \"(R : Type u) → [inst : CommRing R] → Ω[Polynomial R⁄R] ≃ₗ[Polynomial R] Polynomial R\", \"doc\": \"For any commutative ring $ R $, the module of Kähler differentials $ \\\\Omega_{R[X]/R} $ is isomorphic to the polynomial ring $ R[X] $ as an $ R[X] $-module. This isomorphism maps the differential $ dX \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent connecting maps, ordinary dual base change and scheme diagonals do not construct a derived-coinduction diagonal generator or its Koszul-normalized compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"DerivedCategory\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent connecting maps, ordinary dual base change and scheme diagonals do not construct a derived-coinduction diagonal generator or its Koszul-normalized compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalClass|dualizing.*[Kk]oszul|[Kk]oszul.*dualizing|coinduction.*[Dd]iagonal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent connecting maps, ordinary dual base change and scheme diagonals do not construct a derived-coinduction diagonal generator or its Koszul-normalized compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical diagonal fundamental class relative dualizing polynomial derived Hom base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": IsBaseChange A (ibc.toDual)\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"Module.Dual.baseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A (A ⊗[R] V)\", \"doc\": \"The linear map from the dual module $\\\\text{Hom}_R(V, R)$ to $\\\\text{Hom}_A(A \\\\otimes_R V, A)$ induced by base change from $R$ to an $R$-algebra $A$, constructed by composing the base change homomorphis\"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(f : Dual R V) : ibc.toDual f = (f.baseChange A).congr ibc.equiv\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n  {\"name\": \"IsBaseChange.toDualBaseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": A ⊗[R] Dual R V ≃ₗ[A] Dual A W\", \"doc\": \"The linear equivalence between the tensor product of an $ R $-algebra $ A $ with the dual module $ \\text{Dual}_R V $ and the dual module $ \\text{Dual}_A W $, establishing that base change commutes with \"}\n  {\"name\": \"IsBaseChange.toDual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A W\", \"doc\": \"The R-linear map from the dual module of V over R to the dual module of W over A, induced by base change via the algebra structure of A over R. This map sends an R-linear functional on V to an A-linea\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"Module.Dual.baseChange_baseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(f : Dual R V) : (f.baseChange A).baseChange B = (congr (cancelBaseChange R A B B V)).symm (f.baseChange B)\", \"doc\": \"For a dual module $ V^* $ over a commutative semiring $ R $, applying successive base changes from $ R $ to $ A $ and then from $ A $ to $ B $ is canonically isomorphic to a direct base change from $ \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"[IsStableUnderBaseChange P] [P.RespectsIso] : P.diagonal.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $P$ in a category with pullbacks is stable under base change and respects isomorphisms, then the diagonal morphism property derived from $P$ is also stable under base change. Sp\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent connecting maps, ordinary dual base change and scheme diagonals do not construct a derived-coinduction diagonal generator or its Koszul-normalized compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Repair of polynomial-model steps 5--8: graph-normalized diagonal generator at Noetherian stages, compatible with nonflat changes of stage, localization and Koszul refinement, before intrinsic-pair rigidity.",
+   "via": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-koszul-diagonal-class",
+  "worker": "stage1",
+  "summary": "Constructed the normalized diagonal class by perfect coinduction exchange, transitivity and graph Koszul evaluation; checked arbitrary Tor-independent scalar changes, both-factor localization, triangular refinement, and lift independence via scalar endomorphism rigidity. One general signed Koszul evaluation-pasting sublemma, not a relative dualizing-class restatement, remains statement-only.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3), retained algebraic-duality prerequisite chain in blueprint.from: explicit graph normalization in polynomial duality. The latest blueprint has no separate statement of this prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-algebraic-shriek-relative-perfect",
+    "why": "Generic algebraic/adjunction tool: Relative perfection of algebraic upper shriek for flat Noetherian algebras. Used only for its displayed statement in the graph construction; this unit has no replacement for that algebraic operation."
+   },
+   {
+    "node": "lem-trf-coinduction-polynomial-refinement",
+    "why": "Generic algebraic/adjunction tool: Derived coinduction cancels added evaluation variables. Used only for its displayed statement in the graph construction; this unit has no replacement for that algebraic operation."
+   },
+   {
+    "node": "lem-trf-coinduction-total-hom-model",
+    "why": "Generic algebraic/adjunction tool: Coinduced total Hom complexes and K-injective targets. Used only for its displayed statement in the graph construction; this unit has no replacement for that algebraic operation."
+   },
+   {
+    "node": "lem-trf-derived-coinduction-adjunction",
+    "why": "Generic algebraic/adjunction tool: Derived coinduction is right adjoint to restriction of scalars. Used only for its displayed statement in the graph construction; this unit has no replacement for that algebraic operation."
+   },
+   {
+    "node": "lem-trf-flat-polynomial-quotient-perfect",
+    "why": "Generic algebraic/adjunction tool: Perfectness of a flat finite-type polynomial quotient. Used only for its displayed statement in the graph construction; this unit has no replacement for that algebraic operation."
+   },
+   {
+    "node": "lem-trf-polynomial-graph-coinduction",
+    "why": "Generic algebraic/adjunction tool: Polynomial graph coinduction and its oriented Koszul dual. Used only for its displayed statement in the graph construction; this unit has no replacement for that algebraic operation."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Generic chain-level sign tool: step 7 takes only its displayed identity between the signed symmetry and the shift comparisons of total tensors, to move the refinement block last; no node of this unit states the signed shift/symmetry coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-trf-coinduction-polynomial-refinement",
+  "lem-trf-coinduction-total-hom-model",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-polynomial-graph-coinduction",
+  "lem-pur-total-tensor-signed-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-35b556cd0",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-35b556cd0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-koszul-evaluation-pasting and every cited statement in full, plus Stacks dualizing 0E2E with the 0BZI/0BZJ, 0A70/0A71, 0624/0625/0628 and 0BQZ labels. This is an ordinary first split: live is still unsplit, there is no repair note, and the statement is unchanged. Steps 1-2 follow the 0E2E route (flat base change along p1, then delta^! p2^! = A through the graph Koszul resolution). Step 3 is elementary through T(f)(x)=f(x)(1). In step 4 I checked every Tor-independence: F⊗P' resolves B'; A⊗^L_T T'=A' and B⊗^L_T T'=B' because A and T are B2-flat; B⊗^L_A A'=B'. No flatness of R' is used. Step 5 uses gamma for A->B only as a map, which the exchange node defines without perfectness. Step 6 localizes both diagonal factors. In step 8, B ≅ RHom(C_P,C_P) makes the ratio a scalar b, and injectivity of multiplication by xi forces b=1. I tested the new node: with r=1 the complex is S->S, so H^0=S/f; tuples of zeros are excluded; concatenation K(f)⊗K(g) resolves D; the (-1)^{rs} sign is exactly t^Ch_{r,s}. It is not a clause of the item and not a duplicate of the trf chart, flat-epimorphism or lci-determinant nodes. Repairs: (1) B3: the new node used the exchange comparison, coinduction transitivity and its sign conventions without citations; I added lem-sfb-perfect-coinduction-tor-independent-exchange, lem-trf-derived-coinduction-adjunction, lem-cat-right-adjoint-composition and lem-pur-total-tensor-signed-coherence, and completed the created field. (2) E5: step 7 skipped the block interchange. The pasting lemma puts the t-a quotient first, but kappa_Q needs it last. I wrote the bookkeeping through the identity sigma t_{n,1}=(-1)^n t_{1,n} sigma and the matrix clause for the cyclic permutation, and added that use to proof_deps and tool_uses. Batch 5: def-trf-derived-coinduction and the six lem-trf nodes (coinduction adjunction, total-Hom model, graph coinduction, polynomial refinement, flat quotient perfect, algebraic shriek relative perfect) are generic algebra. I walked their closures: no thm/sk/nt trace-formula or Poincare node, and no cycle. All accepted, together with the declared tool_uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PolynomialKoszulDiagonalClass",
+  "declaration": "AlgebraicGeometry.polynomial_koszul_diagonal_class",
+  "declarations": [
+   "AlgebraicGeometry.polynomial_koszul_diagonal_class"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PolynomialKoszulDiagonalClass.lean",
+  "statement": "theorem polynomial_koszul_diagonal_class : ∃ K : PolynomialKoszulDiagonalAssignment.{u}, IsPolynomialKoszulDiagonalSystem K",
+  "branch": "sheaf-dag",
+  "by": "Q151",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-213b6562e",
+  "group": "Q151",
+  "result": "fix",
+  "note": "F1 (H3, sign): IsKoszulDiagonalRefinement.IsContraction pins the contraction by Mathlib's ShortExact.singleδ. Its mapping-cone triangle has mor₃ = −fst (inl_v_triangle_mor₃_f), so it is the negative roof, while IsKoszulDiagonalGraphTrace uses the positive Koszul cocycle (top wedge ↦ volume; project koszulComplex d(e)=+f matches the cone differential +φ). The refinement clause is then false: with n=0, R=B=P=ℤ, Q=ℤ[t], t↦0, the model map sends ξ_Q to −ξ_P; a chain-level lift through K(x,t) gives the same −1 for every n. FIX: fixes/PolynomialKoszulDiagonalData.lean uses (-hs.singleδ)⟦n⟧' with a convention docstring; fixes/def-sfb-polynomial-koszul-diagonal-data.json rewrites only the statement sentence on the contraction (Koszul evaluation dual(t-a)⊗d(t-a)↦1, minus the cone connecting morphism). No recorded lean.statement changes. Other checks pass: β, τ and κ are uniquely pinned by their counit and cocycle equations, so the ∃-assignment is not hollow; ξ is the adjunct of κ⁻¹; no extra hypotheses (Noetherian R, flat finitely presented B, no flatness of R→R'); scalar, localization, identity and composition changes, lift independence and ordered iterates are rendered; edge cases n=0, B=0, h=1, h=0, R=0 covered; statement verbatim; source and blueprint docstrings present; only the item theorem is sorry; no duplicate notion found. Advisory: multiplication by ξ uses the helper's closed internal Hom rather than the recorded derived internal Hom; IsIso does not depend on that choice. The fixed Data module plus the delivered System and Class modules compile clean in one nt_compile --json call (7.5/3.0/4.8 s, exit 0, no warnings beyond sorry)."
+ }
+}

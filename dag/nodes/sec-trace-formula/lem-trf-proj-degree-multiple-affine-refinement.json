@@ -1,0 +1,222 @@
+{
+ "id": "lem-trf-proj-degree-multiple-affine-refinement",
+ "kind": "statement",
+ "title": "Degree-multiple affine standard-open refinement on any open of Proj",
+ "statement": "Let $A=\\bigoplus_{j\\geq0}A_j$ be a nonnegatively graded commutative ring, $P=\\operatorname{Proj}(A)$ [def-pc-proj], $d\\geq1$, and $U\\subseteq P$ any open subscheme [def-weil-open-immersion]. For every $x\\in U$ and every open neighbourhood $N\\subseteq U$ of $x$, there are $q\\geq1$ and a homogeneous $g\\in A_q$ such that $g^d\\in A_{qd}$ and $x\\in D_+(g^d)=D_+(g)\\subseteq N\\subseteq U$. This common standard open is affine, with its canonical scheme identification $D_+(g)=\\operatorname{Spec}A_{(g)}$, where $A_{(g)}$ is the degree-zero part of $A_g$ [def-nagata-homogeneous-localization-degree-zero]. Consequently the family $\\{D_+(f)\\subseteq U:\\ f\\in A_{nd},\\ n\\geq1\\}$, viewed as opens of $U$, is an affine-open basis of $U$. No quasi-compactness hypothesis on $U$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01MW (lemma-ample-on-proj), proof of clauses (6)--(7): standard opens form an affine basis, with positive powers to enforce a degree multiple; Tag 01MB (lemma-proj-scheme), affine standard opens."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-weil-open-immersion",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [
+  {
+   "text": "Identify $U$ with its open image in $P$ by [def-weil-open-immersion]. Since $N$ is open in the open subset $U$, it is open in $P$: write $N=U\\cap V$ for an open $V\\subseteq P$. Apply the positive-degree standard-open basis of [lem-sc-proj-standard-open-basis] to $x\\in N$, obtaining $q\\geq1$ and $g\\in A_q$ with $x\\in D_+(g)\\subseteq N$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-sc-proj-standard-open-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JP (lemma-topology-proj), (5); restriction of an open basis to an open subset"
+   }
+  },
+  {
+   "text": "The graded multiplication law gives $g^d\\in A_{qd}$ by multiplying $d$ copies of $g$. For each point represented by a homogeneous prime $\\mathfrak p$ of [def-pc-proj], one has $g^d\\in\\mathfrak p$ if and only if $g\\in\\mathfrak p$: the reverse implication is closure under multiplication, and the forward implication follows by induction from primality, since $d\\geq1$. Thus $D_+(g^d)=D_+(g)$ as opens of $P$, so also as open subschemes with the restricted structure sheaf. The inclusions from Step 1 remain valid.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW (lemma-ample-on-proj), proof: positive powers preserve standard opens"
+   }
+  },
+  {
+   "text": "Apply [prop-nagata-proj-standard-open] to the positive-degree homogeneous $g\\in A_q$. It gives the canonical scheme isomorphism $D_+(g)\\cong\\operatorname{Spec}(A_{(g)})$, hence affineness of the common open of Step 2. This is the whole standard open contained in $U$, whose scheme structure is the restriction from $P$, rather than an arbitrary intersection of an affine open with $U$.",
+   "uses": [
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MB (lemma-proj-scheme), affine identification of standard opens"
+   }
+  },
+  {
+   "text": "For the final family, every $f\\in A_{nd}$ with $n\\geq1$ has positive degree $nd$, so [prop-nagata-proj-standard-open] makes $D_+(f)$ affine. If it is contained in $U$, it is an open subscheme of $U$ by [def-weil-open-immersion]. Given any $x\\in N\\subseteq U$ as above, Steps 1--2 put $D_+(g^d)$ in this family with $n=q$, containing $x$ and contained in $N$. This is precisely the neighbourhood criterion for a basis on $U$. All choices were made for one neighbourhood at a time; no finite covering or quasi-compactness was used.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW (lemma-ample-on-proj), proof of (6)--(7), the standard-open basis argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-sc-proj-standard-open-basis",
+  "def-pc-proj",
+  "prop-nagata-proj-standard-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MW (lemma-ample-on-proj), positive-power and basis argument, and 01MB (lemma-proj-scheme); Algebra Tag 00JP (lemma-topology-proj), (5). Only the local basis argument is used, not the quasi-compact choice of a twisting degree."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In Proj of a graded ring, for any open U and positive integer d, the standard opens D_+(f) contained in U with deg f a positive multiple of d form an affine open basis of U",
+   "results": "{\"t\": \"2026-10-22T06:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"In Proj of a graded ring, for any open U and positive integer d, the standard opens D_+(f) contained in U with deg f a positive multiple of d form an affine open basis of U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.isBasis_basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"ProjectiveSpectrum.isTopologicalBasis_basic_opens\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top'\"], \"digest\": \"611be7df1b6e14dc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a graded ring, powers of homogeneous elements give an affine basis of any open in Proj with degrees in any set containing a positive multiple of every positive degree",
+   "results": "{\"t\": \"2026-10-22T06:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a graded ring, powers of homogeneous elements give an affine basis of any open in Proj with degrees in any set containing a positive multiple of every positive degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.isBasis_basicOpen\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top'\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top\", \"AlgebraicGeometry.Proj\"], \"digest\": \"191daf6954ba783e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"isTopologicalBasis\"",
+   "results": "{\"t\": \"2026-10-22T06:14:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveSpectrum\\\", \\\"isTopologicalBasis\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.isTopologicalBasis_basic_opens\"], \"digest\": \"9ec491432487ca10\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isTopologicalBasis|basicOpen_pow|isAffineOpen_basicOpen",
+   "results": "{\"t\": \"2026-10-22T06:14:43Z\", \"tool\": \"grep\", \"query\": \"isTopologicalBasis|basicOpen_pow|isAffineOpen_basicOpen\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\"], \"digest\": \"4008016d7fa0db29\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every open neighbourhood in Proj contains a standard affine open defined by a homogeneous element whose degree is divisible by a prescribed positive integer",
+   "results": "{\"t\": \"2026-10-22T06:14:43Z\", \"tool\": \"leansearch\", \"query\": \"Every open neighbourhood in Proj contains a standard affine open defined by a homogeneous element whose degree is divisible by a prescribed positive integer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.basicOpen_pow\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"ProjectiveSpectrum.basicOpen_pow\", \"ProjectiveSpectrum.isOpen_iff\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.awayι_preimage_basicOpen\", \"AlgebraicGeometry.Proj.basicOpen\", \"ProjectiveSpectrum.basicOpen\"], \"digest\": \"a4195ae105a4dc96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary open subset of Proj has a basis of affine standard opens defined by positive degree homogeneous elements with degree divisible by a fixed positive integer",
+   "results": "{\"t\": \"2026-10-23T04:25:19Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary open subset of Proj has a basis of affine standard opens defined by positive degree homogeneous elements with degree divisible by a fixed positive integer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isBasis_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"ProjectiveSpectrum.isTopologicalBasis_basic_opens\", \"ProjectiveSpectrum.basicOpen\"], \"digest\": \"bf4af3285f83d48e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection shows only component facts; Basic.lean:79 is a basis over all ring elements, :66 preserves opens under powers, :161 and :201 give affine homogeneous charts. These do not state the prescribed-degree neighbourhood refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpen_pow|isBasis_basicOpen|isAffineOpen_basicOpen|basicOpenIsoSpec",
+   "results": "{\"t\": \"2026-10-23T04:26:04Z\", \"tool\": \"grep\", \"query\": \"basicOpen_pow|isBasis_basicOpen|isAffineOpen_basicOpen|basicOpenIsoSpec\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\"], \"digest\": \"4e57ad653e9151a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection shows only component facts; Basic.lean:79 is a basis over all ring elements, :66 preserves opens under powers, :161 and :201 give affine homogeneous charts. These do not state the prescribed-degree neighbourhood refinement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive degree homogeneous elements with degree divisible by a fixed integer give an affine basis on any open subset of Proj",
+   "results": "{\"t\": \"2026-10-23T04:26:04Z\", \"tool\": \"leansearch\", \"query\": \"Positive degree homogeneous elements with degree divisible by a fixed integer give an affine basis on any open subset of Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"ProjectiveSpectrum.basicOpen_pow\", \"ProjectiveSpectrum.isTopologicalBasis_basic_opens\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.opensRange_awayι\", \"AlgebraicGeometry.Proj.basicOpenToSpec\"], \"digest\": \"ad9ab4c8bbddf6ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection shows only component facts; Basic.lean:79 is a basis over all ring elements, :66 preserves opens under powers, :161 and :201 give affine homogeneous charts. These do not state the prescribed-degree neighbourhood refinement."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.basicOpen_pow, AlgebraicGeometry.Proj.isBasis_basicOpen",
+   "results": "{\"t\": \"2026-10-23T04:26:04Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj.basicOpen_pow, AlgebraicGeometry.Proj.isBasis_basicOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection shows only component facts; Basic.lean:79 is a basis over all ring elements, :66 preserves opens under powers, :161 and :201 give affine homogeneous charts. These do not state the prescribed-degree neighbourhood refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fixed positive d, every neighbourhood in the projective spectrum contains D plus g power d for some positive degree homogeneous g, and this open is affine",
+   "results": "{\"t\": \"2026-10-23T04:26:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a fixed positive d, every neighbourhood in the projective spectrum contains D plus g power d for some positive degree homogeneous g, and this open is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"ProjectiveSpectrum.basicOpen\", \"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"ProjectiveSpectrum.isOpen_basicOpen\", \"AlgebraicGeometry.Proj.isBasis_basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\"], \"digest\": \"a1d7e9c0f655ac07\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection shows only component facts; Basic.lean:79 is a basis over all ring elements, :66 preserves opens under powers, :161 and :201 give affine homogeneous charts. These do not state the prescribed-degree neighbourhood refinement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proj-twist-section-basic-open",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited Section-algebra/Proj ampleness input of lem-trf-local-term-locality: returned item proof Steps 3 and 4, positive-power neighbourhood refinement and affineness of the whole chosen standard open inside U.",
+   "via": [
+    "lem-trf-proj-twist-section-basic-open",
+    "lem-trf-proj-qc-open-twist-ample",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-proj-degree-multiple-affine-refinement",
+  "worker": "stage1",
+  "summary": "Reused the existing positive-degree standard-open basis and canonical affine-chart theorem. Wrote out the homogeneous-power and prime-ideal argument and restriction to an arbitrary open; no new nodes or hypotheses. Rechecked project declarations, DAG/blueprint duplicates, and Mathlib search hits.",
+  "blueprint": "Realizes the inherited Section-algebra/Proj ampleness input already identified in blueprint.from.place: positive-power neighbourhood refinement and affineness of the whole chosen standard open inside U, through lem-trf-proj-twist-section-basic-open. The current ancestor lem-trf-local-term-locality has no direct Proj sentence; this is its existing lower-level algebraic-geometric tool chain, not a replacement of the contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-proj-standard-open-basis",
+    "why": "Generic positive-degree affine basis theorem for every Proj; used only to choose a chart in one neighbourhood. No statement of this unit supplies that topology theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-proj-standard-open-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-bf204b9eb",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-bf204b9eb (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The delivery is a one-level split with no new nodes. The statement, stmt_deps and source are unchanged, proof_deps equals the union of the steps' uses, and there is no SGA citation. There is no repair note for this item. Sources checked: Stacks 00JP (2) and (5) (algebra.tex l.13450); 01MB (constructions.tex l.1267); 01MW (5)-(7) and its proof (l.1948-1990). In 01MW, quasi-compactness only serves to choose a common d. With d fixed in advance, the pointwise power argument needs no finiteness, so the statement is not weakened. Step 1: lem-sc-proj-standard-open-basis (reviewed PASS by J1) gives g in A_q with q at least 1 and x in D_+(g) inside N. Step 2: g^d is in p exactly when g is, by primality and d at least 1, so D_+(g^d)=D_+(g); this is genuinely elementary. Step 3: prop-nagata-proj-standard-open (Mathlib leaf, basicOpenIsoSpec) gives D_+(g) = Spec A_(g); its Proj, def-nagata-affine-proj, has the same Mathlib match, AlgebraicGeometry.Proj, as def-pc-proj. Step 4 is the neighbourhood criterion for a basis. Edge cases A=0, U empty, d=1, A=k[x] with deg x=2, a non-quasi-compact U and nilpotent f all hold. There is no cycle, since the basis lemma's proof uses only lem-weil-pbc-proj-standard-open-inclusion (0) and def-nagata-affine-proj. A duplicate search of the DAG found no node stating the degree-multiple refinement, and the parent lem-trf-proj-twist-section-basic-open Step 3 uses exactly this statement. The tool use of lem-sc-proj-standard-open-basis is accepted: it is a generic Proj-topology fact used as a black box, and the unit sk-i-curve-zero route has no Proj step. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjDegreeMultipleAffineRefinement",
+  "declaration": "AlgebraicGeometry.Proj.degreeMultiple_affine_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjDegreeMultipleAffineRefinement.lean",
+  "statement": "theorem degreeMultiple_affine_refinement {A : Type u} {σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] (d : ℕ) (hd : 0 < d) (U : (Proj 𝒜).Opens) : (∀ (x : U.toScheme) (N : U.toScheme.Opens), x ∈ N → ∃ (q : ℕ) (g : A), 0 < q ∧ g ∈ 𝒜 q ∧ g ^ d ∈ 𝒜 (q * d) ∧ U.ι x ∈ basicOpen 𝒜 (g ^ d) ∧ basicOpen 𝒜 (g ^ d) = basicOpen 𝒜 g ∧ basicOpen 𝒜 g ≤ U.ι ''ᵁ N ∧ IsAffineOpen (basicOpen 𝒜 g) ∧ IsIso (basicOpenToSpec 𝒜 g)) ∧ TopologicalSpace.Opens.IsBasis {V : U.toScheme.Opens | ∃ (n : ℕ) (f : A), 0 < n ∧ f ∈ 𝒜 (n * d) ∧ basicOpen 𝒜 f ≤ U ∧ V = U.ι ⁻¹ᵁ basicOpen 𝒜 f} ∧ (∀ (n : ℕ) (f : A), 0 < n → f ∈ 𝒜 (n * d) → basicOpen 𝒜 f ≤ U → IsAffineOpen (U.ι ⁻¹ᵁ basicOpen 𝒜 f))",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0a83ef3c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Clause-by-clause match of degreeMultiple_affine_refinement to the node: d>0, arbitrary open U (no qc), x∈N in U.toScheme, q>0, g∈𝒜 q, g^d∈𝒜(q*d), U.ι x∈D+(g^d)=D+(g)≤U.ι''ᵁN (whole standard open), IsAffineOpen plus IsIso of the hypothesis-free canonical basicOpenToSpec (Mathlib Basic.lean l.140; basicOpenIsoSpec = asIso of it), Opens.IsBasis of the preimages of D+(f) with f∈𝒜(n*d), n>0, plus their affineness. Universes independent; no extra hypotheses. Edge cases (empty U or Proj, d=1, zero/nilpotent f, non-qc U) OK. lean.statement verbatim in the file; node otherwise identical to live; report has Worker report and Second reading by Q28 sections; single sorry; docstrings carry source place and blueprint id; private import of the live proof-dep module ProjStandardOpenBasis; no duplicate in Mathlib or the project. No fixes needed."
+ }
+}

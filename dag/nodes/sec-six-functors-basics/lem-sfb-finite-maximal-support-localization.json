@@ -1,0 +1,401 @@
+{
+ "id": "lem-sfb-finite-maximal-support-localization",
+ "kind": "statement",
+ "title": "Localization decomposition of a finite module with finite maximal support",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and let $M$ be a finite $R$-module [def-weil-finitely-generated-module]. Let $\\mathfrak m_1,\\ldots,\\mathfrak m_r$ be distinct maximal ideals and suppose that $M_{\\mathfrak q}=0$ for every prime ideal $\\mathfrak q$ other than the listed ideals, where localization is [def-weil-pbc-module-localization]. Then the canonical $R$-linear map\n$$M\\longrightarrow\\prod_{i=1}^r M_{\\mathfrak m_i},\\qquad m\\longmapsto(m/1)_i,$$\nis an isomorphism. The list may include ideals at which $M$ is zero. If $r=0$, the assertion says that $M=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00L2, lemma-support-closed, applied to R/Ann(M), followed by Tag 00JA, lemma-product-local, or Tag 00JB, lemma-artinian-finite-length: tensor the finite product decomposition of R/Ann(M) with M."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\operatorname{Ann}_R(M)$ and $B=R/I$, acting on $M$ by $\\bar a m=am$. By [lem-weil-pbc-finite-module-support-annihilator], the primes containing $I$ are precisely the primes at which $M$ is nonzero. Thus they are exactly the $\\mathfrak m_i$ with $i\\in J:=\\{i:I\\subseteq\\mathfrak m_i\\}$. Primes of $B$ correspond to primes of $R$ containing $I$: inverse image under $R\\to B$ preserves the proper-ideal and prime-product conditions, and the inverse sends $\\mathfrak p\\supseteq I$ to $\\mathfrak p/I$, with quotient $B/(\\mathfrak p/I)=R/\\mathfrak p$. Consequently every prime of $B$ is one of the distinct maximal ideals $\\mathfrak n_i=\\mathfrak m_i/I$ for $i\\in J$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-support-annihilator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00L2, lemma-support-closed; quotient ideal correspondence written out"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-zero-locus-eq-iff-radical-eq] to the zero ideal of $B$. It gives $\\sqrt{(0)}=\\bigcap_{i\\in J}\\mathfrak n_i$. Hence each element of this intersection is nilpotent. If $J$ is empty, the intersection is $B$, so $1$ is nilpotent, $B=0$, and $M=0$ because $1_B$ acts as the identity. In that case every localization of $M$ is zero and the conclusion follows, including the empty list. Henceforth suppose $J\\ne\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology, (7), for I=0; zero module localization from fractions"
+   }
+  },
+  {
+   "text": "Now [lem-weil-pbc-product-of-localizations-at-maximal] applies to $B$: its maximal ideals are exactly the finite list $(\\mathfrak n_i)_{i\\in J}$ and their intersection consists of nilpotent elements. Write its canonical ring isomorphism as $\\theta:B\\xrightarrow{\\sim}\\prod_{i\\in J}B_{\\mathfrak n_i}$. Let $e_i\\in B$ be the inverse image of the tuple with $1$ in position $i$ and $0$ elsewhere. Componentwise multiplication and addition give $e_i^2=e_i$, $e_ie_j=0$ for $i\\ne j$, and $\\sum_i e_i=1$.",
+   "uses": [
+    "lem-weil-pbc-product-of-localizations-at-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JA, lemma-product-local, canonical product decomposition"
+   }
+  },
+  {
+   "text": "Write $e_iM=\\{e_im:m\\in M\\}$. The $R$-linear maps $M\\to\\prod_{i\\in J}e_iM$, $m\\mapsto(e_im)_i$, and $(x_i)_i\\mapsto\\sum_i x_i$ are inverse: their composites are $\\sum_i e_im=m$ and $(\\sum_j e_ix_j)_i=(x_i)_i$, since $x_j=e_jx_j$. This is a finite sum, so there is no direct-product/direct-sum issue.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JA, lemma-product-local; elementary module calculation from the product idempotents"
+   }
+  },
+  {
+   "text": "For $i\\in J$ the map $\\phi_i:e_iM\\to M_{\\mathfrak m_i}$ is $x\\mapsto x/1$. Here are the fraction calculations using [def-weil-pbc-module-localization]. Choose a representative $a_i\\in R$ of $e_i$. Since $e_i/1=1$ in $B_{\\mathfrak n_i}$, $e_i\\notin\\mathfrak n_i$, hence $a_i\\notin\\mathfrak m_i$. The equality $a_i(1-e_i)M=0$ therefore gives $(e_im)/1=m/1$. For any $s\\in R\\setminus\\mathfrak m_i$, the element $\\bar s/1$ is invertible in $B_{\\mathfrak n_i}$. Under $\\theta$, take the tuple with its inverse in position $i$ and zero elsewhere; its inverse image $b\\in B$ satisfies $\\bar s b=e_i$ and $be_i=b$. If $x\\in e_iM$ and $x/1=0$, choose $u\\notin\\mathfrak m_i$ with $ux=0$, and choose $b$ for $s=u$ as above. Then $x=e_ix=bux=0$, proving injectivity. For a fraction $m/s$, choose $b$ for this $s$ and put $x=be_im\\in e_iM$. We have $sx=e_im$, so $x/1=(e_im)/s=m/s$. This proves surjectivity, hence $\\phi_i$ is an $R$-linear isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JA, lemma-product-local, module consequence; explicit equality and zero criteria from Tag 07JZ, definition-localization-module"
+   }
+  },
+  {
+   "text": "Compose the isomorphism in step 4 with the product of the $\\phi_i$. Its $i$th component is $(e_im)/1=m/1$, so it is the required canonical map on the indices in $J$. If $i\\notin J$, choose $a\\in I\\setminus\\mathfrak m_i$. Then $am=0$ for all $m$, while $a$ acts invertibly on $M_{\\mathfrak m_i}$ by [def-weil-pbc-module-localization]; thus $M_{\\mathfrak m_i}=0$. Inserting these zero factors is an isomorphism, with inverse the coordinate projection to $J$, and gives exactly the claimed map for the whole listed set.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ, definition-localization-module; elementary insertion of zero factors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-product-of-localizations-at-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00L2 (lemma-support-closed), 00E0 (lemma-Zariski-topology, (7)), and 00JA (lemma-product-local); explicit idempotent-and-fraction assembly of the module consequence proposed by the item source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite module supported on finitely many maximal ideals is isomorphic to the product of its localizations at these maximal ideals",
+   "results": {
+    "t": "2026-10-22T06:27:51Z",
+    "tool": "leanfinder",
+    "query": "A finite module supported on finitely many maximal ideals is isomorphic to the product of its localizations at these maximal ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Finite.of_isLocalized_maximal",
+     "Submodule.fg_of_isLocalized_maximal",
+     "PrimeSpectrum.piLocalizationToMaximalEquiv",
+     "MaximalSpectrum.toPiLocalizationEquiv",
+     "Module.Finite.of_localized_maximal",
+     "Submodule.exists_isInternal_prime_power_torsion",
+     "PrimeSpectrum.piLocalizationToMaximal_bijective",
+     "Submodule.fg_of_localized_maximal"
+    ],
+    "digest": "223604203986be0a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toPiLocalizationEquiv decomposes a ring with discrete spectrum, not a finite module over a possibly positive-dimensional ring; Dedekind torsion decomposition adds a domain hypothesis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An Artinian module is the direct sum of its localizations at maximal ideals",
+   "results": {
+    "t": "2026-10-22T06:28:09Z",
+    "tool": "leanfinder",
+    "query": "An Artinian module is the direct sum of its localizations at maximal ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsSemiprimaryRing.finite_of_isArtinian",
+     "IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing",
+     "Module.finite_of_isArtinianRing",
+     "isArtinian_iff_submodule_quotient",
+     "Module.finite_iff_isArtinianRing",
+     "IsArtinianRing.tfae",
+     "IsArtinianRing.of_finite",
+     "isArtinian_of_fg_of_artinian'"
+    ],
+    "digest": "d1527f0c0329fc15"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toPiLocalizationEquiv decomposes a ring with discrete spectrum, not a finite module over a possibly positive-dimensional ring; Dedekind torsion decomposition adds a domain hypothesis"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.support, IsLocalizedModule",
+   "results": {
+    "t": "2026-10-22T06:27:40Z",
+    "tool": "loogle",
+    "query": "Module.support, IsLocalizedModule",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toPiLocalizationEquiv decomposes a ring with discrete spectrum, not a finite module over a possibly positive-dimensional ring; Dedekind torsion decomposition adds a domain hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(IsMaximal|isMaximal)|pi.*localiz|localiz.*pi",
+   "results": {
+    "t": "2026-10-22T06:27:40Z",
+    "tool": "grep",
+    "query": "support.*(IsMaximal|isMaximal)|pi.*localiz|localiz.*pi",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Topology.lean"
+    ],
+    "digest": "aba4505ff11b368b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toPiLocalizationEquiv decomposes a ring with discrete spectrum, not a finite module over a possibly positive-dimensional ring; Dedekind torsion decomposition adds a domain hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "toPi.*[Ll]ocal|[Ll]ocal.*[Dd]ecomp|[Ss]upport.*[Ff]inite|[Aa]rtinian.*[Ll]ocal",
+   "results": {
+    "t": "2026-10-22T06:28:09Z",
+    "tool": "grep",
+    "query": "toPi.*[Ll]ocal|[Ll]ocal.*[Dd]ecomp|[Ss]upport.*[Ff]inite|[Aa]rtinian.*[Ll]ocal",
+    "sub": "RingTheory/Artinian",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Artinian/Ring.lean",
+     "Mathlib/RingTheory/Artinian/Ring.lean",
+     "Mathlib/RingTheory/Artinian/Ring.lean",
+     "Mathlib/RingTheory/Artinian/Ring.lean"
+    ],
+    "digest": "c6f7d0c22bdb6b3e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toPiLocalizationEquiv decomposes a ring with discrete spectrum, not a finite module over a possibly positive-dimensional ring; Dedekind torsion decomposition adds a domain hypothesis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated module supported at finitely many closed points decomposes into its localizations",
+   "results": {
+    "t": "2026-10-22T06:27:41Z",
+    "tool": "leansearch",
+    "query": "A finitely generated module supported at finitely many closed points decomposes into its localizations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Finite.of_isLocalizedModule",
+     "Module.Finite.instLocalizationLocalizedModule",
+     "Module.Finite.of_isLocalized_maximal",
+     "Module.Finite.of_localized_maximal",
+     "Module.Finite.of_localizationSpan_finite'",
+     "Submodule.fg_of_isLocalized_maximal",
+     "Submodule.fg_of_localized_maximal",
+     "Module.support"
+    ],
+    "digest": "6060b7f08c98f548"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toPiLocalizationEquiv decomposes a ring with discrete spectrum, not a finite module over a possibly positive-dimensional ring; Dedekind torsion decomposition adds a domain hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(IsMaximal|isMaximal)|pi.*localiz|localiz.*pi",
+   "results": {
+    "t": "2026-10-23T09:30:33Z",
+    "tool": "grep",
+    "query": "support.*(IsMaximal|isMaximal)|pi.*localiz|localiz.*pi",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/LocalProperties/Basic.lean",
+     "Mathlib/RingTheory/LocalProperties/Basic.lean",
+     "Mathlib/RingTheory/LocalProperties/Basic.lean",
+     "Mathlib/RingTheory/LocalProperties/Semilocal.lean",
+     "Mathlib/RingTheory/LocalProperties/Semilocal.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean"
+    ],
+    "digest": "1031e9c286eca5f2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring decomposition and finiteness descent do not state the canonical module isomorphism; the idempotent and fraction argument requires more than a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An Artinian module is the product of its localizations at maximal ideals",
+   "results": {
+    "t": "2026-10-23T09:30:33Z",
+    "tool": "leansearch",
+    "query": "An Artinian module is the product of its localizations at maximal ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MaximalSpectrum.PiLocalization",
+     "IsArtinian",
+     "IsArtinianRing.localization_artinian",
+     "Module.Finite.of_isLocalized_maximal",
+     "isArtinian_of_fg_of_artinian",
+     "set_has_minimal_iff_artinian",
+     "Module.finite_of_isArtinianRing",
+     "IsArtinianRing.quotNilradicalEquivPi"
+    ],
+    "digest": "0c95f62db8f3acf3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring decomposition and finiteness descent do not state the canonical module isomorphism; the idempotent and fraction argument requires more than a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.support, IsLocalizedModule",
+   "results": {
+    "t": "2026-10-23T09:30:34Z",
+    "tool": "loogle",
+    "query": "Module.support, IsLocalizedModule",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring decomposition and finiteness descent do not state the canonical module isomorphism; the idempotent and fraction argument requires more than a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module supported on finitely many maximal ideals is canonically isomorphic to the product of its localizations",
+   "results": {
+    "t": "2026-10-23T09:30:35Z",
+    "tool": "leanfinder",
+    "query": "A finite module supported on finitely many maximal ideals is canonically isomorphic to the product of its localizations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Finite.of_isLocalized_maximal",
+     "Submodule.fg_of_isLocalized_maximal",
+     "Module.Finite.of_localized_maximal",
+     "MaximalSpectrum.toPiLocalizationEquiv",
+     "PrimeSpectrum.piLocalizationToMaximalEquiv",
+     "MaximalSpectrum.finite_of_toPiLocalization_surjective",
+     "Submodule.fg_of_localized_maximal",
+     "IsArtinianRing.quotNilradicalEquivPi"
+    ],
+    "digest": "5e89a993fc048b39"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring decomposition and finiteness descent do not state the canonical module isomorphism; the idempotent and fraction argument requires more than a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-isolated-deformation-lift",
+  "date": "2026-10-22",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: injectivity for the obstruction and surjectivity for the tuple of differences between local lifts",
+   "via": [
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-maximal-support-localization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the three existing Mathlib leaves for finite-module support, radical as intersection of primes, and the canonical ring decomposition. Wrote the module isomorphism explicitly with product idempotents and fractions, including extraneous zero factors and the empty support. No new nodes. Searches of the project Lean found no exact attachment.",
+  "blueprint": "Supports the recorded chain from det-thm-sf-ctf-stability-direct-images, proof (3), through the isolated-singularity deformation input (Stacks 0DZP/0DZF). This item is the finite-support algebra used by lem-sfb-affine-isolated-deformation-lift. The inherited created.item chain currently has no mechanically resolved blueprint ancestor (blueprint_refs.py ancestor prints None); retain its explicit from.place and via rather than inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-60e3c6b63",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-60e3c6b63 (reviewer sub-agent of L); spot-checked: PASS; no fixes and no dropped nodes. I read the full contract docs (coord/dag-sync.md is absent from the snapshot), the item, all 6 cited nodes and their Mathlib matches, Stacks 00JA (statement and proof) and the tags-map entries for 00L2/00E0/00JB/07JZ, and the sole citer lem-sfb-affine-isolated-deformation-lift. Statement: unchanged and correct. It was tested on Z/6 at (2),(3) and with (5) added, k[x]/(x^2) at (x), r=0 (M=0) and M=Z (excluded); the unneeded Noetherian hypothesis is supplied by the citer. Step 1: the support-annihilator leaf gives V(Ann M) = the m_i with i in J, so the n_i=m_i/I are distinct and maximal. Step 2: radical leaf at 0 in B; J empty gives B=0 and M=0. Step 3: the 00JA leaf's hypotheses hold exactly; product idempotents are taken from theta. Step 4: elementary idempotent decomposition. Step 5: I re-did the fraction calculus. e_i is not in n_i, so a_i is not in m_i; b=theta^-1(0,...,(s/1)^-1,...,0) satisfies sb=e_i and be_i=b; injectivity and surjectivity follow from these and the cited LocalizedModule definition, so the elementary marking is accepted. Step 6: canonical components; a in I but not in m_i kills the factors with i not in J. proof_deps equals the union of uses. No new nodes; no duplicate found in dag/nodes (nearest: lem-sc-finite-length-finite-maximal-support, lem-per-noetherian-module-finite-product, the ring leaf the item cites). All cited nodes are Mathlib leaves, so there is no route issue and no tool_uses. No SGA cited. The inherited null blueprint.from.node is not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteMaximalSupportLocalization",
+  "declaration": "Module.bijective_pi_localization_of_finite_maximal_support",
+  "file": "lean/Sheaf/RingTheory/FiniteMaximalSupportLocalization.lean",
+  "statement": "theorem bijective_pi_localization_of_finite_maximal_support (R : Type u) [CommRing R] [IsNoetherianRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] (r : ℕ) (m : Fin r → MaximalSpectrum R) (hdistinct : Function.Injective m) (hsupport : ∀ q : PrimeSpectrum R, (∀ i : Fin r, q.asIdeal ≠ (m i).asIdeal) → Subsingleton (LocalizedModule q.asIdeal.primeCompl M)) : Function.Bijective (LinearMap.pi fun i : Fin r ↦ LocalizedModule.mkLinearMap (m i).asIdeal.primeCompl M)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d956ca33d",
+  "group": "Q119",
+  "result": "fix",
+  "note": "Lean statement exact: IsNoetherianRing R, Module.Finite R M (universes u,v), Fin r → MaximalSpectrum injective, Subsingleton LocalizedModule at every prime off the list, conclusion Bijective (LinearMap.pi mkLinearMap) = canonical m↦(m/1)_i iso; edge cases r=0 (M=0), zero factors, M=0, zero ring, k[x]/(x²) covered; distinctness needed; no Mathlib/project duplicate (only ring-level toPiLocalizationEquiv, upstream length_lt_top_of_finite_maximal_support differs); docstrings with source place and blueprint tag, 6-step proof plan, sorry only, no definitions, lean.statement verbatim. Sole fault H11: 'Second reading by Q119' is a self-check → FIX via fixes/lem-sfb-finite-maximal-support-localization.report.md (worker report verbatim + independent clause-by-clause reading). No Lean change, no compile needed."
+ }
+}

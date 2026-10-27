@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-homogeneous-polynomial-augmented-resolution",
+ "kind": "statement",
+ "title": "Homogeneous polynomial augmented resolution and inserted-zero contraction",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E/\\mathbf Q_\\ell$, and $F=E$ or $F=\\Omega$. Put $A(S)=C(S,F)$, using all continuous maps on the coherent profinite site [def-sfb-continuous-map-condensed-ring], and $L=\\mathbf Z_\\ell^r$ for $r\\geq0$, with its product topology [def-sfb-ladic-lattice]. Use internal $A$-modules and internal $L$-actions [sk-def-sfb-module-objects, def-sfb-condensed-action-module], in coefficient universes containing the site and every profinite parameter set [def-weil-size-convention].\n\nFor $n\\geq0$, let $K^n$ be the internal direct sum of copies of $A$ on the monomials in the $(n+1)r$ variables $y_0,\\ldots,y_n$, each an $r$-tuple [def-weil-pbc-mv-polynomial-ring]. Give it the diagonal action $(g\\cdot f)(y_0,\\ldots,y_n)=f(y_0-g,\\ldots,y_n-g)$, for every section $g\\in C(S,L)$, and the differential\n$$(\\delta f)(y_0,\\ldots,y_{n+1})=\\sum_{i=0}^{n+1}(-1)^if(y_0,\\ldots,\\widehat y_i,\\ldots,y_{n+1}).$$\nSet $K^n=0$ for $n<0$, and let $a:A[0]\\to K$ include the constants, with trivial action on $A$.\n\nThese formulas define an equivariant augmented cochain complex: all substitutions are internal $A$-linear morphisms, $\\delta^2=0$, and $a$ is an equivariant cochain map. After forgetting actions, the maps\n$$(h^nf)(y_0,\\ldots,y_{n-1})=f(0,y_0,\\ldots,y_{n-1})\\quad(n>0),\\qquad h^0f=f(0)$$\nare internal $A$-linear and satisfy $h^0a=1$, $ah^0+h^1\\delta^0=1$ on $K^0$, and $\\delta^{n-1}h^n+h^{n+1}\\delta^n=1$ on $K^n$ for $n>0$. They commute with restriction of profinite parameters; equivariance of $h$ is not asserted. The augmentation $a$ is a quasi-isomorphism in the abelian equivariant category, whose kernels and cokernels are the underlying ones [lem-sfb-condensed-derived-restriction-calculus], so $Q(a)$ is an isomorphism in its ordinary derived category [def-weil-abstract-derived-category]. This includes $r=0$, where the augmented underlying complex is the augmented constant cosimplicial complex. No completion of $F$ is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, agent-formulated homogeneous polynomial reduction: construction and inserted-zero contraction of the homogeneous polynomial resolution (former parent steps 1-2 and rank-zero contraction in step 7). Exact reference WANTED; the blueprint paragraph delegates this input rather than proving it."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-ladic-lattice",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-sfb-bundled-continuous-scalar-ring",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a Model for each of the two coefficient fields from model_nonempty. The stronger construction works for every normed Q_ell-algebra field and does not require completion.",
+   "uses": [
+    "lem-sfb-homogeneous-polynomial-model-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+   }
+  },
+  {
+   "text": "For every presented Model obtain the inserted-zero Contraction from contraction_nonempty.",
+   "uses": [
+    "lem-sfb-homogeneous-polynomial-contraction-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+   }
+  },
+  {
+   "text": "For a short complex f,g in an abelian category, an identity r f + g s = 1 forces ker(g) followed by coker(f) to be zero. Apply this to the underlying short complexes in positive degrees. In degree zero use the zero identity to obtain exactness of augmentation followed by d0; its underlying retraction proves it monic. Negative-degree objects are zero.",
+   "uses": [
+    "def-sfb-homogeneous-polynomial-resolution-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+   }
+  },
+  {
+   "text": "Use CondensedDerivedRestriction.forgetExact to reflect the underlying exactness into the action category. ShortComplex.quasiIso_iff_of_zeros gives the degree-zero quasi-isomorphism; exactness away from zero gives all other degrees.",
+   "uses": [
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+   }
+  },
+  {
+   "text": "The ordinary derived localization inverts this quasi-isomorphism. Combine the model existence and universal contraction/quasi-isomorphism statements separately for E and Omega.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-homogeneous-polynomial-model-existence",
+  "lem-sfb-homogeneous-polynomial-contraction-existence",
+  "def-sfb-homogeneous-polynomial-resolution-data",
+  "def-sfb-condensed-derived-invariants",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "polynomial.*(contract|homotop|resolution)|(contract|homotop|resolution).*polynomial",
+   "results": "{\"t\": \"2026-10-22T06:02:49Z\", \"tool\": \"grep\", \"query\": \"polynomial.*(contract|homotop|resolution)|(contract|homotop|resolution).*polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/RingTheory/Polynomial/SeparableDegree.lean\", \"Mathlib/RingTheory/Polynomial/SeparableDegree.lean\"], \"digest\": \"ac74f66c781c9df9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep free chain resolutions, Dold-Kan splitting and general homotopy constructors do not construct or contract the internal polynomial direct-sum cochain resolution with parameter-dependent lattice translation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous polynomial deletion complex augmented by constants has the insertion of zero contracting homotopy",
+   "results": "{\"t\": \"2026-10-22T06:02:49Z\", \"tool\": \"leansearch\", \"query\": \"Homogeneous polynomial deletion complex augmented by constants has the insertion of zero contracting homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.homogeneousComponent_zero\", \"Homotopy.mkCoinductive\", \"CochainComplex.IsKProjective.homotopyZero\", \"Homotopy.nullHomotopy\", \"Homotopy.nullHomotopy'\", \"Homotopy.nullHomotopy_hom\", \"Homotopy.mkInductive\", \"ChainComplex.alternatingConstHomotopyEquiv\"], \"digest\": \"f768d29a4718b29d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep free chain resolutions, Dold-Kan splitting and general homotopy constructors do not construct or contract the internal polynomial direct-sum cochain resolution with parameter-dependent lattice translation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-22T06:02:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep free chain resolutions, Dold-Kan splitting and general homotopy constructors do not construct or contract the internal polynomial direct-sum cochain resolution with parameter-dependent lattice translation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented complex of internal polynomial modules with alternating coordinate deletion and diagonal lattice translation is equivariantly quasi isomorphic to the constants by insertion of zero",
+   "results": "{\"t\": \"2026-10-22T06:03:00Z\", \"tool\": \"leanfinder\", \"query\": \"An augmented complex of internal polynomial modules with alternating coordinate deletion and diagonal lattice translation is equivariantly quasi isomorphic to the constants by insertion of zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.standardComplex.compForgetAugmentedIso\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"HomologicalComplex.alternatingConstScIsoEven\", \"AlgebraicTopology.alternatingFaceMapComplexConst\", \"ChainComplex.alternatingConstHomologyZero\", \"HomologicalComplex.alternatingConstScIsoOdd\"], \"digest\": \"4ed8b7e7570fb210\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep free chain resolutions, Dold-Kan splitting and general homotopy constructors do not construct or contract the internal polynomial direct-sum cochain resolution with parameter-dependent lattice translation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial functions in tuples with the deletion differential form a split exact augmented complex contracted by evaluating the first variable at zero",
+   "results": "{\"t\": \"2026-10-22T06:03:00Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial functions in tuples with the deletion differential form a split exact augmented complex contracted by evaluating the first variable at zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.ιSummand_comp_d_comp_πSummand_eq_zero\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"SimplicialObject.Splitting.σ_comp_πSummand_id_eq_zero\", \"SimplicialObject.Splitting.comp_PInfty_eq_zero_iff\", \"SimplicialObject.Splitting.cofan_inj_comp_PInfty_eq_zero\", \"MvPolynomial.pderiv_inl_universalFactorizationMap_X\", \"MvPolynomial.pderiv_inr_universalFactorizationMap_X\", \"SimplicialObject.Splitting.nondegComplex\"], \"digest\": \"3c45d88cac986715\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep free chain resolutions, Dold-Kan splitting and general homotopy constructors do not construct or contract the internal polynomial direct-sum cochain resolution with parameter-dependent lattice translation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating deletion complex of polynomial rings with insertion of zero contracting homotopy",
+   "results": "{\"t\": \"2026-10-22T11:59:52Z\", \"tool\": \"leansearch\", \"query\": \"Alternating deletion complex of polynomial rings with insertion of zero contracting homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.nullHomotopy'\", \"Homotopy.nullHomotopy\", \"HomotopyCategory.isZero_quotient_obj_iff\", \"HomologicalComplex.alternatingConst\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.Hσ\", \"HomologicalComplex.alternatingConst_X\", \"AlgebraicTopology.DoldKan.homotopyPToId\"], \"digest\": \"1183e53aeb123d9c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract homotopies, alternating constant complexes, simplicial extra degeneracies, or ordinary group representations; none constructs this internal polynomial direct-sum complex with section-dependent lattice actions. The displayed formulas still require the explicit calculation given here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented polynomial cochain complex with alternating deletion of variables is contracted by inserting zero and is quasi isomorphic to constants",
+   "results": "{\"t\": \"2026-10-22T12:00:04Z\", \"tool\": \"leanfinder\", \"query\": \"An augmented polynomial cochain complex with alternating deletion of variables is contracted by inserting zero and is quasi isomorphic to constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.alternatingConstHomotopyEquiv\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ\", \"CochainComplex.augmentTruncate\", \"AlgebraicTopology.AlternatingCofaceMapComplex.obj\", \"CochainComplex.augment\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"AlgebraicTopology.alternatingCofaceMapComplex\"], \"digest\": \"7df75bc930f411bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract homotopies, alternating constant complexes, simplicial extra degeneracies, or ordinary group representations; none constructs this internal polynomial direct-sum complex with section-dependent lattice actions. The displayed formulas still require the explicit calculation given here."
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingConstHomotopyEquiv|homologyMap_eq_of_homotopy|eval.*comp|aeval.*comp",
+   "results": "{\"t\": \"2026-10-22T12:00:47Z\", \"tool\": \"grep\", \"query\": \"alternatingConstHomotopyEquiv|homologyMap_eq_of_homotopy|eval.*comp|aeval.*comp\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean\", \"Mathlib/Algebra/Homology/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Lifting.lean\", \"Mathlib/Algebra/Homology/HomologicalComplexLimits.lean\", \"Mathlib/Algebra/Homology/HomologicalComplexLimits.lean\"], \"digest\": \"be95d51ccf32c16a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract homotopies, alternating constant complexes, simplicial extra degeneracies, or ordinary group representations; none constructs this internal polynomial direct-sum complex with section-dependent lattice actions. The displayed formulas still require the explicit calculation given here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cosimplicial polynomial algebra with deletion cofaces has an extra codegeneracy given by evaluation at zero making the augmentation a homotopy equivalence",
+   "results": "{\"t\": \"2026-10-22T12:00:56Z\", \"tool\": \"leanfinder\", \"query\": \"A cosimplicial polynomial algebra with deletion cofaces has an extra codegeneracy given by evaluation at zero making the augmentation a homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s_comp_δ₀\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\"], \"digest\": \"b361937580551872\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract homotopies, alternating constant complexes, simplicial extra degeneracies, or ordinary group representations; none constructs this internal polynomial direct-sum complex with section-dependent lattice actions. The displayed formulas still require the explicit calculation given here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-derived-bar-comparison",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: polynomial-resolution input below the dense-lattice comparison; construction, alternating deletion, inserted-zero contraction and rank-zero case. The inherited created.item chain has no blueprint ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homogeneous-polynomial-augmented-resolution",
+  "worker": "stage1",
+  "summary": "Q12 checked the unchanged statement and supplied the full finite-support sheaf construction, equivariant deletion complex, explicit inserted-zero identities, kernel/image proof and derived localization. All non-elementary facts are existing cited nodes; no new nodes. No matching project declaration or Mathlib theorem was found. Repair of the 2026-10-22 return: compared the retained split with the current unsplit node, reread all cited statements, and made the sheafification/monoidal hypotheses in step 1 explicit with the existing sheaf-tensor theorem. The statement and its dependencies remain identical to the current DAG.",
+  "blueprint": "Current main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), open direct image; steps 1-3 construct the polynomial input, 4-6 prove the inserted-zero contraction and exactness, 7 passes to the equivariant derived category, and 8 checks rank zero and noncomplete coefficients. The inherited ancestry stops at the unanchored lem-sfb-admissible-direct-image; no fictitious blueprint id is supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-profinite-coherent-sheaf-criterion",
+    "why": "The generic finite-cover sheaf criterion proves that the finite-support polynomial presheaf represents the internal direct sum; the unit does not replace this site-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-profinite-coherent-sheaf-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-359c470e4",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-359c470e4 (reviewer sub-agent of L); spot-checked: Pass with no changes. This is a promotion re-push of the earlier head 04be5b7. A reader PASSed that head, but in clones/live and side-live the item is still unsplit with an empty proof. There is no repair note and no other group has split the item, so the delivery is not superseded. I diffed the item JSON against 04be5b7. Statement, source, stmt_deps, created, chapter and unit are identical. The only change is in step 1. It now cites sk-def-sfb-sheaf-tensor, which names the coherent profinite site as essentially small and makes sheafification strong symmetric monoidal. From that, a local equivalence f gives a(f⊗R) ≅ a(f)⊗a(R), which is an iso. That discharges the 'local equivalences are monoidal' hypothesis of def-weil-pbc-internal-abelian-sheaf-module-equivalence, and the node is also added to proof_deps. I re-read all 8 steps and every cited statement. Step 1: finite-support polynomials satisfy the coherent sheaf criterion (lem-sfb-profinite-coherent-sheaf-criterion), with coefficientwise descent through C(−,F). Step 2: T_g comes from the polynomial universal property and T_gT_t=T_{g+t}, which matches the action-module definition and the coordinatewise lattice law. Step 3: the omission signs (−1)^(a+b−1) and (−1)^(a+b) cancel, so δ²=0. Steps 4–5: I re-expanded both contraction identities and they hold. Step 6: the cycle factorization z=δhz is valid, and h⁰a=1 gives A≅Z⁰. Step 7: restriction-calculus says equivariant kernels and cokernels are the underlying ones, so Q(a) is an iso. Step 8: for r=0, δ is 0 in even and 1 in odd degrees. Small cases checked with r=1: f=y₀ in K⁰, and f=y₀, f=y₁ in K¹. No SGA is cited. Source is main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3); the proof is honestly marked agent-written. The only other node that cites the item is its parent lem-sfb-polynomial-derived-bar-comparison, so there is no duplicate. Maintainer note: please promote this approved S1 head rather than re-dispatching it."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomogeneousPolynomialAugmentedResolution",
+  "declaration": "Profinite.CondensedAction.HomogeneousPolynomial.homogeneous_polynomial_augmented_resolution",
+  "declarations": [
+   "Profinite.CondensedAction.HomogeneousPolynomial.homogeneous_polynomial_augmented_resolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HomogeneousPolynomialAugmentedResolution.lean",
+  "statement": "theorem homogeneous_polynomial_augmented_resolution (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (r : ℕ) : Assertion ell E r ∧ Assertion ell Ω r",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All supporting data definitions are moved verbatim to HomogeneousPolynomialResolutionData and publicly reexported here. The original theorem signature is unchanged. Construction and contraction are separate genuine steps; the exactness, quasi-isomorphism and derived-localization consequences are proved in this module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9524db3e",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read the node, all 11 stmt_dep records/sources (ActionModule.act, CondensedBar.Equivariant/ActionAbelian, restriction calculus, continuousScalarRing, Lattice) and the module. Clause by clause: monomial coproduct in (n+1)r variables with zero negative degrees; diagonal translation pinned on every S, g and coefficient via translatedMonomial (X - g_i); deletion via succAbove with (-1)^i pins d; equivariant faces; constant augmentation pinned through singleObjXSelf with trivial action; h0 = evaluation at 0, h = insert-zero; h0a=1, ah0+h1d0=1, positive identity order checked; QuasiIso plus IsIso(Q.map a) for the actual augmentation. Nonempty Model ∧ ∀P over fully pinned data: not arbitrary, not stronger. Retains noncomplete Ω and E with canonical norms; r=0, n=0, empty S, universes u/u+1 OK; lean.statement verbatim; docstrings and 8-step proof; only sorry. Added stmt_deps are landed definitions, used, acyclic. Note: polynomialArrow duplicates the one-line helper owned by the parent theorem node lem-sfb-polynomial-derived-bar-comparison; notation-level, not a second notion. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9227f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T081728-L-2053750",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + split nodes (model/contraction existence, resolution-data def) against verbatim-moved data block, Assertion conjuncts and scratch axioms compile"
+ }
+}

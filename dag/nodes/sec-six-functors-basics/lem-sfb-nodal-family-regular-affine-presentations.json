@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-nodal-family-regular-affine-presentations",
+ "kind": "statement",
+ "title": "Nodal families admit regular affine curve presentations",
+ "statement": "Let $S$ be a locally Noetherian scheme [pqf-def-locnoeth] and $f:X\\to S$ a flat morphism [def-weil-flat-morphism] of finite presentation, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact [def-weil-finite-type-morphism] and quasi-separated [def-weil-quasi-separated-morphism]. Assume its geometric fibres [def-weil-geometric-fibre] are nonempty reduced schemes pure of dimension one [def-weil-pure-dimension] and are nodal: every closed point outside the smooth locus [def-sbc-smooth-morphisms] of the geometric fibre has maximal-ideal-adic completed local ring [def-weil-pbc-adic-completion] isomorphic to $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series] over the algebraically closed geometric field $\\Omega$. The geometric fibres need not be connected. Every ordinary residue-field fibre is pure of dimension one and a local complete intersection over its residue field [def-weil-pbc-complete-intersection-over-field]. For every affine open $V=\\operatorname{Spec}R\\subset S$ and every $x\\in f^{-1}V$, there is an affine open neighbourhood $U=\\operatorname{Spec}B\\subset f^{-1}V$ of $x$ and an integer $c\\geq0$ with an $R$-algebra presentation\n$$B\\simeq R[x_0,\\ldots,x_c]/(f_1,\\ldots,f_c)$$\nwhose ordered equations are a regular sequence in the polynomial ring [def-weil-pbc-regular-sequence, def-weil-pbc-mv-polynomial-ring]. Thus these are regular affine curve presentations of [def-trf-nodal-dualizing-datum], covering $f^{-1}V$ for every such $V$. The coefficient map is the one induced by $f$. Neither properness, connectedness, a smooth generic fibre, a marking, nor a normal or integral base is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00SY (lemma-syntomic), 00SV (lemma-relative-global-complete-intersection-conormal), 061L (lemma-regular-sequence-in-neighbourhood), together with curves.tex Tag 0C4E (lemma-nodal-lci). Agent assembly of former item steps 1--3; use yh-1 to express a principal ambient localization as a regular affine curve presentation."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-trf-nodal-dualizing-datum",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Every ordinary or geometric field fibre is locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). On its affine opens [lem-weil-pbc-lfp-affine-opens-finite-presentation] gives finitely presented algebras over the field, hence finitely generated algebras (discard the finitely many relations). By [lem-weil-pbc-lft-affine-pairs] these fibres are locally of finite type.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TS (lemma-base-change-finite-presentation), 01TQ (lemma-locally-finite-presentation-characterize), 01T2 (lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "Fix a geometric fibre over an algebraically closed field $\\Omega$. It is locally of finite type by step 1 and pure of dimension one by hypothesis. Every closed point is smooth or has precisely the completed node ring in [lem-trf-nodal-curve-lci-criterion](1); use $\\Omega$ itself as its algebraic closure. The implication (1)$\\Rightarrow$(2) gives a local complete intersection over $\\Omega$. This holds for every geometric fibre and does not require connectedness.",
+   "uses": [
+    "lem-trf-nodal-curve-lci-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4E (lemma-nodal-lci), implication (1) to (2)."
+   }
+  },
+  {
+   "text": "By [lem-trf-geometric-pure-fibre-point-dimension], every ordinary fibre $X_s$ has local topological dimension $1$ at every point. Apply the component formula of [lem-trf-field-extension-component-local-dimension] to $Y=X_s$ and the identity extension $\\kappa(s)/\\kappa(s)$: every irreducible component has dimension $1$, so $X_s$ is pure of dimension one. The same argument applies to every nonempty open subscheme of $X_s$: its local topological dimensions agree with those of $X_s$, since neighbourhoods contained in an open neighbourhood are cofinal in the definition of local topological dimension. Thus every nonempty affine open in an ordinary fibre has dimension $1$ as well.",
+   "uses": [
+    "lem-trf-geometric-pure-fibre-point-dimension",
+    "lem-trf-field-extension-component-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00P4 (lemma-dimension-at-a-point-preserved-field-extension), 02FY (lemma-dimension-fibre-after-base-change)(1); varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic)(5)."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$, an affine open $V=\\operatorname{Spec}A\\subseteq S$ containing $s$, with prime $\\mathfrak p\\subset A$ corresponding to $s$, and an affine open $U=\\operatorname{Spec}B\\subseteq f^{-1}V$. Let $\\Omega=\\overline{\\kappa(s)}$ be the algebraic closure fixed in [def-weil-geometric-fibre], so that the geometric fibre of the hypothesis is $X_{\\bar s}=X\\times_S\\operatorname{Spec}\\Omega$; note that only this geometric fibre is controlled by the hypotheses, not the fibres at arbitrary algebraically closed fields. By [lem-weil-pbc-lfp-affine-opens-finite-presentation] $A\\to B$ is of finite presentation, so $B\\otimes_A\\kappa(\\mathfrak p)$ is a finitely generated $\\kappa(\\mathfrak p)$-algebra (the images of the variables generate it). By [lem-weil-pbc-open-preimage-fibre-product] the inverse images of $U$ in $X_s$ and in $X_{\\bar s}$ are open subschemes and are the fibre products $U\\times_S\\operatorname{Spec}\\kappa(s)$, $U\\times_S\\operatorname{Spec}\\Omega$; as $\\operatorname{Spec}\\kappa(s)\\to S$ and $\\operatorname{Spec}\\Omega\\to S$ factor through the open $V$, these are $U\\times_V\\operatorname{Spec}\\kappa(s)$ and $U\\times_V\\operatorname{Spec}\\Omega$, which [lem-weil-pbc-fibre-product-affine-spectra] identifies with $\\operatorname{Spec}(B\\otimes_A\\kappa(\\mathfrak p))$ and $\\operatorname{Spec}(B\\otimes_A\\Omega)$ over the respective fields. By step 2, $X_{\\bar s}$ has an affine open cover by spectra of finitely generated local-complete-intersection $\\Omega$-algebras, so [lem-trf-lci-affine-open-locality], applied to the affine open $\\operatorname{Spec}(B\\otimes_A\\Omega)$, shows that $B\\otimes_A\\Omega$ is a local complete intersection over $\\Omega$. Since $(B\\otimes_A\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\Omega\\cong B\\otimes_A\\Omega$ as $\\Omega$-algebras ($(b\\otimes t)\\otimes u\\mapsto b\\otimes tu$, inverse $b\\otimes u\\mapsto(b\\otimes1)\\otimes u$), the converse direction of [lem-weil-pbc-lci-field-change] shows that $B\\otimes_A\\kappa(\\mathfrak p)$ is a local complete intersection over $\\kappa(\\mathfrak p)$. By [lem-weil-pbc-affine-opens-basis] the affine opens $U\\subseteq f^{-1}V$ cover $f^{-1}V\\supseteq f^{-1}(s)$, so their inverse images, the affine opens $\\operatorname{Spec}(B\\otimes_A\\kappa(\\mathfrak p))$ just described, cover $X_s$: this proves the ordinary-fibre LCI assertion. As $X_s$ is locally of finite type over $\\kappa(s)$ by step 1, (1)$\\Rightarrow$(3) of [lem-trf-lci-pointwise-criterion] shows that each $\\mathcal O_{X_s,x}$ is a complete-intersection local ring over $\\kappa(s)$.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-lci-affine-open-locality",
+    "lem-weil-pbc-lci-field-change",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-trf-lci-pointwise-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SJ (lemma-lci-field-change), as in the proof of morphisms.tex Tag 01UD/01UF; morphisms.tex Tag 01UG (lemma-local-complete-intersection); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "Fix the prescribed $V=\\operatorname{Spec}R$ and $x\\in f^{-1}V$, and set $s=f(x)$. The local ring map at $x$ is flat by [def-weil-flat-morphism], and $f$ is of finite presentation at $x$. Together with step 4 these are exactly the hypotheses of [lem-trf-syntomic-pointwise-local-model]. Obtain an affine neighbourhood $U_0=\\operatorname{Spec}B_0\\subset f^{-1}V$ of $x$ and $B_0=P/(a_1,\\ldots,a_r)$, $P=R[t_1,\\ldots,t_n]$, a relative global complete intersection as an $R$-algebra via $f$. Its fibre over $s$, $\\operatorname{Spec}(B_0\\otimes_R\\kappa(s))$, is a nonempty (it contains $x$) affine open in $X_s$ by the chart identification of step 4, so has dimension $1$ by step 3. The relative-global-CI condition [def-weil-pbc-relative-global-complete-intersection] gives $n-r=1$, hence $n=r+1$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-trf-syntomic-pointwise-local-model",
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UE (lemma-syntomic-locally-standard-syntomic)(3) to (2); Algebra Tags 00SY (lemma-syntomic) and 00SP (definition-relative-global-complete-intersection)."
+   }
+  },
+  {
+   "text": "Let $q\\subset B_0$ be the point $x$, and $q\\prime\\subset P$ its inverse image. By [lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence], the ordered $a_1,\\ldots,a_r$ form a regular sequence in $P_{q\\prime}$. The ring $R$ is Noetherian by [pqf-lem-affine-open-locnoeth], and $P$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Hence [lem-exc-regular-sequence-principal-neighbourhood] gives $h\\in P\\setminus q\\prime$ such that the $a_i$ form a regular sequence in $P_h$. Put $g=h\\bmod(a_1,\\ldots,a_r)$. Since $g\\notin q$, [lem-weil-pbc-principal-localization-open-immersion] identifies $U=\\operatorname{Spec}(B_0)_g$ with an affine open neighbourhood of $x$ in $U_0$.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-exc-regular-sequence-principal-neighbourhood",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00SV (lemma-relative-global-complete-intersection-conormal)(1), 061L (lemma-regular-sequence-in-neighbourhood); properties.tex Tag 01OW (lemma-locally-Noetherian); schemes.tex Tag 01I3 (lemma-standard-open-affine)."
+   }
+  },
+  {
+   "text": "In $P[y]$, multiplication by $hy-1$ is injective: if $(hy-1)\\sum b_i y^i=0$, coefficient comparison gives $b_0=0$ and $b_i=hb_{i-1}=0$ inductively. By [lem-weil-pbc-localization-away-polynomial-quotient], $P[y]/(hy-1)\\simeq P_h$. Thus $hy-1,a_1,\\ldots,a_r$ is a regular sequence by [def-weil-pbc-regular-sequence], since after its first element its successive multiplication maps are those of the regular sequence in $P_h$. Its final quotient is $(B_0)_g$: equivalently quotient first by the $a_i$ and apply the same localization presentation to $B_0$ and $g$. This quotient is nonzero because it has the point $x$. Set $c=r+1$. There are $n+1=r+2=c+1$ variables and $c$ ordered equations, as required. Every map fixes $R$, so the coefficient map is induced by $f$. Repeating for each $x$ gives the asserted cover.",
+   "uses": [
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LF (definition-regular-sequence) and the polynomial localization presentation in Tag 08JZ (lemma-principal-localization-NL). Elementary coefficient comparison and successive-quotient calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-geometric-pure-fibre-point-dimension",
+  "lem-trf-field-extension-component-local-dimension",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-lci-affine-open-locality",
+  "lem-weil-pbc-lci-field-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-lci-pointwise-criterion",
+  "def-weil-flat-morphism",
+  "lem-trf-syntomic-pointwise-local-model",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tags 00SY, 00SV(1), 061L, 08JZ, using curves.tex 0C4E and morphisms.tex 01UE/01UF, with the elementary ordered localization equation placed first."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented family of reduced nodal curves over a locally Noetherian scheme has affine presentations with c plus one variables and a regular sequence of c equations",
+   "results": "{\"t\": \"2026-10-22T06:23:38Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented family of reduced nodal curves over a locally Noetherian scheme has affine presentations with c plus one variables and a regular sequence of c equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.IsStandardSmooth.out\", \"Algebra.Smooth.finitePresentation\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.smooth_iff\"], \"digest\": \"5bb089ceacd430e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, flatness or standard smooth presentations, which exclude nodes; none derives regular c-equation curve presentations from geometric nodality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSyntomic\", \"Presentation\"",
+   "results": "{\"t\": \"2026-10-22T06:23:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSyntomic\\\", \\\"Presentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, flatness or standard smooth presentations, which exclude nodes; none derives regular c-equation curve presentations from geometric nodality."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|regular.*curve.*presentation|syntomic",
+   "results": "{\"t\": \"2026-10-22T06:23:44Z\", \"tool\": \"grep\", \"query\": \"nodal|regular.*curve.*presentation|syntomic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, flatness or standard smooth presentations, which exclude nodes; none derives regular c-equation curve presentations from geometric nodality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat family whose geometric fibers are nodal curves is a local complete intersection of relative dimension one",
+   "results": "{\"t\": \"2026-10-22T06:24:20Z\", \"tool\": \"leanfinder\", \"query\": \"A flat family whose geometric fibers are nodal curves is a local complete intersection of relative dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"836cb4607fa3fca7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, flatness or standard smooth presentations, which exclude nodes; none derives regular c-equation curve presentations from geometric nodality."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSyntomic|CompleteIntersection|IsRegularSequence",
+   "results": "{\"t\": \"2026-10-22T06:25:05Z\", \"tool\": \"grep\", \"query\": \"IsSyntomic|CompleteIntersection|IsRegularSequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, flatness or standard smooth presentations, which exclude nodes; none derives regular c-equation curve presentations from geometric nodality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat family of nodal curves admits regular affine complete intersection presentations of relative dimension one",
+   "results": "{\"t\": \"2026-10-22T06:25:05Z\", \"tool\": \"leansearch\", \"query\": \"A flat family of nodal curves admits regular affine complete intersection presentations of relative dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.rec\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\"], \"digest\": \"05c83bfc3415f44c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, flatness or standard smooth presentations, which exclude nodes; none derives regular c-equation curve presentations from geometric nodality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat family of nodal curves admits local polynomial presentations by a regular sequence of codimension one less than the number of variables",
+   "results": "{\"t\": \"2026-10-23T04:16:10Z\", \"tool\": \"leanfinder\", \"query\": \"A flat family of nodal curves admits local polynomial presentations by a regular sequence of codimension one less than the number of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.out\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth\"], \"digest\": \"283c9a2276d72ac1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth presentations require smoothness and do not include nodal fibres; flatness or regular-sequence scalar-extension lemmas do not construct the required presentations. Read StandardSmooth.lean:62--89."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|syntomic|regular.*sequence.*presentation",
+   "results": "{\"t\": \"2026-10-23T04:16:11Z\", \"tool\": \"grep\", \"query\": \"nodal|syntomic|regular.*sequence.*presentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth presentations require smoothness and do not include nodal fibres; flatness or regular-sequence scalar-extension lemmas do not construct the required presentations. Read StandardSmooth.lean:62--89."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat finitely presented morphism with complete intersection curve fibers has local regular sequence presentations",
+   "results": "{\"t\": \"2026-10-23T04:16:11Z\", \"tool\": \"leansearch\", \"query\": \"A flat finitely presented morphism with complete intersection curve fibers has local regular sequence presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"AlgebraicGeometry.Flat.mk\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"Module.Flat.projective_of_finitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.Flat\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"640a67e494fb75c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth presentations require smoothness and do not include nodal fibres; flatness or regular-sequence scalar-extension lemmas do not construct the required presentations. Read StandardSmooth.lean:62--89."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "{\"t\": \"2026-10-23T04:16:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth presentations require smoothness and do not include nodal fibres; flatness or regular-sequence scalar-extension lemmas do not construct the required presentations. Read StandardSmooth.lean:62--89."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A syntomic morphism of pure relative dimension one locally is a quotient of a polynomial ring by a regular sequence",
+   "results": "{\"t\": \"2026-10-23T04:18:37Z\", \"tool\": \"leanfinder\", \"query\": \"A syntomic morphism of pure relative dimension one locally is a quotient of a polynomial ring by a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"7b5bd3d28ebce678\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: standard smooth presentations require smoothness and do not include nodal fibres; flatness or regular-sequence scalar-extension lemmas do not construct the required presentations. Read StandardSmooth.lean:62--89."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-log-canonical-reconstruction",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; extraction of original item steps 1,2,3: Nodal families admit regular affine curve presentations",
+   "via": [
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-family-regular-affine-presentations",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Seven steps assemble existing DAG lemmas from geometric nodality through ordinary LCI fibres and standard syntomic charts. No new nodes. The equation hy-1 is placed first so local regularity gives global polynomial regularity without a false global-regularity assumption. Reviewer FIX (Q71 cc): step 4 descends LCI from the geometric fibre at the algebraic closure via lci-field-change instead of the syntomic criterion's all-Omega condition (1).",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/plurinodal route. Realizes the extracted nodal-log-canonical-reconstruction prerequisite, former steps 1--3, as specified by the item blueprint.from.place. The ancestor utility returns None for this created-item chain; no blueprint node states this lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-curve-lci-criterion",
+    "why": "Generic Nodal curves characterized by a local complete intersection and unramified Jacobian subscheme used as the stated local algebra/scheme tool; this unit contains no replacement for this interface. It implements the existing nodal-family local-presentation prerequisite, not a change to the alteration route."
+   },
+   {
+    "node": "lem-trf-geometric-pure-fibre-point-dimension",
+    "why": "Generic Pure geometric fibres give the ordinary pointwise fibre dimension used as the stated local algebra/scheme tool; this unit contains no replacement for this interface. It implements the existing nodal-family local-presentation prerequisite, not a change to the alteration route."
+   },
+   {
+    "node": "lem-trf-field-extension-component-local-dimension",
+    "why": "Generic Component dimensions after a field extension from local dimensions used as the stated local algebra/scheme tool; this unit contains no replacement for this interface. It implements the existing nodal-family local-presentation prerequisite, not a change to the alteration route."
+   },
+   {
+    "node": "lem-trf-lci-affine-open-locality",
+    "why": "Generic: every affine open of a scheme with an LCI affine cover over a field has an LCI coordinate ring; used as a stated commutative-algebra tool (reviewer FIX of step 4, replacing the syntomic geometric-fibre criterion, whose condition (1) quantifies over all algebraically closed fields while the item controls only the geometric fibres at algebraic closures of residue fields)."
+   },
+   {
+    "node": "lem-trf-lci-pointwise-criterion",
+    "why": "Generic Pointwise local-ring criteria for local complete intersections used as the stated local algebra/scheme tool; this unit contains no replacement for this interface. It implements the existing nodal-family local-presentation prerequisite, not a change to the alteration route."
+   },
+   {
+    "node": "lem-trf-syntomic-pointwise-local-model",
+    "why": "Generic A pointwise flat complete-intersection fibre admits a standard affine model used as the stated local algebra/scheme tool; this unit contains no replacement for this interface. It implements the existing nodal-family local-presentation prerequisite, not a change to the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "why": "Generic The equations of a relative global complete intersection form a regular sequence at every prime used as the stated local algebra/scheme tool; this unit contains no replacement for this interface. It implements the existing nodal-family local-presentation prerequisite, not a change to the alteration route."
+   },
+   {
+    "node": "lem-exc-regular-sequence-principal-neighbourhood",
+    "why": "Generic A regular sequence at a prime spreads to a principal neighbourhood used as the stated local algebra/scheme tool; this unit contains no replacement for this interface. It implements the existing nodal-family local-presentation prerequisite, not a change to the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-lci-field-change",
+    "why": "Generic: a finite type algebra over a field is LCI iff its scalar extension is (Stacks 00SJ); used in step 4 to descend LCI from the geometric fibre to the ordinary fibre rings (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-geometric-pure-fibre-point-dimension",
+  "lem-trf-field-extension-component-local-dimension",
+  "lem-trf-lci-affine-open-locality",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-trf-syntomic-pointwise-local-model",
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-weil-pbc-lci-field-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-3f5894e1e",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-3f5894e1e (reviewer sub-agent of L); spot-checked: I read the item, all 20 cited statements and the sources: curves.tex 0C4E l.4483, algebra.tex 00SV(1) l.36767, 061L l.16696, 00SJ l.36262 and 08JZ. There are no new nodes and no duplicate: across the DAG, 'regular affine curve presentation' appears only in the definition and in nodes that assume such presentations. Steps 1-3 and 5-7 are correct. I checked the coefficient recurrence for hy-1 being a nonzerodivisor, which holds even when h is 0 or a zero divisor. The variable count is c+1=r+2. I tested a smooth line (r=0), uv=0 in characteristic 2 and over a nonreduced R, a nonclosed x and an empty S. One fault was repaired (E1). Step 4 fed step 2 into condition (1) of lem-trf-syntomic-geometric-fibres-affine-criterion, which needs LCI geometric fibres at every algebraically closed Omega. The item's hypothesis (def-weil-geometric-fibre) only covers the fibre at the algebraic closure of kappa(s). The repaired step 4 covers each affine pair directly: the fibre-product charts give Spec(B⊗kappa(p)) and Spec(B⊗Omega); lem-trf-lci-affine-open-locality makes B⊗Omega LCI; the converse of lem-weil-pbc-lci-field-change (00SJ) then makes B⊗kappa(p) LCI; these charts cover X_s, and lci-pointwise-criterion turns that into CI local rings. Step 5 now names the s-fibre chart from step 4, and proof_deps and tool_uses were updated. The syntomic criterion is no longer cited. Batch 5: the transitive closures of all six flagged trf nodes (0C4E, 00P4/0A21, 02FY, 01UD (now dropped), 01UG, 01UE) and of the added lci-affine-open-locality stay within sk-i-curve-zero commutative algebra plus scheme basics. None reaches trace-formula, Poincaré-duality or batch-4 nodes, so all are generic tools and accepted. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalFamilyRegularAffinePresentations",
+  "declaration": "AlgebraicGeometry.nodal_family_regular_affine_presentations",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalFamilyRegularAffinePresentations.lean",
+  "statement": "theorem nodal_family_regular_affine_presentations {X S : Scheme.{u}} (f : X ⟶ S) [IsLocallyNoetherian S] [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (hgeom : ∀ s : S, Nonempty (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)) ∧ IsReduced (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)) ∧ (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).IsPureDimension 1 ∧ ∀ x : (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)), x ∈ closedPoints (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)) → x ∉ ((pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).smoothLocus : Set (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s))) → ∃ e : AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).presheaf.stalk x)) ((pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) (AlgebraicClosure (S.residueField s)) ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) (AlgebraicClosure (S.residueField s))) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) (AlgebraicClosure (S.residueField s)))}), ∀ a : (AlgebraicClosure (S.residueField s)), e (AdicCompletion.of (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).presheaf.stalk x)) ((pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).presheaf.stalk x) (((Scheme.ΓSpecIso (.of (AlgebraicClosure (S.residueField s)))).inv ≫ (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).appLE ⊤ ⊤ le_top ≫ (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).presheaf.germ ⊤ x trivial).hom a)) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) : (∀ s : S, (f.fiber s).IsPureDimension 1 ∧ ∀ x : f.fiber s, ∃ U : (f.fiber s).affineOpens, x ∈ U.1 ∧ ∃ ft : @Algebra.FiniteType (S.residueField s) Γ(f.fiber s, U.1) _ _ (((Scheme.ΓSpecIso (.of (S.residueField s))).inv ≫ (f.fiberToSpecResidueField s).appLE ⊤ U.1 le_top).hom.toAlgebra), @Algebra.IsLocalCompleteIntersection (S.residueField s) Γ(f.fiber s, U.1) _ _ (((Scheme.ΓSpecIso (.of (S.residueField s))).inv ≫ (f.fiberToSpecResidueField s).appLE ⊤ U.1 le_top).hom.toAlgebra) ft) ∧ (∀ (V : S.affineOpens) (x : X), f x ∈ V.1 → ∃ A : NodalCanonicalPresentation f, A.V = V ∧ x ∈ A.U.1)",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bef538809",
+  "group": "Q157",
+  "result": "pass",
+  "note": "First delivery (no rebind); only item lean record + one module; statement verbatim. All hypotheses (IsLocallyNoetherian, Flat, LFP+QC+QS, geometric fibre pullback per def-weil-geometric-fibre note, Nonempty/IsReduced/IsPureDimension 1, closed non-smooth points with Ω-linear completion iso to Ω[[u,v]]/(uv) via scalar equation) and both conclusions (ordinary fibre pure dim 1 + LCI affine cover via fiberToSpecResidueField; ∀ affine V, x over V ∃ NodalCanonicalPresentation with A.V = V, x ∈ A.U, whose fields match the regular affine curve presentation of def-trf-nodal-dualizing-datum) match the node; no extra assumptions, universe u only; edge cases (empty S, c=0, nonreduced base, char 2 node, nonclosed x) fine; no duplicate; docstrings with 7-step plan; lines ≤100; proof-dep imports exist; report sections present. No findings, no compile (no change)."
+ }
+}

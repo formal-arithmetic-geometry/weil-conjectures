@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.Tactic.CategoryTheory.Monoidal.Basic
 
 /-!
 # The right adjoint of a braided functor is lax braided
@@ -36,6 +37,8 @@ through the adjunction.
 - `CategoryTheory.BraidedCategory.preservesColimitsOfShape_flip_curriedTensor_obj`: in a
   braided category, tensoring on the right with `X` preserves the colimits of shape `J` that
   tensoring on the left with `X` preserves, the two functors being identified by the braiding.
+- `CategoryTheory.MonoidalCategory.leftUnitor_inv_whiskerRight_tensorμ_leftUnitor`: the
+  middle-four interchange with the unit in the first slot is a braiding.
 -/
 
 @[expose] public section
@@ -147,3 +150,18 @@ def tensorRightEquivalence (X Y : C) (e : X ⊗ Y ≅ 𝟙_ C) : C ≌ C :=
       rightUnitorNatIso C)
 
 end CategoryTheory.BraidedCategory
+
+namespace CategoryTheory.MonoidalCategory
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [BraidedCategory C]
+
+/-- The middle-four interchange with the unit in the first slot is the braiding of the next two
+factors: `λ⁻¹ ▷ _ ≫ tensorμ 𝟙 A B D ≫ λ ▷ _ = α⁻¹ ≫ β_{A,B} ▷ D ≫ α`. -/
+@[reassoc]
+lemma leftUnitor_inv_whiskerRight_tensorμ_leftUnitor (A B D : C) :
+    (λ_ A).inv ▷ (B ⊗ D) ≫ tensorμ (𝟙_ C) A B D ≫ (λ_ B).hom ▷ (A ⊗ D) =
+      (α_ A B D).inv ≫ (β_ A B).hom ▷ D ≫ (α_ B A D).hom := by
+  simp only [tensorμ]
+  monoidal
+
+end CategoryTheory.MonoidalCategory

@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9 and 0D6D; steps 7--10 of the flat scalar evaluation refinement."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9 and 0D6D; steps 7--10 of the flat scalar evaluation refinement."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatScalarEvaluationModel",
+  "date": "2026-10-24",
+  "group": "R2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-hom-flat-scalar-evaluation-model",
+   "place": "Arbitrary derived-input naturality, towers, identity and coefficient squares.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-sfb-scalar-hom-derived-square-coherence",
+ "title": "Derived scalar Hom comparison coherence for arbitrary inputs",
+ "statement": "For the recorded scalar derived models M [def-sfb-scalar-hom-comparison-data] and normalized strong scalar tensor comparisons mu [lem-sfb-scalar-hom-tensor-coherence], the evaluation-defined coefficientBaseChangeHom is natural in both arbitrary derived inputs, is compatible with composition and identity scalar extension, and is compatible with every commuting coefficient square, transported by the canonical composite extension isomorphism. All equalities concern actual derived morphisms, including inverses of localized quasi-isomorphisms. This is independent of flat chain representatives or K-injective complexes.",
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Apply scalarHomTensorCoherence to the normalized tensor comparisons. The already proved scalarHomComparisonTower gives naturality, composition and identity for the evaluation-defined Hom maps on all derived objects.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "lem-pur-scalar-hom-comparison-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a commuting coefficient square use composition for its two paths. Substitute the equality of their composite ring maps. Conjugate the two equalities by the inverse composite extension isomorphism on the two Hom inputs and on the source. Bifunctoriality and cancellation of the resulting isomorphisms give the displayed derived square.",
+   "uses": [
+    "lem-pur-scalar-hom-comparison-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-pur-scalar-hom-comparison-tower"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary scalar extension tensor Hom evaluation complexes compatible coefficient square",
+   "results": "8 hits: HomologicalComplex.tensorHom, scalar extension composition, and universal tensor constructions; no chain evaluation coefficient-square theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.right_triangle_components",
+   "results": "Unknown identifier in search index; 0 matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chainEquiv_symm_pure|coefficientCompatibility_generic",
+   "results": "0 search-index hits. Repository search finds the proved private chain-equivalence and generic strict coefficient compatibility used by the proof.",
+   "date": "2026-10-24",
+   "verdict": "library proof helpers"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarHomDerivedSquareCoherence",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarHomDerivedSquareCoherence.lean",
+  "declaration": "CategoryTheory.ScalarHomDerivedCoherence.coherence",
+  "statement": "theorem coherence : DerivedCoherence.{c, v, r, w} (J := J) M μ",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "independent cc review: ChainSquare/model_exists and lean.statement vs clones/live (annotation-only); node proof fields vs imports; new node lean records vs new modules; importer FlatInternalHomEvaluationRoof compiled against delivered modules (exit 0); #print axioms model_exists clean"
+ }
+}

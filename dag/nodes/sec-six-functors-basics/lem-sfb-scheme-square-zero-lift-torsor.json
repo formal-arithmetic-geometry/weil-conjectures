@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-scheme-square-zero-lift-torsor",
+ "kind": "statement",
+ "title": "Marked square-zero scheme lifts and their cotangent Ext torsors",
+ "statement": "Let $S\\hookrightarrow S'$ be a first order thickening of schemes [def-pc-scheme, def-sbc-first-order-thickening], with ideal $\\mathcal J$ satisfying $\\mathcal J^2=0$, and let $f:X\\to S$ be flat [def-weil-flat-morphism]. A marked lift is a flat scheme $X'\\to S'$ and an isomorphism $X'\\times_{S'}S\\cong X$ [def-pc-fibre-product]; arrows preserve this marking. Put $G=f^*\\mathcal J$ [def-pc-module-pullback]. Use the Zariski sheaf standard polynomial cotangent complex $L_{X/S}$ [lem-trf-affine-cotangent-comparison] and $\\operatorname{Ext}^j_X(E,G)=\\operatorname{Hom}_{D(\\mathcal O_X)}(E,G[j])$ [def-weil-abstract-derived-category]. If a marked lift exists, its isomorphism classes are a torsor under $\\operatorname{Ext}^1_X(L_{X/S},G)$: after choosing one lift each class is uniquely its translate by one group element. The automorphisms of a marked lift inducing the identity on $X$ are canonically the additive group $\\operatorname{Ext}^0_X(L_{X/S},G)$. These identifications commute with restriction to open subschemes of $X$ and with maps on square-zero coefficient modules. If $S=\\operatorname{Spec}k$ for a field $k$ and $S'=\\operatorname{Spec}(k\\oplus M)$ for a finite-dimensional $k$-vector space $M$, with $(a,m)(b,n)=(ab,an+bm)$, the trivial lift supplies a canonical origin and gives a canonical identification of marked flat deformation classes with $\\operatorname{Ext}^1_X(L_{X/k},\\mathcal O_X\\otimes_kM)$. It is $k$-linear for the deformation operations induced by linear maps of $M$ and addition of square-zero directions; the trivial lift maps to zero. Here the tensor product is sheafified sectionwise tensor [def-pur-sheaf-tensor-product]. For $X=\\operatorname{Spec}A$, where $A$ is a localization of a finitely generated $k$-algebra, choose a localized polynomial surjection $P\\twoheadrightarrow A$ with kernel $J$. This classification agrees with $\\operatorname{Ext}^1_A([J/J^2\\to\\Omega^1_{P/k}\\otimes_PA],A\\otimes_kM)$, in degrees $-1,0$, via the affine restriction of the sheaf cotangent complex; it is natural under further localizations. These conclusions impose no properness or dimension hypothesis on $X$.",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 0D14 (lemma-deform), using cotangent.tex Tags 08UW (lemma-compare-cotangent-complex-with-naive-ringed-spaces) and 08UZ (lemma-find-obstruction-ringed-spaces); split origin and functoriality: Tags 0GPZ (lemma-extensions-of-relative-ringed-spaces), 0GQ1 and 0GQ2; affine model: more-morphisms.tex Tag 0D0I (lemma-NL-affine)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-first-order-thickening",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "lem-trf-affine-cotangent-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-field",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-kahler-differentials",
+  "def-sfb-marked-scheme-lifts",
+  "def-sfb-zariski-square-zero-extension-problems",
+  "def-sfb-scheme-lift-classification-data",
+  "def-sfb-scheme-cotangent-open-restriction",
+  "def-sfb-affine-scheme-deformation-comparison",
+  "def-sfb-scheme-coefficient-extension-problems"
+ ],
+ "proof": [
+  {
+   "text": "Identify the underlying spaces of $S$ and $S'$ and put $B=\\mathcal O_X$, $R=f^{-1}\\mathcal O_S$, $R'=f^{-1}\\mathcal O_{S'}$, $K=f^{-1}\\mathcal J$, so $R'/K=R$. The ideal $\\mathcal J$ is quasi-coherent on $S$ (as an $\\mathcal O_S$-module it is its own conormal module, because $\\mathcal J^2=0$); hence $G=B\\otimes_R K=f^*\\mathcal J$ is quasi-coherent by module pullback. A marked flat lift gives a ring extension $0\\to G\\to E\\to B\\to0$ with an $R'$-algebra structure whose map on $K$ is $k\\mapsto1\\otimes k$: the flat cartesian conormal comparison identifies its actual ideal with $G$. Conversely realize any such extension as a scheme by the Zariski realization lemma. On affine charts write $R'_0\\twoheadrightarrow R_0$, kernel $I$, and $E_0\\twoheadrightarrow B_0$, kernel $B_0\\otimes_{R_0}I$. The prescribed map on $I$ implies $IE_0=G_0$ and $E_0/IE_0=B_0$. The quotient-tensor identification gives $I\\otimes_{R'_0}E_0\\cong I\\otimes_{R_0}B_0=G_0$, and multiplication is the injection $G_0\\hookrightarrow E_0$. The nilpotent-ideal flatness criterion now makes $E_0$ flat over $R'_0$, since $B_0$ is flat over $R_0$. The affine flatness criterion gives flatness globally; the quotient says its special fibre is precisely the marked $X$. The realization lemma identifies all marked isomorphisms. Thus marked lifts are exactly these extensions, with their specified base-ideal map.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+    "lem-sfb-zariski-square-zero-scheme-realization",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-sfb-nilpotent-ideal-flatness-criterion",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0D14 (lemma-deform), proof; more-morphisms.tex Tags 05YV and 063Y (lemma-deform), including the converse flatness argument"
+   }
+  },
+  {
+   "text": "Fix a lift extension $E_0$. If $F$ is an $R$-algebra extension of $B$ by $G$, form $E_0+F$ by taking $E_0\\times_BF$ and quotienting its kernel by $\\{(g,-g):g\\in G\\}$. Give it the $R'$-structure $r'\\mapsto[\\rho_0(r'),\\rho_F(\\bar r')]$, where $\\rho_F$ is the base map $R\\to F$. It still sends $k\\in K$ to $1\\otimes k$, so step 1 realizes it as a flat marked lift. Conversely for a lift $E$ form $E-E_0=(E\\times_BE_0)/\\{(g,g):g\\in G\\}$. The map $r'\\mapsto[\\rho(r'),\\rho_0(r')]$ kills $K$ and factors through $R$; its kernel is identified with $G$ by $(g,h)\\mapsto g-h$. The cancellation $E_0+(E-E_0)\\cong E$ sends a local representative $(a_0,[e,b_0])$ to $e+i(g)$, where $a_0-b_0=i_0(g)$. Replacing $(e,b_0)$ by $(e+i(h),b_0+i_0(h))$ replaces $g$ by $g-h$, leaving this formula unchanged; the outer antidiagonal relation also cancels. The same formula, replacing $e$ by a section of $F$, identifies $(E_0+F)-E_0$ with $F$. These maps are local isomorphisms on both kernel and quotient and therefore are isomorphisms of extensions. For three factors the relation is always that the sum of kernel coordinates is zero. Hence $(E_0+F_1)+F_2=E_0+(F_1+F_2)$, and $E_0+(B\\oplus G)=E_0$. The sheaf-algebra classification identifies these Baer classes and their addition with $\\operatorname{Ext}^1_B(L_{B/R},G)$. Taking $F=E-E_0$ proves both existence and uniqueness of a translating element. This proves the asserted torsor, independently of any properness or dimension assumption.",
+   "uses": [
+    "lem-sfb-zariski-sheaf-algebra-extension-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UC (lemma-choices-ringed-spaces), translation construction; Tags 0GPZ and 0GQ0, expressed as Baer sum and difference"
+   }
+  },
+  {
+   "text": "Every $R'$-automorphism of a lift that is the identity on $B$ is also the identity on $G$, since $G$ is generated as a $B$-module by the image of $K$. For such an automorphism $\\phi$, $\\phi(e)-e$ depends only on $p(e)$ and defines $d:B\\to G$. Expanding $\\phi(ee')$ and using $G^2=0$ gives $d(bb')=b\\,d(b')+b'\\,d(b)$; $R'$-linearity makes it vanish on $R$. Conversely $e\\mapsto e+i(d(p(e)))$ for an $R$-derivation fixes the base and quotient and has inverse given by $-d$. The cross term is zero, so composition corresponds to addition. The derivation identification in the sheaf-algebra Ext lemma gives exactly $\\operatorname{Ext}^0_B(L_{B/R},G)$, with no chosen origin.",
+   "uses": [
+    "lem-sfb-zariski-sheaf-algebra-extension-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08U8 (lemma-huge-diagram-ringed-spaces), automorphisms; cotangent.tex Tag 08UZ (lemma-find-obstruction-ringed-spaces), part (3)"
+   }
+  },
+  {
+   "text": "Restriction to an open applies every displayed formula sectionwise. For a coefficient map $u:G\\to H$, push out the kernels and the base-ideal map: on the displayed kernel coordinates it sends $[g,h]$ to $[u(g),u(h)]$. It therefore commutes with Baer addition and difference, and sends $d$ to $ud$. The sheaf-algebra Ext lemma identifies these operations with the induced Ext maps; its open-restriction compatibility uses the same standard sheaf cotangent complex. For general $H$ this assertion is at the level of square-zero extension problems with base-ideal map $uc$; when both problems arise as flat lifts the scheme identification of step 1 applies. Thus no arbitrary coefficient pushout is falsely asserted to remain a flat lift of the same base.",
+   "uses": [
+    "lem-sfb-zariski-sheaf-algebra-extension-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tags 0GQ0, 0GQ1, 0GQ2; all pushout and difference operations use the specified base-ideal map"
+   }
+  },
+  {
+   "text": "For the split base $k\\oplus M$, the projection $k\\oplus M\\to k$ is split by $k\\to k\\oplus M$. A lift extension is therefore a sheaf of $k$-algebras with square-zero kernel $G=\\mathcal O_X\\otimes_kM$. Conversely every such extension has the unique base structure $(a,m)\\mapsto a\\,1+i(1\\otimes m)$; multiplication gives $ab\\,1+i(a\\otimes n+b\\otimes m)$, as required. Step 1 makes it a flat lift. The split extension $B\\oplus G$ is the trivial family by the fibre-product affine tensor description, and the base-change flatness lemma guarantees it is flat. The sheaf-algebra class map consequently gives the canonical classification, taking the trivial family to zero. A linear map $M\\to N$ induces kernel pushout $B\\otimes M\\to B\\otimes N$; it is the base change of the lift. Indeed base change is flat, so step 1 identifies its kernel with $B\\otimes_kN$ and quotient with $B$. The base-change map from the old extension induces $1\\otimes u$ on its kernel. The induced map from its kernel pushout is the identity on kernel and quotient, hence is an isomorphism. For addition first take the fibre product of two extensions over $B$ (directions $M\\oplus M$), then push out the kernel along addition. The Ext lemma sends these operations to coefficient maps and addition. Scalar multiplication is the coefficient map $m\\mapsto am$, giving the stated $k$-linearity.",
+   "uses": [
+    "lem-sfb-zariski-sheaf-algebra-extension-ext",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-pc-fibre-product",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tags 0GPZ, 0GQ0, 0GQ2, specialized to the split thickening; more-morphisms.tex Tag 063Y"
+   }
+  },
+  {
+   "text": "For $X=\\operatorname{Spec}A$, use the intrinsic affine cotangent comparison to identify the full sheaf complex with $\\widetilde{L_{A/k}}$, and $G$ with $\\widetilde{A\\otimes_kM}$. The affine quasi-coherent derived equivalence identifies their derived Hom groups with those in $D(A)$. The localized polynomial presentation lemma identifies $C=[J/J^2\\to\\Omega^1_{P/k}\\otimes_PA]$ with $\\tau_{\\geq-1}L_{A/k}$. In the truncation triangle $Q\\to L_{A/k}\\to C\\to Q[1]$, $Q\\in D^{\\leq-2}$, hence both $\\operatorname{Hom}(Q,G[1])$ and $\\operatorname{Hom}(Q[1],G[1])$ vanish by t-structure orthogonality. Exactness of Hom out of the triangle makes $\\operatorname{Ext}^1_A(C,G)\\to\\operatorname{Ext}^1_A(L_{A/k},G)$ bijective. This is the required affine model, without a regular-sequence hypothesis on $J$. Every map used here is the canonical presentation or restriction map. The presentation comparison commutes with maps of localized presentations and the intrinsic comparison with smaller affine charts; the standard cotangent localization comparison handles successive localizations. Thus the Ext description and the deformation class commute with every further localization.",
+   "uses": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-trf-lci-naive-cotangent-model",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-derived-tstructure-orthogonality",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-trf-affine-cotangent-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0I (lemma-NL-affine); cotangent.tex Tag 08UW; perfect.tex lemma-affine-compare-bounded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-first-order-thickening",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-sfb-nilpotent-ideal-flatness-criterion",
+  "lem-sfb-zariski-sheaf-algebra-extension-ext",
+  "lem-sfb-zariski-square-zero-scheme-realization",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-tensor-over-quotient-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 0D14, using Tags 0GPZ and 0GQ0-0GQ2 for Baer differences and split origin; cotangent.tex 08UZ and more-morphisms.tex 05YV, 063Y, 0D0I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat scheme lifts over a square zero thickening form a torsor under Ext one of the cotangent complex and automorphisms are Ext zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring H1Cotangent and derivationToSquareZeroEquivLift classify different algebraic data, not global scheme lifts or their derived Ext torsors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cotangent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring H1Cotangent and derivationToSquareZeroEquivLift classify different algebraic data, not global scheme lifts or their derived Ext torsors"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(torsor|deform)|deform.*(torsor|Ext)|squareZero.*[Ll]ift",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Derivation/Basic.lean\", \"line\": \"27\", \"text\": \"- `derivationToSquareZeroEquivLift`: The `R`-derivations from `A` into a square-zero ideal `I`\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"16\", \"text\": \"- `derivationToSquareZeroOfLift`: The `R`-derivations from `A` into a square-zero ideal `I`\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"48\", \"text\": \"def derivationToSquareZeroOfLift [IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : A →ₐ[R] B)\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"73\", \"text\": \"theorem derivationToSquareZeroOfLift_apply [IsScalarTower R A B] (f : A →ₐ[R] B)\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"75\", \"text\": \"    (derivationToSquareZeroOfLift I hI f e x : B) = f x - algebraMap A B x :=\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"116\", \"text\": \"def derivationToSquareZeroEquivLift [IsScalarTower R A B] : Derivation R A I ≃\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"402\", \"text\": \"      (derivationToSquareZeroEquivLift (KaehlerDifferential.ideal R S).cotangentIdeal\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Basic.lean\", \"line\": \"80\", \"text\": \"          (derivationToSquareZeroEquivLift I hI)).surjective.subsingleton\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring H1Cotangent and derivationToSquareZeroEquivLift classify different algebraic data, not global scheme lifts or their derived Ext torsors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of marked flat scheme deformations over first order thickenings by cotangent complex Ext groups",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X) {n : ℕ}\\n  (f f_1 : R.complex.X n ⟶ Y) (e_f : f = f_1) (m m_1 : ℕ) (e_m : m = m_1) (hm : n + 1 = m)\\n  (hf : CategoryT\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group $ \\\\operatorname{Ext}^n(X, Y) $ is defined as the hom-set in the derived category between the $ n $-shifted single-term\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P : Extension R A) [FormallySmooth R P.Ring] :\\n  Function.Injective P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \"(P : Extension.{u} R S) : Function.Bijective (H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring H1Cotangent and derivationToSquareZeroEquivLift classify different algebraic data, not global scheme lifts or their derived Ext torsors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First order deformations of schemes are classified by extensions of sheaves of algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring H1Cotangent and derivationToSquareZeroEquivLift classify different algebraic data, not global scheme lifts or their derived Ext torsors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked flat scheme lifts over square zero thickenings form a torsor for cotangent complex Ext one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology and lifting ring maps do not give the global marked flat scheme classification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology and lifting ring maps do not give the global marked flat scheme classification"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(torsor|deform)|deform.*(torsor|Ext)|squareZero.*[Ll]ift",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Derivation/Basic.lean\", \"line\": \"27\", \"text\": \"- `derivationToSquareZeroEquivLift`: The `R`-derivations from `A` into a square-zero ideal `I`\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"16\", \"text\": \"- `derivationToSquareZeroOfLift`: The `R`-derivations from `A` into a square-zero ideal `I`\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"48\", \"text\": \"def derivationToSquareZeroOfLift [IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : A →ₐ[R] B)\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"73\", \"text\": \"theorem derivationToSquareZeroOfLift_apply [IsScalarTower R A B] (f : A →ₐ[R] B)\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"75\", \"text\": \"    (derivationToSquareZeroOfLift I hI f e x : B) = f x - algebraMap A B x :=\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"116\", \"text\": \"def derivationToSquareZeroEquivLift [IsScalarTower R A B] : Derivation R A I ≃\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"402\", \"text\": \"      (derivationToSquareZeroEquivLift (KaehlerDifferential.ideal R S).cotangentIdeal\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Basic.lean\", \"line\": \"80\", \"text\": \"          (derivationToSquareZeroEquivLift I hI)).surjective.subsingleton\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology and lifting ring maps do not give the global marked flat scheme classification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First order flat deformations of schemes are classified by cotangent complex cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallyEtale.mk\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Subsingleton Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallyEtale R A\", \"doc\": \"If the module of Kähler differentials $\\\\Omega_{A/R}$ is trivial and the first cohomology group of the cotangent complex is trivial, then the algebra $A$ over $R$ is formally étale.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P : Extension R A) [FormallySmooth R P.Ring] :\\n  Function.Injective P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology and lifting ring maps do not give the global marked flat scheme classification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-scheme-deformation-hull",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: general first-order lift classification before specializing to the tangent of a proper scheme.",
+   "via": [
+    "lem-sfb-proper-scheme-deformation-hull",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-square-zero-lift-torsor",
+  "worker": "stage1",
+  "summary": "Realized scheme lifts as quasi-coherent ring extensions, proved the torsor by explicit Baer difference and cancellation, computed automorphisms as derivations, and checked coefficient operations and the localized affine model. Two genuinely supporting Zariski ring-sheaf lemmas are stated, not split. No hypothesis or conclusion changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: general first-order lift classification before specializing to the tangent of a proper scheme. Steps 1-6 supply the first-order scheme deformation classification used before the proper deformation hull.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic Derived quasi-coherent modules on an affine scheme input for the Zariski extension/affine cotangent argument; the deformation-hull unit has no statement replacing this tool."
+   },
+   {
+    "node": "lem-trf-affine-cotangent-comparison",
+    "why": "Generic Sheaf cotangent stalks, section maps and ring localization input for the Zariski extension/affine cotangent argument; the deformation-hull unit has no statement replacing this tool."
+   },
+   {
+    "node": "lem-trf-lci-cotangent-presentation",
+    "why": "Generic Intrinsic cotangent complex: lci models, Tor-independent base change and smooth specialization input for the Zariski extension/affine cotangent argument; the deformation-hull unit has no statement replacing this tool."
+   },
+   {
+    "node": "lem-trf-lci-naive-cotangent-model",
+    "why": "Generic Natural projection to the two-term naive cotangent truncation input for the Zariski extension/affine cotangent argument; the deformation-hull unit has no statement replacing this tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+    "why": "Generic Conormal sheaf of a closed immersion under (flat) base change input for the Zariski extension/affine cotangent argument; the deformation-hull unit has no statement replacing this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic Sections of the pullback of a quasi-coherent module over an affine open input for the Zariski extension/affine cotangent argument; the deformation-hull unit has no statement replacing this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic The pullback of a quasi-coherent module is quasi-coherent input for the Zariski extension/affine cotangent argument; the deformation-hull unit has no statement replacing this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-bbe526ac5",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-bbe526ac5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. I compared them against Stacks 0D14, 0GPZ, 0GQ0-0GQ2 and 08U8 (defos.tex), 08UW, 08UZ and 08UR (cotangent.tex), and 05YV and 063Y (more-morphisms.tex). The full L can replace NL because 08UW gives NL = τ_{≥-1}L. The realization node matches 05YV hypothesis by hypothesis, and its morphism clause is true because the kernels are nilpotent and the underlying space is the same. The extension-Ext node is 0GPZ for the identity map of (T,R) to (T,A), with 0GQ0/0GQ2 giving the pushout and Baer-sum compatibility, Der equal to Hom(L,G[0]) since H^0(L)=Ω, and arbitrary G allowed. Neither new node duplicates an existing one: the étale, algebraic-space and ring versions differ, and neither restates a clause of the item. Steps checked: step 1 is the conormal flat base change plus the nilpotent flatness criterion, using the tensor-over-quotient identification and I^2=0. Step 2's Baer sum and difference formulas are invariant under both relations and give existence and uniqueness of the translate. In step 3, G is generated by the image of K, so the automorphism fixes G and d is an R-derivation. Step 4's pushouts work at the level of extension problems. Step 5's unique (k⊕M)-structure is multiplicative because the kernel has square zero, and base change is the kernel pushout. In step 6, Q lies in D^{≤-2}, so Hom(Q,G[1]) and Hom(Q[1],G[1]) both vanish, and the localized presentation is allowed by the naive model. Edge cases G=0, M=0, X empty and non-separated X all hold. Batch-5: lem-trf-lci-cotangent-presentation (only its affine-chart clause is used), lem-trf-lci-naive-cotangent-model and lem-trf-affine-cotangent-comparison are generic cotangent-complex foundations; their closures (882, 521 and 668 nodes) reach no trace-formula, Lefschetz or Poincaré-duality theorem, so I accept them. All seven split_report.tool_uses are generic and accepted. No SGA source is used and nothing was changed. Maintainer note: the base contains a duplicate pair, lem-sfb-nilpotent-ideal-flatness-criterion and lem-sfb-nilpotent-ideal-module-flatness."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeSquareZeroLiftTorsor",
+  "declaration": "AlgebraicGeometry.SchemeDeformation.exists_classification",
+  "declarations": [
+   "AlgebraicGeometry.SchemeDeformation.Classification",
+   "AlgebraicGeometry.SchemeDeformation.exists_classification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeSquareZeroLiftTorsor.lean",
+  "statement": "theorem exists_classification (C : Coherence.{u}) (D : TopCat.SheafCotangent.Comparison C) : Nonempty (Classification C D)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-937cd1884",
+  "group": "Q70",
+  "result": "fix",
+  "note": "F1 (H3): Classification.restrict_class lacked IsFirstOrderThickening i and is false without it (S=X=∅, S'=Spec ℤ: every flat S'-scheme is a lift; Z=S' and Z=∅ both IsRestriction of Y=S' to the empty open, forcing S'≅∅), so exists_classification was unprovable. F2 (H3): problem_base was asserted for arbitrary i; for a non-closed-immersion i, ker(f⁻¹i⁻¹O_S'→f⁻¹O_S) can exceed the image of f⁻¹i⁻¹J. Fix: add (_hi : IsFirstOrderThickening i) to both clauses (the node's standing hypothesis; every downstream use of problem f i already carries hi). fixes/SchemeSquareZeroLiftTorsor.lean plus a lean-record.json pinning the unchanged statement; nt_compile --json clean on all 7 modules (item 17.1 s, load 65). Rest verified: torsor normalized via solutions/solution_class/translation_normalization to the landed Baer/ConormalClass; automorphisms pinned by e↦e+i(d(p e)) through a unique DerivationRepresentative; open/coefficient naturality; split k⊕M classes/scalar/trivial/addition/base change tied to the general torsor; affine two-term Ext via the bijective naiveExt and every localization; no extra hypotheses; universes free; H2/H12 records fine; the only sorry is the main proof. Advisory: new def nodes cite theorem nodes for plain decls (Naive.* and moduleOverFunctor_limits have existing def owners; CotangentPresentation and SquareZeroSheaf.Classification have none)."
+ }
+}

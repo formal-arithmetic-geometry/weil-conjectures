@@ -1,0 +1,157 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 forward implication, preparation for Lemma 6.6.8; Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 03A0, 03CY, 099L, 099R"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsComplete|mapHomologicalComplexHomologyIso",
+   "results": "Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/NumberTheory/Padics/ProperSpace.lean, Mathlib/NumberTheory/Padics/ProperSpace.lean, Mathlib/Combinatorics/SimpleGraph/Maps.lean",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport derived complete complexes of sheaves along a locally closed immersion and an equivalence of ringed sites, preserving residue and slice comparisons",
+   "results": "SheafOfModules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_hom_app_app, SheafOfModules.pushforwardNatIso_hom, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstantFiniteTypeModules|isFlat_constantFieldModule",
+   "results": "No indexed Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplexHomologyIso\"",
+   "results": "No indexed Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a constant field sheaf every module sheaf is flat and tensor with a degree zero sheaf commutes with homology",
+   "results": "Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-26",
+   "verdict": "No complete normalization theorem; project API and exact-functor homology comparisons reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionLiftingInput",
+  "date": "2026-10-26",
+  "group": "W5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "id": "lem-sfb-adic-immersion-completed-transport",
+ "title": "Completed immersion restriction with fixed residue and slice comparisons",
+ "statement": "Let X and S be Noetherian schemes and i:S→X an immersion [def-pc-scheme], [def-weil-closed-immersion], [def-weil-open-immersion]. Let A be a Noetherian ring and I any ideal [def-weil-pbc-noetherian-ring]. A complete complex K with completed coefficients and a fixed etale complex C representing its residue [def-sfb-adic-stratified-perfect-data] admit a transported complete complex M on the small model of S [def-sfb-adic-residue-lift-comparisons]. The residue projection of M is isomorphic to adicResidueComparison applied to the explicit sfbImmersionResidue i I C [lem-sfb-adic-immersion-residue-transport]. For every original pro-etale object U there is an equivalence of standard derived categories on the completed model slice and the actual inverse-image coefficient slice. It identifies restriction of M with sfbLocalRestriction of K, and, for every ordinary A-complex P, identifies restriction of the completed constant realization of P with sfbLocalRestriction of sfbCompletedModel(P). There are no boundedness, lissity, maximality or adic completeness assumptions on A; no perfect model is selected.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-adic-stratified-perfect-data",
+  "def-sfb-adic-residue-lift-comparisons",
+  "lem-sfb-adic-immersion-residue-transport"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved SfbCompletionNormalization.complete_iff to normalize K and preserve local derived completeness. Choose a finite generating family of I, and apply the completeness clause of the existing adicStratumCompletionUnit to the specified completed inverse image.",
+   "uses": [
+    "def-sfb-adic-immersion-completed-model",
+    "lem-sfb-adic-stratum-completion-unit",
+    "lem-sfb-completion-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two residue functor comparisons to K and C. Map the supplied residue isomorphism through the exact fixed-scalar derived inverse image and compose the three isomorphisms. This gives the actual zeroth projection of the previously fixed complete object.",
+   "uses": [
+    "lem-sfb-adic-immersion-residue-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the uniform slice comparison for the specified completed inverse image to K. Its same equivalence already compares every ordinary completed constant model P. Assemble these with completeness and residue into the existential conclusion.",
+   "uses": [
+    "lem-sfb-adic-immersion-slice-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adic-immersion-completed-model",
+  "lem-sfb-adic-stratum-completion-unit",
+  "lem-sfb-adic-immersion-residue-comparison",
+  "lem-sfb-adic-immersion-slice-comparison",
+  "lem-sfb-completion-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "F8: explicit model normalization, restriction-of-scalars completeness, completion-unit preservation, residue and slice comparison steps of Lemma 6.5.8 / Proposition 6.6.11."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof invoking the forward implication of the integral criterion, restriction and coefficient normalization before lisse residue lifting; Completed immersion restriction with fixed residue and slice comparisons",
+   "via": [
+    "lem-sfb-adic-immersion-lifting-input",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-adic-constructible-local-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicImmersionCompletedTransport",
+  "file": "lean/Sheaf/Paper/AdicImmersionCompletedTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbAdicImmersion_completedTransport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfbAdicImmersion_completedTransport"
+  ],
+  "statement": "theorem sfbAdicImmersion_completedTransport\n    (X S : Scheme.{u}) [IsNoetherian X] [IsNoetherian S]\n    (i : S ⟶ X) [IsImmersion i]\n    (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A)\n    (K : _)\n    (hcomplete : IsSfbAdicComplete X I K)\n    (C : CochainComplex\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ)\n    (hres : Nonempty (DerivedCategory.Q.obj (sfbResidueComplex X I K) ≅\n      DerivedCategory.Q.obj\n        (((ProEtale.comparisonUpperStar.{u + 2, u}\n          (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))) X).mapHomologicalComplex (.up ℤ)).obj C))) :\n    ∃ (M : ConstantCompletion.D\n        (ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, 0} S) A I)),\n      ConstantCompletion.IsComplete\n        (ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, 0} S) A I 0) M ∧\n      Nonempty ((ConstantCompletion.extend\n        (ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, 0} S) A I 0)).obj\n          M ≅ (adicResidueComparison.{u, 0} S (A ⧸ I ^ (0 + 1))).obj (sfbImmersionResidue i I C)) ∧\n      ∀ U : S.ProEt, ∃ eU :\n          ConstantCompletion.D\n            ((ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, 0} S) A I).over\n              ((AsSmall.up : S.ProEt ⥤ coefficientProEtaleSiteModel.{u, 0} S).obj U)) ≌\n            (let R := (adicLisseForget S).obj\n              ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj\n                (adicLisseCompletedRing X I))\n             @DerivedCategory (SheafOfModules.{u + 1} (R.over U)) _ _\n               (HasDerivedCategory.standard _)),\n        Nonempty (sfbLocalRestriction i (adicLisseCompletedRing X I) U K ≅\n          eU.functor.obj ((adicResidueRestriction.{u + 1}\n            (ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, 0} S) A I)\n            ((AsSmall.up : S.ProEt ⥤ coefficientProEtaleSiteModel.{u, 0} S).obj U)).obj M)) ∧\n        ∀ P : CochainComplex (ModuleCat.{u + 1} A) ℤ,\n          Nonempty (eU.functor.obj ((adicResidueRestriction.{u + 1}\n            (ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, 0} S) A I)\n            ((AsSmall.up : S.ProEt ⥤ coefficientProEtaleSiteModel.{u, 0} S).obj U)).obj\n              (adicResidueConstantPerfect.{u, 0} S I P)) ≅\n            sfbLocalRestriction i (adicLisseCompletedRing X I) U (sfbCompletedModel X I P))",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T203641-L-2837290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T001524-L-6141",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

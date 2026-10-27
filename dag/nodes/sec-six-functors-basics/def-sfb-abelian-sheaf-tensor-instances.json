@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-abelian-sheaf-tensor-instances",
+ "kind": "definition",
+ "title": "Canonical instance interfaces for the tensor of abelian sheaves",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $C$ be a category with a Grothendieck topology $J$, essentially small relative to the coefficient universe $\\mathcal U$ [def-weil-size-convention], and let $\\mathcal B=\\operatorname{Sh}(C,J;\\mathrm{Ab}_{\\mathcal U})$. Define its canonical tensor instance interfaces by specializing the sheafified tensor of [sk-def-sfb-sheaf-tensor] to abelian groups with tensor over $\\mathbf Z$. The sheafification interface is left exact sheafification transported from a $\\mathcal U$-small model of $C$. The monoidal and symmetric interfaces are precisely the corresponding fields of the specified sheaf tensor structure, with tensor $a(F\\otimes_{\\mathbf Z,p}G)$ and unit $a(\\underline{\\mathbf Z})$. The closed interface is a right-adjoint structure for this fixed tensor, obtained from its recorded closedness. The additive tensor interface and preservation of finite colimits by $F\\otimes-$ are the specializations of the recorded tensor properties. These are interfaces to the specified tensor, not an arbitrary monoidal structure or additional hypotheses.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-def-sfb-sheaf-tensor-structure.md",
+  "place": "Ab specialization, tensor and unit definitions and symmetric structure; det-def-sfb-sheaf-tensor-closed.md, tensor-Hom adjunction and additivity/right exactness. Canonical instance interfaces requested in the H2 return for lem-sfb-sheaf-modobj-grothendieck-any-ring."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "monoidalCategory|MonoidalPreadditive|HasWeakSheafify CategoryTheory/Sites/Monoidal.lean",
+   "results": "5 hits: 17, 40, 42, 168, 169",
+   "date": "2026-10-25",
+   "verdict": "Generic constructions or special sites only; the new definition module specializes the existing sfbSheafTensorStructure and its properties, as requested by the H2 return; it does not define a second tensor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical monoidal structure on abelian sheaves sheafified tensor over integers essentially small site",
+   "results": "8 hits: PresheafOfModules.monoidalCategory, PresheafOfModules.monoidalCategoryStruct, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Sheaf.cartesianMonoidalCategory, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.tensorProd_isSheaf, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+   "date": "2026-10-25",
+   "verdict": "Generic constructions or special sites only; the new definition module specializes the existing sfbSheafTensorStructure and its properties, as requested by the H2 return; it does not define a second tensor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical sheafified tensor product abelian sheaves monoidal closed additive preserves finite colimits",
+   "results": "8 hits: instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalClosedLightCondMod, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.tensorProd_isSheaf, instMonoidalClosedLightCondSet, instMonoidalClosedCondensedSet",
+   "date": "2026-10-25",
+   "verdict": "Generic constructions or special sites only; the new definition module specializes the existing sfbSheafTensorStructure and its properties, as requested by the H2 return; it does not define a second tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l sectionwiseShortExactSheafMonoidal|canonicalAbelianSheafTensor|def-sfb-abelian-sheaf-tensor-instances dag/nodes; python3 tools/blueprint_refs.py search \"abelian sheaf tensor\"",
+   "results": "Only lem-pe-internal-module-sectionwise-short-exact owns the prior instance interfaces under a theorem binding; zero blueprint nodes match the search. No dedicated definition node owns these instance interfaces.",
+   "date": "2026-10-25",
+   "verdict": "New ownership node requested explicitly by the maintainer; no existing definition node for the instance bundle."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n sfbSheafTensorStructure|instance.*[Ss]heaf.*Monoidal|instance.*[Ss]heaf.*[Pp]readditive lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/Monoidal/{Defs,TensorColimits}.lean",
+   "results": "Etale.sheafMonoidalCategory and ProEtale.sheafMonoidalCategory, plus corresponding closed instances: special scheme sites, not arbitrary independent site universes.",
+   "date": "2026-10-25",
+   "verdict": "Use the general existing canonical sheaf tensor, specialize it in the new definition module."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n sectionwiseShortExactSheaf lean/Sheaf/CategoryTheory/InternalModuleSectionwiseShortExact.lean; rg -n abelianSheafTensor lean/WeilConjectures lean/Sheaf dag/lean_names_upstream.json",
+   "results": "Six canonical instance definitions at lines 49-101 in the theorem-owned module; no preexisting declarations with the new names.",
+   "date": "2026-10-25",
+   "verdict": "The requested repair supplies a definition-owned module instead of citing the unrelated theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-modobj-grothendieck-any-ring",
+  "date": "2026-10-25",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-formal-closed-support",
+   "place": "Proof, adjunction paragraph: canonical abelian-sheaf tensor interfaces for Grothendieckness of internal modules, extracted at the maintainer H2 return.",
+   "via": [
+    "lem-sfb-sheaf-modobj-grothendieck-any-ring",
+    "lem-route-formal-closed-support-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-formal-closed-support",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AbelianSheafTensorInstances",
+  "declaration": "CategoryTheory.abelianSheafTensorMonoidal",
+  "declarations": [
+   "CategoryTheory.abelianSheafTensorSheafify",
+   "CategoryTheory.abelianSheafTensorMonoidal",
+   "CategoryTheory.abelianSheafTensorSymmetric",
+   "CategoryTheory.abelianSheafTensorClosed",
+   "CategoryTheory.abelianSheafTensorPreadditive",
+   "CategoryTheory.abelianSheafTensorLeftColimits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AbelianSheafTensorInstances.lean",
+  "statement": "instance abelianSheafTensorMonoidal {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (J : GrothendieckTopology C) : MonoidalCategory (Sheaf J AddCommGrpCat.{w})",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Definition-owned instance interfaces requested by the maintainer in the H2 return. Every body is derived from the existing canonical tensor and its recorded properties, following InternalModuleSectionwiseShortExact.lean:40-101, without importing that theorem module. Closed chooses only a right adjoint of a fixed functor, determined up to its adjunction isomorphism; the monoidal tensor data is the existing sfbSheafTensorStructure field, never chosen from existence."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f4f834e9",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f4f834e9",
+  "group": "NK",
+  "result": "pass",
+  "note": "Six-clause statement matches the node: EssentiallySmall.{w} site with independent uC/vC/w, MonObj R with no commutativity, Mathlib Mod (left self-action); both IsGrothendieckAbelian.{w}; Mod.forget faithful, preserves finite limits, finite colimits and filtered colimits at {w,w}. New def node def-sfb-abelian-sheaf-tensor-instances: six declarations built from sfbSheafTensorStructure.monoidal/.symmetric (= Sheaf.monoidalCategory/Sheaf.symmetricCategory) and the recorded sfbSheafTensor_properties/monoidalPreadditive. Nothing empty or unproved, no second tensor; closed .some only feeds the Prop MonoidalPreadditive. Statement matches det-def-sfb-sheaf-tensor-structure (Ab case) and the node is not on live. H2 return of c385bf90f29c repaired (unrelated theorem dep removed). Item differs from live only in stmt_deps and lean; both lean.statement fields match their files verbatim; docstrings carry source, blueprint tag and proof steps. Mod.instAbelian/isGrothendieckAbelian need no commutativity. Advisory: duplicate instance copies remain in the theorem module InternalModuleSectionwiseShortExact.lean."
+ }
+}

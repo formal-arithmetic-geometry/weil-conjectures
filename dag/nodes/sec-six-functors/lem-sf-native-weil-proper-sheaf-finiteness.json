@@ -1,0 +1,287 @@
+{
+ "id": "lem-sf-native-weil-proper-sheaf-finiteness",
+ "kind": "statement",
+ "title": "Proper native Weil direct image finiteness on the constructible heart",
+ "statement": "Fix a finite field $k_0$ and a prime $\\ell\\ne\\operatorname{char}(k_0)$. Use the locally finite continuous $\\Omega=\\overline{\\mathbf Q}_\\ell$ coefficient sheaves, the categories $\\mathcal A_T$ of their module sheaves, the categories $\\mathcal W_T$ of pro-etale sheaves with invertible Frobenius structure, and the constructibility condition of [def-sf-native-weil-derived-framework]. Let $p:Z\\to T$ be a proper morphism [def-weil-proper-morphism] of $k_0$-schemes, with $T$ quasi-compact, quasi-separated [def-weil-quasi-separated-morphism] and locally of finite type [def-weil-finite-type-morphism] over $k_0$. The ordinary equivariant direct image $p_{0*}:\\mathcal W_Z\\to\\mathcal W_T$ is additive and left exact. For each $F\\in\\mathcal W_Z$ with constructible underlying sheaf, place $F$ in degree zero in the ordinary derived category. Then the actual total right derived functor $Rp_{0*}$ of $p_{0*}$ satisfies\n$$H^n(Rp_{0*}(F[0]))=0\\quad\\text{outside a finite integer interval},$$\nand the underlying sheaf of $H^n(Rp_{0*}(F[0]))$ is constructible for every $n\\in\\mathbf Z$. This assertion concerns derivation in $\\mathcal W_Z$, not fixed pairs in the derived category of $\\mathcal A_Z$.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+  "place": "ProEtaleWeilSheaf.lowerStar and additive/left-exact instances, lines 79-90; WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor, lines 104-141, specialized to proper p. The underlying finiteness carrier is SixFunctors/ProEtale/Adic/LowerStar.lean; its affine input is the already recorded lem-sf-adic-affine-direct-image-finiteness. No forbidden source is used."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=\\overline{k_0}$ and write $\\bar p:\\bar Z\\to\\bar T$ for geometric base change. Properness survives this base change by [lem-pc-proper-base-change], hence $\\bar p$ is quasi-compact and locally of finite type by the definition of properness, and quasi-separated by [lem-pc-separated-quasi-separated]. The structure morphism $\\bar T\\to\\operatorname{Spec}k$ is quasi-compact and locally of finite type by [lem-pc-quasi-compact-base-change] and [lem-weil-pbc-lft-base-change], applied to $T\\to\\operatorname{Spec}k_0$. Its quasi-compactness is precisely quasi-compactness of $T$, since the target has its single affine chart. Characteristic is unchanged by field extension: the field inclusion $k_0\\hookrightarrow k$ has zero kernel, so a positive integer kills $1$ in one field exactly when it does in the other. Thus $\\operatorname{char}k\\ne\\ell$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+    "place": "ProEtaleWeilSheaf.lowerStar and instances (74-87); objectProperty_rightDerivedLowerStar_singleFunctor (110-136), with the affine input and finite-cover descent in Adic/LowerStar.lean."
+   }
+  },
+  {
+   "text": "Write $G=\\bar p_*$ for the ordinary module direct image and $U_S:\\mathcal W_S\\to\\mathcal A_S$ for forgetting Frobenius. Kernels of module sheaves are sectionwise by [def-weil-sheaf-of-modules-category]. By the direct-image definition of [def-weil-proetale-inverse-image], on a pro-etale test object $V\\to\\bar T$, $(GM)(V)=M(V\\times_{\\bar T}\\bar Z)$, with scalars restricted along the coefficient map of [def-sf-native-weil-derived-framework]. Consequently $G(a+b)=G(a)+G(b)$, $G(0)=0$, and $G(\\ker a)=\\ker(Ga)$: all three are the same equalities evaluated at $V\\times_{\\bar T}\\bar Z$. Frobenius is an automorphism; [lem-weil-proetale-isomorphism-inverse-image] identifies its pullback with an equivalence of sites. The coefficient identification is literally precomposition of the same locally finite functions, whose inverse is precomposition by the inverse automorphism. Hence Frobenius acts by additive autoequivalences on these module categories. The lifted direct image has underlying functor $G$ and structure $G(\\phi)\\circ c_M$ by the framework definition. The kernel of a commuting map carries the restriction of this invertible structure, because the Frobenius equivalence preserves kernels; finite direct sums carry the sum structure. Therefore the displayed sectionwise equalities lift to $p_{0*}$, proving its additivity and left exactness.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sf-native-weil-derived-framework",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+    "place": "ProEtaleWeilSheaf.lowerStar and instances (74-87); objectProperty_rightDerivedLowerStar_singleFunctor (110-136), with the affine input and finite-cover descent in Adic/LowerStar.lean."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-adic-affine-direct-image-finiteness] over $k$ to every pair of affine schemes occurring in the affine hypothesis of [lem-sf-adic-affine-finiteness-descent]. The coefficient models agree: locally finite-dimensional $\\mathbf Q_\\ell$-span implies values in a finite extension, because a basis consists of finitely many elements of the algebraic closure and their compositum is finite; conversely values in a finite extension have finite-dimensional span. Both constructibility conditions mean finite locally closed constructible stratifications locally on the scheme, with finite free trivializations on pro-etale covers. No common-stage pair category is substituted for these module categories. The affine hypothesis is therefore satisfied. The descent lemma, with $f=\\bar p$ and the geometric hypotheses from step 1, gives bounded constructible $R\\bar p_*((U_ZF)[0])$, since the single complex has only its degree-zero cohomology $U_ZF$.",
+   "uses": [
+    "lem-sf-adic-affine-direct-image-finiteness",
+    "lem-sf-adic-affine-finiteness-descent",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+    "place": "ProEtaleWeilSheaf.lowerStar and instances (74-87); objectProperty_rightDerivedLowerStar_singleFunctor (110-136), with the affine input and finite-cover descent in Adic/LowerStar.lean."
+   }
+  },
+  {
+   "text": "The categories $\\mathcal A_S$ are categories of modules over the actual ring sheaf $B_{\\bar S}$ on the small pro-etale site; they are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], in a common sheaf-value universe. Apply [lem-sf-fixed-pair-derived-forget-comparison] to these categories, their Frobenius autoequivalences verified in step 2, the additive left exact functor $G$, and the natural Frobenius comparison $c$ supplied in [def-sf-native-weil-derived-framework]. Its transported functor is exactly $p_{0*}$ by the formula in step 2. The lemma gives the canonical isomorphism in the ordinary underlying derived category\n$$D(U_T)Rp_{0*}(F[0])\\xrightarrow{\\sim}R\\bar p_*((U_ZF)[0]).$$\nIn particular this is a comparison of the actual right derived functors: it does not replace $D(\\mathcal W)$ by fixed pairs in $D(\\mathcal A)$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+    "place": "ProEtaleWeilSheaf.lowerStar and instances (74-87); objectProperty_rightDerivedLowerStar_singleFunctor (110-136), with the affine input and finite-cover descent in Adic/LowerStar.lean."
+   }
+  },
+  {
+   "text": "Let $C=Rp_{0*}(F[0])$. The fixed-pair comparison lemma says that $U_T$ is exact and conservative. Exactness identifies $U_TH^n(C)$ with $H^n(D(U_T)C)$: applying $U_T$ to $\\ker d^n/\\operatorname{im}d^{n-1}$ preserves both the kernel and its quotient. Taking cohomology of step 4 identifies this with $H^n(R\\bar p_*((U_ZF)[0]))$. Step 3 supplies an interval $[a,b]$ outside which the latter is zero, and constructibility in every degree. For $n\\notin[a,b]$, $U_T(0\\to H^n(C))$ is an isomorphism, so conservativity makes $0\\to H^n(C)$ an isomorphism. Thus $C$ vanishes in those degrees. In every degree its underlying cohomology sheaf is isomorphic to the constructible sheaf from step 3 and is constructible by transporting the local finite-free trivializations. This proves both required finiteness clauses.",
+   "uses": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+    "place": "ProEtaleWeilSheaf.lowerStar and instances (74-87); objectProperty_rightDerivedLowerStar_singleFunctor (110-136), with the affine input and finite-cover descent in Adic/LowerStar.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "def-weil-sheaf-of-modules-category",
+  "def-sf-native-weil-derived-framework",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "lem-sf-adic-affine-direct-image-finiteness",
+  "lem-sf-adic-affine-finiteness-descent",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sf-fixed-pair-derived-forget-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/WeilSheaf/LowerStar.lean",
+  "place": "ProEtaleWeilSheaf.lowerStar and instances (74-87); objectProperty_rightDerivedLowerStar_singleFunctor (110-136), with the affine input and finite-cover descent in Adic/LowerStar.lean.",
+  "note": "Follows the existing native derived-forget argument, exposing its affine finiteness and conditional finite-cover descent dependencies; no forbidden source is invoked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image of a constructible Weil sheaf placed in degree zero is bounded with constructible cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, Condensed.lanSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite, CompHausLike.LocallyConstantModule.functor, Condensed.isSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsProper, IsConstructible",
+   "results": "0 hits: ; loogle: unknown identifier 'IsProper'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "12 hits: AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.instRespectsIsoScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*[Cc]onstructible|[Cc]onstructible.*[Ll]owerStar",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper pushforward l adic constructible sheaf derived bounded cohomology Frobenius",
+   "results": "8 hits: SheafOfModules.pushforward_map_val, CategoryTheory.Functor.sheafPushforwardContinuous, TopCat.Sheaf.pushforward, SheafOfModules.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardSections",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteLowerStar|AdicSheaf|ProEtaleWeilSheaf",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state bounded constructible direct image in the native Weil derived category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image constructible l-adic sheaf bounded cohomology",
+   "results": "8 hits: AlgebraicGeometry.IsProper.mk; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; CompHausLike.LocallyConstant.counit_app_val; CondensedSet.LocallyConstant.functorFullyFaithful; CategoryTheory.Sheaf.IsConstant.mk; LightCondensed.IsDiscrete; LightProfinite.hasSheafify",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state bounded constructible direct image in the native Weil derived category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra'",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state bounded constructible direct image in the native Weil derived category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of constructible pro-etale Weil sheaves has bounded constructible derived cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; Condensed.isSheafProfinite; Condensed.lanSheafProfinite; CategoryTheory.Functor.sheafPushforwardCocontinuous; LightCondMod.ofSheafLightProfinite; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state bounded constructible direct image in the native Weil derived category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting Frobenius commutes with derived direct image of l-adic module sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardComp; LightCondensed.forget_obj_val_map; SheafOfModules.pushforward_map_val; SheafOfModules.pushforwardComp_hom_app_val_app; TopCat.Sheaf.pushforwardForgetIso; TopCat.Sheaf.pushforward_forget; SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardNatIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state bounded constructible direct image in the native Weil derived category"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-shriek-triangulated",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package clause 3, applying compact support to the localization triangle: the native derived realization of lem-zl-morphism-open-closed-reduction. The created.item chain ends at the maintainer seed, so blueprint_refs.py ancestor returns None. ProEtaleWeilSheaf.lowerStar and additive/left-exact instances, lines 79-90; WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor, lines 104-141, specialized to proper p. The underlying finiteness carrier is SixFunctors/ProEtale/Adic/LowerStar.lean; its affine input is the already recorded lem-sf-adic-affine-direct-image-finiteness. No forbidden source is used.",
+   "via": [
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-proper-sheaf-finiteness",
+  "worker": "stage1",
+  "summary": "Separated the native equivariant derivation from the underlying adic finite-cover argument. Reused the fixed-pair derived-forget comparison and the existing affine adic finiteness node. Added only a conditional affine-to-qcqs descent lemma, with no proof. Wrote out additivity and left exactness sectionwise, verified geometric base-change hypotheses and coefficient conventions, then reflected boundedness and transported constructibility using exact conservative forgetting. The upstream wrapper is sorry-free locally but reaches the existing affine finiteness sorry, so is not a finished attachment.",
+  "blueprint": "Realizes the native proper factor of the recorded prop-functor-package clause 3 / lem-zl-morphism-open-closed-reduction localization route, through lem-sf-native-weil-shriek-triangulated. No chapter or unit route changes. The ancestor chain ends at a maintainer seed (None); the inherited breadcrumb is retained and same_as=[] after whole-blueprint searches.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-adic-affine-direct-image-finiteness",
+    "why": "Underlying native coefficient affine finiteness; the package unit supplies no affine proof. The new conditional descent node only propagates this input."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme-theoretic stability of properness under geometric base change."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic separatedness implies quasi-separatedness for the geometric proper morphism."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Generic stability of quasi-compactness for the geometric target structure morphism."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic stability of local finite type for the geometric target structure morphism."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic site equivalence along the Frobenius automorphism; its coefficient map is identified directly."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Grothendieck theorem for modules over the actual locally finite coefficient ring sheaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-adic-affine-direct-image-finiteness",
+  "lem-pc-proper-base-change",
+  "lem-pc-separated-quasi-separated",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-df8750765",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-df8750765 (reviewer sub-agent of L); spot-checked: PASS, no fixes; full review in review.md. I read the item, the new node, every cited statement, the units sk-thm-sf-package and sk-prop-sf-finiteness, WeilSheaf/LowerStar.lean:70-141 and Adic/LowerStar.lean:1-581. The item statement is unchanged and is WeilComplex.objectProperty_rightDerivedLowerStar_singleFunctor specialised to proper p. That Lean rests on the sorry at Adic/LowerStar.lean:415, so it cannot be attached as finished. Step 1: proper, separated-implies-quasi-separated, quasi-compact and locally-finite-type base change give p̄ quasi-compact, quasi-separated and locally of finite type, and T̄ quasi-compact and locally of finite type over k with char k ≠ ℓ. Step 2: the direct image is computed sectionwise; Frobenius is an equivalence via lem-weil-proetale-isomorphism-inverse-image; the step identifies the coefficient sheaf B correctly by precomposition; it proves additivity and left exactness. Step 3: the affine node matches the descent hypothesis exactly; the coefficient models (locally finite span ⇔ values in a finite extension) and the constructibility conventions agree. Step 4: all hypotheses of the fixed-pair lemma hold: Grothendieck by ring-sheaves-grothendieck, the autoequivalences from step 2, and the framework iso c in the right direction. It gives the derived isomorphism D(U_T)Rp_{0*} ≅ Rp̄_*D(U_Z). Step 5: forgetting is exact and conservative, which reflects vanishing and transfers constructibility. New node lem-sf-adic-affine-finiteness-descent is true; it is the dévissage, Mayer–Vietoris, finite-cover induction and target-localisation argument at Adic/LowerStar.lean:142-566. It is self-contained, statement-only, with all search kinds recorded. It does not restate the item, the affine node or the different-coefficient condensed nodes. Batch-5 flag: lem-trf-proper-finite-fibre-finite-near is general scheme theory (proper with finite fibre is finite near the point). The cited affine finiteness node is a finiteness/constructibility input of the H^i_c kind, outside the trace-formula and Poincaré-duality assumptions, so I accept it. The 7 declared tool uses (the affine finiteness node and six generic scheme/site/Grothendieck lemmas) are accepted. No SGA source is cited and there is no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.ProperSheafFiniteness",
+  "declaration": "AlgebraicGeometry.WeilComplex.proper_sheaf_finiteness",
+  "file": "lean/Sheaf/WeilSheaf/ProperSheafFiniteness.lean",
+  "statement": "theorem WeilComplex.proper_sheaf_finiteness (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {Z T : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [T.Over (Spec (CommRingCat.of k₀))] (p : Z ⟶ T) [p.IsOver (Spec (CommRingCat.of k₀))] [IsProper p] [QuasiCompact (T ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (T ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))] : (ProEtaleWeilSheaf.lowerStar k₀ l p).Additive ∧ PreservesFiniteLimits (ProEtaleWeilSheaf.lowerStar k₀ l p) ∧ ∀ (F : ProEtaleWeilSheaf k₀ l Z), WeilSheaf.objectProperty k₀ l Z F → WeilComplex.objectProperty k₀ l T ((ProEtaleWeilSheaf.lowerStar k₀ l p).rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Exact proper specialization, combining the additive and left-exact clauses with the single-sheaf derived finiteness clause. Uses the recorded native framework and its actual ambient rightDerivedFunctor, not fixed pairs in a derived category. The upstream singleFunctor theorem has more general morphism hypotheses and does not include the two ordinary-functor clauses, so no single existing declaration has this signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a6a52957",
+  "group": "NO",
+  "result": "pass",
+  "note": "Delivered theorem WeilComplex.proper_sheaf_finiteness is the source objectProperty_rightDerivedLowerStar_singleFunctor (WeilSheaf/LowerStar.lean:104-141) specialised to IsProper p, plus the Additive and PreservesFiniteLimits instance clauses. IsProper supplies qc/qs/lft of p. T qc+qs+lft over k0 is as in the node, not stronger. The conclusion is the actual rightDerivedFunctor on DerivedCategory(ProEtaleWeilSheaf), not fixed pairs; WeilComplex.objectProperty = t.bounded ⊓ constructible homology in every degree. The node differs from live only in lean; lean.statement is verbatim; existing:false is justified (no other declaration or delivery). Stmt_dep records checked; public imports for statement deps, plain imports match the proof_deps' live lean records; descent node has no record so no import. Docstrings carry source place, blueprint tag and 5 proof steps; proof is sorry only. Edge cases (empty schemes, F=0, id, all n, universes) are fine. No file changed, so nothing compiled. Advisory only: the Adic.LowerStar import is also reached transitively."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

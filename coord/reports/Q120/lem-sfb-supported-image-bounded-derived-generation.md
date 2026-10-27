@@ -1,0 +1,74 @@
+# Q120 stage-1 report
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-supported-image-bounded-derived-generation.json: item, statement unchanged; seven proof steps, no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-profinite-constant-model-relation-hull.json: new statement-only structural lemma, unsplit; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-supported-hull-proetale-descent.json: new statement-only structural lemma, unsplit; no Mathlib match.
+- citations.json: exact statement quotations for every step/citation pair.
+
+## Attachments
+
+None. Searches of lean/WeilConjectures/ for the item tag, supported images, scalar local models and the proposed new notions found no declaration giving these assertions. In particular generic localizing-closure declarations do not assert these explicit product and uniformly termwise bounded filtered-colimit closures.
+
+## WANTED
+
+WANTED: an exact published proof of continuous relation-kernel generation on extremally disconnected profinite spaces, for lem-sfb-profinite-constant-model-relation-hull. Hemo–Richarz–Scholbach, Sections 3–4, supplies the category and component reduction, not this structural hull assertion.
+
+WANTED: an exact published proof of pro-étale locality of degree-zero membership in the explicitly supported product/filtered-colimit hull, for lem-sfb-supported-hull-proetale-descent. HRS Corollary 4.7 concerns descent of lisse and constructible categories and does not assert this generated-subcategory locality.
+
+The report records these requests because this worker cannot write literature/LIST.md or coord/HUMAN.md. The item proof is agent-written and does not attribute either new assertion to HRS.
+
+## Audit findings and corrections
+
+The imported item is an independent agent-formulated obligation. Its source paragraph in the latest blueprint motivates the downstream cohomology application but does not prove the present derived-generation assertion. Its parent already explicitly distinguishes this structural claim from finite-model image closure. I preserved the item's coefficients, topology, all operations, arbitrary continuous maps, support chains and conclusion verbatim. No STATEMENT-DISPUTED change was needed.
+
+The proof does not use a Noetherian kernel/image-closure theorem or identify all-continuous Omega functions with finite-field-valued functions. HRS Examples 3.6 and 4.2 were read: they explain why neither constant-matrix replacement nor exactness of the global-sections extension functor is available. Component inverse image is a different, exact functor and its full-faithfulness/evaluation statements are the existing nodes actually used.
+
+I corrected the draft product-transport argument: rather than leave 'derived sections are right adjoints' unsupported in the profinite coefficient category, step 3 now proves the claim from sectionwise products, the stated component evaluation, full faithfulness, and the existing termwise derived-product theorem on the scheme W. This also constructs the source derived product by its Hom universal property. The proof never replaces all small products by countable ones.
+
+The two new lemmas are strictly different inputs, not two copies of the image conclusion: the first is solely on the profinite slice site, with constant global scalar source and target and a kernel conclusion, and has neither scheme supports nor descent. The second is a locality principle for an arbitrary degree-zero module whose local hull membership is already supplied; it says nothing about maps, matrices, kernels or images. The item's steps carry the component reduction, transfer of closure operations, exact support-chain transport and final image triangle.
+
+## Not duplicates
+
+lem-sfb-profinite-constant-model-relation-hull vs lem-sfb-supported-image-bounded-derived-generation: profinite-slice constant-model kernel generation has no scheme, support chain, or local model descent; the item obtains arbitrary supported images by the separate reduction and triangle argument.
+
+lem-sfb-profinite-constant-model-relation-hull vs lem-sfb-supported-image-derived-completeness: the existing node concerns integral principal-adic completion on affine schemes and their supported restrictions; neither its hypotheses nor its conclusion state hull generation, and it does not cover rational or norm-Omega coefficients.
+
+lem-sfb-profinite-constant-model-relation-hull vs lem-sfb-continuous-qbar-lisse-heart-closure: the existing node requires a Noetherian underlying scheme space and concludes finite-model kernel closure; the new node is a profinite slice-site generation statement, including arbitrary extremally disconnected component spaces, and does not conclude kernel finite presentation.
+
+lem-sfb-profinite-constant-model-relation-hull vs lem-sfb-principal-complete-heart-kernels: completeness of kernels between complete modules is not generation from finite scalar local models, and that node assumes a regular principal element and quotient tower.
+
+lem-sfb-supported-hull-proetale-descent vs lem-sfb-local-model-cohomology-descent: the existing node assumes scalar constant complexes, exact scalar extension, and finite scalar cohomology on a finite cover and concludes finite local models; the new node descends membership in an explicitly defined derived hull, with no such complex or scalar-cohomology data.
+
+lem-sfb-supported-hull-proetale-descent vs lem-sfb-finite-complex-heart-filtered-approximation: the existing node assumes affine Noetherian X and a local cohomology bound and concerns Serre/filtered presentations in a heart; the new node has no cohomology bound or Noetherianity and concerns descent of one specified product/filtered-colimit hull.
+
+No new node shares a Stacks tag source with an existing node: both new conclusions are explicitly agent-formulated with exact references WANTED. Whole-DAG key-word and whole-blueprint searches included 'bounded derived generation', 'Godement', 'profinite kernel', 'proétale localizing', 'profinite relation', 'generated class', 'product filtered hull', 'matrix relation', 'constant relation kernel' and 'supported hull'; none states either new assertion. The nearest blueprint ancestor is det-sf-comp-coherence-cocycle, and the via chains are retained and extended by the item.
+
+## Review by Q120
+
+I read the chapter and unit records, the current blueprint unit and refinement/cocycle proofs under literature/blueprint/latest/, the item's statement, and the parent proof that consumes this generation result. The unit record still has the older smooth-purity chapter path; the current chapter and item are six-functors-basics. I preserved the item's fixed chapter/unit metadata and did not edit either record. This is a descendant structural input to refinement comparison, not a replacement of the compactification route.
+
+For the item and both new nodes I read HRS Sections 3 and 4.1, especially Examples 3.1, 3.6, 4.2 and Proposition 4.3 with formula (4.2). I distinguished the component inverse image from the generally non-t-exact extension functor in Example 4.2. The new profinite relation statement is an explicit remaining algebra/topology obligation; HRS is provenance, not a claimed theorem citation. The new descent statement likewise does not follow just from Corollary 4.7; it remains a named structural obligation. Both carry full definitions of their closure classes, all coefficients and underlines, universe conventions and empty cases, with proof lists empty.
+
+Step 1 uses the closed-subspace quasi-compactness statement, the two directions of lem-weil-pbc-quasi-separated-affine-cover-criterion, and the actual weakly contractible affine basis theorem. The former gives precisely quasi-compactness of closed intersections. For open subschemes their intersections are the ambient intersections; for closed subschemes a finite affine cover and its closed intersections prove qcqs. The model covers can be pulled back to a common refinement and then refined by that basis; no finite common field or constant matrix assumption is used. I read Stacks proetale.tex Tags 098F (lemma-w-contractible-proetale-cover), 098H (lemma-w-contractible-is-weakly-contractible) and 0990 (lemma-proetale-enough-w-contractible) as the source for the basis assertions.
+
+Step 2 uses lem-zl-component-relative-profinite-site for the continuous component-site functor and coefficient factorization; lem-sfb-wcontractible-component-derived-hom explicitly states exact, fully faithful inverse image on the unbounded derived categories. sk-def-sfb-constructible explicitly gives the finite scalar cokernel models used in the finite-presentation calculation. lem-weil-pbc-derived-single-fully-faithful identifies degree-zero derived Hom with module Hom, so the descended v is an actual module map. I opened each statement; no use is made of their proof-only constructions. Stacks 06XS, derived.tex lemma-negative-exts (2), gives the degree-zero Hom assertion; HRS Proposition 4.3 gives the component input. The kernel identification also cites det-prop-sfb-module-pullback-exact-main: its statement gives exactness of the actual coefficient module inverse image for every scheme map, hence b^*ker(u)=ker(b^*u). This is not a claim that kernels are themselves finite scalar models.
+
+Step 3 uses the full evaluation statement of lem-sfb-component-pullback-unbounded-evaluation, including exact evaluations on weakly contractible tests; det-pe-sections-conservative gives the basis isomorphism test. Products of sheaves are sectionwise by the limit universal property. det-pe-products-derived states the termwise representation of every small derived product on W, without countability or bounds. Full faithfulness from the step-2 component node then verifies the source product by the displayed Hom bijections. The left-adjoint colimit lemma and the ringed-topos module adjunction apply to the actual component inverse image, and lem-sf-exact-functor-derived-triangulated supplies shifts and triangles. I read the latest blueprint's product proof, alongside Stacks derived.tex lemma-products. Common lower bounds remain termwise the same under an additive termwise functor; no unbounded colimit exchange is used.
+
+Step 4 cites the component site's cover-preservation and the new profinite kernel statement. The class whose members pull back into G_W contains every local scalar generator because these covers induce scheme covers. Step 3 checked each closure operation required for its inverse class to be admissible. Thus the least-class argument is literally intersection containment. The hypotheses on P follow from W being w-contractible. Neither constant entries nor completeness of Omega is required by the new kernel statement.
+
+Step 5 cites precisely the new supported-hull descent statement: K is a degree-zero module on the qcqs source S, the chosen basis cover is small and consists of affine weakly contractible schemes, and step 4 establishes the local memberships. No compatibility of independently chosen generation expressions is presumed.
+
+Step 6 uses lem-weil-pbc-proetale-ringed-open-closed for exactness of j_!, i_*, their module adjunctions and the closed filtered-colimit clause; det-sf-open-closed-extension-zero-limits explicitly gives all small derived products for j_!. The generic adjoint limit/colimit statements apply to the stated adjunctions; sk-def-sfb-module-derived-pushpull gives the derived adjunction and sk-def-sfb-derived-categories identifies the exact underived functor with its derived functor. lem-sfb-internal-module-operations-transport explicitly identifies both open and closed internal operations with the section-ring operations, including exactness transport. lem-sf-exact-functor-derived-triangulated gives shifts and triangles. I read Stacks 09BM (closed direct-image exactness), 09AH (open–closed sequence), and 03D7 (module adjunction), plus the latest blueprint extension-by-zero limits proof. Targets along the chain are qcqs by step 1, and every complementary open is quasi-compact by hypothesis. Concatenating chains preserves the generator form. The induction proves J(G_S) contained in G_X, not a false arbitrary-pushforward preservation claim.
+
+Step 7 uses the statement of lem-weil-pbc-complex-ses-triangle, whose source is Stacks 0152, derived.tex lemma-derived-canonical-delta-functor. I read that source. The abelian image factorization gives the stated exact sequence; exactness of J was checked in step 6. Rotating its distinguished triangle uses the shifts already built into G_X, so no t-structure truncation closure is silently assumed.
+
+I checked small cases for each new statement. On an empty profinite space every module in the assertion is zero; on a singleton, maps between finite scalar models have finitely presented scalar kernels for a finite ring, a DVR, or a field, so the kernel is already a generator. Zero and identity maps give the source model and zero respectively, on every P. Nonconstant rank or valuation functions are deliberately covered by the remaining generation obligation, not by a false finite-model conclusion; HRS Examples 3.6/4.2 are not counterexamples to its hull conclusion. For the descent lemma the identity covering is tautological, and a split cover makes the module a retract of its descended pullback; empty V and zero modules are included. I checked that the two new nodes make no unrestricted truncation or arbitrary-subobject closure assertion. The item itself handles zero and identity u, zero rings, empty schemes and empty chains with its unchanged statement. All seven proof steps are under 2000 characters, and every non-elementary input is named in uses; the final new obligations have no proof sketches in their statements. I verified all 27 citation quotes against the actual node statements.
+
+Actual Mathlib searches are in searches.jsonl. For each new node the two different semantic phrasings (LeanFinder and LeanSearch), Loogle and source grep were run, and I read their returned names/types. They gave profinite limits and condensed constructors, finite-generation structures, generic prestack descent, ordinary etale-algebra descent and bounded representatives, not either new assertion. A returned solidity declaration is a definition, not a proof of relation-kernel generation. Item searches likewise gave ordinary sheaf/image APIs. Every recorded new-node query is exactly a logged query. The report's off-unit tools are also declared in split_report.tool_uses; no source route is silently replaced. No Lean, compiler or Lake command was run.
+
+## Unfinished work
+
+The item is split one level. The two new statement-only structural inputs remain open for later workers, as required. There are no new Mathlib leaves, no attachment claims and no source-statement correction. Server dry-run results are recorded below after execution.

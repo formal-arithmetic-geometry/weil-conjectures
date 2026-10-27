@@ -1,0 +1,408 @@
+{
+ "id": "lem-sfb-space-finite-type-fppf-effectivity",
+ "kind": "statement",
+ "title": "Effective fppf descent of finite-type algebraic spaces",
+ "statement": "Algebraic spaces and their morphisms are as in [def-trf-algebraic-space], over schemes [def-pc-scheme] in the universes of [def-weil-size-convention]. Let $T$ be a scheme, let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering [def-pc-fppf-site], and let $X_i\\to T_i$ be algebraic spaces of finite type: they are quasi-compact and locally of finite type on etale charts [def-weil-finite-type-morphism]. Suppose given isomorphisms $\\varphi_{ij}:X_i\\times_TT_j\\xrightarrow{\\sim}T_i\\times_TX_j$ over $T_i\\times_TT_j$, with $\\varphi_{ii}$ the identity on the diagonal and $\\varphi_{jk}\\circ\\varphi_{ij}=\\varphi_{ik}$ after pullback to each triple overlap. There exists an algebraic space $X\\to T$ and isomorphisms $X\\times_TT_i\\cong X_i$ inducing precisely the given $\\varphi_{ij}$. Fibre products mean sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. No countability assumption on $I$ is required.",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 0ADV, bootstrap-lemma-descend-algebraic-space, part (2) (scheme-base specialization)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-weil-finite-type-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Regard each $X_i$ as a sheaf on the big fppf site of $T_i$, as in [def-trf-algebraic-space]. The maps $\\varphi_{ij}$ are isomorphisms of these restricted sheaves and satisfy the sheaf descent cocycle. Use the small skeleton in [def-weil-size-convention] to apply [lem-pe-set-sheaf-cover-descent] to the given covering. This constructs a sheaf $F$ on the big fppf site of $T$ and isomorphisms $e_i:F|_{T_i}\\simeq X_i$ satisfying $e_j=\\varphi_{ij}e_i$ on each double overlap. In particular $F\\times_T h_{T_i}\\simeq X_i$ as sheaves over $T_i$. Algebraicity of $F$ is the remaining issue.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-size-convention",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  },
+  {
+   "text": "Write $\\mathcal B(T)$ for the set of affine open subschemes of $T$. Refine the schemes $T_i$ by affine open subschemes. Restricting a flat locally finitely presented map to an open subscheme preserves both properties by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The images of these affine pieces in $T$ are open by [lem-weil-pbc-flat-lfp-open] and cover $T$. For each affine basis open $B\\subset T$ that is contained in at least one such image, choose one affine piece $V_B\\subset T_{a(B)}$ whose image contains $B$. The selected images still cover: for any $t\\in T$, first take an image containing $t$, then an affine open $B$ with $t\\in B$ contained in it. Each $V_B$ is affine and $V_B\\to T$ is locally of finite presentation, hence locally of finite type by [lem-sfb-stack-chartwise-smooth-etale-calculus]; so [lem-sfb-bounded-affine-lft-coproduct], applied to the one-member family, makes $V_B$ isomorphic over $T$ to an object of the big fppf site, and we replace $V_B$ by that object. Let $J$ be the set of basis opens for which a choice was made. Thus $|J|\\leq|\\mathcal B(T)|$, and $\\{V_j\\to T\\}_{j\\in J}$ is an fppf covering by [def-pc-fppf-site]. If $T$ is empty, choose $J=\\varnothing$. This argument uses affine opens rather than a bound on the cardinality of the point set of $T$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-pc-fppf-site",
+    "lem-sfb-bounded-affine-lft-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  },
+  {
+   "text": "For $j\\in J$ put $P_j=F\\times_T h_{V_j}$. The isomorphism $e_{a(j)}$ identifies it with $X_{a(j)}\\times_{T_{a(j)}}V_j$. This is an algebraic space by [lem-trf-space-fibre-products-etale-covers], and its map to $V_j$ is of finite type by the arbitrary-base-change clause of [lem-sfb-stack-finite-type-calculus]. As $V_j$ is affine, quasi-compactness of this finite-type morphism says exactly that $|P_j|$ is quasi-compact. This uses quasi-compactness over an affine test scheme, without imposing quasi-separatedness on $P_j$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-finite-type-calculus",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale atlas $W_j\\to P_j$ with $W_j$ affine by [lem-sfb-qc-space-affine-etale-atlas]. The map $W_j\\to V_j$ is locally of finite type: it is an etale scheme-chart test of the locally finite type map $P_j\\to V_j$, with the chart meaning stated in [lem-sfb-stack-finite-type-calculus]. The map $V_j\\to T$ is locally finitely presented and hence locally of finite type; composition preserves local finite type by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Consequently $W_j\\to T$ is locally of finite type. No finiteness assertion about the etale atlas as a morphism is used.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-scheme-coproduct-family] form $E=\\coprod_jW_j$. Step 2 gives $|J|\\leq|\\mathcal B(T)|\\leq\\max\\{\\aleph_0,|\\mathcal B(T)|\\}$, and step 4 gives affine schemes $W_j$ locally of finite type over $T$. Thus [lem-sfb-bounded-affine-lft-coproduct] gives a representative of $E$ in the original big site over $T$. Explicitly, if $\\theta:E\\xrightarrow{\\sim}E_0$ is the isomorphism over $T$, use $\\theta\\circ\\iota_j:W_j\\to E_0$ as the coproduct maps: any family of maps from the $W_j$ extends uniquely by precomposing its extension from $E$ with $\\theta^{-1}$. Thus $E_0$ is itself a scheme coproduct in the fixed site. Applying [lem-trf-algebraic-space-coproduct] to the atlases $W_j\\to P_j$ now gives an algebraic space $P=\\coprod_jP_j$ in fppf sheaves. Its required atlas-source size hypothesis has therefore been verified in the fixed site, including when $J$ is empty.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-bounded-affine-lft-coproduct",
+    "lem-trf-algebraic-space-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  },
+  {
+   "text": "Similarly let $D=\\coprod_jV_j$, with its map $p:D\\to T$. The $V_j$ are affine, and $V_j\\to T$ is locally of finite type by the local-finite-presentation implication in [lem-sfb-stack-chartwise-smooth-etale-calculus]. By [lem-sfb-bounded-affine-lft-coproduct] choose an isomorphism $\\delta:D\\xrightarrow{\\sim}D_0$ over $T$ with $D_0$ in the original big site. Its structure map is $p_0=p\\circ\\delta^{-1}$ and its component maps are $\\delta\\circ\\iota_j$; hence $p_0\\circ\\delta\\circ\\iota_j=p\\circ\\iota_j$ for every $j$. Replace $D,p$ by $D_0,p_0$: the coproduct universal property follows by composing extensions with $\\delta^{-1}$, as in step 5. Its component inclusions are disjoint open immersions covering $D$ by [lem-weil-pbc-scheme-coproduct-family]. Flatness and local finite presentation of $p$ follow on these components by source locality in [lem-sfb-stack-chartwise-smooth-etale-calculus]; its surjectivity follows from the jointly surjective family in step 2. Hence $p$ is a surjective flat locally finitely presented scheme morphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-bounded-affine-lft-coproduct",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  },
+  {
+   "text": "The maps $P_j\\to F$ induce $q:P\\to F$. To identify its scheme tests, fix a scheme $Z$ and a section $a\\in F(Z)$. By [lem-trf-fppf-sheaf-coproduct-partition], a section of $h_Z\\times_F P$ over any test scheme $Z'\\to Z$ consists of a clopen partition $Z'=\\coprod_jZ'_j$ and sections of $P_j$ over $Z'_j$ mapping to $a|_{Z'_j}$. Since $P_j=F\\times_T h_{V_j}$, those sections are exactly maps $Z'_j\\to V_j$ over $T$; the $F$-component is already fixed. By the scheme coproduct universal property [lem-weil-pbc-scheme-coproduct-family], these data are exactly a map $Z'\\to D$ over $T$, obtained by gluing on the indicated disjoint open cover. Conversely a map to $D$ gives this partition by inverse images of the coproduct components. These inverse constructions commute with restriction, so $h_Z\\times_F P\\simeq h_{Z\\times_T D}$. The constructions keep the $Z$-section fixed, so the projection to $Z$ is the usual scheme base change of $p$. In particular the structural map $P\\to T$ is the composite $P\\to F\\to T$, since this equality holds on every coproduct summand.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  },
+  {
+   "text": "The scheme-test projection in step 7 is surjective, flat and locally of finite presentation by base-change stability in [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to the morphism $p$ of step 6. In particular $q:P\\to F$ is representable by schemes, hence by algebraic spaces, and satisfies exactly the scheme-test hypotheses of [lem-sfb-fppf-space-atlas-bootstrap]. Here $F$ is the sheaf constructed in step 1 and $P$ is the algebraic space constructed in step 5. The bootstrap theorem proves that $F$ is an algebraic space over $T$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  },
+  {
+   "text": "Take $X$ to be this algebraic space with underlying sheaf $F$. The isomorphisms $e_i$ from step 1 give $X\\times_TT_i\\simeq X_i$. Their comparisons are precisely $\\varphi_{ij}$, because the descent construction imposed $e_j=\\varphi_{ij}e_i$ before any refinement. Morphisms of algebraic spaces are morphisms of their sheaves [def-trf-algebraic-space], so these are the required algebraic-space isomorphisms. The proof used a bounded refinement of the original covering only to establish algebraicity; it imposed no countability restriction on $I$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-size-convention",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-sfb-bounded-affine-lft-coproduct",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 0ADV, lemma-descend-algebraic-space (2), scheme-base case; expanded using Tag 04U0, lemma-locally-algebraic-space-finite-type. The affine-basis refinement below repairs the insufficient point-indexed size estimate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fppf descent data for algebraic spaces of finite type are effective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instEffectiveEpiEffectiveEpiOver\", \"module\": \"Mathlib/CategoryTheory/EffectiveEpi/Enough\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) [inst_2 : F.EffectivelyEnough]\\n  (X : D), CategoryTheory.EffectiveEpi (F.effectiveEpiOver X)\", \"doc\": \"For any object $ X $ in category $ \\\\mathcal{D} $, the canonical morphism from $ F(P) $ to $ X $, where $ P $ is the source object in the effective presentation of $ X $ via the functor $ F $, is an ef\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : (i : ι) → X i ⟶ S),\\n  CategoryTheory.Sieve.ofArrows \", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Functor.EffectivePresentation.effectiveEpi\", \"module\": \"Mathlib/CategoryTheory/EffectiveEpi/Enough\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {X : D}\\n  (self : F.EffectivePresentation X), CategoryTheory.EffectiveEpi self.f\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and an object $X$ in $\\\\mathcal{D}$, if $p$ is an effective presentation of $X$ via $F$, then the canonical \"}\n  {\"name\": \"CategoryTheory.Functor.EffectivelyEnough.presentation\", \"module\": \"Mathlib/CategoryTheory/EffectiveEpi/Enough\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {F : CategoryTheory.Functor C D} [self : F.EffectivelyEnough] (X : D),\\n  Nonempty (F.EffectivePresentation X)\", \"doc\": \"If a functor $ F : C \\\\to D $ is effectively enough, then every object $ X $ in category $ D $ admits an effective presentation via $ F $, meaning there exists data encoding $ X $ as an effective coequ\"}\n  {\"name\": \"CategoryTheory.Functor.EffectivePresentation\", \"module\": \"Mathlib/CategoryTheory/EffectiveEpi/Enough\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] → CategoryTheory.Functor C D → D → Type (max u_1 v_2)\", \"doc\": \"A type that, given categories $ C $ and $ D $, a functor $ F : C \\to D $, and an object $ X $ in $ D $, encodes the data of an effective presentation of $ X $ via $ F $. This is used in the context of \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J] {S : C},\\n  ∀ R ∈ J S, (F.toDescentData fun f => f.obj.hom).EssSurj\", \"doc\": \"For a pseudofunctor $ F $ from the locally discrete opposite category of $ \\\\mathcal{C} $ to the category of small categories, if $ F $ satisfies the stack conditions with respect to a Grothendieck top\"}\n  {\"name\": \"CategoryTheory.Functor.effectiveEpiOverObj\", \"module\": \"Mathlib/CategoryTheory/EffectiveEpi/Enough\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] → (F : CategoryTheory.Functor C D) → [F.EffectivelyEnough] → D → D\", \"doc\": \"For an object $ X $ in category $ \\\\mathcal{D} $, returns the image under functor $ F $ of the source object from the effective presentation of $ X $ via $ F $. Specifically, it maps $ X $ to $ F(P) $,\"}\n  {\"name\": \"CategoryTheory.Precoherent.pullback\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Basic\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} [self : CategoryTheory.Precoherent C] {B₁ B₂ : C}\\n  (f : B₂ ⟶ B₁) (α : Type) [Finite α] (X₁ : α → C) (π₁ : (a : α) → X₁ a ⟶ B₁),\\n  CategoryTheory.EffectiveEpiFamily X₁ π₁ →\\n    ∃ β,\\n      ∃ (_ : Finite β),\\n        ∃ X₂ π₂,\\n          Cate\", \"doc\": \"In a precoherent category $\\\\mathcal{C}$, given a morphism $f: B_2 \\\\to B_1$ and an effective epimorphic family $\\\\{X_1(a) \\\\to B_1\\\\}_{a \\\\in \\\\alpha}$ (with $\\\\alpha$ finite), there exists a finite effectiv\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic spaces can be glued along faithfully flat locally finitely presented coverings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.glued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"Given gluing data $ D $ for schemes, the glued scheme is defined as the colimit (multicoequalizer) of the diagram constructed from $ D $, which identifies overlapping open subsets via specified isomor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → CategoryTheory.GlueData AlgebraicGeometry.Scheme\", \"doc\": \"The function maps the inductive type representing gluing data for schemes (involving open subsets and isomorphisms) to the categorical gluing data structure for the category of schemes, enabling the u\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → AlgebraicGeometry.Scheme.GlueData\", \"doc\": \"This definition constructs gluing data for schemes using an open cover $\\\\mathcal{U}$ of a scheme $X$. It specifies: (1) an index set $I_0$ for the cover, (2) a functor assigning each index to a scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰 →\\n          [Small.{u, u_1} 𝒰.I₀] → [Quiver.IsThin 𝒰.I₀] → Alg\", \"doc\": \"Given a scheme $ S $ with an open cover $ \\\\mathcal{U} $, where the zeroth component $ \\\\mathcal{U}_0 $ forms a small, thin category equipped with a locally directed structure, this is the colimit of th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData), CategoryTheory.Limits.HasMulticoequalizer D.diagram\", \"doc\": \"For any gluing data $ D $ of schemes, the associated multispan diagram constructed from open subsets $ U(i) $ and intersection isomorphisms $ V(i,j) $ admits a multicoequalizer. This colimit encodes t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"doc\": \"The function converts gluing data for schemes into gluing data for locally ringed spaces by applying the forgetful functor that maps each scheme to its underlying locally ringed space structure. This \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"descent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descendAlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective fppf descent of finite type algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Smooth A B] :\\n  ∃ (A₀ : Type u) (B₀ : Type u) (_ : CommRing A₀) (_ : CommRing B₀) (_ : Algebra R A₀) (_ : Algebra A₀ A) (_ :\\n    Algebra A₀ B₀),\\n    Function.Injective (algebraMap A₀ A) ∧ FiniteType R A₀ ∧ Smooth A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective fppf descent for algebraic spaces of finite type",
+   "results": {
+    "t": "2026-10-22T06:25:03Z",
+    "tool": "leanfinder",
+    "query": "Effective fppf descent for algebraic spaces of finite type",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.IsFinite.instDescScheme",
+     "AlgebraicGeometry.IsFinite",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd"
+    ],
+    "digest": "aa162cd323dfa485"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent and scheme gluing do not prove effectivity for finite-type algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descendAlgebraicSpace",
+   "results": {
+    "t": "2026-10-22T06:25:40Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|descendAlgebraicSpace",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent and scheme gluing do not prove effectivity for finite-type algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": {
+    "t": "2026-10-22T06:25:41Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent and scheme gluing do not prove effectivity for finite-type algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective fppf descent for algebraic spaces of finite type",
+   "results": {
+    "t": "2026-10-22T06:25:41Z",
+    "tool": "leansearch",
+    "query": "Effective fppf descent for algebraic spaces of finite type",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd",
+     "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.isFinite_iff",
+     "Algebra.Etale.exists_subalgebra_fg"
+    ],
+    "digest": "95bd8e84d7f324f2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent and scheme gluing do not prove effectivity for finite-type algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic spaces glue along flat locally finitely presented covering families",
+   "results": {
+    "t": "2026-10-22T06:25:52Z",
+    "tool": "leanfinder",
+    "query": "Algebraic spaces glue along flat locally finitely presented covering families",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.GlueData.gluedScheme",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued",
+     "AlgebraicGeometry.Scheme.GlueData",
+     "AlgebraicGeometry.Scheme.GlueData.glued",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData",
+     "AlgebraicGeometry.Scheme.GlueData.toGlueData",
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.glueData"
+    ],
+    "digest": "5d6bdb96896d563a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent and scheme gluing do not prove effectivity for finite-type algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-descent-isom-spaces",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space.",
+   "via": [
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-finite-type-fppf-effectivity",
+  "worker": "stage1",
+  "summary": "Expanded 0ADV(2) through sheaf descent, a basis-indexed affine refinement, finite-type local spaces and affine etale atlases, bounded scheme coproducts, an explicit scheme-test calculation and 04S6(3). Reused the existing sheaf descent, algebraic-space coproduct and property-calculus nodes. Added three statement-only supporting lemmas. Repaired the point-cardinality inference of the 04U0 proof without changing the item statement. Repair of the 2026-10-22 return at afdef6547d6: rebased the retained split onto the current unsplit DAG through the delivery overlay, re-read all cited statements and their exact retained witnesses, and made the fixed-site representative transport explicit in step 5; the statement and dependency lists are unchanged. On the repeated promotion return, rechecked the unchanged live dependency statements against all 23 citation witnesses; expanded step 5 with the explicit isomorphism and inverse giving the fixed-site coproduct universal property, and step 7 with the preserved base projection. No statement, route or dependency changed. On the 2026-10-23 promotion repair, the initial current-origin dry run passed at ca15492f865. All existing citation statements still agree exactly with the retained witnesses. Step 6 now specifies the fixed-site representative D_0, its structure map p composed with delta inverse, and its component maps, so the subsequent base-change calculation uses the same T-morphism. The mathematical route, statement and dependency sets are retained.",
+  "blueprint": "The inherited chain supports det-thm-sf-ctf-stability-direct-images (3), via the stable/nodal curve stack prerequisites recorded in blueprint.from.place. The present steps expand its 0ADV(2) effectivity input and the 04U0 size argument. blueprint_refs.py ancestor returns None because the inherited created.item chain ends at a Lean-module name; this is preserved, with the exact place and via list retained. Whole-blueprint searches found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Definition or generic property tool needed for the stated construction; no node of this unit replaces it."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Definition or generic property tool needed for the stated construction; no node of this unit replaces it."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Generic gluing of set sheaves on a covering, applied on the small big-fppf skeleton; it supplies no algebraic-space effectivity."
+   },
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic algebraic-space coproduct theorem with its scheme-atlas size hypothesis verified here."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-coproduct-partition",
+    "why": "Generic clopen-partition description of sheaf coproducts, needed to compute the scheme tests of q."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic construction of sheaf fibre products of algebraic spaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-2bf3ac995",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-2bf3ac995 (reviewer sub-agent of L); spot-checked: Fourth delivery of this split, after afdef6547d6d, 18a8d1bd44ca and 945110d54997. All three were FIXed for the same step-2 fault, and each was then refused at promotion. The item is still unsplit in both live and side-live, none of the new ids exist there, and there is no repair note, so the re-split rule does not apply and nothing supersedes this head. The three new nodes are byte-identical to all earlier heads. The item changes from 945110d54997 only in step 6 and the summary. Step 6 now gives D ≅ D₀ via δ, with p₀ = p∘δ⁻¹, components δ∘ι_j and extensions composed with δ⁻¹. I checked it: D₀ is then a coproduct in the fixed site, and p₀ is flat, lfp and surjective. Step 2 has reverted to the unfixed text. Sources re-read: 04S6(3) and its proof via the diagonal bootstrap; 0ADV(2); 03H6, whose 'finite' is a slip for étale; 04T7; 000R(3)/(6). The statement is the scheme-base case of 0ADV(2), with nothing weakened and no countability restriction. The source-error claim holds: F₂[x₀,x₁,…] has size ℵ₀ but at least 2^ℵ₀ points, so 04U0's point-indexed bound fails. Steps 1 and 3-9 re-checked. I re-derived h_Z×_F P ≅ h_{Z×_T D} in step 7. Step 8 meets exactly the hypotheses of the bootstrap node, i.e. 04S6(3). The new nodes are true, statement-only and not duplicates: the bootstrap node is 04S6(3) against the étale-scheme bootstrap; the atlas node is the forward direction of 03H6 against the qc-map neighbourhood and per-open atlases; the bounded node follows from 04T7 and 000R(6). They were tested on empty, singleton and non-quasi-separated cases. A grep of live for these tags finds no new duplicate. Batch-5 check: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, lem-a1-space-affine-etale-cover, lem-trf-algebraic-space-coproduct and lem-trf-fppf-sheaf-coproduct-partition are general algebraic-space and sheaf foundations of unit sk-i-curve-zero. None is a statement or proof step of the trace formula or Poincaré duality, so all are accepted. The six declared generic tool_uses are accepted. One fault, repaired (C1/E1): step 2 forms the site covering {V_j→T}, and step 3 forms h_{V_j}, without placing the open subscheme V_B in the fixed big site; def-pc-fppf-site has no open-subscheme closure (that is 000R(3)), and 𝓑(T) is undefined. I re-applied the earlier fix onto this head's text: define 𝓑(T); note V_B is affine and lfp, hence lft, over T; apply lem-sfb-bounded-affine-lft-coproduct to the one-member family and replace V_B by its site representative; add that node to step 2's uses. It is already in proof_deps, so the union of uses still equals proof_deps. The raw diff is 9 lines, and the new step 6 and summary are kept. Maintainer note: this step-2 FIX has now been lost on four heads after refused promotions; please carry it into the retained sandbox.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFiniteTypeFppfEffectivity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finiteType_fppf_descent_effective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFiniteTypeFppfEffectivity.lean",
+  "statement": "theorem finiteType_fppf_descent_effective {I : Type w} (T : Scheme.{u}) (Tᵢ : I → Scheme.{u}) (p : ∀ i : I, Tᵢ i ⟶ T) (hcov : Presieve.ofArrows Tᵢ p ∈ Scheme.fppfPrecoverage T) (D : (Scheme.fppfTopology.pseudofunctorOver (Type u)).DescentData p) (hAlg : ∀ i : I, IsAlgebraicSpace (D.obj i)) (hft : ∀ i : I, MapIsQuasiCompact ((Over.mkIdTerminal.isTerminalObj yoneda _).from (D.obj i).obj) ∧ MapToSchemeIsLocally (@LocallyOfFiniteType) ⟨D.obj i, hAlg i⟩ (Over.mk (𝟙 (Tᵢ i))) ((Over.mkIdTerminal.isTerminalObj yoneda _).from (D.obj i).obj)) : ∃ X : AlgebraicSpace T, Nonempty (D ≅ ((Scheme.fppfTopology.pseudofunctorOver (Type u)).toDescentData p).obj X.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The input is Mathlib descent data for fppf sheaves on the slice sites, with local algebraicity and finite type. The conclusion is an isomorphism of descent data, preserving the given overlap comparisons. The added landed statement dependency def-sfb-proper-curve-moduli owns the reused MapIsQuasiCompact and MapToSchemeIsLocally predicates; no curve-family hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad643ef6d",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0ADV(2) (bootstrap.tex l.1778-1797), scheme-base case. fppfPrecoverage covering (jointly surjective, flat, lfp; no qc). DescentData of sheaves on fppfTopology.over (Tᵢ i): hom/pullHom_hom/hom_self/hom_comp give φ_ij, the diagonal identity and the cocycle. hAlg: IsAlgebraicSpace. hft: MapIsQuasiCompact and MapToSchemeIsLocally LocallyOfFiniteType of the canonical terminal-Yoneda arrow to h_{T_i}. Conclusion: ∃ X : AlgebraicSpace T, Nonempty (D ≅ toDescentData p X.obj); descent-data morphisms recover φ_ij exactly. Index I : Type w is free; no added hypotheses. Edge cases: empty I forces empty T; repeated members, empty spaces, non-quasi-separated spaces OK. Statement verbatim; source/blueprint docstrings and 9-step proof present; sorry only; no definitions. Added stmt_dep def-sfb-proper-curve-moduli is landed and defines the qc/lft predicates. Live node differs only in lean and stmt_deps; no other S2 delivery. Report sections present; the second reading is the worker's self-check. No compile run (no file changed). No findings."
+ }
+}

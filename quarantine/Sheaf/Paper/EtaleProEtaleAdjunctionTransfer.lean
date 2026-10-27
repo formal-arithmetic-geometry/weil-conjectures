@@ -26,6 +26,7 @@ node det-sp-et-proet-adjunction-transfer (blueprint: det-sp-et-proet-adjunction-
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option maxRecDepth 1000
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.AdjunctionTransfer
@@ -299,73 +300,56 @@ private theorem proEtaleProperty_stableUnderShift
   exact (proEtaleProperty_iff A T _).2
     (ProEtale.DerivedCategory.constructibleFiniteTor.shift ((proEtaleProperty_iff A T K).1 hK) n)
 
-/-- Transfer the etale adjunction with its prescribed counit, and identify it uniquely
-with the restriction of the Brown adjoint. The equivalence equalities ensure that the
-forward functors are the actual restricted comparison inverse images. The equation
-on cf identifies its inverse with the specified proper mate and open comparison,
-so cf is the canonical compact-support comparison for the same compactification. The localizing
-categories and compactification functor are expressed in the ordinary constant-ring
-presentation of the finite-discrete coefficient categories.
+/-- Transport a unique counit-preserving isomorphism along a specified source iso.
+Source: blueprint det-sp-et-proet-adjunction-transfer, uniqueness of right adjoints
+(blueprint: det-sp-et-proet-adjunction-transfer). -/
+theorem transportUniqueCounitIso
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : D ⥤ E) {G H J : C ⥤ D} {T : C ⥤ E}
+    (j : G ≅ H) (ε : G ⋙ F ⟶ T) (δ : J ⋙ F ⟶ T)
+    (h : ∃! γ : G ≅ J, ∀ K, F.map (γ.hom.app K) ≫ δ.app K = ε.app K) :
+    ∃! θ : H ≅ J, ∀ K,
+      F.map (θ.hom.app K) ≫ δ.app K = F.map (j.inv.app K) ≫ ε.app K := by
+  obtain ⟨γ, hγ, huniq⟩ := h
+  refine ⟨j.symm ≪≫ γ, ?_, ?_⟩
+  · intro K
+    change F.map (j.inv.app K ≫ γ.hom.app K) ≫ _ = _
+    rw [F.map_comp, Category.assoc, hγ]
+  · intro θ hθ
+    have hh : j ≪≫ θ = γ := by
+      apply huniq
+      intro K
+      change F.map (j.hom.app K ≫ θ.hom.app K) ≫ _ = _
+      rw [F.map_comp, Category.assoc, hθ, ← Category.assoc, ← F.map_comp,
+        j.hom_inv_id_app, F.map_id, Category.id_comp]
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    apply (cancel_epi (j.hom.app K)).1
+    simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+      Iso.hom_inv_id_app_assoc] using congrArg (fun z ↦ z.hom.app K) hh
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sp-et-proet,
-det-sp-et-proet-adjunction-transfer, statement and both proof paragraphs
-(blueprint: det-sp-et-proet-adjunction-transfer).
-
-Proof:
-1. Put E_T = nu_T^*. For M',N' set M=Q_X M', N=Q_Y N'. Use the equivalence
-   counits, bounded-below full faithfulness (thm-weil-pbc-site-comparison), the etale
-   adjunction, and the given compact-support comparison to identify Hom(M',E_X G N)
-   with Hom(Rf_! M',N'). Naturality of the equivalence counits, etale adjunction and
-   compact-support comparison makes this a natural Hom equivalence.
-2. Transpose the identity to obtain the counit. It is c_f(G Q_Y N') inverse, followed
-   by E_Y(epsilon_et at Q_Y N'), followed by the equivalence counit at N'. At E_Y N,
-   the equivalence triangle identity gives the displayed formula using the inverse
-   equivalence unit at N. The Hom equivalence gives both adjunction triangle identities.
-3. The source comparison of finite-value and finite-stalk constructibility identifies
-   the generator property with the source's constructibleFiniteTor, so it is stable
-   under shifts. Given a Brown adjunction, transpose the transported small counit
-   to obtain a map from the small right-adjoint value to the Brown value. On Hom
-   from every shifted generator, this is the composite of the two adjunction
-   bijections. Its cone belongs to the localizing closure and is right orthogonal
-   to all shifted generators, hence zero: the left orthogonal of that right
-   orthogonal is localizing and contains the generators. Thus the comparison is
-   an isomorphism and Brown preserves the generators.
-4. Restrict the supplied Brown adjunction along the fully faithful inclusions.
-   Fullness of both inclusions retains exactly the Brown counit.
-5. det-sp-unique-right-adjoint transposes the two counits to mutually inverse natural
-   transformations. Injectivity of the Brown Hom equivalence proves uniqueness of
-   the counit-preserving isomorphism, with precisely the displayed ambient equation. -/
-theorem etaleProEtaleAdjunctionTransfer
-    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-    [IsSeparated (X ↘ Spec (.of k))]
-    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-    [IsSeparated (Y ↘ Spec (.of k))]
-    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
-    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
-    (_hA : ∃ n : ℕ, (ℓ ^ n : A) = 0) (c : Compactification f)
+/-- Transfer an adjunction across the specified comparison equivalences and comparison iso.
+The construction retains the quasi-inverse and actual counit, and restricts any Brown
+adjunction to the generator subcategories with its unique counit-preserving comparison.
+Source: blueprint det-sp-et-proet-adjunction-transfer, categorical proof paragraphs 1--3
+(blueprint: det-sp-et-proet-adjunction-transfer). -/
+theorem etaleProEtaleAdjunctionTransferOfComparison
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (hX : ∀ K, etaleProperty A X K → proEtaleProperty A X
       ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K))
     (hY : ∀ K, etaleProperty A Y K → proEtaleProperty A Y
       ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj K))
     (eX : (etaleProperty A X).FullSubcategory ≌ (proEtaleProperty A X).FullSubcategory)
     (eY : (etaleProperty A Y).FullSubcategory ≌ (proEtaleProperty A Y).FullSubcategory)
-    (heX : eX.functor = comparison A X hX) (heY : eY.functor = comparison A Y hY)
+    (_heX : eX.functor = comparison A X hX) (_heY : eY.functor = comparison A Y hY)
     (hEt : ∀ K, etaleProperty A X K → etaleProperty A Y
       ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K))
     (hPro : ∀ K, proEtaleProperty A X K → proEtaleProperty A Y
       ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K))
     (cf : etaleLowerShriek A c hEt ⋙ eY.functor ≅
       eX.functor ⋙ proEtaleLowerShriek A c hPro)
-    (_hcf : ∀ K : (etaleProperty A X).FullSubcategory,
-      (cf.inv.app K).hom =
-        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
-            (eqToHom (congrArg (fun F ↦ (F.obj K).obj) heX)) ≫
-          (compactSupportSiteComparison A c).hom.app ((etaleToPlus A X).obj K) ≫
-          eqToHom (congrArg (fun F ↦ (F.obj ((etaleLowerShriek A c hEt).obj K)).obj)
-            heY).symm)
     (G : (etaleProperty A Y).FullSubcategory ⥤ (etaleProperty A X).FullSubcategory)
     (adjEt : etaleLowerShriek A c hEt ⊣ G) :
     ∃ adjPro : proEtaleLowerShriek A c hPro ⊣ (eY.inverse ⋙ G ⋙ eX.functor),
@@ -475,5 +459,99 @@ theorem etaleProEtaleAdjunctionTransfer
         ((γ.hom.app N).hom) ≫ (adjSmall.counit.app N).hom = _
       rw [hc]
       exact hγ N
+
+
+
+/-- Transfer the etale adjunction with its prescribed counit, and identify it uniquely
+with the restriction of the Brown adjoint. The equivalence equalities ensure that the
+forward functors are the actual restricted comparison inverse images. The equation
+on cf identifies its inverse with the specified proper mate and open comparison,
+so cf is the canonical compact-support comparison for the same compactification. The localizing
+categories and compactification functor are expressed in the ordinary constant-ring
+presentation of the finite-discrete coefficient categories.
+
+Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sp-et-proet,
+det-sp-et-proet-adjunction-transfer, statement and both proof paragraphs
+(blueprint: det-sp-et-proet-adjunction-transfer).
+
+Proof:
+1. Put E_T = nu_T^*. For M',N' set M=Q_X M', N=Q_Y N'. Use the equivalence
+   counits, bounded-below full faithfulness (thm-weil-pbc-site-comparison), the etale
+   adjunction, and the given compact-support comparison to identify Hom(M',E_X G N)
+   with Hom(Rf_! M',N'). Naturality of the equivalence counits, etale adjunction and
+   compact-support comparison makes this a natural Hom equivalence.
+2. Transpose the identity to obtain the counit. It is c_f(G Q_Y N') inverse, followed
+   by E_Y(epsilon_et at Q_Y N'), followed by the equivalence counit at N'. At E_Y N,
+   the equivalence triangle identity gives the displayed formula using the inverse
+   equivalence unit at N. The Hom equivalence gives both adjunction triangle identities.
+3. The source comparison of finite-value and finite-stalk constructibility identifies
+   the generator property with the source's constructibleFiniteTor, so it is stable
+   under shifts. Given a Brown adjunction, transpose the transported small counit
+   to obtain a map from the small right-adjoint value to the Brown value. On Hom
+   from every shifted generator, this is the composite of the two adjunction
+   bijections. Its cone belongs to the localizing closure and is right orthogonal
+   to all shifted generators, hence zero: the left orthogonal of that right
+   orthogonal is localizing and contains the generators. Thus the comparison is
+   an isomorphism and Brown preserves the generators.
+4. Restrict the supplied Brown adjunction along the fully faithful inclusions.
+   Fullness of both inclusions retains exactly the Brown counit.
+5. det-sp-unique-right-adjoint transposes the two counits to mutually inverse natural
+   transformations. Injectivity of the Brown Hom equivalence proves uniqueness of
+   the counit-preserving isomorphism, with precisely the displayed ambient equation. -/
+theorem etaleProEtaleAdjunctionTransfer
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
+    (_hA : ∃ n : ℕ, (ℓ ^ n : A) = 0) (c : Compactification f)
+    (hX : ∀ K, etaleProperty A X K → proEtaleProperty A X
+      ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K))
+    (hY : ∀ K, etaleProperty A Y K → proEtaleProperty A Y
+      ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj K))
+    (eX : (etaleProperty A X).FullSubcategory ≌ (proEtaleProperty A X).FullSubcategory)
+    (eY : (etaleProperty A Y).FullSubcategory ≌ (proEtaleProperty A Y).FullSubcategory)
+    (heX : eX.functor = comparison A X hX) (heY : eY.functor = comparison A Y hY)
+    (hEt : ∀ K, etaleProperty A X K → etaleProperty A Y
+      ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K))
+    (hPro : ∀ K, proEtaleProperty A X K → proEtaleProperty A Y
+      ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K))
+    (cf : etaleLowerShriek A c hEt ⋙ eY.functor ≅
+      eX.functor ⋙ proEtaleLowerShriek A c hPro)
+    (_hcf : ∀ K : (etaleProperty A X).FullSubcategory,
+      (cf.inv.app K).hom =
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+            (eqToHom (congrArg (fun F ↦ (F.obj K).obj) heX)) ≫
+          (compactSupportSiteComparison A c).hom.app ((etaleToPlus A X).obj K) ≫
+          eqToHom (congrArg (fun F ↦ (F.obj ((etaleLowerShriek A c hEt).obj K)).obj)
+            heY).symm)
+    (G : (etaleProperty A Y).FullSubcategory ⥤ (etaleProperty A X).FullSubcategory)
+    (adjEt : etaleLowerShriek A c hEt ⊣ G) :
+    ∃ adjPro : proEtaleLowerShriek A c hPro ⊣ (eY.inverse ⋙ G ⋙ eX.functor),
+      (∀ N : (etaleProperty A Y).FullSubcategory,
+        (adjPro.counit.app (eY.functor.obj N)) =
+          (proEtaleLowerShriek A c hPro).map
+              (eX.functor.map (G.map (eY.unitIso.inv.app N))) ≫
+            cf.inv.app (G.obj N) ≫ eY.functor.map (adjEt.counit.app N)) ∧
+      (∀ (hLoc : ∀ K, CategoryTheory.localizingClosure (proEtaleProperty A X) K →
+          CategoryTheory.localizingClosure (proEtaleProperty A Y)
+            ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K))
+        (J : (CategoryTheory.localizingClosure (proEtaleProperty A Y)).FullSubcategory ⥤
+          (CategoryTheory.localizingClosure (proEtaleProperty A X)).FullSubcategory)
+        (adjBrown : localizingLowerShriek A c hLoc ⊣ J),
+        ∃ hJ : ∀ N : (proEtaleProperty A Y).FullSubcategory,
+            proEtaleProperty A X ((J.obj ((toLocalizing A Y).obj N)).obj),
+          ∃! γ : (eY.inverse ⋙ G ⋙ eX.functor) ≅ brownRestriction A J hJ,
+            ∀ N : (proEtaleProperty A Y).FullSubcategory,
+              (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+                  ((γ.hom.app N).hom) ≫
+                (adjBrown.counit.app ((toLocalizing A Y).obj N)).hom =
+              (adjPro.counit.app N).hom) := by
+  exact etaleProEtaleAdjunctionTransferOfComparison A c hX hY eX eY heX heY
+    hEt hPro cf G adjEt
 
 end AlgebraicGeometry.ProEtale.AdjunctionTransfer

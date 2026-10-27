@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-proper-dc-preserves-integral",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "lem-sfb-dc-lower-star-preserves, proper integral-coefficient case of the direct-image preservation assertion; the same finiteness argument is the first paragraph (1) of det-thm-sfb-proper-base-change-integral.proof, here under the broader Noetherian hypotheses of the upstream declaration",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper direct image preserves bounded constructible complexes (ring of integers)",
+ "statement": "Fix a prime $\\ell$ and a field $k$ in which $\\ell$ is invertible. Let $E\\subseteq\\overline{\\mathbf Q}_\\ell$ be a finite extension of $\\mathbf Q_\\ell$ and $\\Lambda=\\underline{\\mathcal O_E}$ the condensed ring of its integers [sk-def-sfb-condensed-ring]. For a scheme $T$ write $\\Lambda_T$ for the pulled-back coefficient ring [sk-def-sfb-pulled-back-coefficients] and $D(\\Mod_{\\Lambda_T})$ for the derived category of module objects on the pro-étale site of $T$ [sk-def-sfb-module-derived-pushpull]. Let $Y$ be a Noetherian $k$-scheme (quasi-compact [def-weil-pbc-quasi-compact-scheme] and locally Noetherian [pqf-def-locnoeth]) and $p\\colon Z\\to Y$ a proper morphism [def-weil-proper-morphism]. If $K\\in D(\\Mod_{\\Lambda_Z})$ is bounded constructible [sk-def-sfb-bounded-constructible], then $Rp_*K\\in D(\\Mod_{\\Lambda_Y})$ is bounded constructible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/lem-sfb-dc-lower-star-preserves.md",
+  "place": "lem-sfb-dc-lower-star-preserves: the case of a proper morphism (proper base change theorem, finiteness clause), which the proof reduces to after compactifying; Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/ProperLowerStarEllAdic.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj (module WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic, lines 93-101, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-bounded-constructible",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The specified coefficient has IsEllAdicFinitenessCoefficient via its continuous, integral or algebraicClosure constructor, with exactly the given multiplication. Unpack bounded constructibility as boundedness of K and constructibility of each H^q(K). The latter puts every H^q(K) in constructibleCoproductClosure by le_weakSerreCoproductClosure; this replete property contains zero.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply properLowerStar_uniformBound_ellAdic to the given prime, coefficient, field, structure map, Noetherian target and proper morphism. Obtain one integer d bounding the images of all degree-zero objects in constructibleCoproductClosure. If K is at most b, the triangulated and shift-compatible total right derived functor and isLE_obj_of_isLE_of_homologyProperty give Rp_* K at most b+d. Its hypotheses are boundedness of K and the cohomology containment from the preceding step.",
+   "uses": [
+    "lem-sfb-noetherian-proper-heart-uniform-bound",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sfb-bounded-heart-amplitude-devissage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If K is at least a, Functor.isGE_rightDerivedFunctor_obj, already proved in the public ConstructibleDirectImage dependency, gives Rp_* K at least a. This is the bounded-below comparison with R^+; the module heart is Grothendieck abelian, hence has enough injectives and K-injective resolutions, and the underived pushforward is additive. Thus Rp_* K is bounded with lower bound a and upper bound b+d. The bounded predicate does not require the displayed endpoints to be ordered, so it also covers the zero image and disjoint bounds.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply properLowerStar_constructible_cohomology_ellAdic with the same coefficient and geometric hypotheses to K and its original bounded-constructibility proof. Every cohomology object of Rp_* K is constructible. Pair this with the preceding boundedness to obtain boundedConstructible. No characteristic-positivity or finite-type assumption on aY is introduced.",
+   "uses": [
+    "lem-sfb-noetherian-proper-constructible-cohomology",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-noetherian-proper-heart-uniform-bound",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-bounded-heart-amplitude-devissage",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sfb-noetherian-proper-constructible-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Theorem 6.7.1, Lemma 6.7.2 and Remark 6.8.15, through the existing Noetherian proper-finiteness inputs; formal finite Postnikov devissage and bounded-below derived comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image along a proper morphism preserves bounded constructible l-adic complexes",
+   "results": "Scheme.Hom.isLocallyConstructible_image (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation), IsProper.* fields: constructible sets only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward along proper morphism preserves bounded constructible complexes of l-adic sheaves",
+   "results": "SheafOfModules.pushforward_obj_val, pushforward_assoc (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous): underived pushforward only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'IsConstructible|constructibleSheaf|PadicAlgCl' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "constructible sets (Mathlib/Topology/Constructible.lean, RingTheory/Spectrum/Prime/ConstructibleSet.lean), PadicAlgCl in NumberTheory/Padics/Complex.lean; no derived pushforward or constructible sheaves",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image preserves bounded constructible complexes of sheaves over the ring of integers of a finite l-adic field extension",
+   "results": "8 hits. CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolid, CompHausLike.LocallyConstantModule.functor, LightCondAb.ofSheafLightProfinite, Condensed.profiniteFree, CondensedMod.ofSheafCompHaus, AlgebraicGeometry.Scheme.Hom.isConstructible_image. These concern underived pushforward, constructible sets or condensed-object constructions, not integral adic derived proper finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|constructibleSheaf|IsEllAdicFinitenessCoefficient",
+   "results": "0 hits. . These concern underived pushforward, constructible sets or condensed-object constructions, not integral adic derived proper finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived pushforward of a bounded constructible integral l-adic complex along a proper scheme morphism is bounded constructible",
+   "results": "8 hits. TopCat.Sheaf.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Cover.pushforwardIso_f, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso. These concern underived pushforward, constructible sets or condensed-object constructions, not integral adic derived proper finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, DerivedCategory",
+   "results": "0 hits. . These concern underived pushforward, constructible sets or condensed-object constructions, not integral adic derived proper finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme morphism has a bounded derived pushforward preserving constructible cohomology for integral continuous adic coefficients",
+   "results": "8 hits. AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.Scheme.Hom.isConstructible_image. These concern underived pushforward, constructible sets or condensed-object constructions, not integral adic derived proper finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforward|isConstructible_image|ofSheafProfinite",
+   "results": "25 hits. Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean. These concern underived pushforward, constructible sets or condensed-object constructions, not integral adic derived proper finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic",
+     "lines": [
+      90,
+      101
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/ProperLowerStarEllAdic.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj"
+  ],
+  "statement": "theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj\n    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]\n    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}\n    (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) Z)))\n    (hK : boundedConstructible _ K) :\n    boundedConstructible _ (R((p)_*⟦Profinite.padicIntegersRingObj.{u} ℓ E⟧).obj K) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; the same clause is stated in blueprint form by det-thm-sfb-proper-base-change-integral; Sheaf.Paper.ProperBaseChangeRational.properPushforward_boundedConstructible_rational is our (sorried) version of the rational clause"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proper-dc-preserves-integral",
+  "worker": "stage1",
+  "summary": "Q37 splits the upstream proper integral finiteness input without adding nodes: bounded-below compatibility, the existing uniform proper heart bound, finite truncation devissage, and existing proper constructible cohomology establish the two bounded-constructible conditions. All generic input statements are read and their closures checked not to reach the item. The misleading standing-setting citation is removed; the mathematical hypotheses remain those of the upstream declaration.",
+  "blueprint": "lem-sfb-dc-lower-star-preserves, proper integral-coefficient case; det-thm-sfb-proper-base-change-integral.proof paragraph (1), finiteness conclusion. The item is not the key statement of sk-prop-open-coefficients, so no unit realized fields are changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-noetherian-proper-heart-uniform-bound",
+    "why": "Uniform upper bound on heart objects for the actual broader Noetherian proper setting; the unit invokes proper finiteness but its standing-scheme inputs do not cover this upstream generality."
+   },
+   {
+    "node": "lem-sfb-noetherian-proper-constructible-cohomology",
+    "why": "Per-degree proper constructibility for integral coefficients on a Noetherian base; no bounded-image conclusion is taken from it, and the unit lacks an equally general finiteness input."
+   },
+   {
+    "node": "lem-sfb-bounded-heart-amplitude-devissage",
+    "why": "Generic finite-truncation argument turns a heart upper bound into an upper bound on a bounded complex, without changing the integral proper-finiteness route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic triangulated and integer-shift structure for the K-injective total right derived functor, needed by the finite-truncation argument."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "Generic compatibility of total and bounded-below right derived functors gives a lower bound on the actual total module image."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic Grothendieck/closed-monoidal structure of abelian sheaf categories, needed to make the module categories Grothendieck abelian for the D^+ comparison of step 2."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Module objects over a commutative ring object form a Grothendieck abelian category; generic input for the injective hypotheses of step 2."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic: Grothendieck abelian categories have enough injectives (hypothesis of the D^+ comparison)."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic: K-injective resolutions in Grothendieck abelian categories (hypothesis of the D^+ comparison)."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic existence of the bounded-below right derived functor of an additive functor with enough injectives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-noetherian-proper-heart-uniform-bound",
+  "lem-sfb-noetherian-proper-constructible-cohomology",
+  "lem-sfb-bounded-heart-amplitude-devissage",
+  "lem-pc-right-derived-functor-triangulated",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-6cf9759de",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-6cf9759de (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 6 steps and the statement of every cited node. It adds no new nodes and cites no SGA. (1) The statement change is right: dropping [sk-def-sfb-dc-setting] matches the bound upstream Lean (ProperLowerStarEllAdic.lean:93-101: ringChar k ≠ ℓ, any aY, IsNoetherian Y, IsProper p). That definition would force char p>0 and finite type; for example k=Q with Y=Z=Spec Q meets the Lean hypotheses but not the definition. The change strengthens the statement, and the only citer works in the standing setting. (2) Bhatt–Scholze Thm 6.7.1 and Lemma 6.7.2 have a 'proper' alternative with no excellence assumption, and Remark 6.8.15 covers O_E. The cited Noetherian nodes lem-sfb-noetherian-proper-heart-uniform-bound and lem-sfb-noetherian-proper-constructible-cohomology carry this under exactly the item's hypotheses, including the induced-integer constructor. (3) Steps checked: step 1 unpacks the definition. Step 2 gets a lower bound c from the D+ comparison. Step 3 gives a uniform d on P_Z, which contains each H^i(K). Step 4 applies the devissage, using a triangulated, shift-compatible Rp_* and the fact that P_Z is replete with 0 in it, so the image is at most b+d. Step 5 gives constructible H^q. Step 6 uses the interval [c,max(c,b+d)]. Edge cases checked: K=0, empty Z, p=id over Q, P^1 with K=Λ, and c>b+d. (4) No duplicate: det-thm-sfb-proper-base-change-integral covers only the standing setting. No cycle after the fix. The 5 declared tool_uses are accepted, plus 5 generic ones that I added. FIX (C1/B3, 2 faults): step 2 used the EnoughInjectives/K-injective hypotheses of src-right-derived-functor-plus-compatibility and the existence of R^+ without citing any node. I now cite lem-weil-pbc-sheaf-tensor-closed, lem-sfb-modobj-grothendieck, lem-sp-grothendieck-enough-injectives, lem-sfb-grothendieck-k-injective and lem-weil-pbc-right-derived-plus-injective, as the sibling qbar item does. Removing dc-setting also left 'pulled-back coefficient ring' without a definition, so I added [sk-def-sfb-pulled-back-coefficients] to the statement and stmt_deps. proof_deps is recomputed as the union of all uses. Maintainer note: lem-sfb-dc-lower-star-preserves lists this item and its continuous/qbar siblings in proof_deps, but none of its steps names them.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261023T131931-L-2173142",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properLowerStarHeartHypotheses_continuousMapRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properLowerStarHeartHypotheses_padicAlgClRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properLowerStarHeartHypotheses_padicIntegersRingObj"
+  ],
+  "sorry_after": []
+ }
+}

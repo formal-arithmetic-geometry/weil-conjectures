@@ -1,0 +1,92 @@
+{
+ "id": "lem-pur-inverse-section-adjunction-gluing",
+ "kind": "statement",
+ "title": "Gluing exact adjunctions on inverse section categories",
+ "statement": "Let $\\mathcal A_n,\\mathcal B_n$ ($n\\ge1$) be abelian categories [def-sp-abelian], with exact additive transition functors $r_n:\\mathcal A_n\\to\\mathcal A_{n+1}$ and $s_n:\\mathcal B_n\\to\\mathcal B_{n+1}$. Define $\\operatorname{Sect}(\\mathcal A,r)$ to have objects $(X_n,x_n:X_{n+1}\\to r_nX_n)$ and morphisms $(f_n)$ satisfying $r_n(f_n)x_n=x'_nf_{n+1}$; define $\\operatorname{Sect}(\\mathcal B,s)$ similarly. Suppose additive exact functors $L_n:\\mathcal A_n\\to\\mathcal B_n$ and $P_n:\\mathcal B_n\\to\\mathcal A_n$ have adjunctions $L_n\\dashv P_n$ with units $\\eta_n$ and counits $\\varepsilon_n$. Supply natural isomorphisms $\\alpha_n:L_{n+1}r_n\\xrightarrow{\\sim}s_nL_n$ and $\\beta_n:P_{n+1}s_n\\xrightarrow{\\sim}r_nP_n$. Require, for $X\\in\\mathcal A_n$ and $Y\\in\\mathcal B_n$,\n$$\\beta_{n,L_nX}\\,P_{n+1}(\\alpha_{n,X})\\,\\eta_{n+1,r_nX}=r_n(\\eta_{n,X}),$$\n$$\\varepsilon_{n+1,s_nY}=s_n(\\varepsilon_{n,Y})\\,\\alpha_{n,P_nY}\\,L_{n+1}(\\beta_{n,Y}),$$\nwhere compositions are read right to left. Then these section categories are abelian with componentwise exactness. The formulas\n$$(LX)_n=L_nX_n,\\quad (LX)_{n+1}\\to s_n(LX)_n=\\alpha_{n,X_n}L_{n+1}(x_n),$$\n$$(PY)_n=P_nY_n,\\quad (PY)_{n+1}\\to r_n(PY)_n=\\beta_{n,Y_n}P_{n+1}(y_n)$$\ndefine exact additive functors $L,P$ and an adjunction $L\\dashv P$. Its unit and counit are the actual families $(\\eta_{n,X_n})_n$ and $(\\varepsilon_{n,Y_n})_n$, and its Hom bijection is componentwise transposition $f_n\\mapsto P_n(f_n)\\eta_{n,X_n}$, with inverse $g_n\\mapsto\\varepsilon_{n,Y_n}L_n(g_n)$. Both families satisfy the section-transition equations and both triangle identities as section maps. In particular this applies to strict semilinear module systems [def-coef-semilinear-system-models], with $r_n,s_n$ restriction of scalars [def-pc-sheaf-restrict-scalars]; no invertibility of the system transitions is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "fix-prop-coherence.proof.md paragraph 2, adjunction units and counits: old open-adjunction proof step 1, assembling coefficient-level functors and transformations into strict system maps; agent-extracted obligation, not a verbatim blueprint theorem"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-coef-semilinear-system-models",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunctions on categories of strict semilinear module systems obtained by gluing levelwise exact adjunctions compatible with restriction of scalars",
+   "results": "CondensedMod.LocallyConstant.adjunction; Condensed.freeForgetAdjunction; LightCondensed.freeForgetAdjunction; ModuleCat.extendRestrictScalarsAdj; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.instIsRightAdjointRestrictScalars; ModuleCat.instIsLeftAdjointRestrictScalars; ModuleCat.instIsRightAdjointCoextendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact extension by zero restriction adjunction for strict semilinear systems of module sheaves over an inverse tower of coefficient rings",
+   "results": "ModuleCat.extendRestrictScalarsAdj; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom bijection between inverse systems from compatible component adjunctions with restriction of scalars and exact termwise open extension by zero",
+   "results": "ComplexShape.Embedding.liftExtendfArrowIso; ComplexShape.Embedding.homEquiv_apply_coe; ComplexShape.Embedding.homRestrict_f; ComplexShape.Embedding.liftExtend_homRestrict; ComplexShape.Embedding.homRestrict_comp_extendMap; ComplexShape.Embedding.homEquiv; ComplexShape.Embedding.homRestrict.f_eq; ComplexShape.Embedding.homRestrict_comp_extendMap_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]djunction.*[Ss]ection|[Aa]djunction.*[Dd]iagram|[Aa]djunction.*[Tt]ower [directory Mathlib/CategoryTheory]",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean; Mathlib/CategoryTheory/Sites/LocalSite.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing exact adjunctions on varying abelian categories along transition functors compatible with units and counits gives an exact adjunction on strict inverse sections",
+   "results": "CategoryTheory.abelianOfAdjunction; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.mk; CategoryTheory.Adjunction.CoreUnitCounit.noConfusionType",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between categories of sections of inverse diagrams of abelian categories is induced by compatible exact adjunctions on fibers, with componentwise unit and counit",
+   "results": "Condensed.setAbAdjunction; CategoryTheory.Over.toOverSectionsAdj; CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.adjunction; LightCondSet.sequentialAdjunction; CondensedSet.LocallyConstant.adjunction; LightCondSet.LocallyConstant.adjunction; LightCondSet.topCatAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.sections",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-open-adjunction-shift",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "fix-prop-coherence.proof.md paragraph 2, adjunction units and counits: old open-adjunction proof step 1, assembling coefficient-level functors and transformations into strict system maps",
+   "via": [
+    "lem-pur-open-adjunction-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

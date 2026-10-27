@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-native-ringed-restriction-derived-hom",
+ "kind": "statement",
+ "title": "Native Ringed Restriction Derived Hom",
+ "status": "split",
+ "statement": "For continuous restriction along an equivalence inducing equivalences on slices, suppose the corresponding module restriction is an equivalence and both sites admit the indicated additive sheafification and derived categories. Restriction of derived internal Hom(L,M) is isomorphic to derived internal Hom of the two restricted objects. The derived-category universes may differ. Dependencies: [lem-pur-native-ringed-restriction-hom], [def-pur-derived-internal-hom], [def-weil-pbc-derived-inverse-image].",
+ "stmt_deps": [
+  "lem-pur-native-ringed-restriction-hom",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "choose a complex representing L and a K-injective complex representing M. An exact additive equivalence preserves K-injectives. Compute the two derived Hom objects using these representatives, restrict their Hom complex using the ordinary restriction comparison, and use the localization factorization of the derived functor. The site-object, site-arrow, coefficient and derived universes remain independent.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-hom",
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-native-ringed-restriction-hom",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For continuous restriction along an equivalence inducing equivalences on slices, suppose the corresponding module restriction is an equivalence and both sites admit the indicated additive sheafification and derived categories. Restriction of derived internal Hom(L,M) is isomorphic to derived internal Hom of the two restricted objects. The derived-category universes may differ.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": ((pullbackPushforwardAdjunction.{u} φ).homEquiv _ _).symm (unitToPushforwardObjUnit φ) = pullbackObjUnitToUnit φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"RestrictScalars.addEquiv\", \"module\": \"Mathlib.Algebra.Algebra.RestrictScalars\", \"type\": \": RestrictScalars R S M ≃+ M\", \"doc\": \"The restriction of scalars construction that views an $ S $-module $ M $ as an $ R $-module (given a ring homomorphism $ R \\\\to S $) is additively equivalent to $ M $ itself via the identity map.\"}\n  {\"name\": \"PresheafOfModules.sheafificationHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \"{P : PresheafOfModules.{v} R₀} {F : SheafOfModules.{v} R} :\\n  ((sheafification α).obj P ⟶ F) ≃ (P ⟶ (restrictScalars α).obj ((SheafOfModules.forget _).obj F))\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ≅ pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"PresheafOfModules.sheafifyHomEquiv'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \"{F : PresheafOfModules.{v} R.val} (hF : Presheaf.IsSheaf J F.presheaf) :\\n  ((sheafify α φ).val ⟶ F) ≃ (M₀ ⟶ (restrictScalars α).obj F)\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).obj Y ⟶ X) → (Y ⟶ (ModuleCat.coextendScalars f).obj X)\", \"doc\": \"For ring homomorphism $ f : R \\\\to S $, this function establishes a natural isomorphism between the Hom set of $ R $-linear maps from the restricted $ S $-module $ Y $ to $ X $, and the Hom set of $ S \"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \": (G.op ⋙ ℱ ⟶ G.op ⋙ ℱ'.val) ≃ (ℱ ⟶ ℱ'.val)\", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $, there is a natural equivalence between the hom-set of natural transforma\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"The functor `DerivedCategory C₁ ⥤ DerivedCategory C₂` induced\\nby an exact functor `F : C₁ ⥤ C₂` between abelian categories.\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryIdIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" (C₁ : Type u_1) [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : (CategoryTheory.Functor.id C₁).mapDerivedCategory ≅ CategoryTheory.Functor.id (DerivedCategory C₁)\", \"doc\": \"The functor `DerivedCategory C₁ ⥤ DerivedCategory C₁` induced by the identity\\nfunctor of `C₁` identifies to the identity functor of the derived category.\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"`DerivedCategory.singleFunctor` commutes with `F` and `F.mapDerivedCategory`.\"}\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {F : CategoryTheory.Functor C₁ C₂} [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.Localization.Lifting DerivedCategory.Q (HomologicalComplex.quasiIso C₁ (ComplexShape.up ℤ)) DerivedCategory.Q (CategoryTheory.Functor.id C₁).mapDerivedCategory\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.NatTrans.mapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {F : CategoryTheory.Functor C₁ C₂} [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"A natural transformation between exact functors between abelian categories\\ninduces a natural transformation between the corresponding induced functors\\non the derived categories.\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.NatTrans.CommShift (CategoryTheory.Functor.mapDerivedCategoryIdIso C₁).hom ℤ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryCompIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {C₃ : Type u_3} [CategoryTheory.Category.{v_3, u_3} C₃] [CategoryTheory.Abelian C₃]\", \"doc\": \"If `F` and `G` are exact functors between abelian categories, the composition\\nof the induced functors on the derived category identifies to the functor\\ninduced by `F ⋙ G`.\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n (mapDerivedCategory|internalHom).*(Iso|iso|equiv) Mathlib/ (local read-only Mathlib source)",
+   "results": "2 matching source lines. First matches:\nMathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:68:      F.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso C₁).hom.app K) ≫\nMathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:65:          (F.mapDerivedCategory.commShiftIso (1 : ℤ)).inv.app (Q.obj S.X₁) := by",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativeRingedRestrictionDerivedHom",
+  "file": "lean/Sheaf/CategoryTheory/NativeRingedRestrictionDerivedHom.lean",
+  "declaration": "CategoryTheory.NativeRestriction.derivedHomRestriction",
+  "statement": "theorem derivedHomRestriction\n    {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]\n    {K : GrothendieckTopology C} {J : GrothendieckTopology D}\n    (F : C ⥤ D) [Functor.IsContinuous F K J]\n    (R : Sheaf J CommRingCat.{max c d vc vd r})\n    (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)\n    [(restrictModules.{_, _, _, _, r} (K := K) F R).IsEquivalence]\n    [HasSheafify J AddCommGrpCat.{max c d vc vd r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c d vc vd r}]\n    [HasSheafify K AddCommGrpCat.{max c d vc vd r}]\n    [K.WEqualsLocallyBijective AddCommGrpCat.{max c d vc vd r}]\n    [HasDerivedCategory.{w} (NativeModules.{max c d vc vd r, d, vd} R)]\n    [HasDerivedCategory.{w'} (NativeModules.{max c d vc vd r, c, vc}\n      (restrictedCommRing.{_, _, _, _, r} (K := K) F R))]\n    (L M : DerivedCategory (NativeModules.{max c d vc vd r, d, vd} R)) :\n    let T := restrictModules.{_, _, _, _, r} (K := K) F R\n    let S := restrictedCommRing.{_, _, _, _, r} (K := K) F R\n    Nonempty (T.mapDerivedCategory.obj\n      ((derivedInternalHomOfUniverses.{d, vd, max c vc r, w} J R).obj (op L, M)) ≅\n        (derivedInternalHomOfUniverses.{c, vc, max d vd r, w'} K S).obj\n          (op (T.mapDerivedCategory.obj L), T.mapDerivedCategory.obj M))",
+  "declarations": [
+   "CategoryTheory.NativeRestriction.derivedHomRestriction"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

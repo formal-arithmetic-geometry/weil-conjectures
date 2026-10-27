@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-scalar-site-comparison-normalized-data",
+ "kind": "statement",
+ "title": "Canonical scalar pullback and bounded-below site mate comparison",
+ "statement": "For a scheme map f:X→Y and a unital map a:A→B of discrete commutative rings [def-pc-scheme], the scalar/pullback inverse mates on the etale and pro-etale ordinary unbounded derived categories [def-weil-pbc-derived-categories] are invertible [lem-sfb-proetale-scalar-pullback-mate-invertible]. Define their forward comparisons to be the inverses. The etale comparison is the normalized representative comparison of [lem-pur-derived-change-of-rings]. The canonical ambient direct-image mate is that of [def-sf-etale-proetale-ambient-direct-image-comparison]. For qcqs f its component at any bounded-below etale A-complex J is invertible, without finiteness of A. These statements keep the specified mate normalizations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite rings paragraph, transport of scalar direct-image mates; canonical pullback/scalar and site comparison maps (Stacks 07A4, 0G7E, 09A6)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-sfb-proetale-scalar-pullback-mate-invertible",
+  "lem-pur-derived-change-of-rings",
+  "def-sf-etale-proetale-ambient-direct-image-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply invertibility of the normalized scalar inverse mates and take their inverses; identify the etale result by its representative scalar unit equation and uniqueness.",
+   "uses": [
+    "lem-sfb-proetale-scalar-pullback-mate-invertible",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-etale-scalar-pullback-existence",
+    "def-pur-scalar-pullback-representative-data",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The qcqs bounded-below direct-image comparison places the target in the comparison image. Comparison adjunction units are invertible at J and at Rf_*J. The triangle equation makes the comparison counit invertible on this image. Iterated mates then show that the specified ambient mate component is invertible.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-scalar-pullback-representative-data",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-scalar-pullback-existence",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sfb-proetale-scalar-pullback-mate-invertible",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Canonical comparison normalization used in the finite rings paragraph."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension commutes with exact inverse image as the inverse mate of scalar restriction",
+   "results": "ModuleCat.extendRestrictScalarsAdj and its sectionwise Hom equivalence; no derived site mate result.",
+   "date": "2026-10-25",
+   "verdict": "Only the ordinary module adjunction is present; derived sheaf argument required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived scalar-change mate for direct image commutes with etale proetale comparison",
+   "results": "etale algebra and ordinary adjunction results, no fixed canonical site scalar mate.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; use normalized flat-resolution localization."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(IsIso|isIso)|isIso.*mateEquiv",
+   "results": "No matching specialization. Generic mate identities apply but do not assert scalar pullback invertibility.",
+   "date": "2026-10-25",
+   "verdict": "The site and flat-resolution hypotheses require the proved specialization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleProEtaleScalarMate",
+  "date": "2026-10-25",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-etale-proetale-scalar-mate",
+   "place": "Canonical comparison helpers needed for the scalar direct-image mate equation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleProEtaleScalarMateData",
+  "file": "lean/Sheaf/Paper/EtaleProEtaleScalarMateData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarPullbackReverse_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarPullbackReverseProEtale",
+   "AlgebraicGeometry.ProEtale.scalarPullbackReverseEtale",
+   "AlgebraicGeometry.ProEtale.scalarPullbackReverse_isIso",
+   "AlgebraicGeometry.ProEtale.scalarPullbackProEtaleIso",
+   "AlgebraicGeometry.ProEtale.scalarPullbackEtaleIso",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbientPullbackIso",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbient",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbient_isIso",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbientIso"
+  ],
+  "statement": "theorem scalarPullbackReverse_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) : IsIso (scalarPullbackReverseProEtale a f) ∧ IsIso (scalarPullbackReverseEtale a f)",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-25",
+  "note": "Canonical comparison definitions and their proved private normalization lemmas are shared here with complete invertibility proofs. Private representative equations are added next to their equivalent defining constructions in ScalarPullbackRepresentativeData and EtaleDerivedScalarTensor."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d8a7",
+  "group": "T7",
+  "result": "fix",
+  "landing": "20261025T181149-L-4084036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d8a7",
+  "group": "T7",
+  "result": "fix",
+  "landing": "20261025T181149-L-4084036",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery vs 9276d delivery+C-9276d fixes (7 of 8 Lean files byte-identical to uncorrected 9276d; Data module adds normalization lemmas + changed directImageComparisonAmbientPullbackIso body); fixed set vs published clone c84b68f; 70 downstream users compiled against fixed sandbox (70/70)"
+ }
+}

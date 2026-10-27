@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-general-ring-integration-exponent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (3): Kummer exponent change preserves the normalized projective-line trace, ordered affine counits and actual bundle integration.",
+   "via": [
+    "lem-sp-general-ring-exponent"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kummer exponent compatibility of actual bundle integration",
+ "statement": "Let A be any finite commutative ring, and let M,N be positive integers annihilating A with N dividing M. Let S be Noetherian with M and N invertible, let F be a finite locally free O_S-module of constant rank d [def-asd-vector-bundle-zero-section], and let q:mu_M,S -> mu_N,S and b:A_S(1;M) ~= A_S(1;N) satisfy the power and scalar/root generator conditions of FiniteGeneralRingKummerComparison in [def-sp-general-ring-canonical-data]. Let e be the ordered shifted tensor comparison finiteGeneralRingLevelPower from that definition, and pi the projection of the vector bundle of F. Use the fixed compact-support functor vectorBundlePurityLower [thm-amb-vector-bundle-purity, def-amb-etale-compact-support]. Then Rpi_!(pi^*e.hom) followed by the actual vectorBundleIntegration at exponent N equals vectorBundleIntegration at exponent M [def-amb-vector-integration]. This is an identity of actual integration arrows in the ordinary etale derived category, before transposition or restriction to zero. It includes rank zero, the zero ring and empty S.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3), exponent independence; proof (2), Kummer projective-line normalization and vector-bundle step."
+ },
+ "stmt_deps": [
+  "def-sp-general-ring-canonical-data",
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-etale-compact-support",
+  "def-amb-vector-integration",
+  "thm-amb-vector-bundle-purity"
+ ],
+ "proof": [
+  {
+   "text": "Write M=N*k. The Kummer diagram has power k on the units term containing mu_M and identity on the last units term. Exactness and boundary naturality identify the two scalar-extended first Chern classes of O(1) under the specified generator-normalized root-line map b. The unit columns also correspond, so the normalized projective-line decompositions, and hence their inverse second-projection traces, commute with b.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict along the affine-line open and iterate the resulting counit in the prescribed coordinate order. This identifies the affine-space counits under the ordered shifted tensor of b, with the identity at rank zero. On every bundle frame the prescribed integration is the corresponding affine counit after normalized Tate pullback. Generator naturality gives precisely pullback of finiteGeneralRingLevelPower. The trace equations agree on all frames; unique sheaf gluing, read in degree zero, gives equality of the actual global integration arrows.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-amb-vector-integration",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-p1-trace",
+  "def-amb-vector-integration",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-kummer-any-base",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3) exponent independence, with the normalization in (2); isolate its vector-bundle integration factor before the diagonal/Rees assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer power comparison commutes with vector bundle integration and the zero section adjunction",
+   "results": "Eight unrelated topological vector-bundle coordinate results; no etale integration or Kummer exponent comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_left in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-27",
+   "verdict": "Supplies the formal transposition step, not the geometric trace equation."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*integration|integration.*exponent|vectorBundleIntegration",
+   "results": "msearch grep returned zero Mathlib matches. Local library search found vectorExponentIndependence only for finiteTateCoefficient ell E n, and integratedSpecialization_scalar with scalar-extension functors and section mates rather than a fixed-ring integration identity.",
+   "date": "2026-10-27",
+   "verdict": "No existing declaration of the arbitrary finite-ring bundle zero-section identity. Blueprint bundle exponent search found no exact duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.FiniteGeneralRingExponent",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.FiniteGeneralRingIntegrationExponent",
+  "file": "lean/Sheaf/SecSmoothPurity/FiniteGeneralRingIntegrationExponent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteGeneralRingIntegrationExponent",
+  "statement": "theorem finiteGeneralRingIntegrationExponent\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (M N : ℕ) (hMpos : 0 < M) (hNpos : 0 < N) (hdiv : N ∣ M)\n    (hM : (M : A) = 0) (hN : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (M : Γ(S, ⊤))) (hS' : IsUnit (N : Γ(S, ⊤)))\n    (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (q : S.rootsOfUnitySheaf M ⟶ S.rootsOfUnitySheaf N)\n    (b : Scheme.finiteEtaleTateLine S M A hM ≅\n      Scheme.finiteEtaleTateLine S N A hN)\n    (hb : FiniteGeneralRingKummerComparison A M N hM hN S q b) :\n    (Etale.vectorBundlePurityLower A S d F).map\n        ((Etale.ordinaryFinitePullback A (VectorBundleZeroSection.π S d F)).map\n          (finiteGeneralRingLevelPower A M N hM hN S b d).hom) ≫\n        Etale.vectorBundleIntegration N hNpos A hN S hS' d F =\n      Etale.vectorBundleIntegration M hMpos A hM S hS d F\n",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T103502-L-1088336",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T103502-L-1088336",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

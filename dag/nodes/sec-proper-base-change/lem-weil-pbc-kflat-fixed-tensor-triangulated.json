@@ -159,7 +159,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YM, 06YP and 06YU; derived.tex cone and distinguished triangles; more-algebra.tex Tag 0FNH. C2 realizes the nine-step argument using the existing generic BifunctorTriangulated and shift-localization APIs, with no change to the unit route."
+  "place": "Tags 06YM, 06YP and 06YU; derived.tex cone and distinguished triangles; more-algebra.tex Tag 0FNH. C2 realizes the nine-step argument using the existing generic BifunctorTriangulated and shift-localization APIs, with no change to the unit route. C6 definition repair: derivedTensor directly curries the published independent-coefficient tensor, definitionally equal to the former selectedTensorPresentation projection. Existing theorems and representative data are unchanged."
  },
  "mathlib_searches": [
   {
@@ -316,15 +316,26 @@
   "result": "pass",
   "note": "Snapshot differs from live only in the item's lean field; statement verbatim; one sorry; docstrings carry Stacks 06YM/06YP/06YU/0FNH, blueprint tag and the 9 proof steps. Every node clause is rendered against the recorded declarations: ringedSiteModules, map₂CochainComplex of curriedTensor (= descent theorem's tensor), siteDerivedTensorIndependentCoefficients (universes .{u,v,r,w,0,0} match its def), IsKFlatIndependentCoefficients, IsFlatOnSite, and Mathlib's map₂CochainComplex CommShift₂Int (the shift dependency's mathlib_match). Quasi-iso preservation holds for arbitrary B,B'; shifts preserve K-flat and flat terms; IsTriangulated for both fixed functors; cL/cR are pinned to representativeIso on flat-term K-flat B with NatTrans.CommShift; the existential CommShift₂Int s is determined through these and supplies naturality in derived fixed maps and the (-1)^{ab} sign. Site/coefficient universes are independent with no extra hypotheses; edge cases checked. Not a duplicate: DerivedCategory/Monoidal/Shift is for a different derived tensor. nt_compile --json rc=0 in 21.5 s, no warnings. Advisory: representativeIso uses Nonempty.some of the dependency's comparisons (the interface limit); some redundant proof imports; the cone clause is implied by IsTriangulated."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-7084d",
-  "group": "C2",
-  "result": "fix",
-  "landing": "20261021T233622-L-837738",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261022T040151-L-2818727",
   "kind": "interface",
-  "note": "independent cc review: delivered item vs clones/live base and the PASSed 17c0 head; 15 direct importers from clones/live compiled against delivered and fixed item; change-record Users vs computed users"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

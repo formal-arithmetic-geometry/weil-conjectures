@@ -1,0 +1,352 @@
+{
+ "id": "lem-pur-complete-residue-line-inverse",
+ "kind": "statement",
+ "title": "A complete complex with shifted rank-one residue has a tensor inverse",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\pi$, and a Noetherian scheme $X$ on which $\\ell$ is invertible. Noetherian means admitting a finite affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring, def-pc-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site] put $B_n=(R/\\pi^n)_X$, $n\\geq1$, and $\\widehat R_X=\\varprojlim_n B_n$ [def-weil-completed-integral-coefficients]. Use the module derived categories and internal Hom of [def-weil-derived-pullback-tensor-hom], and the ordinary ambient derived tensor over the ring sheaf [def-weil-derived-tensor]. Let $M\\in D(\\widehat R_X)$ be derived complete [def-weil-derived-complete], and fix $m\\in\\mathbf Z$. Assume that $M_1=M\\otimes^L_{\\widehat R_X}B_1$ is isomorphic to $\\nu_X^*L[m]$, where $\\nu_X$ is the etale/pro-etale comparison [def-weil-pbc-site-comparison-morphism] and $L$ is an etale sheaf of $R/\\pi$-modules etale locally isomorphic to the constant rank-one module $(R/\\pi)_X$.\n\nThen there is a locally free rank-one $\\widehat R_X$-module sheaf $\\mathcal L$, meaning pro-etale locally isomorphic to $\\widehat R_X$, and an isomorphism $M\\simeq\\mathcal L[m]$ in $D(\\widehat R_X)$. Every $\\mathcal L\\otimes_{\\widehat R_X}B_n$ is of etale origin and etale locally constant with finite free rank-one values. Put $M^\\vee=R\\mathcal Hom_{\\widehat R_X}(M,\\widehat R_X)$. Both $M$ and $M^\\vee$ belong to $D^b_{ctf}(X,\\mathcal O_E)$ [def-weil-finite-tor-amplitude, def-weil-derived-complete-integral-detailed], and the evaluation maps in both tensor orders give derived isomorphisms\n$$M\\otimes^L_{\\widehat R_X}M^\\vee\\simeq\\widehat R_X,\\qquad M^\\vee\\otimes^L_{\\widehat R_X}M\\simeq\\widehat R_X.$$\nFor every $n\\geq1$, the cohomological and Tor intervals of the reductions of $M$ and $M^\\vee$ can be taken to be $[-m,-m]$ and $[m,m]$, respectively, independent of $n$. The empty scheme is allowed. No trivialization of $\\mathcal L$ is specified. The ordinary tensor products in these evaluation maps are derived complete. Their canonical comparisons to the quotient-tower completed tensor products [def-pur-integral-derived-operations] are isomorphisms, and through these comparisons the displayed maps also give the two inverse evaluations for the specified integral tensor product.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.6.8 (pp. 52-53): perfect local models from locally constant perfect residue; specialized to a shifted residue line, with the resulting line and its dual evaluation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-complete",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-tensor",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Write $B=\\widehat R_X$ and $k=R/\\pi$. The quotient/constant-coefficient completion comparison identifies $B/\\pi^nB$ with $B_n$ and identifies quotient-tower completeness with local derived $(\\pi)$-completeness. Apply the residue-lisse perfect lifting theorem with $A=R$, $J=(\\pi)$, and $C=L[m]$. Its Noetherian and completeness hypotheses hold for the complete valuation ring of the finite extension $E$ and for the given Noetherian $X$. The residue complex has its only cohomology in degree $-m$, with rank-one finite free values; tensoring its local model $k[m]$ with any degree-zero module gives a complex in degree $-m$, so its Tor interval is $[-m,-m]$. We obtain a pro-etale cover $U_t$ and bounded finite-projective $R$-complexes $P_t$ with $M|_{U_t}\\simeq B|_{U_t}\\otimes_R P_t$.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-adic-residue-lisse-perfect-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2, Lemma 6.6.8; Stacks proetale.tex Tag 09C6 (lemma-connected-adic-lisse), completed-coefficient version"
+   }
+  },
+  {
+   "text": "Omit empty covering members. The residue calculation for a completed perfect model gives $(M|_{U_t})\\otimes_B^L k\\simeq\\underline{P_t\\otimes_R k}$. At any geometric point of the nonempty scheme $U_t$, the hypothesis on $L$ identifies its cohomology with $k$ in degree $-m$ and zero in all other degrees. Hence the scalar Betti numbers of $P_t\\otimes_R^L k$ are $d_{-m}=1$, $d_i=0$ for $i\\ne-m$. The bounded finite-projective representative makes $P_t$ pseudo-coherent (the equivalent projective-representative criterion in the cited finite-free-model lemma). Apply the local pseudo-coherent minimal-model theorem to the local ring $R$. Its representative has term $R^{d_i}$ in degree $i$; thus its only term is $R$ in degree $-m$, with zero differentials. Consequently $P_t\\simeq R[m]$, and $M|_{U_t}\\simeq B|_{U_t}[m]$.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field; Bhatt--Scholze Lemma 6.6.8 local models"
+   }
+  },
+  {
+   "text": "Put $\\mathcal L=\\mathcal H^{-m}(M)$. Exactness of restriction (on underlying abelian sheaves, hence also on module sheaves) gives $\\mathcal L|_{U_t}\\cong B|_{U_t}$ and $\\mathcal H^i(M)|_{U_t}=0$ for $i\\ne-m$. A sheaf with zero restriction to a cover is zero, by the separatedness axiom, so these cohomology sheaves vanish globally. For a representative complex $K$ of $M$, the smart truncation $\\tau_{\\le -m}K\\to K$ and the quotient $\\tau_{\\le -m}K\\to\\mathcal H^{-m}(K)[m]$ are quasi-isomorphisms: their cohomology maps are identities in degree $-m$ and all other cohomology is zero. This gives $M\\simeq\\mathcal L[m]$ in the derived category. It uses the global cohomology sheaf, and does not try to glue arbitrarily chosen derived trivializations.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Exact restriction to localized sites; smart truncation of a complex with one nonzero cohomology sheaf"
+   }
+  },
+  {
+   "text": "Set $\\mathcal L^*=\\mathcal Hom_B(\\mathcal L,B)$. The line-evaluation inverse-pair theorem gives a line $\\mathcal L^*$, both specified sheaf evaluations, and inverse exact tensor equivalences. By the sheaf tensor--Hom adjunction, $\\mathcal Hom_B(\\mathcal L,-)$ is the right adjoint of tensoring with $\\mathcal L$, so is naturally the inverse equivalence $-\\otimes_B\\mathcal L^*$; it is therefore exact. Applying this exact functor to a K-injective resolution $B\\to I$ is a quasi-isomorphism from $\\mathcal L^*$ to $\\mathcal Hom_B(\\mathcal L,I)$. The defining Hom-complex formula, including its usual differential, shifts this result by $[-m]$ when its first input is $\\mathcal L[m]$. It follows that $M^\\vee=R\\mathcal Hom_B(M,B)\\simeq\\mathcal L^*[-m]$. The unbounded derived line-tensor theorem computes tensor with either line termwise and is compatible with shifts. Hence the specified derived evaluations are isomorphisms in both orders: they are the derived images of the line evaluations with the cancelling shifts. On local bases their degree-zero evaluation is multiplication (with the standard Koszul shift/symmetry signs when the order is reversed).",
+   "uses": [
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-derived-internal-hom",
+    "lem-pur-line-unbounded-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8Q and 0B8N (line evaluations and inverse exact equivalences); sites-cohomology.tex Tag 06YU (derived tensor)"
+   }
+  },
+  {
+   "text": "Both $\\mathcal L$ and $\\mathcal L^*$ are flat, by the line-tensor theorem. Thus the derived reductions of $M$ and $M^\\vee$ are respectively $\\mathcal L_n[m]$ and $\\mathcal L_n^*[-m]$, where $\\mathcal L_n=\\mathcal L\\otimes_B B_n$ and $\\mathcal L_n^*=\\mathcal L^*\\otimes_B B_n$. Restricting the same trivializing cover makes each of these sheaves equal to $B_n$. They are locally constant with finite stalks, since $R/\\pi^n$ is a finite ring. The pro-etale/etale local-constancy equivalence therefore descends each to a finite locally constant etale module sheaf. On a nonempty etale trivializing member its constant value has geometric stalk isomorphic to $R/\\pi^n$, so the value is itself free of rank one. This proves the asserted etale local rank-one property for every $n$, for the line and also for its dual.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-sf-proetale-locally-constant-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant; sites-cohomology.tex Tag 06YU"
+   }
+  },
+  {
+   "text": "The completed perfect-model lemma with the degree-zero complex $P=R$ makes $B[0]$ locally derived $(\\pi)$-complete. The quotient/constant-coefficient comparison identifies this with quotient-tower completeness. Apply the integral line-tensor comparison with $C=B[0]$, first $T=\\mathcal L$ and then $T=\\mathcal L^*$. Its left side is $T$ and its right side is exactly $R\\varprojlim_n\\operatorname{Res}_n(T\\otimes_B B_n)$, through the canonical quotient maps. It follows that both lines are derived complete. Shifting this quotient-tower isomorphism by $m$ or $-m$ shows the same for $M$ and $M^\\vee$; shifts commute with the products and cone defining this derived limit.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sf-integral-line-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1 and Definition 3.5.2; completed-line specialization"
+   }
+  },
+  {
+   "text": "For every $n$, each reduced line and its dual is flat and finite locally constant. The partition consisting of $X$ itself verifies finite-torsion constructibility. Tensoring $\\mathcal L_n[m]$ with any degree-zero $B_n$-module sheaf gives its ordinary tensor with $\\mathcal L_n$, shifted by $m$, and therefore has cohomology only in degree $-m$. For $\\mathcal L_n^*[-m]$ the same calculation puts cohomology in degree $m$. Taking the other factor to be $B_n$ gives the cohomological intervals too. The intervals $[-m,-m]$ and $[m,m]$ are independent of $n$. Together with completeness from Step 6, these are exactly the defining conditions for both objects to belong to $D^b_{ctf}(X,\\mathcal O_E)$. For the empty scheme all the sheaves and complexes are zero, the evaluations are isomorphisms, and the same intervals satisfy every vanishing condition.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1 and Lemmas 6.5.3--6.5.4; uniform shifted-line Tor calculation"
+   }
+  },
+  {
+   "text": "Finally apply ordinary/ completed tensor comparison to $(M,M^\\vee)$ and $(M^\\vee,M)$, which are now known to be bounded constructible derived-complete objects. A Noetherian scheme is quasi-compact, by its finite affine cover, and, being locally Noetherian, quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated], as required. The theorem proves that both ordinary tensors are complete and that their canonical comparisons to the specified quotient-tower completed tensors are isomorphisms. Composing the two ordinary evaluations of Step 4 with the inverses of these comparisons gives the two inverse evaluations for the specified integral tensor product. This uses the canonical comparisons induced by coefficient quotient maps, so it identifies the tensor product stipulated in the item.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5 and Definition 3.4.10; quotient-tower comparison of Lemma 3.4.12(4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-residue-lisse-perfect-lift",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-derived-internal-hom",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-sf-integral-line-tensor-comparison",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-fix-constructible-tensor-completion",
+  "lem-weil-pbc-locally-noetherian-quasi-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.6.8, specialized using Stacks Tag 0BCC, then the ordinary line duality calculation and Lemma 6.5.5; assembly written by Q151"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex of sheaves over the completed valuation ring whose residue reduction is a rank one locally constant sheaf shifted by m is tensor invertible with inverse shifted by minus m",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|tensorInvertible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete complex with residue reduction a locally constant rank one sheaf in a single degree has a two sided tensor inverse",
+   "results": "8 hits: Module.Invertible.rTensorInv_leftInverse, Submodule.tensorInvEquiv, Module.Invertible.rTensorInv, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, Module.Invertible.instTensorProduct_1, Module.Invertible.instTensorProduct, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedComplete\", \"Invertible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adically complete derived sheaf whose reduction modulo a uniformizer is a shifted free rank one local system is locally a shifted completed coefficient line with dual evaluation isomorphisms",
+   "results": "8 hits: BDeRhamPlus, BDeRham, AdicCompletion.coe_eval, AdicCompletion.eval_of, AdicCompletion.val_smul_eq_evalₐ_smul, AdicCompletion.eval_apply, AdicCompletion, AdicCompletion.eval",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete sheaf complex over a complete discrete valuation ring with shifted rank one residue is locally a shifted invertible module",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.isFinitePresentation, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, SheafOfModules.IsFinitePresentation, SheafOfModules.isQuasicoherent",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived categories, ordinary invertible modules, and sheaf generators do not state the complete residue-line criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|tensorInvertible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived categories, ordinary invertible modules, and sheaf generators do not state the complete residue-line criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complete complex whose residue is a shifted rank one local system is tensor invertible",
+   "results": "8 hits: Submodule.tensorInvEquiv, Module.Invertible.instTensorProduct_2, Module.Invertible.instTensorProduct, DerivedCategory.instIsTriangulated, Module.Invertible.instTensorProduct_1, DerivedCategory, HomologicalComplexUpToQuasiIso, DerivedCategory.instEssSurjCochainComplexIntQ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived categories, ordinary invertible modules, and sheaf generators do not state the complete residue-line criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedComplete\", \"Invertible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived categories, ordinary invertible modules, and sheaf generators do not state the complete residue-line criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adically complete complex with residue a shifted rank one constant sheaf has a locally free rank one cohomology sheaf and an evaluation tensor inverse",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.mapFree, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived categories, ordinary invertible modules, and sheaf generators do not state the complete residue-line criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-varying-dimension-dualizing-inverse",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: integral coefficient stage of the dualizing inverse, after fixing one relative-dimension component",
+   "via": [
+    "lem-pur-varying-dimension-dualizing-inverse"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-complete-residue-line-inverse",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing completed local perfect lifting, scalar minimal-model, line duality, finite-coefficient descent and tensor-completion comparisons. Eight proof steps include the actual rank-one deduction, global cohomology-sheaf construction, internal-dual identification, finite reductions, uniform intervals and both specified evaluations. No new nodes.",
+  "blueprint": "Realizes the final invertibility assertion of def-pur-section-invariant, integral stage on a fixed relative-dimension component, through the parent lem-pur-varying-dimension-dualizing-inverse. No change to the finite-coefficient purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Constant-to-completed coefficients on derived-complete categories; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-sfb-adic-residue-lisse-perfect-lift",
+    "why": "Generic Local perfect lifting from a lisse residue complex without finite coefficient hypotheses; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-sfb-adic-perfect-model-complete-reduction",
+    "why": "Generic Completeness and residue calculation of a completed perfect coefficient model; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "why": "Generic Bounded-above finite-free model at a cohomological upper bound; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-sc-perfect-local-pseudocoherent-free-model",
+    "why": "Generic Minimal free model over a local ring; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Generic Restriction to a localized site is exact; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "why": "Generic Specified evaluation and exact tensor inverse pair for a sheaf line; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic Sheaves of modules on a site form a symmetric monoidal closed category; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-pur-line-unbounded-derived-tensor",
+    "why": "Generic Derived tensor by a locally free line is the exact termwise equivalence; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Generic Locally constant pro-etale sheaves with finite values are of etale origin; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-sf-integral-line-tensor-comparison",
+    "why": "Generic Ordinary and completed tensor with an integral coefficient line; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Generic Ordinary and completed tensor agree on integral constructible complexes; used only for the coefficient/local-model/line assembly, not to replace a purity argument. Applies with the ring and site explicitly identified in the proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-residue-lisse-perfect-lift",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-sf-integral-line-tensor-comparison",
+  "lem-fix-constructible-tensor-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-83f681449",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-83f681449 (reviewer sub-agent of L); spot-checked: I read all 8 steps against the full statement of every cited node and against Bhatt–Scholze Lemma 6.6.8 (pp. 52–53). The statement is unchanged, there are no new nodes, no SGA, no cycle, and proof_deps equals the union of the step uses. Step 1: the item's quotient-tower completeness of M is turned into local (π)-completeness through lem-weil-pbc-constant-completion-equivalence (Koszul completion = R lim of the reductions, and Koszul completeness = the local condition). The lift lemma's hypotheses hold: O_E is Noetherian and complete; X is Noetherian with a finite affine cover; C = L[m] has f.g. locally constant cohomology; its Tor window is [−m,−m] because L is flat. Step 2: (π) is maximal; the perfect-model lemma also holds on covering slices; the stalk count gives d_{−m}=1 and d_i=0 otherwise; the minimal model over the local ring is R[m]. Step 3 (exact restriction plus smart truncation) is genuinely elementary. Step 4: 𝓗om(𝓛,−) is the right adjoint of the equivalence T, so it is ≅ S and exact; this gives M^∨ ≅ 𝓛*[−m], and the derived evaluations come from the unbounded line-tensor node. Step 5: R/π^n is finite, so lem-sf-proetale-locally-constant-origin(b) applies, and rank one is read off a stalk. Step 6: the comparison with C = B[0] is correct; an existing node, lem-pur-completed-line-complete, states the same completeness directly (advisory only). Step 7: checked against the ctf, constructibility and completeness definitions; the intervals are uniform in n, and empty X is fine. Step 8: the hypotheses of lem-fix-constructible-tensor-completion hold. Fault fixed (C1): Step 8 used 'Noetherian ⇒ quasi-separated' with no node; it now cites the Mathlib leaf lem-weil-pbc-locally-noetherian-quasi-separated in its uses and in proof_deps (fixes/dag/nodes/sec-smooth-purity/lem-pur-complete-residue-line-inverse.json). Batch-5 check: both flagged citations (lem-sfb-adic-residue-lisse-perfect-lift and lem-sfb-adic-perfect-model-complete-reduction) reach sec-poincare-duality only through lem-pod-derived-exact-square-composition. That node is generic homological algebra (squares of exact functors pass to derived categories coherently), not part of Poincaré duality or the trace formula, so both citations are accepted. The declared generic tool_uses are accepted. No duplicate of the item exists.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompleteResidueLineInverse",
+  "declaration": "WeilConjectures.completeResidueLineInverse",
+  "declarations": [
+   "WeilConjectures.completeResidueAbSheafify",
+   "WeilConjectures.completeResidueAbLocallyBijective",
+   "WeilConjectures.completeResidueEtaleLine",
+   "WeilConjectures.completeResidueEtalePullback",
+   "WeilConjectures.completeResidueUnit",
+   "WeilConjectures.completeResidueDual",
+   "WeilConjectures.completeResidueTensor",
+   "WeilConjectures.completeResidueEvaluation",
+   "WeilConjectures.completeResidueEvaluationReverse",
+   "WeilConjectures.completeResidueLineInverse"
+  ],
+  "file": "lean/Sheaf/Paper/CompleteResidueLineInverse.lean",
+  "statement": "theorem completeResidueLineInverse [IsNoetherian X] (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (M : IntegralOnSlice.D.{u, u} l E X none) (_hM : IntegralOnSlice.IsComplete.{u, u} l E X none M) (m : ℤ) (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E 1)))) (_hL : completeResidueEtaleLine X (Padic.coefficientExtensionRing l E 1) L) (_hres : Nonempty ((scalarReductionDerivedExtension l E X 0).obj M ≅ ((DerivedCategory.singleFunctor _ 0).obj ((completeResidueEtalePullback l E X 0).obj L))⟦m⟧)) : ∃ T : IntegralOnSlice.Mod.{u, u} l E X none, T.IsFiniteLocallyFreeOfRank 1 ∧ Nonempty (M ≅ ((DerivedCategory.singleFunctor _ 0).obj T)⟦m⟧) ∧ (∀ n : ℕ, ∃ Ln : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))), completeResidueEtaleLine X (Padic.coefficientExtensionRing l E (n + 1)) Ln ∧ Nonempty ((scalarReductionExtension l E X n).obj T ≅ (completeResidueEtalePullback l E X n).obj Ln)) ∧ finiteTorConstructibleIntegral l E X M ∧ finiteTorConstructibleIntegral l E X (completeResidueDual l E X M) ∧ IsIso (completeResidueEvaluation l E X M) ∧ IsIso (completeResidueEvaluationReverse l E X M) ∧ (∀ n : ℕ, proEtaleCohomologicalSupport ((scalarReductionDerivedExtension l E X n).obj M) ⊆ Set.Icc (-m) (-m) ∧ HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension l E X n).obj M) (-m) (-m) ∧ proEtaleCohomologicalSupport ((scalarReductionDerivedExtension l E X n).obj (completeResidueDual l E X M)) ⊆ Set.Icc m m ∧ HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension l E X n).obj (completeResidueDual l E X M)) m m) ∧ IntegralOnSlice.IsComplete.{u, u} l E X none (completeResidueTensor l E X M (completeResidueDual l E X M)) ∧ IntegralOnSlice.IsComplete.{u, u} l E X none (completeResidueTensor l E X (completeResidueDual l E X M) M) ∧ IsIso ((IntegralOnSlice.completionUnit.{u, u} l E X none).app (completeResidueTensor l E X M (completeResidueDual l E X M))) ∧ IsIso ((IntegralOnSlice.completionUnit.{u, u} l E X none).app (completeResidueTensor l E X (completeResidueDual l E X M) M)) ∧ ∃ (e : (IntegralOnSlice.completedTensor.{u, u} l E X none).obj (M, completeResidueDual l E X M) ≅ completeResidueUnit l E X) (e' : (IntegralOnSlice.completedTensor.{u, u} l E X none).obj (completeResidueDual l E X M, M) ≅ completeResidueUnit l E X), (IntegralOnSlice.completionUnit.{u, u} l E X none).app (completeResidueTensor l E X M (completeResidueDual l E X M)) ≫ e.hom = completeResidueEvaluationReverse l E X M ∧ (IntegralOnSlice.completionUnit.{u, u} l E X none).app (completeResidueTensor l E X (completeResidueDual l E X M) M) ≫ e'.hom = completeResidueEvaluation l E X M",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3862394db",
+  "group": "O4",
+  "result": "pass",
+  "note": "Single module Sheaf.Paper.CompleteResidueLineInverse; only the node's lean record changed; statement verbatim; Worker report and Second reading by O4 sections present. All hypotheses match: Noetherian X, l invertible, IntegralOnSlice.IsComplete none = recorded completeness, L an etale line via an etale Cover with L.over ≅ constant ULift(R/π), residue iso via scalarReductionDerivedExtension 0 and the canonical finiteCoefficientIntrinsicComparison. All conclusions match: T.IsFiniteLocallyFreeOfRank 1 with M ≅ T[m]; each underived reduction ≅ ν^* of an etale rank-one line; M^∨ = ambient IntegralOnSlice.hom into the unit; both in finiteTorConstructibleIntegral; IsIso of the closed-structure evaluation and braiding≫evaluation; support/Tor intervals [-m,-m] and [m,m] for all n≥1; both ordinary tensors complete; completionUnit components iso (completedTensor = tensor ⋙ completion); e,e' pinned by completionUnit ≫ e.hom = evaluation. Universe t=u inherited from finiteTorConstructibleIntegral.{u,u}. Empty X and m of any sign fine. No hollow defs, docstrings and the 8-step proof present, imports exist. Advisory: some statement decls owned by nodes outside stmt_deps; completeResidueEtaleLine could reuse IsLocallyConstantSheaf; global instances are re-bindings. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-sp-strict-geometric-coordinates",
+ "kind": "statement",
+ "title": "Constant-section geometric coordinates and localized inverse-image composition",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and a Base b as in [def-sp-tower-shriek-data]. On every scheme morphism f there exists Geometry g_f in b's fixed source and target calculi. There are ordinary inverse-image composition isomorphisms c_(f,g):g_g.pull followed by g_f.pull is isomorphic to g_(f composed with g).pull. The exact cochain localization of c evaluates to the composite of the two specified pullEvaluation maps and the canonical constant-ring derived pullback composition isomorphism at every positive ell-power quotient. This statement does not provide open extension, open tensor comparison or a Base.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), constant-section geometric coordinates and localized inverse-image composition"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the geometric semilinear system calculus using the given source calculus. The constant-section inverse-image ring comparisons identify the coefficient sheaves and all quotient transitions with the actual source-scheme coefficients. Transport the full level inverse-image/direct-image/adjunction package together, with the identity-on-sections normalization. Use the fixed target calculus and transport its signed K-flat models by their canonical comparisons. This gives Geometry, its fixed target-calculus equality and its transition and projection equations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-sp-tower-shriek-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form ordinary inverse-image composition by adjunction conjugacy from the sectionwise direct-image compositor. Both its finite evaluation and the canonical finite pullback compositor are transposes of the same constant-section map, hence agree before localization. Localize the exact cochain functors and this ordinary square. Use the geometric pullEvaluation_model equation and the canonical finite composition normalization, and extend from Q(P) to arbitrary derived objects by naturality. This supplies the displayed evaluation equation of the termwise localized ordinaryComp.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-sp-tower-shriek-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "def-sp-tower-shriek-data"
+ ],
+ "proof_origin": {
+  "by": "agent D8",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "Expansion of the coordinate-construction step; proof in words follows the module docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict semilinear systems of module sheaves constant quotient coefficients inverse image composition extension by zero",
+   "results": "Returned SheafOfModules.Presentation.mapGenerators and mapRelations and free-module lemmas, not coordinate transport or sequence-site geometric comparisons. A further open-tensor query returned scheme open-immersion restriction adjunctions, not module systems.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem; the project interfaces and ordinary module-sheaf tools are needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image of module sheaves over constant ring sheaves commutes with composition and exact evaluation on strict coefficient systems; extension by zero tensor adjunction transpose; vertical sheaf condition",
+   "results": "Found SheafOfModules.mk, SheafOfModules.isSheaf, SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv, and constantCommuteCompose. These provide ordinary ingredients but do not assert simultaneous fixed system calculi, normalized finite adjunction packages or derived open tensor transposes.",
+   "date": "2026-10-27",
+   "verdict": "No statement match. Reuse the project semilinear and open normalization interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "verticalDiagramSite_isSheaf_iff|eq_unit_mul_pow_irreducible|mapDerivedCategoryCompIso; derived.*[Cc]omp|[Cc]omp.*derived|tensor.*[Ee]xtension in Mathlib module sheaves and DerivedCategory",
+   "results": "Mathlib provides IsDiscreteValuationRing.eq_unit_mul_pow_irreducible and ordinary module pullback composition. The project provides verticalDiagramSite_isSheaf_iff, semilinearDerivedSections, constant-ring pullback normalization, and openTensorNormalization. There is no theorem of the exact strict ell-power coordinates.",
+   "date": "2026-10-27",
+   "verdict": "Arithmetic and rebundling can be proved directly; geometric coordinate transport and open support require the indicated narrower steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityStrictCoordinatesExistence",
+  "date": "2026-10-27",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2), constant-section geometric coordinates and localized inverse-image composition",
+   "via": [
+    "lem-sp-strict-coordinates-existence",
+    "lem-sp-strict-system-geometric-realization",
+    "lem-sp-strict-compactification-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityStrictGeometricCoordinates",
+  "file": "lean/Sheaf/Paper/SmoothPurityStrictGeometricCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.strictGeometricCoordinates",
+  "statement": "theorem strictGeometricCoordinates (b : Base l E) :\n    ∃ geometry : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), Geometry l E b f,\n      ∃ ordinaryComp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),\n        (geometry g).pull ⋙ (geometry f).pull ≅ (geometry (f ≫ g)).pull,\n      ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ) (K : D l E Z),\n        (Ev l E X n).map\n            (((Functor.mapDerivedCategoryCompIso (geometry g).pull (geometry f).pull).symm ≪≫\n              Functor.mapDerivedCategoryNatIso (ordinaryComp f g)).hom.app K) ≫\n            ((geometry (f ≫ g)).pullEvaluation n).hom.app K =\n          ((geometry f).pullEvaluation n).hom.app ((pull l E b (geometry g)).obj K) ≫\n            (proEtaleConstantRingDerivedPullback (R l E n) f).map\n              (((geometry g).pullEvaluation n).hom.app K) ≫\n            (proEtaleConstantRingPullbackComposition f g (R l E n)).hom.app\n              ((Ev l E Z n).obj K)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T050549-L-238104",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T050549-L-238104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -183,7 +183,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-72636e158 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, the three steps, and the main-20261015 source def-sfb-comap-lower-star-iso.md and .proof.md. I also read the unit sk-def-sfb-coefficient-comparisons, its _section.md and its proof paragraph 'Pushforward and pullback'. The item statement matches the blueprint word for word: arbitrary morphisms a and f, source Mod_{Λ'_X}, target Mod_{Λ_Y}, and the common-composite normalization. Nothing is weakened. Step 1 is elementary: it instantiates the current sk-def-sfb-module-pushforward-pullback, where f_*=Res_{η_f}∘mapMod(f^Ab_*) with f^Ab_* lax monoidal and η_f: Λ_Y→f^Ab_*Λ_X, together with clause 1 of sk-def-sfb-change-of-scalars. In Step 2, lem-sfb-coefficient-pushforward-square applies to the underlying abelian-group map and its ring clause holds. It gives f_*a_X∘η_f=η'_f∘a_Y, which is the orientation def-sfb-comap-mapmod-square requires. The ring-object morphism facts come from sk-def-sfb-coefficient-morphisms and sk-def-sfb-coefficient-change, and the latter also states the square itself. In Step 3, I substituted the four corners and four arrows into the statement of def-sfb-comap-mapmod-square (reviewed by L/Q52). This gives exactly Res_{a_Y}∘f_*^{Λ'}≅f_*^Λ∘Res_{a_X} on Mod_{Λ'_X}→Mod_{Λ_Y}, together with the normalization. All cited units are on the route, with no tool use and no cycle (I checked the transitive closure). The delivery has no new nodes. rg over dag/nodes found no duplicate: the other hits are sibling comparisons or unrelated nodes in other chapters. Edge cases checked: identity a or f, the zero ring, empty X, and noninvertible Z→F_p; none needs flatness or invertibility. The searches do not give a Mathlib leaf (Mod.comap only defines restriction). The master Lean files named in the report are not in the literature, and they are not needed because this is not a target node. No fixes were made."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.comapLowerStarIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.comapLowerStarIso",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+     "lines": [
+      147,
+      154
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "branch": "master",
   "existing": true,
@@ -193,5 +218,26 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.comapLowerStarIso"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients: the blueprint item def-sfb-comap-lower-star-iso's upstream Lean declarations, proved in live (sweep of the propagation)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings with coefficient\nchanges $a_X$ ([sk-def-sfb-coefficient-change]), and $f\\colon X\\to Y$ a morphism of schemes.\nWith $f_*$ the pushforward of module objects ([det-def-sfb-module-pushforward-pullback]), there\nis a natural isomorphism\n\n$$\n\\operatorname{Res}_{a_Y}\\circ f_*\\;\\cong\\;f_*\\circ\\operatorname{Res}_{a_X}\\colon\n\\Mod_{\\Lambda'_X}\\longrightarrow\\Mod_{\\Lambda_Y},\n$$\n\nunder which both sides are $\\mathrm{mapMod}(f_*)$ followed by the restriction of scalars along\n$\\eta'_f\\circ a_Y=f_*a_X\\circ\\eta_f\\colon\\Lambda_Y\\to f_*\\Lambda'_X$.",
+  "proof": [
+   {
+    "text": "On module objects $f_*=\\operatorname{Res}_{\\eta_f}\\circ\\mathrm{mapMod}(f_*)$\n([det-def-sfb-module-pushforward-pullback]), with $f_*$ on abelian sheaves lax monoidal. Apply\n[def-sfb-comap-mapmod-square] to $F=f_*$, $\\varphi_X=a_X$, $\\varphi_Y=a_Y$, $\\eta_R=\\eta_f$,\n$\\eta_S=\\eta'_f$; the required square commutes by [lem-sfb-coefficient-pushforward-square].",
+    "uses": [
+     "det-def-sfb-module-pushforward-pullback",
+     "def-sfb-comap-mapmod-square",
+     "lem-sfb-coefficient-pushforward-square"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

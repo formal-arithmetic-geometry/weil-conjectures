@@ -1,0 +1,124 @@
+{
+ "id": "def-sf-integral-proper-projection-coordinates",
+ "kind": "definition",
+ "title": "Constructed direct-image coordinates for proper projection",
+ "statement": "Fix D,C,E as in [def-fix-six-functor-datum], H a higher-operation datum, invertibility of the coefficient prime, and realized system operations o,z from [def-sf-integral-system-realization-data]. On each finite-type k-scheme W, let reduce_W be the full constructible inclusion followed by whole-system coefficient reduction. The natural tensor comparison is datumTensorReductionIso of [def-sf-integral-projection-coordinate-data], in curried notation. For f:X→Y, pullComparison is reduction of the prescribed completed pullback value followed by the actual reconstruction counit. Define direct_f as the adjunction mate of pullComparison inverse under the recorded pull/direct adjunctions. The direct source coordinate is tensor reduction followed by tensor of direct and identity. The direct target coordinate is direct on the tensor/pullback input followed by direct image of inputReduction inverse. Define openIdentity from the canonical sectionwise bridge to exact identity-open extension. All these maps are explicit constructions; no projection square or arbitrary existence choice defines them.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; proper-coincidence and identity-open unit normalization"
+ },
+ "stmt_deps": [
+  "def-sf-integral-projection-coordinate-data",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "Construct the tensor natural transformation from datumTensorReductionIso. Construct the pullback natural isomorphism from the prescribed completed pullback value and the actual counit; naturality is the composite naturality equation. Take its inverse adjunction mate to define direct. Compose these specified maps to form source and target, and compose the canonical bridge with identity-open extension to form openIdentity. No further existence assertion is used.",
+   "uses": [
+    "def-sf-integral-projection-coordinate-data",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility of the specified maps under successive coefficient reductions; proper-coincidence and identity-open unit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-projection-coordinate-data",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; proper-coincidence and identity-open unit normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tensor compatible natural comparison of left adjoints induces a commuting projection formula square for their right adjoint mates",
+   "results": "Eight general adjunction-square and Kan extension results, including homEquiv_naturality_left_square_iff. No coefficient-system normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the project rightAdjointProjectionMap_mate for the categorical assembly; the concrete coefficient normalizations require separate computations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "Twelve general adjunction declarations, including Adjunction.id, ofIsLeftAdjoint and ofIsRightAdjoint. No specialized coefficient normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing adjunction API, retaining the actual coefficient comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|leftAdjointUniq|rightAdjointProjectionMap",
+   "results": "Twenty-five Mathlib hits, including mateEquiv_counit and homEquiv_leftAdjointUniq_hom_app. Local source also supplies rightAdjointProjectionMap_mate in the adopted library.",
+   "date": "2026-10-27",
+   "verdict": "The mate and uniqueness APIs handle categorical glue, but do not assert the concrete tensor or identity-open coefficient normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperProjectionSystemNormalization",
+  "date": "2026-10-27",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compatibility of the specified maps under successive coefficient reductions; proper-coincidence and identity-open unit normalization",
+   "via": [
+    "lem-sf-integral-proper-projection-system-normalization",
+    "lem-sf-integral-projection-reduction-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProperProjectionCoefficientData",
+  "file": "lean/Sheaf/Paper/IntegralProperProjectionCoefficientData.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.reduce",
+  "statement": "abbrev reduce (W : SixFunctorSpace D)",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.reduce",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.tensor",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.pullTensor",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.pullComparison",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.pullComparison_hom_app",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.direct",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.source",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.target",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.openIdentity",
+   "WeilConjectures.IntegralProjectionReduction.ProperCoordinates.ambientPull_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261027T021414-L-2766948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261027T021414-L-2766948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-common-frobenius-square-normalization",
+ "kind": "statement",
+ "title": "Agreement of normalized common-stage Frobenius squares",
+ "statement": "Fix a finite-field datum D, a prime l distinct from D.p, an algebraic closure \\Omega of Q_l, finite-type arithmetic models X_0,Y_0, a morphism f_0:X_0\\to Y_0 and an arbitrary object K in the common-stage constructible coefficient category of its geometric target. The component (zlFrobeniusSquare D l hl \\Omega f_0).app K equals podCommonSquarePullbackComponent l \\Omega (zlFiberMap D f_0) g_X g_Y (zlFrobenius_naturality D f_0) K. Both comparisons retain the actual normalized composition maps; this assertion involves no constant objects, Tate line, smoothness or purity. The first square is defined in [def-zl-weil-ind-sheaf-category]; the second is defined in [lem-pod-semilinear-field-operation-lifts] using the composition comparison of [lem-pur-derived-pullback-tensor-iso]. The prime-invertibility instances are those of [def-weil-weil-sheaf-complex], and K ranges over the common-stage category of [def-weil-algebraically-closed-coefficients].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, canonical constant input and normalized pullback-composition comparison"
+ },
+ "stmt_deps": [
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pod-semilinear-field-operation-lifts",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "The two composition families use the same integralPullbackComposition family: zlIntegralPullComp f g and pullbackTensorIntegralComposition g f are definitionally identical. Rationalization identifies their hom components with the same localized integral map.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At the literal finite stage of K, the normalization equations for zlPullComp and pullbackTensorCommonComposition express the same localized arrow conjugated by the fixed pullback identifications. The coefficient cocycle equations cancel the boundary comparisons. Equality of their representative classes identifies their components and inverses.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand both Frobenius squares as inverse first compositor, the eqToIso for the same scheme square, and the second compositor. The two comparisons from the preceding step and proof irrelevance for the middle equality give the desired equality.",
+   "uses": [
+    "lem-pod-semilinear-field-operation-lifts"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pod-semilinear-field-operation-lifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, canonical constant input and normalized pullback-composition comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback identification of constant sheaves respects composition and geometric Frobenius",
+   "results": "constantCommuteCompose and sheaf-module pullbackComp concern ordinary sheaves. No common-stage normalized unit or normalized geometric Frobenius compositor equality.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two common-stage derived pullback composition isomorphisms normalized by the same integral composition are equal",
+   "results": "Categorical pullback pasting and mkNatIso_eq. None compares these integral-normalized scalar-localized common-stage maps.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Cc]omposition|pullback.*[Uu]nit",
+   "results": "Ordinary scheme-module and site pullback unit and composition APIs; no normalized completed, rational or common-stage coefficient-unit Frobenius square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantPurityFrobeniusSquare",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Step 1, canonical constant input and normalized pullback-composition comparison",
+   "via": [
+    "lem-pur-constant-purity-frobenius-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonFrobeniusSquareNormalization",
+  "file": "lean/Sheaf/Paper/CommonFrobeniusSquareNormalization.lean",
+  "declaration": "WeilConjectures.commonFrobeniusSquare_eq",
+  "declarations": [
+   "WeilConjectures.commonFrobeniusSquare_eq"
+  ],
+  "statement": "theorem commonFrobeniusSquare_eq\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (f₀ : X₀ ⟶ Y₀)\n    (K : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left) :\n    letI := fun x ↦ sfWeilPrimeInvertible D l hl X₀ x\n    letI := fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y\n    (zlFrobeniusSquare D l hl Ω f₀).app K =\n      podCommonSquarePullbackComponent l Ω (zlFiberMap D f₀)\n        (D.geometricFrobenius X₀).hom (D.geometricFrobenius Y₀).hom\n        (zlFrobenius_naturality D f₀) K",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ac54",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034621-L-3666357",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ac54",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034621-L-3666357",
+  "kind": "interface",
+  "note": "independent cc review: delivered CommonConstantUnitFrobenius/CommonFrobeniusSquareNormalization/item vs clone item (verbatim Unit…CommonUnit move, diff empty); zlPullComp vs pullbackTensorCommonComposition definitions (same integralPullbackComposition.choose); node stmt_deps vs owners of declarations in the Lean statements"
+ }
+}

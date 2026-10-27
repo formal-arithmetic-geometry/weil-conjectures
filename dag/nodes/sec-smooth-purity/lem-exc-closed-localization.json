@@ -99,7 +99,18 @@
   "def-weil-pbc-proetale-operations"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-open-closed-triangle",
  "split_report": {
@@ -151,5 +162,25 @@
   "landing": "20261019T005431-L-2770633",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Consider a cartesian square [def-weil-pbc-cartesian-square]\n$$\n\\begin{array}{ccc}\nW' & \\xrightarrow{\\;w'\\;} & Z\\\\\n{\\scriptstyle g'}\\downarrow & & \\downarrow{\\scriptstyle g}\\\\\nW & \\xrightarrow{\\;w\\;} & X\n\\end{array}\n$$\nwith $w$ (hence $w'$) weakly etale and $g$ an arbitrary morphism, for\ninstance a closed immersion $Z\\hookrightarrow X$. For pro-etale sheaves, the\ninverse images along $w$ and $w'$ are restrictions to the slices over $W$ and\n$W'$. The base change map\n$$\n w^*g_*\\longrightarrow g'_*w'^*\n$$\nis an isomorphism, and it corresponds, under the adjunctions $w^*\\dashv w_*$\nand $w'^*\\dashv w'_*$, to the identification $g_*w'_*\\cong w_*g'_*$ of direct\nimages along the two composites of the square. The two composites of inverse\nimages agree, $w'^*g^*\\cong g'^*w^*$, both being identified with the inverse\nimage along the diagonal of the square. In particular restriction to $W$\ncommutes with the underived direct image along a closed immersion,\ncompatibly with the units and counits of these adjunctions.",
+  "proof": [
+   {
+    "text": "By the slice identification in\n[lem-weil-pbc-proetale-restriction-injectives], restriction along a weakly\netale map is evaluation on objects over it. For an object $T\\to W$ of the\nslice, both $(w^*g_*G)(T)$ and $(g'_*w'^*G)(T)$ are the value of $G$ on\n$T\\times_XZ=T\\times_WW'$, the two descriptions of this fibre product being\nidentified by the cartesian square [def-weil-pbc-cartesian-square]. Thus both\nfunctors are precomposition with two functors of sites that are isomorphic\nvia the canonical comparison of fibre products, and the base change map is\ninduced by this isomorphism; hence it is an isomorphism. Its mate under the\nrestriction adjunctions is computed sectionwise: the units restrict sections\nto the slices and the counits evaluate them, and unwinding these formulas\ngives exactly the isomorphism of direct images along the two composites\n$g\\circ w'$ and $w\\circ g'$ of the square. Finally, inverse images are left\nadjoint to direct images, and direct images compose strictly up to canonical\nisomorphism; by uniqueness of adjoints $(g\\circ w')^*\\cong w'^*g^*$ and\n$(w\\circ g')^*\\cong g'^*w^*$, and $g\\circ w'=w\\circ g'$ gives the\nagreement of the two composites of inverse images.",
+    "uses": [
+     "lem-weil-pbc-proetale-restriction-injectives",
+     "def-weil-pbc-cartesian-square"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

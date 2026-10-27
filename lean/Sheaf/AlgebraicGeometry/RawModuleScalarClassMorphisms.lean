@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
+public import Sheaf.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso
 public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 
 /-! # Native morphisms of raw cohomology classes
@@ -23,6 +23,14 @@ universe u
 open CategoryTheory Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
+
+set_option backward.defeqAttrib.useBackward true
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+attribute [local irreducible] moduleAbelianUpperStarComparison moduleAbelianUpperStarIso
+  RawModuleScalarComparison.freeMap
 
 /-- Read a module raw class as its existing derived morphism.
 Source: Stacks Project, Tags 03FD and 03Q8; `higherDirectImageRawOverFunctor` and

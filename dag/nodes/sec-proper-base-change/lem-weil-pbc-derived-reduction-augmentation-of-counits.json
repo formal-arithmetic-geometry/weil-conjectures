@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-derived-reduction-augmentation-of-counits",
+ "kind": "statement",
+ "title": "Augmentation compatibility from computing reduction counits",
+ "statement": "Let B,C,D,E be abelian categories with chosen derived categories [def-weil-abstract-derived-category]. Let F:B→C, G:D→E, CX:B→D and CY:C→E be exact additive functors with their canonical derived localization factors [lem-sf-exact-functor-derived-triangulated]. Let RX:B→D and RY:C→E be additive, LX:D(B)→D(D) and LY:D(C)→D(E), and let cX_P:LX(QP)→Q(RX(P)) and cY_P:LY(QP)→Q(RY(P)) be specified families. Fix ordinary units uX:CX→RX and uY:CY→RY, derived units iX:D(CX)→LX and iY:D(CY)→LY, ordinary comparisons e:RX⋙G≅F⋙RY and c:CX⋙G≅F⋙CY, and a derived comparison τ:LX⋙D(G)≅D(F)⋙LY. Suppose a class of source complexes resolves every complex by a quasi-isomorphism; cY at their F-images is invertible; the representative comparison equation [def-weil-pbc-derived-reduction-comparison-formula] holds on this class; both derived units followed by these counits equal their exact localization factor followed by Q of their ordinary units; and G(uX_M) followed by e_M equals c_M followed by uY_FM for every M. Then for every K, D(G)(iX_K) followed by τ_K equals the canonical derived exact square associated to c followed by iY_D(F)K.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY (derived base change), with the ordinary tensor-pullback square from sites-modules.tex Tag 03EL."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-derived-reduction-comparison-formula"
+ ],
+ "proof": [
+  {
+   "text": "The canonical derived square associated to c commutes with exact-functor localization factors. Apply the composition-factor equations to CX,G and F,CY, cancel the first composition isomorphism, and use the factor equation for the derived natural isomorphism of c.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the two natural transformations to the resolving class. Fully faithful restriction detects equality. At a representative P postcompose with LY of the exact F factor and cY_FP; this map is invertible. Apply the representative comparison equation, combine the source derived unit with cX using its normalization, and use naturality of the G localization factor. The termwise ordinary augmented square identifies the result with Q(c_P) followed by Q(uY_FP). The exact-square factor identity and the target unit normalization give the other path. Naturality of iY finishes the representative equality, hence the global equality.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "def-weil-pbc-derived-reduction-comparison-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-reduction-comparison-formula",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-reduction-pullback-derived-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY (derived base change), with the ordinary tensor-pullback square from sites-modules.tex Tag 03EL. Fully proved categorical extraction of item proof step 4; no new obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "augmentationOfCounits|augmentationOfComparison",
+   "results": "0 hits. ",
+   "date": "2026-10-27",
+   "verdict": "No existing statement of the augmented four-functor square. Use the exact localization factors and prove compatibility from representative equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryCompIso_fac\"",
+   "results": "0 hits. ",
+   "date": "2026-10-27",
+   "verdict": "No existing statement of the augmented four-functor square. Use the exact localization factors and prove compatibility from representative equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived natural comparison preserves augmentation when its computing counits are invertible on resolving complexes and the ordinary comparison preserves the unit",
+   "results": "8 hits. CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Adjunction.derived_counit, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-27",
+   "verdict": "No existing statement of the augmented four-functor square. Use the exact localization factors and prove compatibility from representative equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratumCompletionUnitRestriction",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-stratum-completion-unit-restriction",
+   "place": "Proof step 4: strict augmentation compatibility.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedReductionAugmentationCompatibility",
+  "file": "lean/Sheaf/Paper/DerivedReductionAugmentationCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedReduction_augmentationOfCounits",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.derivedReduction_augmentationOfCounits"
+  ],
+  "statement": "theorem derivedReduction_augmentationOfCounits\n    {B C D E : Type*} [Category B] [Category C] [Category D] [Category E]\n    [Abelian B] [Abelian C] [Abelian D] [Abelian E]\n    [HasDerivedCategory B] [HasDerivedCategory C]\n    [HasDerivedCategory D] [HasDerivedCategory E]\n    (F : B ⥤ C) (G : D ⥤ E) (RX CX : B ⥤ D) (RY CY : C ⥤ E)\n    [F.Additive] [G.Additive] [RX.Additive] [RY.Additive]\n    [CX.Additive] [CY.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits CX] [PreservesFiniteColimits CX]\n    [PreservesFiniteLimits CY] [PreservesFiniteColimits CY]\n    (LX : DerivedCategory B ⥤ DerivedCategory D)\n    (LY : DerivedCategory C ⥤ DerivedCategory E)\n    (cX : ∀ P : CochainComplex B ℤ, LX.obj (DerivedCategory.Q.obj P) ⟶\n      DerivedCategory.Q.obj ((RX.mapHomologicalComplex (.up ℤ)).obj P))\n    (cY : ∀ P : CochainComplex C ℤ, LY.obj (DerivedCategory.Q.obj P) ⟶\n      DerivedCategory.Q.obj ((RY.mapHomologicalComplex (.up ℤ)).obj P))\n    (uX : CX ⟶ RX) (uY : CY ⟶ RY)\n    (iX : CX.mapDerivedCategory ⟶ LX) (iY : CY.mapDerivedCategory ⟶ LY)\n    (e : RX ⋙ G ≅ F ⋙ RY) (c : CX ⋙ G ≅ F ⋙ CY)\n    (τ : LX ⋙ G.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ LY)\n    (good : ObjectProperty (CochainComplex B ℤ))\n    (res : ∀ K, ∃ (P : CochainComplex B ℤ) (p : P ⟶ K), good P ∧ QuasiIso p)\n    (hiso : ∀ P, good P → IsIso (cY ((F.mapHomologicalComplex (.up ℤ)).obj P)))\n    (hnorm : ∀ P, good P →\n      DerivedReductionComparisonFormula F G RX RY LX LY cX cY e τ P)\n    (hX : ∀ P, good P → iX.app (DerivedCategory.Q.obj P) ≫ cX P =\n      CX.mapDerivedCategoryFactors.hom.app P ≫\n        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex uX (.up ℤ)).app P))\n    (hY : ∀ P, good P →\n      iY.app (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) ≫\n        cY ((F.mapHomologicalComplex (.up ℤ)).obj P) =\n      CY.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex uY (.up ℤ)).app\n          ((F.mapHomologicalComplex (.up ℤ)).obj P)))\n    (hOrd : ∀ M, G.map (uX.app M) ≫ e.hom.app M = c.hom.app M ≫ uY.app (F.obj M)) :\n    ∀ K : DerivedCategory B,\n      G.mapDerivedCategory.map (iX.app K) ≫ τ.hom.app K =\n        ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫\n          Functor.mapDerivedCategoryNatIso c ≪≫\n            Functor.mapDerivedCategoryCompIso F CY).hom.app K ≫\n          iY.app (F.mapDerivedCategory.obj K)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T222719-L-685559",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T222719-L-685559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

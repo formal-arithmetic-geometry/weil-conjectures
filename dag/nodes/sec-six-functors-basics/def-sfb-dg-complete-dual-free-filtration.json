@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-dg-complete-dual-free-filtration",
+ "kind": "definition",
+ "title": "Complete decreasing DG filtrations with shifted character-dual product layers",
+ "status": "split",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use associative unital differential graded $\\mathbf Z$-algebras $A$, right DG $A$-modules, their underlying cochain complexes and homogeneous right action as in [def-sfb-dg-derived-category]. A complete dual-free filtration of a right DG module $I$ is specified by quotient presentations as follows. Give right DG modules $Q_p$, degreewise surjective DG maps $\\pi_p:I\\to Q_p$ for $p\\in\\mathbf N$, with $Q_0$ degreewise zero, and DG maps $q_p:Q_{p+1}\\to Q_p$ with $q_p\\pi_{p+1}=\\pi_p$. For every $n\\in\\mathbf Z$ and tuple $x_p\\in Q_p^n$ satisfying $q_p(x_{p+1})=x_p$, there is a unique $y\\in I^n$ with $\\pi_p(y)=x_p$ for every $p$. Give degree-zero additive right $A$-linear sections $s_p$ of $q_p$ after forgetting the differentials. Give DG modules $L_p$ and DG maps $j_p:L_p\\to Q_{p+1}$ which in every degree are injective with image $\\ker q_p$. For each $p$ give a set $T_p$ in the component-module universe, integers $k_{p,t}$, and additive equivalences $L_p^n\\cong\\prod_{t\\in T_p}\\operatorname{Hom}_{\\mathbf Z}(A^{-(n+k_{p,t})},\\mathbf Q/\\mathbf Z)$. For $x\\in L_p^n$, the coordinates satisfy $(dx)_t(b)=(-1)^{n+1}x_t(d_A b)$ for $b\\in A^{-(n+1+k_{p,t})}$, and $(xa)_t(b)=x_t(ab)$ for $a\\in A^m$, $b\\in A^{-(n+m+k_{p,t})}$; canonical degree transports are understood. Thus $L_p$ is a product of the DG shifts $A^\\vee[k_{p,t}]$, with unchanged right action and shifted differential. The actual filtration is $F_p^n=\\ker(\\pi_p^n)$; $Q_p$ represents $I/F_p$ and $L_p$ represents $F_p/F_{p+1}$. Empty products and arbitrary integer shifts are allowed. No section is required to preserve differentials.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Property (I) immediately before Tag 09KR, lemma-property-I-sequence; character dual and shift conventions in section-modules-noncommutative-graded and immediately before Tag 09K4."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Complete filtered differential graded module with split graded quotient maps and character dual product layers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsModuleFiltration.toGradedSMul\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"∀ {ι : Type u_1} {ιM : Type u_2} {R : Type u_3} {M : Type u_4} {σ : Type u_5} {σM : Type u_6} {inst : AddMonoid ι}\\n  {inst_1 : PartialOrder ι} {inst_2 : PartialOrder ιM} {inst_3 : VAdd ι ιM} {inst_4 : Semiring R} {inst_5 : SetLike σ R}\\n  {inst_6 : AddCommMonoid M} {inst_7 : Module R M} {inst_8 : Set\", \"doc\": \"If $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ is a module filtration on a module $M$ over a semiring $R$, then the family $\\\\{F_i\\\\}$ satisfies the graded scalar multiplication compatibility condition, ensuring that scala\"}\n  {\"name\": \"IsModuleFiltration.rec\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [inst_2 : PartialOrder ιM] →\\n                  [inst_3 : VAdd ι ιM] →\\n   \", \"doc\": \"A recursor for the module filtration predicate, allowing definition by recursion on the structure of an IsModuleFiltration by providing a constructor that uses the underlying IsFiltration and GradedSM\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Splitting.splitEpi_g\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"(s : S.Splitting) : SplitEpi S.g\", \"doc\": \"Given a preadditive category $\\\\mathcal{C}$ and a short complex $S$ with a splitting $s$, the differential $g: X_2 \\\\to X_3$ is a split epimorphism with section $s: X_3 \\\\to X_2$. This is witnessed by th\"}\n  {\"name\": \"AdicCompletion.submodule\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Submodule R ((n : ℕ) → M ⧸ I ^ n • ⊤)\", \"doc\": \"The submodule of the product $\\\\prod_{n \\\\in \\\\mathbb{N}} M/I^nM$ consisting of compatible sequences $\\\\{x_n\\\\}$ where each $x_n \\\\in M/I^nM$ and for all $m \\\\leq n$, the transition map sends $x_n$ to $x_m$.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Splitting.splitMono_f\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"(s : S.Splitting) : SplitMono S.f\", \"doc\": \"Given a preadditive category $\\\\mathcal{C}$ and a short complex $S$ in $\\\\mathcal{C}$ with a splitting, the differential morphism $f: S.X_1 \\\\to S.X_2$ is a split monomorphism with retraction $r: S.X_2 \\\\\"}\n  {\"name\": \"QuadraticForm.dualProd\", \"module\": \"Mathlib.LinearAlgebra.QuadraticForm.Dual\", \"type\": \": QuadraticForm R (Module.Dual R M × M)\", \"doc\": \"The quadratic form on the product of the dual module $ M^* $ and the module $ M $ over a commutative semiring $ R $, defined by evaluating a linear functional at a module element. For any scalar $ a \\\\\"}\n  {\"name\": \"CharacterModule.dual\", \"module\": \"Mathlib.Algebra.Module.CharacterModule\", \"type\": \"(f : A →ₗ[R] B) : CharacterModule B →ₗ[R] CharacterModule A\", \"doc\": \"Given an $R$-linear map $f: A \\\\to B$ between two $R$-modules, the dual map `CharacterModule.dual(f)` is the $R$-linear map from the character module of $B$ to the character module of $A$ defined by pr\"}\n  {\"name\": \"CharacterModule.surjective_of_dual_injective\", \"module\": \"Mathlib.Algebra.Module.CharacterModule\", \"type\": \"(f : A →ₗ[R] A') (hf : Function.Injective (dual f)) : Function.Surjective f\", \"doc\": \"Let $ R $ be a commutative ring and $ A, A' $ be $ R $-modules. If $ f : A → A' $ is an $ R $-linear map and the induced dual map $ \\\\widehat{f} : \\\\widehat{A'} → \\\\widehat{A} $ (defined by $ \\\\widehat{f}\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No complete DG filtration interface. CharacterModule supplies the actual homogeneous character groups and is reused; ordinary cochain K-injectivity does not specify a DG action or a dual-free filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete decreasing filtration of right differential graded modules with products of shifted character dual layers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsModuleFiltration.mk_int\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {R : Type u_3} {M : Type u_4} {σ : Type u_5} {σM : Type u_6} [inst : Semiring R] [inst_1 : SetLike σ R]\\n  [inst_2 : AddCommMonoid M] [inst_3 : Module R M] [inst_4 : SetLike σM M] (F : ℤ → σ) (mono : Monotone F)\\n  [inst_5 : SetLike.GradedMonoid F] (F' : ℤ → σM),\\n  Monotone F' → ∀ [SetLike.GradedSMu\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $ forming a graded monoid, and a monotone family $ F' : \\\\mathbb{Z} \\\\to \\\\sigma_M $ of subsets of an $ R $-module $ M $\"}\n  {\"name\": \"IsModuleFiltration\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [PartialOrder ιM] →\\n                  [VAdd ι ιM] →\\n                    [\", \"doc\": \"A predicate asserting that a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration, where $\\\\iota$ is an ordered additive monoid. This requires that ea\"}\n  {\"name\": \"IsModuleFiltration.toGradedSMul\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {ιM : Type u_2} {R : Type u_3} {M : Type u_4} {σ : Type u_5} {σM : Type u_6} {inst : AddMonoid ι}\\n  {inst_1 : PartialOrder ι} {inst_2 : PartialOrder ιM} {inst_3 : VAdd ι ιM} {inst_4 : Semiring R} {inst_5 : SetLike σ R}\\n  {inst_6 : AddCommMonoid M} {inst_7 : Module R M} {inst_8 : Set\", \"doc\": \"If $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ is a module filtration on a module $M$ over a semiring $R$, then the family $\\\\{F_i\\\\}$ satisfies the graded scalar multiplication compatibility condition, ensuring that scala\"}\n  {\"name\": \"IsModuleFiltration.toIsFiltration\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {ιM : Type u_2} (R : Type u_3) {M : Type u_4} {σ : Type u_5} {σM : Type u_6} {inst : AddMonoid ι}\\n  {inst_1 : PartialOrder ι} {inst_2 : PartialOrder ιM} {inst_3 : VAdd ι ιM} {inst_4 : Semiring R} {inst_5 : SetLike σ R}\\n  {inst_6 : AddCommMonoid M} {inst_7 : Module R M} {inst_8 : Set\", \"doc\": \"If a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration (i.e., each $F_i$ is a submodule, the filtration is increasing, and compatible with additio\"}\n  {\"name\": \"IsRingFiltration.mk_int\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {R : Type u_2} {σ : Type u_3} [inst : Semiring R] [inst_1 : SetLike σ R] (F : ℤ → σ),\\n  Monotone F → ∀ [SetLike.GradedMonoid F], IsRingFiltration F fun n => F (n - 1)\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $, indexed by integers, that forms a graded monoid, the shifted family $ \\\\{F(n - 1)\\\\}_{n \\\\in \\\\mathbb{Z}} $ defines a \"}\n  {\"name\": \"HomologicalComplex.dgoToHomologicalComplex_obj_d\", \"module\": \"Mathlib/Algebra/Homology/DifferentialObject\", \"type\": \"∀ {β : Type u_1} [inst : AddCommGroup β] (b : β) (V : Type u_2) [inst_1 : CategoryTheory.Category.{v_1, u_2} V]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms V]\\n  (X : CategoryTheory.DifferentialObject ℤ (CategoryTheory.GradedObjectWithShift b V)) (i j : β),\\n  ((HomologicalComplex.dgoToHomologi\", \"doc\": \"For a differential object $X$ in the category of $\\\\mathbb{Z}$-graded objects with shift $b$, the differential $d_{i,j}$ of the corresponding homological complex is defined as follows: if $i + b = j$, \"}\n  {\"name\": \"IsRingFiltration.toGradedMonoid\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {σ : Type u_3} {inst : AddMonoid ι} {inst_1 : PartialOrder ι} {inst_2 : Semiring R}\\n  {inst_3 : SetLike σ R} {F : ι → σ} {F_lt : outParam (ι → σ)} [self : IsRingFiltration F F_lt], SetLike.GradedMonoid F\", \"doc\": \"If a semiring $ R $ is equipped with a ring filtration $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$, then the family $\\\\{F_i\\\\}$ forms a graded monoid structure on $ R $, where the product of elements from $ F_i $ and $ F_j\"}\n  {\"name\": \"Ideal.Filtration\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_3) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_3\", \"doc\": \"The structure of a filtration on an $ R $-module $ M $ associated with an ideal $ I $ of a commutative ring $ R $, where $ M $ is an additive commutative group equipped with an $ R $-module structure.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No complete DG filtration interface. CharacterModule supplies the actual homogeneous character groups and is reused; ordinary cochain K-injectivity does not specify a DG action or a dual-free filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CharacterModule, CochainComplex",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No complete DG filtration interface. CharacterModule supplies the actual homogeneous character groups and is reused; ordinary cochain K-injectivity does not specify a DG action or a dual-free filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "character[Dd]ual|[Dd]ual[Ff]ree|[Cc]ofree|[Pp]ropertyI",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No complete DG filtration interface. CharacterModule supplies the actual homogeneous character groups and is reused; ordinary cochain K-injectivity does not specify a DG action or a dual-free filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg characterDual|dualFree|cofree|CompleteDualFreeFiltration lean/WeilConjectures lean/Sheaf; rg character dual|dual-free dag/nodes; python3 tools/blueprint_refs.py search complete dual-free",
+   "results": "Project: DgAlgebraDerivedCategory defines Algebra, RightModule, underlying, regular, act and ShiftComparison; DgAlgebraHomotopyStructure defines homotopyRel. No complete dual-free filtration declaration. DAG: the item, the DG injective resolution/localization and good-character-embedding statements, and shifted-character-dual-hom; none defines a filtration interface. Blueprint search: 0 blueprint nodes match complete dual-free. No name match for CompleteDualFreeFiltration in project, Mathlib, or dag/lean_names_upstream.json.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the published DG algebra and module interface; add only the complete dual-free filtration notion, expressed by quotient and layer coordinate data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-complete-cofree-orthogonality",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09KU, lemma-right-resolution; 09KS, lemma-property-I-K-injective, applied also to all shifts; 09KY, lemma-hom-derived, part (2) and its proof, which only uses homotopical injectivity. Supporting input: Tag 09KS, lemma-property-I-K-injective, with property (I) defined immediately before Tag 09KR, lemma-property-I-sequence; the proof uses Tag 09K4, lemma-hom-into-shift-dual-free. Missing definition interface: property (I) and its shifted character-dual layers, expressed by exact quotient presentations.",
+   "via": [
+    "lem-sfb-dg-complete-cofree-orthogonality",
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCompleteDualFreeFiltration",
+  "declaration": "CategoryTheory.DgAlgebra.CompleteDualFreeFiltration",
+  "file": "lean/Sheaf/CategoryTheory/DgCompleteDualFreeFiltration.lean",
+  "statement": "structure CompleteDualFreeFiltration (A : Algebra.{u}) (I : RightModule A)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec337f484",
+  "group": "Q78",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec337f484",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Statement exists_rightLinearHomotopy_of_completeDualFreeFiltration matches node and Stacks 09KS/property (I): new CompleteDualFreeFiltration encodes F_p=ker π_p (F_0=I via Subsingleton Q_0), completeness as unique compatible lifts per degree, graded right-A-linear sections not commuting with d (admissible epis), layers = ker q_p with ≃+ coordinates to full Type-u products of CharacterModule(A^{-(n+k)}); hand-checked differential sign (-1)^(n+1) and unsigned action (λa)(b)=λ(ab) against dga.tex section-hom-complexes; conclusion = Homotopy(g,0) plus unsigned right-linearity HEq, verbatim body of published homotopyRel (inlined since 0 in RightModule needs a Preadditive field only from HomotopyStructure; advisory). Edge cases (empty index, zero I, finite/infinite filtrations, all ℤ degrees) covered. Item node differs from live only in lean+stmt_deps; dep record unchanged; statements verbatim; no duplicate in side-live lean/dag; docstrings with source/blueprint and 5-step plan; sole sorry. Advisories: proof-only import Grp.Injective, redundant public import. No files changed, no compile."
+ }
+}

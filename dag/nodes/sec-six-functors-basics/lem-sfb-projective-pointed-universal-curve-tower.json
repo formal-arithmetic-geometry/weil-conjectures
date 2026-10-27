@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-projective-pointed-universal-curve-tower",
+ "kind": "statement",
+ "title": "Projective iteration of the universal stable pointed curve",
+ "statement": "Let $k$ be a field, $g\\geq2$ and $n\\geq0$ integers, and $T_0$ a finite-type H-projective $k$-scheme. Let $a_0:T_0\\to\\overline{\\mathcal M}_{g,0}$ specify a stable unpointed genus-$g$ family. Use the stable ordered pointed moduli groupoids of [def-sfb-stable-pointed-moduli-groupoids]. For $r\\geq0$, let $F_r:\\overline{\\mathcal M}_{g,r+1}\\to\\overline{\\mathcal M}_{g,r}$ forget the last marking and stabilize, with the contraction and stabilization convention of [lem-sfb-knudsen-pointed-forgetful-universal-curve].\n\nThere exist schemes $T_r$ and maps $a_r:T_r\\to\\overline{\\mathcal M}_{g,r}$ for $0\\leq r\\leq n$, starting from the specified $T_0,a_0$, and maps $q_r:T_{r+1}\\to T_r$ for $r<n$, such that every square with horizontal maps $a_{r+1},a_r$ and vertical maps $q_r,F_r$ is 2-cartesian. If $(X_r\\to T_r,s_{1,r},\\ldots,s_{r,r})$ is the family specified by $a_r$, then $T_{r+1}=X_r$ and $q_r$ is its structural morphism; the family specified by $a_{r+1}$ is the stabilized family obtained by appending the tautological extra section on $X_r\\times_{T_r}X_r$. Each $T_r$ is finite type and H-projective over $k$. Each $q_r$ is H-projective, flat and finitely presented, as well as projective in the projective-bundle convention. For any $k$-scheme $B$ and map $b:B\\to T_r$, the pullback of the family specified by $a_r$ is a stable ordered $r$-pointed genus-$g$ family, with bundle projectivity, flatness, finite presentation, nodal geometric fibres, disjoint smooth sections and the component stability inequalities.\n\nField, scheme, finite type, H-projectivity, bundle projectivity, stable pointed curves, smoothness, flatness and finite presentation use [def-weil-field], [def-pc-scheme], [def-weil-finite-type-morphism], [def-kun-projective], [def-trf-projective-bundle-morphism], [def-sfb-stable-pointed-curve], [def-sbc-smooth-morphisms], [def-weil-flat-morphism] and [def-sbc-locally-finite-presentation]. The 2-cartesian terminology and pullbacks have the groupoid meaning in [def-sfb-stable-pointed-moduli-groupoids].",
+ "source": {
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 2, especially Corollary 2.6 (contraction and stabilization are inverse), printed p.179; universal-curve identification, p.162. Projectivity conversion uses Stacks Tags 087S (lemma-projective-over-quasi-projective-is-H-projective) and 01WE (lemma-H-projective-composition). Local Knudsen PDF WANTED; agent induction from these inputs.",
+  "url": "https://www.dam.brown.edu/people/mumford/alg_geom/papers/1976b--DetDiv%2BKnudsenSequel-GT.pdf"
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-projective",
+  "def-trf-projective-bundle-morphism",
+  "def-sfb-stable-pointed-curve",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the length $r$ of the whole tower. Retain all $T_j,a_j$ for $0\\leq j\\leq r$ and $q_j$ for $j<r$, every earlier 2-cartesian square, the finite-type and H-projective structure morphisms of every $T_j$, and the H-projectivity, bundle projectivity, flatness and finite presentation of every $q_j$. Each $a_j$ must specify a stable ordered $j$-pointed genus-$g$ family. At $r=0$ take the specified $T_0,a_0$; there are no transition morphisms or squares to check. A map to the moduli groupoid means an actual family, so write the family at the last stage as $X_r\\to T_r$ with its labelled sections.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Agent induction from the universal-curve identification in Section 2; base case and the moduli-groupoid convention."
+   }
+  },
+  {
+   "text": "Assume the invariant at $r<n$. Apply the Knudsen universal-curve theorem to $(X_r/T_r,s_{1,r},\\ldots,s_{r,r})$, with $S=\\operatorname{Spec}k$. Choose its representing scheme itself as $T_{r+1}=X_r$ and put $q_r:X_r\\to T_r$ equal to the structural map. The universal extra point is the section $x\\mapsto(x,x)$ of $X_r\\times_{T_r}X_r\\to X_r$ (projection to the base factor); the old sections are $x\\mapsto(s_{i,r}(q_r(x)),x)$ when the second factor is the base. The theorem stabilizes this family with its extra section, giving $a_{r+1}$ and the comparison $F_r a_{r+1}\\cong a_r q_r$. To check the square, evaluate on a $k$-scheme $B$. Its 2-fibre product has objects $(b,Y,\\phi)$: a map $b:B\\to T_r$, a stable $(r+1)$-pointed family $Y/B$, and an ordered-family isomorphism $\\phi:F_r(Y)\\xrightarrow{\\sim}b^*a_r$. The cited theorem identifies this groupoid naturally with maps $B\\to X_r$ over $T_r$, by its mutually inverse contraction and stabilization. This is precisely the defining 2-cartesian property, with automorphisms and all old labels retained. It also gives bundle projectivity, flatness and finite presentation of $q_r$. Its stabilization includes collisions with old markings and nodes, so no distinctness condition is imposed on the tautological point.",
+   "uses": [
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, especially Corollary 2.6; the existing universal-curve theorem supplies representation, stabilization, and its arbitrary-base naturality."
+   }
+  },
+  {
+   "text": "By the inductive H-projectivity and its definition choose a closed immersion $T_r\\hookrightarrow\\mathbf P^N_k$ over $k$. Apply the projective-ample-invertible lemma with $A=k$ and this immersion: its pullback of $\\mathcal O(1)$ is an ample invertible sheaf on $T_r$. The bundle-to-H-projective lemma therefore applies to the bundle-projective $q_r$ from step 2 and makes $q_r$ H-projective. Compose $q_r$ with the H-projective structure map of $T_r$ using H-projective composition. Thus $T_{r+1}$ is H-projective over $k$. The ample sheaf is obtained anew on each $T_r$; bundle projectivity alone has not been used as an unconditional H-projectivity assertion.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 087S (lemma-projective-over-quasi-projective-is-H-projective), clause (1), and 01WE (lemma-H-projective-composition); ample sheaf from Properties Tag 01PU and projective-space twisting sheaves as in the cited ample lemma."
+   }
+  },
+  {
+   "text": "The finite presentation of $q_r$ includes quasi-compactness. In its affine presentations $R[x_1,\\ldots,x_d]/(f_1,\\ldots,f_e)$ the images of the finitely many variables generate the algebra; thus it is locally of finite type. With quasi-compactness, this is finite type by definition. Apply clause (1) of the finite-type composition lemma with $f=q_r:T_{r+1}\\to T_r$ and $h:T_r\\to\\operatorname{Spec}k$, which is finite type by the inductive invariant. Their composite is the specified $k$-structure map of $T_{r+1}$, so $T_{r+1}$ is finite type over $k$. Steps 2--4 establish the invariant at $r+1$ while retaining the earlier tower. Finite induction constructs the required tower through $n$; for $n=0$ no $q_r$ or square is required.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition Tag 01TP (definition-finite-presentation), Definition Tag 01T0 (definition-finite-type), and Tag 01T3 (lemma-composition-finite-type); finite presentation implies finite type by the displayed affine presentation."
+   }
+  },
+  {
+   "text": "For any $0\\le r\\le n$, the constructed $a_r$ specifies a stable ordered $r$-pointed genus-$g$ family. Apply the arbitrary-base-change clause of the Knudsen theorem to any $k$-scheme $B$ and $b:B\\to T_r$. The result is again a stable ordered $r$-pointed genus-$g$ family in the same convention. Unpacking the stable-family definition gives bundle projectivity, flatness, finite presentation, nodal geometric fibres, disjoint smooth sections and the component stability inequalities requested. The moduli convention retains the ordered labels and the genus. No finite-type, reducedness or Noetherian hypothesis on $B$ is introduced.",
+   "uses": [
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "def-sfb-stable-pointed-curve",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, arbitrary-base-change naturality and stability; the stable-family and ordered moduli definitions spell out all the requested clauses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+  "def-kun-projective",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-sfb-stable-pointed-curve"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Finite induction assembling the existing Knudsen universal-curve statement and Stacks Tags 087S, 01WE and 01T3; local Knudsen PDF WANTED. No claim to have read the unavailable PDF is made."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Iterating the universal stable pointed curve over a projective parameter scheme gives projective parameter schemes for every number of markings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"{ι : Type u} →\\n  (R : ι → CommRingCat) →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing } ⟶ X) →\\n        (i : ι) → AlgebraicGeometry.Spec (R i) ⟶ X\", \"doc\": \"Given a morphism from the spectrum of the product ring $\\\\prod_i R_i$ to a scheme $X$, this function constructs the corresponding family of morphisms from each spectrum $\\\\operatorname{Spec}(R_i)$ to $X\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Projective R → Type r\", \"doc\": \"The type of points on a projective Weierstrass curve over a commutative ring $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine space, Proj and generic forgetful functors do not construct or iterate the Knudsen universal stable curve with its 2-cartesian and projectivity properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Knudsen forgetful stable curve morphism is the universal curve and iteration preserves projectivity over a field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.forget_obj_eq_coe\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Sort _\", \"doc\": \"The functor obtained by composing the forgetful functor from schemes to topological spaces with the forgetful functor from topological spaces to types, mapping each scheme to its underlying set and ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forget\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Scheme.{u} ⥤ Type u\", \"doc\": \"The functor obtained by composing the forgetful functor from schemes to topological spaces with the forgetful functor from topological spaces to types, mapping each scheme to its underlying set and ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": X.Etale ⥤ Over X\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": forgetToLocallyRingedSpace.FullyFaithful\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is fully faithful, meaning it induces a bijection between hom-sets of schemes and hom-sets of their underlyi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": forgetToLocallyRingedSpace.Full\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is full, meaning that for any two schemes, every morphism between their underlying locally ringed spaces ari\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \": SheafedSpace C ⥤ PresheafedSpace C\", \"doc\": \"The functor that maps each sheafed space over a category $\\\\mathcal{C}$ to its underlying presheafed space by forgetting the sheaf condition, and maps morphisms of sheafed spaces to the corresponding m\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \"{i j} (f : i ⟶ j) : IsOpenImmersion <| ((F ⋙ MorphismProperty.Over.forget P ⊤ S) ⋙ Over.forget S).map f\", \"doc\": \"For any morphism $ f $ in the appropriate category, applying the composition of the forgetful functors (first forgetting the morphism property and then forgetting the over category structure) results \"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.forgetMapIsOpenImmersion\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": PresheafedSpace.IsOpenImmersion ((forget).map f)\", \"doc\": \"The forgetful functor from sheafed spaces to presheafed spaces maps open immersions between sheafed spaces to open immersions between presheafed spaces. Specifically, if a morphism of sheafed spaces i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine space, Proj and generic forgetful functors do not construct or iterate the Knudsen universal stable curve with its 2-cartesian and projectivity properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"StableCurve\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: affine space, Proj and generic forgetful functors do not construct or iterate the Knudsen universal stable curve with its 2-cartesian and projectivity properties"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*curve|knudsen|stable.*pointed|pointed.*moduli",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: affine space, Proj and generic forgetful functors do not construct or iterate the Knudsen universal stable curve with its 2-cartesian and projectivity properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tower of projective schemes obtained by successively adding marked points to stable curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine space, Proj and generic forgetful functors do not construct or iterate the Knudsen universal stable curve with its 2-cartesian and projectivity properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Knudsen forgetful stable curve morphism is the universal curve and iteration preserves projectivity over a field",
+   "results": "Q147 logged result: OK 8 hits. Returned names/files: AlgebraicGeometry.Scheme.forget_obj_eq_coe, AlgebraicGeometry.Scheme.forget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace, AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace, AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.forgetMapIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj, affine-space, Weierstrass and generic scheme/forgetful declarations do not state the stable-pointed-moduli tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StableCurve\"",
+   "results": "Q147 logged result: OK 0 hits. Returned names/files: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj, affine-space, Weierstrass and generic scheme/forgetful declarations do not state the stable-pointed-moduli tower"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*curve|knudsen|stable.*pointed|pointed.*moduli",
+   "results": "Q147 logged result: OK 0 hits. Returned names/files: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj, affine-space, Weierstrass and generic scheme/forgetful declarations do not state the stable-pointed-moduli tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterating the universal stable pointed curve over a projective parameter scheme gives projective parameter schemes for every number of markings",
+   "results": "Q147 logged result: OK 8 hits. Returned names/files: WeierstrassCurve.Projective, AlgebraicGeometry.Proj, WeierstrassCurve.Projective.PointClass, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.AffineSpace.over",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj, affine-space, Weierstrass and generic scheme/forgetful declarations do not state the stable-pointed-moduli tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tower of projective schemes obtained by successively adding marked points to stable curves",
+   "results": "Q147 logged result: OK 8 hits. Returned names/files: AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.CanonicallyOver, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.pointsPi, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet, AlgebraicGeometry.Proj.isSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj, affine-space, Weierstrass and generic scheme/forgetful declarations do not state the stable-pointed-moduli tower"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-stable-pointed-level-parameter",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Returned proof Steps 3--4: iteration of Knudsen universal curves from any projective unpointed parameter scheme; ample sheaves, H-projectivity induction and arbitrary-base-change stability.",
+   "via": [
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-pointed-universal-curve-tower",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Gave the finite induction explicitly, using existing Knudsen, ample-sheaf, projectivity conversion/composition and finite-type composition nodes. Read the exact statement of every cited node; arbitrary-base-change stability is taken from the Knudsen statement, not inferred just from a projective-bundle presentation. No new nodes, no Lean attachment, no unit changes. All five Mathlib search calls are logged in the Q147 sandbox. Repair of the landing refusal: compared the retained returned split with the current read-only DAG and revalidated every cited statement and quote. The live item is unsplit; statement, statement dependencies, source, creation history, chapter, unit and blueprint metadata agree exactly. Retained the five-step route and logged searches. Corrected step 4 to non-elementary because it invokes the finite-type composition theorem, and made that theorem's two morphisms and inductive hypothesis explicit. Expanded citation evidence to cover every conclusion used. Delivery is rebuilt on the current origin/sheaf-dag by deliver.py. Repeated repair on 2026-10-23: rebased split-owned fields onto the current live item and reread all sixteen current dependencies; every retained full-statement quote still agrees. Strengthened the invariant to retain every earlier transition property and expanded the groupoid-valued test of the 2-cartesian square, citing its definition explicitly. Preserved the statement, proof route and actual search records.",
+  "blueprint": "Realizes the inherited from.place: the projective stable pointed parameter construction, returned proof steps 3--4, iteration of universal curves, ample sheaves, H-projectivity induction and arbitrary-base-change stability. The ancestry tool returns None, as already recorded in this created node; the inherited ancestry is preserved. Whole-blueprint searches for universal curve, pointed and H-projective found no equivalent tower theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "For a chosen H-projective embedding over the field, its statement supplies an ample invertible sheaf; this generic projective-space fact is not supplied by the constructible-functor unit."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Converts the bundle-projective universal curve to H-projective over the now-ample base; this generic Stacks 087S tool does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Composes the two H-projective maps in the induction; generic Stacks 01WE scheme geometry, absent from the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-2b3e9b444",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-2b3e9b444 (reviewer sub-agent of L); spot-checked: This is the third push of this split. Heads c21e1207 and 44cc140e both got PASS, but their landings were refused because the side completion had not been promoted. Live and side-live still hold the item unsplit, there is no repair note and it is not a 2026-10-21 re-split. There are no new nodes and no Lean. Compared with live, only split-owned fields changed (proof, status, proof_deps, split_report, proof_origin, mathlib_searches); the statement and stmt_deps are unchanged. Delta vs 44cc: step 1 now keeps the whole tower in the invariant, including all four properties of every q_j, and states the r=0 case explicitly. Step 2 now checks the square on test schemes B: the objects of the 2-fibre product are (b,Y,φ) with φ:F_r(Y)≅b^*a_r, which matches the 2-fibre-product definition in def-sfb-stable-pointed-moduli-groupoids. The Knudsen node identifies this groupoid with maps B→X_r over T_r, through its representation and mutually inverse contraction/stabilization clauses. The definition was added to step 2's uses and was already in proof_deps. Both changes are correct. I reread all five steps against the cited statements. Knudsen node: representation, stabilization at collisions, the base change of F_r is bundle-projective, flat and f.p., and stability holds under arbitrary base change. Projective-ample with A=k gives an ample i^*O(1). 087S needs only an ample sheaf on the target. 01WE gives composition, and finite-type composition clause (1) covers step 4. proof_deps is the union of the uses. Edge cases checked: n=0, T_0 empty, r=0, the tautological point meeting a marking or node, and non-Noetherian B; g>=2 is kept. Batch-5 check: lem-trf-projective-bundle-to-h-projective (Stacks 087S) and lem-trf-h-projective-composition (01WE) are generic scheme geometry and not steps of the proofs of the trace formula or Poincaré duality, so I accept them. All three tool_uses are generic and accepted. There is no SGA citation and no duplicate node. The Knudsen PDF is not available locally; it is declared WANTED and the proof is marked agent-written. Maintainer note: three PASSed pushes have been refused at landing for lack of promotion; the only content changes since the first are refinements of the step 1/2 wording."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectivePointedUniversalCurveTower",
+  "declaration": "AlgebraicGeometry.exists_projective_pointed_universal_curve_tower",
+  "declarations": [
+   "AlgebraicGeometry.KnudsenPointedCurveDatum",
+   "AlgebraicGeometry.StablePointedModuli.tautologicalExtra",
+   "AlgebraicGeometry.exists_projective_pointed_universal_curve_tower"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectivePointedUniversalCurveTower.lean",
+  "statement": "theorem exists_projective_pointed_universal_curve_tower (k : Type u) [Field k] (g n : ℕ) (hg : 2 ≤ g) (T₀ : Over (Spec (.of k))) (a₀ : StablePointedModuli (Spec (.of k)) g 0) (ha₀ : a₀.base = T₀) (hft : LocallyOfFiniteType T₀.hom) (hqc : QuasiCompact T₀.hom) (hp : IsHProjective T₀.hom) : ∃ (D : (r : Fin n) → KnudsenPointedCurveDatum (Spec (.of k)) g r.val) (a : (r : Fin (n + 1)) → StablePointedModuli (Spec (.of k)) g r.val) (hb : ∀ r : Fin n, (a r.succ).base = (a r.castSucc).totalScheme), a ⟨0, Nat.zero_lt_succ n⟩ = a₀ ∧ (∀ r : Fin (n + 1), LocallyOfFiniteType (a r).base.hom ∧ QuasiCompact (a r).base.hom ∧ IsHProjective (a r).base.hom) ∧ (∀ r : Fin n, IsHProjective (a r.castSucc).projection ∧ Flat (a r.castSucc).projection ∧ LocallyOfFinitePresentation (a r.castSucc).projection ∧ QuasiCompact (a r.castSucc).projection ∧ QuasiSeparated (a r.castSucc).projection ∧ IsProjectiveBundle (a r.castSucc).projection ∧ ∃ e : a r.succ ≅ (D r).stabilization.obj (a r.castSucc).tautologicalExtra, e.hom.base = eqToHom (hb r) ≫ eqToHom ((D r).stabilization.w_obj (a r.castSucc).tautologicalExtra).symm) ∧ (∀ r : Fin n, ∃ R : BasedFunctor (moduliTwoFiberProduct (a r.castSucc).familyMap (StablePointedUniversalCurve.forgetful (D r).contraction)) (discreteModuli (yoneda.obj (a r.castSucc).totalScheme)), R.toFunctor.IsEquivalence ∧ (∀ Z, (yoneda.preimage (R.obj Z).hom).left = eqToHom (congrArg Over.left (R.w_obj Z)) ≫ StablePointedUniversalCurve.representedPoint (D r).contraction (a r.castSucc) Z) ∧ (∀ Z, (yoneda.preimage (R.obj Z).hom).left ≫ (a r.castSucc).projection = eqToHom (congrArg Over.left (R.w_obj Z)) ≫ (yoneda.preimage Z.obj.left.hom).left)) ∧ (∀ (r : Fin (n + 1)) (B : Over (Spec (.of k))) (b : B ⟶ (a r).base), IsStablePointedCurve ((a r).pullback B b).projection ((a r).pullback B b).sections ((a r).pullback B b).section_projection ∧ QuasiCompact ((a r).pullback B b).projection ∧ QuasiSeparated ((a r).pullback B b).projection)",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite tower of the recorded stable labelled moduli families. KnudsenPointedCurveDatum merely packages exactly the witnesses of the dependency theorem; it is existentially supplied at each transition, with no additional hypothesis. The next base equals the old total scheme, the next family stabilizes the diagonal extra section, and normalized representing equivalences retain the groupoid comparisons."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8454692c7",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Node unchanged except lean; statement verbatim in file. KnudsenPointedCurveDatum fields match exists_knudsen_pointed_forgetful_universal_curve exactly (existential, no extra hypothesis). tautologicalExtra = pullback along projection, snd as base, diagonal extra, paired old sections. hb gives T_{r+1}=X_r with composite structure map; e pins a_{r+1} to stabilization with base eqToHom; stage-zero equality to a₀; LFT+QC+IsHProjective per stage; IsHProjective/Flat/LFP/QC/QS/IsProjectiveBundle per transition; 2-cartesian via the recorded moduliTwoFiberProduct representation equivalence normalized by representedPoint and the projection; arbitrary-B IsStablePointedCurve+QC+QS with the genus in the pullback object. Edge cases n=0, r=0, empty T₀, g=2, diagonal collisions, non-Noetherian B OK; single universe u. No duplicates, no hollow defs, sorry only, docstrings OK. Advisory: hg redundant with genus_at_least_two; induced comparison functor implicit. No compile (no change)."
+ }
+}

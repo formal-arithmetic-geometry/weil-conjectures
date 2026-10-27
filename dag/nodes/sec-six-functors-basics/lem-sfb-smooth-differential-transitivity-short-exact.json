@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-smooth-differential-transitivity-short-exact",
+ "kind": "statement",
+ "title": "Smooth transitivity gives a short exact sequence of differential sheaves",
+ "statement": "Let $h:X\\to Y$ and $g:Y\\to S$ be morphisms of schemes [def-pc-scheme], and assume $h$ is smooth [def-sbc-smooth-morphisms]. Use the relative Kähler differential sheaves with their universal derivations [def-sc-relative-differential-sheaf] and tensor module pullback [def-pc-module-pullback]. The canonical differential map $d_{h/S}:h^*\\Omega^1_{Y/S}\\to\\Omega^1_{X/S}$ of [def-a1-relative-differentials-pullback-map], sending $1\\otimes du$ to $d(h^\\sharp u)$, fits into a short exact sequence of $\\mathcal O_X$-modules\n$$0\\longrightarrow h^*\\Omega^1_{Y/S}\\xrightarrow{d_{h/S}}\\Omega^1_{X/S}\\xrightarrow{q}\\Omega^1_{X/Y}\\longrightarrow0,$$\nwhere $q$ sends $d_{X/S}v$ to $d_{X/Y}v$. Short exactness means exactness at every term [def-weil-pbc-exact-sequence]; in particular the first map is injective and the last map is surjective as maps of sheaves. No smoothness assumption on $g$, and no Noetherian, separation, or constant-relative-dimension hypothesis, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02K4, lemma-triangle-differentials-smooth, statement and proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-a1-relative-differentials-pullback-map",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-a1-differential-sheaf-transitivity-exact] to obtain the canonical last arrow q, its derivation formula, a zero-composite witness, exactness at the middle and Epi q. Retain also its affine comparison diagram for the first arrow.",
+   "uses": [
+    "lem-a1-differential-sheaf-transitivity-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an affine triple U, V, W with h(U) contained in V and g(V) contained in W, the comparison identifies the restricted first arrow with tilde(uA), where uA(a tensor db) = a d(h-sharp b). The actual section maps compose by Scheme.Hom.appLE_comp_appLE. By smoothness [def-sbc-smooth-morphisms], the section map B to C is smooth, hence formally smooth. Identify uA with KaehlerDifferential.mapBaseChange using the extension-restriction adjunction and extensionality on differential generators. The Jacobi-Zariski exact sequence and vanishing of H1Cotangent for a formally smooth algebra prove its injectivity, as in [lem-weil-pbc-formally-smooth-differentials-injective].",
+   "uses": [
+    "lem-a1-differential-sheaf-transitivity-exact",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-formally-smooth-differentials-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-sc-tilde-preserves-finite-limits], tilde preserves the monomorphism uA. The affine comparison diagram then makes the restriction of the canonical first arrow a monomorphism. The forgetful functor to abelian presheaves preserves limits, so each component of a module-sheaf monomorphism is injective [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "lem-sc-tilde-preserves-finite-limits",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove cancellation of any two maps into the first term locally. For each point of each source open O, choose W around g(h(x)), V inside g-inverse(W), and U inside O intersect h-inverse(V), all affine. Restriction monicity gives equality on U, using naturality of the two maps. The sheaf separation axiom, including the empty cover when O is empty, gives equality on O. Thus the first arrow is monic. Combine it with middle exactness and Epi q to form ShortComplex.ShortExact [def-weil-pbc-exact-sequence].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-differential-sheaf-transitivity-exact",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-formally-smooth-differentials-injective",
+  "lem-sc-tilde-preserves-finite-limits",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H8",
+  "date": "2026-10-26",
+  "based_on": {
+   "document": "literature/stacks-project/morphisms.tex",
+   "place": "Tag 02K4, lemma-triangle-differentials-smooth; algebra.tex Tag 04B2 via the formally smooth exact sequence Tag 031K"
+  },
+  "note": "Affine route using the comparison clauses already stated by relativeDifferentials_transitivity_exact; avoids reconstructing its first-arrow comparison on stalks. No unit route is changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For schemes X to Y to S with X to Y smooth the transitivity sequence of sheaves of differentials is short exact",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T18:57:42Z\", \"tool\": \"leanfinder\", \"query\": \"For schemes X to Y to S with X to Y smooth the transitivity sequence of sheaves of differentials is short exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"KaehlerDifferential.exact_mapBaseChange_map\", \"Algebra.Generators.Cotangent.exact\", \"Algebra.H1Cotangent.exact_map_δ\"], \"digest\": \"37d9355e62a0ed24\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give ring-level KaehlerDifferential.exact_mapBaseChange_map and Algebra.H1Cotangent.exact_δ_mapBaseChange, or smoothness instances, not the scheme-sheaf short exact sequence. Read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239: passing from these ring/presheaf results to scheme sheaves requires affine comparison and gluing, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"exact\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T18:58:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"KaehlerDifferential.exact_mapBaseChange_map\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\"], \"digest\": \"9a809c88bbae2dde\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give ring-level KaehlerDifferential.exact_mapBaseChange_map and Algebra.H1Cotangent.exact_δ_mapBaseChange, or smoothness instances, not the scheme-sheaf short exact sequence. Read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239: passing from these ring/presheaf results to scheme sheaves requires affine comparison and gluing, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth morphism of schemes the cotangent transitivity sequence is injective on the left",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T18:58:19Z\", \"tool\": \"leansearch\", \"query\": \"For a smooth morphism of schemes the cotangent transitivity sequence is injective on the left\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.Generators.Cotangent.exact\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"7383eabb6ff63358\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give ring-level KaehlerDifferential.exact_mapBaseChange_map and Algebra.H1Cotangent.exact_δ_mapBaseChange, or smoothness instances, not the scheme-sheaf short exact sequence. Read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239: passing from these ring/presheaf results to scheme sheaves requires affine comparison and gluing, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism gives a short exact sequence of relative cotangent sheaves for a composition",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T18:58:21Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth morphism gives a short exact sequence of relative cotangent sheaves for a composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.Cotangent.exact\", \"Algebra.Generators.CotangentSpace.exact\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\"], \"digest\": \"ed634f98eafd9290\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give ring-level KaehlerDifferential.exact_mapBaseChange_map and Algebra.H1Cotangent.exact_δ_mapBaseChange, or smoothness instances, not the scheme-sheaf short exact sequence. Read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239: passing from these ring/presheaf results to scheme sheaves requires affine comparison and gluing, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|KaehlerDifferential|differentials.*smooth|smooth.*differentials",
+   "sub": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T18:59:12Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials|KaehlerDifferential|differentials.*smooth|smooth.*differentials\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"ad2125c327dadfc0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give ring-level KaehlerDifferential.exact_mapBaseChange_map and Algebra.H1Cotangent.exact_δ_mapBaseChange, or smoothness instances, not the scheme-sheaf short exact sequence. Read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239: passing from these ring/presheaf results to scheme sheaves requires affine comparison and gluing, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "injective|exact|mapBaseChange",
+   "sub": "RingTheory/Smooth",
+   "results": "{\"t\": \"2026-10-23T18:59:47Z\", \"tool\": \"grep\", \"query\": \"injective|exact|mapBaseChange\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\"], \"digest\": \"1159a25a65272568\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give ring-level KaehlerDifferential.exact_mapBaseChange_map and Algebra.H1Cotangent.exact_δ_mapBaseChange, or smoothness instances, not the scheme-sheaf short exact sequence. Read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239: passing from these ring/presheaf results to scheme sheaves requires affine comparison and gluing, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scheme morphisms X to Y to S with X to Y smooth, the pullback map from relative differential sheaves is a monomorphism and the cotangent transitivity sequence is short exact",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T20:56:26Z\", \"tool\": \"leanfinder\", \"query\": \"For scheme morphisms X to Y to S with X to Y smooth, the pullback map from relative differential sheaves is a monomorphism and the cotangent transitivity sequence is short exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.Generators.Cotangent.exact\", \"Algebra.Generators.CotangentSpace.exact\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\"], \"digest\": \"f82185223735bf9f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits concern ring cotangent complexes or smoothness, not the scheme-sheaf sequence; Loogle and the AlgebraicGeometry grep return no hits. Read the ring candidate Algebra.H1Cotangent.exact_δ_mapBaseChange in RingTheory/Kaehler/JacobiZariski.lean:556 and the formally-etale argument in RingTheory/Etale/Kaehler.lean:38-45; the sheaf comparison is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials.*(exact|mono)|(exact|mono).*relativeDifferentials",
+   "sub": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T20:56:50Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials.*(exact|mono)|(exact|mono).*relativeDifferentials\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits concern ring cotangent complexes or smoothness, not the scheme-sheaf sequence; Loogle and the AlgebraicGeometry grep return no hits. Read the ring candidate Algebra.H1Cotangent.exact_δ_mapBaseChange in RingTheory/Kaehler/JacobiZariski.lean:556 and the formally-etale argument in RingTheory/Etale/Kaehler.lean:38-45; the sheaf comparison is additional work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative cotangent sheaf sequence for a smooth morphism of schemes is short exact",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T20:56:50Z\", \"tool\": \"leansearch\", \"query\": \"The relative cotangent sheaf sequence for a smooth morphism of schemes is short exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.CotangentSpace.exact\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"Algebra.Generators.Cotangent.exact\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"instR\", \"Algebra.Extension.Cotangent\", \"Algebra.Extension.H1Cotangent\"], \"digest\": \"56dae15009ba0337\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits concern ring cotangent complexes or smoothness, not the scheme-sheaf sequence; Loogle and the AlgebraicGeometry grep return no hits. Read the ring candidate Algebra.H1Cotangent.exact_δ_mapBaseChange in RingTheory/Kaehler/JacobiZariski.lean:556 and the formally-etale argument in RingTheory/Etale/Kaehler.lean:38-45; the sheaf comparison is additional work."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeDifferentials\", \"exact\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T20:56:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"relativeDifferentials\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits concern ring cotangent complexes or smoothness, not the scheme-sheaf sequence; Loogle and the AlgebraicGeometry grep return no hits. Read the ring candidate Algebra.H1Cotangent.exact_δ_mapBaseChange in RingTheory/Kaehler/JacobiZariski.lean:556 and the formally-etale argument in RingTheory/Etale/Kaehler.lean:38-45; the sheaf comparison is additional work."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-etale-localization-relative-differentials",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms. Supporting input: Tags 04CU, 05ZF, finite presentation of the relative differential sheaf on compatible etale charts. Supporting input for this split: Scheme relative differentials agree with differentials on the small etale ringed topos. Stacks Tag 04CS, first proof paragraph: the canonical isomorphism under etale localization, supplied by Tag 04BX. Supporting input for Tag 04BX, second sentence of proof: apply smooth transitivity to X_2 -> X_1 -> S_1.",
+   "via": [
+    "lem-sfb-etale-localization-relative-differentials",
+    "lem-sfb-scheme-etale-relative-differentials-comparison",
+    "lem-sfb-space-relative-differentials-finite-presentation",
+    "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-differential-transitivity-short-exact",
+  "worker": "stage1",
+  "summary": "Checked Stacks 02K4 and its algebraic proof via 04B2 and 031K. Reused the existing right-exact sheaf sequence, smooth-stalk formal smoothness, pullback-stalk and differential-stalk comparisons, and formally-smooth differential injectivity. Wrote the generator calculation identifying the actual stalk arrow and the sectionwise kernel argument. No new nodes and no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms. Supporting input: Tags 04CU, 05ZF, finite presentation of the relative differential sheaf on compatible etale charts. Supporting input for this split: Scheme relative differentials agree with differentials on the small etale ringed topos. Stacks Tag 04CS, first proof paragraph: the canonical isomorphism under etale localization, supplied by Tag 04BX. Supporting input for Tag 04BX, second sentence of proof: apply smooth transitivity to X_2 -> X_1 -> S_1. The split supplies the smooth-transitivity prerequisite via the existing stalk tools; latest direct-images proof (3) provides the ancestor context.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-differential-sheaf-transitivity-exact",
+    "why": "Generic canonical right-exact differential sequence and its maps; no separate node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic tensor pullback stalk formula including the unit on germs, needed to identify the first arrow; no node of this unit replaces this formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-differential-sheaf-transitivity-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-1c7328f90",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-1c7328f90 (reviewer sub-agent of L); spot-checked: I read the whole item. It has 4 steps and the delivery has no new nodes. The statement matches Stacks morphisms 02K4 (l.7407) exactly: only h is smooth, g is arbitrary, and nothing is weakened. Sources checked: 04B2 (algebra l.38347), which reduces to 031K (l.38040, formally smooth B->C, A->B arbitrary), and 08TE and 0098 for the stalk identifications. Step 1: lem-a1-differential-sheaf-transitivity-exact states the right-exact sequence with first map d_{h/S}, the canonical second map, and no hypotheses. Step 2: the stalk map is identified as C⊗_BΩ_{B/R}->Ω_{C/R}, c⊗db↦c d(b̄), from lem-weil-pbc-module-stalk-pullback (s_y⊗1 germ formula), lem-sfb-relative-differentials-stalk applied to g and to gh, and def-a1's defining property; C-linearity on the generators finishes it. Step 3: the Mathlib leaf lem-sfb-smooth-stalk-formally-smooth gives B->C formally smooth, in the same lifting formulation. The Mathlib leaf lem-weil-pbc-formally-smooth-differentials-injective, applied with (R,B,C), then gives injectivity; it needs no condition on R->B. Step 4 is genuinely elementary: germ criterion, sheaf uniqueness (including the empty cover), sectionwise kernels, and the short-exact characterization. proof_deps equal the union of the uses. The two off-unit tool uses, lem-a1 (01UX) and module-stalk-pullback (0098), are generic, and I accept them. I scanned all snapshot nodes for 02K4/04B2/031K and smooth differential sequences and found no duplicate. There is no cycle (closure of 126 nodes) and no SGA. The one citer, etale-localization-relative-differentials, uses exactly this statement. Edge cases checked: h=id, A²->A¹->Spec k, X empty; k[t]->k[t]/(t) shows smoothness is needed. Note for the maintainer: the item's blueprint.from.node is null, a broken chain inherited from the base that this delivery did not touch."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothDifferentialTransitivityShortExact",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.relativeDifferentials_transitivity_shortExact_of_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDifferentialTransitivityShortExact.lean",
+  "statement": "theorem relativeDifferentials_transitivity_shortExact_of_smooth {X Y S : Scheme.{u}} (h : X ⟶ Y) (g : Y ⟶ S) [Smooth h] : ∃ q : (h ≫ g).relativeDifferentials ⟶ h.relativeDifferentials, (∀ (O : X.Opens) (a : Γ(X, O)), q.app O ((h ≫ g).relativeDifferentialsDerivation.d (X := op O) a) = h.relativeDifferentialsDerivation.d (X := op O) a) ∧ ∃ z : g.relativeDifferentialsPullbackMap h ≫ q = 0, (ShortComplex.mk (g.relativeDifferentialsPullbackMap h) q z).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-068d2f83d",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Matches Stacks 02K4 (morphisms.tex l.7407-7426): only h smooth ([Smooth h] = recorded Mathlib AlgebraicGeometry.Smooth), no assumption on g. First arrow = recorded canonical relativeDifferentialsPullbackMap from tensorPullback; q given by the derivation formula on every open (determines q uniquely; same form as the landed right-exact dependency relativeDifferentials_transitivity_exact); ShortExact in X.Modules = exact + mono + epi (sheaf surjectivity). Edge cases X empty, h=id, g=id, non-constant dimension, arbitrary S covered; single scheme universe. lean.statement verbatim; only lean field differs from live node; no new nodes or definitions; proof sorry; docstrings carry source and blueprint id plus the 4 proof steps; imports exist; no duplicate found by rg/Mathlib searches. Second-reading section is the launcher's direct-delivery placeholder, accepted as in other runs. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T082212-L-2149323",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

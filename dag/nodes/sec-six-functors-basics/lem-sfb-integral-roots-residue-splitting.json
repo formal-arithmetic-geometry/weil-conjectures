@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-integral-roots-residue-splitting",
+ "kind": "statement",
+ "title": "Integral split roots force splitting at every normalization residue field",
+ "statement": "Let $S$ be an integral scheme with function field $K$, let $M/K$ be a finite extension, and let $a:W\\to S$ be the normalization of $S$ in $M$ [def-fin-normalization-extension]. Let $s\\in S$, put $R=\\mathcal O_{S,s}$ and $F=\\kappa(s)$, and let $E=\\operatorname{Spec}D$ be a finite etale $F$-scheme. Suppose given a finite set $B$, finite separable extensions $F_b/F$, an $F$-algebra isomorphism $D\\cong\\prod_{b\\in B}F_b$, a finite Galois extension $L/F$ with $F$-embeddings $F_b\\hookrightarrow L$, and a primitive element $\\alpha$ with $L=F(\\alpha)$. Let $q\\in F[T]$ be its monic minimal polynomial of degree $d\\ge1$, and let $f\\in R[T]$ be a monic lift of $q$ of degree $d$. Assume a full factorization $f(T)=\\prod_{\\nu=1}^d(T-\\beta_\\nu)$ with $\\beta_\\nu\\in M$. Then every $\\beta_\\nu$ belongs to the integral closure $\\overline R^{\\,M}$. For every point $w\\in W$ with $a(w)=s$, the canonical map $\\overline R^{\\,M}\\to\\mathcal O_{W,w}\\to\\kappa(w)$ gives\n$$q(T)=\\prod_{\\nu=1}^d(T-\\overline\\beta_\\nu)\\quad\\text{in }\\kappa(w)[T].$$\nFor each such $w$ there is an $F$-embedding $L\\hookrightarrow\\kappa(w)$. For every $b\\in B$ one has an isomorphism of $\\kappa(w)$-algebras\n$$F_b\\otimes_F\\kappa(w)\\cong\\prod_{1\\le j\\le [F_b:F]}\\kappa(w).$$\nConsequently $D\\otimes_F\\kappa(w)\\cong\\prod_{1\\le j\\le n}\\kappa(w)$ for $n=\\sum_{b\\in B}[F_b:F]$, and $E\\times_F\\operatorname{Spec}\\kappa(w)$ is isomorphic over $\\kappa(w)$ to the disjoint union of $n$ copies of $\\operatorname{Spec}\\kappa(w)$. Empty $B$ and $E$ are allowed. No normality, projectivity or Noetherian hypothesis on $S$, no group action, and no Galois hypothesis on $M/K$ are required.\n\nIntegral scheme, function field, residue field, finite morphism, etaleness, fibre product, polynomial ring, field extension and separability use [def-pc-integral-scheme], [def-sc-function-field], [def-weil-residue-field], [def-weil-finite-integral-morphism], [def-weil-etale-morphism], [def-pc-fibre-product], [def-weil-polynomial-ring], [def-pc-field-extension] and [def-weil-pbc-separable-algebraic-extension]. Finite Galois means finite-dimensional, separable and normal (every minimal polynomial splits).",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.6, printed p.614, containment in every residue field; Stacks Algebra 00U3 (lemma-etale-over-field), with the integral-root reduction argument supplied by the agent. Full argument preserved as old steps 13--14 in the delivery report.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-fin-normalization-extension",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-weil-residue-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-polynomial-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Evaluating the assumed factorization at $T=\\beta_\\nu$ gives $f(\\beta_\\nu)=0$. Since $f$ is monic, the definition [def-weil-pbc-integral-closure] says exactly that $\\beta_\\nu$ is integral over $R$, hence lies in $C=\\overline R^{\\,M}$. This proves the first assertion without any normality hypothesis on $R$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition of an integral element; agent argument for the integral-root step omitted in de Jong Lemma 5.6"
+   }
+  },
+  {
+   "text": "Fix any $w$ above $s$. Choose an affine open $U=\\operatorname{Spec}A$ containing $s$, and write $\\mathfrak p$ for its prime. By [def-fin-normalization-extension], $a^{-1}U=\\operatorname{Spec}C_A$, where $C_A$ is the integral closure of $A$ in $M$; write $\\mathfrak Q\\subset C_A$ for $w$, so $\\mathfrak Q\\cap A=\\mathfrak p$. The stalk identifications of [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-spec-map-stalk-localization] give $R=A_{\\mathfrak p}$ and $\\mathcal O_{W,w}=(C_A)_{\\mathfrak Q}$, compatibly with the structural map. By [lem-weil-pbc-integral-closure-commutes-localization], $C=(A\\setminus\\mathfrak p)^{-1}C_A$ inside $M$: localizing $M$ at these nonzero elements leaves $M$ unchanged. Since all elements of $A\\setminus\\mathfrak p$ avoid $\\mathfrak Q$, the fraction map $c/t\\mapsto c/t$ defines the required canonical map $C\\to(C_A)_{\\mathfrak Q}=\\mathcal O_{W,w}$. Its composite with the residue quotient has restriction to $R$ equal to $R\\to F\\to H$, where $H=\\kappa(w)$, by [def-weil-residue-field].",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307, lemma-integral-closure-localize; Schemes 01HV and the affine stalk maps; agent assembly"
+   }
+  },
+  {
+   "text": "The inclusion $C\\subset M$ is injective. Thus the given polynomial identity, whose coefficients and roots lie in $C$, is already an equality in $C[T]$ (compare each coefficient). Apply $C\\to H$ coefficientwise. The image of $f$ is the image of $q$, since $f$ lifts $q$ and the composite on $R$ is $R\\to F\\to H$. Ring homomorphisms preserve finite products, $T$, and constants, giving $q_H(T)=\\prod_{\\nu=1}^d(T-\\overline\\beta_\\nu)$ in $H[T]$. This proves the displayed reduction identity for the arbitrary $w$ chosen in step 2.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficientwise calculation after Tag 0307"
+   }
+  },
+  {
+   "text": "Because $d\\ge1$, put $z=\\overline\\beta_1\\in H$; step 3 gives $q_H(z)=0$. By [lem-weil-pbc-minimal-polynomial-quotient-field-iso], evaluation at $\\alpha$ identifies $F[T]/(q)$ with $F(\\alpha)=L$. Evaluation $g\\mapsto g_H(z)$ kills every multiple of $q$, so $[g]\\mapsto g_H(z)$ is a well-defined unital $F$-algebra map from this quotient to $H$: representatives differing by $q h$ have evaluations differing by $q_H(z)h_H(z)=0$. Composing with the inverse isomorphism gives $\\iota:L\\to H$. It is injective: if a nonzero $x$ mapped to zero, $1=xx^{-1}$ would map to zero in the field $H$. This proves the required $F$-embedding.",
+   "uses": [
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Simple algebraic extension presentation used in Tag 030N, lemma-primitive-element; agent evaluation argument"
+   }
+  },
+  {
+   "text": "Fix $b\\in B$. Apply [lem-zl-finite-separable-tensor-primitive-presentation] with $k=F$, $E=F_b$, $K=H$. It supplies $\\gamma_b$, its monic irreducible minimal polynomial $P_b$, $F_b=F(\\gamma_b)$, and an $H$-algebra isomorphism $H\\otimes_F F_b\\cong H[T]/((P_b)_H)$. If $r_b=[F_b:F]$, then $\\deg P_b=r_b$: by [lem-weil-pbc-simple-algebraic-extension-power-basis], $1,\\gamma_b,\\ldots,\\gamma_b^{r_b-1}$ is a basis. A relation of degree less than $r_b$ contradicts independence; spanning expresses $\\gamma_b^{r_b}$ as a linear combination of those powers, giving a monic annihilating polynomial of degree $r_b$. Minimality of $P_b$ proves both inequalities. In particular $r_b\\ge1$.",
+   "uses": [
+    "lem-zl-finite-separable-tensor-primitive-presentation",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P, lemma-field-extension-geometrically-irreducible, primitive-element tensor presentation; Fields Tag 030N"
+   }
+  },
+  {
+   "text": "Let $j_b:F_b\\hookrightarrow L$ be the supplied embedding. The minimal polynomial of $j_b(\\gamma_b)$ over $F$ is $P_b$, because evaluation has the same kernel after the injective map $j_b$. Normality of $L/F$, in exactly the sense stated in the item, gives a full factorization of $P_b$ into $r_b$ monic linear factors over $L$. These roots are pairwise distinct. Indeed, separability of $F_b/F$ gives $UP_b+VP_b^{\\prime}=1$ by [def-weil-pbc-separable-algebraic-extension] and [def-pc-separable-polynomial]. A repeated root $c$ in the linear factorization would give $P_b(c)=P_b^{\\prime}(c)=0$ (differentiate the product), contradicting this identity at $c$. Applying the injective $\\iota:L\\hookrightarrow H$ gives a factorization $(P_b)_H=\\prod_{j=1}^{r_b}(T-c_{b,j})$ with pairwise distinct $c_{b,j}\\in H$.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HM, definition-normal; separability and the elementary derivative test for a repeated linear factor"
+   }
+  },
+  {
+   "text": "By [lem-pc-polynomial-quotient-distinct-linear-crt], evaluation at the distinct $c_{b,j}$ identifies $H[T]/((P_b)_H)$ with $\\prod_{j=1}^{r_b}H$ as $H$-algebras. Compose with step 5. To put the tensor factors in the order required by the statement, use $F_b\\otimes_F H\\to H\\otimes_F F_b$, $x\\otimes h\\mapsto h\\otimes x$. The bilinearity relations in [def-weil-pbc-module-tensor-product] make this linear map well-defined, and the same formula in reverse is its inverse. It preserves $1$ and multiplication, since $(x\\otimes h)(y\\otimes k)=xy\\otimes hk$ by [lem-weil-pbc-algebra-tensor-pushout-universal-property]; it also preserves the $H$-structure maps. Hence $F_b\\otimes_F H\\cong\\prod_{j=1}^{r_b}H$ as $H$-algebras.",
+   "uses": [
+    "lem-pc-polynomial-quotient-distinct-linear-crt",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3, lemma-etale-over-field, separable polynomial case; explicit tensor symmetry and CRT assembly"
+   }
+  },
+  {
+   "text": "Tensor the supplied $F$-algebra isomorphism $D\\cong\\prod_{b\\in B}F_b$ with $H$. By [lem-weil-pbc-tensor-finite-product] the coordinate map $(\\prod_b F_b)\\otimes_F H\\to\\prod_b(F_b\\otimes_F H)$, $(x_b)_b\\otimes h\\mapsto(x_b\\otimes h)_b$, is an isomorphism of $F$-modules. It is an $H$-algebra isomorphism as well: the pure-tensor product formula of [lem-weil-pbc-algebra-tensor-pushout-universal-property] shows preservation of products and $1$, and it sends $1\\otimes h$ to $(1\\otimes h)_b$. Pure tensors span by [def-weil-pbc-module-tensor-product], so bilinearity extends these equalities to all tensors. Compose with step 7 for each $b$ and reindex the coordinates $(b,j)$ to obtain $D\\otimes_F H\\cong\\prod_{j=1}^n H$, $n=\\sum_b r_b$. For $B=\\varnothing$ both products and the tensor with $D=0$ are the zero ring, so the same assertion includes the empty case.",
+   "uses": [
+    "lem-weil-pbc-tensor-finite-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent algebra-compatibility calculation for finite-product tensor comparison in the residue splitting argument"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], $E\\times_F\\operatorname{Spec}H\\cong\\operatorname{Spec}(D\\otimes_F H)$ over $\\operatorname{Spec}H$. Apply $\\operatorname{Spec}$ to the $H$-algebra isomorphism in step 8. Finally specialize [lem-sbc-finite-product-principal-open] to the coefficient ring $H$, the element $1$, and the $n$ constant component algebras $H$. Its principal opens $D(1)$ are the whole spectra, so it gives $\\coprod_{j=1}^n\\operatorname{Spec}H\\cong\\operatorname{Spec}(\\prod_{j=1}^nH)$ over $\\operatorname{Spec}H$. Composition (inverting this last isomorphism) gives precisely the asserted disjoint union over $H$. The cited result permits $n=0$; the resulting scheme is empty. Every construction was for arbitrary $w$ over $s$, so all conclusions hold at every such point.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sbc-finite-product-principal-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4/01JQ, affine fibre products; finite-product spectrum comparison specialized at the unit principal open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "def-weil-residue-field",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-zl-finite-separable-tensor-primitive-presentation",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-separable-polynomial",
+  "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sbc-finite-product-principal-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Integral-root reduction argument supplying the detail omitted in de Jong Lemma 5.6; localization via 0307, simple extensions via Fields 030N/09HM, and residue CRT via Algebra 00U3. The cited de Jong PDF is absent locally (WANTED in report)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a monic local lift of the primitive polynomial of a finite Galois residue extension splits in a function field extension then every residue field of the normalization above that point contains the residue extension and splits the finite etale residue algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {n : ℕ} (m k : ℕ) (hn : n = m + k) (p : Polynomial.MonicDegreeEq R n) (P : Ideal R)\\n  [inst_1 : P.IsPrime] (f : Polynomial.MonicDegreeEq P.ResidueField m) (g : Polynomial.MonicDegreeEq P.ResidueField k),\\n  Polynomial.map (algebraMap R P.ResidueField) ↑p = ↑f * ↑g\", \"doc\": \"For a prime ideal $ P $ in a commutative ring $ R $, given monic polynomials $ f $ and $ g $ over the residue field of $ P $ such that their product equals the image of a monic polynomial $ p $ of deg\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_map_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [inst_5 : q.IsPrime]\\n  [inst_6 : q.LiesOver p],\\n  Algebra.IsUnramifiedAt R q ↔\\n    Algebra.IsSeparable p.ResidueField q.Resi\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"instIsAlgebraicResidueFieldOfIsIntegral\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances\", \"type\": \"∀ {A : Type u_2} {B : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (q : Ideal B) [inst_3 : q.LiesOver p] [inst_4 : p.IsPrime] [inst_5 : q.IsPrime] [Algebra.IsIntegral A B],\\n  Algebra.IsAlgebraic p.ResidueField q.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if $B$ is an integral algebra over $A$, then the residue field of $\\\\mathfrak\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"instIsSeparableResidueFieldOfQuotientIdeal\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances\", \"type\": \"∀ {A : Type u_2} {B : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (q : Ideal B) [inst_3 : q.LiesOver p] [inst_4 : p.IsMaximal] [inst_5 : q.IsMaximal]\\n  [Algebra.IsSeparable (A ⧸ p) (B ⧸ q)], Algebra.IsSeparable p.ResidueField q.ResidueField\", \"doc\": \"If the quotient rings $ A/p $ and $ B/q $ are separable algebras, then the residue fields of the maximal ideals $ p $ and $ q $ are also separable algebras.\"}\n  {\"name\": \"Polynomial.residueFieldMapCAlgEquiv\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Polynomial\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      [inst_1 : I.IsPrime] →\\n        (J : Ideal (Polynomial R)) →\\n          [inst_2 : J.IsPrime] →\\n            [inst_3 : J.LiesOver I] →\\n              J = Ideal.map Polynomial.C I → J.ResidueField ≃ₐ[I.ResidueField] RatFunc I.ResidueField\", \"doc\": \"Given prime ideals $ I \\\\subseteq R $ and $ J \\\\subseteq R[X] $ such that $ J $ lies over $ I $ (i.e., $ J \\\\cap R = I $) and $ J $ is the extension of $ I $ under the constant polynomial embedding $ C :\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integral roots, normal field embeddings and etale factorization neighbourhoods do not give all-prime reduction and the residue-algebra splitting of the prescribed normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Splits, IsIntegral",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Normal.out\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} {K : Type u_2} [Field F] [Field K] [Algebra F K] : Normal F K → ∀ (x : K), IsIntegral F x ∧ (Polynomial.map (algebraMap F K) (minpoly F x)).Splits\", \"doc\": \"\"}\n  {\"name\": \"normal_iff\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} {K : Type u_2} [Field F] [Field K] [Algebra F K] : Normal F K ↔ ∀ (x : K), IsIntegral F x ∧ (Polynomial.map (algebraMap F K) (minpoly F x)).Splits\", \"doc\": \"\"}\n  {\"name\": \"IsIntegral.mem_range_algHom_of_minpoly_splits\", \"module\": \"Mathlib.RingTheory.Adjoin.Field\", \"type\": \" {R : Type u_1} {K : Type u_2} {L : Type u_3} [CommRing R] [Field K] [Field L] [Algebra R K] {x : L} [Algebra R L] (int : IsIntegral R x) (h : (Polynomial.map (algebraMap R K) (minpoly R x)).Splits) (f : K →ₐ[R] L) : x ∈ f.range\", \"doc\": \"\"}\n  {\"name\": \"IsIntegral.mem_range_algebraMap_of_minpoly_splits\", \"module\": \"Mathlib.RingTheory.Adjoin.Field\", \"type\": \" {R : Type u_1} {K : Type u_2} {L : Type u_3} [CommRing R] [Field K] [Field L] [Algebra R K] {x : L} [Algebra R L] [Algebra K L] [IsScalarTower R K L] (int : IsIntegral R x) (h : (Polynomial.map (algebraMap R K) (minpoly R x)).Splits) : x ∈ (algebraMap K L).range\", \"doc\": \"\"}\n  {\"name\": \"IsIntegral.minpoly_splits_tower_top'\", \"module\": \"Mathlib.RingTheory.Adjoin.Field\", \"type\": \" {R : Type u_1} {K : Type u_2} {L : Type u_3} {M : Type u_4} [CommRing R] [Field K] [Field L] [CommRing M] [Algebra R K] [Algebra R M] [Algebra K M] [IsScalarTower R K M] {x : M} (int : IsIntegral R x) {f : K →+* L} (h : (Polynomial.map (f.comp (algebraMap R K)) (minpoly R x)).Splits) : (Polynomial.\", \"doc\": \"The `RingHom` version of `IsIntegral.minpoly_splits_tower_top`.\"}\n  {\"name\": \"IsIntegral.minpoly_splits_tower_top\", \"module\": \"Mathlib.RingTheory.Adjoin.Field\", \"type\": \" {R : Type u_1} {K : Type u_2} {L : Type u_3} {M : Type u_4} [CommRing R] [Field K] [Field L] [CommRing M] [Algebra R K] [Algebra R M] [Algebra K M] [IsScalarTower R K M] {x : M} [Algebra K L] [Algebra R L] [IsScalarTower R K L] (int : IsIntegral R x) (h : (Polynomial.map (algebraMap R L) (minpoly R\", \"doc\": \"\"}\n  {\"name\": \"Polynomial.lift_of_splits\", \"module\": \"Mathlib.RingTheory.Adjoin.Field\", \"type\": \" {F : Type u_2} {K : Type u_3} {L : Type u_4} [Field F] [Field K] [Field L] [Algebra F K] [Algebra F L] (s : Finset K) : (∀ x ∈ s, IsIntegral F x ∧ (Polynomial.map (algebraMap F L) (minpoly F x)).Splits) → Nonempty (↥(Algebra.adjoin F ↑s) →ₐ[F] L)\", \"doc\": \"If `K` and `L` are field extensions of `F` and we have `s : Finset K` such that\\nthe minimal polynomial of each `x ∈ s` splits in `L` then `Algebra.adjoin F s` embeds in `L`.\"}\n  {\"name\": \"IsIntegral.mem_intermediateField_of_minpoly_splits\", \"module\": \"Mathlib.FieldTheory.SplittingField.IsSplittingField\", \"type\": \" {K : Type v} {L : Type w} [Field K] [Field L] [Algebra K L] {x : L} (int : IsIntegral K x) {F : IntermediateField K L} (h : (Polynomial.map (algebraMap K ↥F) (minpoly K x)).Splits) : x ∈ F\", \"doc\": \"\"}\n  {\"name\": \"IntermediateField.card_algHom_adjoin_integral\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Basic\", \"type\": \" (F : Type u_1) [Field F] {E : Type u_2} [Field E] [Algebra F E] {α : E} {K : Type u} [Field K] [Algebra F K] (h : IsIntegral F α) (h_sep : IsSeparable F α) (h_splits : (Polynomial.map (algebraMap F K) (minpoly F α)).Splits) : Nat.card (↥F⟮α⟯ →ₐ[F] K) = (minpoly F α).natDegree\", \"doc\": \"\"}\n  {\"name\": \"IntermediateField.nonempty_algHom_of_splits\", \"module\": \"Mathlib.FieldTheory.Extension\", \"type\": \" {F : Type u_1} {E : Type u_2} {K : Type u_3} [Field F] [Field E] [Field K] [Algebra F E] [Algebra F K] (hK' : ∀ (s : E), IsIntegral F s ∧ (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) : Nonempty (E →ₐ[F] K)\", \"doc\": \"\"}\n  {\"name\": \"IntermediateField.Lifts.exists_lift_of_splits\", \"module\": \"Mathlib.FieldTheory.Extension\", \"type\": \" {F : Type u_1} {E : Type u_2} {K : Type u_3} [Field F] [Field E] [Field K] [Algebra F E] [Algebra F K] (x : IntermediateField.Lifts F E K) {s : E} (h1 : IsIntegral F s) (h2 : (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) : ∃ y, x ≤ y ∧ s ∈ y.carrier\", \"doc\": \"Given an integral element `s : E` over `F` whose `F`-conjugates are all in `K`,\\nany lift can be extended to one whose carrier contains `s`.\"}\n  {\"name\": \"IntermediateField.nonempty_algHom_of_adjoin_splits\", \"module\": \"Mathlib.FieldTheory.Extension\", \"type\": \" {F : Type u_1} {E : Type u_2} {K : Type u_3} [Field F] [Field E] [Field K] [Algebra F E] [Algebra F K] {S : Set E} (hK : ∀ s ∈ S, IsIntegral F s ∧ (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) (hS : IntermediateField.adjoin F S = ⊤) : Nonempty (E →ₐ[F] K)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integral roots, normal field embeddings and etale factorization neighbourhoods do not give all-prime reduction and the residue-algebra splitting of the prescribed normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*splitt|splitt.*residue|integral.*root|root.*integral",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"566\", \"text\": \"theorem isIntegral_root' (hg : g.Monic) : IsIntegral R (root g) :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"666\", \"text\": \"theorem isIntegral_root (hf : f ≠ 0) : IsIntegral K (root f) :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"667\", \"text\": \"  (isAlgebraic_root hf).isIntegral\"}\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"701\", \"text\": \"    apply (isIntegral_root hf).mem_span_pow\"}\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"1088\", \"text\": \"  have h2 := isIntegral_trans (R := K) _ (AdjoinRoot.isIntegral_root h)\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1217\", \"text\": \"lemma _root_.Algebra.IsIntegral.comap_surjective [Algebra R S] [Algebra.IsIntegral R S]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1226\", \"text\": \"lemma _root_.RingHom.IsIntegral.comap_surjective {f : R →+* S} (hf : f.IsIntegral)\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean\", \"line\": \"22\", \"text\": \"* `primitiveRoots k R`: the finset of primitive `k`-th roots of unity in an integral domain `R`.\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean\", \"line\": \"30\", \"text\": \"* `IsPrimitiveRoot.zpowers_eq`: in an integral domain, the subgroup generated by\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean\", \"line\": \"32\", \"text\": \"* `IsPrimitiveRoot.card_primitiveRoots`: if an integral domain\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean\", \"line\": \"694\", \"text\": \"/-- If an integral domain has a primitive `k`-th root of unity, then it has `φ k` of them. -/\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean\", \"line\": \"841\", \"text\": \"/-- If `p` is prime, the `p`-th roots of unity in an integral domain are exactly the primitive\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"329\", \"text\": \"    have : _root_.IsIntegral (Localization.Away sA) (algebraMap S T x) :=\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/Lemmas.lean\", \"line\": \"15\", \"text\": \"Assume that `μ` is a primitive `n`th root of unity in an integral domain `R`. Then\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/Basic.lean\", \"line\": \"26\", \"text\": \"* `rootsOfUnity.isCyclic`: the roots of unity in an integral domain form a cyclic group.\"}\n  {\"file\": \"Mathlib/RingTheory/IsAdjoinRoot.lean\", \"line\": \"568\", \"text\": \"theorem isIntegral_root : IsIntegral R h.root := ⟨f, h.monic, h.aeval_root_self⟩\"}\n  {\"file\": \"Mathlib/RingTheory/IsAdjoinRoot.lean\", \"line\": \"643\", \"text\": \"  let ⟨q, hq⟩ := minpoly.isIntegrallyClosed_dvd h.isIntegral_root h.aeval_root_self\"}\n  {\"file\": \"Mathlib/RingTheory/IsAdjoinRoot.lean\", \"line\": \"645\", \"text\": \"    eq_of_monic_of_associated h.monic (minpoly.monic h.isIntegral_root) <| by\"}\n  {\"file\": \"Mathlib/RingTheory/IsAdjoinRoot.lean\", \"line\": \"721\", \"text\": \"    {α : E} (hα : IsIntegral F α) (hα₂ : F⟮α⟯ = ⊤) : IsAdjoinRootMonic E (minpoly F α) where\"}\n  {\"file\": \"Mathlib/RingTheory/Trace/Basic.lean\", \"line\": \"165\", \"text\": \"  rw [← isIntegral_algebraMap_iff (algebraMap L (AlgebraicClosure F)).injective, trace_eq_sum_roots]\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/Algebra/Ideal.lean\", \"line\": \"17\", \"text\": \"  then any `x ∈ IS` is integral over `I`, i.e. it is a root\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Integral.lean\", \"line\": \"54\", \"text\": \"  have : _root_.IsIntegral (Localization.Away t) (algebraMap S (Localization.Away (f t)) r) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"296\", \"text\": \"    replace hm := fun k : ℕ ↦ (isIntegral_algebraMap (x := AdjoinRoot.mk 𝓟.f 𝓟.g ^ k)).mul hm\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"312\", \"text\": \"  have hfg : IsIntegral R (AdjoinRoot.mk 𝓟'.f 𝓟'.g) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"316\", \"text\": \"    convert! (Algebra.IsIntegral.isIntegral (R := R) (AdjoinRoot.mk 𝓟.f 𝓟.g)).map e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integral roots, normal field embeddings and etale factorization neighbourhoods do not give all-prime reduction and the residue-algebra splitting of the prescribed normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "All integral roots of a lifted separable residue polynomial reduce at every prime of the integral closure so the finite etale residue algebra splits after extending that residue field",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of a completely split monic polynomial at any prime of an integral closure embeds its Galois residue splitting field and gives a product decomposition by Chinese remainders",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {n : ℕ} (m k : ℕ) (hn : n = m + k) (p : Polynomial.MonicDegreeEq R n) (P : Ideal R)\\n  [inst_1 : P.IsPrime] (f : Polynomial.MonicDegreeEq P.ResidueField m) (g : Polynomial.MonicDegreeEq P.ResidueField k),\\n  Polynomial.map (algebraMap R P.ResidueField) ↑p = ↑f * ↑g\", \"doc\": \"For a prime ideal $ P $ in a commutative ring $ R $, given monic polynomials $ f $ and $ g $ over the residue field of $ P $ such that their product equals the image of a monic polynomial $ p $ of deg\"}\n  {\"name\": \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial (ZMod p)}\\n  (hQ : Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  ↑((NumberField.Ideal.primesOverSpanEquivMonicFactor\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ and a monic polynomial $ Q $ modulo $ p $, the inverse of the equivalence between prime ideals lying over the span of $ \\\\theta $ and monic p\"}\n  {\"name\": \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply_eq_span\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial ℤ}\\n  (hQ : Polynomial.map (Int.castRingHom (ZMod p)) Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  ↑((NumberField.I\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, the inverse of the canonical equivalence between prime ideals of $ \\\\mathc\"}\n  {\"name\": \"RingOfIntegers.monicFactorsMod\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → NumberField.RingOfIntegers K → (p : ℕ) → [inst : Fact (Nat.Prime p)] → Finset (Polynomial (ZMod p))\", \"doc\": \"The finite set of monic irreducible polynomials in $\\\\mathbb{Z}/p\\\\mathbb{Z}[X]$ obtained by factoring the minimal polynomial of $\\\\theta$ over $\\\\mathbb{Z}$ after applying the canonical ring homomorphism\"}\n  {\"name\": \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    {θ : NumberField.RingOfIntegers K} →\\n      {p : ℕ} →\\n        [inst_1 : Fact (Nat.Prime p)] →\\n          [NumberField K] →\\n            ¬p ∣ RingOfIntegers.exponent θ →\\n              ↑((Ideal.span {↑p}).primesOver (NumberField.RingOfIntegers K)) ≃ ↥(RingOfInteg\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, there is a canonical equivalence between the set of prime ideals of $ \\\\ma\"}\n  {\"name\": \"NumberField.Ideal.liesOver_primesOverSpanEquivMonicFactorsMod_symm\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [NumberField K],\\n  ¬p ∣ RingOfIntegers.exponent θ →\\n    ∀ {Q : Polynomial ℤ},\\n      Polynomial.map (Int.castRingHom (ZMod p)) Q ∈ RingOfIntegers.monicFactorsMod θ p →\\n        (Ideal.span {↑p,\", \"doc\": \"Let $ K $ be a number field with ring of integers $ \\\\mathcal{O}_K $, and let $ \\\\theta \\\\in \\\\mathcal{O}_K $. For a prime $ p $ not dividing the exponent of $ \\\\theta $, and a monic irreducible polynomial\"}\n  {\"name\": \"NumberField.Ideal.inertiaDeg_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial ℤ}\\n  (hQ : Polynomial.map (Int.castRingHom (ZMod p)) Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  (Ideal.span {↑p}\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, the inertia degree of the prime ideal $ \\\\mathfrak{P} $ corresponding to a\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integral roots, normal field embeddings and etale factorization neighbourhoods do not give all-prime reduction and the residue-algebra splitting of the prescribed normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial over a local domain splits in a finite function field extension and reduction of its integral roots at every point of the normalization embeds the residue splitting field",
+   "results": "{\"t\": \"2026-10-23T04:14:03Z\", \"tool\": \"leanfinder\", \"query\": \"A monic polynomial over a local domain splits in a finite function field extension and reduction of its integral roots at every point of the normalization embeds the residue splitting field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"AlgebraicClosure.Monics.map_eq_prod\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"Polynomial.Monic.exists_splits_map\", \"Polynomial.residueFieldMapCAlgEquiv\", \"Polynomial.residueFieldMapCAlgEquiv_algebraMap\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\"], \"digest\": \"f6d881460a271b36\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned field and polynomial ingredients do not state the normalization-residue assertion with all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Splits, IsIntegral",
+   "results": "{\"t\": \"2026-10-23T04:14:03Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Splits, IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Normal.out\", \"normal_iff\", \"IsIntegral.mem_range_algHom_of_minpoly_splits\", \"IsIntegral.mem_range_algebraMap_of_minpoly_splits\", \"IsIntegral.minpoly_splits_tower_top'\", \"IsIntegral.minpoly_splits_tower_top\", \"Polynomial.lift_of_splits\", \"IsIntegral.mem_intermediateField_of_minpoly_splits\"], \"digest\": \"b5c56ae4c2f2a6ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned field and polynomial ingredients do not state the normalization-residue assertion with all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*splitt|splitt.*residue|integral.*root",
+   "results": "{\"t\": \"2026-10-23T04:14:03Z\", \"tool\": \"grep\", \"query\": \"residue.*splitt|splitt.*residue|integral.*root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/MahlerMeasure.lean\", \"Mathlib/NumberTheory/MahlerMeasure.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\"], \"digest\": \"d90b2f87e4d69a2e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned field and polynomial ingredients do not state the normalization-residue assertion with all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral roots of a split monic polynomial reduce to a splitting of the residue polynomial at all points of normalization",
+   "results": "{\"t\": \"2026-10-23T04:14:27Z\", \"tool\": \"leansearch\", \"query\": \"Integral roots of a split monic polynomial reduce to a splitting of the residue polynomial at all points of normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isInteger_of_is_root_of_monic\", \"Polynomial.rootOfSplits'\", \"AdjoinRoot.isIntegral_root'\", \"Polynomial.aeval_root_derivative_of_splits\", \"Polynomial.aeval_eq_prod_aroots_sub_of_monic_of_splits\", \"IsAdjoinRootMonic.isIntegral_root\", \"Polynomial.eval_eq_prod_roots_sub_of_monic_of_splits_id\", \"Polynomial.rootOfSplits\"], \"digest\": \"17dcf3f3498e1ea5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned field and polynomial ingredients do not state the normalization-residue assertion with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable field subextension of a normal extension becomes a product of copies of a field containing the normal extension after tensor base change",
+   "results": "{\"t\": \"2026-10-23T04:14:29Z\", \"tool\": \"leanfinder\", \"query\": \"A finite separable field subextension of a normal extension becomes a product of copies of a field containing the normal extension after tensor base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGalois.of_separable_splitting_field_aux\", \"Normal.tower_top_of_normal\", \"Ring.instIsSeparableFractionRingSubtypeAlgebraicClosureMemIntermediateFieldNormalClosure\", \"AlgHom.liftNormal\", \"AlgHom.restrictNormal'\", \"IntermediateField.restrictScalars_normal\", \"IntermediateField.restrictRestrictAlgEquivMapHom_surjective\", \"IntermediateField.LinearDisjoint.isField_of_isAlgebraic\"], \"digest\": \"b05ef190a1d0d187\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned field and polynomial ingredients do not state the normalization-residue assertion with all its clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-finite-residue-domination",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, second paragraph, application of Lemma 5.6 at the maximal points of the nonsplit locus. Extraction of old steps 13--14: reduction at every point and residue CRT.",
+   "via": [
+    "lem-sfb-equivariant-finite-residue-domination",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-roots-residue-splitting",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave the canonical map from the local integral closure using affine normalization and localization; reduced the full root factorization at an arbitrary point; constructed the residue embedding by evaluation; used existing primitive tensor presentation, explicit separability calculation and CRT to split every factor; checked algebra compatibility and empty products. No new nodes.",
+  "blueprint": "Auxiliary to det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration chain and de Jong 5.7 application of 5.6. Existing from.place identifies old steps 13--14. Steps 1--4 realize integral-root reduction at every normalization point; steps 5--9 realize the finite-etale residue CRT. blueprint_refs ancestor returns no ancestor; inherited null from.node and via retained. Searches for primitive element, minimal polynomial, splitting field, normalization and finite products found no blueprint statement of this item.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-finite-separable-tensor-primitive-presentation",
+    "why": "Generic finite-separable-field tensor presentation, valid for arbitrary receiving fields; no node of this unit states this algebraic tool."
+   },
+   {
+    "node": "lem-pc-polynomial-quotient-distinct-linear-crt",
+    "why": "Generic CRT for a prescribed list of distinct field elements; does not replace the alteration or all-point reduction route."
+   },
+   {
+    "node": "lem-sbc-finite-product-principal-open",
+    "why": "Generic finite-product spectrum isomorphism over the coefficient ring, used only at h=1 to turn the established residue algebra product into a disjoint union."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-finite-separable-tensor-primitive-presentation",
+  "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "lem-sbc-finite-product-principal-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-4bfe99c77",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-4bfe99c77 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and every cited statement in full. The delivery has 1 commit and no new nodes, the statement is unchanged, and no SGA source is cited. Step 1 is the monic relation, matching def-weil-pbc-integral-closure. Step 2 builds the canonical map: def-fin-normalization-extension gives Spec C_A over Spec A, the two stalk lemmas give R=A_p and O_{W,w}=(C_A)_Q, and 0307 (checked against algebra.tex l.7597) gives C=(A\\p)^{-1}C_A inside M. That fraction map is well defined because Q∩A=p, and its restriction to R is R->F->kappa(w). Step 3 reduces the factorization by comparing coefficients. Step 4 embeds L by evaluating at a reduced root via F[T]/(q)≅L and is injective because L is a field. Step 5 applies the lem-zl primitive tensor presentation over an arbitrary receiving field; deg P_b=[F_b:F] follows from the power basis. Step 6 uses normality as defined in the item and the separability Bezout identity to get distinct roots, and the injective F-map keeps them distinct. Step 7 combines the CRT node with an explicit tensor swap. Step 8 upgrades the module-only finite-product lemma to an algebra isomorphism explicitly and covers B empty. Step 9 combines the affine fibre product with lem-sbc-finite-product-principal-open at h=1, n>=0. I tested the inert case Z_(2), q=T^2+T+1, M=Q(zeta_3), kappa(w)=F_4, and the case d=1. No duplicate in the DAG: lem-sfb-local-etale-residue-polynomial-lifts supplies the hypotheses, and the pbc étale-splitting lemmas are étale-local results. The use in the citer's step 5 (lem-sfb-equivariant-finite-residue-domination) matches. Advisories, not faults: (1) the statement uses the integral closure without listing def-weil-pbc-integral-closure in stmt_deps; (2) the worker wrote tool_uses for three generic algebra tools themselves (C8), which I accept; (3) the de Jong PDF is absent and the proof is credited to the agent."
+ }
+}

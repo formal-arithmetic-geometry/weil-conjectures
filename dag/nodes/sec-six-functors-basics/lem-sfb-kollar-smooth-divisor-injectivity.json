@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-kollar-smooth-divisor-injectivity",
+ "kind": "statement",
+ "title": "Kollar injectivity for a smooth divisor in a power of a line bundle",
+ "statement": "Let $F$ be an algebraically closed field of characteristic zero [def-weil-field, def-weil-algebraic-closure], and let $Y$ be a smooth projective geometrically integral $F$-scheme of pure dimension $n\\geq0$ [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-projective-morphism, def-pc-integral-scheme]. Put $\\omega_Y=\\bigwedge^n\\Omega^1_{Y/F}$, where the sheaf of Kähler differentials is obtained by gluing $\\Omega_{B/F}$ on affine opens $\\operatorname{Spec}B\\subseteq Y$ [def-weil-pbc-kahler-differentials], and the exterior power is the quotient of the $n$th tensor power by the alternating multilinearity relations, with $\\bigwedge^0\\Omega^1_{Y/F}=\\mathcal O_Y$. Let $L$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], let $m\\geq2$ be an integer, and let $0\\ne s\\in\\Gamma(Y,L^{\\otimes m})$. Assume its zero scheme $D=Z(s)$ [def-pc-zero-scheme] is smooth over $F$; the empty zero scheme is allowed. Then for every $j\\geq0$ the homomorphism\n$$H^j(Y,\\omega_Y\\otimes L)\\xrightarrow{\\;H^j(\\cdot s)\\;}H^j(Y,\\omega_Y\\otimes L^{\\otimes(m+1)})$$\nis injective. Here $\\cdot s$ is the sheaf morphism locally given by multiplication by the function representing $s$, $H^j=R^j\\Gamma$ is Zariski module sheaf cohomology [pqf-def-cohomology], and tensor products and nonnegative tensor powers are those of [def-pur-sheaf-tensor-product]. No ampleness hypothesis on $L$ is imposed.",
+ "source": {
+  "document": "literature/popa-kodaira-dimension.pdf",
+  "place": "WANTED locally: Mihnea Popa, Kodaira dimension of algebraic varieties, section 1.6 opening paragraph (printed p.22: extension to algebraically closed characteristic-zero fields), Theorem 1.6.6 and proof (printed pp.26--27), with m>=2; author notes read online at https://people.math.harvard.edu/~mpopa/271/Kodaira-posted.pdf. This is the injectivity input, not Theorem 1.6.1 itself."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-invertible-module",
+  "def-pc-zero-scheme",
+  "pqf-def-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "If $D=\\varnothing$, every local function representing $s$ is a unit: its principal ideal defines the empty closed subscheme. Thus multiplication by $s$ is a sheaf isomorphism, whose inverse induces an inverse in cohomology. Assume henceforth $D\\ne\\varnothing$. On an integral scheme the local functions representing a nonzero section of a line bundle are nonzero: if one were zero on a nonempty open, injectivity into the common function field would make all representatives zero, contradicting $s\\ne0$. They are therefore nonzerodivisors. The image of $s:L^{-m}\\to\\mathcal O_Y$ is exactly the ideal of $D$ by the definition of $Z(s)$; this identifies that ideal with $L^{-m}$.",
+   "uses": [
+    "def-pc-zero-scheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "Theorem 1.6.6, setup; elementary empty-divisor case and regularity of the section written out."
+   }
+  },
+  {
+   "text": "Apply the cyclic-cover lemma to the given $(Y,L,m,s)$. It supplies a smooth projective root cover $W$, without assuming it connected, and the cohomology character decompositions compatible with $d$. Apply the first-Hodge-differential lemma to $W$ over $F$. The whole map $H^q(W,d)$ is zero for every $q\\geq0$. Its character-one block is the map $H^q(Y,\\nabla_1)$, so that map is zero. This uses sheaves of $F$-vector spaces for the differential, not an assertion of $\\mathcal O$-linearity.",
+   "uses": [
+    "lem-sfb-cyclic-root-cover-eigenforms",
+    "lem-sfb-hodge-first-differential-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "WANTED locally; Proposition 1.6.5 and proof of Theorem 1.6.6, pp.26--27."
+   }
+  },
+  {
+   "text": "Put $N=L^{-1}$ and let $r:N\\to N\\otimes\\mathcal O_D$ be restriction, viewed on $Y$. The cyclic-cover lemma gives $\\nabla_1(b e^{-1})=(db+(b/m)du/u)\\otimes e^{-1}$ and the residue map kills $db$ and sends $du/u$ to $1$. Hence $r=m(\\operatorname{res}_D\\otimes1)\\nabla_1$ on every trivializing open and therefore globally. Applying $F$-linear sheaf cohomology and step 2 gives $H^q(Y,r)=0$ for every $q\\geq0$. The factor $m$ (not $1/m$) multiplies the residue composite; division by $m$ is legitimate because $\\operatorname{char}F=0$.",
+   "uses": [
+    "lem-sfb-cyclic-root-cover-eigenforms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "WANTED locally; Lemma 1.6.7, p.27, with its residue coefficient explicitly computed."
+   }
+  },
+  {
+   "text": "Step 1 gives the short exact sequence $0\\to L^{-(m+1)}\\xrightarrow{\\cdot s}L^{-1}\\xrightarrow{r}L^{-1}\\otimes\\mathcal O_D\\to0$: on a trivializing open it is $0\\to A\\xrightarrow{\\cdot u}A\\to A/(u)\\to0$, with $u$ a nonzerodivisor. Apply the cited long exact derived-functor sequence for global sections. Exactness at $H^q(Y,L^{-1})$, together with $H^q(Y,r)=0$, says that $H^q(Y,\\cdot s):H^q(Y,L^{-(m+1)})\\to H^q(Y,L^{-1})$ is surjective for all $q\\geq0$.",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "WANTED locally; Theorem 1.6.6 proof, p.27, short exact sequence and its long exact cohomology sequence."
+   }
+  },
+  {
+   "text": "For $0\\leq j\\leq n$ set $q=n-j$ and apply functorial Serre duality to $v=\\cdot s:L^{-(m+1)}\\to L^{-1}$. Its dual sheaf map is multiplication by the same local function $u$, so $\\operatorname{id}_{\\omega_Y}\\otimes v^\\vee$ is exactly the map $\\omega_Y\\otimes L\\to\\omega_Y\\otimes L^{m+1}$ in the item. Under the duality isomorphisms its degree-$j$ cohomology map is precomposition with the surjection of step 4. Such precomposition is injective: if a functional vanishes on the image of a surjective map, it vanishes everywhere. For $j>n$ the source is zero by the vanishing clause of the same duality lemma. This proves every asserted degree.",
+   "uses": [
+    "lem-sfb-projective-line-module-serre-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0FVV, 0FVX and 0FW0; final Serre-duality step of Popa Theorem 1.6.6, p.27, with the transposed map checked locally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-zero-scheme",
+  "def-pc-integral-scheme",
+  "lem-sfb-cyclic-root-cover-eigenforms",
+  "lem-sfb-hodge-first-differential-zero",
+  "pqf-def-cohomology",
+  "lem-sfb-projective-line-module-serre-duality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/popa-kodaira-dimension.pdf",
+  "place": "Assembly after reading Popa Proposition 1.6.5, Theorem 1.6.6 and Lemma 1.6.7 online, printed pp.24--27; local copy WANTED. Serre-duality hypotheses and functoriality checked against Stacks Tags 0FVV, 0FVX, 0FW0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a section of a power of a line bundle with smooth zero divisor induces an injective map on cohomology of the canonical bundle tensor that line bundle in characteristic zero",
+   "results": "8 hits; read results: Algebra.Extension.h1Cotangentι_injective, AlgebraicGeometry.StructureSheaf.toBasicOpen_injective, Algebra.SubmersivePresentation.cotangentComplexAux_injective, Algebra.FormallySmooth.kerCotangentToTensor_injective_iff, Algebra.SubmersivePresentation.cotangentComplex_injective, AlgebraicGeometry.injective_germ_basicOpen, Algebra.Generators.CotangentSpace.map_toComp_injective, Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway.",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module or germ injectivity, abstract injective resolutions, and ordinary scalar multiplication do not state injectivity on canonical-bundle sheaf cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"injective\", \"cohomology\"",
+   "results": "12 hits; read results: CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective_apply, CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective_symm_apply, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk.",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module or germ injectivity, abstract injective resolutions, and ordinary scalar multiplication do not state injectivity on canonical-bundle sheaf cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "Kodaira|Kollar|Kollár|Esnault|Viehweg|canonical.*injectiv|injectiv.*canonical",
+   "results": "17 hits; read results: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/Algebra/Colimit/Ring.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/NumberTheory/NumberField/Basic.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module or germ injectivity, abstract injective resolutions, and ordinary scalar multiplication do not state injectivity on canonical-bundle sheaf cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kollar injectivity theorem for a smooth divisor in a tensor power of an invertible sheaf on a smooth projective variety",
+   "results": "8 hits; read results: AlgebraicGeometry.StructureSheaf.toBasicOpen_injective, AlgebraicGeometry.Scheme.IsGermInjectiveAt, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_injective, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.stalkMap_injective_of_isAffine, Algebra.SubmersivePresentation.cotangentComplexAux_injective, AlgebraicGeometry.injective_germ_basicOpen.",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module or germ injectivity, abstract injective resolutions, and ordinary scalar multiplication do not state injectivity on canonical-bundle sheaf cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by a section with smooth zero divisor is injective on the cohomology of omega tensor L on a smooth projective variety of characteristic zero",
+   "results": "8 hits; read results: Ideal.mulQuot_injective, isSMulRegular_iff_mem_nonZeroSMulDivisors, ContMDiffSection.coe_injective, isSMulRegular_on_submodule_iff_mem_imp_smul_eq_zero_imp_eq_zero, Algebra.lsmul_injective, PresheafOfModules.Sheafify.zero_smul, ContMDiffSection.coe_zsmul, ContMDiffSection.coe_nsmul.",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module or germ injectivity, abstract injective resolutions, and ordinary scalar multiplication do not state injectivity on canonical-bundle sheaf cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kollar injectivity multiplication by a section with smooth divisor on cohomology of canonical bundle tensor line bundle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f : R), Function.Injective ⇑(AlgebraicGeometry.StructureSheaf.toBasicOpen R f)\", \"doc\": \"The canonical ring homomorphism from the localization $R_f$ of a commutative ring $R$ at an element $f$ to the ring of sections $\\\\mathcal{O}(D(f))$ in the structure sheaf over the basic open set $D(f)\"}\n  {\"name\": \"Algebra.Extension.h1Cotangentι_injective\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Injective ⇑Algebra.Extension.h1Cotangentι\", \"doc\": \"The canonical linear map from the first cotangent cohomology module $ H^1 = \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ to the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ in an $ R $-algebra extension is injective.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Function.Injective ⇑P.toExtension.cotangentComplex\", \"doc\": \"The cotangent complex map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ is injective for a submersive presentation of an $R$-algebra $S$.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Injective ⇑P.cotangentComplexAux\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra with finite generating set $ \\\\sigma $, the cotangent complex auxiliary map $ \\\\mathrm{cotangentComplexAux} : \\\\mathrm{Cotangent}(P) \\\\to \\\\sigma \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.specTargetImageFactorization f)))\", \"doc\": \"The application of the target-image factorization of a scheme morphism $ f $ to the entire topological space induces an injective map between the global sections of the structure sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.injective_germ_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x : ↥X) (hx : x ∈ U) (f : ↑(X.presheaf.obj (Opposite.op U))) (hf : x ∈ X.basicOpen f),\\n      Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx)) →\\n        Function.Injective ⇑(C\", \"doc\": \"Let $ X $ be a scheme, $ U $ an affine open subset of $ X $, $ x $ a point in $ U $, and $ f $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ such that $ x $ lies in the basic open set \"}\n  {\"name\": \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {P : Type u_2}\\n  [inst_3 : CommRing P] [inst_4 : Algebra R P] [Algebra.FormallySmooth R P] [inst_6 : Algebra P A]\\n  [IsScalarTower R P A],\\n  Function.Surjective ⇑(algebraMap P A) →\\n    (Function.Injective ⇑(\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ P $, and a $ P $-algebra $ A $ with a scalar tower structure over $ R $, if the canonical algebra map $ P \\to A $ is surjective, then the injectivity \"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.postcomp_injective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  {M : PresheafOfModules (R.comp (CategoryTheory.forg\", \"doc\": \"Given presheaves of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ M $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a universal derivation $ d $, if tw\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent/germ injectivity and abstract injective-resolution cohomology do not imply canonical-bundle cohomology injectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"injective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.KInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} {n : ℤ} [CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L] [L.IsKInjective] : CochainComplex.HomComplex.CohomologyClass K L n ≃ Cate\", \"doc\": \"When `L` is a K-injective cochain complex, cohomology classes\\nin `CohomologyClass K L n` identify to elements in a type `SmallShiftedHom` relatively\\nto quasi-isomorphisms.\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.KInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] (K L : CochainComplex C ℤ) (n : ℤ) [CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L] [L.IsKInjective] : Function.Bijective CochainComplex.HomComplex.Cohomolog\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective_apply\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.KInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} {n : ℤ} [CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L] [L.IsKInjective] (x : CochainComplex.HomComplex.CohomologyClass K L n) : \", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective_symm_apply\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.KInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} {n : ℤ} [CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L] [L.IsKInjective] (b : CategoryTheory.Localization.SmallShiftedHom (Homolo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ} : CategoryTheory.Abelian.Ext X Y n ≃ CochainComplex.HomComplex.CohomologyClass ((CochainComplex.singleFunctor C 0).obj X) R.cochainComple\", \"doc\": \"If `R` is an injective resolution of `Y`, then `Ext X Y n` identifies\\nto the type of cohomology classes of degree `n` from `(singleFunctor C 0).obj X`\\nto `R.cochainComplex`.\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ} {R₀ : Type u_1} [Ring R₀] [CategoryTheory.Linear R₀ C] : CategoryTheory.Abelian.Ext X Y n ≃ₗ[R₀] CochainComplex.HomComplex.CohomologyClas\", \"doc\": \"If `R` is an injective resolution of `Y` in a `R₀`-linear category,\\nthen `Ext X Y n` identifies to the `R₀`-module of cohomology classes\\nof degree `n` from `(singleFunctor C 0).obj X` to `R.cochainCom\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ} : CategoryTheory.Abelian.Ext X Y n ≃+ CochainComplex.HomComplex.CohomologyClass ((CochainComplex.singleFunctor C 0).obj X) R.cochainCompl\", \"doc\": \"If `R` is an injective resolution of `Y`, then `Ext X Y n` identifies\\nto the group of cohomology classes of degree `n` from `(singleFunctor C 0).obj X`\\nto `R.cochainComplex`.\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ} (f : X ⟶ R.cocomplex.X n) (m : ℕ) (hm : n + 1 = m) (hf : CategoryTheory.CategoryStruct.comp f (R.cocomplex.d n m) = 0) : R.extEquivCohomo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] (X : C) {Y : C} (R : CategoryTheory.InjectiveResolution Y) (n : ℕ) : R.extEquivCohomologyClass 0 = 0\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_zero\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ} : R.extEquivCohomologyClass.symm 0 = 0\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_neg\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ} (x : CategoryTheory.Abelian.Ext X Y n) : R.extEquivCohomologyClass (-x) = -R.extEquivCohomologyClass x\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_smul\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ} {R₀ : Type u_1} [Ring R₀] [CategoryTheory.Linear R₀ C] (r : R₀) (x : CochainComplex.HomComplex.CohomologyClass ((CochainComplex.singleFun\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent/germ injectivity and abstract injective-resolution cohomology do not imply canonical-bundle cohomology injectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "Kodaira|Kollar|Kollár|Esnault|Viehweg|canonical.*injectiv",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"383\", \"text\": \"Then the canonical map `colim Homₛ(Dᵢ, X) ⟶ Homₛ(lim Dᵢ, X)` is injective.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"683\", \"text\": \"Then the canonical map `colim Homₛ(Dᵢ, X) ⟶ Homₛ(lim Dᵢ, X)` is injective.\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Tensor.lean\", \"line\": \"94\", \"text\": \"the canonical map `I ⊗ M →ₗ M` is injective. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"21\", \"text\": \"(i.e., injective linear maps) `N →ₗ[R] P`, the canonical map `N ⊗ M → P ⊗ M` is injective\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"109\", \"text\": \"the canonical map `N ⊗ M → P ⊗ M` is injective. This implies the same is true for\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"line\": \"86\", \"text\": \"/-- If `T` is a flat `R`-module, the canonical map `tensorCotangentHom R T I` is injective. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"53\", \"text\": \"theorem _root_.NumberField.canonicalEmbedding_injective [NumberField K] :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"54\", \"text\": \"    Function.Injective (NumberField.canonicalEmbedding K) := RingHom.injective _\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"line\": \"242\", \"text\": \"/-- The canonical map from `𝓞 K` to `K` is injective.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"line\": \"249\", \"text\": \"/-- The canonical map from `𝓞 K` to `K` is injective.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"line\": \"257\", \"text\": \"/-- The canonical map from `𝓞 K` to `K` is injective.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"line\": \"539\", \"text\": \"/-- The canonical map out of a direct sum of a family of submodules is injective when the submodules\"}\n  {\"file\": \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"line\": \"564\", \"text\": \"/-- The canonical map out of a direct sum of a family of additive subgroups is injective when the\"}\n  {\"file\": \"Mathlib/GroupTheory/PushoutI.lean\", \"line\": \"224\", \"text\": \"canonical element of each coset. We also need all the maps in the diagram to be injective -/\"}\n  {\"file\": \"Mathlib/GroupTheory/HNNExtension.lean\", \"line\": \"30\", \"text\": \"- `HNNExtension.of_injective` : The canonical embedding `G →* HNNExtension G A B φ` is injective.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent/germ injectivity and abstract injective-resolution cohomology do not imply canonical-bundle cohomology injectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by section of a power of a line bundle is injective on canonical sheaf cohomology when the zero divisor is smooth",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ContMDiffSection.coe_injective\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \": Injective ((↑) : Cₛ^n⟮I; F, V⟯ → ∀ x, V x)\", \"doc\": \"The canonical map from $ C^k $-smooth sections of a vector bundle over a manifold with corners to the space of functions assigning each point to an element of the corresponding fiber is injective.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme.{u}} {U : TopologicalSpace.Opens X} (hU : IsCompact U.carrier) (hU' : IsQuasiSeparated U.carrier)\\n  {f s : Γ(X, U)} (hf : f |_ X.basicOpen s = 0) : ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"ContMDiffOn.smul_section\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"(hf : ContMDiffOn I 𝓘(𝕜) n f u) (hs : ContMDiffOn I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (s x)) u) :\\n  ContMDiffOn I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (f x • s x)) u\", \"doc\": \"Let $ E $ be a vector bundle over a manifold modeled on a normed vector space $ F $, with base space $ M $ and scalar field $ \\\\mathbb{K} $. If $ f : M \\\\to \\\\mathbb{K} $ is a $ C^n $-differentiable func\"}\n  {\"name\": \"ContMDiff.smul_section\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"(hf : ContMDiff I 𝓘(𝕜) n f) (hs : ContMDiff I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (s x))) :\\n  ContMDiff I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (f x • s x))\", \"doc\": \"Given a $ C^n $-differentiable function $ f $ on a manifold modeled by $ I $ and a $ C^n $-differentiable section $ s $ of a vector bundle with fiber model $ \\\\mathcal{K} \\\\times F $, the scalar multipl\"}\n  {\"name\": \"ContMDiffOn.smul_section_of_tsupport\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{s : Π (x : M), V x} {ψ : M → 𝕜} (hψ : ContMDiffOn I 𝓘(𝕜) n ψ u) (ht : IsOpen u) (ht' : tsupport ψ ⊆ u)\\n  (hs : ContMDiffOn I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (s x)) u) :\\n  ContMDiff I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (ψ x • s x))\", \"doc\": \"If $\\\\psi: M \\\\to \\\\mathbb{K}$ is $C^n$-differentiable on an open set $u \\\\subseteq M$ containing the topological support of $\\\\psi$, and the section $s: M \\\\to \\\\bigcup_{x \\\\in M} V_x$ is $C^n$-differentiabl\"}\n  {\"name\": \"ContMDiffWithinAt.const_smul_section\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"(hs : ContMDiffWithinAt I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (s x)) u x₀) :\\n  ContMDiffWithinAt I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (a • s x)) u x₀\", \"doc\": \"For a vector bundle over a manifold modeled on a model space $ I $ with fibers modeled on a normed vector space $ F $ over a nontrivially normed field $ \\\\mathbb{K} $, if a section $ s $ is $ C^n $-dif\"}\n  {\"name\": \"isSMulRegular_iff_mem_nonZeroSMulDivisors\", \"module\": \"Mathlib.Algebra.GroupWithZero.NonZeroDivisors\", \"type\": \"{M : Type*} [AddGroup M] [DistribMulAction M₀ M] {m₀ : M₀} : IsSMulRegular M m₀ ↔ m₀ ∈ nonZeroSMulDivisors M₀ M\", \"doc\": \"For an element $ m_0 $ in a monoid $ M_0 $ with a distributive multiplicative action on an additive group $ M $, the scalar multiplication by $ m_0 $ is injective if and only if $ m_0 $ is a non-zero \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent/germ injectivity and abstract injective-resolution cohomology do not imply canonical-bundle cohomology injectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity theorem for adjoint line bundle cohomology without ampleness using cyclic root covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.h1Cotangentι_injective\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Injective ⇑Algebra.Extension.h1Cotangentι\", \"doc\": \"The canonical linear map from the first cotangent cohomology module $ H^1 = \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ to the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ in an $ R $-algebra extension is injective.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Injective ⇑P.cotangentComplexAux\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra with finite generating set $ \\\\sigma $, the cotangent complex auxiliary map $ \\\\mathrm{cotangentComplexAux} : \\\\mathrm{Cotangent}(P) \\\\to \\\\sigma \\\\to\"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] {n : ℕ} [inst_5 : Fact (0 < n)],\\n  Function.Injective ⇑IsDedekindDomain.selmerGroup.fromUnitLift\", \"doc\": \"The group homomorphism from the quotient group $ R^\\times/(R^\\times)^n $ to the Selmer group $ K^\\times/(K^\\times)^n $, defined by lifting units modulo $ n $-th powers in a Dedekind domain $ R $ with frac\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_app_injective\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : ↑Y.affineOpens) [AlgebraicGeometry.QuasiCompact f],\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.toImage f)\\n          ((TopologicalSpace.Opens.map (AlgebraicG\", \"doc\": \"For a quasi-compact morphism $ f $ of schemes, the induced map on sections over the preimage of an open subset $ U $ under the inclusion of the image subscheme is injective, i.e., $ f.\\text{toImage}.\\\\t\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f : R), Function.Injective ⇑(AlgebraicGeometry.StructureSheaf.toBasicOpen R f)\", \"doc\": \"The canonical ring homomorphism from the localization $R_f$ of a commutative ring $R$ at an element $f$ to the ring of sections $\\\\mathcal{O}(D(f))$ in the structure sheaf over the basic open set $D(f)\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Function.Injective ⇑P.toExtension.cotangentComplex\", \"doc\": \"The cotangent complex map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ is injective for a submersive presentation of an $R$-algebra $S$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"The canonical morphism from the glued scheme constructed via colimit from the gluing data of an open cover $\\\\mathcal{U}$ to the original scheme $X$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_injective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m →\\n    0 < m →\\n      Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec 𝒜\", \"doc\": \"The continuous map toSpec from the projective spectrum Proj(A) to the prime spectrum Spec(A^0_f) of the degree-zero component of the homogeneous localization at f is injective when f is a homogeneous \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent/germ injectivity and abstract injective-resolution cohomology do not imply canonical-bundle cohomology injectivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kodaira-vanishing",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1.",
+   "via": [
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-kollar-smooth-divisor-injectivity",
+  "worker": "stage1",
+  "summary": "No exact project attachment or Mathlib match. Preserved the full statement, including empty divisor, dimension zero and arbitrary algebraically closed characteristic-zero field. Split into the cyclic root-cover character calculation, first Hodge differential vanishing, residue computation, the cohomology exact sequence, and functorial Serre duality; three statement-only supporting nodes. Differential maps are only F-linear; no connectedness is imposed on the root cover. Popa source remains WANTED locally.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Realizes the supporting injectivity argument for Kodaira by the root-cover/Hodge/residue/Serre-duality proof of Popa 1.6.6.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-cohomology",
+    "why": "Its statement explicitly includes the long exact sequence for global-sections cohomology of a short exact module sequence; this generic cohomology tool is not supplied by the ctf-stability unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-5c865b03d",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-5c865b03d (reviewer sub-agent of L); spot-checked: Read the item and all 3 new nodes in full. Checked them against Popa (Harvard notes, fetched read-only, local copy still WANTED; proof_origin is agent): §1.6 p.22, Def 1.6.3, Lemma 1.6.4, Prop 1.6.5, Thm 1.6.6 and Lemma 1.6.7 with proofs; and against Stacks 0FVV/0FVX/0FW0. The item statement is unchanged from base, and live and side-live are still unsplit. Steps: (1) D=∅ case and nonzerodivisor local equations from integrality; (2) the cover node gives the character-1 block H^q(∇_1) of H^q(W,d), and the Hodge node gives H^q(W,d)=0; (3) local check d(bt)=(db+(b/m)du/u)t, so r=m·res∘∇_1, which matches Popa 1.6.7; (4) the long exact sequence of 0→L^{-(m+1)}→L^{-1}→L^{-1}⊗O_D→0 gives surjectivity in every degree; (5) the variance of v^∨ and the canonical biduality isomorphisms check out, precomposition with a surjection is injective, and j>n is covered by the vanishing clause. Cover node: rank-m algebra; smoothness via u∉m^2 on smooth D; log eigensheaf decomposition and ∇_a formula verified locally. The Hodge and Serre-duality nodes are true in the generality stated. Not duplicates: thm-sc-serre-duality-curve (dimension ≤1), the flag equivariant pairing, the derived dualizing nodes, and the sbc root-model nodes. Edge cases checked: n=0, D=∅, m=2, disconnected W, j>n. The pqf-def-cohomology tool use is accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KollarSmoothDivisorInjectivity",
+  "declaration": "AlgebraicGeometry.kollar_smooth_divisor_injectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/KollarSmoothDivisorInjectivity.lean",
+  "statement": "theorem kollar_smooth_divisor_injectivity (F : Type u) [Field F] [IsAlgClosed F] [CharZero F] (Y : Scheme.{u}) (f : Y ⟶ Spec (.of F)) (n : ℕ) [SmoothOfRelativeDimension n f] [IsProjective f] [GeometricallyIntegral f] (L : Y.Modules) [L.IsInvertible] (m : ℕ) (hm : 2 ≤ m) (s : 𝟙_ Y.Modules ⟶ L.tensorPow m) (hs : s ≠ 0) (hD : Smooth (s.zeroLocus.subschemeι ≫ f)) (j : ℕ) : Function.Injective ((RingedSpace.moduleCohomology Y.toRingedSpace j).map ((ρ_ (Scheme.Modules.exteriorSheaf f.relativeDifferentials n ⊗ L)).inv ≫ ((Scheme.Modules.exteriorSheaf f.relativeDifferentials n ⊗ L) ◁ s) ≫ (α_ (Scheme.Modules.exteriorSheaf f.relativeDifferentials n) L (L.tensorPow m)).hom))",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fbfca734",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and Popa Thm 1.6.6: F alg. closed char 0 at universe u; Y over Spec F with SmoothOfRelativeDimension n, IsProjective, GeometricallyIntegral; ω = exteriorSheaf f.relativeDifferentials n (∧^0 = O); L invertible; m ≥ 2; s : 𝟙 ⟶ L.tensorPow m, s ≠ 0 (necessary hypothesis); Smooth (zeroLocus.subschemeι ≫ f), empty divisor allowed; all j : ℕ; injectivity of moduleCohomology.map of ρ⁻¹ ≫ (ω⊗L)◁s ≫ α, which is local multiplication by s, target definitionally ω⊗L^{m+1} via tensorPow_succ. The Y.Modules tensor is the same Mathlib construction as the def-pur record (accepted convention). Statement field verbatim. Not landed live; no duplicate found. No hollow definition, sorry only, docstrings carry source place and 5 proof steps. Edge cases n=0, D=∅, m=2, j>n, Y≠∅ checked. Advisory: CochainTensorUniverses import only serves the def-pur record. No files changed, no compile run."
+ }
+}

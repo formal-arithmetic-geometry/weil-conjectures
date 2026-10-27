@@ -186,7 +186,42 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-module-category",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.isLimitKernelFork",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Abelian",
+     "lines": [
+      84,
+      95
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.isLimitKernelFork",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.Abelian",
+     "lines": [
+      86,
+      97
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "Sheaf.CategoryTheory.ModuleObjects.KernelStructure",
   "declaration": "CategoryTheory.Mod.exists_kernel_module_structure",
@@ -218,5 +253,26 @@
    "CategoryTheory.Mod.exists_kernel_module_structure"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal C$ be a preadditive monoidal category whose tensor product is additive in\neach variable, and let $\\mathcal R$ be a monoid object of $\\mathcal C$. Let\n$f\\colon M\\to N$ be a morphism of $\\mathcal R$-module objects ([det-def-sfb-module-objects-definition])\nwhose underlying morphism has a kernel $\\iota\\colon K\\to M$ in $\\mathcal C$. Then there is\na unique morphism $\\gamma_K\\colon\\mathcal R\\otimes K\\to K$ with\n$\\iota\\circ\\gamma_K=\\gamma_M\\circ(\\mathcal R\\otimes\\iota)$. It is an action of\n$\\mathcal R$ on $K$, and $\\iota\\colon(K,\\gamma_K)\\to M$ is a kernel of $f$ in\n$\\Mod_{\\mathcal R}(\\mathcal C)$.",
+  "proof": [
+   {
+    "text": "The tensor product is additive in each variable, so $\\mathcal R\\otimes0=0$. Hence\n$$\nf\\gamma_M(\\mathcal R\\otimes\\iota)=\\gamma_N(\\mathcal R\\otimes f\\iota)=\\gamma_N(\\mathcal R\\otimes0)=0 .\n$$\nSo $\\gamma_M(\\mathcal R\\otimes\\iota)$ factors uniquely through $\\iota$, which gives\n$\\gamma_K$. The unit and associativity axioms for $\\gamma_K$ hold after composition with the\nmonomorphism $\\iota$, because they hold for $\\gamma_M$. Hence they hold for $\\gamma_K$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Let $g\\colon L\\to M$ be a morphism of module objects with $fg=0$, and let\n$h\\colon L\\to K$ be its factorization in $\\mathcal C$, so $\\iota h=g$. Then\n$$\n\\iota h\\gamma_L=g\\gamma_L=\\gamma_M(\\mathcal R\\otimes g)\n=\\gamma_M(\\mathcal R\\otimes\\iota)(\\mathcal R\\otimes h)=\\iota\\gamma_K(\\mathcal R\\otimes h).\n$$\nSince $\\iota$ is a monomorphism, $h$ is a morphism of module objects. It is unique because\n$\\iota$ is a monomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-unramified-diagonal-singleton-field-cover",
+ "kind": "statement",
+ "title": "Etale field cover of a reduced locally Noetherian singleton stack",
+ "statement": "Let $S$ be a scheme and $\\mathcal Z$ a reduced locally Noetherian algebraic stack over $S$ such that $|\\mathcal Z|$ has exactly one point. Assume the relative diagonal $\\Delta_{\\mathcal Z/S}$ is unramified [def-weil-unramified-morphism], meaning that each scheme base change, on etale scheme charts of its algebraic-space source, is unramified. There are a field $k$ [def-weil-field] and a representable-by-algebraic-spaces surjective etale morphism $z:\\operatorname{Spec}k\\to\\mathcal Z$ [def-weil-etale-morphism]. No Noetherian hypothesis on $S$ or perfectness hypothesis on $k$ is imposed. An algebraic stack over $S$ means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; stack, 2-fibre product, and representability use [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space], and smooth uses [def-sbc-smooth-morphisms]. Its point set consists of field-valued objects modulo isomorphism over a common field extension. A stack is reduced and locally Noetherian when it admits a smooth surjective scheme atlas which is reduced and locally Noetherian [pqf-def-locnoeth]; reduced means every local ring has no nonzero nilpotents. Properties of representable morphisms are tested after scheme base change on etale scheme charts.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06N0 (lemma-DM-residual-gerbe); relative-base formulation by Tag 050N (lemma-separated-implies-morphism-separated), (1). DM here means unramified diagonal, not an already constructed etale atlas."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "pqf-def-locnoeth",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Apply the flat-field-cover lemma to obtain a field $K$ and a representable surjective flat locally finitely presented map $a:U=\\operatorname{Spec}K\\to\\mathcal Z$. The given smooth atlas also implies fppf descent for $\\mathcal Z$. Form its self-relation $R=U\\times_{\\mathcal Z}U$ with source, target and composition given by the two projections and composition of the displayed isomorphisms. The fppf presentation lemma gives flat locally finitely presented $s,t:R\\to U$ and an equivalence $[U/R]\\simeq\\mathcal Z$. In particular $s,t$ are locally of finite type by chartwise calculus. No etale atlas is used.",
+   "uses": [
+    "lem-sfb-singleton-stack-flat-lfp-field-cover",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0, opening: 06MP, 02ZY and 04WY."
+   }
+  },
+  {
+   "text": "The map $j=(s,t):R\\to U\\times_SU$ is exactly the scheme base change of $\\Delta_{\\mathcal Z/S}$ by $a\\times a$, so it is unramified by the hypothesis. The field-groupoid identity-component lemma applies: $R$ is a separated scheme, $j$ is separated and locally quasi-finite, and the identity component $P=\\operatorname{Spec}B$ is open and closed in $R$. Its operations restrict to a groupoid, both projections to $U$ are finite locally free, and $P\\to U\\times_SU$ is a monomorphism. These are statements about the relative relation over $S$, so no passage to an absolute diagonal or hypothesis on $S$ is needed.",
+   "uses": [
+    "lem-sfb-field-groupoid-identity-finite-relation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0, first paragraph: stabilizer dimension, 06FF, 06LZ, 06LH, and the component containing the identity."
+   }
+  },
+  {
+   "text": "Apply division by a finite flat subrelation to $(U,R,P)$. Its hypotheses hold by step 2 and affineness of $U$. Obtain $q:U\\to\\bar U=U/P$, finite locally free and surjective, and a scheme groupoid $(\\bar U,\\bar R)$ whose restriction along $q$ is $(U,R)$. The affine finite-flat-relation quotient theorem identifies $\\bar U$ with $\\operatorname{Spec}k_0$ for the equalizer $k_0=\\{b\\in K:s^\\sharp(b)=t^\\sharp(b)\\text{ in }B\\}$. This identification is compatible with $q$, because both objects represent the same fppf quotient. The equalizer contains $0,1$ and is closed under ring operations. If $b\\ne0$ belongs to it, both images are equal units, so their inverses are equal and $b^{-1}$ also belongs to it. Thus $k_0$ is a field. Notice that these are the $P$-invariants, not the invariants of the whole relation $R$.",
+   "uses": [
+    "lem-sfb-divide-finite-flat-subgroupoid",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "def-weil-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0, finite-flat quotient and invariant-field argument; bootstrap.tex 04S4; groupoids.tex 03BM."
+   }
+  },
+  {
+   "text": "The map $q$ is an fppf cover. The restriction equivalence gives $[\\bar U/\\bar R]\\simeq[U/R]\\simeq\\mathcal Z$, compatibly with the maps from $U$. The map $R\\to\\bar R$ is the base change of $q\\times q$ along $(\\bar s,\\bar t)$, hence is surjective flat locally finitely presented by chartwise base change and composition. To check flatness and local finite presentation of $\\bar s$, use the target cover $q:U\\to\\bar U$ and the source cover $R\\to\\bar R\\times_{\\bar U,\\bar s}U$; the latter is the base change of the other copy of $q$ in the restriction formula. The resulting composite to $U$ is $s$. The source-and-target locality lemma descends both properties. The same argument with $t$ proves that $\\bar t$ is flat and locally finitely presented. This explicitly handles both copies of $q$ rather than identifying $s$ itself with a single target base change of $\\bar s$.",
+   "uses": [
+    "lem-sfb-divide-finite-flat-subgroupoid",
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-representable-fppf-etale-open-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0, second and third paragraphs: 04S4, 046T and descent of the projections."
+   }
+  },
+  {
+   "text": "Pull back the unit $\\bar e:\\bar U\\to\\bar R$ by the fppf cover $R\\to\\bar R$. The unit clause of the division lemma identifies its preimage $R\\times_{\\bar R,\\bar e}\\bar U$ with $P$, and the resulting map to $R$ is the original inclusion of the subrelation: arrows above an identity are precisely the arrows of $P$, which is $U\\times_{\\bar U}U$. This identification respects both projections by the kernel-pair conclusion of step 3. The inclusion $P\\to R$ is open, so target-local descent for open immersions shows that $\\bar e$ is open. The open-unit groupoid lemma, applied to the flat locally finitely presented projections proved in step 4, now gives that $\\bar s,\\bar t$ are etale.",
+   "uses": [
+    "lem-sfb-divide-finite-flat-subgroupoid",
+    "lem-sfb-representable-fppf-etale-open-descent",
+    "lem-sfb-groupoid-open-unit-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0, cartesian unit square and final paragraph (04R9, 02G5, 02GV)."
+   }
+  },
+  {
+   "text": "The fppf groupoid presentation lemma makes $b:\\bar U\\to[\\bar U/\\bar R]\\simeq\\mathcal Z$ representable, surjective, flat and locally finitely presented, with self-relation $\\bar R$. After base change along this cover $b$, the morphism $b$ is one of $\\bar s,\\bar t$, which are etale by step 5. Target-local descent of etaleness therefore proves that $b$ is etale. By step 3 its source is the spectrum of the field $k_0$, giving the required morphism $z$. The construction used local Noetherianity only to obtain the initial finitely presented field cover; it required no perfectness of either field and no Noetherianity of $S$.",
+   "uses": [
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0, concluding application of 04XD (lemma-check-property-covering)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-singleton-stack-flat-lfp-field-cover",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-field-groupoid-identity-finite-relation",
+  "lem-sfb-divide-finite-flat-subgroupoid",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "def-weil-field",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-sfb-groupoid-open-unit-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06N0 (lemma-DM-residual-gerbe), entire proof, formulated directly over S; correcting R-invariant to P-invariant in the quotient-field sentence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced locally Noetherian algebraic stack with one point and unramified diagonal admits a surjective etale morphism from the spectrum of a field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results concern schemes or commutative rings, not this algebraic-stack assertion; scheme specialization does not construct the required stack or field cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional reduced Noetherian DM stack has an etale field cover without a perfectness assumption",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[IsLocallyNoetherian X] (h : topologicalKrullDim X ≤ 0) : IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"Ring.KrullDimLE.isField_of_isDomain\", \"module\": \"Mathlib.RingTheory.KrullDimension.Zero\", \"type\": \"[IsDomain R] : IsField R\", \"doc\": \"If $ R $ is a commutative semiring that is an integral domain and has Krull dimension zero (i.e., its prime spectrum contains no nontrivial chains of prime ideals), then $ R $ is a field. This follows\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"PerfectField.ofCharZero\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"[CharZero K] : PerfectField K\", \"doc\": \"Any field with characteristic zero is a perfect field.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results concern schemes or commutative rings, not this algebraic-stack assertion; scheme specialization does not construct the required stack or field cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results concern schemes or commutative rings, not this algebraic-stack assertion; scheme specialization does not construct the required stack or field cover"
+  },
+  {
+   "tool": "grep",
+   "query": "residualGerbe|residual_gerbe|AlgebraicStack|DeligneMumford",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results concern schemes or commutative rings, not this algebraic-stack assertion; scheme specialization does not construct the required stack or field cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced locally Noetherian algebraic stack with singleton point space has an etale field atlas if its diagonal is unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zero dimensional Deligne Mumford stack admits etale cover by spectrum of a field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|residualGerbe",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced locally Noetherian algebraic stack with singleton point space has an etale field atlas if its diagonal is unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zero dimensional Deligne Mumford stack admits etale cover by spectrum of a field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|residualGerbe",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-point-etale-self-relation",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack.",
+   "via": [
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unramified-diagonal-singleton-field-cover",
+  "worker": "stage1",
+  "summary": "Followed 06N0 through a flat lfp field presentation, identity finite subrelation, division of the groupoid, fppf descent of projections and open unit, and etaleness from the open unit. Added six statement-only groupoid/stack/descent inputs after DAG, blueprint, Lean and recorded Mathlib searches. Kept the relative diagonal over S throughout. Corrected the source quotient-field wording to P-invariants and made both factors of the restriction base change explicit. No item statement change.",
+  "blueprint": "Inherited null ancestor, confirmed by blueprint_refs.py ancestor; retained its precise place and via chain. Realizes the finite-type-point/self-relation supporting input to the unramified-diagonal atlas criterion in the alteration/moduli prerequisite of det-thm-sf-ctf-stability-direct-images (3). Latest blueprint sk-thm-sf-ctf-stability direct-images proof read; no change to its route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-finite-flat-affine-relation-quotient",
+    "why": "Generic affine finite locally free equivalence-relation quotient with explicit invariant ring; no node of this unit supplies that coordinate formula. This implements exactly the 03BM invocation in 06N0."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-finite-flat-affine-relation-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-2829ee1e1",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-2829ee1e1 (reviewer sub-agent of L); spot-checked: Read 06N0 in full and every cited source: 06MP, 06FF, 06LZ, 06LH, 04S4 (statement and proof), 04WY, 04WZ, 04X0, 04M9, 046S/046T, 04XD, 04R9; tags 041W/041T/041X/042B, 06ET/06EV and 02G5/02GV checked at their labels. The item statement is unchanged and matches the live and side-live clones; the item is still unsplit there, and no new id or duplicate tag exists live or side-live. The worker's source-error claim is right: 06N0 should say P-invariants, not R-invariants. In the Galois pair groupoid U/P = Spec L while the R-invariants are k. Steps 1-4 and 6 check out: Z is an fppf stack via the étale-to-fppf descent node, j is the base change of the diagonal along a×a, and flat/lfp descent for s̄ uses two covers with the composite equal to s. Three repairs. (1) C3/C4 in step 5: the preimage of ē is U×_ŪU for any restriction, but as delivered the 04S4 node's statement does not say that R→R̄ sends P into the unit. Its statement would allow a kernel conjugate to P. The fact is in the 04S4 proof (descent datum p⁻¹∘r∘p') and in the 06N0 square, so I added a unit clause to lem-sfb-divide-finite-flat-subgroupoid (P = R×_{R̄,ē}Ū, plus the image characterisation), and step 5 now cites it. (2) lem-sfb-field-groupoid-identity-finite-relation listed def-sfb-stable-pointed-moduli-groupoids as a statement dependency that its statement never uses; removed. (3) The item step-5 wording is adjusted to match (1). New nodes tested on small cases: Galois, purely inseparable (P non-reduced), B of a finite étale group, and the open-unit étale criterion. The new nodes are not duplicates of the smooth-groupoid, unramified-descent, smooth-cover-descent or affine-quotient nodes. The lem-a1 quotient tool use is accepted as generic 03BM. Every batch-5 flag is a general definition (algebraic space, stack conventions, projective bundle) or generic flat descent, not the trace formula or Poincaré duality, so none forces a return. No SGA, no cycle, and proof_deps equals the union of the step uses.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedDiagonalSingletonFieldCover",
+  "declaration": "CategoryTheory.exists_unramified_diagonal_singleton_field_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedDiagonalSingletonFieldCover.lean",
+  "statement": "theorem exists_unramified_diagonal_singleton_field_cover {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hstack : IsModuliStack F) (hdiag : HasAlgebraicSpaceDiagonal F) (U : Over S) (atlas : BasedFunctor (discreteModuli (yoneda.obj U)) F) (hatlas : IsSmoothModuliAtlas F U atlas) (hreduced : ∀ x : U.left, _root_.IsReduced (U.left.presheaf.stalk x)) (hnoetherian : IsLocallyNoetherian U.left) (hsingleton : ∃ (K : Type u) (_ : Field K) (s : Spec (.of K) ⟶ S) (x : BasedFunctor (discreteModuli (yoneda.obj (Over.mk s))) F), ∀ (L : Type u) [Field L] (t : Spec (.of L) ⟶ S) (y : BasedFunctor (discreteModuli (yoneda.obj (Over.mk t))) F), ∃ (E : Type u) (_ : Field E) (e : Spec (.of E) ⟶ S) (i : Over.mk e ⟶ Over.mk s) (j : Over.mk e ⟶ Over.mk t), Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map i)).comp x) ((discreteModuliMap (yoneda.map j)).comp y))) (hunramified : HasUnramifiedModuliDiagonal F) : ∃ (K : Type u) (_ : Field K) (s : Spec (.of K) ⟶ S) (a : BasedFunctor (discreteModuli (yoneda.obj (Over.mk s))) F), ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ SpaceMapIsEtale Z T p ∧ SpaceMapIsSurjective Z T p",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-532a2c4dc",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: arbitrary S, IsModuliStack + HasAlgebraicSpaceDiagonal + IsSmoothModuliAtlas on a bound atlas that is stalkwise reduced and IsLocallyNoetherian, singleton = existential field point + common-extension 2-iso (identical to landed exists_singleton_stack_flat_lfp_field_cover), relative diagonal over S via HasUnramifiedModuliDiagonal (T ⨯ U in Over S, chartwise IsUnramified); conclusion: field K, a, pinned space base change with SpaceMapIsEtale ∧ SpaceMapIsSurjective. No extra hypotheses, universes free (fields in u, v/w free). Added stmt_deps def-sfb-algebraic-moduli-stack/def-sfb-open-moduli-substack are landed owners of the used decls; the other 9 dep records are identical to side-live; lean.statement verbatim; docstrings carry source place, blueprint tag and 6-step proof; sorry only; no duplicate found (grep SpaceMapIsEtale users, UnramifiedDiagonalEtaleAtlas is 06N3); report has Worker report + Second reading by Q49. Stacks tex not local; source judged via node record + stage-1 review. No compile (no change)."
+ }
+}

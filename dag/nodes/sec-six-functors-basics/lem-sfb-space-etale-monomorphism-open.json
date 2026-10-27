@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-space-etale-monomorphism-open",
+ "kind": "statement",
+ "title": "Etale monomorphisms of algebraic spaces are open immersions",
+ "statement": "Let $S$ be a scheme and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Suppose $f$ is etale [def-weil-etale-morphism], tested on scheme charts, and is a monomorphism of sheaves: for every $S$-scheme $T$, the map $X(T)\\to Y(T)$ is injective. Then $f$ is an open immersion, meaning that every scheme base change is an open immersion [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05W5 (lemma-etale-universally-injective-open), monomorphism specialization."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-sfb-space-chartwise-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix any $S$-scheme $T$ and morphism $y:h_T\\to Y$. The sheaf fibre product $E=X\\times_Yh_T$ is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. Let $g:E\\to h_T$ be its projection. Interpret the chartwise etale hypothesis as in [lem-trf-space-chartwise-etale-permanence]: for every representable etale scheme chart $U\\to X$, every scheme base change of $U\\to Y$ is an etale scheme morphism. This is the representable-etale condition on that composite, not on $f$. The base-change clause of that node makes $g$ chartwise etale. No representability of $f$ or $g$ has been assumed.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W5 (lemma-etale-universally-injective-open), scheme-base-change reduction, specialized to a monomorphism."
+   }
+  },
+  {
+   "text": "For every $S$-scheme $H$, the set $E(H)$ consists of pairs $(x,t)\\in X(H)\\times h_T(H)$ with $f_H(x)=y_H(t)$ in $Y(H)$. If two pairs have the same $t$, injectivity of $X(H)\\to Y(H)$ makes their $x$ entries equal. Thus $g$ is a monomorphism. In $E(H)\\times_{h_T(H)}E(H)$ the two entries are consequently equal. The diagonal $E\\to E\\times_{h_T}E$ therefore has inverse the first projection, naturally in $H$. For a scheme test $h_H\\to E\\times_{h_T}E$, pull back this inverse: the pullback of the diagonal is isomorphic over $h_H$ to $h_H$ itself, so is represented by $H$ with its identity map. This is a closed immersion by [def-weil-closed-immersion]: the whole target is closed in itself and the identity sheaf map is surjective. This verifies separatedness in the exact scheme-test form needed below.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 042M (lemma-monomorphism), 042N (lemma-monomorphism-separated), and lemma-base-change-monomorphism; the pair and diagonal arguments are written out."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-etale-space-locally-quasi-finite] to the chartwise etale map $g:E\\to T$. It is chartwise locally quasi-finite. Step 2 gives its diagonal as a closed immersion on every scheme test. The two hypotheses of [lem-a1-separated-locally-qf-space-representable] now hold, so there is a scheme $Z$ over $T$ and an isomorphism $h_Z\\cong E$ over $h_T$. This does not require $E$, $T$, or $g$ to be quasi-compact or Noetherian.",
+   "uses": [
+    "lem-a1-etale-space-locally-quasi-finite",
+    "lem-a1-separated-locally-qf-space-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W5 (lemma-etale-universally-injective-open), representability paragraph; Tag 03XU (lemma-etale-locally-quasi-finite) and Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme)."
+   }
+  },
+  {
+   "text": "Identify $E$ with $h_Z$ by the isomorphism of step 3, and write $p:Z\\to T$ for $g$. The scheme-source equivalence in [lem-trf-space-chartwise-etale-permanence] makes $p$ an etale scheme morphism; equivalently test its chartwise property on $\\operatorname{id}_Z$. By [def-weil-etale-morphism], $p$ is flat and locally of finite presentation. It is a monomorphism of schemes: if $a,b:H\\to Z$ satisfy $pa=pb$, this common composite gives $H$ its $S$-structure, both maps are $S$-morphisms, and the injectivity proved in step 2 gives $a=b$. Hence [lem-pe-flat-lfp-monomorphism-open] applies to $p$ and proves that it is an open immersion.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-weil-etale-morphism",
+    "lem-pe-flat-lfp-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025G (theorem-etale-radicial-open), implication (3) implies (1), the final scheme step of Tag 05W5; spaces-properties.tex Tag 03FR (definition-etale), agreement for scheme morphisms."
+   }
+  },
+  {
+   "text": "The open immersion $p:Z\\to T$ represents the sheaf projection $X\\times_Yh_T\\to h_T$ from step 1. Since $T\\to Y$ was arbitrary, every scheme base change of $f$ is represented by an open immersion of schemes [def-weil-open-immersion]. This is exactly the asserted open-immersion condition on $f$.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W5 (lemma-etale-universally-injective-open), scheme-base-change reduction, specialized to a monomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-pe-flat-lfp-monomorphism-open",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05W5 (lemma-etale-universally-injective-open), monomorphism specialization; Tags 042M, 042N, 03XU, 03XX and etale.tex Tag 025G."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Mm]ono|[Mm]ono.*[Ee]tale",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"80\", \"text\": \"  Precoverage.toGrothendieck_mono etalePrecoverage_le_proetalePrecoverage\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"83\", \"text\": \"  Precoverage.toGrothendieck_mono proetalePrecoverage_le_fpqcPrecoverage\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Basic.lean\", \"line\": \"183\", \"text\": \"instance [FormallyEtale R S] (M : Submonoid S) : FormallyEtale R (Localization M) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Basic.lean\", \"line\": \"253\", \"text\": \"  formallyEtale := Algebra.FormallyEtale.of_isLocalization (Submonoid.powers r)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\", \"line\": \"619\", \"text\": \"  rw [← Functor.mono_map_iff_mono skeletalEquivalence.functor]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale monomorphism of algebraic spaces is an open immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion ≤ CategoryTheory.MorphismProperty.monomorphisms AlgebraicGeometry.Scheme\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes, i.e., the property of being an open immersion is contained within the property of being a monomorphism for morphisms in th\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale injective maps of algebraic spaces are open embeddings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion =\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Topology.IsOpenEmbedding) ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] x => Function.Bijective ⇑x\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpenEmbedding\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying continuous map is a topological open embedding and the induced sheaf morphism yields isomorphisms of local rings on sta\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    (∀ (x : ↥X),\\n        ∃ U i,\\n          ∃ (x_1 : AlgebraicGeometry.IsOpenImmersion i),\\n            x ∈ AlgebraicGeometry.Scheme.Hom.opensRange i ∧\\n              AlgebraicGeometry.Is\", \"doc\": \"Let $ f: X \\\\to Y $ be a morphism of schemes. If $ f $ is injective and for every point $ x \\\\in X $, there exists an open immersion $ i: U \\\\to X $ with $ x \\\\in \\\\text{im}(i) $ such that the composition \"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.isEmbedding\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsPreimmersion f],\\n  Topology.IsEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a preimmersion of schemes, then the underlying continuous map $ f_{\\\\text{base}} : X \\\\to Y $ is a topological embedding in the category of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.base_embedding\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsPreimmersion f],\\n  Topology.IsEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, if $ f $ is a preimmersion, then the underlying continuous map $ f_{\\text{base}} : X \\to Y $ is a topological embedding, i.e., a homeomorphism onto its image.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale monomorphism of algebraic spaces is an open immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenImmersion ≤ MorphismProperty.monomorphisms Scheme.{u}\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes, i.e., the property of being an open immersion is contained within the property of being a monomorphism for morphisms in th\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.mono\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": Mono f\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": Mono f\", \"doc\": \"Every open immersion of locally ringed spaces is a monomorphism in the category of locally ringed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] : IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": Mono f\", \"doc\": \"Every open immersion of presheafed spaces is a monomorphism in the category of presheafed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Mono\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|of_flat_of_mono",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: scheme-level candidates only; the flat-lfp-mono theorem is the existing leaf lem-pe-flat-lfp-monomorphism-open",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale monomorphism of algebraic spaces is an open immersion",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+   "results": "1 hits: AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: scheme-level candidates only; the flat-lfp-mono theorem is the existing leaf lem-pe-flat-lfp-monomorphism-open"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale monomorphism of algebraic spaces is an open immersion",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion, AlgebraicGeometry.instIsSmoothOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: scheme-level candidates only; the flat-lfp-mono theorem is the existing leaf lem-pe-flat-lfp-monomorphism-open"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chartwise etale injective morphism between algebraic spaces is representable by open subschemes",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: scheme-level candidates only; the flat-lfp-mono theorem is the existing leaf lem-pe-flat-lfp-monomorphism-open"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-etale-atlas",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Etale monomorphisms of algebraic spaces are open immersions.",
+   "via": [
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-etale-monomorphism-open",
+  "worker": "stage1",
+  "summary": "Followed Stacks 05W5 after specialization to a sheaf monomorphism. On each scheme test the explicit pair calculation makes the diagonal an isomorphism, hence a closed immersion. Existing chartwise etale permanence, etale local quasi-finiteness, and separated local-quasi-finite representability reduce to the existing Mathlib flat-lfp-monomorphism leaf. No new nodes, no statement weakening, no Lean attachment. Repair of returned head dac31f00f34: retained the approved scheme-test argument, compared the retained item with the current unsplit live node, re-read every cited live statement, and verified all nine quotation pairs. Made the fibre-product compatibility explicit as f_H(x)=y_H(t); the delivery tool rebases this retained split onto the current live DAG for promotion by L. Renewed live-DAG repair after initial dry-run 5dbaf1e4a94: all current cited statements and quotation pairs rechecked; step 2 now explicitly identifies every scheme-test pullback of the diagonal with that test scheme, proving its representability as well as its closed-immersion property. Current-server repair on 2026-10-23: initial dry run 61a8f6aa625 passed; re-read all current cited statements, including the October 22 re-splits of chartwise permanence and separated locally quasi-finite representability. Step 1 now spells out the quantified scheme-test meaning of the chart composite, so no representability of f is smuggled into the base-change reduction. All nine current citation quotes remain exact; the original statement and proof route are preserved.",
+  "blueprint": "Realizes the inherited from.place: det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction and its unramified-diagonal/etale-atlas prerequisite, specifically the sentence that an etale monomorphism is an open immersion. The ancestor command currently prints None; the inherited blueprint.from.node and via chain are retained. Whole-blueprint searches for etale monomorphism, monomorphism, 05W5, quasi-finite separated and etale locally quasi-finite found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Uses only the generic algebraic-space fibre-product existence statement, not the representable-etale covering specialization; the unit supplies no such foundation."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Uses chartwise etale base change and its scheme-source equivalence, generic foundations not supplied by this unit."
+   },
+   {
+    "node": "lem-a1-etale-space-locally-quasi-finite",
+    "why": "Uses etale local quasi-finiteness over a scheme, a Stacks foundation not supplied by this unit."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Uses separated locally quasi-finite algebraic-space representability over a scheme, the same foundation invoked in the source 05W5 proof; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-a1-separated-locally-qf-space-representable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-714d87f30",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-714d87f30 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 5-step split of Stacks 05W5 (spaces-morphisms.tex lemma-etale-universally-injective-open, read at lines 10729-10758), with no new nodes. Statement, stmt_deps, source and blueprint record are unchanged. Compared with the earlier head 668b6a38, only step 1 and step 2 are reworded; both are correct clarifications. Step checks: (1) 02X2 fibre product: E is an algebraic space; the chartwise-etale base-change clause makes g chartwise etale. (2) Elementary: injectivity of f_H makes g a monomorphism, so the diagonal is an isomorphism; every scheme-test pullback is represented by id_H, a closed immersion by def-weil-closed-immersion. (3) 03XU gives chartwise locally quasi-finite; both hypotheses of 03XX (chartwise lqf and closed diagonal on every scheme test) hold, so h_Z is isomorphic to E over T, with no quasi-compact or Noetherian assumption. (4) The scheme-source equivalence plus base change along id_T makes p:Z->T etale, hence flat and lfp. Absolute monomorphism: give H its S-structure through T, then injectivity on H-points gives a=b. The 025G Mathlib leaf (IsOpenImmersion.of_flat_of_mono) assumes exactly flat, lfp and mono. (5) The isomorphism is over T, which is the item's definition of open immersion. The 8 proof_deps equal the union of the steps' uses. No cycle: the cited closure has 902 nodes and does not contain the item. No duplicate: I compared lem-a1-space-open-chart-tests (the converse), lem-sfb-unramified-space-open-diagonal and lem-trf-etale-open-chart-morphism-descent. Edge cases checked: empty X, identity, proper open subspace, two-sheet cover excluded, nonreduced T, non-quasi-compact open. Batch-5 flag: the four flagged citations (02X2/03FR-03FU/03XU/03XX) are generic algebraic-space foundations. They reach sec-trace-formula only through def-trf-algebraic-space, which the item's statement already cites, and the descent nodes under it. The closure has no assumption leaf, no Poincare node and no trace-formula theorem, so this is not a step of the trace formula or Poincare duality proofs; accepted, as are the four tool_uses. No SGA. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleMonomorphismOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_monomorphism_is_open_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMonomorphismOpen.lean",
+  "statement": "theorem etale_monomorphism_is_open_immersion {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : IsChartwiseEtale f) (hmono : ∀ (T : Over S), Function.Injective (fun x : yoneda.obj T ⟶ X.obj.obj => x ≫ f.hom.hom)) : ∀ (T : Over S) (y : yoneda.obj T ⟶ Y.obj.obj), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (Limits.pullback.snd f.hom.hom y)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b4dc7b94",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery of f986efa53158, which was returned for H2. Lean module is byte-identical. The only change to the item node adds def-sfb-space-chartwise-etale-morphism to stmt_deps; that node is landed and owns IsChartwiseEtale (EnlargedEtaleRingedSite.lean:47). Statement re-checked clause by clause against the node and Stacks 05W5: S, X, Y; hf IsChartwiseEtale; hmono injectivity on S-scheme points via Yoneda; conclusion that every scheme base change is represented by an open immersion, an equivalent form of IsRepresentableWith on f.hom.hom. No extra assumptions or universe restrictions. Edge cases (empty X, empty T, identity, non-qc opens, two-sheet cover excluded) are covered. sorry-only, docstrings give source and blueprint, lean.statement verbatim, private proof-plan imports exist, report sections present. No compile since no file changed. Advisory only: the conclusion could be stated directly on f.hom.hom."
+ }
+}

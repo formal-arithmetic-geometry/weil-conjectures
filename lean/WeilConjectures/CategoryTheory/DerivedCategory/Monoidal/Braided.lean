@@ -8,24 +8,19 @@ module
 public import Mathlib.Algebra.Homology.BifunctorFlip
 public import Mathlib.CategoryTheory.Monoidal.Braided.Multifunctor
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+import WeilConjectures.CategoryTheory.Monoidal.DerivedSymmetric
 
 /-!
-# The derived category of a braided (symmetric) category is braided (symmetric)
+# The braiding of the derived tensor product, and the symmetry of `D(C)`
 
 Let `C` be an abelian monoidal category satisfying the hypotheses under which the derived
 category `D(C)` is monoidal for the derived tensor product, i.e. those of
 `WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal`: the derived tensor
 product is the binary left derived functor of the tensor product on
-`K(C) := HomotopyCategory C (ComplexShape.up ℤ)`. This file shows that if moreover `C` is
-braided, respectively symmetric, then so is `D(C)`: the braiding is constructed, the hexagon
-identities and the symmetry axiom are left as `sorry`.
-
-The only new mathematical input is the braiding on `C`: no further K-flat hypothesis is
-needed, the derived monoidal structure being taken as a hypothesis here
-(`DerivedCategory.Qh.HasDerivedMonoidalCategory _`). In practice that hypothesis, together
-with the `GradedObject` hypotheses below, is what `C` Grothendieck abelian, monoidal
-preadditive and monoidal closed with functorial flat resolutions provides; none of those is
-needed for the transport of the braiding itself, so they are not assumed.
+`K(C) := HomotopyCategory C (ComplexShape.up ℤ)`. This file constructs, for `C` braided, the
+braiding isomorphisms of `K(C)` and of `D(C)` as natural isomorphisms of bifunctors, and states
+that `D(C)` is symmetric if `C` is (the symmetry law is left as `sorry`).
 
 The construction follows the chain
 `C braided ⟹ Koszul braiding on CochainComplex C ℤ ⟹ K(C) braided ⟹ D(C) braided`:
@@ -37,31 +32,27 @@ The construction follows the chain
    (`HomologicalComplex.braiding`): the braiding of `C` transported through `mapBifunctor`
    (`HomologicalComplex.mapBifunctorIsoOfIso`), followed by the flip isomorphism
    `HomologicalComplex.mapBifunctorFlipIso` of the total complex, which carries the sign
-   `σ (p, q) = (-1) ^ (p * q)` of the complex shape sign formalism. The braided axioms
-   reduce on homogeneous summands to the hexagons in `C` together with
-   `(-1) ^ (p * (q + r)) = (-1) ^ (p * q) * (-1) ^ (p * r)` and its mirror image, and the
-   symmetry axiom to the one in `C`, since `(-1) ^ (p * q) * (-1) ^ (q * p) = 1`.
+   `σ` of the complex shape sign formalism.
 2. **Descent to the homotopy category.** The braiding is an honest isomorphism of complexes,
    natural in both variables, so it descends along the quotient functor
-   (`HomotopyCategory.MonoidalCategory.braiding`, via `Quotient.natIsoLift₂`). The hexagons
-   and the symmetry relation are equalities of chain maps, preserved by the quotient functor;
-   they are `sorry`ed (`HomotopyCategory.MonoidalCategory.braidedCategory`).
+   (`HomotopyCategory.MonoidalCategory.braiding`, via `Quotient.natIsoLift₂`).
 3. **Transport through the derived tensor.** Write `T := curriedTensor K(C)` and
    `T^L := curriedTensor D(C)`, so that `T^L` is the binary left derived functor of `T`. A
    morphism `τ : T.flip ⟶ T` lifts to `T^L.flip ⟶ T^L` by the binary left derived lifting
-   property (`DerivedMonoidal.flipLift`); no statement that `T^L.flip` is left derived is
-   needed. The derived braiding `DerivedMonoidal.braiding` is the lift of the braiding of
-   `K(C)`, evaluated at swapped arguments, with inverse the lift of its inverse; the two are
-   mutually inverse by binary left derived uniqueness (`Functor.leftDerived₂_ext`). The two
-   hexagons (`sorry`ed) are identities of natural transformations in three variables, hence
-   follow by *ternary* left derived extensionality, as in the coherence proofs of the derived
-   monoidal structure; the symmetry axiom (`sorry`ed) is an identity in two variables, so
-   binary extensionality suffices and no further derivability hypothesis is needed.
+   property (`DerivedMonoidal.flipLift`). The derived braiding `DerivedMonoidal.braiding` is
+   the lift of the braiding of `K(C)`, evaluated at swapped arguments, with inverse the lift of
+   its inverse; the two are mutually inverse by binary left derived uniqueness
+   (`Functor.leftDerived₂_ext`).
 
-Step 3 is formulated abstractly: a braided source together with a localization carrying a
-derived monoidal structure yields a braided derived monoidal category
-(`DerivedMonoidal.braidedCategory`). The instance on `D(C)` is its application to
-`DerivedCategory.Qh`.
+## Implementation notes
+
+No braided structure is declared here. For a general complex shape `c`, the sign of
+`TotalComplexShapeSymmetry c c c` is only determined up to a global sign, and replacing `σ` by
+`-σ` breaks the hexagon identities, so the braiding of `K(C)` is only claimed to be braided for
+`c = ComplexShape.up ℤ`, where this is proved (`HomotopyCategory.braidedCategory`). The braided
+structure on `D(C)` is the proved `DerivedCategory.braidedCategory'` (see
+`CategoryTheory.DerivedMonoidal.braidedCategory'`); it is not a global instance, and the
+symmetric structure `DerivedCategory.symmetricCategory` built on it is a `def` as well.
 -/
 
 @[expose] public section
@@ -237,12 +228,6 @@ noncomputable def braiding : bifunctor C c ≅ (bifunctor C c).flip :=
         (HomologicalComplex.braiding_hom_naturality f₁ (𝟙 K₂))).trans
           ((quotient C c).map_comp _ _))))
 
-/-- The homotopy category `K(C)` of a braided category `C` is braided. The hexagon identities
-are `sorry`ed: they hold already for the Koszul braiding on complexes, by the hexagons in `C`
-and `(-1) ^ (p * (q + r)) = (-1) ^ (p * q) * (-1) ^ (p * r)`. -/
-noncomputable instance braidedCategory : BraidedCategory (HomotopyCategory C c) :=
-  .ofBifunctor (braiding C c) sorry sorry
-
 end HomotopyCategory.MonoidalCategory
 
 /-! ### Transport of a braiding through a derived monoidal structure -/
@@ -299,40 +284,28 @@ noncomputable def braiding : bifunctor L W ≅ (bifunctor L W).flip where
     ext X₁ X₂
     exact NatTrans.congr_app (NatTrans.congr_app key X₂) X₁
 
-/-- A derived monoidal category of a braided category is braided. The hexagon identities are
-`sorry`ed: they follow from those in `C` by ternary left derived extensionality. -/
-noncomputable instance braidedCategory : BraidedCategory (DerivedMonoidal L W) :=
-  .ofBifunctor (braiding L W) sorry sorry
-
 end CategoryTheory.DerivedMonoidal
 
 /-! ### The derived category -/
 
 namespace DerivedCategory
 
-variable (C : Type u) [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
-  [MonoidalCategory C] [MonoidalPreadditive C]
-  [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
+variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
 
-/-- The derived category of a braided abelian monoidal category is braided for the derived
-tensor product: the braiding of `C` induces the Koszul braiding on complexes, which descends
-to `K(C)` and is transported to `D(C)` by the universal property of the binary left derived
-functor. -/
-noncomputable instance braidedCategory [BraidedCategory C] :
-    BraidedCategory (DerivedCategory C) :=
-  inferInstanceAs (BraidedCategory (DerivedMonoidal Qh
-    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))))
+local instance hasColimitsOfSize_symmetricCategory : HasColimitsOfSize.{0, 0} C :=
+  hasColimitsOfSizeShrink C
+
+variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
+  [MonoidalPreadditive C] [SymmetricCategory C] [Abelian.HasFunctorialFlatResolution C]
 
 /-- The derived category of a symmetric abelian monoidal category is symmetric for the
-derived tensor product. The braiding is the one of `DerivedCategory.braidedCategory`; only
-the symmetry axiom has to be proved, and being an identity in two variables, it follows from
-the symmetry of `K(C)` by binary left derived extensionality. -/
-noncomputable instance symmetricCategory [SymmetricCategory C] :
-    SymmetricCategory (DerivedCategory C) where
-  symmetry X Y := sorry
+derived tensor product, with the braiding `DerivedCategory.braidedCategory'`. Only the symmetry
+identity law has to be proved. Being an identity in two variables, it follows from the symmetry of
+`K(C)` by binary left derived extensionality. -/
+@[instance_reducible]
+noncomputable def symmetricCategory : SymmetricCategory (DerivedCategory C) where
+  __ := braidedCategory' C
+  symmetry X Y := by
+    exact braiding_hom_braiding_hom C (fun _ _ ↦ SymmetricCategory.symmetry _ _) X Y
 
 end DerivedCategory

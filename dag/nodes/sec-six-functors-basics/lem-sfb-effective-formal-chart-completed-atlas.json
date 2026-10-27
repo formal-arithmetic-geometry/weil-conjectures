@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-effective-formal-chart-completed-atlas",
+ "kind": "statement",
+ "title": "An effective formal quotient atlas is a completed etale scheme chart",
+ "statement": "Let $\\Omega$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $\\mathcal X$ be a finite-type Deligne--Mumford stack over $\\Omega$, and let $x:\\operatorname{Spec}\\Omega\\to\\mathcal X$ be a point. Stack, atlas and 2-isomorphism have the meanings in [def-sfb-stable-pointed-moduli-groupoids]; finite type means that a scheme atlas is locally of finite type [def-weil-finite-type-morphism]. Let $H=\\operatorname{Aut}(x)$ be finite, let $(R,\\mathfrak m)$ be a complete Noetherian local $\\Omega$-algebra with residue field $\\Omega$, and let $f:\\operatorname{Spec}R\\to\\mathcal X$ restrict to $x$ on the closed point. Assume that the formal completion of $\\mathcal X$ along the residual gerbe of $x$ is identified with $[\\operatorname{Spf}R/H]$, and that the restriction of $f$ is its canonical formal atlas. The residual gerbe is the full substack of objects locally isomorphic to $x$; the quotient classifies $H$-torsors with equivariant maps, and $\\operatorname{Spf}R$ is the formal scheme given by the compatible spectra $\\operatorname{Spec}(R/\\mathfrak m^n)$. Then there exist a finite-type scheme $T$, an etale morphism $a:T\\to\\mathcal X$, a point $t\\in T(\\Omega)$ above $x$, an isomorphism of complete local $\\Omega$-algebras $R\\simeq\\widehat{\\mathcal O_{T,t}}$, and a 2-isomorphism between $f$ and the composite $\\operatorname{Spec}R\\simeq\\operatorname{Spec}\\widehat{\\mathcal O_{T,t}}\\to T\\to\\mathcal X$. Completion is maximal-ideal adic [def-weil-pbc-adic-completion]; local Noetherian means a unique maximal ideal and the ascending chain condition on ideals [def-weil-pbc-noetherian-ring].",
+ "source": {
+  "document": "literature/stacks-project/stacks-geometry.tex",
+  "place": "Tag 0DQZ (lemma-compare-versal-ring-completion), together with etale.tex Tag 039M (lemma-characterize-etale-completions). Agent-formulated specialization to the given effective formal etale atlas: no existence of a formal quotient presentation is asserted. Pikaart--de Jong, Proposition 2.3.6, printed p.11, uses such an effective atlas; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-sfb-formal-moduli-quotient",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-completed-local-scheme-chart",
+  "def-sfb-formal-supported-moduli-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Apply the complete-pair henselian theorem to $(R,\\mathfrak m)$. It is a henselian pair, hence $R$ is a henselian local ring. Its residue field is $\\Omega$, which is separably closed: the minimal polynomial of an element of an algebraic field extension has a root in $\\Omega$, so its irreducibility forces degree one. Thus $R$ is strictly henselian by the terminology node.",
+   "uses": [
+    "lem-weil-pbc-complete-pair-henselian",
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ALJ (lemma-complete-henselian); algebra.tex Tag 04GF (definition-henselian)."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $U\\to\\mathcal X$ which is locally of finite type over $\\Omega$, as allowed by the finite-type hypothesis. The $2$-fibre product $E=\\operatorname{Spec}R\\times_{\\mathcal X}U$ is an algebraic space, etale and surjective over $\\operatorname{Spec}R$. Choose a surjective etale scheme cover $W\\to E$ from the definition of algebraic space. The calculus applies to these representable maps and makes the composite $W\\to\\operatorname{Spec}R$ etale and surjective. Use its scheme-chart characterization of surjectivity with the identity chart of the scheme $W$: this scheme map is surjective on points, so there is $y\\in W$ above the closed point. The strictly henselian etale-neighbourhood section lemma supplies $\\sigma:\\operatorname{Spec}R\\to W$ over $\\operatorname{Spec}R$. The projections of $\\sigma$ give an actual morphism $g:\\operatorname{Spec}R\\to U$ and a $2$-isomorphism $\\theta:a g\\xrightarrow{\\sim}f$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), etale-neighbourhood characterization; the section argument is also read in lean/WeilConjectures/AlgebraicGeometry/Sites/StrictlyHenselian.lean:65-108. Stack base change is as in algebraic.tex Tag 045C."
+   }
+  },
+  {
+   "text": "Let $t$ be the $\\Omega$-point given by restricting $g$ to the closed point. Its residue field is $\\Omega$: the injection $\\kappa(t)\\to\\Omega$ induced by this point has image containing the structural copy of $\\Omega$. Choose an affine finite-type neighbourhood $T=\\operatorname{Spec}D$ of $t$ in the locally finite-type atlas $U$. Every prime of the local ring $R$ is contained in $\\mathfrak m$, so every open subset of $\\operatorname{Spec}R$ containing its closed point is all of $\\operatorname{Spec}R$. Hence $g$ factors through $T$. The restriction $a:T\\to\\mathcal X$ is etale by source locality, and $T$ is finite type since its coordinate algebra is finitely generated. Put $A=\\mathcal O_{T,t}$ and $\\mathfrak n=\\mathfrak m_A$. The affine-stalk localization statement identifies $A$ with $D_{\\mathfrak p_t}$. The map $D\\to R$ of $g$ inverts $D\\setminus\\mathfrak p_t$, so induces a local $\\Omega$-map $u:A\\to R$ with identity residue map. The same localization argument applied to $\\operatorname{Spec}R$ at its maximal ideal identifies its stalk with $R$. Keep $\\theta$ and its closed-point restriction as the chosen framing of $a(t)$ by $x$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Affine spectrum and stalk localization; cf. Tag 01HV (lemma-spec-sheaves). The shrinking uses only the displayed prime-ideal argument and the finite-type definition."
+   }
+  },
+  {
+   "text": "For any local $\\Omega$-algebra $(C,\\mathfrak q)$ with residue field $\\Omega$ and $\\mathfrak q^N=0$, let $\\mathcal D_x(C)$ be the groupoid of objects $\\xi\\in\\mathcal X(C)$ with a specified isomorphism $\\xi|_\\Omega\\simeq x$, and arrows respecting that isomorphism. The atlas $a$ identifies this groupoid with the discrete set of maps $b:\\operatorname{Spec}C\\to T$ reducing to $t$. Indeed, $T\\times_{\\mathcal X,\\xi}\\operatorname{Spec}C$ is an etale algebraic space over $\\operatorname{Spec}C$; the framing and $t$ specify its section over $\\Omega$. Extend this section successively over $C/\\mathfrak q^j$, using the unique first order lifting theorem: the kernel $\\mathfrak q^j/\\mathfrak q^{j+1}$ has square zero for $j\\geq1$. Uniqueness makes the final section unique. By the $2$-fibre-product definition, a section is precisely a pair $(b,a(b)\\simeq\\xi)$ with the specified reduction. For a framed isomorphism $\\beta:a(b_1)\\simeq a(b_2)$, the pairs $(b_1,\\beta)$ and $(b_2,1)$ are sections of $T\\times_{\\mathcal X,a(b_2)}\\operatorname{Spec}C$ with the same closed reduction. Uniqueness gives $b_1=b_2$ and $\\beta=1$. This proves full faithfulness as well as essential surjectivity. Uniqueness also makes the identification natural in $C$.",
+   "uses": [
+    "lem-sfb-etale-space-infinitesimal-lifting",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0616 (lemma-etale-formally-etale), with definition-formally-smooth-etale-unramified; applied to the etale algebraic-space pullback of the scheme atlas."
+   }
+  },
+  {
+   "text": "Use the assumed formal quotient identification to describe the same $\\mathcal D_x(C)$. Every such framed object lies in the formal completion: its closed restriction is in the residual gerbe and the ideal $\\mathfrak q$ is nilpotent. So it is a pair $(P,v)$ with $P$ an $H$-torsor over $\\operatorname{Spec}C$ and $v:P\\to\\operatorname{Spf}R$ equivariant. The quotient-atlas torsor statement for the trivial action on $Z=\\operatorname{Spec}\\Omega$ shows that $P=\\operatorname{Spec}B$ is finite etale over $C$. A map from the affine scheme $P$ to $\\operatorname{Spf}R$ is a compatible family, that is, an $\\Omega$-map $R\\to B$ killing some $\\mathfrak m^M$. Each automorphism of the local ring $R$ preserves its unique maximal ideal and therefore every $\\mathfrak m^M$, so the finite quotients are $H$-stable and $(P,v)$ is a pair for the quotient $[\\operatorname{Spec}(R/\\mathfrak m^M)/H]$. The quotient-atlas torsor statement identifies its atlas pullback with the finite etale scheme $P\\to\\operatorname{Spec}C$. The chosen closed framing specifies a section of $P$ over $\\Omega$, since $f|_\\Omega=x$ and the formal restriction of $f$ is the canonical atlas. Apply the first order lifting theorem along the same powers of $\\mathfrak q$ to obtain exactly one section extending it. The section is a pair consisting of a continuous local $\\Omega$-map $r:R\\to C$ and an isomorphism $q(r)\\simeq\\xi$; composed with the assumed $2$-isomorphism between the formal restriction of $f$ and $q$, this is an isomorphism $f(r)\\simeq\\xi$ with the prescribed reduction. For two choices of finite level, pass to a common larger level; the induced torsor sections have the same closed reduction, so unique lifting identifies them. Thus the map $r$ and its framed isomorphism are independent of that choice. As in step 4, uniqueness gives full faithfulness and naturality. Thus $\\mathcal D_x(C)$ is also equivalent to the discrete set of these maps $R\\to C$.",
+   "uses": [
+    "lem-sfb-finite-group-quotient-atlas-torsor",
+    "lem-sfb-etale-space-infinitesimal-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tags 04WM (proposition-equal-quotient-stacks), 0371 (remark-X-mod-G-group), and 0BLZ (lemma-finite-etale-stack), on each nilpotent level; unique lifting is spaces-more-morphisms.tex Tag 0616."
+   }
+  },
+  {
+   "text": "Maps $\\operatorname{Spec}C\\to T=\\operatorname{Spec}D$ reducing to $t$ correspond to local $\\Omega$-maps $A=D_{\\mathfrak p_t}\\to C$: precisely the elements of $D\\setminus\\mathfrak p_t$ must be inverted, since their residues in $\\Omega$ are nonzero. The affine spectrum and localization statements give this correspondence. Combine steps 4 and 5 using the actual isomorphism $\\theta:a g\\simeq f$. The resulting bijection, for every $C$ under consideration, is exactly\n$$\\{r:R\\to C\\text{ local over }\\Omega\\}\\longrightarrow\\{h:A\\to C\\text{ local over }\\Omega\\},\\qquad r\\longmapsto r u.$$\nThis is the displayed map because pulling $\\theta$ back by $r$ identifies the atlas lift with $g\\circ\\operatorname{Spec}r$, whose local ring map is $r u$. Local maps to $C$ are continuous, since they send $\\mathfrak m^N$ into $\\mathfrak q^N=0$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Affine spectrum and stalk localization; explicit calculation of the comparison map, using the two preceding equivalences."
+   }
+  },
+  {
+   "text": "For $n\\geq1$ put $A_n=A/\\mathfrak n^n$ and $R_n=R/\\mathfrak m^n$. Both are local $\\Omega$-algebras with nilpotent maximal ideal and residue field $\\Omega$, so step 6 applies without an Artinian or finite-type requirement on the test. Its surjectivity for $C=A_n$ gives a local map $v_n:R\\to A_n$ with $v_n u=q^A_n$. Locality implies $v_n(\\mathfrak m^n)=0$, giving $\\bar v_n:R_n\\to A_n$. Let $u_n:A_n\\to R_n$ be induced by $u$. The equation $v_nu=q^A_n$ implies $\\bar v_n u_n=1$. The maps $u_n v_n$ and $q^R_n$ from $R$ to $R_n$ become equal after precomposition with $u$, both giving $q^R_n u$. Injectivity in step 6 for $C=R_n$ implies $u_n v_n=q^R_n$, hence $u_n\\bar v_n=1$. Therefore every $u_n$ is an isomorphism. For the quotient transitions $p^A_n:A_{n+1}\\to A_n$ and $p^R_n:R_{n+1}\\to R_n$, the common origin $u$ gives $u_n p^A_n=p^R_n u_{n+1}$. Composing on the left by $\\bar v_n$ and on the right by $\\bar v_{n+1}$ gives $p^A_n\\bar v_{n+1}=\\bar v_n p^R_n$, the compatibility needed in step 8.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary quotient-ring argument from the bijections of step 6. This also identifies the actual maps on completions, rather than an abstract isomorphism of versal rings."
+   }
+  },
+  {
+   "text": "By definition $\\widehat A=\\varprojlim_n A_n$, and completeness identifies $R$ with $\\varprojlim_n R_n$. Apply $u_n$ to each coordinate of a compatible sequence to define $\\alpha:\\widehat A\\to R$. Apply $\\bar v_n$ to each coordinate for its inverse; step 7 proves the two composites are the identity coordinate by coordinate. Thus $\\alpha$ is an isomorphism of complete local $\\Omega$-algebras, with $\\alpha\\circ(A\\to\\widehat A)=u$. Both maps preserve the adic filtrations: their finite-level reductions are the inverse local maps $u_n,\\bar v_n$. Take $R\\simeq\\widehat A$ to be $\\alpha^{-1}$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition of adic completion as compatible sequences; the inverse-limit argument is written coordinatewise."
+   }
+  },
+  {
+   "text": "The morphism $\\operatorname{Spec}R\\xrightarrow{\\operatorname{Spec}\\alpha}\\operatorname{Spec}\\widehat A\\to T$ has coordinate ring map $D\\to A\\to\\widehat A\\xrightarrow{\\alpha}R$, which equals $D\\to A\\xrightarrow{u}R$ by step 8. This is the coordinate map of $g$, so the two scheme morphisms are equal by the affine spectrum correspondence. Composing with $a$ and then with the already constructed $\\theta:a g\\simeq f$ supplies the required $2$-isomorphism on all of $\\operatorname{Spec}R$. The point $t$, finite-type scheme $T$, etaleness of $a$ and complete-local-ring isomorphism were constructed in steps 2, 3 and 8.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Affine spectrum correspondence; equality of the two explicit ring maps. The final 2-isomorphism is the actual lift from step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complete-pair-henselian",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-algebraic-closure",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sfb-etale-space-infinitesimal-lifting",
+  "lem-sfb-finite-group-quotient-atlas-torsor",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-geometry.tex",
+  "place": "Agent-written effective-chart comparison, motivated by Tag 0DQZ (lemma-compare-versal-ring-completion), using the stated etale lifting and quotient-torsor inputs rather than asserting uniqueness of arbitrary versal rings. Full argument in steps 1-9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An effective formal quotient chart of a Deligne Mumford stack at a geometric point is the completion of an etale scheme atlas at a lift",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecStalk x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "ad66b17cdd95460c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"VersalRing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "[Vv]ersalRing|formal.*[Aa]tlas|[Aa]tlas.*[Cc]ompletion",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"line\": \"84\", \"text\": \"formalization, it makes sense first to choose the atlas, and then to ask whether this precise atlas\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "f787013b6542b768"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed local ring of an etale atlas prorepresents deformations with fixed closed point of a Deligne Mumford stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x : PrimeSpectrum R) : x ⤳ closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\n  {\"name\": \"IsLocalRing.closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": PrimeSpectrum R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal. This defines a closed point in the prime spectrum of $ R $, corresponding to the u\"}\n  {\"name\": \"IsLocalRing.closedPoint.congr_simp\", \"module\": \"Mathlib.RingTheory.KrullDimension.Module\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [inst_1 : IsLocalRing R], IsLocalRing.closedPoint R = IsLocalRing.closedPoint R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal, thereby defining a closed point in the prime spectrum of $ R $.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "36ef06d77f81a87c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal etale chart is isomorphic to completed local ring of an etale neighborhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"Given a standard étale presentation of an $ R $-algebra $ S $ over a commutative ring $ R $, the canonical algebra homomorphism from the standard étale ring extension to $ S $ is bijective.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "59fa2fd5cb15f822"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective formal etale atlas of a Deligne Mumford stack is the completed local ring of an etale scheme chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring etaleness hits do not state the effective formal quotient/completed atlas comparison for a Deligne--Mumford stack",
+   "digest": "543a23537f3fb02e"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring etaleness hits do not state the effective formal quotient/completed atlas comparison for a Deligne--Mumford stack",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|AlgebraicStack|formal.*atlas|atlas.*completion",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"line\": \"84\", \"text\": \"formalization, it makes sense first to choose the atlas, and then to ask whether this precise atlas\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring etaleness hits do not state the effective formal quotient/completed atlas comparison for a Deligne--Mumford stack",
+   "digest": "f787013b6542b768"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraization of an effective formal etale chart of a Deligne Mumford stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_comp_bijective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \":\\n  FormallyEtale R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Bijective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if for every $ R $-algebra $ B $ and every ideal $ I \\\\subseteq B $ with $ I^2 = 0 $, the natural map $ \\\\text{Hom}_R(A, B) \\\\to \\\\text{Hom}_R(A, B/I) \"}\n  {\"name\": \"RingHom.formallyEtale_algebraMap\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Algebra R S] : (algebraMap R S).FormallyEtale ↔ Algebra.FormallyEtale R S\", \"doc\": \"The canonical ring homomorphism from $ R $ to $ S $ is formally étale if and only if $ S $ is a formally étale algebra over $ R $. This equivalence establishes that the formal étaleness of the algebra\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(e : A ≃ₐ[R] B) : FormallyEtale R A ↔ FormallyEtale R B\", \"doc\": \"Given an algebra isomorphism $ e : A \\\\simeq_R B $, the algebra $ A $ is formally étale over $ R $ if and only if $ B $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n  {\"name\": \"Algebra.FormallyEtale.mk\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Subsingleton Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallyEtale R A\", \"doc\": \"If the module of Kähler differentials $\\\\Omega_{A/R}$ is trivial and the first cohomology group of the cotangent complex is trivial, then the algebra $A$ over $R$ is formally étale.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring etaleness hits do not state the effective formal quotient/completed atlas comparison for a Deligne--Mumford stack",
+   "digest": "76de8f0c36ef2821"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pointed formal quotient deformation space equals the completion of any etale atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyEtale R A], Algebra.FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S), P.toSubmersivePresentation.toPresentation = P.toPresentation\", \"doc\": \"For any standard étale presentation $ P $ of an $ R $-algebra $ S $, converting $ P $ to a submersive presentation, then to a pre-submersive presentation, and finally to an algebra presentation yields\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"StandardEtalePresentation.mk.inj\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  {P : StandardEtalePair R} {x : S} {hasMap : P.HasMap x} {lift_bijective : Function.Bijective ⇑(P.lift x hasMap)}\\n  {P_1 : StandardEtalePair R} {x_1 : S} {hasMap_1 : P_1.HasMap x_1}\\n  {lift_bijective_1 \", \"doc\": \"If two standard étale presentations constructed via the mk function are equal, then their underlying standard étale pairs and elements $x$ (satisfying $f(x)=0$ and $g(x)$ invertible) must be equal. Th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and ring etaleness hits do not state the effective formal quotient/completed atlas comparison for a Deligne--Mumford stack",
+   "digest": "40857753aa12b66f"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-finite-normalization-charts",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: An effective formal quotient atlas is a completed etale scheme chart.",
+   "via": [
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-effective-formal-chart-completed-atlas",
+  "worker": "stage1",
+  "summary": "Lifted the given effective map through an etale atlas using strict henselianity, compared the two framed nilpotent-test functors using unique etale lifting and the finite constant-group torsor pullback, then proved each actual quotient-ring map is invertible and took inverse limits. The final 2-isomorphism comes from the actual lift. Two strictly smaller statement-only prerequisites were created. The statement is unchanged; existing searches are retained. Retained the computed null blueprint ancestor required by blueprint_refs.py; the inherited source place explicitly identifies det-thm-sf-ctf-stability-direct-images, but the historical created.item chain is broken upstream of this item. Repair of return at head 234bcc84f8e: compared the retained delivery with the current live unsplit item and re-read all cited live statements against the saved verbatim quotations; none changed in meaning. Expanded the framed-isomorphism uniqueness in step 4 and the inverse transition equation in step 7; retained both statement-only prerequisites and all logged search results. The delivery command rebases this split onto its current server DAG base; no live completion or review is asserted by this worker. Repair of the later return at 5c093bac4c4: compared the retained split with the current unsplit live item, re-read every cited live statement and the two prerequisite sources, and verified all twenty quotations against the current statements. Expanded step 5 to explain invariance of maximal-ideal powers and independence of the finite quotient level. The initial current-base dry run passed at 18f41780489; the changed inputs receive a fresh dry run before push. Repair of the citation-drift return: re-read the current chartwise-calculus statement, including its added field-extension definition and equivalent scheme-chart test of surjectivity. Step 2 now applies that test explicitly to obtain the closed-fibre scheme point required by the strict-henselian section lemma. Refreshed all three quotations of that node; no statement or proof edge changed. Rechecked every other cited statement and retained the existing searches and two prerequisites.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: An effective formal quotient atlas is a completed etale scheme chart.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic henselian/local-ring scheme input for comparing the supplied effective formal chart with an etale atlas; the unit supplies no replacement for this local algebraic fact."
+   },
+   {
+    "node": "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "why": "Generic henselian/local-ring scheme input for comparing the supplied effective formal chart with an etale atlas; the unit supplies no replacement for this local algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic henselian/local-ring scheme input for comparing the supplied effective formal chart with an etale atlas; the unit supplies no replacement for this local algebraic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-77d67ede2",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-77d67ede2 (reviewer sub-agent of L); spot-checked: This is the fifth push of this split. 234bcc84, b050f684, 5c093bac and c8a6befff were all FIXed on step 5. The first three landings were refused because the item was completed in this project's DAG but not in live. c8a6 was refused because the cited lem-sfb-stack-chartwise-smooth-etale-calculus statement changed. Both new nodes are byte-identical to c8a6 (sha256). In the item, only step 2 and the split_report changed. Step 5 is again the pre-fix text, so the fix was lost a fourth time. On live and side-live the item is still unsplit with no review, neither new id exists, and there is no repair note, so the delivery is not superseded. Only the chartwise-calculus statement changed among the cited nodes: it now defines surjectivity by field-extension lifting and gives an equivalent scheme-chart test. Step 2 (new text) is correct: the chart test with T = Spec R and the identity chart of W gives a point of W over the closed point, which is exactly the hypothesis of the strict-henselian section lemma. Steps 1, 3, 4 and 6-9 were re-read against the current statements and are correct. Step 1: complete-pair-henselian plus algebraically closed Ω make R strictly henselian. Step 3: part (c) of the affine-stalk lemma gives A = D_{p_t}. Step 4: unique étale lifting along q^j/q^{j+1}, and the pairs (b1,β), (b2,1) give full faithfulness. Steps 6-9: r↦ru; Yoneda at C = A_n and C = R_n inverts each u_n; then coordinatewise limits and θ. New nodes: the lifting node is Stacks 0616/04GC and true. It is not a duplicate of the new lem-sfb-smooth-space-affine-infinitesimal-lift, which gives existence only. The torsor node holds in every characteristic (04M9/04WM, 0BLZ plus fppf descent). It is not a duplicate of lem-sfb-action-groupoid-quotient-criterion, lem-sfb-flat-affine-action-stack-presentation, def-sfb-affine-action-quotient-stack or lem-sfb-finite-formal-quotient-pullback. Neither node restates a clause of the item. No SGA source is cited. Batch 5: def-trf-algebraic-space (cited directly and reached through the chartwise calculus) and def-trf-projective-bundle-morphism (reached through def-sfb-stable-pointed-moduli-groupoids) are general definitions, not parts of the trace-formula or Poincaré-duality statements or their proofs, so I accept them. I accept the tool_uses complete-pair-henselian, strict-henselian-section and affine-stalk-localization as generic. FIX (E5, step 5): I re-applied the c8a6 text. The torsor node for the trivial action on Spec Ω gives P = Spec B, finite étale, so v is an Ω-map R→B killing some m^M, and H preserves m^M. The torsor gives q(r)≅ξ, and the assumed 2-isomorphism turns it into f(r)≅ξ. Only proof[4].text changed; the new step 2 and the split_report are kept. The file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-effective-formal-chart-completed-atlas.json. Maintainer: apply this fix at landing; it has been lost four times.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EffectiveFormalChartCompletedAtlas",
+  "declaration": "CategoryTheory.effectiveFormalChart_completedAtlas",
+  "declarations": [
+   "CategoryTheory.effectiveFormalChart_completedAtlas"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EffectiveFormalChartCompletedAtlas.lean",
+  "statement": "theorem effectiveFormalChart_completedAtlas (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (X : BasedCategory.{v, w} (Over (Spec (.of Ω)))) (hX : IsDeligneMumfordModuliStack X) (hft : ∃ (U : Over (Spec (.of Ω))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) X), IsEtaleModuliAtlas a ∧ LocallyOfFiniteType U.hom) (x : BasedFunctor (discreteModuli (yoneda.obj (Over.mk (𝟙 (Spec (.of Ω)))))) X) (H : Type u) [Group H] [Finite H] (aut : H ≃* Aut (moduliChartPoint x)) (R : Type u) [CommRing R] [IsLocalRing R] [Algebra Ω R] [IsNoetherianRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (ρ : IsLocalRing.ResidueField R ≃ₐ[Ω] Ω) (f : BasedFunctor (discreteModuli (yoneda.obj (affineActionScheme Ω R))) X) (hf : Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map (closedResiduePoint Ω R ρ))).comp f) x)) (σ : H →* Aut (affineActionScheme Ω R)) (θ : FormalSupportedAtlasAction σ f {IsLocalRing.closedPoint R}) (hformal : IsFormalSupportedModuliQuotient x σ f {IsLocalRing.closedPoint R} θ) : ∃ (T : Over (Spec (.of Ω))) (a : BasedFunctor (discreteModuli (yoneda.obj T)) X) (t : Over.mk (𝟙 (Spec (.of Ω))) ⟶ T), LocallyOfFiniteType T.hom ∧ QuasiCompact T.hom ∧ IsEtaleModuliMap a ∧ Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map t)).comp a) x) ∧ ∃ (e : R ≃ₐ[Ω] pointCompletedLocalRing Ω T (t.left (IsLocalRing.closedPoint Ω))) (b : affineActionScheme Ω R ⟶ T), b.left = Spec.map (CommRingCat.ofHom e.symm.toRingHom) ≫ fromSpecPointCompletion Ω T (t.left (IsLocalRing.closedPoint Ω)) ∧ Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map b)).comp a) f)",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18659e33c",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Clause-by-clause match: Ω alg. closed; DM stack with a locally finite-type étale atlas (node convention); x; finite H ≃ Aut(x); complete Noetherian local R with ρ:κ(R)≃Ω; f with closed restriction ≅ x; formal quotient via the new supported interface; conclusion T of finite type (LFT ∧ QC), étale a, t over x, e:R≃ₐ[Ω] completed stalk, b = Spec e⁻¹ ≫ canonical map, 2-iso b;a≅f on all of Spec R. New FormalSupportedAtlasAction/IsFormalSupportedModuliQuotient faithfully encode [Spf R/H] (local ess. surjectivity, fullness by labels, faithfulness on nonempty tests; cocycle uses the landed Aut convention, not vacuous); not a duplicate of the global IsFormalModuliQuotient, which would strengthen the hypothesis; global⇒supported keeps the parent usable. pointCompletedLocalRing reuses NodalFiber.completedLocalRing with the actual Ω-structure; fromSpecPointCompletion and closedResiduePoint are real data, no sorry. Statements verbatim; item text/proof unchanged vs live, only lean + 4 stmt_deps added. Docstrings with source/blueprint and proof steps 1-9. Notes: aut unlinked but implied by hformal; owners of IsEtaleModuliMap/affineActionScheme in stmt_deps only transitively (definition nodes, acceptable). No compile (no change)."
+ }
+}

@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-ringed-site-strict-perfect-local-actual",
+ "kind": "statement",
+ "title": "Local actual maps from strictly perfect ringed-site complexes",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a site with a sheaf of commutative rings, with module sheaves [def-weil-sheaf-of-modules-category] and unbounded derived category and localization $Q$ [def-weil-abstract-derived-category]. Let $U$ be a site object and use restrictions to the localized ringed site $(\\mathcal C/U,\\mathcal O_U)$ [def-pur-localized-ringed-site]. Let $P^\\bullet,F^\\bullet$ be cochain complexes of $\\mathcal O_U$-modules. Assume $P^\\bullet$ is strictly perfect: it is zero outside finitely many degrees and each $P^j$ is a direct summand of a finite free $\\mathcal O_U$-module. For every morphism $u:Q(P^\\bullet)\\to Q(F^\\bullet)$ in $D(\\mathcal O_U)$ there is a covering $\\{U_i\\to U\\}$ and chain maps $u_i:P^\\bullet|_{U_i}\\to F^\\bullet|_{U_i}$ whose images under localization equal $u|_{U_i}$. No boundedness assumption is imposed on $F^\\bullet$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FR, lemma-local-actual, assertion (1)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "lem-sf-site-perfect-overmap-exact",
+  "lem-sf-site-perfect-overmap-additive"
+ ],
+ "proof": [
+  {
+   "text": "Apply the left calculus of fractions of [lem-pc-quasi-isomorphisms-multiplicative-system] to the abelian category of $\\mathcal O_U$-modules. Choose a complex $G^\\bullet$ and chain maps $\\beta:P^\\bullet\\to G^\\bullet$, $f:F^\\bullet\\to G^\\bullet$, with $f$ a quasi-isomorphism and $u=Q(f)^{-1}\\circ Q(\\beta)$. Here the homotopy category has complexes as objects and homotopy classes of chain maps as morphisms, so the numerator and denominator can be represented by actual chain maps. This is the fraction formula implemented by Mathlib DerivedCategory.left_fac; it imposes no bound on either target complex.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FR, lemma-local-actual, proof of assertion (1)"
+   }
+  },
+  {
+   "text": "Choose $a\\in\\mathbf Z$ below the finite support of $P^\\bullet$; for the zero complex any $a$ works. Apply [lem-sfb-ringed-site-strict-perfect-local-lift] with its $E=P$, its $F=G$, its $G=F$, its $u=\\beta$ and its $v=f$. Every term of $P$ is a finite-free direct summand by hypothesis. Since $f$ is a quasi-isomorphism, $H^j(f)$ is an isomorphism for all $j$, hence is an isomorphism for $j>a$ and surjective for $j=a$. The lemma gives a covering $\\{U_i\\to U\\}$ and actual chain maps $u_i:P|_{U_i}\\to F|_{U_i}$ with $f|_{U_i}\\circ u_i$ chain homotopic to $\\beta|_{U_i}$. Both $F$ and $G$ may be unbounded.",
+   "uses": [
+    "lem-sfb-ringed-site-strict-perfect-local-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FR, lemma-local-actual, proof of assertion (1)"
+   }
+  },
+  {
+   "text": "For each covering member, restriction on module sheaves is exact by [lem-pur-site-restriction-module-adjunction-exact], applied on $\\mathcal C/U$. Relocalization [def-pur-localized-ringed-site] identifies its slice at $U_i\\to U$ with $\\mathcal C/U_i$. By [lem-weil-pbc-exact-functor-derived-factorization], termwise restriction preserves quasi-isomorphisms and its localization comparison is natural. Thus the restriction of the fraction in Step 1 is $u|_{U_i}=Q_i(f|_{U_i})^{-1}\\circ Q_i(\\beta|_{U_i})$, with the canonical comparison isomorphisms understood. Localization factors through the homotopy category [def-weil-abstract-derived-category], so the homotopy in Step 2 gives $Q_i(f|_{U_i})\\circ Q_i(u_i)=Q_i(\\beta|_{U_i})$. The first factor is invertible because the restricted $f$ is a quasi-isomorphism. Multiplying by its inverse gives $Q_i(u_i)=u|_{U_i}$, as required.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FR, lemma-local-actual, proof of assertion (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-ringed-site-strict-perfect-local-lift",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FR, lemma-local-actual, proof of assertion (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On an arbitrary ringed site a derived map from a bounded complex of direct summands of finite free modules is locally represented by an actual chain map",
+   "results": "OK: 8 hits; SheafOfModules.Presentation.mapGenerators, SheafOfModules.Presentation.map, SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.mapRelations, SheafOfModules.Presentation.mapRelations_mapGenerators, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.freeMap, SheafOfModules.presentationOfIsCokernelFree_generators",
+   "date": "2026-10-23",
+   "verdict": "no match: fraction representation and global K-projectivity do not give local chain representatives for strictly perfect complexes over an arbitrary ring sheaf; finite free sheaves need not be projective objects of the sheaf category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local chain representatives for derived morphisms out of strictly perfect complexes of sheaves over a sheaf of rings",
+   "results": "OK: 8 hits; SheafOfModules.LocalGeneratorsData, SheafOfModules.LocalGeneratorsData.X, DerivedCategory.left_fac_of_isStrictlyGE, SheafOfModules.LocalGeneratorsData.I, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Sheaf.H",
+   "date": "2026-10-23",
+   "verdict": "no match: fraction representation and global K-projectivity do not give local chain representatives for strictly perfect complexes over an arbitrary ring sheaf; finite free sheaves need not be projective objects of the sheaf category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective, Homotopy",
+   "results": "OK: 4 hits; CochainComplex.IsKProjective.homotopyZero, CochainComplex.IsKProjective.mk, CochainComplex.IsKProjective.nonempty_homotopy_zero, CochainComplex.IsKProjective.homotopyZero_def",
+   "date": "2026-10-23",
+   "verdict": "no match: fraction representation and global K-projectivity do not give local chain representatives for strictly perfect complexes over an arbitrary ring sheaf; finite free sheaves need not be projective objects of the sheaf category"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictlyPerfect|strictlyPerfect|local_actual|locally.*chain",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: fraction representation and global K-projectivity do not give local chain representatives for strictly perfect complexes over an arbitrary ring sheaf; finite free sheaves need not be projective objects of the sheaf category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from strictly perfect complexes on ringed sites are locally morphisms of complexes",
+   "results": "OK: 8 hits; CategoryTheory.GrothendieckTopology.W, AlgebraicGeometry.LocallyRingedSpace.homMk, CategoryTheory.ShortComplex.homMk, AlgebraicGeometry.affineLocally, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.LocallyRingedSpace.Hom, HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported, CategoryTheory.ShortComplex.Hom",
+   "date": "2026-10-23",
+   "verdict": "no match: fraction representation and global K-projectivity do not give local chain representatives for strictly perfect complexes over an arbitrary ring sheaf; finite free sheaves need not be projective objects of the sheaf category"
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|isKProjective_of_projective",
+   "results": "OK: 2 hits; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: fraction representation and global K-projectivity do not give local chain representatives for strictly perfect complexes over an arbitrary ring sheaf; finite free sheaves need not be projective objects of the sheaf category"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictlyPerfect|strictlyPerfect|local_actual|locally.*chain",
+   "results": "{\"t\": \"2026-10-23T14:43:56Z\", \"tool\": \"grep\", \"query\": \"StrictlyPerfect|strictlyPerfect|local_actual|locally.*chain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern fraction representations, ordinary sheaf presentations, or complex operations; none gives local actual representatives from strictly perfect sheaf complexes on arbitrary ringed sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from strictly perfect complexes on a ringed site locally lift to morphisms of complexes",
+   "results": "{\"t\": \"2026-10-23T14:43:57Z\", \"tool\": \"leansearch\", \"query\": \"Morphisms from strictly perfect complexes on a ringed site locally lift to morphisms of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.Embedding.liftExtend\", \"HomologicalComplex.liftCycles\", \"CategoryTheory.ShortComplex.liftCycles\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"ComplexShape.Embedding.liftExtend.congr_simp\", \"ComplexShape.Embedding.liftExtend_f\", \"PerfectRing.lift.congr_simp\", \"ComplexShape.Embedding.liftExtend.f\"], \"digest\": \"cc55c57acce04639\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern fraction representations, ordinary sheaf presentations, or complex operations; none gives local actual representatives from strictly perfect sheaf complexes on arbitrary ringed sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.left_fac",
+   "results": "{\"t\": \"2026-10-23T14:43:57Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.left_fac\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac\"], \"digest\": \"5dbd6adcc009f40f\"}",
+   "date": "2026-10-23",
+   "verdict": "partial match only: DerivedCategory.left_fac supplies the fraction representation used in Step 1, but not the local lifting through its denominator; the item is not a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local lifting up to homotopy of maps from strictly perfect sheaf complexes through a quasi isomorphism",
+   "results": "{\"t\": \"2026-10-23T14:44:01Z\", \"tool\": \"leanfinder\", \"query\": \"Local lifting up to homotopy of maps from strictly perfect sheaf complexes through a quasi isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\"], \"digest\": \"0042f99b7a7a04e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern fraction representations, ordinary sheaf presentations, or complex operations; none gives local actual representatives from strictly perfect sheaf complexes on arbitrary ringed sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an arbitrary ringed site derived morphisms from bounded finite free retract complexes are locally chain maps",
+   "results": "{\"t\": \"2026-10-23T14:44:03Z\", \"tool\": \"leanfinder\", \"query\": \"On an arbitrary ringed site derived morphisms from bounded finite free retract complexes are locally chain maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"SheafOfModules.IsFinitePresentation\", \"PresheafOfModules.IsLocallyInjective\"], \"digest\": \"954361fddabf3f9f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern fraction representations, ordinary sheaf presentations, or complex operations; none gives local actual representatives from strictly perfect sheaf complexes on arbitrary ringed sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+  "by": "worker",
+  "date": "2026-10-23",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof (3), preservation by proper direct image: supporting perfectness/pseudo-coherence descent input, through Tag 08FV (lemma-cone-pseudo-coherent), proof (1), and Tag 08FR (lemma-local-actual), assertion (1). The inherited via chain records the intermediate supporting lemmas.",
+   "via": [
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-strict-perfect-local-actual",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Stacks 08FR(1), reusing the existing general 08FQ local lift, the Mathlib fraction-system node and exact restriction/localization tools. No new nodes. Checked all substitutions and verbatim cited statements; target complexes remain unbounded. Repaired the null blueprint ancestor using the already recorded via-chain endpoint and the current blueprint proof (3).",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), proper direct-image preservation; inherited supporting chain through perfectness descent, pseudo-coherence descent and 08FV. Steps 1-3 realize precisely the 08FR(1) actual-map prerequisite, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact restriction of modules on any localized ringed site, needed to restrict the fraction denominator; the ctf-stability unit does not construct this site interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-ec1a91d72",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-ec1a91d72 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement is unchanged from live and matches Stacks 08FR(1) (sites-cohomology.tex lemma-local-actual) together with definition-strictly-perfect (l.11717): arbitrary ringed site, object U, E strictly perfect, F unbounded. There is no re-split note, and live/side-live still have the item unsplit. Step 1: left fraction u=Q(f)^{-1}Q(beta) with f:F->G a quasi-isomorphism, from lem-pc-quasi-isomorphisms-multiplicative-system (Mathlib leaf). This matches Stacks' alpha=f^{-1}beta and the orientation of Mathlib left_fac. Step 2: the substitution into lem-sfb-ringed-site-strict-perfect-local-lift (08FQ, same unit, unsplit, so no cycle) is E=P, F=G, G=F, u=beta, v=f, with a below the support of P. A quasi-isomorphism meets the weaker H^j hypothesis; the step yields f|∘u_i ≃ beta|. Step 3: restriction to C/U_i is exact (lem-pur-site-restriction-module-adjunction-exact on C/U, plus the relocalization clause of def-pur-localized-ringed-site). lem-weil-pbc-exact-functor-derived-factorization gives preservation of quasi-isomorphisms and a natural phi, so u|_{U_i}=Q_i(f|)^{-1}Q_i(beta|). Q factors through K, the homotopy gives Q_i(f|)Q_i(u_i)=Q_i(beta|), and cancelling gives Q_i(u_i)=u|_{U_i}; I checked this cancellation. proof_deps is exactly the union of uses. Edge cases checked: P=0, acyclic F, F unbounded on both sides, zero ring, empty covering. Duplicate search (rg -L for 08FR/08FQ/strictly perfect) found only étale or constant-coefficient variants, none stating the general ringed-site result. The tool_use lem-pur-site-restriction-module-adjunction-exact (unit sk-def-sf-operations) is actually on the route, since sk-thm-sf-ctf-stability uses sk-def-sf-operations, and it is Lean-closed. The declaration is redundant; accepted. from.node was filled as det-thm-sf-ctf-stability-direct-images, the endpoint of the via chain, and the proof (3) place was checked. No SGA. Searches cover all three kinds. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.StrictPerfectLocalActual",
+  "declaration": "CategoryTheory.StrictPerfectLocalActual.exists_local_chain_map",
+  "declarations": [
+   "CategoryTheory.StrictPerfectLocalActual.rings",
+   "CategoryTheory.StrictPerfectLocalActual.restrict",
+   "CategoryTheory.StrictPerfectLocalActual.exists_local_chain_map"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/StrictPerfectLocalActual.lean",
+  "statement": "theorem exists_local_chain_map (U : C) (P F : CochainComplex (ringedSiteModules.{max c v r} ((rings.{c, v, r} R).over U)) ℤ) (hbounded : ∃ a b : ℤ, ∀ j : ℤ, j < a ∨ b < j → IsZero (P.X j)) (hterms : ∀ j : ℤ, ∃ n : ℕ, Nonempty (Retract (P.X j) (∏ᶜ fun _ : Fin n ↦ SheafOfModules.unit ((rings.{c, v, r} R).over U)))) (u : DerivedCategory.Q.obj P ⟶ DerivedCategory.Q.obj F) : ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ t : ((SheafOfModules.overMap.{max c v r} (rings.{c, v, r} R) f).mapHomologicalComplex (.up ℤ)).obj P ⟶ ((SheafOfModules.overMap.{max c v r} (rings.{c, v, r} R) f).mapHomologicalComplex (.up ℤ)).obj F, DerivedCategory.Q.map t = restrict.{c, v, r, w} R f u",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d277e33b",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read node, Stacks 08FR(1)+definition-strictly-perfect, all 5 stmt_deps and their Lean, module, report. All clauses match: CommRingCat.{max c v r} (same convention as landed StrictPerfectCoefficientPackageOfUniverses, site universes independent), hbounded/hterms = strictly perfect (Retract into finite product of unit), F unbounded, arbitrary u, covering sieve equivalent to a covering family, chain map t with Q.map t = restrict R f u; restrict is a canonical mapDerivedCategoryFactors inv/map/hom composite (orientation checked against Mathlib ExactFunctor.lean). lean.statement verbatim; only the theorem is sorry; helpers are real; docstrings carry source, blueprint and proof steps. Mechanical theorem-stmt_dep finding: the statement needs the PreservesFiniteLimits/Colimits and Additive conclusions of lem-sf-site-perfect-overmap-exact/-additive to form mapDerivedCategory inside restrict, a genuine dependency (no definitions come from that module), so PASS on that point. No duplicate 08FR and no general-site strictly-perfect predicate; note that hterms could later be phrased via StrictPerfectCoefficientPackageOnSite (equivalent; needs a stmt_dep, so not a stage-2 FIX). Edge cases P=0, n=0, zero ring, unbounded/acyclic F, empty covering sieve OK. Second reading is the author's self-check (note). No changes, so no compile."
+ }
+}

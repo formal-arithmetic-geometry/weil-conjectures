@@ -1,0 +1,229 @@
+{
+ "id": "lem-per-h1-koszul-last-product",
+ "kind": "statement",
+ "title": "Multiplying the last elements of H1-regular tuples",
+ "statement": "Let $R$ be a commutative ring, let $s\\geq0$, and let $h_1,\\ldots,h_s,f,g\\in R$. Use the Koszul complex and homology of [def-weil-pbc-koszul-complex]. If $H_1(K_R(h_1,\\ldots,h_s,f))=0$ and $H_1(K_R(h_1,\\ldots,h_s,g))=0$, then $H_1(K_R(h_1,\\ldots,h_s,fg))=0$. The prefix may be empty, and no locality, Noetherian, nonzero-ring or proper-ideal assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 062G, lemma-mult-koszul-regular, clause (1), specialized to M=R."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "For any complex $P$, identify $P\\otimes_RR$ with $P$ by $x\\otimes a\\mapsto ax$, inverse $x\\mapsto x\\otimes1$. Bilinearity gives $(ax)\\otimes1=x\\otimes a$; linearity of the differential gives $d(ax)=a\\,d(x)$, so these inverse maps identify cycles, boundaries and their quotients. Thus the two assumed vanishing statements hold equally for the complexes tensored with $R$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062G, lemma-mult-koszul-regular (1); explicit cycle chase using Tags 0628/0629, lemma-cone-koszul-abstract and lemma-cone-koszul."
+   }
+  },
+  {
+   "text": "Put $A=K_R(h_1,\\ldots,h_s)\\otimes_RR$ and $B_t=K_R(h_1,\\ldots,h_s,t)\\otimes_RR$. Apply the cited coordinate lemma with $M=R$ separately for $t=f,g,fg$. It identifies $(B_t)_0$ with $A_0$, $(B_t)_1$ with $A_1\\oplus A_0$, and $(B_t)_2$ with $A_2\\oplus A_1$, with differentials $D_{t,1}(x,y)=d_1x+ty$ and $D_{t,2}(u,v)=(d_2u+tv,-d_1v)$. We use these coordinates below, writing $d$ for the appropriately typed differential of $A$.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-koszul-tensor-cone-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062G, lemma-mult-koszul-regular (1); explicit cycle chase using Tags 0628/0629, lemma-cone-koszul-abstract and lemma-cone-koszul."
+   }
+  },
+  {
+   "text": "Take any cycle $(x,y)\\in(B_{fg})_1$, so $dx+fg\\,y=0$. The pair $(x,fy)\\in(B_g)_1$ is a cycle since $dx+g(fy)=0$. By $H_1(B_g)=0$ and the definition $H_1=\\ker D_1/\\operatorname{im}D_2$, choose $u\\in A_2$, $v\\in A_1$ with $x=du+gv$ and $fy=-dv$.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062G, lemma-mult-koszul-regular (1); explicit cycle chase using Tags 0628/0629, lemma-cone-koszul-abstract and lemma-cone-koszul."
+   }
+  },
+  {
+   "text": "The pair $(v,y)\\in(B_f)_1$ is now a cycle, since $dv+fy=0$. The other hypothesis $H_1(B_f)=0$ gives $w\\in A_2$, $q\\in A_1$ with $v=dw+fq$ and $y=-dq$.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062G, lemma-mult-koszul-regular (1); explicit cycle chase using Tags 0628/0629, lemma-cone-koszul-abstract and lemma-cone-koszul."
+   }
+  },
+  {
+   "text": "Linearity and commutativity give $x=du+g(dw+fq)=d(u+gw)+fg\\,q$ and $y=-dq$. Consequently $(x,y)=D_{fg,2}(u+gw,q)$ is a boundary. Every cycle is a boundary, hence $H_1(B_{fg})=0$. The identification in step 1 gives $H_1(K_R(h_1,\\ldots,h_s,fg))=0$. All formulas also hold for $s=0$, when $A_1=A_2=0$, and for the zero ring; no cancellation or properness assumption was used.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062G, lemma-mult-koszul-regular (1); explicit cycle chase using Tags 0628/0629, lemma-cone-koszul-abstract and lemma-cone-koszul."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-koszul-tensor-cone-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 062G, lemma-mult-koszul-regular (1); explicit cycle chase using Tags 0628/0629, lemma-cone-koszul-abstract and lemma-cone-koszul. Agent-written coordinate expansion of the homology exactness argument; the existing coordinate lemma supplies the only non-elementary input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If first Koszul homology vanishes for tuples (h,f) and (h,g), it vanishes for (h,fg)",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δAux_mul, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.Cotangent.exact, Algebra.Generators.CotangentSpace.exact, Algebra.Generators.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.H1Cotangent.exact_map_δ, KaehlerDifferential.kerTotal_mkQ_single_algebraMap; digest f74b44fd3c25c563. ",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence results require successive nonzerodivisors; cotangent H1 is a different complex; homogeneous-ideal and smooth-presentation results do not prove Koszul H1 vanishing or its consequences. Mathlib RegularSequence.lean:21 lists Koszul, H1 and quasi-regular sequences as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "H1 regular sequences closed under multiplying the last element",
+   "results": "8 hits: RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsRegular.cons, RingTheory.Sequence.IsWeaklyRegular.cons', RingTheory.Sequence.isRegular_cons_iff', RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.IsWeaklyRegular.cons, RingTheory.Sequence.IsRegular.recIterModByRegularWithRing; digest da8f4fbbe4ae41a0. ",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence results require successive nonzerodivisors; cotangent H1 is a different complex; homogeneous-ideal and smooth-presentation results do not prove Koszul H1 vanishing or its consequences. Mathlib RegularSequence.lean:21 lists Koszul, H1 and quasi-regular sequences as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence results require successive nonzerodivisors; cotangent H1 is a different complex; homogeneous-ideal and smooth-presentation results do not prove Koszul H1 vanishing or its consequences. Mathlib RegularSequence.lean:21 lists Koszul, H1 and quasi-regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "H1Regular|H_1|koszul",
+   "results": "1 hits: Mathlib/RingTheory/Regular/RegularSequence.lean; digest e93f847680f4c3f4. ",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence results require successive nonzerodivisors; cotangent H1 is a different complex; homogeneous-ideal and smooth-presentation results do not prove Koszul H1 vanishing or its consequences. Mathlib RegularSequence.lean:21 lists Koszul, H1 and quasi-regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "H1Regular|H_1|koszul",
+   "results": "19 hits: Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Congruence/Hom.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean; digest e77eb2e6bd4a6e2c.",
+   "date": "2026-10-24",
+   "verdict": "no match: first phrasing gives cotangent homology and exterior-algebra identities, not Koszul H1 multiplication; second phrasing gives generic mapping-cone component identities and connecting-map comparisons, not the assertion. Ordinary regular-sequence constructors require different hypotheses. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists Koszul and H1 regular sequences as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If first Koszul homology vanishes for tuples (h,f) and (h,g), it vanishes for (h,fg)",
+   "results": "8 hits: KaehlerDifferential.kerTotal_mkQ_single_mul, ExteriorAlgebra.ι_mul_prod_list, KaehlerDifferential.kerTotal_mkQ_single_algebraMap, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Extension.Cotangent.smul_eq_zero_of_mem, Algebra.FormallyUnramified.one_tmul_sub_tmul_one_mul_elem, Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff, Algebra.Generators.H1Cotangent.exact_map_δ; digest f934d6782df8d954.",
+   "date": "2026-10-24",
+   "verdict": "no match: first phrasing gives cotangent homology and exterior-algebra identities, not Koszul H1 multiplication; second phrasing gives generic mapping-cone component identities and connecting-map comparisons, not the assertion. Ordinary regular-sequence constructors require different hypotheses. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists Koszul and H1 regular sequences as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: first phrasing gives cotangent homology and exterior-algebra identities, not Koszul H1 multiplication; second phrasing gives generic mapping-cone component identities and connecting-map comparisons, not the assertion. Ordinary regular-sequence constructors require different hypotheses. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists Koszul and H1 regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|IsH1Regular",
+   "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Algebra/Homology/LocalCohomology.lean; digest 492dc8c9f4d558e7.",
+   "date": "2026-10-24",
+   "verdict": "no match: first phrasing gives cotangent homology and exterior-algebra identities, not Koszul H1 multiplication; second phrasing gives generic mapping-cone component identities and connecting-map comparisons, not the assertion. Ordinary regular-sequence constructors require different hypotheses. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists Koszul and H1 regular sequences as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "H1 regular sequences closed under multiplying the last element",
+   "results": "8 hits: RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsRegular.cons, RingTheory.Sequence.IsWeaklyRegular.cons', RingTheory.Sequence.isRegular_cons_iff', RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.IsWeaklyRegular.cons, RingTheory.Sequence.IsRegular.recIterModByRegularWithRing; digest da8f4fbbe4ae41a0.",
+   "date": "2026-10-24",
+   "verdict": "no match: first phrasing gives cotangent homology and exterior-algebra identities, not Koszul H1 multiplication; second phrasing gives generic mapping-cone component identities and connecting-map comparisons, not the assertion. Ordinary regular-sequence constructors require different hypotheses. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists Koszul and H1 regular sequences as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of degree one homology of mapping cones of scalar endomorphisms f and g implies vanishing for their composite fg",
+   "results": "8 hits: CochainComplex.mappingCone.inr_fst_assoc, CochainComplex.mappingCone.inl_v_descShortComplex_f_assoc, CochainComplex.mappingCone.inl_v_descShortComplex_f, CochainComplex.mappingCone.homologySequenceδ_triangleh, CochainComplex.mappingCone.inr_f_fst_v, CochainComplex.mappingCone.inl_snd_assoc, CochainComplex.mappingCone.inr_f_fst_v_assoc, CochainComplex.mappingCone.inl_v_snd_v; digest 2ceb8bb7a8ea35a1.",
+   "date": "2026-10-24",
+   "verdict": "no match: first phrasing gives cotangent homology and exterior-algebra identities, not Koszul H1 multiplication; second phrasing gives generic mapping-cone component identities and connecting-map comparisons, not the assertion. Ordinary regular-sequence constructors require different hypotheses. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists Koszul and H1 regular sequences as TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-h1-koszul-quasi-regular",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: regular finite-torsion local model; Expose X Lemma 1.6, the inference from the pulled-back Koszul resolution to a regular immersion. The Koszul criterion used here is Stacks 09CC, whose proof passes through 062I and 061S. Auxiliary multiplication lemma used by Stacks 062I, second paragraph, to replace the last generator by its nth power.",
+   "via": [
+    "lem-per-h1-koszul-quasi-regular",
+    "lem-per-noetherian-local-koszul-criterion",
+    "lem-per-tor-independent-blowup-transform",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-h1-koszul-last-product",
+  "worker": "stage1",
+  "summary": "Q130: unchanged statement checked against Stacks 062G(1). No matching finished project declaration. Expanded the homology exactness argument as a cycle chase using the existing last-generator coordinates; two applications of the hypotheses give an explicit boundary (u+gw,q). No new nodes, no derived/sheaf comparison, no regularity assumptions. Six fresh logged Mathlib searches supplement the inherited searches.",
+  "blueprint": "Auxiliary last-generator multiplication in the existing chain under lem-per-artin-gabber-affine-curve, Step 3: regular finite-torsion local model / regular immersion criterion, through lem-per-h1-koszul-quasi-regular. Current latest blueprint and all-chapter blueprint searches checked; no blueprint node states this algebraic lemma. This split only expands the below-unit algebra input, preserving the inherited route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-koszul-tensor-cone-coordinates",
+    "why": "Generic algebraic last-generator coordinate decomposition, including both differential formulas and r=0. The item unit supplies no separate exterior-power coordinate lemma; this does not replace a step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-koszul-tensor-cone-coordinates"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-a99f1fcd2",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-a99f1fcd2 (reviewer sub-agent of L); spot-checked: Read in full; no fixes written. The statement is unchanged from live, where the item is still unsplit, and only the split fields changed. It equals Stacks 062G (more-algebra.tex:7311, lemma-mult-koszul-regular) clause (1) with M=R: arbitrary commutative ring, empty prefix allowed. The delivery has no new nodes and does not restate the statement. The 062C exact-sequence argument is replaced by an explicit cycle chase. Step 1 identifies P⊗R with P, which is elementary and needed because the coordinate lemma is phrased for K⊗M. Step 2 applies lem-weil-pbc-koszul-tensor-cone-coordinates with M=R and last entry t∈{f,g,fg}; its n=0 formulas D1(x,y)=dx+ty and D2(u,v)=(du+tv,−dv) match the lemma's statement exactly. Steps 3–5 recomputed by hand: from a g-boundary x=du+gv, fy=−dv and an f-boundary v=dw+fq, y=−dq, we get (x,y)=D_{fg,2}(u+gw,q). Tested on s=0 (product of nonzerodivisors), the zero ring, (x,y²) in k[x,y], and a unit prefix with f=g=0; no cancellation is used. The citer lem-per-h1-koszul-quasi-regular applies the item in the stated form. Duplicate grep for 062G/062C/koszul-mult finds only lem-pc-koszul-coordinate-mul-triangle, a sheaf triangle in D(O_X) and a different statement. No cycle, no SGA. The tool_uses entry for the generic coordinate lemma is accepted (C7/C8)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulH1LastProduct",
+  "declaration": "ExteriorAlgebra.koszul_h1_last_mul",
+  "file": "lean/Sheaf/RingTheory/KoszulH1LastProduct.lean",
+  "statement": "theorem koszul_h1_last_mul {R : Type u} [CommRing R] (s : ℕ) (h : Fin s → R) (f g : R) (hf : IsZero ((koszulComplex R (s + 1) (Fin.snoc h f)).homology 1)) (hg : IsZero ((koszulComplex R (s + 1) (Fin.snoc h g)).homology 1)) : IsZero ((koszulComplex R (s + 1) (Fin.snoc h (f * g))).homology 1)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8b8c2768",
+  "group": "Q97",
+  "result": "pass",
+  "note": "koszul_h1_last_mul matches node and Stacks 062G(1) with M=R: CommRing R : Type u with no extra instances; s : ℕ, h : Fin s → R; Fin.snoc appends f, g, f*g; IsZero of homology 1 of the recorded ℕ-indexed koszulComplex = ker d1/im d2. Covers s=0 and the zero ring; no regularity or proper-ideal hypothesis. lean.statement verbatim; node differs from live only in lean field; stmt_dep identical to live. No duplicate declaration or name clash in live lean or Mathlib. Docstrings carry source and blueprint and all 5 proof steps; sorry only; plain import is the proof_dep coordinate-lemma module. Fits citer lem-per-h1-koszul-quasi-regular (u, f_r^n). No findings."
+ }
+}

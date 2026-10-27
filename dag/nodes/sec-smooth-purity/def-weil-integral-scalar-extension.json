@@ -33,9 +33,45 @@
   "lem-weil-integral-scalar-extension-well-defined",
   "lem-weil-linear-abelian-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Retain the strict Roos/K-flat universal-localization construction and its normalized comparison and additivity from the existing well-definedness theorem. For the ordinary coefficient map, the finite quotient scalar maps commute with reduction. They define a cone on the target coefficient tower; its limit lift and full faithfulness of forgetting commutativity give the completed commutative-ring map. Joint monicity of the projections proves uniqueness.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the independent-coefficient-universe derived change-of-rings theorem to the completed map, retaining its ordinary tensor functor, prescribed object and morphism formulas, and additivity. These formulas determine the ordinary functor.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed finite-freeness theorem supplies a basis for the target coefficient sheaf as a module over the source via the specified completed map. The basis tensor isomorphisms and their naturality identify ordinary extension followed by restriction with finite power. Finite power preserves finite limits and colimits. Restriction has the same underlying abelian sheaf functor, hence preserves those limits and colimits and reflects isomorphisms; it therefore reflects them as well. Reflect the finite-power exactness back to ordinary extension.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "lem-pur-finite-free-scalar-extension",
+    "lem-pur-finite-power-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-completed-integral-finite-free",
+  "lem-pur-finite-free-scalar-extension",
+  "lem-pur-finite-power-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Proposition 3.5.1; existing strict Roos construction retained, with the ordinary exact tensor API proved from the finite-basis lemmas. F9, 2026-10-25."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,7 +96,18 @@
   "item": "def-weil-rationalization-karoubi",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-integral-scalar-extension",
@@ -97,5 +144,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "Section 1(B): publicly retains IntegralScalarExtension and exposes exactly its existing strict Roos/K-flat universal localization with independent scheme and coefficient universes. The current recorded abbreviation fixes both universes to u, although IntegralScalarExtensionWellDefined already supports independent t and u. The same witness, its normalized representative comparison and its additivity are used; no new scalar construction or extra hypothesis is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T071018-L-34844",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

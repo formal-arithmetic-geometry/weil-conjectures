@@ -22,11 +22,9 @@
  ],
  "proof": [
   {
-   "text": "Retagging changes only the structural maps to $\\operatorname{Spec}k$. The underlying schemes, the morphism $f$, and the chosen compactification $X\\to\\overline X\\to Y$ are unchanged. Thus the identified small pro-etale ringed sites give exactly the same strict tower categories, exact pullback functors, and termwise tensor operations. This is an identity of the abelian tower categories of [sk-def-sp-coefficient-towers], so it induces an identity on complexes and on their ordinary derived categories, retaining the quotient transitions. The Tate sheaves of [def-coefficient-twists-detailed] are unchanged: on an object $U$ their roots of unity are the same units satisfying $u^{\\ell^r}=1$, with the same power transition maps. The compactification construction of $F_\\bullet$ is likewise the same underlying functor. Identify the right adjoints by the stipulated counit-preserving isomorphism; [det-sp-tower-gluing](2) supplies its uniqueness and the Hom bijection. This argument uses the identity of the entire tower construction, not faithfulness of finite evaluations on derived morphisms.",
+   "text": "Apply [lem-pur-tower-operations-ground-field-retagging] to identify the ordinary derived tower categories, pullbacks, tensor constraints, Tate twists and same-compactification compact-support functor. These identifications retain the actual quotient transitions and identify the uniformly bounded constructible finite-Tor domains. Write $\\rho:G_{f^{\\langle\\sigma\\rangle}}\\xrightarrow{\\sim}G_f$ for the stipulated counit-preserving identification.",
    "uses": [
-    "sk-def-sp-coefficient-towers",
-    "det-sp-tower-gluing",
-    "def-coefficient-twists-detailed"
+    "lem-pur-tower-operations-ground-field-retagging"
    ],
    "elementary": false,
    "source": {
@@ -35,7 +33,7 @@
    }
   },
   {
-   "text": "The reviewed auxiliary comparison [lem-pur-orientation-ground-field-retagging] gives, under exactly the same underlying-site and counit-preserving adjoint identifications, the equality of normalized tower orientations a_{f^{\\langle\\sigma\\rangle},\\bullet}=a_{f,\\bullet}, including all quotient-coefficient transition maps. Hence the orientation factor in the definition of the purity map is unchanged.",
+   "text": "By [lem-pur-orientation-ground-field-retagging], the normalized orientations satisfy $\\rho_{\\mathbf1}\\circ a_{f^{\\langle\\sigma\\rangle},\\bullet}=a_{f,\\bullet}$ in the ordinary tower derived category, with quotient transitions retained.",
    "uses": [
     "lem-pur-orientation-ground-field-retagging"
    ],
@@ -46,14 +44,12 @@
    }
   },
   {
-   "text": "For $K_\\bullet$ in the stated constructible finite-Tor category, [det-sp-tower-gamma](2) defines $t_K$ as the adjoint transpose of $C_K:F_\\bullet(f^*_\\bullet K_\\bullet\\otimes^L\\omega_{f,\\bullet})\\to K_\\bullet$, where $C_K$ is inverse projection formula followed by $1\\otimes\\varepsilon_\\bullet$ at the coefficient unit. The projection transformation is the compactification construction of [def-exchange-projection]: the direct-image projection map is the transpose of the pullback-tensor comparison followed by the ordinary direct-image counit, and it is followed by the extension-by-zero tensor comparison. Retagging leaves each of these constructions unchanged on the identical underlying sites and compactification of Step 1; the same applies to their tower construction used in [det-sp-tower-gamma](2), before any evaluation. The projection transformation is natural in the $\\omega$ input, so the counit-preserving identification $\\rho:G_{\\mathrm{retag}}\\xrightarrow{\\sim}G_f$ also identifies $C_K$ for the two choices of $\\omega=G(1)$. Explicitly, the two maps $t_{f,K}\\circ(1\\otimes\\rho_1)$ and $\\rho_K\\circ t_{\\mathrm{retag},K}$ have the same transpose: apply $\\varepsilon_{f,K}\\circ F_\\bullet(-)$, use $\\varepsilon_f\\circ F_\\bullet(\\rho)=\\varepsilon_{\\mathrm{retag}}$, and the just-identified projection composite. Injectivity of the Hom bijection of [det-sp-tower-gluing], or the adjunct-counit identity [lem-weil-pbc-adjunct-counit-identity], makes these two maps equal. Step 2 gives $\\rho_1\\circ a_{\\mathrm{retag}}=a_f$. Composing with $1\\otimes a$ and the common twist reassociation therefore gives $\\rho_K\\circ\\gamma_{\\mathrm{retag}}(K_\\bullet)=\\gamma_f(K_\\bullet)$, exactly the asserted equality under the stipulated identifications. The domain is the full constructible finite-Tor tower category in [det-sp-tower-gamma](2), so no normalization assumption is used.",
+   "text": "For every $K_\\bullet$ in the stated category, [lem-pur-tower-tensor-transpose-ground-field-retagging] gives $\\rho_K\\circ t^{\\mathrm{retag}}_K=t_{f,K}\\circ(1\\otimes\\rho_{\\mathbf1})$. By [det-sp-tower-gamma](2), $\\gamma$ is the common twist reassociation followed by $1\\otimes a$ and $t$. Substitute the equality of Step 2 in this formula: $\\rho_K\\circ\\gamma_{f^{\\langle\\sigma\\rangle},\\bullet}(K_\\bullet)=t_{f,K}\\circ(1\\otimes\\rho_{\\mathbf1})\\circ(1\\otimes a_{\\mathrm{retag}})\\circ\\mathrm{reassoc}=t_{f,K}\\circ(1\\otimes a_f)\\circ\\mathrm{reassoc}=\\gamma_{f,\\bullet}(K_\\bullet)$. This is the claimed equality under the identifications. Every cited assertion applies to all uniformly bounded constructible finite-Tor towers, so normalization is unnecessary.",
    "uses": [
-    "det-sp-tower-gamma",
-    "det-sp-tower-gluing",
-    "lem-weil-pbc-adjunct-counit-identity",
-    "def-exchange-projection"
+    "lem-pur-tower-tensor-transpose-ground-field-retagging",
+    "det-sp-tower-gamma"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
     "place": "Steps 1–3, adjoint-transpose definition of tower purity and retagging invariance"
@@ -61,13 +57,10 @@
   }
  ],
  "proof_deps": [
-  "def-coefficient-twists-detailed",
-  "def-exchange-projection",
   "det-sp-tower-gamma",
-  "det-sp-tower-gluing",
   "lem-pur-orientation-ground-field-retagging",
-  "lem-weil-pbc-adjunct-counit-identity",
-  "sk-def-sp-coefficient-towers"
+  "lem-pur-tower-operations-ground-field-retagging",
+  "lem-pur-tower-tensor-transpose-ground-field-retagging"
  ],
  "proof_origin": {
   "by": "agent",
@@ -173,19 +166,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-tower-purity-ground-field-retagging",
   "worker": "stage1",
-  "summary": "Audited the tower purity retagging statement against the tower gluing and tower gamma interfaces. No new node is needed: the reviewed sibling lem-pur-orientation-ground-field-retagging supplies the required equality of normalized tower orientations, while det-sp-tower-gamma defines purity as the unique adjoint transpose of the projection-formula map. The identity-on-underlying-sites and same-compactification hypotheses make every other factor identical, so the purity maps agree for every constructible finite-Tor tower without normalization.",
-  "blueprint": "Realizes Steps 1–3 of thm-pur-weil-equivariance-of-purity-and-trace.proof.md for the tower coefficient stage; the orientation subcomparison is cited from lem-pur-orientation-ground-field-retagging.",
+  "summary": "Repair of the human-directed re-split: statement unchanged; extracted two independent statement-only work items for the underlying strict-tower operation identifications and for geometric projection/counit-transpose compatibility under retagging. The parent assembles them with the existing normalized orientation comparison. All original arguments are allocated explicitly in report.md; no finite-evaluation faithfulness or tower normalization is assumed.",
+  "blueprint": "Realizes the tower part of Steps 1–3 of thm-pur-weil-equivariance-of-purity-and-trace: underlying-operation identification, orientation equality and projection/counit transpose, followed by the purity composite.",
   "tool_uses": [
    {
-    "node": "det-sp-tower-gluing",
-    "why": "The generic representing-pair Hom bijection and unique counit-preserving identification of tower right adjoints; the six-functors package route does not state this strict-tower interface."
-   },
-   {
     "node": "det-sp-tower-gamma",
-    "why": "The generic orientation and adjoint-transpose formula on all uniformly bounded constructible finite-Tor towers, including non-normalized towers; this tower interface is not replaced by the six-functors package route."
+    "why": "The smooth-purity tower interface gives the precise three-factor formula for gamma on all uniformly bounded constructible finite-Tor towers; it is a generic tool, not a replacement route."
    }
   ]
  },
@@ -194,12 +183,23 @@
   "det-sp-tower-gamma"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q13-604d8d897",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q154-89b746863",
+  "group": "Q154",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-604d8d897 (reviewer sub-agent of L); spot-checked: Read the full delivery, cited statements, sources, and unit/chapter route. Statement unchanged. Added two tower tool-use declarations and direct twist/projection citations; made the counit-preserving transpose comparison explicit. Non-normalized towers and edge cases check out. Corrected JSON is under fixes/dag/nodes/sec-six-functors/; detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-89b746863 (reviewer sub-agent of L); spot-checked: I read the whole item, the old proof (verbatim in the report) and both new nodes, every cited statement (det-sp-tower-gamma, det-sp-tower-gluing, det-sp-tower-shriek-levels, lem-pur-orientation-ground-field-retagging, sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers, def-coefficient-twists-detailed, def-exchange-projection, def-weil-pbc-proetale-site, def-weil-compactifications-refinements), and two blueprint texts: main-20261015 thm-pur-weil-equivariance-of-purity-and-trace.proof Steps 1-5 and sk-prop-sp-tower-geometric-gamma.proof clause (2). Re-split note (2026-10-21): no argument of the old proof is lost. Old Step 1 (same sites, towers, twists via u^{l^r}=1, same compactification) became the operations node, stated in more detail. Old Step 2 is still the orientation lemma (rho_1 a_retag = a_f). Old Step 3 became the transpose node: the claim that PF is the same transformation, the naturality in the omega slot, eps_f F(rho)=eps_retag, equal transposes and injectivity of the gluing Hom bijection. The item proof is a 3-step assembly of about 1.4k characters; the new nodes are about 2.1k and 2.6k characters, so of comparable size, and neither restates the item. Maths checked: C_K F(1⊗rho_1)=C_K^sigma, then the transposes agree by the gluing bijection on C_X. Step 3 substitution: rho_K gamma^sigma = t(1⊗rho_1)(1⊗a^sigma)reassoc = gamma_f, which is genuinely elementary. Each construction depends only on the underlying schemes and the site, so the operations node is true. Small cases checked: sigma=id, f=id with d=0, empty X, K=0, ramified E (A_n=A_{E,en}), and non-normalized towers. B1-B3 hold: both new nodes have empty proofs, and their bracketed citations equal their stmt_deps. No SGA source is used. grep for 'retag' over the DAG finds no duplicate statement. Batch-5 flags (shriek-levels, gluing, gamma): all three were already in the item's closure (gluing and gamma are stmt_deps of the item; shriek-levels is a stmt_dep of gluing), and the delivered closure adds no node besides the two new ones. They are generic tower-construction interfaces, not trace-formula or Poincare-duality proof steps, so I accepted them. No files changed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,388 @@
+{
+ "id": "lem-sp-completed-coefficient-regular-quotients",
+ "kind": "statement",
+ "title": "Completed integral coefficient projections and regular scalar powers",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$ and uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension], and any scheme $T$. On its small pro-etale site put $R=\\mathcal O_{E,T}$ with its actual projections to the constant quotient ring sheaves $C_j=(O/\\pi^j)_T$ and $B_n=(O/\\ell^n)_T$ for $j,n\\geq1$ [sk-def-sp-coefficient-towers, def-weil-pbc-constant-sheaf]. There exist $u\\in O^\\times$ and $e\\geq1$ such that $\\ell=u\\pi^e$; the ideals $(\\ell^n)$ and $(\\pi^j)$ are cofinal, and all rings $O/\\pi^j$ and $O/\\ell^n$ are finite. On sections over every site object, multiplication by each positive power of $\\pi$ or $\\ell$ is injective on $R$. The actual projection $\\rho_j:R\\to C_j$ is an epimorphism of sheaves of rings and its kernel is the ideal sheaf $\\pi^jR$. Likewise $q_n:R\\to B_n$ is an epimorphism with kernel $\\ell^nR$. Thus the canonical maps induce ring-sheaf isomorphisms $R/\\pi^jR\\xrightarrow{\\sim}C_j$ and $R/\\ell^nR\\xrightarrow{\\sim}B_n$, normalized by the projections and compatible with every quotient transition. Quotients here are sheaf quotients (sheafification of sectionwise quotients), and $\\pi,\\ell$ act by their constant scalar sections; no characteristic or finiteness condition on $T$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First paragraph, coefficient setup before the displayed derived tensor product; returned proof steps 1–3; explicit agent expansion of the coefficient calculation (not a theorem stated verbatim by Bhatt–Scholze)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-pbc-constant-sheaf",
+  "def-pe-principal-power-ring-quotients"
+ ],
+ "proof": [
+  {
+   "text": "Apply DVR factorization to the nonzero scalar ell. Its absolute value is strictly less than one, so it is not a unit and the uniformizer exponent e is positive. Equality (ell)=(pi)^e and the existing cofinality theorem give cofinal positive filtrations. Use Padic.finite_coefficientExtensionRing for the uniformizer quotients; rewriting (ell)^(n+1)=(pi)^(e(n+1)) gives finiteness of the ell quotients.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-coefficient-extension",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph: coefficient regularity and finite quotients used for the reduction cone. Lean proof assembled by E3 from the existing DVR, divisibility, regularity and normalized-map uniqueness declarations."
+   }
+  },
+  {
+   "text": "The constant-to-completed map followed by a uniformizer projection is the constant quotient map by limit.lift_pi. The chosen ell comparison has the same normalization by sp_completed_coefficient_limit. Naturality of toSheafify identifies their values on the specified scalar sections with reductions of scalars.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph: coefficient regularity and finite quotients used for the reduction cone. Lean proof assembled by E3 from the existing DVR, divisibility, regularity and normalized-map uniqueness declarations."
+   }
+  },
+  {
+   "text": "A surjective homomorphism of coefficient rings has a set-theoretic section. Apply constant set sheafification to this section and transport through constantCommuteCompose for the underlying-set functor. This proves surjectivity on sections of the constant ring quotient map. Factor it through the normalized completed projection; that projection is therefore surjective on every site object, and cancellation on sections proves it is epi.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-pe-ring-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph: coefficient regularity and finite quotients used for the reduction cone. Lean proof assembled by E3 from the existing DVR, divisibility, regularity and normalized-map uniqueness declarations."
+   }
+  },
+  {
+   "text": "For the uniformizer projection, completedIntegralProjection_divisible writes every kernel element as pi^(n+1)y. Conversely scalar normalization and quotient ideal membership show that every such product maps to zero. Thus the kernel is exactly the sectionPowerIdeal. Apply completedIntegralScalar_regular for injectivity of every uniformizer power.",
+   "uses": [
+    "lem-sp-completed-integral-projection-divisibility",
+    "lem-pod-completed-integral-scalar-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph: coefficient regularity and finite quotients used for the reduction cone. Lean proof assembled by E3 from the existing DVR, divisibility, regularity and normalized-map uniqueness declarations."
+   }
+  },
+  {
+   "text": "To calculate the ell projection kernel, identify its ideal with the uniformizer ideal of exponent e(n+1). Equality elimination reduces its target to that uniformizer quotient, and completedIntegralFiniteQuotientHom_ext identifies the two normalized projections. Transfer the kernel formula. The scalar ring homomorphism sends ell=u*pi^e to the same identity in completed sections. Its unit factor gives equality of principal ideals and permits cancellation, proving regularity of ell powers.",
+   "uses": [
+    "lem-sp-completed-integral-finite-quotient-hom-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph: coefficient regularity and finite quotients used for the reduction cone. Lean proof assembled by E3 from the existing DVR, divisibility, regularity and normalized-map uniqueness declarations."
+   }
+  },
+  {
+   "text": "For either scalar power, form the natural transformation from sectionwise quotient rings to the constant finite quotient, using the proved kernel formula. Each component is bijective by the first isomorphism theorem and sectionwise surjectivity, so it is an isomorphism of presheaves. Sheafify this isomorphism and compose with the counit at the target sheaf. Naturality of the sheafification unit and the adjunction triangle identity prove that the resulting isomorphism is normalized by the actual projection.",
+   "uses": [
+    "def-pe-principal-power-ring-quotients",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph: coefficient regularity and finite quotients used for the reduction cone. Lean proof assembled by E3 from the existing DVR, divisibility, regularity and normalized-map uniqueness declarations."
+   }
+  },
+  {
+   "text": "The actual finite projections commute with every reduction: both sides have the same constant normalization, so apply completedIntegralFiniteQuotientHom_ext. Transport each finite quotient transition through the constructed isomorphisms. Associativity, projection normalization and hom-inv cancellation give both projection equations and both transition squares.",
+   "uses": [
+    "lem-sp-completed-integral-finite-quotient-hom-ext"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph: coefficient regularity and finite quotients used for the reduction cone. Lean proof assembled by E3 from the existing DVR, divisibility, regularity and normalized-map uniqueness declarations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pe-ring-sheafification-underlying-sets",
+  "lem-sp-completed-integral-projection-divisibility",
+  "lem-pod-completed-integral-scalar-regular",
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "def-pe-principal-power-ring-quotients",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First paragraph: coefficient regularity and finite quotients used for the reduction cone. Lean proof assembled by E3 from the existing DVR, divisibility, regularity and normalized-map uniqueness declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On any pro-etale site the completed ring of integers of a finite extension of Q_l has regular uniformizer and l powers, finite constant quotients identified by the canonical projections",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "BDeRhamPlus",
+     "instCommRingBDeRhamPlus",
+     "BDeRham",
+     "IsDedekindDomain.HeightOneSpectrum.adicCompletion",
+     "IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers",
+     "PreTilt.exists_smodEq_untiltAux",
+     "IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion",
+     "PreTilt"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion, perfectoid rings and condensed constructions do not identify the actual completed coefficient sheaf projections with finite constant quotients or give its regular scalars on every scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "completedIntegral|uniformizer.*(sheaf|kernel)|adicCompletion.*quotient",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+     "Mathlib/RingTheory/AdicCompletion/Basic.lean",
+     "Mathlib/RingTheory/AdicCompletion/Algebra.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion, perfectoid rings and condensed constructions do not identify the actual completed coefficient sheaf projections with finite constant quotients or give its regular scalars on every scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completed integral coefficient ring on the pro-etale site has quotient modulo uniformizer powers equal to the constant finite quotient sheaf",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "PreTilt.mk_comp_untilt_eq_coeff_zero",
+     "WittVector.quotientPEquiv_mk",
+     "WittVector.quotientPEquiv",
+     "Condensed.lanCondensedSet",
+     "Condensed.lanSheafProfinite",
+     "Condensed.isColimitLocallyConstantPresheafDiagram",
+     "UniformSpace.Completion.coeRingHom",
+     "BDeRhamPlus"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion, perfectoid rings and condensed constructions do not identify the actual completed coefficient sheaf projections with finite constant quotients or give its regular scalars on every scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"quotient\"",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "AdicCompletion.instSMulQuotientIdealHSMulTopSubmodule",
+     "AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule",
+     "AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion, perfectoid rings and condensed constructions do not identify the actual completed coefficient sheaf projections with finite constant quotients or give its regular scalars on every scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a uniformizer on the inverse limit of constant DVR quotient sheaves is injective and its canonical projection modulo a uniformizer power has exactly that power ideal as kernel and is a sheaf epimorphism",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Ideal.quotientToQuotientRangePowQuotSucc_injective",
+     "AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq",
+     "AdicCompletion.exists_smodEq_pow_add_one_smul",
+     "Ideal.quotientToQuotientRangePowQuotSucc_mk",
+     "Ideal.quotientToQuotientRangePowQuotSuccAux_mk",
+     "AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top",
+     "AdicCompletion.of_apply",
+     "AdicCompletion.eval_of"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion, perfectoid rings and condensed constructions do not identify the actual completed coefficient sheaf projections with finite constant quotients or give its regular scalars on every scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral coefficient sheaf on a site is torsion free and reduction modulo powers of a uniformizer is the constant quotient sheaf",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Profinite.NobelingProof.instIsAddTorsionFreeLocallyConstantInt",
+     "CategoryTheory.Sheaf.IsConstant.mk",
+     "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app",
+     "SheafOfModules.unit",
+     "SheafOfModules.free",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.ιFree",
+     "ModuleCat.Tilde.res_const"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary adic-completion, constant-sheaf, ramification and module declarations do not state the completed ring-sheaf projection/kernel/injectivity package on an arbitrary scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a uniformizer on the inverse limit of constant DVR quotient sheaves is injective and the canonical projection has kernel the corresponding principal ideal sheaf",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Ideal.quotientToQuotientRangePowQuotSucc_injective",
+     "Ideal.powQuotSuccInclusion_injective",
+     "BDeRham",
+     "IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers",
+     "Ideal.quotientRangePowQuotSuccInclusionEquiv",
+     "Ideal.quotientToQuotientRangePowQuotSucc_mk",
+     "Ideal.quotientToQuotientRangePowQuotSuccAux_mk",
+     "Ideal.powQuotSuccInclusion_apply_coe"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary adic-completion, constant-sheaf, ramification and module declarations do not state the completed ring-sheaf projection/kernel/injectivity package on an arbitrary scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of constant quotient ring sheaves by powers of a nonzero element has injective scalar multiplication and the expected quotient sheaves",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Ideal.quotientToQuotientRangePowQuotSucc_injective",
+     "Ideal.powQuotSuccInclusion_injective",
+     "AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq",
+     "AdicCompletion.val_smul_eq_evalₐ_smul",
+     "AdicCompletion.smul_mk",
+     "AdicCompletion.map_injective",
+     "localCohomology",
+     "AdicCompletion.of_apply"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary adic-completion, constant-sheaf, ramification and module declarations do not state the completed ring-sheaf projection/kernel/injectivity package on an arbitrary scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-ell-coefficient-fiber",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "First paragraph, coefficient setup before the displayed derived tensor product; returned proof steps 1–3",
+   "via": [
+    "lem-sp-ell-coefficient-fiber"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-completed-coefficient-regular-quotients",
+  "worker": "stage1",
+  "summary": "Split with no new nodes, retaining the statement and inherited citations/searches. Reused existing DVR finiteness/factorization, arbitrary-scheme integral-limit comparison, scalar regularity and sectionwise projection-divisibility lemmas. Wrote local constant lifts, epimorphism cancellation, ell-power normalization, explicit quotient inverse and transition compatibility. Checked every cited statement, small cases and dependency closures.",
+  "blueprint": "sk-lem-sp-tower proof, first paragraph before the displayed derived tensor: coefficient setup and the regular scalar quotient underlying the reduction cone. This is below the unit route, and does not replace any unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "DVR factorization and the finite residue field for the given finite local-field extension; generic coefficient arithmetic. The tower reconstruction unit has no arithmetic or site-theoretic replacement for this fact."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Finiteness of the positive uniformizer quotients; generic coefficient arithmetic. The tower reconstruction unit has no arithmetic or site-theoretic replacement for this fact."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Clause (3) identifies the actual coefficient ring with its uniformizer-power limit on any scheme; a generic coefficient comparison. The tower reconstruction unit has no arithmetic or site-theoretic replacement for this fact."
+   },
+   {
+    "node": "lem-pod-completed-integral-scalar-regular",
+    "why": "Injectivity of the constant uniformizer on sections over any pro-etale object; generic coefficient-ring regularity. The tower reconstruction unit has no arithmetic or site-theoretic replacement for this fact."
+   },
+   {
+    "node": "lem-sp-completed-integral-projection-divisibility",
+    "why": "Sectionwise division of the actual uniformizer projection kernel; generic coefficient-ring divisibility. The tower reconstruction unit has no arithmetic or site-theoretic replacement for this fact."
+   },
+   {
+    "node": "lem-pe-ring-sheafification-underlying-sets",
+    "why": "Naturality identifies the underlying set sheafification of a constant ring and its constant scalar sections; generic sheafification tool. The tower reconstruction unit has no arithmetic or site-theoretic replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives of sections in a sheafification; generic site tool used for lifts and quotient representatives. The tower reconstruction unit has no arithmetic or site-theoretic replacement for this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pod-completed-integral-scalar-regular",
+  "lem-sp-completed-integral-projection-divisibility",
+  "lem-pe-ring-sheafification-underlying-sets"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-dd3ad8ece",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-dd3ad8ece (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, the statements of all 12 cited nodes, and the sk-lem-sp-tower main-20261015 proof (first paragraph). The delivery adds no new nodes and no fixes. No proof_dep has the item in its closure, so there is no cycle. No SGA is cited, and there is no re-split note for this item. Step 1: lem-weil-l-adic-extension-integers-dvr(5) gives ell=u*pi^e, and the norms |ell|=ell^-1<1, |u|=1, 0<|pi|<1 give e>0. The hypotheses of lem-weil-valued-dvr-finite-quotients hold (nonarchimedean norm from def-weil-l-adic-coefficient-extension(1)), which gives finite O/pi^j and O/ell^n=O/pi^(en). Step 2: clause (3) of det-prop-sfb-qlbar-colimit-x-integral-limit holds for any scheme. Its canonical iso is normalized on constant sections through the X[O_E] representations of clauses 1-2. B_n=C_en holds literally, and q_n=rho_en matches the ell-power reindexing in sk-def-sp-coefficient-towers. Step 3: lem-pod-completed-integral-scalar-regular (any T, U, m) states exactly that multiplication by pi^j is injective on sections. Step 4: projection-divisibility applies at n=j-1>=0, and injectivity makes the sectionwise image a sheaf. Its B is cited through def-weil-completed-integral-coefficients, whose ell!=p setting is irrelevant to the construction. Step 5: local constant lifts come from 00WK and the underlying-set comparison; the epimorphism is proved by cancellation, not by claiming surjectivity. Steps 6-7: the ell case follows through the unit u^n, and the quotient inverse is glued from local lifts; both are routine and correct. Small cases checked: E=Q_ell, a ramified E, j=1, empty and disconnected U, any characteristic. Batch-5 check: lem-pod-completed-integral-scalar-regular is a generic coefficient-ring regularity fact. Neither the trace formula nor Poincare duality gives it, it comes from prop-cohomological-finiteness, it is proved in Lean, and its 104-node closure has no other pod or trf node. It is therefore outside both assumptions and accepted. Maintainer note: the item's content already appears in existing split nodes lem-sf-completed-coefficient-free-resolution, lem-a1-principal-koszul-strict-replacement (the exact sequence 0->R->R->S_n->0) and det-prop-integral-criterion-constant-coefficients(1). These are merge candidates. The item was created by a prior landed NX split, so this delivery cannot drop it, and its proof is correct, more direct, and adds the ell-power normalization and transition compatibility. Tool_uses for the DVR, integral-limit, regularity, divisibility and sheafification tools are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedCoefficientRegularQuotients",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_completed_coefficient_regular_quotients",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spCompletedScalarSection",
+   "AlgebraicGeometry.ProEtale.spEllCommRingSheaf",
+   "AlgebraicGeometry.ProEtale.spCompletedEllCommRingProjection",
+   "AlgebraicGeometry.ProEtale.spUniformizerQuotientTransition",
+   "AlgebraicGeometry.ProEtale.spEllQuotientTransition",
+   "AlgebraicGeometry.ProEtale.sp_completed_coefficient_regular_quotients"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedCoefficientRegularQuotients.lean",
+  "statement": "theorem sp_completed_coefficient_regular_quotients : (∃ (v : (Padic.coefficientExtensionIntegers l E)ˣ) (e : ℕ), 1 ≤ e ∧ (l : Padic.coefficientExtensionIntegers l E) = (v : Padic.coefficientExtensionIntegers l E) * Padic.coefficientExtensionUniformizer l E ^ e) ∧ ((∀ j : ℕ, ∃ n : ℕ, spEllIdeal l E ^ (n + 1) ≤ Padic.coefficientExtensionIdeal l E (j + 1)) ∧ (∀ n : ℕ, ∃ j : ℕ, Padic.coefficientExtensionIdeal l E (j + 1) ≤ spEllIdeal l E ^ (n + 1))) ∧ (∀ n : ℕ, Finite (Padic.coefficientExtensionRing l E (n + 1)) ∧ Finite (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))) ∧ (∀ (n : ℕ) (U : T.ProEtᵒᵖ), Function.Injective (fun x : (completedIntegralCommRingSheafUnrestricted l E T).obj.obj U ↦ (@id ((completedIntegralCommRingSheafUnrestricted l E T).obj.obj U) ((spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)).val U)) ^ (n + 1) * x) ∧ Function.Injective (fun x : (completedIntegralCommRingSheafUnrestricted l E T).obj.obj U ↦ (@id ((completedIntegralCommRingSheafUnrestricted l E T).obj.obj U) ((spCompletedScalarSection l E T l).val U)) ^ (n + 1) * x)) ∧ (∀ n : ℕ, Epi (completedIntegralCommRingProjectionUnrestricted l E T n) ∧ Epi (spCompletedEllCommRingProjection l E T n) ∧ ∀ U : T.ProEtᵒᵖ, RingHom.ker ((completedIntegralCommRingProjectionUnrestricted l E T n).hom.app U).hom = sectionPowerIdeal (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)) (n + 1) U ∧ RingHom.ker ((spCompletedEllCommRingProjection l E T n).hom.app U).hom = sectionPowerIdeal (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T l) (n + 1) U) ∧ ∃ (a : ∀ n : ℕ, principalPowerRingQuotient (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)) (n + 1) ≅ integralCoefficientCommRingSheaf l E T n) (b : ∀ n : ℕ, principalPowerRingQuotient (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T l) (n + 1) ≅ spEllCommRingSheaf l E T n), (∀ n : ℕ, principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)) (n + 1) ≫ (a n).hom = completedIntegralCommRingProjectionUnrestricted l E T n) ∧ (∀ n : ℕ, principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T l) (n + 1) ≫ (b n).hom = spCompletedEllCommRingProjection l E T n) ∧ (∀ (m n : ℕ) (h : m ≤ n), ∃ (r : principalPowerRingQuotient (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)) (n + 1) ⟶ principalPowerRingQuotient (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)) (m + 1)) (s : principalPowerRingQuotient (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T l) (n + 1) ⟶ principalPowerRingQuotient (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T l) (m + 1)), principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)) (n + 1) ≫ r = principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)) (m + 1) ∧ principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T l) (n + 1) ≫ s = principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T) (spCompletedScalarSection l E T l) (m + 1) ∧ r ≫ (a m).hom = (a n).hom ≫ spUniformizerQuotientTransition l E T h ∧ s ≫ (b m).hom = (b n).hom ≫ spEllQuotientTransition l E T h)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Positive level n denotes exponent n+1. Reuses the existing completed coefficient sheaf, chosen scalar map, normalized ell-tower comparison, and principalPowerRingQuotient sheafification. All quotient transitions are normalized by the quotient projections. The only stmt_deps addition names the already landed principal-power quotient construction. Review FIX (2026-10-23): the CommRingCat ell projection is named spCompletedEllCommRingProjection, since AlgebraicGeometry.ProEtale.spCompletedEllProjection (RingCat form of the same map) is already declared by the parent lem-sp-ell-coefficient-fiber, whose module will import this one.",
+  "fixed_by": "NT-stage2-cc-a5a6633a2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5a6633a2",
+  "group": "N6",
+  "result": "fix",
+  "note": "Maths faithful clause by clause: factorization l=u*pi^e (e>=1), two-way cofinality, finiteness, sectionwise injectivity of pi/l powers on the recorded completed CommRing sheaf with the canonical constant scalar, Epi of the limit projection and of the l projection (the unique witness of sp_completed_coefficient_limit), kernels = sectionPowerIdeal, quotient isos from principalPowerRingQuotient fixed by the (epi) projections, and transition squares for all m<=n. Added landed stmt_dep def-pe-principal-power-ring-quotients is allowed; no hollow defs; H8 docstring has all 7 steps; no extra hypotheses or universe equations. H9 FIXED: AlgebraicGeometry.ProEtale.spCompletedEllProjection is already declared by the parent lem-sp-ell-coefficient-fiber (EllCoefficientFiber.lean), which has this item in proof_deps and will import it at stage 3; renamed to spCompletedEllCommRingProjection in fixes/CompletedCoefficientRegularQuotients.lean plus lean-record.json (declarations, verbatim statement, note); nt_compile --json clean in 2.8 s, injected-error control fails as expected. Advisories: decls owned by def-weil-completed-integral-coefficients are not in stmt_deps (reached via sk-def-sp-coefficient-towers); the second reading was written by the author under the dispatcher's no-second-agent policy."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261023T123449-L-1193580",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

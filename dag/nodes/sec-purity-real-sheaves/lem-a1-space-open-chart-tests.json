@@ -1,0 +1,228 @@
+{
+ "id": "lem-a1-space-open-chart-tests",
+ "kind": "statement",
+ "title": "Open scheme tests give monomorphy and etale composite charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $O,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $j:O\\to Y$ be a morphism. Suppose that for every $S$-scheme $H$ and every $c:h_H\\to Y$, the sheaf fibre product $h_H\\times_YO$ is represented by a scheme $O_H$, whose projection to $H$ is an open immersion [def-weil-open-immersion]. Here $h_H(K)=\\operatorname{Mor}_S(K,H)$, and fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers], with scheme fibre products as in [def-pc-fibre-product]. Then $j$ is injective on sections over every scheme: for $a_1,a_2\\in O(H)$ with $j(a_1)=j(a_2)$ one has $a_1=a_2$. Thus $j$ is a monomorphism of these sheaves. Each $O_H\\to H$ is etale [def-weil-etale-morphism]. For every representable etale chart $v:h_V\\to O$ with $V$ a scheme, the composite $jv:h_V\\to Y$ is representable etale. More precisely, for every $c:h_H\\to Y$ its scheme test is canonically $h_V\\times_Yh_H\\cong h_V\\times_O h_{O_H}$; the scheme representing the right side has etale projection to $O_H$, and its projection to $H$ is the composite of that map with $O_H\\to H$.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WK (lemma-composition-representable-transformations-property), specialized to an open inclusion and an etale chart; scheme inputs: morphisms.tex Tags 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), and schemes.tex Tag 01L7 (lemma-immersions-monomorphisms)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix an $S$-scheme $H$ and $a_1,a_2\\in O(H)$ with common image $c\\in Y(H)$. A section $a$ defines the natural transformation $h_H\\to O$ sending $t:K\\to H$ to $a|_t$; evaluation at $\\mathrm{id}_H$ is its inverse. Thus the two compatible pairs $(\\mathrm{id}_H,a_i)$ give two maps $s_i:H\\to O_H$ over $H$, under the assumed representing isomorphism $h_{O_H}\\cong h_H\\times_YO$. To see this correspondence explicitly, a natural transformation $h_H\\to h_{O_H}$ is the map obtained by evaluating at $\\mathrm{id}_H$, since naturality forces its value on $t$ to be composition with $t$. The projection $p:O_H\\to H$ is an open immersion, hence a monomorphism by [lem-weil-pbc-open-immersion-monomorphism]. Since $p s_1=p s_2=\\mathrm{id}_H$, we have $s_1=s_2$, and evaluation of the $O$-projection gives $a_1=a_2$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L7 (lemma-immersions-monomorphisms), applied to the scheme test; spaces.tex, discussion following definition-immersion."
+   }
+  },
+  {
+   "text": "For any sheaf $F$ and maps $u_1,u_2:F\\to O$ satisfying $j u_1=j u_2$, step 1 applied to $u_1(x),u_2(x)$ for every scheme $H$ and $x\\in F(H)$ gives equality of all components. Hence $u_1=u_2$, which is precisely that $j$ is a monomorphism of sheaves.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Discussion following definition-immersion: immersions are monomorphisms."
+   }
+  },
+  {
+   "text": "For every scheme test $c:h_H\\to Y$, the given scheme map $p:O_H\\to H$ is an open immersion. Apply [lem-weil-pbc-open-immersion-etale] to obtain that $p$ is etale.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GP (lemma-open-immersion-etale)."
+   }
+  },
+  {
+   "text": "Compatible-pair functors are sheaves: glue each component by its sheaf axiom; equality of the images follows by uniqueness of gluing. Thus these functors realize the sheaf pullbacks. Fix the representable etale map $v:h_V\\to O$ and a scheme test $c:h_H\\to Y$. Let $r:h_{O_H}\\to O$ be the other projection of $h_{O_H}\\cong h_H\\times_YO$. By the scheme-test definition in [def-trf-algebraic-space], $h_V\\times_O h_{O_H}$ is represented by a scheme $W$ and its projection $q:W\\to O_H$ is etale. The required comparison is explicit: on each test scheme $K$, send $(x,t)\\in V(K)\\times H(K)$ with $jv(x)=c(t)$ to $(x,(t,v(x)))$. Its inverse sends $(x,(t,o))$, where $v(x)=o$ and $c(t)=j(o)$, to $(x,t)$. Restrictions preserve both formulas. They therefore give mutually inverse natural maps $h_V\\times_Yh_H\\cong h_V\\times_Oh_{O_H}$. The projection to $h_H$ is $h_p\\circ h_q$ by these formulas.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WK (lemma-composition-representable-transformations-property): explicit scheme-test pullback calculation filling its omitted proof in this case."
+   }
+  },
+  {
+   "text": "For this $W$, step 3 gives that $p$ is etale and step 4 gives that $q$ is etale. Clause (2) of [lem-weil-pbc-etale-composition-cancellation] gives that $p\\circ q:W\\to H$ is etale. Thus every scheme test of $jv$ is represented by $W$ with etale projection, exactly representable etaleness in [def-trf-algebraic-space]. Step 4 gives the stated canonical comparison and both projection descriptions.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WK (lemma-composition-representable-transformations-property), with morphisms.tex Tag 02GN (lemma-composition-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WK (lemma-composition-representable-transformations-property), scheme-test argument; discussion following definition-immersion, using schemes.tex Tag 01L7 and morphisms.tex Tags 02GP, 02GN. Explicit omitted pullback details supplied by Q27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A representable open immersion of algebraic spaces is injective on every scheme section and composes with etale scheme charts to give etale charts",
+   "results": "{\"t\": \"2026-10-22T07:58:04Z\", \"tool\": \"leanfinder\", \"query\": \"A representable open immersion of algebraic spaces is injective on every scheme section and composes with etale scheme charts to give etale charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme\"], \"digest\": \"da39cd577ece6a3f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme open-immersion monomorphy and general relative-property composition are available ingredients, but neither states the combined arbitrary-space-source section-injectivity and explicit chart scheme-test assertion. Representable.lean lines 389-440 require separate relative-property implications, composition, and Yoneda section identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme tests of an open inclusion of sheaves show it is a monomorphism and that every etale chart remains etale after composition",
+   "results": "{\"t\": \"2026-10-22T07:58:16Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme tests of an open inclusion of sheaves show it is a monomorphism and that every etale chart remains etale after composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"AlgebraicGeometry.Scheme.Opens.instIsOpenImmersionι\", \"AlgebraicGeometry.instIsOpenImmersionHomOfLE\", \"AlgebraicGeometry.Scheme.restrict\", \"AlgebraicGeometry.Scheme.ofRestrict\", \"AlgebraicGeometry.Scheme.Opens.instIsOverι\", \"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict\"], \"digest\": \"f1b19168d9fa6381\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme open-immersion monomorphy and general relative-property composition are available ingredients, but neither states the combined arbitrary-space-source section-injectivity and explicit chart scheme-test assertion. Representable.lean lines 389-440 require separate relative-property implications, composition, and Yoneda section identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T07:58:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme open-immersion monomorphy and general relative-property composition are available ingredients, but neither states the combined arbitrary-space-source section-injectivity and explicit chart scheme-test assertion. Representable.lean lines 389-440 require separate relative-property implications, composition, and Yoneda section identification."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space|open.*immersion.*(chart|sheaf)",
+   "results": "{\"t\": \"2026-10-22T07:58:17Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic space|open.*immersion.*(chart|sheaf)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\"], \"digest\": \"09f2c709d4732e74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme open-immersion monomorphy and general relative-property composition are available ingredients, but neither states the combined arbitrary-space-source section-injectivity and explicit chart scheme-test assertion. Representable.lean lines 389-440 require separate relative-property implications, composition, and Yoneda section identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable open immersions of sheaves are monomorphisms and composites with etale charts are representable etale",
+   "results": "{\"t\": \"2026-10-22T07:58:17Z\", \"tool\": \"leansearch\", \"query\": \"Representable open immersions of sheaves are monomorphisms and composites with etale charts are representable etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono\", \"AlgebraicGeometry.IsOpenImmersion.mono\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono\", \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instMono\", \"AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\"], \"digest\": \"6ceac837e3743a2b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme open-immersion monomorphy and general relative-property composition are available ingredients, but neither states the combined arbitrary-space-source section-injectivity and explicit chart scheme-test assertion. Representable.lean lines 389-440 require separate relative-property implications, composition, and Yoneda section identification."
+  },
+  {
+   "tool": "grep",
+   "query": "relative_comp|presheaf.*[Mm]ono|relative.*[Mm]ultiplicative|IsStableUnderComposition",
+   "results": "{\"t\": \"2026-10-22T08:00:23Z\", \"tool\": \"grep\", \"query\": \"relative_comp|presheaf.*[Mm]ono|relative.*[Mm]ultiplicative|IsStableUnderComposition\", \"sub\": \"CategoryTheory/MorphismProperty/Representable.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"74\", \"402\", \"403\", \"417\", \"427\"], \"digest\": \"b0c08f65fc60742a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme open-immersion monomorphy and general relative-property composition are available ingredients, but neither states the combined arbitrary-space-source section-injectivity and explicit chart scheme-test assertion. Representable.lean lines 389-440 require separate relative-property implications, composition, and Yoneda section identification."
+  },
+  {
+   "tool": "grep",
+   "query": "relative_isStableUnderComposition|presheaf_monomorphisms_le_monomorphisms",
+   "results": "{\"t\": \"2026-10-22T08:10:28Z\", \"tool\": \"grep\", \"query\": \"relative_isStableUnderComposition|presheaf_monomorphisms_le_monomorphisms\", \"sub\": \"CategoryTheory/MorphismProperty\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\"], \"digest\": \"c2f8773c597f3cdb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme open-immersion monomorphy and general relative-property composition are available ingredients, but neither states the combined arbitrary-space-source section-injectivity and explicit chart scheme-test assertion. Representable.lean lines 389-440 require separate relative-property implications, composition, and Yoneda section identification."
+  },
+  {
+   "tool": "grep",
+   "query": "relative_isStableUnderComposition|presheaf_monomorphisms_le_monomorphisms|relative_comp",
+   "results": "{\"t\": \"2026-10-23T04:11:30Z\", \"tool\": \"grep\", \"query\": \"relative_isStableUnderComposition|presheaf_monomorphisms_le_monomorphisms|relative_comp\", \"sub\": \"CategoryTheory/MorphismProperty/Representable.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"402\", \"428\", \"446\"], \"digest\": \"2d056ee5fbb2fad3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits and general relative-property ingredients do not give the complete combined assertion by a one-line specialization; read Representable.lean:368-440 and the existing scheme Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable open immersions of sheaves are injective on sections and composites with etale scheme charts are representable etale",
+   "results": "{\"t\": \"2026-10-23T04:11:31Z\", \"tool\": \"leansearch\", \"query\": \"Representable open immersions of sheaves are injective on sections and composites with etale scheme charts are representable etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono\", \"AlgebraicGeometry.IsOpenImmersion.mono\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instMono\", \"AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk\", \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion\"], \"digest\": \"196288e0c6b49b34\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits and general relative-property ingredients do not give the complete combined assertion by a one-line specialization; read Representable.lean:368-440 and the existing scheme Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "MorphismProperty.relative, IsOpenImmersion, Etale",
+   "results": "{\"t\": \"2026-10-23T04:11:31Z\", \"tool\": \"loogle\", \"query\": \"MorphismProperty.relative, IsOpenImmersion, Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MorphismProperty.relative'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "query rejected: unknown identifier MorphismProperty.relative; no conclusion of absence from this query; semantic and source searches used instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces whose scheme base changes are open immersions is injective on sections and composition with a representable etale scheme chart is representable etale",
+   "results": "{\"t\": \"2026-10-23T04:11:38Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces whose scheme base changes are open immersions is injective on sections and composition with a representable etale scheme chart is representable etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"e97daa4d820a760c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits and general relative-property ingredients do not give the complete combined assertion by a one-line specialization; read Representable.lean:368-440 and the existing scheme Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fully faithful Yoneda functor, relative open immersions are monomorphisms of sheaves and relative etale maps are stable under composition",
+   "results": "{\"t\": \"2026-10-23T04:12:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a fully faithful Yoneda functor, relative open immersions are monomorphisms of sheaves and relative etale maps are stable under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenImmersion_isStableUnderComposition\", \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"AlgebraicGeometry.IsOpenImmersion.mono\", \"AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.isOpenImmersion_isMultiplicative\", \"AlgebraicGeometry.HasRingHomProperty.comp_of_isOpenImmersion\"], \"digest\": \"3e588bbc82af3af7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits and general relative-property ingredients do not give the complete combined assertion by a one-line specialization; read Representable.lean:368-440 and the existing scheme Mathlib leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-separated-lqf-permanence",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The geometric representability branch beneath lem-a1-affine-hc0, via 03XX and 03XW: third paragraph, base-change hypotheses in the induction diagram; fourth paragraph, separated locally quasi-finite structure of the saturated open over T′. Extraction of old permanence proof steps 3 and 4.",
+   "via": [
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-open-chart-tests",
+  "worker": "stage1",
+  "summary": "Wrote section lifts and monomorphism cancellation explicitly, then constructed the canonical chart-test isomorphism by mutually inverse compatible-pair formulas. Reused the existing scheme monomorphism, open-etale, and etale-composition Mathlib leaves; no new nodes. Statement unchanged; searched project, DAG, blueprint and Mathlib.",
+  "blueprint": "Auxiliary geometric representability branch under lem-a1-affine-hc0 through the recorded via chain: open-subspace step of lem-a1-space-separated-lqf-permanence, realizing its monicity and chart-composition inputs. No change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-6b5ab0ab0",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-6b5ab0ab0 (reviewer sub-agent of L); spot-checked: I read the item in full. It is a 0-node split, the statement is unchanged and there is no repair note. Step 1: the Yoneda lifts s_i:H→O_H with p s_i=id_H, together with the open-immersion monomorphism leaf, give a_1=a_2. Step 2: componentwise monomorphism, correctly marked elementary. Step 3: the open-immersion étale leaf. Step 4: the explicit natural maps (x,t)↦(x,(t,v(x))) and back are well defined and inverse to each other, the projection is p∘q, and W and the étale q come from the scheme-test definition in def-trf-algebraic-space. Step 5: clause (2) of the étale composition leaf. Statement tested on an open subscheme U⊆X, on empty H or O_H and on j=id. Sources checked: spaces.tex 02WK (line 559), the discussion after definition-immersion, schemes.tex 01L7, morphisms.tex 02GP and 02GN. No SGA is used. proof_deps equals the union of the uses. The only citer, lem-a1-space-separated-lqf-permanence, uses exactly the monic and chart-composition clauses. lem-trf-space-representable-etale-scheme-tests overlaps only the composition clause and no node is added. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceOpenChartTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_open_chart_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceOpenChartTests.lean",
+  "statement": "theorem space_open_chart_tests {S : Scheme.{u}} (O Y : AlgebraicSpace S) (j : O ⟶ Y) (hj : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom) : (∀ H : Over S, Function.Injective (j.hom.hom.app (op H))) ∧ Mono j.hom ∧ (∀ (H U : Over S) (c : yoneda.obj H ⟶ Y.obj.obj) (p : U ⟶ H) (r : yoneda.obj U ⟶ O.obj.obj), IsPullback r (yoneda.map p) j.hom.hom c → Etale p.left) ∧ ∀ (V : Over S) (v : yoneda.obj V ⟶ O.obj.obj), IsEtale v → IsEtale (v ≫ j.hom.hom) ∧ ∀ (H U : Over S) (c : yoneda.obj H ⟶ Y.obj.obj) (p : U ⟶ H) (r : yoneda.obj U ⟶ O.obj.obj), IsPullback r (yoneda.map p) j.hom.hom c → ∃ e : Limits.pullback (v ≫ j.hom.hom) c ≅ Limits.pullback v r, e.inv ≫ Limits.pullback.fst (v ≫ j.hom.hom) c = Limits.pullback.fst v r ∧ e.inv ≫ Limits.pullback.snd (v ≫ j.hom.hom) c = Limits.pullback.snd v r ≫ yoneda.map p ∧ ∃ (W : Over S) (q : W ⟶ U) (d : yoneda.obj W ≅ Limits.pullback v r), d.hom ≫ Limits.pullback.snd v r = yoneda.map q ∧ Etale q.left ∧ Etale (q ≫ p).left ∧ (d.hom ≫ e.inv) ≫ Limits.pullback.snd (v ≫ j.hom.hom) c = yoneda.map (q ≫ p)",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa227d8b2",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Statement verbatim; hj = IsRepresentableWith(IsOpenImmersion) scheme-test interface of def-trf-algebraic-space, no stronger. Conclusions: section injectivity, Mono j.hom (sheaves), Etale p for every representing square, IsEtale (v≫j), canonical e characterized by both inverse projections, W/q/d with Etale q and Etale (q≫p) and the projection equation all match the node. Node diff vs live = lean field only; no duplicate declaration in side-live lean/ or Mathlib; universe u throughout, autoImplicit false; edge cases (empty S/H/V/O_H, j=id) covered; sorry-only proof, source/blueprint/proof-step docstrings present, report sections present. No fixes."
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-diagram-tensor-shift-constraints",
+ "kind": "statement",
+ "title": "Normalized diagram-site tensor shifts and action unitors",
+ "statement": "For arbitrary natural-number ring sequence A with adjacent maps δ and any scheme W, use the ringed sequence site, fixed derived tensor and predicates of [def-pur-diagram-pullback-shift-data]. There is a TensorConstraints T at W for which TensorCoherence T holds: the normalized signed two-shift, associator and symmetry comparisons admit the representative-normalized action unitors and obey all the stated single-slot shift laws, simultaneous extraction, signed interchange, associativity, symmetry and unitor shift equations. No geometric pullback or compositor is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); more-algebra.tex item-shift-tensor and item-flip-tensor-product. Parent proof steps 1, 4, 5 and tensor portion of 6."
+ },
+ "stmt_deps": [
+  "def-pur-diagram-pullback-shift-data"
+ ],
+ "proof": [
+  {
+   "text": "Take the uniquely normalized derived shift, associator and symmetry maps. The degree-zero ring is resolving because tensor with it is the identity; localize its chain action unitors and extend from resolving inputs, obtaining the two model normalizations.",
+   "uses": [
+    "lem-pur-derived-tensor-additive-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On resolving inputs use the signed total-tensor equations. Single-slot zero and addition laws are the bifunctor shift laws; extracting second then first gives extraction and the two orders differ by (-1)^(ab). The associator exponents bp+c(p+q) and cq+(b+c)p agree; symmetry exponents differ by 2bp. The degree-zero ring factor makes both unitor exponents zero.",
+   "uses": [
+    "lem-pur-total-tensor-signed-coherence",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Insert the canonical representative comparisons and extend these chain equalities uniquely to all derived inputs by faithful restriction in each finite tuple.",
+   "uses": [
+    "lem-pur-derived-tensor-additive-constraints"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-weil-pbc-total-tensor-integer-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); more-algebra.tex item-shift-tensor and item-flip-tensor-product. Parent proof steps 1, 4, 5 and tensor portion of 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived tensor product on ringed site modules has coherent simultaneous integer shifts associator symmetry and unitors",
+   "results": "Eight results: presheaf monoidal structures, NatTrans.CommShift.associator, and module tensor facts. None gives this resolving-normalized diagram-site statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor comparison of an exact pullback functor commutes with total cochain shifts and preserves total tensor summands",
+   "results": "Eight hits in Mathlib/Algebra/Homology/BifunctorShift: single-slot shift maps and summand formulas. These supply chain ingredients, not the geometric presentation or normalized derived descent.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftUnitor.*shift|shift.*leftUnitor|mapHomologicalComplexCompIso",
+   "results": "13 hits: shift-functor unitors and mapHomologicalComplexCompIso in Additive.lean. No normalized derived-tensor/site presentation result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.DiagramPullbackMonoidalShiftModels",
+  "date": "2026-10-26",
+  "group": "F7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Maps-used sentence: primitive pullback and tensor identifications; retains original item steps 1-3 and the intrinsic-equality part of step 7; Normalized diagram-site tensor shifts and action unitors",
+   "via": [
+    "lem-pur-diagram-pullback-monoidal-shift-models",
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.DiagramTensorShiftConstraints",
+  "file": "lean/Sheaf/SixFunctors/DiagramTensorShiftConstraints.lean",
+  "declaration": "WeilConjectures.DiagramPullbackShift.diagramTensorShiftConstraints",
+  "statement": "theorem diagramTensorShiftConstraints (W : Scheme.{u}) : ∃ T : TensorConstraints A δ W, TensorCoherence A δ T",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a9b2",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T205446-L-3251048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a9b2",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T205446-L-3251048",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean+node files vs reviewed head e47c86c6c2cd (byte-identical; only change record/report differ); item node vs earlier reviewer fix; reader gate: delivered modules + direct importer SystemTensorShiftCoherence compiled (exit 0)"
+ }
+}

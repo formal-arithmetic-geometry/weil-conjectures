@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-flat-groupoid-quotient-open-presentation",
+ "kind": "statement",
+ "title": "Flat groupoid quotient presentations and invariant open restriction",
+ "statement": "Work over a field $k$ [def-weil-field], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], algebraic spaces mean [def-trf-algebraic-space], and stacks, representability and 2-fibre products mean [def-sfb-stable-pointed-moduli-groupoids]. Representable morphism properties are tested after scheme base change on etale scheme charts. Flatness, local finite presentation, etaleness and properness use [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-etale-morphism, def-weil-proper-morphism]. A stack morphism is separated if its relative diagonal is proper. The inertia stack $I_{\\mathcal A}$ has objects $(a,\\alpha)$ with $a\\in\\mathcal A(T)$ and $\\alpha\\in\\operatorname{Aut}(a)$, and arrows given by conjugating isomorphisms. Its projection forgets $\\alpha$. Finite inertia means that every scheme base change of this projection is a finite scheme morphism [def-weil-finite-integral-morphism]. The set $|\\mathcal A|$ consists of field-valued objects up to isomorphism after common field extension, with the atlas topology [lem-sfb-stack-point-topology]. A scheme groupoid $(U,R,s,t,e,i,c)$ has the laws of [def-a1-groupoid-scheme]. Its quotient $[U/R]$ is the fppf stackification of the groupoid of $T$-points, using [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description]. Finite locally free means finite, flat and locally of finite presentation [def-pc-finite-locally-free]. Let $(U,R,s,t,e,i,c)$ be a groupoid of $k$-schemes with $s,t$ flat and locally of finite presentation. Then $\\mathcal Q=[U/R]$ is an algebraic stack and $p:U\\to\\mathcal Q$ is representable by algebraic spaces, surjective, flat and locally of finite presentation, with canonical equivalence $R\\simeq U\\times_{\\mathcal Q}U$. If $s,t$ are finite, then $p$ is finite (every scheme base change is a finite scheme morphism), and $p$ is of finite presentation. Pullback gives an inclusion-preserving bijection between open substacks $\\mathcal W\\subseteq\\mathcal Q$ and open subschemes $V\\subseteq U$ satisfying $s^{-1}(V)=t^{-1}(V)$. Under this bijection $U\\times_{\\mathcal Q}\\mathcal W=V$ and $\\mathcal W\\simeq[V/R_V]$, where $R_V=s^{-1}(V)=t^{-1}(V)$. The restricted projections are the base changes of $s,t$, so are finite locally free when $s,t$ are. Every point of $|\\mathcal Q|$ lifts to a point of $U$.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tags 06FI (theorem-flat-groupoid-gives-algebraic-stack), 06FH (lemma-flat-quotient-flat-presentation); spaces-groupoids.tex Tag 04M9 (lemma-quotient-stack-2-cartesian); stacks-more-morphisms.tex Tag 0DUM (lemma-well-nigh-affine), proof, descent of finiteness using stacks-properties.tex Tag 04XD (lemma-check-property-covering). Invariant open correspondence is the fppf-presentation version of stacks-properties.tex Tag 0507 (lemma-substacks-presentation), by the same descent argument, and algebraic.tex Tag 04WY (remark-flat-fp-presentation). Point lifting: stacks-morphisms.tex lemma-points-presentation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-stack-point-topology",
+  "def-a1-groupoid-scheme",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-pc-finite-locally-free",
+  "def-sfb-scheme-groupoid-quotient-presentation",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-surjective-moduli-map",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-flat-groupoid-algebraic-quotient] over $S=\\operatorname{Spec}k$ to the given scheme groupoid, regarded as a groupoid in algebraic spaces. Its hypotheses are exactly flatness and local finite presentation of $s,t$. It gives algebraicity of $\\mathcal Q$, representability, surjectivity, flatness and local finite presentation of $p$, and $R\\simeq U\\times_{\\mathcal Q}U$ with projections $s,t$. Its field-extension lifting clause also gives immediately the asserted surjectivity $|U|\\to|\\mathcal Q|$.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tags 06FI and 06FH, with spaces-groupoids.tex Tag 04M9"
+   }
+  },
+  {
+   "text": "Suppose $s,t$ are finite. For a scheme $T\\to\\mathcal Q$, let $F=U\\times_{\\mathcal Q}T$, an algebraic space by step 1. The local-description theorem [lem-sfb-groupoid-stackification-local-description] supplies an fppf cover $\\{T_i\\to T\\}$ and lifts $u_i:T_i\\to U$ of the object on $T$. The tuple definition of the 2-fibre product and step 1 identify $F\\times_TT_i$ with $R\\times_{s,U,u_i}T_i$, respecting its map to $T_i$. This scheme map is a base change of the finite morphism $s$, hence finite by [lem-trf-finite-radicial-basechange], and by the same node so is each of its scheme base changes. The family $\\{T_i\\to T\\}$ is an fppf covering [def-pc-fppf-site]: jointly surjective, with flat locally finitely presented members. Hence [lem-sfb-space-finite-fppf-descent], applied to $F\\to T$ and this covering, makes $F\\to T$ finite on every scheme test; taking the test $T$ itself, $F$ is a scheme finite over $T$. This proves finiteness of $p$ on every scheme test. By the definition of a finite scheme morphism it is affine, and [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact and quasi-separated. Together with the local finite presentation from step 1, this gives finite presentation (locally of finite presentation, quasi-compact and quasi-separated).",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-pc-fppf-site",
+    "lem-trf-finite-radicial-basechange",
+    "lem-sfb-space-finite-fppf-descent",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06FH, proof, fppf local lifts; spaces-descent.tex Tag 0426; spaces-morphisms.tex Tag 03ZQ"
+   }
+  },
+  {
+   "text": "Pullback of any open substack $\\mathcal W\\subseteq\\mathcal Q$ is an open subscheme $V\\subseteq U$. The two pullbacks to $R=U\\times_{\\mathcal Q}U$ coincide: a point of the 2-fibre product comes with an isomorphism between its images in $\\mathcal Q$, and membership in a strictly full substack is invariant under that isomorphism. Pullback preserves inclusion. These assertions use only the definitions of open substack and 2-fibre product in [lem-sfb-invariant-open-substack-descent] and [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507, forward map"
+   }
+  },
+  {
+   "text": "Conversely fix an invariant open $V\\subseteq U$. Choose a smooth surjective scheme atlas $a:A\\to\\mathcal Q$, available by [def-sfb-algebraic-moduli-stack], and put $E=U\\times_{\\mathcal Q}A$, with $h:E\\to U$ and $q:E\\to A$. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $h$ is smooth surjective and $q$ is flat, locally of finite presentation and surjective. In particular they are surjective on point sets by [lem-sfb-representable-stack-point-surjectivity]. Put $D=h^{-1}(V)$ and $B=q(|D|)\\subseteq A$. This is open by [lem-sfb-flat-lfp-space-universally-open], so give it its open subscheme structure. We claim $q^{-1}(B)=D$. If $e$ lies over a point of $B$, choose $d\\in|D|$ over that same point. The point-surjectivity of fibre products in [lem-a1-space-point-open-calculus] gives a common-field representative of $(e,d)$ in $E\\times_AE$. Their $U$-coordinates and the two comparison isomorphisms give an arrow of $U\\times_{\\mathcal Q}U=R$. One endpoint lies in $V$, so invariance puts the other in $V$. This proves saturation. Equality of open point subsets is equality of open subspaces by [lem-a1-space-etale-open-image].",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-representable-stack-point-surjectivity",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507, invariant-open construction via a smooth atlas; spaces-morphisms.tex Tag 042S"
+   }
+  },
+  {
+   "text": "The open $B$ is invariant under $A\\times_{\\mathcal Q}A$. Indeed, represent an arrow by $\\alpha:a(a_1)\\simeq a(a_2)$ over a field. After field extension, lift $a_1$ to $e=(u,a_1,\\beta)$ in $E$, using surjectivity of $q$. Saturation from step 4 says $a_1\\in B$ exactly when $u\\in V$. Composing $\\beta$ with $\\alpha$ produces $(u,a_2,\\alpha\\beta)\\in E$, so $u\\in V$ implies $a_2\\in B$. Apply the inverse arrow for the reverse implication. Open subspaces are determined by point subsets by [lem-a1-space-etale-open-image], hence the two inverse-image opens on $A\\times_{\\mathcal Q}A$ agree. Now [lem-sfb-invariant-open-substack-descent], applied to the smooth atlas $A$, gives an open substack $\\mathcal W$ with $A\\times_{\\mathcal Q}\\mathcal W=B$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), applied to the smooth atlas A"
+   }
+  },
+  {
+   "text": "Its pullback $V'=U\\times_{\\mathcal Q}\\mathcal W$ is an open subscheme. On $E$ its pullback is $q^{-1}(B)=h^{-1}(V)$ by step 4. Since $h$ is surjective, $V'=V$. If $\\mathcal W'$ is any other open substack with pullback $V$, its pullback $B'$ to $A$ satisfies $q^{-1}(B')=h^{-1}(V)=q^{-1}(B)$; surjectivity of $q$ gives $B'=B$, and uniqueness in [lem-sfb-invariant-open-substack-descent] gives $\\mathcal W'=\\mathcal W$. Finally $V_1\\subseteq V_2$ implies $D_1\\subseteq D_2$, hence $B_1\\subseteq B_2$; inclusion preservation in the same node gives $\\mathcal W_1\\subseteq\\mathcal W_2$. These calculations prove both directions of the inclusion-preserving bijection.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507, uniqueness and inclusion preservation; common-atlas argument"
+   }
+  },
+  {
+   "text": "The open substack $\\mathcal W$ is an algebraic stack [def-sfb-algebraic-moduli-stack]: it is a strictly full substack of the etale stack $\\mathcal Q$ whose membership is tested by open subschemes, hence etale-local, so it is an etale stack; since $\\mathcal W\\to\\mathcal Q$ is fully faithful, $T\\times_{\\mathcal W\\times\\mathcal W}\\mathcal W=T\\times_{\\mathcal Q\\times\\mathcal Q}\\mathcal Q$ for every scheme $T\\to\\mathcal W\\times\\mathcal W$, so its diagonal is representable by algebraic spaces; and $B=A\\times_{\\mathcal Q}\\mathcal W\\to\\mathcal W$ is a base change of the smooth surjective atlas $a$, hence a smooth surjective scheme atlas by [lem-sfb-stack-chartwise-smooth-etale-calculus]. By base change from step 1, $V=U\\times_{\\mathcal Q}\\mathcal W\\to\\mathcal W$ is representable, surjective, flat and locally of finite presentation, using [lem-sfb-stack-chartwise-smooth-etale-calculus]. Its self 2-fibre product is the restriction of $R$ to both endpoints in $V$. Invariance identifies this with $R_V=s^{-1}(V)=t^{-1}(V)$: an arrow has both endpoints in $V$ exactly when either endpoint is in $V$. The groupoid operations restrict because identities, inverse and composition retain endpoints. Clause (2) of [lem-sfb-fppf-groupoid-stack-presentations], applied to $V\\to\\mathcal W$, now gives $\\mathcal W\\simeq[V/R_V]$ compatibly with the map from $V$.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-a1-groupoid-scheme",
+    "lem-sfb-fppf-groupoid-stack-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04WY (remark-flat-fp-presentation)"
+   }
+  },
+  {
+   "text": "The restricted source and target maps are literally $R\\times_{s,U}V\\to V$ and $R\\times_{t,U}V\\to V$: equality of the two inverse-image opens identifies their sources with $R_V$. Flatness and local finite presentation survive these base changes by [lem-sfb-stack-chartwise-smooth-etale-calculus], and finiteness survives by [lem-trf-finite-radicial-basechange]. Hence if $s,t$ are finite locally free, so are the restricted projections, by the definition [def-pc-finite-locally-free].",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-finite-radicial-basechange",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZY (lemma-base-change-finite-locally-free), expanded into the three defining properties"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-groupoid-algebraic-quotient",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-pc-fppf-site",
+  "lem-trf-finite-radicial-basechange",
+  "lem-sfb-space-finite-fppf-descent",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-invariant-open-substack-descent",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-representable-stack-point-surjectivity",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image",
+  "def-a1-groupoid-scheme",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "def-pc-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tags 06FI and 06FH; invariant-open descent of stacks-properties.tex Tag 0507 applied on a smooth atlas, with spaces-descent.tex Tag 0426 and algebraic.tex Tag 04WY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented groupoid has an algebraic quotient stack with faithfully flat presentation and invariant open subschemes give open quotient substacks",
+   "results": "[leanfinder] OK 8 hit(s); top results: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf quotient of a flat finitely presented scheme groupoid has algebraic atlas kernel pair and invariant open restriction; finite source implies finite presentation map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFinitePresentation f] : LocallyOfFinitePresentation (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is locally of finite presentation, then for any open subset $ V $ of $ Y $, the restriction $ f|_V $ is also locally of finite presentation.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \":\\n  FinitePresentation R A ↔\\n    ∃ (ι : Type*) (_ : Fintype ι) (f : MvPolynomial ι R →ₐ[R] A), Surjective f ∧ (RingHom.ker f.toRingHom).FG\", \"doc\": \"A commutative semiring $ R $-algebra $ A $ is finitely presented over $ R $ if and only if there exists a finite set $ \\\\iota $ and a surjective algebra homomorphism $ f : R[\\\\iota] \\\\to A $ such that th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotientStack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|flat.groupoid|invariant.open.*stack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|flat.groupoid|invariant.open.*stack",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic stack quotient of flat groupoid finite presentation invariant opens",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.recOn, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, AlgebraicGeometry.flat_iff, SheafOfModules.Presentation.IsFinite, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotientStack\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented scheme groupoid quotient is an algebraic stack with invariant open substack correspondence",
+   "results": "8 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat.instDescScheme, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-etale-affine-charts",
+  "date": "2026-10-23",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: middle paragraph of Tag 0DUE: pull back the open, restrict the groupoid, and recover its quotient open and finite-flat presentation.",
+   "via": [
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-groupoid-quotient-open-presentation",
+  "worker": "stage1",
+  "summary": "Reuse the existing general flat-groupoid algebraicity theorem; prove finite presentation by fppf object lifts and one new space-level finiteness-descent input; descend invariant opens through a smooth atlas with explicit saturation, then recover the quotient of the restricted relation. Normalize doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "Supporting quotient geometry below det-thm-sf-ctf-stability-direct-images proof (3), as specified by blueprint.from.place. Current latest blueprint read; this imported support node is not itself a blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic scheme or algebraic-space permanence, point or open-subspace calculus for this quotient proof; no node of the unit states it and the unit alteration route is unchanged."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic scheme or algebraic-space permanence, point or open-subspace calculus for this quotient proof; no node of the unit states it and the unit alteration route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-e7a2a3264",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-e7a2a3264 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node lem-sfb-space-finite-fppf-descent and every cited statement. I checked them against Stacks 06FH, 06FI, 0507 (whose presentations are smooth, so the delivery correctly argues through a smooth atlas A), 0426 and 04WY. The item statement is identical to the Q76 base apart from normalized TeX escapes. The new node is a true, self-contained statement: the fppf case of Stacks 0426. It is not a duplicate: four-property-fppf-descent and representable-stack-fppf-locality do not cover 'finite', fpqc-descend-finite is for schemes only, and finite-space-morphism-topology gives base change only. I fixed three faults in the corrected item file. (1) C3/C4, step 2: descent was credited to a nonexistent 'descent clause' of lem-sfb-finite-space-morphism-topology, and the new node was listed in uses but never cited in the text. The step now applies [lem-sfb-space-finite-fppf-descent] to the fppf covering [def-pc-fppf-site]. (2) E1, step 7: clause (2) of lem-sfb-fppf-groupoid-stack-presentations needs W to be an algebraic stack, and this was never shown. I added the short argument (etale stack; diagonal as base change of Q's; atlas B→W as base change of a) via def-sfb-algebraic-moduli-stack and the chartwise calculus. (3) Steps 2 and 8 took finiteness of the base changes of s and t from the space node without its 'finite on scheme tests' hypothesis. They now cite the Mathlib leaf lem-trf-finite-radicial-basechange. proof_deps was recomputed and finite-space-morphism-topology dropped. Batch-5: every flagged citation reaches sec-trace-formula only through def-trf-algebraic-space or lem-trf-space-fibre-products-etale-covers. Both are general foundations, not trace-formula or Poincaré statements or proof steps, so they are accepted. The tool_uses of lem-a1-space-point-open-calculus and lem-a1-space-etale-open-image are generic and accepted. No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatGroupoidQuotientOpenPresentation",
+  "declaration": "CategoryTheory.flat_groupoid_quotient_open_presentation",
+  "declarations": [
+   "CategoryTheory.quotientOpenScheme",
+   "CategoryTheory.quotientOpenInclusion",
+   "CategoryTheory.flat_groupoid_quotient_open_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatGroupoidQuotientOpenPresentation.lean",
+  "statement": "theorem flat_groupoid_quotient_open_presentation (k : Type u) [Field k] (U R : Over (Spec (.of k))) (s t : R ⟶ U) (e : U.left ⟶ R.left) (i : R.left ⟶ R.left) (c : pullback s.left t.left ⟶ R.left) (hG : IsGroupoidScheme s.left t.left e i c) [Flat s.left] [Flat t.left] [LocallyOfFinitePresentation s.left] [LocallyOfFinitePresentation t.left] (Q : BasedCategory.{v, w} (Over (Spec (.of k)))) (p : BasedFunctor (discreteModuli (yoneda.obj U)) Q) (P : SchemeGroupoidQuotientPresentation s t e i c Q p) : IsAlgebraicModuliStack Q ∧ IsRepresentableByAlgebraicSpaces p ∧ IsSurjectiveModuliMap p ∧ ModuliSpaceTest @Flat p ∧ ModuliSpaceTest @LocallyOfFinitePresentation p ∧ (moduliTwoFiberLift (discreteModuliMap (yoneda.map s)) (discreteModuliMap (yoneda.map t)) (BasedNatIso.mkNatIso P.arrows.val P.arrows.property)).toFunctor.IsEquivalence ∧ (IsFinite s.left → IsFinite t.left → ModuliSchemeTest @IsFinite p ∧ ModuliSchemeTest (fun _ _ f ↦ LocallyOfFinitePresentation f ∧ QuasiCompact f ∧ QuasiSeparated f) p) ∧ (∃ b : OpenModuliSubstack Q ≃ {V : U.left.Opens // s.left ⁻¹ᵁ V = t.left ⁻¹ᵁ V}, (∀ W₁ W₂ : OpenModuliSubstack Q, W₁.IsContainedIn W₂ ↔ (b W₁).val ≤ (b W₂).val) ∧ ∀ W : OpenModuliSubstack Q, (∃ a : BasedFunctor (discreteModuli (yoneda.obj (quotientOpenScheme U (b W).val))) (moduliTwoFiberProduct p (fullModuliInclusion Q W.property)), IsSchemeModuliBaseChange a (quotientOpenInclusion U (b W).val)) ∧ ∃ (sV tV : quotientOpenScheme R (s.left ⁻¹ᵁ (b W).val) ⟶ quotientOpenScheme U (b W).val) (eV : (quotientOpenScheme U (b W).val).left ⟶ (quotientOpenScheme R (s.left ⁻¹ᵁ (b W).val)).left) (iV : (quotientOpenScheme R (s.left ⁻¹ᵁ (b W).val)).left ⟶ (quotientOpenScheme R (s.left ⁻¹ᵁ (b W).val)).left) (cV : pullback sV.left tV.left ⟶ (quotientOpenScheme R (s.left ⁻¹ᵁ (b W).val)).left) (hs : sV.left ≫ (b W).val.ι = (s.left ⁻¹ᵁ (b W).val).ι ≫ s.left) (ht : tV.left ≫ (b W).val.ι = (s.left ⁻¹ᵁ (b W).val).ι ≫ t.left) (q : BasedFunctor (discreteModuli (yoneda.obj (quotientOpenScheme U (b W).val))) W.category), eV ≫ (s.left ⁻¹ᵁ (b W).val).ι = (b W).val.ι ≫ e ∧ iV ≫ (s.left ⁻¹ᵁ (b W).val).ι = (s.left ⁻¹ᵁ (b W).val).ι ≫ i ∧ cV ≫ (s.left ⁻¹ᵁ (b W).val).ι = pullback.map sV.left tV.left s.left t.left (s.left ⁻¹ᵁ (b W).val).ι (s.left ⁻¹ᵁ (b W).val).ι (b W).val.ι hs ht ≫ c ∧ Nonempty (SchemeGroupoidQuotientPresentation sV tV eV iV cV W.category q) ∧ Nonempty (ModuliTwoIso (q.comp (fullModuliInclusion Q W.property)) ((discreteModuliMap (yoneda.map (quotientOpenInclusion U (b W).val))).comp p)) ∧ IsPullback (s.left ⁻¹ᵁ (b W).val).ι sV.left s.left (b W).val.ι ∧ IsPullback (s.left ⁻¹ᵁ (b W).val).ι tV.left t.left (b W).val.ι ∧ (s.left.IsFiniteLocallyFree → t.left.IsFiniteLocallyFree → sV.left.IsFiniteLocallyFree ∧ tV.left.IsFiniteLocallyFree)) ∧ Function.Surjective (moduliSchemePointMap p)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed SchemeGroupoidQuotientPresentation to specify [U/R] with its actual arrow identification and composition, and the existing full-open-substack and chartwise morphism interfaces. The six added statement dependencies are already landed definition nodes. The two helpers construct the actual open scheme and inclusion with real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ee88823b",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery of returned head 3b5022216443, which was returned for H2 only. Lean file byte-identical (SHA256 bafcd41b...e655) and lean.statement verbatim. The item adds stmt_deps def-sfb-surjective-moduli-map (owner of IsSurjectiveModuliMap) and def-sfb-stack-point-topological-space (owner of moduliSchemePointMap), both landed existing:true; every other non-Mathlib declaration has a cited owner. Compared with live: only the six landed definition stmt_deps and the lean record are added; statement, proof and dependency records are untouched. Re-checked SchemeGroupoidQuotientPresentation, IsSchemeModuliBaseChange, ModuliSchemeTest/ModuliSpaceTest, moduliSchemePointMap and moduliTwoFiberLift: every node clause matches, with no extra hypotheses and no universe equality. Helpers carry real data, docstrings and the 8 proof steps are present, proof is sorry. Report has Worker report and Second reading by Q31. No recompile (no file changed)."
+ }
+}

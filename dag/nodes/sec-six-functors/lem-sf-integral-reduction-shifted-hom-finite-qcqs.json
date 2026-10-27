@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-integral-reduction-shifted-hom-finite-qcqs",
+ "kind": "statement",
+ "title": "Finite shifted Hom into restricted reductions on qcqs spaces",
+ "statement": "Let X be any finite-type quasicompact scheme over the finite field in [def-fix-six-functor-datum], with no separatedness assumption on its structure morphism. For bounded constructible derived-complete integral K and M, Hom(K[1],Res(Red_m M)) is finite for every m. This is the shifted Hom finiteness input to the constructible Milnor mapping-limit argument.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Successive coefficient reductions, integral reconstruction, and coherence"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum"
+ ],
+ "proof": [
+  {
+   "text": "Shift K in the integral constructible category. Apply integral residue Tor to both inputs, obtaining the finite Tor intervals for their reductions. Use the proved intrinsic_hom_finite from CompactSupportTermHomFinite, which already requires no separated structure morphism. Transport the finite Hom set across the actual scalar extension/restriction adjunction. Empty schemes and zero inputs are included.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-compact-support-term-hom-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Successive coefficient reductions, integral reconstruction, and coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-sf-compact-support-term-hom-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Successive coefficient reductions, integral reconstruction, and coherence; explicit coefficient-coordinate route (P2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition coherence of compact support projection formula proper comparison associativity pentagon",
+   "results": "Eight unrelated Profinite and continuous-map projection hits; no coefficient-normalized compact support identity.",
+   "date": "2026-10-26",
+   "verdict": "Use the project finite projection laws and normalized coefficient data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.IsHomotopyLimit.bijective_milnorMap",
+   "results": "Unknown identifier; no hits in Mathlib. The project source contains the required proved Milnor injection.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved source Milnor theorem with constructible finite shifted Hom groups."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*coherence|projection.*composition",
+   "results": "Five unrelated Mathlib hits; project rg locates the finite-stage laws, residue-Tor criterion and separated constructible Hom reconstruction.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib replacement for the normalized projection or the qcqs finiteness input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStageProjectionStructuralIdentities",
+  "date": "2026-10-27",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Finite shifted Hom into restricted reductions on qcqs spaces",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionShiftedHomFiniteQcqs",
+  "file": "lean/Sheaf/Paper/IntegralReductionShiftedHomFiniteQcqs.lean",
+  "declaration": "WeilConjectures.integralReduction_shiftedHom_finite_qcqs",
+  "statement": "theorem integralReduction_shiftedHom_finite_qcqs\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (X : SixFunctorSpace D)\n    (K M : sfIntegralConstructibleCategory l E X.obj.left) (m : ℕ) :\n    Finite (K.obj⟦(1 : ℤ)⟧ ⟶\n      (sfDerivedReductionRestricted l E X.obj.left m).obj M.obj)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T183849-L-3785139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T183849-L-3785139",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

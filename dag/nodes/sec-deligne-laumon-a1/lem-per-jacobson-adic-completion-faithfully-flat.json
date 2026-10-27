@@ -1,0 +1,189 @@
+{
+ "id": "lem-per-jacobson-adic-completion-faithfully-flat",
+ "kind": "statement",
+ "title": "Faithful flatness of completion inside the Jacobson radical",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $I\\subseteq\\operatorname{Jac}(R)$ be an ideal, where $\\operatorname{Jac}(R)$ is the intersection of all maximal ideals. Let $\\widehat R_I=\\varprojlim_{n\\ge1}R/I^n$ be the adic completion [def-weil-pbc-adic-completion]. Then the canonical homomorphism $R\\to\\widehat R_I$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MC, lemma-completion-faithfully-flat, full assertion for any ideal contained in the Jacobson radical, not just the local maximal-ideal case."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\widehat R_I$ and let $c:R\\to S$ be the canonical map. Apply [lem-weil-pbc-noetherian-completion-flat] to the Noetherian ring $R$ and its ideal $I$: the map $c$ is flat. This application does not require $R$ to be local.",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MC, lemma-completion-faithfully-flat, proof"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m$ of $R$. Since $I\\subseteq\\operatorname{Jac}(R)$, we have $I\\subseteq\\mathfrak m$. By [def-weil-pbc-adic-completion], first-coordinate projection is an $R$-algebra map $p:S\\to R/I$ with $p(c(a))=a\\bmod I$. Compose it with $R/I\\to R/\\mathfrak m$ to obtain a unital ring map $q:S\\to R/\\mathfrak m$ satisfying $q(c(a))=a\\bmod\\mathfrak m$. Every element of the extended ideal $\\mathfrak mS$ is a finite sum $\\sum_j c(a_j)s_j$ with $a_j\\in\\mathfrak m$, so $q(\\sum_jc(a_j)s_j)=0$. If $1$ belonged to $\\mathfrak mS$, this would give $1=0$ in $R/\\mathfrak m$, contradicting the properness of $\\mathfrak m$. Hence $\\mathfrak mS\\ne S$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MC, lemma-completion-faithfully-flat, proof"
+   }
+  },
+  {
+   "text": "The map $c:R\\to S$ is flat by Step 1, and Step 2 shows that $\\mathfrak mS\\ne S$ for every maximal ideal $\\mathfrak m$ of $R$. Apply [lem-weil-pbc-flat-faithfully-flat-maximal-ideals] to conclude that $c$ is faithfully flat.",
+   "uses": [
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MC, lemma-completion-faithfully-flat, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-completion-flat",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MC, lemma-completion-faithfully-flat, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat|faithfully_flat|FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T07:07:49Z\", \"tool\": \"grep\", \"query\": \"faithfullyFlat|faithfully_flat|FaithfullyFlat\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian gives flatness only; IsHausdorff.of_le_jacobson gives separatedness. No returned declaration supplies faithful flatness of this completion in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"FaithfullyFlat\"",
+   "results": "{\"t\": \"2026-10-24T07:07:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"FaithfullyFlat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian gives flatness only; IsHausdorff.of_le_jacobson gives separatedness. No returned declaration supplies faithful flatness of this completion in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of a Noetherian ring along an ideal in the Jacobson radical is a faithfully flat algebra",
+   "results": "{\"t\": \"2026-10-24T07:07:49Z\", \"tool\": \"leansearch\", \"query\": \"The completion of a Noetherian ring along an ideal in the Jacobson radical is a faithfully flat algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.instCommRing\", \"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion\", \"AdicCompletion.module\", \"AdicCompletion.instAlgebra\", \"AdicCompletion.subring\", \"AdicCompletion.liftRingHom.congr_simp\", \"AdicCompletion.subalgebra\"], \"digest\": \"7de7c5139e73b490\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian gives flatness only; IsHausdorff.of_le_jacobson gives separatedness. No returned declaration supplies faithful flatness of this completion in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-jacobson-adic-completion-faithfully-flat: For a Noetherian ring R and an ideal I contained in its Jacobson radical, the canonical map to the I-adic completion is faithfully flat",
+   "results": "{\"t\": \"2026-10-24T07:07:52Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-jacobson-adic-completion-faithfully-flat: For a Noetherian ring R and an ideal I contained in its Jacobson radical, the canonical map to the I-adic completion is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.map_injective\", \"IsHausdorff.of_le_jacobson\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"IsAdicComplete.le_jacobson_bot\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.of_injective\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"e1c247c92e9d91d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian gives flatness only; IsHausdorff.of_le_jacobson gives separatedness. No returned declaration supplies faithful flatness of this completion in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring maps faithfully flatly to its I-adic completion when I is contained in the Jacobson radical",
+   "results": "{\"t\": \"2026-10-24T07:37:12Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian ring maps faithfully flatly to its I-adic completion when I is contained in the Jacobson radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.map_injective\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"IsHausdorff.of_le_jacobson\", \"AdicCompletion.map_exact\", \"IsAdicComplete.le_jacobson_bot\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"8dd6c92c3c42901a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: returned completion flatness, the completion construction, and separatedness/completeness facts, not faithful flatness for an arbitrary Jacobson-contained ideal. Flatness alone is already the existing Mathlib leaf lem-weil-pbc-noetherian-completion-flat."
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat|faithfully_flat|FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T07:42:45Z\", \"tool\": \"grep\", \"query\": \"faithfullyFlat|faithfully_flat|FaithfullyFlat\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: returned completion flatness, the completion construction, and separatedness/completeness facts, not faithful flatness for an arbitrary Jacobson-contained ideal. Flatness alone is already the existing Mathlib leaf lem-weil-pbc-noetherian-completion-flat."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adic completion of a Noetherian ring is faithfully flat when the ideal is in the Jacobson radical",
+   "results": "{\"t\": \"2026-10-24T07:42:45Z\", \"tool\": \"leansearch\", \"query\": \"The adic completion of a Noetherian ring is faithfully flat when the ideal is in the Jacobson radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.instAlgebra\", \"AdicCompletion\", \"AdicCompletion.instCommRing\", \"AdicCompletion.module\", \"IsAdicComplete.le_jacobson_bot\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"IsAdicComplete\"], \"digest\": \"ce642edb9f3edda8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: returned completion flatness, the completion construction, and separatedness/completeness facts, not faithful flatness for an arbitrary Jacobson-contained ideal. Flatness alone is already the existing Mathlib leaf lem-weil-pbc-noetherian-completion-flat."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"FaithfullyFlat\"",
+   "results": "{\"t\": \"2026-10-24T07:42:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"FaithfullyFlat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: returned completion flatness, the completion construction, and separatedness/completeness facts, not faithful flatness for an arbitrary Jacobson-contained ideal. Flatness alone is already the existing Mathlib leaf lem-weil-pbc-noetherian-completion-flat."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-compatible-formal-ideal-adic-descent",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3, regular local model and purity, through the small-singular-locus / ideal-adic G-ring lifting chain; Rotthaus Theorem 3 Claim 4, equations (4.1)–(4.3). Tag 00MC, lemma-completion-faithfully-flat, full assertion for any ideal contained in the Jacobson radical, not just the local maximal-ideal case.",
+   "via": [
+    "lem-per-compatible-formal-ideal-adic-descent",
+    "lem-per-local-g-ring-adic-lifting",
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-jacobson-adic-completion-faithfully-flat",
+  "worker": "stage1",
+  "summary": "Checked the full Jacobson-radical assertion against Stacks 00MC. Reused the Mathlib leaves for Noetherian completion flatness and the maximal-ideal criterion; wrote out the elementary first-coordinate quotient argument proving every extended maximal ideal proper. No new nodes or statement changes.",
+  "blueprint": "Realizes the inherited regular-local-model/purity support chain below lem-per-artin-gabber-affine-curve, through lem-per-compatible-formal-ideal-adic-descent: the use of faithful flatness in Rotthaus Theorem 3 Claim 4, equations (4.1)–(4.3). The latest blueprint ancestor has its affine-pushforward statement but no explicit completion proof; the precise immediate source is Stacks 00MC, lemma-completion-faithfully-flat. The chapter and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N0-4ce7090b3",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-4ce7090b3 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 00MC (lemma-completion-faithfully-flat, algebra.tex:22977). The statement matches the source hypothesis by hypothesis: R is Noetherian, I lies in Jac(R), and the canonical map R→lim R/I^n is the map in question. The statement is unchanged from the base node. The delivery has no new nodes. Step 1 cites lem-weil-pbc-noetherian-completion-flat, the Mathlib leaf AdicCompletion.flat_of_isNoetherian (AsTensorProduct.lean:379), which gives flatness for any ideal of a Noetherian ring. Step 2 is marked elementary, and it is: def-weil-pbc-adic-completion includes the projection S→R/I (Mathlib evalOneₐ, Algebra.lean:177). Composing with R/I→R/m sends every element of mS to 0, so 1 is not in mS, and this uses I⊆m. Step 3 cites lem-weil-pbc-flat-faithfully-flat-maximal-ideals (Module.faithfullyFlat_iff, Basic.lean:63; Stacks 00HP); its hypotheses are exactly what Steps 1 and 2 give. proof_deps equals the union of the uses and there is no cycle. All cited nodes are Mathlib leaves, so the route through unit sk-p-dl-a1-perverse is fine and no tool_uses are needed. Duplicate scan over dag/nodes: the only near match is lem-weil-pbc-local-completion-faithfully-flat, which covers only the local m-adic case. Mathlib grep finds no FaithfullyFlat in AdicCompletion. Edge cases checked: R=0, I=0, nilpotent I, products of local rings, and Z with I=(2), where the statement fails without the hypothesis (3Z_2=Z_2). The only citer, lem-per-compatible-formal-ideal-adic-descent step 1, uses the item exactly as stated. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobsonAdicCompletionFaithfullyFlat",
+  "declaration": "AdicCompletion.faithfullyFlat_of_le_jacobson",
+  "file": "lean/Sheaf/RingTheory/JacobsonAdicCompletionFaithfullyFlat.lean",
+  "statement": "theorem faithfullyFlat_of_le_jacobson (R : Type u) [CommRing R] [IsNoetherianRing R] (I : Ideal R) (hI : I ≤ (⊥ : Ideal R).jacobson) : Module.FaithfullyFlat R (AdicCompletion I R)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b2875755",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Statement AdicCompletion.faithfullyFlat_of_le_jacobson (CommRing+IsNoetherianRing R, I ≤ (⊥).jacobson ⊢ Module.FaithfullyFlat R (AdicCompletion I R)) matches node and Stacks 00MC (algebra.tex:22977) clause by clause; canonical Algebra instance (algebraMap_apply = of), n=0 coordinate trivial; node copy identical to live apart from lean record; lean.statement verbatim; 3 Mathlib-leaf stmt_deps used; docstrings carry source/blueprint/3 proof steps citing existing flat_of_isNoetherian, evalOneₐ, faithfullyFlat_iff; sorry only, no defs; no duplicate in Mathlib/side-live (pair-henselization and local-maximal results differ); edge cases R=0, I=0, nilpotent I, non-local R, ℤ/(2) necessity checked; report has Worker report and Second reading by Q02; no files changed, no compile needed."
+ }
+}

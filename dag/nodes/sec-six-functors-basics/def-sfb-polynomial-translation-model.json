@@ -1,0 +1,119 @@
+{
+ "id": "def-sfb-polynomial-translation-model",
+ "kind": "definition",
+ "title": "Polynomial translation modules with normalized monomial coprojections",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, a normed $\\mathbf Q_\\ell$-algebra field $F$ with the extended norm, and $r,m\\geq0$. Let $A_F$ be the bundled all-continuous condensed ring [def-sfb-bundled-continuous-scalar-ring] in the compatible universes [def-weil-size-convention]. Put $L=\\mathbf Z_\\ell^r$, with its inverse-limit topology, and let $I=(\\{1,\\ldots,r\\}\\sqcup\\{1,\\ldots,m\\})\\to_0\\mathbf N$ be the monomial exponents of [def-weil-pbc-mv-polynomial-ring]. A polynomial translation model is an internal $A_F$-module with internal $L$-action [def-sfb-condensed-action-module], together with coprojections $\\iota_d:A_F\\to T$ that exhibit $T$ as the coproduct of regular modules indexed by $d\\in I$ [sk-def-sfb-module-objects]. For every profinite $S$, every $g\\in C(S,L)$, exponent $d$, and coefficient $c\\in C(S,F)$, require $g\\cdot\\iota_d(c)=\\sum_e\\iota_e(\\operatorname{coeff}_e((y-g)^az^b)c)$, where $d=(a,b)$ and the coefficient polynomial is obtained by actual multivariate substitution over $C(S,F)$. Thus translations affect all $y$ variables and fix all spectators $z$; the formula holds for varying continuous parameters and determines the action on every profinite test object. This is a specification of a monomial coproduct and its action, with no degree bound or completion.",
+ "stmt_deps": [
+  "def-sfb-bundled-continuous-scalar-ring",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-condensed-action-module",
+  "sk-def-sfb-module-objects"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; expanded polynomial translation obligation, definition of the monomial direct sum and generalized-parameter translation action."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "translatedMonomial|PolynomialTranslation|polynomial.*translation",
+   "results": "{\"t\": \"2026-10-24T15:35:08Z\", \"tool\": \"grep\", \"query\": \"translatedMonomial|PolynomialTranslation|polynomial.*translation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration of the internal condensed polynomial translation presentation. Reuse the existing project helper PolynomialTranslation.Model; no definition node currently owns this notion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The internal direct sum indexed by polynomial monomials with p adic translation on all continuous profinite sections",
+   "results": "{\"t\": \"2026-10-24T15:35:08Z\", \"tool\": \"leansearch\", \"query\": \"The internal direct sum indexed by polynomial monomials with p adic translation on all continuous profinite sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectSum.GRing\", \"DirectSum.Decomposition.isInternal\", \"DirectSum\", \"instInhabitedDirectSum\", \"DirectSum.IsInternal\", \"DirectSum.IsInternal.chooseDecomposition\", \"AdicCompletion.sumInv_apply\", \"DirectSum.mk\"], \"digest\": \"5fb76ab7dab0c3bd\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration of the internal condensed polynomial translation presentation. Reuse the existing project helper PolynomialTranslation.Model; no definition node currently owns this notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Condensed polynomial translation module monomial coproduct presentation with varying continuous parameters",
+   "results": "{\"t\": \"2026-10-24T15:35:12Z\", \"tool\": \"leanfinder\", \"query\": \"Condensed polynomial translation module monomial coproduct presentation with varying continuous parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FirstOrder.Ring.genericPolyMap\", \"PolynomialLaw.lifts\", \"PolynomialModule\", \"PolynomialModule.single\", \"PolynomialModule.lsingle\", \"MvPolynomial.universalFactorizationMapPresentation\", \"instInhabitedPolynomialModule\", \"PolynomialModule.comp_single\"], \"digest\": \"aecea43ff9ee5c7d\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration of the internal condensed polynomial translation presentation. Reuse the existing project helper PolynomialTranslation.Model; no definition node currently owns this notion."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'translatedMonomial|PolynomialTranslation|polynomial.*translation' lean/WeilConjectures lean/Sheaf; rg -l 'polynomial.*(coproduct|direct sum)|monomial.*(coproduct|direct sum)' dag/nodes/sec-six-functors-basics/def-*.json; python3 tools/blueprint_refs.py search 'polynomial translation'",
+   "results": "No matching upstream declaration. lean/Sheaf/CategoryTheory/PolynomialTranslationAcyclic.lean:49 translatedMonomial and :65 Model give exactly the required notion. DAG definition hits were the scalar-ring bundle and unrelated weighted, Veronese, DG and root definitions; no polynomial-translation definition node. Blueprint search: 0 blueprint nodes. The statement node lem-sfb-polynomial-translation-acyclic records Model as a helper, but its own statement is higher-invariant vanishing and is downstream of this item.",
+   "date": "2026-10-24",
+   "verdict": "Register the existing helper on a new definition node without restating it or depending on downstream acyclicity."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-rank-one-difference-model",
+  "date": "2026-10-24",
+  "group": "Q04"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Polynomial translation module T and its varying-parameter action, first paragraph of the finite polynomial rank-one model.",
+   "via": [
+    "lem-sfb-polynomial-rank-one-difference-model",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.CategoryTheory.PolynomialTranslationAcyclic",
+  "declaration": "Profinite.CondensedAction.PolynomialTranslation.Model",
+  "declarations": [
+   "Profinite.CondensedAction.PolynomialTranslation.translatedMonomial",
+   "Profinite.CondensedAction.PolynomialTranslation.Model"
+  ],
+  "statement": "structure Model",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "note": "Exact existing specification at PolynomialTranslationAcyclic.lean:65, using translatedMonomial at line 49. No new Lean module or copied definition. The theorem node carrying this helper asserts higher-invariant vanishing, not this definition; citing that downstream theorem would create a DAG cycle."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22260db5",
+  "group": "Q04",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22260db5",
+  "group": "Q04",
+  "result": "fix",
+  "note": "Lean exact against node: Ω NormedField+NormedAlgebra ℚ_ℓ+IsAlgClosure (no completeness), E₀ finite intermediate field, F=E₀ and F=Ω conjuncts with the same Q, r=k+1, G=Fin k→ℤ_ℓ, H=ℤ_ℓ; π pinned t-first, consistent with Model's X−g substitution (signs y1↦y1−t). PolynomialSystem pins V_n (injective embed, image = degree≤n), monomial basis, inclusion, D=−pderiv(inl 0), e_n=n+1, aeval translation, polynomial matrix entries; System gives nilpotence, compatibility, G-commutation, equivariance, joint continuity, Taylor sum over range(n+1). PresentationAssertion: P = existing Presentation; j/p/w/e pinned by section formulas, j≫w=T.ι and c.ι≫e=identify≫w; colimit in ActionModule and after forgetAction; D/expD/delta pinned on stages and coprojections, delta=τ−1 with monomial formula f(y1−1)−f. Edge cases k=0, m=0, n=0, empty S, no degree bound, noncomplete Ω OK. New existing:true def-sfb-polynomial-translation-model: check_existing clean; stmt_deps own Model's declarations. Statement field verbatim; no hollow defs; only the item theorem is sorried. Sole fault H11: the second reading was the author's self-check → fixes/<item>.report.md (worker report + New nodes verbatim + independent clause-by-clause second reading). Advisories: item imports the module of the downstream acyclic theorem (omit the later proof import or move Model); normContinuousRing/Extended reached via def-sfb-ind-unipotent-system; ∀ T does not assert that a Model exists (the acyclic node does). No compile (no Lean change)."
+ }
+}

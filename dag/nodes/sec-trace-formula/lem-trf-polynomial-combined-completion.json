@@ -1,0 +1,174 @@
+{
+ "id": "lem-trf-polynomial-combined-completion",
+ "kind": "statement",
+ "title": "Completion of the combined polynomial ideal",
+ "statement": "Let R be a Noetherian commutative local ring with maximal ideal m [def-weil-pbc-noetherian-ring]. For d≥0 set Q=mR[X_1,…,X_d]+(X_1,…,X_d) [def-weil-pbc-mv-polynomial-ring]. There exists a ring isomorphism E from the Q-adic completion of R[X] to the power series ring in d variables over the m-adic completion of R [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. For every n,x,a with x_n=a mod m^n, the n-th coordinate of E⁻¹(C(x)) is C(a) mod Q^n. For every y and polynomial p representing y_1 mod Q, reduction modulo m of the constant coefficient of E(y) equals the residue of the constant coefficient of p.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 054L, lemma-smooth-etale-over-affine-space; explicit polynomial-model calculation of lem-trf-smooth-rational-point-completion, Step 7 (not a verbatim assertion of that tag)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put A=completion_m(R), T=A[[X]], and H=(mA,X). Completion is Noetherian and mA-adically complete, so T is H-adically complete.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-power-series-complete-over-complete-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the canonical polynomial-to-series map f, compare coefficients using the two combined-ideal criteria and the completion evaluation kernel: f(p)∈H^n iff p∈Q^n. Thus the induced quotient map is injective. Truncate an arbitrary series below degree n and lift its finitely many coefficients modulo m^n to R; the difference belongs to H^n, proving surjectivity.",
+   "uses": [
+    "lem-trf-polynomial-combined-ideal-coefficients",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient isomorphisms commute with reductions because their maps send each representative p to f(p). Their inverse limits give an isomorphism of the two completions. Identify the H-completion with T using completeness. Constants and residue compatibility follow by evaluating the constructed map at quotient levels n and 1 respectively. Reuse AdicCompletion.equiv_of_powerQuotient_bijective from the shared completion-comparison module; no separate inverse-limit helper is declared here.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-trf-completion-equiv-power-quotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-trf-polynomial-combined-ideal-coefficients",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "def-weil-pbc-adic-completion",
+  "lem-trf-completion-equiv-power-quotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Explicit coefficient calculation in lem-trf-smooth-rational-point-completion, Step 7, formalized by M6. The shared inverse-limit comparison is proved once in Sheaf.RingTheory.CompletionEquivPowerQuotients and imported by both consumers (repair of cac493bc5a5)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completion of smooth local algebra at rational residue point is a formal power series ring over completed base",
+   "results": "{\"t\": \"2026-10-23T10:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"completion of smooth local algebra at rational residue point is a formal power series ring over completed base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"PowerSeries.residueFieldOfPowerSeries\", \"LaurentSeries.ratfuncAdicComplPkg\"], \"digest\": \"f64ad387c01d1aed\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the retrieved grading, Rees-algebra, completion and coefficient lemmas do not state this combined polynomial ideal comparison; explicit construction proved in the delivered module."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"MvPowerSeries\"",
+   "results": "{\"t\": \"2026-10-23T10:14:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"MvPowerSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the retrieved grading, Rees-algebra, completion and coefficient lemmas do not state this combined polynomial ideal comparison; explicit construction proved in the delivered module."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*powerSeries|associatedGraded.*polynomial|polynomial.*associatedGraded",
+   "results": "{\"t\": \"2026-10-23T10:14:08Z\", \"tool\": \"grep\", \"query\": \"completion.*powerSeries|associatedGraded.*polynomial|polynomial.*associatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"a6998a4887638fbc\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the retrieved grading, Rees-algebra, completion and coefficient lemmas do not state this combined polynomial ideal comparison; explicit construction proved in the delivered module."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"associatedGraded\"",
+   "results": "{\"t\": \"2026-10-23T12:01:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"associatedGraded\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the retrieved grading, Rees-algebra, completion and coefficient lemmas do not state this combined polynomial ideal comparison; explicit construction proved in the delivered module."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*polynomial|polynomial.*associatedGraded|completion.*combined|combined.*completion",
+   "results": "{\"t\": \"2026-10-23T12:05:01Z\", \"tool\": \"grep\", \"query\": \"associatedGraded.*polynomial|polynomial.*associatedGraded|completion.*combined|combined.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the retrieved grading, Rees-algebra, completion and coefficient lemmas do not state this combined polynomial ideal comparison; explicit construction proved in the delivered module."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*polynomial|polynomial.*associatedGraded|combined.*ideal.*coeff",
+   "results": "{\"t\": \"2026-10-23T13:14:40Z\", \"tool\": \"grep\", \"query\": \"associatedGraded.*polynomial|polynomial.*associatedGraded|combined.*ideal.*coeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the retrieved grading, Rees-algebra, completion and coefficient lemmas do not state this combined polynomial ideal comparison; explicit construction proved in the delivered module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of R polynomial ring at the ideal generated by maximal ideal and variables is formal power series over the completed local base ring with compatible constants",
+   "results": "{\"t\": \"2026-10-23T13:30:40Z\", \"tool\": \"leansearch\", \"query\": \"Completion of R polynomial ring at the ideal generated by maximal ideal and variables is formal power series over the completed local base ring with compatible constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.instCommRing\", \"AdicCompletion.subring\", \"AdicCompletion.mkₐ\", \"AdicCompletion.subalgebra\", \"PowerSeries.maximalIdeal_eq_span_X\", \"LaurentSeries.powerSeries_ext_subring\", \"MvPolynomial.coe_C\", \"PowerSeries.instIsLocalRing\"], \"digest\": \"f06cb982c58e36a6\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match: the retrieved grading, Rees-algebra, completion and coefficient lemmas do not state this combined polynomial ideal comparison; explicit construction proved in the delivered module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothRationalPointCompletion",
+  "date": "2026-10-23",
+  "group": "M6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Taylor modules, initial diagrams and finite local variation; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Theorem 3.17, Corollaries 3.19--3.20, Remarks 9.1, Lemma 9.3; Bierstone--Milman--Temkin, arXiv:0905.3580, sections 6.1 and 6.5. No Stacks tag states this package. Further input for Taylor modules and diagrams: Completion at a rational point of an essentially smooth local map. Explicit polynomial model calculation of lem-trf-smooth-rational-point-completion, Step 7.",
+   "via": [
+    "lem-trf-smooth-rational-point-completion",
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialCombinedCompletion",
+  "file": "lean/Sheaf/RingTheory/PolynomialCombinedCompletion.lean",
+  "declaration": "MvPolynomial.combinedIdeal_completion",
+  "statement": "theorem combinedIdeal_completion\n    (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (d : ℕ) :\n    let I := IsLocalRing.maximalIdeal R\n    let Q := I.map (C (σ := Fin d)) ⊔ idealOfVars (Fin d) R\n    ∃ E : AdicCompletion Q (MvPolynomial (Fin d) R) ≃+*\n        MvPowerSeries (Fin d) (AdicCompletion I R),\n      (∀ (n : ℕ) (x : AdicCompletion I R) (a : R),\n        AdicCompletion.evalₐ I n x = Ideal.Quotient.mk (I ^ n) a →\n          AdicCompletion.evalₐ Q n (E.symm (MvPowerSeries.C x)) =\n            Ideal.Quotient.mk (Q ^ n) (C a)) ∧\n      (∀ (y : AdicCompletion Q (MvPolynomial (Fin d) R)) (p : MvPolynomial (Fin d) R),\n        AdicCompletion.evalₐ Q 1 y = Ideal.Quotient.mk (Q ^ 1) p →\n          AdicCompletion.evalOneₐ I (MvPowerSeries.constantCoeff (E y)) =\n            IsLocalRing.residue R (constantCoeff p))",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261023T231843-L-3652173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261023T231843-L-3652173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

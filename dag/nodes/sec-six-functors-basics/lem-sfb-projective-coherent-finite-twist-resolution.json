@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-projective-coherent-finite-twist-resolution",
+ "kind": "statement",
+ "title": "Finite resolution of a coherent projective sheaf by twists",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq0$, $P=\\mathbf P^n_k$ [def-pc-proj], with twisting sheaves $\\mathcal O_P(d)=\\widetilde{S(d)}$ for $S=k[x_0,\\ldots,x_n]$ and $d\\in\\mathbf Z$ [def-weil-pbc-proj-twisting-sheaf], whose frames on $D_+(x_i)$ have the transition rule $e_i^{(d)}=(x_i/x_j)^d e_j^{(d)}$ of [def-pc-projective-space-twist], and let $G$ be a coherent $\\mathcal O_P$-module [pqf-def-coherent]. There are an integer $0\\leq\\ell\\leq n+1$, finite index sets $I_0,\\ldots,I_\\ell$, integers $d_{j,r}$, and an exact sequence of coherent sheaves\n$$0\\to\\bigoplus_{r\\in I_\\ell}\\mathcal O_P(d_{\\ell,r})\\to\\cdots\\to\\bigoplus_{r\\in I_0}\\mathcal O_P(d_{0,r})\\to G\\to0.$$\nThe assertion allows $G=0$ and $n=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), combined with constructions.tex Tag 03GM (lemma-quasi-coherent-projective-space) and coherent.tex Tag 01YS (lemma-coherent-projective): graded Hilbert syzygy and exact sheafification give the finite twist-resolution formulation. This is a supporting algebraic lemma, not a GAGA comparison."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "pqf-def-coherent",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=k[x_0,\\ldots,x_n]$. The field $k$ is Noetherian by [lem-weil-pbc-field-regular-ring]. Since the $n+1$ variables generate $S$ in degree one, [lem-sfb-standard-proj-coherent-section-finiteness] gives that $P$ is Noetherian and that $M=\\bigoplus_{a\\geq0}\\Gamma(P,G(a))$ is a finite graded $S$-module, extended by zero in negative degrees. By [pqf-lem-coherent-ft-locnoeth], the coherent sheaf $G$ is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-field-regular-ring",
+    "lem-sfb-standard-proj-coherent-section-finiteness",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG6 (lemma-coherent-on-proj), opening assertion and (4); Tag 01XZ (lemma-coherent-Noetherian); Tag 01YS (lemma-coherent-projective) (5)"
+   }
+  },
+  {
+   "text": "Let $N=\\bigoplus_{a\\in\\mathbf Z}\\Gamma(P,G(a))$ with the action of [lem-sfb-proj-section-module-reconstruction]; that node gives $\\widetilde N\\simeq G$. The inclusion $M\\hookrightarrow N$ induces a sheaf map by [lem-sc-p1-proj-tilde-functorial]. On every $U_i=D_+(x_i)$, its chart map is $M_{(x_i)}\\to N_{(x_i)}$ by [def-weil-pbc-proj-twisting-sheaf]. Both fraction modules use precisely numerators of degree $a\\geq0$ and denominators $x_i^a$, so this map is bijective. The $U_i$ cover by [lem-weil-pbc-proj-polynomial-twist-chart]. The inverses agree on overlaps (being inverses of one sheaf map), hence glue. Thus $\\widetilde M\\simeq G$.",
+   "uses": [
+    "lem-sfb-proj-section-module-reconstruction",
+    "lem-sc-p1-proj-tilde-functorial",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-proj-polynomial-twist-chart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GM (lemma-quasi-coherent-projective-space), reconstructed nonnegative section module; Tag 01M7 (lemma-proj-sheaves), chart formula"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-polynomial-graded-hilbert-syzygy] to the finite graded module $M$ over the polynomial ring in $m=n+1$ variables. Obtain $0\\to F_m\\to\\cdots\\to F_0\\to M\\to0$ with degree-preserving maps and $F_j=\\bigoplus_{r\\in I_j}S(d_{j,r})$, each $I_j$ finite.",
+   "uses": [
+    "lem-sfb-polynomial-graded-hilbert-syzygy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring) and Tag 0EKB (lemma-graded-NAK), graded enhancement isolated as the cited node"
+   }
+  },
+  {
+   "text": "Set $K_0=M$, $K_{j+1}=\\ker(F_j\\twoheadrightarrow K_j)$ for $0\\leq j<m$, and $K_{m+1}=0$; exactness of the resolution identifies $F_m\\simeq K_m$. These are graded modules, and $0\\to K_{j+1}\\to F_j\\to K_j\\to0$ is short exact for every $0\\leq j\\leq m$. Apply [lem-sfb-proj-graded-sheafification-exact] to these sequences. Their sheafifications splice to an exact sequence: each differential factors through the epimorphism onto $\\widetilde K_j$ followed by its monomorphism into $\\widetilde F_{j-1}$, so its image is precisely the next kernel. Functoriality [lem-sc-p1-proj-tilde-functorial] identifies these composites with the sheafified original maps. The zero module has zero associated sheaf by the chart definition [def-weil-pbc-proj-twisting-sheaf]. Replace $\\widetilde M$ by $G$ using step 2.",
+   "uses": [
+    "lem-sfb-proj-graded-sheafification-exact",
+    "lem-sc-p1-proj-tilde-functorial",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M7 (lemma-proj-sheaves), final assertion: exactness; elementary splicing of the resulting short exact sequences"
+   }
+  },
+  {
+   "text": "For each $j$, [lem-sc-proj-finite-twist-coproduct-fractions] gives the degree-zero-fraction charts of $F_j=\\bigoplus_r S(d_{j,r})$ on the finite coproduct of the corresponding Proj twists. The compatible-chart uniqueness in [lem-weil-pbc-proj-graded-module-sheaf-exists] therefore identifies this coproduct with $\\widetilde F_j$. On $U_i$, the summand for shift $d$ has basis $x_i^d$ in the localized degree-$d$ piece, including negative $d$. On overlaps $x_i^d=(x_i/x_h)^d x_h^d$. This is exactly the gluing rule of [def-pc-projective-space-twist], so these Proj twists are the twisting sheaves in the item. Hence $\\widetilde F_j\\simeq\\bigoplus_{r\\in I_j}\\mathcal O_P(d_{j,r})$. Transport the arrows along these isomorphisms.",
+   "uses": [
+    "lem-sc-proj-finite-twist-coproduct-fractions",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01M6 (definition-structure-sheaf), 01M7 (lemma-proj-sheaves), 01MN (definition-twist), 01MS (lemma-when-invertible); finite sums and chart gluing"
+   }
+  },
+  {
+   "text": "Each finite sum of twists is free of finite rank on every $U_i$, hence is quasi-coherent and of finite type by [pqf-def-coherent]. Since $P$ is locally Noetherian by step 1, [pqf-lem-coherent-ft-locnoeth] makes every term coherent. Taking $\\ell=m=n+1$ proves the asserted bound; zero terms are permitted. For $G=0$ one may instead take $\\ell=0$ and $I_0=\\varnothing$. Nothing excluded $n=0$: the same construction uses the one-variable polynomial ring and $\\ell=1\\leq n+1$.",
+   "uses": [
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ (lemma-coherent-Noetherian); elementary index choice and zero-object cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-regular-ring",
+  "lem-sfb-standard-proj-coherent-section-finiteness",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sfb-proj-section-module-reconstruction",
+  "lem-sc-p1-proj-tilde-functorial",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-sfb-polynomial-graded-hilbert-syzygy",
+  "lem-sfb-proj-graded-sheafification-exact",
+  "lem-sc-proj-finite-twist-coproduct-fractions",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "def-pc-projective-space-twist",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly from 00OQ and the graded enhancement isolated below, 03GM, 0AG6/01YS, 01M7 and 01XZ; explicit truncation and twisting-convention comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every coherent module on projective n space over a field has a finite resolution by finite direct sums of twisting structure sheaves",
+   "results": "OK 8 hits: Rep.standardComplex.x_projective, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert graded syzygy theorem sheafified on projective space gives a finite line bundle twist resolution of any coherent sheaf",
+   "results": "OK 8 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf on projective space over a field admits a finite resolution by sums of O d",
+   "results": "OK 8 hits: CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, CategoryTheory.HasProjectiveResolutions.out, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, SheafOfModules.QuasicoherentData.IsFinitePresentation, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.exact₀.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpace\", \"resolution\"",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "syzygy|graded.*resolution|resolution.*twist",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent algebraic sheaf on projective n space over a field admits a resolution of length at most n+1 by finite sums of O(d)",
+   "results": "OK 8 hits: CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CochainComplex.isKProjective_of_projective.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent modules on projective space have finite resolutions by twisting invertible sheaves",
+   "results": "OK 8 hits: ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, SheafOfModules.IsFinitePresentation.mk, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, Module.finitePresentation_of_projective, SheafOfModules.QuasicoherentData.IsFinitePresentation, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpace\", \"resolution\"",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "syzygy|graded.*resolution|resolution.*twist",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gaga-derived-coherent-sections",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Finite resolution of a coherent projective sheaf by twists.",
+   "via": [
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-projective-coherent-finite-twist-resolution",
+  "worker": "stage1",
+  "summary": "Represented G by its finite nonnegative section module, proved truncation does not alter the associated sheaf, isolated arbitrary-variable graded Hilbert syzygy as one algebraic statement-only node, sheafified via short exact kernels, and compared shifted-free charts to the item's gluing twists. Checked coherence and zero/dimension-zero cases. Statement and original sources retained.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, latest blueprint proof (3), through the recorded GAGA/Kodaira prerequisite chain. No unit or chapter route changed. The inherited nearest imported blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-p1-proj-tilde-functorial",
+    "why": "Generic associated-sheaf functor for arbitrary graded rings, needed for the truncation inclusion and for splicing; the p1 name does not restrict its statement."
+   },
+   {
+    "node": "lem-weil-pbc-proj-polynomial-twist-chart",
+    "why": "General polynomial-Proj affine covering, needed to check the truncation isomorphism and the twisting convention in all dimensions."
+   },
+   {
+    "node": "lem-sc-proj-finite-twist-coproduct-fractions",
+    "why": "General finite-coproduct fraction charts over any graded commutative ring, identifying each sheafified shifted-free term."
+   },
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Uniqueness of an associated sheaf with compatible fraction charts, used to identify the finite coproduct; no projective-line restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-p1-proj-tilde-functorial",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-sc-proj-finite-twist-coproduct-fractions",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-a5f417bb7",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-a5f417bb7 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-polynomial-graded-hilbert-syzygy and every cited statement in full, and checked the Stacks sources: 00OQ (algebra.tex l.27723), 0EKB (graded NAK), 03GM, 01YS(5)/0AG6(4), 01M7 and 01XZ. This is the first delivery of the item, and live still has it unsplit. There is no repair note and no SGA citation. The new node is the graded Hilbert syzygy theorem for k[x_1..x_m] with m>=0. It is true and was tested on m=0, M=S/(x_1), M=0 and S(d). It is self-contained, statement-only, and its source is honestly marked as an agent-extracted graded enhancement of 00OQ. It is not a duplicate: the lem-sc-p1-* syzygy, Nakayama and free-cover nodes cover only two variables, and the weil-pbc global-dimension nodes are ungraded or local. It is pure algebra, so it does not restate the item. Step 1: k is Noetherian, S is generated in degree 1, and P is Noetherian; finiteness of N>=0 uses the same twist and action conventions as the reconstruction node; coherent implies quasi-coherent. Step 2: the truncation map on M_(x_i)->N_(x_i) is bijective, because numerators have degree a>=0 and torsion relations are the same in M; the opens U_i cover P, so the map is an isomorphism, as in 03GM. Step 3 applies the new node with m=n+1. Step 4 splices the short exact sequences of graded kernels through the exactness node and tilde functoriality. Step 5 identifies the coproduct of Proj twists with the sheaf of the sum of the S(d_r) through the coproduct-fractions node and uniqueness (b). It then compares that with the glued O(d) of def-pc-projective-space-twist using the basis x_i^d (also for negative d) and the transition rule x_i^d=(x_i/x_j)^d x_j^d. Step 6 gets coherence from 01XZ; l=n+1, and G=0 and n=0 are covered. Accepted tool uses: the four nodes declared in tool_uses, plus pqf-lem-coherent-ft-locnoeth (01XZ, generic, undeclared; the maintainer should record it). Batch-5 flag: lem-trf-proj-twist-section-basic-open, reached through lem-sfb-proj-section-module-reconstruction, is generic Proj topology (nonvanishing loci of canonical sections form a basis). The only trf nodes in the item's closure are four generic Proj-chart nodes, and the closure reaches no assume leaf, trace-transport or Poincare node, so these citations are outside the assumed statements. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFiniteTwistResolution",
+  "declaration": "AlgebraicGeometry.Proj.exists_coherent_finite_twist_resolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFiniteTwistResolution.lean",
+  "statement": "theorem exists_coherent_finite_twist_resolution (k : Type u) [Field k] (n : ℕ) (G : (projectiveSpaceOverAffine (ULift.{u} (Fin (n + 1))) k).Modules) (hG : RingedSpace.IsCoherent (projectiveSpaceOverAffine (ULift.{u} (Fin (n + 1))) k).toRingedSpace G) : ∃ (ℓ : ℕ), ℓ ≤ n + 1 ∧ ∃ (F : ChainComplex (projectiveSpaceOverAffine (ULift.{u} (Fin (n + 1))) k).Modules ℕ) (π : F.X 0 ⟶ G) (w : F.d 1 0 ≫ π = 0), Epi π ∧ (ShortComplex.mk (F.d 1 0) π w).Exact ∧ (∀ j : ℕ, F.ExactAt (j + 1)) ∧ (∀ j : ℕ, ℓ < j → IsZero (F.X j)) ∧ (∀ j : ℕ, j ≤ ℓ → RingedSpace.IsCoherent (projectiveSpaceOverAffine (ULift.{u} (Fin (n + 1))) k).toRingedSpace (F.X j) ∧ ∃ (r : ℕ) (d : Fin r → ℤ), Nonempty (F.X j ≅ ∐ (fun a : Fin r ↦ @twist _ _ _ _ _ (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k) MvPolynomial.gradedAlgebra (d a))))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65b147e2a",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Re-delivery of 6fff (returned for H13/H4: it rebound def-pc-projective-space-twist's record). Fixed: all 5 dependency records match live byte for byte, and there are no new nodes. The statement correction says O_P(d)=S(d)~ (01MN) and adds def-weil-pbc-proj-twisting-sheaf as a statement dependency, with verbatim old statement/deps; the only citer, lem-sfb-gaga-derived-coherent-sections (steps 7-9), still holds. Lean matches the node clause by clause: Field k, n:ℕ, polynomial Proj, RingedSpace.IsCoherent, ℓ≤n+1, surjective augmentation, exact everywhere including the left end, terms coherent and ≅ finite sums of Proj.twist (negative d allowed). G=0 and n=0 covered; only universe u, bound. Statement field verbatim, proof only sorry, docstrings with source and blueprint id, all imports present. No file changed, so nothing compiled; signature identical to the previously compiled head.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q54 stage 2",
+  "old_statement": "Let $k$ be a field [def-weil-field], $n\\geq0$, $P=\\mathbf P^n_k$ with its twisting sheaves [def-pc-proj, def-pc-projective-space-twist], and let $G$ be a coherent $\\mathcal O_P$-module [pqf-def-coherent]. There are an integer $0\\leq\\ell\\leq n+1$, finite index sets $I_0,\\ldots,I_\\ell$, integers $d_{j,r}$, and an exact sequence of coherent sheaves\n$$0\\to\\bigoplus_{r\\in I_\\ell}\\mathcal O_P(d_{\\ell,r})\\to\\cdots\\to\\bigoplus_{r\\in I_0}\\mathcal O_P(d_{0,r})\\to G\\to0.$$\nThe assertion allows $G=0$ and $n=0$.",
+  "what": "The item fixes the polynomial Proj model but cited only def-pc-projective-space-twist, whose recorded Lean construction lives on the distinct base-change ProjectiveSpace model. Clarify that O_P(d) is the existing Proj twist, the sheaf associated to S(d), and cite def-weil-pbc-proj-twisting-sheaf. Retain the original node only for its standard-open transition prescription. Both landed definition records remain untouched; no mathematical hypothesis, resolution bound or exactness clause changes.",
+  "source": {
+   "document": "literature/stacks-project/constructions.tex",
+   "place": "Tag 01MN, definition-twist (1): O_X(d) = tilde(S(d)); Tag 03GM, lemma-quasi-coherent-projective-space, standard opens and transition T_i/T_j. Together with the item sources 00OQ and 01YS."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-gaga-derived-coherent-sections",
+    "holds": true,
+    "note": "Step 9 still resolves the coherent pushforward on polynomial projective space by finite sums of its Proj twists; their standard-chart transitions are unchanged, so the twist comparison in Steps 7-8 and the kernel induction remain valid."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-field",
+   "def-pc-proj",
+   "def-pc-projective-space-twist",
+   "pqf-def-coherent"
+  ]
+ }
+}

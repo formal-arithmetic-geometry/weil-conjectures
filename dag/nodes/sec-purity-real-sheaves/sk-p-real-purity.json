@@ -1,0 +1,170 @@
+{
+ "id": "sk-p-real-purity",
+ "kind": "statement",
+ "title": "Purity of real sheaves on curves",
+ "statement": "On a smooth geometrically connected curve over $\\mathbf F_q$, every\nirreducible constituent of an $\\iota$-real lisse Weil sheaf\n([sk-def-wrp-real-definition]) is punctually $\\iota$-pure of weight equal to\nits determinant weight ([sk-d-real-detweights]). In particular, every\n$\\iota$-real lisse Weil sheaf on the curve is mixed ([sk-d-real-weights]).",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-purity-real-sheaves/sk-p-real-purity/_section.md",
+  "place": "node sk-p-real-purity, order 3881"
+ },
+ "stmt_deps": [
+  "sk-def-wrp-real-definition",
+  "sk-d-real-weights"
+ ],
+ "proof": [
+  {
+   "text": "We first prove the assertion on an affine curve. Replacing the sheaf\nby its semisimplification does not change its local characteristic\npolynomials ([sk-r-real-linear], [lem-wf-real-semisimplification]), so we may\nwrite\n\n$$\n \\mathcal G=\\bigoplus_{i=1}^t\\mathcal G_i,\n \\qquad \\gamma_1>\\cdots>\\gamma_t,\n \\qquad r_i=\\operatorname{rank}\\mathcal G_i,\n$$\n\nwhere $\\mathcal G_i$ is the sum of the irreducible constituents with\ndeterminant weight $\\gamma_i$ ([def-rp-weight-blocks]).",
+   "uses": [
+    "lem-wf-real-semisimplification",
+    "def-rp-weight-blocks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix $i$, set $N=\\sum_{j<i}r_j$, and put\n$B=\\sum_{j<i}r_j\\gamma_j$. By [sk-p-exterior] and [sk-d-real-detweights]\n(that is, by [sk-cor-walg-curve-calculus]), the largest determinant weight of a\nconstituent of $\\bigwedge^{N+1}\\mathcal G$ is $B+\\gamma_i$. Indeed,\nit is obtained by taking $n_j=r_j$ for every $j<i$ and $n_i=1$, and\nevery other choice gives a smaller sum, because the $\\gamma_j$ are\nstrictly decreasing. Exterior powers of a real sheaf are real, since\ntheir eigenvalues are the products of eigenvalues with distinct\nindices and complex conjugation permutes this multiset\n([lem-rp-exterior-reality]). Hence [sk-p-real-rankin] applies to\n$\\bigwedge^{N+1}\\mathcal G$.",
+   "uses": [
+    "lem-rp-exterior-reality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $\\alpha$ be an eigenvalue on the stalk of $\\mathcal G_i$ at $x$.\nThe decomposition of the exterior power of a direct sum shows that\n$\\bigwedge^{N+1}\\mathcal G$ contains the summand\n\n$$\n (\\det\\mathcal G_1\\otimes\\cdots\\otimes\\det\\mathcal G_{i-1})\n        \\otimes\\mathcal G_i.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "On it, $\\alpha$ contributes the eigenvalue $\\alpha$ times the\neigenvalues of $\\det\\mathcal G_j$ for $j<i$. These determinants are\npure of weights $r_j\\gamma_j$ ([sk-cor-wrp-rankone-pure]), so the product of\nthe squares of their absolute values at $x$ is $q_x^B$. Consequently\n[sk-p-real-rankin] gives\n\n$$\n |\\iota(\\alpha)|^2q_x^B\\le q_x^{B+\\gamma_i},\n \\qquad |\\iota(\\alpha)|^2\\le q_x^{\\gamma_i}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The dual $\\mathcal G^\\vee$ is real as well, with determinant weights\n$-\\gamma_t>\\cdots>-\\gamma_1$ ([sk-cor-walg-curve-calculus]). Applying the\nsame argument to the summand $\\mathcal G_i^\\vee$, we get\n$|\\iota(\\alpha^{-1})|^2\\le q_x^{-\\gamma_i}$. Hence\n$|\\iota(\\alpha)|^2=q_x^{\\gamma_i}$, as required.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Now let the curve be arbitrary, and choose a closed point $x$ and an\naffine open neighbourhood of $x$. This neighbourhood is geometrically\nconnected, being a nonempty open subscheme of a smooth geometrically\nintegral curve. Restriction to it preserves irreducibility. Indeed, a\nconnected finite étale cover of a normal connected curve is integral,\nand hence remains connected after restriction to a dense open; thus the\nmaps of geometric and of arithmetic fundamental groups are surjective.\nSince restriction preserves the degree map, the map of Weil groups is\nsurjective too, and so the invariant subspaces on the open are exactly\nthose on the curve ([lem-wf-dense-open-pi1-surjective], [sk-d-real-weil]).",
+   "uses": [
+    "lem-wf-dense-open-pi1-surjective",
+    "sk-d-real-weil"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction of a real sheaf is real, and the determinant keeps its\nweight by [sk-cor-wrp-rankone-pure]. Hence the affine case\napplies at $x$, and since $x$ was arbitrary, we obtain purity on the\nwhole curve ([thm-rp-real-lisse-purity-affine]). Finally, a composition series\nis a finite filtration with pure quotients, which proves that the sheaf is\nmixed.",
+   "uses": [
+    "thm-rp-real-lisse-purity-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-real-semisimplification",
+  "def-rp-weight-blocks",
+  "lem-rp-exterior-reality",
+  "lem-wf-dense-open-pi1-surjective",
+  "sk-d-real-weil",
+  "thm-rp-real-lisse-purity-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-purity-real-sheaves/sk-p-real-purity/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 3881,
+ "blueprint_uses": [
+  "sk-cor-walg-curve-calculus",
+  "sk-cor-wrp-rankone-pure",
+  "sk-d-real-detweights",
+  "sk-d-real-weights",
+  "sk-d-real-weil",
+  "sk-def-wrp-real-definition",
+  "sk-p-exterior",
+  "sk-p-real-rankin",
+  "sk-r-real-linear"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "sk-p-real-purity",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-purity",
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "proof"
+  ],
+  "statement": "On a smooth geometrically connected curve over $\\mathbf F_q$, every\nirreducible constituent of an $\\iota$-real lisse Weil sheaf\n([sk-def-wrp-real-definition]) is punctually $\\iota$-pure of weight equal to\nits determinant weight ([sk-d-real-detweights]). In particular, every\n$\\iota$-real lisse Weil sheaf on the curve is mixed ([sk-d-real-weights]).",
+  "proof": [
+   {
+    "text": "We first prove the assertion on an affine curve. Replacing the sheaf\nby its semisimplification does not change its local characteristic\npolynomials ([sk-r-real-linear], [lem-wf-real-semisimplification]), so we may\nwrite\n\n$$\n \\mathcal G=\\bigoplus_{i=1}^t\\mathcal G_i,\n \\qquad \\gamma_1>\\cdots>\\gamma_t,\n \\qquad r_i=\\operatorname{rank}\\mathcal G_i,\n$$\n\nwhere $\\mathcal G_i$ is the sum of the irreducible constituents with\ndeterminant weight $\\gamma_i$ ([def-rp-weight-blocks]).",
+    "uses": [
+     "lem-wf-real-semisimplification",
+     "def-rp-weight-blocks"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Fix $i$, set $N=\\sum_{j<i}r_j$, and put\n$B=\\sum_{j<i}r_j\\gamma_j$. By [sk-p-exterior] and [sk-d-real-detweights]\n(that is, by [sk-cor-walg-curve-calculus]), the largest determinant weight of a\nconstituent of $\\bigwedge^{N+1}\\mathcal G$ is $B+\\gamma_i$. Indeed,\nit is obtained by taking $n_j=r_j$ for every $j<i$ and $n_i=1$, and\nevery other choice gives a smaller sum, because the $\\gamma_j$ are\nstrictly decreasing. Exterior powers of a real sheaf are real, since\ntheir eigenvalues are the products of eigenvalues with distinct\nindices and complex conjugation permutes this multiset\n([lem-rp-exterior-reality]). Hence [sk-p-real-rankin] applies to\n$\\bigwedge^{N+1}\\mathcal G$.",
+    "uses": [
+     "lem-rp-exterior-reality"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $\\alpha$ be an eigenvalue on the stalk of $\\mathcal G_i$ at $x$.\nThe decomposition of the exterior power of a direct sum shows that\n$\\bigwedge^{N+1}\\mathcal G$ contains the summand\n\n$$\n (\\det\\mathcal G_1\\otimes\\cdots\\otimes\\det\\mathcal G_{i-1})\n        \\otimes\\mathcal G_i.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "On it, $\\alpha$ contributes the eigenvalue $\\alpha$ times the\neigenvalues of $\\det\\mathcal G_j$ for $j<i$. These determinants are\npure of weights $r_j\\gamma_j$ ([sk-cor-wrp-rankone-pure]), so the product of\nthe squares of their absolute values at $x$ is $q_x^B$. Consequently\n[sk-p-real-rankin] gives\n\n$$\n |\\iota(\\alpha)|^2q_x^B\\le q_x^{B+\\gamma_i},\n \\qquad |\\iota(\\alpha)|^2\\le q_x^{\\gamma_i}.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the reverse inequality, write\n$w(\\beta)=\\log|\\iota(\\beta)|^2/\\log q_x$ for a nonzero $\\beta$, and let\n$\\mathcal W$ be an irreducible constituent of $\\mathcal G_i$, of rank\n$s$, whose stalk at $x$ has $\\alpha$ as an eigenvalue. Its eigenvalues\n$\\beta_1,\\ldots,\\beta_s$ at $x$ are eigenvalues on $\\mathcal G_i$, so\n$w(\\beta_k)\\le\\gamma_i$ for every $k$. Their product is the eigenvalue\non $\\det\\mathcal W$, which is pure of weight $s\\gamma_i$\n([sk-d-real-detweights]), so $\\sum_kw(\\beta_k)=s\\gamma_i$. A sum of $s$\nnumbers that are each at most $\\gamma_i$ equals $s\\gamma_i$ only if all\nof them equal $\\gamma_i$. Hence $|\\iota(\\alpha)|^2=q_x^{\\gamma_i}$, as\nrequired.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Now let the curve be arbitrary, and choose a closed point $x$ and an\naffine open neighbourhood of $x$. This neighbourhood is geometrically\nconnected, being a nonempty open subscheme of a smooth geometrically\nintegral curve. Restriction to it preserves irreducibility. Indeed, a\nconnected finite étale cover of a normal connected curve is integral,\nand hence remains connected after restriction to a dense open; thus the\nmaps of geometric and of arithmetic fundamental groups are surjective.\nSince restriction preserves the degree map, the map of Weil groups is\nsurjective too, and so the invariant subspaces on the open are exactly\nthose on the curve ([lem-wf-dense-open-pi1-surjective], [sk-d-real-weil]).",
+    "uses": [
+     "lem-wf-dense-open-pi1-surjective",
+     "sk-d-real-weil"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The restriction of a real sheaf is real, and the determinant keeps its\nweight by [sk-cor-wrp-rankone-pure]. Hence the affine case\napplies at $x$, and since $x$ was arbitrary, we obtain purity on the\nwhole curve ([thm-rp-real-lisse-purity-affine]). Finally, a composition series\nis a finite filtration with pure quotients, which proves that the sheaf is\nmixed.",
+    "uses": [
+     "thm-rp-real-lisse-purity-affine"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
+}

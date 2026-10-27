@@ -1,0 +1,309 @@
+{
+ "id": "lem-coef-restricted-tower-resolution-acyclicity",
+ "kind": "statement",
+ "title": "Acyclicity and projection equations for a restricted varying-ring resolution",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], $B_1\\leftarrow B_2\\leftarrow\\cdots$ a sequence of sheaves of commutative rings, and $A$ a sheaf of commutative rings with compatible homomorphisms $A\\to B_n$. Let $\\mathscr S(B)$ be the category of strict semilinear module systems, identified with modules over $B$ on the sequence site $\\mathcal T=\\mathcal C\\times\\mathbf N_{\\ge1}$, with componentwise exactness [lem-pur-system-ringed-sequence-site]. Use ordinary unbounded derived categories and write $[K]$ for the derived object of a complex and $[f]$ for the class of a chain map [def-weil-abstract-derived-category]. Put $U_0N=(\\operatorname{Res}_{A\\to B_n}N_n)_n$ [def-pc-sheaf-restrict-scalars]. Let $g$ be the sequence-site projection with constant inverse image, put $\\Delta A=g^{-1}A$, let $r:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal T),\\Delta A)$ be the identity on underlying topoi with structural map $\\Delta A\\to B$, and put $p=g\\circ r$ [def-weil-pbc-ringed-topos-morphism]. Under the sequence-site identification, $r_*=U_0$ is exact and $g_*=\\lim$, computed degreewise on complexes. For every K-injective system resolution $a:N\\to I$ and every K-injective tower resolution $j:U_0I\\to J$ [def-pur-kinjective-complex], the chain map $\\lim j:\\lim U_0I\\to\\lim J$ is a quasi-isomorphism. The ordinary complex $p_*I$ is canonically $\\lim U_0I$. For each $n$, both $U_0a_n$ and $j_n$ are quasi-isomorphisms, and the following equality holds in $D(A)$:\n$$[U_0a_n]^{-1}[j_n]^{-1}[\\operatorname{pr}_n^J][\\lim j]=[U_0a_n]^{-1}[\\operatorname{pr}_n^{U_0I}].$$\nHere $\\operatorname{pr}_n$ denotes the degreewise inverse-limit projection; $U_0a_n$ means scalar restriction of $a_n$. These identifications commute with the canonical derived resolution transitions in $a,j$. There is no assumption that $U_0I$ or any $I_n$ is K-injective.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E (lemma-derived-pushforward-composition), applied to identity-topos ring restriction followed by the sequence-site projection of section-derived-limits; agent records the two-resolution projection equation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Under the sequence-site identification in the hypotheses, $r$ is the coefficient-change morphism for $\\Delta A\\to B$: its direct image is restriction of scalars. On underlying abelian sheaves this changes neither sections nor maps; componentwise exactness therefore makes $r_*=U_0$ exact. The direct image of $g$ is the tower limit stipulated in the statement. Explicitly, a section of $g_*r_*M$ over $V$ is a family $(x_n)$, $x_n\\in M_n(V)$, compatible with all transitions. Its $A(V)$-action is the componentwise action through $A(V)\\to B_n(V)$. This is exactly $\\lim U_0M$, including its projection maps. Applying the description in every complex degree gives $p_*I=g_*r_*I=\\lim U_0I$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), sequence-site projection; Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "Use the resolving-adjunction comparison isIso_map_of_adjoints underlying the normalized ringed-topos composition theorem. Construct the left adjoint of U0 by extending scalars at each level, with transition b tensor x sent to image(b) tensor transition(x); the normalized scalar adjunctions give its adjunction to U0. Constant towers are left adjoint to inverse limit. Resolve a tower by viewing it as a strict system over the constant ring A and taking the existing sequence-site K-flat resolution. Exact restriction along identities identifies the resulting componentwise K-flat tower with a resolution of the original tower. Scalar extension inverts quasi-isomorphisms between these representatives, by the scalar model at each level. Constant towers preserve K-flatness and quasi-isomorphisms. The generic comparison theorem, with the K-injective Hom bijections at I and J, therefore makes the localized map lim j invertible, hence lim j is a quasi-isomorphism. This proves the given acyclicity assertion for independent site and coefficient universes, without assuming U0I is K-injective.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-pur-system-evaluation-kflat",
+    "lem-pc-kflat-resolution",
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-scalar-generators",
+    "lem-pur-system-scalar-coherence",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), sequence-site projection; Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "A K-injective resolution is a quasi-isomorphism by definition. Since exactness of $\\mathscr S(B)$ is componentwise, kernels, images and hence cohomology of a system complex are componentwise. Thus $a_n$ is a quasi-isomorphism. Scalar restriction keeps the underlying abelian complex, its cycles, boundaries and cohomology; consequently $U_0a_n$ is a quasi-isomorphism as well. For the tower resolution $j$, exactness of tower evaluation gives the same conclusion for $j_n$. This proves that both inverses occurring in the asserted equation exist in $D(A)$; it makes no assertion about K-injectivity of $I_n$.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), sequence-site projection; Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "Naturality of the ordinary limit-cone projections gives an equality of chain maps $\\operatorname{pr}_n^J\\circ\\lim j=j_n\\circ\\operatorname{pr}_n^{U_0I}$. Take classes in $D(A)$ and compose on the left first with $[j_n]^{-1}$ and then with $[U_0a_n]^{-1}$. Cancellation gives exactly $[U_0a_n]^{-1}[j_n]^{-1}[\\operatorname{pr}_n^J][\\lim j]=[U_0a_n]^{-1}[\\operatorname{pr}_n^{U_0I}]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), sequence-site projection; Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "Precomposition by a quasi-isomorphism is bijective on homotopy classes of maps into a K-injective target. Apply this to a with target I-prime to obtain k and a homotopy ak to a-prime, then to j with target J-prime to obtain l and a homotopy jl to (U0k)j-prime. The same injectivity proves uniqueness of both comparison classes. Localizing the homotopies and canceling a and j gives the displayed fractions. The fractions imply that k and l are quasi-isomorphisms. Quasi-isomorphisms between K-injectives are homotopy equivalences, so additive restriction and inverse limit preserve them and their homotopy inverses. Applying inverse limit to the second homotopy and localizing gives the comparison square. The fractions and uniqueness characterize the canonical derived resolution transitions; the definition of directImageComplexIso is the identity identification with the composite functor.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sp-kinjective-comparison-principle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), sequence-site projection; Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "For the projections, evaluation of $lj\\simeq j'U_0k$ gives $[j_n']^{-1}[l_n]=[U_0k_n][j_n]^{-1}$, while $ka\\simeq a'$ gives $[U_0a_n']^{-1}[U_0k_n]=[U_0a_n]^{-1}$. Together with $[\\operatorname{pr}_n^{J'}][\\lim l]=[l_n][\\operatorname{pr}_n^J]$, these show that the normalized projection $[U_0a_n]^{-1}[j_n]^{-1}[\\operatorname{pr}_n^J]$ commutes with the resolution transitions. The other side of step 4 commutes by the same first-resolution equation and naturality of $\\operatorname{pr}_n^{U_0I}$. These are precisely the two sides of the asserted equality. Uniqueness of the homotopy classes in step 5 gives identity and composition compatibility, including a change of $j$ alone by taking $k=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), sequence-site projection; Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-kinjective-complex",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-pur-system-evaluation-kflat",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-system-scalar-generators",
+  "lem-pur-system-scalar-model",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0D6E; C3 implements the composition theorem through its generic resolving-adjunction comparison, with componentwise K-flat resolutions, and proves the projection and homotopy cancellation equations directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans|rightDerivedFunctorComparison|rightDerivedComp",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Functor/Derived/RightDerived.lean:101-115 and Localization/DerivabilityStructure/PointwiseRightDerived.lean:64-85; these define comparisons, not their invertibility in this ringed sequence setting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived composition with an exact functor and normalized projections to exact evaluation functors",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedNatTrans",
+   "results": "{\"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedNatTrans_id\", \"CategoryTheory.Functor.rightDerivedNatTrans\", \"CategoryTheory.Functor.rightDerivedNatIso_hom\", \"CategoryTheory.Functor.rightDerivedNatIso_inv\", \"CategoryTheory.Functor.rightDerivedNatTrans_fac\", \"CategoryTheory.Functor.rightDerivedNatTrans_app\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the universal transformation API assumes the derived functors and has no varying-ring sequence-site acyclicity theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived composition with an exact functor preserves a natural transformation to an exact evaluation functor, with K-injective resolution comparison formula",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: natural transformations and bounded-below derived maps do not prove inverse-limit acyclicity for restricted varying-ring K-injective systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a varying ring sheaf tower and K-injective system I, restriction to a constant base ring followed by inverse limit sends a K-injective replacement UI to a quasi-isomorphism lim UI to lim J, with natural projection equations",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CochainComplex.cm5b\", \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern injective resolutions of single objects or unrelated quasi-isomorphism factorizations; none concerns varying-ring systems"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedComp|rightDerivedFunctorComparison|IsKInjective",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: PointwiseRightDerived.lean:64-85 constructs the comparison; lines 108-123 require an IsRightDerivabilityStructure and do not supply varying-ring sequence-site acyclicity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A K-injective resolution after restriction of scalars on a ringed sequence site induces a quasi-isomorphism on inverse limits",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.quasiIso\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.self\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.of_def\", \"PresheafOfModules.limitPresheafOfModules_map\", \"CategoryTheory.InjectiveResolution.mk.injEq\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual injective resolutions and presheaf limits, not scalar-restricted varying-ring K-injective system acyclicity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedComp",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedComp'\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract rightDerivedFunctorComparison and its invertibility require a right derivability structure not furnished for scalar restriction here; rightDerivedComp query has no identifier match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of a K-injective complex over a varying ring tower is acyclic for inverse limit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.cm5b.I\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"HomologicalComplex.isGrothendieckAbelian\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CochainComplex.IsKInjective\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern K-injective Hom bijections, bounded-below injective complexes, and abstract localization, not this ringed sequence acyclicity statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract rightDerivedFunctorComparison and its invertibility require a right derivability structure not furnished for scalar restriction here; rightDerivedComp query has no identifier match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of ringed topoi f and g, if I is K-injective and f push I to J is a K-injective replacement, then g push of this replacement is a quasi-isomorphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective.Qh_map_bijective\", \"CochainComplex.isKInjective_of_iso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern K-injective Hom bijections, bounded-below injective complexes, and abstract localization, not this ringed sequence acyclicity statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-sequence-pushforward-limit-projections",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, first and last derived mapping-limit comparisons: the scalar-restriction factorization and the two-resolution comparison underlying the specified total-limit projections (old item steps 1-3).",
+   "via": [
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-restricted-tower-resolution-acyclicity",
+  "worker": "stage1",
+  "summary": "Split with no new nodes: specialize the existing normalized ringed-topos composition theorem to scalar restriction and the sequence projection, then prove the literal projection equation and all resolution changes by chain homotopies. Statement unchanged. Preserve prior searches and add the Q11 logged searches.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint: historical proof paragraph 2, the first and last mapping-limit comparisons; current main-20261015 statement defining G_f by the restricted total limit and specifying its adjunction maps. Steps 1-2 give the underlying total-limit comparison, steps 3-4 its actual projection equation, steps 5-6 resolution compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "why": "Generic identity-topos coefficient-change identification used to interpret r_*; it does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic normalized unbounded composition theorem supplies the quasi-isomorphism g_*j for the actual varying-ring sequence site."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic exactness of ordinary tower evaluation is used only for the quasi-isomorphisms j_n."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic K-injective Hom bijection supplies the canonical comparison homotopy classes."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic resolution-transition formula identifies the chain-homotopy comparisons with the canonical derived resolution transitions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-ba1bdb85e",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-ba1bdb85e (reviewer sub-agent of L); spot-checked: I read the item in full; it has 6 steps and no new nodes. The statement, stmt_deps and blueprint are byte-identical to the live node, which is unsplit (created by Q77, 2026-10-22). There is no repair note, the item is not on the drop list and there are no SGA references. Sources: I read Stacks sites-cohomology 0D6E (l.4010ff, composition by adjoint uniqueness) and 0940 (l.5016ff: g_*=lim, g^{-1} the constant system on C×N with vertical covers). Step 1: r is the identity-topos coefficient change ΔA→B, so r_* is restriction of scalars and is exact; the elementary adjoint computation gives g_*=lim. Step 2 specializes lem-weil-pbc-ringed-topoi-derived-pushforward-composition with f=r. Its hypotheses match exactly: I is K-injective, j is a K-injective resolution of r_*I, and the sites are small. The conclusion is true even though restriction of scalars does not preserve K-injectives. Step 3: a_n, U_0a_n and j_n are quasi-isomorphisms, via componentwise exactness and exactness of ev_n. Step 4: naturality of the limit cone plus cancellation; I checked the types. Step 5: k and l come from the K-injective Hom bijection, lj≃j'U_0k, applying lim gives [lim l][lim j]=[lim j'][p_*k], and the map-computation lemma's existence hypothesis is discharged by prop-pur on both sequence sites. Step 6: I verified both cancellation identities and P'[lim l]=P. Edge cases hold: zero ring, constant B, non-flat Z→Z/2, unbounded complexes. No duplicate exists: the parent uses only the factorization and projection equation, the sibling cochain-transposes node and strict-tower-homotopy-limit state other things, and an rg search found nothing else. I accept the 5 declared tool uses, all generic homological lemmas from sk-thm-properbasechange and sk-def-exchange. Minor and not fixed: step 3 relies on componentwise exactness, which the statement stipulates through its stmt_dep lem-pur-system-ringed-sequence-site, but the step does not list that node in its uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RestrictedTowerResolutionAcyclicity",
+  "declaration": "SheafOfModules.RestrictedTowerResolution.acyclicity",
+  "declarations": [
+   "SheafOfModules.RestrictedTowerResolution.Modules",
+   "SheafOfModules.RestrictedTowerResolution.restriction",
+   "SheafOfModules.RestrictedTowerResolution.restrictionComposition",
+   "SheafOfModules.RestrictedTowerResolution.tower",
+   "SheafOfModules.RestrictedTowerResolution.restrictionFunctor",
+   "SheafOfModules.RestrictedTowerResolution.restrictionFunctorAdditive",
+   "SheafOfModules.RestrictedTowerResolution.directImage",
+   "SheafOfModules.RestrictedTowerResolution.limitAdditive",
+   "SheafOfModules.RestrictedTowerResolution.limitComplex",
+   "SheafOfModules.RestrictedTowerResolution.restrictionComplex",
+   "SheafOfModules.RestrictedTowerResolution.directImageComplexIso",
+   "SheafOfModules.RestrictedTowerResolution.projection",
+   "SheafOfModules.RestrictedTowerResolution.componentMap",
+   "SheafOfModules.RestrictedTowerResolution.restrictionFunctor_exact",
+   "SheafOfModules.RestrictedTowerResolution.acyclicity",
+   "SheafOfModules.RestrictedTowerResolution.resolutionTransitions"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RestrictedTowerResolutionAcyclicity.lean",
+  "statement": "theorem acyclicity {N I : CochainComplex (StrictRingSystem B) ℤ} (a : N ⟶ I) [QuasiIso a] [I.IsKInjective] {T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ} (j : (restrictionComplex A B α).obj I ⟶ T) [QuasiIso j] [T.IsKInjective] : QuasiIso ((limitComplex A).map j) ∧ ∀ n : ℕ, QuasiIso (componentMap A ((restrictionComplex A B α).map a) n) ∧ QuasiIso (componentMap A j n) ∧ ∃ (ea : DerivedCategory.Q.obj (((restrictionComplex A B α).obj N).asFunctor.obj (op n)) ≅ DerivedCategory.Q.obj (((restrictionComplex A B α).obj I).asFunctor.obj (op n))) (ej : DerivedCategory.Q.obj (((restrictionComplex A B α).obj I).asFunctor.obj (op n)) ≅ DerivedCategory.Q.obj (T.asFunctor.obj (op n))), ea.hom = DerivedCategory.Q.map (componentMap A ((restrictionComplex A B α).map a) n) ∧ ej.hom = DerivedCategory.Q.map (componentMap A j n) ∧ DerivedCategory.Q.map ((limitComplex A).map j) ≫ DerivedCategory.Q.map (projection A T n) ≫ ej.inv ≫ ea.inv = DerivedCategory.Q.map (projection A ((restrictionComplex A B α).obj I) n) ≫ ea.inv",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The three statements restrictionFunctor_exact, acyclicity and resolutionTransitions give the exactness, two-resolution projection equation and all canonical resolution-change clauses. Public real-data helpers construct U0 and p_* in the stipulated sequence-site coordinates, with a natural complex isomorphism directImageComplexIso. No K-injectivity of U0I or I_n is assumed. The ordinary restriction-tower construction in SequenceProjectionDerivedAdjunction is private, so this module provides the needed sectionwise public interface using the existing scalar-composition isomorphism; it does not use that downstream derived-adjunction theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e7e34cae",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps (all byte-identical to live; item differs only in lean), Stacks 0D6E/0940, module and report. Each clause matches. U0 is the actual restrictScalars tower with the identity-section composition iso; restrictionFunctor_exact is true since strict systems are componentwise. acyclicity: lim j quasi-iso, component quasi-isos, and the projection equation with ea/ej homs pinned to Q(U0a_n) and Q(j_n), correct left-to-right order. resolutionTransitions: k,l existence and uniqueness up to homotopy, canonical fractions, the lim square and both normalized projection equations, all hand-verified true. p_*=U0⋙lim with Iso.refl follows the node's stipulated coordinates and the landed parent's fLim presentation; a RingedToposMorphism would force SmallCategory/RingCat.{u}. No K-injectivity of U0I assumed; universes u/v/w/d/s/t independent. Statement verbatim, no line over 100 chars, docstrings carry source, blueprint and steps, all theorems sorry, defs real data. Advisory only: local Modules/restriction abbrevs equal downstream theorem-module abbrevs; RingedToposMorphism and proof-dep imports unused, same convention as the parent; systemScalarRestrictionComposition is owned by non-stmt_dep def-weil-pbc-system-scalar-coherence. No recompile, no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261024T184721-L-3131413",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

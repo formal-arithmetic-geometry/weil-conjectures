@@ -3,22 +3,122 @@
  "blueprint": {
   "is": "pur9-dg-def-tangent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Relative tangent bundle",
- "statement": "For a smooth morphism $f:X\\to Y$, the relative tangent bundle is $T_{X/Y}:=\\operatorname{Spec}_X\\operatorname{Sym}_{\\mathcal O_X}(\\Omega_{X/Y})\\to X$, whose zero section corresponds to the augmentation $\\operatorname{Sym}(\\Omega_{X/Y})\\to\\mathcal O_X$.",
+ "statement": "Let $f:X\\to Y$ be a smooth morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms], and put $F=\\Omega_{X/Y}$, the sheaf of relative Kähler differentials [def-sc-relative-differential-sheaf]. Its affine-local associated-module description makes $F$ quasi-coherent in the sense of [pqf-def-coherent]. Let $\\mathcal A=\\operatorname{Sym}_{\\mathcal O_X}(F)$ and $j:F\\to\\mathcal A$ be the symmetric algebra sheaf and generator map constructed in [lem-weil-pbc-symmetric-algebra-sheaf-construction]. Use its quasi-coherence and affine-section identifications from [lem-weil-pbc-quasi-coherent-symmetric-algebra-affine]. The relative tangent bundle is the relative spectrum with its structural projection [lem-weil-pbc-affine-morphism-relative-spec],\n$$\n\\pi:T_{X/Y}:=\\underline{\\operatorname{Spec}}_X(\\mathcal A)\\longrightarrow X.\n$$\nThe augmentation $\\epsilon:\\mathcal A\\to\\mathcal O_X$ is the unique morphism of $\\mathcal O_X$-algebras with $\\epsilon\\circ j=0$, supplied by [lem-weil-pbc-quasi-coherent-symmetric-algebra-core] for the zero linear map $F\\to\\mathcal O_X$. Identify $\\underline{\\operatorname{Spec}}_X(\\mathcal O_X)$ with $X$ by [lem-weil-pbc-affine-morphism-relative-spec](2)-(3) applied to $\\mathrm{id}_X$. The zero section $z:X\\to T_{X/Y}$ is the $X$-morphism corresponding contravariantly to $\\epsilon$ under that anti-equivalence. On an affine open $U=\\operatorname{Spec}R\\subseteq X$, its restriction is the spectrum map [def-weil-affine-spectrum] of the augmentation $\\operatorname{Sym}_R(F(U))\\to R$ that fixes constants and kills all degree-one generators. In particular $\\pi\\circ z=\\mathrm{id}_X$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-diag-reg/pur9-dg-def-tangent.md",
   "place": "node pur9-dg-def-tangent, order 2347"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "pqf-def-coherent",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+  "def-weil-affine-spectrum",
+  "def-asd-vector-bundle-zero-section",
+  "lem-trf-dth-fitting-smooth-locus"
+ ],
+ "proof": [
+  {
+   "text": "The zeroSectionOver morphism has source the identity X-scheme, so its over-category equation is zeroSection followed by projection equal to the identity. Full faithfulness maps its defining preimage back to counit followed by augmentationToBase. Composing with the inverse counit identifies pullback along zeroSection with the augmentation.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine symmetric-algebra comparison makes sectionMap on an affine open bijective. The projection is affine by its defining full-subcategory property; hence the inverse image of an affine open is affine, and its toSpecGamma map is an isomorphism. The counit isomorphism on sections and Spec applied to sectionMap are isomorphisms, so their composite affineChart is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Applying the under-category equation to algebraIso on U identifies the scalar inclusion followed by sectionMap and algebraIso with projection.app U. Naturality of toSpecGamma and the inverse affine-open isomorphism then give the chart projection equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use augmentation_spec for the explicitly constructed augmentation: on sectionwise symmetric algebras it is algebraMapInv. Combining this with the counit pullback equation proves the section-ring identity for the restricted zero section. Naturality of toSpecGamma for appLE, followed by contravariant functoriality of Spec, gives the zero-section chart equation.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "M5",
+  "document": "Stacks Project, Constructions, Tags 01LX and 01M2",
+  "place": "Relative-spectrum affine charts and augmentation zero section; Lean argument adapted from the already proved VectorBundleZeroSection affineChart_spec and affineChart_equations, without their constant-rank or Noetherian hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism of schemes the relative tangent bundle is the relative spectrum of the symmetric algebra of the sheaf of relative differentials, with its zero section",
+   "results": "AlgebraicGeometry.FormallyUnramified; Algebra.smoothLocus_eq_compl_support_inter; Algebra.Extension.CotangentSpace; Algebra.Extension.Cotangent; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; Algebra.Extension.H1Cotangent; Algebra.Extension.CotangentSpace.map; Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations defines the relative tangent bundle of a scheme morphism together with its augmentation section"
+  },
+  {
+   "tool": "grep",
+   "query": "tangentBundle|tangent_bundle|relativeTangent|relative_tangent|SymmetricAlgebra|relativeSpec",
+   "results": "No hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations defines the relative tangent bundle of a scheme morphism together with its augmentation section",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent bundle of a smooth scheme morphism is Spec of the symmetric algebra of its relative differential sheaf",
+   "results": "TangentBundle.trivializationAt_apply; TangentBundle.contMDiffVectorBundle; AlgebraicGeometry.IsSmooth; tangentMap; TangentBundle; instR; tangentBundleModelSpaceHomeomorph_coe_symm; tangentBundle_model_space_coe_chartAt",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations defines the relative tangent bundle of a scheme morphism together with its augmentation section"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"tangent\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-22",
+   "verdict": "unavailable: the submitted Loogle pattern was rejected as an unknown identifier; it supplies no absence evidence. The later SymmetricAlgebra query succeeded."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|RelativeSpec|relativeSpec|[Tt]angent",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations defines the relative tangent bundle of a scheme morphism together with its augmentation section",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra",
+   "results": "SymmetricAlgebra; SymmetricAlgebra.instCommSemiring; SymmetricAlgebra.instNontrivial; SymmetricAlgebra.instCommRing; SymmetricAlgebra.isSymmetricAlgebra_ι; SymmetricAlgebra.algebraMapInv; SymmetricAlgebra.lift; SymmetricAlgebra.algHom",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: the algebra of a module and its augmentation are present, but not the relative-spectrum scheme of the differential sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative spectrum of a quasicoherent symmetric algebra sheaf on a scheme, with the section induced by its augmentation",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι; AlgebraicGeometry.specTargetImage; AlgebraicGeometry.specTargetImageRingHom; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj; AlgebraicGeometry.AffineSpace.homOfVector; AlgebraicGeometry.AffineSpace.toSpecMvPoly; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations defines the relative tangent bundle of a scheme morphism together with its augmentation section"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -29,5 +129,75 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-diag-reg",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "pur9-dg-def-tangent",
+  "worker": "stage1",
+  "group": "NI",
+  "summary": "Expanded the unchanged relative-Spec-of-Sym(Omega) definition and augmentation zero section using nine existing notion/construction nodes, without new nodes, Noetherian hypotheses or constant-rank assumptions. Checked the current blueprint and Stacks definitions, searched the whole DAG/blueprint and project Lean for attachments, and ran two phrasings of Mathlib searches. This is a definition split: proof and proof_deps remain empty.",
+  "blueprint": "Realizes the entire statement of blueprint pur9-dg-def-tangent: Spec_X Sym(Omega_{X/Y}), its structural projection, and the zero section corresponding to the augmentation. It supplies the tangent-bundle notion in the normal-bundle identification of sk-lem-diag-reg; no unit route or unit realization fields are changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NI-484abd70e",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-484abd70e (reviewer sub-agent of L); spot-checked: Definition split with 0 new nodes; the blueprint main-20261015 pur9-dg-def-tangent (Spec_X Sym(Omega_{X/Y}) with the zero section from the augmentation) is kept with no added or dropped hypotheses. Every clause matches its cited statement. def-sc-relative-differential-sheaf gives Omega on affine U->V as the sheaf associated to Omega_{A/R}, so quasi-coherence in the sense of pqf-def-coherent(1) is a one-line inline remark. P^# and j come from lem-weil-pbc-symmetric-algebra-sheaf-construction. The quasi-coherence of P^# and the bijectivity of theta_U on affines come from lem-weil-pbc-quasi-coherent-symmetric-algebra-affine. epsilon is the unique algebra map with epsilon∘j=0, from lem-weil-pbc-quasi-coherent-symmetric-algebra-core with B=O_X and f=0. lem-weil-pbc-affine-morphism-relative-spec (2)-(3) gives Spec_X(O_X)=X through id_X; z:X->T has the correct contravariant direction, pi∘z=id, and on affines z is Spec(epsilon_U) via def-weil-affine-spectrum. Stacks tags checked against tags/tags: 01UQ, 01UT (morphisms.tex:6441), 01LW, 01LX, 01M2 (constructions.tex:805, V(E)=Spec Sym E for quasi-coherent E, EGA variance), 01CF, 01CG, 01CL. Small cases: id_X gives T=X; A^d_B gives B[v] with v=0; etale gives T=X; non-constant rank and empty X are fine. Duplicate search: def-asd- and def-pur-vector-bundle-zero-section need Noetherian or constant rank and are not general enough; def-pur-normal-bundle and lem-pur-diagonal-regular-immersion only use T_{X/Y}; same_as [] is correct. No Lean declaration found in WeilConjectures or Sheaf. Mathlib searches are recorded in three kinds and the failed Loogle query is marked unavailable. Same lem-weil-pbc construction-interface pattern as the accepted def-pur-vector-bundle-zero-section. No cycle and no new nodes. Advisory: the inherited import_flag 'unreachable' is stale because lem-pur-affine-target-diagonal-dnc cites the item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeTangentBundle",
+  "declaration": "AlgebraicGeometry.RelativeTangentBundle.scheme",
+  "declarations": [
+   "AlgebraicGeometry.RelativeTangentBundle.algebraObject",
+   "AlgebraicGeometry.RelativeTangentBundle.over",
+   "AlgebraicGeometry.RelativeTangentBundle.scheme",
+   "AlgebraicGeometry.RelativeTangentBundle.projection",
+   "AlgebraicGeometry.RelativeTangentBundle.augmentation",
+   "AlgebraicGeometry.RelativeTangentBundle.zeroSectionOver",
+   "AlgebraicGeometry.RelativeTangentBundle.zeroSection",
+   "AlgebraicGeometry.RelativeTangentBundle.algebraIso",
+   "AlgebraicGeometry.RelativeTangentBundle.affineChart",
+   "AlgebraicGeometry.RelativeTangentBundle.zeroSection_comp_projection",
+   "AlgebraicGeometry.RelativeTangentBundle.zeroSectionRestricted",
+   "AlgebraicGeometry.RelativeTangentBundle.affineChart_spec"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTangentBundle.lean",
+  "statement": "def scheme : Scheme.{u}",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Section parameters {X Y : Scheme.{u}} (f : X ⟶ Y) [Smooth f]. Uses the general antiEquivalence and augmentation helpers from def-asd-vector-bundle-zero-section without its Noetherian or constant-rank bundle wrappers, and relativeDifferentials_isQuasicoherent from lem-trf-dth-fitting-smooth-locus; those landed helper owners are added to stmt_deps. The other declarations supply the structural projection, augmentation zero section, canonical affine charts and their section/augmentation equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-424035215",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Checked every clause against the node and the main-20261015 source (Spec_X Sym(Ω_{X/Y}) with the augmentation zero section). Smooth f is the only hypothesis; Ω = f.relativeDifferentials; A = SymmetricAlgebraSheaf.algebra, with quasi-coherence and affine sections from quasiCoherentSymmetricAlgebra_affine_comparison; T = canonical relative Spec via the VectorBundleZeroSection anti-equivalence inverse; ε = the unique core map for f=0; z = the full-faithful preimage of augmentationToBase, direction X→T; affineChart_spec (iso, projection, Spec algebraMapInv) and π∘z=id are sorry'd theorems with proof docstrings. No Noetherian or rank assumption, no hollow defs, docstrings present, statement verbatim. Only the item's lean and stmt_deps changed; the two added stmt_deps are landed nodes (allowed). Mechanical finding: lem-trf-dth-fitting-smooth-locus supplies only the Prop instance relativeDifferentials_isQuasicoherent, which is required by the affine comparison to type algebraObject; no other instance exists, so the statement depends on the theorem's conclusion → PASS on that point. Advisory: CoherentFiniteType import probably unused. No compile (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261023T103112-L-3052028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

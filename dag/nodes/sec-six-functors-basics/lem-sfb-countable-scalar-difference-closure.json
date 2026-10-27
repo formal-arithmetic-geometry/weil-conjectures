@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-countable-scalar-difference-closure",
+ "kind": "statement",
+ "title": "Closure for the repeated-scalar product differential",
+ "statement": "Let $A$ be an abelian category [def-sp-abelian] with countable products [def-weil-category-product]. Assume that for every epimorphism $f:M\\to N$, the product $\\prod_{n\\in\\mathbb N}f$ is an epimorphism. Let $a:\\operatorname{Id}_A\\to\\operatorname{Id}_A$ be natural. Put $P(M)=\\prod_{n\\in\\mathbb N}M$ and let $s_M:P(M)\\to P(M)$ have nth coordinate $a_M\\circ\\operatorname{pr}_{n+1}$. Put $d_M=1-s_M$. For any morphism $g:M\\to N$ with $d_M,d_N$ invertible, $d_{\\ker g},d_{\\operatorname{coker}g},d_{\\operatorname{im}g}$ are invertible. If $0\\to M\\to E\\to N\\to0$ is short exact and $d_M,d_N$ are invertible, then $d_E$ is invertible.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.1.11, printed p.17, and Lemma 3.4.14, printed p.23: exact countable products and the two-term representative of T"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-category-product"
+ ],
+ "proof": [
+  {
+   "text": "The countable power functor is constant-diagram formation followed by limit. It preserves finite limits and is additive. The hypothesis says it preserves epimorphisms. Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels and preservesFiniteColimits_of_preservesHomology therefore make it exact.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The coordinate formula for s is natural because a is natural; hence d is a natural endomorphism of countable power. Apply [lem-sfb-exact-endomorphism-iso-closure].",
+   "uses": [
+    "lem-sfb-exact-endomorphism-iso-closure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-exact-endomorphism-iso-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-25",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.1.11, printed p.17, and Lemma 3.4.14, printed p.23: exact countable products and the two-term representative of T",
+  "note": "The product criterion and exact-functor argument spell out the two-term Roos calculation of the cited source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Countable products preserve kernels and cokernels in an abelian category when countable products preserve epimorphisms",
+   "results": "8 hits: CategoryTheory.instCountableAB4OfAB4OfSize, CategoryTheory.AB4Star, CategoryTheory.CountableAB4Star, CategoryTheory.AB4StarOfSize, CategoryTheory.instCountableAB4StarOfAB4StarOfSize, CategoryTheory.instAB4StarOfSize, CategoryTheory.CountableAB4Star.of_countableAB5Star, CategoryTheory.CountableAB4.of_countableAB5",
+   "date": "2026-10-25",
+   "verdict": "no exact match: CountableAB4Star and exact-functor facts give exactness of countable power; the stated scalar-difference invertibility closure still requires the proved natural-endomorphism argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact countable products, the property that one minus scalar shift on a countable power is invertible is closed under kernels cokernels images and extensions",
+   "results": "8 hits: CategoryTheory.ObjectProperty.IsSerreClass, CategoryTheory.ObjectProperty.isoModSerre, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.Functor.homologicalKernel, CategoryTheory.ObjectProperty.prop_X₂_of_exact, CategoryTheory.IsGrothendieckAbelian, CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsoModSerre",
+   "date": "2026-10-25",
+   "verdict": "no exact match: CountableAB4Star and exact-functor facts give exactness of countable power; the stated scalar-difference invertibility closure still requires the proved natural-endomorphism argument."
+  },
+  {
+   "tool": "grep",
+   "query": "CountableAB4Star|preservesHomology_of_preservesEpis_and_kernels|isIso₂_of_shortExact_of_isIso₁₃",
+   "results": "13 hits: Mathlib/Condensed/Light/AB.lean, Mathlib/Condensed/Light/AB.lean, Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/CategoryTheory/Abelian/Injective/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "no exact match: CountableAB4Star and exact-functor facts give exactness of countable power; the stated scalar-difference invertibility closure still requires the proved natural-endomorphism argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrincipalCompleteHeartKernels",
+  "group": "F4",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph (direct-sum preservation): descendant supported scalar heart estimate; the kernel/image completeness input, not an assertion made by the blueprint itself. Computational step: Proposition 3.1.11, printed p.17, and Lemma 3.4.14, printed p.23: exact countable products and the two-term representative of T",
+   "via": [
+    "lem-sfb-principal-complete-heart-kernels",
+    "lem-sfb-supported-image-derived-completeness",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CountableScalarDifference",
+  "file": "lean/Sheaf/Paper/CountableScalarDifference.lean",
+  "declaration": "CategoryTheory.CountableScalarDifference.iso_closure",
+  "statement": "theorem iso_closure (a : 𝟭 A ⟶ 𝟭 A)\n    (hE : ∀ (M N : A) (f : M ⟶ N), Epi f →\n      Epi (Limits.Pi.map (fun _ : ℕ ↦ f))) :\n    (∀ (M N : A) (g : M ⟶ N), IsIso ((difference a).app M) →\n      IsIso ((difference a).app N) → IsIso ((difference a).app (kernel g)) ∧\n      IsIso ((difference a).app (cokernel g)) ∧ IsIso ((difference a).app (image g))) ∧\n    (∀ S : ShortComplex A, S.ShortExact → IsIso ((difference a).app S.X₁) →\n      IsIso ((difference a).app S.X₃) → IsIso ((difference a).app S.X₂))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.CountableScalarDifference.power",
+   "CategoryTheory.CountableScalarDifference.scalarShift",
+   "CategoryTheory.CountableScalarDifference.difference",
+   "CategoryTheory.CountableScalarDifference.iso_closure"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T095220-L-3323299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T095220-L-3323299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,278 @@
+{
+ "id": "lem-route-sp-rational-twist-map-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "via": [],
+   "place": "Proof, Rational and algebraic closure paragraph: E_Y(1) is obtained from the integral twist by inverting ell. This auxiliary fixes the coefficient-extension transition on that localization by its tensor formula (ProEtaleTateTwists.lean:335-348)."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Localization gives the unique rational transition with the prescribed tensor formula.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, an arbitrary scheme $X$, and finite intermediate fields $\\mathbf Q_\\ell\\subseteq E\\subseteq F\\subseteq\\Omega$ (equality allowed). Work in $\\mathcal C=\\operatorname{Sh}(X_{\\mathrm{proet}},\\mathbf{Ab})$ on the small site [def-weil-pbc-proetale-site], with the sheafified tensor $\\otimes=\\otimes_{\\mathbf Z}$ [sk-def-sfb-sheaf-tensor]. For $G=E,F$, write $A_G=p_X^*\\underline{\\mathcal O_G}$ and $K_G=p_X^*\\underline G$, with their canonical inclusion $i_G:A_G\\to K_G$, using the continuous-function condensed rings and their pulled-back ring objects [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients]. For $n\\geq1$ put $B_{G,n}=p_X^*\\underline{\\mathcal O_G/\\ell^n\\mathcal O_G}$, with discrete quotient topology, and let $r_{G,n}:A_G\\to B_{G,n}$ be reduction. Put\n$$T_{G,n}=B_{G,n}\\otimes\\mu_{\\ell^n,X},\\qquad M_G=\\varprojlim_{n\\geq1}T_{G,n}.$$\nHere the roots and their power transitions are those of [def-pur-roots-of-unity-sheaf]; $T_{G,n}$ is an $A_G$-module with action on its first factor through $r_{G,n}$, the tower transition is the $A_G$-module map with underlying arrow quotient reduction tensored with $z\\mapsto z^\\ell$ [lem-sp-integral-level-transition-unique], the limit is taken in internal $A_G$-modules, and its action and underlying projections $p_{G,n}$ are coordinatewise [def-weil-pbc-internal-abelian-sheaf-module-equivalence, def-pur-sheaf-inverse-limit]. Thus $M_G$ is the actual integral twist, with the natural-number index $n-1$ of `spIntegralTwistLevel` corresponding to exponent $n$.\n\nLet $d:K_E\\to K_F$ be the pulled-back field inclusion and $j:A_E\\to A_F$ the ring inclusion characterized by $i_Fj=di_E$ [lem-route-sp-integers-map-exists-unique]. Let $a_n:B_{E,n}\\to B_{F,n}$ be the quotient transition characterized by $a_nr_{E,n}=r_{F,n}j$ [lem-route-sp-ell-map-exists-unique]. Let $u:M_E\\to M_F$ be the integral transition characterized by\n$$p_{F,n}u=(a_n\\otimes1_{\\mu_{\\ell^n,X}})p_{E,n}\\quad(n\\geq1)$$\n[lem-route-sp-integral-twist-map-exists-unique]. Define $Q_G=K_G\\otimes_{A_G}M_G$ by extension of scalars [def-sfb-modobj-extension], with its defining balancing-coequalizer projection $q_G:K_G\\otimes M_G\\to Q_G$. Then there is exactly one morphism of abelian sheaves $f:Q_E\\to Q_F$ such that\n$$f\\circ q_E=q_F\\circ(d\\otimes u).$$\nThis is the underlying-morphism assertion of `AlgebraicGeometry.ProEtale.spRationalTwistMap_existsUnique`: $Q_G$ is `spRationalTwist X ℓ G` and $q_G$ is `Mod.extendπ`. No invertibility of $\\ell$ on $X$, local freeness, or additional linearity hypothesis on $f$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.md",
+  "place": "det-prop-sfb-cartesian-coefficients-twists: the Lean of this node (its module Sheaf.Paper.CartesianCoefficientTwists uses) reaches AlgebraicGeometry.ProEtale.spRationalTwistMap_existsUnique, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spRationalTwistMap_existsUnique (module Sheaf.Paper.ProEtaleTateTwists, lines 335-348, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "def-sfb-modobj-extension",
+  "lem-sp-integral-level-transition-unique",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "The finite quotient transition j_n is a monoid-object morphism. Indeed its composite with the epimorphic coefficient reduction is the composite of the integral coefficient inclusion [lem-route-sp-integers-map-exists-unique] with the target coefficient reduction. The defining square [lem-route-sp-ell-map-exists-unique] therefore yields preservation of one by precomposition with the source unit, and preservation of multiplication by cancelling the tensor of the source reduction with itself. Tensoring preserves epimorphisms because the sheaf tensor is a left adjoint [lem-weil-pbc-sheaf-tensor-closed].",
+   "uses": [
+    "lem-route-sp-integers-map-exists-unique",
+    "lem-route-sp-ell-map-exists-unique",
+    "lem-weil-pbc-sheaf-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph; localization of the normalized integral transition."
+   }
+  },
+  {
+   "text": "For each finite level the tensor of j_n and the root identity is semilinear: use the free-module action, the coefficient reduction square, associator naturality and preservation of multiplication by j_n. Apply the jointly monic underlying target limit projections [def-pur-sheaf-inverse-limit] to the desired integral action equation. Projection linearity and the finite normalization [lem-route-sp-integral-twist-map-exists-unique] reduce it to the finite-level semilinearity just proved.",
+   "uses": [
+    "lem-route-sp-ell-map-exists-unique",
+    "lem-route-sp-integral-twist-map-exists-unique",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph; localization of the normalized integral transition."
+   }
+  },
+  {
+   "text": "Write the source and target extension-of-scalars objects as their defining balancing coequalizers [def-sfb-modobj-extension]. Tensor the coefficient field inclusion with the integral transition and then compose with the target coequalizer projection. This arrow coequalizes the source balancing pair: the coefficient square from [lem-route-sp-integers-map-exists-unique], multiplicativity of the field inclusion, associator naturality, and the preceding integral semilinearity transform its first composite into its second. Hence Mod.extendDescHom supplies an arrow of the required type, and its factorization equation is exactly the requested normalization. The source coequalizer projection is epi [def-weil-pbc-category-colimit], so cancelling it gives uniqueness.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "lem-route-sp-integers-map-exists-unique",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph; localization of the normalized integral transition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "def-pur-sheaf-inverse-limit",
+  "def-sfb-modobj-extension",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Rational and algebraic closure paragraph; localization of the normalized integral transition.",
+  "note": "M6: purely categorical tensor calculation and coequalizer descent; no local pure-tensor generator or internal-to-section module equivalence theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'spRationalTwistMap_existsUnique' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear map of modules over a commutative square of ring homomorphisms induces a unique map on extension of scalars tensor products",
+   "results": "{\"t\": \"2026-10-25T06:33:22Z\", \"tool\": \"leanfinder\", \"query\": \"A semilinear map of modules over a commutative square of ring homomorphisms induces a unique map on extension of scalars tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.lift\", \"LinearMap.liftBaseChange\", \"IsBaseChange.linearMapLeftRightHom\", \"IsBaseChange.linearMapRightBaseChangeHom\", \"TensorProduct.AlgebraTensorModule.lift\", \"LinearMap.liftBaseChangeEquiv\", \"ModuleCat.ExtendScalars.map'\", \"TensorProduct.AlgebraTensorModule.map\"], \"digest\": \"ddd74416aac539d1\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "grep",
+   "query": "extendπ|extendDesc|extendScalars",
+   "results": "{\"t\": \"2026-10-25T06:34:04Z\", \"tool\": \"grep\", \"query\": \"extendπ|extendDesc|extendScalars\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map between rational Tate twists is uniquely induced by a coefficient inclusion and the integral Tate twist transition",
+   "results": "{\"t\": \"2026-10-25T06:34:04Z\", \"tool\": \"leansearch\", \"query\": \"A map between rational Tate twists is uniquely induced by a coefficient inclusion and the integral Tate twist transition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTensorProduct.map\", \"groupCohomology.mapCocycles₁\", \"groupCohomology.cochainsMap_id_f_map_mono\", \"groupCohomology.coboundariesToCocycles₁_apply\", \"map_wittStructureInt\", \"LinearMap.coeIsScalarTower\", \"Representation.IntertwiningMap.instFunLike\", \"Algebra.Generators.CotangentSpace.map_toComp_injective\"], \"digest\": \"37bda9f7f9d112b7\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.extendπ",
+   "results": "{\"t\": \"2026-10-25T06:34:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Mod.extendπ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Mod.extendπ'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: requested project-specific identifier is unknown to Loogle; this is not a global absence verdict."
+  },
+  {
+   "tool": "grep",
+   "query": "extendπ|extendDesc|namespace Mod",
+   "results": "{\"t\": \"2026-10-25T06:34:53Z\", \"tool\": \"grep\", \"query\": \"extendπ|extendDesc|namespace Mod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/LinearAlgebra/Reflection.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\"], \"digest\": \"5e6658b1092530fd\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|tateModule|extendDescHom|extendπ",
+   "results": "{\"t\": \"2026-10-25T06:39:47Z\", \"tool\": \"grep\", \"query\": \"tateTwist|tateModule|extendDescHom|extendπ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.coequalizer.desc",
+   "results": "{\"t\": \"2026-10-25T06:42:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.coequalizer.desc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coequalizer.isoTargetOfSelf_hom\", \"CategoryTheory.Limits.coequalizer.desc\", \"CategoryTheory.Limits.coequalizer.π_desc\", \"CategoryTheory.Limits.coequalizer.π_desc_assoc\", \"CategoryTheory.Limits.coequalizer.π_colimMap_desc\", \"CategoryTheory.Limits.coequalizerComparison_map_desc\", \"CategoryTheory.Limits.coequalizerComparison_map_desc_assoc\", \"CategoryTheory.Limits.map_π_preserves_coequalizer_inv_desc\"], \"digest\": \"d778d6524506b9af\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general coequalizer factorization only, not the Tate transition or its balancing identity."
+  },
+  {
+   "tool": "grep",
+   "query": "def liftBaseChange|def liftBaseChangeEquiv",
+   "results": "{\"t\": \"2026-10-25T06:44:38Z\", \"tool\": \"grep\", \"query\": \"def liftBaseChange|def liftBaseChangeEquiv\", \"sub\": \"RingTheory/TensorProduct/Basic.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"52\"], \"digest\": \"28b175fb0bebef5d\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary algebra-module universal property; it does not state the internal abelian-sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear map of modules over a commutative square of ring homomorphisms induces a unique map on extension of scalars tensor products",
+   "results": "{\"t\": \"2026-10-25T06:33:22Z\", \"tool\": \"leanfinder\", \"query\": \"A semilinear map of modules over a commutative square of ring homomorphisms induces a unique map on extension of scalars tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.lift\", \"LinearMap.liftBaseChange\", \"IsBaseChange.linearMapLeftRightHom\", \"IsBaseChange.linearMapRightBaseChangeHom\", \"TensorProduct.AlgebraTensorModule.lift\", \"LinearMap.liftBaseChangeEquiv\", \"ModuleCat.ExtendScalars.map'\", \"TensorProduct.AlgebraTensorModule.map\"], \"digest\": \"ddd74416aac539d1\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "grep",
+   "query": "extendπ|extendDesc|extendScalars",
+   "results": "{\"t\": \"2026-10-25T06:34:04Z\", \"tool\": \"grep\", \"query\": \"extendπ|extendDesc|extendScalars\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map between rational Tate twists is uniquely induced by a coefficient inclusion and the integral Tate twist transition",
+   "results": "{\"t\": \"2026-10-25T06:34:04Z\", \"tool\": \"leansearch\", \"query\": \"A map between rational Tate twists is uniquely induced by a coefficient inclusion and the integral Tate twist transition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTensorProduct.map\", \"groupCohomology.mapCocycles₁\", \"groupCohomology.cochainsMap_id_f_map_mono\", \"groupCohomology.coboundariesToCocycles₁_apply\", \"map_wittStructureInt\", \"LinearMap.coeIsScalarTower\", \"Representation.IntertwiningMap.instFunLike\", \"Algebra.Generators.CotangentSpace.map_toComp_injective\"], \"digest\": \"37bda9f7f9d112b7\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.extendπ",
+   "results": "{\"t\": \"2026-10-25T06:34:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Mod.extendπ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Mod.extendπ'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: requested project-specific identifier is unknown to Loogle; this is not a global absence verdict."
+  },
+  {
+   "tool": "grep",
+   "query": "extendπ|extendDesc|namespace Mod",
+   "results": "{\"t\": \"2026-10-25T06:34:53Z\", \"tool\": \"grep\", \"query\": \"extendπ|extendDesc|namespace Mod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/LinearAlgebra/Reflection.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\"], \"digest\": \"5e6658b1092530fd\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|tateModule|extendDescHom|extendπ",
+   "results": "{\"t\": \"2026-10-25T06:39:47Z\", \"tool\": \"grep\", \"query\": \"tateTwist|tateModule|extendDescHom|extendπ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states the rational Tate-twist assertion; ordinary module base change is a useful analogue but not a one-line instance for internal sheaf modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.coequalizer.desc",
+   "results": "{\"t\": \"2026-10-25T06:42:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.coequalizer.desc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coequalizer.isoTargetOfSelf_hom\", \"CategoryTheory.Limits.coequalizer.desc\", \"CategoryTheory.Limits.coequalizer.π_desc\", \"CategoryTheory.Limits.coequalizer.π_desc_assoc\", \"CategoryTheory.Limits.coequalizer.π_colimMap_desc\", \"CategoryTheory.Limits.coequalizerComparison_map_desc\", \"CategoryTheory.Limits.coequalizerComparison_map_desc_assoc\", \"CategoryTheory.Limits.map_π_preserves_coequalizer_inv_desc\"], \"digest\": \"d778d6524506b9af\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general coequalizer factorization only, not the Tate transition or its balancing identity."
+  },
+  {
+   "tool": "grep",
+   "query": "def liftBaseChange|def liftBaseChangeEquiv",
+   "results": "{\"t\": \"2026-10-25T06:44:38Z\", \"tool\": \"grep\", \"query\": \"def liftBaseChange|def liftBaseChangeEquiv\", \"sub\": \"RingTheory/TensorProduct/Basic.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"52\"], \"digest\": \"28b175fb0bebef5d\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary algebra-module universal property; it does not state the internal abelian-sheaf assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "det-prop-sfb-cartesian-coefficients-twists",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistConstructions",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistConstructions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spRationalTwistMap_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spRationalTwistMap_existsUnique"
+  ],
+  "statement": "theorem spRationalTwistMap_existsUnique {E F : PadicAlgCl.FiniteIntermediateField ℓ}\n    (h : E ≤ F) :\n    ∃! f : (spRationalTwist X ℓ E).X ⟶ (spRationalTwist X ℓ F).X,\n      Mod.extendπ (padicIntegersToPadicSubfield X ℓ E) (spIntegralTwist X ℓ E) ≫ f =\n        (coefficientMap.{u} (Profinite.padicSubfieldRingObjMap ℓ h) X ⊗ₘ\n          spIntegralTwistMap X ℓ h) ≫\n            Mod.extendπ (padicIntegersToPadicSubfield X ℓ F) (spIntegralTwist X ℓ F) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-sp-rational-twist-map-exists-unique",
+  "worker": "stage1",
+  "summary": "Replaced the machine provisional signature/docstring with a self-contained statement matching arbitrary X and the underlying-morphism uniqueness. Seven steps identify the actual quotient ring maps, verify integral semilinearity coordinatewise, check the balancing identity, and apply the defining coequalizer universal property. Reused existing nodes throughout; no new node or Mathlib leaf. Searched upstream Lean, the whole DAG, imported blueprint and current latest sources; no exact attachment. Repair of returned head fd2da888d00: revalidated every current cited statement, matched the newly landed integral-transition statement by k=n-1, and rewrote step 4 to make the system identification and separate semilinearity calculation explicit. Updated its verbatim citation; statement, route, existing searches and seven-step proof retained.",
+  "blueprint": "det-prop-sfb-cartesian-coefficients-twists proof, Integral twist and Rational and algebraic closure paragraphs. Steps 1–4 justify the integral coefficient transition used on localization; steps 5–7 construct and characterize its rational transition. Tate construction follows current sk-def-sp-tate-twist; no smooth-purity route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-braided-sheaf-tensor-generators",
+    "why": "Equality detection for morphisms out of sheafified tensor products; needed to justify section-tensor calculations without assuming sheaf sections are pure tensors."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic abelian-sheaf theorem providing existence of coequalizers and colimit preservation by tensor; used solely to verify the hypotheses of internal extension of scalars."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic equivalence transporting the internal-module limit to the sectionwise module-sheaf limit with the same underlying cone (unit sk-thm-properbasechange, cited by sk-prop-an)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-3c066e959",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-3c066e959 (reviewer sub-agent of L); spot-checked: Read the whole item, every cited statement, the integral sister node's proof (for its limit cone), and the Lean ProEtaleTateTwists.lean:230-348. The statement matches spRationalTwistMap_existsUnique exactly: arbitrary X, ℓ not assumed invertible, Q_G is the extension of scalars along i_G, q_G = extendπ, and uniqueness is among all abelian-sheaf maps of f∘q_E = q_F∘(d⊗u). The item's n≥1 corresponds to index n−1 in the Lean and in the ell and integral nodes. The seven steps are correct. Step 1 gets O_E⊂O_F from the same absolute value on Ω and identifies the map through the IsMonHom+square uniqueness. Step 2 proves a_n is a ring map from the uniqueness in the ell node. Step 3 checks semilinearity at finite level with the generator lemma. Step 4 gets semilinearity of u coordinatewise. Steps 5–7 check the hypotheses of def-sfb-modobj-extension, compute the balancing in the order d multiplicative, i_F j = d i_E, F-balancing, step 4, and finish with the coequalizer universal property. Tested E=F, empty X or zero roots, n=1, ℓ non-invertible and ramified F/E. There are no new nodes and no duplicate (the semilinear, rational-id/comp and qbar nodes cite this item; no cycle). Two citation repairs in fixes/dag/nodes/sec-smooth-purity/lem-route-sp-rational-twist-map-exists-unique.json. (1) C4/E1, step 2: continuity of the reductions was cited to lem-sp-ell-quotient-finite-discrete, which is stated for the O_E of def-weil-l-adic-coefficient-extension with its own topology, not the O_G restricted from Ω used here. Continuity now comes from the statement of lem-route-sp-ell-map-exists-unique, and that node is removed from the step, proof_deps and tool_uses. (2) C4, step 4 and the statement: M_G is a limit in internal A_G-modules, but only def-pur-sheaf-inverse-limit (sheaves of O-modules) was cited. Added def-weil-pbc-internal-abelian-sheaf-module-equivalence (unit sk-thm-properbasechange, on route) for the underlying cone, and lem-sp-integral-level-transition-unique in the statement for the A_G-linear tower transition. The proposition is unchanged. Accepted tool_uses: lem-sfb-braided-sheaf-tensor-generators, lem-weil-pbc-sheaf-tensor-closed, def-weil-pbc-internal-abelian-sheaf-module-equivalence.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

@@ -1,0 +1,281 @@
+{
+ "id": "lem-sp-tower-p1-uniform-ctf-domains",
+ "kind": "statement",
+ "title": "Etale-origin witnesses and uniform bounds for the projective-line tower functors",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p>0$, a separated finite-type $k$-scheme $S$ [sk-def-sfb-dc-setting], and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Put $B_n=\\mathcal O_E/\\ell^n$, $P=\\mathbf P^1_S$ and $q:P\\to S$ [def-nagata-projective-space-base-change]. On each $T=S,P$, use coefficient towers [sk-def-sp-coefficient-towers], their ordinary derived category and level evaluation [det-sp-coefficient-towers-abelian]. Let $\\mathscr U(T)$ be the full subcategory of uniformly bounded constructible finite-Tor towers [sk-def-sp-normalized-towers]: there are fixed cohomological and Tor intervals, independent of $n$, for the bounded constructible levels $C_n$. No normalization of reduction maps is required. Let $\\mathscr C^+(T)\\subset D^+(\\operatorname{Tow}(T,\\mathcal O_E))$ be the full subcategory whose levels lie in the essential image of $\\nu_T^*:D^+(T_{\\mathrm{et}},B_n)\\to D^+(T_{\\mathrm{proet}},B_n)$ [def-weil-pbc-etale-origin-witness]. Use the Tate line tower of [det-sp-tower-classes]. Then $\\mathscr U(T)\\subseteq\\mathscr C^+(T)$ for $T=S,P$, and\n$$Rq_{*,\\bullet}(\\mathscr U(P))\\subseteq\\mathscr U(S),\\qquad q_\\bullet^*(-)(1)[2](\\mathscr U(S))\\subseteq\\mathscr U(P).$$\nMore precisely, for a tower $K$ whose levels have cohomology in $[r,s]$ and Tor amplitude in $[a,b]$, every level of $q_\\bullet^*K(1)[2]$ is constructible, has cohomology in $[r-2,s-2]$, and has Tor amplitude in $[a-2,b-2]$, with the same intervals for every $n$. For every affine open $U\\subseteq S$, each $K_n|_U$ has a bounded constructible ordinary etale representative with that same Tor interval; it admits a flat representative supported in $[a,b]$. Its pullback, tensor with $B_n(1)$ and shift by $[2]$ is a K-flat representative supported in $[a-2,b-2]$ for the corresponding level on $\\mathbf P^1_U$, and these local intervals hold globally. Constructibility here uses finite constructible locally closed stratifications and their inverse images, not merely finite stalks. The assertion for $Rq_{*,\\bullet}$ is for the proper map $q$ (the identity open immersion in its compactification), smooth of pure relative dimension one. This is a domain-and-bound statement, with no adjunction conclusion, and makes no assertion of this constructible restriction over arbitrary schemes.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Restriction to the standing setting: etale-origin witnesses, proper image, and pullback Tor bounds (old steps 12-14)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-nagata-projective-space-base-change",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-pbc-etale-origin-witness",
+  "det-sp-tower-classes"
+ ],
+ "proof": [
+  {
+   "text": "Apply uniformTower_etale_domains to each T=S or P1_S with the recorded base c.base; this supplies the domain inclusion.",
+   "uses": [
+    "lem-sp-uniform-tower-etale-domains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply towerP1_push_ctf to obtain preservation by the proper-image functor.",
+   "uses": [
+    "lem-sp-tower-p1-proper-ctf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the precise bounds clause, apply towerP1_level_ctf_model independently at every n. Its first projection gives the output bounds and its second projection gives the global and affine-local retained models.",
+   "uses": [
+    "lem-sp-tower-p1-level-ctf-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For pullTwist preservation, unpack the common input cohomological and Tor intervals from spConstructibleTorTowers. Convert homology vanishing to IsGE and IsLE, and use levelwise constructibility to form bounds. Apply the one-level result at every n with these same intervals. Convert the resulting t-structure bounds back to vanishing; shifting both ordered endpoints by two preserves their order. Supply the shifted common intervals and the finite-level boundedness, constructibility and Tor witnesses. The private helpers bounds_of_constructibleTor and constructibleTor_of_bounds implement these conversions in Lean.",
+   "uses": [
+    "sk-def-sp-normalized-towers",
+    "lem-sp-tower-p1-level-ctf-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-uniform-tower-etale-domains",
+  "lem-sp-tower-p1-proper-ctf",
+  "lem-sp-tower-p1-level-ctf-model",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Lean assembly from the domain, proper-image and single-level local-model steps; uniform pullback preservation is deduced by explicit bound conversions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projective line derived direct image and pullback Tate twist shift two preserve uniformly bounded constructible finite Tor amplitude towers and these towers have etale origin levels over finite type field schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tor\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"DerivedCategory.singleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : CategoryTheory.Functor C (DerivedCategory C)\", \"doc\": \"The single functor `C ⥤ DerivedCategory C` which sends `X : C` to the\\nsingle cochain complex with `X` sitting in degree `n : ℤ`.\"}\n  {\"name\": \"DerivedCategory.singleFunctors\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.SingleFunctors C (DerivedCategory C) ℤ\", \"doc\": \"The single functors `C ⥤ DerivedCategory C` for all `n : ℤ` along with\\ntheir compatibilities with shifts.\"}\n  {\"name\": \"DerivedCategory.instAdditiveSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : (DerivedCategory.singleFunctor C n).Additive\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instAdditiveShiftFunctorInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : (CategoryTheory.shiftFunctor (DerivedCategory C) n).Additive\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : DerivedCategory.singleFunctor C n ≅ (CochainComplex.singleFunctor C n).comp DerivedCategory.Q\", \"doc\": \"The isomorphism `singleFunctor C n ≅ CochainComplex.singleFunctor C n ⋙ Q`.\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : DerivedCategory.singleFunctors C ≅ (CochainComplex.singleFunctors C).postcomp DerivedCategory.Q\", \"doc\": \"The isomorphism\\n`DerivedCategory.singleFunctors C ≅ (CochainComplex.singleFunctors C).postcomp Q`.\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : DerivedCategory.singleFunctor C n ≅ (HomotopyCategory.singleFunctor C n).comp DerivedCategory.Qh\", \"doc\": \"The isomorphism `singleFunctor C n ≅ HomotopyCategory.singleFunctor C n ⋙ Qh`.\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQhIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : DerivedCategory.singleFunctors C ≅ (HomotopyCategory.singleFunctors C).postcomp DerivedCategory.Qh\", \"doc\": \"The isomorphism\\n`DerivedCategory.singleFunctors C ≅ (HomotopyCategory.singleFunctors C).postcomp Qh` given\\nby the definition of `DerivedCategory.singleFunctors`.\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ_hom_app\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) (X : C) : (DerivedCategory.singleFunctorIsoCompQ C n).hom.app X = CategoryTheory.CategoryStruct.id ((DerivedCategory.singleFunctor C n).obj X)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ_inv_app\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) (X : C) : (DerivedCategory.singleFunctorIsoCompQ C n).inv.app X = CategoryTheory.CategoryStruct.id ((DerivedCategory.singleFunctor C n).obj X)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQIso_hom_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (x✝ : ℤ) : (DerivedCategory.singleFunctorsPostcompQIso C).hom.hom x✝ = CategoryTheory.CategoryStruct.id ((DerivedCategory.singleFunctors C).functor x✝)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQIso_inv_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (x✝ : ℤ) : (DerivedCategory.singleFunctorsPostcompQIso C).inv.hom x✝ = CategoryTheory.CategoryStruct.id ((DerivedCategory.singleFunctors C).functor x✝)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|Constructible.*pullback|pullback.*Constructible",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform Tor intervals for inverse image of constructible torsion sheaves tensor invertible line and even shift and comparison of etale and proetale bounded derived categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃)\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} A] [inst_3 : Catego\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, and a category $\\\\mathcal{A}$, the inverse equivalence bet\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.inverse.congr_simp\", \"module\": \"Mathlib.Condensed.Light.Small\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e e_1 : C ≌ D)\\n  (e_e : e = e_1) (A : Type u₃) [inst_2 : CategoryTheory.Category.{v₃, u₃}\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and equivalences $e, e_1: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, if $e = e_1$, then the inverse sheaf category equi\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃)\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} A] [inst_3 : Catego\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, the inverse functor of the induced sheaf category equ\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr_inverse\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃)\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} A] [inst_3 : Catego\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where the inverse functor $e^{-1}$ is a dense subsite,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.topIso_inv\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens), U.topIso.inv = X.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"The inverse of the isomorphism between the global sections of the terminal sheaf over an open subset $ U $ of a scheme $ X $ and the global sections of its direct image sheaf under the inclusion $ U \\t\"}\n  {\"name\": \"CategoryTheory.Equivalence.precoherent_isSheaf_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Equivalence\", \"type\": \"(e : C ≌ D) (F : Cᵒᵖ ⥤ A) :\\n  haveI := e.precoherent\\n  IsSheaf (coherentTopology C) F ↔ IsSheaf (coherentTopology D) (e.inverse.op ⋙ F)\", \"doc\": \"For equivalent categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ satisfies the sheaf condition with respect to the coherent topology on $\\\\mathcal{C}$\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.functor\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": Sheaf J A ⥤ Sheaf K A\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where the inverse functor $e^{-1}$ is a dense subsite,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Tor intervals for inverse image of constructible torsion sheaves tensor invertible line and even shift and comparison of etale and proetale bounded derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projective line inverse image Tate twist shift and proper pushforward preserve uniform constructible finite Tor amplitude coefficient towers",
+   "results": "Names returned: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardComp_inv_app_val_app, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits concern generic scheme modules, site equivalences, condensed projectivity or derived single functors; none states uniform constructible finite-Tor varying-coefficient towers on the projective line."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|Constructible.*pullback|pullback.*Constructible",
+   "results": "Names returned: ",
+   "date": "2026-10-23",
+   "verdict": "no match: No source hits for Tor amplitude or constructible pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform Tor intervals for inverse image of constructible torsion sheaves tensor invertible line and even shift and comparison of etale and proetale bounded derived categories",
+   "results": "Names returned: CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.Equivalence.sheafCongr.inverse.congr_simp, Algebra.FormallyEtale.instTensorProduct, CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map, CategoryTheory.Equivalence.sheafCongr_inverse, AlgebraicGeometry.Scheme.Opens.topIso_inv, CategoryTheory.Equivalence.precoherent_isSheaf_iff, CategoryTheory.Equivalence.sheafCongr.functor",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits concern generic scheme modules, site equivalences, condensed projectivity or derived single functors; none states uniform constructible finite-Tor varying-coefficient towers on the projective line."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tor\"",
+   "results": "Names returned: DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.instAdditiveShiftFunctorInt, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.singleFunctorsPostcompQhIso",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits concern generic scheme modules, site equivalences, condensed projectivity or derived single functors; none states uniform constructible finite-Tor varying-coefficient towers on the projective line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-p1-adjunction",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Restriction to the standing setting: etale-origin witnesses, proper image, and pullback Tor bounds (old steps 12-14)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-tower-p1-uniform-ctf-domains",
+  "worker": "stage1",
+  "summary": "Split the domain-and-bound assertion using existing nodes only. Verified standing-setting and finite-coefficient hypotheses, exact tower boundedness and etale-origin witnesses, proper compact-support specialization, prescribed Tor-window flat models, pulled-back constructible stratifications, root-normalized site comparisons, and affine restrictions. The statement is unchanged; no adjunction, normalization, algebraically closed base, or arbitrary-scheme constructible restriction is used.",
+  "blueprint": "det-sp-tower-p1-adjunction, the restriction to the standing setting in its statement, and the unit sk-prop-sp-tower-geometric Steps Classes and integration/Unit and counit/Charts and gluing insofar as they require constructible domains and uniform bounds. Current latest p1.proof.md Levels supplies the levelwise viewpoint; the detailed domain argument is the present agent assembly of Stacks-based nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Only the finite free Z_l-module assertion in clause (3), to see that O_E/ell^n is finite. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Properness of the standard projective line, needed to use the identity-open compactification. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "The actual base-change projective-space interface has two affine-line charts, needed to verify relative dimension one. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Smoothness and pure relative dimension of those affine-line charts. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Exact evaluation and componentwise kernels/cokernels identify cohomology levels and detect vanishing of a tower. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Bounded intrinsically constructible finite-ring levels admit etale-origin witnesses with the same cohomological intervals. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Preservation and reflection of the prescribed Tor interval under finite-coefficient etale/pro-etale comparison. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "sk-lem-sp-tower-bound",
+    "why": "The unit already cites this uniform compact-support bound; specialize its compactification to the identity open and q. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "det-sp-tower-bound-uniform",
+    "why": "The explicit coefficient-independent interval [a,b+2d] underlying the unit tower bound, used with d=1. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Existence of a flat constructible etale model in the specified Tor interval, not merely some interval. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Finite root-line sheaf is etale locally free rank one, for N=ell^n and R=B_n. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-sp-etale-pullback-line-flat-model",
+    "why": "Explicit flat K-flat pullback/line/shift model, with pulled-back finite strata and covers. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Ordinary system operations evaluate to level pullback and derived tensor without normalization. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-sp-etale-chart-comparison-isos",
+    "why": "The root-normalized inverse-image/twist/shift comparisons identify the actual pro-etale level functor. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exact comparison carries etale models and their cohomological intervals to pro-etale models. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Pulling each flat model term through the site comparison preserves flatness. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "The bounded flat pro-etale model is K-flat against arbitrary acyclic complexes. This is an auxiliary domain/geometry tool, not a replacement of the unit adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-sheaf-locally-free",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "sbc-lem-affine-space-smooth",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "det-pe-finite-tor-comparison-noetherian",
+  "sk-lem-sp-tower-bound",
+  "det-sp-tower-bound-uniform",
+  "lem-sf-etale-flat-constructible",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sp-etale-pullback-line-flat-model",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sp-etale-chart-comparison-isos",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-8cf4f8166",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-8cf4f8166 (reviewer sub-agent of L); spot-checked: First split of lem-sp-tower-p1-uniform-ctf-domains: no repair note, 0 new nodes, statement unchanged. The parent's blueprint proof (main-20261015 sk-prop-sp-tower-geometric-p1.proof.md) has no domain argument, so proof_origin 'agent' is correct. I read all six steps against the statements of the nodes they cite. Step 1: properness via lemma-nagata-projective-space-base-change-proper; the B_n-finiteness cite lem-pur-twist-sheaf-locally-free(3) and smoothness of relative dimension one via chart (c), affine-space-smooth and smooth-local-on-source are acceptable. Step 2: 09AL constructible origin with the interval preserved and reflected, and det-pe reflects the Tor interval [a,b]. Step 3: sk-lem-sp-tower-bound with compactification (id,q) and D^+ input, and det-sp-tower-bound-uniform with d=1 giving [a,b+2]. Step 4: Stacks 03TT gives the prescribed-interval flat model; the line-flat-model node gives terms in [a-2,b-2] and the H^j = q^*H^{j+2}⊗E stratum formula. Step 5: the semilinear system levels and chart-comparison-isos (A=B=B_n, u=q, c=1, s=2) match the det-sp-tower-classes Tate level, and bounded flat terms are K-flat. Step 6: affine opens via the line model with r=0 and then on P^1_U. Edge cases checked: S empty, a=b, the degree -2 sign, ramified E with B_n = A_{E,en}, non-normalized towers. Duplicate candidates twisted-pullback-tower-domain and proetale-ctf-pullback-domains hold only over k = F̄_q; no duplicate, no cycle. Two citation fixes in fixes/dag/nodes/sec-smooth-purity/lem-sp-tower-p1-uniform-ctf-domains.json: (1) step 1 now cites the scheme leaf lem-weil-pbc-proper-fp-permanence(e) (Stacks 01KU (1)) for separated composition instead of the algebraic-space lemma lem-sfb-space-separated-fp-composition 'applied to schemes', which left the scheme-to-space comparison uncited; its tool_uses entry is removed. (2) Step 2 now cites lem-weil-pbc-qcqs-over-affine for the qcqs hypothesis of det-pe-finite-tor-comparison-noetherian. Batch-5: the def-trf-algebraic-space flag is a general definition and is removed by fix (1). The flag lem-trf-proetale-unit-leray-chain-formula (via det-sp-tower-bound-uniform) is a generic Leray/unit identity, a finiteness and Tor-bound input rather than a step of the trace formula. The flag lem-pod-etale-stalk-tensor-scalar (via chart-comparison-isos) is a generic stalk tensor fact. I accept both. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerP1UniformCtfDomains",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1Uniform.towerP1_uniform_ctf_domains",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1Uniform.towerP1_uniform_ctf_domains"
+  ],
+  "file": "lean/Sheaf/Paper/TowerP1UniformCtfDomains.lean",
+  "statement": "theorem towerP1_uniform_ctf_domains (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hlp : l ≠ p) (S : Scheme.{u}) [S.Over (Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (hS : IsUnit (l : Γ(S, ⊤))) (c : TowerClasses l E S hS) (DS : SpCoefficientTowersAbelian l E S) (DP : SpCoefficientTowersAbelian l E (ProjectiveLine S)) : (∀ (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T), (T = S ∨ T = ProjectiveLine S) → ∀ K : spDerivedCoefficientTowers l E T D, spConstructibleTorTowers l E T D K → (∃ a : ℤ, DerivedCategory.IsGE ((spTowerShriekRealization l E c.base T D).functor.obj K) a) ∧ ∀ n : ℕ, Nonempty (SpTowerShriek.Origin l E c.base T n ((spTowerShriekRealization l E c.base T D).functor.obj K))) ∧ (∀ M : spDerivedCoefficientTowers l E (ProjectiveLine S) DP, spConstructibleTorTowers l E (ProjectiveLine S) DP M → spConstructibleTorTowers l E S DS ((push l E c DS DP).obj M)) ∧ (∀ K : spDerivedCoefficientTowers l E S DS, spConstructibleTorTowers l E S DS K → spConstructibleTorTowers l E (ProjectiveLine S) DP ((pullTwist l E c DS DP).obj K)) ∧ (∀ (K : spDerivedCoefficientTowers l E S DS) (r s a b : ℤ), bounds l E S DS K r s a b → bounds l E (ProjectiveLine S) DP ((pullTwist l E c DS DP).obj K) (r - 2) (s - 2) (a - 2) (b - 2) ∧ ∀ n : ℕ, Nonempty (LocalModel (SpTowerShriek.R l E n) (l ^ (n + 1)) (SpTowerClasses.coefficient_annihilates l E n) S ((spDerivedCoefficientEvaluation l E S DS n).obj K) ((spDerivedCoefficientEvaluation l E (ProjectiveLine S) DP n).obj ((pullTwist l E c DS DP).obj K)) r s a b) ∧ ∀ (U : S.Opens), IsAffineOpen U → Nonempty (LocalModel (SpTowerShriek.R l E n) (l ^ (n + 1)) (SpTowerClasses.coefficient_annihilates l E n) U.toScheme ((proEtaleConstantRingDerivedPullback (SpTowerShriek.R l E n) U.ι).obj ((spDerivedCoefficientEvaluation l E S DS n).obj K)) ((proEtaleConstantRingDerivedPullback (SpTowerShriek.R l E n) (ProjectiveSpace.map (ULift.{u} (Fin 2)) U.ι)).obj ((spDerivedCoefficientEvaluation l E (ProjectiveLine S) DP n).obj ((pullTwist l E c DS DP).obj K))) r s a b))",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d0762d62",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Lean statement correct clause by clause: standing-setting hypotheses (hS derivable from l≠p, only types the pinned TowerClasses); U=spConstructibleTorTowers ⊆ C+ (same formula as the landed parent's SpTowerP1.domain); push/pullTwist = parent Presentation.F/G conjugated by spTowerShriekRealization (c.projective.geometry is the geometry of q); bounds shifts (r,s,a,b) by -2 with n-uniform endpoints; LocalModel for affine U and globally keeps the étale origin with the same intervals, a flat model in [a,b], the line model q^-1C⊗B_n(1)[2] and a K-flat pro-étale realization ≅ the restricted output level. The global model is slightly stronger than the node's wording but proved by steps 4-5 (accepted). Edge cases S=∅, U=∅, a=b, n=0, ramified E covered. Not hollow, one sorry, docstrings/lines/imports ok, no parent import cycle. Fault H11: the 'Second reading by Q25' was a self-check → FIX fixes/lem-sp-tower-p1-uniform-ctf-domains.report.md (worker report verbatim + independent clause-by-clause reading). Advisory: uncited owners def-sp-tower-shriek-realization, def-asd-finite-etale-tate-twist, def-pc-kflat-complex, def-weil-pbc-proetale-operations, theorem lem-sp-etale-pullback-line-flat-model (stmt_deps unchanged since stage 1). No compile (Lean unchanged; report-only fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-32960",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T161756-L-102813",
+  "kind": "interface",
+  "note": "independent cc review: delivered TowerP1UniformCtfDomains + 4 new modules/nodes against clone f0d376f: theorem stmt byte-identical, 6 defs verbatim in TowerP1CtfData with public re-export and change record, 3 sorried steps against original conjuncts and finiteRing_constructibleDerived_origin/Origin/Base definitions"
+ }
+}

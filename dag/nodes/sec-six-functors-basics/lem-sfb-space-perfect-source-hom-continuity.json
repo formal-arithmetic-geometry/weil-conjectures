@@ -1,0 +1,375 @@
+{
+ "id": "lem-sfb-space-perfect-source-hom-continuity",
+ "kind": "statement",
+ "title": "Hom from a perfect source commutes with affine inverse limits of spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme]. Use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space], module sheaves and canonical tensor pullback and direct image [def-trf-space-etale-module-functors], and their unbounded derived categories [def-weil-abstract-derived-category]. Derived pullback $Lh^*$ is computed by K-flat resolutions with flat terms and $Rh_*$ by K-injective resolutions. A perfect object means one etale locally isomorphic in the derived category to a bounded complex of direct summands of finite free structure modules. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Let $I$ be a small nonempty directed set, $(X_i,q_{ji})$ an inverse system of quasi-compact quasi-separated algebraic spaces over $S$ with affine transition morphisms, and $X=\\varprojlim_iX_i$ with projections $q_i$. Quasi-compact means that the space admits a surjective etale atlas from a quasi-compact scheme; quasi-separated means its diagonal is quasi-compact on affine scheme tests. An affine morphism is representable with affine inverse images of affine scheme tests. Fix $i\\in I$, a perfect $P_i\\in D(\\mathcal O_{X_i})$, and any $K_i\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X_i})$, with no boundedness or finite Tor dimension assumption on $K_i$. Put $P_j=Lq_{ji}^*P_i$, $K_j=Lq_{ji}^*K_i$, $P=Lq_i^*P_i$, and $K=Lq_i^*K_i$. The canonical pullback-induced map $$\\operatorname{colim}_{j\\ge i}\\operatorname{Hom}_{D(\\mathcal O_{X_j})}(P_j,K_j)\\longrightarrow\\operatorname{Hom}_{D(\\mathcal O_X)}(P,K)$$ is bijective. Transition maps use the canonical composition isomorphisms of derived pullback.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09RI (lemma-descend-homomorphisms), clause (1), in Situation 09RH (situation-descent)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-a1-space-point-topology",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "Pass to the tail $j\\ge i$, which is still small and directed. For every qcqs etale $t:T\\to X_i$ set $T_j=T\\times_{X_i}X_j$ and $T_\\infty=T\\times_{X_i}X$. The affine-limit and affine-locality lemmas identify $T_\\infty=\\varprojlim_{j\\ge i}T_j$, give affine projections and transitions, and show the $T_j$ are qcqs. Pullback to $T$ and then to $T_j$ agrees with restriction of $P_j,K_j$ by the etale chart calculus, including its composition comparisons; $K_j|_{T_j}$ remains quasi-coherent in cohomology. Define $\\mathcal C(T)$ to mean that the pullback-induced Hom comparison for these restrictions is bijective with $K_i|_T$ replaced by $K_i|_T[n]$ for every integer $n$. This simultaneous formulation supplies both adjacent degrees needed in excision. Restriction of a local bounded finite-free summand model remains such a model, so $P_i|_T$ is perfect.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RI (lemma-descend-homomorphisms), first paragraph, property P; strengthened to all shifts. Tags 07SF and 08GP for the limit and induction setup."
+   }
+  },
+  {
+   "text": "Suppose $T$ is affine. Then all $T_j$ and $T_\\infty$ are affine schemes by affine locality and the affine projections. Write $T=\\operatorname{Spec}A_0$, $T_j=\\operatorname{Spec}A_j$, $T_\\infty=\\operatorname{Spec}A$; limit sections gives $A=\\operatorname{colim}_{j\\ge i}A_j$ with its actual transition maps. The perfect object's cohomology is quasi-coherent by the qc-space perfectness lemma. Thus the unbounded Zariski–etale equivalence applies to both restricted objects. Etale detection of perfectness makes the Zariski preimage of $P_i|_T$ perfect. The affine perfect-model theorem supplies a bounded finite-projective $A_0$-complex $B^\\bullet$ representing it. The affine quasi-coherent derived equivalence gives an arbitrary $A_0$-complex representing the preimage of $K_i|_T$; choose a flat-term K-flat replacement $C^\\bullet$ by the module-resolution theorem. Neither equivalence nor this resolution requires a cohomological bound on $K_i$.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-limit-sections",
+    "lem-sfb-space-perfect-uniform-tor",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-detects-perfect",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-source-module-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RI, affine paragraph; Tag 09RE (perfect.tex, lemma-descend-homomorphisms), case (1); Tags 071Q and 08HG for comparison and perfection."
+   }
+  },
+  {
+   "text": "For $D=A_j$ or $A$, affine derived pullback identifies the two pulled-back objects with the etale realizations of $B^\\bullet\\otimes_{A_0}D$ and $C^\\bullet\\otimes_{A_0}D$. For the first model each term is a summand of a finite free module, so its tensor functor is a summand of a finite sum of the exact identity functor and is exact; the bounded-flat K-flatness lemma then shows ordinary tensor computes derived tensor; for the second this follows from K-flatness. A finite-projective term is a summand of a finite free module, and tensoring its splitting shows that the first model is again bounded finite-projective. Since both pulled-back objects have quasi-coherent cohomology, the Zariski–etale equivalence (between full subcategories) and the affine quasi-coherent derived equivalence for $D$ identify their etale derived Hom groups with $\\operatorname{Hom}_{D(D)}$ between these two module complexes. Bounded-above projectivity and the K-projective localization bijection therefore identify these derived maps with chain maps modulo homotopy. Chain-level extension/restriction of scalars sends a map $a$ to $b\\mapsto a(b\\otimes1)$, with inverse $v\\mapsto(b\\otimes d\\mapsto d\\,v(b))$; these formulas also send homotopies to homotopies. Consequently the Hom group at $D$ in degree $n$ is $\\operatorname{Hom}_{K(A_0)}(B^\\bullet,(C^\\bullet\\otimes_{A_0}D)[n])$. All transition and limit maps become $v\\mapsto(1\\otimes\\alpha)\\circ v$: the displayed formulas commute with iterated scalar extension, and the Zariski–etale pullback comparison respects composition.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, case (1), the passage from derived maps after scalar extension to homotopy maps over the initial ring."
+   }
+  },
+  {
+   "text": "The colimit $A$ of the $A_0$-algebras is also their colimit as $A_0$-modules. Tensor-colimit preservation with each $C^r$ gives $\\operatorname{colim}_j(C^r\\otimes_{A_0}A_j)=C^r\\otimes_{A_0}A$, naturally for the differentials. Thus $N_j^\\bullet=C^\\bullet\\otimes_{A_0}A_j$ has degreewise colimit $N^\\bullet=C^\\bullet\\otimes_{A_0}A$. This assertion uses no flatness of the transition rings.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-tensor-commutes-with-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE (lemma-descend-homomorphisms), case (1), final finite-projective homotopy-category calculation, with finite generators and equations written explicitly."
+   }
+  },
+  {
+   "text": "Here is the finite-coordinate argument for the comparison $\\operatorname{colim}_j\\operatorname{Hom}_{K(A_0)}(B^\\bullet,N_j^\\bullet[n])\\to\\operatorname{Hom}_{K(A_0)}(B^\\bullet,N^\\bullet[n])$. Choose splittings $u_r:B^r\\to A_0^{m_r}$ and $v_r:A_0^{m_r}\\to B^r$ with $v_ru_r=1$ for the finitely many nonzero terms. For any module map $f:B^r\\to N^s$, lift the finitely many values $f(v_r(e_a))$ to one stage by the elementwise colimit criterion. The resulting map $g:A_0^{m_r}\\to N_j^s$ gives a lift $g u_r$ of $f$, since its limit image is $f v_r u_r=f$. Likewise two maps with source $B^r$ whose limit images agree agree at a later stage: apply eventual equality to their values on the finite generating list $v_r(e_a)$. Finite lists of such maps or equalities can be treated at a single stage by directedness.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE (lemma-descend-homomorphisms), case (1), final finite-projective homotopy-category calculation, with finite generators and equations written explicitly."
+   }
+  },
+  {
+   "text": "Given a chain map $f:B^\\bullet\\to N^\\bullet[n]$, lift its finitely many components by the preceding construction. The defects $d g^r-g^{r+1}d$ vanish in the colimit, and there are only finitely many nonzero possible defects because $B$ is bounded. Eventual equality, applied to each defect on its finite generating list, kills them at one later stage. The resulting chain map lifts $f$, proving surjectivity on homotopy classes. For injectivity, bring two representatives to a common stage and let $h^r:B^r\\to N^{r+n-1}$ be a homotopy between their limit maps, using the shifted target differential. Lift the finitely many $h^r$. The finitely many equations $f-g=dh+hd$ hold after passing to a later stage by the same finite-generator test. Hence the representatives become homotopic there. This proves the desired bijection for every $n$. Under step 3 it is precisely the pullback Hom comparison, so $\\mathcal C(T)$ holds for all affine $T$, including the empty affine, whose complexes and Hom groups are zero.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE (lemma-descend-homomorphisms), case (1), final finite-projective homotopy-category calculation, with finite generators and equations written explicitly."
+   }
+  },
+  {
+   "text": "Let $(U\\subset W,V\\to W)$ be a square in the distinguished-square induction principle, and put $T=U\\times_WV$. Base change gives distinguished squares at each $j$ and at infinity. Apply the derived-Hom Mayer–Vietoris lemma to the restrictions of $P_j,K_j$ on each $W_j$ and at infinity. Its boundary naturality makes these long exact sequences a directed system and makes the pullback comparisons a morphism from its colimit to the limit sequence. Filtered colimits of abelian groups preserve exactness, so the source row is exact; the colimit of the two local summands is the sum of their colimits, by the finite biproduct universal property. With $A^n_Z=\\operatorname{colim}_j\\operatorname{Hom}(P_j|_{Z_j},K_j|_{Z_j}[n])$ and $B^n_Z$ the corresponding Hom group at infinity, we obtain the commutative exact five-term diagram\n$$ A_U^{n-1}\\oplus A_V^{n-1}\\to A_T^{n-1}\\to A_W^n\\to A_U^n\\oplus A_V^n\\to A_T^n $$\nover the same row with $B$ in place of $A$. If $\\mathcal C(U),\\mathcal C(V),\\mathcal C(T)$ hold, its four outer vertical arrows are bijections.",
+   "uses": [
+    "lem-sfb-space-derived-hom-mayer-vietoris",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RI, first paragraph, condition (2) via Tag 08H9; filtered exactness is applied to Hom groups, not to an unbounded cohomology spectral sequence."
+   }
+  },
+  {
+   "text": "Here is the diagram chase for the middle comparison. For surjectivity, take $y\\in B_W^n$, lift its image in $B_U^n\\oplus B_V^n$ to $a$ in the upper local pair. Its obstruction in $A_T^n$ is zero by injectivity of that comparison, so exactness lifts $a$ to $x\\in A_W^n$. The difference $y-\\bar x$ comes from $B_T^{n-1}$; lift that element to $A_T^{n-1}$ and add its boundary to $x$. For injectivity, if $x\\in A_W^n$ has zero lower image, its local image is zero by the local-pair bijection, hence $x=\\partial t$. The lower image of $t$ comes from $B_U^{n-1}\\oplus B_V^{n-1}$. Lift that pair to the upper row and subtract its image from $t$; injectivity at $A_T^{n-1}$ then makes the difference zero. Thus $x=0$. This proves $\\mathcal C(W)$ for every $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RI, the elementary exact-sequence chase behind condition (2)."
+   }
+  },
+  {
+   "text": "The property $\\mathcal C$ is invariant under isomorphism over $X_i$, since every map defining it is canonical derived pullback. The affine case and the distinguished-square step verify exactly hypotheses (a) and (b) of the qcqs-space induction principle. Apply it with base $X_i$ to obtain $\\mathcal C(X_i)$. Its clause $n=0$ is the asserted bijection. The maps are the prescribed pullback-induced maps, as checked on the affine models and in the base-change naturality of Mayer–Vietoris; no choice of model changes that cocone.",
+   "uses": [
+    "lem-sfb-space-qcqs-distinguished-square-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RI, first paragraph invoking Tag 08GP (lemma-induction-principle)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-detects-perfect",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-derived-hom-mayer-vietoris",
+  "lem-sfb-space-limit-sections",
+  "lem-sfb-space-perfect-uniform-tor",
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09RI (lemma-descend-homomorphisms), clause (1), proof using Tag 08GP, Tag 08H9, and the affine calculation in perfect.tex Tag 09RE (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a perfect complex into a quasi coherent derived object on an inverse limit of qcqs algebraic spaces is the filtered colimit of stage Hom sets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Hom\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsPurelyInseparable.instNonemptyAlgHomOfPerfectField\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [IsPurelyInseparable F E] (L : Type u_2) [Field L] [PerfectField L] [Algebra F L] : Nonempty (E →ₐ[F] L)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [PerfectField K] [AlgebraicGeometry.IsReduced X] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFinitePresentation f] : Dense ↑(AlgebraicGeometry.Scheme.Hom.smoothLocus f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [PerfectField K] [AlgebraicGeometry.IsIntegral X] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFinitePresentation f] : genericPoint ↥X ∈ AlgebraicGeometry.Scheme.Hom.smoothLocus f\", \"doc\": \"\"}\n  {\"name\": \"RingHom.pNilradical_le_ker_of_perfectRing\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \" {K : Type u_1} {L : Type u_2} [CommSemiring K] [CommSemiring L] (i : K →+* L) (p : ℕ) [ExpChar L p] [PerfectRing L p] : pNilradical K p ≤ RingHom.ker i\", \"doc\": \"If `i : K →+* L` is a ring homomorphism of exponential characteristic `p` rings, such that `L`\\nis perfect, then the `p`-nilradical of `K` is contained in the kernel of `i`.\"}\n  {\"name\": \"IsPerfectClosure.equiv_toRingHom\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \" {K : Type u_1} {L : Type u_2} {M : Type u_3} [CommRing K] [CommRing L] [CommRing M] (i : K →+* L) (j : K →+* M) (p : ℕ) [ExpChar M p] [ExpChar K p] [ExpChar L p] [PerfectRing L p] [IsPerfectClosure i p] [PerfectRing M p] [IsPerfectClosure j p] : (IsPerfectClosure.equiv i j p).toRingHom = PerfectRin\", \"doc\": \"\"}\n  {\"name\": \"IsPerfectClosure.equiv_symm_toRingHom\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \" {K : Type u_1} {L : Type u_2} {M : Type u_3} [CommRing K] [CommRing L] [CommRing M] (i : K →+* L) (j : K →+* M) (p : ℕ) [ExpChar M p] [ExpChar K p] [ExpChar L p] [PerfectRing L p] [IsPerfectClosure i p] [PerfectRing M p] [IsPerfectClosure j p] : (IsPerfectClosure.equiv i j p).symm.toRingHom = Perfe\", \"doc\": \"\"}\n  {\"name\": \"perfectClosure.comap_eq_of_algHom\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] {K : Type w} [Field K] [Algebra F K] (i : E →ₐ[F] K) : IntermediateField.comap i (perfectClosure F K) = perfectClosure F E\", \"doc\": \"If `i` is an `F`-algebra homomorphism from `E` to `K`, then the preimage of `perfectClosure F K`\\nunder the map `i` is equal to `perfectClosure F E`.\"}\n  {\"name\": \"perfectClosure.map_le_of_algHom\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] {K : Type w} [Field K] [Algebra F K] (i : E →ₐ[F] K) : IntermediateField.map i (perfectClosure F E) ≤ perfectClosure F K\", \"doc\": \"If `i` is an `F`-algebra homomorphism from `E` to `K`, then the image of `perfectClosure F E`\\nunder the map `i` is contained in `perfectClosure F K`.\"}\n  {\"name\": \"Perfection.coeffMonoidHom\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \" (M : Type u_1) [CommMonoid M] (p n : ℕ) : Perfection M p →* M\", \"doc\": \"The `n`-th coefficient of an element of the perfection.\"}\n  {\"name\": \"Perfection.pthRootMonoidHom\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \" (M : Type u_1) [CommMonoid M] (p : ℕ) : Perfection M p →* Perfection M p\", \"doc\": \"The `p`-th root of an element of the perfection.\"}\n  {\"name\": \"Perfection.mapMonoidHom\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \" (p : ℕ) {M : Type u_2} {N : Type u_3} [CommMonoid M] [CommMonoid N] (φ : M →* N) : Perfection M p →* Perfection N p\", \"doc\": \"A monoid homomorphism `M →* N` induces `Perfection M p →* Perfection N p`.\"}\n  {\"name\": \"Perfection.liftMonoidHom\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \" (p : ℕ) (M : Type u_2) [CommMonoid M] [PerfectRing M p] (N : Type u_3) [CommMonoid N] : (M →* N) ≃* (M →* Perfection N p)\", \"doc\": \"Given monoids `M` and `N`, with `M` being perfect,\\nany homomorphism `M →+* N` can be lifted uniquely to a homomorphism `M →* Perfection N p`.\"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|perfect.*[Hh]om.*colimit|[Hh]om.*perfect.*colimit",
+   "results": "[grep] OK 0 hit(s)\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuity of morphisms from perfect complexes to quasi coherent complexes under affine inverse limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": HasLimits AffineScheme.{u}\", \"doc\": \"The category of affine schemes has all limits, meaning that for every diagram in this category, the limit exists within it.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] : CompactSpace c.pt\", \"doc\": \"If $ I $ is a cofiltered category and $ D : I \\to \\text{Scheme} $ is a diagram where each object $ D(i) $ is a compact space and each morphism $ D(f) $ is an affine morphism, then the limit of $ D $ (i.\"}\n  {\"name\": \"ContinuousAffineEquiv.continuous_invFun\", \"module\": \"Mathlib.Topology.Algebra.ContinuousAffineEquiv\", \"type\": \"∀ {k : Type u_1} {P₁ : Type u_2} {P₂ : Type u_3} {V₁ : Type u_4} {V₂ : Type u_5} [inst : Ring k]\\n  [inst_1 : AddCommGroup V₁] [inst_2 : Module k V₁] [inst_3 : AddTorsor V₁ P₁] [inst_4 : TopologicalSpace P₁]\\n  [inst_5 : AddCommGroup V₂] [inst_6 : Module k V₂] [inst_7 : AddTorsor V₂ P₂] [inst_8 : Topo\", \"doc\": \"The inverse function of a continuous affine equivalence between topological affine spaces over a ring is continuous, i.e., for any continuous affine equivalence $ e : P₁ ≃ᴬ[k] P₂ $, the inverse mappin\"}\n  {\"name\": \"ProfiniteGrp.toLimit_fun_continuous\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : Continuous (toLimit_fun P)\", \"doc\": \"The canonical group homomorphism from a profinite group $ P $ to the limit of its finite quotient groups is continuous with respect to the product topology on the limit.\"}\n  {\"name\": \"AffineMap.continuous_linear_iff\", \"module\": \"Mathlib.Topology.Algebra.Affine\", \"type\": \"{f : P →ᵃ[R] Q} : Continuous f.linear ↔ Continuous f\", \"doc\": \"For an affine map $ f : P \\to Q $ between affine spaces over a ring $ R $, the continuity of $ f $ is equivalent to the continuity of its underlying linear transformation $ f_{\\\\text{linear}} $.\"}\n  {\"name\": \"AffineMap.continuous_iff\", \"module\": \"Mathlib.Topology.Algebra.Affine\", \"type\": \"{f : P →ᵃ[R] Q} : Continuous f ↔ Continuous f.linear\", \"doc\": \"For an affine map $ f $ between affine spaces over a ring $ R $, $ f $ is continuous if and only if its underlying linear transformation is continuous.\"}\n  {\"name\": \"LinearMap.continuous_of_isContPerfPair\", \"module\": \"Mathlib.Topology.Algebra.Module.PerfectPairing\", \"type\": \": Continuous (p x)\", \"doc\": \"For a commutative ring $ R $ with topology and topological $ R $-modules $ M $ and $ N $, if the bilinear map $ M \\\\times N \\\\to R $ is a continuous perfect pairing (i.e., the induced maps $ M \\\\to \\\\math\"}\n  {\"name\": \"ContinuousAffineMap.continuous\", \"module\": \"Mathlib.Topology.Algebra.ContinuousAffineMap\", \"type\": \"(f : P →ᴬ[R] Q) : Continuous f\", \"doc\": \"Every continuous affine map $ f : P \\to Q $ between torsors $ P $ and $ Q $ over a ring $ R $ is continuous as a function, where $ P $ is a torsor for an additive group $ V $ over $ R $ and $ Q $ is a \"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom commutes with affine inverse limits of algebraic spaces for a perfect source and arbitrary quasi coherent target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.preservesLimit_rightOp_Γ\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {I : Type w} [inst : CategoryTheory.Category.{v, w} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)],\\n  CategoryTheory.Limits.PreservesLimit D AlgebraicGeometry.Scheme.Γ.rightOp\", \"doc\": \"The right opposite of the global sections functor for schemes preserves limits when restricted to diagrams where every object is an affine scheme. This means that for any diagram of affine schemes, th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Perfect.*(colimit|limit)|perfect.*(colimit|limit)",
+   "results": "{\"t\": \"2026-10-23T18:36:25Z\", \"tool\": \"grep\", \"query\": \"Perfect.*(colimit|limit)|perfect.*(colimit|limit)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: Scheme section/morphism limit continuity, topological continuity, and field perfectness do not state derived structure-module Hom continuity for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a perfect complex to an unbounded quasi coherent complex commutes with affine inverse limits of algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T18:36:48Z\", \"tool\": \"leanfinder\", \"query\": \"Hom from a perfect complex to an unbounded quasi coherent complex commutes with affine inverse limits of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"6d8c56ef8a109619\"} Read the returned signatures: Scheme section/morphism limit continuity, topological continuity, and field perfectness do not state derived structure-module Hom continuity for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect source derived Hom continuity for inverse systems of algebraic spaces with affine transition maps",
+   "results": "{\"t\": \"2026-10-23T18:37:05Z\", \"tool\": \"leansearch\", \"query\": \"Perfect source derived Hom continuity for inverse systems of algebraic spaces with affine transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.toLimit_fun_continuous\", \"CommRingCat.HomTopology.precompHomeomorph\", \"ContinuousAffineEquiv.continuous_invFun\", \"AlgebraicGeometry.PresheafedSpace.Hom\", \"LinearMap.IsContPerfPair.ext\", \"AlgHom.instContinuousLinearMapClassOfAlgHomClass\", \"LinearMap.IsContPerfPair.ext_iff\", \"AlgebraicGeometry.PresheafedSpace.isoOfComponents_hom\"], \"digest\": \"284d8e4dae17369b\"} Read the returned signatures: Scheme section/morphism limit continuity, topological continuity, and field perfectness do not state derived structure-module Hom continuity for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-23T18:37:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: Scheme section/morphism limit continuity, topological continuity, and field perfectness do not state derived structure-module Hom continuity for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-limit-category",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 09RJ (lemma-perfect-on-limit), in Situation 09RH (situation-descent); derived pullback preserves perfect objects by sites-cohomology.tex Tag 08H6 (lemma-perfect-pullback). Supporting input: proof of Tag 09RJ, first paragraph, full faithfulness from Tag 09RI (1).",
+   "via": [
+    "lem-sfb-space-perfect-limit-category",
+    "lem-sfb-space-perfect-flat-proper-model",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-source-hom-continuity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Stacks 09RI (1): all-shift etale-local property, affine comparison and K-flat arbitrary target, finite-coordinate lifting of chain maps and homotopies, then natural Mayer–Vietoris and qcqs-space induction. One statement-only node: derived-Hom excision with base-change boundaries. The finite-projective colimit argument is elementary from existing module-colimit statements and is written out, not made a node. Reused the existing comparison, model, affine-limit, exactness and induction statements; checked empty, shifted, nonflat and unbounded cases. No project attachment.",
+  "blueprint": "Inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor); retain the full inherited from.place/via chain. This is the full-faithfulness input Tag 09RI (1) to the perfect-limit category used in direct-image stability. Read latest sk-thm-sf-ctf-stability and the whole-DAG/blueprint searches. Steps realize the affine and excision paragraphs of 09RI without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-perfect-affine-bounded-projective",
+    "why": "Generic perfect objects on an affine scheme are bounded finite projective complexes used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic derived quasi-coherent modules on an affine scheme used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-pc-source-module-kflat-resolution",
+    "why": "Generic flat k-flat module resolutions from the source library used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine computation of derived pullback and derived tensor product used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-sc-bounded-above-projective-kprojective",
+    "why": "Generic bounded-above projective complexes are k-projective used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-coef-kprojective-derived-hom-bijection",
+    "why": "Generic derived morphisms from an arbitrary k-projective complex used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "why": "Generic a filtered colimit of algebras is the colimit of the underlying modules used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-commutes-with-colimits",
+    "why": "Generic tensor products commute with colimits of modules used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "Generic filtered colimits of abelian groups are exact used in the affine algebra calculation or exact-sequence assembly; no different geometric route or finiteness assumption is substituted."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ring-theoretic K-flatness of the bounded finite-projective source model; its terms have exact tensor functors by their finite-free splittings."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "Generic existence of stage representatives and eventual equality for module colimits, used on the finite lists of source generators, chain equations and homotopy equations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-3dc98ba5a",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-3dc98ba5a (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, Stacks spaces-perfect 09RH/09RI(1), 08GP, 08H9, 08GV and perfect.tex 09RE(1); the tags agree with the tag table. The item statement equals 09RI(1) and is unchanged from the base. Live has the item unsplit, so this is not superseded. The 9 steps follow 09RI. Step 1: an all-shift property C(T). Step 2: the affine case (08EB model, 06Z0, unbounded K-flat C). Step 3: Hom in K(A_0) via K-projectivity and scalar adjunction. Steps 4-6: the colimit of the target, and finite lifting of chain maps and homotopies from 00D6/00D7; the existing pc colimit-descent nodes all need fp or finite-projective targets, so they cannot replace this. Step 7: Mayer-Vietoris rows and filtered exactness. Step 8: a correct five-lemma chase. Step 9: the 08GP induction. New node lem-sfb-space-derived-hom-mayer-vietoris (08H9 with derived base-change naturality, boundary included) is true: the extension-by-zero triangle is preserved by Lh^*, using elementary-shriek-exact after base change. I checked U=W, U empty and nonflat h. It is not a duplicate of lem-sc-derived-hom-mayer-vietoris, distinguished-derived-gluing, relative-mv-exchange-triangles or elementary-shriek-exact, and it does not restate the item. FIX (C1/C4): step 3 needed full faithfulness of tilde at A_j and A (06Z0) but cited it only in step 2, for A_0; I added lem-pc-affine-qcoh-derived-equivalence to step 3 uses with one sentence. Batch-5: every listed citation is a general definition or a foundational fact about algebraic spaces (limits, affine locality, Zariski-etale comparison, extension by zero, qcqs induction), not a step of the trace-formula or Poincare-duality proofs, so it is accepted. The tool_uses (generic pc/coef/weil-pbc algebra) are accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectSourceHomContinuity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfect_source_hom_continuity",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitDerivedComparison",
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitHomTransition",
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitHomTransition_id",
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitHomTransition_comp",
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitHomDiagram",
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitHomToLimit",
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitHomToLimit_transition",
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitHomCocone",
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitHomComparison",
+   "AlgebraicGeometry.AlgebraicSpace.perfect_source_hom_continuity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectSourceHomContinuity.lean",
+  "statement": "theorem perfect_source_hom_continuity [Nonempty I] [IsDirected I (· ≤ ·)] (hc : IsLimit c) (hqc : ∀ j : I, CompactSpace (Point (D.obj (op j)).obj.obj)) (hqs : ∀ j : I, IsAbsolutelyQuasiSeparated (D.obj (op j))) (haff : ∀ (j k : I) (h : j ≤ k), MapIsAffine (D.map (homOfLE h).op)) (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} (D.obj (op i)).smallStructureSheaf P) (hK : (D.obj (op i)).derivedQCohProperty K) : Function.Bijective (spaceLimitHomComparison D i P K c)",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical tail Hom diagram, pullback cocone and colimit comparison have explicit data. Supporting functor and cocone laws are named theorem obligations with proof docstrings. Added only already-landed statement dependencies for the canonical derived pullback, derived module calculus, absolute quasi-separatedness, affine morphisms, point topology and local perfectness. ULift places Hom sets in max u w for the colimit and is an equivalence of sets."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0f8a9d13",
+  "group": "NW",
+  "result": "fix",
+  "note": "Lean exact vs node/Stacks 09RI(1) in Situation 09RH: qc via CompactSpace Point (points_compactSpace_iff), IsAbsolutelyQuasiSeparated, MapIsAffine for all j≤k, IsLimit cone, P IsPerfectOnRingedSiteOfUniverses.{u,u,u,w}, K derivedQCohProperty with no bound; canonical spaceDerivedPullback transitions via spaceDerivedPullbackComp (leftDerivedUnique), directions checked via D.map_comp/c.w; Bijective colimit.desc of pullback cocone over Ici i, ULift size-only; 6 added stmt_deps are landed defs; statement verbatim, 10 declarations listed, docstrings and 9 proof steps present; no duplicate (only scheme versions). Sole fault H11: 'Author's second pass' second reading → fixes/lem-sfb-space-perfect-source-hom-continuity.report.md (worker report verbatim + independent second reading). No Lean change, so no compile."
+ }
+}

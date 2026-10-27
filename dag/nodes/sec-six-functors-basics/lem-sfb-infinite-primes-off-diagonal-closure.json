@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-infinite-primes-off-diagonal-closure",
+ "kind": "statement",
+ "title": "Infinite families of affine primes force diagonal accumulation",
+ "statement": "Let $A$ be a commutative ring, let $k$ be a field [def-weil-field], and let $(\\mathfrak p_n)_{n\\geq1}$ be pairwise distinct prime ideals of $A$. For every $n$ fix a field embedding $k\\hookrightarrow\\kappa(\\mathfrak p_n)$, where $\\kappa(\\mathfrak p_n)=\\operatorname{Frac}(A/\\mathfrak p_n)$ [def-weil-residue-field]. In the affine scheme $P=\\operatorname{Spec}(A\\otimes_{\\mathbf Z}A)$ [def-weil-affine-spectrum, def-pc-fibre-product], let $E$ be the union, over $n\\ne m$, of the images of $\\operatorname{Spec}(\\kappa(\\mathfrak p_n)\\otimes_k\\kappa(\\mathfrak p_m))\\to P$ induced by the residue maps on the two factors. Then the Zariski closure $\\overline E$ meets the image of the absolute diagonal $\\operatorname{Spec}A\\to P$, induced by multiplication $A\\otimes_{\\mathbf Z}A\\to A$. No $k$-algebra structure on $A$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 088I (lemma-infinite-number); unadorned tensor products in the target are over Z, as in the proof of Tag 088J."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $k_n=\\kappa(\\mathfrak p_n)$. Apply [lem-trf-family-common-extension-field] to the countable family $k_n/k$: obtain a field $K/k$ and compatible embeddings $i_n:k_n\\hookrightarrow K$. Put $B=\\prod_{n\\geq1}K$ and define $\\alpha:A\\to B$ by $\\alpha(a)_n=i_n(a\\bmod\\mathfrak p_n)$. This is a ring homomorphism; it does not require a $k$-algebra structure on $A$.",
+   "uses": [
+    "lem-trf-family-common-extension-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088I (lemma-infinite-number), product-of-fields proof; common-overfield refinement to use actual field-valued coordinate points."
+   }
+  },
+  {
+   "text": "Let $C=B\\otimes_KB$, let $e_n$ be the coordinate idempotents, and put $J=(e_n\\otimes e_n:n\\geq1)$. By [lem-sfb-sequence-tensor-off-diagonal-kernel], the map $\\theta:C\\to\\prod_{n\\ne m}K$, $u\\otimes v\\mapsto(u_nv_m)_{n\\ne m}$, has kernel $J$. Let $s_{n,m}\\in\\operatorname{Spec}C$ be the kernel of the coordinate map $\\theta_{n,m}:C\\to K$, and put $S=\\{s_{n,m}:n\\ne m\\}$. These kernels are prime because $K$ is a field.",
+   "uses": [
+    "lem-sfb-sequence-tensor-off-diagonal-kernel",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088I (lemma-infinite-number), product-of-fields proof; common-overfield refinement to use actual field-valued coordinate points."
+   }
+  },
+  {
+   "text": "The Zariski closure of $S$ is $V(J)$. Indeed, each $s_{n,m}$ contains $J$, so $\\overline S\\subseteq V(J)$. Conversely, if a closed set $V(H)$ contains $S$, every $h\\in H$ has $\\theta_{n,m}(h)=0$ for all $n\\ne m$; hence $H\\subseteq\\ker\\theta=J$, and $V(J)\\subseteq V(H)$. Intersecting over all such closed sets gives the reverse containment. This uses only the definition of the Zariski topology; it makes no assertion about density for arbitrary products of nonreduced rings.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088I (lemma-infinite-number), product-of-fields proof; common-overfield refinement to use actual field-valued coordinate points."
+   }
+  },
+  {
+   "text": "Let $I=(e_n:n\\geq1)\\subset B$. Every element of $I$ is a finite sum of multiples of $e_n$ and therefore has finite support. The constant sequence $1$ has infinite support, so $I\\ne B$. By [lem-weil-pbc-minimal-prime-over-proper-ideal] choose a prime $\\mathfrak q$ of $B$ containing $I$. For the multiplication homomorphism $\\mu:C\\to B$, the prime $Q=\\mu^{-1}(\\mathfrak q)$ contains $J$, since $\\mu(e_n\\otimes e_n)=e_n$. Thus $Q\\in\\overline S$.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-over-proper-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088I (lemma-infinite-number), product-of-fields proof; common-overfield refinement to use actual field-valued coordinate points."
+   }
+  },
+  {
+   "text": "Define $\\psi:A\\otimes_{\\mathbf Z}A\\to C$ by $a\\otimes b\\mapsto\\alpha(a)\\otimes\\alpha(b)$, and let $f=\\operatorname{Spec}\\psi$. For $n\\ne m$, the homomorphism $k_n\\otimes_k k_m\\to K$, $x\\otimes y\\mapsto i_n(x)i_m(y)$, is well-defined by compatibility over $k$. Its composite with the residue map from $A\\otimes_{\\mathbf Z}A$ is $\\theta_{n,m}\\psi$, so $f(s_{n,m})\\in E$. Continuity implies $f(Q)\\in\\overline E$: the closed set $f^{-1}(\\overline E)$ contains $S$ and therefore its closure. Finally, $\\mu\\psi(a\\otimes b)=\\alpha(ab)$, so $f(Q)$ is the diagonal image of the prime $\\alpha^{-1}(\\mathfrak q)\\in\\operatorname{Spec}A$. This proves the required intersection.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088I (lemma-infinite-number), product-of-fields proof; common-overfield refinement to use actual field-valued coordinate points."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-family-common-extension-field",
+  "lem-sfb-sequence-tensor-off-diagonal-kernel",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 088I (lemma-infinite-number), product-of-fields proof; common-overfield refinement to use actual field-valued coordinate points."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Infinitely many distinct primes of a ring with residue fields over a common field give an off diagonal tensor spectrum image whose closure meets the diagonal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T],\\n  (algebraMap R T).SurjectiveOnStalks →\\n    ∀ (p₁ p₂ : PrimeSpectrum (TensorProduct R S T)),\\n      PrimeSpectrum.tensorProductTo R S T p₁ = \", \"doc\": \"If two prime ideals $\\\\mathfrak{p}_1$ and $\\\\mathfrak{p}_2$ in the tensor product $S \\\\otimes_R T$ satisfy $\\\\mathrm{tensorProductTo}(\\\\mathfrak{p}_1) = \\\\mathrm{tensorProductTo}(\\\\mathfrak{p}_2)$ under the \"}\n  {\"name\": \"PrimeSpectrum.tensorProductTo\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : Algebra R S] →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] → PrimeSpectrum (TensorProduct R S T) → PrimeSpectrum S × PrimeSpectrum T\", \"doc\": \"The function maps a prime ideal $\\\\mathfrak{p}$ in the tensor product $S \\\\otimes_R T$ to the pair $(\\\\mathfrak{p}_S, \\\\mathfrak{p}_T)$, where $\\\\mathfrak{p}_S$ is the preimage of $\\\\mathfrak{p}$ under the \"}\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T],\\n  (algebraMap R T).SurjectiveOnStalks → Topology.IsEmbedding (PrimeSpectrum.tensorProductTo R S T)\", \"doc\": \"If the ring homomorphism $ R \\\\to S $ is surjective on stalks, then the induced continuous map $ \\\\operatorname{Spec}(S \\\\otimes_R T) \\\\to \\\\operatorname{Spec}(S) \\\\times \\\\operatorname{Spec}(T) $ is a topol\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (K : Type u_2) (R : Type u_3) (S : Type u_4) [inst : Field K] [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R K] [inst_4 : Algebra R S] (L : Type u_5) [inst_5 : Field L] [inst_6 : Algebra R L]\\n  [inst_7 : Algebra K L] [inst_8 : IsScalarTower R K L] [IsPurelyInseparable K L],\\n  Is\", \"doc\": \"Let $ R $ be a commutative semiring, $ K $ and $ S $ be $ R $-algebras, and $ L $ be a field extending $ K $ as a purely inseparable field extension. The map induced by the tensor product $ K \\\\otimes_\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (k : Type u_1) (K : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  [inst_3 : CommRing R] [inst_4 : Algebra k R] [IsPurelyInseparable k K],\\n  IsHomeomorph (PrimeSpectrum.comap (algebraMap R (TensorProduct k R K)))\", \"doc\": \"Let $ k \\\\to K $ be a purely inseparable field extension and $ R $ a commutative semiring equipped with a $ k $-algebra structure. The induced map on prime spectra given by preimage under the canonical\"}\n  {\"name\": \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/RingHom\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u_1} [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : PrimeSpectrum R),\\n  Nontrivial (TensorProduct R p.asIdeal.ResidueField S) ↔ p ∈ Set.range (PrimeSpectrum.comap (algebraMap R S))\", \"doc\": \"For commutative rings $R$ and $S$ with an $R$-algebra structure on $S$, and a prime ideal $\\\\mathfrak{p}$ in $R$, the tensor product of the residue field of $\\\\mathfrak{p}$ with $S$ over $R$ is nontrivi\"}\n  {\"name\": \"Ideal.ResidueField.exists_smul_eq_tmul_one\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (x : TensorProduct R S p.ResidueField), ∃ r ∉ p, ∃ s, r • x = s ⊗ₜ[R] 1\", \"doc\": \"For any element $ x $ in the tensor product $ S \\\\otimes_R \\\\text{ResidueField}(p) $, there exists an element $ r \\\\notin p $ and an element $ s \\\\in S $ such that $ r \\\\cdot x = s \\\\otimes 1 $.\"}\n  {\"name\": \"PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber\", \"type\": \"∀ (R : Type u_3) (S : Type u_4) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : PrimeSpectrum R)\\n  (q : ↑(PrimeSpectrum.comap (algebraMap R S) ⁻¹' {p})),\\n  ↑((PrimeSpectrum.preimageHomeomorphFiber R S p) q).asIdeal =\\n    ⇑(Algebra.TensorProduct.lift (Ideal.ResidueField.mapₐ p.a\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the ideal corresponding to the image of a prime ideal $ \\\\mathfrak{q} $ in $ S $ (lyi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of pairs of distinct points in an infinite affine fibre meets the diagonal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Combinatorics.Line.diagonal\", \"module\": \"Mathlib/Combinatorics/HalesJewett\", \"type\": \"(α : Type u_5) → (ι : Type u_6) → [Nonempty ι] → Combinatorics.Line α ι\", \"doc\": \"The function constructs a combinatorial line where every index is a wildcard (mapped to none), leveraging the non-emptiness of the index type $\\\\iota$ to satisfy the requirement of having at least one \"}\n  {\"name\": \"Configuration.HasPoints.mkPoint_ax\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"∀ {P : Type u_1} {L : Type u_2} {inst : Membership P L} [self : Configuration.HasPoints P L] {l₁ l₂ : L} (h : l₁ ≠ l₂),\\n  Configuration.HasPoints.mkPoint h ∈ l₁ ∧ Configuration.HasPoints.mkPoint h ∈ l₂\", \"doc\": \"In a combinatorial configuration with points $P$ and lines $L$, any two distinct lines $l_1 \\\\neq l_2$ intersect at a unique point in $P$ that is incident to both lines, i.e., the intersection point sa\"}\n  {\"name\": \"Configuration.HasPoints.mkPoint\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"{P : Type u_1} →\\n  {L : Type u_2} → {inst : Membership P L} → [self : Configuration.HasPoints P L] → {l₁ l₂ : L} → l₁ ≠ l₂ → P\", \"doc\": \"Given a combinatorial configuration with points $P$ and lines $L$, this function assigns to any two distinct lines $l_1 \\neq l_2$ their unique intersection point in $P$, which is incident to both lines\"}\n  {\"name\": \"Configuration.Nondegenerate.exists_point\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"∀ {P : Type u_1} {L : Type u_2} {inst : Membership P L} [self : Configuration.Nondegenerate P L] (l : L), ∃ p, p ∉ l\", \"doc\": \"In a non-degenerate configuration of points and lines, for every line $ l $, there exists at least one point $ p $ that is not incident to $ l $. Formally, for any line $ l $, there exists a point $ p\"}\n  {\"name\": \"Configuration.HasPoints.toNondegenerate\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"∀ {P : Type u_1} {L : Type u_2} {inst : Membership P L} [self : Configuration.HasPoints P L],\\n  Configuration.Nondegenerate P L\", \"doc\": \"Every configuration with points, lines, and an incidence relation is non-degenerate.\"}\n  {\"name\": \"isClosed_diagonal\", \"module\": \"Mathlib/Topology/Separation/Hausdorff\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] [T2Space X], IsClosed (Set.diagonal X)\", \"doc\": \"In a Hausdorff topological space $X$, the diagonal set $\\\\{(x, x) \\\\mid x \\\\in X\\\\}$ is closed in the product topology on $X \\\\times X$.\"}\n  {\"name\": \"Configuration.HasLines.toNondegenerate\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"∀ {P : Type u_1} {L : Type u_2} {inst : Membership P L} [self : Configuration.HasLines P L],\\n  Configuration.Nondegenerate P L\", \"doc\": \"Any combinatorial configuration with lines satisfies the non-degeneracy conditions, ensuring it avoids trivial arrangements such as all points lying on a single line or all lines passing through a sin\"}\n  {\"name\": \"Configuration.HasPoints.existsUnique_point\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"∀ (P : Type u_1) (L : Type u_2) [inst : Membership P L] [Configuration.HasPoints P L] (l₁ l₂ : L),\\n  l₁ ≠ l₂ → ∃! p, p ∈ l₁ ∧ p ∈ l₂\", \"doc\": \"In a combinatorial configuration with points and lines, for any two distinct lines $l_1$ and $l_2$, there exists a unique point $p$ such that $p$ lies on both $l_1$ and $l_2$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"closure\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_closure\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] (t : Set (PrimeSpectrum R)) : PrimeSpectrum.vanishingIdeal (closure t) = PrimeSpectrum.vanishingIdeal t\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] (t : Set (PrimeSpectrum R)) : PrimeSpectrum.zeroLocus ↑(PrimeSpectrum.vanishingIdeal t) = closure t\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.le_iff_mem_closure\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] (x y : PrimeSpectrum R) : x ≤ y ↔ y ∈ closure {x}\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.closure_singleton\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] (x : PrimeSpectrum R) : closure {x} = PrimeSpectrum.zeroLocus ↑x.asIdeal\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.closure_range_comap\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommSemiring R] [CommSemiring S] (f : R →+* S) : closure (Set.range (PrimeSpectrum.comap f)) = PrimeSpectrum.zeroLocus ↑(RingHom.ker f)\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.closure_image_comap_zeroLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] (f : R →+* S) (I : Ideal S) : closure (PrimeSpectrum.comap f '' PrimeSpectrum.zeroLocus ↑I) = PrimeSpectrum.zeroLocus ↑(Ideal.comap f I)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]iagonal|[Ii]nfinite.*[Pp]rime|[Cc]losure",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"line\": \"68\", \"text\": \"  rw [← H.1 (isClosed_zeroLocus I), (isClosed_zeroLocus _).closure_subset_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"line\": \"93\", \"text\": \"    suffices {x} = (⋃ p ∈ { p : PrimeSpectrum R | IsMin p ∧ p ≠ x }, closure {p})ᶜ by\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"line\": \"95\", \"text\": \"      refine Set.Finite.isClosed_biUnion ?_ (fun _ _ ↦ isClosed_closure)\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"line\": \"99\", \"text\": \"      Set.mem_compl_iff, and_imp, ← specializes_iff_mem_closure, ← le_iff_specializes,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"161\", \"text\": \"theorem zeroLocus_vanishingIdeal_eq_closure (t : Set (PrimeSpectrum R)) :\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"162\", \"text\": \"    zeroLocus (vanishingIdeal t : Set R) = closure t := by\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"163\", \"text\": \"  rcases isClosed_iff_zeroLocus (closure t) |>.mp isClosed_closure with ⟨I, hI⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"164\", \"text\": \"  rw [subset_antisymm_iff, (isClosed_zeroLocus _).closure_subset_iff, hI,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"167\", \"text\": \"  exact ⟨subset_closure, subset_zeroLocus_vanishingIdeal t⟩\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For distinct prime ideals with common field embeddings the closure of cross tensor products meets the affine diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.TensorProduct\", \"type\": \"(p₁ p₂ : PrimeSpectrum (S ⊗[R] T)) (h : tensorProductTo R S T p₁ = tensorProductTo R S T p₂) : p₁ ≤ p₂\", \"doc\": \"If two prime ideals $\\\\mathfrak{p}_1$ and $\\\\mathfrak{p}_2$ in the tensor product $S \\\\otimes_R T$ satisfy $\\\\mathrm{tensorProductTo}(\\\\mathfrak{p}_1) = \\\\mathrm{tensorProductTo}(\\\\mathfrak{p}_2)$ under the \"}\n  {\"name\": \"Subalgebra.LinearDisjoint.of_isField'\", \"module\": \"Mathlib.RingTheory.LinearDisjoint\", \"type\": \"{A : Type v} [Ring A] {B : Type w} [Ring B] [Algebra R A] [Algebra R B] (H : IsField (A ⊗[R] B)) (fa : A →ₐ[R] S)\\n  (fb : B →ₐ[R] S) (hfa : Function.Injective fa) (hfb : Function.Injective fb) : fa.range.LinearDisjoint fb.range\", \"doc\": \"If the tensor product $ A \\\\otimes_R B $ is a field, and $ f_A: A \\\\to S $ and $ f_B: B \\\\to S $ are injective $ R $-algebra homomorphisms, then the images $ f_A(A) $ and $ f_B(B) $ are linearly disjoint\"}\n  {\"name\": \"PrimeSpectrum.tensorProductTo\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.TensorProduct\", \"type\": \"(x : PrimeSpectrum (S ⊗[R] T)) : PrimeSpectrum S × PrimeSpectrum T\", \"doc\": \"The function maps a prime ideal $\\\\mathfrak{p}$ in the tensor product $S \\\\otimes_R T$ to the pair $(\\\\mathfrak{p}_S, \\\\mathfrak{p}_T)$, where $\\\\mathfrak{p}_S$ is the preimage of $\\\\mathfrak{p}$ under the \"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \"{s : Set S} (hs : Ideal.span s = ⊤) (Sᵣ : s → Type*) [∀ r, CommRing (Sᵣ r)] [∀ r, Algebra S (Sᵣ r)]\\n  [∀ r, Algebra R (Sᵣ r)] [∀ r, IsScalarTower R S (Sᵣ r)] [∀ r, IsLocalization.Away r.1 (Sᵣ r)]\\n  (H : ∀ r, Function.Bijective (toIntegralClosure R (Sᵣ r) B)) : Function.Bijective (toIntegralClosure R\", \"doc\": \"Let $R$ and $S$ be commutative rings, with $S$ being an $R$-algebra, and let $B$ be another $R$-algebra. For a ring $A$ and an $A$-algebra $C$, let $\\\\overline{C}^A$ denote the integral closure of $A$ \"}\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.TensorProduct\", \"type\": \": IsEmbedding (tensorProductTo R S T)\", \"doc\": \"If the ring homomorphism $ R \\\\to S $ is surjective on stalks, then the induced continuous map $ \\\\operatorname{Spec}(S \\\\otimes_R T) \\\\to \\\\operatorname{Spec}(S) \\\\times \\\\operatorname{Spec}(T) $ is a topol\"}\n  {\"name\": \"TensorProduct.toIntegralClosure\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \"(B : Type*) [CommRing B] [Algebra R B] : S ⊗[R] integralClosure R B →ₐ[S] integralClosure S (S ⊗[R] B)\", \"doc\": \"The algebra homomorphism from $ S \\\\otimes_R \\\\overline{B}^R $ to $ \\\\overline{S \\\\otimes_R B}^S $, where $ \\\\overline{B}^R $ denotes the integral closure of $ R $ in $ B $, and $ \\\\overline{S \\\\otimes_R B}^\"}\n  {\"name\": \"PrimeSpectrum.primeSpectrumProd\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \": PrimeSpectrum (R × S) ≃ PrimeSpectrum R ⊕ PrimeSpectrum S\", \"doc\": \"The canonical isomorphism between the prime spectrum of the product semiring $ R \\\\times S $ and the disjoint union of the prime spectra of $ R $ and $ S $, established by mapping each prime ideal $ \\\\m\"}\n  {\"name\": \"PrimeSpectrum.primeSpectrumProdHomeo\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": PrimeSpectrum (R × S) ≃ₜ PrimeSpectrum R ⊕ PrimeSpectrum S\", \"doc\": \"The canonical homeomorphism between the prime spectrum of the product semiring $ R \\\\times S $ and the disjoint union $ \\\\mathrm{Spec}(R) \\\\sqcup \\\\mathrm{Spec}(S) $, induced by the Zariski topology. This\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an infinite sequence of distinct primes with residue fields over a common field the closure of the off diagonal tensor spectra meets the absolute diagonal",
+   "results": "PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux; PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable; PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks; PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable; PrimeSpectrum.exists_maximal_notMem_range_sigmaToPi_of_infinite; PrimeSpectrum.tensorProductTo; PrimeSpectrum.nontrivial_iff_mem_rangeComap; Ideal.ResidueField.exists_smul_eq_tmul_one. The infinite-product maximal ideal is only the residual-locus step, not the off-diagonal closure conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match: no exact statement or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-space-decent",
+  "date": "2026-10-23",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. Second paragraph of Tag 088J: apply lemma-infinite-number to a countable subfamily of pairwise distinct chart points if the etale field fibre is infinite.",
+   "via": [
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-infinite-primes-off-diagonal-closure",
+  "worker": "stage1",
+  "summary": "Preserved the absolute-diagonal statement and expanded the product-ring proof. Compatible common-overfield embeddings let every off-diagonal coordinate be an actual K-valued point, so the closure is computed directly from its vanishing ideal, avoiding the unjustified general jointly-injective-family density argument. One new statement-only algebraic kernel lemma; all other non-elementary inputs already exist.",
+  "blueprint": "Realizes the existing provenance chain to det-thm-sf-ctf-stability-direct-images proof (3), through locally-separated decency, Tag 088J second paragraph: its Tag 088I auxiliary infinite-primes argument. The ancestor command returns None for this already broken imported chain, so the existing null from.node and its via list are preserved; the new node extends that same chain. Steps follow Tag 088I: product reduction (1), coordinate kernel (2), closure (3), nonempty residual locus (4), absolute-diagonal pushforward (5).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-family-common-extension-field",
+    "why": "Only simultaneous compatible embeddings of countably many field extensions are used to refine the product-of-fields argument of Tag 088I. This is a generic field-theory tool, not a trace-formula step; the unit has no other arbitrary-family common-overfield node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-family-common-extension-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-62e3332ee",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-62e3332ee (reviewer sub-agent of L); spot-checked: PASS, no files changed. I read the item (5 steps), the new node lem-sfb-sequence-tensor-off-diagonal-kernel, every cited statement and Stacks 088I/088J/0CNJ (tags file confirms the labels). Status: no repair note exists for this item; in clones/live and side-live it is still unsplit, so this is a first delivery and not superseded. Statement: unchanged and agrees with 088I hypothesis by hypothesis; tensor products are over Z as 088J requires. Source error confirmed: 088I's step 'jointly injective, hence dense' fails for nonreduced rings, and it really arises there (k=F_p(t), k_n=k(t^{1/p^n}): k_n⊗_k k_m has nilpotents of unbounded index). The delivery keeps 088I's product-and-diagonal route but maps everything into one common field K, so the off-diagonal points are K-points and the closure is computed exactly as V(ker θ)=V(J). Steps: step 1 cites the common-overfield node for a countable family; the map α is a ring map with no k-structure on A. Step 2 takes ker θ=J from the new node; each coordinate kernel is prime because K is a field. Step 3 proves both inclusions from the definition of the Zariski topology. Step 4: (e_n) is proper because its elements have finite support and the index set is infinite; the Mathlib leaf gives a prime q, and μ⁻¹(q) contains J. Step 5: θ_{n,m}ψ factors through κ_n⊗_kκ_m→K, well defined because the embeddings agree on k; continuity gives f(Q) in the closure of E, and μψ=α∘mult shows f(Q) is on the diagonal. New node: true. The finite-rank column argument works; checked on e_1⊗e_2 (not in the kernel), e_1⊗e_1+e_2⊗e_2 (in J) and 1⊗1 (not in the kernel) over F_2. It is statement-only and self-contained, cites its definitions, records 5 real searches, is not a restatement (pure linear algebra, strictly smaller than the item) and has no duplicate (rg -L over dag/nodes, blueprint main-20261015). Batch-5 flag on lem-trf-family-common-extension-field: accepted. It is a generic common-overfield lemma for a family of field extensions; its full closure is 19 generic commutative-algebra nodes, with no trace-formula or duality theorem. Neither assumption leaf gives it, and the only non-trf alternative (lem-weil-common-extension-fields) covers two fields only. Its tool use is declared and accepted. No SGA. Advisory: the item's base-era stmt_deps do not cite def-weil-pbc-module-tensor-product for the ring tensor products; left unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InfinitePrimesOffDiagonalClosure",
+  "declaration": "AlgebraicGeometry.infinitePrimes_offDiagonalClosure",
+  "declarations": [
+   "AlgebraicGeometry.residueTensorMap",
+   "AlgebraicGeometry.infinitePrimes_offDiagonalClosure"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InfinitePrimesOffDiagonalClosure.lean",
+  "statement": "theorem infinitePrimes_offDiagonalClosure (A : Type u) [CommRing A] (k : Type v) [Field k] (p : ℕ → Spec (CommRingCat.of A)) (hp : Function.Injective p) [∀ n : ℕ, Algebra k ((Spec (CommRingCat.of A)).residueField (p n))] : (closure (⋃ n : ℕ, ⋃ m : ℕ, ⋃ (_ : n ≠ m), Set.range (PrimeSpectrum.comap (residueTensorMap A k (p n) (p m)))) ∩ Set.range (PrimeSpectrum.comap (Algebra.TensorProduct.lmul' ℤ (S := A)).toRingHom)).Nonempty",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ab40d232",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 088I clause by clause: ring A (Type u), field k (Type v), injective p : ℕ → Spec A, arbitrary Algebra k on Scheme.residueField (p n), ambient PrimeSpectrum (A ⊗[ℤ] A), off-diagonal union over n≠m of comap of residueTensorMap (productMap over ℤ of includeLeft/Right ∘ (ΓSpecIso.inv ≫ Γevaluation), a real map), diagonal = range of comap lmul' ℤ; conclusion (closure E ∩ diagonal).Nonempty. No extra hypotheses or universe equality. Only the lean field differs from the live node; statement verbatim in file; stmt_dep records (Field, residueField, Spec, pullback) used; proof-dep imports present (FamilyCommonExtensionFields, MinimalPrime.Basic); sorry-only; docstrings with 088I and blueprint id; no duplicate found. Minor: proof docstring merges node steps 2-3 into one, but all content is present; accepted. No compile run (nothing changed)."
+ }
+}

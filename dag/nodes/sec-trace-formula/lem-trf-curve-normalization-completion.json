@@ -34,131 +34,36 @@
    }
   },
   {
-   "text": "Let $\\mathfrak p_1,\\ldots,\\mathfrak p_t$ be the finitely many minimal primes of $A$. Apply the reduced-Noetherian total-fractions lemma to obtain the canonical isomorphism $Q(A)\\cong\\prod_i K_i$, where $K_i=A_{\\mathfrak p_i}$ is a field and $\\mathfrak p_iA_{\\mathfrak p_i}=0$. Put $D_i=A/\\mathfrak p_i$. The kernel of $A\\to K_i$ is exactly $\\mathfrak p_i$: one inclusion follows from the displayed vanishing, and if $a/1=0$, some $u\\notin\\mathfrak p_i$ has $ua=0$, so primality gives $a\\in\\mathfrak p_i$. Thus $D_i$ embeds in $K_i$; writing elements of $K_i$ as $a/u$ shows that it is its fraction field. Each $D_i$ is a local Noetherian Nagata domain by the quotient clause. Moreover $\\dim D_i=1$: the maximal ideal of $A$ is not minimal (otherwise every prime, being contained in it, equals it and $\\dim A=0$), so $\\mathfrak p_i\\subsetneq\\mathfrak m$ gives a chain of length one in $D_i$, while any longer chain would lift to one in $A$.",
+   "text": "Apply [lem-trf-nagata-normalization-dvr-branches] to the reduced local Nagata ring $A$ of dimension $1$ from step 1. It gives that $B$ is finite over $A$ and that every $B_{\\mathfrak q}$ over $\\mathfrak m$ is a DVR. The inclusion $A\\hookrightarrow B$ is the inclusion into its total ring of fractions.",
    "uses": [
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "lem-weil-pbc-finite-over-nagata-nagata"
+    "lem-trf-nagata-normalization-dvr-branches"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof of the normalization/completion clause"
+    "place": "Tags 0C3S and 0C3V, normalization and local DVR input."
    }
   },
   {
-   "text": "Let $E_i$ be the integral closure of $D_i$ in $K_i$. The Nagata condition says $D_i$ is N-2, and the Japanese-domain definition, with the degree-one extension $K_i/K_i$, says $E_i$ is a finite $D_i$-module. The one-dimensional integral-closure lemma, applied to the Noetherian domain $D_i$, gives that $E_i$ is a Dedekind domain. View $P=\\prod_i E_i$ inside $\\prod_iK_i=Q(A)$. Finite module generators of the $E_i$, placed in one coordinate at a time, generate $P$ over $A$, since $A\\twoheadrightarrow D_i$. Thus $P$ is finite over $A$, so the finite-algebra-is-integral lemma gives $P\\subseteq B$. Conversely a monic equation over $A$ for $b\\in B$ projects to a monic equation over $D_i$ for its $i$th component, which therefore belongs to $E_i$. Hence $B=P$. This proves that $B$ is finite over $A$ and identifies its factors as Dedekind domains.",
+   "text": "Put $R=\\widehat A$ and $C=B\\otimes_A R$. Step 1 supplies Noetherianness, so [lem-trf-finite-dvr-branch-completion] applies to the injective finite algebra of step 2. It gives flatness of $A\\to R$, reducedness and dimension $1$ of $R$, and integral closedness of $C$ in $Q(C)$ via its product of completed DVR branches.",
    "uses": [
-    "def-weil-pbc-nagata-ring",
-    "def-weil-pbc-japanese-domain",
-    "def-weil-pbc-integral-closure",
-    "def-weil-finitely-generated-module",
-    "lem-sc-integral-closure-dedekind-surjective-fibres",
-    "lem-weil-pbc-finite-algebra-is-integral"
+    "lem-trf-finite-dvr-branch-completion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3S, finiteness of normalization; Tag 0C3V, proof; Tag 09IG for each component normalization"
+    "place": "Tag 0C3V, final paragraph: completed DVR product."
    }
   },
   {
-   "text": "For a prime $\\mathfrak q$ of $B$ lying over $\\mathfrak m$, the product description of $B$ selects a single factor $E_i$ and a prime $\\mathfrak r$ of it: in the domain $B/\\mathfrak q$, each coordinate idempotent is $0$ or $1$, exactly one is $1$, so all the other factors disappear. Consequently $B_{\\mathfrak q}\\cong(E_i)_{\\mathfrak r}$. The contraction of $\\mathfrak r$ to $D_i$ is $\\mathfrak m/\\mathfrak p_i\\ne0$, hence $\\mathfrak r\\ne0$. Since $E_i$ is a one-dimensional domain, a nonzero prime is maximal: $0\\subsetneq\\mathfrak r\\subsetneq\\mathfrak r'$ would be a chain of length two. Apply the Dedekind-localization lemma to see that $B_{\\mathfrak q}$ is a DVR. Its completion is a DVR by the DVR-completion lemma; the DVR definition gives its principal-ideal-domain property, and the PID-normality lemma makes it a normal domain.",
+   "text": "Now [lem-trf-flat-birational-normalization-comparison] applies to $A\\subset B\\subset Q(A)$ and the flat map $A\\to R$ of step 3: $A,R$ are reduced and $B$ is finite. Since $C$ is integrally closed in $Q(C)$, its canonical map $j:C\\hookrightarrow Q(R)$ identifies it with the integral closure of $R$. The lemma gives $\\phi(a/t)=\\bar a/\\bar t$ and $j(b\\otimes r)=r\\phi(b)$, so this is exactly the required map with the stated denominator convention. Together with steps 2 and 3, this gives every clause.",
    "uses": [
-    "lem-sc-dedekind-localization-dvr",
-    "lem-weil-pbc-completion-of-dvr-is-dvr",
-    "def-sc-discrete-valuation-ring",
-    "lem-weil-pbc-pid-noetherian-normal"
+    "lem-trf-flat-birational-normalization-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof; Tags 00PD and 0AP1 for local normalizations and their completions"
-   }
-  },
-  {
-   "text": "Write $R=\\widehat A$ and $C=B\\otimes_A R$. Apply the finite-extension completion lemma with the Noetherian ring $A$, the finite algebra $B$, and the prime $\\mathfrak m$. Since $A$ is local, $A_{\\mathfrak m}=A$ (all denominators outside $\\mathfrak m$ are units). It gives a finite product decomposition $C\\cong\\prod_{\\mathfrak q\\mid\\mathfrak m}\\widehat{B_{\\mathfrak q}}$, using the tensor flip $r\\otimes b\\mapsto b\\otimes r$. The isomorphism is compatible with both the $B$- and $R$-algebra structures. Step 4 shows every factor is a normal domain. Thus $C$ is reduced and is a finite product of normal domains.",
-   "uses": [
-    "lem-weil-pbc-completion-finite-extension",
-    "def-weil-module-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof; Tag 07N9, finite-extension completion decomposition"
-   }
-  },
-  {
-   "text": "The Noetherian completion-flatness lemma and the definition of flatness apply to $A\\to R$. Tensoring the injection $A\\hookrightarrow B\\subset Q(A)$ gives an injection $i:R\\hookrightarrow C$, $r\\mapsto1\\otimes r$. Since $C$ is reduced by step 5, so is $R$: $r^n=0$ implies $i(r)^n=0$, then $i(r)=0$, then $r=0$. The completion-dimension lemma says that $R$ is Noetherian local and $\\dim R=\\dim A=1$. If $b_1,\\ldots,b_h$ generate $B$ over $A$, the elements $b_j\\otimes1$ generate $C$ over $R$, by expanding each pure tensor. Therefore $C$ is a finite $R$-module and the finite-algebra-is-integral lemma says it is integral over $R$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-completion-flat",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-completion-dimension",
-    "def-weil-finitely-generated-module",
-    "def-weil-module-base-change",
-    "lem-weil-pbc-finite-algebra-is-integral"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof of the normalization/completion clause"
-   }
-  },
-  {
-   "text": "The finite-algebra-Noetherian lemma applies to $R\\to C$, so $C$ is Noetherian and hence has finitely many minimal primes. Together with its reducedness and its finite-product-of-normal-domains description in step 5, these are all the hypotheses for the reduced-normal-total-fractions equivalence. Apply implication (3)$\\Rightarrow$(2) there: $C$ is integrally closed in $Q(C)$.",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof of the normalization/completion clause"
-   }
-  },
-  {
-   "text": "For the chosen finite generators write $b_j=a_j/t_j$ in $Q(A)$, where every $t_j$ is a non-zero-divisor of $A$. Put $s=\\prod_jt_j$. Then $s$ is a non-zero-divisor and $sB\\subseteq A$: explicitly $sb_j=a_j\\prod_{\\ell\\ne j}t_\\ell\\in A$, and extend by linearity. Multiplication by $s$ on $B$ is injective because $s$ is invertible in $Q(A)$. Tensor this injection and the injection $s:A\\to A$ with the flat $A$-module $R$. Thus multiplication by $s$ is injective on both $C$ and $R$. Here and below $s$ also denotes its image in these rings.",
-   "uses": [
-    "def-weil-finitely-generated-module",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof of the normalization/completion clause"
-   }
-  },
-  {
-   "text": "The $A$-linear map $d:B\\to A$, $b\\mapsto sb$, induces $d_R:C\\to R$, $d_R(b\\otimes r)=(sb)r$. On pure tensors, $i(d_R(c))=sc$ and $d_R(i(r))=sr$, hence these identities hold for every $c,r$. Define $j:C\\to R[1/s]$ by $j(c)=d_R(c)/s$. It is additive and sends $1$ to $1$. For multiplication, apply the injective map $i$ to obtain $i(d_R(c)d_R(c'))=s^2cc'=i(s\\,d_R(cc'))$, so $d_R(c)d_R(c')=s\\,d_R(cc')$, proving multiplicativity of $j$. If $j(c)=0$, some power of $s$ annihilates $d_R(c)$; its regularity on $R$ gives $d_R(c)=0$, hence $sc=0$ and then $c=0$. Also $j(i(r))=r$. We have therefore explicitly embedded $R\\subseteq C\\subseteq R[1/s]\\subseteq Q(R)$.",
-   "uses": [
-    "def-weil-module-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof of the normalization/completion clause"
-   }
-  },
-  {
-   "text": "These embeddings identify $Q(C)$ with $Q(R)$. Indeed if $r\\in R$ is a non-zero-divisor and $rc=0$ in $C$, multiply by $s$ to get $r(sc)=0$ in $R$, since $sC\\subseteq R$. Thus $sc=0$ and $c=0$, so $r$ remains regular in $C$. Conversely if $t\\in C$ is regular, then $st\\in R$ is regular on $R$: $(st)r=0$ in $C$ implies $r=0$ by the regularity of $s$ and $t$ on $C$. Hence every fraction $c/t\\in Q(C)$ equals $(sc)/(st)\\in Q(R)$. The inclusion in the other direction sends $a/r$ to the same fraction in $Q(C)$; these formulas are inverse and agree on $C$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof of the normalization/completion clause"
-   }
-  },
-  {
-   "text": "Under this common fraction-ring identification, step 6 makes every element of $C$ integral over $R$. Conversely, an element of $Q(R)=Q(C)$ integral over $R$ satisfies the same monic equation over $C$, so step 7 puts it in $C$. Thus $j$ identifies $C$ with the integral closure of $R$ in $Q(R)$. Finally every non-zero-divisor $t$ of $A$ remains one in $R$, by tensoring the injection $t:A\\to A$ with $R$ using flatness. Thus $A\\to R$ extends to $\\phi:Q(A)\\to Q(R)$ with $\\phi(a/t)=\\bar a/\\bar t$. For $b=a/t\\in B$, the identity $t(b\\otimes1)=a\\otimes1$ in $C$ forces $j(b\\otimes1)=\\bar a/\\bar t=\\phi(b)$, and $R$-linearity gives $j(b\\otimes r)=r\\phi(b)$. This proves that the normalization identification is precisely the canonical map with the denominator convention required in the statement.",
-   "uses": [
-    "def-weil-pbc-integral-closure",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3V, proof of the normalization/completion clause"
+    "place": "Tag 0C3V, finite integral normal subalgebra inside the localized base; explicit canonical denominator calculation."
    }
   }
  ],
@@ -170,28 +75,14 @@
   "lem-weil-pbc-polynomial-nagata",
   "lem-weil-pbc-finite-over-nagata-nagata",
   "lem-weil-pbc-nagata-localization",
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-  "def-weil-pbc-integral-closure",
-  "def-weil-finitely-generated-module",
-  "lem-sc-integral-closure-dedekind-surjective-fibres",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-sc-dedekind-localization-dvr",
-  "lem-weil-pbc-completion-of-dvr-is-dvr",
-  "def-sc-discrete-valuation-ring",
-  "lem-weil-pbc-pid-noetherian-normal",
-  "lem-weil-pbc-completion-finite-extension",
-  "def-weil-module-base-change",
-  "lem-weil-pbc-noetherian-completion-flat",
-  "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-completion-dimension",
-  "lem-weil-pbc-finite-algebra-noetherian",
-  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+  "lem-trf-nagata-normalization-dvr-branches",
+  "lem-trf-finite-dvr-branch-completion",
+  "lem-trf-flat-birational-normalization-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0C3S and 0C3V, normalization finiteness and the finite-product-of-completed-DVRs proof; the latter argument is applied before reducedness, which then follows by the flat injection. The common-denominator computation makes the total-fraction-ring identification explicit."
+  "place": "Tags 0C3S and 0C3V, unchanged component/complete-DVR route; four-step assembly after extracting three independent arguments. Full pre-repair argument and assignment are retained in report.md."
  },
  "mathlib_searches": [
   {
@@ -275,10 +166,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-curve-normalization-completion",
   "worker": "stage1",
-  "summary": "Checked the unchanged statement against Stacks 0C3S and 0C3V. Reused existing Nagata stability, total-fractions, component Dedekind, finite-completion and DVR nodes. Completed the explicit finite-generator denominator calculation and the canonical fraction map. The completed normalization is reduced first, so flat injection proves reducedness of the completion without a new analytically-unramified lemma. No new nodes.",
+  "summary": "Repair of the batch5 re-split return: unchanged statement, three independently claimable statement-only unsplit lemmas (normalization branches, completed DVR algebra, canonical flat birational comparison), and a short four-step assembly. The complete old eleven-step argument is preserved and assigned in report.md; all new searches were run through msearch.py.",
   "blueprint": "Realizes the inherited local normalization/completion input before the simple-pole branch calculation, along the full existing from/via ancestry of lem-trf-local-term-locality. The current main-20261015 ancestor/unit uses the contraction route; this historical auxiliary item is not a replacement for any of its steps. Whole-blueprint search found no statement-identical blueprint node.",
   "tool_uses": [
    {
@@ -292,34 +183,6 @@
    {
     "node": "lem-weil-pbc-nagata-localization",
     "why": "Localization supplies Nagata for an essentially finite type algebra; it does not replace any local-term argument."
-   },
-   {
-    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "why": "Its product of minimal-prime fields identifies the ambient total ring for normalization, a generic algebra tool absent from this unit."
-   },
-   {
-    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
-    "why": "Only its Dedekind conclusion for each one-dimensional domain normalization is used, with the trivial field extension, as in Tag 0C3V; no curve-estimate route is imported."
-   },
-   {
-    "node": "lem-sc-dedekind-localization-dvr",
-    "why": "Localizations at the verified maximal primes of the component Dedekind domains are DVRs, exactly the local input of Tag 0C3V."
-   },
-   {
-    "node": "lem-weil-pbc-completion-of-dvr-is-dvr",
-    "why": "The completed branch rings are DVRs; the local-term unit has no DVR completion result."
-   },
-   {
-    "node": "lem-weil-pbc-completion-finite-extension",
-    "why": "Its compatible finite product decomposition identifies the completed normalization factors, as in Tag 0C3V; the unit has no algebraic completion decomposition."
-   },
-   {
-    "node": "lem-weil-pbc-completion-dimension",
-    "why": "Its Noetherian-local completion and dimension conclusion supplies the required dimension of the completed ring."
-   },
-   {
-    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
-    "why": "Its implication (3) to (2) turns the completed DVR product into integral closedness in its total fraction ring; this is a generic normalization tool."
    }
   ]
  },
@@ -336,12 +199,12 @@
   "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q16-f64e3b420",
-  "group": "Q16",
+  "reviewer": "NT-cc-Q72-806fe5fbe",
+  "group": "Q72",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-f64e3b420 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited statements against Stacks 0C3S/0C3V and supporting algebra sources. All eleven steps, hypotheses, canonical denominator map, edge cases, dependency closure and generic tool uses check out. No repairs needed; review.md written. Pivot metadata was absent from the snapshot; no prohibited machinery appears in the inspected closure."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-806fe5fbe (reviewer sub-agent of L); spot-checked: Re-split answers the 2026-10-22 batch5 note (live repair note released; live still has the old 11-step proof, so this delivery is not superseded). Statement byte-identical. A script check found all 11 old step texts verbatim in the report allocation, and each new node's statement carries every conclusion of its assigned steps. Node 1, nagata-normalization-dvr-branches (old 2–4a): finitely many minimal primes, Q(A)=∏K_i, D_i 1-dim Nagata domains, E_i finite Dedekind, B=∏E_i finite, B_q=(E_i)_r a DVR. Node 2, finite-dvr-branch-completion (old 4b–7): C≅∏(B_q)^, flatness, R↪C, R and C reduced, dim R=1, C finite/Noetherian and integrally closed in Q(C). Node 3, flat-birational-normalization-comparison (old 8–11): S_A→S_R, d_R, j=d_R/f(s) injective, Q(C)=Q(R), integral-closure identification. All three are true; checked on a DVR, the node k[x,y]_(x,y)/(xy) and B=A. Statements are of comparable size (1687/1571/1581 chars) and none restates the parent. Parent is 1905 chars: old step 1 is kept as an assembly of the existing Nagata stability lemmas, and steps 2–4 are citations whose hypotheses match exactly and give the stated denominator convention. Source: Stacks varieties.tex 0C3V/0C3S, read; no SGA. Dup search over the DAG found only related nodes (lem-per-normalization-completion-base-change, lem-exc-punctured-curve-branches, lem-sc-semilocal-dim-one-normalization), none duplicates. Batch-5: the three flagged citations are new general commutative algebra with def-only stmt_deps, not part of the proof of the trace formula or of Poincaré duality, so accepted. Maintainer note: the item's tool_uses still lists 7 lemmas that only the old-step allocation now uses; prune to the three Nagata lemmas."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.CurveNormalizationCompletion",
@@ -361,5 +224,16 @@
   "result": "fix",
   "note": "Statement and source checks passed; scompile.py returned exit code 0. Repaired the H11 placeholder second-reading section with a complete replacement report under fixes/. Full findings are recorded in review.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

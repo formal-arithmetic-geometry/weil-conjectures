@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-finite-algebra-units-affine-chart",
+ "kind": "statement",
+ "title": "Determinant-open coordinates for the unit scheme of a finite algebra",
+ "statement": "Let $k$ be a field [def-weil-field], let $A$ be a nonzero finite-dimensional commutative $k$-algebra [def-weil-pbc-algebra-hom-quotient, def-weil-finite-dimensional-subspace], and let $e_1,\\ldots,e_d$ be a $k$-basis of $A$, with $d\\geq1$. Write $e_i e_j=\\sum_{h=1}^d c_{hij}e_h$ with $c_{hij}\\in k$. In the polynomial algebra $B=k[x_1,\\ldots,x_d]$ [def-weil-pbc-mv-polynomial-ring], set\n$$M(x)_{hj}=\\sum_{i=1}^d c_{hij}x_i,\\qquad N(x)=\\det M(x)\\in B,$$\nwith determinant as in [def-weil-pbc-matrix-determinant]. Let $U=D(N)\\subseteq\\operatorname{Spec}B=\\mathbb A^d_k$ be the open subscheme whose points are the prime ideals not containing $N$ [def-weil-affine-spectrum, def-sbc-affine-space, def-weil-open-immersion]. For every commutative $k$-algebra $R$, evaluation identifies\n$$U(R)=\\{(a_1,\\ldots,a_d)\\in R^d:N(a_1,\\ldots,a_d)\\in R^\\times\\},$$\nand the rule $(a_i)\\mapsto\\sum_i e_i\\otimes a_i$ is a bijection $U(R)\\simeq(A\\otimes_kR)^\\times$, natural in $R$ [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Here $B'^\\times$ denotes elements with multiplicative inverses in the commutative ring $B'$, and $X(R)=\\operatorname{Hom}_k(\\operatorname{Spec}R,X)$. If $P$ is any affine $k$-scheme with natural bijections $P(R)\\simeq(A\\otimes_kR)^\\times$ for all commutative $k$-algebras $R$, these bijections induce a $k$-scheme isomorphism $U\\simeq P$. Finally, if $1_A=\\sum_i b_i e_i$ with $b_i\\in k$, then $N(b_1,\\ldots,b_d)=1$, so $U$ is nonempty. No separability or reducedness assumption on $A$, and no reducedness assumption on $R$, is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.60, proof, printed p.250: basis coordinates and norm polynomial. The identical multiplication-matrix construction applies to any finite-dimensional commutative algebra. For arbitrary test algebras R, read norm invertible, rather than merely nonzero (see report Source error)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-affine-spectrum",
+  "def-sbc-affine-space",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=B[1/N]$. By [lem-weil-pbc-affine-open-section-vanishing-prime](b), $U=D(N)$ is affine with coordinate ring $D$, and its inclusion corresponds to $B\\to D$. By [def-weil-affine-spectrum] and the polynomial universal property [def-weil-pbc-mv-polynomial-ring], morphisms $\\operatorname{Spec}R\\to\\operatorname{Spec}B$ over $k$ are evaluations $x_i\\mapsto a_i$. The localization definition [def-weil-ring-localization-away] makes $N/1$ a unit of $D$; hence a map $D\\to R$ restricts to an evaluation with $N(a)$ a unit. Conversely, [lem-weil-pbc-localization-away-universal-property] extends every such evaluation uniquely to $D\\to R$. The extension respects $k$ because its restriction on $B$ does. This proves exactly the asserted description of $U(R)$, including the zero test ring.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.60, proof, printed p.250; multiplication-matrix generalization to a finite commutative algebra, with unit in place of nonzero for arbitrary test algebras"
+   }
+  },
+  {
+   "text": "Fix a commutative $k$-algebra $R$. By [lem-weil-pbc-free-module-base-change-free], $(e_i\\otimes1)_{i=1}^d$ is an $R$-basis of $A\\otimes_kR$. Thus $a\\mapsto u(a)=\\sum_i e_i\\otimes a_i$ is a bijection from $R^d$ to its underlying module. The tensor multiplication formula [lem-weil-pbc-algebra-tensor-pushout-universal-property](1) gives $u(a)(e_j\\otimes1)=\\sum_h(e_h\\otimes1)(\\sum_i c_{hij}a_i)$. Hence multiplication by $u(a)$ has matrix $T=M(a)$. In the Leibniz determinant formula [def-weil-pbc-matrix-determinant], evaluation commutes with every finite sum and product and with the signs. Therefore $\\det T=N(a)$.",
+   "uses": [
+    "lem-weil-pbc-free-module-base-change-free",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.60, proof, printed p.250; multiplication-matrix generalization to a finite commutative algebra, with unit in place of nonzero for arbitrary test algebras"
+   }
+  },
+  {
+   "text": "If $u(a)$ has inverse $v$, the matrices of multiplication by $u(a)$ and $v$ in the basis of step 2 are two-sided inverses: their products act identically on each basis vector. Apply [lem-weil-pbc-matrix-left-inverse-minors](2) with $n=m=d$, matrix $T$, scalar $f=1$ and this inverse matrix. The unique maximal minor of a square matrix is $\\det T$, so $1\\in(\\det T)$; thus $\\det T$ is a unit. Conversely, if $\\det T$ is a unit, [lem-weil-pbc-matrix-adjugate-identity] makes $(\\det T)^{-1}\\operatorname{adj}(T)$ an inverse matrix. Apply this inverse to the coordinate vector of $1\\otimes1$, obtaining an element $v$ with $u(a)v=1$. Commutativity gives $vu(a)=1$ as well. Consequently $u(a)$ is a unit exactly when $N(a)$ is a unit. Restricting the bijection in step 2 to these subsets, and using step 1, proves $U(R)\\simeq(A\\otimes_kR)^\\times$; the inverse of a unit is unique, so using unit elements or units with their inverses gives the same set.",
+   "uses": [
+    "lem-weil-pbc-matrix-left-inverse-minors",
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 07DQ (lemma-matrix-left-inverse), square case of (2), and 080R (lemma-matrix-right-inverse), adjugate identity in its proof"
+   }
+  },
+  {
+   "text": "For a $k$-algebra homomorphism $\\varphi:R\\to R\\prime$, the induced tensor map sends $e_i\\otimes a_i$ to $e_i\\otimes\\varphi(a_i)$; its existence and uniqueness follow by applying [lem-weil-pbc-algebra-tensor-pushout-universal-property](2),(3) to the two maps $A\\to A\\otimes_kR\\prime$ and $R\\to A\\otimes_kR\\prime$. It sends a unit and its inverse to mutually inverse elements. On coordinates it sends $a$ to $(\\varphi(a_i))$, and $N(\\varphi(a_i))=\\varphi(N(a_i))$ by the finite-sum formula of step 2. On $U(R)$ the extension maps commute with $\\varphi$ by their uniqueness in step 1. Therefore both directions of the restricted coordinate bijection commute with every $\\varphi$, proving naturality without any assumption that $R$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.60, proof, printed p.250; multiplication-matrix generalization to a finite commutative algebra, with unit in place of nonzero for arbitrary test algebras"
+   }
+  },
+  {
+   "text": "Let $P$ be as in the statement and put $C=\\Gamma(P,\\mathcal O_P)$, with its structural $k$-algebra map. Since $P$ and $U$ are affine, [def-weil-affine-spectrum] identifies their $R$-points with $\\operatorname{Hom}_{k\\text{-alg}}(C,R)$ and $\\operatorname{Hom}_{k\\text{-alg}}(D,R)$ respectively. The requirement that a scheme map be over $k$ is exactly that its corresponding ring map commute with the two structural maps from $k$, by contravariant functoriality of $\\operatorname{Spec}$. Composing the natural bijection of steps 1--4 with the inverse of the given bijection for $P$ gives natural bijections $\\Phi_R:\\operatorname{Hom}_{k\\text{-alg}}(D,R)\\to\\operatorname{Hom}_{k\\text{-alg}}(C,R)$. Apply [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] in the category of commutative $k$-algebras: $\\theta=\\Phi_D(\\mathrm{id}_D):C\\to D$ is an isomorphism inducing these very bijections. Its spectrum is the required $k$-scheme isomorphism $U\\simeq P$. This uses only affine test schemes, not a Yoneda assertion on all schemes.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.60, proof, printed p.250; multiplication-matrix generalization to a finite commutative algebra, with unit in place of nonzero for arbitrary test algebras"
+   }
+  },
+  {
+   "text": "For the coordinates $b_i$ of $1_A$, the $j$th column of $M(b)$ is the coordinate vector of $(\\sum_i b_i e_i)e_j=e_j$. Uniqueness of basis expansions gives $M(b)=I_d$. In the determinant formula [def-weil-pbc-matrix-determinant], the identity permutation contributes $1$ and every other permutation contributes $0$, so $N(b)=1$. Step 1 with $R=k$ yields a $k$-point of $U$. The source $\\operatorname{Spec}k$ has a point by [def-weil-affine-spectrum], so this morphism exhibits a point of $U$, proving nonemptiness. All arguments used only freeness and commutativity; nilpotents in $A$ or $R$ do not affect them.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.60, proof, printed p.250; multiplication-matrix generalization to a finite commutative algebra, with unit in place of nonzero for arbitrary test algebras"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lem-weil-pbc-free-module-base-change-free",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-weil-pbc-matrix-left-inverse-minors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.60, proof, printed p.250; multiplication-matrix generalization to a finite commutative algebra, with unit in place of nonzero for arbitrary test algebras"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isUnit.*norm|norm.*isUnit|WeilRestriction|weilRestriction|units.*[Oo]pen|[Oo]pen.*units",
+   "results": "{\"t\": \"2026-10-24T08:55:16Z\", \"tool\": \"grep\", \"query\": \"isUnit.*norm|norm.*isUnit|WeilRestriction|weilRestriction|units.*[Oo]pen|[Oo]pen.*units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/PadicIntegers.lean\", \"Mathlib/NumberTheory/Padics/PadicIntegers.lean\", \"Mathlib/RingTheory/ChainOfDivisors.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\"], \"digest\": \"171d82931edf1416\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not give the asserted algebraic-torus quotient or parametrization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, IsUnit",
+   "results": "{\"t\": \"2026-10-24T08:55:16Z\", \"tool\": \"loogle\", \"query\": \"Algebra.norm, IsUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: linear-map determinant invertibility and basic-open APIs do not state representability or the coordinate isomorphism of the finite-algebra unit functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil restriction of the multiplicative group is the determinant nonvanishing open subset of affine space",
+   "results": "{\"t\": \"2026-10-24T08:55:16Z\", \"tool\": \"leansearch\", \"query\": \"Weil restriction of the multiplicative group is the determinant nonvanishing open subset of affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"Matrix.GeneralLinearGroup.det\", \"MulHom.restrict\", \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"Subgroup.HasDetOne\", \"LinearEquiv.det_symm\"], \"digest\": \"e322ad5ad6f5e8fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: linear-map determinant invertibility and basic-open APIs do not state representability or the coordinate isomorphism of the finite-algebra unit functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The units in a finite dimensional commutative algebra are represented by the principal open subset of affine space defined by the determinant of multiplication",
+   "results": "{\"t\": \"2026-10-24T08:55:18Z\", \"tool\": \"leanfinder\", \"query\": \"The units in a finite dimensional commutative algebra are represented by the principal open subset of affine space defined by the determinant of multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.isUnit\", \"Algebra.isOpen_smoothLocus\", \"resolventSet\", \"Algebra.SubmersivePresentation.jacobian_isUnit\", \"LinearMap.isUnit_iff_isUnit_det\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\"], \"digest\": \"b365dec5732828ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: linear-map determinant invertibility and basic-open APIs do not state representability or the coordinate isomorphism of the finite-algebra unit functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite free algebra, invertibility of an element is equivalent to invertibility of its multiplication determinant and defines an affine open unit scheme",
+   "results": "{\"t\": \"2026-10-24T08:55:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite free algebra, invertibility of an element is equivalent to invertibility of its multiplication determinant and defines an affine open unit scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.Spec_basicOpen\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"c2d7cad5555465f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: linear-map determinant invertibility and basic-open APIs do not state representability or the coordinate isomorphism of the finite-algebra unit functor"
+  },
+  {
+   "tool": "grep",
+   "query": "isUnit_iff_isUnit_det|isUnit_norm_iff|norm_isUnit",
+   "results": "{\"t\": \"2026-10-24T08:58:48Z\", \"tool\": \"grep\", \"query\": \"isUnit_iff_isUnit_det|isUnit_norm_iff|norm_isUnit\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/DedekindDomain/Different.lean\"], \"digest\": \"2ac4091010464eae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: linear-map determinant invertibility and basic-open APIs do not state representability or the coordinate isomorphism of the finite-algebra unit functor"
+  },
+  {
+   "tool": "grep",
+   "query": "isUnit_iff_isUnit_det",
+   "results": "{\"t\": \"2026-10-24T08:58:48Z\", \"tool\": \"grep\", \"query\": \"isUnit_iff_isUnit_det\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\"], \"digest\": \"927de813d0ad4d95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: linear-map determinant invertibility and basic-open APIs do not state representability or the coordinate isomorphism of the finite-algebra unit functor"
+  },
+  {
+   "tool": "grep",
+   "query": "isUnit_iff_isUnit_det|Spec_basicOpen|baseChange_apply",
+   "results": "{\"t\": \"2026-10-24T09:16:20Z\", \"tool\": \"grep\", \"query\": \"isUnit_iff_isUnit_det|Spec_basicOpen|baseChange_apply\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\"], \"digest\": \"e53d641ddd90ae3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The invertible elements of a finite free algebra are represented by a principal open subscheme of affine space",
+   "results": "{\"t\": \"2026-10-24T09:16:21Z\", \"tool\": \"leansearch\", \"query\": \"The invertible elements of a finite free algebra are represented by a principal open subscheme of affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.basicOpen\", \"spectrum.inv₀_mem_inv\", \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk\"], \"digest\": \"163cbff701af1f74\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.isUnit_iff_isUnit_det",
+   "results": "{\"t\": \"2026-10-24T09:16:21Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.isUnit_iff_isUnit_det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LinearMap.isUnit_iff_isUnit_det\"], \"digest\": \"65dc8972cf5e1dab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The units of a finite dimensional commutative algebra are represented by the determinant open subset of affine space",
+   "results": "{\"t\": \"2026-10-24T09:16:22Z\", \"tool\": \"leanfinder\", \"query\": \"The units of a finite dimensional commutative algebra are represented by the determinant open subset of affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.isUnit\", \"Algebra.SubmersivePresentation.jacobian_isUnit\", \"LinearMap.isUnit_iff_isUnit_det\", \"FiniteDimensional.exists_mul_eq_one\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"LinearMap.coe_equivOfIsUnitDet\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\"], \"digest\": \"53a2931466556b09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction of the multiplicative group represented by localization at the algebra norm polynomial",
+   "results": "{\"t\": \"2026-10-24T09:19:42Z\", \"tool\": \"leanfinder\", \"query\": \"Weil restriction of the multiplicative group represented by localization at the algebra norm polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galRestrict\", \"Algebra.norm_localization\", \"Algebra.intNormAux\", \"galRestrictHom\", \"prod_galRestrict_eq_norm\", \"groupCohomology.norm_ofAlgebraAutOnUnits_eq\", \"galRestrict'\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\"], \"digest\": \"af4bf0fd15f6c455\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isUnit_iff_isUnit_det",
+   "results": "{\"t\": \"2026-10-24T09:23:47Z\", \"tool\": \"grep\", \"query\": \"theorem isUnit_iff_isUnit_det\", \"sub\": \"LinearAlgebra/Matrix/NonsingularInverse.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"127\"], \"digest\": \"bd1c7af67d79ba30\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible square matrix over a commutative ring is equivalent to its determinant being invertible",
+   "results": "{\"t\": \"2026-10-24T09:23:47Z\", \"tool\": \"leansearch\", \"query\": \"An invertible square matrix over a commutative ring is equivalent to its determinant being invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.invertibleEquivDetInvertible\", \"Matrix.invertibleOfIsUnitDet\", \"Matrix.invertibleOfDetInvertible\", \"Matrix.detInvertibleOfInvertible\", \"Matrix.invertibleEquivDetInvertible_apply\", \"Matrix.isUnits_det_units\", \"Matrix.toLinearEquiv\", \"Matrix.isUnit_det_of_invertible\"], \"digest\": \"70cbee642d777641\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.isUnit_iff_isUnit_det",
+   "results": "{\"t\": \"2026-10-24T09:23:47Z\", \"tool\": \"loogle\", \"query\": \"Matrix.isUnit_iff_isUnit_det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Matrix.isUnit_iff_isUnit_det\"], \"digest\": \"5872d889b7755d6e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square matrix over any commutative ring is invertible if and only if its determinant is a unit",
+   "results": "{\"t\": \"2026-10-24T09:23:52Z\", \"tool\": \"leanfinder\", \"query\": \"A square matrix over any commutative ring is invertible if and only if its determinant is a unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.isUnit_iff_isUnit_det\", \"Matrix.invertibleEquivDetInvertible\", \"Matrix.invertibleEquivDetInvertible_apply\", \"Matrix.invertibleOfIsUnitDet\", \"Matrix.isUnit_det_of_invertible\", \"Matrix.invertibleOfDetInvertible\", \"Matrix.invertibleEquivDetInvertible_symm_apply\", \"Matrix.isUnit_nonsing_inv_det_iff\"], \"digest\": \"cb0064cd26e70b4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isUnit_iff_isUnit_det",
+   "results": "{\"t\": \"2026-10-24T09:25:33Z\", \"tool\": \"grep\", \"query\": \"theorem isUnit_iff_isUnit_det\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\"], \"digest\": \"99cf9ef1c57ac661\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give determinant invertibility, norms or basic-open ingredients only; used existing DAG ingredients instead"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-unirational-parametrization",
+  "date": "2026-10-24",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a). Milne 17.93(b), proof: 'which are unirational over k (see 12.64)'. Supporting input: Proposition 12.60, proof, printed p.250: basis coordinates and norm polynomial. The identical multiplication-matrix construction applies to any finite-dimensional commutative algebra. For arbitrary test algebras R, read norm invertible, rather than merely nonzero (see report Source error).",
+   "via": [
+    "lem-sfb-torus-unirational-parametrization",
+    "lem-sfb-infinite-field-reductive-rational-density",
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-algebra-units-affine-chart",
+  "worker": "stage1",
+  "summary": "Six-step proof of all clauses, with no new nodes: principal-open localization points; base-changed basis and multiplication matrix; determinant unit criterion from existing scalar-left-inverse and adjugate nodes; explicit naturality; affine representability uniqueness by co-Yoneda; identity coordinates and nonemptiness. Statement unchanged. Milne 12.60 is extended from a field extension to a finite commutative algebra and its nonzero wording is read as unit for arbitrary test rings.",
+  "blueprint": "Supporting basis-coordinate and norm-polynomial argument of Milne 12.60 in the inherited from.place chain, serving the torus-unirationality input to the recorded direct-image route; latest blueprint direct-images proof (3) read; this item has no direct blueprint counterpart.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-1ef7fe457",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-1ef7fe457 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes and has six proof steps. Source: Milne iAG2017 Prop. 12.60 (printed p.250) generalises from k'/k to any finite commutative algebra, using the determinant of the multiplication matrix. Milne's 'nonzero norm' is correctly read as 'unit norm' for arbitrary test rings R: over R=k[t] with A=k, t is nonzero but not a unit. Steps: (1) affine-open-section-vanishing-prime(b) plus the localization definition and universal property give U(R) = {a : N(a) a unit}, including R=0. (2) The free-module base-change basis (e_i⊗1) and the tensor product formula give T=M(a); I recomputed the index convention M_hj=Σ_i c_hij a_i. (3) Forward: matrix-left-inverse-minors(2) with n=m=d, f=1 gives 1 ∈ (det T). Reverse: the adjugate identity applied to the coordinates of 1⊗1, then commutativity. Correct over any commutative ring, with no field linear algebra. (4) Naturality comes from tensor universal property (2),(3) and uniqueness of the localization extension. (5) The co-Yoneda node applies in commutative k-algebras with direction θ=Φ_D(id): C→D, so Spec θ: U→P; the test category matches the hypothesis. (6) M(1_A)=I, so N=1, giving a k-point and nonemptiness. Small cases checked: k (N=x), k×k (x1x2), k[ε]/ε² (x1²), and R=0. Every proof dependency is a Mathlib leaf or the Lean-closed left-inverse-minors node, so tool_uses=[] is correct. Duplicate search: finite-free-algebra-map-coordinates, a1 determinant-norm nodes, pd norm-prime criterion, endomorphism-invertible-iff-det-nonzero, sc iso-locus basic open and torus-induced-quotient; none restates the item. The citer torus-unirational-parametrization uses exactly the stated clauses. Minor issues, no change made: the inherited null blueprint from.node, the missing lean_audit field, stale creator search-verdict text, and 'R\\prime' notation in step 4."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteAlgebraUnitsAffineChart",
+  "declaration": "AlgebraicGeometry.FiniteAlgebraUnits.affineChart",
+  "declarations": [
+   "AlgebraicGeometry.FiniteAlgebraUnits.multiplicationMatrix",
+   "AlgebraicGeometry.FiniteAlgebraUnits.normPolynomial",
+   "AlgebraicGeometry.FiniteAlgebraUnits.openSubset",
+   "AlgebraicGeometry.FiniteAlgebraUnits.chart",
+   "AlgebraicGeometry.FiniteAlgebraUnits.affineChart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAlgebraUnitsAffineChart.lean",
+  "statement": "theorem affineChart [Nontrivial A] [FiniteDimensional k A] (e : Module.Basis (Fin d) k A) (hd : 0 < d) : IsAffine (chart e).left ∧ (∀ b : Fin d → k, (∑ i, b i • e i) = 1 → MvPolynomial.aeval b (normPolynomial e) = 1) ∧ Nonempty (chart e).left ∧ ∃ E : ∀ R : CommAlgCat.{u} k, (((Spec (.of R)).asOver (Spec (.of k)) ⟶ chart e) ≃ {a : Fin d → R // IsUnit (MvPolynomial.aeval a (normPolynomial e))}), ∃ V : ∀ R : CommAlgCat.{u} k, ({a : Fin d → R // IsUnit (MvPolynomial.aeval a (normPolynomial e))} ≃ (A ⊗[k] R)ˣ), (∀ (R : CommAlgCat.{u} k) (p : (Spec (.of R)).asOver (Spec (.of k)) ⟶ chart e), p.left ≫ (openSubset e).ι = Spec.map (CommRingCat.ofHom (MvPolynomial.aeval (E R p).val).toRingHom)) ∧ (∀ (R : CommAlgCat.{u} k) (a : {a : Fin d → R // IsUnit (MvPolynomial.aeval a (normPolynomial e))}), (V R a : A ⊗[k] R) = ∑ i, (e i) ⊗ₜ[k] (a.val i)) ∧ (∀ (R S : CommAlgCat.{u} k) (φ : R ⟶ S) (p : (Spec (.of R)).asOver (Spec (.of k)) ⟶ chart e), (E S ((Spec.map (CommRingCat.ofHom φ.hom.toRingHom)).asOver _ ≫ p)).val = fun i ↦ φ.hom ((E R p).val i)) ∧ (∀ (R S : CommAlgCat.{u} k) (φ : R ⟶ S) (a : {a : Fin d → R // IsUnit (MvPolynomial.aeval a (normPolynomial e))}) (b : {b : Fin d → S // IsUnit (MvPolynomial.aeval b (normPolynomial e))}), b.val = (fun i ↦ φ.hom (a.val i)) → V S b = Units.map (Algebra.TensorProduct.map (AlgHom.id k A) φ.hom).toMonoidHom (V R a)) ∧ (∀ (P : Over (Spec (.of k))) [IsAffine P.left] (β : ∀ R : CommAlgCat.{u} k, (((Spec (.of R)).asOver (Spec (.of k)) ⟶ P) ≃ (A ⊗[k] R)ˣ)), (∀ (R S : CommAlgCat.{u} k) (φ : R ⟶ S) (p : (Spec (.of R)).asOver (Spec (.of k)) ⟶ P), β S ((Spec.map (CommRingCat.ofHom φ.hom.toRingHom)).asOver _ ≫ p) = Units.map (Algebra.TensorProduct.map (AlgHom.id k A) φ.hom).toMonoidHom (β R p)) → ∃ ι : chart e ≅ P, ∀ (R : CommAlgCat.{u} k) (p : (Spec (.of R)).asOver (Spec (.of k)) ⟶ chart e), β R (p ≫ ι.hom) = V R (E R p))",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16ee54c47",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read node, Milne 12.60 source note, all 9 mathlib stmt_dep records, module and report. Lean matches clause by clause: M_hj=Σ_i c_hij x_i via e.repr, N=Matrix.det, U=basicOpen N in Spec k[x] over k via constants; E pinned to Spec of evaluation; V pinned to Σ e_i⊗a_i; both natural; affine-P clause gives ι : chart ≅ P over k inducing β; b-expansion ⇒ N(b)=1; Nonempty U; unit (not nonzero) norm. Edge cases R=0, A=k, k×k, k[ε]/ε² fine. lean.statement verbatim (checked); live node differs only in lean (null live; S1 NJ landed). No duplicates found. Notes: same-worker second reading (self-declared), k and A share universe u (documented), redundant hd/FiniteDimensional mirror node. No compile needed (no changes)."
+ }
+}

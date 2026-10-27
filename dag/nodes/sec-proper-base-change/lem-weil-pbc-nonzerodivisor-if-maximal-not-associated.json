@@ -106,7 +106,18 @@
   "item": "lem-weil-pbc-serre-criterion-normal",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -155,5 +166,32 @@
    "exists_mem_maximalIdeal_smul_injective"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring and $M$ a finite $R$-module such that $\\mathfrak m$ is not an associated prime of $M$, i.e. there is no $z\\in M$ with $\\{a\\in R: az=0\\}=\\mathfrak m$. Then there is an $x\\in\\mathfrak m$ which is a nonzerodivisor on $M$ (multiplication by $x$ on $M$ is injective).",
+  "proof": [
+   {
+    "text": "Let $A=\\operatorname{Ass}_R(M)$, the associated primes defined by annihilators as in the statement. It is finite, since $R$ is Noetherian and $M$ is finite. For every $\\mathfrak q\\in A$, the ideal $\\mathfrak q$ is proper, hence $\\mathfrak q\\subseteq\\mathfrak m$ because $R$ is local. By the hypothesis $\\mathfrak q\\ne\\mathfrak m$, so $\\mathfrak m\\not\\subseteq\\mathfrak q$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "If $A$ is nonempty, list its distinct members as $\\mathfrak q_1,\\ldots,\\mathfrak q_r$ with $r\\ge1$. Step 1 gives $\\mathfrak m\\not\\subseteq\\mathfrak q_i$ for each $i$, and each $\\mathfrak q_i$ is prime. Prime avoidance, applied to $J=\\mathfrak m$ and the $\\mathfrak q_i$, yields $x\\in\\mathfrak m$ outside every member of $A$. If $A$ is empty, take $x=0\\in\\mathfrak m$, which is also outside every member of $A$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The chosen $x$ belongs to no associated prime of $M$. Since over a Noetherian ring the zerodivisors on $M$ are exactly the elements of the union of the associated primes of $M$, $x$ is therefore not a zerodivisor on $M$: if $xz=0$, then $z=0$. Thus multiplication by $x$ is injective. This also covers $A=\\varnothing$: then the union of associated primes is empty, so even $x=0$ is regular on $M$ (necessarily $M=0$).",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

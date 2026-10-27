@@ -1,0 +1,121 @@
+{
+ "id": "lem-pbc-module-ext-resolution-hmap",
+ "kind": "statement",
+ "title": "The fixed module/Ext resolution comparison respects arbitrary h-maps",
+ "statement": "For arbitrary schemes X,Y, g:Y to X, modules F on X and G on Y, a coefficient map phi:F to g_*G, degree q and module-cohomology element x, the fixed moduleCohomologyExtResolutionEquiv carries moduleCohomologyFMap(g,phi,q)(x) to the small-universe abelian Ext h-map: inverse image by invImage(g), precomposition with constIso(g).symm, and postcomposition with coeff(g,phi). This involves only [def-pc-scheme], [def-weil-sheaf-of-modules-category], [new-module-cohomology-ext-resolution-naturality], [def-weil-pbc-module-cohomology-fmap] and [def-pc-flat-cohomology-comparison], without any change of Ext universe.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "new-module-cohomology-ext-resolution-naturality",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FB, remark-explain-arrow; sites-cohomology.tex Tag 03FD"
+ },
+ "proof": [
+  {
+   "text": "Apply moduleCohomology_transport_coefficient to the fixed resolution equivalence on both schemes. Supply moduleCohomologyExtResolutionEquiv_naturality for the given coefficient map and moduleCohomologyExtResolutionEquiv_edge for its target module. This yields the small-Ext h-map equality directly.",
+   "uses": [
+    "new-module-cohomology-coefficient-transport",
+    "new-module-cohomology-ext-resolution-naturality",
+    "new-module-cohomology-ext-resolution-edge"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-module-cohomology-coefficient-transport",
+  "new-module-cohomology-ext-resolution-naturality",
+  "new-module-cohomology-ext-resolution-edge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FB, remark-explain-arrow; sites-cohomology.tex Tag 03FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparison module sheaf cohomology underlying abelian sheaf cohomology natural under morphism ringed spaces",
+   "results": "Generic sheaf cohomology and module forgetful APIs; no formula for this project-specific comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing edge comparison and coefficient transport; no unproved lemma is added."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext.chgUniv\"",
+   "results": "Ext.chgUniv found; it supplies universe transport, not the comparison component formula.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing edge comparison and coefficient transport; no unproved lemma is added."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyExtResolutionEquiv_edge|moduleCohomology_transport_coefficient",
+   "results": "msearch no hits; direct rg found existing edge comparison and coefficient transport, but no exposed equality of the large comparison and fixed resolution equivalence.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing edge comparison and coefficient transport; no unproved lemma is added."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentModuleAbelianFMap",
+  "date": "2026-10-27",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Small-Ext functoriality step extracted from lem-pbc-module-abelian-hmap, before the canonical Ext universe change.",
+   "via": [
+    "lem-pbc-module-abelian-hmap",
+    "lem-weil-pbc-qcoherent-normalized-pullback-square",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtHMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyExtHMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyExtResolutionEquiv_hmap",
+  "statement": "theorem moduleCohomologyExtResolutionEquiv_hmap {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (F : X.Modules) (G : Y.Modules) (φ : F ⟶ (pushforward g).obj G)\n    (q : ℕ) (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :\n    moduleCohomologyExtResolutionEquiv Y G q (moduleCohomologyFMap g φ q x) =\n      Sheaf.H.map (coeff g φ) q\n        (Sheaf.H.mapFunctor (invImage g) (constIso g).symm\n          ((SheafOfModules.toSheaf X.ringCatSheaf).obj F) q\n          (moduleCohomologyExtResolutionEquiv X F q x))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T182407-L-3553549",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T182407-L-3553549",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

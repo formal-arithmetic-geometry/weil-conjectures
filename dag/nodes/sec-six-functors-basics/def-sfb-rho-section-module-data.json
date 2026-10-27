@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-rho-section-module-data",
+ "kind": "definition",
+ "title": "Actual semi-invariant section modules and rational left translation",
+ "status": "split",
+ "statement": "Let $F$ be a field [def-weil-field] and $G,B$ be $F$-group schemes with homomorphism $i:B\\to G$ [def-sc-group-scheme]. Write $F[G]=\\Gamma(G,\\mathcal O_G)$ with its scalar structure from $G\\to\\operatorname{Spec}F$. For every commutative $F$-algebra $A$ and $g:\\operatorname{Spec}A\\to G$, evaluation $\\operatorname{ev}_g:F[G]\\to A$ is pullback on global sections, followed by $\\Gamma(\\operatorname{Spec}A,\\mathcal O)=A$. For a character $\\chi:B\\to\\mathbf G_m$ [def-sc-gm-ga] and $m\\in\\mathbf N$, define the actual submodule $W(G,B,i,\\chi,m)\\subseteq F[G]$ by the equations $\\operatorname{ev}_{g i(b)}(f)=\\chi(b)^m\\operatorname{ev}_g(f)$ for every $A$, $g\\in G(A)$ and $b\\in B(A)$. Equivalently this is the intersection of the kernels of those $F$-linear difference maps. For a finite-dimensional subspace $W\\subseteq F[G]$, say that $W$ has rational left translation if there are a finite index set $I$, an $F$-linear isomorphism $e:F^I\\simeq W$, and an algebraic-group representation $r:G\\to\\operatorname{GL}_I$ in the sense of [def-wf-algebraic-representations], such that, writing $f_j=e(\\delta_j)$, one has $\\sum_i r(s)_{ij}\\operatorname{ev}_g(f_i)=\\operatorname{ev}_{s^{-1}g}(f_j)$ for every commutative $F$-algebra $A$, $s,g\\in G(A)$ and $j\\in I$. This specifies the action on the actual functions; the basis merely expresses the rational action on this subspace in coordinates. The zero-dimensional case is included.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-wf-algebraic-representations"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 4a, pp.83--84 (linear representations; rational representations in the footnote), Section 18c and Definition 22.21 (p.468); Alper Section 9.7 immediately before Lemma 9.7.2 for the positive right-semi-invariance convention."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "semi invariant regular functions on affine algebraic group finite dimensional induced module Borel subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.toInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommSemiring k] →\\n      [inst_1 : Group G] →\\n        {V : Type u_4} →\\n          [inst_2 : AddCommMonoid V] →\\n            [inst_3 : Module k V] →\\n              (ρ : Representation k G V) →\\n                (S : Subgroup G) →\\n                  [S.Normal] \", \"doc\": \"Given a commutative semiring $ k $, a group $ G $, a $ k $-module $ V $, a representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S $ of $ G $, this constructs the representation of\"}\n  {\"name\": \"Rep.toInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [S.Normal] → Rep k G\", \"doc\": \"Given a commutative ring $ k $, group $ G $, $ k $-module $ V $, representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S $ of $ G $, this constructs the representation of $ G $ on \"}\n  {\"name\": \"Representation.IndV\", \"module\": \"Mathlib.RepresentationTheory.Induced\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : CommRing k] →\\n        [inst_1 : Group G] →\\n          [inst_2 : Group H] →\\n            (G →* H) →\\n              {A : Type u_4} →\\n                [inst_3 : AddCommGroup A] → [inst_4 : Module k A] → Representation k G A → Type (max \", \"doc\": \"Given a commutative ring $k$, groups $G$ and $H$, a group homomorphism $\\\\phi: G \\\\to H$, and a $k$-representation $\\\\rho$ of $G$ on an additive commutative group $A$, the induced representation is const\"}\n  {\"name\": \"Representation.invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : CommSemiring k] →\\n        [inst_1 : Group G] → [inst_2 : AddCommMonoid V] → [inst_3 : Module k V] → Representation k G V → Submodule k V\", \"doc\": \"For a commutative semiring $k$, group $G$, and $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, this is the submodule of $V$ consisting of all elements $v \\\\in V$ such tha\"}\n  {\"name\": \"Representation.mem_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(v : V) : v ∈ invariants ρ ↔ ∀ g : G, ρ g v = v\", \"doc\": \"For a commutative semiring $k$, a group $G$, and a $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, an element $v \\\\in V$ belongs to the invariant submodule $V^G$ if and o\"}\n  {\"name\": \"Representation.invariants_eq_inter\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \": (invariants ρ).carrier = ⋂ g : G, Function.fixedPoints (ρ g)\", \"doc\": \"The underlying set of the invariant submodule $ V^G $ is equal to the intersection of the fixed points of each group element's action, i.e., $ V^G = \\\\bigcap_{g \\\\in G} \\\\{ v \\\\in V \\\\mid \\\\rho(g)(v) = v \\\\}\"}\n  {\"name\": \"Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} [inst : CommSemiring k] [inst_1 : Group G] {V : Type u_4} [inst_2 : AddCommMonoid V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) (S : Subgroup G) [inst_4 : S.Normal],\\n  Representation.IsTrivial (MonoidHom.comp (ρ.toInvariants S) S.subtype)\", \"doc\": \"For any commutative semiring $k$, group $G$, $k$-module $V$ with representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, and normal subgroup $S \\\\trianglelefteq G$, the induced representation of $S$ on the inv\"}\n  {\"name\": \"Representation.le_comap_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(g : G) : (invariants <| ρ.comp S.subtype) ≤ (invariants <| ρ.comp S.subtype).comap (ρ g)\", \"doc\": \"For every group element $ g \\\\in G $, the submodule of vectors invariant under the action of subgroup $ S $ is contained within the preimage under $ \\\\rho(g) $ of itself, i.e., $ V^S \\\\subseteq (\\\\rho(g))\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match: the hits concern representations of abstract groups, not semi-invariant regular functions on a group scheme tested on every algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the subspace of regular functions on an affine group scheme satisfying f(g b) equals character(b) power m times f(g), with rational left translation action",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TannakaDuality.FiniteGroup.leftRegular\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Representation k G (G → k)\", \"doc\": \"Let $G$ be a finite group and $k$ be a commutative ring. The left regular representation of $G$ over $k$ is the representation on the $k$-module of functions from $G$ to $k$. The action of an element \"}\n  {\"name\": \"TannakaDuality.FiniteGroup.rightRegular\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Representation k G (G → k)\", \"doc\": \"The right regular representation of a finite group $G$ over a commutative ring $k$ is a monoid homomorphism $\\\\rho: G \\\\to \\\\mathrm{End}_k(k[G])$ defined by $(\\\\rho_s(f))(t) = f(t \\\\cdot s)$ for all $f \\\\in\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.leftRegular_apply\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (s t : G) (f : G → k),\\n  (TannakaDuality.FiniteGroup.leftRegular s) f t = f (s⁻¹ * t)\", \"doc\": \"For any elements $ s, t $ in a finite group $ G $ and any function $ f: G \\to k $, the left regular representation of $ s $ applied to $ f $ evaluated at $ t $ equals $ f(s^{-1}t) $.\"}\n  {\"name\": \"AlgebraicGeometry.term𝔸(_;_)\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Lean.ParserDescr\", \"doc\": \"A parser for the notation $\\\\mathbb{A}(R; n)$ representing the affine space over a base ring $R$ with dimension $n$.\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.sumSMulInv\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → [Fintype G] → {X : FDRep k G} → ↑X.V → (G → k) →ₗ[k] ↑X.V\", \"doc\": \"Let $k$ be a commutative ring and $G$ be a finite group. Let $(X, \\\\rho)$ be a finitely generated representation of $G$ over $k$, where $\\\\rho: G \\\\to \\\\mathrm{End}_k(X)$ is the group homomorphism to the \"}\n  {\"name\": \"Representation.apply_eq_of_leftRegular_eq_of_generator\", \"module\": \"Mathlib/RepresentationTheory/Basic\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} [inst : CommSemiring k] [inst_1 : Group G] (g : G),\\n  (∀ (x : G), x ∈ Subgroup.zpowers g) →\\n    ∀ (x : G →₀ k), ((Representation.leftRegular k G) g) x = x → ∀ (γ : G), x γ = x g\", \"doc\": \"For any group $G$, commutative semiring $k$, and representation of $G$ on a $k$-module $V$, if an element $x$ of the subgroup generated by $g$ satisfies the condition that the left regular action of $\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.ofRightFDRep\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      [inst_2 : Finite G] → [Fintype G] → (X : FDRep k G) → ↑X.V → (TannakaDuality.FiniteGroup.rightFDRep ⟶ X)\", \"doc\": \"For a finite group $G$, commutative ring $k$, and representation $X$ in $\\\\text{FDRep}_k(G)$, this constructs a morphism from the right regular representation of $G$ to $X$ by mapping each function $f:\"}\n  {\"name\": \"MeasureTheory.Measure.modularCharacter\", \"module\": \"Mathlib/MeasureTheory/Group/ModularCharacter\", \"type\": \"{G : Type u_1} →\\n  [inst : TopologicalSpace G] → [inst_1 : Group G] → [IsTopologicalGroup G] → [LocallyCompactSpace G] → G →* NNReal\", \"doc\": \"The modular character homomorphism $\\\\Delta : G \\\\to \\\\mathbb{R}_{\\\\geq 0}^\\\\times$ is a group homomorphism from a locally compact topological group $G$ to the multiplicative monoid of non-negative real nu\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match: the hits concern representations of abstract groups, not semi-invariant regular functions on a group scheme tested on every algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?invariant|sectionModule|rational.*translation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No match: the hits concern representations of abstract groups, not semi-invariant regular functions on a group scheme tested on every algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"rho|Rho|semi.?invariant|sectionModule\" lean/WeilConjectures/AlgebraicGeometry/GroupScheme; rg -n \"RhoSection|HasRationalLeftTranslation|sectionModule\" lean/Sheaf; python3 tools/blueprint_refs.py search \"rho section\"; rg -n \"def-sfb-rho-section-module-data\" dag/nodes",
+   "results": "No matching definition in the project or upstream. Blueprint search: 0 blueprint nodes match 'rho section'. The existing rho-section statement and its homogeneous-line-bundle proof dependency describe the desired spaces in prose but have no Lean interfaces. Existing RationalHom supplies algebraic representations and is reused; algΓ, algSpec.fullyFaithful and algΓAlgSpecAdjunction supply the coordinate algebra and evaluation.",
+   "date": "2026-10-24",
+   "verdict": "The actual semi-invariant submodule and its normalized rational-action predicate are missing; reuse existing algebraic-geometric constructions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-section-modules",
+  "date": "2026-10-24",
+  "group": "Q136"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Definition of the actual semi-invariant subspaces and their rational left action.",
+   "via": [
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RhoSectionModuleData",
+  "declaration": "AlgebraicGeometry.RhoSection.sectionModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/RhoSectionModuleData.lean",
+  "statement": "def sectionModule {F : Type u} [Field F] (G B : Grp (Over (Spec (.of F)))) (i : B ⟶ G) (χ : B ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (m : ℕ) : Submodule F (Coordinate G.X)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.RhoSection.Coordinate",
+   "AlgebraicGeometry.RhoSection.evaluate",
+   "AlgebraicGeometry.RhoSection.characterValue",
+   "AlgebraicGeometry.RhoSection.sectionModule",
+   "AlgebraicGeometry.RhoSection.HasRationalLeftTranslation"
+  ],
+  "fixed_by": "NT-stage2-cc-eb57ce16a"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb57ce16a",
+  "group": "Q136",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb57ce16a",
+  "group": "Q136",
+  "result": "fix",
+  "note": "Every hypothesis and conclusion clause matches the node: semisimple via IsSemisimpleGroupScheme; simply connected via hsc (surjective, finite kernel, kernel points central over every A, conclusion IsIso); IsRhoBorelPair = maximal torus, split torus iso, Borel, k≫j=i; conjugation ModObj fixed by its equation; Φ = nonzero characters with nonzero weightSpace; ρ^2 = product of roots (torsion-free, no division in F); ρB extends ρ and kills every closed normal connected unipotent subgroup; sectionModule is the actual semi-invariant subspace over all A; nonzero, Module.Finite and HasRationalLeftTranslation (left action, columns oriented correctly). Edge cases S=1, SL2 sign, char 2, universes all fine. No duplicate Lean anywhere; new defs are real data; only proof is sorry; docstring follows proof steps 1-5. F1 fixed: new node def-sfb-rho-section-module-data and the HasRationalLeftTranslation docstring cited Milne 'Definition 12.1 (rational representations)', but 12.1 is Example 12.1 (cyclic-group Hopf algebras); corrected to Milne §4a pp.83-84 in fixes/def-sfb-rho-section-module-data.json (source.place only) and fixes/RhoSectionModuleData.lean (docstring only); fixed file compiled clean via nt_compile --json in 10.4 s. Advisory: characterValue is close to a theorem-owned helper; subgroup-predicate and StandardGroupSchemes owners are not in stmt_deps."
+ }
+}

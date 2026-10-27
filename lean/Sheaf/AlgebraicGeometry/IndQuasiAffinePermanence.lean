@@ -9,8 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
-import Sheaf.AlgebraicGeometry.QuasiAffineBaseChange
-import Sheaf.AlgebraicGeometry.QuasiAffineTargetLocality
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenQuasiAffineChartDescent
+import Sheaf.AlgebraicGeometry.QcOpenPullbackQuasiAffineEnlargement
+import Sheaf.AlgebraicGeometry.SeparatedAffinePairNeighbourhoods
 
 /-!
 # Permanence and separation for ind-quasi-affine morphisms
@@ -41,6 +42,85 @@ def indQuasiAffineProperty {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
       IsCompact (K : Set (Limits.pullback (C := Scheme.{u}) f U.ι)) →
         IsQuasiAffineHom (K.ι ≫ Limits.pullback.snd f U.ι)
 
+private def qcOpensQuasiAffine (X : Scheme.{u}) : Prop :=
+  ∀ K : X.Opens, IsCompact (K : Set X) → K.toScheme.IsQuasiAffine
+
+private theorem qcOpensQuasiAffine_of_openImmersion {X Y : Scheme.{u}} (i : X ⟶ Y)
+    [IsOpenImmersion i] (hY : qcOpensQuasiAffine Y) : qcOpensQuasiAffine X := by
+  intro K hK
+  have : (i ''ᵁ K).toScheme.IsQuasiAffine :=
+    hY (i ''ᵁ K) (hK.image i.continuous)
+  exact Scheme.IsQuasiAffine.of_isIso (i.isoImage K).hom
+
+private def qcOpensAffineProperty : AffineTargetMorphismProperty.{u} :=
+  fun X _ _ _ ↦ qcOpensQuasiAffine X
+
+private instance qcOpensAffineProperty_respectsIso :
+    qcOpensAffineProperty.toProperty.RespectsIso := by
+  apply AffineTargetMorphismProperty.respectsIso_mk
+  · intro X Y Z e f _ h
+    exact qcOpensQuasiAffine_of_openImmersion e.hom h
+  · intro X Y Z e f _ h
+    exact h
+
+private theorem qcOpensQuasiAffine_of_affine_charts {X Y : Scheme.{u}} [IsAffine Y]
+    (f : X ⟶ Y) {I : Type v} (U : I → Y.Opens)
+    (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤)
+    (hlocal : ∀ i, qcOpensQuasiAffine (f ⁻¹ᵁ U i).toScheme) :
+    qcOpensQuasiAffine X := by
+  have : IsAffine (⊤ : Y.Opens).toScheme := isAffineOpen_top Y
+  have htop : qcOpensQuasiAffine (f ⁻¹ᵁ (⊤ : Y.Opens)).toScheme := by
+    intro K hK
+    exact (isQuasiAffineHom_quasiCompact_open_of_affine_charts f U hU hcover
+      hlocal ⊤ isCompact_univ K hK).2 (isAffineOpen_top Y)
+  let e : (f ⁻¹ᵁ (⊤ : Y.Opens)).toScheme ≅ X :=
+    X.isoOfEq (by simp) ≪≫ X.topIso
+  exact qcOpensQuasiAffine_of_openImmersion e.inv htop
+
+private instance qcOpensAffineProperty_isLocal : qcOpensAffineProperty.IsLocal where
+  respectsIso := inferInstance
+  to_basicOpen {X Y} _ f r h := qcOpensQuasiAffine_of_openImmersion (f ⁻¹ᵁ _).ι h
+  of_basicOpenCover {X Y} _ f s hs h := by
+    apply qcOpensQuasiAffine_of_affine_charts f (fun r : s ↦ Y.basicOpen r.1)
+    · intro r
+      exact (isAffineOpen_top Y).basicOpen r.1
+    · exact (isAffineOpen_top Y).iSup_basicOpen_eq_self_iff.mpr hs
+    · exact h
+
+private theorem indQuasiAffineProperty_iff (X Y : Scheme.{u}) (f : X ⟶ Y) :
+    indQuasiAffineProperty f ↔ targetAffineLocally qcOpensAffineProperty f := by
+  constructor
+  · intro hf U
+    have : IsAffine U.1.toScheme := U.2
+    apply qcOpensQuasiAffine_of_openImmersion (pullbackRestrictIsoRestrict f U.1).inv
+    intro K hK
+    have := hf U.1 U.2 K hK
+    exact Scheme.IsQuasiAffine.of_isQuasiAffineHom (K.ι ≫ pullback.snd f U.1.ι)
+  · intro hf U hU K hK
+    have : IsAffine U.toScheme := hU
+    have h := qcOpensQuasiAffine_of_openImmersion
+      (pullbackRestrictIsoRestrict f U).hom (hf ⟨U, hU⟩) K hK
+    have : K.toScheme.IsQuasiAffine := h
+    infer_instance
+
+private instance indQuasiAffineProperty_hasAffineProperty :
+    HasAffineProperty @indQuasiAffineProperty qcOpensAffineProperty where
+  isLocal_affineProperty := inferInstance
+  eq_targetAffineLocally' := by
+    ext X Y f
+    exact indQuasiAffineProperty_iff X Y f
+
+private theorem qcOpensAffineProperty_baseChange :
+    qcOpensAffineProperty.IsStableUnderBaseChange := by
+  apply AffineTargetMorphismProperty.IsStableUnderBaseChange.mk
+  intro B X A _ _ b a hX
+  have h : qcOpensQuasiAffine (pullback a b) := by
+    intro L hL
+    obtain ⟨n, Wj, W, _, _, _, _, _, h, _⟩ :=
+      qc_open_pullback_quasi_affine_enlargement a b hX L hL
+    exact h
+  exact qcOpensQuasiAffine_of_openImmersion (pullbackSymmetry b a).hom h
+
 /-- Ind-quasi-affineness is stable under arbitrary base change, local on an affine open
 cover of the target, and implies quasi-affineness of quasi-compact opens and separatedness
 when the target is affine.
@@ -70,6 +150,28 @@ theorem indQuasiAffineProperty_permanence {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (∀ (_hY : IsAffine Y), indQuasiAffineProperty f →
       (∀ (K : X.Opens), IsCompact (K : Set X) → K.toScheme.IsQuasiAffine) ∧
         Scheme.IsSeparated X ∧ QuasiSeparatedSpace X) := by
-  sorry
+  have hbc : (MorphismProperty.IsStableUnderBaseChange @indQuasiAffineProperty) :=
+    HasAffineProperty.isStableUnderBaseChange qcOpensAffineProperty_baseChange
+  refine ⟨?_, ?_, ?_⟩
+  · intro T g hf
+    exact MorphismProperty.pullback_snd f g hf
+  · intro I U hU hcover
+    constructor
+    · intro hf i
+      exact MorphismProperty.pullback_snd f (U i).ι hf
+    · intro hf
+      apply HasAffineProperty.of_iSup_eq_top (fun i ↦ ⟨U i, hU i⟩) hcover
+      intro i
+      have : IsAffine (U i).toScheme := hU i
+      have h := HasAffineProperty.iff_of_isAffine.mp (hf i)
+      exact qcOpensQuasiAffine_of_openImmersion
+        (pullbackRestrictIsoRestrict f (U i)).inv h
+  · intro hY hf
+    have hX : qcOpensQuasiAffine X := HasAffineProperty.iff_of_isAffine.mp hf
+    have hsep := Scheme.separated_of_affine_pair_neighbourhoods X (by
+      intro A B hA hB
+      have : (A ⊔ B).toScheme.IsQuasiAffine := hX (A ⊔ B) (hA.isCompact.union hB.isCompact)
+      exact ⟨A ⊔ B, le_rfl, inferInstance⟩)
+    exact ⟨hX, hsep.2.1, (quasiSeparatedSpace_iff_quasiSeparated X).mpr hsep.2.2⟩
 
 end AlgebraicGeometry

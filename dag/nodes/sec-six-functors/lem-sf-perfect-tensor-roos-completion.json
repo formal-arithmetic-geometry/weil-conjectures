@@ -93,11 +93,12 @@
    }
   },
   {
-   "text": "For cochain maps $a:P\\to P'$, $b:Q\\to Q'$, reduction of $a(x)\\otimes b(y)$ equals $(a\\bmod\\pi^j)(\\bar x)\\otimes(b\\bmod\\pi^j)(\\bar y)$, giving a strictly commuting augmentation square. Bounded-above projective complexes are K-projective, and the K-projective Hom bijection says that every derived morphism between our bounded projective models is represented by a cochain map uniquely up to homotopy. These squares therefore give naturality for all derived morphisms: tensoring a homotopy in the first variable gives $h\\otimes1$; in the second variable it gives $x\\otimes y\\mapsto(-1)^{\\deg x}x\\otimes h(y)$. A strict tower homotopy $h_j$ induces the fibre homotopy $(x,y)\\mapsto((h_jx_j)_j,-(h_jy_j)_j)$; substituting into $dH+Hd$ gives the difference of the induced fibre maps. Thus both the tensor and fibre maps depend only on the homotopy classes. An isomorphism of derived models is represented by maps inverse up to homotopy, so the comparison is an isomorphism and the strictly commuting squares prove independence of models and the identity and composition laws.",
+   "text": "For cochain maps $a:P\\to P'$, $b:Q\\to Q'$, reduction of $a(x)\\otimes b(y)$ equals $(a\\bmod\\pi^j)(\\bar x)\\otimes(b\\bmod\\pi^j)(\\bar y)$, giving a strictly commuting augmentation square. Bounded-above projective complexes are K-projective, and the K-projective Hom bijection says that every derived morphism between our bounded projective models is represented by a cochain map uniquely up to homotopy. These squares therefore give naturality for all derived morphisms: tensoring a homotopy in the first variable gives $h\\otimes1$; in the second variable it gives $x\\otimes y\\mapsto(-1)^{\\deg x}x\\otimes h(y)$. A strict tower homotopy $h_j$ induces the fibre homotopy $(x,y)\\mapsto((h_jx_j)_j,-(h_jy_j)_j)$; substituting into $dH+Hd$ gives the difference of the induced fibre maps. Thus both the tensor and fibre maps depend only on the homotopy classes. An isomorphism of derived models is represented by maps inverse up to homotopy, so the comparison is an isomorphism and the strictly commuting squares prove independence of models and the identity and composition laws. The implemented strict naturality uses product projections and cancellation of the coordinate isomorphism, and homotopy invariance applies roosF_homotopy_functor to the quotient functor applied to the given homotopy.",
    "uses": [
     "lem-sc-bounded-above-projective-kprojective",
     "lem-coef-kprojective-derived-hom-bijection",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-strict-roos-homotopy-functor"
    ],
    "elementary": false,
    "source": {
@@ -106,7 +107,7 @@
    }
   },
   {
-   "text": "For a third bounded projective complex $T$ and homogeneous $x,y,z$, both associator routes have quotient coordinate $\\bar x\\otimes(\\bar y\\otimes\\bar z)$ under step 2. For degrees $r,s$ both symmetry routes have coordinate $(-1)^{rs}\\bar y\\otimes\\bar x$. The left unitor routes send $\\bar a\\otimes\\bar x$ to $\\overline{ax}$, and the right unitor routes send $\\bar x\\otimes\\bar a$ to $\\overline{ax}$. The coefficient unit sends $1$ to $(1\\bmod\\pi^j)_j$. In every case the shifted coordinate is zero, preserved by the product cochain maps, so these are equal maps to the fibre, not only equal maps after projection. Localizing gives the asserted coherence diagrams, since the derived associators and unitors are induced from complexes.",
+   "text": "For a third bounded projective complex $T$ and homogeneous $x,y,z$, both associator routes have quotient coordinate $\\bar x\\otimes(\\bar y\\otimes\\bar z)$ under step 2. For degrees $r,s$ both symmetry routes have coordinate $(-1)^{rs}\\bar y\\otimes\\bar x$. The left unitor routes send $\\bar a\\otimes\\bar x$ to $\\overline{ax}$, and the right unitor routes send $\\bar x\\otimes\\bar a$ to $\\overline{ax}$. The coefficient unit sends $1$ to $(1\\bmod\\pi^j)_j$. In every case the shifted coordinate is zero, preserved by the product cochain maps, so these are equal maps to the fibre, not only equal maps after projection. Localizing gives the asserted coherence diagrams, since the derived associators and unitors are induced from complexes. In Lean every displayed tensor coherence square is an instance of the general strict augmentation naturality lemma, so no separate associator or symmetry calculation is necessary for these equations.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "lem-sfb-derived-monoidal"
@@ -127,10 +128,11 @@
    }
   },
   {
-   "text": "Let $R\\to S$ be as in the statement and first use the $\\pi$-power quotients $B_j=S/\\pi^jS$. The balanced scalar tensorator is $\\beta:((P\\otimes_RS)\\otimes_S(Q\\otimes_RS))\\xrightarrow{\\sim}V\\otimes_RS$, $(x\\otimes s)\\otimes(y\\otimes u)\\mapsto(x\\otimes y)\\otimes su$. The same formula in $B_j$ identifies the scalar-extended quotient tensor tower with the quotient tower of $V\\otimes_RS$. The finite-free scalar comparison for Roos complexes commutes with augmentations: on first coordinates the two routes send $((x\\otimes y)\\otimes s)$ to $((\\bar x\\otimes\\bar y)\\otimes\\bar s)_j$, and both shifted coordinates are zero. Thus the square with $e_{P,Q}\\otimes_RS$, $\\beta$, and the $\\pi$-power completion of the extended complexes commutes. Tensor with $S$ is exact, so it computes derived extension and preserves the quasi-isomorphism. The finite-free strict-tower transport identifies this chain comparison with the canonical derived completion comparison, independently of a chosen basis.",
+   "text": "Let $R\\to S$ be as in the statement and first use the $\\pi$-power quotients $B_j=S/\\pi^jS$. The balanced scalar tensorator is $\\beta:((P\\otimes_RS)\\otimes_S(Q\\otimes_RS))\\xrightarrow{\\sim}V\\otimes_RS$, $(x\\otimes s)\\otimes(y\\otimes u)\\mapsto(x\\otimes y)\\otimes su$. The same formula in $B_j$ identifies the scalar-extended quotient tensor tower with the quotient tower of $V\\otimes_RS$. The finite-free scalar comparison for Roos complexes commutes with augmentations: on first coordinates the two routes send $((x\\otimes y)\\otimes s)$ to $((\\bar x\\otimes\\bar y)\\otimes\\bar s)_j$, and both shifted coordinates are zero. Thus the square with $e_{P,Q}\\otimes_RS$, $\\beta$, and the $\\pi$-power completion of the extended complexes commutes. Tensor with $S$ is exact, so it computes derived extension and preserves the quasi-isomorphism. The finite-free strict-tower transport identifies this chain comparison with the canonical derived completion comparison, independently of a chosen basis. The scalar tensorator formula uses Mathlib AlgebraTensorModule.distribBaseChange_symm_tmul and the map-bifunctor comparison on the total tensor inclusions. Quotient naturality follows by cancellation of the surjective extended quotient map; product projections and the two Roos coordinates give scalarComparison naturality. The scalar cone map is constructed from the additive cone and shift comparisons and the commuting product square, with uniqueness by cancellation of the coordinate isomorphisms. S1 implements the levelwise isomorphism using Mathlib TensorProduct.tensorQuotMapSMulEquivTensorQuot, transporting Ideal.map_pow, and obtains uniqueness by cancellation of the surjective extended quotient projection. For finite-free scalar extension, ModuleCat.preservesLimits_extendScalars_of_finite_projective makes piComparison invertible. The canonical product map is piComparison followed by the product of these levelwise isomorphisms. Its two degreewise copies and the additive biproduct comparison make the canonical cone map invertible. Projecting the augmentation square onto both cone coordinates reduces it to the defining quotient equations; strict augmentation naturality supplies the balanced tensorator square.",
    "uses": [
     "lem-pur-compact-support-roos-cofinality",
-    "lem-weil-pbc-finite-free-strict-tower-transport"
+    "lem-weil-pbc-finite-free-strict-tower-transport",
+    "lem-pur-roos-additive-comparison"
    ],
    "elementary": false,
    "source": {
@@ -139,10 +141,11 @@
    }
   },
   {
-   "text": "Write $\\sigma$ for a uniformizer of $S$. The free $R$-module $S$ has positive rank, since $S$ is a nonzero unital ring; hence multiplication by the nonzero $\\pi$ is injective on $S$ and its image in $S$ is nonzero. The DVR factorization gives $\\pi=u\\sigma^e$. Locality makes $\\pi$ a nonunit, so $e\\geq1$. Thus $B_j=S/\\sigma^{ej}S$. Apply the explicit cofinal Roos restriction $r_e$ to the full $\\sigma$-power tower of the extended tensor. It is a quasi-isomorphism and sends its quotient augmentation to the augmentation at levels $ej$. More explicitly its first coordinate is restriction $x\\mapsto(x_{ej})_j$ and its shifted coordinate is the block sum of transition images, which sends zero to zero. Together with step 10 this gives the required square in the derived category by inverting $r_e$. It is the comparison through the cofinal quotient maps specified in the statement; no equality of the two indexed towers is assumed.",
+   "text": "Write $\\sigma$ for a uniformizer of $S$. The free $R$-module $S$ has positive rank, since $S$ is a nonzero unital ring; hence multiplication by the nonzero $\\pi$ is injective on $S$ and its image in $S$ is nonzero. The DVR factorization gives $\\pi=u\\sigma^e$. Locality makes $\\pi$ a nonunit, so $e\\geq1$. Thus $B_j=S/\\sigma^{ej}S$. Apply the explicit cofinal Roos restriction $r_e$ to the full $\\sigma$-power tower of the extended tensor. It is a quasi-isomorphism and sends its quotient augmentation to the augmentation at levels $ej$. More explicitly its first coordinate is restriction $x\\mapsto(x_{ej})_j$ and its shifted coordinate is the block sum of transition images, which sends zero to zero. Together with step 10 this gives the required square in the derived category by inverting $r_e$. It is the comparison through the cofinal quotient maps specified in the statement; no equality of the two indexed towers is assumed. For the actual arithmetic cone map, compare its coordinates with transitionHomotopy_all: coordinate uniqueness identifies its restriction map and transfers QuasiIso. The existing rho_one, rho_mul, and rho_augment calculations give identity, composition, and augmentation preservation.",
    "uses": [
     "lem-weil-pbc-dvr-unit-times-uniformizer-power",
-    "lem-pur-compact-support-roos-cofinality"
+    "lem-pur-compact-support-roos-cofinality",
+    "lem-weil-roos-transition-homotopy"
    ],
    "elementary": false,
    "source": {
@@ -175,14 +178,17 @@
   "lem-weil-pbc-small-module-diagrams-grothendieck",
   "lem-sc-bounded-above-projective-kprojective",
   "lem-coef-kprojective-derived-hom-bijection",
+  "lem-pur-strict-roos-homotopy-functor",
   "lem-pur-compact-support-roos-cofinality",
   "lem-weil-pbc-finite-free-strict-tower-transport",
-  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+  "lem-pur-roos-additive-comparison",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-roos-transition-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941, lemma-derived-limit-is-ok; explicit finite-retract and pure-tensor calculations supplied by NJ, following the parent completion route"
+  "place": "Tag 0941, lemma-derived-limit-is-ok; explicit finite-retract and pure-tensor calculations supplied by NJ, following the parent completion route; X8 implements quotient, coordinate, tensorator, arithmetic and scalar naturality portions using generic strict Roos coordinate lemmas, retaining the original unfinished finite-projective completion and scalar-extension arguments.; S1 completes the canonical quotient/base-change isomorphism and finite-free scalar-extension comparisons using the existing module quotient equivalence and finite-projective limit preservation, with explicit cone-coordinate proofs."
  },
  "mathlib_searches": [
   {
@@ -389,5 +395,27 @@
   "group": "Q65",
   "result": "fix",
   "note": "Re-delivery of the 29d7d53c H2/C5 RETURN. Lean file is byte-identical. The theorem stmt_deps are replaced by def-sf-adic-module-quotient-data and def-sf-strict-roos-square-map (both existing:true; their statements match the live Lean) plus def-sp-strict-tower-arithmetic-restriction-data. Every owner-module declaration the item uses is covered, and there is no cycle. check_new_node is clean. check_existing flagged noncomputable in the strictRoosMapOfSquare lean.statement. FIX: fixes/def-sf-strict-roos-square-map.json with noncomputable trimmed by text replace; check_existing now clean. Mathematics as previously reviewed. No compile because no Lean was changed. Advisories: strictRoosProduct/Endomorphism/Complex/Coordinates are owned only by theorem lem-sf-strict-roos-derived-limit-comparison (older gap); map_power is not listed; tensor_coherence is close to naturality."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261025T204901-L-3035893",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

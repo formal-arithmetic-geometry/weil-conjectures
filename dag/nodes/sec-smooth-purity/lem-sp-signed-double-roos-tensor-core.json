@@ -1,0 +1,157 @@
+{
+ "id": "lem-sp-signed-double-roos-tensor-core",
+ "kind": "statement",
+ "title": "Koszul tensor exchange and strict augmentation coherence",
+ "statement": "Let C, R, the strict Roos, tensorTower, completion, coordinate and augmentation data be as in [def-sp-signed-double-roos-tensor-exchange-data]. Given any natural isomorphism beta between rows and columns with the signed four-coordinate formula, the principal Koszul tensor commutes with the strict Roos construction: for each section t there are natural eta equal objectwise to the specified augmentation, natural level inclusions tau equal to strictAugmentation, and tower isomorphisms gamma_Q from tensorTower(Roos(Q)) to the j-tower Roos_n(Q_n tensor L_j). Gamma is natural in Q, preserves each tensor summand and both Roos coordinates, commutes with evaluations, and carries the strict Koszul inclusion to Roos of the level inclusions. The composite Roos_n(eta) followed by beta and Roos_j(gamma inverse) equals augmentation on Roos(Q). Before gamma inverse its coordinates of j-Roos degree one vanish, and its coordinates of j-Roos degree zero are coordinate(Q,p,k,n) followed by the specified Koszul inclusion, with the canonical equality transport. No existence or evaluation-square assertion about beta is included, and no derived comparison, product exactness, regularity, torsion or boundedness assumption is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Koszul tensor exchange and strict augmentation coherence; parent node lem-sp-signed-double-roos-tensor-exchange coordinate proof. Stacks 014E (derived.tex, definition-cone), 012Z (homology.tex, definition-associated-simple-complex), 03EK (sites-modules.tex, section-tensor-product), 0941 (sites-cohomology.tex, lemma-derived-limit-is-ok)."
+ },
+ "stmt_deps": [
+  "def-sp-signed-double-roos-tensor-exchange-data"
+ ],
+ "proof": [
+  {
+   "text": "The tensor definition gives $M\\otimes_RR\\cong M$ by $x\\otimes r\\mapsto rx$, with inverse $x\\mapsto x\\otimes1$: balancing gives $x\\otimes r=rx\\otimes1$. These sectionwise inverse maps are natural in restrictions, and hence sheafify to inverse maps. Consequently $(V\\otimes L_j)^k\\cong V^{k+1}\\oplus V^k$, with coordinates from Koszul degrees $-1,0$. Only these two summands occur, even when $V$ is unbounded. The product/biproduct maps of step 1 therefore identify $(\\prod_nQ_n)\\otimes L_j$ and $\\prod_n(Q_n\\otimes L_j)$ degreewise, and identify the two Roos copies as well. Define $\\gamma_j$ by these coordinate maps, leaving each $Q_n^a\\otimes L_j^b$ coordinate unchanged; the inverse assembles its two product coordinates. This constructs inverse graded maps without asserting that arbitrary tensor products preserve products.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-principal-koszul-quotient-towers",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, section-tensor-product; homology.tex Tag 012Z, definition-associated-simple-complex: two nonzero Koszul degrees"
+   }
+  },
+  {
+   "text": "Check the differentials on a coordinate of intrinsic $Q$ degree $a$, Roos degree $p\\in\\{0,1\\}$, and Koszul degree $b\\in\\{-1,0\\}$. On $H_0\\otimes L_j$ the internal $Q$ differential has coefficient $(-1)^p$, the Koszul differential has coefficient $(-1)^{a+p}$, and the Roos arrow from $p=0$ to $p=1$ is $-(1-s_n)$. On $\\mathsf R_n(Q\\otimes L_j)$ they are respectively $(-1)^p$, $(-1)^p(-1)^a$, and $-(1-s_n)$. The coefficients agree, so the graded maps in step 6 are chain isomorphisms. The same coordinate test shows naturality in $Q$, commutation with the Koszul transition $(t,1)$, the degree-zero Koszul inclusion, and evaluation at $n$: all are the same component maps before and after $\\gamma_j$.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-principal-koszul-quotient-towers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex; derived.tex Tag 014E, definition-cone: three differential contributions"
+   }
+  },
+  {
+   "text": "The map $u_P$ is a chain map because $p\\mapsto p\\otimes1$ is the degree-zero Koszul inclusion, its components are fixed by the $j$-transition, and its shifted $j$-component is zero. Write an input to $H_0$ as $(v,u)$, of $n$-Roos degrees $0,1$. The coordinates of $\\mathsf R_n(u_{Q_n})(v,u)$ in the order of step 2 are $(v\\otimes1,0,u\\otimes1,0)$, with the indicated entries repeated for all $j$. Applying $\\beta$ gives $(v\\otimes1,u\\otimes1,0,0)$ in target order. Thus every $j$-Roos-degree-one coordinate is zero, and the degree-zero ones are precisely the two coordinates of $H_0$ inserted in Koszul degree zero. Step 7 identifies their images under $\\mathsf R_j(\\gamma^{-1})$ with $u_{H_0}(v,u)$. This proves the asserted strict equality, and therefore its derived equality. All calculations use finite biproducts and specified countable products only; no boundedness or condition on $t$ or $Q$ was used.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-pur-principal-koszul-quotient-towers",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence: explicit signed interchange and tensor augmentation identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-weil-category-product",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014E, definition-cone; literal coordinate argument of the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Interchanging two mapping cocones has sign minus one on the doubly shifted component and preserves the two evaluations",
+   "results": [
+    "CochainComplex.mappingCone.shiftIso",
+    "CochainComplex.mappingCone.shiftTriangleIso",
+    "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No matching double Roos interchange or its coordinate/tensor interface. Cone and shift APIs are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone",
+   "results": [
+    "CochainComplex.mappingCocone",
+    "CochainComplex.mappingCocone.inl",
+    "CochainComplex.mappingCocone.inr",
+    "CochainComplex.mappingCocone.snd",
+    "CochainComplex.mappingCocone.liftCochain"
+   ],
+   "date": "2026-10-25",
+   "verdict": "The construction and its basic maps exist; no theorem combines a double product interchange or the principal Koszul tensor/augmentation equations."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(tensor|prod)|roos.*(interchange|flip)",
+   "results": [],
+   "date": "2026-10-25",
+   "verdict": "No Mathlib hits. Local source search also found no result with this generality; KoszulRoosProjectionComparison uses pro-etale sites and regular coefficients and its left-tensor normalization does not supply this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedDoubleRoosTensorExchange",
+  "date": "2026-10-25",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Koszul tensor exchange and strict augmentation coherence; refinement of the completeness calculation.",
+   "via": [
+    "lem-sp-signed-double-roos-tensor-exchange",
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedDoubleRoosTensorExchangeTensor",
+  "file": "lean/Sheaf/Algebra/Homology/SignedDoubleRoosTensorExchangeTensor.lean",
+  "declaration": "CategoryTheory.SignedDoubleRoos.signed_double_roos_tensor_core",
+  "declarations": [
+   "CategoryTheory.SignedDoubleRoos.signed_double_roos_tensor_core"
+  ],
+  "statement": "theorem signed_double_roos_tensor_core (β : rows R ≅ columns R) (hβ : (∀ (X : ℕᵒᵖ ⥤ Tower R) (p q : Bool) (k : ℤ) (n j : ℕ), (β.hom.app X).f k ≫ columnCoordinate R X p q k n j = if p && q then -rowCoordinate R X p q k n j else rowCoordinate R X p q k n j)) : ∀ t : (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).sections, ∃ (η : 𝟭 (Complex R) ⟶ completion R t) (τ : ∀ j : ℕ, 𝟭 (Complex R) ⟶ tensorTower R t ⋙ (CategoryTheory.evaluation ℕᵒᵖ (Complex R)).obj (op j)) (γ : ∀ Q : Tower R, (tensorTower R t).obj ((roos R).obj Q) ≅ (Q ⋙ tensorTower R t).flip ⋙ roos R), (∀ P : Complex R, η.app P = augmentation R P t) ∧ (∀ (P : Complex R) (j : ℕ), (τ j).app P = (strictAugmentation R P t).app (op j)) ∧ (∀ (Q Q' : Tower R) (f : Q ⟶ Q') (j : ℕ), ((tensorTower R t).map ((roos R).map f)).app (op j) ≫ (γ Q').hom.app (op j) = (γ Q).hom.app (op j) ≫ (roos R).map (((flipFunctor _ _ _).map (Functor.whiskerRight f (tensorTower R t))).app (op j))) ∧ (∀ (Q : Tower R) (j : ℕ) (p : Bool) (a b k : ℤ) (h : a + b = k) (n : ℕ), HomologicalComplex.ιTensorObj ((roos R).obj Q) (principalKoszul R t j) a b k h ≫ ((γ Q).hom.app (op j)).f k ≫ coordinate R ((Q ⋙ tensorTower R t).flip.obj (op j)) p k n = (coordinate R Q p a n ▷ (principalKoszul R t j).X b) ≫ HomologicalComplex.ιTensorObj (Q.obj (op n)) (principalKoszul R t j) (a - degree p) b (k - degree p) (by omega)) ∧ (∀ (Q : Tower R) (j n : ℕ), (γ Q).hom.app (op j) ≫ evaluation R ((Q ⋙ tensorTower R t).flip.obj (op j)) n = (evaluation R Q n ▷ principalKoszul R t j)) ∧ (∀ (Q : Tower R) (j : ℕ), (strictAugmentation R ((roos R).obj Q) t).app (op j) ≫ (γ Q).hom.app (op j) = (roos R).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q (τ j))) ∧ (∀ Q : Tower R, (roos R).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η) ≫ β.hom.app (Q ⋙ tensorTower R t) ≫ (roos R).map (γ Q).inv = augmentation R ((roos R).obj Q) t) ∧ (∀ (Q : Tower R) (p q : Bool) (k : ℤ) (n j : ℕ), ((roos R).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η) ≫ β.hom.app (Q ⋙ tensorTower R t)).f k ≫ columnCoordinate R (Q ⋙ tensorTower R t) p q k n j = if hq : q then 0 else coordinate R Q p k n ≫ ((strictAugmentation R (Q.obj (op n)) t).app (op j)).f (k - degree p) ≫ eqToHom (congrArg (fun a : ℤ ↦ (((tensorTower R t).obj (Q.obj (op n))).obj (op j)).X a) (by simp [degree, hq])))",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-332c9",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261025T163857-L-882743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-332c9",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261025T163857-L-882743",
+  "kind": "interface",
+  "note": "independent cc review: 18 moved definitions byte-identical to published item module (clone c84b68f); item theorem signature unchanged; two new sorry cores = parent conjuncts 1-3 (minus unneeded exactness) and the tensor conjunct for any β with the coordinate formula (which determines β); nodes follow the assembly proof"
+ }
+}

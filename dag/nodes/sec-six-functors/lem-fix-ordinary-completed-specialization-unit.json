@@ -1,0 +1,141 @@
+{
+ "id": "lem-fix-ordinary-completed-specialization-unit",
+ "kind": "statement",
+ "title": "Actual completed module unit on a closed specialization neighbourhood",
+ "statement": "Fix $\\ell,E$ [def-weil-l-adic-coefficient-extension], and qcqs schemes $X,Z$ [def-pc-scheme, def-weil-quasi-separated-morphism]. Let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion]. Let $V$ be an affine object of $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] such that every epimorphism of set sheaves valued in $\\mathrm{Type}(\\max(u,t+1))$ is surjective on $V$-sections. Suppose every point of $V$ specializes to a point of $V\\times_X Z$. For every module $M$ over the completed integral coefficient sheaf [def-weil-completed-integral-coefficients], the actual unit $M\\to i_*i^*M$ of ordinaryAdjunction [def-fix-qcqs-completion-ordinary-models] is bijective on $V$-sections. The module and coefficient universe is $\\max(u,t+1)$; scheme universe $t$ and coefficient-field universe $u$ are independent.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AC, lemma-compute-i-star; with Modules on Sites Tags 03D2 and 03D3 for the module comparison and its unit equation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-completed-integral-coefficients",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "The closed-immersion case s=id of qcqsOrdinaryRestrictionExact makes the actual ordinaryCoefficientMap invertible. Reindex its ring adjunction and finite-projection-normalized direct ring map to the coefficient-sized small site. Restricting the adjunction preserves its unit and hence the invertible coefficient adjunct.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the independent-universe abelian specialization theorem for the left adjoint to actual abelian direct image. Restrict this adjunction to the coefficient-sized small sites; its unit is literally precomposition of the original unit, so its evaluation at the model of V is bijective.",
+   "uses": [
+    "lem-u9-proetale-abelian-specialization-universes",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved independent-universe transfer theorem to these ring, abelian and module adjunctions. Its coefficient-adjunct instance is exactly the invertible ordinaryCoefficientMap, and its abelian hypothesis is the preceding specialization-unit computation. Its conclusion is the specified ordinaryAdjunction unit on V-sections.",
+   "uses": [
+    "lem-u9-proetale-module-unit-from-abelian-universes",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-qcqs-ordinary-restriction-exact",
+  "def-fix-qcqs-completion-ordinary-models",
+  "lem-u9-proetale-abelian-specialization-universes",
+  "def-weil-proetale-inverse-image",
+  "lem-u9-proetale-module-unit-from-abelian-universes"
+ ],
+ "proof_origin": {
+  "by": "U9 stage 3; adapted the proved small-site scalar-action comparison and generalized the affine specialization proof to independent coefficient universes",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 09AC, lemma-compute-i-star; Tag 09BL (1),(2); Tags 03D2 and 03D3, module pullback and its adjunction unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "specialization.*unit|module.*localization.*sequence|isIso₂_of_shortExact",
+   "results": "Mathlib/LinearAlgebra/Determinant.lean; Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean; Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean; Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean; Mathlib/Algebra/Star/Unitary.lean",
+   "date": "2026-10-27",
+   "verdict": "No direct pro-etale completed-module statement. Use generic adjunction and exactness APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "date": "2026-10-27",
+   "verdict": "No direct pro-etale completed-module statement. Use generic adjunction and exactness APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image adjunction unit on sections of a weakly contractible pro-etale affine whose points specialize to a closed subscheme is bijective",
+   "results": "StandardEtalePresentation.lift_bijective; AlgebraicGeometry.Spec.fullyFaithful; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective; AlgebraicGeometry.isomorphisms_eq_stalkwise; AlgebraicGeometry.ΓSpec.adjunction; AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine",
+   "date": "2026-10-27",
+   "verdict": "No direct pro-etale completed-module statement. Use generic adjunction and exactness APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an open and its complementary closed subset, sheaves of modules have a localization exact sequence and restrictions jointly detect isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrict_obj; ModuleCat.Tilde.toOpen; ModuleCat.Tilde.openToLocalization; AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp",
+   "date": "2026-10-27",
+   "verdict": "No direct pro-etale completed-module statement. Use generic adjunction and exactness APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryCompletedOpenClosedDetection",
+  "date": "2026-10-27",
+  "group": "R8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison. The complementary open-closed localization argument.",
+   "via": [
+    "lem-fix-ordinary-completed-open-closed-detection",
+    "lem-fix-qcqs-ordinary-local-detection",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryCompletedSpecializationUnit",
+  "file": "lean/Sheaf/Paper/OrdinaryCompletedSpecializationUnit.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.ordinaryCompletedSpecializationUnit",
+  "statement": "theorem ordinaryCompletedSpecializationUnit\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Z : Scheme.{t}} [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Z] [QuasiSeparatedSpace Z]\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    (V : X.ProEt) [IsAffine V.left]\n    (hweak : ∀ (P Q : Sheaf (ProEt.topology X) (Type (max u (t + 1)))) (φ : P ⟶ Q),\n      Epi φ → Function.Surjective (φ.hom.app (op V)))\n    (hspec : ∀ x : V.left, ∃ z : ↥(pullback V.hom i),\n      Specializes x ((pullback.fst V.hom i) z))\n    (M : Mod l E X none) :\n    Function.Bijective (((ordinaryAdjunction l E i).unit.app M).val.app (op V))",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T012930-L-2349270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261027T034757-L-3685820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

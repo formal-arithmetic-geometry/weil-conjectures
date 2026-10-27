@@ -1,0 +1,139 @@
+{
+ "id": "lem-zl-finite-field-base-change-residue-surjective",
+ "kind": "statement",
+ "title": "Surjectivity of the actual residue tensor map for a finite-field constant extension",
+ "statement": "Let k and F be finite fields and i:k\\to F a field embedding. Let X be a finite-type k-scheme with structure f:X\\to\\operatorname{Spec}k [def-pc-scheme, def-weil-finite-type-morphism]. Form Y=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}F with projections p:Y\\to X and q:Y\\to\\operatorname{Spec}F [def-pc-fibre-product, def-weil-affine-spectrum]. Let z be a closed point of Y and x=p(z). Write e:\\kappa(x)\\to\\kappa(z) for the actual residue-field map of p and j:F\\to\\kappa(z) for the base-field residue embedding of q [def-weil-residue-field]. Their composites from k agree. The induced ring map \\kappa(x)\\otimes_k F\\to\\kappa(z) is surjective. Here the tensor is the commutative-ring pushout of the actual maps k\\to\\kappa(x) and i:k\\to F, and the induced map is its universal map with restrictions e and j.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JT, lemma-points-fibre-product, residue-field clause; direct finite-field universal-property proof by A8."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The pullback is locally of finite type over F. By [lem-kun-closed-point-field], the closed point z has residue field K finite-dimensional over finite F, so K is a finite set. Let A be the image subring of the canonical tensor map into K. It is finite and is a domain. Multiplication by a nonzero element is injective and hence surjective, so A is a field. In Lean use Scheme.Hom.finite_residueField_of_isClosed, Module.finite_of_finite, and Finite.isField_of_domain.",
+   "uses": [
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT, lemma-points-fibre-product, residue-field clause; direct finite-field universal-property proof by A8."
+   }
+  },
+  {
+   "text": "Both actual factor maps corestrict to A. By [lem-weil-pbc-residue-field-point-naturality], Spec of the first followed by the canonical point of x and Spec of the second form a compatible pair over Spec k. The displayed base-map equality is exactly this compatibility. The fibre-product universal property [def-pc-fibre-product] yields t:Spec A -> X_F. Composing with Spec of the inclusion A -> K gives the canonical point j_z:Spec K -> X_F, by equality of both projections.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT, lemma-points-fibre-product, residue-field clause; direct finite-field universal-property proof by A8."
+   }
+  },
+  {
+   "text": "The unique point of Spec A maps to z. The field-valued-point bijection [lem-weil-pbc-morphism-from-spec-field] gives d:kappa(z) -> A with t=j_z composed with Spec(d). The equality after inclusion into K and uniqueness in that bijection give inclusion composed with d equal to the identity of K. Therefore every element of K belongs to A and has a tensor preimage.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT, lemma-points-fibre-product, residue-field clause; direct finite-field universal-property proof by A8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JT, lemma-points-fibre-product, residue-field clause; direct finite-field universal-property proof by A8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from the tensor product of residue fields to the residue field of a closed point in a finite-field fibre product is surjective",
+   "results": "OK 8 hits: Ideal.surjectiveOnStalks_residueField, IsLocalRing.residue_surjective, TensorProduct.mapOfCompatibleSMul_surjective, AdicCompletion.ofTensorProduct_surjective_of_finite, Ideal.algebraMap_residueField_surjective, Scheme.residue_surjective, Module.FaithfullyFlat.surjective_of_tensorProduct. These are different maps; no direct match.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite field constant extension, the image of the residue tensor map is a finite field and equals the point residue field by uniqueness of field-valued points",
+   "results": "OK 8 hits, including IsLocalRing.ResidueField.finite_of_finite, RingHom.EssFiniteType.residueFieldMap, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Ideal.ResidueField.exists_smul_eq_tmul_one. No matching global tensor-map surjectivity assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "residueField.*[Ss]urjective|[Ss]urjective.*residueField",
+   "results": "OK 25 hits, including Ideal.algebraMap_residueField_surjective and Ideal.Fiber.lift_residueField_surjective. No exact match for the fibre-product map. Source rg found no duplicate finiteFieldBaseChangeResidue declaration or node.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionPullbackReturnResidue",
+  "date": "2026-10-25",
+  "group": "A8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, constant extension and local Frobenius powers: finite residue compositum underlying the unchanged residue-cardinality powers.",
+   "via": [
+    "lem-zl-constant-extension-pullback-return-residue",
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFieldBaseChangeResidueSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFieldBaseChangeResidueSurjective.lean",
+  "declaration": "AlgebraicGeometry.finiteFieldBaseChangeResidue_surjective",
+  "statement": "theorem finiteFieldBaseChangeResidue_surjective\n    {k F : Type u} [Field k] [Finite k] [Field F] [Finite F]\n    (i : k →+* F) {X : Scheme.{u}} (f : X ⟶ Spec (.of k))\n    [LocallyOfFiniteType f] [QuasiCompact f]\n    (z : ↥(pullback f (Spec.map (CommRingCat.ofHom i))))\n    (hz : z ∈ closedPoints (↥(pullback f (Spec.map (CommRingCat.ofHom i)))))\n    (h : CommRingCat.ofHom (f.residueFieldAlgebraMap\n        (pullback.fst f (Spec.map (CommRingCat.ofHom i)) z)) ≫\n        (pullback.fst f (Spec.map (CommRingCat.ofHom i))).residueFieldMap z =\n      CommRingCat.ofHom i ≫ CommRingCat.ofHom\n        ((pullback.snd f (Spec.map (CommRingCat.ofHom i))).residueFieldAlgebraMap z)) :\n    Function.Surjective (pushout.desc\n      ((pullback.fst f (Spec.map (CommRingCat.ofHom i))).residueFieldMap z)\n      (CommRingCat.ofHom\n        ((pullback.snd f (Spec.map (CommRingCat.ofHom i))).residueFieldAlgebraMap z)) h).hom",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T161847-L-131201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T161847-L-131201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

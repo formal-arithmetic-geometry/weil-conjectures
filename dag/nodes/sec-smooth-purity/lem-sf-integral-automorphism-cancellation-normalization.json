@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-integral-automorphism-cancellation-normalization",
+ "kind": "statement",
+ "title": "Integral inverse cancellation agrees with the ordinary-image normalization",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension]. Let C be an IntegralComparisonSystem [def-sf-integral-comparison-system-data], g:X -> Y an isomorphism of schemes with ell invertible in every residue field [def-weil-scheme-morphism-properties], and K an integral constructible derived-complete object on Y [def-weil-derived-complete-integral-detailed]. The homomorphism obtained by the inverse of the specified completed compositor for (g inverse,g), transport along g inverse followed by g = identity, and the specified completed identity unit equals pullbackIdentityEpsilon(g,K), the inverse-image counit transported through the actual ordinary-to-completed comparisons [lem-pod-pullback-identities-scalar-extension]. This is equality of the actual integral derived morphisms, not only of their finite reductions. The Lean statement uses HEq to preserve the two standard presentations of this same ambient category, and explicitly pins the compositor/unit composite to the full constructible inclusion presentation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: canonical inverse-composition comparisons; parent detailed proof steps 4--6, using the normalized whole-system realization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-integral-comparison-system-data",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pod-pullback-identities-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat representative of K and its simultaneous quotient diagram. Reindex it by g and its inverse. The inverse-image equivalence and the actual coefficient maps identify their composite with the original whole diagram: sections, coefficient actions, augmentations and transitions agree. The sequence compositor followed by its identity unit is therefore the ordinary inverse-image counit on this system.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply total limit. The representative normalizations of the pullback realization models identify the counit-built integral compositor and completeness unit with that system calculation. Use the whole-system substitution comparison; equality is not inferred merely from all individual finite reductions.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-pur-completed-operation-tower-substitution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For g and its inverse substitute theta kappa = H(unit), the normalization of the actual ordinary-to-completed comparison. Naturality and the reduction/limit adjunction triangle cancel the intermediate reconstruction units and counits. The remaining composite is lambda for the inverse, inverse image of lambda for g, and the ordinary inverse-image counit. This is exactly pullbackIdentityEpsilon. Resolving localization and naturality carry the equality from the representative to K.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-pod-pullback-identities-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-pod-pullback-identities-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: canonical inverse-composition comparisons; parent detailed proof steps 4--6, using the normalized whole-system realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral pullback along a scheme isomorphism: the normalized composition comparison followed by the identity unit is the ordinary inverse-image counit transported through completion",
+   "results": "8 hits: pullbackSpecIso_inv_fst'_assoc, pullbackSpecIso_inv_snd_assoc, pullbackSpecIso_inv_fst_assoc, Scheme.IdealSheafData.comapIso_hom_snd, Scheme.Modules.pseudofunctor_left_unitality, Scheme.Modules.pseudofunctor_right_unitality, Scheme.Modules.conjugateEquiv_pullbackComp_inv, Scheme.IdealSheafData.comapIso_inv_subschemeι.",
+   "date": "2026-10-27",
+   "verdict": "No match. These concern scheme fiber products or ordinary sheaf modules, not the normalized completed integral comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition comparison for inverse image along an isomorphism followed by the identity unit equals the inverse equivalence counit",
+   "results": "8 hits, including CategoryTheory.Equivalence.symm_counitIso, symm_unitIso, inverse_counitInv_comp, unitInv_app_inverse and Iso.compInverseIso_inv_app.",
+   "date": "2026-10-27",
+   "verdict": "These provide ordinary categorical counit identities. None compares the prescribed completed whole-system compositor to the actual ordinary-to-completed normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits concerning construction of natural isomorphisms and their components.",
+   "date": "2026-10-27",
+   "verdict": "No comparison between the two specified integral cancellation maps; generic assembly does not supply the normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIdentityEpsilon|integralComparisonComposition",
+   "results": "0 Mathlib hits. Project searches find the defining comparison modules and IsomorphismFieldTransportClauses; none states their equality.",
+   "date": "2026-10-27",
+   "verdict": "No existing exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AutomorphismConstructibleStageEquivalence",
+  "date": "2026-10-27",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Weil-structures paragraph: canonical inverse-composition comparisons; parent detailed proof steps 4--6, using the normalized whole-system realization.",
+   "via": [
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralAutomorphismCancellationNormalization",
+  "file": "lean/Sheaf/Paper/IntegralAutomorphismCancellationNormalization.lean",
+  "declaration": "WeilConjectures.integralAutomorphismCancellation_normalization",
+  "statement": "theorem integralAutomorphismCancellation_normalization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (C : IntegralComparisonSystem.{u} l) {X Y : Scheme.{u}}\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (g : X ⟶ Y) [IsIso g] (K : sfIntegralConstructibleCategory l E Y) :\n    HEq (pullbackIdentityEpsilon l E g K).hom\n      (((integralComparisonComposition l E C (inv g) g K).symm ≪≫\n        eqToIso (congrArg (fun f ↦ (integralDerivedPullback l E f).obj K.obj)\n          (IsIso.inv_hom_id g)) ≪≫ integralComparisonUnit l E C Y K :\n        ((constructibleIntegralPullback l E g ⋙\n          constructibleIntegralPullback l E (inv g)).obj K).obj ≅ K.obj).hom)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T094347-L-217937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T094347-L-217937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

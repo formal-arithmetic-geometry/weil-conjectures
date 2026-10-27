@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-polynomial-augmentation-boundary",
+ "kind": "statement",
+ "title": "Polynomial augmentations: standard resolution and boundary lifting criterion",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings and let $Q_\\bullet\\to\\operatorname{const}B$ be an augmented simplicial $A$-algebra [def-weil-pbc-simplicial-object]. For a simplicial abelian group $M$ put $s(M)^{-n}=M_n$ for $n\\geq0$, with differential $\\sum_{i=0}^n(-1)^id_i$ for $n>0$, and zero positive terms. The constant augmentation $s(\\operatorname{const}B)\\to B[0]$, identity in degree zero and zero in negative degrees, is a quasi-isomorphism [def-weil-abstract-derived-category]. If every $Q_n\\to B$ is surjective and $s(Q_\\bullet)\\to B[0]$ is a quasi-isomorphism, then $Q_\\bullet\\to\\operatorname{const}B$ is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration], including the boundary lifting condition in dimension zero. Let $F_A(E)=A[E]$ [def-weil-pbc-mv-polynomial-ring], let $U$ forget $A$-algebras to sets, put $G=F_AU$, and let $\\epsilon:G\\to\\mathrm{id}$ and $\\delta=F_A\\eta U:G\\to G^2$ be evaluation and the map induced by the adjunction unit. The terms $P_n=G^{n+1}B$, with faces $G^i\\epsilon G^{n-i}$, degeneracies $G^i\\delta G^{n-i}$ and the iterated evaluation augmentation, form an augmented simplicial $A$-algebra. Every $P_n$ is polynomial and every $P_n\\to B$ is surjective. The underlying simplicial-set augmentation is a homotopy equivalence (a homotopy inverse and homotopies are maps of simplicial sets, without any additivity requirement). Its additive alternating augmentation $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism and its underlying simplicial-set augmentation is a trivial Kan fibration. No finiteness assumption on the rings or sets of polynomial variables is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PM (definition-standard-resolution), 08PT (lemma-pi-shriek-standard), first proof, and 08QI (remark-resolution); simplicial.tex Tags 08ND (lemma-standard-simplicial-homotopy), 08P2 (lemma-homotopy-equivalence), 08P1 (lemma-qis-simplicial-abelian-groups)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-cotangent-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "For the constant simplicial abelian group $B$, every face is the identity. Hence the differential from degree $-n$ is zero for odd $n$ and the identity for even $n>0$. Its degree-zero cohomology is $B/0=B$. In degree $-n<0$, if $n$ is even its kernel is zero, and if $n$ is odd the incoming differential from degree $-(n+1)$ is the identity, so the cohomology is zero. Positive terms vanish. The stated augmentation is a chain map and induces the identity on $H^0$ and isomorphisms between zero groups elsewhere; it is therefore a quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0197 (lemma-homology-eilenberg-maclane), proof for k=0; nonpositive cochain indexing."
+   }
+  },
+  {
+   "text": "Write $q:Q_\\bullet\\to\\operatorname{const}B$ for the augmentation. Its additive alternating map satisfies $s(Q)\\xrightarrow{s(q)}s(\\operatorname{const}B)\\to B[0]$ equal to the augmentation assumed in the statement. For every $r$, the second map on $H^r$ is invertible by Step 1 and the composite is invertible by hypothesis, so $H^r(s(q))$ is invertible. Every $q_n$ is surjective by hypothesis. Apply [lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting] to the additive simplicial groups underlying $Q$ and $\\operatorname{const}B$. It gives the required boundary fillers in every dimension. In dimension zero the boundary is empty and the required lift is precisely a preimage under $Q_0\\to B$.",
+   "uses": [
+    "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), applied after the constant-complex comparison; cotangent.tex Tag 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "The polynomial universal property [def-weil-pbc-mv-polynomial-ring] identifies functions $E\\to UC$ with $A$-algebra maps $A[E]\\to C$, naturally in $E$ and $C$. Thus $F_A\\dashv U$, with unit $e\\mapsto x_e$ and counit evaluation $x_c\\mapsto c$. The first triangle identity holds on each generator $x_e$ and on coefficients; the second sends each $c$ to $x_c$ and back to $c$. Apply [lem-trf-adjunction-standard-simplicial-homotopy] to this adjunction and $a=B$. Its formulas are exactly $P_n=G^{n+1}B$, the faces and degeneracies in the statement, and the iterated evaluation augmentation. It gives both the augmented simplicial algebra and a homotopy equivalence of its underlying simplicial sets. The homotopy inverse and homotopies live in sets; no additivity of those maps is used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-adjunction-standard-simplicial-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08NC (lemma-standard-simplicial), 08ND (lemma-standard-simplicial-homotopy); example-polynomial-algebra and example-polynomial-algebra-maps; cotangent.tex Tag 08PM (definition-standard-resolution)."
+   }
+  },
+  {
+   "text": "Each $P_n=F_A(UG^nB)=A[UG^nB]$ is polynomial. Write $a_n:G^{n+1}B\\to B$ for its augmentation and put $t_{-1}(b)=b$, $t_n(b)=x_{t_{n-1}(b)}\\in G^{n+1}B$. Evaluation gives $a_0(t_0(b))=b$; recursively $a_n(t_n(b))=a_{n-1}(t_{n-1}(b))=b$. These set-theoretic preimages prove surjectivity for all $n\\geq0$. The polynomial universal property permits arbitrary sets of variables, so this argument imposes no finiteness condition.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PM (definition-standard-resolution), displayed terms and evaluation augmentation; simplicial.tex example-polynomial-algebra-maps."
+   }
+  },
+  {
+   "text": "The augmentation $p:P_\\bullet\\to\\operatorname{const}B$ is additive because its components are algebra maps. Its underlying simplicial-set map is a homotopy equivalence by Step 3. Apply [lem-trf-simplicial-abelian-set-homotopy-quasi-iso] to obtain a quasi-isomorphism $s(p):s(P)\\to s(\\operatorname{const}B)$, although the chosen inverse and homotopies need not be additive. Composing with the constant augmentation of Step 1 gives the required quasi-isomorphism $s(P)\\to B[0]$: its cohomology maps are composites of isomorphisms. Step 4 supplies degreewise surjectivity, so the criterion proved in Step 2 now gives the trivial Kan fibration, including dimension zero.",
+   "uses": [
+    "lem-trf-simplicial-abelian-set-homotopy-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence); cotangent.tex Tag 08PT (lemma-pi-shriek-standard), first proof, and Tag 08QI (remark-resolution)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-adjunction-standard-simplicial-homotopy",
+  "lem-trf-simplicial-abelian-set-homotopy-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PM (definition-standard-resolution), 08PT (lemma-pi-shriek-standard), first proof, and 08QI (remark-resolution), with simplicial.tex Tags 0197, 08ND, 08P2 and 08P1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "standard simplicial polynomial algebra resolution augmentation is a quasi-isomorphism and a trivial Kan fibration",
+   "results": "8 hits; top=['CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv', 'classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule', 'classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented', 'classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve', 'CategoryTheory.SimplicialObject.cosk', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex', 'SimplicialObject.Splitting', \"AlgebraicTopology.DoldKan.Γ₀'_obj\"]; note=; digest=76900aa0f68d7ec3. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: ExtraDegeneracy.homotopyEquiv requires additive extra degeneracies; the standard algebra resolution is contracted only after forgetting to sets. Dold–Kan comparison and generic simplicial-object definitions do not give this augmentation criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\"",
+   "results": "12 hits; top=['CategoryTheory.CosimplicialObject.Truncated.mkNotation', 'CategoryTheory.SimplicialObject.Truncated.mkNotation', 'CategoryTheory.CosimplicialObject', 'CategoryTheory.SimplicialObject', 'CategoryTheory.CosimplicialObject.Augmented', 'CategoryTheory.SimplicialObject.Augmented', 'CategoryTheory.CosimplicialObject.Truncated', 'CategoryTheory.SimplicialObject.Truncated']; note=; digest=fd52027898d27ba0. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: ExtraDegeneracy.homotopyEquiv requires additive extra degeneracies; the standard algebra resolution is contracted only after forgetting to sets. Dold–Kan comparison and generic simplicial-object definitions do not give this augmentation criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*resolution|resolution.*polynomial|trivial.*fibration",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: ExtraDegeneracy.homotopyEquiv requires additive extra degeneracies; the standard algebra resolution is contracted only after forgetting to sets. Dold–Kan comparison and generic simplicial-object definitions do not give this augmentation criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "standard simplicial free commutative algebra resolution is contractible over the augmented ring",
+   "results": "8 hits; top=['instCommRingFreeCommRing', 'FreeAlgebra', 'CategoryTheory.SimplicialObject.Augmented', 'FreeAlgebra.instRing', 'CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv', 'AugmentedSimplexCategory', 'classifyingSpaceUniversalCover.compForgetAugmented.toModule', 'FreeAlgebra.instFree']; note=; digest=a56f0f4889394d15. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: ExtraDegeneracy.homotopyEquiv requires additive extra degeneracies; the standard algebra resolution is contracted only after forgetting to sets. Dold–Kan comparison and generic simplicial-object definitions do not give this augmentation criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*resolution|resolution.*polynomial|trivial.*fibration [sub=AlgebraicTopology]",
+   "results": "{\"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"0140202238240f5f\", \"sub\": \"AlgebraicTopology\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected search results. ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) requires an extra degeneracy in a preadditive category; the standard polynomial contraction is only in sets. DoldKan normalization compares two complexes of the same simplicial abelian group. The classifying-space and model-category resolutions concern different objects. AlgCat.adj (Algebra/Category/AlgCat/Basic.lean:205) uses the noncommutative FreeAlgebra, not the asserted augmentation theorem. None states all clauses or the general boundary criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "free commutative algebra cotriple resolution of a ring has augmentation inducing isomorphisms on additive homology",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAlgebra.instRing\", \"FreeLieAlgebra.instAddGroup\", \"AlgCat.adj\", \"FreeRing.coeRingHom\", \"FreeAlgebra.instAddCommMonoid\", \"FreeAlgebra.lift\", \"FreeRing.toFreeCommRing\", \"FreeCommRing.lift\"], \"digest\": \"af735283e84a001c\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected search results. ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) requires an extra degeneracy in a preadditive category; the standard polynomial contraction is only in sets. DoldKan normalization compares two complexes of the same simplicial abelian group. The classifying-space and model-category resolutions concern different objects. AlgCat.adj (Algebra/Category/AlgCat/Basic.lean:205) uses the noncommutative FreeAlgebra, not the asserted augmentation theorem. None states all clauses or the general boundary criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExtraDegeneracy\"",
+   "results": "{\"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\"], \"digest\": \"a1b304067fef6d6b\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected search results. ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) requires an extra degeneracy in a preadditive category; the standard polynomial contraction is only in sets. DoldKan normalization compares two complexes of the same simplicial abelian group. The classifying-space and model-category resolutions concern different objects. AlgCat.adj (Algebra/Category/AlgCat/Basic.lean:205) uses the noncommutative FreeAlgebra, not the asserted augmentation theorem. None states all clauses or the general boundary criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "standard simplicial polynomial algebra resolution augmentation is a quasi-isomorphism and a trivial Kan fibration",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"Rep.standardComplex.compForgetAugmentedIso\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"AlgebraicTopology.DoldKan.Γ₀\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"AlgebraicTopology.DoldKan.Γ₀NondegComplexIso\"], \"digest\": \"66e77edd5b9013fb\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected search results. ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) requires an extra degeneracy in a preadditive category; the standard polynomial contraction is only in sets. DoldKan normalization compares two complexes of the same simplicial abelian group. The classifying-space and model-category resolutions concern different objects. AlgCat.adj (Algebra/Category/AlgCat/Basic.lean:205) uses the noncommutative FreeAlgebra, not the asserted augmentation theorem. None states all clauses or the general boundary criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cotriple resolution associated to free commutative algebra forgetful adjunction has acyclic augmentation and boundary fillers",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"ModuleCat.projectiveResolution\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\"], \"digest\": \"4577cb1103704309\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected search results. ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) requires an extra degeneracy in a preadditive category; the standard polynomial contraction is only in sets. DoldKan normalization compares two complexes of the same simplicial abelian group. The classifying-space and model-category resolutions concern different objects. AlgCat.adj (Algebra/Category/AlgCat/Basic.lean:205) uses the noncommutative FreeAlgebra, not the asserted augmentation theorem. None states all clauses or the general boundary criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-resolution-coherence",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Re-split: standard augmentation and boundary-lifting bridge (old Steps 1–3).",
+   "via": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-augmentation-boundary",
+  "worker": "stage1",
+  "summary": "Split using three existing same-unit simplicial results, without new nodes: constant-complex parity computation; comparison with the constant simplicial target before applying boundary lifting; polynomial/free-set adjunction and its triangle identities; explicit nested-variable preimages; nonadditive set-homotopy comparison followed by the criterion. Added the existing polynomial definition as a statement dependency. The mathematical statement is unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Re-split: standard augmentation and boundary-lifting bridge (old Steps 1–3). The five steps realize the standard-augmentation and boundary-lifting bridge needed for the polynomial cotangent resolution in that supporting argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-ca6f8b9f3",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-ca6f8b9f3 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged; it adds no new nodes. The statement is unchanged apart from one added citation: [def-weil-pbc-mv-polynomial-ring] in the text and in stmt_deps. The item is still unsplit in clones/live and clones/side-live, and it has no repair note. Sources read: cotangent.tex 08PM, 08PT (first proof) and 08QI; simplicial.tex 08ND, 08P2, 08P1 and 0197; tags checked against stacks-project/tags/tags; no SGA. The proof is the 08PT first proof plus the 08QI criterion. Step 1: the alternating differential of s(const B) is 0 for odd n and the identity for even n>0, so H^0=B and all other cohomology is 0; this is elementary. Step 2: s(Q)->s(const B)->B[0] composes to q_0; 2-out-of-3 makes s(q) a quasi-isomorphism; lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting then gives fillers for all n>=0, and n=0 is the p_0 surjectivity clause of def-weil-pbc-trivial-kan-fibration. Step 3: the polynomial universal property gives the adjunction F_A ⊣ U (triangle identities checked on generators); lem-trf-adjunction-standard-simplicial-homotopy with a=B gives exactly the item's terms, faces, degeneracies and augmentation, and the homotopy equivalence on underlying sets (08ND). Step 4: t_n(b)=x_{t_{n-1}(b)} and a_n=a_{n-1}∘d_0 with d_0=ε_{G^nB}, which gives surjectivity in every degree for arbitrary variable sets. Step 5: lem-trf-simplicial-abelian-set-homotopy-quasi-iso does not require an additive inverse or homotopies (08P2); composing with Step 1 and applying Step 2 gives the trivial Kan fibration. proof_deps equals the union of the uses, there is no cycle, and all three cited lemmas are reviewed and in sk-i-curve-zero, so no tool_uses are needed. Edge cases checked: B=0, the identity A->A, infinite rings and variable sets, characteristic 2. Duplicates: def-trf-cotangent-resolution-data, lem-trf-polynomial-resolution-extension-trivial-kan, lem-trf-constant-polynomial-resolution-retraction and the cotangent citers do not state the item. Route pivot: def-weil-pbc-trivial-kan-fibration is the classical combinatorial notion (Stacks 08NL, Mathlib match SSet.modelCategoryQuillen.I.rlp), used only for the 08QI/08P1 resolution criterion; it was already in the base statement and its use is justified at Steps 2 and 5. 'Simplicial set' means the ordinary underlying simplicial set and involves no enhancement machinery. Both are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialAugmentationBoundary",
+  "declaration": "Algebra.CotangentResolution.polynomial_augmentation_boundary",
+  "file": "lean/Sheaf/RingTheory/PolynomialAugmentationBoundary.lean",
+  "statement": "theorem polynomial_augmentation_boundary (f : Arrow CommRingCat.{u}) : QuasiIso (HomologicalComplex.extendMap (AlgebraicTopology.AlternatingFaceMapComplex.ε.app (⟨(SimplicialObject.const AddCommGrpCat.{u}).obj ((forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat).obj f.right), (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat).obj f.right, 𝟙 _⟩)) ComplexShape.embeddingDownNat) ∧ (∀ Q : Augmentation f, (∀ n : ℕ, Function.Surjective (Q.augmentation.app (op ⦋n⦌))) → QuasiIso (additiveAugmentation Q) → SSet.Enhanced.trivialKanFibration (Functor.whiskerRight Q.augmentation (forget CommRingCat.{u}))) ∧ ∃ P : Augmentation f, IsStandard P ∧ IsPolynomialResolution P ∧ (∃ g : (SimplicialObject.const CommRingCat.{u}).obj f.right ⋙ forget CommRingCat.{u} ⟶ P.algebra ⋙ forget CommRingCat.{u}, Relation.EqvGen (fun a b ↦ Nonempty (SSet.Homotopy a b)) (Functor.whiskerRight P.augmentation (forget CommRingCat.{u}) ≫ g) (𝟙 (P.algebra ⋙ forget CommRingCat.{u})) ∧ Relation.EqvGen (fun a b ↦ Nonempty (SSet.Homotopy a b)) (g ≫ Functor.whiskerRight P.augmentation (forget CommRingCat.{u})) (𝟙 ((SimplicialObject.const CommRingCat.{u}).obj f.right ⋙ forget CommRingCat.{u}))) ∧ SSet.Enhanced.trivialKanFibration (Functor.whiskerRight P.augmentation (forget CommRingCat.{u}))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdbe1f2f9",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps (incl. CotangentResolutionCoherence Augmentation/IsStandard/additiveAugmentation/IsPolynomialResolution in full; TrivialKanFibration = I.rlp abbrev; SSet.Homotopy), module and report. Node diff vs live: only lean + landed stmt_dep def-trf-cotangent-resolution-data (allowed §5). All clauses match: constant ε-extension QuasiIso; criterion for arbitrary Augmentation (surjective ∀n incl. 0, QuasiIso additiveAugmentation → I.rlp of underlying SSet map, ∂Δ[0] included); ∃ P IsStandard (exact recursive terms/faces/degeneracies/augmentation) ∧ IsPolynomialResolution (Type u variables, A-coefficient isos, surjective, qis) ∧ set-level homotopy inverse via EqvGen of SSet.Homotopy (correct directions, no additivity) ∧ trivial Kan fibration. Edge cases B=0, identity, infinite sets, char 2, n=0, universe u from recorded interface. Gates: no defs, one sorry, source/blueprint docstrings with 5 proof steps, statement verbatim, imports per §3.7 with cycle-forming reverse import omitted and listed. No compile (no change). No findings."
+ }
+}

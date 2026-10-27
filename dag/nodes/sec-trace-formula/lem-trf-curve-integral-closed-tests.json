@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-curve-integral-closed-tests",
+ "kind": "statement",
+ "title": "Integral closed subscheme tests and the generic witness on a proper curve",
+ "statement": "Let $k$ be a field [def-weil-field] and $C$ an integral scheme [def-pc-integral-scheme] proper over $k$ [def-weil-proper-morphism] of topological Krull dimension one [def-kun-topological-krull-dimension]. Let $\\xi$ be its generic point, so $\\overline{\\{\\xi\\}}=C$, and let $\\mathcal L$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. For every integral closed subscheme $i:Z\\hookrightarrow C$ [def-weil-closed-immersion], exactly one of the following holds: $i$ is an isomorphism over $C$; or there is a closed point $z\\ne\\xi$, meaning $\\{z\\}$ is closed, and an isomorphism $Z\\cong\\operatorname{Spec}\\kappa(z)$ over $C$ identifying $i$ with the canonical residue-field morphism. Here $\\operatorname{Spec}$ and $\\kappa(z)=\\mathcal O_{C,z}/\\mathfrak m_z$ are as in [def-weil-affine-spectrum, def-weil-residue-field]. In the first case the coherent module $\\mathcal G=\\mathcal O_C$ [pqf-def-coherent] has support $C$, where $\\operatorname{Supp}(\\mathcal G)=\\{x:\\mathcal G_x\\ne0\\}$ and stalks are [def-weil-pbc-module-stalk]. Its generic stalk is $\\kappa(\\xi)$, annihilated by $\\mathfrak m_\\xi=0$, and has dimension one over $\\kappa(\\xi)$ [def-weil-vector-space-dimension]. Moreover $\\mathcal L\\otimes_{\\mathcal O_C}\\mathcal O_C\\cong\\mathcal L$ [def-pur-sheaf-tensor-product], and\n$$\\chi(C,\\mathcal L\\otimes\\mathcal O_C)-\\chi(C,\\mathcal O_C)=\\deg_k(\\mathcal L),$$\nwith Euler characteristic and degree as in [def-pc-euler-characteristic, def-pc-degree-line-bundle].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYV, lemma-degree-on-proper-curve, proof of condition (2): the dichotomy Z=X or a closed point and the witness O_X when Z=X (returned steps 4-5)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-vector-space-dimension",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-euler-characteristic",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=i(|Z|)$. By the definition of a closed immersion and integrality, $T$ is a nonempty irreducible closed subset of $C$. Scheme sobriety gives a unique $z\\in T$ with $\\overline{\\{z\\}}=T$. Suppose $T\\ne C$. If $y\\in T$ and $y\\ne z$, then $\\overline{\\{y\\}}\\subseteq T$; equality would make $y$ a second generic point of $T$, so this inclusion is strict. The closure of a singleton is irreducible: any closed cover of it contains the point in one member, hence contains its entire closure in that member. Thus $\\overline{\\{y\\}}\\subsetneq T\\subsetneq C$ is a chain of irreducible closed subsets of length two, contrary to $\\dim C=1$. Therefore $T=\\{z\\}$ is closed. It cannot contain $\\xi$, since a closed subset containing $\\xi$ contains $C$. Finally $C$ is not a singleton: a singleton has no strict chain of nonempty irreducible closed subsets and has dimension zero.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-scheme-sober",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (2); elementary expansion of its whole-curve/closed-point dichotomy, using Schemes Tag 01IS, lemma-scheme-sober"
+   }
+  },
+  {
+   "text": "Since $C$ and $Z$ are integral, both are reduced. If $T=C$, compare $i:Z\\to C$ with the identity closed immersion of $C$. Uniqueness of the reduced induced closed subscheme on $T$ identifies them over $C$, so $i$ is an isomorphism. If $T=\\{z\\}$, the canonical morphism $j_z:\\operatorname{Spec}\\kappa(z)\\to C$ is a closed immersion by the closed-point residue-immersion criterion. Its source is integral, hence reduced: its only nonempty affine open is itself and its ring is the field $\\kappa(z)$. Its image is $\\{z\\}$. Apply the same uniqueness theorem to $i$ and $j_z$ to obtain $Z\\cong\\operatorname{Spec}\\kappa(z)$ over $C$. The alternatives are exclusive because their images are respectively $C$ and the proper singleton $\\{z\\}$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-closed-point-residue-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme, uniqueness; canonical residue-field map: Tag 01J9, lemma-characterize-points"
+   }
+  },
+  {
+   "text": "In the whole-curve case choose $\\mathcal G=\\mathcal O_C$. The proper-field invertible-coherence theorem, applied to $C$ and the given $\\mathcal L$, gives coherence of $\\mathcal O_C$ and $\\mathcal L$. For every $x\\in C$, the integral-scheme stalk theorem says $\\mathcal O_{C,x}$ is an integral domain, hence is nonzero. The stalk of $\\mathcal G$ is exactly $\\mathcal O_{C,x}$, so the support specified in the statement is all of $C$.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (2), choice G=O_X; coherence: Tag 01XZ, lemma-coherent-Noetherian"
+   }
+  },
+  {
+   "text": "At $\\xi$, the same integral-scheme stalk theorem identifies $\\mathcal G_\\xi=\\mathcal O_{C,\\xi}$ as a field. The only proper ideal of a field is zero (a nonzero element generates $1$), so its maximal ideal is $\\mathfrak m_\\xi=0$. By the definition $\\kappa(\\xi)=\\mathcal O_{C,\\xi}/\\mathfrak m_\\xi$, the quotient map identifies $\\mathcal G_\\xi$ with $\\kappa(\\xi)$ as a module over the stalk ring. Its annihilation by $\\mathfrak m_\\xi$ follows from $\\mathfrak m_\\xi=0$. The singleton $\\{1\\}$ is a basis over this field: every element is its own scalar times $1$, and $a\\cdot1=0$ forces $a=0$. The dimension is consequently one.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-residue-field",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions, final assertion; elementary residue-field and basis calculation"
+   }
+  },
+  {
+   "text": "For every open $U$, the balanced map $s\\otimes a\\mapsto as$ identifies $\\mathcal L(U)\\otimes_{\\mathcal O_C(U)}\\mathcal O_C(U)$ with $\\mathcal L(U)$, with inverse $s\\mapsto s\\otimes1$. The two composites are identities because $(as)\\otimes1=s\\otimes a$. These maps commute with restriction. Hence the presheaf tensor $P$ is isomorphic to the sheaf $\\mathcal L$ by some $\\alpha:P\\to\\mathcal L$. Its sheafification $P\\to P^\\#$ defines the sheaf tensor product. By the universal property, $\\alpha$ factors uniquely as $\\beta\\circ(P\\to P^\\#)$ with $\\beta:P^\\#\\to\\mathcal L$, and $\\alpha^{-1}$ followed by $P\\to P^\\#$ is a map $\\gamma:\\mathcal L\\to P^\\#$. Uniqueness of factorizations through $P\\to P^\\#$ gives $\\gamma\\beta=\\mathrm{id}$, and $\\beta\\gamma=\\mathrm{id}$ is immediate, so $P^\\#\\cong\\mathcal L$. Thus $\\mathcal L\\otimes\\mathcal O_C\\cong\\mathcal L$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; explicit tensor-unit maps on sections"
+   }
+  },
+  {
+   "text": "The preceding isomorphism identifies $\\mathcal L\\otimes\\mathcal O_C$ with the coherent module $\\mathcal L$. Cohomology, being a functor, sends this isomorphism to isomorphisms in every degree, so the alternating sums defining the two Euler characteristics agree. The definition of degree gives $\\deg_k(\\mathcal L)=\\chi(C,\\mathcal L)-\\chi(C,\\mathcal O_C)$. Substituting yields $\\chi(C,\\mathcal L\\otimes\\mathcal O_C)-\\chi(C,\\mathcal O_C)=\\deg_k(\\mathcal L)$, exactly the generic witness assertion in Tag 0AYV.",
+   "uses": [
+    "def-pc-euler-characteristic",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYR, definition-degree-invertible-sheaf, and Tag 0AYV, lemma-degree-on-proper-curve, condition (2) with Z=X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-scheme-sober",
+  "def-kun-topological-krull-dimension",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-weil-pbc-module-stalk",
+  "def-weil-vector-space-dimension",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "def-pc-euler-characteristic",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (2), whole-curve case; the implicit dimension argument is expanded using 01IS and 01J3, and the tensor-unit maps are written on sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every integral closed subscheme of an integral one dimensional scheme is the whole scheme or the spectrum of the residue field of a closed point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Unique ↥(AlgebraicGeometry.Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n  {\"name\": \"AlgebraicGeometry.affine_isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R) ↔ IsDomain ↑R\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is integral if and only if the commutative ring $R$ is a domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [AlgebraicGeometry.IsIntegral X] → OrderTop ↥X\", \"doc\": \"For any integral scheme $X$, its underlying topological space is equipped with an order having a top element, which is the unique generic point of $X$. This means that every point in $X$ is a speciali\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsIntegral X ↔ IrreducibleSpace ↥X ∧ AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → Unique ↥(AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any field $ K $, the scheme $ \\\\operatorname{Spec}(K) $ has a unique carrier (underlying topological space), corresponding to the fact that the prime spectrum $ \\\\operatorname{Spec}(K) $ contains on\"}\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closed subschemes of an integral curve are reduced closed points or the entire curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsIntegral X] : X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(U : X.Opens) [IsReduced X] : IsReduced U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsIntegral Y] [Nonempty X] : IsIntegral X\", \"doc\": \"If $X$ is a non-empty scheme equipped with an open immersion into an integral scheme $Y$, then $X$ is also an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : IrreducibleSpace X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \": IsIntegral X ↔ IrreducibleSpace X ∧ IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsIntegral",
+   "results": "[loogle] OK 0 hit(s)\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(integral|irreducible).*(closed|subscheme)|topologicalKrullDim.*[=≤].*1",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"40\", \"text\": \"theorem isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed [IsAlgClosed K]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"141\", \"text\": \"  have := isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed G'\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"line\": \"22\", \"text\": \"Here we're making use of the equivalence between irreducible closed subsets of a scheme and their\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"136\", \"text\": \"    IsIntegralHom f ↔ UniversallyClosed f ∧ IsAffineHom f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"152\", \"text\": \"  apply PrimeSpectrum.isIntegral_of_isClosedMap_comap_mapRingHom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"160\", \"text\": \"    @IsIntegralHom = (@UniversallyClosed ⊓ @IsAffineHom : MorphismProperty Scheme) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"16\", \"text\": \"irreducible component is not already reduced. Instead, we take the closed subscheme defined by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"23\", \"text\": \"* `AlgebraicGeometry.Scheme.irreducibleComponent`: The subscheme structure on an irreducible\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"45\", \"text\": \"    exact TopologicalSpace.NoetherianSpace.finite_irreducibleComponents.sdiff.isClosed_biUnion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"64\", \"text\": \"  (X.irreducibleComponentIdeal Z hZ).subscheme\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"68\", \"text\": \"  (X.irreducibleComponentIdeal Z hZ).subschemeι\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"269\", \"text\": \"  simp_rw [isPreirreducible_iff_isClosed_union_isClosed, not_forall, not_or] at H\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"360\", \"text\": \"open IrreducibleCloseds Set in\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"20\", \"text\": \"  If `X` is an integral scheme that is universally closed over `Spec K`, then `Γ(X, ⊤)` is a field.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"22\", \"text\": \"  If `X` is an integral scheme that is universally closed and of finite type over `Spec K`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"95\", \"text\": \"    IsIntegralHom.eq_universallyClosed_inf_isAffineHom, inf_assoc, inf_left_comm]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"138\", \"text\": \"theorem isIntegral_appTop_of_universallyClosed (f : X ⟶ Y) [UniversallyClosed f] [IsAffine Y] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"145\", \"text\": \"  rw [← IsIntegralHom.SpecMap_iff, IsIntegralHom.iff_universallyClosed_and_isAffineHom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"384\", \"text\": \"      exact TopologicalSpace.NoetherianSpace.finite_irreducibleComponents.sdiff.isClosed_biUnion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"398\", \"text\": \"    (by rw [Set.image_univ, U.range_ι, hU]; exact mem_irreducibleComponent)).mem_closed\"}\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf of an integral proper curve has full support generic stalk dimension one and twisting it by a line bundle changes Euler characteristic by the degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"FunctionField.classNumber\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class number is defined as the cardinality of the class group of the ring of integers $\\\\mathcal{O}_F$ (the integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over the finite field $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"Module.rankAtStalk_self\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] [Nontrivial R], Module.rankAtStalk R = 1\", \"doc\": \"For any non-trivial commutative semiring $ R $, the rank of $ R $ as a module over itself localized at any prime ideal $ \\\\mathfrak{p} $ is 1. Specifically, the rank of $ R $ over the localization $ R_\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isScalarTower\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : IrreducibleSpace ↥X] (U : X.Opens) (x : ↥U) [inst_1 : Nonempty ↥↑U],\\n  IsScalarTower ↑(X.presheaf.obj (Opposite.op U)) ↑(X.presheaf.stalk ↑x) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, the ring of sections $\\\\Gamma(X, U)$ over $U$ is equipped with an algebra structure over the function field of $X$. This structure \"}\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral closed subscheme of an integral curve has only one point and equals the reduced residue field subscheme at that closed point",
+   "results": "8 hits read: Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, Scheme.range_fromSpecResidueField, Scheme.Spec_map_residue_apply, Scheme.SpecMap_residue_apply, isClosed_singleton_iff_isClosedImmersion, IsAffineOpen.primeIdealOf_genericPoint, Scheme.SpecToEquivOfField, Scheme.fromSpecResidueField_apply. These describe residue-field points and generic primes but do not classify all integral closed subschemes or give the coherent generic witness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(integral|irreducible).*(closed|subscheme)|topologicalKrullDim.*[=≤].*1",
+   "results": "20 hits. Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean. Read the returned types: only integrality, its consequences, and scheme constructions; none gives the complete closed-subscheme and module-witness statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closed subschemes of a proper integral curve and the structure sheaf generic rank one degree formula",
+   "results": "8 hits. AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsIntegral.casesOn, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion. Read the returned types: only integrality, its consequences, and scheme constructions; none gives the complete closed-subscheme and module-witness statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsIntegral",
+   "results": "0 hits. . Read the returned types: only integrality, its consequences, and scheme constructions; none gives the complete closed-subscheme and module-witness statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closed subschemes of an integral one dimensional scheme are the whole scheme or reduced closed points; the structure sheaf gives the degree Euler characteristic identity",
+   "results": "8 hits. AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral. Read the returned types: only integrality, its consequences, and scheme constructions; none gives the complete closed-subscheme and module-witness statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral algebraic curve has only reduced closed points as proper integral closed subschemes and degree of a line bundle equals its Euler characteristic minus that of the structure sheaf",
+   "results": "8 hits. AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.IsReduced, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain. Read the returned types: only integrality, its consequences, and scheme constructions; none gives the complete closed-subscheme and module-witness statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-euler-tensor-generic-rank",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the integral-curve Euler-characteristic calculation in the proof of Stacks 0AYX (via 0AYV). Within this supporting calculation: Tag 0AYV, lemma-degree-on-proper-curve, proof of condition (2): the dichotomy Z=X or a closed point and the witness O_X when Z=X (returned steps 4-5).",
+   "via": [
+    "lem-trf-curve-euler-tensor-generic-rank",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-curve-integral-closed-tests",
+  "worker": "stage1",
+  "summary": "No new nodes: expanded the dimension-one closed-support dichotomy, used the existing reduced-induced uniqueness and closed-point residue immersion nodes, and assembled coherence, full support, generic rank one and the degree identity from existing statements and explicit elementary calculations. The statement is unchanged.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the integral-curve Euler-characteristic calculation in the proof of Stacks 0AYX (via 0AYV). Within this supporting calculation: Tag 0AYV, lemma-degree-on-proper-curve, proof of condition (2): the dichotomy Z=X or a closed point and the witness O_X when Z=X (returned steps 4-5). Steps 1-2 realize the integral closed tests; steps 3-6 realize the O_C generic witness in the 0AYV supporting calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "The generic uniqueness theorem for reduced closed structures turns the topological dichotomy into the scheme-theoretic alternatives. No node of this unit supplies that general theorem; it does not replace the 0AYV route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-96a3c1141",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-96a3c1141 (reviewer sub-agent of L); spot-checked: Read Stacks 0AYV (varieties.tex lemma-degree-on-proper-curve), the proof of condition (2). The statement and stmt_deps are byte-identical to the unsplit node in the Q143 snapshots. There are no new nodes, no repair note (so not a re-split) and no SGA. The item's clauses are exactly what the parent lem-trf-curve-euler-tensor-generic-rank uses in its steps 2-4. Step 1: the dimension-one chain argument (cl{y} strictly inside T strictly inside C) uses lem-weil-pbc-scheme-sober for the unique generic point; it is correct and elementary. Step 2: uniqueness clause (3) of lem-weil-pbc-reduced-induced-closed-subscheme is applied to i and to id_C, and to i and j_z, after lem-trf-closed-point-residue-immersion makes j_z a closed immersion. This gives the isomorphism over C and the identification with the canonical residue-field morphism. Its tool_use (unit sk-thm-p1, which this unit does not provide) is accepted; under C8 L should record tool_uses, not the worker, but the content is right. Step 3: lem-trf-proper-field-invertible-coherent applies with all its hypotheses in force; nonzero domain stalks give Supp O_C = C. Step 4: the generic stalk is a field, so m_xi = 0 and the dimension is 1. Step 6: functoriality of cohomology plus the definition of degree; not circular. Edge cases checked: non-rational closed point, singular curve, L = O_C, non-reduced or empty Z, singleton C. rg -L over the snapshot DAG found no duplicate. FIX: step 5 went from a presheaf tensor isomorphic to the sheaf L to its sheafification being isomorphic to L without citing sheafification. Added def-weil-pbc-sheafification to step 5 uses and proof_deps, and wrote out the universal-property argument (beta gamma = id, and gamma beta = id by unique factorization). File: fixes/dag/nodes/sec-trace-formula/lem-trf-curve-integral-closed-tests.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveIntegralClosedTests",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.curve_integral_closed_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveIntegralClosedTests.lean",
+  "statement": "theorem curve_integral_closed_tests (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C = 1) (ξ : C) (hξ : closure ({ξ} : Set C) = Set.univ) (L : C.Modules) [L.IsInvertible] : (∀ (Z : Scheme.{u}) [IsIntegral Z] (i : Z ⟶ C) [IsClosedImmersion i], Xor (IsIso i) (∃ z : C, IsClosed ({z} : Set C) ∧ z ≠ ξ ∧ ∃ e : Z ≅ Spec (C.residueField z), e.hom ≫ C.fromSpecResidueField z = i)) ∧ RingedSpace.IsCoherent C.toRingedSpace (SheafOfModules.unit C.ringCatSheaf) ∧ {x : C | ¬ Subsingleton ↑(TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) (SheafOfModules.unit C.ringCatSheaf).val.presheaf x)} = Set.univ ∧ IsLocalRing.maximalIdeal (C.presheaf.stalk ξ) = ⊥ ∧ (∀ (a : C.presheaf.stalk ξ), a ∈ IsLocalRing.maximalIdeal (C.presheaf.stalk ξ) → ∀ m : TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) (SheafOfModules.unit C.ringCatSheaf).val.presheaf ξ, a • m = 0) ∧ Nonempty ((RingedSpace.moduleStalkFunctor C.toRingedSpace ξ).obj (SheafOfModules.unit C.ringCatSheaf) ≅ (ModuleCat.restrictScalars (C.residue ξ).hom).obj (ModuleCat.of (C.residueField ξ) (C.residueField ξ))) ∧ Module.finrank (C.presheaf.stalk ξ) ↑(TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) (SheafOfModules.unit C.ringCatSheaf).val.presheaf ξ) = 1 ∧ Nonempty (L ⊗ SheafOfModules.unit C.ringCatSheaf ≅ L) ∧ (L ⊗ SheafOfModules.unit C.ringCatSheaf).eulerChar k - eulerChar k (SheafOfModules.unit C.ringCatSheaf) = L.degree k",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca3da5ad6",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0AYV cond (2) proof: hypotheses (field k, integral C proper over k, topologicalKrullDim=1, generic ξ with closure=univ, invertible L) identical to landed parent eulerChar_tensor_invertible_generic_rank; Xor dichotomy IsIso i vs closed z≠ξ with e : Z ≅ Spec κ(z), e.hom ≫ fromSpecResidueField z = i, both true and exclusive (dim 1); witness clauses hoisted out of ∀Z, equivalent via 𝟙 C; full RingedSpace.IsCoherent, support=univ via non-subsingleton stalks, m_ξ=⊥, annihilation, stalk ≅ restrictScalars along canonical residue map, finrank over stalk ring =1 (parent encoding), L⊗O≅L, χ(L⊗O)−χ(O)=deg L. lean.statement verbatim; node differs from live only in lean; only theorem is by sorry; docstrings have source, blueprint and 6-step proof; report has Worker report + Second reading by NV. Edge cases (empty or singleton C, empty Z, non-rational closed points, L=O, any characteristic) checked. Minor accepted: RingedSpace.moduleStalkFunctor used per def-weil-pbc-module-stalk record note. No compile (no changes)."
+ }
+}

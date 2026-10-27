@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-tensor-exchange-normalized-models",
+ "kind": "statement",
+ "title": "Existence of normalized tensor-exchange adjunction ingredients",
+ "statement": "Fix a finite-field datum $D$, coefficient datum $A$ with prime $\\ell\\ne p$, finite extension $E/\\mathbf Q_\\ell$, positive $n$, a six-functor operation datum six, a separated finite-type map $f:X\\to Y$ between finite-type schemes over $D.k$, a constructible exceptional-adjunction System $S$ and a compactification $c$ of $f$ [def-fix-six-functor-datum, def-sf-tensor-exchange-presentation]. There exists a Presentation $p$ of the three adjunctions and actual projection on the four coefficient stages, together with NormalizedDatum(six,S,c,p). This asserts no exchange isomorphism, exchange shift structure or coefficient-transposition identity.",
+ "stmt_deps": [
+  "def-sf-tensor-exchange-presentation",
+  "def-fix-six-functor-datum",
+  "def-weil-exceptional-inverse-image",
+  "def-nagata-compactification"
+ ],
+ "proof": [
+  {
+   "text": "Restrict internal Hom, tensor, pullback and ordinary direct image to the actual full finite-Tor categories, using the finite Hom bounds and the uniform integral Hom/direct-image bounds. The finite direct-image corollary and pullback/tensor preservation ensure all intermediate inputs lie in these categories, including on nonseparated finite-type schemes.",
+   "uses": [
+    "lem-sf-tensor-exchange-ctf-domains",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ringed closed adjunction has evaluation as counit. Integrally compose it with the completion-unit mapping property for complete Hom targets. Restrict the inverse proper/open projection and conjugate by the actual signed braidings. Retain all ringed and partial realization equations.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-ambient-completed-tensor-adjunction",
+    "fix-prop-projection-formula",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize these ingredients at every finite coefficient field, and realize common-stage objects and arrows at one finite field. Unique-adjoint transport identifies the chosen System functors and their transposes with the supplied datum. These constructions give the original-field equality and both field-stage ProjectionRealized equations. No exchange Conclusion is selected.",
+   "uses": [
+    "lem-sf-tensor-hom-coefficient-transposes",
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-tensor-exchange-ctf-domains",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ambient-completed-tensor-adjunction",
+  "fix-prop-projection-formula",
+  "fix-prop-adjunctions",
+  "lem-sf-tensor-hom-coefficient-transposes",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1 (five adjunction bijections), Step 2, coefficient compatibility and the integral, rational and common-stage paragraphs"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1 (five adjunction bijections), Step 2, coefficient compatibility and the integral, rational and common-stage paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom exchange for an exceptional adjunction from a projection formula",
+   "results": "8 hits: CategoryTheory.expComparison, CategoryTheory.coev_expComparison, CategoryTheory.exp.adjunction, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.exponentialIdealReflective, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.bijection, CategoryTheory.ExponentiableMorphism.coev_def",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction/closed-category results only; no exact normalized geometric coefficient-stage statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Iso",
+   "results": "12 hits: CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoLeft_unit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction/closed-category results only; no exact normalized geometric coefficient-stage statement."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIso|CoefficientClosedStructure|inverseComponent",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction/closed-category results only; no exact normalized geometric coefficient-stage statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor internal Hom exchange isomorphism from an exceptional adjunction and projection formula with coefficient and shift compatibility",
+   "results": "8 hits: CategoryTheory.exp.adjunction, CategoryTheory.ihom.adjunction, dualTensorHomEquivOfBasis, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, lTensorHomEquivHomLTensor, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.Types.tensorProductAdjunction",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction/closed-category results only; no exact normalized geometric coefficient-stage statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorAdjunctionExchange",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Step 1 (five adjunction bijections), Step 2, coefficient compatibility and the integral, rational and common-stage paragraphs",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.TensorExchangeNormalizedModels",
+  "file": "lean/Sheaf/SixFunctors/TensorExchangeNormalizedModels.lean",
+  "declaration": "WeilConjectures.TensorAdjunctionExchange.normalized_models",
+  "declarations": [
+   "WeilConjectures.TensorAdjunctionExchange.normalized_models"
+  ],
+  "statement": "theorem normalized_models (D : FiniteFieldDatum.{u}) (A : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic A.l) E] [FiniteDimensional (Padic A.l) E] (n : ℕ) (hn : 1 ≤ n) (six : SixFunctorOperationDatum D A E n hn) {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (S : System A.l A.Qbar D A.different (f := f.hom.left)) (c : Compactification f.hom.left) : ∃ core : Presentation A.l A.Qbar D A.different f.hom.left S c, NormalizedDatum D A E n hn six f S c core",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d65d2",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T162044-L-231227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d65d2",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T162044-L-231227",
+  "kind": "interface",
+  "note": "independent cc review: pp.all #print of the 19 moved decls + tensor_adjunction (clone S1 item compiled in base sandbox) vs delivered Presentation/item: identical; sorry halves read against Model/RingModel/Projection/NormalizedDatum pinning; importer VerdierHomChainComposition rc 0"
+ }
+}

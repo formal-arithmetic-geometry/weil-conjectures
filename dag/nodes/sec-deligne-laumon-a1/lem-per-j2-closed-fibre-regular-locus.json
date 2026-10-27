@@ -1,0 +1,348 @@
+{
+ "id": "lem-per-j2-closed-fibre-regular-locus",
+ "kind": "statement",
+ "title": "Openness of the ambient regular locus along a J-2 closed fibre",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $I\\subseteq A$ be an ideal, and let $f:X\\to\\operatorname{Spec}A$ be a finite-type morphism of schemes [def-pc-scheme] [def-weil-affine-spectrum] [def-weil-finite-type-morphism]. Assume $A/I$ is J-2: for every finite-type $A/I$-algebra, the set of primes whose local rings are regular local is open [def-exc-excellent-ring]. Put $Z=f^{-1}V(I)$, with its subspace topology. Then $\\{x\\in Z:\\mathcal O_{X,x}\\text{ is regular local}\\}$ is open in $Z$ [def-weil-regular-scheme]. Equivalently, $W=\\{x\\in Z:\\mathcal O_{X,x}\\text{ is not regular local}\\}$ is closed in $X$. This uses the local rings of $X$, not the local rings of the closed subscheme defined by $I\\mathcal O_X$.",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Lemma 4.2 and Claim 4.3, printed pp.4–5. No Stacks tag states this relative ambient-regular-locus assertion. The J-2 hypothesis has its definition in Stacks More on Algebra, definition-J. Archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Work on a finite affine cover $U=\\operatorname{Spec}B$ of $X$ with $B$ a finite-type $A$-algebra, supplied by the finite-type hypothesis. The finite-type Noetherian algebra lemma makes both $B$ and $C=B/IB$ Noetherian (the latter is also finite type over $A$). The quotient-spectrum homeomorphism identifies $Z\\cap U=V(IB)$ with $\\operatorname{Spec}C$. The affine stalk isomorphism identifies $\\mathcal O_{X,x}$ with $B_{\\mathfrak p_x}$. Thus on this chart we must show that $E=\\{\\mathfrak p\\in V(IB):B_{\\mathfrak p}\\text{ is regular local}\\}$ is open in $V(IB)$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.2, first sentence of proof (affine reduction); Stacks 00FN lemma-Noetherian-permanence, 00E5 lemma-spec-closed, 01HV lemma-spec-sheaves."
+   }
+  },
+  {
+   "text": "If $\\mathfrak p\\subseteq\\mathfrak q$ and $B_{\\mathfrak q}$ is regular local, the prime correspondence supplies $Q=\\mathfrak pB_{\\mathfrak q}$, and $(B_{\\mathfrak q})_Q\\cong B_{\\mathfrak p}$ by the localization-of-localization isomorphism. Regular local rings remain regular local at primes. Hence regularity is stable under generalization in $\\operatorname{Spec}B$, and in particular within $V(IB)$.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-localize-localization-at-prime",
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.2, final paragraph, generalization stability; Stacks 00E3 lemma-spec-localization and 0AFS lemma-localization-of-regular-local-is-regular."
+   }
+  },
+  {
+   "text": "Every nonempty irreducible closed subset of $V(IB)$ is $V(\\mathfrak q)$ for a prime $\\mathfrak q\\supseteq IB$, using the quotient-spectrum homeomorphism and the classification of irreducible closed subsets of a spectrum. If $B_{\\mathfrak q}$ is not regular local, no $B_{\\mathfrak p}$ with $\\mathfrak p\\supseteq\\mathfrak q$ can be regular, by step 2. Then $V(\\mathfrak q)$ itself is a nonempty relatively open subset disjoint from $E$. It remains to produce a nonempty open subset contained in $E$ when $B_{\\mathfrak q}$ is regular local.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Claim 4.3, reduction to Z=V(q) and the case q not in Reg(X); Stacks 00ES lemma-irreducible."
+   }
+  },
+  {
+   "text": "Assume $B_{\\mathfrak q}$ is regular local. Since $\\mathfrak q\\supseteq IB$, the quotient $B/\\mathfrak q$ is finite type over $A/I$: the images of any finite set of algebra generators of $B$ still generate it, and $I$ acts by zero. The J-2 assumption therefore makes its regular locus open. This locus contains its generic point, since $B/\\mathfrak q$ is a domain and its localization at zero is its fraction field, a regular local ring of dimension zero and maximal ideal zero. By the basic-open basis choose $b\\notin\\mathfrak q$ such that $(B/\\mathfrak q)_{\\mathfrak p/\\mathfrak q}$ is regular local whenever $\\mathfrak p\\supseteq\\mathfrak q$ and $b\\notin\\mathfrak p$.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Claim 4.3, equation (4.1); Stacks 07P7 definition-J and 00E0 lemma-Zariski-topology."
+   }
+  },
+  {
+   "text": "Choose $d=\\dim B_{\\mathfrak q}$ generators of its maximal ideal. Write each as $a_i/s_i$ with $a_i\\in\\mathfrak q$, $s_i\\notin\\mathfrak q$. Replacing each generator by its unit multiple $a_i/1$ preserves the generated ideal. The resulting system of parameters is a regular sequence by the regular-local generators lemma. The principal-neighbourhood lemma supplies $g\\notin\\mathfrak q$ such that $a_1,\\ldots,a_d$ is a regular sequence in $B_g$. This includes $d=0$, when the sequence is empty.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-exc-regular-sequence-principal-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Claim 4.3, maximal ideal generated by a regular sequence; Stacks 00NQ lemma-regular-ring-CM and 061L lemma-regular-sequence-in-neighbourhood."
+   }
+  },
+  {
+   "text": "Let $K=(a_1,\\ldots,a_d)\\subseteq\\mathfrak q$. Noetherianity gives finitely many generators $t_j$ of $\\mathfrak q$. Since $KB_{\\mathfrak q}=\\mathfrak qB_{\\mathfrak q}$, ideal-membership clearing supplies $s_j\\notin\\mathfrak q$ with $s_jt_j\\in K$. Put $s=\\prod_j s_j\\notin\\mathfrak q$. Then $s\\mathfrak q\\subseteq K$, because $st_j=(\\prod_{l\\ne j}s_l)(s_jt_j)\\in K$ and the $t_j$ generate $\\mathfrak q$. For every prime $\\mathfrak p$ avoiding $s$, the element $s/1$ is invertible in $B_{\\mathfrak p}$, whence $KB_{\\mathfrak p}=\\mathfrak qB_{\\mathfrak p}$. Empty generating sets use the product $1$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-exc-localization-ideal-membership-clearing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Claim 4.3, shrinking so that q is generated by the chosen regular sequence; Stacks 07P9 lemma-intersection-regular-with-closed, the same denominator-clearing step."
+   }
+  },
+  {
+   "text": "Put $h=bgs\\notin\\mathfrak q$. For $\\mathfrak p\\supseteq\\mathfrak q$ avoiding $h$, localize $B_g$ further at the prime corresponding to $\\mathfrak p$; this ring is $B_{\\mathfrak p}$, with $a_i/1$ unchanged (both invert exactly the elements required by the fraction localization). Weak regularity survives this localization. Since all $a_i\\in\\mathfrak p$, their final quotient is nonzero, so they are a regular sequence in $B_{\\mathfrak p}$. Step 6 identifies their ideal with $\\mathfrak qB_{\\mathfrak p}$. The quotient-localization isomorphism gives $B_{\\mathfrak p}/\\mathfrak qB_{\\mathfrak p}\\cong(B/\\mathfrak q)_{\\mathfrak p/\\mathfrak q}$, regular by step 4. The ring $B_{\\mathfrak p}$ is Noetherian and local; lifting regularity from this regular-sequence quotient proves it regular. Thus $V(\\mathfrak q)\\cap D(h)$ is a nonempty relatively open subset contained in $E$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-exc-weakly-regular-sequence-localization",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-regular-local-lift-regular-sequence-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Claim 4.3, the assertion that all primes in V(q) outside V(q+fB) are regular; Stacks 00CT proposition-localize-quotient, 00FN lemma-Noetherian-permanence and 00NU lemma-regular-mod-x."
+   }
+  },
+  {
+   "text": "Apply the Noetherian constructibility criterion to $Y=\\operatorname{Spec}C$ and the subset corresponding to $E$. It applies since $C$ is Noetherian, so $Y$ has a one-element affine Noetherian cover. For every irreducible closed subset the nonempty open subset required by that criterion was constructed in steps 3 and 7. Thus $E$ is constructible in $\\operatorname{Spec}C$. Step 2 gives generalization stability in this spectrum, because prime inclusion in $C$ corresponds to prime inclusion in $B$ among primes containing $IB$. The constructible-generalization-open lemma for spectra makes $E$ open in $\\operatorname{Spec}C$, hence open in $Z\\cap U$.",
+   "uses": [
+    "lem-trf-noetherian-constructible-subset-criterion",
+    "lem-trf-spectrum-constructible-generalization-open",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Claim 4.3 and Lemma 4.2, final paragraph; Stacks 053Z lemma-characterize-constructible-Noetherian and 00I0 lemma-constructible-stable-specialization-closed (2)."
+   }
+  },
+  {
+   "text": "The sets $Z\\cap U$ are open in $Z$ and cover it, so the union of their relatively open regular loci is open in $Z$. The complement $W$ is closed in $Z$. Finally $V(I)$ is closed in $\\operatorname{Spec}A$ and the underlying map of a scheme morphism is continuous, so $Z=f^{-1}V(I)$ is closed in $X$. A subset closed in a closed subspace is closed in the ambient space: writing $W=Z\\cap F$ for a closed $F\\subseteq X$ proves the asserted closedness of $W$ in $X$. Conversely that closedness gives openness of $Z\\setminus W$ in $Z$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Lemma 4.2, affine-to-global passage; equivalence with ambient closedness used immediately in Lemma 4.4, printed p.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-localize-localization-at-prime",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-exc-excellent-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "def-weil-pbc-noetherian-ring",
+  "lem-exc-localization-ideal-membership-clearing",
+  "lem-exc-weakly-regular-sequence-localization",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "lem-trf-noetherian-constructible-subset-criterion",
+  "lem-trf-spectrum-constructible-generalization-open",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Online text of Lemma 4.2 and Claim 4.3, printed pp.4–5, read on 2026-10-24; archival copy absent (WANTED in report). The argument is expanded with existing Stacks-tagged DAG lemmas; marked agent under the missing-local-document rule."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-j2-closed-fibre-regular-locus: For a finite type scheme X over a Noetherian ring A with J2 quotient A I the regular locus of X restricted over V I is open in the closed fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [JacobsonSpace ↥Y],\\n  JacobsonSpace ↥X\", \"doc\": \"If $ Y $ is a Jacobson space and $ f: X \\to Y $ is a morphism locally of finite type, then $ X $ is also a Jacobson space.\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth, etale, unramified and free loci differ from the regular-local-ring locus of the ambient scheme along a J-2 closed fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsJ2Ring\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth, etale, unramified and free loci differ from the regular-local-ring locus of the ambient scheme along a J-2 closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "regularLocus|IsJ2Ring|IsQuasiExcellent|isRegularLocus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth, etale, unramified and free loci differ from the regular-local-ring locus of the ambient scheme along a J-2 closed fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-j2-closed-fibre-regular-locus: Regular locus of total space intersected with closed fibre is open when the base quotient is J2",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"Topology.IsOpenEmbedding.preimage_closedPoints\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"(hf : IsOpenEmbedding f) [JacobsonSpace Y] : f ⁻¹' closedPoints Y = closedPoints X\", \"doc\": \"If $ f : X \\\\to Y $ is an open embedding and $ Y $ is a Jacobson space, then the preimage of the closed points of $ Y $ under $ f $ is equal to the closed points of $ X $, i.e., $ f^{-1}(\\\\text{closedPo\"}\n  {\"name\": \"JacobsonSpace.closure_inter_closedPoints\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"∀ {X : Type u_1} {inst : TopologicalSpace X} [self : JacobsonSpace X] {Z : Set X},\\n  IsClosed Z → closure (Z ∩ closedPoints X) = Z\", \"doc\": \"In a Jacobson space $X$, for any closed set $Z$, the closure of the intersection $Z \\\\cap \\\\text{closedPoints}(X)$ is equal to $Z$ itself, i.e., $\\\\overline{Z \\\\cap \\\\text{closedPoints}(X)} = Z$.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [LocallyOfFiniteType f] : JacobsonSpace (f.fiber y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"IsLocalRing.isOpen_iff_finite_quotient\", \"module\": \"Mathlib.Topology.Algebra.Ring.Compact\", \"type\": \"{I : Ideal R} : IsOpen (X := R) I ↔ Finite (R ⧸ I)\", \"doc\": \"An ideal $ I $ in a topological local ring $ R $ is open if and only if the quotient ring $ R/I $ is finite.\"}\n  {\"name\": \"PrimeSpectrum.instQuasiSeparatedSpace\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": QuasiSeparatedSpace (PrimeSpectrum R)\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is a quasi-separated topological space. This means that the intersection of any two quasi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth, etale, unramified and free loci differ from the regular-local-ring locus of the ambient scheme along a J-2 closed fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-j2-closed-fibre-regular-locus: Quasi excellent closed subscheme of a Noetherian base implies openness of regular points of a finite type total space along that closed subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth, etale, unramified and free loci differ from the regular-local-ring locus of the ambient scheme along a J-2 closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "IsJ2|IsExcellent|regularLocus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no J-2, excellent-ring or regular-locus declaration occurs in Mathlib/RingTheory."
+  },
+  {
+   "tool": "grep",
+   "query": "regularLocus|IsJ2Ring|IsQuasiExcellent|isRegularLocus",
+   "results": "No exact match. No hits. Returned names: ; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular points of ambient scheme along a closed fibre over a J2 quotient form an open subset",
+   "results": "No exact match. Hits concern closed points, affine opens, and Jacobson fibres; none states ambient regular-locus openness under J-2. Returned names: AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, Topology.IsOpenEmbedding.preimage_closedPoints, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, IsLocalRing.closedPoint_mem_iff, AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Scheme.Opens.mem_basicOpen_toScheme; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsJ2Ring\"",
+   "results": "No exact match. No hits. Returned names: ; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular locus of a finite type scheme over a Noetherian ring restricted to the closed fibre over an ideal I is open if A modulo I is J2",
+   "results": "No exact match. Hits concern relative smooth/etale/unramified or module free loci, or constructible-set data; none proves ambient regularity along a J-2 fibre. Returned names: Algebra.isOpen_smoothLocus, Algebra.isOpen_unramifiedLocus, Algebra.isOpen_etaleLocus, Algebra.smoothLocus, Module.isOpen_freeLocus, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, Algebra.etaleLocus; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For Noetherian rings the regular local locus intersected with a closed subset is constructible if the quotient base ring is J2",
+   "results": "No exact match. Hits concern relative smooth/etale/unramified or module free loci, or constructible-set data; none proves ambient regularity along a J-2 fibre. Returned names: PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, PrimeSpectrum.isConstructible_basicOpen, PrimeSpectrum.ConstructibleSetData, PrimeSpectrum.BasicConstructibleSetData, PrimeSpectrum.exists_constructibleSetData_iff, PrimeSpectrum.BasicConstructibleSetData.toSet, PrimeSpectrum.BasicConstructibleSetData.f, PrimeSpectrum.isConstructible_range_comap; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-alteration-regular-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J. This auxiliary lemma supplies Openness of the ambient regular locus along a J-2 closed fibre.",
+   "via": [
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-j2-closed-fibre-regular-locus",
+  "worker": "stage1",
+  "summary": "Q93 checked ambient rather than fibre regularity, expanded Claim 4.3 using the existing regular-sequence and constructibility tools, and proved openness and ambient closedness without new nodes. Read every cited statement and supplied verbatim citation evidence. No statement change.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, regular local model and purity (Step 3 in the inherited ancestry), via lem-per-qe-alteration-regular-neighbourhood: this auxiliary proof establishes its J-2 closed-fibre regular-locus input. Steps 1–8 realize Kurano–Shimomoto Lemma 4.2 / Claim 4.3; step 9 supplies the closed subset needed in their Lemma 4.4. Current latest blueprint ancestor was read; no equivalent blueprint node was found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic A localization of a regular local ring at a prime is a regular local ring used in the relative ambient-regular-locus proof of Kurano–Shimomoto Claim 4.3; no lemma of this unit supplies this algebraic/topological tool. This does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic A regular system of parameters is a regular sequence used in the relative ambient-regular-locus proof of Kurano–Shimomoto Claim 4.3; no lemma of this unit supplies this algebraic/topological tool. This does not replace the unit route."
+   },
+   {
+    "node": "lem-exc-regular-sequence-principal-neighbourhood",
+    "why": "Generic A regular sequence at a prime spreads to a principal neighbourhood used in the relative ambient-regular-locus proof of Kurano–Shimomoto Claim 4.3; no lemma of this unit supplies this algebraic/topological tool. This does not replace the unit route."
+   },
+   {
+    "node": "lem-exc-regular-local-lift-regular-sequence-quotient",
+    "why": "Generic Regularity lifts from the quotient by a regular sequence used in the relative ambient-regular-locus proof of Kurano–Shimomoto Claim 4.3; no lemma of this unit supplies this algebraic/topological tool. This does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-noetherian-constructible-subset-criterion",
+    "why": "Generic Constructibility criterion on irreducible closed subsets of a Noetherian scheme used in the relative ambient-regular-locus proof of Kurano–Shimomoto Claim 4.3; no lemma of this unit supplies this algebraic/topological tool. This does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "lem-trf-noetherian-constructible-subset-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-e6e41db2e",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-e6e41db2e (reviewer sub-agent of L); spot-checked: I read the item and all 24 cited statements in full. The statement is unchanged against the live clone. The 9-step proof, which adds no new nodes, is the J-2 relativisation of Stacks More on Algebra 07P9 (lemma-intersection-regular-with-closed), read at more-algebra.tex lines 11611-11640. Kurano-Shimomoto is not in literature/, so the report lists it as WANTED and proof_origin.by is agent. The step-by-step checks: step 1 uses 00FN, 00E5 and the affine stalk localization; step 2 uses 00E3 and 0AFS for generalization; step 3 uses 00ES and shows a non-regular V(q) is disjoint from E. In step 4, J-2 of A/I is applied to B/q (finite type over A/I), and the regular generic point plus 00E0 give b not in q. In step 5, 00NQ and 061L are applied to the a_i in the Noetherian ring B. Step 6 clears denominators explicitly, giving s.q contained in K. In step 7, weak regularity localizes, the final quotient is nonzero because the a_i lie in p, 00CT gives the quotient, and 00NU lifts regularity. The identification of B_p with the localization of B_g at pB_g is a two-line fact written in the step; I accept it under the C1 short-fact exception. Step 8 uses 053Z on Spec C, then generalization stability and 00I0(2). Step 9 is elementary closedness. Small cases checked: I=A, I=0, d=0, and B=k[eps]/(eps^2), where W=X. There is no cycle. The five declared tool_uses are generic commutative algebra and topology, and I accept them. Batch 5: the three flagged citations are generic and outside both assumptions. lem-exc-regular-local-lift-regular-sequence-quotient is Stacks 00NU, and its closure reaches only the Mathlib leaf lem-trf-regular-sequence-dimension-formula. lem-trf-noetherian-constructible-subset-criterion is Stacks 053Z, Noetherian topology. lem-trf-spectrum-constructible-generalization-open is Stacks 00I0, a Mathlib leaf. None is a step of the trace formula or of Poincare duality. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.JTwoClosedFibreRegularLocus",
+  "declaration": "AlgebraicGeometry.isOpen_regularLocus_on_j2_closedFibre",
+  "file": "lean/Sheaf/AlgebraicGeometry/JTwoClosedFibreRegularLocus.lean",
+  "statement": "theorem isOpen_regularLocus_on_j2_closedFibre (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A)) [LocallyOfFiniteType f] [QuasiCompact f] (hJ : ∀ (B : Type u) [CommRing B] [Algebra (A ⧸ I) B] [Algebra.FiniteType (A ⧸ I) B], IsOpen {p : PrimeSpectrum B | IsRegularLocalRing (Localization.AtPrime p.asIdeal)}) : IsOpen {x : {x : X // f x ∈ PrimeSpectrum.zeroLocus (I : Set A)} | IsRegularLocalRing (X.presheaf.stalk x.1)} ∧ IsClosed {x : X | f x ∈ PrimeSpectrum.zeroLocus (I : Set A) ∧ ¬ IsRegularLocalRing (X.presheaf.stalk x)}",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96b7569aa",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Clause-by-clause match. Noetherian A, arbitrary I, finite type = LocallyOfFiniteType+QuasiCompact (matches the record). hJ is the J-2 part of the recorded IsQuasiExcellent at A⧸I, verbatim, universe u, no Noetherian/G-ring added. Both conclusions use ambient X.presheaf.stalk: open in the subtype f⁻¹V(I) and W closed in X, the node's two equivalent forms. IsRegularLocalRing is the recorded ring notion. Only the lean field changed versus live; statement verbatim in file; proof is sorry only; docstrings have the source place, blueprint tag and nine proof steps; no new defs. Edge cases I=A, I=0, empty X, k[ε]/ε² checked. Note only: upstream IsJ2 is definitionally the same as hJ. No compile run since no change; worker's compile is clean."
+ }
+}

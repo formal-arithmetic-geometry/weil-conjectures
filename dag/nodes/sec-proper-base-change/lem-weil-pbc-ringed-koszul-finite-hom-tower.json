@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-ringed-koszul-finite-hom-tower",
+ "kind": "statement",
+ "title": "Finite Koszul evaluation identifies the Hom tower with the strict tensor tower",
+ "statement": "Let C be a small site, O a commutative ring sheaf, r any natural number and b a Fin r-indexed family of global sections. For every ordinary complex I of O-module sheaves, the inverse diagram m ↦ Hom(P_m,I), where P=ringedKoszulDiagram O r b, is naturally isomorphic to the actual strict diagram underlying ringedKoszulTensorTowerComplex O r b I. Naturality is with respect to every inverse tower transition. There is no K-injectivity hypothesis and no assertion concerning limits or quasi-isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A0A, lemma-colim-and-lim-of-duals; derived.tex Tag 0949, lemma-colim-hocolim, explicit ordinary-complex calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Each one-generator positive Koszul factor is supported in degrees zero and one, with unit terms. Apply the proved source-library theorem CochainComplex.isDualizable_of_isStrictlyGE_of_isStrictlyLE to obtain its dualizability; all other terms are zero and hence dualizable. Induct on r and use IsDualizable.tensorObj. The empty diagram has the monoidal unit as its value.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved signed comparison homComplexIsoInternalHomObj with the closed internal Hom of ordinary complexes. Its component formula and homComplexFunctor_map_f_π show naturality also in the contravariant source variable. The formula for closed precomposition follows by currying and the tensor summand inclusions. This accounts for the total-complex signs without re-expanding the finite Koszul tensor.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a dualizable positive Koszul complex P, the canonical closed evaluation [P,1] tensor I to [P,I] is invertible by MonoidalClosed.isIso_ihomUnitTensorToIhom. Conjugate it by the signed Hom comparisons and use the braiding to construct I tensor Hom(P,O[0]) to Hom(P,I). Prove its contravariant naturality using the evaluation/currying identity and naturality of the signed comparisons.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The natural evaluations assemble into a map of inverse towers, with every component invertible. Invert this natural isomorphism and compose with the degreewise identity isomorphism from the tensor tower to the asFunctor diagram of its transposed tower complex. All these steps are in ordinary complexes; coefficients are arbitrary.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A0A, lemma-colim-and-lim-of-duals; Example example-dual before lemma-left-dual-complex; more-algebra.tex lemma-left-dual-complex",
+  "note": "M3 uses the existing proved bounded-complex dualizability and signed internal-Hom comparison APIs to implement finite evaluation, including contravariant naturality and strict tower transposition. No new intermediate sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom sends direct sums to products and mapping cones to mapping fibres",
+   "results": "Eight hits about closed category internal Hom, Day convolution and direct sums; none provides the signed chain-level telescope/Roos arrow comparison or strict Koszul evaluation.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free Koszul complex dual tensor evaluation isomorphism natural in the differential and chain maps",
+   "results": "Eight hits about Kaehler differentials and finite dimensional evaluation. No theorem for the actual sheaf Koszul tower. Loogle CochainComplex.mappingCocone finds constructors and coordinate projection identities, but no Hom-of-telescope comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|Hom.*[Tt]elescope",
+   "results": "Mathlib has no complex Koszul construction. Source HomComplexMappingCone concerns the second variable. SignedDoubleHomCone has proved private coordinate and differential formulas relevant to the first-variable calculation. InternalHomCoproduct supplies a sheaf-level universal property. RingedKoszulColimitHomOrdinaryLimit only asserts a limit isomorphism with a unit equation, not a tower evaluation isomorphism or the telescope map normalization. Blueprint Koszul search finds no duplicate of either precise algebraic step.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulRoosInclusion",
+  "date": "2026-10-26",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Ordinary finite Koszul Hom/telescope calculation supporting Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-koszul-roos-inclusion",
+    "lem-weil-pbc-ringed-koszul-tensor-tower-limit-acyclic",
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedKoszulFiniteHomTower",
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulFiniteHomTower.lean",
+  "declaration": "CategoryTheory.exists_ringedKoszul_finiteHomTower_iso",
+  "statement": "theorem exists_ringedKoszul_finiteHomTower_iso\n    (O : Sheaf J CommRingCat.{u}) (r : ℕ)\n    (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (I : ringedSiteComplex O) :\n    Nonempty ((ringedKoszulDiagram O r b).op ⋙\n        (homComplexFunctor (R := O)).flip.obj I ≅\n      (ringedKoszulTensorTowerComplex O r b I).asFunctor)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T202249-L-2699801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T002001-L-46845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

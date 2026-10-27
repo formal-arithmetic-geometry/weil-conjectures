@@ -1,0 +1,369 @@
+{
+ "id": "lem-sfb-truncated-algebra-matching-finite-type",
+ "kind": "statement",
+ "title": "Finite type of the next matching algebra of an algebraic hypercover truncation",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $B$ be a commutative finite type $A$-algebra [def-weil-pbc-finite-type-algebra], and let $n\\geq0$. Let $P$ be an $n$-truncated simplicial object [def-weil-pbc-simplicial-coskeleton] in the category of commutative $A$-algebras augmented to $B$, with $P_k$ of finite type over $A$ for $0\\leq k\\leq n$. Define $M_0(P)=B$, $M_1(P)=P_0\\times_B P_0$, and, for $2\\leq k\\leq n+1$, let $M_k(P)$ be the $A$-algebra of tuples $(p_0,\\ldots,p_k)\\in P_{k-1}^{k+1}$ with $d_i p_j=d_{j-1}p_i$ for $i<j$; all tuple operations are componentwise. Equivalently these are compatible proper-face families over a common element of $B$; that element is forced by the tuple for $k\\geq1$. For $1\\leq k\\leq n$ let $\\mu_k:P_k\\to M_k(P)$ be $p\\mapsto(d_0p,\\ldots,d_kp)$, and let $\\mu_0:P_0\\to B$ be the augmentation. Suppose every $\\mu_k$ for $0\\leq k\\leq n$ is surjective. Then $M_{n+1}(P)$ is of finite type over $A$.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PW (lemma-polynomial), finite type of the next coskeletal term; equivalently the relative matching algebra of a truncation with surjective lower matching maps. The matching formula is made explicit as in the proof; more-algebra.tex lemma-formal-consequence is its finite-type input."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-simplicial-coskeleton"
+ ],
+ "proof": [
+  {
+   "text": "Write $P(\\alpha):P_t\\to P_r$ for the map of an order-preserving $\\alpha:[r]\\to[t]$. For $0\\le k\\le n$ and $m\\ge k$, form $C_{k,m}$ from a common $b\\in B$ and elements $x_\\theta\\in P_r$ for every $0\\le r\\le k$ and $\\theta:[r]\\to[m]$, satisfying $x_{\\theta\\alpha}=P(\\alpha)(x_\\theta)$ whenever both dimensions are at most $k$, and augmentation $x_\\theta\\mapsto b$. Operations are componentwise. Put $C_{-1,m}=B$. These are finite families with finitely many equations. Evaluation at the identity gives $C_{k,k}\\cong P_k$, with inverse $p\\mapsto(P(\\theta)p)_\\theta$.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PW (lemma-polynomial), proof: compatible families on skeleta and the cartesian square for successive skeleta."
+   }
+  },
+  {
+   "text": "For $1\\le k\\le n+1$, identify $C_{k-1,k}$ with $M_k(P)$: restriction to the $k+1$ facets gives the tuple of the statement; two facets meet in the face whose two descriptions are $d_i p_j=d_{j-1}p_i$. All lower injective faces lie in a facet, and these pairwise intersection equations make their values independent of the facet chosen. Every order-preserving map uniquely factors as a surjection onto its image followed by that image inclusion, so values on noninjective faces are forced by the degeneracy maps. The functor identities give all compatibility equations. For $k=1$ the common $b$ imposes exactly the fibre-product condition. For $k\\ge2$, any two vertices share an edge, so their augmentations agree; every facet has that same augmentation. Thus no extra $b$ remains. Also $C_{-1,0}=M_0(P)=B$.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PW (lemma-polynomial), proof: compatible families on skeleta and the cartesian square for successive skeleta."
+   }
+  },
+  {
+   "text": "Fix $0\\le k\\le n$ and $k<m\\le n+1$. Index the injective $k$-faces by $E:[k]\\hookrightarrow[m]$. Restriction $\\psi_E:C_{k-1,m}\\to C_{k-1,k}=M_k(P)$ is surjective. For $k=0$ this is $\\mathrm{id}_B$. For $k\\ge1$, write $e_j=E(j)$ and put $\\rho(t)=\\max(\\{0\\}\\cup\\{j:e_j\\le t\\})$. This is order-preserving and $\\rho E=\\mathrm{id}$. Given a compatible family $y$ on $[k]$, set $x_\\theta=y_{\\rho\\theta}$ and keep its augmentation. This defines a compatible family on $[m]$, since precomposition commutes with every $P(\\alpha)$, and its restriction along $E$ is $y$. It is an $A$-algebra section of $\\psi_E$.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PW (lemma-polynomial), proof: compatible families on skeleta and the cartesian square for successive skeleta."
+   }
+  },
+  {
+   "text": "For these $k,m$ there is a cartesian identification $C_{k,m}\\cong C_{k-1,m}\\times_{\\prod_E M_k(P)}\\prod_E P_k$, with maps $(\\psi_E)_E$ and $(\\mu_k)_E$. Indeed, a full family restricts to a lower family and values $p_E$ on the injective $k$-faces, with boundary $\\mu_k(p_E)=\\psi_E(x)$. Conversely those boundary equations supply every compatibility with proper subfaces of $E$; all remaining $k$-simplices are degeneracies of lower-dimensional injective faces, with values forced by the surjection--injection factorization. Their compatibility follows by factoring compositions and using the functor identities. Different injective $k$-faces intersect only in dimension less than $k$, so there are no further equations. The two constructions are inverse and preserve componentwise operations. This also proves the case $k=0$: vertices are independent over the common $b$.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PW (lemma-polynomial), proof: compatible families on skeleta and the cartesian square for successive skeleta."
+   }
+  },
+  {
+   "text": "Induct on $k$ from $-1$ to $n$ to prove that every $C_{k,m}$, $\\max(0,k)\\le m\\le n+1$, is finite type over $A$. The base is $C_{-1,m}=B$. At stage $k\\ge0$, the diagonal case $m=k$ is $P_k$, finite type by hypothesis. If $m>k$, use the cartesian description of step 4 and apply [lem-sfb-finite-type-surjective-product-pullback] with $R=A$, $Q=C_{k-1,m}$, $C_E=P_k$ and $D_E=C_{k-1,k}=M_k(P)$. The index set consists of the finitely many injections $[k]\\hookrightarrow[m]$. Both $Q$ and $D_E$ are finite type by the preceding induction stage, and $P_k$ is finite type by hypothesis. Every $\\varphi_E=\\mu_k$ is surjective by the item hypothesis, and every $\\psi_E$ is surjective by step 3. The base $A$ is Noetherian. The cited node therefore gives precisely the required finite type of $C_{k,m}$.",
+   "uses": [
+    "lem-sfb-finite-type-surjective-product-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PW (lemma-polynomial), proof: compatible families on skeleta and the cartesian square for successive skeleta."
+   }
+  },
+  {
+   "text": "Taking $k=n$ and $m=n+1$ gives a finite type algebra $C_{n,n+1}$. The facet identification of step 2 identifies it with $M_{n+1}(P)$ as an $A$-algebra, proving the assertion. For $n=0$ this is exactly $P_0\\times_B P_0$, obtained already by the $k=0,m=1$ induction step.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PW (lemma-polynomial), proof: compatible families on skeleta and the cartesian square for successive skeleta."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-coskeleton",
+  "lem-sfb-finite-type-surjective-product-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PW (lemma-polynomial), proof, with its finite-type input Tag 08NI. The finite-family construction makes the truncation formulation explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(matching|coskeleton|cosk).*(FiniteType|finite type)|FiniteType.*(matching|cosk)",
+   "results": {
+    "t": "2026-10-23T12:12:15Z",
+    "tool": "grep",
+    "query": "(matching|coskeleton|cosk).*(FiniteType|finite type)|FiniteType.*(matching|cosk)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cosk\", Algebra.FiniteType",
+   "results": {
+    "t": "2026-10-23T12:12:16Z",
+    "tool": "loogle",
+    "query": "\"cosk\", Algebra.FiniteType",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coskeleton of finite type simplicial algebras with surjective matching maps is finite type",
+   "results": {
+    "t": "2026-10-23T12:12:16Z",
+    "tool": "leansearch",
+    "query": "Coskeleton of finite type simplicial algebras with surjective matching maps is finite type",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension",
+     "CategoryTheory.SimplicialObject.cosk",
+     "CategoryTheory.SimplicialObject.IsCoskeletal.mk",
+     "CategoryTheory.SimplicialObject.isCoskeletal_iff_isIso",
+     "CategoryTheory.SimplicialObject.Truncated.cosk",
+     "CategoryTheory.SimplicialObject.IsCoskeletal",
+     "CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension",
+     "SSet.Truncated.cosk"
+    ],
+    "digest": "33a570ae99d5db37"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The matching algebra of a truncated simplicial finite type algebra over a Noetherian ring is finite type if all lower boundary maps are surjective",
+   "results": {
+    "t": "2026-10-23T12:44:27Z",
+    "tool": "leanfinder",
+    "query": "The matching algebra of a truncated simplicial finite type algebra over a Noetherian ring is finite type if all lower boundary maps are surjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.SubmersivePresentation",
+     "Algebra.Presentation.instFiniteTypeIntCoreOfFinite",
+     "Algebra.EssFiniteType.of_surjective",
+     "Algebra.SubmersivePresentation.cotangentComplexAux_surjective",
+     "Algebra.FiniteType.iff_quotient_freeAlgebra'",
+     "Algebra.FiniteType.iff_quotient_freeAlgebra",
+     "SimplicialObject.Splitting.IndexSet.instFintype",
+     "AlgHom.Finite.of_surjective"
+    ],
+    "digest": "41ceb3d152fd2401"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian finite type algebras closed under the boundary matching limits of truncated algebra hypercovers",
+   "results": {
+    "t": "2026-10-23T12:46:19Z",
+    "tool": "leanfinder",
+    "query": "Noetherian finite type algebras closed under the boundary matching limits of truncated algebra hypercovers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.EssFiniteType.isNoetherianRing",
+     "Algebra.FiniteType.isNoetherianRing",
+     "AlgebraicGeometry.IsLocallyNoetherian",
+     "AlgebraicGeometry.IsNoetherian",
+     "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian",
+     "Algebra.FinitePresentation.of_finiteType",
+     "AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover",
+     "AlgHom.FinitePresentation.of_finiteType"
+    ],
+    "digest": "3dc6bd77c3dee889"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; polynomial presentations, generic coskeleta and splitting indices do not give this algebraic matching or compatible polynomial-cell assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(matching|coskeleton|cosk).*(FiniteType|finite type)|FiniteType.*(matching|cosk)",
+   "results": {
+    "t": "2026-10-23T14:14:56Z",
+    "tool": "grep",
+    "query": "(matching|coskeleton|cosk).*(FiniteType|finite type)|FiniteType.*(matching|cosk)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic coskeletons, truncated simplicial objects and finite-type quotients do not state this matching-algebra finiteness theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The next matching algebra of a truncated simplicial finite type algebra over a Noetherian ring is finite type if lower matching maps are surjective",
+   "results": {
+    "t": "2026-10-23T14:14:56Z",
+    "tool": "leansearch",
+    "query": "The next matching algebra of a truncated simplicial finite type algebra over a Noetherian ring is finite type if lower matching maps are surjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FiniteType.of_surjective",
+     "AlgHom.FiniteType.comp_surjective",
+     "AlgHom.FiniteType.of_surjective",
+     "RingHom.FiniteType.of_surjective",
+     "AlgHom.FiniteType",
+     "AlgHom.Finite.finiteType",
+     "Algebra.FiniteType.isNoetherianRing",
+     "RingHom.FiniteType"
+    ],
+    "digest": "dece1272eb8b6c82"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic coskeletons, truncated simplicial objects and finite-type quotients do not state this matching-algebra finiteness theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cosk\", Algebra.FiniteType",
+   "results": {
+    "t": "2026-10-23T14:14:56Z",
+    "tool": "loogle",
+    "query": "\"cosk\", Algebra.FiniteType",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic coskeletons, truncated simplicial objects and finite-type quotients do not state this matching-algebra finiteness theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Boundary matching object of a truncated simplicial commutative algebra is finitely generated if lower matching maps are surjective and the base is Noetherian",
+   "results": {
+    "t": "2026-10-23T14:14:57Z",
+    "tool": "leanfinder",
+    "query": "Boundary matching object of a truncated simplicial commutative algebra is finitely generated if lower matching maps are surjective and the base is Noetherian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.Truncated",
+     "SimplexCategory.Truncated",
+     "SimplexCategory.Truncated.σ",
+     "CategoryTheory.CosimplicialObject.Truncated",
+     "CategoryTheory.SimplicialObject.truncation",
+     "SimplexCategory.Truncated.tacticTrunc",
+     "Algebra.FiniteType.iff_quotient_freeAlgebra'",
+     "SimplexCategory.Truncated.δ"
+    ],
+    "digest": "5406214e5b315d62"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic coskeletons, truncated simplicial objects and finite-type quotients do not state this matching-algebra finiteness theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-polynomial-simplicial-resolution",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). Tag 08PW (lemma-polynomial), finite type of the next coskeletal term; equivalently the relative matching algebra of a truncation with surjective lower matching maps. The matching formula is made explicit as in the proof; more-algebra.tex lemma-formal-consequence is its finite-type input.",
+   "via": [
+    "lem-sfb-finite-polynomial-simplicial-resolution",
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-truncated-algebra-matching-finite-type",
+  "worker": "stage1",
+  "summary": "Followed Stacks 08PW via compatible skeleton families and the 08NI product-pullback lemma. Proved the face-restriction surjections explicitly with monotone retractions; checked all coordinate maps and the induction, including n=0. One new statement-only generic algebra lemma; no statement change.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor confirms it). This supports the inherited det-thm-sf-ctf-stability-direct-images alteration/deformation chain at the finite polynomial simplicial resolution prerequisite; realizes Tag 08PW successive-skeleton cartesian squares, with Tag 08NI as its input. Latest blueprint unit and direct-image proof were read; no alternative matching-algebra statement occurs there.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-3bac41d60",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-3bac41d60 (reviewer sub-agent of L); spot-checked: I read Stacks 08PW (cotangent.tex lemma-polynomial, statement and full proof), 08NI (more-algebra lemma-formal-consequence) and 00IT. The item statement is unchanged from side-live and correctly recasts 08PW as a statement about an n-truncation and its matching algebras M_k; the augmentation is forced for k>=2 (checked). Step 1: C_{k,m} = Mor(sk_k Delta[m], sk_k P) as compatible families, with C_{k,k} = P_k checked. Step 2: facet identification with M_k, the relation d_i p_j = d_{j-1} p_i checked through delta_j delta_i = delta_i delta_{j-1}. Step 3: the retraction rho(t) = max({0} u {j : e_j <= t}) is monotone with rho E = id, so it gives an algebra section of psi_E; this writes out the argument the source omits. Step 4: the cartesian square is checked, including the boundary condition on proper faces and the k=0 case. Step 5: the induction ranges and every hypothesis of the new node are checked. Step 6: elementary. Small cases n=0 and n=1 match the source's displays. New node lem-sfb-finite-type-surjective-product-pullback is exactly 08NI; it is true because P' -> D_{i0} is surjective, and the edge cases I = empty (T = Q) and D_i = 0 hold. It is statement-only and self-contained, with all four search kinds recorded; Mathlib has only Artin-Tate (fg_of_fg_of_fg), so unsplit is correct. No DAG node states 00IT or 08NI, and it is not a clause of the item. Same unit, no tool_uses, no SGA, the item is not superseded in live or side-live, and there is no repair note. The worker's source-typo report (P_{k0+1}) is correct and the item does not inherit the typo. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TruncatedAlgebraMatchingFiniteType",
+  "declaration": "Algebra.truncatedMatchingAlgebra_finiteType",
+  "declarations": [
+   "Algebra.truncatedMatchingAmbient",
+   "Algebra.truncatedMatchingEval",
+   "Algebra.truncatedMatchingAlgebra",
+   "Algebra.TruncatedMatchingSurjective",
+   "Algebra.truncatedMatchingAlgebra_finiteType"
+  ],
+  "file": "lean/Sheaf/RingTheory/TruncatedAlgebraMatchingFiniteType.lean",
+  "statement": "theorem truncatedMatchingAlgebra_finiteType (A : Type u) [CommRing A] [IsNoetherianRing A] (n : ℕ) (B : CommAlgCat.{v} A) (_hB : RingHom.FiniteType (algebraMap A B)) (P : SimplicialObject.Truncated (CommAlgCat.{v} A) n) (ε : P ⟶ (Functor.const (SimplexCategory.Truncated n)ᵒᵖ).obj B) (_hP : ∀ r : SimplexCategory.Truncated n, RingHom.FiniteType (algebraMap A (P.obj (op r)))) (_hμ : ∀ (k : ℕ) (hk : k ≤ n), TruncatedMatchingSurjective P B ε k hk) : RingHom.FiniteType (algebraMap A (truncatedMatchingAlgebra P B ε (n + 1)))",
+  "branch": "sheaf-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The matching algebra uses the compatible proper-face family presentation explicitly allowed by the node, with a common augmentation value. Surjectivity is expressed by the coordinate graph of the canonical map, including degree zero. The helper definitions are the matching construction introduced in this node, not separate independent notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc1896792",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Statement matches node 08PW item clause by clause: Noetherian A, B with RingHom.FiniteType, SimplicialObject.Truncated (CommAlgCat A) n with natural augmentation ε, termwise finite type, surjectivity as the graph condition of the canonical matching map for k≤n (k=0 is augmentation surjectivity), conclusion finite type of the degree n+1 matching algebra. Matching algebra = compatible families (b,x_θ) over θ:[r]→[k], r<k (node's allowed equivalent form); k=0 gives B, k=1 gives P0×_B P0, k≥2 gives the facet tuples with d_i p_j=d_{j-1}p_i, b forced. Only the item's lean field changed and its statement is verbatim in the file; helpers non-hollow with docstrings; only sorry; no duplicate notion in Mathlib/project; independent universes u,v; report sections present. No compile needed (no changes)."
+ }
+}

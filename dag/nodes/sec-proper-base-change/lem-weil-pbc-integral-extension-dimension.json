@@ -130,7 +130,18 @@
   "item": "lem-weil-pbc-complete-local-domain-finite-over-regular",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -172,5 +183,27 @@
   "landing": "20261020T144258-L-2260983",
   "kind": "interface",
   "note": "independent cc review: removed RingHom.integralExtensionDimension vs live WeilConjectures RingHom.IsIntegral.ringKrullDim_le_and_isMaximal_comap (identical signature and proof); AugmentationHeight 2-line adaptation compiled; node lean record rebinding vs WeilConjectures signature"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:A\\to B$ be a ring map of commutative rings such that $B$ is integral over $A$ (every element of $B$ is a root of a monic polynomial with coefficients in $f(A)$). Then $\\dim B\\le\\dim A$ (Krull dimensions: suprema of lengths of chains of prime ideals), and for every maximal ideal $\\mathfrak n$ of $B$ the ideal $f^{-1}(\\mathfrak n)$ is a maximal ideal of $A$.",
+  "proof": [
+   {
+    "text": "($\\dim B\\le\\dim A$.) Write $\\varphi:A\\to B$ for the ring map. Let $\\mathfrak q_0\\subsetneq\\mathfrak q_1\\subsetneq\\cdots\\subsetneq\\mathfrak q_n$ be a chain of prime ideals of $B$ of length $n$, and put $\\mathfrak p_i=\\varphi^{-1}(\\mathfrak q_i)$. Each $\\mathfrak p_i$ is a prime ideal of $A$: $1\\notin\\mathfrak p_i$ since $\\varphi(1)=1\\notin\\mathfrak q_i$, and $ab\\in\\mathfrak p_i$ gives $\\varphi(a)\\varphi(b)\\in\\mathfrak q_i$, so $\\varphi(a)\\in\\mathfrak q_i$ or $\\varphi(b)\\in\\mathfrak q_i$. Since $B$ is integral over $A$ and $\\mathfrak q_{i-1}$ is a prime with $\\mathfrak q_{i-1}\\subsetneq\\mathfrak q_i$, incomparability for integral extensions (distinct comparable primes of $B$ have distinct contractions) gives $\\mathfrak p_{i-1}\\subsetneq\\mathfrak p_i$ for $i=1,\\dots,n$. So $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ is a chain of prime ideals of $A$ of length $n$, and $n\\le\\dim A$. Taking the supremum over all chains in $B$ gives $\\dim B\\le\\dim A$ (if $B=0$ there is no chain and $\\dim B=-\\infty$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Maximal ideals lie over maximal ideals.) Let $\\mathfrak n\\subset B$ be a maximal ideal. Since $B$ is integral over $A$, $\\varphi^{-1}(\\mathfrak n)$ is a maximal ideal of $A$ (the field $B/\\mathfrak n$ is integral over the domain $A/\\varphi^{-1}(\\mathfrak n)$, which is therefore a field); that is, $\\mathfrak n$ lies over the maximal ideal $\\varphi^{-1}(\\mathfrak n)$ of $A$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,142 @@
+{
+ "id": "lem-sp-level-bounds-tower-domain",
+ "kind": "statement",
+ "title": "Uniform level intervals imply the ordinary strict-tower domain",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, and base the recorded ordinary strict-tower presentation [det-sp-tower-shriek-levels, def-sp-tower-shriek-realization]. Let T be a Noetherian scheme, with finite-level origins retaining specified cohomological and Tor intervals [def-sp-chart-tate-tower-data]. Let C be an actual ordinary derived strict coefficient tower on T whose levels are intrinsically constructible finite-Tor, with cohomological support in [a,b] and Tor amplitude in [s,t], where a<=b and s<=t. Then C has the recorded domain: its inverse realization is in the unnormalized uniform constructible finite-Tor subcategory for every abelian presentation, C is bounded below, and every level has an independent retained etale-origin witness. No transition compatibility is imposed on those witnesses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals"
+ },
+ "stmt_deps": [
+  "def-sp-chart-tate-tower-data",
+  "det-sp-tower-shriek-levels",
+  "def-sp-tower-shriek-realization"
+ ],
+ "proof": [
+  {
+   "text": "Exact evaluation in [det-sp-coefficient-towers-abelian] commutes with kernels, images and quotients, hence $\\mathcal H^i(K)_n=\\mathcal H^i(K_n)$. For $i<a$ or $i>b$ all these evaluations are zero. A strict tower sheaf whose every component is zero is the zero object (all its transition maps are then uniquely zero), so $\\mathcal H^i(K)=0$ in those degrees. In particular $K\\in D^+(\\operatorname{Tow})$. This argument applies to every actual derived tower with common levelwise cohomological bounds; it uses no reconstruction of a tower from unrelated derived levels.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs: bounded-below strict-tower domain"
+   }
+  },
+  {
+   "text": "The section-preserving derived realization identifies the evaluated inverse realization with every original finite level. Transport its constructibility, cohomological and Tor intervals across these isomorphisms to obtain spConstructibleTorTowers for every abelian presentation. Apply the given finite-origins hypothesis to each original level, with its ordered intervals. The etale origin is bounded below, and the canonical intrinsic module equivalence identifies its fixed-scalar comparison with that original level. This supplies a separate retained Origin for each n, with no compatibility equation.",
+   "uses": [
+    "def-sp-tower-shriek-realization",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "def-sp-tower-shriek-realization",
+  "det-sp-tower-shriek-levels"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform cohomological and Tor bounds for pullback and Tate twist in ordinary derived coefficient towers",
+   "results": "Rep.isZero_Tor_succ_of_projective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.cm5b and homology exact-sequence lemmas; no specialized tower interval transport.",
+   "date": "2026-10-25",
+   "verdict": "Use existing geometric and finite-level declarations; a tower-presentation bridge is still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension",
+   "results": "smoothOfRelativeDimension_comp, smoothOfRelativeDimension_isStableUnderBaseChange, pullback fst/snd instances.",
+   "date": "2026-10-25",
+   "verdict": "Geometry is already available; no ordinary tower-domain or interval API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of strict sheaf coefficient towers jointly detects zero homology and bounded below complexes",
+   "results": "ShortComplex.exact_iff_isZero_homology, CochainComplex.isZero_of_isGE, HomologicalComplex.exactAt_iff_isZero_homology; no strict coefficient tower bridge.",
+   "date": "2026-10-25",
+   "verdict": "General exact homology tools available, but no specialized result."
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*bound|bound.*tower; origins|domain_of_bounds|bounds_operations|bounds_pull|bounds_twist",
+   "results": "Mathlib has no coefficient-tower bounds. Project: SmoothPurityTowerBound, CompactSupportUniformTorBound, TwistedPullbackTowerDomain and ProEtaleCtfPullbackDomains. The latter two require finite-field/gamma data and import this module, so cannot supply the bridge without a cycle. blueprint_refs.py search tower bounds returned 0 blueprint nodes.",
+   "date": "2026-10-25",
+   "verdict": "New nodes record only the missing interfaces used by this argument, not copies of the chart theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerChartAdmissibility",
+  "date": "2026-10-25",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals",
+   "via": [
+    "lem-sp-tower-chart-admissibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerBoundsDomain",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerBoundsDomain.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpChartAdmissibility.domain_of_level_bounds",
+  "statement": "theorem domain_of_level_bounds\n    (base : SpTowerShriek.Base l E) (T : Scheme.{u}) [IsNoetherian T]\n    (horig : origins l E T)\n    (C : SpTowerShriek.D l E T) (a b s t : ℤ) (hab : a ≤ b) (hst : s ≤ t)\n    (hC : bounds l E T C a b s t) : domain l E base T C",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sp-level-bounds-tower-domain",
+  "worker": "stage3 B7",
+  "summary": "Read the current blueprint Local pairs/Uniformity source, all cited declarations, and the original chart-admissibility proof steps. Searched Mathlib through LeanSearch, Loogle, LeanFinder and source grep, and searched project/blueprint duplicates. This interface isolates only the finite-to-tower domain or operation bridge used by the real chart assembly.",
+  "blueprint": "Local pairs and Uniformity of det-sp-tower-gluing; details are the cited chart-admissibility proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37575",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T162009-L-190660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37575",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T162009-L-190660",
+  "kind": "interface",
+  "note": "independent cc review: 13 relocated chart data decls byte-identical to live (SmoothPurityTowerChartData, public re-export from item); tower_chart_admissibility signature unchanged; domain_of_level_bounds/elementary_tower_bounds checked true against SpTowerShriek.Base/Geometry/Data pinning; 5 delivered modules + 7 direct importers compile in sandbox; node proof fields match the Lean"
+ }
+}

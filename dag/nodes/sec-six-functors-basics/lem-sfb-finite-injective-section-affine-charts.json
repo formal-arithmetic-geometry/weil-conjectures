@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-finite-injective-section-affine-charts",
+ "kind": "statement",
+ "title": "Affine charts along finite surjections with injective section maps",
+ "statement": "Let $k$ be a field [def-weil-field], let $X,Z$ be schemes [def-pc-scheme] with structure morphisms $a:X\\to\\operatorname{Spec}k$ and $b:Z\\to\\operatorname{Spec}k$, and let $q:X\\to Z$ satisfy $bq=a$. Assume $a$ is of finite type [def-weil-finite-type-morphism], $q$ is finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism], and for every affine open $V\\subseteq Z$ the pullback $q^\\sharp_V:\\Gamma(V,\\mathcal O_Z)\\to\\Gamma(q^{-1}V,\\mathcal O_X)$ is injective. Then $X$ is Noetherian (locally Noetherian [pqf-def-locnoeth] and quasi-compact, meaning every open cover has a finite subcover), and $Z$ admits a finite affine open cover $Z=\\bigcup_j V_j$. For every affine open $V=\\operatorname{Spec}A$ of $Z$, the inverse image $q^{-1}V$ is affine, with coordinate ring $B$, and $q^\\sharp_V$ identifies $A$ with a $k$-subalgebra of $B$; $B$ is a finite-type $k$-algebra [def-weil-pbc-finite-type-algebra] and is finitely generated as an $A$-module [def-weil-finitely-generated-module]. The ring $A$ is a finite-type $k$-algebra and is Noetherian [def-weil-pbc-noetherian-ring]. The empty schemes and the empty affine cover are included.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00IS, lemma-Artin-Tate; agent-formulated affine-chart assembly of the retained item proof steps 1--2. The scheme and Noetherian inputs are the affine-pair finite-type characterization and finite-type-over-Noetherian results, detailed with their tags in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Because $a$ is of finite type, it is quasi-compact and locally of finite type. The inverse image of the whole affine $\\operatorname{Spec}k$ is $X$, so $X$ is quasi-compact. Choose a finite affine open cover $X=\\bigcup_i W_i$. The affine-pair characterization applied to $a$, $W_i$ and $\\operatorname{Spec}k$ says that each $\\Gamma(W_i,\\mathcal O_X)$ is a finite-type $k$-algebra.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pqf-finite-affine-cover-qc-open",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T1 (definition-finite-type) and 01T2 (lemma-locally-finite-type-characterize); the finite cover is the finite-subcover argument."
+   }
+  },
+  {
+   "text": "Each of these coordinate rings is Noetherian by the finite-type affine algebra lemma. This affine cover proves that $X$ is locally Noetherian by its definition. Together with the quasi-compactness from step 1 this is precisely the asserted Noetherianity of $X$. If $X$ is empty use the empty cover.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian), proof, together with properties.tex Tag 01OV (definition-noetherian)."
+   }
+  },
+  {
+   "text": "For any open cover $Z=\\bigcup_\\alpha O_\\alpha$, continuity of $q$ gives an open cover $X=\\bigcup_\\alpha q^{-1}O_\\alpha$. Quasi-compactness supplies finitely many indices. Their $O_\\alpha$ cover $Z$: given $z$, choose $x$ with $q(x)=z$ by surjectivity, then use the chosen cover of $X$. Thus $Z$ is quasi-compact. This argument includes the empty cover when $X=\\varnothing$, since surjectivity then forces $Z=\\varnothing$.",
+   "uses": [
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent-written open-cover argument using surjectivity and continuity; no descent theorem is invoked."
+   }
+  },
+  {
+   "text": "Apply the finite affine cover lemma to the quasi-compact open $Z$ of itself to obtain $Z=\\bigcup_j V_j$ with finitely many affine opens. For an arbitrary affine open $V=\\operatorname{Spec}A$ of $Z$, finiteness of $q$ means directly that $U=q^{-1}V$ is affine, say with coordinate ring $B$, and that $B$ is a finitely generated $A$-module via $q^\\sharp_V$. The affine-pair characterization for $a$, $U$ and $\\operatorname{Spec}k$ gives finite type of $B$ over $k$.",
+   "uses": [
+    "lem-pqf-finite-affine-cover-qc-open",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WH (definition-integral), finite clause, and 01T2 (lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "The relation $bq=a$ makes $q^\\sharp_V:A\\to B$ a $k$-algebra map. Its assumed injectivity identifies $A$ with its image $T\\subseteq B$ as a $k$-subalgebra. If $b_1,\\ldots,b_r$ generate $B$ over $A$, their same expressions generate it over $T$: replace each coefficient $c$ by $q^\\sharp_V(c)$. A field is Noetherian, since an ideal containing a nonzero $c$ contains $c^{-1}c=1$ and otherwise is zero. Apply Artin--Tate with base $k$, ambient algebra $B$ and subalgebra $T$: $T$ is finite type over $k$. Lift its finitely many algebra generators through the bijection $A\\to T$; injectivity then shows that they generate $A$ over $k$.",
+   "uses": [
+    "lem-sfb-artin-tate-subalgebra-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IS (lemma-Artin-Tate), with the explicit elementary image-subalgebra identification."
+   }
+  },
+  {
+   "text": "Apply the finite-type affine algebra lemma to $A$ over $k$ to conclude that $A$ is Noetherian. Since $V$ was arbitrary, every asserted chart has all the stated properties. For $V=\\varnothing$, both coordinate rings are zero rings; the empty generating sets and the same Artin--Tate theorem apply, which requires neither the ambient algebra nor its subalgebra to be nonzero.",
+   "uses": [
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence); zero algebra permitted."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-wf-affine-noetherian-components",
+  "pqf-def-locnoeth",
+  "def-weil-surjective-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-artin-tate-subalgebra-finite-type"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Affine-chart assembly of Tags 01T1, 01T2, 01T6 and 01WH with algebra.tex Tags 00IS and 00FN; the open-cover and image-subalgebra arguments are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism from a finite type scheme over a field with injective pullback on affine sections has finite type target and finite affine Noetherian charts",
+   "results": "8 hit(s); top recorded results: AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.IsFinite.finite_app",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-app results give finiteness over the target, not finite generation of the target over k; flat descent requires flatness, which is absent; fg_of_fg_of_fg is only the existing algebraic Artin--Tate input, not the scheme chart assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "6 hit(s); top recorded results: AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.IsFinite.eq_inf, AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage, AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-app results give finiteness over the target, not finite generation of the target over k; flat descent requires flatness, which is absent; fg_of_fg_of_fg is only the existing algebraic Artin--Tate input, not the scheme chart assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "(finiteType|finite_type).*(surjective|injective)|(surjective|injective).*(finiteType|finite_type)",
+   "results": "6 hit(s); top recorded results: Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-app results give finiteness over the target, not finite generation of the target over k; flat descent requires flatness, which is absent; fg_of_fg_of_fg is only the existing algebraic Artin--Tate input, not the scheme chart assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite type over a field along a finite surjective morphism whose pullbacks on affine coordinate rings are injective",
+   "results": "8 hit(s); top recorded results: RingHom.FiniteType, RingHom.FaithfullyFlat.codescendsAlong_injective, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, Algebra.Smooth.exists_finiteType, RingHom.FiniteType.of_surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-app results give finiteness over the target, not finite generation of the target over k; flat descent requires flatness, which is absent; fg_of_fg_of_fg is only the existing algebraic Artin--Tate input, not the scheme chart assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Tate theorem for finite scheme maps with schematically dominant finite type source over a field, target affine coordinate rings are finitely generated and Noetherian",
+   "results": "8 hit(s); top recorded results: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsArtinianScheme.finite, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, RingHom.finite_of_algHom_finiteType_of_isJacobsonRing, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine, finite_of_algHom_finiteType_of_isJacobsonRing, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-app results give finiteness over the target, not finite generation of the target over k; flat descent requires flatness, which is absent; fg_of_fg_of_fg is only the existing algebraic Artin--Tate input, not the scheme chart assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "fg_of_fg_of_fg|finite_app|locallyOfFiniteType_app|finite_appTop_of_universallyClosed",
+   "results": "21 hit(s); top recorded results: Mathlib/Topology/MetricSpace/Pseudo/Basic.lean, Mathlib/Topology/Algebra/Valued/LocallyCompact.lean, Mathlib/Topology/Separation/DisjointCover.lean, Mathlib/Topology/Separation/DisjointCover.lean, Mathlib/Topology/Separation/DisjointCover.lean, Mathlib/LinearAlgebra/Finsupp/LinearCombination.lean, Mathlib/RingTheory/Adjoin/Tower.lean, Mathlib/RingTheory/Adjoin/Tower.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-app results give finiteness over the target, not finite generation of the target over k; flat descent requires flatness, which is absent; fg_of_fg_of_fg is only the existing algebraic Artin--Tate input, not the scheme chart assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "(finiteType|finite_type).*(surjective|injective)|(surjective|injective).*(finiteType|finite_type)",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: finite_app and finiteType_appLE supply chart inputs only; flat descent requires absent flatness; Artin--Tate is the existing algebraic leaf, not this scheme assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite type from source to target for a finite surjective scheme morphism with injective coordinate ring maps over a field",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, RingHom.FiniteType.of_surjective, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: finite_app and finiteType_appLE supply chart inputs only; flat descent requires absent flatness; Artin--Tate is the existing algebraic leaf, not this scheme assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "6 hits; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.IsFinite.eq_inf, AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage, AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: finite_app and finiteType_appLE supply chart inputs only; flat descent requires absent flatness; Artin--Tate is the existing algebraic leaf, not this scheme assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism of schemes with injective affine section maps from a finite type scheme over a field has finite type Noetherian target affine coordinate rings",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: finite_app and finiteType_appLE supply chart inputs only; flat descent requires absent flatness; Artin--Tate is the existing algebraic leaf, not this scheme assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "fg_of_fg_of_fg|finite_app|locallyOfFiniteType_app|finiteType_of",
+   "results": "25 hits; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: finite_app and finiteType_appLE supply chart inputs only; flat descent requires absent flatness; Artin--Tate is the existing algebraic leaf, not this scheme assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Tate descent of finite type algebra along an injective module finite algebra map and affine charts of schemes over fields",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, Algebra.Smooth.exists_finiteType, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: finite_app and finiteType_appLE supply chart inputs only; flat descent requires absent flatness; Artin--Tate is the existing algebraic leaf, not this scheme assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-quotient-normal-proper",
+  "date": "2026-10-22",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Existing quotient prerequisite in ILO X 2.3 Step 2 diagram (2.c), printed p.151: finite affine inverse images and Artin--Tate; retained lem-sfb-finite-quotient-normal-proper proof steps 1--2, excluding the action identification retained in the parent.",
+   "via": [
+    "lem-sfb-finite-quotient-normal-proper",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-injective-section-affine-charts",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Stacks 01T2, 01T6, 01WH, 00IS and 00FN. Six complete steps reuse existing nodes; no new node or Mathlib leaf. The finite-cover descent and image-subalgebra coefficient identification are explicit. No exact project attachment or one-line Mathlib match for the whole assembly was found. Empty schemes and zero coordinate rings are included.",
+  "blueprint": "Realizes the existing from.place: affine inverse images and Artin--Tate in ILO X 2.3 Step 2 diagram (2.c), retained parent proof steps 1--2. The latest blueprint unit was read; the existing null ancestor and via chain are retained. Whole-blueprint searches for injective section, affine pairs, Artin.Tate and finite type.*subalgebra found no equivalent imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-fd19f22b3",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-fd19f22b3 (reviewer sub-agent of L); spot-checked: Read the item in full: the statement is unchanged, and the only stmt_dep added is def-weil-affine-spectrum, which the statement uses for Spec k and V=Spec A. There are no new nodes. I read every cited node (all Mathlib leaves or definitions, none merged, no route or tool_use issue) and the Stacks sources: 01T2 morphisms.tex:2673 (all affine pairs), 01T6 :2765, 01WH :10957 finite clause, 00IS algebra.tex:12297, 00FN :5991. Steps: (1) X is quasi-compact because it is the preimage of the affine Spec k; a finite affine cover comes from isCompact_iff_finite_and_eq_biUnion_affineOpens; the affine-pair lemma applies to (W_i, Spec k). (2) Each Γ(W_i) is Noetherian by lem-wf-affine-noetherian-components, so X is Noetherian by pqf-def-locnoeth plus quasi-compactness. (3) Z is quasi-compact by the elementary surjectivity argument. (4) Finiteness of q makes every q^{-1}V affine with B a finite A-module; the affine-pair lemma gives B of finite type over k. (5) bq=a makes q^♯ a k-algebra map; the image T satisfies exactly the hypotheses of Artin–Tate (k Noetherian inline, B of finite type, B finite over T), and generators transfer back through A≅T. (6) A is Noetherian by the finite-type-over-a-field leaf. Edge cases checked: empty schemes and zero rings are allowed by both leaves; q=id gives the expected special case. The injectivity hypothesis is needed: X=Spec k → Spec k[ε_i] with all ε_iε_j=0 is finite and surjective but its target is not of finite type, and the item excludes it. Duplicate search by rg -L for Artin–Tate/00IS and 'finite surjective' found only different nodes (submersion subring, invariant-subalgebra transfer, admissible quotient, finite-surjective dimension). proof_deps equals the union of uses; there are 3 search kinds; no SGA is cited; the blueprint fields are retained. No fixes."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteInjectiveSectionAffineCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteInjectiveSectionAffineCharts.lean",
+  "declaration": "AlgebraicGeometry.finite_injective_section_affine_charts",
+  "statement": "theorem finite_injective_section_affine_charts {k : Type u} [Field k] {X Z : Scheme.{u}} (a : X ⟶ Spec (CommRingCat.of k)) (b : Z ⟶ Spec (CommRingCat.of k)) (q : X ⟶ Z) (hcomp : q ≫ b = a) [LocallyOfFiniteType a] [QuasiCompact a] [IsFinite q] [Surjective q] (hinj : ∀ (V : Z.Opens), IsAffineOpen V → Function.Injective (q.app V).hom) : IsLocallyNoetherian X ∧ CompactSpace X ∧ ∃ (n : ℕ) (V : Fin n → Z.Opens), (∀ j, IsAffineOpen (V j)) ∧ (⨆ j, V j) = ⊤ ∧ ∀ (W : Z.Opens), IsAffineOpen W → IsAffineOpen (q ⁻¹ᵁ W) ∧ Function.Injective (q.app W).hom ∧ (q.app W).hom.comp ((b.appLE ⊤ W le_top).hom.comp (Scheme.ΓSpecIso (CommRingCat.of k)).inv.hom) = (a.appLE ⊤ (q ⁻¹ᵁ W) le_top).hom.comp (Scheme.ΓSpecIso (CommRingCat.of k)).inv.hom ∧ RingHom.FiniteType ((a.appLE ⊤ (q ⁻¹ᵁ W) le_top).hom.comp (Scheme.ΓSpecIso (CommRingCat.of k)).inv.hom) ∧ (q.app W).hom.Finite ∧ RingHom.FiniteType ((b.appLE ⊤ W le_top).hom.comp (Scheme.ΓSpecIso (CommRingCat.of k)).inv.hom) ∧ IsNoetherianRing (Γ(Z, W))",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-24"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-399677d90",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Only the item lean field changed; the statement matches the file verbatim. Every node hypothesis has a matching Lean hypothesis and none is stronger: finite type as LocallyOfFiniteType+QuasiCompact, IsFinite/Surjective, injectivity on affine opens only, hcomp. Every conclusion clause is present: IsLocallyNoetherian ∧ CompactSpace for X, a Fin n affine cover of Z, affine q⁻¹W, injective and finite q.app W, the k-compatibility equation (true by comp_appLE plus hcomp), RingHom.FiniteType for both canonical k-maps, IsNoetherianRing Γ(Z,W). Empty schemes, Fin 0 and zero rings are covered; single universe u. All stmt_dep records match existing Mathlib declarations; def-weil-field has lean null but status mathlib (Field) as for its other citers. No name clash in side-live lean/ or Mathlib; docstrings carry source, blueprint id and the six steps; proof is sorry only. Not recompiled per instruction; worker reports a clean compile. Optional note: the X clause equals Mathlib IsNoetherian X."
+ }
+}

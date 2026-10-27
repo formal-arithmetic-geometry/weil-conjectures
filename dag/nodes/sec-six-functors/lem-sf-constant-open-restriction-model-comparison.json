@@ -1,0 +1,170 @@
+{
+ "id": "lem-sf-constant-open-restriction-model-comparison",
+ "kind": "lemma",
+ "title": "Constant module inverse image in open-slice coordinates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $j:V\\hookrightarrow T$ be an open immersion of schemes [def-weil-open-immersion] and let $A$ be any commutative ring. Work on the small pro-etale sites [def-weil-pbc-proetale-site]. Write $C_W=\\mathsf{sfCbcModelModules}(W,A)$ for the fixed constant-module equivalence to the published small model, and let $P_j=\\mathsf{sfCbcMorphism}(j).\\mathsf{modulePull}(A)$ be its fixed constant-module inverse image [lem-sf-cbc-compact-support-composition-limit]. Let $W_j$ be the pro-etale object given by $j$, let $B_T=\\underline A_T$, and write $S_j=\\mathsf{sfCbcConstantModuleToSlice}(T,W_j,A)$ for the fixed constant-coefficient transport from modules on $V$ to modules over $B_T|_{W_j}$ on the slice [lem-sf-cbc-extension-zero-completion]. For $R_j$ the literal restriction of $B_T$-modules to that slice [lem-pur-site-restriction-module-adjunction-exact], there is a natural isomorphism $C_T\\mathbin{\\ggg}P_j\\mathbin{\\ggg}C_V^{-1}\\mathbin{\\ggg}S_j\\cong R_j$. All equivalences and scalar maps are the existing constant-section-normalized ones. No finiteness of $A$, quasi-compactness of $j$, nonemptiness of the schemes, extension functor, or derived category is assumed.",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "lem-sf-cbc-compact-support-composition-limit",
+  "lem-sf-cbc-extension-zero-completion",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03DI and 03DJ (module pullback and localization); proetale.tex Tag 098K (weakly etale localization); Step 11 of lem-sf-constant-semilinear-generator-comparison."
+ },
+ "proof": [
+  {
+   "text": "Define the canonical constant-ring direct-image map on the AsSmall model by the constant-presheaf sheafification unit. The scalar normalization lemma identifies its set-sheaf transpose with the prescribed algebraic inverse-image scalar map. Apply the existing supplied tensor/module adjunction to this fixed algebraic lift, and identify its scalar-extension functor with ConstantCompletion.change.",
+   "uses": [
+    "lem-sf-constant-inverse-image-scalar-normalization",
+    "lem-pur-ringed-pullback-presentation-on-sites",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the fixed sfCbcModelModules transport with continuous module pushforward along AsSmall.down and the prescribed constant-ring comparison. The square of canonical constant-ring maps commutes: precompose with the constant sheafification unit and use sfCbcModelRingMap_existsUnique on both schemes. Continuous module-pushforward composition then gives the square of right adjoints. Conjugating the model adjunction by the two fixed equivalences and applying leftAdjointUniq identifies the transported modulePull with the ordinary constant-module left adjoint.",
+   "uses": [
+    "lem-sf-cbc-extension-zero-completion",
+    "lem-sf-cbc-compact-support-composition-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved openMap/baseChange site adjunction, its invertible constant-ring transpose, and the generic continuous module adjunction from VaryingRingOperations. Construct explicitly the natural isomorphism between Over.forget and cbcSliceFunctor followed by openMap; its components are identity maps on the underlying schemes. Naturality of the constant sheafification unit and the defining unit equation for sfCbcConstantSliceMap identify the resulting coefficient composite with the fixed slice coefficient map. Continuous module-pushforward composition and congruence therefore identify the ordinary constant-module left adjoint followed by sfCbcConstantModuleToSlice with literal localizedModuleRestriction. Whisker the model comparison by the fixed slice transport and compose the two isomorphisms.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sf-cbc-extension-zero-completion",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constant-inverse-image-scalar-normalization",
+  "lem-pur-ringed-pullback-presentation-on-sites",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sf-cbc-extension-zero-completion",
+  "lem-sf-cbc-compact-support-composition-limit",
+  "def-sp-varying-ring-operations",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03DI, 03DJ; H4: explicit conjugation of fixed continuous direct images, module adjoint uniqueness, and open-to-slice coefficient comparison. Only the ring scalar normalization in former Step 2 remains split off; all module and coordinate comparisons are Lean proofs."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "inverse image of sheaves of modules along an open immersion agrees with restriction to the localized slice site",
+   "results": "Eight hits, including Scheme.Modules.restrictFunctorIsoPullback, concern the Zariski structure sheaf and not the pro-etale constant ring model.",
+   "date": "2026-10-26",
+   "verdict": "No exact statement in Mathlib."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "An open immersion extension by zero is left adjoint to inverse image for sheaves of modules",
+   "results": "Eight hits, including Scheme.Modules.restrictAdjunction and restrictFunctorIsoPullback, concern a different site.",
+   "date": "2026-10-26",
+   "verdict": "Use existing pro-etale localization and model transports."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "Five hits: ofNatIsoRight, its unit and counit equations, and its two Hom-equivalence formulas.",
+   "date": "2026-10-26",
+   "verdict": "Supplies the final adjunction transport but not the geometric comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "localizedModuleRestriction|sfCbcOpenRestriction",
+   "results": "msearch Mathlib grep: zero hits. Project rg finds literal localizedModuleRestriction and the fixed model functors, but no comparison of this precise composite with literal restriction.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate statement found."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search open restriction; search 098K",
+   "results": "Six matches for open restriction, including det-sf-mate-open-restriction (a derived six-functor mate statement), and none for 098K. None compares the specified ordinary constant-module model pullback to literal slice restriction.",
+   "date": "2026-10-26",
+   "verdict": "No blueprint duplicate of this coordinate comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstantSemilinearGeneratorComparison",
+  "date": "2026-10-26",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "Normalized trace sentence, via Step 11 of the individual proper/open scalar comparison: identify constant inverse image with slice restriction before forming the open adjunction.",
+   "via": [
+    "lem-sf-constant-semilinear-generator-comparison",
+    "lem-sf-integral-compactification-comparison-bridge",
+    "lem-sf-identification-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ConstantOpenRestrictionModelComparison",
+  "file": "lean/Sheaf/SixFunctors/ConstantOpenRestrictionModelComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfCbcOpenRestrictionModelComparison",
+  "statement": "theorem sfCbcOpenRestrictionModelComparison {V T : Scheme.{u}} (j : V ⟶ T)\n    [IsOpenImmersion j] (A : Type u) [CommRing A] :\n    Nonempty (sfCbcModelModules T A ⋙\n        (sfCbcMorphism j).modulePull (ULift.{u + 1} A) ⋙\n          (sfCbcModelModules V A).asEquivalence.inverse ⋙\n            sfCbcConstantModuleToSlice T (cbcOpenObject j inferInstance) A ≅\n      SheafOfModules.localizedModuleRestriction (adicConstantRing T A)\n        (cbcOpenObject j inferInstance))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic ringed-site localization to express constant module inverse image in slice coordinates; no geometric route of the parent unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Generic comparison for actual ringed inverse image supplies the slice equivalence before identifying the fixed constant coefficient transports."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Only its ordinary algebraic inverse-image lift and canonical constant-ring structural map are used to compare the fixed module pullback; no completion conclusion is used."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module pullback and its specified induced scalar action identify the linearity of the underlying inverse-image comparison."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261025T212751-L-231005",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T001741-L-27349",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "id": "def-trf-formal-taylor-jet-matrices",
+ "kind": "definition",
+ "title": "Formal Taylor jet matrices, origin rank and rank-minor ideals",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\sigma$ be a finite variable index set, $L$ a field, $s,t\\in\\mathbf N$, and $f_i\\in L[[X_j:j\\in\\sigma]]$ [def-weil-pbc-multivariate-power-series] for $i=1,\\ldots,s$. Write $E_t=\\{\\gamma\\in\\mathbf N^\\sigma:|\\gamma|\\le t\\}$ and $\\nu!=\\prod_j\\nu_j!$, mapped to the coefficient ring. Using the iterated formal partial derivatives [def-trf-formal-power-series-partial-derivative], define the matrix [def-weil-matrix] $B_t(f)$ with row index $\\delta\\in E_t$ and column index $(i,\\eta)\\in\\{1,\\ldots,s\\}\\times E_t$ by $B_t(f)_{\\delta,(i,\\eta)}=\\partial^{\\delta-\\eta}f_i/(\\delta-\\eta)!$ when $\\eta\\le\\delta$, and zero otherwise. The reciprocal factorial is taken in $L$ and embedded as a constant series. Set $r_t(f)=\\operatorname{rank}_L B_t(f)(0)$ and $J_t(f)=J_{r_t(f)+1}(B_t(f))$ [def-trf-minor-ideal]. Here the minor ideal of any matrix with finite row and column index types is defined by transporting both index types through their standard equivalences with finite ordinals and applying the recorded minor ideal. The auxiliary multi-index factorial is also defined over every commutative coefficient ring by the same product. Empty variable and generator sets, $t=0$, and oversized minors are included.",
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-matrix",
+  "def-trf-minor-ideal"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Bierstone--Milman, Invent. Math. 128 (1997), Definition 7.9, (7.12) and Definition 7.13, pp.265--266; extraction of the six existing helper definitions from the formal Hilbert-stratum theorem module."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite truncated formal Taylor matrix multivariate normalized partial derivative columns origin rank minors ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ftaylorSeriesWithin\", \"module\": \"Mathlib.Analysis.Calculus.ContDiff.FTaylorSeries\", \"type\": \"(f : E → F) (s : Set E) (x : E) : FormalMultilinearSeries 𝕜 E F\", \"doc\": \"Let `E` and `F` be normed vector spaces over a nontrivially normed field `𝕜`. For a function `f: E → F`, a set `s ⊆ E`, and a point `x ∈ E`, the function `ftaylorSeriesWithin f s x` gives the formal T\"}\n  {\"name\": \"hasFTaylorSeriesUpToOn_top_iff_right\", \"module\": \"Mathlib.Analysis.Calculus.ContDiff.FTaylorSeries\", \"type\": \"(hN : ∞ ≤ N) :\\n  HasFTaylorSeriesUpToOn N f p s ↔\\n    (∀ x ∈ s, (p x 0).curry0 = f x) ∧\\n      (∀ x ∈ s, HasFDerivWithinAt (fun y => p y 0) (p x 1).curryLeft s x) ∧\\n        HasFTaylorSeriesUpToOn N (fun x => continuousMultilinearCurryFin1 𝕜 E F (p x 1)) (fun x => (p x).shift) s\", \"doc\": \"A function $ f $ has a formal Taylor series expansion up to infinity on a set $ s $ if and only if: (1) the zeroth term of the series equals $ f $ at every point in $ s $, (2) the first derivative ter\"}\n  {\"name\": \"ftaylorSeries\", \"module\": \"Mathlib.Analysis.Calculus.ContDiff.FTaylorSeries\", \"type\": \"(f : E → F) (x : E) : FormalMultilinearSeries 𝕜 E F\", \"doc\": \"For a function $ f : E → F $ between normed vector spaces over a nontrivially normed field $ 𝕜 $, the formal Taylor series at a point $ x ∈ E $ is a sequence where each term is the $ n $-th Fréchet de\"}\n  {\"name\": \"MvPowerSeries.truncFun\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Trunc\", \"type\": \"(φ : MvPowerSeries σ R) : MvPolynomial σ R\", \"doc\": \"For a multivariate power series $\\\\varphi$ in variables $\\\\sigma$ over a ring $R$, the truncation function maps $\\\\varphi$ to the polynomial obtained by summing all monomials of $\\\\varphi$ with degree les\"}\n  {\"name\": \"HasFTaylorSeriesUpToOn.fderivWithin\", \"module\": \"Mathlib.Analysis.Calculus.ContDiff.FTaylorSeries\", \"type\": \"∀ {𝕜 : Type u} [inst : NontriviallyNormedField 𝕜] {E : Type uE} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type uF} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : WithTop ℕ∞}\\n  {f : E → F} {p : E → FormalMultilinearSeries 𝕜 E F} {s : Set E},\\n  HasFTaylorSeries\", \"doc\": \"Let $ \\\\mathbb{K} $ be a nontrivially normed field, $ E $ and $ F $ be normed vector spaces over $ \\\\mathbb{K} $, and $ s \\\\subseteq E $. If a function $ f : E \\\\to F $ has a formal Taylor series expansio\"}\n  {\"name\": \"HasFTaylorSeriesUpTo.fderiv\", \"module\": \"Mathlib.Analysis.Calculus.ContDiff.FTaylorSeries\", \"type\": \"∀ {𝕜 : Type u} [inst : NontriviallyNormedField 𝕜] {E : Type uE} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type uF} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : WithTop ℕ∞}\\n  {f : E → F} {p : E → FormalMultilinearSeries 𝕜 E F},\\n  HasFTaylorSeriesUpTo n f p →\", \"doc\": \"If a function $ f $ has a Taylor series expansion up to order $ n $ given by a formal multilinear series $ p $, then for every natural number $ m $ less than $ n $, the derivative of the $ m $-th term\"}\n  {\"name\": \"MvPowerSeries.truncFun'\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Trunc\", \"type\": \"(φ : MvPowerSeries σ R) : MvPolynomial σ R\", \"doc\": \"For each natural number $ n $, the function that maps a multivariate power series $ \\\\varphi $ to the polynomial obtained by summing, over all monomials $ m $ of total degree at most $ n $, the product\"}\n  {\"name\": \"MvPolynomial.instFiniteDimensionalROfFinite\", \"module\": \"Mathlib.FieldTheory.Finite.Polynomial\", \"type\": \"[Finite σ] : FiniteDimensional K (R σ K)\", \"doc\": \"For any finite commutative ring $ K $ and finite type $ \\\\sigma $, the submodule $ R(\\\\sigma, K) $ of multivariate polynomials $ K[\\\\sigma] $ with exponents bounded by $ \\\\#K - 1 $ in each variable is fin\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib replacement. Existing project declarations are moved without changing names or bodies into the definition-owned module requested by the return."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal power series finite Taylor jet matrix normalized derivatives matrix origin rank minors ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) →\\n                  (R\", \"doc\": \"The Jacobian determinant of a submersive presentation with coefficients in R₀ is the determinant of the Jacobi matrix derived from the pre-submersive presentation constructed using coefficients in R₀.\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {ι : Type w} {σ : Type t} [inst : CommRing R] {v : ι → MvPolynomial σ R} (a : ι → σ)\\n  (ha : Function.Injective a)\\n  (s : optParam (MvPolynomial σ R ⧸ Ideal.span (Set.range v) → MvPolynomial σ R) (Function.surjInv ⋯))\\n  (hs :\\n    autoParam\\n      (∀ (x : MvPolynomial σ R ⧸ Ideal.span (\", \"doc\": \"For a finite type $\\\\iota$ with decidable equality, the $(i,j)$-entry of the Jacobi matrix of the naive pre-submersive presentation is equal to the partial derivative of the relation $v_j$ with respect\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobiMatrix\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    {ι : Type w} →\\n      {σ : Type t} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              (P : Algebra.PreSubmersivePresentation R S ι σ) → [Fintype σ] → [DecidableEq σ] → Matrix σ σ P.Ring\", \"doc\": \"The Jacobi matrix associated with a pre-submersive presentation $ P $ is the matrix representation of the differential operator $ \\\\partial_i $ acting on relations, expressed in the standard basis of f\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobian\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    {ι : Type w} →\\n      {σ : Type t} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.PreSubmersivePresentation R S ι σ → [Finite σ] → S\", \"doc\": \"The Jacobian is defined as the determinant of the differential operator $\\\\partial_i$ acting on relations in the polynomial ring $R[\\\\iota]$, mapped through the canonical algebra homomorphism from $P.\\\\t\"}\n  {\"name\": \"Algebra.SubmersivePresentation.jacobianRelations\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] → [inst_3 : Finite σ] → Algebra.SubmersivePresentation R S ι σ → σ → MvPolynomial ι R\", \"doc\": \"For each generator $ s $ in the finite generating set $ \\\\sigma $, this defines a multivariate polynomial over $ R $ in variables $ \\\\iota $ that encodes the relation between the Jacobian determinant an\"}\n  {\"name\": \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) →\\n                  (R\", \"doc\": \"In a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the inverse of the Jacobian unit $ \\\\operatorname{det}^{-1} $ is expressed as a multivariate polynomial over\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.aevalDifferential_toMatrix'_eq_mapMatrix_jacobiMatrix\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.PreSubmersivePresentation R S ι σ) [inst_3 : Fintype σ] [inst_4 : DecidableEq σ],\\n  LinearMap.toMatrix' P.aevalDifferential = (MvPolynomial.aeval P.val).mapMatrix P.j\", \"doc\": \"The matrix representation of the differential operator $ \\\\text{aevalDifferential} $, obtained by evaluating partial derivatives of relations in the algebra presentation, is equal to the result of appl\"}\n  {\"name\": \"Algebra.SubmersivePresentation.basisDeriv_apply\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (i j : σ),\\n  P.basisDeriv i j = (MvPolynomial.aeval P.val) ((MvPolynomial.pderiv (P.map j)) (P.relation i))\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, the basis element $ \\\\text{basisDeriv}_P(i,j) $ is given by evaluating the algebra homomorphism $ \\\\t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib replacement. Existing project declarations are moved without changing names or bodies into the definition-owned module requested by the return."
+  },
+  {
+   "tool": "grep",
+   "query": "jetExponents|multiFactorial|finiteMinorIdeal|formalJetMatrix|formalJetRank|formalJetMinorIdeal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib replacement. Existing project declarations are moved without changing names or bodies into the definition-owned module requested by the return."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '(def|abbrev) (jetExponents|multiFactorial|finiteMinorIdeal|formalJetMatrix|formalJetRank|formalJetMinorIdeal)' lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search Taylor matrix",
+   "results": "Only Sheaf/AlgebraicGeometry/FormalHilbertStratumMinors.lean defines the six names. No WeilConjectures declaration or separately owning DAG definition node. 0 blueprint nodes match Taylor matrix. The existing theorem-node lean.declarations list is the ownership defect F2; the definitions are relocated, not duplicated.",
+   "date": "2026-10-24",
+   "verdict": "Move the exact existing definitions; no new construction or parallel definition is introduced."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-supported-taylor-presentation-pivots",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Bierstone--Milman, Invent. Math. 128 (1997), Definition 7.9, (7.12) and Definition 7.13, pp.265--266; extraction of the six existing helper definitions from the formal Hilbert-stratum theorem module.",
+   "via": [
+    "lem-trf-supported-taylor-presentation-pivots",
+    "lem-trf-formal-hilbert-stratum-minors",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalTaylorJetMatrices",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.formalJetMatrix",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.jetExponents",
+   "AlgebraicGeometry.HilbertCoefficient.multiFactorial",
+   "AlgebraicGeometry.HilbertCoefficient.finiteMinorIdeal",
+   "AlgebraicGeometry.HilbertCoefficient.formalJetMatrix",
+   "AlgebraicGeometry.HilbertCoefficient.formalJetRank",
+   "AlgebraicGeometry.HilbertCoefficient.formalJetMinorIdeal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalTaylorJetMatrices.lean",
+  "statement": "def formalJetMatrix {σ : Type v} [Fintype σ] {L : Type u} [Field L]\n    {s : ℕ} (f : Fin s → MvPowerSeries σ L) (t : ℕ) :\n    Matrix ↥(jetExponents σ t) (Fin s × ↥(jetExponents σ t)) (MvPowerSeries σ L)",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Exact relocation of existing definition bodies and names as required by immutable-head return F2; the former theorem module now publicly imports this definition-owned module."
+ }
+}

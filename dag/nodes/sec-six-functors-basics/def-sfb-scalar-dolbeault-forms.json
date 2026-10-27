@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-scalar-dolbeault-forms",
+ "kind": "definition",
+ "title": "Scalar antiholomorphic coefficient forms and their Dolbeault differential",
+ "statement": "Use the usual fields $\\mathbf R,\\mathbf C$ [def-weil-field] and the conjugate Wirtinger derivative $\\partial_{\\bar z_j}=\\tfrac12(\\partial_{x_j}+i\\partial_{y_j})$ [def-sfb-kahler-coordinate-data]. For $n,q\\geq0$ and an open $U\\subset\\mathbf C^n$, a scalar $(0,q)$ coefficient form is a family $(f_J:U\\to\\mathbf C)_J$ indexed by increasing $q$-tuples in $\\{1,\\ldots,n\\}$, denoting $\\sum_J f_J\\,d\\bar z_J$. It is smooth when every coefficient is real smooth on $U$. For $q>n$ there are no indices, hence only the zero form. Restriction to $V\\subset U$ is restriction of each coefficient. Define its Dolbeault differential by the coefficient formula $(\\bar\\partial\\alpha)_K=\\sum_{r=0}^{q}(-1)^r\\partial_{\\bar z_{K_r}} f_{K\\setminus K_r}$ for every increasing $(q+1)$-tuple $K$; equivalently $\\bar\\partial\\alpha=\\sum_{j,J}(\\partial_{\\bar z_j}f_J)d\\bar z_j\\wedge d\\bar z_J$. Coefficients are actual functions on $U$; zero extensions are used only inside derivatives and smoothness tests within $U$, so no regularity across the boundary is imposed.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Demailly, I §3.C, formulas (3.14)--(3.17), printed pp.23--24; read https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf in this sandbox."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-kahler-coordinate-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smooth scalar zero q differential forms and their antiholomorphic Dolbeault derivative in complex coordinates",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"extDeriv_extDeriv_apply\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(hω : ContDiffAt 𝕜 r ω x) (hr : minSmoothness 𝕜 2 ≤ r) : extDeriv (extDeriv ω) x = 0\", \"doc\": \"If $\\\\omega$ is a differential form of degree $n$ that is continuously differentiable of order $r$ at a point $x$, where $r$ is at least the minimal smoothness required for the field $\\\\mathbb{K}$, then\"}\n  {\"name\": \"extDeriv_fun_smul\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(c : 𝕜) (ω : E → E [⋀^Fin n]→L[𝕜] F) : extDeriv (c • ω) x = c • extDeriv ω x\", \"doc\": \"For any scalar $ c $ in a normed field $ \\\\mathbb{K} $ and differential form $ \\\\omega $ of degree $ n $, the exterior derivative of the scalar multiple $ c \\\\cdot \\\\omega $ at a point $ x $ equals $ c $ \"}\n  {\"name\": \"extDerivWithin_fun_smul\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(c : 𝕜) (ω : E → E [⋀^Fin n]→L[𝕜] F) (hsx : UniqueDiffWithinAt 𝕜 s x) :\\n  extDerivWithin (fun x ↦ c • ω x) s x = c • extDerivWithin ω s x\", \"doc\": \"For a scalar $ c $ in a normed field $ \\\\mathbb{K} $ and a differential form $ \\\\omega $, if the unique differentiability condition holds at $ x $ within subset $ s $, then the exterior derivative of $ \"}\n  {\"name\": \"extDeriv_extDeriv\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(h : ContDiff 𝕜 r ω) (hr : minSmoothness 𝕜 2 ≤ r) : extDeriv (extDeriv ω) = 0\", \"doc\": \"For a continuously differentiable differential form $\\\\omega$ of degree $n$ over a nontrivially normed field $\\\\mathbb{K}$, if the smoothness order $r$ satisfies $\\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2) \\\\l\"}\n  {\"name\": \"extDerivWithin_extDerivWithin_apply\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(hω : ContDiffWithinAt 𝕜 r ω s x) (hr : minSmoothness 𝕜 2 ≤ r) (hs : UniqueDiffOn 𝕜 s) (hx : x ∈ closure (interior s))\\n  (h'x : x ∈ s) : extDerivWithin (extDerivWithin ω s) s x = 0\", \"doc\": \"For a differential form $\\\\omega$ over a nontrivially normed field $\\\\mathbb{K}$, if $\\\\omega$ is $C^r$-smooth within a set $s$ at a point $x \\\\in s$ with $r \\\\geq \\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2)$, an\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Subsingleton Ω[S⁄R]\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is zero.\"}\n  {\"name\": \"conformalAt_iff_differentiableAt_or_differentiableAt_comp_conj\", \"module\": \"Mathlib.Analysis.Complex.Conformal\", \"type\": \"{f : ℂ → ℂ} {z : ℂ} :\\n  ConformalAt f z ↔ (DifferentiableAt ℂ f z ∨ DifferentiableAt ℂ (f ∘ conj) (conj z)) ∧ fderiv ℝ f z ≠ 0\", \"doc\": \"A complex function $ f $ is conformal at a point $ z $ if and only if either $ f $ is complex differentiable at $ z $ or $ f $ composed with complex conjugation is complex differentiable at $ \\\\overlin\"}\n  {\"name\": \"ModularForm.instZero\", \"module\": \"Mathlib.NumberTheory.ModularForms.Basic\", \"type\": \": Zero (ModularForm Γ k)\", \"doc\": \"The zero element in the space of modular forms of weight $k$ for a subgroup $\\\\Gamma \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ is the constant function $f(z) = 0$ on the upper half-plane $\\\\mathbb{H}$, which\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No coordinate scalar (0,q) form or Dolbeault operator match; exterior d and holomorphic primitives do not define it."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dolbeault\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No coordinate scalar (0,q) form or Dolbeault operator match; exterior d and holomorphic primitives do not define it."
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|Wirtinger|barPartial|antiholomorphic",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Analysis/Complex/Conformal.lean\", \"line\": \"40\", \"text\": \"  only if it's holomorphic or antiholomorphic at that point.\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Conformal.lean\", \"line\": \"48\", \"text\": \"Antiholomorphic functions such as the complex conjugate are considered as conformal functions in\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Conformal.lean\", \"line\": \"54\", \"text\": \"  throughout or antiholomorphic throughout.\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Conformal.lean\", \"line\": \"151\", \"text\": \"/-- A complex function is conformal if and only if the function is holomorphic or antiholomorphic\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No coordinate scalar (0,q) form or Dolbeault operator match; exterior d and holomorphic primitives do not define it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n Dolbeault|dolbeault|Wirtinger|barPartial|antiholomorphic lean/WeilConjectures lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Complex/AnalyticProjectiveStructureCohomology.lean:8:import Sheaf.Paper.HermitianDolbeaultOrthogonalDecomposition\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Complex/AnalyticProjectiveStructureCohomology.lean:47:   lem-sfb-dolbeault-acyclic-resolution with p=0 and the identity case of\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Complex/AnalyticProjectiveStructureCohomology.lean:60:4. For 1≤q≤n, lem-sfb-hermitian-dolbeault-orthogonal-decomposition writes a closed\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Complex/AnalyticProjectiveStructureCohomology.lean:65:   Conjugation produces a closed (q,0)-form. Its dbar component vanishes, so Dolbeault\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/KahlerNormalHolomorphicCoordinates.lean:15:The metric coefficients use Kong's first-linear convention. Both Wirtinger first derivatives\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/KahlerNormalHolomorphicCoordinates.lean:28:vanishing holomorphic and antiholomorphic first derivatives at the center.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/KahlerCoordinateData.lean:3:public import Sheaf.Geometry.Manifold.HermitianDolbeaultData\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/KahlerCoordinateData.lean:13:Closedness is the cyclic coordinate formula for its exterior derivative. Wirtinger operators\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/KahlerCoordinateData.lean:57:/-- The Wirtinger derivative `∂z_l = (∂x_l - i ∂y_l)/2` of a smooth coefficient.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/KahlerCoordinateData.lean:64:/-- The conjugate Wirtinger derivative `∂bar_z_l = (∂x_l + i ∂y_l)/2`.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:14:# Smooth Hermitian Dolbeault data in holomorphic coordinates\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:17:(blueprint: def-sfb-hermitian-dolbeault-data).\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:39:(blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:43:Source: Kong §3.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:50:Source: Kong §3.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:56:Source: Kong §3.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:64:no additional fields. Source: Kong §3.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:72:(blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:83:Source: Kong §3.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:88:Source: Kong §6.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:93:Source: Kong §6.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:103:Source: Kong §6.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:116:Source: Kong §6.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:125:Source: Kong §6.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:132:(blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:143:(blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:148:/-- The Dolbeault operators and the smooth formal adjoint, specified on actual smooth\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:152:(blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:153:structure DolbeaultOperators (g : HermitianMetric n M) (μ : MetricVolume g) where\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:173:/-- The Dolbeault Laplacian on smooth forms, `D D* + D* D`.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:174:Source: Kong §6.1 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:175:def DolbeaultOperators.laplacian {g : HermitianMetric n M} {μ : MetricVolume g}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:176:    (D : DolbeaultOperators g μ) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:181:Source: Kong §6.2, Theorem 6.7 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:182:def DolbeaultOperators.harmonic {g : HermitianMetric n M} {μ : MetricVolume g}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:183:    (D : DolbeaultOperators g μ) (p q : ℤ) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:188:Source: Kong §6.2, Theorem 6.7 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:189:def DolbeaultOperators.exact {g : HermitianMetric n M} {μ : MetricVolume g}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:190:    (D : DolbeaultOperators g μ) (p q : ℤ) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:195:Source: Kong §6.2, Theorem 6.7 (blueprint: def-sfb-hermitian-dolbeault-data). -/\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:196:def DolbeaultOperators.coexact {g : HermitianMetric n M} {μ : MetricVolume g}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean:197:    (D : DolbeaultOperators g μ) (p q : ℤ) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Analysis/Complex/CauchyGreenTestFunction.lean:29:functions from their antiholomorphic derivative, with absolute convergence and\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Analysis/Complex/CutoffCauchyTransform.lean:52:antiholomorphic derivative equation, and commutes with every parameter derivative.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Analysis/Complex/CauchyGreenAnnulusFormula.lean:30:The integrand `(vx z + I * vy z) / 2` is the antiholomorphic derivative.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean:3:public import Sheaf.Geometry.Manifold.HermitianDolbeaultData\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean:6:# Orthogonal decomposition of smooth Dolbeault forms\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean:9:(blueprint: lem-sfb-hermitian-dolbeault-orthogonal-decomposition).\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean:12:Dolbeault operator and its formal adjoint. Orthogonality is for the metric integral pairing.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean:26:(blueprint: lem-sfb-hermitian-dolbeault-orthogonal-decomposition).\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean:32:2. The node lem-sfb-dolbeault-laplacian-elliptic gives ellipticity of the smooth Laplacian.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean:45:theorem hermitian_dolbeault_orthogonal_decomposition\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/HermitianDolbeaultOrthogonalDecomposition.lean:49:    (g : HermitianMetric n M) (μ : MetricVolume g) (D : DolbeaultOperators g μ)\n",
+   "date": "2026-10-24",
+   "verdict": "HermitianDolbeaultData gives general real alternating fields and metric/operator structures, not this open-domain coefficient representation. KahlerCoordinateData.wirtingerBarPartial is reused directly; no second coefficient derivative is defined."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"id\": \"def-.*(dolbeault|antiholomorphic|differential-form) dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/def-sfb-hermitian-dolbeault-data.json:2: \"id\": \"def-sfb-hermitian-dolbeault-data\",\n",
+   "date": "2026-10-24",
+   "verdict": "HermitianDolbeaultData gives general real alternating fields and metric/operator structures, not this open-domain coefficient representation. KahlerCoordinateData.wirtingerBarPartial is reused directly; no second coefficient derivative is defined."
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-scalar-dolbeault",
+  "date": "2026-10-24",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Scalar local Dolbeault input to the Dolbeault acyclic resolution, in det-thm-sf-ctf-stability-direct-images proof (3); Demailly I §3.C coordinate forms.",
+   "via": [
+    "lem-sfb-local-scalar-dolbeault",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.ScalarDolbeaultForms",
+  "declaration": "ComplexManifold.scalarDolbeault",
+  "declarations": [
+   "ComplexManifold.ScalarAntiholomorphicForm",
+   "ComplexManifold.scalarCoefficientExtension",
+   "ComplexManifold.IsSmoothScalarForm",
+   "ComplexManifold.restrictScalarForm",
+   "ComplexManifold.scalarDolbeault"
+  ],
+  "file": "lean/Sheaf/Analysis/Complex/ScalarDolbeaultForms.lean",
+  "statement": "def scalarDolbeault {n q : ℕ} {U : Set (Fin n → ℂ)} (α : ScalarAntiholomorphicForm n q U) : ScalarAntiholomorphicForm n (q + 1) U",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08d72870f",
+  "group": "NJ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08d72870f",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Both item theorems match the node clause by clause: open U, a in U, degree q+1, smooth, closed gives an open V with a in V inside U and a smooth degree-q beta on V with dbar(beta) = alpha restricted to V; the degree-0 iff is complex differentiability on open U. New def node def-sfb-scalar-dolbeault-forms: increasing-tuple coefficients (Fin q ↪o Fin n) on U, ContDiffOn R infinity, restriction, and dbar with the (-1)^r deletion sign via succAboveOrderEmb.comp (= K composed with succAbove r), reusing wirtingerBarPartial (dx + i dy)/2; signs and normalization verified. No duplicate in Mathlib, live or side-live (HermitianDolbeaultData and Q143's DolbeaultSheafData are different settings). Edge cases n=0, q>n and empty U are fine. Statements verbatim, proofs sorry only, docstrings complete, report sections present (second reading by the same worker, stated openly). No compile run because no file changed."
+ }
+}

@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-split-real-algebra-positive-squares",
+ "kind": "statement",
+ "title": "Positive elements of a split-real rational algebra are sums of squares",
+ "statement": "Let $C$ be a commutative unital $\\mathbf Q$-algebra, meaning a commutative ring with a unital homomorphism $\\mathbf Q\\to C$. Suppose its underlying $\\mathbf Q$-vector space has a finite basis. Let $d\\geq0$ be an integer and let\n$$\\rho:C\\otimes_{\\mathbf Q}\\mathbf R\\xrightarrow{\\sim}\\mathbf R^d$$\nbe an isomorphism of unital $\\mathbf R$-algebras, with coordinatewise operations on $\\mathbf R^d$ and scalar tensor product as in [def-weil-pbc-module-tensor-product]. If $x\\in C$ satisfies $\\rho(x\\otimes1)_i>0$ for every $1\\leq i\\leq d$, then there are an integer $r\\geq1$ and elements $q_1,\\ldots,q_r\\in C$ such that\n$$x=\\sum_{j=1}^r q_j^2.$$\nThe zero algebra and $d=0$ are allowed. The squares and the equality are in $C$, not merely in its scalar extension to $\\mathbf R$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent algebraic auxiliary for the abelian endomorphism-span input; the split-real algebra setting is motivated by II §1, proof of Lemma 1.3, pp.77–78. The sum-of-squares theorem is an agent argument, written in the report, not an assertion attributed to that lemma."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a rational basis $b_1,\\ldots,b_n$ of $C$. Its coordinate functionals $\\lambda_j:C\\to\\mathbf Q$ extend to real linear maps $\\widetilde\\lambda_j:C\\otimes_{\\mathbf Q}\\mathbf R\\to\\mathbf R$ by $\\widetilde\\lambda_j(c\\otimes t)=\\lambda_j(c)t$, using the bilinear universal property [def-weil-pbc-module-tensor-product]. On pure tensors the basis identity gives $c\\otimes t=\\sum_j(b_j\\otimes1)\\lambda_j(c)t$, and $\\widetilde\\lambda_i(b_j\\otimes1)=\\delta_{ij}$. Thus $b_j\\otimes1$ is a real basis. If $n=0$, the rational basis already gives $C=0$; take $r=1,q_1=0$. Henceforth $n>0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent Gram-matrix argument for the algebraic auxiliary; Milne II §1 Lemma 1.3, printed pp.77–78 is motivation only, not a source asserting sums of squares. See report.md."
+   }
+  },
+  {
+   "text": "Put $D=C\\otimes_{\\mathbf Q}\\mathbf R$ and $x_i=\\rho(x\\otimes1)_i>0$. Let $e_i=\\rho^{-1}(\\delta_i)$ for the coordinate vectors $\\delta_i$ of $\\mathbf R^d$, and write $e_i=\\sum_a t_{ai}(b_a\\otimes1)$ with $t_i=(t_{ai})_a\\in\\mathbf R^n$. Since $\\rho$ is an algebra isomorphism, $e_i^2=e_i$ and $x\\otimes1=\\sum_i x_i e_i$; since it is a linear isomorphism, the $t_i$ form a real basis. Define the symmetric matrix $G_{ab}=\\sum_i x_i t_{ai}t_{bi}$. For $z\\ne0$, some $\\sum_a z_at_{ai}$ is nonzero (otherwise $z$ is orthogonal to a spanning family and hence to itself), so $\\sum_{a,b}z_aG_{ab}z_b=\\sum_i x_i(\\sum_a z_at_{ai})^2>0$. Also, by expansion of the squares, $\\sum_{a,b}G_{ab}(b_ab_b\\otimes1)=\\sum_i x_ie_i^2=x\\otimes1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent Gram-matrix argument for the algebraic auxiliary; Milne II §1 Lemma 1.3, printed pp.77–78 is motivation only, not a source asserting sums of squares. See report.md."
+   }
+  },
+  {
+   "text": "Define a rational linear map $L:\\operatorname{Sym}_n(\\mathbf Q)\\to\\mathbf Q^n$ by taking the coordinates in the basis $(b_a)$ of $\\sum_{a,b}H_{ab}b_ab_b$, and let $\\xi\\in\\mathbf Q^n$ be the coordinates of $x$. The multiplication structure constants of $C$ in this rational basis are rational, so the real map with these same coefficients takes $G$ to $\\xi$, by the preceding displayed equality and the extended coordinate functionals. Apply [lem-sfb-rational-positive-definite-feasibility] with $m=n$, this $L$, and $b=\\xi$. It gives a rational symmetric $H$ with $L(H)=\\xi$ and with positive definite real image. The exact rational equality $L(H)=\\xi$ says $\\sum_{a,b}H_{ab}b_ab_b=x$ in $C$.",
+   "uses": [
+    "lem-sfb-rational-positive-definite-feasibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent Gram-matrix argument for the algebraic auxiliary; Milne II §1 Lemma 1.3, printed pp.77–78 is motivation only, not a source asserting sums of squares. See report.md."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rational-positive-definite-gram] to $H$. Obtain $r\\geq0$ and $v_k\\in\\mathbf Q^n$ with $H_{ab}=\\sum_{k=1}^r(v_k)_a(v_k)_b$. Set $q_k=\\sum_a(v_k)_ab_a\\in C$. Distributivity and commutativity give\n$$\\sum_kq_k^2=\\sum_{a,b}\\left(\\sum_k(v_k)_a(v_k)_b\\right)b_ab_b=\\sum_{a,b}H_{ab}b_ab_b=x.$$\nIf necessary append the zero element as one additional summand, ensuring that the number of summands is at least one. All coefficients and all $q_k$ lie in $\\mathbf Q$ and $C$, respectively; the last equality is already in $C$.",
+   "uses": [
+    "lem-sfb-rational-positive-definite-gram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent Gram-matrix argument for the algebraic auxiliary; Milne II §1 Lemma 1.3, printed pp.77–78 is motivation only, not a source asserting sums of squares. See report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-rational-positive-definite-feasibility",
+  "lem-sfb-rational-positive-definite-gram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent Gram-matrix argument for the algebraic auxiliary; Milne II §1 Lemma 1.3, printed pp.77–78 is motivation only, not a source asserting sums of squares. See report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finite dimensional commutative rational algebra split as a product of real fields over the real numbers, every element positive in all coordinates is a finite sum of squares",
+   "results": "8 hits. isSemireal_iff, isSumSq_iff, IsSumSq, IsSumSq.prod, RingPreordering.mem_of_isSumSq, NumberField.mixedEmbedding.convexBodySumFun_nonneg, IsSumSq.sum_sq, RootPairing.rootForm_self_sum_of_squares; IsSumSq definitions, closure properties, semireality and root forms do not establish sums of squares from split-real strict positivity.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element of a finite dimensional commutative Q algebra which is strictly positive under every real embedding is a sum of squares in that Q algebra",
+   "results": "8 hits. isSemireal_iff, isSumSq_iff, NumberField.mixedEmbedding.fundamentalCone.norm_pos_of_mem, IsSumSq, isSemireal_iff_not_isSumSq_neg_one, Subsemiring.mem_sumSq, RootPairing.rootForm_self_sum_of_squares, IsSemireal.of_not_isSumSq_neg_one; The second phrasing again found sums-of-squares definitions and semireality, not the required converse for finite rational algebras.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A totally positive element of a totally real number field is a sum of squares",
+   "results": "8 hits. IsSumSq, IsSquare.isSumSq, AddSubmonoid.mem_sumSq, Subsemiring.sumSq, isSumSq_iff, AddSubmonoid.sumSq, RingPreordering.mem_of_isSumSq, Subsemiring.mem_sumSq; IsSumSq and preordering membership give definitions or the forward direction only.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSumSq",
+   "results": "12 hits. IsSumSq, Nat.isSumSq, IsSumSq.zero, IsSquare.isSumSq, IsSumSq.mul_self, IsSumSq.one, IsSumSq.natCast, IsSumSq.sq_add; Definitions and closure/induction lemmas for sums of squares, not the required positivity-to-squares theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isSumSq|IsSumSq|totally.*positive|totally.*real",
+   "results": "25 hits. Mathlib/NumberTheory/NumberField/Cyclotomic/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/TotallyRealComplex.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/TotallyRealComplex.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/TotallyRealComplex.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/TotallyRealComplex.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/TotallyRealComplex.lean, Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean, Mathlib/NumberTheory/NumberField/CMField.lean; Read the returned sums-of-squares and semireal definitions and totally-real number-field notions; no split-real algebra converse.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isSumSq|[Ss]um.*[Ss]quare",
+   "results": "3 hits. Mathlib/Algebra/Order/Ring/Ordering/Basic.lean, Mathlib/Algebra/Order/Ring/Ordering/Basic.lean, Mathlib/Algebra/Order/Ring/Ordering/Basic.lean; In Mathlib/Algebra/Order/Ring/Ordering only an import and RingPreordering.mem_of_isSumSq: the opposite implication.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite dimensional rational commutative algebra split over the reals, a strictly positive element is a finite sum of squares",
+   "results": "8 hits: IsSumSq, isSumSq_iff, isSemireal_iff, IsSumSq.sum_sq, RingPreordering.mem_of_isSumSq, isSemireal_iff_not_isSumSq_neg_one, IsSumSq.nonneg, Subsemiring.mem_sumSq. Sums-of-squares definitions and the forward nonnegativity implication do not give the requested converse in a split-real algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A totally positive element of a totally real number field is a sum of squares",
+   "results": "8 hits: NumberField.IsTotallyReal, isSemireal_iff, RingPreordering.mem_of_isSumSq, IsSumSq, isSemireal_iff_not_isSumSq_neg_one, IsSemireal.of_not_isSumSq_neg_one, isSumSq_iff, Zsqrtd.nonneg_cases. Sums-of-squares definitions and the forward nonnegativity implication do not give the requested converse in a split-real algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An element positive in all real coordinates of a split rational algebra is a sum of squares",
+   "results": "8 hits: isSumSq_iff, AddSubmonoid.mem_sumSq, IsSumSq, IsSquare.isSumSq, Subsemiring.sumSq, Subsemiring.mem_sumSq, Subsemiring.coe_sumSq, IsSumSq.nonneg. Sums-of-squares definitions and the forward nonnegativity implication do not give the requested converse in a split-real algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSumSq",
+   "results": "12 hits: IsSumSq, Nat.isSumSq, IsSumSq.zero, IsSquare.isSumSq, IsSumSq.mul_self, IsSumSq.one, IsSumSq.natCast, IsSumSq.sq_add. Sums-of-squares definitions and the forward nonnegativity implication do not give the requested converse in a split-real algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isSumSq|IsSumSq|totally.*positive",
+   "results": "2 hits: Mathlib/Algebra/Order/Ring/Ordering/Basic.lean, Mathlib/Algebra/Order/Ring/Ordering/Basic.lean. Sums-of-squares definitions and the forward nonnegativity implication do not give the requested converse in a split-real algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+  "date": "2026-10-24",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Agent algebraic auxiliary for the abelian endomorphism-span input; the split-real algebra setting is motivated by II §1, proof of Lemma 1.3, pp.77–78. The sum-of-squares theorem is an agent argument, written in the report, not an assertion attributed to that lemma.",
+   "via": [
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-real-algebra-positive-squares",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and the exact conclusion, including the zero algebra. Constructed the real positive definite multiplication Gram matrix explicitly, then separated rational strict feasibility and rational outer-square factorization into two statement-only linear algebra auxiliaries. All searches actually executed and source attribution kept agent-origin.",
+  "blueprint": "The ancestor command reports blueprint.from.node = None, as on the live item; retained this inherited null ancestry and its complete via chain. The place is the agent algebraic auxiliary used in step 2 of lem-sfb-abelian-symmetric-ample-endomorphism-span. Steps 1–4 realize this auxiliary by tensor coordinates, the split-real idempotent Gram construction, rational feasibility, and rational outer-square contraction. Whole-blueprint searches found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-d3c9a2a66",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-d3c9a2a66 (reviewer sub-agent of L); spot-checked: Base check: on live the item is unsplit with no proof; its statement is byte-identical to the delivered one. Its only citer is lem-sfb-abelian-symmetric-ample-endomorphism-span step 2, which uses the statement unchanged. No repair or re-split note exists and no parallel split was found. Steps 1-2 are elementary and checked. Step 1 extends the coordinate functionals by the bilinear universal property of def-weil-pbc-module-tensor-product, which yields the real basis b_j⊗1; n=0 gives C=0 and x=0^2. Step 2 sets G=Σx_i t_i t_i^T, which is positive definite because the t_i span (ρ is a linear isomorphism, so d=n); its contraction is Σx_i e_i^2=x⊗1. Step 3 is correct: L on the basis E_ii, E_ij+E_ji has the rational structure constants, so L_R(G)=ξ and the feasibility node applies with m=n. Step 4 applies the Gram node and expands Σq_k^2 to Σ H_ab b_a b_b = x; appending 0 gives r≥1. New node feasibility is true: the solution space is a Q-defined affine subspace, its rational points are dense in it, and positive definiteness is open. Edge cases n=0 and m=0 hold, and strictness is needed. New node Gram is true: a rational Schur-complement induction works, with a=A/D written as AD copies of (1/D)^2. Small cases checked: [2]=1+1, and [[2,1],[1,2]] gives Schur complement 3/2. Item cases checked: the zero algebra, C=Q with x=2, Q×Q, and Q(√2), where √2 is excluded and 2+√2 is admitted. A duplicate grep of all node statements (sum of squares, positive definite, Gram, Cholesky, outer product, totally positive) found nothing equivalent. Neither new node restates the item, and the two are of comparable size. Milne AV II §1 Lemma 1.3 (printed pp.77-78) was read: it does not assert the sum-of-squares result, and the agent-origin attribution is honest. No SGA is used and there are no tool_uses. No changes."
+ }
+}

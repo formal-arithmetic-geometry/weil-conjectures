@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-monoidal-local-regularity-criterion",
+ "kind": "statement",
+ "title": "Monoidal local algebra criterion for regularity and parameter lifts",
+ "statement": "Let $(A,\\mathfrak m,k)$ be a nonzero Noetherian local commutative ring [def-weil-pbc-noetherian-ring], and let $P$ be a fine saturated commutative monoid [def-trf-fs-log-blowup], written additively and sharp (its only invertible element is $0$). Let $a:P\\to(A,\\cdot)$ be a monoid homomorphism with $a(p)\\in\\mathfrak m$ for every $p\\ne0$. For a monoid ideal $J\\subseteq P$ (a subset with $J+P\\subseteq J$, including the empty subset), put $JA=(a(j):j\\in J)$, and assume $a^{-1}(JA)=J$ for every $J$. Put $I=(a(p):p\\ne0)$ and $r=\\dim_{\\mathbf Q}(P^{\\mathrm{gp}}\\otimes_{\\mathbf Z}\\mathbf Q)$. Suppose $A/I$ is regular local [def-weil-regular-scheme] and $\\dim A=\\dim(A/I)+r$, where dimension is Krull dimension [def-weil-pbc-krull-dimension-ring]. Then the set of indecomposable nonzero elements of $P$ is finite and generates $P$, and $P^{\\mathrm{gp}}$ is torsion free. If these elements are enumerated without repetitions as $p_1,\\ldots,p_n$, their images form a $k$-basis of $I/\\mathfrak mI$. Moreover $A$ is regular local if and only if $n=r$, if and only if $P\\cong\\mathbf N^r$. If $P\\cong\\mathbf N^r$, write $t_1,\\ldots,t_r$ for the images of its basis under $a$. For any regular system of parameters of $A/I$ and any lifts $b_1,\\ldots,b_s\\in\\mathfrak m$ of that system, $(t_1,\\ldots,t_r,b_1,\\ldots,b_s)$ is a regular system of parameters of $A$ [def-weil-pbc-regular-system-of-parameters]. The cases $P=0$, $r=0$ and $s=0$ are included.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.2, 1.6--1.7, printed pp. 69--70, and VIII, Lemma 3.4.3, printed p. 110; local algebra underlying the criterion, extracted from returned proof steps 2--5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-fs-log-blowup",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "Choose an inclusion-minimal finite monoid generating set $S$ of $P$, omitting $0$. Every indecomposable nonzero element belongs to $S$: in an expression as a sum of generators, two or more nonzero summands would decompose it. Conversely, if $s\\in S$ were $x+y$ with $x,y\\ne0$, express $x,y$ in $S$. An occurrence of $s$ would give $s=s+z+y$ (or the symmetric equality); cancellation and sharpness would force $y=0$ (or $x=0$). Thus neither expression contains $s$, contradicting minimality of $S$. Hence $S$ is exactly the finite set of indecomposables and generates $P$. Also, if $g\\in P^{\\mathrm{gp}}$ and $Ng=0$ for $N>0$, saturation puts both $g$ and $-g$ in $P$; sharpness gives $g=0$. Here cancellation and saturation are precisely the properties in [def-trf-fs-log-blowup]. This proves torsion freeness without a structure theorem for finitely generated groups.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.2, 1.6--1.7, printed pp. 69--70; VIII 3.4.3, printed p. 110. Agent local-algebra argument from the stated ideal-contraction hypothesis."
+   }
+  },
+  {
+   "text": "Write $u_i=a(p_i)$. By step 1, every nonzero monomial is divisible by some $u_i$, so $I=(u_1,\\ldots,u_n)$. Fix $i$ and let $J_i=\\bigcup_{j\\ne i}(p_j+P)$. Indecomposability and distinctness imply $p_i\\notin J_i$, even when $J_i$ is empty. Contraction therefore says $u_i\\notin(u_j:j\\ne i)$. If the classes of the $u_i$ in $I/\\mathfrak mI$ had a nontrivial $k$-linear relation, a coefficient different from zero could be solved for over the field $k$; consequently the other $n-1$ classes would span $I/\\mathfrak mI$. Apply [lem-weil-pbc-nakayama-local-generators] to the finite $A$-module $I$, finite already from its displayed generating list. It would give $I=(u_j:j\\ne i)$, a contradiction. Thus these classes form a basis. This argument uses contraction for arbitrary monoid ideals, not merely principal ones.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK), 00NR (lemma-regular-quotient-regular), and 00NQ (lemma-regular-ring-CM)."
+   }
+  },
+  {
+   "text": "The $p_i$ span $P^{\\mathrm{gp}}\\otimes\\mathbf Q$, so $r\\le n$. If $n=r$, these $n$ spanning vectors are a basis. The surjection $\\mathbf N^n\\to P$ sending the standard basis to $p_i$ is then injective: an equality of sums gives a rational linear relation on that basis, forcing equality of all integer coefficients. Thus $P\\cong\\mathbf N^r$. Conversely, a monoid isomorphism preserves indecomposable nonzero elements; in $\\mathbf N^r$ they are exactly the $r$ standard basis vectors, so $P\\cong\\mathbf N^r$ implies $n=r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.2, 1.6--1.7, printed pp. 69--70; VIII 3.4.3, printed p. 110. Agent local-algebra argument from the stated ideal-contraction hypothesis."
+   }
+  },
+  {
+   "text": "Suppose $A$ is regular and put $d=\\dim A$, $s=\\dim(A/I)$. We have $I\\subseteq\\mathfrak m$, so $I$ is proper, and its quotient is regular by hypothesis. Apply [lem-weil-pbc-regular-local-quotient-kernel-parameters] to obtain parameters $x_1,\\ldots,x_d$ and $I=(x_1,\\ldots,x_c)$. The prefix-quotient assertion of [lem-weil-pbc-regular-local-generators-regular-sequence] gives $s=d-c$ for exactly this parameter list. The assumed equality $d=s+r$ now gives $c=r$. Since the $c$ elements $x_i$ generate $I$, their classes span the vector space $I/\\mathfrak mI$, whose basis in step 2 has size $n$. Hence $n\\le c=r$; combine with $r\\le n$ from step 3 to obtain $n=r$. Neither the number $c$ nor the quotient dimension is inferred from the kernel-parameters lemma alone.",
+   "uses": [
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK), 00NR (lemma-regular-quotient-regular), and 00NQ (lemma-regular-ring-CM)."
+   }
+  },
+  {
+   "text": "Conversely suppose $n=r$. For any parameters $\\bar b_1,\\ldots,\\bar b_s$ of $A/I$ and any lifts $b_i\\in\\mathfrak m$, the list $(u_1,\\ldots,u_r,b_1,\\ldots,b_s)$ generates $\\mathfrak m$: reduce any $v\\in\\mathfrak m$ modulo $I$, express its image using the $\\bar b_i$, lift the coefficients, and express the remaining element of $I$ using the $u_i$. Its length is $r+s=\\dim A$, so [def-weil-regular-scheme] makes $A$ regular and [def-weil-pbc-regular-system-of-parameters] makes this list a regular system of parameters. Under any chosen isomorphism $P\\cong\\mathbf N^r$, its basis maps to the indecomposables in some order, proving the assertion for the specified $t_i$. If $P=0$, all monoid lists are empty and $I=0$; if $r=0$, every $g\\in P^{\\mathrm{gp}}$ has zero image in its rationalization, so some positive integer kills $g$ (clear denominators in localization at the positive integers). Step 1 gives $g=0$, hence $P=0$ and $n=0$. If $s=0$, the parameter list downstairs is empty and the same generation argument gives $\\mathfrak m=I$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.2, 1.6--1.7, printed pp. 69--70; VIII 3.4.3, printed p. 110. Agent local-algebra argument from the stated ideal-contraction hypothesis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.2, 1.6--1.7, printed pp. 69--70; VIII 3.4.3, printed p. 110. Agent local-algebra argument from the stated ideal-contraction hypothesis. Ordinary local algebra follows Stacks Tags 00DV, 00NR and 00NQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local ring with a sharp fine saturated monoid chart contracting every monoid ideal, regular quotient by nonzero monomials and the log dimension formula is regular if and only if the monoid is free.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Regular/RegularSequence\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Nontrivial M] [Module.Finite R M] {rs : List R},\\n  (∀ r ∈ rs, r ∈ IsLocalRing.maximalIdeal R) →\\n    (RingTheory.Sequence.IsRegular M rs ↔ RingTheory.Sequence.IsWeaklyRegula\", \"doc\": \"In a local ring $ R $, for a non-trivial finite $ R $-module $ M $, a list of elements $ rs $ contained in the maximal ideal of $ R $ forms a regular sequence on $ M $ if and only if it forms a weakly\"}\n  {\"name\": \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] (rs : List R),\\n  RingTheory.Sequence.IsRegular R rs → ringKrullDim (R ⧸ Ideal.ofList rs) + ↑rs.length = ringKrullDim R\", \"doc\": \"For a commutative ring $ R $ and a regular sequence $ rs $ in $ R $, the Krull dimension of the quotient ring $ R $ modulo the ideal generated by $ rs $ plus the length of $ rs $ equals the Krull dime\"}\n  {\"name\": \"Module.free_iff_isTorsionFree\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/PID\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsPrincipalIdealRing R] [IsDomain R] [Module.Finite R M], Module.Free R M ↔ Module.IsTorsionFree R M\", \"doc\": \"Let $ R $ be a principal ideal domain and $ M $ a finitely generated $ R $-module. Then $ M $ is free if and only if it is torsion-free.\"}\n  {\"name\": \"Module.free_of_finite_type_torsion_free\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/PID\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} [inst : CommRing R] {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsPrincipalIdealRing R] [IsDomain R] [Finite ι] {s : ι → M},\\n  Submodule.span R (Set.range s) = ⊤ → ∀ [Module.IsTorsionFree R M], Module.Free R M\", \"doc\": \"Let $ R $ be a principal ideal domain. If $ M $ is a finitely generated torsion-free $ R $-module, then $ M $ is free.\"}\n  {\"name\": \"Module.free_of_finite_type_torsion_free'\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/PID\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsPrincipalIdealRing R] [IsDomain R] [Module.Finite R M] [Module.IsTorsionFree R M], Module.Free R M\", \"doc\": \"Every finitely generated torsion-free module over a principal ideal domain (PID) is a free module.\"}\n  {\"name\": \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a regular element in the maximal ideal of a local ring $ R $, then the Krull dimension of $ R $ satisfies $ \\\\dim(R) = \\\\dim(R/(x)) + 1 $, where $ R/(x) $ denotes the quotient ring of $ R $ \"}\n  {\"name\": \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  [IsPrincipalIdealRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∀ (P : Ideal R), P ≠ ⊥ → P.IsPrime → P = IsLocalRing.maximalIdeal R,\\n      Submodule.IsPrincipal (IsL\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and an integral domain, the following are equivalent: (1) $ R $ is a principal ideal ring; (2) $ R $ is a valuation ring; (3) $ R $ is a Dedekin\"}\n  {\"name\": \"invariantBasisNumber_of_nontrivial_of_commRing\", \"module\": \"Mathlib/LinearAlgebra/InvariantBasisNumber\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [Nontrivial R], InvariantBasisNumber R\", \"doc\": \"Every non-trivial commutative ring has the invariant basis number property, meaning that any two bases of a free module over such a ring have the same cardinality.\"}\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, AddMonoidHom",
+   "results": "[loogle] OK 0 hit(s)\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|monoid.*regular.*local|regular.*local.*monoid",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Flat/Localization.lean\", \"line\": \"119\", \"text\": \"theorem IsSMulRegular.of_isLocalizedModule {K : Type*} [AddCommMonoid K] [Module R K]\"}\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal indecomposable generators of a sharp saturated monoid map to a basis of I modulo m I under monoidal ideal contraction.",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sharp finitely generated saturated monoid whose number of indecomposable elements equals the rank of its group completion is a free commutative monoid; use this to detect regularity of a local monoid chart.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAffineMonoid\", \"module\": \"Mathlib/Algebra/AffineMonoid/Basic\", \"type\": \"(M : Type u_1) → [CommMonoid M] → Prop\", \"doc\": \"A commutative monoid $M$ is an affine monoid if it is finitely generated, cancellative, and torsion-free.\"}\n  {\"name\": \"Algebra.GrothendieckGroup.instFG\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/Finite\", \"type\": \"∀ {M : Type u_1} [inst : CommMonoid M] [Monoid.FG M], Monoid.FG (Algebra.GrothendieckGroup M)\", \"doc\": \"If a commutative monoid $ M $ is finitely generated, then its Grothendieck group is also finitely generated as a monoid.\"}\n  {\"name\": \"AffineMonoid.to_twoUniqueProds\", \"module\": \"Mathlib/Algebra/AffineMonoid/UniqueSums\", \"type\": \"∀ {M : Type u_1} [inst : CancelCommMonoid M] [Monoid.FG M] [IsMulTorsionFree M], TwoUniqueProds M\", \"doc\": \"Every finitely generated, cancellative, multiplicatively torsion-free commutative monoid satisfies the two unique products condition.\"}\n  {\"name\": \"IsAffineMonoid.toIsMulTorsionFree\", \"module\": \"Mathlib/Algebra/AffineMonoid/Basic\", \"type\": \"∀ {M : Type u_1} {inst : CommMonoid M} [self : IsAffineMonoid M], IsMulTorsionFree M\", \"doc\": \"Every affine monoid is multiplicatively torsion-free, meaning that for any element $a$ in the monoid and positive integer $n$, if $a^n = 1$ then $a = 1$.\"}\n  {\"name\": \"Algebra.GrothendieckAddGroup.instFG\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/Finite\", \"type\": \"∀ {M : Type u_1} [inst : AddCommMonoid M] [AddMonoid.FG M], AddMonoid.FG (Algebra.GrothendieckAddGroup M)\", \"doc\": \"If $ M $ is a finitely generated additive commutative monoid, then its Grothendieck group $ \\\\text{GrothendieckAddGroup}(M) $, which is the universal abelian group generated by $ M $ with inverses, is \"}\n  {\"name\": \"IsAffineMonoid.toFG\", \"module\": \"Mathlib/Algebra/AffineMonoid/Basic\", \"type\": \"∀ {M : Type u_1} {inst : CommMonoid M} [self : IsAffineMonoid M], Monoid.FG M\", \"doc\": \"Every affine monoid is finitely generated.\"}\n  {\"name\": \"Algebra.GrothendieckGroup\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup\", \"type\": \"(M : Type u_1) → [CommMonoid M] → Type u_1\", \"doc\": \"The Grothendieck group of a commutative monoid $ M $ is constructed as the localization of $ M $ at its entire submonoid $ M $ itself. This forms the group completion of $ M $ by formally inverting al\"}\n  {\"name\": \"AddSubmonoid.closure_addIrreducible\", \"module\": \"Mathlib/Algebra/AffineMonoid/Irreducible\", \"type\": \"∀ {M : Type u_1} [inst : AddCancelCommMonoid M] [Subsingleton (AddUnits M)] [AddMonoid.FG M],\\n  AddSubmonoid.closure {p | AddIrreducible p} = ⊤\", \"doc\": \"In a cancellative commutative additive monoid $M$ with trivial additive units (i.e., the only additive unit is zero) and finitely generated as an additive monoid, the additive submonoid generated by a\"}\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fine saturated sharp monoid chart in a Noetherian local ring with regular quotient and dimension formula is regular exactly when the monoid is free.",
+   "results": "OK 8 hits; returned names/files: IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, Module.free_of_flat_of_isLocalRing, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, Module.free_of_finite_type_torsion_free, Module.free_of_finite_type_torsion_free', IsLocalRing.finrank_cotangentSpace_le_one_iff, Module.free_iff_isTorsionFree, IsLocalRing.finrank_CotangentSpace_eq_one_iff. The returned local regular-sequence, flat/free-module, PID, cotangent-space and localized-independence results do not state the monoid-chart criterion. In the second query, basisQuotient requires an already free finite algebra with an existing basis; the Dedekind-domain independence result and localization descent also do not give monoid-ideal contraction. Read the candidate source types; no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|monoid.*regular.*local|regular.*local.*monoid",
+   "results": "OK 1 hits; returned names/files: Mathlib/RingTheory/Flat/Localization.lean. Read the reported source declarations. IsSMulRegular.of_isLocalizedModule concerns non-zero-divisors after module localization, not regular local rings with monoid charts. The second grep locates basisQuotient and independence lemmas; their hypotheses concern free algebras, Dedekind domains or localization, not this criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, AddMonoidHom",
+   "results": "OK 0 hits; returned names/files: . No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local ring with a sharp saturated monoid chart and regular monomial quotient is regular if and only if its monoid is free.",
+   "results": "OK 8 hits; returned names/files: Module.free_of_maximalIdeal_rTensor_injective, IsLocalization.injective_iff_isRegular, IsLocalization.isRegular_mk', le_nonZeroDivisors_iff_isRegular, isRegular_iff_mem_nonZeroDivisors, Submonoid.LocalizationMap.injective_iff, IsRegular.monomial, Module.free_of_flat_of_isLocalRing. Eight hits: finite flat modules are free, localization injectivity/regular-element lemmas, nonZeroDivisors equivalences and IsRegular.monomial. These concern regular elements or free modules, not the requested regular-local monoid criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Indecomposable generators of a sharp saturated monoid have linearly independent chart images modulo the maximal ideal times the monomial ideal; a free chart gives regular local parameters.",
+   "results": "OK 8 hits; returned names/files: LinearIndependent.of_isLocalized_maximal, Ideal.FinrankQuotientMap.linearIndependent_of_nontrivial, IsLocalFrameOn.linearIndependent, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, IsLocalRing.basisQuotient_apply, Algebra.Generators.basisCotangentAway, IsLocalRing.basisQuotient, IsLocalRing.basisQuotient_repr. The returned local regular-sequence, flat/free-module, PID, cotangent-space and localized-independence results do not state the monoid-chart criterion. In the second query, basisQuotient requires an already free finite algebra with an existing basis; the Dedekind-domain independence result and localization descent also do not give monoid-ideal contraction. Read the candidate source types; no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "basisQuotient|linearIndependent_of_nontrivial|of_isLocalized_maximal",
+   "results": "OK 25 hits; returned names/files: Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/LocalRing/Module.lean, Mathlib/RingTheory/LocalRing/Quotient.lean, Mathlib/RingTheory/LocalRing/Quotient.lean, Mathlib/RingTheory/LocalRing/Quotient.lean, Mathlib/RingTheory/LocalRing/Quotient.lean, Mathlib/RingTheory/LocalRing/Quotient.lean. Read the reported source declarations. IsSMulRegular.of_isLocalizedModule concerns non-zero-divisors after module localization, not regular local rings with monoid charts. The second grep locates basisQuotient and independence lemmas; their hypotheses concern free algebras, Dedekind domains or localization, not this criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-free-characteristic-regular-boundary",
+  "date": "2026-10-22",
+  "group": "Q105"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VI, 1.4 and 1.7, printed pp. 69--70; Expose VIII, 3.4.4, printed p. 110, and 4.1.1, printed p. 117. Normal crossings here is the etale-local parameter criterion, not strictness of global components. Auxiliary: Expose VI, 1.2, 1.6--1.7, printed pp. 69--70, and VIII, Lemma 3.4.3, printed p. 110; local algebra underlying the criterion, extracted from returned proof steps 2--5.",
+   "via": [
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoidal-local-regularity-criterion",
+  "worker": "stage1",
+  "summary": "Q138 checked ILO VI 1.2 and 1.6--1.7, VIII 3.4.3 and Stacks 00DV/00NR/00NQ. Kept the statement and proved atoms, torsion freeness, cotangent basis, freeness criterion and arbitrary parameter lifts in five steps. Reused existing generic local-algebra nodes; no new nodes.",
+  "blueprint": "Realizes the free-characteristic regularity subargument in Proof (1)--(2) of lem-trf-local-term-locality through its nearby-duality alteration ancestry: the monoidal local criterion used for the regular log modification and normal crossings boundary.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "why": "Generic regular-local quotient theorem (Stacks 00NR) supplies a parameter-generated kernel; the trace-formula unit has no such local-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic prefix dimension theorem (Stacks 00NQ) computes the dimension of that same quotient; no trace-formula unit result supplies this local algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-557530b64",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-557530b64 (reviewer sub-agent of L); spot-checked: I read the item in full; it has 5 steps and no new nodes. The statement is byte-identical to the base and to the live and side-live clones, where the item is still unsplit; there is no repair note and no SGA reference. Step 1: atoms are exactly a minimal generating set (cancellation + sharpness), and saturation applied to g and -g gives a torsion-free P^gp; this is elementary from def-trf-fs-log-blowup. Step 2: for J_i=∪_{j≠i}(p_j+P), contraction gives u_i∉(u_j:j≠i); the empty ideal covers n=1. Nakayama on the finitely generated module I then makes the classes a basis of I/mI. Step 3: r≤n, and n=r makes N^n→P injective; isomorphisms preserve atoms. Step 4: I⊆m is proper and A/I is regular, so kernel-parameters gives I=(x_1..x_c) and the generators-regular-sequence node gives s=d-c, hence c=r and n≤c=r≤n. Both cited statements say what is used. Step 5: lifting coefficients shows m is generated by u_i and b_j, which are dim A elements, so the definitions give A regular and a regular system of parameters. The edge cases P=0, r=0 (kernel of G→G⊗Q is torsion) and s=0 are covered. Source checks: ILO VI 1.2, 1.6 and 1.7 (pp. 69-70; VI 1.7 is Nizioł 5.2) and VIII 3.4.3. The item is a correctly labelled agent-written abstraction, and its hypotheses match exactly what parent lem-trf-free-characteristic-regular-boundary step 1 feeds into it. Small cases: k[[t]] with t gives a pass; with t^2 the hypothesis is excluded; k[[x^2,xy,y^2]] gives n=3>r=2, singular as predicted. Duplicate search: free-log-chart-ordinary-parameters, sharp-fs-orthant-embedding, sharp-monoid-ideal-minimal-generators, per-regular-boundary-divisorial-chart and sfb-free-characteristic-relative-nc-criterion; none is this criterion. The tool_uses of the two sk-thm-p1 generic regular-local nodes (Stacks 00NR/00NQ) are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonoidalLocalRegularityCriterion",
+  "declaration": "RingTheory.monoidal_local_regularity_criterion",
+  "file": "lean/Sheaf/RingTheory/MonoidalLocalRegularityCriterion.lean",
+  "statement": "theorem monoidal_local_regularity_criterion (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (P : Type v) [AddCommMonoid P] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ p : P, IsAddUnit p → p = 0) (a : Multiplicative P →* A) (ha : ∀ p : P, p ≠ 0 → a (Multiplicative.ofAdd p) ∈ IsLocalRing.maximalIdeal A) (hcontract : ∀ J : Set P, (∀ p ∈ J, ∀ q : P, p + q ∈ J) → ∀ p : P, a (Multiplicative.ofAdd p) ∈ Ideal.span ((fun q : P ↦ a (Multiplicative.ofAdd q)) '' J) ↔ p ∈ J) (I : Ideal A) (hI : I = Ideal.span ((fun p : P ↦ a (Multiplicative.ofAdd p)) '' {p | p ≠ 0})) (r : ℕ) (hr : r = Module.finrank ℚ (ℚ ⊗[ℤ] Algebra.GrothendieckAddGroup P)) [IsRegularLocalRing (A ⧸ I)] (hdim : ringKrullDim A = ringKrullDim (A ⧸ I) + (r : WithBot ℕ∞)) : {p : P | AddIrreducible p}.Finite ∧ AddSubmonoid.closure {p : P | AddIrreducible p} = ⊤ ∧ IsAddTorsionFree (Algebra.GrothendieckAddGroup P) ∧ (∀ (n : ℕ) (p : Fin n → P), Function.Injective p → Set.range p = {q : P | AddIrreducible q} → (∃ b : Module.Basis (Fin n) (A ⧸ IsLocalRing.maximalIdeal A) (I ⧸ (IsLocalRing.maximalIdeal A • (⊤ : Submodule A I))), ∀ i : Fin n, ∃ x : I, (x : A) = a (Multiplicative.ofAdd (p i)) ∧ b i = Submodule.mkQ (IsLocalRing.maximalIdeal A • (⊤ : Submodule A I)) x) ∧ (IsRegularLocalRing A ↔ n = r) ∧ (n = r ↔ Nonempty (P ≃+ (Fin r → ℕ)))) ∧ (∀ (e : P ≃+ (Fin r → ℕ)) (bs : List A), (∀ b ∈ bs, b ∈ IsLocalRing.maximalIdeal A) → IsLocalRing.IsRegularSystemOfParameters (bs.map (Ideal.Quotient.mk I)) → IsLocalRing.IsRegularSystemOfParameters (List.ofFn (fun i : Fin r ↦ a (Multiplicative.ofAdd (e.symm (Pi.single i 1)))) ++ bs))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1dceea072",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Lean exact against node: Noetherian local A; IsFineSaturatedMonoid (Multiplicative P) is the fs notion of cited def-trf-fs-log-blowup (declaration owned by def-trf-log-regular-pair and used by the fs module itself; H4 ok); sharp; ha; hcontract for all monoid ideals incl. empty (parse checked); hI; hr finrank of Q⊗P^gp; IsRegularLocalRing (A/I); hdim. Conclusions: atoms finite and generate P, IsAddTorsionFree P^gp, k-basis of literal I/mI for every injective enumeration, IsRegularLocalRing A ↔ n=r ↔ Nonempty(P≃+N^r), lifted-parameter RSoP for all e and bs. Edge cases P=0/r=0/s=0/J=∅ ok; universes u,v independent. Node differs from live only by lean; statement verbatim; no name collision; proof is sorry; docstrings ok. Only fault H11: second reading is an author self-reread → fixes/lem-trf-monoidal-local-regularity-criterion.report.md (worker report verbatim + clause-by-clause second reading). No Lean change, so no compile."
+ }
+}

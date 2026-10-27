@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-finite-hopf-self-injective",
+ "kind": "statement",
+ "title": "Finite-dimensional commutative Hopf algebras are self-injective",
+ "statement": "Let $k$ be a field [def-weil-field]. A commutative Hopf $k$-algebra here means a unital commutative $k$-algebra $A$ with $k$-algebra maps $\\Delta_A:A\\to A\\otimes_k A$, $\\epsilon_A:A\\to k$, $S_A:A\\to A$ such that $(\\Delta_A\\otimes1)\\Delta_A=(1\\otimes\\Delta_A)\\Delta_A$, $(\\epsilon_A\\otimes1)\\Delta_A=(1\\otimes\\epsilon_A)\\Delta_A=1_A$, and $\\mu_A(S_A\\otimes1)\\Delta_A=\\mu_A(1\\otimes S_A)\\Delta_A=\\eta_A\\epsilon_A$, under the usual tensor unit and associativity identifications; $\\mu_A$ and $\\eta_A$ are multiplication and unit. Tensor products are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Let $H$ be such a commutative Hopf $k$-algebra admitting a finite $k$-vector-space basis [def-weil-pbc-free-module]. For arbitrary $H$-modules $U,V$, every injective $H$-linear map $j:U\\to V$ and every $H$-linear map $f:U\\to H$ admit an $H$-linear map $g:V\\to H$ with $g\\circ j=f$. No finite-generation hypothesis is imposed on $U$ or $V$.",
+ "source": {
+  "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+  "place": "Bichon, arXiv:2301.05480v2, section 3, first paragraph: finite-dimensional Hopf algebras are self-injective. Read online at https://arxiv.org/html/2301.05480v2; local document WANTED in report.md. This is the injective-module extension formulation of that assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-hopf-frobenius-form] to $H$, with its given finite basis and Hopf structure. Choose $\\lambda:H\\to k$ such that $\\Phi:H\\to\\operatorname{Hom}_k(H,k)$, $\\Phi(a)(h)=\\lambda(ha)$, is bijective. It is $k$-linear because multiplication and $\\lambda$ are $k$-linear in each relevant variable. In particular an element of $H$ is uniquely determined by all the numbers $\\lambda(ha)$, $h\\in H$.",
+   "uses": [
+    "lem-sfb-finite-hopf-frobenius-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Section 3, first paragraph, self-injectivity assertion; agent proof by a Frobenius functional and extension of a field-linear functional. Local document WANTED."
+   }
+  },
+  {
+   "text": "Regard $U,V$ as $k$-vector spaces by restriction of scalars. By [lem-weil-pbc-vector-space-basis-through-vector] with the empty independent set choose a basis $B$ of $U$. The set $j(B)$ is independent: applying injectivity of $j$ to a finite relation gives the corresponding relation in $B$. Use the same node to extend $j(B)$ to a basis $C$ of $V$. Assign the value $\\lambda(f(b))$ to $j(b)$ and zero to every basis vector in $C\\setminus j(B)$. Unique finite basis expansions define a $k$-linear map $t:V\\to k$, and expansion in $B$ gives $t(j(u))=\\lambda(f(u))$ for all $u\\in U$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Section 3, first paragraph, self-injectivity assertion; agent proof by a Frobenius functional and extension of a field-linear functional. Local document WANTED."
+   }
+  },
+  {
+   "text": "For $v\\in V$ the formula $h\\mapsto t(hv)$ is $k$-linear, so bijectivity of $\\Phi$ defines a unique element $g(v)\\in H$ by $\\lambda(hg(v))=t(hv)$ for every $h\\in H$. For $v,w\\in V$ and $a\\in H$, evaluate at any $h\\in H$: $\\lambda(hg(v+w))=t(hv)+t(hw)=\\lambda(h(g(v)+g(w)))$, and $\\lambda(hg(av))=t((ha)v)=\\lambda((ha)g(v))=\\lambda(h(ag(v)))$. Injectivity of $\\Phi$ gives $g(v+w)=g(v)+g(w)$ and $g(av)=ag(v)$. Thus $g$ is $H$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Section 3, first paragraph, self-injectivity assertion; agent proof by a Frobenius functional and extension of a field-linear functional. Local document WANTED."
+   }
+  },
+  {
+   "text": "For $u\\in U$ and $h\\in H$, $H$-linearity of $j,f$ and the identity for $t$ give $\\lambda(hg(j(u)))=t(hj(u))=t(j(hu))=\\lambda(f(hu))=\\lambda(hf(u))$. Injectivity of $\\Phi$ gives $g(j(u))=f(u)$. This proves the extension condition. The bases in step 2 may be infinite; all expansions used there are finite sums, so no finite-generation hypothesis on $U$ or $V$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Section 3, first paragraph, self-injectivity assertion; agent proof by a Frobenius functional and extension of a field-linear functional. Local document WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-hopf-frobenius-form",
+  "lem-weil-pbc-vector-space-basis-through-vector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+  "place": "Section 3, first paragraph, self-injectivity assertion; agent proof by a Frobenius functional and extension of a field-linear functional. Local document WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional Hopf algebra is self injective as a module over itself",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:18:01Z",
+    "tool": "leansearch",
+    "query": "Finite dimensional Hopf algebra is self injective as a module over itself",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HopfAlgCat.Hom.mk.inj",
+     "HopfAlgCat.Hom.mk.injEq",
+     "HopfAlgCat.Hom.toBialgHom_injective",
+     "HopfAlgebra.mk",
+     "HopfAlgebraStruct.recOn",
+     "HopfAlgebraStruct.noConfusionType",
+     "FiniteDimensional.of_subalgebra_toSubmodule",
+     "HopfAlgCat.carrier"
+    ],
+    "digest": "23c3c9e2083694e3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations: HopfAlgCat.Hom.mk.inj, HopfAlgCat.Hom.mk.injEq, HopfAlgCat.Hom.toBialgHom_injective, HopfAlgebra.mk, HopfAlgebraStruct.recOn, HopfAlgebraStruct.noConfusionType, FiniteDimensional.of_subalgebra_toSubmodule, HopfAlgCat.carrier. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional commutative Hopf algebra is an injective module over itself: linear maps from a submodule extend to the ambient module",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:19:42Z",
+    "tool": "leanfinder",
+    "query": "A finite dimensional commutative Hopf algebra is an injective module over itself: linear maps from a submodule extend to the ambient module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.instInjective",
+     "FDRep.instInjectiveOfNeZeroCastCard",
+     "orzechProperty_iff",
+     "MonoidAlgebra.exists_leftInverse_of_injective",
+     "FiniteDimensional.left",
+     "OrzechProperty.injective_of_surjective_endomorphism",
+     "HopfAlgebra",
+     "instFaithfulSMul_1"
+    ],
+    "digest": "41c52944f04be7ac"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations: Rep.instInjective, FDRep.instInjectiveOfNeZeroCastCard, orzechProperty_iff, MonoidAlgebra.exists_leftInverse_of_injective, FiniteDimensional.left, OrzechProperty.injective_of_surjective_endomorphism, HopfAlgebra, instFaithfulSMul_1. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional Hopf algebras are Frobenius algebras and self injective",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:19:45Z",
+    "tool": "leanfinder",
+    "query": "Finite dimensional Hopf algebras are Frobenius algebras and self injective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CommSemiring.toHopfAlgebra",
+     "HopfAlgebra",
+     "HopfAlgCat",
+     "HopfAlgebraStruct",
+     "HopfAlgCat.instHopfAlgebra",
+     "HopfAlgebra.ofAlgHom",
+     "HopfAlgCat.of_comul",
+     "HopfAlgCat.instRing"
+    ],
+    "digest": "38040d1508950d65"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations: CommSemiring.toHopfAlgebra, HopfAlgebra, HopfAlgCat, HopfAlgebraStruct, HopfAlgCat.instHopfAlgebra, HopfAlgebra.ofAlgHom, HopfAlgCat.of_comul, HopfAlgCat.instRing. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.Injective",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:19:40Z",
+    "tool": "loogle",
+    "query": "HopfAlgebra, Module.Injective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no hits. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius|[Ii]njective|[Ii]ntegral",
+   "sub": "RingTheory/HopfAlgebra",
+   "results": {
+    "t": "2026-10-23T19:19:40Z",
+    "tool": "grep",
+    "query": "[Ff]robenius|[Ii]njective|[Ii]ntegral",
+    "sub": "RingTheory/HopfAlgebra",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Convolution.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Convolution.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Convolution.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Convolution.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Convolution.lean"
+    ],
+    "digest": "ef6613f74d89c068"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations: Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional Hopf algebra is Frobenius: there exists a linear functional lambda such that the pairing lambda(x*y) is nondegenerate",
+   "sub": "",
+   "results": "Returned CommSemiring.toHopfAlgebra, HopfAlgebra, HopfAlgebra.ofAlgHom, HopfAlgebraStruct, HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit, HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit, MonoidAlgebra.instHopfAlgebra, HopfAlgCat. The Hopf structure, constructors and antipode identities do not assert existence of a Frobenius functional.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|[Ii]ntegral|[Ii]njective",
+   "sub": "RingTheory/HopfAlgebra",
+   "results": "Returned Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean. The Hopf files contain convolution-injectivity identities, not a Frobenius functional; the broad RingTheory hits concern characteristic-p Frobenius maps or separable-field trace forms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional commutative Hopf algebra is self injective",
+   "sub": "",
+   "results": "Returned HopfAlgCat.Hom.mk.inj, HopfAlgCat.Hom.mk.injEq, HopfAlgCat.Hom.toBialgHom_injective, GroupLike.instCommGroup, HopfAlgebraStruct.noConfusionType, HopfAlgCat.instRing, HopfAlgCat.carrier, HopfAlgebraStruct.antipode. The Hopf structure, constructors and antipode identities do not assert existence of a Frobenius functional.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.Injective",
+   "sub": "",
+   "results": "Returned no hits. The Hopf structure, constructors and antipode identities do not assert existence of a Frobenius functional.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional Hopf algebra Frobenius form nondegenerate lambda multiplication",
+   "sub": "",
+   "results": "Returned traceForm_nondegenerate, LinearMap.BilinForm.apply_toDual_symm_apply, HopfAlgebraStruct.noConfusionType, LinearMap.BilinForm.toDual, HopfAlgebra.mul_antipode_rTensor_comul_apply, HopfAlgebra.mul_antipode_lTensor_comul, LinearMap.BilinForm.Nondegenerate.flip, HopfAlgebra.counit_comp_antipode. traceForm_nondegenerate assumes a separable field extension, not an arbitrary finite Hopf algebra; BilinForm.toDual requires a nondegenerate form as input and does not construct one.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, LinearEquiv",
+   "sub": "",
+   "results": "Returned no hits. The Hopf structure, constructors and antipode identities do not assert existence of a Frobenius functional.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional Hopf algebra has a nondegenerate associative bilinear form and is isomorphic to its linear dual",
+   "sub": "",
+   "results": "Returned CommSemiring.toHopfAlgebra, HopfAlgebra, HopfAlgebra.sum_mul_antipode_eq_smul, HopfAlgebra.ofAlgHom, HopfAlgebra.sum_antipode_mul_eq_smul, HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit, HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit, HopfAlgebra.mul_antipode_lTensor_comul_apply. The Hopf structure, constructors and antipode identities do not assert existence of a Frobenius functional.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|nondegenerate|selfInjective",
+   "sub": "RingTheory",
+   "results": "Returned Mathlib/RingTheory/MvPolynomial/Expand.lean, Mathlib/RingTheory/MvPolynomial/Expand.lean, Mathlib/RingTheory/MvPolynomial/Expand.lean, Mathlib/RingTheory/MvPolynomial/Expand.lean, Mathlib/RingTheory/MvPolynomial/Expand.lean, Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean. The Hopf files contain convolution-injectivity identities, not a Frobenius functional; the broad RingTheory hits concern characteristic-p Frobenius maps or separable-field trace forms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|[Nn]ondegenerate|[Ii]ntegral",
+   "sub": "Algebra/Category/HopfAlgCat",
+   "results": "Returned no hits. The Hopf files contain convolution-injectivity identities, not a Frobenius functional; the broad RingTheory hits concern characteristic-p Frobenius maps or separable-field trace forms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-hopf-basis-lifting",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism. Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention. Supporting argument: Theorem 3.31, printed pp.73--74, nilpotent-augmentation case: the explicitly asserted isomorphism A^(J) to B. The printed proof of injectivity has a gap: see report.md, Source error; this new node records the true statement only, not that argument. Repair input: finite-dimensional Hopf self-injectivity, used to construct an A-linear retraction of i.",
+   "via": [
+    "lem-sfb-nilpotent-hopf-basis-lifting",
+    "lem-sfb-hopf-subalgebra-faithfully-flat",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-hopf-self-injective",
+  "worker": "stage1",
+  "summary": "The statement is unchanged. Supply a Frobenius-functional structural input as one new statement-only node; reuse the existing arbitrary-basis-extension Mathlib leaf. Construct the extension explicitly by first extending lambda composed with f as a field-linear functional, then using the bijective Frobenius pairing to recover g(v), and verify H-linearity and g composed with j equals f by formulas. No finiteness of U or V is required.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the already established alteration/group-quotient prerequisite chain, specifically the finite-Hopf self-injectivity repair input to lem-sfb-nilpotent-hopf-basis-lifting. This is a generic algebra prerequisite below the unit route; the current latest blueprint does not itself state the finite Hopf assertion. The inherited ancestor command returns None, retained as null rather than inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-c30fda1cf",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-c30fda1cf (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-sfb-finite-hopf-frobenius-form in full. The item statement is unchanged: arbitrary H-modules U and V, an injective H-linear j and f: U→H, with no finiteness condition; its only citer, nilpotent-hopf-basis-lifting, uses it as stated. All four steps are correct. Step 1 takes λ with Φ(a)(h)=λ(ha) bijective from the new node, whose hypotheses are copied word for word from the item. Step 2 uses the Mathlib leaf vector-space-basis-through-vector (Basis.extend, any dimension; a Mathlib leaf, so not route) to extend λ∘f along j by zero on the complement basis; j(B) is independent and the values are well defined because j is injective. Steps 3 and 4 set g(v)=Φ⁻¹(h↦t(hv)); I re-derived additivity, H-linearity and g∘j=f from injectivity of Φ. The new node is the Larson–Sweedler Frobenius property. I tested it on k, on k^G (sum of coordinates) and on k[t]/(t^p) in characteristic p (coefficient of t^{p-1}). It is strictly smaller than the item, since steps 2–4 are a real argument, and carries a statement only. Searches with LeanSearch, Loogle, LeanFinder and grep are recorded; my own grep of Mathlib for Frobenius algebra, SelfInjective and Larson found nothing. My rg -L over the DAG for Hopf, Frobenius and self-injective found no duplicate; the closest nodes, finite-coalgebra-dual-base-change and hopf-relative-kernel-shear, state other things. Neither source (Bichon arXiv:2301.05480 §3, Zheng REU 2020 Thm 4.15) is in the literature directory, so I could not check them at the cited places; both are WANTED and proof_origin is agent. blueprint.from.node is null, inherited from the item's created chain. There is no SGA citation, no cycle, and no repair or re-split note. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HopfAlgebra.FiniteSelfInjective",
+  "declaration": "HopfAlgebra.finiteDimensional_exists_extension",
+  "file": "lean/Sheaf/RingTheory/HopfAlgebra/FiniteSelfInjective.lean",
+  "statement": "theorem finiteDimensional_exists_extension (k : Type u) [Field k] (H : Type v) [CommRing H] [HopfAlgebra k H] (ι : Type w) [Finite ι] (basis : Module.Basis ι k H) (U : Type x) (V : Type y) [AddCommGroup U] [Module H U] [AddCommGroup V] [Module H V] (j : U →ₗ[H] V) (hj : Function.Injective j) (f : U →ₗ[H] H) : ∃ g : V →ₗ[H] H, g.comp j = f",
+  "branch": "sheaf-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f1b5f972",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Only the lean field changed vs live; lean.statement verbatim in the file. Clause-by-clause: Field k; CommRing H + Mathlib HopfAlgebra (Bialgebra/Coalgebra laws; linear antipode is automatically an algebra map on a commutative H, so no stronger hypothesis); finite basis = Module.Basis ι k H with [Finite ι] (Module.Free alone would lose finiteness; matches landed finiteDual_hopfModule); arbitrary U:Type x, V:Type y H-modules with no finiteness; injective H-linear j, H-linear f:U→H; conclusion ∃ g, g.comp j = f. Edge cases (any char, U=0, f=0, infinite modules, H=k) covered; no unbound universes. No defs, one sorry, source/blueprint docstrings and 4-step proof docstring present; no Hopf-directory or recorded Mathlib duplicate; report has Worker report + Second reading by Q105. No fixes, no compile needed."
+ }
+}

@@ -8,17 +8,11 @@ public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.RegularLocalRing.Polynomial
-import WeilConjectures.RingTheory.RegularLocalLocalization
-import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
-import WeilConjectures.RingTheory.LocalizationOfRegularRing
-import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.AlgebraicGeometry.SNCRootLocalPresentation
+import Sheaf.RingTheory.TransverseLocalRootFamilyRegular
+import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
+import Mathlib.Algebra.MvPolynomial.Equiv
+import Mathlib.RingTheory.Spectrum.Prime.RingHom
 
 /-!
 # Regularity of finite simultaneous roots along strict normal crossings
@@ -94,6 +88,107 @@ theorem isRegularRing_snc_finiteRoot
     IsRegularRing (MvPolynomial (Fin r) A ⧸
       Ideal.span (Set.range (fun i : Fin r ↦
         (MvPolynomial.X i : MvPolynomial (Fin r) A) ^ n - MvPolynomial.C (t i)))) := by
-  sorry
+  classical
+  have hex (i : Fin r) : ∃ Z ∈ irreducibleComponents (H.support :
+      Set (Spec (.of A))), Subtype.val '' Z = PrimeSpectrum.zeroLocus {t i} := by
+    have hi := Set.mem_range_self (f := fun i : Fin r ↦
+      PrimeSpectrum.zeroLocus ({t i} : Set A)) i
+    rw [hbranches] at hi
+    exact hi
+  choose c hc heq using hex
+  let f : Fin r → {Z : Set (H.support : Set (Spec (.of A))) //
+      Z ∈ irreducibleComponents (H.support : Set (Spec (.of A)))} :=
+    fun i ↦ ⟨c i, hc i⟩
+  have hf : Function.Bijective f := by
+    constructor
+    · intro i j hij
+      apply hdistinct
+      exact (heq i).symm.trans ((congrArg (fun Z ↦ Subtype.val '' Z.val) hij).trans (heq j))
+    · intro Z
+      have hZ : Subtype.val '' Z.val ∈ Set.range
+          (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({t i} : Set A)) := by
+        rw [hbranches]
+        exact ⟨Z.val, Z.property, rfl⟩
+      obtain ⟨i, hi⟩ := hZ
+      refine ⟨i, Subtype.ext ?_⟩
+      exact Subtype.val_injective.image_injective ((heq i).trans hi)
+  let components := Equiv.ofBijective f hf
+  have hcomponent (i : Fin r) : Subtype.val '' (components i).val =
+      PrimeSpectrum.zeroLocus ({t i} : Set A) := heq i
+  have hbranches' (i : Fin r) : (Ideal.span {t i}).IsPrime ∧
+      Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {t i})))) =
+        Subtype.val '' (components i).val := by
+    constructor
+    · apply (PrimeSpectrum.isIrreducible_zeroLocus_iff_of_radical _
+        ((Ideal.isRadical_iff_quotient_reduced _).mpr (hreduced i))).mp
+      rw [PrimeSpectrum.zeroLocus_span, ← hcomponent]
+      exact (components i).property.prop.image _ continuous_subtype_val.continuousOn
+    · rw [hcomponent]
+      change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.span {t i}))) = _
+      rw [range_comap_of_surjective _ (Ideal.Quotient.mk (Ideal.span {t i}))
+          Ideal.Quotient.mk_surjective,
+        Ideal.mk_ker, PrimeSpectrum.zeroLocus_span]
+  obtain ⟨hnoeth, hrootNoeth, hlocal⟩ :=
+    snc_root_local_presentation A hA r t H hH components hbranches' n hn
+  let := hnoeth
+  let := hrootNoeth
+  rw [isRegularRing_iff]
+  intro q hq
+  let p : Ideal A := q.comap (algebraMap A _)
+  have : p.IsPrime := Ideal.comap_isPrime _ q
+  obtain ⟨hstrata, e, he, -⟩ := hlocal p
+  obtain ⟨Q, hQ, -, eq, -⟩ := he.2.2 q rfl
+  have := hQ
+  let R := Localization.AtPrime p
+  let t' : Fin r → R := fun i ↦ algebraMap A R (t i)
+  have : IsRegularLocalRing R := by
+    let := hA.2
+    exact IsRegularLocalRing.of_ringEquiv
+      (Spec.stalkIso (.of A) ⟨p, inferInstance⟩).commRingCatIsoToRingEquiv
+  have hstrata' (J : Finset (Fin r))
+      (hJ : ∀ j ∈ J, t' j ∈ IsLocalRing.maximalIdeal R) :
+      IsRegularLocalRing (RingTheory.transverseRootCoefficientRing t' J) ∧
+        ringKrullDim (RingTheory.transverseRootCoefficientRing t' J) +
+          (J.card : WithBot ℕ∞) = ringKrullDim R := by
+    have hJ' : ∀ j ∈ J, t j ∈ p := fun j hj ↦
+      (IsLocalization.AtPrime.to_map_mem_maximal_iff R p (t j)).mp (hJ j hj)
+    exact ⟨(hstrata J hJ').1, (hstrata J hJ').2.1⟩
+  have hnunit' : IsUnit (n : R) := by
+    simpa only [map_natCast] using hnunit.map (algebraMap A R)
+  have hregular := (RingTheory.isRegularRing_transverseLocalRootFamily R (Fin r) t'
+    hstrata' n hn hnunit' ∅ Finset.univ (by simp) (by simp)).1
+  have hB : IsRegularRing (MvPolynomial (Fin r) R ⧸
+      Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n -
+        MvPolynomial.C (t' i)))) := by
+    let eR : RingTheory.transverseRootCoefficientRing t' ∅ ≃+* R :=
+      (Ideal.quotEquivOfEq (show Ideal.span (t' '' (↑(∅ : Finset (Fin r)) :
+        Set (Fin r))) = ⊥ by simp)).trans (RingEquiv.quotientBot R)
+    have heR (a : R) : eR (Ideal.Quotient.mk _ a) = a := by
+      simp [eR]
+    let eI : (Finset.univ : Finset (Fin r)) ≃ Fin r :=
+      Equiv.ofBijective (fun i ↦ i.val)
+        ⟨Subtype.val_injective, fun i ↦ ⟨⟨i, Finset.mem_univ i⟩, rfl⟩⟩
+    let eP := (MvPolynomial.mapEquiv _ eR).trans
+      (MvPolynomial.renameEquiv R eI).toRingEquiv
+    have hgen (i : (Finset.univ : Finset (Fin r))) :
+        eP (MvPolynomial.X i ^ n -
+          MvPolynomial.C (Ideal.Quotient.mk _ (t' i))) =
+          MvPolynomial.X (i : Fin r) ^ n - MvPolynomial.C (t' i) := by
+      simp [eP, heR, eI]
+    have hrel : Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n -
+        MvPolynomial.C (t' i))) =
+        (RingTheory.transverseRootRelationIdeal t' n ∅ Finset.univ).map eP := by
+      rw [RingTheory.transverseRootRelationIdeal, Ideal.map_span, ← Set.range_comp]
+      congr 1
+      ext z
+      constructor
+      · rintro ⟨i, rfl⟩
+        exact ⟨⟨i, Finset.mem_univ i⟩, hgen _⟩
+      · rintro ⟨i, rfl⟩
+        exact ⟨i.val, (hgen i).symm⟩
+    let := hregular
+    exact IsRegularRing.of_ringEquiv (Ideal.quotientEquiv _ _ eP hrel)
+  let := hB
+  exact IsRegularLocalRing.of_ringEquiv eq
 
 end AlgebraicGeometry

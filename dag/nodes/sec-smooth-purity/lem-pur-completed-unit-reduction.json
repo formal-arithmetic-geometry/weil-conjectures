@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-completed-unit-reduction",
+ "kind": "statement",
+ "title": "Canonical reduction and augmentation of the completed regular coefficient unit",
+ "statement": "For a prime l, a finite extension E of Q_l, a finite-field datum D with different characteristic, and a scheme W where l is a unit in every stalk, there exists CompletedUnitPullback.Reduction l E W for the fixed calculus of [def-pur-completed-unit-pullback-data]. The finite identifications act as the identity on sections, their derived comparison uses the actual constantCoefficientReductionMap at every level, and the augmentation is the adjunction unit followed by the total limit of that comparison.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 3.5 and 6.5, Lemmas 6.5.9 and 6.8.2; regular-module calculation in lem-pur-completed-unit-pullback-tower"
+ },
+ "stmt_deps": [
+  "def-pur-completed-unit-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct finite identifications by inverse of the unit-to-pushforward-unit map along the equality of the evaluated ring and the actual finite ring. Their section formula follows by equality induction and the inverse equations. Apply the strict regular-system comparison. Existing constructibility gives derived completeness; stalkwise invertibility implies invertibility on global sections. Normalized reconstruction makes the actual adjunction unit invertible. Compose this unit isomorphism with total limit of the strict comparison; its augmentation equation holds by definition.",
+   "uses": [
+    "lem-pur-completed-unit-strict-comparison",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-pur-normalized-reconstruction-adjunction-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-unit-strict-comparison",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-pur-normalized-reconstruction-adjunction-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit normalized regular-module argument, refined from the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient system of scalar extension of a regular ring module is isomorphic to the regular quotient ring system",
+   "results": "8 hits concerning ordinary quotient modules and regular sequences",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "results": "12 hits including unit, unitHomEquiv, unit_val and freeCofan; useful ordinary interface only",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*unit|unit.*reduction|system.*regular",
+   "results": "6 unrelated hits; direct project search finds the supplied calculus and strict regular tensor calculations",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The regular module sheaf has canonical finite quotient reductions and its derived inverse limit is the completed coefficient sheaf",
+   "results": "8 hits: AdicCompletion, AdicCompletion.of_apply, AdicCompletion.of, ModuleCat.tildeInModuleCat, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, SheafOfModules.hasLimit, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-25",
+   "verdict": "no exact match: ordinary units and limits do not supply normalized derived whole-system comparison or completed scalar compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|pullbackObjUnitToUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "results": "Read lines 60-111: explicit ring-section map, its adjoint, and invertibility under finality. Used for the ordinary multiplication; no completed quotient-system or scalar-natural comparison.",
+   "date": "2026-10-25",
+   "verdict": "useful ordinary ingredient only; no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedUnitPullbackTower",
+  "date": "2026-10-24",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-unit-pullback-tower",
+   "place": "Regular coefficient calculation and coefficient transport in proof steps 1–6"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedUnitReduction",
+  "file": "lean/Sheaf/Paper/CompletedUnitReduction.lean",
+  "declaration": "WeilConjectures.CompletedUnitPullback.completedUnitReduction",
+  "statement": "theorem completedUnitReduction (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (W : Scheme.{u})\n    (hW : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) :\n    Nonempty (Reduction l E W (calculus l E W))",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item modules vs clone item (moved block identical, target signature identical); 5 new nodes' lean.statement vs files; sorry lemmas vs CoefficientReductionModels/PullModel pinning; importer AdicUnitTraceReductionData compiled against delivered set"
+ }
+}

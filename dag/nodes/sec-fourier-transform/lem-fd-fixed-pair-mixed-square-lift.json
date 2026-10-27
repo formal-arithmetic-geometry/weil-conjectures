@@ -1,0 +1,235 @@
+{
+ "id": "lem-fd-fixed-pair-mixed-square-lift",
+ "kind": "statement",
+ "title": "Lifting mixed comparison squares and their coherences to fixed pairs",
+ "statement": "Let $\\mathcal C_i,\\mathcal D_i$ ($i=0,1$) be categories in a common sufficiently large universe [def-nagata-category], with endofunctors $F_i$ and $G_i$. Let $J_i:\\mathcal C_i\\to\\mathcal D_i$, $T_s:\\mathcal C_0\\to\\mathcal C_1$ and $T_p:\\mathcal D_0\\to\\mathcal D_1$ be functors. Give natural isomorphisms\n$$b_i:J_iF_i\\simeq G_iJ_i,\\quad r_s:T_sF_0\\simeq F_1T_s,\\quad r_p:T_pG_0\\simeq G_1T_p,\\quad j:J_1T_s\\simeq T_pJ_0,$$\nwhere juxtaposition is ordinary composition, and assume for every $K\\in\\mathcal C_0$ that\n$$r_{p,J_0K}\\,T_p(b_{0,K})\\,j_{F_0K}=G_1(j_K)\\,b_{1,T_sK}\\,J_1(r_{s,K}).$$\nOn fixed-pair categories [def-weil-endofunctor-fixed-pair-category], use the transports with structures $J_i(\\theta)b_i^{-1}$, $T_s(\\theta)r_s^{-1}$ and $T_p(\\psi)r_p^{-1}$ and with the corresponding functors on arrows. They are functors, and $j$ lifts to a natural isomorphism\n$$\\widetilde j:\\widetilde J_1\\widetilde T_s\\xrightarrow{\\sim}\\widetilde T_p\\widetilde J_0$$\nwhose component at $(K,\\theta)$ has underlying arrow $j_K$. In particular its precise intertwining identity is\n$$j_KJ_1(T_s(\\theta)r_{s,K}^{-1})b_{1,T_sK}^{-1}=T_p(J_0(\\theta)b_{0,K}^{-1})r_{p,J_0K}^{-1}G_1(j_K).$$\nThe inverse has underlying arrow $j_K^{-1}$. These lifts preserve any specified identity and cocycle equations between composites of these transformations and their functorial whiskerings, provided those equations have the same source and target pair functors and hold on underlying arrows. The assertion applies equally when $T_s,T_p$ are inclusions of coefficient stages into common-stage categories, rather than scalar-extension functors; it requires no equivalence assumption on $T_s,T_p$ or $J_i$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence: scalar and finite-to-common compatibility of transported Weil structures; returned proof steps 8–10; agent-written auxiliary, full inherited argument retained in report.md"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof": [
+  {
+   "text": "For any of the four transports, write its data as $L:\\mathcal A\\to\\mathcal B$, $U:\\mathcal A\\to\\mathcal A$, $V:\\mathcal B\\to\\mathcal B$, $c:LU\\simeq VL$. The proposed structure $\\eta_X=L(\\theta_X)c_X^{-1}$ has inverse $c_XL(\\theta_X^{-1})$, since both composites cancel to identities by functoriality. For an intertwiner $u\\theta_X=\\theta_YU(u)$, naturality gives $LU(u)c_X^{-1}=c_Y^{-1}V(Lu)$, hence\n$$L(u)\\eta_X=L(u\\theta_X)c_X^{-1}=L(\\theta_Y)LU(u)c_X^{-1}=\\eta_YV(Lu).$$\nThus the stipulated arrow map lands in the fixed-pair morphisms. It preserves identities and composition because $L$ does and pair composition is underlying composition. Apply this calculation with $(L,c)=(J_i,b_i),(T_s,r_s),(T_p,r_p)$ to obtain all four functors.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Agent expansion of inherited transport construction, preceding returned proof step 8"
+   }
+  },
+  {
+   "text": "Fix $(K,\\theta)\\in\\mathcal C_0^{F_0}$. Multiply the assumed mixed equation on the left by $T_p(b_{0,K}^{-1})r_{p,J_0K}^{-1}$ and on the right by $J_1(r_{s,K}^{-1})b_{1,T_sK}^{-1}$. Cancelling adjacent inverse factors, using that functors preserve inverse equations, gives\n$$j_{F_0K}J_1(r_{s,K}^{-1})b_{1,T_sK}^{-1}=T_p(b_{0,K}^{-1})r_{p,J_0K}^{-1}G_1(j_K).$$\nBoth sides have source $G_1J_1T_sK$ and target $T_pJ_0F_0K$. No inverse of a functor has been used.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Agent expansion of returned proof step 8: rearranging the supplied mixed square"
+   }
+  },
+  {
+   "text": "The two composite pair functors give structure maps\n$$\\alpha_K=J_1(T_s\\theta)J_1(r_{s,K}^{-1})b_{1,T_sK}^{-1},\\qquad \\beta_K=T_p(J_0\\theta)T_p(b_{0,K}^{-1})r_{p,J_0K}^{-1}.$$\nNaturality of $j$ at the underlying arrow $\\theta:F_0K\\to K$ is $j_KJ_1(T_s\\theta)=T_p(J_0\\theta)j_{F_0K}$. Substituting it and the preceding step yields\n$$j_K\\alpha_K=T_p(J_0\\theta)j_{F_0K}J_1(r_{s,K}^{-1})b_{1,T_sK}^{-1}=\\beta_KG_1(j_K).$$\nThis is the defining pair-morphism condition and, on expanding $\\alpha_K,\\beta_K$ by functoriality, precisely the displayed intertwining identity in the statement.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Agent expansion of returned proof step 9: naturality at the Weil structure"
+   }
+  },
+  {
+   "text": "From $j_K\\alpha_K=\\beta_KG_1(j_K)$, compose on the left with $j_K^{-1}$ and on the right with $G_1(j_K^{-1})$ to get $j_K^{-1}\\beta_K=\\alpha_KG_1(j_K^{-1})$. Thus $j_K^{-1}$ is the inverse pair morphism; the two composites are identities because they are so on underlying arrows. For a pair arrow $u:K\\to K'$, the equality $T_pJ_0(u)j_K=j_{K'}J_1T_s(u)$ is naturality of $j$ and is also naturality in the pair category, whose forgetful functor is faithful. The inverse family is natural as well: compose this equality on the left by $j_{K'}^{-1}$ and on the right by $j_K^{-1}$. These families therefore define the required natural isomorphism $\\widetilde j$.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Agent expansion of returned proof step 9: inverse and naturality"
+   }
+  },
+  {
+   "text": "For any specified equation with the same source and target pair functors, evaluate both sides at a source pair. Forgetting takes identity components to identities, vertical composition to composition, right whiskering to applying the underlying functor to the component, and left whiskering to evaluating the component on the transported pair. These assertions follow directly from the arrow maps in step 1 and the component formulas in steps 3–4; in particular they also hold for inverse components. Thus each component equality after forgetting is exactly the assumed underlying equation. Faithfulness of the forgetful functor makes the two pair arrows equal, and componentwise equality gives equality of the natural transformations. This proves the identity and cocycle assertions. Taking $T_s,T_p$ to be coefficient-stage inclusions makes the identical calculations with their stipulated $r_s,r_p,j$; none of steps 1–4 uses fullness, faithfulness, essential surjectivity, or any inverse functor.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Agent expansion of returned proof step 10: finite-to-common inclusions and coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Abstract fixed-pair calculation for the coefficient/Frobenius transport implicit in def-fd-trace-function; inherited argument in coord/reports/Q35/lem-fd-frobenius-fixed-pair-comparison.md, old steps 8–10, expanded using fixed-pair definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapOfNatIsoHom|mapOfNatIsoCompIso|IsoAlgebra",
+   "results": "1 hits; Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: action functors and comparisons of ordinary endofunctor algebras do not state the four-category mixed-square lift and its coherent stage specializations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms compatible with endofunctor commutation isomorphisms lift to invertible algebra transport functors and preserve identity and cocycle equations",
+   "results": "8 hits; CategoryTheory.NatIso.isIso_app_of_isIso; CategoryTheory.Functor.CommShift.OfComp.iso; CategoryTheory.Endofunctor.Algebra.functorOfNatTransId; CategoryTheory.NatTrans.naturality_2; CategoryTheory.NatIso.hom_app_isIso; CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.mapCommMonNatIso; CategoryTheory.Functor.Monoidal.transport",
+   "date": "2026-10-22",
+   "verdict": "no match: action functors and comparisons of ordinary endofunctor algebras do not state the four-category mixed-square lift and its coherent stage specializations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra, CategoryTheory.NatIso",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: action functors and comparisons of ordinary endofunctor algebras do not state the four-category mixed-square lift and its coherent stage specializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative mixed square of natural isomorphisms between functors commuting with endofunctors lifts to a natural isomorphism on categories of fixed pairs compatible with scalar extension and coefficient stage inclusions",
+   "results": "8 hits; CategoryTheory.CatCommSq.iso; CategoryTheory.LocalizerMorphism.catCommSq; CategoryTheory.CatCommSq.iso_hom_naturality; AlgebraicTopology.DoldKan.Compatibility.τ₁; AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app; CategoryTheory.CatCommSq.iso_hom_naturality_assoc; CategoryTheory.CatCommSq.hInv; CategoryTheory.CatCommSq.vInv_iso_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: action functors and comparisons of ordinary endofunctor algebras do not state the four-category mixed-square lift and its coherent stage specializations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra",
+   "results": "12 hits; CategoryTheory.Endofunctor.Algebra; CategoryTheory.Endofunctor.instInhabitedAlgebraId; CategoryTheory.Endofunctor.Algebra.a; CategoryTheory.Endofunctor.Algebra.instCategory; CategoryTheory.Endofunctor.Algebra.instCategoryStruct; CategoryTheory.Endofunctor.Algebra.Hom; CategoryTheory.Endofunctor.Algebra.Hom.id; CategoryTheory.Endofunctor.Algebra.forget",
+   "date": "2026-10-22",
+   "verdict": "no match: action functors and comparisons of ordinary endofunctor algebras do not state the four-category mixed-square lift and its coherent stage specializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compatibility equation for a natural isomorphism between two composites of equivariant functors induces a natural isomorphism of their functors on invertible endofunctor algebras",
+   "results": "8 hits; CategoryTheory.Functor.mapActionCongr_hom; CategoryTheory.Functor.mapActionCongr; CategoryTheory.Functor.mapActionComp; CategoryTheory.Functor.mapActionComp_inv; Action.resCongr; Action.resCongr_hom; CategoryTheory.Functor.mapActionComp_hom; Action.resCongr_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: action functors and comparisons of ordinary endofunctor algebras do not state the four-category mixed-square lift and its coherent stage specializations"
+  },
+  {
+   "tool": "grep",
+   "query": "functorOfNatTrans|[Ee]quivalence|mapOfNatTrans",
+   "results": "5 hits; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; searched Mathlib/CategoryTheory/Endofunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: action functors and comparisons of ordinary endofunctor algebras do not state the four-category mixed-square lift and its coherent stage specializations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a commutative square of natural isomorphisms to categories of objects with an invertible endofunctor action, preserving cocycle equations",
+   "results": "8 hits; CategoryTheory.Localization.Lifting.ofIsos; CategoryTheory.CatCommSq.iso; CategoryTheory.Square.isoMk; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare; CategoryTheory.CommSq.LiftStruct; CategoryTheory.Quotient.natIsoLift; CategoryTheory.CatCommSq.iso_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra isoMk constructs individual algebra isomorphisms; functorOfNatTrans compares endofunctors on one category; action comparisons concern monoid actions. None states the four-category fixed-pair mixed square with its displayed structure, inverse and coherence clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra",
+   "results": "12 hits; CategoryTheory.Endofunctor.Algebra; CategoryTheory.Endofunctor.instInhabitedAlgebraId; CategoryTheory.Endofunctor.Algebra.a; CategoryTheory.Endofunctor.Algebra.instCategory; CategoryTheory.Endofunctor.Algebra.instCategoryStruct; CategoryTheory.Endofunctor.Algebra.Hom; CategoryTheory.Endofunctor.Algebra.Hom.id; CategoryTheory.Endofunctor.Algebra.forget",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra isoMk constructs individual algebra isomorphisms; functorOfNatTrans compares endofunctors on one category; action comparisons concern monoid actions. None states the four-category fixed-pair mixed square with its displayed structure, inverse and coherence clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfNatIso|IsoAlgebra|functorOfNatTrans|mapActionCongr",
+   "results": "9 hits; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Action/Continuous.lean; Mathlib/CategoryTheory/Action/Basic.lean; Mathlib/CategoryTheory/Action/Basic.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra isoMk constructs individual algebra isomorphisms; functorOfNatTrans compares endofunctors on one category; action comparisons concern monoid actions. None states the four-category fixed-pair mixed square with its displayed structure, inverse and coherence clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of two composites of functors commuting with endofunctors lifts to the categories of invertible endofunctor algebras when its commutation square is compatible",
+   "results": "8 hits; CategoryTheory.Endofunctor.Algebra.isoMk; CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp; CategoryTheory.Endofunctor.Algebra.isoMk_hom_f; CategoryTheory.Monad.Algebra.isoMk; CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp_inv_app_f; CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp_hom_app_f; AlgebraicTopology.DoldKan.Compatibility.υ; CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq_inv_app_f",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra isoMk constructs individual algebra isomorphisms; functorOfNatTrans compares endofunctors on one category; action comparisons concern monoid actions. None states the four-category fixed-pair mixed square with its displayed structure, inverse and coherence clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of invertible endofunctor algebras along two different composites of functors, with an equivariant natural isomorphism between the composites and faithful detection of coherence equations",
+   "results": "8 hits; AlgebraicTopology.DoldKan.Compatibility.τ₁; CategoryTheory.Endofunctor.Algebra.isoMk; CategoryTheory.Endofunctor.Algebra.functorOfNatTransEq; CategoryTheory.Monad.algebraEquivOfIsoMonads_functor; CategoryTheory.Monad.algebraEquivOfIsoMonads; CategoryTheory.Monad.algebraEquivOfIsoMonads_unitIso; CategoryTheory.Monad.algebraFunctorOfMonadHomComp; CategoryTheory.Monad.transport",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra isoMk constructs individual algebra isomorphisms; functorOfNatTrans compares endofunctors on one category; action comparisons concern monoid actions. None states the four-category fixed-pair mixed square with its displayed structure, inverse and coherence clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-frobenius-fixed-pair-comparison",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence: scalar and finite-to-common compatibility of transported Weil structures; returned proof steps 8–10",
+   "via": [
+    "lem-fd-frobenius-fixed-pair-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-fixed-pair-mixed-square-lift",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and its hypotheses. Wrote the transport, mixed-square cancellation, exact intertwining calculation, inverse and naturality, and faithful detection of coherence in five short elementary steps; no auxiliary statement is needed. Checked related project Lean and Mathlib source, with fresh logged searches; no exact attachment or Mathlib match.",
+  "blueprint": "def-fd-trace-function coefficient-pair interpretation, through lem-fd-rational-coefficient-category-comparison and lem-fd-frobenius-fixed-pair-comparison: inherited returned steps 8–10 supply the mixed square, its naturality calculation, and stage/coherence applications. These are expanded in steps 2–5, after the transport check in step 1."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-969199eb3",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-969199eb3 (reviewer sub-agent of L); spot-checked: Read the item's statement and all five steps in full and retyped every composite. They use right-to-left composition with b_i:J_iF_i→G_iJ_i, r_s:T_sF_0→F_1T_s, r_p:T_pG_0→G_1T_p and j:J_1T_s→T_pJ_0. Both sides of the mixed square go J_1T_sF_0K→G_1T_pJ_0K, and both sides of the displayed identity go G_1J_1T_sK→T_pJ_0K, so the statement is well typed. Step 1: the transport L(θ)c^{-1} has inverse cL(θ^{-1}), and naturality of c gives L(u)η_X=η_YV(Lu). Step 2: cancelling on the left by T_p(b_0^{-1})r_p^{-1} and on the right by J_1(r_s^{-1})b_1^{-1} is correct; I checked the factor order. Step 3: j's naturality at θ plus step 2 gives j_Kα_K=β_KG_1(j_K), which is exactly the statement's identity. Step 4: the inverse condition j^{-1}β=αG_1(j^{-1}) and the inverse naturality are correct. Step 5: the forgetful functor is faithful and respects composition and whiskering; the same-source/target hypothesis is used properly, and the inclusion case needs no equivalence. All steps are honestly elementary and cite only def-weil-endofunctor-fixed-pair-category (θ:TX≅X, u∘θ=θ'∘T(u), faithful forgetful functor; matches the steps) and def-nagata-category. Against the live clone, only status, proof, proof_deps, proof_origin, split_report and the appended searches changed; the statement, stmt_deps, source and blueprint are unchanged. There are no new nodes, no repair note and no prior split by another group. Not duplicates: lem-fd-fixed-pair-equivalence-transport (needs an equivalence), lem-pur-natural-comparison-functor-transport (one functor) and lem-pur-natural-comparison-strict-intertwiners (one category). The only citer, lem-fd-frobenius-fixed-pair-comparison, uses only clauses the statement gives (scalar and inclusion cases, coherence). The blueprint def-fd-trace-function only defines the trace; the item is an agent auxiliary with an inherited source field. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedPairMixedSquareLift",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_mixedSquare_lift",
+  "file": "lean/Sheaf/CategoryTheory/FixedPairMixedSquareLift.lean",
+  "statement": "theorem fixedPair_mixedSquare_lift {C₀ : Type u₀} [Category.{v₀} C₀] {C₁ : Type u₁} [Category.{v₁} C₁] {D₀ : Type u₂} [Category.{v₂} D₀] {D₁ : Type u₃} [Category.{v₃} D₁] (F₀ : C₀ ⥤ C₀) (F₁ : C₁ ⥤ C₁) (G₀ : D₀ ⥤ D₀) (G₁ : D₁ ⥤ D₁) (J₀ : C₀ ⥤ D₀) (J₁ : C₁ ⥤ D₁) (Ts : C₀ ⥤ C₁) (Tp : D₀ ⥤ D₁) (b₀ : F₀ ⋙ J₀ ≅ J₀ ⋙ G₀) (b₁ : F₁ ⋙ J₁ ≅ J₁ ⋙ G₁) (rs : F₀ ⋙ Ts ≅ Ts ⋙ F₁) (rp : G₀ ⋙ Tp ≅ Tp ⋙ G₁) (j : Ts ⋙ J₁ ≅ J₀ ⋙ Tp) (mixed : ∀ K : C₀, j.hom.app (F₀.obj K) ≫ Tp.map (b₀.hom.app K) ≫ rp.hom.app (J₀.obj K) = J₁.map (rs.hom.app K) ≫ b₁.hom.app (Ts.obj K) ≫ G₁.map (j.hom.app K)) : (∃ jLift : mapOfNatIso rs.symm ⋙ mapOfNatIso b₁.symm ≅ mapOfNatIso b₀.symm ⋙ mapOfNatIso rp.symm, (∀ K : IsoAlgebra F₀, (jLift.hom.app K).hom.f = j.hom.app K.carrier) ∧ (∀ K : IsoAlgebra F₀, (jLift.inv.app K).hom.f = j.inv.app K.carrier) ∧ (∀ K : IsoAlgebra F₀, b₁.inv.app (Ts.obj K.carrier) ≫ J₁.map (rs.inv.app K.carrier ≫ Ts.map K.str.hom) ≫ j.hom.app K.carrier = G₁.map (j.hom.app K.carrier) ≫ rp.inv.app (J₀.obj K.carrier) ≫ Tp.map (b₀.inv.app K.carrier ≫ J₀.map K.str.hom))) ∧ (∀ (A : Type uA) [Category.{vA} A] (B : Type uB) [Category.{vB} B] (U : B ⥤ B) (P Q : A ⥤ IsoAlgebra U) (α β : P ⟶ Q), (∀ X : A, (α.app X).hom.f = (β.app X).hom.f) → α = β)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7d64e701",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Every binder matches the node: b_i, r_s, r_p, j, with orientation converted from right-to-left composition. The mixed square, retyped, goes J1TsF0K→G1TpJ0K. The transports are the existing IsoAlgebra.mapOfNatIso of b_i.symm, rs.symm and rp.symm, with str = c⁻¹≫Lθ, exactly the J(θ)b⁻¹ structure. jLift has the exact composite source and target, its hom and inv components are pinned to j.hom.app and j.inv.app, and the intertwining identity is checked in factor order. The coherence schema is rendered as faithful detection of parallel transformations into IsoAlgebra U, which is the node's step 5 and is accepted (advisory: generic). Four independent universe pairs, no extra hypotheses, no new definitions. IsoAlgebra is definitionally the full subcategory of def-weil-endofunctor-fixed-pair-category, consistent with lem-sf-fixed-pair-adjunction-lift. stmt_deps are 2 mathlib definition nodes. The proof is sorry only. The docstrings carry the source place, the blueprint tag and steps 1-5. lean.statement is verbatim. Only the lean field differs from the live node. The report has both sections. Not recompiled (no file changed); the worker reports clean 7.8 s/3.8 s compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261023T105116-L-3494245",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_mixedSquare_lift"
+  ],
+  "sorry_after": []
+ }
+}

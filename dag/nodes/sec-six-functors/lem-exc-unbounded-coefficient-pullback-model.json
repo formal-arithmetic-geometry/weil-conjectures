@@ -1,0 +1,305 @@
+{
+ "id": "lem-exc-unbounded-coefficient-pullback-model",
+ "kind": "statement",
+ "title": "Unbounded coefficient comparison on flat-term K-flat inverse-image models",
+ "statement": "Let $f:V\\to X$ be any morphism of schemes [def-pc-scheme] and $A\\to B$ a unital homomorphism of finite commutative rings. On the small pro-etale sites [def-weil-pbc-proetale-site] use constant ring sheaves [def-weil-pbc-constant-sheaf], module sheaves [def-weil-sheaf-of-modules-category], and canonical inverse images $f_A^*,f_B^*$ [def-weil-proetale-inverse-image], which are exact [prop-weil-pbc-proetale-constant-exact] and induce $D(f_A^*),D(f_B^*)$ termwise. Let $K$ be an arbitrary, possibly unbounded, object of $D(X_{\\mathrm{proet}},A)$ [def-weil-abstract-derived-category]. Derived coefficient extension $-\\otimes_A^L B$ takes values in the derived category of $B$-modules [lem-pur-derived-change-of-rings]. For every flat-term K-flat resolution $P\\to K$ [def-pc-flat-sheaf-modules, def-pc-kflat-complex, def-pc-quasi-iso-modules], $f_A^*P$ is flat-term K-flat and represents $D(f_A^*)K$.\n\nThe complexes $(f_A^*P)\\otimes_{A_V}B_V$ and $f_B^*(P\\otimes_{A_X}B_X)$ represent, respectively, $(D(f_A^*)K)\\otimes_A^L B$ and $D(f_B^*)(K\\otimes_A^L B)$. There is a natural $B_V$-linear chain isomorphism\n$$t_P:(f_A^*P)\\otimes_{A_V}B_V\\xrightarrow{\\sim}f_B^*(P\\otimes_{A_X}B_X).$$\nUnder the canonical constant-ring identifications $f^{-1}A_X\\cong A_V$, $f^{-1}B_X\\cong B_V$ [prop-weil-pbc-proetale-constant-ring-map], both sides identify with $f^{-1}P\\otimes_{f^{-1}A_X}B_V$, and $t_P$ is the identity on local pure tensors $p\\otimes b$ [def-pur-sheaf-tensor-product]. Its localization is independent of the flat-term K-flat resolution and gives the canonical derived inverse-image coefficient comparison, a natural isomorphism\n$$(D(f_A^*)K)\\otimes_A^L B\\xrightarrow{\\sim}D(f_B^*)(K\\otimes_A^L B)$$\nin $D(V_{\\mathrm{proet}},B)$. No flatness of $A\\to B$, boundedness, constructibility or finite Tor amplitude of $K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat; flat-term resolution and coefficient-comparison application: blueprint thm-exc-explicit-preservation proof paragraph 2, expanded returned step 4. Supporting lemmas K-flat-resolution and derived-base-change in the same file, and sites-modules.tex lemma-tensor-product-pullback."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pur-sheaf-tensor-product",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-sp-constant-scalar-pullback-comparison",
+  "def-sp-proetale-scalar-mate-identifications",
+  "def-exc-proetale-scalar-balancing-data",
+  "def-sp-proetale-constant-coefficient-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing scalar balancing chain to obtain t with the pure-tensor normalization and a B-linear scalarBalancingMap. Lift each restricted map to a B-linear sheaf morphism using its B-linearity; naturality follows from the displayed balancing isomorphism. Restriction of scalars reflects isomorphisms, so these maps form the natural isomorphism s. Apply s inverse degreewise to form T.",
+   "uses": [
+    "lem-sp-proetale-scalar-balancing-chain",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E and 06YY; sites-modules.tex Tag 03EL. Canonical mate computation on supplied complexes."
+   }
+  },
+  {
+   "text": "For any supplied flat-term K-flat P, apply the ringed-topos pullback theorem with the algebraic inverse image and canonical constant-ring comparison. This gives both K-flatness and termwise flatness of the pulled complex. Exact inverse image preserves quasi-isomorphisms. The universal coefficient counits on P and its pullback are invertible, so the two computation morphisms are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-pur-derived-change-of-rings",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-pulled-reduction-normalization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E and 06YY; sites-modules.tex Tag 03EL. Canonical mate computation on supplied complexes."
+   }
+  },
+  {
+   "text": "Reuse the proved ordinary coefficient/pullback mate from the existing normalization-comparison module. Its unit formula and the pure-tensor normalization show that its composite with s is the identity: apply the scalar and geometric adjunction bijections and evaluate sections. Cancel the mate isomorphism to identify s with its inverse.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sp-proetale-scalar-balancing-chain",
+    "lem-weil-pbc-pulled-reduction-normalization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E and 06YY; sites-modules.tex Tag 03EL. Canonical mate computation on supplied complexes."
+   }
+  },
+  {
+   "text": "Reuse the proved derivedMate_rep helper from the existing normalization-comparison module. Its normalized scalar derived adjunction and general derived mate calculation compute the canonical representative equation on every cochain P, with the degreewise ordinary mate on the right.",
+   "uses": [
+    "lem-weil-pbc-pulled-reduction-normalization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E and 06YY; sites-modules.tex Tag 03EL. Canonical mate computation on supplied complexes."
+   }
+  },
+  {
+   "text": "Identify the degreewise mate with T using step 3. Naturality of the already constructed canonical derived coefficient/pullback comparison along the inverse of the supplied isomorphism Q(P) ≅ K transports the equation at Q(P) to the required equation at K. Functoriality and associativity give exactly the two named computation maps. No new localization, choice of resolution, or flatness of B over A is needed.",
+   "uses": [
+    "lem-pur-derived-mate-comparison",
+    "def-sp-constant-scalar-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E and 06YY; sites-modules.tex Tag 03EL. Canonical mate computation on supplied complexes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-proetale-scalar-balancing-chain",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-pur-derived-change-of-rings",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-pulled-reduction-normalization-comparison",
+  "lem-pur-derived-mate-comparison",
+  "def-sp-constant-scalar-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "M9: canonical mate representative argument; Stacks 03EL, 0G7E, 06YY; reuses proved private ordinaryMate, ordinaryMate_one, derivedMate_rep and pullback_good from PulledReductionNormalizationComparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(derived|KFlat|K.flat).*(changeOfRings|extendScalars)|changeOfRings.*pullback",
+   "results": "0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary scalar adjunctions, free sheaf pullback, or unrelated cotangent comparisons; none gives the unbounded B-linear chain-model comparison and its descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"changeOfRings\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary scalar adjunctions, free sheaf pullback, or unrelated cotangent comparisons; none gives the unbounded B-linear chain-model comparison and its descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of unbounded module sheaf complexes commutes with derived extension of scalars as a target-ring linear natural isomorphism",
+   "results": "8 hit(s): ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, LinearEquiv.extendScalarsOfSurjective_symm, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.sheafificationCompPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary scalar adjunctions, free sheaf pullback, or unrelated cotangent comparisons; none gives the unbounded B-linear chain-model comparison and its descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded complexes of finite ring module sheaves, exact proetale inverse image commutes with derived coefficient extension as an isomorphism over the target coefficient ring computed on flat-term K-flat resolutions",
+   "results": "8 hit(s): KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, CondensedMod.IsSolid.isIso_solidification_map, Algebra.H1Cotangent.exact_δ_mapBaseChange, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.H1Cotangent.exact_map_δ, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Generators.H1Cotangent.exact_map_δ', localCohomology.diagramComp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary scalar adjunctions, free sheaf pullback, or unrelated cotangent comparisons; none gives the unbounded B-linear chain-model comparison and its descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two B-linear complexes obtained by pulling back an A-flat K-flat resolution and then changing coefficients, or by changing coefficients and pulling back, are canonically isomorphic and descend independently of the unbounded resolution",
+   "results": "8 hit(s): CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.isBaseChange, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, RingHom.Flat.respectsIso, Algebra.FormallyUnramified.flat_of_restrictScalars, CategoryTheory.Abelian.LeftResolution.map_chainComplex_d",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary scalar adjunctions, free sheaf pullback, or unrelated cotangent comparisons; none gives the unbounded B-linear chain-model comparison and its descent"
+  },
+  {
+   "tool": "grep",
+   "query": "(KFlat|K.flat|derived).*(changeOfRings|extendScalars)|changeOfRings.*pullback",
+   "results": "0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback/composition, free sheaves, exact-functor linearity, or flat scalar extension; not the arbitrary-ring-map unbounded B-linear model comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of sheaves commutes with derived scalar extension without flatness on unbounded complexes",
+   "results": "8 hit(s): SheafOfModules.pullback, TopCat.Sheaf.pullback, PresheafOfModules.pullback, SheafOfModules.pullback_comp_id, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_assoc, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback/composition, free sheaves, exact-functor linearity, or flat scalar extension; not the arbitrary-ring-map unbounded B-linear model comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hit(s): PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback/composition, free sheaves, exact-functor linearity, or flat scalar extension; not the arbitrary-ring-map unbounded B-linear model comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of module sheaves commutes with derived extension of scalars on arbitrary unbounded K-flat complexes",
+   "results": "8 hit(s): CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, ModuleCat.localizedModule_functor_map_exact, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, instAbelianCondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback/composition, free sheaves, exact-functor linearity, or flat scalar extension; not the arbitrary-ring-map unbounded B-linear model comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of coefficient rings for sheaves: derived scalar extension is compatible with inverse image and computed by flat term K flat resolutions",
+   "results": "8 hit(s): SheafOfModules.restrictScalars, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pushforwardCongr, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback/composition, free sheaves, exact-functor linearity, or flat scalar extension; not the arbitrary-ring-map unbounded B-linear model comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|def pullback|preservesFiniteLimits_extendScalars_of_flat",
+   "results": "14 hit(s): Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback/composition, free sheaves, exact-functor linearity, or flat scalar extension; not the arbitrary-ring-map unbounded B-linear model comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-exc-explicit-preservation",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "thm-exc-explicit-preservation",
+   "place": "Proof paragraph 2, final sentences: unbounded flat-term K-flat coefficient comparison, including target B-action and resolution independence (returned step 4)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-exc-unbounded-coefficient-pullback-model",
+  "worker": "stage1",
+  "summary": "Assembled the arbitrary-morphism, unbounded B-linear comparison using existing general ringed-topos K-flat preservation, the existing ordinary B-linear pro-etale chain comparison, coefficient-derived computation and K-flat localization. No new nodes or statement changes. Checked the target-ring actions and descent without choosing direct comparison maps between resolutions.",
+  "blueprint": "thm-exc-explicit-preservation, proof paragraph 2, final three sentences (current main-20261015 proof in sec-smooth-purity/sk-prop-sp-et-proet): expand preservation of flat resolutions and the coefficient isomorphism without flatness of A -> B.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence on arbitrary small ringed sites of unbounded K-flat resolutions with flat terms; generic resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "General ringed-topos flat-term K-flat preservation, avoiding the topological-space-only variant; generic site tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical finite constant-ring structural maps identify module pullback with transported inverse image."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exact inverse image for arbitrary scheme morphisms and each finite coefficient ring."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "B-valued derived coefficient extension and K-flat computation without coefficient flatness."
+   },
+   {
+    "node": "lem-sp-proetale-scalar-balancing-chain",
+    "why": "Ordinary B-linear comparison for any finite ring map and arbitrary scheme morphism, including pure-tensor and differential equations; no lemma in this unit supplies this general sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Equivalence between good-complex localization and the unbounded module derived category; generic resolution-localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Descent and uniqueness for natural transformations and their inverses; generic category-theory tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-sp-proetale-scalar-balancing-chain"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-0522ec62d",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-0522ec62d (reviewer sub-agent of L); spot-checked: Read the item's five steps in full, every cited statement, the main-20261015 thm-exc-explicit-preservation proof (paragraph 2, last sentences) and Stacks 0G7E, 06YY and 03EL. There are no new nodes. The statement and stmt_deps are byte-identical to the parent-review FIX (Q34 1a72), so the citer's step 4 is unchanged. Step 1: lem-pc-kflat-resolution gives a flat-term K-flat resolution. lem-weil-pbc-ringed-topos-kflat-pullback applies on V-small skeletons, and its u^* is literally the module pullback of def-weil-proetale-inverse-image with c = c^f_A (iso by constant-ring-map). Exactness (constant-exact) preserves quasi-isomorphisms. Step 2: the K-flat computation of lem-pur-derived-change-of-rings(2) is applied on V to f_A^*q and on X to q, then exact f_B^*; no non-flat tensor is used as a derived one. Step 3: in scalar-balancing-chain with (X,Y)→(V,X), t∘β is B-linear in the direction V(P)→U(P) and is inverted. The pure-tensor formula and the unbounded chain/naturality clauses are as cited. Step 4: the equivalence from site-derived-tensor-descent; U and V invert W by derived-change-of-rings(1) plus exactness; descent by localization-universal-property(2). Step 5: independence and cocycle from (2)-(3). Hypotheses: A→B arbitrary, f arbitrary, K unbounded; no flatness or bound is used. Edge cases checked: f = id, A = B, B = 0, V = ∅, and Z/4→F_2 at a point (Tor terms kept). The eight off-unit tool_uses are accepted. Maintainer note: def-sp-constant-scalar-pullback-comparison (λ_f, arbitrary rings) together with lem-sp-proetale-scalar-tensor-normalization (same t_P representative) already give this derived iso. The item is its finite-ring inverse and is consistent with it; this predates the delivery and is not a fault here. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UnboundedCoefficientPullbackModel",
+  "declaration": "AlgebraicGeometry.ProEtale.unboundedCoefficientPullbackModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.excPullbackThenCoefficientComputation",
+   "AlgebraicGeometry.ProEtale.excCoefficientThenPullbackComputation",
+   "AlgebraicGeometry.ProEtale.unboundedCoefficientPullbackModel"
+  ],
+  "file": "lean/Sheaf/Paper/UnboundedCoefficientPullbackModel.lean",
+  "statement": "theorem unboundedCoefficientPullbackModel {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {V X : Scheme.{u}} (f : V ⟶ X) : ∃ t : scalarMateOrdinaryTensor φ X ⋙ proEtaleConstantRingPullback A f ≅ proEtaleConstantRingPullback A f ⋙ scalarMateOrdinaryTensor φ V, IsScalarBalancing φ f t ∧ ∃ s : proEtaleRingExtension (proEtaleConstantRingMap (T := X) φ) ⋙ proEtaleConstantRingPullback B f ≅ proEtaleConstantRingPullback A f ⋙ proEtaleRingExtension (proEtaleConstantRingMap (T := V) φ), (∀ M : proEtaleRingModules X (proEtaleConstantRing X A), (scalarMateRestriction φ V).map (s.hom.app M) = scalarBalancingMap φ f t M) ∧ ∃ T : (proEtaleConstantRingPullback A f ⋙ proEtaleRingExtension (proEtaleConstantRingMap (T := V) φ)).mapHomologicalComplex (.up ℤ) ≅ (proEtaleRingExtension (proEtaleConstantRingMap (T := X) φ) ⋙ proEtaleConstantRingPullback B f).mapHomologicalComplex (.up ℤ), (∀ (P : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) (n : ℤ), (T.hom.app P).f n = s.inv.app (P.X n) ∧ (T.inv.app P).f n = s.hom.app (P.X n)) ∧ (∀ P : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := proEtaleConstantRing X A) P → (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology X) (R := proEtaleConstantRing X A) (P.X n)) → CochainComplex.IsKFlatIndependentCoefficients (R := proEtaleConstantRing V A) (((proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ)).obj P) ∧ (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology V) (R := proEtaleConstantRing V A) ((((proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ)).obj P).X n)) ∧ (∀ (G : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) (q : P ⟶ G), QuasiIso q → QuasiIso (((proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ)).map q)) ∧ ∀ (K : proEtaleDerivedCategory X A) (i : DerivedCategory.Q.obj P ≅ K), IsIso (excPullbackThenCoefficientComputation φ f P K i) ∧ IsIso (excCoefficientThenPullbackComputation φ f P K i) ∧ (directImageScalarPullbackIso φ f).inv.app K ≫ excCoefficientThenPullbackComputation φ f P K i = excPullbackThenCoefficientComputation φ f P K i ≫ DerivedCategory.Q.map (T.hom.app P))",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Returned-head H2 repair: cite the definition owners of constant scalar operations, scalar mate identifications, constant coefficient ring maps and the three existing scalar-balancing definitions. The scalar-balancing theorem remains a proof dependency. The accepted theorem and helper definitions are unchanged; only DirectImageScalarOperations is imported directly in place of DirectImageScalarExchange. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0d29a352",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery of H2-returned 7e2543702e72. Lean diff = one import (DirectImageScalarExchange→DirectImageScalarOperations); signature/helpers unchanged (H3 verdict of prior review re-confirmed: λ_f.inv direction, α/γ explicit composites, T degreewise s.inv/s.hom, no flatness/bound). stmt_deps: lem-fix-direct-image-scalar-exchange→def-sp-constant-scalar-pullback-comparison, lem-fix-proetale-scalar-mate-normalization→def-sp-proetale-scalar-mate-identifications, lem-sp-proetale-scalar-balancing-chain→new def-exc-proetale-scalar-balancing-data, + def-sp-proetale-constant-coefficient-ring-map (advisory). New node: existing:true on unchanged ProEtaleScalarBalancingChain, decls scalarBalancingBeta/Map/IsScalarBalancing, statement verbatim, text matches β inverse mate, composite and pure-tensor predicate; no dup (strict-quotient balancing is different). Advisory: proEtaleTensorPair owner not cited by new node (body of existing def). No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261024T190401-L-4040620",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

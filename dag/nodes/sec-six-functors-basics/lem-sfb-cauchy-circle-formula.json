@@ -1,0 +1,98 @@
+{
+ "id": "lem-sfb-cauchy-circle-formula",
+ "kind": "statement",
+ "title": "One-variable Cauchy formula on a circle",
+ "statement": "Work over $\\mathbf C$ [def-weil-field]. Let $c\\in\\mathbf C$, let $R>0$, and let $h:\\mathbf C\\to\\mathbf C$ be continuous on $\\{\\zeta:|\\zeta-c|\\leq R\\}$ and complex differentiable at every point of $\\{\\zeta:|\\zeta-c|<R\\}$. Then for every $z$ with $|z-c|<R$,\n$$\\frac{1}{2\\pi i}\\int_{|\\zeta-c|=R}\\frac{h(\\zeta)}{\\zeta-z}\\,d\\zeta=h(z),$$\nwhere the circle is positively oriented, parametrized by $\\zeta=c+Re^{it}$ for $0\\leq t\\leq2\\pi$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I §3.A, Cauchy formula (3.3), printed p.21; the continuous-on-closure version is Mathlib/Analysis/Complex/CauchyIntegral.lean:552. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cauchy integral formula on a circle for a complex differentiable function on the closed disc evaluates the function at any interior point",
+   "results": "[leanfinder] OK 8 hit(s): DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, DifferentiableOn.circleIntegral_sub_inv_smul, DiffContOnCl.circleIntegral_sub_inv_smul, circleAverage_of_differentiable_on, Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable, Complex.two_pi_I_inv_smul_circleIntegral_sub_inv_smul_of_differentiable_on_off_countable, sum_cauchyPowerSeries_eq_integral, DiffContOnCl.deriv_eq_smul_circleIntegral",
+   "date": "2026-10-24",
+   "verdict": "match: DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, Mathlib/Analysis/Complex/CauchyIntegral.lean:552; all hypotheses and normalization read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"two_pi_i_inv_smul_circleIntegral_sub_inv_smul\"",
+   "results": "[loogle] OK 2 hit(s): DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, Complex.two_pi_I_inv_smul_circleIntegral_sub_inv_smul_of_differentiable_on_off_countable",
+   "date": "2026-10-24",
+   "verdict": "match: DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, Mathlib/Analysis/Complex/CauchyIntegral.lean:552; all hypotheses and normalization read"
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem.*two_pi_i_inv_smul_circleIntegral_sub_inv_smul|^theorem.*integral.*[Pp]aram|^theorem.*[Aa]nalytic.*integral",
+   "results": "[grep] OK 8 hit(s): Mathlib/Analysis/Complex/CauchyIntegral.lean, Mathlib/Analysis/Complex/CauchyIntegral.lean, Mathlib/Analysis/BoxIntegral/Integrability.lean, Mathlib/Analysis/BoxIntegral/Integrability.lean, Mathlib/Analysis/BoxIntegral/Integrability.lean, Mathlib/Analysis/BoxIntegral/Basic.lean, Mathlib/Analysis/BoxIntegral/Basic.lean, Mathlib/Analysis/BoxIntegral/Basic.lean; Mathlib/Analysis",
+   "date": "2026-10-24",
+   "verdict": "match: DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, Mathlib/Analysis/Complex/CauchyIntegral.lean:552; all hypotheses and normalization read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cauchy integral formula gives the value of a holomorphic function as a contour integral over a circle containing the point",
+   "results": "[leansearch] OK 8 hit(s): DiffContOnCl.circleIntegral_sub_inv_smul, DifferentiableOn.circleIntegral_sub_inv_smul, DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, circleIntegral.integral_sub_inv_smul_sub_smul, Complex.circleIntegral_sub_center_inv_smul_of_differentiable_on_off_countable, Complex.two_pi_I_inv_smul_circleIntegral_sub_inv_smul_of_differentiable_on_off_countable, Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable, Complex.circleIntegral_div_sub_of_differentiable_on_off_countable",
+   "date": "2026-10-24",
+   "verdict": "match: DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, Mathlib/Analysis/Complex/CauchyIntegral.lean:552; all hypotheses and normalization read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul",
+  "file": "Mathlib/Analysis/Complex/CauchyIntegral.lean",
+  "line": 552,
+  "how": "specializes in one line: take E = C in the declaration at line 552. DiffContOnCl C h (ball c R) is exactly differentiability in the open disc and continuity on its closure, which is the closed disc because R > 0; scalar multiplication is ordinary multiplication."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hartogs-punctured-affine-extension",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. Supporting input: Hartogs extension across the origin in several variables. Cauchy-integral proof of the isolated-puncture input: One-variable Cauchy formula on a circle.",
+   "via": [
+    "lem-sfb-hartogs-punctured-affine-extension",
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

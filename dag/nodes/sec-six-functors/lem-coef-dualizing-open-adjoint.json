@@ -1,0 +1,311 @@
+{
+ "id": "lem-coef-dualizing-open-adjoint",
+ "kind": "statement",
+ "title": "Open structural adjunction with normalized composite counit",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $1\\le m\\le n$. Set $A=\\mathcal O_E/(\\varpi^n)$, $B=\\mathcal O_E/(\\varpi^m)$ [def-weil-finite-field-fiber]. For a separated finite-type $k$-scheme $Y$ [def-weil-proper-morphism, def-weil-finite-type-morphism], write $a_Y:Y\\to s=\\operatorname{Spec}k$, $F_{Y,R}=Ra_{Y,R!}\\dashv G_{Y,R}=a_{Y,R}^{\\times}$, $\\omega_{Y,R}=G_{Y,R}R_s$, and $\\varepsilon_{Y,R}:F_{Y,R}\\omega_{Y,R}\\to R_s$, for $R=A,B$, on ordinary small etale module derived categories [def-weil-pbc-derived-categories, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Let $T_Y=-\\otimes_A^LB$ [def-kun-derived-tensor], and denote the canonical compact-support coefficient comparison by $c_{Y,K}:T_sF_{Y,A}K\\to F_{Y,B}T_YK$ [lem-fix-compact-support-coefficient-change]. Here bounded constructible finite-Tor means constructible cohomology, zero outside a finite interval, and integers $a\\le b$ such that tensoring with every degree-zero module sheaf has cohomology only in $[a,b]$ [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. Let $j:U\\hookrightarrow Y$ be an affine open subscheme. It is a quasi-compact separated etale morphism of finite type. The open compact-support candidate for $U\\xrightarrow jY\\xrightarrow{1}Y$ is exact termwise $j_{!,R}$, left adjoint to $j^*$, with evaluation counit $e_{R,W}:j_{!,R}j^*W\\to W$ [def-weil-pbc-extension-by-zero, lem-amb-etale-adjoint-locality]. There are canonical counit-preserving identifications\n$$j^*\\omega_{Y,R}\\cong\\omega_{U,R},\\qquad F_{U,R}\\cong F_{Y,R}j_{!,R},$$\nand, using these identifications,\n$$\\varepsilon_{U,R}=\\varepsilon_{Y,R}\\circ F_{Y,R}(e_{R,\\omega_{Y,R}}).$$\nFor bounded-below inputs the identifications are the ones induced by the ordinary etale structural adjunctions and the canonical compact-support compositor [lem-amb-etale-compact-comparisons, def-weil-pbc-composite-adjunction]; thus the evaluation counit in this formula is the specified one. There is also the canonical coefficient-tensor identification $j^*T_Y\\cong T_Uj^*$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed; extraction of the expanded retained stage-1 proof, steps 20,21"
+ },
+ "stmt_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-proper-morphism",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-conventions",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-support-compositor"
+ ],
+ "proof": [
+  {
+   "text": "Obtain local Noetherianity of Y from finite type over Spec k, and compactness from quasi-compactness of its structural morphism. Restriction to the affine open U gives local Noetherianity, while affineness gives compactness. Thus U and Y are Noetherian. Mathlib instances give quasi-compactness of j (compact source and quasi-separated target), separatedness, etaleness and local finite type. Nagata gives compactifications of aY and j followed by aY; the open immersion has its standard compactification.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "def-asd-compactifiable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed; extraction of the expanded retained stage-1 proof, steps 20,21"
+   }
+  },
+  {
+   "text": "The open extension/restriction adjunction is the existing degreewise derived evaluation adjunction. Compose it with adjY, transport its left functor along coefDualizingOpenLeftIso, and apply rightAdjointUniq_hom_app_counit at the constant coefficient complex. The definition of transport and the composite counit give exactly CoefDualizingOpenCounitStatement. This works for arbitrary G, H and structural adjunctions, at both coefficient levels.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed; extraction of the expanded retained stage-1 proof, steps 20,21"
+   }
+  },
+  {
+   "text": "Apply coefDualizingOpenCompositorPlus at each of the two finite coefficient levels. Its statement is exactly the bounded-below component CoefDualizingOpenPlusStatement after unfolding the real comparison definitions.",
+   "uses": [
+    "lem-coef-dualizing-open-compositor-plus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed; extraction of the expanded retained stage-1 proof, steps 20,21"
+   }
+  },
+  {
+   "text": "The tensor/open-restriction isomorphism and finite coefficient reduction are already real constructions coefDualizingOpenTensorIso and coefDualizingOpenReduction. The former transports the published K-flat-normalized B-linear scalarPullbackIso along exact inverse-image comparisons. No new tensor theorem or flatness assumption is needed. Assemble the four geometric properties, both counit equations and both bounded-below equations by conjunction.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed; extraction of the expanded retained stage-1 proof, steps 20,21"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-compactifiable",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-extension-by-zero",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-coef-dualizing-open-compositor-plus",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "pqf-lem-affine-open-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed; extraction of the expanded retained stage-1 proof, steps 20,21; M3 Lean assembly: adjunction uniqueness, derived identity normalization, and pasting the published comparison/composition restriction squares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine open in a separated finite type scheme the structural etale exceptional adjoint restricts with the composite extension by zero evaluation counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : (TopologicalSpace.Opens ↥X)ᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Hom.toLRSHom (X.ofRestrict h)).c.app V =\\n \", \"doc\": \"For a scheme $X$, open subset $U$, open immersion $h: U \\\\to X$, and open set $V$ in $X$, the sheaf component of the morphism $X|_U \\\\to X$ at $V$ equals the map induced by the counit of the adjunction \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : X.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (X.ofRestrict h) V = X.presheaf.map (⋯.adjunction.counit.\", \"doc\": \"For a scheme $X$, an open subset $U$ with open immersion $h: U \\to X$, and an open set $V$ in $X$, the component of the morphism $X|_U \\to X$ at $V$ is equal to the presheaf map of $X$ applied to the co\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U),\\n  CategoryTheory.CategoryStruct.comp hU.fromSpec X.toSpecΓ =\\n    AlgebraicGeometry.Spec.map (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)\", \"doc\": \"For a scheme $X$ and an affine open subset $U \\\\subseteq X$, the composition of the inclusion morphism $\\\\operatorname{Spec}(\\\\Gamma(U)) \\\\to X$ with the unit morphism $X \\\\to \\\\operatorname{Spec}(\\\\Gamma(X)\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]\\n  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op { carrier := R, commRing := inst })\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.obj\\n                (O\", \"doc\": \"For a locally ringed space $X$ and commutative ring $R$, the composition of the structure sheaf morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(U) \\\\to R$ with the component of the Γ-Spec adjunction hom\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) (V : X.Opens) (h : U ≤ V),\\n  AlgebraicGeometry.Scheme.Hom.app hU.fromSpec V =\\n    CategoryTheory.CategoryStruct.comp (X.presheaf.map (CategoryTheory.homOfLE h).op)\\n      (CategoryTheory.CategoryStruct.comp (Algebr\", \"doc\": \"For an affine open subset $U$ of a scheme $X$ and an open subset $V$ containing $U$, the component of the morphism $\\\\operatorname{Spec}(\\\\Gamma(U)) \\\\to X$ at $V$ equals the composition of three maps: (\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  CategoryTheory.CategoryStruct.comp U.toSpecΓ\\n      (AlgebraicGeometry.Spec.map (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) =\\n    CategoryTheory.CategoryStruct.comp U.ι X.toSpecΓ\", \"doc\": \"For a scheme $X$ and an open subset $U \\\\subseteq X$, the composition of the unit morphism $U \\\\to \\\\operatorname{Spec}(\\\\Gamma(U))$ with the morphism induced by the presheaf restriction map $\\\\Gamma(X) \\\\t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Modules restriction adjunctions are for structural O-modules on the Zariski site, not constant finite coefficients on the small etale site, and do not give compact-support structural counits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion compact support right adjoint locality canonical mate and evaluation counit",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.Functor.id C ⊣ CategoryTheory.Functor.id C\", \"doc\": \"The adjunction between the identity functor on a category and itself.\"}\n  {\"name\": \"CategoryTheory.Adjunction.instInhabitedId\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : Inhabited (CategoryTheory.Functor.id C ⊣ CategoryTheory.Functor.id C)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor D C) : Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"`F ⊣ G` represents the data of an adjunction between two functors\\n`F : C ⥤ D` and `G : D ⥤ C`. `F` is the left adjoint and `G` is the right adjoint.\\n\\nWe use the unit-counit definition of an adjunction\"}\n  {\"name\": \"CategoryTheory.Equivalence.toAdjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.functor ⊣ e.inverse\", \"doc\": \"The adjunction given by an equivalence of categories. (To obtain the opposite adjunction,\\nsimply use `e.symm.toAdjunction`.)\"}\n  {\"name\": \"CategoryTheory.Equivalence.toAdjunction'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.inverse ⊣ e.functor\", \"doc\": \"`toAdjunction'` is the dual of `ToAdjunction`, which we need for `to_dual`.\\nPlease avoid using this directly.\"}\n  {\"name\": \"CategoryTheory.Adjunction.isLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : F.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : G ⊣ F) : F.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mk'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction from the data of a `CoreHomEquivUnitCounit`, i.e. a hom set\\nequivalence, unit and counit natural transformations together with proofs of the equalities\\n`homEquiv_unit` and `hom\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquiv F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between `F` and `G` out of a natural bijection between each\\n`F.obj X ⟶ Y` and `X ⟶ G.obj Y`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between functors `F` and `G` given a unit and counit for the adjunction\\nsatisfying the triangle identities.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (left : CategoryTheory.Functor C D) [left.IsLeftAdjoint] : left ⊣ left.rightAdjoint\", \"doc\": \"The adjunction associated to a functor known to be a left adjoint.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (right : CategoryTheory.Functor C D) [right.IsRightAdjoint] : right.leftAdjoint ⊣ right\", \"doc\": \"The adjunction associated to a functor known to be a right adjoint.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Modules restriction adjunctions are for structural O-modules on the Zariski site, not constant finite coefficients on the small etale site, and do not give compact-support structural counits."
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion|extensionByZero",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Geometry.RingedSpace.OpenImmersion\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"line\": \"31\", \"text\": \"* `AlgebraicGeometry.PresheafedSpace.GlueData.ιIsOpenImmersion`: The map `ι i : U i ⟶ glued`\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"line\": \"67\", \"text\": \"open AlgebraicGeometry.PresheafedSpace.IsOpenImmersion\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"line\": \"99\", \"text\": \"  f_open : ∀ i j, IsOpenImmersion (f i j)\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"line\": \"116\", \"text\": \"  (PresheafedSpace.IsOpenImmersion.pullbackFstOfRight (D.f i j) (D.f i k)).invApp\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"line\": \"22\", \"text\": \"* `AlgebraicGeometry.PresheafedSpace.IsOpenImmersion`: the `Prop`-valued typeclass asserting\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"line\": \"24\", \"text\": \"* `AlgebraicGeometry.IsOpenImmersion`: the `Prop`-valued typeclass asserting\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"line\": \"26\", \"text\": \"* `AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict`: The source of an\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"line\": \"28\", \"text\": \"* `AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift`: Any morphism whose range is\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"line\": \"30\", \"text\": \"* `AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace`: If `f : X ⟶ Y` is an\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Geometry.RingedSpace.OpenImmersion\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Geometry.RingedSpace.OpenImmersion\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"203\", \"text\": \"    LocallyRingedSpace.IsOpenImmersion\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"231\", \"text\": \"  hom := LocallyRingedSpace.IsOpenImmersion.lift\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"234\", \"text\": \"  inv := LocallyRingedSpace.IsOpenImmersion.lift\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"57\", \"text\": \"instance : IsOpenImmersion U.ι := inferInstanceAs (IsOpenImmersion (X.ofRestrict _))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"203\", \"text\": \"  (IsOpenImmersion.opensEquiv (U.ι)).trans (Equiv.subtypeEquivProp (by simp))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"219\", \"text\": \"  exact (PresheafedSpace.IsOpenImmersion.ofRestrict_invApp _ _ _).trans\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"242\", \"text\": \"  IsOpenImmersion.lift V.ι U.ι (by simpa using e)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"247\", \"text\": \"  IsOpenImmersion.lift_fac _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"835\", \"text\": \"  have : LocallyRingedSpace.IsOpenImmersion (toSpec 𝒜 f) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"836\", \"text\": \"    LocallyRingedSpace.IsOpenImmersion.of_stalk_iso (toSpec 𝒜 f)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"838\", \"text\": \"  exact LocallyRingedSpace.IsOpenImmersion.to_iso _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"193\", \"text\": \"instance : IsOpenImmersion (Proj.awayι 𝒜 f f_deg hm) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"194\", \"text\": \"  IsOpenImmersion.comp _ _\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Modules restriction adjunctions are for structural O-modules on the Zariski site, not constant finite coefficients on the small etale site, and do not give compact-support structural counits."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension.*zero",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Modules restriction adjunctions are for structural O-modules on the Zariski site, not constant finite coefficients on the small etale site, and do not give compact-support structural counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion compact support right adjoint locality canonical mate and evaluation counit in ordinary etale derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\", \"module\": \"Mathlib/Geometry/RingedSpace/SheafedSpace\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {U : TopCat} (X : AlgebraicGeometry.SheafedSpace C)\\n  {f : U ⟶ ↑X.toPresheafedSpace} (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  (V : (TopologicalSpace.Opens ↑↑X.toPresheafedSpace)ᵒᵖ),\\n  (X.ofRestrict h).hom.c.app\", \"doc\": \"For a sheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U$ of $X$'s underlying space, and an open embedding $f: U \\\\to X$, the presheaf component of the morphism $X|_U \\\\to X$ is given by\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous and cocontinuous sheaf pu\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Modules restriction adjunctions are for structural O-modules on the Zariski site, not constant finite coefficients on the small etale site, and do not give compact-support structural counits."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|exceptionalAdjoint|extensionByZero",
+   "results": "OK; 10 hits; top hits: Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean; result digest cff4eaf4dd172c03",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Zariski structure sheaf modules, ordinary restriction, or unrelated uses of dualizing; none states this ordinary etale compact-support and structural counit assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of an etale dualizing complex along an open immersion preserves the structural evaluation counit",
+   "results": "OK; 8 hits; top hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, ModuleCat.RestrictionCoextensionAdj.counit', AlgebraicGeometry.Scheme.ofRestrict, AlgebraicGeometry.StructureSheaf.res_apply, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; result digest b178c52a77cc9dbe",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Zariski structure sheaf modules, ordinary restriction, or unrelated uses of dualizing; none states this ordinary etale compact-support and structural counit assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "OK; 12 hits; top hits: CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit; result digest ac2dfcadb3e25da5",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction composition/uniqueness proves only the categorical assembly, not the ordinary etale structural compact-support comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion restriction of the dualizing complex, compact support composite adjunction and evaluation counit",
+   "results": "OK; 8 hits; top hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app, AlgebraicGeometry.Scheme.ofRestrict_app; result digest 8c2a148b3482474e",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Zariski structure sheaf modules, ordinary restriction, or unrelated uses of dualizing; none states this ordinary etale compact-support and structural counit assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition of compactly supported etale cohomology functors and restriction of exceptional inverse image to an open subscheme",
+   "results": "OK; 8 hits; top hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.restrict_presheaf_map, AlgebraicGeometry.Scheme.ofRestrict_appLE; result digest f8a173e71a225756",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Zariski structure sheaf modules, ordinary restriction, or unrelated uses of dualizing; none states this ordinary etale compact-support and structural counit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|comp_counit_app",
+   "results": "OK; 9 hits; top hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; result digest a2559fd032367402",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction composition/uniqueness proves only the categorical assembly, not the ordinary etale structural compact-support comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-dualizing",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-dualizing-open-adjoint",
+  "worker": "stage1",
+  "summary": "Q65: five-step assembly of the exact open evaluation adjunction, unbounded compact-support compositor, counit-normalized right-adjoint uniqueness, bounded-below restriction and derived coefficient tensor comparison. Statement unchanged; no new nodes and no Lean attachment. All cited statements read and quoted in citations.json. Maintainer reader (Q65 review): added Step 1 proving the statement's clause that j is a quasi-compact separated etale finite-type morphism, the Noetherianity of Y and U and compactifiability (argument of the retained parent step 20, dropped by the delivery); Step 5 now gives the chain-level K-flat argument for the B-linear tensor comparison.",
+  "blueprint": "Realizes the first sentence of proof paragraph 2 of lem-coef-finite-dualizing: ordinary etale locality, with the structural composite counit fixed. The open formula needed by the subsequent coefficient-mate calculation is proved explicitly.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "The categorical definition supplies the composite Hom bijection and its exact counit formula."
+   },
+   {
+    "node": "def-weil-pbc-extension-by-zero",
+    "why": "Defines the particular open extension presheaf, identifying the open special case of sum extension."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "The counit-normalized uniqueness theorem identifies the two right adjoints, rather than only asserting some isomorphism."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Exact ordinary unbounded etale sum-extension/restriction adjunction; generic tool for the open-locality sentence."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Identifies the named bounded-below comparator; no extension from bounded-below objects is inferred from it."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Supplies the unbounded left compositor and its explicit bounded-below restriction; the unit has no replacement for this compact-support tool."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Normalizes compact support along an etale map to exact sum extension on unbounded ordinary derived categories, including evaluation."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Specifies the actual evaluation counit on sheaves; needed to pin down the derived counit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic unbounded ringed-topos tensor/pullback theorem, specialized to open restriction and a constant coefficient quotient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-extension-by-zero",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-98e8dbd40",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-98e8dbd40 (reviewer sub-agent of L); spot-checked: FIX: two repairable faults, both repaired in fixes/dag/nodes/sec-six-functors/lem-coef-dualizing-open-adjoint.json.\n\nBackground: the item is the open-adjoint node split off by O4's re-split of lem-coef-finite-dualizing (old steps 20-21). Live and side-live still have it unsplit with the same statement, so this delivery is not superseded. It creates no new nodes, adds no cycle (I checked reachability from every cited node, the added ones included) and cites no SGA. It follows main-20261015 lem-coef-finite-dualizing proof paragraph 2, the locality sentence. I checked Stacks 07A4, 0G7E and 0DV0.\n\nWhat holds: the main argument is correct. The composite counit d=ε_Y∘F(e_G) matches def-weil-pbc-composite-adjunction. Moving F_U⊣G_U across along β gives the counit ε_U∘β. det-sp-unique-right-adjoint then gives θ with ε_U∘β∘FJ(θ)=d, and at R_s this is exactly the stated formula. β=α_{a_Y,j}∘F(n^{-1}) has the right types. Restricting to bounded-below inputs uses the last clause of the unbounded-comparisons node.\n\nFault 1 (C1/E1): the statement asserts 'j is a quasi-compact separated etale morphism of finite type', but the delivered proof assumes it as given. It also takes Noetherianity of Y and U and compactifiability of a_Y, a_U and j for granted. These are needed for adjoint-locality, the compact-support normalization and the unbounded compositor. Old step 20 proved them and the delivery dropped that argument. Repair: a new Step 1 citing pqf-lem-locnoeth-lft, pqf-lem-affine-open-locnoeth, lem-weil-pbc-open-immersion-etale, lem-weil-pbc-locally-noetherian-quasi-separated (affine∩affine is quasi-compact, so j is quasi-compact), lem-weil-pbc-qc-open-immersion-finite-type and def-asd-compactifiable, with (j,1_Y) as the compactification of j.\n\nFault 2 (E5): Step 5 argued 'B-linearity follows since the comparison preserves the B action'. That is not a proof: the cited lemma works over the one ring A, and commuting with the B-action in D(A) does not give an isomorphism of B-complexes. Repair: a chain-level argument. Take a K-flat resolution P→K with flat terms. j^*P is K-flat (lemma clause), and restriction commutes with tensor products, so j^*(P⊗_A B_Y)=j^*P⊗_A B_U as B_U-complexes, naturally in K. No flatness of A→B is used.\n\nSteps were renumbered (6 steps), cross-references updated and proof_deps recomputed. Statement, stmt_deps and blueprint are unchanged.\n\nEdge cases checked: U empty, U=Y, m=n, unbounded K.\n\nDuplicate search: the pro-etale and section-site open counit nodes are not duplicates. The declared tool_uses are accepted as generic black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientDualizingOpenAdjoint",
+  "declaration": "AlgebraicGeometry.Etale.coefDualizingOpenAdjoint",
+  "declarations": [
+   "AlgebraicGeometry.Etale.coefDualizingOpenRightIso",
+   "AlgebraicGeometry.Etale.CoefDualizingOpenCounitStatement",
+   "AlgebraicGeometry.Etale.coefDualizingOpenTensorIso",
+   "AlgebraicGeometry.Etale.coefDualizingOpenReduction",
+   "AlgebraicGeometry.Etale.CoefDualizingOpenAdjointStatement",
+   "AlgebraicGeometry.Etale.coefDualizingOpenAdjoint"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientDualizingOpenAdjoint.lean",
+  "statement": "theorem coefDualizingOpenAdjoint (P : WeilConjectures.PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 ≤ m) (_hmn : m ≤ P.level) (Y U : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) (j : U ⟶ Y) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsOpenImmersion j] [IsAffine U] : CoefDualizingOpenAdjointStatement P m hm Y U aY j",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repairs H2/H3 at immutable returned head 692c626d5542. The compositor definition is cited through its owning existing definition node def-sf-etale-support-compositor; the theorem remains proof-only. The bounded-below clause compares coefDualizingOpenLeftIso itself to coefDualizingOpenLeftPlusIso, which uses the canonical compactification comparison to (j, identity), the derived identity normalization and rightDerivedLowerShriekPlusCompIso. The generic copied composition clause and generic evaluation-compatibility clause are removed. The right identification remains its counit-normalized right-adjoint uniqueness mate. Both coefficient levels and all previously accepted clauses are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2169c813",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of 692c626d5542 (RETURN H2+H3). Both corrections applied and nothing else changed (checked by diffing the snapshot, module and node record). H2: stmt_dep lem-amb-unbounded-compact-support-comparisons replaced by def-sf-etale-support-compositor (existing:true record of unboundedEtaleLowerShriekCompIso); the theorem remains in proof_deps. H3: the copied dependency conjunct and the generic counit-compatibility conjunct are removed. New real-data def coefDualizingOpenLeftPlusIso = inverse of the D+ open normalization (rightDerivedLowerShriekOfCompactificationPlusIso to ofIsOpenImmersion j, then lowerStarIdDerivedPlus, then unitor), whiskered by Rf_!+ and followed by rightDerivedLowerShriekPlusCompIso. CoefDualizingOpenPlusStatement now asserts this agrees on D+ with coefDualizingOpenLeftIso itself, through the Plus compatibilities; types checked by hand, both sides ι(Rf_!+ j_!+ K) -> R(jf)_!(ιK); the two sides are different constructions, so the clause has content; stated at both levels A and B. The right iso remains the rightAdjointUniq mate of the left iso, so it is pinned once the left iso is. lean.statement verbatim; all 10 declarations present; a single sorry, in the theorem. Edge cases U empty, U=Y, m=n, m=1 and unbounded K are admitted. No compile (no file changed). Advisories: lowerStarIdDerivedPlus and rightDerivedLowerStarIdIso have no node record; rightDerivedLowerShriekOfCompactificationPlusIso and rightDerivedLowerShriekPlusCompIso are bound only through the mixed record of the theorem stmt_dep lem-amb-etale-compact-comparisons (same treatment as 692c gave rightDerivedLowerShriekPlusCompIso); the report entry for that node lists only its theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8b1b9",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261025T163853-L-878364",
+  "kind": "interface",
+  "note": "independent cc review: item conjunct CoefDualizingOpenPlusStatement vs new sorry theorem coefDualizingOpenCompositorPlus (same statement, item hypotheses); moved defs vs clone bodies (verbatim); item node vs clone (proof fields + lean.declarations + tool_uses only)"
+ }
+}

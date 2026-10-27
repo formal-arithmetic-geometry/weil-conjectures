@@ -1,0 +1,639 @@
+{
+ "id": "lem-coef-system-internal-hom-representability",
+ "kind": "statement",
+ "title": "Sequence-site internal Hom and punctual representation of mapping systems",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$ and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be separated finite type between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], with compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements]. For $W=X,Y,\\overline X$ and $\\tau=\\mathrm{et},\\mathrm{proet}$ [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], let $\\mathscr S_W^\\tau$ be the category of strict systems of $(A_n)_W$-module sheaves with semilinear quotient transitions and componentwise morphisms [lem-pur-coefficient-system-derived-comparison]; use its ordinary unbounded derived category [def-weil-abstract-derived-category], exact evaluations $e_n$ and, for $m\\ge n\\ge1$, derived quotient functors $T^W_{m,n}=-\\otimes^L_{A_m}A_n$ [def-weil-derived-tensor]. Write $t^M_{m,n}:T^W_{m,n}M_m\\to M_n$ for the scalar-extension adjunct of the actual transition. \nLet $W=X$ or $Y$, write $H_W^{\\mathrm{sys}}(M,N)$ for derived internal Hom on the ringed sequence site [def-pur-derived-internal-hom], and use for normalized $M$ [def-coef-normalized-dvr-tower] (every $t_{m,n}$ invertible) and arbitrary $N$ the canonical identifications\n$$e_nH_W^{\\mathrm{sys}}(M,N)\\cong R\\mathcal Hom_{A_n}(M_n,N_n),$$\ncarrying system evaluation to ordinary tensor-Hom evaluation, of [lem-coef-semilinear-derived-sections]; they exist on both sites $\\tau$. If $M,N\\in D(\\mathscr S_W^{\\mathrm{proet}})$ are both normalized, the comparison from the fiberwise Hom system $\\mathcal I_W(M,N)$ [lem-coef-derived-system-evaluation-calculus] to $H_W^{\\mathrm{sys}}(M,N)$, defined as the closed transpose of its system evaluation, is invertible; under these identifications it evaluates to the identity of $R\\mathcal Hom_{A_n}(M_n,N_n)$.\nNow let $M,N\\in D(\\mathscr S_W^{\\mathrm{et}})$ be normalized with bounded constructible finite-Tor levels [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude]. The tensor/evaluation-defined comparison along [def-weil-pbc-site-comparison-morphism]\n$$\\nu_W^*H_{W,\\mathrm{et}}^{\\mathrm{sys}}(M,N)\\longrightarrow H_{W,\\mathrm{proet}}^{\\mathrm{sys}}(\\nu_W^*M,\\nu_W^*N)$$\nis invertible. For $s=\\operatorname{Spec}k$ and $a_W:W\\to s$, the etale coefficient system\n$$\\widehat{\\mathcal H}_W(M,N)=Ra_{W,*,\\bullet}^{\\mathrm{et}}H_{W,\\mathrm{et}}^{\\mathrm{sys}}(M,N)$$\nrepresents $P\\mapsto\\operatorname{Hom}(a_W^*P\\otimes^LM,N)$ on $D(\\mathscr S_s^{\\mathrm{et}})$ (for this representability alone no finiteness of $M,N$ is needed). Its underlying abelian tower identifies canonically with $\\mathcal H_W(\\nu_W^*M,\\nu_W^*N)$, the pro-etale mapping system obtained by total termwise derived global sections of $\\mathcal I_W(\\nu_W^*M,\\nu_W^*N)$. This comparison uses the site-comparison unit and derived pushforward composition, preserves evaluation and transposition, and imposes no common bound on the levels.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second proof paragraph, both finite RHom expressions: internal Hom evaluation and etale punctual representing object; returned steps 11-12. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-semilinear-derived-sections",
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the semilinear derived-sections calculus to the coefficient ring sequence on each chosen site. It supplies the canonical fiber identification for normalized $M$ and arbitrary $N$, including its evaluation normalization. For normalized pro-etale $M,N$, transpose the actual system evaluation $\\mathcal I_W(M,N)\\otimes^LM\\to N$ using closedness on the sequence ringed site. The evaluated transpose is the transpose of ordinary evaluation, hence the identity of $R\\mathcal Hom_{A_n}(M_n,N_n)$. Every evaluation of this comparison is therefore invertible, so joint conservativity makes the system comparison invertible. This uses existence of the evaluation map in the fiberwise-system lemma, rather than lifting an arbitrary family of maps.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, mapping-system comparison: assembly step 1"
+   }
+  },
+  {
+   "text": "For etale normalized $M,N$ as in the statement, take the canonical ringed-topos pullback-Hom comparison on the sequence sites: its transpose is inverse-image of system evaluation after the tensor pullback comparison. Exact inverse image commutes with coefficient extension and hence preserves normalization. Evaluating this actual map and using the normalized Hom identifications gives the finite-level evaluation-defined comparison $\\nu_W^*R\\mathcal Hom_{A_n}(M_n,N_n)\\to R\\mathcal Hom_{A_n}(\\nu_W^*M_n,\\nu_W^*N_n)$. The finite constructible comparison theorem applies: $W$ is finite type over $\\overline{\\mathbf F}_q$, $M_n$ is bounded constructible finite-Tor, and $N_n$ is bounded constructible. All evaluated maps are invertible, so the system comparison is invertible. No common interval is used.",
+   "uses": [
+    "lem-coef-ringed-pullback-hom-evaluation-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "thm-sf-hom-comparison-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, mapping-system comparison: assembly step 2"
+   }
+  },
+  {
+   "text": "Put $J=H_{W,\\mathrm{et}}^{\\mathrm{sys}}(M,N)$. Apply system inverse-image/direct-image adjunction to the structure morphism, and then the closed tensor-Hom adjunction on its source sequence ringed site. For every $P\\in D(\\mathscr S_s^{\\mathrm{et}})$ this gives natural bijections $\\operatorname{Hom}(P,Ra_{W,*,\\bullet}^{\\mathrm{et}}J)\\cong\\operatorname{Hom}(a_W^*P,J)\\cong\\operatorname{Hom}(a_W^*P\\otimes^LM,N)$. The forward map is explicitly $h\\mapsto\\mathrm{ev}\\circ(\\varepsilon_J\\otimes1_M)\\circ(a_W^*h\\otimes1_M)$, with $\\varepsilon$ the structure-morphism counit. The inverse first curries and then takes the structure-morphism adjunct. The two adjunction identities prove they are inverse. This proves representability for arbitrary ambient $M,N$, independently of normalization and finiteness.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, mapping-system comparison: assembly step 3"
+   }
+  },
+  {
+   "text": "Return to the finite-Tor constructible inputs. Form the actual system unit $J\\to R\\nu_{W,*,\\bullet}\\nu_W^*J$. Its evaluation is the ordinary site-comparison unit at $J_n=R\\mathcal Hom_{A_n}(M_n,N_n)$. The finite constructible-Hom theorem makes $J_n$ bounded constructible finite-Tor, so $J_n$ and $\\nu_W^*J_n$ lie in $D^+$. A bounded-below injective resolution of $\\nu_W^*J_n$ is K-injective [lem-weil-pbc-dplus-injective-representative](2), so the unbounded $R\\nu_{W,*,n}$ and its unit agree at $J_n$ with the bounded-below direct image and unit of the site-comparison theorem; thus the bounded-below full-faithfulness theorem makes this level unit invertible. Joint conservativity of exact system evaluation proves that the system unit is invertible even if the lower bounds of $J_n$ vary with $n$. Combine it with step 2 and the inverse of step 1 on the pro-etale side to obtain a specified isomorphism $J\\cong R\\nu_{W,*,\\bullet}\\mathcal I_W(\\nu_W^*M,\\nu_W^*N)$.",
+   "uses": [
+    "cor-weil-finite-constructible-hom",
+    "thm-weil-pbc-site-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, mapping-system comparison: assembly step 4"
+   }
+  },
+  {
+   "text": "On $s=\\operatorname{Spec}k$, the absolute Galois group is trivial. The abelian stalk equivalence and its terminal-section identification therefore identify etale abelian sheaves with abelian groups by the actual global-sections functor. It is exact, since an equivalence preserves kernels and cokernels. Adding $A_n$ actions and the transition equations gives the same identification for semilinear coefficient systems; forgetting the actions gives their underlying abelian towers. The inverse equivalence acts on the abelian groups and every scalar endomorphism, so no finite-generation condition occurs. Exactness and the exact-functor localization theorem identify derived point sections with this termwise underlying-tower functor.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-sc-etale-global-sections-galois-invariants",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, mapping-system comparison: assembly step 5"
+   }
+  },
+  {
+   "text": "Apply $Ra_{W,*,\\bullet}^{\\mathrm{et}}$ to the isomorphism in step 4, then take the point sections of step 5. Derived pushforward composition on the sequence ringed topoi identifies the result with total derived termwise sections of $\\mathcal I_W(\\nu_W^*M,\\nu_W^*N)$ on the pro-etale site: both composites are the terminal sections functor on the pro-etale sequence site. Use the canonical composition comparison, followed by the scalar-forgetting/sections comparison of the sequence global-sections lemma: termwise sections followed by forgetting scalars equals termwise scalar restriction $U_W$ followed by termwise sections, and since forgetting scalars and $U_W$ are exact they are their own derived functors, so two further composition comparisons identify the derived composites with $R\\Gamma^{\\operatorname{Tow}}\\circ U_W$ as maps in $D(\\operatorname{Tow}(\\operatorname{Ab}))$, whose evaluations are the level identifications of that lemma. By the definition in the evaluation-calculus lemma this is $\\mathcal H_W(\\nu_W^*M,\\nu_W^*N)$. All arrows have been constructed before evaluation. The pullback-Hom arrow preserves evaluation and transposes by its cited normalization; the unit and composition arrows are the adjunction words, and system evaluation commutes with these transposes by the semilinear calculus. Thus this is the stated evaluation-preserving comparison. The sole bounded-below argument was at each separate $J_n$ in step 4; the pushforwards and composition here are unbounded.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-ringed-pullback-hom-evaluation-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, mapping-system comparison: assembly step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-coef-ringed-pullback-hom-evaluation-comparison",
+  "thm-sf-hom-comparison-constructible",
+  "cor-weil-finite-constructible-hom",
+  "thm-weil-pbc-site-comparison",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-sc-etale-global-sections-galois-invariants",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-coef-sequence-global-sections-evaluation",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second paragraph, finite mapping complexes: assembly from existing ordinary-system calculus and finite Hom comparison; Stacks 08J9, 0D6E, 04JQ and 04JM supply the general categorical tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of cartesian strict derived coefficient systems evaluates to fiber internal Hom and its derived sections represent tensoring by test coefficient systems with etale proetale comparison",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "LightCondensed.ihomPoints",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "(R : Type u) →\n  [inst : CommRing R] →\n    (A B : LightCondMod R) →\n      (S : LightProfinite) →\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)",
+      "doc": "Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections "
+     },
+     {
+      "name": "LightCondensed.ihomPoints_symm_comp",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\n  (LightCondensed.ihomPoints R P B S).symm\n      (CategoryTheory.CategoryStruct.comp\n        (Cat",
+      "doc": "Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\Phi_T$, between the sections"
+     },
+     {
+      "name": "LightCondensed.ihom_map_val_app",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (A B P : LightCondMod R) (S : LightProfinite) (e : A ⟶ B)\n  (x : ↑((P ⟹ A).val.obj (Opposite.op S))),\n  (CategoryTheory.ConcreteCategory.hom (((CategoryTheory.ihom P).map e).val.app (Opposite.op S))) x =\n    (LightCondensed.ihomPoints R P B S).symm\n      (CategoryT",
+      "doc": "For any light condensed $ R $-modules $ A $, $ B $, $ P $, a light profinite space $ S $, a morphism $ e: A \to B $, and an element $ x $ in the hom-set $ [P, A](S) $, the application of the internal h"
+     },
+     {
+      "name": "LightCondensed.ihomPoints_apply",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite) (x : ↑((A ⟹ B).val.obj (Opposite.op S))),\n  (LightCondensed.ihomPoints R A B S) x =\n    CategoryTheory.MonoidalClosed.uncurry\n      (((LightCondensed.freeForgetAdjunction R).homEquiv ((CategoryTheory.coherentTopology Ligh",
+      "doc": "For any commutative ring $ R $, light condensed $ R $-modules $ A $ and $ B $, and a light profinite space $ S $, the points of the internal hom-object $ [A, B] $ at $ S $ are given by uncurrying the "
+     },
+     {
+      "name": "LightCondensed.ihomPoints_symm_apply",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite)\n  (x : CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\n  (LightCondensed.ihomPoints R A B S).symm x =\n    (CategoryTheory.coherentTopology LightProfinite).yonedaEquiv\n  ",
+      "doc": "For any objects $A, B$ in the category of light condensed $R$-modules and a light profinite space $S$, the inverse of the internal hom points map $\\text{ihomPoints}_R(A, B, S)$ evaluated at a morphism"
+     },
+     {
+      "name": "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj ",
+      "doc": "For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,"
+     },
+     {
+      "name": "LightCondensed.internallyProjective_iff_tensor_condition'",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\n  CategoryTheory.InternallyProjective P ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\n     ",
+      "doc": "Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\to B$ of light condensed $R$-modules, any light profinite space $S$"
+     },
+     {
+      "name": "LightCondensed.free_internallyProjective_iff_tensor_condition",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj ",
+      "doc": "For a light condensed set $ P $, the free $ R $-module $ \\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\to B"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ihom.adjunction and internalHomAdjunction2 assume a closed category; they do not identify sequence-site internal Hom with cartesian fiber Hom or its proetale global mapping-system representation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global mapping towers on normalized quotient coefficient systems are represented by ordinary derived sequence site internal Hom and punctual etale sections",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap",
+      "module": "Mathlib/AlgebraicGeometry/Normalization",
+      "type": "{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f",
+      "doc": "A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $."
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+      "module": "Mathlib/AlgebraicGeometry/Normalization",
+      "type": "{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat",
+      "doc": "The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\Gamma(Y, U) $ in $ \\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\subseteq U $ the induced ri"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+      "module": "Mathlib/AlgebraicGeometry/Normalization",
+      "type": "{X Y : AlgebraicGeometry.Scheme} →\n  (f : X ⟶ Y) →\n    [inst : AlgebraicGeometry.QuasiCompact f] →\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\n        {T : AlgebraicGeometry.Scheme} →\n          (f₁ : X ⟶ T) →\n            (f₂ : T ⟶ Y) →\n              [AlgebraicGeometry.IsIntegralHom f₂] →\n ",
+      "doc": "A morphism from the normalization of a scheme morphism $ f: X \to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ "
+     },
+     {
+      "name": "StandardEtalePair.lift",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "{R : Type u_1} →\n  {S : Type u_2} →\n    [inst : CommRing R] →\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S",
+      "doc": "Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co"
+     },
+     {
+      "name": "StandardEtalePair.homEquiv",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "{R : Type u_1} →\n  {S : Type u_2} →\n    [inst : CommRing R] →\n      [inst_1 : CommRing S] →\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }",
+      "doc": "For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\n$$ \\operatorname{Hom}_{R\\text{-alg}}(P.\\text{Ring}, S) \\cong \\"
+     },
+     {
+      "name": "StandardEtalePair.instFormallyEtaleRing",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring",
+      "doc": "For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+      "module": "Mathlib/AlgebraicGeometry/Normalization",
+      "type": "∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\n      (AlgebraicGeometry.Scheme.Hom.no",
+      "doc": "For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\alpha: \\mathcal{O}_Y \\Rightarrow F $ satisfies the localization condition: for every affi"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.Hom.fromNormalization",
+      "module": "Mathlib/AlgebraicGeometry/Normalization",
+      "type": "{X Y : AlgebraicGeometry.Scheme} →\n  (f : X ⟶ Y) →\n    [inst : AlgebraicGeometry.QuasiCompact f] →\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y",
+      "doc": "The canonical morphism from the normalization of a scheme morphism $ f: X \to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ihom.adjunction and internalHomAdjunction2 assume a closed category; they do not identify sequence-site internal Hom with cartesian fiber Hom or its proetale global mapping-system representation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of cartesian strict derived coefficient systems evaluates to fiber internal Hom and its derived sections represent tensoring by test coefficient systems with etale proetale comparison",
+   "results": {
+    "summary": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "hits": []
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom, CategoryTheory.Adjunction",
+   "results": {
+    "summary": "[loogle] OK 10 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.ihom.adjunction",
+      "module": "Mathlib.CategoryTheory.Monoidal.Closed.Basic",
+      "type": " {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (A : C) [CategoryTheory.Closed A] : CategoryTheory.MonoidalCategory.tensorLeft A ⊣ CategoryTheory.ihom A",
+      "doc": "The adjunction between `A ⊗ -` and `A ⟹ -`."
+     },
+     {
+      "name": "CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+      "module": "Mathlib.CategoryTheory.Monoidal.Closed.Basic",
+      "type": " {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.MonoidalClosed C] (x✝ : C) : CategoryTheory.MonoidalClosed.internalHomAdjunction₂.adj x✝ = CategoryTheory.ihom.adjunction x✝",
+      "doc": ""
+     },
+     {
+      "name": "CategoryTheory.MonoidalClosed.ofEquiv_curry_def",
+      "module": "Mathlib.CategoryTheory.Monoidal.Closed.Basic",
+      "type": " {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M",
+      "doc": "Suppose we have a monoidal equivalence `F : C ≌ D`, with `D` monoidal closed. We can pull the\nmonoidal closed instance back along the equivalence. For `X, Y, Z : C`, this lemma describes the\nresulting"
+     },
+     {
+      "name": "CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def",
+      "module": "Mathlib.CategoryTheory.Monoidal.Closed.Basic",
+      "type": " {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M",
+      "doc": "Suppose we have a monoidal equivalence `F : C ≌ D`, with `D` monoidal closed. We can pull the\nmonoidal closed instance back along the equivalence. For `X, Y, Z : C`, this lemma describes the\nresulting"
+     },
+     {
+      "name": "CategoryTheory.Over.toOverSectionsAdj",
+      "module": "Mathlib.CategoryTheory.LocallyCartesianClosed.Sections",
+      "type": " {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.CartesianMonoidalCategory C] (I : C) [CategoryTheory.Closed I] [CategoryTheory.ChosenPullbacksAlong (CategoryTheory.curryRightUnitorHom I)] [CategoryTheory.BraidedCategory C] : CategoryTheory.toOver I ⊣ CategoryTheory.Over.sections ",
+      "doc": "The adjunction between the toOver functor and the sections functor."
+     },
+     {
+      "name": "CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom",
+      "module": "Mathlib.CategoryTheory.Monoidal.Braided.Reflection",
+      "type": " {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.MonoidalCategory D] [CategoryTheory.SymmetricCategory D] [CategoryTheory.MonoidalClosed D] [CategoryTheory.MonoidalCategory C] {L : CategoryTheory.Functor D C} [L.Monoidal] {R",
+      "doc": ""
+     },
+     {
+      "name": "CategoryTheory.Monoidal.Reflective.isIso_tfae",
+      "module": "Mathlib.CategoryTheory.Monoidal.Braided.Reflection",
+      "type": " {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.MonoidalCategory D] [CategoryTheory.SymmetricCategory D] [CategoryTheory.MonoidalClosed D] {R : CategoryTheory.Functor C D} [R.Faithful] [R.Full] {L : CategoryTheory.Functor D",
+      "doc": "Day's reflection theorem.\n\nLet `D` be a symmetric monoidal closed category and let `C` be a reflective subcategory. Denote by\n`R : C ⥤ D` the inclusion functor and by `L : D ⥤ C` the reflector. Let `u"
+     },
+     {
+      "name": "CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso",
+      "module": "Mathlib.CategoryTheory.Monoidal.Closed.Functor",
+      "type": " {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [CategoryTheory.MonoidalClosed C] [CategoryTh",
+      "doc": "If the Frobenius morphism at `A` is an isomorphism, then the exponential comparison transformation\n(at `A`) is an isomorphism."
+     },
+     {
+      "name": "CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
+      "module": "Mathlib.CategoryTheory.Monoidal.Closed.Functor",
+      "type": " {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [CategoryTheory.MonoidalClosed C] [CategoryTh",
+      "doc": "If the exponential comparison transformation (at `A`) is an isomorphism, then the Frobenius morphism\nat `A` is an isomorphism."
+     },
+     {
+      "name": "CategoryTheory.frobeniusMorphism_mate",
+      "module": "Mathlib.CategoryTheory.Monoidal.Closed.Functor",
+      "type": " {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [CategoryTheory.CartesianMonoidalCategory C] [CategoryTheory.CartesianMonoidalCategory D] (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [CategoryTheory.MonoidalClosed C] [CategoryTh",
+      "doc": ""
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ihom.adjunction and internalHomAdjunction2 assume a closed category; they do not identify sequence-site internal Hom with cartesian fiber Hom or its proetale global mapping-system representation."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHomAdjunction|evaluationAdjunctionRight|derived.*[Ss]ections",
+   "results": {
+    "summary": "[grep] OK 8 hit(s)",
+    "hits": [
+     {
+      "file": "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+      "line": "43",
+      "text": "  ParametrizedAdjunction.hasLiftingProperty_iff MonoidalClosed.internalHomAdjunction₂"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+      "line": "58",
+      "text": "  ParametrizedAdjunction.hasLiftingProperty_iff MonoidalClosed.internalHomAdjunction₂"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+      "line": "54",
+      "text": "def evaluationAdjunctionRight (c : C) : evaluationLeftAdjoint D c ⊣ (evaluation _ _).obj c :="
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+      "line": "70",
+      "text": "  ⟨_, ⟨evaluationAdjunctionRight _ _⟩⟩"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Parametrized.lean",
+      "line": "17",
+      "text": "(See `MonoidalClosed.internalHomAdjunction₂` in the file"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+      "line": "305",
+      "text": "def internalHomAdjunction₂ [MonoidalClosed C] :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Arrow.lean",
+      "line": "164",
+      "text": "    adj := LeibnizAdjunction.adj _ _ (MonoidalClosed.internalHomAdjunction₂) X }"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean",
+      "line": "35",
+      "text": "  MonoidalClosed.internalHomAdjunction₂.preservesLimitsOfShape_flip_obj _ _"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ihom.adjunction and internalHomAdjunction2 assume a closed category; they do not identify sequence-site internal Hom with cartesian fiber Hom or its proetale global mapping-system representation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of normalized inverse systems of quotient coefficient sheaves and derived global sections representing tensor Hom",
+   "results": {
+    "summary": "OK 8 hits; ",
+    "hits": [
+     "LightCondensed.ihomPoints",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category adjunctions and condensed internal Hom do not assert the normalized varying-ring system comparisons or derived punctual representation."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHomAdjunction|derived.*[Hh]om|evaluationAdjunctionRight",
+   "results": {
+    "summary": "OK 25 hits; ",
+    "hits": [
+     "Mathlib/Algebra/Lie/CartanCriterion.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category adjunctions and condensed internal Hom do not assert the normalized varying-ring system comparisons or derived punctual representation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of normalized quotient coefficient systems represents mapping towers by derived pushforward",
+   "results": {
+    "summary": "OK 8 hits; ",
+    "hits": [
+     "HasDerivedCategory.standard",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Abelian.Ext.hom'",
+     "DerivedCategory.quotientCompQhIso",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "CategoryTheory.Abelian.Ext.hom",
+     "DerivedCategory.instAdditiveHomotopyCategoryIntUpQh",
+     "HomologicalComplexUpToQuasiIso.quotientCompQhIso"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category adjunctions and condensed internal Hom do not assert the normalized varying-ring system comparisons or derived punctual representation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom, CategoryTheory.Adjunction",
+   "results": {
+    "summary": "OK 10 hits; ",
+    "hits": [
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+     "CategoryTheory.MonoidalClosed.ofEquiv_curry_def",
+     "CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def",
+     "CategoryTheory.Over.toOverSectionsAdj",
+     "CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom",
+     "CategoryTheory.Monoidal.Reflective.isIso_tfae",
+     "CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category adjunctions and condensed internal Hom do not assert the normalized varying-ring system comparisons or derived punctual representation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom on ringed inverse sequence sites and etale proetale comparison for bounded constructible finite Tor complexes",
+   "results": {
+    "summary": "OK 8 hits; ",
+    "hits": [
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.ihomPoints",
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteSolidification",
+     "Condensed.profiniteSolidCounit",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition"
+    ],
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category adjunctions and condensed internal Hom do not assert the normalized varying-ring system comparisons or derived punctual representation."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHomAdjunction|evaluationAdjunctionRight|semilinear.*[Ss]ystem",
+   "results": {
+    "summary": "OK 8 hits; ",
+    "hits": [
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+     "Mathlib/CategoryTheory/Adjunction/Parametrized.lean",
+     "Mathlib/CategoryTheory/Monoidal/Arrow.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean",
+     "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+     "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean"
+    ],
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed-category adjunctions and condensed internal Hom do not assert the normalized varying-ring system comparisons or derived punctual representation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-section-adjoint-mates",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Second proof paragraph, both finite RHom expressions: internal Hom evaluation and etale punctual representing object; returned steps 11-12.",
+   "via": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-system-internal-hom-representability",
+  "worker": "stage1",
+  "summary": "No new nodes. Assembled the canonical system Hom comparison, finite-level etale/proetale comparison, punctual representation, and actual derived-sections tower comparison using existing nodes. Statement unchanged. Explicit levelwise boundedness argument avoids any uniform bound or faithfulness of derived evaluation on morphisms.",
+  "blueprint": "Second paragraph of prop-coef-integral-exceptional-adjoint.proof.md, both finite RHom expressions: construct actual sequence-site internal Hom and its punctual representing object, compare the latter with the pro-etale mapping tower before taking inverse limit.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-hom-comparison-constructible",
+    "why": "Finite-level evaluation-defined etale/proetale internal-Hom comparison used separately at each coefficient level."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Bounded-below site-comparison unit applied to each individual bounded finite-level internal Hom."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "Generic field-topos stalk equivalence specialized to the algebraically closed base point to identify underlying towers."
+   },
+   {
+    "node": "lem-sc-etale-global-sections-galois-invariants",
+    "why": "Identifies the equivalence with actual terminal global sections, rather than an arbitrary equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Exact point sections compute their unbounded derived functor termwise."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical unbounded derived pushforward composition for the structure map and site comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-hom-comparison-constructible",
+  "thm-weil-pbc-site-comparison",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-sc-etale-global-sections-galois-invariants",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-b9be4bab2",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-b9be4bab2 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full, plus the main-20261015 proof of prop-coef-integral-exceptional-adjoint (second paragraph). The delivery is one commit with no new nodes; statement and stmt_deps are unchanged. Live still has the item unsplit and there is no repair note. No SGA is cited. All six steps are sound. Step 1: system evaluation from the calculus node, transposed with the closed structure, evaluates to the identity at each level, so it is invertible by joint conservativity. Step 2: e_n of the pullback-Hom comparison β^ν is the level comparison, and thm-sf-hom-comparison-constructible applies (W finite type over F̄_q, M_n in D^b_ctf, N_n in D^b_c), with no common bound. Step 3: the a^*⊣Ra_* adjunction plus the closed adjunction gives representability with no finiteness. Step 4: cor-weil-finite-constructible-hom needs both inputs ctf, which the statement assumes. Step 5: with K=Ω=k the Galois group is trivial and the intertwining hypothesis is vacuous. Step 6: the composition node applies on small sequence sites, and H_W = RΓ^Tow∘U_W with A=R̂_W. Edge cases checked: empty W, zero inputs, n=1, W=s, no flatness assumed. The duplicate search found only sibling nodes of the parent split. All six declared tool uses are accepted. FIX: (C1) step 4 applied the bounded-below unit of thm-weil-pbc-site-comparison to the unbounded system unit with no citation; I added lem-weil-pbc-dplus-injective-representative(2), a closed Mathlib leaf (bounded-below injective complexes are K-injective), to step 4 and proof_deps. (E5) Step 6 compressed the system-level identification forget∘RΓ^sys ≅ RΓ^Tow∘U_W in D(Tow(Ab)); I wrote it out as two further composition comparisons using exactness, and added lem-weil-pbc-exact-functor-derived-functor to step 6 uses. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-system-internal-hom-representability.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemInternalHomRepresentability",
+  "declaration": "WeilConjectures.SystemInternalHom.systemInternalHomRepresentability",
+  "declarations": [
+   "WeilConjectures.SystemInternalHom.proSiteSmall",
+   "WeilConjectures.SystemInternalHom.sequenceSiteSmall",
+   "WeilConjectures.SystemInternalHom.coefficient",
+   "WeilConjectures.SystemInternalHom.quotient",
+   "WeilConjectures.SystemInternalHom.coefficients",
+   "WeilConjectures.SystemInternalHom.Et",
+   "WeilConjectures.SystemInternalHom.etHom",
+   "WeilConjectures.SystemInternalHom.EtData",
+   "WeilConjectures.SystemInternalHom.sectionsTower",
+   "WeilConjectures.SystemInternalHom.sectionsTowerAdditive",
+   "WeilConjectures.SystemInternalHom.comparisonSite",
+   "WeilConjectures.SystemInternalHom.proConstant",
+   "WeilConjectures.SystemInternalHom.ComparisonRing",
+   "WeilConjectures.SystemInternalHom.ComparisonRing.push",
+   "WeilConjectures.SystemInternalHom.ComparisonImage",
+   "WeilConjectures.SystemInternalHom.ComparisonImage.P",
+   "WeilConjectures.SystemInternalHom.ComparisonImage.R",
+   "WeilConjectures.SystemInternalHom.ComparisonImage.derivedAdjunction",
+   "WeilConjectures.SystemInternalHom.ComparisonTensor",
+   "WeilConjectures.SystemInternalHom.pullHom",
+   "WeilConjectures.SystemInternalHom.representingObject",
+   "WeilConjectures.SystemInternalHom.representingEquiv",
+   "WeilConjectures.SystemInternalHom.pointSections",
+   "WeilConjectures.SystemInternalHom.PointSections",
+   "WeilConjectures.SystemInternalHom.PointSections.derived",
+   "WeilConjectures.SystemInternalHom.proSections",
+   "WeilConjectures.SystemInternalHom.exactThenRightUnit",
+   "WeilConjectures.SystemInternalHom.twoRightThenExactUnit",
+   "WeilConjectures.SystemInternalHom.proSectionsUnit",
+   "WeilConjectures.SystemInternalHom.compositionUnit",
+   "WeilConjectures.SystemInternalHom.ordinarySectionsMap",
+   "WeilConjectures.SystemInternalHom.SectionsComparison",
+   "WeilConjectures.SystemInternalHom.mappingComparison",
+   "WeilConjectures.SystemInternalHom.fiberComparison",
+   "WeilConjectures.SystemInternalHom.EtNormalized",
+   "WeilConjectures.SystemInternalHom.EtFinite",
+   "WeilConjectures.SystemInternalHom.Representability",
+   "WeilConjectures.SystemInternalHom.towerSectionValue",
+   "WeilConjectures.SystemInternalHom.SectionsUnit",
+   "WeilConjectures.SystemInternalHom.structureSectionObject",
+   "WeilConjectures.SystemInternalHom.composedSectionsComplex",
+   "WeilConjectures.SystemInternalHom.systemInternalHomRepresentability"
+  ],
+  "file": "lean/Sheaf/Paper/SystemInternalHomRepresentability.lean",
+  "statement": "theorem systemInternalHomRepresentability (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_c : Compactification f) : Nonempty (Representability l E (X ↘ Spec (CommRingCat.of D.k))) ∧ Nonempty (Representability l E (Y ↘ Spec (CommRingCat.of D.k)))",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical sequence-site presentations, with actual quotient transitions, constant-generator ring maps, pure-tensor and derived-unit normalization. The existing fiberwise I is already coefficientSequenceInternalHom. The punctual representation is defined for arbitrary ambient inputs.",
+  "fixed_by": "NT-stage2-cc-e95728c68"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e95728c68",
+  "group": "Q68",
+  "result": "fix",
+  "note": "H3 fixed: Representability.fiber_identity used system.fiberHom on both sides around fiberComparison, which equals the identity because the dependency defines I_W as coefficientSequenceInternalHom, so the clause always held. Fixed by ending it with (proetale.homEvaluation M ((pro_normalization M).2 hM) n).hom.app N, the identification of lem-coef-semilinear-derived-sections that the node names. Only this field changed; the theorem signature, lean record and stmt_deps are unchanged. The fixed file compiled through nt_compile --json in 49.9 s with no errors. All other clauses checked against the node and the dependency declarations: hypotheses and conclusion for X and Y, pinned site-comparison and tensor data, evaluation-defined pullHom, pull_iso and mapping_iso with finiteness per level and no common bound, representingEquiv for all M N P with its counit/evaluation formula and naturality, mapping comparison into coefficientSequenceGlobalHom, universes as in the dependencies, no hollow definitions, docstrings and proof steps present. fiber_iso is trivially true because of how the dependency realizes I_W; accepted."
+ }
+}

@@ -1,0 +1,221 @@
+{
+ "id": "lem-trf-universal-tensor-kernel-witness",
+ "kind": "statement",
+ "title": "A single tensor-kernel witness for a map into a Mittag-Leffler module",
+ "statement": "Let $R$ be a commutative ring, $P$ a finitely presented $R$-module [def-sc-finitely-presented-module], $M$ an $R$-module that is Mittag-Leffler in the tensor-product sense [def-trf-mittag-leffler-module], and $f:P\\to M$ an $R$-linear map. Tensor products and induced maps are [def-weil-pbc-module-tensor-product]. There exist an $R$-module $T$, whose underlying collection is a set, and $z\\in P\\otimes_RT$ with $(f\\otimes\\mathrm{id}_T)(z)=0$ such that, for every finitely presented $R$-module $Q$ and every $x\\in\\ker(f\\otimes\\mathrm{id}_Q)$, there is an $R$-linear map $q:T\\to Q$ satisfying $(\\mathrm{id}_P\\otimes q)(z)=x$. No flatness hypothesis is imposed on $P$, $M$ or $Q$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1): finite-presentation representatives, product of all kernel pairs, and the first commutative square; tensor-product input Tag 059K (proposition-fp-tensor)."
+ },
+ "stmt_deps": [
+  "def-sc-finitely-presented-module",
+  "def-trf-mittag-leffler-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For each pair $m,n\\in\\mathbf N$ and each $n\\times m$ matrix $a$ over $R$, form $Q_a=R^n/\\operatorname{im}(a:R^m\\to R^n)$. These matrix codes form a set $B$, and the definition of finite presentation gives an $R$-linear isomorphism $e:Q_a\\xrightarrow{\\sim}Q$ for every finitely presented $Q$: a presentation surjection $R^n\\to Q$ sends a coset to the image of any representative; exactness makes this well-defined and bijective. Put $A=\\{(a,y):a\\in B,\\ y\\in P\\otimes_RQ_a,\\ (f\\otimes\\mathrm{id}_{Q_a})(y)=0\\}$. Each tensor product is a set by its quotient construction, so $A$ is a set. For $\\alpha=(a,y)$ write $Q_\\alpha=Q_a$ and $y_\\alpha=y$, and set $T=\\prod_{\\alpha\\in A}Q_\\alpha$, with componentwise module operations. Its underlying collection is a set.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1), the set B, pairs A and first commutative square; Tag 059K (proposition-fp-tensor), implication (1) implies (2)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-presentation-tensor-products] to the finitely presented module $P$ and the set-indexed family $(Q_\\alpha)$. The tuple $(y_\\alpha)_\\alpha$ has a preimage $z\\in P\\otimes_RT$ under the bijective comparison map. Thus $(\\mathrm{id}_P\\otimes\\pi_\\alpha)(z)=y_\\alpha$ for every coordinate projection $\\pi_\\alpha:T\\to Q_\\alpha$.",
+   "uses": [
+    "lem-trf-finite-presentation-tensor-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1), the set B, pairs A and first commutative square; Tag 059K (proposition-fp-tensor), implication (1) implies (2)."
+   }
+  },
+  {
+   "text": "Put $w=(f\\otimes\\mathrm{id}_T)(z)$. The $\\alpha$-coordinate of $\\theta_{M,(Q_\\alpha)}(w)$ equals $(f\\otimes\\mathrm{id}_{Q_\\alpha})(y_\\alpha)=0$. Indeed the identity $(\\mathrm{id}_M\\otimes\\pi_\\alpha)(f\\otimes\\mathrm{id}_T)=(f\\otimes\\mathrm{id}_{Q_\\alpha})(\\mathrm{id}_P\\otimes\\pi_\\alpha)$ holds on $p\\otimes t$, since both sides give $f(p)\\otimes\\pi_\\alpha(t)$, and hence holds everywhere by generation by pure tensors. The Mittag-Leffler definition makes $\\theta_{M,(Q_\\alpha)}$ injective, so $w=0$.",
+   "uses": [
+    "def-trf-mittag-leffler-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1), the set B, pairs A and first commutative square; Tag 059K (proposition-fp-tensor), implication (1) implies (2)."
+   }
+  },
+  {
+   "text": "Given finitely presented $Q$ and $x\\in\\ker(f\\otimes\\mathrm{id}_Q)$, choose $a\\in B$ and $e:Q_a\\xrightarrow{\\sim}Q$ as in step 1. Set $y=(\\mathrm{id}_P\\otimes e^{-1})(x)$. Checking on $p\\otimes q$ gives $(f\\otimes\\mathrm{id}_{Q_a})(y)=(\\mathrm{id}_M\\otimes e^{-1})((f\\otimes\\mathrm{id}_Q)(x))=0$. Hence $\\alpha=(a,y)\\in A$. Define $q=e\\circ\\pi_\\alpha:T\\to Q$. Then $(\\mathrm{id}_P\\otimes q)(z)=(\\mathrm{id}_P\\otimes e)(y)=x$: composition of induced maps is checked on pure tensors, and $e\\circ e^{-1}=\\mathrm{id}_Q$. This proves both required properties without any flatness assumption.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1), the set B, pairs A and first commutative square; Tag 059K (proposition-fp-tensor), implication (1) implies (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-finite-presentation-tensor-products",
+  "def-trf-mittag-leffler-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1), the set B, pairs A and first commutative square; Tag 059K (proposition-fp-tensor), implication (1) implies (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Mittag|universal.*kernel|kernel.*witness",
+   "results": "{\"t\": \"2026-10-22T06:47:28Z\", \"tool\": \"grep\", \"query\": \"Mittag|universal.*kernel|kernel.*witness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\"], \"digest\": \"5be68ee99b2eff30\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-kernel and quotient exactness declarations do not construct a single witness representing all finite-presentation tests; tensorKerEquiv additionally assumes flatness. The finite-presentation tensor results do not assert this universal element."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented source mapping to a Mittag Leffler module has a universal tensor kernel witness built from a product of finitely presented test modules",
+   "results": "{\"t\": \"2026-10-22T06:47:28Z\", \"tool\": \"leansearch\", \"query\": \"A finitely presented source mapping to a Mittag Leffler module has a universal tensor kernel witness built from a product of finitely presented test modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKerEquiv_apply\", \"Module.Presentation.tensor\", \"LinearMap.tensorKerEquiv\", \"Module.FinitePresentation.prod\", \"LinearMap.tensorKer\", \"Module.Finite.kerRepr\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"Module.FinitePresentation.pi\"], \"digest\": \"8815308b8179c137\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-kernel and quotient exactness declarations do not construct a single witness representing all finite-presentation tests; tensorKerEquiv additionally assumes flatness. The finite-presentation tensor results do not assert this universal element."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T06:47:29Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"Module.FinitePresentation.isBaseChange_map\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_basis_baseChange\"], \"digest\": \"583cdbed6395ec38\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-kernel and quotient exactness declarations do not construct a single witness representing all finite-presentation tests; tensorKerEquiv additionally assumes flatness. The finite-presentation tensor results do not assert this universal element."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map from a finitely presented module P to a tensor Mittag Leffler module M there is one tensor kernel element in P tensor T whose images under maps from T to finitely presented modules exhaust all tensor kernels",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a map from a finitely presented module P to a tensor Mittag Leffler module M there is one tensor kernel element in P tensor T whose images under maps from T to finitely presented modules exhaust all tensor kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lTensor_mkQ\", \"rTensor_mkQ\", \"TensorProduct.map_ker\", \"LinearMap.kerLTensorEquivOfSurjective\", \"LinearMap.tensorKerEquiv\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"Submodule.FG.exists_rTensor_fg_inclusion_eq\", \"LinearMap.ker_tensorProductMk\"], \"digest\": \"c5671c51004d6014\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-kernel and quotient exactness declarations do not construct a single witness representing all finite-presentation tests; tensorKerEquiv additionally assumes flatness. The finite-presentation tensor results do not assert this universal element."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product of all finitely presented tensor kernel tests produces a single element whose evaluations generate every test kernel for a map into a Mittag Leffler module",
+   "results": "{\"t\": \"2026-10-22T06:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"A product of all finitely presented tensor kernel tests produces a single element whose evaluations generate every test kernel for a map into a Mittag Leffler module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lTensor_mkQ\", \"rTensor_mkQ\", \"TensorProduct.exists_of_fg\", \"Ideal.ker_tensorProductMk_quotient\", \"TensorProduct.map_ker\", \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"LinearMap.ker_tensorProductMk\", \"AdicCompletion.ofTensorProduct_surjective_of_finite\"], \"digest\": \"3df0a2b1c79b1a3d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-kernel and quotient exactness declarations do not construct a single witness representing all finite-presentation tests; tensorKerEquiv additionally assumes flatness. The finite-presentation tensor results do not assert this universal element."
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|universal.*kernel|kernel.*witness",
+   "results": "{\"t\": \"2026-10-23T15:03:07Z\", \"tool\": \"grep\", \"query\": \"Mittag|universal.*kernel|kernel.*witness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\"], \"digest\": \"3a5eb3a9ee8e537d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inverse-system Mittag-Leffler and tensor kernels with flatness do not give a universal element for all finite-presentation tests; product-map construction alone is insufficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal tensor kernel witness for a finitely presented module mapping into a Mittag Leffler module",
+   "results": "{\"t\": \"2026-10-23T15:03:07Z\", \"tool\": \"leansearch\", \"query\": \"Universal tensor kernel witness for a finitely presented module mapping into a Mittag Leffler module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKerEquiv\", \"TensorProduct.map_ker\", \"LinearMap.tensorKer_coe\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"Module.Flat.ker_lTensor_eq\", \"LinearMap.tensorKerEquiv_apply\", \"LinearMap.tensorKer_tmul\", \"LinearMap.tensorKer\"], \"digest\": \"6be53d45a411aefb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inverse-system Mittag-Leffler and tensor kernels with flatness do not give a universal element for all finite-presentation tests; product-map construction alone is insufficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T15:03:07Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"Module.FinitePresentation.isBaseChange_map\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_basis_baseChange\"], \"digest\": \"583cdbed6395ec38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inverse-system Mittag-Leffler and tensor kernels with flatness do not give a universal element for all finite-presentation tests; product-map construction alone is insufficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a finitely presented module to a Mittag Leffler module has a single tensor kernel element whose images exhaust the kernels on all finitely presented test modules",
+   "results": "{\"t\": \"2026-10-23T15:03:08Z\", \"tool\": \"leanfinder\", \"query\": \"A map from a finitely presented module to a Mittag Leffler module has a single tensor kernel element whose images exhaust the kernels on all finitely presented test modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKerEquiv\", \"TensorProduct.map_ker\", \"Module.Flat.tfae_equational_criterion\", \"LinearMap.kerLTensorEquivOfSurjective\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"Module.Flat.ker_lTensor_eq\", \"Module.flat_iff\", \"Module.Flat.of_forall_exists_factorization\"], \"digest\": \"6d9062252fbd073b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inverse-system Mittag-Leffler and tensor kernels with flatness do not give a universal element for all finite-presentation tests; product-map construction alone is insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKerEquiv|theorem map_ker|def piRightHom",
+   "results": "{\"t\": \"2026-10-23T16:23:36Z\", \"tool\": \"grep\", \"query\": \"tensorKerEquiv|theorem map_ker|def piRightHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/Algebra/Group/Subgroup/Ker.lean\", \"Mathlib/RingTheory/Ideal/Over.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\"], \"digest\": \"ab6a9c7a70b2e500\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inverse-system Mittag-Leffler and tensor kernels with flatness do not give a universal element for all finite-presentation tests; product-map construction alone is insufficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A single element of a tensor product represents every finite presentation test kernel by evaluation maps from a product of test modules",
+   "results": "{\"t\": \"2026-10-23T16:23:38Z\", \"tool\": \"leanfinder\", \"query\": \"A single element of a tensor product represents every finite presentation test kernel by evaluation maps from a product of test modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Relations.Solution.isPresentationCoreTensor\", \"instFinitePresentationTensorProduct\", \"TensorProduct.exists_eq_tmul_of_forall\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"Module.Relations.Solution.IsPresentation.tensor\", \"Module.Presentation.tensor_var\", \"Module.Presentation.tensor\", \"Module.Presentation.tensor_relation\"], \"digest\": \"94eb7ad218a6e8b6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inverse-system Mittag-Leffler and tensor kernels with flatness do not give a universal element for all finite-presentation tests; product-map construction alone is insufficient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-mittag-leffler-hom-systems",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Last sentence: 'countably generated, flat and Mittag-Leffler ... whence projective'. Supporting Tag 059X (lemma-countgen-projective), the sentence 'Since M is Mittag-Leffler, (Hom_R(M_i,N_1)) is a Mittag-Leffler inverse system'. Supporting Tag 059M, proof of (2) implies (1), the universal kernel element for a map from a finite presentation. Returned Hom-systems proof steps 1-2 and the representative-isomorphism calculation in step 3.",
+   "via": [
+    "lem-trf-mittag-leffler-hom-systems",
+    "lem-trf-countable-flat-mittag-leffler-projective",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-universal-tensor-kernel-witness",
+  "worker": "stage1",
+  "summary": "Expanded the first product square in Stacks 059M into a set-indexed matrix-coded construction, cited the existing finite-presentation/product comparison (059K), and checked naturality and transport to every test module explicitly. No new nodes and no statement changes.",
+  "blueprint": "Supporting Stacks 059M proof of (2) implies (1), through the first commutative square, in the existing ancestor chain from lem-trf-local-term-locality. The current latest blueprint ancestor remains the contracting-local-term theorem; this split refines only its previously recorded algebraic supporting branch."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-3901cc63b",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-3901cc63b (reviewer sub-agent of L); spot-checked: This is a first split of a statement-only node; there is no re-split note and no new nodes. The statement and stmt_deps are unchanged, and proof_deps equal the union of the step uses. Source check: Stacks algebra.tex Tag 059M (proposition-ML-tensor), proof of (2)⇒(1). The item realizes the sets B and A, the first square and the preimage x of (x_α); the later P′ factorization is left to the parent and its siblings. Step 1 encodes finitely presented modules as R^n/im(a), so A and T=∏Q_α are sets. Step 2 is the only non-elementary step and correctly cites lem-trf-finite-presentation-tensor-products (059K: bijective θ_P for any set-indexed family). Step 3 gets the coordinate identity by naturality on pure tensors and then uses the injectivity in def-trf-mittag-leffler-module, so (f⊗id_T)(z)=0. Step 4 transports through e:Q_a≅Q with q=e∘π_α, which gives (id⊗q)(z)=x. Right-factor maps id_P⊗q are obtained from the universal property of def-weil-pbc-module-tensor-product; this is elementary. Edge cases checked: R=0, P=0, M=0, f=id, a nonflat P, and m or n=0. No flatness is used anywhere. No duplicate exists: I checked the trf ML siblings and the pbc sheaf representatives node. The delivery cites no SGA and has no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.UniversalTensorKernelWitness",
+  "declaration": "Module.exists_universal_tensor_kernel_witness",
+  "file": "lean/Sheaf/RingTheory/UniversalTensorKernelWitness.lean",
+  "statement": "theorem exists_universal_tensor_kernel_witness (R : Type u) [CommRing R] (P : Type v) [AddCommGroup P] [Module R P] [Module.FinitePresentation R P] (M : Type w) [AddCommGroup M] [Module R M] (hM : Module.IsMittagLeffler.{u, w, max u v w, max u v w} R M) (f : P →ₗ[R] M) : ∃ (T : Type (max u v w)) (_ : AddCommGroup T) (_ : Module R T), ∃ z : P ⊗[R] T, LinearMap.rTensor T f z = 0 ∧ ∀ (Q : Type t) [AddCommGroup Q] [Module R Q] [Module.FinitePresentation R Q] (x : P ⊗[R] Q), LinearMap.rTensor Q f x = 0 → ∃ q : T →ₗ[R] Q, LinearMap.lTensor P q z = x",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4c6bf559",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Checked the Lean signature clause by clause against the node and Stacks 059M (2)=>(1). Module.FinitePresentation on P and Q; IsMittagLeffler.{u,w,max u v w,max u v w} is an instance of the recorded def, weaker than ML at all sizes and large enough for the matrix-code product family via ULift; set-sized T : Type (max u v w); rTensor kernel and lTensor evaluation have the right orientation; T and z are fixed before Q and x; Q's universe t is free. Edge cases R/P/M zero, f=0 or id, m or n=0, empty index, non-flat modules all covered. No duplicate in side-live Sheaf/WeilConjectures. Only the node's lean record changed and its statement matches the file verbatim. Proof is sorry; docstrings carry source and blueprint; no new defs; worker report and second-reading sections present. No findings."
+ }
+}

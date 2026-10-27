@@ -1,0 +1,114 @@
+{
+ "id": "lem-pbc-coefficient-direct-image-restriction-cube",
+ "kind": "statement",
+ "title": "Ordinary direct-image coefficient comparisons satisfy the restriction cube",
+ "statement": "Let f:X→Y and ring sheaves R₀,R,SY on Y and RX,SX on X have coefficient isomorphisms b:R₀≅R, cR:f⁻¹R≅RX, cS:f⁻¹SY≅SX and maps φY:R→SY, φX:RX→SX satisfying cR;φX=f⁻¹φY;cS [def-weil-pbc-proetale-operations]. Put χ=b;φY and q=f⁻¹b;cR. Write F,G,H,J for ordinary direct images with coefficients R,RX; SY,SX; R₀,f⁻¹R₀; SY,f⁻¹SY. Let cp:F Res_b≅Res_q H, cz:G Res_Id≅Res_cS J and cd:J Res_χ≅Res_f⁻¹χ H be the canonical comparisons. Let i:Res_φX F≅G Res_φY be identity on sections. Form a:Res_φX Res_q≅Res_cS Res_f⁻¹χ and d:Res_φY Res_b≅Res_Id Res_χ from the canonical restriction compositors [def-weil-pbc-bounded-constructible-tower, lem-pbc-scalar-coefficient-equivalence]. For every SX-module sheaf M, d_(GM);Res_χ(cz_M);cd_(Res_cS M)=Res_b(i_M⁻¹);cp_(Res_φX M);H(a_M).",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pbc-scalar-coefficient-equivalence",
+  "lem-sfb-derived-scalar-mate-thick-locus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 07A6, ordinary coefficient comparisons and restriction composition"
+ },
+ "proof": [
+  {
+   "text": "The restriction compositors act identically on sections by their defining uniqueness property. Their inverses act identically by the inverse-hom identity. The supplied ordinary comparison acts identically by hi, and cancellation proves the same for its inverse.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The canonical coefficient comparisons cp, cz and cd are identity on sections by proEtaleRingRestrictionDirectImage_existsUnique. Expand both composites on a section over U, observing that direct image evaluates a morphism on the base change of U. Every factor is the identity on the underlying section. Extensionality of module-sheaf morphisms gives the equality. This proof also applies to zero rings and empty sites.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 07A6, ordinary coefficient comparisons and restriction composition",
+  "note": "N4: complete Lean proof; no new hole. Extracted after local unfolding optimizations and profiling, as permitted by the current worker brief."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restriction.*cube|mapDerivedCategoryCompIso_id_comp",
+   "date": "2026-10-27",
+   "results": "0 hits; []; ",
+   "verdict": "No complete statement for these library comparisons; use the existing exact-derived unit laws and the sectionwise formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "mapDerivedCategoryCompIso",
+   "date": "2026-10-27",
+   "results": "0 hits; []; loogle: unknown identifier 'mapDerivedCategoryCompIso'",
+   "verdict": "No complete statement for these library comparisons; use the existing exact-derived unit laws and the sectionwise formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor on derived categories composition isomorphism preserves the identity unit and restriction scalar direct image coefficient comparison commuting cube",
+   "date": "2026-10-27",
+   "results": "8 hits; ['CategoryTheory.Abelian.Ext.mapExactFunctor_hom', 'CategoryTheory.Functor.mapDerivedCategorySingleFunctor', 'CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app', 'CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app', 'CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc', 'CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app', 'CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app']; ",
+   "verdict": "No complete statement for these library comparisons; use the existing exact-derived unit laws and the sectionwise formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedCoefficientDirectImageSquare",
+  "date": "2026-10-27",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-normalized-coefficient-direct-image-square",
+   "place": "Ordinary direct-image coefficient comparisons satisfy the restriction cube",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDirectImageRestrictionCube",
+  "file": "lean/Sheaf/Paper/CoefficientDirectImageRestrictionCube.lean",
+  "declaration": "AlgebraicGeometry.Scheme.coefficientDirectImageRestrictionCube",
+  "statement": "theorem coefficientDirectImageRestrictionCube\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (b : R₀ ≅ R)\n    (SY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (SX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (φY : R ⟶ SY) (φX : RX ⟶ SX)\n    (cR : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ RX)\n    (cS : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj SY ≅ SX)\n    (hc : cR.hom ≫ φX =\n      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map φY ≫ cS.hom)\n    (i : pbcRestrict φX ⋙ proEtaleRingModuleDirectImage f R RX cR ≅\n      proEtaleRingModuleDirectImage f SY SX cS ⋙ pbcRestrict φY)\n    (hi : ∀ (M : pbcModules X SX) (U : Y.ProEtᵒᵖ),\n      HEq (fun x ↦ (i.hom.app M).val.app U x)\n        (fun x : ((proEtaleRingModuleDirectImage f SY SX cS).obj M).val.obj U ↦ x)) :\n  let χ := b.hom ≫ φY\n  let q := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).mapIso b ≪≫ cR\n  let hq : q.hom ≫ φX = DerivedScalarMate.inverseMap f χ ≫ cS.hom := by\n    dsimp only [q, χ, Iso.trans_hom, Functor.mapIso_hom, DerivedScalarMate.inverseMap]\n    rw [Category.assoc, hc, ← Category.assoc, ← Functor.map_comp]\n  let H := proEtaleRingModuleDirectImage f R₀ (DerivedScalarMate.inverseRing f R₀)\n    (Iso.refl _)\n  let GS := proEtaleRingModuleDirectImage f SY SX cS\n  let cp := proEtaleRingRestrictionDirectImage f R₀ R\n    (DerivedScalarMate.inverseRing f R₀) RX b.hom q.hom (Iso.refl _) cR (by simp [q])\n  let cz := proEtaleRingRestrictionDirectImage f SY SY\n    (DerivedScalarMate.inverseRing f SY) SX (𝟙 SY) cS.hom (Iso.refl _) cS (by simp)\n  let cd := proEtaleRingRestrictionDirectImage f R₀ SY\n    (DerivedScalarMate.inverseRing f R₀) (DerivedScalarMate.inverseRing f SY)\n    χ (DerivedScalarMate.inverseMap f χ) (Iso.refl _) (Iso.refl _) (by simp)\n  let a := pbcRestrictComp q.hom φX (q.hom ≫ φX) rfl ≪≫\n    (pbcRestrictComp (DerivedScalarMate.inverseMap f χ) cS.hom\n      (q.hom ≫ φX) hq.symm).symm\n  let d := pbcRestrictComp b.hom φY χ rfl ≪≫\n    (pbcRestrictComp χ (𝟙 SY) χ (by simp)).symm\n  ∀ M : pbcModules X SX,\n      d.hom.app (GS.obj M) ≫ (pbcRestrict χ).map (cz.hom.app M) ≫\n        cd.hom.app ((pbcRestrict cS.hom).obj M) =\n      (pbcRestrict b.hom).map (i.inv.app M) ≫\n        cp.hom.app ((pbcRestrict φX).obj M) ≫ H.map (a.hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T050628-L-246847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T050628-L-246847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

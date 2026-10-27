@@ -1,0 +1,149 @@
+{
+ "id": "def-sp-power-torsion-limit-models",
+ "kind": "definition",
+ "title": "Strict left-Koszul completion and its normalized Roos coordinates",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $T$, the completed integral coefficient sheaf $R$ [sk-def-sp-coefficient-towers], and its uniformizer section $\\pi$ [def-sp-completed-uniformizer-section]. On unbounded $R$-complexes use the principal Koszul tower $L_j=[R\\xrightarrow{\\pi^{j+1}}R]$ with transition $(\\pi,1)$ [def-pur-principal-koszul-quotient-towers]. Define the strict functor $P\\mapsto (L_j\\otimes P)_j$ and its composite $C$ with the existing Roos functor $\\mathsf R$ [def-pur-integral-derived-operations]. Its unit is the shifted-cone lift of the product of the degree-zero inclusions $1\\otimes x$, with zero shifted homotopy. The Koszul transition naturality makes this a valid chain map. The zero and one Roos coordinates are the unshifted cone projection and the shifted cone projection, each followed by a product projection. For a tower $Q$, the column tower is $j\\mapsto\\mathsf R_n(L_j\\otimes Q_n)$; row and column coordinates are the four composites of these two projections, with output degrees $k,k-1,k-1,k-2$. These are the constructions and conventions used in the power-torsion limit theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+ },
+ "stmt_deps": [
+  "sk-def-sp-coefficient-towers",
+  "def-sp-completed-uniformizer-section",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pur-integral-derived-operations",
+  "def-sf-strict-roos-functor",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of unbounded complexes using Koszul complexes and homotopy inverse limits",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HasDerivedCategory",
+     "HasDerivedCategory.standard",
+     "HomologicalComplex.instHasLimit",
+     "DerivedCategory",
+     "HomologicalComplexUpToQuasiIso",
+     "HomologicalComplex.instHasLimitsOfShape",
+     "HomologicalComplexUpToQuasiIso.Q",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived inverse limit of complexes each killed by a power of a regular element is derived complete with the canonical Koszul completion unit",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "IsAdicComplete.of_lift",
+     "BDeRhamPlus",
+     "IsAdicComplete",
+     "AdicCompletion",
+     "IsAdicComplete.toIsPrecomplete",
+     "IsAdicComplete.lift",
+     "IsAdicComplete.StrictMono.of_lift",
+     "IsAdicComplete.StrictMono.of_comp_lift"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.complete|[Kk]oszul|[Rr]oos",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+     "Mathlib/RingTheory/Regular/RegularSequence.lean",
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PowerTorsionSheafLimitComplete",
+  "date": "2026-10-25",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7.",
+   "via": [
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PowerTorsionSheafLimitModels",
+  "file": "lean/Sheaf/Paper/PowerTorsionSheafLimitModels.lean",
+  "declaration": "WeilConjectures.PowerTorsionLimit.roos",
+  "statement": "abbrev roos : (ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E T) ℤ) ⥤\n    CochainComplex (integralTowerModules l E T) ℤ",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PowerTorsionLimit.roos",
+   "WeilConjectures.PowerTorsionLimit.tensorTower",
+   "WeilConjectures.PowerTorsionLimit.completion",
+   "WeilConjectures.PowerTorsionLimit.unit_condition",
+   "WeilConjectures.PowerTorsionLimit.unit",
+   "WeilConjectures.PowerTorsionLimit.coordinateZero",
+   "WeilConjectures.PowerTorsionLimit.coordinateOne",
+   "WeilConjectures.PowerTorsionLimit.evaluation",
+   "WeilConjectures.PowerTorsionLimit.columns",
+   "WeilConjectures.PowerTorsionLimit.rowCoordinate",
+   "WeilConjectures.PowerTorsionLimit.columnCoordinate"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4bce",
+  "group": "Y6",
+  "result": "fix",
+  "landing": "20261025T164846-L-1111894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4bce",
+  "group": "Y6",
+  "result": "fix",
+  "landing": "20261025T164846-L-1111894",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to published; moved Models defs diffed verbatim vs old item module; 3 new sorry statements read against nodes and the inherited item statement (sign (-1)^{pq} recomputed, nilpotent s^r=0 argument, K-flat span); #print axioms on scratch compile of all 5 modules (sorryAx only via the new steps)"
+ }
+}

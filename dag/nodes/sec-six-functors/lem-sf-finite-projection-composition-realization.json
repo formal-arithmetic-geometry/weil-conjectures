@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-finite-projection-composition-realization",
+ "kind": "statement",
+ "title": "Tensor endpoint normalization of the binary support compositor",
+ "statement": "For a finite operation stage S [def-sf-operation-stages] and a supplied Cartesian proper/open triangle j:X→V, b:V→W, q:V→Y, p:W→B, i:Y→B, s:B→Z with b p=q i, j,b,i open, b,i quasi-compact and q,p,s proper, take the three factor compactifications. For bounded constructible K and finite-Tor L, the forward support compositor tensored with L, followed by iterationSourceComparison and the tensor of raw alpha, equals sourceComparison. At the target, the forward support compositor followed by the tensor of torPullComposition intertwines binaryIterationTargetComparison with binaryTargetComparison. The comparison maps are explicit composites of coefficient units, support and pullback comparisons, using [lem-sf-finite-projection-iteration-realization]. The statement contains no projection morphism.",
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-sf-composition-projection-data",
+  "lem-sf-finite-projection-iteration-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition sentence: realization of the same specified projection maps and support compositors."
+ },
+ "proof": [
+  {
+   "text": "Apply the already stated originSupportComparison_composition at K and at its tensor input, using domains for constructibility. Expand originSupportComparison and cancel the tower candidate comparisons to obtain the binary support normalization at the three factor compactifications. This reuses the finiteCompositionNormalization argument already isolated in the origin-normalization node.",
+   "uses": [
+    "lem-sf-finite-support-origin-binary-normalization",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the canonical origin compositor on this Cartesian triangle with raw alpha by cartesianCompactSupportCompositor. Apply the uncurried fixed-scalar tensor to the product morphism (alpha at K, identity at the fixed presentation of L), and realize this forward-normalization equation to obtain the source equality.",
+   "uses": [
+    "lem-sf-cartesian-compact-support-compositor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the explicit iteration tensor comparison. Substitute finitePullCompositionNormalization and use the coefficient equivalence triangle identities. Functoriality of the product isomorphism with identity at K gives the raw tensor image of trianglePull, with its final binaryPullCast. This proves the target equality without a projection map.",
+   "uses": [
+    "def-sf-operation-stages",
+    "lem-sf-finite-projection-iteration-realization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-support-origin-binary-normalization",
+  "def-sf-operation-stages",
+  "lem-sf-cartesian-compact-support-compositor",
+  "lem-sf-finite-projection-iteration-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Explicit coefficient-unit cancellation in the composition sentence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Conjugating projection transformations by equivalences preserves iteration of two functors",
+   "results": "Function conjugation and generic category-equivalence results; no result about these prescribed derived support realizations.",
+   "date": "2026-10-27",
+   "verdict": "Use naturality of the published components and explicit coefficient units."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.unitIso; CategoryTheory.NatTrans.naturality",
+   "results": "Found equivalence unit, counit triangle and naturality statements; none specialize directly to the project-defined support normalizations.",
+   "date": "2026-10-27",
+   "verdict": "These generic lemmas supply the formal cancellations, not the geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*composition|composition.*projection; iteration.*realization; finiteCompositionNormalization",
+   "results": "Mathlib has no compact-support comparison. The project has raw compositionProjectionMate, cartesianCompactSupportCompositor and finiteCompositionNormalization, but no equation identifying the iteration endpoints used here. Blueprint search for projection realization gave no matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "Separate iteration transport from projection-free compositor normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionBinarySquare",
+  "date": "2026-10-27",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition sentence: coefficient realization of two successive support operations.",
+   "via": [
+    "lem-sf-finite-projection-binary-square",
+    "lem-sf-finite-projection-composition-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionCompositionRealization",
+  "file": "lean/Sheaf/Paper/FiniteProjectionCompositionRealization.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.binary_composition_realization",
+  "declarations": [
+   "WeilConjectures.CompactSupportFiniteProjection.fixedScalarTensorData",
+   "WeilConjectures.CompactSupportFiniteProjection.fixedScalarTensorData_eq",
+   "WeilConjectures.CompactSupportFiniteProjection.realizedPullTargetIso",
+   "WeilConjectures.CompactSupportFiniteProjection.realizedPullTargetIso_hom",
+   "WeilConjectures.CompactSupportFiniteProjection.realizedTriangleTargetIso",
+   "WeilConjectures.CompactSupportFiniteProjection.realizedTriangleTargetIso_hom",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryFirst",
+   "WeilConjectures.CompactSupportFiniteProjection.binarySecond",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryTotal",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryPullCast",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryTargetComparison",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryIterationTargetComparison",
+   "WeilConjectures.CompactSupportFiniteProjection.iteration_realization_factors",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryIterationTargetComparison_hom",
+   "WeilConjectures.CompactSupportFiniteProjection.BinaryCompositionRealization",
+   "WeilConjectures.CompactSupportFiniteProjection.binary_composition_realization"
+  ],
+  "statement": "theorem binary_composition_realization\n    (sq : IsPullback b.hom.left q.hom.left p.hom.left i.hom.left)\n    (K : sixFunctorFiniteCategory D C E n hn X)\n    (L : finiteTorConstructibleCategory C.l E n hn Z.obj.left)\n    (ha : letI := Padic.finite_coefficientExtensionRing C.l E n hn\n      IsIso (alpha (ordinary D\n        (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) j b q p i s hb)) :\n    BinaryCompositionRealization S j b q p i s hb sq K L ha",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T050540-L-235778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T050540-L-235778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

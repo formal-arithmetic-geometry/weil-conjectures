@@ -1,0 +1,267 @@
+{
+ "id": "lem-trf-fp-affine-limit-chart-models",
+ "kind": "statement",
+ "title": "Finite affine refinement charts and local module models at one limit stage",
+ "statement": "Let $I$ be a small nonempty directed set and $(S_i,p_{ji})_{i\\in I}$ an inverse system of schemes [def-pc-scheme], where $p_{ji}:S_j\\to S_i$ for $j\\geq i$ is affine [pqf-def-affine-morphism]. Assume each $S_i$ is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism]. Let $S=\\varprojlim_i S_i$ be the scheme limit with projections $p_i$ (so compatible families of maps from any scheme into the $S_i$ factor uniquely through $S$). For sheaves of modules [def-weil-sheaf-of-modules-category], finite presentation means locally admitting an exact sequence $\\mathcal O^m\\to\\mathcal O^n\\to F\\to0$ with finite $m,n$. All pullbacks are tensor pullbacks [def-pc-module-pullback], with their canonical composition identifications.\nFix $i_0\\in I$ and a finitely presented $\\mathcal O_S$-module $F$. Choose a finite affine open cover $(U_a)$ of $S$, finite affine covers $(W_{ab,r})$ of each $U_a\\cap U_b$, finite affine covers of the intersections $W_{ab,r}\\cap W_{ab,r'}$, and finite affine covers $(T_{abc,s})$ of triple intersections, subordinate to the three chosen pair covers. Empty covers are permitted for empty opens. Such a finite collection exists. Denote its finitely many labelled affine opens by $C_d$, recording all specified inclusions between them. Then there exist $i\\geq i_0$, affine opens $C_{d,i}\\subseteq S_i$ and finitely presented quasi-coherent modules $N_{d,i}$ [pqf-def-coherent] on $C_{d,i}$ with the following properties.\n(1) $p_i^{-1}C_{d,i}=C_d$. Every specified inclusion and every covering equation in the chosen collection holds at stage $i$: the $U_{a,i}$ cover $S_i$, the $W_{ab,r,i}$ cover $U_{a,i}\\cap U_{b,i}$, the overlap refinements cover the corresponding pair-chart intersections, and the subordinate triple charts cover $U_{a,i}\\cap U_{b,i}\\cap U_{c,i}$.\n(2) For $j\\geq i$ put $C_{d,j}=p_{ji}^{-1}C_{d,i}$. These are affine, their restricted inverse system has limit $C_d$, and the canonical maps induce $\\varinjlim_{j\\geq i}\\Gamma(C_{d,j},\\mathcal O)\\cong\\Gamma(C_d,\\mathcal O)$.\n(3) For the restricted projection $q_d:C_d\\to C_{d,i}$ there is an isomorphism $e_d:q_d^*N_{d,i}\\xrightarrow{\\sim}F|_{C_d}$. On affine sections this is an isomorphism $\\Gamma(C_d,\\mathcal O)\\otimes_{\\Gamma(C_{d,i},\\mathcal O)}\\Gamma(C_{d,i},N_{d,i})\\cong\\Gamma(C_d,F)$ via the canonical tensor-pullback sections comparison. No transition maps between distinct $N_{d,i}$ are asserted.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, lemma-descend-modules-finite-presentation, first proof (affine reduction and Zariski gluing); extracted intermediate assertion: Returned proof Steps 1--3: finite affine charts, incidence and covering stabilization, restricted ring colimits, and local object models."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "pqf-def-coherent",
+  "def-trf-finite-affine-refinement-collection"
+ ],
+ "proof": [
+  {
+   "text": "The limit projections are affine by Mathlib isAffineHom_π_app. Its quasi-compactness follows from Scheme.compactSpace_of_isLimit; its quasi-separatedness follows from an affine projection to the fixed quasi-separated stage. Apply the finite refinement existence lemma to the limit.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-trf-finite-affine-refinement-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the arbitrary valid labelled collection. Descend every labelled affine open and take a common upper bound. Consider the finite type of expressions consisting of finite unions of labels, top, pair intersections and triple intersections. All these expressions are quasi-compact at each stage: use finite-union compactness, quasi-separatedness and the affine compactness criterion. Each equality between expressions that holds on the limit becomes true at a later stage by eventual equality of compact opens. Finite quantification in the atTop filter gives one stage above i₀ where all such equalities hold. They imply every Valid field, encoding an inclusion C_d ≤ C_e as C_d = C_d intersect C_e. Inverse image preserves the expressions, so valid collections remain valid at every later stage.",
+   "uses": [
+    "lem-trf-affine-open-limit-descent",
+    "pqf-lem-limit-qc-open-descends",
+    "pqf-lem-qs-intersection-qc",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-trf-finite-affine-refinement-collection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each stage chart, its opensDiagram has affine objects and its opensCone is limiting. On any thin cofiltered diagram of affine schemes, global sections take the limit to a ring colimit. Replace the opposite indexing category by its thin skeleton, a directed partial order. Extend the finitely presented sections of the restricted module along the inverse canonical ring-colimit comparison. Apply the preorder module-model theorem. Cocone compatibility and extendScalarsComp, followed by cancellation of extension along inverse ring isomorphisms, identify the resulting model with the sections of the original restricted sheaf. Realize it as a finitely presented quasi-coherent sheaf using affine sections realization. The tensor/native pullback comparison comes from uniqueness of the left adjoint to pushforward.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-finite-presentation-affine-sections",
+    "lem-pc-fp-preorder-colimit-model",
+    "lem-pc-fp-affine-sections-realization",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a common upper bound for the finitely many chart-model indices and the geometric stage. Pull each chart and its sheaf model to this common stage. Restricted transition maps commute with the restricted limit projections, proved after composing with the open immersion of the original stage chart. Tensor-pullback composition and the original model isomorphisms give the new sheaf comparisons. Tensor pullback preserves finite presentation; finite presentation supplies quasi-coherence. The Valid fields persist by inverse image. For the final opensDiagram, affine objects and isLimitOpensCone yield the requested canonical ring colimit by isColimitOfPreserves Scheme.Γ.",
+   "uses": [
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each final chart apply exists_tensorPullback_affine_sections at the top affine opens. Rewrite its appLE ring map to appTop. Swap tensor factors and use its second-factor scalar-linearity to obtain a bijective map linear over the source chart ring. The specified unit of exists_tensorPullbackAdjunction is exactly tensorPullbackSection, so the pure-tensor formula is the required one. Compose the resulting module isomorphism with the global-sections isomorphism of the constructed sheaf comparison. This constructs HasFpLimitChartModel with the actual prescribed map.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-trf-finite-affine-refinement-existence",
+  "lem-trf-affine-open-limit-descent",
+  "pqf-lem-limit-qc-open-descends",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-trf-finite-affine-refinement-collection",
+  "lem-weil-pbc-finite-presentation-affine-sections",
+  "lem-pc-fp-preorder-colimit-model",
+  "lem-pc-fp-affine-sections-realization",
+  "def-pc-module-pullback",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR first proof, made explicit using finite open-expression stabilization, thin-skeleton ring-colimit transport, affine sheaf realization and normalized tensor sections (F8, 2026-10-27)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a directed limit of quasi compact quasi separated schemes with affine transition morphisms, descend a finite affine cover, its overlap and triple refinements, and local finitely presented module models to a common stage",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine (Mathlib/AlgebraicGeometry/AffineTransitionLimit); Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover; Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover; ExistsHomHomCompEqCompAux.𝒰D; Scheme.exists_isQuasiAffine_of_isLimit; ExistsHomHomCompEqCompAux.h𝒰S; nonempty_isColimit_Γ_mapCocone; Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget.",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover descent and section-ring colimits cover only geometric subclaims; no simultaneous finite chart-incidence realization with finitely presented local module models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite diagram of affine opens and covering refinements on the limit of qcqs schemes with affine transitions can be realized at one stage with finitely presented local module models",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \": Scheme.OpenCover.{u} (D.obj A.i')\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": HasLimits AffineScheme.{u}\", \"doc\": \"The category of affine schemes has all limits, meaning that for every diagram in this category, the limit exists within it.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] {J : Type*} (U : J → c.pt.Opens) (hU : IsOpenCover U)\\n  (hU' : ∀ i, IsAffineOpen (U i)) :\\n  ∃ (i : I) (s : Finset J) (V : s → (D.obj i).Opens),\\n    IsOpenCov\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasColimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": HasColimits AffineScheme.{u}\", \"doc\": \"The category of affine schemes admits all colimits, meaning that for any small diagram in this category, there exists a colimit object within the category of affine schemes.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $f(V) \\\\subseteq U$, the induced ring homomorphism $\\\\mathcal{O}_Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{I : Type*} [Category* I] {D : I ⥤ Scheme.{u}} (c : Cone D) (hc : IsLimit c) [∀ i, IsAffine (D.obj i)] : IsAffine c.pt\", \"doc\": \"If $\\\\{X_i\\\\}_{i \\\\in I}$ is a diagram of affine schemes indexed by a category $I$, and $c$ is a limit cone over this diagram in the category of schemes, then the apex of the cone $c$ is also an affine s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝓤 : X.OpenCover) : X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover descent and section-ring colimits cover only geometric subclaims; no simultaneous finite chart-incidence realization with finitely presented local module models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover descent and section-ring colimits cover only geometric subclaims; no simultaneous finite chart-incidence realization with finitely presented local module models."
+  },
+  {
+   "tool": "grep",
+   "query": "(finite.?present|finitely.?present).*(descen|[lL]imit)|(descen|[lL]imit).*(finite.?present|finitely.?present)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"83\", \"text\": \"    obtain ⟨j, u, hcomp⟩ := IsFinitelyPresentable.exists_hom_of_isColimit pres.isColimit g\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"126\", \"text\": \"lemma FinitePresentation.codescendsAlong_faithfullyFlat :\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"127\", \"text\": \"    CodescendsAlong FinitePresentation FaithfullyFlat := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean\", \"line\": \"85\", \"text\": \"  obtain ⟨i', q, hq⟩ := IsFinitelyPresentable.exists_hom_of_isColimit (P j').isColimit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean\", \"line\": \"113\", \"text\": \"    obtain ⟨j, p, q, hpq⟩ := IsFinitelyPresentable.exists_eq_of_isColimit (P _).isColimit _ _ this\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"line\": \"50\", \"text\": \"/-- An object `X` is finitely presentable if `Hom(X, -)` preserves all filtered colimits. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"line\": \"67\", \"text\": \"lemma isFinitelyPresentable_iff_preservesFilteredColimitsOfSize {X : C} :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"line\": \"68\", \"text\": \"    IsFinitelyPresentable.{w} X ↔ PreservesFilteredColimitsOfSize.{w, w} (coyoneda.obj (op X)) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"line\": \"71\", \"text\": \"lemma isFinitelyPresentable_iff_preservesFilteredColimits {X : C} :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"line\": \"72\", \"text\": \"    IsFinitelyPresentable.{v} X ↔ PreservesFilteredColimits (coyoneda.obj (op X)) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"30\", \"text\": \"  of finite presentation is projective and the former descends. This also holds without\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"31\", \"text\": \"  the finite presentation assumption, but requires showing that projectivity descends\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1343\", \"text\": \"to a filtered colimit if `X` is locally of finite presentation over `X`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"38\", \"text\": \"instance : DescendsAlong @LocallyOfFinitePresentation (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"39\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.FinitePresentation.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"91\", \"text\": \"    LocallyOfFinitePresentation (Limits.pullback.fst f g) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"96\", \"text\": \"    LocallyOfFinitePresentation (Limits.pullback.snd f g) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"180\", \"text\": \"    P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"line\": \"66\", \"text\": \"    {c : Cocone D} (hc : IsColimit c) {X A : C} {p : X ⟶ A} (hp : isFinitelyPresentable.{w} C p)\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"line\": \"201\", \"text\": \"    obtain ⟨j₂, q, hcomp, hu⟩ := IsFinitelyPresentable.exists_hom_of_isColimit_under\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"line\": \"218\", \"text\": \"    obtain ⟨j₃, v, hcomp', hq⟩ := IsFinitelyPresentable.exists_hom_of_isColimit_under\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/FinitePresentation.lean\", \"line\": \"81\", \"text\": \"lemma RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit (hf : f.hom.FinitePresentation)\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/FinitePresentation.lean\", \"line\": \"144\", \"text\": \"/-- If `S` is a finitely presented `R`-algebra, then `Hom_R(S, -)` preserves filtered colimits. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/FinitePresentation.lean\", \"line\": \"145\", \"text\": \"lemma CommRingCat.preservesColimit_coyoneda_of_finitePresentation\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/FinitePresentation.lean\", \"line\": \"165\", \"text\": \"/-- If `S` is a finitely presented `R`-algebra, then `Hom_R(S, -)` preserves filtered colimits. -/\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover descent and section-ring colimits cover only geometric subclaims; no simultaneous finite chart-incidence realization with finitely presented local module models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend a finite diagram of affine opens and local finitely presented sheaf modules along a directed inverse limit of quasi compact quasi separated schemes with affine transition morphisms",
+   "results": "OK 8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: returned geometric affine-limit results or finite-presentation morphism definitions, not the simultaneous chart and module statement"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite.?[pP]resentation|finitely.?[pP]resented).*(descen|[lL]imit)|(descen|[lL]imit).*(finite.?[pP]resentation|finitely.?[pP]resented)",
+   "results": "OK 6 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned geometric affine-limit results or finite-presentation morphism definitions, not the simultaneous chart and module statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine open refinements and finitely presented quasi coherent module models descend to a common stage of an affine transition scheme limit",
+   "results": "OK 8 hits: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.AffineScheme.hasLimits, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.AffineScheme.hasColimits, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.AffineScheme.createsLimitsForgetToScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: returned geometric affine-limit results or finite-presentation morphism definitions, not the simultaneous chart and module statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", \"IsLimit\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned geometric affine-limit results or finite-presentation morphism definitions, not the simultaneous chart and module statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation modules on an inverse limit of schemes are pulled back from modules on affine open subsets at a finite stage with a fixed finite open refinement diagram",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.locallyOfFinitePresentation_iff, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: returned geometric affine-limit results or finite-presentation morphism definitions, not the simultaneous chart and module statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fp-modules-affine-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. Finite-presentation module and map descent used to descend the tensor-inverse witness of the chosen line bundle. Returned proof Steps 1--3: finite affine charts, incidence and covering stabilization, restricted ring colimits, and local object models.",
+   "via": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-trf-invertible-affine-limit-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fp-affine-limit-chart-models",
+  "worker": "stage1",
+  "summary": "Expanded the finite-affine preparation into eight steps using existing DAG statements only: qcqs of the limit, finite subordinate refinements, labelled affine-open descent, equation stabilization, restricted ring colimits, algebraic object models, affine sheaf realization and common-stage tensor pullback. Preserved the statement and inherited provenance, audited every citation against its statement, and checked empty opens and zero-ring models. No new nodes or Lean files.",
+  "blueprint": "The inherited from.place points through finite-presentation module descent and invertible-module descent to the fibrewise ampleness input below lem-trf-local-term-locality. Steps 1--5 expand the finite affine geometry and Steps 6--8 the independent local object models in the first proof of Stacks 01ZR. The current latest blueprint ancestor and sk-i-curve-zero were read; this is a generic supporting tool, not a replacement for the contracting-correspondence unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic construction/restriction theorem for affine-transition scheme limits, including the canonical ring colimit; not a trace/local-term theorem supplied by this unit."
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic intersection theorem for quasi-compact opens on a quasi-separated scheme, needed for finite refinements and open equations; no unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine criterion for finite-presentation modules, including finite presentation implies quasi-coherence; no unit node supplies it."
+   },
+   {
+    "node": "lem-pc-fp-module-map-descent-affine",
+    "why": "Uses only the algebraic object clause for a directed colimit of rings (05N7), not global scheme-module descent or the parent item."
+   },
+   {
+    "node": "lem-pc-fp-affine-sections-realization",
+    "why": "Generic realization of a supplied affine section model as a sheaf, with no limit or finite-stage choice in its statement."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic stability under arbitrary tensor pullback, to synchronize the finitely many local models."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic canonical affine tensor-pullback sections comparison needed for the explicit sections clause (3)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-fp-affine-sections-realization",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-dbc7e0628",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-dbc7e0628 (reviewer sub-agent of L); spot-checked: I read the 8-step split in full; it has no new nodes and the statement is unchanged against the base dagsnap, which had no proof, so this is a first split. Source: Stacks 01ZR lemma-descend-modules-finite-presentation, whose first proof leaves the Zariski gluing out; its hypotheses (directed set, affine transitions, qcqs stages) match the item. I checked every cited statement against its step. Step 1: S is qcqs via the affine-cover criterion (1)/(2), affine⇒quasi-compact (permanence (3)) and the preimage-of-qc-open lemma, with no affine-overlap assumption. Step 2: pqf-lem-qs-intersection-qc on S, which Step 1 makes qs; the triple covers are subordinate by pointwise choice. Step 3: the Mathlib leaf lem-trf-affine-open-limit-descent (cofiltered, qs stages) plus a common bound. Step 4: inclusions and covers encoded as equalities of qc opens on the qcqs S_k, stabilized by clause (2) of pqf-lem-limit-qc-open-descends, so the stage covers really are covers. Step 5: the restriction and affine 01YW clauses of lem-weil-pbc-limit-affine-transition give Γ(C_d) = colim via the canonical maps. Step 6: fp⇒qcoh and fp sections from lem-weil-pbc-quasi-coherent-finite-type-affine (0)/(b), then the 05N7 object clause on the tail. Step 7: the hypotheses of lem-pc-fp-affine-sections-realization match exactly, with g.appTop the coprojection. Step 8: fp under tensor pullback without flatness, the composition iso of def-pc-module-pullback, and the affine sections iso of lem-weil-pbc-module-pullback-affine-sections. No cycle: the dependency closure of 145 nodes contains neither the item nor its parent. Not duplicates: the picard-framework chart-model nodes (lem-pc-fp-local-object-models, -affine-chart-object-models, -module-map-descent, -local-descent-datum) all sit in the base-change-over-Noetherian-affine setting. Edge cases checked: singleton I, empty charts and empty S, non-separated qcqs schemes. All seven generic tool_uses are accepted. No SGA source is used. Advisory only: the worker wrote tool_uses itself, which C8 leaves to the maintainer."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationAffineLimitChartModels",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_affine_limit_chart_models",
+  "declarations": [
+   "AlgebraicGeometry.fpLimitChartProjection",
+   "AlgebraicGeometry.HasFpLimitChartModel",
+   "AlgebraicGeometry.exists_finitePresentation_affine_limit_chart_models"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationAffineLimitChartModels.lean",
+  "statement": "theorem exists_finitePresentation_affine_limit_chart_models {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (F : c.pt.Modules) (hF : F.IsFinitePresentation) : (∃ (K : FiniteAffineRefinementShape) (C : Fin K.size → c.pt.Opens), K.Valid C) ∧ ∀ (K : FiniteAffineRefinementShape) (C : Fin K.size → c.pt.Opens), K.Valid C → ∃ (i : I) (_ : i₀ ≤ i) (Ci : Fin K.size → (D.obj (op i)).Opens), K.Valid Ci ∧ ∀ d : Fin K.size, ∃ h : c.π.app (op i) ⁻¹ᵁ Ci d = C d, (∀ j : Over (op i), IsAffine ((opensDiagram D (op i) (Ci d)).obj j)) ∧ Nonempty (IsLimit (opensCone D c (op i) (Ci d))) ∧ Nonempty (IsColimit (Scheme.Γ.mapCocone (opensCone D c (op i) (Ci d)).op)) ∧ HasFpLimitChartModel (c.π.app (op i)) (C d) (Ci d) h F",
+  "branch": "sheaf-dag",
+  "by": "Q125",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba249b1b9",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_deps, the new def node and both modules. Hypotheses match the node (small nonempty directed I in Type u, affine transitions, qcqs stages, IsLimit cone, Mathlib IsFinitePresentation). Existence conjunct plus a universal clause over every valid FiniteAffineRefinementShape. Clause (1): actual open equalities and Valid at stage i ≥ i₀. Clause (2): Mathlib opensDiagram/opensCone on the Over(op i) tail, affine, IsLimit, canonical Γ colimit. Clause (3): finitely presented quasi-coherent N, iso e from tensorPullback, θ pinned on pure tensors via tensorPullbackSection (checked to be the genuine 1⊗s), so θ is canonical. Records verbatim, only lean/stmt_deps changed vs live, imports exist, no duplicate package found, sorry only in the theorem, docstrings and report sections present. Advisory only: IsQuasicoherent redundant; ordered and diagonal pairs required (literal reading)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T094407-L-222159",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

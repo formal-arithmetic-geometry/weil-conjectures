@@ -1,0 +1,158 @@
+{
+ "id": "lem-per-blowup-closed-fiber-of-rees-reduction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: completion part of the closed-point purity test, ILO XX 4.4 admissible blowups and the note identifying the completed systems. This is the final geometric implication from the reduced Rees-ring identification to the closed-fibre isomorphism.",
+   "via": [
+    "lem-per-admissible-modification-system",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical Rees reduction identifies the two closed fibres",
+ "statement": "Let $f:A\\to B$ be a homomorphism of commutative rings, and let $I,J\\subseteq A$ be ideals. Use affine spectra [def-weil-affine-spectrum]. Write $R_A(J)=\\bigoplus_{n\\geq0}J^nt^n$ [def-nagata-rees-algebra], $\\operatorname{Bl}_J(\\operatorname{Spec}A)=\\operatorname{Proj}R_A(J)$ [def-nagata-affine-blowup], and use scheme fibre products [def-pc-fibre-product]. Suppose that the canonical maps induced by $f$ give ring isomorphisms $e_0:A/I\\simeq B/IB$ and $e_R:R_A(J)/IR_A(J)\\simeq R_B(JB)/(IB)R_B(JB)$: explicitly, each isomorphism sends every residue class to the residue class of its canonical image. Then there is an isomorphism $e:\\operatorname{Bl}_{JB}(\\operatorname{Spec}B)\\times_{\\operatorname{Spec}B}\\operatorname{Spec}(B/IB)\\simeq\\operatorname{Bl}_J(\\operatorname{Spec}A)\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$. Its composite with the first projection is the first projection followed by the canonical blowup morphism induced by $f$; its composite with the second projection is the second projection followed by $\\operatorname{Spec}(e_0)$. No finite-generation, flatness or completion hypothesis is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XX section 4.4, final Note, printed p.374: isomorphism of Rees reductions gives the closed-fibre identification; naturality of the Proj base-change comparison."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-nagata-rees-algebra",
+  "def-nagata-affine-blowup",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The extended ideal IR_A(J) is homogeneous: its degree-n component is IJ^n. The coefficientwise map induced by f respects the grading and the extended ideals, so it descends to a graded map of the two quotient Rees rings. The representative formula identifies its underlying ring map with e_R. A bijective graded map has graded inverse: decompose a preimage into its finitely many homogeneous components and use injectivity to make all components outside the target degree zero. The degree-zero map agrees with e_0, by the representative formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XX section 4.4, final Note, printed p.374: isomorphism of Rees reductions gives the closed-fibre identification; naturality of the Proj base-change comparison."
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-relative-proj-base-change-arbitrary] to the Rees graded algebra over Spec A and the quotient morphism Spec(A/I) -> Spec A, and likewise over B. On every affine open, the pullback algebra is the original graded algebra tensored with the residue ring; the map x tensor a-bar -> a*x identifies it with the homogeneous quotient by I. Thus the closed fibres identify with Proj of the quotient Rees graded rings. The graded isomorphism in Step 1 identifies those Proj schemes over Spec(e_0). Compose the two base-change isomorphisms with this isomorphism.",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XX section 4.4, final Note, printed p.374: isomorphism of Rees reductions gives the closed-fibre identification; naturality of the Proj base-change comparison."
+   }
+  },
+  {
+   "text": "On a standard homogeneous localization the constructed morphism sends F/s^d to f(F)/f(s)^d. After the first projection this is exactly the morphism of blowups induced by f. On degree-zero constants the map is e_0, giving the second projection formula. These formulas agree on chart intersections because they are induced by the same coefficientwise homomorphism; the standard charts cover Proj, so both identities hold globally. If the quotient graded ring is zero the Proj schemes are empty and the identities still hold; if J is the unit ideal the assertion reduces to Spec(e_0).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XX section 4.4, final Note, printed p.374: isomorphism of Rees reductions gives the closed-fibre identification; naturality of the Proj base-change comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XX section 4.4, final Note, printed p.374: isomorphism of Rees reductions gives the closed-fibre identification; naturality of the Proj base-change comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A canonical graded isomorphism of Rees algebras modulo an ideal induces an isomorphism of the closed fibers of blowups",
+   "results": "Proj.pullbackAwayιIso and Proj.projIsoSpec concern standard chart constructions; no theorem with the closed-fibre and both projection identities.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Ideal.Quotient",
+   "results": "Service returned unknown identifier Ideal.Quotient and zero hits; separate source inspection found no Rees reduction comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical graded isomorphism of Rees algebras modulo an ideal induces an isomorphism of the closed fibers of blowups",
+   "results": "KummerDedekind.quotAdjoinEquivQuotMap and fractional-ideal canonicalEquiv results do not state this geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rees.*quotient|quotient.*rees|Blowup.*dense",
+   "results": "No matching closed-fibre comparison; Mathlib.RingTheory.ReesAlgebra has no geometric quotient theorem. WeilConjectures.Blowup.Affine.BaseChange proves a closed immersion into the base-change pullback, not the required closed-fibre isomorphism. The existing relative-Proj base-change result is the generic tool used in Step 2.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdmissibleModificationSystem",
+  "date": "2026-10-26",
+  "group": "A3"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BlowupClosedFiberOfReesReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupClosedFiberOfReesReduction.lean",
+  "declaration": "AlgebraicGeometry.AffineBlowup.exists_closedFiberIso_of_reesReduction",
+  "statement": "theorem exists_closedFiberIso_of_reesReduction\n    {A B : Type u} [CommRing A] [CommRing B]\n    (f : A →+* B) (I J : Ideal A)\n    (e₀ : A ⧸ I ≃+* B ⧸ I.map f)\n    (he₀ : ∀ a : A, e₀ (Ideal.Quotient.mk I a) = Ideal.Quotient.mk _ (f a))\n    (eR : reesAlgebra J ⧸ I.map (algebraMap A (reesAlgebra J)) ≃+*\n      reesAlgebra (J.map f) ⧸ (I.map f).map (algebraMap B (reesAlgebra (J.map f))))\n    (heR : ∀ F : reesAlgebra J,\n      eR (Ideal.Quotient.mk _ F) = Ideal.Quotient.mk _ (reesGrading.hom f rfl F)) :\n    ∃ e : pullback (AffineBlowup.toSpec (J.map f))\n          (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.map f)))) ≅\n        pullback (AffineBlowup.toSpec J)\n          (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))),\n      e.hom ≫ pullback.fst _ _ = pullback.fst _ _ ≫ AffineBlowup.hom f rfl ∧\n      e.hom ≫ pullback.snd _ _ = pullback.snd _ _ ≫\n        Spec.map (CommRingCat.ofHom e₀.toRingHom)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.AlgebraicGeometry.AdmissibleModificationSystem",
+  "worker": "A3",
+  "summary": "Only the final geometric step of the original proof is isolated. Completion descent, filteredness, density, power quotients and Rees quotients are proved in the item.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Arbitrary Proj base change converts the homogeneous Rees quotient into the scheme closed fibre; this is the generic tool already approved for the parent argument."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T080737-L-1547693",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T080737-L-1547693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

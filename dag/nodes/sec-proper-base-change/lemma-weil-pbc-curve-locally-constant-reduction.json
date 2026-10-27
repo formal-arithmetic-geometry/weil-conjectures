@@ -123,7 +123,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction",
+     "module": "WeilConjectures.ConstructibleSheaf.LocallyConstantReduction",
+     "lines": [
+      44,
+      83
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -163,8 +188,13 @@
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $U$ be irreducible and let $G$ be a finite locally constant sheaf of\n$\\mathbf F_\\ell$-vector spaces on $U_{\\Et}$. There is a connected finite\netale $v:V\\to U$ of degree prime to $\\ell$ such that $v^{-1}G$ has a\nfiltration by subsheaves with constant $\\mathbf F_\\ell$-quotients. The\nadjunction unit and the trace satisfy\n\n$$\n G\\xrightarrow{\\eta}v_*v^{-1}G\n \\xrightarrow{\\operatorname{tr}}G\n   =\\deg(v)\\operatorname{id}_G,\n$$\n\nso $G$ is a direct summand of $v_*v^{-1}G$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\ell$ be a prime, $U$ an irreducible scheme and $G$ a finite locally\nconstant sheaf of $\\mathbf F_\\ell$-vector spaces on $U_{\\Et}$. There are a\nconnected scheme $V$, a finite etale $v:V\\to U$ and an integer $d$ prime to\n$\\ell$ such that every geometric fibre of $v$ has exactly $d$ points, and:\n\n1. $v^{-1}G$ has a finite filtration\n   $0=W_0\\subseteq W_1\\subseteq\\cdots\\subseteq W_n=v^{-1}G$ by subsheaves\n   whose successive quotients $W_{i+1}/W_i$ are isomorphic to the constant\n   sheaf $\\mathbf F_\\ell$;\n2. the adjunction unit $\\eta:G\\to v_*v^{-1}G$ has a retraction\n   $r:v_*v^{-1}G\\to G$, $r\\circ\\eta=\\operatorname{id}_G$; so $G$ is a\n   direct summand of $v_*v^{-1}G$.",
   "proof": [
    {
     "text": "Choose a geometric point $\\bar u$ of $U$. The locally constant sheaf gives\na representation\n\n$$\n\\rho:\\pi_1(U,\\bar u)\\longrightarrow\n\\operatorname{GL}_{\\mathbf F_\\ell}(G_{\\bar u})\n$$\n\nwith finite image $Q$. If $H\\subseteq Q$ is an $\\ell$-Sylow subgroup, the\ninverse image $\\rho^{-1}(H)$ defines a connected finite etale cover\n$v:V\\to U$ of degree $d=[Q:H]$, which is prime to $\\ell$. On $V$, the\nmonodromy factors through $H$.",
@@ -192,7 +222,7 @@
     "elementary": null
    },
    {
-    "text": "Under the finite-etale correspondence of [thm-galois-lc-etale], the finite\nlocally constant $\\mathbf F_\\ell$-sheaf $G$ on the irreducible $U$\ncorresponds to a finite etale $U$-scheme, and its monodromy is the action of\nthe finite group $Q$ (the image of $\\rho$) on the geometric stalk\n$G_{\\bar u}$. Let $H$ be a Sylow $\\ell$-subgroup of $Q$, of index prime to\n$\\ell$, and let $v:V\\to U$ be the corresponding connected finite etale map of\ndegree $[Q:H]$; then the monodromy of $v^{-1}G$ is the $\\ell$-group $H$, so\nthe finite $\\ell$-group filtration of\n[lemma-weil-pbc-finite-l-group-filtration] applied to the $H$-module\n$G_{\\bar u}$ gives a filtration of $v^{-1}G$ with constant\n$\\mathbf F_\\ell$-quotients. At a geometric point, the unit\n$G\\to v_*v^{-1}G$ is the diagonal and the trace is the sum over the finite\nfibre, by [lemma-weil-pbc-finite-stalk-formula], so their composite is\n$\\deg(v)\\operatorname{id}_G$ with $\\deg(v)\\not\\equiv0\\pmod\\ell$, and $G$ is a\ndirect summand of $v_*v^{-1}G$.",
+    "text": "Under the finite-etale correspondence of [thm-galois-lc-etale], the finite\nlocally constant $\\mathbf F_\\ell$-sheaf $G$ on the irreducible $U$\ncorresponds to a finite etale $U$-scheme, and its monodromy is the action of\nthe finite group $Q$ (the image of $\\rho$) on the geometric stalk\n$G_{\\bar u}$. Let $H$ be a Sylow $\\ell$-subgroup of $Q$, of index prime to\n$\\ell$, and let $v:V\\to U$ be the corresponding connected finite etale map of\ndegree $[Q:H]$; then the monodromy of $v^{-1}G$ is the $\\ell$-group $H$, so\nthe finite $\\ell$-group filtration of\n[lemma-weil-pbc-finite-l-group-filtration] applied to the $H$-module\n$G_{\\bar u}$ gives a filtration of $v^{-1}G$ with constant\n$\\mathbf F_\\ell$-quotients. At a geometric point, the unit\n$G\\to v_*v^{-1}G$ is the diagonal and the trace is the sum over the finite\nfibre, by [lemma-weil-pbc-finite-stalk-formula], so their composite is\n$d\\operatorname{id}_G$ with $d\\not\\equiv0\\pmod\\ell$, and\n$r=d^{-1}\\operatorname{tr}$ is the required retraction.",
     "uses": [
      "thm-galois-lc-etale",
      "lemma-weil-pbc-finite-l-group-filtration",
@@ -201,6 +231,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

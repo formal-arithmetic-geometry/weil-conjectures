@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-regular-principal-completion-fiber",
+ "kind": "statement",
+ "title": "The fiber of regular principal quotient completion is the scalar inverse-limit tower",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and use its small pro-étale site in the fixed universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $R$ be a sheaf of commutative rings and $t\\in\\Gamma(T,R)$ a global section such that multiplication by $t$ on $R$ is monic. Work in the ordinary unbounded derived category $D(\\operatorname{Mod}(R))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For $n\\geq1$ put $Q_n=R/t^nR$. Derived tensor means the total sheaf tensor evaluated on a K-flat resolution [def-pc-tensor-complex-sheaves, def-pc-kflat-complex], and $\\operatorname{Res}_n$ is restriction of scalars along $R\\to Q_n$ [def-pc-sheaf-restrict-scalars]. Set\n$$C_t(K)=R\\varprojlim_{n\\geq1}\\operatorname{Res}_n(K\\otimes_R^LQ_n).$$\nHere $R\\varprojlim$ is the total right-derived functor on strict inverse towers, computed by strict resolutions and the augmented Roos model [def-weil-derived-limit, def-weil-strict-roos-model], with transitions induced by $Q_{n+1}\\to Q_n$. For a complex $K^\\bullet$ representing $K$, let $T_t(K)$ be the localized strict Roos complex\n$$\\operatorname{Cone}\\bigl(1-s_t:\\prod_{n\\geq1}K^\\bullet\\longrightarrow\\prod_{n\\geq1}K^\\bullet\\bigr)[-1],\\qquad s_t((k_n))=(tk_{n+1}),$$\nformed functorially on complexes and localized at quasi-isomorphisms. Let $c_K:K\\to C_t(K)$ be its specified reduction augmentation, with quotient maps in the product coordinate and zero in the shifted-product coordinate. Let $e_K:T_t(K)\\to K$ be evaluation at the first term of the repeated-$t$ tower. There is a distinguished triangle, natural in $K$,\n$$T_t(K)\\xrightarrow{\\ t e_K\\ }K\\xrightarrow{\\ c_K\\ }C_t(K)\\longrightarrow T_t(K)[1].$$\nIn particular the second arrow is this specified completion unit, not an arbitrary lift of its product components.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, proof of (1) iff (2), printed pp.22-23: the transition is t on the source and identity on the target of K --t^n--> K. Regularity identifies this two-term Koszul tower with the quotient-tensor tower. The n>=1 convention gives t times first evaluation on the first arrow."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-limit",
+  "def-weil-strict-roos-model",
+  "def-pur-principal-quotient-completion-model",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pur-sheaf-modules-hom-module"
+ ],
+ "proof": [
+  {
+   "text": "Countable products in $\\operatorname{Mod}(R)$ are exact by [lem-weil-proetale-countable-products-exact]. Use the strict Roos functor $H$ and its reordered coordinates of [lem-pe-roos-cone-calculus]: $H(N)^q=(\\prod N_n^q)\\oplus(\\prod N_n^{q-1})$ and $d(v,u)=(dv,-du-(1-s_N)v)$. It inverts levelwise quasi-isomorphisms and commutes with cones and shifts, preserving the cone inclusion and boundary with their specified signs. Thus its localization is an exact functor on strict towers. For the total right-derived limit in the statement, [lem-weil-strict-roos-derivation] supplies its Roos descent and [lem-weil-strict-roos-normalization] identifies this descent with the resolution-defined total functor, including evaluations and every compatible zero-shifted-coordinate augmentation. We use this normalized comparison throughout; the non-functorial existence notion of derived limit alone is insufficient.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-pe-roos-cone-calculus",
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-strict-roos-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), normalized strict comparison; Bhatt-Scholze Proposition 3.1.11"
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $P\\to K^\\bullet$ by [lem-pc-kflat-resolution]. Write $L_n=[R\\xrightarrow{t^n}R]$ in degrees $-1,0$. Its quotient augmentation $\\epsilon_n:L_n\\to Q_n[0]$, transitions $(t,1)$, and tensor towers with their compatible augmentations are exactly [def-pur-principal-koszul-quotient-towers]. Multiplication by $t^n$ is monic: the case $n=1$ is the hypothesis, and composing one more copy of the monomorphism proves the next case. Consequently $H^{-1}(L_n)=\\ker(t^n)=0$, $H^0(L_n)=\\operatorname{coker}(t^n)=Q_n$, and all other cohomology vanishes. Hence $\\epsilon_n$ is a quasi-isomorphism. By [lem-pur-kflat-tensor-quasiiso-independent], $\\epsilon_n\\otimes1_P$ is a quasi-isomorphism. These maps commute with transitions and carry the degree-zero Koszul augmentation to the quotient augmentation, as stated in the tower definition.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-principal-koszul-quotient-towers",
+    "lem-pur-kflat-tensor-quasiiso-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YP (lemma-K-flat-quasi-isomorphism); principal Koszul augmentation of algebraization.tex Tag 0A0E"
+   }
+  },
+  {
+   "text": "Put $A=(P\\xleftarrow{t}P\\xleftarrow{t}\\cdots)$ and $B=(P\\xleftarrow{1}P\\xleftarrow{1}\\cdots)$. Define the strict tower map $f:A\\to B$ by $f_n=t^n$: the transition square is the identity $t^nt=t^{n+1}$. The tensor convention [def-pc-tensor-complex-sheaves] identifies $L_n\\otimes P$ with $\\operatorname{Cone}(t^n:P\\to P)$: in degree $q$ its coordinates are $(b,a)\\in P^q\\oplus P^{q+1}$ and its differential is $(db+t^na,-da)$. The tensor transition is $(b,a)\\mapsto(b,ta)$, exactly the cone transition of $f$. Its augmentation is $x\\mapsto(x,0)$. Thus the whole augmented tensor tower, not only its individual derived vertices, is the cone tower $\\operatorname{Cone}(f)$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, proof of (1) iff (2), printed p.22; explicit tensor signs"
+   }
+  },
+  {
+   "text": "Apply the cone comparison of [lem-pe-roos-cone-calculus] and the distinguished cone triangle of [def-weil-abstract-derived-category]. They give the triangle $H(A)\\xrightarrow{H(f)}H(B)\\to H(\\operatorname{Cone}(f))\\to H(A)[1]$ after localization, with second arrow induced by the cone inclusion. Step 2 and the levelwise-quasi-isomorphism assertion of [lem-pe-roos-cone-calculus] identify its third vertex with $H(U)$, where $U_n=Q_n[0]\\otimes P$. This represents $C_t(K)$: K-flat tensor computes the derived reductions, and step 1 identifies $H(U)$ with their total derived inverse limit. The normalized comparison carries its zero-shifted-coordinate quotient augmentation to the specified $c_K$.",
+   "uses": [
+    "lem-pe-roos-cone-calculus",
+    "def-weil-abstract-derived-category",
+    "lem-weil-strict-roos-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, proof of (1) iff (2); strict normalization: Stacks Tag 0941"
+   }
+  },
+  {
+   "text": "For the constant tower $B$ set $S=1-s_1$, and define $j:P\\to H(B)$ by $j(x)=((x)_n,0)$ and $e:H(B)\\to P$ by $e(v,u)=v_1$. Both are chain maps and $ej=1$. Define a chain map on product complexes by $r(w)_1=0$, $r(w)_n=-\\sum_{i=1}^{n-1}w_i$ for $n>1$. Every coordinate uses a finite sum, so this defines a morphism of sheaves. Directly $Sr=1$ and $rSv=v-(v_1)_n$. In the Roos differential of [lem-pe-roos-cone-calculus], the degree $-1$ morphism $h(v,u)=(-ru,0)$ satisfies $(dh+hd)(v,u)=(rSv,u)=(1-je)(v,u)$. Hence $e$ and $j$ are inverse in the homotopy category and therefore in the derived category [def-weil-abstract-derived-category]. This contraction is natural in $P$.",
+   "uses": [
+    "lem-pe-roos-cone-calculus",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, constant-target tower in the proof of (1) iff (2); explicit finite-sum contraction"
+   }
+  },
+  {
+   "text": "Use the inverse pair $e,j$ to replace the middle vertex of step 4 by $P$. The first arrow becomes $eH(f)$. Since $H(f)$ is diagonal with product coordinates $t^n$, this map sends $(v,u)$ to $tv_1$. On $H(A)$ first evaluation is $(v,u)\\mapsto v_1$, so the first arrow is exactly $t e_K$, with no index shift. The second arrow is the cone inclusion applied to $j$ and then the quotient comparison of step 2. Its coordinates are therefore $x\\mapsto(((x\\bmod t^n)_n),0)$ in $H(U)$: the zero shifted coordinate is preserved at both stages. Step 1 identifies this particular map with $c_K$. Transporting the boundary of the cone triangle gives the asserted distinguished triangle. These coordinate computations use [lem-pe-roos-cone-calculus] and its augmentation compatibility, not a choice of a lift from product components.",
+   "uses": [
+    "lem-pe-roos-cone-calculus",
+    "lem-weil-strict-roos-normalization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, source transition t and target transition identity; n>=1 first-coordinate normalization"
+   }
+  },
+  {
+   "text": "All constructions above commute with chain maps: the maps $t^n$, the quotient augmentations, the finite-sum contraction, and the Roos cone comparison. They also descend to the derived category. Indeed $A$ and $B$ carry a quasi-isomorphism of representatives to a levelwise quasi-isomorphism, and so do their cone towers by the cone-preservation and quasi-isomorphism properties in [lem-pe-roos-cone-calculus]. On K-flat representatives the quotient tower is naturally levelwise quasi-isomorphic to this cone tower by step 2. Thus changing a K-flat resolution conjugates the third vertex and its augmentation by the same natural isomorphism. The calculus of fractions in [lem-pur-quasi-isos-saturated-triangulated], together with existence of K-flat resolutions [lem-pc-kflat-resolution], lets every derived morphism be computed by a roof of K-flat representatives: resolve the middle complex of any roof and compose its two maps. Naturality for those two chain maps proves naturality for the roof and hence for all derived morphisms. In particular $H(A)$ agrees with the representative-independent $T_t(K)$ in the statement. The same refinement applied to the common denominators supplied by that calculus proves independence of roofs; homotopic chain maps already agree after localization. Equivalently, uniqueness of descended transformations in [lem-weil-pbc-localization-universal-property] identifies these compatible computations.",
+   "uses": [
+    "lem-pe-roos-cone-calculus",
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.9, functorial cone construction; Lemma 3.4.12, proof of (1) iff (2); localization via Stacks Tag 05RU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pe-roos-cone-calculus",
+  "lem-weil-strict-roos-derivation",
+  "lem-weil-strict-roos-normalization",
+  "lem-pc-kflat-resolution",
+  "def-pur-principal-koszul-quotient-towers",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, proof of (1) iff (2), printed pp.22-23; strict normalization from Stacks Tag 0941; tensor preservation from Tag 06YP. Coordinate contractions and n>=1 arrow normalization expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completion|adic|telescope|Roos",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types give classical adic completion, local cohomology as colimits of Ext, ordinary localization, generic short-exact triangles, or unrelated monadic/idempotent completion; none identifies the specified quotient-completion unit with this scalar-tower fiber triangle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Distinguished triangle from the inverse limit of multiplication by t to a complex to its derived t adic completion",
+   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.triangleOfSES, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished, DerivedCategory.triangleOfSES_distinguished, HomotopyCategory.Pretriangulated.distinguishedTriangles, CategoryTheory.Triangulated.SpectralObject.distinguished', CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one, CategoryTheory.Triangulated.TStructure.exists_triangle",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types give classical adic completion, local cohomology as colimits of Ext, ordinary localization, generic short-exact triangles, or unrelated monadic/idempotent completion; none identifies the specified quotient-completion unit with this scalar-tower fiber triangle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"limit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types give classical adic completion, local cohomology as colimits of Ext, ordinary localization, generic short-exact triangles, or unrelated monadic/idempotent completion; none identifies the specified quotient-completion unit with this scalar-tower fiber triangle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular global section t of a sheaf of rings, the fiber of K to the derived inverse limit of K tensor R modulo t powers is the derived inverse limit of the repeated multiplication by t tower on K",
+   "results": "8 hits: localCohomology, ModuleCat.Tilde.Localizations, ModuleCat.Tilde.const, AdicCompletion.ofTensorProduct_tmul, ModuleCat.Tilde.const_apply, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types give classical adic completion, local cohomology as colimits of Ext, ordinary localization, generic short-exact triangles, or unrelated monadic/idempotent completion; none identifies the specified quotient-completion unit with this scalar-tower fiber triangle"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|completion|homotopyLimit|homotopy.*limit",
+   "results": "10 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types give classical adic completion, local cohomology as colimits of Ext, ordinary localization, generic short-exact triangles, or unrelated monadic/idempotent completion; none identifies the specified quotient-completion unit with this scalar-tower fiber triangle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy inverse limit of multiplication by a regular scalar is the mapping fiber of the canonical derived adic completion unit; compute powers quotient by the two term Koszul resolution",
+   "results": "8 hits: BDeRhamPlus, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.of_apply, AdicCompletion.eval_of, AdicCompletion.factorₐ_evalₐ_one, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.eval_comp_of, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types give classical adic completion, local cohomology as colimits of Ext, ordinary localization, generic short-exact triangles, or unrelated monadic/idempotent completion; none identifies the specified quotient-completion unit with this scalar-tower fiber triangle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy fiber of the canonical derived completion map is the homotopy limit of the repeated multiplication tower for a regular element",
+   "results": "8 hits: instQFactorsThroughHomotopyIntUp, instQFactorsThroughHomotopyDown, AlgebraicTopology.DoldKan.homotopyPInftyToId, HomologicalComplex.homotopyCofiber, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, CochainComplex.cm5b.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyPInftyToId_hom, HomologicalComplex.homotopyCofiber.inrCompHomotopy",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; classical adic completion and generic homotopy cofibers do not give this normalized regular-principal sheaf quotient tower triangle"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|completion|Roos|homotopyLimit",
+   "results": "8 hits: Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LeftResolution/Reduced.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; classical adic completion and generic homotopy cofibers do not give this normalized regular-principal sheaf quotient tower triangle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion by powers of a regular scalar sits in a natural distinguished triangle with the repeated multiplication inverse tower",
+   "results": "8 hits: AdicCompletion, AdicCompletion.module, AdicCompletion.val_smul, AdicCompletion.liftRingHom.congr_simp, AdicCompletion.instPowNat, AdicCompletion.instIsScalarTower, AdicCompletion.instCommRing, AdicCompletion.instSMul.congr_simp",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; classical adic completion and generic homotopy cofibers do not give this normalized regular-principal sheaf quotient tower triangle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"limit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; classical adic completion and generic homotopy cofibers do not give this normalized regular-principal sheaf quotient tower triangle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cone of multiplication by t powers is a resolution of the quotient by t powers and its homotopy inverse limit is derived adic completion",
+   "results": "8 hits: AdicCompletion, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.of_apply, AdicCompletion.evalₐ_of, AdicCompletion.eval_of, BDeRhamPlus, AdicCompletion.evalₐ, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; classical adic completion and generic homotopy cofibers do not give this normalized regular-principal sheaf quotient tower triangle"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-principal-complete-heart-kernels",
+  "date": "2026-10-24",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph (direct-sum preservation): the supported scalar-heart estimate needs kernel/image completeness; this node supplies its regular-principal completion fiber calculation, not an assertion stated by the blueprint.",
+   "via": [
+    "lem-sfb-principal-complete-heart-kernels",
+    "lem-sfb-supported-image-derived-completeness",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-regular-principal-completion-fiber",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing strict tower, K-flat tensor and Roos comparison nodes. Expanded the regular Koszul resolution, the constant-tower finite-sum contraction, and the coordinate calculation identifying both t times first evaluation and the specified zero-shifted-coordinate completion unit. No new nodes.",
+  "blueprint": "Realizes the descendant completeness calculation serving det-sf-comp-coherence-cocycle, Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph (direct-sum preservation). The latest blueprint does not itself state this fiber computation; the route above the node is unchanged. Whole-blueprint searches for principal completion, Roos and completion found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact products for arbitrary ring sheaves on the small pro-etale site justify the strict Roos model. No step of compactification coherence is replaced."
+   },
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "Generic strict Roos cone and shift comparisons provide the triangle and its actual maps. No step of compactification coherence is replaced."
+   },
+   {
+    "node": "lem-weil-strict-roos-derivation",
+    "why": "Generic total right-derived limit identification for module-sheaf strict towers. No step of compactification coherence is replaced."
+   },
+   {
+    "node": "lem-weil-strict-roos-normalization",
+    "why": "Generic normalization preserves actual augmentations and evaluations under the total-limit comparison. No step of compactification coherence is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of K-flat resolutions on ringed sites. No step of compactification coherence is replaced."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "Generic sheaf K-flat tensor invariance, including independent coefficient universes. No step of compactification coherence is replaced."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "Generic calculus of fractions for unbounded complexes justifies the roof computation and common refinements in naturality; no compactification argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic uniqueness of natural transformations after localization; no compactification argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pe-roos-cone-calculus",
+  "lem-weil-strict-roos-derivation",
+  "lem-weil-strict-roos-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-c3d1c08a6",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-c3d1c08a6 (reviewer sub-agent of L); spot-checked: PASS with no changes; review.md has the details. Shape: one commit; only the item node and report changed. Compared with live/side-live (still unsplit), only status, proof, proof_deps, proof_origin, split_report and new mathlib_searches entries changed; statement, stmt_deps, source and blueprint are unchanged. No new nodes. proof_deps equals the union of the step uses (11 ids, all present). No SGA. Not a re-split note and not superseded live. Source: Bhatt–Scholze 1309.1198, Lemma 3.4.9 proof (p.22: F_{i+1}=cok(T(K,x)→K)≃R lim(K—x^n→K)) and Lemma 3.4.12 (1)⇔(2) (pp.22–23: transition is x on the source, identity on the target); the item makes this fibre triangle precise for a regular t. Step 1: the four tool hypotheses hold (any scheme and ring sheaf; the 2026-10-23 size convention makes the pro-étale site essentially V-small). Normalization's Q(b)θ=Q(λ)d.hom ties the zero-coordinate augmentation to the derived-limit unit. Step 2: t^n monic by composition, so ε_n is a quasi-isomorphism; tensor invariance applies with P K-flat in the second variable, as in the tower definition. Step 3: recomputed Tot(L_n⊗P), d(b,a)=(db+t^n a,−da) = Cone(t^n), transition (b,a)↦(b,ta) = cone of f_n=t^n. Step 4: cone comparison plus cone triangle, then H(ε⊗1) is a levelwise quasi-isomorphism and derivation/normalization identify the third vertex with C_t(K). Step 5: recomputed Sr=1, rSv=v−(v_1), dh+hd=(rSv,u)=1−je. Step 6: eH(f)=t·v_1 and the second arrow is the zero-shifted quotient augmentation, i.e. c_K. Step 7: naturality via K-flat roofs, saturation (MS2/MS3) and localization uniqueness (2)/(3). Small cases: t a unit; ℤ with t=p (fibre (ℤ_p/ℤ)[−1]); ℤ[x] with t=x; K=0. Duplicate search (grep -R for 3.4.12 and completion fibre terms; regular-roos-koszul-unit, regular-quotient-completion-unit, pe-completion-triangle-comparison, kflat-augmented-roos-comparison, augmented-scalar-roos-resolution) found no node stating this triangle. Accepted tool_uses: proetale-countable-products-exact, pe-roos-cone-calculus, strict-roos-derivation, strict-roos-normalization (generic). Maintainer note: the worker wrote the tool_uses list itself (C8), but its contents are correct."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RegularPrincipalCompletionFiber",
+  "declaration": "CategoryTheory.regularPrincipalCompletionFiber",
+  "declarations": [
+   "CategoryTheory.PrincipalCompletionFiber.Modules",
+   "CategoryTheory.PrincipalCompletionFiber.scalar",
+   "CategoryTheory.PrincipalCompletionFiber.scalarComplex",
+   "CategoryTheory.PrincipalCompletionFiber.scalarTower",
+   "CategoryTheory.PrincipalCompletionFiber.scalarRoos",
+   "CategoryTheory.PrincipalCompletionFiber.firstEvaluation",
+   "CategoryTheory.PrincipalCompletionFiber.FiberTriangle",
+   "CategoryTheory.regularPrincipalCompletionFiber"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RegularPrincipalCompletionFiber.lean",
+  "statement": "theorem regularPrincipalCompletionFiber (X : AlgebraicGeometry.Scheme.{t}) (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{max u (t + 1)}) [HasDerivedCategory.{w} (PrincipalCompletionFiber.Modules.{t + 1, t, max u (t + 1)} R)] (a : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients (AlgebraicGeometry.Scheme.ProEt.topology X) R)).sections) (_ha : Mono (globalSectionMultiplication R a)) : PrincipalCompletionFiber.FiberTriangle.{t + 1, t, max u (t + 1), w} R a",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The completion vertex is the existing normalized universal PrincipalQuotientCompletion.Model. T is a genuine localization of the explicit repeated-scalar strict Roos functor; e and multiplication are normalized on every representative. The distinguished triangles form a natural triangle with the specified completion unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-247ab6f56",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Only lean record and stmt_deps (+3 landed def nodes: principal-quotient-completion-model, principal-koszul-quotient-towers, sheaf-modules-hom-module) changed vs side-live; lean.statement verbatim; single sorry; helpers real (sectionsSMul-based scalar, ofOpSequence scalar tower + transpose, roosF, roosEval 0). Clauses: ProEt.topology X with coefficients CommRingCat.{max u (t+1)} (size convention, no universe equation); Mono(globalSectionMultiplication) = t regular; completion = landed universal Model (counit left-derived, K-flat computes, coordinates (0,∏q_n), unit_computes) so ∃F harmless; T descends scalarRoos via φ; e pinned to roosEval 0 (n≥1 = level 0), μ pinned to scalarComplex so first arrow = a·e_K; second arrow = F.unit; natural δ, triangle distinguished ∀K. Edge cases K=0, zero ring, a unit, ℤ/p, unbounded K OK. No duplicate in live Sheaf/Algebra/Homology. Docstrings with source+blueprint, 7-step proof docstring. No compile needed (no file changed); worker compile clean."
+ }
+}

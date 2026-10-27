@@ -16,132 +16,71 @@
  ],
  "proof": [
   {
-   "text": "The lifting characterization in [def-weil-pbc-projective-module] gives sections of each $a^i$; thus $P^i=N^i\\oplus Q^i$. If $P^i\\oplus E$ is finite free, then $N^i\\oplus(Q^i\\oplus E)$ is that same finite free module, so $N^i$ is finite projective. Check $d_N$ directly using the cohomology definition in [def-weil-abstract-derived-category]. A kernel element killed by $d_N$ is a cycle of $P^{-1}$ killed by $H^{-1}(a)$, hence zero (there are no degree $-2$ boundaries). For $y\\in N^0$, injectivity of $H^0(a)$ implies $y=d_Px$. The element $a^{-1}x$ is a cycle of $Q^{-1}$. Surjectivity of $H^{-1}(a)$ gives a cycle $z\\in P^{-1}$ with $a^{-1}z=a^{-1}x$. Then $x-z\\in N^{-1}$ and $d_N(x-z)=y$. Thus $d_N$ is bijective.",
+   "text": "Apply [lem-trf-two-term-kernel-normalization] to $a$. It gives the finite projective kernel terms, invertible differential, and exactly the prescribed $\\Gamma_a,\\delta_N,T_a$.",
    "uses": [
-    "def-weil-pbc-projective-module",
-    "def-weil-abstract-derived-category"
+    "lem-trf-two-term-kernel-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), construction before Tag 0FJJ: applying the extracted kernel-normalization construction."
+   }
+  },
+  {
+   "text": "For the identity map the kernel is zero, $D(N)=R$ and $\\delta_N=1$. The kernel-first wedge map of [lem-trf-projective-determinant-exact-sequence] has empty kernel wedge, so $\\Gamma_{1}(x\\otimes1)=x$ and $T_1=1$.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJI, construction for surjective quasi-isomorphisms: kernel projectivity and acyclicity."
+    "place": "Tag 0FJI (section-determinants-complexes), identity case of the construction; Tag 0FJB (lemma-det-ses), empty kernel wedge."
    }
   },
   {
-   "text": "Apply [lem-trf-projective-determinant-exact-sequence] to the two split exact sequences of Step 1. Its maps are exactly the prescribed $\\gamma^i$, with kernel wedges first. Their tensor product, inverse dual in degree $-1$, and ordinary tensor symmetry give $\\Gamma_a$. The same node makes the determinant modules invertible; the top exterior map of $d_N$ is an isomorphism of these lines. Under $\\operatorname{Hom}(\\det N^{-1},\\det N^0)=\\det N^0\\otimes(\\det N^{-1})^\\vee$, this is a generator $\\delta_N$ of $D(N)$. Indeed locally a basis wedge is taken to a basis wedge; its tensor with the dual source wedge is a generator. Inserting this generator in $\\Gamma_a$ is an isomorphism $D(Q)\\to D(P)$, whose inverse is the stated $T_a$.",
+   "text": "For homotopic $a,b$, [lem-trf-two-term-normalization-locality-equivariance] reduces equality of $T_a,T_b$ to each prime localization and identifies their constructions there, with finite free terms. Over that local ring [lem-trf-local-homotopy-unit-determinant-lift] supplies a chain automorphism $k$ with $ak=b$ and $D(k)=1$. Apply the equivariance formula in [lem-trf-two-term-normalization-locality-equivariance] with $a'=b$, $u=k$, $v=1$: $T_aD(k)=T_b$. This proves equality locally and hence globally.",
    "uses": [
+    "lem-trf-two-term-normalization-locality-equivariance",
+    "lem-trf-local-homotopy-unit-determinant-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), localization reduction and automorphism square."
+   }
+  },
+  {
+   "text": "For composition put $N=\\ker a$, $M=\\ker b$, $L=\\ker(ba)$. The composite is surjective and induces composite cohomology isomorphisms, so [lem-trf-two-term-kernel-normalization] applies to all three maps. The restriction $a^i:L^i\\to M^i$ has kernel $N^i$ and is onto: lift $m\\in M^i$ through $a^i$; its lift lies in $L^i$ since $b^im=0$. It splits by [def-weil-pbc-projective-module]. The quotient isomorphisms are $L/N\\to M$, $[l]\\mapsto a(l)$; $P/N\\to Q$, $[p]\\mapsto a(p)$; and $P/L\\to S$, $[p]\\mapsto ba(p)$. Their injectivity and surjectivity follow from these kernel checks and surjectivity of $a,ba$. They commute with differentials by the chain equations. The map $P/N\\to P/L$ becomes $b:Q\\to S$, since both send $[p]$ to $ba(p)$. Thus this is the required flag with finite projective terms.",
+   "uses": [
+    "lem-trf-two-term-kernel-normalization",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJL (lemma-compose-surjections), kernel flag for the composite; explicit exactness and quotient identifications."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-acyclic-two-term-flag-determinants] to this flag. Under Step 4's quotient isomorphisms its three $G$ maps become $\\Gamma_a,\\Gamma_b,\\Gamma_{ba}$: [lem-trf-projective-determinant-exact-sequence] sends kernel wedges and quotient lifts to the same ordered wedge on either side. For $c:L/N\\xrightarrow{\\sim}M$, $c^0d_{L/N}=d_Mc^{-1}$; a wedge $e$ and its differential image therefore go to $\\det(c^{-1})e$ and $\\det(d_M)\\det(c^{-1})e$. Thus $D(c)\\delta_{L/N}=\\delta_M$. The differentials of $N,L$ are unchanged. Substitute $z_M=\\delta_M$, $z_N=\\delta_N$ in the two flag identities:\n$$\\Gamma_a(\\Gamma_b(x\\otimes\\delta_M)\\otimes\\delta_N)=\\Gamma_{ba}(x\\otimes\\delta_L).$$\nBy normalization the left side is $T_a^{-1}(T_b^{-1}(x))$ and the right side is $T_{ba}^{-1}(x)$. Taking inverses gives $T_{ba}=T_b\\circ T_a$.",
+   "uses": [
+    "lem-trf-acyclic-two-term-flag-determinants",
     "lem-trf-projective-determinant-exact-sequence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJI, defining triangle for det(a); Tag 0FJB (lemma-det-ses)."
-   }
-  },
-  {
-   "text": "For $a=\\mathrm{id}_P$, its kernel is the zero complex, $D(N)=R$ and $\\delta_N=1$. The wedge formula has empty kernel wedge and leaves each quotient wedge unchanged. Hence $\\Gamma_a(x\\otimes1)=x$ and $T_a=1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJI, zero-kernel case of the definition."
-   }
-  },
-  {
-   "text": "For homotopy invariance we may compute at every prime of $R$. The split sequences of Step 1 stay split after localization (apply the same projection and section), and their kernels and differentials are therefore the localized ones. Wedge products, duals of rank-one projectives, and their evaluation maps localize by their basis formulas. Thus $\\Gamma_a$, $\\delta_N$ and $T_a$ localize to the same construction. By [lem-weil-pbc-finite-projective-standard-free-cover], all the terms are finite free at each prime: choose a covering element outside that prime and then localize its free basis. Equality there detects equality globally: if an element $y$ in the image of the difference of two maps were nonzero, its proper annihilator would lie in a maximal ideal $\\mathfrak m$; $y/1=0$ at $\\mathfrak m$ would give $sy=0$ for $s\\notin\\mathfrak m$, a contradiction. For the zero ring all modules are zero and equality is immediate.",
-   "uses": [
-    "lem-weil-pbc-finite-projective-standard-free-cover"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph, localization reduction."
-   }
-  },
-  {
-   "text": "Work over one such local ring. Apply [lem-trf-local-common-summand-surjections] to $a^{-1},b^{-1}:P^{-1}\\to Q^{-1}$ in chosen finite bases. It gives $U\\subseteq P^{-1}$ on which both maps are isomorphisms, including when the target has rank zero. Let $s:Q^{-1}\\to U\\subseteq P^{-1}$ be the inverse of $a^{-1}|_U$ and put $t=sh:P^0\\to P^{-1}$. Then $a^{-1}t=h$.",
-   "uses": [
-    "lem-trf-local-common-summand-surjections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK, second and final paragraphs."
-   }
-  },
-  {
-   "text": "Put $k^{-1}=1+td_P$ and $k^0=1+d_Pt$. The equations $k^0d_P=d_Pk^{-1}$, $a^{-1}k^{-1}=b^{-1}$, and $a^0k^0=b^0$ follow by expansion and the chain-map equation for $a$. The map $k^{-1}$ is invertible without a finiteness-of-ring assumption: in $P^{-1}=\\ker a^{-1}\\oplus U$ its matrix is $\\left(\\begin{smallmatrix}1&0\\\\ C&B\\end{smallmatrix}\\right)$, where $B=(a^{-1}|_U)^{-1}(b^{-1}|_U)$ is invertible. Its inverse is $\\left(\\begin{smallmatrix}1&0\\\\-B^{-1}C&B^{-1}\\end{smallmatrix}\\right)$. Write $v=(1+td_P)^{-1}$. An inverse for $k^0$ is $1-d_Pvt$: both products equal $1$, using $v+vtd_P=1=v+td_Pv$. Hence $k$ is a chain isomorphism and restricts to an isomorphism $c:N_b\\to N_a$ because $ak=b$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK, first two paragraphs; explicit inverse calculation for the chosen lift."
-   }
-  },
-  {
-   "text": "In local bases let $A$ be the matrix of $d_P$ and $B$ the matrix of $t$. By [lem-trf-rectangular-determinant-switch], $\\det(k^0)=\\det(1+AB)=\\det(1+BA)=\\det(k^{-1})$. Both scalars are units since $k$ is invertible. Consequently the map $D(k)=\\det(k^0)\\otimes\\det(k^{-1})^{-\\vee}$ on $D(P)$ is multiplication by their ratio, hence is the identity.",
-   "uses": [
-    "lem-trf-rectangular-determinant-switch"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK, first paragraph, using Tag 0FJF (lemma-det-switch)."
-   }
-  },
-  {
-   "text": "Use the wedge formula of [lem-trf-projective-determinant-exact-sequence] in the diagram with kernel map $c^i$, middle map $k^i$, and quotient map $1$. Applying $k^i$ to a kernel wedge followed by quotient lifts gives the wedge of $c^i$ applied to that kernel basis followed by the images of those lifts, still lifts of the same quotient basis. Thus $\\det(k^i)\\gamma_b^i=\\gamma_a^i(\\det(c^i)\\otimes1)$. Also $c^0d_{N_b}=d_{N_a}c^{-1}$, so taking exterior powers gives $D(c)\\delta_{N_b}=\\delta_{N_a}$. Tensor the first equality in the two degrees, inverse-dualizing degree $-1$: $D(k)\\Gamma_b(x\\otimes\\delta_{N_b})=\\Gamma_a(x\\otimes\\delta_{N_a})$. Step 7 makes $D(k)=1$, so $T_b^{-1}=T_a^{-1}$. Step 4 gives $T_b=T_a$ over $R$.",
-   "uses": [
-    "lem-trf-projective-determinant-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJK, first paragraph; the wedge naturality of Tag 0FJC (lemma-det-ses-functorial), verified here on generators."
-   }
-  },
-  {
-   "text": "For composition put $N=\\ker a$, $M=\\ker b$, $L=\\ker(ba)$. The composite is degreewise surjective and a quasi-isomorphism, since its cohomology maps are compositions of isomorphisms. Thus Step 1 applies to all three kernels. In each degree, $a$ gives an exact sequence $0\\to N^i\\to L^i\\to M^i\\to0$: to lift $m\\in M^i$ lift it along $a^i$; that lift belongs to $L^i$ since $b^im=0$. These sequences split by [def-weil-pbc-projective-module] since $M^i$ is projective. Let $\\eta^i:\\det N^i\\otimes\\det M^i\\to\\det L^i$ be their wedge maps. Let $\\Xi:D(M)\\otimes D(N)\\to D(L)$ be obtained from $\\eta^0$ and its inverse dual in degree $-1$, using ordinary tensor symmetry just as for $\\Gamma$.",
-   "uses": [
-    "def-weil-pbc-projective-module",
-    "lem-trf-projective-determinant-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJL (lemma-compose-surjections), kernel exact sequences implicit in its hints."
-   }
-  },
-  {
-   "text": "The three kernel differentials are isomorphisms and give an isomorphism between the exact sequences of Step 9. Choose bases $n$ of $N^{-1}$ and $m$ of $M^{-1}$ and lifts $\\widetilde m$ in $L^{-1}$. Their degree-zero images $d_Nn,d_Mm,d_L\\widetilde m$ are corresponding bases and lifts. The wedge of $d_Nn$ followed by $d_L\\widetilde m$ is the image by $\\det(d_L)$ of the wedge of $n$ followed by $\\widetilde m$. Evaluating on these generators gives $\\Xi(\\delta_M\\otimes\\delta_N)=\\delta_L$. This calculation holds on every simultaneous free localization and hence globally by Step 4's detection argument; the empty wedges give the same formula in rank zero.",
-   "uses": [
-    "lem-trf-projective-determinant-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJL, compatibility of the acyclic-kernel trivializations; wedge naturality as in Tag 0FJC."
-   }
-  },
-  {
-   "text": "For each degree use the filtration $N^i\\subset L^i\\subset P^i$, with successive quotients $M^i,S^i$. Choose local bases $n,m,s$ and choose lifts of $m$ into $L^i$ and of $s$ into $P^i$. Their images in $Q^i$ are lifts of $s$ for $b^i$. Applying first the wedge map for $b^i$ then for $a^i$, or first $\\eta^i$ then the map for $(ba)^i$, sends these tensors to the identical ordered wedge $n\\wedge\\widetilde m\\wedge\\widetilde s$. Thus these termwise maps agree. Tensoring the degree-zero equality with the inverse dual of the degree-minus-one equality, and using only ordinary tensor symmetry, yields\n$$\\Gamma_a\\bigl(\\Gamma_b(x\\otimes z_M)\\otimes z_N\\bigr)=\\Gamma_{ba}\\bigl(x\\otimes\\Xi(z_M\\otimes z_N)\\bigr).$$\nPut $z_M=\\delta_M$, $z_N=\\delta_N$ and use Step 10. The equality becomes $T_a^{-1}T_b^{-1}(x)=T_{ba}^{-1}(x)$, so $T_{ba}=T_bT_a$. The wedge computation also proves compatibility on overlaps, and Step 4 detects the displayed equality globally. All kernel orders are identical in both degrees; there is no graded tensor switch and no extra sign.",
-   "uses": [
-    "lem-trf-projective-determinant-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0FJL (lemma-compose-surjections); explicit calculation of the omitted filtration step, Tag 0FJD (lemma-det-filtration)."
+    "place": "Tag 0FJL (lemma-compose-surjections), omitted proof, using the filtration identity of Tag 0FJD (lemma-det-filtration)."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-projective-module",
-  "def-weil-abstract-derived-category",
+  "lem-trf-two-term-kernel-normalization",
   "lem-trf-projective-determinant-exact-sequence",
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "lem-trf-local-common-summand-surjections",
-  "lem-trf-rectangular-determinant-switch"
+  "lem-trf-two-term-normalization-locality-equivariance",
+  "lem-trf-local-homotopy-unit-determinant-lift",
+  "def-weil-pbc-projective-module",
+  "lem-trf-acyclic-two-term-flag-determinants"
  ],
  "proof_origin": {
   "by": "document",
@@ -245,10 +184,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-surjective-two-term-determinant-calculus",
   "worker": "stage1",
-  "summary": "Expanded the Stacks kernel-normalized construction and all calculus laws. Split off only the determinant exact-sequence construction and the local common-summand assertion; recorded the rectangular switch as a Mathlib leaf. Gave explicit chain inverses, wedge naturality and the omitted composition calculation; checked arbitrary rings and rank-zero cases. Statement unchanged.",
+  "summary": "Q30 repair of returned head 18f4c3d6227 (2026-10-22 15:24 UTC), following the promotion-related landing refusal. Rebased the item field-by-field on the current read-only live DAG, retaining only the repaired proof, proof_deps and split_report as overrides; the delivery tool packages on current origin/sheaf-dag. Re-read all existing cited statements and verified verbatim quotes; four new searched statement-only nodes and all eleven archived arguments are retained. Step 5 now explicitly computes the transport of the quotient differential generator and evaluates both sides of the filtration identity as the inverse normalized maps. Statement and route unchanged; assembly under 3000 characters.",
   "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects.",
   "tool_uses": [
    {
@@ -271,12 +210,12 @@
   "lem-weil-pbc-finite-projective-standard-free-cover"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q55-7ad6826f0",
-  "group": "Q55",
+  "reviewer": "NT-cc-Q30-e6a177914",
+  "group": "Q30",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-7ad6826f0 (reviewer sub-agent of L); spot-checked: Reviewed item, all three new nodes, cited statements, unit/chapter route, and Stacks Tags 0FJB, 0FJC, 0FJD, 0FJF, 0FJI, 0FJK, 0FJL. Checked every proof step, hypotheses, rank-zero and small finite-field cases, determinant directions, Mathlib leaf, duplicate searches, and accepted tool uses. Wrote review.md; no DAG repairs required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-e6a177914 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement and the Stacks sources in full: more-algebra.tex 0FJC, 0FJD, 0FJF, and section 0FJI with the construction before 0FJJ, lemma-canonical-element-well-defined, 0FJK and 0FJL. The live repair note is still released (stage 1, re-split, at least 2 nodes). Live still has the old 11-step proof of 7106 characters and none of the new ids exists, so the delivery is not superseded. Against the previously PASSed head 18f4c3d6 the new nodes are byte-identical. Only the step-5 text and the split_report changed, so this is not an A6 re-push. Coverage of the old proof: steps 1-2 went to kernel-normalization, steps 4 and 8 to locality-equivariance, steps 5-7 to local-homotopy-unit-lift, steps 9-11 to acyclic-flag, step 3 is assembly step 2, and the step-9 exactness check is assembly step 4. Nothing was dropped. The node statements are 1386 to 1710 characters each and the assembly is 2511 characters. T_a is the inverse of y ↦ Γ_a(y⊗δ_N), which is Stacks' det(a). Stacks 0FJL's 'det(M)→det(K)' is a typo, and T_{ba}=T_b T_a has the right direction. Checks I recomputed: the d_N bijectivity element chase; the 0FJC equivariance identities D(c)δ'=δ and T_a D(u)=D(v)T_{a'} (applied with u=k, v=1, a'=b); the chain equations, the block inverse, (k^0)^{-1}=1-d w t and det(1+dt)=det(1+td) for the lift; the 0FJD and 0FJC flag identities; the new step-5 transport D(c)δ_{L/N}=δ_M, from det(c^0)det(d_{L/N})=det(d_M)det(c^{-1}). Edge cases checked: rank 0, Q^{-1}=0 (then U=0 and k=1), the zero ring, and non-Noetherian local rings. Kernel-normalization restates the item's preliminary construction clause, which old steps 1-2 proved. This is unavoidable under the order and is not D1 relabelling. A duplicate search with rg -L for the Stacks tags and for the lem-sc-determinant, new-determinant and k0 nodes found no duplicate or generalization. The tool_uses are generic definitions and are accepted. No SGA source is used. Batch-5 check: all four flagged citations are this delivery's new nodes and are pure determinant algebra of two-term complexes. Their closure inside sec-trace-formula is only def-trf-projective-determinant-module and lem-trf-projective-determinant-exact-sequence (unit sk-i-curve-zero), with no trace or duality theorem. The item reaches batch 5 through lem-sfb-adjunction-cotangent-determinant-normalization, so the citations are accepted as generic. Advisory only: the new nodes have no lean_audit field. No fixes."
  },
  "lean": {
   "module": "Sheaf.SecTraceFormula.SurjectiveTwoTermDeterminantCalculus",
@@ -315,5 +254,16 @@
   "result": "pass",
   "note": "Statement matches the node clause by clause: R any CommRing; TwoTermComplex/TwoTermMap with chain equation; finite projective terms; DegreewiseSurjective; QuasiIso = H^-1 kernel map bijective + H^0 coker injective/surjective (real, unlike Q134); kernel finite/projective and Bijective kernelDifferential concluded; D(P)=det P0 ⊗ Dual det P-1 via landed N5 Module.determinantModule (no duplicate, unlike Q18/Q54). T_a = choose of ∃! pinned by N5 IsDeterminantExactSequenceMap γ's (kernel-first, unique) and contraction formula T(γ0(n0⊗q)⊗φ)=q⊗(φ∘γ-1∘(n-1⊗–)) with Λd_N n-1=n0; checked on local bases this equals Γ_a(x⊗δ_N)=T_a^{-1}(x), and these elements span D(P), so the ∃! is true and T is fixed. Identity = refl, homotopy equations verbatim, T_ba=(T_a).trans(T_b). Edge cases zero ring/rank 0/nonconstant rank/char 2 ok; universes free. Only the item's lean field changed; statement verbatim; docstrings with source/blueprint and 11 steps; all theorems sorry; lines ≤100. nt_compile --json clean 11.0 s, control error detected. Advisories: determinantModule/IsDeterminantExactSequenceMap owners not in stmt_deps (a stage-2 delivery cannot add them; maintainer may add def-trf-projective-determinant-module); explicit two-term structure needs a stage-3 bridge to CochainComplex; non-public imports unused by the statement serve the cited dependencies."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

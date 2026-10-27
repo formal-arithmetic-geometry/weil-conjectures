@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Upstream files verbatim (the human, 2026-10-20): every file of the source library in lean/ that differs from the
+"""RETIRED 2026-10-23 (the owner: a sync is a real merge, never an overwrite; ~/cc1/upsync-quick.py no longer
+calls this tool; conflicts go to tools/upstream_merge_agent.py). Kept for reference.
+
+Upstream files verbatim (the human, 2026-10-20): every file of the source library in lean/ that differs from the
 source's tip takes the tip's text. What only our version had moves out of the upstream file:
 
   * a declaration the tip does not have goes to a companion module of ours,
@@ -91,6 +94,18 @@ def span(text: str, d) -> tuple[int, int]:
 
 def only_sorry(body: str) -> bool:
     return re.sub(r"\s+", " ", re.sub(r"^:=\s*(by\s+)?", "", body.strip())).strip() in ("sorry", "by sorry")
+
+
+def n_sorry(body: str) -> int:
+    """`sorry`s of a body outside comments"""
+    return len(re.findall(r"(?<![\w'])sorry(?![\w'])", re.sub(r"--[^\n]*|/-.*?-/", "", body, flags=re.S)))
+
+
+def fills_sorries(tip_body: str, our_body: str) -> bool:
+    """2026-10-23: our body fills upstream sorries when the tip's body has some and ours has fewer. Before, only a body
+    that is entirely `sorry` counted, so fills of field-level sorries (`def ... where f := sorry`, instance fields) were
+    replaced by the tip's text at every sync (MapModMonoidal: proved four times, wiped four times)."""
+    return only_sorry(tip_body) and not only_sorry(our_body) or 0 < n_sorry(tip_body) and n_sorry(our_body) < n_sorry(tip_body)
 
 
 def companion(mod: str, ours: str, extra_keys: set[str], decl_o) -> str:
@@ -185,7 +200,7 @@ def run(tip: str, up: str, write: bool = True, companions: bool = False) -> dict
         for d in sorted(dt, key=lambda d: d["start"], reverse=True):
             o = ok.get(key(d))
             body_o = ours[o["start"]:o["end"]] if o else ""
-            if o and only_sorry(d["body"]) and not only_sorry(o["body"]) and \
+            if o and fills_sorries(d["body"], o["body"]) and \
                     " ".join((o["statement"] or "").split()) == " ".join((d["statement"] or "").split()) and \
                     not any(re.search(r"(?<![\w'])" + re.escape(n) + r"(?![\w'])", body_o) for n in xshort):
                 # (a proof that uses a declaration moved to the companion cannot stay in the upstream file)

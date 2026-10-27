@@ -1,0 +1,158 @@
+{
+ "id": "lem-pur-affine-vector-standard-frame",
+ "kind": "statement",
+ "title": "Integration in the single standard global frame of the free bundle",
+ "statement": "Let P be a finite purity setting, B a Noetherian scheme with finite-type structure map aB to its field, d≥0, and t,D normalized finite Tate transport and P1 data. Set F0 to the free module on ULift(Fin d). Its standard inverse global frame k:A^d_B→E(F0) is affineTraceMap(B.topIso.inv,d) followed by vectorIntegrationChart on the top open in the restriction of the standard free frame [def-asd-vector-bundle-zero-section, def-amb-vector-integration-charts]. This is a concrete isomorphism over B, independent of integration. Write c_f for vectorIntegrationBaseCoefficientPullback along f, q for the affine projection, pi for the free bundle projection, L_q=Rq_! and L_pi=Rpi_!, and u for singleFunctorObjUnitIso. Put tau_aff=L_q.map((affineLinearCoefficientDescent composed with c_q).inv) followed by affineLinearCompactComparison.inv, affineTraceCounit(t,D), and u.hom. Put tau_free=L_pi.map(c_pi.inv) followed by vectorBundleIntegration and u.hom. Then normalized compact-support transport along k followed by the affine trace equals inverse identity pullback followed by identity pullback of the free vector trace and the actual monoidal unit comparison. This assertion concerns only this fixed free module and this fixed frame; it has no arbitrary affine isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.md",
+  "place": "Definition: integration is the affine-space integration on a trivializing open"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-vector-integration-charts",
+  "def-amb-vector-integration",
+  "lem-pur-affine-vector-trace-action-comp"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate existsUnique_vectorIntegrationGluing at the top-open standard free frame. The ordered Tate coefficient composition law, applied to the chart square, rewrites vectorIntegrationChartCoefficient as pullback of the bundle coefficient comparison, coefficient transport along the chart, and inverse affine coefficient descent. Naturality of exchange cancels the bundle comparison and gives frame_normalization for the intrinsic ordered coefficient on the total space. All auxiliary statements are proved private lemmas in this module.",
+   "uses": [
+    "def-amb-vector-integration",
+    "lem-pur-ordered-tate-coefficient-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove compactTrace_baseChange for the affine tower. Identify its right base-change at the constant unit with coefficient descent by affineTraceRightBaseChange_unit_coefficient. Ordered Tate composition in the tower square turns this into the square for the intrinsic total-space coefficient. Exchange naturality and affineTraceUnitCompactComparison_baseChange reduce the trace square to affineTraceTowerCounit_baseChange. The required P1 base-change hypothesis follows from ordinaryFiniteP1BaseChange_of_normalization; counit naturality supplies the constant-unit comparison.",
+   "uses": [
+    "lem-amb-vector-integration-restricted-chart-coefficient-core",
+    "lem-pur-ordered-tate-coefficient-composition",
+    "lem-amb-affine-trace-unit-compact-base-change",
+    "lem-amb-affine-trace-tower-counit-base-change",
+    "lem-amb-ordinary-finite-p1-datum-uniqueness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove coefficientExchange_comp by horizontal exchange pasting, naturality, and ordered Tate coefficient composition. Apply it to the top-open chart square followed by the affine tower square of B.topIso.inv. Their composite has base map identity and top map affineVectorStandardChart. Combine frame_normalization and compactTrace_baseChange to identify the trace for this composite square. This explicitly transports the normalization back to B and requires no new geometric lemma.",
+   "uses": [
+    "lem-amb-affine-linear-exchange-coherence",
+    "lem-pur-ordered-tate-coefficient-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the derived pullback compositor moves the bundle trace through it. ordinaryFiniteUnitPullback_comp identifies the two constant-unit transports with transport along the identity. Finally constantUnit_pullback and constantUnit_hom replace the constant target by the actual monoidal unit. Precompose with inverse identity pullback to recover exactly affineVectorTraceAction and the displayed equality. No positivity of rank, nonempty base, or nonzero coefficient ring is used.",
+   "uses": [
+    "lem-amb-ordinary-finite-unit-pullback-comp",
+    "lem-sf-p1-constant-unit-pullback",
+    "lem-sf-p1-constant-unit-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "lem-pur-ordered-tate-coefficient-composition",
+  "lem-amb-vector-integration-restricted-chart-coefficient-core",
+  "lem-amb-affine-trace-unit-compact-base-change",
+  "lem-amb-affine-trace-tower-counit-base-change",
+  "lem-amb-ordinary-finite-p1-datum-uniqueness",
+  "lem-amb-affine-linear-exchange-coherence",
+  "lem-amb-ordinary-finite-unit-pullback-comp",
+  "lem-sf-p1-constant-unit-pullback",
+  "lem-sf-p1-constant-unit-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.md",
+  "place": "Local affine integration normalization, transported from the top open using the proved coefficient, exchange, counit and constant-unit composition equations; Lean proof by P9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical standard free vector bundle frame compact support integration equals affine tower counit",
+   "results": "Eight manifold vector bundle coordinate and local frame hits, no etale compact-support trace theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Found naturality and unrelated categorical constructions. Naturality is used in the composition proof; no geometric trace normalization.",
+   "date": "2026-10-27",
+   "verdict": "Categorical glue only."
+  },
+  {
+   "tool": "grep",
+   "query": "affineVectorTraceAction|affineVectorStandardFrame",
+   "results": "No Mathlib hits. Local searches read VectorBundleIntegration normalization, AffineLinearExchangeCoherence, and OrderedTateCoefficientComposition.",
+   "date": "2026-10-27",
+   "verdict": "No existing duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineVectorTracePresentation",
+  "date": "2026-10-27",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Agreement on the model: on the trivial bundle integration is ordered affine-space integration",
+   "via": [
+    "lem-pur-restricted-affine-diagonal-vector-integration",
+    "lem-pur-restricted-affine-diagonal-dnc-trace",
+    "lem-pur-diagonal-dnc-affine-model",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization",
+    "lem-pur-affine-vector-trace-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineVectorStandardFrame",
+  "file": "lean/Sheaf/Paper/AffineVectorStandardFrame.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineVectorStandardFrame",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.affineVectorStandardFrame",
+   "WeilConjectures.PurityFiniteSetting.affineVectorStandardChart",
+   "WeilConjectures.PurityFiniteSetting.affineVectorStandardChart_over",
+   "WeilConjectures.PurityFiniteSetting.affineVectorStandardChart_isIso",
+   "WeilConjectures.PurityFiniteSetting.affineVectorStandardChart_square"
+  ],
+  "statement": "theorem affineVectorStandardFrame (P : PurityFiniteSetting.{u})\n    (B : Scheme.{u}) [IsNoetherian B]\n    (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (d : ℕ)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]\n      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t T hT) :\n    let F := SheafOfModules.free (R := B.ringCatSheaf) (ULift.{u} (Fin d))\n    letI := (Etale.vectorIntegration_geometry B d F).1\n    letI := (Etale.vectorIntegration_geometry B d F).2.1\n    let q := affineTraceProjection B d\n    let π := VectorBundleZeroSection.π B d F\n    letI := (NagataCompactification q).hasCompactification\n    letI := (NagataCompactification π).hasCompactification\n    let c (T S : Scheme.{u}) (f : T ⟶ S) (aS : S ⟶ Spec (.of P.field.k)) :=\n      Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t f (P.diagonalExponent_isUnit aS) d\n    let L := Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) q\n    let L₀ := Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) π\n    let τ := L.map\n        ((Etale.affineLinearCoefficientDescent P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates t B (P.diagonalExponent_isUnit aB) d) ≪≫\n          c _ _ q aB).inv ≫\n      (Etale.affineLinearCompactComparison P.diagonalExponent\n        (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n        P.diagonalExponent_annihilates B (P.diagonalExponent_isUnit aB) d).inv ≫\n      Etale.affineTraceCounit P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t D B (P.diagonalExponent_isUnit aB) d ≫\n      (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} P.Coefficient) B).hom\n    let τ₀ := L₀.map (c _ _ π aB).inv ≫\n      Etale.vectorBundleIntegration P.diagonalExponent\n        (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n        P.diagonalExponent_annihilates B (P.diagonalExponent_isUnit aB) d F ≫\n      (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} P.Coefficient) B).hom\n    Etale.affineVectorTraceAction P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t π q (affineVectorStandardChart B d)\n        (affineVectorStandardChart_square B d) (P.diagonalExponent_isUnit (π ≫ aB)) d ≫ τ =\n      (Etale.leftDerivedUpperStarId (ModuleCat.{u + 1} P.Coefficient) B).inv.app _ ≫\n        (Etale.ordinaryFinitePullback P.Coefficient (𝟙 B)).map τ₀ ≫\n        (Etale.leftDerivedUpperStarUnitIso\n          (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).hom",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261027T034801-L-3686326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261027T072148-L-2804182",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

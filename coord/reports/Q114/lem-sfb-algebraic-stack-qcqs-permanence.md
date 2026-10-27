@@ -1,0 +1,72 @@
+## Files written
+
+All node files are under dag/nodes/sec-six-functors-basics/ in this sandbox.
+
+- lem-sfb-algebraic-stack-qcqs-permanence.json: item, statement unchanged, split into three steps; not in Mathlib for algebraic stacks.
+- lem-sfb-representable-stack-quasicompact-tests.json: statement-only lemma, unsplit; no Mathlib match.
+- lem-sfb-stack-quasicompact-absolute-criterion.json: statement-only lemma, unsplit; no Mathlib match.
+- lem-sfb-stack-quasiseparated-cancellation.json: statement-only lemma, unsplit; no Mathlib match.
+- citations.json records the verbatim statement excerpts for every step citation. searches.jsonl and the saved search-result files preserve the actual searches and answers.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the item id, algebraicStack, quasiSeparatedStack, and quasi-compact stack terminology. No project declaration states the general algebraic-stack result. The Mathlib candidates compactSpace_iff_quasiCompact (QuasiCompact.lean:137), QuasiSeparated.of_comp (QuasiSeparated.lean:219), QuasiCompact.of_comp (line 250), and quasiCompact_of_compactSpace (line 255) were read: all quantify over Scheme. They cannot be specialized to arbitrary algebraic stacks, including nonrepresentable morphisms.
+
+## WANTED
+
+None. All sources used are present in literature/stacks-project/.
+
+## Issues and route
+
+The item statement is correct and was retained verbatim, with all six statement dependencies. Its ancestor chain has blueprint.from.node null in the current live record, and blueprint_refs.py ancestor prints None; the new nodes retain exactly that computed ancestor, prepending this item to the existing via chain. Read the current blueprint latest (COMMITS.txt: main-20261023-1620, 7284bb09), its sk-thm-sf-ctf-stability unit and the direct-images proof (3). This split supplies the existing generic moduli/alteration prerequisite and does not replace the unit route. The new nodes inherit the item's chapter and unit; neither record was edited.
+
+No source statement is disputed. The source proof of 050Y has a minor map-name error, detailed below. The new nodes are genuine inputs: scheme-test compatibility, absolute compactness versus the structure morphism, and relative diagonal cancellation for a composite. They do not restate either global-source clause of the item. In particular the cancellation lemma makes no compactness hypothesis and applies over an arbitrary intermediate stack with only a condition on the second morphism's diagonal.
+
+## Source error
+
+In stacks-morphisms.tex Tag 050Y (lemma-quasi-compact-permanence), the proof calls the projection X times_Z Y -> Y a base change of f. Its source is instead the base change of g composed with f: its square has bottom map g:Y -> Z and right map gf:X -> Z. The source's hypothesis that gf is quasi-compact makes this projection quasi-compact, so the statement is correct. Our proof uses p:X -> Spec Z explicitly, and never asserts that f is quasi-compact before it has been proved. The graph square is instead written directly as a pullback of Delta_g, avoiding any reliance on the source's section shorthand.
+
+## Not duplicates
+
+lem-sfb-representable-stack-quasicompact-tests vs lem-sfb-representable-stack-property-tests: the existing node concerns properness and local quasi-finiteness for morphisms of DM stacks representable by schemes, not quasi-compactness for arbitrary representable-by-spaces morphisms of algebraic stacks.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-sfb-algebraic-stack-quasicompact-surjection: the existing 04YC node gives compactness via a surjection or an affine atlas, not the universal stack base changes of the absolute structure morphism.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-sfb-stack-affinization-qcqs: the existing node constructs the global-functions affinization over a field from a source already assumed to have qcqs structural morphism; it does not identify absolute compactness with structural compactness.
+lem-sfb-stack-quasiseparated-cancellation vs lem-sfb-stack-separated-source-separated-inertia-target: the existing node is the separated, proper-diagonal case for DM stacks with finite inertia, rather than quasi-separatedness for arbitrary algebraic stacks.
+lem-sfb-stack-quasiseparated-cancellation vs lem-sfb-separated-source-finite-inertia-target: its general clause is separated cancellation from 050M(3), not quasi-separated cancellation from 050M(4), and its base is a field.
+lem-sfb-stack-quasiseparated-cancellation vs lem-sfb-stack-separation-compactness-permanence: that node is about base change and composition of separated morphisms over a field, not cancellation of quasi-separated morphisms.
+lem-sfb-stack-quasiseparated-cancellation vs lem-sfb-stack-separation-composition: that node composes proper diagonals in the DM case; it does not cancel a quasi-separated diagonal in the algebraic-stack case.
+
+lem-sfb-stack-quasicompact-absolute-criterion vs new-etale-affine-singleton-product-ring: the existing node identifies the ring of an iterated product of affine objects of a small etale site; the new node is compactness of a general algebraic stack structure morphism on arbitrary stack tests.
+lem-sfb-stack-quasicompact-absolute-criterion vs new-etale-affine-singleton-tensor-degree-kernel: the existing node proves injectivity of a degree comparison map for an Amitsur complex and Cech sections, not compactness of stack products.
+lem-sfb-stack-quasicompact-absolute-criterion vs new-etale-affine-singleton-tensor-degree-surjective: the existing node proves surjectivity of a degree comparison map for an Amitsur complex and Cech sections, not compactness of stack products.
+lem-sfb-stack-quasicompact-absolute-criterion vs new-etale-affine-singleton-tensor-sections-span: the existing node generates sections of a quasi-coherent sheaf on iterated affine etale products, not compactness of absolute stack structure morphisms.
+lem-sfb-stack-quasicompact-absolute-criterion vs new-etale-finite-affine-cech-basis: the existing node gives finite affine refinements and affine iterated products on a small etale site; the new node treats arbitrary algebraic stacks and arbitrary compact stack tests.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-pc-dim-base-change-affine-covers: the existing node constructs matching affine covers under a field extension for a locally finite type scheme; the new node imposes no field or finite-type hypothesis and concerns algebraic stacks.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-weil-pbc-fibre-product-affine-spectra: the existing node supplies the affine product calculation used inside the intended future proof, but not the passage through two affine smooth stack atlases or universal compactness of a structure morphism.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-weil-pbc-p1-power-affine-charts: the existing node constructs coordinate charts of a finite product of projective lines; the new node concerns compact stack products with no projective-space hypothesis.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-weil-pbc-quasi-coherent-algebra-affine-inclusion: the existing node glues affine relative spectra across affine open inclusions using a quasi-coherent algebra, not compactness of algebraic stacks.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-weil-pbc-quotient-base-change-closed-immersion-ideal: the existing node computes the ideal sheaf and affine charts of a closed base change by a quotient ring, not compactness of arbitrary algebraic stack products.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-sfb-closed-ideal-base-change-affine-diagram: the existing node computes pullback of a closed ideal and the corresponding section sequence; the new node has no ideal, sheaf or closed immersion and instead identifies compactness with a universal stack-test property.
+lem-sfb-stack-quasicompact-absolute-criterion vs lem-sbc-affine-fibre-sections-tensor: the existing node identifies affine fibre sections over a residue field with a tensor product; the new node concerns the absolute structure morphism of an arbitrary algebraic stack.
+
+Before creating nodes searched all dag/nodes by the tags 050T, 050M, 050Y, 050J, by stack/quasi-compact/quasi-separated terminology, and by structural/composite/base-change conditions. Also ran blueprint_refs.py search on quasi-separated, quasi-compact algebraic stack, 050T, 050M, 050F, 050J, and quasi-separated cancellation. None states a new lemma. The existing space-qcqs-permanence, space-qcqs-source-products, space-integral-qcqs-permanence, and qcqs-space-fibre-product nodes apply only to algebraic spaces. Their statements were read and they cannot replace an arbitrary algebraic stack by a space.
+
+## Review by Q114
+
+I read Tag 075S (lemma-quasi-compact-quasi-separated-permanence) clause (2) and its references 050Y and 050M in stacks-morphisms.tex, and the full separation definition 04YW(4). Quasi-separatedness for a stack morphism means its representable diagonal is BOTH quasi-compact and quasi-separated, not merely quasi-compact. The item has precisely the source and target assumptions used in 075S(2); I did not insert any finite-type, DM, representability or Noetherian hypothesis.
+
+For the representable-test node I read 050T, including the argument via a quasi-compact smooth atlas in the forward direction and affine opens on a scheme test in the reverse direction. Its statement explicitly equates those scheme tests to the universal quasi-compact-stack test, which is what step 1 needs. For the absolute-criterion node I read 04YC in stacks-properties.tex, 050U in stacks-morphisms.tex and 01JQ (lemma-fibre-product-affines) in schemes.tex. The intended argument, retained here for the later splitter, is: choose affine smooth atlases U -> A and V -> T by 04YC; U times_SpecZ V is affine by 01JQ, and is a smooth surjective scheme atlas of A times_SpecZ T by base-change/composition of atlases. Hence this product is quasi-compact. Conversely test the structure morphism at Spec Z. This is a universal product/atlas assertion without any quasi-separatedness assumption, and does not follow just by unfolding the definition of a stack morphism. For cancellation I read the full proof of 050M(4), with X -> X times_Y X -> X times_Z X, its representable scheme tests A -> B -> T, and the algebraic-space cancellation of compactness and separation. The new node states exactly that independent relative theorem, rather than using the proper-diagonal separated case from an existing node.
+
+Step 1 uses the absolute criterion for p, the definition of quasi-separatedness for p and Delta_g, and the new 050T equivalence to pass from Delta_g's scheme tests to stack quasi-compactness. Each cited statement explicitly supplies what is used; the excerpt for the definition includes its full relative-diagonal condition. These hypotheses hold over Spec Z even though the original base S need not be quasi-separated. Forgetting S changes none of the scheme tests for an atlas or a diagonal.
+
+Step 2 uses the existing algebraic-stack fibre-product theorem to ensure P is algebraic and the fibred-groupoid definition for its actual objects and arrows. I checked its statement (not just its proof): it supplies an algebraic 2-fibre product with the indicated projections. The graph is a pullback of Delta_g: an object records an isomorphism f(x) -> y, and the explicit isomorphism to the identity triple is written in the step. The quasi-compactness base-change and composition claims are each proved in the step by testing the defining universal quantifier twice. There is no hidden theorem that a section or a representable map is automatically quasi-compact. The step is marked elementary because the two inputs and their compactness are already known, the groupoid calculation is explicit, and the rest is just substitution in the definition. In particular it is not an unsupported assertion that fibre products of arbitrary quasi-compact stacks are quasi-compact: that absolute fact is the separately named criterion.
+
+Step 3 uses the new relative cancellation theorem with a=f and b=g, and the definition to verify gf=p quasi-separated and Delta_g quasi-separated. The proof never invokes the misleading scheme theorem that quasi-separatedness cancels without a condition on Delta_g. Its conclusion combined with step 2 is the item's two clauses.
+
+I checked B1-B10: new nodes have only statements, empty proofs and proof dependencies, complete objects and definition dependencies, exact tag/label sources, and filled blueprint references; every recorded search was actually run through msearch.py (two semantic phrasings, Loogle, grep, LeanSearch). No Mathlib result has the right object type. I checked C1-C8 against every cited statement; citations.json contains exact excerpts, the proof dependencies are exactly the union of uses, and all statement inputs remain in the same unit. I checked D1-D5: none of the three supporting statements is a clause of the item, and no proof of the item is shifted wholesale to one child. The graph computation and definition-only permanence steps remain in the item.
+
+For E1-E7 I checked empty stacks (empty atlas/products), identities, scheme maps as a special case, non-quasi-compact targets, and nonrepresentable classifying-stack maps such as B G_m -> Spec k. The absolute criterion still applies to a quasi-compact stack with non-quasi-compact diagonal, since it only uses a quasi-compact atlas; it does not falsely assume that atlas morphism is quasi-compact. The representable-test node is applied to a diagonal, not to f. The cancellation node retains the necessary Delta_g hypothesis. All proof steps are below 2000 characters, so there is no long step concealing an auxiliary lemma. No SGA source, trace-formula step or Poincare-duality step is used: the inherited def-trf-algebraic-space and the fibred-groupoid definition supply general notions only.
+
+## Unfinished work
+
+None for this stage-1 split. The three newly stated lemmas are intentionally unsplit and will be separate queue items. No Lean files were written and no compiler, Lake or build command was run. The first dry run requested additional nonduplicate explanations for the 01JQ co-citations. I opened all twelve statements, confirmed their scheme/ideal/etale-site scope, and added the individual comparisons above; none states the stack compactness criterion. The required dry run and final push follow.

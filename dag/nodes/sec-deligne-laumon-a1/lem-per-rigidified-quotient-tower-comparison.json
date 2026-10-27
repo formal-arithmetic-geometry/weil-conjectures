@@ -2,7 +2,7 @@
  "id": "lem-per-rigidified-quotient-tower-comparison",
  "kind": "statement",
  "title": "Strict inert comparison of rigidified quotient resolution towers",
- "statement": "Fix the saturated monoidal resolution rule induced by one smooth-functorial saturated fan resolution [lem-trf-functorial-fan-desingularization], [lem-trf-log-fan-chart-blowup], [lem-trf-functorial-log-blowup-etale-descent]. Let $X,Y$ be Noetherian regular separated schemes [def-weil-regular-scheme], [pqf-def-locnoeth] with tame generically free actions of finite groups $G,H$. Suppose that the actions are admissible (invariant affine opens cover), have abelian geometric inertia, and preserve $G$-strict, respectively $H$-strict, strict normal crossings boundaries $B_X,B_Y$ outside which they are free [def-trf-strict-normal-crossings-boundary]. Let $\\overline B_X\\supset B_X$, $\\overline B_Y\\supset B_Y$ be invariant normal crossings boundaries whose divisorial fs log structures are very tame [def-trf-fs-log-blowup]. Resolve each rigidified log quotient by the fixed rule and pull its tower back in fs log schemes to $X$, respectively $Y$. Regard the underlying towers as normalized blowup towers, retaining their ordered ideal centers. If $\\lambda:H\\to G$ and $\\phi:Y\\to X$ are equivariant, induce isomorphisms on geometric inertia, and $B_Y=\\phi^{-1}B_X$, $\\overline B_Y=\\phi^{-1}\\overline B_X$, then the induced morphism of rigidified log quotients is strict, and the tower on $Y$ is the contracted scheme pullback of the tower on $X$. Contraction deletes precisely the stages with unit center ideal. The scheme pullback equals the strict-transform tower. These canonical comparisons respect identities and composition and apply to localizations, strict localizations, completions, and finite disjoint unions of the indicated schemes.",
+ "statement": "Fix the saturated monoidal resolution rule induced by one smooth-functorial saturated fan resolution [lem-trf-functorial-fan-desingularization], [lem-trf-log-fan-chart-blowup], [lem-trf-functorial-log-blowup-etale-descent]. Let $X,Y$ be Noetherian regular separated schemes [def-weil-regular-scheme], [pqf-def-locnoeth] with tame generically free actions of finite groups $G,H$. Suppose that the actions are admissible (invariant affine opens cover), have abelian geometric inertia, and preserve $G$-strict, respectively $H$-strict, strict normal crossings boundaries $B_X,B_Y$ outside which they are free [def-trf-strict-normal-crossings-boundary]. Let $\\overline B_X\\supset B_X$, $\\overline B_Y\\supset B_Y$ be invariant normal crossings boundaries whose divisorial fs log structures are very tame [def-trf-fs-log-blowup]. Resolve each rigidified log quotient by the fixed rule and pull its tower back in fs log schemes to $X$, respectively $Y$. Regard the underlying towers as normalized blowup towers, retaining their ordered ideal centers. If $\\lambda:H\\to G$ and $\\phi:Y\\to X$ are equivariant, induce isomorphisms on geometric inertia, and $B_Y=\\phi^{-1}B_X$, $\\overline B_Y=\\phi^{-1}\\overline B_X$, and the induced morphism of enlarged divisorial log pairs $(Y,\\overline B_Y)\\to(X,\\overline B_X)$ is strict [def-per-strict-log-morphism], then the induced morphism of rigidified log quotients is strict, and the tower on $Y$ is the contracted scheme pullback of the tower on $X$. Contraction deletes precisely the stages with unit center ideal. The scheme pullback equals the strict-transform tower. These canonical comparisons respect identities and composition and apply to localizations, strict localizations, completions, and finite disjoint unions of the indicated schemes. Here boundary inverse images are reduced; normal crossings means that every point has an etale neighbourhood on which the inverse image of the boundary is a strict normal crossings boundary [def-trf-strict-normal-crossings-boundary]. Very tame has the meaning of [def-per-very-tame-fs-log-action], and an invariant log quotient has the meaning of [def-per-fs-log-group-action]. The localization and completion comparisons use the induced strict divisorial log structures and the corresponding stabilizer actions. A proper principal center is retained even when its blowup is an isomorphism.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "VIII Proposition 5.4.2, Corollary 5.4.4 and 5.4.5, printed pp.126--127; normalized-tower interpretation 5.3.10--5.3.11."
@@ -14,11 +14,135 @@
   "def-weil-regular-scheme",
   "pqf-def-locnoeth",
   "def-trf-strict-normal-crossings-boundary",
-  "def-trf-fs-log-blowup"
+  "def-trf-fs-log-blowup",
+  "def-per-strict-log-morphism",
+  "def-per-very-tame-fs-log-action",
+  "def-per-fs-log-group-action",
+  "def-trf-strict-etale-log-blowup-procedure",
+  "def-per-gabber-modification-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Give $X,Y$ their enlarged divisorial log structures $M_X,M_Y$. By the meaning of normal crossings in the statement, every point has an etale neighbourhood on which the boundary is strict normal crossings; the divisorial log structure restricts to the divisorial log structure there, and fs log regularity is etale local. On it the regular-boundary chart theorem gives the chart by those regular parameters, its regular stratum and the logarithmic dimension equality. Thus both pairs are fs log regular. Apply the very-tame log-quotient theorem separately to the two admissible generically free actions. Write $q_X:X\\to Q_X$, $q_Y:Y\\to Q_Y$. Their invariant log structures are fs log regular, their quotient maps are finite surjective Kummer etale, and their geometric fibres are orbits. The finite-quotient strict-local lemma also gives that $Q_X,Q_Y$ are Noetherian. Equivariance and the invariant quotient property induce $\\bar\\phi:Q_Y\\to Q_X$.",
+   "uses": [
+    "lem-per-regular-boundary-divisorial-chart",
+    "lem-per-very-tame-log-quotient",
+    "lem-per-finite-quotient-strict-local-invariants",
+    "def-per-fs-log-group-action",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.7, 3.2; VIII 5.3.8 and 5.4.1"
+   }
+  },
+  {
+   "text": "Fix a geometric point $y$ and $x=\\phi(y)$. Identify the two inertia groups using $\\lambda$, and call this group $K$. By strict-local invariants the log stalks on the quotients are $M_{X,x}^K$ and $M_{Y,y}^K$. Choose the equivariant sharp chart $a:Q\\to M_{X,x}$, with pairing $\\chi:K_{\\rm ab}\\otimes Q^{\\rm gp}\\to\\mu_{|K|}$. Strictness pulls this chart back to a chart of $M_{Y,y}$ with the same sharp monoid. Equivariance gives exactly the transported pairing: $k(\\phi^*a(q))=\\phi^*(\\chi_q(k))\\phi^*a(q)$. The local quotient-chart lemma identifies both quotient characteristics with $P=Q\\cap\\ker\\chi$. Its hypotheses follow from very tameness (invertible inertia order, fixed characteristic and stratum), and the finite strict-local invariant rings from step 1; roots of unity and their fixedness come with the equivariant chart. The map between quotient characteristics is the identity of $P$, since $a(p)$ pulls back to $\\phi^*a(p)$. Both quotient log stalks are logifications of this same chart, with their respective unit groups. Their chart pushout formulas therefore identify the pulled-back target log structure with the source log structure. This proves strictness of $\\bar\\phi$ at every geometric point. In particular this uses the added strictness hypothesis, not just equality of boundary supports.",
+   "uses": [
+    "lem-per-finite-quotient-strict-local-invariants",
+    "lem-per-very-tame-equivariant-sharp-chart",
+    "lem-per-very-tame-local-kummer-quotient",
+    "def-trf-fs-log-blowup",
+    "def-per-strict-log-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII proof of Proposition 5.4.2; VI 3.5(a),(b) and 3.7"
+   }
+  },
+  {
+   "text": "Record the one-stage scheme calculation used below. For a strict map $(V,N)\\to(W,M)$ and a coherent log center generated by $E\\subset P$ in a chart of $W$, use that same chart on $V$. On affine charts with rings $A\\to B$, the saturated blowup charts of the coherent-log-ideal construction are $A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q_e^{\\rm sat}]$ and $B\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q_e^{\\rm sat}]$. The isomorphism $B\\otimes_A(A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q_e^{\\rm sat}])\\simeq B\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q_e^{\\rm sat}]$, $b\\otimes(a\\otimes z^q)\\mapsto ba\\otimes z^q$, has inverse $b\\otimes z^q\\mapsto b\\otimes(1\\otimes z^q)$. It agrees on all common monomial localizations, so identifies the underlying scheme square with an ordinary Cartesian square. The algebraized center is extended from $(\\alpha(e):e\\in E)$ to $(\\phi^*\\alpha(e):e\\in E)$. This is a calculation from the cited chart statement, requiring no flatness or assertion that normalization commutes with arbitrary base change.",
+   "uses": [
+    "lem-trf-coherent-log-ideal-chart-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.10 and the chart calculation in Lemma 3.4.6(ii)"
+   }
+  },
+  {
+   "text": "Apply the fixed regularization rule to the quotient log schemes. Its strict-pullback comparison gives $\\mathcal R(Q_Y)=C(\\bar\\phi^*\\mathcal R(Q_X))$, with actual ordered centers. This assertion may be checked on affine open neighborhoods in both quotients: each is Noetherian separated fs log regular, so the regularization theorem applies, and the quotient map is strict by step 2. This avoids assuming separatedness of a quotient merely from finiteness. On overlaps the comparisons agree because the local theorem respects composition and is the same fixed fan-induced rule. The existing etale-descent theorem constructs its global tower and the contraction-descent theorem, applied with its strict etale map equal to the identity of $Q_Y$ and its tower $B=\\bar\\phi^*\\mathcal R(Q_X)$, descends these local contracted comparisons along a surjective strict etale cover of $Q_Y$. Finite covers suffice by Noetherianity. Thus the comparison holds globally, and its retained indices delete exactly whole-log-monoid centers.",
+   "uses": [
+    "lem-per-gabber-log-blowup-regularization",
+    "lem-trf-functorial-log-blowup-etale-descent",
+    "lem-trf-log-tower-contraction-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.15; first paragraph of proof of Corollary 5.4.4"
+   }
+  },
+  {
+   "text": "Pull this ordered comparison back to $Y$. The commutative square $q_X\\phi=\\bar\\phi q_Y$ identifies its uncontracted tower with the recursive fs pullback to $Y$ of the tower on $X$: a saturated blowup of a pulled-back ideal has exactly the universal property of the fs fibre product, so the two orders of pullback have the same unique factorization maps. At each level the log center is the ideal generated by the image of the original center. Kummer-cover base-change stability makes the pulled-back tower log regular, since the quotient stages are log regular. The normalized-blowup comparison identifies its underlying morphism with the normalized blowup of that algebraized ideal, and ensures log regularity for the next level. It applies on integral components: a log regular scheme has normal-domain local rings by the divisorial-structure theorem, so the finitely many irreducible components of a Noetherian such scheme are disjoint open-and-closed integral schemes. Step 3 applied successively to the strict map $Y\\to X$ identifies this recursive tower with the ordinary scheme pullback. Its centers are extended ideal sheaves, so this is also the normalized strict-transform tower. Hence the quotient comparison gives precisely the claimed contracted scheme-pullback comparison on $Y$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-per-kummer-boundary-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.4.6, 3.4.8; 5.3.10--5.3.11 and proof of Corollary 5.4.4"
+   }
+  },
+  {
+   "text": "Contraction deletes a stage exactly when its log ideal is the whole monoid sheaf. This is equivalent to its algebraized ideal being the unit ideal: at a local ring an ideal generated entirely by nonunits is contained in the maximal ideal, whereas a unit generator is a unit log section. The finite surjective $q_Y$ detects this unit condition: if a ring ideal were proper at a point, its extension is contained in the maximal ideal at every point above it. Thus pulling the quotient comparison to $Y$ introduces no further deleted indices, and no proper principal center is deleted. The chart maps of step 3 and the unique universal-property maps of step 5 are identities for an identity map and compose to the direct comparison. Deleting unit stages does not change later extended ideals; successive deletions retain exactly the same ordered indices as direct deletion. Together with the composition law of the fixed rule, this gives the stated identity and composition laws. A component inclusion into a finite disjoint union is strict, so this also gives componentwise compatibility without choosing separate resolution rules.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-per-gabber-log-blowup-regularization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.10, 5.3.10; Corollary 5.4.4"
+   }
+  },
+  {
+   "text": "Apply the comparison to localization, strict localization and completion, with the induced divisorial charts and the stabilizer action. These charts are pulled back as log charts, so these are strict maps; on geometric stabilizers they give the indicated inertia isomorphisms. Localizations of the regular scheme have its regular local rings. Strict henselization is Noetherian and regular by the two cited strict-henselization results; completion of a Noetherian regular local ring is Noetherian regular by the completion result. Thus these operations stay in the indicated class whenever equipped with the boundary and action data in the statement, and the preceding argument applies directly, without any finite-type or excellence assumption. In particular one obtains the formulas of 5.4.5; finite disjoint unions are covered by step 6.",
+   "uses": [
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-regular",
+    "lem-weil-pbc-completion-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.4.5; strict-local version of 5.4.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-boundary-divisorial-chart",
+  "lem-per-very-tame-log-quotient",
+  "lem-per-finite-quotient-strict-local-invariants",
+  "def-per-fs-log-group-action",
+  "lem-per-very-tame-equivariant-sharp-chart",
+  "lem-per-very-tame-local-kummer-quotient",
+  "def-trf-fs-log-blowup",
+  "def-per-strict-log-morphism",
+  "lem-trf-coherent-log-ideal-chart-construction",
+  "lem-per-gabber-log-blowup-regularization",
+  "lem-trf-functorial-log-blowup-etale-descent",
+  "lem-trf-log-tower-contraction-descent",
+  "lem-trf-log-blowup-normalization",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-per-kummer-boundary-restriction",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-weil-pbc-completion-regular-local",
+  "def-trf-strict-normal-crossings-boundary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 3.5; VIII proof of Proposition 5.4.2, Corollary 5.4.4 and 5.4.5, with 3.4.6 and 5.3.10--5.3.11"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +171,73 @@
    "results": "{\"t\": \"2026-10-18T21:43:22Z\", \"tool\": \"grep\", \"query\": \"rigidification|inertia.*strict|normalized.*blowup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log[Bb]low|[Vv]ery[Tt]ame|[Ii]nertia",
+   "results": "{\"t\": \"2026-10-24T00:27:52Z\", \"tool\": \"grep\", \"query\": \"log[Bb]low|[Vv]ery[Tt]ame|[Ii]nertia\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict base change of normalized monomial blowups of log regular schemes",
+   "results": "{\"t\": \"2026-10-24T00:27:53Z\", \"tool\": \"leansearch\", \"query\": \"Strict base change of normalized monomial blowups of log regular schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.Unramified.baseChange\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\"], \"digest\": \"c35a69caedf7e193\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"log\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T00:27:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"log\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Topology.IsQuotientMap\", \"Topology.IsQuotientMap.surjective\", \"Topology.IsQuotientMap.isCoinducing\", \"Topology.IsQuotientMap.mk\", \"Topology.isQuotientMap_iff\", \"Topology.IsQuotientMap.id\", \"Topology.IsQuotientMap.continuous\", \"Topology.IsQuotientMap.of_inverse\"], \"digest\": \"14c09783b3932a12\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict inertia preserving equivariant morphisms between very tame log regular schemes give strict maps on quotients and compatible normalized blowup towers",
+   "results": "{\"t\": \"2026-10-24T00:27:54Z\", \"tool\": \"leanfinder\", \"query\": \"Strict inertia preserving equivariant morphisms between very tame log regular schemes give strict maps on quotients and compatible normalized blowup towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\"], \"digest\": \"513443192f218cba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant log quotient has chart given by the kernel of the character pairing of a tame stabilizer",
+   "results": "{\"t\": \"2026-10-24T00:27:55Z\", \"tool\": \"leanfinder\", \"query\": \"Invariant log quotient has chart given by the kernel of the character pairing of a tame stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.logEmbeddingQuot\", \"NumberField.Units.logEmbeddingEquiv\", \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne\", \"NumberField.Units.logEmbeddingQuot_apply\", \"NumberField.Units.dirichletUnitTheorem.logEmbedding_ker\", \"NumberField.mixedEmbedding.logMap_torsion_smul\", \"NumberField.mixedEmbedding.fundamentalCone.logMap_expMapBasis\", \"NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion\"], \"digest\": \"1a4981f6173025d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]og[Bb]low|[Mm]onoidal.*[Bb]low|[Ss]trict.*[Ll]og|[Bb]low.*[Nn]ormali",
+   "results": "{\"t\": \"2026-10-24T00:31:16Z\", \"tool\": \"grep\", \"query\": \"[Ll]og[Bb]low|[Mm]onoidal.*[Bb]low|[Ss]trict.*[Ll]og|[Bb]low.*[Nn]ormali\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Small.lean\", \"Mathlib/AlgebraicGeometry/Sites/Small.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\"], \"digest\": \"b4691ba056bc9293\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized monomial blowups commute with strict logarithmic base change without flatness",
+   "results": "{\"t\": \"2026-10-24T00:31:17Z\", \"tool\": \"leansearch\", \"query\": \"Normalized monomial blowups commute with strict logarithmic base change without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.Flat.isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\"], \"digest\": \"d38b16346c2fa52c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-24T00:31:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization, CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc\"], \"digest\": \"81bddea5529a0466\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a strict morphism of fs log regular schemes saturated log blowups along the pulled back monoid ideal form a Cartesian square of underlying schemes",
+   "results": "{\"t\": \"2026-10-24T00:31:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a strict morphism of fs log regular schemes saturated log blowups along the pulled back monoid ideal form a Cartesian square of underlying schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.AffineSpace.isPullback_map\"], \"digest\": \"1d1967eb095601df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme normalization or algebraic base-change results, not logarithmic quotient-resolution towers"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-absolute-equivariant-modification",
@@ -78,5 +265,103 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-rigidified-quotient-tower-comparison",
+  "worker": "stage1",
+  "summary": "Q17: corrected the omitted enlarged-log strictness hypothesis, with explicit xy counterexample in report.md. Reused existing quotient-chart, regularization, chart-blowup and contraction statements; no new nodes. The proof checks actual invariant log charts, ordinary Cartesian squares and ordered center ideals.",
+  "blueprint": "Latest lem-per-artin-gabber-affine-curve proof Step 3, through the recorded Gabber purity/modification ancestry: ILO VIII 5.4.2, 5.4.4--5.4.5; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-coherent-log-ideal-chart-construction",
+    "why": "General logarithmic chart, normalized-blowup or center-descent tool for ILO VIII 5.4.4; no statement of the perverse-curve unit supplies this geometric input."
+   },
+   {
+    "node": "lem-trf-functorial-log-blowup-etale-descent",
+    "why": "General logarithmic chart, normalized-blowup or center-descent tool for ILO VIII 5.4.4; no statement of the perverse-curve unit supplies this geometric input."
+   },
+   {
+    "node": "lem-trf-log-tower-contraction-descent",
+    "why": "General logarithmic chart, normalized-blowup or center-descent tool for ILO VIII 5.4.4; no statement of the perverse-curve unit supplies this geometric input."
+   },
+   {
+    "node": "lem-trf-log-blowup-normalization",
+    "why": "General logarithmic chart, normalized-blowup or center-descent tool for ILO VIII 5.4.4; no statement of the perverse-curve unit supplies this geometric input."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "General logarithmic chart, normalized-blowup or center-descent tool for ILO VIII 5.4.4; no statement of the perverse-curve unit supplies this geometric input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "General logarithmic chart, normalized-blowup or center-descent tool for ILO VIII 5.4.4; no statement of the perverse-curve unit supplies this geometric input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "General logarithmic chart, normalized-blowup or center-descent tool for ILO VIII 5.4.4; no statement of the perverse-curve unit supplies this geometric input."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "General logarithmic chart, normalized-blowup or center-descent tool for ILO VIII 5.4.4; no statement of the perverse-curve unit supplies this geometric input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-coherent-log-ideal-chart-construction",
+  "lem-trf-functorial-log-blowup-etale-descent",
+  "lem-trf-log-tower-contraction-descent",
+  "lem-trf-log-blowup-normalization",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-weil-pbc-completion-regular-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-b588bdbf8",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-b588bdbf8 (reviewer sub-agent of L); spot-checked: Read in full against ILO VIII 3.3.8-3.3.15, 3.4.2-3.4.9 (Lemma 3.4.6(ii), Thm 3.4.9), 5.3.6-5.3.11, 5.4.1, Prop 5.4.2 (with proof), Cor 5.4.4, 5.4.5 (printed pp.107-112, 124-127) and VI 1.5-1.7. Accepted statement correction: the old statement is false. With t=xy and G=H=1, V(t) pulls back to the reduced SNC divisor V(xy), but the map of characteristics N->N^2, 1->(1,1), is not strict. ILO 5.4 and 5.4.2 assume strict inert maps, so the added strictness of (Y,B̄_Y)->(X,B̄_X) is the source's hypothesis, not a weakening. Both citers still hold: absolute-equivariant-modification steps 7-8 use completed strict localizations and étale projections, both strict; complete-local-rigidification only fixes the construction. Steps: step 2 checks every hypothesis of the local Kummer quotient (strictly henselian, n invertible, trivial on residue field and A/I, fixed root of unity, A finite over A^H); strictness gives the same chart Q and the same χ, so P=Q∩ker χ maps by the identity and φ̄ is strict. Step 3 is the tensor identity of 3.4.6(ii), elementary. Step 4 descends affine-local comparisons by contraction-descent with f=id; tower isomorphisms are unique. Step 5 is fs pullback by universal property, Kummer base-change log regularity, normalization on integral components, matching 3.4.9. Step 6 is elementary. Step 7: inertness holds because an element fixing a geometric point over x' is the identity on the closure of x' (X separated). No new nodes; no duplicate (inert-etale-quotient-comparison is narrower, needing the same group and an étale map). No SGA. Batch-5: none of the 12 flagged closures contains a thm-trf, trace-formula, Poincaré-duality or nt-assume node (thm-pd-spreading-out is the generic limit lemma of sec-picard-framework); all are generic log-geometry or commutative-algebra tools, accepted. 10-19 dropped-route finding: the item is reached on the base via the sfb chain through lem-sfb-gabber-global-snc-alteration (maintainer re-split of 10-22), not via artin-gabber. BFS with the item excluded shows all 7 flagged nodes already reached and the split adds 0 closure nodes, so it is not a route violation. Tool uses accepted (5 trf log tools of sk-i-curve-zero, 3 sc/pbc regularity nodes). FIX (one fault, B3/E1): the statement's 'normal crossings means etale locally a product of distinct regular parameters' could be read like def-trf-normal-crossings-divisor (a condition only at one point w). Under that reading, step 1's 'SNC on an étale neighbourhood' needs J-2 (Stacks 0CBS), which an arbitrary regular Noetherian X need not satisfy. The statement now gives the Stacks 0BI9 meaning (every point has an étale neighbourhood on which the boundary is SNC [def-trf-strict-normal-crossings-boundary]); step 1 uses it and explains why log regularity is étale local; that definition node is added to step-1 uses and proof_deps. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-rigidified-quotient-tower-comparison.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RigidifiedQuotientTowerComparison",
+  "declaration": "AlgebraicGeometry.rigidifiedQuotient_tower_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/RigidifiedQuotientTowerComparison.lean",
+  "statement": "theorem rigidifiedQuotient_tower_comparison (R : FineFan.SmoothFunctorialDesingularization.{u}) (P : StrictEtaleLogBlowupProcedure IsLogBlowupInput.{u}) (hP : RigidifiedQuotient.IsFanInduced R P) : Nonempty (RigidifiedQuotient.ComparisonSystem.{u, v} P)",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.RigidifiedQuotient.liftedTower",
+   "AlgebraicGeometry.RigidifiedQuotient.IsFanInduced",
+   "AlgebraicGeometry.RigidifiedQuotient.Pair",
+   "AlgebraicGeometry.RigidifiedQuotient.Hom",
+   "AlgebraicGeometry.RigidifiedQuotient.Construction",
+   "AlgebraicGeometry.RigidifiedQuotient.Comparison",
+   "AlgebraicGeometry.RigidifiedQuotient.ComparisonSystem",
+   "AlgebraicGeometry.rigidifiedQuotient_tower_comparison"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f8329223",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Read the item, all 12 stmt_deps (json-diffed vs live: the item changes only lean + 2 added def stmt_deps that the statement really uses; the 3 dep records change only lean), the 341-line module, the 3 (B) dep modules (header-only module conversions, no live importers), and the used decls (LogBlowupComparison and procedure axioms, descent theorem, LogFanTower/Chart, SmoothFunctorialDesingularization, IsQuotient, GabberModification Inert/GStrict/FreeOpen/AbelianInertia, IsNormalizedBlowup, strictTransformι, Mathlib IdealSheafData.comap). Every clause of the Q17-corrected node is rendered: fan-induced P; Noetherian regular separated; tame, generically free, admissible, abelian inertia; G-strict SNC B free outside; NC B̄ in the 0BI9 sense with divisorial iso commuting with alpha; very tame; inert λ,φ; reduced inverse images; explicit strictness; strict quotient map; contracted fs and ordinary scheme pullback; extended centers; unit-center iff; strict-transform iso; identity/composition; universal over all strict inert maps, so localization, completion and disjoint-union cases are covered. Nonempty(ComparisonSystem) is fully normalized (categorical quotient, fs pullbacks, stalk-span centers, quotient square). fullPullback holds since procedure identityIndex excludes whole centers and q is surjective. Not a duplicate of GabberModification.Comparison (different tower type); Rigidification would add global SNC and quasi-excellence. Edge cases: n=0, empty, disconnected, trivial group, proper principal center, consecutive unit centers, universes. Statement verbatim in all 4 records. No compile (nothing changed); worker reports a clean compile and an OK dry run. Advisories: duplicate of Q70's landed StrictEtaleLogBlowupProcedure conversion (record by/note only, so --revert-nodes is optional); report wrongly lists 2 omitted imports; FanDesingularization lost proof-plan imports for stage 3; theorem-owned LogFanTower/Chart from a base-era stmt_dep; second reading by the same worker."
+ }
 }

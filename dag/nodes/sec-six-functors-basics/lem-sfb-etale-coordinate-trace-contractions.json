@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-etale-coordinate-trace-contractions",
+ "kind": "statement",
+ "title": "Conditional coordinate trace contractions for ordinary etale pushforward",
+ "statement": "Let $A$ be a finite commutative ring, $f:X\\to Y$ a proper morphism of arbitrary schemes [def-weil-proper-morphism, def-pc-scheme], and $W=X\\times_YX$ with projections $p_1,p_2$ [def-pc-fibre-product]. Use ordinary unbounded small-etale module derived categories [def-weil-pbc-derived-categories], exact inverse images [def-weil-pbc-inverse-image], derived tensors [def-kun-derived-tensor], and their canonical derived adjunctions. Let $J_Y$ be an $A_Y$-module sheaf etale locally isomorphic to $A_Y$, let $d\\in\\mathbf Z$, and set $L_Y=J_Y[2d]$, $L_X=f^*L_Y$, and $L_W=p_1^*L_X=p_2^*L_X$, using the canonical pullback comparisons. Let $F=Rf_*$ and $HK=f^*K\\otimes_A^L L_X$.\n\nWrite $\\pi_{u,K,E}:K\\otimes_A^LRu_*E\\to Ru_*(u^*K\\otimes_A^LE)$ for the ordered canonical projection map: it is the symmetry-conjugate of [def-kun-projection-formula-map]. Let $\\beta_{2,M}:f^*FM\\xrightarrow{\\sim}Rp_{2*}p_1^*M$ and $\\beta_{1,M}:f^*FM\\xrightarrow{\\sim}Rp_{1*}p_2^*M$ be the canonical proper exchanges [def-kun-unbounded-exchange]. Suppose given derived morphisms $t:FL_X\\to A_Y$ and $t_i:Rp_{i*}L_W\\to A_X$ with\n$$t_i\\circ\\beta_{i,L_X}=f^*t\\qquad(i=1,2),$$\nunder $p_{3-i}^*L_X=L_W$ and $f^*A_Y=A_X$. No diagonal class or diagonal-integral identity is assumed. Define natural maps\n$$e_K=(1_K\\otimes t)\\circ\\pi_{f,K,L_X}^{-1}:FHK\\to K,$$\nwith the right unitor understood, and\n$$C_M:Rp_{2*}(p_1^*M\\otimes L_W)\\xrightarrow{\\sim}Rp_{2*}p_1^*M\\otimes L_X\\xrightarrow{\\beta_{2,M}^{-1}\\otimes1}HFM.$$\nThe first arrow is the inverse projection formula for $p_2$ with outside coefficient $L_X$, conjugated by tensor symmetries. Then for every $M\\in D(X_{\\mathrm{et}},A)$ and $K\\in D(Y_{\\mathrm{et}},A)$ one has\n$$e_{FM}\\circ F(C_M)=F(1_M\\otimes t_1)\\circ F(\\pi_{p_1,M,L_W}^{-1}),$$\nwhere the two sources are identified by $FRp_{2*}=R(fp_2)_*=R(fp_1)_*=FRp_{1*}$, and\n$$H(e_K)\\circ C_{HK}=(1_{HK}\\otimes t_2)\\circ\\pi_{p_2,HK,L_W}^{-1}.$$\nIn the second formula identify $p_1^*HK=p_2^*HK$ by $fp_1=fp_2$. All comparisons are the canonical tensor, pullback, direct-image composition and exchange comparisons; the maps are equal as derived morphisms. No Noetherian, boundedness, constructibility, or Tor-amplitude hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, the paragraph interchanging the two coordinates; second triangle, taking the common pulled-back coefficient outside the second projection. Conditional comparison of the actual exchange/projection maps, before evaluating either diagonal integral."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map",
+  "def-kun-unbounded-exchange",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-kun-tensor-sym",
+  "lem-kun-tensor-unit",
+  "sbc-def-base-change-map",
+  "lem-kun-0f0g",
+  "lem-kun-proper-base-change-torsion-ring"
+ ],
+ "proof": [
+  {
+   "text": "For the first equation fix M. Precompose both sides with the isomorphism J=orderedProjection(f,FM,f*L) followed by F(comparison(L,M) inverse). Apply [lem-sfb-etale-coordinate-kunneth-factorization] to J followed by directComparison. On the left cancel comparison inverse/hom and the f projection hom/inverse in evaluation. On the right cancel the p1 projection hom/inverse and combine tensor maps, replacing exchange1 followed by t1 using ht1. Apply [lem-sfb-etale-projection-trace-normalization] to identify the remaining composite with identity tensor t followed by the right unitor. Cancel J to obtain the first equation. The cancellations are implemented in the proved private generic lemma cancel_coordinate and instantiated with the canonical isomorphisms; the trace substitution uses projectionTraceNormalization and tensor functoriality.",
+   "uses": [
+    "lem-sfb-etale-coordinate-kunneth-factorization",
+    "lem-sfb-etale-projection-trace-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-etale-even-line-self-symmetry] to J[2d]. Use its equality as the self-symmetry hypothesis in [lem-sfb-etale-second-coordinate-contraction] with the given ht2. This is exactly the second equation for the unchanged canonical maps. Pair the two conclusions.",
+   "uses": [
+    "lem-sfb-etale-even-line-self-symmetry",
+    "lem-sfb-etale-second-coordinate-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-coordinate-kunneth-factorization",
+  "lem-sfb-etale-projection-trace-normalization",
+  "lem-sfb-etale-even-line-self-symmetry",
+  "lem-sfb-etale-second-coordinate-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient. Lean reduction: the first equation is proved by isomorphism cancellation and projection naturality; the second specializes a coefficient self-symmetry theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "trace.*(baseChange|projection)|projection.*trace|diagonal.*(triangle|adjunction)|kernel.*interchange",
+   "results": "{\"t\": \"2026-10-22T07:53:09Z\", \"tool\": \"grep\", \"query\": \"trace.*(baseChange|projection)|projection.*trace|diagonal.*(triangle|adjunction)|kernel.*interchange\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of trace tensor projection formula and base change in a self fibre product of ringed topoi",
+   "results": "{\"t\": \"2026-10-22T07:53:10Z\", \"tool\": \"leansearch\", \"query\": \"Compatibility of trace tensor projection formula and base change in a self fibre product of ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_baseChange\", \"IsBaseChange\", \"LinearMap.trace_tensorProduct'\", \"Algebra.trace_eq_of_ringEquiv\", \"Algebra.trace_eq_of_equiv_equiv\", \"IsBaseChange.tensorEquiv\", \"LinearMap.trace_tensorProduct\", \"Algebra.trace_trace\"], \"digest\": \"0cbd7033e6a22bc6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.TwoSquare",
+   "results": "{\"t\": \"2026-10-22T07:53:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.TwoSquare\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For symmetric monoidal pullback direct image adjunctions satisfying projection formula and Beck Chevalley, compare the two coordinate trace contractions on a fibre product with trace followed by exchange",
+   "results": "{\"t\": \"2026-10-22T07:53:20Z\", \"tool\": \"leanfinder\", \"query\": \"For symmetric monoidal pullback direct image adjunctions satisfying projection formula and Beck Chevalley, compare the two coordinate trace contractions on a fibre product with trace followed by exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"PresheafOfModules.pullbackComp\"], \"digest\": \"16172ab77bf40dc2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a proper self fibre product a supported diagonal morphism and a compatible trace give two triangle composites equal to tensoring with the two diagonal integrals, without assuming either integral is the identity",
+   "results": "{\"t\": \"2026-10-22T07:58:03Z\", \"tool\": \"leanfinder\", \"query\": \"In a proper self fibre product a supported diagonal morphism and a compatible trace give two triangle composites equal to tensoring with the two diagonal integrals, without assuming either integral is the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\"], \"digest\": \"82d2f45a61a6a24f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-22T13:47:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\"], \"digest\": \"ec73ed347580c9e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(baseChange|exchange|counit)|trace.*projection",
+   "results": "{\"t\": \"2026-10-22T13:47:01Z\", \"tool\": \"grep\", \"query\": \"projection.*(baseChange|exchange|counit)|trace.*projection\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula base change and contraction by a trace map on derived sheaves",
+   "results": "{\"t\": \"2026-10-22T13:47:02Z\", \"tool\": \"leansearch\", \"query\": \"Projection formula base change and contraction by a trace map on derived sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_contract\", \"LinearMap.trace_eq_contract'\", \"LinearMap.trace_baseChange\", \"Algebra.trace_comp_trace\", \"LinearMap.trace_eq_contract_apply\", \"Algebra.intTraceAux\", \"CategoryTheory.CostructuredArrow.grothendieckProj_map\", \"Algebra.trace_comp_trace_of_basis\"], \"digest\": \"7f3517e74221a735\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal pullback right adjoint formalism with proper base change compare trace contractions along the two projections of a self fibre product",
+   "results": "{\"t\": \"2026-10-22T13:47:06Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric monoidal pullback right adjoint formalism with proper base change compare trace contractions along the two projections of a self fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.μ_pullback_left_fst_snd\", \"CategoryTheory.Over.μ_pullback_left_snd\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"CategoryTheory.Over.tensorHom_left_snd\", \"CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left\", \"CategoryTheory.Over.tensorHom_left_fst\", \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"eaf4e1117cb15956\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutativity of the Kunneth morphism obtained by projection formula and base change for a fibre product of proper maps",
+   "results": "{\"t\": \"2026-10-22T13:48:47Z\", \"tool\": \"leanfinder\", \"query\": \"Commutativity of the Kunneth morphism obtained by projection formula and base change for a fibre product of proper maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.t'_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_snd_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Pullback.t_fst_snd\"], \"digest\": \"006c1bc88e1fd3a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical relative Kunneth map of unbounded etale derived sheaves is the composite of projection formula exchange base change and direct image composition",
+   "results": "{\"t\": \"2026-10-22T13:50:43Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical relative Kunneth map of unbounded etale derived sheaves is the composite of projection formula exchange base change and direct image composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjUnitToUnit\"], \"digest\": \"280fa681a7d0c66b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-22T13:50:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "grep",
+   "query": "kunnethMap_eq|[Kk]unneth.*(projection|exchange)",
+   "results": "{\"t\": \"2026-10-22T13:50:43Z\", \"tool\": \"grep\", \"query\": \"kunnethMap_eq|[Kk]unneth.*(projection|exchange)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kunneth morphism equals the composite of the projection morphism and the base change morphism",
+   "results": "{\"t\": \"2026-10-22T13:50:44Z\", \"tool\": \"leansearch\", \"query\": \"Kunneth morphism equals the composite of the projection morphism and the base change morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.homologyπ\", \"CochainComplex.isIso_homologyπ₀\", \"CategoryTheory.ShortComplex.LeftHomologyData.copy_π\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'\", \"HomologicalComplex.p_fromOpcycles\", \"CategoryTheory.ShortComplex.LeftHomologyMapData.commπ_assoc\", \"CategoryTheory.ShortComplex.LeftHomologyMapData.commπ\", \"KaehlerDifferential.tensorKaehlerEquiv\"], \"digest\": \"f0db38176e6e0747\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.braiding, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-22T13:52:57Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.braiding, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.braiding'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "grep",
+   "query": "(braiding|symmetry).*(self|rank|even)|(rank.one|even).*(braiding|symmetry)",
+   "results": "{\"t\": \"2026-10-22T13:52:57Z\", \"tool\": \"grep\", \"query\": \"(braiding|symmetry).*(self|rank|even)|(rank.one|even).*(braiding|symmetry)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The symmetry automorphism on L tensor L is the identity for an even shift of a locally free rank one sheaf on a ringed site",
+   "results": "{\"t\": \"2026-10-22T13:52:57Z\", \"tool\": \"leanfinder\", \"query\": \"The symmetry automorphism on L tensor L is the identity for an even shift of a locally free rank one sheaf on a ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.symmetricCategory\", \"Module.Invertible.tensorProductComm_eq_refl\", \"LightCondensed.instSymmetricCategoryLightCondMod\", \"CategoryTheory.CommShift₂Setup.int_ε\", \"CategoryTheory.CommShift₂Setup.hε\", \"CategoryTheory.CommShift₂Setup.int_z\", \"ModuleCat.MonoidalCategory.symmetricCategory\", \"CategoryTheory.CommShift₂Setup.int\"], \"digest\": \"123d88cf17c6b9a9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Self braiding of a rank one locally free module shifted by an even integer is identity in the derived category",
+   "results": "{\"t\": \"2026-10-22T13:52:58Z\", \"tool\": \"leansearch\", \"query\": \"Self braiding of a rank one locally free module shifted by an even integer is identity in the derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SemimoduleCat.braiding\", \"CategoryTheory.Limits.biprod.symmetry\", \"CategoryTheory.Limits.biprod.braiding\", \"ModuleCat.MonoidalCategory.instBraidedCategory\", \"DerivedCategory.instHasShiftInt\", \"CategoryTheory.Dial.braiding\", \"CategoryTheory.Prod.braiding_unitIso\", \"AlgebraicGeometry.instBraidedCategoryOverScheme\"], \"digest\": \"bcf1ef6a8fb29af9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative square of schemes the exterior product map is the adjoint of the tensor product of the two pulled back counits and factors through projection and exchange",
+   "results": "{\"t\": \"2026-10-22T13:53:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative square of schemes the exterior product map is the adjoint of the tensor product of the two pulled back counits and factors through projection and exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_fst\"], \"digest\": \"8f2b4f43d4d97752\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory.braiding",
+   "results": "{\"t\": \"2026-10-22T13:53:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.BraidedCategory.braiding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.braiding\", \"CategoryTheory.op_braiding\", \"CategoryTheory.MonoidalOpposite.mop_braiding\", \"CategoryTheory.SymmetricCategory.braiding_swap_eq_inv_braiding\", \"CategoryTheory.BraidedCategory.tensorLeftIsoTensorRight_hom_app\", \"CategoryTheory.BraidedCategory.tensorLeftIsoTensorRight_inv_app\", \"CategoryTheory.unop_braiding\", \"CategoryTheory.MonoidalOpposite.unmop_braiding\"], \"digest\": \"f53a8a78d2b55a08\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line object concentrated in even cohomological degree has trivial self symmetry for derived tensor of sheaves",
+   "results": "{\"t\": \"2026-10-22T13:53:58Z\", \"tool\": \"leanfinder\", \"query\": \"A line object concentrated in even cohomological degree has trivial self symmetry for derived tensor of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.symmetricCategory\", \"LightCondensed.instSymmetricCategoryLightCondMod\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"HomologicalComplex.instHasTensorTensorUnit\", \"CategoryTheory.Sheaf.braidedCategory\", \"CategoryTheory.Sheaf.monoidalCategory\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"CategoryTheory.sheafToPresheaf_δ\"], \"digest\": \"89f68b4bd20bdf45\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits concern ordinary module traces, generic mates, nonderived pullback, or signed tensor structures; none states both specified etale trace-contraction identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-affine-base-p1-trace-adjunction",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "First triangle, the paragraph interchanging the two coordinates; second triangle, taking the common pulled-back coefficient outside the second projection. Conditional comparison of the actual exchange/projection maps, before evaluating either diagonal integral. Unit sk-prop-sf-rf-shriek-preservation step 3, via the projective-line building block. The created.item ancestor command returns None because the imported creation chain terminates before a blueprint_kind record.",
+   "via": [
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-etale-coordinate-trace-contractions",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six-step proof reuses the existing arbitrary-ringed-topos Kunneth factorizations, proper unbounded projection/base change and projection/exchange tensor coherence. The first equality is checked after an explicit common product isomorphism; the second uses the precise base-change square and a representative proof that an even shifted line has trivial self-symmetry. No new nodes or Mathlib leaves.",
+  "blueprint": "thm-amb-p1-adjunction.proof.md, first triangle paragraph interchanging the coordinates and second triangle paragraph extracting the common coefficient. This proves only the conditional contraction comparisons preceding diagonal-integral evaluation. The inherited ancestor command returns None; the existing explicit from.place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic weil pbc proper base change on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-kun-0f0g",
+    "why": "Generic kun 0f0g on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic kun proper base change torsion ring on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic sfb ringed derived monoidal comparisons on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-sfb-ringed-kunneth-factorizations",
+    "why": "Generic two-coordinate projection/exchange factorization on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic projection naturality and tensor associativity on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-weil-pbc-adjunct-counit-identity",
+    "why": "Generic weil pbc adjunct counit identity on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "why": "Generic exact tensor equivalence for an ordinary sheaf line on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic weil pbc site derived tensor descent on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic projection/exchange compatibility on its stated ordinary module categories; used as a black box for the unit projective-line building block, without replacing its purity or diagonal-integral route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-base-change",
+  "lem-kun-0f0g",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-kunneth-factorizations",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NH-a15a6c149",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a15a6c149 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes and an unchanged statement. Statement, stmt_deps, source and blueprint are byte-identical to the item as created in the Q41 snapshot, so the target is not weakened. I read the blueprint source thm-amb-p1-adjunction.proof.md (the coordinate interchange in the first triangle, the common-coefficient extraction and no Koszul sign in the second). Checks per step: (1) lem-kun-0f0g matches Stacks 0F0G (proper f, torsion Λ, unbounded objects) and lem-kun-proper-base-change-torsion-ring holds for any torsion ring, so a finite ring is covered; for the constant ring A, f^{-1} is the ringed pullback. (2) Kunneth factorization with q=f, a=p1, b=p2, N=L_X: β_M is the exchange for the square (f, p2, f, p1), so β_M=β_2 and β̄_N=β_1; both composites match J_M in tensor order and target. (3) Precomposing with J_M cancels down to 1⊗t; on the right, t_1β_1=f^*t, projection naturality, and PF_f(M,A_Y)=1 via its counit transpose. (4) σ_{L,L}=id for J[2d]: K-flat one-term model, sign (−1)^{4d²}=+1, and the rank-one swap is the identity locally; an odd shift or rank two breaks it, so the hypotheses are used. (5) lem-weil-pbc-ringed-exchange-tensor-coherence has the orientation β_{2,HK}P(π)=γ(1⊗β_{2,L}), and inverting with t_2β_2=Pt gives P(e_K)β^{-1}=(1⊗t_2)γ^{-1}. (6) I recomputed the associativity identity conjugated by symmetries; σ_{E,p^*L}=id by step 4, and σ-naturality gives (1_{HK}⊗t_2)γ_{HK,E}^{-1}. Edge cases checked: f=id, t=0, d≤0, empty schemes, unbounded M and K. No cycle, and proof_deps equals the union of the uses. No duplicate: lem-sp-tower-p1-triangle-factorization works with pro-étale towers, and lem-pur-tensor-action-trace-contraction and lem-pur-composite-integration-counit are composite-counit identities. I accept the 10 declared tool_uses; all are generic structural lemmas. No SGA. Maintainer note: blueprint.from.node=null is inherited from the creation chain, not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoordinateTraceContractions",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.contractions",
+  "declarations": [
+   "AlgebraicGeometry.Etale.CoordinateTrace.contractions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoordinateTraceContractions.lean",
+  "statement": "theorem contractions [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) (hJ : Scheme.IsLisseRankOneSheaf J) (d : ℤ) (t : (push A f).obj ((pull A f).obj (shiftedLine A J d)) ⟶ constantComplex A Y) (t1 : (push A (pullback.fst f f)).obj ((pull A (pullback.snd f f)).obj ((pull A f).obj (shiftedLine A J d))) ⟶ constantComplex A X) (t2 : (push A (pullback.snd f f)).obj ((pull A (pullback.snd f f)).obj ((pull A f).obj (shiftedLine A J d))) ⟶ constantComplex A X) (ht1 : (exchange1 A f ((pull A f).obj (shiftedLine A J d))).hom ≫ t1 = (pull A f).map t ≫ (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom) (ht2 : (exchange2 A f ((pull A f).obj (shiftedLine A J d))).hom ≫ (push A (pullback.snd f f)).map (coordinate A f (shiftedLine A J d)).hom ≫ t2 = (pull A f).map t ≫ (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom) : (∀ M : DerivedCategoryModule A X, (push A f).map (comparison A f (shiftedLine A J d) M).hom ≫ evaluation A f (shiftedLine A J d) t ((push A f).obj M) = (directComparison A f).hom.app _ ≫ (push A f).map ((orderedProjectionIso A (pullback.fst f f) M ((pull A (pullback.snd f f)).obj ((pull A f).obj (shiftedLine A J d)))).inv ≫ ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map t1 ≫ (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X M).hom)) ∧ (∀ K : DerivedCategoryModule A Y, (comparison A f (shiftedLine A J d) ((H A f (shiftedLine A J d)).obj K)).hom ≫ (H A f (shiftedLine A J d)).map (evaluation A f (shiftedLine A J d) t K) = (push A (pullback.snd f f)).map (((derivedTensor (ModuleCat.{u + 1} A) (pullback f f)).map (coordinateH A f (shiftedLine A J d) K).hom).app ((pull A (pullback.snd f f)).obj ((pull A f).obj (shiftedLine A J d)))) ≫ (orderedProjectionIso A (pullback.snd f f) ((H A f (shiftedLine A J d)).obj K) ((pull A (pullback.snd f f)).obj ((pull A f).obj (shiftedLine A J d)))).inv ≫ ((derivedTensor (ModuleCat.{u + 1} A) X).obj ((H A f (shiftedLine A J d)).obj K)).map t2 ≫ (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X ((H A f (shiftedLine A J d)).obj K)).hom)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Public theorem signature unchanged. Canonical definitions extracted verbatim to EtaleCoordinateTraceData and publicly re-exported; first equation proved by explicit cancellation, second from the generalized identity-self-symmetry contraction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad3b4b034",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of returned 2339318b: adds exactly the 5 requested owners to stmt_deps plus 2 public imports; statement, proof, proof_deps and Lean signature byte-identical; no import cycle, no DAG cycle in snapshot. Clause-by-clause re-check of beta1/beta2, ht1/ht2, e_K, C_M and both equations with directComparison/coordinateH identifications OK; universes and edge cases OK; no hollow defs, sorry only in theorem. Theorem stmt_deps judged genuine: lem-kun-0f0g and lem-kun-proper-base-change-torsion-ring supply IsIso for the asIso inverses in the statement; lem-kun-tensor-sym and lem-kun-tensor-unit are recorded as the constructed iso defs derivedTensorSymmetry/derivedTensorRightUnitor, which no def node owns -> PASS on that point. Advisory: derivedSquareUpperStarIso, rightDerivedLowerStarComp and leftDerivedUpperStar{Tensor,Unit}Iso have no DAG owner. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7a53",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T123006-L-1822645",
+  "kind": "interface",
+  "note": "independent cc review: contractions signature and node lean.statement vs clone (identical); 14 extracted defs vs clone item module (verbatim apart from blueprint tags, item re-exports Data); three new sorried statements vs parent node steps 1-6 (true, needed, not restatements); projectionTraceNormalization axioms (propext/choice/Quot.sound)"
+ }
+}

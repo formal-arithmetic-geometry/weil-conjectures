@@ -1,0 +1,126 @@
+{
+ "id": "src-weil-pbc-strict-localization-closed-stalk",
+ "kind": "statement",
+ "title": "Adopted strict-localization base change on the closed geometric stalk",
+ "statement": "Let f:X→S be quasi-compact and quasi-separated [def-weil-quasi-separated-morphism], Ω an algebraically closed field, and s:Spec Ω→S a geometric point [def-weil-geometric-point]. Let A be henselian local with separably closed residue field [def-weil-pbc-henselian-terminology] and e:Spec A≅strictLocalization(s), the adopted full pointed-affine-neighbourhood model. Suppose p₀:X₀→X and f₀:X₀→Spec A form a cartesian square [def-weil-pbc-cartesian-square] over f and e.hom followed by strictLocalizationToBase(s). For every separably closed field k, morphism a:Spec k→Spec κA, abelian étale sheaf G on X [def-weil-pbc-abelian-etale-sheaves], and q∈ℕ, H^q of the derived base-change mate [def-weil-pbc-derived-exchange] at G[0] is invertible on the geometric stalk [def-weil-pbc-geometric-stalks] at a followed by the residue closed-point map. This is the exact fully proved adopted declaration; the original small-colimit statement remains the separate node lem-weil-pbc-strict-local-base-change-closed-stalk.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/StrictLocalBaseChangeClosedStalk.lean; literature/stacks-project/etale-cohomology.tex",
+  "place": "isIso_strictHenselization_baseChange_closedStalk, lines 118–139; Stacks Project Tags 03Q9 and 03QO"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-geometric-point",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply the adopted model-global-homology theorem to K=G[0] and n=q. For the resulting homology sheaf map, enlarge k to its algebraic closure. The extended geometric point lies over the closed point since Spec of the residue quotient maps every point to the maximal ideal. The strictly henselian sections/stalk theorem makes the global germ of each homology sheaf invertible, and its naturality identifies the section map followed by the target germ with the source germ followed by the stalk map. The section map is invertible by the model theorem and the natural sections comparison, so cancelling the invertible source germ proves that the extended stalk map is invertible. Naturality of the invertible geometric-field-extension comparison then gives invertibility at the original point. This node records an existing fully proved library theorem and adds no Lean declaration or unproved step.",
+   "uses": [
+    "src-weil-pbc-strict-localization-model-global-homology",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-geometric-point-field-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "src-weil-pbc-strict-localization-model-global-homology",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-geometric-point-field-extension"
+ ],
+ "proof_origin": {
+  "by": "adopted source-library proof, read and attached by C3",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/StrictLocalBaseChangeClosedStalk.lean",
+  "place": "The private closedStalk_isIso_of_sections and public theorem; Stacks Tags 03Q9, 03QO, 03PN and 03Q1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change to strict henselization is an isomorphism on the closed geometric stalk",
+   "results": "8 Mathlib hits including Spec_stalkClosedPointIso, ΓSpecIso_hom_stalkClosedPointIso_inv, stalkClosedPointIso_inv, isomorphisms_eq_stalkwise and arrowStalkMapSpecIso.",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib result. The exact full-model result is already proved in the adopted source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"sheafFiber\"",
+   "results": "4 Mathlib hits: point/presheaf-to-sheafification and monoidal fibre comparison instances.",
+   "date": "2026-10-24",
+   "verdict": "No strict-localization base-change result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change closed stalk strict henselization",
+   "results": "8 Mathlib hits: surjectivity on stalks, localization and general base-change stability lemmas.",
+   "date": "2026-10-24",
+   "verdict": "No exact result."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_strictHenselization_baseChange_closedStalk|smallStrictHenselizationColimitIso_toBase",
+   "results": "Mathlib search: zero hits. rg of lean/WeilConjectures and lean/Sheaf found the fully proved adopted closed-stalk theorem and the canonical structural-map compatibility.",
+   "date": "2026-10-24",
+   "verdict": "Use the existing adopted theorem and comparison instead of repeating the sections/stalk argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalBaseChangeClosedStalk",
+  "date": "2026-10-24",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Closed-stalk strict-henselization comparison: transport from the small representative-colimit model to the adopted full model.",
+   "via": [
+    "lem-weil-pbc-strict-local-base-change-closed-stalk"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictLocalBaseChangeClosedStalk",
+  "declaration": "AlgebraicGeometry.Etale.isIso_strictHenselization_baseChange_closedStalk",
+  "statement": "theorem isIso_strictHenselization_baseChange_closedStalk\n    {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    {A : Type u} [CommRing A] [HenselianLocalRing A]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    (eA : Spec (.of A) ≅ strictLocalization s)\n    {X₀ : Scheme.{u}} (p₀ : X₀ ⟶ X) (f₀ : X₀ ⟶ Spec (.of A))\n    (sq₀ : IsPullback p₀ f₀ f (eA.hom ≫ strictLocalizationToBase s))\n    {k : Type u} [Field k] [IsSepClosed k]\n    (a : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    IsIso ((pointSmallEtale\n      (a ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).sheafFiber.map\n        ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n          ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq₀.toCommSq).app\n            ((DerivedCategory.Plus.singleFunctor _ 0).obj G))))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-24",
+  "note": "Existing complete full strictLocalization theorem; no adopted source file is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261023T230512-L-3435947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261023T230512-L-3435947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

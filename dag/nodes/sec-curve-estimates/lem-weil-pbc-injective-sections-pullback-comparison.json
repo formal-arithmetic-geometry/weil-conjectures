@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Every stage projection is etale by base change. Use the already proved injective_upperStar_obj_of_etale_addCommGrp of WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic to show that every term of the restricted complex is injective. Its lower bound is inherited by the mapped complex. CochainComplex.isKInjective_of_injective makes it K-injective. The right-derived sections unit is therefore invertible; the localization factorization and q inverse are isomorphisms, as is their image under homology.",
+   "text": "Reuse the first two clauses of the adopted injectiveSections_strictLocal_comparison in WeilConjectures.AlgebraicGeometry.EtaleInjectiveSectionsComparison: its stage projections and transition maps are exactly those of this statement. Its proof restricts the bounded-below injective representative along etale stage projections, uses CochainComplex.isKInjective_of_injective, and inverts the derived-sections unit. The five common sections constructions have exactly the same definitions in both modules; use the adopted ones rather than redeclaring them.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-sp-right-adjoint-preserves-injectives",
@@ -28,7 +28,7 @@
    "elementary": false
   },
   {
-   "text": "Specialize the arbitrary triangle naturality theorem to each neighbourhood map, the projection at its target, and the projection at its source. The equality h = a followed by g is the symmetry of naturality of strictLocalNeighbourhoodProjection, with its identity composite removed. Specialize the same theorem to each cone leg, the stage projection, and the pullback first projection, using the symmetry of Q.smallModelOver. These give the two restriction assertions without an injectivity assertion for the limit.",
+   "text": "Keep the neighbourhood naturality clause of the adopted theorem. For the genuinely different cone-leg clause, apply sectionsComparison_triangle_naturality to Q.smallModelLegs.app i, the stage projection, and the first projection from the small-model pullback, using (Q.smallModelOver i).symm. This yields exactly the required restriction square without asserting acyclicity at the limit.",
    "uses": [
     "lem-weil-pbc-sections-comparison-triangle-naturality",
     "def-weil-pbc-small-model-mate-projection-data"
@@ -55,9 +55,9 @@
   "lem-weil-pbc-strict-local-small-model-geometry-transport"
  ],
  "proof_origin": {
-  "by": "T6 adapting the complete existing proof along the canonical colimit-model comparison",
+  "by": "E2, retirement of duplicate constructions with the full small-model comparison preserved",
   "document": "Stacks Project",
-  "place": "Tag 03Q9 final paragraph: invertibility proved using the source-library injective restriction lemma; naturality isolated in an arbitrary triangle theorem"
+  "place": "Tag 03Q9 final injective-complex paragraph; reuse the adopted stage and transition comparison and arbitrary triangle naturality on the transported cone."
  },
  "mathlib_searches": [
   {
@@ -114,21 +114,17 @@
  "unit": "sk-prop-h2",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInjectiveSectionsComparison.lean",
-  "declaration": "AlgebraicGeometry.Etale.injectiveSections_strictLocal_comparison",
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.EtaleInjectiveSectionsComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/EtaleInjectiveSectionsComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_injectiveSections_strictLocal_comparison",
   "declarations": [
-   "AlgebraicGeometry.Etale.sectionsPullbackNat",
-   "AlgebraicGeometry.Etale.termwiseSectionsCohomology",
-   "AlgebraicGeometry.Etale.termwiseSectionsRestriction",
-   "AlgebraicGeometry.Etale.termwiseSectionsToDerived",
-   "AlgebraicGeometry.Etale.representativeSectionsComparison",
-   "AlgebraicGeometry.Etale.injectiveSections_strictLocal_comparison"
+   "AlgebraicGeometry.Etale.smallModel_injectiveSections_strictLocal_comparison"
   ],
-  "statement": "theorem injectiveSections_strictLocal_comparison {X S : Scheme.{v}}\n    (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s)\n    (J : CochainComplex.Plus (InjectiveObject\n      (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})))\n    (q : K.obj ≅ DerivedCategory.Q.obj\n      (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :\n    (∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),\n      IsIso (representativeSectionsComparison\n        ((strictLocalNeighbourhoodProjection f s).app i) q n)) ∧\n    (∀ {i j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)} (a : i ⟶ j),\n      representativeSectionsComparison\n        ((strictLocalNeighbourhoodProjection f s).app j) q n ≫\n      (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj j) n).map\n        ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1}\n          ((strictLocalNeighbourhoodDiagram f s).map a)).unit.app\n            ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app\n        j)).mapDerivedCategory.obj\n              K.obj)) ≫\n      (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map\n        ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso\n          AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map a)).hom.app\n            ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map\n        a)).mapDerivedCategory.obj\n              ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f\n        s).app j)).mapDerivedCategory.obj\n                K.obj))) ≫\n      (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj i) n).map\n        ((Functor.mapDerivedCategoryNatIso\n          (Etale.upperStarComp AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map a)\n        ((strictLocalNeighbourhoodProjection f s).app j)\n            ((strictLocalNeighbourhoodProjection f s).app i) ((Category.comp_id\n        ((strictLocalNeighbourhoodProjection f s).app i)).symm.trans\n        ((strictLocalNeighbourhoodProjection f s).naturality a).symm)) ≪≫\n          Functor.mapDerivedCategoryCompIso\n            (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app j))\n            (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map\n        a))).inv.app K.obj) =\n        termwiseSectionsRestriction ((strictLocalNeighbourhoodDiagram f s).map a)\n          ((strictLocalNeighbourhoodProjection f s).app j)\n          ((strictLocalNeighbourhoodProjection f s).app i)\n          ((Category.comp_id _).symm.trans\n            ((strictLocalNeighbourhoodProjection f s).naturality a).symm)\n          (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫\n        representativeSectionsComparison\n          ((strictLocalNeighbourhoodProjection f s).app i) q n) ∧\n    (∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),\n      representativeSectionsComparison\n        ((strictLocalNeighbourhoodProjection f s).app i) q n ≫\n      (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj i) n).map\n        ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1}\n          (Q.smallModelLegs.app i)).unit.app\n            ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app\n        i)).mapDerivedCategory.obj\n              K.obj)) ≫\n      (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map\n        ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso\n          AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)).hom.app\n            ((Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)).mapDerivedCategory.obj\n              ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f\n        s).app i)).mapDerivedCategory.obj\n                K.obj))) ≫\n      (Etale.cohomology AddCommGrpCat.{v + 1} (pullback f (Scheme.strictHenselizationStructuralMap\n        s)) n).map\n        ((Functor.mapDerivedCategoryNatIso\n          (Etale.upperStarComp AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)\n        ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f\n        (Scheme.strictHenselizationStructuralMap s))\n            (Q.smallModelOver i).symm) ≪≫\n          Functor.mapDerivedCategoryCompIso\n            (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))\n            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i))).inv.app K.obj) =\n        termwiseSectionsRestriction (Q.smallModelLegs.app i)\n          ((strictLocalNeighbourhoodProjection f s).app i)\n          (pullback.fst f (Scheme.strictHenselizationStructuralMap s))\n          (Q.smallModelOver i).symm\n          (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫\n        representativeSectionsComparison\n          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n)",
+  "statement": "theorem smallModel_injectiveSections_strictLocal_comparison {X S : Scheme.{v}}\n    (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s)\n    (J : CochainComplex.Plus (InjectiveObject\n      (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})))\n    (q : K.obj ≅ DerivedCategory.Q.obj\n      (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :\n    (∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),\n      IsIso (representativeSectionsComparison\n        ((strictLocalNeighbourhoodProjection f s).app i) q n)) ∧\n    (∀ {i j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)} (a : i ⟶ j),\n      representativeSectionsComparison\n        ((strictLocalNeighbourhoodProjection f s).app j) q n ≫\n      (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj j) n).map\n        ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1}\n          ((strictLocalNeighbourhoodDiagram f s).map a)).unit.app\n            ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app\n        j)).mapDerivedCategory.obj\n              K.obj)) ≫\n      (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map\n        ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso\n          AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map a)).hom.app\n            ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map\n        a)).mapDerivedCategory.obj\n              ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f\n        s).app j)).mapDerivedCategory.obj\n                K.obj))) ≫\n      (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj i) n).map\n        ((Functor.mapDerivedCategoryNatIso\n          (Etale.upperStarComp AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map a)\n        ((strictLocalNeighbourhoodProjection f s).app j)\n            ((strictLocalNeighbourhoodProjection f s).app i) ((Category.comp_id\n        ((strictLocalNeighbourhoodProjection f s).app i)).symm.trans\n        ((strictLocalNeighbourhoodProjection f s).naturality a).symm)) ≪≫\n          Functor.mapDerivedCategoryCompIso\n            (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app j))\n            (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).map\n        a))).inv.app K.obj) =\n        termwiseSectionsRestriction ((strictLocalNeighbourhoodDiagram f s).map a)\n          ((strictLocalNeighbourhoodProjection f s).app j)\n          ((strictLocalNeighbourhoodProjection f s).app i)\n          ((Category.comp_id _).symm.trans\n            ((strictLocalNeighbourhoodProjection f s).naturality a).symm)\n          (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫\n        representativeSectionsComparison\n          ((strictLocalNeighbourhoodProjection f s).app i) q n) ∧\n    (∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),\n      representativeSectionsComparison\n        ((strictLocalNeighbourhoodProjection f s).app i) q n ≫\n      (Etale.cohomology AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodDiagram f s).obj i) n).map\n        ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1}\n          (Q.smallModelLegs.app i)).unit.app\n            ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app\n        i)).mapDerivedCategory.obj\n              K.obj)) ≫\n      (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map\n        ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso\n          AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)).hom.app\n            ((Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)).mapDerivedCategory.obj\n              ((Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f\n        s).app i)).mapDerivedCategory.obj\n                K.obj))) ≫\n      (Etale.cohomology AddCommGrpCat.{v + 1} (pullback f (Scheme.strictHenselizationStructuralMap\n        s)) n).map\n        ((Functor.mapDerivedCategoryNatIso\n          (Etale.upperStarComp AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i)\n        ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f\n        (Scheme.strictHenselizationStructuralMap s))\n            (Q.smallModelOver i).symm) ≪≫\n          Functor.mapDerivedCategoryCompIso\n            (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))\n            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i))).inv.app K.obj) =\n        termwiseSectionsRestriction (Q.smallModelLegs.app i)\n          ((strictLocalNeighbourhoodProjection f s).app i)\n          (pullback.fst f (Scheme.strictHenselizationStructuralMap s))\n          (Q.smallModelOver i).symm\n          (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫\n        representativeSectionsComparison\n          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n)",
   "branch": "sheaf-dag",
-  "by": "E3",
-  "date": "2026-10-12"
+  "by": "E2",
+  "date": "2026-10-22",
+  "note": "Retired the duplicate Sheaf module. The five model-independent sections constructions are reused verbatim from WeilConjectures.AlgebraicGeometry.EtaleInjectiveSectionsComparison. The small-model theorem is retained with its original type under an explicit smallModel_ name; its first two clauses reuse the adopted theorem, and the last uses arbitrary triangle naturality."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -143,14 +139,25 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-a9e15",
-  "group": "H1",
+  "reviewer": "C-b062f",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261022T025328-L-1279972",
+  "landing": "20261022T044009-L-1166090",
   "kind": "interface",
-  "note": "independent cc review: old item vs new StrictLocalSmallModel/MateProjectionData (identical modulo two renames); withdrawn smallModel_isIso_strictLocalCohomologyGermMap vs WeilConjectures isIso_strictLocalCohomologyGermMap (identical statement); 13 adapted unclaimed consumers vs live (rename/import edits only); 15 delivered + 14 downstream modules compiled together: 29/29 OK, max 46.7 s"
+  "note": "independent cc review: retired Sheaf EtaleInjectiveSectionsComparison vs WeilConjectures twin (5 defs byte-identical, same StrictLocalNeighbourhoodGeometry); retained smallModel_ theorem type = old theorem type verbatim; 6 adapted unclaimed consumers vs live (rename/import only); 26/26 transitive-importer sandbox compile OK, max 38.1 s; axioms clean"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "statement_change": {
   "date": "2026-10-22",
   "by": "H1 stage 2",

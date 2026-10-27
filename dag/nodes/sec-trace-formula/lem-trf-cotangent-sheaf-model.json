@@ -16,117 +16,61 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal D=\\mathcal C_{B/A}^{op}$, the category of polynomial $A$-algebras augmented to $B$ in the statement. Use its chosen small skeleton and transport the resolutions to it; the stipulated common infinite bound contains the sets of generators of their terms and of the standard resolution. A presheaf on $\\mathcal C_{B/A}$ is a covariant functor on $\\mathcal D$. By [lem-trf-derived-colimit-bar], $L\\pi_!F$ is the left derived colimit of this functor. There is a sign convention to fix when using [lem-trf-simplicial-derived-colimit-computation]: the chain $U_n\\to\\cdots\\to U_0$ in $\\mathcal C$ becomes $T_0\\to\\cdots\\to T_n$ in $\\mathcal D$, with $T_i=U_i$. The former bar deletes the last vertex first, while the latter deletes the first vertex first. Thus $d_{\\mathcal C,n}=(-1)^n d_{\\mathcal D,n}$. Multiplication in degree $-n$ by $\\lambda_n=(-1)^{n(n+1)/2}$ gives a chain isomorphism $j_F:K_{\\mathcal C}(F)\\to K_{\\mathcal D}(F)$, since $\\lambda_n=(-1)^n\\lambda_{n-1}$. It is the identity in degree zero, respects augmentations, and commutes with every bar map induced by a functor and coefficient transformation. We use this explicit identification throughout.",
+   "text": "Take universes $\\mathcal U\\in\\mathcal V$ with $A,B$ and the resolutions $\\mathcal U$-small; the skeleton $\\mathcal D=\\mathcal C_{B/A}^{op}$ is a small full subcategory of $\\mathcal D_{B/A}$ of [lem-trf-polynomial-presentation-homology]. A polynomial resolution $P_\\bullet\\to B$ of [lem-trf-cotangent-resolution-coherence] (the standard one is such by that node) has polynomial terms surjecting onto $B$ and $s(P_\\bullet)\\to B[0]$ a quasi-isomorphism, so its underlying augmentation is a trivial Kan fibration by [lem-trf-polynomial-augmentation-boundary]; transport its terms into $\\mathcal D$. Clause (1) of [lem-trf-polynomial-resolution-universal-evaluation] with $R=B$ gives $\\alpha_{P,F}=j_F^{-1}a_{P,F}:s(F(P_\\bullet))\\simeq L\\pi_!F$, natural in $F$ and in augmented resolution maps, with the bar sign $(-1)^{n(n+1)/2}$ fixed. Inverting it proves the general resolution formula.",
    "uses": [
-    "def-weil-size-convention",
-    "lem-trf-derived-colimit-bar",
-    "lem-trf-simplicial-derived-colimit-computation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), 08Q9 (lemma-compute-by-cosimplicial-resolution); reversal of the bar face order written explicitly"
-   }
-  },
-  {
-   "text": "Let $P_\\bullet\\to B$ be any polynomial resolution specified in [lem-trf-cotangent-resolution-coherence]. Regard it as a morphism of simplicial abelian groups to the constant simplicial group $B$. By the definition in that node every $P_n\\to B$ is surjective, so the morphism is termwise surjective. The alternating complex $s(B)$ of constant $B$ has differential $\\sum_{i=0}^n(-1)^i\\mathrm{id}_B$ from degree $n$, which is zero for odd $n$ and the identity for even $n\\geq2$; hence $H_0(s(B))=B$, $H_n(s(B))=0$ for $n\\geq1$, and $s(B)\\to B[0]$ is a quasi-isomorphism. Since $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism by the definition of resolution and factors through $s(B)$, the map $s(P_\\bullet)\\to s(B)$ is a quasi-isomorphism. By [lem-trf-surjective-qis-simplicial-group-trivial-kan] (Stacks Tag 08P1) the underlying map of simplicial sets $P_\\bullet\\to B$ is a trivial Kan fibration in the sense of [def-weil-pbc-trivial-kan-fibration]: surjective on vertices, with boundary fillers for all $n\\geq1$. This applies to the standard resolution too, since [lem-trf-cotangent-resolution-coherence] states that it is a resolution, and its terms surject onto $B$ by that definition.",
-   "uses": [
+    "lem-trf-polynomial-presentation-homology",
     "lem-trf-cotangent-resolution-coherence",
-    "lem-trf-surjective-qis-simplicial-group-trivial-kan",
-    "def-weil-pbc-trivial-kan-fibration"
+    "lem-trf-polynomial-augmentation-boundary",
+    "lem-trf-polynomial-resolution-universal-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tags 08PT (lemma-pi-shriek-standard), 08QI (remark-resolution); simplicial Tag 08P1 (lemma-qis-simplicial-abelian-groups)"
+    "place": "Tags 08PS (lemma-identify-pi-shriek), 08PT (lemma-pi-shriek-standard), 08QI (remark-resolution)"
    }
   },
   {
-   "text": "For an object $T=A[E]\\to B$ of $\\mathcal D$, a simplex of $S_T=\\operatorname{Hom}_{\\mathcal D}(T,P_\\bullet)$ is a choice, for each $e\\in E$, of a simplex of $P_\\bullet$ mapping to the prescribed element $\\epsilon_T(e)$ of $B$. This follows from the universal property of a polynomial algebra and commutes with all simplicial operators. A lifting problem for $S_T\\to *$ against $\\partial\\Delta[n]\\hookrightarrow\\Delta[n]$ therefore gives, for each generator, a boundary lifting problem for $P_\\bullet\\to B$ over the constant simplex $\\epsilon_T(e)$. Step 2 and [def-weil-pbc-trivial-kan-fibration] provide fillers; choose them for all generators and extend uniquely to an algebra map $T\\to P_n$. For $n=0$ choose generator lifts by the same condition. Hence $S_T\\to *$ is a trivial Kan fibration. By [lem-weil-pbc-trivial-kan-homotopy-equivalence] it is homotopy equivalent to a singleton. This includes the empty generator set and arbitrary sets of generators within the size bound.",
-   "uses": [
-    "def-weil-pbc-trivial-kan-fibration",
-    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08PS (lemma-identify-pi-shriek), representables expressed as choices of lifts of generators; simplicial Tag 08NS (lemma-trivial-kan-homotopy)"
-   }
-  },
-  {
-   "text": "Steps 1 and 3 verify the smallness and representable-contractibility hypotheses of [lem-trf-simplicial-derived-colimit-computation], with $R=B$, $Q=P_\\bullet$, and the covariant functor corresponding to any module presheaf $F$. It gives $a_{P,F}:s(F(P_\\bullet))\\xrightarrow{\\sim}\\mathbf H(\\mathcal D,F)$. Composing with the inverse of Step 1's bar identification gives $\\alpha_{P,F}:s(F(P_\\bullet))\\xrightarrow{\\sim}L\\pi_!F$. Its naturality in $F$ and in augmented simplicial maps $P\\to Q$ is the naturality asserted by that node; in particular $\\alpha_{Q,F}s(F(h))=\\alpha_{P,F}$. Inverting $\\alpha_{P,F}$ proves the general resolution formula in the item. No flatness or exactness assumption on $F$ is used.",
-   "uses": [
-    "lem-trf-simplicial-derived-colimit-computation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), specialized as in cotangent Tags 08PS and 08QI"
-   }
-  },
-  {
-   "text": "The maps $dp\\otimes r\\mapsto d(v(p))\\otimes r$ for an augmented algebra map $v:P\\to Q$ define the coefficient functor $F_{B/A}$: additivity, the Leibniz relation, and the vanishing of differentials of elements of $A$ are preserved, using the defining relations in [def-weil-pbc-kahler-differentials]. The tensor relation is preserved because both augmentations give the same action on $B$. Identity and composition hold on these generating symbols. For $P=P^{\\mathrm{std}}$, [lem-trf-cotangent-resolution-coherence] identifies $s(F_{B/A}(P))$ with its defining complex $L_{B/A}$. Define $\\theta_{B/A}=\\alpha_{\\mathrm{std},F_{B/A}}^{-1}$. For any other resolution the induced comparison is $\\theta_{B/A}\\alpha_{P,F_{B/A}}$. These are the polynomial-resolution comparisons of Tags 08PU and 08QI: evaluate the sheaf on the standard resolution to define $L_{B/A}$, and identify its evaluation on any other resolution through the same $L\\pi_!F_{B/A}$. This fixes the canonical comparison convention in [lem-trf-cotangent-resolution-coherence], rather than choosing an arbitrary isomorphism. If the comparison of [lem-trf-cotangent-resolution-coherence] is formed on the larger category of all small augmented polynomial algebras rather than on the skeleton, the reindexing clause of [lem-trf-simplicial-derived-colimit-computation] for the inclusion $i$, identity coefficients and $k$ the transport isomorphism gives $a^{\\mathrm{big}}_P=\\mathbf H(i,\\mathrm{id})a_P$ for $P$ and for the standard resolution alike, so $a_{\\mathrm{std}}^{-1}a_P$ is the same in both.",
+   "text": "The rules $\\mathrm dp\\otimes r\\mapsto\\mathrm d(w(p))\\otimes r$ respect additivity, Leibniz and $\\mathrm d(A)=0$ of [def-weil-pbc-kahler-differentials] and the tensor balancing, as $w$ commutes with the augmentations; identity and composition hold on generators. So $F_{B/A}=\\mathcal F_{B/A}\\circ i$ for $\\mathcal F_{B/A}(T)=\\Omega_{T/A}\\otimes_TB$ on $\\mathcal D_{B/A}$, and $s(F_{B/A}(P^{\\mathrm{std}}))=L_{B/A}$. The comparison of [lem-trf-cotangent-resolution-coherence] is $c_P=(a^{\\mathrm{big}}_{\\mathrm{std}})^{-1}a^{\\mathrm{big}}_P$, from [lem-trf-polynomial-presentation-homology] for $R=B$ and $\\mathcal F_{B/A}$. Clause (2) of [lem-trf-polynomial-resolution-universal-evaluation] gives $c_P=\\alpha_{\\mathrm{std}}^{-1}\\alpha_P$. Put $\\theta_{B/A}=\\alpha_{\\mathrm{std},F_{B/A}}^{-1}$; then $\\theta_{B/A}\\alpha_P=c_P$ for every polynomial resolution, with no arbitrary choice.",
    "uses": [
     "def-weil-pbc-kahler-differentials",
     "lem-trf-cotangent-resolution-coherence",
-    "lem-trf-simplicial-derived-colimit-computation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tags 08PU (lemma-compute-cotangent-complex) and 08QI (remark-resolution), with the defining complex of Tag 08PN"
-   }
-  },
-  {
-   "text": "For the arbitrary square $(a,b)$ in the statement, write $v:\\mathcal D_{B/A}\\to\\mathcal D_{B'/A'}$ for $P\\mapsto P\\otimes_A A'$; its opposite is $u$. It lands in polynomial presentations: $A[E]\\otimes_A A'\\simeq A'[E]$, with the inverse maps fixing the variables and coefficients, and the augmentation sends $p\\otimes a'$ to $b(\\epsilon_P(p))a'$. The formula $t_P(dp\\otimes r)=d(p\\otimes1)\\otimes b(r)$ respects the differential relations of [def-weil-pbc-kahler-differentials]. It is balanced because $d(p\\otimes1)(q\\otimes1)\\otimes b(r)=d(p\\otimes1)\\otimes b(\\epsilon_P(q)r)$, and is $b$-semilinear. For an augmented map $h:P\\to Q$, both naturality composites send $dp\\otimes r$ to $d(h(p)\\otimes1)\\otimes b(r)$. Thus this is the coefficient transformation for the general reindexing comparison, without conditions on $a,b$.",
-   "uses": [
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QL (section-functoriality), category functor u and the coefficient transformation"
-   }
-  },
-  {
-   "text": "Let $P=P^{\\mathrm{std}}(B/A)$ and $P'=P^{\\mathrm{std}}(B'/A')$. The standard semilinear augmented simplicial map $h:P\\to P'$ is supplied by [lem-trf-cotangent-resolution-coherence]. Its extension $k:vP\\to P'$ sends $p\\otimes a'$ to $h(p)a'$. It is well defined by $a$-semilinearity; it commutes with each simplicial operator and augmentation because $h$ does. The composite coefficient map in degree $n$ is explicitly $F_{B'/A'}(k_n)t_{P_n}(dp\\otimes r)=d(h_n(p))\\otimes b(r)$. Therefore its alternating chain map is precisely the standard differential-complex map $f^{\\mathrm{std}}_{a,b}$ in that node. This uses only the construction of $k$ and the differential relations in [def-weil-pbc-kahler-differentials].",
-   "uses": [
-    "lem-trf-cotangent-resolution-coherence",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QL (section-functoriality), explicit standard-resolution maps and their differential maps"
-   }
-  },
-  {
-   "text": "Apply the reindexing clause of [lem-trf-simplicial-derived-colimit-computation] to $v,t,k$ of Steps 6 and 7. Both endpoints $P,P'$ satisfy its hypothesis by Step 3. It gives $a_{P',F'}f^{\\mathrm{std}}_{a,b}=\\mathbf H(v,t)a_{P,F}$ after restriction to $B$. By the bar-chain formula in [lem-trf-derived-colimit-bar], and the sign identification of Step 1, $\\mathbf H(v,t)$ corresponds exactly to the specified map $T=L\\pi_!(u,t)$: both send a chain with coefficient $x$ to its image chain with coefficient $t(x)$, and the scalar $\\lambda_n$ commutes with this operation. Thus $\\alpha_{P',F'}f^{\\mathrm{std}}_{a,b}=T\\alpha_{P,F}$. Multiply on the left by $\\alpha_{P',F'}^{-1}$ and on the right by $\\alpha_{P,F}^{-1}$ to obtain $\\theta_{B'/A'}T=f^{\\mathrm{std}}_{a,b}\\theta_{B/A}$. Restriction of scalars here is degreewise restriction on these bar models, as expressly provided by the comparison node. Its naturality clause requires no contractibility of $vP$; in particular nothing assumes $P\\otimes_A A'\\to B'$ to be a resolution. This proves the identity for every ring square.",
-   "uses": [
-    "lem-trf-simplicial-derived-colimit-computation",
-    "lem-trf-derived-colimit-bar"
+    "lem-trf-polynomial-presentation-homology",
+    "lem-trf-polynomial-resolution-universal-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QL (section-functoriality), omitted agreement supplied by the reindexing comparison of sites-cohomology Tag 08Q9 and bar formulas of Tags 08PH,08PD"
+    "place": "Tags 08PU (lemma-compute-cotangent-complex), 08QI (remark-resolution)"
+   }
+  },
+  {
+   "text": "For a ring square, [lem-trf-polynomial-square-bar-naturality] gives $v:T\\mapsto(T\\otimes_AA'\\to B')$, the transformation $t$ of the statement, the standard semilinear map $h:P^{\\mathrm{std}}\\to P'^{\\mathrm{std}}$ of [lem-trf-cotangent-resolution-coherence] and $k:vP^{\\mathrm{std}}\\to P'^{\\mathrm{std}}$, $k(p\\otimes a')=h(p)a'$. Since $F'(k_n)t(\\mathrm dp\\otimes r)=\\mathrm d(h_n(p))\\otimes b(r)$, $s(F'(k)t)$ is the map $f^{\\mathrm{std}}_{a,b}$ of the coherence node. Transport isomorphisms into the skeleton are absorbed in $t$ and $k$; by [lem-trf-derived-colimit-bar] they do not change $T$. Clause (3) of [lem-trf-polynomial-resolution-universal-evaluation] ($\\rho=b$, $G=F'$) gives $\\alpha_{\\mathrm{std}'}f^{\\mathrm{std}}_{a,b}=T\\alpha_{\\mathrm{std}}$ after restriction to $B$. Composing with $\\alpha_{\\mathrm{std}'}^{-1}$ and $\\alpha_{\\mathrm{std}}^{-1}$ gives $\\theta_{B'/A'}T=f^{\\mathrm{std}}_{a,b}\\theta_{B/A}$. Only the endpoints are resolutions, so every square (e.g. non-flat $\\mathbf Z\\to\\mathbf F_2$) is covered.",
+   "uses": [
+    "lem-trf-polynomial-square-bar-naturality",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-polynomial-resolution-universal-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), omitted agreement of the sheaf and standard-resolution maps"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-size-convention",
-  "lem-trf-derived-colimit-bar",
-  "lem-trf-simplicial-derived-colimit-computation",
+  "lem-trf-polynomial-presentation-homology",
   "lem-trf-cotangent-resolution-coherence",
-  "lem-trf-surjective-qis-simplicial-group-trivial-kan",
-  "def-weil-pbc-trivial-kan-fibration",
-  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-  "def-weil-pbc-kahler-differentials"
+  "lem-trf-polynomial-augmentation-boundary",
+  "lem-trf-polynomial-resolution-universal-evaluation",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-polynomial-square-bar-naturality",
+  "lem-trf-derived-colimit-bar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cotangent.tex",
-  "place": "Tags 08PS,08PT,08PU,08QI; Tag 08QL omitted agreement is written using the existing general reindexing comparison and explicit bar-sign identification."
+  "place": "Tags 08PS,08PT,08PU,08QI,08QL. Original eight-step argument carried by lem-trf-polynomial-augmentation-boundary (old Step 2), lem-trf-polynomial-presentation-homology (old Steps 3-4), lem-trf-polynomial-square-bar-naturality (old Steps 6-7) and lem-trf-polynomial-resolution-universal-evaluation (old Steps 1, 4, 5 transport, 8 sign); the parent assembles them."
  },
  "mathlib_searches": [
   {
@@ -233,28 +177,83 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-cotangent-sheaf-model",
   "worker": "stage1",
-  "summary": "Eight steps realize the sheaf-model comparison and all-ring-square functoriality with no new nodes. Checked the standard and arbitrary resolution contractibility hypotheses, coefficient balancing, and the reversal of bar face conventions. Every non-elementary input is an existing node; no Lean attachment covers the full statement. Statement unchanged. Maintainer review: Step 2 now uses the new statement-only node lem-trf-surjective-qis-simplicial-group-trivial-kan (Stacks 08P1) instead of the two citations of dropped machinery nodes.",
+  "summary": "Repair of the human 2026-10-21 re-split return. Statement unchanged. Added two statement-only unsplit nodes separating universal polynomial-resolution evaluation (including representable contractibility and signed reindexing) from differential-presheaf construction and chain-map identification. The parent is a short assembly. All eight original arguments are assigned verbatim in report.md to these independent proof tasks and the final cancellation. No Lean file, compiler or build used. Current-DAG landing repair: compared the saved pre-split item with the current shared item (identical), re-read every current statement dependency and verified all six literal citations. Reviewed the newly split general bar dependencies and documented why their augmented-bar, derived-reindexing and scalar-restriction statements do not duplicate polynomial-resolution universal evaluation. Retained the two-node work distribution and unchanged statement. Further current-DAG repair: re-read coherence after its three-node re-split, checked all six newly flagged same-tag statements, and added seven precise duplicate distinctions plus a handoff identifying the newly reusable augmentation, presentation-homology and square-naturality inputs. All six current statement citations match; the original returned item and current shared item remain identical, and the assembly is 1913 characters. Reviewer FIX (2026-10-23): the delivered nodes repeated the same-day landed Q18 split of lem-trf-cotangent-resolution-coherence (augmentation-boundary = trivial-Kan clause, presentation-homology = Hom contractibility and evaluation, square-bar-naturality = coefficient presheaf, t, k and K(h)). lem-trf-polynomial-differential-reindexing dropped; universal-evaluation restated as the remaining small-model sign/transport/reindexing bridge; parent re-cites the Q18 nodes.",
   "blueprint": "Supports lem-trf-local-term-locality proof (1)-(2), semistable-alteration/nearby-cycle branch, via the inherited marked-dualizing/LCI/cotangent-transitivity chain in blueprint.from. This is the sheaf-model and map-identification input to the transitivity triangle, not a replacement of the unit route.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-    "why": "Generic simplicial-set fact (a trivial Kan fibration is a homotopy equivalence with a section) used in Step 3 to turn the trivial Kan fibration S_T -> * into a homotopy equivalence with a singleton, as Stacks 08PS requires; the trace-formula unit has no such statement."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-trivial-kan-homotopy-equivalence"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q30-3851021cf",
-  "group": "Q30",
+  "reviewer": "NT-cc-Q73-53856aac1",
+  "group": "Q73",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-3851021cf (reviewer sub-agent of L); spot-checked: Read the whole item, every cited node's statement, the proof of lem-trf-cotangent-resolution-coherence (it defines the canonical comparison as c_Q=a_std^{-1}a_Q), and the sources: Stacks 08PS/08PT/08PU/08QI/08QL, sites-cohomology 08Q9, simplicial.tex section-complexes, definition-trivial-kan, 08P1 and 08NZ. The statement matches Stacks and is not weakened; it is a supporting ring lemma, not a target node. Step 1: checked the face conventions. d_C=(-1)^n d_D, and lambda_n=(-1)^{n(n+1)/2} satisfies lambda_n=(-1)^n lambda_{n-1}, so it is a chain isomorphism that commutes with the bar maps. Step 3: the generator-wise boundary filling is correct, including n=0, empty E and infinite E. Step 4: the hypotheses of the computation node are exactly Steps 1 and 3. Steps 6-7: checked the polynomial base change, the balance d(p⊗1)(q⊗1)⊗b(r)=d(p⊗1)⊗b(eps(q)r), and that k is well defined and equals the standard map. Step 8: the algebra theta'T=f theta checks; only the endpoints need to be resolutions, which covers the non-flat case Z→F2. Route pivot: Step 2 cited the dropped nodes lem-cbc-simplicial-module-model and lem-coef-kan-quillen-right-proper, with 'model structure'/'Quillen' wording, only to make a polynomial resolution a trivial Kan fibration. The delivery did not justify them, and Stacks 08PU takes the elementary route through 08P1. Fixed: added the statement-only node lem-trf-surjective-qis-simplicial-group-trivial-kan (Stacks simplicial 08P1, lemma-qis-simplicial-abelian-groups). I tested it on f=id, on Y=0, and on the non-surjective counterexample, and found no duplicate in a DAG-wide rg or in Mathlib. Step 2 now uses it: the maps P_n→B are surjective, s(const B)→B[0] is a quasi-isomorphism, and two-out-of-three gives the rest. I removed both dropped nodes and the now-unneeded normalized-alternating node from proof_deps and tool_uses. 'simplicial set' still appears, but only in its plain combinatorial sense. I also added one sentence to Step 5: the reindexing clause along the skeleton inclusion shows that c_P is the same whether the coherence node's large category or the skeleton is used. Accepted tool_use: lem-weil-pbc-trivial-kan-homotopy-equivalence, used in Step 3 as a black box, as in 08PS. No SGA, no cycle, statement unchanged.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-53856aac1 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, every cited statement (including all three Q18 nodes and the current 3-step proof of lem-trf-cotangent-resolution-coherence), the released re-split note, and Stacks cotangent.tex 08PS l.229-260, 08PT, 08PU, 08QI l.667-690 and 08QL l.867-940. The item statement matches Stacks (the functor u and the map t as in 08QL), is not weakened and cites no SGA. The live item is still the 8-step version, so the delivery is not superseded. The node files are identical to the earlier PASSed heads 6c9ae1b4/6b9156c6 apart from split_report. The base now contains the landed same-day Q18 re-split of coherence, and the report lists it but keeps duplicating it (C5/B9/D1, stages/1-dag §2 Duplicates). (a) In universal-evaluation, the trivial-Kan clause is lem-trf-polynomial-augmentation-boundary, and the S_T contractibility clause (including empty or infinite E) is lem-trf-polynomial-presentation-homology. (b) In differential-reindexing, the Kähler presheaf, v, t, k, K(h) and the standard map t_n are lem-trf-polynomial-square-bar-naturality, and K(t)=f^std holds by coherence. Its only remaining content, c_P=α_std⁻¹α_P, is a two-line inclusion-reindexing argument. Following the N0/Q120/N6/NJ precedents, I fixed it. (1) drop lem-trf-polynomial-differential-reindexing; nothing else cites it. (2) Restated lem-trf-polynomial-resolution-universal-evaluation as the bridge that is really missing: a small full subcategory D of the D_{B/A} of presentation-homology, P with trivial-Kan augmentation, any R and F. Clause (1): j_F is multiplication by (-1)^{n(n+1)/2}, and α=j⁻¹a is natural. Clause (2): a^big_P=H(i,id)a_P, hence α_Q⁻¹α_P=(a^big_Q)⁻¹a^big_P. Clause (3): the signed reindexing along any v, ρ, k with no hypothesis on vP. I added the presentation-homology stmt_dep (no cycle) and updated source and blueprint.from.place. (3) Rewrote the parent as 3 steps of 884, 883 and 1028 characters, 2795 in total. Step 1 cites augmentation-boundary, coherence, presentation-homology and clause (1). Step 2 does the Kähler relation and balancing checks, takes coherence's c_P from presentation-homology and applies clause (2), giving θ=α_std⁻¹. Step 3 takes v, t, h, k from square-bar-naturality, checks F'(k)t=d(hp)⊗b(r)=f^std, uses derived-colimit-bar's natural-isomorphism clause for the skeleton transport, applies clause (3) and cancels. proof_deps equal the union of uses, and all ids exist and are unmerged. Every old step now has a node: 1, 4 and 5 (transport) and 8 in universal-evaluation; 2 in augmentation-boundary; 3-4 in presentation-homology; 6-7 in square-bar-naturality. The count falls to 1, which I waived because the remaining work already sits in the landed, unsplit Q18 nodes. Checks: d_C=(-1)^n d_D and λ_n=(-1)^nλ_{n-1}; j commutes with bar maps; edge cases Z→F_2 non-flat, B=0, empty or infinite E, characteristic 2. Route-pivot points: in the item, 'model structure/quillen' appears only in the preserved 10-18 review note recording the removal of the dropped nodes, and 'simplicial set' is meant combinatorially. def-weil-pbc-trivial-kan-fibration is the elementary lifting definition, a Mathlib leaf, also used by the landed Q18 nodes. Both are accepted. No new tool_uses; the old trivial-kan-homotopy tool use is no longer exercised. Advisory: c_P is read off coherence's proof, not its statement, as already accepted on 10-18.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentSheafModel",
+  "declaration": "Algebra.CotangentSheaf.exists_model",
+  "declarations": [
+   "Algebra.CotangentSheaf.Presentation",
+   "Algebra.CotangentSheaf.target",
+   "Algebra.CotangentSheaf.presentationObject",
+   "Algebra.CotangentSheaf.Presentations",
+   "Algebra.CotangentSheaf.rings",
+   "Algebra.CotangentSheaf.base",
+   "Algebra.CotangentSheaf.augmentation",
+   "Algebra.CotangentSheaf.coefficientTerm",
+   "Algebra.CotangentSheaf.generator",
+   "Algebra.CotangentSheaf.Coefficients",
+   "Algebra.CotangentSheaf.presheaf",
+   "Algebra.CotangentSheaf.ResolutionLift",
+   "Algebra.CotangentSheaf.FitsBound",
+   "Algebra.CotangentSheaf.evaluation",
+   "Algebra.CotangentSheaf.evaluation_additive",
+   "Algebra.CotangentSheaf.evaluationElement",
+   "Algebra.CotangentSheaf.evaluationMap",
+   "Algebra.CotangentSheaf.lowerShriek",
+   "Algebra.CotangentSheaf.IsNormalized",
+   "Algebra.CotangentSheaf.PreservesBoundary",
+   "Algebra.CotangentSheaf.ResolutionComparison",
+   "Algebra.CotangentSheaf.Model",
+   "Algebra.CotangentSheaf.theta",
+   "Algebra.CotangentSheaf.BaseChange",
+   "Algebra.CotangentSheaf.barCoefficientMap",
+   "Algebra.CotangentSheaf.sheafMap",
+   "Algebra.CotangentSheaf.ContainsRings",
+   "Algebra.CotangentSheaf.exists_model"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentSheafModel.lean",
+  "statement": "theorem exists_model (C : CotangentResolution.Coherence.{u}) (S : CategoryColimitBarSystem.{u}) (κ : Type u) [Infinite κ] : ∃ M : ∀ (f : Arrow CommRingCat.{u}), ContainsRings κ f → Model C S f κ, ∀ (f g : Arrow CommRingCat.{u}) (hf : ContainsRings κ f) (hg : ContainsRings κ g) (q : f ⟶ g), ∃ V : BaseChange q (M f hf).coefficients (M g hg).coefficients, sheafMap (M f hf) (M g hg) V ≫ (ModuleCat.restrictScalars q.right.hom).mapDerivedCategory.map (theta (M g hg)).hom = (theta (M f hf)).hom ≫ CotangentResolution.cotangentMap C q",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The auxiliary declarations specify this node's small polynomial-presentation site, coefficient sheaf, canonical resolution comparisons, and arbitrary-square bar map. Every module object uses the existing Mathlib or recorded dependency definition. No construction is selected from an uncharacterized existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-283a2d1b3",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Clause-by-clause match: small polynomial-presentation category (all augmented A-algebra maps, no surjectivity, Infinite κ plus ContainsRings bound); Kaehler coefficient presheaf pinned by its b⊗dx formula; theta = standard comparison then generator-pinned differentialIso into cotangentComplex C f; comparison natural in F and in resolution maps; agrees with C.comparison; BaseChange pinned (objects by equality, insertion HEq MvPolynomial.map, coefficient map on generators); sheafMap = S.map bar-chain map; final equation theta' T = f^std theta after restriction to B for all ring squares, no flatness or injectivity. Pinning: comparison isos normalised by colimit augmentation, IsNormalized against S.comparison and PreservesBoundary; unit re-scaling of terms leaves the equation invariant; lift choice absorbed. Edge cases (empty/infinite vars, n=0, zero rings, non-flat squares, standardFits) and universes (single u, small category) ok. No duplicate notion (PolynomialPresentation.Target/Pair is a different category). Only the item lean field changed; statement verbatim; 28 declarations match; no line over 100 chars; docstrings and 8 proof steps present; only sorry is the theorem. Not recompiled per the 2026-10-21 rule; no file changed. Advisories: short Second reading section; uniqueness of the normalised comparison accepted but not proved."
+ }
 }

@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-bounded-affine-lft-coproduct",
+ "kind": "statement",
+ "title": "Bounded coproducts of affine locally finite type schemes stay in the big site",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], fix a big fppf site $(\\mathit{Sch}/T)_{fppf}$ [def-pc-fppf-site] in the universes of [def-weil-size-convention], and let $\\mathcal B(T)$ be the set of affine open subschemes of $T$. Let $J$ be a set with $|J|\\leq\\max\\{\\aleph_0,|\\mathcal B(T)|\\}$. For each $j\\in J$, let $W_j$ be an affine scheme and let $f_j:W_j\\to T$ be locally of finite type [def-weil-finite-type-morphism]. An affine scheme means a scheme isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$. The scheme coproduct $W=\\coprod_{j\\in J}W_j$ [lem-weil-pbc-scheme-coproduct-family], with the induced map to $T$, is isomorphic over $T$ to an object of the fixed big fppf site. No flatness, separatedness or finite-presentation assumption on the $f_j$ is required. The empty family is allowed.",
+ "source": {
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 04T7, lemma-bound-finite-type; Tag 000Q, lemma-bound-size; Tag 000J, lemma-construct-category, bounded-size closure; Tag 000R, lemma-what-is-in-it, (6). These give the stated affine coproduct bound. The maximum includes aleph_0 to cover the empty family."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-sfb-stacks-big-site-category"
+ ],
+ "proof": [
+  {
+   "text": "For each $j$, choose $W_j\\cong\\operatorname{Spec}A_j$. The spectrum is quasi-compact by lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact (iii), so $W_j$ is quasi-compact: carry any open cover across this homeomorphism and pull back a finite subcover. Apply lem-sfb-qc-lft-scheme-size-bound to $f_j$, whose source is now quasi-compact and which is locally of finite type by hypothesis. With $s$ as defined there, this gives $s(W_j)\\leq s(T)$ for every $j$. Only quasi-compactness of the source, not of the morphism, is used.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sfb-qc-lft-scheme-size-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 04T7, lemma-bound-finite-type; Tag 000R, lemma-what-is-in-it (6), using Tag 000J, lemma-construct-category (2)."
+   }
+  },
+  {
+   "text": "By lem-weil-pbc-scheme-coproduct-family, the coprojections give an open covering $W=\\bigcup_{j\\in J}\\iota_j(W_j)$ and the unique induced morphism $f:W\\to T$. Each open subscheme is isomorphic to $W_j$, hence has the same size: an isomorphism bijects affine opens and induces isomorphisms of their section rings. Put $\\kappa=s(T)$. Its defining maximum gives $\\aleph_0\\leq\\kappa$ and $|\\mathcal B(T)|\\leq\\kappa$, so $|J|\\leq\\kappa\\leq\\kappa^{\\aleph_0}$ (use constant functions for the last injection). Step 1 also gives $s(\\iota_j(W_j))\\leq\\kappa\\leq\\kappa^{\\aleph_0}$. If $J$ is empty, the stated covering forces $W$ empty; all these inequalities and the empty-cover assertion remain valid.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 04T7, lemma-bound-finite-type; Tag 000R, lemma-what-is-in-it (6), using Tag 000J, lemma-construct-category (2)."
+   }
+  },
+  {
+   "text": "The fixed big site contains $T$ by the definition of its slice over $T$. Apply lem-sfb-big-site-open-cover-size-closure with base object $T$ and the open covering in step 2. Both required bounds have just been checked, including the empty cover. It yields an object $W_0$ of the chosen category and a scheme isomorphism $e:W_0\\cong W$.",
+   "uses": [
+    "lem-sfb-big-site-open-cover-size-closure",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 04T7, lemma-bound-finite-type; Tag 000R, lemma-what-is-in-it (6), using Tag 000J, lemma-construct-category (2)."
+   }
+  },
+  {
+   "text": "Equip $W_0$ with $f_0=f\\circ e$. The chosen category in a big site is full, so $f_0$ is a morphism in it to $T$. Thus $(W_0,f_0)$ is an object of the slice $(\\mathit{Sch}/T)_{fppf}$, and $e$ is an isomorphism over $T$ since $f\\circ e=f_0$. Object membership imposes no covering condition: the flatness and local finite presentation requirements in def-pc-fppf-site describe covering families. The argument has therefore used none of flatness, separatedness or finite presentation of the maps $f_j$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-sfb-big-site-open-cover-size-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021R, definition-big-fppf-site; Tag 021S, definition-big-small-fppf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-sfb-qc-lft-scheme-size-bound",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sfb-big-site-open-cover-size-closure",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tags 04T7 and 000R (6); transport to the slice uses topologies.tex definition-big-small-fppf (021S)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(size|cardinal|[Cc]ardinal).*(finiteType|FiniteType|[Aa]ffine)|[Aa]ffine.*(cardinal|[Cc]ardinal)",
+   "results": {
+    "t": "2026-10-22T06:30:29Z",
+    "tool": "grep",
+    "query": "(size|cardinal|[Cc]ardinal).*(finiteType|FiniteType|[Aa]ffine)|[Aa]ffine.*(cardinal|[Cc]ardinal)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide finite subcovers or finite-type maps on sections, not the cardinal bound and membership of an arbitrarily indexed coproduct in a fixed big site."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cardinal size of schemes under finite type morphisms and open coverings",
+   "results": {
+    "t": "2026-10-22T06:30:29Z",
+    "tool": "leansearch",
+    "query": "Cardinal size of schemes under finite type morphisms and open coverings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X",
+     "AlgebraicGeometry.Scheme.RationalMap.openCoverDomain",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange",
+     "AlgebraicGeometry.Scheme.openCoverOfIsOpenCover",
+     "AlgebraicGeometry.Scheme.OpenCover.compactSpace",
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.sizeOf_spec"
+    ],
+    "digest": "b05a0ad4070d3407"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide finite subcovers or finite-type maps on sections, not the cardinal bound and membership of an arbitrarily indexed coproduct in a fixed big site."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cardinal\"",
+   "results": {
+    "t": "2026-10-22T06:30:30Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"cardinal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide finite subcovers or finite-type maps on sections, not the cardinal bound and membership of an arbitrarily indexed coproduct in a fixed big site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The size of a locally finite type quasi compact scheme is bounded by the size of the base and scheme size is bounded by an open cover",
+   "results": {
+    "t": "2026-10-22T06:30:35Z",
+    "tool": "leanfinder",
+    "query": "The size of a locally finite type quasi compact scheme is bounded by the size of the base and scheme size is bounded by an open cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover",
+     "AlgebraicGeometry.Scheme.quasiCompactCover",
+     "AlgebraicGeometry.Scheme.OpenCover.compactSpace",
+     "AlgebraicGeometry.QuasiCompactCover.inst",
+     "AlgebraicGeometry.QuasiCompactCover.of_finite",
+     "AlgebraicGeometry.Scheme.OpenCover.finiteSubcover",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isCompact",
+     "AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X"
+    ],
+    "digest": "354b109ea0656353"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide finite subcovers or finite-type maps on sections, not the cardinal bound and membership of an arbitrarily indexed coproduct in a fixed big site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cardinality bound for the affine open sets and rings of sections of a quasi compact scheme locally of finite type over another scheme",
+   "results": {
+    "t": "2026-10-22T06:30:37Z",
+    "tool": "leanfinder",
+    "query": "Cardinality bound for the affine open sets and rings of sections of a quasi compact scheme locally of finite type over another scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE",
+     "AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset",
+     "AlgebraicGeometry.Scheme.Hom.finiteType_appLE",
+     "AlgebraicGeometry.locallyOfFiniteType_iff",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.locallyQuasiFinite_iff"
+    ],
+    "digest": "2693a04bac15c730"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide finite subcovers or finite-type maps on sections, not the cardinal bound and membership of an arbitrarily indexed coproduct in a fixed big site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For affine schemes locally of finite type over S indexed by at most the affine open subsets of S, their disjoint union has a representative in the fixed big fppf site",
+   "results": {
+    "t": "2026-10-22T06:33:23Z",
+    "tool": "leanfinder",
+    "query": "For affine schemes locally of finite type over S indexed by at most the affine open subsets of S, their disjoint union has a representative in the fixed big fppf site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.Scheme.AffineCover",
+     "AlgebraicGeometry.instIsAffineSigmaObjScheme",
+     "AlgebraicGeometry.Scheme.AffineCover.J",
+     "AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint",
+     "AlgebraicGeometry.Scheme.AffineCover.I₀",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X"
+    ],
+    "digest": "6d3d13e40e67de9f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide finite subcovers or finite-type maps on sections, not the cardinal bound and membership of an arbitrarily indexed coproduct in a fixed big site."
+  },
+  {
+   "tool": "grep",
+   "query": "(cardinal|Cardinal|small|Small).*(FiniteType|finiteType)|(FiniteType|finiteType).*(cardinal|Cardinal|small|Small)",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "grep",
+    "query": "(cardinal|Cardinal|small|Small).*(FiniteType|finiteType)|(FiniteType|finiteType).*(cardinal|Cardinal|small|Small)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean"
+    ],
+    "digest": "c6ba4f6ebdf2d194"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite coproducts and essential smallness do not state the fixed-big-site cardinal closure assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coproduct of affine locally finite type schemes belongs to a bounded big site",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "leansearch",
+    "query": "Coproduct of affine locally finite type schemes belongs to a bounded big site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyRingedSpace.coproduct",
+     "AlgebraicGeometry.instHasFiniteCoproductsScheme",
+     "CategoryTheory.Sheaf.instHasFiniteCoproducts",
+     "AlgebraicGeometry.instIsAffineHomDescScheme",
+     "AlgebraicGeometry.instIsAffineSigmaObjScheme",
+     "AlgebraicGeometry.instIsAffineCoprodScheme",
+     "AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd",
+     "AlgebraicGeometry.Scheme.coprodPresheafObjIso"
+    ],
+    "digest": "9279d2f755290110"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite coproducts and essential smallness do not state the fixed-big-site cardinal closure assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cardinal\"",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"cardinal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite coproducts and essential smallness do not state the fixed-big-site cardinal closure assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine locally finite type scheme family with bounded index set has its coproduct represented in a fixed big fppf site",
+   "results": {
+    "t": "2026-10-23T09:34:43Z",
+    "tool": "leanfinder",
+    "query": "An affine locally finite type scheme family with bounded index set has its coproduct represented in a fixed big fppf site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instIsAffineSigmaObjScheme",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty",
+     "AlgebraicGeometry.IsFinite.instDescScheme",
+     "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+     "AlgebraicGeometry.instHasFiniteCoproductsScheme",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀"
+    ],
+    "digest": "23b875360ce5f81c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite coproducts and essential smallness do not state the fixed-big-site cardinal closure assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded disjoint union of affine schemes locally of finite type over T lies in the same universe and big site as T",
+   "results": {
+    "t": "2026-10-23T09:34:45Z",
+    "tool": "leanfinder",
+    "query": "A bounded disjoint union of affine schemes locally of finite type over T lies in the same universe and big site as T",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instIsAffineSigmaObjScheme",
+     "AlgebraicGeometry.IsFinite.instDescScheme",
+     "AlgebraicGeometry.instHasFiniteCoproductsScheme",
+     "AlgebraicGeometry.instIsAffineCoprodScheme",
+     "AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty",
+     "AlgebraicGeometry.instIsAffineHomDescScheme",
+     "AlgebraicGeometry.instFinitaryExtensiveScheme",
+     "AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteSpecOfFinite"
+    ],
+    "digest": "7514a1c40583c79c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite coproducts and essential smallness do not state the fixed-big-site cardinal closure assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-finite-type-fppf-effectivity",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 04U0, the scheme size estimates ensuring that the coproducts of the refined bases and of their affine atlases belong to the original big site.",
+   "via": [
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-bounded-affine-lft-coproduct",
+  "worker": "stage1",
+  "summary": "Read Stacks scheme-size estimates and the chosen-category definition of big fppf sites; reduced each affine source to the general quasi-compact finite-type size estimate, used the coproduct open covering, checked both cardinal bounds, and transported the resulting scheme representative over T. Two general statement-only prerequisites; empty family explicit. No Lean attachment found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 04U0, the scheme size estimates ensuring that the coproducts of the refined bases and of their affine atlases belong to the original big site. The four steps realize precisely the bounded-coproduct prerequisite; the current latest blueprint direct-image paragraph (3) is the ancestor context, not a replacement source for these Stacks set-theoretic facts.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-5be715432",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-5be715432 (reviewer sub-agent of L); spot-checked: I read the item, all four steps, both new nodes and every cited statement; I also read Stacks sets.tex (the size definition, 000J, 000P, 000Q, 04T7, 000R(6) with its proof) and topologies.tex 021R/021S. The item statement is unchanged against live, and live still has the item unsplit, so it is not superseded. New node lem-sfb-qc-lft-scheme-size-bound is exactly 04T7. Its size is defined inline with ℵ0, which matches Stacks. It assumes only a quasi-compact source and a locally finite type morphism, and is correct for S empty, S = Spec F_2 with X = A^1, and non-quasi-compact S. New node lem-sfb-big-site-open-cover-size-closure is 000R(6) and records that Sch_α is full. The printed 000Q fails for an empty cover, but the node handles that case correctly: 000J(2) applies because ℵ0 ≤ Bound(size T). The node is general and smaller than the item, so it is not a restatement of the item (D1). Step 1: spec-basic-opens (iii) gives W_j quasi-compact, then 04T7 gives s(W_j) ≤ s(T). Step 2: the coproduct-family node gives the open cover; |J| ≤ max(ℵ0,|B(T)|) ≤ s(T) ≤ s(T)^ℵ0; marked elementary, correctly. Step 3: the closure node gives W_0 in the site with an isomorphism to W. Step 4: f_0 = f∘e is a morphism because the category is full, so W_0 lies in the slice over T; no fppf condition applies to objects. proof_deps equal the union of the steps' uses; both new nodes are in the item's unit, the other citations are Mathlib leaves or definitions, and no tool_uses are needed. I searched for duplicates (04T7, 000R, 000Q, 000J, 04U0, size wording) over the snapshot and the live and side-live clones and found none; the essentially-small affine-étale node is not a size bound. Searches are recorded in three kinds. The null blueprint from.node is inherited, with the via chain correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedAffineLocallyFiniteTypeCoproduct",
+  "declaration": "AlgebraicGeometry.Scheme.bounded_affine_locallyOfFiniteType_coproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedAffineLocallyFiniteTypeCoproduct.lean",
+  "statement": "theorem bounded_affine_locallyOfFiniteType_coproduct (code : Scheme.{u} ↪ ZFSet.{u + 1}) (S₀ : Set Scheme.{u}) (α : Ordinal.{u + 1}) (hsite : IsStacksBigSiteCategory code S₀ α) (T : StacksBigSiteCategory code α) (J : Type u) (hJ : Cardinal.mk J ≤ max Cardinal.aleph0 (Cardinal.mk T.obj.affineOpens)) (W : J → Scheme.{u}) [∀ j : J, IsAffine (W j)] (f : ∀ j : J, W j ⟶ T.obj) [∀ j : J, LocallyOfFiniteType (f j)] : ∃ W₀ : Over T, ∃ e : W₀.left.obj ≅ ∐ W, e.hom ≫ Sigma.desc f = W₀.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Cites the already landed def-sfb-stacks-big-site-category to retain the fixed chosen full category, rather than using all schemes in the ambient universe. Over T is its actual slice category; the displayed isomorphism commutes with the maps to T."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63fc3ce0d",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Item node changes only lean and stmt_deps (+ landed def-sfb-stacks-big-site-category, allowed by brief-stage2 §5); no other node or lean file changed. Every clause matches: T in the chosen full category StacksBigSiteCategory with hsite admissibility, hJ the exact max(aleph0, |affineOpens|) bound, IsAffine and LocallyOfFiniteType per j with nothing added, ∐ W with Sigma.desc f, ∃ W₀ : Over T with an isomorphism whose triangle commutes. Provable via 04T7 + 000Q + hsite clause (2). Empty J, empty T and non-qc T covered; universes consistent with the dependency. No definitions, proof is sorry, docstrings carry source place and blueprint tag, statement verbatim, report has Worker report and Second reading sections. No fixes, so no compile."
+ }
+}

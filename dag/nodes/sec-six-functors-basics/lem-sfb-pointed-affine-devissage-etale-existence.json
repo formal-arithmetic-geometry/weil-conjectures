@@ -1,0 +1,462 @@
+{
+ "id": "lem-sfb-pointed-affine-devissage-etale-existence",
+ "kind": "statement",
+ "title": "Pointed affine complete devissage after elementary etale neighborhoods",
+ "statement": "Let $f:X\\to B$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], let $\\mathcal F$ be a finite-type quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], and let $x\\in X$ with $b=f(x)$. There exist affine schemes $X',B'$, points $x'\\in X'$, $b'\\in B'$, a locally finite type morphism $f':X'\\to B'$ with $f'(x')=b'$, and elementary etale pointed maps $g:(X',x')\\to(X,x)$ and $e:(B',b')\\to(B,b)$ with $f\\circ g=e\\circ f'$; here elementary etale pointed means an etale morphism sending the marked point to the marked point and inducing an isomorphism of their residue fields, as in [def-trf-pointed-scheme-devissage-data]. The pulled-back module $g^*\\mathcal F$ is a finite-type quasi-coherent $\\mathcal O_{X'}$-module, and $(g^*\\mathcal F,X',B',x',b')$ admits a pointed affine devissage chain in the auxiliary sense of [def-trf-pointed-scheme-devissage-data], for the morphism $f'$. In particular all the intermediate marked points, singleton finite fibres, connecting cokernel identifications and generic-fibre basis maps are retained. A chain of length zero is permitted when the pulled-back module is zero. Pullback means [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05HR (proposition-existence-complete-at-x), affine construction in its proof; Tags 05HI (definition-complete-devissage-at-x) and 05HM (lemma-shrink-complete). Forget only the support-dimension equalities, retaining all auxiliary pointed data."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-trf-pointed-scheme-devissage-data",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "First choose an affine open $B_0\\subset B$ containing $b$ and an affine open $X_0\\subset f^{-1}(B_0)$ containing $x$. The affine-pairs criterion makes $X_0\\to B_0$ locally finite type. Restriction of $\\mathcal F$ is finite type and quasi-coherent by pullback preservation. The inclusions are elementary etale: open immersions are etale and the local rings, hence residue fields, at a point of an open subscheme are unchanged. It therefore suffices to solve the problem for affine $X,B$; compose the eventual pointed maps with these inclusions and use pullback composition. All subsequent inputs will also have affine source and base.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, affine reduction using 05H4/05HI; elementary affine neighbourhood reduction."
+   }
+  },
+  {
+   "text": "For every affine locally finite type $X\\to B$, finite-type quasi-coherent $\\mathcal F$ and marked $x\\mapsto b$, prove the claimed existence by strong induction on $d=\\dim_x\\operatorname{Supp}(\\mathcal F_b)$ when $(\\mathcal F_b)_x\\ne0$, handling the zero fibre-stalk case separately at every stage. This $d$ is a finite nonnegative integer. Indeed the affine-pairs criterion gives a finite generating family for the coordinate algebra of $X$ over that of $B$; its images generate the fibre algebra over $\\kappa(b)$, by the affine fibre-product formula. Thus the fibre is finite type over a field and has finite dimension. Its sheaf is finite type and quasi-coherent by pullback preservation, so its support is closed. Chains of irreducible closed subsets of that support are chains in the fibre; its dimension, and the minimum over open neighbourhoods defining dimension at the marked point, are finite. The induction quantifies over all such bases and modules, allowing the base to change in the recursive call.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, induction parameter in the first proof paragraph."
+   }
+  },
+  {
+   "text": "If $(\\mathcal F_b)_x=0$, write $X=\\operatorname{Spec}A$, $B=\\operatorname{Spec}R$, $\\mathcal F\\cong\\widetilde M$ with $M$ finite. The affine fibre-product formula gives $X_b=\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$, and the affine pullback and stalk formulas give $(\\mathcal F_b)_x\\cong M_{\\mathfrak q}/\\mathfrak p M_{\\mathfrak q}$, with $\\mathfrak q$ the marked prime and $\\mathfrak p$ its contraction. The ideal $\\mathfrak p A_{\\mathfrak q}$ lies in the maximal ideal of $A_{\\mathfrak q}$. Nakayama gives $M_{\\mathfrak q}=0$. The support is closed and misses $x$, so choose an affine neighbourhood $U$ of $x$ in its complement. All stalks of $\\mathcal F|_U$ vanish, hence this sheaf is zero. The elementary pointed inclusion $U\\hookrightarrow X$, the unchanged affine base, and the empty chain solve this case by the chain definition. This argument applies at every recursive input, including the later cokernel.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-nakayama-jacobson",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, zero fibre-stalk case made explicit; Nakayama as in Tag 05HF."
+   }
+  },
+  {
+   "text": "Suppose the fibre-stalk is nonzero with induction parameter $d$. Apply elementary module devissage to obtain affine elementary etale source and base changes, a finite $\\pi:Z\\to Y$, a finitely presented closed immersion $i:Z\\hookrightarrow X$, and $i_*\\mathcal G\\cong\\mathcal F$, after renaming the changed data. It gives marked $z,y$, $i(z)=x$, $\\pi(z)=y$, $\\pi^{-1}(y)=\\{z\\}$, and a purely transcendental $\\kappa(y)/\\kappa(b)$. The smooth map $Y\\to B$ has geometrically integral fibres of dimension $d$, where $d$ is measured before this change. Here relative dimension $d$ means $\\dim_u$ of the fibre is $d$ at every point $u$, and an irreducible chain through a point $u$ meets every open neighbourhood of $u$, so each fibre has dimension exactly $d$. Integral implies irreducible after every field extension, so these are exactly auxiliary pointed one-step data. No invariance assertion for support dimension under etale maps is needed.",
+   "uses": [
+    "lem-trf-elementary-module-devissage",
+    "def-pc-integral-scheme",
+    "def-pc-geometrically-irreducible",
+    "def-trf-pointed-scheme-devissage-data",
+    "def-sbc-smooth-morphisms",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR first paragraph, using Tag 057S (lemma-elementary-devissage), equivalently 05H6."
+   }
+  },
+  {
+   "text": "Set $\\mathcal H=\\pi_*\\mathcal G$. It is quasi-coherent by the affine-pushforward theorem, since a finite morphism is affine. It is finite type: on affine sections let $C=\\Gamma(Y,\\mathcal O_Y)$ and $D=\\Gamma(Z,\\mathcal O_Z)$. Choose generators $a_i$ of the finite $C$-module $D$ and generators $m_j$ of the finite $D$-module $\\Gamma(Z,\\mathcal G)$. The finitely many $a_i m_j$ generate the latter over $C$, as follows by expanding coefficients twice. The affine finite-type criterion applies to $\\mathcal H$. Now the generic-basis-drop lemma gives $\\alpha:\\mathcal O_Y^{\\oplus r}\\to\\mathcal H$ which is an isomorphism on the generic residue-field vector space of $Y_b$, and a finite-type quasi-coherent cokernel $\\mathcal Q$ with fibre-support dimension strictly less than $d$ whenever nonempty. In particular for $d=0$ its fibre support is empty.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-trf-devissage-generic-basis-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR second paragraph, using Tag 05HF (lemma-existence-alpha)."
+   }
+  },
+  {
+   "text": "If $(\\mathcal Q_b)_y=0$, the argument of step 3 gives an open neighbourhood of $y$ where $\\mathcal Q=0$. Choose a principal open $W$ inside it: the complement is $V(I)$ on the affine $Y$, and some $a\\in I$ is outside the prime of $y$, so $y\\in D(a)\\subset Y\\setminus V(I)$. Apply the target-shrinking clause (2) of the pointed-restriction lemma to the first datum. The new target is $W\\times_B B_1$ after a principal base restriction; the restricted $\\alpha$ has cokernel zero and retains its generic residue-field isomorphism. The first datum alone is therefore a complete chain of length one. This proves the base case $d=0$ as well as this stopping case for every $d$.",
+   "uses": [
+    "lem-trf-devissage-pointed-restriction",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR second paragraph, stopping case; Tag 05HA target shrinking."
+   }
+  },
+  {
+   "text": "Otherwise $(\\mathcal Q_b)_y\\ne0$, and its local support dimension is strictly smaller than $d$ by step 5. The map $Y\\to B$ is smooth, hence locally finitely presented and locally finite type: its affine-local finite polynomial presentations have finite generating families. Apply the strong induction hypothesis to $(\\mathcal Q,Y,B,y,b)$. It yields a square of elementary pointed etale maps $(Y',y')\\to(Y,y)$ over $(B',b')\\to(B,b)$, and a chain for the pullback $\\mathcal Q'$ on $Y'$. The base is allowed to change because step 2 quantified over every affine base.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR third paragraph and equation-overcome-this, induction on the cokernel."
+   }
+  },
+  {
+   "text": "Apply pointed etale refinement to the first datum and the square from step 7. Its singleton-fibre and purely transcendental hypotheses hold by step 4. It gives affine elementary $(B'',b'')\\to(B',b')$, elementary $(X'',x'')\\to(X,x)$ over the composite base map, and an affine open $Y''\\subset X_1:=Y'\\times_{B'}B''$ containing the marked point, with a new pointed one-step datum and $Z''=Z\\times_Y Y''$. Pull back $\\alpha$ using its stated finite-pushforward comparison: the generic residue-field map remains an isomorphism and its cokernel is the pullback of $\\mathcal Q$ to $Y''$. The pointed-restriction lemma (1) pulls back the tail chain to a chain for $\\mathcal Q_1$ on $X_1$, where $\\mathcal Q_1$ is the pullback of $\\mathcal Q'$; it applies because $B''$ is affine and its marked residue field equals that of $B'$. Pullback composition identifies the new first cokernel with $\\mathcal Q_1|_{Y''}$.",
+   "uses": [
+    "lem-trf-devissage-pointed-etale-refinement",
+    "lem-trf-devissage-pointed-restriction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, applying Tag 05HE, equation-shrink-this and conditions (a)--(d)."
+   }
+  },
+  {
+   "text": "Shrink the tail chain inside the initial open $Y''\\subset X_1$ using clause (3) of pointed restriction. Obtain a principal base restriction $B_1\\subset B''$ and a principal open $V\\subset X_1$ contained in $Y''$, with a chain for $\\mathcal Q_1|_V$. Inside $Y''$ the open $V$ is still principal: restrict its defining global function from $X_1$. Restrict the first datum to $B_1$, then use its target-shrinking clause (2) with $V$. After a further principal base restriction $B_2\\subset B_1$ its target is precisely $V\\times_{B_1}B_2$. Pull back the shrunken tail to $B_2$ by clause (1). Its initial module is now exactly the cokernel of the restricted first $\\alpha$, by the cokernel comparison in pointed restriction. Concatenate this first datum with that tail. Every marked point and singleton finite fibre is retained; the first generic-basis map is retained by restriction and all later ones by tail base change; consecutive modules are the displayed cokernels and the last cokernel is zero. This verifies every chain condition and completes the strong induction.",
+   "uses": [
+    "lem-trf-devissage-pointed-restriction",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR final paragraph, using Tags 05HA and 05HM to align the first datum and tail."
+   }
+  },
+  {
+   "text": "Check also that each resulting affine structure map is locally finite type. For any constructed elementary square over affine input $X\\to B$, write $C=X\\times_B B'$ and let $u:X'\\to C$ be the induced map. The projection $C\\to X$ is etale by base change; its composite with $u$ is the constructed etale map $X'\\to X$. Etale cancellation makes $u$ etale, hence locally finitely presented. Write $B=\\operatorname{Spec}R$, $X=\\operatorname{Spec}A$, $B'=\\operatorname{Spec}R'$, $X'=\\operatorname{Spec}A'$. Then $C=\\operatorname{Spec}(A\\otimes_RR')$. The affine finite-presentation criterion gives finitely many generators of $A'$ over $A\\otimes_RR'$. Adjoin these to the images of a finite generating family of $A/R$ to generate $A'/R'$. The affine criterion gives local finite type of $X'\\to B'$. Finally compose with the original open inclusions and all earlier elementary changes. Their etale maps compose, their residue-field maps compose as isomorphisms, and all squares commute. Pullback composition and preservation of finite type and quasi-coherence identify the final module with $g^*\\mathcal F$ and give its stated properties. The chain is the one just constructed, including the empty-chain case of step 3.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-type-morphism",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, composition of the successive elementary squares and final locally finite type check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-kun-dimension",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-nakayama-jacobson",
+  "def-trf-pointed-scheme-devissage-data",
+  "lem-trf-elementary-module-devissage",
+  "def-pc-integral-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-trf-devissage-generic-basis-drop",
+  "lem-trf-devissage-pointed-restriction",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-trf-devissage-pointed-etale-refinement",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05HR (proposition-existence-complete-at-x), full induction; auxiliary pointed data of 05HI, with zero fibre-stalk case and the length-one stopping case made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent module admits a pointed complete devissage after elementary etale neighborhoods of source and base",
+   "results": "{\"t\": \"2026-10-24T00:33:50Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type quasi coherent module admits a pointed complete devissage after elementary etale neighborhoods of source and base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"e9e0058b8daa910c\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Module.Finite",
+   "results": "{\"t\": \"2026-10-24T00:34:19Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|Devissage",
+   "results": "{\"t\": \"2026-10-24T00:34:19Z\", \"tool\": \"grep\", \"query\": \"devissage|dévissage|Devissage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete pointed Raynaud Gruson devissage of a coherent module after etale base change",
+   "results": "{\"t\": \"2026-10-24T00:34:19Z\", \"tool\": \"leansearch\", \"query\": \"Complete pointed Raynaud Gruson devissage of a coherent module after etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.formallyEtale\", \"FinitePresentation.of_isBaseChange\", \"IsBaseChange.rank_eq\", \"IsBaseChange.finrank_eq\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"355802dd1b7808ec\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson complete devissage at a point of a finite type scheme for a finite type quasi coherent sheaf",
+   "results": "{\"t\": \"2026-10-24T00:35:03Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud Gruson complete devissage at a point of a finite type scheme for a finite type quasi coherent sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"aedde89d360646ef\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|Devissage",
+   "results": "{\"t\": \"2026-10-24T01:21:46Z\", \"tool\": \"grep\", \"query\": \"devissage|dévissage|Devissage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned types: local finite generation, affine neighbourhoods and smooth presentations do not give a complete pointed devissage chain with successive cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete Raynaud Gruson devissage of a finite module in elementary etale pointed neighborhoods",
+   "results": "{\"t\": \"2026-10-24T01:21:46Z\", \"tool\": \"leansearch\", \"query\": \"Complete Raynaud Gruson devissage of a finite module in elementary etale pointed neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.fg_of_localized_maximal\", \"Module.Finite.of_localized_maximal\", \"Module.Finite.of_localizationSpan\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.Finite.of_localizationSpan_finite\", \"Algebra.FormallyEtale.recOn\", \"SheafOfModules.isFinitePresentation\", \"ModuleCat.Tilde.isLocallyFraction\"], \"digest\": \"09a9180ba26700fa\"} Read the returned types: local finite generation, affine neighbourhoods and smooth presentations do not give a complete pointed devissage chain with successive cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Module.Finite",
+   "results": "{\"t\": \"2026-10-24T01:21:46Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned types: local finite generation, affine neighbourhoods and smooth presentations do not give a complete pointed devissage chain with successive cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent sheaf admits a complete pointed affine devissage after elementary etale neighborhoods",
+   "results": "{\"t\": \"2026-10-24T01:21:48Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type quasi coherent sheaf admits a complete pointed affine devissage after elementary etale neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\"], \"digest\": \"17e457d34b6f85dc\"} Read the returned types: local finite generation, affine neighbourhoods and smooth presentations do not give a complete pointed devissage chain with successive cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson complete devissage at a point by finite maps to smooth schemes and generic fibre bases",
+   "results": "{\"t\": \"2026-10-24T01:22:36Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud Gruson complete devissage at a point by finite maps to smooth schemes and generic fibre bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"d9633ae025df2063\"} Read the returned types: local finite generation, affine neighbourhoods and smooth presentations do not give a complete pointed devissage chain with successive cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isStandardSmooth|exists_isStandardSmoothOfRelativeDimension|instLocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-24T01:27:14Z\", \"tool\": \"grep\", \"query\": \"exists_isStandardSmooth|exists_isStandardSmoothOfRelativeDimension|instLocallyOfFinitePresentation\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"33\", \"84\", \"99\", \"102\", \"136\"], \"digest\": \"a8a3f7fea31575a0\"} Read the returned types: local finite generation, affine neighbourhoods and smooth presentations do not give a complete pointed devissage chain with successive cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*of_localized_maximal|theorem.*of_localizationSpan|def isFinitePresentation",
+   "results": "{\"t\": \"2026-10-24T01:27:14Z\", \"tool\": \"grep\", \"query\": \"theorem.*of_localized_maximal|theorem.*of_localizationSpan|def isFinitePresentation\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/Semilocal.lean\", \"Mathlib/RingTheory/LocalProperties/Semilocal.lean\", \"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\"], \"digest\": \"7ea9c41abf09ae3b\"} Read the returned types: local finite generation, affine neighbourhoods and smooth presentations do not give a complete pointed devissage chain with successive cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-henselian-pointed-devissage-chart",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of sk-thm-sf-ctf-stability-direct-images: compactification and direct-image preservation, inherited algebraic flattening prerequisite; Tag 05PG first paragraph, reducing to a complete devissage at the marked prime using Tag 05I1 / Tag 05HR. Scheme existence before the henselian retraction; retain the intermediate points.",
+   "via": [
+    "lem-sfb-henselian-pointed-devissage-chart",
+    "lem-sfb-henselian-fp-module-quotient-flattening-ideal",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pointed-affine-devissage-etale-existence",
+  "worker": "stage1",
+  "summary": "Q128 follows the full Stacks 05HR induction using existing one-step, dimension-drop, pointed-refinement and restriction nodes, with no new nodes. The zero fibre-stalk case, exact cokernel alignment, strong-induction quantification and final local finite-type clause are explicit. The statement is unchanged.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), compactification/direct-image preservation: inherited flattening prerequisite, through the recorded henselian chart ancestry. The present proof realizes its algebraic pointed-devissage existence input using Stacks 05HR; no chapter or unit route is replaced. Whole-blueprint searches for devissage and 05HR found no duplicate blueprint statement. The inherited created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor reports None); its provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-jacobson",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-trf-elementary-module-devissage",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-trf-devissage-generic-basis-drop",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-trf-devissage-pointed-restriction",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-trf-devissage-pointed-etale-refinement",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic geometric/module tool used in the Stacks 05HR pointed-devissage induction below the inherited flattening prerequisite; it does not replace a unit step, and this unit has no statement of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-trf-elementary-module-devissage",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-trf-devissage-generic-basis-drop",
+  "lem-trf-devissage-pointed-restriction",
+  "lem-trf-devissage-pointed-etale-refinement",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-6dfb60ad9",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-6dfb60ad9 (reviewer sub-agent of L); spot-checked: The delivery is the full Stacks 05HR induction (flat.tex lines 1428-1570), split into 10 steps that cite existing nodes; it adds no new nodes. I checked the statement, stmt_deps and source against 05HR/05HI. They are unchanged and correct for the auxiliary pointed definition, which drops only the support-dimension equality. Stacks' 'length zero' stopping case is correctly treated as a chain of length one; length zero is used only when F=0. I checked every step against the cited statements. Step 3: Nakayama applies to the finite module M_q with pA_q inside qA_q. Step 4: elementary-module-devissage needs x in Supp(F_s) and returns every field of the one-step datum, with n equal to the original dim_x. Step 5: generic-basis-drop gives a strict drop below d. Step 6: restriction clause (2) handles the stopping case and d=0. Steps 8-9 follow Stacks' shrinking order exactly: refinement, then restriction (3), then (2), then (1); I checked the cokernel identifications. Step 10: the final map is locally finite type via etale cancellation. I tested F=0, a zero fibre stalk, d=0, r=0, non-closed marked points and non-Noetherian bases. No flatness or finite-presentation hypothesis on F is used. There is no cycle, and no duplicate: the 05I1 algebra-existence node forgets the marked primes, which the henselian-chart citer needs. Batch-5 check on the four sec-trace-formula citations (elementary-module-devissage 057S, generic-basis-drop 05HF, pointed-restriction 05HA/05HK/05HM, pointed-etale-refinement 05HE): all four are generic algebraic geometry. Their full closure of 1606 nodes contains no trace-formula or Poincare-duality theorem, no assumption leaf and no batch-4 target, so all four are accepted. I accept all 20 declared tool_uses as generic black boxes. FIX in the item file: step 3 now cites lem-weil-pbc-fibre-product-affine-spectra for X_b=Spec(A⊗κ(p)). Step 4 now cites def-sbc-smooth-morphisms and def-kun-dimension, with the two-line argument that relative dimension d gives fibre dimension d. All three ids were already in proof_deps.; 1 file(s) fixed by the reviewer"
+ }
+}

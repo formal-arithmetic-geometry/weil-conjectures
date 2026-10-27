@@ -125,6 +125,12 @@ def inflationGradedCup (p q : ℕ)
       cohomology A G :=
   (baseShiftedUnitTensor A p q).hom ≫ (a ⊗ₘ b) ≫ cup (A := A) (G := G)
 
+section CanonicalBraiding
+
+-- The upstream derived braiding is a definition, so select its canonical Koszul
+-- normalization explicitly for the braided inflation assertion below.
+attribute [local instance] DerivedCategory.braidedCategory'
+
 section ProfiniteGroup
 variable [hCompact : CompactSpace G] [hHausdorff : T2Space G]
   [hDisconnected : TotallyDisconnectedSpace G]
@@ -182,6 +188,7 @@ theorem inflationCupTranspose (p q : ℕ)
   sorry
 
 end ProfiniteGroup
+end CanonicalBraiding
 
 /-- Universal normalized signs identify ordered cup with y[p] after x under Phi.
 Source: paragraph (3), internal bar normalization, Stacks 0FNG

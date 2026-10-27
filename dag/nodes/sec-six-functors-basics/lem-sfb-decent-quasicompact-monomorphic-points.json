@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-decent-quasicompact-monomorphic-points",
+ "kind": "statement",
+ "title": "Quasi-compact field points have monomorphic representatives",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with field-valued point classes and atlas topology [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A field is as in [def-weil-field] and its spectrum as in [def-weil-affine-spectrum]. A field-valued morphism $u:\\operatorname{Spec}F\\to X$ is quasi-compact if for every affine scheme $U\\to X$ the scheme $U\\times_X\\operatorname{Spec}F$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. Assume every field-valued morphism to $X$ is quasi-compact. Then for every $x\\in|X|$ there exist a field $F$ and a quasi-compact monomorphism $j:\\operatorname{Spec}F\\to X$ representing $x$. Monomorphism means that composition with $j$ is injective on morphisms from every algebraic space over $S$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JV (lemma-UR-finite-above-x), implication (6) to (4), pointwise; Tag 03I8 (definition-very-reasonable)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $X_0=j_!X$ over $Z=\\operatorname{Spec}\\mathbf Z$ using [lem-sfb-space-change-base-to-integers](1)-(2). Its displayed formula identifies a field map into $X_0$ with a field map into $X$ together with its map to $S$. It also identifies point classes: equality after a common extension into $X_0$ forces equality of the structure maps to $S$. Every affine scheme map $T\\to X_0$ supplies a map $T\\to S$. By the fibre-product comparison in (1), its pullback against any field map is the same underlying scheme as the pullback over $X$. Hence every field map into $X_0$ is quasi-compact by the hypothesis. After constructing a field monomorphism into $X_0$, its composite to $S$ makes it an $S$-map; (2) recovers the corresponding map into $X$. Thus we may work over $Z$ and return to $S$ at the end.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tags 03I4 (lemma-change-base-scheme), (1)-(3), and 04SG (lemma-category-of-spaces-over-smaller-base-scheme)."
+   }
+  },
+  {
+   "text": "Fix the point $x$ and choose a point-surjective etale scheme atlas $V\\to X_0$ by [lem-a1-space-affine-etale-cover], then $v\\in V$ above $x$. Let $L=\\kappa(v)$ and $T=\\operatorname{Spec}L$, with $i:T\\to V$ and composite $b:T\\to X_0$. The point-class convention [def-a1-algebraic-space-point-classes] says $b$ represents $x$; [lem-weil-pbc-morphism-from-spec-field] supplies $i$. The new Mathlib leaf [lem-sfb-residue-field-point-monomorphism] says $i$ is a scheme monomorphism. Form $P=T\\times_{X_0}V$ and $H=T\\times_{X_0}T$. These are schemes: each is a pullback of the representable diagonal on a scheme product [def-trf-algebraic-space]. The atlas scheme-test definition makes $P\\to T$ etale. Since $b$ is quasi-compact and $T$ is affine, the affine test $T\\xrightarrow b X_0$ gives quasi-compactness of $H$.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "def-a1-algebraic-space-point-classes",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-sfb-residue-field-point-monomorphism",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), proof (2) to (3), starting with a chart residue-field representative; Tag 03JV (lemma-UR-finite-above-x), (6) implies (5)."
+   }
+  },
+  {
+   "text": "The map $m:H\\to P$ sends a pair $(t_1,t_2)$ to $(t_1,i(t_2))$. It is a monomorphism of schemes: if two maps into $H$ have equal composites to $P$, their first coordinates agree, and their second coordinates agree after $i$, hence agree by its monomorphism property; the fibre-product universal property makes the maps equal. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to $P\\to T$ at the unique point of the field spectrum: its scheme fibre is $P$, so $P$ is a disjoint union $\\coprod_{a\\in A}\\operatorname{Spec}L_a$, with finite separable $L_a/L$. By [lem-sfb-monomorphism-into-field-coproduct], $m$ identifies $H$ over $P$ with the union of a subset of those components. The sheaf fibre-product universal property used here is [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-sfb-residue-field-point-monomorphism",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-sfb-monomorphism-into-field-coproduct",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), proof (2) to (3), using schemes.tex Tag 03DP (lemma-mono-towards-spec-field) and morphisms.tex Tag 02GL (lemma-etale-over-field)."
+   }
+  },
+  {
+   "text": "The components of $H$ in step 3 are disjoint open subsets covering $H$. Quasi-compactness from step 2 gives a finite subcover, so only finitely many components occur. Their inclusion into $P$ is an open immersion. By [lem-weil-pbc-etale-composition-cancellation](1)-(2), the first projection $H\\to T$, its composite with $P\\to T$, is etale. It is quasi-compact because $T$ has only the opens $\\varnothing,T$, whose inverse images are $\\varnothing,H$. The interchange isomorphism $(t_1,t_2)\\mapsto(t_2,t_1)$ of the self-fibre product exchanges the projections, so the second projection is etale and quasi-compact as well. Its inverse is the same interchange map, directly by [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), proof (2) to (3), finiteness and etaleness of the self-relation projections."
+   }
+  },
+  {
+   "text": "Both projections of $H=T\\times_{X_0}T$ now satisfy [lem-sfb-finite-point-self-relation-field-monomorphism], applied over $Z$. It gives a field $F$ and a map $j_0:\\operatorname{Spec}F\\to X_0$ representing $x$, injective on morphisms from every test scheme. This implies the monomorphism property on all algebraic spaces: if $a,c:E\\to\\operatorname{Spec}F$ have $j_0a=j_0c$, evaluate at every scheme $W$ and every section $e\\in E(W)$. The two resulting scheme maps $W\\to\\operatorname{Spec}F$ have equal composites with $j_0$, so are equal. Thus $a_W=c_W$ for all $W$, and $a=c$ since algebraic-space morphisms are natural transformations [def-trf-algebraic-space].",
+   "uses": [
+    "lem-sfb-finite-point-self-relation-field-monomorphism",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), implication (3) to (4); scheme-test to algebraic-space-test monomorphism by the natural-transformation definition."
+   }
+  },
+  {
+   "text": "Return to $S$ by [lem-sfb-space-change-base-to-integers](2): the composite $\\operatorname{Spec}F\\xrightarrow{j_0}X_0\\to S$ makes $j_0$ a morphism of pairs, hence an $S$-morphism $j:\\operatorname{Spec}F\\to X$. The field-class identification in step 1 shows it represents the original $x$. If two $S$-morphisms from an algebraic space have equal composites with $j$, the corresponding maps of pairs have equal composites with $j_0$, so step 5 and faithfulness of the equivalence make them equal. Finally $j$ is quasi-compact by the original assumption on every field-valued map to $X$, on all affine scheme tests. This proves both required properties. If $|X|$ is empty, there is no $x$ to choose and the assertion is vacuous.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), (6) to (4), pointwise, with spaces.tex Tag 04SG for restoration of the base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-change-base-to-integers",
+  "lem-a1-space-affine-etale-cover",
+  "def-a1-algebraic-space-point-classes",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-sfb-residue-field-point-monomorphism",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sfb-monomorphism-into-field-coproduct",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-finite-point-self-relation-field-monomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JV, (6) to (4), with Tag 03JU (2) to (3) and (3) to (4): form a quasi-compact etale field self-relation and take its monomorphic field quotient; avoid the unnecessary global finite-chart criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|residual[Ss]pace",
+   "results": "1 hits: Mathlib/Data/Ordmap/Ordset.lean. The grep hit in Ordset.lean is an unrelated English use of decent.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphisms or unrelated topology/data structures, not the assertion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact field valued point of an algebraic space admits a quasi compact monomorphic representative",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.quasiCompact_of_isIso, AlgebraicGeometry.quasiCompact_iff_compactSpace, AlgebraicGeometry.QuasiCompact.mk, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphisms or unrelated topology/data structures, not the assertion for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphisms or unrelated topology/data structures, not the assertion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space a point admits a quasi compact field valued morphism if and only if it admits a quasi compact monomorphism from a field spectrum",
+   "results": "8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.compactSpace_iff_quasiCompact, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.quasiCompact_iff_spectral, AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.quasiCompact_of_compactSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphisms or unrelated topology/data structures, not the assertion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A decent algebraic space has a quasi compact monomorphism from a field spectrum representing each point",
+   "results": "Hits: AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.range_fromSpecResidueField, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.compactSpace_iff_exists",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme residue-field and quasi-compactness facts do not state the algebraic-space assertion; no algebraic-space declaration in the local source search"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "Hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme residue-field and quasi-compactness facts do not state the algebraic-space assertion; no algebraic-space declaration in the local source search"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|residualSpace|decent",
+   "results": "Hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme residue-field and quasi-compactness facts do not state the algebraic-space assertion; no algebraic-space declaration in the local source search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every point of an algebraic space all of whose field valued morphisms are quasi compact admits a monomorphism from a field spectrum",
+   "results": "Hits: AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.compactSpace_iff_quasiCompact, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme residue-field and quasi-compactness facts do not state the algebraic-space assertion; no algebraic-space declaration in the local source search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A decent algebraic space has a quasi compact residual field monomorphism at every point",
+   "results": "Hits: AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.compactSpace_iff_quasiCompact, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme residue-field and quasi-compactness facts do not state the algebraic-space assertion; no algebraic-space declaration in the local source search"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-decent-space-finite-field-map",
+  "date": "2026-10-23",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: Finiteness for field-valued maps over closed base points, before using the rational section identity. Supporting lemma for Tag 08AL: Tag 03JV (lemma-UR-finite-above-x), implication (6) to (4), pointwise; Tag 03I8 (definition-very-reasonable).",
+   "via": [
+    "lem-sfb-decent-space-finite-field-map",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-decent-quasicompact-monomorphic-points",
+  "worker": "stage1",
+  "summary": "Unchanged statement; explicit finite etale self-relation construction from a chart residue point, existing 03DP and 03JU helpers, and base change to integers and back. One new Mathlib leaf for the residue-field inclusion monomorphism. Logged searches, exact citation audit and dependency-cycle check.",
+  "blueprint": "Realizes the supporting 03JV (6) to (4) input named by the existing historical from.place under det-thm-sf-ctf-stability-direct-images proof (3). The helper is not imported; ancestor resolves to None. Preserve historical ancestry. Read latest unit and direct-images proof; no matching statement in whole-blueprint searches for 03JV, field monomorphism, quasi-compact field, residue monomorphism and 01L6.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic existence of a point-surjective scheme atlas, not a replacement route for a unit step. The unit does not restate this general tool."
+   },
+   {
+    "node": "def-a1-algebraic-space-point-classes",
+    "why": "Definition of the class of a chart residue-field representative. The unit does not restate this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-from-spec-field",
+    "why": "Canonical residue-field representative of a scheme point. The unit does not restate this general tool."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Representable diagonal, atlas scheme tests and natural-transformation morphisms. The unit does not restate this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic decomposition of an etale scheme over a field. The unit does not restate this general tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Sheaf fibre-product universal property and algebraic-space products. The unit does not restate this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme open-immersion etaleness and composition. The unit does not restate this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "def-a1-algebraic-space-point-classes",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-d94832b02",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-d94832b02 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new leaf, all 11 cited statements, Stacks 03JU (whole proof), 03JV, 03I8, and Mathlib ResidueField.lean:241 and Preimmersion.lean:65. The statement is unchanged and equals 03JV (6)=>(4) made global; quasi-compactness is tested against every affine U->X. Step 1: reduction to Spec Z through change-base (1)-(2). j_!h_T=h_T and the fibre-product clause give j_!(TxSpecF)=Tx_{X0}SpecF, so the hypothesis transfers and |X0|=|X|. This is elementary. Step 2: point-surjective atlas, then b=Spec k(v)->X0 represents x. H=Tx_{X0}T is quasi-compact by testing the field map b against the affine T itself. Step 3: m=(pr1,i pr2) is mono because the leaf makes i mono. P over the field L is a coproduct of finite separable Spec L_a (02GL node), and the arbitrary-family 03DP node gives H as a subset of those components. Step 4: quasi-compactness of H makes the subset finite; open immersion followed by etale gives pr1 etale; T has one point, so pr1 is quasi-compact; the swap handles pr2. Step 5: the hypotheses of the 03JU (3)=>(4) node over Z hold, and its mono on scheme tests extends section-wise to all algebraic spaces. Step 6: back to S by equivalence (2) and faithfulness; j is quasi-compact by the hypothesis. New leaf lem-sfb-residue-field-point-monomorphism: Tag 01L6, correct for non-closed points, a one-line combination of the two instances, mono in Scheme matches the stated cancellation. No duplicate found by rg for 01L6, fromSpecResidueField and mono/residue statements. No existing node states the item: qs-space-field-monomorphism needs a qs diagonal, and the other 03JV/03JU nodes are other implications or consumers. No cycle. Batch 5: the flagged closures reach only foundational algebraic-space definitions and fibre-product facts (def-trf-algebraic-space, sheaf pullback, space fibre products). These are general definitions, not steps of the trace-formula or Poincare-duality proofs, so they are outside the assumptions. The seven generic cross-unit tool_uses are accepted. No SGA source and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DecentQuasiCompactMonomorphicPoints",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_quasiCompact_monomorphic_field_representative",
+  "file": "lean/Sheaf/AlgebraicGeometry/DecentQuasiCompactMonomorphicPoints.lean",
+  "statement": "theorem exists_quasiCompact_monomorphic_field_representative {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : ∀ (K : Type u) [Field K] (b : Spec (CommRingCat.of K) ⟶ S) (c : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (U : Over S), IsAffine U.left → ∀ t : yoneda.obj U ⟶ X.obj.obj, ∃ (V : Over S) (p : V ⟶ U) (q : yoneda.obj V ⟶ yoneda.obj (Over.mk b)), IsPullback q (yoneda.map p) c t ∧ CompactSpace V.left) (x : Point X.obj.obj) : ∃ (F : Type u) (_ : Field F) (b : Spec (CommRingCat.of F) ⟶ S) (j : yoneda.obj (Over.mk b) ⟶ X.obj.obj), schemePointMap j (IsLocalRing.closedPoint F) = x ∧ (∀ (Y : AlgebraicSpace S) (a c : Y.obj.obj ⟶ yoneda.obj (Over.mk b)), a ≫ j = c ≫ j → a = c) ∧ ∀ (U : Over S), IsAffine U.left → ∀ t : yoneda.obj U ⟶ X.obj.obj, ∃ (V : Over S) (p : V ⟶ U) (q : yoneda.obj V ⟶ yoneda.obj (Over.mk b)), IsPullback q (yoneda.map p) j t ∧ CompactSpace V.left",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cafc18cfc",
+  "group": "NI",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: hqc = node's affine-test quasi-compactness (IsPullback scheme square + CompactSpace, identical to landed DecentSpaceFiniteFieldMap hypothesis); conclusion gives field F, j with schemePointMap j closedPoint = x, cancellation against all AlgebraicSpace S sources, and same affine-test QC for j. Stacks 03JV (6)=>(4) checked in decent-spaces.tex l.514-547. No extra assumptions; edge cases (empty X, empty affine test, nonclosed points, any char, non-qs base) covered; universes consistent; autoImplicit false. Node changed only in lean; statement verbatim; docstrings carry source, blueprint and 6 proof steps; sorry only; no hollow defs; imports exist. Inline QC expansion is the node's own definition (not a duplicate notion). No findings."
+ }
+}

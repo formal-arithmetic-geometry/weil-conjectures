@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-cubical-partition-differential-faces",
+ "kind": "statement",
+ "title": "Cubical tensor differential expanded into reindexed, uncancelled faces",
+ "statement": "Let $r\\geq0$, let $v\\in\\mathbf Z^r$, and let $I\\subseteq\\{1,\\ldots,r\\}$ be finite. Use the free cubical chains [def-weil-pbc-free-module], cells $[v,A]$, standard vectors $u_i$, and signed cubical boundary of [lem-sfb-integral-lattice-cubical-contraction]. Write $u_A=\\sum_{i\\in A}u_i$, $\\epsilon(A,C)=(-1)^{\\#\\{(a,c)\\in A\\times C:c<a\\}}$, and $P(v,I)=\\sum_{A\\subseteq I}\\epsilon(A,I\\setminus A)[v,A]\\otimes[v+u_A,I\\setminus A]$. The tensors are those of [def-weil-pbc-module-tensor-product], in the total chain complex [def-weil-pbc-module-chain-complex-homology] with differential $d_T(x\\otimes y)=dx\\otimes y+(-1)^a x\\otimes dy$ on bidegree $(a,b)$. For each $i\\in I$, $B\\subseteq I\\setminus\\{i\\}$, put $C=(I\\setminus\\{i\\})\\setminus B$, $A=B\\cup\\{i\\}$, and $E=C\\cup\\{i\\}$. Then, before any shuffle-sign simplification or cancellation,\n$$\\begin{aligned}\nd_TP(v,I)=\\sum_{i\\in I}\\sum_{B\\subseteq I\\setminus\\{i\\}}\\bigl(&\\epsilon(A,C)(-1)^{\\#\\{a\\in A:a<i\\}}([v+u_i,A\\setminus\\{i\\}]\\otimes[v+u_A,C]-[v,A\\setminus\\{i\\}]\\otimes[v+u_A,C])\\\\\n&+\\epsilon(B,E)(-1)^{|B|+\\#\\{c\\in E:c<i\\}}([v,B]\\otimes[v+u_B+u_i,E\\setminus\\{i\\}]-[v,B]\\otimes[v+u_B,E\\setminus\\{i\\}])\\bigr).\n\\end{aligned}$$\nAll terms are in total degree $|I|-1$. If $I=\\varnothing$, the differential and the outer sum are zero, including $r=0$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is the route location only. Agent-written finite calculation, steps 1–2 of lem-sfb-cubical-partition-boundary-expansion, originally integral cubical diagonal proof steps 2–3. Exact external reference remains WANTED."
+ },
+ "stmt_deps": [
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the free linear extension P on [v,I]. For each subset A of I put C=I\\A. Disjointness and |A|+|C|=|I| place its tensor in total degree |I|. Linearity distributes the total differential across the finite powerset sum and its shuffle coefficients. On bidegree (a,b), its two terms are d tensor 1 and (-1)^a times 1 tensor d. Expand each cubical cell boundary and distribute the tensor over its finite sum and subtraction by bilinearity. The resulting first faces are indexed by A disjoint union C=I and i in A; second faces by the same partitions and i in C. Their coefficients are respectively epsilon(A,C)(-1)^#{a in A:a<i} and epsilon(A,C)(-1)^|A|(-1)^#{c in C:c<i}.",
+   "uses": [
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) is the route location only. Agent-written finite calculation, steps 1–2 of lem-sfb-cubical-partition-boundary-expansion, originally integral cubical diagonal proof steps 2–3. Exact external reference remains WANTED."
+   }
+  },
+  {
+   "text": "For a first face remove i from A and call the result B. This gives i in I and a partition B disjoint union C=I\\{i}; insertion of i into B is its inverse. For a second face remove i from C, giving the same remaining partition; insertion into its second part is the inverse. Disjointness guarantees i is absent from both remaining parts. Reindex both finite sums by these bijections, and parametrize the remaining partition by B subset I\\{i} and C=(I\\{i})\\B. Keep each coefficient and each of its two tensor terms unchanged: this is the displayed formula, before signs are simplified and before middle terms cancel. If I is empty, both factors have degree zero and the total differential and outer sum both vanish; this covers rank zero as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) is the route location only. Agent-written finite calculation, steps 1–2 of lem-sfb-cubical-partition-boundary-expansion, originally integral cubical diagonal proof steps 2–3. Exact external reference remains WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is the route location only. Agent-written finite calculation, steps 1–2 of lem-sfb-cubical-partition-boundary-expansion, originally integral cubical diagonal proof steps 2–3. Exact external reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The total tensor differential applied to a finite signed sum of cubical pure tensors expands into the sum of the two factor boundaries",
+   "results": "8 hits, including HomologicalComplex.unit_tensor_d₁, Rep.barComplex.d_single, Rep.standardComplex.d_of. No cubical partition expansion.",
+   "date": "2026-10-26",
+   "verdict": "no match: abstract tensor signs are available but the specific cubical expansion and finite reindexing are not stated."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιTensorObj",
+   "results": "3 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.leftUnitor'_inv.",
+   "date": "2026-10-26",
+   "verdict": "no match: the summand inclusion is available, not the cubical generator formula."
+  },
+  {
+   "tool": "grep",
+   "query": "ιMapBifunctor_d|ι_mapBifunctor_d|ιMapBifunctor.*d|mapBifunctor.d_eq",
+   "results": "14 hits, including Mathlib/Algebra/Homology/Bifunctor.lean:141,145,160,256,261, and Monoidal.lean:57,210,260. Read mapBifunctor.d_eq, d₁_eq, d₂_eq, ι_D₁ and ι_D₂; these provide the generic total differential, not the finite cubical calculation.",
+   "date": "2026-10-26",
+   "verdict": "no match for the cubical reindexed faces; generic differential API is available."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicTopology.CubicalPartitionBoundaryExpansion",
+  "date": "2026-10-26",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) is the route location only. Agent-written finite calculation, steps 1–2 of lem-sfb-cubical-partition-boundary-expansion, originally integral cubical diagonal proof steps 2–3. Exact external reference remains WANTED. Ancestor lookup returns None; blueprint search for cubical returns zero nodes.",
+   "via": [
+    "lem-sfb-cubical-partition-boundary-expansion",
+    "lem-sfb-integral-cubical-chain-diagonal",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicTopology.CubicalPartitionDifferentialFaces",
+  "file": "lean/Sheaf/AlgebraicTopology/CubicalPartitionDifferentialFaces.lean",
+  "declaration": "IntegralLatticeCubical.partitionDifferentialFaces",
+  "statement": "theorem partitionDifferentialFaces (r : ℕ) (v : Fin r → ℤ) (I : Finset (Fin r)) :\n    ((HomologicalComplex.tensorObj (chainComplex r) (chainComplex r)).d\n        I.card (I.card - 1))\n      (diagonalComponent r I.card (cell r (I.card : ℤ) v I)) =\n      ∑ i ∈ I, ∑ B ∈ (I.erase i).powerset,\n        ((partitionSign r (insert i B) (I.erase i \\ B) *\n            (-1 : ℤ) ^ ((insert i B).filter (fun j ↦ j < i)).card) •\n          (tensorCell r (I.card - 1) (v + unitVector r i)\n              (v + directionSum r (insert i B)) ((insert i B).erase i) (I.erase i \\ B) -\n            tensorCell r (I.card - 1) v (v + directionSum r (insert i B))\n              ((insert i B).erase i) (I.erase i \\ B)) +\n        (partitionSign r B (insert i (I.erase i \\ B)) * (-1 : ℤ) ^ B.card *\n            (-1 : ℤ) ^ ((insert i (I.erase i \\ B)).filter (fun j ↦ j < i)).card) •\n          (tensorCell r (I.card - 1) v (v + directionSum r B + unitVector r i) B\n              ((insert i (I.erase i \\ B)).erase i) -\n            tensorCell r (I.card - 1) v (v + directionSum r B) B\n              ((insert i (I.erase i \\ B)).erase i)))",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T082134-L-2140865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T082134-L-2140865",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

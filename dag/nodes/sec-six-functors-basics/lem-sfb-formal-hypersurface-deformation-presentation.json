@@ -1,0 +1,373 @@
+{
+ "id": "lem-sfb-formal-hypersurface-deformation-presentation",
+ "kind": "statement",
+ "title": "Presentations of flat formal hypersurface deformations",
+ "statement": "Let $k$ be a field [def-weil-field], let $n\\geq1$, and let $0\\ne f\\in(x_1,\\ldots,x_n)^2\\subset k[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series]. Let $R$ be a commutative Artinian local $k$-algebra with residue field $k$; Artinian means the descending chain condition on ideals. Let $Q$ be a complete Noetherian local $R$-algebra, flat over $R$ [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion, def-weil-pbc-flat-ring-map], with a specified isomorphism $Q/\\mathfrak m_RQ\\cong k[[x_1,\\ldots,x_n]]/(f)$. For any lifts $q_i\\in\\mathfrak m_Q$ of the specified classes of $x_i$, substitution gives a continuous surjection $R[[x_1,\\ldots,x_n]]\\twoheadrightarrow Q$ and its kernel has a generator $F$ reducing to $f$. Conversely, for every lift $F$ of $f$, the quotient $R[[x_1,\\ldots,x_n]]/(F)$ is flat over $R$. For a surjection $R'\\twoheadrightarrow R$ of such Artinian algebras, a flat lift $Q'$ of $Q$, and a specified presentation $Q=R[[x_1,\\ldots,x_n]]/(F)$, the coordinates and generator can be lifted so that $Q'=R'[[x_1,\\ldots,x_n]]/(F')$ with $F'\\bmod\\ker(R'\\to R)=F$, respecting the specified reduction isomorphism. These choices may be made compatibly along any tower $R/\\mathfrak m_R^j$ for a complete Noetherian local $k$-algebra $R$: a compatible system of flat hypersurface deformations is given by one equation in $R[[x_1,\\ldots,x_n]]$. The module representing continuous relative derivations of this quotient into complete finitely generated modules is the cokernel of the Jacobian column $(\\partial F/\\partial x_i)_i:Q\\to Q^{\\oplus n}$. Moreover, if $R$ is a complete Noetherian local $k$-algebra, $X\\to\\operatorname{Spec}R$ is a morphism of finite presentation [def-pc-scheme, def-sbc-locally-finite-presentation], and $x\\in X$ is a point over the closed point with an isomorphism of $R$-algebras $\\widehat{\\mathcal O}_{X,x}\\cong R[[x_1,\\ldots,x_n]]/(F)$, then $\\Omega_{X/R,x}\\otimes_{\\mathcal O_{X,x}}\\widehat{\\mathcal O}_{X,x}$, with $\\Omega$ the relative Kähler differentials [def-weil-pbc-kahler-differentials], is the cokernel of the Jacobian column $(\\partial F/\\partial x_i)_i$ over $\\widehat{\\mathcal O}_{X,x}$.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DY5 (lemma-power-series-rings-TI), proof of (2), the lifted-equation presentation; the Artinian-base and compatible-tower version is the same presentation argument using flatness and complete Nakayama. Continuous differential presentation is the universal-derivation Jacobian calculation. These extensions are stated by the worker, not quotations of the first-order lemma."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathfrak m=\\mathfrak m_R$ and $B=R[[x_1,\\ldots,x_n]]$. The Artinian-local lemma gives that $R$ is Noetherian and $\\mathfrak m^N=0$; hence $R$ is complete, since its quotient tower is eventually constant. The power-series Noetherianity, local-ring and combined-ideal completeness results show that $B$ is Noetherian local and complete for $J=\\mathfrak mB+(x_1,\\ldots,x_n)$. Coefficient reduction identifies $B/\\mathfrak mB$ with $k[[x_1,\\ldots,x_n]]$: its kernel is $\\mathfrak mB$ by the cited coefficient-kernel result, and it is onto by lifting each coefficient. The same Noetherianity, locality and completeness assertions hold for a complete Noetherian local base $R$, with this same $J$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-complete-over-complete-base",
+    "lem-sbc-mv-power-series-quotient-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00KH (lemma-Noetherian-dimension-0), 00J8 (lemma-artinian-radical-nilpotent), 0306 (lemma-Noetherian-power-series); coefficientwise completion and reduction as in the cited power-series nodes"
+   }
+  },
+  {
+   "text": "The prescribed $q_i\\in\\mathfrak m_Q$ define an $R$-algebra homomorphism $\\phi:B\\to Q$ by the power-series universal property, using the assumed maximal-ideal completeness of $Q$. It is continuous for the maximal-ideal topologies: $\\mathfrak m$ has nilpotent image in $Q$, so maps into $\\mathfrak m_Q$, and $\\phi(J^r)\\subseteq\\mathfrak m_Q^r$. Modulo $\\mathfrak m$, the composite with the specified special-fibre isomorphism is precisely the quotient map $k[[x]]\\to k[[x]]/(f)$, by the coordinate prescription. Thus $B/\\mathfrak mB\\to Q/\\mathfrak mQ$ is onto. Nilpotent Nakayama applied to the $R$-linear map $\\phi$ gives surjectivity of $\\phi$; no finite generation of $Q$ as an $R$-module is needed.",
+   "uses": [
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK), part (11), applied to the substitution in Examples of Deformation Problems Tag 0DY5 (lemma-power-series-rings-TI), proof (2)"
+   }
+  },
+  {
+   "text": "Put $K=\\ker\\phi$. Tensor $0\\to K\\to B\\to Q\\to0$ with $k=R/\\mathfrak m$. Since its last term $Q$ is $R$-flat, the cited flat-quotient tensor lemma makes $K/\\mathfrak mK\\to B/\\mathfrak mB$ injective with image exactly $(f)$. Choose $F\\in K$ mapping to the element $f$ of this ideal. Then $K=BF+\\mathfrak mK$. Apply nilpotent Nakayama over $B$ to $B\\to K$, $b\\mapsto bF$, with nilpotent ideal $\\mathfrak mB$. This gives $K=BF$, and therefore the asserted presentation with precisely the prescribed reduction of its generator.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL (lemma-flat-tor-zero) and Tag 00DV (lemma-NAK), part (11); expanded flatness argument in Examples of Deformation Problems Tag 0DY5, proof (2)"
+   }
+  },
+  {
+   "text": "Conversely, the constants map $R\\to B$ is flat by the power-series constants-flatness result, and is local by Step 1. The ring $k[[x_1,\\ldots,x_n]]$ is a domain by the power-series domain result. Thus $0\\ne f\\in(x)^2$ is a nonzerodivisor and a nonunit, so is a length-one regular sequence. For any coefficient lift $F$ of $f$, apply the regular-sequence lifting theorem to the flat local map $R\\to B$: it gives both that $F$ is a nonzerodivisor in $B$ and that $B/(F)$ is $R$-flat. Its quotient is complete Noetherian local by the complete-local quotient theorem. This argument also applies over a complete Noetherian local base with the same specified residue field and special-fibre equation.",
+   "uses": [
+    "lem-sbc-mv-power-series-constants-flat",
+    "lem-weil-pbc-power-series-domain",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-grothendieck-regular-sequence-flat",
+    "lem-weil-pbc-complete-local-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MG (lemma-grothendieck-regular-sequence), length-one case, and Tag 0325 (lemma-quotient-complete-local)"
+   }
+  },
+  {
+   "text": "Let $I=\\ker(R'\\twoheadrightarrow R)$, $B'=R'[[x]]$, and fix the given identification $Q'/IQ'=Q$. Lift each specified coordinate $q_i$ to $q'_i\\in Q'$. These lifts are in the maximal ideal, since $IQ'$ is nilpotent and the quotient is local. Step 2 gives $B'\\twoheadrightarrow Q'$ with kernel $K'$. Coefficient reduction gives $B'/IB'=B$. Tensor $0\\to K'\\to B'\\to Q'\\to0$ over $R'$ with $R$; flatness of $Q'$ identifies $K'/IK'$ with the kernel $(F)$ of the specified $B\\to Q$. In particular $F$ itself lifts to $F'\\in K'$. Since $I\\subseteq\\mathfrak m_{R'}$ is nilpotent, nilpotent Nakayama applied to $B'\\to K'$, $b\\mapsto bF'$, gives $K'=(F')$. Both coordinates and the exact equation $F$, rather than just its ideal, now have the required reductions. The diagram commutes on coefficients and variables, hence on series by the substitution universal property.",
+   "uses": [
+    "lem-sbc-mv-power-series-quotient-kernel",
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-nakayama-nilpotent",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL (lemma-flat-tor-zero) and Tag 00DV (lemma-NAK); relative version of the lifted-equation argument of Examples of Deformation Problems Tag 0DY5"
+   }
+  },
+  {
+   "text": "For a complete Noetherian local $k$-algebra $R$ with residue field $k$, write $R_j=R/\\mathfrak m_R^j$ for $j\\ge1$. These are Artinian local by the cited quotient theorem. A compatible system here includes reduction isomorphisms $Q_{j+1}\\otimes_{R_{j+1}}R_j\\cong Q_j$ satisfying their cocycle identities, and the specified special-fibre identification. Begin with $Q_1=k[[x]]/(f)$, its standard coordinates, and $F_1=f$. Inductively apply Step 5 to $R_{j+1}\\to R_j$, the specified reduction of $Q_{j+1}$, and the already chosen presentation of $Q_j$. It chooses coordinates and $F_{j+1}$ reducing exactly to the preceding ones. This is an induction with fixed base and successor data, so all presentations commute with every transition map.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KH (lemma-Noetherian-dimension-0), applied to the maximal-ideal-power quotients; agent induction using Step 5"
+   }
+  },
+  {
+   "text": "Set $B_j=R_j[[x]]$. Coefficientwise completeness of $R$ gives $\\varprojlim_j B_j=R[[x]]=B$; multiplication agrees because each coefficient of a product is a finite sum. Thus $(F_j)_j$ determines $F\\in B$. By Step 4, multiplication by $F_j$ is injective in $B_j$. Consequently the transition maps of $K_j=(F_j)$ are onto, and multiplication by $F_j$ identifies the tower $(K_j)$ with $(B_j)$, since $F_{j+1}$ reduces to $F_j$. Apply the cited inverse-limit exactness theorem to $0\\to K_j\\to B_j\\to Q_j\\to0$. It gives an onto map $B\\to\\varprojlim_jQ_j$ with kernel the image of $\\varprojlim_jK_j$, which under the preceding tower identifications is exactly $FB$. Hence $\\varprojlim_jQ_j\\cong R[[x]]/(F)$ with all the chosen reductions. By Step 4 over the complete base this quotient is flat; it is complete Noetherian local as well.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 03CA (lemma-Mittag-Leffler), applied to the principal-ideal kernel tower"
+   }
+  },
+  {
+   "text": "For the differential assertions work over either base in the statement. Write $B=R[[x]]$, $J=\\mathfrak m_RB+(x)$, $Q=B/(F)$ and $\\mathfrak n=JQ$. Let $M$ be a finite $Q$-module complete and separated for $\\mathfrak n$. For $v=(v_i)\\in M^n$, the formula $D_v(h)=\\sum_i(\\partial_i h)v_i$ is an $R$-derivation $B\\to M$, since each formal partial derivative is the derivation in the cited definition. It is continuous: $\\partial_i(J^{r+1})\\subseteq J^r$ by Leibniz, as $\\partial_i$ kills $\\mathfrak m_R$ and sends each variable to $0$ or $1$. Conversely, truncate any series $h$ in total $x$-degree. Its polynomial truncations converge to $h$, and their partial derivatives converge to $\\partial_i h$, because the omitted terms have degrees at least $s$ and their derivatives at least $s-1$. Any continuous $R$-derivation therefore agrees with $D_v$ on all series once it has the values $v_i$ on $x_i$: polynomial Leibniz gives the equality on truncations and separatedness of $M$ gives it on their limits. Thus evaluation on the coordinates is a bijection with $M^n$.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Examples of Deformation Problems Tag 0DY5, proof (1), formal derivative calculation; agent expansion by polynomial truncations"
+   }
+  },
+  {
+   "text": "The derivation $D_v$ of Step 8 descends to $Q=B/(F)$ exactly when $D_v(F)=\\sum_i(\\partial_iF)v_i=0$: indeed $D_v(Fh)=F D_v(h)+hD_v(F)$, with $F$ acting by zero on $M$. The quotient topology is the maximal-ideal topology, since the surjection sends $J^r$ onto $\\mathfrak n^r$, so descended derivations are continuous. Put $P=\\operatorname{coker}(Q\\xrightarrow{(\\partial_iF)_i}Q^n)$. A $Q$-linear map $P\\to M$ is exactly a tuple $v_i$ satisfying the preceding relation. The derivation $\\delta:Q\\to P$, $h\\mapsto[(\\partial_i h)_i]$, is well defined by the same Leibniz calculation. The finite module $P$ is complete over the complete Noetherian local ring $Q$ by the cited finite-module completeness result. Every linear map of these adic modules is continuous, since it sends $\\mathfrak n^rP$ into $\\mathfrak n^rM$. Hence composition with $\\delta$ gives the required natural bijection between $\\operatorname{Hom}_Q(P,M)$ and continuous relative derivations.",
+   "uses": [
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA (lemma-completion-tensor), part (3), and the universal-derivation calculation from Examples of Deformation Problems Tag 0DY5"
+   }
+  },
+  {
+   "text": "Finally set $A=\\mathcal O_{X,x}$, $C=\\widehat A\\cong R[[x]]/(F)$, and $L=\\Omega_{A/R}\\otimes_A C$. On an affine neighbourhood finite presentation makes its ring a finite-type $R$-algebra; the Noetherian finite-type and localization results give that $A$ is Noetherian. The differential sheaf theorem and localization of differentials identify $\\Omega_{X/R,x}=\\Omega_{A/R}$ and make it finite. Thus $L$ is finite and complete over $C$. The module-valued derivation-completion theorem, together with the finite-module completion/tensor comparison, extends $d:A\\to\\Omega_{A/R}$ uniquely to a continuous $R$-derivation $\\widehat d:C\\to L$. Step 9 gives a $C$-linear map $u:P\\to L$ with $u\\delta=\\widehat d$. In the other direction restrict $\\delta$ to $A$; the universal property of Kähler differentials gives $\\Omega_{A/R}\\to P$, and scalar extension gives $v:L\\to P$. The continuous derivations $v\\widehat d$ and $\\delta$ agree on the dense image of $A$, hence agree on $C$. Therefore $vu$ fixes every $\\delta(x_i)$, which generate $P$, so $vu=1$. Also $uv$ fixes every $da\\otimes1$ for $a\\in A$, which generate $L$, so $uv=1$. This identifies $L$ with the stated Jacobian-column cokernel, canonically relative to the specified formal coordinates.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "lem-trf-module-valued-derivation-completion",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Tags 01UT (lemma-differentials-affine) and 01V2 (lemma-finite-type-differentials); Algebra Tags 00RT (lemma-differentials-localize), 00MA (lemma-completion-tensor); More on Algebra Tag 07PE (lemma-derivation-extends), module-valued version; agent comparison on universal derivations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-sbc-mv-power-series-quotient-kernel",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-nakayama-nilpotent",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-sbc-mv-power-series-constants-flat",
+  "lem-weil-pbc-power-series-domain",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-grothendieck-regular-sequence-flat",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-trf-module-valued-derivation-completion",
+  "lem-weil-pbc-completion-finite-module-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DY5 (lemma-power-series-rings-TI), proof (2), expanded to Artinian bases and compatible towers via 00HL, 00DV, 00MG and 03CA; proof (1) differential calculation expanded using 07PE and finite-module completion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat Artinian deformation of a formal hypersurface k power series modulo f is a power series ring over the base modulo a lift of f",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisionAt\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → PowerSeries A → PowerSeries A → Polynomial A → Ideal A → Prop\", \"doc\": \"Given a commutative ring $ A $, three power series $ f, g, h $, a polynomial $ p $, and an ideal $ I $, this proposition encodes the conditions under which the Weierstrass division of $ f $ by $ g $ y\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → Polynomial A → PowerSeries A → Ideal A → Prop\", \"doc\": \"For a commutative ring $ A $, this proposition encodes that a power series $ f $ factors as a polynomial $ p $ multiplied by a power series $ u $, with $ u $ being a unit modulo the ideal $ I $.\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {f : Polynomial A} →\\n        {h : PowerSeries A} →\\n          {I : Ideal A} →\\n            g.IsWeierstrassFactorizationAt f h I →\\n              [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {f}) ≃ₐ[A] PowerSeries A ⧸ Ideal.sp\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {I : Ideal A} →\\n        g.IsWeierstrassDivisorAt I → [IsAdicComplete I A] → PowerSeries A ⧸ Ideal.span {g} →ₗ[A] Polynomial A\", \"doc\": \"A linear map from the quotient ring of formal power series $ A⟦X⟧ $ modulo the ideal generated by a Weierstrass divisor $ g $ to the polynomial ring $ A[X] $. This map is constructed by lifting the qu\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass preparation concerns division and factoring a given one-variable series; no hit presents arbitrary flat multivariate hypersurface deformations"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Module.Flat",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass preparation concerns division and factoring a given one-variable series; no hit presents arbitrary flat multivariate hypersurface deformations"
+  },
+  {
+   "tool": "grep",
+   "query": "hypersurface.*deform|deform.*hypersurface|lift.*relation|relation.*lift",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass preparation concerns division and factoring a given one-variable series; no hit presents arbitrary flat multivariate hypersurface deformations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat deformation of complete intersection equation admits a lifted hypersurface presentation compatible with reduction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Module.Flat.of_forall_exists_factorization\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"(h :\\n    ∀ {l : ℕ} {f : Fin l →₀ R} {x : (Fin l →₀ R) →ₗ[R] M},\\n      x f = 0 → ∃ (k : ℕ) (a : (Fin l →₀ R) →ₗ[R] (Fin k →₀ R)) (y : (Fin k →₀ R) →ₗ[R] M), x = y ∘ₗ a ∧ a f = 0) :\\n  Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finite list $ f $ of elements in the free $ R $-module $ \\\\text{Fin}(l) \\\\to_0 R $, and for every $ R $-linear map $ x: \"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"module\": \"Mathlib.RingTheory.Flat.Tensor\", \"type\": \": Flat R M ↔ ∀ ⦃I : Ideal R⦄, I.FG → Function.Injective (TensorProduct.lift ((lsmul R M).comp I.subtype))\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. Then $M$ is a flat module if and only if for every finitely generated ideal $I$ of $R$, the canonical linear map from the tensor product $I \\\\oti\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": HasRingHomProperty (@Flat) RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass preparation concerns division and factoring a given one-variable series; no hit presents arbitrary flat multivariate hypersurface deformations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Q is flat over a local Artinian ring and its special fibre is k[[x]]/(f), any lifted coordinates present Q as A[[x]]/(F)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.weierstrassMod\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → Polynomial A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $ and a power series $ g $ over $ A $, this function computes the Weierstrass modulus of $ g $ with respect to another power seri\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"PowerSeries.weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        (g : PowerSeries A) → (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → Polynomial A\", \"doc\": \"Given a local ring $ A $ and a power series $ g $ over $ A $ whose image under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal) is non-zero, this function returns\"}\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization.unique\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A},\\n  g.IsWeierstrassFactorization f h →\\n    ∀ (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n      f = g.weierstr\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then any Weierstra\"}\n  {\"name\": \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n  g.IsWeierstrassFactorization (g.weierstrassDistinguished hg) (g.weierstrassUnit hg)\", \"doc\": \"Let $ A $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ g $ be a power series over $ A $. If the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero,\"}\n  {\"name\": \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n  (g.weierstrassDistinguished hg).IsDistinguishedAt (IsLocalRing.maximalIdeal A)\", \"doc\": \"For a local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if a power series $ g $ over $ A $ has non-zero image under the residue map $ A \\\\to A/\\\\mathfrak{m} $, then the Weierstrass distinguished pol\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass preparation concerns division and factoring a given one-variable series; no hit presents arbitrary flat multivariate hypersurface deformations"
+  },
+  {
+   "tool": "grep",
+   "query": "hypersurface.*deform|deform.*hypersurface|continuous.*[Dd]erivation|[Dd]erivation.*continuous",
+   "results": "{\"t\": \"2026-10-23T09:33:37Z\", \"tool\": \"grep\", \"query\": \"hypersurface.*deform|deform.*hypersurface|continuous.*[Dd]erivation|[Dd]erivation.*continuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/ContDiff/RestrictScalars.lean\"], \"digest\": \"0c89cb2b2e62986a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary formal partial derivatives or unrelated analytic differentiation, not the full deformation and continuous differential theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Present a complete flat local algebra whose closed fibre is a power series hypersurface by lifting coordinates and its equation",
+   "results": "{\"t\": \"2026-10-23T09:33:37Z\", \"tool\": \"leansearch\", \"query\": \"Present a complete flat local algebra whose closed fibre is a power series hypersurface by lifting coordinates and its equation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Ideal.ResidueField.liftₐ\", \"IsAdicComplete.liftAlgHom\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\"], \"digest\": \"a8ddee9a770f3b2e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smooth lifting and one-variable Weierstrass results do not give arbitrary flat multivariate presentations or the continuous relative differential comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Module.Flat",
+   "results": "{\"t\": \"2026-10-23T09:33:38Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smooth lifting and one-variable Weierstrass results do not give arbitrary flat multivariate presentations or the continuous relative differential comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat deformation of a formal hypersurface over an Artinian local algebra has one lifted equation and continuous differentials are its Jacobian cokernel",
+   "results": "{\"t\": \"2026-10-23T09:33:49Z\", \"tool\": \"leanfinder\", \"query\": \"A flat deformation of a formal hypersurface over an Artinian local algebra has one lifted equation and continuous differentials are its Jacobian cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.formallySmooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.smooth_iff\", \"RingHom.smooth_def\", \"Algebra.IsStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\", \"Algebra.Smooth\", \"RingHom.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"50fbb558f2e44ecf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smooth lifting and one-variable Weierstrass results do not give arbitrary flat multivariate presentations or the continuous relative differential comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential|derivation",
+   "results": "{\"t\": \"2026-10-23T09:42:06Z\", \"tool\": \"grep\", \"query\": \"KaehlerDifferential|derivation\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\"], \"digest\": \"8549e5931f345a0a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary formal partial derivatives or unrelated analytic differentiation, not the full deformation and continuous differential theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete local flat algebra over an Artin ring with hypersurface special fibre is a quotient of a multivariate formal power series ring by a principal ideal",
+   "results": "{\"t\": \"2026-10-23T09:42:11Z\", \"tool\": \"leanfinder\", \"query\": \"A complete local flat algebra over an Artin ring with hypersurface special fibre is a quotient of a multivariate formal power series ring by a principal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"HenselianLocalRing\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"c5a603c6b0fa2ab8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smooth lifting and one-variable Weierstrass results do not give arbitrary flat multivariate presentations or the continuous relative differential comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-deformation-smoothing-parameters",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Presentations of flat formal hypersurface deformations.",
+   "via": [
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-formal-hypersurface-deformation-presentation",
+  "worker": "stage1",
+  "summary": "Expanded the first-order Stacks presentation argument to arbitrary Artinian bases, exact lifting of a prescribed generator, and compatible complete-base towers. Proved the continuous differential universal property by a direct truncation calculation from the existing formal derivative definition, and compared it with completed algebraic differentials by explicit inverse maps. All non-elementary tools already exist in the DAG; no new nodes, no change of statement.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the existing admissible-direct-image / plurinodal / stable-level / local-nodal-deformation dependency chain. The latest blueprint assembles this through sk-prop-open-coefficients; this item supplies only the local formal algebra prerequisite recorded by its creation ancestry. The imported blueprint ancestor finder returns None; the existing ancestry and precise from.place are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Generic algebraic tool: Power series over a complete Noetherian ring are complete for the combined ideal. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-sbc-mv-power-series-quotient-kernel",
+    "why": "Generic algebraic tool: Kernel of coefficient reduction modulo a finitely generated ideal. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Generic algebraic tool: Universal property of a power series ring mapping into a complete ring. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-nilpotent",
+    "why": "Generic algebraic tool: Nakayama's lemma for a nilpotent ideal (surjectivity modulo I). It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-sbc-mv-power-series-constants-flat",
+    "why": "Generic algebraic tool: Flatness of constants in finite-variable power series. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-regular-sequence-flat",
+    "why": "Generic algebraic tool: Regular sequence on the closed fibre of a flat local homomorphism. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Generic algebraic tool: A quotient of a Noetherian complete local ring is a Noetherian complete local ring. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "why": "Generic algebraic tool: Inverse limits of a tower of short exact sequences whose kernels have surjective transition maps. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic algebraic tool: A finite module over a Noetherian ring complete along an ideal is complete. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Generic algebraic tool: Relative differential sheaves: finite type and canonical cartesian base change. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   },
+   {
+    "node": "lem-trf-module-valued-derivation-completion",
+    "why": "Generic algebraic tool: Continuous completion of a module-valued derivation. It supplies the precise fact used in the local formal presentation/differential calculation; this unit has no alternative statement of that tool and no unit-level proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-sbc-mv-power-series-quotient-kernel",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-nakayama-nilpotent",
+  "lem-sbc-mv-power-series-constants-flat",
+  "lem-weil-pbc-grothendieck-regular-sequence-flat",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-trf-module-valued-derivation-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-a0ad87578",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-a0ad87578 (reviewer sub-agent of L); spot-checked: I read Stacks 0DY5 (lemma-power-series-rings-TI), proofs (1) and (2), and every cited statement in full. The delivery creates no new nodes. Its statement and stmt_deps are identical to the live base (unsplit there, empty proof), and there is no repair note, so this is a first split. Steps 1-3: the universal property applies to the complete ring Q with q_i in m_Q, and its uniqueness clause shows the reduction mod m is the quotient map. Nilpotent Nakayama (no finiteness needed) gives surjectivity. The flat-quotient tensor lemma with N=k gives K/mK = (f), so f itself lifts and Nakayama over mB gives K=(F). Step 4: constants are flat because R is Noetherian, R->B is local, and f is regular in the domain k[[x]]. The Grothendieck regular-sequence lemma then gives that F is a nonzerodivisor and B/(F) is flat. Step 5: the same argument relative to I = ker(R'->R) lifts the exact generator F. It reads 'flat lift Q'' as a complete Noetherian local flat R'-algebra, which is the class the only citer (nodal-deformation-smoothing-parameters) uses; the general reading is also true (Q' Noetherian via completion-noetherian-quotient-noetherian), so this is advisory only. Steps 6-7: the induction is properly set up. The kernel tower is identified with B_j through the nonzerodivisors F_j, and the tower-limit lemma (b) gives kernel FB. Step 8 (elementary) is accepted: d_i(J^{r+1}) is in J^r, and truncation plus separatedness gives uniqueness. Step 9 descends D_v exactly when sum d_iF v_i = 0, and finite-module completeness puts P in the test category. Step 10: Noetherianity, the stalk Omega_{A/R}, and the module-valued completion derivation identified with Omega tensor C give maps u and v that I checked are mutually inverse on generators. I tested f=x^2 in characteristic 2, R=k, k[eps] with x^2-eps, the node xy-s, and a stationary tower. Batch-5 flags: def-trf-formal-power-series-partial-derivative is a general definition; lem-trf-relative-differential-sheaf-base-change (01V0/01UT) and lem-trf-module-valued-derivation-completion (07PE) are generic algebra, not part of the trace-formula or Poincare-duality assumptions or their proofs, so all three are OK. lem-trf-completed-jacobian-differentials works over a field base and is not a duplicate. The off-unit generic tools are declared in tool_uses. No SGA source is cited."
+ }
+}

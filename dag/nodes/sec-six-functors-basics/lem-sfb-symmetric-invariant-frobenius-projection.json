@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-symmetric-invariant-frobenius-projection",
+ "kind": "statement",
+ "title": "Natural Frobenius projection from symmetric invariant tensors",
+ "statement": "Let $k$ be a field [def-weil-field] of characteristic $p>0$ and $M,N$ arbitrary $k$-vector spaces (that is, modules over $k$, not assumed finite-dimensional). Use module tensor products [def-weil-pbc-module-tensor-product] and extension of scalars [def-weil-module-base-change]. Put $\\sigma(a)=a^p$ and $M^{(p)}=M\\otimes_{k,\\sigma}k$, so $(am)\\otimes c=m\\otimes a^pc$. Let $I_p(M)=(M^{\\otimes p})^{\\mathfrak S_p}$ be the subspace fixed by every permutation of the $p$ factors. For any $k$-basis $B$ of $M$, the sums $s_O=\\sum_{t\\in O}t$ over the distinct tensors in permutation orbits of $B^p$ form a basis of $I_p(M)$. The $k$-linear map $\\lambda_M:I_p(M)\\to M^{(p)}$ specified by $\\lambda_M(b^{\\otimes p})=b\\otimes1$ and $\\lambda_M(s_O)=0$ for every non-singleton orbit is independent of $B$. For every $k$-linear map $h:M\\to N$, its tensor power restricts to $I_p(h):I_p(M)\\to I_p(N)$ and\n$$\\lambda_N I_p(h)=h^{(p)}\\lambda_M,\\qquad h^{(p)}(m\\otimes c)=h(m)\\otimes c.$$\nLet $\\tau:M^{\\otimes p}\\otimes N^{\\otimes p}\\to(M\\otimes N)^{\\otimes p}$ interleave factors, and let $\\kappa:M^{(p)}\\otimes N^{(p)}\\to(M\\otimes N)^{(p)}$ be the canonical isomorphism with $\\kappa((m\\otimes a)\\otimes(n\\otimes b))=(m\\otimes n)\\otimes ab$. Then for $x\\in I_p(M)$ and $y\\in I_p(N)$,\n$$\\lambda_{M\\otimes N}(\\tau(x\\otimes y))=\\kappa(\\lambda_M(x)\\otimes\\lambda_N(y)).$$\nHere $\\tau(x\\otimes y)$ is invariant under simultaneous permutations of the paired factors. For $M=k$, the canonical identification $k^{(p)}\\to k$, $a\\otimes c\\mapsto a^pc$, sends $\\lambda_k(1^{\\otimes p})$ to $1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 11(i), diagram preceding Definition 11.39, printed p.224; linear-algebra properties implicit in the diagram, made precise here."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Choose bases $B,C$ of $M,N$ using [lem-weil-pbc-vector-space-free]. By [lem-sfb-finite-tensor-product-basis-coordinates], the words $B^p$ give a basis of $M^{\\otimes p}$, even when $B$ is infinite. Permutations reindex these words, so an invariant vector has coefficients constant on each orbit. Its support is finite, hence it is the finite sum of those constant coefficients times $s_O$. Conversely each $s_O$ is invariant, and a relation among different $s_O$ has every coefficient zero by looking at one word in each disjoint orbit. This proves the asserted orbit basis. A singleton orbit is exactly a constant word: invariance under transpositions makes all entries equal.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "lem-sfb-finite-tensor-product-basis-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, invariant-tensor arrow before Definition 11.39; agent-written coordinate verification of the linear algebra implicit there."
+   }
+  },
+  {
+   "text": "The characteristic $p$ of a field is prime: a factorization $p=rs$ with $1<r,s<p$ would give two nonzero elements $r\\cdot1,s\\cdot1$ with zero product. For a nonconstant word orbit $O\\subset B^p$, choose a letter occurring $r$ times, where $0<r<p$. Count pairs $(w,i)$ with $w\\in O$ and that letter in position $i$. The count is $r|O|$. Permuting positions gives bijections between the fibers at any two positions, so it is also $p a$, where $a$ is the number of words having that letter in the first position. Thus $r|O|=pa$ in the integers. Since $p$ is prime and $0<r<p$, Euclid's elementary divisibility property gives $p\\mid |O|$. Consequently $|O|\\cdot1_k=0$. This argument uses only finite counting and prime divisibility; it does not divide by $p!$ or by an orbit size in $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, invariant-tensor arrow before Definition 11.39; agent-written coordinate verification of the linear algebra implicit there."
+   }
+  },
+  {
+   "text": "The ring map $\\sigma$ is supplied by [def-weil-ring-frobenius]. Apply [lem-weil-pbc-free-module-base-change-free] to $k\\xrightarrow{\\sigma}k$: $(b\\otimes1)_{b\\in B}$ is a basis of $M^{(p)}$. Using the orbit basis of step 1, define $\\lambda_{M,B}$ by the specified images and extend linearly. Equivalently, for invariant $z$ whose word coefficients are $z_w$, it is $\\sum_{b\\in B}z_{(b,\\ldots,b)}(b\\otimes1)$, a finite sum. The balancing rule of [def-weil-module-base-change] is $(ab)\\otimes c=b\\otimes a^pc$. In particular, if $m=\\sum_b a_b b$, then $m\\otimes1=\\sum_b a_b^p(b\\otimes1)$.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "lem-weil-pbc-free-module-base-change-free",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, invariant-tensor arrow before Definition 11.39; agent-written coordinate verification of the linear algebra implicit there."
+   }
+  },
+  {
+   "text": "Let $h:M\\to N$ be linear and write $h(b_i)=\\sum_j h_{ji}c_j$. Its tensor power commutes with each permutation, as both composites take $m_1\\otimes\\cdots\\otimes m_p$ to the same permuted tensor of the $h(m_i)$; these tensors generate by [def-weil-pbc-module-tensor-product]. It therefore restricts to invariants. For an orbit $O$ with representative $(i_1,\\ldots,i_p)$, [lem-sfb-finite-tensor-product-basis-coordinates] gives the coefficient of $c_j^{\\otimes p}$ in $h^{\\otimes p}(s_O)$ as $|O|\\prod_{r=1}^p h_{j,i_r}$: the product is unchanged by permuting the $i_r$. For a nonconstant orbit this is zero by step 2. For the singleton $b_i^{\\otimes p}$ it is $h_{ji}^p$. Step 3 now gives $\\lambda_{N,C}h^{\\otimes p}(b_i^{\\otimes p})=\\sum_j h_{ji}^p(c_j\\otimes1)=h(b_i)\\otimes1$. Both sides vanish on every nonconstant orbit sum. These equalities on the orbit basis prove $\\lambda_{N,C}I_p(h)=h^{(p)}\\lambda_{M,B}$, with $h^{(p)}$ the base-changed map of [def-weil-module-base-change].",
+   "uses": [
+    "lem-sfb-finite-tensor-product-basis-coordinates",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, invariant-tensor arrow before Definition 11.39; agent-written coordinate verification of the linear algebra implicit there."
+   }
+  },
+  {
+   "text": "In step 4 take $N=M$ and $h=\\mathrm{id}_M$, choosing any second basis $C$ of the same space. Both $I_p(h)$ and $h^{(p)}$ are identity maps, so that equality says $\\lambda_{M,C}=\\lambda_{M,B}$. Hence $\\lambda_M$ is independent of the basis; step 4 is its required naturality. Notice that no spanning claim for the pure powers $m^{\\otimes p}$ is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, invariant-tensor arrow before Definition 11.39; agent-written coordinate verification of the linear algebra implicit there."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-finite-tensor-product-basis-coordinates] for two factors to give $M\\otimes N$ the basis $B\\times C$, and also to give $M^{(p)}\\otimes N^{(p)}$ the basis $(b\\otimes1)\\otimes(c\\otimes1)$. By [lem-weil-pbc-free-module-base-change-free], $(b\\otimes c)\\otimes1$ is a basis of $(M\\otimes N)^{(p)}$. The base-changed bilinear tensor map from [def-weil-module-base-change] therefore induces the isomorphism $\\kappa$ sending the first displayed basis to the second. Bilinearity gives exactly the formula with coefficient $ab$ in the statement. The interleaving map $\\tau$ is defined on pure tensors by pairing the factors; tensor universality [def-weil-pbc-module-tensor-product] also constructs its inverse by unpairing. For each permutation $g$, $g\\tau(x\\otimes y)=\\tau(gx\\otimes gy)$ by evaluating on pure tensors. Thus $\\tau(x\\otimes y)$ is invariant when $x,y$ are invariant.",
+   "uses": [
+    "lem-sfb-finite-tensor-product-basis-coordinates",
+    "lem-weil-pbc-free-module-base-change-free",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, invariant-tensor arrow before Definition 11.39; agent-written coordinate verification of the linear algebra implicit there."
+   }
+  },
+  {
+   "text": "Write the word coefficients of $x$ and $y$ in the tensor bases from [lem-sfb-finite-tensor-product-basis-coordinates] as $x_{i_1,\\ldots,i_p}$ and $y_{j_1,\\ldots,j_p}$. The coefficient of the paired word $((i_1,j_1),\\ldots,(i_p,j_p))$ in $\\tau(x\\otimes y)$ is their product, by bilinearity. In particular its constant-word coefficient at $(b,c)$ is $x_{b,\\ldots,b}y_{c,\\ldots,c}$. The formula of step 3 therefore makes both sides of the requested tensor identity equal to the same finite sum $\\sum_{b,c}x_{b,\\ldots,b}y_{c,\\ldots,c}((b\\otimes c)\\otimes1)$. Finally take the basis $\\{1\\}$ of $k$: the definition gives $\\lambda_k(1^{\\otimes p})=1\\otimes1$. The balanced map $a\\otimes c\\mapsto a^pc$ is inverse to $c\\mapsto1\\otimes c$, since $a\\otimes c=1\\otimes a^pc$; it sends that value to $1$.",
+   "uses": [
+    "lem-sfb-finite-tensor-product-basis-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 11(i), printed p.224, invariant-tensor arrow before Definition 11.39; agent-written coordinate verification of the linear algebra implicit there."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-free",
+  "lem-sfb-finite-tensor-product-basis-coordinates",
+  "def-weil-ring-frobenius",
+  "lem-weil-pbc-free-module-base-change-free",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 11(i), printed p.224, invariant-tensor arrow before Definition 11.39; agent-written coordinate verification of the linear algebra implicit there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "symmetricPower|symmetric.*tensor|dividedPower|orbitSum|orbit_sum",
+   "results": "25 hits: Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Coinvariant SymmetricPower and ordinary Frobenius do not state the invariant-tensor projection or its natural tensor compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius twist is a quotient of symmetric invariant tensors in characteristic p by the nonconstant permutation orbit sums",
+   "results": "8 hits: frobenius, LinearMap.frobenius, SymmetricPower.tprod_equiv, SymmetricPower, SymmetricPower.Rel.perm, iterateFrobeniusEquiv_one, frobeniusEquiv_symm_apply_frobenius, frobeniusEquiv_symm_pow",
+   "date": "2026-10-24",
+   "verdict": "no match: Coinvariant SymmetricPower and ordinary Frobenius do not state the invariant-tensor projection or its natural tensor compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorPower\", \"frobenius\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: Coinvariant SymmetricPower and ordinary Frobenius do not state the invariant-tensor projection or its natural tensor compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a vector space in characteristic p the symmetric invariant p-fold tensor power has a natural Frobenius-twisted diagonal projection killing nonconstant orbit sums compatible with tensor products",
+   "results": "8 hits: SymmetricPower.mk, SymmetricPower.Rel, SymmetricPower.tprod, SymmetricPower.smul', TensorProduct.termSym[_]^__, SymmetricPower, Action.diagonalSuccIsoTensorDiagonal_hom_hom, SymmetricPower.smul",
+   "date": "2026-10-24",
+   "verdict": "no match: Coinvariant SymmetricPower and ordinary Frobenius do not state the invariant-tensor projection or its natural tensor compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|invariant|orbit",
+   "results": "0 hits: ; searched Mathlib/LinearAlgebra/TensorPower",
+   "date": "2026-10-24",
+   "verdict": "no match: Coinvariant SymmetricPower and ordinary Frobenius do not state the invariant-tensor projection or its natural tensor compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal-coefficient map from symmetric invariant tensors of degree p to the Frobenius twist is independent of the vector space basis and is natural and compatible with tensor products",
+   "results": "8 hits: SymmetricPower.mk, Rep.diagonalSuccIsoTensorTrivial_hom_hom_single, Action.diagonalSuccIsoTensorDiagonal_hom_hom, Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_left, TensorPower.cast_eq_cast, SymmetricPower.tprod, Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_single, Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_right",
+   "date": "2026-10-24",
+   "verdict": "no match: Coinvariant SymmetricPower and ordinary Frobenius do not state the invariant-tensor projection or its natural tensor compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The symmetric invariant pth tensor power in characteristic p has a natural Frobenius twisted diagonal coefficient projection killing nonconstant permutation orbit sums",
+   "results": "8 hits: Perfection.coeff_frobeniusEquiv_symm, Perfection.coeff_iterate_frobeniusEquiv_symm, SymmetricPower.smul', IsPurelyInseparable.iterateFrobeniusₛₗ, Perfection.coeff_frobenius, SymmetricPower.tprod, Perfection.coeff_iterate_frobenius, Perfection.coeff_iterate_frobenius'",
+   "date": "2026-10-24",
+   "verdict": "no match: Frobenius and tensor-power operations occur, but none states this natural projection on invariant tensors with its basis and tensor identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural map from degree p invariant tensors to the Frobenius base change vector space is basis independent and multiplicative under interleaving tensor factors",
+   "results": "8 hits: isBaseChange_tensorProduct_map, LinearMap.toMvPolynomial_baseChange, LinearMap.polyCharpolyAux_baseChange, IsBaseChange.linearMapRightBaseChangeHom, PolynomialLaw.toFun_eq_rTensor_φ_toFun', LinearMap.tensorProductEnd_apply, Module.End.baseChangeHom_apply_apply, IsBaseChange.finitePow",
+   "date": "2026-10-24",
+   "verdict": "no match: Frobenius and tensor-power operations occur, but none states this natural projection on invariant tensors with its basis and tensor identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "invariant tensor power Frobenius twist natural projection",
+   "results": "8 hits: LinearMap.frobenius, exteriorPower.toTensorPower, TensorProduct.map_pow, TensorPower.cast_tprod, LinearMap.iterateFrobenius, iterate_frobeniusEquiv_symm_pow_p_pow, PiTensorProduct.mapL_pow, LinearEquiv.rTensor_pow",
+   "date": "2026-10-24",
+   "verdict": "no match: Frobenius and tensor-power operations occur, but none states this natural projection on invariant tensors with its basis and tensor identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorPower\", \"frobenius\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: Frobenius and tensor-power operations occur, but none states this natural projection on invariant tensors with its basis and tensor identities."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|orbit|invariant",
+   "results": "0 hits: ; directory LinearAlgebra/TensorPower",
+   "date": "2026-10-24",
+   "verdict": "no match: Frobenius and tensor-power operations occur, but none states this natural projection on invariant tensors with its basis and tensor identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-group-frobenius-verschiebung",
+  "date": "2026-10-24",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Definition 11.39 and Proposition 11.40(a), printed pp.224-225: canonical Verschiebung construction and the identity V composed with F equals multiplication by p. Linear algebra of the invariant-tensor arrow lambda in Milne Definition 11.39, before applying iterated comultiplication.",
+   "via": [
+    "lem-sfb-affine-group-frobenius-verschiebung",
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symmetric-invariant-frobenius-projection",
+  "worker": "stage1",
+  "summary": "Proved the orbit basis by finite-support coordinates, the prime divisibility of nonconstant orbit sizes by double counting, and all projection identities by explicit diagonal coefficients. One new Mathlib leaf supplies finite tensor bases and coordinates with arbitrary index sets. Reused the existing scalar-extension basis and vector-space-basis leaves. Statement and original statement dependencies unchanged.",
+  "blueprint": "Makes precise the invariant-tensor arrow lambda before Milne Definition 11.39, on the inherited chain below det-thm-sf-ctf-stability-direct-images proof (3). The latest blueprint keeps this within the direct-image preservation route; no chapter or unit step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-c694a750a",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-c694a750a (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new leaf and every cited statement. The item's statement and stmt_deps are byte-identical to the Q43 snapshot. The citer lem-sfb-affine-group-frobenius-verschiebung still gets every clause it uses: orbit basis, basis independence, naturality, κ-compatibility and the unit clause. Source checked: Milne iAG2017 §11(i), printed pp.224-225. Milne's λ_A sends x(a⊗…⊗a) to a⊗x. The item's λ(b^{⊗p})=b⊗1, killing nonconstant orbit sums, agrees with this, since m^{⊗p}=Σ_O(∏a)s_O gives m⊗1. The convention (am)⊗c=m⊗a^pc is the balancing in def-weil-module-base-change for σ. Step 1: the orbit basis comes from the word basis of the new leaf; it holds with finite support, finite disjoint orbits and infinite B. Step 2: double counting gives r|O|=pa with 0<r<p, so p divides |O|; this is genuinely elementary. Step 3: the base-change basis (b⊗1) and the formula λ(z)=Σ z_{b^p}(b⊗1). Step 4: the coefficient of c_j^{⊗p} in h^{⊗p}(s_O) is |O|∏h; it is 0 for nonconstant orbits and h_ji^p for b_i^p, giving Σ_j h_ji^p(c_j⊗1)=h(b_i)⊗1. Step 5: h=id with two bases gives independence and is not circular. Step 6: κ is built from the bilinear β_A clause and sends basis to basis; τ is invariant. Step 7: constant paired-word coefficients give the identity, and the unit clause is 1⊗1↦1. New leaf lem-sfb-finite-tensor-product-basis-coordinates: I read Mathlib PiTensorProduct/Basis.lean l.33, 42 and 49. It is an exact match with [Finite ι], arbitrary basis index types and the empty-J case. It is not a duplicate: lem-sc-tensor-product-free-basis needs finite bases, and lem-sfb-tensor-word-basis is about the tensor algebra. It is not a clause of the parent. Small cases tested: p=2 with a basis change b'=b+c, M=0, M=k, k=F_p(t), and nonconstant s_O⊗c^p in the product clause. Advisory only: the finite tensor ⊗_j and M^{⊗p} cite the binary tensor definition, a convention the item's base statement already uses. No SGA source is used, there are no tool_uses and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.SymmetricInvariantFrobeniusProjection",
+  "declaration": "SymmetricInvariantFrobenius.symmetric_invariant_frobenius_projection",
+  "declarations": [
+   "SymmetricInvariantFrobenius.projectionForBasis",
+   "SymmetricInvariantFrobenius.twistMap",
+   "SymmetricInvariantFrobenius.tensorComparison",
+   "SymmetricInvariantFrobenius.projection",
+   "SymmetricInvariantFrobenius.symmetric_invariant_frobenius_projection"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/SymmetricInvariantFrobeniusProjection.lean",
+  "statement": "theorem symmetric_invariant_frobenius_projection (M : Type v) (N : Type w) [AddCommGroup M] [Module k M] [AddCommGroup N] [Module k N] : (∀ (J : Type j) (B : Module.Basis J k M), ∃ OB : Module.Basis (Set.range (fun t : Fin p → J ↦ Finset.univ.image (fun e : Equiv.Perm (Fin p) ↦ t ∘ e))) k (↥(⨅ e : Equiv.Perm (Fin p), ((PiTensorProduct.reindex k (fun _ : Fin p ↦ M) e).toLinearMap).fixedSubmodule)), ∀ t, (OB ⟨Finset.univ.image (fun e : Equiv.Perm (Fin p) ↦ t ∘ e), Set.mem_range_self t⟩).val = ∑ s ∈ Finset.univ.image (fun e : Equiv.Perm (Fin p) ↦ t ∘ e), PiTensorProduct.tprod k (fun i ↦ B (s i))) ∧ (∀ (J : Type j) (B : Module.Basis J k M) (t : Fin p → J), ((∀ i, t i = t ⟨0, (Fact.out : p.Prime).pos⟩) → projectionForBasis k p B (∑ s ∈ Finset.univ.image (fun e : Equiv.Perm (Fin p) ↦ t ∘ e), PiTensorProduct.tprod k (fun i ↦ B (s i))) = (1 : k) ⊗ₜ[k, frobenius k p] B (t ⟨0, (Fact.out : p.Prime).pos⟩)) ∧ ((¬ ∀ i, t i = t ⟨0, (Fact.out : p.Prime).pos⟩) → projectionForBasis k p B (∑ s ∈ Finset.univ.image (fun e : Equiv.Perm (Fin p) ↦ t ∘ e), PiTensorProduct.tprod k (fun i ↦ B (s i))) = 0)) ∧ (∀ (J : Type j) (B : Module.Basis J k M) (x : ⨂[k] (_ : Fin p), M), (∀ e : Equiv.Perm (Fin p), PiTensorProduct.reindex k (fun _ : Fin p ↦ M) e x = x) → projectionForBasis k p B x = projection k p M x) ∧ (∀ (h : M →ₗ[k] N) (x : ⨂[k] (_ : Fin p), M), (∀ e : Equiv.Perm (Fin p), PiTensorProduct.reindex k (fun _ : Fin p ↦ M) e x = x) → (∀ e : Equiv.Perm (Fin p), PiTensorProduct.reindex k (fun _ : Fin p ↦ N) e (PiTensorProduct.map (fun _ : Fin p ↦ h) x) = PiTensorProduct.map (fun _ : Fin p ↦ h) x) ∧ projection k p N (PiTensorProduct.map (fun _ : Fin p ↦ h) x) = twistMap k p h (projection k p M x)) ∧ (∀ (x : ⨂[k] (_ : Fin p), M) (y : ⨂[k] (_ : Fin p), N), (∀ e : Equiv.Perm (Fin p), PiTensorProduct.reindex k (fun _ : Fin p ↦ M) e x = x) → (∀ e : Equiv.Perm (Fin p), PiTensorProduct.reindex k (fun _ : Fin p ↦ N) e y = y) → (∀ e : Equiv.Perm (Fin p), PiTensorProduct.reindex k (fun _ : Fin p ↦ M ⊗[k] N) e (PiTensorProduct.map₂ (fun _ : Fin p ↦ TensorProduct.mk k M N) x y) = PiTensorProduct.map₂ (fun _ : Fin p ↦ TensorProduct.mk k M N) x y) ∧ projection k p (M ⊗[k] N) (PiTensorProduct.map₂ (fun _ : Fin p ↦ TensorProduct.mk k M N) x y) = tensorComparison k p M N (projection k p M x ⊗ₜ[k] projection k p N y)) ∧ (Functor.Monoidal.εIso (ModuleCat.extendScalars (frobenius k p))).inv (projection k p k (PiTensorProduct.tprod k (fun _ : Fin p ↦ (1 : k)))) = 1",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1b3a56b9",
+  "group": "NE",
+  "result": "pass",
+  "note": "Snapshot node = live node except new lean field; lean.statement verbatim in file. Six conjuncts match node: orbit-sum basis of ⨅ fixedSubmodule(reindex e) indexed by distinct orbit finsets; projectionForBasis on constant/nonconstant orbit sums (1⊗B t0 / 0); basis independence on invariants vs ofVectorSpace projection; naturality incl. invariance of map h x with twistMap = LinearMap.baseChange along frobenius; τ = map₂ TensorProduct.mk with paired invariance, κ = distribBaseChange.symm ((a⊗m)⊗(b⊗n)↦ab⊗(m⊗n)); unit clause via εIso.inv = AlgebraTensorModule.rid (Adjunction.lean:81), c⊗a↦a^p c, true for any basis of k. Hypotheses: Field k, Fact p.Prime, CharP k p (= char p>0), no finiteness, independent universes u v w j. Edge cases M=0/empty J, infinite bases, p=2, imperfect k fine. Helpers have real data, source+blueprint docstrings, sorry-only proof, report sections present. Notes: inline Mathlib frobenius (def-weil-ring-frobenius not a stmt_dep); PiTensorProduct under binary-tensor citation (advisory). No compile run (no file changed)."
+ }
+}

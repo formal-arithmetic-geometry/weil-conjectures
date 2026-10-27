@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-contracted-prime-tensor-comparison",
+ "kind": "statement",
+ "title": "Natural tensor comparison at an algebra prime and its contracted base prime",
+ "statement": "Let $\\varphi:R\\to A$ be a homomorphism of commutative rings, let $\\mathfrak q\\in\\operatorname{Spec}A$, and put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Localizations and spectra are [def-weil-pbc-module-localization] and [def-weil-affine-spectrum], and tensor products are [def-weil-pbc-module-tensor-product]. For an $A$-module $P$ and an $R$-module $N$, give $P_{\\mathfrak q}$ its $R_{\\mathfrak p}$-action through the canonical ring map $R_{\\mathfrak p}\\to A_{\\mathfrak q}$, $r/t\\mapsto\\varphi(r)/\\varphi(t)$. There are canonical $A_{\\mathfrak q}$-linear isomorphisms\n$$\\alpha_{P,N}:(P\\otimes_R N)_{\\mathfrak q}\\xrightarrow{\\sim}P_{\\mathfrak q}\\otimes_R N,\\qquad (x\\otimes n)/s\\longmapsto(x/s)\\otimes n,$$\n$$\\beta_{P,N}:P_{\\mathfrak q}\\otimes_R N\\xrightarrow{\\sim}P_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}N_{\\mathfrak p},\\qquad z\\otimes n\\longmapsto z\\otimes(n/1).$$\nWrite $c_{P,N}=\\beta_{P,N}\\alpha_{P,N}$. For every $A$-linear map $v:P\\to P'$, these isomorphisms satisfy\n$$c_{P',N}\\circ(v\\otimes_R1_N)_{\\mathfrak q}=(v_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}1_{N_{\\mathfrak p}})\\circ c_{P,N}.$$\nIf $N$ already has an $R_{\\mathfrak p}$-module structure restricting to its given $R$-action, then $N\\to N_{\\mathfrak p}$, $n\\mapsto n/1$, is an $R_{\\mathfrak p}$-linear isomorphism with inverse $n/t\\mapsto t^{-1}n$; composing $c_{P,N}$ with this inverse on the second tensor factor identifies $(v\\otimes_R1_N)_{\\mathfrak q}$ with $v_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}1_N$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof: the displayed two tensor identities, their compatibility with the module map, and the following sentence N_p = N"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=A\\setminus\\mathfrak q$ and $S=R\\setminus\\mathfrak p$. The inverse image $\\mathfrak p$ is prime: $1\\notin\\mathfrak p$, and $ab\\in\\mathfrak p$ implies $\\varphi(a)\\varphi(b)\\in\\mathfrak q$, hence $a\\in\\mathfrak p$ or $b\\in\\mathfrak p$. Thus $S,T$ are multiplicative and $\\varphi(S)\\subset T$. The fraction relation of [def-weil-pbc-module-localization], applied to the rings themselves, makes $r/t\\mapsto\\varphi(r)/\\varphi(t)$ well defined: an equality witnessed by $u\\in S$ maps to an equality witnessed by $\\varphi(u)\\in T$. The sum and product formulas show that this is a unital ring map $R_{\\mathfrak p}\\to A_{\\mathfrak q}$; restriction of the $A_{\\mathfrak q}$-action gives the asserted $R_{\\mathfrak p}$-action on $P_{\\mathfrak q}$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof, displayed tensor identities and N_p = N; expanded using Tags 00DK and 00DL"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] to $R\\to A$, $T$, $M=P$, and $N$. It gives the $A$-linear isomorphism $\\alpha_{P,N}$ with the required formula. It is $A_{\\mathfrak q}$-linear as well: an $A$-linear map between $A_{\\mathfrak q}$-modules commutes with multiplication by $s\\in T$ and therefore with its inverse (apply the map to $s(s^{-1}w)=w$). It consequently commutes with every scalar $a/s$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof, displayed tensor identities and N_p = N; expanded using Tags 00DK and 00DL"
+   }
+  },
+  {
+   "text": "Use the localization criterion stated in [lem-weil-pbc-localization-tensor-product]. The identity $P_{\\mathfrak q}\\to P_{\\mathfrak q}$ is a localization at $S$: every $t\\in S$ acts invertibly via $\\varphi(t)/1$, every element is already an identity image with denominator $1$, and equality of identity images is witnessed by $1\\in S$. The map $N\\to N_{\\mathfrak p}$ is a localization at $S$ by [def-weil-pbc-module-localization]. Apply the cited tensor theorem with its ring $A=R_{\\mathfrak p}$, its first pair $M=M'=P_{\\mathfrak q}$, and its second pair $N,N'=N_{\\mathfrak p}$. It says that the $R$-linear map $\\beta:z\\otimes n\\mapsto z\\otimes(n/1)$ is a localization at $S$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof, displayed tensor identities and N_p = N; expanded using Tags 00DK and 00DL"
+   }
+  },
+  {
+   "text": "Write $X=P_{\\mathfrak q}\\otimes_RN$ and $Y=P_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}N_{\\mathfrak p}$. For $t\\in S$, multiplication by $t$ on $X$ has inverse $z\\otimes n\\mapsto(t^{-1}z)\\otimes n$; this map exists by the tensor universal property [def-weil-pbc-module-tensor-product], since multiplication by $t^{-1}$ on $P_{\\mathfrak q}$ is $R$-linear. The localization criterion [lem-weil-pbc-localization-tensor-product] now makes $\\beta$ bijective. Indeed, if $\\beta(x)=\\beta(x')$, some $t\\in S$ kills $x-x'$, so $x=x'$. Every $y\\in Y$ is $t^{-1}\\beta(x)=\\beta(t^{-1}x)$, so it is in the image. Finally, the formula $\\beta(az\\otimes n)=az\\otimes(n/1)=a\\beta(z\\otimes n)$ for $a\\in A_{\\mathfrak q}$ proves $A_{\\mathfrak q}$-linearity on generators, hence everywhere. This is the required isomorphism $\\beta_{P,N}$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof, displayed tensor identities and N_p = N; expanded using Tags 00DK and 00DL"
+   }
+  },
+  {
+   "text": "For an $A$-linear $v:P\\to P'$, both sides of the claimed naturality identity send $(x\\otimes n)/s$ to $(v(x)/s)\\otimes(n/1)$, using the formulas for $\\alpha,\\beta$ and localized maps [def-weil-pbc-module-localization]. These pure fractions generate: write any tensor numerator as a finite sum of pure tensors [def-weil-pbc-module-tensor-product] and divide the sum by its common denominator $s$. Equality on these generators proves the identity for $c_{P,N}=\\beta_{P,N}\\alpha_{P,N}$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof, displayed tensor identities and N_p = N; expanded using Tags 00DK and 00DL"
+   }
+  },
+  {
+   "text": "If $N$ is already an $R_{\\mathfrak p}$-module with the prescribed restriction, put $\\delta(n/t)=t^{-1}n$. This is well defined by the fraction relation [def-weil-pbc-module-localization]: $u(t'n-tn')=0$ implies $t'n=tn'$ since $u$ acts invertibly, and then $t^{-1}n=(t')^{-1}n'$. The fraction addition and scalar formulas make $\\delta$ $R_{\\mathfrak p}$-linear. The unit $\\eta(n)=n/1$ is also $R_{\\mathfrak p}$-linear because it commutes with $R$ and with inverses of multiplication by $t\\in S$. We have $\\delta\\eta(n)=n$ and $\\eta\\delta(n/t)=n/t$, the latter after multiplying by the invertible $t$. Compose $c$ with $1\\otimes\\delta$. Both composites with the maps induced by $v$ send $(x\\otimes n)/s$ to $(v(x)/s)\\otimes n$, proving the final identification on the generators from Step 5.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof, displayed tensor identities and N_p = N; expanded using Tags 00DK and 00DL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof, displayed tensor identities and N_p = N; expanded using Tags 00DK and 00DL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "moduleTensorEquiv|map_lTensor|map_rTensor|rTensor",
+   "results": "{\"t\": \"2026-10-22T06:41:26Z\", \"tool\": \"grep\", \"query\": \"moduleTensorEquiv|map_lTensor|map_rTensor|rTensor\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\"], \"digest\": \"2c448d6128d58720\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: BaseChange.lean:244 gives the first localization comparison and :132 compares tensors of two already localized-base modules, but neither gives the contracted-prime comparison for an arbitrary R-module N, its normalization and naturality in the A-module, or the N_p = N specialization. These require constructing and composing comparisons; not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.moduleTensorEquiv",
+   "results": "{\"t\": \"2026-10-22T06:41:27Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.moduleTensorEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalization.moduleTensorEquiv\"], \"digest\": \"098a61b8533ec592\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: BaseChange.lean:244 gives the first localization comparison and :132 compares tensors of two already localized-base modules, but neither gives the contracted-prime comparison for an arbitrary R-module N, its normalization and naturality in the A-module, or the N_p = N specialization. These require constructing and composing comparisons; not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of tensor products at an algebra prime equals tensor over the base localized at its contracted prime naturally in the algebra module",
+   "results": "{\"t\": \"2026-10-22T06:41:27Z\", \"tool\": \"leansearch\", \"query\": \"Localization of tensor products at an algebra prime equals tensor over the base localized at its contracted prime naturally in the algebra module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalizedModule.rTensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalization.tensor\", \"IsLocalization.moduleLid\", \"IsLocalization.mk'_tmul\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\"], \"digest\": \"6558d2c27266eb85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: BaseChange.lean:244 gives the first localization comparison and :132 compares tensors of two already localized-base modules, but neither gives the contracted-prime comparison for an arbitrary R-module N, its normalization and naturality in the A-module, or the N_p = N specialization. These require constructing and composing comparisons; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the tensor product of an algebra module and a base module at a prime of the algebra is naturally the tensor product over the base localized at the contracted prime, compatible with linear maps",
+   "results": "{\"t\": \"2026-10-22T06:41:38Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of the tensor product of an algebra module and a base module at a prime of the algebra is naturally the tensor product over the base localized at the contracted prime, compatible with linear maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.rTensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.moduleTensorEquiv\", \"IsLocalization.Away.tensorEquiv\", \"IsLocalizedModule.map_lTensor\", \"IsLocalization.Away.tensorRightEquiv\"], \"digest\": \"3489d5b068b6d293\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: BaseChange.lean:244 gives the first localization comparison and :132 compares tensors of two already localized-base modules, but neither gives the contracted-prime comparison for an arbitrary R-module N, its normalization and naturality in the A-module, or the N_p = N specialization. These require constructing and composing comparisons; not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.rTensor",
+   "results": "{\"t\": \"2026-10-22T06:42:08Z\", \"tool\": \"loogle\", \"query\": \"IsLocalizedModule.rTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsLocalizedModule.rTensor\", \"IsLocalizedModule.map_lTensor\"], \"digest\": \"d3471ce0e6e8a599\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: BaseChange.lean:244 gives the first localization comparison and :132 compares tensors of two already localized-base modules, but neither gives the contracted-prime comparison for an arbitrary R-module N, its normalization and naturality in the A-module, or the N_p = N specialization. These require constructing and composing comparisons; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical equivalence (M tensor_R N)_q = M_q tensor_{R_p} N_p for p the inverse image of q, natural in the A-module M; if N is an R_p-module then N_p is N",
+   "results": "{\"t\": \"2026-10-22T06:42:16Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical equivalence (M tensor_R N)_q = M_q tensor_{R_p} N_p for p the inverse image of q, natural in the A-module M; if N is an R_p-module then N_p is N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.moduleTensorEquiv\", \"IsLocalizedModule.rTensor\", \"IsLocalizedModule.map_lTensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.Away.tensor\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalization.tensor\"], \"digest\": \"2b0418b9967d6f40\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: BaseChange.lean:244 gives the first localization comparison and :132 compares tensors of two already localized-base modules, but neither gives the contracted-prime comparison for an arbitrary R-module N, its normalization and naturality in the A-module, or the N_p = N specialization. These require constructing and composing comparisons; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleTensorEquiv|IsLocalizedModule.rTensor|map_lTensor",
+   "results": "{\"t\": \"2026-10-23T09:48:02Z\", \"tool\": \"grep\", \"query\": \"moduleTensorEquiv|IsLocalizedModule.rTensor|map_lTensor\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\"], \"digest\": \"58cd97492d4dfd3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide tensor-localization ingredients, already represented by existing DAG Mathlib leaves; no single declaration or one-line specialization gives both contracted-prime comparisons, their A_q-linearity, naturality in P, and the already-localized N specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor localization at an algebra prime and its contracted base prime with naturality",
+   "results": "{\"t\": \"2026-10-23T09:48:03Z\", \"tool\": \"leansearch\", \"query\": \"Tensor localization at an algebra prime and its contracted base prime with naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.tensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.Away.tensorEquiv\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalization.tensorRight\", \"IsLocalization.isLocalization_atPrime_localization_atPrime\"], \"digest\": \"7224b117ca31d8de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide tensor-localization ingredients, already represented by existing DAG Mathlib leaves; no single declaration or one-line specialization gives both contracted-prime comparisons, their A_q-linearity, naturality in P, and the already-localized N specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.moduleTensorEquiv",
+   "results": "{\"t\": \"2026-10-23T09:48:03Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.moduleTensorEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalization.moduleTensorEquiv\"], \"digest\": \"098a61b8533ec592\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide tensor-localization ingredients, already represented by existing DAG Mathlib leaves; no single declaration or one-line specialization gives both contracted-prime comparisons, their A_q-linearity, naturality in P, and the already-localized N specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an algebra module tensor a base module at a prime is tensor over the base at the contracted prime, naturally in the algebra module",
+   "results": "{\"t\": \"2026-10-23T09:48:14Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of an algebra module tensor a base module at a prime is tensor over the base at the contracted prime, naturally in the algebra module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.tensorEquiv\", \"IsLocalizedModule.rTensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.Away.tensorRightEquiv\", \"IsLocalization.moduleTensorEquiv\", \"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\"], \"digest\": \"2c074d4f46408f11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide tensor-localization ingredients, already represented by existing DAG Mathlib leaves; no single declaration or one-line specialization gives both contracted-prime comparisons, their A_q-linearity, naturality in P, and the already-localized N specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map R to A and q over p, (P tensor_R N)_q is P_q tensor_R_p N_p, and N_p equals N if N is already an R_p module",
+   "results": "{\"t\": \"2026-10-23T09:49:11Z\", \"tool\": \"leanfinder\", \"query\": \"For a ring map R to A and q over p, (P tensor_R N)_q is P_q tensor_R_p N_p, and N_p equals N if N is already an R_p module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.map_lTensor\", \"IsLocalization.moduleTensorEquiv\", \"IsLocalizedModule.rTensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalization.Away.tensor\", \"IsLocalization.tensor\"], \"digest\": \"1fad3b69eb238480\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide tensor-localization ingredients, already represented by existing DAG Mathlib leaves; no single declaration or one-line specialization gives both contracted-prime comparisons, their A_q-linearity, naturality in P, and the already-localized N specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-universal-injective-check-stalks",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL. Supporting Stacks Tag 05CL: the displayed two tensor identities, their compatibility with the module map, and the following sentence N_p = N",
+   "via": [
+    "lem-trf-universal-injective-check-stalks",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-contracted-prime-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and expanded the two tensor identities of Stacks 05CL. Reused the existing general tensor-localization Mathlib leaves; proved invertibility of the second comparison from the explicit localization criterion, upgraded scalar linearity, checked naturality on pure fractions, and proved N_p = N by its explicit inverse. No new nodes.",
+  "blueprint": "Supplies the two tensor comparisons in Stacks 05CL on the existing semistable-alteration/flattening support chain beneath lem-trf-local-term-locality. The latest blueprint ancestor and unit were read; their current text no longer spells out this auxiliary algebra chain. This split preserves that imported support task and does not replace any unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-e3f014b93",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-e3f014b93 (reviewer sub-agent of L); spot-checked: Read the delivery in full. It is one commit changing only the item and its report, with 0 new nodes. Statement and stmt_deps are identical to live and side-live, where the item is still unsplit; there is no repair note and no supersession. Source check: Stacks algebra.tex Tag 05CL (lemma-universally-injective-check-stalks) proof, the two displayed identities and 'N_p = N'. The item states these as alpha and beta, adds naturality in P, and adds the N_p=N clause, with no added hypothesis. Step 1: R_p->A_q is well defined because a witness u maps to phi(u). Step 2: the over-base Mathlib leaf (IsLocalizedModule.rTensor, BaseChange:244) with M=P and T=A\\q gives alpha with the exact formula; A_q-linearity follows from inverse commutation. The leaf's naturality in N is correctly not used. Step 3: every hypothesis of the tensor-product leaf checked (R->R_p a localization; id on P_q a localization because phi(t)/1 is a unit; matching R-structures; N->N_p by the def), so beta is a localization at S. Step 4: t is invertible on P_q(x)_R N by the universal property, and (b)/(c) give bijectivity. Step 5: both sides of the square send (x(x)n)/s to (v(x)/s)(x)(n/1), and these elements generate. Step 6: delta(n/t)=t^{-1}n is well defined and R_p-linear and inverts eta. Edge cases: A=0 vacuous; Z->Z[x] at q=(x) with N=Z/2 gives 0 everywhere; Z/l at (l) and at (p), p != l; zero divisors. No duplicate found among the 05CL / contracted-prime neighbours. Citers fixed-tensor-kernel-stalk-criterion and universal-injective-check-stalks use exactly what the item states. Only Mathlib leaves and definitions are cited, so there is no route issue and no tool_uses. No SGA. coord/dag-sync.md is absent from the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ContractedPrimeTensorComparison",
+  "declaration": "LocalizedModule.contractedPrime_tensor_comparison",
+  "declarations": [
+   "LocalizedModule.ContractedPrimeTensorComparison",
+   "LocalizedModule.contractedPrime_tensor_comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/ContractedPrimeTensorComparison.lean",
+  "statement": "theorem contractedPrime_tensor_comparison (R : Type u) (A : Type v) (P : Type w) (P' : Type x) (N : Type y) [CommRing R] [CommRing A] [Algebra R A] [AddCommGroup P] [AddCommGroup P'] [AddCommGroup N] [Module A P] [Module A P'] [Module R P] [Module R P'] [Module R N] [IsScalarTower R A P] [IsScalarTower R A P'] (q : PrimeSpectrum A) : ContractedPrimeTensorComparison R A P P' N q",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The public proposition abbreviation expands the entire node with the canonical scalar structures inside its body. The theorem has no let binders. Alpha and beta for P and P′ are characterized by the prescribed pure-fraction formulas; the two naturality squares and the already-localized N specialization are included. No independent notion or dependency repair is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f102e913",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Only the item's lean record, module and report change; no new nodes or dependency repairs; not superseded. Checked clause by clause against the node and Stacks 05CL: α/α′ ((x⊗n)/s↦(x/s)⊗n) and β/β′ (z⊗n↦z⊗n/1) are A_q-linear isos pinned by their formulas; R_p-actions by restriction along localRingHom, as in the UniversalInjectiveCheckStalks sibling; naturality for all f:P→ₗ[A]P′ with (f⊗1)_q = LocalizedModule.map of AlgebraTensorModule.rTensor; N_p=N clause for any compatible [Module R_p N][IsScalarTower R R_p N], δ pinned by δ.symm n = n/1 and δ(n/t)=mk' 1 t • n, final square with δ.lTensor. No extra hypotheses, five independent universes, no instance clash on N_p. Edge cases: A=0, zero modules, ℤ→ℤ[X] at (X) with ℤ/2, zero divisors, field base. The Prop abbrev is the statement itself, not hollow; no file-local declarations; docstrings give source, blueprint id and the 6 proof steps; sorry only; lean.statement verbatim; report sections present. No compile run since nothing changed."
+ }
+}

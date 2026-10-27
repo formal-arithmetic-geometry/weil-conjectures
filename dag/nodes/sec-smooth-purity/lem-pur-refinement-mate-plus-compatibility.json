@@ -1,0 +1,171 @@
+{
+ "id": "lem-pur-refinement-mate-plus-compatibility",
+ "kind": "statement",
+ "title": "Bounded-below inclusion of the identity-normalized pro-etale proper/open mate",
+ "statement": "Let $\\Lambda$ be a finite commutative ring. Let $r:T_1\\to T_2$ be proper and let $j_1:X\\hookrightarrow T_1$, $j_2:X\\hookrightarrow T_2$ be quasi-compact open immersions with $j_1r=j_2$. Use the unbounded mate $\\gamma$ of [lem-sf-proper-open-projection-mate] and the bounded-below mate $\\gamma^+$ of [def-cbc-proetale-clopen-mate-data] for the square $(j_1,j_2,1_X,r)$. Write $d:R^+(1_X)_*\\cong 1$ for right-derived localization of the canonical sheaf direct-image identity, $c:R(1_X)_*\\cong1$ for the conjugate of the canonical identity pullback, $e_j:j_!^+\\iota\\cong\\iota j_!$ for the canonical exact-extension inclusion comparison, and $q_r:R_r^+\\iota\\cong\\iota R_r$ for rightDerivedFunctorPlusCompatibility. For every $K\\in D^+(X_{\\mathrm{proet}},\\Lambda)$, one has the equality of actual morphisms $j_{2!}(c_K^{-1})\\,\\gamma_{\\iota K}=e_{j_2,K}^{-1}\\,\\iota(j_{2!}^+(d_K^{-1})\\,\\gamma_K^+)\\,q_{r,j_{1!}^+K}\\,R_r(e_{j_1,K})$, with composites written in Lean order. All maps are the specified pro-etale ones. There is no etale-origin witness, no site comparison and no constructibility condition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence; canonical bounded-below inclusion calculation in Step 2 of lem-pur-pf-witnessed-mate-normalization; Stacks more-etale.tex, lemma-shriek-proper-and-open, and sites-cohomology.tex, remark-base-change."
+ },
+ "stmt_deps": [
+  "lem-sf-proper-open-projection-mate",
+  "def-cbc-proetale-clopen-mate-data",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact alpha inclusion comparison before taking mates, and the identity direct-image inclusion comparison for normalization.",
+   "uses": [
+    "lem-pur-refinement-alpha-plus-inclusion",
+    "lem-pur-identity-push-plus-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the included bounded-below counit using derivedAdjunctionPlus and restrictFullyFaithful. Naturality of the total-to-exact pullback comparison gives included_proper_counit. Apply the inverse proper-adjunction Hom equivalence to the two unnormalized mates. The mate counit identity, naturality of alpha, the included counit identities at the identity and at r, and the alpha inclusion identity identify their transposes. This proves refinement_mate_inclusion.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-refinement-alpha-plus-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace the inverse unbounded identity conjugate by the included bounded-below inverse normalization followed by identity-push inclusion. Apply functoriality and refinement_mate_inclusion. The exact extension inclusion comparisons are reflexive, giving precisely the target equation.",
+   "uses": [
+    "lem-pur-identity-push-plus-inclusion",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-refinement-alpha-plus-inclusion",
+  "lem-pur-identity-push-plus-inclusion",
+  "lem-sc-derived-adjunction-from-underived",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Original Steps 1–3; restriction of mates proved in Lean, with exact alpha localization isolated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded below derived adjunction mate compatibility inclusion unbounded derived category",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedη.congr_simp",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derivedε",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No matching proper/open inclusion identity: general derived-adjunction results or unrelated topological statements only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper open clopen mate bounded below inclusion canonical identity direct image comparison",
+   "results": {
+    "hits": 8,
+    "top": [
+     "TopologicalSpace.Clopens.coe_himp",
+     "Profinite.Nobeling.ι",
+     "TopologicalSpace.Opens.map_functor_eq",
+     "TopologicalSpace.Clopens.coe_toOpens",
+     "TopologicalSpace.Opens.adjunction_counit_app_self",
+     "TopologicalSpace.Opens.adjunction_counit_map_functor",
+     "ClopenUpperSet.instBoundedOrder",
+     "TopologicalSpace.CompactOpens.coe_toClopens"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No matching proper/open inclusion identity: general derived-adjunction results or unrelated topological statements only."
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*[Cc]ompat|[Cc]ompat.*mate",
+   "results": {
+    "hits": 6,
+    "top": [
+     "Mathlib/Topology/UniformSpace/ProdApproximation.lean",
+     "Mathlib/CategoryTheory/Sites/Precoverage/Subsheaf.lean",
+     "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+     "Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+     "Mathlib/CategoryTheory/Sites/Subsheaf.lean",
+     "Mathlib/CategoryTheory/Sites/Subsheaf.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No matching proper/open inclusion identity: general derived-adjunction results or unrelated topological statements only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityWitnessedMateNormalization",
+  "date": "2026-10-26",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Step 4, compactification independence: bounded-below inclusion normalization of the pro-etale proper/open refinement mate",
+   "via": [
+    "lem-pur-pf-witnessed-mate-normalization",
+    "lem-pur-pf-refinement-compatibility",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenRefinementMatePlusCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenRefinementMatePlusCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.properOpenRefinementMate_plus_compatibility",
+  "statement": "theorem properOpenRefinementMate_plus_compatibility\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X T₁ T₂ : Scheme.{u}} (r : T₁ ⟶ T₂) [IsProper r]\n    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂)\n    [IsOpenImmersion j₁] [IsOpenImmersion j₂] [QuasiCompact j₁] [QuasiCompact j₂]\n    (h : j₁ ≫ r = j₂)\n    (K : DerivedCategory.Plus\n      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :\n    let J₁ := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁\n    let J₂ := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₂\n    let R := lowerStar (ModuleCat.{u + 1} Λ) r\n    let d := Functor.rightDerivedFunctorPlusNatIso\n      (lowerStarId (ModuleCat.{u + 1} Λ) X) ≪≫\n        Functor.rightDerivedFunctorPlusIdIso _\n    J₂.mapDerivedCategory.map\n        (((conjugateIsoEquiv\n          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X))\n          Adjunction.id) (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).symm).inv.app\n            K.obj) ≫\n      (properOpenMate Λ j₁ (𝟙 X) r j₂\n        (h.trans (Category.id_comp j₂).symm)).app K.obj =\n    J₂.mapDerivedCategoryPlusCompatibility.inv.app K ≫\n      DerivedCategory.Plus.ι.map\n        (J₂.mapDerivedCategoryPlus.map (d.inv.app K) ≫\n          (cbcClopenMatePlus Λ j₁ j₂ (𝟙 X) r\n            (h.trans (Category.id_comp j₂).symm)).app K) ≫\n      R.rightDerivedFunctorPlusCompatibility.hom.app (J₁.mapDerivedCategoryPlus.obj K) ≫\n      R.rightDerivedFunctor.map (J₁.mapDerivedCategoryPlusCompatibility.hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261025T203648-L-2838662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261027T034723-L-3679000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

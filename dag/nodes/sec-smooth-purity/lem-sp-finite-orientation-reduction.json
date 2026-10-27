@@ -1,0 +1,311 @@
+{
+ "id": "lem-sp-finite-orientation-reduction",
+ "kind": "statement",
+ "title": "Coefficient-unit purity and reduction of finite diagonal orientations",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a smooth separated morphism of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Write $\\ell=u\\varpi_E^e$ with $u$ a unit and $e\\geq1$, and put $R_n=\\mathcal O_E/\\ell^n=A_{E,en}$ for $n\\geq1$. Use the ordinary derived categories of strict varying-coefficient towers [sk-def-sp-coefficient-towers, def-weil-abstract-derived-category], their uniform constructible finite-Tor full subcategories $\\mathcal C_T=\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ [sk-def-sp-normalized-towers], and ordinary derived tensor products [def-weil-derived-tensor]. Twists are [def-coefficient-twists-detailed], and $F_\\bullet=Rf_{!,\\bullet}\\dashv G_\\bullet=f^!_\\bullet$ with finite units, counits and evaluations is [det-sp-tower-gluing]. Put $\\mathbf1_{\\bullet,T}=(R_{n,T})_n$ and $\\omega_\\bullet=G_\\bullet\\mathbf1_{\\bullet,Y}$, so $\\omega_n=f^!_{R_n}R_{n,Y}$; pullback means levelwise finite derived pullback [def-weil-derived-pullback-tensor-hom].\n\nLet $a_n:R_{n,X}(d)[2d]\\xrightarrow{\\sim}\\omega_n$ be the inverse of the finite diagonal isomorphism [thm-pur-diagonal-dualizing-object] at index $en$. Let $\\gamma_{f,R_n}$ denote the specified inverse-diagonal-orientation/tensor-transpose map [def-pur-smooth-purity-map, def-pur-co-smoothness], using the compactification projection map [def-exchange-projection]. Under the tensor-unit identifications,\n$$\\theta_{f,R_{n,Y}}=1_{\\omega_n},\\qquad a_n=\\gamma_{f,R_n}(R_{n,Y}).$$\nThe orientation and purity comparison defined over $R_n$ by [det-sp-finite-general-ring] agree with these maps at index $en$. For every $1\\leq m\\leq n$, under canonical Tate reduction [det-sp-scalar-extension-functor],\n$$c_{n,m}(R_{n,Y})\\circ(a_n)_{R_m}=a_m.$$\nHere $(-)_{R_m}=-\\otimes^L_{R_n}R_m$ and $c_{n,m}$ is the coefficient comparison [det-sp-reduction-compatibilities]. This is the compatibility for the actual reduction maps of $\\omega_\\bullet$: these reduction maps are $c_{n,m}(R_{n,Y})$ under the finite evaluations of $G_\\bullet$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1), finite diagonal orientations, coefficient-unit tensor map and quotient compatibility; retained proof steps 1-2"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-pur-diagonal-dualizing-object",
+  "def-pur-smooth-purity-map",
+  "def-pur-co-smoothness",
+  "def-exchange-projection",
+  "det-sp-finite-general-ring",
+  "det-sp-scalar-extension-functor",
+  "det-sp-reduction-compatibilities"
+ ],
+ "proof": [
+  {
+   "text": "Since $\\ell=u\\varpi_E^e$ with $u$ invertible, $(\\ell^n)=(\\varpi_E^{en})$. Thus the quotient $R_n$ with its constant sheaf is canonically $A_{E,en}$. Apply [thm-pur-diagonal-dualizing-object] at the positive index $en$ to obtain $\\Pi_n:\\omega_n\\xrightarrow{\\sim}R_{n,X}(d)[2d]$ and set $a_n=\\Pi_n^{-1}$. All its scheme hypotheses hold: $f$ is smooth, separated, of finite type and pure dimension $d$, over the stipulated $k$. The coefficient unit $R_{n,Y}$ is a constant finite free rank-one sheaf, hence constructible, concentrated in degree zero and of Tor amplitude $[0,0]$: tensoring it with a degree-zero module sheaf gives that same sheaf. It is therefore an allowed input for the finite purity comparisons. For unit_tower_mem, identify evaluation of the actual sequence-site coefficient module with the regular finite coefficient module by evaluation_ring and transport along that ring equality. Exact evaluation commutes with the degree-zero single functor; levelComparison and the realization counit identify the inverse realization at every level with this single regular module. To prove its finite bounds, use the canonical intrinsic coefficient realization F. Its existing tensor comparison and essential surjectivity give F(1) isomorphic to 1: choose K with F(K) isomorphic to 1 and compose F(1) = F(1) tensor 1, the comparison with F(1 tensor K), and the left unitor of K. The fixed-scalar unit single is the comparison image of the constructible etale unit single. Exact homology comparison and the intrinsic constructibility equivalence transfer all its constructible cohomology sheaves. Its cohomology vanishes outside [0,0]; flatness of the unit gives fixed-scalar Tor amplitude [0,0], and intrinsic Tor-amplitude transport gives the same intrinsic bound. Finally transport these three properties across the finite-evaluation isomorphisms and use the single common pair of intervals [0,0] at every level. No normalization or invertibility of tower reductions enters membership.",
+   "uses": [
+    "thm-pur-diagonal-dualizing-object",
+    "lem-exc-intrinsic-realization-tensor-complex",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(1)-(2), finite orientation and tensor transpose"
+   }
+  },
+  {
+   "text": "For the specified ordinary-etale compact-support projection, apply the proved source-library theorem AlgebraicGeometry.Etale.projectionMap_rightUnitality (WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit). It says that projection at the tensor unit, followed by the pullback-unit comparison and right unitor, is the right unitor of compact support. Thus its inverse has the corresponding unit normalization. This uses the actual projection map underlying [def-pur-co-smoothness], without separately reproving its proper and open factors.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/ProjectionFormula/Unit.lean",
+    "place": "AlgebraicGeometry.Etale.projectionMap_rightUnitality"
+   }
+  },
+  {
+   "text": "Write F = Rf_!, G = f^!, U for the coefficient unit and omega = GU. Transpose the projection-unit identity of step 2 through F adjoint G. Adjunction.ext_of_comp_counit and map_projectionTensorMap_comp_counit identify the W-first tensor mate at U with omega tensor the pullback-unit hom followed by the right unitor. Naturality of braiding converts the coefficient-first smoothTensorDualityMap to the left unitor after the inverse pullback-unit comparison. Finally whisker exchange moves the inverse orientation past that comparison, and left-unitor naturality proves gamma(U) = alpha.inv. The private generic categorical helpers in the Lean module implement these equalities; no additional purity statement is assumed. For the comparison-origin single-complex unit, naturality of this tensor mate transports the identity along smoothPurityUnitIso. This gives smoothPurityEtaleTheta equal to the pullback-unit comparison followed by the left unitor. The specification of diagonalDualizingObject writes it as diagonalDualizingComparison followed by the comparison functor applied to its ordinary orientation. Expand smoothPurityTensorMapInPresentation and smoothPurityTheta, move that inverse orientation through the pullback and tensor comparison using naturality, cancel diagonalDualizingComparison.inv followed by .hom, and use left-unitor naturality. The remaining arrows are exactly the displayed sourceUnitIso followed by diagonalDualizingObject.inv, proving canonical_purity_at_unit without an additional purity assumption.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "def-pur-smooth-purity-map",
+    "thm-pur-diagonal-dualizing-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(1)-(2), finite orientation and tensor transpose"
+   }
+  },
+  {
+   "text": "The ring $R_n$ is finite and killed by $\\ell^n$. Clause (2) of [det-sp-finite-general-ring] identifies its scalar-extended orientation with the orientation obtained by the direct diagonal and deformation construction with $R_n$ coefficients, which is $\\Pi_n$ at the index $en$. Taking inverses gives precisely $a_n$. Clause (3) defines the general-ring purity map by this inverse orientation followed by the tensor transpose of the inverse compact-support projection and the same counit. These are the factors in step 3, so the general-ring and $A_{E,en}$ purity maps agree (also for general allowed $K$). No arbitrary isomorphism between the two dualizing objects is being selected. For uniformizer_purity_agreement, apply the already proved ordinaryGammaCoefficient from ReductionCompatibilities to the coefficient equivalence, the two displayed orientations and uniformizer_orientation_agreement. This general tensor-mate formula holds on every ordinary input K, so the stated bounded constructible finite-Tor hypothesis is not needed for this final formal substitution. Its tensor source is definitionally the published diagonalTwistEtale ordered line. The orientation agreement and the remaining tower clauses retain their recorded proofs to be formalized.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "det-sp-reduction-compatibilities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(1)-(2), finite orientation and tensor transpose"
+   }
+  },
+  {
+   "text": "Apply normalizedOrientation_scalar from lem-sp-finite-normalized-orientation-scalar to the actual quotient RingHom.ulift (SpTowerCalculus.quotient l E hmn), N=l^(n+1) and M=l^(m+1). Positivity follows from primality of l and M dividing N from m≤n. finiteGeneralRingPrimeSetting supplies N invertible on Y and X and M invertible on X. The two input normalization predicates and t are exactly the inputs of that generic theorem. Its complete factorization and square-pasting proof gives the displayed inverse-orientation equality without changing a coefficient map or root comparison.",
+   "uses": [
+    "lem-sp-finite-normalized-orientation-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sp-coefficient-unit-tower-normalized to the inverse section realization of the actual coefficient unit. The supplied identification of whole towers gives an isomorphism from K to this inverse realization, by composing the realization unit with the inverse functor applied to the identification. Naturality of the canonical reduction expresses its component on K as the component on that unit conjugated by the scalar-extended n-th evaluation and the inverse m-th evaluation of this isomorphism. Thus the actual input reduction is invertible. Levels.reduction from det-sp-tower-gluing identifies scalar extension of the n-th exceptional evaluation comparison followed by the coefficient mate and the finite right adjoint of the input reduction with the actual exceptional-output reduction followed by the m-th comparison. Postcompose this equality with the finite right adjoint of the inverse input reduction. Functoriality and the hom-inverse identity cancel the last two factors. This is exactly unit_tower_reduction, including the specified proof of input invertibility and actual coefficientMate.",
+   "uses": [
+    "lem-sp-coefficient-unit-tower-normalized",
+    "det-sp-tower-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(1) finite evaluations of the dualizing tower and (3) its reduction maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-pur-diagonal-dualizing-object",
+  "lem-exc-intrinsic-realization-tensor-complex",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "def-coef-semilinear-system-models",
+  "def-pur-co-smoothness",
+  "def-exchange-projection",
+  "def-pur-smooth-purity-map",
+  "det-sp-finite-general-ring",
+  "det-sp-reduction-compatibilities",
+  "lem-sp-finite-normalized-orientation-scalar",
+  "lem-sp-coefficient-unit-tower-normalized",
+  "det-sp-tower-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S7",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1)-(3); quotient orientation reduction specializes the proved generic finite-ring theorem, whose proof pastes diagonal and integrated closed-section scalar squares. The generic proof is in its own module to keep each file within 60 seconds. A direct structure cache keeps the concrete quotient statement compact, without changing its text or coefficient operations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagonal smooth purity orientation at the coefficient unit is the purity map and commutes with reduction of finite coefficient rings",
+   "results": "8 hit(s): Algebra.SubmersivePresentation.isStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, RingHom.IsStandardSmoothOfRelativeDimension.id. Hits concern standard smooth algebras, real orientations or compiler purity, not the diagonal sheaf orientation and its coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 hit(s): Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity. Hits concern standard smooth algebras, real orientations or compiler purity, not the diagonal sheaf orientation and its coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation.*reduction|purity.*coefficient",
+   "results": "0 hit(s): . Hits concern standard smooth algebras, real orientations or compiler purity, not the diagonal sheaf orientation and its coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth exceptional inverse image of the coefficient unit and canonical diagonal orientation under change of finite coefficients",
+   "results": "8 hit(s): mdifferentiableOn_symm_coordChangeL, instContMDiffInv₀OfTopWithTopENat, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, BumpCovering.coe_toSmoothPartitionOfUnity, Trivialization.contMDiffOn_symm. Hits concern standard smooth algebras, real orientations or compiler purity, not the diagonal sheaf orientation and its coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth exceptional inverse image of the coefficient unit and canonical diagonal orientation under change of finite coefficients",
+   "results": "8 hit(s): Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs, Orientation.volumeForm_map, Orientation.map_apply, ContMDiffFiberwiseLinear.locality_aux₂, ContMDiffFiberwiseLinear.locality_aux₁, Algebra.SubmersivePresentation.aevalDifferentialEquiv. Hits concern standard smooth algebras, real orientations or compiler purity, not the diagonal sheaf orientation and its coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagonal smooth purity orientation at the coefficient unit commutes with derived reduction of coefficient rings",
+   "results": "8 hit(s): Algebra.SubmersivePresentation.isStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, RingHom.IsStandardSmoothOfRelativeDimension.id, Algebra.IsStandardSmoothOfRelativeDimension.id. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation.*reduction|purity.*coefficient",
+   "results": "0 hit(s): . ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth exceptional inverse image of the constant coefficient sheaf and canonical diagonal orientation under change of finite coefficients",
+   "results": "8 hit(s): smoothSheaf.obj_eq, smoothSheaf, smoothSheafCommRing, smoothSheaf.coeFun, smoothSheafCommRing.coeFun, Trivialization.contMDiffOn_symm, smoothSheafCommRing.forgetStalk_inv_comp_eval_assoc, smoothSheafCommRing.ι_forgetStalk_hom_apply. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 hit(s): Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pullback tensor counit map evaluated at the unit equals the identity and smooth purity is compatible with scalar extension",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.monObjAsOverPullback_one, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.extendScalarsId_inv_app_apply, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-gamma",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (1), finite diagonal orientations, coefficient-unit tensor map and quotient compatibility; retained proof steps 1-2",
+   "via": [
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-finite-orientation-reduction",
+  "worker": "stage1",
+  "summary": "Q144 checked the finite coefficient indexing, wrote out the unit projection/counit transpose calculation, identified the general finite-ring diagonal orientation, specialized its coefficient square and evaluated the actual tower transitions. All non-elementary inputs are existing nodes; no new nodes or statement changes. Project source searches found no exact attachment.",
+  "blueprint": "Ancestor det-sp-integral-adjunction-bijection, Normalization and Purity paragraphs, via det-sp-tower-gamma; tower-geometric gamma proof (1) finite diagonal orientations, (2) tensor transpose evaluated at the unit, and (3) the coefficient square and actual tower reductions.",
+  "tool_uses": [
+   {
+    "node": "thm-pur-diagonal-dualizing-object",
+    "why": "The finite diagonal orientation explicitly invoked by the tower-geometric route."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "The specified compactification projection map whose unit component is evaluated."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic unit normalization of the counit-defined proper projection mate; it supplies the proper factor of the fixed compactification map, not a substitute purity route."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Canonical open-extension tensor isomorphism used in the fixed compactification projection composite."
+   },
+   {
+    "node": "def-pur-co-smoothness",
+    "why": "Definition of the canonical finite tensor transpose evaluated at the coefficient unit."
+   },
+   {
+    "node": "def-pur-smooth-purity-map",
+    "why": "Definition of the inverse-diagonal orientation/tensor-transpose purity map used by this route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pur-diagonal-dualizing-object",
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-pur-smooth-purity-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-327b6713c",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-327b6713c (reviewer sub-agent of L); spot-checked: S1 split with no new nodes. Item statement, stmt_deps and blueprint fields are unchanged; there is no re-split note and no SGA. Read against main-20261015 sk-prop-sp-tower-geometric-gamma.proof (1)-(3) and the citer det-sp-tower-gamma step 1. Step 1: R_n = A_{E,en} because (ℓ^n) = (ϖ^{en}); thm-pur-diagonal-dualizing-object applies at index en, and R_{n,Y} has Tor amplitude [0,0]. Step 2: def-exchange-projection PF = Rp_*(γ)∘π, where π is the α of lem-weil-pbc-ringed-projection-mate-exact, whose last clause gives α at the unit = 1; the open factor of lem-cbc-extension-zero at the unit is a direct computation. Step 3 (elementary): θ at the unit is the adjunct of ε_U, equal to 1 by the triangle identity, and γ = θ∘(1⊗Π^{-1})∘τ gives a_n. Step 4: det-sp-finite-general-ring (2) is the direct diagonal construction at A_{E,en}; (3) differs from def-pur-co-smoothness only by symmetry coherence. Step 5: det-sp-reduction-compatibilities (3) applies to the non-flat unital quotient, with Tate reduction from scalar-extension (3). Step 6: det-sp-tower-gluing (3) uses the same c_{n,m}; the unit tower (R_n, q_n) has the canonical identification as its reduction map. Edge cases checked: d = 0, m = n, e > 1, X = ∅. Worker tool_uses accepted. Advisory: the 'also for general K' remark in step 4 is not used. Maintainer note: Q95 delivered this item in parallel; land only one."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteOrientationReduction",
+  "declaration": "AlgebraicGeometry.ProEtale.SpFiniteOrientation.finite_orientation_reduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.setting",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.coefficient_ideal",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.coefficientEquiv",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.ordinaryOrientation",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.coefficient_unit_purity",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.sourceUnitIso",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.canonical_purity_at_unit",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.uniformizer_orientation_agreement",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.finite_orientation_reduction",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.uniformizer_purity_agreement",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.unit_tower_mem",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.unit_tower_reduction",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.towerCoefficientCommRing",
+   "AlgebraicGeometry.ProEtale.SpFiniteOrientation.quotientCoefficientCommRing"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteOrientationReduction.lean",
+  "statement": "theorem finite_orientation_reduction (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [QuasiCompact f] [LocallyOfFiniteType f] [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f] (m n : ℕ) (hmn : m ≤ n) (hN : ((l ^ (n + 1) : ℕ) : ULift.{u + 1} (SpTowerShriek.R l E n)) = 0) (hM : ((l ^ (m + 1) : ℕ) : ULift.{u + 1} (SpTowerShriek.R l E m)) = 0) (geometry : Etale.FiniteRingSectionDeformation.Geometry d (pullback.fst f f) (pullback.diagonal f)) (alphaN : Etale.dualizingComplex (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f ≅ Etale.FiniteSmoothPurity.line _ (l ^ (n + 1)) hN X d) (alphaM : Etale.dualizingComplex (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E m))) f ≅ Etale.FiniteSmoothPurity.line _ (l ^ (m + 1)) hM X d) (_hn : Etale.FiniteSmoothPurity.OrientationNormalized _ _ (pow_pos (Fact.out : l.Prime).pos _) hN f d geometry ((finiteGeneralRingPrimeSetting D l hl (n + 1) (Nat.succ_pos n)).diagonalExponent_isUnit (X ↘ Spec (.of D.k))) alphaN) (_hm : Etale.FiniteSmoothPurity.OrientationNormalized _ _ (pow_pos (Fact.out : l.Prime).pos _) hM f d geometry ((finiteGeneralRingPrimeSetting D l hl (m + 1) (Nat.succ_pos m)).diagonalExponent_isUnit (X ↘ Spec (.of D.k))) alphaM) (t : Etale.FiniteSmoothPurity.CoefficientLineComparison (RingHom.ulift (SpTowerCalculus.quotient l E hmn)) (l ^ (n + 1)) (l ^ (m + 1)) hN hM X) : (Etale.FiniteSmoothPurity.ordinaryScalar (RingHom.ulift (SpTowerCalculus.quotient l E hmn)) X).map alphaN.inv ≫ Etale.ExceptionalCoefficients.dualizingScalarMap (RingHom.ulift (SpTowerCalculus.quotient l E hmn)) f = (t.tensorPower d).hom ≫ alphaM.inv",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Positive coefficient exponent n+1. Companion statements cover the identity-induced uniformizer quotient equivalence, the actual coefficient-unit tensor mate, equality with the recorded canonical pro-etale purity map, direct/general-ring orientation and purity agreement, uniform coefficient-unit tower membership, and actual tower reductions. Ordinary-etale equations use precisely the canonical finite comparison presentations already supplied by the dependencies; orientation parameters are constrained by their recorded coordinate or diagonal/DNC normalization. E3 adds a direct cache of the ordinary lifted ell-power quotient commutative-ring structure; its local instance registration preserves all existing statement text and coefficient operations. S7 adds the direct quotient-ring structure cache with explicit prime and extension parameters; its local registration covers only the quotient-orientation comparison and preserves all existing statement text and coefficient operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a165fa93a",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read item node, report, module, and the decls of FiniteSmoothPurityMaps (gamma, OrientationNormalized), FiniteSmoothCoefficientArrows (CoefficientLineComparison pinned by roots_power/generators/derived_normalization; tensorPower), ExceptionalCoefficient* (dualizingScalarMap = mateMap counit transpose at 1 then unitIso), PurityDiagonalDualizingObject (diagonalDualizingObject .choose under exactly the binders of canonical_purity_at_unit), SmoothPurityTowerGluing (coefficientMate, Levels.reduction), Geometry (Prop consequences of smooth separated). All clauses rendered: R_n=A_{E,en} via quotEquivOfEq of ideal equality; theta at unit = lambda and gamma(1)=alpha.inv (order checked); pro-etale form ends in diagonalDualizingObject.inv; general-ring vs index-e(n+1) orientation and purity agreement; c∘(a_n)_{R_m}=Tate≫a_m in the right order; unit tower membership and reduction = coefficientMate with real IsIso content. Orientations pinned by OrientationNormalized/DiagonalOrientationNormalization; no free isos; extra binders are consequences; n means n+1 so 1<=m<=n. 4 real defs, 8 sorry theorems, docstrings with source and blueprint tags, statement verbatim, 12 decls present, only the item lean field changed, single S2 delivery. No recompile (no file changed). Advisories: étale mateMap vs pro-etale coefficientMate presentations of c_{n,m} not bridged (inherited from det-sp-reduction-compatibilities; consumer tower-gamma); owners not in stmt_deps reached via cited det-sp nodes; module docstring says blueprint/latest; self second reading; coefficient_ideal restates a conjunct of SmoothPurityTowerReductionTranspose."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T034742-L-3681791",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-stack-fppf-module-functors",
+ "kind": "definition",
+ "title": "All big fppf module sheaves and their canonical direct-image functors",
+ "statement": "Work in [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], let $\\mathcal C,\\mathcal D$ be categories fibred in groupoids over $\\mathit{Sch}/S$, and let $a:\\mathcal D\\to\\mathcal C$ be a functor over schemes [def-sfb-stable-pointed-moduli-groupoids]. Use the inherited big fppf sites, regular-function structure rings and their canonical common-universe lifts of [def-sfb-stack-quasi-coherent-algebra]. Let $\\operatorname{Mod}(\\mathcal C_{\\mathrm{fppf}})$ be all structure-module sheaves [def-weil-sheaf-of-modules-category], without cartesian or quasi-coherent conditions. Abelian sheafification exists in the common ambient universe, inverts exactly locally bijective maps, and induces Mathlib's abelian module-sheaf structure [def-weil-presheaf-modules-sheafification]. These module categories admit injective resolutions [def-sp-injective-resolutions]. Precomposition with $a$ preserves sheaves. The canonical identification of structure rings is induced by the equality of the projections to schemes; define $a^*$ by literal precomposition using this identification. Its right adjoint $a_*$ is characterized up to unique compatible natural isomorphism by the adjunction; on a test $y$ it is compatible sections on $\\mathcal D\\times_{\\mathcal C}(\\mathit{Sch}/V)$, with base-change restrictions and the regular-function action. The right adjoint is additive. Define $R^qa_*$ for $q\\in\\mathbf N$ by applying $a_*$ to an injective resolution and taking degree-$q$ cohomology. No algebraicity, representability, finiteness, flatness or quasi-coherence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06TP, 06TV, 06WE and 075G; inherited fppf ringed sites, compatible sections and direct-image functors."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module sheaves on a big fppf fibred groupoid site precomposition direct image right adjoint",
+   "results": "{\"t\": \"2026-10-24T13:10:42Z\", \"tool\": \"leansearch\", \"query\": \"Module sheaves on a big fppf fibred groupoid site precomposition direct image right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Sheaf.instIsRightAdjointSheafComposeOfHasWeakSheafify\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"CategoryTheory.Functor.sheafPushforwardContinuous\"], \"digest\": \"cd868e9bfc2ebace\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic site/module APIs only; reuse the existing fppf topology and structure ring, and supply their missing all-module direct-image interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduliFppf\"",
+   "results": "{\"t\": \"2026-10-24T13:10:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"moduliFppf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic site/module APIs only; reuse the existing fppf topology and structure ring, and supply their missing all-module direct-image interface."
+  },
+  {
+   "tool": "grep",
+   "query": "moduliFppf.*(Modules|DirectImage|Precomposition)",
+   "results": "{\"t\": \"2026-10-24T13:10:43Z\", \"tool\": \"grep\", \"query\": \"moduliFppf.*(Modules|DirectImage|Precomposition)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic site/module APIs only; reuse the existing fppf topology and structure ring, and supply their missing all-module direct-image interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l fppf.*(module functors|module sheaves) dag/nodes lean/WeilConjectures lean/Sheaf; blueprint_refs.py search fppf module",
+   "results": "Found the unstated lem-sfb-fibred-fppf-ringed-inverse-image and lem-sfb-fibred-site-functor-continuity, which assert exactness/topos properties, not a recorded all-module direct-image construction. StackQuasiCoherentAlgebra supplies topology and moduliModuleRings (reused). No blueprint node matched fppf module; no existing fppf module direct-image declaration.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition of the missing fppf interface. The etale interface is Q22 and is used separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Sheafified fibre-cohomology formula used to assemble the higher-direct-image comparison. Concrete ringed big-site, direct-image and resolution cohomology presheaf constructions needed to state this comparison. Fppf counterpart of the accepted Q22 big-etale module functor interface.",
+   "via": [
+    "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackFppfModuleFunctors",
+  "declaration": "CategoryTheory.moduliFppfHigherImage",
+  "declarations": [
+   "CategoryTheory.ModuliFppfModules",
+   "CategoryTheory.moduliFppf_hasSheafify",
+   "CategoryTheory.moduliFppf_wEqualsLocallyBijective",
+   "CategoryTheory.moduliFppf_abelian",
+   "CategoryTheory.moduliFppf_hasInjectiveResolutions",
+   "CategoryTheory.moduliFppf_continuous",
+   "CategoryTheory.moduliFppfPrecompositionRings",
+   "CategoryTheory.moduliFppfRingIso",
+   "CategoryTheory.moduliFppfPrecomposition",
+   "CategoryTheory.moduliFppfPrecomposition_isLeftAdjoint",
+   "CategoryTheory.moduliFppfDirectImage",
+   "CategoryTheory.moduliFppfDirectImage_additive",
+   "CategoryTheory.moduliFppfHigherImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackFppfModuleFunctors.lean",
+  "statement": "def moduliFppfHigherImage {S : Scheme.{u}} {D C : BasedCategory.{v, w} (Over S)} (hD : IsFibredInGroupoids D) (hC : IsFibredInGroupoids C) (a : BasedFunctor D C) (i : ℕ) : ModuliFppfModules D hD ⥤ ModuliFppfModules C hC",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2c35b26e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2c35b26e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Rebase of 4a1f (PASS) after Q22 def-sfb-stack-big-etale-module-functors landed via Q57: the Q22 copy is dropped. All three Lean modules (StackHigherImageFibreCohomology, StackFibreCohomology, StackFppfModuleFunctors), the item node and the new nodes def-sfb-stack-fibre-cohomology-presheaf/def-sfb-stack-fppf-module-functors are byte-identical to 4a1f. The snapshot Q22 node and live StackBigEtaleModuleFunctors.lean are identical to the carried copy; the base contains the owner, so no drop_nodes is needed. All other snapshot nodes match live; the item differs from live only in lean and stmt_deps; lean.statement is verbatim in its file for all three records; no live clash for the new nodes or names. Maths re-read vs Stacks 075G: tau et/fppf selectors, all module sheaves, arbitrary BasedFunctor, comma test fibre, sigma pinned for every I, e_y pinned for every I/J/augmentation-compatible t, scalar clause, NatIsos in M, independent universes, edge cases q=0/empty fibre/M=0/h=id. Defs are real data; only Prop obligations are sorried. Advisories: no explicit P^q restriction vs fibre base-change clause; some unused imports. No file changed, no compile."
+ }
+}

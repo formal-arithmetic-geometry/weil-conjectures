@@ -1,0 +1,239 @@
+{
+ "id": "lem-per-finite-torsion-free-free-embedding",
+ "kind": "statement",
+ "title": "Finite torsion-free modules over a domain embed into finite free modules",
+ "statement": "Let $R$ be a commutative integral domain and let $M$ be a finitely generated $R$-module [def-weil-finitely-generated-module]. Suppose $M$ is torsion free, meaning that $am=0$ with $0\\ne a\\in R$ implies $m=0$. Then there exist an integer $r\\geq0$ and an injective $R$-linear map $i:M\\to R^r$, where $R^r$ is the module of $r$-tuples with coordinatewise operations, including $R^0=0$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AUU (more-algebra-lemma-finite-torsion-free-submodule-free), torsion-free implies finite-free embedding; more-algebra.tex:4863-4884."
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=R\\setminus\\{0\\}$, a multiplicative subset since $R$ is a domain, and form $K=S^{-1}R$ and $V=S^{-1}M$ by [def-weil-pbc-module-localization]. For $M=R$ the fraction operations give the ring $K$: $(a/s)(b/t)=ab/(st)$ and $1=1/1$. The fraction equality criterion and cancellation in $R$ show $a/s=0$ exactly when $a=0$, hence $R\\to K$, $a\\mapsto a/1$, is injective and $1\\ne0$ in $K$. Each nonzero $a/s$ has inverse $s/a$, so $K$ is a field and $V$ is a $K$-vector space.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUU, more-algebra-lemma-finite-torsion-free-submodule-free, proof (more-algebra.tex:4870-4881)."
+   }
+  },
+  {
+   "text": "Let $j:M\\to V$ be $m\\mapsto m/1$. The kernel criterion in [def-weil-pbc-module-localization] says $j(m)=0$ implies $um=0$ for some $u\\in S$. Torsion freeness gives $m=0$, so $j$ is injective. Choose generators $x_1,\\ldots,x_n$ by [def-weil-finitely-generated-module]. If $m=\\sum_i c_i x_i$ with $c_i\\in R$, then $m/s=\\sum_i(c_i/s)j(x_i)$. Thus the finitely many $j(x_i)$ span $V$ over $K$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUU, more-algebra-lemma-finite-torsion-free-submodule-free, proof (more-algebra.tex:4870-4881)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-vector-space-free], choose a basis $(e_\\alpha)_{\\alpha\\in I}$ of $V$. In the finite-support expansions of $j(x_1),\\ldots,j(x_n)$ in this basis [def-weil-pbc-free-module], let $J\\subseteq I$ be the union of their supports. It is finite. Every vector of $V$ is a linear combination of the $j(x_i)$ and therefore has zero basis coefficients outside $J$. If $\\alpha\\in I\\setminus J$, the vector $e_\\alpha$ would have coefficient both $1$ and $0$ at $\\alpha$, contradicting uniqueness of basis expansions. Hence $I=J$ is finite. Enumerate the basis as $e_1,\\ldots,e_r$; unique expansion defines the $K$-linear coordinate isomorphism $\\theta:V\\xrightarrow{\\sim}K^r$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUU, more-algebra-lemma-finite-torsion-free-submodule-free, proof (more-algebra.tex:4870-4881)."
+   }
+  },
+  {
+   "text": "Write $\\theta(j(x_i))_k=a_{ik}/b_{ik}$ with $a_{ik}\\in R$ and $b_{ik}\\in S$ for $1\\le i\\le n$, $1\\le k\\le r$. Put $b=\\prod_{i,k}b_{ik}\\ne0$ (the empty product is $1$). Then $b\\,a_{ik}/b_{ik}=a_{ik}\\prod_{(h,l)\\ne(i,k)}b_{hl}$ lies in the embedded copy of $R\\subset K$. For $m=\\sum_i c_i x_i$, each coordinate of $b\\theta(j(m))$ equals $\\sum_i c_i a_{ik}\\prod_{(h,l)\\ne(i,k)}b_{hl}\\in R$. This is independent of the chosen expression for $m$, since it is the coordinate of the fixed vector $b\\theta(j(m))$ and $R\\to K$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUU, more-algebra-lemma-finite-torsion-free-submodule-free, proof (more-algebra.tex:4870-4881)."
+   }
+  },
+  {
+   "text": "Define $i:M\\to R^r$ by taking these unique $R$-valued coordinates of $b\\theta(j(m))$. Additivity and $R$-linearity follow coordinatewise from those of $j$ and $\\theta$ and injectivity of $R\\to K$. If $i(m)=0$, then $b\\theta(j(m))=0$ in $K^r$. As $b\\ne0$, it is invertible in $K$; thus $\\theta(j(m))=0$, then $j(m)=0$, and finally $m=0$. This proves injectivity. For $r=0$ the same argument shows $V=0$ and $M=0$, giving the required map to $R^0=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUU, more-algebra-lemma-finite-torsion-free-submodule-free, proof (more-algebra.tex:4870-4881)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-vector-space-free",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AUU, more-algebra-lemma-finite-torsion-free-submodule-free, proof (more-algebra.tex:4870-4881)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated torsion free module over an integral domain embeds into a finite free module",
+   "results": "{\"t\": \"2026-10-24T02:57:30Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated torsion free module over an integral domain embeds into a finite free module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.free_of_finite_type_torsion_free\", \"Module.Finite.left\", \"FiniteDimensional.left\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.free_iff_isTorsionFree\", \"Module.Invertible.instFinite\", \"Module.finite_of_finrank_pos\"], \"digest\": \"f5d75a7c7e93b52a\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:329-404: the basis and freeness results require IsPrincipalIdealRing, absent here. Mathlib/RingTheory/Localization/Free.lean:78-94 requires finite presentation and produces a free localization, not an embedding into finite free over the original domain. Module.Finite.of_injective only transfers finite generation, and the field-tower results do not supply an embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(embed|injective|free)|embed.*free|torsion.free",
+   "results": "{\"t\": \"2026-10-24T02:57:57Z\", \"tool\": \"grep\", \"query\": \"exists.*(embed|injective|free)|embed.*free|torsion.free\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\"], \"digest\": \"280321a90ae85963\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:329-404: the basis and freeness results require IsPrincipalIdealRing, absent here. Mathlib/RingTheory/Localization/Free.lean:78-94 requires finite presentation and produces a free localization, not an embedding into finite free over the original domain. Module.Finite.of_injective only transfers finite generation, and the field-tower results do not supply an embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finitely generated torsion free module over a domain admits an injective linear map to a finite free module",
+   "results": "{\"t\": \"2026-10-24T02:57:58Z\", \"tool\": \"leansearch\", \"query\": \"Every finitely generated torsion free module over a domain admits an injective linear map to a finite free module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.isTorsionFree_iff_algebraMap_injective\", \"Module.free_of_finite_type_torsion_free\", \"Module.free_iff_isTorsionFree\", \"Module.basisOfFiniteTypeTorsionFree\", \"LinearMap.lsmul_injective\", \"Module.Finite.of_injective\"], \"digest\": \"9de689f3aeade4a0\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:329-404: the basis and freeness results require IsPrincipalIdealRing, absent here. Mathlib/RingTheory/Localization/Free.lean:78-94 requires finite presentation and produces a free localization, not an embedding into finite free over the original domain. Module.Finite.of_injective only transfers finite generation, and the field-tower results do not supply an embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Module.IsTorsionFree",
+   "results": "{\"t\": \"2026-10-24T02:57:59Z\", \"tool\": \"loogle\", \"query\": \"Module.Finite, Module.IsTorsionFree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.free_iff_isTorsionFree\", \"Module.basisOfFiniteTypeTorsionFree'\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.finite_of_rank_eq_zero\", \"Module.finrank_pos\", \"Module.finrank_zero_iff\", \"Module.finrank_pos_iff\"], \"digest\": \"4578801a691741f4\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:329-404: the basis and freeness results require IsPrincipalIdealRing, absent here. Mathlib/RingTheory/Localization/Free.lean:78-94 requires finite presentation and produces a free localization, not an embedding into finite free over the original domain. Module.Finite.of_injective only transfers finite generation, and the field-tower results do not supply an embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(embed|injective)|embed.*free|IsTorsionFree",
+   "results": "{\"t\": \"2026-10-24T02:58:35Z\", \"tool\": \"grep\", \"query\": \"exists.*(embed|injective)|embed.*free|IsTorsionFree\", \"sub\": \"LinearAlgebra/FreeModule\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/Basic.lean\", \"Mathlib/LinearAlgebra/FreeModule/Basic.lean\"], \"digest\": \"d207ccc5b85d8c8e\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:329-404: the basis and freeness results require IsPrincipalIdealRing, absent here. Mathlib/RingTheory/Localization/Free.lean:78-94 requires finite presentation and produces a free localization, not an embedding into finite free over the original domain. Module.Finite.of_injective only transfers finite generation, and the field-tower results do not supply an embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a domain is isomorphic to a submodule of a finite rank free module exactly when it is torsion free",
+   "results": "{\"t\": \"2026-10-24T02:58:35Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a domain is isomorphic to a submodule of a finite rank free module exactly when it is torsion free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_iff_isTorsionFree\", \"Module.free_of_finite_type_torsion_free'\", \"Module.free_of_finite_type_torsion_free\", \"Module.finrank_eq_zero_iff_isTorsion\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.Finite.left\", \"Module.finrank_eq_zero_iff\", \"Module.finite_of_rank_eq_zero\"], \"digest\": \"9cb60e6857548ec3\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:329-404: the basis and freeness results require IsPrincipalIdealRing, absent here. Mathlib/RingTheory/Localization/Free.lean:78-94 requires finite presentation and produces a free localization, not an embedding into finite free over the original domain. Module.Finite.of_injective only transfers finite generation, and the field-tower results do not supply an embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(embed|injective)|embed.*free|IsTorsionFree",
+   "results": "{\"t\": \"2026-10-24T03:18:13Z\", \"tool\": \"grep\", \"query\": \"exists.*(embed|injective)|embed.*free|IsTorsionFree\", \"sub\": \"LinearAlgebra/FreeModule\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/Basic.lean\", \"Mathlib/LinearAlgebra/FreeModule/Basic.lean\"], \"digest\": \"d207ccc5b85d8c8e\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:103,139,329-404: the freeness/basis results require IsPrincipalIdealRing, absent from the item. The rank inequalities embed finite free modules in M, not M into finite free. Field-tower finiteness and rank-zero criteria do not supply the required embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Module.IsTorsionFree",
+   "results": "{\"t\": \"2026-10-24T03:18:14Z\", \"tool\": \"loogle\", \"query\": \"Module.Finite, Module.IsTorsionFree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.free_iff_isTorsionFree\", \"Module.basisOfFiniteTypeTorsionFree'\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.finite_of_rank_eq_zero\", \"Module.finrank_pos\", \"Module.finrank_zero_iff\", \"Module.finrank_pos_iff\"], \"digest\": \"4578801a691741f4\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:103,139,329-404: the freeness/basis results require IsPrincipalIdealRing, absent from the item. The rank inequalities embed finite free modules in M, not M into finite free. Field-tower finiteness and rank-zero criteria do not supply the required embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated torsion free module over an integral domain admits an injective linear map into R to the n",
+   "results": "{\"t\": \"2026-10-24T03:18:18Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated torsion free module over an integral domain admits an injective linear map into R to the n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.le_rank_iff_exists_linearMap\", \"Module.free_of_finite_type_torsion_free'\", \"strongRankCondition_iff_succ\", \"Module.one_le_rank_iff\", \"Module.Finite.exists_nat_not_surjective\", \"strongRankCondition_iff_forall_not_injective\", \"Cardinal.mk_le_of_module\", \"strongRankCondition_iff\"], \"digest\": \"f07c598e21e99969\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:103,139,329-404: the freeness/basis results require IsPrincipalIdealRing, absent from the item. The rank inequalities embed finite free modules in M, not M into finite free. Field-tower finiteness and rank-zero criteria do not supply the required embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite torsion free module over a domain embeds in a finite rank free module",
+   "results": "{\"t\": \"2026-10-24T03:20:00Z\", \"tool\": \"leansearch\", \"query\": \"A finite torsion free module over a domain embeds in a finite rank free module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.basisOfFiniteTypeTorsionFree'\", \"Module.free_of_finite_type_torsion_free\", \"Module.basisOfFiniteTypeTorsionFree\", \"Module.free_iff_isTorsionFree\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"instIsTorsionFreeOfIsDomainOfNoZeroSMulDivisors\", \"Module.Free.instIsTorsionFree\"], \"digest\": \"25798c05156eb378\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:103,139,329-404: the freeness/basis results require IsPrincipalIdealRing, absent from the item. The rank inequalities embed finite free modules in M, not M into finite free. Field-tower finiteness and rank-zero criteria do not supply the required embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a domain is isomorphic to a submodule of a finite free module exactly when it is torsion free",
+   "results": "{\"t\": \"2026-10-24T03:20:01Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a domain is isomorphic to a submodule of a finite free module exactly when it is torsion free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_iff_isTorsionFree\", \"Module.free_of_finite_type_torsion_free'\", \"Module.free_of_finite_type_torsion_free\", \"Module.finrank_eq_zero_iff_isTorsion\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.Finite.left\", \"FiniteDimensional.left\", \"Module.finite_iff_finite\"], \"digest\": \"b511917de7034bf7\"}; Read Mathlib/LinearAlgebra/FreeModule/PID.lean:103,139,329-404: the freeness/basis results require IsPrincipalIdealRing, absent from the item. The rank inequalities embed finite free modules in M, not M into finite free. Field-tower finiteness and rank-zero criteria do not supply the required embedding. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization.*injective|injective.*IsTorsionFree|mk.*eq_zero|isLocalizedModule_iff",
+   "results": "{\"t\": \"2026-10-24T03:20:29Z\", \"tool\": \"grep\", \"query\": \"IsLocalization.*injective|injective.*IsTorsionFree|mk.*eq_zero|isLocalizedModule_iff\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Basic.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Algebra.lean\", \"Mathlib/RingTheory/Localization/Algebra.lean\"], \"digest\": \"3f2207d8819a04b3\"}; Ingredient search only: localization and vector-space basis results support the proof via existing DAG nodes; these do not state the full finite-free embedding theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional vector space over a field is linearly equivalent to Fin n to the field",
+   "results": "{\"t\": \"2026-10-24T03:20:32Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional vector space over a field is linearly equivalent to Fin n to the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"finDimVectorspaceEquiv\", \"FiniteDimensional.instFintypeElemOfVectorSpaceIndex\", \"FiniteDimensional.finiteDimensional_pi\", \"LinearEquiv.finiteDimensional\", \"FiniteDimensional\", \"FiniteDimensional.nonempty_linearEquiv_of_finrank_eq\", \"Module.Basis.finiteDimensional_of_finite\", \"LinearEquiv.ofFinrankEq\"], \"digest\": \"59e87ea807be70b2\"}; Ingredient search only: localization and vector-space basis results support the proof via existing DAG nodes; these do not state the full finite-free embedding theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-torsion-free-bidual-injective",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical regular-pair refinement under the ancestor's duality direction (latest blueprint proof Step 3, 'the duality symmetry of the middle perverse t-structure'); immediate use: lem-per-weil-divisor-strict-local-cartier-test, proof Step 4, 'The flat-reflexivity lemma makes this image finite reflexive'. The finite-free embedding criterion used before and after base change in Tag 0EB9. Immediate refinement of lem-per-reflexive-saturated-free-embedding: Tag 0AV0 (more-algebra-lemma-reflexive-torsion-free), clause (3), more-algebra.tex:5162-5214; used in the proof of Tag 0EB8 and hence in the reverse implication of Tag 0AV2. Immediate refinement: the finite-free embedding underlying the coordinate map beta in Tag 0AV0, proof of clause (3); supplied by Tag 0AUU.",
+   "via": [
+    "lem-per-torsion-free-bidual-injective",
+    "lem-per-reflexive-saturated-free-embedding",
+    "lem-per-flat-base-change-reflexive-modules",
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-torsion-free-free-embedding",
+  "worker": "stage1",
+  "summary": "Checked Tag 0AUU and preserved the statement. Reused the existing module-localization construction and vector-space basis Mathlib leaf. Wrote the localization injectivity, finite-basis support argument, common denominator product and coordinate injection explicitly; no new nodes, no PID or Noetherian hypothesis. Retained inherited searches and provenance; performed and recorded fresh prescribed searches.",
+  "blueprint": "Historical regular-pair refinement under the ancestor's duality direction (latest blueprint proof Step 3, 'the duality symmetry of the middle perverse t-structure'); immediate use: lem-per-weil-divisor-strict-local-cartier-test, proof Step 4, 'The flat-reflexivity lemma makes this image finite reflexive'. The finite-free embedding criterion used before and after base change in Tag 0EB9. Immediate refinement of lem-per-reflexive-saturated-free-embedding: Tag 0AV0 (more-algebra-lemma-reflexive-torsion-free), clause (3), more-algebra.tex:5162-5214; used in the proof of Tag 0EB8 and hence in the reverse implication of Tag 0AV2. Immediate refinement: the finite-free embedding underlying the coordinate map beta in Tag 0AV0, proof of clause (3); supplied by Tag 0AUU. Steps 1-5 realize the immediate Tag 0AUU refinement, retaining the historical lineage; latest ancestor Step 3 does not itself assert this algebra lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-484f1796e",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-484f1796e (reviewer sub-agent of L); spot-checked: Read Stacks 0AUU (more-algebra-lemma-finite-torsion-free-submodule-free, tags:13662, more-algebra.tex:4863-4881). The item states the torsion-free-to-embedding direction with exactly the source's hypotheses (domain, finite, torsion free) and nothing weakened; it is the only direction the parent lem-per-torsion-free-bidual-injective step 2 uses. No new nodes. Step 1: S^{-1}R is a field via the fraction criterion of def-weil-pbc-module-localization (a/s=0 iff a=0, inverse s/a). Step 2: injectivity of j from that node's verbatim kernel criterion plus torsion freeness; the j(x_i) span V. Step 3: basis by lem-weil-pbc-vector-space-free, finite by the support-union argument, which needs 1≠0 from step 1. Step 4: the source's 'clear denominators' is written out (b·a_ik/b_ik = a_ik·∏ of the other b_hl), well defined since R→K is injective (E5 satisfied). Step 5: linearity and injectivity are correct, and r=0 forces M=0. proof_deps equals the union of uses; every cited node is a Mathlib leaf, so there is no route issue and no tool_uses. Edge cases checked: M=0, R a field, (x,y)⊂k[x,y], Z/2. No duplicate in the DAG (rg -L for 0AUU and for torsion-free/domain statements). Mathlib has only the PID result Module.free_iff_isTorsionFree, so the item is not a leaf. 13 searches covering all three kinds; blueprint from/same_as filled. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FiniteTorsionFreeEmbedding",
+  "declaration": "Module.exists_injective_fin_fun_of_finite_of_isTorsionFree",
+  "file": "lean/Sheaf/LinearAlgebra/FiniteTorsionFreeEmbedding.lean",
+  "statement": "theorem exists_injective_fin_fun_of_finite_of_isTorsionFree (R : Type u) (M : Type v) [CommRing R] [IsDomain R] [AddCommGroup M] [Module R M] [Module.Finite R M] [Module.IsTorsionFree R M] : ∃ (r : ℕ) (i : M →ₗ[R] (Fin r → R)), Function.Injective i",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-819751a29",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Lean theorem Module.exists_injective_fin_fun_of_finite_of_isTorsionFree matches the node clause by clause: CommRing+IsDomain, Module.Finite (recorded stmt_dep decl), Module.IsTorsionFree (equal to the node's condition via isTorsionFree_iff_smul_eq_zero under IsDomain), ∃ r:ℕ, i : M →ₗ[R] (Fin r → R) injective, r=0 included. No PID/Noetherian/nontriviality/universe restriction. Matches the forward direction of Stacks 0AUU (more-algebra.tex:4863-4881). Edge cases M=0, field, (x,y)⊂k[x,y], ℤ/2 OK. No Mathlib/project duplicate (Mathlib only has PID versions). Only the lean field differs from live; dep record identical; statement verbatim in file; not landed by another group. Docstrings carry source, blueprint tag and 5 proof steps; one sorry theorem; plain proof-dep imports; report has both required sections. No file changed, nothing compiled."
+ }
+}

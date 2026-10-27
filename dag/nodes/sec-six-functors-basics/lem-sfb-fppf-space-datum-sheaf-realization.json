@@ -1,0 +1,525 @@
+{
+ "id": "lem-sfb-fppf-space-datum-sheaf-realization",
+ "kind": "statement",
+ "title": "Fppf descent data of algebraic spaces realized as sheaves",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use the universes and site skeletons of [def-weil-size-convention]. Algebraic spaces over $S$ are fppf sheaves with the atlas and diagonal conditions of [def-trf-algebraic-space]; their morphisms are natural transformations. Let $X$ and $X_i$ be algebraic spaces over $S$, indexed by a set $I$, and let $a_i:X_i\\to X$ be flat and locally of finite presentation on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation], jointly surjective on field-valued point classes [lem-trf-space-fibre-products-etale-covers]. This is an fppf covering of algebraic spaces. Let $\\mathcal D$ have objects algebraic spaces $V_i\\to X_i$ with isomorphisms $\\varphi_{ij}:V_i\\times_X X_j\\xrightarrow{\\sim}X_i\\times_X V_j$ over $X_i\\times_X X_j$ satisfying the triple-overlap cocycle $\\varphi_{ik}=\\varphi_{jk}\\circ\\varphi_{ij}$ after pullback, and arrows the families of $X_i$-morphisms commuting with these isomorphisms. Let $\\mathcal L$ be the full subcategory of fppf sheaves of sets $F$ on $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-weil-pbc-sites-and-cohomology], endowed with a map $F\\to X$, for which each sheaf pullback $X_i\\times_X F$ is an algebraic space. Sheaf pullbacks are computed by pairs of sections with equal images. The functor $\\mathcal L\\to\\mathcal D$ sending $F$ to the pullbacks $X_i\\times_X F$ and their canonical overlap isomorphisms is an equivalence. In particular every datum has a sheaf realization with displayed local isomorphisms inducing exactly $\\varphi_{ij}$, and maps between two such sheaves over $X$ correspond bijectively to compatible families of maps over the $X_i$. No algebraicity assertion about $F$ itself is included.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0ADT (lemma-descent-data-sheaves), equivalence and clause (1); algebraic-space fppf coverings: spaces-topologies.tex definition-fppf-covering."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-space-cover-sheaf-descent-categories",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "For $F\\to X$ in $\\mathcal L$, put $V_i=X_i\\times_XF$. The canonical overlap map sends $((x_i,f),x_j)$ to $(x_i,(x_j,f))$. These are morphisms of algebraic spaces because morphisms are natural transformations; the overlap fibre products exist by the cited fibre-product lemma. On a triple overlap both composites keep the same $f$ and reorder the same three base coordinates, proving the cocycle. A map $F\\to G$ acts on the $f$ coordinate, so this construction is a functor $R:\\mathcal L\\to\\mathcal D$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer construction and verification of the quasi-inverses"
+   }
+  },
+  {
+   "text": "Every section $x\\in X(T)$, for an $S$-scheme $T$, locally lifts to some $X_i$. Indeed, $Y_i=T\\times_X X_i$ are algebraic spaces by the fibre-product lemma and form an fppf family over $T$ by covering calculus (2). Choose the surjective etale scheme atlas $U_i\\to Y_i$ supplied by the definition of algebraic space. Covering calculus (1) and (3) show that the composites $U_i\\to T$ form an fppf family; (4) identifies it as a covering of schemes in the given site. Their maps to $X_i$ lift $x$. This proves the local lifting needed below without assuming any $X_i\\to X$ representable.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tags 03Y8 (definition-fppf-covering), 03Y9 (lemma-fppf); lemma-refine-fppf-schemes and lemma-fppf-covering-surjective"
+   }
+  },
+  {
+   "text": "For a datum $(V_i,\\varphi_{ij})$, write $b_i:V_i\\to X_i$. For sections $x_i\\in X_i(T)$ and $x_j\\in X_j(T)$ over the same $x\\in X(T)$, define $\\tau_{ij}(x_i,x_j)$ on the fibre of $V_i(T)\\to X_i(T)$ by the $V_j$ coordinate of $\\varphi_{ij}(v_i,x_j)$. The cocycle gives $\\tau_{ik}=\\tau_{jk}\\tau_{ij}$, with the appropriate three fixed coordinates. On repeated coordinates $\\tau_{ii}^2=\\tau_{ii}$; since it is bijective it is the identity. Taking the triple $(i,j,i)$ gives $\\tau_{ji}=\\tau_{ij}^{-1}$. Thus on $A(T)=\\coprod_iV_i(T)$ the rule $(i,v_i)\\sim(j,v_j)$ iff their images in $X(T)$ agree and $v_j=\\tau_{ij}(b_i(v_i),b_j(v_j))(v_i)$ is an equivalence relation. Naturality of the $\\varphi_{ij}$ makes it stable under restriction. Define the quotient presheaf $P(T)=A(T)/{\\sim}$ with its induced map $P\\to X$. This is the pointwise quotient underlying the coequalizer of Tag 0ADT.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer construction and verification of the quasi-inverses"
+   }
+  },
+  {
+   "text": "Take $F=P^{++}$ with unit $\\eta:P\\to F$. The cited plus theorem supplies an actual sheaf and its sheafification universal property in the chosen universe containing the site and the set $I$; thus no colimit over a large category is used. Since $X$ is a sheaf, $P\\to X$ extends uniquely to $p:F\\to X$. For each $i$ define $q_i:V_i\\to F$ by $v\\mapsto\\eta([i,v])$ and $\\theta_i:V_i\\to X_i\\times_XF$ by $v\\mapsto(b_i(v),q_i(v))$. These are natural transformations over $X_i$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-plus-theorem",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer construction and verification of the quasi-inverses"
+   }
+  },
+  {
+   "text": "The maps $\\theta_i$ are injective on sections. If $\\theta_i(v)=\\theta_i(w)$ over $T$, then $b_i(v)=b_i(w)$ and $\\eta([i,v])=\\eta([i,w])$. The local-equality clause of the cited sheafification lemma gives a covering on which $[i,v]=[i,w]$ in $P$. By the quotient relation from step 3 and $\\tau_{ii}(x_i,x_i)=1$, this says $v=w$ there. Since $V_i$ is a sheaf, equality on that covering implies $v=w$ over $T$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer construction and verification of the quasi-inverses"
+   }
+  },
+  {
+   "text": "Each $\\theta_i$ is also surjective on sections. Given $(x_i,f)\\in(X_i\\times_XF)(T)$, the local-representation clause of the cited lemma gives a covering $T_a\\to T$ on which $f=\\eta([j_a,v_a])$. Write $x_{j_a}=b_{j_a}(v_a)$. The equality defining the pullback says $a_i(x_i)=a_{j_a}(x_{j_a})$, so put $w_a=\\tau_{j_ai}(x_{j_a},x_i)(v_a)\\in V_i(T_a)$. The quotient relation gives $\\theta_i(w_a)=(x_i,f)|_{T_a}$. On pairwise overlaps these $w_a$ have equal images under $\\theta_i$ and are equal by step 5. The sheaf axiom glues them uniquely to $w\\in V_i(T)$ with $\\theta_i(w)=(x_i,f)$. Consequently the $\\theta_i$ are isomorphisms, with inverse the unique preimage on every $T$, natural since $\\theta_i$ is natural. Hence $F$ lies in $\\mathcal L$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer construction and verification of the quasi-inverses"
+   }
+  },
+  {
+   "text": "The displayed isomorphisms recover the original transitions, rather than just isomorphic local objects: for $(v_i,x_j)$ the definition of the quotient gives $q_i(v_i)=q_j(\\tau_{ij}(b_i(v_i),x_j)(v_i))$. Therefore the canonical reordering overlap map for $F$, expressed via $\\theta_i$ and $\\theta_j$, is precisely $\\varphi_{ij}$. If $h_i:V_i\\to W_i$ is an arrow of data, its compatibility is the equality $h_j\\tau_{ij}=\\sigma_{ij}h_i$. It therefore induces $P_V\\to P_W$, $[i,v]\\mapsto[i,h_i(v)]$. The universal property of sheafification extends this to a unique $F_V\\to F_W$. It is over $X$ because the two maps to $X$ agree on $P_V$. Uniqueness also proves preservation of identities and composition. This defines a functor $Q:\\mathcal D\\to\\mathcal L$, and the $\\theta_i$ give a natural isomorphism from the identity datum to $RQ$.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer construction and verification of the quasi-inverses"
+   }
+  },
+  {
+   "text": "For $G\\to X$ in $\\mathcal L$, apply $Q$ to its canonical datum $V_i=X_i\\times_XG$. Forgetting $x_i$ gives $P(T)\\to G(T)$, $[i,(x_i,g)]\\mapsto g$. It is well defined because the canonical transitions leave $g$ fixed, and it extends to $\\epsilon_G:QR(G)\\to G$ by sheafification. It is locally surjective: for $g\\in G(T)$ apply step 2 to its image in $X(T)$ to choose local $x_i$, and use $\\eta([i,(x_i,g)])$. It is injective on sections: if $f,f^{\\prime}$ have the same image $g$, represent them on a common covering by $[i,(x_i,g)]$ and $[j,(x_j,g)]$ using the cited local-representation lemma and the composition/base-change axioms for coverings. These two representatives are related by the canonical transition, hence have equal classes, so $f=f^{\\prime}$ by the sheaf axiom. Local preimages now agree on overlaps by injectivity and glue, proving surjectivity on every $T$. Thus $\\epsilon_G$ is an isomorphism over $X$; it is natural in $G$ by its formula on representatives and the uniqueness in sheafification.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer construction and verification of the quasi-inverses"
+   }
+  },
+  {
+   "text": "The natural isomorphisms in steps 7 and 8 make $Q$ and $R$ quasi-inverse. Explicitly, given compatible maps $h_i:X_i\\times_XG\\to X_i\\times_XH$, sheafify their map on quotient representatives as in step 7 and compose with $\\epsilon_G^{-1}$ and $\\epsilon_H$. Its pullback is $h_i$ by the formula on representatives. Conversely two maps $G\\to H$ with the same pullbacks agree on each section after the covering from step 2, and then agree by the sheaf axiom for $H$. This gives the asserted bijection on maps and the equivalence, including the displayed local identifications of step 7. Empty families cause no exception: an empty family covers only the empty $X$, and all local existence and equality arguments use the empty covering and its sheaf axiom. No atlas or representable diagonal for the resulting global $F$ was used or asserted.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer construction and verification of the quasi-inverses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-weil-pbc-sheafification-plus-theorem",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0ADT (lemma-descent-data-sheaves), coequalizer proof; omitted quasi-inverse checks expanded sectionwise using Sites Tags 00WB, 00WH, 00WK and Topologies on Spaces Tags 03Y8, 03Y9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "descent|effective",
+   "results": {
+    "t": "2026-10-23T11:45:44Z",
+    "tool": "grep",
+    "query": "descent|effective",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean"
+    ],
+    "digest": "030a693155941369"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract descent for an already known stack requires the very stack hypothesis at issue; regular epimorphisms do not supply the sheaf realization and overlap equivalence. Dense-subsite equivalences do not give descent over algebraic-space covers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Descent\"",
+   "results": {
+    "t": "2026-10-23T11:45:45Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"Descent\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv"
+    ],
+    "digest": "99979f992c8454fc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract descent for an already known stack requires the very stack hypothesis at issue; regular epimorphisms do not supply the sheaf realization and overlap equivalence. Dense-subsite equivalences do not give descent over algebraic-space covers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of sheaves of sets along an epimorphism of sheaves is effective and fully faithful",
+   "results": {
+    "t": "2026-10-23T11:45:46Z",
+    "tool": "leanfinder",
+    "query": "Descent of sheaves of sets along an epimorphism of sheaves is effective and fully faithful",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.instEpiSheafTypeToImage",
+     "CategoryTheory.isRegularEpiCategory_sheaf",
+     "CategoryTheory.SheafOfTypes.adhesive",
+     "CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi",
+     "CategoryTheory.coherentTopology.epi_π_app_zero_of_epi",
+     "CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify",
+     "CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization",
+     "CategoryTheory.Sheaf.epi_of_isLocallySurjective'"
+    ],
+    "digest": "95f964d3311e1f7e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract descent for an already known stack requires the very stack hypothesis at issue; regular epimorphisms do not supply the sheaf realization and overlap equivalence. Dense-subsite equivalences do not give descent over algebraic-space covers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf descent data of algebraic spaces correspond to sheaves over the base whose pullbacks are algebraic spaces",
+   "results": {
+    "t": "2026-10-23T11:47:25Z",
+    "tool": "leansearch",
+    "query": "Fppf descent data of algebraic spaces correspond to sheaves over the base whose pullbacks are algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff",
+     "CategoryTheory.Pseudofunctor.DescentData.ofObj",
+     "CategoryTheory.Pseudofunctor.isEquivalence_toDescentData",
+     "CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq",
+     "CategoryTheory.Pseudofunctor.DescentData",
+     "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+     "CategoryTheory.Pseudofunctor.DescentData.mk",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence"
+    ],
+    "digest": "ed80dbd84cb01d94"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract descent for an already known stack requires the very stack hypothesis at issue; regular epimorphisms do not supply the sheaf realization and overlap equivalence. Dense-subsite equivalences do not give descent over algebraic-space covers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves over an algebraic space are equivalent to compatible sheaves over an fppf covering of algebraic spaces",
+   "results": {
+    "t": "2026-10-23T11:47:30Z",
+    "tool": "leanfinder",
+    "query": "Sheaves over an algebraic space are equivalent to compatible sheaves over an fppf covering of algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+     "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+     "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor",
+     "CategoryTheory.Equivalence.sheafCongr",
+     "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense",
+     "CategoryTheory.Equivalence.sheafCongr_functor",
+     "CategoryTheory.Equivalence.sheafCongrPrecoherent",
+     "CategoryTheory.Functor.IsCoverDense.Types.sheafIso"
+    ],
+    "digest": "f7052c55ba674ef9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract descent for an already known stack requires the very stack hypothesis at issue; regular epimorphisms do not supply the sheaf realization and overlap equivalence. Dense-subsite equivalences do not give descent over algebraic-space covers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": {
+    "t": "2026-10-23T11:53:53Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract descent for an already known stack requires the very stack hypothesis at issue; regular epimorphisms do not supply the sheaf realization and overlap equivalence. Dense-subsite equivalences do not give descent over algebraic-space covers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf descent datum of algebraic spaces yields an fppf sheaf F over the base whose pullbacks recover the datum, without asserting F is algebraic",
+   "results": {
+    "t": "2026-10-23T11:53:59Z",
+    "tool": "leanfinder",
+    "query": "An fppf descent datum of algebraic spaces yields an fppf sheaf F over the base whose pullbacks recover the datum, without asserting F is algebraic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.isEquivalence_toDescentData",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_obj",
+     "CategoryTheory.Pseudofunctor.DescentData.obj",
+     "CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff",
+     "CategoryTheory.Pseudofunctor.toDescentData_obj",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctor"
+    ],
+    "digest": "3163a409e150f23d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract descent for an already known stack requires the very stack hypothesis at issue; regular epimorphisms do not supply the sheaf realization and overlap equivalence. Dense-subsite equivalences do not give descent over algebraic-space covers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf descent data of algebraic spaces are equivalent to sheaves whose local pullbacks are algebraic spaces",
+   "results": {
+    "t": "2026-10-23T13:07:52Z",
+    "tool": "leanfinder",
+    "query": "Fppf descent data of algebraic spaces are equivalent to sheaves whose local pullbacks are algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.isEquivalence_toDescentData",
+     "CategoryTheory.Pseudofunctor.isStackFor_iff",
+     "CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence",
+     "CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff",
+     "CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff",
+     "CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq",
+     "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj"
+    ],
+    "digest": "f3bed996f5d2977a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stack descent requires an IsStack hypothesis not established for the relevant slice pseudofunctor; dense-subsite equivalences concern change of site rather than realization of this algebraic-space datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Descent\"",
+   "results": {
+    "t": "2026-10-23T13:09:43Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"Descent\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv"
+    ],
+    "digest": "99979f992c8454fc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stack descent requires an IsStack hypothesis not established for the relevant slice pseudofunctor; dense-subsite equivalences concern change of site rather than realization of this algebraic-space datum."
+  },
+  {
+   "tool": "grep",
+   "query": "descent|effective",
+   "results": {
+    "t": "2026-10-23T13:09:43Z",
+    "tool": "grep",
+    "query": "descent|effective",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean",
+     "Mathlib/CategoryTheory/Sites/Subsheaf.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean"
+    ],
+    "digest": "ec1a22a94874ee7e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stack descent requires an IsStack hypothesis not established for the relevant slice pseudofunctor; dense-subsite equivalences concern change of site rather than realization of this algebraic-space datum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf descent data of algebraic spaces correspond to sheaves over the base whose pullbacks are algebraic spaces",
+   "results": {
+    "t": "2026-10-23T13:09:44Z",
+    "tool": "leansearch",
+    "query": "Fppf descent data of algebraic spaces correspond to sheaves over the base whose pullbacks are algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff",
+     "CategoryTheory.Pseudofunctor.DescentData.ofObj",
+     "CategoryTheory.Pseudofunctor.isEquivalence_toDescentData",
+     "CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq",
+     "CategoryTheory.Pseudofunctor.DescentData",
+     "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+     "CategoryTheory.Pseudofunctor.DescentData.mk",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence"
+    ],
+    "digest": "ed80dbd84cb01d94"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stack descent requires an IsStack hypothesis not established for the relevant slice pseudofunctor; dense-subsite equivalences concern change of site rather than realization of this algebraic-space datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves over an algebraic space are equivalent to compatible sheaves over an fppf covering of algebraic spaces",
+   "results": {
+    "t": "2026-10-23T13:12:07Z",
+    "tool": "leanfinder",
+    "query": "Sheaves over an algebraic space are equivalent to compatible sheaves over an fppf covering of algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+     "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+     "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor",
+     "CategoryTheory.Equivalence.sheafCongr",
+     "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense",
+     "CategoryTheory.Equivalence.sheafCongr_functor",
+     "CategoryTheory.Equivalence.sheafCongrPrecoherent",
+     "CategoryTheory.Functor.IsCoverDense.Types.sheafIso"
+    ],
+    "digest": "f7052c55ba674ef9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stack descent requires an IsStack hypothesis not established for the relevant slice pseudofunctor; dense-subsite equivalences concern change of site rather than realization of this algebraic-space datum."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-space-single-cover-effective-descent",
+  "date": "2026-10-23",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Coarse moduli schemes restrict to open substacks. The inherited creation chain ends at a Lean module rather than a DAG node; the explicit main-20261015 anchor is paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration-moduli prerequisite below the Rj_* preservation input. Supporting input: Keel--Mori uniform categorical space and universal homeomorphism, before identifying it with the given coarse scheme. Local input: Stabilizer-preserving etale morphisms give cartesian moduli squares. Supporting input to Tag 0DUV: descend etale spaces from one etale chart cover; Tags 0ADV(1), 0ADT, 042B. Sheaf step of Tag 0ADV(1): apply spaces-descent Tag 0ADT before proving algebraicity.",
+   "via": [
+    "lem-sfb-etale-space-single-cover-effective-descent",
+    "lem-sfb-keel-mori-stabilizer-preserving-etale",
+    "lem-sfb-keel-mori-uniform-topological-moduli",
+    "lem-sfb-coarse-moduli-open-restriction",
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-space-datum-sheaf-realization",
+  "worker": "stage1",
+  "summary": "Expanded Tag 0ADT into its pointwise equivalence-relation quotient followed by set-valued sheafification; proved local pullback isomorphisms, exact recovery of the cocycle, functoriality, natural quasi-inverses and the map bijection. Reused existing covering calculus and sheafification nodes; no new nodes. The statement is unchanged.",
+  "blueprint": "Inherited blueprint.from.node is null (blueprint_refs.py ancestor confirms this). The explicit inherited anchor is det-thm-sf-ctf-stability-direct-images, paragraph (3), Rj_* preservation via the alteration/moduli prerequisite. This item supplies the sheaf part of Tag 0ADV(1), below the etale-space descent input, using Tag 0ADT; current latest blueprint paragraph (3) was read.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-plus-theorem",
+    "why": "General site sheafification and local-section calculus; used as a black box for the quotient presheaf on the big fppf site. The unit has no replacement for this generic site input."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "General site sheafification and local-section calculus; used as a black box for the quotient presheaf on the big fppf site. The unit has no replacement for this generic site input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Steps 1-2 take from its statement only that sheaf fibre products of algebraic spaces (V_i x_X X_j, X_i x_X V_j, T x_X X_i) are algebraic spaces and fibre products in algebraic spaces; generic algebraic-space input of unit sk-i-curve-zero, which this unit does not cite and has no node replacing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-plus-theorem",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-d82770d79",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-d82770d79 (reviewer sub-agent of L); spot-checked: The proof is correct. One small fix adds a missing route declaration; the mathematics is unchanged. I read the item in full against Stacks 0ADT (spaces-descent.tex l.3587). The statement is the equivalence plus clause (1); clause (2) on algebraicity of F is deliberately left out, which is a sub-statement and not a weakening. It matches live byte for byte, and there are no new nodes and no repair note. The fppf covering hypothesis matches spaces-topologies definition-fppf-covering (l.762). Step-by-step checks: steps 1-2 use the fibre-product lemma and covering calculus (2),(3),(1),(4) for local lifting; schemes are treated as algebraic spaces, the DAG's standing convention. Step 3 builds the transports: τ_ii is the identity from the (i,i,i) cocycle and bijectivity, τ_ji=τ_ij^{-1} from (i,j,i), and the relation is an equivalence stable under restriction. Step 4 takes F=P^{++} with p:F→X. Step 5 proves injectivity from the local-equality clause of lem-weil-pbc-site-sheafification-sections-local plus τ_ii=id. Step 6 proves surjectivity through w_a=τ_{j_a i}(v_a), gluing by step 5. Step 7 recovers exactly φ_ij (I traced (v_i,x_j) through both sides) and builds the functor Q. Step 8: the counit is well defined, locally surjective via step 2 (the only use of the covering hypothesis, which is right) and injective via the canonical τ. Step 9 assembles the quasi-inverses. Edge cases: identity cover, repeated members, I=∅ (only X=∅; sheafification gives the one section over ∅), and empty V_i. Duplicates: the lem-trf-fppf-* nodes are the scheme-cover version (023Y analogue), and lem-sfb-space-finite-type-fppf-effectivity is about effectivity, so there is no duplicate. Route: sk-thm-p1 is in the unit's transitive closure, so the two declared pbc sheafification tool uses are on route and harmless. lem-trf-space-fibre-products-etale-covers (unit sk-i-curve-zero, outside the closure, not finished) was used in steps 1-2 but not declared. FIX: I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-fppf-space-datum-sheaf-realization.json, matching how the other reviewed nodes of this unit record it. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfSpaceDatumSheafRealization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fppfSpaceDatumSheafRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfSpaceDatumSheafRealization.lean",
+  "statement": "theorem fppfSpaceDatumSheafRealization {S : Scheme.{u}} {I : Type w} {X : AlgebraicSpace S} {Xᵢ : I → AlgebraicSpace S} (a : ∀ i, Xᵢ i ⟶ X) (hflat : ∀ i, MapIsFlat (a i)) (hlfp : ∀ i, MapIsLocallyOfFinitePresentation (a i)) (hsurj : IsJointlySurjective (fun i ↦ (a i).hom.hom)) : (spaceCoverSheafRestriction a).IsEquivalence ∧ (∀ D : SpaceCoverSheafDescent a, ∃ F : (IsLocallyAlgebraicSpaceSheaf a).FullSubcategory, Nonempty (D ≅ (spaceCoverSheafRestriction a).obj F)) ∧ (∀ F G : (IsLocallyAlgebraicSpaceSheaf a).FullSubcategory, Function.Bijective ((spaceCoverSheafRestriction a).map : (F ⟶ G) → ((spaceCoverSheafRestriction a).obj F ⟶ (spaceCoverSheafRestriction a).obj G)))",
+  "branch": "sheaf-dag",
+  "by": "Q122",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fbd7e6e2",
+  "group": "Q122",
+  "result": "pass",
+  "note": "The descent category's natural transport on generalized points is equivalent by Yoneda to the overlap isomorphisms φij with the cocycle (self+cocycle give invertibility; invertible φ with the cocycle gives self). The full subcategory of locally algebraic sheaves imposes no algebraicity on F. The restriction functor is the canonical one, built from Mathlib's Over.pullback with pullback.lift transport. Hypotheses are MapIsFlat/MapIsLocallyOfFinitePresentation (landed def-sfb-space-morphism-properties) and IsJointlySurjective (field-point lifting, Tag 03BU). The conclusion is equivalence, realization up to datum isomorphism, and bijectivity on maps, matching the node and Tag 0ADT. I: Type w is unrestricted, so there is no universe restriction. Empty, repeated-index and empty-Vi cases are covered. lean.statement is verbatim; stmt_deps only add the new definition node and a landed node; no duplicate exists; docstrings, sorry-only proof and report sections are OK. No files changed, so no compile. Advisories: IsJointlySurjective's owner def-trf-algebraic-space-jointly-surjective-family is not in the item's stmt_deps (reached via lem-trf-space-fibre-products-etale-covers; siblings list it); lem-sfb-space-fppf-covering-calculus has no Lean record yet (stage 3)."
+ }
+}

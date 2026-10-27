@@ -1,0 +1,118 @@
+{
+ "id": "lem-sfb-completed-affine-coefficient-model",
+ "kind": "statement",
+ "title": "Continuous-function coordinates for completed coefficient sections",
+ "statement": "For a prime l and any scheme X, the completed coefficient ring sheaf [def-pur-twist-coefficient-rings] on the pro-etale site [def-weil-pbc-proetale-site] admits ring equivalences from its sections over each V to continuous functions from the underlying space of V to the p-adic integers. These equivalences commute with every restriction.",
+ "stmt_deps": [
+  "def-pur-twist-coefficient-rings",
+  "def-weil-pbc-proetale-site"
+ ],
+ "source": {
+  "document": "lean/Sheaf/Paper/CompletedAffineFreeLocalDual.lean",
+  "place": "docstring of completedAffineFree_localDual_detect: continuous-function coordinates for completed coefficient sections"
+ },
+ "proof": [
+  {
+   "text": "Use the constant-sheaf comparison with continuous functions for discrete rings, naturally in finite reduction maps. The positive finite p-adic residue maps form a cone from the continuous p-adic coefficient sheaf to the specified finite constant tower.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "def-pur-twist-coefficient-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone induces a morphism to the completion. Prove it bijective on sections: residues distinguish p-adic functions; conversely compatible continuous finite functions lift pointwise by PadicInt.ofCompatible, and continuity follows by the closed embedding of the compact p-adic integers into their finite residue product. Sectionwise limits, isomorphism reflection, and removal of ULift yield the natural ring equivalences.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "def-pur-twist-coefficient-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "document": "lean/Sheaf/Paper/CompletedAffineFreeLocalDual.lean",
+  "place": "finite-support stage-test and closed-pattern proof sketch",
+  "note": "Strict substep of the parent argument. It asserts no nonzero-section detection and makes no reference to sheafified free modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous p-adic functions as inverse limit of finite constant pro-etale coefficient sheaves; finite clopen interpolation and equality-pattern cover for pro-affine etale morphisms",
+   "results": "AffineTransitionLimit existence and finite-type factorization results, plus unrelated perfectoid coefficient definitions; no interpolation, pattern-cover, or completed coefficient sheaf theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toZModPow\"",
+   "results": "Found PadicInt.toZModPow, ext_of_toZModPow, zmod_cast_comp_toZModPow, and compatible finite reduction interfaces. These are used for coefficient coordinates; they do not supply geometric scalar interpolation or pattern covers.",
+   "date": "2026-10-27",
+   "verdict": "Arithmetic interfaces only."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(equal|graph)|pattern.*cover|continuous.*(limit|padic)",
+   "results": "Continuous and profinite limit infrastructure, no finite pro-etale pattern cover or scalar interpolation theorem. Local Sheaf and WeilConjectures search found the existing discrete continuous coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact geometric match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAffineFreePresheafLocalDual",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-completed-affine-free-local-dual-local-presheaf",
+   "place": "continuous-function coordinates for completed coefficient sections",
+   "via": [
+    "lem-sfb-completed-affine-free-local-dual-local-presheaf"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAffineCoefficientModel",
+  "file": "lean/Sheaf/Paper/CompletedAffineCoefficientModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedAffineCoefficientModel_exists",
+  "statement": "theorem completedAffineCoefficientModel_exists (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :\n    Nonempty (CompletedAffineCoefficientModel l X)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CompletedAffineCoefficientModel",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedAffineCoefficientModel_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T064438-L-2178011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T064438-L-2178011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

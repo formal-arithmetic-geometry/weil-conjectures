@@ -18,99 +18,40 @@
  ],
  "proof": [
   {
-   "text": "Suppose first that $\\mathcal F_x\\otimes\\kappa(x)=0$. The stalk $\\mathcal F_x$ is finitely generated over the local ring $\\mathcal O_{X,x}$ because $\\mathcal F$ is of finite presentation. Apply the Nakayama generating criterion [lem-weil-pbc-nakayama-local-generators] to the empty family: its image generates the zero residue-fibre, so $\\mathcal F_x=0$. Apply [lem-weil-pbc-module-finite-type-surjective-on-stalk] to the zero morphism $0\\to\\mathcal F$. Its stalk map is surjective because $\\mathcal F_x=0$, and finite presentation gives finite type. After shrinking to an open neighbourhood $W$ of $x$, $\\mathcal F|_W=0$, which is the required conclusion with $r=0$.",
+   "text": "Apply lem-trf-finite-presentation-stalk-fibre-data at x. Write R=O_{S,f(x)}, B=O_{X,x}, M=F_x. Its finite free presentation gives Module.FinitePresentation B M: the kernel of the displayed surjection is the range of its finite free relation map, hence finitely generated. Retain the essentially finitely presented local algebra model P, its localization T, and the compatible fibre quotient equivalences theta and eta.",
    "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-module-finite-type-surjective-on-stalk"
+    "lem-trf-finite-presentation-stalk-fibre-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 080Q, proof, first sentence (the zero-fibre case), using Algebra Tag 00DV and Modules Tag 01B8."
-   }
+   "elementary": false
   },
   {
-   "text": "Assume now that $\\mathcal F_x\\otimes\\kappa(x)\\ne0$. Set $R=\\mathcal O_{S,s}$ with maximal ideal $\\mathfrak m_R=\\mathfrak m_s$, $S_x=\\mathcal O_{X,x}$ with $\\alpha=f^\\sharp_x:R\\to S_x$ (a local homomorphism), use the identity map as the second local map $\\beta:S_x\\to S_x$, and let $M=\\mathcal F_x$. Since $f$ is locally of finite presentation [def-sbc-locally-finite-presentation], there are affine opens $\\operatorname{Spec}B\\ni x$ of $X$ and $\\operatorname{Spec}A\\ni s$ of $S$ with $f(\\operatorname{Spec}B)\\subseteq\\operatorname{Spec}A$ and $B$ a finitely presented $A$-algebra; with $\\mathfrak p\\subset A$, $\\mathfrak q\\subset B$ the primes of $s$, $x$, the ring $S_x=B_{\\mathfrak q}$ is a localization of the finitely presented $A_{\\mathfrak p}$-algebra $B\\otimes_AA_{\\mathfrak p}$, and $A_{\\mathfrak p}=R$; so $S_x$ is essentially of finite presentation over $R$. Taking stalks at $x$ of a local presentation $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U\\to0$ (stalks are exact) shows that $M$ is a finitely presented $S_x$-module, and $M\\ne0$ because $M\\otimes\\kappa(x)\\ne0$. For the fibre, let $p:X_s\\to X$ be the first projection and $x'\\in X_s$ the point over $x$. By [lem-sbc-scheme-fibre-stalk-quotient], $p^\\sharp_{x'}$ induces a ring isomorphism $S_x/\\mathfrak m_RS_x\\cong\\mathcal O_{X_s,x'}$. By [lem-weil-pbc-module-stalk-pullback] applied to $p$ and $\\mathcal F$, $(\\mathcal F_s)_{x'}=(p^*\\mathcal F)_{x'}\\cong M\\otimes_{S_x}\\mathcal O_{X_s,x'}$ as $\\mathcal O_{X_s,x'}$-modules, and under the ring isomorphism this is $M\\otimes_{S_x}S_x/\\mathfrak m_RS_x=M/\\mathfrak m_RM$ as an $S_x/\\mathfrak m_RS_x$-module. Flatness is invariant under such a compatible pair of isomorphisms, so the hypothesis that $(\\mathcal F_s)_x$ is flat over $\\mathcal O_{X_s,x}$ says that $M/\\mathfrak m_RM$ is flat over $S_x/\\mathfrak m_RS_x$; the other hypothesis says that $M$ is flat over $R$. Hence [lem-weil-pbc-criterion-flatness-fibre], applied to $R\\xrightarrow{\\alpha}S_x\\xrightarrow{\\mathrm{id}}S_x$ and $M$ (its $S$ and $S'$ both $S_x$), gives that $\\mathcal F_x=M$ is flat over $\\mathcal O_{X,x}$.",
+   "text": "Split on whether M is subsingleton. In that case M is free, with the empty basis, directly. Otherwise M is nontrivial. Restrict scalars through the actual local stalk map R to B; relative flatness is Module.Flat R M. Through theta and eta, lem-pc-flat-semilinear-equiv transfers fibre stalk flatness to flatness of M/(m_R B)M over B/m_R B. The quotient-tensor equivalence identifies this quotient with (B/m_R B) tensor_B M, linearly over the quotient ring. Apply lem-weil-pbc-criterion-flatness-fibre to R to B to B, the second map the identity, and the same presentation P,T twice. The conclusion makes M flat over B, and lem-weil-pbc-finite-flat-local-free makes M free.",
    "uses": [
+    "lem-pc-flat-semilinear-equiv",
     "lem-weil-pbc-criterion-flatness-fibre",
-    "lem-sbc-scheme-fibre-stalk-quotient",
-    "lem-weil-pbc-module-stalk-pullback",
-    "def-sbc-locally-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 080Q, proof, second sentence (the fibre criterion applied with f = id), in its local form Algebra Tag 00R7 (lemma-criterion-flatness-fibre); fibre local ring by Schemes Tag 0HA1 and stalk of pullback by Sheaves Tag 0098."
-   }
-  },
-  {
-   "text": "The stalk $\\mathcal F_x$ is finitely generated over the local ring $\\mathcal O_{X,x}$, and it is flat by the preceding step. Therefore [lem-weil-pbc-finite-flat-local-free] gives a finite basis of $\\mathcal F_x$ over $\\mathcal O_{X,x}$; write its cardinality as $r\\ge0$.",
-   "uses": [
     "lem-weil-pbc-finite-flat-local-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 080Q, proof, sentence “Hence $\\mathcal F_x$ is free”, invoking Algebra Tag 00NZ."
-   }
+   "elementary": false
   },
   {
-   "text": "Represent the $r$ basis vectors by sections on a common open neighbourhood $U$ of $x$ and let $\\psi:\\mathcal O_U^{\\oplus r}\\to\\mathcal F|_U$ send the standard basis to those sections. Its stalk map at $x$ is surjective (indeed an isomorphism). The restriction $\\mathcal F|_U$ is of finite type because it is of finite presentation. Applying [lem-weil-pbc-module-finite-type-surjective-on-stalk] to $\\psi$ and shrinking gives an open neighbourhood $V\\subseteq U$ of $x$ on which $\\psi$ is surjective as a sheaf map.",
+   "text": "In either case the finite free B-module M has the basis Module.finBasis indexed by Fin r, with r its finite rank. Apply lem-trf-finite-presentation-stalk-basis-spread to X.toRingedSpace, F and that basis; invert its isomorphism. Scheme.Modules.overIsoFreeEquiv converts the over-site trivialization to the scheme restriction, and restrictFreeIso identifies the restriction of the free module on X with the free module on W. Compose to obtain exactly the required isomorphism. This also handles rank zero.",
    "uses": [
-    "lem-weil-pbc-module-finite-type-surjective-on-stalk"
+    "lem-trf-finite-presentation-stalk-basis-spread"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 080Q, proof, sentences “Choose an open neighbourhood ... sections ... basis” and “The corresponding map ... is surjective after shrinking”, using Modules Tag 01B8."
-   }
-  },
-  {
-   "text": "On the ringed space $V$, the module $\\mathcal F|_V$ remains finitely presented and $\\psi:\\mathcal O_V^{\\oplus r}\\to\\mathcal F|_V$ is surjective. Hence [lem-weil-pbc-finite-presentation-kernel-surjection-finite-type] shows that $K=\\operatorname{Ker}(\\psi)$ is of finite type. At $x$, the map $\\psi_x$ is the chosen basis isomorphism, so $K_x=0$.",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 080Q, proof, sentences “Then Ker(ψ) is of finite type” and “Ker(ψ)_x=0”, invoking Modules Tag 01BP."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-module-finite-type-surjective-on-stalk] to the zero morphism $0\\to K$ at $x$. Since $K$ is of finite type and $K_x=0$, its stalk map is surjective, so after shrinking to an open neighbourhood $W\\subseteq V$ we have $K|_W=0$.",
-   "uses": [
-    "lem-weil-pbc-module-finite-type-surjective-on-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 080Q, proof, sentence “Whence after shrinking U once more ψ is an isomorphism”, with Modules Tag 01B8."
-   }
-  },
-  {
-   "text": "The restriction $\\psi|_W$ is surjective by construction and has zero kernel, hence is an isomorphism of $\\mathcal O_W$-modules. Therefore $\\mathcal F|_W\\cong\\mathcal O_W^{\\oplus r}$, proving the statement.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 080Q, proof, final sentence."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sbc-locally-finite-presentation",
-  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-pc-flat-semilinear-equiv",
+  "lem-trf-finite-presentation-stalk-basis-spread",
+  "lem-trf-finite-presentation-stalk-fibre-data",
   "lem-weil-pbc-criterion-flatness-fibre",
-  "lem-weil-pbc-finite-flat-local-free",
-  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
-  "lem-weil-pbc-module-finite-type-surjective-on-stalk",
-  "lem-weil-pbc-module-stalk-pullback",
-  "lem-weil-pbc-nakayama-local-generators"
+  "lem-weil-pbc-finite-flat-local-free"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 080Q, lemma-flat-and-free-at-point-fibre, proof; auxiliary facts are Stacks Tags 00DV, 00R7, 00NZ, 01B8 and 01BP."
+  "place": "Tag 080Q, lemma-flat-and-free-at-point-fibre; local-algebra criterion and final basis-spreading argument. Lean assembly by W2, 2026-10-26: split directly on the zero stalk, rather than its residue fibre, and let basis spreading handle rank zero."
  },
  "mathlib_searches": [
   {
@@ -215,48 +156,32 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-flat-fibre-free-neighbourhood",
   "worker": "stage1",
-  "summary": "Read Stacks Tag 080Q and its complete proof. The imported statement is unchanged. I split the proof into the zero-stalk case, the local fibre flatness criterion, finite flat local freeness, spreading a basis to a surjection, finite type of the kernel, shrinking the zero kernel, and the final isomorphism. Every non-elementary input is an existing DAG node; no new nodes were needed. I checked the empty basis/rank-zero case and the nonzero case separately, and recorded Q58 Mathlib searches.",
-  "blueprint": "The item has no direct blueprint node. Its inherited ancestor is lem-trf-local-term-locality; the steps realize the ancestor proof citation of Stacks Tag 080Q in the semistable-alteration/flattening route. Same_as search over the full blueprint found no duplicate blueprint statement.",
+  "summary": "Repair of the human re-split return. Statement unchanged. Extracted two independent statement-only unsplit nodes: finite-presentation stalk/fibre algebra data (the geometric preparation inside old Step 2) and prescribed stalk-basis spreading on any ringed space (old Steps 4--7). The parent retains the zero-residue-fibre argument, applies the original local flatness criterion and finite-flat-local freeness, then invokes basis spreading. The full returned argument and its new ownership are preserved in report.md; all new nodes were searched with the mandated logged tools. Landing-return repair: rebased the retained split onto the current shared DAG and reread all cited statements; all seven quotation checks still pass, so no mathematical or dependency change was needed. The two extracted nodes and original logged searches are retained for live-DAG promotion by L. Current-DAG retry verification after the provider interruption: the shared item still equals returned-item.json in every field; all seven current citation quotes were revalidated and the two extracted ids remain absent from the shared DAG. The retained 1760-character assembly and both statement-only tasks are overlaid on the current item again, preserving its statement and all maintainer fields. Revalidated on 2026-10-23 against the current read-only DAG after the landing-promotion return: the returned baseline and current item agree, all seven citation quotations match the current statements, both auxiliary ids remain new, and the retained searches were read without rerunning unchanged questions. Refreshed this delivery from the current item with only the four worker-owned stage-1 fields overlaid.",
+  "blueprint": "Same inherited semistable-alteration/flattening route from lem-trf-local-term-locality; no change of unit or ancestor. The first new node serves the local setup in Tag 080Q and the second serves its final basis/surjection/kernel paragraph. Whole-blueprint searches found no duplicate.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-criterion-flatness-fibre",
-    "why": "Step 2 takes the local fibre flatness criterion (Algebra 00R7) as stated, with S=S'=O_{X,x}; the trace-formula unit has no statement of the critère de platitude par fibres."
+    "why": "Step 3 uses the existing generic local-algebra fibre criterion with S=S′=B; the unit has no alternative for Algebra 00R7."
    },
    {
     "node": "lem-weil-pbc-module-finite-type-surjective-on-stalk",
-    "why": "Steps 1, 4 and 6 spread stalk surjectivity onto a finite-type module to a neighbourhood (Modules 01B8); a generic ringed-space tool the unit does not supply."
-   },
-   {
-    "node": "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
-    "why": "Step 5 needs that the kernel of a surjection from a finite free module onto a finitely presented module is of finite type (Modules 01BP); a generic ringed-space tool the unit does not supply."
-   },
-   {
-    "node": "lem-sbc-scheme-fibre-stalk-quotient",
-    "why": "Step 2 identifies the local ring of the fibre X_s at x with O_{X,x}/m_s O_{X,x} (Schemes 0HA1); a generic scheme fact the unit does not supply."
-   },
-   {
-    "node": "lem-weil-pbc-module-stalk-pullback",
-    "why": "Step 2 identifies the stalk of the fibre pullback F_s with F_x tensor O_{X_s,x} (Sheaves 0098); a generic module-pullback fact the unit does not supply."
+    "why": "Step 2 uses the generic finite-type ringed-space surjectivity-near-a-stalk lemma on 0 to F, to cover the zero case; the unit has no substitute."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-criterion-flatness-fibre",
-  "lem-weil-pbc-module-finite-type-surjective-on-stalk",
-  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
-  "lem-sbc-scheme-fibre-stalk-quotient",
-  "lem-weil-pbc-module-stalk-pullback"
+  "lem-weil-pbc-criterion-flatness-fibre"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q58-42dfeebaa",
-  "group": "Q58",
+  "reviewer": "NT-cc-NO-dda74bda7",
+  "group": "NO",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-42dfeebaa (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 080Q (more-morphisms.tex, lemma-flat-and-free-at-point-fibre: the statement, the preceding remark and the whole proof). The statement is unchanged from the side/live unsplit node and agrees with 080Q hypothesis by hypothesis; r=0 covers the zero case. The delivery has no new nodes, and the only DAG nodes stating 080Q are the item and its citer lem-trf-generic-free-blowup. I checked each of the seven steps against the statement of the node it cites. Step 1 (00DV, empty family; then 01B8 on 0->F): correct. Step 2 (00R7 with S=S'=O_{X,x}, beta=id): every hypothesis holds (alpha local, essentially of finite presentation from locally of finite presentation, M finitely presented and nonzero). However, the identification of (F_s)_x with M/m_sM over O_{X_s,x}=O_{X,x}/m_sO_{X,x} was justified only as 'by definition'. It is Schemes 0HA1 plus Sheaves 0098 (C1). Fixed by citing the existing nodes lem-sbc-scheme-fibre-stalk-quotient and lem-weil-pbc-module-stalk-pullback and writing out the compatible isomorphisms and the essential-finite-presentation argument (def-sbc-locally-finite-presentation). Steps 3-7 (00NZ, 01B8, 01BP, 01B8, elementary isomorphism): correct, including K_x=0 from exactness of stalks. Small cases: k[t]/(t) over A^1 and over Spec k each fail one flatness hypothesis and are not free; O^n is free; so both hypotheses are needed. The five off-unit non-leaf lemma uses (00R7, 01B8, 01BP, 0HA1, 0098) were undeclared (C8). I added them to split_report.tool_uses and accept them. proof_deps now equals the union of the uses. No cycle (I checked transitive deps), no SGA source, not a target node. The corrected item is in fixes/dag/nodes/sec-trace-formula/lem-trf-flat-fibre-free-neighbourhood.json; no nodes added or dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-dda74bda7 (reviewer sub-agent of L); spot-checked: Fourth delivery of this re-split (earlier PASSes: f16d097f, 808cb5fc, 05392d2f), sent again after a landing/promotion return. Both new nodes are identical to the earlier deliveries. The item differs only in split_report.date and one added summary sentence; statement, proof and deps are unchanged. The earlier snapshots were partial, so I reread every cited statement on this base. The item matches Stacks 080Q (more-morphisms lemma-flat-and-free-at-point-fibre) hypothesis by hypothesis. Step 1: fibre-data, since finite presentation gives local finite presentation. Step 2: the current Nakayama node with the empty family gives M=0, then the 01B8 node applied to 0->F gives r=0; otherwise M is nonzero. Step 3: current 00R7 node with S=S'=B and beta=id. Its five hypotheses hold: the T^-1 P witness twice, M finitely presented, M nonzero, fibre flatness moved across by theta and eta (elementary), and R-flatness. Then 00NZ gives a finite basis. Step 4: basis-spread, then invert the isomorphism. The new nodes are true. fibre-data checked on f=id, Spec k -> Spec k[t] and M=0, against 0HA1 and 0098. basis-spread is 0B8J keeping the chosen germs, checked on r=0, a one-point space and arbitrary ringed spaces. They are of comparable size, neither restates the item, and no old argument was dropped. Duplicate search with rg -L on this base (0B8J, 080Q, free-neighbourhood wording): lem-trf-generic-free-blowup, lem-sc-local-section-quotient-finite-free, new-sbc-local-section-of-epi, lem-sc-open-stalk-free-map-one-lift and the lem-pc-finite-free-stalk-* nodes each lack a hypothesis or conclusion, so none is a duplicate. Accepted tool_uses: 00R7, 01B8. No fixes. Maintainer note: L should promote this rather than dispatch it again."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -276,5 +201,26 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T083404-L-2339700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

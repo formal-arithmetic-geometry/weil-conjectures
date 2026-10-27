@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-affine-diagonal-transpose-power",
+ "kind": "statement",
+ "title": "Assemble raw trace and coefficient root-power compatibility",
+ "statement": "Use [def-pur-affine-diagonal-integration-constructions] in the finite setting [def-pur-conventions]. Let f:U→B be compactifiable quasi-compact with a specified rank-d affine tower presentation, and B finite type over k. For r≤r' annihilating A, supply a normalized root-power map q on U and a line comparison e with its pure-generator formula. Then the ordered shifted tensor comparison induced by e, followed by the presented exceptional transpose at r, equals the presented exceptional transpose at r'. The existence of q,e and the corresponding compact-support integration equation are not part of this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement"
+ },
+ "stmt_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the exponent clause of [lem-asd-etale-finite-twist-pullback] on B to obtain a root-power map qB and the line isomorphism eB, with their kernel and pure-generator equations. Invertibility of the root exponent on B follows from [def-pur-conventions].",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-affine-diagonal-power-coefficient] to obtain comparison of the two coefficient prefixes and [lem-pur-affine-diagonal-raw-transpose-power] for the raw ordered trace transposes. In the explicit formula [def-pur-affine-diagonal-integration-constructions], reassociate, substitute the coefficient equation, combine the two pullback maps by functoriality, substitute the raw transpose equation and append the unchanged dualizing base-change mate. The proved private categorical transport lemma performs exactly this calculation.",
+   "uses": [
+    "lem-pur-affine-diagonal-power-coefficient",
+    "lem-pur-affine-diagonal-raw-transpose-power",
+    "def-pur-affine-diagonal-integration-constructions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "def-pur-conventions",
+  "lem-pur-affine-diagonal-power-coefficient",
+  "lem-pur-affine-diagonal-raw-transpose-power",
+  "def-pur-affine-diagonal-integration-constructions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized root power maps commute with derived coefficient pullback and affine space integration trace",
+   "results": "8 hits: Algebra.normalizedTrace and normalizedTrace_def, Polynomial.integralNormalization_map and related field-trace/polynomial normalization results. None concerns etale Tate coefficients, ordered integration or exceptional adjunctions.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root power comparison commutes with the exceptional transpose of ordered affine integration",
+   "results": "8 hits: RootPairing.RootPositiveForm.pairingIn_mul_eq_pairingIn_mul_swap, RootPairing.chainBotCoeff_mul_chainTopCoeff and root-system chain/reflection lemmas. No finite Tate comparison or derived trace equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv_apply, homEquiv_symm_apply and comp_homEquiv. These supply the generic adjunction API, not root-power trace compatibility. Local source homEquiv_naturality_left_symm gives the compact-support equation from the transpose equation.",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction glue only"
+  },
+  {
+   "tool": "grep",
+   "query": "root.*power|power.*root|homEquiv_naturality_left",
+   "results": "25 returned hits include rootsOfUnity.integer_power_of_ringEquiv, cyclotomic primitive-root power bases and number-field root-of-unity results. These concern algebraic roots and power bases, not sheaves, Tate scalar extension, compact-support integration or exceptional transposes. A separate local source search found the generic adjunction source-naturality lemma used in the assembly.",
+   "date": "2026-10-26",
+   "verdict": "no geometric match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalIntegrationOrientation",
+  "group": "F2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement",
+   "via": [
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalTransposePower",
+  "file": "lean/Sheaf/Paper/AffineDiagonalTransposePower.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalTranspose_powerCompatible",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalTranspose_powerCompatible"
+  ],
+  "statement": "theorem affineDiagonalTranspose_powerCompatible (P : PurityFiniteSetting.{u})\n    {U B : Scheme.{u}} (d : ℕ) (f : U ⟶ B) [HasCompactification f] [QuasiCompact f]\n    (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (r r' : ℕ) (hrr : r ≤ r')\n    (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : P.Coefficient) = 0)\n    (hA' : ((P.coefficients.l ^ (r' + 1) : ℕ) : P.Coefficient) = 0)\n    (c : U ≅ affineTraceTower B d) (hc : c.hom ≫ affineTraceProjection B d = f)\n    (q : U.rootsOfUnitySheaf (P.coefficients.l ^ (r' + 1)) ⟶\n      U.rootsOfUnitySheaf (P.coefficients.l ^ (r + 1)))\n    (e : Scheme.finiteEtaleTateLine U (P.coefficients.l ^ (r' + 1)) P.Coefficient hA' ≅\n      Scheme.finiteEtaleTateLine U (P.coefficients.l ^ (r + 1)) P.Coefficient hA)\n    (hq : q ≫ kernel.ι ((P.coefficients.l ^ (r + 1)) • 𝟙 U.gmSheaf) =\n      (P.coefficients.l ^ (r' + 1) / P.coefficients.l ^ (r + 1)) •\n        kernel.ι ((P.coefficients.l ^ (r' + 1)) • 𝟙 U.gmSheaf))\n    (he : ∀ (V : U.Etaleᵒᵖ) (a : P.Coefficient)\n      (z : (U.rootsOfUnitySheaf (P.coefficients.l ^ (r' + 1))).obj.obj V),\n      e.hom.hom.app V (Scheme.finiteEtaleTateOneGenerator P.Coefficient\n        (P.coefficients.l ^ (r' + 1)) U hA' V a z) =\n      Scheme.finiteEtaleTateOneGenerator P.Coefficient\n        (P.coefficients.l ^ (r + 1)) U hA V a (q.hom.app V z)) :\n    (P.affineDiagonalPowerComparison U r r' hA hA' e d).hom ≫\n      P.affineDiagonalPresentedTranspose d f aB r hA c hc =\n        P.affineDiagonalPresentedTranspose d f aB r' hA' c hc",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T201830-L-2628638",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T201830-L-2628638",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

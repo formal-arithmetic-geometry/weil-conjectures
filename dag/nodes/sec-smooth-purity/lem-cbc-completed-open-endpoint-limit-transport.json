@@ -1,0 +1,336 @@
+{
+ "id": "lem-cbc-completed-open-endpoint-limit-transport",
+ "kind": "statement",
+ "title": "Completed open endpoint comparisons transport normalized derived limits",
+ "statement": "Let $(A,I)$ be a Noetherian adic datum with finite perfect quotients $P_n=A/I^n$, completed coefficient sheaves $A_V=\\lim_n(P_n)_V$ and strict reduction towers [def-weil-pbc-adic-coefficient-datum]. Let $(j:U\\hookrightarrow T,j':U'\\hookrightarrow T',u:T'\\to T,v:U'\\to U)$ be a cartesian open square with $j$ quasi-compact [def-cbc-open-immersion-square, def-weil-finite-type-morphism]. Use exact ringed extension by zero [lem-pur-site-restriction-module-adjunction-exact]. Let $K\\in D(\\operatorname{Mod}(A_U))$ be intrinsically derived $I$-complete, with $j_!K$ complete [def-weil-pbc-intrinsic-completion]. Use its canonical quotient/open comparison $(j_!K)_\\bullet\\simeq J_jK_\\bullet$. Set\n$$Q=Lu^*_{\\operatorname{Tow}}(j_!K)_\\bullet,\\quad C=Lv^*_{\\operatorname{Tow}}K_\\bullet,\\quad M=r_UK_\\bullet,\\quad H=G_vM,\\quad N=G_uJ_jM,$$\nwhere pullback is [def-weil-pbc-completed-pullback], $r_V$ is restriction along $\\underline A_V\\to A_V$ [def-pc-sheaf-restrict-scalars], and constant-$A$ operations are [def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-open-extension]. Fix the canonical scalar/finite-reduction comparisons $a:r_{T'}Q\\simeq N$, $d:r_{U'}C\\simeq H$ [lem-weil-pbc-constant-completion-equivalence]. Write $e:r_{T'}J_{j'}\\simeq J_{j'}r_{U'}$ for the identity-of-extension-presheaves comparison of [lem-cbc-ringed-open-scalar-limit-coherence] for the ring map $\\underline A_{T'}\\to A_{T'}$, and $b=J_{j'}(d)e_C$.\nWrite $\\widehat L_V$ and $L_V$ for completed-ring and constant-$A$ total derived inverse limit respectively. For scalar restriction and the two coefficient versions of $j'_!$, use exactly the normalized comparison $\\lambda_F:FL\\simeq LF^{\\operatorname{Tow}}$ of [lem-cbc-exact-product-functor-strict-limit], including its strict-augmentation normalization, as specified for these four functors in [lem-cbc-ringed-open-scalar-limit-coherence]. These open comparisons are isomorphisms, with $j'$ quasi-compact by base change [lem-pc-quasi-compact-base-change]. The canonical source endpoint is\n$$\\widehat a=L_{T'}(a)\\lambda_{r_{T'},Q}:r_{T'}\\widehat L_{T'}Q\\simeq L_{T'}N.$$\nThe canonical target endpoint is\n$$\\widehat b=j'_!\\bigl(L_{U'}(d)\\lambda_{r_{U'},C}\\bigr)e_{\\widehat L_{U'}C}:r_{T'}j'_!\\widehat L_{U'}C\\simeq j'_!L_{U'}H.$$\nThey agree with the finite-reduction and completed-pullback endpoint comparisons, carrying the quotient-tower completion units to the constant-$A$ units. They satisfy the endpoint pasting identity\n$$\\widehat b\\circ r_{T'}((\\lambda^{\\mathrm{comp}}_{j',C})^{-1})=\\lambda_{j',H}^{-1}\\circ L_{T'}(b)\\circ\\lambda_{r_{T'},J_{j'}C}.$$\nConsequently, for every derived strict-tower morphism $\\theta:Q\\to J_{j'}C$, define $B_\\theta=(\\lambda^{\\mathrm{comp}}_{j',C})^{-1}\\circ\\widehat L_{T'}(\\theta)$. In the stated endpoints its scalar restriction is\n$$\\widehat b\\circ r_{T'}(B_\\theta)\\circ\\widehat a^{-1}=\\lambda_{j',H}^{-1}\\circ L_{T'}(b\\circ r_{T'}(\\theta)\\circ a^{-1}).$$\nThese identities are natural in the coefficient complex and the strict-tower morphism. They impose no open-unit-mate condition on $\\theta$, no etale-origin or common degree bound, and no faithfulness condition on derived evaluation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange paragraph and final derived-limit paragraph; agent-written refinement of the specified scalar/reduction and open-unit comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-open-immersion-square",
+  "def-weil-finite-type-morphism",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-completed-pullback",
+  "def-pc-sheaf-restrict-scalars",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-cbc-ringed-open-scalar-limit-coherence",
+  "lem-pc-quasi-compact-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use the pro-etale slice presentation of each open extension and the invertible localized open unit to prove both ordinary open extensions fully faithful. The ringed scalar/open comparison places the scalar-restricted completed extension in the essential image of the constant extension, making its counit invertible there. The explicit inverse-mate formula is a composite of this counit, the invertible completed open unit, and the specified scalar/pullback isomorphism. Thus the specified scalar/open mate is invertible, including on the empty open.",
+   "uses": [
+    "lem-sp-proetale-open-slice-presentation",
+    "lemma-weil-pbc-projection-formula-open-piece",
+    "lem-cbc-ringed-open-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite-exchange paragraph and final derived-limit paragraph; agent-written refinement of the specified scalar/reduction and open-unit comparisons."
+   }
+  },
+  {
+   "text": "Prove that exact localization preserves invertibility of the open adjunction unit: on a complex the unit is the localized degreewise unit conjugated by exact-functor factorization isomorphisms, and essential surjectivity extends this to every derived object. Apply this both to modules and to strict towers. Transport the ringed strict reduction isomorphism through canonical left-adjoint isomorphisms to the endpoint open extension; it puts reduction of an extended object in the essential image of strict open extension. Its counit is therefore invertible there. The explicit inverse-mate formula gives invertibility of the specified reduction transpose. Naturality is the naturality of that inverse mate.",
+   "uses": [
+    "lem-cbc-ringed-open-strict-reduction",
+    "lem-sp-proetale-open-slice-presentation",
+    "lem-sf-exact-localization-inverse-mate",
+    "lem-sf-cbc-constant-tower-direct-image-normalization",
+    "def-cbc-completed-open-scalar-quotient-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite-exchange paragraph and final derived-limit paragraph; agent-written refinement of the specified scalar/reduction and open-unit comparisons."
+   }
+  },
+  {
+   "text": "For any endpoint limit mate, the unit equation for mates and naturality of the constant-diagram comparison prove strict-augmentation normalization. Construct the normalized Roos comparison using the recorded cornerData and comparisonData. Conjugate its equation by the canonical Roos-to-limit isomorphisms on complexes; their projection equations identify the resulting map with the ordinary preserved-limit comparison. Its cochain right-derived unit equation is ExchangeDerivedPushNormalized. The uniqueness theorem exactDerivedMate_eq therefore identifies that invertible comparison with cbcEndpointLimitMap. Scalar restriction preserves products; transfer open-extension product preservation through the pro-etale slice equivalence. Apply this argument to the scalar functor and to both coefficient versions of the open extension.",
+   "uses": [
+    "lem-cbc-normalized-limit-square-coherence",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-derived-exact-equivalence-squares",
+    "lem-cbc-ringed-open-extension-products",
+    "lem-sp-proetale-open-slice-presentation",
+    "lem-cbc-ringed-open-scalar-limit-coherence",
+    "lem-a1-strict-roos-shift-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite-exchange paragraph and final derived-limit paragraph; agent-written refinement of the specified scalar/reduction and open-unit comparisons."
+   }
+  },
+  {
+   "text": "Apply the exact derived cube theorem to the ordinary scalar/open square and its four identity-component constant-diagram squares. Its ordinary cube is checked componentwise. The exchange-mate cube under the four constant/limit adjunctions gives the normalized scalar/open limit square. Cancel its invertible factors to obtain the inverse square.",
+   "uses": [
+    "lem-fix-site-open-exchange-localization",
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite-exchange paragraph and final derived-limit paragraph; agent-written refinement of the specified scalar/reduction and open-unit comparisons."
+   }
+  },
+  {
+   "text": "Compare the exact-localization adjunction with the right-derived adjunction transported through rightDerivedFunctorIsoMapDerivedCategory. Both units have the same cochain factorization, hence localization extensionality and Adjunction.ext identify them. The ordinary constant/open unit square is componentwise the open unit. Localize it with mate_unit_Q to obtain the specified derived constant/open unit square. Transpose the requested reduction augmentation equation. Naturality of the quotient augmentation, its pullback compatibility reduction_augmentation, and the derived constant/open unit square give equality. Cancel the inverse reduction isomorphism.",
+   "uses": [
+    "lem-sf-exact-localization-inverse-mate",
+    "lem-sf-cbc-constant-tower-direct-image-normalization",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite-exchange paragraph and final derived-limit paragraph; agent-written refinement of the specified scalar/reduction and open-unit comparisons."
+   }
+  },
+  {
+   "text": "Quasi-compactness of the base-changed open follows from its pullback presentation. Compose the inverse scalar/open limit square with the target finite-reduction map and use naturality of the constant open limit isomorphism; this gives the endpoint pasting identity. For any strict derived tower arrow theta, use scalar-limit naturality, the pasting identity, and cancellation of the source endpoint isomorphism to obtain the stated conjugation formula. These are equalities in the derived category of strict towers and use no faithfulness of evaluation.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Finite-exchange paragraph and final derived-limit paragraph; agent-written refinement of the specified scalar/reduction and open-unit comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-proetale-open-slice-presentation",
+  "lemma-weil-pbc-projection-formula-open-piece",
+  "lem-cbc-ringed-open-scalar-adjunction",
+  "lem-cbc-ringed-open-strict-reduction",
+  "lem-sf-exact-localization-inverse-mate",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
+  "def-cbc-completed-open-scalar-quotient-interface",
+  "lem-cbc-normalized-limit-square-coherence",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "lem-derived-exact-equivalence-squares",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-cbc-ringed-open-scalar-limit-coherence",
+  "lem-a1-strict-roos-shift-localization",
+  "lem-fix-site-open-exchange-localization",
+  "lem-weil-pbc-exchange-mate-cube",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "R3 stage-3 proof: fully faithful open adjunctions and essential-image counits; strict reduction transport; normalized constant-diagram mates; exact and mate cubes; quotient augmentation transposition; endpoint naturality and inverse cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(derivedLimit|DerivedLimit|Rlim|rlim|inverseLimit).*(restrictScalars|RestrictScalars|extensionByZero)|(extensionByZero).*(limit|Limit)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: functoriality and ordinary module completion do not identify these normalized derived scalar/open endpoints"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scalar restricted inverse limit of any strict tower morphism followed by inverse open extension limit comparison is conjugated by the canonical finite reduction source and target comparisons",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.restrictScalars\", \"IntermediateField.restrictScalars\", \"Derivation.restrictScalars\", \"Submodule.restrictScalarsEmbedding\", \"LinearEquiv.restrictScalars\", \"FormalMultilinearSeries.restrictScalars\", \"Subalgebra.ofRestrictScalars\", \"ContinuousLinearMap.restrictScalarsL\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: functoriality and ordinary module completion do not identify these normalized derived scalar/open endpoints"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_comp\", \"PresheafOfModules.map_comp\", \"PresheafOfModules.map_comp_assoc\", \"PresheafOfModules.mk\", \"PresheafOfModulesOfCommRing.mk\", \"AlgebraicGeometry.PresheafedSpace.map_comp_c_app\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: functoriality and ordinary module completion do not identify these normalized derived scalar/open endpoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport the normalized comparison between extension by zero and total derived inverse limit through restriction of scalars and finite reduction endpoint isomorphisms including completion units",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"AdicCompletion.transitionMap_comp_eval\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"IsAdicComplete.StrictMono.extend_eq\", \"AdicCompletion.congr\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: functoriality and ordinary module completion do not identify these normalized derived scalar/open endpoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting the scalar restriction and extension by zero derived inverse limit comparison square, with quotient tower source and target endpoint isomorphisms and strict augmentation units",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.square_commutes\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"localCohomology.diagramComp\", \"InverseSystem.globalEquiv_naturality\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"IsAdicComplete.of_comp_lift\", \"AdicCompletion.transitionMap_comp_eval\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: functoriality and ordinary module completion do not identify these normalized derived scalar/open endpoints"
+  },
+  {
+   "tool": "grep",
+   "query": "(derivedLimit|DerivedLimit|Rlim|rlim|inverseLimit).*(restrictScalars|RestrictScalars|extensionByZero)|(extensionByZero).*(limit|Limit)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic naturality/product identities do not state the normalized derived scalar/open comparison with quotient-augmentation endpoints"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical normalized derived inverse limit comparisons for scalar restriction and extension by zero satisfy pasting and transport all strict tower morphisms",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.restrictScalars.congr_simp\", \"IsScalarTower.AlgEquiv.restrictNormalHom_comp\", \"Derivation.restrictScalars\", \"Submodule.restrictScalars\", \"InverseSystem.invLimEquiv.congr_simp\", \"IntermediateField.restrictScalars\", \"ContinuousLinearMap.restrictScalarsL\", \"AdicCompletion.instIsScalarTower\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic naturality/product identities do not state the normalized derived scalar/open comparison with quotient-augmentation endpoints"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.map_comp",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic naturality/product identities do not state the normalized derived scalar/open comparison with quotient-augmentation endpoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport normalized derived inverse limit through restriction of scalars and extension by zero, preserving quotient tower completion units",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.congr\", \"Hausdorffification.lift\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"AdicCompletion.instModuleOfIsScalarTower\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic naturality/product identities do not state the normalized derived scalar/open comparison with quotient-augmentation endpoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the composite comparison from an exact product preserving functor applied to derived inverse limit, compatibility with natural isomorphisms and augmentation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.inv_piComparison_comp_map_π\", \"CategoryTheory.Limits.prodComparison_inv_natural\", \"CategoryTheory.Limits.prodComparison_inv_natural_assoc\", \"CategoryTheory.Limits.prodComparison_natural\", \"CategoryTheory.Limits.prodComparison_comp\", \"CategoryTheory.Limits.inv_piComparison_comp_map_π_assoc\", \"CategoryTheory.Limits.map_lift_piComparison_assoc\", \"CategoryTheory.Limits.prodComparison_natural_of_natTrans\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic naturality/product identities do not state the normalized derived scalar/open comparison with quotient-augmentation endpoints"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_comp|naturality|def congr",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"19\", \"50\", \"56\", \"57\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic naturality/product identities do not state the normalized derived scalar/open comparison with quotient-augmentation endpoints"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary adic completion and generic naturality/product identities do not state the normalized derived scalar/open comparison with quotient-augmentation endpoints"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-completed-open-strict-mate-identification",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof first sentence, the two isomorphisms defining def-cbc-completed-exchange-map: final open factor; final derived-limit factor and its scalar/open endpoint normalization (returned item Steps 5-7).",
+   "via": [
+    "lem-cbc-completed-open-strict-mate-identification",
+    "lem-cbc-complete-proetale-strict-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-completed-open-endpoint-limit-transport",
+  "worker": "stage1",
+  "summary": "No exact project attachment or Mathlib match found. No new nodes: reuse normalized scalar/open coherence and finite-reduction/completion comparison. Check all four functor hypotheses, identify canonical augmentation-normalized endpoints, and write out endpoint pasting and conjugation of an arbitrary tower map. Statement unchanged.",
+  "blueprint": "thm-cbc-complete-proetale.proof.md, first paragraph, completed extension-by-zero factor; lem-cbc-completed-extension-zero-comparison.proof.md, finite-reduction and final derived-limit paragraphs.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic coefficient-change and finite-reduction comparison, including limits and completion units; the open-square unit supplies no replacement for this coefficient-ring tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-c31ccf465",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-c31ccf465 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the parent re-split packet (old Q106 Steps 5-7, from which this item was cut) and the main-20261015 lem-cbc-completed-extension-zero-comparison proof (final derived-limit paragraph). The delivery is one commit with no new nodes; statement, stmt_deps and blueprint are unchanged; proof_deps equals the union of the step uses; there is no cycle and no missing or merged id. Step 1: lem-pc-quasi-compact-base-change (Mathlib leaf) shows j' is quasi-compact. The ringed-open coherence lemma, with R=constant A_{T'} and S=A_{T'}, gives e and the four normalized lambdas as isomorphisms; no flatness or extra hypotheses. Step 2: the endpoints are a-hat=L(a)lambda_r and b-hat. I verified the completion units through the augmentation clause of the exact-product lemma, the quotient-map compatibility in the constant-completion equivalence and the augmentation clause of the coherence lemma. Step 3: recomputed with types. The coherence identity at M=C, cancelled, plus naturality of lambda_{j'} at d and L(J d)L(e_C)=L(b), gives the pasting identity exactly. Step 4: naturality of lambda_r at theta and a-hat^{-1}=lambda_r^{-1}L(a)^{-1} give the theta formula for arbitrary theta; target and source types checked. Edge cases checked: U empty, u=id, theta=0, unbounded K, I=A. No argument of the old Q106 Steps 5-7 is lost. Coefficient categories (completed against constant A) are identified only through r and the cited comparisons. No duplicate: lem-cbc-normalized-limit-square-coherence is the generic square under the coherence lemma, and the item is a specialization plus a theta-conjugation. Accepted tool_use: lem-weil-pbc-constant-completion-equivalence, the generic coefficient comparison. No SGA. Advisory: the statement writes J_{j'} for both the completed and the constant open extension; typing makes it unambiguous and Step 1 introduces J against J-hat. I left it unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedOpenEndpointLimitTransport",
+  "declaration": "AlgebraicGeometry.Scheme.completedOpenEndpointLimitTransport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcEndpointWhiskerLimits",
+   "AlgebraicGeometry.Scheme.cbcEndpointWhiskerColimits",
+   "AlgebraicGeometry.Scheme.cbcEndpointOpen",
+   "AlgebraicGeometry.Scheme.cbcEndpointOpenAdj",
+   "AlgebraicGeometry.Scheme.cbcEndpointDerivedOpenAdj",
+   "AlgebraicGeometry.Scheme.cbcEndpointTowerOpenAdj",
+   "AlgebraicGeometry.Scheme.cbcEndpointScalarOpenInv",
+   "AlgebraicGeometry.Scheme.cbcEndpointScalarOpenInv_isIso",
+   "AlgebraicGeometry.Scheme.cbcEndpointScalarOpen",
+   "AlgebraicGeometry.Scheme.cbcEndpointDerivedScalarOpen",
+   "AlgebraicGeometry.Scheme.cbcEndpointTowerScalarOpen",
+   "AlgebraicGeometry.Scheme.cbcEndpointReductionInv",
+   "AlgebraicGeometry.Scheme.cbcEndpointReductionInv_properties",
+   "AlgebraicGeometry.Scheme.cbcEndpointReductionInvNat",
+   "AlgebraicGeometry.Scheme.cbcEndpointReduction",
+   "AlgebraicGeometry.Scheme.cbcEndpointQuotientOpen",
+   "AlgebraicGeometry.Scheme.cbcEndpointLimitAdj",
+   "AlgebraicGeometry.Scheme.cbcEndpointConst",
+   "AlgebraicGeometry.Scheme.cbcEndpointLimitMap",
+   "AlgebraicGeometry.Scheme.CbcEndpointAugmentationNormalized",
+   "AlgebraicGeometry.Scheme.cbcEndpointScalarLimit_properties",
+   "AlgebraicGeometry.Scheme.cbcEndpointOpenLimit_properties",
+   "AlgebraicGeometry.Scheme.cbcEndpointScalarLimit",
+   "AlgebraicGeometry.Scheme.cbcEndpointCompletedOpenLimit",
+   "AlgebraicGeometry.Scheme.cbcEndpointConstantOpenLimit",
+   "AlgebraicGeometry.Scheme.cbcEndpointReduction_augmentation",
+   "AlgebraicGeometry.Scheme.cbcEndpointQ",
+   "AlgebraicGeometry.Scheme.cbcEndpointC",
+   "AlgebraicGeometry.Scheme.cbcEndpointM",
+   "AlgebraicGeometry.Scheme.cbcEndpointH",
+   "AlgebraicGeometry.Scheme.cbcEndpointN",
+   "AlgebraicGeometry.Scheme.cbcEndpointA",
+   "AlgebraicGeometry.Scheme.cbcEndpointD",
+   "AlgebraicGeometry.Scheme.cbcEndpointB",
+   "AlgebraicGeometry.Scheme.cbcEndpointSource",
+   "AlgebraicGeometry.Scheme.cbcEndpointTarget",
+   "AlgebraicGeometry.Scheme.completedOpenEndpointLimitTransport"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedOpenEndpointLimitTransport.lean",
+  "statement": "theorem completedOpenEndpointLimitTransport {U' U T' T : Scheme.{t}} {v : U' ⟶ U} {j' : U' ⟶ T'} {j : U ⟶ T} {u : T' ⟶ T} [IsOpenImmersion j] [IsOpenImmersion j'] [QuasiCompact j] (sq : OpenImmersionSquare v j' j u) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (K : d.derived U) (_hK : cbcCompleteProperty d U r a ha K) (_hJK : cbcCompleteProperty d T r a ha ((cbcEndpointOpen d j).mapDerivedCategory.obj K)) : ∃ hqc : QuasiCompact j', @id Prop ((proEtaleRingRestrictScalars (exchangeScalar d T')).mapDerivedCategory.map ((@cbcEndpointCompletedOpenLimit _ _ d _ _ j' inferInstance hqc).inv.app ((cbcEndpointC d v).obj K)) ≫ (cbcEndpointTarget d v j').hom.app K = (cbcEndpointScalarLimit d T').hom.app ((cbcTowerDerived (cbcEndpointOpen d j')).obj ((cbcEndpointC d v).obj K)) ≫ (completedRlim T' (exchangeConstantRing T' A)).map ((cbcEndpointB d v j').hom.app K) ≫ (@cbcEndpointConstantOpenLimit _ _ d _ _ j' inferInstance hqc).inv.app ((cbcEndpointH d v).obj K)) ∧ ∀ theta : (cbcEndpointQ d j u).obj K ⟶ (cbcTowerDerived (cbcEndpointOpen d j')).obj ((cbcEndpointC d v).obj K), (cbcEndpointSource d j u).inv.app K ≫ (proEtaleRingRestrictScalars (exchangeScalar d T')).mapDerivedCategory.map ((completedRlim T' (d.completedRing T')).map theta ≫ (@cbcEndpointCompletedOpenLimit _ _ d _ _ j' inferInstance hqc).inv.app ((cbcEndpointC d v).obj K)) ≫ (cbcEndpointTarget d v j').hom.app K = (completedRlim T' (exchangeConstantRing T' A)).map ((cbcEndpointA d j u).inv.app K ≫ (exchangeTowerRes d T').map theta ≫ (cbcEndpointB d v j').hom.app K) ≫ (@cbcEndpointConstantOpenLimit _ _ d _ _ j' inferInstance hqc).inv.app ((cbcEndpointH d v).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical endpoint constructions use the published integral strict-tower interfaces. Supporting theorems retain scalar/open invertibility, quotient/open naturality and augmentation normalization; all theorem proofs are postponed. The main statement includes both endpoint pasting and transport of every derived strict-tower morphism. Completeness uses the existing intrinsic-completion predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab1a40059",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Clause-by-clause check of completedOpenEndpointLimitTransport against the node: Q,C,M,H,N; a, d, e (mate of exchangeOrdinaryResPull) and b; the four λ as constant-diagram mates, pinned by augmentation normalization; â=L(a)λ_r and b̂=J(L(d)λ_r)e; the pasting identity and the ∀θ formula in diagrammatic order. Both identities follow formally from the mates. Sorry'd helpers are true. No extra hypotheses or universe restrictions. Edge cases: empty U, u=id, θ=0, unbounded K, I=A. Statement verbatim; 37 declarations match the file; no new nodes; stmt_deps unchanged; import closure has no cycle; docstrings carry source, blueprint tag and the 4 proof steps; report sections present. No compile (no change). Advisories: owners outside stmt_deps (exchange* family from theorem lem-weil-pbc-strict-tower-exchange-mate-normalization, completedRlim, towerPull, reductionTowerPullbackIso, proEtaleRingOpenExtension, unowned cbcCompleteProperty); cbcEndpoint* duplicates the ancestor theorem module's cbcRealization* mates (importing would be a stage-3 cycle; j_! model differs: proEtaleRingOpenExtension vs cbcOpenShriek); the units clause is rendered through the defined endpoints and the augmentation theorems."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261025T202942-L-2769846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

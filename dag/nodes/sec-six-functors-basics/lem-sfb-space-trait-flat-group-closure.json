@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-space-trait-flat-group-closure",
+ "kind": "statement",
+ "title": "Flat horizontal closure of a locally finite-type group space over a trait",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $\\pi$ generate its maximal ideal, let $K=\\operatorname{Frac}R$, and put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $G$ be a separated algebraic space over $S$ [def-trf-algebraic-space], locally of finite type on etale scheme charts [def-weil-finite-type-morphism], with multiplication, identity and inverse satisfying the group identities; commutativity is not assumed. Separated means that its diagonal is representable by closed immersions [def-weil-closed-immersion]. There is a unique closed subspace $C\\hookrightarrow G$ [def-sfb-space-closed-subspace] such that for every etale affine chart $U=\\operatorname{Spec}B\\to G$, its pullback is $\\operatorname{Spec}(B/J_B)$, where $J_B=\\ker(B\\to B[1/\\pi])$. It satisfies $C_K=G_K$. The operations of $G$ restrict to $C$, making $C$ a separated flat group algebraic space locally of finite type and locally of finite presentation over $S$ [def-weil-flat-morphism, def-sbc-locally-finite-presentation], with these properties tested on etale charts. For every flat $S$-scheme $T$, every $S$-morphism $T\\to G$ factors uniquely through $C$. No quasi-compactness, reducedness or smoothness is assumed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Anantharaman, Schemas en groupes, espaces homogenes et espaces algebriques sur une base de dimension 1, Memoires SMF 33 (1973), 1.2.0 and 1.2.5(b), printed pp.15 and 18-19, and 1.3.1(c), printed p.20 (OCR renders section 1.3 as 1.5): generic closure, group structure and etale-chart construction. Local archive WANTED; primary scan read at https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-closed-subspace"
+ ],
+ "proof": [
+  {
+   "text": "For every etale scheme chart $U\\to G$, let $D_U=V(\\pi)\\subseteq U$ and let $I_U$ be the subsheaf of $\\mathcal O_U$ consisting of sections zero on $U\\setminus D_U$. This is an ideal since restriction is a ring homomorphism. On each affine open $\\operatorname{Spec}B\\subseteq U$ the complementary open is the principal open $D(\\pi)$, so it is quasi-compact; thus $U\\setminus D_U$ is retrocompact even when $U$ is not quasi-compact. Apply [lem-trf-supported-sections-quasi-coherent] with $\\mathcal F=\\mathcal O_U$ and defining ideal $(\\pi)$. It gives quasi-coherence and $I_U(\\operatorname{Spec}B)=\\{b:\\exists n\\geq0,\\ \\pi^n b=0\\}$. The elementary criterion for equality to zero in a localization identifies this ideal with $J_B=\\ker(B\\to B[1/\\pi])$.",
+   "uses": [
+    "lem-trf-supported-sections-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset, (2)-(3), applied to the principal closed set V(pi)."
+   }
+  },
+  {
+   "text": "For a morphism $f:W\\to U$ between etale charts of $G$, $f$ is etale by the cancellation clause of [lem-trf-space-chartwise-etale-permanence], applied to the two representable etale maps to $G$. In particular it is flat [def-weil-etale-morphism]. Apply [lem-trf-supported-kernel-flat-pullback] to $H=\\mathcal O_U$ and $D_U=V(\\pi)$: $f^*I_U\\to\\mathcal O_W$ is injective with image $I_W$. Hence it gives the canonical isomorphism $f^*I_U\\simeq I_W$, compatible with inclusions. These isomorphisms satisfy identity and composition, because both composites followed by the inclusion into $\\mathcal O_W$ are the same pulled-back inclusion and that inclusion is monic. Pass from Zariski modules on each chart to etale modules using [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], including its pullback comparison. Now [lem-sfb-space-qcoh-cartesian-chart-family] gives a quasi-coherent module $I$ on $G$ and a map $I\\to\\mathcal O_G$ inducing the inclusions on all charts. This map is injective and its image is an ideal: both assertions can be checked on sections locally in the etale site, where they are the already established assertions for $I_U$. Thus $I$ is a quasi-coherent ideal with the prescribed chart ideals.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-weil-etale-morphism",
+    "lem-trf-supported-kernel-flat-pullback",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-qcoh-cartesian-chart-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03LZ and 03LY (lemma-characterize-quasi-coherent-small-etale and lemma-characterize-module-small-etale); supported-ideal comparison from 07ZP and the affine flat-pullback calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-ideal-closed-subspace-correspondence] to $I$. It supplies the closed subspace $i:C\\hookrightarrow G$ and identifies its pullback to every affine etale chart with $\\operatorname{Spec}(B/J_B)$, since the ideal restricts to $J_B$. If another closed subspace has these pullbacks, its ideal has the same restrictions, hence is the same ideal (sections and equalities of sheaves are local). The bijection in that node gives equality as closed subspaces. Finally $J_B[1/\\pi]=0$: a fraction with numerator in $J_B$ is zero because some power of $\\pi$ kills its numerator. Localization of the quotient is therefore $B[1/\\pi]$. This identifies $C_K\\to G_K$ with the identity on every pulled-back chart, and hence with an isomorphism.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, lemma-closed-immersion-ideals, correspondence and etale restriction; elementary localization of the chart ideals."
+   }
+  },
+  {
+   "text": "The ring $B/J_B$ injects into $B[1/\\pi]$ by the definition of $J_B$. A DVR is a PID and has $R[1/\\pi]=K$ [def-sc-discrete-valuation-ring]: every nonzero element is a unit times a power of the uniformizer. Consequently $B[1/\\pi]$ is a $K$-algebra, so multiplication by every nonzero element of $R$ is invertible there, and its submodule $B/J_B$ is torsion-free over $R$. Flatness is checked at the local rings [def-weil-flat-morphism]. Let $x\\in\\operatorname{Spec}(B/J_B)$ correspond to a prime $\\mathfrak p$ with image $s\\in S$. The local ring $(B/J_B)_{\\mathfrak p}$ is again $R$-torsion-free: if $r\\neq0$ and $r\\,b/t=0$, then $u r b=0$ in $B/J_B$ for some $u\\notin\\mathfrak p$, so $ub=0$ and $b/t=0$. The local ring $\\mathcal O_{S,s}$ is either $R$ (closed point) or $K$ (generic point). In the first case apply [lem-weil-pbc-pid-torsion-free-module-flat], which imposes no finite-generation condition on the module. In the second case $K$ is a field, hence a PID, and every $K$-module is torsion-free, so the same leaf applies. Thus each chart $\\operatorname{Spec}(B/J_B)\\to S$ is flat. Since the pullbacks of a covering etale chart family of $G$ cover $C$ [lem-trf-space-fibre-products-etale-covers], these are exactly the flat charts required in the statement.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "def-weil-flat-morphism",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW, lemma-dedekind-torsion-free-flat (1), PID case; Tag 0539, valuation-ring-torsion-free-flat, for the DVR specialization; Morphisms Definition 01U3 (flatness at local rings)."
+   }
+  },
+  {
+   "text": "By [def-weil-finite-type-morphism], every etale scheme chart of $G$ is covered by affine opens $\\operatorname{Spec}B$ with $B$ a finitely generated $R$-algebra; such an affine open is again an etale affine chart of $G$ (an open immersion followed by an etale chart is etale), so these charts form a covering family, and by step 3 the pullback of $C$ to each of them is $\\operatorname{Spec}(B/J_B)$. On such a chart the images of a finite algebra-generating set of $B$ generate $B/J_B$; no finite generation of $J_B$ is needed for this assertion. Thus these charts of $C$ are locally of finite type. Every ideal of $R$ is principal [def-sc-discrete-valuation-ring], hence finitely generated, so $R$ is Noetherian [def-weil-pbc-noetherian-ring]. The one-element affine cover of $S=\\operatorname{Spec}R$ makes $S$ locally Noetherian [pqf-def-locnoeth]. Apply [pqf-lem-lft-fp-locnoeth] to each chart $\\operatorname{Spec}(B/J_B)\\to S$. This proves local finite presentation on the same etale charts. No global finite-type assertion is made.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-noetherian-finite-type-finite-presentation (1); Properties Tag 01OV, definition-noetherian."
+   }
+  },
+  {
+   "text": "Let $T$ be a flat $S$-scheme and $h:T\\to G$. Pull a covering family $U_a\\to G$ back to $T$, obtaining etale scheme covers $V_a=T\\times_G U_a\\to T$ [lem-trf-space-fibre-products-etale-covers]. Each $V_a$ is flat over $S$: its local ring maps to $T$ are flat by [def-weil-etale-morphism], those of $T\\to S$ are flat by hypothesis, and their composite is flat directly from [def-weil-pbc-flat-ring-map], since the iterated tensor functor sends an injection to an injection twice. By [lem-weil-pbc-flat-morphism-affine-criterion], the coordinate rings $A$ of affine opens in $V_a$ are $R$-flat, hence $R$-torsion-free by [lem-trf-flat-module-torsionfree-domain]. Every local section of the pulled-back ideal $I$ is generated by images of elements of $J_B$ from an affine chart $U=\\operatorname{Spec}B$ of $G$. Such an element is killed by a power of $\\pi$, so its image in $A$ is zero. The factorization criterion of [lem-sfb-space-ideal-closed-subspace-correspondence] therefore gives $V_a\\to C$. These lifts agree on overlaps since $i$ is monic, and glue as maps of sheaves to a unique lift $T\\to C$. This proves the claimed universal property without assuming $T$ quasi-compact.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, factorization criterion; More on Algebra Tag 0538, lemma-flat-torsion-free; Morphisms Tag 01U5. Chart version of Anantharaman 1.2.0."
+   }
+  },
+  {
+   "text": "The same factorization conclusion holds for an $S$-space $Y$ having flat scheme etale charts: apply step 6 to the composite of each such chart with $Y\\to G$. The lifts agree after pulling back to overlaps, because their composites with the monomorphism $C\\to G$ agree. The sheaf condition glues them to the unique morphism $Y\\to C$. Here overlaps are schemes by representability of the etale charts [def-trf-algebraic-space]; this is simply descent of a section of the sheaf subobject $C\\subseteq G$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, factorization tested on scheme charts; elementary sheaf gluing."
+   }
+  },
+  {
+   "text": "The space $C\\times_S C$ has flat scheme etale charts: take products over $S$ of the affine charts of $C$ from step 4. The two successive base-changed chart families cover by [lem-trf-space-fibre-products-etale-covers]; their composites are etale coverings by [lem-trf-space-chartwise-etale-permanence]. By [lem-weil-pbc-fibre-product-affine-spectra] their coordinate rings are $A\\otimes_R A'$ for $R$-flat algebras $A,A'$. This tensor product is $R$-flat directly from [def-weil-pbc-flat-ring-map], since tensoring by it is the composite of tensoring by $A$ and by $A'$, each preserving injections. Apply step 7 to the composite $C\\times_S C\\to G\\times_S G\\xrightarrow{m}G$, and to $C\\to G\\xrightarrow{\\mathrm{inv}}G$. Apply step 6 to the identity section $S\\to G$ (the identity $S\\to S$ is flat). This restricts all three operations. The group identities hold after composing with $i$ since they hold in $G$; cancel the monomorphism $i$ to obtain each identity in $C$. This requires no commutativity.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-flat-ring-map",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02X2, lemma-fibre-product-spaces; affine tensor products and sheaf monomorphism cancellation. Expansion of Anantharaman 1.2.5(b)."
+   }
+  },
+  {
+   "text": "Finally the diagonal $C\\to C\\times_S C$ is the pullback of $G\\to G\\times_S G$ along $C\\times_S C\\to G\\times_S G$. Indeed, on every test scheme a pair of $C$-points has equal images in $G$ if and only if its two $C$-points are equal, since $i$ is monic. After a scheme test into $C\\times_S C$, its pullback diagonal is therefore a scheme closed immersion by the separatedness hypothesis on $G$. This is precisely the stated separatedness condition for $C$. Together with steps 3--8 it proves all the assertions.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Definition of separatedness by the diagonal; elementary pullback identification for a subobject."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-space-qcoh-cartesian-chart-family",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-supported-kernel-flat-pullback",
+  "lem-trf-supported-sections-quasi-coherent",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "pqf-def-locnoeth",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Synthesis of Tag 03MB with Tags 07ZP, 03LZ, 03LY, 0AUW and 01U5; chart expansion of Anantharaman 1.2.0, 1.2.5(b), 1.3.1(c), primary scan read online, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of the generic fibre of a locally finite type group algebraic space over a DVR is a flat closed subgroup",
+   "results": "{\"t\": \"2026-10-24T11:08:28Z\", \"tool\": \"leanfinder\", \"query\": \"The schematic closure of the generic fibre of a locally finite type group algebraic space over a DVR is a flat closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\"], \"digest\": \"44f34ea1292a3ce2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The generic fibre closure of a group algebraic space over a discrete valuation ring is a flat closed group subspace",
+   "results": "{\"t\": \"2026-10-24T11:08:29Z\", \"tool\": \"leansearch\", \"query\": \"The generic fibre closure of a group algebraic space over a discrete valuation ring is a flat closed group subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.instResLE\", \"integralClosure\", \"Subgroup.isClosed_topologicalClosure\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Ring.NormalClosure\", \"ClosedSubgroup.ctorIdx\"], \"digest\": \"d363f99fad99aa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T11:08:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schematicClosure|generic.*closure",
+   "results": "{\"t\": \"2026-10-24T11:08:29Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|schematicClosure|generic.*closure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Killing uniformizer torsion on etale charts constructs the flat horizontal closure of a group space over a trait",
+   "results": "{\"t\": \"2026-10-24T11:08:35Z\", \"tool\": \"leanfinder\", \"query\": \"Killing uniformizer torsion on etale charts constructs the flat horizontal closure of a group space over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"StandardEtalePair.lift\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.Etale.of_isLocalizationAway\"], \"digest\": \"2bbd08935b6cc95f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes already given, flatness or normalization, module descent, or Zariski representability; none states this algebraic-space/group-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of the generic fibre of a group algebraic space over a discrete valuation ring is a flat closed subgroup",
+   "results": "{\"t\": \"2026-10-24T11:42:56Z\", \"tool\": \"leanfinder\", \"query\": \"The schematic closure of the generic fibre of a group algebraic space over a discrete valuation ring is a flat closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"5469d87087eae026\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-flatness, valuation and module-torsion results do not state a closed subgroup construction for an algebraic space; existing DAG flatness tools are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schematicClosure|horizontalClosure",
+   "results": "{\"t\": \"2026-10-24T11:43:24Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|schematicClosure|horizontalClosure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-flatness, valuation and module-torsion results do not state a closed subgroup construction for an algebraic space; existing DAG flatness tools are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Killing uniformizer power torsion in etale affine charts gives the flat closure of a group space over a trait",
+   "results": "{\"t\": \"2026-10-24T11:43:24Z\", \"tool\": \"leansearch\", \"query\": \"Killing uniformizer power torsion in etale affine charts gives the flat closure of a group space over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"Module.flat_of_localized_span\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"4ed0a1981838fd12\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-flatness, valuation and module-torsion results do not state a closed subgroup construction for an algebraic space; existing DAG flatness tools are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T11:43:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-flatness, valuation and module-torsion results do not state a closed subgroup construction for an algebraic space; existing DAG flatness tools are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-group-space-schematicity",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input, schematicity of the descended group space; 1.2.0 and 1.2.5(b), printed pp.15 and 18-19, and 1.3.1(c), printed p.20 (OCR renders section 1.3 as 1.5): generic closure, group structure and etale-chart construction",
+   "via": [
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-trait-flat-group-closure",
+  "worker": "stage1",
+  "summary": "Q40 expands horizontal closure on etale charts, using existing supported-section and flat-pullback nodes, cartesian chart families and the closed-subspace correspondence. Proves flatness, finite presentation, factorization and group operations without any new node or statement change. No project Lean attachment exists. Missing local Anantharaman archive is reported.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input; the present descendant supplies the horizontal-closure part of trait group-space schematicity. No unit route changed. Whole-blueprint searches for flat closure, generic closure, horizontal closure and schematic closure found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic input for the etale-chart construction: Zariski and small etale quasi-coherent modules agree functorially. It supplies a module, scheme, or chart calculation, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic input for the etale-chart construction: Chartwise etale permanence for algebraic spaces. It supplies a module, scheme, or chart calculation, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic input for the etale-chart construction: Fibre products of algebraic spaces and pullback of etale coverings. It supplies a module, scheme, or chart calculation, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-supported-kernel-flat-pullback",
+    "why": "Generic input for the etale-chart construction: Supported-section kernels commute with flat pullback for locally principal support. It supplies a module, scheme, or chart calculation, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-supported-sections-quasi-coherent",
+    "why": "Generic input for the etale-chart construction: Quasi-coherent supported sections and their affine ideal-power description. It supplies a module, scheme, or chart calculation, not a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-supported-kernel-flat-pullback",
+  "lem-trf-supported-sections-quasi-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-5b38f972d",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-5b38f972d (reviewer sub-agent of L); spot-checked: I read the whole split: the item statement and all 9 steps, plus the statement of every cited node (20). I checked the Stacks sources at the cited places: 03MB (lemma-closed-immersion-ideals) and 07ZP (lemma-sections-supported-on-closed-subset). The Anantharaman book is not in the local literature; it is recorded as WANTED and the proof is marked agent-written, which is correct. The delivery has no new nodes, leaves the statement and stmt_deps unchanged, and is not a re-split. The parent node lem-sfb-trait-group-space-schematicity uses only clauses that the statement gives. Steps 1-3 and 6-9 are correct as written: retrocompactness of D(pi) on affine opens; the chart map W->U is etale by the cancellation clause; flat pullback of the supported ideal for the principal set V(pi); the cartesian-family descent; the 03MB correspondence, its etale restriction and its factorization criterion; C_K=G_K because J_B[1/pi]=0; T needs no quasi-compactness; flatness of A tensor A'; group laws by cancelling the monomorphism (no commutativity needed); separatedness by pulling back the diagonal. Small cases checked: R[e]/(pi e, e^2) gives R, R/pi gives the empty chart, flat non-reduced charts are kept. FIX, two hypothesis gaps (E1): step 4 deduced flatness from the global ring map through the affine criterion, which quantifies over all affine opens. It is now checked at local rings by def-weil-flat-morphism: (B/J_B)_p is torsion-free and O_{S,s} is R or K, both PIDs. Step 5 assumed B finitely generated, but def-weil-finite-type-morphism only gives an affine cover by finitely generated algebras; it now restricts to those charts, which are still etale charts. proof_deps updated. Batch-5: def-trf-algebraic-space is a definition. The two sfb nodes reach sec-trace-formula only through that definition. The six lem-trf-* nodes are generic results on schemes, algebraic spaces and commutative algebra (07ZP, 03DX, 03FV/041F, 02X2, flat implies torsion-free). None is a step of the trace formula or Poincare duality, so all are accepted. All five declared tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitFlatGroupSpaceClosure",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_trait_flat_group_closure",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.HasTraitClosureCharts",
+   "AlgebraicGeometry.AlgebraicSpace.exists_trait_flat_group_closure"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitFlatGroupSpaceClosure.lean",
+  "statement": "theorem exists_trait_flat_group_closure (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (G : AlgebraicSpace (Spec (.of R))) [GrpObj G.obj.obj] (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 G.obj.obj) (𝟙 G.obj.obj))) (hlft : ∀ U : G.EtaleSite, LocallyOfFiniteType U.obj.left.hom) : ∃ C : ClosedSubspace G, HasTraitClosureCharts R π G C ∧ (∀ D : ClosedSubspace G, HasTraitClosureCharts R π G D → D = C) ∧ IsIso (Functor.whiskerLeft (Over.map (Spec.map (CommRingCat.ofHom (algebraMap R K)))).op C.val.arrow.hom.hom) ∧ (∃ _ : GrpObj (C.val : AlgebraicSpace (Spec (.of R))).obj.obj, IsMonHom C.val.arrow.hom.hom) ∧ IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 (C.val : AlgebraicSpace (Spec (.of R))).obj.obj) (𝟙 (C.val : AlgebraicSpace (Spec (.of R))).obj.obj)) ∧ (∀ U : (C.val : AlgebraicSpace (Spec (.of R))).EtaleSite, Flat U.obj.left.hom ∧ LocallyOfFiniteType U.obj.left.hom ∧ LocallyOfFinitePresentation U.obj.left.hom) ∧ ∀ (T : Over (Spec (.of R))) (a : yoneda.obj T ⟶ G.obj.obj), Flat T.hom → ∃! l : yoneda.obj T ⟶ (C.val : AlgebraicSpace (Spec (.of R))).obj.obj, l ≫ C.val.arrow.hom.hom = a",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94350ea0e",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Read item node, all 8 stmt_deps, the Lean module, report and side-live AlgebraicSpace/ClosedSubspace sources. Node changed only in lean; statement verbatim in file; single sorry. Clause match: DVR+hπ+IsFractionRing; G : AlgebraicSpace with GrpObj on presheaf (pointwise fibre products, non-commutative; CommutativeSpaceGroup unsuitable so no H4 dup); hsep closed-immersion diagonal; hlft on all étale charts (étale-local, equivalent). Conclusion: ClosedSubspace C with HasTraitClosureCharts (literal Spec(B/ker(B→B[1/π])) pullback square for every étale Spec B→G), uniqueness from chart condition alone, IsIso over Spec K points (C_K=G_K), GrpObj+IsMonHom inclusion, closed diagonal, Flat/LFT/LFP on all C-charts, ∃! factorization for every flat T without qc. Edge cases B=0, empty T, flat G, π-torsion all covered; single universe u. Helper is a real Prop with docstrings; 9-step proof docstring; imports exist; no theorem-owned defs. No file changed, no compile."
+ }
+}

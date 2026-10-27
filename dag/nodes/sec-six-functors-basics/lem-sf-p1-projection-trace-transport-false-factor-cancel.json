@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-p1-projection-trace-transport-false-factor-cancel",
+ "kind": "statement",
+ "title": "False projection chart-factor cancellation",
+ "statement": "Let $A$ be a finite commutative ring, $N\\in\\mathbf N$ with $(N:A)=0$, and $t$ a normalized finite twist transport system [def-asd-ordinary-finite-p1-arrows]. Let $S$ be a scheme with $N$ invertible in $\\Gamma(S,\\mathcal O_S)$. Put $P=\\mathbf P^1_S$, $q:P\\to S$, $P'=\\mathbf P^1_P$, $r:P'\\to P$, and $v=\\mathbf P^1(q):P'\\to P$. Work in the ordinary unbounded etale $A$-module derived categories and write $L_T=A_T(1)[2]$ for the concrete shifted finite Tate line. Set $F=Rr_*$ and $U=q^*Rq_*L_P$. Let $e:U\\to F(v^*L_P)$ be the specified ordinary projective-line exchange for $q$, and $c:v^*L_P\\xrightarrow{\\sim}L_{P'}$ the normalized shifted-line pullback comparison for $v$, using the image of the given unit $N$ on $P$. Define the chart factor $a=e\\,;\\,F(c.\\mathrm{hom})$ and its displayed inverse $b=F(c.\\mathrm{inv})\\,;\\,e^{-1}$, where semicolon means first the left arrow, then the right arrow. Then $a\\,;\\,b=1_U$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "the inverse/direct-image cancellation after introducing the chart factor"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Install invertibility of the ordinary projective-line exchange using lem-asd-ordinary-finite-p1-exchange-iso, and unfold the displayed chart factor and its inverse.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-exchange-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reassociate the composite. Cancel the pushforward images of the shifted-line isomorphism and its inverse by Mathlib Iso.map_hom_inv_id_assoc, then cancel the exchange with its inverse by IsIso.hom_inv_id. The result is the identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-sp-finite-p1-unit-on-pullback",
+  "lem-asd-ordinary-finite-p1-exchange-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The inverse/direct-image cancellation after introducing the chart factor; made explicit using functorial inverse cancellation and exchange invertibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a category a composite of an isomorphism with the functor image of another isomorphism cancels with the reverse composite of their inverses",
+   "results": "8 hits; CategoryTheory.Functor.map_hom_inv_assoc, CategoryTheory.Functor.map_inv_hom_assoc, CategoryTheory.Iso.map_inv_hom_id_assoc, CategoryTheory.Iso.map_hom_inv_id_assoc, CategoryTheory.Functor.map_hom_inv, CategoryTheory.Iso.map_inv_hom_id, CategoryTheory.Iso.map_hom_inv_id, CategoryTheory.Functor.mapIso_trans",
+   "date": "2026-10-26",
+   "verdict": "General categorical cancellation only: Iso.map_hom_inv_id and its reassociation; does not supply invertibility of the specified geometric exchange."
+  },
+  {
+   "tool": "grep",
+   "query": "hom_inv_id|map_comp|map_id",
+   "results": "0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "Read Mathlib/CategoryTheory/Iso.lean:255-256 (IsIso.hom_inv_id) and 453-455 (Iso.map_hom_inv_id). These justify elementary step 3 but do not prove the required geometric invertibility. The initial Isomorphism.lean path was incorrect, so its zero hits are not absence evidence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor sends the composite of an isomorphism and its inverse to the identity",
+   "results": "8 hits; CategoryTheory.Iso.map_hom_inv_id_eval_app, CategoryTheory.Functor.map_hom_inv, CategoryTheory.Iso.map_inv_hom_id_eval_app, CategoryTheory.FunctorToTypes.map_inv_map_hom_apply, CategoryTheory.Iso.map_hom_inv_id_app, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Iso.map_hom_inv_id_assoc, CategoryTheory.Functor.map_inv_hom",
+   "date": "2026-10-26",
+   "verdict": "Generic functor inverse identities found, including Functor.map_hom_inv and Iso.map_hom_inv_id_assoc; the project-specific exchange isomorphism is still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id, CategoryTheory.Functor.map_comp",
+   "results": "0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical identity only; the exact-name query finds Iso.map_hom_inv_id. The initial combined-name query has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_hom_inv_id|theorem hom_inv_id|theorem map_comp|theorem map_id",
+   "results": "25 hits; Mathlib/CategoryTheory/Functor/Category.lean, Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/Iso.lean, Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+   "date": "2026-10-26",
+   "verdict": "Read Mathlib/CategoryTheory/Iso.lean:255-256 (IsIso.hom_inv_id) and 453-455 (Iso.map_hom_inv_id). These justify elementary step 3 but do not prove the required geometric invertibility. The initial Isomorphism.lean path was incorrect, so its zero hits are not absence evidence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.map_hom_inv_id",
+   "results": "1 hits; CategoryTheory.Iso.map_hom_inv_id",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical identity only; the exact-name query finds Iso.map_hom_inv_id. The initial combined-name query has no hits."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransportFalse",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-p1-adjunction",
+   "place": "First triangle: after the definition of eta, the canonical proper base-change and normalized line identifications cancel with their inverses in the first-coordinate calculation.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-false",
+    "lem-sf-p1-projection-trace-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceFalseFactorCancel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ProjectionTraceFalseFactorCancel.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.falseProjectionChartFactor_cancel",
+  "statement": "theorem falseProjectionChartFactor_cancel (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) : falseProjectionChartFactor A N hA t S hS ≫ falseProjectionChartFactorInv A N hA t S hS = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NA-36af4b242",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-36af4b242 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes. The statement now gives the explicit hypotheses: (N:A)=0, N invertible on S, P=P^1_S, P'=P^1_P, r, v=P^1(q), e the ordinary projective-line exchange for q, c the shifted-line pullback isomorphism for v, a=e;F(c.hom), b=F(c.inv);e^{-1}. It matches the Lean `falseProjectionChartFactor_cancel` and its two definitions (ChartPasting:25-43, FactorCancel:25-45). I checked OrdinaryFiniteP1Arrows:152-164 and 268-279 and FiniteP1KummerNaturality:47-51 (the splitting target is Rq_*(L_P[2])). The unit hypothesis only makes c well-typed: without it c is not defined, and it fails for Spec F_2 with N=2. Nothing is weakened. Step 1: lem-sp-finite-p1-unit-on-pullback, which holds for any f, gives the unit on Γ(P), the target of v, so c is defined. Step 2: lem-asd-ordinary-finite-p1-exchange-iso, with g=q and M=L_P (the quantifiers match), makes the specified e invertible. Step 3 is the elementary identity e;F(hom;inv);e^{-1}=1. I read the blueprint thm-amb-p1-adjunction proof (latest=main-20261026) in full: the first triangle's canonical base-change and line identifications are the arrows cancelled here. Changing from.node from a created node to thm-amb-p1-adjunction is justified, because created.item is a Lean module and the grandparent's from.node is null. Removing the chart-exchange and integral-data stmt_deps is correct, since neither the statement nor the proof uses them. I accept both tool_uses: unit-on-pullback and exchange-iso are generic tools and their Lean has no sorry. Small cases checked: S empty, A=0, N=1, A=Z/2. Not acted on: the item's lean.module (SfP1ProjectionTraceFalseMate) does not match its file, but that field is maintainer-owned. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T235924-L-1469706",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-p1-projection-trace-transport-false-factor-cancel",
+  "worker": "stage1",
+  "summary": "Made the intended finite-coefficient cancellation statement explicit, including the unit hypothesis required to type the normalized line comparison; replaced the triangle-identity slogan by the two actual inverse cancellations. Reused the existing ordinary-arrow definition, arbitrary-base exchange invertibility, and unit pullback lemma. No new nodes. Repaired the non-blueprint from.node by identifying its stated source thm-amb-p1-adjunction.",
+  "blueprint": "thm-amb-p1-adjunction.proof.md, first triangle: the canonical proper-base-change and line comparisons used before the coordinate integral; this split isolates only their inverse cancellation.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-finite-p1-unit-on-pullback",
+    "why": "Generic pullback of a unit on global functions, used only to type the normalized line comparison; no unit-specific theorem is being replaced."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-exchange-iso",
+    "why": "Invertibility of the specified ordinary projective-line exchange for arbitrary base change and unbounded finite coefficients; a generic input to this inverse cancellation, not a replacement route."
+   }
+  ]
+ },
+ "mathlib_match": null,
+ "tool_uses": [
+  "lem-sp-finite-p1-unit-on-pullback",
+  "lem-asd-ordinary-finite-p1-exchange-iso"
+ ]
+}

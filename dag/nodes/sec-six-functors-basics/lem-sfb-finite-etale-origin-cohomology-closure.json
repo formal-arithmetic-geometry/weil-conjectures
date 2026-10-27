@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-finite-etale-origin-cohomology-closure",
+ "kind": "statement",
+ "title": "Triangle closure of the bounded constructible étale-origin class on the pro-étale site with finite coefficients",
+ "statement": "Let $X$ be any scheme and $B$ a finite commutative ring with the discrete topology. On the small pro-étale and étale sites of $X$ [def-weil-pbc-proetale-site, def-weil-pbc-etale-site, def-weil-size-convention] use the coefficient ring sheaves $B_{X,\\mathrm{pro\\acute et}}=(U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),B))^\\#$ and $B_{X,\\mathrm{\\acute et}}$, the unbounded derived categories $D(X_{\\mathrm{pro\\acute et}},B)$ and $D(X_{\\mathrm{\\acute et}},B)$, the comparison $\\nu_X:X_{\\mathrm{pro\\acute et}}\\to X_{\\mathrm{\\acute et}}$ [def-weil-pbc-site-comparison-morphism] with its termwise exact derived inverse image $\\nu_X^*:D(X_{\\mathrm{\\acute et}},B)\\to D(X_{\\mathrm{pro\\acute et}},B)$, and the strictly full subcategory $D^b_c(X_{\\mathrm{pro\\acute et}},B)$ of objects $N$ admitting an isomorphism $\\nu_X^*A\\xrightarrow{\\sim}N$ with $A$ a bounded constructible étale complex, all exactly as defined in [def-weil-pbc-proetale-modules]; bounded constructible étale complexes are those of [def-weil-pbc-constructible-complexes] (cohomology vanishing outside a finite interval, every cohomology sheaf constructible with respect to a finite partition of $X$ into locally closed constructible subschemes). Write $O_B(N)$ for $N\\in D^b_c(X_{\\mathrm{pro\\acute et}},B)$. Then $O_B(0)$ holds; $O_B$ is invariant under isomorphisms; $O_B(N[r])\\Longleftrightarrow O_B(N)$ for every integer $r$; and for every distinguished triangle $N_1\\to N_2\\to N_3\\to N_1[1]$ of $D(X_{\\mathrm{pro\\acute et}},B)$ [def-weil-triangulated-category], any two of $O_B(N_1),O_B(N_2),O_B(N_3)$ imply the third. In particular $D^b_c(X_{\\mathrm{pro\\acute et}},B)$ is a strictly full triangulated subcategory of $D(X_{\\mathrm{pro\\acute et}},B)$, although the inverse image $\\nu_X^*$ is not assumed full on unbounded objects. No Noetherian, quasi-compactness, dimension, finite-type or invertibility hypothesis on $X$ is imposed; the zero ring and the empty scheme are allowed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AL (lemma-compare-constructible-derived), proof: the constructible-cohomology subcategories are strictly full saturated triangulated subcategories and the comparison identifies them; derived.tex Tag 0145 (TR2) for the rotations. Carries returned item steps 5–6 (step 4's constant-scalar encoding is internal to the existing comparison node on the same coefficient convention)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Let $P(N)$ mean that the intrinsic pro-étale cohomology sheaves of $N$ are constructible and vanish outside some finite interval. Apply [lem-weil-pbc-finite-ring-constructible-derived-origin] with the given $X,B$: its source uses exactly our globally stratified étale constructibility predicate and its inverse image is the specified ring-sheaf inverse image. The equivalence says precisely $O_B(N)\\Longleftrightarrow P(N)$. This uses the bounded comparison only; it asserts no fullness on all unbounded objects.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, statement and first paragraph of proof; Tag 09B5, lemma-constructible-serre"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-proetale-dbc-triangulated] to $Y=X$ and $\\Lambda=B$. Its predicate is $P$. It gives $P(0)$, invariance under isomorphisms, $P(N[r])\\Longleftrightarrow P(N)$ for every $r\\in\\mathbf Z$, and closure when the first and third terms of a distinguished triangle satisfy $P$. Substitute the equivalence from step 1 to obtain the corresponding assertions for $O_B$.",
+   "uses": [
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, statement and first paragraph of proof; Tag 09B5, lemma-constructible-serre"
+   }
+  },
+  {
+   "text": "For the triangle $N_1\\to N_2\\to N_3\\to N_1[1]$, if $O_B(N_1),O_B(N_2)$ hold, rotate once by TR2 to $N_2\\to N_3\\to N_1[1]\\to N_2[1]$; its outer terms satisfy $O_B$ by shift stability, so step 2 gives $O_B(N_3)$. If $O_B(N_2),O_B(N_3)$ hold, rotate twice to $N_3\\to N_1[1]\\to N_2[1]\\to N_3[1]$; step 2 gives $O_B(N_1[1])$, hence $O_B(N_1)$. Together with the outer-term case this gives all three implications. The defined essential image is strictly full, and these closure assertions make it triangulated.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category, TR2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AL, lemma-compare-constructible-derived, statement and first paragraph of proof; Tag 09B5, lemma-constructible-serre; assembly in the global finite-stratification convention of the two existing DAG lemmas (Stacks itself uses affine-local constructibility)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(triang|[Oo]rigin)|pro[Ee]tale.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"equivalence\", \"constant\"",
+   "results": "1 hits: CategoryTheory.Sheaf.isConstant_iff_of_equivalence",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact coefficient equivalence between ring sheaf modules and fixed scalar module sheaves commutes with derived inverse image and preserves constructible cohomology",
+   "results": "8 hits: ModuleCat.restrictScalarsEquivalenceOfRingEquiv, SheafOfModules.restrictScalars, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.Sheafify.SMulCandidate.h, RestrictScalars.ringEquiv, SheafOfModules.pushforwardNatIso_inv, PresheafOfModules.Sheafify.smul.congr_simp, PresheafOfModules.Sheafify.map_smul_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty\", \"IsTriangulated\", \"map\"",
+   "results": "3 hits: CategoryTheory.ObjectProperty.instIsTriangulatedMapOfIsTriangulatedOfFull, CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated, CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The essential image of bounded constructible etale complexes on the proetale site is closed under shifts and all two out of three implications of distinguished triangles",
+   "results": "8 hits: CategoryTheory.Functor.essImageDistTriang, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.rotate_essImageDistTriang, CategoryTheory.Functor.contractible_mem_essImageDistTriang, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂', CategoryTheory.ObjectProperty.IsTriangulatedClosed₂, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂RightOrthogonal",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme and finite commutative ring, constant scalar module encoding identifies etale to proetale inverse image on derived categories, preserving global constructibility and cohomology",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.FormallyEtale.iff_of_equiv, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars from the sheafified constant ring intertwines geometric inverse image on module sheaves and its termwise derived functor",
+   "results": "8 hits: PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, SheafOfModules.sheafificationCompPullback, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over any scheme with finite commutative coefficients, bounded constructible etale origin is equivalent to bounded constructible proetale cohomology and is closed under distinguished triangles",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite coefficient ring on an arbitrary scheme, a bounded derived complex with globally constructible cohomology descends to the etale site",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheafification and constant-sheaf equivalences, or triangulated-image instances requiring fullness and a known triangulated source, do not prove the finite-coefficient globally constructible comparison and normalized derived site square on arbitrary schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(triang|[Oo]rigin)|pro[Ee]tale.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: etale site and constant-sheaf constructions, ordinary derived bounds, and abstract triangulated images do not state the intrinsic finite-ring etale-origin assertion; abstract image closure requires fullness not assumed on the unbounded comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes of finite coefficient etale sheaves have triangulated essential image under proetale inverse image",
+   "results": "8 hits: CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Functor.essImageDistTriang, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mk, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Condensed.lanSheafProfinite, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: etale site and constant-sheaf constructions, ordinary derived bounds, and abstract triangulated images do not state the intrinsic finite-ring etale-origin assertion; abstract image closure requires fullness not assumed on the unbounded comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty\", \"IsTriangulated\", \"map\"",
+   "results": "3 hits: CategoryTheory.ObjectProperty.instIsTriangulatedMapOfIsTriangulatedOfFull, CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated, CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: etale site and constant-sheaf constructions, ordinary derived bounds, and abstract triangulated images do not state the intrinsic finite-ring etale-origin assertion; abstract image closure requires fullness not assumed on the unbounded comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite commutative ring on any scheme, the bounded constructible etale-origin proetale complexes form a strictly full triangulated subcategory",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: etale site and constant-sheaf constructions, ordinary derived bounds, and abstract triangulated images do not state the intrinsic finite-ring etale-origin assertion; abstract image closure requires fullness not assumed on the unbounded comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomologically bounded objects whose cohomology sheaves are constructible on the pro etale site are the essential image of bounded constructible etale complexes and satisfy two out of three for triangles",
+   "results": "8 hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.TStructure.t, DerivedCategory.IsGE",
+   "date": "2026-10-22",
+   "verdict": "no match: etale site and constant-sheaf constructions, ordinary derived bounds, and abstract triangulated images do not state the intrinsic finite-ring etale-origin assertion; abstract image closure requires fullness not assumed on the unbounded comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-residue-class-triangle-closure",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-integral-heart-triangulated",
+   "place": "Paragraph (1): 'bounded constructible complexes on the étale site form a triangulated subcategory', transported to the pro-étale étale-origin class D^b_c(X_proét,B) of the residue reduction; old item steps 4–6.",
+   "via": [
+    "lem-sfb-integral-residue-class-triangle-closure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-etale-origin-cohomology-closure",
+  "worker": "stage1",
+  "summary": "Reused the existing finite-ring derived comparison and intrinsic bounded-constructible triangulated-closure nodes. Identified their predicates on exactly the prescribed ring-sheaf coefficients and global finite stratifications, then wrote out both rotation arguments. No new nodes or statement changes. Fixed-scalar Lean theorem found but not attached across the non-definitional coefficient encoding.",
+  "blueprint": "det-lem-int-integral-heart-triangulated, proof paragraph (1): stability of constructible residue reduction under shifts and cones, via the bounded finite-coefficient étale-origin class.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic finite discrete coefficient comparison identifies the precise étale-origin predicate with intrinsic bounded constructible cohomology; the integral-heart unit has no separate such comparison."
+   },
+   {
+    "node": "lem-weil-proetale-dbc-triangulated",
+    "why": "Generic intrinsic finite-coefficient closure under shifts and outer-term triangles; supplies the residue-level tool used by the integral-heart proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-8592f670b",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-8592f670b (reviewer sub-agent of L); spot-checked: Item-only split with three steps; no new nodes and no repair note, so the re-split rule does not apply; statement kept. Coefficient category checked: lem-weil-pbc-finite-ring-constructible-derived-origin and lem-weil-proetale-dbc-triangulated both work over proEtaleRingModules X (proEtaleConstantRing X B) with IsConstructibleProEtaleModuleSheaf in Lean. In the DAG they use the same nu_X^* and the same global-stratification convention as def-weil-pbc-proetale-modules / def-weil-pbc-constructible-complexes. Step 1: O_B<=>P from the equivalence plus its 'in particular' clause and iso-closure of P. Step 2: the triangulated closure of P, with 'finitely many nonzero degrees' equal to 'a finite interval'. Step 3: one and two TR2 rotations, checked; signs do not matter for object predicates. Source checked: Stacks proetale.tex 5356-5385 (09AL; any scheme, Noetherian Lambda) and 09B5; proof_origin agent is justified by the affine-local vs global convention. Edge cases B=0, X empty and non-quasi-compact X are fine. The off-route origin node (sk-thm-properbasechange) is accepted as a generic tool use: the on-route sk-thm-pe-constructible-comparison needs a qcqs X. dbc-triangulated is in sk-def-sf-operations, which is on route. Duplicate search found no node with this statement. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PullbackBoundedConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.isBoundedConstructibleFiniteCoefficient_isTriangulated",
+  "statement": "theorem isBoundedConstructibleFiniteCoefficient_isTriangulated (T : Scheme.{u})\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    [TopologicalSpace Λ] [DiscreteTopology Λ] :\n    (isBoundedConstructibleFiniteCoefficient T Λ).IsTriangulated :=",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing theorem for the recorded isBoundedConstructibleFiniteCoefficient predicate and FiniteCoefficientDerivedCategory, including arbitrary schemes, finite commutative discrete rings, the zero ring and the empty scheme. ObjectProperty.IsTriangulated encodes zero, all integer shifts and extension closure; its rotation instances give all three triangle implications. The essential-image predicate is already IsClosedUnderIsomorphisms by Mathlib ObjectProperty.map, so strict fullness and shift equivalence require no additional hypothesis. The theorem uses bounded-below full faithfulness, not unbounded fullness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-258d1a672",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Delivery adds only an existing:true lean record → AlgebraicGeometry.ProEtale.isBoundedConstructibleFiniteCoefficient_isTriangulated (Sheaf.AlgebraicGeometry.PullbackBoundedConstructible:126-130, proved, no sorry); statement field verbatim equal. Checked against the node: Scheme.{u} with no hypotheses; CommRing+Finite+discrete Λ : Type (u+1), zero ring allowed; finiteCoefficientRingSheaf = sheafified C(ConnectedComponents U, Λ); FiniteCoefficientDerivedCategory + termwise finiteCoefficientDerivedComparison; isBoundedConstructibleFiniteCoefficient = ObjectProperty.map of the global-finite-stratification bounded étale predicate (stmt_dep def-weil-pbc-proetale-modules). Mathlib IsTriangulated = ContainsZero + IsStableUnderShift ℤ + Closed₂; rotation instances give Closed₁/₃ via the map IsClosedUnderIsomorphisms instance → zero, iso-invariance, shift iff, all three 2-of-3 implications, strictly full triangulated. No unbounded fullness assumed; edge cases (empty scheme, B=0, all r ∈ ℤ) covered; report sections present; no compile needed (no file changed). No findings."
+ }
+}

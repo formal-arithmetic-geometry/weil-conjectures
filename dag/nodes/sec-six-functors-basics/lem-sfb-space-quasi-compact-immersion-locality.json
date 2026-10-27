@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-space-quasi-compact-immersion-locality",
+ "kind": "statement",
+ "title": "Quasi-compact immersions of algebraic spaces are local on the base",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $h:Z\\to T$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering. For algebraic spaces such a covering means a family whose pullback by each scheme mapping to $T$ is an fppf covering on etale scheme charts [def-pc-fppf-site]. Then $h$ is a quasi-compact immersion if and only if each $Z\\times_TT_i\\to T_i$ is a quasi-compact immersion. Here an immersion of algebraic spaces is representable by schemes and every scheme base change factors as a closed immersion followed by an open immersion [def-weil-closed-immersion, def-weil-open-immersion]; quasi-compact means that pullback to a quasi-compact scheme has quasi-compact source [def-weil-pbc-quasi-compact-scheme]. In particular the assertion includes descent of representability by schemes.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0424, lemma-descending-property-quasi-compact-immersion (fpqc locality, specialized to fppf coverings)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $P(f)=$ quasi-compact immersion. The affine-test equivalences for immersions and quasi-compactness give hypothesis (2) of the fpqc property criterion and base-change stability. For hypothesis (1), take finitely many maps $f_j:X_j\\to Y_j$ with $P$. Their sheaf coproducts are algebraic spaces. A scheme test $W\\to\\coprod_jY_j$ partitions $W$ into the clopen pieces $W_j$ pulling back $Y_j$; the pullback source over $W_j$ is $X_j\\times_{Y_j}W_j$. The immersion criterion applied to this open cover makes the coproduct map an immersion. If $W$ is affine, each clopen $W_j$ is quasi-compact (closed in the quasi-compact space $W$), so each pullback source is quasi-compact, and their finite disjoint union is quasi-compact: choose finite subcovers on the pieces. The quasi-compact affine-test criterion now gives $P$ for the coproduct. For the empty family both source and target are empty, an isomorphism and quasi-compact. Coproducts and all charts are taken within the fixed size convention.",
+   "uses": [
+    "lem-sfb-space-immersion-affine-tests",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-fpqc-property-affine-criterion",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0424, first paragraph; Tag 041J (lemma-descending-properties-morphisms), hypotheses (1) and (2)."
+   }
+  },
+  {
+   "text": "Check hypothesis (3) of the criterion. Let $V\\to U$ be flat surjective between affine schemes and $X\\to U$ an algebraic-space morphism such that $X_V\\to V$ is a quasi-compact immersion. Its source is a scheme by representability. The scheme factorization lemma writes $X_V\\xrightarrow{j}C\\xrightarrow{i}V$ with $j$ open and $i$ closed. Since $V$ is affine, $C$ is affine by the affine closed-immersion criterion. Also $X_V$ is quasi-compact: it is the inverse image of the quasi-compact open $V$ under the quasi-compact scheme map $X_V\\to V$. Thus $j$ exhibits $X_V$ as a quasi-compact open subscheme of an affine scheme, which is precisely the quasi-affine hypothesis for the next step.",
+   "uses": [
+    "lem-pqf-qc-immersion-open-closed-factor",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0424, sentence X prime to Z prime is quasi-affine; scheme argument of morphisms.tex Tag 02JR (lemma-quasi-compact-immersion-quasi-affine)."
+   }
+  },
+  {
+   "text": "Apply quasi-affine scheme representability descent to $V\\to U$ and $X\\to U$. The preceding step verifies its quasi-affine scheme source hypothesis upstairs, and the cover is flat surjective and affine-to-affine. Hence $X$ is a scheme. Now apply scheme quasi-compact-immersion descent to the same square. Its scheme-source hypothesis is now satisfied and its upstairs hypothesis is exactly the original assumption on $X_V\\to V$. Consequently $X\\to U$ is a quasi-compact immersion. This proves hypothesis (3), including the previously unassumed representability.",
+   "uses": [
+    "lem-sfb-space-quasi-affine-affine-descent",
+    "lem-sfb-scheme-qc-immersion-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0424, last paragraph, using 0423 and 02L8. The phrase closed immersion in line 1745 is a typo; the required and obtained conclusion is quasi-compact immersion."
+   }
+  },
+  {
+   "text": "The fpqc property criterion now applies to the isomorphism-invariant property $P$: step 1 supplies its finite-coproduct and affine-test hypotheses, and steps 2-3 supply its affine flat-surjective descent hypothesis. It yields $P(h)$ if and only if $P(h\\times_TT_i)$ for every fpqc covering of $T$.",
+   "uses": [
+    "lem-sfb-space-fpqc-property-affine-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0424, application of Tag 041J."
+   }
+  },
+  {
+   "text": "The given fppf covering is fpqc: on a scheme pullback, take the etale scheme charts specified in its covering convention and apply the scheme fppf-to-fpqc lemma. For each affine test these charts have finite flat affine refinements as in that lemma, with their maps into the original $T_i$; these are exactly the refinements required in the algebraic-space fpqc convention of the criterion. Thus step 4 applies to the given family. The forward implication also follows directly from the base-change clauses of the affine-test lemmas. If the covering is empty its target is empty, and the asserted immersion is the empty isomorphism.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-sfb-space-fpqc-property-affine-criterion",
+    "lem-sfb-space-immersion-affine-tests",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0424 specialized to fppf; spaces-topologies.tex Tag 0DFQ (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), fppf implies fpqc."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-pqf-qc-immersion-open-closed-factor",
+  "lem-sfb-scheme-qc-immersion-fpqc-descent",
+  "lem-sfb-space-fpqc-property-affine-criterion",
+  "lem-sfb-space-immersion-affine-tests",
+  "lem-sfb-space-quasi-affine-affine-descent",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0424 (lemma-descending-property-quasi-compact-immersion), via 041J, 0423 and scheme 02L8; the typo closed immersion in line 1745 is corrected to quasi-compact immersion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact immersion of algebraic spaces is fpqc local on the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsOpenImmersion g₁ ∧\\n        AlgebraicGeometry.IsClosedImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.QuasiCompact (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.QuasiSeparated g],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-compact, and $ g $ is quasi-separated, then $ f $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.QuasiCompact\", \"doc\": \"The quasi-compactness property of morphisms of schemes is multiplicative, meaning that the composition of two quasi-compact morphisms is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic spaces is a quasi compact immersion if it is so after an fpqc covering of the target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isCompact_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"[QuasiCompact f] {U : Opens Y} (hU : IsCompact (U : Set Y)) : IsCompact (f ⁻¹ᵁ U : Set X)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if for every compact open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ is a compact subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism between schemes $ X $ and $ Y $ is an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{Z : Scheme} [IsLocallyNoetherian X] {f : Z ⟶ X} [IsOpenImmersion f] : QuasiCompact f\", \"doc\": \"Every open immersion $ f: Z \\to X $ into a locally Noetherian scheme $ X $ is a quasi-compact morphism. That is, if $ X $ admits an open cover by Noetherian schemes and $ f $ is an open immersion (a mo\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Set ↥Y), IsOpen U → IsCompact U → IsCompact (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' U)) →\\n    AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ of schemes, if for every open subset $ U \\\\subseteq Y $ that is quasi-compact, the preimage $ f^{-1}(U) $ is quasi-compact in $ X $, then $ f $ is a quasi-compact morphi\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] : QuasiCompact f\", \"doc\": \"Every isomorphism between schemes is a quasi-compact morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"[QuasiCompact f] : QuasiCompact f.toImage\", \"doc\": \"If a morphism $ f $ of schemes is quasi-compact, then the induced morphism from $ X $ to the image subscheme of $ f $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"[IsImmersion f] [QuasiCompact f] : IsOpenImmersion f.toImage\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is an immersion and quasi-compact, then the induced morphism from $ X $ to the image subscheme $ f.\\text{image} $ is an open immersion. This means the morphism $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"IsLocalAtTarget\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.compact immersion|IsImmersion.*(fpqc|fppf)|[Aa]lgebraic[Ss]pace",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"243\", \"text\": \"If `f : X ⟶ Y` is a quasi-compact immersion, then `X` is the pullback of the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of quasi compact locally closed immersions along faithfully flat covers of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact immersion of algebraic spaces descends along fppf coverings of its target",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.QuasiCompactCover.homCover, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact, AlgebraicGeometry.Scheme.instQuasiCompactToImage",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space immersion locality theorem; hits on schemes do not supply representability descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"DescendsAlong\"",
+   "results": "0 hits; declarations/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space immersion locality theorem; hits on schemes do not supply representability descent."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.compact immersion|IsImmersion.*(DescendsAlong|fpqc|fppf)",
+   "results": "1 hits; declarations/files: Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space immersion locality theorem; hits on schemes do not supply representability descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of locally closed immersions of algebraic spaces along faithfully flat covers",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.IsImmersion.isLocallyClosed_range, AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.isImmersion_iff, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsImmersion.mk, AlgebraicGeometry.isImmersion_eq_inf",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space immersion locality theorem; hits on schemes do not supply representability descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-picard-space-curves-smooth",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Descent of the universal locally closed equality loci for arbitrary Picard sheaf sections.",
+   "via": [
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasi-compact-immersion-locality",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0424 through its affine descent criterion, separating affine tests, quasi-affine representability descent and scheme immersion descent. Proved the quasi-affine input by existing scheme factorization and affine closed-immersion facts. Corrected a source-proof typo but left the item statement unchanged. Searched project Lean, whole DAG, newest blueprint and Mathlib.",
+  "blueprint": "Newest blueprint det-thm-sf-ctf-stability-direct-images proof (3) provides the ancestor route; the existing generated chain refines its alteration/Picard equality-locus input. This item supplies descent of those locally closed equality loci; steps follow Stacks 0424. The ancestor tool prints None, preserved as JSON null.",
+  "tool_uses": [
+   {
+    "node": "def-weil-size-convention",
+    "why": "Generic scheme/space coproduct, partition, or covering tool used only for the hypotheses of Stacks 041J; it replaces no unit-level six-functor argument."
+   },
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic scheme/space coproduct, partition, or covering tool used only for the hypotheses of Stacks 041J; it replaces no unit-level six-functor argument."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-coproduct-partition",
+    "why": "Generic scheme/space coproduct, partition, or covering tool used only for the hypotheses of Stacks 041J; it replaces no unit-level six-functor argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-size-convention",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-a09b08c81",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-a09b08c81 (reviewer sub-agent of L); spot-checked: I read the item and all four new nodes in full. Item statement and stmt_deps are byte-identical to live, where the item is still unsplit, so no parallel group has superseded it. Source read: Stacks 0424 (spaces-descent l.1722-1751), 041J, 0423, descent.tex 02L8, spaces-morphisms 03M4, 03KG and 03HF; tags checked against tags/tags. The line-1745 typo ('closed immersion' instead of 'quasi-compact immersion') is real and is reported correctly; the D(2)⊂Spec Z counterexample holds and the statement is untouched. Step 1 checks hypotheses (1) and (2) of the same-unit 041J criterion with the two new affine-test nodes, the 02WQ coproduct node and the 0F15 clopen-partition node. It correctly argues that clopen pieces of an affine are quasi-compact and that a finite union of quasi-compact spaces is quasi-compact, and it handles the empty family. Step 2 is the 02JR argument: 01QV factors open then closed, the middle scheme C is affine by 01QO(1) on the whole target, and X_V is quasi-compact. Step 3 applies the 0423 representability node before the scheme 02L8 node; this order is necessary because the scheme node gives no representability. Step 4 is the criterion. Step 5 turns the fppf covering into finite flat affine refinements via 022C on étale charts. New nodes: (1) immersion affine tests = 03M4 (1)(3)(5) plus 02YW; (2) quasi-compact affine tests = 03KG plus 03HF/03HD; (3) quasi-affine descent = 0423 for an affine flat-surjective cover (a quasi-affine scheme over an affine is a quasi-affine morphism); (4) scheme 02L8 for a singleton affine cover. All four are true, statement-only, strictly smaller than the item and not duplicates. Compared against closed-immersion-atlas-locality, trf open-immersion-etale-local, quasicompact-fppf-local, trf qc-separated-etale-local, trf/a1 quasi-affine effective descent and a1 open-image descent. Mathlib FlatDescent has open-immersion descent only. Batch 5: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, lem-trf-algebraic-space-coproduct, lem-trf-fppf-covering-is-fpqc (Mathlib leaf), lem-trf-fppf-sheaf-coproduct-partition and the criterion's closure contain only generic sheaf, coproduct, fibre-product and algebraic-space foundations, with no theorem or Poincaré-duality node. They are outside both assumptions. Accepted tool_uses: the coproduct and partition nodes, as generic tools. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuasiCompactImmersionLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quasiCompactImmersion_iff_fppfCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuasiCompactImmersionLocality.lean",
+  "statement": "theorem quasiCompactImmersion_iff_fppfCover {S : Scheme.{u}} {I : Type w} {Z T : AlgebraicSpace S} (h : Z ⟶ T) (Tᵢ : I → AlgebraicSpace S) (q : ∀ i : I, Tᵢ i ⟶ T) (hq : IsFppfCover q) : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left ∧ IsImmersion p.left) h.hom.hom ↔ ∀ i : I, IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left ∧ IsImmersion p.left) (Limits.pullback.snd h.hom.hom (q i).hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c903b973",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read item, Stacks 0424 (l.1722-1751; l.1745 'closed immersion' typo correctly documented), IsRepresentableWith, IsFppfCover (chartwise flat+lfp+jointly surjective), Mathlib IsImmersion/isImmersion_iff_exists. Every clause matches: arbitrary I : Type w, fppf family with no extra assumption on members, representability included in the conclusion (no assumed IsRepresentable), QC for every scheme test equivalent to the node's QC-test form, RHS pullback.snd h (q i) with the same predicate, iff. Edge cases: empty I forces T empty, empty members/schemes allowed, no Noetherian/separatedness hypotheses. lean.statement verbatim; only the lean field differs from live; docstrings carry source, blueprint and the 5 proof steps; lines under 100 chars; only sorry; proof-dep imports exist with no cycle; no H4 duplicate. No compile needed (no change; worker reports clean). Maintainer advisory: IsFppfCover belongs to statement node lem-sfb-space-fppf-covering-calculus, not in stmt_deps; no definition node exists, so advisory only, not H2."
+ }
+}

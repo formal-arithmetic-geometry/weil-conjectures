@@ -1,0 +1,326 @@
+{
+ "id": "lem-trf-two-term-augmentation-determinant-normalization",
+ "kind": "statement",
+ "title": "Ordered-wedge normalization of two-term augmentation determinants",
+ "statement": "Let $B$ be a commutative ring and\n$$0\\to U\\xrightarrow{i}V\\xrightarrow{p}W\\to0$$\na short exact sequence of finite projective $B$-modules [def-weil-pbc-projective-module] of constant ranks $a,a+d,d$, with $a,d\\geq0$. Write $\\det E=\\bigwedge^{\\operatorname{rank}E}_B E$ [def-weil-pbc-exterior-algebra], $\\lambda=(\\det U)^\\vee\\otimes_B\\det V$ with $(-)^\\vee=\\operatorname{Hom}_B(-,B)$, and $C=[U\\xrightarrow{i}V]$ in degrees $-1,0$. Regard the complexes as quasi-coherent complexes on $\\operatorname{Spec}B$ in [def-pc-derived-category], and use the two-term determinant functor of [lem-trf-two-term-perfect-determinant] with its affine-local normalization: its exterior-model comparisons commute with restriction to open subschemes, and on an affine open $\\operatorname{Spec}R$, for a degreewise surjective quasi-isomorphism $a:P\\to Q$ between two-term complexes of finite projective $R$-modules, $\\det(a)$ is, under the exterior-model comparisons, the kernel-normalized map $T_a$ of [lem-trf-surjective-two-term-determinant-calculus] (the ordinary tensor symmetry reorders the two factors). The ordered-wedge map $\\delta:\\det W\\to\\lambda$, given on free localizations by\n$$w_1\\wedge\\cdots\\wedge w_d\\mapsto(u_1\\wedge\\cdots\\wedge u_a)^\\vee\\otimes\\bigl(i(u_1)\\wedge\\cdots\\wedge i(u_a)\\wedge\\widetilde w_1\\wedge\\cdots\\wedge\\widetilde w_d\\bigr),$$\nwhere $(u_j)$ is any basis of $U$ and $p(\\widetilde w_j)=w_j$, is independent of both choices and is an isomorphism. For the augmentation $q:C\\to W[0]$ one has $\\det(q)=\\delta^{-1}$. Both statements commute with arbitrary scalar extension $B\\to B'$ and with isomorphisms of such exact sequences; in particular, for a chain map $f:C\\to C'$ between two such resolutions of the same $W$ with $q'f=q$,\n$$\\delta'^{-1}\\det(f)=\\delta^{-1}.$$\nThe empty exterior powers for $a=0$ or $d=0$ use $\\bigwedge^0 E=B$.\nFor the algebraic interpretation, let $k$ be a field and $U_0\\hookrightarrow V_0$ a regular closed immersion [def-weil-closed-immersion, def-weil-pbc-regular-sequence] of codimension $a$ into an open of $\\mathbf A^{a+d}_k$, with $U_0$ smooth of pure dimension $d$ over $k$ [def-sbc-smooth-morphisms, def-weil-pure-dimension]. In the conormal sequence $0\\to\\mathcal I/\\mathcal I^2\\to\\Omega^1_{V_0/k}|_{U_0}\\to\\Omega^1_{U_0/k}\\to0$ [def-weil-pbc-kahler-differentials], the smooth-locus identification of the canonical algebraic adjunction line $K_{U_0/k}$ [lem-trf-flat-lci-canonical-adjunction] with $\\bigwedge^d\\Omega^1_{U_0/k}$, namely its normalized isomorphism $\\theta:K_{U_0/k}\\simeq\\det L_{U_0/k}$ [lem-sfb-adjunction-cotangent-determinant-normalization] followed by the smooth-locus isomorphism $\\det L_{U_0/k}\\simeq\\bigwedge^d\\Omega^1_{U_0/k}$ of [lem-trf-lci-determinant-descent-smooth], is $\\delta^{-1}$ on the presentation's chart line $(\\det\\mathcal I/\\mathcal I^2)^\\vee\\otimes\\det\\Omega^1_{V_0/k}|_{U_0}$, also on stalks and after extension of their residue fields.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E9Y (lemma-determinant), relation-first wedge formula, and 0E9Z (lemma-fundamental-class-lci), construction of the algebraic smooth identification; more-algebra.tex Tag 0FJI (section-determinants-complexes), degreewise surjective quasi-isomorphism construction preceding lemma-canonical-element-well-defined; perfect.tex Tags 0FJX (lemma-determinant-two-term-complexes), 0FJY (remark-functorial-det). Auxiliary augmentation computation in returned parent proof Steps 8 and 10."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-pc-derived-category",
+  "lem-trf-two-term-perfect-determinant",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-regular-sequence",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "lem-sfb-adjunction-cotangent-determinant-normalization",
+  "lem-trf-lci-determinant-descent-smooth"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=\\det U$, $M=\\det W$. The kernel-first exact-sequence isomorphism is $\\gamma:L\\otimes M\\simeq\\det V$. Since $L$ is an invertible module, evaluation $L^\\vee\\otimes L\\simeq B$ is invertible. Tensor its inverse with $M$, then apply $1\\otimes\\gamma$, to obtain $\\delta:M\\simeq L^\\vee\\otimes\\det V$. On a free localization evaluation inverse sends $1$ to $u^\\vee\\otimes u$, where $u=u_1\\wedge\\cdots\\wedge u_a$; hence this is exactly the displayed formula. Independence of lifts and bases follows from the canonical $\\gamma$ and evaluation, not from a chosen splitting. Explicitly changing the relation basis by $A$ multiplies the wedge by $\\det A$ and its dual by $(\\det A)^{-1}$; adding an $i(U)$-vector to a lift contributes a wedge with $a+1$ relation vectors, which is zero.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-trf-line-module-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses); duality.tex Tag 0E9Y (lemma-determinant), relation-first formula"
+   }
+  },
+  {
+   "text": "The augmentation $q^{-1}:U\\to0$, $q^0=p:V\\to W$ is degreewise surjective; exactness gives $H^{-1}(C)=0$ and $H^0(C)=W$, so it is a quasi-isomorphism. Its kernel is $N=[U\\xrightarrow{i}i(U)]$, identified by $i$ with $[U\\xrightarrow{1}U]$. In the kernel-normalization notation, $\\gamma^{-1}$ is the unit identification $\\det U\\otimes B\\simeq\\det U$, while $\\gamma^0$ is the relation-first $\\gamma$. For a local relation wedge $u$, write $i(u)$ for its image wedge. The differential generator is $\\delta_N=i(u)\\otimes u^\\vee$. Therefore $\\Gamma_q(w\\otimes\\delta_N)=\\gamma(u\\otimes w)\\otimes u^\\vee$ in $D(C)=\\det V\\otimes(\\det U)^\\vee$. Ordinary tensor symmetry identifies this with $\\delta(w)$; no exterior factors are interchanged. Thus $T_q^{-1}=\\delta$. These are the kernel, the maps $\\gamma^i,\\Gamma_q$, the generator $\\delta_N$ and the inverse $T_q$ of [lem-trf-surjective-two-term-determinant-calculus], which defines $T_q$ by the same formula. By the affine-local normalization of the determinant functor fixed in the statement, $\\det(q)$ is $T_q$ under the exterior-model comparisons $\\det(C)\\cong D(C)$ and $\\det(W[0])\\cong\\det W$. Consequently $\\det(q)=T_q=\\delta^{-1}$.",
+   "uses": [
+    "lem-trf-two-term-kernel-normalization",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), construction immediately before lemma-canonical-element-well-defined; perfect.tex Tag 0FJX (lemma-determinant-two-term-complexes)"
+   }
+  },
+  {
+   "text": "For any $B\\to B'$, projectivity of $W$ splits the exact sequence. A section $s$ identifies $V$ with $U\\oplus W$ by $(u,w)\\mapsto i(u)+s(w)$: the inverse sends $v$ to $(i^{-1}(v-sp(v)),p(v))$. Tensoring this isomorphism preserves the split exact sequence without requiring $B'$ flat. The exterior/dual scalar comparisons commute with evaluation and the kernel-first $\\gamma$, so they commute with the composite defining $\\delta$ in Step 1. Naturality of determinant pullback gives the same comparison for $q$, whose scalar extension is its usual augmentation since all terms are projective. Taking inverses in Step 2 proves scalar compatibility of $\\det(q)=\\delta^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-ses-projective-quotient-splits",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-trf-two-term-perfect-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJY (remark-functorial-det); more-algebra.tex Tag 0FJI (section-determinants-complexes)"
+   }
+  },
+  {
+   "text": "An isomorphism of exact sequences gives a square of augmentation maps with chain-isomorphism source and degree-zero-isomorphism target. Equivariance of $T$ for that square gives $T_{q'}D(f)=D(e)T_q$ (orient the isomorphisms in the equivariance statement inversely if necessary), where $e:W\\simeq W'$ is its quotient map. On $W[0]$, $D(e)=\\bigwedge^d e$. Step 2 identifies the same square with the naturality square for $\\delta^{-1}$ and hence for $\\delta$. For an arbitrary chain map between resolutions of the same $W$ with $q'f=q$, its cohomology map is the identity on $W$ and is an isomorphism in every other degree, since those groups vanish. Thus $f$ is a derived isomorphism even when its term maps are not isomorphisms. Determinant functoriality gives $\\det(q')\\det(f)=\\det(q)$, and substitution from Step 2 proves $\\delta'^{-1}\\det(f)=\\delta^{-1}$.",
+   "uses": [
+    "lem-trf-two-term-normalization-locality-equivariance",
+    "lem-trf-two-term-perfect-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), functorial determinant construction; perfect.tex Tag 0FJX (lemma-determinant-two-term-complexes)"
+   }
+  },
+  {
+   "text": "All preceding formulas use the empty wedge $1\\in B$. If $a=0$, $p:V\\simeq W$ and $\\delta=\\det(p)^{-1}$, so $\\det(q)=\\det(p)$. If $d=0$, $i:U\\simeq V$ and $\\delta(1)=\\det(i)$ in $(\\det U)^\\vee\\otimes\\det V$; its inverse is the acyclic evaluation trivialization. If both ranks vanish, all maps are the unit identifications. Thus there is no positivity assumption and no extra sign at either endpoint.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), canonical acyclic element; duality.tex Tag 0E9Y (lemma-determinant), empty-wedge convention"
+   }
+  },
+  {
+   "text": "Work locally on $U_0$ in the stated regular presentation and set $C_0=\\mathcal I/\\mathcal I^2$, $V_1=\\Omega^1_{V_0/k}|_{U_0}$, $E=[C_0\\xrightarrow{\\mathrm d}V_1]$ and $n=a+d$. A regular sequence of length $a$ is Koszul-regular [lem-weil-pbc-regular-sequence-koszul-regular] and its classes give a basis of $C_0$ [lem-weil-pbc-regular-sequence-conormal-free], so $C_0$ and $V_1$ are free of ranks $a$ and $n$. The statement invokes the adjunction line of [lem-trf-flat-lci-canonical-adjunction] for $U_0\\to\\operatorname{Spec}k$, whose hypotheses are those of [lem-sfb-adjunction-cotangent-determinant-normalization]: $\\operatorname{Spec}k$ is Noetherian, $U_0$ is locally closed in $\\mathbf A^n_k$, hence finitely presented and flat over the field $k$, the single presentation has $c=a=n-d$, and the geometric fibre is smooth of pure dimension $d$. The adjunction chart line is literally $K_i=(\\bigwedge^a C_0)^\\vee\\otimes\\bigwedge^nV_1=D(E)$ up to ordinary tensor symmetry. By [lem-sfb-adjunction-cotangent-determinant-normalization], the composite $K_i\\to K_{U_0/k}|_U\\xrightarrow{\\theta}\\det L_{U_0/k}|_U$ is this exterior-model identification followed by $\\det(\\lambda_i)$, where $\\lambda_i:E\\simeq L_{U_0/k}|_U$ is the conormal model comparison. Its transitions are $\\det(\\lambda_j^{-1}\\lambda_i)$. Thus the canonical adjunction gluing, and not merely its isomorphism class, is the determinant gluing of the conormal complexes.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-sfb-adjunction-cotangent-determinant-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6V (lemma-lci-shriek), local Koszul adjunction computation; Tag 0E9Z (lemma-fundamental-class-lci), identification of the adjunction chart line"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-lci-determinant-descent-smooth] to the presentation of Step 6; its affine-local normalization hypothesis on the determinant functor is the one fixed in the statement. Since $U_0$ is smooth, $\\Omega^1_{U_0/k}$ has rank $d$ and the canonical map $\\varepsilon:L_{U_0/k}\\simeq\\Omega^1_{U_0/k}[0]$ induces $\\det L_{U_0/k}\\simeq\\bigwedge^d\\Omega^1_{U_0/k}$. The composite $\\varepsilon\\lambda_i:E\\to\\Omega^1_{U_0/k}[0]$ is an isomorphism in the derived category, so $H^{-1}(E)=0$: the conormal differential is injective and the conormal sequence of the statement is exact. Its maps $\\alpha_i:D(E)\\simeq\\det L_{U_0/k}|_U$ are the exterior-model identification followed by $\\det(\\lambda_i)$, so by Step 6 the specified identification $K_i\\to\\bigwedge^d\\Omega^1_{U_0/k}$ is $\\det(\\varepsilon)\\alpha_i=\\det(\\varepsilon\\lambda_i)$. The theorem states that this map agrees with the local exact-conormal-sequence determinant comparison in relation-first order, i.e. with the inverse of the ordered-wedge $\\delta$ of Step 1 for $0\\to C_0\\to V_1\\to\\Omega^1_{U_0/k}\\to0$. This is consistent with Step 2: on an affine free chart $\\varepsilon\\lambda_i$ is represented by the augmentation $q$ of that sequence and $\\det(q)=\\delta^{-1}$, not its negative. Equality on all charts gives equality of sheaf maps and therefore of germs at every stalk. Tensoring a stalk with its residue field or any extension of that field preserves the equality and the isomorphisms; the stalk sequence is split exact of finite free modules, and Step 3 identifies the resulting wedge formulas with the scalar-extended formulas. This proves the final clause with the specified normalization.",
+   "uses": [
+    "lem-trf-lci-determinant-descent-smooth",
+    "lem-trf-lci-cotangent-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E9Y (lemma-determinant) and 0E9Z (lemma-fundamental-class-lci), smooth identification; perfect.tex Tag 0FJY (remark-functorial-det)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-determinant-exact-sequence",
+  "lem-trf-line-module-duality",
+  "lem-trf-two-term-kernel-normalization",
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-weil-pbc-ses-projective-quotient-splits",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-trf-two-term-normalization-locality-equivariance",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "lem-sfb-adjunction-cotangent-determinant-normalization",
+  "lem-trf-lci-determinant-descent-smooth",
+  "lem-trf-lci-cotangent-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJI (section-determinants-complexes), degreewise-surjective determinant construction, specialized to the augmentation; duality.tex Tags 0E9Y and 0E9Z for the ordered wedge and smooth interpretation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The determinant of the augmentation of a two term finite free resolution of a projective module is inverse to the relation first ordered wedge determinant isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"The determinant of the augmentation of a two term finite free resolution of a projective module is inverse to the relation first ordered wedge determinant isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.detAux_def\", \"exteriorPower.pairingDual_ιMulti_ιMulti\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\", \"LinearMap.det_def\", \"LinearMap.det_eq_det_mul_det\", \"LinearMap.coe_det\", \"Module.Free.of_det_ne_one\", \"LinearMap.free_of_det_ne_one\"], \"digest\": \"6171b396b4043ff5\"} Full signatures in lem-trf-two-term-augmentation-determinant-normalization.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower, LinearMap.det",
+   "results": "{\"t\": \"2026-10-22T06:45:28Z\", \"tool\": \"loogle\", \"query\": \"exteriorPower, LinearMap.det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'exteriorPower'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Full signatures in lem-trf-two-term-augmentation-determinant-normalization.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*[Aa]ugmentation|[Aa]ugmentation.*determinant|determinant.*[Ss]hort[Ee]xact",
+   "results": "{\"t\": \"2026-10-22T06:45:28Z\", \"tool\": \"grep\", \"query\": \"determinant.*[Aa]ugmentation|[Aa]ugmentation.*determinant|determinant.*[Ss]hort[Ee]xact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Full signatures in lem-trf-two-term-augmentation-determinant-normalization.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant functor on a quasi-isomorphism from a two term projective resolution to its cokernel agrees with the exact sequence wedge trivialization and base change",
+   "results": "{\"t\": \"2026-10-22T06:45:28Z\", \"tool\": \"leansearch\", \"query\": \"Determinant functor on a quasi-isomorphism from a two term projective resolution to its cokernel agrees with the exact sequence wedge trivialization and base change\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Full signatures in lem-trf-two-term-augmentation-determinant-normalization.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation of the acyclic identity summand in a split two term complex gives the relation before quotient lifts wedge formula, natural in chain maps and scalar extension",
+   "results": "{\"t\": \"2026-10-22T06:45:45Z\", \"tool\": \"leanfinder\", \"query\": \"Cancellation of the acyclic identity summand in a split two term complex gives the relation before quotient lifts wedge formula, natural in chain maps and scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.ιSummand_comp_d_comp_πSummand_eq_zero\", \"HomologicalComplex.homotopyCofiber.sndX_inrX\", \"SimplicialObject.Splitting.comp_PInfty_eq_zero_iff\", \"SimplicialObject.Splitting.cofan_inj_comp_PInfty_eq_zero\", \"SimplicialObject.Splitting.σ_comp_πSummand_id_eq_zero_assoc\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self\", \"HomologicalComplex.cylinder.inlX_π\", \"SimplicialObject.Splitting.σ_comp_πSummand_id_eq_zero\"], \"digest\": \"cd5c3586cacd0279\"} Full signatures in lem-trf-two-term-augmentation-determinant-normalization.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*[Aa]ugmentation|[Aa]ugmentation.*determinant|determinant.*[Ss]hort[Ee]xact",
+   "results": "{\"t\": \"2026-10-23T12:19:31Z\", \"tool\": \"grep\", \"query\": \"determinant.*[Aa]ugmentation|[Aa]ugmentation.*determinant|determinant.*[Ss]hort[Ee]xact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: endomorphism determinants, degree-zero/one exterior powers and projective resolution APIs do not state this determinant-line augmentation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant line of an exact sequence of projective modules agrees with the determinant of its resolution augmentation",
+   "results": "{\"t\": \"2026-10-23T12:19:32Z\", \"tool\": \"leansearch\", \"query\": \"Determinant line of an exact sequence of projective modules agrees with the determinant of its resolution augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.det\", \"LinearMap.associated_det_comp_equiv\", \"LinearEquiv.det\", \"ModuleCat.projectiveResolution\", \"CategoryTheory.ProjectiveResolution.exact_succ\", \"LinearMap.detAux\", \"LinearMap.coe_det\", \"Module.Basis.det_comp_basis\"], \"digest\": \"fbb3ae2b7b148017\"} Read the returned signatures: endomorphism determinants, degree-zero/one exterior powers and projective resolution APIs do not state this determinant-line augmentation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.det, LinearMap.exteriorPower",
+   "results": "{\"t\": \"2026-10-23T12:19:32Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det, LinearMap.exteriorPower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'LinearMap.exteriorPower'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: endomorphism determinants, degree-zero/one exterior powers and projective resolution APIs do not state this determinant-line augmentation normalization.",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Determinant functor sends the augmentation of a two term finite projective resolution to the inverse of the kernel first exterior wedge isomorphism",
+   "results": "{\"t\": \"2026-10-23T12:19:33Z\", \"tool\": \"leanfinder\", \"query\": \"Determinant functor sends the augmentation of a two term finite projective resolution to the inverse of the kernel first exterior wedge isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution.π_f\", \"ModuleCat.exteriorPower.natIso₁\", \"ModuleCat.exteriorPower.natIso₀\", \"CategoryTheory.ProjectiveResolution.isoExt\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq\", \"CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso\", \"CategoryTheory.ProjectiveResolution.π'_f_zero\", \"ModuleCat.exteriorPower.iso₁\"], \"digest\": \"37d4a74beafb36c9\"} Read the returned signatures: endomorphism determinants, degree-zero/one exterior powers and projective resolution APIs do not state this determinant-line augmentation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*([Ff]unctor|[Cc]omplex|[Ee]xact)|([Ff]unctor|[Cc]omplex|[Ee]xact).*determinant",
+   "results": "{\"t\": \"2026-10-23T12:19:56Z\", \"tool\": \"grep\", \"query\": \"determinant.*([Ff]unctor|[Cc]omplex|[Ee]xact)|([Ff]unctor|[Cc]omplex|[Ee]xact).*determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"Mathlib/Algebra/ContinuedFractions/Computation/Approximations.lean\", \"Mathlib/Algebra/ContinuedFractions/Determinant.lean\", \"Mathlib/LinearAlgebra/Complex/Determinant.lean\", \"Mathlib/LinearAlgebra/Complex/Determinant.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/Manifold.lean\", \"Mathlib/Analysis/Complex/OperatorNorm.lean\", \"Mathlib/Analysis/Complex/OperatorNorm.lean\"], \"digest\": \"b80d50abf8a618e2\"} Read the returned signatures: endomorphism determinants, degree-zero/one exterior powers and projective resolution APIs do not state this determinant-line augmentation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.det",
+   "results": "{\"t\": \"2026-10-23T12:19:57Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.det\", \"LinearMap.det_id\", \"LinearMap.det_eq_one_of_subsingleton\", \"LinearMap.finite_of_det_ne_one\", \"LinearMap.free_of_det_ne_one\", \"Module.Free.of_det_ne_one\", \"LinearMap.det_eq_one_of_not_module_finite\", \"LinearMap.isUnit_det\"], \"digest\": \"3a541211bc8bc2dc\"} Read the returned signatures: endomorphism determinants, degree-zero/one exterior powers and projective resolution APIs do not state this determinant-line augmentation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical top exterior power isomorphism for a short exact sequence of finite projective modules, natural under base change and relation first wedge order",
+   "results": "{\"t\": \"2026-10-23T12:20:01Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical top exterior power isomorphism for a short exact sequence of finite projective modules, natural under base change and relation first wedge order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.exteriorPower.iso₁_hom_naturality_assoc\", \"ModuleCat.exteriorPower.iso₁_hom_naturality\", \"exteriorPower.oneEquiv_naturality\", \"ModuleCat.exteriorPower.iso₀_hom_naturality_assoc\", \"ModuleCat.exteriorPower.iso₀_hom_naturality\", \"ModuleCat.exteriorPower.iso₁\", \"exteriorPower.zeroEquiv_naturality\", \"ModuleCat.exteriorPower\"], \"digest\": \"ac5bdab9c30667fa\"} Read the returned signatures: endomorphism determinants, degree-zero/one exterior powers and projective resolution APIs do not state this determinant-line augmentation normalization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "^(noncomputable )?(def|theorem|lemma|abbrev) (det|associated_det_comp_equiv|detAux|coe_det|det_comp_basis|projectiveResolution|isoExt|exact_succ|natIso₁|natIso₀|iso₁|fromLeftDerivedZero_eq)",
+   "results": "{\"t\": \"2026-10-23T12:28:07Z\", \"tool\": \"grep\", \"query\": \"^(noncomputable )?(def|theorem|lemma|abbrev) (det|associated_det_comp_equiv|detAux|coe_det|det_comp_basis|projectiveResolution|isoExt|exact_succ|natIso₁|natIso₀|iso₁|fromLeftDerivedZero_eq)\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/Matrix/Permutation.lean\", \"Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean\", \"Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean\", \"Mathlib/LinearAlgebra/Matrix/AbsoluteValue.lean\", \"Mathlib/LinearAlgebra/Matrix/AbsoluteValue.lean\", \"Mathlib/LinearAlgebra/Matrix/AbsoluteValue.lean\"], \"digest\": \"9f1aabbf66fedc23\"} Read these hits: the determinant declarations concern endomorphisms, linear automorphisms or matrix determinants, not determinant lines of derived augmentations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def det |def detAux|theorem coe_det|associated_det_comp_equiv",
+   "results": "{\"t\": \"2026-10-23T12:28:28Z\", \"tool\": \"grep\", \"query\": \"def det |def detAux|theorem coe_det|associated_det_comp_equiv\", \"sub\": \"LinearAlgebra/Determinant.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"135\", \"179\", \"184\", \"427\", \"432\"], \"digest\": \"5f19f98717e4b007\"} Read these hits: the determinant declarations concern endomorphisms, linear automorphisms or matrix determinants, not determinant lines of derived augmentations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-conormal-determinant-comparison",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Missing prerequisite for this local input: compare the completed algebraic conormal determinant with an arbitrary regular formal presentation, preserving the generic differential map, before computing the plane residue. Re-split component: Ordered-wedge augmentation determinant and its algebraic smooth interpretation (old Steps 8, 10).",
+   "via": [
+    "lem-trf-completed-conormal-determinant-comparison",
+    "lem-trf-formal-plane-adjunction-lattice",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-two-term-augmentation-determinant-normalization",
+  "worker": "stage1",
+  "group": "NS",
+  "summary": "Proved the normalization by computing the augmentation kernel and its determinant generator. Reused existing exact-sequence, duality, scalar-comparison and affine determinant inputs; no new nodes. Checked arbitrary non-flat scalar extension using splitting, naturality for isomorphisms and arbitrary comparison chain maps, empty ranks, and the algebraic smooth interpretation through the existing signed Koszul and determinant-descent comparisons. Statement and statement dependencies unchanged.",
+  "blueprint": "Auxiliary ordered-wedge normalization in the existing descendant chain of lem-trf-local-term-locality: the completed-conormal comparison, former Steps 8 and 10. Read the current latest blueprint ancestor and sk-i-curve-zero; this generic algebra lemma does not replace their contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic regular-sequence/module algebra used on the stated local conormal presentation; it does not replace any step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-conormal-free",
+    "why": "Generic regular-sequence/module algebra used on the stated local conormal presentation; it does not replace any step of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-weil-pbc-regular-sequence-conormal-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-68c76a7b5",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-68c76a7b5 (reviewer sub-agent of L); spot-checked: I read the whole split: item only, 7 steps, no new nodes. It is the first split of a Q14-created statement node, so no re-split note applies. There is no cycle: the closure of 2193 nodes contains neither the item nor its citer, completed-conormal. Sources read: 0E9Y (duality l.7510), whose formula t^vee ⊗ α(t)∧s̃ matches the relation-first δ; the 0FJI construction (kernel-first γ, δ(Ker)); 0FJX, including its 'affine locally More on Algebra' clause. By hand I checked: Step 1 δ=(1⊗γ)(ev^{-1}⊗1); Step 2 N=[U→iU], δ_N=i(u)⊗u^vee, Γ_q(w⊗δ_N)=(i(u)∧w̃)⊗u^vee, so T_q=δ^{-1}; Step 3 explicit splitting with non-flat B' (also Z→Z/2); Step 4 equivariance for chain isomorphisms plus functoriality for arbitrary quasi-isomorphisms; Step 5 a=0, d=0, a=d=1 on B^2; Step 7 H^{-1}=0. Faults, all FIXed. (1) C3/C4, Step 2: det(q)=T_q comes only from the proof of lem-trf-two-term-perfect-determinant, whose statement omits 0FJX's affine clause. Twisting the model comparisons by (−1)^{r(s+1)} keeps every clause of that statement but changes det(q) by (−1)^{ad}. The statement now pins the functor with wording identical to the landed Q81 descent-smooth statement (det(a)=T_a of lem-trf-surjective-two-term-determinant-calculus, added to stmt_deps). (2) C3/C4, Step 6: the adjunction statement does not say its transitions are the Koszul/determinant ones. The step now cites lem-sfb-adjunction-cotangent-determinant-normalization (θ, chart normalization, transitions det(λ_j^{-1}λ_i)), with its hypotheses checked for U_0/k (Q64 precedent). (3) C3: the referent of 'smooth-locus identification of the adjunction line' was not fixed by any statement. It is pinned in the statement as θ followed by descent-smooth's det L≃∧^dΩ, with that node added to stmt_deps. Step 7 now uses descent-smooth's α_i and its relation-first agreement clause. proof_deps equals the union of the step uses: dropped affine-two-term-determinant and lci-koszul-duality-determinant-comparison; added surjective-calculus, the sfb normalization node and lci-cotangent-presentation. These are named statement corrections, not weakenings, and the citer is unaffected. tool_uses for the maintainer: the sfb normalization node (unit sk-thm-sf-ctf-stability). Maintainer: strengthen lem-trf-two-term-perfect-determinant with the 0FJX affine clause, and lem-trf-flat-lci-canonical-adjunction with its explicit smooth-locus map.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.TwoTermAugmentationDeterminantNormalization",
+  "declaration": "AlgebraicGeometry.exists_twoTermAugmentationDeterminantNormalization",
+  "declarations": [
+   "AlgebraicGeometry.TwoTermAugmentationSequence",
+   "AlgebraicGeometry.TwoTermAugmentationSequence.IsOrderedWedge",
+   "AlgebraicGeometry.TwoTermAugmentationSequence.degreeZero",
+   "AlgebraicGeometry.TwoTermAugmentationNormalization",
+   "AlgebraicGeometry.IsAugmentationQuotientComparison",
+   "AlgebraicGeometry.TwoTermAugmentationCompatibilities",
+   "AlgebraicGeometry.SmoothConormalAugmentation",
+   "AlgebraicGeometry.SmoothConormalAugmentation.sequence",
+   "AlgebraicGeometry.IsGeometricAugmentationNormalization",
+   "AlgebraicGeometry.HasAffineAugmentationRealizations",
+   "AlgebraicGeometry.exists_twoTermAugmentationDeterminantNormalization"
+  ],
+  "file": "lean/Sheaf/TraceFormula/TwoTermAugmentationDeterminantNormalization.lean",
+  "statement": "theorem exists_twoTermAugmentationDeterminantNormalization (T : TwoTermPerfectDeterminantData.{u, w}) (hT : T.IsCanonical) : ∃ N : ∀ (X : Scheme.{u}) [IsAffine X] (S : TwoTermAugmentationSequence X), TwoTermAugmentationNormalization S T, TwoTermAugmentationCompatibilities T N ∧ IsGeometricAugmentationNormalization T ∧ HasAffineAugmentationRealizations.{u}",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b920c0659",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read node, 13 stmt_dep records, report, module and dependency Lean (IsCanonical, IsFlatLCI(Pullback)DeterminantComparison, FlatLCICotangentChart/AdjunctionCotangentNormalization, SmoothComparison.beta). Every clause rendered: TwoTermAugmentationSequence on affine X plus a realization conjunct for finite projective B-modules (tilde, constant rankAtStalk); IsOrderedWedge relation-first on every open and all tuples; delta iso plus independent; q pinned (negative=0, zero=p), degreeZeroExterior pinned by the empty wedge, det(q)=delta.symm; scalar clause for any affine g (non-flat) with pinned eL/eW; chain-map clause concludes derived iso and delta'^-1 det f = delta^-1; geometric clause localIso≫theta≫beta=delta.inv plus stalk and residue extensions. Hand check against IsCanonical exact-cone formula: (-1)^a cancels the -i(u) columns, so det(q)=delta^-1 with no sign. Edge cases a=0, d=0, empty X, zero ring, nonfree, nonflat. Only lean field changed; statement verbatim; 11 declarations present; one sorry; docstrings and 7 steps; lines<=100; no clash. Advisories: geometric clause quantifies over all FlatLCIBaseChange B (stronger than U0/k but the same local computation; B=id is the node); FlatLCI*/CotangentPresentation owners reached via cited theorem nodes as in landed sfb and descent-smooth nodes; stalk and residue clauses are formal consequences. No compile (no FIX)."
+ }
+}

@@ -1,0 +1,515 @@
+{
+ "id": "lem-sfb-homogeneous-tuple-prefix-homotopy",
+ "kind": "statement",
+ "title": "Uniform equivariant prefix homotopy for homogeneous tuple chains",
+ "statement": "Let $G$ be a group, $H\\subseteq G$ a subgroup, $n\\geq0$ and $a_0,\\ldots,a_n\\in G$. For $Y=H,G$ let $B_q(Y)$, $q\\geq0$, be the free abelian group with specified basis the ordered $(q+1)$-tuples (repetitions allowed) [def-weil-pbc-free-module], with $B_{-1}(Y)=\\mathbf Z$ on the empty tuple, $B_q(Y)=0$ for $q<-1$, and alternating deletion boundary $d$, augmented by $d[y]=1$ and $d(1)=0$. Give these groups diagonal left $H$-translation, trivial in degree $-1$. Let $I_q:B_q(H)\\to B_q(G)$ be induced by inclusion, with $I_{-1}=1$.\nSuppose homomorphisms $A_q:B_q(H)\\to B_q(G)$ for $-1\\leq q\\leq n$ satisfy $A_{-1}=1$, $dA_q=A_{q-1}d$ for $0\\leq q\\leq n$, and $A_q(gz)=gA_q(z)$ for $g\\in H$. Assume also the following finite-formula property for each $0\\leq q\\leq n$: there are finitely many integers $c_{q,\\lambda}$ and coordinate functions $b_{q,\\lambda,k}:H^{q+1}\\to G$ ($0\\leq k\\leq q$), each of the form $h\\mapsto h_j$ or $h\\mapsto h_ja_i$ for fixed $j\\in\\{0,\\ldots,q\\}$ and $i\\in\\{0,\\ldots,n\\}$, such that\n$$A_q[h_0,\\ldots,h_q]=\\sum_\\lambda c_{q,\\lambda}[b_{q,\\lambda,0}(h),\\ldots,b_{q,\\lambda,q}(h)].$$\nAll coefficients and coordinate choices in these lists are independent of the values of $h$.\nFor $b\\in G$ define prefixing $C_b:B_q(G)\\to B_{q+1}(G)$ by $C_b[y_0,\\ldots,y_q]=[b,y_0,\\ldots,y_q]$ for $q\\geq0$ and $C_b(1)=[b]$ in degree $-1$. These maps satisfy $dC_b+C_bd=1$ in degrees $q\\geq-1$ (the term below degree $-1$ is zero) and $gC_b(z)=C_{gb}(gz)$ for $g\\in H$.\nSet $Q_{-1}:B_{-1}(H)\\to B_0(G)$ equal to zero. For $0\\leq q\\leq n$, recursively define on basis symbols $x=[h_0,\\ldots,h_q]$, then extend additively,\n$$Z_q(x)=I_qx-A_qx-Q_{q-1}(dx),\\qquad Q_q(x)=C_{h_0}(Z_q(x)).$$\nThen $dZ_q(x)=0$ and\n$$I_q-A_q=dQ_q+Q_{q-1}d\\qquad(0\\leq q\\leq n).$$\nEvery $Q_q$ is $H$-equivariant. For each $0\\leq q\\leq n$, there is a fixed finite integer expansion of $Q_q[h_0,\\ldots,h_q]$ into $(q+2)$-tuples whose coordinates are each some $h_j$ or $h_ja_i$, with indices, coefficients and choices independent of the input values. This is an equality in the free abelian group; repeated terms may be retained without input-dependent equality tests.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent arithmetic expansion below local continuous-cocycle descent; extracted argument of lem-sfb-homogeneous-cocycle-rectangle-detection, original steps 5–7. Not asserted by the blueprint text; continuous-coefficient partial-resolution comparison reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-sfb-augmented-tuple-chains"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified bases of [def-weil-pbc-free-module]: an assignment $[h]\\mapsto v_h$ extends by $\\sum m_h[h]\\mapsto\\sum m_hv_h$, uniquely and additively. Thus each recursively assigned $Q_q$ exists once $Q_{q-1}$ does; no quotient relations need checking. Alternating deletion has $d^2=0$: deleting original positions $i<j$ in the two orders gives the same tuple with signs $(-1)^{i+j-1}$ and $(-1)^{i+j}$. In degree $1$ this says $d([y_1]-[y_0])=1-1=0$; in degrees $0,-1$ it follows from $d(1)=0$. Deletion commutes termwise with inclusion and with diagonal translation, including the augmentation.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 1 (not a claim made by the blueprint text)."
+   }
+  },
+  {
+   "text": "For a basis tuple $y=[y_0,\\ldots,y_q]$, expanding the boundary gives $d[b,y_0,\\ldots,y_q]=y-\\sum_{i=0}^q(-1)^i[b,y_0,\\ldots,\\widehat{y_i},\\ldots,y_q]=y-C_bdy$. For $q=0$ the last term is $[b]$, since $d[y_0]=1$; for $q=-1$, $dC_b(1)=d[b]=1$ and the other term is zero. Additivity proves $dC_b+C_bd=1$. Also $g[b,y_0,\\ldots,y_q]=[gb,gy_0,\\ldots,gy_q]$, and $g[b]=[gb]$ in augmented degree, proving $gC_b(z)=C_{gb}(gz)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 2 (not a claim made by the blueprint text)."
+   }
+  },
+  {
+   "text": "Put $D_q=I_q-A_q$ for $-1\\leq q\\leq n$. The hypotheses and step 1 give $D_{-1}=0$ and $dD_q=D_{q-1}d$. We prove by induction on $q=0,\\ldots,n$ both that every basis value $Z_q(x)=D_qx-Q_{q-1}dx$ is a cycle and that the homomorphism identity $D_q=dQ_q+Q_{q-1}d$ holds. The latter identity, once checked on basis tuples, holds on all chains by the finite expansion in step 1. The base case and induction step are the following calculations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 3 (not a claim made by the blueprint text)."
+   }
+  },
+  {
+   "text": "For $q=0$, $Q_{-1}=0$ and $dZ_0(x)=dD_0x=D_{-1}dx=0$. Step 2 now gives $dQ_0x=dC_{h_0}Z_0(x)=Z_0(x)-C_{h_0}dZ_0(x)=D_0x$. This proves both inductive assertions in degree zero, using only the stated augmentation condition $A_{-1}=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 4 (not a claim made by the blueprint text)."
+   }
+  },
+  {
+   "text": "For $1\\leq q\\leq n$, assume the homomorphism identity in degree $q-1$. For a basis $x=[h_0,\\ldots,h_q]$, substitute it after $d$ to obtain\n$$dZ_q(x)=D_{q-1}dx-dQ_{q-1}dx\n=D_{q-1}dx-(D_{q-1}-Q_{q-2}d)dx\n=Q_{q-2}d^2x=0.$$\nHere $q=1$ uses the already defined zero map $Q_{-1}$, so no $Q_{-2}$ is introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 5 (not a claim made by the blueprint text)."
+   }
+  },
+  {
+   "text": "For this same $q$ and $x$, apply step 2 to the cycle just obtained: $dQ_qx=dC_{h_0}Z_q(x)=Z_q(x)-C_{h_0}dZ_q(x)=D_qx-Q_{q-1}dx$. Extend from basis elements as in step 1. This proves $D_q=dQ_q+Q_{q-1}d$, completes the induction, and gives the required identities through degree $n$ without using any map $A_{n+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 6 (not a claim made by the blueprint text)."
+   }
+  },
+  {
+   "text": "For equivariance, induct separately from the equivariant zero map $Q_{-1}$. Since $I,A,d$ commute with $g\\in H$, equivariance of $Q_{q-1}$ implies $Z_q(gx)=gZ_q(x)$ on basis tuples. Their first coordinates are $gh_0$ and $h_0$, respectively, so step 2 gives $Q_q(gx)=C_{gh_0}(gZ_q(x))=gC_{h_0}Z_q(x)=gQ_q(x)$. Translation sends a finite basis expansion to its translated expansion, so the identity extends additively to every chain. This includes $q=0$ because $Q_{-1}=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 7 (not a claim made by the blueprint text)."
+   }
+  },
+  {
+   "text": "For the finite-formula assertion, describe a coordinate by a fixed label $(j,*)$ meaning $h_j$, or $(j,i)$ meaning $h_ja_i$. A formula is a finite list of integer coefficients and words in these labels, evaluated term by term, with no collection of equal evaluated tuples. In degree zero, the list for $Q_0[h_0]$ consists of $[h_0,h_0]$ with coefficient $1$, followed by $[h_0,b_{0,\\lambda,0}(h_0)]$ with coefficients $-c_{0,\\lambda}$. These are fixed words of length $2$; $Q_{-1}d=0$. This is the induction base.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 8 (not a claim made by the blueprint text)."
+   }
+  },
+  {
+   "text": "Suppose the list for $Q_{q-1}$ is fixed, with $q\\geq1$. For each deletion position $s=0,\\ldots,q$, substitute $h_{\\iota_s(j)}$ for its $j$th input, where $\\iota_s(j)=j$ if $j<s$ and $j+1$ if $j\\geq s$. This changes $(j,*)$ to $(\\iota_s(j),*)$ and $(j,i)$ to $(\\iota_s(j),i)$, preserving the allowed coordinate forms. The list for $Z_q$ is the concatenation of the single inclusion word, the given $A_q$ list with negated coefficients, and these $q+1$ substituted lists with coefficients multiplied by $-(-1)^s$. Prefix the label $(0,*)$ to every word to obtain precisely the list for $Q_q$. Each list is finite, its words have length $q+2$, and its indices and coefficients depend only on the fixed previous lists and $q$. Induction proves the assertion for every $q\\leq n$, including coincident coordinates, repeated terms and zero coefficients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the extracted prefix-homotopy argument; explicit calculation 9 (not a claim made by the blueprint text)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic subargument extracted from lem-sfb-homogeneous-cocycle-rectangle-detection; explicit augmented-boundary calculations and degree inductions supplied by Q154."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Explicit equivariant chain homotopy between homogeneous tuple inclusion and an augmented chain map, using first-coordinate prefixing with fixed finite coordinate formulas",
+   "results": {
+    "t": "2026-10-22T06:10:40Z",
+    "tool": "leanfinder",
+    "query": "Explicit equivariant chain homotopy between homogeneous tuple inclusion and an augmented chain map, using first-coordinate prefixing with fixed finite coordinate formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkInductive",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom",
+     "Homotopy.mkInductiveAux₂",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "Homotopy.mkInductiveAux₃",
+     "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv",
+     "Homotopy.mkInductiveAux₂_add_one",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId"
+    ],
+    "digest": "a574ad4c63fc9703"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general homotopy constructors require the component identities as input and do not establish this prefix recursion, equivariance and uniform integral coordinate formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"bar\"",
+   "results": {
+    "t": "2026-10-22T06:10:26Z",
+    "tool": "loogle",
+    "query": "\"Homotopy\", \"bar\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general homotopy constructors require the component identities as input and do not establish this prefix recursion, equivariance and uniform integral coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "(prefix|prepend|cons).*(homotop|contract)|(homotop|contract).*(prefix|prepend)",
+   "results": {
+    "t": "2026-10-22T06:10:25Z",
+    "tool": "grep",
+    "query": "(prefix|prepend|cons).*(homotop|contract)|(homotop|contract).*(prefix|prepend)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+     "Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean"
+    ],
+    "digest": "5dd49a82a828e352"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general homotopy constructors require the component identities as input and do not establish this prefix recursion, equivariance and uniform integral coordinate formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prefix contraction on the augmented homogeneous bar complex recursively constructs a finite-formula equivariant chain homotopy",
+   "results": {
+    "t": "2026-10-22T06:10:27Z",
+    "tool": "leansearch",
+    "query": "A prefix contraction on the augmented homogeneous bar complex recursively constructs a finite-formula equivariant chain homotopy",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkCoinductiveAux₁",
+     "Homotopy.mk.congr_simp",
+     "Homotopy.mk",
+     "Homotopy.mkInductiveAux₂.congr_simp",
+     "Homotopy.mkInductiveAux₂",
+     "Homotopy.mkCoinductiveAux₁.congr_simp",
+     "Homotopy.mkCoinductiveAux₂",
+     "Homotopy.noConfusionType"
+    ],
+    "digest": "d2bf7cbe818ba53a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general homotopy constructors require the component identities as input and do not establish this prefix recursion, equivariance and uniform integral coordinate formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite-coordinate equivariant augmented chain map A on free ordered tuple chains, the recursion Q(x)=prefix(first x)(inclusion(x)-A(x)-Q(boundary x)) gives inclusion minus A equals dQ plus Qd with uniform finite evaluation formulas",
+   "results": {
+    "t": "2026-10-22T06:11:45Z",
+    "tool": "leanfinder",
+    "query": "Given a finite-coordinate equivariant augmented chain map A on free ordered tuple chains, the recursion Q(x)=prefix(first x)(inclusion(x)-A(x)-Q(boundary x)) gives inclusion minus A equals dQ plus Qd with uniform finite evaluation formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.N₂_obj_X_d",
+     "Rep.standardComplex.d",
+     "Homotopy.mkInductiveAux₂_add_one",
+     "Rep.standardComplex.d_of",
+     "AlgebraicTopology.DoldKan.Q_succ",
+     "AlgebraicTopology.DoldKan.decomposition_Q",
+     "ChainComplex.mk'_d",
+     "AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq"
+    ],
+    "digest": "008f61d83a399a78"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general homotopy constructors require the component identities as input and do not establish this prefix recursion, equivariance and uniform integral coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "mkInductive|def homotopyEquiv|def homotopy",
+   "results": {
+    "t": "2026-10-22T06:11:19Z",
+    "tool": "grep",
+    "query": "mkInductive|def homotopyEquiv|def homotopy",
+    "sub": "Algebra/Homology/Homotopy.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "411",
+     "425",
+     "462",
+     "467",
+     "471"
+    ],
+    "digest": "77d9bef09cb63051"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general homotopy constructors require the component identities as input and do not establish this prefix recursion, equivariance and uniform integral coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "def mkInductive|theorem mkInductiveAux₂_add_one",
+   "results": {
+    "t": "2026-10-22T06:12:23Z",
+    "tool": "grep",
+    "query": "def mkInductive|theorem mkInductiveAux₂_add_one",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Homotopy.lean",
+     "Mathlib/Algebra/Homology/Homotopy.lean",
+     "Mathlib/Algebra/Homology/Homotopy.lean",
+     "Mathlib/Algebra/Homology/Homotopy.lean"
+    ],
+    "digest": "64083a4be751f0ac"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general homotopy constructors require the component identities as input and do not establish this prefix recursion, equivariance and uniform integral coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "(prefix|prepend|cons).*(homotop|contract)|(homotop|contract).*(prefix|prepend)",
+   "results": {
+    "t": "2026-10-22T09:40:19Z",
+    "tool": "grep",
+    "query": "(prefix|prepend|cons).*(homotop|contract)|(homotop|contract).*(prefix|prepend)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 16,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean",
+     "Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean",
+     "Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean"
+    ],
+    "digest": "2d14c0bc1988193c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive commutation identities as input; simplicial homotopies require extra simplicial data; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv contracts the forgotten standard complex but does not state the first-coordinate comparison recursion for arbitrary A with H-equivariance and fixed finite coordinate formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous bar chains prefix contraction constructs equivariant chain homotopy with fixed finite integer formulas",
+   "results": {
+    "t": "2026-10-22T09:40:19Z",
+    "tool": "leansearch",
+    "query": "Homogeneous bar chains prefix contraction constructs equivariant chain homotopy with fixed finite integer formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkInductiveAux₂.congr_simp",
+     "Homotopy.mkInductive",
+     "Homotopy",
+     "Homotopy.mk.congr_simp",
+     "Homotopy.mkInductiveAux₂",
+     "Homotopy.comm",
+     "Homotopy.symm",
+     "Homotopy.noConfusionType"
+    ],
+    "digest": "a8e6018b9a0c40f6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive commutation identities as input; simplicial homotopies require extra simplicial data; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv contracts the forgotten standard complex but does not state the first-coordinate comparison recursion for arbitrary A with H-equivariance and fixed finite coordinate formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"bar\"",
+   "results": {
+    "t": "2026-10-22T09:40:19Z",
+    "tool": "loogle",
+    "query": "\"Homotopy\", \"bar\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive commutation identities as input; simplicial homotopies require extra simplicial data; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv contracts the forgotten standard complex but does not state the first-coordinate comparison recursion for arbitrary A with H-equivariance and fixed finite coordinate formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant homotopy on augmented free abelian ordered tuple chains obtained recursively by prefixing the first vertex; uniform finite coordinate formulas",
+   "results": {
+    "t": "2026-10-22T09:40:20Z",
+    "tool": "leanfinder",
+    "query": "Equivariant homotopy on augmented free abelian ordered tuple chains obtained recursively by prefixing the first vertex; uniform finite coordinate formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "GenLoop.homotopyTo_apply",
+     "Homotopy.mkInductiveAux₃",
+     "Homotopy.mkInductiveAux₁",
+     "Homotopy.mkInductiveAux₂_add_one",
+     "GenLoop.homotopyFrom",
+     "Homotopy.mkInductiveAux₂",
+     "GenLoop.homotopyTo",
+     "Homotopy.mkCoinductiveAux₃"
+    ],
+    "digest": "828407a28bacbaf7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive commutation identities as input; simplicial homotopies require extra simplicial data; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv contracts the forgotten standard complex but does not state the first-coordinate comparison recursion for arbitrary A with H-equivariance and fixed finite coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "contract|homotopy|homogeneous",
+   "results": {
+    "t": "2026-10-22T09:40:39Z",
+    "tool": "grep",
+    "query": "contract|homotopy|homogeneous",
+    "sub": "RepresentationTheory/Homological",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean"
+    ],
+    "digest": "4d40e83a2e069a8d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive commutation identities as input; simplicial homotopies require extra simplicial data; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv contracts the forgotten standard complex but does not state the first-coordinate comparison recursion for arbitrary A with H-equivariance and fixed finite coordinate formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chain homotopy comparison of equivariant maps on the homogeneous bar resolution using a contracting homotopy and finite formulas on tuples",
+   "results": {
+    "t": "2026-10-22T09:40:43Z",
+    "tool": "leanfinder",
+    "query": "Chain homotopy comparison of equivariant maps on the homogeneous bar resolution using a contracting homotopy and finite formulas on tuples",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.standardComplex.εToSingle₀_comp_eq",
+     "Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv",
+     "Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv_f_0_eq",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "AlgebraicTopology.DoldKan.homotopyHσToZero",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom",
+     "AlgebraicTopology.DoldKan.homotopyQToZero",
+     "AlgebraicTopology.DoldKan.homotopyPToId"
+    ],
+    "digest": "869b949ce16b9e0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive commutation identities as input; simplicial homotopies require extra simplicial data; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv contracts the forgotten standard complex but does not state the first-coordinate comparison recursion for arbitrary A with H-equivariance and fixed finite coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy|contract|extraDegeneracy",
+   "results": {
+    "t": "2026-10-22T09:41:06Z",
+    "tool": "grep",
+    "query": "homotopy|contract|extraDegeneracy",
+    "sub": "RepresentationTheory/Homological/Resolution.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "9",
+     "30",
+     "59",
+     "134",
+     "135"
+    ],
+    "digest": "2b19ac87994fb753"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Homotopy.mkInductive requires the inductive commutation identities as input; simplicial homotopies require extra simplicial data; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv contracts the forgotten standard complex but does not state the first-coordinate comparison recursion for arbitrary A with H-equivariance and fixed finite coordinate formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-homogeneous-cocycle-rectangle-detection",
+  "date": "2026-10-22",
+  "group": "Q129"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), proper/open direct-image stability, agent arithmetic expansion: explicit prefix homotopy with uniform coordinate formulas; original rectangle-detection proof. This arithmetic argument is absent from the blueprint text.",
+   "via": [
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-homogeneous-tuple-prefix-homotopy",
+  "worker": "stage1",
+  "summary": "Explicit elementary split with no new nodes: construct additive extensions from the specified bases, check augmented deletion and prefix identities, prove the cycle and homotopy identities by induction, then prove equivariance and fixed finite coordinate formulas by separate inductions. All degrees including -1 and 0 and repeated coordinates are checked. No exact project or Mathlib attachment was found. Statement and inherited metadata are retained.",
+  "blueprint": "The source paragraph (3) concerns proper/open direct-image stability. This node is an agent arithmetic subargument below its continuous-cochain descent branch, not a theorem asserted in the blueprint; blueprint_refs ancestor returns None, retained as null. Calculations 1–6 realize the recursive prefix homotopy; calculation 7 its equivariance; calculations 8–9 its uniform coordinate formulas. No change to the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-565b9b2c4",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-565b9b2c4 (reviewer sub-agent of L); spot-checked: I read the full 9-step proof (no new nodes) and the statement is unchanged from the live node, which is still unsplit: no other group's run or landing supersedes this one, and there is no repair note. Step 1 cites def-weil-pbc-free-module for additive extension (Stacks algebra.tex item-free-module) and d^2=0 by the (-1)^{i+j-1}/(-1)^{i+j} cancellation, including augmentation degrees. Step 2 checks dC_b+C_bd=1 at q>=0, q=0 and q=-1, plus gC_b(z)=C_{gb}(gz). Steps 3-6 are a non-circular induction: the base uses A_{-1}=1, the cycle step uses only the degree q-1 identity with Q_{-1}=0, and no A_{n+1} is needed. Step 7 gets equivariance from the moving first-coordinate prefix C_{gh_0}. Steps 8-9 build the formula lists with reindexing iota_s and signs -(-1)^s, giving input-independent words of length q+2 with coordinates h_j or h_j a_i. Small cases: A=I gives Q=0; n=0; trivial group with A_1=m gives Q_1=(1-m)[1,1,1]. A script with G=Z/4, H={0,2}, right translation by 3, n=3 confirms the cycle, homotopy and equivariance identities. The statement matches what the parent rectangle-detection uses in steps 3-5, and its hypotheses are exactly the conclusions of ordered-join-coset-comparison. Duplicate search over the ordered-join, prefix-telescope (post-base) and Cech prefix nodes and the Mathlib Homotopy.mkInductive and Rep standard-resolution results found no duplicate or attachment. No SGA, no tool_uses, and the agent proof_origin honestly says paragraph (3) does not contain this calculation."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.HomogeneousTuplePrefixHomotopy",
+  "declaration": "ContinuousCohomology.AugmentedTupleChains.homogeneousTuplePrefixHomotopy",
+  "declarations": [
+   "ContinuousCohomology.AugmentedTupleChains.HasCoordinateFormula",
+   "ContinuousCohomology.AugmentedTupleChains.prefixHomotopy",
+   "ContinuousCohomology.AugmentedTupleChains.prefixDefect",
+   "ContinuousCohomology.AugmentedTupleChains.homogeneousTuplePrefixHomotopy"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/HomogeneousTuplePrefixHomotopy.lean",
+  "statement": "theorem homogeneousTuplePrefixHomotopy {G : Type u} [Group G] (H : Subgroup G) (n : ℕ) (a : Fin (n + 1) → G) (A : (m : Fin (n + 2)) → Chains H m.val →+ Chains G m.val) (haug : A 0 = map H.subtype 0) (hchain : ∀ (q : Fin (n + 1)) (z : Chains H (q.val + 1)), boundary G q.val (A ⟨q.val + 1, Nat.succ_lt_succ q.isLt⟩ z) = A ⟨q.val, Nat.lt_succ_of_lt q.isLt⟩ (boundary H q.val z)) (hequiv : ∀ (m : Fin (n + 2)) (g : H) (z : Chains H m.val), A m (translate g m.val z) = translate (g : G) m.val (A m z)) (hformula : ∀ q : Fin (n + 1), HasCoordinateFormula H a (q.val + 1) (q.val + 1) (A ⟨q.val + 1, Nat.succ_lt_succ q.isLt⟩)) : (∀ (b : G) (z : Chains G 0), boundary G 0 (prepend b 0 z) = z) ∧ (∀ (m : ℕ) (b : G) (z : Chains G (m + 1)), boundary G (m + 1) (prepend b (m + 1) z) + prepend b m (boundary G m z) = z) ∧ (∀ (m : ℕ) (g : H) (b : G) (z : Chains G m), translate (g : G) (m + 1) (prepend b m z) = prepend ((g : G) * b) m (translate (g : G) m z)) ∧ (∀ (q : Fin (n + 1)) (x : Fin (q.val + 1) → H), boundary G q.val (prefixDefect H n A q x) = 0) ∧ (∀ (q : Fin (n + 1)) (z : Chains H (q.val + 1)), map H.subtype (q.val + 1) z - A ⟨q.val + 1, Nat.succ_lt_succ q.isLt⟩ z = boundary G (q.val + 1) (prefixHomotopy H n A (q.val + 1) z) + prefixHomotopy H n A q.val (boundary H q.val z)) ∧ (∀ (m : Fin (n + 2)) (g : H) (z : Chains H m.val), prefixHomotopy H n A m.val (translate g m.val z) = translate (g : G) (m.val + 1) (prefixHomotopy H n A m.val z)) ∧ (∀ q : Fin (n + 1), HasCoordinateFormula H a (q.val + 1) (q.val + 2) (prefixHomotopy H n A (q.val + 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d06f2ba0c",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Every hypothesis and all seven conclusion parts match the node over degrees -1..n, using tuple length = degree+1 consistently. A has exactly the range 0..n+1 and the zero extension of Q above degree n is never used. Boundary sign (-1)^i, Fin.cons prefixing and the degree -1 contraction checked. HasCoordinateFormula fixes the term count, coefficients and labels before the input and sums over Fin r, so repeated terms need no input-dependent choices. Item JSON differs from live only by the lean record and the new stmt_dep def-sfb-augmented-tuple-chains, which has no live clash; lean.statement matches the file verbatim. Rep.standardComplex.d puts the coefficients and G in one universe, so with Z it restricts G to Type 0; the new Finsupp wrapper is justified. Poset chains have no repeated vertices. Only the theorem proof is sorry; no hollow definitions; docstrings carry source place, blueprint id and proof steps 1-9; no extra assumptions; report has both required sections. No change made, so no compile run."
+ }
+}

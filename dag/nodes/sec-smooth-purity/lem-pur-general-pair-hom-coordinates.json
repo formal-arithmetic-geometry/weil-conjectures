@@ -1,0 +1,289 @@
+{
+ "id": "lem-pur-general-pair-hom-coordinates",
+ "kind": "statement",
+ "title": "Normalized Hom-colimit coordinates on the actual intrinsic pair category",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and an arbitrary scheme $Y$. The universe of $Y$ and the universe of $\\Omega$ are independent. Let $I$ be the directed poset of finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set]. Use the specified small coefficient models, intrinsic raw rational stages $C_E=D^b_c(Y,E)$ [def-weil-rationalization-karoubi], and the datum-free normalized scalar stage system $S$ of [lem-general-algebraically-closed-coefficient-stages]. Write $T_{EL}$ for its transition for $E\\le L$, $a_{ELM}:T_{LM}T_{EL}\\cong T_{EM}$ for its associator, and $\\sigma_{EL,n,K}:T_{EL}(K[n])\\cong(T_{EL}K)[n]$ for its fixed integral-image-normalized integer-shift comparison. Let $P=S.\\mathrm{PairCategory}$ be the category with literal objects $(E,K)$ and morphisms the classes $[L,u]$ modulo equality after common-stage transport [def-sf-directed-common-stage-data]. Write $j_E:C_E\\to P$ for the specified inclusion. No finite-field datum, geometric base-field structure, noetherian assumption, or Karoubi completion is part of this construction.\n\nFor $A=(E,K)$ and $B=(F,H)$ let $I_{A,B}=\\{L\\in I:E,F\\le L\\}$ and $G_L=\\operatorname{Hom}_{C_L}(T_{EL}K,T_{FL}H)$. The specified maps\n$$t_{LM}(u)=a_{FLM,H}\\circ T_{LM}(u)\\circ a_{ELM,K}^{-1}$$\nform a directed system of abelian groups [def-weil-directed-colimit-abelian-groups]. There exists exactly one set equivalence\n$$e_{A,B}:\\operatorname{Hom}_P(A,B)\\xrightarrow{\\sim}\\varinjlim_{L\\in I_{A,B}}G_L$$\nwith $e_{A,B}([L,u])=\\iota_L(u)$ for every representative. Transfer the colimit group structure by $e_{A,B}$. Then $[L,u]+[L,v]=[L,u+v]$ and $[L,0]=0$; composition is bilinear, each $j_E$ is additive, and a pair at the bottom coefficient field with a finite-stage zero object is a zero object of $P$. Every morphism has a finite representative, and two representatives define the same morphism precisely when their specified transports agree at some common later field. These assertions refer to the fixed quotient category and the uniquely normalized coordinate equivalences, not an arbitrary isomorphic category.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained order-1462 displayed Hom colimit and literal pair realization; live GeneralAlgebraicallyClosedCoefficients.lean:57-506 and 570-583; live Lean: Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients.homCoordinates_existsUnique",
+  "note": "Construction material retained from old arguments 2, 3, 9 and the Hom/zero portion of 13:\n\nIdentify the quotient of finite Hom representatives with the disjoint-union direct limit by mutually inverse quotient lifts; both relations are equality after extension. Compose with Mathlib Module.DirectLimit.linearEquiv.symm to obtain the abelian-colimit coordinates. Each representative has the specified image, and representative induction proves uniqueness. The existing transportSystem obligation is retained.\n\nUse the transported AddEquiv and its representative normalization to show mkHom preserves addition and zero. Move morphisms to a common stage and apply finite-stage bilinearity to prove composition_bilinear; the inclusion formula and additive scalar transition prove inclusion_additive. The bottom coefficient field with its zero object gives a literal zero pair: its identity is the zero representative since the transition preserves zero.\n\nFor transportSystem, the stage cocycle makes reflexive transport idempotent. The transition at a reflexive stage is naturally isomorphic to the identity by the normalized tensor unitor, so it is faithful. Transport is then injective by tr_injective, and its idempotence forces it to be the identity. The composition law is tr_tr. This avoids a separate calculation of the two tensor unit coherence equations.\n\nExpand transport as the scalar image conjugated by the two associators. It is additive. For reflexive transport the cocycle gives idempotence, the normalized unitor makes the reflexive transition faithful, and conjugation is injective, forcing reflexive transport to be identity. The iterated transport law follows by naturality and the cocycle. Define two quotient lifts between common-stage Hom classes and the set direct limit: both relations are equality after extension, so the lifts are inverse by representative induction. Compose with Module.DirectLimit.linearEquiv.symm (natural-number module structures) to obtain the algebraic colimit coordinates, fixed uniquely on every representative. Transfer its group operation; injectivity gives [L,u]+[L,v]=[L,u+v] and [L,0]=0. Move finitely many arrows to one common stage; finite-stage bilinearity gives bilinear composition. The inclusion representative and scalar additivity give additive inclusions. For the bottom-stage zero pair, its identity is zero since the exact transition preserves zero; id=0 proves it is zero. Quotient induction gives representatives and equality after a later common extension. These same quotient/colimit, sum/zero, bilinearity, representative and zero-object arguments apply to the specified intrinsic finite-field stages, as required by old argument 13; that node records its independent shift and transport normalizations."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-directed-common-stage-data",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified intrinsic stages, not the ordinary PBC stages: the normalized-stage lemma gives additive scalar functors and the associator cocycle for arbitrary $Y$. The rationalization definition supplies the finite-stage triangulated, hence preadditive, categories and their zero objects. The canonical scalar-composition comparison, including its compatibility with the identity extension, supplies the tensor unitor $T_{LL}\\cong\\mathrm{id}_{C_L}$; no equality $T_{LL}=\\mathrm{id}$ is imposed. In particular $T_{LL}$ is faithful: naturality of that isomorphism conjugates $T_{LL}(f)=T_{LL}(g)$ to $f=g$. Finally $I_{A,B}$ is nonempty since it contains $EF$, and directed since the compositum of two common overfields is another common overfield. These constructions use the given small models, allowing the scheme and coefficient universes to be independent.\n\nLean implementation: The existing public construction theorem transportSystem already proves these checks and steps 2–3 for the specified transportHom; reuse it without constructing another stage system.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-weil-rationalization-karoubi",
+    "def-weil-triangulated-category",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Clauses (2), (4), scalar-extension diagram; retained order-1462 scalar unit and common-overfield index."
+   }
+  },
+  {
+   "text": "Each $t_{LM}$ is a homomorphism: $T_{LM}(u+v)=T_{LM}(u)+T_{LM}(v)$ and $T_{LM}(0)=0$, and composition on either side by a fixed associator component is additive in the preadditive target stage. Thus the displayed transport formula gives exactly the specified homomorphisms $G_L\\to G_M$.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-sf-directed-common-stage-data",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 Hom system, expansion of associator-conjugated transport."
+   }
+  },
+  {
+   "text": "Write $b^E_{LM}=a_{ELM,K}$ and $b^F_{LM}=a_{FLM,H}$. Expand $t_{MN}t_{LM}(u)$ as\n$$b^F_{MN}T_{MN}(b^F_{LM})\\,T_{MN}T_{LM}(u)\\,T_{MN}((b^E_{LM})^{-1})(b^E_{MN})^{-1}.$$\nThe cocycle rewrites its left outside factor as $b^F_{LN}a_{LMN,T_{FL}H}$ and its right outside factor as $a_{LMN,T_{EL}K}^{-1}(b^E_{LN})^{-1}$. Naturality of $a_{LMN}$ then changes the middle three factors to $T_{LN}(u)$. Hence $t_{MN}t_{LM}(u)=t_{LN}(u)$, including repeated fields. In particular $r=t_{LL}$ satisfies $r^2=r$. This $r$ is injective: cancel its two invertible outside factors and use faithfulness of $T_{LL}$ from step 1. Applying this injectivity to $r(r(u))=r(u)$ gives $r(u)=u$. Together with step 2 these are the directed-system laws. This argument needs no separately assumed unit coherence and does not silently treat a general StageSystem as strictly unital.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 Hom transportSystem; associator cocycle and normalized scalar identity transition."
+   }
+  },
+  {
+   "text": "Put $D=\\varinjlim_{I_{A,B}}G_L$. Send a representative $(L,u)$ of the fixed quotient $\\operatorname{Hom}_P(A,B)$ to $\\iota_L(u)\\in D$. The representative criterion in the directed-colimit node says that these images coincide exactly when $t_{LN}(u)=t_{MN}(v)$ at some common later $N$. This is exactly the relation defining the fixed pair-category Hom quotient. The map therefore descends and is injective; it is surjective since every element of $D$ is some $\\iota_L(u)$. Its inverse sends $\\iota_L(u)$ to $[L,u]$, well-defined by the same criterion. This constructs the required set equivalence on the actual quotient, with $e_{A,B}([L,u])=\\iota_L(u)$, rather than replacing $P$ by an equivalent category.\n\nLean implementation: In Lean reuse homCoordinates_existsUnique, whose existing proved quotient lifts implement this step and the uniqueness part of step 5.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Displayed Hom colimit in clauses (2), (4); retained order-1462 literal-pair realization, mutually inverse quotient lifts."
+   }
+  },
+  {
+   "text": "Every morphism of $P$ has a representative by its quotient definition. Consequently any other set equivalence with the prescribed representative formula agrees with $e_{A,B}$ on every morphism, proving uniqueness as a set equivalence. The equality criterion for representatives is the quotient relation, equivalently the directed-colimit criterion used in step 4, and gives precisely equality after the specified common-stage transport.\n\nLean implementation: The existing proved representatives theorem supplies both finite representatives and this eventual-equality criterion.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 representative normalization, uniqueness and eventual equality."
+   }
+  },
+  {
+   "text": "Transfer the abelian group structure from $D$ along $e_{A,B}$. Its canonical maps $\\iota_L$ are homomorphisms, so\n$$e_{A,B}([L,u+v])=\\iota_L(u+v)=\\iota_L(u)+\\iota_L(v)=e_{A,B}([L,u]+[L,v]).$$\nInjectivity gives $[L,u+v]=[L,u]+[L,v]$. Likewise $e_{A,B}([L,0])=\\iota_L(0)=0=e_{A,B}(0)$ gives $[L,0]=0$. For different stages choose a common overfield and use the representative relation to replace each arrow by its transported representative; the same formulas then apply there. All group axioms hold by transfer along a bijection.\n\nLean implementation: For the actual homAddCommGroup, apply injectivity of homCoordinates, rewrite its addition and zero using Equiv.addEquiv, rewrite each representative using homCoordinates_existsUnique.exists.choose_spec, and apply map_add or map_zero to AddCommGroup.DirectLimit.of.",
+   "uses": [
+    "def-weil-directed-colimit-abelian-groups",
+    "def-sf-directed-common-stage-data",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 Hom-group transfer and normalized sum/zero formulas."
+   }
+  },
+  {
+   "text": "For $f,f':A\\to B$ and $g:B\\to C$, choose representatives and a finite field $N$ above their finitely many fields, using composita. Replace the three representatives by their specified transports $u,u',v$ to $N$. The definition of composition and step 6 give\n$$(g\\circ(f+f'))=[N,v\\circ(u+u')]=[N,v\\circ u+v\\circ u']=(g\\circ f)+(g\\circ f').$$\nFinite-stage bilinearity is used in the middle equality. Representing $f,g,g'$ at a common $N$ similarly gives $[N,(v+v')\\circ u]=[N,v\\circ u]+[N,v'\\circ u]$. Thus composition is bilinear for exactly the transported group structures. This proves the required preadditivity without importing an independently chosen group structure on $P$.\n\nLean implementation: Reuse the existing proved composition_bilinear theorem for this exact transferred Hom-group structure.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 composition_bilinear; finite-stage preadditivity after common transport."
+   }
+  },
+  {
+   "text": "For $f,g:K\\to H$ in $C_E$, the specified inclusion is $j_E(f)=[E,T_{EE}(f)]$. Therefore\n$$j_E(f+g)=[E,T_{EE}(f)+T_{EE}(g)]=j_E(f)+j_E(g),$$\nby scalar additivity and step 6. Also $j_E(0)=[E,0]=0$. This proves that each actual inclusion, with its given arrow formula, is additive.\n\nLean implementation: Reuse the existing proved inclusion_additive theorem for the specified intrinsic inclusion.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 inclusion_additive; specified inclusion representatives."
+   }
+  },
+  {
+   "text": "Let $E_0=\\mathbf Q_\\ell$ be the bottom field, let $Z$ be a zero object of $C_{E_0}$, and take the literal pair $O=(E_0,Z)$. Since $1_Z=0$ and $T_{E_0E_0}$ is additive, $1_{T_{E_0E_0}Z}=T_{E_0E_0}(1_Z)=T_{E_0E_0}(0)=0$. The specified identity of $O$ is therefore $[E_0,0]=0$ by step 6. For any object $A$, bilinearity from step 7 gives $f=f\\circ1_O=f\\circ0=0$ for every $f:O\\to A$, and $g=1_O\\circ g=0\\circ g=0$ for every $g:A\\to O$; the zero arrows exist. Thus both Hom sets are singletons and $O$ is a zero object. This proof only uses the identity-transition zero calculation, not a geometric hypothesis on $Y$.\n\nLean implementation: In Lean Functor.map_isZero applied to the additive inclusion of the bottom field implements the identity-equals-zero argument. The inclusion sends Z definitionally to the literal pair (E0,Z).",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-rationalization-karoubi",
+    "def-sf-directed-common-stage-data",
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 bottom-stage zero pair; zero-object part of old argument 13."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-weil-rationalization-karoubi",
+  "def-weil-triangulated-category",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-finite-subextension-directed-set",
+  "def-sf-directed-common-stage-data",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Clauses (2), (4), retained order-1462 Hom/zero construction. F2 reuses the already-proved transportSystem, homCoordinates_existsUnique, composition_bilinear, inclusion_additive and representatives in GeneralAlgebraicallyClosedCoefficients. The representative sum/zero equations are proved by the transferred AddEquiv and direct-limit structure homomorphisms; the literal zero pair follows from Functor.map_isZero. No use of pairHomCoordinates or of the enclosing unfinished coefficient theorem is made."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient Hom of a directed stage pair category is uniquely identified with the abelian group direct limit by its representative formula, giving bilinear composition, additive stage inclusions and a zero pair",
+   "results": "8 hits: AddCommGroup.DirectLimit, DirectLimit.instAddGroup, DirectLimit.instAddCommGroupOfAddMonoidHomClass, AddCommGroup.DirectLimit.lift_unique, AddCommGroup.DirectLimit.directedSystem, AddCommGroup.DirectLimit.hom_ext, DirectLimit.map₀_def, AddCommGroup.DirectLimit.map",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit.linearEquiv",
+   "results": "3 hits: Module.DirectLimit.linearEquiv, Module.DirectLimit.linearEquiv_of, Module.DirectLimit.linearEquiv_symm_mk",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "linearEquiv|def lift|of.*add",
+   "results": "5 hits: 130, 206, 214, 225, 244",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identify quotient representatives of a filtered category with a direct limit of abelian groups and show composition is bilinear",
+   "results": "8 hits: AddCommGroup.DirectLimit, AddGrpCat.FilteredColimits.G.mk_eq, AddCommGrpCat.FilteredColimits.colimit, GrpCat.FilteredColimits.G.mk, AddGrpCat.FilteredColimits.colimit_add_mk_eq, AddCommGrpCat.FilteredColimits.colimitAddCommGroup, AddCommGrpCat.FilteredColimits.G, GrpCat.FilteredColimits.colimit",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match for this concrete normalized intrinsic interface; generic tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hom set of a directed stage pair category has unique representative normalized coordinates in a direct limit of abelian groups",
+   "results": "Actual NQ msearch log 2026-10-27T07:26:45Z: 8 hits; DirectLimit.exists_eq_mk₂, AddCommGroup.DirectLimit.lift_unique, AddCommGroup.DirectLimit.hom_ext, AddCommGroup.DirectLimit.hom_ext_iff, DirectLimit.Module.hom_ext_iff, DirectLimit.exists_eq_mk₃, DirectLimit.map₀_def, AddCommGroup.DirectLimit.directedSystem.",
+   "date": "2026-10-27",
+   "verdict": "no match: generic direct-limit and quotient tools do not specify the intrinsic scalar-stage pair category and its normalized coordinates"
+  },
+  {
+   "tool": "grep",
+   "query": "linearEquiv|linearEquiv_symm_mk|exists_of|zero_exact",
+   "results": "Actual NQ msearch log 2026-10-27T07:27:06Z: 5 hits; 100, 111, 113, 114, 121. Subdirectory Algebra/Colimit/Module.lean.",
+   "date": "2026-10-27",
+   "verdict": "no match: generic direct-limit and quotient tools do not specify the intrinsic scalar-stage pair category and its normalized coordinates"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient by eventual equality of a directed system of abelian groups is its direct limit with every element represented at a finite stage",
+   "results": "Actual NQ msearch log 2026-10-27T07:27:07Z: 8 hits; FirstOrder.Language.DirectLimit, AddCommGroup.DirectLimit, DirectLimit, ModuleCat.directLimitCocone, DirectLimit.setoid, Module.DirectLimit, Module.DirectLimit.inhabited, DirectLimit.instGroup.",
+   "date": "2026-10-27",
+   "verdict": "no match: generic direct-limit and quotient tools do not specify the intrinsic scalar-stage pair category and its normalized coordinates"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit.linearEquiv",
+   "results": "Actual NQ msearch log 2026-10-27T07:27:07Z: 3 hits; Module.DirectLimit.linearEquiv, Module.DirectLimit.linearEquiv_of, Module.DirectLimit.linearEquiv_symm_mk.",
+   "date": "2026-10-27",
+   "verdict": "no match: generic direct-limit and quotient tools do not specify the intrinsic scalar-stage pair category and its normalized coordinates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify eventual equality quotient morphisms with a directed abelian group colimit and transfer preadditivity and a zero object to the fixed pair category",
+   "results": "Actual NQ msearch log 2026-10-27T07:27:24Z: 8 hits; AddCommGrpCat.Colimits.Quot, AddGrpCat.FilteredColimits.G.mk_eq, AddGrpCat.FilteredColimits.G.mk, AddGrpCat.FilteredColimits.colimitNegAux, AddCommGrpCat.FilteredColimits.G, AddCommGrpCat.FilteredColimits.colimit, AddCommGrpCat.Colimits.colimitCocone, AddGrpCat.FilteredColimits.colimit.",
+   "date": "2026-10-27",
+   "verdict": "no match: generic direct-limit and quotient tools do not specify the intrinsic scalar-stage pair category and its normalized coordinates"
+  },
+  {
+   "tool": "grep",
+   "query": "linearEquiv",
+   "results": "Actual NQ msearch log 2026-10-27T07:27:34Z: 5 hits; 206, 214, 225, 244, 252. Subdirectory Algebra/Colimit/Module.lean.",
+   "date": "2026-10-27",
+   "verdict": "no match: generic direct-limit and quotient tools do not specify the intrinsic scalar-stage pair category and its normalized coordinates"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained order-1462 displayed Hom colimit and literal pair realization; live GeneralAlgebraicallyClosedCoefficients.lean:57-506 and 570-583",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-pair-hom-coordinates",
+  "worker": "stage1",
+  "summary": "NQ checked the arbitrary-scheme intrinsic statement against the retained source construction and wrote nine explicit steps. Existing normalized scalar-stage, identity-composition, literal-pair and directed-colimit nodes suffice; no duplicate or elementary new node is introduced. Transport identity is proved from cocycle idempotence and the faithful tensor identity transition. The unique quotient coordinates fix the transferred group operations before bilinearity, inclusions and the bottom zero pair are proved.",
+  "blueprint": "Nearest ancestor def-weil-algebraically-closed-coefficients, retained order 1462: displayed Hom colimit and literal pair realization; current blueprint sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit clauses (2),(4). Steps 1-3 give the actual directed Hom system, 4-5 the normalized quotient coordinates, 6-9 the group, bilinear composition, additive inclusions and zero-pair assertions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-17579c1ea",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-17579c1ea (reviewer sub-agent of L); spot-checked: No new nodes. The item statement is kept and is true, and all 9 steps are checked against the cited statements. Step 3: the cocycle at (F,L,M,N) and (E,L,M,N) plus naturality of a_LMN give t_MN t_LM = t_LN. Reflexive transport is idempotent and injective (T_LL is faithful through the identity-extension unitor of lem-weil-scalar-extension-composition, the Lean sfRationalScalarUnit/unitor at Stages.lean:579-587), so it is the identity, with no strict unit assumed. Steps 4-5: the representative and eventual-equality criterion of def-weil-directed-colimit-abelian-groups matches the quotient relation of def-sf-directed-common-stage-data, which gives the unique coordinate bijection. Steps 6-9: the ι_L are homomorphisms, which gives the same-stage sum and zero formulas, bilinearity at a common compositum stage, j_E f=[E,T_EE f] is additive, and the zero pair has 1_O=[E0,T(0)]=0. All dependencies are in unit sk-def-sf-operations, there is no cycle, and proof_deps equals the union of the step uses. Candidates checked and not duplicates: def-weil-pbc-finite-stage-pair-category (noetherian T, strict unit), lem-pur-general-legacy-hom-coordinates (other categories). Advisory: the unitor is only implicit in 'compatible with the identity extension'. Not a re-split item (no repair note)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralPairHomCoordinates",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.pairHomCoordinates",
+  "file": "lean/Sheaf/Paper/GeneralPairHomCoordinates.lean",
+  "statement": "theorem pairHomCoordinates (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (Y : AlgebraicGeometry.Scheme.{u}) : (∀ A B : Pair l Ω Y, DirectedSystem (StageHom A B) (fun {L M} h ↦ transportHom A B L M h)) ∧ (∀ A B : Pair l Ω Y, ∃! e : (A ⟶ B) ≃ ColimitHom A B, ∀ (L : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (f : StageHom A B ⟨L, hA, hB⟩), e (StageSystem.PairCategory.mkHom L hA hB f) = colimitOf A B L hA hB f) ∧ (∀ (A B : Pair l Ω Y) (L : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (f g : StageHom A B ⟨L, hA, hB⟩), ofHom A B L hA hB f + ofHom A B L hA hB g = ofHom A B L hA hB (f + g)) ∧ (∀ (A B : Pair l Ω Y) (L : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L), ofHom A B L hA hB (0 : StageHom A B ⟨L, hA, hB⟩) = 0) ∧ (∀ (A B C : Pair l Ω Y) (f f' : A ⟶ B) (g : B ⟶ C), (f + f') ≫ g = f ≫ g + f' ≫ g) ∧ (∀ (A B C : Pair l Ω Y) (f : A ⟶ B) (g g' : B ⟶ C), f ≫ (g + g') = f ≫ g + f ≫ g') ∧ (∀ E : Padic.FiniteCoefficientFields l Ω, (inclusion E : Stage l Ω Y E ⥤ Pair l Ω Y).Additive) ∧ (∀ Z : Stage l Ω Y (Padic.finiteCoefficientBase l Ω), IsZero Z → IsZero (⟨Padic.finiteCoefficientBase l Ω, Z⟩ : Pair l Ω Y)) ∧ (∀ (A B : Pair l Ω Y) (f : A ⟶ B), ∃ (L : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (g : StageHom A B ⟨L, hA, hB⟩), f = ofHom A B L hA hB g) ∧ (∀ (A B : Pair l Ω Y) (L M : Common A B) (f : StageHom A B L) (g : StageHom A B M), ofHom A B L.val L.property.1 L.property.2 f = ofHom A B M.val M.property.1 M.property.2 g ↔ ∃ (N : Common A B) (hL : L ≤ N) (hM : M ≤ N), transport A B L N hL f = transport A B M N hM g)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "States the complete node as one conjunction on the existing intrinsic quotient and colimit, including the public same-stage sum and zero formulas and the literal bottom-pair IsZero conclusion. All categories, transports, colimits and transferred group structures are reused unchanged; no new definition or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82ccbeb75",
+  "group": "NH",
+  "result": "pass",
+  "note": "Ten-clause conjunction matches the node clause by clause: directed system of transportHom; ∃! Equiv normalized on every mkHom representative; same-stage sum/zero in homAddCommGroup (transfer along the unique homCoordinates); bilinear composition; additive inclusions (stageSystem.ι); IsZero for every zero Z at finiteCoefficientBase=⊥; finite representatives; equality iff transports agree at a common later field. Transport = assoc.inv ≫ T.map ≫ assoc.hom matches a_FLM∘T_LM(u)∘a_ELM^{-1}. No extra hypotheses; u,v independent; lean.statement verbatim; only the lean field changed; docstrings carry the source place and all 9 steps; proof is sorry; no copies (H4); searches recorded. Advisory: reuses declarations of def-weil-algebraically-closed-coefficients (proof_deps include the item, so it cannot be cited) but that module proves all Hom-coordinate facts sorry-free and the cycle-closing back-import is listed per §3(7); cite the new owner node after the B2 split. Second reading is the worker's own pass, clause-matched. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T094401-L-220592",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

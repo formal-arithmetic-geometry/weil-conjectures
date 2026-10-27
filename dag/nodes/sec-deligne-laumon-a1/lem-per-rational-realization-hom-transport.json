@@ -1,0 +1,183 @@
+{
+ "id": "lem-per-rational-realization-hom-transport",
+ "kind": "statement",
+ "title": "Normalized coefficient transport of the bounded-below localized derived Hom comparison",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $A=\\mathcal O_E$ and $\\varpi$ its fixed uniformizer [def-weil-l-adic-coefficient-extension]. Let $X$ be a noetherian finite-dimensional scheme on which $\\ell$ is invertible. On $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] put $B_X=\\varprojlim_n(A/\\varpi^{n+1})_X$ [def-weil-pbc-adic-coefficient-datum]. Fix any normalized rational module realization $R$ of [lem-per-rational-module-realization-functor], including its quotient-normalized coefficient isomorphism $e:B_X\\xrightarrow{\\sim}A_X$, its normalized inclusion $A_X\\to E_X$ into the continuous $E$-valued coefficient sheaf, and its normalized constant $E$-action. For module sheaves [def-weil-sheaf-of-modules-category], sheaf tensor [def-pur-sheaf-tensor-product] and unbounded derived categories [def-weil-abstract-derived-category], let $F:D(B_X)\\to D(E_X)$ be the specified universal derived scalar extension along that coefficient map. Equip $D(E_X)$ with the $A[1/\\varpi]$-action obtained by restricting the normalized constant $E$-action along the canonical localized valuation-ring equivalence. There is a commutation structure with integer shifts on $F$ for which the general predicate $\\operatorname{scalarLocalizationHomComparison}$ of [lem-weil-pbc-scalar-localization-derived-hom] holds with source predicate $\\operatorname{CountableBoundedBelowHomContinuous}$ of [def-weil-pbc-countable-bounded-below-hom-continuity] and target predicate $L\\in D^+(B_X)$. Thus for every source $K$ with this continuity property, every bounded-below $L$ and every $q\\in\\mathbf Z$, there are $A[1/\\varpi]$-linear equivalences\n$$\\operatorname{Hom}_{D(B_X)}(K,L[q])[1/\\varpi]\\xrightarrow{\\sim}\\operatorname{Hom}_{D(E_X)}(FK,FL[q]),\\qquad f/\\varpi^n\\longmapsto\\varpi^{-n}F(f)$$\nwith the stated shift comparison appended. All precomposition, postcomposition, identity, graded composition and simultaneous-shift equations in that predicate hold. This statement proves no continuity or boundedness for constructible objects and asserts no full faithfulness of the raw rationalization functor.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-per-rational-module-realization-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-scalar-localization-derived-hom",
+  "def-weil-pbc-countable-bounded-below-hom-continuity"
+ ],
+ "proof": [
+  {
+   "text": "Use the independent-universe sectionwise localization on the actual pro-etale site. Obtain its actual tensor functor F, object/map equations, additivity and exactness from scalarLocalization_sheaf_exact. Apply [lem-per-rational-realization-ordinary-localization] to obtain the scalar-compatible additive module equivalence G0 and the ordinary tensor-composition isomorphism.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-sheaf-exact",
+    "lem-per-rational-realization-ordinary-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
+   }
+  },
+  {
+   "text": "Take G=G0.mapDerivedCategory; the exact derived functor of an additive equivalence is an equivalence and has the canonical integer-shift structure [lem-weil-pbc-exact-functor-derived-factorization]. The ordinary exactness of pbcExtend alpha is R.ordinary_exact. Its exact derived functor is a universal left derived functor, so leftDerivedUnique compares it with the prescribed pbcDerivedExtend alpha using pbcExtensionCounit [lem-per-rational-module-realization-functor, lem-weil-pbc-exact-functor-derived-functor]. Combine this comparison with mapDerivedCategoryCompIso and mapDerivedCategoryNatIso e to obtain delta:F.mapDerivedCategory followed by G is isomorphic to pbcDerivedExtend alpha. The proved exact_derived_semilinear helper attached to [lem-weil-pbc-scalar-localization-derived-hom] descends G0 scalar compatibility to G. Its target scalar action is exactly rationalRealizationLocalizedLinear.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-per-rational-module-realization-functor",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-scalar-localization-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-scalar-localization-telescope-of-universes] to F and its object/map equations. Its derived right adjoint, normalized telescope and semilinearity are precisely the inputs of the already proved generic hom_comparison_of_telescope in [lem-weil-pbc-scalar-localization-derived-hom]. This proves the Hom comparison with the canonical continuous-source and bounded-below-target predicates on the actual site.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-telescope-of-universes",
+    "lem-weil-pbc-scalar-localization-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
+   }
+  },
+  {
+   "text": "For every K,L,q, compose the localized-Hom linear equivalence with G.mapLinearMap, which is bijective because G is fully faithful, then postcompose with the shift comparison of G and conjugate by delta at K and the q-shift of delta at L. Transfer the composite shift structure through delta using Functor.CommShift.ofIso. Expanding that shift comparison and the composite shift comparison, naturality of delta identifies the resulting numerator map with H.map f followed by H.commShiftIso q. All maps used are linear, so the fraction formula is preserved. Apply the proved normalized-comparison helper from the scalar-localization module to obtain naturality, identity, graded composition and simultaneous-shift equations. This is the private transportHomComparison proof in Lean.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-derived-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-per-rational-realization-ordinary-localization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-per-rational-module-realization-functor",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-scalar-localization-derived-hom",
+  "lem-weil-pbc-scalar-localization-telescope-of-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), pp. 61--62: independent-universe localization telescope, ordinary coefficient equivalence, universal-derived-functor uniqueness, and explicit normalized Hom transport, formalized by Y5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport scalar localization derived Hom comparison along normalized isomorphisms of sheaves of coefficient rings",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.map_ιFree_mapFree_hom, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.Sheafify.map_smul_eq. No result supplies normalized coefficient transport of the universal derived tensor comparison. Local source search finds ScalarLocalizationDerivedHom and BoundedHomLocalizationEmbedding in the standard sheaf-localization presentation; neither states this transport.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized isomorphism of coefficient sheaves transports localized derived Hom equivalences and all shift compatibilities",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Functor.commShiftOfLocalization.iso, CategoryTheory.Localization.SmallShiftedHom.postcompEquiv, CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app, CochainComplex.mappingCone.shiftIso, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Functor.commShiftOfLocalization.iso.congr_simp. No result supplies normalized coefficient transport of the universal derived tensor comparison. Local source search finds ScalarLocalizationDerivedHom and BoundedHomLocalizationEmbedding in the standard sheaf-localization presentation; neither states this transport.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*[Hh]om|[Hh]om.*localiz",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean. No result supplies normalized coefficient transport of the universal derived tensor comparison. Local source search finds ScalarLocalizationDerivedHom and BoundedHomLocalizationEmbedding in the standard sheaf-localization presentation; neither states this transport.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleRationalHomComparison",
+  "date": "2026-10-25",
+  "group": "C7"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, identification of rational continuous realization before computing pullback cohomology; coefficient transport in original step 3 of lem-per-constructible-rational-hom-comparison.",
+   "via": [
+    "lem-per-constructible-rational-hom-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalRealizationHomTransport",
+  "file": "lean/Sheaf/Paper/RationalRealizationHomTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rationalRealizationHomTransport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rationalRealizationLocalizedLinear",
+   "AlgebraicGeometry.Scheme.rationalRealizationHomTransport"
+  ],
+  "statement": "theorem rationalRealizationHomTransport (R : RationalModuleRealization l E X) :\n    (fun [_localizedLinear : Linear (Localization.Away (pbcUniformizer l E))\n        (DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E)))] ↦\n      ∃ (_shift : (pbcDerivedExtend (R.integralIso.hom ≫ R.inclusion)).CommShift ℤ),\n        scalarLocalizationHomComparison (PbcIntegralRing l E) (pbcUniformizer l E)\n          (pbcDerivedExtend (R.integralIso.hom ≫ R.inclusion))\n          DerivedCategory.CountableBoundedBelowHomContinuous\n          (fun L ↦ ∃ b : ℤ, L.IsGE b))\n      (_localizedLinear := rationalRealizationLocalizedLinear l E X R)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.ConstructibleRationalHomComparison",
+  "worker": "stage3",
+  "summary": "Isolate the coefficient-presentation and universal-derived-functor transport from original proof step 3. Constructible Hom continuity, boundedness and full faithfulness are proved by assembly in the item. This lemma applies to general Hom-continuous and bounded-below objects.",
+  "blueprint": "First pullback/cohomology paragraph of lem-per-smooth-pullback-t-exact, through the full-faithfulness input to the continuous rational realization."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a8aa7",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T122631-L-1792106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261027T094544-L-241762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

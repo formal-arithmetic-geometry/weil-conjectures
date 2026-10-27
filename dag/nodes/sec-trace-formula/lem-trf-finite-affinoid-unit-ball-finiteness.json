@@ -1,0 +1,476 @@
+{
+ "id": "lem-trf-finite-affinoid-unit-ball-finiteness",
+ "kind": "statement",
+ "title": "Finite affinoid maps are finite on spectral unit balls over an algebraically closed field",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. Let $A,B\\ne0$ be commutative unital affinoid $K$-algebras: each is a quotient of a finite-variable Tate algebra of restricted series [def-trf-restricted-series-presentation], with its affinoid Banach topology. Assume $B$ is reduced. For $H=A,B$ define $\\rho_H(h)=\\sup_\\chi|\\chi(h)|$, with $\\chi:H\\to K$ running over continuous unital $K$-algebra homomorphisms, and put $H_{\\le1}=\\{h\\in H:\\rho_H(h)\\le1\\}$. Let $\\varphi:A\\to B$ be a continuous $K$-algebra homomorphism satisfying $\\rho_B(\\varphi(a))\\le\\rho_A(a)$ for all $a\\in A$. Assume $B$ is a finitely generated $A$-module through $\\varphi$ [def-weil-finitely-generated-module]. Then $B_{\\le1}$ is a finitely generated $A_{\\le1}$-module through the restriction of $\\varphi$.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Section 6.4.1, Corollaries 5 and 6, algebraically closed base and reduced target case. Independently checked in Conrad perfectoid seminar, Lecture 12, paragraph following Example 12.2.5, PDF p.2: a finite affinoid map is finite on power-bounded subrings in this case. The spectral unit balls equal the power-bounded subrings for reduced affinoids. Primary seminar PDF read online 2026-10-24; local archival copies of BGR and Lecture 12 WANTED.",
+  "url": "https://virtualmath1.stanford.edu/~conrad/Perfseminar/Notes/L12.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "First identify the character supremum in the statement with the maximal-ideal supremum $\\sigma_H$ of [lem-trf-affinoid-supremum-seminorm-calculus], for every nonzero affinoid $H$ used below. Each maximal residue field is finite over the algebraically closed $K$, hence is $K$ as a $K$-algebra. Its residue character is continuous: its absolute value is bounded by $\\sigma_H$, which in turn is bounded by any Tate quotient Gauss norm. Conversely, a unital $K$-character is onto $K$, so has maximal kernel and is this residue character. Thus $\\rho_H=\\sigma_H$, even for nonreduced $H$. The cited lemma supplies finiteness, contraction for every affinoid homomorphism, and equality with the Gauss norm on a Tate algebra. Directly from the character formula, $\\rho_H(h+h')\\le\\max(\\rho_H(h),\\rho_H(h'))$, the unit balls are subrings, $\\rho_H(hh')\\le\\rho_H(h)\\rho_H(h')$ and $\\rho_H(ah)=|a|\\rho_H(h)$ for $a\\in K$. In particular the stipulated restriction of $\\varphi$ is a ring map.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Section 6.2.1, supremum seminorm; use of the given spectral balls in Corollary 6.4.1/5. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  },
+  {
+   "text": "Choose a Tate presentation $A=T_r/I$; $I$ is proper since $A\\ne0$. By [lem-trf-tate-normalization-lift] choose $T=K\\langle U_1,\\ldots,U_d\\rangle$ and a finite injective map $j:T\\to A$. Write $G$ for its Gauss norm. By [lem-trf-affinoid-supremum-seminorm-calculus], $\\rho_A(j(t))\\le G(t)$. The composite $T\\to A\\to B$ makes $B$ finite over $T$: if $a_l$ generate $A$ over $T$ and $b_k$ generate $B$ over $A$, the products $\\varphi(a_l)b_k$ generate, by expanding each coefficient in $b=\\sum_k\\varphi(a_k')b_k$. For this action $\\rho_B(tb)\\le G(t)\\rho_B(b)$.",
+   "uses": [
+    "lem-trf-tate-normalization-lift",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Theorem 6.4.1/3, reduction of the source to a Tate algebra, printed pp.251–252. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-affinoid-minimal-component-norm] to the reduced, nonzero $B$. Obtain nonzero affinoid domains $C_i=B/\\mathfrak p_i$ and an injective map $q:B\\to P=\\prod_i C_i$ with $\\rho_B(b)=\\max_i\\rho_{C_i}(q_i(b))$, using step 1 to identify the seminorm conventions. Each $C_i$ is finite over $T$, since images of a finite generating family of $B$ still generate its quotient. By [lem-trf-affinoid-spectral-banach-norm], applied to each nonzero reduced $C_i$, these component functions are norms. Give $P$ the maximum norm. Each $T$-action is contractive for $G$, by the character inequalities from step 1, so $q$ is an isometric $T$-linear inclusion.",
+   "uses": [
+    "lem-trf-affinoid-minimal-component-norm",
+    "lem-trf-affinoid-spectral-banach-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 6.4.1/3, general reduced case and Lemma 6.2.1/3, printed p.252. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  },
+  {
+   "text": "For each $i$, let $J_i=\\ker(T\\to C_i)$, a proper ideal. Apply [lem-trf-tate-normalization-lift] to $T/J_i$. It supplies an injective map $\\alpha_i:S_i=K\\langle W_1,\\ldots,W_{e_i}\\rangle\\to T$ for which $S_i\\to T/J_i$ is finite and injective. The induced $T/J_i\\to C_i$ is injective by the definition of $J_i$ and finite: the $T$-generators of $C_i$ still generate after replacing each coefficient by its class modulo $J_i$. Thus $S_i\\to C_i$ is finite and injective, with finiteness given by the double-sum calculation of step 2. The source-to-source maps satisfy $G(\\alpha_i(s))\\le G_i(s)$ by [lem-trf-affinoid-supremum-seminorm-calculus], where $G_i$ is the Gauss norm of $S_i$. By [lem-trf-tate-fraction-orthogonal-spectral-norm], the norm $\\rho_{C_i}$ extends to an $F_i=\\operatorname{Frac}(S_i)$-vector-space norm $N_i$ on $L_i=\\operatorname{Frac}(C_i)$ with a finite orthogonal $F_i$-basis $v_{ik}$. This lemma applies to the domain $C_i$ and the finite injective map just constructed; no separability assumption is used.",
+   "uses": [
+    "lem-trf-tate-normalization-lift",
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 6.4.1/3, domain case: normalization of the source modulo its kernel, and the cartesian fraction field, printed pp.251–252. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  },
+  {
+   "text": "Every nonzero value of $N_i$ lies in $|K^\\times|$. By [lem-trf-tate-fraction-orthogonal-spectral-norm], for $0\\ne z\\in L_i$ the value $N_i(z)>0$ is the finite maximum of the numbers $|a_l|_{F_i}^{1/l}$ formed from the minimal polynomial of $z$ over $F_i$, so it equals one of them with $a_l\\ne0$. A nonzero Gauss norm of a restricted series is the absolute value of one coefficient: choose a nonzero coefficient $c$ and the threshold $|c|/2>0$; the coefficients exceeding it form a finite nonempty set, so their maximum is attained, bounds all remaining coefficients and is therefore the Gauss norm. Hence $|F_i^\\times|=|K^\\times|$, and as $K$ is algebraically closed every element of $|K^\\times|$ has its $l$th roots in $|K^\\times|$. Now choose finitely many $S_i$-module generators $z_l$ of $C_i$, write each $z_l$ in the basis $v_{ik}$ ($1\\le k\\le n_i$), and let $0\\ne\\delta_i\\in S_i$ be the product of the denominators of these finitely many coordinates ($1$ for an empty product). Choose $\\lambda_k\\in K^\\times$ with $|\\lambda_k|=N_i(\\delta_i^{-1}v_{ik})$ and put $w_k=\\lambda_k^{-1}\\delta_i^{-1}v_{ik}$. Define the injective $S_i$-linear map $\\beta_i:S_i^{n_i}\\to L_i$, $(s_k)\\mapsto\\sum_ks_kw_k$. Orthogonality of the basis gives $N_i(\\beta_i(s))=\\max_k|s_k|_{F_i}N_i(w_k)=\\max_kG_i(s_k)$. A coordinate $a/b$ of $z_l$ equals $(a\\delta_i/b)\\delta_i^{-1}$ with $a\\delta_i/b\\in S_i$, so the $w_k$-coordinate $\\lambda_ka\\delta_i/b$ of $z_l$ lies in $S_i$ and $z_l\\in\\beta_i(S_i^{n_i})$; hence $C_i\\subseteq\\beta_i(S_i^{n_i})$.",
+   "uses": [
+    "lem-trf-tate-fraction-orthogonal-spectral-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Theorem 6.4.1/3, enclosing the finite domain module in a cartesian Tate lattice, printed p.252; value group of the spectral norm from Corollaries 6.4.1/4-5, p.251. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-tate-submodule-norm-controlled-generators] with $D=S_i$, $s=n_i$ and the $S_i$-submodule $\\Lambda_i'=\\beta_i^{-1}(C_i)\\subseteq S_i^{n_i}$, whose maximum Gauss norm is the norm $\\|\\cdot\\|$ of that node. It gives $v'_1,\\ldots,v'_{h_i}\\in\\Lambda_i'$ with $\\|v'_m\\|=1$ such that each $x\\in\\Lambda'_i$ is $\\sum_mf_mv'_m$ with $G_i(f_m)\\le\\|x\\|$. Put $x_{im}=\\beta_i(v'_m)\\in C_i$. Since $N_i$ restricts to $\\rho_{C_i}$ on $C_i$ (step 4, with step 1), step 5 gives $\\rho_{C_i}(x_{im})=1$, and $\\rho_{C_i}(\\beta_i(x))=\\|x\\|$. For $c\\in C_i$ put $x=\\beta_i^{-1}(c)$: then $c=\\sum_mf_mx_{im}$ with $G_i(f_m)\\le\\rho_{C_i}(c)$, while the ultrametric inequality and $N_i(fz)=|f|_{F_i}N_i(z)$ give $\\rho_{C_i}(c)\\le\\max_mG_i(f_m)$. Thus $\\rho_{C_i}(c)=\\max_mG_i(f_m)$ for this representation.",
+   "uses": [
+    "lem-trf-tate-submodule-norm-controlled-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Theorem 6.4.1/3, submodule of the cartesian lattice via Theorem 5.2.7/7 and Corollary 5.2.7/11, printed pp.208-212, 252; the unit-weight case cited here is Bosch, Lectures on Formal and Rigid Geometry, Section 1.3, Corollary 10. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  },
+  {
+   "text": "These families work over the common $T$. The map $S_i\\to C_i$ is the composite of $\\alpha_i$ with $T\\to T/J_i\\to C_i$, so step 6 gives $c=\\sum_m\\alpha_i(f_m)x_{im}$, and the action inequality of step 3 and contraction of $\\alpha_i$ from step 4 give\n$$\\rho_{C_i}(c)\\le\\max_mG(\\alpha_i(f_m))\\le\\max_mG_i(f_m)=\\rho_{C_i}(c).$$\nThus equality holds throughout. Put each $x_{im}$ in the $i$th factor of $P$, with zero in every other factor, and index the concatenated family by the finite set $R$ of pairs $(i,m)$. Let $\\pi:T^R\\to P$, $(t_{im})\\mapsto\\sum t_{im}x_{im}$. It is $T$-linear, $\\|\\pi(t)\\|_P\\le\\max G(t_{im})$ by the ultrametric and action inequalities, and every $p\\in P$ is $\\pi(t)$ for some $t$ with $\\max G(t_{im})=\\|p\\|_P$: represent each component separately and take the maximum over $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 6.4.1/3, transport of pseudo-cartesian generators from the normalizing Tate algebra and finite direct sums; Lemma 5.2.7/4(a), printed pp.209,251–252. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  },
+  {
+   "text": "The isometric image $q(B)\\subseteq P$ is a $T$-submodule, so $\\Lambda''=\\pi^{-1}(q(B))\\subseteq T^R$ is a $T$-submodule. Apply [lem-trf-tate-submodule-norm-controlled-generators] with $D=T$ and $s=|R|$. It gives $v''_1,\\ldots,v''_g\\in\\Lambda''$ of maximum Gauss norm $1$ such that each $\\tau=(\\tau_r)_{r\\in R}\\in\\Lambda''$ is $\\sum_hf_hv''_h$ with $G(f_h)\\le\\max_{r\\in R}G(\\tau_r)$. Since $q$ is injective, define $y_h\\in B$ by $q(y_h)=\\pi(v''_h)$; as $q$ is isometric, $\\rho_B(y_h)\\le1$. For $b\\in B$ choose by step 7 a $t\\in T^R$ with $\\pi(t)=q(b)$ and $\\max G(t_{im})=\\rho_B(b)$. Then $t\\in\\Lambda''$, so $t=\\sum_hf_hv''_h$ with $G(f_h)\\le\\rho_B(b)$. Applying the $T$-linear maps $\\pi$ and $q^{-1}$ on $q(B)$ gives $b=\\sum_hf_hy_h$, where $T$ acts on $B$ through $\\varphi\\circ j$.",
+   "uses": [
+    "lem-trf-tate-submodule-norm-controlled-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 6.4.1/3, reduced case, last sentence: Corollary 5.2.7/11 for the embedded submodule, printed p.252. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  },
+  {
+   "text": "For $b\\in B_{\\le1}$ take the representation $b=\\sum_hf_hy_h$ of step 8. Every $G(f_h)\\le\\rho_B(b)\\le1$, so step 2 gives $j(f_h)\\in A_{\\le1}$. Thus $b=\\sum_h\\varphi(j(f_h))y_h$ is in the $A_{\\le1}$-span of the finite family $y_h\\in B_{\\le1}$. Conversely each such finite combination belongs to $B_{\\le1}$ by spectral contraction of $\\varphi$, submultiplicativity and the ultrametric inequality from step 1. Therefore this family generates exactly $B_{\\le1}$ over $A_{\\le1}$. This proves module finiteness even when $A$ has nilpotents or $\\ker\\varphi\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Corollary 6.4.1/5 and the explicit generator-scaling argument of Lemma 5.2.7/5, printed pp.209,251. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+    "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-tate-normalization-lift",
+  "lem-trf-affinoid-minimal-component-norm",
+  "lem-trf-affinoid-spectral-banach-norm",
+  "lem-trf-tate-fraction-orthogonal-spectral-norm",
+  "lem-trf-tate-submodule-norm-controlled-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Assembly following BGR 6.4.1/3–5 and 5.2.7/11, read online; the archival PDF is absent from literature/. All coefficient, component and scaling arguments are written in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affinoid|power.?bounded|Grauert|Remmert",
+   "results": {
+    "t": "2026-10-24T08:49:36Z",
+    "tool": "grep",
+    "query": "affinoid|power.?bounded|Grauert|Remmert",
+    "sub": "",
+    "ok": true,
+    "n_hits": 19,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SeminormFromConst.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SeminormFromConst.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/InvariantExtension.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "8ebc194c9e5d385d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Finite and AlgHom.Finite only define algebraic module finiteness; IsIntegral.of_finite goes from finite modules to integral elements, and does not show that spectral unit balls are finite. Scheme finite-map declarations concern global sections of schemes, not affinoid unit balls."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite homomorphism of affinoid algebras over an algebraically closed complete nonarchimedean field with reduced target, the induced map on power bounded subrings is module finite",
+   "results": {
+    "t": "2026-10-24T08:49:36Z",
+    "tool": "leansearch",
+    "query": "For a finite homomorphism of affinoid algebras over an algebraically closed complete nonarchimedean field with reduced target, the induced map on power bounded subrings is module finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.QuasiFinite",
+     "AlgHom.Finite",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "RingHom.Finite",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "RingHom.finite_algebraMap"
+    ],
+    "digest": "68ff12151ea8e803"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Finite and AlgHom.Finite only define algebraic module finiteness; IsIntegral.of_finite goes from finite modules to integral elements, and does not show that spectral unit balls are finite. Scheme finite-map declarations concern global sections of schemes, not affinoid unit balls."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"Finite\"",
+   "results": {
+    "t": "2026-10-24T08:49:36Z",
+    "tool": "loogle",
+    "query": "\"IsIntegral\", \"Finite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "isIntegral_iff_isIntegral_closure_finite",
+     "Algebra.finite_adjoin_simple_of_isIntegral",
+     "Algebra.finite_adjoin_of_finite_of_isIntegral",
+     "RingHom.Finite.to_isIntegral",
+     "RingHom.IsIntegral.of_finite",
+     "Algebra.IsIntegral.of_finite",
+     "IsIntegral.of_finite",
+     "RingHom.Finite.of_isIntegral_of_finiteType"
+    ],
+    "digest": "86158b26f963d688"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Finite and AlgHom.Finite only define algebraic module finiteness; IsIntegral.of_finite goes from finite modules to integral elements, and does not show that spectral unit balls are finite. Scheme finite-map declarations concern global sections of schemes, not affinoid unit balls."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grauert Remmert finiteness: finite maps of affinoid algebras induce finite maps of power bounded subrings over an algebraically closed field when the target is reduced",
+   "results": {
+    "t": "2026-10-24T08:49:40Z",
+    "tool": "leanfinder",
+    "query": "Grauert Remmert finiteness: finite maps of affinoid algebras induce finite maps of power bounded subrings over an algebraically closed field when the target is reduced",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.finite_appTop_of_universallyClosed",
+     "AlgebraicGeometry.IsFinite.SpecMap_iff",
+     "Algebra.QuasiFinite.finite_primeSpectrum",
+     "AlgebraicGeometry.isFinite_iff"
+    ],
+    "digest": "925124c514434ec4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Finite and AlgHom.Finite only define algebraic module finiteness; IsIntegral.of_finite goes from finite modules to integral elements, and does not show that spectral unit balls are finite. Scheme finite-map declarations concern global sections of schemes, not affinoid unit balls."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism of reduced affinoid Banach algebras over an algebraically closed nonarchimedean field is finite on the spectral norm unit balls",
+   "results": {
+    "t": "2026-10-24T08:50:38Z",
+    "tool": "leanfinder",
+    "query": "A finite morphism of reduced affinoid Banach algebras over an algebraically closed nonarchimedean field is finite on the spectral norm unit balls",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "Algebra.QuasiFinite.finite_primeSpectrum",
+     "AlgebraicGeometry.IsFinite.SpecMap_iff",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "Algebra.QuasiFinite.finite_comap_preimage",
+     "AlgebraicGeometry.finite_appTop_of_universallyClosed",
+     "Algebra.QuasiFinite.finite_comap_preimage_singleton"
+    ],
+    "digest": "ae7aaa1f0bb25c8c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Finite and AlgHom.Finite only define algebraic module finiteness; IsIntegral.of_finite goes from finite modules to integral elements, and does not show that spectral unit balls are finite. Scheme finite-map declarations concern global sections of schemes, not affinoid unit balls."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite maps of affinoid algebras over an algebraically closed complete nonarchimedean field with reduced target are finite on spectral unit balls",
+   "results": {
+    "t": "2026-10-24T09:31:43Z",
+    "tool": "leanfinder",
+    "query": "Finite maps of affinoid algebras over an algebraically closed complete nonarchimedean field with reduced target are finite on spectral unit balls",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.IsFinite.SpecMap_iff",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "Algebra.QuasiFinite.finite_primeSpectrum",
+     "AlgebraicGeometry.finite_appTop_of_universallyClosed",
+     "AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace",
+     "AlgebraicGeometry.Scheme.Hom.finiteType_appLE"
+    ],
+    "digest": "4e1772e90baa3131"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme finite-map declarations, generic algebraic finiteness, and spectral norms on field extensions do not give finite generation on affinoid spectral unit balls."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|power.?bounded|Grauert|Remmert",
+   "results": {
+    "t": "2026-10-24T09:32:06Z",
+    "tool": "grep",
+    "query": "affinoid|power.?bounded|Grauert|Remmert",
+    "sub": "",
+    "ok": true,
+    "n_hits": 19,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SeminormFromConst.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SeminormFromConst.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/InvariantExtension.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "8ebc194c9e5d385d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme finite-map declarations, generic algebraic finiteness, and spectral norms on field extensions do not give finite generation on affinoid spectral unit balls."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finiteness on rings of power bounded elements for finite homomorphisms of reduced affinoid algebras",
+   "results": {
+    "t": "2026-10-24T09:32:07Z",
+    "tool": "leansearch",
+    "query": "Finiteness on rings of power bounded elements for finite homomorphisms of reduced affinoid algebras",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.QuasiFinite",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgHom.Finite",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "RingHom.QuasiFinite.of_finite",
+     "RingHom.finite_ofLocalizationSpan",
+     "RingHom.IsBounded"
+    ],
+    "digest": "afa11051a1cc2f63"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme finite-map declarations, generic algebraic finiteness, and spectral norms on field extensions do not give finite generation on affinoid spectral unit balls."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Finite\", \"IsIntegral\"",
+   "results": {
+    "t": "2026-10-24T09:32:07Z",
+    "tool": "loogle",
+    "query": "\"Finite\", \"IsIntegral\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "isIntegral_iff_isIntegral_closure_finite",
+     "Algebra.finite_adjoin_simple_of_isIntegral",
+     "Algebra.finite_adjoin_of_finite_of_isIntegral",
+     "RingHom.Finite.to_isIntegral",
+     "RingHom.IsIntegral.of_finite",
+     "Algebra.IsIntegral.of_finite",
+     "IsIntegral.of_finite",
+     "RingHom.Finite.of_isIntegral_of_finiteType"
+    ],
+    "digest": "86158b26f963d688"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme finite-map declarations, generic algebraic finiteness, and spectral norms on field extensions do not give finite generation on affinoid spectral unit balls."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism of nonarchimedean Banach algebras induces a module finite homomorphism on the subrings of power bounded elements when the field is algebraically closed and the target is reduced",
+   "results": {
+    "t": "2026-10-24T09:37:37Z",
+    "tool": "leanfinder",
+    "query": "A finite morphism of nonarchimedean Banach algebras induces a module finite homomorphism on the subrings of power bounded elements when the field is algebraically closed and the target is reduced",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NumberField.Embeddings.finite_of_norm_le",
+     "finite_of_algHom_finiteType_of_isJacobsonRing",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "spectralNorm.nontriviallyNormedField",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "AlgHom.Finite",
+     "spectralMulAlgNorm",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal"
+    ],
+    "digest": "8f1e6c2950c24dee"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme finite-map declarations, generic algebraic finiteness, and spectral norms on field extensions do not give finite generation on affinoid spectral unit balls."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-reduction-norm-lifting",
+  "date": "2026-10-24",
+  "group": "Q111"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field.",
+   "via": [
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-finite-affinoid-unit-ball-finiteness",
+  "worker": "stage1",
+  "summary": "N6 checked BGR 6.4.1/3–5 and followed its independent pseudo-cartesian module route. Three statement-only inputs isolate minimal-component norms, the orthogonal spectral fraction field of a finite affinoid domain, and (in the delivery, dropped at review) inheritance of norm-attaining generators by Tate submodules. Nine assembly steps retain relative normalization, finite products, denominators, contraction, rescaling and the final unit-ball generating argument. The item statement is unchanged. No use of distinguished presentations or norm lifting, which would be circular. Repair of the 2026-10-24 return: rebased onto the refreshed current DAG; the existing proof-dependency blobs are unchanged from c3203c1679c. Step 1 now displays the ultrametric inequality and step 4 explicitly derives finiteness over the source quotient before composing the normalization. All retained citation statements were re-read; citations and search records remain valid. On renewed dispatch after the repeated promotion refusal, the Gauss maximum argument in step 8 explicitly chooses half a nonzero coefficient norm, so the finite set whose maximum is taken is nonempty. The maintainer promotion diagnosis is preserved in the report. Review FIX (2026-10-24, 9b69d34): the new generic norm-attaining-submodule node was dropped as an unneeded generalization of the existing lem-trf-tate-submodule-norm-controlled-generators; steps 5-9 now rescale the orthogonal lattice to unit weights (value group from the fraction-field formula, with the |c|/2 Gauss-maximum argument) and apply the existing unit-weight node twice.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. This is the historical auxiliary analytic input; the latest contracting-correspondence unit route is not replaced. Steps 1–9 prove the finite-spectral-ball lemma below the inherited analytic branch."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-9b69d34fc",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-9b69d34fc (reviewer sub-agent of L); spot-checked: Head 9b69 is byte-identical to the previous head c0741: the item plus three new nodes. The earlier heads c3203, 00ed and c0741 each got FIX and were then refused at landing because the side completion was never promoted to the queue. That is a maintainer state problem, not a mathematical one. I read every step and every cited statement in full: supremum-seminorm-calculus, normalization-lift, spectral-banach-norm, the three definitions, and the existing lem-trf-tate-submodule-norm-controlled-generators. BGR is not in literature/, so I checked the route against my own knowledge of BGR 6.4.1/3–5, 5.2.7/7 and /11, 5.3.2/1, 3.8.1/7 and 6.2.1/3. The item statement is unchanged; reducedness of B is needed (K→K[ε]/ε² fails without it). There is no cycle, and the re-split rule does not apply because the item was seeded without a proof. Steps 1–4 are correct, including for a nonreduced source A and a noninjective φ. New node minimal-component-norm is true; tested on K×K and K<X,Y>/(XY). New node fraction-orthogonal-spectral-norm is true; tested with e=0 and the inseparable map U↦X^p. Its statement gets one FIX: the inline definition of an affinoid domain (B2/B3), and wording that makes the explicit minimal-polynomial formula hold for the same N that step 5 uses. C5 FIX: the new lem-trf-tate-norm-attaining-submodules generalizes the existing same-unit node lem-trf-tate-submodule-norm-controlled-generators (Q110), which the worker's not-duplicate list missed. With K algebraically closed, every weight lies in |K^×|, so the existing node is enough. I dropped the new node and rewrote steps 5–9, reusing the 00ed text after checking each line: rescale the orthogonal lattice to unit weights, apply the existing node with D=S_i, transport to T through a norm-attaining surjection π, apply the existing node with D=T to π^{-1}(q(B)), then generate the unit ball. Step 5 keeps the |c|/2 Gauss-maximum argument and now says explicitly that the w_k-coordinates lie in S_i. proof_deps are updated. Files: fixes/dag/nodes/sec-trace-formula/{lem-trf-finite-affinoid-unit-ball-finiteness,lem-trf-tate-fraction-orthogonal-spectral-norm}.json. No tool_uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteAffinoidUnitBallFiniteness",
+  "declaration": "RestrictedSeries.finite_affinoid_unit_ball_finiteness",
+  "declarations": [
+   "RestrictedSeries.characterSupremum",
+   "RestrictedSeries.finite_affinoid_unit_ball_finiteness"
+  ],
+  "file": "lean/Sheaf/RingTheory/FiniteAffinoidUnitBallFiniteness.lean",
+  "statement": "theorem finite_affinoid_unit_ball_finiteness (K : Type u) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] [IsAlgClosed K] (A : Type v) [NormedCommRing A] [Nontrivial A] [Algebra K A] (B : Type w) [NormedCommRing B] [Nontrivial B] [Algebra K B] [IsReduced B] (_hA : IsAffinoidQuotient K A (algebraMap K A)) (_hB : IsAffinoidQuotient K B (algebraMap K B)) (φ : A →ₐ[K] B) (_hφ : Continuous φ) (_hcontract : ∀ a : A, characterSupremum K B (φ a) ≤ characterSupremum K A a) (_hfinite : φ.Finite) : ∃ (n : ℕ) (y : Fin n → B), (∀ i : Fin n, characterSupremum K B (y i) ≤ 1) ∧ ∀ b : B, characterSupremum K B b ≤ 1 → ∃ a : Fin n → A, (∀ i : Fin n, characterSupremum K A (a i) ≤ 1) ∧ b = ∑ i : Fin n, φ (a i) * y i",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82251abed",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read item node (only lean added, no statement_change), module, report, and stmt_deps (Field via NontriviallyNormedField; IsAffinoidQuotient read in side-live; AlgHom.Finite = Module.Finite via φ.toAlgebra). Every hypothesis matches the node with nothing stronger: K alg closed/complete/ultrametric/nontrivial; A,B Nontrivial; IsReduced B only; affinoid via recorded quotient-Gauss-norm predicate; φ continuous AlgHom; contraction; φ.Finite. characterSupremum = sSup of ‖χ h‖ over continuous K-AlgHoms, real data, nonempty and bounded on the nonzero affinoids of the statement; it is the node's own inline ρ, kept as a helper in the item module. Conclusion is the explicit finite generation of B≤1 over A≤1 through φ, verbatim the def-weil-finitely-generated-module definition, correct quantifier order. Edge cases (n=0, empty family, nonreduced A, non-injective φ, any characteristic, independent universes u/v/w) covered. No duplicate of a character or spectral seminorm in Sheaf/WeilConjectures or the sibling nodes (grauert_remmert_powerbounded uses a different inline predicate); no proof dep has Lean. Docstrings give source place, blueprint id and the 9-step plan; sorry only; lean.statement verbatim in the file. No changes made, so no compile."
+ }
+}

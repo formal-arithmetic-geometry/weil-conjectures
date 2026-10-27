@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-localization-tensorator-signed-shifts",
+ "kind": "statement",
+ "title": "Signed two-factor shifts commute with the lax localization tensorator",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $C$ be its category of $\\mathcal O_X$-module sheaves [def-weil-sheaf-of-modules-category], and let $Q:\\operatorname{Ch}(C)\\to D(\\mathcal O_X)$ be the localization with the specified K-flat derived tensor [def-pc-scheme-derived-tensor-structure]. Write $\\mu_{K,L}:QK\\otimes^{\\mathbf L}QL\\to Q\\operatorname{Tot}(K\\otimes L)$ for its canonical lax monoidal comparison [lem-sf-ringed-derived-native-tensor]. For arbitrary integer complexes $K,L$ and integers $a,b$, let $s_{a,b}:\\operatorname{Tot}(K[a]\\otimes L[b])\\to\\operatorname{Tot}(K\\otimes L)[a+b]$ multiply the summand with shifted first-factor degree $i$ by $(-1)^{bi}$ [def-pc-tensor-complex-sheaves, lem-weil-pbc-total-tensor-integer-shifts]. Let $t_{a,b}:QK[a]\\otimes^{\\mathbf L}QL[b]\\to(QK\\otimes^{\\mathbf L}QL)[a+b]$ be its K-flat descended comparison [lem-weil-pbc-derived-tensor-shift-descent], and let $\\eta_{K,a}:Q(K[a])\\xrightarrow{\\sim}(QK)[a]$ be the localization shift comparison. Then\n$$\\eta_{\\operatorname{Tot}(K\\otimes L),a+b}\\,Q(s_{a,b})\\,\\mu_{K[a],L[b]}=\\mu_{K,L}[a+b]\\,t_{a,b}\\,(\\eta_{K,a}\\otimes^{\\mathbf L}\\eta_{L,b}).$$\nThis is an equality of derived morphisms from $Q(K[a])\\otimes^{\\mathbf L}Q(L[b])$ to $Q\\operatorname{Tot}(K\\otimes L)[a+b]$. No flatness, boundedness, acyclicity or quasi-coherence is assumed on $K,L$, and $\\mu$ is not asserted invertible.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FPB, lemma-symmetric-monoidal-derived, canonical K-flat construction; agent-formulated compatibility refinement with the target-shift convention, not a verbatim assertion of the tag. Signed total shift is the calculation in literature/stacks-project/more-algebra.tex, item-shift-tensor, with the extraction order fixed as displayed."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "def-weil-abstract-derived-category",
+  "def-sc-scheme-canonical-tensor-shift"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=a+b$ and $T(K,L)=\\operatorname{Tot}(K\\otimes L)$. Extract the second shift first, then the first: $s_{a,b}=s^1_a[b]\\circ s^2_b$ on $(K[a],L[b])$. Its sign on shifted first degree $i$ is $(-1)^{bi}$. This is natural in chain maps in both variables by the total-shift theorem. For clarity, the first-differential signs in $s\\,d$ and $d\\,s$ are respectively $a+b(i+1)$ and $bi+a+b$; the second-differential signs are $i+b+bi$ and $bi+a+b+(i+a)$, equal modulo two. Thus this convention works for all integers, including negative ones.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH, item-shift-tensor; the explicitly chosen extraction order in the item."
+   }
+  },
+  {
+   "text": "On the small site of open subsets of $X$, choose flat-term K-flat resolutions $p:P\\to K$ and $q:R\\to L$. Shifts preserve flat-term K-flat complexes. Since localization inverts quasi-isomorphisms and commutes with shifts, $Q(p[a])$ and $Q(q[b])$ are isomorphisms. Hence $v=Q(p[a])\\otimes^{\\mathbf L}Q(q[b])$ is invertible, with inverse the tensor of their inverses.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YU, definition-derived-tor and its preceding construction."
+   }
+  },
+  {
+   "text": "The site derived tensor descent says that a natural transformation between bifunctors on $D(\\mathcal O_X)$ is determined by, and extends uniquely from, its restriction to pairs of flat-term K-flat complexes. Hence the native tensor of the statement and the published bifunctor $T$ of shift descent are identified by the unique natural isomorphism whose component at such a pair $(P,R)$ is $c_{P,R}\\circ\\mu_{P,R}$, where $c$ is the published representative comparison $QT(P,R)\\cong T(QP,QR)$; $t_{a,b}$ is read through this identification, as the statement does. Under it, the simultaneous K-flat comparison of the native tensor theorem is $c=\\mu_{P,R}^{-1}$, also on shifted pairs. The normalization clause of derived-tensor shift descent, composed in the extraction order of step 1, says $\\eta\\,Q(s_{a,b})\\,\\mu_{P[a],R[b]}=\\mu_{P,R}[n]\\,t_{a,b}\\,(\\eta_{P,a}\\otimes^{\\mathbf L}\\eta_{R,b})$: $t^2_b$ at $(Q(P[a]),QR)$ and $t^1_a$ at $(QP,QR)$ are $Q(s^2_b)$, $Q(s^1_a)$ conjugated by $c$ and $\\eta$, and naturality of $t^2_b$ in the first variable along $\\eta_{P,a}$ moves its first argument from $Q(P[a])$ to $(QP)[a]$. This is precisely the desired equality on the resolving pair: it follows by substituting $c=\\mu^{-1}$ in the stated conjugation formula and cancelling the adjacent inverse comparisons.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor; signed normalization from more-algebra.tex Tag 0FNH, item-shift-tensor. Agent assembly of the cited representative comparisons."
+   }
+  },
+  {
+   "text": "Call the two sides at $(K,L)$ $A_{K,L}$ and $B_{K,L}$, and put $w=Q(T(p,q))[n]$. Naturality of $\\mu$, $s$, and $\\eta$ gives $A_{K,L}v=wA_{P,R}$. Naturality of the descended $t$ and of $\\eta$, followed by naturality of $\\mu$ shifted by $n$, gives $B_{K,L}v=wB_{P,R}$. Step 3 therefore gives $A_{K,L}v=B_{K,L}v$; compose on the right with $v^{-1}$. This proves the displayed equality without inverting $w$ or $\\mu_{K,L}$.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, canonical K-flat construction; agent-written naturality and cancellation argument for the compatibility refinement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor, and Tag 06YS, lemma-K-flat-resolution; more-algebra.tex Tag 0FNH, item-shift-tensor. Compatibility refinement assembled from the cited DAG statements; cohomology.tex Tag 0FPB omits this verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_symm_mk_hom|laxMonoidalQ|tensor.*shift|shift.*tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of ordinary modules, shift-linear derived functors, or abstract shifts; none states the lax tensorator square for arbitrary complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural lax monoidal localization of cochain complexes to the derived category preserves tensor products of shifted maps from flat degree zero objects with the Koszul shift sign",
+   "results": "8 hits: DerivedCategory.instCommShiftCochainComplexIntQ, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, CategoryTheory.Tor', CategoryTheory.Tor, DerivedCategory.instLinearShiftFunctorInt, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of ordinary modules, shift-linear derived functors, or abstract shifts; none states the lax tensorator square for arbitrary complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"shift\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of ordinary modules, shift-linear derived functors, or abstract shifts; none states the lax tensorator square for arbitrary complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived localization tensor comparison commutes with tensoring shifted cochain maps from bounded complexes of flat sheaves",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalizedModule.map_lTensor, IsLocalizedModule.rTensor, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, RingHom.Flat.ofLocalizationSpanTarget, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of ordinary modules, shift-linear derived functors, or abstract shifts; none states the lax tensorator square for arbitrary complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "laxMonoidalQ|tensor.*shift|shift.*tensor",
+   "results": "2 hits: Mathlib/CategoryTheory/Shift/Basic.lean, Mathlib/CategoryTheory/Shift/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of ordinary modules, shift-linear derived functors, or abstract shifts; none states the lax tensorator square for arbitrary complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "laxMonoidalQ|tensorator.*shift|shift.*tensorator",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general localization/shift or Tor declarations do not state the lax tensorator square for arbitrary complexes with the specified signed two-factor shift"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal, CategoryTheory.Functor.CommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general localization/shift or Tor declarations do not state the lax tensorator square for arbitrary complexes with the specified signed two-factor shift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category localization lax tensor comparison is compatible with the signed isomorphisms for shifting either tensor factor",
+   "results": "8 hits: CategoryTheory.Functor.commShiftOfLocalization.iso, CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app, CategoryTheory.Functor.commShiftOfLocalization, CategoryTheory.Functor.commShiftOfLocalization.iso.congr_simp, CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+   "date": "2026-10-23",
+   "verdict": "no match: general localization/shift or Tor declarations do not state the lax tensorator square for arbitrary complexes with the specified signed two-factor shift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical lax tensorator from complexes to the derived category commutes with signed shifts in both variables on arbitrary complexes",
+   "results": "8 hits: DerivedCategory.instCommShiftCochainComplexIntQ, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, HomologicalComplex.monoidalCategoryStruct",
+   "date": "2026-10-23",
+   "verdict": "no match: general localization/shift or Tor declarations do not state the lax tensorator square for arbitrary complexes with the specified signed two-factor shift"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|commShift",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general localization/shift or Tor declarations do not state the lax tensorator square for arbitrary complexes with the specified signed two-factor shift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat resolutions prove compatibility of the derived tensor product counit with two cochain complex shifts by naturality and cancellation",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Tor_map, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+   "date": "2026-10-23",
+   "verdict": "no match: general localization/shift or Tor declarations do not state the lax tensorator square for arbitrary complexes with the specified signed two-factor shift"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-module-cup-shifted-hom-comparison",
+  "date": "2026-10-23",
+  "group": "Q54"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: The coherent cohomology bialgebra of a proper group. Supporting tensor-coefficient identities used in the external-product calculations: associativity, signed symmetry, and both units before the group-law construction. Auxiliary for the tensor-coefficient identities: identify the ordinary unsigned cup, canonical coefficient maps and the class of one with normalized shifted derived morphisms. Supporting comparison: compatibility of signed two-factor shifts with the lax localization tensorator on arbitrary cochain complexes.",
+   "via": [
+    "lem-sfb-module-cup-shifted-hom-comparison",
+    "lem-sfb-module-cup-associativity-symmetry-unit",
+    "lem-sfb-coherent-group-bialgebra",
+    "lem-sfb-abelian-structure-h1-dimension",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-localization-tensorator-signed-shifts",
+  "worker": "stage1",
+  "summary": "Q32: unchanged statement; resolve both complexes, check the prescribed second-then-first signed shift on resolving pairs using the published normalization, and descend by two explicit naturality equations cancelling only the invertible derived resolution maps. No new nodes.",
+  "blueprint": "Auxiliary to the existing provenance chain from det-thm-sf-ctf-stability-direct-images, proof (3), via the coherent-group cup comparison: supplies exactly the signed localization compatibility requested by the parent. Current latest blueprint unit and direct-image proof read; no change of unit route. blueprint_refs ancestor reports None for this pre-existing created-node chain; existing provenance retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions of arbitrary module-sheaf complexes; no geometric direct-image result in this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Only its shift-stability assertion for flat-term K-flat complexes is used; generic tensor machinery, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Uses naturality of the canonical lax tensorator and its inverse normalization on K-flat pairs, the tensor model already fixed by the statement."
+   },
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "Uses the prescribed representative normalization and naturality of derived shifts, also already fixed by the statement; the argument for arbitrary nonflat complexes is supplied here."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Only its transformation-extension clause on flat-term K-flat pairs, to identify the native localization tensor with the published bifunctor carrying the descended shift t; generic tensor machinery, no unit step replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-a18339183",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-a18339183 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement byte-identical to live, where it is still unsplit; no repair note; no new nodes), every cited statement, Stacks 0FNH item-shift-tensor (more-algebra.tex l.18385; its sign (-1)^{pb} uses the original first degree, the item's (-1)^{bi} uses the shifted degree; they differ by the constant (-1)^{ab}, the convention is stated explicitly and consistent with the second-then-first extraction of the total-shift leaf), 0FPB (cohomology.tex l.13015, proof omitted, so agent origin is correct), 06YS and 06YU. Step 1: chain-map sign parities recomputed (a+b(i+1) against a+b+bi; i+b+bi against i+b+bi mod 2); correct. Step 2: flat-term K-flat resolutions exist on Opens(X), shift stability is a literal sentence of kflat-fixed-tensor-triangulated, and v is invertible. Step 4: both naturality identities A v = w A_{P,R} and B v = w B_{P,R} re-derived; only v is inverted; correct. Edge cases checked: a=b=0, a=b=1 with O_X[0] (sign -1 on both sides), negative shifts, zero complexes, characteristic 2, unbounded non-flat K and L. Duplicate search: lem-sc-scheme-tensor-shift-binary-localization-square (shift 1, K-flat), the -localization-normalization lemma, lem-pur-shifted-tensor-morphism-calculus and kflat-fixed-tensor-triangulated are not duplicates; the parent module-cup step uses exactly this square. FIX (C4): step 3 set the native tensorator inverse mu^{-1} equal to the descent node's published comparison c without a citation. They come from different constructions (native/schemeDerivedTensorMonoidal versus the published T, siteRestrictionDerivedTensor). Added the transformation-extension clause of lem-weil-pbc-site-derived-tensor-descent, which gives the unique identification native tensor ≅ T with components c∘mu on flat-term K-flat pairs, so c = mu^{-1}. Also wrote out the extraction-order conjugation via naturality of t^2 along eta_{P,a}, added the node to step-3 uses and proof_deps, and declared it in split_report.tool_uses. Accepted tool uses: kflat-resolution, kflat-fixed-tensor-triangulated, ringed-derived-native-tensor, derived-tensor-shift-descent, site-derived-tensor-descent. No SGA citations, no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts",
+  "declaration": "AlgebraicGeometry.localization_tensorator_signed_shifts",
+  "declarations": [
+   "AlgebraicGeometry.schemeSignedTotalTensorShift",
+   "AlgebraicGeometry.schemeSignedDerivedTensorShift",
+   "AlgebraicGeometry.localization_tensorator_signed_shifts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizationTensoratorSignedShifts.lean",
+  "statement": "theorem localization_tensorator_signed_shifts (K L : CochainComplex (ringedSiteModules.{u} (moduleRings X.toRingedSpace)) ℤ) (a b : ℤ) : Functor.LaxMonoidal.μ DerivedCategory.Q (K⟦a⟧) (L⟦b⟧) ≫ DerivedCategory.Q.map (schemeSignedTotalTensorShift X K L a b).hom ≫ (DerivedCategory.Q.commShiftIso (a + b)).hom.app (K ⊗ L) = ((DerivedCategory.Q.commShiftIso a).hom.app K ⊗ₘ (DerivedCategory.Q.commShiftIso b).hom.app L) ≫ (schemeSignedDerivedTensorShift X (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) a b).hom ≫ (Functor.LaxMonoidal.μ DerivedCategory.Q K L)⟦a + b⟧'",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two helper isomorphisms compose the existing signed one-variable comparisons in second-then-first order. The derived helper uses schemeCanonicalTensorShift, the existing normalized K-flat descent on the specified native scheme tensor. Its owning, already landed definition node is added to stmt_deps. The theorem imposes no conditions on the complexes and does not invert their tensorators."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2743d3a55",
+  "group": "O1",
+  "result": "pass",
+  "note": "All clauses match. The probe shows the derived tensor is schemeDerivedTensorMonoidal and μ is the generic DerivedCategory.Q lax instance that RingedDerivedNative.lax uses; the complex tensor cochainModulesMonoidal is SheafOfModules.monoidalCategory with only a proof argument added. s = mapBifunctorShift₂Iso (sign (i*b).negOnePow, i the shifted degree) then mapBifunctorShift₁Iso shifted by b, then shiftFunctorAdd' inverse: second extracted first, as the node says. t uses the same order via schemeCanonicalTensorShift (shift structure taken down along μ on K-flat representatives), which is the descent node's t under the step-3 identification; it is not the first-first shiftTensorShiftIso. η directions and composition order are correct; no flatness or IsIso hypotheses. The stmt_deps gain only the landed def-sc-scheme-canonical-tensor-shift (allowed). The statement field is verbatim, no name clash, docstrings and sorry are in order, no pro-etale. Probe compile via nt_compile --json: the item module is clean (11.1 s). No findings."
+ }
+}

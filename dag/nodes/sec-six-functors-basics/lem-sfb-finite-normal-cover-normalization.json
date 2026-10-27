@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-finite-normal-cover-normalization",
+ "kind": "statement",
+ "title": "A finite normal integral cover is the normalization in its function field",
+ "statement": "Let $X,Z$ be integral schemes [def-pc-integral-scheme], with $Z$ locally Noetherian [pqf-def-locnoeth] and normal, meaning every local ring of $Z$ is an integrally closed domain. Let $f:Z\\to X$ be finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. Put $F=k(X)$ and $L=k(Z)$ [def-sc-function-field], and suppose the induced field extension $L/F$ is finite [def-pc-field-extension]. For every nonempty affine open $V=\\operatorname{Spec}A\\subseteq X$, write $f^{-1}V=\\operatorname{Spec}B$ [def-weil-affine-spectrum]. The structural map $A\\to B$ is injective. Under the germ embedding $B\\subseteq L=\\operatorname{Frac}B$, the ring $B$ is exactly the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure]. The corresponding affine identifications agree after restriction to principal opens and on overlaps; they give a canonical $X$-isomorphism $Z\\cong X^L$, where $X^L$ is the normalization of $X$ in $L$ [def-fin-normalization-extension]. Its restriction to the generic point is the identity on $L$, and it is uniquely determined by being over $X$ and inducing this identity. Neither normality of $X$ nor etaleness of $f$ is required.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035I (lemma-characterize-normalization), applied to the generic-point map and a finite normal integral cover; Properties Tag 0358 (lemma-normal-integral-sections) and Algebra Tag 00GK (lemma-finite-is-integral). Affine integral-closure argument of returned steps 6--7."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-integral-closure",
+  "def-fin-normalization-extension"
+ ],
+ "proof": [
+  {
+   "text": "Fix a nonempty affine open $V=\\operatorname{Spec}A$ of $X$. Finiteness gives $f^{-1}V=\\operatorname{Spec}B$ with $B$ finite as an $A$-module. Surjectivity makes this open nonempty. Both opens are integral since nonempty affine opens of integral schemes have domain coordinate rings. The affine-function-field lemma identifies their germ embeddings with $A\\subset F$ and $B\\subset L=\\operatorname{Frac}B$. The surjective map $f$ is dominant, and its generic stalk map $F\\to L$ is the function-field map: it sends the germ of $a\\in A$ to the germ of its pullback in $B$. A unital homomorphism of fields is injective, so if $a$ pulls back to zero in $B$, its image in $F$ is zero and hence $a=0$. Thus $A\\to B$ is injective, with all embeddings compatible inside $L$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-surjective-morphism",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sfb-dominant-function-field-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OK/01ON (definition-integral; lemma-characterize-integral); morphisms.tex Tag 01RV (lemma-integral-scheme-rational-functions), schemes.tex Tag 01HV (lemma-spec-sheaves)(6); morphisms.tex Tag 01WH (definition-integral)"
+   }
+  },
+  {
+   "text": "For every maximal ideal $\\mathfrak m$ of $B$, the affine stalk-localization statement identifies $B_{\\mathfrak m}$ with the corresponding local ring of $Z$. That local ring is an integrally closed domain by hypothesis. Transport normal-domain structure across the stalk isomorphism, and apply normality local at maximal ideals to the domain $B$. It follows that $B$ is integrally closed in its fraction field $L$. This uses neither normality of $A$ nor Noetherianity of $A$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-normal-domain-ring-equivalence",
+    "lem-weil-pbc-normal-domain-of-local-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0358 (lemma-normal-integral-sections), affine case; schemes.tex Tag 01HV (lemma-spec-sheaves)(6); algebra.tex Tag 030B (lemma-normality-is-local)"
+   }
+  },
+  {
+   "text": "Put $C=\\overline A^{\\,L}$, the subring of elements of $L$ integral over $A$. Every $b\\in B$ is integral over $A$ by finite-algebra integrality. Its monic equation remains an equation after the germ embedding $B\\hookrightarrow L$. Consequently $B\\subseteq C$ as subrings of $L$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GK (lemma-finite-is-integral)"
+   }
+  },
+  {
+   "text": "Conversely let $c\\in C$. Choose a monic equation $c^n+\\sum_{i<n}a_ic^i=0$ with $a_i\\in A$. Regard each $a_i$ in $B$ through $A\\hookrightarrow B$. This same equation makes $c\\in L$ integral over $B$. Since step 2 proved $B$ integrally closed in $L=\\operatorname{Frac}B$, we have $c\\in B$. Thus $C=B$ inside $L$. By the affine description of normalization in a finite function-field extension and contravariance of spectrum, the identity of this subring gives an isomorphism $e_V:f^{-1}V\\xrightarrow{\\sim}(X^L)|_V$ over $V$. Its generic field map is the identity on $L$, because the ring map on $C=B$ is the identity and every element of $L$ is a fraction of elements of $B$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-normal-ring",
+    "def-fin-normalization-extension",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I (lemma-characterize-normalization), affine integral-closure argument; properties.tex Tag 0358 (lemma-normal-integral-sections)"
+   }
+  },
+  {
+   "text": "For $a\\in A$ nonzero, the inverse image of $D(a)\\subset V$ is $D(f^\\sharp a)\\subset\\operatorname{Spec}B$: a prime belongs to the inverse image exactly when it does not contain $f^\\sharp a$. The principal-open section formulas give $A_a$ and $B_a$, with restriction $b\\mapsto b/1$. Integral closure commuting with localization identifies $\\overline{A_a}^{\\,L}$ with $C_a$, since localization of $L$ at the nonzero image of $a$ is $L$ itself. Localizing $B=C\\subset L$ gives the identity $B_a=C_a\\subset L$. Hence the restriction of $e_V$ is exactly $e_{D(a)}$, including its map on sections. For $a=0$ both opens are empty and compatibility is automatic.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-fin-normalization-extension",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); schemes.tex Tag 01HV (lemma-spec-sheaves)(3)-(5)"
+   }
+  },
+  {
+   "text": "These local maps agree on arbitrary overlaps as well. Cover $V\\cap V'$ by affine opens $W$; no affineness of $V\\cap V'$ is assumed. For nested nonempty affine opens $W\\subset V$, both source restriction and normalization restriction, after their germ embeddings, send each section to the same element of $L$. For the source this is the definition of restriction and germ; for normalization it is its construction from the integral-closure subrings in $L$, with the principal transitions verified in step 5. The injective germ embedding on $f^{-1}W$ therefore makes the restriction square with the identity $C_V=B_V$ and $C_W=B_W$ commute. The same applies with $V'$ in place of $V$. Thus both restricted maps equal $e_W$, so they agree on the overlap by morphism gluing. Glue the $e_V$ and, separately, their inverse maps. The two composites are identity on each chart, hence globally identity by uniqueness in morphism gluing. This gives the canonical $X$-isomorphism $e:Z\\cong X^L$, inducing the identity on $L$.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I (lemma-characterize-normalization), affine construction; schemes.tex Tag 01JA (section-glueing-schemes), gluing local morphisms"
+   }
+  },
+  {
+   "text": "Finally let $u:Z\\to X^L$ be another morphism over $X$ inducing the identity on $L$. On each nonempty affine $V\\subset X$ it restricts to a morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}C$ and hence a ring map $u_V^\\sharp:C\\to B$. For $c\\in C$, its image under $u_V^\\sharp$ has germ $c\\in L$, by the stipulated generic identity. Since $B\\hookrightarrow L$ is injective, $u_V^\\sharp(c)=c$. The affine spectrum correspondence gives $u|_{f^{-1}V}=e_V$, and uniqueness in morphism gluing gives $u=e$. In particular the asserted isomorphism is uniquely determined. The proof nowhere assumes etaleness of $f$ or normality of $X$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I (lemma-characterize-normalization), uniqueness via affine coordinate rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sfb-dominant-function-field-map",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-normal-domain-ring-equivalence",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-normal-ring",
+  "def-fin-normalization-extension",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035I affine argument, using properties.tex Tag 0358, algebra.tex Tags 00GK/030B/0307; explicit germ-compatible assembly and uniqueness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism from a normal integral Noetherian scheme is the normalization of the integral target in the source function field",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+   "date": "2026-10-22",
+   "verdict": "No match: relative normalization of a morphism f is not the normalization in the function field of its source. The integral-morphism isomorphism normalizes X in the whole source, and does not identify affine rings inside k(Z), nor supply the generic identity and gluing required here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dominant normal integral cover is canonically the normalization of the base in its function field",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial, FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial, Ring.instFiniteNormalClosure_1, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Normal.isIntegral",
+   "date": "2026-10-22",
+   "verdict": "No match: relative normalization of a morphism f is not the normalization in the function field of its source. The integral-morphism isomorphism normalizes X in the whole source, and does not identify affine rings inside k(Z), nor supply the generic identity and gluing required here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine coordinate rings of a finite dominant normal integral cover are the integral closures of base rings in its function field and glue canonically",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, IsIntegralClosure.isFractionRing_of_finite_extension",
+   "date": "2026-10-22",
+   "verdict": "No match: relative normalization of a morphism f is not the normalization in the function field of its source. The integral-morphism isomorphism normalizes X in the whole source, and does not identify affine rings inside k(Z), nor supply the generic identity and gluing required here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"IsIntegral\"",
+   "results": "5 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback",
+   "date": "2026-10-22",
+   "verdict": "No match: relative normalization of a morphism f is not the normalization in the function field of its source. The integral-morphism isomorphism normalizes X in the whole source, and does not identify affine rings inside k(Z), nor supply the generic identity and gluing required here."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationIn|IsIntegralClosure|instIsIsoToNormalization|isIntegrallyClosed.*[Ss]ection",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "No match: relative normalization of a morphism f is not the normalization in the function field of its source. The integral-morphism isomorphism normalizes X in the whole source, and does not identify affine rings inside k(Z), nor supply the generic identity and gluing required here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism of integral schemes from a normal source identifies the source with normalization in its function field",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement: relative normalization of a supplied morphism does not give the identification in the source function field, together with its affine equalities and generic-identity uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationIn|instIsIsoToNormalization|IsIntegrallyClosed.*[Ss]ection",
+   "results": "0 hits; ; directory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement: relative normalization of a supplied morphism does not give the identification in the source function field, together with its affine equalities and generic-identity uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine rings of a finite dominant normal cover are integral closures in the function field",
+   "results": "8 hits; FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial, integralClosure, FunctionField.ringOfIntegers, FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial, integralClosure.isIntegralClosure, Ring.instIsIntegrallyClosedNormalClosure, Ring.instFiniteNormalClosure, Ring.NormalClosure",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement: relative normalization of a supplied morphism does not give the identification in the source function field, together with its affine equalities and generic-identity uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"IsIntegral\"",
+   "results": "5 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement: relative normalization of a supplied morphism does not give the identification in the source function field, together with its affine equalities and generic-identity uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal integral affine finite scheme over a domain is the spectrum of its integral closure in the fraction field",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.Scheme.Hom.normalization",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement: relative normalization of a supplied morphism does not give the identification in the source function field, together with its affine equalities and generic-identity uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsIsoToNormalization|normalizationIn|IsIntegrallyClosed",
+   "results": "0 hits; ; directory AlgebraicGeometry/Normalization.lean",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement: relative normalization of a supplied morphism does not give the identification in the source function field, together with its affine equalities and generic-identity uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-etale-normal-generic-components",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, etaleness of normalization off the branch points: select the field factor defined by the chosen radicals, rather than assuming all the binomials are irreducible. Extracted argument: returned steps 6--7: affine integral closure inside the source function field and localization-compatible canonical gluing.",
+   "via": [
+    "lem-sfb-finite-etale-normal-generic-components",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-normal-cover-normalization",
+  "worker": "stage1",
+  "summary": "Proved the affine integral-closure equality by the two monic-polynomial inclusions, then verified principal restriction, arbitrary overlaps, inverse gluing and generic-identity uniqueness. Reused existing Mathlib and definition nodes; no new nodes. The statement is unchanged.",
+  "blueprint": "The inherited provenance has from.node=null (ancestor tool confirms None). This supplies the extracted returned steps 6--7 described in from.place: affine closure in k(Z), localization-compatible canonical gluing; no unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-b0ca19caf",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-b0ca19caf (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and every cited node's statement in full; the delivery has no new nodes. The statement and stmt_deps are identical to the live and side-live node, which is still unsplit. This is the first split of a node Q39 created on 2026-10-22, and there is no re-split repair note. The statement is true. I checked it on a field point, the map t=s², the cusp k[t^2,t^3]⊂k[t] (target not normal) and a purely inseparable L/F. The locally Noetherian hypothesis on Z is inherited and unused; that is not a weakening. Step 1: finite gives B as a finite A-module; surjective gives a nonempty preimage and dominance; the generic germ map (def-sfb-dominant-function-field-map) is a map of fields, so A→B is injective. Step 2: clause (c) of the affine stalk-localization lemma, normality transported across the stalk isomorphism, and the maximal-ideal criterion (030B) make B a normal domain with Frac B = L. Step 3: finite implies integral (00GK), so B ⊆ C. Step 4 is marked elementary and is: the same monic equation is integral over B, so C ⊆ B, and e_V comes from the affine model of def-fin-normalization-extension, including its blueprint_update. Step 5: integral closure commutes with localization at a≠0, which is invertible in L; for a=0 both opens are empty. Step 6: overlaps are covered by affine opens W with no separatedness assumed, the two maps are compared through injective germ embeddings into L, and gluing handles both forward and inverse maps. Step 7: uniqueness through the generic identity and gluing uniqueness. Every cited statement is a Mathlib leaf or a definition, so no tool_uses are needed. proof_deps equals the union of the step uses, and there is no SGA reference. The duplicate search (035I/0358 and normalization phrases in the DAG) found relative-normalization-universal-property, finite-normal-dense-open-iso/comparison, trivial-inertia-finite-etale-normalization and finite-curve-normalization-regular; none states this. I read the sources at Morphisms 035I and Properties 0358. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteNormalCoverNormalization",
+  "declaration": "AlgebraicGeometry.finite_normal_cover_normalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteNormalCoverNormalization.lean",
+  "statement": "theorem finite_normal_cover_normalization {X Z : Scheme.{u}} [IsIntegral X] [IsIntegral Z] [IsLocallyNoetherian Z] (hZ : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) (f : Z ⟶ X) [IsFinite f] [Surjective f] [Algebra X.functionField Z.functionField] (hL : X.fromSpecOfAlgebraFunctionField Z.functionField = Z.fromSpecFunctionField ≫ f) [FiniteDimensional X.functionField Z.functionField] : ∃ e : Z ≅ X.normalizationIn Z.functionField, e.hom ≫ X.fromNormalizationIn Z.functionField = f ∧ Z.fromSpecFunctionField ≫ e.hom = (X.fromSpecOfAlgebraFunctionField Z.functionField).toNormalization ∧ (∀ v : Z ⟶ X.normalizationIn Z.functionField, v ≫ X.fromNormalizationIn Z.functionField = f → Z.fromSpecFunctionField ≫ v = (X.fromSpecOfAlgebraFunctionField Z.functionField).toNormalization → v = e.hom) ∧ ∀ (V : X.Opens), IsAffineOpen V → ∀ (_ : Nonempty V), ∃ (_ : Nonempty (f ⁻¹ᵁ V)) (hpre : f ⁻¹ᵁ V ≤ e.hom ⁻¹ᵁ (X.fromNormalizationIn Z.functionField ⁻¹ᵁ V)) (hgen : ⊤ ≤ (X.fromSpecOfAlgebraFunctionField Z.functionField).toNormalization ⁻¹ᵁ (X.fromNormalizationIn Z.functionField ⁻¹ᵁ V)), IsAffineOpen (f ⁻¹ᵁ V) ∧ Function.Injective (f.app V) ∧ Function.Injective (Z.germToFunctionField (f ⁻¹ᵁ V)) ∧ IsFractionRing Γ(Z, f ⁻¹ᵁ V) Z.functionField ∧ Set.range (Z.germToFunctionField (f ⁻¹ᵁ V)) = (@integralClosure Γ(X, V) Z.functionField _ _ ((Z.germToFunctionField (f ⁻¹ᵁ V)).hom.comp (f.app V).hom).toAlgebra : Set Z.functionField) ∧ e.hom.appLE (X.fromNormalizationIn Z.functionField ⁻¹ᵁ V) (f ⁻¹ᵁ V) hpre ≫ Z.germToFunctionField (f ⁻¹ᵁ V) = (X.fromSpecOfAlgebraFunctionField Z.functionField).toNormalization.appLE (X.fromNormalizationIn Z.functionField ⁻¹ᵁ V) ⊤ hgen ≫ (Scheme.ΓSpecIso (.of Z.functionField)).hom",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The supplied function-field algebra is constrained by hL to be the actual generic pullback. The global isomorphism realizes every affine integral-closure identification on sections; this simultaneously expresses principal-open and overlap compatibility. Uniqueness is asserted among all morphisms over X with the prescribed generic map, not only isomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6de33537",
+  "group": "NZ",
+  "result": "pass",
+  "note": "All node clauses are rendered faithfully with no extra hypotheses. The algebra instance is fixed by hL to the actual generic stalk map (satisfiable by the existing functionFieldAlgebra). The isomorphism is over X with the identity at the generic point, unique among all morphisms over X. Affine clauses: preimage affine and nonempty, A→B injective, germ injective with IsFractionRing, image of B equals the integral closure of A in k(Z), and e's section maps are the identity in L, which gives overlap compatibility without separatedness. normalizationIn/fromNormalizationIn read in source: real relative-normalization definitions. No duplicate: exists_iso_normalizationIn gives only the bare isomorphism. Statement verbatim; only the lean field changed versus side-live; proof is a single sorry; docstrings carry sources and the 7 steps; worker report and NZ second reading present. Not recompiled since no file changed."
+ }
+}

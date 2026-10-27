@@ -1,0 +1,480 @@
+{
+ "id": "lem-pur-pf-finite-compositor-counit",
+ "kind": "statement",
+ "title": "The specified finite direct-image compositor preserves the ordinary counit and its projection mate",
+ "statement": "Fix the finite coefficient datum $A=A_{E,n}$ of [def-pur-conventions]. Let $U\\xrightarrow{h}V\\xrightarrow{g}W$ be proper morphisms between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Use ordinary unbounded derived categories of constant-$A$ modules on the small pro-etale sites, and the actual pullbacks, direct images and adjunctions $P_t=Lt^*\\dashv R_t=Rt_*$ of [def-weil-pbc-proetale-operations], for $t=h,g,gh$. Let $a:P_{gh}\\xrightarrow{\\sim}P_hP_g$ be the canonical pullback compositor [lem-weil-pbc-proetale-derived-pullback-composition], and let\n$$c=c_{g,h}:R_{gh}\\xrightarrow{\\sim}R_gR_h$$\nbe exactly the finite direct-image compositor of [lem-weil-derived-direct-image-composition], obtained by deriving the underived fibre-product-pasting map, not an unspecified isomorphism. Then $c^{-1}$ is conjugate to $a$ under these derived adjunctions [def-weil-pbc-adjunction-conjugate]. In particular, writing $\\varepsilon_t:P_tR_t\\to1$ for the specified ordinary counits, for every $M\\in D(U_{\\mathrm{proet}},A)$ the equality of actual maps $P_{gh}R_{gh}M\\to M$ is\n$$\\varepsilon_{gh,M}=\\varepsilon_{h,M}\\circ P_h(\\varepsilon_{g,R_hM})\\circ a_{R_gR_hM}\\circ P_{gh}(c_M).$$\nLet $\\pi_t$ be the counit-defined projection map of [def-exchange-projection] and let $d_{M,N}:M\\otimes_A^LP_{gh}N\\xrightarrow{\\sim}M\\otimes_A^LP_hP_gN$ be $1_M\\otimes a_N$, using the tensor-pullback comparisons of [lem-pur-derived-pullback-tensor-iso]. For arbitrary $M\\in D(U_{\\mathrm{proet}},A)$ and $N\\in D(W_{\\mathrm{proet}},A)$, the resulting compositor-normalized projection identity is\n$$R_gR_h(d_{M,N})\\circ c_{M\\otimes_A^LP_{gh}N}\\circ\\pi_{gh;M,N}\n=R_g(\\pi_{h;M,P_gN})\\circ\\pi_{g;R_hM,N}\\circ(c_M\\otimes1_N).$$\nThese identities are natural in their derived arguments. Under the canonical identity identifications they also hold if either proper map is an identity; the corresponding identity projection is the identity. They do not require boundedness, etale origin, constructibility, or finite Tor amplitude and invert no projection map.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0DV0, lemma-compose-counits and equation-compose-counits; sites-cohomology.tex Tag 0B56, equation-projection-formula-map. Extraction of former Step 3, including normalization for the specified finite pro-etale compositor; the general projection law is already lem-sfb-ringed-projection-tensor-composition."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-exchange-projection",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof": [
+  {
+   "text": "Write $p_t=t^*$ and $r_t=t_*$ for the ordinary module functors of [def-weil-pbc-proetale-operations]. Their coefficient maps are the canonical constant-$A$ identifications, so all $p_t$ are exact. Let $b:r_{gh}\\cong r_gr_h$ be the specified ordinary fibre-product-pasting comparison. On sections over $T\\to W$, it is induced by $U\\times_WT\\cong U\\times_V(V\\times_WT)$; both structural maps to the constant coefficient ring agree. Under the composite ordinary adjunction [def-weil-pbc-composite-adjunction], the conjugate of $b^{-1}$ is the ordinary pullback comparison $a^0:p_{gh}\\cong p_hp_g$. Indeed the two successive adjunction bijections insert the two pullback units, and, after the displayed fibre-product identification, the single unit has that same value. In the tensor presentation of module pullback this sends $m\\otimes r$ to $(m\\otimes1)\\otimes r$, with inverse $(m\\otimes s)\\otimes r\\mapsto m\\otimes c_h(s)r$; balancing verifies both inverses and the equality of units. This is precisely the termwise comparison specified in [lem-weil-pbc-proetale-derived-pullback-composition], not an arbitrary isomorphism between the pullbacks.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03D8 (sites-modules.tex, lemma-push-pull-composition-modules) and 0D6D (lemma-derived-pullback-composition); ordinary module adjunction and its units"
+   }
+  },
+  {
+   "text": "Choose a K-injective representative $I$ of $M$ by [prop-pur-kinjective-resolutions-exist], on the small site model specified by the operations. Since $p_h,p_g,p_{gh}$ are exact left adjoints, [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $r_hI$, $r_gr_hI$ and $r_{gh}I$ K-injective. Thus the specified $R_hM,R_gR_hM,R_{gh}M$ are represented by these complexes. In the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] take $j:r_hI\\to J$ to be the identity, since $r_hI$ is already K-injective. Here $(gh)_*I$ and $g_*h_*I$ are identified by $b_I$, so the class of $g_*j=\\mathrm{id}$ in that normalization is $Q(b_I)$. The item specifies $c$ as the comparison of [lem-weil-derived-direct-image-composition] obtained by deriving the underived fibre-product-pasting map $b$; with the K-injective representatives just chosen this derived map is $Q(b_I):Q((gh)_*I)\\to Q(g_*h_*I)$. Hence $c_M=Q(b_I)$ after the canonical resolution identifications. Only this stated specification of $c$ is used, not the construction inside the cited lemma's proof. There is no assertion that ordinary direct image is exact: only its preservation of K-injectives is used.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+   }
+  },
+  {
+   "text": "For any derived input on $W$, choose a K-flat representative $K$ with flat terms by [lem-pc-kflat-resolution]. Then [lem-weil-pbc-termwise-adjunction-homotopy] gives the ordinary adjunction bijections $a_h$ on homotopy classes. The derived bijection of [def-weil-pbc-proetale-operations] is the canonical bijection $e$ of [lem-pc-pre-derived-adjoint-functors-general], characterized by $e(p_s\\circ Q(f)\\circ Q(t)^{-1})=Q(s)^{-1}\\circ Q(a_h(f))\\circ u_t$; take $s=\\mathrm{id}$ on the K-injective target and $t=\\mathrm{id}$ on $K$, which is allowed since the pullbacks are exact. By [lem-weil-pbc-kinjective-hom-derived], localization identifies maps into each of $I,r_hI,r_gr_hI,r_{gh}I$ with those homotopy classes. Hence the actual derived adjunction bijection for $P_{gh}\\dashv R_{gh}$ is computed by the ordinary bijection on $p_{gh}K,I$; the two successive derived bijections are computed by the ordinary ones on $p_hp_gK,I$. Exactness identifies $P_t(QK)$ with $Q(p_tK)$, as in [def-weil-pbc-proetale-operations]. Precomposition by $Q(a^0_K)$ and postcomposition by $Q(b_I^{-1})$ therefore correspond by Step 1. The former is $a_{QK}$ by [lem-weil-pbc-proetale-derived-pullback-composition], and the latter is $c_M^{-1}$ by Step 2. Every derived object has a complex representative and every target has such an $I$; the Hom identifications are natural, including on localized morphisms. By the formula of [def-weil-pbc-adjunction-conjugate], naturality of the units and the triangle identities, a transformation $\\tau:L_2\\to L_1$ and $\\sigma:R_1\\to R_2$ satisfy $\\sigma=\\tau^c$ exactly when precomposition by $\\tau$ on $\\operatorname{Hom}(L_1X,Y)$ corresponds under the two adjunction bijections to postcomposition by $\\sigma$ on $\\operatorname{Hom}(X,R_1Y)$; this Yoneda check is elementary. This proves that $a$ and this particular $c^{-1}$ are conjugate under the specified derived adjunctions.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6E; derived.tex Tags 070I (lemma-K-injective) and 09T5 (lemma-derived-adjoint-functors)"
+   }
+  },
+  {
+   "text": "Put $L'=P_hP_g$, $R'=R_gR_h$ and $e'_M=\\varepsilon_{h,M}\\circ P_h(\\varepsilon_{g,R_hM})$, the composite counit of [def-weil-pbc-composite-adjunction]. By the definition of conjugation [def-weil-pbc-adjunction-conjugate], $c_M^{-1}$ is the adjunct under $P_{gh}\\dashv R_{gh}$ of $e'_M\\circ a_{R'M}$. The adjunct-counit identity [lem-weil-pbc-adjunct-counit-identity] gives $\\varepsilon_{gh,M}\\circ P_{gh}(c_M^{-1})=e'_M\\circ a_{R'M}$. Precompose with $P_{gh}(c_M)$ and cancel the inverse pair. This is exactly the counit equality in the item, with source $P_{gh}R_{gh}M$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits and equation-compose-counits; adjunction characterization following Definition 0037"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-projection-tensor-composition] to the ringed topoi $U_{\\mathrm{proet}}\\to V_{\\mathrm{proet}}\\to W_{\\mathrm{proet}}$, with constant ring sheaf $A$ and their small site models. The operations and canonical adjunctions are exactly [def-weil-pbc-proetale-operations]. Its projection maps are the adjuncts of $(\\varepsilon\\otimes1)\\mu$, which are exactly $\\pi_t$ by the finite projection clause of [def-exchange-projection]. Its canonical tensor comparisons are the finite comparisons of [lem-pur-derived-pullback-tensor-iso], including their compatibility with pullback composition. Steps 2–4 identify the direct-image comparison with the specified $c$ and normalize its counit. To write the cited composition equality with explicit endpoints, its source identification is $c_M\\otimes1_N$ and its target identification is $R_gR_h(1_M\\otimes a_N)\\circ c_{M\\otimes^LP_{gh}N}$. Substituting these two identifications into that equality gives precisely\n$$R_gR_h(d_{M,N})\\,c_{M\\otimes^LP_{gh}N}\\,\\pi_{gh;M,N}=R_g(\\pi_{h;M,P_gN})\\,\\pi_{g;R_hM,N}\\,(c_M\\otimes1_N).$$\nAll the hypotheses of the cited coherence lemma are ringed-topos hypotheses, with arbitrary derived arguments; none requires a projection isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-composition",
+    "def-weil-pbc-proetale-operations",
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; categories.tex Tag 0DV0; existing ringed projection composition coherence"
+   }
+  },
+  {
+   "text": "The components in the counit equality are natural transformations, so that equality is natural in $M$. Projection naturality in both variables is part of [lem-sfb-ringed-projection-tensor-composition]. If either map is an identity, [lem-weil-derived-direct-image-composition] makes $c$ the identity after the canonical unit identifications; its conjugate is the corresponding identity pullback comparison by [def-weil-pbc-adjunction-conjugate]. The composite adjunction then has the remaining adjunction's counit, and the same ringed projection lemma says the identity projection is the identity. Substitution gives both asserted identity cases. Every preceding step used ordinary unbounded module categories and arbitrary $M,N$; no inverse of a projection map was taken.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0DV0 (identity adjunction specialization) and 0B56 (identity projection specialization)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-derived-direct-image-composition",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "def-exchange-projection",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D, 0D6E, 07A6, 0B56; categories.tex Tag 0DV0. Explicit normalization argument for the specified finite pro-etale compositor, followed by the existing general projection coherence theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived direct image composition isomorphism is adjunction conjugate to the derived pullback composition for proetale constant module sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "SheafOfModules.pullbackIso",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.rightDerived",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*Comp|comp.*Adjunction|Adjunction.*comp",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps",
+   "subdirectory": "CategoryTheory/Functor/Derived"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward composition comparison conjugate under adjunction to pullback composition",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Over.pullbackComp",
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection transformation for composite right adjoints of monoidal pullbacks equals iterated projection transformations under the direct image compositor",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit",
+     "CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc",
+     "CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom",
+     "CategoryTheory.ChosenPullbacksAlong.pullbackComp",
+     "PresheafOfModules.pullbackComp",
+     "CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc",
+     "CategoryTheory.ChosenPullbacksAlong.comp",
+     "CategoryTheory.ExponentiableMorphism.comp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.MonoidalCategory",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.isMonoidal_comp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comp|comp.*projection|projectionFormula",
+   "results": {
+    "hits": 24,
+    "top": [
+     "Mathlib/CategoryTheory/GradedObject.lean",
+     "Mathlib/CategoryTheory/Sums/Products.lean",
+     "Mathlib/CategoryTheory/Sums/Products.lean",
+     "Mathlib/CategoryTheory/Sums/Products.lean",
+     "Mathlib/CategoryTheory/Sums/Products.lean",
+     "Mathlib/CategoryTheory/Products/Basic.lean",
+     "Mathlib/CategoryTheory/Products/Basic.lean",
+     "Mathlib/CategoryTheory/Galois/Decomposition.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "specified finite derived direct-image compositor is adjunction mate of pullback compositor and preserves counits",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit",
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+     "CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc",
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
+     "PresheafOfModules.pullbackComp",
+     "CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit"
+    ],
+    "note": "",
+    "digest": "8146679ad89f28e4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic underived conjugation or slice-category results do not identify the specified derived pro-etale compositor and its projection maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor, CategoryTheory.NatTrans",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic underived conjugation or slice-category results do not identify the specified derived pro-etale compositor and its projection maps"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*Comp|projection.*composition|compose-counits",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean"
+    ],
+    "note": "",
+    "digest": "29689dda1b3f3f95"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic underived conjugation or slice-category results do not identify the specified derived pro-etale compositor and its projection maps",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image compositor is conjugate to pullback compositor under adjunction and projection maps compose",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ChosenPullbacksAlong.mapPullbackAdj",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "TopCat.Presheaf.pushforwardPullbackAdjunction",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackComp",
+     "CategoryTheory.Subobject.existsPullbackAdj",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction"
+    ],
+    "note": "",
+    "digest": "64b10fc8939cf539"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic underived conjugation or slice-category results do not identify the specified derived pro-etale compositor and its projection maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monoidal adjunction projection formula morphisms composition derived pullback pushforward sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackComp",
+     "CategoryTheory.ExponentiableMorphism.coev",
+     "CategoryTheory.ExponentiableMorphism.coev_ev",
+     "CategoryTheory.ExponentiableMorphism.ev_naturality_assoc",
+     "CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom"
+    ],
+    "note": "",
+    "digest": "e84641c3c0b25be1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic underived conjugation or slice-category results do not identify the specified derived pro-etale compositor and its projection maps"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormulaMap|conjugateEquiv_pullbackComp_inv",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean"
+    ],
+    "note": "",
+    "digest": "05c7545332397852"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic underived conjugation or slice-category results do not identify the specified derived pro-etale compositor and its projection maps",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-pf-refinement-compatibility",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "prop-pur-affine-space-composition-law proof Steps 2 and 4: composition/unit reassociation and block-order comparison; finite projection compatibility needed by the compactification refinement subargument",
+   "via": [
+    "lem-pur-pf-refinement-compatibility",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-pf-finite-compositor-counit",
+  "worker": "stage1",
+  "summary": "Identified the specified ordinary geometric compositor on K-injective representatives and its conjugate pullback comparison using the actual derived Hom bijections. Derived the explicit counit formula and applied the existing general ringed projection composition lemma with both endpoint identifications displayed. No new nodes, no statement changes.",
+  "blueprint": "Serves the existing refinement-compatibility descendant of prop-pur-affine-space-composition-law: realizes the ordinary direct-image and projection compatibility underlying reassociation/unit laws in proof Steps 2 and 4. Latest blueprint read at main-20261023-1620; no purity trace route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic ordinary ringed-topos/derived-category tool for the specified finite coefficient operations and their normalization, rather than a replacement for the affine-space purity route; the unit has no separate statement giving this tool."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic characterization of the canonical derived adjunction bijection on representatives, which def-weil-pbc-proetale-operations uses to define the derived adjunction; added by the Q08 maintainer reader for Step 3."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-derived-direct-image-composition",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-43ed2a2b0",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-43ed2a2b0 (reviewer sub-agent of L); spot-checked: Read the item, its 6 steps and every cited statement. The Stacks sources check out: 0DV0 lemma-compose-counits (categories.tex l.3576), 0B56 equation-projection-formula-map (sites-cohomology.tex l.13666) and 0D6E. No new nodes, no SGA, no re-split note. The statement is true and the orientation is right: the conjugate of a is c^{-1}. Steps 1, 4, 5 and 6 are correct: the composite counit matches def-weil-pbc-composite-adjunction, and step 5's endpoint factors (c_M⊗1 at the source, R_gR_h(1⊗a_N)∘c at the target) match lem-sfb-ringed-projection-tensor-composition's composition law with f:=h. Two citation faults are repaired. (1) C3/C4, step 2: it identified c with the ringed-topoi pushforward-composition comparison κ by appealing to lem-weil-derived-direct-image-composition, whose statement says only 'canonical'; that identification is in its proof. Reworded to rest on the item's own specification of c as the derived fibre-product-pasting map b, with (gh)_*I≅g_*h_*I via b_I, so c_M=Q(b_I). (2) C1/C4, step 3: 'the derived bijection is computed by the ordinary one on representatives' needs the characterization formula stated in lem-pc-pre-derived-adjoint-functors-general, which was not cited; added it to the step's uses, proof_deps and tool_uses (with s=id, t=id), and wrote out the Hom/Yoneda characterization of conjugates, since def-weil-pbc-adjunction-conjugate gives only the component formula. Duplicate search found no duplicate: lem-sf-composition-projection-mate (compact-support α), lem-trf-compact-composition-tower-formula, lem-sc-derived-pullback-composition-mate-unit (Zariski), lem-pur-composition-tensor-mate. Edge cases checked: g or h the identity, M=0, N=unit. The worker's generic tool_uses are accepted. The statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCompositorCounit",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteCompositorCounit",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteCompositor_preservesFlat",
+   "WeilConjectures.PurityFiniteSetting.finiteCompositorCounit",
+   "WeilConjectures.PurityFiniteSetting.finiteCompositorCounit_identity",
+   "WeilConjectures.PurityFiniteSetting.finiteCompositorCounit_identityProjection"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCompositorCounit.lean",
+  "statement": "theorem finiteCompositorCounit (P : PurityFiniteSetting.{u}) (U V W : Over (Spec (CommRingCat.of P.field.k))) [IsSeparated U.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated V.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated W.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] (h : U ⟶ V) (g : V ⟶ W) [IsProper h.left] [IsProper g.left] : (finiteDirectImageComposition P.Coefficient h.left g.left).inv = conjugateEquiv ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) g.left).comp (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) h.left)) (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) (h.left ≫ g.left)) (leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) h.left g.left).hom ∧ (∀ M : DerivedCategory (Sheaf (ProEt.topology U.left) (ModuleCat.{u + 1} P.Coefficient)), (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) (h.left ≫ g.left)).counit.app M = L(((h.left ≫ g.left))^*[(ModuleCat.{u + 1} P.Coefficient)]).map ((finiteDirectImageComposition P.Coefficient h.left g.left).hom.app M) ≫ (leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) h.left g.left).hom.app (R((g.left)_*[(ModuleCat.{u + 1} P.Coefficient)]).obj (R((h.left)_*[(ModuleCat.{u + 1} P.Coefficient)]).obj M)) ≫ L((h.left)^*[(ModuleCat.{u + 1} P.Coefficient)]).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) g.left).counit.app (R((h.left)_*[(ModuleCat.{u + 1} P.Coefficient)]).obj M)) ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) h.left).counit.app M) ∧ (∀ (M : DerivedCategory (Sheaf (ProEt.topology U.left) (ModuleCat.{u + 1} P.Coefficient))) (N : DerivedCategory (Sheaf (ProEt.topology W.left) (ModuleCat.{u + 1} P.Coefficient))), (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} P.Coefficient) (h.left ≫ g.left)).app M).app N) ≫ (finiteDirectImageComposition P.Coefficient h.left g.left).hom.app (((derivedTensor (ModuleCat.{u + 1} P.Coefficient) U.left).obj M).obj (L(((h.left ≫ g.left))^*[(ModuleCat.{u + 1} P.Coefficient)]).obj N)) ≫ R((g.left)_*[(ModuleCat.{u + 1} P.Coefficient)]).map (R((h.left)_*[(ModuleCat.{u + 1} P.Coefficient)]).map (((derivedTensor (ModuleCat.{u + 1} P.Coefficient) U.left).obj M).map ((leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) h.left g.left).hom.app N))) = (((derivedTensor (ModuleCat.{u + 1} P.Coefficient) W.left).map ((finiteDirectImageComposition P.Coefficient h.left g.left).hom.app M)).app N) ≫ (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} P.Coefficient) g.left).app (R((h.left)_*[(ModuleCat.{u + 1} P.Coefficient)]).obj M)).app N) ≫ R((g.left)_*[(ModuleCat.{u + 1} P.Coefficient)]).map (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} P.Coefficient) h.left).app M).app (L((g.left)^*[(ModuleCat.{u + 1} P.Coefficient)]).obj N)))",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd6e81d3a",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Single-file delivery Sheaf.Paper.FiniteCompositorCounit; all 8 dep records identical to live, node differs only in lean; statement verbatim. Checked clause by clause: c.inv = conjugateEquiv (adj_g.comp adj_h) adj_gh a.hom (right direction); counit equality has the node's 4 factors; projection identity endpoints checked factor by factor against node (π_gh≫c≫R_gR_h(1⊗a_N) = (c_M⊗1)≫π_g≫R_g π_h); c is recorded finiteDirectImageComposition, a/π/μ are canonical upstream leftDerivedUpperStarComp/rightDerivedLowerStarProjectionMap/leftDerived₂ tensor comparison (same presentation as landed ordinaryDerivedCompositeTranspose); identity laws stated explicitly; no extra hypotheses; flat instance is a real term; sorry-only proofs; docstrings with sources+blueprint+6 steps; imports exist. Advisory: recorded a/μ use the intrinsic proEtaleDerivedCategory presentation, but the item is forced to the fixed-scalar presentation by the recorded c."
+ }
+}

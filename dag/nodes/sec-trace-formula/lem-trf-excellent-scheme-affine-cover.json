@@ -60,7 +60,7 @@
    }
   },
   {
-   "text": "Apply [lem-trf-universally-catenary-affine-cover] to the locally Noetherian scheme $X$ of step 1. The hypothesis holds on the same cover because every $A_i$ is universally catenary. The conclusion is that $B$ is universally catenary.",
+   "text": "Apply [lem-trf-universally-catenary-affine-cover] to the locally Noetherian scheme $X$ of step 1, reindexing the given cover by the range of its map into the opens of $X$. This range has the universe of $X$, as required by the Lean declaration; the supremum of the cover is unchanged, and its affine and universally catenary properties descend to the range. Every original chart is universally catenary by step 1. The conclusion is that $B$ is universally catenary.",
    "uses": [
     "lem-trf-universally-catenary-affine-cover"
    ],
@@ -82,9 +82,8 @@
    }
   },
   {
-   "text": "Let $W\\subseteq X$ be any open subscheme. For each $x\\in W$, [lem-weil-pbc-affine-opens-basis] supplies an affine open $V$ of $X$ with $x\\in V\\subseteq W$. Hence the collection of all affine opens $V\\subseteq W$ covers $W$. By step 5 each $\\mathcal O_X(V)$ is excellent, and the restricted structure sheaf of the open subscheme satisfies $\\mathcal O_W(V)=\\mathcal O_X(V)$ [def-pc-scheme]. These same opens are the required affine cover of $W$. If $W$ is empty, the empty collection is already a cover.",
+   "text": "Let $W$ be any open subscheme of $X$, and let $V$ be any affine open of $W$. Its image under the open immersion $W \\to X$ is affine, by Mathlib IsAffineOpen.image_of_isOpenImmersion. Step 5 makes its ambient section ring excellent. The restricted structure sheaf of the open subscheme [def-pc-scheme] identifies this section ring definitionally with the section ring of $V$ in $W$ (Mathlib Scheme.Opens.toScheme_presheaf_obj). This proves the stronger Lean conclusion for every affine open of every open subscheme directly, including empty opens; no affine-basis refinement is needed.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
     "def-pc-scheme"
    ],
    "elementary": false,
@@ -101,13 +100,12 @@
   "lem-trf-g-ring-affine-cover",
   "lem-trf-j2-affine-cover",
   "lem-trf-universally-catenary-affine-cover",
-  "lem-weil-pbc-affine-opens-basis",
   "pqf-def-locnoeth"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 0HAB (lemma-locally-excellent), proof: separate G-ring and J-2 locality and then universal catenarity, followed by its final assertion about opens."
+  "place": "Tag 0HAB (lemma-locally-excellent), proof: separate G-ring and J-2 locality and then universal catenarity, followed by its final assertion about opens. Lean proof by U4: the final assertion uses the image of an affine open under the open immersion and the definition of the restricted structure sheaf, rather than refining by the affine-open basis."
  },
  "mathlib_searches": [
   {
@@ -157,7 +155,18 @@
  },
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "lem-trf-excellent-scheme-affine-cover",
@@ -191,5 +200,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Statement isExcellent_of_affine_open_cover matches lem-trf-excellent-scheme-affine-cover and Stacks 0HAB (3)=>(2) plus Moreover: Scheme.{u}, arbitrary Type v index, Mathlib IsOpenCover, IsAffineOpen and IsExcellent (Q21 def-exc-excellent-ring) charts; no extra hypotheses or universe restriction. Second conjunct (all affine opens of each open W excellent) is equivalent to the node's 'covered by affine opens with excellent rings' (affine opens always cover) and faithful to the source; does not duplicate Orgogozo.IsExcellentScheme. Node changes only the lean field; lean.statement verbatim in file. Edge cases (empty I/X, V=⊥, W=⊥/⊤) fine. sorry only, no definitions, source/blueprint docstrings with steps 1-6, both report sections present. nt_compile.py on local side overlay: clean, 4.9 s; error reporting confirmed with a deliberately broken copy. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261023T105714-L-3595124",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

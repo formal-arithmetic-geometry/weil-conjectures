@@ -75,11 +75,22 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
-  "module": "Sheaf.Paper.FiniteTateSiteDescent",
+  "module": "Sheaf.Paper.FiniteTateSiteDescentDefinitions",
   "declaration": "AlgebraicGeometry.Scheme.IsFiniteTateSiteComparison",
   "declarations": [
    "AlgebraicGeometry.Scheme.finiteTateCoefficient",
@@ -100,7 +111,8 @@
   "by": "Q39",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Reuses all twelve existing definitions in Sheaf.Paper.FiniteTateSiteDescent, unchanged. Their bodies are identical to the returned extraction, apart from blueprint docstring tags. This definition node records the conventions only; it asserts no descent theorem. The corollary imports the existing owner module, and no module is copied, extracted, or redeclared."
+  "note": "The twelve existing definitions have been relocated verbatim and are publicly reexported by FiniteTateSiteDescent. Signatures and bodies are unchanged.",
+  "file": "lean/Sheaf/Paper/FiniteTateSiteDescentDefinitions.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -117,5 +129,15 @@
   "group": "Q39",
   "result": "fix",
   "note": "28b4 = a678 delivery plus twiceSucc replaced by the existing PurityFiniteSetting.frameDegreeNext (identical signature, PurityFrameClass.lean:139, proof-irrelevant use in EtalePowerPresentation.normalized); this repairs the duplicate-declaration refusal. Statement and binders are byte-identical to a678, which earlier reviews read clause by clause: O_E/E/Qbar clauses and counit equations, no extra hypotheses or universe restriction, edge cases d=0, empty X, levels n+1. lean.statement is verbatim and all 48 declarations are present. Mechanical finding: thm-pur-diagonal-dualizing-object is a genuine dependency (finiteIntegration uses diagonalDualizingObject = existsUnique_diagonalDualizingObject.exists.choose), PASS on that point. FIX 1 (H6): structureIsOver was again a proof term for the Prop class Hom.IsOver, the 84cf/a678 fixes having been lost on re-delivery; restored as theorem := by sorry with a proof docstring plus attribute [instance]. FIX 2: re-applied the a678 inlining of non-instance lets in finitePowerComparison/finiteIntegration (zeta-equal, no signature change). Report sentence corrected and a Reviewer fix section added. nt_compile --json on the local overlay at load about 80: delivered clean in 37.6 s; fixed clean in about 48 s and 29.6 s. Note: frameDegreeNext's owner def-pur-frame-class is not in stmt_deps (proof-irrelevant arithmetic, no rule requires it)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-96e60",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261025T003330-L-3230059",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (unchanged); 12 relocated defs vs clone FiniteTateSiteDescent (byte-identical bodies); 2 new sorry lemmas vs their nodes (true, not restatements); node proof fields vs Lean assembly; 23 direct importers compiled against the delivered modules"
  }
 }

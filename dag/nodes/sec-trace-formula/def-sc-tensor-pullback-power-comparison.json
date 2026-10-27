@@ -1,0 +1,168 @@
+{
+ "id": "def-sc-tensor-pullback-power-comparison",
+ "kind": "definition",
+ "title": "Canonical tensor-pullback, tensor-product and tensor-power comparisons",
+ "status": "split",
+ "statement": "Let $j:Z\\to X$ be a morphism of schemes [def-pc-scheme]. Let $T_j:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_Z)$ be the explicit tensor pullback and $P_j$ the ordinary sheaf pullback [def-pc-module-pullback], on the categories of sheaves of modules [def-weil-sheaf-of-modules-category]. Define $\\theta_j:T_j\\xrightarrow{\\sim}P_j$ to be the comparison from uniqueness of left adjoints to $j_*$, using the normalized tensor-pullback adjunction of [lem-pc-module-pullback-adjunction] (the adjunction $T_j\\dashv j_*$ whose unit sends a section $m$ to $1\\otimes m$; it is unique, since an adjunction is determined by its unit), and the ordinary pullback adjunction. For any $\\mathcal O_X$-modules $A,B$, define $c_j(A,B):T_j(A\\otimes B)\\xrightarrow{\\sim}T_j(A)\\otimes T_j(B)$ as $\\theta_j(A\\otimes B)$, followed by the inverse monoidal multiplication comparison for $P_j$, followed by $\\theta_j(A)^{-1}\\otimes\\theta_j(B)^{-1}$. Tensor products and their unit are those of [def-pur-sheaf-tensor-product]. For any $\\mathcal O_X$-module $L$, write $L^{\\otimes0}=\\mathcal O_X$ and $L^{\\otimes(d+1)}=L\\otimes L^{\\otimes d}$. Define $p_j(L,d):T_j(L^{\\otimes d})\\xrightarrow{\\sim}(T_jL)^{\\otimes d}$ recursively for every $d\\in\\mathbb N$: at $d=0$ it is $\\theta_j(\\mathcal O_X)$ followed by the canonical isomorphism $P_j\\mathcal O_X\\cong\\mathcal O_Z$; at $d+1$ it is $c_j(L,L^{\\otimes d})$ followed by $\\operatorname{id}_{T_jL}\\otimes p_j(L,d)$. These are fixed comparison constructions for arbitrary $j,A,B,L$, without invertibility, immersion or square-zero hypotheses.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, lemma-tensor-product-pullback; literature/stacks-project/sheaves.tex, Tag 0096, lemma-adjoint-pullback-pushforward-modules. The unit and recursive tensor-power specialization are the existing boundaryPullbackComparison, boundaryPullbackTensorIso and boundaryPullbackPowIso constructions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundaryPullbackComparison|boundaryPullbackTensorIso|boundaryPullbackPowIso|tensorPow",
+   "results": "{\"t\": \"2026-10-22T04:32:23Z\", \"tool\": \"grep\", \"query\": \"boundaryPullbackComparison|boundaryPullbackTensorIso|boundaryPullbackPowIso|tensorPow\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib construction: reuse boundaryPullbackComparison, boundaryPullbackTensorIso and boundaryPullbackPowIso in the existing project module; no new Lean declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Functor.Monoidal.μIso",
+   "results": "{\"t\": \"2026-10-22T04:32:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Functor.Monoidal.μIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib construction: reuse boundaryPullbackComparison, boundaryPullbackTensorIso and boundaryPullbackPowIso in the existing project module; no new Lean declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of tensor module pullback with ordinary pullback and tensor products and nonnegative tensor powers",
+   "results": "{\"t\": \"2026-10-22T04:32:25Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical comparison of tensor module pullback with ordinary pullback and tensor products and nonnegative tensor powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorPower\", \"PolynomialLaw.toFun'_eq_of_diagram\", \"PolynomialLaw.toFun_eq_rTensor_φ_toFun'\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"TensorPower.toTensorAlgebra_tprod\", \"TensorPower.gMul_eq_coe_linearMap\", \"PresheafOfModules.Monoidal.tensorObj\", \"PolynomialLaw.exists_lift'\"], \"digest\": \"b7fed756ba94bdbc\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib construction: reuse boundaryPullbackComparison, boundaryPullbackTensorIso and boundaryPullbackPowIso in the existing project module; no new Lean declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback of tensor powers of a sheaf of modules is canonically isomorphic to the tensor powers of its pullback including the zeroth power",
+   "results": "{\"t\": \"2026-10-22T04:32:40Z\", \"tool\": \"leansearch\", \"query\": \"The pullback of tensor powers of a sheaf of modules is canonically isomorphic to the tensor powers of its pullback including the zeroth power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TensorPower.algebraMap₀\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"digest\": \"265dbf673324a68e\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib construction: reuse boundaryPullbackComparison, boundaryPullbackTensorIso and boundaryPullbackPowIso in the existing project module; no new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg boundaryPullbackComparison|boundaryPullbackTensorIso|boundaryPullbackPowIso dag/nodes lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search tensor.*pullback|pullback.*tensor",
+   "results": "Project source: all three definitions in WeilConjectures/AlgebraicGeometry/SquareZeroTensorBoundaryComparisons.lean, lines 39, 46, 63. Sheaf modules consume these definitions. DAG declaration-ownership scan: no definition node owns any of the three; theorem nodes cite or list them. Blueprint search: 0 blueprint nodes match. No duplicate construction is needed.",
+   "date": "2026-10-22",
+   "verdict": "Register definition ownership with existing:true, as required by H2 return e19deccb3b30."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ample-fibre-section-lifting",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Canonical identification of the pullback of a tensor power with the tensor power of the fibre pullback, in the section-lifting input to the fibrewise-ampleness branch.",
+   "via": [
+    "lem-trf-ample-fibre-section-lifting",
+    "lem-trf-noetherian-fibre-ample-neighbourhood",
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.boundaryPullbackComparison",
+    "AlgebraicGeometry.Scheme.Modules.boundaryPullbackTensorIso",
+    "AlgebraicGeometry.Scheme.Modules.boundaryPullbackPowIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.boundaryPullbackComparison",
+     "module": "WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons",
+     "lines": [
+      37,
+      42
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.boundaryPullbackTensorIso",
+     "module": "WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons",
+     "lines": [
+      44,
+      52
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.boundaryPullbackPowIso",
+     "module": "WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons",
+     "lines": [
+      61,
+      68
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundaryPullbackComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.boundaryPullbackComparison",
+   "AlgebraicGeometry.Scheme.Modules.boundaryPullbackTensorIso",
+   "AlgebraicGeometry.Scheme.Modules.boundaryPullbackPowIso"
+  ],
+  "statement": "def boundaryPullbackComparison {X Z : Scheme.{u}} (j : Z ⟶ X) :\n    tensorPullback j ≅ pullback j",
+  "branch": "slopmaster2",
+  "by": "Q32",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership required by independent stage-2 return H2 at e19deccb3b30. All three declarations are existing plain definitions with actual data, not choices from square_zero_ideal_tensor_unit_isIso. The comparison uses the normalized tensor-pullback adjunction; tensor and power comparisons are constructed from it and the monoidal ordinary pullback. No declaration is moved, copied or added. Reviewer fix (Q32 1da19097): boundaryPullbackComparison takes Classical.choose of exists_tensorPullbackAdjunction, owned by lem-pc-module-pullback-adjunction; that node is now in stmt_deps and cited. The chosen adjunction is canonical: its unit is prescribed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1da190975",
+  "group": "Q32",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1da190975",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Re-delivery after H2 RETURN e19deccb: item Lean byte-identical; item node vs live changes only lean + stmt_dep def-sc-tensor-pullback-power-comparison (theorem lem-sc-square-zero-ideal-tensor-unit dropped). Statement re-checked vs Stacks 0D2M final assertion (F=O_Z): proper, locally Noetherian + compact S, invertible L, actual fibre/tensor pullback, ample L_s with proved witness, ∃d₀ ∀d≥d₀ ∀t ∃U∋s ∃t' with 1⊗t' restricted and genuine recursive boundaryPullbackPowIso = t; quantifier order and edge cases fine, no stronger hypotheses, sorry only, docstrings ok. New existing:true def node matches the three def bodies, has no other owner, passes check_existing, no cycle. Finding: boundaryPullbackComparison is leftAdjointUniq of Classical.choose exists_tensorPullbackAdjunction, owned by lem-pc-module-pullback-adjunction, missing from the new node's stmt_deps/statement (canonical: unit-normalized). FIX = complete node JSON fixes/def-sc-tensor-pullback-power-comparison.json adding and citing it; passes check_new_node and check_existing. Advisories: tensorPow owner def-sc-invertible-module not cited; pullbackObjUnitIso unowned; item statement text does not cite the new node (stmt_deps does); brief self-audit second reading. No compile (record-only fix)."
+ }
+}

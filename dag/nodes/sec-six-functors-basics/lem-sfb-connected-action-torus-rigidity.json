@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-connected-action-torus-rigidity",
+ "kind": "statement",
+ "title": "Rigidity of actions of connected algebraic groups on tori",
+ "statement": "Let $k$ be a field [def-weil-field]. All group schemes below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$ of $k$. A torus is a group scheme becoming $(\\mathbf G_m)^d$ over $\\bar k$ for some integer $d\\geq0$, where $\\mathbf G_m$ is as in [def-sc-gm-ga]. Let $G$ be smooth and geometrically connected, let $T$ be a torus, and let $a:G\\times_kT\\to T$ be an action by group-scheme automorphisms. Thus for every commutative $k$-algebra $A$ and $g\\in G(A)$, the map $t\\mapsto a(g,t)$ is a group automorphism of $T(A)$, naturally under change of $A$. Then $a$ is the projection $G\\times_kT\\to T$; equivalently, $a(g,t)=t$ for all $A,g,t$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.36 and Corollary 12.37, printed pp.243--244; specialization from groups of multiplicative type to tori."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Write $K=\\bar k$. It suffices to prove the equality after extension to $K$: if $C=k[T]$ and $D=k[G\\times_kT]$, equality of the extended maps implies $(a^*(c)-\\operatorname{pr}_2^*(c))\\otimes1=0$ in $D\\otimes_kK$ for each $c\\in C$. [lem-sfb-field-extension-tensor-injective] makes $D\\to D\\otimes_kK$ injective. The spectrum correspondence [def-weil-affine-spectrum] and affine product formula [lem-weil-pbc-fibre-product-affine-spectra] therefore imply equality of the original maps. Over $K$, choose the splitting $T_K\\simeq\\mathbf G_m^d$ supplied by the definition of torus in the statement, and conjugate the action by it. Put $X=G_K$. This is affine and connected by the hypotheses, and its identity is a $K$-point.",
+   "uses": [
+    "lem-sfb-field-extension-tensor-injective",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.36, reduction to algebraically closed k; Corollary 12.37, base-extension reduction made explicit."
+   }
+  },
+  {
+   "text": "For each $n\\geq1$ restrict the action to $X\\times_KH_n$, where $H_n=(\\mu_n)^d\\subset\\mathbf G_m^d$ [def-sc-gm-ga]. The homomorphism hypothesis makes this a family of homomorphisms $H_n\\to\\mathbf G_m^d$. [lem-sfb-finite-torsion-hom-parameter] gives its classifying morphism $c_n:X\\to C_n$, with $C_n$ a finite disjoint union of copies of $\\operatorname{Spec}K$. Each inverse image of a component is open and closed; connectedness forces exactly one to be nonempty [def-weil-connected-scheme]. The map factors through that open component, which is $\\operatorname{Spec}K$, so it is the constant $K$-morphism with value $c_n(e)$. The action identity gives $a(e,h)=h$, hence naturality and injectivity of the classifying bijection give $a|_{X\\times H_n}=\\operatorname{pr}_2|_{X\\times H_n}$ as scheme morphisms. This holds even when $\\operatorname{char}K$ divides $n$.",
+   "uses": [
+    "lem-sfb-finite-torsion-hom-parameter",
+    "def-sc-gm-ga",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.35 and Theorem 12.36, finite case; Corollary 12.37, evaluation at the identity."
+   }
+  },
+  {
+   "text": "Put $B=\\Gamma(X,\\mathcal O_X)$. The affine product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $X\\times_K\\mathbf G_m^d$ with the spectrum of $L_B=B[t_1^{\\pm1},\\ldots,t_d^{\\pm1}]$, and $X\\times_KH_n$ with the spectrum of $L_B/(t_1^n-1,\\ldots,t_d^n-1)$. Indeed [def-sc-gm-ga] gives the one-variable rings; iterate the affine product formula, and send $b\\otimes t^u$ to $bt^u$. Its inverse sends a finite sum to $\\sum b_u\\otimes t^u$; the pure-tensor relations and the monomial multiplication show these maps are inverse. For $H_n$, impose each relation $t_i^n=1$; the inverse variables become $t_i^{n-1}$, giving precisely the displayed quotient. Thus the two pullbacks of every target function have the same image in every one of these quotients by Step 2.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-gm-ga",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.36, final paragraph on printed p.244: parameter-algebra tensor products, with their maps specified."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-torus-torsion-joint-injectivity] with coefficient ring $B$ and rank $d$. Step 3 gives $a^*(f)=\\operatorname{pr}_2^*(f)$ for every target function $f$. The affine spectrum correspondence [def-weil-affine-spectrum] gives $a=\\operatorname{pr}_2$ over $K$, and Step 1 gives the equality over $k$. Evaluating equal morphisms on any commutative $k$-algebra $A$ yields $a(g,t)=t$, as required.",
+   "uses": [
+    "lem-sfb-torus-torsion-joint-injectivity",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.33 and Theorem 12.36, last paragraph, followed by Corollary 12.37."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-extension-tensor-injective",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-finite-torsion-hom-parameter",
+  "def-sc-gm-ga",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-torus-torsion-joint-injectivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.36 and Corollary 12.37, printed pp.243--244; finite case Lemma 12.35 and density Theorem 12.33."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic action by group automorphisms of a geometrically connected algebraic group on a torus is trivial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : TopologicalSpace G] [inst_5 : IsTopologicalGroup G]\\n  [i\", \"doc\": \"In the context of a Galois category $\\\\mathcal{C}$ with a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$ and a compact topological group $G$ equipped with a multiplicative action on each $F(X)$, this con\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a continuous multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X],\\n  CategoryTheory.PreGaloisCategory.IsGalois\", \"doc\": \"For a connected object $X$ in a pre-Galois category, $X$ is a Galois object if and only if the automorphism group $\\\\mathrm{Aut}(X)$ acts pretransitively on the finite type $F(X)$, where pretransitivit\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, and a compact topological group $G$ acting continuously on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, if $G$ is the fun\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], MulAction.IsPretransitive (CategoryTheory.A\", \"doc\": \"For any connected object $X$ in a pre-Galois category $\\\\mathcal{C}$ and fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, the automorphism group $\\\\mathrm{Aut}(F)$ acts pretransitively on the fini\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X], MulAction.IsPretransitive (CategoryTheory.Aut \", \"doc\": \"If an object $ X $ in a pre-Galois category $ \\\\mathcal{C} $ satisfies the Galois condition, then the automorphism group $ \\\\mathrm{Aut}(F) $ of a fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Action\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X],\\n  MulAction.IsPretransitive (CategoryTheory\", \"doc\": \"For any Galois object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, the automorphism group $ \\\\mathrm{Aut}(X) $ acts pretransitively on the finite type $ F(X) $, where $ F $ is the fiber functor to f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions and analytic tori do not give rigidity of algebraic families of torus automorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal torus subgroups of connected affine algebraic groups are central",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"instNormalUpperCentralSeriesStep\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [inst_1 : H.Normal], (upperCentralSeriesStep H).Normal\", \"doc\": \"For any group $G$ and a subgroup $H$ of $G$, the upper central series step starting at $H$ is a normal subgroup of $G$. This asserts that each term in the upper central series construction is invarian\"}\n  {\"name\": \"Subgroup.instNormalCenter\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"∀ {G : Type u_1} [inst : Group G], (Subgroup.center G).Normal\", \"doc\": \"For any group $ G $, the center of $ G $ is a normal subgroup. This means that every element in the center commutes with all elements of $ G $, and conjugation by any element of $ G $ leaves the cente\"}\n  {\"name\": \"upperCentralSeriesStep\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"{G : Type u_1} → [inst : Group G] → (H : Subgroup G) → [H.Normal] → Subgroup G\", \"doc\": \"The subgroup of elements $ x \\\\in G $ such that for all $ y \\\\in G $, the commutator $ [x, y] = xyx^{-1}y^{-1} $ lies in $ H $. This defines a step in the upper central series of a group, where $ H $ is\"}\n  {\"name\": \"upperCentralSeries_normal\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G] (n : ℕ), (upperCentralSeries G n).Normal\", \"doc\": \"For any group $ G $, each term in the upper central series of $ G $ is a normal subgroup of $ G $. The upper central series is recursively defined by starting with the trivial subgroup and taking the \"}\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → (H : Subgroup G) ×' H.Normal\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"upperCentralSeriesStep_eq_comap_center\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [inst_1 : H.Normal],\\n  upperCentralSeriesStep H = Subgroup.comap (QuotientGroup.mk' H) (Subgroup.center (G ⧸ H))\", \"doc\": \"For a normal subgroup $ H $ of a group $ G $, the upper central series step defined by $ H $ coincides with the preimage of the center of the quotient group $ G/H $ under the canonical quotient map $ \"}\n  {\"name\": \"mem_upperCentralSeriesStep\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [inst_1 : H.Normal] (x : G),\\n  x ∈ upperCentralSeriesStep H ↔ ∀ (y : G), x * y * x⁻¹ * y⁻¹ ∈ H\", \"doc\": \"An element $x$ belongs to the upper central series step $H$ if and only if for every element $y$ in the group, the commutator $[x, y] = x y x^{-1} y^{-1}$ lies in $H$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions and analytic tori do not give rigidity of algebraic families of torus automorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions and analytic tori do not give rigidity of algebraic families of torus automorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "torus|multiplicative.type|diagonalizable",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"30\", \"text\": \"This theorem applies, e.g., to the map `z ↦ n • z` on the additive circle or a torus.\"}\n  {\"file\": \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"line\": \"88\", \"text\": \"  for some flows on the two-torus (e.g., one can take a constant flow and glue in a few Cherry\"}\n  {\"file\": \"Mathlib/Algebra/Group/TypeTags/Hom.lean\", \"line\": \"13\", \"text\": \"# Transport algebra morphisms between additive and multiplicative types.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"23\", \"text\": \"  triangularizable if and only if it is diagonalizable.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"77\", \"text\": \"/-- A finitely-semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"82\", \"text\": \"/-- A semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"line\": \"120\", \"text\": \"product space is simultaneously diagonalizable. -/\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"40\", \"text\": \"namespace UnitAddTorus\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"49\", \"text\": \"def mFourier : C(UnitAddTorus d, ℂ) where\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"53\", \"text\": \"variable {n} {x : UnitAddTorus d}\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"88\", \"text\": \"/-- The star subalgebra of `C(UnitAddTorus d, ℂ)` generated by `mFourier n` for `n ∈ ℤᵈ`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"89\", \"text\": \"def mFourierSubalgebra (d : Type*) [Fintype d] : StarSubalgebra ℂ C(UnitAddTorus d, ℂ) where\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"12\", \"text\": \"# Integral over a torus in `ℂⁿ`\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"14\", \"text\": \"In this file we define the integral of a function `f : ℂⁿ → E` over a torus\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"16\", \"text\": \"`torusMap (c : ℂⁿ) (R θ : ℝⁿ)` to be the point in `ℂⁿ` given by $z_k=c_k+R_ke^{θ_ki}$,\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"17\", \"text\": \"where $i$ is the imaginary unit, then define `torusIntegral f c R` as the integral over\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\", \"line\": \"19\", \"text\": \"`torusMap` multiplied by `f (torusMap c R θ)`.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"139\", \"text\": \"  declaration when the first argument has no multiplicative type-class, but argument `α` does.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"178\", \"text\": \"    If the first argument is not the argument with a multiplicative type-class, `@[to_additive]`\"}\n  {\"file\": \"Mathlib/Topology/Instances/AddCircle/Real.lean\", \"line\": \"52\", \"text\": \"abbrev UnitAddTorus (d : Type*) := d → UnitAddCircle\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions and analytic tori do not give rigidity of algebraic families of torus automorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic action by group automorphisms of a geometrically connected algebraic group on a torus is trivial",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Action.ρAut\", \"module\": \"Mathlib.CategoryTheory.Action.Basic\", \"type\": \"{G : Type*} [Group G] (A : Action V G) : G →* Aut A.V\", \"doc\": \"The group homomorphism from $ G $ to the automorphism group $ \\\\mathrm{Aut}(A.V) $ induced by the action $ A $, mapping each element $ g \\\\in G $ to the automorphism $ \\\\rho(g) $ of $ A.V $, where $ \\\\rho\"}\n  {\"name\": \"Action.ρAut_apply_hom\", \"module\": \"Mathlib.CategoryTheory.Action.Basic\", \"type\": \"∀ {V : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} V] {G : Type u_2} [inst_1 : Group G] (A : Action V G)\\n  (g : G), (A.ρAut g).hom = A.ρ g\", \"doc\": \"For any group action $ A $ of $ G $ on a category $ V $ and any element $ g \\\\in G $, the underlying morphism of the automorphism $ A.\\\\rho_{\\\\text{Aut}}(g) $ is equal to the endomorphism $ A.\\\\rho(g) $.\"}\n  {\"name\": \"AddAut.applyMulAction\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": MulAction (AddAut M) M\", \"doc\": \"The additive automorphism group of an additive structure $ M $ acts on $ M $ by applying the automorphisms. Specifically, for any automorphism $ \\\\varphi \\\\in \\\\text{AddAut}(M) $ and element $ m \\\\in M $,\"}\n  {\"name\": \"FixedPoints.toAlgAut_bijective\", \"module\": \"Mathlib.FieldTheory.Fixed\", \"type\": \"[Finite G] [FaithfulSMul G F] : Function.Bijective (MulSemiringAction.toAlgAut G (FixedPoints.subfield G F) F)\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ F $, then the group homomorphism from $ G $ to the group of $ \\\\mathrm{FixedSubfield}(G, F) $-algebra automorphisms of $ F $ is bijective.\"}\n  {\"name\": \"AlgEquiv.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Algebra.Equiv\", \"type\": \": FaithfulSMul (A₁ ≃ₐ[R] A₁) A₁\", \"doc\": \"The action of the group of R-algebra automorphisms on A₁ is faithful, meaning that if two automorphisms act identically on every element of A₁, then they are equal.\"}\n  {\"name\": \"RelIso.applyMulAction\", \"module\": \"Mathlib.Algebra.Order.Group.Action.End\", \"type\": \": MulAction (r ≃r r) α\", \"doc\": \"The group of relational isomorphisms from a relational structure $(\\\\alpha, r)$ to itself acts on the underlying set $\\\\alpha$ by applying each isomorphism to elements of $\\\\alpha$. This action is define\"}\n  {\"name\": \"AlgEquiv.instMulDistribMulActionUnits\", \"module\": \"Mathlib.Algebra.Algebra.Equiv\", \"type\": \": MulDistribMulAction (A₁ ≃ₐ[R] A₁) A₁ˣ\", \"doc\": \"The group of $ R $-algebra automorphisms of $ A_1 $ acts on the group of units $ A_1^\\times $ via distributive multiplicative action, where each automorphism maps units to units by applying the automor\"}\n  {\"name\": \"AddAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": FaithfulSMul (AddAut M) M\", \"doc\": \"The action of the additive automorphism group on M is faithful, meaning that if two automorphisms agree on all elements of M, then they are equal.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions and analytic tori do not give rigidity of algebraic families of torus automorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|reductive|torus|centralizer|solvable|groupScheme|GroupScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions and analytic tori do not give rigidity of algebraic families of torus automorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic action by automorphisms of a geometrically connected algebraic group on a torus is trivial",
+   "results": "{\"t\": \"2026-10-23T11:47:50Z\", \"tool\": \"leanfinder\", \"query\": \"Every algebraic action by automorphisms of a geometrically connected algebraic group on a torus is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\"], \"digest\": \"1460058ac092abcc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract actions, Galois categories and subgroup centralizers do not state algebraic torus rigidity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal torus in a connected algebraic group is central by rigidity of characters",
+   "results": "{\"t\": \"2026-10-23T11:47:51Z\", \"tool\": \"leanfinder\", \"query\": \"A normal torus in a connected algebraic group is central by rigidity of characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.instNormalCenter\", \"upperCentralSeriesAux\", \"Subgroup.normal_centralizer\", \"upperCentralSeriesStep\", \"Sylow.le_center_or_le_commutator\", \"instNormalUpperCentralSeriesStep\", \"Subgroup.centerCharacteristic\", \"ConjAct.fixedPoints_eq_center\"], \"digest\": \"a4a12af3ff0abd5e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract actions, Galois categories and subgroup centralizers do not state algebraic torus rigidity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "{\"t\": \"2026-10-23T11:47:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract actions, Galois categories and subgroup centralizers do not state algebraic torus rigidity"
+  },
+  {
+   "tool": "grep",
+   "query": "torus|diagonalizable|multiplicative.type",
+   "results": "{\"t\": \"2026-10-23T11:47:47Z\", \"tool\": \"grep\", \"query\": \"torus|diagonalizable|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract actions, Galois categories and subgroup centralizers do not state algebraic torus rigidity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected algebraic group acts trivially on a torus by group automorphisms",
+   "results": "{\"t\": \"2026-10-23T11:47:48Z\", \"tool\": \"leansearch\", \"query\": \"A connected algebraic group acts trivially on a torus by group automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.ρAut\", \"CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction\", \"FixedPoints.toAlgAut_bijective\", \"MulAction.IwasawaStructure.is_conj\", \"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"CategoryTheory.FintypeCat.Action.isConnected_of_transitive\", \"FixedPoints.toAlgAut_surjective\", \"ConjAct.fixedPoints_eq_center\"], \"digest\": \"2e90a293f85d0f96\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract actions, Galois categories and subgroup centralizers do not state algebraic torus rigidity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-radical-quotient",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Rigidity of actions of connected algebraic groups on tori.",
+   "via": [
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-connected-action-torus-rigidity",
+  "worker": "stage1",
+  "summary": "Q24 follows Milne 12.35--12.37 through finite constant Hom parameters and torsion quotient joint injectivity; records scalar-extension injectivity as a Mathlib leaf. Statement unchanged; nilpotent coefficient rings and characteristic-dividing torsion orders retained.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/moduli/PGL/reductive-radical prerequisite chain in blueprint.from.place. This item realizes the connected-action rigidity input using Milne 12.36. The inherited ancestor is null (blueprint_refs ancestor confirms the broken imported chain), retained rather than inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-f156e6f6c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-f156e6f6c (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 pp.243-244 (Thm 12.33, Lemma 12.35, Thm 12.36 and its proof, Cor 12.37). The four-step split follows 12.36 exactly: finite case, then coordinate rings, then joint injectivity, then a short assembly. Step 1: the reduction to k-bar via the new leaf (injectivity of D -> D⊗K), the affine product formula and the spectrum bijection is correct and elementary. Step 2: X=G_K is connected and nonempty, so the classifying map factors through one copy of Spec K and is constant; naturality and the unit axiom give a=pr2 on X×μ_n^d, also when char divides n. Step 3: the identifications of L_B and L_B/J_n are written out (t^{-1}=t^{n-1}). Step 4: assembly only. Leaf: Algebra.TensorProduct.includeLeft_injective at Mathlib/RingTheory/Flat/Basic.lean:410-415, with Module.Flat.of_free (line 231) and Module.Free.of_divisionRing (VectorSpace.lean:156), all lines verified; it is a one-line specialization. Hom-parameter node: true over every base (Cartier dual of μ_n is constant Z/n via group-likes of A[Z/n], i.e. orthogonal idempotents), checked on n=1, r=0, s=0 and μ_p in characteristic p. Joint-injectivity node: true for every ring B (take n larger than the spread of the support), checked on r=0, nilpotent B and the zero ring. Neither node restates the item. DAG search (Cartier, rigid, torus, diagonalizable, Laurent, constant scheme, group-like, 12.3x) found no duplicate: split-torus-hom-matrices and group-algebra-group-like-basis are field-level only. No SGA source, no route departure. blueprint.from.node=null is an inherited base fault. FIX (B2/B3, E4): lem-sfb-finite-torsion-hom-parameter said 'morphisms' with no base, and as arbitrary scheme morphisms the bijection is false (fields with automorphisms); step 2 needs a K-morphism. It now says k-morphisms, natural in k-morphisms X'->X, with X(A)=Hom_k(Spec A,X), citing def-weil-scheme-over-base and def-weil-pbc-algebra-hom-quotient (both added to stmt_deps).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConnectedActionTorusRigidity",
+  "declaration": "AlgebraicGeometry.connected_action_torus_rigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedActionTorusRigidity.lean",
+  "statement": "theorem connected_action_torus_rigidity {k : Type u} [Field k] (G T : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [IsAffine T.X.left] [LocallyOfFiniteType T.X.hom] [QuasiCompact T.X.hom] [Smooth G.X.hom] (hG : ConnectedSpace ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj G).X.left) (hT : MultiplicativeType.IsTorus T) [a : ModObj G.X T.X] (hhom : ∀ (A : CommAlgCat.{u} k) (g : (algSpec (.of k)).obj (op A) ⟶ G.X) (t₁ t₂ : (algSpec (.of k)).obj (op A) ⟶ T.X), g • (t₁ * t₂) = (g • t₁) * (g • t₂)) : a.smul = CartesianMonoidalCategory.snd G.X T.X",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa1baa6fc",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, ToriMultiplicativeType source (baseChange/splitTorus/IsTorus incl. rank 0), Mathlib ModObj/Hom smul/algSpec. Lean matches clause by clause: Field k; Grp(Over Spec k) with IsAffine+LocallyOfFiniteType+QuasiCompact; Smooth G; ConnectedSpace of the actual k̄ base change; IsTorus T; ModObj action; hhom on all CommAlgCat.{u} k points is equivalent to action by group automorphisms (g⁻¹ inverse, naturality automatic); conclusion a.smul = snd. Edge cases d=0, trivial G, zero algebra, any characteristic; no extra assumptions; single universe u. Docstrings carry source/blueprint and the 4 node steps; statement verbatim; sorry only; no defs. Added stmt_dep def-sfb-tori-multiplicative-type is the landed owner used. No duplicate found. No findings; no recompile per 2026-10-21 rule."
+ }
+}

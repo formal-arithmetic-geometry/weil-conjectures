@@ -1,0 +1,281 @@
+{
+ "id": "lem-pur-derived-injective-cone-comparison",
+ "kind": "statement",
+ "title": "Right-derived units compare cone-quotient triangles on injective rows",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], with enough injectives in $\\mathcal A$ [def-sp-injective-resolutions], and let $T:\\mathcal A\\to\\mathcal B$ be additive [def-sp-left-exact-additive]. Use the bounded-below derived categories and the shift/cone convention of [def-weil-pbc-bounded-derived-subcategories, def-weil-abstract-derived-category]. Write $\\alpha_L:Q(TL)\\to RT(QL)$ for the right-derived unit [lem-weil-pbc-right-derived-plus-injective]. Suppose\n$$0\\to E\\xrightarrow{u}F\\xrightarrow{v}G\\to0$$\nis a degreewise short exact row of bounded-below complexes of injectives of $\\mathcal A$, and its termwise image under $T$ is also degreewise short exact. Put $P=\\operatorname{Cone}(u)$, with $P^n=F^n\\oplus E^{n+1}$ and $d(b,a)=(db+u(a),-da)$, and put $q:P\\to G$, $q(b,a)=v(b)$. The complex $P$ is bounded below and termwise injective. There is a canonical complex isomorphism $\\chi:T(P)\\xrightarrow{\\sim}\\operatorname{Cone}(T(u))$ preserving the cone inclusion and negative projection, including the comparison $T(E[1])\\cong T(E)[1]$. Both $q$ and $q_T:\\operatorname{Cone}(T(u))\\to T(G)$ are quasi-isomorphisms, and $q_T\\chi=T(q)$. The invertible units $\\alpha_E,\\alpha_F,\\alpha_G$ identify the entire image under $RT$ of\n$$QE\\xrightarrow{Qu}QF\\xrightarrow{Qv}QG\\xrightarrow{(-\\operatorname{pr}_E)q^{-1}}QE[1]$$\nwith the distinguished triangle of the $T$-image row. More precisely, $(\\alpha_E^{-1},\\alpha_F^{-1},\\alpha_G^{-1})$ is an isomorphism of triangles from this image to that row's triangle; its last-arrow square uses the canonical shift comparison of $RT$. Under $\\alpha_P$ and $Q\\chi$, $RT(Qq)$ is $Qq_T$, so its third arrow is exactly $(-\\operatorname{pr}_{T(E)})q_T^{-1}$. This comparison is natural in morphisms of such short exact rows. On cones the map associated to a row morphism $(e,f,g)$ is $(b,a)\\mapsto(fb,ea)$ and commutes with quotient and negative projection.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014Z, section-canonical-delta-functor, cone-to-quotient triangle; definition-cone; Tag 05TH, lemma-injective-acyclic, bounded-below injective evaluation"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof": [
+  {
+   "text": "Choose a common strict lower bound N for E,F,G. Then P^n=0 for n<N-1. For any monomorphism M→L, a map M→F^n⊕E^{n+1} has two components, each of which extends to L by injectivity; pairing the extensions proves injectivity of P^n. Thus P, as well as E,F,G, is a bounded-below complex of injectives. This argument uses only the defining extension property, not preservation of injectives by T.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TH, lemma-injective-acyclic, hypotheses; definition-cone"
+   }
+  },
+  {
+   "text": "Additivity gives the canonical biproduct comparison χ^n:T(F^n⊕E^{n+1})≅T(F^n)⊕T(E^{n+1}). In these coordinates the image differential has matrix ((T(d_F),T(u)),(0,-T(d_E))), so χ is a complex isomorphism. The termwise identification s_E:T(E[1])≅T(E)[1] is a chain isomorphism since T(-d_E)=-T(d_E). Matrix projection and inclusion give χ T(i)=i_T and (-pr_{T(E)})χ=s_E T(-pr_E). Likewise q_Tχ=T(v pr_F)=T(q), by their two biproduct components. These are equations of chain maps; element notation is only shorthand for biproduct components.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "definition-cone, displayed differential and inclusion/projection; additive biproduct calculation"
+   }
+  },
+  {
+   "text": "Apply lem-pc-cone-short-exact-quasi-iso first to E→F→G in A and then to T(E)→T(F)→T(G) in B; the second application uses the assumed exactness of that image row. Hence q and q_T are quasi-isomorphisms, so Qq and Qq_T are invertible. By the definition of distinguished triangles, localizing the cone triangle gives a distinguished triangle. Replace its cone vertex by QG via Qq: its second arrow becomes Qv since qi=v, and its last arrow becomes δ=Q(-pr_E)(Qq)^{-1}. The identical argument in B gives δ_T=Q(-pr_{T(E)})(Qq_T)^{-1}. All complexes used are bounded below, so these are triangles in D⁺.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014Z, section-canonical-delta-functor, construction preceding lemma-derived-canonical-delta-functor; Tag 0152"
+   }
+  },
+  {
+   "text": "Put c_L=α_L^{-1} for L=E,F,G,P. These inverses exist by lem-weil-pbc-right-derived-plus-injective and Step 1. Naturality of α gives c_M RT(Qh)=Q(T h)c_L for each chain map h:L→M between these complexes. Taking h=u,v proves the first two triangle squares. Taking h=q gives c_G RT(Qq)=Q(Tq) c_P=Qq_T Qχ c_P, using q_Tχ=T(q) from Step 2; hence RT(Qq)=c_G^{-1} Qq_T (Qχ c_P), which is precisely the claimed identification of RT(Qq) under α_P and Qχ. No assertion that T preserves all quasi-isomorphisms is needed.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TH, lemma-injective-acyclic; naturality of the right-derived comparison"
+   }
+  },
+  {
+   "text": "Apply lem-sc-p1-right-derived-injective-boundary with A,B,v=T and H=(E→F→G). Its hypotheses are exactly enough injectives in A, additivity of T, bounded-below termwise injectivity of the three complexes, and short exactness of the row and its T-image. The canonical boundaries are δ and δ_T of Step 3: both use the localized cone quotient and the negative projection convention. The lemma says c_E[1] σ_E RT(δ)=δ_T c_G, with the canonical shift comparison σ_E:RT(QE[1])≅RT(QE)[1]. This is the last triangle square. Together with Step 4 and the invertibility of c_E,c_F,c_G it gives the asserted isomorphism of triangles, and hence distinguishedness of the image triangle.",
+   "uses": [
+    "lem-sc-p1-right-derived-injective-boundary",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, canonical SES boundary; Tag 05TH, injective comparison; existing inverse-unit boundary theorem"
+   }
+  },
+  {
+   "text": "For a strict row morphism (e,f,g), the diagonal cone map C(b,a)=(fb,ea) commutes with differentials because fu=u′e. Its two components give q′C=gq and (-pr_{E′})C=e[1](-pr_E). After localization, invert the q maps to obtain δ′Qg=Qe[1]δ. The same computation applies to the T-image row; the biproduct comparison χ is natural since each of its two projections is T of the original projection. Finally naturality of α at e,f,g makes the componentwise triangle isomorphisms natural. Thus the cone comparison, quotient identification and all three triangle squares commute with row morphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, naturality proof; lemma-functorial-cone with zero homotopy"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sc-p1-right-derived-injective-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014Z/0152, cone-to-quotient construction and naturality; Tag 05TH; assembly using the existing inverse-unit boundary comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Tt]riangle|mapTriangle.*rightDerived|rightDerivedFunctorObjQIso.*naturality",
+   "results": "",
+   "date": "2026-10-22",
+   "verdict": "no match: cone-map and triangleOfSES isomorphisms alone do not give the right-derived-unit-normalized comparison of all arrows, including quotient and shift, on injective rows"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorObjQIso\", \"map\"",
+   "results": "",
+   "date": "2026-10-22",
+   "verdict": "no match: cone-map and triangleOfSES isomorphisms alone do not give the right-derived-unit-normalized comparison of all arrows, including quotient and shift, on injective rows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived additive functor applied to a short exact row of bounded below injective complexes equals the triangle of its termwise image using the derived units and cone quotient",
+   "results": "CategoryTheory.ShortComplex.ShortExact.singleTriangle; DerivedCategory.triangleOfSES_obj₁; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso; DerivedCategory.triangleOfSESIso; DerivedCategory.triangleOfSES_obj₂; DerivedCategory.triangleOfSES; DerivedCategory.triangleOfSESδ; CategoryTheory.ShortComplex.ShortExact.singleδ",
+   "date": "2026-10-22",
+   "verdict": "no match: cone-map and triangleOfSES isomorphisms alone do not give the right-derived-unit-normalized comparison of all arrows, including quotient and shift, on injective rows"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived additive functor comparison of cone quotient triangles on bounded below injective models by natural units",
+   "results": "CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.rightDerivedUnique",
+   "date": "2026-10-22",
+   "verdict": "no match: cone-map and triangleOfSES isomorphisms alone do not give the right-derived-unit-normalized comparison of all arrows, including quotient and shift, on injective rows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor unit preserves all arrows and the negative projection in cone quotient triangles on injective complexes",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'; CochainComplex.mappingCone.mapTrianglehIso; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; DerivedCategory.triangleOfSESIso; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-22",
+   "verdict": "no match: cone-map and triangleOfSES isomorphisms alone do not give the right-derived-unit-normalized comparison of all arrows, including quotient and shift, on injective rows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived additive functor compares the cone quotient triangle of a short exact sequence of bounded below injective complexes with the termwise image using its unit and canonical shift comparison",
+   "results": "8 hits: DerivedCategory.triangleOfSESIso, CategoryTheory.Functor.map_distinguished_exact, CochainComplex.mappingCone.mapTrianglehIso, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, DerivedCategory.triangleOfSESδ, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-22",
+   "verdict": "no exact match for the entire item: generic unit/shift and cone/SES tools are partial matches; read the returned candidate sources and reused existing DAG nodes for the cone quasi-isomorphism and the boundary comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Tt]riangle|mapTriangle.*rightDerived|rightDerived.*[Cc]ommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no exact match for the entire item: generic unit/shift and cone/SES tools are partial matches; read the returned candidate sources and reused existing DAG nodes for the cone quasi-isomorphism and the boundary comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived unit compares short exact sequence triangles on injective complexes including connecting morphism and shift",
+   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.singleTriangle, CategoryTheory.Functor.rightDerived_map_eq, DerivedCategory.triangleOfSESδ, DerivedCategory.triangleOfSES_mor₃, CategoryTheory.ShortComplex.ShortExact.singleδ, CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp, DerivedCategory.triangleOfSES, DerivedCategory.triangleOfSESδ.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no exact match for the entire item: generic unit/shift and cone/SES tools are partial matches; read the returned candidate sources and reused existing DAG nodes for the cone quasi-isomorphism and the boundary comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"commShift\"",
+   "results": "12 hits: CategoryTheory.Functor.IsRightDerivedFunctor.instCommShiftTotalRightDerived, CategoryTheory.Functor.IsRightDerivedFunctor.commShift, CategoryTheory.Functor.IsRightDerivedFunctor.natTrans_commShift, CategoryTheory.NatTrans.CommShift.rightDerivedNatTrans, CategoryTheory.NatTrans.CommShift.of_isRightDerivedFunctor, CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app, CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app_assoc, CategoryTheory.Functor.instCommShiftPlusRightDerivedFunctorPlusInt",
+   "date": "2026-10-22",
+   "verdict": "no exact match for the entire item: generic unit/shift and cone/SES tools are partial matches; read the returned candidate sources and reused existing DAG nodes for the cone quasi-isomorphism and the boundary comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and shift compatibility of the canonical right derived unit on bounded below complexes",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.NatTrans.rightDerived_comp",
+   "date": "2026-10-22",
+   "verdict": "no exact match for the entire item: generic unit/shift and cone/SES tools are partial matches; read the returned candidate sources and reused existing DAG nodes for the cone quasi-isomorphism and the boundary comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusUnit|mapTriangleIso|descShortComplex",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+   "date": "2026-10-22",
+   "verdict": "no exact match for the entire item: generic unit/shift and cone/SES tools are partial matches; read the returned candidate sources and reused existing DAG nodes for the cone quasi-isomorphism and the boundary comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-proetale-support-global-boundary",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "Proof Steps 1 and 3; sk-prop-a1 first localization triangle and global supported-class paragraph; Tag 09XP, section-cohomology-support, first triangle and long exact sequence; cone-to-quotient normalization (old item Step 8); extracted argument from returned global-boundary proof steps 4--5",
+   "via": [
+    "lem-pur-proetale-support-global-boundary",
+    "lem-pur-retracted-support-localization-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-derived-injective-cone-comparison",
+  "worker": "stage1",
+  "summary": "Proved boundedness and injectivity directly from the extension property, computed the additive cone comparison and quotient identities, reused the existing cone quasi-isomorphism and inverse-unit SES boundary nodes, and assembled all three triangle squares and row naturality. Statement unchanged; no new nodes. Did not assume left exactness of T or preservation of injectives by T.",
+  "blueprint": "Supports main-20261015 prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3 and sk-prop-a1 localization/global-supported-class paragraph through the existing support-global-boundary ancestry. This node supplies only the generic injective-row comparison and retains the localization route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic existence, natural unit and evaluation on bounded-below injective complexes; sk-prop-a1 has no replacement for this homological algebra tool."
+   },
+   {
+    "node": "lem-sc-p1-right-derived-injective-boundary",
+    "why": "Generic inverse-unit compatibility with the canonical SES connecting morphism under the same additive hypotheses; avoids duplicating its proved boundary argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sc-p1-right-derived-injective-boundary"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-dee7ebe38",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-dee7ebe38 (reviewer sub-agent of L); spot-checked: Read the item's statement and all six steps; it has no new nodes. Read every cited statement: def-sp-abelian, def-sp-injective-resolutions, def-sp-left-exact-additive, def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories, lem-weil-pbc-right-derived-plus-injective, lem-pc-cone-short-exact-quasi-iso, and lem-sc-p1-right-derived-injective-boundary with its Lean statement rightDerived_injectiveComplex_boundary. Read Stacks derived.tex definition-cone (l.2471), Tag 014Z (l.3901) and Tag 0152 with its naturality proof (l.3965). The cone sign, the injectivity of P^n, the biproduct comparison χ and the identities χT(i)=i_T, (−pr)χ=s_E T(−pr_E) and q_Tχ=T(q) are correct. The boundary δ=Q(−pr)Qq^{-1} is the same as Mathlib's triangleOfSESδ and Stacks' −p∘q^{-1}. The boundary node's hypotheses (additive T, enough injectives in A, injective rows, exact row and image row) all hold, and Step 5's last-square equation type-checks. Row naturality via the diagonal cone map matches Stacks 0152. Edge cases T=0, T=id and E=0 check out. The boundary, cone and right-derived nodes do not depend on the item, so there is no cycle. No duplicate found: the nearest candidates are lem-pur-injective-cone-boundary-descent, lem-sp-derived-injective-resolution-naturality and lem-weil-pbc-kinjective-fiber-triangle-comparison. Accepted the two declared tool_uses. One fault, fixed: Step 4's equation for h=q, 'Qχ c_P RT(Qq)=Qq_T c_G', does not compose. Replaced it with c_G RT(Qq)=Q(Tq)c_P=Qq_T Qχ c_P, using Step 2, which gives the stated identification of RT(Qq) under α_P and Qχ. Fix file: fixes/dag/nodes/sec-smooth-purity/lem-pur-derived-injective-cone-comparison.json, which changes only the Step 4 text.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.DerivedInjectiveConeComparison",
+  "declaration": "CategoryTheory.rightDerived_injectiveRow_triangleComparison",
+  "declarations": [
+   "CategoryTheory.boundedBelowRowTriangle",
+   "CategoryTheory.rightDerived_injectiveRow_triangleComparison",
+   "CategoryTheory.rightDerived_injectiveRow_coneComparison",
+   "CategoryTheory.rightDerived_injectiveRow_coneQuotient",
+   "CategoryTheory.rightDerived_injectiveRow_naturality",
+   "CategoryTheory.rightDerived_injectiveRow_triangleNaturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Abelian/DerivedInjectiveConeComparison.lean",
+  "statement": "theorem rightDerived_injectiveRow_triangleComparison (T : A ⥤ B) [T.Additive] (H : ShortComplex (CochainComplex.Plus A)) [∀ n : ℤ, Injective (H.X₁.obj.X n)] [∀ n : ℤ, Injective (H.X₂.obj.X n)] [∀ n : ℤ, Injective (H.X₃.obj.X n)] (hH : (H.map (CochainComplex.plus A).ι).ShortExact) (hTH : ((H.map (CochainComplex.plus A).ι).map (T.mapHomologicalComplex (.up ℤ))).ShortExact) : (boundedBelowRowTriangle H hH ∈ distTriang (DerivedCategory.Plus A)) ∧ ((T.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj (boundedBelowRowTriangle H hH) ∈ distTriang (DerivedCategory B)) ∧ ∃ e : (T.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj (boundedBelowRowTriangle H hH) ≅ DerivedCategory.triangleOfSES hTH, e.hom.hom₁ = boundedBelowInjectiveComparison T H.X₁ ∧ e.hom.hom₂ = boundedBelowInjectiveComparison T H.X₂ ∧ e.hom.hom₃ = boundedBelowInjectiveComparison T H.X₃",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main declaration is the prescribed derived triangle isomorphism. The remaining declarations state the cone, quotient and row-naturality clauses. The fully faithful triangulated inclusion D⁺(B) → D(B) displays the target using Mathlib triangleOfSES; all its vertices are bounded below. boundedBelowRowTriangle packages the existing canonical SES boundary without a second boundary or cone."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-616ed77b5",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_deps, the delivered module and the RightDerivedInjectiveBoundary dependency, plus the Mathlib mapHomologicalComplexIso, descShortComplex, triangleOfSESδ/triangleOfSES/triangleOfSES.map. Every clause matches: P = mappingCone H.f.hom is bounded below and injective; χ is the canonical mapHomologicalComplexIso preserving inr and negative projection (with commShiftIso) and the quotient; q and q_T are quasi-isomorphisms; the source triangle is Q⁺u, Q⁺v and the lifted triangleOfSESδ (−pr∘q⁻¹); the main theorem gives an iso to triangleOfSES hTH with all three components = inverse-unit comparisons, last square via the mapTriangle shift comparison; the cone-quotient identification uses α_P; naturality is given componentwise and as a triangle-morphism equality. No extra hypotheses (no left exactness, injectives only in A), independent universes, no hollow def, all proofs sorry, docstrings carry source and blueprint, lines ≤100, report sections present, live node differs only in lean. Advisories: boundedBelowInjectiveComparison/boundedBelowSESBoundary are plain defs of the non-stmt_dep theorem node lem-sc-p1-right-derived-injective-boundary (no cycle, stmt_deps as stage 1, standing advisory precedent); the DerivedCategory.ShortExact import is redundant, already re-exported. Not recompiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261023T124415-L-1395779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.rightDerived_injectiveRow_coneComparison",
+   "CategoryTheory.rightDerived_injectiveRow_coneQuotient",
+   "CategoryTheory.rightDerived_injectiveRow_naturality",
+   "CategoryTheory.rightDerived_injectiveRow_triangleComparison",
+   "CategoryTheory.rightDerived_injectiveRow_triangleNaturality"
+  ],
+  "sorry_after": []
+ }
+}

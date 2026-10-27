@@ -18,9 +18,8 @@
  ],
  "proof": [
   {
-   "text": "Use [sk-prop-sfb-cartesian-coefficients] (1) for the coefficient identifications: every inverse-image coefficient ring $g^{-1}\\Lambda_X$ along an immersion $g:T\\to X$ is the prescribed $\\Lambda_T$. By [lem-weil-pbc-noetherian-open-subscheme-noetherian] every open prefix $V_k$ is Noetherian, hence quasi-compact, and by [lem-weil-pbc-locally-noetherian-quasi-separated] it is quasi-separated. Every inclusion between them is quasi-compact: an affine inverse image is an open in a Noetherian scheme, hence quasi-compact; its diagonal is an isomorphism, so it is quasi-separated.",
+   "text": "Noetherian open prefixes and their open intersections are Noetherian and quasi-separated, so all open immersions required by the successor theorem are quasi-compact and quasi-separated. The specified condensed-coefficient functors already include the coefficient pullback identifications. The unit-route coefficient and heart-closure imports remain present.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated"
    ],
@@ -31,10 +30,9 @@
    }
   },
   {
-   "text": "Localization [det-sf-open-closed-sequence-ring-sheaf] (3) makes each counit $\\epsilon_k:F_k\\to F$ mono. [lem-sfb-open-filtration-successor] for $W=V_{k-1}\\subseteq V_k=V$ gives $d_k:F_{k-1}\\to F_k$ with $\\epsilon_kd_k=\\epsilon_{k-1}$, hence $d_k$ is mono by cancellation. These maps give the non-strict chain over $F$. Extension from the empty open is zero; the identity-open adjunction is the identity, giving both endpoints.",
+   "text": "The proved private monic-counit and empty-module lemmas in the integral-gluing module apply to any commutative condensed ring. They show that every actual open counit is monic, that the empty prefix has zero image, and that the full prefix has top image. The last prefix inclusion is an isomorphism because its image is the whole scheme.",
    "uses": [
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "lem-sfb-open-filtration-successor"
+    "lem-weil-pbc-continuous-constructible-integral-gluing"
    ],
    "elementary": false,
    "source": {
@@ -43,7 +41,7 @@
    }
   },
   {
-   "text": "For $k\\ge1$, let $c:S_k\\hookrightarrow V_k$ be the closed complement of $V_{k-1}$. The cokernel assertion of [lem-sfb-open-filtration-successor] gives $\\operatorname{coker}(d_k)\\cong v_{k!}c_*c^*v_k^*F=v_{k!}c_*(F|_{S_k})$, since $a_k=v_kc$ and inverse images compose. By [lem-sfb-image-subobject-of-monomorphism], the counit image subobjects are $[\\epsilon_{k-1}]$ and $[\\epsilon_k]$. Apply [lem-sfb-subobject-inclusion-cokernel] with $f=\\epsilon_{k-1}$, $g=\\epsilon_k$, $\\alpha=1$, $\\phi=d_k$. Its required equation is precisely the counit identity in step 2; thus the quotient of the specified subobjects is this cokernel.",
+   "text": "The difference of consecutive prefixes is exactly the given stratum, by the prefix equations and pairwise disjointness. Lift its immersion into the larger open; it is an immersion with closed image, hence closed. Apply [lem-sfb-open-filtration-successor] to obtain a natural nesting map, its actual counit identity, and its natural cokernel. Evaluate at F, use [lem-sfb-image-subobject-of-monomorphism] and [lem-sfb-subobject-inclusion-cokernel], and use preservation of cokernels by evaluation. This gives the quotient as the closed extension inside the larger prefix followed by open extension to X.",
    "uses": [
     "lem-sfb-open-filtration-successor",
     "lem-sfb-image-subobject-of-monomorphism",
@@ -56,9 +54,11 @@
    }
   },
   {
-   "text": "For $a_k=v_kc=iu$ with the given closure factorization, [lem-sfb-locally-closed-extension-coherence] with $R=\\Lambda_X$ gives $v_{k!}c_*\\cong i_*u_!=a_{k!}$; step 1 identifies its inverse-image rings $a_k^{-1}\\Lambda_X$, $c^{-1}\\Lambda_{V_k}$ with the prescribed coefficient rings. Applying this to the restriction in step 3 proves the desired quotient formula.",
+   "text": "Compare this closed-then-open extension N with the prescribed closure factorization using the existing earlier support interfaces. For a map missing the stratum, its pullback into the larger open factors through the open complement of the closed stratum. Apply openRestrictionPushforwardZero from the condensed recollement module, pullback composition, and open base change to show the restriction of N is zero. The existing open unit and closed counit identify its restriction to the stratum with M. Apply abelian_closed_support to the forgotten module on X, then the existing moduleUnitOfAbelian transport, to obtain the invertible closed-support unit for the closure. Inside the closure, apply the existing abelian_open_supported_counit and essential-image transport for module open extension to obtain its invertible open counit. Composing these maps and pullback composition gives N isomorphic to the specified open-then-closed extension. No duplicate module-support wrapper is declared.",
    "uses": [
-    "lem-sfb-locally-closed-extension-coherence"
+    "lem-sfb-proetale-supported-reconstruction",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-proetale-abelian-closed-counit"
    ],
    "elementary": false,
    "source": {
@@ -67,9 +67,9 @@
    }
   },
   {
-   "text": "Adaptedness and the finite-constant-local-model characterization in [det-lem-coefficient-heart-closure] make each $F|_{S_k}$ lisse. No step requires a strict inclusion.",
+   "text": "Apply [new-det-lem-coefficient-heart-common-stratification-lisse] to R and its identity refinement. The adapted finite constant local model on each stratum therefore gives exactly the required lisse restriction.",
    "uses": [
-    "det-lem-coefficient-heart-closure"
+    "new-det-lem-coefficient-heart-common-stratification-lisse"
    ],
    "elementary": false,
    "source": {
@@ -79,20 +79,21 @@
   }
  ],
  "proof_deps": [
-  "sk-prop-sfb-cartesian-coefficients",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-weil-pbc-continuous-constructible-integral-gluing",
   "lem-sfb-open-filtration-successor",
   "lem-sfb-image-subobject-of-monomorphism",
   "lem-sfb-subobject-inclusion-cokernel",
-  "lem-sfb-locally-closed-extension-coherence",
-  "det-lem-coefficient-heart-closure"
+  "lem-sfb-proetale-supported-reconstruction",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-proetale-abelian-closed-counit",
+  "new-det-lem-coefficient-heart-common-stratification-lisse"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-  "place": "Short assembly of localization, the existing open successor and locally closed coherence, with explicit image-subobject and quotient-representative comparisons."
+  "place": "D2 stage-3 repaired proof: actual condensed open counits, existing natural open successor and image-subobject cokernel comparison; existing earlier abelian support and module-transport interfaces for the closure comparison, with four duplicate private wrappers removed; identity-refinement lisseness."
  },
  "mathlib_searches": [
   {
@@ -256,7 +257,6 @@
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-locally-closed-extension-coherence",
   "lem-sfb-open-filtration-successor"
  ],
  "reviewed": {
@@ -269,7 +269,18 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-coefficient-heart",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -294,5 +305,15 @@
   "by": "N7",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261023T230625-L-3452737",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

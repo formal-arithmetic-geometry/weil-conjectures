@@ -1,0 +1,286 @@
+{
+ "id": "lem-trf-regular-component-etale-stalk-primes",
+ "kind": "statement",
+ "title": "Prime ideals and contractions of regular components in an étale stalk",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $D\\hookrightarrow X$ be a reduced closed subscheme [def-weil-closed-immersion, def-pc-reduced-scheme], and let $(D_a)_{a\\in F}$ be its distinct reduced irreducible components, indexed by a finite set $F$ [def-weil-irreducible-components]. Assume every $D_a$ is regular [def-weil-regular-scheme]. Let $v:W\\to X$ be étale [def-weil-etale-morphism], let $w\\in W$, put $x=v(w)$, $A=\\mathcal O_{X,x}$ and $R=\\mathcal O_{W,w}$, and write $\\varphi:A\\to R$ for the stalk map [def-weil-pbc-module-stalk]. Let $I\\subseteq A$ be the ideal of $D$ and $F_x=\\{a\\in F:x\\in D_a\\}$. For $a\\in F_x$ let $\\mathfrak p_a\\subseteq A$ be the ideal of $D_a$ and put $\\mathfrak q_a=\\mathfrak p_aR$. Then the $\\mathfrak p_a$ are exactly the distinct minimal primes over $I$; $\\mathcal O_{D_a,x}=A/\\mathfrak p_a$; and the closed pullback to $\\operatorname{Spec}R$ of $D_a\\hookrightarrow X$ is $\\operatorname{Spec}(R/\\mathfrak q_a)$. Each $R/\\mathfrak q_a$ is a nonzero regular local domain, each $\\mathfrak q_a$ is a proper prime, and $\\varphi^{-1}(\\mathfrak q_a)=\\mathfrak p_a$. In particular the $\\mathfrak q_a$ are distinct. With $V(J)$ denoting the set of primes containing an ideal $J$ in $R$, one has $V(IR)=\\bigcup_{a\\in F_x}V(\\mathfrak q_a)$, including the empty-family case. Components missing $x$ have empty pullback to $\\operatorname{Spec}R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07NF, lemma-regular-goes-up; agent local-component application and contraction argument of returned parent steps 1--3 (full argument and other source nodes retained in report.md)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-regular-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-module-stalk",
+  "def-weil-affine-spectrum",
+  "def-trf-marked-ideal-order"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Noetherian affine open $U=\\operatorname{Spec}B$ containing $x$, using [pqf-def-locnoeth]. By [lem-weil-pbc-open-subspace-irreducible-closed-correspondence], the nonempty $D_a\\cap U$ are exactly the distinct irreducible components of $D\\cap U$: the order-preserving correspondence preserves maximal irreducible closed subsets. Their reduced structures are the restrictions of those on $D_a$, since reducedness is a local-ring condition [def-pc-reduced-scheme]. Apply [lem-sfb-closed-component-stalk-calculus] to the reduced closed subscheme $D\\cap U$ of the Noetherian scheme $U$. Stalks are unchanged by restriction to a neighborhood. It gives exactly the distinct minimal primes $\\mathfrak p_a$ over $I$, the quotient descriptions $\\mathcal O_{D_a,x}=A/\\mathfrak p_a$, and $I=\\bigcap_{a\\in F_x}\\mathfrak p_a$. A component missing $x$ has unit stalk ideal. The empty intersection is $A$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "def-pc-reduced-scheme",
+    "lem-sfb-closed-component-stalk-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme; algebra.tex Tags 00ES (lemma-irreducible), 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "For $a\\in F_x$, apply [lem-trf-finite-intersection-etale-stalk-model] with the single closed subscheme $D_a$ and $z=x$. It identifies $D_a\\times_X\\operatorname{Spec}R$ with $\\operatorname{Spec}(R/\\mathfrak p_aR)$ and the local ring at the unique point $\\widetilde w$ of $E_a=D_a\\times_XW$ over $w$ with $R/\\mathfrak p_aR$. Its natural stalk map is $A/\\mathfrak p_a\\to R/\\mathfrak p_aR$. The local Noetherian hypothesis and the condition $x\\in D_a$ required there both hold.",
+   "uses": [
+    "lem-trf-finite-intersection-etale-stalk-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JU (lemma-fibre-product-immersion); morphisms.tex Tag 02GO (lemma-base-change-etale)."
+   }
+  },
+  {
+   "text": "The projection $E_a\\to D_a$ is etale by [lem-weil-pbc-etale-scheme-base-change]. Apply [lem-sfb-etale-stalk-invariants] at $\\widetilde w$: its target stalk $A/\\mathfrak p_a$ is regular local by regularity of $D_a$ and [def-weil-regular-scheme], so its source stalk $R/\\mathfrak q_a$ is regular local, and the quotient stalk map is faithfully flat. By [lem-sc-regular-local-domain] this quotient is a nonzero integral domain. Therefore $\\mathfrak q_a$ is a proper prime: a product lies in $\\mathfrak q_a$ exactly when the product of its classes in the quotient is zero.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-sfb-etale-stalk-invariants",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AH0, lemma-regular-etale-extension; algebra.tex Tag 00NP, lemma-regular-domain."
+   }
+  },
+  {
+   "text": "For each $a\\in F_x$, apply [lem-weil-pbc-faithfully-flat-universally-injective] to the faithfully flat map $C=A/\\mathfrak p_a\\to S=R/\\mathfrak q_a$ and the $C$-module $C$. Under $C\\otimes_C S\\cong S$, $c\\otimes s\\mapsto cs$ with inverse $s\\mapsto1\\otimes s$, its injectivity says that $A/\\mathfrak p_a\\to R/\\mathfrak q_a$ is injective. Thus $\\varphi(b)\\in\\mathfrak q_a$ if and only if $b\\in\\mathfrak p_a$, giving the stated contraction. Equal $\\mathfrak q_a$ would have equal contractions and hence equal indices by Step 1.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CK, lemma-faithfully-flat-universally-injective."
+   }
+  },
+  {
+   "text": "Let $Q$ be any prime of $R$. Then $IR\\subseteq Q$ if and only if $I\\subseteq\\varphi^{-1}(Q)$. If $F_x$ is nonempty, Step 1 gives $\\prod_{a\\in F_x}\\mathfrak p_a\\subseteq I$; primality forces $\\mathfrak p_a\\subseteq\\varphi^{-1}(Q)$ for some $a$. Indeed, otherwise choose one element of each $\\mathfrak p_a$ outside that prime; their product contradicts primality. This condition is equivalent to $\\mathfrak q_a\\subseteq Q$. Conversely $I\\subseteq\\mathfrak p_a$ gives $IR\\subseteq\\mathfrak q_a$. This proves $V(IR)=\\bigcup_{a\\in F_x}V(\\mathfrak q_a)$. If $F_x$ is empty, Step 1 gives $I=A$, hence $IR=R$ and both sides are empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal and prime calculation from Step 1; empty intersection convention."
+   }
+  },
+  {
+   "text": "Finally let $a$ miss $x$. On the affine neighborhood $U$ of Step 1, write $D_a\\cap U=\\operatorname{Spec}(B/J_a)$ using [def-weil-closed-immersion]. Its unit stalk ideal says $J_aA=A$, so $J_aR=R$. Apply [lem-sbc-finite-affine-tensor-base-change] with a singleton family $E_0=B/J_a$ and $B$-algebra $R$. The pullback is $\\operatorname{Spec}((B/J_a)\\otimes_B R)$. The explicit quotient isomorphism sends $(b+J_a)\\otimes r$ to $\\varphi_B(b)r+J_aR$, with inverse $r+J_aR\\mapsto(1+J_a)\\otimes r$. Thus its ring is $R/J_aR=0$ and its spectrum is empty. Restriction to $U$ computes the original pullback since $\\operatorname{Spec}R\\to X$ factors through $U$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sbc-finite-affine-tensor-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; explicit quotient-tensor calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+  "def-pc-reduced-scheme",
+  "lem-sfb-closed-component-stalk-calculus",
+  "lem-trf-finite-intersection-etale-stalk-model",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-sfb-etale-stalk-invariants",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "def-weil-closed-immersion",
+  "lem-sbc-finite-affine-tensor-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AH0 (lemma-regular-etale-extension), assembled with Tags 01J3, 00ES, 00E3, 01I4, 02GO, 00NP and 05CK via existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism pulls back each regular irreducible component to a scheme whose local ring is a domain and whose defining prime contracts to the original component prime",
+   "results": "8 hits: Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, Algebra.IsEtaleAt.comp, Algebra.exists_etale_of_isEtaleAt, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, AlgebraicGeometry.IsEtale.of_comp, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus. No returned declaration supplies the local prime family, regular quotient rings, and contraction identities; etale-locus and integral-scheme declarations cover only ingredients.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsRegularLocalRing\"",
+   "results": "0 hits: . No returned declaration supplies the local prime family, regular quotient rings, and contraction identities; etale-locus and integral-scheme declarations cover only ingredients.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEtale.*IsRegular|IsRegular.*IsEtale|comap.*map.*prime",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean. No returned declaration supplies the local prime family, regular quotient rings, and contraction identities; etale-locus and integral-scheme declarations cover only ingredients.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale morphism and a regular reduced irreducible closed subscheme, its extended ideal in a local ring is prime and contracts to the original ideal",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local branches of a regular irreducible closed subscheme remain integral under an etale neighbourhood, with distinct original component primes distinguished by contraction",
+   "results": "8 hits: Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, Algebra.IsEtaleAt. No returned declaration supplies the local prime family, regular quotient rings, and contraction identities; etale-locus and integral-scheme declarations cover only ingredients.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale map of schemes the ideals of regular irreducible components extend to distinct prime ideals in local rings with unchanged contraction",
+   "results": "8 hits: Algebra.etaleLocus, RingHom.Etale.ofLocalizationSpan, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, RingHom.Etale.ofLocalizationSpanTarget, Algebra.IsEtaleAt, Algebra.IsEtaleAt.comp, Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff; no exact component-prime family theorem. Etale-locus/finite-algebra declarations and localization-only prime results do not supply this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEtale.*IsRegular|IsRegular.*IsEtale|component.*stalk",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; no exact component-prime family theorem. Etale-locus/finite-algebra declarations and localization-only prime results do not supply this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The extended ideals of regular components in an etale local ring are distinct primes contracting to the component ideals",
+   "results": "8 hits: Ideal.primesOver, IsLocalization.minimalPrimes_map, Ideal.primesOver.isPrime, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Ideal.IsMinimalPrimaryDecomposition.distinct, IsLocalization.AtPrime.comap_map_eq_map, IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime, IsLocalRing.le_maximalIdeal_of_isPrime; no exact component-prime family theorem. Etale-locus/finite-algebra declarations and localization-only prime results do not supply this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsRegularLocalRing\"",
+   "results": "0 hits: ; no exact component-prime family theorem. Etale-locus/finite-algebra declarations and localization-only prime results do not supply this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of a reduced closed subscheme at a point stay prime after etale pullback when the component local rings are regular",
+   "results": "8 hits: Algebra.etaleLocus, RingHom.Etale.propertyIsLocal, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.IsEtaleAt.comp, Algebra.mem_etaleLocus_iff, Algebra.IsEtaleAt, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.ofLocalizationSpan; no exact component-prime family theorem. Etale-locus/finite-algebra declarations and localization-only prime results do not supply this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-component-coordinate-identification",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the local strict-normal-crossings criterion after the étale coordinate calculation in Lemma 4.2.9; returned steps 1--3: affine component ideals, regularity of the étale pullback stalk, and contraction to the original primes",
+   "via": [
+    "lem-trf-etale-component-coordinate-identification",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-regular-component-etale-stalk-primes",
+  "worker": "stage1",
+  "summary": "Reuses existing component-stalk calculus on a Noetherian affine neighborhood, the finite-intersection etale stalk model, etale regularity and faithful flatness, regular-local domain theorem, and universal injectivity. Proves contraction, distinctness, the closed-set union and missing-component case explicitly. No new nodes or statement changes.",
+  "blueprint": "Realizes the inherited local normal-crossings component-identification subargument (parent steps 1--3); the current ancestor lem-trf-local-term-locality is a contracting-correspondence theorem, so this is a descended technical tool, not a direct assertion of its current text.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "why": "Generic order-preserving restriction of irreducible closed subsets, to justify working on a Noetherian affine neighborhood."
+   },
+   {
+    "node": "lem-sfb-closed-component-stalk-calculus",
+    "why": "Generic closed-component and stalk-ideal calculus, applied on an affine neighborhood; this unit supplies no general component/minimal-prime result."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic stability of etale morphisms under base change."
+   },
+   {
+    "node": "lem-sfb-etale-stalk-invariants",
+    "why": "Generic etale regularity and faithful flatness of stalk maps; no replacement of a trace-formula unit step."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic regular-local domain theorem used for the pulled-back quotient."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
+    "why": "Generic injectivity theorem for faithfully flat scalar extension; applied to the quotient stalk map."
+   },
+   {
+    "node": "lem-sbc-finite-affine-tensor-base-change",
+    "why": "Generic affine tensor description for a singleton pullback, used for components missing the point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+  "lem-sfb-closed-component-stalk-calculus",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-sbc-finite-affine-tensor-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-70cd1c7af",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-70cd1c7af (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full; there are no new nodes. This was an unsplit first split, not a re-split: there is no repair note. The statement is unchanged and is what the parent etale-component-coordinate-identification step 1 consumes. Step 1: on a Noetherian affine U containing x (correct handling of locally Noetherian X), the order-preserving open-subspace correspondence identifies the components of D∩U, and closed-component-stalk-calculus gives the minimal primes, O_{D_a,x}=A/p_a, I as the intersection of the p_a, and unit ideals for components missing x. Step 2: finite-intersection-etale-stalk-model with a single D_a gives Spec(R/p_aR), the point w̃ and the stalk map. Step 3: étale base change plus etale-stalk-invariants at w̃ (no Noetherian hypothesis needed) gives faithful flatness and regularity; regular-local-domain then makes q_a a proper prime. Step 4: universal injectivity with N=C gives the contraction (Stacks 05CK, algebra.tex l.20255). Step 5 is elementary prime-product avoidance and covers the empty case. Step 6: the singleton tensor base change gives R/J_aR=0, and the factorization through the open v^{-1}(U) is correct (no E3 error). Regularity source: 0AH0 lemma-regular-etale-extension (more-algebra.tex l.10858). No SGA source. Small cases tested: V(xy) in k[x,y], x outside D, D=X, globally disconnected pullback. No duplicates and no cycle. All 7 generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularComponentEtaleStalkPrimes",
+  "declaration": "AlgebraicGeometry.regular_component_etale_stalk_primes",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularComponentEtaleStalkPrimes.lean",
+  "statement": "theorem regular_component_etale_stalk_primes {X D : Scheme.{u}} [IsLocallyNoetherian X] (d : D ⟶ X) [IsClosedImmersion d] [IsReduced D] {F : Type v} [Finite F] (C : F → Scheme.{u}) (k : (a : F) → C a ⟶ D) [∀ a : F, IsClosedImmersion (k a)] [∀ a : F, IsReduced (C a)] (hcomponents : Set.range (fun a : F ↦ Set.range (k a)) = irreducibleComponents D) (hdistinct : Function.Injective (fun a : F ↦ Set.range (k a))) (hregular : ∀ a : F, IsRegularScheme (C a)) {W : Scheme.{u}} (f : W ⟶ X) [Etale f] (w : W) (I : Ideal (X.presheaf.stalk (f w))) (hI : I = HilbertSamuel.stalkIdeal d.ker (f w)) (Fx : Set F) (hFx : Fx = {a : F | f w ∈ Set.range (k a ≫ d)}) (p : F → Ideal (X.presheaf.stalk (f w))) (hp : ∀ a : F, p a = HilbertSamuel.stalkIdeal (k a ≫ d).ker (f w)) (q : F → Ideal (W.presheaf.stalk w)) (hq : ∀ a : F, q a = (p a).map (f.stalkMap w).hom) : Set.BijOn p Fx I.minimalPrimes ∧ (∀ a ∈ Fx, (∀ (z : C a) (hz : (k a ≫ d) z = f w), ∃ e : (X.presheaf.stalk (f w) ⧸ p a) ≃+* (C a).presheaf.stalk z, ∀ b : X.presheaf.stalk (f w), e (Ideal.Quotient.mk (p a) b) = ((k a ≫ d).stalkMap z).hom ((X.presheaf.stalkCongr (.of_eq hz)).inv.hom b)) ∧ (∃ e : pullback (k a ≫ d) (W.fromSpecStalk w ≫ f) ≅ Spec (.of (W.presheaf.stalk w ⧸ q a)), e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (q a))) = pullback.snd (k a ≫ d) (W.fromSpecStalk w ≫ f)) ∧ Nontrivial (W.presheaf.stalk w ⧸ q a) ∧ IsRegularLocalRing (W.presheaf.stalk w ⧸ q a) ∧ IsDomain (W.presheaf.stalk w ⧸ q a) ∧ (q a).IsPrime ∧ q a ≠ ⊤ ∧ (q a).comap (f.stalkMap w).hom = p a) ∧ Set.InjOn q Fx ∧ PrimeSpectrum.zeroLocus (I.map (f.stalkMap w).hom : Set (W.presheaf.stalk w)) = ⋃ a ∈ Fx, PrimeSpectrum.zeroLocus (q a : Set (W.presheaf.stalk w)) ∧ (∀ a ∉ Fx, IsEmpty (pullback (k a ≫ d) (W.fromSpecStalk w ≫ f) : Scheme.{u}))",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Component ideals use the existing HilbertSamuel.stalkIdeal, recorded by def-trf-marked-ideal-order, added to stmt_deps. The theorem retains arbitrary finite component index types, the empty family, actual quotient stalk maps, and pullback identifications over Spec R. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19247e4a3",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Item node vs live: only the lean record and stmt_dep def-trf-marked-ideal-order were added; that landed def node owns HilbertSamuel.stalkIdeal (sup of affine germ images, i.e. the stalk ideal of D and of D_a). The other 8 dependency records are unchanged and there are no new nodes. lean.statement is verbatim. Clause by clause: locally Noetherian X; reduced closed D; reduced closed components with ranges = irreducibleComponents, injective, Finite F in free universe v; IsRegularScheme components; Etale f; x, A, R, phi as direct expressions; BijOn p Fx minimalPrimes; A/p_a ≅ O_{D_a,z} compatible with stalkMap via stalkCongr (direction checked); pullback ≅ Spec(R/q_a) over Spec R; Nontrivial, IsRegularLocalRing (Mathlib), IsDomain, prime, proper; comap = p_a; InjOn q; zeroLocus(IR) = union; empty pullback off Fx. Edge cases: empty F, x outside D, D = X, crossing branches. Gates: one sorry theorem, source and blueprint docstrings, six-step proof docstring, no hollow defs, no pro-etale substitute, both report sections present. No file changed, so no compile; the worker compiled clean."
+ }
+}

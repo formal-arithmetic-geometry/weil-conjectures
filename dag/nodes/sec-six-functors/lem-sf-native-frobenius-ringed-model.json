@@ -1,0 +1,142 @@
+{
+ "id": "lem-sf-native-frobenius-ringed-model",
+ "kind": "statement",
+ "title": "Ordinary Frobenius-compatible coefficient and internal Hom realization",
+ "statement": "Let k₀ be a finite field, l a prime, and X a scheme over Spec k₀. Put Y equal to the native geometric fiber and F equal to the actual WeilSheaf.frobeniusPullback k₀ l X on ordinary native adic modules. There exist a small category C in universe u+1 with pullbacks, a topology J, a continuous site autoequivalence s whose inverse is continuous, a commutative ring sheaf R, an isomorphism a:s.inverse_*R≅R, and an additive equivalence E:Modules(R)≌AdicSheaf(l,Y). Write sigma for the actual precomposition/scalar-transport module functor defined by (J,s,R,a). There is a natural isomorphism c:E F≅sigma E (diagrammatic functor notation E.functor ⋙ F ≅ sigma ⋙ E.functor). For all ordinary modules M,N there is an isomorphism h:E Hom_R(M,N)≅Hom_native(E M,E N), natural for precomposition and postcomposition. For every twisted presentation P of (J,s,R,a), h commutes with ordinary Frobenius Hom: F(h) followed by native Frobenius-Hom, precomposition by c_M inverse, and postcomposition by c_N equals c_Hom followed by E(P.sigmaHom) and h_sigmaM,sigmaN. This statement involves ordinary sheaves and ordinary translation only: no categories of Weil fixed pairs, action-site module equivalence, derived categories, or equivariant internal Hom are asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; underived small-site and fixed-pair parts of the native ringed presentation."
+ },
+ "stmt_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicitly constructed lifted bounded pro-etale category, topology, inverse postcomposition translation and the restricted actual comparisonRing. Cover preservation in both directions follows from unchanged covering domains and arrows. Transport pullbacks using AsSmall.down. The coefficient isomorphism is the identity on locally finite functions. No Frobenius action-site realization or resolution-existence theorem is chosen.",
+   "uses": [
+    "def-sf-native-frobenius-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the fixed additive equivalence from the same data construction. Obtain the existing normalized native ordinary Hom comparison H. The constructed homComparison combines the proved slice-unlifting isomorphism and H reversed through the native section-equivalence unit and counit. The proved two-variable pointwise naturality is exactly the hom_naturality field.",
+   "uses": [
+    "def-sf-native-frobenius-model-data",
+    "lem-sf-adic-module-hom-comparison-core",
+    "lem-sf-small-site-module-hom",
+    "def-sf-native-frobenius-hom-comparison",
+    "lem-sf-native-frobenius-hom-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the native inverse-pushforward comparison for this fixed model to the actual geometric Galois Frobenius and H. It supplies c and its ordinary Hom square for every presentation P. Populate NativeFrobeniusRingedModel with the constructed ordinary data, c, the pointwise Hom isomorphisms and their naturality. The native endofunctor is definitionally WeilSheaf.frobeniusPullback, so its comparison equation fills hom_frobenius unchanged.",
+   "uses": [
+    "lem-sf-native-frobenius-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-frobenius-model-data",
+  "lem-sf-adic-module-hom-comparison-core",
+  "lem-sf-small-site-module-hom",
+  "def-sf-native-frobenius-hom-comparison",
+  "lem-sf-native-frobenius-hom-naturality",
+  "lem-sf-native-frobenius-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation paragraph; construct the ordinary model and slice Hom explicitly, leaving only native inverse pushforward versus fixed translation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence from internal module sheaves to sectionwise module sheaves intertwines pullback and internal Hom for a site automorphism",
+   "results": "Eight sheaf pullback, sheafCongr and sheafHom results; none compares the actual native adic module pullback with a small ringed-site model.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence intertwining endofunctors induces an equivalence between categories of algebras with invertible structure maps",
+   "results": "Monad algebra equivalence and Endofunctor.Algebra.isoMk; no native Frobenius or sectionwise Hom comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use source-library IsoAlgebra transport and prove the categorical glue."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfNatIso|equivalenceOfNatIso; sectionModule.*Hom|ambient.*Hom|comparisonModuleFunctor",
+   "results": "Mathlib search gives no native comparison. Project search finds fullyFaithfulMapOfNatIso and the proved adicModuleHomComparisonCore, but no Frobenius-compatible small-site composite.",
+   "date": "2026-10-27",
+   "verdict": "The ordinary comparisons exist separately; the displayed Frobenius square is new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRingedPresentation",
+  "date": "2026-10-27",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom comparison and naturality of evaluation paragraph; underived small-site and fixed-pair parts of the native ringed presentation.",
+   "via": [
+    "lem-sf-native-weil-ringed-presentation",
+    "lem-sf-native-weil-hom-closed-structure",
+    "lem-sf-native-weil-hom-right-adjoint",
+    "lem-sf-native-weil-tensor-adjoints",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeFrobeniusRingedModel",
+  "file": "lean/Sheaf/Paper/NativeFrobeniusRingedModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_frobenius_ringed_model",
+  "statement": "theorem native_frobenius_ringed_model\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :\n    Nonempty (NativeFrobeniusRingedModel k₀ l X)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T034759-L-3686129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T064449-L-2182596",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

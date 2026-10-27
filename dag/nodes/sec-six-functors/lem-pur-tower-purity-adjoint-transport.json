@@ -1,0 +1,173 @@
+{
+ "id": "lem-pur-tower-purity-adjoint-transport",
+ "kind": "statement",
+ "title": "Transport a normalized tower purity record along a counit-preserving adjoint comparison",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension], and the section-normalized Base b, Operations o and Coordinates q of [det-sp-tower-shriek-levels, def-sp-coefficient-tower-shriek-interfaces]. Let X,Y be Noetherian schemes, j:X -> Z an open immersion [def-weil-open-immersion] and p:Z -> Y proper [def-weil-proper-morphism], with j followed by p quasi-compact and compactifiable. Fix d>=0 and the actual Tate twist datum w on X [def-coefficient-twists-detailed]. Let hF assert that compact support for this fixed factorization preserves the full uniform constructible finite-Tor tower categories [sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers]. Let G',G be two right adjoints to this same compact-support functor, with adjunctions adj',adj and arbitrary finite-level presentations lv',lv satisfying all the counit, unit and coefficient-mate normalization equations of [det-sp-tower-gluing]. Given a normalized Purity record a' for G',adj',lv' [det-sp-tower-gamma], there exists a Purity record a for G,adj,lv whose orientation arrow is a'.orientation.hom followed by realization((adj'.rightAdjointUniq adj).hom.app 1_Y). Here realization is the specified inclusion and section-preserving realization in the ordinary derived category of strict coefficient towers [def-weil-abstract-derived-category]; 1_Y is originalUnit with the membership witness a'.unit_mem. This asserts transport of one given record, not equality of two normalized orientations. No smoothness or structural-field hypotheses beyond the supplied records are required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Uniqueness and functoriality; Levels; together with tower-geometric-gamma.proof.md (1)--(3), transport between counit-preserving presentations, agent-written expansion"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "det-sp-tower-shriek-levels",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-coefficient-twists-detailed",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-gluing",
+  "det-sp-tower-gamma",
+  "def-weil-abstract-derived-category",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put rho=adj'.rightAdjointUniq adj. Retain the coefficient unit membership, tensor data, root lines, all coefficient and tensor coordinates, geometry and unit-invertibility witnesses of a'. Define the target orientation as a'.orientation followed by realization.mapIso (rho.app unit). This fixes the transported orientation itself rather than choosing any normalized orientation.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-tower-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Uniqueness and functoriality"
+   }
+  },
+  {
+   "text": "The adjunction comparison satisfies F(rho_K) followed by epsilon_K = epsilon'_K. Naturality of the common compactification projection, multiplied by its inverse, commutes tensor(rho_unit) through the inverse projection. Tensor symmetry naturality and the counit identity therefore identify projectionCounit' with the new projectionCounit after F(1 tensor rho_unit). Apply the Hom bijection of adj to conclude gamma' followed by realization(rho_K) equals the new gamma. This is an equality before finite evaluation. Transfer invertibility and naturality by this equation. Transfer tensor-domain membership, projection invertibility and exceptional normalization along the same isomorphism; the constructible and normalized domains are invariant under isomorphism. The source-domain and compact-support normalization clauses are unchanged.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-tower-gluing",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(2), definition as a counit transpose; (3), normalization"
+   }
+  },
+  {
+   "text": "At each level n, lv'.support_evaluation and lv.support_evaluation have equal comparison arrows by their normalization in the coefficient-tower-shriek interfaces. Compare the ordinary origins using originIso of their ReductionExceptionalRealization records. Both origins are bounded below, so [thm-weil-pbc-site-comparison], the finite-coefficient etale/pro-etale comparison, lifts the composite originIso uniquely to an ordinary isomorphism. Compare the ordinary right adjoints by rightAdjointUniq. The two Levels.counit equations and the two realization.counit equations show that evaluation of rho equals this composite right comparison: compose with the compact-support counit and apply injectivity of its Hom bijection. For the finite-level witness keep exactly the original diagonal geometry dg and the original normalized ordinary orientation alpha. Compose the old ui with the origin comparison. Its coefficient-unit equation follows from naturality of originIso and Levels.unit.",
+   "uses": [
+    "det-sp-tower-gluing",
+    "det-sp-reduction-exceptional",
+    "def-sp-coefficient-tower-shriek-interfaces",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels, identification of evaluations and finite units/counits"
+   }
+  },
+  {
+   "text": "In each finite_levels WordComparison equation, substitute the origin, right-adjoint and evaluated-rho identities from the preceding step. Naturality of rightIso and levelComparison cancels the intermediate comparison arrows. The first square becomes precisely the orientation square for the transported orientation. The second becomes the square for the new gamma, by step 2. The source coefficient and tensor words are unchanged because their data were retained. The same dg and alpha still satisfy OrientationNormalized. The two Levels.reduction equations identify the coefficient-mate reductions, so quotient transitions are retained. Assemble the transported Purity record from these fields. The claimed hom equality is its orientation definition. No equality between two independently chosen normalized orientations and no faithfulness of evaluation on arbitrary derived maps has been used.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-tower-gluing",
+    "def-sp-coefficient-tower-shriek-interfaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(1), finite normalized orientations; (2), levelwise tensor transposes; (3), coefficient transitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "det-sp-reduction-exceptional",
+  "det-sp-tower-gamma",
+  "det-sp-tower-gluing",
+  "sk-def-sp-normalized-towers",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Uniqueness and functoriality; Levels; together with tower-geometric-gamma.proof.md (1)--(3), transport between counit-preserving presentations, agent-written expansion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity_rightAdjoint_transport|transport.*Purity|Purity.*transport",
+   "results": "{\"t\": \"2026-10-25T12:07:30Z\", \"tool\": \"grep\", \"query\": \"purity_rightAdjoint_transport|transport.*Purity|Purity.*transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjoint-uniqueness identities do not transport the finite-level normalization, origin comparisons and all fields of the recorded tower Purity structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a normalized purity orientation and finite coefficient comparisons along the counit preserving isomorphism between two right adjoints of the same functor",
+   "results": "{\"t\": \"2026-10-25T12:07:30Z\", \"tool\": \"leansearch\", \"query\": \"Transport a normalized purity orientation and finite coefficient comparisons along the counit preserving isomorphism between two right adjoints of the same functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc\", \"CategoryTheory.Comonad.transport\", \"CategoryTheory.Adjunction.rightAdjointUniq_hom_counit\", \"CategoryTheory.OverPresheafAux.counit\", \"CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc\", \"CategoryTheory.Adjunction.rightAdjointUniq\", \"CategoryTheory.Bicategory.Adj.rIso\", \"CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit\"], \"digest\": \"6f8faca4a19cd770\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjoint-uniqueness identities do not transport the finite-level normalization, origin comparisons and all fields of the recorded tower Purity structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\", \"homEquiv\"",
+   "results": "{\"t\": \"2026-10-25T12:07:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightAdjointUniq\\\", \\\"homEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app\"], \"digest\": \"c49a585727c9c65e\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjoint-uniqueness identities do not transport the finite-level normalization, origin comparisons and all fields of the recorded tower Purity structure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrientationGroundFieldRetagging",
+  "date": "2026-10-25",
+  "group": "F6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Proof Step 1, underlying-site identification of the exceptional adjoints in the semilinear purity square; the normalized tower orientation must be moved to the common counit-preserving presentation",
+   "via": [
+    "lem-pur-orientation-ground-field-retagging"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerPurityAdjointTransport",
+  "file": "lean/Sheaf/Paper/TowerPurityAdjointTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerGamma.purity_rightAdjoint_transport",
+  "statement": "theorem purity_rightAdjoint_transport\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)\n    (q : SpTowerCalculus.Coordinates l E b)\n    {X Z Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p]\n    [QuasiCompact (j ≫ p)] [HasCompactification (j ≫ p)] (d : ℕ)\n    (w : SpChartAdmissibility.Twists l E X)\n    (hF : ∀ M : SpTowerCalculus.C l E b q X,\n      spConstructibleTorTowers l E Y (q.abelian Y)\n        ((SpTowerCalculus.F l E b o q (factorization j p)).obj M.obj))\n    (G' G : SpTowerCalculus.C l E b q Y ⥤ SpTowerCalculus.C l E b q X)\n    (adj' : SpTowerGluing.support l E b o q (factorization j p) hF ⊣ G')\n    (adj : SpTowerGluing.support l E b o q (factorization j p) hF ⊣ G)\n    (lv' : SpTowerGluing.Levels l E b o q (factorization j p) hF G' adj')\n    (lv : SpTowerGluing.Levels l E b o q (factorization j p) hF G adj)\n    (a' : Purity l E b o q j p d w hF G' adj' lv') :\n    ∃ a : Purity l E b o q j p d w hF G adj lv,\n      a.orientation.hom = a'.orientation.hom ≫\n        (realization l E b q X).map\n          ((adj'.rightAdjointUniq adj).hom.app ⟨originalUnit l E b q Y, a'.unit_mem⟩)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T143307-L-978460",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T143307-L-978460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

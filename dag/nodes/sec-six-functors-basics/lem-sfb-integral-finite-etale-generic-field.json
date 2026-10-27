@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-integral-finite-etale-generic-field",
+ "kind": "statement",
+ "title": "Generic fibre and function field of a surjective integral finite etale cover",
+ "statement": "Let $X,Z$ be integral schemes [def-pc-integral-scheme], and let $f:Z\\to X$ be finite etale and surjective [def-weil-finite-integral-morphism, def-weil-etale-morphism, def-weil-surjective-morphism]. Put $F=k(X)$ and $L=k(Z)$ [def-sc-function-field]. The morphism induces a finite separable field extension $L/F$ [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension]. There is a canonical isomorphism $Z\\times_X\\operatorname{Spec}F\\cong\\operatorname{Spec}L$ [def-pc-fibre-product] whose projections are the generic-point map $\\operatorname{Spec}L\\to Z$ (the canonical morphism $\\operatorname{Spec}\\kappa(\\eta_Z)\\to Z$ [lem-weil-pbc-morphism-from-spec-field], where $\\kappa(\\eta_Z)=\\mathcal O_{Z,\\eta_Z}=L$ because this local ring is a field) and the field-extension map $\\operatorname{Spec}L\\to\\operatorname{Spec}F$. More precisely, for every nonempty affine open $V=\\operatorname{Spec}A\\subseteq X$, its inverse image is a nonempty affine $\\operatorname{Spec}B$ [def-weil-affine-spectrum], $A\\to B$ is injective, and the germ maps identify $F=\\operatorname{Frac}A$ and $L=\\operatorname{Frac}B$. Using tensor products [def-weil-pbc-module-tensor-product] and localization [def-weil-pbc-module-localization], writing $S=A\\setminus\\{0\\}$, there are compatible $F$-algebra isomorphisms $B\\otimes_A F\\cong S^{-1}B\\cong L$; the first sends $b\\otimes(a/s)$ to $ab/s$, and the second sends $b/s$ to its quotient in $L$. These identifications are independent of the affine chart and commute with both projections.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GL (lemma-etale-over-field), part (2), with Tag 01RV (lemma-integral-scheme-rational-functions); affine generic fibre and localization calculation in the proof of the returned item, step 5."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix a nonempty affine open $V=\\operatorname{Spec}A\\subseteq X$. By [def-weil-finite-integral-morphism], $W=f^{-1}V=\\operatorname{Spec}B$ is affine and $B$ is a finite $A$-module. Surjectivity [def-weil-surjective-morphism] makes $W$ nonempty. Apply [lem-sc-integral-function-field-affine-fraction] to $V\\subseteq X$ and $W\\subseteq Z$: both rings are domains; both opens contain the respective generic points; and the generic germ maps identify $F=\\operatorname{Frac}A$ and $L=\\operatorname{Frac}B$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-surjective-morphism",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WH, definition-integral; Tag 01RV, lemma-integral-scheme-rational-functions, integral case; the affine-stalk calculation of schemes-lemma-spec-sheaves (01HV)."
+   }
+  },
+  {
+   "text": "Write $\\varphi:A\\to B$ for the affine ring map. Surjectivity gives a point of $W$ over the generic point $(0)$ of $V$. By the spectrum construction [def-weil-affine-spectrum], its prime $\\mathfrak q$ has $\\varphi^{-1}(\\mathfrak q)=(0)$. Thus $\\varphi(a)=0$ implies $a\\in(0)$, proving injectivity. Consequently the generic prime $(0)$ of $B$ also contracts to $(0)$ of $A$, so $f(\\eta_Z)=\\eta_X$. The canonical generic stalk map $\\iota:F\\to L$ of [def-sfb-dominant-function-field-map] satisfies $\\iota(g_X(a)/g_X(s))=g_Z(\\varphi(a))/g_Z(\\varphi(s))$ for $s\\ne0$: stalk maps take the germ of a section to the germ of its pullback and preserve inverses. It is injective, since a unital map of fields has zero kernel. This fixes the field embedding used below.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sfb-dominant-function-field-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CC1, lemma-dominant-between-integral, proof: generic primes and contraction; the generic stalk map and naturality of germs."
+   }
+  },
+  {
+   "text": "The restriction $W\\to V$ is etale by [lem-a1-etale-open-restriction]. Apply [lem-weil-pbc-etale-algebra-residue-field-separable] with $\\mathfrak q=(0)\\subset B$ and $\\mathfrak p=(0)\\subset A$, whose contraction equality was proved in step 2. Their residue fields are $\\operatorname{Frac}B=L$ and $\\operatorname{Frac}A=F$. The induced residue-field map sends $a/s$ to $\\varphi(a)/\\varphi(s)$, hence is exactly $\\iota$ by step 2. The cited lemma therefore proves that this particular $L/F$ is finite separable.",
+   "uses": [
+    "lem-a1-etale-open-restriction",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GJ, lemma-etale-characterize, final assertion; Tag 02GL, lemma-etale-over-field (2), equivalently algebra-lemma-etale-at-prime (00U4)."
+   }
+  },
+  {
+   "text": "Put $S=A\\setminus\\{0\\}$ and $C=\\varphi(S)^{-1}B$. Since $B$ is a domain and $\\varphi$ is injective, fractions give an injective map $j:C\\to L$, $b/s\\mapsto g_Z(b)/g_Z(\\varphi(s))$: its kernel is zero because a zero quotient has zero numerator. The localization universal property [lem-weil-pbc-ring-localization-universal-property] also gives $F\\to C$, $a/s\\mapsto\\varphi(a)/s$, and $j$ respects $F$ by step 2. If $b_1,\\ldots,b_n$ generate the finite $A$-module $B$, then their images span $C$ over $F$: writing $b=\\sum a_i b_i$ gives $b/s=\\sum(a_i/s)(b_i/1)$. Thus $C$ is a finite-dimensional domain over $F$. Apply [lem-weil-pbc-finite-dimensional-domain-is-field] to conclude that $C$ is a field. Every nonzero $b\\in B$ now has an inverse in $C$. By the same localization universal property, the map $B\\to C$ extends to $L=\\operatorname{Frac}B\\to C$. Its composites with $j$ are identities, since on each fraction $b/t$ both composites return $b/t$. Hence $j:C\\cong L$ is the required $F$-algebra isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization; fraction relation preceding Definition 00CO; finite-dimensional-domain argument (rank-nullity) as stated by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "The compatible maps $B\\to C$ and $F\\to C$ give, by [lem-weil-pbc-algebra-tensor-pushout-universal-property], a ring homomorphism $\\alpha:B\\otimes_A F\\to C$ with $\\alpha(b\\otimes(a/s))=\\varphi(a)b/s$. Conversely every $1\\otimes s$ for $s\\in S$ is invertible, with inverse $1\\otimes(1/s)$. Apply [lem-weil-pbc-ring-localization-universal-property] to $B\\to B\\otimes_A F$ to obtain $\\beta:C\\to B\\otimes_A F$, $b/s\\mapsto b\\otimes(1/s)$. The composite $\\alpha\\beta$ sends every $b/s$ to itself. On pure tensors, $\\beta\\alpha(b\\otimes(a/s))=\\varphi(a)b\\otimes(1/s)=b\\otimes(a/s)$ by the balancing relation. Pure tensors generate [def-weil-pbc-module-tensor-product], so $\\beta\\alpha$ is the identity. Both maps preserve the structural $F$-maps, proving the asserted $F$-algebra isomorphism with the stated formula.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK, lemma-tensor-localization, explicit fraction formula and inverse; Tag 00CP, proposition-universal-property-localization."
+   }
+  },
+  {
+   "text": "Let $i_X=j_{\\eta_X}:\\operatorname{Spec}F\\to X$ and $i_Z=j_{\\eta_Z}:\\operatorname{Spec}L\\to Z$ be the canonical morphisms of [lem-weil-pbc-morphism-from-spec-field]; here $\\kappa(\\eta_X)=\\mathcal O_{X,\\eta_X}=F$ and $\\kappa(\\eta_Z)=L$, since these local rings are fields (step 1), so the residue maps are identities. By [lem-weil-pbc-residue-field-point-naturality] applied to $f$ and $\\eta_Z$, $f i_Z=i_X\\operatorname{Spec}(r)$, where $r:\\kappa(\\eta_X)\\to\\kappa(\\eta_Z)$ is the residue-field map of $f$; as the local rings are these fields, $r$ is the stalk map $\\iota$ of step 2, so $f i_Z=i_X\\operatorname{Spec}\\iota$. The same lemma for the open immersion $V\\subseteq X$, together with [lem-weil-pbc-spec-residue-field-identification] for $\\mathfrak p=(0)\\subset A$, shows that $i_X$ factors through $V$ as $\\operatorname{Spec}$ of the germ map $A\\to\\operatorname{Frac}A=F$, $a\\mapsto g_X(a)$; likewise the factorization of $i_Z$ through $W$ is $\\operatorname{Spec}(g_Z:B\\to L)$. The pair $(i_Z,\\operatorname{Spec}\\iota)$ defines $h:\\operatorname{Spec}L\\to Z\\times_X\\operatorname{Spec}F$ by [def-pc-fibre-product]. Since $i_X$ factors through $V$, [lem-weil-pbc-open-preimage-fibre-product] and the fibre-product universal property identify this target with $W\\times_V\\operatorname{Spec}F$: any pair over $X$ factors uniquely through $W=f^{-1}V$, with the same projections. By [lem-weil-pbc-fibre-product-affine-spectra] it is $\\operatorname{Spec}(B\\otimes_A F)$, its projections corresponding to $b\\mapsto b\\otimes1$ and $u\\mapsto1\\otimes u$. Under this description $h$ is the spectrum of $j\\alpha$, $b\\otimes u\\mapsto g_Z(b)\\iota(u)$, an isomorphism by steps 4 and 5. Therefore $h$ is an isomorphism, and its inverse is the displayed generic-fibre isomorphism in the statement. By its defining projection equations it identifies the two projections with $i_Z$ and $\\operatorname{Spec}\\iota$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4/01JQ, lemma-fibre-product-affine-schemes and lemma-fibre-product-affines; Tag 01JR, lemma-open-fibre-product; the universal property in Definition 01JP."
+   }
+  },
+  {
+   "text": "The fields and maps $\\iota,i_X,i_Z$ were defined on generic stalks, independent of a chart. On every nonempty affine chart the ring isomorphism just constructed sends $b\\otimes u$ to $g_Z(b)\\iota(u)$, so its spectrum is the same morphism $h$: [def-pc-fibre-product] says that a morphism to the pullback is uniquely determined by its two projections. Thus different charts give identical $h$ and identical inverse isomorphisms. More explicitly, on any smaller nonempty affine chart restrictions of $b$ have the same germ in $L$; denominators have the same inverse there, so $b/s\\mapsto g_Z(b)/g_Z(\\varphi(s))$ agrees with restriction. Two arbitrary charts contain the generic points; choose an affine neighbourhood inside their nonempty intersection and apply these equations twice. This proves chart independence and compatibility with both projections, without assuming intersections of affine opens are affine.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions, generic germ identifications; schemes-lemma-fibre-product-affine-schemes (01I4), universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-weil-affine-spectrum",
+  "def-sfb-dominant-function-field-map",
+  "lem-a1-etale-open-restriction",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-spec-residue-field-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01RV and 02GL; affine calculation assembled from Schemes 01I4/01JR and Algebra 00CP/00DK. The explicit assembly and canonicity verification are by Q116."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective finite etale map of integral schemes the generic fibre is the spectrum of the function field of the source, a finite separable field extension",
+   "results": "8 hits; Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.Scheme.residue_surjective, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.isField_of_universallyClosed",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Etale.iff_exists_algEquiv_prod classifies field-base algebras but does not identify an integral cover generic fibre with its own function field and both projections. Tensor-product and fraction-ring hits are algebraic inputs requiring the affine-scheme argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The function field of an integral finite etale cover is finite separable and its spectrum is the generic fibre",
+   "results": "8 hits; AlgebraicGeometry.Scheme.functionField, Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_isSeparable, AlgebraicGeometry.instFieldCarrierFunctionField, FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial, Algebra.FormallyEtale.of_isSeparable_aux",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Etale.iff_exists_algEquiv_prod classifies field-base algebras but does not identify an integral cover generic fibre with its own function field and both projections. Tensor-product and fraction-ring hits are algebraic inputs requiring the affine-scheme argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of a finite etale domain with the fraction field of its base domain equals its own fraction field and is separable",
+   "results": "8 hits; Algebra.Etale.baseChange, Algebra.TensorProduct.isField_of_isAlgebraic, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.IsAlgebraic.isBaseChange_of_isFractionRing",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Etale.iff_exists_algEquiv_prod classifies field-base algebras but does not identify an integral cover generic fibre with its own function field and both projections. Tensor-product and fraction-ring hits are algebraic inputs requiring the affine-scheme argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"functionField\", \"fiber\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Etale.iff_exists_algEquiv_prod classifies field-base algebras but does not identify an integral cover generic fibre with its own function field and both projections. Tensor-product and fraction-ring hits are algebraic inputs requiring the affine-scheme argument."
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*[Ee]tale|[Ee]tale.*functionField|functionField.*fiber|fiber.*functionField",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Etale.iff_exists_algEquiv_prod classifies field-base algebras but does not identify an integral cover generic fibre with its own function field and both projections. Tensor-product and fraction-ring hits are algebraic inputs requiring the affine-scheme argument."
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*[Ee]tale|[Ee]tale.*functionField|functionField.*fiber|fiber.*functionField",
+   "results": "{\"t\": \"2026-10-23T04:26:51Z\", \"tool\": \"grep\", \"query\": \"functionField.*[Ee]tale|[Ee]tale.*functionField|functionField.*fiber|fiber.*functionField\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the complete scheme-level statement. Affine fraction-field, etale algebra and algebraic base-change hits are constituent inputs; they do not alone assert the generic-fibre isomorphism with both projections and chart independence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The generic fiber of a finite etale integral scheme over an integral base is the spectrum of its function field as a finite separable extension",
+   "results": "{\"t\": \"2026-10-23T04:26:51Z\", \"tool\": \"leansearch\", \"query\": \"The generic fiber of a finite etale integral scheme over an integral base is the spectrum of its function field as a finite separable extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"Algebra.FormallyEtale.iff_isSeparable\"], \"digest\": \"4d155f089edf783c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the complete scheme-level statement. Affine fraction-field, etale algebra and algebraic base-change hits are constituent inputs; they do not alone assert the generic-fibre isomorphism with both projections and chart independence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-23T04:26:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"functionField\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the complete scheme-level statement. Affine fraction-field, etale algebra and algebraic base-change hits are constituent inputs; they do not alone assert the generic-fibre isomorphism with both projections and chart independence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective finite etale morphism between integral schemes the generic fibre is canonically the spectrum of the source function field with both projections, and the field extension is finite separable",
+   "results": "{\"t\": \"2026-10-23T04:26:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a surjective finite etale morphism between integral schemes the generic fibre is canonically the spectrum of the source function field with both projections, and the field extension is finite separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"2841057c7103a66e\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the complete scheme-level statement. Affine fraction-field, etale algebra and algebraic base-change hits are constituent inputs; they do not alone assert the generic-fibre isomorphism with both projections and chart independence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a finite extension of integral domains with the fraction field of the base gives the fraction field of the extension; identify the generic fibre of the finite morphism",
+   "results": "{\"t\": \"2026-10-23T04:28:44Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a finite extension of integral domains with the fraction field of the base gives the fraction field of the extension; identify the generic fibre of the finite morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Algebra.instIsEpiOfIsDomainOfIsFractionRing\", \"Algebra.FiniteType.baseChange\"], \"digest\": \"93682f5cc38b1b9b\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the complete scheme-level statement. Affine fraction-field, etale algebra and algebraic base-change hits are constituent inputs; they do not alone assert the generic-fibre isomorphism with both projections and chart independence."
+  },
+  {
+   "tool": "grep",
+   "query": "isBaseChange_of_isFractionRing|functionField_isFractionRing_of_isAffineOpen|iff_exists_algEquiv_prod",
+   "results": "{\"t\": \"2026-10-23T04:40:09Z\", \"tool\": \"grep\", \"query\": \"isBaseChange_of_isFractionRing|functionField_isFractionRing_of_isAffineOpen|iff_exists_algEquiv_prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\"], \"digest\": \"f88ba0cae800edfd\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the complete scheme-level statement. Affine fraction-field, etale algebra and algebraic base-change hits are constituent inputs; they do not alone assert the generic-fibre isomorphism with both projections and chart independence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-etale-normal-generic-components",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, etaleness of normalization off the branch points: select the field factor defined by the chosen radicals, rather than assuming all the binomials are irreducible. Extracted argument: returned step 5: injective affine rings, localization of the generic fibre, one separable field factor and its function-field identification.",
+   "via": [
+    "lem-sfb-finite-etale-normal-generic-components",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-finite-etale-generic-field",
+  "worker": "stage1",
+  "summary": "Q116 checked the complete generic-fibre statement, reused existing Mathlib leaves and definitions, and supplied seven proof steps including both projections and chart independence. No new nodes or mathematical changes to the statement. Maintainer reader FIX: the generic-point morphisms of the statement and step 6 now cite their definition and properties (lem-weil-pbc-morphism-from-spec-field, lem-weil-pbc-residue-field-point-naturality, lem-weil-pbc-spec-residue-field-identification), all Mathlib leaves.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), de Jong §3.5 marking branch: the integral-component generic field identification formerly hidden in lem-sfb-finite-etale-normal-generic-components step 5. The imported created.item chain has no blueprint ancestor (blueprint_refs.py ancestor returns None); inherited provenance is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-231797cae",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-231797cae (reviewer sub-agent of L); spot-checked: S1 split of a statement-only item: 7 steps, no new nodes, no re-split note, and the item is not split or reviewed on live or side-live. The statement is unchanged apart from adding the tensor and localization definition citations. I checked it against Stacks 02GL(2) (morphisms.tex l.8175) and 01RV (l.12705); it is true. Edge cases: identity cover, a field base, purely inseparable (excluded), reducible cover (excluded by integrality). No duplicate found: finite-dominant-generic-pushforward-stalk, normalized-base-relative-factorization, per-generic-fibre-finiteness and the parent are all different statements; the parent cites the item, and the item does not cite the parent. Steps 1-5 and 7 are correct against the cited statements: finite gives an affine W=Spec B; surjectivity gives W nonempty and φ injective; lem-a1 open restriction plus the residue-field-separable leaf at the zero primes give ι finite separable; φ(S)^{-1}B is a finite-dimensional domain, hence a field equal to L; the tensor pushout and localization UP give B⊗_A F ≅ S^{-1}B; fibre-product uniqueness gives chart independence. All citations are Mathlib leaves, definitions or same-unit nodes, so no tool_use is needed and no SGA is cited. One B3/C1 fault, repaired: the generic-point morphisms Spec F→X and Spec L→Z (statement and step 6) had no node, and step 6 used without citation both i_X|_V = Spec(germ map A→F) and f i_Z = i_X Spec ι. In fixes/dag/nodes/sec-six-functors-basics/lem-sfb-integral-finite-etale-generic-field.json I added lem-weil-pbc-morphism-from-spec-field to stmt_deps and to the statement text. Step 6 now cites that node, lem-weil-pbc-residue-field-point-naturality and lem-weil-pbc-spec-residue-field-identification (all Mathlib leaves), with proof_deps updated to match and the step set to elementary=false.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralFiniteEtaleGenericField",
+  "declaration": "AlgebraicGeometry.integral_finite_etale_generic_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralFiniteEtaleGenericField.lean",
+  "statement": "theorem integral_finite_etale_generic_field {X Z : Scheme.{u}} [IsIntegral X] [IsIntegral Z] (f : Z ⟶ X) [IsFinite f] [Etale f] [Surjective f] : ∃ (a : Algebra X.functionField Z.functionField), a = (f.functionFieldMap f.apply_genericPoint_of_flat).hom.toAlgebra ∧ FiniteDimensional X.functionField Z.functionField ∧ Algebra.IsSeparable X.functionField Z.functionField ∧ (∃! e : Spec Z.functionField ≅ pullback f X.fromSpecFunctionField, e.hom ≫ pullback.fst f X.fromSpecFunctionField = Z.fromSpecFunctionField ∧ e.hom ≫ pullback.snd f X.fromSpecFunctionField = Spec.map (CommRingCat.ofHom (algebraMap X.functionField Z.functionField))) ∧ ∀ (V : X.Opens) (_ : IsAffineOpen V) (_ : Nonempty V), ∃ (_ : Nonempty (f ⁻¹ᵁ V)), IsAffineOpen (f ⁻¹ᵁ V) ∧ Function.Injective (f.app V) ∧ IsFractionRing Γ(X, V) X.functionField ∧ IsFractionRing Γ(Z, f ⁻¹ᵁ V) Z.functionField ∧ ∃ (ab : Algebra Γ(X, V) Γ(Z, f ⁻¹ᵁ V)), ab = (f.app V).hom.toAlgebra ∧ ∃ (c : X.functionField →+* LocalizedModule Γ(X, V)⁰ Γ(Z, f ⁻¹ᵁ V)) (α : (Γ(Z, f ⁻¹ᵁ V) ⊗[Γ(X, V)] X.functionField) ≃+* LocalizedModule Γ(X, V)⁰ Γ(Z, f ⁻¹ᵁ V)) (β : LocalizedModule Γ(X, V)⁰ Γ(Z, f ⁻¹ᵁ V) ≃+* Z.functionField), (∀ t : X.functionField, α (1 ⊗ₜ[Γ(X, V)] t) = c t) ∧ (∀ t : X.functionField, β (c t) = algebraMap X.functionField Z.functionField t) ∧ (∀ (b : Γ(Z, f ⁻¹ᵁ V)) (r : Γ(X, V)) (s : Γ(X, V)⁰), α (b ⊗ₜ[Γ(X, V)] (X.germToFunctionField V r / X.germToFunctionField V s)) = LocalizedModule.mk ((f.app V r) * b) s) ∧ (∀ (b : Γ(Z, f ⁻¹ᵁ V)) (s : Γ(X, V)⁰), β (LocalizedModule.mk b s) = Z.germToFunctionField (f ⁻¹ᵁ V) b / Z.germToFunctionField (f ⁻¹ᵁ V) (f.app V s)) ∧ (∀ (b : Γ(Z, f ⁻¹ᵁ V)) (t : X.functionField), β (α (b ⊗ₜ[Γ(X, V)] t)) = Z.germToFunctionField (f ⁻¹ᵁ V) b * algebraMap X.functionField Z.functionField t) ∧ (∀ (W : Z.Opens) (hW : W ≤ f ⁻¹ᵁ V) (_ : Nonempty W) (b : Γ(Z, f ⁻¹ᵁ V)) (s : Γ(X, V)⁰), β (LocalizedModule.mk b s) = Z.germToFunctionField W (Z.presheaf.map (homOfLE hW).op b) / Z.germToFunctionField W (Z.presheaf.map (homOfLE hW).op (f.app V s)))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4da3bad17",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 02GL(2)/01RV. Hypotheses are exactly IsIntegral X and Z plus IsFinite/Etale/Surjective f, with one universe u. Algebra a is pinned to the generic stalk map functionFieldMap (same data as dominantFunctionFieldAlgebra), with FiniteDimensional and IsSeparable. ∃! e : Spec L ≅ pullback f X.fromSpecFunctionField with fst = Z.fromSpecFunctionField and snd = Spec.map algebraMap (uniqueness is true and expresses canonicity). For every nonempty affine V: preimage nonempty and affine, f.app V injective, both IsFractionRing via germs, ab pinned to f.app V; α: B⊗F≃S⁻¹B and β: S⁻¹B≃L with c forced by α, giving F-algebra isos, the node's two fraction formulas, compatibility with both projections, and a restriction/chart clause. Edge cases fine (empty excluded by IsIntegral, empty V excluded as in the node, non-Noetherian bases and char p allowed). lean.statement verbatim; node differs from side-live only in lean; stmt_deps unchanged; the two stmt_deps without lean records are status-mathlib leaves (TensorProduct, fromSpecResidueField). No definitions, proof is sorry, docstrings have source/blueprint and 7 steps, report has Worker report and Second reading by Q39 sections. No compile (no change made)."
+ }
+}

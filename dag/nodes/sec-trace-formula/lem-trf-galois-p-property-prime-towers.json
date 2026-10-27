@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-galois-p-property-prime-towers",
+ "kind": "statement",
+ "title": "Prime-degree towers from the Galois p-property",
+ "statement": "Let $p$ be a prime and let $F$ be a field [def-weil-field] of characteristic either $0$ or $p$. Assume that every finite Galois extension $N/F$ has degree a power of $p$. Galois means normal and separable: every irreducible polynomial over $F$ with a root in $N$ splits in $N$, and minimal polynomials of elements have distinct roots. For every finite field extension $L/F$ there are $n\\ge0$ and intermediate fields $$F=F_0\\subset F_1\\subset\\cdots\\subset F_n=L,\\qquad [F_{i+1}:F_i]=p\\quad(0\\le i<n).$$ Degrees mean vector-space dimensions. No separability hypothesis is imposed on $L/F$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49, subgroup-chain argument and the separate purely inseparable argument; also proof of Corollary 6.1.6, printed p. 41.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Every element of the finite-dimensional extension $L/F$ is algebraic: its powers are linearly dependent over $F$. Apply the separable-first lemma to obtain $F\\subseteq E\\subseteq L$ with $E/F$ separable and $L/E$ purely inseparable. Both extensions are finite: $E$ is an $F$-linear subspace of $L$, and any finite $F$-spanning set of $L$ also spans over $E$. In characteristic zero the same lemma gives $E=L$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030K, lemma-separable-first, including its characteristic-zero case."
+   }
+  },
+  {
+   "text": "Apply the finite-Galois-envelope lemma to the single finite separable extension $E/F$. It gives an $F$-embedding $\\iota:E\\hookrightarrow N$ with $N/F$ finite Galois. Identify $E$ with its image for the subgroup argument. Put $G=\\operatorname{Aut}_F(N)$. The finite-Galois fixed-field theorem gives that $G$ is finite, $|G|=[N:F]$, and $N^G=F$. By the hypothesis of this item choose $a\\geq0$ with $|G|=p^a$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DT (lemma-normal-closure), 0EXM (lemma-normal-closure-galois), 09I1 (lemma-finite-Galois), and 09DW (theorem-galois-theory)."
+   }
+  },
+  {
+   "text": "Let $H=\\{g\\in G:g|_E=1\\}$. The Galois fixed-field recovery theorem for intermediate fields, applied to the Galois extension $N/F$ and its intermediate field $E$, gives $N^H=E$. The subgroup $H$ is finite and acts faithfully on $N$, so the finite-faithful-action theorem gives $[N:E]=|H|$. The intermediate fields are finite over $F$ as subspaces of $N$, and $N$ is finite over each because an $F$-spanning set still spans. Degree multiplicativity now gives $p^a=|H|[E:F]$. Unique factorization of positive integers implies $|H|=p^b$ for some $0\\leq b\\leq a$: every prime divisor of the positive divisor $|H|$ of $p^a$ must be $p$.",
+   "uses": [
+    "lem-exc-etale-galois-fixed-field-subgroup",
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DW (theorem-galois-theory), 09I3 (lemma-galois-over-fixed-field), and 09G9 (lemma-multiplicativity-degrees)."
+   }
+  },
+  {
+   "text": "Construct $H_0,\\ldots,H_{a-b}$ inductively with $H_0=H$, $H_j\\subseteq H_{j+1}$, and $|H_j|=p^{b+j}$. At $j<a-b$, the integer $p^{b+j+1}$ divides $p^a=|G|$, so apply the subgroup-enlargement leaf to $H_j$. This supplies the next subgroup with the required containment and cardinality. At the last stage $H_{a-b}=G$, because it is a subset of the finite set $G$ with the same cardinality. If $a=b$ this is the length-zero chain.",
+   "uses": [
+    "lem-trf-subgroup-prime-power-successor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "The finite-group input to Tag 09DW, theorem-galois-theory: Sylow.exists_subgroup_card_pow_succ, Mathlib/GroupTheory/Sylow.lean:645-647; elementary finite induction."
+   }
+  },
+  {
+   "text": "Set $r=a-b$ and $T_i=N^{H_{r-i}}$ for $0\\leq i\\leq r$. The defining fixed-point conditions give $T_i\\subseteq T_{i+1}$; the endpoints are $T_0=F$ and $T_r=E$ by steps 2 and 3. Each subgroup acts faithfully, so the finite-action degree theorem gives $[N:T_i]=|H_{r-i}|=p^{a-i}$. For $i<r$, degree multiplicativity yields $p^{a-i}=p^{a-i-1}[T_{i+1}:T_i]$, hence $[T_{i+1}:T_i]=p$. These inclusions are strict because $p>1$. Pull this chain back through $\\iota$: the inverse images of the $T_i\\subseteq\\iota(E)$ are intermediate fields of the original $E/F$, and $\\iota$ maps a basis of each successive extension bijectively to a basis, so all successive degrees remain $p$.",
+   "uses": [
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09I3 (lemma-galois-over-fixed-field) and 09G9 (lemma-multiplicativity-degrees); fixed-field inclusion follows directly from the definition."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}F=0$, then $E=L$, and the preceding chain finishes the proof. If $\\operatorname{char}F=p$, the field $E$ also has characteristic $p$, since its structural inclusion is injective. Apply the purely-inseparable pth-root-tower theorem to the finite purely inseparable extension $L/E$: it gives $E=U_0\\subset\\cdots\\subset U_s=L$ with each successive degree $p$. Concatenate the chain from $F$ to $E$ with this one, listing $E$ only once. Their finitely many intermediate fields lie in $L$ and every successive degree is $p$. Empty chains are allowed when either extension is trivial; in particular $L=F$ gives $n=0$.",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-pth-root-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030K (lemma-separable-first, characteristic-zero case already applied in step 1) and 09HI (lemma-finite-purely-inseparable)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-trf-subgroup-prime-power-successor",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Expanded assembly of Tags 030K, 09DT, 0EXM, 09DW, 09I1, 09I3, 09G9, 09HI and the Mathlib Sylow enlargement theorem; following the subgroup/purely-inseparable route in Temkin, proof of Theorem 6.3.1, printed p. 49."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If every finite Galois extension of a field has p power degree then every finite field extension is a tower of degree p extensions",
+   "results": "OK 8 hits: isPurelyInseparable_iff_fd_isPurelyInseparable, finInsepDegree_eq_pow, IsPurelyInseparable.instOfHasExponent, IsPurelyInseparable.finrank_eq_pow, FiniteField.Extension, IsPurelyInseparable.hasExponent_of_finiteDimensional, IsPurelyInseparable, perfectClosure.isPurelyInseparable; ; digest ea5248c9fcf854ca",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite extension of a field with pro p absolute Galois group admits a tower with successive degrees p including inseparable extensions",
+   "results": "OK 8 hits: IsGalois.tower_top_of_isGalois, IsPurelyInseparable.tower_top, IntermediateField.isPurelyInseparable_tower_top, FiniteField.card_algEquiv_extension, IntermediateField.isPurelyInseparable_tower_bot, InfiniteGalois.profiniteGalGrp, FiniteField.natCard_algEquiv_extension, IsGaloisGroup.finite; ; digest 7f50783531370e5d",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPGroup, Subgroup",
+   "results": "OK 12 hits: IsPGroup.to_quotient, IsPGroup.to_subgroup, IsPGroup.center_nontrivial, IsPGroup.bot_lt_center, IsPGroup.of_bot, IsPGroup.index, IsPGroup.to_inf_left, IsPGroup.to_inf_right; ; digest 479eab69876879f4",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPGroup|prime.*tower|tower.*prime|descen.*finrank|descen.*degree|descen.*field",
+   "results": "OK 0 hits: ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extensions over a field all of whose finite Galois groups are p groups are built by adjoining elements of prime degree p",
+   "results": "OK 8 hits: FiniteField.Extension, FiniteGaloisIntermediateField, IsAbelianGalois, exists_root_adjoin_eq_top_of_isCyclic, isCyclic_tfae, GaloisField.instIsGaloisOfFinite, FiniteField.instIsCyclicAlgEquivOfFinite, FiniteGaloisIntermediateField.finGaloisGroup; ; digest 579207741284257f",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of a field with only p power degree finite Galois extensions is a tower of degree p extensions",
+   "results": "{\"t\": \"2026-10-24T09:44:33Z\", \"tool\": \"leanfinder\", \"query\": \"A finite extension of a field with only p power degree finite Galois extensions is a tower of degree p extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.Extension\", \"FiniteGaloisIntermediateField\", \"isPurelyInseparable_iff_fd_isPurelyInseparable\", \"IsPurelyInseparable\", \"GaloisField.instIsGaloisOfFinite\", \"IsPurelyInseparable.finrank_eq_pow\", \"FiniteField.Extension.exists_frob_pow_eq\", \"IsPurelyInseparable.hasExponent_of_finiteDimensional\"], \"digest\": \"e5768bef5633a534\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the hits give only finite-field examples, purely inseparable degree formulas, or individual tools",
+   "digest": "e5768bef5633a534"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite extension of a p special field can be refined into degree p field extensions",
+   "results": "{\"t\": \"2026-10-24T09:47:46Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite extension of a p special field can be refined into degree p field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.Extension\", \"finInsepDegree_eq_pow\", \"IsPurelyInseparable.finrank_eq_pow\", \"IntermediateField.isSimpleOrder_of_finrank_prime\", \"IsPRadical.isPurelyInseparable\", \"IsPurelyInseparable.hasExponent_of_finiteDimensional\", \"FiniteField.instFieldExtension\", \"isPurelyInseparable_iff_fd_isPurelyInseparable\"], \"digest\": \"d7183bd901c29404\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the hits give only finite-field examples, purely inseparable degree formulas, or individual tools",
+   "digest": "d7183bd901c29404"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPGroup, Subgroup",
+   "results": "{\"t\": \"2026-10-24T09:44:33Z\", \"tool\": \"loogle\", \"query\": \"IsPGroup, Subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsPGroup.to_quotient\", \"IsPGroup.to_subgroup\", \"IsPGroup.center_nontrivial\", \"IsPGroup.bot_lt_center\", \"IsPGroup.of_bot\", \"IsPGroup.index\", \"IsPGroup.to_inf_left\", \"IsPGroup.to_inf_right\"], \"digest\": \"479eab69876879f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the hits give only finite-field examples, purely inseparable degree formulas, or individual tools",
+   "digest": "479eab69876879f4"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite field extensions over a field with pro p absolute Galois group have towers of degree p",
+   "results": "{\"t\": \"2026-10-24T09:45:05Z\", \"tool\": \"leansearch\", \"query\": \"Finite field extensions over a field with pro p absolute Galois group have towers of degree p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.Extension\", \"FiniteField.natCard_algEquiv_extension\", \"FiniteField.instFieldExtension\", \"FiniteField.Extension.frob\", \"FiniteField.instIsCyclicAlgEquivOfFinite\", \"FiniteField.card_algEquiv_extension\", \"FiniteField.instFiniteExtension\", \"IsGalois.tower_top_of_isGalois\"], \"digest\": \"a52151f004b44cd4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the hits give only finite-field examples, purely inseparable degree formulas, or individual tools",
+   "digest": "a52151f004b44cd4"
+  },
+  {
+   "tool": "grep",
+   "query": "prime.*tower|tower.*prime|IsPGroup",
+   "results": "{\"t\": \"2026-10-24T09:45:05Z\", \"tool\": \"grep\", \"query\": \"prime.*tower|tower.*prime|IsPGroup\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the hits give only finite-field examples, purely inseparable degree formulas, or individual tools",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-tame-prime-tower",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: §2.1, p. 9 (maximal tame extension has pro-p absolute Galois group); §6.1 opening, p. 36 (criterion); proof of Theorem 6.3.1, first paragraph, p. 49 (finite tame descent and prime-degree towers). Supporting input: Proof of Theorem 6.3.1, first paragraph, printed p. 49, subgroup-chain argument and the separate purely inseparable argument; also proof of Corollary 6.1.6, printed p. 41.",
+   "via": [
+    "lem-trf-valued-tame-prime-tower",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-galois-p-property-prime-towers",
+  "worker": "stage1",
+  "summary": "Separated the finite extension into its separable and purely inseparable parts, passed to a finite Galois envelope, constructed an explicit nested chain of subgroups by one-power Sylow enlargement, computed all fixed-field degrees and pulled back to L. Reused all existing field-theory nodes; two new exact Mathlib leaves supply intermediate fixed-field recovery and prescribed subgroup enlargement. No statement change.",
+  "blueprint": "Realizes the inherited semistable-alteration supporting branch under lem-trf-local-term-locality (1)-(2), at Temkin proof of Theorem 6.3.1, printed p. 49, subgroup-chain and purely inseparable sentences. The latest blueprint locality proof itself stops at Varshavsky; this is an inherited auxiliary branch, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Generic finite Galois envelope for the separable part; no field-theoretic envelope theorem is provided by this trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-fixed-field",
+    "why": "Generic automorphism-count and fixed-base-field theorem for a finite Galois extension."
+   },
+   {
+    "node": "lem-wf-finite-field-action-fixed-degree",
+    "why": "Generic degree formula for a finite faithful field action, applied to the subgroups in the constructed chain."
+   },
+   {
+    "node": "lem-weil-pbc-field-degree-multiplicativity",
+    "why": "Generic multiplicativity of finite field degrees, used to compute successive fixed-field degrees."
+   },
+   {
+    "node": "lem-weil-pbc-separable-first-purely-inseparable",
+    "why": "Generic algebraic-extension decomposition into a separable part followed by a purely inseparable part."
+   },
+   {
+    "node": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "why": "Generic degree-p root tower for the final purely inseparable part, exactly the second branch of the source argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-55b83d5f5",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-55b83d5f5 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full against Stacks fields.tex (09DW statement and proof at 2784-2806; tags 030K/09DT/0EXM/09I1/09I3/09G9/09HI all exist), Mathlib Sylow.lean:643-647 and Galois/Basic.lean:312-315, and every cited node statement. The Temkin PDF is missing from literature/, so the proof stays agent-written with the WANTED line recorded. All six steps are correct. Step 1: separable-first plus elementary finiteness of E/F and L/E. Step 2: n=1 Galois envelope, |G|=[N:F]=p^a. Step 3: Artin degree for the faithful H gives |H|=p^b. Step 4: induction with the Sylow enlargement keeping H inside, ending at G by cardinality. Step 5: fixed fields T_i=N^{H_{r-i}}; I checked the orientation (T_0=F, T_r=E, successive degrees p) and the pullback through iota. Step 6: pth-root tower for L/E in char p, concatenated with the chain; in char 0, E=L. Edge cases checked: L=F, E=F, E=L, a=b, a=0, p=2, E/F not normal. The only citer, lem-trf-valued-tame-prime-tower, applies it to T of char 0 or p, which the statement covers. lem-trf-subgroup-prime-power-successor is an exact leaf and no duplicate exists. FIX (C5): new node lem-trf-finite-galois-intermediate-fixed-recovery duplicates the existing Mathlib leaf lem-exc-etale-galois-fixed-field-subgroup (any Galois K/k, H = automorphisms fixing L pointwise, fixed field = L; InfiniteGalois.fixedField_fixingSubgroup), which the report's not-duplicates list missed. In the corrected item, step 3 uses and proof_deps now cite the existing node and the step text was adjusted; I dropped the new node. I accept the six declared tool_uses: generic field theory in a deep auxiliary branch, no unit step replaced. No SGA is used.; 1 file(s) fixed by the reviewer"
+ }
+}

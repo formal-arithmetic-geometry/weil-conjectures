@@ -21,122 +21,90 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\operatorname{Mod}(A)$ and $\\mathcal V=\\operatorname{Tow}(\\mathcal A)$. Restriction along any coefficient-ring map changes only the action, so preserves the sectionwise kernels and the sheafified sectionwise cokernels described in [def-weil-sheaf-of-modules-category]. Thus the componentwise functor $U^0:\\mathscr S(B)\\to\\mathcal V$ is exact, by the assumed componentwise exactness and [lem-weil-tower-category-levelwise-abelian]. Compatibility of $A\\to B_n$ makes every transition $A$-linear. By [lem-weil-pbc-exact-functor-derived-factorization], $U^0$ induces the asserted functor $U$ on ordinary derived categories. Its evaluations are the termwise restrictions of the input evaluations; this follows degree by degree from [def-pc-sheaf-restrict-scalars].",
+   "text": "Construct U^0 explicitly: its nth module is restriction along A to B_n, and its arrows are the given semilinear transitions followed by the scalar-composition identification. The strict-system identity and composition equations verify the functor laws on sections. Evaluation identifies it with the exact coefficient restriction of the nth system evaluation, so it preserves finite limits and colimits componentwise. Localize it and its evaluation comparisons to obtain U.",
    "uses": [
+    "def-pc-sheaf-restrict-scalars",
     "def-weil-sheaf-of-modules-category",
     "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Module-sheaf kernels and cokernels; exact restriction of the scalar action. The argument is written out using the cited module-category statement."
-   }
-  },
-  {
-   "text": "The category $\\mathcal V$ is Grothendieck abelian by [lem-weil-pbc-small-module-diagrams-grothendieck], with index the small countable category $\\mathbf N_{\\ge1}^{op}$. Apply [lem-weil-pbc-kinjective-functorial-existence] to obtain a functorial resolution $P\\to I(P)$ of every complex of constant-$A$ towers. The individual module-sheaf categories also have K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. Here the site is small and all ring sheaves and tower indices lie in the chosen coefficient universe, as required by these statements. No boundedness or exactness of infinite products is required.",
-   "uses": [
-    "lem-weil-pbc-small-module-diagrams-grothendieck",
-    "lem-weil-pbc-kinjective-functorial-existence",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck, applied to the small diagram module category."
-   }
-  },
-  {
-   "text": "Let $H^0:\\mathcal V\\to\\operatorname{Tow}(\\operatorname{Ab})$ send a tower to its tower of global sections, using the actual transition maps. It is additive: the maps on sections preserve addition, and finite biproducts and their maps are componentwise. Applying an additive functor degreewise respects homotopies, shifts and mapping cones (a cone uses only a finite biproduct in each degree); hence it gives an exact functor $K(\\mathcal V)\\to D(\\operatorname{Tow}(\\operatorname{Ab}))$. The hypotheses of [lem-weil-pbc-kinjective-total-derived] now hold by Step 2. Obtain $R H^0=R\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}$ with its universal unit, computed by $H^0I(P)$. Define $G=(R H^0)U$. This composition is a functor on the ordinary derived category, since both factors are functors there; it is not merely a choice of objects at each level.",
-   "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 070Y: K-injective computation and existence of the total right derived functor."
-   }
-  },
-  {
-   "text": "For a complex $P$ of constant-$A$ towers, the resolution $P\\to I$ of Step 2 evaluates to $P_n\\to I_n$, a quasi-isomorphism by exact evaluation [lem-weil-tower-category-levelwise-abelian]. By [lem-weil-tower-evaluation-kinjective], $I_n$ is K-injective over $A$. (Reindex positive integers by $n\\mapsto n-1$.) Thus [lem-weil-pbc-kinjective-total-derived] identifies both $e_nR H^0(QP)$ and $R\\Gamma_A(QP_n)$ with the same complex $\\Gamma(\\mathcal C,I_n)$, using their derived units. Here $e_n$ on $D(\\operatorname{Tow}(\\operatorname{Ab}))$ is the derived functor of the exact evaluation, computed termwise by [lem-weil-pbc-exact-functor-derived-factorization], and the tower transitions give natural maps $e_{n+1}\\to e_n$ computed termwise in the same way. This specifies $\\beta_n:e_nR H^0\\cong R\\Gamma_A e_n$. For a derived input morphism, represent it by a chain map between K-injective tower representatives, using [lem-weil-pbc-kinjective-hom-derived]; the evaluated map computes both sides. Homotopic maps give homotopic section maps, so these identifications are natural and independent of representatives. The same equality on $\\Gamma(I_{n+1})\\to\\Gamma(I_n)$ proves $\\beta_n t=R\\Gamma_A(t)\\beta_{n+1}$ for the actual tower transitions.",
-   "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-kinjective-hom-derived",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, proof paragraph beginning with the exact left adjoint to evaluation; constant ring-sheaf module version via the cited general tower-evaluation theorem."
+    "place": "Tags 0941 and 0D6E; exact restriction, K-injective computation and normalized derived-unit comparison."
    }
   },
   {
-   "text": "Write $H_R=R\\Gamma(\\mathcal C,-):D(\\operatorname{Mod}(R))\\to D(\\operatorname{Ab})$ and $\\eta_R$ for its derived unit. For a ring-sheaf map $R\\to S$, let $r_{R,S}$ be exact restriction. The underived equality $\\Gamma_R r_{R,S}=\\Gamma_S$ and the universal property in [lem-weil-pbc-kinjective-total-derived] give a unique comparison $\\sigma_{R,S}:H_S\\to H_Rr_{R,S}$ with $\\sigma_{R,S,Q M}\\eta_{S,M}=\\eta_{R,r_{R,S}M}$ for every complex $M$. It is invertible: [lem-weil-pbc-restriction-ringed-topos-module-direct-image] realizes $r_{R,S}$ as the direct image of $(\\operatorname{Sh}(\\mathcal C),S)\\to(\\operatorname{Sh}(\\mathcal C),R)$. Compose with the global-sections ringed-topos morphism $g$ [def-weil-pbc-ringed-topos-morphism] to the one-point site with ring $\\underline{\\mathbf Z}$, whose module complexes are abelian-group complexes by [lem-weil-pbc-singleton-site-module-comparison]: $g^{-1}$ sends a set $E$ to the constant sheaf [def-weil-pbc-constant-sheaf], which preserves finite limits as the sheafification of a finite-limit-preserving constant presheaf; $g_*F=\\operatorname{Hom}(*,F)=\\Gamma(\\mathcal C,F)$ is its right adjoint by the universal property of sheafification; the ring map is the unit $\\underline{\\mathbf Z}\\to R$. Thus $g_*$ on $R$-modules is $\\Gamma_R$. For an $S$-K-injective $L$ and an $R$-K-injective resolution $j:r_{R,S}L\\to K$, [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] says that $\\Gamma(j)$ is a quasi-isomorphism. The unit equation computes $\\sigma_{R,S,QL}$ by precisely $\\Gamma(j)$ under the resolution identifications. It is therefore the canonical composition isomorphism; every derived object has such an $L$ by [prop-pur-kinjective-resolutions-exist]. Exact restriction and its right derived functor agree termwise by [lem-weil-pbc-exact-functor-derived-factorization]. Take $R=A,S=B_n$ and use $\\sigma_{A,B_n}^{-1}$ after $\\beta_n$ to obtain the second required comparison.",
+   "text": "Module sheaves on the essentially small site are Grothendieck in the coefficient universe by lem-pur-ringed-site-grothendieck-coefficient-universe. A separator of the constant-coefficient tower category is the coproduct, over the natural-number indices, of evaluation left adjoints of a separator of modules. Evaluation detects inequality of natural transformations; its adjunction proves that this family separates. Filtered colimits and their exactness are computed pointwise. Thus this tower category is Grothendieck in the same coefficient universe. Obtain K-injective resolutions and derive additive sections by the K-injective localizer: a quasi-isomorphism between K-injectives is a homotopy equivalence, and additive sections preserve that equivalence.",
    "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-pbc-ringed-topos-morphism",
-    "lem-weil-pbc-singleton-site-module-comparison",
-    "def-weil-pbc-constant-sheaf"
+    "lem-pur-ringed-site-grothendieck-coefficient-universe",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-kinjective-total-derived"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, proof: exact left adjoint to constant-coefficient evaluation; Tag 0D6E, lemma-derived-pushforward-composition; agent combination with derived-functor units."
+    "place": "Tags 0941 and 0D6E; exact restriction, K-injective computation and normalized derived-unit comparison."
    }
   },
   {
-   "text": "The scalar comparisons have the needed composition normalization. For $R\\to S\\to T$, identify $r_{R,S}r_{S,T}=r_{R,T}$ by their identical actions [def-pc-sheaf-restrict-scalars]. Both $\\sigma_{R,T}$ and $(\\sigma_{R,S}r_{S,T})\\sigma_{S,T}$, after precomposition with $\\eta_T$, equal $\\eta_Rr_{R,T}$ by the unit equations of Step 5. The uniqueness clause of [lem-weil-pbc-kinjective-total-derived] therefore makes them equal. The identity-ring comparison is the identity by the same argument. This is a direct application of the cited universal property, rather than an additional coefficient-coherence assumption.",
+   "text": "Use the comparison-descent and derived-extensionality argument of lem-coef-tower-right-derived-evaluation for the chosen derived pairs. Exact evaluation factors turn the two units into transformations with the same source. Both are invertible on K-injective towers because constant-coefficient evaluation preserves K-injectivity. Descend their comparison to the derived category. Naturality of the units and the localized transition factors imply its actual-transition identity after cancellation on K-injectives; derived extensionality extends it to all objects. Define G as this tower-derived functor after U.",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-coef-tower-right-derived-evaluation",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0941 and 0D6E; exact restriction, K-injective computation and normalized derived-unit comparison."
+   }
+  },
+  {
+   "text": "Apply lem-coef-restriction-sections-acyclic to a K-injective S-complex and a K-injective resolution of its scalar restriction. Naturality of the R-derived unit and its invertibility at that resolution show that the R-unit is already invertible at the restricted complex. Descend the S-unit and restricted R-unit to an invertible scalar comparison. This gives exactly scalar_unit, including the canonical exact localization factors. Precompose the composite of two scalar comparisons with the derived unit; its normalization, naturality and the exact restriction-composition factors give the same unit equation as the direct comparison. The universal property of right derivation proves the cocycle.",
+   "uses": [
+    "lem-coef-restriction-sections-acyclic",
+    "lem-coef-tower-right-derived-evaluation",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0941 and 0D6E; exact restriction, K-injective computation and normalized derived-unit comparison."
+   }
+  },
+  {
+   "text": "Localize the ordinary compatibility of U^0 with system transitions. Its equality on complexes follows from the recorded sectionwise transition equation; the canonical exact localization factors give the equality on the derived category. Combine this equality with the tower comparison transition equation. Naturality of the scalar comparison moves the system transition across it, and the cocycle cancels the two scalar comparisons into the inverse comparison for B_n to B_m. This is finite_transition. All maps used are natural transformations, so naturality in the derived input is retained. Use the already proved exact-square factorization helper of lem-pod-derived-exact-square-composition to normalize the evaluation squares, rather than reproving that factorization.",
+   "uses": [
+    "def-coef-system-derived-transition",
+    "def-coef-tower-derived-evaluation-transition",
+    "lem-pod-derived-exact-square-composition"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, proof: exact left adjoint to constant-coefficient evaluation; Tag 0D6E, lemma-derived-pushforward-composition; agent combination with derived-functor units."
-   }
-  },
-  {
-   "text": "Put $C=B_{n+1}$, $S=B_n$, and let $d:J_{n+1}\\to r_{C,S}J_n$ be the given transition in $D(C)$. Its derived-sections map is $\\sigma_{C,S,J_n}^{-1}H_C(d):H_C(J_{n+1})\\to H_S(J_n)$. Naturality of $\\sigma_{A,C}$ in $d$ and Step 6 give the explicit identity\n$$\\sigma_{A,S,J_n}^{-1}H_A(r_{A,C}d)\\sigma_{A,C,J_{n+1}}=\\sigma_{C,S,J_n}^{-1}H_C(d).$$\nIndeed, substitute $\\sigma_{A,S}=(\\sigma_{A,C}r_{C,S})\\sigma_{C,S}$ and cancel the adjacent inverse comparisons using naturality. Combine this identity with the $\\beta$ transition equation of Step 4. The comparisons $\\sigma_{A,B_n}^{-1}\\beta_n$ thus intertwine the actual transitions of $G(J)$ with the stated finite derived-sections transitions. Every comparison is natural for derived input morphisms by Steps 4 and 5, so their composites are natural too. This calculation applies also to identity and iterated transitions. It only uses K-injectivity of constant-$A$ tower evaluations, never of varying-ring evaluations.",
-   "uses": [
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, proof: exact left adjoint to constant-coefficient evaluation; Tag 0D6E, lemma-derived-pushforward-composition; agent combination with derived-functor units."
+    "place": "Tags 0941 and 0D6E; exact restriction, K-injective computation and normalized derived-unit comparison."
    }
   }
  ],
  "proof_deps": [
   "def-pc-sheaf-restrict-scalars",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-ringed-topos-morphism",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-singleton-site-module-comparison",
-  "lem-weil-pbc-small-module-diagrams-grothendieck",
   "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-coef-tower-right-derived-evaluation",
   "lem-weil-tower-evaluation-kinjective",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-coef-restriction-sections-acyclic",
+  "def-coef-system-derived-transition",
+  "def-coef-tower-derived-evaluation-transition",
+  "lem-pod-derived-exact-square-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941, lemma-derived-limit-is-ok, proof: exact left adjoint to constant-coefficient evaluation; Tag 0D6E, lemma-derived-pushforward-composition; agent combination with derived-functor units."
+  "place": "Tag 0941 and Tag 0D6E; the stated comparison route with coefficient-universe Grothendieck categories, the proved small-model acyclicity bridge, and explicit localization-factor and cocycle calculations."
  },
  "mathlib_searches": [
   {
@@ -231,13 +199,24 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-coef-sequence-global-sections-evaluation",
   "worker": "stage1",
-  "summary": "Constructed the ordinary total derived constant-coefficient tower-sections functor; evaluated the same tower resolution and proved naturality via the K-injective Hom-bijection. Constructed the coefficient comparison by the universal derived unit, checked invertibility and composition normalization using 0D6E, and wrote the finite transition equation explicitly. Reused existing nodes throughout; no new nodes and no statement change.",
-  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2, first and last derived mapping-complex comparisons, through lem-coef-derived-system-evaluation-calculus, returned step 12 first half. This supplies its derived termwise sections and finite transition-compatible evaluations.",
+  "summary": "Responded to the 2026-10-22 human re-split note: extracted the tower right-derived evaluation argument and the coherent scalar-sections comparison as two independent statement-only nodes, leaving exact restriction and the explicit transition cancellation in the assembly. The item statement is unchanged.",
+  "blueprint": "Proof paragraph 2, first and last mapping-complex comparisons, through lem-coef-derived-system-evaluation-calculus, returned step 12 first half; extracted from the global-sections evaluation proof in response to the 2026-10-22 re-split note.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-exact-functor-derived-factorization",
@@ -245,22 +224,6 @@
    },
    {
     "node": "lem-weil-pbc-kinjective-functorial-existence",
-    "why": "Generic abelian/derived-category tool used in the constant-coefficient resolution and scalar-comparison construction; no biduality or geometric unit route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-hom-derived",
-    "why": "Generic abelian/derived-category tool used in the constant-coefficient resolution and scalar-comparison construction; no biduality or geometric unit route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Generic abelian/derived-category tool used in the constant-coefficient resolution and scalar-comparison construction; no biduality or geometric unit route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
-    "why": "Generic abelian/derived-category tool used in the constant-coefficient resolution and scalar-comparison construction; no biduality or geometric unit route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
     "why": "Generic abelian/derived-category tool used in the constant-coefficient resolution and scalar-comparison construction; no biduality or geometric unit route is replaced."
    },
    {
@@ -274,10 +237,6 @@
    {
     "node": "prop-pur-kinjective-resolutions-exist",
     "why": "Generic abelian/derived-category tool used in the constant-coefficient resolution and scalar-comparison construction; no biduality or geometric unit route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-singleton-site-module-comparison",
-    "why": "Generic identification of module sheaves on the one-point site with ordinary modules, used to read the global-sections direct image of the 0D6E composition node as abelian-group complexes (added by the stage-1 reviewer)."
    }
   ]
  },
@@ -286,20 +245,15 @@
   "lem-weil-pbc-kinjective-functorial-existence",
   "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-small-module-diagrams-grothendieck",
-  "lem-weil-tower-category-levelwise-abelian",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-singleton-site-module-comparison"
+  "lem-weil-tower-category-levelwise-abelian"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q11-982b24941",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q76-9cc6a5b6b",
+  "group": "Q76",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-982b24941 (reviewer sub-agent of L); spot-checked: I read the item and every cited node statement in full. Statement is byte-identical to the base (unsplit live, not superseded); no new nodes; no repair note; not dropped; no SGA. Sources checked: Stacks 0941 (sites-cohomology l.5067) gives exact i_{n,!} for constant-ring evaluation only, and the item uses it only for constant-A towers through lem-weil-tower-evaluation-kinjective. Stacks 0D6E (l.4011) is used through the K-injective normalization of lem-weil-pbc-ringed-topoi-derived-pushforward-composition with f=(Sh C,S)->(Sh C,R) and g=global sections; ring-map directions are correct. Steps 1-3 are correct: exact restriction gives U; Fun(N^op,Mod A) is Grothendieck, so functorial K-injectives exist; the additive H^0 gives a triangulated K(V)->D(Tow Ab). Step 4: beta_n comes from evaluating the same tower resolution, with naturality from the Hom bijection. Step 5: sigma comes from the universal unit and is invertible by Gamma(j) being a quasi-isomorphism. I checked the Step 6 cocycle and the Step 7 cancellation algebraically. Edge cases (zero rings and inputs, identity and non-flat maps, unbounded inputs, zero transitions) are fine. No duplicates: lem-coef-semilinear-derived-sections pulls rings back instead of restricting to a constant A, and lem-pe-left-module-derived-evaluation-forget is bounded below with a constant Lambda. FIX repairs two C1 citation gaps. Step 4 now cites lem-weil-pbc-exact-functor-derived-factorization for derived evaluation e_n on D(Tow Ab). Step 5 now writes out the global-sections ringed-topos morphism, citing def-weil-pbc-ringed-topos-morphism, def-weil-pbc-constant-sheaf and lem-weil-pbc-singleton-site-module-comparison. proof_deps is recomputed and split_report.tool_uses gets one added entry. Accepted generic tool_uses: the pbc/pur K-injective and ringed-topos nodes plus the singleton-site comparison.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-9cc6a5b6b (reviewer sub-agent of L); spot-checked: This answers the human's 2026-10-22 re-split note. The proof is now 5 steps and 2332 chars, against 6989 chars in 7 steps before, and the item statement is unchanged. Old steps 3-4 became lem-coef-tower-right-derived-evaluation and old steps 5-6 became lem-coef-derived-sections-scalar-coherence. Every clause of the old argument is stated in the new nodes: K-injective evaluation, beta_n, unit normalization, naturality and transitions in the tower node; the unique unit-normalized sigma, invertibility via kappa_{g,f}, the Gamma(j) representative, cocycle and identity in the scalar node. Old steps 1, 2 and 7 stay as short glue; I checked the step-5 cancellation myself and it is elementary. Neither node restates the item, and they are of comparable size. Tower node: for any abelian A, e_n has an exact left adjoint (the module at levels m>=n, 0 below), as in the Stacks 0941 proof paragraph (sites-cohomology l.5067). From this I checked the unit equation and the transition equation. Tested on id, 0, Hom(Z/2,-) on Ab, and m=n. It is not a duplicate of lem-weil-pbc-tower-derived-evaluation-normalization, which needs an exact left adjoint F with F -| G and Grothendieck categories. Scalar node: the universal property gives sigma in the right direction, and Stacks 0D6E (l.4011) with lem-weil-pbc-ringed-topoi-derived-pushforward-composition gives invertibility. Cocycle and identity follow from uniqueness. Tested on the one-point site, R=S, Z->Z/2 and the zero ring. Fault (fixed): the scalar node's statement used restriction-as-direct-image, the singleton-site Z-module = Ab identification, and K-injective resolutions without citing them. FIX adds lem-weil-pbc-restriction-ringed-topos-module-direct-image, lem-weil-pbc-singleton-site-module-comparison, def-pur-kinjective-complex and prop-pur-kinjective-resolutions-exist to its text and stmt_deps; all four are acyclic and already in the item's tool_uses. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-derived-sections-scalar-coherence.json. No SGA; not dropped; not superseded live.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CoefficientSequenceGlobalSections",
@@ -343,5 +297,15 @@
   "group": "NC",
   "result": "fix",
   "note": "H2 repair verified. New existing:true definition nodes def-coef-system-derived-transition and def-coef-tower-derived-evaluation-transition own the plain Localization.liftNatTrans defs systemDerivedTransition and towerDerivedEvaluationTransition; their lean.statement fields match the live signatures verbatim. The item cites them instead of the two theorem nodes and adds def-pur-system-level-left-extension-basic. The item uses no other decls from those modules, no competing owner exists, no cycle, and the snapshot is otherwise identical to side-live. The Lean is byte-identical to the module previously checked clause by clause. FIX: def-coef-system-derived-transition writes the target as D(e_m)∘D(r_{n,m}), which does not typecheck; the Lean and the same sentence give D(r_{n,m})∘D(e_m). Full node JSON with the composite reordered in fixes/. Compile: nt_compile timed out at 60 s at load 131; lcompile 560 s waited for a slot the whole time; with linters off the module compiled clean in 52.7 s (15 s CPU, load 139). Land at lower load. Advisories: sheafification instances not stated in the new node, docstring blueprint tags still name the theorem nodes, Sheaf.Γ spelling, duplicate HasDerivedCategory instance."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261024T184540-L-3066020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

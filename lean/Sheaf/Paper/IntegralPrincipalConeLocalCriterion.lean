@@ -9,6 +9,9 @@ public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.RingedSectionLocalizationOfUniverses
 public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
+import Sheaf.Algebra.Homology.SitePerfectModelRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
+import Sheaf.CategoryTheory.NativePrincipalConeCriterion
 
 /-! # The local criterion for a principal cone completion
 
@@ -58,6 +61,36 @@ def locallyComplete
           s.val (op (Over.mk f)) = σ (op V) * c) →
       IsZero (localTest l E T K U s)
 
+private def localTestIso {K L : IntegralOnSlice.D l E T none} (e : K ≅ L)
+    (U : T.ProEt)
+    (s : ((IntegralOnSlice.ring l E T (some U)).obj ⋙ forget CommRingCat).sections) :
+    localTest l E T K U s ≅ localTest l E T L U s := by
+  letI : HasSheafify (IntegralOnSlice.topology T (some U))
+      CommRingCat.{max u (t + 1)} :=
+    letI : EssentiallySmall.{max u (t + 1)} (IntegralOnSlice.Site T (some U)) :=
+      essentiallySmallSelf _
+    hasSheafifyEssentiallySmallSite _ _
+  let R := IntegralOnSlice.rings l E T none
+  letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)} (R.over U))
+  let F := SheafOfModules.overFunctor.{max u (t + 1)} R U
+  letI : PreservesFiniteLimits F := (SheafOfModules.overFunctor_exact_ofUniverses R U).1
+  letI : PreservesFiniteColimits F :=
+    (SheafOfModules.overFunctor_exact_ofUniverses R U).2
+  let e' := SheafOfModules.overFunctor_derivedRestrictionIso R U K ≪≫
+    F.mapDerivedCategory.mapIso e ≪≫
+      (SheafOfModules.overFunctor_derivedRestrictionIso R U L).symm
+  exact (IntegralOnSlice.hom l E T (some U)).mapIso ((Iso.refl _).prod e')
+
+private theorem locallyComplete_iso
+    (σ : ∀ U : T.ProEtᵒᵖ, (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)
+    {K L : IntegralOnSlice.D l E T none} (e : K ≅ L) :
+    locallyComplete l E T σ K ↔ locallyComplete l E T σ L := by
+  constructor
+  · intro h U s hs
+    exact (h U s hs).of_iso (localTestIso l E T e U s).symm
+  · intro h U s hs
+    exact (h U s hs).of_iso (localTestIso l E T e U s)
+
 /-- The principal cone completion is locally complete, and its specified unit is
 invertible exactly for locally complete inputs. The scalar is any natural section;
 no regularity, boundedness or flatness of the input complex is needed.
@@ -87,6 +120,84 @@ theorem localCriterion
     locallyComplete l E T σ (DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion μ)) ∧
       (locallyComplete l E T σ K ↔
         IsIso (e.inv ≫ DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ))) := by
-  sorry
+  let J := IntegralOnSlice.topology T none
+  let R := IntegralOnSlice.ring l E T none
+  let Rg := IntegralOnSlice.rings l E T none
+  let a : (R.obj ⋙ forget CommRingCat).sections := ⟨σ, _hσ⟩
+  let : HasSheafify J AddCommGrpCat.{max u (t + 1)} :=
+    IntegralOnSlice.abSheafify.{t, u} T none
+  let : J.WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    IntegralOnSlice.abLocallyBijective.{t, u} T none
+  let : ∀ U : IntegralOnSlice.Site T none, HasSheafify (J.over U) AddCommGrpCat.{max u (t + 1)} :=
+    fun U ↦ IntegralOnSlice.abSheafify.{t, u} T (some U)
+  let : ∀ U : IntegralOnSlice.Site T none, (J.over U).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} :=
+    fun U ↦ IntegralOnSlice.abLocallyBijective.{t, u} T (some U)
+  let : ∀ U : IntegralOnSlice.Site T none, HasSheafify (J.over U) CommRingCat.{max u (t + 1)} :=
+    fun U ↦
+      letI : EssentiallySmall.{max u (t + 1)} (Over U) := essentiallySmallSelf _
+      hasSheafifyEssentiallySmallSite _ _
+  let : HasDerivedCategory (SheafOfModules.{max u (t + 1)} Rg) :=
+    IntegralOnSlice.hasDerived l E T none
+  let : ∀ U : IntegralOnSlice.Site T none,
+      HasDerivedCategory (SheafOfModules.{max u (t + 1)} (Rg.over U)) :=
+    fun U ↦ HasDerivedCategory.standard _
+  have testIso (N : IntegralOnSlice.D l E T none) (U : T.ProEt)
+      (s : ((R.over U).obj ⋙ forget CommRingCat).sections) :
+      localTest l E T N U s ≅ principalLocalTest.{t + 1, t, u} R N U s := by
+    letI := (SheafOfModules.overFunctor_exact_ofUniverses Rg U).1
+    letI := (SheafOfModules.overFunctor_exact_ofUniverses Rg U).2
+    exact (IntegralOnSlice.hom l E T (some U)).mapIso
+      ((Iso.refl _).prod (SheafOfModules.overFunctor_derivedRestrictionIso Rg U N))
+  have hpred (N : IntegralOnSlice.D l E T none) :
+      locallyComplete l E T σ N ↔ principalLocallyComplete.{t + 1, t, u} R a N := by
+    constructor
+    · intro h U s hs
+      exact (h U s hs).of_iso (testIso N U s).symm
+    · intro h U s hs
+      exact (h U s hs).of_iso (testIso N U s)
+  let F := AsSmall.down.{t, t + 1, max u (t + 1)}
+    (C := IntegralOnSlice.Site T none)
+  let Js := F.inducedTopology J
+  let : F.IsEquivalence :=
+    (AsSmall.equiv.{t, t + 1, max u (t + 1)}
+      (C := IntegralOnSlice.Site T none)).symm.isEquivalence_functor
+  let S := NativeRestriction.restrictedCommRing.{max u (t + 1), t + 1,
+    max u (t + 1), t, u} (K := Js) F R
+  let H := NativeRestriction.restrictModules.{max u (t + 1), t + 1,
+    max u (t + 1), t, u} (K := Js) F R
+  let : H.IsEquivalence := NativeRestriction.globalModulesEquivalence
+    (K := Js) F R
+  let : HasSheafify Js AddCommGrpCat.{max u (t + 1)} := inferInstance
+  let : Js.WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} := inferInstance
+  let : ∀ U : AsSmall.{max u (t + 1)} (IntegralOnSlice.Site T none),
+      HasSheafify (Js.over U) AddCommGrpCat.{max u (t + 1)} := fun _ ↦ inferInstance
+  let : ∀ U : AsSmall.{max u (t + 1)} (IntegralOnSlice.Site T none),
+      (Js.over U).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    fun _ ↦ inferInstance
+  let : ∀ U : AsSmall.{max u (t + 1)} (IntegralOnSlice.Site T none),
+      HasSheafify (Js.over U) CommRingCat.{max u (t + 1)} := fun _ ↦ inferInstance
+  let : HasDerivedCategory
+      (NativeRestriction.NativeModules.{max u (t + 1), max u (t + 1),
+        max u (t + 1)} S) := HasDerivedCategory.standard _
+  let Rs := NativeRestriction.NativeRings.{max u (t + 1), max u (t + 1),
+    max u (t + 1)} S
+  let : ∀ U : AsSmall.{max u (t + 1)} (IntegralOnSlice.Site T none),
+      HasDerivedCategory (SheafOfModules.{max u (t + 1)} (Rs.over U)) :=
+    fun _ ↦ HasDerivedCategory.standard _
+  let : HasDerivedCategory
+      (ℕᵒᵖ ⥤ NativeRestriction.NativeModules.{max u (t + 1), max u (t + 1),
+        max u (t + 1)} S) := HasDerivedCategory.standard _
+  let : HasExactLimitsOfShape (Discrete ℕ) (IntegralOnSlice.Mod l E T none) :=
+    AlgebraicGeometry.Scheme.ProEt.products_exact.{t, u, 0} T Rg ℕ
+  let : HasExactLimitsOfShape (Discrete ℕ)
+      (NativeRestriction.NativeModules.{max u (t + 1), max u (t + 1),
+        max u (t + 1)} S) :=
+    HasExactLimitsOfShape.of_codomain_equivalence (Discrete ℕ) H.asEquivalence
+  obtain ⟨hc, hi⟩ := NativeRestriction.nativePrincipalConeCriterion.{t + 1, t, u}
+    R a P μ _hμ
+  refine ⟨(hpred _).mpr hc, ?_⟩
+  rw [← locallyComplete_iso l E T σ e, hpred, hi]
+  exact (isIso_comp_left_iff e.inv _).symm
 
 end WeilConjectures.IntegralPrincipalCone

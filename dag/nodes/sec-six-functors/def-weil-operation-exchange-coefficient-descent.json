@@ -25,7 +25,8 @@
   "def-weil-frobenius-detailed",
   "lem-weil-frobenius-square-cartesian",
   "lem-fix-operation-reduction",
-  "def-sf-refinement-comparison-isomorphism"
+  "def-sf-refinement-comparison-isomorphism",
+  "def-weil-frobenius-witnessed-compactification"
  ],
  "source": {
   "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
@@ -33,7 +34,14 @@
  },
  "proof": [
   {
-   "text": "Keep the recorded origin, compactification, finite exchange, integral exchange, coefficient mate, and common-stage constructions. The intrinsic compactification coherence and refinement normalization, integral pullback linearity, operation coefficient invertibility, rational coefficient comparison, and two stage compatibility laws remain the existing named proof obligations with their original docstring arguments.",
+   "text": "Publicly re-export the finite-origin section from FrobeniusWitnessedCompactification. Its public names, signatures, construction formulas, completed normalization proofs and the existing named intrinsic coherence obligation are retained. This self-contained relocation is required for the per-file compile limit after local definition-opacity improvements.",
+   "uses": [
+    "def-weil-frobenius-witnessed-compactification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Keep the recorded origin, compactification, finite exchange, integral exchange, coefficient mate, and common-stage constructions. The intrinsic compactification coherence obligation is retained in the extracted witnessed module; the two stage compatibility laws retain their existing named proof obligations and original docstring arguments. Operation coefficient invertibility follows by the component arguments below.",
    "uses": [
     "def-weil-scheme-morphism-properties",
     "def-weil-compactifications-refinements",
@@ -60,11 +68,6 @@
    "elementary": false
   },
   {
-   "text": "For the intrinsic pairwise cocycle, choose a common refinement of three compactifications from intrinsicCompactificationCoherence, substitute its three normalized comparison formulas, and cancel the middle isomorphism and its inverse. Exact etale inverse image preserves the lower bound by Functor.isGE_mapDerivedCategory_obj.",
-   "uses": [],
-   "elementary": true
-  },
-  {
    "text": "Prove the raw localized Hom identity and composition laws by tensor induction, using ScalarLocalization.composition_tmul and the original integral functor laws. A second tensor induction transports integral naturality to every localized Hom. The private localizedFunctor_comp repeats tensor induction to prove literal compatibility with composition.",
    "uses": [
     "def-weil-rationalization-karoubi"
@@ -84,6 +87,30 @@
    "text": "Construct pullScalar_existsUnique componentwise from integralPullbackScalarComparison. Restrict scalarCompletion to the constructible category, where it is an isomorphism. Whisker its inverse by integral pullback, compose the ordinary scalar/pullback natural isomorphism, and whisker scalarCompletion by target pullback. This composite proves naturality of the prescribed completed components. Componentwise extensionality proves uniqueness.",
    "uses": [
     "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For modelRationalScalar_existsUnique, use the private scalar-localization isomorphism construction underlying scalar-extension composition. Its pure-tensor characterization gives the localized source and target functor formulas. Localize the actual integral modelSideScalar, prove naturality by the tensor formula, and use componentwise extensionality for uniqueness. Apply modelRationalSource_eq or modelRationalTarget_eq according to the side.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict integralDerivedPullback_linear to the constructible full subcategory. For addition and scalar multiplication separately, apply ObjectProperty.hom_ext and then the corresponding ambient map_add or map_smul equality. This proves pullback_linear for the same specified functor without new hypotheses or constructions. In modelSource_linear and modelTarget_linear, expose only the named composite before synthesizing the additive and linear instances for its specified factors, avoiding inference of unspecified composite factors.",
+   "uses": [
+    "lem-sf-integral-derived-pullback-linear"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For modelScalarMap_isIso, split the retained SupportModel. In the direct branch apply the component-level direct-image coefficient exchange invertibility. In the compact branch apply sfCompactSupportCoefficientExchange_isIso to the middle whole-system coefficient map; the surrounding compactRealization components are isomorphisms. Map the source component isomorphism through scalar extension, compose it with asIso of the existing middle component proof, then compose with the inverse target component. The hom of this explicit composite is definitionally the specified compact coefficient map. In each branch ObjectProperty.isIso_hom_iff lifts component invertibility to the full constructible subcategory, and NatIso.isIso_of_isIso_app lifts it to the natural transformation. No Frobenius hypothesis is used in coefficient invertibility, and no new coefficient map is chosen.",
+   "uses": [
+    "lem-weil-direct-image-coefficient-exchange-invertible",
+    "lem-sf-compact-support-coefficient-exchange-invertible",
+    "def-weil-system-operation-exchange-realization"
    ],
    "elementary": true
   }
@@ -109,12 +136,17 @@
   "def-weil-frobenius-detailed",
   "lem-weil-frobenius-square-cartesian",
   "lem-fix-operation-reduction",
-  "def-sf-refinement-comparison-isomorphism"
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-weil-scalar-extension-composition",
+  "lem-sf-integral-derived-pullback-linear",
+  "lem-weil-direct-image-coefficient-exchange-invertible",
+  "lem-sf-compact-support-coefficient-exchange-invertible",
+  "def-weil-frobenius-witnessed-compactification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/Sheaf/Paper/FrobeniusSquareExchange.lean",
-  "place": "J3 stage-3 partial proof, 2026-10-19. Eleven original holes closed, following the existing declaration docstrings, with no new holes or statement changes. The private localizedFunctor_comp is elementary tensor-induction glue for the two rational composite equalities."
+  "place": "H6 stage-3 partial proof, 2026-10-25. The rational scalar comparison is proved by localizing the specified integral comparison, with original statements and constructions retained. Private proved helpers supply scalar-conjugation naturality and generic tensor-localization calculations. G8 stage-3 partial proof, 2026-10-26: refinement normalization is proved by explicit witness transport, compositor naturality and equivalence triangle cancellation. No new hypotheses or proof dependencies. D4 stage-3 partial proof, 2026-10-26: pullback_linear follows by full-subcategory morphism extensionality from integralDerivedPullback_linear; all other constructions and remaining obligations are retained. D2, 2026-10-27: modelScalarMap_isIso is reduced by a complete two-case proof to the existing compact-support coefficient component lemma and one new direct-image coefficient component lemma. The latter is strictly the direct branch and is independent of Frobenius, rational localization and the stage system. The three other original holes remain. The specialized localization-composition proof uses direct tensor induction and local opacity avoids repeated expansion of the tensor composition constructor. The independent finite-origin section is relocated unchanged to FrobeniusWitnessedCompactification after optimized full-module delivery preflight still took 63 seconds. Its declarations are publicly re-exported and their node attachment moves to the new extraction node. The original coherence hole is relocated, not added or closed."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -198,45 +230,24 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "lean": {
   "module": "Sheaf.Paper.FrobeniusSquareExchange",
   "declaration": "WeilConjectures.FrobeniusExchange.commonStageExchange",
   "declarations": [
-   "WeilConjectures.FrobeniusExchange.originUnderlying",
-   "WeilConjectures.FrobeniusExchange.originUnderlyingAdditive",
-   "WeilConjectures.FrobeniusExchange.originUnderlyingLimits",
-   "WeilConjectures.FrobeniusExchange.originUnderlyingColimits",
-   "WeilConjectures.FrobeniusExchange.origin",
-   "WeilConjectures.FrobeniusExchange.CompactOrigin",
-   "WeilConjectures.FrobeniusExchange.CompactOriginCategory",
-   "WeilConjectures.FrobeniusExchange.compactOriginForget",
-   "WeilConjectures.FrobeniusExchange.fixedOpenModel",
-   "WeilConjectures.FrobeniusExchange.fixedDerivedOpenModel",
-   "WeilConjectures.FrobeniusExchange.fixedCompact",
-   "WeilConjectures.FrobeniusExchange.fixedCompactModel",
-   "WeilConjectures.FrobeniusExchange.fixedOriginWitness",
-   "WeilConjectures.FrobeniusExchange.fixedRefinementOpen",
-   "WeilConjectures.FrobeniusExchange.intrinsicRefinement",
-   "WeilConjectures.FrobeniusExchange.intrinsicOriginCandidate",
-   "WeilConjectures.FrobeniusExchange.intrinsicCompactificationCoherence",
-   "WeilConjectures.FrobeniusExchange.intrinsicCompactificationComparison",
-   "WeilConjectures.FrobeniusExchange.intrinsicCompactificationComparison_cocycle",
-   "WeilConjectures.FrobeniusExchange.fiberMap",
-   "WeilConjectures.FrobeniusExchange.galois",
-   "WeilConjectures.FrobeniusExchange.finiteDirect",
-   "WeilConjectures.FrobeniusExchange.frobeniusDirectFinite",
-   "WeilConjectures.FrobeniusExchange.etalePull",
-   "WeilConjectures.FrobeniusExchange.realizationPullback",
-   "WeilConjectures.FrobeniusExchange.originUnderlyingPullback",
-   "WeilConjectures.FrobeniusExchange.originPullback",
-   "WeilConjectures.FrobeniusExchange.pulledOriginWitness",
-   "WeilConjectures.FrobeniusExchange.etalePull_lowerBound",
-   "WeilConjectures.FrobeniusExchange.pulledCompactOrigin",
-   "WeilConjectures.FrobeniusExchange.pulledCompactOriginFunctor",
-   "WeilConjectures.FrobeniusExchange.transportCompact",
    "WeilConjectures.FrobeniusExchange.localizedHom",
    "WeilConjectures.FrobeniusExchange.localizedHom_laws",
    "WeilConjectures.FrobeniusExchange.localizedFunctor",
@@ -276,9 +287,7 @@
    "WeilConjectures.FrobeniusExchange.stageAction",
    "WeilConjectures.FrobeniusExchange.stageExchange_compatible",
    "WeilConjectures.FrobeniusExchange.stageExchange",
-   "WeilConjectures.FrobeniusExchange.commonStageExchange",
-   "WeilConjectures.FrobeniusExchange.refinementIntrinsicOrigin",
-   "WeilConjectures.FrobeniusExchange.intrinsicCompactificationComparison_refinement"
+   "WeilConjectures.FrobeniusExchange.commonStageExchange"
   ],
   "file": "lean/Sheaf/Paper/FrobeniusSquareExchange.lean",
   "statement": "def commonStageExchange : (stageAction l K₀ hl f gX gY M Ω false).functor ⟶ (stageAction l K₀ hl f gX gY M Ω true).functor",
@@ -305,13 +314,13 @@
   "note": "Fifth delivery (after 661a RETURN, bf9d RETURN, 6bd5 FIX returned at landing, de4b RETURN). Both de4b findings repaired, checked by snapshot diff and against live records: (1) no prop-compactification-coherence-detailed record delivered (the snapshot copy is identical to Q116's live record); landed Sheaf.Paper.CompactificationCoherence imported; intrinsic-coordinate helpers moved unchanged into FrobeniusSquareExchange and owned by def-weil-operation-exchange-coefficient-descent; new refinementIntrinsicOrigin (keeps O.2.L, canonical alpha) and postponed theorem intrinsicCompactificationComparison_refinement equating the intrinsic comparison at a witness with the landed refinementComparisonIsomorphism conjugated by fixedCompactModel (factors match refinementComparisonAtWitness; new stmt_dep def-sf-refinement-comparison-isomorphism is landed). (2) SystemOperationExchangeRealization.lean is byte-identical (sha256) to the 6bd5 reviewer fix: canonical systemDirectEvaluation/systemPullEvaluation.inv. Mechanical theorem stmt_dep lem-trf-integral-pullback-comparison-realization: PASS on that point, models/scalarModels are .choose of the object its conclusion constructs. Ownership 13/68/74, each declaration owned once, all three statements verbatim, sorry only in theorems, docstrings/line lengths ok, no added hypotheses, edge cases covered. nt_compile --json clean: 14.0/28.7/4.1 s."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
-  "result": "pass",
-  "landing": "20261019T002621-L-2162644",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-3c1b1",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T012820-L-2335181",
+  "kind": "interface",
+  "note": "independent cc review: published FSE lines 173-827 vs new FrobeniusWitnessedCompactification (verbatim modulo blueprint id); modelScalarMap_isIso cases vs sfCompactSupportCoefficientExchange_isIso + new direct lemma (mirror statement); item/new node lean records vs Lean; sandbox compile of 3 delivered modules + 2 direct importers (all OK)"
  }
 }

@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-free-quotient-kernel-regularity-bound",
+ "kind": "statement",
+ "title": "Uniform regularity of kernels of coherent free-sheaf quotients",
+ "statement": "Fix integers $n\\geq0$, $r\\geq1$, and a polynomial $P\\in\\mathbf Q[t]$. There is an integer $a$, depending only on $n,r,P$, such that the following holds for every field $k$ [def-weil-field]. On $\\mathbf P^n_k$ let\n$$0\\longrightarrow\\mathcal K\\longrightarrow\\mathcal O^{\\oplus r}\\longrightarrow\\mathcal F\\longrightarrow0$$\nbe a short exact sequence of coherent modules [pqf-def-coherent]. Suppose that $\\chi(\\mathbf P^n_k,\\mathcal F(d))=P(d)$ for every integer $d$, where $\\chi$ is the alternating sum of finite coherent-cohomology dimensions [def-pc-euler-characteristic]. Then $\\mathcal K$ is $a$-regular, meaning\n$$H^j(\\mathbf P^n_k,\\mathcal K(a-j))=0\\quad(1\\leq j\\leq n).$$\nHere $\\mathcal G(d)=\\mathcal G\\otimes\\mathcal O(d)$, with twists as in [def-pc-projective-space-twist], and $H^j$ is module sheaf cohomology [pqf-def-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08AG, lemma-bound-quotients-free, statement and proof; regularity is Tag 08A3, definition-regularity."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "pqf-def-coherent",
+  "def-pc-euler-characteristic",
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Prove the assertion by induction on $n$, simultaneously for every $r\\geq1$, every rational polynomial $P$, and every field. For $n=0$ the defining range $1\\leq j\\leq n$ is empty, so take $a=0$. For $n>0$ set $\\Delta P(t)=P(t)-P(t-1)$ and choose the integer $m'$ supplied by the induction hypothesis for $(n-1,r,\\Delta P)$. Put $b=\\max(1,m')$. These choices precede any choice of field or quotient.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, assembly of the extracted arguments with the corrected enlarged regularity bound."
+   }
+  },
+  {
+   "text": "Use the field-extension lemma with $L=k(u)$, which is infinite since the powers of the indeterminate $u$ are distinct. It preserves the coherent free quotient and every value $P(d)$, and reflects $a$-regularity for every integer $a$. Thus it suffices to construct the same bound over infinite fields.",
+   "uses": [
+    "lem-sfb-projective-quotient-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, assembly of the extracted arguments with the corrected enlarged regularity bound."
+   }
+  },
+  {
+   "text": "Over the infinite field choose the common regular hyperplane for $\\mathcal F,\\mathcal K,\\mathcal O^{\\oplus r},\\mathcal O_X$. The restricted-quotient lemma gives the coherent exact quotient $0\\to K_H\\to\\mathcal O_H^{\\oplus r}\\to F_H\\to0$ and $\\chi(H,F_H(d))=\\Delta P(d)$. Since $H\\cong\\mathbf P^{n-1}_k$, induction makes $K_H$ $m'$-regular. The regularity consequences make it $b$-regular. The common hyperplane also gives injective multiplication on $\\mathcal K$ at every twist.",
+   "uses": [
+    "lem-sfb-coherent-regular-hyperplane-restriction",
+    "lem-sfb-hyperplane-free-quotient-euler-difference",
+    "lem-sfb-m-regular-coherent-sheaf-consequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, assembly of the extracted arguments with the corrected enlarged regularity bound."
+   }
+  },
+  {
+   "text": "Apply the cohomology-tail lemma to $E=\\mathcal K$ at $m=b$. With $h_b=\\dim_kH^1(X,\\mathcal K(b))$, its two clauses give $H^j(X,\\mathcal K(t))=0$ for $j\\geq2,t\\geq b$, and $H^1(X,\\mathcal K(t))=0$ for $t\\geq b+h_b$.",
+   "uses": [
+    "lem-sfb-hyperplane-cohomology-tail-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, assembly of the extracted arguments with the corrected enlarged regularity bound."
+   }
+  },
+  {
+   "text": "Apply the numerical first-cohomology estimate at $b\\geq1$, using the higher vanishing just obtained. It gives $0\\leq h_b\\leq P(b)$. Define $N=\\max(0,\\lceil P(b)\\rceil)$; then $h_b\\leq N$ and $N$ depends only on $n,r,P$.",
+   "uses": [
+    "lem-sfb-free-quotient-first-cohomology-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, assembly of the extracted arguments with the corrected enlarged regularity bound."
+   }
+  },
+  {
+   "text": "Choose $a=b+N+n+1$. Then $a-1\\geq b+N\\geq b+h_b$, so step 4 gives $H^1(X,\\mathcal K(a-1))=0$. For $2\\leq j\\leq n$ one has $a-j\\geq b$, so step 4 gives $H^j(X,\\mathcal K(a-j))=0$. This is $a$-regularity. Every number depends only on $n,r,P$, and step 2 descends the same bound to the original field. If no quotient with polynomial $P$ exists the assertion is vacuous; the formula still defines an integer.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, assembly of the extracted arguments with the corrected enlarged regularity bound."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-quotient-field-extension",
+  "lem-sfb-coherent-regular-hyperplane-restriction",
+  "lem-sfb-hyperplane-free-quotient-euler-difference",
+  "lem-sfb-m-regular-coherent-sheaf-consequences",
+  "lem-sfb-hyperplane-cohomology-tail-bound",
+  "lem-sfb-free-quotient-first-cohomology-estimate"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08AG, lemma-bound-quotients-free, assembly of the extracted arguments with the corrected enlarged regularity bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Castelnuovo Mumford regularity of the kernel of a quotient of a fixed free sheaf on projective space with prescribed Euler Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:23:30Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform Castelnuovo Mumford regularity of the kernel of a quotient of a fixed free sheaf on projective space with prescribed Euler Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"Module.basicOpen_subset_freeLocus_iff\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"76b2adb150fa01b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, module free loci, regular sequences and sheaf presentations do not bound Castelnuovo--Mumford regularity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T04:23:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"regular\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.isSheafFor_regular_of_projective\", \"CategoryTheory.regularTopology.isSheaf_of_projective\", \"CategoryTheory.regularTopology.isSheaf_yoneda_obj\", \"CategoryTheory.regularTopology.equalizerCondition_iff_isSheaf\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff\", \"CategoryTheory.Equivalence.sheafCongrPreregular\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall\"], \"digest\": \"de6d9148d2fa601f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, module free loci, regular sequences and sheaf presentations do not bound Castelnuovo--Mumford regularity."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|mumford|mRegular|hilbertPolynomial",
+   "results": "{\"t\": \"2026-10-22T04:23:31Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|mumford|mRegular|hilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, module free loci, regular sequences and sheaf presentations do not bound Castelnuovo--Mumford regularity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists m depending only on n r P such that kernels of coherent quotients of O power r on projective n space with Hilbert polynomial P are m regular",
+   "results": "{\"t\": \"2026-10-22T04:23:31Z\", \"tool\": \"leansearch\", \"query\": \"There exists m depending only on n r P such that kernels of coherent quotients of O power r on projective n space with Hilbert polynomial P are m regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.isRegular_cons_iff'\", \"mem_of_isSMulRegular_quotient_of_smul_mem\", \"Algebra.Extension.Cotangent.ker_mk\", \"rTensor_mkQ\", \"IsRegular.monomial\", \"Submodule.ker_mkQ\", \"Polynomial.not_ker_le_map_C_of_surjective_of_quasiFiniteAt\", \"RootPairing.ker_copolarization_eq_ker_corootForm\"], \"digest\": \"8fb5b245ef4cd259\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, module free loci, regular sequences and sheaf presentations do not bound Castelnuovo--Mumford regularity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Boundedness of regularity for kernels of all coherent quotients of a free sheaf with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:23:39Z\", \"tool\": \"leanfinder\", \"query\": \"Boundedness of regularity for kernels of all coherent quotients of a free sheaf with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\"], \"digest\": \"7d122ff524bc8dcb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, module free loci, regular sequences and sheaf presentations do not bound Castelnuovo--Mumford regularity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Castelnuovo Mumford regularity bound for kernels of coherent quotients of O power r on projective space with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:43:22Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform Castelnuovo Mumford regularity bound for kernels of coherent quotients of O power r on projective space with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ProjectiveSpectrum.not_irrelevant_le\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\"], \"digest\": \"b0cf21049d423ac9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, algebraic Hilbert polynomial functions, regular sequences, projective-object Ext vanishing and local free loci do not give uniform Castelnuovo--Mumford regularity of coherent quotient kernels."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|Mumford|mRegular|hilbertPolynomial",
+   "results": "{\"t\": \"2026-10-22T04:43:33Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|Mumford|mRegular|hilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, algebraic Hilbert polynomial functions, regular sequences, projective-object Ext vanishing and local free loci do not give uniform Castelnuovo--Mumford regularity of coherent quotient kernels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded Castelnuovo Mumford regularity of coherent quotients with prescribed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:43:34Z\", \"tool\": \"leansearch\", \"query\": \"Bounded Castelnuovo Mumford regularity of coherent quotients with prescribed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"PrimeSpectrum.ConstructibleSetData.degBound\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"MvPolynomial.isNoetherianRing\", \"QuotientMapQuotient.isNoetherian\", \"MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictTotalDegreeOfFinite\", \"algebra_finiteType_of_liesOver\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"567982d87a6b6166\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, algebraic Hilbert polynomial functions, regular sequences, projective-object Ext vanishing and local free loci do not give uniform Castelnuovo--Mumford regularity of coherent quotient kernels."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T04:43:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"regular\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.isSheafFor_regular_of_projective\", \"CategoryTheory.regularTopology.isSheaf_of_projective\", \"CategoryTheory.regularTopology.isSheaf_yoneda_obj\", \"CategoryTheory.regularTopology.equalizerCondition_iff_isSheaf\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff\", \"CategoryTheory.Equivalence.sheafCongrPreregular\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall\"], \"digest\": \"de6d9148d2fa601f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, algebraic Hilbert polynomial functions, regular sequences, projective-object Ext vanishing and local free loci do not give uniform Castelnuovo--Mumford regularity of coherent quotient kernels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For fixed Hilbert polynomial kernels of quotients of a fixed finite free sheaf on projective n space have uniformly vanishing twisted higher cohomology",
+   "results": "{\"t\": \"2026-10-22T04:43:35Z\", \"tool\": \"leanfinder\", \"query\": \"For fixed Hilbert polynomial kernels of quotients of a fixed finite free sheaf on projective n space have uniformly vanishing twisted higher cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"isZero_Ext_succ_of_projective\", \"Rep.isZero_Tor_succ_of_projective\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CochainComplex.isKProjective_of_projective\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"cd1ff6ccc7c197b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, algebraic Hilbert polynomial functions, regular sequences, projective-object Ext vanishing and local free loci do not give uniform Castelnuovo--Mumford regularity of coherent quotient kernels."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|Mumford|mRegular|hilbertPolynomial",
+   "results": "{\"t\": \"2026-10-22T06:25:54Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|Mumford|mRegular|hilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, regular sequences, regular topology and polynomial kernels do not state a uniform coherent free-quotient regularity bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For fixed n r and P the coherent kernels of O power r quotients on projective n space with Euler polynomial P are all m regular for one m independent of the field",
+   "results": "{\"t\": \"2026-10-22T06:25:55Z\", \"tool\": \"leansearch\", \"query\": \"For fixed n r and P the coherent kernels of O power r quotients on projective n space with Euler polynomial P are all m regular for one m independent of the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.disjoint_ker_aeval_of_isCoprime\", \"MvPolynomial.isRegular_X_pow\", \"IsRegular.monomial\", \"RootPairing.ker_copolarization_eq_ker_corootForm\", \"LieModule.isRegular_iff_coeff_polyCharpoly_rank_ne_zero\", \"CategoryTheory.instPreregularOfPrecoherentOfHasFiniteCoproducts\", \"Algebra.FormallySmooth.casesOn\", \"Polynomial.sup_ker_aeval_eq_ker_aeval_mul_of_coprime\"], \"digest\": \"80eaedaf8f08524c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, regular sequences, regular topology and polynomial kernels do not state a uniform coherent free-quotient regularity bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T06:25:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"regular\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.isSheafFor_regular_of_projective\", \"CategoryTheory.regularTopology.isSheaf_of_projective\", \"CategoryTheory.regularTopology.isSheaf_yoneda_obj\", \"CategoryTheory.regularTopology.equalizerCondition_iff_isSheaf\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff\", \"CategoryTheory.Equivalence.sheafCongrPreregular\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall\"], \"digest\": \"de6d9148d2fa601f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, regular sequences, regular topology and polynomial kernels do not state a uniform coherent free-quotient regularity bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Castelnuovo Mumford regularity bound on kernels of quotients of a finite free coherent sheaf on projective space with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T06:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform Castelnuovo Mumford regularity bound on kernels of quotients of a finite free coherent sheaf on projective space with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"Module.basicOpen_subset_freeLocus_iff\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"3d733e17d9f50315\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj constructions, regular sequences, regular topology and polynomial kernels do not state a uniform coherent free-quotient regularity bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-uniform-section-bound",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families",
+   "via": [
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-free-quotient-kernel-regularity-bound",
+  "worker": "stage1",
+  "summary": "Repair of returned Q40 delivery under the released human re-split note: four new statement-only nodes distribute the original Q25 proof among field-extension transport (old step 2), hyperplane restricted quotient plus Euler difference (old steps 3-4), cohomology tails (old steps 5-8), and the numerical H1 estimate (old step 9). The original ten argument texts are retained verbatim in report.md and mapped to these tasks. The assembly retains simultaneous dimension induction, the common hyperplane for F,K,O^r,O_X, b=max(1,m prime), N=max(0,ceil P(b)), and a=b+N+n+1. Statement, dependencies of statement and inherited maintainer-owned fields are unchanged. Promotion-return repair: compared the retained Q25 baseline with the current shared DAG (identical in every field), rebuilt this item on that current record, re-read both existing proof citations, and verified all six full-statement citation quotes against the current overlay. The final delivery must promote this four-child split, not the older side completion.",
+  "blueprint": "This created node has blueprint.from.node=null in the live repository; its inherited place records the direct-image alteration/Hilbert-scheme prerequisite. The split realizes precisely its Stacks 08AG field-boundedness subargument; no chapter or unit route is changed. Searches of the full imported blueprint for regularity, hyperplane, linear form, 08A0 and 0EGK found no equivalent blueprint statement. The four Q40 nodes realize the Stacks 08AG field-boundedness argument at that same inherited place; each from.place names its paragraphs, and all original arguments are retained in the report.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-sc-flat-base-change-coherent",
+  "lem-pc-finrank-field-base-change",
+  "lem-pc-projective-space-coherent-finiteness",
+  "lem-pc-projective-space-cohomology-bound",
+  "lem-pc-projective-space-serre-vanishing",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-euler-additive",
+  "pqf-def-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-ef56c2734",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-ef56c2734 (reviewer sub-agent of L); spot-checked: This is the third delivery of the four-child re-split after the landing refusal 'side completion never promoted'. Compared with the PASSed 4619ce9d snapshot, the four new nodes are byte-identical. The item differs only in split_report.date, and the report gained one section. Live and side-live still carry Q25's 10-step split, and none of the new ids exists there. I re-read everything against Stacks varieties.tex 08AG (lines 6855-6997), with 08A4/08AB/08A0/089Z/0EGK. Re-split note: the assembly is 6 steps and 2012 characters. Old step 2 went to the field-extension node, old steps 3-4 to the Euler-difference node, old steps 5-8 to the tail node, and old step 9 to the H1 estimate node. Steps 1 and 10 stay in the assembly, and nothing is shortened. All four nodes are true. Field node: flat base change preserves exactness, coherence, twists, cohomology dimensions, chi and regularity; n=0 is covered. Euler-difference node: s injective on F gives exactness of the restricted quotient (A∩xB=xA) and the chi difference; tested on F=0, a skyscraper off H and P^0. Tail node: H^{q≥2} injections plus Serre vanishing give vanishing for t≥m, and the plateau argument gives H^1=0 for t≥m+h; tested on P^1 with O(-2) at m=0. Estimate node: h^1(K(b)) ≤ chi(F(b)) for b≥1; tested on K=0, F=0 and O→O_D. Assembly: the common hyperplane on F,K,O^r,O_X (infinite field, n≥1) supplies every child hypothesis, the m-regular consequences node raises m' to b, and a=b+N+n+1 gives both regularity shifts. The source's off-by-one bound stays corrected. proof_deps equal the union of step uses, and there is no SGA. The duplicate search found no match: the hits coherent-hyperplane-restriction-sequence, pc-finrank, pc-degree-base-change and hilbert-uniform-section-bound are different statements. No fixes. Maintainer: please promote this four-child split over the Q25 side completion."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeQuotientKernelRegularityBound",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_freeQuotient_kernel_regularity_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeQuotientKernelRegularityBound.lean",
+  "statement": "theorem exists_freeQuotient_kernel_regularity_bound (n r : ℕ) (hr : 1 ≤ r) (P : Polynomial ℚ) : ∃ a : ℤ, ∀ (k : Type u) [Field k] (K F : (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of k))).Modules) (i : K ⟶ SheafOfModules.free (R := (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of k))).ringCatSheaf) (ULift.{u} (Fin r))) (q : SheafOfModules.free (R := (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of k))).ringCatSheaf) (ULift.{u} (Fin r)) ⟶ F) (w : i ≫ q = 0), (CategoryTheory.ShortComplex.mk i q w).ShortExact → Scheme.Modules.IsQuasiCoherentFiniteType K → Scheme.Modules.IsQuasiCoherentFiniteType F → (∀ d : ℤ, ((F ⊗ twist (ULift.{u} (Fin (n + 1))) (Spec (CommRingCat.of k)) d).eulerChar k : ℚ) = P.eval (d : ℚ)) → ∀ j : ℕ, 1 ≤ j → j ≤ n → Subsingleton ((K ⊗ twist (ULift.{u} (Fin (n + 1))) (Spec (CommRingCat.of k)) (a - (j : ℤ))).H j)",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1c065eb8",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read node, Stacks varieties.tex 08AG/08A3, delivered module, report and dependency decls (Scheme.Modules.H = Sheaf.H, finrankH/eulerChar finsum over k, ProjectiveSpace.twist pullback of integral O(m), MonoidalCategory X.Modules = SheafOfModules.monoidalCategory, IsQuasiCoherentFiniteType = QC ∧ finite type). Clause match: ∃ a : ℤ before ∀ field k (uniform as node); P^n_k = ℙ(ULift (Fin (n+1)); Spec k); 0→K→free(ULift (Fin r))→F→0 ShortExact; K,F QC finite type (= coherent on locally noetherian P^n_k, recorded pqf-def-coherent decl); ∀ d:ℤ χ(F⊗O(d)) = P(d) in ℚ (finite sum by finiteness/vanishing); Subsingleton H^j(K⊗O(a−j)) for 1≤j≤n exactly per 08A3. No extra hypotheses or universe restrictions; edge cases n=0, r=1, zero modules, finite fields, negative twists fine. lean.statement verbatim; node differs from live only in lean; stmt_deps exact; plain imports = recorded proof-dep modules; docstrings carry source place, blueprint id and 10 proof steps; sorry-only; no new defs; no duplicate found. No findings; no compile (nothing changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,197 @@
+{
+ "id": "def-pur-strict-scalar-mate-evaluation-data",
+ "kind": "definition",
+ "title": "Canonical evaluation data for the strict compact-support scalar mate",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,F$ of $\\mathbf Q_\\ell$, a coefficient map $i:E\\to F$, and their integral rings $A,B$ with uniformizers $t,v$ [def-weil-l-adic-coefficient-extension]. Fix $e\\geq1$ such that $(t)B=(v^e)$ using the specified ramification datum [def-pur-finite-compact-support-scalar-data]. Let $f:X\\to Y$ be a scheme map, and use the small pro-etale sites [def-pur-constant-scalar-tower-adjunction, def-weil-pbc-proetale-site]. For a compactification $c=(j,p)$ and derived reduction calculi $S,S^\\prime$ [def-coef-derived-system-calculus-data], construct the strict $\\mathcal O_F$-linear arrow from constant scalar extension of the native $E$ support tower to the ramified subsequence of the native $F$ support tower after completed scalar extension. Its factors, in order, are the support-model identification, the proper/open scalar comparison, the normalized reduction balancing, inverse proper/open reindexing, and the inverse target support-model identification [def-pur-native-constant-support-model, def-pur-constant-scalar-tower-mates, def-pur-strict-scalar-reduction-balancing]. Construct source and target finite-evaluation isomorphisms using identity-on-sections evaluation/restriction, finite tensor balancing normalized by its universal cochain counit, positive-exponent support evaluation, and the canonical completed coefficient tensor square [def-pur-finite-compact-support-scalar-data]. These definitions retain exactly the existing constructions and all their normalizations; this node asserts no equality between the evaluated arrow and the finite mate.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-direct-image",
+  "def-weil-extension-by-zero",
+  "def-pur-constant-scalar-tower-mates",
+  "def-pur-native-constant-support-model",
+  "def-pur-strict-scalar-reduction-balancing",
+  "def-coef-derived-system-calculus-data",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-pur-constant-scalar-tower-adjunction",
+  "def-pur-finite-scalar-coordinate-data",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map), 0940 (section-derived-limits); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor). Step 7 of lem-pur-compact-support-strict-scalar-mate."
+ },
+ "proof": [
+  {
+   "text": "Construct the positive arithmetic reindexing comparison using the exact left adjoint to restriction; exact open reindexing is localization of the literal ordinary identity square. Compose them with the given support-model and reduction-balancing isomorphisms to define arrow.",
+   "uses": [
+    "lem-sp-strict-tower-arithmetic-restriction-resolution",
+    "def-pur-native-constant-support-model",
+    "def-pur-strict-scalar-reduction-balancing",
+    "def-pur-constant-scalar-tower-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the exact system restriction and use its equality with finite restriction. Identity-on-sections extensionality proves the unique ordinary comparison. Localize the resulting square. Constant tensor is exact by retracting exact tower tensor through constant diagrams and evaluation.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-finite-scalar-coordinate-data",
+    "def-pur-constant-scalar-tower-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the existing single-module quotient balancing isomorphisms. Injectivity of the scalar adjunction Hom bijection and naturality of the tensor unit prove naturality and uniqueness on pure tensors. Conservative exact positive restriction makes the finite scalar extension exact. Localize and transport through the universal scalar counit; localization uniqueness proves the derived normalization. Compose these comparisons to define sourceEvaluation and targetEvaluation.",
+   "uses": [
+    "lem-pur-finite-quotient-module-balancing",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-pur-finite-compact-support-scalar-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-strict-tower-arithmetic-restriction-resolution",
+  "def-pur-native-constant-support-model",
+  "def-pur-strict-scalar-reduction-balancing",
+  "def-pur-constant-scalar-tower-mates",
+  "def-coef-ringed-sequence-site",
+  "def-pur-finite-scalar-coordinate-data",
+  "def-pur-constant-scalar-tower-adjunction",
+  "lem-pur-finite-quotient-module-balancing",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit expansion of the existing strict scalar mate argument, Step 7; no new mathematical route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived adjunction mates on strict inverse systems preserves the canonical proper scalar comparison and extension by zero tensor balancing",
+   "results": "8 hits in Mathlib.Condensed.Light.InternallyProjective and Mathlib.Condensed.Light.Monoidal, concerning internally projective condensed modules and tensor/Hom adjunctions. None supplies the normalized proper/open finite evaluation square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; condensed module facts do not identify these ringed-system evaluation maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySquareIso",
+   "results": "0 hits, unknown identifier CategoryTheory.Functor.mapDerivedCategorySquareIso. The declaration is in the adopted source library, not Mathlib. Read the source-library construction instead.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|rightDerivedFunctorCompMapDerivedCategoryIso",
+   "results": "msearch Mathlib grep returned 0 hits. Local rg found the exact derived square tools in the adopted source library and the existing evaluation constructions in CompactSupportStrictScalarMate. Blueprint search for finite evaluation scalar mate returned no separate node.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing constructions unchanged; the specific finite evaluated-arrow equality remains a separate argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarMate",
+  "date": "2026-10-26",
+  "group": "C1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Finite scalar compact-support comparison, canonical strict tower evaluation and the finite proper/open mate.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictScalarMateEvaluationData",
+  "file": "lean/Sheaf/Paper/StrictScalarMateEvaluationData.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.arrow",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.subsequence_preservesKInjective",
+   "WeilConjectures.PurStrictScalar.reindexProperOrdinary",
+   "WeilConjectures.PurStrictScalar.reindexProper",
+   "WeilConjectures.PurStrictScalar.reindexOpenOrdinary",
+   "WeilConjectures.PurStrictScalar.reindexOpen",
+   "WeilConjectures.PurStrictScalar.reindexImage",
+   "WeilConjectures.PurStrictScalar.arrow",
+   "WeilConjectures.PurStrictScalar.ordinaryPositiveRestriction",
+   "WeilConjectures.PurStrictScalar.ordinaryPositiveRestriction_exact",
+   "WeilConjectures.PurStrictScalar.positiveRestriction_additive",
+   "WeilConjectures.PurStrictScalar.positiveRestriction_limits",
+   "WeilConjectures.PurStrictScalar.positiveRestriction_colimits",
+   "WeilConjectures.PurStrictScalar.positiveRestriction",
+   "WeilConjectures.PurStrictScalar.ordinaryFiniteRestriction",
+   "WeilConjectures.PurStrictScalar.ordinaryFiniteRestriction_exact",
+   "WeilConjectures.PurStrictScalar.finiteRestriction_additive",
+   "WeilConjectures.PurStrictScalar.finiteRestriction_limits",
+   "WeilConjectures.PurStrictScalar.finiteRestriction_colimits",
+   "WeilConjectures.PurStrictScalar.finiteRestriction",
+   "WeilConjectures.PurStrictScalar.evaluationRestriction_existsUnique",
+   "WeilConjectures.PurStrictScalar.evaluationRestrictionOrdinary",
+   "WeilConjectures.PurStrictScalar.evaluationRestriction",
+   "WeilConjectures.PurStrictScalar.supportEvaluation",
+   "WeilConjectures.PurStrictScalar.baseTensor_exact",
+   "WeilConjectures.PurStrictScalar.baseTensor",
+   "WeilConjectures.PurStrictScalar.tensorEvaluation",
+   "WeilConjectures.PurStrictScalar.baseTensorCounit",
+   "WeilConjectures.PurStrictScalar.finiteOrdinaryBalancing_existsUnique",
+   "WeilConjectures.PurStrictScalar.finiteOrdinaryBalancing",
+   "WeilConjectures.PurStrictScalar.finiteBalancing_existsUnique",
+   "WeilConjectures.PurStrictScalar.finiteBalancing",
+   "WeilConjectures.PurStrictScalar.sourceEvaluation",
+   "WeilConjectures.PurStrictScalar.positiveSupportEvaluation",
+   "WeilConjectures.PurStrictScalar.subsequenceEvaluation",
+   "WeilConjectures.PurStrictScalar.targetEvaluation"
+  ],
+  "statement": "def arrow {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (S' : CoefficientDerivedSystemCalculus.{u, u} l F X) (e : ℕ)\n    (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) :\n    support l E c S ⋙ T l E F i Y ⟶\n      pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙\n        support l F c S' ⋙ subsequence l F Y e",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2b81c",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T065257-L-2781926",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2b81c",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T065257-L-2781926",
+  "kind": "interface",
+  "note": "independent cc review: the moved block in StrictScalarMateEvaluationData against the clone's original (identical apart from blueprint tags); the new sorry against the first clause of compactSupportStrictScalarMateConclusion and its node; the 6 direct importers compiled in a sandbox against the delivered modules"
+ }
+}

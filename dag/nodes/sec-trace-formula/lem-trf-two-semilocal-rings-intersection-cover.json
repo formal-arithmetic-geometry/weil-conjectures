@@ -1,0 +1,276 @@
+{
+ "id": "lem-trf-two-semilocal-rings-intersection-cover",
+ "kind": "statement",
+ "title": "Two independent semilocal rings give an affine intersection cover",
+ "statement": "Let $K$ be a field [def-weil-field] and let $C,D\\subseteq K$ be unital subrings with fraction field $K$. Assume that both rings are Noetherian [def-weil-pbc-noetherian-ring], semilocal (have finitely many maximal ideals), and of Krull dimension exactly one [def-weil-pbc-krull-dimension-ring]. Suppose the multiplication map $C\\otimes_{\\mathbb Z}D\\to K$ is surjective [def-weil-pbc-module-tensor-product]. Put $R=C\\cap D$. Then the inclusions induce open immersions $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ and $\\operatorname{Spec}D\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum, def-weil-open-immersion] whose images cover $\\operatorname{Spec}R$. Moreover the multiplication map $C\\otimes_R D\\to K$ is an isomorphism of rings.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09N3 (varieties-lemma-semi-local-both-side), statement in Situation 09MY (varieties-situation-glue)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-jacobson-denominator-function-field] with $A=C$ and the singleton family $B_1=D$. Obtain $0\\ne f\\in C$ with $t=f^{-1}\\in\\operatorname{Jac}(D)$, where $\\operatorname{Jac}$ denotes the intersection of all maximal ideals. Apply it again with $A=D$, $B_1=C$ to obtain $0\\ne g\\in D$ with $s=g^{-1}\\in\\operatorname{Jac}(C)$. All its Noetherian, dimension-one, semilocal and common-fraction-field hypotheses are exactly the assumptions here. The second tensor map is surjective because swapping pure tensors gives an inverse pair of linear maps $C\\otimes_{\\mathbb Z}D\\leftrightarrow D\\otimes_{\\mathbb Z}C$, by the universal property and generation by pure tensors [def-weil-pbc-module-tensor-product]; multiplication into $K$ is unchanged.",
+   "uses": [
+    "lem-sc-jacobson-denominator-function-field",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N5 (varieties-lemma-create-globally-generated), applied twice with a singleton family; agent assembly for Tag 09N3 (varieties-lemma-semi-local-both-side)."
+   }
+  },
+  {
+   "text": "Put $a=fs\\in\\operatorname{Jac}(C)$ and $b=gt\\in\\operatorname{Jac}(D)$; then $ab=1$ in $K$. The Jacobson radicals are ideals, being intersections of ideals. By [lem-weil-pbc-jacobson-radical-one-plus-units] applied to those ideals, $1+a$ is a unit of $C$ and $1+b$ a unit of $D$. Define $x=(1+a)^{-1}$ and $y=a(1+a)^{-1}$ in $K$. Since $ab=1$, $x=b(1+b)^{-1}$ and $y=(1+b)^{-1}$. The first formulas show $x\\in C^\\times$ and $y\\in\\operatorname{Jac}(C)$; the second show $x\\in\\operatorname{Jac}(D)$ and $y\\in D^\\times$. Thus $x,y\\in R=C\\cap D$, both are nonzero, and $x+y=1$.",
+   "uses": [
+    "lem-weil-pbc-jacobson-radical-one-plus-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AME (algebra-lemma-contained-in-radical), equivalence (1) and (2); explicit reciprocal-element calculation supplied by the agent."
+   }
+  },
+  {
+   "text": "For each pair $(B,h)=(C,y)$ or $(D,x)$, prove $B_h=K$ using [def-weil-ring-localization-away]. Let $0\\ne d\\in B$. Every prime $\\mathfrak p$ containing $d$ is nonzero. It is contained in a maximal ideal $\\mathfrak m$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]; if $\\mathfrak p\\subsetneq\\mathfrak m$, the chain $(0)\\subsetneq\\mathfrak p\\subsetneq\\mathfrak m$ contradicts $\\dim B=1$ [def-weil-pbc-krull-dimension-ring]. Hence every such prime is maximal and contains $h\\in\\operatorname{Jac}(B)$. By the radical-intersection clause of [lem-weil-pbc-zero-locus-eq-iff-radical-eq], $h\\in\\sqrt{(d)}$. Thus $h^n=de$ for some $n\\ge1$ and $e\\in B$, so $d^{-1}=e/h^n\\in B_h$. Every element of the fraction field $K$ is therefore in $B_h$. The fraction map $B_h\\to K$ is injective: $h\\ne0$ and a fraction mapping to zero has zero numerator in the domain $B$. This identifies the rings inside $K$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (algebra-lemma-Zariski-topology), items (2) and (7), and Definition 00KE (algebra-definition-Krull); applied to the two radical elements constructed above."
+   }
+  },
+  {
+   "text": "Since $x$ is a unit of $C$, the fractions $r/x^n$ with $r\\in R$ lie in $C$. Conversely, for $c\\in C\\subset K=D_x$ write $c=d/x^n$ with $d\\in D$ and $n\\ge0$. Then $d=x^nc\\in C$ as $x,c\\in C$, so $d\\in C\\cap D=R$. Thus $C=R_x$ inside $K$. Likewise $y$ is a unit of $D$ and $K=C_y$; for $d\\in D$ write $d=c/y^n$, whence $c=y^nd\\in D\\cap C=R$. Thus $D=R_y$. These are identifications over $R$, with injectivity checked by the zero-numerator criterion for localization fractions [def-weil-ring-localization-away].",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N3 (varieties-lemma-semi-local-both-side), final paragraph: the principal-localization conclusion; explicit denominator argument using the two witnesses from Tag 09N5."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-principal-localization-open-immersion] to $R_x$ and $R_y$. Under the identifications in Step 4, the resulting morphisms are precisely the morphisms induced by the inclusions $R\\subset C,D$, and they are open immersions with images $D_R(x)$ and $D_R(y)$. These images cover: a prime of $R$ outside both would contain $x$ and $y$, hence $x+y=1$, contrary to being proper. Here $D_R(h)$ denotes the primes not containing $h$, as in the cited statement.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3 (schemes-lemma-standard-open-affine), proof identifying Spec of a principal localization with its basic open; cover checked by x+y=1."
+   }
+  },
+  {
+   "text": "Apply the module clause of [lem-weil-pbc-localization-tensor] to the $R$-module $D$ and the element $x\\in R$. It gives a bijective linear map $R_x\\otimes_R D\\to D_x$, $(r/x^n)\\otimes d\\mapsto rd/x^n$. Steps 3 and 4 identify its source with $C\\otimes_R D$ and its target with $K$. On each pure tensor $c\\otimes d$ its value is $cd\\in K$, so it equals the multiplication map in the statement by generation by pure tensors [def-weil-pbc-module-tensor-product]. That ring homomorphism is therefore bijective, hence an isomorphism of rings.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (algebra-lemma-tensor-localization), formula for the canonical module isomorphism; specialized to powers of x and M=D."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-jacobson-denominator-function-field",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-jacobson-radical-one-plus-units",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-localization-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09N3, proved by the independent denominator theorem Tag 09N5 instead of its printed DVR-gluing induction; reciprocal-element construction and assembly supplied by Q66."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semilocal|semi.local|glue.*subring|intersection.*noetherian",
+   "results": "{\"t\": \"2026-10-23T12:24:13Z\", \"tool\": \"grep\", \"query\": \"semilocal|semi.local|glue.*subring|intersection.*noetherian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalProperties/Semilocal.lean\"], \"digest\": \"ec7e281f04902fe1\"}; Read the returned declarations. General scheme gluing constructs a scheme without proving this intersection is affine; tensor-product spectrum embeddings do not construct the open charts. Subring closure Noetherianity concerns finitely generated subrings, not intersections. Intersection-of-localizations lemmas start with a given ring. No match for the two-ring intersection gluing theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two one dimensional Noetherian semilocal domains inside a field with surjective multiplication tensor map glue to the affine spectrum of their intersection",
+   "results": "{\"t\": \"2026-10-23T12:24:14Z\", \"tool\": \"leansearch\", \"query\": \"Two one dimensional Noetherian semilocal domains inside a field with surjective multiplication tensor map glue to the affine spectrum of their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc\", \"AlgebraicGeometry.pullbackSpecIso\", \"PrimeSpectrum.tensorProductTo\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"AlgebraicGeometry.coprodSpec\", \"AlgebraicGeometry.sigmaSpec\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued\"], \"digest\": \"5cd47882f96ac253\"}; Read the returned declarations. General scheme gluing constructs a scheme without proving this intersection is affine; tensor-product spectrum embeddings do not construct the open charts. Subring closure Noetherianity concerns finitely generated subrings, not intersections. Intersection-of-localizations lemmas start with a given ring. No match for the two-ring intersection gluing theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Subring\", \"Noetherian\"",
+   "results": "{\"t\": \"2026-10-23T12:24:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Subring\\\", \\\"Noetherian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"is_noetherian_subring_closure\"], \"digest\": \"3ebf837c7ef39932\"}; Read the returned declarations. General scheme gluing constructs a scheme without proving this intersection is affine; tensor-product spectrum embeddings do not construct the open charts. Subring closure Noetherianity concerns finitely generated subrings, not intersections. Intersection-of-localizations lemmas start with a given ring. No match for the two-ring intersection gluing theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independent Noetherian semilocal subrings of a field have intersection whose spectrum is glued from their spectra as open subschemes",
+   "results": "{\"t\": \"2026-10-23T12:24:15Z\", \"tool\": \"leanfinder\", \"query\": \"Independent Noetherian semilocal subrings of a field have intersection whose spectrum is glued from their spectra as open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.instIsOpenImmersionSigmaSpec\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.coprodSpec_apply\", \"PrimeSpectrum.iInf_localization_eq_bot\", \"AlgebraicGeometry.coprodSpec_coprodMk\", \"AlgebraicGeometry.sigmaSpec\", \"MaximalSpectrum.iInf_localization_eq_bot\"], \"digest\": \"5d79d8e6cdd5b7cb\"}; Read the returned declarations. General scheme gluing constructs a scheme without proving this intersection is affine; tensor-product spectrum embeddings do not construct the open charts. Subring closure Noetherianity concerns finitely generated subrings, not intersections. Intersection-of-localizations lemmas start with a given ring. No match for the two-ring intersection gluing theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Subring.*(inf|inter)|isNoetherian_iff_of_finite|of_isLocalization_maximal",
+   "results": "{\"t\": \"2026-10-23T12:25:08Z\", \"tool\": \"grep\", \"query\": \"Subring.*(inf|inter)|isNoetherian_iff_of_finite|of_isLocalization_maximal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Field/Subfield/Basic.lean\", \"Mathlib/Algebra/Field/Subfield/Basic.lean\", \"Mathlib/Algebra/Field/Subfield/Basic.lean\", \"Mathlib/Algebra/Field/Subfield/Basic.lean\", \"Mathlib/FieldTheory/Relrank.lean\", \"Mathlib/Algebra/Ring/Subring/MulOpposite.lean\", \"Mathlib/Algebra/Ring/Subring/MulOpposite.lean\", \"Mathlib/Algebra/Ring/Subring/MulOpposite.lean\"], \"digest\": \"45a8eedd7ee2c955\"}; Read the returned declarations. General scheme gluing constructs a scheme without proving this intersection is affine; tensor-product spectrum embeddings do not construct the open charts. Subring closure Noetherianity concerns finitely generated subrings, not intersections. Intersection-of-localizations lemmas start with a given ring. No match for the two-ring intersection gluing theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two Noetherian one dimensional semilocal subrings A B of K generating K the spectra of A and B are open subschemes covering Spec of A intersection B and their tensor over the intersection is K",
+   "results": "{\"t\": \"2026-10-23T12:25:11Z\", \"tool\": \"leanfinder\", \"query\": \"For two Noetherian one dimensional semilocal subrings A B of K generating K the spectra of A and B are open subschemes covering Spec of A intersection B and their tensor over the intersection is K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"Algebra.ZariskisMainProperty\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"PrimeSpectrum.iInf_localization_eq_bot\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"3859caa992fbff63\"}; Read the returned declarations. General scheme gluing constructs a scheme without proving this intersection is affine; tensor-product spectrum embeddings do not construct the open charts. Subring closure Noetherianity concerns finitely generated subrings, not intersections. Intersection-of-localizations lemmas start with a given ring. No match for the two-ring intersection gluing theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inter.*Noetherian|Noetherian.*inter|[Ss]emi.?local.*[Ss]ubring|[Ss]ubring.*[Ss]emi.?local",
+   "results": "{\"t\": \"2026-10-23T12:32:26Z\", \"tool\": \"grep\", \"query\": \"inter.*Noetherian|Noetherian.*inter|[Ss]emi.?local.*[Ss]ubring|[Ss]ubring.*[Ss]emi.?local\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Algebra/DirectSum/LinearMap.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\"], \"digest\": \"37bd8d9592c400ce\"}; Read the returned declarations. General scheme gluing constructs a scheme without proving this intersection is affine; tensor-product spectrum embeddings do not construct the open charts. Subring closure Noetherianity concerns finitely generated subrings, not intersections. Intersection-of-localizations lemmas start with a given ring. No match for the two-ring intersection gluing theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"Spec\", \"Subring\"",
+   "results": "{\"t\": \"2026-10-23T12:32:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"Spec\\\", \\\"Subring\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned declarations. General scheme gluing constructs a scheme without proving this intersection is affine; tensor-product spectrum embeddings do not construct the open charts. Subring closure Noetherianity concerns finitely generated subrings, not intersections. Intersection-of-localizations lemmas start with a given ring. No match for the two-ring intersection gluing theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two independent Noetherian semilocal one dimensional subrings C D of K have open spectra covering the spectrum of their intersection",
+   "results": "{\"t\": \"2026-10-23T14:42:22Z\", \"tool\": \"leanfinder\", \"query\": \"Two independent Noetherian semilocal one dimensional subrings C D of K have open spectra covering the spectrum of their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.instQuasiSeparatedSpace\", \"IsDedekindDomain.HeightOneSpectrum.iInf_localization_eq_bot\", \"MaximalSpectrum.iInf_localization_eq_bot\", \"PrimeSpectrum.iInf_localization_eq_bot\", \"PrimeSpectrum.instPrespectralSpace\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"PrimeSpectrum.instSpectralSpace\", \"instFiniteMaximalSpectrumOfIsFractionRing\"], \"digest\": \"982c6a064f1b3c14\"}; Read the hits: intersection of maximal localizations starts with one ring, general affine basis covers do not identify two arbitrary subrings with localizations of their intersection, and tensor spectrum embedding/Noetherian filtration declarations do not state this theorem. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two one dimensional semilocal domains in a field whose tensor multiplication is surjective have an affine intersection cover",
+   "results": "{\"t\": \"2026-10-23T14:42:23Z\", \"tool\": \"leansearch\", \"query\": \"Two one dimensional semilocal domains in a field whose tensor multiplication is surjective have an affine intersection cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"RingHom.SurjectiveOnStalks.tensorProductMap\", \"IsLocalization.algebraMap_pi_surjective_of_isLocalization\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"Subalgebra.LinearDisjoint.of_isField'\", \"AlgebraicGeometry.Scheme.AffineCover.X\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\"], \"digest\": \"53b4f39d5f757239\"}; Read the hits: intersection of maximal localizations starts with one ring, general affine basis covers do not identify two arbitrary subrings with localizations of their intersection, and tensor spectrum embedding/Noetherian filtration declarations do not state this theorem. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"Subring\"",
+   "results": "{\"t\": \"2026-10-23T14:51:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"Subring\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: intersection of maximal localizations starts with one ring, general affine basis covers do not identify two arbitrary subrings with localizations of their intersection, and tensor spectrum embedding/Noetherian filtration declarations do not state this theorem. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semilocal.*[Ss]ubring|[Ss]ubring.*semilocal|intersection.*cover|inter.*[Nn]oetherian",
+   "results": "{\"t\": \"2026-10-23T14:51:58Z\", \"tool\": \"grep\", \"query\": \"semilocal.*[Ss]ubring|[Ss]ubring.*semilocal|intersection.*cover|inter.*[Nn]oetherian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Noetherian.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\"], \"digest\": \"4d4919d32ec8aab4\"}; Read the hits: intersection of maximal localizations starts with one ring, general affine basis covers do not identify two arbitrary subrings with localizations of their intersection, and tensor spectrum embedding/Noetherian filtration declarations do not state this theorem. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semilocal-subring-affine-gluing",
+  "date": "2026-10-23",
+  "group": "Q80"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 09NN proof, last sentence: the integral case; this is the componentwise reduction supporting the finite-pinching affine-neighbourhood hypothesis in the ancestor contraction paragraph. Supporting 09NJ proof: Tag 09N4 (varieties-lemma-glue-a-bunch-of-local-rings), statement and proof; local-ring consequences used explicitly in Tag 09NJ (varieties-lemma-finite-set-codim-1-points-in-affine), proof, displayed open covering and sentence preceding it. Supporting 09N4 induction: apply 09N3 to A_1 and the intersection of the remaining rings.",
+   "via": [
+    "lem-trf-semilocal-subring-affine-gluing",
+    "lem-trf-integral-codimension-one-affine-neighbourhood",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-two-semilocal-rings-intersection-cover",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed complementary principal-open parameters from two applications of the existing independent Jacobson-denominator theorem. Expanded the unit, radical, denominator and canonical tensor calculations. Reused existing nodes only; no new lemmas or Mathlib leaves.",
+  "blueprint": "Tag 09NN proof, last sentence: the integral case; this is the componentwise reduction supporting the finite-pinching affine-neighbourhood hypothesis in the ancestor contraction paragraph. Supporting 09NJ proof: Tag 09N4 (varieties-lemma-glue-a-bunch-of-local-rings), statement and proof; local-ring consequences used explicitly in Tag 09NJ (varieties-lemma-finite-set-codim-1-points-in-affine), proof, displayed open covering and sentence preceding it. Supporting 09N4 induction: apply 09N3 to A_1 and the intersection of the remaining rings.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-jacobson-denominator-function-field",
+    "why": "Generic two-subring denominator tool (Stacks 09N5) applied to singleton families in both orders; its 46-node dependency closure does not include this item or the gluing theorem. It supplies radical denominators, while this item constructs complementary parameters and proves the chart and tensor conclusions; no node in this unit supplies the denominator theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-jacobson-denominator-function-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-5b19be85a",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-5b19be85a (reviewer sub-agent of L); spot-checked: PASS, no changes and nothing in fixes/. First split of a node that had no proof on base, so the re-split rule does not apply; no new nodes, no SGA. Source: the statement matches Stacks 09N3 (varieties.tex 7446-7505) in Situation 09MY. Step 1 uses lem-sc-jacobson-denominator-function-field (09N5, varieties.tex 7536-7590) twice, once per order; the tensor swap is justified by the tensor-product definition node. Its 46-node dependency closure contains neither the item nor the 09N4 parent, and the 09N5 proof does not use 09N3, so there is no cycle. Step 2: I recomputed a=f/g in Jac C, b=g/f in Jac D, x=1/(1+a)=b/(1+b) and y=a/(1+a)=1/(1+b), with x+y=1, via the 0AME units node. Step 3: B_h=K follows from the dim-1 chain argument, the every-prime-in-a-maximal clause and the radical formula sqrt(I) = intersection of V(I); the unit-d edge case also holds. Step 4 (C=R_x, D=R_y) is correctly marked elementary. Step 5 gives the open immersions with images D(x), D(y) (01I3); they cover because x+y=1. Step 6: the module clause of the localization-tensor node (00DE) with pure-tensor generation gives the ring isomorphism. Small cases: k[t]_(t) with k[t]_(t-1) gives x=1-t, y=t as expected; C=D and C inside D are excluded by surjectivity. Duplicates: rg for 09N3 finds no other node stating the item. Accepted tool_uses: lem-sc-jacobson-denominator-function-field (unit sk-thm-curveestimate) as a generic black-box commutative-algebra tool, replacing no step of unit sk-i-curve-zero's route. proof_origin agent is recorded honestly; blueprint fields are present."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TwoSemilocalRingsIntersectionCover",
+  "declaration": "AlgebraicGeometry.two_semilocal_rings_intersection_cover",
+  "declarations": [
+   "Subring.infTensorProductMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TwoSemilocalRingsIntersectionCover.lean",
+  "statement": "theorem two_semilocal_rings_intersection_cover {K : Type u} [Field K] (C D : Subring K) [IsFractionRing C K] [IsFractionRing D K] [IsNoetherianRing C] [IsNoetherianRing D] [Finite (MaximalSpectrum C)] [Finite (MaximalSpectrum D)] (hCdim : ringKrullDim C = 1) (hDdim : ringKrullDim D = 1) (hsurj : Function.Surjective (Algebra.TensorProduct.productMap (IsScalarTower.toAlgHom ℤ C K) (IsScalarTower.toAlgHom ℤ D K))) : IsOpenImmersion (Spec.map (CommRingCat.ofHom (Subring.inclusion (inf_le_left : C ⊓ D ≤ C)))) ∧ IsOpenImmersion (Spec.map (CommRingCat.ofHom (Subring.inclusion (inf_le_right : C ⊓ D ≤ D)))) ∧ (∀ x : Spec (CommRingCat.of (C ⊓ D : Subring K)), x ∈ Set.range (Spec.map (CommRingCat.ofHom (Subring.inclusion (inf_le_left : C ⊓ D ≤ C)))) ∨ x ∈ Set.range (Spec.map (CommRingCat.ofHom (Subring.inclusion (inf_le_right : C ⊓ D ≤ D))))) ∧ Function.Bijective (Subring.infTensorProductMap C D)",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary canonical ring homomorphism Subring.infTensorProductMap uses the inclusion-induced algebra structures and Mathlib Algebra.TensorProduct.productMap; the final conjunct asserts its bijectivity, equivalent to being an isomorphism of rings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77215f634",
+  "group": "O4",
+  "result": "pass",
+  "note": "Statement matches Stacks 09N3 in 09MY clause by clause: Field K, Subring C D, IsFractionRing, IsNoetherianRing, Finite MaximalSpectrum, ringKrullDim = 1, productMap over Z surjective; the conclusions are IsOpenImmersion of Spec.map of Subring.inclusion inf_le_left/right, a range cover of Spec(C ⊓ D) and bijectivity of the canonical productMap over C ⊓ D (= ring iso). Helper Subring.infTensorProductMap is real canonical data with source/blueprint docstrings and no sorry; the name is unused in Mathlib and the live clone. lean.statement is verbatim in the file; universe bound; no extra assumptions; the docstring carries all 6 proof steps; report sections present; the interface matches the consumer SemilocalSubringAffineGluing; edge cases checked (field excluded by dim=1, nested rings excluded by surjectivity). No findings; no compile needed since no file changed."
+ }
+}

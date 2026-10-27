@@ -1,0 +1,153 @@
+{
+ "id": "lem-diagonal-cyclic-cartier-projection",
+ "kind": "statement",
+ "title": "Cyclic projection of the specified completed diagonal class",
+ "statement": "Let l be prime, Y,P=ProjectiveLine Y,W=diagonalSurface Y Noetherian, l invertible on Y, and supply the three DiagonalTraceLocalizations. Let D be a derived simultaneous reduction with DiagonalCompletionSpec and DiagonalCycleSystemSpec, and let delta be a completed arrow satisfying IsDiagonalLimit. Let family be a coefficient Family and reference a Reference to this same whole delta [def-sfb-diagonal-coefficient-reference]. For every n there exists a CyclicCartierFrame p [def-diagonal-cyclic-cartier-frame] whose reduction of family.zl.delta equals geoCartierCanonicalClass over R=ULift(Z/l^(n+1)), with the positive Cartier sign. No finite extension E, uniformizer, quotient coefficient algebra or trace conclusion occurs.",
+ "stmt_deps": [
+  "def-diagonal-cyclic-cartier-frame",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-geo-cartier-canonical-class"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [
+  {
+   "text": "Construct the frame independently of the completed arrow. Use the finite-discrete realization and direct-image comparison helpers, the regular flat scalar endpoint, supported flatness and the ordinary supported scalar unit, and flatness of zlLine. Construct the integral and finite root maps, then apply the cyclic root endpoint lemma. Package these data in CyclicCartierFrame.",
+   "uses": [
+    "lem-diagonal-uniformizer-finite-models",
+    "lem-diagonal-scalar-diagram-transport",
+    "lem-diagonal-supported-scalar-source",
+    "lem-sfb-diagonal-supported-flat",
+    "lem-sfb-diagonal-supported-ordinary-scalars",
+    "lem-diagonal-finite-integral-endpoint",
+    "lem-diagonal-integral-root-map",
+    "lem-diagonal-finite-root-map",
+    "lem-diagonal-cyclic-root-endpoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite coefficient transport comparison to the supplied frame and IsDiagonalLimit. It identifies the integral restrictions of its cyclic reduction and cartierResidueReducedPro. The proved cyclic restriction-detection theorem cancels this restriction.",
+   "uses": [
+    "def-sfb-diagonal-trace-limit-characterization",
+    "def-sfb-diagonal-coefficient-reference",
+    "lem-diagonal-cyclic-evaluation-transport",
+    "lem-diagonal-cyclic-class-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the uniqueness clause of cartier_reduction_site_comparison on geoCartierCanonicalClass. Its etale boundary witness is geoCartierEtaleClass, with geoCartierEtaleClass_spec and geoCartierCanonicalClass_comparison. This identifies cartierResidueReducedPro with the canonical positive class. Substitute into the result of the preceding step.",
+   "uses": [
+    "lem-sp-cartier-reduction-site-comparison",
+    "def-sfb-geo-cartier-canonical-class",
+    "def-sfb-geo-cartier-canonical-etale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-uniformizer-finite-models",
+  "lem-diagonal-scalar-diagram-transport",
+  "lem-diagonal-supported-scalar-source",
+  "lem-sfb-diagonal-supported-flat",
+  "lem-sfb-diagonal-supported-ordinary-scalars",
+  "lem-diagonal-finite-integral-endpoint",
+  "lem-diagonal-integral-root-map",
+  "lem-diagonal-finite-root-map",
+  "lem-diagonal-cyclic-root-endpoint",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-diagonal-cyclic-evaluation-transport",
+  "lem-diagonal-cyclic-class-restriction",
+  "lem-sp-cartier-reduction-site-comparison",
+  "def-sfb-geo-cartier-canonical-class",
+  "def-sfb-geo-cartier-canonical-etale"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+  "by": "R4",
+  "note": "Real Lean frame construction using the proved cyclic root endpoint, integral restriction cancellation, and positive canonical boundary comparison. One finite coefficient-transport comparison remains separately stated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized derived scalar unit induces a bijection on Ext groups and finite coefficient changes preserve the supported Cartier class",
+   "date": "2026-10-27",
+   "results": "8 hits: Ext.chgUniv, Ext.homEquiv_chgUniv, Ext.mk₀_bijective, Ext.homLinearEquiv, Ext.homLinearEquiv_apply, Ext.mk₀_linearEquiv₀_apply, Ext.smul_eq_comp_mk₀, ProjectiveResolution.extAddEquivCohomologyClass_apply.",
+   "verdict": "Generic Ext APIs only. Local search found scalar_unit_ext_bijective (proved), geoCartierCanonicalClass_scalar (stated), and the completed and scalar endpoint interfaces; reuse them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "date": "2026-10-27",
+   "results": "6 hits, including CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp and map_comp_assoc.",
+   "verdict": "Functor composition API is available, but not the normalized completed/condensed/finite cyclic comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "CyclicCartier|CartierFrame|cyclic.*[Cc]artier",
+   "date": "2026-10-27",
+   "results": "0 hits.",
+   "verdict": "No existing cyclic Cartier frame or its projection/continuation theorem in the search index. Local rg additionally inspected DiagonalCoefficient*, DiagonalUniformizer*, GeoCartier*, CartierReduction*, and ScalarUnitExt."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerCartierReduction",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+   "via": [
+    "lem-diagonal-uniformizer-cartier-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCyclicCartierProjection",
+  "file": "lean/Sheaf/Paper/DiagonalCyclicCartierProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCompleted_cyclicCartier",
+  "statement": "theorem diagonalCompleted_cyclicCartier\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D)\n    (hsystem : DiagonalCycleSystemSpec l Y hY D)\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (hδ : DiagonalTrace.IsDiagonalLimit l Y hY D δ)\n    (family : Family l Y) (reference : Reference l Y δ family) (n : ℕ) :\n    ∃ p : CyclicCartierFrame l Y n,\n      p.reduce l Y n family.zl.delta =\n        geoCartierCanonicalClass (diagonalResidue.{u} l n) (l ^ (n + 1))\n          (pow_pos (Fact.out : l.Prime).pos _) (cartierResidue_cast l (n + 1))\n          (diagonalImmersion Y) (diagonalImmersion_cartier Y)\n          (diagonalSurface_power_unit l Y hY n)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021357-L-2763238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T050641-L-249228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

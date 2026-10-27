@@ -1,0 +1,260 @@
+{
+ "id": "lem-a1-quasi-affine-chart-limit-topology",
+ "kind": "statement",
+ "title": "Topology and ambient-open images of a directed quasi-affine chart limit",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], let $I$ be a small nonempty directed partially ordered set, and let $U_i\\subseteq Y$ be open subschemes such that $U_k\\subseteq U_i$ for $i\\leq k$. Assume every $U_i$ is quasi-affine, meaning a quasi-compact open subscheme of an affine scheme. Put $E=\\bigcap_i|U_i|$ with its subspace topology and $A_i=\\Gamma(U_i,\\mathcal O_{U_i})$, with transition homomorphisms given by restriction. Let $(C,(r_i:A_i\\to C)_i)$ be a colimit of this system in commutative rings [def-weil-pbc-category-colimit]. Let $j_i:U_i\\to\\operatorname{Spec}A_i$ be the canonical morphism corresponding to $\\mathrm{id}_{A_i}$ under [lem-a1-locally-ringed-space-affine-adjunction], and put $p_i=\\operatorname{Spec}(r_i):\\operatorname{Spec}C\\to\\operatorname{Spec}A_i$ [def-weil-affine-spectrum] and $Q_i=j_i(|U_i|)$. Then there is a unique continuous map $t:E\\to|\\operatorname{Spec}C|$ satisfying $p_i\\circ t=j_i|_E$ for every $i$. It is a homeomorphism onto\n$$F=\\bigcap_i p_i^{-1}(Q_i),$$\nand each $p_i^{-1}(Q_i)$ is a quasi-compact open of $\\operatorname{Spec}C$. For every open $W\\subseteq Y$ contained in $E$ and every $i\\in I$, regarding $W$ as an open in $U_i$, one has\n$$t(W)=p_i^{-1}(j_i(W)).$$\nIn particular $t(W)$ is open in $\\operatorname{Spec}C$; no quasi-compactness of $W$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0API, lemma-sits-in-functions, proof, middle paragraph from the commutative diagrams through the description of the image, and final paragraph of cartesian squares (old parent steps 4 and 7)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
+  "lem-a1-locally-ringed-space-affine-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Write $q_{ik}=\\operatorname{Spec}(A_i\\to A_k)$ for $i\\le k$. The canonical-embedding lemma makes each $j_i$ an open immersion with quasi-compact source; thus $Q_i$ is open and quasi-compact. Naturality of the affine adjunction gives $q_{ik}j_k=j_i|_{U_k}$: both morphisms correspond to restriction $A_i\\to A_k$. In particular the points $j_i(e)$ form a compatible family for every $e\\in E$.",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0API, lemma-sits-in-functions, proof, middle paragraph and final paragraph of cartesian squares"
+   }
+  },
+  {
+   "text": "Apply the filtered-spectrum topological-limit statement to the given colimit $C$. Its compatible-family homeomorphism defines a unique map $t$ by the coordinates $j_i|_E$. Each coordinate is continuous, and the spectrum topology is the coarsest making the projections continuous; therefore $t$ is continuous. The same compatible-family bijection proves uniqueness among all maps with these coordinates.",
+   "uses": [
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0API, lemma-sits-in-functions, proof, middle paragraph and final paragraph of cartesian squares"
+   }
+  },
+  {
+   "text": "Certainly $t(E)\\subseteq F$. Conversely take $z\\in F$ and write uniquely $p_i(z)=j_i(x_i)$ with $x_i\\in U_i$, using the open embeddings. If $i\\le k$, compatibility and step 1 give $j_i(x_i)=j_i(x_k)$, hence $x_i=x_k$ as points of $Y$. For arbitrary $i,l$ choose $k\\ge i,l$; then $x_i=x_k=x_l$. Nonemptiness of $I$ now supplies one common point $x\\in\\bigcap_iU_i=E$, and coordinate uniqueness gives $z=t(x)$. The same injectivity of any $j_i$ proves injectivity of $t$.",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0API, lemma-sits-in-functions, proof, middle paragraph and final paragraph of cartesian squares"
+   }
+  },
+  {
+   "text": "Fix $i_0\\in I$. On $F$ the inverse of $t$ is $z\\mapsto j_{i_0}^{-1}(p_{i_0}(z))$, regarded as a point of $E$. This map is continuous into $Y$, since $p_{i_0}(F)\\subseteq Q_{i_0}$ and $j_{i_0}$ is a homeomorphism onto $Q_{i_0}$. It is continuous into the subspace $E$: the inverse image of $E\\cap O$ is the inverse image of $O$ for every open $O\\subseteq Y$. Thus $t:E\\to F$ is a homeomorphism. The final clause of the filtered-spectrum lemma applied to the quasi-compact open $Q_i$ proves each $p_i^{-1}(Q_i)$ quasi-compact and open.",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "def-weil-open-immersion",
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0API, lemma-sits-in-functions, proof, middle paragraph and final paragraph of cartesian squares"
+   }
+  },
+  {
+   "text": "Fix $i$ and an open $W\\subseteq Y$ contained in $E$. For $k\\ge i$, apply the affinization-square lemma to the open inclusion $U_k\\subseteq U_i$, whose source and target are both quasi-affine. It identifies $q_{ik}^{-1}(j_i(U_k))$ with $j_k(U_k)$ and the restricted map with the identity on $U_k$. Since $W\\subseteq U_k$, taking the inverse image of $j_i(W)$ inside this identified open gives $q_{ik}^{-1}(j_i(W))=j_k(W)$, with the same point $w\\in W$ on both sides. Also $j_i(W)$ is open, because $W$ is open in $U_i$ and $j_i$ is an open immersion.",
+   "uses": [
+    "lem-a1-quasi-affine-open-affinization-square",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0API, lemma-sits-in-functions, proof, middle paragraph and final paragraph of cartesian squares"
+   }
+  },
+  {
+   "text": "The coordinate identity gives $t(W)\\subseteq p_i^{-1}(j_i(W))$. Conversely let $p_i(z)=j_i(w)$ with $w\\in W$. For every $k\\ge i$, step 5 and its identity-on-$U_k$ clause imply $p_k(z)=j_k(w)$. For arbitrary $l$ choose $k\\ge i,l$; then $p_l(z)=q_{lk}p_k(z)=j_l(w)$ by step 1. Coordinate uniqueness from step 2 gives $z=t(w)$. Hence $t(W)=p_i^{-1}(j_i(W))$, an open set by continuity of $p_i$. No compactness of $W$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0API, lemma-sits-in-functions, proof, middle paragraph and final paragraph of cartesian squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-weil-open-immersion",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "lem-a1-quasi-affine-open-affinization-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0API, lemma-sits-in-functions, proof, middle paragraph and final paragraph of cartesian squares"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of quasi-affine open subschemes embeds in the spectrum of the colimit of their section rings with image the intersection of the inverse images of the charts",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:19:51Z\", \"tool\": \"leanfinder\", \"query\": \"An inverse limit of quasi-affine open subschemes embeds in the spectrum of the colimit of their section rings with image the intersection of the inverse images of the charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι\"], \"digest\": \"9908174ad7d73744\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual quasi-affine chart embeddings or limits of schemes with affine transition maps. They do not identify this possibly nonschematic intersection or its arbitrary ambient-open images; a general open inclusion need not be affine."
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_toSpecΓ|instIsOpenImmersionToSpecΓ|isLimit.*[Ss]pec|[Ss]pec.*isLimit",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-22T06:20:30Z\", \"tool\": \"grep\", \"query\": \"isPullback_toSpecΓ|instIsOpenImmersionToSpecΓ|isLimit.*[Ss]pec|[Ss]pec.*isLimit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\"], \"digest\": \"3673523a0eac8173\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual quasi-affine chart embeddings or limits of schemes with affine transition maps. They do not identify this possibly nonschematic intersection or its arbitrary ambient-open images; a general open inclusion need not be affine."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"toSpecΓ\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:20:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"toSpecΓ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\"], \"digest\": \"828b52176dad08e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual quasi-affine chart embeddings or limits of schemes with affine transition maps. They do not identify this possibly nonschematic intersection or its arbitrary ambient-open images; a general open inclusion need not be affine."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A directed intersection of quasi-affine open charts maps homeomorphically to the intersection of their inverse images in the spectrum of the colimit ring",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:20:31Z\", \"tool\": \"leansearch\", \"query\": \"A directed intersection of quasi-affine open charts maps homeomorphically to the intersection of their inverse images in the spectrum of the colimit ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.projIsoSpecTopComponent\", \"SpectrumRestricts.homeomorph\", \"AlgebraicGeometry.IsAffineOpen.isoSpec\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top_assoc\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_top\", \"QuasispectrumRestricts.homeomorph\", \"AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ\"], \"digest\": \"32aab43c08a50661\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual quasi-affine chart embeddings or limits of schemes with affine transition maps. They do not identify this possibly nonschematic intersection or its arbitrary ambient-open images; a general open inclusion need not be affine."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the inverse limit of the spectra of section rings of decreasing quasi affine opens, the image of any ambient open contained in every stage is the inverse image of its image at a fixed stage",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:20:41Z\", \"tool\": \"leanfinder\", \"query\": \"In the inverse limit of the spectra of section rings of decreasing quasi affine opens, the image of any ambient open contained in every stage is the inverse image of its image at a fixed stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ\", \"AlgebraicGeometry.Scheme.IdealSheafData.opensRange_subschemeCover_map\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_self\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_image_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen'\", \"AlgebraicGeometry.IsAffineOpen.ι_basicOpen_preimage\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f\"], \"digest\": \"e43429a00a4a8209\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual quasi-affine chart embeddings or limits of schemes with affine transition maps. They do not identify this possibly nonschematic intersection or its arbitrary ambient-open images; a general open inclusion need not be affine."
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_toSpecΓ|instIsOpenImmersionToSpecΓ|preimage_opensRange_toSpecΓ",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-22T13:51:48Z\", \"tool\": \"grep\", \"query\": \"isPullback_toSpecΓ|instIsOpenImmersionToSpecΓ|preimage_opensRange_toSpecΓ\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"0108b042ee83f95b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the canonical quasi-affine open embedding is only an input. QuasiAffine.lean:115 and 147 require an affine morphism, which an arbitrary inclusion of quasi-affine opens need not be. Directed affine covers and affine-chart isomorphisms do not state the directed-intersection topology or arbitrary ambient-open image equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of spectra of global sections of quasi affine opens identifies the directed intersection and sends ambient opens to opens",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T13:51:48Z\", \"tool\": \"leansearch\", \"query\": \"The inverse limit of spectra of global sections of quasi affine opens identifies the directed intersection and sends ambient opens to opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.isoSpec\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.cocone\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_top\", \"AlgebraicGeometry.IsAffineOpen.isoSpec_inv_appTop\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.cocone_ι_app\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.IsAffineOpen.isoSpec_inv_ι\", \"AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ\"], \"digest\": \"957ef2636106e4ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the canonical quasi-affine open embedding is only an input. QuasiAffine.lean:115 and 147 require an affine morphism, which an arbitrary inclusion of quasi-affine opens need not be. Directed affine covers and affine-chart isomorphisms do not state the directed-intersection topology or arbitrary ambient-open image equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"toSpecΓ\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T13:51:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"toSpecΓ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\"], \"digest\": \"828b52176dad08e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the canonical quasi-affine open embedding is only an input. QuasiAffine.lean:115 and 147 require an affine morphism, which an arbitrary inclusion of quasi-affine opens need not be. Directed affine covers and affine-chart isomorphisms do not state the directed-intersection topology or arbitrary ambient-open image equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of an open subset contained in all quasi affine charts equals the inverse image of its chart image in the spectrum of a direct limit ring",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T13:51:51Z\", \"tool\": \"leanfinder\", \"query\": \"The image of an open subset contained in all quasi affine charts equals the inverse image of its chart image in the spectrum of a direct limit ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ\", \"AlgebraicGeometry.Scheme.affineBasisCover_map_range\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage\", \"AlgebraicGeometry.IsAffineOpen.opensRange_fromSpec\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f\", \"AlgebraicGeometry.IsAffineOpen.range_fromSpec\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_preimage_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen'\"], \"digest\": \"80b6fbd4960b5c7c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the canonical quasi-affine open embedding is only an input. QuasiAffine.lean:115 and 147 require an affine morphism, which an arbitrary inclusion of quasi-affine opens need not be. Directed affine covers and affine-chart isomorphisms do not state the directed-intersection topology or arbitrary ambient-open image equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed intersection of decreasing quasi affine open subschemes embeds in the spectrum of the colimit of their rings of global sections",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T13:51:52Z\", \"tool\": \"leanfinder\", \"query\": \"A directed intersection of decreasing quasi affine open subschemes embeds in the spectrum of the colimit of their rings of global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.directedAffineCover_f\", \"AlgebraicGeometry.Scheme.directedAffineCover_X\", \"AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.cocone\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.cocone_ι_app\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_f\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone\"], \"digest\": \"fcd1efa9f19acb1f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the canonical quasi-affine open embedding is only an input. QuasiAffine.lean:115 and 147 require an affine morphism, which an arbitrary inclusion of quasi-affine opens need not be. Directed affine covers and affine-chart isomorphisms do not state the directed-intersection topology or arbitrary ambient-open image equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-intersection-canonical-affine-embedding",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, canonical embedding j, final compatibility diagram, and identification of the inverse images of j(W) under both affine projections. In Tag 0API: proof, middle paragraph from the commutative diagrams through the description of the image, and final paragraph of cartesian squares (old parent steps 4 and 7)",
+   "via": [
+    "lem-a1-intersection-canonical-affine-embedding",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-quasi-affine-chart-limit-topology",
+  "worker": "stage1",
+  "summary": "Expanded the topology and ambient-open-image arguments of Tag 0API in six steps, using the existing canonical quasi-affine embedding, affine adjunction, filtered-spectrum topology, and Cartesian affinization-square nodes. No new nodes or statement changes. Explicit common-upper-bound arguments handle the image and arbitrary ambient opens without assuming the inclusions affine or W quasi-compact.",
+  "blueprint": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, canonical embedding j, final compatibility diagram, and identification of the inverse images of j(W) under both affine projections. In Tag 0API: proof, middle paragraph from the commutative diagrams through the description of the image, and final paragraph of cartesian squares (old parent steps 4 and 7)",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-5db2714da",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-5db2714da (reviewer sub-agent of L); spot-checked: Read Stacks Tag 0API (more-groupoids.tex lemma-sits-in-functions): the middle paragraph (the charts U_i→Spec A_i are qc open immersions; Spec colim A_i = lim Spec A_i; E→Spec A is a homeomorphism onto the intersection of the inverse images) and the final paragraph (the 0ARY cartesian squares give that j(W) is open). The item is that topological content, and its statement is unchanged; parent steps 3 and 5 use exactly the homeomorphism onto F, the qc of p_i^{-1}(Q_i) and t(W)=p_i^{-1}(j_i(W)). Checked all 6 steps against the cited statements. (1) Adjunction naturality in Z and R gives q_ik j_k=j_i|U_k; the trf embedding plus the open-immersion definition make Q_i a qc open. (2) The hypotheses of filtered-spectrum-topological-limit match the item (small, nonempty, directed, colimit in CRing); continuity comes from its coarsest-topology clause and uniqueness from its bijection. (3) Image and injectivity follow from injectivity of j_i and common upper bounds, with no affineness of intersections and no separatedness of Y assumed. (4) The inverse is j_{i0}^{-1}p_{i0}; the qc of p_i^{-1}(Q_i) comes from the node's explicit final clause. (5) The 0ARY square node is applied only to U_k⊆U_i (both quasi-affine) and never to W; its 'equivalently' clause gives q_ik^{-1}(j_i(W))=j_k(W) pointwise. (6) The elementary assembly is genuinely elementary. The item's j_i (via the adjunction) agrees with the trf node's j (via morphism-into-affine): both send f to f^sharp. Edge cases tested: constant system, empty U_i (C=0), A^2 minus 0 in A^2, D(f) in Spec B, non-qc W. No new nodes; proof_deps equals the union of uses; no cycle; the rg -L duplicate search found no other node with this statement. Batch-5: lem-trf-quasi-affine-canonical-affine-embedding is a Mathlib leaf (Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine) stating the generic fact that a quasi-affine scheme embeds openly into Spec Γ. It is not part of the trace formula or Poincaré duality or their proofs; accepted. lem-a1-quasi-affine-open-affinization-square (same unit, 0ARY) reaches sec-trace-formula only through that leaf; accepted. No SGA; tool_uses empty and none needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiAffineChartLimitTopology",
+  "declaration": "AlgebraicGeometry.Scheme.quasiAffineChartLimitTopology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.quasiAffineChartSectionDiagram",
+   "AlgebraicGeometry.Scheme.quasiAffineChartLimitTopology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiAffineChartLimitTopology.lean",
+  "statement": "theorem quasiAffineChartLimitTopology (Y : Scheme.{u}) (I : Type u) [PartialOrder I] [Nonempty I] (hdir : Directed (· ≤ ·) (id : I → I)) (U : I → Y.Opens) (hU : Antitone U) [hqa : ∀ i : I, (U i).toScheme.IsQuasiAffine] (c : Cocone (quasiAffineChartSectionDiagram Y U hU)) (hc : IsColimit c) : ∃ t : C({x : Y // ∀ i : I, x ∈ U i}, Spec c.pt), (∀ (i : I) (x : {x : Y // ∀ i : I, x ∈ U i}), (Spec.map (c.ι.app i)) (t x) = (U i).toScheme.toSpecΓ ⟨x.val, x.property i⟩) ∧ (∀ t' : C({x : Y // ∀ i : I, x ∈ U i}, Spec c.pt), (∀ (i : I) (x : {x : Y // ∀ i : I, x ∈ U i}), (Spec.map (c.ι.app i)) (t' x) = (U i).toScheme.toSpecΓ ⟨x.val, x.property i⟩) → t' = t) ∧ Topology.IsEmbedding t ∧ Set.range t = ⋂ i : I, (Spec.map (c.ι.app i)) ⁻¹' Set.range (U i).toScheme.toSpecΓ ∧ (∀ i : I, IsOpen ((Spec.map (c.ι.app i)) ⁻¹' Set.range (U i).toScheme.toSpecΓ) ∧ IsCompact ((Spec.map (c.ι.app i)) ⁻¹' Set.range (U i).toScheme.toSpecΓ)) ∧ (∀ W : Y.Opens, (W : Set Y) ⊆ ⋂ i : I, (U i : Set Y) → (∀ i : I, t '' {x | x.val ∈ W} = (Spec.map (c.ι.app i)) ⁻¹' ((U i).toScheme.toSpecΓ '' {x : (U i).toScheme | x.val ∈ W})) ∧ IsOpen (t '' {x | x.val ∈ W}))",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-616dcd774",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: E as a subtype with subspace topology, A_i built from real restriction maps, arbitrary colimit cocone, j_i = toSpecΓ, unique continuous t with p_i∘t = j_i, embedding with range F, each p_i⁻¹(Q_i) open and compact, and t(W) = p_i⁻¹(j_i(W)) for every i plus openness with no compactness on W. No extra hypotheses (no separatedness, no affine inclusions). Checked against the source text (more-groupoids Tag 0API, middle and final paragraphs). Only the lean field changed versus base; the statement is verbatim in the file. Proof-dependency modules filteredSpectrumTopologicalLimit and isPullback_toSpecΓ_of_isOpenImmersion are imported. The helper diagram is real data and does not duplicate intersectionOpenDiagram. Index in universe u is enough for the only citer, the parent intersection-canonical-affine-embedding. Docstrings carry source, blueprint tag and the 6 steps; only proof is sorry. Report has both required sections. No file changed, so nothing compiled. Advisory: at stage 3 the parent needs an iso Γ(U.toScheme,⊤) ≅ X.presheaf.obj (op U) to connect the two diagrams."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261023T102647-L-2944246",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.quasiAffineChartLimitTopology"
+  ],
+  "sorry_after": []
+ }
+}

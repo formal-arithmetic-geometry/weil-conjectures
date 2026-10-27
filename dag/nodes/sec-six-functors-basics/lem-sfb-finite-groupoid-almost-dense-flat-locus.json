@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-finite-groupoid-almost-dense-flat-locus",
+ "kind": "statement",
+ "title": "Almost dense finite locally free locus for a finite groupoid",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme]. Assume $s,t$ are finite [def-weil-finite-integral-morphism]. For a morphism $a:T\\to U$, the restricted groupoid has object scheme $T$ and arrow scheme $T\\times_{a,U,s}R\\times_{t,U,a}T$ [def-pc-fibre-product], with induced source, target and groupoid operations. Then there are an open subscheme $W\\subseteq U$ and a closed subscheme $W'\\subseteq W$ [def-weil-open-immersion, def-weil-closed-immersion] such that both are $R$-invariant (their inverse images under $s$ and $t$ agree as subschemes of $R$), $W'\\hookrightarrow W$ induces a homeomorphism on underlying spaces, $U=t(s^{-1}(\\overline{|W|}))$ as sets, and the source and target of the restricted groupoid on $W'$ are finite locally free [def-pc-finite-locally-free].",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), statement."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Choose the invariant closed filtration $Z_n$ of [lem-sfb-finite-groupoid-invariant-rank-filtration], and put $D_r=Z_{r-1}\\setminus Z_r$. Its intersection is empty, and the source over $D_r$ is finite locally free of degree $r$. We construct pairwise disjoint invariant opens $W_r\\subseteq U$ and invariant closed subschemes $W'_r\\subseteq W_r$ with $|W'_r|=|W_r|$, maintaining $U\\setminus|Z_n|\\subseteq C_n:=\\bigcup_{1\\leq r\\leq n}\\sigma(\\overline{|W_r|})$, where $\\sigma(A)=t(s^{-1}(A))$. For $n=0$ take $C_0=\\varnothing$; the asserted inclusion holds because $Z_0=U$.",
+   "uses": [
+    "lem-sfb-finite-groupoid-invariant-rank-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), first paragraph and induction hypotheses"
+   }
+  },
+  {
+   "text": "For any already constructed $W_r$, its saturation $F_r=\\sigma(\\overline{|W_r|})$ is invariant by [lem-sfb-groupoid-subset-saturation-invariant]. It is closed: $s^{-1}(\\overline{|W_r|})$ is closed by continuity of $s$, and $t$ sends closed subsets to closed subsets by [lem-weil-pbc-finite-closed-map-finite-fibres], since $t$ is finite. Thus each finite union $C_n=\\bigcup_{r\\leq n}F_r$ is closed and invariant, with $s^{-1}(C_n)=t^{-1}(C_n)$.",
+   "uses": [
+    "lem-sfb-groupoid-subset-saturation-invariant",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), induction, closed saturated subsets"
+   }
+  },
+  {
+   "text": "Given the construction through $n$, set $W_{n+1}=U\\setminus(|Z_{n+1}|\\cup C_n)$ with its open subscheme structure. Since $U\\setminus|Z_n|\\subseteq C_n$, this open lies in $|Z_n|\\setminus|Z_{n+1}|$. Its underlying set is therefore exactly the set prescribed in the source, $|Z_n|\\setminus(|Z_{n+1}|\\cup C_n)$. Complements and unions preserve the equality of inverse images defining set invariance; hence $W_{n+1}$ is invariant as an open subscheme. Each earlier $W_r$ lies in $F_r$ by the identity section, so is disjoint from $W_{n+1}$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), inductive construction of the next open; corrected indexing in the openness argument"
+   }
+  },
+  {
+   "text": "Define $W'_{n+1}=Z_n\\times_U W_{n+1}$. On an affine open $\\operatorname{Spec}A$ of $W_{n+1}$ this is $\\operatorname{Spec}(A/I)$ for the restricted ideal of $Z_n$, so it is closed; its support is all of $W_{n+1}$ by step 3. Pullback intersections of the two equal subschemes $s^{-1}(Z_n)=t^{-1}(Z_n)$ and $s^{-1}(W_{n+1})=t^{-1}(W_{n+1})$ show scheme-theoretic invariance of $W'_{n+1}$. It is an open subscheme of $D_{n+1}$. Thus its source is the open restriction of the degree-$(n+1)$ map in [lem-sfb-finite-groupoid-invariant-rank-filtration]. Finiteness persists by [lem-weil-pbc-finite-morphism-permanence](a); flatness and local finite presentation persist because the same local rings and local affine presentations compute them on an open restriction. Its fibres are the same fibres, so the degree stays $n+1$. Inversion is an involutive isomorphism interchanging source and target, hence the target has the same properties.",
+   "uses": [
+    "lem-sfb-finite-groupoid-invariant-rank-filtration",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), inductive construction of the thickening and rank assertion"
+   }
+  },
+  {
+   "text": "Extend $C_n$ by $F_{n+1}=\\sigma(\\overline{|W_{n+1}|})$. A point outside $Z_{n+1}$ either lies in $C_n$ or, by step 3, belongs to $W_{n+1}$, which is contained in $F_{n+1}$ by the identity section. This proves $U\\setminus|Z_{n+1}|\\subseteq C_{n+1}$ and closes the induction. In particular its initial stage is $W_1=W'_1=U\\setminus Z_1$; no rank-zero piece is needed.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), verification of induction property (3), including the initial stage"
+   }
+  },
+  {
+   "text": "Let $W=\\bigcup_{r\\geq1}W_r$ with its open subscheme structure. The pairwise disjoint open cover identifies $W$ with $\\coprod_r W_r$. Glue $W'_r\\hookrightarrow W_r$ to $W'\\hookrightarrow W$: on each member use its defining ideal, and on the empty intersections compatibility is unique. The resulting quotient structure sheaves define a closed immersion by its affine-local description. Since each $|W'_r|=|W_r|$, this closed immersion is a homeomorphism on underlying spaces. Invariance of $W$ is equality of the unions of its inverse images. For $W'$ the two pullbacks agree on each common open inverse image of $W_r$, where they are the equal pullbacks of $W'_r$; hence they agree globally.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), disjoint unions of the open pieces and their closed thickenings"
+   }
+  },
+  {
+   "text": "For an invariant monomorphism $W'\\to U$, the double restriction $W'\\times_{U,s}R\\times_{t,U}W'$ identifies with either single inverse image: the equality of the two inverse-image subschemes makes the second condition automatic, and a monomorphism has unique lifts. Consequently the restricted source is a base change of the finite map $s$, and is finite by [lem-weil-pbc-finite-morphism-permanence](a). Above each open-and-closed piece $W'_r$ it is exactly the source constructed in step 4, so it is flat at every point. Every point also has the local affine finite presentation furnished on that piece, hence the global source is locally of finite presentation. By the definition it is finite locally free. Inversion identifies the restricted target with the restricted source, so the target is finite locally free as well.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), final finite locally free conclusion, with finiteness obtained by a single global base change"
+   }
+  },
+  {
+   "text": "For any $u\\in|U|$, the empty intersection $\\bigcap_n|Z_n|$ gives some $n$ with $u\\notin|Z_n|$. By the induction $u\\in C_n$, hence $u\\in\\sigma(\\overline{|W_r|})$ for some $r\\leq n$. Since $W_r\\subseteq W$, monotonicity of closure, inverse image and image gives $u\\in\\sigma(\\overline{|W|})$. This proves $|U|=t(s^{-1}(\\overline{|W|}))$. Together with steps 6 and 7 it gives all four required clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), last paragraph: use of the empty intersection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-groupoid-invariant-rank-filtration",
+  "lem-sfb-groupoid-subset-saturation-invariant",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-a1-groupoid-scheme",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABA (lemma-finite-flat-over-almost-dense-subscheme), full proof; index in the openness argument corrected using the preceding induction property (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scheme groupoid with finite source and target has an invariant open with a closed thickening on which the maps are finite locally free and whose closure meets every orbit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) [H : CompactSpace ↥X] (x : ↥⋯.choose),\\n  𝒰.finiteSubcover.f x = 𝒰.f (AlgebraicGeometry.Scheme.Cover.idx 𝒰 ↑x)\", \"doc\": \"For any compact scheme $X$ and open cover $\\\\mathcal{U}$ of $X$, under the compactness assumption, the function $f$ of the finite subcover evaluated at a point $x \\\\in X$ equals the original cover's fun\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) [H : CompactSpace ↥X] (x : ↥⋯.choose),\\n  𝒰.finiteSubcover.X x = 𝒰.X (AlgebraicGeometry.Scheme.Cover.idx 𝒰 ↑x)\", \"doc\": \"For any compact scheme $X$ and any open cover $\\\\mathcal{U}$ of $X$ (defined by a jointly surjective family of open immersions), there exists a finite subset $t$ of the indexing set such that the union\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → [H : CompactSpace ↥X] → X.OpenCover\", \"doc\": \"For any compact scheme $X$ and any open cover $\\\\mathcal{U}$ of $X$ (defined by a jointly surjective family of open immersions), there exists a finite subset $t$ of the indexing set such that the union\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} → AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f → S\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this definition constructs\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [inst_3 : Quiver.IsThin J]\\n  [ins\", \"doc\": \"The zeroth component $ I_0 $ of the open cover of the colimit scheme $ \\\\varinjlim F $, constructed from locally directed gluing data, is equal to the category $ J $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X.RationalMap Y) → (↑f.domain).OpenCover\", \"doc\": \"For a rational map $f$ between schemes $X$ and $Y$, this constructs an open cover of the domain of $f$ using the domains of all partial maps equivalent to $f$. The cover consists of open immersions wh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝒰 : X.OpenCover) → [H : CompactSpace ↥X] → Fintype 𝒰.finiteSubcover.I₀\", \"doc\": \"For any compact scheme $ X $ and an open cover $ \\\\mathcal{U} $ of $ X $, the index set $ I_0 $ of the finite subcover is finite. This follows from the compactness of $ X $, which guarantees that any o\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite groupoid stratification gives a thickened invariant open with finite locally free source and target whose saturated closure is the whole scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StructureGroupoid.mk\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"{H : Type u_2} →\\n  [inst : TopologicalSpace H] →\\n    (members : Set (OpenPartialHomeomorph H H)) →\\n      (∀ (e e' : OpenPartialHomeomorph H H), e ∈ members → e' ∈ members → e.trans e' ∈ members) →\\n        (∀ e ∈ members, e.symm ∈ members) →\\n          OpenPartialHomeomorph.refl H ∈ members →\\n        \", \"doc\": \"Given a topological space $ H $, this constructor defines a structure groupoid from a set of open partial homeomorphisms $ H \\rightleftharpoons H $ that is closed under composition, inverses, contains \"}\n  {\"name\": \"closedUnderRestriction'\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"{G : StructureGroupoid H} [ClosedUnderRestriction G] {e : OpenPartialHomeomorph H H} (he : e ∈ G) {s : Set H}\\n  (hs : IsOpen s) : e.restr s ∈ G\", \"doc\": \"If $ G $ is a structure groupoid on a topological space $ H $ that is closed under restriction, and $ e $ is a partial homeomorphism in $ G $, then for any open subset $ s $ of the domain of $ e $, th\"}\n  {\"name\": \"continuousGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"(H : Type*) [TopologicalSpace H] : StructureGroupoid H\", \"doc\": \"The groupoid generated by the continuous pregroupoid on a topological space $H$, consisting of all open partial homeomorphisms between open subsets of $H$. This groupoid includes every homeomorphism b\"}\n  {\"name\": \"Topology.IsOpenEmbedding.singleton_hasGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"{f : α → H} (h : IsOpenEmbedding f) (G : StructureGroupoid H) [ClosedUnderRestriction G] :\\n  @HasGroupoid _ _ _ _ h.singletonChartedSpace G\", \"doc\": \"Given a topological space $\\\\alpha$ and a model space $H$, if $f : \\\\alpha \\\\to H$ is an open embedding and $G$ is a structure groupoid on $H$ closed under restriction, then the charted space structure o\"}\n  {\"name\": \"ClosedUnderRestriction.closedUnderRestriction\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"∀ {H : Type u_1} {inst : TopologicalSpace H} {G : StructureGroupoid H} [self : ClosedUnderRestriction G]\\n  {e : OpenPartialHomeomorph H H}, e ∈ G → ∀ (s : Set H), IsOpen s → e.restr s ∈ G\", \"doc\": \"For a topological space $ H $ and a structure groupoid $ G $ on $ H $, if $ G $ is closed under restriction, then for any homeomorphism $ e \\\\in G $ and any open subset $ s $ of the domain of $ e $, th\"}\n  {\"name\": \"StructureGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"(H : Type u_2) → [TopologicalSpace H] → Type u_2\", \"doc\": \"For a topological space $H$, the structure groupoid is the groupoid whose objects are open subsets of $H$ and whose morphisms are homeomorphisms between these open subsets.\"}\n  {\"name\": \"idGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"(H : Type*) [TopologicalSpace H] : StructureGroupoid H\", \"doc\": \"For a topological space $ H $, this is the structure groupoid consisting of the identity open partial homeomorphism on $ H $ and all open partial homeomorphisms with empty source domain. It satisfies \"}\n  {\"name\": \"StructureGroupoid.locality\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"(G : StructureGroupoid H) {e : OpenPartialHomeomorph H H} (h : ∀ x ∈ e.source, ∃ s, IsOpen s ∧ x ∈ s ∧ e.restr s ∈ G) :\\n  e ∈ G\", \"doc\": \"For a structure groupoid $ G $ on a topological space $ H $, if a partial homeomorphism $ e : H \\to H $ has the property that for every $ x $ in its domain, there exists an open neighborhood $ s $ of $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(stratif|flat)|invariant.*thickening",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "almost.dense|groupoid.*flat.*locus",
+   "results": "{\"t\": \"2026-10-23T09:41:00Z\", \"tool\": \"grep\", \"query\": \"almost.dense|groupoid.*flat.*locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Topology/Metrizable/Basic.lean\", \"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"Mathlib/Topology/UniformSpace/Cauchy.lean\", \"Mathlib/Topology/UniformSpace/Cauchy.lean\", \"Mathlib/Topology/UniformSpace/Cauchy.lean\", \"Mathlib/Topology/UniformSpace/Cauchy.lean\", \"Mathlib/Topology/UniformSpace/Cauchy.lean\"], \"digest\": \"77c8400a490b242c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flat open restrictions, dense subsets under group actions, affine-limit covers and almost-dense metric-space results do not state the finite-groupoid invariant thickening construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An almost dense invariant flat locus for a finite scheme groupoid obtained using a closed thickening of an invariant open subscheme",
+   "results": "{\"t\": \"2026-10-23T09:41:00Z\", \"tool\": \"leansearch\", \"query\": \"An almost dense invariant flat locus for a finite scheme groupoid obtained using a closed thickening of an invariant open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpen.dense_of_preimage_vadd_invariant\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.instResLE\", \"Dense.closure\", \"AlgebraicGeometry.Flat.mk\", \"aeconst_of_dense_setOf_preimage_smul_ae\", \"AlgebraicGeometry.Scheme.Hom.denseRange\"], \"digest\": \"95072a2d812fda0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flat open restrictions, dense subsets under group actions, affine-limit covers and almost-dense metric-space results do not state the finite-groupoid invariant thickening construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T09:41:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flat open restrictions, dense subsets under group actions, affine-limit covers and almost-dense metric-space results do not state the finite-groupoid invariant thickening construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme groupoid with finite source and target has an invariant open and a closed subscheme with the same support on which source and target are finite locally free and the saturated closure of the open is all objects",
+   "results": "{\"t\": \"2026-10-23T09:41:01Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme groupoid with finite source and target has an invariant open and a closed subscheme with the same support on which source and target are finite locally free and the saturated closure of the open is all objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_I₀\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover\"], \"digest\": \"ffdabee146647d80\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flat open restrictions, dense subsets under group actions, affine-limit covers and almost-dense metric-space results do not state the finite-groupoid invariant thickening construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-finite-flat-over-almost-dense-subscheme.",
+   "via": [
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-groupoid-almost-dense-flat-locus",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0ABA and 0AB9; supplied the invariant filtration and subset-saturation lemmas as two statement-only nodes, wrote the full induction and scheme-theoretic gluing, and reused finite closedness and base-change permanence. Corrected only prime typography in the statement and the source proof indexing; no mathematical hypothesis or conclusion changed.",
+  "blueprint": "Supporting geometry in det-thm-sf-ctf-stability-direct-images (3), reached through the existing alteration/moduli chain recorded in blueprint.from.place; realizes Tag 0ABA inside the proof of Tag 0ABI. Current latest blueprint read; no route or unit change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Finite maps send closed subsets to closed subsets; generic scheme tool used to close each saturation, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Finiteness under arbitrary base change for restricted sources; generic scheme tool, with no node of this unit providing it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-627f34af6",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-627f34af6 (reviewer sub-agent of L); spot-checked: I read the delivery in full against Stacks 0ABA and 0AB9 (more-groupoids.tex lines 2420-2528) and 03LO(1) (groupoids.tex). No changes made. (1) The item statement matches 0ABA and nothing is weakened: 'thickening' is written as 'a closed immersion that is a homeomorphism', which is equivalent. The only edit is W\\prime to W', which renders the same. On clones/live and side-live the item is still unsplit, and the snapshot has no repair note, so this is a first split. (2) The new rank-filtration node is exactly 0AB9. I checked it is true without Noetherian or finite-presentation hypotheses using Fitting ideals: the section e makes Fit_0 = 0, and Fit_{r-1}=0 with Fit_r=O gives local freeness of rank r. It is not a duplicate of lem-a1-affine-groupoid-invariant-rank-strata, which assumes affine and already finite locally free. (3) The new saturation node is exactly 03LO(1), with invariance written as s^{-1}(σA)=t^{-1}(σA). It is a real lemma because it needs the point equivalence relation, and the a1 groupoid nodes and sfb orbit nodes do not state it. (4) Searching the DAG with rg -L and blueprint_refs search for 0AB9, 03LO, 0ABA, saturation and 'invariant closed' found no other node stating either new lemma, so same_as=[] is right. (5) Steps 1-8 are correct. The induction U∖Z_n ⊆ C_n is stated with its base case. C_n is closed because t is finite and therefore a closed map. The worker says the Stacks openness sentence cites the wrong index; I checked line 2509 and they are right, and their formula W_{n+1}=U∖(Z_{n+1}∪C_n) fixes it. W'_{n+1}=Z_n×_U W_{n+1} is an open subscheme of D_{n+1}. Gluing along the disjoint open cover is done per piece. Global finiteness comes from base change of s once the invariant monomorphism collapses the double restriction; flatness and finite presentation are checked per piece. (6) Edge cases checked: U empty, the trivial groupoid, a constant finite group, infinitely many ranks on a non-quasi-compact U, and non-reduced U. (7) I accept both tool_uses: lem-weil-pbc-finite-closed-map-finite-fibres and lem-weil-pbc-finite-morphism-permanence are generic finite-morphism Mathlib leaves. No SGA citation; proof_deps equals the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupoidAlmostDenseFlatLocus",
+  "declaration": "AlgebraicGeometry.IsGroupoidScheme.exists_almostDense_finiteLocallyFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupoidAlmostDenseFlatLocus.lean",
+  "statement": "theorem IsGroupoidScheme.exists_almostDense_finiteLocallyFree {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) [IsFinite s] [IsFinite t] : ∃ (W : U.Opens) (W' : Scheme.{u}) (j : W' ⟶ W.toScheme), IsClosedImmersion j ∧ s ⁻¹ᵁ W = t ⁻¹ᵁ W ∧ (∃ E : pullback s (j ≫ W.ι) ≅ pullback t (j ≫ W.ι), E.hom ≫ pullback.fst t (j ≫ W.ι) = pullback.fst s (j ≫ W.ι)) ∧ IsHomeomorph j ∧ t '' (s ⁻¹' closure (W : Set U)) = Set.univ ∧ (pullback.fst (pullback.snd (j ≫ W.ι) s ≫ t) (j ≫ W.ι) ≫ pullback.fst (j ≫ W.ι) s).IsFiniteLocallyFree ∧ (pullback.snd (pullback.snd (j ≫ W.ι) s ≫ t) (j ≫ W.ι)).IsFiniteLocallyFree",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cc814250",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Read node, Stacks 0ABA (more-groupoids.tex 2455-2466) and groupoids.tex invariance definition (3571-3592), the module, report and all 6 statement deps (IsGroupoidScheme fields, IsFinite, pullback, Opens.ι, IsClosedImmersion, Scheme.Hom.IsFiniteLocallyFree = finite+flat+lfp). Clause match: hypotheses are only IsGroupoidScheme + [IsFinite s][IsFinite t]; W : U.Opens with s⁻¹ᵁW = t⁻¹ᵁW; W' via closed immersion j with an iso over R between pullback s a and pullback t a (= Stacks invariant monomorphism, item 4); thickening = IsClosedImmersion ∧ IsHomeomorph; t''(s⁻¹' closure W) = univ; restricted arrows pullback (snd a s ≫ t) a with source fst≫fst and target snd both IsFiniteLocallyFree. Edge cases checked: empty U, identity groupoid, non-reduced U, non-quasi-compact U with unbounded ranks, W not dense. One universe u. H4: def-sfb-restricted-groupoid-relation exists but is not cited by the node; inline Mathlib pullbacks in the same order, no new definitions; no existing 0ABA statement found. Node diff vs live is the lean field only; lean.statement verbatim (scripted check); single sorry; docstrings carry the source place, blueprint id and 8 proof steps; report has Worker report and Second reading sections. Not recompiled (no change); worker reports a clean compile. No findings."
+ }
+}

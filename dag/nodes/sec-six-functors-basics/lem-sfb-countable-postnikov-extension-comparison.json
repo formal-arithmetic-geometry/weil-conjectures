@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-countable-postnikov-extension-comparison",
+ "kind": "statement",
+ "title": "Countable Postnikov extension and comparison",
+ "statement": "Let $\\mathcal T$ be a triangulated category [def-weil-triangulated-category]. A complex in $\\mathcal T$ indexed by $\\mathbf N$ is a sequence $\\cdots\\xrightarrow{d_3}X_2\\xrightarrow{d_2}X_1\\xrightarrow{d_1}X_0$ with $d_{r-1}d_r=0$. A Postnikov system for it means $Y_0=X_0$, distinguished triangles\n$$Y_r\\xrightarrow{a_r}X_r\\xrightarrow{b_r}Y_{r-1}\\xrightarrow{c_r}Y_r[1]\\quad(r\\ge1),$$\nwith $a_{r-1}b_r=d_r$ (and $a_0=1$). The connecting arrows give a sequence $Y_0\\to Y_1[1]\\to Y_2[2]\\to\\cdots$.\nIf $\\operatorname{Hom}_{\\mathcal T}(X_i[i-j-2],X_j)=0$ for all $i>j+2$, such a system exists; more precisely every finite Postnikov system on an initial segment can be extended to the next term under these vanishings.\nSuppose $u_r:X_r\\to X'_r$ is a map of complexes, both complexes are equipped with Postnikov systems, and $\\operatorname{Hom}_{\\mathcal T}(X_i[i-j-1],X'_j)=0$ for all $i>j+1$. Here a map of (finite or full) Postnikov systems extending $u$ is a family $g_r:Y_r\\to Y'_r$ with $g_0=u_0$ such that, for each $r\\ge1$, $(g_r,u_r,g_{r-1})$ is a morphism of the distinguished triangles above: $a'_rg_r=u_ra_r$, $b'_ru_r=g_{r-1}b_r$, and $g_r[1]c_r=c'_rg_{r-1}$, where $c_r:Y_{r-1}\\to Y_r[1]$ and $c'_r$ are the connecting arrows. Then every map of the initial finite Postnikov systems extending the corresponding $u_r$ extends to the next term. Thus there is a compatible map of the full systems extending $u_r$. If every $u_r$ is an isomorphism, all its maps $Y_r\\to Y'_r$ can be chosen to be isomorphisms. These assertions also apply to finite complexes by appending zero terms.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0D7Z (definition-postnikov-system); Tags 0D83 (lemma-existence-postnikov-system), 0D82 (lemma-maps-postnikov-systems-vanishing) and 014A (lemma-third-isomorphism-triangle). Countable form obtained by the extension induction in their proofs; no coproduct or convergence assertion is included."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-sfb-postnikov-system"
+ ],
+ "proof": [
+  {
+   "text": "First propagate the two stated vanishing hypotheses through the already chosen finite systems. For the existence hypothesis put $s=2$ and $A_j=X_j$, $Z_j=Y_j$; for the comparison hypothesis put $s=1$ and $A_j=X'_j$, $Z_j=Y'_j$. Fix $i$ and prove $\\operatorname{Hom}(X_i[(i-j-s)],Z_j)=0$ by induction on $j$ with $i>j+s$. At $j=0$ this is the hypothesis because $Z_0=A_0$. For $j>0$, inverse-rotate the distinguished triangle to $Z_{j-1}[-1]\\to Z_j\\to A_j\\to Z_{j-1}$. A map $f:X_i[(i-j-s)]\\to Z_j$ has zero composite to $A_j$ by the assumed vanishing. The cited Hom exactness factors $f$ through $Z_{j-1}[-1]$. Its group of possible factors is isomorphic, by shifting both arguments, to $\\operatorname{Hom}(X_i[i-(j-1)-s],Z_{j-1})$, which vanishes by induction. Thus $f=0$. This induction applies to every prescribed finite system, without making or changing any of its choices.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0D82 (lemma-maps-postnikov-systems-vanishing), proof (1), and 0D83 (lemma-existence-postnikov-system), obstruction vanishing; Tag 0149 (lemma-representable-homological)."
+   }
+  },
+  {
+   "text": "For extension to $n=1$, put $b_1=d_1:X_1\\to Y_0=X_0$ and use TR1 and inverse rotation (TR2) to complete it to $Y_1\\to X_1\\xrightarrow{b_1}Y_0\\to Y_1[1]$. For extension to $n=2$, the prescribed triangle $Y_1\\xrightarrow{a_1}X_1\\xrightarrow{b_1}X_0\\to Y_1[1]$ satisfies $b_1d_2=d_1d_2=0$. The Hom exactness gives $b_2:X_2\\to Y_1$ with $a_1b_2=d_2$. Complete $b_2$ to the required triangle by TR1 and TR2. Both constructions keep all previously prescribed triangles.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0D81 (lemma-postnikov-system-small-cases), proof for lengths 1 and 2; Tag 0D83 (lemma-existence-postnikov-system), initial cases."
+   }
+  },
+  {
+   "text": "Now let $n\\ge3$ and retain a prescribed system through $n-1$. Put $h=b_{n-1}d_n:X_n\\to Y_{n-2}$. Its composite with $a_{n-2}$ equals $d_{n-1}d_n=0$. Inverse rotation of the triangle at $n-2$ and Hom exactness therefore factor $h$ through $Y_{n-3}[-1]$. The factor is zero: by shifting, its Hom group is $\\operatorname{Hom}(X_n[1],Y_{n-3})$, which is the case $i=n$, $j=n-3$, $s=2$ of step 1. Hence $h=0$. Apply Hom exactness to the prescribed triangle $Y_{n-1}\\xrightarrow{a_{n-1}}X_{n-1}\\xrightarrow{b_{n-1}}Y_{n-2}\\to Y_{n-1}[1]$ to obtain $b_n:X_n\\to Y_{n-1}$ with $a_{n-1}b_n=d_n$. Complete $b_n$ to a distinguished triangle $Y_n\\to X_n\\to Y_{n-1}\\to Y_n[1]$ using TR1 and TR2. This extends the given system by exactly one term.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0D83 (lemma-existence-postnikov-system), extension induction and its two Hom-exactness obstruction factorizations; Tag 0149 (lemma-representable-homological)."
+   }
+  },
+  {
+   "text": "For comparison, suppose a prescribed map of systems is given through $n-1$ and write $\\alpha=g_{n-1}b_n-b'_nu_n:X_n\\to Y'_{n-1}$. For $n=1$ this is zero since $g_0=u_0$ and the $u_r$ commute with $d_1,d'_1$. For $n\\ge2$, compute $a'_{n-1}\\alpha=u_{n-1}a_{n-1}b_n-a'_{n-1}b'_nu_n=u_{n-1}d_n-d'_nu_n=0$. Inverse rotation of the target triangle at $n-1$ and Hom exactness factor $\\alpha$ through $Y'_{n-2}[-1]$. The factor vanishes by step 1 with $i=n$, $j=n-2$, $s=1$, since $\\operatorname{Hom}(X_n,Y'_{n-2}[-1])\\cong\\operatorname{Hom}(X_n[1],Y'_{n-2})=0$. Thus $g_{n-1}b_n=b'_nu_n$ for every $n\\ge1$. Apply the cited second-square form of TR3 to the two prescribed triangles at $n$, with second and third vertex maps $u_n,g_{n-1}$. It supplies $g_n:Y_n\\to Y'_n$ satisfying both $a'_ng_n=u_na_n$ and $g_n[1]c_n=c'_ng_{n-1}$. Together with the computed square these are precisely all three required equations, and the earlier $g_r$ are retained.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-tr3-second-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0D82 (lemma-maps-postnikov-systems-vanishing), proof (2): difference of the second square and TR3 after rotation; Tag 0149 (lemma-representable-homological)."
+   }
+  },
+  {
+   "text": "If all $u_r$ are isomorphisms, $g_0=u_0$ is an isomorphism. Inductively the morphism of distinguished triangles $(g_n,u_n,g_{n-1})$ constructed in step 4 has two isomorphism components, namely $u_n$ and $g_{n-1}$. The cited triangle two-out-of-three statement implies that $g_n$ is an isomorphism. The same induction shows that any already prescribed finite comparison has isomorphism components under these hypotheses.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A (lemma-third-isomorphism-triangle); Tag 0D83 (lemma-existence-postnikov-system), last paragraph."
+   }
+  },
+  {
+   "text": "Starting from $Y_0=X_0$, recursively choose one extension supplied by steps 2 and 3 for each successive natural number, always retaining the preceding choices. The data at any index are fixed at the first stage containing that index, so all triangles and equations hold in the resulting countable system. Starting from $g_0=u_0$, the identical recursion with step 4 produces a compatible full comparison; it may start with any prescribed finite comparison. This is ordinary countable recursive choice of objects and morphisms in a fixed ambient universe, not a limit construction. The connecting maps in the asserted sequence are exactly $c_{r+1}[r]:Y_r[r]\\to Y_{r+1}[r+1]$. For a finite complex append zero objects and zero differentials. New vanishing conditions whose source index exceeds the old length hold since that source is zero; all other conditions are unchanged. Apply the countable result and restrict to the original finite segment. If finite comparisons are componentwise isomorphisms, extend $u$ by the unique isomorphism of zero objects and apply step 5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0D7Z (definition-postnikov-system), recursive definition; example-key-postnikov, explicit infinite extension of the notion; countable recursion on the extensions proved above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-tr3-second-square",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0D82 and 0D83, extension proofs, with the small cases in Tag 0D81 and triangle isomorphisms in Tag 014A; countable recursive assembly written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complex in a triangulated category has a Postnikov convolution if Hom of X i shifted by i minus j minus two to X j vanishes and chain maps extend under analogous negative Hom vanishing",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.exists_triangle\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"For any object $A$ in a triangulated category $\\\\mathcal{C}$ equipped with a t-structure $t$, and for any integers $n_0$ and $n_1$ satisfying $n_1 = n_0 + 1$, there exist objects $X$ and $Y$ in $\\\\mathc\"}\n  {\"name\": \"HomotopyCategory.spectralObjectMappingCone\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n          CategoryTheory.Triangulated.SpectralObject (HomotopyCat\", \"doc\": \"A spectral object in the homotopy category of integer-indexed cochain complexes, constructed using the composable arrows functor followed by the quotient to homotopy classes. The structure includes: (\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}\n  {\"name\": \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"A morphism $ f $ belongs to the $ \\\\text{trW} $ property of the homological kernel of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ if and only if for every integer $ n $, the image of $ f $ under the \"}\n  {\"name\": \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ from a pretriangulated category $ \\\\mathcal{C} $ (with integer-indexed shifts and a zero object) to an abelian category $ \\\\mathcal{A} $, a \"}\n  {\"name\": \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Pretriangulated\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [hC : CategoryTheory.Pretriangulated C],\\n  ∀ T\", \"doc\": \"In a pretriangulated category $\\\\mathcal{C}$, for any distinguished triangle $T = (X \\\\xrightarrow{f} Y \\\\xrightarrow{g} Z \\\\xrightarrow{h} X[1])$ and any morphism $f: X \\\\to Y$ satisfying $f \\\\circ g = 0$,\"}\n  {\"name\": \"DerivedCategory.triangleOfSESδ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        {S : CategoryTheory.ShortComplex (CochainComplex C ℤ)} →\\n          S.ShortExact →\\n            (DerivedCategory.Q.obj S.X₃ ⟶\\n              (CategoryTh\", \"doc\": \"The morphism $ \\\\delta: Q(X_3) \\\\to Q(X_1)[1] $ in the derived category, constructed from a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $, using the localization functor $ Q $ and the mapping\"}\n  {\"name\": \"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Pretriangulated\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [hC : CategoryTheory.Pretriangulated C],\\n  ∀ T\", \"doc\": \"In a pretriangulated category $\\\\mathcal{C}$, for any distinguished triangle $T = (X \\\\xrightarrow{f} Y \\\\xrightarrow{g} Z \\\\xrightarrow{h} X[1])$ and any morphism $f: Y \\\\to X$ such that the composition $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure truncations, spectral objects and lifting along exact short complexes do not give Postnikov systems for a complex of derived objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct compatible finite Postnikov systems for an infinite complex in a triangulated category using vanishing obstructions and lift a morphism of complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.LeftHomologyData.liftH\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.LeftHomology\", \"type\": \"(k : A ⟶ S.X₂) (hk : k ≫ S.g = 0) : A ⟶ h.H\", \"doc\": \"For a short complex $S$ denoted by $X_1 \\\\xrightarrow{f} X_2 \\\\xrightarrow{g} X_3$ in a category $\\\\mathcal{C}$, let $h$ be its homology data where $h.H$ is the homology object at $X_2$. Given a morphism\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.lift\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"(hS : S.Exact) {A : C} (k : A ⟶ S.X₂) (hk : k ≫ S.g = 0) [Mono S.f] : A ⟶ S.X₁\", \"doc\": \"Let $S$ be an exact short complex $X₁ \\\\stackrel{f}{\\\\longrightarrow} X₂ \\\\stackrel{g}{\\\\longrightarrow} X₃$ in a category $C$. Suppose that $f$ is a monomorphism. For any morphism $k : A \\\\to X₂$ such tha\"}\n  {\"name\": \"HomotopyCategory.instIsTriangulatedIntUp\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Triangulated\", \"type\": \": IsTriangulated (HomotopyCategory C (ComplexShape.up ℤ))\", \"doc\": \"Given a preadditive category $\\\\mathcal{C}$, the homotopy category of integer-indexed chain complexes over $\\\\mathcal{C}$ forms a triangulated category. This structure combines: (1) the category structu\"}\n  {\"name\": \"CategoryTheory.ShortComplex.RightHomologyData.liftH\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.RightHomology\", \"type\": \"(k : A ⟶ h.Q) (hk : k ≫ h.g' = 0) : A ⟶ h.H\", \"doc\": \"Given a morphism $ k: A \\to Q $ to the right homology object $ Q $ of a short complex and a proof that $ k $ composed with the differential $ g' $ yields the zero morphism, this function constructs the\"}\n  {\"name\": \"CategoryTheory.ShortComplex.liftHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Homology\", \"type\": \"(k : A ⟶ S.opcycles) (hk : k ≫ S.fromOpcycles = 0) : A ⟶ S.homology\", \"doc\": \"Given a morphism $ k: A \\to Q $ (where $ Q $ is the right homology object of a short complex $ S $) and a proof that $ k $ composed with the morphism $ Q \\to X_3 $ yields the zero morphism, this functio\"}\n  {\"name\": \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Qh (C := C)).IsTriangulated\", \"doc\": \"The homotopy category of integer-indexed cochain complexes in a preadditive category is equipped with a triangulated structure. This means it has a shift functor parameterized by integers and a class \"}\n  {\"name\": \"HomotopyCategory.instPretriangulatedIntUp\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated\", \"type\": \": Pretriangulated (HomotopyCategory C (ComplexShape.up ℤ))\", \"doc\": \"The homotopy category of cochain complexes with integer indices in a preadditive category admits a pretriangulated structure. This structure is defined by declaring distinguished triangles to be those\"}\n  {\"name\": \"HomologicalComplex.liftCycles\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"{A : C} (k : A ⟶ K.X i) (j : ι) (hj : c.next i = j) (hk : k ≫ K.d i j = 0) : A ⟶ K.cycles i\", \"doc\": \"Given an object $ A $ in a category $ \\\\mathcal{C} $ with zero morphisms, a homological complex $ K $, an index $ i $, and a morphism $ k: A \\\\to K_i $ satisfying $ k \\\\circ d_{i,j} = 0 $ (where $ j = \\\\t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure truncations, spectral objects and lifting along exact short complexes do not give Postnikov systems for a complex of derived objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Postnikov\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure truncations, spectral objects and lifting along exact short complexes do not give Postnikov systems for a complex of derived objects"
+  },
+  {
+   "tool": "grep",
+   "query": "Postnikov|convolution|Toda",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure truncations, spectral objects and lifting along exact short complexes do not give Postnikov systems for a complex of derived objects"
+  },
+  {
+   "tool": "grep",
+   "query": "Postnikov|convolution|Toda",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure truncations, spectral objects and lifting along exact short complexes do not give Postnikov systems for a complex of derived objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a Postnikov system for a complex in a triangulated category under vanishing of negative shifted Hom groups, extending any finite initial system and any comparison map",
+   "results": "Search available: True; 8 hits; returned declarations/files: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, CategoryTheory.Triangulated.TStructure.triangleLTGE, CategoryTheory.Triangulated.TStructure.exists_triangle, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one, HomotopyCategory.spectralObjectMappingCone; note: ; Mathlib subdirectory: ; logged digest: a15b0fb553d2da39",
+   "date": "2026-10-23",
+   "verdict": "no match: returned t-structure, derived-fraction, homological-functor and Day-convolution facts do not construct or compare Postnikov systems"
+  },
+  {
+   "tool": "grep",
+   "query": "Postnikov|convolution|Toda",
+   "results": "Search available: True; 25 hits; returned declarations/files: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean; note: ; Mathlib subdirectory: CategoryTheory; logged digest: 0cd89644c17c889c",
+   "date": "2026-10-23",
+   "verdict": "no match: returned t-structure, derived-fraction, homological-functor and Day-convolution facts do not construct or compare Postnikov systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain complex of objects of a triangulated category admits a convolution under shifted Hom vanishing",
+   "results": "Search available: True; 8 hits; returned declarations/files: CategoryTheory.Functor.comp_homologySequenceδ, DerivedCategory.instIsTriangulated, CochainComplex.HomComplex.Cochain.shift, HomotopyCategory.instIsTriangulatedIntUp, CategoryTheory.Functor.homologySequence_comp_assoc, HomotopyCategory, HomotopyCategory.mappingCone_triangleh_distinguished, HomotopyCategory.instPretriangulatedIntUp; note: ; Mathlib subdirectory: ; logged digest: 415658e227c04705",
+   "date": "2026-10-23",
+   "verdict": "no match: returned t-structure, derived-fraction, homological-functor and Day-convolution facts do not construct or compare Postnikov systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Postnikov\"",
+   "results": "Search available: True; 0 hits; returned declarations/files: ; note: ; Mathlib subdirectory: ; logged digest: 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: returned t-structure, derived-fraction, homological-functor and Day-convolution facts do not construct or compare Postnikov systems"
+  },
+  {
+   "tool": "grep",
+   "query": "Postnikov|Toda|convolution",
+   "results": "Search available: True; 0 hits; returned declarations/files: ; note: ; Mathlib subdirectory: CategoryTheory/Triangulated; logged digest: 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: returned t-structure, derived-fraction, homological-functor and Day-convolution facts do not construct or compare Postnikov systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coyoneda_exact₂\"",
+   "results": "Search available: True; 1 hits; returned declarations/files: CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂; note: ; Mathlib subdirectory: ; logged digest: 24a88d4eb163cd4c",
+   "date": "2026-10-23",
+   "verdict": "partial match only: Hom exactness is already the existing leaf lem-weil-pbc-hom-into-triangle-exact, not this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-semisimplicial-derived-realization",
+  "date": "2026-10-23",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Realization of a flat semisimplicial derived system. Supporting input: Countable Postnikov extension and comparison.",
+   "via": [
+    "lem-sfb-flat-semisimplicial-derived-realization",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-countable-postnikov-extension-comparison",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0D7Z, 0D81, 0D82, 0D83 and 014A against the unchanged statement; wrote the shifted Hom-vanishing induction, the existence and comparison obstructions, all three comparison equations, recursive countable assembly and the finite zero-tail case. All non-elementary inputs are existing Mathlib leaves; no new node, statement correction or route replacement is needed.",
+  "blueprint": "The inherited ancestry serves det-thm-sf-ctf-stability-direct-images proof (3), via the recorded semisimplicial-derived-realization chain. Latest blueprint proof (3) still assembles proper and open direct images. This supporting node realizes precisely the Postnikov extension/comparison input of lem-sfb-flat-semisimplicial-derived-realization, not a new proof of the unit. Whole-blueprint searches for Postnikov, Hom vanishing, triangle exact and finite tower found no equivalent blueprint node. The ancestor tool reports from.node=None; the inherited field is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-181ac794d",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-181ac794d (reviewer sub-agent of L); spot-checked: Read in full. The statement is unchanged from the Q32 reviewer's FIX, which named c_r and defined the morphism of triangles. It matches Stacks derived.tex 0D7Z, 0D83 (Hom(X_i[i-j-2],X_j)=0, i>j+2), 0D82 (P: Hom(X_i[i-j-1],X'_j)=0, i>j+1), 0D81 and 014A. The finite-extension wording is exactly what the 0D83 and 0D82 proofs establish, so no target is weakened. No new nodes and no SGA. Step 1: shifted vanishing induction; I checked the j-1 index shift and the j=0 base. Step 2: n=1 and n=2 as in 0D81. Step 3: obstruction Hom(X_n[1],Y_{n-3}) via step 1 with (n,n-3,2); n=3 case checked. Step 4: alpha computation, Hom(X_n[1],Y'_{n-2}) via (n,n-2,1), n=2 boundary is the hypothesis, n=1 by the chain map. lem-weil-pbc-tr3-second-square is applied in the correct orientation and gives both remaining squares. Step 5: lem-sf-triangle-morphism-iso, two of three. Step 6: elementary recursion. The connecting maps c_{r+1}[r] and the zero-tail truncation are correct. Hom-exactness clause (ii) gives exactly the factorizations used. proof_deps is the union of step uses. Duplicate check: bounded-postnikov-extension-generation, pbc-finite-postnikov-isomorphism, sp-stratified-reduction-postnikov-comparison and pod-fixed-pair-postnikov-identifications are all different statements. No cycle. Advisory: the inherited blueprint.from.place is maintainer-owned and left unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.CountablePostnikovExtensionComparison",
+  "declaration": "CategoryTheory.Triangulated.exists_postnikovSystem_extension",
+  "declarations": [
+   "CategoryTheory.Triangulated.exists_postnikovSystem_extension",
+   "CategoryTheory.Triangulated.exists_postnikovSystem_comparison_step",
+   "CategoryTheory.Triangulated.exists_postnikovSystem_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/CountablePostnikovExtensionComparison.lean",
+  "statement": "theorem exists_postnikovSystem_extension (K : ChainComplex C ℕ) (N : WithTop ℕ) (hvan : ∀ (i j : ℕ), (i : WithTop ℕ) ≤ N → j + 2 < i → Subsingleton ((K.X i)⟦((i : ℤ) - (j : ℤ) - 2)⟧ ⟶ K.X j)) : Nonempty (PostnikovSystem K N) ∧ (∀ (n : ℕ) (hn : ((n + 1 : ℕ) : WithTop ℕ) ≤ N) (P : PostnikovSystem K (n : WithTop ℕ)), ∃ Q : PostnikovSystem K ((n + 1 : ℕ) : WithTop ℕ), Q.restrict (by exact_mod_cast Nat.le_succ n) = P) ∧ (∀ (n : ℕ) (hn : (n : WithTop ℕ) ≤ N) (P : PostnikovSystem K (n : WithTop ℕ)), ∃ Q : PostnikovSystem K N, Q.restrict hn = P)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6020ef733",
+  "group": "Q103",
+  "result": "pass",
+  "note": "New def-sfb-postnikov-system (PostnikovSystem/restrict/Hom/connecting) matches Stacks 0D7Z with the node's Y_0=X_0, a_0=1 normalisation; triangles, a_r b_{r+1}=d_{r+1}, all three Hom squares and the c_{r+1}[r] connecting arrow via shiftFunctorAdd' 1 r checked. Item theorems: existence hypothesis = 0D83 Hom(X_i[i-j-2],X_j)=0 for i>j+2; comparison hypothesis = 0D82 mixed Hom(X_i[i-j-1],X'_j)=0 for i>j+1. Existence, one-step extension and extension to N keep prescribed data by restriction equality; comparison step and full comparison carry the iso clause (true by 014A 2-out-of-3); no uniqueness claimed. Edge cases N=0,1,2,⊤ and first obstructions (3,0),(2,0) checked; universes free; IsTriangulated is the node's own assumption. No hollow definitions, only `by sorry`, docstrings with source and blueprint tags, statement fields verbatim, only lean and stmt_deps changed in the item record; no duplicate notion in Mathlib or the project. No file changed, so no compile."
+ }
+}

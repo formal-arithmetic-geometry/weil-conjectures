@@ -162,7 +162,32 @@
   "def-weil-pbc-etale-sheaves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.GenericComparison",
+     "lines": [
+      140,
+      232
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd",
  "split_report": {
@@ -212,5 +237,31 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $C$ be an integral separated\ncurve over an algebraically closed field,\nand let $F$ be an abelian etale\nsheaf on $C$ whose sections vanish generically in the following sense: for\nevery nonempty affine open $j_U:U\\hookrightarrow C$ write\n$u_U:F\\to j_{U*}j_U^*F$ for the adjunction unit; every section of $F$ over an\netale $V\\to C$ is, locally on $V$ for the etale topology, killed by $u_U$\nfor some nonempty affine open $U$. Then $H^q(C,F)=0$ for all $q>0$, in the\nsense of [def-weil-pbc-etale-cohomology].",
+  "proof": [
+   {
+    "text": "For a nonempty affine open $U\\subseteq C$ put $F_U=\\ker(u_U)$. The nonempty\naffine opens form a filtered family under reverse inclusion (two of them\nmeet, $C$ being irreducible, and their intersection contains a nonempty\naffine open), and for $U'\\subseteq U$ the unit $u_{U'}$ factors through\n$u_U$, so $F_U\\subseteq F_{U'}$. We claim $F=\\varinjlim_UF_U$. The map from\nthe colimit is a monomorphism, as a filtered colimit of subsheaves, and the\nhypothesis says precisely that every section of $F$ lies, locally on its\ndomain, in the image of some $F_U$; so the map is also an epimorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Fix $U$ and let $S=C\\setminus U$. Since $C$ is integral of dimension at most\none and $U$ is a nonempty open, $S$ is a finite set of closed points.\nOver $U$ the unit $u_U$ is an isomorphism, so $F_U$ restricts to zero on $U$.\nFor $i_S:S\\to C$, the map $F_U\\to i_{S*}i_S^*F_U$ is an\nisomorphism: at a point of $S$ it is the identity, and outside\n$S$ both stalks vanish. Finite direct image is exact by\n[lemma-weil-pbc-finite-direct-image-exact], so its cohomology\nis the cohomology on $S$. That is zero in positive degrees\nby [lem-weil-pbc-zero-dimensional-cohomology], since\n$S$ is a finite disjoint union of spectra of algebraically\nclosed fields. Hence $H^q(C,F_U)=0$ for $q>0$. Finally\n[lem-weil-pbc-cohomology-filtered-colimit] identifies $H^q(C,F)$ with\n$\\varinjlim_UH^q(C,F_U)=0$.",
+    "uses": [
+     "lemma-weil-pbc-finite-direct-image-exact",
+     "lem-weil-pbc-zero-dimensional-cohomology",
+     "lem-weil-pbc-cohomology-filtered-colimit"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

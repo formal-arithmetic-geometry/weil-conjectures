@@ -1,0 +1,264 @@
+{
+ "id": "lem-trf-descended-resolution-smooth-comparisons",
+ "kind": "statement",
+ "title": "Descent and coherence of smooth comparisons for ordinary resolution towers",
+ "statement": "Fix a totally ordered set $L$. Let $\\mathcal C$ be the reduced finite-type $\\mathbf Q$-schemes admitting a closed embedding into a smooth separated finite-type scheme, including finite disjoint unions [def-pc-reduced-scheme, def-weil-finite-type-morphism, def-weil-closed-immersion, def-sbc-smooth-morphisms, def-weil-proper-morphism]. Suppose $A$ assigns to every $X\\in\\mathcal C$ a finite ordinary regular resolution tower with distinct increasing labels in $L$, coherent nonempty nowhere dense regular centers, and regular last level [def-trf-ordinary-resolution-rule, def-nagata-global-blowup, pqf-def-coherent, def-weil-regular-scheme]. For every smooth map in $\\mathcal C$, assume that the source tower is canonically the contracted cartesian pullback of the target tower, with identical retained labels and extended center ideals [def-pc-fibre-product, def-nagata-extended-ideal]. Contraction deletes precisely unit-ideal stages. Suppose $R$ assigns regular towers with the same labeling convention to all reduced finite-type $\\mathbf Q$-schemes and, for every finite affine cover $U=\\coprod_a U_a\\to S$, has a canonical identification $R(S)\\times_S U\\simeq A(U)$ with no deleted labels. Assume these identifications are the ones obtained by gluing the equal labeled ideals on overlaps and are independent of cover with the cover-comparison cocycle [def-weil-open-immersion].\n\nThen every smooth $h:T\\to S$ has a canonical contracted cartesian comparison $R(T)\\simeq(h^*R(S))^c$, preserving the original order of labels and the extended ideals. For any finite affine cover $U=\\coprod U_a\\to S$ and finite affine cover $V=\\coprod V_b\\to T$ subordinate to the opens $h^{-1}U_a$, this comparison restricts to the specified comparison for the induced smooth $V\\to U$. A global stage is deleted exactly when its extended ideal is unit on every lifted $V_b$; at each retained stage its ideal equals the ideal of $R(T)$ under the comparison. The comparisons are independent of the subordinate covers and have cartesian squares at every level.\n\nFor identity maps the retained-stage maps, counts and level maps are identities. For composable smooth maps $Z\\xrightarrow{g}T\\xrightarrow{h}S$, the comparison for $h\\circ g$ equals the composite of the two comparisons, including the level maps and the ordered deletion data, with the canonical cartesian associativity identifications. On every affine blowup chart these level identifications are the canonical tensor base-change identifications. If $h$ is surjective, no stage is deleted. These statements allow varying relative dimension and apply to finite disjoint unions as whole inputs. If $A(\\varnothing)$ is trivial, then $R(\\varnothing)$ is trivial.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.9, 2.3.4--2.3.5(i)--(ii), printed pp.88,91--92. Conditional descent of comparisons, their identity/composition laws and surjective nondeletion; retained old proof Steps 6--7. Agent expansion on subordinate affine covers and ordinary blowup charts."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-trf-ordinary-resolution-rule",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-trf-labeled-ordinary-resolution-descent-data"
+ ],
+ "proof": [
+  {
+   "text": "For each smooth rational map h choose a labeled comparison c_h together with its restrictions to every subordinate cover by [lem-trf-affine-cover-ordinary-resolution-comparison]. The assigned towers and their regularity are exactly D.tower and D.tower.regular, so no new tower data are chosen.",
+   "uses": [
+    "lem-trf-affine-cover-ordinary-resolution-comparison",
+    "def-trf-labeled-ordinary-resolution-descent-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "Injectivity of the label order embeddings gives r_id(k)=k and r_hg(k)=r_h(r_g(k)). A count is determined by its value zero, its after-retained equations and its deleted-level equations, by induction on the original finite level. For the composite candidate c_g(c_h(i)), a stage absent from r_h has unchanged c_h; a stage in r_h but absent from the composite is deleted by r_g. These two cases prove the deleted equations and hence the count composition law. The identity count follows directly from the identity survivor equation and count_after.",
+   "uses": [
+    "def-trf-ordinary-resolution-rule",
+    "def-trf-labeled-ordinary-resolution-descent-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "The tower transition-to-base equations follow from transition_comp. For the identity, the index-transport identity map and c_id.levelMap have the same base composite, so [lem-trf-ordinary-resolution-level-map-rigidity] identifies them. For a composite, the transported composite of c_g.levelMap and c_h.levelMap has the base composite of c_hg.levelMap, by their cartesian square equations; rigidity identifies these maps. This constructs the smooth-functorial ordinary rule and pins it to D.tower with its original labels.",
+   "uses": [
+    "lem-trf-ordinary-resolution-level-map-rigidity",
+    "def-trf-ordinary-resolution-rule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "For a retained step k and any permitted isomorphism of blowups over the lower source level, form the right side of CanonicalSteps with the published blowupFlatBaseChangeIso. Its composite with the old blowup map is the new blowup map followed by the lower map: use the pullback condition and blowupFlatBaseChangeIso_hom_snd. The specified blowup_fac equations and the lower cartesian square then identify its composite to S with that of the upper levelMap. Apply rigidity, with the count_after transport. This proves precisely the canonical-step equation, without needing a separate affine tensor-chart restriction theorem.",
+   "uses": [
+    "lem-trf-ordinary-resolution-level-map-rigidity",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "The support of an extended ideal is the inverse image of its support. Therefore an ideal is unit if and only if its restriction to every lifted source-cover member is unit: for the reverse implication, lift any supposed support point through a cover member using the scheme pullback point-existence theorem and obtain a contradiction. Combine this with c_h.deleted_iff_unit. If h is surjective, each levelMap is surjective by its cartesian square and surjective base change; a nonempty center has nonempty inverse image, so its extended ideal is not unit and every stage survives.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-surjective-base-change",
+    "def-trf-ordinary-resolution-rule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "A positive-length regular tower over an empty input would have a point in its first nonempty center, and its toBase map would give a point of the empty scheme. Thus its length is zero, independently of the local tower. Assemble the rule, the restrictions, local deletion, survivor laws, canonical steps and empty-input equation into DescendedRule.",
+   "uses": [
+    "def-trf-ordinary-resolution-rule",
+    "def-trf-labeled-ordinary-resolution-descent-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "def-trf-labeled-ordinary-resolution-descent-data",
+  "def-trf-ordinary-resolution-rule",
+  "lem-trf-affine-cover-ordinary-resolution-comparison",
+  "lem-trf-ordinary-resolution-level-map-rigidity",
+  "lem-weil-pbc-surjective-base-change",
+  "thm-nagata-blowup-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92; W2 Lean assembly through one-map descent and proved level-map rigidity, replacing chart calculations for coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blowup.*(functor|compos|pullback)|contracted.*tower",
+   "results": "[grep] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-descended-resolution-smooth-comparisons: Smooth pullback comparisons of labeled blowup towers descend from finite affine covers and respect identity composition and surjective nondeletion",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom_assoc, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-descended-resolution-smooth-comparisons: Descent of smooth base change isomorphisms for blowup sequences and compatibility of deleting empty centers with composition",
+   "results": "[leansearch] OK 8 hit(s).  Returned: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, CategoryTheory.MorphismProperty.instDescendsAlongOfIsStableUnderBaseChangeOfHasOfPrecompPropertyOfRespectsRight, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, Algebra.IsStandardSmoothOfRelativeDimension.baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blow_up\"",
+   "results": "[loogle] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of canonically labeled blowup towers along affine open covers with smooth pullback and deletion of unit centers",
+   "results": "[leanfinder] OK 8 hit(s). Returned: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state descent and ordered contraction for finite labeled ordinary blowup towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "[loogle] OK 0 hit(s). Returned: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state descent and ordered contraction for finite labeled ordinary blowup towers."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*(tower|contract|compos)|contracted.*tower",
+   "results": "[grep] OK 0 hit(s). Returned: . Directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state descent and ordered contraction for finite labeled ordinary blowup towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change of finite labeled ordinary blowup towers and coherent contraction of empty centers",
+   "results": "[leansearch] OK 8 hit(s). Returned: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, Algebra.IsStandardSmooth.baseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state descent and ordered contraction for finite labeled ordinary blowup towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered sequences of blowing up ideal sheaves pull back by flat maps and contract empty blowups coherently under composition",
+   "results": "[leanfinder] OK 8 hit(s). Returned: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.map_comp, AlgebraicGeometry.Scheme.IdealSheafData.comap_comp, AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap_subschemeι_assoc, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state descent and ordered contraction for finite labeled ordinary blowup towers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-functorial-ordinary-resolution",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Re-split task: VIII 2.1.9, 2.3.4--2.3.5(i)--(ii), printed pp.88,91--92. Conditional descent of comparisons, their identity/composition laws and surjective nondeletion; retained old proof Steps 6--7. Agent expansion on subordinate affine covers and ordinary blowup charts.",
+   "via": [
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-descended-resolution-smooth-comparisons",
+  "worker": "stage1",
+  "summary": "Proved the conditional descent theorem in nine steps. Reused the existing ordinary flat blowup comparison, its tensor chart formula, scheme-morphism gluing, smooth restriction/locality and flat/surjective base-change nodes. The proof constructs one globally synchronized survivor list from A on a disjoint union, glues level isomorphisms, and checks cover independence, all index data, identity, composition, surjective nondeletion and the empty case. No new nodes and no statement changes.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality through the ordinary-resolution ancestor, retained parent proof Steps 6--7: ILO VIII 2.1.9 and 2.3.4--2.3.5. Latest main-20261023-1620 local-term-locality uses the contracting-correspondence argument; this is an explicitly assigned conditional tool on the already recorded historical branch, not a replacement of the current unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "why": "Only its ordinary flat blowup tensor chart and overlap formula is used; this generic geometric tool proves canonicity on affine charts and does not replace any step of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-d55cf2cca",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-d55cf2cca (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited statement; it passes with no fixes. The delivery adds a 9-step proof to the statement-only item and creates no new nodes. The statement and stmt_deps are identical to the Q27 version, proof_deps equals the union of the step uses, there is no SGA citation, and searches of all three kinds are recorded. All arguments of the parent's old Steps 6-7 (quoted in the Q27 report) reappear: smooth V->U on a subordinate cover (St3, using smooth-restrict (a)/(b) and local-on-source), a label is deleted iff its ideal is unit on every lifted V_b (St5), flat blowup base change via bc_g with Y as first factor (St1), the B[I/a] tensor formula checked for B->C->D (St2, I verified it on generators), extension along a composite and the count c_hg = c_g o c_h with survivors r_h o r_g (St8), surjective nondeletion by base change along V(I_i) and the kernel definition of the extended ideal (St9), and the empty input via the empty cover. Sources checked: ILO VIII printed pp.91-92, 2.3.4 and Remark 2.3.5(i)-(iii). The cited nodes are on the route of sk-i-curve-zero (sk-def-smooth, sk-lem-nagata-sketch-blowups, sk-thm-sf-ctf-stability). I accept the declared tool_use of lem-sfb-flat-pullback-blowup-chart-restrictions (only its chart and overlap clauses are used). Edge cases tested: empty T, identity h, open immersions missing a center, a two-component cover, a composite that deletes a retained stage, non-separated S. No duplicate: the monoscheme/log contracted-pullback descent nodes concern other objects. Advisory: Steps 4, 6 and 7 identify the A(v) and R-cover maps with the canonical chart maps by reading 'canonically' as the sibling nodes use it. The result also follows from uniqueness of maps into a blowup (ILO 2.3.4: 'any automorphism of a blow up is the identity'), so this is not a gap."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendedResolutionSmoothComparisons",
+  "declaration": "AlgebraicGeometry.OrdinaryResolutionDescent.descendedResolution_smoothComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendedResolutionSmoothComparisons.lean",
+  "statement": "theorem descendedResolution_smoothComparisons (L : Type w) [LinearOrder L] (D : Datum.{u, w} L) : Nonempty (DescendedRule D)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c91d84e6f",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Item diff vs live: only lean + new def node in stmt_deps; statements verbatim. Read both modules and dependency decls (OrdinaryResolutionRule, OrdinaryTowerCartesianMap, RingedSpace.IsCoherent, toModules, blowupFlatBaseChangeIso). Every hypothesis matches the node: Embeddable is an intrinsic Prop domain; LabeledTower has IsRegularResolution + coherent + labels as an order embedding; LocalRule comparisons extend OrdinaryResolutionComparison with labels; cover identifications extend the landed OrdinaryTowerCartesianMap; the AffineCover total is the whole coproduct; cocycles are consistent. Every conclusion clause is covered: SmoothFunctorialOrdinaryResolution pinned to R by tower_eq + labels; restricts for all covers (cover independence); deleted_locally on lifted V_b; identity/composition retained; CanonicalSteps checked to lie over the lower map (true and not vacuous); surjective nondeletion; empty_trivial. Nonempty is over data fixed by blowup uniqueness. Edge cases: empty, identity, open immersion missing a center, composite deletion, non-separated, universes. Gates met: no hollow defs, sorry only, docstrings with 9 proof steps. Advisories: coherent field on R towers (equivalent here); restricts holds for all smooth v over h; the second reading is a self re-reading. No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T083350-L-2334502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

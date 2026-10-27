@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-coinduction-bounded-injective-model",
+ "kind": "statement",
+ "title": "Bounded injective model for derived coinduction",
+ "statement": "Let $f:A\\to B$ be a homomorphism of commutative rings. Work in the ordinary module derived categories $D(A)$ and $D(B)$ [def-weil-abstract-derived-category], using derived Hom on the one-object ringed sites [def-pur-derived-internal-hom]. Let $L\\in D(A)$, let $a\\leq b$ be integers, and let $I^\\bullet$ be a cochain complex of injective $A$-modules [def-sp-injective-resolutions] with $I^q=0$ for $q\\notin[a,b]$ and an isomorphism $Q(I^\\bullet)\\cong L$. Let $C_f(L)\\in D(B)$ be derived coinduction, namely $R\\operatorname{Hom}_A(B[0],L)$ with the action $(c\\varphi)(x)=\\varphi(xc)$ on a K-injective Hom representative. The complex $J^\\bullet$ with $J^q=\\operatorname{Hom}_A(B,I^q)$, differential $d_J^q(\\varphi)=d_I^q\\circ\\varphi$, and action $(c\\varphi)(x)=\\varphi(xc)$ has injective $B$-module terms and $J^q=0$ for $q\\notin[a,b]$. There is a canonical isomorphism $Q(J^\\bullet)\\cong C_f(L)$ in $D(B)$, whose restriction to $D(A)$ is the usual K-injective computation of $R\\operatorname{Hom}_A(B[0],L)$. No Noetherian, finite-map, flatness, or scalar-action-isomorphism assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 08XR, lemma-hom-injective, and Tag 0AX0, lemma-dualizing-finite, first proof paragraph (bounded coinduced injective model); Tag 0A70, lemma-right-adjoint, for the derived coinduction construction."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-sp-injective-resolutions",
+  "def-trf-derived-coinduction"
+ ],
+ "proof": [
+  {
+   "text": "Put $H(M)=\\operatorname{Hom}_A(B,M)$ with $(c\\varphi)(x)=\\varphi(xc)$ and $H(v)(\\varphi)=v\\circ\\varphi$. Associativity and the unit in $B$ give the module laws, and postcomposition is additive and $B$-linear. Applying this to $I$ gives exactly $J$: $d_J^2(\\varphi)=d_I^2\\circ\\varphi=0$, and $d_J(c\\varphi)(x)=d_I(\\varphi(xc))=(c\\,d_J\\varphi)(x)$. Outside $[a,b]$, $I^q=0$ and hence $J^q=\\operatorname{Hom}_A(B,0)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AX0, lemma-dualizing-finite, first proof paragraph: the degreewise Hom complex and its bounded support; action from the construction before Tag 0A70."
+   }
+  },
+  {
+   "text": "For a $B$-module $N$ and an $A$-module $M$, evaluation at $1$ identifies $\\operatorname{Hom}_B(N,H(M))$ with $\\operatorname{Hom}_A(UN,M)$, where $U$ restricts scalars. Its inverse sends $g$ to $n\\mapsto(x\\mapsto g(xn))$; the two composites are identities since $\\psi(xn)(1)=(x\\psi(n))(1)=\\psi(n)(x)$. These formulas commute with pre- and postcomposition. Thus $U\\dashv H$. A monomorphism of modules is an injective underlying map, so restriction preserves monomorphisms. Apply [lem-exc-rg-right-adjoint-preserves-injectives] with $F=U$, $G=H$ and each injective $I^q$: $J^q=H(I^q)$ is injective over $B$.",
+   "uses": [
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 08XR, lemma-hom-injective and its proof; the invoked general adjoint criterion is homology.tex Tag 015Z, lemma-adjoint-preserve-injectives."
+   }
+  },
+  {
+   "text": "The hypothesis $I^q=0$ for $q\\notin[a,b]$ implies $I^q=0$ for $q<a$. Together with termwise injectivity this verifies both hypotheses of [lem-weil-pbc-bounded-below-injectives-kinjective] in the abelian category of $A$-modules. Consequently $I$ is K-injective.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070J, lemma-bounded-below-injectives-K-injective."
+   }
+  },
+  {
+   "text": "Write $e:QI\\cong L$. Choose the K-injective representative $T$ with $t:QT\\cong L$ used to define $C_f(L)=QH(T)$ in [def-trf-derived-coinduction]. By [lem-weil-pbc-kinjective-hom-derived], $t^{-1}e$ and $e^{-1}t$ lift uniquely to homotopy classes $u:I\\to T$ and $v:T\\to I$. The same bijection, now for target $I$ and target $T$, gives $vu\\simeq1_I$ and $uv\\simeq1_T$. Postcomposition by each component of these homotopies gives $B$-linear homotopies after $H$: the identity $vu-1=dh+hd$ becomes $H(v)H(u)-1=dH(h)+H(h)d$. Hence $QH(u):QJ\\cong QH(T)=C_f(L)$ is an isomorphism in $D(B)$. The uniqueness of the lifted homotopy class makes this comparison independent of the lifts. For a further representative the comparison classes compose, since their images under $Q$ compose and the same bijection is injective; this proves canonicity relative to $e$.",
+   "uses": [
+    "def-trf-derived-coinduction",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, characterization (3); applied to the coinduction construction in dualizing.tex before Tag 0A70."
+   }
+  },
+  {
+   "text": "On the one-object identity-cover $A$-ringed site, the Hom complex $\\operatorname{Hom}_A^\\bullet(B[0],I)$ has only the $p=0$ factor in degree $q$, namely $\\operatorname{Hom}_A(B,I^q)$, and its differential is $d_I\\circ\\varphi$ because $d_{B[0]}=0$. Thus it is precisely $UJ$. By [def-pur-derived-internal-hom] and Step 3 this computes $R\\operatorname{Hom}_A(B[0],L)$. The restriction of Step 4 is postcomposition $\\varphi\\mapsto u\\circ\\varphi$ on this same Hom complex, so its comparison is the usual K-injective comparison, with no extra action or scalar normalization. All constructions used only the stated ring map and injectivity and support hypotheses.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Construction before Tag 0A70, lemma-right-adjoint; Hom differential and K-injective formula in sites-cohomology.tex Section 08J7, section-internal-hom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-trf-derived-coinduction",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 08XR, lemma-hom-injective; Tag 0AX0, lemma-dualizing-finite, first proof paragraph; coinduction construction before Tag 0A70, with the canonical K-injective comparison supplied by derived.tex Tags 070I and 070J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coextendScalars.*(Injective|IsKInjective)|[Ii]njective.*coextendScalars|coinduct.*bounded",
+   "results": "6 hits; top=['Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean']; subdirectory=Algebra; note=; digest=ed76caff89209880",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction and objectwise injective-resolution infrastructure do not identify derived coinduction of a bounded injective complex with its bounded B-injective Hom model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coinduction preserves a specified bounded interval of injective complexes for an arbitrary ring homomorphism",
+   "results": "8 hits; top=['CochainComplex.cm5b.I', 'CochainComplex.isKInjective_of_iso', 'CategoryTheory.Functor.rightDerivedToHomotopyCategory', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'Homotopy.mkCoinductive', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo', 'CategoryTheory.InjectiveResolution.extMk_hom']; subdirectory=; note=; digest=70952ef564e100ca",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction and objectwise injective-resolution infrastructure do not identify derived coinduction of a bounded injective complex with its bounded B-injective Hom model."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.coextendScalars, Injective",
+   "results": "0 hits; top=[]; subdirectory=; note=loogle: unknown identifier 'Injective'; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any commutative ring map A to B, coinduction Hom_A(B,-) sends a bounded injective complex to a bounded complex of injective B-modules representing derived coinduction",
+   "results": "8 hits; top=['CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesInjectiveObjects', 'Rep.Tor', 'Rep.Tor_obj', 'CochainComplex.cm5b.I_X', 'CochainComplex.cm5b.instInjectiveXIntI', 'CochainComplex.cm5b.I', 'localCohomology.diagram', 'Rep.Tor_map']; subdirectory=; note=; digest=7309f0565507611e",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction and objectwise injective-resolution infrastructure do not identify derived coinduction of a bounded injective complex with its bounded B-injective Hom model."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.coextendScalars, CategoryTheory.Injective",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction and objectwise injective-resolution infrastructure do not identify derived coinduction of a bounded injective complex with its bounded B-injective Hom model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction of scalars functor has right adjoint coextension of scalars preserving injectives, and its derived functor on a bounded injective resolution is computed termwise",
+   "results": "8 hits; top=['CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ', 'CategoryTheory.Functor.toRightDerivedZero', 'CategoryTheory.InjectiveResolution.toRightDerivedZero_eq', 'CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective', 'CategoryTheory.Abelian.Ext.mapExactFunctor_hom', 'CategoryTheory.Abelian.Ext.mapExactFunctor', \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", 'Ext']; subdirectory=; note=; digest=53c0512f53ce8dcb",
+   "date": "2026-10-22",
+   "verdict": "no match: right-derived functors evaluated on single injective objects and maps on Ext do not identify the bounded B-injective Hom model of derived coinduction."
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|isKInjective_of_injective",
+   "results": "15 hits; top=['Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean', 'Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean', 'Mathlib/Algebra/Homology/ModelCategory/Injective.lean']; subdirectory=Algebra; note=; digest=3a852d12d393467d",
+   "date": "2026-10-23",
+   "verdict": "no match: coextension and bounded-below K-injectivity are inputs already represented in the DAG; no hit supplies the complete bounded B-injective model with its canonical derived and underlying-A comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded injective complex computes the derived coextension of scalars functor with values in modules over the target ring",
+   "results": "8 hits; top=['ModuleCat.coextendScalars', 'ModuleCat.extendScalars', \"ModuleCat.CoextendScalars.obj'\", \"ModuleCat.ExtendScalars.obj'\", 'ModuleCat.instIsLeftAdjointExtendScalars', 'ModuleCat.instIsRightAdjointCoextendScalars', 'ModuleCat.restrictCoextendScalarsAdj', \"ModuleCat.CoextendScalars.map'\"]; subdirectory=; note=; digest=31ee4aeb7eb86918",
+   "date": "2026-10-23",
+   "verdict": "no match: coextension and bounded-below K-injectivity are inputs already represented in the DAG; no hit supplies the complete bounded B-injective model with its canonical derived and underlying-A comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.coextendScalars, CategoryTheory.Injective",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: coextension and bounded-below K-injectivity are inputs already represented in the DAG; no hit supplies the complete bounded B-injective model with its canonical derived and underlying-A comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map A to B, Hom_A(B,I) for a bounded complex of injective A modules is a bounded complex of injective B modules representing derived coinduction",
+   "results": "8 hits; top=['CochainComplex.cm5b.I', 'CochainComplex.cm5b.instInjectiveXIntI', 'CochainComplex.cm5b.I_X', 'CochainComplex.isKInjective_of_injective', 'Rep.Tor_obj', 'Ext', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CategoryTheory.InjectiveResolution.ofCocomplex']; subdirectory=; note=; digest=bacd9826ed693967",
+   "date": "2026-10-23",
+   "verdict": "no match: coextension and bounded-below K-injectivity are inputs already represented in the DAG; no hit supplies the complete bounded B-injective model with its canonical derived and underlying-A comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars.*rightDerived|rightDerived.*coextendScalars|coinduc.*[Bb]ounded|[Bb]ounded.*coinduc",
+   "results": "1 hits; top=['Mathlib/Data/Seq/Computation.lean']; subdirectory=; note=; digest=fa1c6b9a4f27c52c",
+   "date": "2026-10-23",
+   "verdict": "no match: coextension and bounded-below K-injectivity are inputs already represented in the DAG; no hit supplies the complete bounded B-injective model with its canonical derived and underlying-A comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "12 hits; top=['CochainComplex.IsKInjective', 'CochainComplex.isKInjective_of_injective', 'HomotopyEquiv.isKInjective', 'CochainComplex.isKInjective_of_iso', 'CochainComplex.isKInjective_iff_of_iso', 'CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX', 'CochainComplex.instIsKInjectiveObjIntShiftFunctor', 'CochainComplex.isKInjective_shift_iff']; subdirectory=; note=; digest=71ee57824409744c",
+   "date": "2026-10-23",
+   "verdict": "no match: coextension and bounded-below K-injectivity are inputs already represented in the DAG; no hit supplies the complete bounded B-injective model with its canonical derived and underlying-A comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction of scalars functor has right adjoint Hom that sends bounded injective complexes to injective complexes and computes its unbounded derived functor",
+   "results": "8 hits; top=['CategoryTheory.Abelian.Ext.mapExactFunctor_hom', 'CategoryTheory.Abelian.Ext.mapExactFunctor', 'Ext', 'CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory', 'CategoryTheory.Functor.mapExactFunctor_smul', 'DerivedCategory.instLinearCochainComplexIntQ', 'CategoryTheory.Functor.rightDerived', 'HasDerivedCategory.standard']; subdirectory=; note=; digest=dd9a946c4548b236",
+   "date": "2026-10-23",
+   "verdict": "no match: coextension and bounded-below K-injectivity are inputs already represented in the DAG; no hit supplies the complete bounded B-injective model with its canonical derived and underlying-A comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-map-dualizing-transfer",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Finite-map transfer applied to the quotient of a regular local ring in dualizing.tex Tag 0BFR case (2). Extracted argument: Old Steps 1-2: restriction/coinduction adjunction, preservation of injectives, and the bounded Hom(B,I) representative of the finite-map-transfer input.",
+   "via": [
+    "lem-trf-finite-map-dualizing-transfer",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coinduction-bounded-injective-model",
+  "worker": "stage1",
+  "summary": "Verified the bounded Hom model against Stacks 08XR, the first paragraph of 0AX0 and the construction before 0A70. Kept the statement and all original provenance and searches unchanged. Proved module action, differential, support and adjunction explicitly, then reused three existing general Mathlib leaves for injectivity, bounded-below K-injectivity and localization into K-injectives. Constructed the canonical B-linear derived comparison by postcomposition on homotopy inverses and checked its underlying A-derived-Hom normalization. No new nodes.",
+  "blueprint": "Realizes the auxiliary bounded coinduced injective model extracted from old Steps 1-2 of lem-trf-finite-map-dualizing-transfer, in the local-term-locality ancestor proof (1)-(2) nearby-cycle/semistable-alteration branch. Preserves the existing from.place and via chain; the latest blueprint has no duplicate coinduction statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-360a3affa",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-360a3affa (reviewer sub-agent of L); spot-checked: Shape: no new nodes. The item's statement, stmt_deps, source, created and blueprint fields are unchanged from clones/live, where the item is still unsplit. proof_deps equals the union of the steps' uses. There is no cycle: the item is not in the transitive closure of its 204 dependency nodes. No repair note exists and no SGA source is used. Sources read: Stacks dualizing.tex 08XR lemma-hom-injective (l.216), the trivial-duality construction and 0A70 lemma-right-adjoint (l.2211), and the first proof paragraph of 0AX0 lemma-dualizing-finite (l.2808). The item is exactly that paragraph for an arbitrary ring map, with the same action (cφ)(x)=φ(xc). Step 1: the module laws, B-linearity of postcomposition and of d_J, and the support condition all check by hand. Step 2: both composites of the explicit adjunction are identities, ψ_g is B-linear and ψ_g(n) is A-linear. lem-exc-rg-right-adjoint-preserves-injectives (Adjunction.map_injective) holds for arbitrary categories, so with F=U, G=H each J^q is B-injective. Step 3: the bounded-below lemma applies with lower bound a, so I is K-injective. Step 4: by the Qh bijection for K-injective targets (T from def-trf-derived-coinduction, I from Step 3), the lifts u and v are homotopy inverses. H carries homotopies to B-linear homotopies, so QH(u) is an isomorphism in D(B), and it is independent of the lift because the homotopy class is unique. Step 5: the Hom complex of def-pur-derived-internal-hom with source B[0] is exactly UJ with differential d_I∘φ, and its last sentence gives the canonical comparison u∘−. Edge cases checked: B=0, Z→Z/2 and Z→Q with I=Q/Z, a=b, f=id. Duplicate check: lem-trf-coinduction-total-hom-model and lem-trf-derived-coinduction-adjunction overlap only in part (they lack termwise injectivity and bounded support). The cross-unit citations are Mathlib leaves or definitions, so no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CoinductionBoundedInjectiveModel",
+  "declaration": "ModuleCat.coinduction_bounded_injective_model",
+  "file": "lean/Sheaf/Algebra/Homology/CoinductionBoundedInjectiveModel.lean",
+  "statement": "theorem coinduction_bounded_injective_model {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wB} (ModuleCat.{u} B)] (L : DerivedCategory (ModuleCat.{u} A)) (a b : ℤ) (_hab : a ≤ b) (I : CochainComplex (ModuleCat.{u} A) ℤ) (hIinj : ∀ q : ℤ, Injective (I.X q)) (hIsupp : ∀ q : ℤ, q < a ∨ b < q → IsZero (I.X q)) (s : DerivedCategory.Q.obj I ≅ L) : (∀ q : ℤ, Injective (((coinductionComplexFunctor f).obj I).X q)) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero (((coinductionComplexFunctor f).obj I).X q)) ∧ ∃ (hI : I.IsKInjective) (e : DerivedCategory.Q.obj ((coinductionComplexFunctor f).obj I) ≅ (derivedCoinduction f).obj L), e = (@derivedCoinductionModel A B _ _ f _ _ I hI).symm ≪≫ (derivedCoinduction f).mapIso s ∧ (restrictScalars f).mapDerivedCategory.map e.hom ≫ (derivedCoinductionUnderlyingComparison f).hom.app L = (restrictScalars f).mapDerivedCategoryFactors.hom.app ((coinductionComplexFunctor f).obj I) ≫ (@derivedCoinductionUnderlyingModel A B _ _ f _ I hI).inv ≫ (derivedCoinductionUnderlyingHom f).map s.hom",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H2/H3 of 7b0b6264336a: all underlying Hom helpers and the new canonical natural comparison are owned by the lean-only superset repair of def-trf-derived-coinduction. The restriction clause uses the fixed derivedCoinductionUnderlyingComparison, not an existential objectwise isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00c7edacd",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 7b0b6264336a; both findings fixed. H2: the item's stmt_deps drop the theorem node and add only the landed def-trf-derived-coinduction. That node differs from live only in lean (superset of Q38's five names plus derivedCoinductionUnderlyingHom/Model and the new comparison; nothing overwritten). H3: the existential comparison is replaced by the fixed natural iso derivedCoinductionUnderlyingComparison, built from rightDerivedFunctorCompIso and rightDerivedFunctorIsoMapDerivedCategory (both rightDerivedUnique from the units); real def, no choose or sorry. The final equation is true: with the pinned e and naturality in s it reduces to the unit-compatibility of those isos with the K-injective object isos (rightDerivedFunctorObjQIso is the inverse unit). Clauses checked: arbitrary CommRing map, independent wA/wB, injective terms, strict outside-[a,b] support, s direction, J = coinductionComplexFunctor with action (cφ)(x)=φ(xc), injective B-terms and support conclusions, D(B) iso pinned to model.symm ≪≫ C_f(s), K-injectivity as a conclusion. Edge cases B=0, a=b, f=id, Z→Z/2, Z→Q. No name collisions in live; docstrings with source and blueprint; only the theorem proof is sorry; statement verbatim. Not compiled (no change). Advisory: second reading by the same worker; OrdinaryModuleDerivedInternalHom import unused in the signature."
+ }
+}

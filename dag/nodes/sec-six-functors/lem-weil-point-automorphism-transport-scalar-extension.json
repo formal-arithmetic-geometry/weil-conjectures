@@ -26,124 +26,69 @@
  ],
  "proof": [
   {
-   "text": "The hypotheses make $G_EK$ and $P_EK$ bounded constructible and derived complete by [lem-weil-isomorphism-derived-pullback]. Thus the completion isomorphisms of [lem-weil-finite-free-completed-scalar-comparison] and the natural sections comparisons of [lem-weil-point-sections-scalar-extension] apply to each of $K,G_EK,P_EK$. Use $\\theta_H$ for the ordinary derived sections-tensor map. By [lem-weil-point-derived-sections-tensor-descent], ordinary coefficient extension and sections preserve quasi-isomorphisms, ordinary tensor on representatives computes $C$, and $\\theta$ is defined by the termwise sections map even on nonconstructible complexes. In particular no bounded flat representative is needed. Put $\\eta_H=\\Gamma(s,\\chi_H)\\theta_H=\\varphi_H^{-1}$ for the three complete objects above.",
+   "text": "The finite field k_0 has characteristic p by its cardinality. Since l and p are distinct primes, l is nonzero and a unit in k_0; its images in k and every stalk are units. Restriction along the point automorphism is an isomorphism on section modules. Its naturality is the sectionwise-pinned restriction-natural theorem.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the explicit ordinary tensor models in the point-sections and isomorphism-scalar-comparison lemmas. Adjunction reduces equality of tensor maps to generators 1 tensor x. The canonical sections tensor map, the restriction map, and the inverse-image tensor map all send such a generator to the ordinary tensor section of the restricted x, by the restriction formula. Thus the ordinary restriction tensor square commutes. Descend this square along the exact derived functors using the functoriality of mapDerivedCategoryNatIso and the composition isomorphisms. Identify this descended square with the specified sections comparison via the unique cochain normalization of isomorphismScalarModel and pointOrdinaryDerivedComparison.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the inverse of phi as the exact ordinary tensor comparison followed by sections of chi. Naturality of restriction at chi, together with the preceding square and beta = chi_G inverse followed by b followed by G(chi), gives the inverse-image completed scalar square by cancellation. Use the specified kappa coefficient square and naturality of phi at kappa to obtain the pullback transport square. Constructibility and completeness of G K and P K supply precisely the existing comparison hypotheses.",
    "uses": [
     "lem-weil-isomorphism-derived-pullback",
     "lem-weil-finite-free-completed-scalar-comparison",
     "lem-weil-point-sections-scalar-extension",
-    "lem-weil-point-derived-sections-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-    "place": "First transport arrow of the ordinary and compactly supported Frobenius composites; agent-written coefficient compatibility calculation, using the specified comparison maps. Deligne (1.1.3) and (1.1.7) give the rationalization and transport context, not this completed comparison theorem."
-   }
-  },
-  {
-   "text": "First compare ordinary tensors, before completion. Choose a flat-term K-flat resolution $P\\to K$ by [lem-pc-kflat-resolution], and do the following termwise calculation on $P$. Put $U=(s,\\mathrm{id})$ and $V=(s,g)$. Under the evaluation identification in [lem-weil-point-automorphism-restriction-natural], $\\sigma^g$ is restriction from $U$ to $V$. In each degree test the maps from $\\Gamma(s,P)\\otimes_{\\mathcal O_E}\\mathcal O_L$ on $x\\otimes a$. By [lem-weil-point-finite-free-sections-tensor], $\\theta_P$ sends it to the sheafification image of $x\\otimes a_s$. The tensor restriction formula in [def-pur-sheaf-tensor-product] sends this to the image of $x|_V\\otimes a_s|_V$. The other route first gives $\\sigma^{g,E}_P(x)\\otimes a$; the local formula for $b$ in [lem-weil-isomorphism-scalar-tensor-kflat-model] gives precisely the same section under evaluation at $V$. Here the constant coefficient is unchanged: [lem-weil-point-automorphism-restriction-natural] gives $\\sigma^g_{R_L}(a_s)=c_L^{-1}(a_s)$, exactly the transported action used by $b$. Pure tensors generate the source module, so the maps agree, degree by degree, and commute with differentials. The tensor-model lemma makes $G_EP$ K-flat and identifies $b_P$ with $b_K$ after localization. Naturality of $\\sigma$ for $P\\to K$ and the exact descent of [lem-weil-point-derived-sections-tensor-descent] and the representative identification of $b$ in the tensor-model lemma give\n$$\\Gamma(s,b_K)\\theta_{G_EK}(\\sigma^{g,E}_K\\otimes1)=\\sigma^{g,L}_{CK}\\theta_K.$$\nThis uses images of presheaf pure tensors only, and does not assume that arbitrary sheaf tensor sections are sectionwise tensors.",
-   "uses": [
-    "lem-weil-point-automorphism-restriction-natural",
-    "lem-weil-point-finite-free-sections-tensor",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-isomorphism-scalar-tensor-kflat-model",
-    "lem-weil-point-derived-sections-tensor-descent",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-    "place": "First transport arrow of the ordinary and compactly supported Frobenius composites; agent-written coefficient compatibility calculation, using the specified comparison maps. Deligne (1.1.3) and (1.1.7) give the rationalization and transport context, not this completed comparison theorem."
-   }
-  },
-  {
-   "text": "Apply the derived naturality assertion of [lem-weil-point-automorphism-restriction-natural] at coefficient field $L$ to $\\chi_K:CK\\to TK$. It gives\n$$\\Gamma(s,G_L\\chi_K)\\sigma^{g,L}_{CK}=\\sigma^{g,L}_{TK}\\Gamma(s,\\chi_K).$$\nIts domain is allowed: that assertion applies to every derived morphism, without constructibility assumptions. By the specified definition of $\\beta$ in [lem-weil-isomorphism-comparison-scalar-extension], Step 2 therefore implies\n$$\\begin{aligned}\n\\Gamma(s,\\beta_K)\\eta_{G_EK}(\\sigma^{g,E}_K\\otimes1)\n&=\\Gamma(s,G_L\\chi_K)\\Gamma(s,b_K)\\theta_{G_EK}(\\sigma^{g,E}_K\\otimes1)\\\\\n&=\\sigma^{g,L}_{TK}\\Gamma(s,\\chi_K)\\theta_K\n=\\sigma^{g,L}_{TK}\\eta_K.\n\\end{aligned}$$\nCancel the invertible maps and use $\\eta_H^{-1}=\\varphi_H$ from [lem-weil-point-sections-scalar-extension]. This gives exactly $\\varphi_{G_EK}\\Gamma(s,\\beta_K)^{-1}\\sigma^{g,L}_{TK}=(\\sigma^{g,E}_K\\otimes1)\\varphi_K$, the first asserted equation.",
-   "uses": [
-    "lem-weil-point-automorphism-restriction-natural",
     "lem-weil-isomorphism-comparison-scalar-extension",
-    "lem-weil-point-sections-scalar-extension"
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-pur-integral-operations-scalar-extension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-    "place": "First transport arrow of the ordinary and compactly supported Frobenius composites; agent-written coefficient compatibility calculation, using the specified comparison maps. Deligne (1.1.3) and (1.1.7) give the rationalization and transport context, not this completed comparison theorem."
-   }
+   "elementary": false
   },
   {
-   "text": "The specified-comparison equation of [lem-weil-isomorphism-comparison-scalar-extension] is $\\alpha_K T(\\kappa^{E}_K)=\\kappa^{L}_{TK}\\beta_K$. Since $\\alpha_K$ and $\\beta_K$ are invertible, applying sections gives\n$$\\Gamma(s,\\alpha_K)^{-1}\\Gamma(s,\\kappa^{L}_{TK})=\\Gamma(s,T(\\kappa^{E}_K))\\Gamma(s,\\beta_K)^{-1}.$$\nThe map $\\kappa^E_K:G_EK\\to P_EK$ is the derived morphism specified by [def-weil-inverse-image-pullback-comparison]; both endpoints satisfy the hypotheses from Step 1. Naturality of $\\varphi$ in [lem-weil-point-sections-scalar-extension], applied to this morphism, now gives\n$$\\begin{aligned}\n\\varphi_{P_EK}\\Gamma(s,\\alpha_K)^{-1}t^L_{TK}\n&=(\\Gamma(s,\\kappa^E_K)\\otimes1)\\varphi_{G_EK}\\Gamma(s,\\beta_K)^{-1}\\sigma^{g,L}_{TK}\\\\\n&=(\\Gamma(s,\\kappa^E_K)\\otimes1)(\\sigma^{g,E}_K\\otimes1)\\varphi_K\n=(t^E_K\\otimes1)\\varphi_K.\n\\end{aligned}$$\nThe middle equality is Step 3. Naturality of $t$ is not used.",
+   "text": "For unit and tower coherence, use the naturality of the specified kappa from isomorphism-comparison-natural. The complete coefficient comparison system identifies its derived unit on a complete object as an isomorphism, so kappa, restriction, and their composite t are isomorphisms on the relevant objects. Apply naturality of restriction or t to the canonical scalar unit and associator. Paste the previously proved scalar squares with the unit and tower equations for phi, and cancel restriction or t at the extended object. This yields both integral coherence equations directly, without separate beta or alpha tower assertions.",
    "uses": [
-    "lem-weil-isomorphism-comparison-scalar-extension",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-point-sections-scalar-extension"
+    "lem-weil-isomorphism-comparison-natural",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-point-automorphism-restriction-natural"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-    "place": "First transport arrow of the ordinary and compactly supported Frobenius composites; agent-written coefficient compatibility calculation, using the specified comparison maps. Deligne (1.1.3) and (1.1.7) give the rationalization and transport context, not this completed comparison theorem."
-   }
+   "elementary": false
   },
   {
-   "text": "For identity and successive extensions, first check the ordinary $b$ maps. Write $C_{L/E}$ for ordinary derived change of coefficients and $a^C$ for its associator. For $E\\subset L\\subset M$ the local formula of [lem-weil-isomorphism-scalar-tensor-kflat-model] and the pure-tensor associator of [lem-weil-point-derived-tensor-tower-coherence] give\n$$b_{M/E,K}a^C_{G_EK}=G_M(a^C_K)b_{M/L,C_{L/E}K}C_{M/L}(b_{L/E,K}).$$\nOn a flat-term K-flat model as in Step 2, both routes on the local tensor $((y\\otimes a)\\otimes b)$ with $y=g^{-1}x$, $a=c_L(g^{-1}a_0)$, $b=c_M(g^{-1}b_0)$, give $g^{-1}(x\\otimes a_0b_0)$. Tensor bilinearity and sheafification extend this equality to all sections; the tensor-model lemma identifies these representatives with the derived maps. For $L=E$ the same formula reduces to multiplication, giving the unit equation. There is no completed-tower comparison hidden in this calculation.",
-   "uses": [
-    "lem-weil-isomorphism-scalar-tensor-kflat-model",
-    "lem-weil-point-derived-tensor-tower-coherence",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-    "place": "First transport arrow of the ordinary and compactly supported Frobenius composites; agent-written coefficient compatibility calculation, using the specified comparison maps. Deligne (1.1.3) and (1.1.7) give the rationalization and transport context, not this completed comparison theorem."
-   }
-  },
-  {
-   "text": "Let $A_H:T_{M/L}T_{L/E}H\\to T_{M/E}H$ be the integral associator specified in [lem-weil-point-sections-scalar-extension], namely the ordinary associator conjugated by $\\chi$. Substitute $\\beta=G(\\chi)b\\chi_G^{-1}$ from [lem-weil-isomorphism-comparison-scalar-extension] into Step 5. Naturality and invertibility of $\\chi$ from [lem-weil-finite-free-completed-scalar-comparison] cancel the adjacent $\\chi^{-1}\\chi$ factors, after moving $C_{M/L}G_L(\\chi_{L/E,K})$ past $b_{M/L}$ by the naturality of $b$ in [lem-weil-isomorphism-scalar-tensor-kflat-model], and give\n$$\\beta_{M/E,K}A_{G_EK}=G_M(A_K)\\beta_{M/L,T_{L/E}K}T_{M/L}(\\beta_{L/E,K}).$$\nThe same cancellation gives the unit equation. Using this equation and the naturality and associator equation for $\\varphi$ in [lem-weil-point-sections-scalar-extension] in the formula $\\psi=\\varphi_G\\Gamma(\\beta)^{-1}$ gives\n$$\\psi_{M/E,K}\\Gamma(s,G_M A_K)=a^{\\mathrm{mod}}(\\psi_{L/E,K}\\otimes1)\\psi_{M/L,T_{L/E}K}.$$\nIn this substitution naturality of $\\varphi_{M/L}$ is applied to $\\beta_{L/E,K}$; thus the middle $T_{M/L}(\\beta_{L/E,K})$ cancels as well. This proves the identity and successive-extension compatibility of the first equation. For the second equation, run the same computation with $\\alpha$ in place of $\\beta$: put $\\psi'_K=\\varphi_{P_EK}\\Gamma(s,\\alpha_K)^{-1}$. The composition compatibility of $\\alpha$ in [lem-pur-integral-operations-scalar-extension], for the integral associator $A$ above, reads $\\alpha_{M/E,K}A_{P_EK}=P_M(A_K)\\alpha_{M/L,T_{L/E}K}T_{M/L}(\\alpha_{L/E,K})$; with the associator equation of $\\varphi$ and naturality of $\\varphi_{M/L}$ applied to $\\alpha_{L/E,K}$ (Step 1), it gives $\\psi'_{M/E,K}\\Gamma(s,P_MA_K)=a^{\\mathrm{mod}}(\\psi'_{L/E,K}\\otimes1)\\psi'_{M/L,T_{L/E}K}$, and $\\psi'=\\mathrm{id}$ for $L=E$ by the identity clauses of $\\alpha$ and $\\varphi$. This is the compatibility of the second equation, whose left side is $\\psi'_Kt^L_{TK}$. Module associators: $((x\\otimes a)\\otimes b)\\mapsto x\\otimes ab$.",
+   "text": "Apply module rationalization to the integral scalar square and coherence equations. Naturality of the tensor-rationalization comparison and its unit and tower equations, all supplied by the point-sections scalar-extension API, give the rational scalar, unit, and tower equations under exactly the named rational comparisons.",
    "uses": [
     "lem-weil-point-sections-scalar-extension",
-    "lem-weil-isomorphism-comparison-scalar-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-isomorphism-scalar-tensor-kflat-model"
+    "lem-weil-coefficient-complex-rationalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-    "place": "First transport arrow of the ordinary and compactly supported Frobenius composites; agent-written coefficient compatibility calculation, using the specified comparison maps. Deligne (1.1.3) and (1.1.7) give the rationalization and transport context, not this completed comparison theorem."
-   }
-  },
-  {
-   "text": "Apply the functor $-\\otimes_{\\mathcal O_L}L$ to Step 4. The exactness and derived naturality in [lem-weil-coefficient-complex-rationalization] identify each extended source or target by the specified map $((n\\otimes a)\\otimes b)\\mapsto(n\\otimes1)\\otimes ab$. Hence the right side becomes $(t^{E,\\mathrm{rat}}_K\\otimes_E1_L)$ composed with the rational sections comparison of [lem-weil-point-sections-scalar-extension], and the left side uses the rationalization of the same $\\alpha_K$. These are the raw rationalized functors of [def-weil-rationalization-karoubi], which keep the integral objects and tensor their morphisms with the fraction field. This is the requested rational equation. The unit and mixed integral/field tower equation of the rationalization lemma carry the identity and successive-extension equations of Step 6 to the rational ones, including fractions; no idempotent completion or new choice of comparison is involved.",
-   "uses": [
-    "lem-weil-coefficient-complex-rationalization",
-    "lem-weil-point-sections-scalar-extension",
-    "def-weil-rationalization-karoubi"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-    "place": "First transport arrow of the ordinary and compactly supported Frobenius composites; agent-written coefficient compatibility calculation, using the specified comparison maps. Deligne (1.1.3) and (1.1.7) give the rationalization and transport context, not this completed comparison theorem."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-isomorphism-comparison-scalar-extension",
   "lem-weil-isomorphism-derived-pullback",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-point-sections-scalar-extension",
-  "lem-weil-point-derived-sections-tensor-descent",
-  "lem-weil-point-automorphism-restriction-natural",
-  "lem-weil-point-finite-free-sections-tensor",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-isomorphism-scalar-tensor-kflat-model",
-  "lem-pc-kflat-resolution",
-  "lem-weil-isomorphism-comparison-scalar-extension",
-  "def-weil-inverse-image-pullback-comparison",
-  "lem-weil-point-derived-tensor-tower-coherence",
   "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-coefficient-complex-rationalization",
-  "def-weil-rationalization-karoubi"
+  "lem-weil-isomorphism-comparison-natural",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-coefficient-complex-rationalization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-  "place": "First transport arrow of the ordinary and compactly supported Frobenius composites; agent-written coefficient compatibility calculation, using the specified comparison maps. Deligne (1.1.3) and (1.1.7) give the rationalization and transport context, not this completed comparison theorem."
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3) and (1.1.7), pp. 150-151 (context). J2, 2026-10-25: explicit ordinary tensor calculation, exact derived descent, completion conjugation, and coherence by naturality and cancellation. The source supplies the transport/rationalization context; this specified-map assembly is agent-written."
  },
  "mathlib_searches": [
   {
@@ -248,11 +193,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-weil-point-automorphism-transport-scalar-extension",
   "worker": "stage1",
-  "summary": "Q92 gives an ordinary tensor restriction calculation, conjugates it with the specified completion maps, and uses the existing kappa scalar-comparison equation and naturality of phi to obtain the pullback equation. Unit, tower and raw rationalization equations are checked with the existing associators. Corrected the ill-typed verbal description of phi to the explicit formula already required by its cited statement. No new nodes are needed.",
-  "blueprint": "Realizes coefficient compatibility of the first transport arrows in both composites of def-weil-global-geometric-frobenius, through the inherited point-transport chain; steps 1-4 give the two integral equations, 5-6 the canonical associator compatibility, and 7 the raw rational equation.",
+  "summary": "Q154 repairs the 2026-10-22 re-split return. Three comparable argument blocks are exposed as statement-only unsplit nodes: ordinary restriction tensor square, ordinary/completed inverse-image coefficient towers, and scalar-compatible target transfer with rationalization. The parent statement is unchanged and its proof is a short assembly; the earlier seven arguments are retained verbatim and mapped in report.md.",
+  "blueprint": "Coefficient compatibility of the first transport arrow in the ordinary and compact-support composites of def-weil-global-geometric-frobenius. Returned steps 1-2 -> ordinary-square node and parent Step 1; step 3 -> parent Step 2; steps 5 and beta/psi part of 6 -> inverse-image tower node; steps 4, alpha/psi-prime part of 6 and 7 -> transfer node.",
   "tool_uses": [
    {
     "node": "lem-weil-isomorphism-derived-pullback",
@@ -267,28 +212,8 @@
     "why": "The generic point-sections theorem defines phi and supplies its naturality and coefficient associators; no theorem of the inherited unit supplies this sections comparison."
    },
    {
-    "node": "lem-weil-point-derived-sections-tensor-descent",
-    "why": "The generic exact-functor localization theorem permits termwise ordinary tensor and sections computations on arbitrary representatives and their passage to derived categories."
-   },
-   {
-    "node": "lem-weil-point-finite-free-sections-tensor",
-    "why": "The generic point-sections tensor theorem supplies the balanced pure-tensor formula and the constant-value coefficient sections, not any automorphism compatibility conclusion."
-   },
-   {
-    "node": "lem-weil-point-derived-tensor-tower-coherence",
-    "why": "The generic ordinary-tensor associator and its representative formula are used only to check coherence of the specified comparison maps."
-   },
-   {
     "node": "lem-pur-integral-operations-scalar-extension",
     "why": "The generic operations coefficient-comparison theorem supplies the unit and composition coherence of the specified alpha; this proof does not replace its construction."
-   },
-   {
-    "node": "lem-weil-coefficient-complex-rationalization",
-    "why": "The generic module-complex fraction-field tensor comparison supplies exactness and coherence for passing the proved integral equation to raw rationalization."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "The general existence theorem supplies a flat-term K-flat resolution for the ordinary tensor calculation; it is used solely as a resolution tool, not as a replacement proof route."
    }
   ]
  },
@@ -296,20 +221,16 @@
   "lem-weil-isomorphism-derived-pullback",
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-point-sections-scalar-extension",
-  "lem-weil-point-derived-sections-tensor-descent",
-  "lem-weil-point-finite-free-sections-tensor",
-  "lem-weil-point-derived-tensor-tower-coherence",
   "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-coefficient-complex-rationalization",
-  "lem-pc-kflat-resolution"
+  "lem-weil-coefficient-complex-rationalization"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q92-d3b10d30a",
-  "group": "Q92",
+  "reviewer": "NT-cc-Q154-9bd637c56",
+  "group": "Q154",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-d3b10d30a (reviewer sub-agent of L); spot-checked: Read the item and all 22 cited statements in full. 0 new nodes; the live item is still unsplit; no cycle (the only citer is lem-weil-frobenius-point-transport-natural); no SGA. The statement change only makes the phi gloss explicit as (Gamma(chi) theta)^{-1}, which is exactly the formula in lem-weil-point-sections-scalar-extension, so nothing is weakened. Deligne (1.1.3) p.150 and (1.1.7) checked; they give context only, and proof_origin=agent is correct. Steps checked: Step 1, admissibility from lem-weil-isomorphism-derived-pullback (G_E K and P_E K are in D^b_c). Step 2, pure-tensor computation on a K-flat P: both routes give [x|_V tensor a_s|_V], using sigma(a_s)=c_L^{-1}(a_s) and the local formula of b. Step 3, naturality of sigma^L for chi_K plus beta=G(chi) b chi^{-1}, which gives equation 1 exactly. Step 4, alpha T(kappa)=kappa beta plus naturality of phi for kappa^E_K between objects of D^b_c, which gives equation 2. Step 5, ordinary b-tower on ((y tensor a) tensor b): both sides give g^{-1}(x tensor a_0 b_0). Step 6, beta- and psi-towers fully expanded; they need the naturality of b, which the step did not cite. Step 7, raw rationalization through lem-weil-coefficient-complex-rationalization. Edge cases tested: g=id, L=E, K=0, torsion K, ramified towers, g not over k_0. Tool uses accepted (all generic sections/coefficient/resolution tools of sk-thm-sf-compatibility and sk-thm-picard-semicon). FIX in fixes/dag/nodes/sec-six-functors/lem-weil-point-automorphism-transport-scalar-extension.json: (1) Step 6 now cites lem-weil-isomorphism-scalar-tensor-kflat-model for the naturality of b used in the chi cancellation (added to uses). (2) Step 6's loose 'composing the two instances of Step 4' sentence for the second equation is replaced by the explicit psi'=phi Gamma(alpha)^{-1} tower computation (alpha tower, phi associator, naturality of phi_{M/L} at alpha_{L/E,K}, unit clause). Step length is 1998 characters. Advisory: lem-pur-integral-operations-scalar-extension's statement does not name its composition isomorphism; its proof uses the chi-conjugated associator, which the repaired step makes explicit.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-9bd637c56 (reviewer sub-agent of L); spot-checked: Read in full, against the base (side-live, Q92 PASS, 7 steps, 8143 chars): the item, the 3 new nodes, the 13 cited statements, the repair note, def-weil-global-geometric-frobenius (main-20261015) and Deligne Weil II (1.1.3) and (1.1.7) (context only). Item statement and stmt_deps are byte-identical to the base. The report's 7 returned steps match the base proof verbatim. Nothing was dropped. Old steps 1-2 → restriction-ordinary-tensor-square (A); old step 3 → parent Step 2 (elementary assembly; I recomputed Γ(β)η(σ⊗1)=σ_{TK}η_K ⇒ ψσ=(σ⊗1)φ); old steps 5 and the β/ψ part of 6 → inverse-image-coefficient-tower (B); old step 4, the ψ′ part of 6 and step 7 → scalar-compatible-transport-transfer (C), which generalizes over J, u, δ. Nodes are 2.6k, 3.1k and 3.7k chars; the parent is 2214 chars. No cycle, no SGA, no live supersession. Hand checks: A's pure-tensor values agree on both routes (x|_V⊗a_s|_V, using b(y⊗s)=g⁻¹(p⊗s_0) and σ(a_s)=c⁻¹(a_s)), and A holds on unbounded D(R_E) because kflat-model, descent and restriction-natural cover it. B: both sides of the b tower give g⁻¹(x⊗a_0b_0); I derived the β tower and the ψ tower from the φ associator plus naturality of φ_{M/L} at β. C: the transfer follows from δT(u)=uβ, naturality of φ at u and the σ-square hypothesis; the ζ tower is the same computation; the rational square follows from naturality of ρ. Edge cases checked: g=id, E=L, H=0, torsion H, J=G with u=id, and u=0. FIX, 2 faults: (1) A wrote the identification (G_EP)(U)≅P(V) for a value that lives in Γ(G_L C_{L/E}P); corrected to (G_LM)(U)≅M(V) with M=P⊗R_L. (2) C used a^mod without introducing it and evaluated φ and β at G_FH without stating that G_FH is constructible; both now stated, and stmt_dep lem-weil-isomorphism-derived-pullback added. Batch 5: the full closure gains only the 3 new nodes. Both comparison-scalar-extension (reaching the pullback-comparison-normalization of κ, a general isomorphism-pullback foundation, not a step of the trace formula or of Poincare duality) and coefficient-complex-rationalization (reaching the Mathlib leaf on torsion-free modules over a valuation ring) were cited directly by the base item, so all three flags are accepted. Tool uses are the four generic ones already accepted at Q92. Advisory, inherited: the pur integral-operations statement does not name its composition isomorphism, and parent Step 3 identifies it with the χ-conjugated A.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PointAutomorphismTransportScalarExtension",
@@ -352,5 +273,27 @@
   "group": "Q29",
   "result": "pass",
   "note": "Re-delivery after the H13/H2 RETURN at a5562f0b. The lem-weil-point-automorphism-restriction-natural record is byte-identical to live (Q57 theorem and 12 decls restored); no dependency module is delivered. pointAutomorphismRestrictionModules/Derived are moved verbatim into PointAutomorphismTransportScalarExtension.lean with item blueprint docstrings and are listed in the item's lean.declarations; PointAutomorphismRestrictionDerived.lean is deleted. The item node differs from live only in lean; lean differs from the returned head only by the two declarations and the note. The statement is verbatim, all 21 decls are present and none is unlisted. The helpers are the .2.2.choose of the live theorem's sectionwise-pinned sigma (argument order checked against the live signature) and its liftNatTrans localization, so neither is arbitrary or hollow. The 4 theorems are sorry. All imports exist live and none is quarantined. The item mathematics was passed clause by clause in a5562f0b and Q90, and the signatures are unchanged. Advisory: pointTransportPrimeUnits duplicates the downstream frobeniusPointPrimeUnit. No compile, since no file was changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261025T123131-L-1835869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

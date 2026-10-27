@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-dolbeault-laplacian-elliptic",
+ "kind": "statement",
+ "title": "Smooth formal adjoint and ellipticity of the Dolbeault Laplacian",
+ "statement": "Let $M$ be a compact complex manifold without boundary of complex dimension $n\\geq1$, with a smooth positive definite Hermitian metric $g$. The scalars are $\\mathbf C$ [def-weil-field]. For $0\\leq p,q\\leq n$, let $E^{p,q}=\\bigwedge^p(T^{1,0}M)^*\\otimes_{\\mathbf C}\\bigwedge^q(T^{0,1}M)^*$ be its smooth bundle of complex forms of type $(p,q)$, and let $A^{p,q}(M)=\\Gamma^\\infty(M,E^{p,q})$ be its smooth sections. Here $T^{1,0}M,T^{0,1}M$ are the $i,-i$ eigenspaces of the complexified tangent complex structure. Put $A^{a,b}=0$ outside the type range. Let $D=\\bar\\partial:A^{p,q}\\to A^{p,q+1}$ be the type-$(0,1)$ component of the exterior derivative and use the metric and volume of $g$ to define the $L^2$ Hermitian inner products. The formal adjoint $D^*:A^{p,q+1}\\to A^{p,q}$ exists as a complex-linear differential operator of order at most one with smooth coefficients, characterized by $\\langle Du,v\\rangle_{L^2}=\\langle u,D^*v\\rangle_{L^2}$ for all smooth $u,v$. For each $(p,q)$, the operator $P=DD^*+D^*D$ on $A^{p,q}$ is a differential operator of order at most two with smooth coefficients, and is elliptic of order two: its degree-two principal symbol is invertible on every nonzero real cotangent vector. The same ellipticity holds when $E^{p,q}$ and $P$ are regarded as a real vector bundle and real-linear operator. A differential operator of order at most $k$ means one written in local coordinates and bundle frames as $\\sum_{|\\alpha|\\leq k}a_\\alpha(x)\\partial^\\alpha$; its degree-$k$ principal symbol uses only the terms with $|\\alpha|=k$.",
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "WANTED locally: Wenrui Kong, Notes on Complex Geometry (April 9, 2025); read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf; §6.1 Lemma 6.2, printed p.21, and §6.2 Lemma 6.4, printed p.23; realification is the elementary consequence that an invertible complex-linear symbol is invertible over the reals."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-hermitian-dolbeault-data",
+  "def-sfb-form-differential-expressions"
+ ],
+ "proof": [
+  {
+   "text": "In holomorphic coordinates $z_j=x_j+iy_j$, use the frames $dz_I\\wedge d\\bar z_J$. For a coefficient $f$, the type-$(0,1)$ part of $d(f\\,dz_I\\wedge d\\bar z_J)$ is $\\sum_j\\tfrac12(\\partial_{x_j}+i\\partial_{y_j})f\\,d\\bar z_j\\wedge dz_I\\wedge d\\bar z_J$. Thus $D$ is complex-linear of order at most one with smooth coefficients. With the symbol convention $\\partial_{x_j}\\mapsto\\xi_{x_j}$ (no factor $i$), this gives $\\sigma_1(D)(x,\\xi)=\\varepsilon(\\eta)$, where $\\eta=\\xi^{0,1}$ and $\\varepsilon(\\eta)$ means left exterior multiplication by $\\eta$ on the total complex exterior algebra, restricted to type $(p,q)$. The sign from moving $d\\bar z_j$ past $dz_I$ is included in left multiplication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Kong, Notes on Complex Geometry, §6.1 Lemma 6.2, printed p.21, and §6.2 Lemma 6.4, printed p.23; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Coordinate details and the basis computation below supplied by Q123."
+   }
+  },
+  {
+   "text": "On a coordinate domain write the induced Hermitian metrics on the source and target type bundles as positive definite matrices $H_E,H_F$ and the volume as $\\rho\\,dx$, with $\\rho>0$. Apply the coordinate weighted-adjoint identity to the matrices of $D$ to obtain a local operator $Q$. Its displayed formula gives first-order coefficient $-H_E^{-1}A_j^\\dagger H_F$; differentiating $\\rho$, the matrices, or any later cutoff contributes only order zero. Consequently $\\sigma_1(Q)(x,\\xi)=-\\sigma_1(D)(x,\\xi)^\\dagger$, with the dagger now the pointwise Hermitian adjoint between the two bundles and with $\\xi$ real. The coefficient matrices remain smooth: matrix inversion is given by cofactors divided by the nowhere-zero determinant.",
+   "uses": [
+    "lem-sfb-coordinate-weighted-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Kong, Notes on Complex Geometry, §6.1 Lemma 6.2, printed p.21, and §6.2 Lemma 6.4, printed p.23; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Coordinate details and the basis computation below supplied by Q123."
+   }
+  },
+  {
+   "text": "Take a finite holomorphic coordinate cover $U_a$ of the compact $M$. Its underlying real manifold is Hausdorff and sigma-compact. Apply the smooth subordinate-partition theorem with $S=M$ to obtain $\\varphi_a$. For smooth $v$, define $Tv=\\sum_a Q_a(\\varphi_a v)$, extending each summand by zero outside $U_a$. Its support is contained in the closed support of $\\varphi_a$, a compact subset of $U_a$, so the extension is smooth. The coordinate identity, using the compactly supported input $\\varphi_a v$ and arbitrary $u$, gives $\\langle u,Tv\\rangle=\\sum_a\\langle Du,\\varphi_a v\\rangle=\\langle Du,v\\rangle$. Thus $T$ is a global complex-linear operator with smooth coefficients of order at most one. Its leading symbol is $-\\sum_a\\varphi_a\\sigma_1(D)^\\dagger=-\\sigma_1(D)^\\dagger$ by the preceding coefficient computation. Henceforth set $D^*=T$.",
+   "uses": [
+    "lem-sfb-coordinate-weighted-adjoint",
+    "lem-sfb-smooth-subordinate-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Kong, Notes on Complex Geometry, §6.1 Lemma 6.2, printed p.21, and §6.2 Lemma 6.4, printed p.23; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Coordinate details and the basis computation below supplied by Q123."
+   }
+  },
+  {
+   "text": "If $S$ is another smooth operator with the stated adjunction, take $u=(T-S)v$ in $\\langle u,(T-S)v\\rangle=0$. The integral of the continuous nonnegative function $|(T-S)v|^2$ vanishes, so it is zero everywhere: a positive value would give a positive lower bound on a coordinate ball of positive volume. Thus $S=T$. Repeat this construction in every adjacent type; at a missing type set both the zero differential and its adjoint equal to zero. In particular there is no use of a type outside $0\\leq p,q\\leq n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Kong, Notes on Complex Geometry, §6.1 Lemma 6.2, printed p.21, and §6.2 Lemma 6.4, printed p.23; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Coordinate details and the basis computation below supplied by Q123."
+   }
+  },
+  {
+   "text": "At a point and a real $\\xi\\neq0$, $\\eta=\\xi^{0,1}\\neq0$: a real covector has conjugate $(1,0)$ and $(0,1)$ parts, so if one vanishes then both vanish. In the Hermitian $(0,1)$ cotangent space choose an orthonormal basis beginning with $e_1=\\eta/\\|\\eta\\|$, and combine it with an orthonormal $(1,0)$ basis. On an exterior basis monomial not containing $e_1$, $\\varepsilon(\\eta)^\\dagger\\varepsilon(\\eta)$ is $\\|\\eta\\|^2$ times that monomial and the reverse product is zero. On a monomial containing $e_1$ the reverse holds; the insertion and removal signs cancel. Hence $\\varepsilon(\\eta)\\varepsilon(\\eta)^\\dagger+\\varepsilon(\\eta)^\\dagger\\varepsilon(\\eta)=\\|\\eta\\|^2\\operatorname{id}$ on every type, including $q=0,n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Kong, Notes on Complex Geometry, §6.1 Lemma 6.2, printed p.21, and §6.2 Lemma 6.4, printed p.23; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Coordinate details and the basis computation below supplied by Q123."
+   }
+  },
+  {
+   "text": "Expand each composition defining $P$. In $(A_j\\partial_j)(B_k\\partial_k)$ the order-two term is $A_jB_k\\partial_j\\partial_k$; the product-rule term $A_j(\\partial_j B_k)\\partial_k$ has order one. Therefore $P$ has smooth coefficients, order at most two, and $$\\sigma_2(P)=-\\bigl(\\varepsilon(\\eta)\\varepsilon(\\eta)^\\dagger+\\varepsilon(\\eta)^\\dagger\\varepsilon(\\eta)\\bigr)=-\\|\\eta\\|^2\\operatorname{id}.$$ Its inverse is $-\\|\\eta\\|^{-2}\\operatorname{id}$, since $\\|\\eta\\|>0$, proving ellipticity of order two. When the bundles are regarded as real, a complex coefficient matrix is replaced by its real block matrix; the same symbol and the same inverse remain inverse real-linear maps. This proves the real ellipticity as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Kong, Notes on Complex Geometry, §6.1 Lemma 6.2, printed p.21, and §6.2 Lemma 6.4, printed p.23; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Coordinate details and the basis computation below supplied by Q123."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-coordinate-weighted-adjoint",
+  "lem-sfb-smooth-subordinate-partition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Kong, Notes on Complex Geometry, §6.1 Lemma 6.2, printed p.21, and §6.2 Lemma 6.4, printed p.23; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Coordinate details and the basis computation below supplied by Q123."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Dolbeault|principalSymbol|principal_symbol|formal.adjoint",
+   "results": "[grep] OK 0 hit(s); returned top names/files: ; digest 4f53cda18c2baa0c; Mathlib subdirectory Geometry/",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Euclidean/distributional Laplacians and exterior derivative identities; none constructs the smooth formal adjoint on type bundles or proves its ellipticity on Hermitian manifolds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dolbeault Laplacian elliptic principal symbol on Hermitian complex manifolds",
+   "results": "[leansearch] OK 8 hit(s); returned top names/files: InnerProductSpace.InnerProduct.laplacian, Laplacian.termΔ, Laplacian.laplacian, InnerProductSpace.termΔ[_]_, Laplacian.ctorIdx, Laplacian.mk, InnerProductSpace.instLaplacian.congr_simp, InnerProductSpace.laplacianWithin; digest f8c2ec22361f14bb",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Euclidean/distributional Laplacians and exterior derivative identities; none constructs the smooth formal adjoint on type bundles or proves its ellipticity on Hermitian manifolds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"laplacian\"",
+   "results": "[loogle] OK 12 hit(s); returned top names/files: Laplacian.termΔ, Laplacian, Laplacian.laplacian, Laplacian.mk, LineDeriv.laplacianCLM, LineDeriv.laplacianCLM_eq_sum, InnerProductSpace.instLaplacian, InnerProductSpace.laplacianWithin; digest 01b6d02db6b5e090",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Euclidean/distributional Laplacians and exterior derivative identities; none constructs the smooth formal adjoint on type bundles or proves its ellipticity on Hermitian manifolds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Dolbeault Laplacian of a Hermitian metric is a second order elliptic differential operator with scalar principal symbol",
+   "results": "[leanfinder] OK 8 hit(s); returned top names/files: LineDeriv.laplacianCLM, InnerProductSpace.InnerProduct.laplacian, LineDeriv.laplacianCLM_eq_sum, InnerProductSpace.laplacian_eq_iteratedFDeriv_complexPlane, InnerProductSpace.instLaplacian, InnerProductSpace.laplacianWithin_eq_iteratedFDerivWithin_complexPlane, InnerProductSpace.laplacianWithin, SchwartzMap.laplacianCLM_eq'; digest c4a16a278dc38083",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Euclidean/distributional Laplacians and exterior derivative identities; none constructs the smooth formal adjoint on type bundles or proves its ellipticity on Hermitian manifolds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bar partial operator on complex differential forms has a first order formal adjoint and elliptic Laplacian",
+   "results": "[leanfinder] OK 8 hit(s); returned top names/files: Laplacian.termΔ, InnerProductSpace.InnerProduct.laplacian, LineDeriv.laplacianCLM, Laplacian.laplacian, InnerProductSpace.instLaplacian, LineDeriv.laplacianCLM_eq_sum, InnerProductSpace.laplacian_eq_iteratedFDeriv_complexPlane, extDeriv_extDeriv; digest 482cbc606f148f00",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Euclidean/distributional Laplacians and exterior derivative identities; none constructs the smooth formal adjoint on type bundles or proves its ellipticity on Hermitian manifolds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dolbeault Laplacian is elliptic on Hermitian manifolds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LineDeriv.laplacianCLM\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"(R : Type u_4) →\\n  (E : Type u_6) →\\n    (V₁ : Type u_11) →\\n      {V₂ : Type u_12} →\\n        {V₃ : Type u_13} →\\n          [inst : LineDeriv E V₁ V₂] →\\n            [inst_1 : LineDeriv E V₂ V₃] →\\n              [inst_2 : AddCommGroup V₁] →\\n                [inst_3 : AddCommGroup V₂] →\\n                  [\", \"doc\": \"The Laplacian operator is defined as the sum over all indices $i$ of the composition of two continuous linear maps: first applying the linear derivative operator $\\\\partial_{e_i}$ associated with the $\"}\n  {\"name\": \"LineDeriv.laplacianCLM_eq_sum\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"∀ {ι : Type u_1} {E : Type u_6} {V₁ : Type u_11} {V₂ : Type u_12} {V₃ : Type u_13} [inst : LineDeriv E V₁ V₂]\\n  [inst_1 : LineDeriv E V₂ V₃] [inst_2 : AddCommGroup V₁] [inst_3 : AddCommGroup V₂] [inst_4 : AddCommGroup V₃]\\n  [inst_5 : NormedAddCommGroup E] [inst_6 : InnerProductSpace ℝ E] [inst_7 : F\", \"doc\": \"For a finite-dimensional real inner product space $ E $ with orthonormal basis $\\\\{v_i\\\\}_{i \\\\in \\\\iota}$, the Laplacian operator $\\\\Delta$ applied to a function $ f $ satisfies $\\\\Delta f = \\\\sum_{i \\\\in \\\\i\"}\n  {\"name\": \"InnerProductSpace.laplacian_eq_iteratedFDeriv_complexPlane\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"∀ {F : Type u_3} [inst : NormedAddCommGroup F] [inst_1 : NormedSpace ℝ F] (f : ℂ → F),\\n  Laplacian.laplacian f = fun x => (iteratedFDeriv ℝ 2 f x) ![1, 1] + (iteratedFDeriv ℝ 2 f x) ![Complex.I, Complex.I]\", \"doc\": \"For any function $ f : \\\\mathbb{C} \\\\to F $, the Laplacian $ \\\\Delta f $ evaluated at $ x $ is equal to the sum of the second Fréchet derivatives of $ f $ at $ x $ in the directions $[1, 1]$ and $[i, i]$\"}\n  {\"name\": \"InnerProductSpace.InnerProduct.laplacian\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"{E : Type v} → {F : outParam (Type w)} → [self : Laplacian E F] → E → F\", \"doc\": \"The Laplacian operator $ \\\\Delta $ maps elements of the inner product space $ E $ to elements of $ F $, representing the second-order linear differential operator in distribution theory.\"}\n  {\"name\": \"InnerProductSpace.instLaplacian\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"{E : Type u_2} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : InnerProductSpace ℝ E] →\\n      [FiniteDimensional ℝ E] →\\n        {F : Type u_3} → [inst : NormedAddCommGroup F] → [NormedSpace ℝ F] → Laplacian (E → F) (E → F)\", \"doc\": \"The Laplacian operator on the space of functions from $ E $ to $ F $ is defined using the second Fréchet derivative and the canonical covariant tensor associated with the inner product space structure\"}\n  {\"name\": \"InnerProductSpace.laplacianWithin_eq_iteratedFDerivWithin_complexPlane\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"∀ {F : Type u_3} [inst : NormedAddCommGroup F] [inst_1 : NormedSpace ℝ F] {e : ℂ} {s : Set ℂ} (f : ℂ → F),\\n  UniqueDiffOn ℝ s →\\n    e ∈ s →\\n      InnerProductSpace.laplacianWithin f s e =\\n        (iteratedFDerivWithin ℝ 2 f s e) ![1, 1] + (iteratedFDerivWithin ℝ 2 f s e) ![Complex.I, Complex.I]\", \"doc\": \"For a function $ f : \\\\mathbb{C} \\\\to F $ and a point $ e $ in a set $ s \\\\subseteq \\\\mathbb{C} $ with unique differentiability, the Laplacian of $ f $ at $ e $ within $ s $ equals the sum of the second i\"}\n  {\"name\": \"SchwartzMap.laplacianCLM_eq'\", \"module\": \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv\", \"type\": \"∀ {E : Type u_5} {F : Type u_8} [inst : NormedAddCommGroup E] [inst_1 : NormedAddCommGroup F] [inst_2 : NormedSpace ℝ F]\\n  [inst_3 : InnerProductSpace ℝ E] [inst_4 : FiniteDimensional ℝ E] (f : SchwartzMap E F),\\n  (LineDeriv.laplacianCLM ℝ E (SchwartzMap E F)) f = Laplacian.laplacian f\", \"doc\": \"For any function $ f $ in the Schwartz space $ \\\\mathcal{S}(E, F) $, where $ E $ is a finite-dimensional real inner product space and $ F $ is a real normed vector space, the Laplacian operator defined\"}\n  {\"name\": \"SchwartzMap.laplacianCLM_eq\", \"module\": \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv\", \"type\": \"∀ (𝕜 : Type u_2) {E : Type u_5} {F : Type u_8} [inst : NormedAddCommGroup E] [inst_1 : NormedAddCommGroup F]\\n  [inst_2 : NormedSpace ℝ F] [inst_3 : InnerProductSpace ℝ E] [inst_4 : FiniteDimensional ℝ E] [inst_5 : RCLike 𝕜]\\n  [inst_6 : NormedSpace 𝕜 F] (f : SchwartzMap E F),\\n  (LineDeriv.laplacianCL\", \"doc\": \"For any real closed-like field $\\\\mathbb{K}$, normed vector space $F$ over $\\\\mathbb{K}$, and Schwartz function $f$ in the Schwartz space $\\\\mathcal{S}(E, F)$, the Laplacian operator $\\\\Delta$ acting on $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are flat-space/distributional Laplacians or abstract Hilbert adjoints; none states the Dolbeault bundle adjoint and ellipticity theorem on a Hermitian manifold."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Principal symbol of bar partial Laplacian is minus one half norm squared times identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LineDeriv.laplacianCLM\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"(R : Type u_4) →\\n  (E : Type u_6) →\\n    (V₁ : Type u_11) →\\n      {V₂ : Type u_12} →\\n        {V₃ : Type u_13} →\\n          [inst : LineDeriv E V₁ V₂] →\\n            [inst_1 : LineDeriv E V₂ V₃] →\\n              [inst_2 : AddCommGroup V₁] →\\n                [inst_3 : AddCommGroup V₂] →\\n                  [\", \"doc\": \"The Laplacian operator is defined as the sum over all indices $i$ of the composition of two continuous linear maps: first applying the linear derivative operator $\\\\partial_{e_i}$ associated with the $\"}\n  {\"name\": \"InnerProductSpace.instLaplacian\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"{E : Type u_2} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : InnerProductSpace ℝ E] →\\n      [FiniteDimensional ℝ E] →\\n        {F : Type u_3} → [inst : NormedAddCommGroup F] → [NormedSpace ℝ F] → Laplacian (E → F) (E → F)\", \"doc\": \"The Laplacian operator on the space of functions from $ E $ to $ F $ is defined using the second Fréchet derivative and the canonical covariant tensor associated with the inner product space structure\"}\n  {\"name\": \"InnerProductSpace.InnerProduct.laplacian\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"{E : Type v} → {F : outParam (Type w)} → [self : Laplacian E F] → E → F\", \"doc\": \"The Laplacian operator $ \\\\Delta $ maps elements of the inner product space $ E $ to elements of $ F $, representing the second-order linear differential operator in distribution theory.\"}\n  {\"name\": \"LineDeriv.laplacianCLM_eq_sum\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"∀ {ι : Type u_1} {E : Type u_6} {V₁ : Type u_11} {V₂ : Type u_12} {V₃ : Type u_13} [inst : LineDeriv E V₁ V₂]\\n  [inst_1 : LineDeriv E V₂ V₃] [inst_2 : AddCommGroup V₁] [inst_3 : AddCommGroup V₂] [inst_4 : AddCommGroup V₃]\\n  [inst_5 : NormedAddCommGroup E] [inst_6 : InnerProductSpace ℝ E] [inst_7 : F\", \"doc\": \"For a finite-dimensional real inner product space $ E $ with orthonormal basis $\\\\{v_i\\\\}_{i \\\\in \\\\iota}$, the Laplacian operator $\\\\Delta$ applied to a function $ f $ satisfies $\\\\Delta f = \\\\sum_{i \\\\in \\\\i\"}\n  {\"name\": \"Laplacian.termΔ\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The Laplacian operator, denoted by $\\\\Delta$, is a second-order differential operator defined as the divergence of the gradient, typically expressed in $n$-dimensional Euclidean space as $\\\\Delta = \\\\sum\"}\n  {\"name\": \"InnerProductSpace.laplacianWithin\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"{E : Type u_2} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : InnerProductSpace ℝ E] →\\n      [FiniteDimensional ℝ E] →\\n        {F : Type u_3} → [inst : NormedAddCommGroup F] → [NormedSpace ℝ F] → (E → F) → Set E → E → F\", \"doc\": \"The Laplacian operator defined on an inner product space $ E $, mapping elements of $ E $ to $ F $, constructed via the second iterated Fréchet derivative tensor with respect to the canonical covarian\"}\n  {\"name\": \"Laplacian.laplacian\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"{E : Type v} → {F : outParam (Type w)} → [self : Laplacian E F] → E → F\", \"doc\": \"The Laplacian operator $\\\\Delta$ is the second-order linear differential operator defined in distribution theory, mapping a function (or distribution) in space $E$ to its Laplacian in space $F$. It ser\"}\n  {\"name\": \"TemperedDistribution.laplacian_eq_sum\", \"module\": \"Mathlib/Analysis/Distribution/TemperedDistribution\", \"type\": \"∀ {ι : Type u_1} {E : Type u_3} {F : Type u_4} [inst : NormedAddCommGroup E] [inst_1 : NormedAddCommGroup F]\\n  [inst_2 : InnerProductSpace ℝ E] [inst_3 : FiniteDimensional ℝ E] [inst_4 : NormedSpace ℂ F] [inst_5 : Fintype ι]\\n  (b : OrthonormalBasis ι ℝ E) (f : TemperedDistribution E F),\\n  Laplacian.\", \"doc\": \"For a finite-dimensional real inner product space $E$ with an orthonormal basis $\\\\{b_i\\\\}_{i \\\\in \\\\iota}$, the Laplacian $\\\\Delta f$ of a tempered distribution $f \\\\in \\\\mathcal{S}'(E, F)$ is equal to the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are flat-space/distributional Laplacians or abstract Hilbert adjoints; none states the Dolbeault bundle adjoint and ellipticity theorem on a Hermitian manifold."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dolbeault formal adjoint and elliptic Laplacian",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearPMap.IsFormalAdjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.LinearPMap\", \"type\": \"(T : E →ₗ.[𝕜] F) (S : F →ₗ.[𝕜] E) : Prop\", \"doc\": \"Given $ R $-linear maps $ T : E → F $ and $ S : F → E $ between inner product spaces over a real closed-like field $ \\\\mathbb{K} $, the proposition that $ T $ and $ S $ are formal adjoints, meaning tha\"}\n  {\"name\": \"LinearPMap.IsFormalAdjoint.symm\", \"module\": \"Mathlib.Analysis.InnerProductSpace.LinearPMap\", \"type\": \"(h : T.IsFormalAdjoint S) : S.IsFormalAdjoint T\", \"doc\": \"If $ T $ is a formal adjoint of $ S $, then $ S $ is a formal adjoint of $ T $. Specifically, for $ R $-linear maps $ T : E → F $ and $ S : F → E $ between inner product spaces over a real closed-like\"}\n  {\"name\": \"InnerProductSpace.InnerProduct.laplacian\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \"{E : Type v} → {F : outParam (Type w)} → [self : Laplacian E F] → E → F\", \"doc\": \"The Laplacian operator $ \\\\Delta $ maps elements of the inner product space $ E $ to elements of $ F $, representing the second-order linear differential operator in distribution theory.\"}\n  {\"name\": \"LinearPMap.adjoint_isFormalAdjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.LinearPMap\", \"type\": \": T†.IsFormalAdjoint T\", \"doc\": \"For an $ R $-linear map $ T : E → F $ between inner product spaces over a real closed-like field $ \\\\mathbb{K} $, its adjoint $ T† : F → E $ satisfies the formal adjoint condition: for all $ x $ in the\"}\n  {\"name\": \"Laplacian.laplacian\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \"{E : Type v} → {F : outParam (Type w)} → [self : Laplacian E F] → E → F\", \"doc\": \"The Laplacian operator $\\\\Delta$ is the second-order linear differential operator defined in distribution theory, mapping a function (or distribution) in space $E$ to its Laplacian in space $F$. It ser\"}\n  {\"name\": \"Laplacian.termΔ\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The Laplacian operator, denoted by $\\\\Delta$, is a second-order differential operator defined as the divergence of the gradient, typically expressed in $n$-dimensional Euclidean space as $\\\\Delta = \\\\sum\"}\n  {\"name\": \"InnerProduct.term_†\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Adjoint\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"The dagger symbol denotes the adjoint operator in an inner product space.\"}\n  {\"name\": \"LinearPMap.IsFormalAdjoint.le_adjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.LinearPMap\", \"type\": \"(h : T.IsFormalAdjoint S) : S ≤ T†\", \"doc\": \"Given $ R $-linear maps $ T : E → F $ and $ S : F → E $ between inner product spaces over a real closed-like field $ \\\\mathbb{K} $, if $ S $ is a formal adjoint of $ T $, then $ S $ is less than or equ\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are flat-space/distributional Laplacians or abstract Hilbert adjoints; none states the Dolbeault bundle adjoint and ellipticity theorem on a Hermitian manifold."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"laplacian\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Laplacian.termΔ\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \" : Lean.ParserDescr\", \"doc\": \"`Δ f` is the Laplacian of `f`. The meaning of this notation is type-dependent.\"}\n  {\"name\": \"Laplacian\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \" (E : Type v) (F : outParam (Type w)) : Type (max v w)\", \"doc\": \"The notation typeclass for the Laplace operator.\"}\n  {\"name\": \"Laplacian.laplacian\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \" {E : Type v} {F : outParam (Type w)} [self : Laplacian E F] : E → F\", \"doc\": \"`Δ f` is the Laplacian of `f`. The meaning of this notation is type-dependent.\"}\n  {\"name\": \"Laplacian.mk\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \" {E : Type v} {F : outParam (Type w)} (laplacian : E → F) : Laplacian E F\", \"doc\": \"\"}\n  {\"name\": \"LineDeriv.laplacianCLM\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \" (R : Type u_2) (E : Type u_4) (V₁ : Type u_6) {V₂ : Type u_7} {V₃ : Type u_8} [LineDeriv E V₁ V₂] [LineDeriv E V₂ V₃] [AddCommGroup V₁] [AddCommGroup V₂] [AddCommGroup V₃] [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] [CommRing R] [Module R V₁] [Module R V₂] [Module R V₃] [\", \"doc\": \"The Laplacian defined by iterated `lineDerivOp` as a continuous linear map.\"}\n  {\"name\": \"LineDeriv.laplacianCLM_eq_sum\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \" {ι : Type u_1} {E : Type u_4} {V₁ : Type u_6} {V₂ : Type u_7} {V₃ : Type u_8} [LineDeriv E V₁ V₂] [LineDeriv E V₂ V₃] [AddCommGroup V₁] [AddCommGroup V₂] [AddCommGroup V₃] [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] [Module ℝ V₁] [Module ℝ V₂] [Module ℝ V₃] [TopologicalSp\", \"doc\": \"\"}\n  {\"name\": \"InnerProductSpace.instLaplacian\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \" {E : Type u_2} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_3} [NormedAddCommGroup F] [NormedSpace ℝ F] : Laplacian (E → F) (E → F)\", \"doc\": \"\"}\n  {\"name\": \"InnerProductSpace.laplacianWithin\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \" {E : Type u_2} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_3} [NormedAddCommGroup F] [NormedSpace ℝ F] (f : E → F) (s : Set E) : E → F\", \"doc\": \"Laplacian for functions on real inner product spaces, with respect to a set `s`. Use `open\\nInnerProductSpace` to access the notation `Δ[s]` for `InnerProductSpace.LaplacianWithin`.\"}\n  {\"name\": \"InnerProductSpace.laplacian_eq_iteratedDeriv_real\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \" {F : Type u_3} [NormedAddCommGroup F] [NormedSpace ℝ F] {e : ℝ} (f : ℝ → F) : Laplacian.laplacian f e = iteratedDeriv 2 f e\", \"doc\": \"For a function on `ℝ`, the Laplacian is the second derivative.\"}\n  {\"name\": \"InnerProductSpace.laplacianWithin_eq_iteratedDerivWithin_real\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \" {F : Type u_3} [NormedAddCommGroup F] [NormedSpace ℝ F] {e : ℝ} {s : Set ℝ} (f : ℝ → F) (hs : UniqueDiffOn ℝ s) (he : e ∈ s) : InnerProductSpace.laplacianWithin f s e = iteratedDerivWithin 2 f s e\", \"doc\": \"For a function on `ℝ`, the Laplacian is the second derivative: version within a set.\"}\n  {\"name\": \"InnerProductSpace.laplacianWithin_univ\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \" {E : Type u_2} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_3} [NormedAddCommGroup F] [NormedSpace ℝ F] {f : E → F} : InnerProductSpace.laplacianWithin f Set.univ = Laplacian.laplacian f\", \"doc\": \"The Laplacian equals the Laplacian with respect to `Set.univ`.\"}\n  {\"name\": \"InnerProductSpace.laplacian_const\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \" {E : Type u_2} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_3} [NormedAddCommGroup F] [NormedSpace ℝ F] {c : F} : (Laplacian.laplacian fun x => c) = 0\", \"doc\": \"The Laplacian of a constant function is zero.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are flat-space/distributional Laplacians or abstract Hilbert adjoints; none states the Dolbeault bundle adjoint and ellipticity theorem on a Hermitian manifold."
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|formal.adjoint|principalSymbol|principal_symbol",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are flat-space/distributional Laplacians or abstract Hilbert adjoints; none states the Dolbeault bundle adjoint and ellipticity theorem on a Hermitian manifold."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Lemmas 6.2 and 6.4, smooth formal adjoints and ellipticity of the Dolbeault Laplacian.",
+   "via": [
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dolbeault-laplacian-elliptic",
+  "worker": "stage1",
+  "summary": "Expanded Kong Lemmas 6.2 and 6.4 into a coordinate adjunction, global partition construction, explicit exterior-basis symbol calculation, and realification. Added a local variable-matrix integration identity and the exact Mathlib smooth-partition leaf. Statement unchanged; no Kähler assumption or Hodge decomposition is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Lemmas 6.2 and 6.4, smooth formal adjoints and ellipticity of the Dolbeault Laplacian. Steps 1--4 realize the formal-adjoint prerequisite of Lemma 6.2 and steps 5--6 realize the ellipticity prerequisite of Lemma 6.4. The ancestor command returns None, retained as JSON null with the inherited via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-be88c7a8c",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-be88c7a8c (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. The statement, stmt_deps and blueprint fields are unchanged from Q53's unsplit node. Kong (Lemmas 6.2/6.4) is not in literature/ and is recorded as WANTED, with proof_origin agent, so I derived every formula myself. (1) Step 1: the (0,1) part of d gives sigma_1(D)=eps(xi^{0,1}); I checked the coefficient 1/2(xi_x+i xi_y). (2) The coordinate-weighted-adjoint formula is correct: integrating by parts with one argument compactly supported gives rho H_E Qv = -sum d_j(rho A_j^dag H_F v)+rho B^dag H_F v. Its leading coefficient -H_E^{-1}A_j^dag H_F is minus the pointwise adjoint. Tested with m=r=s=1 and A=1,B=0 (Q=-d/dx), with A=0, and with variable rho (enters only at order 0). (3) T v = sum Q_a(phi_a v): each summand is supported in tsupp phi_a, which is compact and inside U_a. Only the second argument is cut off, as the lemma requires, and sum phi_a=1 on M. (4) Uniqueness via u=(T-S)v and positive volume density; endpoint types are set to zero, so the lemma is never used at rank 0. (5) In an orthonormal coframe with e1=eta/|eta|, eps eps^dag + eps^dag eps = |eta|^2 on every type including q=0,n. A nonzero real xi has eta nonzero by conjugation. (6) sigma_2(P) = -|eta|^2 id, so P is elliptic; the realified symbol is invertible too. The smooth-partition leaf exactly matches Mathlib PartitionOfUnity.lean 121-132, 267-271, 484-485, 550 and exists_isSubordinate 554-555. rg -L found no duplicate: the Kahler, Fredholm and decomposition nodes assume dω=0, presuppose the adjoints, or come downstream. No SGA is cited, there are no tool uses, proof_deps equals the union of uses, and the JSON layout is correct. Minor (not a fault): step 5 assumes the standard induced metric on forms; ellipticity holds under any degree-dependent normalization. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.DolbeaultLaplacianElliptic",
+  "declaration": "ComplexManifold.dolbeault_laplacian_elliptic",
+  "declarations": [
+   "ComplexManifold.dolbeault_laplacian_elliptic"
+  ],
+  "file": "lean/Sheaf/Geometry/Manifold/DolbeaultLaplacianElliptic.lean",
+  "statement": "theorem dolbeault_laplacian_elliptic (n : ℕ) (hn : 1 ≤ n) (M : Type u) [TopologicalSpace M] [ChartedSpace (Model n) M] [IsManifold (𝓘(ℂ, Model n)) ∞ M] [T2Space M] [CompactSpace M] [MeasurableSpace M] [BorelSpace M] (g : HermitianMetric n M) (μ : MetricVolume g) : ∃ D : DolbeaultOperators g μ, ∀ (p q : ℤ), 0 ≤ p → p ≤ n → 0 ≤ q → q ≤ n → HasFormDifferentialOrder 1 p (q + 1) p q D.adjoint ∧ (∀ (α : typeForms (n := n) (M := M) p q) (η : typeForms (n := n) (M := M) p (q + 1)), l2Pair g μ (D.dbar α.val) η.val = l2Pair g μ α.val (D.adjoint η.val)) ∧ (∀ S : smoothForms (n := n) (M := M) →ₗ[ℂ] smoothForms (n := n) (M := M), (∀ η : typeForms (n := n) (M := M) p (q + 1), S η.val ∈ typeForms p q) → (∀ (α : typeForms (n := n) (M := M) p q) (η : typeForms (n := n) (M := M) p (q + 1)), l2Pair g μ (D.dbar α.val) η.val = l2Pair g μ α.val (S η.val)) → ∀ η : typeForms (n := n) (M := M) p (q + 1), S η.val = D.adjoint η.val) ∧ HasFormDifferentialOrder 2 p q p q D.laplacian ∧ IsFormElliptic 2 p q D.laplacian",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d68d0610",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Item record changes only lean + added stmt_deps (def-sfb-hermitian-dolbeault-data, def-sfb-form-differential-expressions); lean.statement verbatim through ':= by'; new def node record complete with verbatim statement. Clause check vs node (Kong L6.2/6.4): compact Hausdorff complex manifold via 𝓘(ℂ,Fin n→ℂ) ∞, n≥1, no extra assumptions; ∃ D : DolbeaultOperators pins dbar (bidegree + chart extDeriv) and adjoint (formal_adjoint + positive l2Pair), so adjoint existence is a conclusion; order-1 adjoint, typewise adjunction, uniqueness on type (p,q+1) (true by positivity), order-2 Laplacian, IsFormElliptic with complex and restrictScalars ℝ BijOn on the typeTensor fibre for all nonzero real covectors. The ∃-representing-expression ellipticity is well defined (symmetrized top coefficients on type fibres are determined by L via compactly supported type sections). Type sign i(p−q) checked; edge cases empty M, q=0/n, p=0/n, k=0 fine; symbol −(εε†+ε†ε) invertible for any degree normalization. H4: no symbol or general-order differential-operator notion in lean/Sheaf, the DAG or Mathlib (firstOrder in CoordinateWeightedAdjoint is a first-order proof dep only). No hollow defs, docstrings with source and blueprint id, six proof steps in the theorem docstring, autoImplicit false, only the theorem is sorry, Worker report and Second reading sections present. No file changed, so no compile."
+ }
+}

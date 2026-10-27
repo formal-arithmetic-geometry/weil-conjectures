@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-group-smoothness-identity-criterion",
+ "kind": "statement",
+ "title": "Smoothness of a flat group is detected at its identity section",
+ "statement": "All group schemes in this statement are schemes [def-pc-scheme] equipped with multiplication, identity and inverse over the indicated base, satisfying the group diagrams (the relative version of [def-sc-group-scheme]). Flatness, smoothness and local finite type have the meanings of [def-weil-flat-morphism, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. A Dedekind domain is a Noetherian integrally closed domain of Krull dimension one. Let $S$ be a locally Noetherian scheme and $G\\to S$ a flat locally finite type group scheme with identity $e:S\\to G$. For each $s\\in S$, the morphism $G\\to S$ is smooth at every point of $G_s$ if and only if it is smooth at $e(s)$. The subset\n$$U=\\{s\\in S:G\\to S\\text{ is smooth at }e(s)\\}$$\nis open, and $G_U\\to U$ is smooth. If $S$ is the spectrum of a Dedekind domain and the generic fibre of $G$ is smooth, then $S\\setminus U$ is a finite set of closed points. No quasi-compactness, commutativity or Néron mapping property is assumed. Locally Noetherian means that each point has an affine neighbourhood whose coordinate ring satisfies the ascending chain condition on ideals [pqf-def-locnoeth].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.1, paragraph immediately before Theorem 5, printed pp.174-175 (flat group smooth at unit is smooth); 10.1 Proposition 4 proof, printed p.291 (translations and finitely many nonsmooth fibres). Local PDF WANTED; primary-source scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:G\\to S$. By [pqf-lem-lft-fp-locnoeth], the locally finite type morphism $f$ is locally of finite presentation, since $S$ is locally Noetherian. Put $W=\\bigcup\\{V\\subseteq G:V\\text{ is open and }f|_V\\text{ is smooth}\\}$. Thus $W$ is open and $x\\in W$ means exactly that $f$ is smooth at $x$. By [lem-weil-pbc-smooth-local-on-source], applied to this open cover of $W$, $f|_W$ is smooth. The empty union is allowed.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TX, lemma-noetherian-finite-type-finite-presentation (1); Tag 01V5, definition-smooth; Tag 01V6, lemma-smooth-characterize."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ with $e(s)\\in W$ and an arbitrary point $x\\in G$ over $s$. Take $K=\\kappa(x)$ and its canonical morphism $j_x:\\operatorname{Spec}K\\to G$ from [lem-weil-pbc-morphism-from-spec-field]. Form $G_K=G\\times_{S,fj_x}\\operatorname{Spec}K$, with projection $p:G_K\\to G$ and structure morphism $f_K$. Its multiplication, unit and inverse are obtained by pulling back those of $G$; the same group diagrams still commute, so it is a $K$-group scheme. The pair $(j_x,\\mathrm{id})$ defines a $K$-point $\\widetilde x$ of $G_K$ whose image under $p$ is $x$. The base-changed identity $e_K$ maps to $e(s)$. Apply [lem-sfb-scheme-flat-smooth-point-base-change] to $f$ and $\\operatorname{Spec}K\\to S$: its hypotheses are flatness of $f$ and the local finite presentation obtained in step 1; it imposes no flatness on this change of base. It gives smoothness of $f_K$ at $e_K$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-sc-group-scheme",
+    "lem-sfb-scheme-flat-smooth-point-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, lemma-set-points-where-fibres-smooth (1); schemes.tex Tag 01J9, lemma-characterize-points and preceding discussion; groupoids.tex definition-group-scheme and lemma-base-change-group-scheme."
+   }
+  },
+  {
+   "text": "By [def-sc-group-scheme-translate, lem-sc-translation-automorphism], left translation $L_{\\widetilde x}$ is a $K$-scheme isomorphism of $G_K$. The unit law gives $L_{\\widetilde x}(e_K)=\\widetilde x$. If $V$ is an open smooth neighbourhood of $e_K$, then $L_{\\widetilde x}(V)$ is an open smooth neighbourhood of $\\widetilde x$: its map to $\\operatorname{Spec}K$ is identified with $V\\to\\operatorname{Spec}K$ by this isomorphism. This invariance uses only [def-sbc-smooth-morphisms]: transport each finite presentation through the chart isomorphism, and transport an infinitesimal lifting problem by the inverse isomorphism, lift to $V$, and compose back. Now [lem-sfb-scheme-flat-smooth-point-base-change] at $\\widetilde x$ implies that $f$ is smooth at $p(\\widetilde x)=x$. Since $x$ was arbitrary, $f$ is smooth at every point of $G_s$. Conversely, that assertion includes the point $e(s)$, proving the equivalence.",
+   "uses": [
+    "def-sc-group-scheme-translate",
+    "lem-sc-translation-automorphism",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-scheme-flat-smooth-point-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Proof of lemma-group-scheme-field-geometrically-irreducible (translations by rational points); morphisms.tex Tag 02V4 (1). The argument uses the residue field of each point, without a closed-point density argument."
+   }
+  },
+  {
+   "text": "The subset in the statement is $U=e^{-1}(W)$, hence is open by continuity of the scheme morphism $e$. Steps 2--3 show $f^{-1}(U)\\subseteq W$. Thus $G_U\\to U$ is the restriction of the smooth morphism $f|_W$ to the open $f^{-1}(U)$ in its source, with target restricted to $U$. Source restriction preserves smoothness by [lem-weil-pbc-smooth-local-on-source]: use the cover of $W$ consisting of $W$ itself and the specified open. Restricting the target to an open containing the image keeps the same local ring presentations and lifting problems in [def-sbc-smooth-morphisms]. This proves $G_U\\to U$ smooth, including the case $U=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-smooth-local-on-source",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V5, definition-smooth and the following paragraph; Tag 01V6, lemma-smooth-characterize. Openness is the inverse image under the identity section."
+   }
+  },
+  {
+   "text": "Finally let $S=\\operatorname{Spec}A$ with $A$ Dedekind and let $\\eta$ be the prime $(0)$. Apply [lem-sfb-scheme-flat-smooth-point-base-change] to $\\operatorname{Spec}\\operatorname{Frac}(A)\\to S$ at the identity of the generic fibre. The generic-fibre smoothness assumption gives $e(\\eta)\\in W$, so $\\eta\\in U$. Therefore $E=S\\setminus U$ is closed and avoids $(0)$. Every prime in $E$ is nonzero and hence maximal: a strictly larger prime would give the chain $(0)\\subsetneq\\mathfrak p\\subsetneq\\mathfrak q$, contradicting $\\dim A=1$. Thus all points of $E$ are closed. Moreover $S$ is Noetherian, having the single affine chart $\\operatorname{Spec}A$ with $A$ Noetherian. Apply [lem-sc-noetherian-closed-points-finite] to conclude that $E$ is finite. This finiteness uses the Noetherian affine base, and requires no quasi-compactness of $G$.",
+   "uses": [
+    "lem-sfb-scheme-flat-smooth-point-base-change",
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BA8, lemma-Noetherian-irreducible-components, as assembled in lem-sc-noetherian-closed-points-finite; morphisms.tex Tag 02V4 (1) at the generic identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-sc-group-scheme",
+  "lem-sfb-scheme-flat-smooth-point-base-change",
+  "def-sc-group-scheme-translate",
+  "lem-sc-translation-automorphism",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-noetherian-closed-points-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of Tag 01TX (1), Tag 02V4 (1), the group translation argument in groupoids.tex, and the existing Noetherian closed-points finiteness lemma; BLR is locally unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"GroupObj\"",
+   "results": "{\"t\": \"2026-10-24T06:59:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"GroupObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*identity|identity.*smooth|smooth.*unit|unit.*smooth",
+   "results": "{\"t\": \"2026-10-24T06:59:24Z\", \"tool\": \"grep\", \"query\": \"smooth.*identity|identity.*smooth|smooth.*unit|unit.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat group scheme the set of base points with smooth fibre is open, as detected by its identity section",
+   "results": "{\"t\": \"2026-10-24T06:59:25Z\", \"tool\": \"leansearch\", \"query\": \"For a flat group scheme the set of base points with smooth fibre is open, as detected by its identity section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.basicOpen_one\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.casesOn\", \"Algebra.basicOpen_subset_smoothLocus_iff\"], \"digest\": \"050ee357828c5069\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented group scheme is smooth over a base point if it is smooth at the identity; generic smoothness gives a dense open base of smoothness",
+   "results": "{\"t\": \"2026-10-24T06:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented group scheme is smooth over a base point if it is smooth at the identity; generic smoothness gives a dense open base of smoothness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"9bac66d498af0a2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern smooth algebras, pointwise scheme smoothness, cotangent spaces or metric dilations; none states this group-scheme assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finite type group scheme over a locally Noetherian base is smooth on a fibre if smooth at its identity",
+   "results": "{\"t\": \"2026-10-24T07:25:01Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finite type group scheme over a locally Noetherian base is smooth on a fibre if smooth at its identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"cd45e69c5f28314d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness definitions, affine smooth-algebra facts and local scheme smoothness presentations; no group identity/fibre criterion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*identity|identity.*smooth|smooth.*unit|unit.*smooth",
+   "results": "{\"t\": \"2026-10-24T07:28:21Z\", \"tool\": \"grep\", \"query\": \"smooth.*identity|identity.*smooth|smooth.*unit|unit.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness definitions, affine smooth-algebra facts and local scheme smoothness presentations; no group identity/fibre criterion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group scheme locally of finite type is smooth if it is smooth at the identity",
+   "results": "{\"t\": \"2026-10-24T07:28:22Z\", \"tool\": \"leansearch\", \"query\": \"A group scheme locally of finite type is smooth if it is smooth at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmooth_iff\", \"RingHom.Smooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"f3fc30eaaafdb8c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness definitions, affine smooth-algebra facts and local scheme smoothness presentations; no group identity/fibre criterion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, CategoryTheory.GrpObj",
+   "results": "{\"t\": \"2026-10-24T07:28:22Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, CategoryTheory.GrpObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T07:31:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.inst\", \"Algebra.FormallySmooth\", \"Algebra.Smooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.Smooth.finitePresentation\", \"Algebra.Smooth.of_isLocalization_Away\"], \"digest\": \"b687eda40c040e54\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness definitions, affine smooth-algebra facts and local scheme smoothness presentations; no group identity/fibre criterion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at the unit of a group scheme implies smoothness at every point of the fibre, by translating a residue-field-valued point",
+   "results": "{\"t\": \"2026-10-24T07:31:13Z\", \"tool\": \"leanfinder\", \"query\": \"Smoothness at the unit of a group scheme implies smoothness at every point of the fibre, by translating a residue-field-valued point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"RingHom.Smooth.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"4b782418178d1d73\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness definitions, affine smooth-algebra facts and local scheme smoothness presentations; no group identity/fibre criterion or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lft-closed-subgroup-group-smoothening",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), proper/open direct images, via the recorded admissible-direct-image and trait-extension chain; BLR 10.1 Proposition 4 smoothening input: detection at the identity, openness, and finitely many bad base points. The imported created.item chain has no blueprint_kind ancestor.",
+   "via": [
+    "lem-sfb-lft-closed-subgroup-group-smoothening",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-smoothness-identity-criterion",
+  "worker": "stage1",
+  "summary": "Q49 supplies a five-step proof using existing DAG nodes only. Arbitrary residue-field points replace an unnecessary algebraic-closure/closed-point density argument. The statement is unchanged; a missing fibre-definition dependency is added. No new nodes or Mathlib leaves.",
+  "blueprint": "The current blueprint direct-images proof paragraph (3) is the root route of the recorded admissible-direct-image chain. This tool proves the identity-section smoothness and finite bad-fibre assertions used in the downstream BLR smoothening input; steps 1--3 establish fibrewise detection, step 4 openness, step 5 finiteness. The ancestor command returns None because the historical created.item chain stops at a node lacking blueprint_kind; the existing null ancestor is retained, not invented.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-translation-automorphism",
+    "why": "Left translation by an arbitrary rational point is a scheme isomorphism; a generic group-law tool over the residue field, not a replacement of any direct-image route step."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-points-finite",
+    "why": "Finiteness of a closed set consisting of closed points on the Noetherian base. The unit has no special replacement for this topological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-translation-automorphism",
+  "lem-sc-noetherian-closed-points-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-c5ee16c0d",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c5ee16c0d (reviewer sub-agent of L); spot-checked: PASS with no changes. This is a first stage-1 delivery: no new nodes, statement unchanged; def-pc-scheme-fibre added to stmt_deps, which is harmless. The five steps check out against the cited statements and Stacks morphisms.tex: 01TX (lft over a locally Noetherian base is lfp); 01V9/02V4(1) as the node lem-sfb-scheme-flat-smooth-point-base-change, which needs f flat and lfp and allows an arbitrary base change, so it applies at e_K and x̃ and at Spec Frac A; groupoids.tex lemma-base-change-group-scheme (elementary). Step 1: W is the smooth locus and f|_W is smooth by the local-on-source iff. Steps 2-3: x̃=(j_x,id), translation L_x̃(e_K)=x̃, smoothness transported through the isomorphism, written out against both clauses of def-sbc-smooth-morphisms. Step 4: U=e^{-1}(W), f^{-1}(U)⊆W, so G_U→U is smooth. Step 5: η∈U; nonzero primes are maximal since dim A=1; finiteness from lem-sc-noetherian-closed-points-finite. Small cases: G_a/G_m (U=S), μ_p over Z (bad set {p}), α_p, empty base. BLR is absent locally and the proof is honestly marked agent-written. No duplicate in dag/nodes; no cycle. Accepted tool_uses: lem-sc-translation-automorphism and lem-sc-noetherian-closed-points-finite (generic). Batch-5 flag: lem-sfb-scheme-flat-smooth-point-base-change reaches lem-trf-smooth-at-point-fibre-criterion (Stacks 01V9) and two generic trf affine-smoothness lemmas. Neither assumption provides these generic morphism facts and they are not trace-formula or Poincaré-duality steps, so I accept the citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SmoothnessIdentityCriterion",
+  "declaration": "AlgebraicGeometry.GrpObj.smooth_fiber_iff_smooth_identity",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.smooth_fiber_iff_smooth_identity",
+   "AlgebraicGeometry.GrpObj.smooth_identity_locus_open_and_smooth",
+   "AlgebraicGeometry.GrpObj.finite_nonsmooth_identity_of_dedekind"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SmoothnessIdentityCriterion.lean",
+  "statement": "theorem GrpObj.smooth_fiber_iff_smooth_identity {S : Scheme.{u}} [IsLocallyNoetherian S] (G : Over S) [GrpObj G] [Flat G.hom] [LocallyOfFiniteType G.hom] (s : S) : (∀ x : G.hom.fiber s, G.hom.fiberι s x ∈ G.hom.smoothLocus) ↔ η[G].left s ∈ G.hom.smoothLocus",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Three theorems together render the fibre criterion, openness and smooth restriction, and the finite closed bad locus over a dimension-one Dedekind spectrum. The existing smoothLocus, group-object unit, scheme fibre, and open restriction are reused without auxiliary definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9ddc0265",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Read node, 8 existing:true stmt_dep records, Mathlib smoothLocus (formally smooth stalk, needs lfp derived from IsLocallyNoetherian+LocallyOfFiniteType). Lean matches every clause: GrpObj on Over S with canonical unit η[G].left; fibre criterion via fiberι ↔ unit in smoothLocus; IsOpen of U ∧ Smooth (G.hom ∣_ e⁻¹ᵁ smoothLocus); Dedekind case with ringKrullDim A = 1 (node's dim-one convention), generic fibre at ⟨⊥,isPrime_bot⟩, bad set Finite ∧ closed points. No extra hypotheses (no qc/commutativity/separatedness), universe u free. lean.statement verbatim; node copy differs only in lean; imports exist live; no defs, all by sorry; source/blueprint/proof docstrings present; report has Worker report + Second reading sections. Edge cases (empty base, U=∅/S, μ_p over ℤ, non-qc G) fine. No fixes, no compile needed."
+ }
+}

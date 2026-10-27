@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-completed-coefficient-system-restriction-acyclic",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Tower direct-image acyclicity of restricted K-injective coefficient systems",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension, $f:X\\to Y$ a scheme morphism, and source a SystemRestrictionData record on $X$ as in [def-pur-completed-pushforward-models]. Let $c:R_Y\\to f_*R_X$ be a completed-ring structural map whose module pushforward is additive. For any RightImage model $T$ of its levelwise tower pushforward and every K-injective cochain complex $I$ of strict coefficient systems [def-pur-kinjective-complex], the component $T.\\mathrm{unit}_{\\mathrm{source.systemRestriction}(I)}$ is an isomorphism. This statement constructs no ordinary system pushforward and no comparison square.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Identify source.finiteIso with the canonical finite coefficient isomorphism by sheafification extensionality and finiteIso_generator. Its completed projections form a compatible cone. Present strict systems as modules over the quotient-ring sequence site, and constant completed-module towers as modules on the constant completed-ring sequence site. The section identities and successor transitions in SystemRestrictionData give a natural isomorphism identifying systemRestriction with restriction along this cone.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-coefficient-evaluation-strict-extension",
+    "lem-pur-completed-coefficient-site-data",
+    "lem-pur-native-constant-restriction-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-injective resolution j of the restricted complex. Transport the original system and the resolution along the sequence-site equivalences. Over each sequence-site object, restrict to its slice; exact slice restriction preserves j and preserves K-injectives. Apply scalar-restriction acyclicity for global sections on that slice. Since its terminal object is the chosen object, this proves j is a quasi-isomorphism on sections at every level and every pro-etale object.",
+   "uses": [
+    "lem-coef-restriction-sections-evaluation-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each level, pushforward evaluates j on the same section complexes over pro-etale base changes. Sectionwise detection and levelwise detection therefore show that tower pushforward sends j to a quasi-isomorphism. The derived unit is invertible on the K-injective resolution; naturality at j, and invertibility of Q(j) and Q(push(j)), imply invertibility of the supplied unit on the restricted complex.",
+   "uses": [
+    "lem-pur-quasi-iso-of-sections-universes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-completed-coefficient-site-data",
+  "lem-pur-native-constant-restriction-acyclicity",
+  "lem-coef-restriction-sections-evaluation-acyclic",
+  "lem-pur-quasi-iso-of-sections-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to scalar restriction and sections on slices; Tag 0A07, lemma-Rf-commutes-with-Rlim, sequence-site presentation. Proof implemented by group M9, 2026-10-27."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Right derived direct image of module sheaves commutes with restriction of scalars on strict inverse systems",
+   "results": "Eight hits: ordinary presheaf pushforward and restriction, ModuleCat restriction adjunction and limit preservation. None states the section-normalized strict-system construction or acyclicity in the completed coefficient presentation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of sheaves of modules on strict inverse systems with varying quotient coefficients commutes with restriction of scalars",
+   "results": "Eight hits including SheafOfModules.restrictScalars, its object and map equations, and localCohomology.diagram. These provide ordinary APIs, not the completed strict-system transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedUnique",
+   "results": "Service reports unknown identifier; local Mathlib contains the declaration.",
+   "date": "2026-10-27",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCoefficientComparison|totalDerivedData|strictRingSystem_isGrothendieckAbelian|coefficientSystemEquivalence",
+   "results": "Local Sheaf sources provide a proved generic normalized derived square, total derived data for additive functors, and Grothendieck strict-system categories. WeilConjectures and Mathlib provide the underlying sheaf pushforward and scalar restriction APIs. None specializes the ordinary section identities or restricted-system acyclicity to CompletedCoefficientPushforwardModels. The generic derived square is reused in the parent.",
+   "date": "2026-10-27",
+   "verdict": "partial match; reuse generic derived construction"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientStrictImage",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1: integral derived adjunction; completed coefficient transport, strict finite-reduction towers and direct image. Ordinary strict-system construction and restricted-system acyclicity, before the derived comparison.",
+   "via": [
+    "lem-pur-completed-coefficient-strict-image",
+    "lem-pur-completed-coefficient-direct-image-diagrams",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientSystemRestrictionAcyclic",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientSystemRestrictionAcyclic.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.systemRestriction_push_acyclic",
+  "statement": "theorem systemRestriction_push_acyclic {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (source : SystemRestrictionData l E X)\n    (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))\n    [(push f c).Additive]\n    (towerImage : RightImage\n      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (push f c)))\n    (I : CochainComplex (Systems l E X) ℤ) (hI : I.IsKInjective) :\n    IsIso (towerImage.unit.app\n      ((source.systemRestriction.mapHomologicalComplex (.up ℤ)).obj I))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T222747-L-692634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T012910-L-2344913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

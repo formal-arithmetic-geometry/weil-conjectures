@@ -26,67 +26,45 @@
  ],
  "proof": [
   {
-   "text": "Fix $m\\geq1$. Put $F=F_X$, absolute $p$-power Frobenius, and $H=F^{am}$, absolute $q^m$-power Frobenius. The factorization [prop-trf-frobenius-factorization] gives $H=g_\\sigma^m\\Phi^m=\\Phi^m g_\\sigma^m$. In [def-trf-scheme-frobenius], $g=g_\\gamma$ is inverse to $g_\\sigma$: their second-factor field maps are inverse, and their first-factor maps are identities. Cancelling $g_\\sigma^m$ gives $\\Phi^m=g^mH=Hg^m$. This is an equality of scheme morphisms; it does not require $g$ to be a $k$-morphism. The characteristic-$p$ hypothesis holds because every structure map from $k_0=\\mathbf F_{p^a}$ sends $p\\cdot1=0$ to $p\\cdot1=0$.",
+   "text": "Fix $m\\geq1$ and $K\\in D_A$. Apply [lem-trf-scheme-galois-comparison-normal-form] with $R=A,B$. It gives characteristic $p$ for $X$, $H=F_X^{am}$, the scheme-map equality $\\Phi^m=g^m\\circ H$, and the component identities $\\kappa^{(m)}_{R,K}=\\tau^{(am)}_{R,L(g^m)_R^*K}\\circ d_{R,K}$ for the specified canonical compositor $d_R$. Both coefficient rings satisfy its prime-to-$p$ annihilator hypothesis.",
    "uses": [
-    "prop-trf-frobenius-factorization",
-    "def-trf-scheme-frobenius"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
-    "place": "Paragraphs 1–2: factorization and the inverse geometric Galois automorphism"
-   }
-  },
-  {
-   "text": "For $R=A,B$ abbreviate $S_R=L(\\Phi^m)_R^*$, $P_R=LH_R^*$, and $G_R=L(g^m)_R^*$. Let $d_R:S_R\\xrightarrow{\\sim}P_RG_R$ be the canonical composition isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition] for $\\Phi^m=g^mH$. Write $t_R=\\tau_R^{(am)}:P_R\\xrightarrow{\\sim}\\operatorname{id}$ for the specified absolute-Frobenius trivialization. Unfolding the specified canonical comparison of [prop-trf-scheme-galois-comparison] fixed in the statement (built from the factorization through absolute $q^m$-power Frobenius and the canonical trivialization) gives $\\kappa^{(m)}_{R,K}=t_{R,G_RK}\\circ d_{R,K}$; this uses the specified construction, not a choice of an arbitrary isomorphism. The finite-discrete coefficient identifications [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant] identify the constant ring objects used here with the finite condensed ring objects. Thus clause (1) of [det-prop-scalar-six-pullback] applies in these ordinary categories. Write $c_S=c_{\\Phi^m}$, $c_P=c_H$, and $c_G=c_{g^m}$. Its composition clause, in the inverse-comparison direction, says precisely\n$$\n T(d_{A,K})\\circ c_{S,K}\n =c_{P,G_AK}\\circ P_B(c_{G,K})\\circ d_{B,TK}.\n$$\nBoth sides go from $S_BTK$ to $TP_AG_AK$. No constructibility, boundedness, or coefficient flatness assumption occurs in clause (1).",
-   "uses": [
-    "prop-trf-scheme-galois-comparison",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "det-prop-scalar-six-pullback"
+    "lem-trf-scheme-galois-comparison-normal-form"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
-    "place": "Displayed construction of kappa; coefficient-comparison composition is det-prop-scalar-six-pullback (1)"
+    "place": "Both paragraphs, canonical factorization and the specified multiplicative iterate"
    }
   },
   {
-   "text": "Apply [lem-trf-absolute-frobenius-coefficient-naturality] on $X$ with exponent $b=am$ to the object $G_AK\\in D_A$. Its hypotheses hold: $X$ has characteristic $p$, both rings are finite commutative, and $u$ is unital. It gives\n$$\nT(t_{A,G_AK})\\circ c_{P,G_AK}=t_{B,TG_AK}.\n$$\nMoreover $t_B$ is a natural transformation $P_B\\to\\operatorname{id}$. Its naturality at the morphism $c_{G,K}:G_BTK\\to TG_AK$ is\n$$\nt_{B,TG_AK}\\circ P_B(c_{G,K})=c_{G,K}\\circ t_{B,G_BTK}.\n$$\nThe second equation is the defining naturality square of this specified trivialization, evaluated at this morphism.",
+   "text": "Apply [lem-trf-frobenius-contraction-scalar-pasting] to $Y=X$, $v=g^m$, $b=am$, and the given unital map $u:A\\to B$. The previous step supplies characteristic $p$; this lemma permits every scheme endomorphism, so $g^m$ need not be $k$-linear. Its coefficient comparisons and compositor are exactly the ones fixed in the statement. It gives $T(e_{A,K})\\circ c_{g^m\\circ H,K}=c_{g^m,K}\\circ e_{B,TK}$.",
    "uses": [
-    "lem-trf-absolute-frobenius-coefficient-naturality"
+    "lem-trf-frobenius-contraction-scalar-pasting"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
-    "place": "Absolute-Frobenius component of the coefficient-naturality claim; canonical trivialization from Stacks 0F6W"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+    "place": "Final sentence, naturality in the coefficient ring"
    }
   },
   {
-   "text": "Starting at $S_BTK$, substitute the composition identity of Step 2 and then both equations of Step 3:\n$$\n\\begin{aligned}\nT(\\kappa^{(m)}_{A,K})\\circ c_{S,K}\n&=T(t_{A,G_AK})\\circ T(d_{A,K})\\circ c_{S,K}\\\\\n&=T(t_{A,G_AK})\\circ c_{P,G_AK}\\circ P_B(c_{G,K})\\circ d_{B,TK}\\\\\n&=t_{B,TG_AK}\\circ P_B(c_{G,K})\\circ d_{B,TK}\\\\\n&=c_{G,K}\\circ t_{B,G_BTK}\\circ d_{B,TK}\\\\\n&=c_{G,K}\\circ\\kappa^{(m)}_{B,TK}.\n\\end{aligned}\n$$\nEvery composite has target $TG_AK$. This is the asserted equality with the original $c_{\\Phi^m}$ and $c_{g^m}$. The calculation works for every $m\\geq1$ and every $K$, so in particular for $m=1$. Derived coefficient comparison and the helper already hold without flatness or Tor-amplitude assumptions, so none is introduced here.",
+   "text": "Under $\\Phi^m=g^m\\circ H$, the contraction $e_R$ in the second step is $\\tau_R^{(am)}d_R$, which the first step identifies with the specified $\\kappa_R^{(m)}$. Substitution in the second step gives the claimed equality, with source $L(\\Phi^m)_B^*(TK)$ and target $T(L(g^m)_A^*K)$. This works for every $m\\geq1$, including $m=1$, and arbitrary $K$; neither cited assertion adds flatness or Tor-amplitude conditions.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
-    "place": "Final sentence: coefficient naturality; explicit typed composition of the two coefficient squares"
+    "place": "Final sentence, substitution of the two intermediate assertions"
    }
   }
  ],
  "proof_deps": [
-  "def-trf-scheme-frobenius",
-  "det-prop-scalar-six-pullback",
-  "lem-trf-absolute-frobenius-coefficient-naturality",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "prop-trf-frobenius-factorization",
-  "prop-trf-scheme-galois-comparison"
+  "lem-trf-scheme-galois-comparison-normal-form",
+  "lem-trf-frobenius-contraction-scalar-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
-  "place": "Final sentence, expanded into the absolute-Frobenius factorization and coefficient-change pasting"
+  "place": "Final sentence; assembly of geometric normal form and scalar-compatible absolute-Frobenius contraction"
  },
  "mathlib_searches": [
   {
@@ -180,37 +158,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-trf-scheme-galois-coefficient-change",
   "worker": "stage1",
-  "summary": "Retained the earlier helper, all recorded searches, the item statement and its hypotheses. Repaired the helper inline definition citations flagged by server preflight, distinguished absolute p-power Frobenius F from H=F^(am), and replaced the vague pasting argument by a typed five-line equality. Cited the actual factorization statement and canonical composition theorem instead of taking formulas from another node's proof. The canonical kappa construction is the one specified by the item, not an arbitrary choice. One new statement-only coefficient-naturality helper remains.",
-  "blueprint": "Realizes the final sentence of thm-trf-finite-coefficient-map.proof.md (naturality in the coefficient ring) using the factorization and multiplicative-iterate construction in prop-trf-scheme-galois-comparison.proof.md.",
-  "tool_uses": [
-   {
-    "node": "prop-trf-frobenius-factorization",
-    "why": "The scheme-map equality needed to unfold the specified scheme/Galois comparison; the coefficient unit gives no replacement geometric factorization."
-   },
-   {
-    "node": "def-trf-scheme-frobenius",
-    "why": "Defines geometric and arithmetic Galois maps as inverse product automorphisms, as required by the coefficient unit Weil convention."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Generic canonical pullback-composition isomorphism used for the specified comparison, not a replacement of the coefficient route."
-   },
-   {
-    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "why": "Identifies finite discrete condensed coefficients with constant coefficients before applying the route scalar comparison."
-   },
-   {
-    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "why": "Transports that ring-object identification to the scheme pro-etale site."
-   },
-   {
-    "node": "det-prop-scalar-six-pullback",
-    "why": "The coefficient unit explicitly uses six-operation scalar comparison; clause (1) gives its ambient pullback and composition coherence."
-   }
-  ]
+  "summary": "Repair of the 2026-10-22 batch5 re-split return: statement unchanged, two independently usable statement-only nodes for the geometric normalization and scalar-compatible Frobenius contraction. The original four steps are allocated explicitly in the report, including their compositor equation and full five-line pasting calculation. Parent proof is now a short typed substitution. Previous searches and maintainer fields retained.",
+  "blueprint": "Realizes the coefficient-naturality final sentence of thm-trf-finite-coefficient-map.proof.md, using the specified construction and positive-iterate normalization in both paragraphs of prop-trf-scheme-galois-comparison.proof.md."
  },
  "tool_uses": [
   "prop-trf-frobenius-factorization",
@@ -221,12 +173,12 @@
   "det-prop-scalar-six-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q04-c569dc2e6",
-  "group": "Q04",
+  "reviewer": "NT-cc-Q34-12c0aad23",
+  "group": "Q34",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-c569dc2e6 (reviewer sub-agent of L); spot-checked: Read the item, the new helper, all cited statements (with main-20261015 blueprint_update proofs), unit sk-p-trace-coeff, the thm-trf-finite-coefficient-map proof and Stacks 0F6W (more-morphisms.tex:19215). The item's hypotheses, coefficient category D(X_proet,R), T, c_h (inverse of det-prop-scalar-six-pullback (1)) and kappa^(m) all match prop-trf-scheme-galois-comparison; no target is weakened. Step 1: Fr^(q^m)=F^{am}=g_sigma^m Phi^m with g_gamma=g_sigma^{-1}, so Phi^m=g^m H. Step 2: the composition orientation is correct, d:S->PG and kappa=t_G∘d as in the blueprint proof; only clause (1)'s composition law is used, and inverting it gives the displayed equation. Step 3: the helper at b=am on G_AK, plus naturality of t_B. Step 4: a five-line substitution, verified. The helper is true, since the site trivialization from the relative-Frobenius isos is compatible with ring sheaves and termwise K-flat tensors. Edge cases: b=0, empty X, B=0, u=id, nonflat Z/l^2->F_l. It is not a duplicate of lem-trf-absolute-frobenius-site or lem-pur-frobenius-trivialization-pullback, and does not restate a clause of the item. Accepted tool uses: det-prop-scalar-six-pullback (off-route generic comparison); the rest are on route or generic infrastructure. Fix: Step 2 unfolded kappa without citing prop-trf-scheme-galois-comparison; added it to the Step 2 text, uses and proof_deps (on route) in fixes/dag/nodes/sec-trace-formula/lem-trf-scheme-galois-coefficient-change.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-12c0aad23 (reviewer sub-agent of L); spot-checked: The re-split of lem-trf-scheme-galois-coefficient-change answers the 2026-10-22 batch5 note: the item keeps its statement, the proof is now a 3-step, 1213-character assembly, and there are two new statement-only nodes. Every base argument reappears in a new node: base step 1 and the kappa unfolding from step 2 go to the normal-form node; the det-prop (1) composition law from step 2, step 3 and the five-line pasting calculation of step 4 go to the contraction node. The normal-form formula kappa^(m) = tau^(am)_{G K} . d is true: it is the definition in step 6 of the DAG proof of prop-trf-scheme-galois-comparison, and step 8 matches it with the multiplicative iterate (same as the main-20261015 blueprint). The order of d (L(g^m H)^* to LH^* L(g^m)^*) and the use of exponent a for m=1 check out. In the contraction node, typing works through all three equations. Its generality (any characteristic-p scheme Y, any endomorphism v, b=0, nonflat coefficient maps, no prime-to-p condition) is backed by lem-trf-absolute-frobenius-site, lem-trf-absolute-frobenius-coefficient-naturality, det-prop-scalar-six-pullback (1) and def-sp-constant-scalar-pullback-comparison; the item already pins def-sp, so the comparison c is the same. Neither node duplicates prop-trf-scheme-galois-comparison, prop-trf-frobenius-factorization, lem-pur-frobenius-trivialization-pullback, lem-trf-scheme-galois-pullback-naturality, lem-sfb-kflat-scalar-comparison-normalization, lem-sp-* scalar squares or lem-trf-frobenius-coefficient-reduction-coherence. The nodes carry about 1000 vs 2300 characters of the base argument, which I accept as comparable since they are distinct arguments. Advisory: lem-sfb-kflat-scalar-comparison-normalization is a likely input for the contraction proof. Other checks: no SGA citation; Mathlib searches include all three kinds; the item is not superseded (live node is still the base proof) and not dropped. No fixes."
  },
  "lean": {
   "module": "Sheaf.SixFunctors.SchemeGaloisCoefficientChange",
@@ -246,5 +198,16 @@
   "result": "pass",
   "note": "Statement matches node clause by clause: FiniteFieldDatum, finite-type X₀ (LOFT+QC), Φ^m and g^m as End powers, arbitrary finite commutative A,B with IsUnit(n:k) annihilator (= prime to p), arbitrary φ, every m≥1 and K in the constant-ring unbounded D(X_proet,R). κ = canonicalSchemeGaloisComparison, pinned by schemeGaloisComparison's last clause (compositor then derived τ fixed by unit/projection equations), not arbitrary. c = directImageScalarPullbackIso.hom (landed def-sp canonical K-flat-normalized comparison; same map as transported det-prop (1) θ⁻¹); direction and ≫ order checked. Adding the landed def-sp node to stmt_deps is permitted; no other node change. Statement verbatim; docstrings carry source, blueprint id and 4 steps; only sorry; lines ≤91. nt_compile --json rc 0, item 3.8 s, no diagnostics. Advisories: unused public imports for stmt_deps; stage-3 needs a composition law for directImageScalarPullbackIso; proof dep absolute-frobenius-coefficient-naturality has no Lean yet."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

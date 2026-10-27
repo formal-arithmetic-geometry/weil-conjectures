@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-native-weil-hom-right-adjoint",
+ "kind": "statement",
+ "title": "Pointwise left adjoints of native derived internal Hom",
+ "statement": "Let k₀ be a finite field, ℓ a prime different from its characteristic, and X a separated finite-type k₀-scheme. Fix NativeClosedHomModels M [def-sf-native-weil-closed-models]. For each K in D(ProEtaleWeilSheaf(k₀,ℓ,X)), the functor L ↦ M.weilHom(K,L) has a left adjoint. This asserts only pointwise adjoint existence: no tensor bifunctor, parameter naturality, ordinary tensor comparison or monoidal constraints.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and transposition paragraph; adjoint construction and invertibility of the unit mate in native tensor lift steps 1--2. Stacks 06YS, 08J9 and 0A97."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "proof": [
+  {
+   "text": "Construct a CoefficientClosedStructure on the specified native Hom model from the Frobenius action-site tensor--Hom adjunction and the row-sign comparison.",
+   "uses": [
+    "lem-sf-native-weil-hom-closed-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed structure adjunction at K has M.weilHom as its right adjoint slice, hence the requested functor is a right adjoint.",
+   "uses": [
+    "lem-sf-native-weil-hom-closed-structure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-hom-closed-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Action-site tensor--Hom adjunction transported to the native model; generic closed-structure adjunction projection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint to fixed-source derived internal Hom on modules on a ringed site using K-flat resolutions and K-injective representatives",
+   "results": "Eight hits: sheaf module pullback and sheafification adjunctions, free module adjunctions and LightCondensed closedness. None constructs an adjoint for the specified native unbounded derived Hom or proves the normalized forgetful mate invertible. Local source search found tensorIhomAdjunction and tensorHomAdjunctionQhObj, but no native monoidal/flat-resolution interface to specialize them directly.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"; \"ParametrizedAdjunction\"",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates provides conjugateEquiv, its identity/composition laws, and its unit/counit equations. The parametrized-adjunction file explicitly leaves assembly from pointwise adjoints as a TODO. These supply formal glue, implemented and proved in the parent module, but neither geometric pointwise assertion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat.*[Aa]djunction|[Aa]djunction.*KFlat|unitMate|unit_mate",
+   "results": "Five Mathlib hits: unit_mateEquiv and related formal equations. Local rg for hom_isRightAdjoint, mate_isIso, pointwise adjoint and unit_mate found no matching native statement. Whole-blueprint searches: tensor adjoint has no exact phrase match; unit mate has two unrelated exchange-map nodes (fix-lem-exchanges and lem-weil-pbc-transport-identifies-exchange).",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorAdjoints",
+  "date": "2026-10-27",
+  "group": "A8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom comparison and transposition paragraph; adjoint construction and invertibility of the unit mate in native tensor lift steps 1--2. Stacks 06YS, 08J9 and 0A97.",
+   "via": [
+    "lem-sf-native-weil-tensor-adjoints",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilHomRightAdjoint",
+  "file": "lean/Sheaf/Paper/NativeWeilHomRightAdjoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_hom_isRightAdjoint",
+  "statement": "theorem native_weil_hom_isRightAdjoint\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    (M : NativeClosedHomModels k₀ l X)\n    (K : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :\n    (Prod.sectR (op K) _ ⋙ M.weilHom).IsRightAdjoint",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T235829-L-1458452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T012822-L-2335606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

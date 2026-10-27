@@ -1,0 +1,166 @@
+{
+ "id": "lem-sfb-finite-type-integral-heart-bound",
+ "kind": "statement",
+ "title": "Upper bound for an integral constructible sheaf direct image",
+ "statement": "Fix a prime ell and a characteristic-p field k, with p prime and p != ell. Let X and Y be separated finite-type k-schemes and f:X -> Y a k-morphism [sk-def-sfb-dc-setting]. Use the pulled-back condensed coefficient rings [sk-def-sfb-condensed-ring], stratified locally finitely presented constructible module objects [sk-def-sfb-bounded-constructible], and the ordinary ambient derived direct image [sk-def-sfb-module-derived-pushpull]. Let E be a finite-dimensional normed Q_ell-algebra which is a field, with its given normed algebra structure. Let A be its closed unit ball and A_Z the continuous integral coefficient ring of [def-weil-pbc-continuous-integral-coefficients]. For every constructible A_X-module F, there is an integer b such that Rf_*(F[0]) lies in D^{<=b}. No rational or algebraic-closure coefficient case is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.5.9 and 6.7.2; Proposition 6.8.11(3); integral paragraph specialized to F[0]"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Identify the given closed unit ball with the spectral integer subring using norm_eq_spectralNorm and continuousIntegers_eq. Uniqueness of the extended absolute value shows that ULift preserves the spectral norm and integer membership. The resulting ring equivalence is an isometry, so postcomposition on continuous functions gives an explicit isomorphism of condensed rings. Restriction of scalars along this isomorphism preserves stratified local finite presentation. Apply the internal constant-model comparison and the single-complex homology isomorphism; in nonzero degrees use the zero finite presentation on the one-stratum stratification.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-integral-continuous-encoding-constructible",
+    "sk-def-sfb-constructible",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite type over the field makes the source and target noetherian. The input direction of internal_integral_residue_criterion gives derived completeness and bounded constructibility with finite Tor amplitude of the actual first quotient reduction.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-internal-integral-residue-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use internal_integral_direct_image_limits: direct image preserves completeness and the specified adjunction mate from reduction of direct image to direct image of reduction is invertible. Retain this actual mate rather than choosing an unrelated isomorphism.",
+   "uses": [
+    "lem-sfb-internal-integral-direct-image-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The DVR residue is a finite field killed by ell. Its defining ideal is the maximal ideal, which is the open norm ball, hence its quotient topology is discrete. Lift the reduced input through finiteCtfInternalEtaleRealization on an ordered Tor interval. Its etale antecedent is bounded constructible and bounded below. Apply the existing source finite-type direct-image theorem. Every sheaf of vector spaces is flat by the geometric-fiber flatness criterion, so bounded devissage and stability of finite Tor amplitude under shifts and extensions give finite Tor amplitude of its etale image. Realize the image on the target and compose the bounded-below pushforward comparison with the input isomorphism.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-finite-ctf-internal-etale-realization",
+    "thm-dg-finite-type-constructibility",
+    "lem-sfb-etale-flat-geometric-fibers",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the finite residue image properties along the inverse canonical mate. The output direction of internal_integral_residue_criterion now gives a bounded integral direct image. Take its upper endpoint. The coefficient-change direct-image isomorphism identifies its cohomology with the exact coefficient transport of the original direct image, and faithfulness reflects zero cohomology above that endpoint. No uniform bound in the input or coefficient is required.",
+   "uses": [
+    "lem-sfb-internal-integral-residue-criterion",
+    "sk-def-sfb-coefficient-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-integral-continuous-encoding-constructible",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-internal-integral-residue-criterion",
+  "lem-sfb-internal-integral-direct-image-limits",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-finite-ctf-internal-etale-realization",
+  "thm-dg-finite-type-constructibility",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "sk-def-sfb-coefficient-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q2",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.4.3, 6.5.9 and 6.7.2; Proposition 6.8.11(3). Internal residue criterion and canonical direct-image mate, finite-field etale realization, and explicit normed-coefficient transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of a constructible sheaf in degree zero along a finite type morphism over a field is bounded above for ell adic coefficients",
+   "results": "Eight generic sheaf pushforward and condensed module hits; no finiteness theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLE\", \"rightDerivedFunctor\"",
+   "results": "Three generic derived-functor hits, no coefficient finiteness.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*rightDerived|rightDerived.*constructible|finite.*cohomological.*dimension",
+   "results": "No Mathlib matches. The source library has finite-coefficient finiteness; general integral/rational/algebraic-closure interfaces have import paths back to this item.",
+   "date": "2026-10-25",
+   "verdict": "No usable acyclic theorem for the new coefficient-specific obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search single bound; unit ball direct image; finite type cohomological bound",
+   "results": "All three searches returned zero matching blueprint nodes. Read the original planned integral, rational and finite-stage interfaces; the new statements specialize their argument to sheaves and abstract normed coefficients.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate acyclic interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeDirectImageSingleBound",
+  "date": "2026-10-25",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Lemmas 6.5.9 and 6.7.2; Proposition 6.8.11(3); integral paragraph specialized to F[0]",
+   "via": [
+    "lem-sfb-dc-lower-star-single-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeIntegralHeartBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeIntegralHeartBound.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteTypeIntegralHeart_boundedAbove",
+  "statement": "theorem finiteTypeIntegralHeart_boundedAbove\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    [FiniteDimensional ℚ_[ℓ] E]\n    (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) X.left))\n    (hF : IsConstructibleModuleObject (condensedRingObj (integralCoeff ℓ E) X.left) F) :\n    ∃ b : ℤ, ((R((f.left)_*⟦integralCoeff ℓ E⟧)).obj\n      ((DerivedCategory.singleFunctor _ 0).obj F)).IsLE b",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261025T123705-L-1890145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T130635-L-3486419",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

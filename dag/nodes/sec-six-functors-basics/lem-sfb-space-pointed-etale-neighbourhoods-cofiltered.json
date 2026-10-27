@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+ "kind": "statement",
+ "title": "Pointed etale scheme neighbourhoods of an algebraic-space geometric point are cofiltered",
+ "statement": "Work in the universes and small-site convention of [def-weil-size-convention]. Let $S$ be a scheme and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ with $\\Omega$ an algebraically closed field. Let $\\mathcal N_{\\bar x}$ have objects $(U,\\bar u)$, where $U\\to X$ is an etale map from a scheme in the small etale site of $X$ and $\\bar u:\\operatorname{Spec}\\Omega\\to U$ lifts $\\bar x$; an arrow $(V,\\bar v)\\to(U,\\bar u)$ is a map $h:V\\to U$ over $X$ satisfying $h\\bar v=\\bar u$. This category is small in the containing universe and cofiltered: it is nonempty, any two objects receive arrows from a common object, and any two parallel arrows $h_1,h_2:(V,\\bar v)\\rightrightarrows(U,\\bar u)$ are equalized by an arrow $(W,\\bar w)\\to(V,\\bar v)$. Thus its opposite is filtered in the sense of [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 04JW (lemma-cofinal-etale), including the final assertion restricting to scheme neighbourhoods; paragraph after Tag 04JY (definition-stalk)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-pointed-etale-abelian-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Use the small skeleton of $X_{\\mathrm{et}}$ fixed in [def-weil-size-convention]. Its objects and arrows form sets in the containing universe. For each object $U$, its lifts of $\\bar x$ form a subset of the set $\\operatorname{Hom}_S(\\operatorname{Spec}\\Omega,U)$. The objects of $\\mathcal N_{\\bar x}$ therefore form a set-indexed union of sets, and its arrows are subsets of the site hom sets. Thus $\\mathcal N_{\\bar x}$ is small in that universe. In the following constructions a scheme neighbourhood may be replaced by its chosen site representative: if $a:U_0\\xrightarrow{\\sim}U$ is the representative isomorphism, replace $\\bar u$ by $a^{-1}\\bar u$ and each incident arrow by its composite with $a$ or $a^{-1}$. All pointed commutativity and equalizing equations are preserved.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04JW (lemma-cofinal-etale), restriction to objects of the small site; paragraph after Tag 04JY (definition-stalk), with the project universe convention."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale atlas $A\\to X$ with $A$ a scheme, using [def-trf-algebraic-space]. Its base change $E=\\operatorname{Spec}\\Omega\\times_X A\\to\\operatorname{Spec}\\Omega$ is a surjective etale morphism of schemes by the scheme-test meaning in that definition, so $E$ is nonempty. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to this scheme morphism and the unique point of $\\operatorname{Spec}\\Omega$; its fibre is $E$ itself. Thus $E$ has a component $\\operatorname{Spec}L$ for a finite separable extension $L/\\Omega$. This extension equals $\\Omega$: for each $a\\in L$, a nonzero annihilating polynomial over $\\Omega$ factors into linear factors by repeated application of the root property in [def-weil-algebraic-closure]; its value at $a$ is zero in a field, so one factor is zero and $a$ lies in $\\Omega$. The component inclusion therefore gives a section $\\operatorname{Spec}\\Omega\\to E$. Composing with $E\\to A$ gives $\\bar a$ with image $\\bar x$, hence an object $(A,\\bar a)$ of the neighbourhood category (after Step 1).",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04JW (lemma-cofinal-etale), final proof paragraph applied to an atlas of X; morphisms.tex Tag 02GL (lemma-etale-over-field), part (2)."
+   }
+  },
+  {
+   "text": "Given $(U_1,\\bar u_1)$ and $(U_2,\\bar u_2)$, form $P=U_1\\times_X U_2$ as a sheaf fibre product. It is represented by a scheme by [lem-trf-space-representable-etale-scheme-tests]. Its projection $P\\to U_1$ is representable etale by base change of $U_2\\to X$, and $P\\to X$ is representable etale by composition, using the same cited statement. The pair $(\\bar u_1,\\bar u_2)$ defines a map $\\operatorname{Spec}\\Omega\\to P$ because both components have composite $\\bar x$. Its two projections are exactly the prescribed lifts. Consequently $(P,(\\bar u_1,\\bar u_2))$ is a scheme neighbourhood with pointed arrows to both given objects. Apply Step 1 if a site representative is required.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04JW (lemma-cofinal-etale), proof of (1); base change and composition from Tags 03FU and 03FT, in the representable scheme-test form."
+   }
+  },
+  {
+   "text": "Given $h_1,h_2:(V,\\bar v)\\rightrightarrows(U,\\bar u)$, set $P=U\\times_X U$, a scheme etale over $X$ by the construction of Step 3. The map $r=(h_1,h_2):V\\to P$ is a scheme map over $X$. Since $V\\to X$ and $P\\to X$ are representable etale, the final clause of [lem-trf-space-representable-etale-scheme-tests] says that $r$ is etale. Let $\\Delta:U\\to P$ be the diagonal and form the scheme fibre product $W=V\\times_{r,P,\\Delta}U$ using [def-pc-fibre-product]. Its projection $q:W\\to U$ is etale by base change of $r$; hence $W\\to U\\to X$ is representable etale, by the base-change, scheme-comparison and composition clauses of [lem-trf-space-representable-etale-scheme-tests]. The equality $r\\bar v=(\\bar u,\\bar u)=\\Delta\\bar u$ gives the lift $\\bar w=(\\bar v,\\bar u)$ to $W$. If $p:W\\to V$ is the other projection, the fibre-product equation $(h_1p,h_2p)=(q,q)$ proves $h_1p=h_2p$, and $p\\bar w=\\bar v$. Thus $p:(W,\\bar w)\\to(V,\\bar v)$ is the required pointed equalizer arrow. No separatedness of $U\\to X$ or closedness of its diagonal is used. Replace $W$ by its representative as in Step 1.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04JW (lemma-cofinal-etale), proof of (2), its displayed fibre-product square; etale permanence is Tag 03FV."
+   }
+  },
+  {
+   "text": "Step 2 gives nonemptiness, Step 3 gives common incoming arrows for every pair of objects, and Step 4 gives an incoming equalizing arrow for every pair of parallel arrows. These are precisely the cofilteredness axioms. Reversing arrows gives nonemptiness, common outgoing arrows and outgoing equalizing arrows in $\\mathcal N_{\\bar x}^{\\mathrm{op}}$, which are the filteredness axioms in [def-weil-pbc-category-colimit]. The smallness assertion is Step 1.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Paragraph after Tag 04JY (definition-stalk), applying Tag 04JW (lemma-cofinal-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-weil-algebraic-closure",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 04JW (lemma-cofinal-etale), all three proof paragraphs; paragraph after Tag 04JY (definition-stalk)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The category of pointed etale scheme neighborhoods of a geometric point of an algebraic space is cofiltered",
+   "sub": "",
+   "results": "Succeeded; 8 hits: CategoryTheory.GrothendieckTopology.Point.isCofiltered, CategoryTheory.PreGaloisCategory.PointedGaloisObject.instIsCofilteredOrEmpty, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the cofiltered-elements theorem assumes an already constructed site point, and the etale instance is for a scheme base. Neither constructs cofiltered pointed scheme neighbourhoods of an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale, CategoryTheory.IsCofiltered",
+   "sub": "",
+   "results": "Succeeded; 1 hits: AlgebraicGeometry.Scheme.instIsCofilteredElementsEtaleCompOverForgetObjOppositeFunctorTypeCoyonedaOpMk. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the cofiltered-elements theorem assumes an already constructed site point, and the etale instance is for a scheme base. Neither constructs cofiltered pointed scheme neighbourhoods of an algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isCofiltered.*[Ee]tale|[Ee]tale.*isCofiltered",
+   "sub": "",
+   "results": "Succeeded; 1 hits: Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the cofiltered-elements theorem assumes an already constructed site point, and the etale instance is for a scheme base. Neither constructs cofiltered pointed scheme neighbourhoods of an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointed etale neighbourhoods of an algebraic space admit common refinements and equalizers",
+   "sub": "",
+   "results": "Succeeded; 8 hits: AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizers, AlgebraicGeometry.LocallyRingedSpace.coequalizer, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.LocallyRingedSpace.instHasColimits, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the cofiltered-elements theorem assumes an already constructed site point, and the etale instance is for a scheme base. Neither constructs cofiltered pointed scheme neighbourhoods of an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale neighborhoods over an algebraic space with a fixed geometric lift form a nonempty cofiltered category",
+   "sub": "",
+   "results": "Succeeded; 8 hits: AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the cofiltered-elements theorem assumes an already constructed site point, and the etale instance is for a scheme base. Neither constructs cofiltered pointed scheme neighbourhoods of an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-conservative-geometric-points",
+  "date": "2026-10-23",
+  "group": "Q113"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tags 04KH and 04KJ, stalk detection of local ring and local-morphism conditions before reconstruction. Geometric-stalk input: Tag 04JW (lemma-cofinal-etale), cofilteredness of pointed scheme neighbourhoods before Tags 04JY and 04K5.",
+   "via": [
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+  "worker": "stage1",
+  "summary": "Proved smallness with explicit representative transport, nonemptiness via a scheme atlas and an algebraically closed-field fibre, common refinements by scheme fibre products over X, and equalizing arrows by the exact diagonal pullback of Tag 04JW. Reused existing representable-etale calculus and field-fibre nodes; no new nodes. No statement correction or Lean attachment.",
+  "blueprint": "Supports the geometric-stalk prerequisite on the inherited det-thm-sf-ctf-stability-direct-images proof (3) branch. The latest blueprint direct-images proof (3) is the ambient route, not a duplicate of this auxiliary assertion. Realizes the entire Tag 04JW proof restricted to scheme neighbourhoods and the paragraph following 04JY.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic representability, base-change, composition and permanence of etale scheme-source maps into algebraic spaces; the unit has no replacement for this scheme-test calculus."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic etale scheme-fibre structure over a field supplies a component of the atlas fibre; the unit has no field-fibre classification."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic scheme fibre-product existence and universal property for the equalizer square; no unit-specific construction replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-f86cf7cad",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-f86cf7cad (reviewer sub-agent of L); spot-checked: Read Stacks spaces-properties 04JW (statement, the Moreover clause and all three proof paragraphs), the paragraph after 04JY, and morphisms 02GL (1),(2). The statement restricts 04JW faithfully to scheme neighbourhoods in X_et, the 04JY index category; the added smallness is proved in Step 1. Step 1: skeleton smallness and representative transport, elementary and correct. Step 2: atlas fibre E is surjective étale over Spec Ω, so nonempty; the 02GL fibre node gives Spec L components; L=Ω by the inline root-splitting argument; the section gives ā over x̄. Step 3: P=U1×_X U2 is a scheme, étale over U1 and X by the cited trf clauses; (ū1,ū2) is a pointed refinement. Step 4: r=(h1,h2) is étale by the trf permanence clause (03FV); W=V×_{r,P,Δ}U with w̄=(v̄,ū) and h1p=h2p is exactly the 04JW square. That p is over X is implicit but immediate. Step 5: the filteredness axioms of def-weil-pbc-category-colimit. Edge cases X=∅, h1=h2 and non-separated or non-qc U are fine. No 04JW or algebraic-space duplicate in the DAG; the scheme version lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered is different. Item is unsplit in live and side-live with no repair note. No SGA. Tool uses accepted: 02GL fibre node (sk-thm-p1) and the representable-étale calculus (sk-i-curve-zero) are generic. Batch-5 finding on lem-trf-space-representable-etale-scheme-tests: it is generic algebraic-space scheme-test calculus (025W/03EC/03FV); its 144-node closure reaches no trace-formula or Poincaré theorem and neither assumption gives it, so no assumption-leaf reroute is needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePointedEtaleNeighbourhoodsCofiltered",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.pointedEtale_small_cofiltered",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePointedEtaleNeighbourhoodsCofiltered.lean",
+  "statement": "theorem pointedEtale_small_cofiltered {S : Scheme.{u}} (X : AlgebraicSpace S) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk s) ⟶ X.obj.obj) : Small.{u + 1} (X.PointedEtale x) ∧ IsCofiltered (X.PointedEtale x) ∧ IsFiltered (X.PointedEtale x)ᵒᵖ",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed AlgebraicSpace.PointedEtale category, carried by def-sfb-space-pointed-etale-abelian-stalk, added to stmt_deps under the landed-nodes rule. Smallness is in u+1; all three cofilteredness axioms and filteredness of the opposite are asserted. No new definitions or statement corrections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b95dc6e32",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 04JW/after-04JY clause by clause: AlgebraicSpace S, alg. closed Ω : Type u with point x over s, landed X.PointedEtale x (StructuredArrow over EtaleSite; arrows over X preserving the lift, direction correct), Small.{u+1}, full IsCofiltered (incl. nonempty), IsFiltered of op. No extra hypotheses or universe restriction; edge cases X=∅, h1=h2, non-separated charts OK. Added stmt_dep def-sfb-space-pointed-etale-abelian-stalk is landed (Q107), allowed by §5. No duplicate in project/Mathlib (only ring/scheme versions). Docstrings carry source, blueprint id and 5 proof steps; sorry only; lean.statement verbatim; live item has no lean record (not a rebind). No compile needed (no file changed)."
+ }
+}

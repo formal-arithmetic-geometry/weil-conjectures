@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-integral-direct-image-reduction-cone",
+ "kind": "statement",
+ "title": "Scalar cone comparison for the actual finite direct-image projection",
+ "statement": "Use the canonical coefficient and functor definitions of [sk-def-pe-derived-completion], [sk-def-sfb-module-derived-pushpull] and [sk-def-sfb-coefficient-change]. For every prime l, finite extension E of Q_l, scheme morphism j : U → X and positive quotient exponent n+1 (Lean index n), with the canonical internal coefficient rings and derived functors, After scalar restriction, the specified projection completes the identity square\non uniformizer multiplication to a morphism of distinguished triangles.\nSource: blueprint integral open direct image, Reduction paragraph; Stacks 014A, 06YY\n(blueprint: lem-sfb-integral-direct-image-reduction-cone).\n\nLean statement (under the displayed l, E and j parameters):\ntheorem integral_direct_image_reduction_cone (n : ℕ)\n    [IsIso (integralReductionPullbackMap l E j n)]\n    (K : DerivedCategory (AdicCompletion.Modules l E U)) :\n    let H := (CondensedRing.moduleObjectDerivedPushforward\n      (DerivedNakayama.integerRing l E) j).obj K\n    let c := (AdicCompletion.restrict l E X n).map (integralFiniteProjection l E j n K)\n    ∃ (s : H ⟶ H)\n      (q : H ⟶ (AdicCompletion.integralLevel l E X H n))\n      (δ : (AdicCompletion.integralLevel l E X H n) ⟶ H⟦(1 : ℤ)⟧)\n      (q' : H ⟶ (AdicCompletion.restrict l E X n).obj\n        ((CondensedRing.moduleObjectDerivedPushforward\n          (DerivedNakayama.quotientRing l E (n + 1)) j).obj\n            ((AdicCompletion.derivedReduction l E U n).obj K)))\n      (δ' : (AdicCompletion.restrict l E X n).obj\n        ((CondensedRing.moduleObjectDerivedPushforward\n          (DerivedNakayama.quotientRing l E (n + 1)) j).obj\n            ((AdicCompletion.derivedReduction l E U n).obj K)) ⟶ H⟦(1 : ℤ)⟧),\n      Pretriangulated.Triangle.mk s q δ ∈ distTriang _ ∧\n      Pretriangulated.Triangle.mk s q' δ' ∈ distTriang _ ∧\n      q ≫ c = q' ∧ c ≫ δ' = δ",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Reduction paragraph: commute exact integral direct image with the uniformizer cone",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-pushforward-Noetherian-case (099N)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-coefficient-change",
+  "lem-sfb-integral-reduction-pullback-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Pull the positive-power uniformizer short exact sequence from derived_nakayama_resolution to X. Its two regular modules are tensor units. DerivedCategory.isDualizable_singleFunctor_obj_of_shortExact makes the degree-zero finite quotient dualizable. Transport through mapModComapIso to the restricted regular finite coefficient.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Reduction paragraph: commute exact integral direct image with the uniformizer cone",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  },
+  {
+   "text": "Choose normalized tensor and scalar/geometric pullback comparisons from internal_scalar_pullback_normalization. The proved normalized_inverse identifies the inverse balancing comparison with the inverse scalar mate. The private inverse_mate_transport calculation transports this equation along exact-pullback comparisons; geometric_mate_transport identifies its geometric direct-image mate with precisely integralFiniteProjection.",
+   "uses": [
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-sfb-normalized-scalar-restriction-push"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Reduction paragraph: commute exact integral direct image with the uniformizer cone",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  },
+  {
+   "text": "The proved generic Adjunction.isIso_rightAdjointProjectionMap_app_app_of_isDualizable theorem makes the integral tensor projection invertible. internal_scalar_mate_projection identifies this with invertibility of rho, hence of the specified finite projection by the equality in the preceding step. No projection formula for arbitrary coefficients is assumed.",
+   "uses": [
+    "lem-sfb-internal-scalar-mate-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Reduction paragraph: commute exact integral direct image with the uniformizer cone",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  },
+  {
+   "text": "Tensor the pulled-back short exact sequence with H. The derived tensor functor preserves its distinguished triangle. The regular-module and residueDerivedTensorIso comparisons identify its vertices with H, H, and integralLevel H n. Transport along these isomorphisms to obtain the first distinguished triangle.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "new-integral-residue-tensor-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Reduction paragraph: commute exact integral direct image with the uniformizer cone",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  },
+  {
+   "text": "Restriction preserves the finite projection isomorphism. Transport the first distinguished triangle along identity, identity, and this isomorphism c. Set q prime = q followed by c and delta prime = inverse c followed by delta. Associativity and c inverse c = identity prove both required squares, with the connecting sign already retained by triangle transport.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Reduction paragraph: commute exact integral direct image with the uniformizer cone",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-derived-nakayama-resolution",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-normalized-scalar-restriction-push",
+  "lem-sfb-internal-scalar-mate-projection",
+  "new-integral-residue-tensor-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Reduction paragraph, using the existing dualizable finite-coefficient projection route; T3 writes the explicit scalar and geometric mate transport and triangle assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image commutes with a regular scalar cone, finite quotient coefficient reduction and its projection formula comparison",
+   "results": "Eight results for ordinary scalar extension, tensor or ideal-adic constructions; none states this internal sheaf derived comparison.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of a quotient by a regular scalar is the cone of scalar multiplication, compatibly with the projection formula mate",
+   "results": "Eight results for ordinary pullback composition or module scalar operations; none states the derived internal comparison.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*cone|reduction.*tower|integralReductionPullbackMap|integralFiniteProjection|integral_direct_image_reduction_tower",
+   "results": "No matches. Generic mate identities and triangle five lemma are available but do not supply coefficient normalization.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.IntegralDirectImageLimits",
+  "date": "2026-10-25",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Reduction paragraph: commute exact integral direct image with the uniformizer cone",
+   "via": [
+    "lem-sfb-internal-integral-direct-image-limits"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralDirectImageReductionCone",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralDirectImageReductionCone.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_direct_image_reduction_cone",
+  "statement": "theorem integral_direct_image_reduction_cone (n : ℕ)\n    [IsIso (integralReductionPullbackMap l E j n)]\n    (K : DerivedCategory (AdicCompletion.Modules l E U)) :\n    let H := (CondensedRing.moduleObjectDerivedPushforward\n      (DerivedNakayama.integerRing l E) j).obj K\n    let c := (AdicCompletion.restrict l E X n).map (integralFiniteProjection l E j n K)\n    ∃ (s : H ⟶ H)\n      (q : H ⟶ (AdicCompletion.integralLevel l E X H n))\n      (δ : (AdicCompletion.integralLevel l E X H n) ⟶ H⟦(1 : ℤ)⟧)\n      (q' : H ⟶ (AdicCompletion.restrict l E X n).obj\n        ((CondensedRing.moduleObjectDerivedPushforward\n          (DerivedNakayama.quotientRing l E (n + 1)) j).obj\n            ((AdicCompletion.derivedReduction l E U n).obj K)))\n      (δ' : (AdicCompletion.restrict l E X n).obj\n        ((CondensedRing.moduleObjectDerivedPushforward\n          (DerivedNakayama.quotientRing l E (n + 1)) j).obj\n            ((AdicCompletion.derivedReduction l E U n).obj K)) ⟶ H⟦(1 : ℤ)⟧),\n      Pretriangulated.Triangle.mk s q δ ∈ distTriang _ ∧\n      Pretriangulated.Triangle.mk s q' δ' ∈ distTriang _ ∧\n      q ≫ c = q' ∧ c ≫ δ' = δ",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralFiniteProjection",
+   "AlgebraicGeometry.ProEtale.integral_direct_image_reduction_cone"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-49639",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T101007-L-3646565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261025T144058-L-1173487",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

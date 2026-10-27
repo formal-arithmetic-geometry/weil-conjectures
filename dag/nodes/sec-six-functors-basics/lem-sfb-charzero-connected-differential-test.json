@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-charzero-connected-differential-test",
+ "kind": "statement",
+ "title": "Connectedness detected by representations with zero differential",
+ "statement": "Let $k$ be a field of characteristic zero [def-weil-field], and let $H$ be an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. For a finite-dimensional rational representation $r:H\\to\\operatorname{GL}(V)$ [def-wf-algebraic-representations], its differential $dr:\\operatorname{Lie}(H)\\to\\operatorname{End}_k(V)$ is induced on the kernels of reduction of dual-number points; $\\operatorname{Lie}(H)$ is the tangent Lie algebra at the identity [def-sc-scheme-tangent-space, def-sc-dual-numbers, def-wf-lie-algebra, def-wf-lie-algebra-derivation]. Then $H$ is geometrically connected if and only if every such representation with $dr=0$ is trivial. Geometrically connected means connected after extension to an algebraic closure, with connectedness as in [def-weil-connected-scheme]. Trivial means $r_A(h)=1$ for every commutative $k$-algebra $A$ and every $h\\in H(A)$. The zero vector space is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Note 9.50, printed pp.184--185 (finite quotients detect components in characteristic zero), and Proposition 10.31 with Cartier 3.23 and Proposition 10.15, printed pp.196,71,190--191. This precise zero-differential formulation is an agent-stated consequence of those general criteria."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-wf-algebraic-representations",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-wf-lie-algebra",
+  "def-weil-connected-scheme",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Assume $H$ geometrically connected. By [lem-weil-geometrically-connected-algebraic-closure] it is connected (take the extension $k/k$), and by [lem-sfb-cartier-characteristic-zero-smooth] it is smooth. Let $r$ have $dr=0$. If $V=0$, its automorphism group on every algebra is the singleton, so the conclusion holds. Otherwise choose a basis of $V$ of size $n\\geq1$. In the coordinate presentation of [def-sc-general-linear-group], the identity subgroup $E=\\operatorname{Spec}k\\subseteq\\operatorname{GL}_{n,k}$ is cut out by $x_{ij}-\\delta_{ij}$; its coordinate map onto $k$ is surjective, so [lem-weil-pbc-closed-immersion-affine-cover-criterion] makes it a closed subgroup. Its tangent space is zero: its only dual-number point over its identity is its identity. Thus $dr(\\operatorname{Lie}(H))=0\\subseteq\\operatorname{Lie}(E)$. Apply [lem-sfb-charzero-lie-detects-factorization] to factor $r$ through $E$. This gives $r_A(h)=I_n$ for every commutative $k$-algebra $A$, including nonreduced algebras.",
+   "uses": [
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "def-sc-general-linear-group",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-sfb-charzero-lie-detects-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Cartier 3.23, p.71; 10.14 and Proposition 10.15, pp.190--191, applied to the identity subgroup; coordinate description 2.8, p.41. Stacks Tag 047N supplies the cited Cartier theorem."
+   }
+  },
+  {
+   "text": "For the converse put $P=\\Pi_k(H)$ and $q=q_H$ from [lem-sfb-algebraic-scheme-etale-components]. Its separatedness hypothesis holds by [lem-weil-pbc-affine-source-morphism-separated], since $H$ is affine. The product comparisons and functoriality in the component-scheme statement give a group law $m_P=\\Pi_k(m_H)$, inverse $\\Pi_k(i_H)$, and identity $\\Pi_k(e_H)$ after identifying $\\Pi_k(H\\times H)=P\\times P$ and $\\Pi_k(\\operatorname{Spec}k)=\\operatorname{Spec}k$. Applying this functor to the associativity, unit and inverse diagrams of $H$ gives the corresponding diagrams for $P$; naturality says $q$ commutes with these operations. Consequently $P$ is a finite etale $k$-group scheme and $q$ a group homomorphism. The nonempty-fibre clause makes $q$ surjective on underlying spaces. The definition [def-weil-finite-integral-morphism] makes $P$ affine with finite-dimensional coordinate algebra $B$; it is of finite type because a finite vector-space spanning set of $B$ also generates $B$ as a $k$-algebra.",
+   "uses": [
+    "lem-sfb-algebraic-scheme-etale-components",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.30--1.31 and Remark 1.33, pp.15--16; construction of the group structure before Proposition 2.37 and its proof, pp.51--52."
+   }
+  },
+  {
+   "text": "Since $P$ is etale, [def-weil-etale-morphism] makes it unramified. Apply the forward implication of [lem-sfb-group-scheme-identity-dual-unramified] to $P$: every dual-number point reducing to the identity is the identity. Hence $\\operatorname{Lie}(P)=0$. By [lem-sfb-finite-group-faithful-regular-matrices], the right regular action on the finite-dimensional vector space $B=k[P]$ is a representation $\\rho:P\\to\\operatorname{GL}(B)$ and its coordinate homomorphism is surjective. The space $B$ is nonzero, since the identity of $P$ gives a unital map $B\\to k$. Form the rational representation $r=\\rho\\circ q$ of $H$ on $B$. The differential composition formula in [lem-sfb-affine-group-lie-tangent-calculus] gives $dr=d\\rho\\circ dq=0$, because $dq$ takes values in $\\operatorname{Lie}(P)=0$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-group-scheme-identity-dual-unramified",
+    "lem-sfb-finite-group-faithful-regular-matrices",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Note 9.50 and preceding 9.49, pp.184--185, using the regular representation of 4.9, p.87, and functoriality of Lie in 10.5--10.6. Etale dual-number uniqueness: Stacks Tags 047I and 02G5 as in the cited group-scheme criterion."
+   }
+  },
+  {
+   "text": "Assume now that every zero-differential representation of $H$ is trivial. Apply this assumption to the $r$ of step 3. For every $k$-algebra $A$ and $h\\in H(A)$, we obtain $\\rho_A(q_A(h))=I=\\rho_A(e_P)$. The surjectivity of the coordinate map supplied by [lem-sfb-finite-group-faithful-regular-matrices] implies that $\\rho_A$ is injective: two algebra maps $B\\to A$ agreeing after precomposition with a surjection into $B$ agree on every element of $B$. Thus $q_A(h)=e_P$ for all $A,h$. In particular take $A=k[H]$ and the universal point given by its identity algebra map. This shows that the coordinate map of $q$ equals that of $e_P\\circ(H\\to\\operatorname{Spec}k)$, so $q$ is the constant identity morphism of schemes, rather than just constant on $k$-points.",
+   "uses": [
+    "lem-sfb-finite-group-faithful-regular-matrices"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Note 9.50, pp.184--185, with the faithful regular representation of 4.9, p.87; explicit all-algebras faithfulness and universal-point argument."
+   }
+  },
+  {
+   "text": "The surjectivity of $q$ in step 2 and its constancy in step 4 imply that $|P|$ consists only of its identity point. Apply [lem-weil-pbc-etale-algebra-over-field-product] to its affine coordinate algebra: $B\\cong\\prod_{j=1}^s L_j$ with $L_j/k$ finite separable fields. The spectrum of this product has one point for each factor (a prime contains exactly all but one of the orthogonal coordinate idempotents), so $s=1$; $s=0$ is excluded by the identity point. The identity section gives a $k$-algebra map $L_1\\to k$. This map is injective because its domain is a field, and its image contains $k$, so $L_1=k$. Hence $P\\cong\\operatorname{Spec}k$. The nonempty geometrically connected fibre assertion of [lem-sfb-algebraic-scheme-etale-components] now applies to its sole fibre, which is all of $H$. It proves that $H$ is geometrically connected, completing the converse over the original field $k$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-sfb-algebraic-scheme-etale-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.31(b) and Corollary 1.32, p.16; Proposition 2.37(d) and Remark 2.39(a), pp.51--52; Note 9.50, pp.184--185. Etale algebras over a field: Stacks Tag 00U3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sfb-cartier-characteristic-zero-smooth",
+  "def-sc-general-linear-group",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-sfb-charzero-lie-detects-factorization",
+  "lem-sfb-algebraic-scheme-etale-components",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-sfb-group-scheme-identity-dual-unramified",
+  "lem-sfb-finite-group-faithful-regular-matrices",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assemble Cartier 3.23, 10.14--10.15, universal components 1.29--1.31 and 2.37, regular representation 4.9, and Note 9.50. The zero-differential equivalence is the agent-stated consequence recorded in the unchanged source field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine algebraic group in characteristic zero is connected if and only if every rational representation with zero differential is trivial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {inst_1 : CategoryTheory.GaloisCategory C} {X : C}\\n  [self : CategoryTheory.PreGaloisCategory.IsGalois X], CategoryTheory.PreGaloisCategory.IsConnected X\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every Galois object $X$ is connected, i.e., if $X$ satisfies the Galois object conditions in $\\\\mathcal{C}$, then $X$ is a connected object in $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"AddTorsor.connectedSpace\", \"module\": \"Mathlib/Topology/Algebra/MulAction\", \"type\": \"∀ (G : Type u_1) (P : Type u_2) [inst : AddGroup G] [inst_1 : AddTorsor G P] [inst_2 : TopologicalSpace G]\\n  [PreconnectedSpace G] [inst_4 : TopologicalSpace P] [ContinuousVAdd G P], ConnectedSpace P\", \"doc\": \"An additive torsor $P$ equipped with a continuous additive group action is a connected topological space. This follows from the continuity of the action and the transitive group structure, ensuring no\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction\", \"module\": \"Mathlib/CategoryTheory/Galois/Action\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  CategoryTheory.PreGaloisCategory.PreservesIsConnected (CategoryTheory.PreGaloisCategory.functorTo\", \"doc\": \"For a pre-Galois category $\\\\mathcal{C}$ and a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FinType}$, the functor assigning each object $X \\\\in \\\\mathcal{C}$ the action of $\\\\mathrm{Aut}(F)$ on $F(X)$ preser\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.PreservesIsConnected.preserves\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {D : Type v₁} {inst_1 : CategoryTheory.Category.{v₂, v₁} D}\\n  {F : CategoryTheory.Functor C D} [self : CategoryTheory.PreGaloisCategory.PreservesIsConnected F] {X : C}\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], CategoryTheory.PreGa\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be categories, and let $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a functor that preserves connected objects. If $X$ is a connected object in $\\\\mathcal{C}$, then $F(X)$ i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Lie\", \"Connected\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onnected.*[Dd]ifferenti|[Dd]ifferenti.*[Cc]onnected|finite.quotient.*[Cc]onnected",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Complex.lean\", \"line\": \"161\", \"text\": \"    hf.mdifferentiableOn.apply_eq_of_isPreconnected_isCompact_isOpen hpc\"}\n  {\"file\": \"Mathlib/Analysis/Complex/AbsMax.lean\", \"line\": \"235\", \"text\": \"    (hc : IsPreconnected U) (ho : IsOpen U) (hd : DifferentiableOn ℂ f U) (hcU : c ∈ U)\"}\n  {\"file\": \"Mathlib/Analysis/Complex/AbsMax.lean\", \"line\": \"259\", \"text\": \"  (norm_eqOn_of_isPreconnected_of_isMaxOn hc ho hd.differentiableOn hcU hm).of_subset_closure\"}\n  {\"file\": \"Mathlib/Analysis/Complex/AbsMax.lean\", \"line\": \"284\", \"text\": \"    (hc : IsPreconnected U) (ho : IsOpen U) (hd : DifferentiableOn ℂ f U) (hcU : c ∈ U)\"}\n  {\"file\": \"Mathlib/Analysis/Complex/AbsMax.lean\", \"line\": \"298\", \"text\": \"  (eqOn_of_isPreconnected_of_isMaxOn_norm hc ho hd.differentiableOn hcU hm).of_subset_closure\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Darboux.lean\", \"line\": \"95\", \"text\": \"    (hf : DifferentiableOn ℝ f s) : OrdConnected (derivWithin f s '' s) :=\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Darboux.lean\", \"line\": \"101\", \"text\": \"    (hf : ∀ x ∈ s, DifferentiableAt ℝ f x) : OrdConnected (deriv f '' s) :=\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/MeanValue.lean\", \"line\": \"605\", \"text\": \"    (hs : IsOpen s) (hs' : IsPreconnected s) (hf : DifferentiableOn 𝕜 f s)\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/MeanValue.lean\", \"line\": \"620\", \"text\": \"    (hs : IsOpen s) (hs' : IsPreconnected s) (hf : DifferentiableOn 𝕜 f s)\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/MeanValue.lean\", \"line\": \"763\", \"text\": \"    (hs : IsOpen s) (hs' : IsPreconnected s) (hf : DifferentiableOn 𝕜 f s)\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/MeanValue.lean\", \"line\": \"769\", \"text\": \"    (hs : IsOpen s) (hs' : IsPreconnected s) (hf : DifferentiableOn 𝕜 f s)\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/MeanValue.lean\", \"line\": \"781\", \"text\": \"    (hs' : IsPreconnected s) (hf : DifferentiableOn 𝕜 f s) (hg : DifferentiableOn 𝕜 g s)\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The component group of an algebraic group is detected by representations trivial on its Lie algebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.HasTrivialRadical.radical_eq_bot\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasTrivialRadical R L], LieAlgebra.radical R L = ⊥\", \"doc\": \"For any Lie algebra $ L $ over a commutative ring $ R $ with a trivial radical, the radical of $ L $ is equal to the zero submodule, i.e., $\\\\operatorname{rad}(L) = \\\\{0\\\\}$.\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[HasTrivialRadical R L] : (ad R L).ker = ⊥\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then the kernel of the adjoint representation $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieModule.IsTrivial\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \"(L : Type v) → (M : Type w) → [Bracket L M] → [Zero M] → Prop\", \"doc\": \"For all $ l \\\\in L $ and $ m \\\\in M $, the bracket $[l, m] = 0$.\"}\n  {\"name\": \"LieAlgebra.center_eq_bot\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \"[LieModule.IsFaithful R L L] : center R L = ⊥\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the action of $ L $ on itself is faithful (i.e., the only element acting as zero on all of $ L $ is the zero element itself), then the center \"}\n  {\"name\": \"LieAlgebra.abelian_radical_of_hasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[HasTrivialRadical R L] : IsLieAbelian (radical R L)\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ has a trivial radical (i.e., its radical is the zero ideal), then the radical is an abelian Lie algebra. This follows because the trivial ra\"}\n  {\"name\": \"GroupLieAlgebra\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \": Type _\", \"doc\": \"The Lie algebra of a group $ G $, defined as the tangent space at the identity element $ 1 $, modeled on the normed vector space $ E $ via the model with corners $ I $.\"}\n  {\"name\": \"instLieRingGroupLieAlgebra.congr_simp\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G]\\n  [i\", \"doc\": \"The Lie algebra $\\\\mathfrak{g} = T_eG$ of a Lie group $G$ is equipped with a Lie ring structure. The Lie bracket $[v, w]$ for $v, w \\\\in \\\\mathfrak{g}$ is defined by taking the Lie bracket of the corresp\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Lemmas\", \"type\": \"(h : ∀ x, LinearMap.trace k _ (toEnd k L M x) = 0) : HasTrivialRadical k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; finite abstract-group Tannaka, generalized nilpotent Lie weights, abstract Lie algebra structure and analytic differential results do not state this assertion about affine group schemes or all split Lie modules"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*differential|differential.*connected|component.*representation",
+   "results": "{\"t\": \"2026-10-24T13:32:26Z\", \"tool\": \"grep\", \"query\": \"connected.*differential|differential.*connected|component.*representation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract finite-group representations, abstract Lie algebra radicals, Galois-category connectedness and formally etale algebras do not state the all-algebras group-scheme equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a connected algebraic group in characteristic zero a representation whose differential vanishes is trivial; the finite etale component group has a faithful regular representation",
+   "results": "{\"t\": \"2026-10-24T13:32:26Z\", \"tool\": \"leansearch\", \"query\": \"For a connected algebraic group in characteristic zero a representation whose differential vanishes is trivial; the finite etale component group has a faithful regular representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instInjective\", \"Algebra.formallyEtale_iff\", \"Representation.IsTrivial.mk\", \"Rep.IsTrivial\", \"Representation.instIsTrivialTrivial\", \"Algebra.FormallyEtale.mk\", \"Rep.instIsTrivialOfOfIsTrivial\", \"Representation.IsTrivial\"], \"digest\": \"fc014c923de36fa7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract finite-group representations, abstract Lie algebra radicals, Galois-category connectedness and formally etale algebras do not state the all-algebras group-scheme equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Lie\", \"Connected\"",
+   "results": "{\"t\": \"2026-10-24T13:32:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Lie\\\", \\\"Connected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract finite-group representations, abstract Lie algebra radicals, Galois-category connectedness and formally etale algebras do not state the all-algebras group-scheme equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine algebraic group over a field of characteristic zero is geometrically connected if and only if every finite dimensional rational representation with zero Lie algebra differential is trivial",
+   "results": "{\"t\": \"2026-10-24T13:32:27Z\", \"tool\": \"leanfinder\", \"query\": \"An affine algebraic group over a field of characteristic zero is geometrically connected if and only if every finite dimensional rational representation with zero Lie algebra differential is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"FDRep.simple_iff_char_is_norm_one\", \"FDRep.simple_iff_end_is_rank_one\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"FDRep.finrank_hom_simple_simple\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\"], \"digest\": \"b3242556fd621d07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract finite-group representations, abstract Lie algebra radicals, Galois-category connectedness and formally etale algebras do not state the all-algebras group-scheme equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differential functor on finite dimensional rational representations of a connected affine group scheme in characteristic zero detects trivial actions; a disconnected group is detected by its finite etale component quotient",
+   "results": "{\"t\": \"2026-10-24T13:35:34Z\", \"tool\": \"leanfinder\", \"query\": \"The differential functor on finite dimensional rational representations of a connected affine group scheme in characteristic zero detects trivial actions; a disconnected group is detected by its finite etale component quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"FDRep.instHasKernels\", \"Rep.instInjective\", \"FDRep.instInjectiveOfNeZeroCastCard\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"TannakaDuality.FiniteGroup.forget\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"Rep.diagonal_succ_projective\"], \"digest\": \"200502f3726661fb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract finite-group representations, abstract Lie algebra radicals, Galois-category connectedness and formally etale algebras do not state the all-algebras group-scheme equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-charzero-lie-group-integration",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Note 9.50, printed pp.184--185 (finite quotients detect components in characteristic zero), and Proposition 10.31 with Cartier 3.23 and Proposition 10.15, printed pp.196,71,190--191. This precise zero-differential formulation is an agent-stated consequence of those general criteria.",
+   "via": [
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-charzero-connected-differential-test",
+  "worker": "stage1",
+  "summary": "Five steps, no new nodes: Cartier and Lie factorization prove the forward implication; universal finite etale components acquire their group structure functorially, their faithful regular representation has zero differential, and triviality forces the component scheme to be Spec k. Statement and statement dependencies unchanged. Edge cases and all-algebras triviality checked.",
+  "blueprint": "Realizes the inherited Milne Note 9.50 / Proposition 10.15 prerequisite of lem-sfb-split-charzero-lie-group-integration. The ancestor command returns None; retain the inherited from.node=null, exact from.place and via chain. Latest blueprint sk-thm-sf-ctf-stability route read. Whole-blueprint connected/component/differential and zero differential/finite quotients searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic scheme-theoretic tool for the indicated separatedness, geometric connectedness, closed immersion, or finite etale algebra calculation; no step of the constructible-functor unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-algebraic-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-f3cfbd187",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-f3cfbd187 (reviewer sub-agent of L); spot-checked: Read the whole item (5 steps, no new nodes; statement and stmt_deps unchanged) and the statement of every cited node. Step 1 meets every hypothesis of the factorization lemma: H is smooth (Cartier) and connected (the algebraic-closure test with k'=k); E=Spec k is a closed subgroup of GL_n by the affine closed-immersion criterion; Lie E=0; dr equals df_e. Factoring r through E gives r_A=I on every algebra, and V=0 is handled separately. Step 2: the group law on Π_k(H) comes from the product comparisons; the diagram identities hold because maps out of Π(H^n) into a finite étale target are determined by q; q is surjective by the nonempty-fibre clause; P is finite with finite-dimensional B. Step 3: étale gives unramified, the forward direction of the dual-number criterion gives Lie P=0, the regular representation exists for finite P, and the composition clause gives d(ρq)=0. Step 4: the surjective coordinate map plus the U-specialization clause make ρ_A injective, and the universal point gives q constant as a morphism. Step 5: an étale algebra with one point and a k-point is k, and the single fibre (all of H) is geometrically connected. Small cases checked: H=1, V=0, G_a and G_m, constant Z/2 (sign character), μ_3/Q, and the char-p Frobenius counterexample showing char 0 is needed. Milne 9.50 (p.184) and 10.15 (p.191) read in the PDF. Batch-5 flags: lem-trf-smooth-at-point-fibre-criterion (Stacks 01V9) and lem-trf-relative-differential-sheaf-base-change (Stacks 01V0) are generic morphism lemmas, not trace-formula or Poincaré steps, so both are accepted. tool_use: the geometric-connectedness test is a generic tool and is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CharZeroConnectedDifferentialTest",
+  "declaration": "AlgebraicGeometry.GeneralLinearGroup.geometricallyConnected_iff_zero_differential_representations_trivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/CharZeroConnectedDifferentialTest.lean",
+  "statement": "theorem geometricallyConnected_iff_zero_differential_representations_trivial {k : Type u} [Field k] [CharZero k] (H : Over (Spec (.of k))) [GrpObj H] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] : GeometricallyConnected H.hom ↔ ∀ (m : Type u) [Fintype m] [DecidableEq m] (r : RationalHom H m) [IsMonHom r], r.differential = 0 → ∀ (A : Type u) [CommRing A] [Algebra k A] (h : AlgebraicGeometry.points H A), r.points A h = 1",
+  "branch": "sheaf-dag",
+  "by": "Q89",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-552732313",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 0b8f01e6a734: def-wf-lie-algebra-derivation (existing:true owner of GrpObj.Lie and its Lie instances) is now cited and in stmt_deps; the statement change is citation-only (byte-checked against old_statement); the only citer, lem-sfb-split-charzero-lie-group-integration, holds; the node diff vs main is limited to lean/statement/statement_change/stmt_deps. Lean is unchanged and matches the node clause by clause via upstream RationalHom (G ⟶ GL_m with IsMonHom), RationalHom.points and RationalHom.differential (ε-part, differential_eq_map_snd), plus Mathlib GeometricallyConnected; edge cases V=0, Spec k, Z/2, μ3/Q, char p and nonreduced algebras are covered; universe u is bound with no extra assumptions; docstrings, sorry-only proof, verbatim lean.statement and report sections are present. No compile run since no file was changed.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q89 stage 2",
+  "old_statement": "Let $k$ be a field of characteristic zero [def-weil-field], and let $H$ be an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. For a finite-dimensional rational representation $r:H\\to\\operatorname{GL}(V)$ [def-wf-algebraic-representations], its differential $dr:\\operatorname{Lie}(H)\\to\\operatorname{End}_k(V)$ is induced on the kernels of reduction of dual-number points; $\\operatorname{Lie}(H)$ is the tangent Lie algebra at the identity [def-sc-scheme-tangent-space, def-sc-dual-numbers, def-wf-lie-algebra]. Then $H$ is geometrically connected if and only if every such representation with $dr=0$ is trivial. Geometrically connected means connected after extension to an algebraic closure, with connectedness as in [def-weil-connected-scheme]. Trivial means $r_A(h)=1$ for every commutative $k$-algebra $A$ and every $h\\in H(A)$. The zero vector space is allowed.",
+  "what": "H2 repair requested by L on immutable head 0b8f01e6a734: the statement uses GrpObj.Lie H and its canonical Lie structure through RationalHom.differential, but omitted their owning existing definition node def-wf-lie-algebra-derivation from the citations and stmt_deps. Add only that reference; no mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+   "place": "Note 9.50, printed pp.184--185 (finite quotients detect components in characteristic zero), and Proposition 10.31 with Cartier 3.23 and Proposition 10.15, printed pp.196,71,190--191. This precise zero-differential formulation is an agent-stated consequence of those general criteria."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-split-charzero-lie-group-integration",
+    "holds": true,
+    "note": "Only the citation and ownership dependency of the canonical tangent Lie algebra are added; the zero-differential connectedness equivalence is unchanged, so its use in the integration argument still holds."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-field",
+   "def-sc-group-scheme",
+   "def-weil-finite-type-morphism",
+   "def-wf-algebraic-representations",
+   "def-sc-scheme-tangent-space",
+   "def-sc-dual-numbers",
+   "def-wf-lie-algebra",
+   "def-weil-connected-scheme"
+  ]
+ }
+}

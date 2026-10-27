@@ -1,0 +1,251 @@
+{
+ "id": "lem-trf-koszul-augmented-scalar-extension",
+ "kind": "statement",
+ "title": "Augmented Koszul scalar extension and its quotient square",
+ "statement": "Let $A,S$ be commutative rings, $\\varphi:A\\to S$ a ring homomorphism, $r\\geq0$, and $g_1,\\ldots,g_r\\in A$ any sequence. Put $I=(g_1,\\ldots,g_r)$ and $I_S=(\\varphi(g_1),\\ldots,\\varphi(g_r))$. Use the Koszul complexes $K_A(g)$ and $K_S(\\varphi g)$ [def-weil-pbc-koszul-complex], placed in cochain degrees $-q$, and their quotient augmentations $\\epsilon_A:K_A(g)\\to(A/I)[0]$ and $\\epsilon_S:K_S(\\varphi g)\\to(S/I_S)[0]$, quotient in degree zero and zero in other degrees. Put $F(E)=\\operatorname{Tot}(E\\otimes_A S[0])$ with its $S$-action [def-pc-mixed-total-tensor], and let $Q_S$ be localization to $D(S)$ [def-weil-abstract-derived-category]. The balanced map $$\\theta:(A/I)\\otimes_A S\\xrightarrow{\\sim}S/I_S,\\qquad\\bar a\\otimes s\\longmapsto\\overline{\\varphi(a)s},$$ is an $S$-linear isomorphism with inverse $\\bar s\\mapsto\\bar1\\otimes s$. There is an isomorphism $$\\beta:Q_SF(K_A(g))\\xrightarrow{\\sim}Q_S(K_S(\\varphi g))$$ in $D(S)$, represented by the cochain isomorphism sending $(e_{i_1}\\wedge\\cdots\\wedge e_{i_q})\\otimes s$ to $s(e_{i_1}\\wedge\\cdots\\wedge e_{i_q})$, with the usual degree-zero tensor unit identification. These maps satisfy $$Q_S(\\theta[0])\\circ Q_S(F(\\epsilon_A))=Q_S(\\epsilon_S)\\circ\\beta,$$ where $F((A/I)[0])$ is canonically $((A/I)\\otimes_A S)[0]$. No flatness or regularity is assumed, and empty sequences and zero rings are included.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 062H (lemma-koszul-regular-flat-base-change), first identity in its proof, together with definition-koszul-complex and its differential formula; augmentation compatibility is the explicit wedge and balanced-quotient calculation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-pc-mixed-total-tensor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-tensor-quotient-base-change] with $B=S$ and $I=(g_1,\\ldots,g_r)$: its extended ideal is $I_S$, and its inverse sends $s\\otimes\\bar a$ to $\\overline{\\varphi(a)s}$. Flip the factors by $\\bar a\\otimes s\\mapsto s\\otimes\\bar a$, whose inverse is the same flip; both respect the balancing relations [def-weil-pbc-module-tensor-product] and the $S$-actions. Composing gives exactly $\\theta$ and its inverse $\\bar s\\mapsto\\bar1\\otimes s$.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF (lemma-tensor-product-exact), quotient specialization; explicit balanced formulas of the cited tensor-quotient node."
+   }
+  },
+  {
+   "text": "Apply [def-pc-mixed-total-tensor] with base ring $A$, output ring $S$, first complex $S[0]$, and second complex $E$. Only the summand with first degree $0$ remains, so its degree-$n$ term is $S\\otimes_A E^n$ and its differential is $1\\otimes d_E$, with sign $(-1)^0=1$. The factor flip $s\\otimes x\\mapsto x\\otimes s$ and its inverse respect balancing and identify this complex with $F(E)$, with $S$ acting on the second factor and differential $d_E\\otimes1$. The same formula commutes with maps of $E$. Thus $F((A/I)[0])$ is canonically $((A/I)\\otimes_A S)[0]$.",
+   "uses": [
+    "def-pc-mixed-total-tensor",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062H (lemma-koszul-regular-flat-base-change), first complex identification; totalization specialized to a degree-zero second factor."
+   }
+  },
+  {
+   "text": "For each $q\\geq0$ write $e_J^A,e_J^S$ for the ordered $q$-fold standard basis wedges, indexed by $q$-element subsets $J\\subseteq\\{1,\\ldots,r\\}$ [lem-weil-pbc-exterior-power-free-basis]. If $x=\\sum_J a_J e_J^A$, define $b_q(x\\otimes s)=\\sum_J\\varphi(a_J)s e_J^S$. This is balanced and defines a map on the tensor product [def-weil-pbc-module-tensor-product]. Define $c_q(\\sum_J s_J e_J^S)=\\sum_J e_J^A\\otimes s_J$. Both maps are $S$-linear; $b_qc_q=1$ by the displayed coordinates, while $c_qb_q(x\\otimes s)=\\sum_J e_J^A\\otimes\\varphi(a_J)s=x\\otimes s$ by balancing. Thus they are inverse. For $q=0$ this is $A\\otimes_A S\\to S$, $a\\otimes s\\mapsto\\varphi(a)s$; for $q>r$ both modules are zero.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0622 (definition-koszul) and 0623 (definition-koszul-complex), standard exterior terms; explicit basis-coordinate construction of the first identity in Tag 062H."
+   }
+  },
+  {
+   "text": "For $J=(i_1<\\cdots<i_q)$ the differential formula in [def-weil-pbc-koszul-complex] gives $d_A(e_J^A)=\\sum_{k=1}^q(-1)^{k-1}g_{i_k}e_{J\\setminus i_k}^A$. Hence $b_{q-1}((d_Ae_J^A)\\otimes s)=\\sum_k(-1)^{k-1}\\varphi(g_{i_k})s e_{J\\setminus i_k}^S=d_S(se_J^S)$. Linearity and tensor generation give this identity on every element. In degree $0$ both outgoing differentials are zero. Place $b_q$ in cochain degree $-q$ and zero in positive degrees. These inverse component maps therefore form a cochain isomorphism $b:F(K_A(g))\\xrightarrow{\\sim}K_S(\\varphi g)$ [def-weil-abstract-derived-category]. The inverse commutes with differentials too: multiplying $b_{q-1}(d_A\\otimes1)=d_Sb_q$ on the left by $c_{q-1}$ and on the right by $c_q$ gives $(d_A\\otimes1)c_q=c_{q-1}d_S$.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0622 (definition-koszul), displayed differential formula immediately following the definition; first identity in Tag 062H."
+   }
+  },
+  {
+   "text": "The stated augmentations are cochain maps: their only possibly nonzero composite with an incoming differential sends $e_i$ to the class of $g_i$, respectively $\\varphi(g_i)$, which is zero [def-weil-pbc-koszul-complex]. In degree zero, both $\\theta[0]\\circ F(\\epsilon_A)$ and $\\epsilon_S\\circ b$ send $a\\otimes s$ to $\\overline{\\varphi(a)s}$. In every other degree their target is zero. Tensor generation [def-weil-pbc-module-tensor-product] proves equality of these cochain maps.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0622 and 0623, degree-one differential and degree-zero quotient augmentation; explicit augmentation-square calculation."
+   }
+  },
+  {
+   "text": "Apply the localization functor $Q_S$ [def-weil-abstract-derived-category] to $b$ and its inverse: their composites still give the identities, so $\\beta=Q_S(b)$ is an isomorphism. Functoriality applied to the equality in the preceding step gives exactly the claimed equation. When $r=0$, the only basis wedge is $1$, $I=I_S=0$, and all maps reduce to the tensor unit and quotient identifications above. Zero rings cause no exception: the displayed inverse and differential identities remain valid, including when the tensor modules are zero. No step used exactness of scalar extension or regularity.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062H, first identity in its proof; elementary functorial passage from the augmented cochain isomorphism to the derived category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-mixed-total-tensor",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622/0623 and the first identity in the proof of Tag 062H; explicit coordinate and augmentation calculations supplied by Q149."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of the Koszul complex commutes with the quotient augmentation and the tensor quotient isomorphism without flatness",
+   "results": "8 hits; top=['Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'tensorKaehlerQuotKerSqEquiv', 'Algebra.Extension.tensorCotangent', 'KaehlerDifferential.tensorKaehlerEquivBase', 'KaehlerDifferential.tensorKaehlerEquiv_left_inv', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'tensorKaehlerQuotKerSqEquiv_tmul_D']; ; digest=7a3f900e1d6ff9a2. The quotient-tensor equivalence is an ingredient (Mathlib/RingTheory/TensorProduct/Quotient.lean:52,64). None of the hits gives the augmented Koszul derived isomorphism or its commuting square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.quotIdealMapEquivTensorQuot",
+   "results": "3 hits; top=['Algebra.TensorProduct.quotIdealMapEquivTensorQuot', 'Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul', 'Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk']; ; digest=66baee660fe87fd9. The quotient-tensor equivalence is an ingredient (Mathlib/RingTheory/TensorProduct/Quotient.lean:52,64). None of the hits gives the augmented Koszul derived isomorphism or its commuting square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*baseChange|koszul.*augmentation|quotIdealMapEquivTensorQuot",
+   "results": "11 hits; top=['Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean', 'Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean', 'Mathlib/RingTheory/RamificationInertia/Ramification.lean', 'Mathlib/RingTheory/QuasiFinite/Basic.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean']; ; digest=7270bbde643c2772. The quotient-tensor equivalence is an ingredient (Mathlib/RingTheory/TensorProduct/Quotient.lean:52,64). None of the hits gives the augmented Koszul derived isomorphism or its commuting square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul base change isomorphism preserving the canonical augmentation to the quotient",
+   "results": "8 hits; top=['KaehlerDifferential.tensorKaehlerEquiv', 'KaehlerDifferential.mapBaseChange.congr_simp', 'Algebra.IsPushout.cancelBaseChangeAux', 'IsBaseChange.basis_apply', 'CliffordAlgebra.ofBaseChange_toBaseChange', 'KaehlerDifferential.tensorKaehlerEquivBase', 'IsBaseChange.toDual_apply', 'KaehlerDifferential.mapBaseChange']; ; digest=85d9285a854ec43d. The quotient-tensor equivalence is an ingredient (Mathlib/RingTheory/TensorProduct/Quotient.lean:52,64). None of the hits gives the augmented Koszul derived isomorphism or its commuting square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented Koszul complex is compatible with arbitrary extension of scalars as an isomorphism of arrows in the derived category",
+   "results": "8 hits; top=['ChainComplex.augmentTruncate', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀', 'CochainComplex.augmentTruncate', 'HomologicalComplex.extendSingleIso', 'Rep.standardComplex.compForgetAugmentedIso', 'HomologicalComplex.dgoEquivHomologicalComplex_counitIso', 'HomologicalComplex.extendSingleIso_inv_f_assoc', 'ChainComplex.truncateAugment']; ; digest=4a9fc157fe4bb2e6. The quotient-tensor equivalence is an ingredient (Mathlib/RingTheory/TensorProduct/Quotient.lean:52,64). None of the hits gives the augmented Koszul derived isomorphism or its commuting square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*baseChange|koszul.*augmentation|quotIdealMapEquivTensorQuot",
+   "results": "11 hits; top=['Mathlib/RingTheory/LocalRing/Length.lean', 'Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean', 'Mathlib/RingTheory/QuasiFinite/Basic.lean', 'Mathlib/RingTheory/RamificationInertia/Ramification.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean']; note=; digest=9ca50fecc497f6b7. The quotient-tensor equivalence is an ingredient, already represented by lem-weil-pbc-tensor-quotient-base-change; the other hits do not state the normalized augmented Koszul comparison and its square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.quotIdealMapEquivTensorQuot",
+   "results": "3 hits; top=['Algebra.TensorProduct.quotIdealMapEquivTensorQuot', 'Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul', 'Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk']; note=; digest=66baee660fe87fd9. The quotient-tensor equivalence is an ingredient, already represented by lem-weil-pbc-tensor-quotient-base-change; the other hits do not state the normalized augmented Koszul comparison and its square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex extension of scalars isomorphism and augmentation to quotient",
+   "results": "8 hits; top=['CochainComplex.augmentTruncate', 'KaehlerDifferential.quotKerTotalEquiv', 'HomologicalComplex.extendXIso', 'HomologicalComplex.extendOpcyclesIso', 'LinearEquiv.extendScalarsOfSurjective', 'HomologicalComplex.extend.congr_simp', 'KaehlerDifferential.quotientCotangentIdealRingEquiv', 'KaehlerDifferential.tensorKaehlerEquiv']; note=; digest=dc8adef5a9c99f21. The quotient-tensor equivalence is an ingredient, already represented by lem-weil-pbc-tensor-quotient-base-change; the other hits do not state the normalized augmented Koszul comparison and its square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of the Koszul complex preserves its quotient augmentation for any commutative ring homomorphism",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', \"KaehlerDifferential.moduleBaseChange'\", 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'KaehlerDifferential.isBaseChange', 'CommRingCat.KaehlerDifferential.map', 'Algebra.Extension.CotangentSpace.map', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex']; note=; digest=b6330175c7a81c3f. The quotient-tensor equivalence is an ingredient, already represented by lem-weil-pbc-tensor-quotient-base-change; the other hits do not state the normalized augmented Koszul comparison and its square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul exterior algebra complex commutes with arbitrary ring base change as an augmented complex over the quotient ring",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', \"KaehlerDifferential.moduleBaseChange'\", 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Generators.H1Cotangent.δAux_ofComp', 'KaehlerDifferential.isBaseChange']; note=; digest=9221066a62b45526. The quotient-tensor equivalence is an ingredient, already represented by lem-weil-pbc-tensor-quotient-base-change; the other hits do not state the normalized augmented Koszul comparison and its square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-koszul-derived-quotient",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Supporting ring/sheaf input: the Koszul-regular sequence identifies the quotient with the derived tensor product of the polynomial augmentation. Re-split component: Original proof step 4: normalized Koszul scalar extension and balanced quotient identification, including the augmentation square.",
+   "via": [
+    "lem-trf-koszul-derived-quotient",
+    "lem-trf-koszul-quotient-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-koszul-augmented-scalar-extension",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Reused the Mathlib tensor-quotient leaf and exterior-power basis leaf; constructed the normalized scalar-extension cochain isomorphism by explicit inverse coordinates, checked its alternating differential, checked the augmentation square before localization, and handled empty sequences and zero rings. The existing unnormalized Koszul base-change existence theorem was read but is not cited for a normalization absent from its statement. Required searches were run and their outputs recorded. Repair of the return at head 9164b0b55c8: compared the retained delivery with the current unsplit item, re-read every current dependency statement and checked all citation quotes. Made step 2 explicitly instantiate the mixed tensor with S[0] first, justify the factor flip by the tensor definition, and compute its differential sign; step 4 now writes the inverse cochain-map identity. Delivery rebases the repaired split onto current origin/sheaf-dag.",
+  "blueprint": "Refines the existing ancestry place in lem-trf-local-term-locality, proof (1)--(2), via lem-trf-koszul-derived-quotient: normalized scalar extension and balanced quotient identification. Steps 1--2 set up quotient and total tensor; steps 3--4 prove the first complex identity in Stacks 062H with its prescribed wedge normalization; steps 5--6 supply the augmentation square and derived form. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-2337dc056",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-2337dc056 (reviewer sub-agent of L); spot-checked: Q149 lem-trf-koszul-augmented-scalar-extension @2337dc05. Shape: one commit, only the item and the report, no new nodes, statement unchanged, no repair note. History: the earlier head 9164b0b5 was PASSed by its reader; its return came from the landing side (side completion not promoted), not from the mathematics. Delta against 9164 is real, not a byte-identical re-push (A6): step 2 now applies def-pc-mixed-total-tensor explicitly (base A, output S, S[0] first), shows the differential sign (-1)^0=1, justifies the factor flip through def-weil-pbc-module-tensor-product (added to its uses); step 4 now proves the inverse c commutes with differentials by conjugating the forward identity. Both are correct. Source: Stacks more-algebra 062H (tags l.7796), whose proof gives K(f)⊗S=K(φf); flatness there serves only the regularity claims, so the item rightly assumes none. 0622/0623 give the differential sign (-1)^{i+1}, which matches step 4's (-1)^{k-1}. The normalization and the augmentation square are the agent's own work and are recorded as agent-written. Steps checked against each cited statement: (1) the tensor-quotient leaf with B=S gives IB=I_S and inverse s⊗ā↦class of φ(a)s; with the flip this is exactly θ and θ⁻¹. (2) only the p=0 summand of B(S[0],E) survives, sign +1, natural in E. (3) b_q is balanced, c_q is well defined on the free target, b_q c_q=1 and c_q b_q=1 by balancing; q=0 and q>r handled. (4) b_{q-1}(d_A e_J⊗s)=d_S(s e_J), checked by hand for r=2; cochain indexing -q is consistent. (5) ε is a cochain map since d(e_i)=g_i lies in I; in degree 0 both composites send a⊗s to the class of φ(a)s, so β is explicit, not an existential (no H3/E5 issue). (6) functoriality of Q_S. All elementary markings are justified. Edge cases tested: r=0; non-flat Z→Z/2 with g=2; g=1; S=0; q>r. Duplicate search (rg -L, Koszul with base change/scalar): lem-sc-koszul-base-change-iso is existence-only with no normalization and is correctly not cited; new-s1-local-koszul-augmented-carrier and the lem-a1-* tower nodes are sheaf/tower statements; nothing duplicates the item. The parent lem-trf-koszul-derived-quotient step 3 uses θ, β and the square exactly as stated. No SGA, no tool_uses, no fixes. Maintainer note: the previous PASS failed only on landing-side promotion; check landing rather than re-dispatching."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulAugmentedScalarExtension",
+  "declaration": "ExteriorAlgebra.KoszulAugmentedScalarExtension.exists_augmented_scalar_extension",
+  "declarations": [
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.complex",
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.quotient",
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.quotientComplex",
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.total",
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.totalDegreeIso",
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.totalSingleIso",
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.degreeIso",
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.quotientComponent",
+   "ExteriorAlgebra.KoszulAugmentedScalarExtension.exists_augmented_scalar_extension"
+  ],
+  "file": "lean/Sheaf/RingTheory/KoszulAugmentedScalarExtension.lean",
+  "statement": "theorem exists_augmented_scalar_extension {A S : Type u} [CommRing A] [CommRing S] (φ : A →+* S) (r : ℕ) (g : Fin r → A) [HasDerivedCategory.{w} (ModuleCat.{u} S)] : ∃ θ : (ModuleCat.extendScalars φ).obj (quotient A g) ≅ quotient S (φ ∘ g), (∀ (a : A) (s : S), θ.hom (s ⊗ₜ[A, φ] Ideal.Quotient.mk (Ideal.span (Set.range g)) a) = Ideal.Quotient.mk (Ideal.span (Set.range (φ ∘ g))) (φ a * s)) ∧ (∀ s : S, θ.inv (Ideal.Quotient.mk (Ideal.span (Set.range (φ ∘ g))) s) = s ⊗ₜ[A, φ] (1 : A ⧸ Ideal.span (Set.range g))) ∧ ∃ εA : complex A g ⟶ quotientComplex A g, ∃ εS : complex S (φ ∘ g) ⟶ quotientComplex S (φ ∘ g), εA.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) (0 : ℤ) (quotient A g)).hom = quotientComponent A g ∧ εS.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) (0 : ℤ) (quotient S (φ ∘ g))).hom = quotientComponent S (φ ∘ g) ∧ ∃ b : (total φ).obj (complex A g) ≅ complex S (φ ∘ g), (∀ (q : ℕ) (i : Fin q → Fin r) (s : S), b.hom.f (-(q : ℤ)) ((totalDegreeIso φ (complex A g) (-(q : ℤ))).inv (s ⊗ₜ[A, φ] (degreeIso A g q).inv (exteriorPower.ιMulti A q (fun j ↦ Finsupp.single (i j) 1)))) = (degreeIso S (φ ∘ g) q).inv (s • exteriorPower.ιMulti S q (fun j ↦ Finsupp.single (i j) 1))) ∧ ∃ β : DerivedCategory.Q.obj ((total φ).obj (complex A g)) ≅ DerivedCategory.Q.obj (complex S (φ ∘ g)), β = DerivedCategory.Q.mapIso b ∧ DerivedCategory.Q.map ((total φ).map εA) ≫ DerivedCategory.Q.map (totalSingleIso φ (quotient A g)).hom ≫ DerivedCategory.Q.map ((CochainComplex.singleFunctor (ModuleCat.{u} S) (0 : ℤ)).map θ.hom) = β.hom ≫ DerivedCategory.Q.map εS",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ca0de118",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Single module Sheaf.RingTheory.KoszulAugmentedScalarExtension, node changes lean only (live node has no lean record), lean.statement verbatim with file signature. Clause-by-clause: arbitrary comm rings/φ/g:Fin r→A (common universe u forced by mixedTotalTensor dep), no flatness/regularity/Nontrivial; complex = koszulComplex.extend embeddingDownNat; F = mixedTotalTensor φ at S[0] (scalar-first order, degree-0 flip sign +1); θ pinned by hom s⊗ā↦[φ(a)s] and inv [s]↦s⊗1; εA/εS pinned by degree-0 quotient component, other targets zero; b pinned on s⊗ιMulti(basis) in every degree −q, β = Q.mapIso b; totalSingleIso via mapBifunctorSingle₁Iso (read, no sign) + singleMapHomologicalComplex + unitor; square in diagrammatic order equals Q(θ[0])∘Q(FεA)=Q(εS)∘β. Edge cases r=0, zero rings, q>r, non-flat, unit in sequence covered. Helpers canonical, docstrings with source/blueprint, one sorry. Duplicates: KoszulDerivedQuotient (regular zero-section only), LocalKoszulAugmentedCarrier (sheaf), KoszulBaseChangeIso (Nonempty, unnormalized) not matches. No changes, no compile run; worker compile clean."
+ }
+}

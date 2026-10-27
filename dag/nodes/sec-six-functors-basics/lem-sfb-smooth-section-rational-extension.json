@@ -1,0 +1,442 @@
+{
+ "id": "lem-sfb-smooth-section-rational-extension",
+ "kind": "statement",
+ "title": "A rational map agreeing with a morphism along a smooth section extends near that section",
+ "statement": "Let $B,T,X,Y$ be schemes [def-pc-scheme], with $T$ normal Noetherian: it has a finite affine cover by Noetherian rings, and every local ring is an integrally closed domain. Let $t:T\\to B$ and $r:Y\\to B$ be morphisms, with $r$ separated (its diagonal is a closed immersion [def-weil-closed-immersion]). Let $q:X\\to T$ be a smooth morphism [def-sbc-smooth-morphisms] with a section $a:T\\to X$, so $q\\circ a=\\operatorname{id}_T$; regard $X$ as a $B$-scheme by $t\\circ q$. Let $D\\subseteq X$ be a dense open subscheme, let $v:D\\to Y$ be a $B$-morphism, and let $b:T\\to Y$ be a $B$-morphism. Put $T^\\circ=a^{-1}(D)$. Suppose $T^\\circ$ contains every $z\\in T$ with $\\dim\\mathcal O_{T,z}\\leq1$ [def-weil-pbc-krull-dimension-ring], and $v\\circ a|_{T^\\circ}=b|_{T^\\circ}$. Then there is an open subscheme $N\\subseteq X$ containing $a(T)$ and a $B$-morphism $\\widetilde v:N\\to Y$ whose restriction to $N\\cap D$ is $v|_{N\\cap D}$. No group structure on $Y$, quasi-compactness of $X$ or $Y$, or separatedness of $q$ is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED. Extracted section form of the argument (replace the first projection and diagonal by a smooth morphism and its section, and the unit section by b); not a quotation of the theorem statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "The source $X$ is normal by [lem-sfb-smooth-normal-ascent], and reduced and locally Noetherian by [lem-trf-smooth-reduced-dense-pullback], since $T$ has those properties. Let $V$ be the union of all open subsets $L\\subseteq X$ admitting a $B$-morphism $v_L:L\\to Y$ agreeing with $v$ on $L\\cap D$. On overlaps these morphisms agree by [lem-sfb-relative-separated-dominant-ext]: the overlap is reduced, its intersection with the dense open $D$ is dense, and both structural composites to $B$ are $tq$. By [lem-weil-pbc-scheme-morphism-gluing] they glue to a $B$-morphism $v_V:V\\to Y$, and $D\\subseteq V$.",
+   "uses": [
+    "lem-sfb-smooth-normal-ascent",
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lem-sfb-relative-separated-dominant-ext",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, Lemma 2 and proof of Theorem 1, printed pp.109–110 (PDF pp.115–116); primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "Write $T_V=a^{-1}(V)$. The two $B$-morphisms $v_Va$ and $b$ on $T_V$ agree on $T^\\circ$. This open is dense in $T$ because it contains every generic point, whose local ring has dimension zero; thus it is dense in $T_V$. Since $T$ is reduced, [lem-sfb-relative-separated-dominant-ext] gives $v_Va=b$ on $T_V$. It remains to show $a(T)\\subseteq V$.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, Lemma 2 and proof of Theorem 1, printed pp.109–110 (PDF pp.115–116); primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "Fix $z\\in T$ and put $x=a(z)$. Choose an affine open $B_0\\subseteq B$ containing $t(z)$ and an affine open $H\\subseteq r^{-1}(B_0)$ containing $b(z)$, by [lem-weil-pbc-affine-opens-basis]; the maps to these opens factor by [lem-weil-pbc-morphism-factors-through-open-subscheme]. Choose an affine neighbourhood $W_0$ of $x$ in $(tq)^{-1}(B_0)$. It is Noetherian: it is locally Noetherian by step 1 and quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Its topology is Noetherian by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Its normal integral components are open and closed by [lem-trf-normal-topologically-noetherian-components]. Retain the component containing $x$ and then an affine neighbourhood $W_1$ of $x$ inside that component. This $W_1$ is normal integral Noetherian by the same local Noetherian and affine quasi-compact argument.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-trf-normal-topologically-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, Lemma 2 and proof of Theorem 1, printed pp.109–110 (PDF pp.115–116); primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "Set $T'=a^{-1}(W_1)\\cap b^{-1}(H)\\cap t^{-1}(B_0)$ and $W=W_1\\cap q^{-1}(T')$. These are open neighbourhoods of $z,x$. The restricted section $a':T'\\to W$ has retraction $q':W\\to T'$; $q'$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. Both schemes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Their normality and the integrality of $W$ follow by restricting local rings and nonempty opens. Put $J=W\\cap V\\cap v_V^{-1}(H)$ and factor $v_V|_J$ through $H$ using [lem-weil-pbc-morphism-factors-through-open-subscheme]. The dense open $T'\\cap T^\\circ$ is nonempty, and its section lies in $J$ by step 2 and $b(T')\\subseteq H$. Hence $J$ is a nonempty open of integral $W$, so is dense.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, Lemma 2 and proof of Theorem 1, printed pp.109–110 (PDF pp.115–116); primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-affine-rational-indeterminacy] to $J\\to H$ on $W$. Obtain its maximal extension $h_E:E\\to H$ and closed boundary $F=W\\setminus E$ of pure codimension one, or empty. The composite $E\\to H\\to Y$ is a $B_0$-morphism: its structural map to $B_0$ agrees with $tq$ on dense $J$, hence on reduced $E$ by [lem-sfb-relative-separated-dominant-ext]. Here the affine $B_0$ is separated over $\\operatorname{Spec}\\mathbf Z$: on affine charts its diagonal is induced by the surjective multiplication map $R\\otimes_{\\mathbf Z}R\\to R$, $r\\otimes s\\mapsto rs$. On $E\\cap V$, the maps $h_E$ (composed to $Y$) and $v_V$ therefore agree by that same relative equality lemma, since they agree on dense $J\\cap E\\cap V$. In particular $h_E$ agrees with $v$ on $E\\cap D$, so $E\\subseteq V$.",
+   "uses": [
+    "lem-sfb-normal-affine-rational-indeterminacy",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, Lemma 2 and proof of Theorem 1, printed pp.109–110 (PDF pp.115–116); primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "Conversely $a'^{-1}(E)=a'^{-1}(V)$. Only the inclusion from right to left needs proof. For $w\\in T'$ with $a'(w)\\in V$, step 2 gives $v_V(a'(w))=b(w)\\in H$, so $a'(w)\\in J\\subseteq E$. Thus $a'^{-1}(F)=T'\\setminus a'^{-1}(V)$. This set contains no point $w$ with $\\dim\\mathcal O_{T',w}\\leq1$: the open immersion $T'\\subseteq T$ preserves its local ring, and all such points lie in $T^\\circ\\subseteq a^{-1}(V)$ by hypothesis. Apply [lem-sfb-smooth-section-divisor-intersection] to $q',a',F$. It forces $a'^{-1}(F)=\\varnothing$. In particular $x=a'(z)\\in E\\subseteq V$.",
+   "uses": [
+    "lem-sfb-smooth-section-divisor-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, Lemma 2 and proof of Theorem 1, printed pp.109–110 (PDF pp.115–116); primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+   }
+  },
+  {
+   "text": "Every $z\\in T$ was arbitrary, so $a(T)\\subseteq V$. Take $N=V$ and $\\widetilde v=v_V$ from step 1. The construction already gives its $B$-linearity and the stated restriction to $N\\cap D$. All neighbourhoods were local; no finite cover of $X$ or $Y$ was taken. If $T$ is empty then $X$ is empty (because $q$ exists) and the unique map on $N=\\varnothing$ suffices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, Lemma 2 and proof of Theorem 1, printed pp.109–110 (PDF pp.115–116); primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-normal-ascent",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-normal-affine-rational-indeterminacy",
+  "lem-sfb-smooth-section-divisor-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §4.4, Lemma 2 and proof of Theorem 1, printed pp.109–110 (PDF pp.115–116); primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED. Local general-section version of the diagonal argument, written out by the worker; local source PDF absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Rr]ational.*[Ss]ection|[Ss]ection.*[Rr]ational|[Ii]ndeterminacy|[Cc]odimension",
+   "results": "{\"t\": \"2026-10-24T07:45:25Z\", \"tool\": \"grep\", \"query\": \"[Rr]ational.*[Ss]ection|[Ss]ection.*[Rr]ational|[Ii]ndeterminacy|[Cc]odimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map domains and representatives or smooth local charts do not assert extension near a section."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of a rational map to a neighbourhood of a smooth section using purity of the indeterminacy locus for affine targets",
+   "results": "{\"t\": \"2026-10-24T07:45:26Z\", \"tool\": \"leansearch\", \"query\": \"Extension of a rational map to a neighbourhood of a smooth section using purity of the indeterminacy locus for affine targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\"], \"digest\": \"0ad4e6715d3251a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map domains and representatives or smooth local charts do not assert extension near a section."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsSmooth\", \"section\"",
+   "results": "{\"t\": \"2026-10-24T07:45:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsSmooth\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map domains and representatives or smooth local charts do not assert extension near a section."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil diagonal trick regularity near a section of a smooth morphism from codimension one regularity on a normal base",
+   "results": "{\"t\": \"2026-10-24T07:45:29Z\", \"tool\": \"leanfinder\", \"query\": \"Weil diagonal trick regularity near a section of a smooth morphism from codimension one regularity on a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"a87922081b6710be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map domains and representatives or smooth local charts do not assert extension near a section."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map on a smooth scheme over a normal Noetherian base is regular near a section if its restriction agrees with a global morphism and it is regular at codimension one points of the section",
+   "results": "{\"t\": \"2026-10-24T07:45:31Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map on a smooth scheme over a normal Noetherian base is regular near a section if its restriction agrees with a global morphism and it is regular at codimension one points of the section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"b4d4a3c927b57afd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map domains and representatives or smooth local charts do not assert extension near a section."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map from a smooth scheme over a normal Noetherian base extends near a section if it agrees there with a morphism and is defined at section points of codimension at most one",
+   "results": "{\"t\": \"2026-10-24T08:43:27Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map from a smooth scheme over a normal Noetherian base extends near a section if it agrees there with a morphism and is defined at section points of codimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\"], \"digest\": \"d183daa5ba2109e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational map agreeing with a morphism along a section of a smooth morphism extends to an open neighborhood of the section over a normal base",
+   "results": "{\"t\": \"2026-10-24T08:46:49Z\", \"tool\": \"leansearch\", \"query\": \"A rational map agreeing with a morphism along a section of a smooth morphism extends to an open neighborhood of the section over a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\"], \"digest\": \"fb2034cb46bd72b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.RationalMap",
+   "results": "{\"t\": \"2026-10-24T08:47:27Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.RationalMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*section|section.*rational|indeterminacy|codimension",
+   "results": "{\"t\": \"2026-10-24T08:47:27Z\", \"tool\": \"grep\", \"query\": \"rational.*section|section.*rational|indeterminacy|codimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "indeterminacy|pure.*codimension|normal.*rational|rational.*normal",
+   "results": "{\"t\": \"2026-10-24T08:49:50Z\", \"tool\": \"grep\", \"query\": \"indeterminacy|pure.*codimension|normal.*rational|rational.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "section.*codimension|codimension.*section|section.*[Dd]ivisor|[Dd]ivisor.*section",
+   "results": "{\"t\": \"2026-10-24T08:49:50Z\", \"tool\": \"grep\", \"query\": \"section.*codimension|codimension.*section|section.*[Dd]ivisor|[Dd]ivisor.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The indeterminacy locus of a rational map from a normal noetherian scheme into an affine scheme is empty or pure codimension one",
+   "results": "{\"t\": \"2026-10-24T08:49:51Z\", \"tool\": \"leansearch\", \"query\": \"The indeterminacy locus of a rational map from a normal noetherian scheme into an affine scheme is empty or pure codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\"], \"digest\": \"bf6d1ca9c20a0362\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth section cannot meet a divisor only over a subset of codimension two in a normal noetherian base",
+   "results": "{\"t\": \"2026-10-24T08:49:51Z\", \"tool\": \"leansearch\", \"query\": \"A smooth section cannot meet a divisor only over a subset of codimension two in a normal noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffSection.mk.inj\", \"ContMDiffSection.ext\", \"ContMDiffSection.coe_injective\", \"ContMDiffSection.mk.injEq\", \"ContMDiffSection\", \"ContMDiffWithinAt.neg_section\", \"ContMDiffSection.ctorIdx\", \"smoothSheaf.contMDiff_section\"], \"digest\": \"9bd26b8e1ad658ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"section\", \"codimension\"",
+   "results": "{\"t\": \"2026-10-24T08:49:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"section\\\", \\\"codimension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-24T08:49:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pure codimension one closed subset of a smooth scheme over a normal Noetherian base meets a section in codimension at most one or not at all",
+   "results": "{\"t\": \"2026-10-24T08:49:54Z\", \"tool\": \"leanfinder\", \"query\": \"A pure codimension one closed subset of a smooth scheme over a normal Noetherian base meets a section in codimension at most one or not at all\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.mem_zeroLocus_iff\", \"AlgebraicGeometry.Scheme.zeroLocus_singleton\"], \"digest\": \"cc5758e01a8bc34b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a rational map from a normal Noetherian scheme to an affine scheme, every irreducible component of the complement of its maximal domain of definition has codimension one",
+   "results": "{\"t\": \"2026-10-24T08:49:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a rational map from a normal Noetherian scheme to an affine scheme, every irreducible component of the complement of its maximal domain of definition has codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"7447b4be665a1707\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map from a normal scheme to Spec A extends over every subset where its coordinate functions have no height one poles",
+   "results": "{\"t\": \"2026-10-24T08:49:56Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map from a normal scheme to Spec A extends over every subset where its coordinate functions have no height one poles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\"], \"digest\": \"da523648aa6f06f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a Weil divisor along the zero section of a smooth morphism has support in codimension at most one on a normal base",
+   "results": "{\"t\": \"2026-10-24T08:49:58Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a Weil divisor along the zero section of a smooth morphism has support in codimension at most one on a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeromorphicNFOn.zero_set_eq_divisor_support\", \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_comap\", \"AlgebraicGeometry.Scheme.zeroLocus_map\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.image_zeroLocus\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\"], \"digest\": \"4dfb9ec24e89b84a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalMap|normal.*codimension|height.*one",
+   "results": "{\"t\": \"2026-10-24T09:02:11Z\", \"tool\": \"grep\", \"query\": \"RationalMap|normal.*codimension|height.*one\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"d9810d0714cd03f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*immersion|codimension|smooth.*section",
+   "results": "{\"t\": \"2026-10-24T09:02:11Z\", \"tool\": \"grep\", \"query\": \"regular.*immersion|codimension|smooth.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational map from a normal Noetherian integral scheme into an affine scheme is defined everywhere if it is defined at all codimension at most one points",
+   "results": "{\"t\": \"2026-10-24T09:02:12Z\", \"tool\": \"leansearch\", \"query\": \"A rational map from a normal Noetherian integral scheme into an affine scheme is defined everywhere if it is defined at all codimension at most one points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.toPartialMap\"], \"digest\": \"d0fa92db6f64bb1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a pure codimension one subset of a smooth scheme over a normal Noetherian base meets a smooth section, it meets the section over a point of base codimension at most one",
+   "results": "{\"t\": \"2026-10-24T09:02:12Z\", \"tool\": \"leansearch\", \"query\": \"If a pure codimension one subset of a smooth scheme over a normal Noetherian base meets a smooth section, it meets the section over a point of base codimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"e49c96a45f19f366\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, IsRegularImmersion, codimension",
+   "results": "{\"t\": \"2026-10-24T09:02:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, IsRegularImmersion, codimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.RationalMap, IsIntegral, IsNoetherian",
+   "results": "{\"t\": \"2026-10-24T09:02:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.RationalMap, IsIntegral, IsNoetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a rational map from a normal Noetherian integral scheme to an affine scheme, the indeterminacy locus has pure codimension one",
+   "results": "{\"t\": \"2026-10-24T09:02:13Z\", \"tool\": \"leanfinder\", \"query\": \"For a rational map from a normal Noetherian integral scheme to an affine scheme, the indeterminacy locus has pure codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"0fe56aace7fbce01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A codimension one closed subset of a smooth scheme over a normal Noetherian base meets a section in codimension at most one",
+   "results": "{\"t\": \"2026-10-24T09:02:14Z\", \"tool\": \"leanfinder\", \"query\": \"A codimension one closed subset of a smooth scheme over a normal Noetherian base meets a section in codimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.IdealSheafData.zeroLocus_inter_subset_supportSet\", \"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\"], \"digest\": \"a9d4bae7a929f0a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-group-weil-extension",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 2 and its proof, printed p.290 (PDF p.296): essentially smooth DVR criterion, via Weil extension. Supporting extension step: BLR §10.1 Proposition 2, converse, invokes §4.4 Theorem 1 to extend the fibrewise dense rational map across codimension at least two. BLR §4.4 Theorem 1, diagonal-reduction paragraph: regularity near a smooth section from regularity at its codimension-at-most-one points and agreement with a given morphism along the section.",
+   "via": [
+    "lem-sfb-relative-group-weil-extension",
+    "lem-sfb-neron-dvr-point-criterion",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-section-rational-extension",
+  "worker": "stage1",
+  "summary": "Preserved the statement and gave a seven-step local maximal-domain proof, with two genuinely smaller statement-only inputs: normal affine-target indeterminacy and divisorial intersection with a smooth section. Explicitly verifies relative separatedness, density, nonseparated-source locality and B-linearity over an affine base neighbourhood.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), via the inherited deep alteration/Néron chain and immediate parent lem-sfb-relative-group-weil-extension step 3. The ancestor utility returns None; retain inherited null from.node and via, and give the precise BLR diagonal paragraph in from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic scheme-locality, Noetherian topology, morphism-gluing or smooth reducedness tool used in the local extension argument; the unit supplies no replacement for this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-ef7c4cc24",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ef7c4cc24 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and both new nodes in full. No files were changed. Item statement unchanged (the old node had no proof). Every cited statement says what its step takes from it. (1) Step 1: normality comes from smooth-normal-ascent; reducedness and local Noetherianity from trf-smooth-reduced-dense-pullback. Overlaps agree by relative-separated-dominant-ext (reduced overlap, D dense, both composites equal tq), then gluing gives v_V. (2) Step 2: T°⊆a^{-1}(V) and T° is dense in Noetherian T, so v_V a=b. (3) Steps 3-4: W_1 is an affine open inside a normal integral component, and W_1⊆(tq)^{-1}(B_0). J is nonempty through T'∩T°, using b(T')⊆H, so J is dense. (4) Step 5: Lemma A applies. B_0-linearity of h_E holds because affine B_0 is separated over Z. Then h_E=v_V on E∩V by relative separatedness, so E⊆V. (5) Step 6: a'^{-1}(E)=a'^{-1}(V), checked both ways. Points of dimension ≤1 lie in T°, so Lemma B gives x∈V. (6) Lemma A is true: maps to Spec A correspond to φ:A→K(W). Poles are height-one points inside W∖D, of which there are finitely many, and Stacks 031T then gives E=W∖closure(P). (7) Lemma B is true, which I proved myself: S^=R^[[X_1..X_d]]. Normal R of dimension ≥2 has depth ≥2, so minimal primes z of R^ satisfy dim R^/z≥2. Then dim S/P≥d+1, contradicting dim S/P≤d when P+I is primary (I is d-generated by Stacks 067R). So the lemma holds even over non-universally-catenary normal bases. (8) Neither node is a duplicate of factorial-affine-rational-poles, affine-open-boundary-codimension-one, the sbc depth-two Hartogs nodes or smooth-section-regular-immersion, and neither relabels a clause of the item. Both are statement-only and B1-B7 hold. Stacks labels checked at algebra.tex:44061 and divisors.tex:5601. BLR has no local copy; it is the inherited source, and I verified the mathematics independently instead. (9) Batch-5 check: lem-trf-smooth-reduced-dense-pullback and lem-trf-normal-topologically-noetherian-components are generic scheme facts whose proof_deps are generic. Neither is part of the trace formula or Poincare duality, so both are accepted as tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothSectionRationalExtension",
+  "declaration": "AlgebraicGeometry.smooth_section_rational_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSectionRationalExtension.lean",
+  "statement": "theorem smooth_section_rational_extension {B T X Y : Scheme.{u}} [IsNoetherian T] (hnormal : ∀ z : T, IsDomain (T.presheaf.stalk z) ∧ IsIntegrallyClosed (T.presheaf.stalk z)) (t : T ⟶ B) (r : Y ⟶ B) [IsSeparated r] (q : X ⟶ T) [Smooth q] (a : T ⟶ X) (ha : a ≫ q = 𝟙 T) (D : X.Opens) (hD : Dense (D : Set X)) (v : D.toScheme ⟶ Y) (hv : v ≫ r = D.ι ≫ q ≫ t) (b : T ⟶ Y) (hb : b ≫ r = t) (hcodim : ∀ z : T, ringKrullDim (T.presheaf.stalk z) ≤ 1 → a z ∈ D) (hagrees : (a ∣_ D) ≫ v = (a ⁻¹ᵁ D).ι ≫ b) : ∃ (N : X.Opens) (w : N.toScheme ⟶ Y), (∀ z : T, a z ∈ N) ∧ w ≫ r = N.ι ≫ q ≫ t ∧ X.homOfLE (inf_le_left : N ⊓ D ≤ N) ≫ w = X.homOfLE (inf_le_right : N ⊓ D ≤ D) ≫ v",
+  "branch": "sheaf-dag",
+  "by": "Q100",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41db51572",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node: IsNoetherian T for the finite Noetherian affine cover; normality as an integrally closed domain at every point (avoids IsNormalScheme's integrality; no DAG node for normal schemes); IsSeparated r as the diagonal closed immersion; Smooth q with a ≫ q = 𝟙; dense open D; hv/hb B-linearity; hcodim via ringKrullDim of the local ring ≤ 1 → a z ∈ D; hagrees as an equality of scheme maps on a⁻¹ᵁD; conclusion ∃ N w with a(T) ⊆ N, B-linearity, and agreement on N ⊓ D via homOfLE. No extra assumptions. Edge cases (empty T, disconnected T, D = X, infinite dimension) covered. lean.statement verbatim; only the lean field differs from live; sorry proof, no definitions, source and blueprint docstrings present, 7-step proof docstring; report has both sections. Note: Q48 a3f7fd37b1ea delivered the same item in parallel and neither has landed; only one should land, and the later must not overwrite the other's lean record."
+ }
+}

@@ -17,7 +17,7 @@
  },
  "proof": [
   {
-   "text": "These are explicit definitions, copied verbatim from the parent. The raw prefix omits only the subsequent supported Karoubi clauses.",
+   "text": "These are explicit definitions with the original equations. The raw prefix omits only the subsequent supported Karoubi clauses. Four named propositions contain the raw composite and normalization witness types literally; their use in HasCoherence changes only expression packaging.",
    "uses": [],
    "elementary": true
   }
@@ -26,7 +26,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
-  "place": "Lines 1191-1228, 1262-1279 and 1291-1321; explicit semilinear localization and supported-idempotent calculations for the finite-stage coherence required in the parent proof"
+  "place": "Lines 1191-1228, 1262-1279 and 1291-1321; explicit semilinear localization and supported-idempotent calculations for the finite-stage coherence required in the parent proof; M8 names the four literal raw composite and normalization clauses to avoid repeated expansion in the Qbar presentation proof"
  },
  "mathlib_searches": [
   {
@@ -107,7 +107,11 @@
    "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.rawPush",
    "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.HasRawOperationCoherence",
    "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.HasOperationCoherence",
-   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.HasCoherence"
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.HasCoherence",
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.RawLeftComposite",
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.RawRightComposite",
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.RawLeftNormalization",
+   "AlgebraicGeometry.Scheme.FiniteStageRationalExchange.RawRightNormalization"
   ],
   "statement": "def HasRawOperationCoherence\n    (pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙\n        pbcAmbientCompleteIntegralTransition l Ω V a ≅\n      pbcAmbientCompleteIntegralTransition l Ω U a ⋙\n        sbcPush l (pbcFiniteField.{u} l Ω M) q)\n    (pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),\n    sbcPull l (pbcFiniteField.{u} l Ω E) q ⋙\n        pbcAmbientCompleteIntegralTransition l Ω U a ≅\n      pbcAmbientCompleteIntegralTransition l Ω V a ⋙\n        sbcPull l (pbcFiniteField.{u} l Ω M) q)\n    (rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω U)\n    (pbcAmbientCompleteRawSystem l Ω V))\n    (rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω V)\n    (pbcAmbientCompleteRawSystem l Ω U))\n    : Prop",
   "existing": false,
@@ -126,13 +130,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-bff0e",
-  "group": "Y9",
-  "result": "fix",
-  "landing": "20261021T214924-L-1893365",
+  "reviewer": "C-66f35",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261022T040208-L-2831428",
   "kind": "interface",
-  "note": "independent cc review: Y9 delivery bff0ec9e (verbatim move of 4 defs into FiniteStageRationalExchangeData, checked by diff against the live item; proved Karoubi extension and assemblies; 2 sorry raw halves) against node lem-sbc-finite-stage-rational-exchange-coherence and its original HasCoherence statement; 8-module sandbox compile rc 0 with #print axioms"
+  "note": "independent cc review: item QbarCoefficientSmoothBaseChange + 4 unclaimed support modules (StageSystemFunctorDescent, AmbientCompleteRawSystem, AmbientCompleteCoefficientCategories, FiniteStageRationalExchangeData) against live base, node sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch and 4 support nodes, 5 change records; sandbox compile of all 5 modules + 7 unchanged importers rc 0; #print axioms clean except the expected sorryAx from dependency statements that are still sorry"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

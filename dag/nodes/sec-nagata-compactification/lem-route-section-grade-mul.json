@@ -1,0 +1,126 @@
+{
+ "id": "lem-route-section-grade-mul",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-nagata-relative-proj-exists",
+   "via": [
+    "lem-nagata-proj-affine-restriction"
+   ],
+   "place": "The local-squares construction uses the graded section ring C=Γ(V,𝒜) on each affine open and its homogeneous pieces; multiplication of degree-m and degree-n pieces is the compatibility needed for these graded section rings."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Homogeneous multiplication adds degrees.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $\\mathcal A$ be a quasi-coherent commutative $\\mathcal O_X$-algebra sheaf [def-weil-pbc-quasi-coherent-algebra] [def-weil-pbc-comm-algebra-sheaf]. Let $(B_n)_{n\\in\\mathbb N}$ be sheaves of $\\mathcal O_X$-modules equipped with a commutative unital graded sheaf algebra structure [def-weil-pbc-graded-sheaf-structures], with multiplication maps $\\mu_{m,n}(U):\\Gamma(U,B_m)\\times\\Gamma(U,B_n)\\to\\Gamma(U,B_{m+n})$ for every open $U\\subseteq X$. Suppose a specified isomorphism of underlying module sheaves $d:\\bigoplus_{n\\ge0}B_n\\xrightarrow{\\sim}\\mathcal A$ respects the multiplication and the unit. Write $i_n:B_n\\to\\mathcal A$ for its composite with the $n$th coproduct inclusion; multiplicativity means $i_{m+n}(U)(\\mu_{m,n}(U)(x,y))=i_m(U)(x)\\cdot i_n(U)(y)$ in $\\Gamma(U,\\mathcal A)$ for every open $U\\subseteq X$, all $m,n\\in\\mathbb N$, $x\\in\\Gamma(U,B_m)$ and $y\\in\\Gamma(U,B_n)$. For an affine open $V\\subseteq X$, put $C_V=\\Gamma(V,\\mathcal A)$ and define the additive subgroup $C_{V,n}=\\operatorname{im}(i_n(V):\\Gamma(V,B_n)\\to C_V)$. Then for all $m,n\\in\\mathbb N$ and $a,b\\in C_V$ with $a\\in C_{V,m}$ and $b\\in C_{V,n}$ one has $ab\\in C_{V,m+n}$. These are the section ring and image subgroups denoted by $A.\\mathrm{sections}(V)$ and $A.\\mathrm{sectionGrade}(V,n)$ for the given relative Proj input algebra $A$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "lem-nagata-proj-affine-restriction: the Lean of this node (its module Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction imports Sheaf.AlgebraicGeometry.RelativeProjData (1 step)) reaches AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_mul, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean, declaration AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_mul (module Sheaf.AlgebraicGeometry.RelativeProjData, lines 78-84, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-graded-sheaf-structures"
+ ],
+ "proof": [
+  {
+   "text": "Lift each homogeneous section through the range defining sectionGrade. Multiply its representatives using graded.mul. The equation mul_eq says the inclusion of this representative equals the product of the original sections.",
+   "uses": [
+    "def-weil-pbc-graded-sheaf-structures"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-graded-sheaf-structures"
+ ],
+ "proof_origin": {
+  "by": "G6",
+  "date": "2026-10-27",
+  "kind": "agent-written",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section relative-proj-via-glueing (01LH), lemma-proj-inclusion (01NO); direct Lean proof using the coproduct universal property and compact affine opens."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous multiplication of two sections in degree m and n lies in degree m plus n",
+   "results": "SetLike.GradedMul.mul_mem (Mathlib/Algebra/GradedMonoid); SetLike.mul_mem_graded; SetLike.IsHomogeneousElem.mul. These generic graded-subset lemmas require a GradedMul instance and do not state multiplication for the range-defined sectionGrade before sectionGradedRing is constructed.",
+   "date": "2026-10-27",
+   "verdict": "generalization: generic graded multiplication lemmas, but no direct sectionGrade theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SetLike.GradedMul.mul_mem",
+   "results": "SetLike.GradedMul.mul_mem, Mathlib.Algebra.GradedMonoid; generic theorem that multiplication is homogeneous.",
+   "date": "2026-10-27",
+   "verdict": "generalization: applies only after supplying a GradedMul instance; does not state this range witness theorem directly"
+  },
+  {
+   "tool": "grep",
+   "query": "GradedMul.*mul_mem|SetLike.GradedMul",
+   "results": "no match in Mathlib/Algebra/GradedMonoid (the source declarations are available under the names returned by LeanFinder/Loogle, but this exact grep pattern produced no textual hit).",
+   "date": "2026-10-27",
+   "verdict": "no direct textual match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "product of elements in ranges of homogeneous inclusions lies in the range of the next homogeneous inclusion",
+   "results": "Set.mul_subset_range; DirectSum.mulHom_of_of; SetLike.prod_mem_graded; GradedMonoid.GMul.mul; no theorem specialized to RelativeProjAlgebra.sectionGrade.",
+   "date": "2026-10-27",
+   "verdict": "no direct match: only generic range or graded-product lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-nagata-proj-affine-restriction",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-nagata-sketch-data",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjData",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_mul",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_mul"
+  ],
+  "statement": "theorem sectionGrade_mul (V : X.affineOpens) (m n : ℕ)\n    (a b : A.sections V) (ha : a ∈ A.sectionGrade V m) (hb : b ∈ A.sectionGrade V n) :\n    a * b ∈ A.sectionGrade V (m + n) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-section-grade-mul",
+  "worker": "stage1",
+  "summary": "The provisional Lean-signature node was rewritten as the complete homogeneous-section multiplication statement. No new DAG node is needed: the proof is a single elementary range-witness argument using the `mul_eq` field of the RelativeProjAlgebra datum. Mathlib searches found only generic graded multiplication lemmas, which cannot be used directly before the section grading instance is defined.",
+  "blueprint": "The step realizes the graded-algebra multiplication compatibility in the Relative Proj input and the affine graded-section construction used in the local-squares proof of lemma-nagata-relative-proj-exists."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NE-e723db418",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-e723db418 (reviewer sub-agent of L); spot-checked: I read the whole item (one step, no new nodes) against RelativeProjData.lean (sectionGrade = range of i_n(V); mul_eq gives i_{m+n}(mul x y) = i_m x * i_n y) and the blueprint def-nagata-relative-proj.md (order 155: graded section algebra on affine opens). The maths is correct: take witnesses x and y, form mu_{m,n}(V)(x,y) in B_{m+n}(V), and apply mul_eq at U=V. Edge cases m=0, n=0, V empty, a=0 and B_n=0 all work. Unit sk-def-nagata-sketch-data: the proof cites definitions only, so there are no tool_uses. Duplicate search with rg -L: siblings section-grade-one, unit-mem, internal and restriction-mem are distinct. Mathlib's SetLike.GradedMul.mul_mem would be circular because sectionGradedRing takes mul_mem from this theorem. There is no cycle. Fixes, both written to fixes/dag/nodes/sec-nagata-compactification/lem-route-section-grade-mul.json: (B2/B3) the statement was phrased through the Lean structure RelativeProjAlgebra and its mul_eq field, cited no notions and had empty stmt_deps. I rewrote it self-contained in the form of the landed sibling lem-route-section-grade-one, with stmt_deps def-pc-scheme, def-weil-pbc-quasi-coherent-algebra, def-weil-pbc-comm-algebra-sheaf and def-weil-pbc-graded-sheaf-structures; no hypothesis was added or dropped and the conclusion is unchanged. (C1) The step now uses def-weil-pbc-graded-sheaf-structures for the multiplication B_m x B_n -> B_{m+n}, and proof_deps matches.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T112350-L-1576056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

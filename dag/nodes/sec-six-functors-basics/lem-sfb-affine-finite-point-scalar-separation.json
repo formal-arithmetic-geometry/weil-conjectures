@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-affine-finite-point-scalar-separation",
+ "kind": "statement",
+ "title": "A regular function separates a finite set from a point outside its closure",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme], let $F\\subseteq |X|$ be a finite set, and let $z\\in |X|$ satisfy $z\\notin\\overline{\\{x\\}}$ for every $x\\in F$. For $y\\in |X|$ and $f\\in\\Gamma(X,\\mathcal O_X)$, let $f(y)$ be the image of the germ $f_y$ in the residue field $\\kappa(y)=\\mathcal O_{X,y}/\\mathfrak m_y$ [def-weil-residue-field]. There exists $f\\in\\Gamma(X,\\mathcal O_X)$ such that $f(x)=0$ for every $x\\in F$ and $f(z)\\ne0$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, proof: affine specialization with W=X; induction step, choice of a section vanishing at the earlier points and nonvanishing at the new point; the affine scalar construction (old item steps 1 and 5)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\Gamma(X,\\mathcal O_X)$. Apply [lem-weil-pbc-affine-open-spec-points] with the affine open $U=X$ to identify $X$ with $\\operatorname{Spec}A$ and write $\\mathfrak p_x,\\mathfrak q$ for the primes corresponding to $x\\in F,z$. The scheme isomorphism is a homeomorphism. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes](1) and its stated definition of $V$, for each $x\\in F$ we therefore have $z\\in\\overline{\\{x\\}}$ if and only if $\\mathfrak q\\in V(\\mathfrak p_x)$, if and only if $\\mathfrak p_x\\subseteq\\mathfrak q$. Negating this equivalence gives $\\mathfrak p_x\\not\\subseteq\\mathfrak q$ for every $x\\in F$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES, algebra-lemma-irreducible (1); affine identification as in Schemes Tag 01IJ, convention after schemes-definition-scheme"
+   }
+  },
+  {
+   "text": "For each $x\\in F$, choose $a_x\\in\\mathfrak p_x\\setminus\\mathfrak q$, which is possible by the non-containment just obtained. Define $f=\\prod_{x\\in F}a_x\\in A$, taking $f=1$ when $F$ is empty. For any $x\\in F$, isolate its factor: $f=a_x\\prod_{y\\in F\\setminus\\{x\\}}a_y$. Since $\\mathfrak p_x$ is an ideal, this proves $f\\in\\mathfrak p_x$. Since $\\mathfrak q$ is prime and no $a_x$ belongs to it, induction on the number of factors gives $f\\notin\\mathfrak q$: the empty product is outside the proper ideal $\\mathfrak q$, and $ab\\in\\mathfrak q$ would force $a\\in\\mathfrak q$ or $b\\in\\mathfrak q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, induction step: section supported away from the earlier point closures; explicit affine scalar construction using Algebra Tag 00ES (algebra-lemma-irreducible) (1) and Schemes Tag 01J3 (schemes-lemma-reduced-closed-subscheme), proof, f(t)=0 iff f lies in the corresponding prime"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-affine-open-section-vanishing-prime](a) on $U=X$. Its residue-field value is the image of the germ used in the statement. The memberships $f\\in\\mathfrak p_x$ give $f(x)=0$ for every $x\\in F$, and $f\\notin\\mathfrak q$ gives $f(z)\\ne0$. This is the required global function.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, schemes-lemma-reduced-closed-subscheme, proof: f(t)=0 iff f in the corresponding prime"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, induction step; explicit affine scalar argument by finite products, using Tags 00ES and 01J3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(finite|finset).*([Ee]valuat|[Bb]asicOpen)|([Ee]valuat|[Bb]asicOpen).*(finite|finset)",
+   "results": "Read hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean Searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/basic-open criteria and ideal product or prime-avoidance lemmas do not state the affine-scheme residue-valued separating-function assertion; the spectrum and germ identifications and construction are additional work"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an affine scheme find a regular function zero at a finite set of points but nonzero at a point outside their closure",
+   "results": "Read hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, image_eq_zero_of_notMem_tsupport, AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.Scheme.zeroLocus_eq_univ_iff_subset_nilradical_of_isCompact, ContinuousMap.notMem_setOfIdeal",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/basic-open criteria and ideal product or prime-avoidance lemmas do not state the affine-scheme residue-valued separating-function assertion; the spectrum and germ identifications and construction are additional work"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, \"evaluation\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/basic-open criteria and ideal product or prime-avoidance lemmas do not state the affine-scheme residue-valued separating-function assertion; the spectrum and germ identifications and construction are additional work"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme a global regular function vanishes at each point of a finite set F and is nonzero at a point z outside the closure of F",
+   "results": "Read hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/basic-open criteria and ideal product or prime-avoidance lemmas do not state the affine-scheme residue-valued separating-function assertion; the spectrum and germ identifications and construction are additional work"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(notMem|mem).*([Ii]nter|[Ff]inset)|primeAvoidance|prime_avoidance",
+   "results": "Read hits: Mathlib/RingTheory/Ideal/Operations.lean, Mathlib/RingTheory/Ideal/Operations.lean, Mathlib/RingTheory/Ideal/Height.lean Searched Mathlib/RingTheory/Ideal",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/basic-open criteria and ideal product or prime-avoidance lemmas do not state the affine-scheme residue-valued separating-function assertion; the spectrum and germ identifications and construction are additional work"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation_(eq_zero|ne_zero)_iff|exists_finset_free_localization|exists_linearEquiv_ideal",
+   "results": "Read hits: Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/basic-open criteria and ideal product or prime-avoidance lemmas do not state the affine-scheme residue-valued separating-function assertion; the spectrum and germ identifications and construction are additional work"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finitely many prime ideals p_i of a commutative ring not contained in q, there exists f in every p_i and outside the prime ideal q",
+   "results": "Read hits: Ideal.subset_union_prime_finite, Ideal.exists_le_prime_disjoint, Ideal.subset_union_prime, Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver, PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain, Ideal.subset_union_prime', PrimeSpectrum.exists_primeSpectrum_prod_le, Ideal.exists_mul_mem_of_mem_minimalPrimes",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation/basic-open criteria and ideal product or prime-avoidance lemmas do not state the affine-scheme residue-valued separating-function assertion; the spectrum and germ identifications and construction are additional work"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme a regular function vanishes on a finite set of points and is nonzero at a point outside the closure of each of them",
+   "results": "Read hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.evaluation_ne_zero_iff_mem_basicOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: returned evaluation/basic-open and zero-locus criteria or ideal-theoretic lemmas; none states the affine-scheme finite-set separation assertion in one specialization. Ideal.IsPrime.inf_le' gives the algebraic core, while affine identification and residue-valued vanishing still require the cited separate leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an affine scheme find a global function vanishing on finitely many points but not on a point outside their closures",
+   "results": "Read hits: AlgebraicGeometry.Scheme.toSpecΓ_image_zeroLocus, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.zeroLocus_eq_univ_iff_subset_nilradical_of_isCompact, AlgebraicGeometry.Scheme.mem_zeroLocus_iff, AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal",
+   "date": "2026-10-23",
+   "verdict": "no match: returned evaluation/basic-open and zero-locus criteria or ideal-theoretic lemmas; none states the affine-scheme finite-set separation assertion in one specialization. Ideal.IsPrime.inf_le' gives the algebraic core, while affine identification and residue-valued vanishing still require the cited separate leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, \"evaluation\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned evaluation/basic-open and zero-locus criteria or ideal-theoretic lemmas; none states the affine-scheme finite-set separation assertion in one specialization. Ideal.IsPrime.inf_le' gives the algebraic core, while affine identification and residue-valued vanishing still require the cited separate leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation_(eq_zero|ne_zero)_iff|toSpecΓ_image_zeroLocus|exists.*(finite|finset).*(evaluation|basicOpen)",
+   "results": "Read hits: Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean Searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned evaluation/basic-open and zero-locus criteria or ideal-theoretic lemmas; none states the affine-scheme finite-set separation assertion in one specialization. Ideal.IsPrime.inf_le' gives the algebraic core, while affine identification and residue-valued vanishing still require the cited separate leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finitely many prime ideals not contained in a prime q there is an element in their intersection outside q",
+   "results": "Read hits: Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver, Ideal.subset_union_prime_finite, Ideal.subset_union_prime, Ideal.subset_union_prime', PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain, PrimeSpectrum.exists_primeSpectrum_prod_le, Ideal.IsPrime.inf_le', PrimeSpectrum.exist_mem_one_of_mem_two",
+   "date": "2026-10-23",
+   "verdict": "no match: returned evaluation/basic-open and zero-locus criteria or ideal-theoretic lemmas; none states the affine-scheme finite-set separation assertion in one specialization. Ideal.IsPrime.inf_le' gives the algebraic core, while affine identification and residue-valued vanishing still require the cited separate leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-invertible-finite-set-section",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "induction step, choice of a section vanishing at the earlier points and nonvanishing at the new point; the affine scalar construction (old item steps 1 and 5); Stacks 0BUT, divisors-lemma-finite-trivialize-invertible-upstairs: the sentence choosing a global section nonvanishing on the finite fibre, by Properties 0F20. This serves Auxiliary local trivialization for the norm construction in Stacks 0BCY: divisors-lemma-norm-invertible, first paragraph, choose a base cover whose inverse images trivialize the invertible sheaf; the ancestor route is det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Existence of an ample invertible sheaf descends through a finite cover of a normal integral scheme. Tags 0BCY (divisors-lemma-norm-invertible) and 0BCZ (divisors-lemma-norm-map-invertible), applied to sections of tensor powers; Section 0BCX (divisors-section-norms) specifies the norm hypotheses.",
+   "via": [
+    "lem-sfb-affine-invertible-finite-set-section",
+    "lem-sfb-finite-trivialize-invertible-upstairs",
+    "lem-sfb-finite-norm-invertible-sections",
+    "lem-sfb-finite-normal-ample-descent",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-finite-point-scalar-separation",
+  "worker": "stage1",
+  "summary": "Unchanged statement; explicit affine prime-ideal finite-product construction. Reused three existing Mathlib leaves for affine identification, closures of primes and residue-valued vanishing; no new nodes. Checked empty finite set, nonclosed points and arbitrary nonreduced rings. No exact project attachment found. Return repair: rechecked the retained delivery against the current unsplit node, re-read all three current cited statements, and made the closure-to-prime-containment equivalence explicit in step 1. The delivery tool rebases these split-owned fields on the current DAG and preserves current maintainer fields. Current-base retry: consolidated step 1 into a single explicit equivalence, checked every citation quote against the current Mathlib-leaf statements, and retained the finite-product proof and actual search log.",
+  "blueprint": "The inherited ancestry search returns None. This auxiliary lemma realizes the scalar separation needed by Stacks 0F20 induction (section vanishing at earlier points but nonvanishing at the new point), on the recorded finite-trivialization/norm/alteration route to det-thm-sf-ctf-stability-direct-images. Whole-blueprint searches for finite set of points, vanishing at, closure of a point and basic open found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-e050f6b2f",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-e050f6b2f (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery creates no new nodes and leaves the statement byte-identical to live and side-live, where the item is still unsplit with an empty proof, so it is not superseded. Compared with the previous head bea92bf1, only step 1 changed: z∈cl{x} ⇔ q∈V(p_x) ⇔ p_x⊆q is now written out explicitly. Step 1 cites the statements of lem-weil-pbc-affine-open-spec-points (for U=X, ι_U is an open immersion onto X, hence a homeomorphism, with p_x and ι(p_x)=x) and lem-weil-pbc-spec-irreducible-closed-subsets-primes (1) (cl{p}=V(p), p'∈V(p) ⇔ p⊆p'). The specialization direction is correct. Step 2 is correctly marked elementary: a_x∈p_x\\q, f=∏a_x, f∈p_x because p_x is an ideal, f∉q because q is prime, and the empty product is 1∉q. Step 3 cites lem-weil-pbc-affine-open-section-vanishing-prime (a), f(x)=0 ⇔ f∈p_x, with the same p_x and the residue value of def-weil-residue-field, which matches the item's germ-then-residue f(y). proof_deps equals the union of the steps' uses, and all three cited nodes are Mathlib leaves, so they count as tools, not route. Sources read: Stacks 0F20 (properties.tex l.5327 ff, the induction step after reducing to no specializations), 00ES(1) (algebra.tex l.4665) and the proof of 01J3 (schemes.tex l.2200-2208). There is no SGA citation. Edge cases checked: empty F gives f=1; X empty is vacuous; in Spec k[t], x=(t), z=(0) gives f=t; for nonreduced k[e]/e² the only possible configuration is excluded by the hypothesis; no closedness or Noetherian assumption is used. The parent lem-sfb-affine-invertible-finite-set-section step 3 supplies exactly the item's hypothesis and uses exactly its conclusion. Duplicate search (outside-the-closure, prime-avoidance and 0F20 greps) finds only lem-trf-quotient-lift-finite-prime-avoidance, which has different content (lifting a residue class mod I to avoid finitely many primes), so it is no duplicate. The four kinds of Mathlib search were recorded with their real hits. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFinitePointScalarSeparation",
+  "declaration": "AlgebraicGeometry.Scheme.exists_globalSection_zero_on_finite_ne_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFinitePointScalarSeparation.lean",
+  "statement": "theorem exists_globalSection_zero_on_finite_ne_zero (X : Scheme.{u}) [IsAffine X] (F : Set X) (hF : F.Finite) (z : X) (hz : ∀ x ∈ F, z ∉ closure ({x} : Set X)) : ∃ f : Γ(X, ⊤), (∀ x ∈ F, X.Γevaluation x f = 0) ∧ X.Γevaluation z f ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab0656ff6",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Only the lean record changed vs side-live (statement byte-identical; not landed elsewhere, first S2 delivery). Lean matches every clause: Scheme.{u}+IsAffine; F : Set X with F.Finite; hz ∀ x∈F, z ∉ closure {x} (correct direction); ∃ f : Γ(X,⊤); f(y) = Γevaluation = germ ⊤ y ≫ residue into residueField (def-weil-residue-field decl, read in Mathlib ResidueField.lean l.54/96-104); vanishing on F ∧ nonzero at z. One explicit universe, no extra instances, lean.statement verbatim. Edge cases F=∅ (f=1), empty X, z∈F, non-closed points/non-reduced rings OK. No duplicate in Mathlib/side-live lean. Docstrings carry Stacks 0F20 + blueprint id + DAG proof steps; single sorry; report sections present. No findings, no fixes."
+ }
+}

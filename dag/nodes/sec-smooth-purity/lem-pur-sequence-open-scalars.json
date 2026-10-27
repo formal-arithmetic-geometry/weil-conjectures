@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-sequence-open-scalars",
+ "kind": "statement",
+ "title": "Preservation of compatible scalar endomorphisms",
+ "statement": "Let C have object universe c and morphism universe v, let k=max(c,v,r), suppose C is essentially small in k, let J be a Grothendieck topology on C, let U be an object, and let B_n be a tower of commutative ring sheaves with adjacent maps τ_n:B_(n+1)→B_n. Use the actual systems, coefficient maps, evaluations and scalar restrictions of [def-coef-semilinear-system-models]. Every ordinary open datum O [def-pur-sequence-site-open-data] satisfies Scalars [def-pur-sequence-open-derived-data]: for every commutative ring R, natural section maps R→B_n(X) compatible with all coefficient maps, t∈R, and localized system M, multiplication by t defines the prescribed sectionwise endomorphisms f of M and g of O.Jfun(M), and O.Jfun(f)=g.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03CY: original proof step 8."
+ },
+ "stmt_deps": [
+  "def-pur-sequence-site-open-data",
+  "def-pur-sequence-open-derived-data"
+ ],
+ "proof": [
+  {
+   "text": "Compatible sections define multiplication endomorphisms on the actual module over the sequence ring. Commutativity gives linearity; naturality and compatibility with every composite tower map give the restriction equation. The localized composite coefficient maps agree with the restrictions of the ambient maps, by the naturality of the identity transformation of op-sequence functors.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "To show level extension preserves multiplication, transpose along [lem-pur-site-restriction-module-adjunction-exact]; naturality of the unit reduces the equation to linearity of the unit component. Apply naturality of O.level to the scalar endomorphism and use this equation. Each level comparison is invertible, so its section map is injective; cancellation gives the actual system equality.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03CY: original proof step 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open localization of a category of semilinear inverse systems of sheaves of modules has exact extension by zero calculated levelwise, with coherent coefficient comparison",
+   "results": "8 hits: SheafOfModules.instAbelian, SheafOfModules.hasLimit, localization linear instances. No comparison theorem.",
+   "date": "2026-10-24",
+   "verdict": "Use project direct-sum adjunction and localization infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coefficient rings commutes coherently with extension by zero on sheaves of modules, preserves scalar endomorphisms, and descends transition equations to derived categories",
+   "results": "8 hits: SheafOfModules.restrictScalars and its object/map/additive formulas; PresheafOfModules.restrictScalars. No normalized open-extension package.",
+   "date": "2026-10-24",
+   "verdict": "The sectionwise formulas support the construction; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, SheafOfModules",
+   "results": "8 hits: sheafificationAdjunction, overMapPushforwardAdj, overPushforwardOverAdj, pushforwardPushforwardAdj and pullbackPushforwardAdjunction.",
+   "date": "2026-10-24",
+   "verdict": "These are component adjunctions; use them via the existing project normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|liftNatTrans|mapDerivedCategorySquareIso",
+   "results": "25 hits including Localization.liftNatTrans_app, comp_liftNatTrans, localization of adjunctions. No complete open sequence comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use localization naturality and its standard factorization equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SequenceSiteOpenExtension",
+  "date": "2026-10-24",
+  "group": "C6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-representative-independence",
+   "place": "First proof sentence: the open-extension factor of the coherent strict compact-support reduction tower. Tags 03DI and 03CY: original proof step 8.",
+   "via": [
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-pur-sequence-site-open-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SequenceOpenScalars",
+  "file": "lean/Sheaf/Paper/SequenceOpenScalars.lean",
+  "declaration": "WeilConjectures.SemilinearSections.SequenceOpenOrdinary.scalars",
+  "statement": "theorem SequenceOpenOrdinary.scalars {C : Type c} [Category.{v} C]\n    [EssentiallySmall.{max c v r} C] (J : GrothendieckTopology C) (U : C)\n    (B : ℕ → Sheaf J CommRingCat.{max c v r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n    (O : SequenceOpenOrdinary.{c, v, r} J U B τ) : O.Scalars.{c, v, r, s}",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2408a",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T184752-L-3173980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2408a",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T184752-L-3173980",
+  "kind": "interface",
+  "note": "independent cc review: delivered SequenceSiteOpenData vs clone's SequenceSiteOpenExtension (verbatim move, only blueprint anchors and gen* options differ); item theorem statement vs clone (identical); new node lean records vs delivered modules; 3 direct importers compiled against the delivered modules in a sandbox (all OK); #print axioms: three new theorems axiom-clean, item theorem sorryAx only via sequenceOpenOrdinary"
+ }
+}

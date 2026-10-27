@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-stack-relative-cech-module-augmentation-exact",
+ "kind": "statement",
+ "title": "Exact augmented relative Cech complex for stack module sheaves",
+ "statement": "Fix the universes and small-skeleton convention of [def-weil-size-convention], a scheme $S$ [def-pc-scheme], and a morphism $u:\\mathcal U\\to\\mathcal X$ of categories fibred in groupoids over $S$-schemes [def-sfb-stable-pointed-moduli-groupoids]. Give each category its big etale site, with the same objects and arrows and coverings lying over jointly surjective etale families of schemes. Its structure sheaf has value $\\Gamma(T,\\mathcal O_T)$ on an object over $T$ [def-sfb-stack-quasi-coherent-algebra]. Pullback of modules is precomposition; for a morphism $v:\\mathcal V\\to\\mathcal X$ define $(v_*N)(x)=\\Gamma(\\mathcal V\\times_{\\mathcal X}T,N|_{\\mathcal V\\times_{\\mathcal X}T})$ when $x$ lies over $T$. Assume every object $x$ of $\\mathcal X$ admits an etale covering family $\\{x_i\\to x\\}$ such that each $x_i$ is isomorphic to $u(z_i)$ for some object $z_i$ of $\\mathcal U$. For $p\\geq0$ form the $2$-fibre product $\\mathcal U_p$ of $p+1$ copies of $\\mathcal U$ over $\\mathcal X$, with projection $u_p$, and let $M$ be any module sheaf on $\\mathcal X$ [def-weil-sheaf-of-modules-category]. The augmented complex of module sheaves\n$$0\\longrightarrow M\\longrightarrow (u_0)_*u_0^*M\\longrightarrow (u_1)_*u_1^*M\\longrightarrow\\cdots$$\nis exact, with augmentation restriction and differential $\\sum_{j=0}^{p+1}(-1)^j d_j^*$ in degree $p$, where $d_j$ omits factor $j$. The augmentation and differentials are natural in $M$. No faithfulness, equalizer, algebraicity, representability, or quasi-coherence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06XE (proposition-exactness-cech-complex); module form obtained by applying the stated abelian-sheaf result to the underlying sheaf, with the sectionwise structure-module action of section-modules."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $F$ equal to the underlying abelian sheaf of $M$. All terms in the asserted sequence are module sheaves: for $x$ over $T$, an element of $(u_p)_*u_p^*M(x)$ is a compatible family of elements of $M$ over the objects of $\\mathcal U_p\\times_{\\mathcal X}T$. Multiply this family by $a\\in\\Gamma(T,\\mathcal O_T)$ after pulling $a$ back to each underlying scheme. Semilinearity of restrictions makes the result compatible. Sheaf gluing holds componentwise: a covering of $T$ pulls back to a covering of every test scheme, so families of sections glue uniquely by the sheaf condition for $M$. Every face pullback and the augmentation preserves this action. Thus forgetting modules gives exactly $E^\\bullet(u,F)$ as defined in the base-change lemma.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-sfb-relative-cech-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XE (proposition-exactness-cech-complex), proof; section-modules for the structure-module action."
+   }
+  },
+  {
+   "text": "The face identities give a complex: in $d^{p+1}d^p$ each pullback omitting two different factors occurs twice with opposite signs, since omitting $i$ and then $j$ equals omitting $j-1$ and then $i$ for $i<j$. The two restrictions of an augmented section to $\\mathcal U_1$ agree by compatibility of its family, so $d^0d^{-1}=0$. Apply the base-change isomorphism with $e=u$, $\\mathcal Y=\\mathcal U$, $\\mathcal V=\\mathcal U\\times_{\\mathcal X}\\mathcal U$ and $g$ the projection to the first factor. It identifies $u^{-1}E^\\bullet(u,F)$ with $E^\\bullet(g,u^{-1}F)$, including the augmentation and differential.",
+   "uses": [
+    "lem-sfb-relative-cech-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XE (proposition-exactness-cech-complex), proof; section-modules for the structure-module action."
+   }
+  },
+  {
+   "text": "The functor $s:\\mathcal U\\to\\mathcal U\\times_{\\mathcal X}\\mathcal U$ sends $z$ to $(z,z,\\mathrm{id}_{u(z)})$ and an arrow $a$ to $(a,a)$. This is a functor by the defining compatibility equation for arrows in a 2-fibre product, and $gs=\\mathrm{id}_{\\mathcal U}$. The contraction lemma therefore gives maps $h^p$ on $E^\\bullet(g,u^{-1}F)$ satisfying $dh+hd=1$, including $h^0d^{-1}=1$. Its sectionwise equations imply exactness: for $d^pc=0$, $c=d^{p-1}h^pc$; at degree $-1$, $d^{-1}c=0$ implies $c=h^0d^{-1}c=0$. Hence the precomposed augmented complex is exact in every degree.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-split-fibred-cech-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XE (proposition-exactness-cech-complex), proof; section-modules for the structure-module action."
+   }
+  },
+  {
+   "text": "For each degree, apply detection of exactness to the corresponding three consecutive terms of $E^\\bullet(u,F)$, using the given etale local lifting hypothesis on $u$. Step 3 and the isomorphism of step 2 supply exactness after precomposition, while step 2 supplies the zero composite. This includes the initial triple $0\\to F\\to E^0(u,F)$. Consequently the augmented sequence is exact as abelian sheaves.",
+   "uses": [
+    "lem-sfb-fibred-cover-detects-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XE (proposition-exactness-cech-complex), proof; section-modules for the structure-module action."
+   }
+  },
+  {
+   "text": "Kernels in module sheaves are the sectionwise kernels and cokernels are sheafifications of sectionwise cokernels. For the module-linear maps of step 1, these kernels and cokernels have the same underlying abelian sheaves as the corresponding abelian-sheaf kernels and cokernels: the quotient action is $a[m]=[am]$, and it descends through restrictions and sheafification. Thus the zero homology in step 4 proves exactness in module sheaves. Finally, for a module morphism $M\\to N$, apply it to every member of each compatible family. Doing this before or after restricting a family gives the same entries, so it commutes with augmentation and every $d_j^*$, hence with their signed sums. This proves the required naturality.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XE (proposition-exactness-cech-complex), proof; section-modules for the structure-module action."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-relative-cech-base-change",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-split-fibred-cech-contraction",
+  "lem-sfb-fibred-cover-detects-exactness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06XE (proposition-exactness-cech-complex), proof; section-modules for the structure-module action."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent resolution of a sheaf by the nerve of a locally surjective morphism of stacks is an exact sheaf valued augmented cochain complex",
+   "results": "Lean Finder returned abstract site hits including CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact and CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve, but no relative stack Cech augmentation theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract descent ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact augmented Cech complex of arbitrary structure sheaf modules on a category fibred in groupoids for a covering functor",
+   "results": "Hits ChainComplex.augment and CategoryTheory.CosimplicialObject.augmentedCechNerve, but no exactness theorem for module sheaves on categories fibred in groupoids.",
+   "date": "2026-10-24",
+   "verdict": "no match: constructions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplex\", \"exact\"",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Cc]ech|augmented.*[Cc]ech|[Cc]ech.*exact",
+   "results": "Mathlib AlgebraicTopology/CechNerve and ExtraDegeneracy definitions, with no sheaf-module exactness theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match: Cech nerve constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Cc]ech|augmented.*[Cc]ech|[Cc]ech.*exact",
+   "results": "Hits read: Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: local-surjectivity and ordinary Cech constructions do not state the relative stack module augmentation theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally essentially surjective morphism of categories fibred in groupoids gives an exact augmented relative Cech complex of structure sheaf modules",
+   "results": "Hits read: CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Pseudofunctor.CoGrothendieck.instEssSurjαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.locallySurjective, CategoryTheory.Presheaf.IsLocallySurjective, CategoryTheory.Presheaf.isLocallySurjective_of_surjective, CategoryTheory.Arrow.augmentedCechConerve, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: local-surjectivity and ordinary Cech constructions do not state the relative stack module augmentation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplex\", \"exact\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: local-surjectivity and ordinary Cech constructions do not state the relative stack module augmentation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally essentially surjective functor of categories fibred in groupoids gives an exact augmented relative Cech complex for arbitrary sheaves of modules",
+   "results": "Hits read: CategoryTheory.coherentTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff, CategoryTheory.extensiveTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf",
+   "date": "2026-10-24",
+   "verdict": "no match: local-surjectivity and ordinary Cech constructions do not state the relative stack module augmentation theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+  "date": "2026-10-24",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Exact augmented relative Cech complex for stack module sheaves.",
+   "via": [
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-relative-cech-module-augmentation-exact",
+  "worker": "stage1",
+  "summary": "Followed Stacks 06XE via 06XC base change, the diagonal section and 06XA contraction, then 06XD exactness detection. Three strictly supporting abelian-sheaf lemmas are statement-only nodes. The module action, sheaf gluing, signed differential, exactness after forgetting and naturality are written out. Statement unchanged; no attachment or Mathlib match.",
+  "blueprint": "Realizes the relative-Cech augmentation prerequisite along the inherited direct-image/alteration chain in blueprint.from.place. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). The ancestor command returns None; retained inherited null from.node and searched the entire imported blueprint for duplicates.",
+  "tool_uses": [
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic module-sheaf kernels and cokernels used to pass from abelian exactness to module exactness; no specialized unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-0f93583f8",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-0f93583f8 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every cited node statement and Stacks stacks-sheaves.tex 06X6/06XA/06XC/06XD/06XE (lines 2960-3360); the tag-to-label mappings check out. The item statement is unchanged and is 06XE for the etale topology applied to the underlying abelian sheaf. Its hypothesis is exactly 06XE(2), and no faithfulness or equalizers are needed. The 5 steps follow the 06XE proof. Step 1 (module action on compatible families, elementary) is correct. Step 2 uses 06XC with e=u and g the first projection; the face-cancellation sentence is the coface identity δ_jδ_i=δ_iδ_{j-1}. Step 3 uses the diagonal (z,z,id) as a strict section; I checked it against the 2-fibre-product arrow rule. Step 4 applies 06XD to each triple, including 0→F→E^0. Step 5 (exactness in modules equals exactness of the underlying abelian sheaves, since kernels are sectionwise and cokernels sheafified) is correctly elementary. The new nodes lem-sfb-relative-cech-base-change, lem-sfb-split-fibred-cech-contraction and lem-sfb-fibred-cover-detects-exactness are true, statement-only, self-contained and of comparable size, and none restates a clause of the item. I tested them on u=id, e=id, M=0 and groupoids with automorphisms. Duplicate search (rg -L for 06X6-06XF and the source labels, contracting homotopy, exactness detection, Cech, fibred groupoids, and a search of the main-20261015 blueprint) found no existing equivalent. Mathlib's ExtraDegeneracy for the Cech nerve is not a one-line match. The batch-5 finding: all three new nodes cite def-sfb-stable-pointed-moduli-groupoids only for its general fibred-groupoid and 2-fibre-product clauses. Its reach to def-trf-projective-bundle-morphism is a projective-bundle definition, not part of the trace formula or Poincaré duality. The item on base and def-sfb-stack-quasi-coherent-algebra already cite it for the same purpose, so I accept it as a general definition. I accept the declared tool use of def-weil-sheaf-of-modules-category, a generic definition. The null blueprint.from.node is inherited from the item. No fixes."
+ }
+}

@@ -60,11 +60,22 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-compatibility",
  "lean": {
-  "module": "Sheaf.Paper.FiniteCoefficientAdjointComparisons",
+  "module": "Sheaf.Paper.FiniteCoefficientAdjointData",
   "declaration": "AlgebraicGeometry.FiniteCoefficientAdjoints.Stage",
   "declarations": [
    "AlgebraicGeometry.FiniteCoefficientAdjoints.Stage",
@@ -87,7 +98,8 @@
   "by": "Q107",
   "date": "2026-10-19",
   "existing": true,
-  "note": "Definition ownership requested by L H2 for e08263117f25. These are concrete Stage/Arrow definitions and their proved quotient compatibility facts, independent of finite_coefficient_adjoint_comparisons. The existing module remains unchanged."
+  "note": "Definition ownership requested by L H2 for e08263117f25. These are concrete Stage/Arrow definitions and their proved quotient compatibility facts, independent of finite_coefficient_adjoint_comparisons. The existing module remains unchanged.",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientAdjointData.lean"
  },
  "reviewed": {
   "date": "2026-10-19",
@@ -104,5 +116,15 @@
   "group": "Q107",
   "result": "pass",
   "note": "Re-delivery fixes all three points of my e08263117f25 RETURN. H2: new existing:true def node def-coef-finite-coefficient-stages owns Stage/Arrow/ringMap/IsFiniteFree/ringMap_id/comp (all present and plain in FiniteCoefficientAdjointComparisons; that module's only sorry is the theorem at l.1061; statement verbatim) and replaces the theorem stmt_dep. Mechanical finding: lem-weil-proetale-direct-image-restriction-of-scalars is genuine, since fixedScalarRestrictionDirectImage = asIso via the node's own fixedScalarRestrictionDirectImageMap_isIso (used in proScalarPull) -> PASS on that point. H4: Sites.Ctf true = recorded ProEtale.DerivedCategory.constructibleFiniteTor. ClosedGeometry is now stated for closedMap via the actual R i_* adjunction counit. ProDirect/ProClosed/ProHom/ProOmega geometry squares cover the pro-etale side. pro.closedMap and pro.omegaMap are equated with canonical proClosedMap/proOmegaMap, consistent with the closed_site/omega_site pins. proScalarPull conjugates the canonical iso, and pbcFixedScalarExtension is by definition the leftAdjoint. inverseOnDomain is used only on invertible maps. Statement verbatim, single sorry, docstrings and both report sections present. nt_compile --json clean, 53.9 s at load 104. Advisories: Stage docstrings name the old blueprint id; smoothDualizingBaseChangeMap's owner def-asd-smooth-dualizing-base-change-arrows is outside stmt_deps; compile time near the 60 s limit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-529dd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T202009-L-2662190",
+  "kind": "interface",
+  "note": "independent cc review: 529d Data relocation (pp.all #print of 38 decls + item identical published vs sandbox) and 3 new ∃! sorry lemmas against the item's own clauses/normalizations; 11 direct importers compiled rc 0"
  }
 }

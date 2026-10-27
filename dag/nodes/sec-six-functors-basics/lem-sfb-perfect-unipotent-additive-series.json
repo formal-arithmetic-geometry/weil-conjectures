@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-perfect-unipotent-additive-series",
+ "kind": "statement",
+ "title": "Central additive series of a smooth connected unipotent group over a perfect field",
+ "statement": "Let $k$ be a perfect field [def-weil-field], meaning that every algebraic extension of $k$ is separable. Let $U$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Assume that $U$ is unipotent: in a faithful finite-dimensional matrix representation, every point over an algebraically closed extension of $k$ has nilpotent difference from the identity matrix. There exist an integer $m\\geq0$ and smooth connected closed subgroup schemes [def-sc-group-scheme-subgroup]\n$$U=U_0\\supseteq U_1\\supseteq\\cdots\\supseteq U_m=1$$\nsuch that every $U_j$ is normal in $U$, every represented fppf group-sheaf quotient $U_j/U_{j+1}$ is isomorphic to $\\mathbf G_{a,k}$ [def-sc-gm-ga], and $U_j/U_{j+1}$ is central in $U/U_{j+1}$. Central means that all its sections commute with all sections of $U/U_{j+1}$ after every base change. Here $1=\\operatorname{Spec}k$ is the trivial group; fppf quotients are sheafifications of the orbit presheaves for faithfully flat finitely presented covers [def-pc-fppf-site, def-weil-pbc-sheafification]. The trivial group admits the series with $m=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 16.24, printed p.331, first assertion (central normal series with additive quotients); Corollary 16.23 and Corollary 16.22, printed p.331, supply its induction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The underlying scheme of $\\mathbf G_a$ is $\\mathbf A^1_k$ by [def-sc-gm-ga]. It is nonempty (the identity is a point), smooth of relative dimension $1$ by [sbc-lem-affine-space-smooth], and therefore has Krull dimension $1$ by [lem-sbc-smooth-fixed-dimension-over-field]. An affine group is separated by [lem-weil-pbc-affine-source-morphism-separated]. The finiteness assertion in [lem-sfb-homogeneous-quotient-krull-dimension], applied to any such group $V$ and its trivial subgroup (whose coset quotient is $V$ with the identity map), makes $\\dim V$ a finite nonnegative integer. We prove the assertion for every smooth connected affine unipotent finite-type $k$-group scheme $V$ over the fixed perfect field by strong induction on this integer. If $V=1$, take $m=0$; there are no quotient or centrality conditions to check.",
+   "uses": [
+    "def-sc-gm-ga",
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-fixed-dimension-over-field",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-homogeneous-quotient-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.24, printed p.331, induction from Corollary 16.23; dimensions by Proposition 5.23, printed p.104."
+   }
+  },
+  {
+   "text": "Suppose $V\\ne1$. Apply [lem-sfb-unipotent-central-additive-subgroup] to obtain a smooth connected central closed subgroup $N\\subseteq V$ with $N\\cong\\mathbf G_a$. Its perfectness convention follows from ours: in characteristic $p$, a root of $T^p-a$ generates a purely inseparable algebraic extension, which must be separable and hence trivial, so every $a\\in k$ is a $p$-th power. Centrality implies normality on every test algebra. By [lem-sbc-connected-rational-point-geometrically-connected], the identity point makes $V$ geometrically connected. Now [lem-sfb-affine-normal-quotient-geometry] supplies $q:V\\to Q=V/N$, affine of finite type, smooth and geometrically connected, with kernel $N$; $q$ is faithfully flat and finitely presented. In particular $Q$ is connected.",
+   "uses": [
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.24, printed p.331, induction from Corollary 16.23; dimensions by Proposition 5.23, printed p.104."
+   }
+  },
+  {
+   "text": "We verify the remaining induction hypothesis, unipotence of $Q$, without assuming that $k$ is algebraically closed. The field-extension clause of [lem-sfb-affine-normal-quotient-geometry] identifies $q_{\\bar k}$ with $V_{\\bar k}\\to V_{\\bar k}/N_{\\bar k}$. In [lem-sfb-unipotent-normal-quotient-image], take $A=V_{\\bar k}$, $D=I=Q_{\\bar k}$, the node's normal subgroup equal to all of $A$, $f=u=q_{\\bar k}$ and $j=\\mathrm{id}$. The source is smooth, connected and unipotent and $q_{\\bar k}$ is faithfully flat, so that node gives unipotence of $Q_{\\bar k}$. The field-extension detection and the smooth geometric-matrix criterion explicitly stated in [lem-sfb-unipotent-to-multiplicative-trivial] give precisely unipotence of $Q$ in the geometric-matrix sense specified above. The coset quotient $V/N$ also satisfies the homogeneous-quotient hypothesis: its kernel identifies coset fibres and its fppf local lifts are fpqc local lifts. Thus [lem-sfb-homogeneous-quotient-krull-dimension] gives $\\dim V=\\dim N+\\dim Q=1+\\dim Q$. Hence $\\dim Q<\\dim V$. If $\\dim V=0$, this is already a contradiction, settling the induction base.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-unipotent-normal-quotient-image",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-homogeneous-quotient-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.24, printed p.331, induction from Corollary 16.23; dimensions by Proposition 5.23, printed p.104."
+   }
+  },
+  {
+   "text": "Apply the strong induction hypothesis to $Q$: write $Q=Q_0\\supseteq\\cdots\\supseteq Q_r=1$ with all terms smooth connected and normal in $Q$, and with central additive successive quotients. Set $P_i=q^{-1}(Q_i)$ for $0\\le i\\le r$. By [lem-sfb-affine-normal-quotient-geometry], these are closed subgroup schemes, smooth and connected since $N$ and $Q_i$ are so, normal in $V$, with $P_0=V$, $P_r=N$ and $P_i/P_{i+1}\\cong Q_i/Q_{i+1}\\cong\\mathbf G_a$. The same correspondence identifies $V/P_{i+1}$ with $Q/Q_{i+1}$: apply its quotient clause to the pair $Q_{i+1}\\triangleleft Q$ and their inverse images. Append $P_{r+1}=1$. The last quotient is $N/1=N\\cong\\mathbf G_a$. Thus $m=r+1$ and this chain has every required geometric and quotient property.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.24, printed p.331, induction from Corollary 16.23; dimensions by Proposition 5.23, printed p.104."
+   }
+  },
+  {
+   "text": "For $i<r$, under $V/P_{i+1}\\cong Q/Q_{i+1}$ the subgroup $P_i/P_{i+1}$ is exactly $Q_i/Q_{i+1}$. On any test scheme, and after any further base change, the latter commutes with every section of $Q/Q_{i+1}$ by the induction hypothesis. The isomorphisms preserve products, so the former commutes with every section of $V/P_{i+1}$. For $i=r$, this is the centrality of $N$ in $V$ chosen in step 2. The appended trivial subgroup is normal, smooth and connected. This proves the centrality clauses and completes the induction, including $Q=1$ (then $r=0$ and the chain is $V=N\\supseteq1$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.24, printed p.331, induction from Corollary 16.23; dimensions by Proposition 5.23, printed p.104."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-ga",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-homogeneous-quotient-krull-dimension",
+  "lem-sfb-unipotent-central-additive-subgroup",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-unipotent-normal-quotient-image",
+  "lem-sfb-unipotent-to-multiplicative-trivial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 16.24, printed p.331, induction from Corollary 16.23; dimensions by Proposition 5.23, printed p.104."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected unipotent algebraic group over a perfect field has a central normal series with additive group quotients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → (H : Subgroup G) ×' H.Normal\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"Group.IsNilpotent.nilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_2) [inst : Group G] [Group.IsNilpotent G], ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"For any nilpotent group $ G $, there exists a natural number $ n $ such that the $ n $-th term of the upper central series of $ G $ is equal to $ G $ itself.\"}\n  {\"name\": \"Group.IsNilpotent.nilpotent'\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_2} {inst : Group G} [self : Group.IsNilpotent G], ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"For any nilpotent group $ G $, there exists a natural number $ n $ such that the $ n $th term of the upper central series of $ G $ equals the entire group $ G $ itself.\"}\n  {\"name\": \"nilpotent_iff_finite_descending_central_series\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G], Group.IsNilpotent G ↔ ∃ n H, IsDescendingCentralSeries H ∧ H n = ⊥\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ and a descending central series $H : \\\\mathbb{N} \\\\to \\\\text{Subgroup}(G)$ such that $H(0) = G$, each subsequent term is generate\"}\n  {\"name\": \"nilpotent_iff_finite_ascending_central_series\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G], Group.IsNilpotent G ↔ ∃ n H, IsAscendingCentralSeries H ∧ H n = ⊤\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ and an ascending central series $H : \\\\mathbb{N} \\\\to \\\\text{Subgroup } G$ such that $H(n)$ equals the entire group $G$.\"}\n  {\"name\": \"Group.isNilpotent_iff\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_2) [inst : Group G], Group.IsNilpotent G ↔ ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ such that the $n$th term of its upper central series equals the entire group $G$.\"}\n  {\"name\": \"isSolvable_def\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ (G : Type u_1) [inst : Group G], IsSolvable G ↔ ∃ n, derivedSeries G n = ⊥\", \"doc\": \"A group $ G $ is solvable if and only if there exists a natural number $ n $ such that the $ n $-th term of its derived series $ \\\\mathrm{derivedSeries}(n) $ is the trivial subgroup $ \\\\bot $, where the\"}\n  {\"name\": \"Group.IsNilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_2) → [Group G] → Prop\", \"doc\": \"A proposition asserting that a group $G$ is nilpotent, meaning it has a central series terminating at the trivial subgroup after finitely many steps.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central series, module filtrations and Lie-group smoothness do not construct a series of algebraic subgroup schemes with additive quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Split unipotent group scheme filtration by copies of the additive group over a perfect field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsModuleFiltration.mk_int\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {R : Type u_3} {M : Type u_4} {σ : Type u_5} {σM : Type u_6} [inst : Semiring R] [inst_1 : SetLike σ R]\\n  [inst_2 : AddCommMonoid M] [inst_3 : Module R M] [inst_4 : SetLike σM M] (F : ℤ → σ) (mono : Monotone F)\\n  [inst_5 : SetLike.GradedMonoid F] (F' : ℤ → σM),\\n  Monotone F' → ∀ [SetLike.GradedSMu\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $ forming a graded monoid, and a monotone family $ F' : \\\\mathbb{Z} \\\\to \\\\sigma_M $ of subsets of an $ R $-module $ M $\"}\n  {\"name\": \"IsModuleFiltration\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [PartialOrder ιM] →\\n                  [VAdd ι ιM] →\\n                    [\", \"doc\": \"A predicate asserting that a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration, where $\\\\iota$ is an ordered additive monoid. This requires that ea\"}\n  {\"name\": \"IsRingFiltration.mk_int\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {R : Type u_2} {σ : Type u_3} [inst : Semiring R] [inst_1 : SetLike σ R] (F : ℤ → σ),\\n  Monotone F → ∀ [SetLike.GradedMonoid F], IsRingFiltration F fun n => F (n - 1)\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $, indexed by integers, that forms a graded monoid, the shifted family $ \\\\{F(n - 1)\\\\}_{n \\\\in \\\\mathbb{Z}} $ defines a \"}\n  {\"name\": \"IsModuleFiltration.toIsFiltration\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {ιM : Type u_2} (R : Type u_3) {M : Type u_4} {σ : Type u_5} {σM : Type u_6} {inst : AddMonoid ι}\\n  {inst_1 : PartialOrder ι} {inst_2 : PartialOrder ιM} {inst_3 : VAdd ι ιM} {inst_4 : Semiring R} {inst_5 : SetLike σ R}\\n  {inst_6 : AddCommMonoid M} {inst_7 : Module R M} {inst_8 : Set\", \"doc\": \"If a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration (i.e., each $F_i$ is a submodule, the filtration is increasing, and compatible with additio\"}\n  {\"name\": \"Ideal.Filtration.Stable.bounded_difference\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M},\\n  F.Stable → F'.Stable → F.N 0 = F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n ∧ F'.N (n + n₀) ≤ F.N n\", \"doc\": \"Given two stable filtrations $\\\\{I^n M\\\\}$ and $\\\\{I'^n M\\\\}$ of an $R$-module $M$ by powers of ideals $I$ and $I'$, if their initial submodules $I^0 M = I'^0 M$ coincide, then there exists an integer $n_\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable → ∃ n₀, ∀ (k : ℕ), F.N (n₀ + k) = I ^ k • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}_{n \\\\in \\\\mathbb{N}}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$, there exists an integer $n_0$ such that for all $k \\\\geq 0$, the equality $I^k \\\\bullet\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_forall_le\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M}, F.Stable → F.N 0 ≤ F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ and another filtration $\\\\{I'^n M\\\\}$ with $I^0 M \\\\subseteq I'^0 M$, there exists an integer $n_0$ such that for all $n \\\\geq 0$, the inclusion $I\"}\n  {\"name\": \"Ideal.Filtration.N\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {M : Type u_3} → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → I.Filtration M → ℕ → Submodule R M\", \"doc\": \"The function $ N $ maps each natural number $ n $ to the $ n $-th submodule $ I^n M $ in the filtration of the $ R $-module $ M $, where $ I $ is an ideal of the commutative ring $ R $. This defines a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central series, module filtrations and Lie-group smoothness do not construct a series of algebraic subgroup schemes with additive quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\", \"series\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central series, module filtrations and Lie-group smoothness do not construct a series of algebraic subgroup schemes with additive quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*(group.scheme|algebraic.group)|splitUnipotent|unipotent.*central.series|central.series.*unipotent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central series, module filtrations and Lie-group smoothness do not construct a series of algebraic subgroup schemes with additive quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth connected unipotent group over perfect field admits additive group composition series",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAddGroup.toContMDiffAdd\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {H : Type u_2} {inst_1 : TopologicalSpace H} {E : Type u_3}\\n  {inst_2 : NormedAddCommGroup E} {inst_3 : NormedSpace 𝕜 E} {I : ModelWithCorners 𝕜 E H} {n : WithTop ℕ∞}\\n  {G : Type u_4} {inst_4 : AddGroup G} {inst_5 : TopologicalSpace G} {inst_6 : Ch\", \"doc\": \"If $ G $ is a Lie additive group modeled on a space with corners $ H $, with smoothness order $ k $, then $ G $ satisfies the $ C^k $-smoothness condition relative to the model with corners structure.\"}\n  {\"name\": \"IsSolvable.mk\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G], (∃ n, derivedSeries G n = ⊥) → IsSolvable G\", \"doc\": \"If there exists a natural number $ n $ such that the $ n $-th term of the derived series of $ G $ is the trivial subgroup $ \\\\{e\\\\} $, then $ G $ is solvable.\"}\n  {\"name\": \"topologicalAddGroup_of_lieAddGroup\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] (I : ModelWithCorners 𝕜 E H) (n : WithTop ℕ∞)\\n  {G : Type u_4} [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_\", \"doc\": \"Let $\\\\mathbb{K}$ be a nontrivially normed field, $H$ a topological space, $E$ a normed vector space over $\\\\mathbb{K}$, and $I$ a model with corners on $E$ and $H$. For a topological space $G$ with a c\"}\n  {\"name\": \"CommGroup.isNilpotent\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"{G : Type*} [CommGroup G] : IsNilpotent G\", \"doc\": \"Every abelian group is nilpotent. A nilpotent group is one that has a central series terminating at the trivial subgroup after finitely many steps, and this instance asserts that the property holds fo\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"upperCentralSeries\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"(n : ℕ) : Subgroup G\", \"doc\": \"For a group $ G $, the $ n $th term of the upper central series is recursively defined by starting with the trivial subgroup and taking the centralizer of the previous term in $ G $. Each term forms a\"}\n  {\"name\": \"nilpotent_iff_finite_ascending_central_series\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \": IsNilpotent G ↔ ∃ n : ℕ, ∃ H : ℕ → Subgroup G, IsAscendingCentralSeries H ∧ H n = ⊤\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ and an ascending central series $H : \\\\mathbb{N} \\\\to \\\\text{Subgroup } G$ such that $H(n)$ equals the entire group $G$.\"}\n  {\"name\": \"ProfiniteAddGrp\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The category of profinite additive groups.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central series, module filtrations and Lie-group smoothness do not construct a series of algebraic subgroup schemes with additive quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*(group.scheme|central.series)|central.series.*unipotent",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abstract group central series, module filtrations, or perfect-field endomorphism decompositions, not subgroup schemes with represented additive quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split unipotent algebraic group over a perfect field has a filtration by closed normal subgroup schemes with additive quotients",
+   "results": "8 hits: Module.End.exists_isNilpotent_isSemisimple, GroupExtension.Splitting, Ideal.Filtration, AddGroupExtension.Splitting.instAddMonoidHomClass, AddGroupExtension.Splitting.ctorIdx, AddGroupExtension.Splitting.noConfusion, perfectField_iff_splits_of_natSepDegree_eq_one, AddGroupExtension.Splitting.noConfusionType",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abstract group central series, module filtrations, or perfect-field endomorphism decompositions, not subgroup schemes with represented additive quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\", \"series\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abstract group central series, module filtrations, or perfect-field endomorphism decompositions, not subgroup schemes with represented additive quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected unipotent affine group scheme over a perfect field has a central series with additive group quotients",
+   "results": "8 hits: Group.IsNilpotent.nilpotent, Group.IsNilpotent.nilpotent', nilpotent_iff_finite_descending_central_series, CommGroup.isNilpotent, Group.isNilpotent_iff, Group.IsNilpotent, nilpotent_iff_finite_ascending_central_series, nilpotent_iff_lowerCentralSeries",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give abstract group central series, module filtrations, or perfect-field endomorphism decompositions, not subgroup schemes with represented additive quotients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-solvable-torsors-and-variety",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Characteristic sequence of a Borel quotient. Supporting input: Zariski splitting of solvable torsors and the underlying solvable variety. Supporting lemma: Corollary 16.24, printed p.331, first assertion (central normal series with additive quotients); Corollary 16.23 and Corollary 16.22, printed p.331, supply its induction.",
+   "via": [
+    "lem-sfb-split-solvable-torsors-and-variety",
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-unipotent-additive-series",
+  "worker": "stage1",
+  "summary": "NU read Milne Corollaries 16.22--16.24, 14.7 and 14.55 and Propositions 5.23--5.29, 1.62 and 5.59. Kept the statement unchanged and gave the dimension induction, verification of the quotient hypotheses, inverse-image construction and functorial centrality argument. Reused existing nodes throughout; no new nodes and no attachments. All four required Mathlib search modes were run; hits concern abstract groups or modules rather than algebraic subgroup schemes.",
+  "blueprint": "Realizes the inherited supporting input Milne Corollary 16.24 on the alteration prerequisite chain in blueprint.from.place. The latest blueprint direct-images proof (3) gives the enclosing direct-image route; the item realizes only this existing supporting algebraic-group lemma. blueprint_refs ancestor returns None, matching the inherited null from.node; via and place are retained. Whole-blueprint searches for unipotent, central normal series and unipotent quotient found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-fixed-dimension-over-field",
+    "why": "Generic dimension calculation for the underlying affine line of Ga, used only to make the induction parameter decrease by one; this unit contains no alternate dimension calculation."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic topology of schemes (connected k-scheme with a k-point is geometrically connected), used in step 2 to give V the geometric connectedness hypothesis of lem-sfb-affine-normal-quotient-geometry; no node of this unit states it, and it is accepted as a tool in the unit (lem-sfb-affine-normal-quotient-geometry, lem-sfb-solvable-normal-subgroup-products)."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness of the affine line (Lean-closed in slopmaster2), used in step 1 only to compute dim Ga = 1; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-02f20efb3",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-02f20efb3 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Milne pp.331 (Cor 16.23 and 16.24). It is the item JSON plus the report, with no new nodes, and the statement is unchanged and agrees with 16.24. It is not superseded: the item is still unsplit in clones/live and clones/side-live. There is no cycle, and all 10 proof_deps exist and are unmerged. Steps 1-5 give a correct strong induction on dim V. Step 1: dim Ga=1 via the affine line and smooth-fixed-dimension, and homogeneous-quotient-krull-dimension with the trivial subgroup gives finite dimensions. Step 2: the central Ga comes from lem-sfb-unipotent-central-additive-subgroup, and the step correctly derives that node's p-th power perfectness from 'algebraic extensions are separable'; the identity point gives geometric connectedness, and affine-normal-quotient-geometry gives Q. Step 3: Q is unipotent by unipotent-normal-quotient-image over k-bar (A=V_kbar, its normal subgroup = A, D=I=Q_kbar, j=id), then the smooth geometric-matrix criterion and field-extension detection in lem-sfb-unipotent-to-multiplicative-trivial. Its dimension is dim V=1+dim Q, because (Q,q) satisfies the coset and fpqc-lift hypotheses of the homogeneous-quotient node. Step 4: the inverse-image clauses give P_i, P_r=N, P_i/P_{i+1}≅Q_i/Q_{i+1} and V/P_{i+1}≅Q/Q_{i+1}. Step 5 transfers centrality and is genuinely elementary. Edge cases checked: V=1, V=Ga, U_3, and the excluded alpha_p and imperfect cases. No duplicate exists in the DAG (unitriangular-coordinate-filtration, smooth-unipotent-solvable and perfect-solvable-unipotent-torus are all different statements). Batch-5 check: affine-normal-quotient-geometry reaches only def-trf-scheme-cover-descent-datum (a general descent-data definition), and unipotent-to-multiplicative-trivial reaches only lem-trf-flat-tensor-preserves-injection (a Mathlib leaf: flat tensor preserves injections). Both are generic and neither is the trace formula, Poincare duality or a step of their proofs, so both are accepted. FIX (C8): step 2 cites lem-sbc-connected-rational-point-geometrically-connected, which is off the unit's route (sk-prop-normal-form) and not Lean-closed, but it is not declared in tool_uses. The report wrongly says the only such citation is the dimension node. The fix file is the item with two tool_uses entries appended: that node (a generic tool already accepted in this unit) and sbc-lem-affine-space-smooth (Lean-closed). The declared tool use lem-sbc-smooth-fixed-dimension-over-field is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.PerfectUnipotentAdditiveSeries",
+  "declaration": "AlgebraicGeometry.perfect_unipotent_additive_series",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/PerfectUnipotentAdditiveSeries.lean",
+  "statement": "theorem perfect_unipotent_additive_series {k : Type u} [Field k] [PerfectField k] (U : Grp (Over (Spec (.of k)))) (haff : IsAffine U.X.left) (hft : LocallyOfFiniteType U.X.hom) (hqc : QuasiCompact U.X.hom) (hsm : Smooth U.X.hom) (hconn : ConnectedSpace U.X.left) (hunip : SolvableGroupStructure.IsUnipotent U) : ∃ (m : ℕ) (S : Fin (m + 1) → Grp (Over (Spec (.of k)))) (i : ∀ j : Fin (m + 1), S j ⟶ U), (∀ j : Fin (m + 1), IsClosedSubgroupScheme (i j).hom.hom ∧ IsNormalSubgroupScheme (i j).hom.hom ∧ Smooth (S j).X.hom ∧ ConnectedSpace (S j).X.left) ∧ IsIso (i 0) ∧ Nonempty (S (Fin.last m) ≅ Grp.trivial _) ∧ (Nonempty (U ≅ Grp.trivial _) → m = 0) ∧ ∀ j : Fin m, ∃ (a : S j.succ ⟶ S j.castSucc) (q : S j.castSucc ⟶ Grp.mk (StandardGroupSchemes.additive k)) (Q : Grp (Over (Spec (.of k)))) (p : U ⟶ Q) (b : Grp.mk (StandardGroupSchemes.additive k) ⟶ Q), a ≫ i j.castSucc = i j.succ ∧ IsFppfGroupQuotient a q ∧ IsFppfGroupQuotient (i j.succ) p ∧ q ≫ b = i j.castSucc ≫ p ∧ ∀ (T : Over (Spec (.of k))) (x : T ⟶ StandardGroupSchemes.additive k) (y : T ⟶ Q.X), (x ≫ b.hom.hom) * y = y * (x ≫ b.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b26c2f05",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Read the node, the 11 stmt_dep records, the Milne Cor 16.22-16.24 text (p.331), the delivered module, the report, and the exact declarations IsUnipotent, IsFppfGroupQuotient, IsClosed/IsNormalSubgroupScheme, StandardGroupSchemes.additive and Grp.trivial. Clause by clause: perfect field via PerfectField; affine, finite type, smooth and connected as explicit hypotheses; geometric matrix unipotence = the def node's notion. Series: IsIso (i 0), last term ≅ trivial, all terms closed, normal in U, smooth and connected, inclusions as factorizations a ≫ i = i'. Successive fppf quotient onto the standard Ga; ambient fppf quotient U/U_{j+1} with the induced b pinned by q ≫ b = i ≫ p; centrality on all T over k and against all sections of Q. The trivial-group m=0 clause is true. Edge cases U=1, Ga, U_3, alpha_p and imperfect fields checked; single universe u. lean.statement verbatim; only lean and two landed definition-node stmt_deps added; no hollow definitions, only sorry; source and blueprint docstrings and the 5-step plan present; report has Worker report and Second reading by Q53; no parallel copy in side-live. No file changed and no compile run; the worker's clean compile and dry run are reported. No findings."
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "lem-sfb-monoidal-equivalence-inverse-structure",
+ "kind": "statement",
+ "title": "Strong monoidal structure on the inverse of an adjoint equivalence",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories [def-sfb-monoidal-category]. Let $F:\\mathcal C\\to\\mathcal D$, $G:\\mathcal D\\to\\mathcal C$ form an adjoint equivalence, with natural isomorphisms $\\eta:\\mathrm{id}_{\\mathcal C}\\cong GF$ and $\\epsilon:FG\\cong\\mathrm{id}_{\\mathcal D}$ satisfying the two triangle identities. Suppose $F$ has a specified strong monoidal structure [def-sfb-strong-monoidal-functor], with $e_F:\\mathbf1_{\\mathcal D}\\cong F\\mathbf1_{\\mathcal C}$ and $c^F_{X,Y}:F(X\\otimes Y)\\cong FX\\otimes FY$. There is a strong monoidal structure on $G$, with maps $e_G:\\mathbf1_{\\mathcal C}\\cong G\\mathbf1_{\\mathcal D}$ and $\\mu^G_{U,V}:GU\\otimes GV\\cong G(U\\otimes V)$, satisfying\n$$G(e_F^{-1})\\circ\\eta_{\\mathbf1_{\\mathcal C}}=e_G,$$\n$$G(c^F_{X,Y})\\circ\\eta_{X\\otimes Y}=\\mu^G_{FX,FY}\\circ(\\eta_X\\otimes\\eta_Y),$$\n$$\\epsilon_{\\mathbf1_{\\mathcal D}}\\circ F(e_G)=e_F^{-1},$$\n$$\\epsilon_{U\\otimes V}\\circ F(\\mu^G_{U,V})=(\\epsilon_U\\otimes\\epsilon_V)\\circ c^F_{GU,GV}.$$\nHere equations denote forward morphisms, and composition is right to left.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0FFL, definition-functor-monoidal-categories, for the notion; the inverse construction and four compatibilities are Mathlib CategoryTheory/Monoidal/Functor.lean:1163-1205."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quasi inverse of a strong monoidal equivalence has a unique strong monoidal structure with monoidal unit and counit natural isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:56:30Z\", \"tool\": \"leanfinder\", \"query\": \"The quasi inverse of a strong monoidal equivalence has a unique strong monoidal structure with monoidal unit and counit natural isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.inverseMonoidal\", \"CategoryTheory.Equivalence.isMonoidal_symm\", \"CategoryTheory.Equivalence.instMonoidalInverseSymmOfFunctor\", \"CategoryTheory.Equivalence.instMonoidalFunctorSymmOfInverse\", \"CategoryTheory.Equivalence.instMonoidalInverseTrans\", \"CategoryTheory.Equivalence.mapMon_inverse\", \"CategoryTheory.Equivalence.instMonoidalInverseRefl\", \"CategoryTheory.Equivalence.IsMonoidal\"], \"digest\": \"aecf58ce823ea046\"}",
+   "date": "2026-10-22",
+   "verdict": "match: Equivalence.inverseMonoidal constructs G; the four Equivalence unit/counit equations at lines 1185, 1190, 1196, 1201 state the displayed identities. No uniqueness claim is made."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Equivalence\", \"monoidal\"",
+   "results": "{\"t\": \"2026-10-22T06:56:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Equivalence\\\", \\\"monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.instMonoidalFunctorRefl\", \"CategoryTheory.Equivalence.instMonoidalInverseRefl\", \"CategoryTheory.Equivalence.isMonoidal_refl\", \"CategoryTheory.Equivalence.inverseMonoidal\", \"CategoryTheory.Equivalence.IsMonoidal\", \"CategoryTheory.Equivalence.instMonoidalFunctorSymmOfInverse\", \"CategoryTheory.Equivalence.instMonoidalInverseSymmOfFunctor\", \"CategoryTheory.Equivalence.instMonoidalFunctorTrans\"], \"digest\": \"b02a3e26d4dd1ac4\"}",
+   "date": "2026-10-22",
+   "verdict": "match: Equivalence.inverseMonoidal constructs G; the four Equivalence unit/counit equations at lines 1185, 1190, 1196, 1201 state the displayed identities. No uniqueness claim is made."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi inverse of a monoidal equivalence is monoidal and the unit and counit are monoidal transformations",
+   "results": "{\"t\": \"2026-10-22T06:56:20Z\", \"tool\": \"leansearch\", \"query\": \"Quasi inverse of a monoidal equivalence is monoidal and the unit and counit are monoidal transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.isMonoidal_symm\", \"CategoryTheory.Equivalence.instMonoidalInverseSymmOfFunctor\", \"CategoryTheory.Equivalence.instMonoidalFunctorSymmOfInverse\", \"CategoryTheory.instMonoidalFunctorInverseCongrLeft\", \"CategoryTheory.Equivalence.inverseMonoidal\", \"CategoryTheory.Iso.instIsMonoidalInvFunctor\", \"CategoryTheory.Equivalence.mapMon_inverse\", \"CategoryTheory.Monoidal.instMonoidalTransportedFunctorEquivalenceTransported\"], \"digest\": \"c0426cb2e43cd072\"}",
+   "date": "2026-10-22",
+   "verdict": "match: Equivalence.inverseMonoidal constructs G; the four Equivalence unit/counit equations at lines 1185, 1190, 1196, 1201 state the displayed identities. No uniqueness claim is made."
+  },
+  {
+   "tool": "grep",
+   "query": "(noncomputable def inverseMonoidal|lemma unitIso_hom_app_tensor_comp_inverse_map_δ_functor|lemma functor_map_μ_inverse_comp_counitIso_hom_app_tensor|lemma unitIso_hom_app_comp_inverse_map_η_functor|lemma functor_map_ε_inverse_comp_counitIso_hom_app)",
+   "results": "{\"t\": \"2026-10-22T06:58:28Z\", \"tool\": \"grep\", \"query\": \"(noncomputable def inverseMonoidal|lemma unitIso_hom_app_tensor_comp_inverse_map_δ_functor|lemma functor_map_μ_inverse_comp_counitIso_hom_app_tensor|lemma unitIso_hom_app_comp_inverse_map_η_functor|lemma functor_map_ε_inverse_comp_counitIso_hom_app)\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"a6b87abba53e8260\"}",
+   "date": "2026-10-22",
+   "verdict": "match: Equivalence.inverseMonoidal constructs G; the four Equivalence unit/counit equations at lines 1185, 1190, 1196, 1201 state the displayed identities. No uniqueness claim is made."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Equivalence.inverseMonoidal",
+  "file": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "how": "exact construction at line 1163, for the adjoint equivalence (F,G,eta,epsilon). With that structure the inferred Adjunction.IsMonoidal gives the four clauses by CategoryTheory.Equivalence.unitIso_hom_app_comp_inverse_map_η_functor (line 1185), unitIso_hom_app_tensor_comp_inverse_map_δ_functor (1190), functor_map_ε_inverse_comp_counitIso_hom_app (1196), and functor_map_μ_inverse_comp_counitIso_hom_app_tensor (1201), all in the same file. cF is δ F and eF is ε F.",
+  "line": 1163
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Fourth blueprint proof paragraph: restriction of the adjunction; auxiliary inverse coefficient equivalence needed for the signed-total comparison in the constant-scalar comparison, steps 4-6.",
+   "via": [
+    "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

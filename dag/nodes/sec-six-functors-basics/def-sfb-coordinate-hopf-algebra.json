@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-coordinate-hopf-algebra",
+ "kind": "definition",
+ "title": "Canonical coordinate Hopf algebra over an unbundled field",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field] and let $H$ be an affine $k$-group scheme [def-sc-group-scheme]. Put $C=k[H]=\\Gamma(H,\\mathcal O_H)$, with $H\\simeq\\operatorname{Spec}C$ [def-weil-affine-spectrum]. Define the canonical coordinate $k$-Hopf algebra structure on $C$ to be the one obtained by transporting the given group structure through the affine spectrum/global-sections equivalence: its comultiplication, counit and antipode are the pullbacks of multiplication, identity and inverse, respectively. The scalar structure is the pullback of the given structure morphism $H\\to\\operatorname{Spec}k$. The coordinate-Hopf instance exposes the unbundled field $k$ as scalar type; it is the specialization of the canonical bundled-base-ring coordinate Hopf structure at $R=\\operatorname{CommRingCat.of}(k)$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 022S, definition-group-scheme and its identity/inverse discussion, translated through affine spectrum; Mathlib AlgebraicGeometry/Group/Affine.lean:337-343 and the unchanged field interface HopfAction.coordinateHopfAlgebra in Sheaf/AlgebraicGeometry/HopfCoactionLinearization.lean:35-38."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical Hopf algebra of global sections of an affine group scheme over a field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Γ\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": AffineSchemeᵒᵖ ⥤ CommRingCat\", \"doc\": \"The contravariant functor that maps each affine scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the comp\"}\n  {\"name\": \"HopfAlgebra\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [CommSemiring R] → [Semiring A] → Type (max u v)\", \"doc\": \"An inductive structure defining a Hopf algebra over a commutative semiring $ R $ and a semiring $ A $, encapsulating the algebraic and coalgebraic operations along with the antipode map required for t\"}\n  {\"name\": \"HopfAlgCat\", \"module\": \"Mathlib.Algebra.Category.HopfAlgCat.Basic\", \"type\": \"(R : Type u) → [CommRing R] → Type (max u (v + 1))\", \"doc\": \"The category of Hopf algebras over a commutative ring $R$, with morphisms given by Hopf algebra homomorphisms.\"}\n  {\"name\": \"HopfAlgebraStruct.mk\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] → [toBialgebra : Bialgebra R A] → (A →ₗ[R] A) → HopfAlgebraStruct R A\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $, a bialgebra structure on $ A $ over $ R $, and a linear map $ S: A \\\\to A $ over $ R $, this constructs the Hopf algebra structure on $ A $ over $ \"}\n  {\"name\": \"HopfAlgCat.carrier\", \"module\": \"Mathlib.Algebra.Category.HopfAlgCat.Basic\", \"type\": \"{R : Type u} → [inst : CommRing R] → HopfAlgCat R → Type v\", \"doc\": \"Given a commutative ring $R$ and a Hopf algebra in the category $\\\\text{HopfAlgCat}_R$, this function returns the underlying type of the Hopf algebra.\"}\n  {\"name\": \"HopfAlgCat.category\", \"module\": \"Mathlib.Algebra.Category.HopfAlgCat.Basic\", \"type\": \": Category (HopfAlgCat.{v} R)\", \"doc\": \"For any commutative ring $R$, the category $\\\\text{HopfAlgCat}_R$ has Hopf algebras over $R$ as objects and Hopf algebra homomorphisms as morphisms. Composition of morphisms is defined via composition \"}\n  {\"name\": \"HopfAlgebra.mk\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [toHopfAlgebraStruct : HopfAlgebraStruct R A] →\\n          LinearMap.mul' R A ∘ₗ LinearMap.rTensor A (HopfAlgebraStruct.antipode R) ∘ₗ CoalgebraStruct.comul =\\n              Algebra.linearMap R A ∘ₗ Coa\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $, and a Hopf algebra structure on $ A $ over $ R $, this constructor verifies the Hopf algebra axioms by asserting that the compositions involving t\"}\n  {\"name\": \"HopfAlgebraStruct\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [CommSemiring R] → [Semiring A] → Type (max u v)\", \"doc\": \"The inductive structure defining a Hopf algebra over a commutative semiring $ R $, with $ A $ as a semiring, encompassing the necessary operations and axioms for a Hopf algebra.\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing canonical affine coordinate Hopf structure found in Mathlib Group/Affine.lean:337-343; reuse the unchanged HopfAction.coordinateHopfAlgebra interface in Sheaf.AlgebraicGeometry.HopfCoactionLinearization, rather than defining it again."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"HopfAlgebra\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" (R : Type u) (A : Type v) [CommSemiring R] [Semiring A] : Type (max u v)\", \"doc\": \"A Hopf algebra over a commutative (semi)ring `R` is a bialgebra over `R` equipped with an\\n`R`-linear endomorphism `antipode` satisfying the antipode axioms.\"}\n  {\"name\": \"HopfAlgebraStruct\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" (R : Type u) (A : Type v) [CommSemiring R] [Semiring A] : Type (max u v)\", \"doc\": \"Isolates the antipode of a Hopf algebra, to allow API to be constructed before proving the\\nHopf algebra axioms. See `HopfAlgebra` for documentation.\"}\n  {\"name\": \"CommSemiring.toHopfAlgebra\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" (R : Type u) [CommSemiring R] : HopfAlgebra R R\", \"doc\": \"Every commutative (semi)ring is a Hopf algebra over itself\"}\n  {\"name\": \"HopfAlgebra.toHopfAlgebraStruct\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" {R : Type u} {A : Type v} {inst✝ : CommSemiring R} {inst✝¹ : Semiring A} [self : HopfAlgebra R A] : HopfAlgebraStruct R A\", \"doc\": \"\"}\n  {\"name\": \"HopfAlgebraStruct.toBialgebra\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" {R : Type u} {A : Type v} {inst✝ : CommSemiring R} {inst✝¹ : Semiring A} [self : HopfAlgebraStruct R A] : Bialgebra R A\", \"doc\": \"\"}\n  {\"name\": \"HopfAlgebraStruct.mk\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommSemiring R] [Semiring A] [toBialgebra : Bialgebra R A] (antipode : A →ₗ[R] A) : HopfAlgebraStruct R A\", \"doc\": \"\"}\n  {\"name\": \"HopfAlgebraStruct.antipode\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" (R : Type u) {A : Type v} {inst✝ : CommSemiring R} {inst✝¹ : Semiring A} [self : HopfAlgebraStruct R A] : A →ₗ[R] A\", \"doc\": \"The antipode of the Hopf algebra.\"}\n  {\"name\": \"HopfAlgebra.antipode_one\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommSemiring R] [Semiring A] [HopfAlgebra R A] : (HopfAlgebraStruct.antipode R) 1 = 1\", \"doc\": \"\"}\n  {\"name\": \"HopfAlgebra.counit_comp_antipode\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommSemiring R] [Semiring A] [HopfAlgebra R A] : CoalgebraStruct.counit ∘ₗ HopfAlgebraStruct.antipode R = CoalgebraStruct.counit\", \"doc\": \"\"}\n  {\"name\": \"HopfAlgebra.counit_antipode\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommSemiring R] [Semiring A] [HopfAlgebra R A] (a : A) : CoalgebraStruct.counit ((HopfAlgebraStruct.antipode R) a) = CoalgebraStruct.counit a\", \"doc\": \"\"}\n  {\"name\": \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" {R : Type u} {A : Type v} {ι : Type u_1} [CommSemiring R] [Semiring A] [HopfAlgebra R A] {a : A} (repr : Coalgebra.Repr R a ι) : ∑ i ∈ repr.index, (HopfAlgebraStruct.antipode R) (repr.left i) * repr.right i = CoalgebraStruct.counit a • 1\", \"doc\": \"\"}\n  {\"name\": \"HopfAlgebra.sum_mul_antipode_eq_smul\", \"module\": \"Mathlib.RingTheory.HopfAlgebra.Basic\", \"type\": \" {R : Type u} {A : Type v} {ι : Type u_1} [CommSemiring R] [Semiring A] [HopfAlgebra R A] {a : A} (repr : Coalgebra.Repr R a ι) : ∑ i ∈ repr.index, repr.left i * (HopfAlgebraStruct.antipode R) (repr.right i) = CoalgebraStruct.counit a • 1\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing canonical affine coordinate Hopf structure found in Mathlib Group/Affine.lean:337-343; reuse the unchanged HopfAction.coordinateHopfAlgebra interface in Sheaf.AlgebraicGeometry.HopfCoactionLinearization, rather than defining it again."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateHopfAlgebra|affineCoordinateHopfAlgebra|HopfAlgebra AlgebraicGeometry/Group",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"256\", \"text\": \"instance instGrpObjSpecAsOverSpec [HopfAlgebra R A] : GrpObj ((Spec A).asOver (Spec R)) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"260\", \"text\": \"instance instCommGrpObjSpecAsOverSpec [HopfAlgebra R A] [IsCocomm R A] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"338\", \"text\": \"    HopfAlgebra R Γ(G, ⊤) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"343\", \"text\": \"    .op <| .mk <| .op <| .of R Γ(G, ⊤)).hopfAlgebra\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing canonical affine coordinate Hopf structure found in Mathlib Group/Affine.lean:337-343; reuse the unchanged HopfAction.coordinateHopfAlgebra interface in Sheaf.AlgebraicGeometry.HopfCoactionLinearization, rather than defining it again."
+  },
+  {
+   "tool": "grep",
+   "query": "rg coordinateHopfAlgebra|affineCoordinateHopfAlgebra in lean/WeilConjectures, lean/Sheaf and dag/nodes; tools/blueprint_refs.py search coordinate Hopf",
+   "results": "No WeilConjectures hit. Sheaf/AlgebraicGeometry/HopfCoactionLinearization.lean:29,35,38 contains the canonical bundled helper and unbundled-field instance. DAG declaration-name hits only in lem-sfb-hopf-coaction-linearization.json:304-305, a theorem node; lem-sfb-affine-group-coordinate-hopf is also a theorem node and matches the general bundled Mathlib structure, not a definition node owning this field instance. No definition node owns this scalar-inference interface. blueprint_refs.py: 0 blueprint nodes match coordinate Hopf.",
+   "date": "2026-10-24",
+   "verdict": "Create only a definition-node attachment to the existing instance, as explicitly required by the immutable-head return; no Lean declaration is duplicated."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-group-frobenius-verschiebung",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Definition 11.39 and Proposition 11.40(a), printed pp.224-225: canonical Verschiebung construction and the identity V composed with F equals multiplication by p. Coordinate Hopf structure used to state the Frobenius/Verschiebung construction.",
+   "via": [
+    "lem-sfb-affine-group-frobenius-verschiebung",
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HopfCoactionLinearization",
+  "declaration": "HopfAction.coordinateHopfAlgebra",
+  "statement": "instance coordinateHopfAlgebra (k : Type u) [Field k] (H : Scheme.{u})\n    [H.Over (Spec (.of k))] [GrpObj (H.asOver (Spec (.of k)))] [IsAffine H] :\n    HopfAlgebra k Γ(H, ⊤)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-node ownership of the unchanged real-data field instance, as requested in the return of immutable head 96741b6f8055. Its body calls affineCoordinateHopfAlgebra (.of k) H, whose body is inferInstance for Mathlib’s canonical affine-group coordinate Hopf structure. No coaction-linearization theorem conclusion is used and no duplicate declaration or instance is introduced."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb1ea8d02",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb1ea8d02",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 96741b6f8055. The item module is byte-identical to the previous head (sha256 bcd22c8c), whose mathematics was reviewed in full and is correct (twist pushout, orbit basis, λ projection, iterated comultiplication, pinned D/E/S/GrpObj, F≫V=𝟙^p). The H2 fault is repaired as prescribed: lem-sfb-hopf-coaction-linearization is removed from stmt_deps and replaced by the new definition node def-sfb-coordinate-hopf-algebra. That node's existing:true record on the unchanged module Sheaf.AlgebraicGeometry.HopfCoactionLinearization, declaration HopfAction.coordinateHopfAlgebra, has a statement verbatim with live lines 35-38; its body is Mathlib's canonical instance (inferInstance), so it is neither hollow nor a duplicate. Against the live item only lean and stmt_deps differ. There is no supersession and no collision with lem-sfb-symmetric-invariant-frobenius-projection (no Lean record yet). The report has Worker report and Second reading by NY sections. No compile was run because no file changed. Advisories: the landed docstrings of the instance still name lem-sfb-hopf-coaction-linearization as their blueprint node; the future symmetric-invariant projection node should reuse twist, invariants and orbitSum."
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-adic-perfect-models-completeness",
+ "kind": "statement",
+ "title": "Completeness from stratified perfect models",
+ "statement": "Let X be a Noetherian scheme [def-pc-scheme], A a commutative Noetherian ring [def-weil-pbc-noetherian-ring] that is adically complete for an ideal I [def-weil-pbc-adically-complete-ring], with I the unique maximal ideal, and let K be a completed-coefficient derived object satisfying IsSfbStratifiedPerfect [def-sfb-adic-stratified-perfect-data]. Then K is IsSfbAdicComplete.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, reverse implication: the completeness sentence, using Lemma 6.5.8"
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-constructible-stratification",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 reverse implication and Lemma 6.5.8; A9: compiled combination of the existing completed-model calculation with separate presentation comparison and stratum gluing steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded perfect local models on a finite stratification give complete adic complexes and bounded constructible residue cohomology",
+   "results": "Generic IsAdicComplete and AdicCompletion declarations only; no project-specific sheaf theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stratified perfect complexes on a pro-etale site are derived complete bounded and have constructible etale residue",
+   "results": "Eight results were checked; all were generic algebraic or site-theoretic declarations.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZero\", \"homology\", \"mapHomologicalComplex\"",
+   "results": "No matching declaration for the required sheaf-valued statement.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSfbStratifiedPerfect|adicPerfectModels|IsSfbAdicComplete",
+   "results": "No existing component theorem in Mathlib or the Sheaf modules beyond the source declarations used by the split.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectModelsResidueOrigin",
+  "date": "2026-10-25",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proposition 6.6.11, reverse implication: the completeness sentence, using Lemma 6.5.8",
+   "via": [
+    "lem-sfb-adic-perfect-models-residue-origin",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectModelsCompleteness",
+  "file": "lean/Sheaf/Paper/AdicPerfectModelsCompleteness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectModels_completeness",
+  "statement": "theorem adicPerfectModels_completeness (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)\n    [IsAdicComplete I A]\n    (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)))\n    (hK : IsSfbStratifiedPerfect X I K) :\n    IsSfbAdicComplete X I K",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-25"
+ },
+ "proof": [
+  {
+   "text": "Unpack IsSfbStratifiedPerfect to obtain the fixed finite stratification, covering sieves, and completed finite-projective models. For each P, its strict lower and upper bounds give the degreewise IsZero hypotheses of [lem-sfb-adic-perfect-model-complete-reduction]; swap the recorded projective/finite pair into the order required there. Take the completeness conjunct of HasCompleteResidueCalculation.",
+   "uses": [
+    "def-sfb-adic-stratified-perfect-data",
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the reverse direction of [lem-sfb-perfect-model-completion-transport] to obtain IsSfbAdicComplete for each global sfbCompletedModel. The original stratified-perfect witness supplies the local isomorphism between K and this complete object on its specified stratum and covering arrow.",
+   "uses": [
+    "lem-sfb-perfect-model-completion-transport",
+    "def-sfb-adic-stratified-perfect-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-sfb-adic-complete-stratum-gluing] on these complete comparison objects and the original local isomorphisms. This concludes IsSfbAdicComplete X I K without changing its statement.",
+   "uses": [
+    "lem-sfb-adic-complete-stratum-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-sfb-perfect-model-completion-transport",
+  "lem-sfb-adic-complete-stratum-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261025T143828-L-1089275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T161903-L-138015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-split-charzero-weyl-character-identity",
+ "kind": "statement",
+ "title": "Weyl alternant identity for split characteristic-zero group representations",
+ "statement": "Let $G$ be a smooth connected affine semisimple simply connected group scheme over $\\mathbf Q$ [def-sc-group-scheme]. Semisimple means that after algebraic closure there is no nontrivial smooth connected solvable normal subgroup; solvable means that iterated commutator subgroups vanish. Simply connected means that every surjective homomorphism from a connected semisimple group with finite central kernel is an isomorphism. Let $T\\subseteq G$ be a split maximal torus, isomorphic to a finite product of $\\mathbf G_m$ and maximal after algebraic closure. Write $X=\\operatorname{Hom}(T,\\mathbf G_m)$ and $Y=\\operatorname{Hom}(\\mathbf G_m,T)$ for the finite-rank free character and cocharacter lattices, paired perfectly by $\\chi\\circ\\eta:t\\mapsto t^{\\langle\\chi,\\eta\\rangle}$. Let $\\Phi\\subset X$ and $\\alpha^\\vee\\in Y$ be the roots and coroots of $(G,T)$: the roots are the nonzero $T$-weights of the adjoint action on the identity tangent Lie algebra, and a coroot is normalized by the opposite root subgroups, with $\\langle\\alpha,\\alpha^\\vee\\rangle=2$. Suppose they form a spanning finite reduced crystallographic root datum: the root and dual reflections permute the root-coroot pairs, proportional roots differ only by sign, and their reflection group $W$ is finite. Fix a simple-root base $\\Delta$ and its positive roots $\\Phi^+$, so the simple roots are linearly independent and every root has integer simple coordinates all nonnegative or all nonpositive. Put $\\rho=\\tfrac12\\sum_{\\alpha\\in\\Phi^+}\\alpha$ in $X\\otimes\\mathbf Q$.\n\nLet $V$ be a nonzero finite-dimensional simple algebraic-group representation [def-wf-algebraic-representations]: its only subspaces invariant after every scalar extension are $0,V$. Suppose $\\lambda\\in X$ is dominant, $\\langle\\lambda,\\delta^\\vee\\rangle\\ge0$ for $\\delta\\in\\Delta$, and that there is $v\\ne0$ on which $T$ acts by $\\lambda$ and every positive-root Lie subspace acts by zero in the differentiated representation. Lie algebras and differentiation here mean the identity tangent spaces, or infinitesimal points over $\\mathbf Q[\\varepsilon]/(\\varepsilon^2)$; the action is a Lie representation [def-wf-lie-algebra]. For $\\chi\\in X$ let $V_\\chi$ be its $T$-weight space. Then $V=\\bigoplus_{\\chi\\in X}V_\\chi$ with only finitely many nonzero summands, $\\rho\\in X$, and in the group algebra $\\mathbf Q[X]$, with $e^\\xi e^\\eta=e^{\\xi+\\eta}$, one has\n$$q\\,A(\\rho)=A(\\lambda+\\rho),\\qquad q=\\sum_{\\chi\\in X}(\\dim_{\\mathbf Q}V_\\chi)e^\\chi,\\qquad A(\\nu)=\\sum_{w\\in W}\\det(w)e^{w\\nu}.$$\nHere the determinant is on $X\\otimes\\mathbf Q$. This is a polynomial identity and does not mean evaluation of a fraction with zero denominator. It includes reducible and empty root systems.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence)."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-wf-algebraic-representations",
+  "def-wf-lie-algebra",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sfb-rank-one-root-interfaces",
+  "def-sfb-rho-section-module-data",
+  "def-sfb-linearly-reductive-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Restrict $V$ to the specified split torus. By [lem-sfb-split-torus-representation-weight-decomposition], $V=\\bigoplus_\\chi V_\\chi$ with finite support. Choose an algebraic closure $F$ by [def-weil-algebraic-closure]. Apply [lem-sfb-split-semisimple-geometric-root-comparison] to obtain $S=G_F$, $T_F$, the same lattices, root datum and chosen positive system, and a Borel $B$ with $U=R_u(B)$. By [lem-sfb-split-simple-absolute-irreducibility], $V_F=F\\otimes_{\\mathbf Q}V$ is simple. The tensor products of bases of the $V_\\chi$ form a basis of $V_F$, on which $T_F$ has the same diagonal characters. Thus $(V_F)_\\chi=F\\otimes V_\\chi$ and $\\dim_F(V_F)_\\chi=\\dim_{\\mathbf Q}V_\\chi$: comparing coordinates in that basis proves equality, since distinct characters remain distinct under the cited lattice bijection. In particular its formal character is the same integer sum $q$. Differentiating the scalar-extended action over dual numbers extends its matrices linearly from $\\mathbf Q$ to $F$; the cited root-space tangent comparison therefore shows that $v_F=1\\otimes v\\ne0$ is still killed by all positive-root Lie spaces and has weight $\\lambda$.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition",
+    "lem-sfb-split-semisimple-geometric-root-comparison",
+    "lem-sfb-split-simple-absolute-irreducibility",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22a, printed p.463; 22.4, printed p.464; the scalar comparison is by the displayed weight basis and tangent functor."
+   }
+  },
+  {
+   "text": "The group $S$ is semisimple and hence reductive by [lem-sfb-reductive-borel-pair-structure]. By [lem-sfb-rho-section-modules], the half sum of the positive roots belongs to $X^*(T_F)$. The lattice bijection of step 1 identifies its rational half sum with the original $\\rho$, hence $\\rho\\in X$. By [lem-sfb-weyl-reflection-realization], the geometric normalizer Weyl group is exactly the reflection group $W$ in the item. By [lem-sfb-rho-regular-weyl-orbit] it has $w_0^2=1$, $w_0\\Phi^+=-\\Phi^+$ and $w_0\\rho=-\\rho$. The direct sum for $\\operatorname{Lie}(U)$ in step 1 kills $v_F$. Apply [lem-sfb-char-zero-differentiation-hom] to the smooth connected affine group $U$ and the linear map $F\\to V_F$, $1\\mapsto v_F$, with trivial source action. Its Lie-equivariance is exactly this vanishing, so the map is $U$-equivariant. Thus $U$ fixes $v_F$ after every algebra extension; since $T_F$ acts by $\\lambda$ and $B=U\\rtimes T_F$, it spans a $B$-eigenline of character $\\lambda$. The unique $U$-fixed line in [lem-sfb-simple-module-dual-highest-weight] now identifies the highest weight of $V_F$ as precisely $\\lambda$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-weyl-reflection-realization",
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-char-zero-differentiation-hom",
+    "lem-sfb-simple-module-dual-highest-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.18--22.19, printed pp.467--468; 10.31, printed p.196; actual rho character before 22.50, printed p.480; 22.53, printed p.481."
+   }
+  },
+  {
+   "text": "Put $\\mu=-w_0\\lambda$. By [lem-sfb-simple-module-dual-highest-weight], $V_F^\\vee$ is simple and has a nonzero $U$-fixed $T_F$-eigenvector $\\ell$ of weight $\\mu$. Since $B=U\\rtimes T_F$, it is a $B$-eigenvector, and simplicity says it generates $V_F^\\vee$. Apply [lem-sfb-primitive-cyclic-weight-bound]: every weight $\\eta$ in the dual satisfies $\\mu-\\eta\\in\\mathbf Z_{\\ge0}\\Delta$. For a simple root $\\delta$, choose a normalizer representative $n$ of $s_\\delta$ using the reflection realization in step 2. The vector $n\\ell\\ne0$ has weight $s_\\delta\\mu$, since $t(n\\ell)=n(n^{-1}tn)\\ell=(s_\\delta\\mu)(t)n\\ell$ on every algebra. Consequently $\\mu-s_\\delta\\mu=\\langle\\mu,\\delta^\\vee\\rangle\\delta$ has nonnegative simple-root coordinates. Linear independence of $\\Delta$ gives $\\langle\\mu,\\delta^\\vee\\rangle\\ge0$. Thus $\\mu$ is dominant. Extend it to $B$ via the projection to $T_F$.",
+   "uses": [
+    "lem-sfb-simple-module-dual-highest-weight",
+    "lem-sfb-primitive-cyclic-weight-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Contragredient highest weight after 22.31, printed p.471; dominance argument of Proposition 22.17 using normalizer transport 22.15, printed pp.466--467."
+   }
+  },
+  {
+   "text": "Write $M_\\mu=\\mathcal L_{-\\widetilde\\mu}$ on $Q=S/B$. By [lem-sfb-homogeneous-line-bundle-sections], its sections are $E(-\\mu)=\\{f\\in F[S]:f(gb)=\\mu(b)f(g)\\}$, with left translation. Define $j:V_F\\to E(-\\mu)$ by $j(x)(g)=\\ell(g^{-1}x)$. These are regular matrix coefficients, since the representation and inversion are morphisms. The dual eigenvector identity $b\\ell=\\mu(b)\\ell$ means $\\ell(b^{-1}y)=\\mu(b)\\ell(y)$, so $j(x)(gb)=\\mu(b)j(x)(g)$. Also $j(sx)(g)=j(x)(s^{-1}g)$, proving equivariance after every algebra extension. Some $x$ has $\\ell(x)\\ne0$, so evaluation at $1$ shows $j\\ne0$. Its kernel is invariant, hence simplicity makes $j$ injective. By [lem-sfb-flag-line-euler-alternant], $H^0(Q,M_\\mu)$ is finite dimensional. The homogeneous-section identification supplies its rational $S$-action. By [lem-sfb-characteristic-zero-complete-reducibility], it is a finite sum of simple modules. Each nonzero simple summand contributes a nonzero $U$-fixed line by [lem-sfb-simple-module-dual-highest-weight]. But [lem-sfb-induced-module-primitive-line] says that the entire nonzero $E(-\\mu)$ has a one-dimensional $U$-fixed space. There is therefore exactly one simple summand. The nonzero equivariant injection $j$ is consequently an isomorphism $V_F\\simeq H^0(Q,M_\\mu)$.",
+   "uses": [
+    "lem-sfb-homogeneous-line-bundle-sections",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-simple-module-dual-highest-weight",
+    "lem-sfb-induced-module-primitive-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.21--22.22, printed pp.468--469; 22.41, printed p.477; 22.48 and the characteristic-zero paragraph following it, printed p.479. Matrix-coefficient realization written explicitly."
+   }
+  },
+  {
+   "text": "For $\\eta\\in X$ write $M_\\eta=\\mathcal L_{-\\widetilde\\eta}$. Pull back along the faithfully flat right $B$-torsor $S\\to Q$ of step 2. The quotient trivializations of [lem-sfb-homogeneous-line-bundle-sections] identify these pullbacks with trivial lines. Multiplication $(z,z')\\mapsto zz'$ commutes with descent data because $\\eta(b)\\xi(b)=(\\eta+\\xi)(b)$. By the full faithfulness in [lem-pc-fpqc-descent], it descends to $M_\\eta\\otimes M_\\xi\\simeq M_{\\eta+\\xi}$, with inverse the usual inverse of the multiplication identification of two trivial lines after pullback. The character $0$ has trivial descent data, giving $M_0=\\mathcal O_Q$; hence $M_\\eta^{-1}=M_{-\\eta}$.",
+   "uses": [
+    "lem-sfb-homogeneous-line-bundle-sections",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18c, printed pp.389--390, character descent data and their multiplication."
+   }
+  },
+  {
+   "text": "By [lem-sfb-rho-regular-weyl-orbit], $\\langle\\rho,\\delta^\\vee\\rangle=1$ for each simple root. Thus the dominance in step 3 makes $\\mu+2\\rho$ strictly dominant. Apply [lem-sfb-strict-dominant-flag-line-ample]: $Q$ is smooth projective geometrically integral and $M_{\\mu+2\\rho}$ is ample. By [lem-sfb-flag-canonical-character], $Q$ has pure dimension $|\\Phi^+|$ and $\\omega_Q\\simeq M_{-2\\rho}$. Step 5 identifies $\\omega_Q\\otimes M_{\\mu+2\\rho}$ with $M_\\mu$. All the hypotheses of [lem-sfb-kodaira-vanishing] hold over the algebraically closed characteristic-zero field $F$, so $H^i(Q,M_\\mu)=0$ for $i>0$. This uses only the characteristic-zero Kodaira branch, before any positive-characteristic dimension comparison.",
+   "uses": [
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-strict-dominant-flag-line-ample",
+    "lem-sfb-flag-canonical-character",
+    "lem-sfb-kodaira-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.51, printed p.480, characteristic-zero proof via Kodaira vanishing, with the canonical twist made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flag-line-euler-alternant] to the character $\\mu$. By steps 4 and 6 its Euler character is $q$, so its polynomial identity reads $qA(-\\rho)=A(-\\mu-\\rho)$. As $\\mu=-w_0\\lambda$ and $w_0\\rho=-\\rho$, the right side is $A(w_0(\\lambda+\\rho))$. Reindexing the defining finite sum by $u=ww_0$ gives $A(w_0\\nu)=\\det(w_0)A(\\nu)$ for every $\\nu$, because $\\det(ww_0^{-1})=\\det(w)\\det(w_0)$ and $\\det(w_0)^2=1$. The same identity at $\\nu=\\rho$ gives $A(-\\rho)=\\det(w_0)A(\\rho)$. Cancel only the scalar unit $\\det(w_0)\\in\\{1,-1\\}$ to obtain $qA(\\rho)=A(\\lambda+\\rho)$ in $\\mathbf Z[X]$, and hence in $\\mathbf Q[X]$. Its coefficients are the original rational dimensions by step 1. There has been no localization or cancellation of $A(\\rho)$.",
+   "uses": [
+    "lem-sfb-flag-line-euler-alternant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.50--22.52, printed p.480, with the sign convention from 18c and 22.48 corrected by choosing mu=-w0(lambda)."
+   }
+  },
+  {
+   "text": "The arguments apply to reducible root systems: they use all roots together and the full Weyl group, with no irreducibility assumption. For the empty root set, the spanning hypothesis forces $X\\otimes\\mathbf Q=0$, hence $X=0$ since it is free. By [lem-sfb-regular-cocharacter-borel-description], empty roots imply $S=T_F$. The specified split torus has character lattice $0$, so its rank is zero and $S=1$. Every subspace of $V_F$ is then invariant. Simplicity makes the span of any nonzero vector all of $V_F$, so $\\dim_F V_F=\\dim_{\\mathbf Q}V=1$. Thus $\\rho=\\lambda=0$, $W=\\{1\\}$, $q=1$ and $A(0)=1$, proving the claimed identity and its finite weight decomposition directly.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.10, printed p.465, trivial-group case; direct verification of the empty root system."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-split-semisimple-geometric-root-comparison",
+  "lem-sfb-split-simple-absolute-irreducibility",
+  "def-weil-algebraic-closure",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-weyl-reflection-realization",
+  "lem-sfb-rho-regular-weyl-orbit",
+  "lem-sfb-char-zero-differentiation-hom",
+  "lem-sfb-simple-module-dual-highest-weight",
+  "lem-sfb-primitive-cyclic-weight-bound",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "lem-sfb-flag-line-euler-alternant",
+  "lem-sfb-characteristic-zero-complete-reducibility",
+  "lem-sfb-induced-module-primitive-line",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-strict-dominant-flag-line-ample",
+  "lem-sfb-flag-canonical-character",
+  "lem-sfb-kodaira-vanishing",
+  "lem-sfb-regular-cocharacter-borel-description"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "22.48--22.52, printed pp.479--480, characteristic-zero route; explicit scalar-extension, matrix-coefficient and sign assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weyl character formula for simple rational representations of a split semisimple simply connected algebraic group in characteristic zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"LieModule.instLinearWeightsOfCharZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a commutative ring $ R $ with characteristic zero, a nilpotent Lie algebra $ L $ over $ R $, and an abelian group $ M $ equipped with compatible $ R $-module and Lie module structures over $ L $, \"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul'\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [inst_9 : LieMo\", \"doc\": \"For a Lie algebra $ L $ over a field $ K $ and a Lie module $ M $, the trace form $ \\\\text{traceForm}(K, L, M) $ is equal to the sum over all non-zero weights $ \\\\chi $ of $ M $ of the dimension $ \\\\text\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul_mul\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [LieModule.Line\", \"doc\": \"For a Lie algebra $ L $ over a field $ K $ and a Lie module $ M $, the trace form $ \\\\text{traceForm}(x, y) $ evaluated at elements $ x, y \\\\in L $ equals the sum over all weights $ \\\\chi $ of the dimens\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_genWeightSpaceOf\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsDomain R] [IsPrincipalIdealRing R\", \"doc\": \"Under the conditions that $ R $ is a principal ideal ring, $ M $ is a torsion-free and Noetherian $ R $-module, and the Lie algebra $ L $ over $ R $ is triangularizable on $ M $, the trace form on $ L\"}\n  {\"name\": \"LieModule.traceForm_genWeightSpace_eq\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [Module.Free R M] [IsDomain R] [IsPrincipalIdealRing R] [inst_10 : LieRing.IsN\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a free $R$-module $M$ (with $R$ a domain and principal ideal ring, $M$ Noetherian, and $M$ admitting linear weights), t\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [inst_9 : LieMo\", \"doc\": \"The trace form of a Lie module $ M $ over a field $ K $ with respect to a Lie algebra $ L $ is equal to the sum over all weights $ \\\\chi $ of the finite rank of the generalized weight space correspondi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weyl\", \"character\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Weyl.*character|weyl.*character|alternant|weylCharacter",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal character of an irreducible highest weight algebraic group module times the rho alternant equals the lambda plus rho alternant",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.Weight.isZero_neg\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \": (-α).IsZero ↔ α.IsZero\", \"doc\": \"For a Lie module weight $\\\\alpha$, the negation $-\\\\alpha$ is the zero weight if and only if $\\\\alpha$ itself is the zero weight.\"}\n  {\"name\": \"LieModule.Weight.coe_weight_mk\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) (h) : (↑(⟨χ, h⟩ : Weight R L M) : L → R) = χ\", \"doc\": \"For a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and a weight function $ \\\\chi : \\\\mathfrak{g} \\\\to R $ with non-trivial genera\"}\n  {\"name\": \"LieModule.mem_weightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) (m : M) : m ∈ weightSpace M χ ↔ ∀ x, ⁅x, m⁆ = χ x • m\", \"doc\": \"An element $ m $ of a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ belongs to the weight space corresponding to a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\t\"}\n  {\"name\": \"LieModule.weightSpace.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  (χ χ_1 : L → R), χ = χ_1 → LieModule.weightSpace M χ = LieModule.weightSpace M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, if two Lie algebra homomorphisms $ \\\\chi, \\\\chi_1: \\\\mathfrak{g} \\\\to R $ are equal, then their corresponding weig\"}\n  {\"name\": \"LieModule.Weight.coe_neg\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \": ((-α : Weight K H L) : H → K) = -α\", \"doc\": \"For any weight $\\\\alpha$ in the Lie module over the Cartan subalgebra $\\\\mathfrak{h}$, the negation $-\\\\alpha$ coerced to a function from $\\\\mathfrak{h}$ to $K$ satisfies $(-\\\\alpha)(h) = -\\\\alpha(h)$ for a\"}\n  {\"name\": \"LieModule.coe_genWeightSpace_of_top\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : (genWeightSpace M (χ ∘ (⊤ : LieSubalgebra R L).incl) : Submodule R M) = genWeightSpace M χ\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated with $\\\\chi\"}\n  {\"name\": \"LieAlgebra.toEnd_pow_apply_mem\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \"{χ₁ χ₂ : H → R} {x : L} {m : M} (hx : x ∈ rootSpace H χ₁) (hm : m ∈ genWeightSpace M χ₂) (n) :\\n  (toEnd R L M x ^ n : Module.End R M) m ∈ genWeightSpace M (n • χ₁ + χ₂)\", \"doc\": \"Let $\\\\mathfrak{g}$ be a Lie algebra over a commutative ring $R$ with Cartan subalgebra $\\\\mathfrak{h}$, acting on a module $M$. For roots $\\\\chi_1, \\\\chi_2 : \\\\mathfrak{h} \\\\to R$, if $x \\\\in \\\\mathfrak{g}_{\"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top'\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsTriangularizable K L M] : ⨆ χ : Weight K L M, genWeightSpace M χ = ⊤\", \"doc\": \"For a triangularizable Lie module $ M $ over a nilpotent Lie algebra $ \\\\mathfrak{g} $, the supremum (sum) of all generalized weight spaces $ \\\\text{Gen}_\\\\chi(M) $ associated to weights $ \\\\chi $ equals \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Highest weight character equals quotient of antisymmetrized exponentials of lambda plus rho and rho",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.traceForm_genWeightSpace_eq\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [Module.Free R M] [IsDomain R] [IsPrincipalIdealRing R] [inst_10 : LieRing.IsN\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a free $R$-module $M$ (with $R$ a domain and principal ideal ring, $M$ Noetherian, and $M$ admitting linear weights), t\"}\n  {\"name\": \"LieModule.chainTopCoeff\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {M : Type u_3} →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"Let $ R $ be a commutative ring that is a domain and torsion-free, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free, Noetherian Lie module over $ L $. For any non-zero linear functio\"}\n  {\"name\": \"LieModule.instLinearWeightsOfCharZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a commutative ring $ R $ with characteristic zero, a nilpotent Lie algebra $ L $ over $ R $, and an abelian group $ M $ equipped with compatible $ R $-module and Lie module structures over $ L $, \"}\n  {\"name\": \"LieModule.Weight.toLinear\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"The linear map from the Lie algebra $ L $ to the commutative ring $ R $ associated with a weight $ \\\\chi $, defined by the weight function itself. This map satisfies additivity ($ \\\\chi(x + y) = \\\\chi(x)\"}\n  {\"name\": \"LieModule.coe_chainTop\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"For a non-zero linear functional $\\\\alpha: L \\\\to R$ and a weight $\\\\beta$ of $M$, where $R$ is a torsion-free commutative domain, $L$ is a nilpotent Lie algebra over $R$, and $M$ is a torsion-free Noeth\"}\n  {\"name\": \"LieModule.coe_chainTop'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Given a non-zero linear functional $\\\\alpha: L \\\\to R$ and a weight $\\\\beta$ of $M$, this function constructs the weight $n\\\\alpha + \\\\beta$ where $n$ is the integer guaranteed by the existence theorem ens\"}\n  {\"name\": \"LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a torsion-free commutative domain, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free Noetherian Lie module over $ L $. For any non-zero linear functional $ \\\\alpha: L \\\\to \"}\n  {\"name\": \"LieAlgebra.IsKilling.chainTopCoeff_zero_right\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_6 : H.IsCartanSubalgebra]\\n  [LieModule.IsTriangularizable K (↥H) L] (α : LieModule.Weight \", \"doc\": \"For a non-trivial Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, and for any non-zero linear functional $\\\\alpha \\\\in \\\\mathfrak{g}^*$, the top coefficient in the chain ass\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern finite abstract-group characters, Lie weights, root systems or trace forms; none states this algebraic-group integration or Weyl character/dimension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl character formula for an irreducible representation of a split semisimple algebraic group in characteristic zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"LieModule.instLinearWeightsOfCharZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a commutative ring $ R $ with characteristic zero, a nilpotent Lie algebra $ L $ over $ R $, and an abelian group $ M $ equipped with compatible $ R $-module and Lie module structures over $ L $, \"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul'\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [inst_9 : LieMo\", \"doc\": \"For a Lie algebra $ L $ over a field $ K $ and a Lie module $ M $, the trace form $ \\\\text{traceForm}(K, L, M) $ is equal to the sum over all non-zero weights $ \\\\chi $ of $ M $ of the dimension $ \\\\text\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_genWeightSpaceOf\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsDomain R] [IsPrincipalIdealRing R\", \"doc\": \"Under the conditions that $ R $ is a principal ideal ring, $ M $ is a torsion-free and Noetherian $ R $-module, and the Lie algebra $ L $ over $ R $ is triangularizable on $ M $, the trace form on $ L\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul_mul\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [LieModule.Line\", \"doc\": \"For a Lie algebra $ L $ over a field $ K $ and a Lie module $ M $, the trace form $ \\\\text{traceForm}(x, y) $ evaluated at elements $ x, y \\\\in L $ equals the sum over all weights $ \\\\chi $ of the dimens\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [inst_9 : LieMo\", \"doc\": \"The trace form of a Lie module $ M $ over a field $ K $ with respect to a Lie algebra $ L $ is equal to the sum over all weights $ \\\\chi $ of the finite rank of the generalized weight space correspondi\"}\n  {\"name\": \"LieModule.traceForm_genWeightSpace_eq\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [Module.Free R M] [IsDomain R] [IsPrincipalIdealRing R] [inst_10 : LieRing.IsN\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a free $R$-module $M$ (with $R$ a domain and principal ideal ring, $M$ Noetherian, and $M$ admitting linear weights), t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite-group characters, Lie weights, topological simple connectedness and abstract root pairings do not state this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weyl\", \"character\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite-group characters, Lie weights, topological simple connectedness and abstract root pairings do not state this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Weyl.*character|weylCharacter|alternant",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite-group characters, Lie weights, topological simple connectedness and abstract root pairings do not state this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The formal character of a simple highest weight module times the rho alternant is the lambda plus rho alternant",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.Weight.isZero_neg\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \": (-α).IsZero ↔ α.IsZero\", \"doc\": \"For a Lie module weight $\\\\alpha$, the negation $-\\\\alpha$ is the zero weight if and only if $\\\\alpha$ itself is the zero weight.\"}\n  {\"name\": \"LieModule.mem_weightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) (m : M) : m ∈ weightSpace M χ ↔ ∀ x, ⁅x, m⁆ = χ x • m\", \"doc\": \"An element $ m $ of a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ belongs to the weight space corresponding to a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\t\"}\n  {\"name\": \"LieModule.weightSpace.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  (χ χ_1 : L → R), χ = χ_1 → LieModule.weightSpace M χ = LieModule.weightSpace M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, if two Lie algebra homomorphisms $ \\\\chi, \\\\chi_1: \\\\mathfrak{g} \\\\to R $ are equal, then their corresponding weig\"}\n  {\"name\": \"LieModule.Weight.mk.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (toFun toFun_1 : L → R) (e_toFun : toFun = to\", \"doc\": \"Given a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and weight functions $ \\\\chi, \\\\chi' : \\\\mathfrak{g} \\\\to R $, if $ \\\\chi = \\\\c\"}\n  {\"name\": \"LieModule.Weight.coe_neg\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \": ((-α : Weight K H L) : H → K) = -α\", \"doc\": \"For any weight $\\\\alpha$ in the Lie module over the Cartan subalgebra $\\\\mathfrak{h}$, the negation $-\\\\alpha$ coerced to a function from $\\\\mathfrak{h}$ to $K$ satisfies $(-\\\\alpha)(h) = -\\\\alpha(h)$ for a\"}\n  {\"name\": \"LieModule.Weight.coe_weight_mk\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) (h) : (↑(⟨χ, h⟩ : Weight R L M) : L → R) = χ\", \"doc\": \"For a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and a weight function $ \\\\chi : \\\\mathfrak{g} \\\\to R $ with non-trivial genera\"}\n  {\"name\": \"LieModule.genWeightSpace.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ χ_1 : L → R),\\n  χ = χ_1 → LieModule.genWei\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, if two weight functions $\\\\chi, \\\\chi_1 : \\\\mathfrak{g} \\\\to R$ are equal, then their associated generali\"}\n  {\"name\": \"LieModule.instLinearWeightsOfIsLieAbelian\", \"module\": \"Mathlib.Algebra.Lie.Weights.Linear\", \"type\": \"[IsLieAbelian L] [IsDomain R] [Module.IsTorsionFree R M] : LinearWeights R L M\", \"doc\": \"For any abelian Lie algebra $ L $ over a domain $ R $, and any torsion-free $ R $-module $ M $, the module $ M $ admits linear weights in the context of Lie algebra representations. This follows from \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite-group characters, Lie weights, topological simple connectedness and abstract root pairings do not state this theorem for algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-characteristic-zero-weyl-dimension",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence).",
+   "via": [
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-charzero-weyl-character-identity",
+  "worker": "stage1",
+  "summary": "Q35 checked Milne 22.52 against its characteristic-zero erratum, reused the existing geometric Euler identity and Kodaira inputs, and wrote the scalar-extension and sign-corrected matrix-coefficient assembly. Two new statement-only inputs expose geometric root comparison and absolute simplicity; the item statement is unchanged.",
+  "blueprint": "The inherited ancestor chain has from.node=null (broken upstream chain), retained as computed by blueprint_refs.py. This realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain through the classical characteristic-zero dimension calculation, specifically Milne 22.52; current latest blueprint direct-images proof (3) was read. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Full faithfulness descends multiplication of the trivial character lines on the B-torsor; this is generic module descent, with no substitute in the representation-theoretic unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-d6a9efb52",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-d6a9efb52 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes (both statement-only and unsplit), and the statement of every cited node. Checked against the local Milne PDF: Th. 22.52, p.480; the characteristic-0 proof via 22.50 and 22.51; the p.480 errata entry restricting 22.52 to characteristic 0; 22.4 with 4.19 (simplicity survives field extension). The item statement is unchanged, written as the polynomial identity qA(rho)=A(lambda+rho) with no fraction. All 8 steps verified. Step 1: weight decomposition, absolute simplicity, tangent comparison. Step 2: semisimple gives reductive, rho in X, W is the reflection group, w0, characteristic-0 differentiation gives U-invariance, so the highest weight is lambda. Step 3: mu=-w0 lambda is dominant via the cyclic weight bound and t(n l)=(s_delta mu)(t) n l. Step 4: checked j(x)(gb)=mu(b)j(x)(g) and equivariance; complete reducibility plus a 1-dimensional U-fixed space in E(-mu) leaves one simple summand, so j is an isomorphism. Step 5: tensor of homogeneous line bundles by fpqc descent full faithfulness; accepted tool use lem-pc-fpqc-descent (generic descent, nothing in the unit replaces it). Step 6: mu+2rho strictly dominant, ampleness, omega_Q=M_{-2rho}, Kodaira in characteristic 0 with all hypotheses checked. Step 7: Euler identity at mu and reindexing A(w0 nu)=det(w0)A(nu); only the unit det(w0) is cancelled. Step 8: empty root system gives S=1 and dim V=1. Tested on lambda=0 and SL2 with lambda=m. New nodes: the geometric root comparison is true (split torus, simply connected passes to F for split groups, Borel exists for any chosen positive system) and does not duplicate split-positive-root-borel (needs a pinned realization) or rational-split-integral-prolongation; absolute irreducibility is a special case of Milne 22.4 and an rg -L search found no duplicate. Neither restates a clause of the item. No cycle (item not in the 16370-node closure). Batch-5 flags: every path ends in a generic sk-i-curve-zero lemma of the sec-trace-formula chapter (fppf-covering-base-change, split-lattice-torus-projection, smooth-composition, proper-field-invertible-coherent, connected-point-geometrically-connected, smooth-fpqc-base-descent). None is the trace formula, Poincare duality or a step of their proofs, so they are outside the assumptions. blueprint.from.node is null, inherited from the broken upstream chain and recorded in split_report; not blocking. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitCharzeroWeylCharacterIdentity",
+  "declaration": "AlgebraicGeometry.SplitWeylCharacter.split_charzero_weyl_character_identity",
+  "declarations": [
+   "AlgebraicGeometry.SplitWeylCharacter.weightSpace",
+   "AlgebraicGeometry.SplitWeylCharacter.alternant",
+   "AlgebraicGeometry.SplitWeylCharacter.split_charzero_weyl_character_identity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitCharzeroWeylCharacterIdentity.lean",
+  "statement": "theorem split_charzero_weyl_character_identity (G T : Grp (Over (Spec (.of ℚ)))) [IsAffine G.X.left] (hsm : Smooth G.X.hom) (hconn : ConnectedSpace G.X.left) (hss : IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure ℚ)).obj G).X) (hsc : ∀ H : Grp (Over (Spec (.of ℚ))), Smooth H.X.hom → ConnectedSpace H.X.left → IsAffine H.X.left → IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure ℚ)).obj H).X → ∀ f : H ⟶ G, Surjective f.hom.hom.left → IsFinite (GrpObj.ker f.hom.hom).hom → (∀ (A : Type) [CommRing A] [Algebra ℚ A] (x : StandardGroupSchemes.affine ℚ A ⟶ GrpObj.ker f.hom.hom) (g : StandardGroupSchemes.affine ℚ A ⟶ H.X), (x ≫ GrpObj.kerι f.hom.hom) * g = g * (x ≫ GrpObj.kerι f.hom.hom)) → IsIso f) (i : T ⟶ G) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus ℚ r)) (hmax : ReductiveTorusCentralizer.IsMaximalTorus ((MultiplicativeType.baseChange (K := AlgebraicClosure ℚ)).map i)) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative ℚ)] (a : ModObj T.X G.X) (ha : a.smul = (i.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (Φ : Finset (Additive (RankOneRoots.Character T))) [DecidableEq (Additive (RankOneRoots.Character T))] [Module.Finite ℤ (Additive (RankOneRoots.Character T))] [Module.Finite ℤ (Additive (RankOneRoots.Cocharacter T))] (P : RootDatum Φ (Additive (RankOneRoots.Character T)) (Additive (RankOneRoots.Cocharacter T))) [P.IsReduced] [Fintype P.weylGroup] (b : P.Base) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (RankOneRoots.Character T)) (ν : Additive (RankOneRoots.Cocharacter T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative ℚ)) ^ P.toLinearMap χ ν) (hweights : ∀ χ : Additive (RankOneRoots.Character T), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace ℚ _ T G a χ.toMul ≠ ⊥) (hspan : Submodule.span ℚ (Set.range (fun α : Φ ↦ TensorProduct.tmul ℤ (1 : ℚ) (P.root α))) = ⊤) (ρ : ℚ ⊗[ℤ] Additive (RankOneRoots.Character T)) (hρ : ρ = (1 / 2 : ℚ) • ∑ α ∈ (@Finset.filter Φ b.IsPos (Classical.decPred _) Finset.univ), TensorProduct.tmul ℤ (1 : ℚ) (P.root α)) (n : ℕ) (r : GeneralLinearGroup.RationalHom G.X (Fin n)) [IsMonHom r] (hnonzero : Nontrivial (Fin n → ℚ)) (hsimple : ∀ U : Submodule ℚ (Fin n → ℚ), IsInvariantRationalSubspace r U → U = ⊥ ∨ U = ⊤) (lam : Additive (RankOneRoots.Character T)) (hdom : ∀ α ∈ b.support, 0 ≤ P.toLinearMap lam (P.coroot α)) (hv : ∃ v : Fin n → ℚ, v ≠ 0 ∧ v ∈ weightSpace i r lam.toMul ∧ ∀ α : Φ, b.IsPos α → ∀ x ∈ @TorusCharacterTangent.weightSpace ℚ _ T G a α.val.toMul, Matrix.toLin' (r.differential x) v = 0) : DirectSum.IsInternal (fun χ : Additive (RankOneRoots.Character T) ↦ weightSpace i r χ.toMul) ∧ {χ : Additive (RankOneRoots.Character T) | weightSpace i r χ.toMul ≠ ⊥}.Finite ∧ ∃ ρ₀ : Additive (RankOneRoots.Character T), TensorProduct.tmul ℤ (1 : ℚ) ρ₀ = ρ ∧ ∃ q : AddMonoidAlgebra ℚ (Additive (RankOneRoots.Character T)), (∀ χ : Additive (RankOneRoots.Character T), q.coeff χ = (Module.finrank ℚ (weightSpace i r χ.toMul) : ℚ)) ∧ q * alternant P ρ₀ = alternant P (lam + ρ₀)",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper weightSpace is the actual simultaneous character eigenspace of the rational representation. alternant is a real finite sum with determinant of the canonical rationalized Weyl action; q is uniquely characterized coefficientwise. The representation is written in a finite basis, using the existing RationalHom and all-algebra invariant subspace predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11b3fc01",
+  "group": "Q157",
+  "result": "fix",
+  "note": "Lean statement exact vs node and Milne 22.52 (char-0 erratum): checked hss/hmax via the AlgebraicClosure base change, hsc central-isogeny test over all Q-algebras (same encoding as landed rho-section-modules), split torus, hpair pins the pairing, hroot+hweights pin the roots, coroots forced by uniqueness given hspan, Mathlib Base coroot conditions automatic for reduced data, rho in Q⊗X, RationalHom basis rep with all-algebra simplicity, dominance, highest vector via r.differential, IsInternal + finite support + integral rho + q pinned per coefficient + identity with det(weightEquiv.baseChange Q) (w•ν = weightHom, consistent). lean.statement verbatim; node statement/proof unchanged, only lean + 7 landed def stmt_deps added. Edge cases: empty/reducible roots, rank 0, n=1. Only fault H11: second reading is the worker's self-check -> fixes/lem-sfb-split-charzero-weyl-character-identity.report.md (worker report unchanged + independent clause-by-clause reading). Advisories: weightSpace uses T(Q)-points (equal for split T over infinite Q); def-sc-gm-ga/sk-d-tangent/algebraic-closure reached through cited tangent-weights/rank-one/tori deps; Prop instance hyps true for a split torus. No Lean changed, so no compile."
+ }
+}

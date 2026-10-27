@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-derived-subgroup-universal-characteristic",
+ "kind": "statement",
+ "title": "The derived subgroup is characteristic over every base algebra",
+ "statement": "Let $k$ be a field [def-weil-field]. Group schemes, closed normal subgroups, smoothness, connectedness and finite type have the meanings of [def-sc-group-scheme, def-sc-group-scheme-subgroup, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Geometrically connected means connected after extension to an algebraic closure [def-weil-algebraic-closure]. Let $H$ be a smooth geometrically connected affine $k$-group scheme of finite type. Let $D(H)\\subseteq H$ be the smallest closed subgroup through which the commutator morphism $(x,y)\\mapsto xyx^{-1}y^{-1}$ factors, as constructed in [lem-sfb-derived-commutator-word-arbitrary-field]. For a commutative $k$-algebra $A$, put $H_A=H\\times_{\\operatorname{Spec}k}\\operatorname{Spec}A$ and $D(H)_A=D(H)\\times_{\\operatorname{Spec}k}\\operatorname{Spec}A$ [def-pc-fibre-product]. For every $A$-group-scheme automorphism $u:H_A\\xrightarrow{\\sim}H_A$, its restriction is an automorphism of the closed subgroup scheme $D(H)_A$; equivalently $u(D(H)_A)=D(H)_A$ as closed subgroup schemes of $H_A$. An $A$-group-scheme automorphism means an isomorphism over $\\operatorname{Spec}A$ preserving multiplication, identity and inverse. The algebra $A$ need not be reduced, a field or of finite type.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 6.19(e) and its proof, printed pp.129--130, using the faithfully flat point description in 6.19(c). Characteristic here explicitly means invariance after every commutative base algebra, not only under k-automorphisms. No Stacks tag states this algebraic-group result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "lem-sfb-derived-commutator-word-arbitrary-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=H\\times_kH$, $o=(e,e)$ and $c(x,y)=xyx^{-1}y^{-1}$. The source $X$ is affine by [lem-weil-pbc-fibre-product-affine-spectra], and finite type by base change followed by composition in [lem-sfb-finite-type-composition-base-change]. The group identities give $c(o)=e$ and $c(x,y)^{-1}=c(y,x)$ over every $k$-algebra. Apply [lem-sfb-affine-pointed-map-generated-subgroup] to this pointed inverse-stable map. With $P=k[H]$, $B_n=k[H^{2n}]$, $w_n=\\prod_{i=1}^n[x_i,y_i]$ and $I=\\bigcap_{n\\ge1}\\ker(w_n^*:P\\to B_n)$, it identifies the smallest closed commutator subgroup with $\\operatorname{Spec}C$, where $C=P/I$. This is precisely $D(H)$ of [lem-sfb-derived-commutator-word-arbitrary-field], by their identical minimality property. Write $q:P\\twoheadrightarrow C$ and $f_n:C\\to B_n$, so $f_nq=w_n^*$. These maps jointly detect zero: if every $f_n(q(p))=0$, then $p\\in I$ by the displayed definition, hence $q(p)=0$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-affine-pointed-map-generated-subgroup",
+    "lem-sfb-derived-commutator-word-arbitrary-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 2.46 and 6.18; coordinate description after Corollary 6.19, printed pp.54–55,129–130"
+   }
+  },
+  {
+   "text": "Fix any commutative $k$-algebra $A$. By [lem-weil-pbc-fibre-product-affine-spectra], put $P_A=P\\otimes_kA=k[H_A]$, $C_A=C\\otimes_kA=k[D(H)_A]$ and $B_{n,A}=B_n\\otimes_kA=k[(H_A)^{2n}]$. The identifications of the iterated products follow from the same fibre-product universal property. Their ring maps are $q_A=q\\otimes1$ and $f_{n,A}=f_n\\otimes1$, as checked on $p\\otimes a$. The map $q_A$ is surjective: each element of $C_A$ is a finite sum $\\sum_i c_i\\otimes a_i$ by [def-weil-pbc-module-tensor-product], and choosing $p_i$ with $q(p_i)=c_i$ gives the preimage $\\sum_i p_i\\otimes a_i$. Apply [lem-sfb-vector-space-tensor-family-zero-detection] with $M=C$, $N=A$, $J=\\{1,2,\\ldots\\}$ and the maps $f_n$. It says that $f_{n,A}(t)=0$ for every $n$ implies $t=0$ in $C_A$. Its hypotheses hold because $A$ is a vector space over the field $k$ and step 1 gives zero detection on $C$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-vector-space-tensor-family-zero-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 6.19(e), printed p.130: agent coordinate-ring argument using Proposition 2.46 instead of the faithfully-flat point description"
+   }
+  },
+  {
+   "text": "Let $u:H_A\\to H_A$ be the given automorphism and let $u^*:P_A\\to P_A$ be its $A$-algebra automorphism. On each test $A$-algebra, preservation of multiplication and inverse gives $u(\\prod_i[x_i,y_i])=\\prod_i[u(x_i),u(y_i)]$. Equivalently, with $U_n=u^{\\times2n}$, $u\\circ w_{n,A}=w_{n,A}\\circ U_n$. These are identities of morphisms: their formulas already hold at the universal tuple with coefficient algebra $B_{n,A}$, using the affine morphism description [def-weil-affine-spectrum]. Pulling back gives $f_{n,A}q_Au^*=U_n^*f_{n,A}q_A$. If $z\\in\\ker q_A$, the right side vanishes at $z$ for every $n$. Step 2 therefore implies $q_Au^*(z)=0$. Thus $\\ker q_A$ is stable under $u^*$. Define $\\bar u^*:C_A\\to C_A$ by $\\bar u^*(q_A(p))=q_A(u^*(p))$. Surjectivity of $q_A$ and stability of its kernel make this well defined and an $A$-algebra map. Its spectrum is a morphism $v:D(H)_A\\to D(H)_A$ with $j_Av=uj_A$, where $j_A$ is the inclusion. This is factorization through the given closed subgroup as schemes, with all nilpotent functions retained.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 6.19(e), printed p.130: the commutator identity, written on coordinate algebras"
+   }
+  },
+  {
+   "text": "Apply step 3 also to $u^{-1}$ and obtain $v':D(H)_A\\to D(H)_A$ with $j_Av'=u^{-1}j_A$. Then $j_Avv'=j_A$ and $j_Av'v=j_A$. Cancel $j_A$: on coordinate rings this is cancellation after the surjection $q_A$, so both composites are the identity by [def-weil-affine-spectrum]. Thus $v$ is an automorphism. It preserves the group operations because its composite with $j_A$ is the group homomorphism $uj_A$; for each $A$-algebra $R$, $D(H)_A(R)\\to H_A(R)$ is injective since an algebra map out of $C_A$ is determined by its composite with $q_A$. Multiplication, identity and inverse identities for $v(R)$ follow by that injection. Finally $uj_A=j_Av$ and the analogous identity for $u^{-1}$ show $u(D(H)_A)=D(H)_A$ as closed subgroup schemes. The argument also covers $A=0$, where all the affine base changes are empty.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 6.19(e), printed p.130: apply invariance to the inverse automorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-affine-pointed-map-generated-subgroup",
+  "lem-sfb-derived-commutator-word-arbitrary-field",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-vector-space-tensor-family-zero-detection",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 6.19(e), printed pp.129–130; coordinate-ring proof using the generated-subgroup construction of Proposition 2.46. The source uses 6.19(c); here joint zero detection supplies scheme-theoretic invariance directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*[Cc]haracteristic|commutator.*[Cc]haracteristic|[Cc]haracteristic.*commutator",
+   "results": "[grep] OK 7 hit(s); Mathlib/Data/ZMod/Basic.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/GroupTheory/Solvable.lean, Mathlib/GroupTheory/Solvable.lean, Mathlib/GroupTheory/Commutator/Basic.lean, Mathlib/GroupTheory/Commutator/Basic.lean, Mathlib/GroupTheory/Commutator/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: instCharacteristicCommutator and derivedSeries_characteristic concern abstract groups, not a subgroup scheme after arbitrary algebra base change; other hits only concern morphism properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every automorphism of a smooth affine group scheme preserves its scheme theoretic commutator subgroup after base change",
+   "results": "[leansearch] OK 8 hit(s); instCharacteristicCommutator, commutator, Subgroup.commutator_characteristic, instNormalCommutator, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AddSubgroup.Characteristic.fixed, Subgroup.Characteristic.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: instCharacteristicCommutator and derivedSeries_characteristic concern abstract groups, not a subgroup scheme after arbitrary algebra base change; other hits only concern morphism properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"Characteristic\"",
+   "results": "[loogle] OK 4 hit(s); instCharacteristicAddCommutator, instCharacteristicCommutator, AddSubgroup.addCommutator_characteristic, Subgroup.commutator_characteristic",
+   "date": "2026-10-24",
+   "verdict": "no match: instCharacteristicCommutator and derivedSeries_characteristic concern abstract groups, not a subgroup scheme after arbitrary algebra base change; other hits only concern morphism properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebraic commutator subgroup is invariant under group scheme automorphisms over every base algebra, not only on field valued points",
+   "results": "[leanfinder] OK 8 hit(s); instCharacteristicCommutator, Subgroup.commutator_characteristic, Field.absoluteGaloisGroup.commutator_closure_isNormal, instNormalCommutator, commutator_def, Field.absoluteGaloisGroupAbelianization, derivedSeries_characteristic, Subgroup.map_subtype_commutator",
+   "date": "2026-10-24",
+   "verdict": "no match: instCharacteristicCommutator and derivedSeries_characteristic concern abstract groups, not a subgroup scheme after arbitrary algebra base change; other hits only concern morphism properties"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSubgroup|derivedGroup|commutator|[Cc]haracteristic",
+   "results": "{\"t\": \"2026-10-24T14:23:01Z\", \"tool\": \"grep\", \"query\": \"derivedSubgroup|derivedGroup|commutator|[Cc]haracteristic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"b05866169c5b2cbb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group characteristic commutator and derivedSeries results do not identify the coordinate ideal of a group-scheme derived subgroup after arbitrary algebra extension; formally unramified base-change and geometrically reduced ring hits also do not state this invariance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group scheme automorphism over any algebra preserves the scheme theoretic commutator subgroup",
+   "results": "{\"t\": \"2026-10-24T14:23:02Z\", \"tool\": \"leansearch\", \"query\": \"A group scheme automorphism over any algebra preserves the scheme theoretic commutator subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instCharacteristicCommutator\", \"Subgroup.map_commutator\", \"commutator\", \"instNormalCommutator\", \"Subgroup.commutator_characteristic\", \"commutator_def\", \"map_commutator_eq\", \"Subgroup.commutator\"], \"digest\": \"dab16f2e180a20c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group characteristic commutator and derivedSeries results do not identify the coordinate ideal of a group-scheme derived subgroup after arbitrary algebra extension; formally unramified base-change and geometrically reduced ring hits also do not state this invariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"Characteristic\"",
+   "results": "{\"t\": \"2026-10-24T14:23:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"commutator\\\", \\\"Characteristic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"instCharacteristicAddCommutator\", \"instCharacteristicCommutator\", \"AddSubgroup.addCommutator_characteristic\", \"Subgroup.commutator_characteristic\"], \"digest\": \"bd18d6c9ff978564\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group characteristic commutator and derivedSeries results do not identify the coordinate ideal of a group-scheme derived subgroup after arbitrary algebra extension; formally unramified base-change and geometrically reduced ring hits also do not state this invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived closed subgroup of a smooth affine group scheme is preserved by every automorphism after arbitrary base algebra extension",
+   "results": "{\"t\": \"2026-10-24T14:23:03Z\", \"tool\": \"leanfinder\", \"query\": \"The derived closed subgroup of a smooth affine group scheme is preserved by every automorphism after arbitrary base algebra extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivedSeries_characteristic\", \"instCharacteristicCommutator\", \"Subgroup.commutator_characteristic\", \"derivedSeries_normal\", \"derivedSeries\", \"derivedSeries_one\", \"derivedSeries_zero\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\"], \"digest\": \"3fa2f2f0a648f774\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group characteristic commutator and derivedSeries results do not identify the coordinate ideal of a group-scheme derived subgroup after arbitrary algebra extension; formally unramified base-change and geometrically reduced ring hits also do not state this invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic derived group characteristic after base change to a nonreduced commutative ring",
+   "results": "{\"t\": \"2026-10-24T14:24:52Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme theoretic derived group characteristic after base change to a nonreduced commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.ringChar_eq\"], \"digest\": \"fc79b82af398b0c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group characteristic commutator and derivedSeries results do not identify the coordinate ideal of a group-scheme derived subgroup after arbitrary algebra extension; formally unramified base-change and geometrically reduced ring hits also do not state this invariance."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-field-semisimple-commutative-test",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Lemma 23.68, printed p.506, implication from semisimple Lie algebra to semisimple connected algebraic group. This is the converse direction to the existing lem-sfb-char-zero-semisimple-group-lie. Supporting input for the Q77 split: Proposition 19.3 and its proof, printed p.398, with geometric semisimplicity in 6.44 (p.135), radical base change in Proposition 19.1 (p.397), and Proposition 19.2(a) (p.398). The test explicitly ranges over affine finite-type subgroup schemes, as all closed subgroups of G are such. No Stacks tag states this algebraic-group criterion. Supporting Q38 input: Corollary 6.19(e) and its proof, printed pp.129--130, using the faithfully flat point description in 6.19(c). Characteristic here explicitly means invariance after every commutative base algebra, not only under k-automorphisms.",
+   "via": [
+    "lem-sfb-perfect-field-semisimple-commutative-test",
+    "lem-sfb-charzero-lie-semisimple-converse",
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-derived-subgroup-universal-characteristic",
+  "worker": "stage1",
+  "summary": "Q37 proves arbitrary-algebra characteristic invariance from the existing pointed-map coordinate construction and tensor-family zero detection. All new searches were run with msearch; no exact project attachment or Mathlib leaf states the full item. No new nodes; no hypotheses changed; corrected only inherited doubled TeX backslashes. Invariance is proved at the level of ideals, so nonreduced and infinitely generated algebras are included.",
+  "blueprint": "Inherited blueprint.from.node=null is confirmed by blueprint_refs.py ancestor. The precise inherited from.place traces det-thm-sf-ctf-stability-direct-images proof (3) through the algebraic-group prerequisites to Milne 6.19(e). Read the latest 20261024 direct-image proof; the split supplies this supporting characteristic-subgroup fact without changing the chapter or unit route. Searches for derived subgroup, commutator and characteristic subgroup found no blueprint statement of this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine base-change computation, used to identify all coordinate rings after arbitrary algebra extension; it does not replace a step of the constructibility unit."
+   },
+   {
+    "node": "def-weil-affine-spectrum",
+    "why": "Generic affine-scheme morphism description, used to construct the restricted morphism from its algebra map and cancel a surjective coordinate map; not a change of unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-1a829eb38",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-1a829eb38 (reviewer sub-agent of L); spot-checked: Read the whole item at 1a829eb3. It has 4 steps and creates no new nodes; the base was a Q38 unsplit node with no repair note. Statement: checked against Milne iAG 2017 Def 1.51(b) (characteristic means alpha(H_R)=H_R for every k-algebra R and every automorphism of G_R) and Prop 6.18 / Cor 6.19(e), printed pp.129-130, with the text after it giving O(DG)=O(G)/intersection of I_n through 2.46. The statement is not weakened; the only change is single in place of doubled TeX backslashes. The parent, perfect-field-semisimple-commutative-test step 4, uses it for conjugation over an arbitrary A, which matches the statement. Step 1: the hypotheses of the pointed-map generated-subgroup node all hold. H^2 is affine (affine fibre-product Mathlib leaf) and of finite type (finite-type composition/base-change Mathlib leaf), o=(e,e) is a k-point, c(o)=e, and c(x,y)^{-1}=c(y,x). The words w_n match Milne (37), D(H) is identified by the same minimality property, and joint zero detection on C=P/I follows from the definition of I. Step 2: q_A is surjective because pure tensors generate. I checked that the existing unsplit zero-detection node is true over a field, for an arbitrary index set and infinite-dimensional spaces, by choosing a basis of N; its hypotheses hold with M=C, N=A. Step 3: u∘w_{n,A}=w_{n,A}∘U_n comes from the homomorphism identities. Pulling back to rings and applying step 2 makes ker q_A stable under u^*, so the map descends to an A-algebra map. This works at the level of ideals, so nilpotents are handled. Step 4: applying step 3 to u^{-1} and cancelling the surjection q_A gives the inverse. Group compatibility follows by injection on points, giving u(D_A)=D_A as closed subschemes. Edge cases checked: H trivial or commutative, A=0, A=k[eps], infinitely generated A, and u not defined over k. Tool uses accepted: affine fibre-product leaf and def-weil-affine-spectrum. No duplicate in the DAG: the derived-commutator node covers only field extensions. Searches are recorded for all three kinds with no match. No fixes."
+ }
+}

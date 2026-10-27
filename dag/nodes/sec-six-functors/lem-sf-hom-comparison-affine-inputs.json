@@ -1,0 +1,333 @@
+{
+ "id": "lem-sf-hom-comparison-affine-inputs",
+ "kind": "statement",
+ "title": "Affine charts and unchanged finite-Tor constructible input models",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\ge1$. Put $A=\\mathcal O_E/\\varpi_E^n$. Let $X$ be a finite-type $k$-scheme, with no separatedness assumption. Let $K,M\\in D^b_c(X_{\\mathrm{et}},A)$, with cohomology respectively zero outside integer intervals $[r,s]$ and $[t,u]$, and suppose $K$ has Tor amplitude in $[a,b]$, where $a\\le b$.\n\nThere is a finite affine open covering $(j_i:U_i\\hookrightarrow X)_{i\\in I}$ such that every $U_i\\to\\operatorname{Spec}k$ is separated and of finite type. For every $i$, the exact site restriction gives $K_i=j_i^*K\\in D^b_{ctf}(U_{i,\\mathrm{et}},A)$ and $M_i=j_i^*M\\in D^b_c(U_{i,\\mathrm{et}},A)$ with the same cohomological intervals and with Tor amplitude $[a,b]$ for $K_i$. A constructible stratification of any $\\mathcal H^h(K)$ or $\\mathcal H^h(M)$ restricts, by intersection with $U_i$ and deletion of empty strata, to one of its restricted cohomology sheaf.\n\nMore precisely, there exists a cochain complex $P$ of flat $A_X$-module sheaves, zero outside $[a,b]$, and an isomorphism $K\\cong Q_XP$ in $D(X_{\\mathrm{et}},A)$, where $Q_X$ is cochain localization. For every such representing isomorphism and every $i$, the restricted complex $P|_{U_i}$ has flat terms, is zero outside $[a,b]$, and its induced isomorphism is $K_i\\cong Q_{U_i}(P|_{U_i})$. If $X$ is empty, the covering may be empty. Here Tor amplitude and $D^b_{ctf}$ use the etale-site convention of [lem-sf-flat-model].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-sf-hom-comparison-constructible.proof.md",
+  "place": "Proof, sentences 1-2: finite affine cover reduces to separated schemes; returned proof steps 1-2, including the bounded flat model and constructible stratification restriction",
+  "external": [
+   {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01KN (lemma-affine-separated), 01KV (lemma-compose-after-separated)"
+   },
+   {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2, lemma-locally-finite-type-characterize"
+   },
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Localization discussion preceding Tag 08FI, lemma-restrict-K-injective-to-open; bounded flat model is the etale-site clause of lem-sf-flat-model"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-flat-model",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Use QuasiCompact.compactSpace_of_compactSpace and the finite subcover of X.affineCover, reindexed by Fintype.equivFin. An affine chart over the affine base is an affine morphism, so it is separated and quasi-compact. Open immersions are locally of finite type, and composition preserves this property. In the empty case choose Fin 0, so the empty-cover requirement is literal.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib.AlgebraicGeometry.Cover.Open; Morphisms.QuasiCompact; Morphisms.Affine; Morphisms.Separated",
+    "place": "OpenCover.finiteSubcover; QuasiCompact.compactSpace_of_compactSpace; isAffineHom_of_isAffine; of_isAffineHom"
+   }
+  },
+  {
+   "text": "Exact categorical module-valued inverse image commutes with derived cohomology via the proved source mapDerivedCategoryHomologyFunctorIso. This is the localization of exact-functor complex cohomology, using the exact-functor factorization. Apply map_isZero and transport along this isomorphism to preserve every stated bound. Convert finite-value constructibility with isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf, apply IsConstructibleSheaf.upperStar, and transport back by the same isomorphism. Unpack the given bounds to the standard derived t-structure when applying the source flat-model theorem.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "place": "mapDerivedCategoryHomologyFunctorIso; ConstructibleSheaf.Pullback.IsConstructibleSheaf.upperStar"
+   }
+  },
+  {
+   "text": "Repeat the explicit stratification pullback construction for FiniteLocallyClosedStratification, indexing by the subtype of nonempty fibre products and reindexing it with Fintype.equivFin. The range formula Scheme.Pullback.range_snd identifies the new strata with the preimages. Every point in a preimage lifts to a fibre product by that formula, proving that deletion of the empty domains preserves covering. Local closedness, constructibility and pairwise disjointness pull back, and immersions are stable under base change. Finite locally constant module sheaves pull back. For each stratum, compose upperStarComp for the first projection, pullback.condition, and upperStarComp for the second projection, and finally the derived-cohomology comparison of step 2. These are isomorphisms in the categorical module-sheaf category, so all comparisons are module-linear without a separate ringed-module encoding bridge.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-pur-scheme-constructible-preimage",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-finite",
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/ConstructibleSheaf/Pullback.lean",
+    "place": "Stratification.pullback; IsFiniteLocallyConstantSheaf.upperStar; IsFiniteLocallyConstantSheaf.of_iso; Etale.upperStarComp"
+   }
+  },
+  {
+   "text": "Apply the existing general small-etale hasTorAmplitudeIn_iff_exists_flatModel to the global bounded constructible object, after the conversion in step 2. Unlike the specialized finite-coefficient wrapper, this source theorem does not require an invertibility instance. For any bounded flat representative, inverse image preserves flatness by upperStarPreservesFlat_moduleCat, proved from the geometric-fibre flatness criterion. The termwise image vanishes in the same degrees because the additive functor preserves zero objects. For any representing isomorphism e, take mapDerivedCategory.mapIso e followed by mapDerivedCategoryFactors.app P; choose this very isomorphism for the displayed equality.",
+   "uses": [
+    "lem-sf-etale-flat-model",
+    "lem-sfb-etale-flat-geometric-fibers",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
+    "place": "hasTorAmplitudeIn_iff_exists_flatModel; UpperLowerStar.FlatModuleCat.upperStarPreservesFlat_moduleCat"
+   }
+  },
+  {
+   "text": "On every chart, apply the reverse implication of the same general small-etale flat-model equivalence to its bounded constructibility from step 2 and the restricted global model from step 4. This proves the original Tor interval [a,b]. Combine this with the cover, both bounded-constructibility conclusions, both unchanged cohomology intervals, the chosen-stratification construction and the formula for every representing isomorphism. Empty-cover chart assertions are vacuous.",
+   "uses": [
+    "lem-sf-etale-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/HomComparisonAffineInputs.lean",
+    "place": "homComparisonAffineInputs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-pur-scheme-constructible-preimage",
+  "lem-sf-etale-flat-model",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-pullback-finite",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-pullback-stratification",
+  "pqf-def-affine-morphism",
+  "prop-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-sf-hom-comparison-constructible.proof.md",
+  "place": "Sentences 1-2. J8 implements the finite affine reduction with the existing categorical module-valued pullback API and general source flat-model theorem; the unit route and the complete statement are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme over an algebraically closed field admits a finite affine open cover of separated finite type schemes on which bounded constructible complexes and their finite Tor amplitude restrict with unchanged bounds",
+   "results": "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover and flat scheme-morphism tools do not state preservation of bounded constructible etale complexes and a bounded flat sheaf model on a finite affine cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an affine open subscheme preserves constructible cohomology and a bounded flat representative in the same degrees",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.sourceAffineLocally_morphismRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover and flat scheme-morphism tools do not state preservation of bounded constructible etale complexes and a bounded flat sheaf model on a finite affine cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"restrict\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover and flat scheme-morphism tools do not state preservation of bounded constructible etale complexes and a bounded flat sheaf model on a finite affine cover"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*restrict|restrict.*constructible|[Tt]or[Aa]mplitude|bounded.*flat",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover and flat scheme-morphism tools do not state preservation of bounded constructible etale complexes and a bounded flat sheaf model on a finite affine cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine open restriction of bounded constructible etale complexes preserves the same finite Tor interval and bounded flat models",
+   "results": "AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.affineOpensRestrict, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.IsFinite.instMorphismRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-cover and flat scheme-morphism tools do not state preservation of bounded constructible etale complexes and a bounded flat sheaf model on a finite affine cover"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*restrict|restrict.*constructible|[Tt]or[Aa]mplitude|bounded.*flat",
+   "results": "{\"t\": \"2026-10-23T16:23:07Z\", \"tool\": \"grep\", \"query\": \"constructible.*restrict|restrict.*constructible|[Tt]or[Aa]mplitude|bounded.*flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general t-structure and scheme-morphism restriction infrastructure does not state constructible etale restriction and the bounded flat model clauses together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open subscheme preserves bounded constructible etale complexes and a bounded flat model in the same degrees",
+   "results": "{\"t\": \"2026-10-23T16:23:08Z\", \"tool\": \"leansearch\", \"query\": \"Restriction to an open subscheme preserves bounded constructible etale complexes and a bounded flat model in the same degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.Scheme.restrict_carrier\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.Scheme.Hom.resLE\"], \"digest\": \"ceaf770dd367d1fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general t-structure and scheme-morphism restriction infrastructure does not state constructible etale restriction and the bounded flat model clauses together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image on small etale sites restricts bounded constructible complexes and preserves flat sheaves on affine open subschemes",
+   "results": "{\"t\": \"2026-10-23T16:23:08Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image on small etale sites restricts bounded constructible complexes and preserves flat sheaves on affine open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\"], \"digest\": \"8829c9782e5205ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general t-structure and scheme-morphism restriction infrastructure does not state constructible etale restriction and the bounded flat model clauses together"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"restrict\"",
+   "results": "{\"t\": \"2026-10-23T16:23:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsConstructible\\\", \\\"restrict\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general t-structure and scheme-morphism restriction infrastructure does not state constructible etale restriction and the bounded flat model clauses together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine open localization preserves cohomological bounds constructible sheaves Tor amplitude and any bounded flat representative of an etale complex",
+   "results": "{\"t\": \"2026-10-23T16:23:10Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine open localization preserves cohomological bounds constructible sheaves Tor amplitude and any bounded flat representative of an etale complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\"], \"digest\": \"9f757043529f4ef5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general t-structure and scheme-morphism restriction infrastructure does not state constructible etale restriction and the bounded flat model clauses together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-hom-comparison-constructible",
+  "date": "2026-10-22",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-hom-ctf",
+ "blueprint": {
+  "from": {
+   "node": "thm-sf-hom-comparison-constructible",
+   "place": "Proof, sentences 1-2: finite affine cover reduces to separated schemes; returned proof steps 1-2, including the bounded flat model and constructible stratification restriction",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-hom-comparison-affine-inputs",
+  "worker": "stage1",
+  "summary": "Q157: all clauses proved from existing nodes, with exact cohomology bounds, module-linear pullback of any constructible stratification, and restriction of every bounded flat representative. No new nodes or statement change. Read the current blueprint and Stacks tags; searched project declarations and Mathlib.",
+  "blueprint": "thm-sf-hom-comparison-constructible proof sentences 1--2: open-local input models and finite affine cover reducing to separated finite-type charts.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Preserves the same finite constant module on each pulled-back trivializing object. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pur-scheme-constructible-preimage",
+    "why": "Ensures the intersected strata are constructible, beyond merely locally closed. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Supplies the global bounded flat model and recovers the chart Tor interval from its restricted model. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affine morphisms are separated; applied to the affine charts over the one-point field spectrum. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Pulls back the stratum trivializing cover to an etale cover of its intersection with the chart. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Identifies inverse image along each etale open with literal section restriction. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Preserves the original cohomological vanishing intervals via the exact cohomology comparison. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact restriction takes every representative and its isomorphism to the restricted representative. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Compares the two routes to restriction on a chart stratum as module sheaves. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Treat each open chart as an etale object before identifying inverse image with restriction. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Preserves termwise flatness for every chosen global flat model. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Pulls back any given stratification to a finite locally closed partition of a chart. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Constant-coefficient module inverse image is exact and agrees with ringed pullback. No node of this unit supplies this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-pullback-constant",
+  "lem-pur-scheme-constructible-preimage",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lemma-constructible-pullback-stratification",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-1ddca417b",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-1ddca417b (reviewer sub-agent of L); spot-checked: Read the whole item, all 16 cited statements and the constructible, flat and derived definitions. This is the item's first split: live has it unsplit with an empty proof, and the re-split note belongs only to the parent, now resolved. The statement and stmt_deps are byte-identical to live. There are 0 new nodes. Step 1: def-weil-finite-type-morphism with V=Spec k gives finitely many charts Spec B_i with B_i finitely generated. Spec k has one point, so each chart map is affine by pqf-def-affine-morphism. lem-weil-pbc-affine-morphism-permanence (3) then gives separatedness. Nothing about overlaps is used. Step 2: the open immersion is etale, inverse image is literal restriction, and prop-weil-pbc-inverse-image-modules-exact (1)-(3) makes it the exact module inverse image. The exact-functor derived factorization and cohomology nodes keep the intervals. Step 3: stratification pullback, constructible preimage (054I, any morphism), the module-linear compositor, etale-cover base change and pullback of constant sheaves give condition (b) of def-weil-pbc-etale-constructible-sheaf on Z∩U_i. Steps 4-5: the etale clause of lem-sf-flat-model in both directions, plus the ringed-topos flat pullback (05VD), gives the flat model for every representing iso and Tor amplitude [a,b] on U_i. Edge cases checked: X empty, K=0, a=b, n=1, doubled-origin line, strata missing U_i. proof_deps equals the union of uses. No SGA appears. All 13 declared tool_uses are generic and accepted. FIX: step 1 source said Tag 01T0 (a section); the definition-finite-type label is Tag 01T1. The step-5 source and proof_origin now cite main-20261015 instead of the moving 'latest' symlink; the text is the same. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-hom-comparison-affine-inputs.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HomComparisonAffineInputs",
+  "declaration": "AlgebraicGeometry.Etale.homComparisonAffineInputs",
+  "file": "lean/Sheaf/Paper/HomComparisonAffineInputs.lean",
+  "statement": "theorem homComparisonAffineInputs (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of D.k)) [LocallyOfFiniteType f] [QuasiCompact f] (K M : DerivedCategoryModule (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X) (_hK : @DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) X K) (_hM : @DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) X M) (r s t v a b : ℤ) (_hab : a ≤ b) (_hKr : ∀ h : ℤ, h < r ∨ s < h → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) h).obj K)) (_hMt : ∀ h : ℤ, h < t ∨ v < h → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) h).obj M)) (_hTor : DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X a b K) : (∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) ℤ, IsBoundedFlatComplex (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) a b P ∧ Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P)) ∧ ∃ (m : ℕ) (U : Fin m → Scheme.{u}) (j : ∀ i : Fin m, U i ⟶ X), (∀ i : Fin m, IsOpenImmersion (j i)) ∧ (∀ x : X, ∃ (i : Fin m) (y : U i), j i y = x) ∧ (IsEmpty X → m = 0) ∧ (∀ i : Fin m, IsAffine (U i) ∧ IsSeparated (j i ≫ f) ∧ LocallyOfFiniteType (j i ≫ f) ∧ QuasiCompact (j i ≫ f)) ∧ (∀ i : Fin m, (@DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) (U i) ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategory.obj K)) ∧ (@DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) (U i) ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategory.obj M)) ∧ (∀ h : ℤ, h < r ∨ s < h → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) h).obj ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategory.obj K))) ∧ (∀ h : ℤ, h < t ∨ v < h → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) h).obj ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategory.obj M))) ∧ DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) (U i) a b ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategory.obj K)) ∧ (∀ (i : Fin m) (N : DerivedCategoryModule (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X), N = K ∨ N = M → ∀ (h : ℤ) (S : X.FiniteLocallyClosedStratification), (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) → (∀ k : Fin S.n, Scheme.IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (S.immersion k)).obj ((_root_.DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) h).obj N))) → ∃ (R : (U i).FiniteLocallyClosedStratification) (e : Fin R.n ≃ {k : Fin S.n // Nonempty ↥(pullback (S.immersion k) (j i) : Scheme.{u})}), (∀ k : Fin R.n, R.domain k = pullback (S.immersion (e k).1) (j i)) ∧ (∀ k : Fin R.n, HEq (R.immersion k) (pullback.snd (S.immersion (e k).1) (j i))) ∧ (∀ k : Fin R.n, R.stratum k = (j i) ⁻¹' S.stratum (e k).1) ∧ (∀ k : Fin R.n, Topology.IsConstructible (R.stratum k)) ∧ (∀ k : Fin R.n, Scheme.IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (R.immersion k)).obj ((_root_.DerivedCategory.homologyFunctor (Sheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) h).obj ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategory.obj N))))) ∧ (∀ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)))) ℤ, IsBoundedFlatComplex (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) a b P → ∀ (e : K ≅ (_root_.DerivedCategory.Q).obj P) (i : Fin m), ∃ eU : ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategory.obj K) ≅ (_root_.DerivedCategory.Q).obj (((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P), IsBoundedFlatComplex (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) a b (((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧ eU = (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategory.mapIso e ≪≫ ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (j i)).mapDerivedCategoryFactors.app P))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2234bf3e",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read item node, all 13 stmt_dep records and the exact Lean decls (isBoundedConstructible, IsConstructibleEtaleModuleSheaf, FiniteLocallyClosedStratification, IsFiniteLocallyConstantSheaf + finite_locally_constant_module_values_iff, hasTorAmplitudeIn, IsBoundedFlatComplex, Etale.upperStar exactness, mapDerivedCategoryFactors orientation, recorded etale flat-model iff). Every hypothesis/clause matches: ULift A convention as lem-sf-flat-model; finite affine cover with separated finite-type charts; IsEmpty X → m=0; K_i/M_i bounded constructible with the same intervals and Tor [a,b]; stratification restriction pinned to nonempty actual fibre products, pullback.snd, preimage strata; ∀ P ∀ e, eU = mapIso e ≪≫ factors.app P. Edge cases (empty X/strata, zero, r>s, a=b, n=1, nonseparated, universes) ok; l-invertibility derived, not assumed. Only the item lean field changed vs live; statement verbatim; docstrings with source/blueprint/5 steps; sorry only; no lines >100; report sections and searches present. Advisory only: Etale.upperStar (def-weil-pbc-inverse-image) and mapDerivedCategoryFactors are used without their owner nodes in the base-era stmt_deps, and def-pur-localized-ringed-site's overFunctor is not used literally; S2 cannot change stmt_deps, so this is a maintainer note. No fixes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261024T190152-L-3973656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

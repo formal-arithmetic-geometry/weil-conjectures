@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-stable-lattice-finite-matrix-reductions",
+ "kind": "statement",
+ "title": "Stable lattice coordinates and continuous finite matrix reductions",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with its norm topology, ring of integers $\\mathcal O=\\mathcal O_E$ and chosen uniformizer $\\pi=\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Let $G$ be a compact topological group, let $V$ be a finite-dimensional norm-topological $E$-vector space of dimension $r\\geq0$, and let $\\rho:G\\to\\operatorname{GL}_E(V)$ be a homomorphism with jointly continuous action $G\\times V\\to V$. There exist a $G$-stable free $\\mathcal O$-submodule $\\Lambda\\subset V$ of rank $r$ spanning $V$ over $E$, an $\\mathcal O$-basis $(e_1,\\ldots,e_r)$ of $\\Lambda$ which is also an $E$-basis of $V$, and a homomorphism $A:G\\to\\operatorname{GL}_r(\\mathcal O)$ such that $\\rho(g)e_j=\\sum_i A(g)_{ij}e_i$ for all $g,j$. Here matrices are as in [def-weil-matrix], and $\\operatorname{GL}_r(R)$ is the group of matrices over $R$ admitting a two-sided matrix inverse. The $\\pi$-adic topology of $\\Lambda$ is its subspace topology from $V$, and the restricted action on $\\Lambda$ is continuous. For every integer $n\\geq1$, put $R_n=\\mathcal O/\\pi^n\\mathcal O$ and let $A_n:G\\to\\operatorname{GL}_r(R_n)$ be entrywise reduction of $A$. Then $R_n$ and $Q_n=A_n(G)$ are finite, and $A_n$ is continuous when its target is discrete. In particular, corestriction gives a continuous surjective homomorphism $G\\to Q_n$, with $Q_n$ discrete. The rank-zero case is included.",
+ "source": {
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, second and third bullets, p. 3; agent expansion of the stable lattice into integral matrix coordinates and continuity of every finite reduction (old item Steps 1-2)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Apply Padic.exists_stable_lattice directly with the module topology already present in its signature. Obtain the finitely generated, full, free stable lattice, its rank equality, the equality of its maximal-ideal-adic and subspace topologies, and its continuous restricted action. No separate comparison of finite-dimensional topologies is needed.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, printed p. 3; agent expansion formalized by Z5."
+   }
+  },
+  {
+   "text": "Extract IsFractionRing O E and the identity span {uniformizer} = maximal ideal from Padic.extension_integers_dvr for the recorded spectral absolute value. Register the lattice as Submodule.IsLattice E. Reindex Module.finBasis O lattice by its rank equality and apply Mathlib Module.Basis.extendOfIsLattice to obtain the field basis, with the same underlying vectors.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, printed p. 3; agent expansion formalized by Z5."
+   }
+  },
+  {
+   "text": "Restrict each representation automorphism to the stable lattice using LinearEquiv.ofSubmodules. Extensionality proves the identity and composition laws. Map the resulting automorphism homomorphism to units of the endomorphism ring, then apply Units.map to LinearMap.toMatrixAlgEquiv of the integral basis. The toMatrix coordinate formula and Basis.sum_repr give the required action formula after inclusion into V.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, printed p. 3; agent expansion formalized by Z5."
+   }
+  },
+  {
+   "text": "Rewrite the principal uniformizer ideal as the recorded maximal ideal to obtain the requested adic-topology equality. Rewrite that equality in the restricted-action existence proof to obtain continuity for the actual subspace topology.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, printed p. 3; agent expansion formalized by Z5."
+   }
+  },
+  {
+   "text": "Define each reduced homomorphism by Matrix.GeneralLinearGroup.map of the ideal quotient map, composed with the integral homomorphism. Padic.finite_coefficientExtensionRing gives finiteness of the coefficient ring; finite functions and injectivity of units into their underlying matrices give finiteness of the general linear group and the image.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, printed p. 3; agent expansion formalized by Z5."
+   }
+  },
+  {
+   "text": "For any commutative ring R, R-module M, ideal I, exponent n and linear coordinate f : M -> R, the additive map x -> f(x) mod I^n has a kernel containing I^n M. The latter is open for the I-adic module topology by Mathlib SubmodulesBasis.openAddSubgroup. AddSubgroup.isOpen_mono makes the kernel open, and continuous_of_continuousAt_zero proves continuity into the discrete quotient. Apply this proved private helper to every basis coordinate and compose with the continuous orbit map on the stable lattice. A matrix fiber is the finite intersection of its entry fibers, hence is open; continuous_discrete_rng proves continuity of the reduced matrix map. A range-restricted fiber equals the corresponding original fiber, giving continuity of the corestriction; MonoidHom.rangeRestrict_surjective supplies surjectivity.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, printed p. 3; agent expansion formalized by Z5."
+   }
+  },
+  {
+   "text": "All constructions apply for empty bases and the zero module. In rank zero the matrix-fiber intersection is empty and therefore the whole group. Positive-level coefficient-ring finiteness is independent of the rank.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, printed p. 3; agent expansion formalized by Z5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, second and third bullets, printed p. 3; agent expansion formalized by Z5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous representation of a compact group over a finite extension of Q p admits an invariant free lattice whose matrix reductions modulo every power of a uniformizer are continuous homomorphisms with finite image",
+   "results": "[leanfinder] OK 8 hit(s); Subgroup.instIsArithmeticMapSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGLOfFiniteIndex: ∀ (Γ : Subgroup (Matrix.SpecialLinearGroup (Fin 2) ℤ)) [Γ.FiniteIndex],\n  (Subgroup.map (Matrix.SpecialLinearGroup.mapGL ℝ) Γ).IsArithmetic; ModularGroup.tendsto_lcRow0: ∀ {cd : Fin 2 → ℤ},\n  IsCoprime (cd 0) (cd 1) →\n    Filter.Tendsto (fun g => (ModularGroup.lcRow0 cd) ↑((Matrix.SpecialLinearGroup.map (Int.castRingHom ℝ)) ↑g))\n      Filter.cofinite (Filter.cocompact ℝ); NumberField.mixedEmbedding.instDiscreteTopologySubtypeMixedSpaceMemSubmoduleIntIdealLattice: ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\n  (I : (FractionalIdeal (nonZeroDivisors (NumberField.RingOfIntegers K)) K)ˣ),\n  DiscreteTopology ↥(NumberField.mixedEmbedding.idealLattice K I); ZLattice.module_finite: ∀ (K : Type u_1) [inst : NormedField K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] [HasSolidNorm K] [FloorRing K]\n  {E : Type u_2} [inst_5 : NormedAddCommGroup E] [inst_6 : NormedSpace K E] [FiniteDimensional K E] [ProperSpace E]\n  (L : Submodule ℤ E) [inst_9 : DiscreteTopology ↥L] [IsZLattice; Subgroup.instDiscreteTopStrictPeriods: ∀ {R : Type u_1} [inst : Ring R] {𝒢 : Subgroup (GL (Fin 2) R)} [inst_1 : TopologicalSpace R] [IsTopologicalRing R]\n  [hG : DiscreteTopology ↥𝒢], DiscreteTopology ↥𝒢.strictPeriods; ModN.basis: {G : Type u_1} →\n  [inst : AddCommGroup G] →\n    {n : ℕ} → [NeZero n] → {ι : Type u_4} → Module.Basis ι ℤ G → Module.Basis ι (ZMod n) (ModN G n); instModuleFinite_of_discrete_submodule: ∀ {E : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [FiniteDimensional ℝ E] (L : Submodule ℤ E)\n  [DiscreteTopology ↥L], Module.Finite ℤ ↥L; NumberField.mixedEmbedding.fundamentalDomain_idealLattice: ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\n  (I : (FractionalIdeal (nonZeroDivisors (NumberField.RingOfIntegers K)) K)ˣ),\n  MeasureTheory.IsAddFundamentalDomain (↥(NumberField.mixedEmbedding.idealLattice K I))\n    (ZSpan.fundamentalDomain (NumberField.mixedEmbedding.fractionalIdealLa",
+   "date": "2026-10-22",
+   "verdict": "no match: continuous GL maps and Z-lattice/order-lattice facts do not construct an invariant local-field lattice with its continuous finite matrix reductions; not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"Continuous\"",
+   "results": "[loogle] OK 4 hit(s); Matrix.GeneralLinearGroup.continuous_apply:  {n : Type u_1} {R : Type u_2} [Fintype n] [DecidableEq n] [CommRing R] [TopologicalSpace R] {α : Type u_4} [TopologicalSpace α] (f : α → GL n R) (hf : Continuous f) (i : n) : Continuous fun x => ↑(f x) i; Matrix.GeneralLinearGroup.continuous_det:  {n : Type u_1} {R : Type u_2} [Fintype n] [DecidableEq n] [CommRing R] [TopologicalSpace R] [IsTopologicalRing R] : Continuous ⇑Matrix.GeneralLinearGroup.det; Matrix.GeneralLinearGroup.continuous_upperRightHom:  {R : Type u_4} [Ring R] [TopologicalSpace R] [IsTopologicalRing R] : Continuous ⇑Matrix.GeneralLinearGroup.upperRightHom; Continuous.generalLinearGroup_map:  {n : Type u_1} {R : Type u_2} {S : Type u_3} [Fintype n] [DecidableEq n] [CommRing R] [TopologicalSpace R] [CommRing S] [TopologicalSpace S] {f : R →+* S} (hf : Continuous ⇑f) : Continuous ⇑(Matrix.GeneralLinearGroup.map f)",
+   "date": "2026-10-22",
+   "verdict": "no match: continuous GL maps and Z-lattice/order-lattice facts do not construct an invariant local-field lattice with its continuous finite matrix reductions; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "(lattice|GeneralLinear).*(reduc|quotient|continuous)|(reduc|quotient|continuous).*(lattice|GeneralLinear)",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Lie/Free.lean:32: currently have definitions of ideals, lattices of ideals, and quotients for; Mathlib/Algebra/Module/Lattice.lean:22: When `R` is a DVR and `ι = Fin 2`, then by taking the quotient of the type of `R`-lattices in; Mathlib/Algebra/Module/ZLattice/Basic.lean:40:   `L` by `e`. If `L` is a `IsZLattice` and `e` is a continuous linear equiv, then it is also a; Mathlib/Algebra/Module/ZLattice/Basic.lean:695: `Submodule ℤ F` that is the pullback of `L` by `e`. If `IsZLattice L` and `e` is a continuous; Mathlib/Algebra/Module/ZLattice/Basic.lean:713:   ZLattice.comap_discreteTopology K L e.continuous e.injective; Mathlib/Algebra/Module/ZLattice/Basic.lean:791:     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L] (f : E → F) (hf : Continuous f); Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean:218:   QuotientGroup.map _ _ (GeneralLinearGroup.map (n := n) f) <| GeneralLinearGroup.map_center_le f; Mathlib/GroupTheory/QuotientGroup/Basic.lean:30: * `QuotientGroup.comapMk'OrderIso`: The correspondence theorem, a lattice; Mathlib/LinearAlgebra/Span/Basic.lean:160: Scott continuous for the ω-complete partial order induced by the complete lattice structures. -/; Mathlib/Analysis/Normed/Order/Lattice.lean:128: /-- Let `α` be a normed lattice ordered group. Then the infimum is jointly continuous.; Mathlib/Analysis/Normed/Order/Lattice.lean:142:     [NormedAddCommGroup α] [Lattice α] [HasSolidNorm α] [IsOrderedAddMonoid α] : ContinuousSup α :=; Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:317: lemma not_continuousAt_weierstrassP (x : ℂ) (hx : x ∈ L.lattice) : ¬ ContinuousAt ℘[L] x := by; Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:324:       (L.compl_lattice_sdiff_singleton_mem_nhds x)).continuousAt).add; Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean:1071:     this.continuous fun z w hw ↦ by lift w to L.lattice using hw; simp).isBounded x 0).trans; Mathlib/MeasureTheory/Function/AEEqFun.lean:571: variable [SemilatticeSup β] [ContinuousSup β]; Mathlib/MeasureTheory/Function/AEEqFun.lean:600: variable [SemilatticeInf β] [ContinuousInf β]; Mathlib/Analysis/Normed/Operator/ContinuousAlgEquiv.lean:20: See `Mathlib/LinearAlgebra/GeneralLinearGroup/AlgEquiv.lean` for the non-continuous version.; Mathlib/Topology/Order/Lattice.lean:15: class `TopologicalLattice` as a topological space and lattice `L` extending `ContinuousInf` and; Mathlib/Topology/Order/Lattice.lean:20: * [Gierz et al, A Compendium of Continuous Lattices][GierzEtAl1980]; Mathlib/Topology/Order/Lattice.lean:57: /-- Let `L` be a lattice equipped with a topology such that `L` has continuous infimum and supremum.; Mathlib/Topology/Order/Lattice.lean:120: lemma finset_sup'_nhds [SemilatticeSup L] [ContinuousSup L]; Mathlib/Topology/Order/Lattice.lean:130: lemma finset_sup'_nhds_apply [SemilatticeSup L] [ContinuousSup L]; Mathlib/Topology/Order/LawsonTopology.lean:44: * [Gierz et al, *A Compendium of Continuous Lattices*][GierzEtAl1980]; Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean:389: protected theorem sup [SemilatticeSup β] [ContinuousSup β] (hf : AEStronglyMeasurable f μ); Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean:395: protected theorem inf [SemilatticeInf β] [ContinuousInf β] (hf : AEStronglyMeasurable f μ)",
+   "date": "2026-10-22",
+   "verdict": "no match: continuous GL maps and Z-lattice/order-lattice facts do not construct an invariant local-field lattice with its continuous finite matrix reductions; not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact group representation over a nonarchimedean local field can be written in integral matrices and gives continuous actions on finite lattice quotients",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; ",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch rate limit; no absence conclusion drawn from this request."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compact topological group acting continuously on a p adic vector space, choose an invariant integral basis so that every reduction modulo the maximal ideal power is a continuous map into a finite general linear group",
+   "results": "[leanfinder] OK 8 hit(s); ModN.basis: {G : Type u_1} →\n  [inst : AddCommGroup G] →\n    {n : ℕ} → [NeZero n] → {ι : Type u_4} → Module.Basis ι ℤ G → Module.Basis ι (ZMod n) (ModN G n); ModN.basis_apply_eq_mkQ: ∀ {G : Type u_1} [inst : AddCommGroup G] {n : ℕ} [inst_1 : NeZero n] {ι : Type u_4} (b : Module.Basis ι ℤ G) (i : ι),\n  (ModN.basis b) i = (ModN.mkQ n) (b i); PadicInt.zmodRepr_spec: ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)] (x : ℤ_[p]), x.zmodRepr < p ∧ x - ↑x.zmodRepr ∈ IsLocalRing.maximalIdeal ℤ_[p]; PadicInt.mahlerTerm: {p : ℕ} →\n  [hp : Fact (Nat.Prime p)] →\n    {E : Type u_1} →\n      [inst : NormedAddCommGroup E] → [inst_1 : Module ℤ_[p] E] → [IsBoundedSMul ℤ_[p] E] → E → ℕ → C(ℤ_[p], E); PadicInt.mahlerEquiv: {p : ℕ} →\n  [hp : Fact (Nat.Prime p)] →\n    (E : Type u_1) →\n      [inst : NormedAddCommGroup E] →\n        [inst_1 : Module ℤ_[p] E] →\n          [inst_2 : IsBoundedSMul ℤ_[p] E] →\n            [IsUltrametricDist E] → [CompleteSpace E] → C(ℤ_[p], E) ≃ₗᵢ[ℤ_[p]] ZeroAtInftyContinuousMap ℕ E; PadicInt.toZMod_spec: ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)] (x : ℤ_[p]), x - (PadicInt.toZMod x).cast ∈ IsLocalRing.maximalIdeal ℤ_[p]; PadicInt.exists_mem_range: ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)] (x : ℤ_[p]), ∃ n < p, x - ↑n ∈ IsLocalRing.maximalIdeal ℤ_[p]; PadicInt.mahlerTerm_apply: ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\n  [inst_2 : IsBoundedSMul ℤ_[p] E] (a : E) (n : ℕ) (x : ℤ_[p]), (PadicInt.mahlerTerm a n) x = (mahler n) x • a",
+   "date": "2026-10-22",
+   "verdict": "no match: continuous GL maps and Z-lattice/order-lattice facts do not construct an invariant local-field lattice with its continuous finite matrix reductions; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "stable|lattice|GeneralLinearGroup|reduction",
+   "results": "[grep] OK 11 hit(s); Mathlib/RepresentationTheory/Subrepresentation.lean:28: which is stable under the `G`-action.; Mathlib/RepresentationTheory/Subrepresentation.lean:89: instance : Lattice (Subrepresentation ρ) :=; Mathlib/RepresentationTheory/Subrepresentation.lean:90:   toSubmodule_injective.lattice _ .rfl .rfl toSubmodule_sup toSubmodule_inf; Mathlib/RepresentationTheory/Semisimple.lean:35:   ComplementedLattice (Subrepresentation ρ); Mathlib/RepresentationTheory/Semisimple.lean:40:   exact OrderIso.complementedLattice_iff Subrepresentation.subrepresentationSubmoduleOrderIso; Mathlib/RepresentationTheory/Semisimple.lean:47:   exact OrderIso.complementedLattice_iff Subrepresentation.submoduleSubrepresentationOrderIso; Mathlib/RepresentationTheory/Submodule.lean:25: /-- Given a representation `ρ` of a group, `ρ.invtSubmodule` is the sublattice of all; Mathlib/RepresentationTheory/Submodule.lean:27: def invtSubmodule : Sublattice (Submodule k V) :=; Mathlib/RepresentationTheory/Submodule.lean:32:   rw [invtSubmodule, Sublattice.mem_iInf]; Mathlib/RepresentationTheory/Submodule.lean:80:     rw [invtSubmodule, Sublattice.mem_iInf]; Mathlib/RepresentationTheory/Maschke.lean:166: /-- This also implies instances `ComplementedLattice (Submodule k[G] V)` and",
+   "date": "2026-10-22",
+   "verdict": "no match: continuous GL maps and Z-lattice/order-lattice facts do not construct an invariant local-field lattice with its continuous finite matrix reductions; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous_apply|generalLinearGroup_map",
+   "results": "[grep] OK 5 hit(s); 35:theorem continuous_apply {α :  Type*} [TopologicalSpace α]; 41:lemma _root_.Continuous.generalLinearGroup_map (hf :  Continuous f) :; 45:lemma _root_.Topology.IsInducing.generalLinearGroup_map (hf :  IsInducing f) :; 49:lemma _root_.Topology.IsEmbedding.generalLinearGroup_map (hf :  IsEmbedding f) :; 55:lemma _root_.Topology.IsClosedEmbedding.generalLinearGroup_map [T0Space R]: ",
+   "date": "2026-10-22",
+   "verdict": "no match: continuous GL maps and Z-lattice/order-lattice facts do not construct an invariant local-field lattice with its continuous finite matrix reductions; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous representation of a compact group over a finite extension of Q p admits an invariant free lattice whose matrix reductions modulo every power of a uniformizer are continuous homomorphisms with finite image",
+   "results": "OK 8 hits; Module.Basis.ofZLatticeBasis_comap, ZLattice.module_free, ZLattice.module_finite, NumberField.mixedEmbedding.fundamentalDomain_idealLattice, Zlattice.FG, ZLattice.FG, NumberField.Units.instDiscrete_unitLattice, NumberField.mixedEmbedding.instDiscreteTopologySubtypeMixedSpaceMemSubmoduleIntIntegerLattice",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give real/integer lattices, local-field topology, open-subgroup quotients or continuous maps of matrix groups; none supplies the full stable local-field lattice and continuous finite-reduction statement."
+  },
+  {
+   "tool": "grep",
+   "query": "(lattice|GeneralLinear).*(reduc|quotient|continuous)|(reduc|quotient|continuous).*(lattice|GeneralLinear)",
+   "results": "OK 25 hits; Mathlib/MeasureTheory/Function/AEEqFun.lean, Mathlib/MeasureTheory/Function/AEEqFun.lean, Mathlib/Probability/Martingale/Basic.lean, Mathlib/Probability/Martingale/Basic.lean, Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean, Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean, Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean, Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give real/integer lattices, local-field topology, open-subgroup quotients or continuous maps of matrix groups; none supplies the full stable local-field lattice and continuous finite-reduction statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact group representation over a nonarchimedean local field can be written in integral matrices and gives continuous actions on finite lattice quotients",
+   "results": "OK 8 hits; IsNonarchimedeanLocalField.toLocallyCompactSpace, Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace, IsNonarchimedeanLocalField.instCompleteSpace, CategoryTheory.PreGaloisCategory.has_decomp_quotients, NonarchimedeanGroup.mk, topologicalGroup_is_uniform_of_compactSpace, Rep.instInjective, IsNonarchimedeanLocalField.valueGroupWithZeroIsoInt",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give real/integer lattices, local-field topology, open-subgroup quotients or continuous maps of matrix groups; none supplies the full stable local-field lattice and continuous finite-reduction statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"Continuous\"",
+   "results": "OK 4 hits; Matrix.GeneralLinearGroup.continuous_apply, Matrix.GeneralLinearGroup.continuous_det, Matrix.GeneralLinearGroup.continuous_upperRightHom, Continuous.generalLinearGroup_map",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give real/integer lattices, local-field topology, open-subgroup quotients or continuous maps of matrix groups; none supplies the full stable local-field lattice and continuous finite-reduction statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compact topological group acting continuously on a p adic vector space, choose an invariant integral basis so that every reduction modulo the maximal ideal power is a continuous map into a finite general linear group",
+   "results": "OK 8 hits; PadicInt.mahlerTerm, Padic.instProperSpace, PadicInt.mahlerEquiv, PadicInt.compactSpace, PadicInt.mahlerTerm_apply, cyclotomicCharacter.continuous, PadicInt.exists_mem_range, PadicInt.zmodRepr_spec",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give real/integer lattices, local-field topology, open-subgroup quotients or continuous maps of matrix groups; none supplies the full stable local-field lattice and continuous finite-reduction statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-linear-image-finite",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md (of det-thm-sf-ctf-stability-direct-images), open direct image; tame-boundary descendant: integral stable lattice and continuous finite reductions in Steps 1-2 of lem-sfb-prime-to-ell-linear-image-finite.",
+   "via": [
+    "lem-sfb-prime-to-ell-linear-image-finite",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-stable-lattice-finite-matrix-reductions",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split it into topology comparison, reuse of the existing compact-group stable-lattice theorem, a common-denominator basis argument, explicit matrix and inverse identities, finite valuation-ring quotients, open-fiber continuity, and the rank-zero check. No new nodes; the complete stable-lattice statement and the existing Mathlib leaves are reused.",
+  "blueprint": "Realizes the stable-lattice and finite-reduction portion of the tame-boundary expansion below paragraph (3), open direct image, of det-thm-sf-ctf-stability-direct-images; nearest blueprint ancestor is null as reported by blueprint_refs.py.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Generic compact-group stable-lattice theorem, including its topology and continuous-action clauses; this auxiliary representation-theoretic construction is not a replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-field valuation theorem giving DVR and finite residue field for finite extensions of Q_ell, and the fraction-field fact used for basis independence; no lemma of the item unit supplies these coefficient facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NX-5e73341dc",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-5e73341dc (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement. There are no new nodes and the statement and stmt_deps are unchanged. The item is not in the drop list, has no repair note and is unsplit both live and on side-live. Source: Stanford L19 Prop. 1.1.9, second and third bullets, p. 3. The stable lattice is taken from lem-pod-profinite-stable-lattice, whose hypotheses match exactly: compact G, the ℓ-adic topology and a jointly continuous action. Step 1 shows the norm topology equals the product topology (LinearEquiv.toContinuousLinearEquiv leaf; E is complete and nontrivially normed). Step 3: common-denominator independence via the fraction-field clause of integers-dvr. Step 4: matrix identities in the column convention, A(gh)=A(g)A(h), two-sided inverse A(g⁻¹). Step 5: all hypotheses of valued-dvr-finite-quotients hold (nonarchimedean value, DVR with finite residue field, π generates m), so R_n is finite and so is GL_r(R_n). Step 6: the fibres are finite intersections of preimages of open cosets v_j+π^nΛ under continuous orbit maps, with equivalence by uniqueness of basis coefficients. Step 7: r=0 works with the empty intersection; G trivial and rank one with the trivial action also check out. The citer prime-to-ell-linear-image-finite uses exactly these conclusions. Duplicate search found nothing: the zl finite-matrix and irreducibility nodes are specialised irreducibility statements. Batch-5 citation of lem-pod-profinite-stable-lattice: its 25-node closure is generic valuation/DVR/linear algebra plus its own core, topology and stabilizer-open children. It does not reach trace-formula or PD content, and it is a general representation fact cited by 11 nodes across chapters, not a step of either assumed proof, so I accept it. I also accept both declared tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.StableLatticeFiniteMatrixReductions",
+  "declaration": "Padic.exists_stable_lattice_finite_matrix_reductions",
+  "file": "lean/Sheaf/RepresentationTheory/StableLatticeFiniteMatrixReductions.lean",
+  "statement": "theorem exists_stable_lattice_finite_matrix_reductions (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] (V : Type w) [AddCommGroup V] [Module E V] [FiniteDimensional E V] : letI := spectralNorm.nontriviallyNormedField ℚ_[l] E letI : TopologicalSpace V := moduleTopology E V letI : Module (coefficientExtensionIntegers l E) V := Module.compHom V (coefficientExtensionIntegers l E).subtype ∀ (ρ : G →* (V ≃ₗ[E] V)), Continuous (fun p : G × V ↦ ρ p.1 p.2) → ∃ Λ : Submodule (coefficientExtensionIntegers l E) V, ∃ b : Module.Basis (Fin (Module.finrank E V)) (coefficientExtensionIntegers l E) Λ, ∃ e : Module.Basis (Fin (Module.finrank E V)) E V, ∃ A : G →* Matrix.GeneralLinearGroup (Fin (Module.finrank E V)) (coefficientExtensionIntegers l E), Submodule.span E (Λ : Set V) = ⊤ ∧ (∀ g : G, (ρ g) '' (Λ : Set V) = (Λ : Set V)) ∧ (∀ j, (b j : V) = e j) ∧ (∀ (g : G) (j : Fin (Module.finrank E V)), ρ g (e j) = ∑ i, ((A g i j : coefficientExtensionIntegers l E) : E) • e i) ∧ (Ideal.span ({coefficientExtensionUniformizer l E} : Set (coefficientExtensionIntegers l E))).adicModuleTopology Λ = TopologicalSpace.induced (fun x : Λ ↦ (x : V)) inferInstance ∧ (∃ a : G × Λ → Λ, Continuous a ∧ ∀ p : G × Λ, (a p : V) = ρ p.1 (p.2 : V)) ∧ ∀ (n : ℕ), 1 ≤ n → ∃ Aₙ : G →* Matrix.GeneralLinearGroup (Fin (Module.finrank E V)) (coefficientExtensionRing l E n), Aₙ = (Matrix.GeneralLinearGroup.map (Ideal.Quotient.mk (coefficientExtensionIdeal l E n))).comp A ∧ Finite (coefficientExtensionRing l E n) ∧ Finite Aₙ.range ∧ @Continuous G _ inferInstance ⊥ Aₙ ∧ @Continuous G Aₙ.range inferInstance ⊥ Aₙ.rangeRestrict ∧ Function.Surjective Aₙ.rangeRestrict",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-382afd5b5",
+  "group": "Q62",
+  "result": "pass",
+  "note": "All node clauses rendered exactly: Λ free of rank finrank (basis b), spans V, stable under ρ(g); b j = e j for an E-basis e; A : G →* GL(Fin r) O_E with ρ g (e j) = Σ_i A g i j • e i (orientation correct); span{π}-adic topology = subspace topology; continuous restricted action; ∀ n ≥ 1, Aₙ pinned to GL.map (Quotient.mk) ∘ A, R_n and Aₙ.range finite, Aₙ and rangeRestrict continuous into ⊥ topologies, surjective corestriction. Field/norm/O_E/π/moduleTopology setup identical to the compiled Padic.exists_stable_lattice; no extra hypotheses (no Hausdorff/profinite/positive rank). Edge cases r=0, n=1, ℓ=2 covered; universes u v w independent. Node copy differs from live only in lean; statement verbatim; report has Worker report and Second reading sections; docstrings carry source place, blueprint id and proof steps; no new defs, sorry only. No existing equivalent in lean/Sheaf. Advisory: two non-public imports only needed for the later proof. Not recompiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261023T132545-L-2300186",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

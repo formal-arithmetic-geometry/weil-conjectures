@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-projective-pgl-stable-quotient",
+ "kind": "statement",
+ "title": "Projective geometric quotients of closed stable loci for PGL",
+ "statement": "Let $k$ be any field [def-weil-field], $r\\geq1$ and $G=\\operatorname{PGL}_{r,k}$, the group scheme of invertible $r$ by $r$ matrices modulo scalars. Let $Z$ be a projective finite-type $k$-scheme [def-kun-projective, def-weil-finite-type-morphism] with a $G$-action and an ample $G$-linearized invertible module $A$ [def-sc-invertible-module]; a linearization is an action on the line lifting the action on $Z$ and linear on fibres, and ample means that some positive tensor power gives a closed embedding into a finite-dimensional projective space. Write $Z^{ss}$ for the geometric points where some positive-degree $G$-invariant section of a power of $A$ is nonzero, and $Z^s$ for those semistable points having orbit closed in $Z^{ss}$ and stabilizer of dimension zero. Suppose $J\\hookrightarrow Z^{ss}$ is a $G$-invariant closed subscheme contained in $Z^s$. Then there is a projective finite-type $k$-scheme $Q$ and a $G$-invariant surjection $q:J\\to Q$ which is universal for $G$-invariant maps to algebraic spaces, and whose fibres on algebraically closed points are precisely the $G$-orbits. More precisely, for every algebraic space $B$ over $k$, composition with $q$ gives a bijection between maps $Q\\to B$ and $G$-invariant maps $J\\to B$, and for every algebraically closed extension $\\Omega/k$ it gives $J(\\Omega)/G(\\Omega)\\simeq Q(\\Omega)$. If $\\overline J$ is the scheme-theoretic closure of $J$ in $Z$, then $Q$ can be constructed as $\\operatorname{Proj}(\\bigoplus_{n\\geq0}H^0(\\overline J,A^{\\otimes n}|_{\\overline J})^G)$. The section-ring multiplication is [def-sc-invertible-section-ring] and $\\operatorname{Proj}$ is [def-pc-proj]. This invariant graded algebra is finitely generated, and a sufficiently divisible Veronese subalgebra gives projectivity in the finite-projective-space convention. Algebraic spaces have the meaning in [def-trf-algebraic-space]. No linear reductivity or characteristic-zero hypothesis is imposed.",
+ "source": {
+  "document": "literature/mumford-fogarty-kirwan-geometric-invariant-theory.pdf",
+  "place": "Projective GIT quotient theorem, Chapter 1 Theorem 1.10, with reductivity in arbitrary characteristic (Haboush) and algebraic-space categorical universality of geometric quotients. Local book WANTED. Agent formulation of the closed stable-locus consequence; Morrison arXiv:0810.2340 Section 3.3 after Corollary 11 and Section 3.4 pp.17--18 describe this application, but do not prove this general algebraic-space quotient theorem.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-pc-proj",
+  "def-sfb-pgl-linearized-polarization",
+  "def-sc-ample",
+  "def-nagata-scheme-theoretic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Form the scheme-theoretic image, with its open immersion from J. Noetherianity gives quasi-compactness. Apply the invariant-image restriction and its semistability comparison.",
+   "uses": [
+    "lem-sfb-pgl-invariant-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image inclusion pulls back the ambient semistable open into the range of J by the closed-range image lemma. Lift geometric points through the open immersion J→X. Cancellation of the closed immersion transfers stable orbits and stabilizers to X.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply invariant section finiteness to X. Convert finite algebra generators to the ambient-subring definition IsFinitelyGenerated. Interpret the additive grading as k-submodules; compare the two Proj schemes by identity graded homomorphisms. The finite-graded-Proj theorem gives the Veronese, finite-type, quasi-compactness and projective embedding clauses.",
+   "uses": [
+    "lem-sfb-pgl-invariant-section-finiteness",
+    "lem-sfb-finite-graded-proj-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine quotient gluing to the semistable open J of X. Transfer invariance, algebraic-space universality and geometric orbit equivalence back to the ambient action using restriction compatibility and cancellation of the closed immersion.",
+   "uses": [
+    "lem-sfb-pgl-semistable-affine-quotient-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pgl-invariant-image-restriction",
+  "lem-sfb-pgl-invariant-section-finiteness",
+  "lem-sfb-finite-graded-proj-projective",
+  "lem-sfb-pgl-semistable-affine-quotient-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/mumford-fogarty-kirwan-geometric-invariant-theory.pdf",
+  "place": "T6 implementation of the image, finite graded Proj, and affine-chart quotient assembly of GIT Chapter 1 Theorem 1.10. New supporting statements retain the original source route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed invariant subscheme of the stable equals semistable locus in projective GIT has a projective coarse moduli quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, linear representation invariants, and scheme ring-quotient lifts do not give a geometric GIT quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically reductive projective linear group action has finitely generated invariants and a geometric quotient on stable orbits universal for algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.instProjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Projective V\", \"doc\": \"Every object $ V $ in the category $ \\\\text{Rep}(k, G) $ of representations of a monoid $ G $ over a ring $ k $ is a projective object. This means that for any epimorphism $ e : A \\\\to B $ in $ \\\\text{Re\"}\n  {\"name\": \"FDRep.instProjectiveOfNeZeroCastCard\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : FDRep k G), CategoryTheory.Projective V\", \"doc\": \"Every finitely generated representation of a finite group $ G $ over a field $ k $ is projective in the category of finitely generated representations, provided that the cardinality of $ G $ (interpre\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"Representation.Coinvariants.mk_surjective\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {V : Type u_3} [inst : CommRing k] [inst_1 : Monoid G] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V), Function.Surjective ⇑(Representation.Coinvariants.mk ρ)\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative ring $k$, the coinvariants module $V/\\\\text{Coinvariants. ker }\\\\rho$ inherits an additive commutative group structure fr\"}\n  {\"name\": \"Representation.Coinvariants\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : CommRing k] →\\n        [inst_1 : Monoid G] → [inst_2 : AddCommGroup V] → [inst_3 : Module k V] → Representation k G V → Type u_3\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative ring $k$, the coinvariants are defined as the quotient module $V / \\\\text{Coinvariants. ker }\\\\rho$, where $\\\\text{Coinvar\"}\n  {\"name\": \"Rep.quotientToInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [inst_2 : S.Normal] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative semiring $ k $, group $ G $, $ k $-module $ V $ with representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S \\\\trianglelefteq G $, this constructs the representa\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"Representation.quotientToInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommSemiring k] →\\n      [inst_1 : Group G] →\\n        {V : Type u_4} →\\n          [inst_2 : AddCommMonoid V] →\\n            [inst_3 : Module k V] →\\n              (ρ : Representation k G V) →\\n                (S : Subgroup G) →\\n                  [inst_4 : S\", \"doc\": \"Given a commutative semiring $k$, group $G$, $k$-module $V$ with representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, and a normal subgroup $S \\\\trianglelefteq G$, this constructs the representation of the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, linear representation invariants, and scheme ring-quotient lifts do not give a geometric GIT quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Quotient\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) : X ⟶ AlgebraicGeometry.Spec ↧(↑A ⧸ I)\", \"doc\": \"Given `f : X ⟶ Spec A` and some ideal `I ≤ ker(A ⟶ Γ(X, ⊤))`,\\nthis is the lift to `X ⟶ Spec (A ⧸ I)`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) : CategoryTheory.CategoryStruct.comp (f.liftQuotient I hI) (Alg\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec ↧↑A \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.Surjective f] : Topology.IsQuotientMap ⇑f\", \"doc\": \"A surjective, quasi-compact, flat morphism is a quotient map.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {R : CommRingCat} (I : Ideal ↑R) : AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any ideal `I` in a commutative ring `R`, the quotient map `specObj R ⟶ specObj (R ⧸ I)`\\nis a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec\", \"module\": \"Mathlib.AlgebraicGeometry.PointsPi\", \"type\": \" {ι : Type u} (R : ι → CommRingCat) (I : Ideal ((i : ι) → ↑(R i))) (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ AlgebraicGeometry.Spec ↧(((i : ι) → ↑(R i)) ⧸ I)) (hf : CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) = AlgebraicGeometry.\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, linear representation invariants, and scheme ring-quotient lifts do not give a geometric GIT quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyReductive|geometric.*quotient|GIT|invariant.*Proj",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Chebyshev.lean\", \"line\": \"60\", \"text\": \"Parts of this file were upstreamed from the PrimeNumberTheoremAnd project by Kontorovich et al, https://github.com/alexKontorovich/PrimeNumberTheoremAnd.\"}\n  {\"file\": \"Mathlib/Logic/Function/FiberPartition.lean\", \"line\": \"17\", \"text\": \"(see PR https://github.com/leanprover-community/mathlib4/pull/14027).\"}\n  {\"file\": \"Mathlib/Logic/UnivLE.lean\", \"line\": \"17\", \"text\": \"directly due to https://github.com/leanprover/lean4/issues/2297.\"}\n  {\"file\": \"Mathlib/Logic/UnivLE.lean\", \"line\": \"44\", \"text\": \"-- After https://github.com/leanprover/lean4/pull/12286 and\"}\n  {\"file\": \"Mathlib/Logic/UnivLE.lean\", \"line\": \"45\", \"text\": \"-- https://github.com/leanprover/lean4/pull/12423, both universe parameters would default to\"}\n  {\"file\": \"Mathlib/Logic/UnivLE.lean\", \"line\": \"55\", \"text\": \"/- This is useless as an instance due to https://github.com/leanprover/lean4/issues/2297 -/\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"265\", \"text\": \"`m + m * f m + m * (f m) ^ 2 + ... + m * (f m) ^ d` where `d` is the number of digits of the\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"267\", \"text\": \"lemma apply_le_sum_digits (n : ℕ) {m : ℕ} (hm : 1 < m) :\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"268\", \"text\": \"    f n ≤ ((Nat.digits m n).mapIdx fun i _ ↦ m * (f m) ^ i).sum := by\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"269\", \"text\": \"  set L := Nat.digits m n\"}\n  {\"file\": \"Mathlib/NumberTheory/Ostrowski.lean\", \"line\": \"271\", \"text\": \"  -- If `c` is a digit in the expansion of `n` in base `m`, then `f c` is less than `m`.\"}\n  {\"file\": \"Mathlib/Logic/Function/Basic.lean\", \"line\": \"652\", \"text\": \"See also https://github.com/leanprover/lean4/issues/12478.\"}\n  {\"file\": \"Mathlib/NumberTheory/PythagoreanTriples.lean\", \"line\": \"240\", \"text\": \"-- see https://github.com/leanprover-community/mathlib4/issues/29041\"}\n  {\"file\": \"Mathlib/NumberTheory/PythagoreanTriples.lean\", \"line\": \"442\", \"text\": \"    -- Added to adapt to https://github.com/leanprover/lean4/pull/2734.\"}\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"line\": \"666\", \"text\": \"/-- Ensure there are no diamonds when `A = ℤ` but there are `reducible_and_instances` https://github.com/leanprover-community/mathlib4/issues/10906 -/\"}\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"line\": \"742\", \"text\": \"-- but there is at `reducible_and_instances` https://github.com/leanprover-community/mathlib4/issues/10906\"}\n  {\"file\": \"Mathlib/Logic/Basic.lean\", \"line\": \"99\", \"text\": \"-- attribute [refl] HEq.refl -- FIXME This is still rejected after https://github.com/leanprover-community/mathlib4/pull/857\"}\n  {\"file\": \"Mathlib/Logic/Basic.lean\", \"line\": \"794\", \"text\": \"-- This can be removed after https://github.com/leanprover/lean4/pull/11316\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Derivative.lean\", \"line\": \"25\", \"text\": \"- Use above, prove Ramanujan's identities. See [here](https://github.com/thefundamentaltheor3m/Sphere-Packing-Lean/blob/main/SpherePacking/ModularForms/RamanujanIdentities.lean)\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"165\", \"text\": \"-- See https://github.com/leanprover/lean4/issues/14084.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"640\", \"text\": \"-- See https://github.com/leanprover/lean4/issues/14084.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"729\", \"text\": \"-- See https://github.com/leanprover/lean4/issues/14084.\"}\n  {\"file\": \"Mathlib/Geometry/Diffeology/Basic.lean\", \"line\": \"125\", \"text\": \"https://github.com/peabrainiac/lean-orbifolds and just needs to be upstreamed. However, some TODOs\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"line\": \"59\", \"text\": \"-- See https://github.com/leanprover/lean4/issues/14084.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"line\": \"151\", \"text\": \"-- See https://github.com/leanprover/lean4/issues/14084.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, linear representation invariants, and scheme ring-quotient lifts do not give a geometric GIT quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed invariant subscheme of the stable equals semistable locus in projective GIT has a projective coarse moduli quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"Representation.invariants_eq_inter\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \": (invariants ρ).carrier = ⋂ g : G, Function.fixedPoints (ρ g)\", \"doc\": \"The underlying set of the invariant submodule $ V^G $ is equal to the intersection of the fixed points of each group element's action, i.e., $ V^G = \\\\bigcap_{g \\\\in G} \\\\{ v \\\\in V \\\\mid \\\\rho(g)(v) = v \\\\}\"}\n  {\"name\": \"Representation.quotient\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(W : Submodule k V) (le_comap : ∀ g, W ≤ W.comap (ρ g)) : Representation k G (V ⧸ W)\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative semiring $k$, and a submodule $W \\\\subseteq V$ satisfying $W \\\\subseteq W^{\\\\rho(g)}$ for all $g \\\\in G$ (i.e., $W$ is inva\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"[QuasiCompact f] : QuasiCompact f.toImage\", \"doc\": \"If a morphism $ f $ of schemes is quasi-compact, then the induced morphism from $ X $ to the image subscheme of $ f $ is also quasi-compact.\"}\n  {\"name\": \"Module.Grassmannian.mk.inj\", \"module\": \"Mathlib.RingTheory.Grassmannian\", \"type\": \"∀ {R : Type u} {inst : CommRing R} {M : Type v} {inst_1 : AddCommGroup M} {inst_2 : Module R M} {k : ℕ}\\n  {toSubmodule : Submodule R M} {finite_quotient : Module.Finite R (M ⧸ toSubmodule)}\\n  {projective_quotient : Module.Projective R (M ⧸ toSubmodule)}\\n  {rankAtStalk_eq : ∀ (p : PrimeSpectrum R), M\", \"doc\": \"If two submodules $ P $ and $ Q $ of an $ R $-module $ M $ satisfy the conditions that their quotient modules $ M/P $ and $ M/Q $ are finitely generated, projective, and have constant rank $ k $ at ev\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, linear representation invariants, and scheme ring-quotient lifts do not give a geometric GIT quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unpointed-stable-coarse-projective",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL.",
+   "via": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-pgl-stable-quotient",
+  "worker": "stage1",
+  "summary": "Affine-chart construction of Proj of the invariant section ring, with scheme-theoretic closure, power-lifted ambient semistability, zero-divisor-safe invariant localization, finite-stabilizer algebraic-space quotients, overlap gluing and Veronese projectivity. Four non-equivariant/affine foundational inputs are stated separately; the original conclusions and arbitrary-characteristic hypotheses are preserved.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. The steps realize the projective GIT prerequisite in the existing detailed direct-image alteration route. Current ancestor tool returns None; inherited null blueprint root is retained.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-dense-flat-pullback",
+    "why": "Used only for flat preservation of schematic density when restricting the PGL action to the closure; this is a generic closure tool, not an alteration-route replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-dense-flat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-d798f8b2c",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-d798f8b2c (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes, every cited statement and Stacks 0B5T locally. MFK and Alper are WANTED, so I checked those inputs against the standard theory (MFK 1.1/1.10, App. 1.C A.1.2, Haboush/Nagata, Keel–Mori). No local source check for them. The item is still unsplit live and not in the route-pivot drop list; its citer unpointed-stable-coarse-projective is live. The statement text is unchanged; only citations changed: def-sc-invertible-module, def-sc-invertible-section-ring and def-pc-proj were added, and the algebraic-space citation now points to def-trf-algebraic-space directly instead of through def-sfb-stable-pointed-moduli-groupoids, which already cites it. Batch-5 flag on def-trf-algebraic-space (item and affine node) accepted: it is a general definition, not part of the trace-formula or Poincaré proof, and it was already in the base closure. Steps: 1 restricts the action to the closure via the cited flat-density lemma (J→X is qcqs and dense; G×X→X is flat). 2-3 show X^ss = X∩Z^ss = J by graded power lifting on Sym(T_an)→Sym(S_an) and the equivariant multiplication to T, with no exactness of invariants assumed. 4 gives finitely generated R=S^G with finite-dimensional R_0, so Proj R is projective. 5 takes the X_s charts. 6 proves R_(s) ≅ S_(s)^G with zero divisors allowed (the defect is killed by s^m). 7 checks the affine-node hypotheses on J_s (orbits closed in the invariant open, stabilizers unchanged). 8 glues via t^d/s^e. 9 gives universality through the Zariski-sheaf property of algebraic spaces. 10 gives the orbit bijection. New nodes are true: PGL reductivity, finite generation and graded power lifting; affine closed-orbit finite-stabilizer quotient, categorical for all algebraic spaces through finite inertia and Keel–Mori; section-algebra package (0B5T(1),(3),(4), 0EKE, qcqs fraction iso); Veronese projectivity of a finitely generated graded algebra with finite-dimensional R_0 (Proj R^(d) = Proj k[R_d] in P^N_k). Edge cases checked: empty, r=1, R_+=0, nonreduced, char p. Not a restatement split. Advisory: when the section-algebra node is split, cite lem-sc-section-ring-localization-bijective. Tool use: lemma-nagata-dense-flat-pullback (sec-nagata) for step 1."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectivePGLStableQuotient",
+  "declaration": "AlgebraicGeometry.PGLLinearization.projective_pgl_stable_quotient",
+  "declarations": [
+   "AlgebraicGeometry.PGLLinearization.closureOver",
+   "AlgebraicGeometry.PGLLinearization.closureInclusion",
+   "AlgebraicGeometry.PGLLinearization.projective_pgl_stable_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectivePGLStableQuotient.lean",
+  "statement": "theorem projective_pgl_stable_quotient (r : ℕ) (hr : 1 ≤ r) (Z : Over (Spec (.of k))) (hprojective : IsHProjective Z.hom) (hfiniteType : LocallyOfFiniteType Z.hom ∧ QuasiCompact Z.hom) (L : Z.left.Modules) [L.IsInvertible] (hample : IsAmple Z.hom L) (D : Action k r Z L) (U : Z.left.Opens) (hsemistable : ∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] (x : fieldTest k Ω ⟶ Z), x.left.base (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum Ω) ∈ U ↔ D.IsSemistable Ω x) (J : Over (Spec (.of k))) (j : J ⟶ Z) (jU : J.left ⟶ U.toScheme) (hclosed : IsClosedImmersion jU) (hfactor : jU ≫ U.ι = j.left) (hinvariant : D.IsInvariantSubscheme j) (hstable : ∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] (x : fieldTest k Ω ⟶ J), D.IsStable Ω (x ≫ j)) : ∃ E : Action k r (closureOver j) ((Scheme.Modules.pullback j.left.imageι).obj L), D.IsRestriction (closureInclusion j) E ∧ E.IsFinitelyGenerated ∧ (∃ d : ℕ, 0 < d ∧ ∀ e : ℕ, 0 < e → E.VeroneseGenerated (d * e)) ∧ ∃ φ : k →+* E.CoefficientRing, (∀ c : k, E.coefficientVal (φ c) = constantSection (Z := closureOver j) (L := (Scheme.Modules.pullback j.left.imageι).obj L) c) ∧ ∃ q : J ⟶ E.projOver φ, IsHProjective (E.projOver φ).hom ∧ LocallyOfFiniteType (E.projOver φ).hom ∧ QuasiCompact (E.projOver φ).hom ∧ Surjective q.left ∧ (∀ (T : Over (Spec (.of k))) (g : Matrices k r T) (x y : T ⟶ J), y ≫ j = D.act T g (x ≫ j) → y ≫ q = x ≫ q) ∧ (∀ (B : AlgebraicSpace (Spec (.of k))) (f : yoneda.obj J ⟶ B.obj.obj), D.IsInvariantMap j B f → ∃! a : yoneda.obj (E.projOver φ) ⟶ B.obj.obj, yoneda.map q ≫ a = f) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω], Function.Surjective (fun x : fieldTest k Ω ⟶ J ↦ x ≫ q) ∧ ∀ x y : fieldTest k Ω ⟶ J, (x ≫ q = y ≫ q ↔ ∃ g : Matrix.GeneralLinearGroup (Fin r) Ω, D.act _ (fieldMatrix Ω g) (x ≫ j) = y ≫ j))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e673486f",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Item diff vs side-live: lean record added; stmt_deps gain new def-sfb-pgl-linearized-polarization, def-sc-ample and def-nagata-scheme-theoretic-closure, all used (IsAmple, Hom.image). Statement in file verbatim. Clause check: Action = natural GL_r(Γ(T)) action on T-points with scalar triviality, cocycles and pullbackComp naturality on line isos ⇔ PGL action plus linearization (fppf descent). IsHProjective plus LFT∧QC. IsAmple. U pinned by geometric semistability (exists since Z^ss=∪D(s)). IsInvariant via canonical powerLift on all test schemes. IsStable: closed C ⇔ orbit closed in Z^ss_Ω (Jacobson/constructible); finite PGL stabilizer classes ⇔ dim 0. Closure = j.left.image; E pinned by IsRestriction (mono + line isos). φ unique (coefficientVal injective). Q = Proj invariantGrade over k. IsFinitelyGenerated, Veronese for all multiples of d. q surjective, invariant, ∃! factorization for every AlgebraicSpace (Spec k), Ω-point orbit bijection. Edge cases: J=∅, r=1, char p, nonreduced, R_0⊋k, universes all in u. invariantGrading via .choose of ∃! GradedRing (Decomposition subsingleton) stated in the def node with proof docstring. No hollow defs, sorry only, source/blueprint docstrings, 10-step proof condensed to 7, no H4 duplicate found. Advisory: q not pinned to the canonical chart map (node does not require it); proof-only SchemeTheoreticallyDominant import. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261023T135420-L-2886120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

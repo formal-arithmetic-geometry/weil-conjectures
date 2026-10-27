@@ -1,0 +1,461 @@
+{
+ "id": "lem-sfb-finite-coefficient-cech-primitive-lift",
+ "kind": "statement",
+ "title": "Finite-coefficient Cech primitives lift with prescribed reduction",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $q:T\\to S$ be a continuous surjection of profinite spaces, meaning compact Hausdorff totally disconnected spaces. For $r\\geq1$, let $P_r=\\{(t_0,\\ldots,t_{r-1})\\in T^r:q(t_i)=q(t_j)\\text{ for all }i,j\\}$ with the subspace topology, as in [def-sfb-profinite-cech-tuples]. For a topological abelian group $M$, write $C^k(M)=C(P_{k+1},M)$ for all continuous maps, with pointwise addition, and for $k\\geq0$ define\n$$(d_k^M c)(t_0,\\ldots,t_{k+1})=\\sum_{j=0}^{k+1}(-1)^j c(t_0,\\ldots,\\widehat{t_j},\\ldots,t_{k+1}),$$\nwhere the signs act by the additive group law. Let $n\\geq1$, let $A,B$ be finite abelian groups with the discrete topology, and let $p:B\\twoheadrightarrow A$ be a surjective homomorphism. Suppose $c\\in C^n(B)$ satisfies $d_n^B c=0$, and a prescribed $u\\in C^{n-1}(A)$ satisfies $d_{n-1}^A u=p\\circ c$. Then there exists $v\\in C^{n-1}(B)$ such that\n$$p\\circ v=u,\\qquad d_{n-1}^B v=c.$$\nThe empty surjection $T=S=\\varnothing$ and the zero coefficient groups are included; in particular, $A=0$ gives a continuous primitive for every finite-$B$-valued positive-degree cocycle. No continuous section of $q$, and no homomorphic section of $p$, is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.3.9(2), (4), printed page 33: discrete coefficient exactness and finite-kernel correction in the profinitely split limit argument; returned proof steps 2, 5 and 6. Agent-formulated pointwise Cech lemma, not asserted verbatim by the paper."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-profinite-cech-tuples"
+ ],
+ "proof": [
+  {
+   "text": "Identify positive-length scalar tuples with the existing set Cech nerve by retaining the same coordinates; both directions are continuous and commute with deletion. Build the continuous alternating boundary from the continuous deletion maps. Apply the differential-squared clause of [lem-weil-pbc-set-cech-nerve-free-resolution] over the integers to a basis tuple, then apply Finsupp.linearCombination with the given cochain as coefficient function. This proves the continuous cochain boundary squares to zero. Additive coefficient homomorphisms commute with the signed sums. These formulas also apply to empty spaces without choosing a point.",
+   "uses": [
+    "lem-weil-pbc-set-cech-nerve-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2), (4), printed page 33; agent-written explicit finite-kernel correction, using finite Cech descent and the finite-set contraction."
+   }
+  },
+  {
+   "text": "Choose a set-theoretic section $s:A\\to B$ of the surjection $p$, so $ps=\\mathrm{id}_A$. Since both groups are discrete, $s$ is continuous; it need not be additive. Set $t=s\\circ u\\in C^{n-1}(B)$, so $pt=u$. Let $K=\\ker p\\subseteq B$ with its subgroup law and discrete subspace topology, and let $i:K\\hookrightarrow B$ be inclusion. It is a finite abelian group. Put $e=c-d_{n-1}^Bt$. Then $pe=pc-d_{n-1}^Au=0$, so $e=i\\circ e_K$ for a unique continuous $e_K:P_{n+1}\\to K$. The cancellation in step 1 and $d_n^Bc=0$ give $i\\circ d_n^Ke_K=d_n^Be=0$; injectivity of $i$ gives $d_n^Ke_K=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2), (4), printed page 33; agent-written explicit finite-kernel correction, using finite Cech descent and the finite-set contraction."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-valued-cech-cocycle-descent] to $e_K$ in degree $n$. Its spaces are the original compact Hausdorff totally disconnected $T,S$, and its map is the given continuous surjection $q$. Its coefficient group is the finite discrete abelian subgroup $K=\\ker p$; step 2 gives continuity of $e_K$ and $d_n^Ke_K=0$, and the item assumes $n\\geq1$. Obtain finite discrete $T_0,S_0$, continuous surjections $a:T\\to T_0$, $b:S\\to S_0$, and a surjection $q_0:T_0\\to S_0$ with $q_0a=bq$. The returned $e_0:(T_0)_{S_0}^{n+1}\\to K$ pulls back to $e_K$ and satisfies $d_ne_0=0$ on every quotient tuple. This last conclusion is used directly; it does not require a quotient tuple to lift to $P_{n+2}$.",
+   "uses": [
+    "lem-sfb-finite-valued-cech-cocycle-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2), (4), printed page 33; agent-written explicit finite-kernel correction, using finite Cech descent and the finite-set contraction."
+   }
+  },
+  {
+   "text": "Choose a section $\\sigma:S_0\\to T_0$ of $q_0$ and put $w_0(x_0,\\ldots,x_{n-1})=e_0(\\sigma(q_0(x_0)),x_0,\\ldots,x_{n-1})$. All entries have the same $q_0$-image. Evaluate $d_ne_0=0$ at $(\\sigma(q_0(x_0)),x_0,\\ldots,x_n)$: its first term is $e_0(x_0,\\ldots,x_n)$, and its remaining sum is $-d_{n-1}w_0(x_0,\\ldots,x_n)$. Here deleting $x_0$ uses the same inserted point because $q_0(x_1)=q_0(x_0)$; $n\\geq1$ ensures $x_1$ exists. Thus $d_{n-1}w_0=e_0$. This is a function on a finite discrete space, hence continuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2), (4), printed page 33; agent-written explicit finite-kernel correction, using finite Cech descent and the finite-set contraction."
+   }
+  },
+  {
+   "text": "Define $w(t_0,\\ldots,t_{n-1})=w_0(a(t_0),\\ldots,a(t_{n-1}))$. The relation $q_0a=bq$ makes this well-defined on $P_n$, and its coordinate formula makes it continuous. Coordinatewise $a$ commutes with every deletion, so $d_{n-1}^Kw$ is the pullback of $d_{n-1}w_0=e_0$, namely $e_K$. Set $v=t+i\\circ w$. Then $pv=u$ since $pi=0$, and $d_{n-1}^Bv=d_{n-1}^Bt+i\\circ e_K=c$. The argument allows $K=0$, $A=0$, or $B=0$; in particular $A=0$ yields the asserted finite-coefficient primitive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2), (4), printed page 33; agent-written explicit finite-kernel correction, using finite Cech descent and the finite-set contraction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-set-cech-nerve-free-resolution",
+  "lem-sfb-finite-valued-cech-cocycle-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.3.9(2), (4), printed page 33; agent-written explicit finite-kernel correction, using finite Cech descent and the finite-set contraction. Lean proof by E5 (2026-10-25): the same kernel correction, using the proved integral set Cech differential-squared identity and an explicit finite-quotient prefix contraction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a profinite surjection, a continuous Cech primitive with finite abelian coefficients lifts across a surjective homomorphism of finite coefficient groups while preserving its prescribed reduction",
+   "results": {
+    "t": "2026-10-22T06:08:08Z",
+    "tool": "leanfinder",
+    "query": "For a profinite surjection, a continuous Cech primitive with finite abelian coefficients lifts across a surjective homomorphism of finite coefficient groups while preserving its prescribed reduction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.lift",
+     "ProfiniteGrp.toLimit_surjective",
+     "Profinite.NobelingProof.CC_exact",
+     "Profinite.lift_lifts",
+     "LightProfinite.surjective_transitionMap",
+     "LightProfinite.proj_surjective",
+     "ProfiniteGrp.toLimit"
+    ],
+    "digest": "bf770cd5178fd632"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech|[Cc]ocycle|primitive",
+   "results": {
+    "t": "2026-10-22T06:08:34Z",
+    "tool": "grep",
+    "query": "[Cc]ech|[Cc]ocycle|primitive",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/Projective.lean"
+    ],
+    "digest": "bee7cf4ad316e555"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"ContinuousMap\"",
+   "results": {
+    "t": "2026-10-22T06:08:34Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"ContinuousMap\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "LightProfinite.instPreservesLimitsOfShapeOppositeNatForgetContinuousMapCarrierToTopAndTotallyDisconnectedSpaceSecondCountableTopology",
+     "ProfiniteAddGrp.instHasForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteProfiniteContinuousMap",
+     "ProfiniteGrp.instHasForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteProfiniteContinuousMap",
+     "ProfiniteAddGrp.instFaithfulProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteAddGrp.instPreservesLimitsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteAddGrp.instReflectsIsomorphismsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteGrp.instFaithfulProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteGrp.instPreservesLimitsProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap"
+    ],
+    "digest": "bb8789992ff971a7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite coefficient continuous Cech cocycle on a profinite surjection has a primitive lifting a prescribed primitive in a quotient coefficient group",
+   "results": {
+    "t": "2026-10-22T06:08:35Z",
+    "tool": "leansearch",
+    "query": "A finite coefficient continuous Cech cocycle on a profinite surjection has a primitive lifting a prescribed primitive in a quotient coefficient group",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.lift",
+     "CochainComplex.mappingCone.liftCocycle",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "CochainComplex.mappingCone.liftCocycle_coe",
+     "CochainComplex.mappingCone.ofHom_lift",
+     "CochainComplex.mappingCone.liftCocycle.congr_simp",
+     "ContinuousMap.canLift",
+     "Profinite.exists_locallyConstant_finite_nonempty"
+    ],
+    "digest": "899ef474ae97da9d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a primitive of a finite valued Cech cocycle through a finite coefficient group epimorphism by killing the cocycle in its finite kernel",
+   "results": {
+    "t": "2026-10-22T06:08:44Z",
+    "tool": "leanfinder",
+    "query": "Lift a primitive of a finite valued Cech cocycle through a finite coefficient group epimorphism by killing the cocycle in its finite kernel",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom",
+     "CategoryTheory.PresheafOfGroups.OneCohomologyRelation",
+     "CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective",
+     "CochainComplex.HomComplex.Cocycle.toSingleMk_surjective",
+     "groupCohomology_induction_on",
+     "groupCohomology.iCocycles_mk",
+     "groupCohomology.π",
+     "CategoryTheory.PresheafOfGroups.OneCocycle.class"
+    ],
+    "digest": "61ce39f92b07df7e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "CC_exact|fin_comap_jointlySurjective|exists_locallyConstant_finite_aux",
+   "results": {
+    "t": "2026-10-22T06:09:15Z",
+    "tool": "grep",
+    "query": "CC_exact|fin_comap_jointlySurjective|exists_locallyConstant_finite_aux",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Span.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Span.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean"
+    ],
+    "digest": "cacfb85cef938f40"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "liftCocycle|fromSingleMk_surjective",
+   "results": {
+    "t": "2026-10-22T06:09:15Z",
+    "tool": "grep",
+    "query": "liftCocycle|fromSingleMk_surjective",
+    "sub": "Algebra/Homology/HomotopyCategory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean"
+    ],
+    "digest": "593fe08e5c3d5a03"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech|[Cc]ocycle|primitive",
+   "results": {
+    "t": "2026-10-22T12:06:07Z",
+    "tool": "grep",
+    "query": "[Cc]ech|[Cc]ocycle|primitive",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/Projective.lean"
+    ],
+    "digest": "bee7cf4ad316e555"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: locally constant limit factorization supplies no quotient Cech equation; Nobeling and singular-chain exactness concern different complexes; mappingCone.liftCocycle constructs a mapping-cone cocycle, not a continuous primitive with prescribed coefficient reduction. The finite-valued Cech descent needed here is an existing project DAG node, whose Lean proof is still sorry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"CochainComplex\"",
+   "results": {
+    "t": "2026-10-22T12:06:08Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"CochainComplex\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: locally constant limit factorization supplies no quotient Cech equation; Nobeling and singular-chain exactness concern different complexes; mappingCone.liftCocycle constructs a mapping-cone cocycle, not a continuous primitive with prescribed coefficient reduction. The finite-valued Cech descent needed here is an existing project DAG node, whose Lean proof is still sorry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift prescribed primitive of finite valued continuous Cech cocycle across surjection of finite abelian groups",
+   "results": {
+    "t": "2026-10-22T12:06:08Z",
+    "tool": "leansearch",
+    "query": "Lift prescribed primitive of finite valued continuous Cech cocycle across surjection of finite abelian groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.mappingCone.liftCocycle_coe",
+     "CochainComplex.mappingCone.ofHom_lift",
+     "CochainComplex.mappingCone.liftCocycle",
+     "CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom",
+     "groupCohomology.toCocycles_comp_isoCocycles₂_hom",
+     "ContinuousMap.canLift",
+     "CochainComplex.HomComplex.CohomologyClass.mk_surjective",
+     "groupCohomology.cocycles₁.val_eq_coe"
+    ],
+    "digest": "c650cb5358118ef0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: locally constant limit factorization supplies no quotient Cech equation; Nobeling and singular-chain exactness concern different complexes; mappingCone.liftCocycle constructs a mapping-cone cocycle, not a continuous primitive with prescribed coefficient reduction. The finite-valued Cech descent needed here is an existing project DAG node, whose Lean proof is still sorry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite coefficient continuous Cech cocycle of a profinite surjection has a primitive lifting a prescribed quotient primitive",
+   "results": {
+    "t": "2026-10-22T12:06:19Z",
+    "tool": "leanfinder",
+    "query": "A finite coefficient continuous Cech cocycle of a profinite surjection has a primitive lifting a prescribed quotient primitive",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.exists_locallyConstant_fin_two",
+     "Profinite.exists_locallyConstant",
+     "ContinuousMap.liftCover_coe'",
+     "LocallyConstant.lift_comp_proj",
+     "ContinuousMap.liftCover_coe"
+    ],
+    "digest": "8bc41ca1f9488297"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: locally constant limit factorization supplies no quotient Cech equation; Nobeling and singular-chain exactness concern different complexes; mappingCone.liftCocycle constructs a mapping-cone cocycle, not a continuous primitive with prescribed coefficient reduction. The finite-valued Cech descent needed here is an existing project DAG node, whose Lean proof is still sorry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of continuous finite discrete coefficient Cech cochains for surjective maps of profinite spaces",
+   "results": {
+    "t": "2026-10-22T12:06:20Z",
+    "tool": "leanfinder",
+    "query": "Exactness of continuous finite discrete coefficient Cech cochains for surjective maps of profinite spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+     "Profinite.NobelingProof.CC_exact",
+     "Condensed.hasExactLimitsOfShape",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+     "CochainComplex.exactAt_of_isLE",
+     "LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite",
+     "HomologicalComplex.exact_of_degreewise_exact"
+    ],
+    "digest": "6b5186ecdb72b34f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: locally constant limit factorization supplies no quotient Cech equation; Nobeling and singular-chain exactness concern different complexes; mappingCone.liftCocycle constructs a mapping-cone cocycle, not a continuous primitive with prescribed coefficient reduction. The finite-valued Cech descent needed here is an existing project DAG node, whose Lean proof is still sorry."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem CC_exact|lemma CC_exact|def liftCocycle|theorem exists_locallyConstant_finite_nonempty|lemma exists_locallyConstant_finite_nonempty|singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+   "results": {
+    "t": "2026-10-22T12:14:50Z",
+    "tool": "grep",
+    "query": "theorem CC_exact|lemma CC_exact|def liftCocycle|theorem exists_locallyConstant_finite_nonempty|lemma exists_locallyConstant_finite_nonempty|singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SingularHomology/Basic.lean",
+     "Mathlib/AlgebraicTopology/SingularHomology/Basic.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean"
+    ],
+    "digest": "6393cc1a6c5baa9c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: locally constant limit factorization supplies no quotient Cech equation; Nobeling and singular-chain exactness concern different complexes; mappingCone.liftCocycle constructs a mapping-cone cocycle, not a continuous primitive with prescribed coefficient reduction. The finite-valued Cech descent needed here is an existing project DAG node, whose Lean proof is still sorry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normed-scalar-profinite-cech-exact",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), finite E open-direct-image branch: positive continuous-function Cech exactness underlying the profinite-parameter column; the paragraph itself delegates the open-coefficient theorem and does not state this agent-formulated analytic input; discrete coefficient exactness and finite-kernel correction in the profinitely split limit argument; returned proof steps 2, 5 and 6",
+   "via": [
+    "lem-sfb-normed-scalar-profinite-cech-exact",
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-coefficient-cech-primitive-lift",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Lift the prescribed quotient cochain by a continuous set section; its error is a finite-kernel-valued cocycle. Reuse the existing finite-valued Cech descent theorem, write the finite quotient contraction with its signs explicitly, and pull its correction back. No new nodes are needed. Checked the empty case, degree one, zero coefficients and nonsplit coefficient epimorphisms. Landing-refusal repair: regenerated the delivery on the current server DAG; re-read both statement definitions and the now re-split, reviewed finite-valued descent lemma. Its unchanged statement still supplies the entire step-3 interface, so the proof route and citation remain valid. Step 3 now checks every hypothesis explicitly and records that both quotient maps are surjective. Retained the returned proof, sources, citations and actual search records; no new nodes. Renewed returned-head repair: matched each of the descent theorem hypotheses to the constructed kernel cocycle explicitly in step 3, including its subspace continuity; retained the all-quotient-tuples conclusion as a statement interface, without assuming surjectivity of the tuple map. Initial current-base dry run passed at 87e0a83f48e.",
+  "blueprint": "Inherited main-20261015 direct-images proof paragraph (3), finite-E open-direct-image branch, via normed-scalar-profinite-cech-exact: supplies the finite-kernel correction in the discrete-coefficient/limit argument. The blueprint delegates open coefficients and does not itself assert this analytic auxiliary. No unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-3feb6a047",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-3feb6a047 (reviewer sub-agent of L); spot-checked: Second delivery after a side-completion promotion refusal. The earlier head d71257fec87c was reviewed PASS. A field diff shows that only proof step 3, now spelling out the hypothesis matching, and split_report changed. The statement, stmt_deps, proof_deps, source, blueprint and unit are identical. The live and side-live clones still have the item unsplit with no review, so no other group has superseded it. The delivery adds no new nodes, and no re-split note applies. I recomputed all five steps. (1) If S is empty, T and every cochain group are empty or zero because n>=1; d^2=0 because the signs (-1)^{i+j-1} and (-1)^{i+j} cancel. (2) With a set section s of p and t=s∘u, e=c-dt has pe=pc-du=0, so it factors through K=ker p, and de_K=0 because the inclusion of K is injective; additivity of s is never used. (3) The current statement of lem-sfb-finite-valued-cech-cocycle-descent matches item for item: T and S compact Hausdorff totally disconnected, q a continuous surjection, M=K finite discrete, n>=1, e_K continuous with its cocycle equation. It returns surjective a and b, q0 with q0a=bq, the factorization, and the cocycle equation on every quotient tuple. It does not depend on this item, so there is no cycle. (4) For w0(x)=e0(σq0x0,x0,...,x_{n-1}), evaluating de0=0 at (σq0x0,x0,...,xn) gives e0=dw0; this uses q0x1=q0x0 and n>=1. (5) For w=w0∘a^n and v=t+i∘w: pv=u and dv=dt+e=c. I checked the edge cases n=1, empty spaces, K=0, A=0, B=0, the non-split Z/4→Z/2 and q=id. Bhatt–Scholze Lemma 4.3.9(2),(4), printed p.33, was checked in the PDF; it is motivation only and proof_origin is agent. No SGA source is cited. A duplicate search found inverse-limit-cech-primitive (a citer), normed-scalar-profinite-cech-exact (the creator) and split-topological-cech-homotopy (a general identity; step 4 is its discrete case, acceptable inline) but no duplicate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FiniteCoefficientCechPrimitiveLift",
+  "declaration": "Profinite.finite_coefficient_cech_primitive_lift",
+  "file": "lean/Sheaf/Topology/FiniteCoefficientCechPrimitiveLift.lean",
+  "statement": "theorem finite_coefficient_cech_primitive_lift (S T : Profinite.{v}) (q : C(T, S)) (hq : Function.Surjective q) (A : Type u) [AddCommGroup A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (B : Type w) [AddCommGroup B] [Finite B] [TopologicalSpace B] [DiscreteTopology B] (p : B →+ A) (hp : Function.Surjective p) (n : ℕ) (hn : 1 ≤ n) (c : C(scalarCechTuples q (n + 1), B)) (hc : ∀ x : scalarCechTuples q (n + 2), ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • c (scalarCechDelete q (n + 1) j x) = 0) (u₀ : C(scalarCechTuples q n, A)) (hu : ∀ x : scalarCechTuples q (n + 1), ∑ j : Fin (n + 1), (-1 : ℤ) ^ j.val • u₀ (scalarCechDelete q n j x) = p (c x)) : ∃ v₀ : C(scalarCechTuples q n, B), (∀ x : scalarCechTuples q n, p (v₀ x) = u₀ x) ∧ (∀ x : scalarCechTuples q (n + 1), ∑ j : Fin (n + 1), (-1 : ℤ) ^ j.val • v₀ (scalarCechDelete q n j x) = c x)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-511728336",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Delivery is 3 files (module, report, item lean field only; node otherwise identical to side-live; no lean recorded for the item there, so not a rebind). The statement matches the node clause by clause: Profinite.{v} spaces with a continuous surjective q; A and B finite discrete AddCommGroups in independent universes u and w; p : B →+ A surjective with no section assumed; 1 ≤ n; c on P_{n+1} with hc over P_{n+2} and Fin (n+2); u₀ on P_n with hu = p∘c over P_{n+1}; conclusion ∃ v₀ with p∘v₀ = u₀ and d v₀ = c. It reuses the owner scalarCechTuples (subtype topology) and scalarCechDelete (succAbove). lean.statement is verbatim in the file and the sum precedence is correct. Edge cases covered: empty spaces, A=0, B=0, K=0, n=1, q=id, char 2. The node proof was re-derived and holds; the private import of the finite-valued descent lemma (signature read) is proof-only. No hollow definitions, the proof is sorry only, source and blueprint docstrings are present with the five proof steps, and there is no duplicate. Worker report and Second reading by Q17 sections are present; the second reading was written by the same worker (noted, not blocking). Not recompiled per the instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261025T043214-L-1690114",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

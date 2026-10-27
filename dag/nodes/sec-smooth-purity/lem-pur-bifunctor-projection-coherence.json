@@ -1,0 +1,100 @@
+{
+ "id": "lem-pur-bifunctor-projection-coherence",
+ "kind": "statement",
+ "title": "Inverse shift and unit coherence of an invertible bifunctor map",
+ "statement": "Let T,U:D→(E→F) be bifunctors and equip E,F with integer shifts and every component functor of T,U with shift comparisons. Let sigma:T→U be invertible. Fix J in E, Q:D→F on objects, and maps a_K:U(K)(J)→Q(K), b_K:T(K)(J)→Q(K). If sigma_K commutes with shifts and sigma_K(J) followed by a_K equals b_K, then the associated natural isomorphism and its inverse commute with shifts, with these forward and inverse unit equations.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Theorem 2.18(2), formal natural-isomorphism cancellation for shift and unit coherence."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Take the isomorphism of the invertible natural transformation. Apply NatTrans.CommShift.of_iso_inv to each component. In the inverse unit equation substitute b_K=sigma_K(J) followed by a_K; associativity and inverse-hom cancellation give a_K. Assemble the conjunction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "P6: elementary natural-isomorphism cancellation using Mathlib NatTrans.CommShift.of_iso_inv."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"Iso\"",
+   "results": "12 hits, including CategoryTheory.NatTrans.CommShift.of_iso_inv and of_isIso.",
+   "date": "2026-10-26",
+   "verdict": "Use of_iso_inv for inverse shift; combine it with unit cancellation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible natural transformation commuting with shifts has an inverse commuting with shifts and inverse unit equations",
+   "results": "8 hits, including CategoryTheory.NatTrans.CommShift.of_iso_inv.",
+   "date": "2026-10-26",
+   "verdict": "Reuse inverse shift result; no packaged unit coherence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctor.*[Cc]oher|[Cc]oher.*bifunctor",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "Generic coherence predicate and packaging are new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSupportProjectionShiftUnit",
+  "date": "2026-10-26",
+  "group": "P6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-support-projection-shift-unit",
+   "place": "Step 5 and final assembly: inverse shift and unit equations from the forward equations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.BifunctorProjectionCoherence",
+  "file": "lean/Sheaf/CategoryTheory/BifunctorProjectionCoherence.lean",
+  "declaration": "CategoryTheory.bifunctorIsoCoherence",
+  "statement": "theorem bifunctorIsoCoherence\n    {D E F : Type*} [Category D] [Category E] [Category F]\n    [HasShift E ℤ] [HasShift F ℤ]\n    (T U : D ⥤ E ⥤ F) [sT : ∀ K, (T.obj K).CommShift ℤ]\n    [sU : ∀ K, (U.obj K).CommShift ℤ]\n    (σ : T ⟶ U) [IsIso σ] (J : E) (Q : D → F)\n    (a : ∀ K, (U.obj K).obj J ⟶ Q K) (b : ∀ K, (T.obj K).obj J ⟶ Q K)\n    (hs : ∀ K, NatTrans.CommShift (σ.app K) ℤ)\n    (hu : ∀ K, (σ.app K).app J ≫ a K = b K) :\n    ∃ e : T ≅ U, BifunctorProjectionCoherent e σ J Q a b",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.BifunctorProjectionCoherent",
+   "CategoryTheory.bifunctorIsoCoherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b734b",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261026T002138-L-60288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b734b",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261026T002138-L-60288",
+  "kind": "interface",
+  "note": "independent cc review: SupportProjectionCoherent new abbrev (BifunctorProjectionCoherent + UnitA/UnitB) unfolded against old def body: identical conjuncts and instances; item theorem signature vs clone 7c3c838 unchanged; both importers compiled against delivered modules; axioms clean"
+ }
+}

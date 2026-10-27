@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-nodal-completed-graded-model",
+ "kind": "statement",
+ "title": "Completed normalization and associated graded model of a quadratic local ring",
+ "statement": "Let $k$ be a field, and let $(A,\\mathfrak m,F)$ be a reduced local $k$-algebra (a ring with a unique maximal ideal $\\mathfrak m$, residue field $F=A/\\mathfrak m$, and no nonzero nilpotents). Assume that $A$ is Noetherian [def-weil-pbc-noetherian-ring], essentially of finite type over $k$ [def-weil-pbc-essentially-finite-type-algebra], and of Krull dimension one [def-weil-pbc-krull-dimension-ring]. Put $R=\\widehat A$ [def-weil-pbc-adic-completion]. Suppose given a $k$-algebra section $F\\to R$ of the residue map and a residue-preserving continuous $F$-algebra presentation\n$$R\\cong F[[X,Y]]/(q),\\qquad q=aX^2+bXY+cY^2,\\qquad b^2-4ac\\ne0.$$\nThere exists an invertible $F$-linear change of the variables after which the coefficient $a$ is nonzero. For any such coordinates put $L=F[Z]/(aZ^2+bZ+c)$ and write $z$ for the class of $Z$ [def-weil-polynomial-ring, def-weil-pbc-algebra-hom-quotient]. Let $B\\subset Q(A)$ be the integral closure of $A$ [def-weil-pbc-integral-closure], where $Q(A)$ inverts all non-zero-divisors (elements whose multiplication is injective). Then $B$ is finite as an $A$-module [def-weil-finitely-generated-module], and there is a compatible $R$-algebra isomorphism\n$$B\\otimes_A R\\cong L[[t]],\\qquad X\\mapsto zt,\\quad Y\\mapsto t,$$\nidentifying the structural image of $R$ with $F+tL[[t]]$. Tensor products and power series use [def-weil-pbc-module-tensor-product, def-weil-pbc-multivariate-power-series]. Under these maps $\\mathfrak m^nR=t^nL[[t]]$ for every $n\\ge1$. Completion induces residue-preserving ring isomorphisms $A/\\mathfrak m^n\\cong R/\\mathfrak m^nR$ for every $n\\ge1$ and a graded $F$-algebra isomorphism\n$$\\operatorname{gr}_{\\mathfrak m}A\\cong H:=F\\oplus\\bigoplus_{n\\ge1}Lt^n\\subset L[t]$$\n[def-weil-pbc-associated-graded-ring]. If $d\\in\\mathfrak m^n$, its degree-$n$ initial class corresponds to the coefficient of $t^n$ in its image in $L[[t]]$, times $t^n$. In particular some $f\\in\\mathfrak m$ has initial class $t$ and image $t(1+th)$ with $h\\in L[[t]]$. The normalization comparison extends the original map on fractions of $A$: every denominator is carried to the same denominator.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBT (remark-quadratic-extension), constructions (2) and (3), completion and graded calculation for the omitted equivalence; the completed quadratic model is the one used there."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Choose a vector on which $q$ is nonzero: use $(1,0)$ if $a\\ne0$, $(0,1)$ if $a=0,c\\ne0$, and $(1,1)$ otherwise, since then $b\\ne0$. Complete it to a basis of $F^2$. The resulting substitution is invertible on power series coefficient by coefficient in each total degree, with inverse induced by the inverse matrix. Its new $X^2$ coefficient is nonzero. The discriminant changes by the square of the nonzero matrix determinant, as direct expansion shows, so it remains nonzero. Fix any coordinates with $a\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), construction (1): choice of a nonzero leading coefficient."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-curve-normalization-completion] to $A$: the hypotheses are precisely reduced, local, essentially of finite type over $k$, and dimension one. It gives finiteness of $B$ and identifies $B\\otimes_A R$ with the integral closure of $R$ in $Q(R)$, by the map extending fractions with the same denominators. Apply [lem-sfb-quadratic-series-integral-closure] to the given presentation of $R$, using $a\\ne0$ and the nonzero discriminant. Its map $X\\mapsto zt$, $Y\\mapsto t$ identifies that integral closure with $C=L[[t]]$ and the image of $R$ with $S=F+tC$. Composing these two identifications gives the required compatible $R$-algebra isomorphism. The first map supplies the stated fraction convention; the second fixes its restriction to $R$.",
+   "uses": [
+    "lem-trf-curve-normalization-completion",
+    "lem-sfb-quadratic-series-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, completion reduction and Cases I/II; varieties.tex Tag 0C3V (lemma-normalization-same-after-completion)."
+   }
+  },
+  {
+   "text": "Noetherianness means every ideal, in particular $\\mathfrak m$, is finitely generated. Apply [lem-weil-pbc-adic-completion-mod-power] with $I=\\mathfrak m$. For every $n\\ge1$ it gives the quotient isomorphism $A/\\mathfrak m^n\\cong R/\\mathfrak m^nR$, induced by the original completion map. These maps commute with the quotient transitions: both send the class of $a\\in A$ to its completion class. At $n=1$ the kernel of $R\\to F$ is therefore $\\mathfrak mR$. The presentation and the substitution are residue-preserving, so in $S=F+tC$ this kernel is exactly $tC$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), part (2), and the given residue-preserving presentation."
+   }
+  },
+  {
+   "text": "In $S=F+tC$ we have $(tC)^n=t^nC$ for all $n\\ge1$: a product of $n$ elements of $tC$ lies in $t^nC$, and conversely $t^nh$ is the product of $n-1$ copies of $t$ with $th$, all in $tC$. For $n=1$ the latter is just $th$. Extension of an ideal commutes with its products by expanding the finite sums of products defining them. Thus the equality $\\mathfrak mR=tC$ from step 3 gives $\\mathfrak m^nR=t^nC$ as subsets of $C$, not merely equality after extending the ideals to $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted graded comparison: ideal-power calculation in the explicit image ring."
+   }
+  },
+  {
+   "text": "For $n\\ge1$, compare the kernels of the transition maps from exponent $n+1$ to exponent $n$ in step 3. They are respectively $\\mathfrak m^n/\\mathfrak m^{n+1}$ and $\\mathfrak m^nR/\\mathfrak m^{n+1}R$, so completion induces a bijection between these kernels. Degree zero is $A/\\mathfrak m=F$. Using step 4, the positive-degree map is then $t^nC/t^{n+1}C\\to Lt^n$, sending a series class to its coefficient of $t^n$ times $t^n$. This is a bijection: its kernel is exactly $t^{n+1}C$ and $\\lambda t^n$ represents every $\\lambda\\in L$. Take the direct sum of these maps and the identity on degree zero. For series of orders at least $n,m$, the coefficient of degree $n+m$ of their product is the product of their coefficients of degrees $n,m$; terms of smaller degree vanish. Degree-zero multiplication is residue multiplication. The multiplication and scalar-action formulas of [def-weil-pbc-associated-graded-ring] therefore make this direct-sum bijection a graded $F$-algebra isomorphism onto $H$. This also proves the asserted formula for every initial class.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), construction (3), explicit coefficient proof of the omitted associated-graded comparison; algebra.tex Tag 05GG for the already established quotient maps."
+   }
+  },
+  {
+   "text": "The degree-one bijection of step 5 has $t\\in Lt$ in its image. Choose a representative $f\\in\\mathfrak m$ of its inverse class. Its image in $C$ has zero constant term and coefficient $1$ at $t$, hence is $t+t^2h=t(1+th)$ for the series $h\\in C$ obtained by shifting all higher coefficients down by two. This is exactly the required lift and its required expansion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), construction (3), degree-one lifting through the quotient map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-curve-normalization-completion",
+  "lem-sfb-quadratic-series-integral-closure",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4A (lemma-2-branches-delta-1), Cases I/II, and 0CBT (remark-quadratic-extension), constructions (1)--(3). The source omits the graded comparison; steps 3--6 supply it by quotient kernels and coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded ring of a one dimensional local ring whose completion is a nondegenerate binary quadratic node is F plus positive degree copies of its quadratic residue algebra",
+   "results": "{\"t\": \"2026-10-23T09:34:56Z\", \"tool\": \"leanfinder\", \"query\": \"The associated graded ring of a one dimensional local ring whose completion is a nondegenerate binary quadratic node is F plus positive degree copies of its quadratic residue algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CliffordAlgebra.gradedAlgebra\", \"HomogeneousLocalization.isLocalRing\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousLocalization.instNontrivialAtPrime\", \"HomogeneousLocalization.homogeneousLocalizationCommRing\"], \"digest\": \"adf5202e297de1e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: completion quotient and generic graded-ring results do not give the normalization-compatible quadratic graded model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of nodal local ring identifies its normalized completion with L power series and maximal ideal powers with t powers",
+   "results": "{\"t\": \"2026-10-23T09:36:42Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of nodal local ring identifies its normalized completion with L power series and maximal ideal powers with t powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.exists_powerSeries_of_memIntegers\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.mem_integers_of_powerSeries\", \"LaurentSeries.coe_X_compare\", \"LaurentSeries.algebraMap_C_mem_adicCompletionIntegers\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"LaurentSeries.powerSeries_ext_subring\"], \"digest\": \"81525a43b786de7c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: completion quotient and generic graded-ring results do not give the normalization-compatible quadratic graded model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T09:36:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AdicCompletion.instSMulQuotientIdealHSMulTopSubmodule\", \"AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule\", \"AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule\"], \"digest\": \"ed5212906905125d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: completion quotient and generic graded-ring results do not give the normalization-compatible quadratic graded model"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|quadratic.*[Gg]raded|[Gg]raded.*quadratic",
+   "results": "{\"t\": \"2026-10-23T09:36:43Z\", \"tool\": \"grep\", \"query\": \"nodal|quadratic.*[Gg]raded|[Gg]raded.*quadratic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: completion quotient and generic graded-ring results do not give the normalization-compatible quadratic graded model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded ring and normalization of a completed ordinary double point",
+   "results": "{\"t\": \"2026-10-23T09:36:44Z\", \"tool\": \"leansearch\", \"query\": \"Associated graded ring and normalization of a completed ordinary double point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedRing.ctorIdx\", \"GradedRing\", \"GradedRing.mk\", \"GradedAlgebra\", \"SetLike.gring.congr_simp\", \"SetLike.gcommRing.congr_simp\", \"GradedRing.toGradedMonoid\", \"SetLike.GradeZero.instRing\"], \"digest\": \"4710e08801226bba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: completion quotient and generic graded-ring results do not give the normalization-compatible quadratic graded model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique formal power series division by a monic homogeneous polynomial in X and Y, with remainder of degree less than d in X",
+   "results": "{\"t\": \"2026-10-23T10:50:24Z\", \"tool\": \"leanfinder\", \"query\": \"Unique formal power series division by a monic homogeneous polynomial in X and Y, with remainder of degree less than d in X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.IsWeierstrassDivisorAt.div\"], \"digest\": \"cd129fabc2420dfc\"}; Read returned hits: general Weierstrass division, Laurent-series integer comparisons, abstract scheme normalization, and generic completion/graded structures do not state the normalization-compatible nodal model and its graded coefficient formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|quadratic.*[Gg]raded|[Gg]raded.*quadratic",
+   "results": "{\"t\": \"2026-10-23T10:59:01Z\", \"tool\": \"grep\", \"query\": \"nodal|quadratic.*[Gg]raded|[Gg]raded.*quadratic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}; Read returned hits: general Weierstrass division, Laurent-series integer comparisons, abstract scheme normalization, and generic completion/graded structures do not state the normalization-compatible nodal model and its graded coefficient formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded of a one dimensional quadratic node and normalization commuting with completion",
+   "results": "{\"t\": \"2026-10-23T10:59:01Z\", \"tool\": \"leansearch\", \"query\": \"Associated graded of a one dimensional quadratic node and normalization commuting with completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.module\", \"AdicCompletion.instCommRing\", \"AdicCompletion.liftRingHom.congr_simp\", \"AdicCompletion\", \"AdicCompletion.instAddCommGroup\", \"SetLike.gcommRing.congr_simp\", \"AdicCompletion.congr\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\"], \"digest\": \"66ba609c9499aa64\"}; Read returned hits: general Weierstrass division, Laurent-series integer comparisons, abstract scheme normalization, and generic completion/graded structures do not state the normalization-compatible nodal model and its graded coefficient formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T10:59:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AdicCompletion.instSMulQuotientIdealHSMulTopSubmodule\", \"AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule\", \"AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule\"], \"digest\": \"ed5212906905125d\"}; Read returned hits: general Weierstrass division, Laurent-series integer comparisons, abstract scheme normalization, and generic completion/graded structures do not state the normalization-compatible nodal model and its graded coefficient formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a completed nodal local ring and its associated graded ring via the separable quadratic residue algebra",
+   "results": "{\"t\": \"2026-10-23T10:59:02Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a completed nodal local ring and its associated graded ring via the separable quadratic residue algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"90ab9e0d0e62598b\"}; Read returned hits: general Weierstrass division, Laurent-series integer comparisons, abstract scheme normalization, and generic completion/graded structures do not state the normalization-compatible nodal model and its graded coefficient formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded of F plus t L power series is F plus positive degree copies of L and completion preserves each maximal ideal quotient",
+   "results": "{\"t\": \"2026-10-23T10:59:03Z\", \"tool\": \"leanfinder\", \"query\": \"The associated graded of F plus t L power series is F plus positive degree copies of L and completion preserves each maximal ideal quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.mem_integers_of_powerSeries\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.div\", \"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.exists_isWeierstrassFactorization\", \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"LaurentSeries.powerSeriesRingEquiv\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\"], \"digest\": \"0b3f4bf60deb28c5\"}; Read returned hits: general Weierstrass division, Laurent-series integer comparisons, abstract scheme normalization, and generic completion/graded structures do not state the normalization-compatible nodal model and its graded coefficient formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-local-tangent-normalization",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Re-split of returned local tangent proof, steps 1--3: Completed normalization and associated graded model of a quadratic local ring.",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-completed-graded-model",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing curve normalization/completion and quadratic series normalization nodes. Wrote the coordinate choice, ideal powers, quotient kernels, graded multiplication and degree-one lift explicitly; no new nodes. Searched project Lean and Mathlib; no attachment or exact Mathlib match.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Re-split of returned local tangent proof, steps 1--3: Completed normalization and associated graded model of a quadratic local ring. Current latest blueprint direct-images proof (3) is the parent route; this local algebra calculation supplies the inherited alteration/nodal branch input.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-curve-normalization-completion",
+    "why": "Generic reduced one-dimensional local algebra normalization under completion, used as a black box; the current unit supplies no substitute for this commutative algebra comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-curve-normalization-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-6a19a710c",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-6a19a710c (reviewer sub-agent of L); spot-checked: The statement is unchanged, there are no new nodes, and the item is still unsplit in live and side-live, so nothing supersedes it. Step 1: if a=c=0 then b≠0, so one of (1,0),(0,1),(1,1) has nonzero q-value even in characteristic 2; the discriminant scales by det², and the coordinate change keeps the presentation continuous and residue-preserving. Step 2 relies only on the statements of the cited nodes. lem-trf-curve-normalization-completion has exactly this item's hypotheses (reduced, local, essentially finite type, dimension 1) and gives finiteness of B, B⊗Â equal to the integral closure, and the convention that denominators are kept. lem-sfb-quadratic-series-integral-closure (a≠0, disc≠0) gives j into L[[t]] with image F+tL[[t]]; transporting along the presentation and composing gives the R-algebra isomorphism. Step 3: the Mathlib leaf for 05GG with I=m (finitely generated by Noetherianity) gives A/mⁿ≅R/mⁿR; residue preservation together with j preserving constant terms gives mR=tC. Steps 4–6 are correctly elementary. (tC)ⁿ=tⁿC holds because tⁿh=t^{n-1}(th). The transition kernels compare with the tⁿ-coefficient map onto Ltⁿ, multiplication goes by lowest-order coefficients, and the F-action goes through A/m. The lift is f=t+t²h. These steps supply the graded comparison that Stacks 0CBT omits ('We omit the equivalence of this with (3)'); I read 0CBT, 0C4A (completion reduction, Cases I/II) and 0C3V in literature/stacks-project. Tested on q=XY (a=0, fixed by step 1), split q=X²+XY over F₂ (no cancellation in L=F×F is used), and non-split X²+Y² over ℝ; at n=1 the quotient is F while positive degrees are L, and the statement keeps that distinction. The siblings quadratic-series-integral-closure, quadratic-coefficient-proj-branches and quadratic-homogeneous-substitution are not duplicates, and the item does not restate a clause of its parent. proof_deps equals the union of the step uses; leansearch, loogle, leanfinder and grep searches are recorded; no SGA. I accept the tool_use of lem-trf-curve-normalization-completion: it is generic commutative algebra (0C3V) and no node of the unit sk-thm-sf-ctf-stability provides it. Batch-5: the full closure of lem-trf-curve-normalization-completion (346 nodes) contains only commutative-algebra lemmas and definitions (Nagata, DVR branches, flat normalization comparison, plus four other sk-i-curve-zero algebra lemmas). It contains no trace-formula statement, Poincaré duality node, assumption leaf or batch-4 target. Neither assumption gives this result, so the citation is outside the assumed statements and is not a batch-5 fault. No fixes."
+ }
+}

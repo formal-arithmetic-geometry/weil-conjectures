@@ -1,0 +1,111 @@
+{
+ "id": "lem-sp-field-projection-proper-square",
+ "kind": "statement",
+ "title": "Proper factor of the scalar projection square",
+ "statement": "Fix P, simultaneous models D [def-sp-field-shriek-system-models], and a normalized tensor datum t [def-sp-field-projection-factor-data]. Let E be contained in F, g:Z to Y be any scheme morphism, K an E-coefficient derived system on Y, and M one on Z. Write q_A and q_B for leftProper, e for the specified proper mate, C for scalar extension, and mu_g for projectionTarget along g. Then C_Y(q_A) followed by e at (g_A^*K tensor M) and Rg_{B,*}(mu_g) equals the scalar tensorator followed by (1 tensor e_M) and q_B(C_Y K,C_Z M), as an equality in the ordinary derived category of F-coefficient systems on Y. No open extension, compactification, normalized-input restriction or cartesianness assumption occurs.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+ },
+ "stmt_deps": [
+  "def-sp-field-projection-factor-data",
+  "def-sp-field-shriek-system-models"
+ ],
+ "proof": [
+  {
+   "text": "realize the four corners on the ringed sequence topoi. The horizontal\nmaps are identity geometric maps with the specified coefficient homomorphisms;\nthe vertical maps are induced by g. The ordinary square is the identity on\nsections, and its derived comparison is D.pull by the K-flat normalization.\nApply ringed exchange/tensor coherence to M and K. The exchange is exactly\nproper P D h g, since both are the mate of that pullback comparison under the\nsame adjunctions. The tensor comparisons agree on pure tensors, hence agree\nafter two-variable K-flat localization. Precompose with the source symmetry\nand postcompose with direct image of the target symmetry. The signed swap\ncommutes with scalar extension: the scalar has degree zero and both routes\nmultiply the homogeneous (a,b) summand by (-1)^(ab). This is the equality below,\nwith the inverse pullback comparison fixing the target corner.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection formula commutes with change of coefficient ring and open extension by zero",
+   "results": "8 hits on structure-sheaf restriction, presentations and unrelated projective-resolution maps. No derived projection/scalar square.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula commutes with change of coefficient ring and open extension by zero",
+   "results": "8 hits on Profinite.NobelingProof projection/restriction maps and unrelated scalar constructions. No ringed derived coefficient square.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "exchange.*[Tt]ensor|[Tt]ensor.*exchange|[Tt]ensor.*[Ss]calar",
+   "results": "25 initial hits on ordinary tensor scalar restriction and module tensor base change; no normalized proper/open field-system square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; these are ordinary algebraic ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldProjectionSystemSquare",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square",
+   "via": [
+    "lem-sp-field-projection-system-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldProjectionProperSquare",
+  "file": "lean/Sheaf/Paper/FieldProjectionProperSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.field_projection_proper_square",
+  "statement": "theorem field_projection_proper_square (t : ProjectionTensorComparisons P D)\n    (E F : Index P) (h : E ≤ F) {Z Y : Scheme.{u}} (g : Z ⟶ Y)\n    (K : SpTowerShriek.D P.coefficients.l E.val Y)\n    (M : SpTowerShriek.D P.coefficients.l E.val Z) :\n    (D.scalars E F h Y).T.map (leftProper P D t E g K M) ≫\n        (proper P D h g).app\n          ((SpTowerShriek.tensor P.coefficients.l E.val (D.base E) Z).obj\n            ((SpTowerShriek.pull P.coefficients.l E.val (D.base E)\n              ((D.operations E).geometry g)).obj K, M)) ≫\n        (SpTowerShriek.push P.coefficients.l F.val (D.base F)\n          ((D.operations F).geometry g)).map (projectionTarget P D t h g K M).hom =\n      (t.scalar E F h Y).hom.app\n          (K, (SpTowerShriek.push P.coefficients.l E.val (D.base E)\n            ((D.operations E).geometry g)).obj M) ≫\n        (SpTowerShriek.tensor P.coefficients.l F.val (D.base F) Y).map\n          (Prod.mkHom (𝟙 _) ((proper P D h g).app M)) ≫\n        leftProper P D t F g ((D.scalars E F h Y).T.obj K)\n          ((D.scalars E F h Z).T.obj M)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature and relocated five data declarations vs clone (identical, public re-export); three new sorried squares/constructions vs Models/Geometry/Operations pinning fields (open_unit, openTensor_mate, tensorPullback_eq, PullComparison.representative)"
+ }
+}

@@ -106,20 +106,20 @@ private theorem reconstructionFiniteTransition
   rw [ha, ha] at h
   exact h
 
-/-- Reconstruction uses the actual evaluation-calculus adjunction.
-Source: the sole proof paragraph of prop-pur-adic-reconstruction-trace-coherence
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus).
-Proof: (1) K-flat scalar extension shows reduction is normalized, as recorded in S.
-(2) Apply lem-coef-normalized-dvr-effectivity to the evaluated normalized tower.
-The resulting scalar-extension comparisons are precisely S.counit_projection;
-joint conservativity of derived evaluation makes the actual counit invertible.
-The same effectivity theorem gives completeness of its total limit.
-(3) The triangle identity makes reduction of the unit invertible. Its first evaluation
-is reduction modulo the uniformizer, by S.unit_projection. Apply
-sk-lem-pe-derived-nakayama between the complete source and complete target.
-Naturality is already that of S.adjunction. No boundedness is used. -/
-theorem purNormalizedReconstruction
-    (_hl : IsUnit (l : Γ(W, ⊤))) (S : CoefficientDerivedSystemCalculus l E W) :
+/-- Normalized reconstruction over any scheme, using the actual reduction adjunction.
+Source: the normalized DVR/Roos reconstruction argument in the sole proof paragraph of
+prop-pur-adic-reconstruction-trace-coherence
+(blueprint: lem-pod-unrestricted-normalized-reconstruction).
+
+Proof: realize the normalized evaluated tower by its two-coordinate Roos triangle.
+DVR effectivity makes its total limit complete and its finite counit maps invertible;
+conservativity of evaluations inverts the actual system counit. For a complete object,
+compare its K-flat quotient tower with the reduction tower, retaining each transition.
+Transport its Roos triangle and use uniqueness of derived limits. The adjunction triangle
+then makes its actual unit invertible. The argument is independent of the characteristic
+of the scheme: the auxiliary finite field datum only requires a prime different from l. -/
+theorem purNormalizedReconstructionOfScheme
+    (S : CoefficientDerivedSystemCalculus l E W) :
     (∀ (N : coefficientSequenceDerived l E W), IsNormalizedCoefficientSequence l E W N →
       IntegralOnSlice.IsComplete l E W none ((coefficientSequenceLimit l E W).obj N) ∧
         IsIso (S.adjunction.counit.app N)) ∧
@@ -255,6 +255,28 @@ theorem purNormalizedReconstruction
     infer_instance
   exact IsIso.of_isIso_comp_right _
     ((S.reduction ⋙ coefficientSequenceLimit l E W).map φ.hom)
+
+
+/-- Reconstruction uses the actual evaluation-calculus adjunction.
+Source: the sole proof paragraph of prop-pur-adic-reconstruction-trace-coherence
+(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus).
+Proof: (1) K-flat scalar extension shows reduction is normalized, as recorded in S.
+(2) Apply lem-coef-normalized-dvr-effectivity to the evaluated normalized tower.
+The resulting scalar-extension comparisons are precisely S.counit_projection;
+joint conservativity of derived evaluation makes the actual counit invertible.
+The same effectivity theorem gives completeness of its total limit.
+(3) The triangle identity makes reduction of the unit invertible. Its first evaluation
+is reduction modulo the uniformizer, by S.unit_projection. Apply
+sk-lem-pe-derived-nakayama between the complete source and complete target.
+Naturality is already that of S.adjunction. No boundedness is used. -/
+theorem purNormalizedReconstruction
+    (_hl : IsUnit (l : Γ(W, ⊤))) (S : CoefficientDerivedSystemCalculus l E W) :
+    (∀ (N : coefficientSequenceDerived l E W), IsNormalizedCoefficientSequence l E W N →
+      IntegralOnSlice.IsComplete l E W none ((coefficientSequenceLimit l E W).obj N) ∧
+        IsIso (S.adjunction.counit.app N)) ∧
+    (∀ (K : DerivedCategory (scalarReductionSource l E W)),
+      IntegralOnSlice.IsComplete l E W none K → IsIso (S.adjunction.unit.app K)) := by
+  exact purNormalizedReconstructionOfScheme l E W S
 
 /-- The normalized replete subcategory selected by Q. Source: the same proof paragraph
 (blueprint: lem-pur-normalized-reconstruction-adjunction-calculus). -/

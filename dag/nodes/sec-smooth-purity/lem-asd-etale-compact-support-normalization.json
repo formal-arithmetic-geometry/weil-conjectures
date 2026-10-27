@@ -105,7 +105,7 @@
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; prop-asd-smooth-base-change coherence (iii)",
-  "note": "J4 explicit graph construction, localization descent and constructor assembly. Three strictly smaller geometric properties remain separate; vertical pasting and counit-preserving adjoint uniqueness are proved directly in Lean."
+  "note": "J4 explicit graph construction, localization descent and constructor assembly. Three strictly smaller geometric properties remain separate; vertical pasting and counit-preserving adjoint uniqueness are proved directly in Lean. K3 factors the existing explicit constructor into a public canonical definition so downstream chart proofs can reuse its specified fields without repeating the private generic lemmas."
  },
  "mathlib_searches": [
   {
@@ -441,12 +441,26 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q84-c64294a9c (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources and route in full. Unbounded fibre evaluation, refinement counit/projection identity and specified exchange directions check out; no duplicate or target weakening found. Added missing lean_audit records to both new-node JSON files under fixes/. Concrete step, source and edge-case checks are in review.md.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization",
   "declaration": "AlgebraicGeometry.Etale.nonempty_etaleCompactSupportNormalization",
   "declarations": [
    "AlgebraicGeometry.Etale.EtaleCompactSupportNormalization",
+   "AlgebraicGeometry.Etale.counitPreservingComparison",
+   "AlgebraicGeometry.Etale.comparison_vComp",
+   "AlgebraicGeometry.Etale.canonicalEtaleCompactSupportNormalization",
    "AlgebraicGeometry.Etale.nonempty_etaleCompactSupportNormalization"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportNormalization.lean",
@@ -455,7 +469,7 @@
   "by": "NH",
   "date": "2026-10-15",
   "existing": false,
-  "note": "Original full structure and theorem signature unchanged. The eight original helpers are now in the publicly reexported NormalizationData module, with identical signatures and bodies. Constructor proof uses the explicit graph construction; see new nodes for the three remaining holes."
+  "note": "Original full structure and theorem signature unchanged. The eight original helpers are now in the publicly reexported NormalizationData module, with identical signatures and bodies. Constructor proof uses the explicit graph construction; see new nodes for the three remaining holes. K3 repair exposes the same constructor as canonicalEtaleCompactSupportNormalization; the existing existence theorem now wraps it. The structure, maps and proof arguments are unchanged. The two existing generic helpers are public so the exposed constructor contains no private declaration. GraphCoherence is publicly imported because the new public constructor uses its canonical graph core and coherence proof fields."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -466,13 +480,13 @@
   "note": "Wrote review.md. Checked immutable statement, all 16 dependencies, sources, declarations, normalizations, universes, edge cases, and maintainer gates. scompile.py reproduced clean sandbox and library compilation. No corrections needed; branch unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-03b35",
-  "group": "J4",
+  "reviewer": "COMPILER",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261018T091405-L-3255847",
+  "landing": "20261024T190211-L-3985972",
   "kind": "interface",
-  "note": "independent cc review: 03b351f vs passed head 30a0f75ae: the 7 Lean modules and 7 nodes are identical, plus the bundled F7 EtaleCompactificationGraphMap.lean (byte-identical to the F7 source compiled in the 30a0f review) and the re-created def-f7 node (lean.statement = def signature); all 8 modules + importer EtaleAmbientAdjointLocality compile (lcompile --all, exit 0); sorryAx only via the 3 stated holes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

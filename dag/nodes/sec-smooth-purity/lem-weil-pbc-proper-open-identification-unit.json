@@ -14,10 +14,9 @@
  ],
  "proof": [
   {
-   "text": "Put V = T1 ×[T2] X, with projections b and p, and s=(j1,id). Then s b=j1 and s p=id. The section is clopen. Expand the specified theta as the derived pullback exchange, Rp_* of extension-by-zero base change (including the identity pullback comparison), and the characterized clopen component restriction.",
+   "text": "Put V = T1 ×[T2] X, with projections b and p, and s=(j1,id). The already-proved properOpenSectionGeometry in the comparison-definition module gives s open and closed and the Cartesian square with j1 and b; the defining pullback projection equations give s b=j1 and s p=id. Expand the specified theta as the derived pullback exchange, Rp_* of extension-by-zero base change (including the identity pullback comparison), and the characterized clopen component restriction.",
    "uses": [
-    "def-weil-pbc-proper-open-comparison",
-    "lem-weil-pbc-proper-open-section"
+    "def-weil-pbc-proper-open-comparison"
    ],
    "elementary": false,
    "source": {
@@ -30,7 +29,8 @@
    "uses": [
     "lem-weil-pbc-clopen-section-direct-image",
     "cor-cbc-derived-extension-zero-base-change",
-    "lem-weil-pbc-extension-by-zero-adjunction"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-derived-exact-square-factorization"
    ],
    "elementary": false,
    "source": {
@@ -39,9 +39,10 @@
    }
   },
   {
-   "text": "Write the derived exchange as a mate. Its counit equation identifies restriction along s with the inverse-image compositor for j1 f=j2 followed by j1^* of the derived counit for f. The direct-image and inverse-image compositors are conjugate, so their factors for s p=id cancel by the adjunction identities and identity normalizations. These are exactly the two displayed factors on the right. This proof does not require the refinement square to be Cartesian, density, nonempty X or a nonzero coefficient ring. The section cancellation used here can be isolated as follows. For adjunctions Lp ⊣ Rp and Ls ⊣ Rs, an isomorphism e:Id ≅ Lp followed by Ls, and rho:Rs followed by Rp ≅ Id conjugate to e, one has homEquiv_p(v) followed by Rp(eta_s) followed by rho = e.hom followed by Ls(v). Naturality of eta_s, then naturality of rho, reduces this equality to unit_conjugateEquiv for the composite adjunction. This generic identity has been checked in Lean. Apply it with the p and s inverse-image/direct-image adjunctions; the isomorphism e comes from s p=id. The remaining Lean formalization is transporting the specified geometric theta through the open base-change and derived-unit identifications.",
+   "text": "Write derived exchange as its mate and apply the counit equation. For the p and s adjunctions, naturality of the s unit and of the direct-image composition isomorphism reduces section cancellation to the normalized composite unit. The existing derived upper/lower-star coherence equations identify that composite unit with the inverse-image isomorphism from s p=id. Finally inverse-image associativity cancels the pullback-square composition factors, leaving the j1 f=j2 comparison followed by j1^* of the derived f counit.",
    "uses": [
-    "lem-weil-pbc-mate-pasting"
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-derived-inverse-image-composition"
    ],
    "elementary": false,
    "source": {
@@ -52,14 +53,15 @@
  ],
  "proof_deps": [
   "def-weil-pbc-proper-open-comparison",
-  "lem-weil-pbc-proper-open-section",
   "lem-weil-pbc-clopen-section-direct-image",
   "cor-cbc-derived-extension-zero-base-change",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-mate-pasting"
+  "lem-weil-pbc-derived-exact-square-factorization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-derived-inverse-image-composition"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "V4",
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tags 0F7B and 0F7I; component restriction in the proper/open comparison and the refinement argument of thm-cbc-finite-torsion, step 5"
  },
@@ -126,14 +128,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261018T091358-L-3253393",
+  "landing": "20261024T191512-L-412197",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-finite-dualizing-mixed-quotient",
+ "kind": "statement",
+ "title": "The finite dualizing counit comparison commutes with mixed quotients",
+ "statement": "Fix a finite-field datum D, a prime l≠D.p, finite extensions E,L of Q_l and an embedding iota:E→L. Let X be a separated finite-type D.k-scheme and n≤m. Use the finite dualizing terms and exceptional transitions t_F of [def-coef-finite-dualizing-data], the counit-defined cross-field maps finiteU of [def-sf-integral-finite-extension-models], and the mixed scalar/quotient mate a of [def-sf-scalar-reduction-exchange]. Then T_(iota_m)(t_E);a_(omega_(E,n));Res_L(finiteU_n)=finiteU_m;t_L. No integral dualizing datum or choice of integral lift is used.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers."
+ },
+ "stmt_deps": [
+  "def-sf-scalar-reduction-exchange",
+  "def-sf-integral-finite-extension-models",
+  "def-coef-finite-dualizing-data"
+ ],
+ "proof": [
+  {
+   "text": "The two coefficient paths agree on residue representatives. Paste the proper coefficient counit mates and the open balancing squares; their outer compact-support comparisons agree by functoriality and associativity. The two regular coefficient unit maps agree because they send 1 to 1. One can check on a larger ramification-multiple quotient and then descend by the quotient comparison cocycle.",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "lem-coef-finite-dualizing",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose this equality under the exceptional and scalar adjunctions. The resulting maps are exactly finiteEtaleU and the finite dualizing transition. Transport through the scalar-section-normalized realization restriction squares and the origins; their inverse pairs cancel. Identity-on-sections coherence identifies the mixed map with scalarReductionExchange. This yields the asserted equality for all target exponents, including m=n and exponent one.",
+   "uses": [
+    "def-sf-scalar-reduction-exchange",
+    "def-sf-integral-finite-extension-models",
+    "def-coef-finite-dualizing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-sf-integral-finite-extension-models",
+  "def-sf-scalar-reduction-exchange",
+  "lem-coef-finite-dualizing",
+  "lem-coef-finite-free-extension",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a commutative coefficient restriction square commutes with tensor quotient transition maps and exceptional counits",
+   "results": "mateEquiv, mateEquiv_counit, mateEquiv_square and mateEquiv_counit_symm provide general adjunction calculus; no normalized DVR or finite dualizing statement.",
+   "verdict": "generic ingredient only",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dualizing coefficient extension counit commutes with reduction quotient transitions",
+   "results": "Eight results: ordinary adic completion transition naturality and unrelated coalgebra counits; no sheaf derived coefficient comparison. Loogle finds Adjunction.homEquiv_naturality_right only.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizing|normalizedDVRReductionTransition|tensorSquare",
+   "results": "msearch Mathlib grep: zero hits. Project search: CoefIntegralFiniteExtensionModels defines quotient and finiteU; FiniteDualizing proves same-field cocycles, FiniteFreeCoefficientExtension provides a stage calculus; no mixed scalar restriction transition theorem.",
+   "verdict": "no duplicate; use existing model declarations",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteDualizingCoherence",
+  "date": "2026-10-26",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers.",
+   "via": [
+    "lem-sf-integral-finite-dualizing-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefFiniteDualizingMixedQuotient",
+  "file": "lean/Sheaf/SixFunctors/CoefFiniteDualizingMixedQuotient.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.finiteU_quotient_transition",
+  "declarations": [
+   "WeilConjectures.IntegralFiniteExtension.finiteU_quotient_transition"
+  ],
+  "statement": "theorem finiteU_quotient_transition {m n : ℕ} (h : n ≤ m) :\n    (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m)).map\n        (integralDualizingExceptionalTransition l E D X hl h) ≫\n      (scalarReductionExchange l E L ι X h).app (integralDualizingFiniteTerm l E D X n) ≫\n      (normalizedDVRRes l L X h).map (finiteU l E L ι X D n) =\n    finiteU l E L ι X D m ≫ integralDualizingExceptionalTransition l L D X hl h",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T202604-L-2732657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T202604-L-2732657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

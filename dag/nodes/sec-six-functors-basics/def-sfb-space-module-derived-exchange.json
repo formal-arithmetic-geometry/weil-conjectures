@@ -1,0 +1,170 @@
+{
+ "id": "def-sfb-space-module-derived-exchange",
+ "kind": "definition",
+ "title": "Canonical derived exchange for algebraic-space modules",
+ "statement": "Fix a scheme $S$ [def-pc-scheme] and algebraic spaces $X,Y,X',Y'$ over $S$ [def-trf-algebraic-space], with the size convention [def-weil-size-convention]. Use their fixed small ringed module models and derived direct images [def-sfb-space-derived-module-calculus], with four separate instances of the unbounded derived categories in an arbitrary common localization morphism universe $w$ [def-weil-abstract-derived-category]. Use the canonical derived tensor pullback and its normalized composition isomorphisms [def-sfb-space-derived-pullback], and the normalized derived adjunctions $La^*\\dashv Ra_*$ [def-sfb-space-affine-hom-comparison]. For morphisms $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $h:X'\\to X$ and an equality $f\\circ h=g\\circ f'$, and every $A\\in D(\\mathcal O_X)$, define the canonical derived exchange $\\operatorname{Ex}_{f,f',g,h}(A):Lg^*Rf_*A\\to Rf'_*Lh^*A$ to be the adjoint under $L(f')^*\\dashv Rf'_*$ of the composite $L(f')^*Lg^*Rf_*A\\xrightarrow{\\sim}Lh^*Lf^*Rf_*A\\xrightarrow{Lh^*(\\epsilon_f(A))}Lh^*A$. The first arrow is the inverse composition comparison for $g,f'$, followed by transport along the displayed equality, followed by the composition comparison for $f,h$. No cartesianness, flatness, quasi-coherence, boundedness or invertibility is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change); specialized to algebraic spaces in spaces-perfect.tex, Tag 08IR (lemma-compare-base-change), first proof sentence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-affine-hom-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived exchange for a commuting square of algebraic spaces defined as the adjoint of the pulled counit",
+   "results": "{\"t\": \"2026-10-23T22:17:55Z\", \"tool\": \"leansearch\", \"query\": \"Canonical derived exchange for a commuting square of algebraic spaces defined as the adjoint of the pulled counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommSq.right_adjoint\", \"CategoryTheory.CommSq.left_adjoint\", \"CategoryTheory.CommSq.recOn\", \"CategoryTheory.Square.commSq\", \"CategoryTheory.CommSq.cocone\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare\", \"CategoryTheory.CatCommSq.iso\", \"CategoryTheory.CommSq.instHasLift_1\"], \"digest\": \"3f7e357d228576a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic ordinary adjunction results do not define the derived module exchange on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change exchange morphism for sheaves of modules on algebraic spaces as an adjunction mate",
+   "results": "{\"t\": \"2026-10-23T22:17:56Z\", \"tool\": \"leanfinder\", \"query\": \"Derived base change exchange morphism for sheaves of modules on algebraic spaces as an adjunction mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsLeftAdjointPullback\"], \"digest\": \"7fceb2e828b0996d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic ordinary adjunction results do not define the derived module exchange on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleDerivedExchange|spaceDerivedExchange|derived.*[Ee]xchange",
+   "results": "{\"t\": \"2026-10-23T22:17:56Z\", \"tool\": \"grep\", \"query\": \"moduleDerivedExchange|spaceDerivedExchange|derived.*[Ee]xchange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n moduleDerivedExchange|spaceDerivedExchange lean/WeilConjectures lean/Sheaf; rg -l moduleDerivedExchange dag/nodes; blueprint_refs.py search derived exchange",
+   "results": "WeilConjectures: no matching name. Sheaf: SpaceFlatComplexBaseChange.lean defines moduleDerivedExchange at line 46 and calls it at line 71. DAG: only lem-sfb-space-flat-complex-base-change and def-sfb-space-base-change-comparisons mention the name; the latter is only a search-result mention and does not define exchange. Blueprint: 29 matches concern scheme constant-coefficient exchange, compact-support exchange, or unrelated dictionary material; no algebraic-space structure-module exchange definition.",
+   "date": "2026-10-23",
+   "verdict": "existing plain definition in theorem module, extracted without changing its name or data; no definition node owns it"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleDerivedExchange|spaceDerivedExchange|derived.*exchange|exchange.*derived",
+   "results": "{\"t\": \"2026-10-23T23:34:29Z\", \"tool\": \"grep\", \"query\": \"moduleDerivedExchange|spaceDerivedExchange|derived.*exchange|exchange.*derived\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived exchange morphism of a commuting square of ringed algebraic spaces defined using adjunction counit",
+   "results": "{\"t\": \"2026-10-23T23:34:29Z\", \"tool\": \"leansearch\", \"query\": \"Derived exchange morphism of a commuting square of ringed algebraic spaces defined using adjunction counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app\", \"CategoryTheory.ExponentiableMorphism.ev_naturality\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit\", \"CategoryTheory.ExponentiableMorphism.ev\"], \"digest\": \"640289b8b8a1e341\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf pullback/adjunction or abstract derived adjunction only; no algebraic-space derived exchange with the specified normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AlgebraicSpace, DerivedCategory",
+   "results": "{\"t\": \"2026-10-23T23:34:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.AlgebraicSpace, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.AlgebraicSpace'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Loogle does not recognize AlgebraicGeometry.AlgebraicSpace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change exchange for modules on algebraic spaces is the adjoint of pullback of the counit",
+   "results": "{\"t\": \"2026-10-23T23:34:30Z\", \"tool\": \"leanfinder\", \"query\": \"Derived base change exchange for modules on algebraic spaces is the adjoint of pullback of the counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackObjUnitToUnit\"], \"digest\": \"d1f3ac468c940d22\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf pullback/adjunction or abstract derived adjunction only; no algebraic-space derived exchange with the specified normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change|beckChevalley",
+   "results": "{\"t\": \"2026-10-23T23:35:41Z\", \"tool\": \"grep\", \"query\": \"baseChange|base_change|beckChevalley\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley mate of a commutative square of derived tensor pullback functors on sheaves of modules",
+   "results": "{\"t\": \"2026-10-23T23:35:42Z\", \"tool\": \"leanfinder\", \"query\": \"Beck Chevalley mate of a commutative square of derived tensor pullback functors on sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"d5b6b73846190745\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf pullback/adjunction or abstract derived adjunction only; no algebraic-space derived exchange with the specified normalizations"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-flat-closed-kernel-base-change",
+  "date": "2026-10-23",
+  "group": "Q98"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf. Canonical exchange in step 6, before conjugation by the closed structure-sheaf comparisons.",
+   "via": [
+    "lem-sfb-space-relative-flat-closed-kernel-base-change",
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceModuleDerivedExchange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.moduleDerivedExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceModuleDerivedExchange.lean",
+  "statement": "def moduleDerivedExchange (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (h : X' ⟶ X)\n    (w : h ≫ f = f' ≫ g) (A : X.DerivedModules) :\n    (derivedTensorPullback g).obj ((derivedDirectImage f).obj A) ⟶\n      (derivedDirectImage f').obj ((derivedTensorPullback h).obj A)",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Extracted verbatim from SpaceFlatComplexBaseChange, with declaration name and body unchanged; the former module publicly imports the new owner. Defines the counit mate, without assuming or claiming a base-change theorem."
+ },
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-space-module-derived-exchange",
+  "worker": "stage1",
+  "summary": "Q69 audited this definition against Stacks 07A6 lemma-adjoint and 07A7 remark-base-change and the first proof sentence of 08IR lemma-compare-base-change. The seven existing statement dependencies supply all objects, derived functors, normalized compositions and adjunctions. No new nodes or proof steps are needed for this definition. Two semantic phrasings plus Loogle, LeanSearch and source grep found only ordinary module pullback or abstract derived-adjunction ingredients, not this algebraic-space exchange. Statement, prior searches, provenance, Lean record and dependency list retained.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), direct-image preservation: supporting algebraic-space module construction along the inherited alteration/duality/08IR route recorded in blueprint.from.place; the item only defines the 07A7 counit mate needed by that route, and makes no base-change isomorphism claim."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-bc420bcea",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-bc420bcea (reviewer sub-agent of L); spot-checked: Audit-only stage-1 delivery: one commit with the item and its report. Compared with live and side-live, only split_report and the six Q69 mathlib_searches are new; the statement, the 7 stmt_deps, the empty proof, the lean record and the blueprint fields are unchanged. There is no repair note and no live review, so nothing supersedes it. I read sites-cohomology lemma-adjoint 07A6 and remark-base-change 07A7 (~l.3989-4062) and the first proof sentence of spaces-perfect lemma-compare-base-change 08IR (~l.4862). The item defines exactly the 07A7 adjoint of Lh^*(ε_f) for any commutative square, with h in the role of g'. The composition step is made precise as inv comp(g,f'), then transport along f∘h=g∘f', then comp(f,h). I type-checked the composite against def-sfb-space-derived-pullback's convention L(f∘g)^*≅Lg^*Lf^*. The coefficient category is unbounded D(O) on the small étale ringed model (def-sfb-space-derived-module-calculus), with no D_QCoh, qc/qs, Tor-independence or flatness hypothesis, so nothing from 08IR is imported or weakened. I opened all 7 stmt_deps and each is used. The derived adjunction is the normalized clause of def-sfb-space-affine-hom-comparison. That clause sits in an affine-square context, but its condition concerns only the edge, and its owned Lean spaceDerivedAdjunction is for an arbitrary h. The sibling def-sfb-space-base-change-comparisons cites it the same way, so I accept it, with an advisory to word that clause for an arbitrary edge. The Lean moduleDerivedExchange (w : h ≫ f = f' ≫ g) matches the statement step by step; its docstring cites 0A1K where the header has 08IR, which is cosmetic. Edge cases: A=0, the identity square and non-cartesian squares are all well defined. Duplicate scan: def-trf-topos-derived-base-change-map is the generic ringed-topos mate on other functor models, an advisory and not a duplicate made here. def-weil-pbc-derived-exchange and def-kun-unbounded-exchange use other coefficient categories. There are no new nodes, no proof steps, no tool_uses and no SGA citation. The searches include LeanSearch, LeanFinder, Loogle and grep. review.md is written."
+ }
+}

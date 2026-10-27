@@ -1,0 +1,324 @@
+{
+ "id": "lem-a1-affine-relation-flat-local-descent",
+ "kind": "statement",
+ "title": "Descent of an invariant tensor comparison and finite local freeness",
+ "statement": "Let $C\\subset A$ be an inclusion of commutative rings, let $B$ be a commutative ring, and let $\\sigma,\\tau:A\\to B$ agree on $C$. Assume $\\operatorname{Spec}A\\to\\operatorname{Spec}C$ is surjective [def-weil-affine-spectrum]. Put $\\phi:A\\otimes_C A\\to B$, $a\\otimes a'\\mapsto\\sigma(a)\\tau(a')$ [def-weil-pbc-module-tensor-product]. Suppose there are finitely many $f_1,\\ldots,f_n\\in A$ generating the unit ideal such that $B_{\\sigma(f_i)}$ is finite free over $A_{f_i}$ via $\\sigma$; localizations are taken by powers of the indicated element. For every prime $\\mathfrak p\\subset C$, suppose there is a faithfully flat map $C_{\\mathfrak p}\\to D_{\\mathfrak p}$ [def-weil-pbc-faithfully-flat-ring-map] such that $A\\otimes_C D_{\\mathfrak p}$ is a finite free $D_{\\mathfrak p}$-module and\n$$\\phi_{D_{\\mathfrak p}}:(A\\otimes_C D_{\\mathfrak p})\\otimes_{D_{\\mathfrak p}}(A\\otimes_C D_{\\mathfrak p})\\longrightarrow B\\otimes_C D_{\\mathfrak p}$$\nis an isomorphism. Then $\\phi$ is an isomorphism, and $C\\to A$ is flat and faithfully flat. The $C$-module $A$ is finitely presented, meaning there is an exact sequence $C^m\\to C^n\\to A\\to0$ for finite $m,n$, and is finite projective, meaning a direct summand of a finite free $C$-module. There are finitely many $g_1,\\ldots,g_l\\in C$ generating the unit ideal with $A_{g_i}$ finite free over $C_{g_i}$. The structural map $q:\\operatorname{Spec}A\\to\\operatorname{Spec}C$ is finite locally free [def-pc-finite-locally-free] and surjective. For every affine open $V=\\operatorname{Spec}T$ in $\\operatorname{Spec}C$, its inverse image is $\\operatorname{Spec}(A\\otimes_C T)$, whose coordinate ring is finite as a $T$-module. Finally $\\operatorname{Spec}B\\to\\operatorname{Spec}A\\times_{\\operatorname{Spec}C}\\operatorname{Spec}A$ is an isomorphism with its two projections equal to $\\operatorname{Spec}\\sigma$ and $\\operatorname{Spec}\\tau$ [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BM (proposition-finite-flat-equivalence), proof second paragraph, descent from local flat extensions and finite-presentation descent; algebra.tex Tag 03C4 (lemma-descend-properties-modules), (2), and Tag 00NX (lemma-finite-projective)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For every C-module M and prime p, realize its localization as C_p ⊗_C M, using the canonical map m ↦ 1 ⊗ m. Scalar cancellation identifies D_p ⊗_{C_p} (C_p ⊗_C M) with D_p ⊗_C M, naturally in M. Tensor symmetry conjugates the stated map φ ⊗ id_{D_p} to id_{D_p} ⊗ φ. These are the maps and identifications used below; the tensor-square reidentification is already incorporated in the hypothesis as stated in Lean.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property; Tag 07JZ (definition-localization-module), fraction construction; scalar identifications used in Tag 03BM."
+   }
+  },
+  {
+   "text": "Apply faithful-flat reflection of bijectivity to the C_p-linear base change of φ. The further D_p-base change is conjugate to id_{D_p} ⊗ φ by scalar cancellation and is bijective by the hypothesis and tensor symmetry. Thus every maximal localization is bijective. The local bijectivity criterion, with C_p ⊗_C (A ⊗_C A) and C_p ⊗_C B as localization models, proves that φ is bijective. AlgEquiv.ofBijective gives its algebra inverse.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM (proposition-finite-flat-equivalence), second proof paragraph, descent of the comparison; algebra.tex Tag 00HN (lemma-characterize-zero-local)."
+   }
+  },
+  {
+   "text": "The free D_p-module D_p ⊗_C A is flat. Scalar cancellation identifies this with D_p ⊗_{C_p} (C_p ⊗_C A), so faithful-flat descent makes C_p ⊗_C A flat over C_p. Localization of scalars makes it flat over C. Apply the local flatness criterion to the canonical maps A → C_p ⊗_C A to get flatness over C. Surjectivity of Spec A → Spec C then gives faithful flatness.",
+   "uses": [
+    "lem-weil-pbc-flatness-descends-faithfully-flat",
+    "lem-pc-affine-sections-flat-over-base",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, second proof paragraph; algebra.tex Tags 03C4 (lemma-descend-properties-modules), (3), 00HT (lemma-flat-localization), (6), and 00HQ (lemma-ff-rings)."
+   }
+  },
+  {
+   "text": "Regard $B$ as an $A$-module through $\\sigma$. Its localization at $f_i\\in A$ is $B_{\\sigma(f_i)}$: the fraction $b/f_i^r$ corresponds to $b/\\sigma(f_i)^r$. The given $f_i$ generate the unit ideal of $A$, and these localized modules are finite free by hypothesis. The standard-cover lemma [lem-sc-affine-standard-cover-finite-presentation-flat] therefore makes $B$ a finitely presented $A$-module. Step 2 identifies it with $A\\otimes_C A$ as an $A$-module through the FIRST factor, since $\\phi((ra)\\otimes a')=\\sigma(r)\\phi(a\\otimes a')$. Apply MODULE finite-presentation descent [lem-trf-finite-presentation-module-descent-flat-local] with $R=C$, $T=A$, $M=A$. Its faithful-flatness hypothesis is step 3, and its scalar extension $T\\otimes_R M$ is this first-factor module. Thus $A$ is finitely presented as a $C$-module, giving the asserted finite presentation.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-sc-affine-standard-cover-finite-presentation-flat",
+    "lem-trf-finite-presentation-module-descent-flat-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EO (lemma-cover), finite presentation; Tag 03C4 (lemma-descend-properties-modules), (2); used exactly this way in groupoids.tex Tag 03BM."
+   }
+  },
+  {
+   "text": "Finitely presented flat modules are projective. Module.Finite.exists_comp_eq_id_of_projective chooses a surjection C^r → A and a section A → C^r by the projective lifting property, giving the required explicit retract. The finite-projective standard-free-cover theorem then gives finitely many g_i spanning the unit ideal with finite free localized modules.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX (lemma-finite-projective), (1) implies (2), (3), (7); explicit splitting uses Tag 05CF (lemma-characterize-projective)."
+   }
+  },
+  {
+   "text": "The global finite presentation of A as a C-module implies finiteness as a module and finite presentation as an algebra (Mathlib.RingTheory.Finiteness.ModuleFinitePresentation). The affine Spec criteria for finite morphisms, flat morphisms and locally finitely presented morphisms therefore apply directly to q. Together these give the asserted IsFiniteLocallyFree structure. Surjectivity is exactly the assumed surjectivity of the map on prime spectra. This uses no restriction to the standard free cover.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB (lemma-finite-flat), affine finite-free implication; Tag 01WI (lemma-finite-local); Tag 01TP (definition-finite-presentation); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "For any C-algebra T, pullback symmetry followed by pullbackSpecIso C T A gives the required isomorphism to Spec (T ⊗_C A). The two pullbackSpecIso projection identities give exactly includeRight and algebraMap T. Finiteness of T ⊗_C A over T is the base-change instance for finite modules. The argument works for every C-algebra T, so in particular for every affine open in the statement.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), affine base change; algebra.tex Tag 00CX (lemma-tensor-product), bilinearity and pure-tensor generation."
+   }
+  },
+  {
+   "text": "Apply the affine fibre-product formula once more with both algebras equal to $A$. Step 2 and contravariant functoriality of $\\operatorname{Spec}$ give an isomorphism $\\operatorname{Spec}B\\to\\operatorname{Spec}A\\times_{\\operatorname{Spec}C}\\operatorname{Spec}A$. The two projections are induced by $a\\mapsto a\\otimes1$ and $a\\mapsto1\\otimes a$. Composing these ring maps with $\\phi$ gives $a\\mapsto\\sigma(a)\\tau(1)=\\sigma(a)$ and $a\\mapsto\\sigma(1)\\tau(a)=\\tau(a)$, respectively, so their scheme morphisms are exactly $\\operatorname{Spec}\\sigma$ and $\\operatorname{Spec}\\tau$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM (proposition-finite-flat-equivalence), comparison $t\\otimes s$; schemes.tex Tag 01I4, projections in the affine fibre product."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "lem-weil-pbc-flatness-descends-faithfully-flat",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-sc-affine-standard-cover-finite-presentation-flat",
+  "lem-trf-finite-presentation-module-descent-flat-local",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BM (proposition-finite-flat-equivalence), second proof paragraph; algebra.tex Tags 03C4, 00EO and 00NX. Step 6 uses the affine criteria directly from the descended module finite presentation and flatness, instead of gluing finite-free charts. Lean implementation by R2, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend finite locally free algebra and tensor comparison isomorphism from faithfully flat extensions of every local ring using finite presentation of the relation algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.FaithfullyFlat.bijective_of_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u_3}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Module.FaithfullyFlat R S],\\n  Function.Bijective ⇑(algebraMap S (TensorProduct R S T)) → Function.Bijective ⇑(algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the canonical algebra homomorphism $ S \\\\to S \\\\otimes_R T $ is bijective, then the canonical algebra homomorphism $ R \\\\to T $ is also bijective.\"}\n  {\"name\": \"Algebra.FinitePresentation.baseChange\", \"module\": \"Mathlib/RingTheory/FiniteStability\", \"type\": \"∀ {R : Type w₁} [inst : CommRing R] {A : Type w₂} [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type w₃)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FinitePresentation R A],\\n  Algebra.FinitePresentation B (TensorProduct R B A)\", \"doc\": \"Let $R$ be a commutative ring, and let $A$ and $B$ be $R$-algebras. If $A$ is a finitely presented $R$-algebra, then the base change $B \\\\otimes_R A$ is a finitely presented $B$-algebra.\"}\n  {\"name\": \"instFinitePresentationTensorProduct\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {A : Type u_1}\\n  [inst_3 : CommRing A] [inst_4 : Algebra R A] [Module.FinitePresentation R M],\\n  Module.FinitePresentation A (TensorProduct R A M)\", \"doc\": \"Let $R$ be a commutative semiring and let $A$ be a commutative ring that is also an $R$-algebra. If $M$ is a finitely presented $R$-module, then the tensor product $A \\\\otimes_R M$, viewed as an $A$-mo\"}\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"{R : Type u_3} → {S : Type u_4} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"In a pushout diagram of commutative rings, if the algebra maps $ R \\to R' $ and $ R' \\to S' $ are bijective, then the induced algebra map $ R \\to S $ is faithfully flat. This requires scalar tower compat\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any commutative ring $ R $ and a commutative $ R $-algebra $ A $ that is smooth over $ B $, there exists a finitely generated $ R $-subalgebra $ A_0 $ of $ A $ such that $ A_0 $ is smooth over $ B\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (TensorProduct R S M)],\\n  Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual faithfully flat descent or projectivity lemmas, not the local-to-global comparison and module finite-presentation argument with the stated tensor-square hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If B is a finite projective A module isomorphic locally faithfully flat to A tensor C A and A is locally faithfully flat free then A is finite projective over C",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (TensorProduct R S M)],\\n  Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"{R : Type u_3} → {S : Type u_4} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"Module.Flat.of_projective\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [Module.Projective R M], Module.Flat R M\", \"doc\": \"Every projective module over a commutative semiring is flat. Specifically, if $ M $ is a projective module over a commutative semiring $ R $, then $ M $ satisfies the flatness condition, meaning tenso\"}\n  {\"name\": \"Module.FaithfullyFlat.bijective_of_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u_3}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Module.FaithfullyFlat R S],\\n  Function.Bijective ⇑(algebraMap S (TensorProduct R S T)) → Function.Bijective ⇑(algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the canonical algebra homomorphism $ S \\\\to S \\\\otimes_R T $ is bijective, then the canonical algebra homomorphism $ R \\\\to T $ is also bijective.\"}\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S],\\n  Module.Flat S (TensorProduct R S M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.FinitePresentation R M], Module.Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R M],\\n  Module.FaithfullyFlat S (TensorProduct R S M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [IsLocalRing A]\\n  [IsLocalRing B] [Module.Flat A B] [IsLocalHom (algebraMap A B)], Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be local rings. If $ A $ is flat as a $ B $-module and the algebra map $ B \\to A $ is a local homomorphism, then $ A $ is faithfully flat over $ B $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual faithfully flat descent or projectivity lemmas, not the local-to-global comparison and module finite-presentation argument with the stated tensor-square hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free descent from local faithfully flat covers and finite presentation of a tensor square",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"instFinitePresentationTensorProduct\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"{A} [CommRing A] [Algebra R A] [Module.FinitePresentation R M] : Module.FinitePresentation A (A ⊗[R] M)\", \"doc\": \"Let $R$ be a commutative semiring and let $A$ be a commutative ring that is also an $R$-algebra. If $M$ is a finitely presented $R$-module, then the tensor product $A \\\\otimes_R M$, viewed as an $A$-mo\"}\n  {\"name\": \"Module.FaithfullyFlat.bijective_of_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Descent\", \"type\": \"[Module.FaithfullyFlat R S] (H : Function.Bijective (algebraMap S (S ⊗[R] T))) : Function.Bijective (algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the canonical algebra homomorphism $ S \\\\to S \\\\otimes_R T $ is bijective, then the canonical algebra homomorphism $ R \\\\to T $ is also bijective.\"}\n  {\"name\": \"Algebra.FinitePresentation.baseChange\", \"module\": \"Mathlib.RingTheory.FiniteStability\", \"type\": \"[FinitePresentation R A] : FinitePresentation B (B ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative ring, and let $A$ and $B$ be $R$-algebras. If $A$ is a finitely presented $R$-algebra, then the base change $B \\\\otimes_R A$ is a finitely presented $B$-algebra.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual faithfully flat descent or projectivity lemmas, not the local-to-global comparison and module finite-presentation argument with the stated tensor-square hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"FinitePresentation\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"RingHom.FinitePresentation.codescendsAlong_faithfullyFlat\", \"module\": \"Mathlib.RingTheory.Finiteness.Descent\", \"type\": \" : RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation) fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat\", \"module\": \"Mathlib.RingTheory.Finiteness.Descent\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] (T : Type u_3) [CommRing T] [Algebra R T] [Module.FaithfullyFlat R T] [Algebra.FinitePresentation T (TensorProduct R T S)] : Algebra.FinitePresentation R S\", \"doc\": \"If `T ⊗[R] S` is of finite presentation over `T` and `T` is `R`-faithfully flat,\\nthen `S` is of finite presentation over `R`\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual faithfully flat descent or projectivity lemmas, not the local-to-global comparison and module finite-presentation argument with the stated tensor-square hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]aithfully[Ff]lat.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Ff]aithfully[Ff]lat|[Ff]inite[Pp]rojective.*[Dd]escent",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"39\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.FinitePresentation.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"98\", \"text\": \"lemma FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"99\", \"text\": \"    [Module.FaithfullyFlat R T] [Algebra.FinitePresentation T (T ⊗[R] S)] :\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"126\", \"text\": \"lemma FinitePresentation.codescendsAlong_faithfullyFlat :\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"127\", \"text\": \"    CodescendsAlong FinitePresentation FaithfullyFlat := by\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"131\", \"text\": \"  exact .of_finitePresentation_tensorProduct_of_faithfullyFlat S\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"64\", \"text\": \"  have : Algebra.FinitePresentation R S := .of_finitePresentation_tensorProduct_of_faithfullyFlat T\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"65\", \"text\": \"  refine ⟨?_, .of_finitePresentation_tensorProduct_of_faithfullyFlat T⟩\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual faithfully flat descent or projectivity lemmas, not the local-to-global comparison and module finite-presentation argument with the stated tensor-square hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant tensor comparison is an isomorphism after faithfully flat extensions of all prime local rings; descend the isomorphism, flatness, and finite local freeness from a finite free cover of its tensor square",
+   "results": "OK 8 hits: Module.FaithfullyFlat.bijective_of_tensorProduct, Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat.instTensorProduct, Module.FaithfullyFlat.iff_flat_and_lTensor_faithful, Module.FaithfullyFlat.lTensor_bijective_iff_bijective, Module.FaithfullyFlat.iff_flat_and_rTensor_faithful, Module.Flat.iff_flat_tensorProduct, Module.FaithfullyFlat.injective_of_tensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned declarations concern individual descent or locality tools, reused through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"FinitePresentation\"",
+   "results": "OK 2 hits: RingHom.FinitePresentation.codescendsAlong_faithfullyFlat, Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned declarations concern individual descent or locality tools, reused through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*localization.*maximal|of_flat_tensorProduct|finitePresentation_of_localization|iff_flat_and_specComap_surjective",
+   "results": "OK 6 hits: Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Etale/Descent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned declarations concern individual descent or locality tools, reused through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prove that a surjective affine spectrum morphism is finite locally free when its tensor comparison descends from faithfully flat prime-local covers and the tensor square has a finite standard free cover",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite.recOn, Module.FaithfullyFlat.of_comap_surjective, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Module.FaithfullyFlat.surjective_of_tensorProduct, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, IsLocalHom.of_comap_surjective, Module.FaithfullyFlat.instTensorProduct, Module.FaithfullyFlat.of_specComap_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned declarations concern individual descent or locality tools, reused through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over a commutative ring is flat if its localizations at every prime ideal are flat",
+   "results": "OK 8 hits: Module.flat_of_localized_maximal, Module.flat_of_isLocalized_maximal, instFlatAtPrime, Module.flat_of_localized_span, Module.flat_iff_of_isLocalization, RingHom.Flat.ofLocalizationPrime, Module.flat_of_isLocalized_span, RingHom.Flat.propertyIsLocal",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned declarations concern individual descent or locality tools, reused through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_localized_maximal|flat_iff_of_isLocalization",
+   "results": "OK 6 hits: Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned declarations concern individual descent or locality tools, reused through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.flat_of_localized_maximal",
+   "results": "OK 1 hits: Module.flat_of_localized_maximal",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned declarations concern individual descent or locality tools, reused through existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-flat-affine-relation-quotient",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting affine-quotient argument: Stacks Tag 03BM (proposition-finite-flat-equivalence), proof second paragraph, descent from local flat extensions and finite-presentation descent; algebra.tex Tag 03C4 (lemma-descend-properties-modules), (2), and Tag 00NX (lemma-finite-projective). Returned item steps 10,11,12.",
+   "via": [
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-relation-flat-local-descent",
+  "worker": "stage1",
+  "summary": "Proved the comparison by faithful-flat reflection of exactness and maximal-local bijectivity; descended flatness first and module finite presentation only after global faithful flatness was established. Reused all supporting DAG nodes, then wrote the summand and all scheme clauses explicitly. No new nodes or changed statement.",
+  "blueprint": "Retains the inherited supporting affine-quotient branch under lem-a1-affine-hc0 via lem-a1-separated-etale-space-scheme, lem-a1-separated-locally-qf-space-representable and lem-a1-finite-flat-affine-relation-quotient: specifically the local-to-global paragraph of Stacks Tag 03BM used by this branch, not a new route for the Rankin–Selberg unit.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-standard-cover-finite-presentation-flat",
+    "why": "Generic commutative-algebra or affine-scheme tool used at the explicitly stated specialization in the proof; the Rankin–Selberg unit supplies no substitute for this supporting 03BM descent calculation."
+   },
+   {
+    "node": "lem-trf-finite-presentation-module-descent-flat-local",
+    "why": "Generic commutative-algebra or affine-scheme tool used at the explicitly stated specialization in the proof; the Rankin–Selberg unit supplies no substitute for this supporting 03BM descent calculation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Generic commutative-algebra or affine-scheme tool used at the explicitly stated specialization in the proof; the Rankin–Selberg unit supplies no substitute for this supporting 03BM descent calculation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic commutative-algebra or affine-scheme tool used at the explicitly stated specialization in the proof; the Rankin–Selberg unit supplies no substitute for this supporting 03BM descent calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-standard-cover-finite-presentation-flat",
+  "lem-trf-finite-presentation-module-descent-flat-local",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-6f0a26f2d",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-6f0a26f2d (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item against Stacks groupoids 03BM (proof paragraph 2) and algebra 03C4(1)-(3), and opened the statement of every cited node; review.md is written and no fixes were needed. The delivery has no new nodes and leaves the statement unchanged. Step 2: the faithfully-flat definition reflects exactness of 0→P_p→B_p and of P_p→B_p→0, then bijectivity at maximal ideals gives that phi is bijective. Step 3: flatness descends along C_p→D_p, then the flatness criterion with A=B=C and M=A, then flat plus surjective on Spec gives faithfully flat. Step 4: B is finitely presented over A through sigma (standard cover with the f_i), the first-factor action matches A⊗_C A, and 03C4(2) applied with R=C, T=A, M=A gives A finitely presented over C. Step 5: the explicit summand C^n≅ker p⊕A is correct, then the standard free cover. Step 6: finite, flat and lfp are each shown locally on D(g_i), which matches def-pc-finite-locally-free. Steps 7-8 are elementary and correct, including the projection order sigma then tau. Edge cases checked: zero ring, C=A=B, empty bases; no rank or Noetherian hypothesis is used. Batch-5 flag on lem-trf-finite-presentation-module-descent-flat-local: accepted. It is unsplit with no proof_deps and states pure Stacks 03C4(2) algebra, so its closure reaches no trace-formula or Poincaré-duality proof node, and nodes outside trf already cite it. The worker-written tool_uses (4 generic algebra tools) are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRelationFlatLocalDescent",
+  "declaration": "AlgebraicGeometry.affineRelation_flat_local_descent",
+  "declarations": [
+   "AlgebraicGeometry.affineRelationTensorComparison",
+   "AlgebraicGeometry.affineRelation_flat_local_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRelationFlatLocalDescent.lean",
+  "statement": "theorem affineRelation_flat_local_descent (C A B : Type u) [CommRing C] [CommRing A] [CommRing B] [Algebra C A] [Algebra A B] [Algebra C B] [IsScalarTower C A B] (τ : A →ₐ[C] B) (hinj : Function.Injective (algebraMap C A)) (hsurj : Function.Surjective (PrimeSpectrum.comap (algebraMap C A))) {n : ℕ} (f : Fin n → A) (hspan : Ideal.span (Set.range f) = ⊤) (hfree : ∀ i : Fin n, Module.Finite (Localization.Away (f i)) (LocalizedModule.Away (f i) B) ∧ Module.Free (Localization.Away (f i)) (LocalizedModule.Away (f i) B)) (D : PrimeSpectrum C → Type v) [∀ p, CommRing (D p)] [∀ p, Algebra (Localization.AtPrime p.asIdeal) (D p)] [∀ p, Algebra C (D p)] [∀ p, IsScalarTower C (Localization.AtPrime p.asIdeal) (D p)] (hfaithful : ∀ p, Module.FaithfullyFlat (Localization.AtPrime p.asIdeal) (D p)) (hlocal : ∀ p, Module.Finite (D p) ((D p) ⊗[C] A) ∧ Module.Free (D p) ((D p) ⊗[C] A) ∧ Function.Bijective (Algebra.TensorProduct.map (affineRelationTensorComparison (IsScalarTower.toAlgHom C A B) τ) (AlgHom.id C (D p)))) : Function.Bijective (affineRelationTensorComparison (IsScalarTower.toAlgHom C A B) τ) ∧ Module.Flat C A ∧ Module.FaithfullyFlat C A ∧ Module.FinitePresentation C A ∧ (∃ (r : ℕ) (i : A →ₗ[C] (Fin r → C)) (p : (Fin r → C) →ₗ[C] A), p.comp i = LinearMap.id) ∧ (∃ (l : ℕ) (g : Fin l → C), Ideal.span (Set.range g) = ⊤ ∧ ∀ i : Fin l, Module.Finite (Localization.Away (g i)) (LocalizedModule.Away (g i) A) ∧ Module.Free (Localization.Away (g i)) (LocalizedModule.Away (g i) A)) ∧ (Spec.map (CommRingCat.ofHom (algebraMap C A))).IsFiniteLocallyFree ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap C A))) ∧ (∀ (T : Type u) [CommRing T] [Algebra C T], IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap C T))) → (∃ e : pullback (Spec.map (CommRingCat.ofHom (algebraMap C A))) (Spec.map (CommRingCat.ofHom (algebraMap C T))) ≅ Spec (CommRingCat.of (T ⊗[C] A)), e.hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : A →ₐ[C] T ⊗[C] A).toRingHom) = pullback.fst _ _ ∧ e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap T (T ⊗[C] A))) = pullback.snd _ _) ∧ Module.Finite T (T ⊗[C] A)) ∧ (∃ e : Spec (CommRingCat.of B) ≅ pullback (Spec.map (CommRingCat.ofHom (algebraMap C A))) (Spec.map (CommRingCat.ofHom (algebraMap C A))), e.hom ≫ pullback.fst _ _ = Spec.map (CommRingCat.ofHom (algebraMap A B)) ∧ e.hom ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom τ.toRingHom))",
+  "branch": "sheaf-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Second-reader FIX: the affine-open clause now pins the identification of the inverse image of Spec T with Spec (T ⊗[C] A) over Spec A (includeRight) and Spec T (algebraMap), the affine fibre-product formula, instead of a bare Nonempty isomorphism. σ is the A-algebra structure on B with τ : A →ₐ[C] B; the base-changed comparison is stated on (A ⊗[C] A) ⊗[C] D, canonically identified with the node's tensor square over D.",
+  "fixed_by": "NT-stage2-cc-71be414bc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71be414bc",
+  "group": "Q96",
+  "result": "fix",
+  "note": "Read all 8 steps and every clause against the node, Stacks 03BM, 03C4(2) and 00NX, and the 5 stmt_dep records (Spec, TensorProduct mathlib_match, Module.FaithfullyFlat, IsFiniteLocallyFree, pullback). Hypotheses match: σ as the A-algebra structure on B plus τ : A →ₐ[C] B covers all pairs agreeing on C; hfree uses LocalizedModule.Away (module notion); D_p lives in an independent universe v; the base-changed φ is canonically identified with the node's tensor square over D_p. Conclusions match: bijective φ, flat and faithfully flat, Module.FinitePresentation, retract of Fin r → C, (l,g) free cover, IsFiniteLocallyFree, Surjective, and Spec B ≅ pullback with fst = Spec σ, snd = Spec τ. Edge cases hold: zero rings, n = 0 or l = 0, rank 0, empty and non-principal affine opens. FIX (H3, mere Nonempty choice): the affine-open clause 'Nonempty (pullback ≅ Spec (T⊗A))' is replaced by ∃ e with e.hom ≫ Spec(includeRight) = pullback.fst and e.hom ≫ Spec(algebraMap T (T⊗A)) = pullback.snd, which is the canonical identification. Complete module and lean-record (statement verbatim) are in fixes/. Fixed file compiled clean through nt_compile --json in 5.2 s. stmt_deps unchanged. The only citer (finite-flat-affine-relation-quotient) does not use this clause. Advisory: the helper is built with Algebra.TensorProduct.lift, not a second notion."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T082808-L-2224618",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-principal-strict-small-model-local-tests",
+ "kind": "statement",
+ "title": "Comparison of principal local tests with the canonical small-site ideal tests",
+ "statement": "For a ringed site (C,J,R) with independent site universes and coefficient universe containing them, let t be a global section and P any object of its unbounded module derived category. Use locallyComplete of [def-sf-regular-roos-koszul-data], which tests every slice section that is in the image of multiplication by t. Restrict R and t to the canonical small model [def-sf-koszul-small-model-completed-tensor], obtaining S and a, and use independent derived localization universes. Then locallyComplete(R,t,P) is equivalent to IsLocallyDerivedRingedIdealComplete [def-weil-pbc-locally-derived-ringed-ideal-complete] for the unit module of S mapping to itself by multiplication by a, evaluated at the derived-equivalence image of P. This is only an equivalence of local predicates; it does not construct or assert a completion reflector. The predicate is defined even without assuming the multiplication map monic.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites-cohomology.tex Tag 0941; sites-modules.tex Tags 03DA and 03DG. The comparison step of lem-sf-principal-strict-limit-reflector."
+ },
+ "stmt_deps": [
+  "def-sf-regular-roos-koszul-data",
+  "def-sf-koszul-small-model-completed-tensor",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Use the induced equivalence on every slice and the exact slice restriction square. The section localization universal property followed by the sheafification comparison identifies the localizations at corresponding sections. The derived-Hom restriction comparison computes the same test through the exact slice equivalence, using independent derived localization universes.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-slices",
+    "lem-pur-native-ringed-restriction-localization",
+    "lem-pur-native-ringed-restriction-derived-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A slice section is determined by its terminal value, by naturality for the unique map to the identity arrow. After identifying corresponding sections, the exact-multiple equation is the image-of-multiplication equation in the small-site predicate. The ordinary and universe-generalized localizations and derived Hom lifts agree by their construction and localization universal property.",
+   "uses": [
+    "def-pur-ringed-principal-local-tests",
+    "def-weil-pbc-ringed-section-localization",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact slice equivalences preserve and reflect zero objects. Every original object is isomorphic to the inverse-equivalence image of a small-model object, and the induced equivalences of slices identify these tests under that isomorphism. Apply the preceding zero-object equivalence in both directions for all slice sections. No regularity, K-flatness or product exactness is used.",
+   "uses": [
+    "def-sf-koszul-small-model-completed-tensor",
+    "lem-pur-native-ringed-restriction-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-native-ringed-restriction-slices",
+  "lem-pur-native-ringed-restriction-localization",
+  "lem-pur-native-ringed-restriction-derived-hom",
+  "def-pur-ringed-principal-local-tests",
+  "def-weil-pbc-ringed-section-localization",
+  "def-pur-derived-internal-hom",
+  "def-sf-koszul-small-model-completed-tensor",
+  "lem-pur-native-ringed-restriction-equivalence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E, with the size and normalization comparisons expanded for the existing Lean interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed sites preserves local derived completeness and the normalized total derived inverse limit of a strict augmented Koszul tower",
+   "results": "AdicCompletion.ofAlgEquiv, AdicCompletion.congr, Ring.DirectLimit.ringEquiv and uniform completion equivalences; none concerns sheaf derived localization tests or strict Koszul augmentation units.",
+   "date": "2026-10-26",
+   "verdict": "No match. Ordinary adic completion equivalences do not give either comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of ringed sites transports the total derived inverse limit of an augmented principal Koszul tower with its unit and reflects local derived completeness",
+   "results": "AdicCompletion.map_exact; LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure; LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; ModuleCat.instPreservesFiniteLimitsLocalizationLocalizedModule_functor.",
+   "date": "2026-10-26",
+   "verdict": "No exact Koszul or local-test comparison. The general derivability results supply only localization infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUnique\"",
+   "results": "CategoryTheory.Functor.rightDerivedUnique, Mathlib.CategoryTheory.Functor.Derived.RightDerived.",
+   "date": "2026-10-26",
+   "verdict": "Useful uniqueness of derived functors; it does not identify the augmented tensor towers or their local localization tests."
+  },
+  {
+   "tool": "grep",
+   "query": "smallModelComplete|principalKoszul_dual_tower_comparison|derivedInternalHom.*[Ee]quiv",
+   "results": "msearch: no Mathlib hits. Direct rg of lean/Sheaf found NativeRestriction.smallModelComplete (AsSmall and same localization universe, covering-sieve divisibility) and principalKoszul_dual_tower_comparison (small equal-universe site before deriving), but neither is either new statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The new steps combine the available transport and singleton interfaces while preserving the specified units and independently sized derived categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "B4",
+  "item": "Sheaf.SixFunctors.PrincipalStrictLimitReflector",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Principal strict limit reflector: Comparison of principal local tests with the canonical small-site ideal tests",
+   "via": [
+    "lem-sf-principal-strict-limit-reflector",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PrincipalStrictSmallModelLocalTests",
+  "file": "lean/Sheaf/SixFunctors/PrincipalStrictSmallModelLocalTests.lean",
+  "declaration": "CategoryTheory.RegularRoosKoszul.principal_strict_small_model_local_tests",
+  "statement": "theorem principal_strict_small_model_local_tests\n    (t : (SheafOfModules.unit (ring.{c, v, r} R)).sections)\n    (P : DerivedCategory.{w} (Modules.{c, v, r} R)) :\n    locallyComplete.{c, v, r, w} R t P ↔\n      IsLocallyDerivedRingedIdealComplete (KoszulSmallModel.ring.{c, v, max c v r} R)\n        (SheafOfModules.unit ((sheafCompose _\n          (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj\n            (KoszulSmallModel.ring.{c, v, max c v r} R)))\n        (ringedKoszulScalar (KoszulSmallModel.ring.{c, v, max c v r} R)\n          (KoszulSmallModel.globalSection.{c, v, max c v r} R ⟨t.val, t.property⟩))\n        ((KoszulSmallModel.derivedEquiv.{c, v, max c v r, w, w₀} R).functor.obj P)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T091140-L-3313794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T091140-L-3313794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

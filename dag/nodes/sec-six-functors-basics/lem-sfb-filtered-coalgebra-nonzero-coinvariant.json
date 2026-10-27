@@ -1,0 +1,211 @@
+{
+ "id": "lem-sfb-filtered-coalgebra-nonzero-coinvariant",
+ "kind": "statement",
+ "title": "A nonzero comodule over a connected filtered coalgebra has a group-like coinvariant",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $C$ be a $k$-vector space with $k$-linear maps $\\Delta:C\\to C\\otimes_k C$ and $\\epsilon:C\\to k$ satisfying $(\\Delta\\otimes1_C)\\Delta=(1_C\\otimes\\Delta)\\Delta$ and $(\\epsilon\\otimes1_C)\\Delta=(1_C\\otimes\\epsilon)\\Delta=1_C$, under the canonical tensor identifications; tensor products are as in [def-weil-pbc-module-tensor-product]. Let $g\\in C$ satisfy $\\Delta(g)=g\\otimes g$ and $\\epsilon(g)=1$. Suppose $C$ has increasing $k$-linear subspaces $C_0\\subseteq C_1\\subseteq\\cdots$ with $C_0=kg$, $\\bigcup_{r\\geq0}C_r=C$, and\n$$\\Delta(C_r)\\subseteq\\sum_{i=0}^r C_i\\otimes_k C_{r-i}\\quad(r\\geq0),$$\nwhere each tensor subspace means its image in $C\\otimes_k C$. Let $V$ be any nonzero $k$-vector space with a $k$-linear map $c:V\\to V\\otimes_k C$ satisfying $(c\\otimes1_C)c=(1_V\\otimes\\Delta)c$ and $(1_V\\otimes\\epsilon)c=1_V$. Then there exists $v\\in V$ with $v\\ne0$ and $c(v)=v\\otimes g$. No algebra structure on $C$, cocommutativity, or finite-dimensionality of $C$ or $V$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 14.4, equation (91), printed p.281; Theorem 14.5, proof of (c) implies (a), printed pp.281–282. This argument uses only the displayed filtration, the coalgebra and comodule identities, and the distinguished group-like element, not multiplication or the antipode."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For $r\\geq0$ put $T_r=\\operatorname{im}(V\\otimes_k C_r\\to V\\otimes_k C)$ and $V_r=c^{-1}(T_r)$. These are increasing subspaces. Every tensor is a finite sum of pure tensors by [def-weil-pbc-module-tensor-product]. For $v\\in V$, write $c(v)=\\sum_{j=1}^m v_j\\otimes a_j$. Exhaustivity puts each $a_j$ in some $C_{r_j}$; taking the maximum of these finitely many indices (and $r=0$ for an empty sum) puts $v$ in $V_r$. Hence $\\bigcup_r V_r=V$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(c) implies (a), printed p.281, definition and exhaustivity of the subspaces V_r."
+   }
+  },
+  {
+   "text": "Let $Q_r=C/C_r$, let $q_r:C\\to Q_r$ be the quotient map, and put $d_r=(1_V\\otimes q_r)c$. Apply [lem-weil-pbc-tensor-right-exact] to $C_r\\to C\\to Q_r\\to0$, tensoring on the left with $V$. It gives $\\ker(1_V\\otimes q_r)=T_r$. Thus $\\ker d_r=V_r$. In particular $V_r=0$ implies that $d_r$ is injective: $d_r(v)=d_r(w)$ gives $v-w\\in\\ker d_r=0$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(c) implies (a), printed p.282, quotient-map injectivity; tensor kernel justification by Stacks Tag 00DF (algebra.tex, lemma-tensor-product-exact)."
+   }
+  },
+  {
+   "text": "Suppose $V_r=0$. Apply [lem-sfb-vector-space-tensor-family-zero-detection] with the singleton family consisting of $d_r:V\\to V\\otimes_k Q_r$, and right factor $Q_r$. Step 2 verifies its zero-detection hypothesis, so $d_r\\otimes1_{Q_r}$ is injective. Consequently $(d_r\\otimes1_{Q_r})d_r$ is injective. On $v\\in V_{r+1}$, coassociativity identifies its value with\n$$(1_V\\otimes q_r\\otimes q_r)(1_V\\otimes\\Delta)c(v).$$\nIndeed, both quotient factors applied to $(c\\otimes1_C)c(v)=(1_V\\otimes\\Delta)c(v)$ give this formula. Since $c(v)\\in T_{r+1}$, the filtration puts $(1_V\\otimes\\Delta)c(v)$ in the sum of the images of $V\\otimes C_i\\otimes C_{r+1-i}$ for $0\\leq i\\leq r+1$. For every such $i$, either $i\\leq r$ or $r+1-i\\leq r$; that factor is killed by $q_r$, using the increasing filtration. The displayed value is therefore zero. Injectivity forces $v=0$, proving $V_r=0\\Rightarrow V_{r+1}=0$.",
+   "uses": [
+    "lem-sfb-vector-space-tensor-family-zero-detection",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(c) implies (a), printed p.282, the displayed induction implication and the two quotient factors."
+   }
+  },
+  {
+   "text": "If $V_0=0$, induction on $r$ gives $V_r=0$ for all $r$: the base is the supposition, and the step is precisely step 3. Exhaustivity from step 1 then gives $V=0$, contrary to the hypothesis. Thus choose $0\\ne v\\in V_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(c) implies (a), printed p.282, V_0=0 implies V=0."
+   }
+  },
+  {
+   "text": "Because $C_0=kg$, a finite pure-tensor expression for an element of $T_0$ has the form $\\sum_j v_j\\otimes(\\lambda_jg)=(\\sum_j\\lambda_jv_j)\\otimes g$. Apply this to $c(v)$ to obtain $c(v)=w\\otimes g$. The comodule counit identity and $\\epsilon(g)=1$ give $v=(1_V\\otimes\\epsilon)c(v)=\\epsilon(g)w=w$. Hence $c(v)=v\\otimes g$, with $v\\ne0$ as required.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(c) implies (a), printed p.282, first paragraph, applying the counit to a vector in V_0."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-sfb-vector-space-tensor-family-zero-detection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 14.5, proof of (c) implies (a), printed pp.281–282; with g replacing the Hopf unit, and the implicit tensor kernel and injectivity facts supplied by the cited nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coconnected|[Cc]omodule|[Cc]oinvariant",
+   "results": "25 hits: Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean. No hit proves the existence of a group-like coinvariant in a nonzero coalgebra comodule. Coalgebra.Repr.arbitrary is a finite pure-tensor expression for comultiplication, and IsCocomm means cocommutative, not coconnected. Representation.Coinvariants is an abstract-group quotient; invtSubmodule is the lattice of stable submodules, not the space of fixed vectors. Read Coalgebra/Basic.lean:40–86, RepresentationTheory/Coinvariants.lean:54–64, and RepresentationTheory/Submodule.lean:35–61.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coconnected coalgebra has a nonzero fixed vector in every nonzero comodule",
+   "results": "8 hits: Coalgebra.toCoalgebraStruct, Coalgebra.IsCocomm.casesOn, Coalgebra.IsCocomm.recOn, Coalgebra.IsCocomm, CoalgHomClass.counit_comp_apply, CoalgCat.instComonObjModuleCatOfCarrier, CoalgCat.toComonObj, CoalgCat.ofComonObj. No hit proves the existence of a group-like coinvariant in a nonzero coalgebra comodule. Coalgebra.Repr.arbitrary is a finite pure-tensor expression for comultiplication, and IsCocomm means cocommutative, not coconnected. Representation.Coinvariants is an abstract-group quotient; invtSubmodule is the lattice of stable submodules, not the space of fixed vectors. Read Coalgebra/Basic.lean:40–86, RepresentationTheory/Coinvariants.lean:54–64, and RepresentationTheory/Submodule.lean:35–61.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"Comodule\"",
+   "results": "0 hits: . No hit proves the existence of a group-like coinvariant in a nonzero coalgebra comodule. Coalgebra.Repr.arbitrary is a finite pure-tensor expression for comultiplication, and IsCocomm means cocommutative, not coconnected. Representation.Coinvariants is an abstract-group quotient; invtSubmodule is the lattice of stable submodules, not the space of fixed vectors. Read Coalgebra/Basic.lean:40–86, RepresentationTheory/Coinvariants.lean:54–64, and RepresentationTheory/Submodule.lean:35–61.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonzero comodule over an exhaustively filtered coalgebra with degree zero spanned by a group like element has a nonzero coinvariant",
+   "results": "8 hits: Representation.finsuppToCoinvariants_single_mk, Rep.coinvariantsFunctor_obj_carrier, Representation.coinvariantsToFinsupp_mk_single, Representation.Coinvariants.mk_eq_zero, Representation.Coinvariants, Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice, Representation.Coinvariants.instModule, Representation.Coinvariants.induction_on. No hit proves the existence of a group-like coinvariant in a nonzero coalgebra comodule. Coalgebra.Repr.arbitrary is a finite pure-tensor expression for comultiplication, and IsCocomm means cocommutative, not coconnected. Representation.Coinvariants is an abstract-group quotient; invtSubmodule is the lattice of stable submodules, not the space of fixed vectors. Read Coalgebra/Basic.lean:40–86, RepresentationTheory/Coinvariants.lean:54–64, and RepresentationTheory/Submodule.lean:35–61.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected filtered coalgebra over a field has a trivial one dimensional subcomodule in each nonzero comodule",
+   "results": "8 hits: Coalgebra.subsingleton_to_ring, simple_of_finrank_eq_one, Coalgebra.Repr.arbitrary, Coalgebra.Repr.mk.inj, is_simple_module_of_finrank_eq_one, CoalgCat.tensorUnit_carrier, isSimpleModule_iff_finrank_eq_one, IsSimpleModule.finrank_eq_one_of_isMulCommutative. No hit proves the existence of a group-like coinvariant in a nonzero coalgebra comodule. Coalgebra.Repr.arbitrary is a finite pure-tensor expression for comultiplication, and IsCocomm means cocommutative, not coconnected. Representation.Coinvariants is an abstract-group quotient; invtSubmodule is the lattice of stable submodules, not the space of fixed vectors. Read Coalgebra/Basic.lean:40–86, RepresentationTheory/Coinvariants.lean:54–64, and RepresentationTheory/Submodule.lean:35–61.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coconnected|[Cc]omodule",
+   "results": "0 hits: . No hit proves the existence of a group-like coinvariant in a nonzero coalgebra comodule. Coalgebra.Repr.arbitrary is a finite pure-tensor expression for comultiplication, and IsCocomm means cocommutative, not coconnected. Representation.Coinvariants is an abstract-group quotient; invtSubmodule is the lattice of stable submodules, not the space of fixed vectors. Read Coalgebra/Basic.lean:40–86, RepresentationTheory/Coinvariants.lean:54–64, and RepresentationTheory/Submodule.lean:35–61.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected filtered coalgebra has a nonzero invariant in every nonzero comodule",
+   "results": "8 hits: IsGroupLikeElem.ne_zero, Coalgebra.Repr.arbitrary, LieModule.chainTop_isNonZero, LieModule.chainTop_isNonZero', IsSl2Triple.HasPrimitiveVectorWith.ne_zero, LieModule.Weight.exists_ne_zero, LieModule.Weight.genWeightSpace_ne_bot, LieAlgebra.instNontrivialSubtypeMemLieSubmoduleLieSubalgebraGenWeightSpaceOfNatForall. Coalgebra.Repr.arbitrary only expresses comultiplication as a finite tensor sum; IsGroupLikeElem.ne_zero asserts nonvanishing of an already group-like element. IsCocomm is cocommutativity. Representation.Coinvariants is a quotient for an abstract group action. None states this filtered-comodule existence theorem. Read Coalgebra/Basic.lean:35–90 and RepresentationTheory/Coinvariants.lean:54–64. Fields with IsModuleFiltration concern module filtrations, not comodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonzero comodule over a coalgebra with exhaustive connected filtration contains a trivial one dimensional subcomodule",
+   "results": "8 hits: IsModuleFiltration, Ideal.trivialFiltration_N, Ideal.trivialFiltration, Ideal.Filtration.submodule_fg_iff_stable, Ideal.Filtration.instInhabited, Ideal.Filtration.instTop, Ideal.Filtration.Stable.exists_forall_le, Ideal.Filtration.Stable. Coalgebra.Repr.arbitrary only expresses comultiplication as a finite tensor sum; IsGroupLikeElem.ne_zero asserts nonvanishing of an already group-like element. IsCocomm is cocommutativity. Representation.Coinvariants is a quotient for an abstract group action. None states this filtered-comodule existence theorem. Read Coalgebra/Basic.lean:35–90 and RepresentationTheory/Coinvariants.lean:54–64. Fields with IsModuleFiltration concern module filtrations, not comodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+  "date": "2026-10-24",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.6 proof, first paragraph and Note 16.8: uniqueness and maximality of the diagonal kernel; present proof steps 2, 4 and 5. Supporting input in this split: Milne 14.16 and 14.18(a): the one-dimensional pullbacks of the torus coordinate characters have a rational fixed vector, using 14.5(b)⇒(a). Supporting coalgebra argument: Milne Theorem 14.5(c) implies (a), printed pp.281–282, applied after constructing the image of the weighted polynomial filtration.",
+   "via": [
+    "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-filtered-coalgebra-nonzero-coinvariant",
+  "worker": "stage1",
+  "summary": "Read Milne 14.4 and 14.5(c) implies (a); retained the coalgebra-only statement. Made tensor exhaustion, the quotient kernel, both injective maps, the filtration vanishing, the induction and the counit calculation explicit. Reused two existing supporting lemmas and created no nodes. No project declaration states the item.",
+  "blueprint": "Realizes the supporting coalgebra argument recorded in blueprint.from.place for the alteration input to det-thm-sf-ctf-stability-direct-images proof (3); the latest blueprint has no separate coalgebra node. The ancestor command returns None, as recorded by the inherited blueprint.from.node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-b22ff53d2",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-b22ff53d2 (reviewer sub-agent of L); spot-checked: Read the item, its 5 steps, every cited node statement and the Milne source (iAG2017 Def 14.4/(91) p.281, Thm 14.5 (c)=>(a) pp.281-282, from the local PDF). The item is still unsplit in both live and side-live and there is no repair note, so it is not superseded and not a re-split. Statement and stmt_deps are unchanged from live. The statement is Milne's argument with the Hopf unit 1 replaced by a group-like g and no algebra structure, which is true because the proof uses neither multiplication nor the antipode; it matches its only citer (unitriangular fixed-vector step 4 with g=1_B). Step 1: finite pure-tensor expression and maximum of finitely many indices give V = union of V_r (empty sum lands in V_0). Step 2: lem-weil-pbc-tensor-right-exact (Stacks 00DF, left-tensor form) gives ker(1_V tensor q_r)=T_r, so ker d_r=V_r. Step 3: zero-detection node with a singleton family f=d_r makes d_r tensor 1 injective. I recomputed (d_r tensor 1)d_r=(1 tensor q_r tensor q_r)(1 tensor Delta)c and checked that each filtration summand is killed because i<=r or r+1-i<=r, including at r=0. Step 4: induction with explicit base and step. Step 5: counit calculation gives c(v)=v tensor g. The cited nodes say what each step takes from them, there is no off-unit statement tool use, no SGA source, and no duplicate in the DAG (searched coalgebra, comodule, group-like, coinvariant, unipotent). No new nodes; proof_deps equals the union of uses; searches are recorded with grep, LeanSearch, Loogle and LeanFinder."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredCoalgebraNonzeroCoinvariant",
+  "declaration": "Coalgebra.exists_nonzero_coinvariant_of_filtration",
+  "file": "lean/Sheaf/RingTheory/FilteredCoalgebraNonzeroCoinvariant.lean",
+  "statement": "theorem exists_nonzero_coinvariant_of_filtration {k : Type u} [Field k] {C : Type v} [AddCommGroup C] [Module k C] [Coalgebra k C] (g : C) (hg : IsGroupLikeElem k g) (F : ℕ → Submodule k C) (hmono : Monotone F) (hzero : F 0 = Submodule.span k {g}) (hexhaustive : ∀ x : C, ∃ r : ℕ, x ∈ F r) (hcomul : ∀ r : ℕ, Submodule.map (Coalgebra.comul (R := k) (A := C)) (F r) ≤ ⨆ i ≤ r, LinearMap.range (TensorProduct.map (F i).subtype (F (r - i)).subtype)) {V : Type w} [AddCommGroup V] [Module k V] [Nontrivial V] (c : V →ₗ[k] V ⊗[k] C) (hcoassoc : (TensorProduct.assoc k V C C).toLinearMap ∘ₗ c.rTensor C ∘ₗ c = (Coalgebra.comul (R := k) (A := C)).lTensor V ∘ₗ c) (hcounit : (TensorProduct.rid k V).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := C)).lTensor V ∘ₗ c = LinearMap.id) : ∃ x : V, x ≠ 0 ∧ c x = x ⊗ₜ[k] g",
+  "branch": "sheaf-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6dcbe551c",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Every clause matches the node: Mathlib Coalgebra (coassoc and both counit laws), IsGroupLikeElem (exactly ε g = 1 and Δ g = g⊗g), monotone exhaustive ℕ-filtration with F 0 = span{g}, comul bound as ⨆ i ≤ r of ranges of TensorProduct.map of the subtypes, comodule coassoc/counit via assoc/rid, Nontrivial V, conclusion ∃ x ≠ 0, c x = x ⊗ g. Universes u, v, w independent; no extra assumptions. lean.statement verbatim (scripted diff); only the lean field changed vs side-live; stmt_deps are Mathlib-status nodes; docstrings carry the source place, blueprint id and 5 steps; sorry only; no definitions; no duplicate in Mathlib or the project. Not recompiled (no change). No findings."
+ }
+}

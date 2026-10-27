@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-space-countable-hypercohomology",
+ "kind": "statement",
+ "title": "Countable hypercohomology with a perfect factor",
+ "statement": "Work in the universes of [def-weil-size-convention], with schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. A space is quasi-compact if its point space is quasi-compact and quasi-separated if its absolute diagonal is quasi-compact on scheme tests. Let $S$ be a scheme, let $X$ be a quasi-compact quasi-separated algebraic space over $S$, and let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Assume that $\\mathcal H^i(K)(V)$ is a countable set for every integer $i$ and every affine scheme $V$ etale over $X$. For every quasi-compact quasi-separated etale morphism $v:U\\to X$, every perfect $P\\in D(\\mathcal O_X)$ and every integer $i$, the underlying set of $H^iR\\Gamma(U,v^*(K\\otimes^{\\mathbf L}_{\\mathcal O_X}P))$ is countable. Here restriction along an etale map is exact, tensor is computed with K-flat resolutions, and derived sections with K-injective resolutions; $R\\Gamma$ is the derived module global-section functor [def-pur-ringed-site-zeroth-hypercohomology]. No boundedness hypothesis on $K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CRU, lemma-countable-cohomology, hypercohomology assertion."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Fix $K$ and a perfect $P$ as in the statement. For a qcqs etale space $t:T\\to X$ let $C(T)$ mean that $H^nR\\Gamma(T,t^*(K\\otimes^{\\mathbf L}P))$ is countable for every integer $n$. By [lem-sfb-space-derived-etale-chart-calculus], restriction is exact, preserves quasi-coherent cohomology and composes canonically. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] it identifies this restricted tensor with $t^*K\\otimes^{\\mathbf L}t^*P$. The local finite-free splittings defining perfectness restrict to the pulled-back etale cover, so $t^*P$ is perfect. Exact restriction also identifies $\\mathcal H^j(t^*K)$ with $t^*\\mathcal H^j(K)$. On an affine etale $T\\to X$ its global sections are therefore countable by hypothesis. Apply [lem-sfb-affine-countable-perfect-tensor] to $L=t^*K$ and $Q=t^*P$. This proves the affine base case $C(T)$, including the empty affine.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-affine-countable-perfect-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRU, affine base case; Tag 0CRP, affine proof paragraph"
+   }
+  },
+  {
+   "text": "Consider an elementary distinguished square $(A\\subset W,B\\to W)$ of qcqs etale objects over $X$ in the induction theorem, and put $D=A\\times_WB$ and $F=(K\\otimes^{\\mathbf L}P)|_W$. Apply [lem-sfb-space-derived-hom-mayer-vietoris] with first argument $\\mathcal O_W$ in degree zero and second argument $F$. The additive bijections of [lem-sfb-ringed-hypercohomology-shifted-unit], with base ring $\\mathbf Z$, identify $\\operatorname{Ext}^n(\\mathcal O_Z,F|_Z)$ with $H^nR\\Gamma(Z,F|_Z)$ for $Z=W,A,B,D$: shift the degree-zero unit into degree $n$ in the source of Hom. Thus the sequence gives an exact segment $H^{n-1}R\\Gamma(D,F|_D)\\to H^nR\\Gamma(W,F)\\to H^nR\\Gamma(A,F|_A)\\oplus H^nR\\Gamma(B,F|_B)$. All these restrictions are the ones in $C$ by exact etale restriction and its composition comparison from step 1. Neither cited theorem imposes a boundedness condition on $F$.",
+   "uses": [
+    "lem-sfb-space-derived-hom-mayer-vietoris",
+    "lem-sfb-ringed-hypercohomology-shifted-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRU, distinguished-square step; Tag 0CRS (lemma-unbounded-mayer-vietoris), exact sequence, obtained here from existing derived-Hom Mayer–Vietoris"
+   }
+  },
+  {
+   "text": "Assume $C(A),C(B),C(D)$. In the exact segment of step 2 write $G=H^nR\\Gamma(W,F)$. The kernel of the map from $G$ to the countable finite direct sum is the image of a countable group, hence countable. Its quotient in $G$ embeds into that finite direct sum, so it too is countable. Choose one representative of each quotient class; addition gives a surjection from the product of the countable kernel and this countable set of representatives onto $G$. A product of two countable sets is countable, so $G$ is countable. This holds for every $n$, proving $C(W)$. Apply [lem-sfb-space-qcqs-distinguished-square-induction] with the property $C$: step 1 supplies all affine objects and this argument supplies precisely the required gluing implication. Consequently $C$ holds for every qcqs etale space over $X$.",
+   "uses": [
+    "lem-sfb-space-qcqs-distinguished-square-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRU, final paragraph; Tag 08GP (lemma-induction-principle), hypotheses (1) and (2)"
+   }
+  },
+  {
+   "text": "For the morphism $v:U\\to X$ in the statement we show that $U$ is qcqs. First, for any algebraic space $Z$ over $S$, $|Z|$ is quasi-compact exactly when $Z$ admits a representable surjective etale map from a quasi-compact scheme: one direction is [lem-sfb-qc-space-affine-etale-atlas], which even gives an affine atlas. Conversely, for a representable surjective etale $a:h_W\\to Z$ the map $|a|$ is continuous by the definition of the atlas topology [def-a1-space-point-topology], and surjective: for a field point $\\operatorname{Spec}K\\to Z$ the scheme $W\\times_Z\\operatorname{Spec}K$ maps onto $\\operatorname{Spec}K$, so it is nonempty, and any of its points gives a $W$-point over a field extension of $K$ in the same class. Hence $|Z|$ is a continuous image of the quasi-compact space $|W|$, so it is quasi-compact. By the same image argument applied to atlases of the test spaces, a morphism is quasi-compact on scheme tests exactly when it is so on quasi-compact algebraic-space tests, and these may be taken affine [lem-sfb-space-quasicompact-affine-tests]; so all quasi-compactness notions used here agree. Now $X$ is quasi-compact, so testing the quasi-compact morphism $v$ on $X\\xrightarrow{\\mathrm{id}}X$ shows that $U=U\\times_XX$ is quasi-compact. View the spaces over $\\operatorname{Spec}\\mathbf Z$: the change-of-base equivalence [lem-sfb-space-change-base-to-integers] keeps their etale scheme charts and fibre products, hence their point spaces and diagonals. Then [lem-sfb-space-qcqs-source-products] gives quasi-separatedness of $U$ from that of $v$ and $X$. Therefore $U\\to X$ is in the domain of $C$, and step 3 gives exactly the asserted countability for every integer $i$. No truncation or boundedness of $K$ was used.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "def-a1-space-point-topology",
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-space-qcqs-source-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRU, conclusion; qcqs domain check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-affine-countable-perfect-tensor",
+  "lem-sfb-space-derived-hom-mayer-vietoris",
+  "lem-sfb-ringed-hypercohomology-shifted-unit",
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "def-a1-space-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CRU (lemma-countable-cohomology), hypercohomology proof: affine case and elementary distinguished-square induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Countability of cohomology and Ext groups for perfect complexes on a finite type algebraic space",
+   "results": "Hits: CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.HasProjectiveDimensionLT.subsingleton, CategoryTheory.HasExt.standard, CategoryTheory.HasInjectiveDimensionLT.subsingleton, CategoryTheory.HasProjectiveDimensionLT.subsingleton', CategoryTheory.HasInjectiveDimensionLT.subsingleton', CategoryTheory.hasExt_iff, CategoryTheory.IsGrothendieckAbelian.hasExt",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext and countable AB4 axioms do not assert cardinal countability of hypercohomology of algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable hypercohomology of quasi-coherent complexes on quasi-compact quasi-separated algebraic spaces",
+   "results": "Hits: CategoryTheory.CountableAB4.mk, CategoryTheory.instCountableAB4StarOfAB4StarOfSize, CategoryTheory.CountableAB4.rec, AlgebraicGeometry.QuasiCompactCover.instBindScheme, CochainComplex.HomComplex.CohomologyClass, CategoryTheory.CountableAB4.casesOn, CochainComplex.HomComplex.CohomologyClass.mk, CategoryTheory.CountableAB4Star.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext and countable AB4 axioms do not assert cardinal countability of hypercohomology of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Countable\"",
+   "results": "Hits: MeasureTheory.ext_of_forall_mem_subalgebra_integral_eq_of_pseudoEMetric_complete_countable",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext and countable AB4 axioms do not assert cardinal countability of hypercohomology of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable.*([Cc]ohom|[Ee]xt)|([Cc]ohom|[Ee]xt).*[Cc]ountable",
+   "results": "0 hits; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext and countable AB4 axioms do not assert cardinal countability of hypercohomology of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*(cohom|homology)|((cohom|homology).*countable)",
+   "results": "0 hits; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable hypercohomology quasicoherent perfect complex algebraic space",
+   "results": "8 hits; CategoryTheory.CountableAB4.mk, CategoryTheory.instCountableAB4OfAB4OfSize, ContinuousCohomology.MultiInd.complex, SheafOfModules.QuasicoherentData.IsFinitePresentation, CategoryTheory.CountableAB4.casesOn, CategoryTheory.CountableAB4Star.recOn, SheafOfModules.quasicoherentDataOfIsFinitePresentation, CategoryTheory.CountableAB4Star",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"homology\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an unbounded quasicoherent complex tensored with a perfect complex on an affine scheme is countable if all cohomology modules are countable",
+   "results": "8 hits; LightCondensed.instCountableAB4StarLightCondMod, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.IsKProjective, CategoryTheory.Sheaf.H",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable cohomology modules remain countable after derived tensor product with a bounded complex of finite projective modules",
+   "results": "8 hits; LightCondensed.instCountableAB4StarLightCondMod, CochainComplex.isKProjective_of_projective, CategoryTheory.Tor, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', Rep.isZero_Tor_succ_of_projective, CategoryTheory.Tor'_obj_obj, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*(cohom|homology|perfect)|((cohom|homology|perfect).*countable)",
+   "results": "0 hits; subdirectory Mathlib/Algebra",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countability of cohomology of a quasicoherent complex tensored with a perfect complex on an affine scheme",
+   "results": "8 hits; CategoryTheory.instCountableAB4StarOfAB4StarOfSize, SheafOfModules.IsQuasicoherent.casesOn, CategoryTheory.CountableAB4Star, CategoryTheory.CountableAB4.mk, SheafOfModules.QuasicoherentData.I, CochainComplex.HomComplex.instAddCommGroupCohomologyClass, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, LightCondensed.instCountableAB4StarLightCondMod",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"tensor\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-sections-perfect-telescope",
+  "date": "2026-10-24",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, final paragraph invoking countability of cohomology on etale charts.",
+   "via": [
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-countable-hypercohomology",
+  "worker": "stage1",
+  "summary": "Retained the statement and the Stacks route. Added only the affine finite-projective tensor countability input; reused existing unbounded Hom Mayer–Vietoris, shifted-unit hypercohomology and qcqs distinguished-square induction. Checked restrictions, arbitrary unbounded inputs, countable extensions and qcqs source permanence.",
+  "blueprint": "Supports the inherited direct-image proof (3) prerequisite through Tag 0CRW: its final countable-cohomology input Tag 0CRU. The inherited ancestor is null; from.place and via are preserved. Latest blueprint direct-image proof (3) and current unit route were read; no route change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General structural-ring tensor pullback comparison, used to restrict the tensor to etale charts."
+   },
+   {
+    "node": "def-weil-pbc-strict-perfect-coefficient-package",
+    "why": "Definition of perfectness by local finite projective splittings."
+   },
+   {
+    "node": "lem-sfb-space-change-base-to-integers",
+    "why": "Generic change-of-base equivalence permits the absolute qcqs source permanence lemma over an arbitrary base."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-space-change-base-to-integers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-b2dd01fb2",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-b2dd01fb2 (reviewer sub-agent of L); spot-checked: Read Stacks 0CRU (spaces-perfect, lemma-countable-cohomology) and the 0CRP affine paragraph. The item statement is identical to live and still unsplit there, with no repair note; it keeps all 0CRU hypotheses (hypercohomology half). New node lem-sfb-affine-countable-perfect-tensor: true; it is the affine base case of 0CRU via D_QCoh(Spec A_et)≃D(A), étale-perfect = global finite projective complex, and P^a a summand of A^n. Tested on empty Y, Q=0, Q=A[k], a summand of A^2, uncountable A with countable L, and unbounded L. It is statement-only, self-contained and strictly smaller than the item; no existing DAG node states it (countable-telescope is 0CRW). Step 1: chart-calculus restriction, tensor pullback (u^*=restriction) and perfectness restriction verify the new node's hypotheses. Step 2: MV with E=O_W plus the shifted-unit bijections (A=Z) give termwise identifications; only exactness and countability are used. Step 3: countable-extension argument plus 08GP induction node (a)/(b) applied correctly. Step 4 fault (C1/E1): it equated point-space quasi-compactness (item and induction node) with the atlas notion of qcqs-source-products without citing anything, and was marked elementary. FIX rewrites step 4: cite lem-sfb-qc-space-affine-etale-atlas and lem-sfb-space-quasicompact-affine-tests (own unit), give the elementary converse via def-a1-space-point-topology, set elementary=false and extend proof_deps. Batch 5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions. The five sfb space lemmas reach trf/pod only through generic space foundations (fppf descent, fibre products, generic pod helpers), not the trace formula, Poincaré duality, an assumption leaf or sk-thm-trace-transport. Accepted. No SGA cited; tool_uses (tensor pullback, perfect package) accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCountableHypercohomology",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.countable_hypercohomology_tensor_perfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCountableHypercohomology.lean",
+  "statement": "theorem countable_hypercohomology_tensor_perfect {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{wX} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : X.IsAbsolutelyQuasiSeparated) (K : X.DerivedModules) (hK : X.derivedQCohProperty K) (hcount : ∀ (j : ℤ) (V : X.EtaleSite), IsAffine (X.etaleForget.obj V) → Countable (((X.smallModuleEquivalence.inverse).obj ((DerivedCategory.homologyFunctor X.SmallModules j).obj K)).val.obj (op V))) (U : AlgebraicSpace S) [HasDerivedCategory.{wU} U.SmallModules] (v : U ⟶ X) (hvet : IsEtale v.hom.hom) (hvqc : IsQuasiCompactPresheafMap v.hom.hom) (hvqs : IsQuasiCompactPresheafMap (diagonalPresheafMap v.hom.hom)) (P : X.DerivedModules) (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, wX} X.smallStructureSheaf P) (i : ℤ) : Countable ((ringedSiteZerothHypercohomologyOfUniverses.{u, u, u, wU} U.smallEtaleModelTopology U.smallStructureSheaf).obj (((derivedTensorPullback.{u, wX, wU} v).obj ((X.derivedDualityModel.closed.tensor).obj (K, P)))⟦i⟧))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing small ringed-model equivalence, D_QCoh predicate, normalized derived tensor, derived tensor pullback and zeroth hypercohomology of the i-shift. The quasi-compact predicate is owned by def-sfb-space-quasi-compact-presheaf-map; the canonical diagonal is owned by def-sfb-presheaf-map-separated-diagonal. Both are existing definitions in SpaceQCSeparatedEtaleLocal; its etale-local theorem conclusion is not used. H2 repair of returned head 7f74d741f328 replaces that theorem node with these two definition nodes in stmt_deps. Lean source and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af887f3b5",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery of the H2 return at 7f74d741f328. The Lean file is byte-identical (sha256 c9a8a75a). In stmt_deps, lem-trf-space-qc-separated-etale-local is replaced by def-sfb-space-quasi-compact-presheaf-map and def-sfb-presheaf-map-separated-diagonal; both are existing:true on SpaceQCSeparatedEtaleLocal, owning IsQuasiCompactPresheafMap (line 38) and diagonalPresheafMap (line 49), and identical to side-live. Only stmt_deps and lean.note changed; statement, proof, proof_deps and lean.statement are unchanged. The item is not landed live. Re-checked against Stacks 0CRU: absolute qs (affine-pair criterion), v qc and qs via the atlas test on v and its diagonal, derivedTensorPullback v : D(X) ⥤ D(U), H^i as H^0 of the shift, independent universes wX and wU, no extra hypotheses, edge cases covered. The proof is sorry only; docstrings carry the source place, the blueprint id and all four proof steps; the report has both required sections. No compile: no file changed."
+ }
+}

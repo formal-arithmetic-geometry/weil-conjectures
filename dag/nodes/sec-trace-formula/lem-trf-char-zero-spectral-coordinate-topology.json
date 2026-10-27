@@ -1,0 +1,405 @@
+{
+ "id": "lem-trf-char-zero-spectral-coordinate-topology",
+ "kind": "statement",
+ "title": "Characteristic-zero spectral extensions have coordinate topology",
+ "statement": "Let $K$ be a field [def-weil-field] of characteristic zero with a nontrivial real-valued multiplicative nonarchimedean absolute value. Let $L/K$ be a finite field extension, with its minimal-polynomial spectral norm $s_{L/K}$ [lem-trf-incomplete-spectral-algebra-norm]. For every $K$-basis $v_1,\\ldots,v_d$ of $L$, there are real $c,C>0$ such that $$c\\max_i|a_i|\\le s_{L/K}(\\sum_i a_iv_i)\\le C\\max_i|a_i|\\qquad(a_i\\in K).$$ Completeness of $K$ is not assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.5.1/4 and Definition 3.5.2/1, printed pp.152-153 (scan PDF pp.160-161); finite-dimensional coordinate formulation of weak cartesianness.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "Put $s=s_{L/K}$ and $z=\\sum_i a_iv_i$. By [lem-trf-incomplete-spectral-algebra-norm], $s$ is definite, scalar homogeneous and ultrametric. Iterating its triangle inequality over the finite sum gives $s(z)\\leq\\max_i |a_i|s(v_i)\\leq C\\max_i|a_i|$, where $C=\\max_i s(v_i)>0$: a field has positive dimension over a subfield and each basis vector is nonzero.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BIH, fields-lemma-trace-and-norm-from-minimal-polynomial; explicit agent argument combining this formula with the spectral-norm definition and norm axioms."
+   }
+  },
+  {
+   "text": "For any $u\\in L$, write its minimal polynomial as $T^r+a_1T^{r-1}+\\cdots+a_r$. The coefficient maximum defining $s$ gives $|a_1|\\leq s(u)$. By [lem-trf-field-trace-minpoly-coefficient], $\\operatorname{Tr}_{L/K}(u)=-(e\\cdot1_K)a_1$ for the integer $e=\\dim_{K(u)}L$. The ultrametric inequality in $K$ gives $|n\\cdot1_K|\\leq1$ for every natural $n$ by induction: the initial value is $|0|=0$, and $|(n+1)\\cdot1_K|\\leq\\max(|n\\cdot1_K|,1)$. Hence $|\\operatorname{Tr}_{L/K}(u)|\\leq s(u)$. This also covers $u=0$, whose minimal polynomial is $T$.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-field-trace-minpoly-coefficient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BIH, fields-lemma-trace-and-norm-from-minimal-polynomial; explicit agent argument combining this formula with the spectral-norm definition and norm axioms."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-char-zero-trace-dual-basis] to the given basis and obtain $(w_j)$ with $\\operatorname{Tr}_{L/K}(v_iw_j)=\\delta_{ij}$. Its hypotheses hold because $K$ has characteristic zero and $L/K$ is finite. By linearity of the field trace, $\\operatorname{Tr}_{L/K}(zw_j)=\\sum_i a_i\\operatorname{Tr}_{L/K}(v_iw_j)=a_j$. The preceding trace estimate and submultiplicativity from [lem-trf-incomplete-spectral-algebra-norm] give $|a_j|\\leq s(zw_j)\\leq s(z)s(w_j)$.",
+   "uses": [
+    "lem-trf-char-zero-trace-dual-basis",
+    "lem-trf-incomplete-spectral-algebra-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Trace/Basic.lean",
+    "place": "Module.Basis.traceDual and Module.Basis.trace_mul_traceDual, lines 553-573; explicit agent coordinate estimate."
+   }
+  },
+  {
+   "text": "Set $B=\\max_j s(w_j)$. It is positive because the trace-dual basis is nonempty and its vectors are nonzero. Taking the maximum of the preceding coordinate inequalities gives $\\max_j|a_j|\\leq Bs(z)$. Thus $c=B^{-1}>0$ satisfies $c\\max_j|a_j|\\leq s(z)$; combine this with step 1. Every bound used only finitely many field operations and the given absolute value, so completeness was never required.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/RingTheory/Trace/Basic.lean",
+    "place": "Module.Basis.traceDual and Module.Basis.trace_mul_traceDual, lines 553-573; explicit agent coordinate estimate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-trf-field-trace-minpoly-coefficient",
+  "lem-trf-char-zero-trace-dual-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 0BIH and Mathlib/RingTheory/Trace/Basic.lean:553-573; explicit trace-dual proof of the coordinate inequalities. The original BGR PDF is absent from this read clone; see report WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every valued field of characteristic zero is weakly stable: every finite algebraic extension with its minimal polynomial spectral norm is a topological vector space with the product coordinate topology",
+   "results": {
+    "t": "2026-10-24T15:38:23Z",
+    "tool": "leanfinder",
+    "query": "Every valued field of characteristic zero is weakly stable: every finite algebraic extension with its minimal polynomial spectral norm is a topological vector space with the product coordinate topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "isNonarchimedean_spectralNorm",
+     "IsNonarchimedeanLocalField",
+     "Valued.completable",
+     "spectralMulAlgNorm",
+     "IsNonarchimedeanLocalField.instIsRankLeOne",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal"
+    ],
+    "digest": "4e237f86b3305154"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives the norm axioms; the normedField and completeSpace constructions require CompleteSpace K and do not prove coordinate equivalence for an incomplete base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every valued field of characteristic zero is weakly stable for the spectral norm on finite extensions",
+   "results": {
+    "t": "2026-10-24T15:40:19Z",
+    "tool": "leanfinder",
+    "query": "Every valued field of characteristic zero is weakly stable for the spectral norm on finite extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm_eq_invariantExtension",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralNorm.nontriviallyNormedField",
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm.normedField",
+     "spectralAlgNorm_def",
+     "spectralNorm_unique_field_norm_ext"
+    ],
+    "digest": "c5bf5bc5be0c1704"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives the norm axioms; the normedField and completeSpace constructions require CompleteSpace K and do not prove coordinate equivalence for an incomplete base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite extensions of a characteristic zero nonarchimedean valued field have spectral norm equivalent to coordinate maximum norms",
+   "results": {
+    "t": "2026-10-24T15:40:19Z",
+    "tool": "leansearch",
+    "query": "finite extensions of a characteristic zero nonarchimedean valued field have spectral norm equivalent to coordinate maximum norms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "spectralNorm",
+     "spectralNorm.normedSpace",
+     "spectralNorm_extends",
+     "spectralNorm.normedField",
+     "isNonarchimedean_spectralNorm",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.seminormedAddCommGroup"
+    ],
+    "digest": "113b544d40d65693"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives the norm axioms; the normedField and completeSpace constructions require CompleteSpace K and do not prove coordinate equivalence for an incomplete base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weakly cartesian\"",
+   "results": {
+    "t": "2026-10-24T15:40:20Z",
+    "tool": "loogle",
+    "query": "\"weakly cartesian\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives the norm axioms; the normedField and completeSpace constructions require CompleteSpace K and do not prove coordinate equivalence for an incomplete base."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.?cartesian|weakly.?stable|trace.*continuous",
+   "results": {
+    "t": "2026-10-24T15:40:20Z",
+    "tool": "grep",
+    "query": "weak.?cartesian|weakly.?stable|trace.*continuous",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives the norm axioms; the normedField and completeSpace constructions require CompleteSpace K and do not prove coordinate equivalence for an incomplete base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an incomplete ultrametric field of characteristic zero the minimal polynomial spectral norm of a finite field extension is equivalent to every basis coordinate norm",
+   "results": {
+    "t": "2026-10-24T16:15:06Z",
+    "tool": "leanfinder",
+    "query": "Over an incomplete ultrametric field of characteristic zero the minimal polynomial spectral norm of a finite field extension is equivalent to every basis coordinate norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralAlgNorm_def",
+     "spectralAlgNorm_of_finiteDimensional_normal_def",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal"
+    ],
+    "digest": "9f1234ce3ad42f3c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm provide the function and norm axioms; general finite-dimensional topology and norm equivalence results require a complete base. The incomplete characteristic-zero coordinate bounds are not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral norm on a finite characteristic zero field extension is equivalent to the maximum norm of coordinates in any basis",
+   "results": {
+    "t": "2026-10-24T16:17:21Z",
+    "tool": "leansearch",
+    "query": "spectral norm on a finite characteristic zero field extension is equivalent to the maximum norm of coordinates in any basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm.normedField",
+     "spectralNorm.normedSpace",
+     "Module.Basis.norm",
+     "spectralNorm_extends",
+     "spectralAlgNorm",
+     "spectralNorm.seminormedAddCommGroup",
+     "spectralNorm_unique"
+    ],
+    "digest": "7b14c247204499fd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm provide the function and norm axioms; general finite-dimensional topology and norm equivalence results require a complete base. The incomplete characteristic-zero coordinate bounds are not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\"",
+   "results": {
+    "t": "2026-10-24T16:15:06Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm_nonneg",
+     "spectralNorm_one",
+     "spectralNorm_zero",
+     "isNonarchimedean_spectralNorm",
+     "isPowMul_spectralNorm",
+     "eq_zero_of_map_spectralNorm_eq_zero",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "8f972011a141306e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm provide the function and norm axioms; general finite-dimensional topology and norm equivalence results require a complete base. The incomplete characteristic-zero coordinate bounds are not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.?cartesian|weakly.?stable|spectralNorm.*(equiv|basis)|spectral.*trace",
+   "results": {
+    "t": "2026-10-24T16:18:34Z",
+    "tool": "grep",
+    "query": "weak.?cartesian|weakly.?stable|spectralNorm.*(equiv|basis)|spectral.*trace",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Field/Krasner.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "63a5313e21fc04df"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm provide the function and norm axioms; general finite-dimensional topology and norm equivalence results require a complete base. The incomplete characteristic-zero coordinate bounds are not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of finite dimensional vector space norms over a complete nontrivially normed field",
+   "results": {
+    "t": "2026-10-24T16:20:55Z",
+    "tool": "leanfinder",
+    "query": "equivalence of finite dimensional vector space norms over a complete nontrivially normed field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FiniteDimensional.complete",
+     "FiniteDimensional.nonempty_continuousLinearEquiv_of_finrank_eq",
+     "spectralNorm.completeSpace",
+     "ContinuousLinearEquiv.ofFinrankEq",
+     "isModuleTopologyOfFiniteDimensional",
+     "FiniteDimensional.nonempty_continuousLinearEquiv_iff_finrank_eq",
+     "MontelSpace.finiteDimensional_of_normedSpace",
+     "FiniteDimensional.proper_rclike"
+    ],
+    "digest": "fbd8ff5fdaef998d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm provide the function and norm axioms; general finite-dimensional topology and norm equivalence results require a complete base. The incomplete characteristic-zero coordinate bounds are not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "equivalent|equiv|CompleteSpace",
+   "results": {
+    "t": "2026-10-24T16:20:55Z",
+    "tool": "grep",
+    "query": "equivalent|equiv|CompleteSpace",
+    "sub": "Analysis/Normed/Unbundled/FiniteExtension.lean",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and spectralAlgNorm provide the function and norm axioms; general finite-dimensional topology and norm equivalence results require a complete base. The incomplete characteristic-zero coordinate bounds are not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-fraction-weak-stability",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis. Proof of BGR 5.3.1/1: Proposition 3.5.1/4 and Definition 3.5.2/1, printed pp.152-153 (scan PDF pp.160-161); finite-dimensional coordinate formulation of weak cartesianness.",
+   "via": [
+    "lem-trf-tate-fraction-weak-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-char-zero-spectral-coordinate-topology",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Proved upper and lower bounds by an explicit trace-dual argument requiring no completeness. The trace coefficient formula bounds the trace by the spectral norm; trace-dual basis vectors recover each coordinate. Added two searched Mathlib leaves, with one declaration per clause; all analytic norm properties are taken from the existing incomplete-spectral-algebra-norm leaf. BGR is absent locally and is recorded WANTED; proof origin is agent, with Stacks and Mathlib sources read.",
+  "blueprint": "Historical analytic input below lem-trf-local-term-locality, as recorded in blueprint.from: supports BGR characteristic-zero weak stability in the Tate fraction-field normalization branch; the current latest blueprint node and sk-i-curve-zero contracting-correspondence route are unchanged. Steps 1-4 give the two coordinate bounds, not a replacement of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-a32d0a29a",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-a32d0a29a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and the cited spectral-norm node in full, with the Mathlib sources open. This is a first split (base had no proof, no repair note); the statement is unchanged and nothing is weakened. The norm node holds without completeness: Mathlib SpectralNorm.lean:381 (spectralNorm), :101 (the term at n=r-1 is |a_1|), :645 and :663 sit in the IsAlgebraic section, and CompleteSpace first appears at :699. Step 1 iterates the strong triangle inequality; C>0 because d>=1. Step 2 gives |a_1|<=s(u) and Tr(u)=-(e*1)a_1, with |n*1|<=1 written out, so |Tr u|<=s(u); checked at u=0 and u in K. Step 3 takes the trace-dual basis and uses K-linearity and submultiplicativity to get |a_j|<=s(z)s(w_j). Step 4 sets c=1/B. Tested on Q with |.|_5 and L=Q(i): the dual basis (1/2,-i/2) gives consistent bounds. Characteristic zero is used only for separability; completeness is never used. New leaf field-trace-minpoly-coefficient matches Trace/Basic.lean:140-142 trace_eq_finrank_mul_minpoly_nextCoeff exactly and agrees with Stacks 0BIH (fields.tex:2426). New leaf char-zero-trace-dual-basis matches Basic.lean:553 traceDual and :571 trace_mul_traceDual, with separability from instances at Perfect.lean:306 and :338. Both new nodes are self-contained, have empty proofs, record all three search kinds, and do not restate the item. rg -L duplicate search (trace-dual, nextCoeff, 0BIH/0BIL, weak stability) found no existing node stating either leaf or the item; the sibling weak-stability nodes assume the inequality or work in characteristic p. No off-route statements and no tool_uses. BGR is absent locally, recorded WANTED, proof_origin agent. No SGA cited. Cosmetic only: step 1's source names 0BIH, which it does not use. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Normed.SpectralNormCoordinateBounds",
+  "declaration": "Module.Basis.spectralNorm_coordinate_bounds",
+  "file": "lean/Sheaf/Analysis/Normed/SpectralNormCoordinateBounds.lean",
+  "statement": "theorem spectralNorm_coordinate_bounds {K : Type u} [NontriviallyNormedField K] [CharZero K] [IsUltrametricDist K] {L : Type v} [Field L] [Algebra K L] [FiniteDimensional K L] {ι : Type w} [Fintype ι] (b : Module.Basis ι K L) : ∃ c C : ℝ, 0 < c ∧ 0 < C ∧ ∀ a : ι → K, c * ‖a‖ ≤ spectralNorm K L (∑ i, a i • b i) ∧ spectralNorm K L (∑ i, a i • b i) ≤ C * ‖a‖",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3348945b2",
+  "group": "NS",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: NontriviallyNormedField+CharZero+IsUltrametricDist K (no CompleteSpace), Field L finite-dim, any Fintype basis, ∃ c C>0 before ∀ a, Pi sup norm ‖a‖ = max|a_i|, spectralNorm K L (Mathlib :381, no completeness) = stmt_dep's s_{L/K}. lean.statement verbatim; node diff vs live only adds lean record. Edge cases (empty ι impossible, a=0, d=1, universes u/v/w independent) fine. Statement true via trace-dual argument. No defs, sorry only, source+blueprint docstrings, proof steps in docstring, report sections present. No duplicate in Mathlib/Sheaf/WeilConjectures. Proof-only deps absent from snapshot but present live. No compile needed (no file changed)."
+ }
+}

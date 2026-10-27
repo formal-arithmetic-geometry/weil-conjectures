@@ -1,0 +1,155 @@
+{
+ "id": "lem-sf-field-stage-completion",
+ "kind": "statement",
+ "title": "Localization and common-field completion of fixed ring stages",
+ "statement": "Fix a prime l, a closure Ω of Q_l, a finite-field datum D with l ≠ D.p, finite-type D.k-schemes X and Y, and a separated finite-type D.k-morphism f:X→Y, without absolute separatedness of X or Y. For every supplied ring-only assembly A [def-sf-ring-stage-assembly-data], there exist rational operations at every c,E, closed operations at every c, and their prescribed rational-left realizations. For R=A.complete built from exactly these outputs and the unchanged A, there are F:CoefficientConstructionFields R and M:CoefficientConstructionCommon R F [def-sf-constructible-exceptional-coefficient-construction-data]. The localization shift structures at X and Y are independent of c, localization q is the identity on each raw represented integral left object, and the common-inclusion shift structures at X and Y are independent of c. No finite/integral operation or ring scalar is constructed by this statement. The representative-arrow normalization is included in M; the common-transition equation is to be deduced by the consumer from its identity-arrow specialization. No refinement is asserted.",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 6, Constructions 6.2 and 6.6, after Lemma 5.22 and Proposition 5.24; original coefficient-stage construction step 5 and raw localization normalizations"
+ },
+ "proof": [
+  {
+   "text": "The prescribed integral compact support is coefficient-DVR-linear. Precompose it with finiteTorIntegralInclusion, transport linearity through A.integralLeft, and reflect the scalar equation on the underlying full-subcategory Hom. This proves linearity of the supplied integral F without changing it. Adjunction.right_adjoint_linear then proves linearity of its supplied G.",
+   "uses": [
+    "def-weil-compact-support-finite-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_rational_stage_localization with these proved linearity hypotheses. Retain its rational operations, prescribed rational-left realizations, localization/scalar comparisons, raw action, and three localization normalizations.",
+   "uses": [
+    "lem-sf-rational-stage-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_common_stage_descent to this same rational family. Retain its closed operations, counit-normalized inclusion comparisons, identity normalization, two inclusion-shift independence properties and transition equation.",
+   "uses": [
+    "lem-sf-common-stage-descent-fixed-rational"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct R by A.complete on exactly those rational and closed operations. Use RationalStageAssembly.fields to construct F by assigning its five fields. Construct M with the supplied common comparisons and identity equations. For representativeAction, expand FΩ.map of a composite, left-compose by qi.hom and substitute the transition equation. Naturality of qj moves FΩ.map of the stage-inclusion arrow past qj; reassociate and cancel qi.hom followed by qi.inv. This proves the required formula for every stage arrow a, not just identity arrows.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Return the two operation families, rational-left realizations and the constructed F,M. Their five final properties are precisely the three localization properties and two common-inclusion shift properties already retained. All finite/integral operations and ring scalar data remain definitionally those of A.complete.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-compact-support-finite-action",
+  "lem-sf-common-stage-descent-fixed-rational",
+  "lem-sf-rational-stage-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 6.2 and 6.6; integral linearity is proved by full-inclusion reflection and Mathlib linearity transport; raw rational localization and common-field descent are the two separate remaining steps. The full representative-arrow formula is proved from the transition equation by naturality and cancellation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CoefficientConstructionRing|exists_coefficient_stages|exists_field_descent",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct normalized exceptional coefficient adjunctions from finite coefficient operations integral reconstruction and rational field descent",
+   "results": "Mathlib.Tactic.Ring.ExtractCoeff.e', Mathlib.Tactic.Ring.ExtractCoeff, IsLocalization.coeffIntegerNormalization, Algebra.SubmersivePresentation.coeffs, Polynomial.integralNormalization_coeff, IsLocalization.integerNormalization_coeff, IsLocalization.integerNormalization_spec, Mathlib.Tactic.Module.qNF.toNF",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "grep",
+   "query": "RingStageAssembly|exceptional.*[Rr]ing.*[Ss]tage|[Ff]ield.*[Ss]tage.*[Aa]ssembly",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite integral coefficient exceptional adjunction scalar mates normalized compact support",
+   "results": "MeasureTheory.LocallyIntegrable.integrable_smul_left_of_hasCompactSupport, HasCompactSupport.smul_left, ContDiffMapSupportedIn.coe_smul, MeasureTheory.HasFiniteIntegral.smul, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, MeasureTheory.hasFiniteIntegral_smul_iff, ContDiffMapSupportedIn.instSMul",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize an integral adjunction and descend its compatible functors to common finite subfields of an algebraic closure",
+   "results": "IsAlgClosed.lift_def, galLift, IsAlgClosed.lift, galRestrict'_galLift, IsIntegralClosure.isLocalization, galLiftEquiv_apply, Algebra.Extension.localization, IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCoefficientStages",
+  "date": "2026-10-27",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Coefficient adjunction stages, step 5 only: raw localization and common finite fields from fixed ring data",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalFieldStageCompletion",
+  "file": "lean/Sheaf/Paper/ExceptionalFieldStageCompletion.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_field_stage_completion",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.exists_field_stage_completion"
+  ],
+  "statement": "theorem exists_field_stage_completion (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (A : RingStageAssembly.{u, v} l Ω D hl (f := f)) :\n    ∃ (rational : ∀ (_c : Compactification f) (E : FieldStage.{max u v} l),\n        Operation.{u, v} l Ω X Y (.rational E))\n      (closed : ∀ _c : Compactification f, Operation.{u, v} l Ω X Y .closed)\n      (rationalLeft : ∀ (c : Compactification f) (E : FieldStage.{max u v} l),\n        (rational c E).F ≅\n          sfCompactSupportFiniteFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl)\n            c E.carrier),\n      let R := A.complete l Ω D hl rational closed rationalLeft\n      ∃ F : CoefficientConstructionFields.{u, v} l Ω D hl R,\n        ∃ M : CoefficientConstructionCommon.{u, v} l Ω D hl R F,\n          (∀ (c d : Compactification f) (E : FieldStage.{max u v} l),\n            (F.rationalizationComparison c E).shiftX =\n              (F.rationalizationComparison d E).shiftX) ∧\n          (∀ (c d : Compactification f) (E : FieldStage.{max u v} l),\n            (F.rationalizationComparison c E).shiftY =\n              (F.rationalizationComparison d E).shiftY) ∧\n          (∀ (c : Compactification f) (E : FieldStage.{max u v} l)\n            (K : C.{u, v} l Ω X (.integral E)),\n            HEq ((F.rationalizationComparison c E).q.hom.app K)\n              (𝟙 ((rationalization.{u, v} l Ω E Y).obj\n                ((A.operation c (.integral E)).F.obj K)))) ∧\n          (∀ (c d : Compactification f) (i : AlgebraicallyClosedCoefficients.Index l Ω),\n            (M.commonComparison c i).shiftX = (M.commonComparison d i).shiftX) ∧\n          (∀ (c d : Compactification f) (i : AlgebraicallyClosedCoefficients.Index l Ω),\n            (M.commonComparison c i).shiftY = (M.commonComparison d i).shiftY)",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261027T013011-L-2357535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T021404-L-2764373",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

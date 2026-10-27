@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-polynomial-difference-deformation-retract",
+ "kind": "statement",
+ "title": "Equivariant internal binomial-basis contraction of polynomial differences",
+ "statement": "Let $A$ be a commutative condensed $\\mathbf Q$-algebra on the coherent profinite site, meaning a commutative condensed ring with a unit-preserving map from the constant rational ring [sk-def-sfb-condensed-ring], in the compatible universes of [def-weil-size-convention]. Use ordinary internal $A$-modules [sk-def-sfb-module-objects]. Fix $d\\geq0$ and let $B=A[x_1,\\ldots,x_d]$ be the internal direct sum of copies of $A$ on its monomials, with coefficientwise addition and monomial multiplication [def-weil-pbc-mv-polynomial-ring]. Let $G$ be a profinite group (compact Hausdorff and totally disconnected), and give $B$ an internal $A$-linear $G$-action by algebra automorphisms, natural on all profinite test sets [def-sfb-condensed-action-module]. Put $T=B[y]=\\bigoplus_{n\\geq0}B\\,y^n$ internally and extend $G$ coefficientwise, fixing $y$. Define the $B$-linear internal endomorphism $\\Delta$ by $\\Delta f(y)=f(y-1)-f(y)$.\n\nPut $b_0=1$ and\n$$b_n=\\frac{(-1)^n}{n!}y(y+1)\\cdots(y+n-1)\\qquad(n>0).$$\nThe maps from the internal copies of $B$ given by the $b_n$ exhibit $T$ as their direct sum: expansion in these $b_n$ is unique and finite on each monomial. In particular the change from $y^n$ to $b_n$ is triangular with invertible rational diagonal entries. The internal formulas satisfy $\\Delta b_0=0$ and $\\Delta b_n=b_{n-1}$ for $n>0$.\n\nLet $i:B\\to T$ include constants, let $p:T\\to B$ be evaluation at $y=0$, and let $J:T\\to T$ be the $B$-linear map $J(b_n)=b_{n+1}$. All these maps are internal and $G$-equivariant, finite on each monomial, and compatible with every profinite base change. They satisfy\n$$\\Delta J=1_T,\\qquad J\\Delta=1_T-ip,\\qquad pi=1_B,\\qquad\\Delta i=0.$$\nConsequently the chain maps $i:B[0]\\to[T\\xrightarrow{\\Delta}T]$ and $p:[T\\xrightarrow{\\Delta}T]\\to B[0]$ are a chain homotopy equivalence, with homotopy $J$ from degree one to degree zero. In the ordinary derived category [def-weil-abstract-derived-category] their classes give inverse isomorphisms\n$$B[0]\\cong Q[\\,T\\xrightarrow{\\Delta}T\\,]\\quad\\text{in }D(\\mathcal A_G(A)),$$\nwhere the displayed complex is in degrees $0,1$. The assertions include $d=0$, $G=1$ and the zero algebra; they require neither a topology on polynomial degrees nor completion of the direct sums.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, polynomial translation acyclicity obligation: retained proof step 4, rational rising-factorial basis and internal equivariant difference contraction. Agent-formulated algebraic argument; this argument is not supplied by the blueprint."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Work with the internal direct sum specified in the statement. A finite rational matrix between finite sums of copies of $B$ defines an internal $B$-linear map, by addition and rational scalar multiplication in the module objects [sk-def-sfb-module-objects]. More generally, a matrix with finitely many nonzero entries in each column defines a map out of the direct sum: specify its map on each summand and use the coproduct universal property. Equalities of such maps are checked on the summand inclusions. Thus finite polynomial calculations below define internal morphisms; they do not assume that evaluating a sheaf coproduct commutes with taking sections.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written algebraic input: interpretation of finite-on-each-monomial formulas"
+   }
+  },
+  {
+   "text": "Write $b_n=u_ny^n+\\sum_{k<n}c_{nk}y^k$, where $u_n=(-1)^n/n!\\in\\mathbf Q^\\times$ and $c_{nk}\\in\\mathbf Q$. Expansion of the finite product defining $b_n$ gives this equality, also for $n=0$ with $u_0=1$. Recursively define $e_0=b_0$ and $e_n=u_n^{-1}(b_n-\\sum_{k<n}c_{nk}e_k)$; here the recursion expresses each monomial $y^n$ as a finite combination of the formal $b$-summands. Induction on $n$ shows that substitution into monomials sends $e_n$ to $y^n$, and substitution of these expansions into $b_n$ gives back its formal summand. Both composites are therefore identity on every summand. This constructs inverse internal triangular maps by step 1, proves the direct-sum assertion and uniqueness, and does not cancel a nonzero element of $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written algebraic input: finite triangular inverse, by induction on the monomial index"
+   }
+  },
+  {
+   "text": "Put $P_0(y)=1$ and $P_n(y)=\\prod_{j=0}^{n-1}(y+j)$ for $n>0$. For $n\\geq1$ the common-factor calculation is $P_n(y-1)-P_n(y)=((y-1)-(y+n-1))P_{n-1}(y)=-nP_{n-1}(y)$. The empty product makes this valid for $n=1$. Multiplication by $(-1)^n/n!$ gives $\\Delta b_n=b_{n-1}$; direct substitution gives $\\Delta b_0=0$. These are identities of formal polynomials over $\\mathbf Q$, hence identities of the internal maps from each $B$-summand. No assertion about injectivity of evaluating polynomials as functions is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written algebraic input: rising-factorial difference identity"
+   }
+  },
+  {
+   "text": "In the coordinates of step 2, define $J$ by shifting the $n$th summand to the $(n+1)$st. This is an internal map by the coproduct property; conjugating by the triangular maps makes it the specified $B$-linear endomorphism of $T$. Each of $i,p,J,\\Delta$ has a finite rational formula on each $y$-monomial, with $p(b_0)=1$ and $p(b_n)=0$ for $n>0$. For every profinite parameter set $S$ and $g\\in C(S,G)$, coefficientwise action fixes these rational scalars and $y$, so both orders of applying any map and $g$ send $c b_n$ to the same indicated rational combination with coefficient $g(c)$. The maps are therefore equivariant in the sense of [def-sfb-condensed-action-module]. Restrictions preserve rational scalars, sums and products, so these same equations hold after every profinite base change.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written algebraic input: construction and natural equivariance of the summand shift"
+   }
+  },
+  {
+   "text": "Check on the $b_n$-summands. Step 3 gives $\\Delta J(b_n)=b_n$ for all $n$; it gives $J\\Delta(b_0)=0$ and $J\\Delta(b_n)=b_n$ for $n>0$. By the values of $p$ in step 4 these are precisely $\\Delta J=1_T$ and $J\\Delta=1_T-ip$. Also $pi=1_B$ and $\\Delta i=0$ hold on constants. The coproduct property extends the equations to the internal maps, including when the coefficient algebra is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written algebraic input: the four deformation-retraction identities"
+   }
+  },
+  {
+   "text": "Let $C$ be $T\\xrightarrow{\\Delta}T$ in degrees $0,1$. Define the cochain map $i:B[0]\\to C$ in degree zero by inclusion and the cochain map $p:C\\to B[0]$ in degree zero by evaluation, with zero components elsewhere. Their chain conditions are respectively $\\Delta i=0$ and a zero equality. Define $h^1=J:C^1\\to C^0$ and all other $h^q=0$. The equation $1_C-ip=dh+hd$ in degree zero is $1_T-ip=J\\Delta$, and in degree one is $1_T=\\Delta J$; elsewhere both sides vanish. Together with $pi=1$ this is the asserted cochain homotopy equivalence. All components are equivariant by step 4.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written algebraic input: explicit cochain maps and degree-minus-one homotopy"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-condensed-product-action-inflation] with $R=A$ and the second group trivial: its abelian-category assertion supplies $\\mathcal A_G(A)$. The identity $J\\Delta=1-ip$ identifies $i:B\\to T$ with the categorical kernel of $\\Delta$: any $a:M\\to T$ killed by $\\Delta$ satisfies $a=ip a$, uniquely since $pi=1$. The identity $\\Delta J=1$ makes $\\Delta$ a split epimorphism, so its cokernel is zero. Hence $H^0(C)\\cong B$, $H^1(C)=0$, and all other cohomology is zero, with $H^0(i)$ the specified identification. By [def-weil-abstract-derived-category], $i$ is a quasi-isomorphism and $Q(i)$ is invertible. Functoriality gives $Q(p)Q(i)=1$, so $Q(p)=Q(i)^{-1}$ and also $Q(i)Q(p)=1$. This proves the displayed derived isomorphism with the stated maps. The proof never used the number of spectator variables or a nontrivial group or algebra, so includes $d=0$, $G=1$ and the zero algebra.",
+   "uses": [
+    "lem-sfb-condensed-product-action-inflation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written algebraic input: abelian ambient category and localization; Stacks Tag 05RU, derived.tex, definition-unbounded-derived-category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-product-action-inflation",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), polynomial-translation algebraic subproblem; complete rational triangular and difference argument supplied here; derived localization as in Stacks Tag 05RU, derived.tex, definition-unbounded-derived-category"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(ascPochhammer|descPochhammer|fwdDiff|binomial).*(basis|surjective|contract|homotopy)|(basis|surjective|contract|homotopy).*(ascPochhammer|fwdDiff|binomial)",
+   "results": "{\"t\": \"2026-10-22T06:06:16Z\", \"tool\": \"grep\", \"query\": \"(ascPochhammer|descPochhammer|fwdDiff|binomial).*(basis|surjective|contract|homotopy)|(basis|surjective|contract|homotopy).*(ascPochhammer|fwdDiff|binomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Pochhammer recurrences, nilpotence of iterated forward differences and generic homotopy equivalences do not state the internal equivariant binomial-basis deformation retract, and this is not a one-line specialization of them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complex of polynomials with differential f X minus one minus f X is homotopy equivalent to the constants over a rational algebra",
+   "results": "{\"t\": \"2026-10-22T06:06:16Z\", \"tool\": \"leansearch\", \"query\": \"The complex of polynomials with differential f X minus one minus f X is homotopy equivalent to the constants over a rational algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.homotopyEquivalences\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"HomotopyEquiv.refl\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"CochainComplex.mappingCone.descHomotopy\", \"HomotopyEquiv.ofIso\", \"HomologicalComplex.mk.congr_simp\"], \"digest\": \"7043847f2e07cf02\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Pochhammer recurrences, nilpotence of iterated forward differences and generic homotopy equivalences do not state the internal equivariant binomial-basis deformation retract, and this is not a one-line specialization of them."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Polynomial\", \"fwdDiff\"",
+   "results": "{\"t\": \"2026-10-22T06:06:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Polynomial\\\", \\\"fwdDiff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Polynomial.fwdDiff_iter_eq_zero_of_degree_lt\", \"Polynomial.fwdDiff_iter_degree_add_one_eq_zero\", \"Polynomial.fwdDiff_iter_degree_eq_factorial\"], \"digest\": \"582639077604288c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Pochhammer recurrences, nilpotence of iterated forward differences and generic homotopy equivalences do not state the internal equivariant binomial-basis deformation retract, and this is not a one-line specialization of them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial finite difference complex over a rational algebra contracts onto constants using the rising factorial binomial basis",
+   "results": "{\"t\": \"2026-10-22T06:06:29Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial finite difference complex over a rational algebra contracts onto constants using the rising factorial binomial basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.preHilbertPoly\", \"fwdDiff_iter_sum_mul_pow_eq_zero\", \"Lagrange.interpolate\", \"Lagrange.eval_iterate_derivative_eq_sum\", \"Polynomial.preHilbertPoly_eq_choose_sub_add\", \"descPochhammer_succ_comp_X_sub_one\", \"Polynomial.fwdDiff_iter_degree_eq_factorial\", \"Lagrange.interpolate_eq_sum\"], \"digest\": \"06a5f452eb176ac8\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Pochhammer recurrences, nilpotence of iterated forward differences and generic homotopy equivalences do not state the internal equivariant binomial-basis deformation retract, and this is not a one-line specialization of them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity and kernel of polynomial backward differences via the rising Pochhammer factorial basis",
+   "results": "{\"t\": \"2026-10-22T06:06:30Z\", \"tool\": \"leanfinder\", \"query\": \"Surjectivity and kernel of polynomial backward differences via the rising Pochhammer factorial basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.preHilbertPoly\", \"Lagrange.interpolate\", \"fwdDiff_iter_sum_mul_pow_eq_zero\", \"Lagrange.funEquivDegreeLT\", \"Polynomial.surjective_toFn\", \"Lagrange.basis\", \"Polynomial.fwdDiff_iter_eq_zero_of_degree_lt\", \"Polynomial.fwdDiff_iter_degree_add_one_eq_zero\"], \"digest\": \"9249ab5f44020653\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Pochhammer recurrences, nilpotence of iterated forward differences and generic homotopy equivalences do not state the internal equivariant binomial-basis deformation retract, and this is not a one-line specialization of them."
+  },
+  {
+   "tool": "grep",
+   "query": "ascPochhammer|fwdDiff_iter_degree",
+   "results": "{\"t\": \"2026-10-22T06:07:46Z\", \"tool\": \"grep\", \"query\": \"ascPochhammer|fwdDiff_iter_degree\", \"sub\": \"RingTheory/Polynomial/Pochhammer.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"28\", \"48\", \"51\", \"53\"], \"digest\": \"967978337193e7e2\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Pochhammer recurrences, nilpotence of iterated forward differences and generic homotopy equivalences do not state the internal equivariant binomial-basis deformation retract, and this is not a one-line specialization of them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal polynomial backward difference over a condensed rational algebra admits a rising factorial basis and equivariant contracting homotopy onto constants",
+   "results": "{\"t\": \"2026-10-23T10:49:01Z\", \"tool\": \"leanfinder\", \"query\": \"Internal polynomial backward difference over a condensed rational algebra admits a rising factorial basis and equivariant contracting homotopy onto constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.preHilbertPoly\", \"descPochhammer\", \"ascPochhammer\", \"fwdDiff_iter_eq_factorial\", \"Polynomial.fwdDiff_iter_degree_eq_factorial\", \"fwdDiff_iter_sum_mul_pow_eq_zero\", \"descPochhammer_succ_comp_X_sub_one\", \"descPochhammer_eq_ascPochhammer\"], \"digest\": \"1a05ba6aca9be220\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the read hits concern Pochhammer polynomials, iterated forward differences, polynomial translation automorphisms or generic homotopies; none states the internal equivariant binomial-basis contraction and its natural finite-sum construction, nor specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "(ascPochhammer|descPochhammer|fwdDiff|binomial).*(basis|surjective|contract|homotopy)|(basis|surjective|contract|homotopy).*(ascPochhammer|fwdDiff|binomial)",
+   "results": "{\"t\": \"2026-10-23T10:49:46Z\", \"tool\": \"grep\", \"query\": \"(ascPochhammer|descPochhammer|fwdDiff|binomial).*(basis|surjective|contract|homotopy)|(basis|surjective|contract|homotopy).*(ascPochhammer|fwdDiff|binomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the read hits concern Pochhammer polynomials, iterated forward differences, polynomial translation automorphisms or generic homotopies; none states the internal equivariant binomial-basis contraction and its natural finite-sum construction, nor specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The polynomial difference complex f(y-1)-f(y) over a rational algebra is equivariantly homotopy equivalent to its constants",
+   "results": "{\"t\": \"2026-10-23T10:49:46Z\", \"tool\": \"leansearch\", \"query\": \"The polynomial difference complex f(y-1)-f(y) over a rational algebra is equivariantly homotopy equivalent to its constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.alternatingConstHomotopyEquiv\", \"Polynomial.fwdDiff_iter_degree_add_one_eq_zero\", \"Polynomial.fwdDiff_iter_eq_zero_of_degree_lt\", \"fwdDiff_iter_sum_mul_pow_eq_zero\", \"CochainComplex.HomComplex.δ_ofHomotopy\", \"HomotopyEquiv.ofIso\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"Polynomial.algEquivAevalXAddC\"], \"digest\": \"d81f222d2707565c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the read hits concern Pochhammer polynomials, iterated forward differences, polynomial translation automorphisms or generic homotopies; none states the internal equivariant binomial-basis contraction and its natural finite-sum construction, nor specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Polynomial\", \"fwdDiff\"",
+   "results": "{\"t\": \"2026-10-23T10:49:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Polynomial\\\", \\\"fwdDiff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Polynomial.fwdDiff_iter_eq_zero_of_degree_lt\", \"Polynomial.fwdDiff_iter_degree_add_one_eq_zero\", \"Polynomial.fwdDiff_iter_degree_eq_factorial\"], \"digest\": \"582639077604288c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the read hits concern Pochhammer polynomials, iterated forward differences, polynomial translation automorphisms or generic homotopies; none states the internal equivariant binomial-basis contraction and its natural finite-sum construction, nor specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "ascPochhammer|fwdDiff_iter_degree",
+   "results": "{\"t\": \"2026-10-23T10:50:58Z\", \"tool\": \"grep\", \"query\": \"ascPochhammer|fwdDiff_iter_degree\", \"sub\": \"RingTheory/Polynomial/Pochhammer.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"28\", \"48\", \"51\", \"53\"], \"digest\": \"967978337193e7e2\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the read hits concern Pochhammer polynomials, iterated forward differences, polynomial translation automorphisms or generic homotopies; none states the internal equivariant binomial-basis contraction and its natural finite-sum construction, nor specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The rising Pochhammer factorial polynomials form a basis of polynomials over a rational algebra and the backward difference is the basis shift",
+   "results": "{\"t\": \"2026-10-23T10:50:59Z\", \"tool\": \"leanfinder\", \"query\": \"The rising Pochhammer factorial polynomials form a basis of polynomials over a rational algebra and the backward difference is the basis shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ascPochhammer\", \"descPochhammer\", \"descPochhammer_eq_ascPochhammer\", \"descPochhammer_succ_comp_X_sub_one\", \"descPochhammer_succ_left\", \"descPochhammer_eval_eq_ascPochhammer\", \"Polynomial.descPochhammer_smeval_eq_ascPochhammer\", \"ascPochhammer_eval_succ\"], \"digest\": \"7b951a81f4c504f1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the read hits concern Pochhammer polynomials, iterated forward differences, polynomial translation automorphisms or generic homotopies; none states the internal equivariant binomial-basis contraction and its natural finite-sum construction, nor specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-translation-acyclic",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, polynomial translation acyclicity obligation: retained proof step 4, rational rising-factorial basis and internal equivariant difference contraction. Agent-formulated algebraic argument; this argument is not supplied by the blueprint. The ancestor command returns None for the inherited creation chain; current motivation is paragraph (3) of literature/blueprint/latest, not a claim that the blueprint supplies this algebraic proof.",
+   "via": [
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-difference-deformation-retract",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Supplied finite triangular inversion, explicit common-factor difference calculation, coproduct construction and natural equivariance of J, all four identities, the degreewise homotopy equation, and the derived isomorphism via an explicit quasi-isomorphism. Reused the existing abelian action-category statement. No new nodes: all remaining calculations are elementary and written out. Retained inherited searches and added actual logged searches with a second semantic phrasing.",
+  "blueprint": "Realizes the polynomial-translation contraction obligation below paragraph (3), open direct image, of the current latest direct-images proof, through the inherited created.item chain. The ancestor command returns None; preserved the inherited null from.node and via list. The blueprint motivates this input but does not supply its proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-65fe66746",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-65fe66746 (reviewer sub-agent of L); spot-checked: I read the item, all four proof citations and the stmt_deps in full, plus the latest direct-images proof paragraph (3), lines 19-25. That paragraph supplies no rational argument, so proof_origin by:agent is right. The statement and stmt_deps are byte-identical to live and side-live, and live is still unsplit. There are no new nodes and no repair note. proof_deps equals the union of the step uses. The only proof citation is lem-sfb-condensed-product-action-inflation (same unit, Grothendieck abelian for any R, with H=1 and the zero ring included); the rest are definitions. No SGA. Recomputed: P_n(y-1)-P_n(y)=-n P_{n-1}, so Δb_n=b_{n-1}; n=1 gives Δ(-y)=1. The triangular inverse ψ(y^n)=u_n^{-1}(β_n-Σc_{nk}ψ(y^k)) is two-sided by induction. On b_n: ΔJ=1 and JΔ=1-ip, using p(b_0)=1 and p(b_n)=0 for n>0. The degree-0 and degree-1 homotopy equations hold with h^1=J. Equivariance is checked for varying g in C(S,G), since the coefficients are rational and y is fixed. Step 7: i is the kernel of Δ because a=ipa+JΔa; Δ is split epi; so i is a quasi-iso and Q(p)=Q(i)^{-1}. Edge cases d=0, G=1, A=0 and n=0,1 all hold. rg over the DAG found no duplicate; lem-trf-rational-sequence-polynomial-forward-difference is about sequences on N. The null blueprint.from.node is inherited from the created.item chain."
+ }
+}

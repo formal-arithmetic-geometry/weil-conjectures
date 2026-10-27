@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-space-single-complex-rhom-inheritance",
+ "kind": "statement",
+ "title": "Perfect-source internal Hom inherits the single-complex base-change stalk condition",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and unbounded module derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Use the ordinary tensor pullbacks [def-trf-space-etale-module-functors], derived by K-flat resolutions with flat terms, and derived internal Hom [def-pur-derived-internal-hom]. Let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms, put $X'=X\\times_Y Y'$ [lem-trf-space-fibre-products-etale-covers], and write $h:X'\\to X$ and $f':X'\\to Y'$ for the projections. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, $K'\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'})$, and $\\phi:Lh^*K\\to K'$.\nFor every geometric point $\\bar z$ of $X'$, put $\\bar x=h\\bar z$, $\\bar y'=f'\\bar z$, $\\bar y=f\\bar x$, $R=\\mathcal O_{Y,\\bar y}$, $A=\\mathcal O_{X,\\bar x}$, $B=\\mathcal O_{Y',\\bar y'}$, and $C=\\mathcal O_{X',\\bar z}$. Assume the canonical maps\n$$\\beta^i_{\\phi,\\bar z}:H^i(K_{\\bar x}\\otimes_R^{\\mathbf L}B)\\otimes_{A\\otimes_R B}C\\longrightarrow H^i(K'_{\\bar z})$$\nare isomorphisms for every $\\bar z$ and every $i\\in\\mathbf Z$ [def-sfb-space-single-complex-stalk-condition]. The maps are induced by $K_{\\bar x}\\otimes_R^{\\mathbf L}B\\to K_{\\bar x}\\otimes_A^{\\mathbf L}C\\to K'_{\\bar z}$ and $C$-linear extension on cohomology.\nFor every perfect $P\\in D(\\mathcal O_X)$, meaning etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package], put\n$$J=R\\mathcal Hom(P,K),\\qquad J'=R\\mathcal Hom(Lh^*P,K').$$\nThen $J,J'$ have quasi-coherent cohomology, and the canonical map\n$$\\psi:Lh^*J\\longrightarrow R\\mathcal Hom(Lh^*P,Lh^*K)\\xrightarrow{R\\mathcal Hom(1,\\phi)}J'$$\nsatisfies the same stalk condition: every $\\beta^i_{\\psi,\\bar z}$ is an isomorphism. The first arrow is the evaluation transpose of $Lh^*J\\otimes^{\\mathbf L}Lh^*P\\simeq Lh^*(J\\otimes^{\\mathbf L}P)\\to Lh^*K$. No quasi-compactness, quasi-separatedness, boundedness of $K,K'$, flatness of $f,g$, or direct-image assertion is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKI (lemma-single-complex-base-change-condition-inherited), clause (2) and its evaluation-defined coefficient map; Tag 0DKG (lemma-single-complex-base-change-condition), etale locality extends the displayed scheme-base formulation to Y; Tag 0A8A (lemma-quasi-coherence-internal-hom) for the stated quasi-coherence."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-derived-internal-hom",
+  "def-sfb-space-single-complex-stalk-condition",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Write $L=Lh^*$ and $H(P,N)=R\\mathcal Hom(P,N)$. Let $\\{U_k\\to X\\}$ be an etale covering on whose members $P$ is represented by strict-perfect complexes $F_k^\\bullet$, put $U'_k=U_k\\times_XX'$ (an etale covering of $X'$) and let $h_k:U'_k\\to U_k$, $j_k:U_k\\to X$, $j'_k:U'_k\\to X'$ be the projections, so $hj'_k=j_kh_k$. The composition comparisons and the 2-isomorphism clause of the monoidal comparison node give $(LP)|_{U'_k}=Lj'^*_kLh^*P\\cong Lh_k^*Lj_k^*P=Lh_k^*(P|_{U_k})$, the restrictions being the exact localization pullbacks. The strict-perfect pullback model applied to $h_k$ and $F_k^\\bullet$ then identifies $Lh_k^*(P|_{U_k})$ with the termwise pullback $h_k^*F_k^\\bullet$, a strict-perfect complex with the same bounds, ranks and retraction identities. Hence $LP$ is perfect. Put $E=H(P,\\mathcal O_X)$. Perfect duality makes $E$ perfect. The perfect-source case of the quasi-coherence theorem, applied to $(P,\\mathcal O_X)$, $(P,K)$ and $(LP,K')$, gives $E,J,J'\\in D_{\\mathrm{QCoh}}$ on their respective spaces. Here $\\mathcal O_X$ is itself a quasi-coherent module, and no lower bound is used.",
+   "uses": [
+    "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-space-pseudocoherent-rhom-quasicoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKI (lemma-single-complex-base-change-condition-inherited), preliminary well-definedness paragraph; Tag 0A8A (lemma-quasi-coherence-internal-hom); sites-cohomology Tags 08H3 and 08JJ"
+   }
+  },
+  {
+   "text": "Let $e:E\\otimes^{\\mathbf L}P\\to\\mathcal O_X$ be evaluation. Perfect duality gives the natural evaluation isomorphisms $a_N:E\\otimes^{\\mathbf L}N\\xrightarrow{\\sim}H(P,N)$. The perfect-source pullback comparison at $N=\\mathcal O_X$, followed by the unit comparison, gives an isomorphism $r:LE\\xrightarrow{\\sim}H(LP,\\mathcal O_{X'})$. Its defining transpose is the pairing $e_L:LE\\otimes^{\\mathbf L}LP\\xrightarrow{t^{-1}}L(E\\otimes^{\\mathbf L}P)\\xrightarrow{L(e)}L\\mathcal O_X\\xrightarrow{\\sim}\\mathcal O_{X'}$. Thus perfect duality for $LP$ gives the isomorphism $b:LE\\otimes^{\\mathbf L}K'\\xrightarrow{r\\otimes1}H(LP,\\mathcal O_{X'})\\otimes^{\\mathbf L}K'\\xrightarrow{\\sim}J'$. Write $T=E\\otimes^{\\mathbf L}K$, $T'=LE\\otimes^{\\mathbf L}K'$, and $a=a_K:T\\xrightarrow{\\sim}J$.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-ringed-perfect-internal-hom-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), 08JF (remark-prepare-fancy-base-change), and 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "Apply tensor inheritance to $E$, $K$, $K'$ and $\\phi$. Its hypotheses are precisely the given cartesian square, quasi-coherence of $K,K'$ and the stalk condition for $\\phi$, together with the quasi-coherence of $E$ proved in step 1. It supplies the stalk condition for $\\lambda:LT\\xrightarrow{t}LE\\otimes^{\\mathbf L}LK\\xrightarrow{1\\otimes\\phi}T'$. In particular $\\beta^i_{\\lambda,\\bar z}$ is invertible for every geometric $\\bar z$ and integer $i$.",
+   "uses": [
+    "lem-sfb-space-single-complex-tensor-inheritance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKI (lemma-single-complex-base-change-condition-inherited), clause (1)"
+   }
+  },
+  {
+   "text": "We verify $\\psi\\circ L(a)=b\\circ\\lambda$ rather than choosing any isomorphism between their objects. Suppress the canonical associators, unitors and the symmetry that moves the last $P$ next to $E$. Uncurrying $a_N$ gives $e\\otimes1_N$; uncurrying $b$ gives $e_L\\otimes1_{K'}$. By the evaluation-transpose definition of the pullback comparison, uncurrying $\\psi\\circ L(a)$ gives $\\phi\\circ L(\\operatorname{ev}_{P,K}\\circ(a\\otimes1_P))$ after the inverse tensor comparison. Substitute $\\operatorname{ev}_{P,K}\\circ(a\\otimes1_P)=e\\otimes1_K$. The strong symmetric monoidal identities for $L$ and the formula for $e_L$ in step 2 identify this composite with $e_L\\otimes\\phi$. Uncurrying $b\\circ\\lambda$ gives $(e_L\\otimes1_{K'})\\circ(1_{LE}\\otimes\\phi\\otimes1_{LP})$, which is also $e_L\\otimes\\phi$ by bifunctoriality of tensor. The closed adjunction is a bijection, so the two curried arrows agree. All constraints here are those fixed by the cited comparisons; in particular their symmetries include the cochain signs.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-ringed-perfect-internal-hom-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JF (remark-prepare-fancy-base-change), evaluation transpose; Tag 08JJ, evaluation comparison; Tags 07A4 and 0FPT, monoidal constraints; Tag 08J9, tensor-Hom adjunction"
+   }
+  },
+  {
+   "text": "Fix $\\bar z,i$ and put $D=A\\otimes_RB$. The definition of the canonical stalk comparison is natural in both coefficients: apply stalks, derived tensor over $R$ with $B$, cohomology and scalar extension to $C$ to the equality in step 4. It gives\n$$\\beta^i_{\\psi,\\bar z}\\circ\\bigl(H^i(a_{\\bar x}\\otimes_R^{\\mathbf L}B)\\otimes_D C\\bigr)=H^i(b_{\\bar z})\\circ\\beta^i_{\\lambda,\\bar z}.$$\nThe two maps induced by $a,b$ are isomorphisms, since functors preserve inverses. The right-hand stalk comparison is an isomorphism by step 3. Composing this equality with the inverse of the left vertical map proves that $\\beta^i_{\\psi,\\bar z}$ is an isomorphism, as required.",
+   "uses": [
+    "def-sfb-space-single-complex-stalk-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG (lemma-single-complex-base-change-condition), equation-bc immediately preceding the lemma; functoriality of that displayed map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-space-pseudocoherent-rhom-quasicoherent",
+  "lem-sfb-ringed-perfect-internal-hom-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-space-single-complex-tensor-inheritance",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-sfb-space-single-complex-stalk-condition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKI, clause (2): supply its omitted finite-perfect calculation using perfect duality (sites-cohomology Tag 08JJ) and clause (1), with an explicit evaluation-transpose check."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "single.?complex.?base.?change|base.?change.?condition|internal.?hom.*perfect",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometric stalk base change condition is stable under derived sheaf Hom with perfect source",
+   "results": "8 hits: CategoryTheory.sheafHom; SurjectiveOnStalks.stableUnderBaseChange; sourceLocalClosure.instIsStableUnderBaseChangeScheme; RingHom.IsStableUnderBaseChange and morphism-property base-change definitions/constructors. These are underived sheaf Hom or stability of morphism properties.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces the single complex base change stalk condition is inherited by derived internal Hom from a perfect complex",
+   "results": "8 hits: DerivedCategory.instIsGEObjSingleFunctor, left_fac_of_isStrictlyGE, isGE_Q_obj_iff and support/Ext localization results. These concern t-structures and morphism fractions, not the coefficient stalk comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"Hom\"",
+   "results": "12 hits in Mathlib.Algebra.Homology.DerivedCategory.Basic: Qh localization, shift, additivity, single-functor comparisons and Q_map_eq_of_homotopy; none is an internal-Hom stalk inheritance theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes preserve the localized derived tensor base change comparison under internal Hom",
+   "results": "8 hits: Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app and its variant, lifting₂CurriedTensorPre_iso, tensorBifunctorIso; Functor.isHomological_of_localization; Functor.instLinearDerivedCategoryMapDerivedCategory and mapDerivedCategoryFactorsh_hom_app; Tor'_map_app. They supply general localization functors or tensor formulas, not internal-Hom inheritance of the stalk comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedHom|Perfect.*[Hh]om|[Hh]om.*Perfect",
+   "results": "25 hits in Mathlib/AlgebraicGeometry, all substring collisions: pullback.congrHom, fiberHomeo, genericPoint_mem_smoothLocus_of_perfectField and dense_smoothLocus_of_perfectField, and Over.tensorHom_left. No derived internal Hom theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedHom|Perfect.*[Hh]om|[Hh]om.*Perfect",
+   "results": "25 hits in Mathlib/AlgebraicGeometry, read: fiberHomeo/congrHom substring collisions, Over.tensorHom_left, and perfect-field smoothness; none concerns derived internal Hom or the stalk comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"Hom\"",
+   "results": "12 hits in Mathlib.Algebra.Homology.DerivedCategory.Basic: localization Qh, shifts, single functors, additivity and homotopy invariance; none states the comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk base change condition is stable under derived internal Hom from a perfect complex",
+   "results": "8 morphism-property stability hits, including SurjectiveOnStalks, flatness and smoothness; none states internal-Hom inheritance.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk base change for derived internal Hom with perfect source",
+   "results": "8 ordinary stalk-map and restriction-isomorphism hits; none states internal-Hom inheritance.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect duality identifies RHom P K with the tensor product of the perfect dual of P and K preserving the stalk base change condition",
+   "results": "8 hits: IsBaseChange.toDualBaseChange/toDual/dual, Module.Dual.baseChange, FGModuleCat evaluation and dualTensorHomEquiv. Read Mathlib/LinearAlgebra/Dual/BaseChange.lean and Contraction.lean: these are ordinary modules and finite-projective linear duals, not derived sheaf Hom or geometric-stalk comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-coefficient-rhom-base-change",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom. Supporting input: Tag 08JY (quot-lemma-noetherian-hom), the Noetherian finite-type-module case used in the last paragraph of Tag 08K6. In the proof of Tag 08JY: the comparison for every T -> B following the Leray identification. Supporting input for 08JQ: 0DKI(2), inheritance of the single-complex stalk condition by perfect-source internal Hom, before applying 0DKH.",
+   "via": [
+    "lem-sfb-space-flat-coefficient-rhom-base-change",
+    "lem-sfb-noetherian-module-hom",
+    "lem-sfb-space-module-hom-affine",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-single-complex-rhom-inheritance",
+  "worker": "stage1",
+  "summary": "Retained the statement and all its hypotheses. Reused existing perfect duality, strict-perfect pullback, quasi-coherence and tensor-inheritance nodes; the proof explicitly checks the coefficient-map identity by uncurrying, then writes the naturality square for the stalk comparison. No new nodes or Mathlib leaves. All sources and cited statements were read; searches recorded by msearch.py found no complete Mathlib match.",
+  "blueprint": "The inherited from.node=null is unchanged (blueprint_refs.py ancestor reports None). The recorded ancestor place is det-thm-sf-ctf-stability-direct-images proof (3), supporting input for 08JQ through 08JY: Tag 0DKI(2) before 0DKH. Steps 1-5 realize exactly this prerequisite. Current latest blueprint unit and direct-images proof were read; no unit step or chapter route is replaced. No blueprint node found with the same arbitrary-algebraic-space stalk condition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "why": "Generic ringed-topos strict-perfect pullback model, applied locally only to establish perfectness of LP; this unit has no node stating that representative comparison."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic symmetric monoidal tensor and unit comparisons used to identify the specified evaluation transpose; no geometric proof route is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic tensor-Hom adjunction and its injectivity for checking equality by uncurrying; no new geometric theorem is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-84c17b507",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-84c17b507 (reviewer sub-agent of L); spot-checked: FIX, no new nodes. I read 0DKI(2) and its proof (spaces-perfect.tex l.5350-5420) and 08JF (remark-prepare-fancy-base-change). ψ is exactly the 08JF evaluation transpose followed by RHom(1,φ). The statement is byte-identical to side-live (item still unsplit there, no repair note) and adds no qc/qs, bound or flatness hypothesis. Steps 2-5: r=α_{h;P,O} with the stated transpose L(ev)∘t^{-1} gives e_L. b is perfect duality for LP. Tensor inheritance has the same R,A,B,C,D and canonical β, needs E∈D_QCoh, and its ψ is λ. I redid the step-4 uncurry: both sides give e_L⊗φ. The Koszul signs agree because lem-sfb-ringed-site-duality-maps fixes y⊗φ↦(x↦yφ(x)) with no sign. Step 5 follows from naturality of the β definition. The one fault: step 1 applied the global strict-perfect pullback model 'on each member of a perfectness cover' without the identification (Lh^*P)|_{U'_k}≅Lh_k^*(P|_{U_k}). Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-single-complex-rhom-inheritance.json: the step now writes the covering U'_k=U_k×_X X' and cites lem-sfb-ringed-derived-monoidal-comparisons (composition comparison plus the 2-isomorphism clause). That node was already in proof_deps and tool_uses. The 3 declared tool_uses (strict-perfect pullback model, monoidal comparisons, closed symmetric monoidal) are generic and accepted. Batch-5 check: pseudocoherent-rhom-quasicoherent and tensor-inheritance reach only def-trf-algebraic-space, a general definition already in stmt_deps, so accepted. perfect-internal-hom-pullback reaches lem-pod-closed-uncurry-laws, a mathlib leaf of generic closed-monoidal curry/uncurry identities, not part of Poincaré duality or the trace formula, so accepted. No duplicate: the 0DKI hits are scheme-level tensor versions or the sfb tensor/flat nodes. Edge cases checked: P=0, P=O, shifts, non-flat h, unbounded K, empty X'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSingleComplexRHomInheritance",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SingleComplex.singleComplexRHomInheritance",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SingleComplex.rhomPullbackComparison",
+   "AlgebraicGeometry.AlgebraicSpace.SingleComplex.rhomCoefficientMap",
+   "AlgebraicGeometry.AlgebraicSpace.SingleComplex.singleComplexRHomInheritance"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSingleComplexRHomInheritance.lean",
+  "statement": "theorem singleComplexRHomInheritance {X X' Y Y' : AlgebraicSpace S} (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (h : X' ⟶ X) (sq : IsPullback h f' f g) (K : X.DerivedQCoh) (K' : X'.DerivedQCoh) (φ : (derivedPullback h).obj K.obj ⟶ K'.obj) (h_stalk : StalkCondition f f' g h sq K.obj K'.obj φ) (P : X.DerivedModules) (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P) : X.derivedQCohProperty (X.derivedHom.obj (op P, K.obj)) ∧ X'.derivedQCohProperty (X'.derivedHom.obj (op ((derivedPullback h).obj P), K'.obj)) ∧ StalkCondition f f' g h sq (X.derivedHom.obj (op P, K.obj)) (X'.derivedHom.obj (op ((derivedPullback h).obj P), K'.obj)) (rhomCoefficientMap h P K.obj K'.obj φ)",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Tag 0DKI(2), with both quasi-coherence conclusions and the existing geometric StalkCondition. The two helper definitions expose the evaluation transpose and its coefficient composite on the already fixed small-model derived pullback, tensor comparison and closed structure. No new choice of a map or any flatness or boundedness assumption is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69ffb7e8d",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read 0DKI(2), node, module, StalkCondition, derivedHom/derivedDualityModel (closed structure indexed by derivedInternalHomOfUniverses; tensor X = closed.tensor), derivedTensorComparison (∃!-pinned), CoefficientClosedStructure evaluation/transpose, sibling singleComplexTensorInheritance. All hypotheses/three conclusion clauses match; psi = transpose(tensorComparison.inv ≫ Lh*(evaluation)) ≫ derivedHom.map(1,φ) is the canonical 08JF map; hP IsPerfectOnRingedSiteOfUniverses.{u,u,u,w} consistent with other space modules; no extra qc/bounds/flatness; edge cases P=0, P=O, unbounded K, empty X' covered. Statement verbatim; node changed only in lean; docstrings with 5 proof steps; sorry only; lines ≤100. Advisory: derivedTensorComparison owner def-sfb-space-pullback-tensor-comparison not in stmt_deps closure (S2 cannot add; maintainer may); rhomPullbackComparison repeats generic ringedPullbackHomComparison formula for the fixed space model, acceptable helper. No compile (no file changed)."
+ }
+}

@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 public import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
-import Sheaf.AlgebraicGeometry.QuasiAffineRelativeSpecEmbedding
 
 /-!
 # Base change of quasi-affine morphisms
@@ -30,21 +28,29 @@ set_option autoImplicit false
 /-- Arbitrary base change preserves quasi-affineness (Stacks Project, Morphisms, Tag 01SO,
 lemma-base-change-quasi-affine) (blueprint: lem-trf-quasi-affine-base-change).
 
-Proof plan:
-1. By `lem-trf-quasi-affine-relative-spec-embedding` (Tag 01SM), factor `f` as a
-   quasi-compact open immersion into the relative spectrum of a quasi-coherent algebra.
-2. The fibre-product universal property identifies the induced map between the two base
-   changes as the pullback of that immersion. It is open by
-   `lem-weil-pbc-open-immersion-base-change` and quasi-compact by clause (3) of
-   `lem-weil-pbc-qcqs-morphism-permanence`; neither requires a condition on `g`.
-3. By `lem-weil-pbc-relative-spec-base-change`, the base-changed relative spectrum is
-   canonically isomorphic over `S'` to the relative spectrum of the pulled-back algebra.
-   Transporting the immersion along this isomorphism preserves openness and quasi-compactness.
-4. The converse of `lem-trf-quasi-affine-relative-spec-embedding` gives quasi-affineness
-   of the projection to `S'`. No finite-presentation assumption enters these steps. -/
+Proof:
+1. The inverse image of every affine open is quasi-affine, hence quasi-compact.
+   The affine-open criterion for quasi-compact morphisms makes `f` quasi-compact.
+2. Each such inverse image is separated, hence quasi-separated. The affine-local
+   criterion `HasAffineProperty.of_iSup_eq_top` makes `f` quasi-separated.
+   These are the first two observations in the proof of Tag 01SM.
+3. Apply the proved source-library theorem `IsQuasiAffineHom.of_isPullback` to
+   the defining pullback square. Its quasi-compactness and quasi-separatedness
+   assumptions were derived in Steps 1 and 2; no extra hypothesis is imposed. -/
 theorem isQuasiAffineHom_baseChange {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     (hf : IsQuasiAffineHom f) :
     IsQuasiAffineHom (pullback.snd f g) := by
-  sorry
+  let : IsQuasiAffineHom f := hf
+  have : QuasiCompact f := by
+    refine quasiCompact_iff_forall_isAffineOpen.mpr fun U hU ↦ ?_
+    have := hU.isQuasiAffine_preimage f
+    exact isCompact_iff_compactSpace.mpr
+      (inferInstance : CompactSpace (f ⁻¹ᵁ U).toScheme)
+  have : QuasiSeparated f := by
+    refine HasAffineProperty.of_iSup_eq_top (P := @QuasiSeparated)
+      (fun U : S.affineOpens ↦ U) (iSup_affineOpens_eq_top S) fun U ↦ ?_
+    have := U.2.isQuasiAffine_preimage f
+    exact inferInstance
+  exact IsQuasiAffineHom.of_isPullback (IsPullback.of_hasPullback f g)
 
 end AlgebraicGeometry

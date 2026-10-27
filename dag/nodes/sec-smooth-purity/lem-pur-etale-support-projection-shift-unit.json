@@ -1,0 +1,276 @@
+{
+ "id": "lem-pur-etale-support-projection-shift-unit",
+ "kind": "statement",
+ "title": "Unital shift-compatible unbounded etale compact-support projection",
+ "statement": "Let $k$ be an algebraically closed field of characteristic $p>0$, let $\\ell\\ne p$ be prime, and let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes [def-weil-scheme-morphism-properties]. No separatedness of $X$ or $Y$ over $k$ is assumed. Fix a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$ [def-weil-compactifications-refinements]. Let $C$ be a finite commutative ring annihilated by a power of $\\ell$. On the ordinary unbounded etale derived categories $D(T_{\\mathrm{et}},C)$ [def-weil-pbc-derived-categories], put $F=Rr_*j_!$.\n\nUse derived tensor [def-kun-derived-tensor], its signed symmetry [lem-kun-tensor-sym] and exact inverse image $f^*$ [prop-weil-pbc-inverse-image-modules-exact]. For every unbounded $L\\in D(Y_{\\mathrm{et}},C)$ and $K\\in D(X_{\\mathrm{et}},C)$, the canonical composite\n$$P_{L,K}:L\\otimes_C^L Rr_*j_!K\\longrightarrow Rr_*(r^*L\\otimes_C^L j_!K)\\longrightarrow Rr_*j_!(j^*r^*L\\otimes_C^L K)=F(f^*L\\otimes_C^L K)$$\nis a natural isomorphism on the derived categories, independent of resolutions. The first arrow is the proper counit projection map [def-kun-projection-formula-map] with the signed symmetries putting $L$ first; the second is induced by the canonical sheaf extension-by-zero tensor map [def-weil-pbc-extension-by-zero]. Give all functors their canonical cochain integer-shift comparisons. For fixed $K$, write $A_K(L)=L\\otimes_C^L FK$, $B_K(L)=F(f^*L\\otimes_C^L K)$ and $c_{H,n,L}:H(L[n])\\xrightarrow{\\sim}H(L)[n]$. Then\n$$c_{B_K,n,L}\\circ P_{L[n],K}=P_{L,K}[n]\\circ c_{A_K,n,L}$$\nfor every $n\\in\\mathbf Z$, and $P_{C_Y,K}=1_{FK}$ under the tensor-unit identifications. For every $V\\in D(C\\text{-}\\mathrm{Mod})$ [def-weil-abstract-derived-category], its termwise constant complex $V_T$ [def-weil-pbc-constant-sheaf] satisfies $f^*V_Y\\cong V_X$ canonically, compatibly with shifts and units. The specialization $P_{V_Y,K}$, including its inverse, has the same coefficient-shift and unit properties.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Theorem 2.18(2), printed p. 12, and Construction 2.26, printed p. 15: actual projection map; retained item proof steps 4 and 8 supply proper/open composition and signed shift/unit coherence."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-sym",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-projection-formula-map",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved proper torsion projection formula to c.g (a finite ring is additively torsion). Each component of the compactification projection is its proper projection followed by the inverse open tensor comparison and the pullback-composition isomorphism. The two signed symmetries are isomorphisms. Thus supportProjectionMap is an isomorphism of bifunctors.",
+   "uses": [
+    "lem-kun-0f0g",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing compactification projection CommShift instance. The canonical signed symmetry commutes with the second-to-first tensor shift comparison by lem-pur-derived-tensor-braiding-shift. Whisker and compose these transformations; the inverse has CommShift because the map is an isomorphism.",
+   "uses": [
+    "lem-pur-derived-tensor-braiding-shift",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply compactificationProjectionMap_rightUnitality. Naturality of the braiding moves the inverse-image unit comparison past the swap, and braiding_leftUnitor changes the resulting composite into the right unitor. Cancel the initial inverse swap. This proves the specified coefficient-first unit equation; multiplying by the inverse component proves its inverse equation.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact-functor derived comparisons have CommShift, so their composite constantFunctorCompLeftDerivedUpperStarIso and its inverse have CommShift. At the coefficient unit, the adjunction constantSheafAdj evaluated at any terminal object has unit equal to the sheafification unit. Adjunction uniqueness and the monoidal pushforward unit identity identify constantSheafCompUpperStarIso at the unit with the monoidal pullback unit map.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived_single_constants_comparison to descend the preceding unit calculation. Naturality of leftDerivedUpperStarIsoMapDerivedCategory and the proved leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp identify the composite with leftDerivedUpperStarUnitIso. Restrict the projection and its inverse along the exact constant functor; whiskering preserves CommShift. Assemble the isomorphism and all conjuncts. Package the same shift/unit conjunction by BifunctorProjectionCoherent and apply bifunctorIsoCoherence, avoiding repeated specialization of inverse cancellation. Apply the generic coherence theorem first to an abstract map with the given forward equations, then specialize it to supportProjectionMap; a proved predicate equivalence transports the result to the declared SupportProjectionCoherent.",
+   "uses": [
+    "lem-kun-derived-single-constants-comparison",
+    "lem-kun-tensor-unit",
+    "lem-pur-bifunctor-projection-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-0f0g",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-tensor-sym",
+  "lem-pur-derived-tensor-braiding-shift",
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-unit",
+  "def-weil-pbc-constant-sheaf",
+  "lem-kun-derived-single-constants-comparison",
+  "lem-pur-bifunctor-projection-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "P6: existing compactification projection invertibility, integer-shift and right-unit APIs, canonical signed symmetry calculation, and exact-single comparison; the declared statement is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical unbounded etale compact support projection formula isomorphism commutes with coefficient shifts and is the identity on the tensor unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.standardComplex.εToSingle₀_comp_eq\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Monoid G],\\n  CategoryTheory.CategoryStruct.comp\\n      (((CategoryTheory.forget₂ (Rep k G) (ModuleCat k)).mapHomologicalComplex (ComplexShape.down ℕ)).map\\n        (Rep.standardComplex.εToSingle₀ k G))\\n      ((HomologicalComplex.singleMapHomologicalComple\", \"doc\": \"The composition of the forgetful functor applied to the standard chain complex with the morphism to the single-term complex equals the homomorphism component of the homotopy equivalence between the fo\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"HomologicalComplex.rightUnitor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Addit\", \"doc\": \"The natural isomorphism between the tensor product of a homological complex $ K $ with the tensor unit complex (which places the monoidal unit at index 0 and zero objects elsewhere) and $ K $ itself. \"}\n  {\"name\": \"HomologicalComplex.tensorUnitIso\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          {I : Type u_2} →\\n            [inst_4 : AddMonoid I] →\\n           \", \"doc\": \"An isomorphism between the graded object constructed by placing the monoidal unit object at position 0 (via the single₀ functor) and the tensor unit homological complex (which places the monoidal unit\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation_map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (a : Fin 2), P.toSubmersivePresentation.map a = id a\", \"doc\": \"For any commutative ring $ R $ and $ R $-algebra $ S $, the canonical map from the standard étale presentation to the submersive presentation of $ S $ acts as the identity function on the finite set o\"}\n  {\"name\": \"Algebra.SubmersivePresentation.sectionCotangent_comp\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  P.sectionCotangent ∘ₗ P.toExtension.cotangentComplex = LinearMap.id\", \"doc\": \"The composition of the canonical section map from the cotangent space to the cotangent module and the cotangent complex map from the cotangent module to the cotangent space of an algebra extension equ\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern algebraic etaleness, complex tensor units, ordinary adjunction shift identities or Tor; none gives the specified proper/open projection and its coherence on whole etale derived categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"CommShift\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern algebraic etaleness, complex tensor units, ordinary adjunction shift identities or Tor; none gives the specified proper/open projection and its coherence on whole etale derived categories."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(commShift|shift|unit)|[Ll]ower[Ss]hriek.*[Pp]rojection",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Algebra/NonUnitalHom.lean\", \"line\": \"172\", \"text\": \"initialize_simps_projections NonUnitalAlgHom\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/NonUnitalHom.lean\", \"line\": \"351\", \"text\": \"/-- The first projection of a product is a non-unital algebra homomorphism. -/\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/NonUnitalHom.lean\", \"line\": \"360\", \"text\": \"/-- The second projection of a product is a non-unital algebra homomorphism. -/\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Unitization.lean\", \"line\": \"422\", \"text\": \"/-- The canonical `S`-linear projection `Unitization R A → A`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Unitization.lean\", \"line\": \"659\", \"text\": \"/-- The canonical `R`-algebra projection `Unitization R A → R`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Unitization.lean\", \"line\": \"919\", \"text\": \"lemma isStarProjection_inr_iff {R A : Type*} [Semiring R] [StarRing R] [NonUnitalSemiring A]\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Unitization.lean\", \"line\": \"921\", \"text\": \"    IsStarProjection (p : Unitization R A) ↔ IsStarProjection p := by\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"25\", \"text\": \"/-- The star projections in a non-unital C⋆-algebra are exactly the extreme points of\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"27\", \"text\": \"theorem isStarProjection_iff_mem_extremePoints_setOfPred_nonneg_inter_unitClosedBall\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"34\", \"text\": \"  · /- Suppose `e` is a star projection, and `a` and `b` are in the nonnegative closed unit ball\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"88\", \"text\": \"alias isStarProjection_iff_mem_extremePoints_setOf_nonneg_inter_unitClosedBall :=\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Extreme.lean\", \"line\": \"89\", \"text\": \"  isStarProjection_iff_mem_extremePoints_setOfPred_nonneg_inter_unitClosedBall\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Basic.lean\", \"line\": \"284\", \"text\": \"theorem IsStarProjection.norm_le [NonUnitalNormedRing E] [StarRing E] [CStarRing E]\"}\n  {\"file\": \"Mathlib/Algebra/Star/StarRingHom.lean\", \"line\": \"108\", \"text\": \"initialize_simps_projections NonUnitalStarRingHom (toFun → apply)\"}\n  {\"file\": \"Mathlib/Algebra/Star/StarAlgHom.lean\", \"line\": \"115\", \"text\": \"initialize_simps_projections NonUnitalStarAlgHom\"}\n  {\"file\": \"Mathlib/Algebra/Star/StarAlgHom.lean\", \"line\": \"479\", \"text\": \"/-- The first projection of a product is a non-unital ⋆-algebra homomorphism. -/\"}\n  {\"file\": \"Mathlib/Algebra/Star/StarAlgHom.lean\", \"line\": \"484\", \"text\": \"/-- The second projection of a product is a non-unital ⋆-algebra homomorphism. -/\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"137\", \"text\": \"/-- The projection of the counit. -/\"}\n  {\"file\": \"Mathlib/Algebra/Star/Unitary.lean\", \"line\": \"452\", \"text\": \"theorem IsStarProjection.two_mul_sub_one_mem_unitary {R : Type*} [Ring R] [StarRing R] {p : R}\"}\n  {\"file\": \"Mathlib/Algebra/Star/Unitary.lean\", \"line\": \"453\", \"text\": \"    (hp : IsStarProjection p) : 2 * p - 1 ∈ unitary R := by\"}\n  {\"file\": \"Mathlib/Algebra/Ring/Hom/Defs.lean\", \"line\": \"119\", \"text\": \"initialize_simps_projections NonUnitalRingHom (toFun → apply)\"}\n  {\"file\": \"Mathlib/Algebra/Star/NonUnitalSubsemiring.lean\", \"line\": \"58\", \"text\": \"initialize_simps_projections NonUnitalStarSubsemiring (carrier → coe, as_prefix coe)\"}\n  {\"file\": \"Mathlib/Algebra/Group/Units/Defs.lean\", \"line\": \"103\", \"text\": \"initialize_simps_projections Units (as_prefix val, val_inv → null, inv → val_inv, as_prefix val_inv)\"}\n  {\"file\": \"Mathlib/Algebra/Group/Units/Defs.lean\", \"line\": \"105\", \"text\": \"initialize_simps_projections AddUnits\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Projection/Basic.lean\", \"line\": \"416\", \"text\": \"/-- Formula for orthogonal projection onto a single unit vector. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern algebraic etaleness, complex tensor units, ordinary adjunction shift identities or Tor; none gives the specified proper/open projection and its coherence on whole etale derived categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proper projection formula composed with open extension by zero tensor map has unit and shift compatibility",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \": CompatibilityUnit adj (Functor.CommShift.isoZero F A) (Functor.CommShift.isoZero G A)\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityUnit adj e₁ e₂) (h' : CompatibilityUnit adj e₁ e₂') : e₂ = e₂'\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ equipped with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ a\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.CompatibilityUnit\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (F ⊣ G) →\\n              {A : Type u_3} →\\n               \", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_comp_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{M N : SheafOfModules.{u} R} (f : unit R ⟶ M) (p : M ⟶ N) : N.unitHomEquiv (f ≫ p) = sectionsMap p (M.unitHomEquiv f)\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and sheaves of modules $ M $ and $ N $ over $ R $, the equivalence between natural transformations $ \\\\eta: \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (U : Y.Opens) :\\n  ((restrictAdjunction f).unit.app M).app U = M.presheaf.map (homOfLE (f.image_preimage_le U)).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.π'_f_zero_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {X : C} (R : CategoryTheory.ProjectiveResolution X) {Z : C}\\n  (h : ((CochainComplex.singleFunctor C 0).obj X).X 0 ⟶ Z),\\n  CategoryTheory.CategoryStruct.\", \"doc\": \"For a projective resolution $ R $ of an object $ X $ in a preadditive category $ \\\\mathcal{C} $ with zero objects, and for any morphism $ h $ from the object at degree 0 of the single-term cochain comp\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences\", \"type\": \"[HasDerivedCategory.{w'} C] {X Y Z : C} {n : ℕ} (x : Ext X Y n) (f : Y ⟶ Z) :\\n  x.hom ≫ ((DerivedCategory.singleFunctor C 0).map f)⟦(n : ℤ)⟧' = (x.comp (mk₀ f) (add_zero n)).hom\", \"doc\": \"For objects $X, Y, Z$ in an abelian category $\\\\mathcal{C}$ and a natural number $n$, composing the homomorphism $x : \\\\mathrm{Ext}^n(X, Y)$ with the image of a morphism $f : Y \\\\to Z$ under the single-t\"}\n  {\"name\": \"ExteriorAlgebra.toTrivSqZeroExt_comp_map\", \"module\": \"Mathlib.LinearAlgebra.ExteriorAlgebra.Basic\", \"type\": \"[Module Rᵐᵒᵖ M] [IsCentralScalar R M] [Module Rᵐᵒᵖ N] [IsCentralScalar R N] (f : M →ₗ[R] N) :\\n  toTrivSqZeroExt.comp (map f) = (TrivSqZeroExt.map f).comp toTrivSqZeroExt\", \"doc\": \"For a commutative ring $ R $ and $ R $-modules $ M $ and $ N $ with central scalar actions, the composition of the exterior algebra homomorphism induced by a linear map $ f: M \\\\to N $ with the canonic\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern algebraic etaleness, complex tensor units, ordinary adjunction shift identities or Tor; none gives the specified proper/open projection and its coherence on whole etale derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula map for compact supports is unital and an exact natural transformation in the tensor coefficient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k : C) {X Y : C} (f : X ⟶ Y),\\n  ((Category\", \"doc\": \"For any morphism $f: X \\to Y$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the object map of the $n$-th Tor functor $\\\\mathrm{Tor}_n(-, k)$ applied to $f$ equals the eval\"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern algebraic etaleness, complex tensor units, ordinary adjunction shift identities or Tor; none gives the specified proper/open projection and its coherence on whole etale derived categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical projection map of a monoidal derived adjunction commutes with shifts in the tensor coefficient and preserves the tensor unit",
+   "results": "8 hits: CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.unit_app_shift_commShiftIso_inv_app, CategoryTheory.Adjunction.shift_unit_app, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right, CategoryTheory.Adjunction.unit_app_unit_comp_map_η_assoc, CategoryTheory.Adjunction.CommShift.CompatibilityUnit; inspected returned signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match: no ordinary unbounded etale compactification projection with all the specified shift and unit clauses; general adjunction shift hits do not supply the geometric projection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded etale compact support projection formula commutes with coefficient shifts and is identity at the constant ring unit",
+   "results": "8 hits: StandardEtalePair.lift_X_left, StandardEtalePresentation.toPresentation_σ', StandardEtalePair.hasMap_X, StandardEtalePresentation.toSubmersivePresentation_map, StandardEtalePresentation.toPresentation_algebra_smul, StandardEtalePresentation.hasMap, StandardEtalePair.inv_aeval_X_g, StandardEtalePair.homEquiv_apply_coe; inspected returned signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match: no ordinary unbounded etale compactification projection with all the specified shift and unit clauses; general adjunction shift hits do not supply the geometric projection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"CommShift\"",
+   "results": "0 hits: ; inspected returned signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match: no ordinary unbounded etale compactification projection with all the specified shift and unit clauses; general adjunction shift hits do not supply the geometric projection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(commShift|shift|unit)|[Ll]ower[Ss]hriek.*[Pp]rojection",
+   "results": "25 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Algebra/Algebra/Unitization.lean; inspected returned signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match: no ordinary unbounded etale compactification projection with all the specified shift and unit clauses; general adjunction shift hits do not supply the geometric projection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|rightAdjointProjectionMap",
+   "results": "0 hits: ; inspected returned signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match: no ordinary unbounded etale compactification projection with all the specified shift and unit clauses; general adjunction shift hits do not supply the geometric projection theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-exceptional-constant-tensor",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph beginning \"For Λ in {O_E,E,Qlb}, use respectively derived inverse limits, rationalization, and the common-stage construction ... of the compatible finite-level functors\": the finite-level constant-coefficient tensor comparison needed to compare derived reductions. Work package: Theorem 2.18(2), printed p. 12, and Construction 2.26, printed p. 15: actual projection map; retained item proof steps 4 and 8 supply proper/open composition and signed shift/unit coherence.",
+   "via": [
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-support-projection-shift-unit",
+  "worker": "stage1",
+  "summary": "Reused the existing unbounded torsion proper projection, unbounded etale open tensor, canonical ringed projection shift/unit theorem, and pullback-constant nodes. Wrote the proper/open assembly and the coefficient-first cochain sign, open reindexing, unit and inverse calculations explicitly. No new nodes, no statement correction.",
+  "blueprint": "Realizes the finite-level coefficient tensor comparison required by the adic-stage paragraph of def-weil-exceptional-inverse-image, before deriving the coefficient reductions of exceptional inverse image. Preserves the seeded proper/open projection route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-0f0g",
+    "why": "Unbounded torsion proper projection for the proper constituent of the chosen compactification. This unit defines operations and has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Canonical signed tensor symmetry changes the factor order of proper/open comparisons. This unit defines operations and has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "Canonical termwise composition comparison and its unit normalization. This unit defines operations and has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic counit projection shift/unit identity on ringed topoi, specialized to constant coefficients. This unit defines operations and has no replacement for this generic tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant module pullback agrees with ringed pullback. This unit defines operations and has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Identifies canonical K-injective shifts with the adjunction-compatible shifts. This unit defines operations and has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Canonical derived tensor action unitors. This unit defines operations and has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Exact constants on arbitrary module complexes. This unit defines operations and has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Pullback of any constant complex is the same constant complex. This unit defines operations and has no replacement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-0f0g",
+  "lem-kun-tensor-sym",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-tensor-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-57094a3b4",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-57094a3b4 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. No new nodes, no fixes; review.md has the detail. The statement is unchanged, so nothing is weakened, and the parent lem-pur-etale-exceptional-constant-tensor uses exactly its L=V_Y specialization, its shift square and its unit. Source checks: Zheng Thm 2.18(2), printed p.12, has the coefficient first, matching the item's L-first order; Stacks 0F0G (etale-cohomology.tex:20193) is proper f, any torsion ring, unbounded inputs, which is lem-kun-0f0g. Hypotheses: C finite and killed by ℓ^N is torsion; the compactification gives j open and r proper. Steps 1-2: the proper projection map and the open map (lem-pur-etale-open-derived-tensor at M=r^*L) are conjugated by tensor swaps. I checked that the two swap signs on the open map cancel, so in M-first order it is the plain degreewise map. j^*r^*≅f^* comes from lem-kun-derived-pullback-composition-monoidal. Step 3: I checked the cochain signs myself. The first-factor shift is the identity and the second-factor shift carries (-1)^{np}; then (-1)^{p(q-n)}(-1)^{np}=(-1)^{pq}, so the one-shift square of lem-weil-pbc-ringed-projection-mate-exact moves to coefficient-first order. lem-weil-pbc-derived-adjunction-shift supplies the canonical shift on Rr_*, and the one-shift square iterates to all n. Step 4: reindexing summand by summand works for unbounded direct-sum totals, and the unit map a⊗e↦ae is the left unitor. Step 5: the unit equation of the composition node gives P_{C_Y,K}=1. Step 6: exact constants plus lem-kun-pullback-constant on complexes give f^*V_Y≅V_X, and the inverse square follows. Edge cases U=∅, K=0, j=id, r=id, C=0, odd/odd degrees all check out. Duplicates: lem-sf-etale-ambient-adjoint-projection (NV PASS today) proves invertibility of the same map in M-first order but has no shift or unit clauses, so the item is not a duplicate. Maintainer note: Steps 1-2 could have cited it; advisory only. Other candidates (lem-weil-finite-compact-projection-formula, lem-sp-finite-ring-compact-support-projection, lem-pur-adic-projection-shift-coherence) are narrower, pro-étale or adic. All 9 tool_uses are accepted as generic inputs (the unit has uses:[]). There is no SGA citation and no repair note. Batch-5 flag on lem-kun-0f0g: accepted. The proper projection formula is a general six-functor result that neither assumption gives, and the chain reaches sec-poincare-duality only through the generic lemma lem-pod-lisse-module-sheaves-as-module-objects. The same citation was accepted in the NV ambient-projection PASS."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupportProjectionShiftUnit",
+  "declaration": "AlgebraicGeometry.Etale.etaleSupportProjectionShiftUnit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportProjectionSource",
+   "AlgebraicGeometry.Etale.supportProjectionTarget",
+   "AlgebraicGeometry.Etale.supportProjectionSourceCommShift",
+   "AlgebraicGeometry.Etale.supportProjectionTargetCommShift",
+   "AlgebraicGeometry.Etale.supportProjectionMap",
+   "AlgebraicGeometry.Etale.supportProjectionTargetUnit",
+   "AlgebraicGeometry.Etale.supportProjectionUnitA",
+   "AlgebraicGeometry.Etale.supportProjectionUnitB",
+   "AlgebraicGeometry.Etale.SupportProjectionCoherent",
+   "AlgebraicGeometry.Etale.supportConstantUnitIso",
+   "AlgebraicGeometry.Etale.SupportConstantPullbackCoherent",
+   "AlgebraicGeometry.Etale.etaleSupportProjectionShiftUnit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupportProjectionShiftUnit.lean",
+  "statement": "theorem etaleSupportProjectionShiftUnit (k : Type u) [Field k] [IsAlgClosed k] (p ell : ℕ) [CharP k p] (_hp : 0 < p) (_hell : ell.Prime) (_hne : ell ≠ p) (C : Type (u + 1)) [CommRing C] [Finite C] (_hC : ∃ N : ℕ, (ell ^ N : C) = 0) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : ∃ e : supportProjectionSource (ModuleCat.{u + 1} C) c ≅ supportProjectionTarget (ModuleCat.{u + 1} C) c, SupportProjectionCoherent (ModuleCat.{u + 1} C) c e ∧ (∀ K : DerivedCategoryModule C X, NatTrans.CommShift (Functor.whiskerLeft (constantFunctor C Y) (e.hom.app K)) ℤ ∧ NatTrans.CommShift (Functor.whiskerLeft (constantFunctor C Y) (e.inv.app K)) ℤ) ∧ SupportConstantPullbackCoherent (ModuleCat.{u + 1} C) f (constantFunctorCompLeftDerivedUpperStarIso C f)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f654b16fe",
+  "group": "N7",
+  "result": "pass",
+  "note": "Only the item's lean record changed; lean.statement matches the file verbatim. supportProjectionMap = sym_Y^-1 ≫ projectionMapOfCompactification (proper counit PF of g, inverse open j_! tensor iso, Lg^*Li^*≅Lf^*) ≫ F(sym_X), where F = D(i_!)⋙R(g_*): the node's coefficient-first composite, no arbitrary map. ∃ e with e.hom pinned; CommShift of hom and inv for the canonical first-variable shifts; unit equations via derivedTensorLeftUnitor and leftDerivedUpperStarUnitIso. Constant pullback: the canonical constantFunctorCompLeftDerivedUpperStarIso with shift and unit (supportConstantUnitIso), and the whiskered constant specializations. Hypotheses (alg. closed char p>0, ℓ≠p prime, finite C killed by ℓ^N, separated finite-type f over k, finite-type X and Y with no separatedness over k, Compactification) are exact; C : Type (u+1) is the recorded convention. Edge cases C=0, empty schemes, id factors, all n∈ℤ are covered. No duplicate (upstream has only the K-first shift instance, no unit). Docstrings carry Zheng 2.18(2)/2.26, Stacks 0F0G/0B56/0GL1 and the six proof steps. Advisory: uncited upstream owners (projectionMapOfCompactification, constantFunctor, constantFunctorCompLeftDerivedUpperStarIso, derivedTensorLeftUnitor, unit isos); stray CompactObject sentence in the report. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b734b",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261026T002138-L-60288",
+  "kind": "interface",
+  "note": "independent cc review: SupportProjectionCoherent new abbrev (BifunctorProjectionCoherent + UnitA/UnitB) unfolded against old def body: identical conjuncts and instances; item theorem signature vs clone 7c3c838 unchanged; both importers compiled against delivered modules; axioms clean"
+ }
+}

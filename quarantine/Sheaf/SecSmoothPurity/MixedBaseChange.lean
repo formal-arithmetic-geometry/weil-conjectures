@@ -5,26 +5,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SecSmoothPurity.ReductionDirectImage
-public import Sheaf.SecSmoothPurity.ReductionExceptional
+public import Sheaf.SecSmoothPurity.MixedBaseChangeOperations
+public import Sheaf.SecSmoothPurity.ReductionExceptionalObjects
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Compactification.BaseChange
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 
-public import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
-import Sheaf.SixFunctors.CtfStabilityDirectImages
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
-import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
+import Sheaf.SecSmoothPurity.MixedCompactSupportScalar
+import Sheaf.SecSmoothPurity.MixedBaseChangeInput
 
 /-!
 # Mixed finite-coefficient base change
@@ -43,6 +32,8 @@ constructible finite-Tor categories.
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+-- Keep the subcategory objects and arrows shared during proof cleanup.
+set_option cleanup.letToHave false
 
 universe u
 
@@ -51,105 +42,93 @@ open AlgebraicGeometry AlgebraicGeometry.ProEtale AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Change derived realization coordinates for an exact fixed-scalar functor.
-Source: blueprint mixed-base-change proof, Step 1 (blueprint: det-sp-mixed-base-change). -/
-def mixedDerivedTransport (A : Type u) [CommRing A] [Finite A]
-    {X Y : Scheme.{u}}
-    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) ⥤
-      Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
-    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
-    ((sfIntrinsicModuleEquivalence X A).inverse ⋙ F ⋙
-        (sfIntrinsicModuleEquivalence Y A).functor).mapDerivedCategory ≅
-      (sfIntrinsicDerivedEquivalence X A).inverse ⋙ F.mapDerivedCategory ⋙
-        (sfIntrinsicDerivedEquivalence Y A).functor :=
-  Functor.mapDerivedCategoryCompIso _ _ ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _)
+attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
+  directImageScalarPullbackIso directImageScalarComparison mixedOpenBaseChangeIso
+  directImageConstantExchange directImageConstantAdjunction reductionOpenScalarIso
+  completedAdicDerivedChange proEtaleRingDerivedAdjunction
+  mixedCompactSupportExchange reductionDirectImageComparison
 
-/-- Transport the actual ordinary open base-change isomorphism to intrinsic coefficients.
-The realization units cancel at the middle schemes; the outside comparisons are fixed
-by their sectionwise units. No inverse is chosen from bare existence.
-Source: blueprint mixed-base-change proof, Steps 1 and 3
-(blueprint: det-sp-mixed-base-change). -/
-def mixedOpenBaseChangeIso (A : Type u) [CommRing A] [Finite A]
-    {U' U Z' Z : Scheme.{u}} (h : U' ⟶ U) (j' : U' ⟶ Z')
-    (j : U ⟶ Z) (g : Z' ⟶ Z) [IsOpenImmersion j] [IsOpenImmersion j']
-    (sq : IsPullback h j' j g) :
-    (sfIntrinsicExtensionByZero j A).mapDerivedCategory ⋙
-        proEtaleConstantRingDerivedPullback A g ≅
-      proEtaleConstantRingDerivedPullback A h ⋙
-        (sfIntrinsicExtensionByZero j' A).mapDerivedCategory := by
-  let Λ := ULift.{u + 1, u} A
-  let J := (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory
-  let J' := (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j').mapDerivedCategory
-  let V := (upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategory
-  let H := (upperStar (ModuleCat.{u + 1} Λ) h).mapDerivedCategory
-  let EU := sfIntrinsicDerivedEquivalence U A
-  let EZ := sfIntrinsicDerivedEquivalence Z A
-  let EU' := sfIntrinsicDerivedEquivalence U' A
-  let EZ' := sfIntrinsicDerivedEquivalence Z' A
-  exact Functor.isoWhiskerLeft _ (openSquareDerivedPullbackModel A g) ≪≫
-    Functor.isoWhiskerRight (mixedDerivedTransport A _) _ ≪≫
-    Functor.isoWhiskerLeft _ (mixedDerivedTransport A _) ≪≫
-    Functor.isoWhiskerLeft (EU.inverse ⋙ J) (EZ.funInvIdAssoc (V ⋙ EZ'.functor)) ≪≫
-    Functor.isoWhiskerLeft EU.inverse
-      (Functor.isoWhiskerRight (ordinaryOpenExtensionBaseChangeIso Λ h j' j g sq)
-        EZ'.functor) ≪≫
-    Functor.isoWhiskerLeft (EU.inverse ⋙ H) (EU'.funInvIdAssoc (J' ⋙ EZ'.functor)).symm ≪≫
-    Functor.isoWhiskerLeft (EU.inverse ⋙ H ⋙ EU'.functor)
-      (mixedDerivedTransport A
-        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j')).symm ≪≫
-    Functor.isoWhiskerRight
-      (mixedDerivedTransport A (upperStar (ModuleCat.{u + 1} Λ) h)).symm _ ≪≫
-    Functor.isoWhiskerRight (openSquareDerivedPullbackModel A h).symm _
+private theorem mixedIsoOfComposites
+    {C : Type*} [Category C] {P Q R S T U : C}
+    (x : P ⟶ Q) (y : Q ⟶ R) (z : R ⟶ S)
+    (a : P ⟶ T) (b : T ⟶ U) (c : U ⟶ S)
+    [IsIso x] [IsIso y] [IsIso z] [IsIso c]
+    (h : x ≫ y ≫ z = a ≫ b ≫ c) : IsIso (a ≫ b) := by
+  have : IsIso ((a ≫ b) ≫ c) := by
+    rw [Category.assoc, ← h]
+    infer_instance
+  exact IsIso.of_isIso_comp_right (a ≫ b) c
 
-/-- The coefficient-independent pullback compactification.
-Source: blueprint mixed-base-change Step 1 (blueprint: det-sp-mixed-base-change). -/
-abbrev mixedPullbackCompactification
-    {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare h f' f g)
-    (c : Compactification f) : Compactification f' :=
-  c.ofIsPullback
-    (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)
+private theorem mixedCancelIso
+    {C : Type*} [Category C] {P Q R : C}
+    (t : P ⟶ Q) (ht : IsIso t) {m n : Q ⟶ R} (h : t ≫ m = t ≫ n) : m = n := by
+  let _ := ht
+  exact (cancel_epi t).1 h
 
-/-- The canonical compact-support exchange, in the same intrinsic constant-ring
-coordinates as b. Its proper factor is the normalized counit mate, and its open
-factor is the existing ordinary base-change isomorphism transported above.
-Source: blueprint mixed-base-change proof Step 4
-(blueprint: det-sp-mixed-base-change). -/
-def mixedCompactSupportExchange (A : Type u) [CommRing A] [Finite A]
-    {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare h f' f g)
-    (c : Compactification f) :
-    reductionCompactSupport A c.i c.g ⋙ proEtaleConstantRingDerivedPullback A g ⟶
-      proEtaleConstantRingDerivedPullback A h ⋙
-        reductionCompactSupport A (mixedPullbackCompactification sq c).i
-          (mixedPullbackCompactification sq c).g := by
-  let hp := IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
-  let cp := mixedPullbackCompactification sq c
-  let psq : ChosenCartesianSquare (pullback.fst c.g g) (pullback.snd c.g g) c.g g :=
-    { w := pullback.condition
-      isoPullback := Iso.refl _
-      hom_fst := Category.id_comp _
-      hom_snd := Category.id_comp _ }
-  exact Functor.whiskerLeft (sfIntrinsicExtensionByZero c.i A).mapDerivedCategory
-      (directImageConstantExchange A psq) ≫
-    Functor.whiskerRight
-      (mixedOpenBaseChangeIso A h cp.i c.i (pullback.fst c.g g)
-        (c.isPullback_i_ofIsPullback hp)).hom (directImageConstantPush A cp.g)
+private theorem mixedCounitNaturality
+    {C D : Type*} [Category C] [Category D]
+    {P : ObjectProperty C} {Q : ObjectProperty D}
+    (F : C ⥤ D) (hF : ∀ M : P.FullSubcategory, Q (F.obj M.obj))
+    (G : Q.FullSubcategory ⥤ P.FullSubcategory)
+    (adj : Q.lift (P.ι ⋙ F) hF ⊣ G)
+    {K L : Q.FullSubcategory} (r : K ⟶ L) :
+    F.map (G.map r).hom ≫ (adj.counit.app L).hom =
+      (adj.counit.app K).hom ≫ r.hom := by
+  exact congrArg (fun z ↦ z.hom) (adj.counit.naturality r)
 
-/-- Pullback on the full intrinsic Dctf categories; the certificate affects only membership.
-Source: blueprint mixed-base-change proof Steps 4 and 6
-(blueprint: det-sp-mixed-base-change). -/
-def mixedCtfPullback (A : Type u) [CommRing A] [Finite A]
-    {U V : Scheme.{u}} (g : U ⟶ V)
-    (hg : ∀ K : spFiniteConstructibleTorCategory V A,
-      spFiniteConstructibleTor U A ((proEtaleConstantRingDerivedPullback A g).obj K.obj)) :=
-  (spFiniteConstructibleTor U A).lift
-    ((spFiniteConstructibleTor V A).ι ⋙ proEtaleConstantRingDerivedPullback A g) hg
+private theorem mixedExceptionalCalc
+    {C D C' D' C₁ D₁ C₁' D₁' : Type*}
+    [Category C] [Category D] [Category C'] [Category D']
+    [Category C₁] [Category D₁] [Category C₁'] [Category D₁']
+    (FA : C ⥤ D) (FB : C₁ ⥤ D₁) (FAp : C' ⥤ D') (FBp : C₁' ⥤ D₁')
+    (SX : C ⥤ C₁) (SY : D ⥤ D₁) (SXp : C' ⥤ C₁') (SYp : D' ⥤ D₁')
+    (UA : C ⥤ C') (UB : C₁ ⥤ C₁') (VA : D ⥤ D') (VB : D₁ ⥤ D₁')
+    (b : FA ⋙ SY ⟶ SX ⋙ FB) (bp : FAp ⋙ SYp ⟶ SXp ⋙ FBp)
+    (βA : FA ⋙ VA ⟶ UA ⋙ FAp) (βB : FB ⋙ VB ⟶ UB ⋙ FBp)
+    (lamX : SX ⋙ UB ≅ UA ⋙ SXp) (lamY : SY ⋙ VB ≅ VA ⋙ SYp)
+    (K : D) (N : C) (NAp : C') (NB : C₁) (NBp₀ NBp₁ : C₁')
+    (c : SX.obj N ⟶ NB) (cp : SXp.obj NAp ⟶ NBp₁)
+    (eA : UA.obj N ⟶ NAp) (eB : UB.obj NB ⟶ NBp₀) (r : NBp₀ ⟶ NBp₁)
+    (εA : FA.obj N ⟶ K) (εB : FB.obj NB ⟶ SY.obj K)
+    (εAp : FAp.obj NAp ⟶ VA.obj K)
+    (εBp₀ : FBp.obj NBp₀ ⟶ VB.obj (SY.obj K))
+    (εBp₁ : FBp.obj NBp₁ ⟶ SYp.obj (VA.obj K))
+    (hc : b.app N ≫ FB.map c ≫ εB = SY.map εA)
+    (hcp : bp.app NAp ≫ FBp.map cp ≫ εBp₁ = SYp.map εAp)
+    (heA : βA.app N ≫ FAp.map eA ≫ εAp = VA.map εA)
+    (heB : βB.app NB ≫ FBp.map eB ≫ εBp₀ = VB.map εB)
+    (hε : FBp.map r ≫ εBp₁ = εBp₀ ≫ lamY.hom.app K)
+    (hmix : lamY.inv.app (FA.obj N) ≫ VB.map (b.app N) ≫ βB.app (SX.obj N) =
+      SYp.map (βA.app N) ≫ bp.app (UA.obj N) ≫ FBp.map (lamX.inv.app N)) :
+    (SYp.map (βA.app N) ≫ bp.app (UA.obj N)) ≫
+        FBp.map (SXp.map eA ≫ cp) ≫ εBp₁ =
+      (SYp.map (βA.app N) ≫ bp.app (UA.obj N)) ≫
+        FBp.map (lamX.inv.app N ≫ UB.map c ≫ eB ≫ r) ≫ εBp₁ := by
+  have hleft : (SYp.map (βA.app N) ≫ bp.app (UA.obj N)) ≫
+      FBp.map (SXp.map eA ≫ cp) ≫ εBp₁ = SYp.map (VA.map εA) := by
+    simp only [Functor.map_comp, Category.assoc]
+    slice_lhs 2 3 => exact (bp.naturality eA).symm
+    simp only [Functor.comp_map, Functor.comp_obj, Category.assoc]
+    rw [hcp, ← SYp.map_comp, ← SYp.map_comp]
+    exact congrArg SYp.map heA
+  rw [hleft]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% (hmix), hε]
+  slice_rhs 3 4 => exact (βB.naturality c).symm
+  simp only [Functor.comp_map, Functor.comp_obj, Category.assoc]
+  slice_rhs 4 6 => exact heB
+  slice_rhs 2 4 =>
+    exact (by simpa only [Functor.map_comp, Category.assoc] using congrArg VB.map hc)
+  have hn := lamY.inv.naturality εA
+  simpa only [Functor.comp_map, Functor.comp_obj, Category.assoc,
+    Iso.inv_hom_id_app, Category.comp_id] using
+      congrArg (fun z ↦ z ≫ lamY.hom.app K) hn
+
 
 set_option maxHeartbeats 600000 in
 -- Elaborating the four full-subcategory adjunctions and their counit equations
 -- exceeds the default heartbeat budget; the ordinary 60-second file limit is retained.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The compact-support and exceptional mixed coefficient/base-change identities.
 All comparison maps are specified: beta is the proper/open composite above, c and c'
 obey their actual coefficient-counit equations, and eA and eB obey the base-change
@@ -160,35 +139,21 @@ The right adjoints are right adjoints on Dctf, with no assertion about ambient a
 Source: main-20261015, sk-prop-sp-purity-bc-mixed.md
 (blueprint: det-sp-mixed-base-change).
 
-Proof, following the six steps of the DAG:
-1. Pull back the chosen compactification. Smooth relative dimension is unchanged.
-   Compute the scalar/pullback comparisons on flat K-flat resolutions: both routes
-   send a local pure tensor to the same tensor with the composite inverse image.
-   These identifications respect the square comparison and its coefficient action.
-2. For the proper factor, transpose the two mixed composites under the primed
-   B-adjunction. Both transposes are scalar extension of the pullback of the
-   A-counit followed by the pullback-square comparison. Use the defining counit
-   equation of the coefficient mate and naturality of the square comparison.
-   The adjunction bijection equates the two proper mixed composites.
-3. For the open factor, extension by zero of a flat-term K-flat resolution is again
-   flat-term K-flat: tensoring it with Q is j_!(P tensor j^*Q); both open functors
-   are exact, and j_! preserves the sums in total tensor products. Both mixed maps
-   restrict to the identity on the open. The open adjunction detects maps from j'_!,
-   proving the open mixed square without detecting derived maps by geometric stalks.
-4. The actual formulas are b = Rp_*(open scalar map) followed after the proper mate,
-   and beta = Rp'_*(open base change) after proper exchange. Finite-ring constructible
-   derived origin supplies bounded etale antecedents. Proper exchange agrees with
-   transported exchange by its counit-mate normalization; the open factors agree by
-   restriction and the open adjunction. Thus beta is the specified exchange, invertible
-   on Dctf. Pullback and scalar extension preserve Dctf, so all inputs are legitimate.
-5. Substitute these formulas, move the open scalar map through proper exchange by
-   naturality, use the proper and open mixed squares, and then move open base change
-   through the proper coefficient mate by naturality. The result is the first identity.
-6. Transpose both exceptional composites under the primed B-adjunction. The left
-   transpose is scalar extension of the pulled-back A-counit after the inverses of
-   scalar-extended beta_A and b'. The right transpose is the same pulled-back counit
-   after the inverses of pullback(b) and beta_B. The first identity at M = GA(K),
-   inverted, equates those factors. The adjunction bijection gives the second identity.
+Proof:
+1. Apply mixedCompactSupportScalar, the inverse-comparison compatibility square
+   for the specified proper/open comparisons, to obtain the first identity.
+2. At N = GA(K), mixedBaseChange_input certifies that the pullback is in Dctf.
+   reductionDirectImage_isIso makes b(N) invertible, and mixedBaseChange_input
+   makes beta_B(SN) invertible. The first identity therefore makes the common
+   precomposition t = S(beta_A(N)) followed by b'(g'^*N) invertible.
+3. Regard the two exceptional composites as maps from the same full-subcategory
+   object and transpose under adjBp. The faithful inclusion identifies their
+   transposes with the ambient counit composites. After precomposing by t,
+   naturality of b', hcp and heA reduce the first transpose to S(g^*(epsilon_A)).
+   For the second, the first mixed identity, counit naturality, naturality of
+   beta_B, heB and hc give that same map. Naturality of the scalar/pullback
+   isomorphism cancels the remaining pair of inverse comparisons. Cancel t and
+   use injectivity of the adjunction Hom equivalence.
 -/
 theorem mixedBaseChange
     (ℓ pchar : ℕ) [Fact ℓ.Prime] (hp : 0 < pchar) (hℓ : pchar ≠ ℓ)
@@ -310,6 +275,101 @@ theorem mixedBaseChange
           eB ((reductionCtfScalar φ Y hSY).obj K) ≫
           (GBp.map (ObjectProperty.homMk
             ((directImageScalarPullbackIso φ g).hom.app K.obj))).hom) := by
-  sorry
+  have hmix (M : spFiniteConstructibleTorCategory X A) :=
+    mixedCompactSupportScalar sq cpt φ M.obj
+  refine ⟨hmix, ?_⟩
+  intro K
+  have hN := (mixedBaseChange_input ℓ pchar hp hℓ k f cpt g' f' g sq A hA (GA.obj K).obj (GA.obj
+    K).property).1
+  let Q : spFiniteConstructibleTorCategory X' B :=
+    ⟨(scalarExtensionFunctor φ X').obj ((proEtaleConstantRingDerivedPullback A g').obj (GA.obj
+      K).obj), hSXp ⟨(proEtaleConstantRingDerivedPullback A g').obj (GA.obj K).obj, hN⟩⟩
+  let L := (reductionCtfScalar φ Y' hSYp).obj ((mixedCtfPullback A g hVA).obj K)
+  have hbN : IsIso ((reductionDirectImageComparison φ cpt.i cpt.g).app (GA.obj K).obj) := by
+    have hbnd : Set.Finite {i : ℤ | ¬ IsZero
+        ((DerivedCategory.homologyFunctor _ i).obj (GA.obj K).obj)} := by
+      obtain ⟨a, z, haz, hz⟩ := (GA.obj K).property.1
+      apply (Set.finite_Icc a z).subset
+      intro i hi
+      constructor <;> by_contra! hn
+      · exact hi (hz i (.inl hn))
+      · exact hi (hz i (.inr hn))
+    exact (reductionDirectImage_isIso ℓ pchar hp hℓ k f cpt.i cpt.g cpt.comm.symm hA hB φ
+      (GA.obj K).obj hbnd (GA.obj K).property.2.1 (GA.obj K).property.2.2).1
+  have := hbN
+  have : IsIso ((mixedCompactSupportExchange B sq cpt).app ((scalarExtensionFunctor φ X).obj (GA.obj
+    K).obj)) :=
+    (mixedBaseChange_input ℓ pchar hp hℓ k f cpt g' f' g sq B hB
+      ((scalarExtensionFunctor φ X).obj (GA.obj K).obj) (hSX (GA.obj K))).2
+  have hcommonIso : IsIso ((scalarExtensionFunctor φ Y').map ((mixedCompactSupportExchange A sq
+    cpt).app
+    (GA.obj K).obj) ≫ (reductionDirectImageComparison φ (mixedPullbackCompactification sq cpt).i
+    (mixedPullbackCompactification sq cpt).g).app ((proEtaleConstantRingDerivedPullback A g').obj
+    (GA.obj K).obj)) := mixedIsoOfComposites
+    ((directImageScalarPullbackIso φ g).inv.app ((reductionCompactSupport A cpt.i cpt.g).obj (GA.obj
+      K).obj)) ((proEtaleConstantRingDerivedPullback B g).map ((reductionDirectImageComparison φ
+      cpt.i cpt.g).app (GA.obj K).obj)) ((mixedCompactSupportExchange B sq cpt).app
+      ((scalarExtensionFunctor φ X).obj (GA.obj K).obj))
+    ((scalarExtensionFunctor φ Y').map ((mixedCompactSupportExchange A sq cpt).app (GA.obj K).obj))
+      ((reductionDirectImageComparison φ (mixedPullbackCompactification sq cpt).i
+      (mixedPullbackCompactification sq cpt).g).app ((proEtaleConstantRingDerivedPullback A g').obj
+      (GA.obj K).obj)) ((reductionCompactSupport B (mixedPullbackCompactification sq cpt).i
+      (mixedPullbackCompactification sq cpt).g).map ((directImageScalarPullbackIso φ g').inv.app
+      (GA.obj K).obj))
+    (hmix (GA.obj K))
+  let m : Q ⟶ GBp.obj L := ObjectProperty.homMk
+    ((scalarExtensionFunctor φ X').map (eA K) ≫ (cp.app ((mixedCtfPullback A g hVA).obj K)).hom)
+  let n : Q ⟶ GBp.obj L := ObjectProperty.homMk
+    ((directImageScalarPullbackIso φ g').inv.app (GA.obj K).obj ≫
+      (proEtaleConstantRingDerivedPullback B g').map (c.app K).hom ≫
+      eB ((reductionCtfScalar φ Y hSY).obj K) ≫
+      (GBp.map (ObjectProperty.homMk ((directImageScalarPullbackIso φ g).hom.app K.obj))).hom)
+  suffices hm : m = n by exact congrArg (fun z ↦ z.hom) hm
+  apply (adjBp.homEquiv Q L).symm.injective
+  apply (spFiniteConstructibleTor Y' B).ι.map_injective
+  change (reductionCompactSupport B (mixedPullbackCompactification sq cpt).i
+    (mixedPullbackCompactification sq cpt).g).map m.hom ≫ (adjBp.counit.app L).hom =
+    (reductionCompactSupport B (mixedPullbackCompactification sq cpt).i
+      (mixedPullbackCompactification sq cpt).g).map n.hom ≫ (adjBp.counit.app L).hom
+  apply mixedCancelIso ((scalarExtensionFunctor φ Y').map ((mixedCompactSupportExchange A sq
+    cpt).app
+    (GA.obj K).obj) ≫ (reductionDirectImageComparison φ (mixedPullbackCompactification sq cpt).i
+    (mixedPullbackCompactification sq cpt).g).app ((proEtaleConstantRingDerivedPullback A g').obj
+    (GA.obj K).obj)) hcommonIso
+  have hε' := mixedCounitNaturality
+    (reductionCompactSupport B (mixedPullbackCompactification sq cpt).i
+      (mixedPullbackCompactification sq cpt).g) hFBp GBp adjBp
+    (ObjectProperty.homMk ((directImageScalarPullbackIso φ g).hom.app K.obj) :
+      (mixedCtfPullback B g hVB).obj ((reductionCtfScalar φ Y hSY).obj K) ⟶ L)
+  have hcalc := mixedExceptionalCalc (reductionCompactSupport A cpt.i cpt.g)
+    (reductionCompactSupport B
+    cpt.i cpt.g) (reductionCompactSupport A (mixedPullbackCompactification sq cpt).i
+    (mixedPullbackCompactification sq cpt).g) (reductionCompactSupport B
+    (mixedPullbackCompactification sq cpt).i (mixedPullbackCompactification sq cpt).g)
+    (scalarExtensionFunctor φ X) (scalarExtensionFunctor φ Y) (scalarExtensionFunctor φ X')
+    (scalarExtensionFunctor φ Y') (proEtaleConstantRingDerivedPullback A g')
+    (proEtaleConstantRingDerivedPullback B g') (proEtaleConstantRingDerivedPullback A g)
+    (proEtaleConstantRingDerivedPullback B g)
+    (reductionDirectImageComparison φ cpt.i cpt.g) (reductionDirectImageComparison φ
+      (mixedPullbackCompactification sq cpt).i (mixedPullbackCompactification sq cpt).g)
+      (mixedCompactSupportExchange A sq cpt) (mixedCompactSupportExchange B sq cpt)
+      (directImageScalarPullbackIso φ g') (directImageScalarPullbackIso φ g) K.obj (GA.obj K).obj
+    (GAp.obj ((mixedCtfPullback A g hVA).obj K)).obj
+    (GB.obj ((reductionCtfScalar φ Y hSY).obj K)).obj
+    (GBp.obj ((mixedCtfPullback B g hVB).obj
+      ((reductionCtfScalar φ Y hSY).obj K))).obj
+    (GBp.obj L).obj
+    (c.app K).hom (cp.app ((mixedCtfPullback A g hVA).obj K)).hom
+    (eA K) (eB ((reductionCtfScalar φ Y hSY).obj K))
+    (GBp.map (ObjectProperty.homMk ((directImageScalarPullbackIso φ g).hom.app K.obj))).hom
+    (adjA.counit.app K).hom
+    (adjB.counit.app ((reductionCtfScalar φ Y hSY).obj K)).hom
+    (adjAp.counit.app ((mixedCtfPullback A g hVA).obj K)).hom
+    (adjBp.counit.app ((mixedCtfPullback B g hVB).obj
+      ((reductionCtfScalar φ Y hSY).obj K))).hom
+    (adjBp.counit.app L).hom
+    (hc K) (hcp ((mixedCtfPullback A g hVA).obj K)) (heA K)
+    (heB ((reductionCtfScalar φ Y hSY).obj K)) hε' (hmix (GA.obj K))
+  exact hcalc
 
 end AlgebraicGeometry.ProEtale

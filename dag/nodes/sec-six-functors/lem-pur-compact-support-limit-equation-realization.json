@@ -1,0 +1,347 @@
+{
+ "id": "lem-pur-compact-support-limit-equation-realization",
+ "kind": "statement",
+ "title": "Realization of compact-support path equations through the completed limit",
+ "statement": "Fix $R=\\mathcal O_E$, $I=(\\varpi_E)$, $P_n=R/I^n$ and the finite-field, pro-etale and completed coefficient conventions of [def-pur-conventions, def-weil-pbc-adic-coefficient-datum]. All schemes and maps lie in the compact-support domains of [fix-lem-exchanges]; in particular the schemes are separated of finite type over $k$, all open compactification factors are quasi-compact, and the integral input $K$ and all intermediate objects are derived complete with the compatible finite etale-origin witnesses and amplitude bounds of those domains. On each scheme $T$ put $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(\\underline R_T))$ and $L_T=R\\lim$ on its derived category [def-cbc-strict-constant-tower-operations, prop-weil-pbc-rlim-functoriality]. Let $\\operatorname{Res}_T$ be restriction from completed to constant coefficients, and $\\mathcal R_T$ the strict reduction functor, with the completion-unit and finite-reduction normalizations of [lem-weil-pbc-constant-completion-equivalence].\nLet $W$ be a finite well-typed word in completed pullbacks, proper derived direct images and quasi-compact open extensions, with compact support represented by its supplied proper/open factorization [def-exchange-projection, def-cbc-completed-exchange-map]. Let $\\widetilde W$ replace these letters by their normalized constant-$R$ strict-tower operations. The specified corner comparison\n$$a_{W,K}:\\operatorname{Res}(WK)\\xrightarrow{\\sim}L_T(\\widetilde W\\operatorname{Res}\\mathcal R(K))$$\nis obtained recursively from the completion units, the canonical proper direct-image/limit comparison [prop-weil-pbc-direct-image-limits], and the open-extension/strict-reduction-limit comparison [lem-cbc-completed-extension-zero-comparison], with the pullback comparisons fixed in the completed exchange definition.\nFor any composable path $\\alpha:W\\to V$ whose arrows are the specified compact-support exchanges, pullback compositors or compactification-refinement comparisons on these domains, let $\\widetilde\\alpha:\\widetilde W\\to\\widetilde V$ be the corresponding constant-tower path, with each proper strict factor the one in [def-cbc-completed-exchange-map] and each open factor the canonical strict open comparison. Then these specified comparisons satisfy\n$$a_{V,K}\\circ\\operatorname{Res}(\\alpha_K)=L_T(\\widetilde\\alpha_{\\operatorname{Res}\\mathcal R(K)})\\circ a_{W,K}.$$\nThe equation also holds for whiskering such paths by the displayed operation words. In particular, if two such parallel strict paths are equal as derived strict-tower maps, their completed paths are equal. The same conclusion applies to the refinement exchange equations and cocycles. This is a comparison of actual maps using the prescribed source and target identifications; equality of finite evaluated maps is not a hypothesis sufficient for it.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent-compatibility paragraph, integral base-change constituent; extracted from returned lem-pur-weil-basechange-semilinear-pasting Step 8 (normalized constant-to-completed limit transport). The normalized derived-limit comparison is an agent auxiliary assertion; the report identifies its Stacks constituents separately."
+ },
+ "stmt_deps": [
+  "fix-lem-exchanges",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-cbc-completed-exchange-map",
+  "def-pur-conventions",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-strict-constant-tower-operations",
+  "prop-weil-pbc-rlim-functoriality",
+  "def-exchange-projection",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-realization-data",
+  "def-weil-finite-tor-amplitude",
+  "def-sf-constant-completed-reduction-transport",
+  "def-sf-integral-support-refinement-comparison",
+  "def-sf-comparison-inverse-or-zero",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Extract endpoint finiteTorConstructibleIntegral from IntegralDomain by cases on each expression (the proved private integralDomain_output helper). Apply completeIntegralConstantRestriction to these two output objects. Their actual scalar completion units are invertible, and each reductionComparison is an isomorphism. Functoriality of total limit therefore makes both prescribed corners invertible.",
+   "uses": [
+    "lem-pur-complete-integral-constant-restriction",
+    "def-pur-compact-support-limit-equation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply compactSupportPathReductionSquare to the given prescribed path. The proved private categorical limit_square lemma expands each corner as eta followed by L(q), uses naturality of eta to move H(a) across it, combines the two consecutive L-maps, substitutes the reduction square, and uses map_comp and associativity. Specialize it to constantReduction, constantLimit and the actual completion unit. This proves the displayed square for every Path.",
+   "uses": [
+    "lem-pur-compact-support-path-reduction-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For two parallel paths with equal towerMap, their displayed squares give equal composites H(a) followed by the target corner. Cancel this invertible corner and apply injectivity of H.map between the two complete endpoint objects supplied by completeIntegralConstantRestriction. This gives a=a′ without testing finite evaluations.",
+   "uses": [
+    "lem-pur-complete-integral-constant-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-compact-support-limit-equation-data",
+  "lem-pur-compact-support-path-reduction-square",
+  "lem-pur-complete-integral-constant-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "T9 reduction of the original normalized limit-realization argument to scalar completeness and the pre-limit path reduction square; actual main Lean proof uses unit naturality, functor map_comp, corner cancellation and restricted faithfulness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of strict reduction compact support exchange maps identifies equations of completed maps by fully faithful constant to completed coefficient equivalence",
+   "results": "IsAdicComplete.StrictMono.of_comp_lift (Mathlib/RingTheory/AdicCompletion/Basic); AdicCompletion.transitionMap_comp_eval_apply (Mathlib/RingTheory/AdicCompletion/Basic); IsAdicComplete.StrictMono.of_lift (Mathlib/RingTheory/AdicCompletion/Basic); IsAdicComplete.StrictMono.factorPow_comp_extend (Mathlib/RingTheory/AdicCompletion/Basic); AdicCompletion.component_sumInv (Mathlib/RingTheory/AdicCompletion/Functoriality); IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq (Mathlib/RingTheory/AdicCompletion/Basic); AdicCompletion.sumInv_apply (Mathlib/RingTheory/AdicCompletion/Functoriality); InverseSystem.invLimEquiv_apply_coe (Mathlib/Order/DirectedInverseSystem)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion units and proper direct image inverse limit comparisons transport composition equations of compact support exchange transformations",
+   "results": "AbstractCompletion.compare_comp_eq_compare (Mathlib/Topology/UniformSpace/AbstractCompletion); CompactlySupportedContinuousMap.continuousMapEquiv_symm_apply (Mathlib/Topology/ContinuousMap/CompactlySupported); CompactlySupportedContinuousMap.compLinearMap (Mathlib/Topology/ContinuousMap/CompactlySupported); ZeroAtInftyContinuousMap.ContinuousMap.liftZeroAtInfty_symm_apply (Mathlib/Topology/ContinuousMap/ZeroAtInfty); ContinuousLinearEquiv.toCompactConvergenceCLM_symm_apply (Mathlib/Analysis/LocallyConvex/Montel); CompactlySupportedContinuousMap.ContinuousMap.liftCompactlySupported (Mathlib/Topology/ContinuousMap/CompactlySupported); CompactlySupportedContinuousMap.continuousMapEquiv_apply_toFun (Mathlib/Topology/ContinuousMap/CompactlySupported); preStoneCechExtend_extends (Mathlib/Topology/Compactification/StoneCech)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp (Mathlib.CategoryTheory.Functor.Basic); PresheafOfModules.map_comp (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModules.map_comp_assoc (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModules.mk (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModulesOfCommRing.mk (Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing); AlgebraicGeometry.PresheafedSpace.map_comp_c_app (Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport equality of compact support base change words from strict towers through derived inverse limit to completed coefficient sheaves",
+   "results": "IsBaseChange.finsuppPow (Mathlib.RingTheory.TensorProduct.IsBaseChangePi); AdicCompletion.transitionMap_comp_eval_apply (Mathlib.RingTheory.AdicCompletion.Basic); InverseSystem.invLimEquiv_symm_apply_coe (Mathlib.Order.DirectedInverseSystem); InverseSystem.invLimEquiv.congr_simp (Mathlib.Order.DirectedInverseSystem); instHasLimitsOfShapeCondensed (Mathlib.Condensed.Limits); AlgebraicGeometry.quasiCompact_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact); CochainComplex.isStrictlyGE_of_iso (Mathlib.Algebra.Homology.Embedding.CochainComplex); InverseSystem.piEquivLim (Mathlib.Order.DirectedInverseSystem)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ll]imit|[Rr]lim|[Cc]ompletion.*[Ee]quiv",
+   "results": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean:96:   (adicCompletion.equiv K v).symm.toRingHom.comp; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean:97:     (UniformSpace.Completion.coeRingHom.comp (WithVal.equiv (v.valuation K)).symm); Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean:32:   ((Completion.equiv w).symm.toRingHom.comp; Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean:33:     (LiesOver.isometry_algebraMap w v).mapRingHom).comp (Completion.equiv v).toRingHom; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:36: - `NumberField.InfinitePlace.Completion.ringEquivRealOfIsReal` : the ring isomorphism; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:39: - `NumberField.InfinitePlace.Completion.ringEquivComplexOfIsComplex` : the ring isomorphism; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:89: /-- `Completion.toCompletion` and `Completion.ofCompletion` as an equivalence. -/; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:97: instance : NormedField v.Completion := fast_instance% (equivCompletion v).normedField; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean:136: /-- `Completion.toCompletion` as an isometry equivalence onto the underlying completion. -/; Mathlib/NumberTheory/Padics/WithVal.lean:186:     rw [Valued.valuedCompletion_apply, ← WithVal.apply_ofVal, withValUniformEquiv_cast_apply]; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean:40:   `v.adicCompletion ℚ ≃A[ℚ] ℚ_[primesEquiv v]`.; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean:41: - `Padic.adicCompletionEquiv p` : the continuous `ℚ`-algebra isomorphism; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean:43: - `Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv v` : the continuous `ℤ`-algebra; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean:45: - `PadicInt.adicCompletionIntegersEquiv p` : the continuous `ℤ`-algebra isomorphism; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean:144: /-- The continuous `ℚ`-algebra isomorphism between `v.adicCompletion ℚ` and `ℚ_[primesEquiv v]`. -/; Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean:81:       (RingEquiv.piCongrRight (fun ⟨_, hv⟩ => Completion.ringEquivRealOfIsReal hv)); Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean:83:         (RingEquiv.piCongrRight (fun v => Completion.ringEquivComplexOfIsComplex; Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean:324: on the idempotent completions. It shall be an equivalence of categories; Mathlib/Topology/CantorBendixson.lean:89: theorem iteratedDerivedSet_limit (ha : Order.IsSuccLimit a) :; Mathlib/Topology/CantorBendixson.lean:91:   simpa [iteratedDerivedSet] using gfpApprox_of_isSuccLimit relDerivedSet ha; Mathlib/Topology/CantorBendixson.lean:109:     simpa [iteratedDerivedSet_limit ha] using; Mathlib/Topology/UniformSpace/Completion.lean:372: def UniformCompletion.completeEquivSelf [CompleteSpace α] [T0Space α] : Completion α ≃ᵤ α :=; Mathlib/Topology/UniformSpace/Completion.lean:373:   AbstractCompletion.compareEquiv Completion.cPkg AbstractCompletion.ofComplete; Mathlib/Topology/UniformSpace/Completion.lean:511: def mapEquiv (e : α ≃ᵤ β) : Completion α ≃ᵤ Completion β := cPkg.mapEquiv cPkg e; Mathlib/Topology/UniformSpace/Completion.lean:529: def completionSeparationQuotientEquiv (α : Type u) [UniformSpace α] :",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"n_hits\": 9, \"note\": \"\", \"digest\": \"4b8320ba791eeca4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical naturality and ordinary limits, adic module completion or sheafification; no normalized completed compact-support path comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit transports compact support base change and refinement path equations with normalized completion unit comparisons",
+   "results": "{\"top\": [\"AbstractCompletion.compare_comp_eq_compare\", \"InverseSystem.pEquivOnLim\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"InverseSystem.globalEquiv_compatibility\", \"IsAdicComplete.of_comp_lift\", \"IsAdicComplete.of_lift\", \"AdicCompletion.transitionMap_comp_eval_apply\"], \"n_hits\": 8, \"note\": \"\", \"digest\": \"b2e0fdcc522799c8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical naturality and ordinary limits, adic module completion or sheafification; no normalized completed compact-support path comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support exchange transformations commute with total derived inverse limit under strict tower comparisons",
+   "results": "{\"top\": [\"DerivedCategory.TStructure.t\", \"CategoryTheory.Limits.limitFlipCompLimIsoLimitCompLim_inv_π_π\", \"CategoryTheory.Limits.limit.isoLimitCone_inv_π\", \"CategoryTheory.Limits.limitCurrySwapCompLimIsoLimitCurryCompLim_inv_π_π\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Limits.colimitLimitIso\", \"InverseSystem.invLimEquiv_apply_coe\"], \"n_hits\": 8, \"note\": \"\", \"digest\": \"a67365e5fe39dd39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical naturality and ordinary limits, adic module completion or sheafification; no normalized completed compact-support path comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*exchange|strict.*tower|derived.*inverse.*limit",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical naturality and ordinary limits, adic module completion or sheafification; no normalized completed compact-support path comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms between completed sheaf operations and derived inverse limits intertwine base change mates and compactification refinements",
+   "results": "{\"top\": [\"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.sheafComposeIso_inv_fac\", \"CategoryTheory.sheafComposeIso_hom_fac\", \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.constantCommuteCompose\", \"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\", \"CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift\"], \"n_hits\": 8, \"note\": \"\", \"digest\": \"f170991b3080826c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical naturality and ordinary limits, adic module completion or sheafification; no normalized completed compact-support path comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-basechange-semilinear-pasting",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility paragraph of prop-pur-weil-equivariance-compatibilities.proof.md: transport of the integral compact-support base-change constituent through its prescribed strict reduction and total-limit comparisons.",
+   "via": [
+    "lem-pur-weil-basechange-semilinear-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-compact-support-limit-equation-realization",
+  "worker": "stage1",
+  "summary": "Audited actual strict-tower and coefficient-normalized comparisons. Reused existing word reconstruction, strict exchange realization, scalar-refinement, and direct-image normalization statements; proved the generator, context and finite-path assembly without new nodes or finite-evaluation faithfulness. Statement unchanged.",
+  "blueprint": "The constituent-compatibility paragraph is realized for integral compact-support exchange and refinement paths: Steps 1--2 fix prescribed corners, 3--6 handle generators, 7--9 give contexts, paths, and strict-equation transport.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-completed-pullback",
+    "why": "Generic normalized Completed pullback supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-cbc-complete-proetale-refinement-exchange-coherence",
+    "why": "Generic normalized Refinement Exchange Coherence supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-cbc-complete-proetale-strict-tower-realization",
+    "why": "Generic normalized Strict Tower Realization supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "Generic normalized Completed extension-by-zero base change supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-cbc-completed-open-strict-mate-identification",
+    "why": "Generic normalized Completed open exchange agrees with the actual constant-coefficient strict mate supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic normalized Canonical strict derived-limit comparison for exact product-preserving module functors supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-cbc-ringed-open-scalar-adjunction",
+    "why": "Generic normalized Scalar restriction and the sheafified slice-extension adjunction supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-cbc-ringed-open-scalar-limit-coherence",
+    "why": "Generic normalized Ringed open extension, scalar restriction and normalized strict limits supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Generic normalized Normalized proper/open calculus on strict pro-etale towers supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic normalized Derived semilinear sections and coefficient-linear geometric operations supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-monoidal-adjunction-transport",
+    "why": "Generic normalized Constant/completed coefficient transport preserves completed tensor and adjunction normalization supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Generic normalized Completed-coefficient pushforward restriction and strict reduction towers supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic normalized Coherent substitution of normalized systems into completed operations supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-pur-diagram-ring-restriction-pushforward",
+    "why": "Generic normalized Derived coefficient restriction on ringed diagram topoi supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "why": "Generic normalized Normalized reconstruction and transported adjunction transposes supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-pur-ringed-refinement-coefficient-square",
+    "why": "Generic normalized Coefficient change preserves the clopen-normalized refinement mate supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-sf-cbc-compact-support-composition-limit",
+    "why": "Generic normalized Normalized reconstruction of composites of completed operations supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-sf-cbc-completed-pullback-unit-tower",
+    "why": "Generic normalized Completed pullback completion unit is invertible in the strict reduction tower supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-sf-cbc-constant-tower-direct-image-normalization",
+    "why": "Generic normalized Constant strict towers and normalized derived direct image supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-sf-cbc-word-reconstruction-coherence",
+    "why": "Generic normalized Coherent word comparisons from supplied generator maps and a reconstruction unit supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-sp-completed-pullback-adjunction",
+    "why": "Generic normalized Completed pullback is left adjoint to direct image supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic normalized Constant-to-completed coefficients on derived-complete categories supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic normalized Strict diagrams as modules on a small site supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic normalized A right adjoint of an exact functor preserves K-injective complexes supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+    "why": "Generic normalized Common quotient reduction of the geometric scalar comparison supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic normalized Canonical composition comparison for unbounded ringed-topos direct images supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic normalized Derived pushforward commutes canonically with strict tower inverse limit supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic normalized Functoriality of the sequential derived inverse limit supplies a constituent of the strict-tower/coefficient realization, retaining the compact-support proper/open route; this package unit has no separate version of the tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-completed-pullback",
+  "lem-cbc-complete-proetale-refinement-exchange-coherence",
+  "lem-cbc-complete-proetale-strict-tower-realization",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-completed-open-strict-mate-identification",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-cbc-ringed-open-scalar-adjunction",
+  "lem-cbc-ringed-open-scalar-limit-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-completed-coefficient-monoidal-adjunction-transport",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-pur-ringed-refinement-coefficient-square",
+  "lem-sf-cbc-compact-support-composition-limit",
+  "lem-sf-cbc-completed-pullback-unit-tower",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
+  "lem-sf-cbc-word-reconstruction-coherence",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-0c0b8775f",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-0c0b8775f (reviewer sub-agent of L); spot-checked: Read the item in full and all 38 cited statements. There are no new nodes, and the statement is unchanged from base and live; live is unsplit with no repair note. Checks: proof_deps equals the union of step uses, and a closure walk over 13677 nodes found no cycle. Coefficient category is consistent: completed O_E sheaves are reached from constant-R towers only through Res (constant-completion-equivalence), and the base-change map is def-cbc-completed-exchange-map's gamma followed by Rp'_*(beta). Steps: (1) Res is an equivalence on complete objects, and kappa, b and e identify the completed adjunctions; j_!H is complete because j is quasi-compact. (2) q_W and a_W=L(q_W)eta come from composition-limit, the open letter from the augmentation clause of exact-product-limit, the pullback letter by definition. (3) strict-tower realization applies with the witnesses and j_!K complete; the open-mate equality r(beta^comp)=lambda^-1 L(beta) holds before evaluation. (4) common-quotient pullback applies (A to A-hat is flat, S_n identified); the compositor is fixed by uniqueness through eta composed with h*eta. (5) refinement coefficient square on Delta R to (P_n) with delta=q_j and chi=Pi, so r_D=gamma_Q; no cartesian hypothesis needed. (6) u_* preserves K-injectives and the strict calculus inverts gamma on the witnessed domain. (7) left whiskering by pullback uses tower substitution on normalized systems, not a pullback/limit commutation. (8) elementary induction. (9) cancellation and faithfulness of Res transport the strict refinement equations. Edge cases checked: empty word gives eta, empty path, identity refinement, zero input. Sources opened: Stacks 0A07, 07A7, 0D6E, 099N(2),(5), 0F7B/C/D/F; no SGA. Off-route citations are all declared tool_uses; sk-def-exchange (K-injective preservation) and sk-def-purity-conv (tower substitution) are generic tools. Batch-5: the trf-site-functorial-flat-resolution, trf-right-fraction-dense-subcategory, pod-derived-exact-square-composition and pod-completed-integral-scalar-regular closure hits are generic homological lemmas, not steps of the trace formula or Poincare duality, so accepted. Note: NW is delivering the same item in parallel (886b6f8f206f); whichever lands first decides the other."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportLimitEquationRealization",
+  "declaration": "WeilConjectures.CompactSupportLimit.compactSupportLimitEquationRealization",
+  "declarations": [
+   "WeilConjectures.CompactSupportLimit.compactSupportLimitEquationRealization"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportLimitEquationRealization.lean",
+  "statement": "theorem compactSupportLimitEquationRealization : EquationLaws l E D o r hl (X := X) (T := T)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Whole derived strict constant-tower equation, with explicit specified exchange/compositor/refinement paths and all unary whiskering. Constant coefficients use the published small-site model and exact whole-system scalar restriction. Corner is explicitly completion unit followed by Rlim of the normalized recursive reduction comparison. Returned H2 repaired by definition ownership nodes for coefficient transport, refinement, and inverseOrZero; theorem-only statement dependencies removed. Removed the unrequested path-arrow IsIso conjunct."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c7f53c75",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery of ef70, which was returned under H2. It removes the theorem stmt_deps lem-sf-constant-semilinear-generator-comparison and lem-pur-compact-support-integral-coefficient-comparison. It adds existing:true def nodes def-sf-constant-completed-reduction-transport (H/U/constantReduction/constantLimit/rho, with rho pinned by the RhoNormalized ∃!), def-sf-integral-support-refinement-comparison (open-unit-normalized γ, then inverse proper compositor and push γ⁻¹) and def-sf-comparison-inverse-or-zero, and cites def-pur-integral-compact-support-coefficient-data. All new stmt_deps exist in live as definition nodes. No other def node owns the registered declarations (they were theorem-module defs only). Signatures are verbatim and the node statements match the Lean. Item statement, proof and source are unchanged from live; the item is not yet landed (NW parallel delivery absent). The only Lean change drops the unrequested IsIso s∧a conjunct; the square and parallel-path cancellation match the node, and the earlier mathematical analysis (domains, corner a=L(q)η, generators, whiskering, edge cases) is confirmed. Advisory: corner uses the theorem-owned wrappers sfCbcSite and sfCbcModelIdeal without a citation; they already appear in the types of the cited def node's declarations, and landed def-sf-integral-compactification-word-comparisons uses them the same way. Gates OK; no compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1bc5c",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T203307-L-2801491",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs EquationLaws (corner iso, square via limit_square, cancellation); moved 12 defs vs clone text (byte-identical); new sorry statements vs nodes/plan Steps 1-9 and Stacks 099N completeness/faithfulness"
+ }
+}

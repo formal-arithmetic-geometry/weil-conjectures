@@ -1,0 +1,57 @@
+## Worker report
+
+Item: lem-per-divisible-torsion-supported-injective-models. Group Q56, stage 1, 2026-10-24.
+
+Files written: dag/nodes/sec-deligne-laumon-a1/lem-per-divisible-torsion-supported-injective-models.json (nine-step proof, unchanged statement and statement dependencies), report.md, citations.json, and the required searches.jsonl. A sandbox-only writing script is retained for the record. The item now uses eighteen existing proof dependencies. No Lean files were written and no compiler, Lake, local DAG checker, or repository git command was run.
+
+## New nodes
+
+None. Zero new Mathlib leaves. The split reuses existing nodes and writes the elementary extension and kernel calculations in its own steps rather than creating duplicates or nodes restating its clauses.
+
+## Attachments
+
+None for this item. Searched lean/WeilConjectures for the item id, torsion and supported-model terminology, and injective nsmul kernels. CategoryTheory.Sheaf.epi_nsmul_id_of_injective and CategoryTheory.Sheaf.surjective_nsmul_H_zero_of_injective in WeilConjectures/CategoryTheory/Sites/SheafCohomologyTorsion.lean are genuine narrower results; neither states this item's finite-module supported model, coefficient rows, or comparison clauses. The first paragraph of Stacks 0DD7 is stronger than the existing DAG divisibility statement, which asserts only an epimorphism of sheaves. Step 1 therefore proves sectionwise divisibility explicitly, rather than pretending that an epimorphism of sheaves implies surjectivity on sections.
+
+## WANTED
+
+None. Read literature/stacks-project/sites-cohomology.tex, Tag 0DD7 (lemma-torsion), first paragraph, and literature/stacks-project/etale-cohomology.tex, Tag 09XQ (lemma-sections-with-support-acyclic), its preceding definition of the supported sheaf and its following derived-functor discussion. Also read ILO, Travaux de Gabber, Expose XVI, Proposition 3.3.2, printed p.245 (PDF page 251). This source motivates compatible coefficient models; it does not assert the present injective torsion-layer refinement, whose proof is marked agent-written. No SGA source is used.
+
+## Audit and searches
+
+The original node had an empty proof, not an existing completed split. Its statement and inherited source/search/blueprint records were retained. There is no released repair note for this item. Read GOAL.md, SETUP.md's three levels, the worker brief, stage 1, delivery-errors B-E, and the chapter and unit records. Read the latest blueprint chapter, unit statement, and lem-per-artin-gabber-affine-curve proof Step 3; the inherited item is the finite-coefficient supported-model input below that ancestor. Neither chapter nor unit was edited.
+
+Whole-DAG searches by 0DD7, 09XQ, divisible, torsion/injective, supported/injective, free sheaf, and scalar/support located the existing generic inputs. Ran blueprint_refs.py ancestor for the item and search for injective, divisible torsion, and supported kernel. No blueprint node states this whole item. The existing lem-per-etale-godement-supported-exact-model is used only for its already stated finite-ring scalar-restriction comparison, not as a replacement for the strict injective torsion-layer construction or its row-exactness proof. A dependency traversal of the selected existing inputs found no path back to this item.
+
+Ran the required logged Mathlib searches: two LeanFinder phrasings, Loogle with CategoryTheory.Injective and CategoryTheory.Sheaf, LeanSearch for the supported torsion-kernel construction, and grep for torsion|divisible|supported in CategoryTheory/Sites. All services responded. Inspected their answers: generic cohomology, K-injective complexes, the algebraic module-support notion and a quotient-ring module structure do not give this combined assertion. The Loogle hit only gives vanishing of positive sheaf cohomology for an injective. The grep returned no hits. Original upstream search records are preserved; the newly appended records agree exactly with searches.jsonl. The Lean 4 skill was used only for search guidance, subject to the brief's stricter no-compilation/no-Lean rules.
+
+## Not duplicates
+
+No new nodes, so there are no new/existing pairs to distinguish. In particular, no second divisibility, support-adjunction, Godement, free-module, K-injective, or acyclic-resolution node was created.
+
+## Review by Q56
+
+I checked the item against the two Stacks proofs with their files open, and against ILO XVI 3.3.2 at printed p.245. The statement is valid for ordinary small-etale modules; no pro-etale comparison, purity theorem, invertibility of ell, or constructibility assumption enters this lemma. No statement correction is required. I kept the hypothesis that multiplication on M is epic as a sheaf map: step 7 uses local lifts, whereas step 6 obtains actual section lifts from injectivity of the different ambient sheaves I and H(I).
+
+1. Step 1 uses the actual statement of lem-trf-site-free-sheaf-sections, whose evaluation-at-the-identity bijection supplies an arbitrary section, the exactness clause of lem-weil-pbc-sheafification-exact, and the extension property in def-sp-injective-resolutions. I checked that no Yoneda/full-faithfulness-only node was substituted. The coefficient calculation on a free abelian basis and the extension along n are the elementary three-line proof in Stacks 0DD7. It proves divisibility on every object, including the terminal object.
+2. Step 2 uses the displayed long exact homology sequence of lem-weil-pbc-complex-ses-homology-long-exact, not merely a definition of a resolution. Iterating the given epimorphism gives ell^r epic on M, so H^1 of the torsion complex vanishes as well as higher cohomology. The extension argument really has a monomorphism of underlying abelian sheaves and a source C annihilated by ell^r, so the extension factors through the desired kernel and is linear. This verifies injectivity over A_r, not over the integers.
+3. Step 3 uses lem-per-etale-closed-sheaf-internal-adjunction with A=Z; its statement explicitly says that the supported right adjoint takes injectives to injectives. The other two cited statements supply sectionwise kernels and exact inverse image, so the intersection of the support kernel and the torsion kernel is exactly H(I)[ell^r]. This supplies injective abelian sheaves on Z to which step 1 genuinely applies. I did not infer divisibility of sections from divisibility of sheaves alone.
+4. Step 4 uses the enough-injectives conclusion of lem-weil-pbc-module-sheaves-enough-injectives and clause (2) of lem-weil-pbc-right-derived-plus-injective. The definition def-per-closed-support-plus-adjunction identifies the chosen adjoint with this derived supported functor and fixes its counit. Thus the comparison uses the actual J_r resolution of step 2 and is normalized by the actual support inclusions.
+5. Step 5 uses the full bounded-below-injectives-implies-K-injective statement and the Hom-in-homotopy to Hom-in-derived bijection, not a resolution comparison for a sheaf alone. The free-module universal property, specialized to the terminal sheaf, states precisely the rank-one Hom formula used here. I checked that the source is A_r in degree zero and the target K_r is nonnegative and termwise injective. The cocycle/homotopy quotient is written out and gives the map by evaluation at 1 with the correct shift convention.
+6. Step 6 is an explicit elementary calculation in a divisible abelian group, applied three times to groups proved divisible in steps 1 and 3. Sectionwise kernels are justified by the cited sheafification/limits statement. I checked the lift x is killed by ell^(a+b), that the kernel is killed by ell^a, and that these are A_(a+b)-linear maps. This proves exactness of E without assuming Gamma or supported inverse image exact.
+7. Step 7 uses the full locally-surjective-iff-epi assertion of lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective. The calculation is local on M and establishes the coefficient row and its commuting augmentations; it does not assert global divisibility of M.
+8. Step 8 first uses lemma-weil-pbc-geometric-stalk-conservative and def-weil-size-convention: all geometric points over fields in the smaller scheme universe give a set in the larger universe, and their stalks detect isomorphisms. Thus the Godement lemma has its required small conservative family. It then uses the sentence of lem-per-etale-godement-supported-exact-model that explicitly commutes the derived identifications with restriction along every finite-ring homomorphism and respects the closed counit. Its hypotheses hold: both A_N and A_r are finite commutative rings and the closed pair is Noetherian. Applying that statement to any injective A_r-sheaf proves support acyclicity after restriction to A_N; this is weaker than, and does not presume, preservation of injectives. The bounded-below-complex clause of sk-thm-acyclicity is exactly what then computes H(Res J_r). Naturality is supplied by the right-derived comparison in lem-weil-pbc-right-derived-plus-injective, with the same counits. I verified this is not a misuse of a mere degreewise cohomology assertion.
+9. Step 9 uses the natural connecting-arrow assertion of lem-weil-pbc-complex-ses-triangle and again the bounded-below acyclic-complex comparison. I added the cone calculation explicitly: additive H commutes with the finite-sum cone, and the cone terms are still support-acyclic. This proves the identification of connecting arrows as well as the first two row maps. The multiplication exponents and inclusion composites are written out, and commutation of the supported inclusions gives compatibility with counits. No unnamed coefficient-transport lemma is hidden in the word natural.
+
+Every cited node was read in full before its quote was added to citations.json. The file contains one verbatim statement excerpt for each of the 23 step/node pairs. For generic off-unit non-Mathlib inputs, split_report.tool_uses explains the precise categorical task; no maintainer-owned tool_uses field was written.
+
+Small cases checked: Z empty gives K=E=0; i the identity gives the ordinary torsion complexes and section complexes. M=0 is allowed even for a nonminimal resolution: the bounded-below derived calculation still identifies K_r with zero. N=r gives identity multiplication and identity restriction. a=b=1 gives multiplication ell from the ell^2 layer onto the ell layer. No step uses finite cohomological dimension, finite rank of M, or ell invertible on X. The nonnegative-resolution hypothesis is used when applying bounded-below K-injectivity and acyclic-resolution theorems. All nine proof steps are shorter than 2000 characters; none moves a clause to a new node.
+
+Corrections during review: I replaced a possible inference from sheaf-epimorphism to section-surjectivity by the explicit free-representable extension proof, added the cone argument to check the connecting-arrow clause, and made the conservative-point hypothesis of the scalar-comparison citation explicit. The item statement did not change.
+
+## Validation
+
+Server review_split: PASS, zero new nodes, proof written by an agent. The first full delivery dry run passed at 0756d470217 (not pushed). A final reading then made the geometric-point conservativity and universe inputs of step 8 explicit; the final dry run and push follow that repair.
+
+## Unfinished
+
+No mathematical clause remains open in this split. New nodes: none.

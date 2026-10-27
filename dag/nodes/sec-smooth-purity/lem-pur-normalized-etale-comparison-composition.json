@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-normalized-etale-comparison-composition",
+ "kind": "statement",
+ "title": "Composition of the normalized etale dualizing comparison",
+ "statement": "Fix the finite coefficient datum [def-pur-conventions], with coefficient ring $\\Lambda$. Let $X\\xrightarrow{v}Y\\xrightarrow{w}Z\\xrightarrow{h}B$ be separated finite-type morphisms [def-weil-scheme-morphism-properties], with $v,w$ etale [def-weil-etale-morphism], $h$ smooth of pure relative dimension $r$ [def-sbc-smooth-morphisms], and $B$ finite type over the fixed field. Let $F:X\\to Z$ and $b:X\\to B$ be separated finite-type maps with $vw=F$ and $Fh=b$; assume $F$ etale and supply compactifications of $h,wh,b$. Write $E$ for the counit-normalized etale comparison [lem-pur-finite-etale-dualizing-normalization], and $\\widetilde E(v,h,b)$ for $E(v,h)$ preceded by the exceptional congruence for $b=vh$. Then $\\widetilde E(F,h,b)$ equals $\\widetilde E(v,wh,b)$ followed by $Lv^*\\widetilde E(w,h,wh)$ and inverse canonical pullback composition for $vw=F$ [lem-weil-pbc-proetale-derived-pullback-composition]. This is an equality of etale-derived arrows. No affine chart, section, diagonal, input equation or orientation is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, output comparison; difference-coordinate refinement Step 6, normalized E composition"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Eliminate the equalities F=vw and b=hF. Expand the normalized comparison into its exceptional congruence and E. Reflexive congruence is identity because support congruence is identity and conjugacy preserves identity.",
+   "uses": [
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the CompositeEEquation clause of [lem-pur-etale-cartesian-tower-tensor-comparison], specialized to q=id, q_Q=id, G=J=w, H=v and p=h. Its identity composites have the canonical exceptional congruences, so transport them along id h=h. This is also obtained by expanding E=rho c: associate the exceptional compositors by conjugate compact-support composition, use normalized rho composition, and move the w-exceptional compositor by naturality of rho_v. The result is E_vw,h = E_v,wh followed by v-pullback of E_w,h followed by inverse pullback composition. Restore the eliminated equality names; the inserted congruence is exactly the one displayed.",
+   "uses": [
+    "lem-pur-etale-cartesian-tower-tensor-comparison",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-etale-cartesian-tower-tensor-comparison",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, output comparison; difference-coordinate refinement Step 6, normalized E composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of dualizing complex commutes with an etale morphism and Cartesian base change",
+   "results": "Search returned etale base-change stability and module-sheaf pullback composition; no normalized dualizing section equation.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized etale dualizing comparison composition base change diagonal section",
+   "results": "Eight results concerning differentials and scheme normalization; none gives the specified derived dualizing comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceEtale|normalizedE|SameProEtaleMap in Mathlib, WeilConjectures and Sheaf; blueprint search difference input",
+   "results": "The existing Cartesian-tower theorem has CompositeEEquation, with identity-composite and equality-congruence transports still to be calculated. No standalone normalizedE composition law exists in the source or Mathlib.",
+   "date": "2026-10-25",
+   "verdict": "The general normalized composition equation is a strict output calculation, independent of affine input equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DifferenceCoordinateSectionIdentifications",
+  "date": "2026-10-25",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, normalized output comparison composition",
+   "via": [
+    "lem-pur-difference-coordinate-section-identifications",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedEtaleComparisonComposition",
+  "file": "lean/Sheaf/Paper/NormalizedEtaleComparisonComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DifferenceCoordinateSection.normalizedE_comp_congr",
+  "statement": "theorem normalizedE_comp_congr (P : WeilConjectures.PurityFiniteSetting.{u})\n    {X Y Z B : Scheme.{u}} (v : X ⟶ Y) (w : Y ⟶ Z) (h : Z ⟶ B)\n    (F : X ⟶ Z) (b : X ⟶ B)\n    [Etale v] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v]\n    [Etale w] [IsSeparated w] [LocallyOfFiniteType w] [QuasiCompact w]\n    [Etale F] [IsSeparated F] [LocallyOfFiniteType F] [QuasiCompact F]\n    [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]\n    [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]\n    [HasCompactification h] [HasCompactification (w ≫ h)] [HasCompactification b]\n    (r : ℕ) [SmoothOfRelativeDimension r h]\n    (aB : B ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (hF : v ≫ w = F) (hb : F ≫ h = b) :\n    (normalizedE P F h b hb.symm aB).hom =\n      (normalizedE P v (w ≫ h) b\n        (hb.symm.trans ((congrArg (fun z ↦ z ≫ h) hF.symm).trans\n          (Category.assoc v w h))) aB).hom ≫\n      (pull P v).map (normalizedE P w h (w ≫ h) rfl aB).hom ≫\n      (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient)\n        v w F hF.symm).inv.app _",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8de59",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261025T203833-L-2861968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8de59",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261025T203833-L-2861968",
+  "kind": "interface",
+  "note": "independent cc review: item theorem's three SameProEtaleMap conjuncts vs the three new sorried statements (étale-side equalities, compared verbatim) + normalizedE relocation and Statement projection refactor vs clone (byte-identical defs, indices checked) + node proof/proof_deps vs Lean"
+ }
+}

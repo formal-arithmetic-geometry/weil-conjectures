@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-nilpotent-flat-multiplicative-deformation",
+ "kind": "statement",
+ "title": "Multiplicative type persists under flat nilpotent deformation",
+ "statement": "Let $R$ be a commutative ring, let $I\\subseteq R$ be an ideal with $I^a=0$ for some integer $a\\geq1$, and put $R_0=R/I$ and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. An $S$-group scheme means a group object in schemes over $S$, and homomorphisms preserve multiplication, identity and inverse. Let $G=\\operatorname{Spec}C$ be an affine $S$-group scheme with $C$ a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra] and a flat $R$-module [def-weil-pbc-flat-ring-map]. Put $G_0=G\\times_S\\operatorname{Spec}R_0$ [def-pc-base-change]. A group scheme $\\Gamma$ over a scheme $U$ is of multiplicative type if there are an fppf covering $\\{V_\\alpha\\to U\\}$ [def-pc-fppf-site] and finitely generated abelian groups $N_\\alpha$ with $\\Gamma\\times_UV_\\alpha\\simeq D_{V_\\alpha}(N_\\alpha)$ as $V_\\alpha$-group schemes; for a scheme $V$, $D_V(N)$ is obtained by gluing the affine groups $D_A(N)=\\operatorname{Spec}A[N]$ with Hopf operations of [def-sfb-ring-diagonalizable-group]. If $G_0$ is of multiplicative type, then $G$ is of multiplicative type. More precisely, if a finitely generated abelian group $N$ and an isomorphism $a_0:G_0\\xrightarrow{\\sim}D_{R_0}(N)$ are given, there is an $S$-group isomorphism $a:G\\xrightarrow{\\sim}D_R(N)$ whose reduction is $a_0$. No smoothness assumption is imposed and torsion in $N$ may have order noninvertible in $R$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem B.3.2(2), proof, printed p.289, the square-zero deformation assertion for a flat affine group reducing to a diagonalizable group, and its fppf-local form. This is the infinitesimal structural prerequisite, not the complete-local Hom bijection. Online source read; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this group-scheme theorem."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-base-change",
+  "def-pc-fppf-site",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "First treat the marked split case with $I=J$ and $J^2=0$. Write $B=C/JC\\simeq R_0[N]$, using the given $a_0$. Flat tensor exactness identifies $JC=J\\otimes_{R_0}B$ and, for $q=2,3$, $J(C^{\\otimes_Rq})=J\\otimes_{R_0}B^{\\otimes_{R_0}q}$. Indeed tensor $0\\to J\\to R\\to R_0\\to0$ with the flat module $C^{\\otimes_Rq}$; this tensor power is flat by successive tensoring with $C$. Write $\\Delta:C\\to C\\otimes_RC$ for the pullback of multiplication; the affine spectrum, the fibre product of affine spectra [lem-weil-pbc-fibre-product-affine-spectra] and the algebra tensor pushout identify the group diagrams with the coproduct, counit and inverse identities. Every character $\\chi_0:G_0\\to\\mathbf G_{m,R_0}$, equivalently a group-like unit $v_0\\in B$, has a unit lift $v\\in C$: lift $v_0$ and its inverse, and invert their product $1+z$ by $1-z$, since $z\\in JC$ has square zero.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem B.3.2(2), square-zero reduction, printed p.289; unit lifting and tensor identifications written out; Stacks 00HD, lemma-flat"
+   }
+  },
+  {
+   "text": "For such a lift put $1+c=\\Delta(v)/(v\\otimes v)$. Its reduction is $1$, so $c\\in J\\otimes_{R_0}(B\\otimes_{R_0}B)$. Coassociativity, computed in $C^{\\otimes_R3}$, gives $c(h,k)+c(hk,l)=c(k,l)+c(h,kl)$: both sides are the first-order term of $v(hkl)/(v(h)v(k)v(l))$, and products of two $J$-terms vanish. Thus $c$ is a regular two-cocycle for $D_{R_0}(N)$ on the coefficient module $J$ with trivial action, i.e. coaction $j\\mapsto j\\otimes e_0$. Apply [lem-sfb-diagonalizable-regular-two-cocycle] to get $b\\in J\\otimes_{R_0}B$ with $c(h,k)=b(k)-b(hk)+b(h)$. Regard $b$ as an element of $JC$ by Step 1. Replacing $v$ by $v'=(1+b)v$ changes the defect to $c+b(hk)-b(h)-b(k)=0$. Hence $\\Delta(v')=v'\\otimes v'$. Applying the counit gives $\\epsilon(v')=\\epsilon(v')^2$, and this unit is therefore $1$; the inverse diagram gives the character inverse. Thus $v'$ defines a character lifting $\\chi_0$.",
+   "uses": [
+    "lem-sfb-diagonalizable-regular-two-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Remark B.2.4, printed p.285, and Theorem B.3.2(2), printed p.289: the degree-two obstruction; explicit unit-valued defect calculation for the smooth target G_m"
+   }
+  },
+  {
+   "text": "The lift of each character is unique. If $v,w\\in C^\\times$ are two group-like lifts of the same character, then $w/v=1+x$ for $x\\in JC=J\\otimes_{R_0}R_0[N]$. The group-like equality says $\\Delta(x)=x\\otimes1+1\\otimes x$, since $J^2=0$. Expand the finitely supported element $x=\\sum_n j_ne_n$. For $n\\ne0$, the coefficient of $(n,n)$ in $J\\otimes_{R_0}R_0[N\\times N]$ is $j_n$ on the left and zero on the right. Thus all those $j_n$ vanish. At $(0,0)$ the equality reads $j_0=2j_0$, so $j_0=0$ also. Consequently $x=0$ and $w=v$. This argument allows arbitrary torsion in $N$ and arbitrary $R_0$-module $J$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem B.3.2(2), printed p.289: rigidity, here expanded coefficientwise for characters without any smoothness or torsion restriction"
+   }
+  },
+  {
+   "text": "For every $n\\in N$, lift the character represented, under $a_0$, by $e_n\\in R_0[N]$ to the unique group-like unit $v_n\\in C$. Uniqueness gives $v_{n+n'}=v_nv_{n'}$ and $v_0=1$: both sides lift the same character. Therefore the finite-sum formula $\\phi:R[N]\\to C$, $\\sum_n r_ne_n\\mapsto\\sum_n r_nv_n$, is an $R$-algebra map. It preserves coproduct and counit on every basis element and carries $e_{-n}$ to $v_n^{-1}$, so it preserves inverse too. Its spectrum is a group homomorphism $a:G\\to D_R(N)$ with reduction exactly $a_0$, by affine contravariance.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem B.3.2(2), printed p.289: reconstruct the diagonalizable-group map from the uniquely lifted characters"
+   }
+  },
+  {
+   "text": "The map $\\phi$ is an isomorphism. Its cokernel $Q$ satisfies $Q/JQ=0$ by tensor right exactness and the isomorphism $\\phi\\bmod J$. Thus $Q=JQ=J^2Q=0$, so $\\phi$ is surjective. Put $K=\\ker\\phi$. The exact sequence $0\\to K\\to R[N]\\to C\\to0$ has flat last term $C$. Tensoring with $R_0$ is therefore still injective on $K/JK$ by [lem-weil-pbc-flat-quotient-tensor-injective]; since $\\phi\\bmod J$ is an isomorphism, $K/JK=0$. Hence $K=JK=J^2K=0$. This proves the marked assertion for a square-zero ideal.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem B.3.2(2), printed p.289: isomorphism of flat deformations; explicit cokernel/kernel argument using Stacks 00DF, lemma-tensor-product-exact, and 00HL, lemma-flat-tor-zero"
+   }
+  },
+  {
+   "text": "For $I^a=0$ start with $R/I$ and the marking $a_0$. For $1\\leq k<a$, pass from $R/I^k$ to $R/I^{k+1}$; the kernel $J_k=I^k/I^{k+1}$ has square zero, since $2k\\geq k+1$. The coordinate algebra $C/I^{k+1}C$ is flat over $R/I^{k+1}$: for an injection of quotient-ring modules, tensoring with it is the same as tensoring the original injection over $R$ with $C$, hence preserves injection. Its finite presentation is the original polynomial presentation reduced modulo $I^{k+1}$. Steps 1–5 lift the isomorphism at level $k$ to level $k+1$ with exactly the chosen reduction. After $a-1$ steps obtain the required marked isomorphism over $R/I^a=R$. If $a=1$ the marking itself is the answer. The zero ring is included, since every coordinate algebra and every displayed coefficient then vanishes.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem B.3.2(2), printed p.289: induction on square-zero thickenings, with the induction variable and base case explicit"
+   }
+  },
+  {
+   "text": "Now suppose only that $G_0$ is of multiplicative type. Apply [lem-sfb-multiplicative-type-etale-splitting] to choose an affine etale covering $V_j\\to\\operatorname{Spec}R_0$ and group isomorphisms $(G_0)_{V_j}\\simeq D_{V_j}(N_j)$. Lift each $V_j$ to an affine etale $U_j\\to S$ using [lem-weil-pbc-affine-etale-closed-immersion-lift]. The $U_j$ cover $S$: every prime of $R$ contains $I$, every prime of the coordinate ring of $U_j$ contains the extended nilpotent ideal, and the reduced family $V_j$ covers $\\operatorname{Spec}R_0$. An etale morphism is flat and locally of finite presentation, so this is an fppf covering.",
+   "uses": [
+    "lem-sfb-multiplicative-type-etale-splitting",
+    "lem-weil-pbc-affine-etale-closed-immersion-lift",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition B.3.4, printed pp.291–292; Stacks 09ZA, proof, first paragraph (affine etale lifting), and 021L (definition of fppf covering)"
+   }
+  },
+  {
+   "text": "Write $U_j=\\operatorname{Spec}A_j$. The group $G_{U_j}$ has flat finitely presented coordinate algebra $A_j\\otimes_RC$: the finite presentation is obtained by applying $R\\to A_j$ to the finitely many defining polynomials, and flatness follows because tensoring an injection of $A_j$-modules with $A_j\\otimes_RC$ is tensoring that injection over $R$ with $C$. Its reduction modulo $IA_j$ is $(G_0)_{V_j}\\simeq D_{A_j/IA_j}(N_j)$, and $(IA_j)^a=0$. Apply the marked assertion proved in Step 6 over $A_j$ to get $G_{U_j}\\simeq D_{A_j}(N_j)$. These isomorphisms on the fppf cover of Step 7 are exactly the definition of multiplicative type. No gluing of the chosen isomorphisms is required.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem B.3.2(2), printed p.289: fppf-local application of the nilpotent split assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-diagonalizable-regular-two-cocycle",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-sfb-multiplicative-type-etale-splitting",
+  "lem-weil-pbc-affine-etale-closed-immersion-lift",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem B.3.2(2), printed p.289; characterwise expansion of its degree-two deformation argument to avoid applying the smooth-target lifting criterion to a nonsmooth diagonalizable target; Proposition B.3.4 for locality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat affine finitely presented group scheme whose reduction modulo a nilpotent ideal is of multiplicative type is itself of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T11:19:29Z\", \"tool\": \"leanfinder\", \"query\": \"A flat affine finitely presented group scheme whose reduction modulo a nilpotent ideal is of multiplicative type is itself of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified\"], \"digest\": \"02d48808884ab74b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat/formally-unramified morphism properties and abstract nilpotent groups; none gives deformation of a possibly nonsmooth multiplicative-type group. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonali[sz]able.*(deform|nilpotent)|(deform|nilpotent).*diagonali[sz]able",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"grep\", \"query\": \"multiplicative.type|diagonali[sz]able.*(deform|nilpotent)|(deform|nilpotent).*diagonali[sz]able\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat/formally-unramified morphism properties and abstract nilpotent groups; none gives deformation of a possibly nonsmooth multiplicative-type group. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nilpotent thickenings preserve multiplicative type for flat affine group schemes",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"leansearch\", \"query\": \"Nilpotent thickenings preserve multiplicative type for flat affine group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"nilpotent_of_mulEquiv\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"LieModule.instIsNilpotentTensor\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsMultiplicativeSchemeOfIsStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.comp\"], \"digest\": \"19c8b1c76092a438\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat/formally-unramified morphism properties and abstract nilpotent groups; none gives deformation of a possibly nonsmooth multiplicative-type group. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"IsNilpotent\"",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"IsNilpotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat/formally-unramified morphism properties and abstract nilpotent groups; none gives deformation of a possibly nonsmooth multiplicative-type group. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal flat deformations of a diagonalizable group scheme are fppf locally diagonalizable",
+   "results": "{\"t\": \"2026-10-24T11:20:06Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal flat deformations of a diagonalizable group scheme are fppf locally diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\"], \"digest\": \"4509aca77d521483\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat/formally-unramified morphism properties and abstract nilpotent groups; none gives deformation of a possibly nonsmooth multiplicative-type group. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat affine group scheme reducing to a diagonalizable group modulo a nilpotent ideal is diagonalizable",
+   "results": "{\"t\": \"2026-10-24T12:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"A flat affine group scheme reducing to a diagonalizable group modulo a nilpotent ideal is diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"18b0065b709f30c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal deformations of diagonalizable group schemes over arbitrary rings",
+   "results": "{\"t\": \"2026-10-24T12:03:05Z\", \"tool\": \"leansearch\", \"query\": \"Infinitesimal deformations of diagonalizable group schemes over arbitrary rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.infinitesimal\", \"Algebra.Extension.toInfinitesimal\", \"Algebra.Extension.ker_infinitesimal\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.AffineScheme\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.FormallyUnramified\"], \"digest\": \"a9da65adb24a9492\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"IsNilpotent\"",
+   "results": "{\"t\": \"2026-10-24T12:03:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"IsNilpotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonali[sz]able.*(nilpotent|deform)|(nilpotent|deform).*diagonali[sz]able",
+   "results": "{\"t\": \"2026-10-24T12:03:04Z\", \"tool\": \"grep\", \"query\": \"multiplicative.type|diagonali[sz]able.*(nilpotent|deform)|(nilpotent|deform).*diagonali[sz]able\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifting characters of flat affine groups across a square zero ideal",
+   "results": "{\"t\": \"2026-10-24T12:03:08Z\", \"tool\": \"leanfinder\", \"query\": \"Lifting characters of flat affine groups across a square zero ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TrivSqZeroExt.lift\", \"Algebra.FormallySmooth.lift\", \"DualNumber.lift_apply_inl\", \"Algebra.FormallySmooth.exists_lift\", \"liftOfDerivationToSquareZero\", \"TrivSqZeroExt.lift_def\", \"TrivSqZeroExt.lift_apply_inl\", \"TrivSqZeroExt.lift_apply_inr\"], \"digest\": \"d654247c4acb0287\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity. Supporting generic input after the commutator has been killed: Conrad Corollary B.4.2(2), commutative extensions over arbitrary schemes. Supporting input: Theorem B.3.2(2), printed pp.288-290, split source, including both the Hom bijection and the open-and-closed-immersion assertion. Supporting input: Theorem B.3.2(2), proof, printed p.289, the square-zero deformation assertion for a flat affine group reducing to a diagonalizable group, and its fppf-local form. This is the infinitesimal structural prerequisite, not the complete-local Hom bijection.",
+   "via": [
+    "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nilpotent-flat-multiplicative-deformation",
+  "worker": "stage1",
+  "summary": "Preserved both original assertions, including prescribed reduction and bad-characteristic torsion. Proved the square-zero marked assertion by lifting units, killing their regular two-cocycle defects with the existing node, proving uniqueness coefficientwise, reconstructing the Hopf map and checking its kernel and cokernel by flat tensor exactness. Inducted over ideal powers, then lifted an etale splitting cover for the general multiplicative-type case. Added only the general etale splitting prerequisite; reused the existing torus case only as a nonduplicate comparison.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited structural prerequisite chain; realizes the infinitesimal deformation input of the complete-local diagonalizable fibre Hom lift. Latest blueprint read at sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. The ancestor command reports null for the inherited broken created.item chain; preserved the inherited from.node and via.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-etale-closed-immersion-lift",
+    "why": "Generic lifting of affine etale charts along a closed immersion; needed to lift the splitting cover from R/I to R and no same-unit statement supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-etale-closed-immersion-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-a74078fd3",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-a74078fd3 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited node statement in full. The item statement is unchanged and true; this is the first split of a previously empty proof, not a re-split. Steps 1–8 check out. Step 1: J(C^{⊗q}) = J⊗_{R0}B^{⊗q} by flatness of C, and the unit lift is valid. Step 2: the coassociativity defect is exactly the hypothesis of lem-sfb-diagonalizable-regular-two-cocycle with the trivial coaction j↦j⊗e_0; I checked the coboundary sign, and the counit argument holds. Step 3: the coefficientwise comparison at (n,n) and (0,0) needs no division, so p-torsion and characteristic 2 are covered. Step 4: φ is a Hopf map reducing to a_0^*. Step 5: the cokernel is killed by right exactness and the kernel by flat-quotient tensor injectivity with N=R0, both exactly as stated in the cited nodes. Step 6: induction over I^k/I^{k+1}, which has square zero, with the base case a=1. Step 7: the étale lift along Spec R0→Spec R gives a cover because primes contain the nilpotent ideal, and étale implies fppf. Step 8: (IA_j)^a=0, and A_j⊗C is flat and finitely presented. New node lem-sfb-multiplicative-type-etale-splitting: true (Conrad B.3.4; tested on the empty base, μ_p over F_p and μ_n over Q), self-contained, statement-only, with five searches. It does not duplicate torus-etale-trivialization, the multiplicative-type fibral criterion, the strict-local clopen lift, fpqc descent or def-sfb-tori-multiplicative-type. There is no cycle, and its only citer is the item. Conrad is not in the local literature (WANTED is recorded), so I checked the mathematics directly. Accepted tool use: lem-weil-pbc-affine-etale-closed-immersion-lift in Step 7 (generic). FIX (C1): the steps used Spec A ×_{Spec R} Spec B ≅ Spec(A⊗B) without citing it. I added lem-weil-pbc-fibre-product-affine-spectra (mathlib leaf) to the uses of Steps 1, 4, 6 and 8 and to proof_deps, and named it in the text of Step 1.; 1 file(s) fixed by the reviewer"
+ }
+}

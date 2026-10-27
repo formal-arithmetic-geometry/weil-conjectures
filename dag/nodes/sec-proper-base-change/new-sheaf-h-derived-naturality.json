@@ -1,0 +1,120 @@
+{
+ "id": "new-sheaf-h-derived-naturality",
+ "kind": "statement",
+ "title": "Coefficient naturality of canonical Ext evaluation",
+ "statement": "For any scheme X and morphism φ:F→G of abelian etale sheaves [def-pc-scheme,def-weil-pbc-abelian-etale-sheaves], every q and Ext class x, the specified evaluation sheafHToDerived [def-weil-pbc-etale-cohomology-presentation,def-weil-pbc-derived-ext-evaluation] of Sheaf.H.map φ q x equals the map on derived cohomology of the single-complex coefficient morphism applied to the evaluation of x.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology-presentation",
+  "def-weil-pbc-derived-ext-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "proof": [
+  {
+   "text": "Ext postcomposition represents postcomposition by the shifted single map. In an abstract abelian category, form the natural composite of the right-derived shift comparison, homology shift comparison and single-complex comparison. Evaluate its naturality at the image of x applied to the fixed degree-zero generator. Functoriality of composition gives precisely the two evaluation composites. Specialize to etale sheaves.",
+   "uses": [
+    "def-weil-pbc-derived-ext-evaluation",
+    "def-weil-pbc-etale-cohomology-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-ext-evaluation",
+  "def-weil-pbc-etale-cohomology-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated etale sheaf of the unit module is isomorphic to the additive structure sheaf naturally in scalar multiplication",
+   "results": "8 hits, including SheafOfModules.unit, unitHomEquiv and structurePresheafCompForget. None identifies the project tensor-section coefficient or its localized scalar action.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPullbackObjUnitToUnit\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHToDerived.*natural|etaleTensorUnit.*Iso|unitRealization.*transport",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation of Ext classes under a right derived functor with respect to coefficient morphisms",
+   "results": "8 hits: extFunctor, its map formula and generic right-derived naturality. None states naturality of the fixed derivedExtEvaluation composite.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnitRealizationScalarNormalization",
+  "date": "2026-10-25",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input via proper smooth curve structural coefficients; unit coefficient transport and scalar normalization.",
+   "via": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "new-unit-realization-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SheafHDerivedNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafHDerivedNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.sheafHToDerived_map",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sheafHToDerived_map"
+  ],
+  "statement": "theorem sheafHToDerived_map {X : Scheme.{u}} {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) (q : ℕ) (x : Sheaf.H F q) : sheafHToDerived G q (Sheaf.H.map φ q x) = (cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).map (DerivedCategory.Q.map ((CochainComplex.singleFunctor _ 0).map φ)) (sheafHToDerived F q x)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

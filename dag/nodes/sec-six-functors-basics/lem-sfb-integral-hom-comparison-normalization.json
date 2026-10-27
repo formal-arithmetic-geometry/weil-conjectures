@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-integral-hom-comparison-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Integral Hom preservation, integral paragraph: identify the displayed reduction morphism with the normalized evaluation transpose; parent step 3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The normalized integral Hom reduction presentations give the same morphism",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "Let $\\ell$ be a prime, $E/\\mathbf Q_\\ell$ a finite field extension, and $X$ a scheme. Fix a finite-field datum $D$ with $\\ell\\ne D.p$, solely for the legacy coefficient interface. For $n\\ge0$, use the completed integral coefficient sheaf and its positive quotient of exponent $n+1$. Let $a$ be any normalized TensorPresentation and $m$ any ReductionPresentation of $a$ at $n$ [def-sf-integral-hom-reduction-models]. For all ordinary unbounded derived inputs $K,L$, the canonical morphism integralHomReductionComparison [def-sf-integral-hom-reduction-comparison] equals IntegralHom.comparison defined by $m$, as a morphism from reduction of the recorded ambient Hom to Hom of the two reductions. This asserts equality of the evaluation-transpose maps themselves, not merely isomorphic endpoints.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06YS and 06YY, uniqueness of derived functors and their comparison maps; sites-cohomology.tex Tag 08J7, tensor-Hom adjunction. Agent comparison of the two existing normalized presentation records."
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-hom-reduction-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Restrict both tensor models to flat-term K-flat representatives. Their representative comparisons identify each with the signed sum-total tensor. The cochain tensor rigidity theorem descends this natural identification uniquely to the derived product category. Exchange the two tensor orders by the Koszul symmetry, whose value in bidegree (i,j) is (-1)^(ij).",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a K-injective target and K-flat tests, the evaluation field of TensorPresentation and the cochain_curry and normalize fields of HomReductionTensorModel identify both adjunction counits with the same actual Hom-complex evaluation. The evaluation sign in the former cancels the Koszul exchange. Naturality extends this identification to arbitrary derived inputs by K-flat and K-injective representatives.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary scalar-extension units in both presentations send x to 1 tensor x. Their tensor comparisons therefore agree on homogeneous generating sections. The counit normalization squares, together with full faithfulness of restriction to representatives, identify the derived scalar tensor comparisons.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uncurry the two displayed Hom comparison morphisms using the target adjunction. Both become scalar extension of the source evaluation, preceded by the inverse scalar tensor comparison. The previous identifications give equality of these uncurried maps. Injectivity of the target adjunction gives the asserted equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cochain-tensor-model-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06YS and 06YY, uniqueness of derived functors and their comparison maps; sites-cohomology.tex Tag 08J7, tensor-Hom adjunction. Agent comparison of the two existing normalized presentation records."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived internal Hom reduction map is independent of normalized tensor presentations",
+   "results": "lTensorHomEquivHomLTensor; ModuleCat.monoidalClosedHomEquiv; homTensorHomEquiv; Rep.homEquiv; CategoryTheory.FreeMonoidalCategory.normalizeMapAux; Rep.coinvariantsTensor_hom_ext; LightCondensed.ihomPoints; rTensorHomEquivHomRTensor_toLinearMap",
+   "date": "2026-10-22",
+   "verdict": "No match: none concerns the specified normalized derived coefficient presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison between normalized tensor-Hom presentations of integral derived reduction",
+   "results": "Algebra.Presentation.tensorModelOfHasCoeffsInv; Module.Relations.Solution.isPresentationCoreTensor; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul; Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul; Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul; CategoryTheory.FreeMonoidalCategory.normalizeObj_tensor; Module.Presentation.tensor_relation",
+   "date": "2026-10-22",
+   "verdict": "No match: none concerns the specified normalized derived coefficient presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSfbAdicComplete|integralHomReductionComparison|IsSfbAdicConstructible in Mathlib; normalization and residue-origin names in lean/WeilConjectures and lean/Sheaf",
+   "results": "No Mathlib occurrence of these predicates or comparisons; no existing declaration of the asserted presentation comparison in either library root.",
+   "date": "2026-10-22",
+   "verdict": "No match; the existing general-lfp, ringed-site completeness and finite-field witness declarations use different coefficient presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralGeneralLfpHomFiniteness",
+  "date": "2026-10-23",
+  "group": "J1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomComparisonNormalization",
+  "file": "lean/Sheaf/Paper/IntegralHomComparisonNormalization.lean",
+  "declaration": "WeilConjectures.integralHomComparison_normalization",
+  "statement": "theorem integralHomComparison_normalization\n    (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : AlgebraicGeometry.Scheme.{u}) (n : ℕ)\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheaf l E X D hl))\n    (m : IntegralHom.ReductionPresentation l E X D hl a n)\n    (K L : completedIntegralDerivedCategory l E X D hl) :\n    integralHomReductionComparison D l hl E X n K L =\n      IntegralHom.comparison l E X D hl m K L",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-9f27b",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261022T202631-L-1339025",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-9f27b",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261022T202631-L-1339025",
+  "kind": "interface",
+  "note": "independent cc review: item proof and the 4 new sorry statements read against IntegralHomReductionModels/IntegralHomReductionComparison structures, generalLfpAdicInputWitness hypotheses, unit realized list, and live node fields"
+ }
+}

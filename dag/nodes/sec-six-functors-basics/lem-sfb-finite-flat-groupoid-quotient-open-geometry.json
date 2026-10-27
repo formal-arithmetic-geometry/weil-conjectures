@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+ "kind": "statement",
+ "title": "Finite-flat groupoid presentations and their invariant open substacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks in groupoids, Deligne--Mumford stacks, representability by algebraic spaces, and 2-fibre products have the meanings in [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. Let $(U,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme], with $s,t$ finite locally free [def-pc-finite-locally-free]. Suppose its fppf quotient stack $\\mathcal Q=[U/R]$ is Deligne--Mumford. Here the quotient is the fppf stackification of the groupoid of $U(T)$-objects and $R(T)$-arrows [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description]. The natural map $p:U\\to\\mathcal Q$ is representable by schemes, surjective, finite, flat and locally of finite presentation. Pullback along $p$ gives a bijection between strictly full open substacks $\\mathcal V\\subseteq\\mathcal Q$ and open subschemes $V\\subseteq U$ satisfying $s^{-1}(V)=t^{-1}(V)$. Such a substack satisfies $U\\times_{\\mathcal Q}\\mathcal V=V$ and $\\mathcal V\\simeq[V/R_V]$, where $R_V=R\\times_{U\\times_S U}(V\\times_S V)$. The restricted projections $R_V\\rightrightarrows V$ are finite locally free, and $V\\to\\mathcal V$ is again representable, surjective, finite, flat and locally of finite presentation. The map $|U|\\to|\\mathcal Q|$ is surjective. If $U$ is affine, then $\\mathcal Q$ is absolutely separated: its diagonal over $\\operatorname{Spec}\\mathbf Z$ is proper. Here an open substack means a full substack stable under pullback whose scheme base changes are open subschemes. Finite, flat and locally of finite presentation are tested after scheme base change using [def-weil-finite-integral-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]; proper for a representable diagonal means proper on scheme charts [def-weil-proper-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUM (lemma-well-nigh-affine), proof and final separatedness assertion; criteria.tex Tags 06FH (lemma-flat-quotient-flat-presentation), 06FI (theorem-flat-groupoid-gives-algebraic-stack); stacks-properties.tex Tag 0507 (lemma-substacks-presentation), open case; spaces-groupoids.tex Tag 04M9 (lemma-quotient-stack-2-cartesian); stacks-morphisms.tex Tag 0DTY (lemma-properties-diagonal-from-presentation), part (6)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-a1-groupoid-scheme",
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-sfb-scheme-groupoid-quotient-presentation",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-stack-properties",
+  "def-sfb-restricted-groupoid-relation",
+  "def-sfb-restricted-groupoid-middle-maps"
+ ],
+ "proof": [
+  {
+   "text": "By [def-pc-finite-locally-free], both projections are finite, flat and locally of finite presentation. Apply [lem-sfb-flat-groupoid-algebraic-quotient] to the given groupoid over the given scheme $S$. It gives an algebraic stack $\\mathcal Q$, an algebraic-space-representable, surjective, flat, locally finitely presented map $p:U\\to\\mathcal Q$, and the canonical identification $R\\simeq U\\times_{\\mathcal Q}U$ with projections $s,t$. No smoothness of $s,t$, no field base and no constant-rank assumption are required.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tags 06FH (lemma-flat-quotient-flat-presentation), 06FI (theorem-flat-groupoid-gives-algebraic-stack); spaces-groupoids.tex Tag 04M9 (lemma-quotient-stack-2-cartesian)."
+   }
+  },
+  {
+   "text": "Fix an affine scheme $T$ and an object $x:T\\to\\mathcal Q$, and put $F=T\\times_{\\mathcal Q}U$, initially an algebraic space. By [lem-sfb-groupoid-stackification-local-description], choose an fppf covering $\\{T_i\\to T\\}$ and maps $u_i:T_i\\to U$ with $x|_{T_i}\\simeq p(u_i)$. The relation in step 1 identifies $F\\times_TT_i\\to T_i$ with a base change of one of $s,t$. It is finite by [lem-weil-pbc-finite-morphism-permanence], hence affine by the definition of finite morphism. Apply the affine clause of [lem-sfb-space-four-property-fppf-descent] to $F\\to T$ and this fppf family. Thus $F\\to T$ is affine; since $T$ is affine, $F$ itself is an affine scheme. The same family is fpqc by [lem-trf-fppf-covering-is-fpqc]. Now [lem-weil-pbc-fpqc-descend-finite] applies to the scheme morphism $F\\to T$ and proves that it is finite. In particular we use scheme finiteness descent only after obtaining scheme representability.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUM (lemma-well-nigh-affine), descent of finiteness in its proof; spaces-descent.tex Tag 041Z (lemma-descending-property-affine); descent.tex Tag 02LA (lemma-descending-property-finite)."
+   }
+  },
+  {
+   "text": "For an arbitrary scheme $T\\to\\mathcal Q$, the pullbacks over its affine open cover are the affine finite schemes of step 2. Apply [lem-weil-pbc-relative-glueing-affine-opens] to these schemes and their canonical restriction maps. The resulting scheme represents $T\\times_{\\mathcal Q}U$: the identifications are identities on the represented fibre-product sheaves, so satisfy the cocycle. By [lem-weil-pbc-finite-local-on-target], its projection to $T$ is finite. Hence $p$ is representable by schemes and finite, in addition to the properties in step 1. Surjectivity of $|p|$ is exactly the field-extension lifting clause of [lem-sfb-flat-groupoid-algebraic-quotient]: for any field-valued object of $\\mathcal Q$, the lifted field-valued point of $U$ has the same class in $|\\mathcal Q|$.",
+   "uses": [
+    "lem-weil-pbc-relative-glueing-affine-opens",
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUM (lemma-well-nigh-affine), proof; morphisms.tex Tag 01WI (lemma-finite-local); criteria.tex Tag 06FH (lemma-flat-quotient-flat-presentation)."
+   }
+  },
+  {
+   "text": "If $\\mathcal W\\subseteq\\mathcal Q$ is an open substack, its pullback $V=U\\times_{\\mathcal Q}\\mathcal W$ is an open subscheme by the definition of open substack. Under $R=U\\times_{\\mathcal Q}U$ from [lem-sfb-flat-groupoid-algebraic-quotient], the two maps $R\\to\\mathcal Q$ are isomorphic. Strict fullness of $\\mathcal W$ then identifies their inverse images of $\\mathcal W$, giving $s^{-1}(V)=t^{-1}(V)$.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), open case; spaces-groupoids.tex Tag 04M9 (lemma-quotient-stack-2-cartesian)."
+   }
+  },
+  {
+   "text": "Conversely let $V\\subseteq U$ be invariant. For $x:T\\to\\mathcal Q$, choose local lifts $u_i:T_i\\to U$ as in step 2. On $T_i\\times_TT_j$, the comparison between their images in $\\mathcal Q$ is an arrow of $R=U\\times_{\\mathcal Q}U$ by [lem-sfb-flat-groupoid-algebraic-quotient]. Invariance gives equal inverse images of $V$ under its two endpoints. Thus the opens $u_i^{-1}(V)$ agree on overlaps. The fppf family is fpqc by [lem-trf-fppf-covering-is-fpqc]; [lem-weil-pbc-open-subscheme-fpqc-descent] gives a unique open $W_x\\subseteq T$ pulling back to these opens. Uniqueness, applied on common refinements, makes $W_x$ independent of the lifts and compatible with every scheme pullback and every isomorphism of $x$. Define $\\mathcal W(T)$ to be the full subgroupoid of objects $x$ for which $W_x=T$. This is a strictly full substack: the property is local and invariant under isomorphism, so descent in $\\mathcal Q$ restricts to it. For a map $a:T'\\to T$, the object $x|_{T'}$ is in $\\mathcal W$ exactly when $a^{-1}(W_x)=T'$, equivalently when $a$ factors through the open $W_x$. This proves $T\\times_{\\mathcal Q}\\mathcal W=W_x$ and proves that $\\mathcal W$ is open. Taking a lift from $U$ itself proves $U\\times_{\\mathcal Q}\\mathcal W=V$.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), descent argument applied to the fppf cover; descent.tex Tag 03N0 (lemma-open-fpqc-covering)."
+   }
+  },
+  {
+   "text": "These constructions are inverse. Starting from an open $\\mathcal W$, its pullback to every $T_i$ is $u_i^{-1}(V)$, so uniqueness in [lem-weil-pbc-open-subscheme-fpqc-descent] identifies $W_x$ with $T\\times_{\\mathcal Q}\\mathcal W$. Hence the full subgroupoid constructed in step 5 is the original one. Starting from $V$, the last assertion of step 5 recovers $V$ itself. This gives the asserted bijection, not merely existence of an open image.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), bijectivity in the open case."
+   }
+  },
+  {
+   "text": "An open substack $\\mathcal W$ of the given Deligne--Mumford stack is again Deligne--Mumford: restrict an etale surjective scheme atlas of $\\mathcal Q$ to its open inverse image, and restrict the representable diagonal. Every scheme test of the restricted atlas is the identical test of the original atlas, since $\\mathcal W$ is a full substack; thus it is etale and surjective. The square with $V,U,\\mathcal W,\\mathcal Q$ is cartesian, so $V\\to\\mathcal W$ is a base change of $p$. On every scheme test, finiteness is preserved by [lem-weil-pbc-finite-morphism-permanence], and flatness, local finite presentation and surjectivity by [lem-sfb-stack-chartwise-smooth-etale-calculus]. In the groupoid, invariance identifies $R_V=R\\times_{U\\times_SU}(V\\times_SV)$ with both $s^{-1}(V)$ and $t^{-1}(V)$. Thus each restricted projection is a base change of the corresponding original projection; the same permanence results and [def-pc-finite-locally-free] give finite local freeness. Finally $V\\times_{\\mathcal W}V=R_V$ by reassociation of these cartesian squares. Apply clause (2) of [lem-sfb-fppf-groupoid-stack-presentations] to the representable surjective flat locally finitely presented scheme map $V\\to\\mathcal W$. It gives $[V/R_V]\\simeq\\mathcal W$, commuting with the object map.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-finite-locally-free",
+    "lem-sfb-fppf-groupoid-stack-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04WY (remark-flat-fp-presentation); spaces-groupoids.tex Tags 046S (lemma-quotient-stack-restrict), 046T (lemma-quotient-stack-restrict-equivalence); morphisms.tex Tag 01WL (lemma-base-change-finite)."
+   }
+  },
+  {
+   "text": "Assume $U$ affine and work absolutely over $\\operatorname{Spec}\\mathbf Z$. Put $C=U\\times_{\\mathbf Z}U$. It is affine by [lem-weil-pbc-fibre-product-affine-spectra], so its projection $C\\to U$ is separated by [lem-weil-pbc-affine-source-morphism-separated]. The arrow map $j=(s,t):R\\to C$ has composite with the first projection equal to the finite morphism $s$. This composite is proper by [lem-weil-pbc-finite-proper]. Apply [lemma-nagata-proper-to-separated-target] to the triangle $R\\to C\\to U$. It proves $j$ proper. This uses the absolute product $C$, not $U\\times_SU$, and needs no separatedness hypothesis on $S$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-finite-proper",
+    "lemma-nagata-proper-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTY (lemma-properties-diagonal-from-presentation), proof of (6); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); morphisms.tex Tag 01WN (lemma-finite-proper)."
+   }
+  },
+  {
+   "text": "Consider the absolute diagonal $\\Delta:\\mathcal Q\\to\\mathcal Q\\times_{\\mathbf Z}\\mathcal Q$. Regard the groupoid as an absolute groupoid by forgetting its $S$-structure; this does not change its total quotient stack or its self-relation $R$. Algebraicity and the relation calculation of [lem-sfb-flat-groupoid-algebraic-quotient] therefore also apply over $\\mathbf Z$. The product target is algebraic by [lem-sfb-algebraic-stack-fibre-products]. The map $p\\times p:C\\to\\mathcal Q\\times_{\\mathbf Z}\\mathcal Q$ is a composite of two base changes of $p$, so is representable, surjective, flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Its base change of $\\Delta$ is exactly $j:R\\to C$, by the self-relation identification: a pair of objects of $U$ together with an isomorphism in $\\mathcal Q$ is an arrow of $R$. The diagonal is representable by algebraic spaces. Apply [lem-sfb-representable-proper-fppf-target-test] to $\\Delta$ and this scheme cover $C$. Since $j$ is proper by step 8, $\\Delta$ is proper. This proves absolute separatedness.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-representable-proper-fppf-target-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTY (lemma-properties-diagonal-from-presentation), (5)--(6); stacks-properties.tex Tag 04XD (lemma-check-property-covering); stacks-more-morphisms.tex Tag 0DUM (lemma-well-nigh-affine), final assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "lem-sfb-flat-groupoid-algebraic-quotient",
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-finite-proper",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-representable-proper-fppf-target-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUM (lemma-well-nigh-affine), finite-presentation and separatedness arguments; invariant opens via the descent proof of stacks-properties.tex Tag 0507 and descent.tex Tag 03N0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free scheme groupoid has an algebraic quotient stack with finite flat presentation and invariant opens give open substacks; affine object scheme gives a separated quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite flat affine groupoid quotient is well nigh affine and separated with open substack correspondence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} (U : (D.obj i).Opens)\\n  {j k : CategoryTheory.Over i} (f : j ⟶ k),\\n  AlgebraicGeometry.IsAffineHom ((Algebraic\", \"doc\": \"Given a diagram of schemes where all morphisms are affine, the morphisms induced by the open subset diagram construction (which maps objects to preimages of an open subset under the diagram's morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.groupoid|quotient.stack|invariant.open.substack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraicity and separatedness of quotient stacks of affine finite locally free groupoids",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"[IsAffine Y] (f : X ⟶ Y) :\\n  AffineTargetMorphismProperty.diagonal (fun X _ _ _ ↦ CompactSpace X) f ↔ QuasiSeparatedSpace X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"SeparationQuotient.instIsTopologicalGroup\", \"module\": \"Mathlib.Topology.Algebra.SeparationQuotient.Basic\", \"type\": \"[Group G] [IsTopologicalGroup G] : IsTopologicalGroup (SeparationQuotient G)\", \"doc\": \"For any topological group $G$, its separation quotient (obtained by identifying topologically indistinguishable points) inherits a topological group structure. The group operations on the quotient are\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern scheme morphisms, ring loci, topological stabilizers, or unrelated splitting constructions, and do not state this algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free groupoid over an arbitrary scheme has a finite flat representable quotient presentation and invariant open substacks",
+   "results": "{\"t\": \"2026-10-23T11:52:51Z\", \"tool\": \"leanfinder\", \"query\": \"Finite locally free groupoid over an arbitrary scheme has a finite flat representable quotient presentation and invariant open substacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"1728f5d280544b6e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, Galois or topological groupoids, not finite flat algebraic-stack quotient presentations and invariant open substacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T11:54:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, Galois or topological groupoids, not finite flat algebraic-stack quotient presentations and invariant open substacks"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.groupoid|quotient.stack|invariant.open.substack",
+   "results": "{\"t\": \"2026-10-23T11:54:09Z\", \"tool\": \"grep\", \"query\": \"flat.groupoid|quotient.stack|invariant.open.substack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, Galois or topological groupoids, not finite flat algebraic-stack quotient presentations and invariant open substacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient stack of a finite locally free scheme groupoid and its open substacks",
+   "results": "{\"t\": \"2026-10-23T11:54:09Z\", \"tool\": \"leansearch\", \"query\": \"Quotient stack of a finite locally free scheme groupoid and its open substacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"TopologicalSpace.Opens.instHasGroupoid\", \"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"Subgroup.quotient_finite_of_isOpen\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.instQuasiSeparatedMorphismRestrict\"], \"digest\": \"8acc3fb52e41e6bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, Galois or topological groupoids, not finite flat algebraic-stack quotient presentations and invariant open substacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finite flat groupoid quotient stack is absolutely separated and its invariant opens are precisely open substacks",
+   "results": "{\"t\": \"2026-10-23T11:54:11Z\", \"tool\": \"leanfinder\", \"query\": \"An affine finite flat groupoid quotient stack is absolutely separated and its invariant opens are precisely open substacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\"], \"digest\": \"f41fc8d991f7d0f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, Galois or topological groupoids, not finite flat algebraic-stack quotient presentations and invariant open substacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-local-affine-covers",
+  "date": "2026-10-23",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Finite-flat groupoid presentations and their invariant open substacks.",
+   "via": [
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-scheme statement and supplied scheme representability before finite fpqc descent, an explicit fppf descent construction for invariant opens, the restricted quotient calculation, and an absolute-diagonal properness argument. Reused existing general tool nodes; the overlapping field-only presentation and separatedness nodes cannot cover this statement. No new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Finite-flat groupoid presentations and their invariant open substacks. Steps 1--3 realize finite flat presentations, 4--7 realize invariant opens and restricted presentations, and 8--9 realize absolute separatedness. The latest blueprint direct-image proof no longer mentions the historical alteration subroute; inherited provenance is retained without changing the unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "General fpqc descent of finiteness for scheme morphisms, applied only after affineness has made the source a scheme; no same-unit node states it for arbitrary schemes."
+   },
+   {
+    "node": "lem-weil-pbc-finite-local-on-target",
+    "why": "General Zariski locality of finite scheme morphisms assembles the affine scheme tests."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "General descent of compatible open subschemes along an fpqc family constructs the inverse open substack for a flat, possibly nonsmooth, presentation."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Generic triangle criterion proves properness of R to the absolute product from finiteness of s; it does not replace a unit-level route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lemma-nagata-proper-to-separated-target"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-70dbaa37c",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-70dbaa37c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all nine steps and the statements of all 18 cited nodes, plus the Stacks sources 0DUM, 0DTY and 0507. It has no new nodes. The statement, stmt_deps and source are unchanged against side-live, where the item is unsplit with no reviewed record and has no repair note. Steps 1-3 obtain p finite and representable by schemes in the right order: local lifts, then fppf descent of affineness for algebraic spaces, so the pullback is an affine scheme, and only then fpqc descent of finiteness for schemes, followed by Zariski gluing. Steps 4-6 prove the invariant-open bijection directly by fpqc descent of opens. They avoid the smooth-atlas node lem-sfb-invariant-open-substack-descent, which would not apply because a finite flat p is not smooth. Step 7 establishes every hypothesis of clause (2) of fppf-groupoid-stack-presentations before using it. Steps 8-9 are the 0DTY(5)/(6) argument: R -> U x_Z U is proper by the proper-triangle criterion, then the fppf target test applies to the absolute diagonal. I checked that isomorphisms in Q lie over the identity of the test scheme, so the pullback of the diagonal along p x p is j : R -> U x_Z U even when S is not separated. Small cases tested: the identity groupoid, the empty groupoid, BG for a finite constant group in characteristic dividing its order, and a nonseparated base S. Batch-5 flags: lem-trf-fppf-covering-is-fpqc is a general Mathlib-leaf topology fact, and the four sfb nodes reach sec-trace-formula only through the general definition def-trf-algebraic-space; none of them is a step of the trace formula or of Poincare duality, so all are accepted. The four declared tool_uses are generic scheme facts and are accepted. Maintainer note: the Q76 field-only nodes are special cases of this item, not duplicates."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFlatGroupoidQuotientOpenGeometry",
+  "declaration": "CategoryTheory.finiteFlatGroupoid_quotient_open_geometry",
+  "declarations": [
+   "CategoryTheory.groupoidOpenChart",
+   "CategoryTheory.groupoidOpenChartInclusion",
+   "CategoryTheory.finiteFlatGroupoid_quotient_open_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatGroupoidQuotientOpenGeometry.lean",
+  "statement": "theorem finiteFlatGroupoid_quotient_open_geometry {S : Scheme.{u}} {U R : Over S} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s.left t.left ⟶ R.left) (hG : IsGroupoidScheme s.left t.left e.left i.left c) [s.left.IsFiniteLocallyFree] [t.left.IsFiniteLocallyFree] (Q : BasedCategory.{v, w} (Over S)) (p : BasedFunctor (discreteModuli (yoneda.obj U)) Q) (presentation : SchemeGroupoidQuotientPresentation s t e.left i.left c Q p) (hQ : IsDeligneMumfordModuliStack Q) : ModuliSchemeTest (fun _ _ f ↦ Surjective f ∧ IsFinite f ∧ Flat f ∧ LocallyOfFinitePresentation f) p ∧ (∃ b : OpenModuliSubstack Q ≃ {V : U.left.Opens // s.left ⁻¹ᵁ V = t.left ⁻¹ᵁ V}, ∀ W : OpenModuliSubstack Q, (∃ a : BasedFunctor (discreteModuli (yoneda.obj (groupoidOpenChart U (b W).val))) (moduliTwoFiberProduct p (fullModuliInclusion Q W.property)), IsSchemeModuliBaseChange a (groupoidOpenChartInclusion U (b W).val)) ∧ ∃ pV : BasedFunctor (discreteModuli (yoneda.obj (groupoidOpenChart U (b W).val))) W.category, Nonempty (ModuliTwoIso (pV.comp (fullModuliInclusion Q W.property)) ((discreteModuliMap (yoneda.map (groupoidOpenChartInclusion U (b W).val))).comp p)) ∧ ModuliSchemeTest (fun _ _ f ↦ Surjective f ∧ IsFinite f ∧ Flat f ∧ LocallyOfFinitePresentation f) pV ∧ (restrictedEtaleRelationSource s t (groupoidOpenChartInclusion U (b W).val)).left.IsFiniteLocallyFree ∧ (restrictedEtaleRelationTarget s t (groupoidOpenChartInclusion U (b W).val)).left.IsFiniteLocallyFree ∧ ∃ (eV : groupoidOpenChart U (b W).val ⟶ restrictedEtaleRelation s t (groupoidOpenChartInclusion U (b W).val)) (iV : restrictedEtaleRelation s t (groupoidOpenChartInclusion U (b W).val) ⟶ restrictedEtaleRelation s t (groupoidOpenChartInclusion U (b W).val)) (cV : pullback (restrictedEtaleRelationSource s t (groupoidOpenChartInclusion U (b W).val)).left (restrictedEtaleRelationTarget s t (groupoidOpenChartInclusion U (b W).val)).left ⟶ (restrictedEtaleRelation s t (groupoidOpenChartInclusion U (b W).val)).left), eV ≫ restrictedGroupoidMiddle s t (groupoidOpenChartInclusion U (b W).val) = groupoidOpenChartInclusion U (b W).val ≫ e ∧ iV ≫ restrictedGroupoidMiddle s t (groupoidOpenChartInclusion U (b W).val) = restrictedGroupoidMiddle s t (groupoidOpenChartInclusion U (b W).val) ≫ i ∧ cV ≫ (restrictedGroupoidMiddle s t (groupoidOpenChartInclusion U (b W).val)).left = restrictedGroupoidComposableMap s t (groupoidOpenChartInclusion U (b W).val) ≫ c ∧ Nonempty (SchemeGroupoidQuotientPresentation (restrictedEtaleRelationSource s t (groupoidOpenChartInclusion U (b W).val)) (restrictedEtaleRelationTarget s t (groupoidOpenChartInclusion U (b W).val)) eV.left iV.left cV W.category pV)) ∧ Function.Surjective (moduliPointMap p) ∧ (IsAffine U.left → HasProperModuliDiagonal (BasedCategory.ofFunctor (Q.p ⋙ Over.map (AlgebraicGeometry.specULiftZIsTerminal.from S))))",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed scheme-groupoid quotient presentation, full open substack, scheme-test and point, proper-diagonal, and restricted-relation interfaces; their owning nodes are added to stmt_deps. Absolute properness is the existing HasProperModuliDiagonal predicate on the unchanged total category with projection composed with Over.map(S → Spec(ULift Z)), not the relative diagonal over S. No new mathematical notion or statement correction. Repair of H2 on 6d52852e716f: restrictedGroupoidMiddle and restrictedGroupoidComposableMap are now cited through their new definition owner def-sfb-restricted-groupoid-middle-maps (existing:true), rather than their module's theorem node. The Lean file and signature are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d66920359",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 of 6d52852e: Lean tree byte-identical to 6d52 (statement maths accepted there; re-read clause table and edge cases, agree). Only item changes: stmt_deps swaps theorem lem-sfb-fppf-groupoid-restriction-quotient for new def node def-sfb-restricted-groupoid-middle-maps, plus lean.note. New node: existing:true on live FppfGroupoidRestrictionQuotient; restrictedGroupoidMiddle and restrictedGroupoidComposableMap are real pullback constructions matching the node text (Stacks 02VB); statement verbatim modulo noncomputable, as in the landed def-sfb-restricted-groupoid-relation; stmt_deps exist on live; no other owner on side-live; Q59 theorem record untouched. Item lean.statement verbatim in file; single sorry; docstrings with source/blueprint; no hollow defs. No compile (no file changed)."
+ }
+}

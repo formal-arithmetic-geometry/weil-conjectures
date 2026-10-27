@@ -1,0 +1,147 @@
+{
+ "id": "lem-asd-flat-ordinary-scalar-unit-derived",
+ "kind": "statement",
+ "title": "Flat ordinary scalar units compute derived units",
+ "statement": "Let $C$ be a category with objects in $\\operatorname{Type}(u+1)$, morphisms in $\\operatorname{Type}(u)$, and essentially small in universe $u+1$. Let $J$ be a Grothendieck topology on $C$. Let $R,A$ be commutative rings in $\\operatorname{Type}(u+1)$, $\\varphi:R\\to A$ a ring homomorphism, $F$ a sheaf of $R$-modules, $G$ a sheaf of $A$-modules, and $\\eta:F\\to\\operatorname{Res}_{\\varphi}G$, where restriction is [def-pc-sheaf-restrict-scalars]. Suppose $F$ is flat: tensoring with $F$ preserves finite limits and finite colimits in the monoidal category of $R$-module sheaves. Suppose, for every $A$-module sheaf $H$, composition with $\\eta$ induces a bijection $\\operatorname{Hom}(G,H)\\to\\operatorname{Hom}(F,\\operatorname{Res}_{\\varphi}H)$. Then $\\eta$ satisfies scalarUniversal [def-geo-exact-degree-zero-interface]: the induced map $F[0]\\to D(\\operatorname{Res}_{\\varphi})(G[0])$ induces bijections $\\operatorname{Hom}(G[0],N)\\to\\operatorname{Hom}(F[0],D(\\operatorname{Res}_{\\varphi})(N))$ for every unbounded derived $A$-module sheaf $N$. No flatness of $A$ over $R$ is assumed.",
+ "stmt_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-geo-exact-degree-zero-interface"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YY (lemma-derived-base-change), and 07A6 (lemma-adjoint), for identity of the site with a map of constant coefficient rings"
+ },
+ "proof": [
+  {
+   "text": "Construct ordinary extension E as composeAndSheafify of ModuleCat.extendScalars and use Sheaf.adjunction to obtain E adjoint to exact restriction U. The identity on ordinary tensor products gives extendScalars followed by restrictScalars isomorphic to tensorLeft of the restricted regular A-module. Restriction commutes with sheafification because it also has a right adjoint. Combine sheafComposeNatIso, the strong monoidal sheafification comparison and the sheafification counit to construct extensionRestrictIso: E followed by U is tensorLeft of the sheafified restricted regular A-module. These are the proved private helpers moduleExtendRestrictIso and extensionRestrictIso.",
+   "uses": [
+    "def-geo-exact-degree-zero-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An acyclic K-flat complex stays acyclic after tensoring with any object, by the adopted source theorem CochainComplex.acyclic_tensorRight_of_kFlat. Use braiding and extensionRestrictIso to deduce acyclicity after E followed by U. Exact faithful restriction reflects acyclicity. Functor.PreservesKFlatQuasiIso.mk', which applies this argument to mapping cones, proves E preserves quasi-isomorphisms between K-flat complexes. This is extension_preservesKFlatQuasiIso; it makes no flatness assumption on A.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive E adjoint to U using the existing generic derived adjunction, and identify the derived right functor of exact U with U.mapDerivedCategory. The single complex F[0] is K-flat by the adopted source criterion CochainComplex.kFlat_single_obj_iff_flat. Apply the K-flat cochain-transpose theorem to make the transpose of its localized ordinary unit invertible. The proved single_unit_square checks the termwise ordinary unit in degree zero, with zero source in all other degrees. derived_single_unit_square then uses naturality of the exact localization comparison and the exact-single comparison to identify its postcomposition with the E single-complex isomorphism with the exact unit specified in the statement.",
+   "uses": [
+    "lem-sfb-exact-right-adjoint-kflat-representative",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-geo-exact-degree-zero-interface",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let q:EF to G be the ordinary adjunction transpose of eta. For every H, postcomposition with q followed by the adjunction Hom equivalence is exactly postcomposition with eta, hence is bijective. Coyoneda detects isomorphisms, so q is invertible. The adjunction unit equation gives eta = unit(F) followed by U(q); naturality of the exact-single comparison gives the same equation for the raw derived units. Compose the invertible cochain transpose from the previous step with q[0]. Postcomposition with this isomorphism followed by the derived adjunction Hom equivalence gives the required bijections for every unbounded N. Finally scalarUniversal is definitionally the named Universal property for restriction.",
+   "uses": [
+    "def-geo-exact-degree-zero-interface"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-geo-exact-degree-zero-interface",
+  "def-pc-kflat-complex",
+  "lem-sfb-exact-right-adjoint-kflat-representative",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ, 06YY and 07A6; direct ModuleCat-valued sheaf construction and exact-right-adjoint K-flat transpose, formalized by X7 on 2026-10-26."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An ordinary extension of scalars unit with flat source induces a universal unit on unbounded derived categories of sheaves of modules",
+   "results": "ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ExtendRestrictScalarsAdj.unit; PresheafOfModules.unit; SheafOfModules.unit; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Unitization.lift; Functor.totalRightDerivedUnit",
+   "date": "2026-10-26",
+   "verdict": "The hits concern ordinary module or module-sheaf functors; none states this normalized derived or finite-image universal property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"Sheaf\"",
+   "results": "No hits",
+   "date": "2026-10-26",
+   "verdict": "No matching sheaf scalar-extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedBaseChange|scalarUniversal|lowerStar.*extendScalars|extendScalars.*lowerStar",
+   "results": "No hits",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem with either required universal property."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedKummerScalarDerived",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Final scalar-extension paragraph of lem-amb-cartier-kummer-map as used by thm-asd-smooth-tensor: compute change of coefficients on the flat degree-zero constant and supported constant sheaves; original derived-units split, steps 3 and 5.",
+   "via": [
+    "lem-asd-supported-kummer-scalar-derived-units",
+    "lem-asd-supported-kummer-scalar-source",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FlatScalarUnit",
+  "file": "lean/Sheaf/CategoryTheory/FlatScalarUnit.lean",
+  "declaration": "SheafExactDegreeZero.scalarUniversal_of_flat",
+  "statement": "theorem scalarUniversal_of_flat\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    (J : GrothendieckTopology C) {R A : Type (u + 1)} [CommRing R] [CommRing A]\n    (φ : R →+* A) (F : Sheaf J (ModuleCat.{u + 1} R))\n    (G : Sheaf J (ModuleCat.{u + 1} A))\n    (η : F ⟶ (Sheaf.restrictScalars J φ).obj G)\n    (hF : ObjectProperty.flat F)\n    (hη : ∀ H : Sheaf J (ModuleCat.{u + 1} A),\n      Function.Bijective (fun f : G ⟶ H ↦ η ≫ (Sheaf.restrictScalars J φ).map f)) :\n    scalarUniversal J φ F G η",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T001301-L-4181579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T024226-L-649083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

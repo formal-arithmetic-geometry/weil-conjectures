@@ -1,0 +1,120 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, before integration."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, before integration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for a section identifies the pushforward of the diagonal class tensored with an object with the object tensored with the diagonal integral",
+   "results": "8 hits, including pullback.diagonal_fst, diagonalObjPullbackFstIso_inv_snd_fst, Scheme.Modules.pushforward_obj_obj and LinearMap.proj_comp_single. They concern ordinary pullback geometry, sheaf sections or linear algebra, not the derived section/projection or trace-tail equations.",
+   "date": "2026-10-27",
+   "verdict": "No matching derived identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category the diagonal kernel unit followed by pullback of the trace counit is identity tensor the diagonal integral",
+   "results": "8 hits: Functor.diag tensor coherences, Dial.triangle, ExactPairing.coevaluation_evaluation and externalProductCompDiagIso components. None addresses geometric diagonal insertion or trace base change.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"counit\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "unitComponent|counitComponent|section.*(projection|tensor)",
+   "results": "RationalP1AmbientComposites defines the maps but proves no contraction. The tower modules TowerP1TriangleFactorization, TowerP1SecondTraceReordering and TowerP1DiagonalProjectionFactor supply an analogous decomposition on a different tower-system category. The generic ringed section/projection and exchange/tensor theorems need normalization transport to the present internal-module category.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical ambient maps and split the insertion and trace-tail equations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(section|counit)|diagonal.*contraction",
+   "results": "msearch Mathlib grep returned 12 hits: Condensed.Discrete.LocallyConstant projection of counit, group-functor section projections, extra degeneracies, hypercovers and Nobeling. None gives the derived geometric contraction or its two component equations.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondAmbientContraction",
+  "date": "2026-10-27",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-ambient-contraction",
+   "place": "Second identity, before integration."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "id": "def-sfb-rational-p1-ambient-tail",
+ "title": "Fixed class-free ambient unit tail",
+ "statement": "For any commutative condensed coefficient Lambda, projective-line base Y, Tate family L, shifted second-line comparison e, derived M on P and invertibility witnesses hb,hp, define unitTail from Rp2*(p1*M(1)[2]) to q*Rq*M(1)[2] as inverse twistProjectionMap followed by twist of the inverse ambient exchange. The helper ambientExchangeInverse is exactly the native inverse expressed using the fixed module-object functor names. Prove unitComponent equals its pushSection/class insertion followed by unitTail, for any Diagram d. All definitions are literal fixed composites, without class or trace data chosen anew.",
+ "stmt_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ambient exchange inverse through the module-object functor wrappers at a generic square, then compose it with the inverse twist projection. Unfold these explicit definitions and unitComponent to prove unitComponent_factor by definitional equality, allowing full local reduction of the derived-instance wrappers.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1AmbientTail",
+  "file": "lean/Sheaf/Paper/RationalP1AmbientTail.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.unitTail",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.ambientExchangeInverse",
+   "AlgebraicGeometry.ProEtale.RationalP1.unitTail",
+   "AlgebraicGeometry.ProEtale.RationalP1.unitComponent_factor"
+  ],
+  "statement": "def unitTail : (moduleObjectDerivedPushforward Λ (secondProjection Y)).obj ((twist Λ (diagonalSurface Y) (L (diagonalSurface Y))).obj ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M)) ⟶ (twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).obj ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T222712-L-684121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T222712-L-684121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

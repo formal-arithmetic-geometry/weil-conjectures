@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-adic-reindexing-hom",
+ "kind": "statement",
+ "title": "Evaluation-transpose Hom law for tensor-compatible reindexing",
+ "statement": "Fix a prime l, a finite-field datum D and an arbitrary FamilyCore C [def-sf-adic-realization-isomorphism-data]. Assume its comparison obeys the tensor compatibility equation of Family for every pair of common-stage objects. Then it obeys the Hom compatibility equation of Family for every permitted internal-Hom pair: comparison at the Hom object, realized Hom map, the ambient evaluation-defined pullHom, and transport by the comparison at both inputs equal realized podCommonHomComparison followed by the realized Hom map at the pulled-back pair. No integral normalization, identity/composition law or new comparison data is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; arbitrary scheme-isomorphism reindexing, including semilinear Frobenius; old step 12; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry the asserted equation using the target tensor-Hom adjunction. Naturality\nof this adjunction in its parameter and both Hom variables rewrites the left side as\npulled-back realized evaluation, followed by the comparison at the second input.\nHere pullHom is by definition the transpose of pulled-back evaluation, so its counit\nidentity supplies this rewrite. Apply tensor compatibility and naturality of comparison\nto the source evaluation arrow. The evaluation equation for the permitted-pair pullback\nHom comparison identifies the result with the uncurrying of the right side. The\nrealization HomLaws evaluation identities give the same realized evaluation on both\nsides. Injectivity of uncurrying proves equality. All Hom objects used are the recorded\npermitted pairs; no perfection assertion on their first input is needed.",
+   "uses": [
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit stage-3 subargument of lem-sf-adic-realization-isomorphism-normalization; 7. Not claimed verbatim in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural monoidal transformation commutes with internal Hom evaluation transpose",
+   "results": "Eight hits including CategoryTheory.ihom.ev_naturality and CategoryTheory.NatTrans.IsMonoidal. These concern generic closed monoidal categories, not the native adic/common-stage normalized maps.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between the common stage adic realization composed with pullback under scheme isomorphism and ordinary derived module inverse image",
+   "results": "Eight hits, including Scheme.Modules.pullbackId, pullbackCongr, restrictFunctorIsoPullback and comapIso identities. None states native adic realization normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientBaseChangeHom|homEquiv_naturality_left_symm",
+   "results": "25 hits for generic adjunction naturality; no coefficientBaseChangeHom in Mathlib. Native adic comparisons are in the project library.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicRealizationIsomorphismNormalization",
+  "date": "2026-10-25",
+  "group": "B9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation with no imported blueprint ancestor; lem-sf-adic-realization-isomorphism-normalization proof steps 7",
+   "via": [
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingHom",
+  "file": "lean/Sheaf/Paper/AdicReindexingHom.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.normalized_reindexing_hom",
+  "statement": "theorem normalized_reindexing_hom\n    (C : FamilyCore l D)\n    (h_tensor_compatibility : ∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n          (M N : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) U.base.left),\n        letI := (C.data T).units\n        letI := (C.data U).units\n        (derivedPull l T.base.left g.hom (C.ring T U g)).map ((C.data U).tensor.tensor.hom.app (M,\n          N)) ≫\n          (C.comparison T U g).inv.app ((commonStageDerivedTensor l (PadicAlgCl l) U.base.left).obj\n            (M, N)) ≫\n          (ordinary l T.base.left (C.data T).realization).map\n            (canonicalCommonStagePullbackTensor l (PadicAlgCl l) g.hom M N).hom =\n        (C.pullTensor T U g).tensor.hom.app\n            ((ordinary l U.base.left (C.data U).realization).obj M,\n             (ordinary l U.base.left (C.data U).realization).obj N) ≫\n          (C.data T).tensor.closed.tensor.map (Prod.mkHom\n            ((C.comparison T U g).inv.app M) ((C.comparison T U g).inv.app N)) ≫\n          (C.data T).tensor.tensor.hom.app ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj\n            M,\n            (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N)) :\n    ∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n      (P : (commonStageHomPairs l (PadicAlgCl l) U.base.left).FullSubcategory),\n    letI := (C.data T).units\n    letI := (C.data U).units\n    (C.comparison T U g).hom.app\n        ((commonStageDerivedInternalHom l (PadicAlgCl l) U.base.left).obj P) ≫\n      (derivedPull l T.base.left g.hom (C.ring T U g)).map\n        (homComparison l U.base.left (C.data U).realization (C.data U).tensor P) ≫\n      pullHom l T.base.left g.hom (C.pullTensor T U g)\n        ((ordinary l U.base.left (C.data U).realization).obj P.obj.1.unop)\n        ((ordinary l U.base.left (C.data U).realization).obj P.obj.2) ≫\n      (ambientHom l T.base.left (C.data T).realization).map\n        (Prod.mkHom ((C.comparison T U g).hom.app P.obj.1.unop).op\n          ((C.comparison T U g).inv.app P.obj.2)) =\n    (ordinary l T.base.left (C.data T).realization).map\n        (podCommonHomComparison l (PadicAlgCl l) g.hom P) ≫\n      homComparison l T.base.left (C.data T).realization (C.data T).tensor\n        ((podPairPullback (commonStageDerivedPullback l (PadicAlgCl l) g.hom)\n      (commonStageHomPairs l (PadicAlgCl l) U.base.left)\n      (commonStageHomPairs l (PadicAlgCl l) T.base.left)\n      (podCommonPairs_pullback l (PadicAlgCl l) g.hom)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly + 4 split statements against AdicRealizationFamilyData Family/FamilyCore fields and pinning structures (RingReindex, IntegralReindex, ReindexTensor); item node proof_deps against Lean; unit sk-prop-sfb-cartesian-coefficients against core child proof_deps; importers AdicQbarConstructibleRealization + NativeWeilScalarFrobeniusCounit compiled against delivered modules"
+ }
+}

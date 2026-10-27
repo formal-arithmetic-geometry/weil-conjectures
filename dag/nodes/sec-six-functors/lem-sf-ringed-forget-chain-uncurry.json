@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-ringed-forget-chain-uncurry",
+ "kind": "lemma",
+ "title": "Underived evaluation preserves ordinary chain uncurrying",
+ "statement": "Let (C,J,R) and (D,Jprime,Rprime) be ringed sites with independent universes and additive sheafification, and let U between their module-sheaf categories be additive. Fix the underived tensor and sheaf-Hom comparisons preserving canonical evaluation [def-sf-ringed-forget-tensor-transposition-data]. For unbounded complexes P,K,I, let t:U(Tot(P,K)) to Tot(UP,UK) and h:U(Hom(K,I)) to Hom(UK,UI) be chain isomorphisms [def-pc-tensor-complex-sheaves, def-pur-hom-complex], with the specified tensor summand and Hom projection equations. Let phi:P to Hom(K,I), and let psi and psiprime be chain maps satisfying the literal componentwise curry equations [lem-sf-coefficient-cochain-tensor-curry] for phi and U(phi) followed by h. Then U(psi)=t followed by psiprime. No exactness, flatness, K-injectivity, derived category or coproduct preservation is assumed.",
+ "stmt_deps": [
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "lem-sf-coefficient-cochain-tensor-curry"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-hom-complexes (08J9), lemma-compose; step 2 of lem-sf-ringed-forget-normalized-uncurry, the underived evaluation calculation."
+ },
+ "proof": [
+  {
+   "text": "Construct canonical sheaf evaluation using the ordinary tensor-Hom equivalence and symmetry. On a pure tensor phi tensor y this evaluates phi at y, by the ordinary sheaf adjunction. By the sheafification adjunction, equality on all such pure tensors implies equality of sheaf tensor maps.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The curry hypotheses therefore identify each tensor summand of psi and psiprime with evaluation after the appropriate Hom projection. The summand equation expresses the inverse tensor comparison on target summands; the projection equation expresses the target projection by the specified Hom comparison. Naturality of the underived tensor comparison and its evaluation equation identify these summand maps.",
+   "uses": [
+    "def-sf-ringed-forget-tensor-transposition-data",
+    "lem-sf-coefficient-cochain-tensor-curry",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the desired equality by the inverse chain tensor comparison. On its target total complex, the tensor summand inclusions jointly detect equality in every degree. The preceding summand calculation proves equality of the chain maps, and cancellation of the chain isomorphism concludes.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-coefficient-cochain-tensor-curry",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-hom-complexes (08J9), lemma-compose, expanded under the given evaluation-preservation square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor Hom evaluation naturality under exact additive functor on cochain complexes",
+   "results": "ihom.ev_naturality and Cochain.map give formal naturality, but no comparison for this product sheaf Hom and total tensor.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving tensor and internal Hom evaluation preserves cochain uncurrying by equality on tensor summands and Hom projections.",
+   "results": "uncurry_expComparison is cartesian; the other hits concern abstract closed adjunctions and do not state the specified sheaf-complex comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry.*(map|[Nn]atural)|([Nn]atural|map).*uncurry",
+   "results": "Mathlib closed naturality and RingedDerivedNative.chainEquiv_symm_naturality are within one category, rather than comparison along U. The blueprint evaluation search found no separate chain-level forgetting statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetNormalizedUncurry",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom/evaluation/transposition paragraph: evaluation commutes with forgetting on tensor summands and Hom projections.",
+   "via": [
+    "lem-sf-ringed-forget-normalized-uncurry",
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedForgetChainUncurry",
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetChainUncurry.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.ringed_forget_chain_uncurry",
+  "statement": "theorem ringed_forget_chain_uncurry\n    (u : Underived.{c, v, r, d, vd, s} J R J' R' U)\n    (P K I : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n    (t : (U.mapHomologicalComplex (.up ℤ)).obj\n        ((coefficientTotalTensor.{r, c, v} J R).obj (P, K)) ≅\n      (coefficientTotalTensor.{s, d, vd} J' R').obj\n        ((U.mapHomologicalComplex (.up ℤ)).obj P,\n          (U.mapHomologicalComplex (.up ℤ)).obj K))\n    (ht : ∀ (p q n : ℤ) (hpq : p + q = n),\n      U.map (tensorSummand.{c, v, r} J R P K p q n hpq) ≫ t.hom.f n =\n        u.tensor.hom.app (P.X p, K.X q) ≫\n          tensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)\n            ((U.mapHomologicalComplex (.up ℤ)).obj K) p q n hpq)\n    (h : (U.mapHomologicalComplex (.up ℤ)).obj (homComplex (R := R) K I) ≅\n      homComplex (R := R') ((U.mapHomologicalComplex (.up ℤ)).obj K)\n        ((U.mapHomologicalComplex (.up ℤ)).obj I))\n    (hh : ∀ (n p q : ℤ) (hpq : p + n = q),\n      h.hom.f n ≫ homComplexπ (R := R') ((U.mapHomologicalComplex (.up ℤ)).obj K)\n          ((U.mapHomologicalComplex (.up ℤ)).obj I) n p q hpq =\n        U.map (homComplexπ (R := R) K I n p q hpq) ≫\n          u.hom.hom.app (op (K.X p), I.X q))\n    (φ : P ⟶ homComplex (R := R) K I)\n    (ψ : (coefficientTotalTensor.{r, c, v} J R).obj (P, K) ⟶ I)\n    (ψ' : (coefficientTotalTensor.{s, d, vd} J' R').obj\n        ((U.mapHomologicalComplex (.up ℤ)).obj P,\n          (U.mapHomologicalComplex (.up ℤ)).obj K) ⟶\n      (U.mapHomologicalComplex (.up ℤ)).obj I)\n    (hψ : IsCoefficientTensorCurry.{r, c, v} J R P K I ψ φ)\n    (hψ' : IsCoefficientTensorCurry.{s, d, vd} J' R'\n      ((U.mapHomologicalComplex (.up ℤ)).obj P) ((U.mapHomologicalComplex (.up ℤ)).obj K)\n      ((U.mapHomologicalComplex (.up ℤ)).obj I) ψ'\n      ((U.mapHomologicalComplex (.up ℤ)).map φ ≫ h.hom)) :\n    (U.mapHomologicalComplex (.up ℤ)).map ψ = t.hom ≫ ψ'",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222709-L-683575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222709-L-683575",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

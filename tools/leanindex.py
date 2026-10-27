@@ -159,50 +159,102 @@ def tokens(s: str) -> list[str]:
 
 # 2026-10-19 (hot path: tools/queue.py write took 113 s, ~70% in lex() of the same 20k sources three times per run):
 # sorry_count, imports_of, public_imports_of and decls_in_text are pure functions of the text; their results are
-# memoized by a digest of the text, in-process and across runs in local/leanindex-text-cache.pickle (entries this
-# run used are kept; the file is rewritten atomically at exit when something new was computed).
-_TC = {"d": None, "dirty": False, "used": set()}
+# memoized by a digest of the text, in-process and across runs.
+# 2026-10-27: the cross-run store was one pickle (local/leanindex-text-cache.pickle, 70k entries, 1.4 GB) that every
+# process loaded whole (3.5 GB RSS each, ~70% of a lander check process) and rewrote whole at exit (the disk filled
+# twice). Now it is a keyed SQLite store (WAL): a process reads the rows it asks for and inserts the rows it computed;
+# nothing is loaded or rewritten whole. Path: $SHEAF_LEANINDEX_CACHE (with .sqlite for .pickle) or
+# local/leanindex-text-cache.sqlite. Rows not written for 10 days are pruned once the file is over 3 GB (a pruned
+# row is computed again).
+_TC = {"mem": {}, "new": {}, "db": None, "pid": None, "lock": None, "path": None, "atexit": False}
+_TC_MISS = object()
 
 
-def _tc():
-    if _TC["d"] is None:
-        import pickle, atexit
-        try:
-            with open(ROOT / "local" / "leanindex-text-cache.pickle", "rb") as f:
-                _TC["d"] = pickle.load(f)
-        except Exception:
-            _TC["d"] = {}
-        atexit.register(_tc_save)
-    return _TC["d"]
+def _tc_path():
+    p = os.environ.get("SHEAF_LEANINDEX_CACHE")
+    if p:
+        return pathlib.Path(p[:-len(".pickle")] + ".sqlite" if p.endswith(".pickle") else p + ".sqlite")
+    return ROOT / "local" / "leanindex-text-cache.sqlite"
+
+
+def _tc_db():
+    """The connection of this process (a forked child opens its own), or None when the store cannot be opened."""
+    if _TC["pid"] == os.getpid():
+        return _TC["db"]
+    import sqlite3, threading, atexit
+    _TC["pid"], _TC["db"], _TC["lock"] = os.getpid(), None, threading.Lock()
+    if not _TC["atexit"]:
+        atexit.register(_tc_save); _TC["atexit"] = True
+    try:
+        path = _tc_path(); path.parent.mkdir(parents=True, exist_ok=True)
+        db = sqlite3.connect(str(path), timeout=30, isolation_level=None, check_same_thread=False)
+        db.execute("PRAGMA busy_timeout=30000")
+        if db.execute("PRAGMA journal_mode").fetchone()[0].lower() != "wal":
+            db.execute("PRAGMA journal_mode=WAL")
+        db.execute("PRAGMA synchronous=NORMAL")
+        db.execute("CREATE TABLE IF NOT EXISTS t (k BLOB NOT NULL, kind TEXT NOT NULL, v BLOB NOT NULL, "
+                   "day INTEGER NOT NULL, PRIMARY KEY (k, kind)) WITHOUT ROWID")
+        _TC["db"], _TC["path"] = db, path
+    except Exception:  # noqa: BLE001   no store: memoize in-process only
+        _TC["db"] = None
+    return _TC["db"]
+
+
+def _tc_get(k, kind):
+    db = _tc_db()
+    if db is None:
+        return _TC_MISS
+    import pickle
+    try:
+        with _TC["lock"]:
+            row = db.execute("SELECT v FROM t WHERE k=? AND kind=?", (k, kind)).fetchone()
+        return _TC_MISS if row is None else pickle.loads(row[0])
+    except Exception:  # noqa: BLE001
+        return _TC_MISS
 
 
 def _tc_save():
-    if not _TC["dirty"]:
+    """Insert the rows computed since the last save (also called every 5000 new rows)."""
+    new = _TC["new"]
+    if not new:
         return
-    import pickle
-    d = _TC["d"]
-    if len(d) > 120000:
-        d = {k: v for k, v in d.items() if k in _TC["used"]}
+    _TC["new"] = {}
+    db = _TC["db"] if _TC["pid"] == os.getpid() else None
+    if db is None:
+        return
+    import pickle, shutil, time, random
     try:
-        out = ROOT / "local" / "leanindex-text-cache.pickle"
-        tmp = out.with_name(out.name + f".{os.getpid()}.tmp")
-        with open(tmp, "wb") as f:
-            pickle.dump(d, f, protocol=pickle.HIGHEST_PROTOCOL)
-        os.replace(tmp, out)
-    except Exception:
+        if shutil.disk_usage(_TC["path"].parent).free < 5 * 2**30:
+            return
+        day = int(time.time() // 86400)
+        rows = [(k, kind, pickle.dumps(v, protocol=pickle.HIGHEST_PROTOCOL), day) for (k, kind), v in new.items()]
+        with _TC["lock"]:
+            db.execute("BEGIN IMMEDIATE")
+            try:
+                db.executemany("INSERT OR IGNORE INTO t (k, kind, v, day) VALUES (?, ?, ?, ?)", rows)
+                if random.random() < 0.01 and _TC["path"].stat().st_size > 3 * 2**30:
+                    db.execute("DELETE FROM t WHERE day < ?", (day - 10,))
+                db.execute("COMMIT")
+            except Exception:
+                db.execute("ROLLBACK"); raise
+    except Exception:  # noqa: BLE001   a cache: losing rows only costs time
         pass
 
 
 def _memo(kind, text, fn):
     import hashlib
     k = hashlib.blake2b(text.encode("utf-8", "surrogatepass"), digest_size=16).digest()
-    d = _tc(); _TC["used"].add(k)
-    e = d.get(k)
-    if e is None:
-        e = d[k] = {}
-    if kind not in e:
-        e[kind] = fn(text); _TC["dirty"] = True
-    return e[kind]
+    v = _TC["mem"].get((k, kind), _TC_MISS)
+    if v is _TC_MISS:
+        v = _tc_get(k, kind)
+        if v is _TC_MISS:
+            v = fn(text); _TC["new"][(k, kind)] = v
+            if len(_TC["new"]) >= 5000:
+                _tc_save()
+        if len(_TC["mem"]) >= 400000:     # a long-running process: keep the in-process memo bounded
+            _TC["mem"].clear()
+        _TC["mem"][(k, kind)] = v
+    return v
 
 
 def sorry_count(s: str) -> int:

@@ -10,23 +10,20 @@ public import Sheaf.Compactification.BoundaryRefinement
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import Sheaf.CategoryTheory.Triangulated.LocalizingIsoLocus
-import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
-import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedDetection
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Mathlib.CategoryTheory.Localization.Adjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.Paper.CartesianCoefficients
+import WeilConjectures.Compactification.OverRefinement
+import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+import all Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono
+import all Sheaf.Paper.CondensedOpenClosedRecollement
+import Mathlib.CategoryTheory.Adjunction.Mates
+import Mathlib.Algebra.Ring.Shrink
+import Sheaf.Paper.ProperOpenBoundaryZero
+import Sheaf.Paper.OpenPullbackGenerators
+import Sheaf.Paper.LocalizingClosureExistence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import Sheaf.Paper.CompactificationLocalizing
-import Sheaf.Paper.CondensedConstantConstructibility
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.FiniteProperBaseChange
-import Sheaf.Paper.IntegralProperBaseChange
 import Sheaf.Paper.OpenImmersionLocalizing
-import Sheaf.Paper.ProperBaseChangeRational
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 
 /-!
 # Proper direct image and open extension by zero
@@ -55,12 +52,133 @@ identity on restriction without choosing an unnormalized isomorphism.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
-universe u
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj ZeroObject
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+private theorem finiteCoefficientShrinkIso (ℓ : ℕ) (A : Type u) [CommRing A] [Finite A]
+    [TopologicalSpace A] [DiscreteTopology A] [IsTopologicalRing A]
+    (hn : ∃ n : ℕ, (ℓ ^ n : A) = 0) :
+    ∃ (B : Type) (_ : CommRing B) (_ : TopologicalSpace B)
+      (_ : DiscreteTopology B) (_ : IsTopologicalRing B),
+      Finite B ∧ (∃ n : ℕ, ∀ a : B, (ℓ ^ n) • a = 0) ∧
+      Nonempty (Mon.mk (Profinite.continuousCoefficientRingObj A) ≅
+        Mon.mk (Profinite.continuousMapRingObj.{u} B)) := by
+  let B := Shrink.{0} A
+  let : CommRing B := inferInstanceAs (CommRing (Shrink.{0} A))
+  let : TopologicalSpace B := ⊥
+  let : DiscreteTopology B := ⟨rfl⟩
+  let : IsTopologicalRing B := inferInstance
+  let ei : A ≃+* B := (Shrink.ringEquiv.{0} A).symm
+  have hc : Continuous ei := continuous_of_discreteTopology
+  have hc' : Continuous ei.symm := continuous_of_discreteTopology
+  let er : Profinite.continuousCoefficientRingSheaf A ≅
+      Profinite.continuousMapRingSheaf.{u} B :=
+    { hom := ⟨{
+        app := fun S ↦ RingCat.ofHom
+          (ULift.ringEquiv.symm.toRingHom.comp
+            ((ei.toRingHom.compLeftContinuous S.unop hc).comp
+              ULift.ringEquiv.toRingHom))
+        naturality := fun _ _ _ ↦ rfl }⟩
+      inv := ⟨{
+        app := fun S ↦ RingCat.ofHom
+          (ULift.ringEquiv.symm.toRingHom.comp
+            ((ei.symm.toRingHom.compLeftContinuous S.unop hc').comp
+              ULift.ringEquiv.toRingHom))
+        naturality := fun _ _ _ ↦ rfl }⟩
+      hom_inv_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact ei.symm_apply_apply (f.down x)
+      inv_hom_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact ei.apply_symm_apply (f.down x) }
+  let ea := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso er
+  have : IsMonHom ea.hom := Sheaf.isMonHom_sheafCompose_map _ er.hom
+  refine ⟨B, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, ?_, ⟨Mon.mkIso ea⟩⟩
+  obtain ⟨n, hn⟩ := hn
+  refine ⟨n, fun a ↦ ?_⟩
+  have hp : (ℓ ^ n : B) = 0 := by
+    simpa only [map_pow, map_natCast, map_zero] using congrArg ei hn
+  rw [nsmul_eq_mul, Nat.cast_pow, hp, zero_mul]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem interchange_mate_iso
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {J : A ⥤ B} {U : B ⥤ A} {P : A ⥤ C} {R : C ⥤ A}
+    {H : B ⥤ D} {S : D ⥤ B} {K : C ⥤ D} {V : D ⥤ C}
+    (a : J ⊣ U) (b : P ⊣ R) (d : H ⊣ S) (e : K ⊣ V)
+    (θ : U ⋙ P ≅ H ⋙ V) [IsIso a.unit]
+    (hc : ∀ T, IsIso (e.counit.app (H.obj (J.obj T)))) :
+    IsIso (Adjunction.exchangeRight d b θ) := by
+  have hleft : IsIso (Adjunction.exchangeLeft a e θ) := by
+    have hcomp (T) : IsIso ((Adjunction.exchangeLeft a e θ).app T) := by
+      rw [Adjunction.exchangeLeft_app]
+      have := hc T
+      infer_instance
+    exact NatIso.isIso_of_isIso_app _
+  have heq : Adjunction.exchangeRight d b θ =
+      conjugateEquiv (a.comp d) (b.comp e) (Adjunction.exchangeLeft a e θ) := by
+    ext T
+    have ht (N : B) :
+        e.unit.app (P.obj (U.obj N)) ≫
+          V.map ((Adjunction.exchangeLeft a e θ).app (U.obj N)) =
+        P.map (a.unit.app (U.obj N)) ≫ θ.hom.app (J.obj (U.obj N)) := by
+      have hh := (e.homEquiv _ _).apply_symm_apply
+        (P.map (a.unit.app (U.obj N)) ≫ θ.hom.app (J.obj (U.obj N)))
+      simpa only [Adjunction.homEquiv_unit, Adjunction.homEquiv_counit,
+        Adjunction.exchangeLeft_app, Functor.map_comp, Category.assoc,
+        Functor.id_obj, Functor.comp_obj] using hh
+    have ht2 (N : B) :
+        e.unit.app (P.obj (U.obj N)) ≫
+          V.map ((Adjunction.exchangeLeft a e θ).app (U.obj N)) ≫
+            V.map (H.map (a.counit.app N)) = θ.hom.app N := by
+      have hn := θ.hom.naturality (a.counit.app N)
+      dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hn
+      rw [← Category.assoc, ht, Category.assoc, ← hn]
+      simp only [← Category.assoc, ← P.map_comp, a.right_triangle_components]
+      erw [P.map_id, Category.id_comp]
+    simp only [Adjunction.exchangeRight_app, conjugateEquiv_apply_app,
+      Adjunction.comp_unit_app, Adjunction.comp_counit_app,
+      Functor.comp_map, Functor.comp_obj, Functor.map_comp, Category.assoc]
+    conv_rhs => rw [← R.map_comp_assoc, ← R.map_comp_assoc, Category.assoc, ht2]
+  rw [heq]
+  infer_instance
+
+private theorem interchange_unique_normalized
+    {C D : Type*} [Category C] [Category D] {J : C ⥤ D} {U : D ⥤ C}
+    (a : J ⊣ U) (K N : C) (M : D) (rho : U.obj M ⟶ N) [IsIso rho]
+    (f : K ⟶ N) :
+    ∃ m : J.obj K ⟶ M, a.homEquiv _ _ m ≫ rho = f ∧
+      ∀ m', a.homEquiv _ _ m' ≫ rho = f → m' = m := by
+  refine ⟨(a.homEquiv _ _).symm (f ≫ inv rho), ?_, ?_⟩
+  · rw [Equiv.apply_symm_apply, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  · intro m hm
+    apply (a.homEquiv _ _).injective
+    rw [Equiv.apply_symm_apply]
+    apply (cancel_mono rho).mp
+    simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hm
+
+private theorem interchange_restricted_iso
+    {C D : Type*} [Category C] [Category D] {J : C ⥤ D} {U : D ⥤ C}
+    (a : J ⊣ U) {K N : C} {M : D} (rho : U.obj M ⟶ N) [IsIso rho]
+    (f : K ⟶ N) [IsIso f] [IsIso (a.unit.app K)] (m : J.obj K ⟶ M)
+    (hm : a.homEquiv _ _ m ≫ rho = f) : IsIso (U.map m) := by
+  have h : IsIso (a.homEquiv _ _ m ≫ rho) := by rw [hm]; infer_instance
+  rw [Adjunction.homEquiv_unit, Category.assoc] at h
+  have : IsIso (U.map m ≫ rho) := IsIso.of_isIso_comp_left (a.unit.app K) _
+  exact IsIso.of_isIso_comp_right _ rho
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
@@ -116,6 +234,301 @@ def compositionInterchangeIsNormalized
       ((openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory.obj A) =
     (lowerStar Λ p).rightDerivedFunctor.map
       ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.i).unit.app A)
+
+private theorem interchange_geometry [IsProper p]
+    [IsSchemeTheoreticallyDominant c.obj.obj.i] :
+    IsPullback p c.obj.obj.i i c.obj.obj.g := by
+  have : QuasiCompact c.obj.obj.i := c.obj.property
+  exact c.obj.obj.isPullback_of_isProper_of_isSchemeTheoreticallyDominant
+
+private theorem interchange_open_unit {U V : Scheme.{u}}
+    (j : U ⟶ V) [IsOpenImmersion j] :
+    IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit := by
+  have := openUnitIsIso Λ j
+  exact Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
+
+private theorem interchange_restriction_iso [IsProper p]
+    [IsSchemeTheoreticallyDominant c.obj.obj.i]
+    (B : DerivedCategory (CategoryTheory.Mod
+      (Sheaf (Scheme.ProEt.topology c.obj.obj.Z) Ab.{u + 1})
+        (condensedRingObj Λ c.obj.obj.Z))) :
+    IsIso (compositionInterchangeRestriction Λ p i c B) := by
+  let a := derivedOpenImmersionLowerShriekUpperStarAdjunction Λ i
+  let b := (derivedUpperStarLowerStarAdjunction Λ p).ofNatIsoLeft
+    (leftDerivedUpperStarIsoMapDerivedCategory Λ p)
+  let d := (derivedUpperStarLowerStarAdjunction Λ c.obj.obj.g).ofNatIsoLeft
+    (leftDerivedUpperStarIsoMapDerivedCategory Λ c.obj.obj.g)
+  let e := derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.i
+  have : IsIso a.unit := interchange_open_unit Λ i
+  have hc (T) : IsIso (e.counit.app
+      ((upperStar Λ c.obj.obj.g).mapDerivedCategory.obj
+        ((openImmersionLowerShriek Λ i).mapDerivedCategory.obj T))) := by
+    have h := cartesianDerivedCounit Λ (interchange_geometry p i c) T
+    exact (NatTrans.isIso_app_iff_of_iso e.counit
+      ((Functor.mapDerivedCategoryCompIso (openImmersionLowerShriek Λ i)
+        (upperStar Λ c.obj.obj.g)).app T)).mp h
+  have := interchange_mate_iso a b d e (compositionInterchangePullback Λ p i c) hc
+  have ht : IsIso ((Adjunction.exchangeRight d b
+      (compositionInterchangePullback Λ p i c)).app B) := inferInstance
+  simpa only [compositionInterchangeRestriction, Adjunction.homEquiv_unit,
+    Functor.map_comp, Category.assoc, Adjunction.exchangeRight_app] using ht
+
+private theorem properOpenInterchange_normalized [IsProper p]
+    [IsSchemeTheoreticallyDominant c.obj.obj.i] :
+    ∀ A : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj Λ X)),
+        ∃ m : (openImmersionLowerShriek Λ i).mapDerivedCategory.obj
+            ((lowerStar Λ p).rightDerivedFunctor.obj A) ⟶
+          (lowerStar Λ c.obj.obj.g).rightDerivedFunctor.obj
+            ((openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory.obj A),
+          compositionInterchangeIsNormalized Λ p i c A m ∧
+          (∀ m', compositionInterchangeIsNormalized Λ p i c A m' → m' = m) := by
+  intro A
+  let ai := derivedOpenImmersionLowerShriekUpperStarAdjunction Λ i
+  let rho := compositionInterchangeRestriction Λ p i c
+    ((openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory.obj A)
+  have : IsIso rho := interchange_restriction_iso Λ p i c _
+  let f := (lowerStar Λ p).rightDerivedFunctor.map
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.i).unit.app A)
+  exact interchange_unique_normalized ai _ _ _ rho f
+
+/-- Zero objects are closed under isomorphisms; the instance making functor kernels
+closed under isomorphisms is no longer in the imported library. -/
+local instance isZero_isClosedUnderIsomorphisms_local {C : Type*} [Category C] :
+    ObjectProperty.IsClosedUnderIsomorphisms (IsZero (C := C)) :=
+  ⟨fun e h ↦ h.of_iso e.symm⟩
+
+private theorem kernelTriangulated
+    {C : Type v} {D : Type w} [Category C] [Category D]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (F : C ⥤ D) [F.Additive] [F.CommShift ℤ] [F.IsTriangulated] :
+    F.kernel.IsTriangulated := by
+  let hshift (n : ℤ) : F.kernel.IsStableUnderShiftBy n := ⟨fun M hM ↦
+    (Functor.map_isZero (shiftFunctor D n) hM).of_iso ((F.commShiftIso n).app M)⟩
+  let : F.kernel.IsStableUnderShift ℤ := ⟨hshift⟩
+  let : F.kernel.ContainsZero := ⟨0, isZero_zero C,
+    Functor.map_isZero F (isZero_zero C)⟩
+  let : F.kernel.IsTriangulatedClosed₂ := .mk' (fun T hT h₁ h₃ ↦
+    Pretriangulated.Triangle.isZero₂_of_isZero₁₃ _ (F.map_distinguished T hT) h₁ h₃)
+  exact {}
+
+private theorem extend_zero
+    {C : Type v} {D : Type w} [Category C] [Category D]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (S : ObjectProperty C) (hloc : IsLocalizingSubcategory (localizingClosure S))
+    (F : C ⥤ D) [F.Additive] [F.CommShift ℤ] [F.IsTriangulated]
+    (hsums : ∀ (I : Type v) (J : Discrete I ⥤ C),
+      (∀ i, localizingClosure S (J.obj (Discrete.mk i))) → PreservesColimit J F)
+    (hS : ∀ K, S K → IsZero (F.obj K)) :
+    ∀ K, localizingClosure S K → IsZero (F.obj K) := by
+  let L := localizingClosure S
+  let P : ObjectProperty C := L ⊓ F.kernel
+  let : L.IsTriangulated := hloc.1
+  let : L.IsClosedUnderIsomorphisms := hloc.2.1
+  let := kernelTriangulated F
+  have hP : IsLocalizingSubcategory P := by
+    refine ⟨inferInstance, inferInstance, ?_⟩
+    intro I J hJ hK
+    let := hJ
+    let := hsums I J (fun i ↦ (hK i).1)
+    refine ⟨hloc.2.2 J hJ (fun i ↦ (hK i).1), ?_⟩
+    have hF : IsZero (J ⋙ F) := (Functor.isZero_iff _).mpr (fun j ↦ (hK j.as).2)
+    exact (isColimitOfPreserves F (colimit.isColimit J)).isZero_pt hF
+  intro K hK
+  exact (hK P hP (fun M hM ↦ ⟨fun Q hQ hSQ ↦ hSQ M hM, hS M hM⟩)).2
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem properOpenInterchange_localizing
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Ybar.Over (Spec (.of k))]
+    [c.obj.obj.Z.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Ybar ↘ Spec (.of k))] [QuasiCompact (Ybar ↘ Spec (.of k))]
+    [IsSeparated (Ybar ↘ Spec (.of k))]
+    [LocallyOfFiniteType (c.obj.obj.Z ↘ Spec (.of k))]
+    [QuasiCompact (c.obj.obj.Z ↘ Spec (.of k))]
+    [IsSeparated (c.obj.obj.Z ↘ Spec (.of k))]
+    [p.IsOver (Spec (.of k))] [i.IsOver (Spec (.of k))]
+    [c.obj.obj.i.IsOver (Spec (.of k))] [c.obj.obj.g.IsOver (Spec (.of k))]
+    [QuasiCompact i] [IsProper p] [IsSchemeTheoreticallyDominant c.obj.obj.i]
+    (_hΛ :
+      (∃ (A : Type u) (_ : CommRing A) (_ : Finite A) (_ : TopologicalSpace A)
+          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),
+        (∃ n : ℕ, (ℓ ^ n : A) = 0) ∧
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk
+          ((sheafCompose (coherentTopology Profinite.{u})
+            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+              (Profinite.padicSubfieldCondensedRing ℓ E.1)))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) :
+    ∀ A : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (condensedRingObj Λ X)),
+      ∀ m : (openImmersionLowerShriek Λ i).mapDerivedCategory.obj
+            ((lowerStar Λ p).rightDerivedFunctor.obj A) ⟶
+          (lowerStar Λ c.obj.obj.g).rightDerivedFunctor.obj
+            ((openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory.obj A),
+      compositionInterchangeIsNormalized Λ p i c A m →
+      localizingClosureProEtale Λ X A → IsIso m  := by
+  have hcoeff : IsFiniteSubextensionLocalizingAdmissibleCoefficient ℓ Λ := by
+    rcases _hΛ with h | h | h | ⟨E, h | h⟩ | h
+    · obtain ⟨R, hR, hfin, ht, hd, htop, hn, ⟨e⟩⟩ := h
+      obtain ⟨B, hb, hbt, hbd, hbtop, hbfin, hbn, ⟨eb⟩⟩ :=
+        finiteCoefficientShrinkIso ℓ R hn
+      exact Or.inl ⟨B, hb, hbt, hbd, hbtop, hbfin, hbn, ⟨e ≪≫ eb⟩⟩
+    · exact Or.inr (Or.inl h)
+    · exact Or.inr (Or.inr (Or.inl h))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩))))
+    · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩)))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))
+  have hadm : IsLocalizingAdmissibleCoefficient ℓ Λ := by
+    rcases hcoeff with h | h | h | h | h | h
+    · exact Or.inl h
+    · exact Or.inr (Or.inl h)
+    · exact Or.inr (Or.inr (Or.inl h))
+    · exact Or.inr (Or.inr (Or.inr (Or.inl h)))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h))))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))
+  have : QuasiCompact c.obj.obj.i := c.obj.property
+  let z := i.closedComplement
+  let J := (openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory
+  let R := (lowerStar Λ c.obj.obj.g).rightDerivedFunctor
+  let V := (upperStar Λ z).mapDerivedCategory
+  let F := J ⋙ R ⋙ V
+  let S : ObjectProperty (DerivedCategory (CategoryTheory.Mod
+      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
+    constantModelBoundedConstructible Λ X ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+  have hloc := (localizingClosure_exists Λ X S).2.2.2.1
+  have : CompactSpace Ybar :=
+    QuasiCompact.compactSpace_of_compactSpace (Ybar ↘ Spec (.of k))
+  have : QuasiSeparatedSpace Ybar :=
+    quasiSeparatedSpace_of_quasiSeparated (Ybar ↘ Spec (.of k))
+  have hsums := (compactification_localizing Λ ℓ k (p ≫ i) c hadm).2.2.1
+  let adj := (upperStarLowerStarAdjunction Λ z).mapDerivedCategoryRightDerivedAdjunction
+  let : V.IsLeftAdjoint := adj.isLeftAdjoint
+  have hgen (A) (hA : S A) : IsZero (F.obj A) := by
+    let q := pullback.fst c.obj.obj.g i
+    let ep := (interchange_geometry p i c).flip.isoPullback
+    have hsq : IsPullback ep.inv q c.obj.obj.i (𝟙 c.obj.obj.Z) :=
+      IsPullback.of_horiz_isIso ⟨by
+        dsimp only [q, ep]
+        rw [IsPullback.isoPullback_inv_fst, Category.comp_id]⟩
+    let aj := derivedOpenImmersionLowerShriekUpperStarAdjunction Λ q
+    have hε := cartesianDerivedCounit Λ hsq A
+    let eF := Functor.mapDerivedCategoryNatIso
+      (Functor.isoWhiskerLeft (openImmersionLowerShriek Λ c.obj.obj.i)
+        (upperStarId Λ c.obj.obj.Z) ≪≫
+          (openImmersionLowerShriek Λ c.obj.obj.i).rightUnitor)
+    have : IsIso (aj.counit.app (J.obj A)) :=
+      (NatTrans.isIso_app_iff_of_iso aj.counit (eF.app A)).mp hε
+    have hjA := (openImmersionLowerShriek_localizing ℓ k (ringChar k)
+      (Nat.Prime.pos Fact.out) (Fact.out : ringChar k ≠ ℓ) Λ hadm c.obj.obj.i).1 ⟨A, hA⟩
+    have hqA := openPullback_generators Λ ℓ k (ringChar k)
+      (Nat.Prime.pos Fact.out) (Fact.out : ringChar k ≠ ℓ) hadm q ⟨J.obj A, hjA⟩
+    let W : Over (Spec (.of k)) := Over.mk (c.obj.obj.Z ↘ Spec (.of k))
+    let B : Over (Spec (.of k)) := Over.mk (Ybar ↘ Spec (.of k))
+    let U : Over (Spec (.of k)) := Over.mk (Y ↘ Spec (.of k))
+    let Z : Over (Spec (.of k)) := Over.mk (z ≫ (Ybar ↘ Spec (.of k)))
+    let rr : W ⟶ B := Over.homMk c.obj.obj.g (comp_over _ _)
+    let ii : U ⟶ B := Over.homMk i (comp_over _ _)
+    let zz : Z ⟶ B := Over.homMk z rfl
+    have : LocallyOfFiniteType W.hom := by
+      change LocallyOfFiniteType (c.obj.obj.Z ↘ Spec (.of k))
+      infer_instance
+    have : QuasiCompact W.hom := by
+      change QuasiCompact (c.obj.obj.Z ↘ Spec (.of k))
+      infer_instance
+    have : IsSeparated W.hom := by
+      change IsSeparated (c.obj.obj.Z ↘ Spec (.of k))
+      infer_instance
+    have : LocallyOfFiniteType B.hom := by
+      change LocallyOfFiniteType (Ybar ↘ Spec (.of k))
+      infer_instance
+    have : QuasiCompact B.hom := by
+      change QuasiCompact (Ybar ↘ Spec (.of k))
+      infer_instance
+    have : IsSeparated B.hom := by
+      change IsSeparated (Ybar ↘ Spec (.of k))
+      infer_instance
+    have : LocallyOfFiniteType U.hom := by
+      change LocallyOfFiniteType (Y ↘ Spec (.of k))
+      infer_instance
+    have : QuasiCompact U.hom := by
+      change QuasiCompact (Y ↘ Spec (.of k))
+      infer_instance
+    have : IsSeparated U.hom := by
+      change IsSeparated (Y ↘ Spec (.of k))
+      infer_instance
+    have : LocallyOfFiniteType Z.hom := by
+      change LocallyOfFiniteType (z ≫ (Ybar ↘ Spec (.of k)))
+      infer_instance
+    have : QuasiCompact Z.hom := by
+      change QuasiCompact (z ≫ (Ybar ↘ Spec (.of k)))
+      infer_instance
+    have : IsSeparated Z.hom := by
+      change IsSeparated (z ≫ (Ybar ↘ Spec (.of k)))
+      infer_instance
+    have : IsProper rr.left := by
+      change IsProper c.obj.obj.g
+      infer_instance
+    have : IsOpenImmersion ii.left := by
+      change IsOpenImmersion i
+      infer_instance
+    have : QuasiCompact ii.left := by
+      change QuasiCompact i
+      infer_instance
+    have : IsClosedImmersion zz.left := by
+      change IsClosedImmersion z
+      infer_instance
+    have : IsReduced Z.left := by
+      dsimp only [Z, Over.mk_left, z]
+      infer_instance
+    have hz := proper_open_boundary_zero ℓ Λ hcoeff k W B U Z rr ii zz
+      (Scheme.Hom.range_closedComplement i) ⟨_, hqA⟩
+    have hz' := hz.of_iso ((leftDerivedUpperStarIsoMapDerivedCategory Λ z).symm.app _)
+    exact hz'.of_iso (((R ⋙ V).mapIso (asIso (aj.counit.app (J.obj A)))).symm)
+  intro A m hm hA
+  have hz : IsZero (F.obj A) := by
+    apply extend_zero S hloc F _ hgen A hA
+    intro I K hK
+    have : PreservesColimit K (J ⋙ R) := hsums I K hK
+    change PreservesColimit K ((J ⋙ R) ⋙ V)
+    infer_instance
+  have hij : IsCompl (Set.range z.base) (Set.range i.base) := by
+    dsimp only [z]
+    rw [Scheme.Hom.range_closedComplement]
+    exact isCompl_compl.symm
+  have hdetect := jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl Λ z i hij
+  apply hdetect.isIso_of_pairFunctor m
+  · apply (NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory Λ i) m).2
+    let a := derivedOpenImmersionLowerShriekUpperStarAdjunction Λ i
+    let rho := compositionInterchangeRestriction Λ p i c (J.obj A)
+    have : IsIso rho := interchange_restriction_iso Λ p i c _
+    have : IsIso a.unit := interchange_open_unit Λ i
+    have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.i).unit :=
+      interchange_open_unit Λ c.obj.obj.i
+    exact interchange_restricted_iso a rho
+      ((lowerStar Λ p).rightDerivedFunctor.map
+        ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.i).unit.app A)) m hm
+  · have hzsrc := isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint
+      Λ i z hij.symm.disjoint ((lowerStar Λ p).rightDerivedFunctor.obj A)
+    have hztgt := hz.of_iso ((leftDerivedUpperStarIsoMapDerivedCategory Λ z).app _)
+    exact hzsrc.isIso hztgt _
+
 
 /-- Proper/open interchange in the standing scheme setting, for all admissible coefficients.
 The coefficient disjunction lists the finite discrete rings killed by an ell power, Z_ell,
@@ -184,6 +597,14 @@ theorem properOpenInterchange
           compositionInterchangeIsNormalized Λ p i c A m ∧
           (∀ m', compositionInterchangeIsNormalized Λ p i c A m' → m' = m) ∧
           (localizingClosureProEtale Λ X A → IsIso m) := by
-  sorry
+  have sq := interchange_geometry p i c
+  have hgeom : c.obj.obj.g ⁻¹ᵁ i.opensRange = c.obj.obj.i.opensRange :=
+    sq.flip.opensRange_fst.symm
+  have hh := properOpenInterchange_normalized Λ p i c
+  refine ⟨hgeom, fun A ↦ ?_⟩
+  obtain ⟨m, hm, hu⟩ := hh A
+  refine ⟨m, hm, hu, ?_⟩
+  exact properOpenInterchange_localizing Λ p i c ℓ k _hΛ A m hm
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing

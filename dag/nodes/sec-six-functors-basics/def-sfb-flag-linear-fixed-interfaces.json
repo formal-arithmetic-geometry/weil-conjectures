@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-flag-linear-fixed-interfaces",
+ "kind": "definition",
+ "title": "Linear projective actions, fixed subfunctors and rational tangent weight bases",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $F$ be a field [def-weil-field], $G,T,S$ group schemes over $F$ [def-sc-group-scheme], and use their internal scheme actions, the actual character and cocharacter morphisms and multiplicative coordinate evaluation [def-sfb-rank-one-root-interfaces]. For $i:S\\to G$, an action $a:G\\times_F X\\to X$, an $F$-algebra $A$ and $x\\in X(A)$, define $\\operatorname{IsFixed}(i,a,x)$ to mean that for every $F$-algebra map $A\\to A'$ and every $s\\in S(A')$ one has $a(i(s),x_{A'})=x_{A'}$. Let $P_n=\\operatorname{Proj}F[X_0,\\ldots,X_n]$ with its existing structure map [def-sfb-diagonal-projective-action]. For a rational representation $\\rho:G\\to\\operatorname{GL}_{n+1}$ [def-sc-general-linear-group], an internal action $a$ on $P_n$ is its linear projective action on lines when for every test algebra $A$ and $g\\in G(A)$ it is induced by the coefficient-fixing graded substitution $X_i\\mapsto\\sum_j\\rho(g)_{ij}X_j$. Precisely this substitution and scalar inclusion have graded lifts with the irrelevant-ideal conditions for Proj maps, and the isomorphism $\\operatorname{Proj}A[X]\\simeq\\operatorname{Spec}A\\times_F P_n$ has the standard first projection and Proj of the inclusion as second projection; its composite with the restricted action is Proj of the substitution. For $i:T\\to G$, an action on $X$, a rational point $e\\in X(F)$ and a set $R$ of characters of $T$, define $\\operatorname{HasTangentWeightBasis}(i,a,e,R)$ to mean: there are $x\\in X$ and an isomorphism $\\epsilon:\\kappa(x)\\simeq F$ inducing exactly $e$, and a $\\kappa(x)$-basis $(b_\\chi)_{\\chi\\in R}$ of the existing tangent space [def-sc-scheme-tangent-space], such that for every $t\\in T(F)$ postcomposition of each dual-number vector $b_\\chi$ with translation by $i(t)$ equals $\\epsilon^{-1}(\\chi(t))b_\\chi$. For split tori over algebraically closed fields this is precisely a tangent character basis, including the empty basis. All definitions use the actual scheme morphisms and include nonreduced and zero test algebras.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-rank-one-root-interfaces",
+  "def-sc-general-linear-group",
+  "def-sfb-diagonal-projective-action",
+  "def-sc-scheme-tangent-space"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.27; Theorem 13.1 and Lemma 13.51; paragraphs preceding Proposition 21.70, p.446; tangent calculation in the proof of Theorem 21.73, p.447. Coordinate and dual-number descriptions made explicit."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsLinearProjectiveAction|HasTangentWeightBasis|IsFixedAfterBaseChange",
+   "results": "{\"t\": \"2026-10-24T05:43:46Z\", \"tool\": \"grep\", \"query\": \"IsLinearProjectiveAction|HasTangentWeightBasis|IsFixedAfterBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No existing scheme-level interface. Hits concern field projectivizations or elliptic-curve point models; reuse existing polynomial Proj, general linear scheme, ModObj and schemeTangentSpace."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme projective space action induced by a general linear representation and character weights of tangent vectors at a fixed rational point",
+   "results": "{\"t\": \"2026-10-24T05:43:46Z\", \"tool\": \"leansearch\", \"query\": \"Scheme projective space action induced by a general linear representation and character weights of tangent vectors at a fixed rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.generalLinearGroup_smul_def\", \"Projectivization.smul_mk\", \"Projectivization.smul_def\", \"Projectivization.instMulAction\", \"Projectivization.instMulAction.congr_simp\", \"OnePoint.instGLAction\", \"OnePoint.smul_infty_eq_ite\", \"OnePoint.smul_some_eq_ite\"], \"digest\": \"16fedf26fae23d0a\"}",
+   "date": "2026-10-24",
+   "verdict": "No existing scheme-level interface. Hits concern field projectivizations or elliptic-curve point models; reuse existing polynomial Proj, general linear scheme, ModObj and schemeTangentSpace."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective space of lines with group scheme linear action and tangent character eigenbasis at a rational point",
+   "results": "{\"t\": \"2026-10-24T05:43:47Z\", \"tool\": \"leanfinder\", \"query\": \"Projective space of lines with group scheme linear action and tangent character eigenbasis at a rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.PointClass\", \"Projectivization.exists_smul_eq_mk_rep\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.Point.point\", \"Projectivization.nonZeroEquivProjectivizationProdUnits\", \"WeierstrassCurve.Jacobian.PointClass\", \"WeierstrassCurve.Projective.toAffine\", \"WeierstrassCurve.Projective.Point.mk_point\"], \"digest\": \"3070b8412e1fa84f\"}",
+   "date": "2026-10-24",
+   "verdict": "No existing scheme-level interface. Hits concern field projectivizations or elliptic-curve point models; reuse existing polynomial Proj, general linear scheme, ModObj and schemeTangentSpace."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsLinearProjectiveAction|HasTangentWeightBasis|IsFixedAfterBaseChange lean/Sheaf lean/WeilConjectures dag/nodes; blueprint_refs.py search projective lines representation; blueprint_refs.py search torus fixed",
+   "results": "No exact definition matches in source, Sheaf or DAG. blueprint_refs: 0 blueprint nodes for each query. def-sfb-diagonal-projective-action is the split diagonal specialization, reused for its projective space. def-sfb-torus-character-tangent-weights concerns group identity tangent spaces, not arbitrary rational points. def-trf-fixed-scheme is an equalizer of two maps, not a group-action fixed subfunctor.",
+   "date": "2026-10-24",
+   "verdict": "No equivalent definition node or declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-torus-fixed-geometry",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Bruhat cells and flag charts for a split reductive group. Supporting input: smooth projective flag quotient, fixed flags and dominant separating cocharacter, preceding Milne 21.70; linear projective actions, fixed-subfunctor and tangent-character notation",
+   "via": [
+    "lem-sfb-flag-torus-fixed-geometry",
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-double-flag-invariant-boundary",
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FlagLinearFixedInterfaces",
+  "declaration": "AlgebraicGeometry.FlagGeometry.IsFixed",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FlagLinearFixedInterfaces.lean",
+  "statement": "def IsFixed {F : Type u} [Field F] {S G : Grp (Over (Spec (.of F)))} (i : S ⟶ G) (X : Over (Spec (.of F))) (a : ModObj G.X X) (A : CommAlgCat.{u} F) (x : (algSpec (.of F)).obj (op A) ⟶ X) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.FlagGeometry.IsFixed",
+   "AlgebraicGeometry.FlagGeometry.IsLinearProjectiveAction",
+   "AlgebraicGeometry.FlagGeometry.HasTangentWeightBasis"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b43562228",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b43562228",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read the item, new def node, both modules, report and all dependency declarations (reductive_borel_pair_structure, RankOneRoots.Weyl/normalizer/Character/Cocharacter, TorusCharacterTangent.weightSpace, schemeTangentSpace, DiagonalProjectiveAction.space, GeneralLinearGroup.homMulEquiv, IsProjective). Every clause matches the node: hypotheses are identical to the borel-pair dep (torsor square, split maximal torus, Borel, Φ⁺ as nonzero Lie(B) weights); aQ is pinned to left multiplication; GL rep, closed immersion and equivariance hold; the Weyl action is pinned by conjugation so (act w).inv≫χ = wχ; for every representative family Q^T is a coproduct of Spec F indexed by W with e_w=n_wB, fixedness tested after all algebra extensions; the tangent basis is indexed by Φ∖wΦ⁺ (w=1 gives −Φ⁺, conjugation direction checked); λ has its pairing pinned, is positive on Φ⁺, and gives the fixed-subfunctor equalities on P(E) and Q. The projective substitution is on lines. Edge cases: empty roots, r=0, repeated weights, char p, nilpotent test algebras, universes. New node fields, searches, stmt_deps and real (non-hollow) defs are fine; no duplicate notion; statement fields are verbatim; only lean plus the new stmt_dep changed; no declaration is owned by a theorem node; docstrings and proof steps present; proof is sorry only. No compile (no file changed). Advisory: the Second reading section is brief."
+ }
+}

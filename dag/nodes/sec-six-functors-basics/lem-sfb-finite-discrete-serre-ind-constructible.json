@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-finite-discrete-serre-ind-constructible",
+ "kind": "statement",
+ "title": "Finite discrete weak Serre hull has filtered constructible presentations",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Let A be a finite commutative discrete topological ring in the scheme universe, X a quasi-compact quasi-separated scheme [def-pc-scheme], and use the normalized condensed coefficient and internal module category [def-pe-finite-discrete-presentation-encoding] on the pro-etale site [def-weil-pbc-proetale-site], with the fixed universe [def-weil-size-convention]. If M lies in the weak Serre coproduct closure [sk-def-localizing-closure] of the finite constant scalar-model constructible modules [sk-def-sfb-constructible], then M is an ambient small filtered colimit of such constructible modules. The stages and arrows are internal modules; no lifts of the arrows to finite presentations are required. Empty X and the zero ring are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement (2), first paragraph; the finite discrete subcase of the coefficient-transfer obligation. Stacks Project Tags 03SA(3), 099Y and 09B1 supply the classical comparison route."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Choose the normalized encoding and compare its ordinary constructible predicate with fixed-coefficient constructibility. Reindex a pro-etale cover between the two allowed small universes.",
+   "uses": [
+    "lem-sf-finite-discrete-normalized-encoding",
+    "lem-sf-finite-discrete-encoding-constructibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exact fully faithful etale comparison essential image is closed under kernels, cokernels, extensions and coproducts. Every constructible module has an etale antecedent. Minimality of the weak Serre coproduct closure therefore gives an etale antecedent F of M. These closure instances are supplied by EtaleOriginHomology.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "def-weil-pbc-site-comparison-morphism",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present F as a small filtered colimit of constructible etale modules. Compose its diagram with comparison and inverse encoding; both preserve colimits. Transport the resulting cocone along the antecedent and equivalence isomorphisms. Constructibility comparison identifies every image stage with a finite scalar-model constructible module.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-finite-discrete-encoding-constructibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-localizing-closure",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement (2), first paragraph; the finite discrete subcase of the coefficient-transfer obligation. Stacks Project Tags 03SA(3), 099Y and 09B1 supply the classical comparison route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The weak Serre coproduct closure of constructible finite discrete coefficient module sheaves on a qcqs scheme consists of filtered colimits of constructible sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instHasColimits, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB5CondensedMod, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Condensed.hasExactColimitsOfShape, SheafOfModules.IsFiniteType, PrimeSpectrum.ConstructibleSetData, instHasColimitsCondensedMod",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.ind",
+   "results": "0 hits: ; loogle: unknown identifier 'ObjectProperty.ind'",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderExtensions|singleObjHomologySelfIso|ind_inverseImage",
+   "results": "23 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean",
+   "date": "2026-10-24",
+   "verdict": "No complete geometric match. Single-complex homology and abstract filtered-colimit APIs are used where applicable; the coefficient and constructibility argument remains project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite discrete coefficient constructible sheaves on a qcqs scheme generate a weak Serre coproduct hull contained in filtered colimits of finite constructible complex hearts, and derived sections preserve the resulting uniform vanishing bound",
+   "results": "8 hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, AlgebraicGeometry.Scheme.Modules.instHasColimits, CategoryTheory.Sheaf.instHasFiniteCoproducts, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.Sheaf.instHasColimitsOfSize, CategoryTheory.Sheaf.instHasFiniteColimits, SheafOfModules.GeneratingSections.IsFiniteType, CategoryTheory.Sheaf.isColimitSheafifyCocone",
+   "date": "2026-10-25",
+   "verdict": "Only generic sheaf colimits and finite-type definitions were found, not the finite coefficient Serre-to-ind presentation or its cohomological bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionCdTopologicalSerreTransfer",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-torsion-cd-topological-serre-transfer",
+   "place": "Finite discrete coefficient branch and conditional ind-finite-heart assembly",
+   "via": [
+    "lem-sfb-torsion-cd-topological-serre-transfer"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteSerreIndConstructible",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteSerreIndConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteDiscrete_serre_is_indConstructible",
+  "statement": "theorem finiteDiscrete_serre_is_indConstructible\n    (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]\n    [Finite A] [DiscreteTopology A]\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    (M : Internal A X)\n    (hM : ObjectProperty.weakSerreCoproductClosure.{u + 1}\n      (IsConstantModelConstructible (coefficient A) X) M) :\n    ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (coefficient A) X) M",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T011040-L-3638342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T011040-L-3638342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

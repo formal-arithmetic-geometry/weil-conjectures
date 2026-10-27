@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-space-naive-cotangent-quasicoherent",
+ "kind": "statement",
+ "title": "Quasi-coherent cohomology of the naive cotangent complex of an arbitrary space morphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $h:X\\to Y$ any morphism of algebraic spaces over $S$ [def-trf-algebraic-space], with the size conventions [def-weil-size-convention]. Let $\\mathrm{NL}_{X/Y}$ be the two-term naive cotangent complex on $X_{\\mathrm{et}}$ of [def-sfb-space-naive-cotangent-complex], regarded in $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Its cohomology sheaves are quasi-coherent [def-trf-space-quasi-coherent-module] and vanish outside degrees $-1,0$. In particular $\\mathrm{NL}_{X/Y}$ belongs to $D_{\\mathrm{QCoh}}(\\mathcal O_X)$, the full subcategory with quasi-coherent cohomology. No finite-presentation, Noetherian, quasi-compactness or quasi-separatedness assumption is imposed on $h$, $X$ or $Y$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D0Y (lemma-netherlander-quasi-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-naive-cotangent-complex",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas $V\\to Y$. By [lem-trf-space-fibre-products-etale-covers], $Z=X\\times_YV$ is an algebraic space and $Z\\to X$ is surjective etale. Choose a surjective etale scheme atlas $W\\to Z$, using [def-trf-algebraic-space]. Thus $W\\to X$ is surjective etale: after base change to any scheme over $X$, both maps are scheme etale covers, whose composite is an etale cover by [lem-weil-pbc-etale-covering-composition]. Cover $W$ by affine opens $U_i=\\operatorname{Spec}B_i$ each mapping into an affine open $V_i=\\operatorname{Spec}R_i$ of $V$: inverse images of an affine-open cover of $V$ are open, and each has an affine-open cover. Open inclusions are etale by [lem-weil-pbc-open-immersion-etale]. Testing on schemes and composing covers as above shows that the maps $p_i:U_i\\to X$ are jointly surjective etale and that $q_i:V_i\\to Y$ are etale. The maps $g_i:U_i\\to V_i$ satisfy $hp_i=q_ig_i$. No finite subcover and no affineness of intersections is used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-covering-composition",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0Y, lemma-netherlander-quasi-coherent, etale-local reduction to schemes; Tag 0D0W, lemma-NL-etale-localization."
+   }
+  },
+  {
+   "text": "For each of these squares, [lem-sfb-space-naive-cotangent-etale-localization] gives $\\mathrm{NL}_{X/Y}|_{U_i}\\simeq\\mathrm{NL}_{U_i/V_i}$. Choose the polynomial presentation $P_i=R_i[x_b\\mid b\\in B_i]\\twoheadrightarrow B_i$, $x_b\\mapsto b$, which is surjective because every $b$ is the image of $x_b$, and put $I_i=\\ker(P_i\\to B_i)$. Apply [lem-sfb-affine-etale-naive-cotangent-presentation] with this possibly infinite set of variables: in $D(\\mathcal O_{U_i})$ the restricted complex is isomorphic to $[A_i\\xrightarrow{d_i}E_i]$ in degrees $-1,0$, where $A_i=(I_i/I_i^2)^{\\sim}_{\\mathrm{et}}$ and $E_i=(B_i\\otimes_{P_i}\\Omega_{P_i/R_i})^{\\sim}_{\\mathrm{et}}$. Each underlying module has a quasi-coherent associated Zariski sheaf by [lem-weil-pbc-spec-module-tilde-sections]; [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] says its associated small-etale sheaf is quasi-coherent. Thus both $A_i$ and $E_i$ are quasi-coherent without any finite-generation assertion.",
+   "uses": [
+    "lem-sfb-space-naive-cotangent-etale-localization",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0Y, reduction via Tags 0D0W and 0D0X; affine comparison more-morphisms.tex Tag 0D0I; descent.tex Tag 03DX."
+   }
+  },
+  {
+   "text": "For the two-term model of step 2 the cohomology sheaves are $\\ker(d_i)$ in degree $-1$, $\\operatorname{coker}(d_i)$ in degree $0$, and zero in all other degrees. Both kernel and cokernel, taken in all module sheaves, are quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits], applied to the scheme $U_i$ regarded as an algebraic space. Restriction to $U_i$ is the exact functor of [lem-pur-site-restriction-module-adjunction-exact]. Consequently it preserves kernels, images and cokernels, so $H^n(\\mathrm{NL}_{X/Y})|_{U_i}=H^n(\\mathrm{NL}_{X/Y}|_{U_i})$. The derived isomorphisms of step 2 identify these with the cohomology sheaves just computed. This uses an exact localization, not tensor pullback along an arbitrary morphism.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0Y, lemma-netherlander-quasi-coherent; spaces-properties.tex Tag 03M1 (lemma-properties-quasi-coherent), clause (3); exact localization as in sites-modules.tex Tag 03DJ."
+   }
+  },
+  {
+   "text": "Fix $n\\in\\{-1,0\\}$ and write $F=H^n(\\mathrm{NL}_{X/Y})$. We verify directly the local-presentation definition [def-trf-space-quasi-coherent-module]. On each $U_i$, step 3 says $F|_{U_i}$ is quasi-coherent; choose an etale covering $U_{ia}\\to U_i$ on which it has a free presentation $\\mathcal O^{(J_{ia})}\\to\\mathcal O^{(K_{ia})}\\to F\\to0$. For any object $T\\to X$ of $X_{\\mathrm{et}}$, base change gives a covering by schemes $T\\times_XU_i\\to T$ by [lem-trf-space-fibre-products-etale-covers]; further base change by $U_{ia}\\to U_i$ and composition gives an etale cover $T\\times_XU_{ia}\\to T$ by [lem-weil-pbc-etale-covering-composition]. Restrict the displayed presentations to these slice sites. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], and a free sheaf restricts to the free sheaf on the same index set: its local sections are locally finite sums of the same basis symbols with coefficients in the restricted structure sheaf. Hence the restricted sequences are the required local free presentations of $F|_T$. Since $T$ was arbitrary, $F$ is quasi-coherent. The zero sheaf has the empty presentation and is also quasi-coherent.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-covering-composition",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M0, lemma-characterize-quasi-coherent, local-presentation argument for (3) implies (1), written for a covering family."
+   }
+  },
+  {
+   "text": "By [def-sfb-space-naive-cotangent-complex] the original complex itself has zero terms outside degrees $-1,0$. In every other degree both its cycles and boundaries are zero, so its cohomology vanishes. Step 4 gives quasi-coherence in the two remaining degrees and for the zero sheaves. Thus every cohomology sheaf is quasi-coherent, which is precisely membership in the full subcategory $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ specified in the statement. All constructions allowed arbitrary small generating sets and arbitrary etale covers; none required finiteness, Noetherianness or separation.",
+   "uses": [
+    "def-sfb-space-naive-cotangent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0Y, lemma-netherlander-quasi-coherent, first paragraph of proof and conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-naive-cotangent-complex",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-affine-etale-naive-cotangent-presentation",
+  "lem-sfb-space-naive-cotangent-etale-localization",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D0Y, lemma-netherlander-quasi-coherent, etale-local reduction; explicit affine comparison via Tags 0D0W, 0D0X and more-morphisms.tex 0D0I, with spaces-properties.tex lemma-characterize-quasi-coherent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The naive cotangent complex of any morphism of algebraic spaces has quasi coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-level H1Cotangent and scheme tilde quasi-coherence do not state quasi-coherence of the etale naive cotangent complex of an arbitrary algebraic-space morphism",
+   "sub": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naive cotangent complex of any morphism of algebraic spaces has quasi coherent cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P : Extension R A) [FormallySmooth R P.Ring] :\\n  Function.Injective P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Function.Exact P.cotangentComplex P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"(M : Submonoid S) [IsLocalization M T] : T ⊗[S] H1Cotangent R S ≃ₗ[T] H1Cotangent R T\", \"doc\": \"Let $R \\\\to S \\\\to T$ be homomorphisms of commutative rings, where $T$ is the localization of $S$ at a multiplicative submonoid $M \\\\subseteq S$. Then the first cotangent cohomology module commutes with \"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \": Function.Injective P.toExtension.cotangentComplex\", \"doc\": \"The cotangent complex map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ is injective for a submersive presentation of an $R$-algebra $S$.\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-level H1Cotangent and scheme tilde quasi-coherence do not state quasi-coherence of the etale naive cotangent complex of an arbitrary algebraic-space morphism",
+   "sub": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) : Prop\", \"doc\": \"A sheaf of modules is quasi-coherent if it is locally the cokernel of a\\nmorphism between coproducts of copies of the sheaf of rings.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] : CategoryTheory.ObjectProperty (She\", \"doc\": \"A sheaf of modules is quasi-coherent if it is locally the cokernel of a\\nmorphism between coproducts of copies of the sheaf of rings.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) [M.IsFinitePr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (q : M.Quasic\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} {inst✝¹ : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat} {inst✝² : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat} {M : Sheaf\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (nonempty_qua\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] : (SheafOfModules.isQuasicoherent R).IsC\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentObjIsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : (SheafOfModules.isQuasicoherent\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.Presentation.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Limits.HasBinaryProducts C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C), CategoryTheory.HasSheafi\", \"doc\": \"If a sheaf of `R`-modules `M` has a presentation, then `M` is quasi-coherent.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent_over\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C) (Y : CategoryTheory.Over X), \", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.of_coversTop\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C) (Y : CategoryTheory.Over X), CategoryTheory.HasSheafify ((J.over X\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {D : Type u₂} [CategoryTheory.Catego\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-level H1Cotangent and scheme tilde quasi-coherence do not state quasi-coherence of the etale naive cotangent complex of an arbitrary algebraic-space morphism",
+   "sub": ""
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]aive[Cc]otangent|[Cc]otangent[Cc]omplex|[Ii]sQuasicoherent",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"415\", \"text\": \"section IsQuasicoherent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"465\", \"text\": \"instance : (tilde M).IsQuasicoherent :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"466\", \"text\": \"  (presentationTilde.{u} _ .univ (by simp) _ (Submodule.span_eq _)).isQuasicoherent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"468\", \"text\": \"instance : ((tilde.functor R).obj M).IsQuasicoherent :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"469\", \"text\": \"  inferInstanceAs <| (tilde M).IsQuasicoherent\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-level H1Cotangent and scheme tilde quasi-coherence do not state quasi-coherence of the etale naive cotangent complex of an arbitrary algebraic-space morphism",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale locally the two term cotangent complex of a morphism of algebraic spaces has quasi coherent kernel and cokernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: algebra-level H1Cotangent and scheme tilde quasi-coherence do not state quasi-coherence of the etale naive cotangent complex of an arbitrary algebraic-space morphism",
+   "sub": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent",
+   "results": "Available; 12 hits; Algebra.H1Cotangent, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.H1Cotangent.mapEquiv, Algebra.Generators.equivH1Cotangent, Algebra.H1Cotangent.map, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.FormallySmooth.mk, Algebra.formallySmooth_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: ring H1Cotangent and smoothness criteria do not state algebraic-space sheaf quasi-coherence",
+   "sub": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-square-zero-extension-transfer",
+  "date": "2026-10-23",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3Q (lemma-thickening-over-thickening-space-quasi-coherent), with the preceding setup; its derived-coherator hypothesis is expressed by the equivalent universal derived-Hom test. Supporting input: Tag 0D3P, proof, first sentence; applied to the composite Z to B prime in the proof of Tag 0D3Q.",
+   "via": [
+    "lem-sfb-space-square-zero-extension-transfer",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-naive-cotangent-quasicoherent",
+  "worker": "stage1",
+  "summary": "Proved arbitrary-morphism quasi-coherence by affine etale localization, the existing polynomial-presentation comparison, quasi-coherent kernels and cokernels, exact restriction, and the written-out local free-presentation criterion. Statement unchanged; no new nodes or Mathlib leaves. No finite-model or Noetherian theorem used.",
+  "blueprint": "Supporting deformation-theory input below the inherited direct-image route: Tag 0D0Y used in Tag 0D3P, first sentence, in the proof of Tag 0D3Q. Read the latest sk-thm-sf-ctf-stability direct-images proof (3). The inherited ancestor is null as blueprint_refs.py ancestor reports; its full from.place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre products and base change of etale covers, needed to obtain compatible affine scheme charts; no theorem of the unit replaces this atlas construction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "Generic composition of scheme etale covering families, applied after scheme tests and refinements."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic open-immersion-etale fact for refining scheme atlases by affine opens."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic change-of-topology equivalence, used only to make the associated affine module sheaves quasi-coherent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-db8ce4992",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-db8ce4992 (reviewer sub-agent of L); spot-checked: I read the whole proof against Stacks 0D0Y (spaces-more-morphisms.tex l.5398) together with 0D0V, 0D0W, 0D0X and spaces-properties 03M0/03M1, and read all 12 cited statements. The statement is unchanged and matches 0D0Y for an arbitrary morphism (the Omega identification is not part of the item). There are no new nodes. Step 1 builds commutative squares U_i->V_i from atlases, using fibre products of spaces (02X2), composition of etale covers (0217) and open immersions being etale; it takes no finite subcover and assumes no affine intersections. Step 2 applies 0D0W, which needs only a commutative square with etale p and q, then the existing polynomial-presentation comparison with arbitrary variables (hypotheses V->S and Spec of R->B checked); the terms are quasi-coherent by tilde plus the Zariski-to-etale equivalence. Step 3 uses 03M1 kernels and cokernels and the exact restriction j^*, which is on the route via sk-def-sf-operations and Lean-closed. Step 4 is marked elementary: it unpacks the local-presentation definition (03M0 (3)=>(1)); no DAG node states this locality, so I accept the marking. Step 5 gets the degree bounds from def-sfb-space-naive-cotangent-complex. Edge cases checked: empty X; char-2 k[e]/(e^2), where H^-1 is nonzero; infinitely generated B; non-quasi-separated spaces. I accept the declared tool_uses (trf fibre products and etale covers, the trf Zariski/etale qcoh equivalence, two pbc Mathlib leaves). Batch-5 flags on def-trf-algebraic-space, lem-trf-scheme-zariski-etale-quasi-coherent-equivalence and lem-trf-space-fibre-products-etale-covers: all three are generic foundations, not steps of the trace-formula or Poincare-duality proofs, so no assumption-leaf citation is needed. No SGA citation. No fixes and no drops."
+ }
+}

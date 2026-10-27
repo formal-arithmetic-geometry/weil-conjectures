@@ -1,0 +1,135 @@
+{
+ "id": "lem-trf-point-transport-strict-quotient-all-complexes",
+ "kind": "statement",
+ "title": "Strict finite point transport laws on every complex",
+ "statement": "Fix the finite field datum D, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ as in [def-trf-coefficient-conventions]. The natural index n denotes the positive exponent n+1. For every complex P of completed integral sheaves on $s=\\operatorname{Spec}k$, let $u_n(P)$ be strictQuotientPointMap of [lem-trf-point-transport-strict-quotient]. These maps commute strictly with the quotient-induced source and finite pullback transitions of [def-weil-integral-reduction-tower] and [def-weil-inverse-image-pullback-comparison]. They are natural in every complex morphism, and on a final-object section x their degree-i value is restriction by geometric Frobenius, followed by the finite pullback tensor-unit generator and restriction along the canonical comma arrow. These three assertions hold before localization, with no good-representative assumption.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "lem-trf-point-transport-strict-quotient",
+  "def-weil-integral-reduction-tower",
+  "def-weil-inverse-image-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved strictQuotientPointMap_identities: its first component gives the transition equality and its third component gives naturality for arbitrary complexes. Apply strictQuotientPointMap_sections for the stated section formula. Combine these three conclusions by conjunction introduction; no good-representative assumption is needed.",
+   "uses": [
+    "lem-trf-point-transport-strict-quotient-identities",
+    "lem-trf-point-transport-strict-quotient-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-transport-strict-quotient-identities",
+  "lem-trf-point-transport-strict-quotient-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Reviewer C-8fe81, C5/B10: combine the existing all-complex identities and section formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact evaluation commutes with the mapping cone realization of a strict inverse tower of complexes",
+   "results": "MappingCone functoriality and mapHomologicalComplex comparisons only; no specific quotient transport or completeness unit theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact point sections of the canonical completion unit of a derived complete complex is an isomorphism",
+   "results": "Completion of normed modules and general Kan-extension units; no coefficient sheaf completion or specified point transport.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "mappingCocone.lift and its two projection formulas supply the cone assembly, but neither of the coefficient-specific assertions.",
+   "date": "2026-10-26",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "strictQuotientPointMap|augmentation.*[Ii]so|identity.*[Tt]ower; point.*transport|transport.*point|completion.*[Ii]so",
+   "results": "Sheaf PointTransportStrictQuotient states its laws only on good complexes. PointSectionsCompletionCone uses integralScalarTowerFunctor rather than the actual unrestricted quotient tower. No existing ordinary-module theorem states these exact interfaces. Mathlib only has generic cone functoriality.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictQuotientPointMap_identities|strictQuotientPointMap_sections",
+   "results": "The existing PointTransportStrictQuotientIdentities and PointTransportStrictQuotientSections modules prove all three assertions, without a good-representative assumption. The reviewer supplied the direct conjunction proof.",
+   "date": "2026-10-27",
+   "verdict": "exact library proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerRealization",
+  "group": "G6",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), Strict finite point transport laws on every complex",
+   "via": [
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.PointTransportStrictQuotientAllComplexes",
+  "file": "lean/Sheaf/Paper/PointTransportStrictQuotientAllComplexes.lean",
+  "declaration": "WeilConjectures.pointTransport_strictQuotient_allComplexes",
+  "statement": "theorem pointTransport_strictQuotient_allComplexes (_hl : l ≠ D.p) :\n    (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (n : ℕ),\n      ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n          ((unrestrictedIntegralTransition l E (Spec (.of D.k)) n).app P) ≫\n          strictQuotientPointMap D l E n P =\n        strictQuotientPointMap D l E (n + 1) P ≫\n          ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n            ((integralOperationsPullbackTransition l E (frobeniusPointIso D).hom n).app P)) ∧\n    (∀ (P P' : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ)\n      (f : P ⟶ P') (n : ℕ),\n      ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n          ((unrestrictedIntegralComplexFunctor l E (Spec (.of D.k)) n).map f) ≫\n          strictQuotientPointMap D l E n P' =\n        strictQuotientPointMap D l E n P ≫\n          ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map\n            ((integralOperationsPullbackLevel l E (frobeniusPointIso D).hom n).map f)) ∧\n    (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ)\n      (n : ℕ) (i : ℤ)\n      (x : (((unrestrictedIntegralFiniteComplex l E (Spec (.of D.k)) n).obj P).X i).val.obj\n        (op (ProEt.mk (𝟙 (Spec (.of D.k)))))),\n      ((strictQuotientPointMap D l E n P).f i) x =\n        ((((integralOperationsPullbackLevel l E (frobeniusPointIso D).hom n).obj P).X i).val.map\n          (proEtaleIsoCommaArrow (frobeniusPointIso D).hom\n            (ProEt.mk (𝟙 (Spec (.of D.k))))).op\n          (integralOperationsPullbackGenerator l E (frobeniusPointIso D).hom n\n            (((unrestrictedIntegralFiniteComplex l E (Spec (.of D.k)) n).obj P).X i)\n            ((proEtaleIsoPostcompose (frobeniusPointIso D).hom).obj\n              (ProEt.mk (𝟙 (Spec (.of D.k)))))\n            ((((unrestrictedIntegralFiniteComplex l E (Spec (.of D.k)) n).obj P).X i).val.map\n              (frobeniusPointRestriction D).op x))))",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery b2da vs returned 8fe8 (diff -r: LFTN split removed, C5 fix and item stmt_deps fix taken, Lean otherwise identical); spec vs published statement (earlier defeq check, published blob unchanged cb8c8b5c887); delivered set + 3 direct importers compiled in sandbox; #print axioms; nodes vs Lean"
+ }
+}

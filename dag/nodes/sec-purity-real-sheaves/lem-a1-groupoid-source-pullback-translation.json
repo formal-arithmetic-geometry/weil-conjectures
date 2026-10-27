@@ -1,0 +1,230 @@
+{
+ "id": "lem-a1-groupoid-source-pullback-translation",
+ "kind": "statement",
+ "title": "Translation of source pullbacks and invariance of source-fibre degree",
+ "statement": "Let $U,R$ be schemes [def-pc-scheme] and let $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$, and $c:R\\times_{s,U,t}R\\to R$ form a groupoid scheme [def-a1-groupoid-scheme], with $c(a,b)=a\\circ b$. Put $P=R\\times_{s,U,t}R$ and $Q=R\\times_{s,U,s}R$ [def-pc-fibre-product], both viewed over $R$ by their second projections $p_2,q_2$. There is an isomorphism $F:P\\xrightarrow{\\sim}Q$ over $R$ given on every test scheme's points by $F(a,b)=(c(a,b),b)$, whose inverse is $G(d,b)=(c(d,i(b)),b)$. In particular $q_2\\circ F=p_2$, $G\\circ F=\\mathrm{id}_P$, and $F\\circ G=\\mathrm{id}_Q$ as scheme morphisms. No finiteness, flatness, affineness, or relation-monomorphism hypothesis is imposed. If $s$ is finite locally free [def-pc-finite-locally-free], let $d(u)=\\dim_{\\kappa(u)}\\Gamma(R\\times_{s,U}\\operatorname{Spec}\\kappa(u),\\mathcal O)$, where $\\kappa(u)$ is the residue field [def-weil-residue-field]. Then $d(t(z))=d(s(z))$ for every $z\\in R$; equivalently, for every $r\\geq0$ the open rank stratum $U_r=\\{u:d(u)=r\\}$ satisfies $s^{-1}(U_r)=t^{-1}(U_r)$ as open subschemes.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02YE (groupoids-lemma-diagram), the two lower cartesian squares, in the absolute groupoid case. Rank consequence: Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free), comparison of base-changed fibre degrees."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Construct the morphisms using the fibre-product universal property [def-pc-fibre-product]. On $P$, $s\\circ c=s\\circ p_2$ by [def-a1-groupoid-scheme], so the pair $(c,p_2)$ gives $F:P\\to Q$. On $Q$, write $q_1,q_2$ for the projections. Since $s q_1=s q_2=t i q_2$, the pair $(q_1,i q_2)$ gives $h:Q\\to P$. Also $s c h=s i q_2=t q_2$, so $(c h,q_2)$ gives $G:Q\\to P$. The second projections of $F$ and $G$ are respectively $p_2$ and $q_2$. These constructions give exactly the asserted formulas on every test scheme. In Lean, f and g are these explicit pullback lifts, and j is the intermediate lift (q1, i q2).",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02YE (lemma-diagram), explicit construction for the lower right square; groupoid axioms preceding Tag 0231"
+   }
+  },
+  {
+   "text": "For any test scheme $H$, associativity, inverse and unit laws [def-a1-groupoid-scheme] give $c(c(a,b),i(b))=c(a,c(b,i(b)))=c(a,e(t(b)))=a$ whenever $s(a)=t(b)$. For a pair with $s(d)=s(b)$ they give $c(c(d,i(b)),b)=c(d,c(i(b),b))=c(d,e(s(b)))=d$. The second coordinate stays $b$ in both computations. Hence the two composites induce identity maps on $H$-points for every $H$. Taking $H=P$ and the point $\\mathrm{id}_P$, respectively $H=Q$ and $\\mathrm{id}_Q$, proves $G\\circ F=\\mathrm{id}_P$ and $F\\circ G=\\mathrm{id}_Q$ as scheme morphisms. Thus $F$ is the claimed isomorphism over $R$, without any geometric hypotheses beyond the groupoid data. A proved private helper groupoid_comp_cancel combines associativity with the right unit law when c(b,d)=e(s(a)); it is applied to (p1,p2,i p2) and (q1,i q2,q2). Pullback extensionality verifies the first-coordinate computations and both second-coordinate equations.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02YE (lemma-diagram), omitted functorial-point argument expanded"
+   }
+  },
+  {
+   "text": "The square (p1,p2;s,t) is the canonical pullback. The projection formulas for the constructed isomorphism F give IsPullback c p2 s s by IsPullback.of_iso_pullback. Under finite local freeness, s is affine, and Scheme.Hom.fiberDegree_of_isPullback (in the module of [def-pc-finite-locally-free]) applied to these two squares gives p2.fiberDegree(z)=s.fiberDegree(t(z)) and p2.fiberDegree(z)=s.fiberDegree(s(z)). Transitivity proves equality of the two fibre degrees. The definition of fiberDegree is definitionally the finrankGamma of fiberToSpecResidueField, so this is precisely the asserted residue-field dimension equality.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02YE (lemma-diagram), the two lower squares; Tag 03BI (lemma-finite-locally-free-disjoint-free), comparison over a point z"
+   }
+  },
+  {
+   "text": "Apply the proved theorem finiteLocallyFree_fiberDimension_isLocallyConstant [lem-weil-pbc-finite-locally-free-degree-locally-constant], which already identifies the locally constant finite-flat rank with the literal fibre dimension. For each natural r, take V to be the open fibre of this locally constant function at r. Its membership equivalence is definitional. Extensionality of opens reduces s inverse V = t inverse V to the fibre-degree equality from the preceding step, point by point. This includes r=0 and empty schemes.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI (lemma-finite-locally-free-disjoint-free), rank strata and invariance"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "agent B6",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 02YE and 03BI. Explicit pullback lifts, cancellation by the groupoid axioms, fibreDegree_of_isPullback, and the existing proved finite-locally-free fibre-dimension local-constancy theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a groupoid scheme composition gives an isomorphism R fiber product source target R to R fiber product source source R over the second projection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the $t'$-induced morphism with successive first \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (i : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso 𝒰 f g i).hom\\n  \", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and an index $i \\\\in \\\\mathcal{U}.I_0$, the composition of the isomorphism $\\\\text{pullbackP1Iso}(\\\\mathcal{U}, f,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the morphism $t'$ (constructed via horizontal pa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the morphism $t'$ (constructed from horizontal p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j : 𝒰.I₀) → AlgebraicGeometry.Scheme.Pullback.v 𝒰 f g i j ⟶ AlgebraicGeome\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs a canonical isomorphism between the pullback objects\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_fst_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For indices $i, j, k$ in the zeroth component of an open cover $\\\\mathcal{U}$ of a scheme $X$, the composition $t'_{\\\\mathcal{U},f,g,i,j,k} \\\\circ \\\\text{pullback.fst} \\\\circ \\\\text{pullback.snd}$ equals $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (i : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso 𝒰 f g i).hom\\n  \", \"doc\": \"For each index $i$ in the zeroth component of an open cover $\\\\mathcal{U}$ of a scheme $X$, the composition of the isomorphism $\\\\text{pullbackP1Iso}(\\\\mathcal{U}, f, g, i)$'s forward morphism with the f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (i : 𝒰.I₀)\\n  {Z_1 : AlgebraicGeometry.Scheme} (h : (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).glued ⟶ Z_1),\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and an index $i \\\\in \\\\mathcal{U}.I_0$, the composition of the inverse of the pullback isomorphism $\\\\text{pull\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme pullback gluing identities, ordinary groupoid inverse laws, and group-object translations do not state the internal groupoid source-pullback isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme pullback gluing identities, ordinary groupoid inverse laws, and group-object translations do not state the internal groupoid source-pullback isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(pullback|fiberProduct)|(?:pullback|fiberProduct).*groupoid",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme pullback gluing identities, ordinary groupoid inverse laws, and group-object translations do not state the internal groupoid source-pullback isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a groupoid scheme right translation by an arrow identifies source fibers over its target and source",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"R_mul\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"{G : Type*} [Semigroup G] [TopologicalSpace G] [ChartedSpace H G] [ContMDiffMul I ∞ G] (g h : G) :\\n  𝑹 I (g * h) = (𝑹 I h).comp (𝑹 I g)\", \"doc\": \"For a topological group $G$ modeled on a manifold with corners $I$ with $C^\\\\infty$-smooth multiplication, the right translation map $R_I(g \\\\cdot h)$ equals the composition of $R_I(h)$ and $R_I(g)$, i.\"}\n  {\"name\": \"Homeomorph.addRight\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"{G : Type w} → [inst : TopologicalSpace G] → [inst_1 : AddGroup G] → [ContinuousAdd G] → G → G ≃ₜ G\", \"doc\": \"For any element $ a $ in a topological additive group $ G $, the function $ f: G \\to G $ defined by $ f(x) = x + a $ is a homeomorphism, i.e., a bijective continuous map with a continuous inverse, wher\"}\n  {\"name\": \"CategoryTheory.GrpObj.mulRight\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Grp_\", \"type\": \"{A : C} [GrpObj A] (f : 𝟙_ C ⟶ A) : A ≅ A\", \"doc\": \"Given a group object $ A $ in a Cartesian monoidal category $ \\\\mathcal{C} $ and a morphism $ f: \\\\mathbf{1}_\\\\mathcal{C} \\\\to A $ from the unit object, this constructs an isomorphism $ A \\\\cong A $ via ri\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.right_invariance'\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"∀ {H : Type u_1} {H' : Type u_3} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace H'] {G : StructureGroupoid H}\\n  {G' : StructureGroupoid H'} {P : (H → H') → Set H → H → Prop},\\n  G.LocalInvariantProp G' P →\\n    ∀ {s : Set H} {x : H} {f : H → H'} {e : OpenPartialHomeomorph H H},\\n      e ∈ G → x\", \"doc\": \"If $ P $ is a local invariant property between topological spaces $ H $ and $ H' $ under structure groupoids $ G $ and $ G' $, then for any homeomorphism $ e \\\\in G $, point $ x $ in the domain of $ e \"}\n  {\"name\": \"Equiv.coe_mulRight\", \"module\": \"Mathlib.Algebra.Group.Units.Equiv\", \"type\": \"(a : G) : ⇑(Equiv.mulRight a) = fun x => x * a\", \"doc\": \"For any element $a$ in a group $G$, the right multiplication equivalence by $a$ (denoted $\\\\mathrm{Equiv.mulRight}\\\\, a$) coerces to the function $G \\\\to G$ defined by $x \\\\mapsto x \\\\cdot a$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : f.fiber y ⟶ X\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme defined by the pullback $X_y := X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is\"}\n  {\"name\": \"CategoryTheory.Groupoid.vertexGroupIsomOfMap\", \"module\": \"Mathlib.CategoryTheory.Groupoid.VertexGroup\", \"type\": \"{c d : C} (f : c ⟶ d) : (c ⟶ c) ≃* (d ⟶ d)\", \"doc\": \"Given a groupoid $\\\\mathcal{C}$ and an isomorphism $f : c \\\\to d$ between objects $c,d \\\\in \\\\mathcal{C}$, this defines a group isomorphism between the automorphism groups $\\\\text{Aut}(c)$ and $\\\\text{Aut}(\"}\n  {\"name\": \"translate\", \"module\": \"Mathlib.Algebra.Group.Translate\", \"type\": \"(a : G) (f : G → α) : G → α\", \"doc\": \"Given an element $ a $ of an additive commutative group $ G $ and a function $ f : G \\\\to \\\\alpha $, the translated function maps each $ x \\\\in G $ to $ f(x - a) $. This operation shifts the input of $ f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme pullback gluing identities, ordinary groupoid inverse laws, and group-object translations do not state the internal groupoid source-pullback isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal groupoid has a cartesian composition square and the inverse is given by composition with the inverse arrow",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrpObj.comp_inv\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Grp_\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  {G X Y : C} [inst_2 : CategoryTheory.GrpObj G] (f : X ⟶ Y) (g : Y ⟶ G),\\n  CategoryTheory.CategoryStruct.comp f g⁻¹ = (CategoryTheory.CategoryStruct.comp f g)⁻¹\", \"doc\": \"In a Cartesian monoidal category $\\\\mathcal{C}$, for any group object $G$ and morphisms $f : X \\\\to Y$ and $g : Y \\\\to G$, the inverse of the composition $f \\\\circ g$ in the group structure of $\\\\text{Hom}\"}\n  {\"name\": \"CategoryTheory.Groupoid.inv\", \"module\": \"Mathlib/CategoryTheory/Groupoid\", \"type\": \"{obj : Type u} → [self : CategoryTheory.Groupoid obj] → {X Y : obj} → (X ⟶ Y) → (Y ⟶ X)\", \"doc\": \"Given a groupoid and a morphism $ f : X \\to Y $ between two objects in the groupoid, this function returns the inverse morphism $ f^{-1} : Y \\to X $, which exists because all morphisms in a groupoid are\"}\n  {\"name\": \"CategoryTheory.Grp_Class.comp_inv\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Grp_\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  {G X Y : C} [inst_2 : CategoryTheory.GrpObj G] (f : X ⟶ Y) (g : Y ⟶ G),\\n  CategoryTheory.CategoryStruct.comp f g⁻¹ = (CategoryTheory.CategoryStruct.comp f g)⁻¹\", \"doc\": \"In a Cartesian monoidal category $\\\\mathcal{C}$, for any group object $G$ and objects $X,Y$, and for any morphisms $f : X \\\\to Y$ and $g : Y \\\\to G$, the composition $f \\\\circ g^{-1}$ equals the inverse o\"}\n  {\"name\": \"CategoryTheory.groupoidOfElements\", \"module\": \"Mathlib/CategoryTheory/Elements\", \"type\": \"{G : Type u} →\\n  [inst : CategoryTheory.Groupoid G] → (F : CategoryTheory.Functor G (Type w)) → CategoryTheory.Groupoid F.Elements\", \"doc\": \"For any groupoid $\\\\mathcal{G}$ and functor $F : \\\\mathcal{G} \\\\to \\\\mathrm{Type}\\\\, w$, the category of elements $\\\\mathrm{Elements}\\\\, F$ forms a groupoid. This means that every morphism in $\\\\mathrm{Elemen\"}\n  {\"name\": \"CategoryTheory.Groupoid.vertexGroup_inv\", \"module\": \"Mathlib/CategoryTheory/Groupoid/VertexGroup\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (c : C) (a : c ⟶ c), a⁻¹ = CategoryTheory.Groupoid.inv a\", \"doc\": \"For any object $ c $ in a groupoid $ \\\\mathcal{C} $ and any morphism $ a : c \\\\to c $, the inverse of $ a $ in the endomorphism group $ \\\\text{Hom}(c, c) $ is equal to the inverse morphism provided by th\"}\n  {\"name\": \"CategoryTheory.Groupoid.comp_inv\", \"module\": \"Mathlib/CategoryTheory/Groupoid\", \"type\": \"∀ {obj : Type u} [self : CategoryTheory.Groupoid obj] {X Y : obj} (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp f (CategoryTheory.Groupoid.inv f) = CategoryTheory.CategoryStruct.id X\", \"doc\": \"In a groupoid, for any morphism $ f : X \\\\to Y $, the composition of $ f $ with its inverse $ f^{-1} $ is equal to the identity morphism on $ X $, i.e., $ f \\\\circ f^{-1} = \\\\text{id}_X $.\"}\n  {\"name\": \"CategoryTheory.Groupoid.inv_comp\", \"module\": \"Mathlib/CategoryTheory/Groupoid\", \"type\": \"∀ {obj : Type u} [self : CategoryTheory.Groupoid obj] {X Y : obj} (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.Groupoid.inv f) f = CategoryTheory.CategoryStruct.id Y\", \"doc\": \"For any morphism $ f : X \\\\to Y $ in a groupoid, the composition of its inverse $ f^{-1} $ with $ f $ is equal to the identity morphism on $ Y $, i.e., $ f^{-1} \\\\circ f = \\\\text{id}_Y $.\"}\n  {\"name\": \"CategoryTheory.Groupoid.vertexGroup.inv_eq_inv\", \"module\": \"Mathlib/CategoryTheory/Groupoid/VertexGroup\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (c : C) (γ : c ⟶ c), γ⁻¹ = CategoryTheory.inv γ\", \"doc\": \"For any morphism $ \\\\gamma $ from an object $ c $ to itself in a groupoid $ \\\\mathcal{C} $, the inverse of $ \\\\gamma $ in the endomorphism group of $ c $ is equal to the inverse of $ \\\\gamma $ in the grou\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme pullback gluing identities, ordinary groupoid inverse laws, and group-object translations do not state the internal groupoid source-pullback isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(degree|rank)|(?:degree|rank).*groupoid",
+   "results": "{\"t\": \"2026-10-22T08:02:29Z\", \"tool\": \"grep\", \"query\": \"groupoid.*(degree|rank)|(?:degree|rank).*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite or discrete fibres and Galois-category cardinality comparisons do not identify the two groupoid source-fibre degrees."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a groupoid scheme with finite locally free source the source fiber degree at the source of any arrow equals the source fiber degree at its target",
+   "results": "{\"t\": \"2026-10-22T08:02:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a groupoid scheme with finite locally free source the source fiber degree at the source of any arrow equals the source fiber degree at its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"AlgebraicGeometry.instIsPreimmersionFiber\\u03b9\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"CategoryTheory.PreGaloisCategory.card_fiber_eq_of_iso\", \"CategoryTheory.PreGaloisCategory.card_hom_le_card_fiber_of_connected\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\"], \"digest\": \"9848ff9339786e54\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite or discrete fibres and Galois-category cardinality comparisons do not identify the two groupoid source-fibre degrees."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(pullback|fiberProduct)|(pullback|fiberProduct).*groupoid",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary groupoid inverse laws, group objects in scheme over-categories and open-cover pullback isomorphisms do not state this internal groupoid translation and rank-invariance result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An internal groupoid in schemes has isomorphic source fibers along any arrow and finite locally free source rank is invariant",
+   "results": "8 hits: CategoryTheory.IsIso.of_groupoid, CategoryTheory.Groupoid.noConfusion, CategoryTheory.Groupoid.noConfusionType, CategoryTheory.Subgroupoid.mk.injEq, CategoryTheory.SmallGroupoid, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, StructureGroupoid.LocalInvariantProp.liftPropOn_of_mem_groupoid, CategoryTheory.instIsGroupoid",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary groupoid inverse laws, group objects in scheme over-categories and open-cover pullback isomorphisms do not state this internal groupoid translation and rank-invariance result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary groupoid inverse laws, group objects in scheme over-categories and open-cover pullback isomorphisms do not state this internal groupoid translation and rank-invariance result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an internal groupoid in schemes right composition by an arrow is an isomorphism between source pullbacks over the arrow scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.GrpObjAsOverPullback, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst_assoc, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary groupoid inverse laws, group objects in scheme over-categories and open-cover pullback isomorphisms do not state this internal groupoid translation and rank-invariance result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a groupoid object composition identifies composable pairs with pairs having the same source using inversion as the inverse map",
+   "results": "8 hits: CategoryTheory.Groupoid.comp_inv, CategoryTheory.Groupoid.invEquiv, CategoryTheory.Groupoid.inv, CategoryTheory.Groupoid.inv_comp, CategoryTheory.Groupoid.vertexGroup_mul, Quiver.FreeGroupoid.instGroupoid, CategoryTheory.Groupoid.vertexGroup_inv, Quiver.FreeGroupoid.congr_comp_reverse",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary groupoid inverse laws, group objects in scheme over-categories and open-cover pullback isomorphisms do not state this internal groupoid translation and rank-invariance result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-invariant-rank-strata",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 02YE translation comparison underlying the two base-changed source fibres in Tag 03BI, used by the ancestor fourth-paragraph affine quotient route; old item step 3. The base-change rank comparison of old item step 4 is included as the finite locally free consequence.",
+   "via": [
+    "lem-a1-affine-groupoid-invariant-rank-strata",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-groupoid-source-pullback-translation",
+  "worker": "stage1",
+  "summary": "Explicit construction and cancellation prove source-pullback translation; the two cartesian squares identify the same pullback rank using the existing Mathlib rank leaf. No new nodes. Normalized doubled TeX backslashes without changing the mathematical statement.",
+  "blueprint": "Inherited ancestor lem-a1-affine-hc0, the former affine quotient subroute recorded in blueprint.from.place: translation comparison of 02YE and rank comparison of 03BI. The latest ancestor proof now gives compact-support vanishing directly and has no groupoid paragraph; this delivery splits the assigned existing auxiliary item and does not alter its ancestor or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-fdb1f553c",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-fdb1f553c (reviewer sub-agent of L); spot-checked: I read the item in full: 4 steps, no new nodes, no fixes. The statement is byte-identical to the base copy (Q11 b3c43c57 snapshot). The report's 'normalized backslashes' remark refers only to JSON escaping. Live and side-live still have the item unsplit, there is no repair note, and no SGA source is cited. Source check: groupoids.tex l.2526 lemma-diagram (02YE) has an omitted proof; steps 1-3 supply it. l.4290 (03BI) uses base change of the s-fibres to both endpoints; steps 3-4 follow it via the rank leaf. Step 1: F=(c,p_2) is well defined by sc=s pr_1; h=(q_1,i q_2) by ti=s; G=(ch,q_2) satisfies the P-condition since s c h=s i q_2=t q_2. Step 2: I checked the associativity side-conditions and the unit/inverse laws, so G F=id and F G=id on all H-points. Step 3: (p_1,p_2;t,s) is P's defining square. (c,p_2;s,s) is cartesian with lift G(d,b), and uniqueness holds because F is invertible. The finite, flat and lfp hypotheses come from def-pc-finite-locally-free. Clause (2) of the Mathlib leaf lem-weil-pbc-finite-flat-rank-iso (FlatRank.lean finrank_of_isPullback, which works on any IsPullback square) gives d(t z)=r_{p_2}(z)=d(s z). Applying the chosen-fibre-product wording to the isomorphic square takes one line; this is advisory only. Step 4: clause (1) makes U_r open and closed, so the inverse images coincide as open subschemes, and the converse also holds. Edge cases: empty U, a group scheme over Spec k (shearing iso), the trivial groupoid, and rank 0 all hold. Duplicate search over the DAG (02YE, 03BI, R×_{s,U,s}R, groupoid rank and restriction nodes) found no node stating this result. There is no cycle; the only cross-unit citation is the Mathlib leaf, so no tool_uses. The inherited blueprint from.place (an older lem-a1-affine-hc0 paragraph) is flagged in the report; advisory."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidSourcePullbackTranslation",
+  "declaration": "AlgebraicGeometry.groupoid_source_pullback_translation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidSourcePullbackTranslation.lean",
+  "statement": "theorem groupoid_source_pullback_translation {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) : (∃ (F : pullback s t ≅ pullback s s) (h : pullback.fst s s ≫ s = (pullback.snd s s ≫ i) ≫ t), F.hom ≫ pullback.fst s s = c ∧ F.hom ≫ pullback.snd s s = pullback.snd s t ∧ F.inv ≫ pullback.fst s t = pullback.lift (pullback.fst s s) (pullback.snd s s ≫ i) h ≫ c ∧ F.inv ≫ pullback.snd s t = pullback.snd s s) ∧ (s.IsFiniteLocallyFree → (∀ z : R, (s.fiberToSpecResidueField (t z)).finrankΓ = (s.fiberToSpecResidueField (s z)).finrankΓ) ∧ ∀ r : ℕ, ∃ V : U.Opens, (∀ x : U, x ∈ V ↔ (s.fiberToSpecResidueField x).finrankΓ = r) ∧ s ⁻¹ᵁ V = t ⁻¹ᵁ V)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da74af421",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Node diff vs side-live: lean record only; lean.statement verbatim in file. Translation iso: projection equations fix F.hom=(c,p2) and F.inv=(c∘(q1,i q2),q2); h follows from pullback.condition and inverse_target; inverse identities are Iso fields; no geometric hypothesis. Degree part only under s.IsFiniteLocallyFree, nothing on t; d(u)=(s.fiberToSpecResidueField u).finrankΓ = dim_κ(u) Γ(R×_{s,U}Spec κ(u)) via ΓAlgebra (FiberDegree l.97), the node's d; d(t z)=d(s z) for all z; for each r:ℕ an open V with points = {d=r} and s⁻¹ᵁV=t⁻¹ᵁV (pins the stratum, includes r=0). Single universe u as in IsGroupoidScheme. Edge cases (empty scheme, rank 0, trivial/pair/field-group groupoids) hold. No new or hollow defs, sorry only, no stronger assumptions, no pro-étale substitute; source and blueprint docstrings with all 4 proof steps; non-public FlatRank import is the proof_dep leaf's module; no duplicate in live lean/Sheaf; report sections present. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T081046-L-1791232",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

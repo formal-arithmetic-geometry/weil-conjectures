@@ -1,0 +1,428 @@
+{
+ "id": "lem-trf-affine-algebra-class-evaluation-comparison",
+ "kind": "statement",
+ "title": "Affine algebra class maps preserve evaluation and open restriction",
+ "statement": "Let $B$ be a commutative ring, let $C$ be a commutative $B$-algebra whose degree-zero complex $C[0]$ is pseudo-coherent over $B$ [def-pc-ring-pseudo-coherent-complex], and let $T\\in D(B)$ satisfy $H^i(T)=0$ for all $i<t$ for some integer $t$ [def-weil-abstract-derived-category]. Write $F_B(P)=\\widetilde P$ for the affine derived realization on $Z=\\operatorname{Spec}B$ [lem-pc-affine-qcoh-derived-equivalence]. Use derived tensor computed by K-flat resolutions [def-pc-kflat-complex], and write $\\mathsf H_B=R\\operatorname{Hom}_B(C[0],T)$, with module derived Hom interpreted as [def-pur-derived-internal-hom] on the one-object ringed site of $B$. There is a canonical isomorphism $\\gamma_{C,T}:F_B(\\mathsf H_B)\\xrightarrow{\\sim}R\\mathcal Hom_Z(F_B(C[0]),F_B(T))$ in $D(\\mathcal O_Z)$, natural in the first argument as a derived $B$-module and in $T$ [def-pc-derived-category]. It is normalized by evaluation: after the canonical isomorphism $F_B(P\\otimes_B^{\\mathbf L}Q)\\cong F_B(P)\\otimes_{\\mathcal O_Z}^{\\mathbf L}F_B(Q)$, the composite of $\\gamma_{C,T}\\otimes1$ with sheaf evaluation equals $F_B$ of module evaluation. For every $\\xi:C[0]\\to T$, define $m_\\xi:C[0]\\to\\mathsf H_B$ as the transpose of $C[0]\\otimes_B^{\\mathbf L}C[0]\\xrightarrow{\\mu_C}C[0]\\xrightarrow{\\xi}T$, where $\\mu_C$ is induced by ordinary algebra multiplication; define $m_{F_B\\xi}$ by the same transpose on sheaves [def-pur-derived-internal-hom]. Then $\\gamma_{C,T}\\circ F_B(m_\\xi)=m_{F_B\\xi}$. These comparisons commute with all $B$-scalar endomorphisms and with precomposition by multiplication by every $c\\in C$. For every ring map $\\varphi:B\\to D$ inducing an affine open immersion $j:\\operatorname{Spec}D\\hookrightarrow Z$, put $C_D=D\\otimes_B C$, $T_D=D\\otimes_B^{\\mathbf L}T$, and $\\xi_D=D\\otimes_B^{\\mathbf L}\\xi$, identifying $D\\otimes_B^{\\mathbf L}C[0]$ with $C_D[0]$. There are canonical natural restriction isomorphisms $j^*F_B(P)\\cong F_D(D\\otimes_B^{\\mathbf L}P)$, compatible with derived tensor, and the evaluation-defined map $\\lambda:D\\otimes_B^{\\mathbf L}\\mathsf H_B\\to R\\operatorname{Hom}_D(C_D[0],T_D)$ is invertible. Under these isomorphisms and open restriction of derived internal Hom, $j^*\\gamma_{C,T}$ equals $\\gamma_{C_D,T_D}\\circ F_D(\\lambda)$, and $\\lambda\\circ(D\\otimes_B^{\\mathbf L}m_\\xi)=m_{\\xi_D}$. Here the tensor and evaluation comparisons are the ones induced by ordinary extension of scalars on K-flat representatives, rather than unspecified isomorphisms. The comparison diagrams commute also under successive affine-open restrictions.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, proof of (3)(a), refined to evaluation and algebra class maps; cohomology.tex lemma-Rhom-complex-of-direct-summands-finite-free; application in duality.tex lemma-relative-dualizing-complex-algebra."
+ },
+ "stmt_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "def-pc-derived-category",
+  "def-trf-affine-algebra-class-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix the tensor comparison $\\alpha_{P,Q}:F_B(P)\\otimes^{\\mathbf L}F_B(Q)\\xrightarrow{\\sim}F_B(P\\otimes^{\\mathbf L}Q)$ as follows. Take K-flat resolutions of both module complexes; their associated sheaf complexes are K-flat, and the total-tensor tilde comparison gives $\\alpha$. Normalize the ordinary tensor comparison by $\\tau(p)\\otimes\\tau(q)\\mapsto\\tau(p\\otimes q)$. The cited affine derived tensor lemma supplies the resulting natural derived isomorphism. This is the comparison computed by extension of scalars, not a new choice of tensor structure. The ringed-site tensor-Hom adjunction supplies evaluation and its bijective transpose, both for the one-object ringed site of $B$ and for the Zariski ringed site of $Z$. Its K-flat uncurrying normalization is precisely evaluation on these representatives. Write $H(E,T)=R\\operatorname{Hom}_B(E,T)$ and $\\mathcal H(F_BE,F_BT)=R\\mathcal Hom_Z(F_BE,F_BT)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-affine-tilde-total-tensor",
+    "lem-weil-pbc-affine-tilde-tensor",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 08DV, 08DX (lemma-affine-K-flat, lemma-quasi-coherence-tensor-product); schemes.tex Tag 01I8; sites-cohomology.tex Tag 08J9 (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "For any $E,T\\in D(B)$ define $\\gamma_{E,T}:F_BH(E,T)\\to\\mathcal H(F_BE,F_BT)$ to be the sheaf tensor-Hom transpose of $F_B(\\mathrm{ev}_{E,T})\\circ\\alpha_{H(E,T),E}$. Thus, by the inverse-transpose identity,\n$$\\mathrm{ev}_{F_BE,F_BT}\\circ(\\gamma_{E,T}\\otimes1)=F_B(\\mathrm{ev}_{E,T})\\circ\\alpha_{H(E,T),E}.$$\nThis constructs a specified comparison even before asserting invertibility. In particular it gives exactly the evaluation normalization of the item when $E=C[0]$.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), evaluation-defined tensor-Hom transpose; perfect.tex Tag 08DX"
+   }
+  },
+  {
+   "text": "Suppose $E$ is pseudo-coherent and $T$ is bounded below. The pseudo-coherent definition supplies a bounded-above finite free representative of $E$, hence a finite projective representative as required by the affine Hom lemma. That lemma puts $J=\\mathcal H(F_BE,F_BT)$ in $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$. For every $V\\in D(B)$ there are natural bijections\n$$\\operatorname{Hom}(F_BV,F_BH(E,T))\\cong\\operatorname{Hom}(V,H(E,T))\\cong\\operatorname{Hom}(V\\otimes^{\\mathbf L}E,T)\\cong\\operatorname{Hom}(F_BV\\otimes^{\\mathbf L}F_BE,F_BT)\\cong\\operatorname{Hom}(F_BV,J).$$\nHere the first and third bijections use full faithfulness of the affine equivalence and $\\alpha$, and the others are the two tensor-Hom adjunctions. By Step 2 this composite sends $h$ to $\\gamma_{E,T}\\circ h$. Choose $W$ and $v:F_BW\\xrightarrow{\\sim}J$ using essential surjectivity onto quasi-coherent objects. Surjectivity at $W$ gives $h:F_BW\\to F_BH(E,T)$ with $\\gamma h=v$, so $k=hv^{-1}$ is a right inverse to $\\gamma$. Injectivity at $V=H(E,T)$ applied to $\\gamma(k\\gamma)=\\gamma$ gives $k\\gamma=1$. Thus $\\gamma_{E,T}$ is invertible. This argument uses only the existing lemma's quasi-coherence conclusion, not an unspecified isomorphism as if it already preserved evaluation.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A6H (lemma-quasi-coherence-internal-hom), (3)(a), and Tag 06Z0 (lemma-affine-compare-bounded); sites-cohomology.tex Tag 08J9"
+   }
+  },
+  {
+   "text": "For $a:E'\\to E$ and $b:T\\to T'$, take inverse transposes of $\\gamma_{E',T'}F_BH(a,b)$ and $\\mathcal H(F_Ba,F_Bb)\\gamma_{E,T}$. Naturality of evaluation and $\\alpha$ makes both equal to\n$$F_B(b\\circ\\mathrm{ev}_{E,T}\\circ(1\\otimes a))\\circ\\alpha_{H(E,T),E'}.$$\nInjectivity of transposition proves naturality for actual derived morphisms in both variables. This argument needs no chain representative of $a$ or $b$. Specialize to $a$ equal to multiplication by $c\\in C$ on $C[0]$ to obtain the precomposition square. Specialize to scalar multiplication on either input for every $b_0\\in B$ to obtain all stated $B$-scalar squares; the comparisons are also morphisms of $\\mathcal O_Z$-modules and so are $B$-linear.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), functorial tensor-Hom adjunction; agent evaluation-transpose calculation"
+   }
+  },
+  {
+   "text": "Put $E=C[0]$ and $q=\\xi\\circ\\mu_C:E\\otimes_B^{\\mathbf L}E\\to T$. By definition $\\mathrm{ev}_{E,T}\\circ(m_\\xi\\otimes1)=q$. The inverse transpose of $\\gamma_{E,T}F_B(m_\\xi)$ is consequently $F_B(q)\\circ\\alpha_{E,E}$. On K-flat resolutions mapping to $C[0]$, multiplication is represented by $p\\otimes q'\\mapsto\\overline p\\,\\overline {q'}$ followed by $\\xi$; termwise tilde and the normalized ordinary tensor map give the same sheaf multiplication. Thus $F_B(q)\\alpha_{E,E}=F_B(\\xi)\\circ\\mu_{F_BE}$. This is the inverse transpose defining $m_{F_B\\xi}$, so injectivity of transposition gives $\\gamma_{C,T}F_B(m_\\xi)=m_{F_B\\xi}$.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-weil-pbc-affine-tilde-tensor",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U (lemma-relative-dualizing-complex-algebra), multiplication-class affine identification; schemes.tex Tag 01I8; sites-cohomology.tex Tag 08J9"
+   }
+  },
+  {
+   "text": "For the given affine open immersion $j$, its local-ring maps are isomorphisms by the definition of open immersion. An isomorphism of rings is flat because its scalar-extension functor is the identity up to that isomorphism. The definition of flat morphism and the affine flatness criterion therefore show that $D$ is flat over $B$. Put $L=D\\otimes_B^{\\mathbf L}-$; the K-flat construction of derived change of rings and exactness of $D\\otimes_B-$ identify $L$ with ordinary extension on complexes. Indeed tensoring preserves the cycle-boundary short exact sequences, hence commutes with cohomology and preserves quasi-isomorphisms. It follows that $LC[0]=C_D[0]$ and $H^i(LT)=D\\otimes_B H^i(T)=0$ for $i<t$. Tensor a bounded-above finite free representative of $C[0]$ with $D$: its terms remain finite free, and exactness preserves the representative quasi-isomorphism, so $C_D[0]$ is pseudo-coherent over $D$. Thus Step 3 applies over $D$, with no Noetherian or perfectness assumption.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize); sites-cohomology.tex Tag 06YY, derived change of rings; more-algebra.tex Tag 064P"
+   }
+  },
+  {
+   "text": "Let $\\rho_P:j^*F_BP\\xrightarrow{\\sim}F_DLP$ be the affine derived pullback comparison. Use its ordinary normalization from the tilde-pullback lemma: the pullback of $\\tau(p)$ corresponds to $\\tau(1\\otimes p)$. It is natural in $P$. On K-flat representatives the tensor square for $\\rho$ sends a pure tensor to the same element $d_1d_2\\otimes(p\\otimes q)$ by either path; the balancing relation proves equality, and the total-complex differential is preserved. These representative comparisons descend to the stated tensor-compatible restriction isomorphisms. Let $\\kappa:j^*\\mathcal H(F_BE,F_BT)\\xrightarrow{\\sim}\\mathcal H(j^*F_BE,j^*F_BT)$ be the inverse of the open internal-Hom comparison. It preserves evaluation: restrict a K-injective representative of the second input (still K-injective), and the ordinary Hom-complex restriction isomorphism sends a family of maps to its restriction. Both resulting evaluation maps send $h\\otimes p$ to $h(p)$, with the same total-complex degrees. Thus the derived square commutes by the representative normalization of the closed adjunction. This verifies the evaluation property rather than assuming that an arbitrary internal-Hom isomorphism has it.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-sc-hom-complex-restrict-open",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 08DW, 08DX; schemes.tex Tag 01I9 (lemma-widetilde-pullback); cohomology.tex Tags 08DL, 08BS; sites-cohomology.tex Tag 08J9"
+   }
+  },
+  {
+   "text": "Write $H=H(E,T)$ and define $\\lambda:LH\\to H_D(LE,LT)$ by transposing $L(\\mathrm{ev}_{E,T})$ after the extension-of-scalars tensor comparison. The latter is the map $ (d\\otimes x)\\otimes(e\\otimes y)\\mapsto de\\otimes(x\\otimes y)$ on K-flat representatives. Compare the two maps from $F_DLH$ to $\\mathcal H(F_DLE,F_DLT)$ obtained (a) from $j^*\\gamma_{E,T}$ via $\\rho$ and $\\kappa$, and (b) as $\\gamma_{LE,LT}\\circ F_D\\lambda$. Their inverse transposes are equal: for (a), apply $j^*$ to the evaluation equation of Step 2, then the evaluation and tensor squares of Step 7; the result is $F_DL(\\mathrm{ev}_{E,T})$ with the scalar-extension and affine tensor comparisons inserted. For (b), Step 2 over $D$ and the defining evaluation equation for $\\lambda$ give exactly that same composite. Injectivity of sheaf transposition proves the asserted equality $j^*\\gamma_{C,T}=\\gamma_{C_D,T_D}\\circ F_D\\lambda$ under the displayed identifications.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, tensor-Hom transpose; perfect.tex Tags 08DW and 08DX; cohomology.tex Tag 08DL"
+   }
+  },
+  {
+   "text": "By Step 3 over $B$ and $D$, Step 6, and invertibility of $\\rho$ and $\\kappa$, the equality of Step 8 expresses $F_D\\lambda$ as a composite of isomorphisms. Full faithfulness of $F_D$ lifts its inverse to an inverse of $\\lambda$; faithfulness verifies both inverse identities. This proves invertibility of the specified map $\\lambda$, rather than merely existence of some scalar-extension isomorphism. Finally the inverse transpose of $\\lambda\\circ Lm_\\xi$ is $L(\\xi\\circ\\mu_C)$ under the tensor comparison, by the defining equations of $\\lambda$ and $m_\\xi$. The scalar-extension formula gives the multiplication $(d\\otimes c)(e\\otimes c')=de\\otimes cc'$ of $C_D$, so this inverse transpose is $\\xi_D\\circ\\mu_{C_D}$. It defines $m_{\\xi_D}$, and injectivity of module transposition proves $\\lambda\\circ Lm_\\xi=m_{\\xi_D}$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, affine equivalence; sites-cohomology.tex Tag 08J9; duality.tex Tag 0E2U, multiplication-class affine identification"
+   }
+  },
+  {
+   "text": "For successive affine open restrictions $B\\to D\\to D'$, identify repeated derived extension and repeated derived pullback with their composites by the canonical composition maps. On representative tensors the two extension identifications both send $e\\otimes(d\\otimes p)$ to $e\\varphi'(d)\\otimes p$; associativity of multiplication proves the equality also on tensor products. Restriction of ordinary Hom families is literally successive restriction, so its evaluation equation is also the composite equation. Consequently the successive $\\rho$ identifications agree, compatibly with the associative derived-pullback composition isomorphisms. The two resulting maps $D'\\otimes_B^{\\mathbf L}H\\to H_{D'}(D'\\otimes_B^{\\mathbf L}E,D'\\otimes_B^{\\mathbf L}T)$ have the identical inverse transpose, namely extension of the original evaluation. They are equal by injectivity. The same argument with $\\xi\\mu_C$ proves coherence for the multiplication class maps, and Step 8 then proves coherence for $\\gamma$. Identity restrictions are the same calculation with the unit element. This proves every requested successive-restriction diagram.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-sc-hom-complex-restrict-open",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5S (lemma-derived-pullback-composition) and Tag 08DL; schemes.tex Tag 01I9; sites-cohomology.tex Tag 08J9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-affine-tilde-total-tensor",
+  "lem-weil-pbc-affine-tilde-tensor",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-hom-complex-restrict-open",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H (3)(a) for quasi-coherence, with the evaluation-defined comparison proved by the affine equivalence (06Z0) and the ringed tensor-Hom adjunction (08J9); open comparisons 08DW and 08DL. The normalization/naturality assembly is agent-written."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RHom|derived.*[Hh]om|[Hh]om.*localization|[Pp]seudo[Cc]oherent",
+   "results": "{\"t\": \"2026-10-22T06:45:34Z\", \"tool\": \"grep\", \"query\": \"RHom|derived.*[Hh]om|[Hh]om.*localization|[Pp]seudo[Cc]oherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/Lean/Meta/Basic.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\"], \"digest\": \"5bb09eabb5755159\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom complexes or unrelated word matches only; no affine derived comparison with these finiteness and naturality conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison between associated sheaf of derived Hom and derived sheaf Hom commutes with tensor Hom evaluation and multiplication, and flat localization of a pseudo coherent first argument is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:45:34Z\", \"tool\": \"leansearch\", \"query\": \"The canonical comparison between associated sheaf of derived Hom and derived sheaf Hom commutes with tensor Hom evaluation and multiplication, and flat localization of a pseudo coherent first argument is an isomorphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "{\"t\": \"2026-10-22T06:45:35Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary flat-module facts or presheaf Hom maps; no derived affine statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a pseudo coherent finite algebra C over B and a bounded below complex T, affine sheafification of derived Hom respects evaluation, the multiplication class C to RHom B C T, scalars and restriction to affine opens",
+   "results": "{\"t\": \"2026-10-22T06:45:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a pseudo coherent finite algebra C over B and a bounded below complex T, affine sheafification of derived Hom respects evaluation, the multiplication class C to RHom B C T, scalars and restriction to affine opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafificationHomEquiv\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine\", \"PresheafOfModules.sheafifyHomEquiv\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens\"], \"digest\": \"3e24987fcac9bf44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, finitely presented sheaves, sheafification adjunctions or derivations; none gives the asserted derived finiteness/comparison package"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bRHom\\b|derivedInternalHom|homComplex|pseudoCoherent",
+   "results": "{\"t\": \"2026-10-22T06:45:55Z\", \"tool\": \"grep\", \"query\": \"\\\\bRHom\\\\b|derivedInternalHom|homComplex|pseudoCoherent\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean\"], \"digest\": \"dd13f7269325109f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom complexes or unrelated word matches only; no affine derived comparison with these finiteness and naturality conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a pseudo coherent algebra into a bounded below complex commutes with affine sheafification and flat localization, compatibly with the class map transposed from algebra multiplication and evaluation",
+   "results": "{\"t\": \"2026-10-22T06:46:07Z\", \"tool\": \"leanfinder\", \"query\": \"Derived Hom from a pseudo coherent algebra into a bounded below complex commutes with affine sheafification and flat localization, compatibly with the class map transposed from algebra multiplication and evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Derivation.Universal.fac\", \"PresheafOfModules.Derivation.Universal.desc\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"PresheafOfModules.Derivation'.Universal.mk\", \"PresheafOfModules.Derivation.Universal\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"PresheafOfModules.HasDifferentials\"], \"digest\": \"44a1112f1e35f870\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary flat modules, finitely presented sheaves, sheafification adjunctions or derivations; none gives the asserted derived finiteness/comparison package"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hom\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-22T06:46:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hom\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.OverPresheafAux.unitAuxAuxAux_hom\", \"CategoryTheory.OverPresheafAux.unitAuxAux_hom_app\", \"CategoryTheory.OverPresheafAux.counitAuxAux_hom\", \"CategoryTheory.OverPresheafAux.counitAux_hom\", \"CategoryTheory.OverPresheafAux.unitAux_hom_left\", \"CategoryTheory.OverPresheafAux.map_mkPrecomp_eqToHom\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan\"], \"digest\": \"47d6155f186fdd94\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary flat-module facts or presheaf Hom maps; no derived affine statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|pseudo_coherent|derivedInternalHom|RHom",
+   "results": "{\"t\": \"2026-10-23T04:15:51Z\", \"tool\": \"grep\", \"query\": \"pseudoCoherent|pseudo_coherent|derivedInternalHom|RHom\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Over.lean\"], \"digest\": \"76c8ca1b3e7ffefe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheafification/Hom or unrelated affine geometry hits; no derived affine evaluation/multiplication/restriction package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated sheaf functor preserves derived internal Hom from a bounded above finite projective complex into a bounded below complex and its tensor Hom evaluation",
+   "results": "{\"t\": \"2026-10-23T04:15:52Z\", \"tool\": \"leansearch\", \"query\": \"The associated sheaf functor preserves derived internal Hom from a bounded above finite projective complex into a bounded below complex and its tensor Hom evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafHom'\", \"CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology\", \"CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf\", \"CategoryTheory.Functor.preservesHomologyOfExact\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"CategoryTheory.sheafHom\", \"CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf\", \"CategoryTheory.GrothendieckTopology.instPreservesSheafification\"], \"digest\": \"2cd1fd1f41a97605\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheafification/Hom or unrelated affine geometry hits; no derived affine evaluation/multiplication/restriction package"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "{\"t\": \"2026-10-23T04:15:52Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheafification/Hom or unrelated affine geometry hits; no derived affine evaluation/multiplication/restriction package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine sheafification of derived Hom from a pseudo coherent complex to a bounded below complex commutes with evaluation and restriction to affine open subschemes",
+   "results": "{\"t\": \"2026-10-23T04:15:54Z\", \"tool\": \"leanfinder\", \"query\": \"Affine sheafification of derived Hom from a pseudo coherent complex to a bounded below complex commutes with evaluation and restriction to affine open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.sheafifyHomEquiv\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\"], \"digest\": \"7d1050f74b6a4219\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheafification/Hom or unrelated affine geometry hits; no derived affine evaluation/multiplication/restriction package"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bRHom\\b|derivedInternalHom|pseudo[Cc]oherent|pseudo_coherent",
+   "results": "{\"t\": \"2026-10-23T04:16:43Z\", \"tool\": \"grep\", \"query\": \"\\\\bRHom\\\\b|derivedInternalHom|pseudo[Cc]oherent|pseudo_coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheafification/Hom or unrelated affine geometry hits; no derived affine evaluation/multiplication/restriction package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For Spec R the canonical tensor Hom mate from sheafification of RHom R P T to sheaf RHom of tilde P and tilde T is an isomorphism when P is pseudo coherent and T is bounded below",
+   "results": "{\"t\": \"2026-10-23T04:16:53Z\", \"tool\": \"leanfinder\", \"query\": \"For Spec R the canonical tensor Hom mate from sheafification of RHom R P T to sheaf RHom of tilde P and tilde T is an isomorphism when P is pseudo coherent and T is bounded below\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"98c6b0ae752f4d10\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheafification/Hom or unrelated affine geometry hits; no derived affine evaluation/multiplication/restriction package"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-relative-dualizing-comparison",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Subargument: Returned proof steps 7--9: finite-free/bounded-below affine Hom comparison normalized by evaluation, compatibility of algebra multiplication transposes, scalar action and affine-open localization.",
+   "via": [
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-algebra-class-evaluation-comparison",
+  "worker": "stage1",
+  "summary": "Q48: retained the entire statement. Constructed the specified comparison as the transpose of realized evaluation, proved it invertible using quasi-coherence and the affine derived equivalence, and proved the algebra class, scalar, open-restriction and composition equations by explicit inverse-transpose computations. Reused existing statements throughout; no new nodes. Checked every cited statement and the Stacks sources, including the boundedness/flatness hypotheses.",
+  "blueprint": "Existing ancestor lem-trf-local-term-locality, via the item’s recorded semistable-modification/relative-duality branch: affine comparison subargument of lem-trf-affine-relative-dualizing-comparison, returned steps 7--9. This split supplies the evaluation normalization and algebra multiplication/restriction compatibility required there without changing the curve/local-term unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat resolution existence, used to compute the fixed tensor comparison. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-pc-affine-tilde-kflat",
+    "why": "K-flat module representatives remain K-flat under affine realization. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-pc-affine-tilde-total-tensor",
+    "why": "Termwise affine realization identifies actual total tensor complexes. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-tensor",
+    "why": "Pins the tensor comparison on ordinary pure sections. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Affine derived tensor and pullback compatibility on K-flat models. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Generic ringed-site tensor-Hom adjunction with evaluation normalization, specialized to module and Zariski sites. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "why": "Only its quasi-coherence conclusion is used, under the exact pseudo-coherent/bounded-below hypotheses. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Full faithfulness and essential image of the affine derived realization. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Extension of scalars computed by K-flat representatives, applied to ordinary modules. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Pins affine restriction comparison by 1 tensor p on ordinary modules. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Canonical invertible restriction comparison for derived sheaf Hom. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-sc-derived-k-injective-restrict-open",
+    "why": "A restricted K-injective computes the restricted derived internal Hom. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-sc-hom-complex-restrict-open",
+    "why": "Ordinary Hom-complex restriction identifies the evaluation representatives. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Associative and unital composition comparisons for successive restrictions. This is a generic affine/derived-category tool; the local-term unit has no competing construction of it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-affine-tilde-total-tensor",
+  "lem-weil-pbc-affine-tilde-tensor",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-hom-complex-restrict-open",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-101a3b4c6",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-101a3b4c6 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the 19 cited nodes' statements, Stacks 0A6H at perfect.tex:2440 and the parent's step 4. The delivery splits an unsplit node created by Q40 on 2026-10-22 and leaves the statement unchanged. It adds no new nodes and has no re-split note. The item is still unsplit in live and side-live. proof_deps equals the union of the step uses, and there is no SGA. The statement agrees with 0A6H(3)(a): K pseudo-coherent and L bounded below. The parent (B=A⊗_RA, C=A, T=M_1) satisfies every hypothesis and uses every clause the item provides. Steps 1-2 construct alpha from K-flat tilde, total tensor and the 01I8 pure-section normalization, and define gamma as the transpose of realized evaluation. Step 3 is correct: I checked that the Hom bijections compose to gamma∘-. It uses qcoh from lem-sc-affine-pseudo-coherent-rhom-qcoherent, whose hypotheses hold through the finite free representative and the bounded-below T. Essential surjectivity and full faithfulness of the affine equivalence then give a two-sided inverse. Steps 4-5 prove naturality and the class identity by inverse transposes; the latter is checked on tau-sections. Step 6 gets D flat over B from the open immersion and the affine criterion, so L is ordinary extension, pseudo-coherence is kept and T_D keeps its bound. Steps 7-10: rho is normalized by the tilde pullback lemma. Evaluation compatibility of kappa comes from K-injective restriction and Hom-complex restriction. lambda's square is checked by inverse transposes, lambda is reflected invertible by full faithfulness, and the 0D5S composition handles successive restrictions. Edge cases B=0, T=0, identity D and a non-perfect pseudo-coherent C all hold. No duplicate exists: lem-sc-affine-rhom-qcoherent is only the Noetherian Ext statement. The generic tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraClassEvaluationComparison",
+  "declaration": "AlgebraicGeometry.AffineClassComparison.affine_algebraClass_evaluation_comparison",
+  "declarations": [
+   "AlgebraicGeometry.AffineClassComparison.ordinaryTensorIso",
+   "AlgebraicGeometry.AffineClassComparison.sheafZeroComplex",
+   "AlgebraicGeometry.AffineClassComparison.zeroRealization",
+   "AlgebraicGeometry.AffineClassComparison.sheafAlgebraMultiplication",
+   "AlgebraicGeometry.AffineClassComparison.sheafClassMap",
+   "AlgebraicGeometry.AffineClassComparison.Compatible",
+   "AlgebraicGeometry.AffineClassComparison.affine_algebraClass_evaluation_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraClassEvaluationComparison.lean",
+  "statement": "theorem affine_algebraClass_evaluation_comparison : ∃ s : Realizations.{u, w}, Compatible s",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-550b3612d",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 6efd92ff (H3 tautological class_eq) repairs it correctly. sheafAlgebraMultiplication is built independently of s (pullbackTensorModelMap then the single/total comparison, then ordinaryTensorIso.inv and tilde(mul')). sheafClassMap transports it through zeroRealization (s.factor plus the single/tilde comparison) and follows with F xi. class_eq fixes E=C[0] and mu=algebraMultiplication, so after uncurrying it asserts tensor then F(mu_C) = (zr⊗zr), mu_C~, zr^-1: the content of step 5. The def node text is corrected. Checked against the node: the hypotheses (IsPseudoCoherent, ∃ t IsGE) are exact; gamma is the Phi-transpose of tensor then F ev, with evaluation_eq and invertible for C[0]; naturality holds for all derived maps; scalar_eq and algebraScalar_eq hold; rho is pinned by rho_normalized and pullbackTotal_normalized, with rho_tensor via IsDerivedPullbackMonoidalModel; localization is the evaluation transpose and invertible under the node's hypotheses; openHom is invertible for all K, L (08DL); restriction_eq directions are checked; localization_class, zero_invertible, algebra_multiplication and algebra_class use the actual D⊗C multiplication and xi_D; extensionComp_normalized, rho_comp and successive_localization hold. The successive gamma square follows from these, since gamma is invertible. ∃ s is acceptable: every datum is pinned (affine_tilde_tensor, exists_tensorPullback_tilde_iso and schemeDerivedTensorHomEquiv are unique). Edge cases B=0, empty open, T=0, xi=0, nonflat C and universes u, w independent are covered. No hollow defs; only the main theorem is sorry; docstrings and blueprint tags present; statement verbatim; report sections present; item stmt_deps add only the def node. Advisory: the helper defs are in the item module; the def node misses the direct stmt_deps def-pc-derived-pullback and def-pc-derived-pullback-tensor-comparison, which are covered transitively; it cites lem-pc-recorded-pullback-composition for the constructed composition iso. No compile (no file changed)."
+ }
+}

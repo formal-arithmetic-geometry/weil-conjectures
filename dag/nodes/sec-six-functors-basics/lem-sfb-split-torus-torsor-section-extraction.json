@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-split-torus-torsor-section-extraction",
+ "kind": "statement",
+ "title": "Nonzero sections on split-torus torsors yield effective kernel twists",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a quasi-compact quasi-separated $k$-scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], and let $r\\geq0$. Put $T=(\\mathbf G_{m,k})^r$ [def-sfb-tori-multiplicative-type]. Let $q:P\\to X$ be faithfully flat and of finite presentation [def-weil-flat-morphism, def-weil-surjective-morphism, def-sbc-locally-finite-presentation], with a right $T$-action over $X$ for which $(p,t)\\mapsto(p,pt)$ is an isomorphism $P\\times_kT\\simeq P\\times_XP$ [def-pc-fibre-product]. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and use tensor pullback [def-pc-module-pullback] and sheaf tensor product [def-pur-sheaf-tensor-product]. If $\\Gamma(P,q^*L)\\ne0$, then there is an invertible $\\mathcal O_X$-module $N$ with $q^*N\\simeq\\mathcal O_P$ and $\\Gamma(X,L\\otimes N)\\ne0$. No group law on $X$ or $P$, properness, smoothness, integrality, or algebraic closedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 0EKK (lemma-complete-reducibility-Gm) and 0EKL (lemma-Gm-equivariant-module), iterated for a finite-rank split torus and glued on the base of a torsor. Agent-extracted section consequence, not a verbatim assertion of either affine lemma; fpqc descent of the rank-one character summands is the proposition-fpqc-descent-quasi-coherent in descent.tex."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-tori-multiplicative-type",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-split-torus-torsor-frame-geometry] to $q:P\\to X$. Its hypotheses are exactly the given faithfully flat finite-presentation map and the specified torsor isomorphism; no smoothness or separation assumption is needed for its frame-product conclusion. Obtain invertible modules $A_1,\\ldots,A_r$ and an $X$-isomorphism $P\\simeq\\prod_i A_i^\\times$. Regard $P$ as this simultaneous-frame scheme. For $r=0$ the same node identifies $q$ with $\\mathrm{id}_X$.",
+   "uses": [
+    "lem-sfb-split-torus-torsor-frame-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Frame-product reduction, using descent.tex Tag 023T as supplied by the cited frame-geometry statement."
+   }
+  },
+  {
+   "text": "For $n\\in\\mathbf Z^r$ set $N_n=\\bigotimes_i A_i^{\\otimes(-n_i)}$, with zero and negative powers as in [lem-sfb-frame-product-laurent-algebra]. That node gives the normalized algebra isomorphism $\\phi:\\bigoplus_nN_n\\xrightarrow{\\sim}q_*\\mathcal O_P$. In particular, for any common affine trivializing chart and frames $e_i$, its $n$-th inclusion sends $\\bigotimes_i e_i^{-n_i}$ to the Laurent monomial $z^n$, where the universal frame of $q^*A_i$ is $z_iq^*e_i$. This is the character decomposition with the sign fixed by evaluation, not by a choice of left versus right representation convention.",
+   "uses": [
+    "lem-sfb-frame-product-laurent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01M2 and 01LX; Laurent frame algebra and its evaluation normalization."
+   }
+  },
+  {
+   "text": "Construct a sheaf map $\\Phi:\\bigoplus_n(L\\otimes N_n)\\to q_*q^*L$ by sending a local pure tensor $l\\otimes a$ in the $n$-th summand to $\\phi_n(a)q^*l$. The tensor and pullback definitions [def-pur-sheaf-tensor-product, def-pc-module-pullback] make this balanced and compatible with restrictions, so it extends through sheafification and the coproduct. On an open $V$ with generator $l$ of $L$, identify $L|_V$ and $q^*L|_{q^{-1}V}$ with their structure sheaves using $l$ and $q^*l$. Each $L\\otimes N_n$ then identifies with $N_n$, and $\\Phi|_V$ is precisely $\\phi|_V$. Its inverse on $V$ is multiplication by $l$ after $\\phi^{-1}|_V$. These local inverses agree since they invert the same map, hence $\\Phi$ is an isomorphism. This proves the required projection formula directly for an invertible $L$.",
+   "uses": [
+    "lem-sfb-frame-product-laurent-algebra",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LX and the definition of sheaf tensor and pullback; local rank-one calculation."
+   }
+  },
+  {
+   "text": "Choose $0\\ne s\\in\\Gamma(P,q^*L)$ and set $t=\\Phi^{-1}(s)\\in\\Gamma(X,\\bigoplus_n L\\otimes N_n)$. For each $n$, the identity on that summand and zero on the others induce a sheaf projection $\\pi_n$ from the sheafified direct sum; put $t_n=\\pi_n(t)$. These projections detect zero: locally a section of a sheafified direct sum comes from finitely many summands, and if all projections vanish that finite sum is zero after restriction to a neighbourhood. Thus all $t_n=0$ would force $t=0$ by the sheaf uniqueness axiom and hence $s=0$. Choose $n$ with $t_n\\ne0$. This uses local finite support only; no assertion about commuting global sections with arbitrary coproducts is needed.",
+   "uses": [
+    "lem-sfb-frame-product-laurent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Sheafified direct sum specified in the Laurent-algebra node; elementary coefficient detection."
+   }
+  },
+  {
+   "text": "Set $N=N_n$. It is invertible: on an open trivializing the finitely many $A_i$, the tensor of the appropriate powers of their generators (dual generators for negative powers) freely generates $N$. The simultaneous-frame representation in [lem-sfb-split-torus-torsor-frame-geometry] gives universal frames $\\tau_i:\\mathcal O_P\\simeq q^*A_i$. Tensor their powers $-n_i$, using dual frames for negative powers. This gives an isomorphism $\\mathcal O_P\\simeq q^*N$: on each trivializing chart it sends $1$ to $\\bigotimes_i\\tau_i^{-n_i}$, and its inverse is the dual evaluation. The maps glue because the universal frames are global. These local formulas use exactly the tensor-pullback and dual conventions of [def-pc-module-pullback, def-sc-invertible-module, def-pur-sheaf-tensor-product]. Finally $t_n\\ne0$ is a section of $L\\otimes N$, proving both conclusions. If $r=0$, $N=\\mathcal O_X$ and this is the original section under $P\\simeq X$.",
+   "uses": [
+    "lem-sfb-split-torus-torsor-frame-geometry",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tautological frame evaluation on the frame open of the dual vector bundle, Tag 01M2; tensor and dual definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-torus-torsor-frame-geometry",
+  "lem-sfb-frame-product-laurent-algebra",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Laurent variant of Tags 01M2 and 01LX, after the existing frame-torsor geometry node; the nonzero-component and tautological-frame argument is written by Q111. Original groupoids 0EKK/0EKL grading route is realized by these explicit Laurent coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torus|Torus|torsor|Torsor|[Ww]eight",
+   "results": "{\"t\": \"2026-10-24T03:11:09Z\", \"tool\": \"grep\", \"query\": \"torus|Torus|torsor|Torsor|[Ww]eight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/InformationTheory/Coding/KraftMcMillan.lean\", \"Mathlib/InformationTheory/Coding/KraftMcMillan.lean\", \"Mathlib/InformationTheory/Coding/KraftMcMillan.lean\", \"Mathlib/InformationTheory/Coding/KraftMcMillan.lean\", \"Mathlib/InformationTheory/Hamming.lean\", \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/NumberTheory/Chebyshev.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\"], \"digest\": \"7fec5157a6027e0b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern topological vector bundles, abstract group extensions, generic module pushforward or unrelated weights; none states the scheme torsor section assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split torus torsor pushforward structure sheaf character decomposition into invertible sheaves",
+   "results": "{\"t\": \"2026-10-24T03:11:09Z\", \"tool\": \"leansearch\", \"query\": \"Split torus torsor pushforward structure sheaf character decomposition into invertible sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforwardSections\", \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"SheafOfModules.pushforwardCongr_inv_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\"], \"digest\": \"29e939a730f2c5e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern topological vector bundles, abstract group extensions, generic module pushforward or unrelated weights; none states the scheme torsor section assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Invertible\"",
+   "results": "{\"t\": \"2026-10-24T03:11:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"Invertible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern topological vector bundles, abstract group extensions, generic module pushforward or unrelated weights; none states the scheme torsor section assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of line bundles on a torus principal bundle decompose into characters and associated invertible sheaves",
+   "results": "{\"t\": \"2026-10-24T03:11:12Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of line bundles on a torus principal bundle decompose into characters and associated invertible sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hom_trivializationAt\", \"hom_trivializationAt_apply\", \"Trivialization.linearEquivAt\", \"Trivialization.symmₗ\", \"Trivialization.IsLinear\", \"Trivialization.IsLinear.linear\", \"Trivialization.linear\", \"Pretrivialization.linearEquivAt\"], \"digest\": \"8fac54342a7db09a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern topological vector bundles, abstract group extensions, generic module pushforward or unrelated weights; none states the scheme torsor section assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero section of a pulled back line bundle along a split torus torsor gives a nonzero section downstairs after twisting by a line bundle trivialized by the torsor",
+   "results": "{\"t\": \"2026-10-24T03:11:14Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero section of a pulled back line bundle along a split torus torsor gives a nonzero section downstairs after twisting by a line bundle trivialized by the torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hom_trivializationAt_target\", \"hom_trivializationAt_baseSet\", \"Trivialization.zeroSection\", \"hom_trivializationAt_source\", \"hom_trivializationAt\", \"hom_trivializationAt_apply\", \"Trivialization.pullback_linear\", \"Pretrivialization.linearMapAt_eq_zero\"], \"digest\": \"5bd28a4e5d880afd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern topological vector bundles, abstract group extensions, generic module pushforward or unrelated weights; none states the scheme torsor section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|Torus|torsor|Torsor|[Ww]eight",
+   "results": "{\"t\": \"2026-10-24T03:12:30Z\", \"tool\": \"grep\", \"query\": \"torus|Torus|torsor|Torsor|[Ww]eight\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"d9cd32e648d6ad6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern topological vector bundles, abstract group extensions, generic module pushforward or unrelated weights; none states the scheme torsor section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|splitTorus|character.*line",
+   "results": "{\"t\": \"2026-10-24T03:40:19Z\", \"tool\": \"grep\", \"query\": \"torsor|splitTorus|character.*line\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of line bundles on split torus torsors decompose by characters",
+   "results": "{\"t\": \"2026-10-24T03:40:19Z\", \"tool\": \"leansearch\", \"query\": \"Sections of line bundles on split torus torsors decompose by characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupExtension.Section.casesOn\", \"GroupExtension.Splitting.toSection\", \"CharacterModule.instAddCommGroup\", \"AddChar.linearIndependent\", \"CharacterModule.homEquiv_symm_apply_apply_apply\", \"mdifferentiableOn_add_section\", \"ContMDiffSection.noConfusion\", \"MDifferentiable.sum_section\"], \"digest\": \"f76d5213fce1bb53\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give generic sheaf operations, abstract group cohomology, algebraic Laurent polynomials, or topological bundle trivializations, not the asserted scheme frame-product algebra or torsor section extraction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Invertible\"",
+   "results": "{\"t\": \"2026-10-24T03:40:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"Invertible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero section of a pulled back line bundle along a split torus torsor yields a twist with a nonzero section downstairs",
+   "results": "{\"t\": \"2026-10-24T03:40:21Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero section of a pulled back line bundle along a split torus torsor yields a twist with a nonzero section downstairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hom_trivializationAt\", \"hom_trivializationAt_baseSet\", \"hom_trivializationAt_apply\", \"Trivialization.pullback_linear\", \"Trivialization.zeroSection\", \"Pretrivialization.linearMapAt\", \"Pretrivialization.linearEquivAt_apply\", \"Bundle.Trivial.trivialization.isLinear\"], \"digest\": \"c5d7d7a6a34f4cff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give generic sheaf operations, abstract group cohomology, algebraic Laurent polynomials, or topological bundle trivializations, not the asserted scheme frame-product algebra or torsor section extraction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An effective twist in the kernel of pullback to a principal multiplicative group bundle has nonzero global sections",
+   "results": "{\"t\": \"2026-10-24T03:40:22Z\", \"tool\": \"leanfinder\", \"query\": \"An effective twist in the kernel of pullback to a principal multiplicative group bundle has nonzero global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PresheafOfGroups.instOneH1\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"Trivialization.zeroSection\", \"CategoryTheory.PresheafOfGroups.H1\", \"Submodule.ker_unitsToPic\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"CategoryTheory.PresheafOfGroups.ZeroCochain\", \"CategoryTheory.PresheafOfGroups.OneCocycle.instOne\"], \"digest\": \"01b8edb4a4bf95fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give generic sheaf operations, abstract group cohomology, algebraic Laurent polynomials, or topological bundle trivializations, not the asserted scheme frame-product algebra or torsor section extraction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-abelian-quotient-ample-reflection",
+  "date": "2026-10-24",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes. Q06 supporting input: One affine section chart at the strict-local identity. NM supporting input: XI Proposition 1.11, field case; compare Lan, Arithmetic compactifications of PEL-type Shimura varieties, Proposition 3.3.3.6 proof and Lemma 4.2.1.8 proof, which explicitly use this implication. Raynaud original WANTED. Q83 supporting input: extraction of an effective character twist from a nonzero section on a split-torus torsor, before applying abelian Picard-kernel algebraic triviality.",
+   "via": [
+    "lem-sfb-semiabelian-abelian-quotient-ample-reflection",
+    "lem-sfb-cubical-strict-local-affine-seed",
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-torsor-section-extraction",
+  "worker": "stage1",
+  "summary": "Reused the existing arbitrary-base split-torus frame geometry; isolated the Laurent function algebra of a product of frame schemes as one new statement-only node. Proved the rank-one projection formula locally, detected a nonzero global coefficient without any global coproduct-commutation theorem, and trivialized the resulting twist by the universal frames. No statement change. Read every cited statement and supplied verbatim quotes.",
+  "blueprint": "Supporting section-extraction input below semiabelian-abelian-quotient-ample-reflection in the inherited chain for det-thm-sf-ctf-stability-direct-images proof (3). Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md: it now gives the shorter proper/open direct-image route, not the old long alteration proof recorded in the inherited provenance. This assigned supporting lemma is proved without changing any unit or chapter route. blueprint ancestor is null as returned by blueprint_refs.py; preserve that inherited value. Whole-blueprint searches found no equivalent frame-algebra or section-extraction statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-03d66a94a",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-03d66a94a (reviewer sub-agent of L); spot-checked: I read the item, its five steps and the new node lem-sfb-frame-product-laurent-algebra in full.\n\nNew node (statement-only). On an affine chart trivialising the A_i, the frame scheme is Spec R[z^{±1}]. The sheafified sum ⊕N_n has the monomial basis there, so q is affine and ⊕N_n ≅ q_*O_P as algebras. The sign is correct: evaluating e^∨ against τ = z q^*e gives z. The descriptions glue under a frame change e' = g e (z' = g^{-1}z). I tested r = 0, the empty base and nilpotent coefficients. The node does not restate the item: it contains no line L and no section. I searched with rg -L for duplicates (frame-model, character-pushout, line-pullback, the matrix-sheaf and lattice-torus nodes, the Laurent evaluation node) and found none.\n\nSources. Stacks constructions 01LX (1),(3) and 01M2 support the node as an agent-extracted Laurent variant. Groupoids 0EKK/0EKL are replaced by explicit coordinates; frame-geometry supplies the descent to the base.\n\nSteps.\n- Step 1: the frame-geometry hypotheses match the item (any k-scheme; flat, surjective, finite presentation; the torsor isomorphism), and only the unconditional frame conclusion is used.\n- Step 2: the new node applied with S = X.\n- Step 3: the rank-one projection formula, checked locally from the tensor and pullback definitions.\n- Step 4: the projections π_n detect zero via local finite support.\n- Step 5: the universal frames trivialise q^*N_n.\nSteps 3–5 are genuinely elementary. No hypothesis is used that is not there, and the statement is not weakened.\n\nBatch-5 citation. The item's citation of frame-geometry reaches lem-trf-projective-bundle-quotient-geometry. That node is the generic Proj(Sym E) functor of points (Stacks 01OB/01OE): ordinary scheme geometry that neither the trace formula nor Poincaré duality gives, so I accept it.\n\nOther checks. Both nodes are in the same unit (sk-thm-sf-ctf-stability). No SGA is cited, there is no cycle, and no tool_uses are needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusTorsorSectionExtraction",
+  "declaration": "AlgebraicGeometry.split_torus_torsor_section_extraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusTorsorSectionExtraction.lean",
+  "statement": "theorem split_torus_torsor_section_extraction {k : Type u} [Field k] (X : Over (Spec (.of k))) (P : Over X.left) [CompactSpace X.left] [QuasiSeparatedSpace X.left] [Flat P.hom] [Surjective P.hom] [LocallyOfFinitePresentation P.hom] [QuasiCompact P.hom] [QuasiSeparated P.hom] (r : ℕ) (act : Over.mk (P.hom ≫ X.hom) ⊗ (MultiplicativeType.splitTorus k r).X ⟶ Over.mk (P.hom ≫ X.hom)) (hone : ∀ (U : Over (Spec (.of k))) (p : U ⟶ Over.mk (P.hom ≫ X.hom)), lift p (1 : U ⟶ (MultiplicativeType.splitTorus k r).X) ≫ act = p) (hmul : ∀ (U : Over (Spec (.of k))) (p : U ⟶ Over.mk (P.hom ≫ X.hom)) (t t' : U ⟶ (MultiplicativeType.splitTorus k r).X), lift (lift p t ≫ act) t' ≫ act = lift p (t * t') ≫ act) (hinvariant : act.left ≫ P.hom = (fst (Over.mk (P.hom ≫ X.hom)) (MultiplicativeType.splitTorus k r).X).left ≫ P.hom) (torsor : ∃ e : (Over.mk (P.hom ≫ X.hom) ⊗ (MultiplicativeType.splitTorus k r).X).left ≅ pullback P.hom P.hom, e.hom ≫ pullback.fst _ _ = (fst (Over.mk (P.hom ≫ X.hom)) (MultiplicativeType.splitTorus k r).X).left ∧ e.hom ≫ pullback.snd _ _ = act.left) (L : X.left.Modules) [L.IsInvertible] (hsection : ∃ s : Γ((Scheme.Modules.tensorPullback P.hom).obj L, ⊤), s ≠ 0) : ∃ N : X.left.Modules, N.IsInvertible ∧ Nonempty ((Scheme.Modules.tensorPullback P.hom).obj N ≅ 𝟙_ P.left.Modules) ∧ ∃ s : Γ(L ⊗ N, ⊤), s ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2a36cb7e",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read the node, 12 stmt_dep records, the snapshot module, the report and the side-live sources for splitTorus, IsInvertible and split_torus_torsor_frame_geometry. Every clause matches the node: qcqs X; faithfully flat finite presentation as Flat+Surjective+LFP+QC+QS; right T-action laws over all test objects plus hinvariant; the torsor iso fixed by both projections, so it is canonical; invertible L; the nonzero tensorPullback section maps to an invertible N with Nonempty(q^*N ≅ 𝟙_) and a nonzero Γ(L⊗N,⊤). Hypotheses are identical to the frame-geometry proof dep. Edge cases (r=0, empty X, nilpotents, single universe u) are covered. lean.statement is verbatim; only sorry; no new defs; docstrings carry the sources, blueprint tag and 5 proof steps. Not recompiled (no change). No findings."
+ }
+}

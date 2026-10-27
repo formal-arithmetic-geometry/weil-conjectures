@@ -11,9 +11,11 @@ public import Sheaf.Algebra.Homology.RingedTensorComplexConstraints
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
+import all Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction
+import Sheaf.Paper.CoefficientTensorCurryNormalization
+import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Chain transposition with one K-flat tensor factor
 
@@ -233,6 +235,378 @@ structure OneKFlatChainTransposeData where
   /-- Factor interchange is the actual Koszul braiding, with sign (-1)^(n*m). -/
   interchange_sign : CategoryTheory.RingedDerivedNative.symmetryPure.{c, v, u} J R
 
+section
+
+set_option maxRecDepth 1024
+set_option linter.unusedSectionVars false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+namespace OneKFlatAux
+
+open CategoryTheory.RingedDerivedNative
+
+attribute [local instance 1000001] CategoryTheory.RingedDerivedNative.cachedCompose
+attribute [local irreducible] SheafOfModules.monoidalCategory homComplexFunctor
+
+private abbrev Mod := SheafOfModules.{max c v u}
+  ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)
+
+private abbrev Complex := CochainComplex (Mod.{c, v, u} J R) ℤ
+
+private noncomputable def rawTensor (P : Complex.{c, v, u} J R) :=
+  Prod.sectL (Complex.{c, v, u} J R) P ⋙ coefficientTotalTensor.{u, c, v} J R ⋙
+    DerivedCategory.Q.{w}
+
+private noncomputable def derivedTensor (P : Complex.{c, v, u} J R) :=
+  DerivedCategory.Q.{w} ⋙
+    Prod.sectL (DerivedCategory (Mod.{c, v, u} J R)) (DerivedCategory.Q.obj P) ⋙ S.tensor
+
+private theorem rawTensor_inverts (P : Complex.{c, v, u} J R)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) :
+    (HomologicalComplex.quasiIso (Mod.{c, v, u} J R) (.up ℤ)).IsInvertedBy
+      (rawTensor.{c, v, u, w} J R P) := by
+  intro A B a ha
+  apply (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  let F := (CategoryTheory.MonoidalCategory.curriedTensor (Mod.{c, v, u} J R)).map₂CochainComplex
+  change QuasiIso ((F.map a).app P ≫ (F.obj B).map (𝟙 P))
+  rw [(F.obj B).map_id, Category.comp_id]
+  exact kFlatTensorPreservesQuasiIsoIndependentCoefficients R P hP a ha
+
+private noncomputable def restrictRight
+    {K A B D : Type*} [Category K] [Category A] [Category B] [Category D]
+    (I : K ⥤ A) (Q : A ⥤ B) (H : A × A ⥤ D) (G : B × B ⥤ D)
+    (e : (I.prod I) ⋙ H ≅ ((I ⋙ Q).prod (I ⋙ Q)) ⋙ G) (P : K) :
+    I ⋙ Prod.sectL A (I.obj P) ⋙ H ≅
+      I ⋙ Q ⋙ Prod.sectL B (Q.obj (I.obj P)) ⋙ G :=
+  NatIso.ofComponents (fun X ↦ e.app (X, P)) (by
+    intro X Y f
+    have h := e.hom.naturality (X := (X, P)) (Y := (Y, P)) (f, 𝟙 P)
+    dsimp only [Functor.comp_map, Functor.prod_map] at h
+    rw [I.map_id, Q.map_id] at h
+    exact h)
+
+private theorem restrictLeft_naturality
+    {K A B D : Type*} [Category K] [Category A] [Category B] [Category D]
+    (I : K ⥤ A) (Q : A ⥤ B) (H : A × A ⥤ D) (G : B × B ⥤ D)
+    (e : (I.prod I) ⋙ H ≅ ((I ⋙ Q).prod (I ⋙ Q)) ⋙ G)
+    (P X Y : K) (f : X ⟶ Y) :
+    H.map (Prod.mkHom (𝟙 (I.obj P)) (I.map f)) ≫ (e.app (P, Y)).hom =
+      (e.app (P, X)).hom ≫
+        G.map (Prod.mkHom (𝟙 (Q.obj (I.obj P))) (Q.map (I.map f))) := by
+  have h := e.hom.naturality (X := (P, X)) (Y := (P, Y)) (𝟙 P, f)
+  dsimp only [Functor.comp_map, Functor.prod_map] at h
+  rw [I.map_id, Q.map_id] at h
+  exact h
+
+private theorem map_pair_square
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    (G : A × B ⥤ D) {X X' : A} {Y Y' : B} (f : X ⟶ X') (g : Y ⟶ Y') :
+    G.map (Prod.mkHom (𝟙 X) g) ≫ G.map (Prod.mkHom f (𝟙 Y')) =
+      G.map (Prod.mkHom f (𝟙 Y)) ≫ G.map (Prod.mkHom (𝟙 X') g) := by
+  rw [← G.map_comp, ← G.map_comp]
+  congr 1
+  apply Prod.hom_ext
+  · exact (Category.id_comp f).trans (Category.comp_id f).symm
+  · exact (Category.comp_id g).trans (Category.id_comp g).symm
+
+private theorem map_pair_factor
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    (G : A × B ⥤ D) {X X' : A} {Y Y' : B} (f : X ⟶ X') (g : Y ⟶ Y') :
+    G.map (Prod.mkHom f (𝟙 Y)) ≫ G.map (Prod.mkHom (𝟙 X') g) =
+      G.map (Prod.mkHom f g) := by
+  rw [← G.map_comp]
+  congr 1
+  apply Prod.hom_ext
+  · exact Category.comp_id f
+  · exact Category.id_comp g
+
+private noncomputable def restrictedComparison (P : Complex.{c, v, u} J R)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) :
+    coefficientKFlatInclusion.{u, c, v} J R ⋙ rawTensor.{c, v, u, w} J R P ≅
+      coefficientKFlatInclusion.{u, c, v} J R ⋙ derivedTensor.{c, v, u, w} J R S P :=
+  restrictRight (coefficientKFlatInclusion.{u, c, v} J R) DerivedCategory.Q
+    (coefficientTotalTensor.{u, c, v} J R ⋙ DerivedCategory.Q) S.tensor T.comparison ⟨P, hP⟩
+
+@[no_expose, irreducible]
+private noncomputable def extendIso
+    {A B E K : Type*} [Category A] [Category B] [Category E] [Category K]
+    (W : MorphismProperty A) (Q : A ⥤ B) [Q.IsLocalization W]
+    (I : K ⥤ A) [(I ⋙ Q).IsLocalization (W.inverseImage I)]
+    (F : B ⥤ E) (H : A ⥤ E) (hH : W.IsInvertedBy H)
+    (e : I ⋙ H ≅ I ⋙ Q ⋙ F) :
+    { c : H ≅ Q ⋙ F // ∀ X, c.app (I.obj X) = e.app X } := by
+  let H' := Localization.lift H hH Q
+  let φ := Localization.fac H hH Q
+  let b : (I ⋙ Q) ⋙ H' ≅ (I ⋙ Q) ⋙ F := Functor.isoWhiskerLeft I φ ≪≫ e
+  let ff := Localization.fullyFaithfulWhiskeringLeft (I ⋙ Q) (W.inverseImage I) E
+  let b' := ff.preimageIso b
+  refine ⟨φ.symm ≪≫ Functor.isoWhiskerLeft Q b', ?_⟩
+  intro X
+  apply Iso.ext
+  have hb := congr_app (ff.map_preimage b.hom) X
+  change φ.inv.app (I.obj X) ≫ b'.hom.app (Q.obj (I.obj X)) = (e.app X).hom
+  rw [show b'.hom.app (Q.obj (I.obj X)) = b.hom.app X from hb]
+  simp [b]
+
+@[no_expose, irreducible]
+private noncomputable def extendedComparison (P : Complex.{c, v, u} J R)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) :
+    { c : rawTensor.{c, v, u, w} J R P ≅ derivedTensor.{c, v, u, w} J R S P //
+      ∀ A : ObjectProperty.FullSubcategory
+        (CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R)),
+        c.app A.obj = T.iso J R S A.obj P A.property hP } := by
+  let := kFlatLocalization.{c, v, u, w} J R
+  exact extendIso
+    (HomologicalComplex.quasiIso (Mod.{c, v, u} J R) (.up ℤ)) DerivedCategory.Q
+    (coefficientKFlatInclusion.{u, c, v} J R)
+    (Prod.sectL (DerivedCategory (Mod.{c, v, u} J R)) (DerivedCategory.Q.obj P) ⋙ S.tensor)
+    (rawTensor.{c, v, u, w} J R P) (rawTensor_inverts.{c, v, u, w} J R P hP)
+    (restrictedComparison.{c, v, u, w} J R S T P hP)
+
+@[no_expose, irreducible]
+private noncomputable def comparison : OneKFlatChainComparison.{c, v, u, w} J R S :=
+  fun A P hP _ ↦ (extendedComparison.{c, v, u, w} J R S T P hP).val.app A
+
+private theorem comparison_normalization :
+    OneKFlatChainComparisonNormalization.{c, v, u, w} J R S T
+      (comparison.{c, v, u, w} J R S T) := by
+  intro A P hA hP hflat
+  unfold comparison
+  exact (extendedComparison.{c, v, u, w} J R S T P hP).property ⟨A, hA⟩
+
+private theorem comparison_left (A A' P : Complex.{c, v, u} J R)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hflat : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X n))
+    (a : A ⟶ A') :
+    DerivedCategory.Q.map ((coefficientTotalTensor.{u, c, v} J R).map
+      (X := (A, P)) (Y := (A', P)) (a, 𝟙 P)) ≫
+        (comparison.{c, v, u, w} J R S T A' P hP hflat).hom =
+      (comparison.{c, v, u, w} J R S T A P hP hflat).hom ≫
+        S.tensor.map (Prod.mkHom (DerivedCategory.Q.map a) (𝟙 (DerivedCategory.Q.obj P))) := by
+  unfold comparison
+  exact (extendedComparison.{c, v, u, w} J R S T P hP).val.hom.naturality a
+
+private theorem comparison_right (A P P' : Complex.{c, v, u} J R)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := R) P')
+    (hflat : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X n))
+    (hflat' : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P'.X n))
+    (b : P ⟶ P') :
+    DerivedCategory.Q.map ((coefficientTotalTensor.{u, c, v} J R).map
+      (X := (A, P)) (Y := (A, P')) (𝟙 A, b)) ≫
+        (comparison.{c, v, u, w} J R S T A P' hP' hflat').hom =
+      (comparison.{c, v, u, w} J R S T A P hP hflat).hom ≫
+        S.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj A)) (DerivedCategory.Q.map b)) := by
+  obtain ⟨F, q, hF, _, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients A
+  let Q := DerivedCategory.Q.{w} (C := Mod.{c, v, u} J R)
+  let B := coefficientTotalTensor.{u, c, v} J R
+  let c := comparison.{c, v, u, w} J R S T
+  have hi : IsIso (Q.map (B.map (X := (F, P)) (Y := (A, P)) (q, 𝟙 P))) :=
+    rawTensor_inverts.{c, v, u, w} J R P hP q hq
+  have sq :
+      Q.map (B.map (X := (F, P)) (Y := (A, P)) (q, 𝟙 P)) ≫
+        Q.map (B.map (X := (A, P)) (Y := (A, P')) (𝟙 A, b)) =
+      Q.map (B.map (X := (F, P)) (Y := (F, P')) (𝟙 F, b)) ≫
+        Q.map (B.map (X := (F, P')) (Y := (A, P')) (q, 𝟙 P')) := by
+    rw [← Q.map_comp, ← Q.map_comp, ← B.map_comp, ← B.map_comp]
+    congr 2
+  have hn : Q.map (B.map (X := (F, P)) (Y := (F, P')) (𝟙 F, b)) ≫
+        (c F P' hP' hflat').hom =
+      (c F P hP hflat).hom ≫ S.tensor.map (Prod.mkHom (𝟙 (Q.obj F)) (Q.map b)) := by
+    dsimp only [c]
+    rw [comparison_normalization.{c, v, u, w} J R S T F P' hF hP' hflat',
+      comparison_normalization.{c, v, u, w} J R S T F P hF hP hflat]
+    exact restrictLeft_naturality (coefficientKFlatInclusion.{u, c, v} J R)
+      Q (B ⋙ Q) S.tensor T.comparison ⟨F, hF⟩ ⟨P, hP⟩ ⟨P', hP'⟩
+      (ObjectProperty.homMk b)
+  apply (cancel_epi (Q.map (B.map (X := (F, P)) (Y := (A, P)) (q, 𝟙 P)))).1
+  change _ ≫ (_ ≫ (c A P' hP' hflat').hom) =
+    _ ≫ ((c A P hP hflat).hom ≫ _)
+  calc
+    _ = Q.map (B.map (X := (F, P)) (Y := (F, P')) (𝟙 F, b)) ≫
+        (Q.map (B.map (X := (F, P')) (Y := (A, P')) (q, 𝟙 P')) ≫
+          (c A P' hP' hflat').hom) := by
+      rw [← Category.assoc, sq, Category.assoc]
+    _ = Q.map (B.map (X := (F, P)) (Y := (F, P')) (𝟙 F, b)) ≫
+        ((c F P' hP' hflat').hom ≫
+          S.tensor.map (Prod.mkHom (Q.map q) (𝟙 (Q.obj P')))) := by
+      rw [comparison_left.{c, v, u, w} J R S T F A P' hP' hflat' q]
+    _ = (c F P hP hflat).hom ≫
+        (S.tensor.map (Prod.mkHom (𝟙 (Q.obj F)) (Q.map b)) ≫
+          S.tensor.map (Prod.mkHom (Q.map q) (𝟙 (Q.obj P')))) := by
+      rw [← Category.assoc, hn, Category.assoc]
+    _ = (c F P hP hflat).hom ≫
+        (S.tensor.map (Prod.mkHom (Q.map q) (𝟙 (Q.obj P))) ≫
+          S.tensor.map (Prod.mkHom (𝟙 (Q.obj A)) (Q.map b))) := by
+      exact congrArg (fun t ↦ (c F P hP hflat).hom ≫ t)
+        (map_pair_square S.tensor (Q.map q) (Q.map b))
+    _ = _ := by
+      rw [← Category.assoc,
+        ← comparison_left.{c, v, u, w} J R S T F A P hP hflat q, Category.assoc]
+
+private theorem comparison_naturality :
+    OneKFlatChainComparisonNaturality.{c, v, u, w} J R S
+      (comparison.{c, v, u, w} J R S T) := by
+  intro A A' P P' hP hP' hflat hflat' a b
+  let B := coefficientTotalTensor.{u, c, v} J R
+  have hmap : B.map (Prod.mkHom a b) =
+      B.map (X := (A, P)) (Y := (A', P)) (a, 𝟙 P) ≫
+        B.map (X := (A', P)) (Y := (A', P')) (𝟙 A', b) := by
+    rw [← B.map_comp]
+    congr 1
+  rw [hmap, Functor.map_comp, Category.assoc,
+    comparison_right.{c, v, u, w} J R S T A' P P' hP hP' hflat hflat' b,
+    ← Category.assoc, comparison_left.{c, v, u, w} J R S T A A' P hP hflat a]
+  rw [Category.assoc, map_pair_factor]
+
+include S T in
+private theorem tensor_inverts : OneKFlatChainTensorInverts.{c, v, u, w} J R := by
+  intro A A' P P' a b hP hP' hflat hflat' ha hb
+  have := ha
+  have := hb
+  have : IsIso (DerivedCategory.Q.map a) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 ha
+  have : IsIso (DerivedCategory.Q.map b) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hb
+  have hn := comparison_naturality.{c, v, u, w} J R S T
+    A A' P P' hP hP' hflat hflat' a b
+  have : IsIso (Prod.mkHom (DerivedCategory.Q.map a) (DerivedCategory.Q.map b)) :=
+    (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+  have : IsIso (S.tensor.map
+      (Prod.mkHom (DerivedCategory.Q.map a) (DerivedCategory.Q.map b))) :=
+    S.tensor.map_isIso _
+  have : IsIso (DerivedCategory.Q.map
+      ((coefficientTotalTensor.{u, c, v} J R).map (Prod.mkHom a b)) ≫
+        (comparison.{c, v, u, w} J R S T A' P' hP' hflat').hom) := by
+    rw [hn]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    (comparison.{c, v, u, w} J R S T A' P' hP' hflat').hom
+
+private theorem hom_inverts : OneKFlatChainHomInverts.{c, v, u, w} J R := by
+  intro P P' E E' b e hP hP' hflat hflat' hE hE' hb he
+  have := hE
+  have := hE'
+  have := hb
+  have := he
+  exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2
+    (quasiIso_homComplex_mapOfUniverses.{c, v, u} e b)
+
+private theorem hom_comparison_isIso : OneKFlatChainHomComparisonIsIso.{c, v, u, w} J R := by
+  intro P E hE
+  let :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, u}
+      J R).1
+  have := hE
+  have : ((coefficientHomResolution.{u, c, v} J R).obj E).IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{max c v u} _ E
+  have : QuasiIso (CategoryTheory.coefficientHomAugmentation.{c, v, u} J R E) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max c v u} _ E).2
+  have h := quasiIso_homComplex_mapOfUniverses.{c, v, u}
+    (CategoryTheory.coefficientHomAugmentation.{c, v, u} J R E) (𝟙 P)
+  rw [op_id, (homComplexFunctor (R := R)).map_id, NatTrans.id_app,
+    Category.id_comp] at h
+  have : IsIso (DerivedCategory.Q.map
+      (((homComplexFunctor.{c, v, max c v u, max c v u} (R := R)).obj (op P)).map
+        (CategoryTheory.coefficientHomAugmentation.{c, v, u} J R E))) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 h
+  infer_instance
+
+private noncomputable def chainUncurry : OneKFlatChainUncurry.{c, v, u} J R :=
+  fun A P _ _ E _ f ↦ (chainEquiv.{c, v, u} J R A P E).symm f
+
+private theorem chainUncurry_pure :
+    OneKFlatChainUncurryPure.{c, v, u} J R (chainUncurry.{c, v, u} J R) := by
+  intro A P E hP hflat hE f n m k h h' U x y
+  exact chainEquiv_symm_pure.{c, v, u, w} J R A P E f n m k h h' U x y
+
+private theorem chainUncurry_naturality :
+    OneKFlatChainUncurryNaturality.{c, v, u} J R (chainUncurry.{c, v, u} J R) := by
+  intro A' A P' P E E' hP hP' hflat hflat' hE hE' a b e f
+  exact chainEquiv_symm_naturality.{c, v, u} J R A A' P P' E E' a b e f
+
+private theorem augmentation_eq (E : Complex.{c, v, u} J R) :
+    (WeilConjectures.coefficientHomAugmentation.{u, c, v} J R).app E =
+      CategoryTheory.coefficientHomAugmentation.{c, v, u} J R E := by
+  unfold WeilConjectures.coefficientHomAugmentation
+    CategoryTheory.coefficientHomAugmentation
+  rfl
+
+private theorem transpose_twoFlat (A P E : Complex.{c, v, u} J R)
+    (hA : CochainComplex.IsKFlatIndependentCoefficients (R := R) A)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hflat : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X n))
+    (hE : E.IsKInjective) (f : A ⟶ homComplex (R := R) P E) :
+    (comparison.{c, v, u, w} J R S T A P hP hflat).hom ≫
+      (S.transpose (DerivedCategory.Q.obj A) (DerivedCategory.Q.obj P)
+        (DerivedCategory.Q.obj E)).symm
+        (DerivedCategory.Q.map f ≫
+          DerivedCategory.Q.map (((homComplexFunctor (R := R)).obj (op P)).map
+            (CategoryTheory.coefficientHomAugmentation.{c, v, u} J R E)) ≫
+          (coefficientHomResolutionIso.{u, c, v, w} J R P E).inv) =
+      DerivedCategory.Q.map (chainUncurry.{c, v, u} J R A P hP hflat E hE f) := by
+  have hpure : IsCoefficientTensorCurry.{u, c, v} J R A P E
+      (chainUncurry.{c, v, u} J R A P hP hflat E hE f) f := by
+    intro n m U x y
+    exact (chainUncurry_pure.{c, v, u, w} J R A P E hP hflat hE f
+      n m (n + m) rfl (add_comm m n) U x y)
+  have hn := coefficientTensorCurry_normalize.{u, c, v, w} J R S T A P E hA hP
+    (chainUncurry.{c, v, u} J R A P hP hflat E hE f) f hpure
+  rw [comparison_normalization.{c, v, u, w} J R S T A P hA hP hflat]
+  have h := congrArg (fun t ↦ (T.iso J R S A P hA hP).hom ≫ t) hn
+  rw [augmentation_eq.{c, v, u} J R E] at h
+  simpa only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_assoc] using h
+
+private theorem transpose_equation :
+    OneKFlatChainTransposeEquation.{c, v, u, w} J R S
+      (comparison.{c, v, u, w} J R S T) (chainUncurry.{c, v, u} J R) := by
+  intro A P E hP hflat hE f
+  obtain ⟨F, q, hF, _, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients A
+  let Q := DerivedCategory.Q.{w} (C := Mod.{c, v, u} J R)
+  let B := coefficientTotalTensor.{u, c, v} J R
+  let c := comparison.{c, v, u, w} J R S T
+  let U := chainUncurry.{c, v, u} J R
+  let ι := Q.map (((homComplexFunctor (R := R)).obj (op P)).map
+    (CategoryTheory.coefficientHomAugmentation.{c, v, u} J R E)) ≫
+      (coefficientHomResolutionIso.{u, c, v, w} J R P E).inv
+  have hi : IsIso (Q.map (B.map (X := (F, P)) (Y := (A, P)) (q, 𝟙 P))) :=
+    rawTensor_inverts.{c, v, u, w} J R P hP q hq
+  have hc : U F P hP hflat E hE (q ≫ f) =
+      B.map (X := (F, P)) (Y := (A, P)) (q, 𝟙 P) ≫ U A P hP hflat E hE f := by
+    have hn := chainUncurry_naturality.{c, v, u} J R
+      F A P P E E hP hP hflat hflat hE hE q (𝟙 P) (𝟙 E) f
+    rw [op_id, (homComplexFunctor (R := R)).map_id, NatTrans.id_app,
+      ((homComplexFunctor (R := R)).obj (op P)).map_id,
+      Category.comp_id, Category.comp_id] at hn
+    exact hn
+  have ht :
+      S.tensor.map (Prod.mkHom (Q.map q) (𝟙 (Q.obj P))) ≫
+          (S.transpose (Q.obj A) (Q.obj P) (Q.obj E)).symm (Q.map f ≫ ι) =
+        (S.transpose (Q.obj F) (Q.obj P) (Q.obj E)).symm (Q.map (q ≫ f) ≫ ι) := by
+    let := S.monoidal
+    simp only [Functor.map_comp, Category.assoc, CoefficientClosedStructure.transpose,
+      CoefficientClosedStructure.tensor, CategoryTheory.MonoidalCategory.tensor_map,
+      CategoryTheory.MonoidalCategory.tensorHom_id]
+    exact ((S.adjunction (Q.obj P)).homEquiv_naturality_left_symm
+      (Q.map q) (Q.map f ≫ ι)).symm
+  apply (cancel_epi (Q.map (B.map (X := (F, P)) (Y := (A, P)) (q, 𝟙 P)))).1
+  change _ ≫ ((c A P hP hflat).hom ≫
+    (S.transpose (Q.obj A) (Q.obj P) (Q.obj E)).symm (Q.map f ≫ ι)) =
+      _ ≫ Q.map (U A P hP hflat E hE f)
+  rw [← Category.assoc, comparison_left.{c, v, u, w} J R S T F A P hP hflat q,
+    Category.assoc, ht]
+  rw [transpose_twoFlat.{c, v, u, w} J R S T F P E hF hP hflat hE (q ≫ f)]
+  exact (congrArg Q.map hc).trans (Q.map_comp _ _)
+
+end OneKFlatAux
+
 /-- An arbitrary unbounded first complex and one flat-term K-flat second complex
 compute the fixed derived tensor and its ordinary chain evaluation transpose.
 Source: Stacks Project, Tags 08J9, 06YP, 06YT, 06YU, 0A90 and 0A95
@@ -277,6 +651,19 @@ Proof:
    of these inverses. No truncation or flatness of A is used. -/
 theorem oneKFlatChainTranspose :
     Nonempty (OneKFlatChainTransposeData.{c, v, u, w} J R S T) := by
-  sorry
+  refine ⟨{ comparison := OneKFlatAux.comparison.{c, v, u, w} J R S T
+            comparison_normalization := OneKFlatAux.comparison_normalization J R S T
+            comparison_naturality := OneKFlatAux.comparison_naturality J R S T
+            uncurry := OneKFlatAux.chainUncurry.{c, v, u} J R
+            uncurry_pure := OneKFlatAux.chainUncurry_pure.{c, v, u, w} J R
+            transpose_eq := OneKFlatAux.transpose_equation J R S T
+            uncurry_naturality := OneKFlatAux.chainUncurry_naturality J R
+            tensor_inverts := OneKFlatAux.tensor_inverts.{c, v, u, w} J R S T
+            hom_inverts := OneKFlatAux.hom_inverts.{c, v, u, w} J R
+            hom_comparison_isIso := OneKFlatAux.hom_comparison_isIso.{c, v, u, w} J R
+            interchange_sign := (CategoryTheory.RingedDerivedNative.complexConstraints
+              J R).symmetry }⟩
+
+end
 
 end WeilConjectures

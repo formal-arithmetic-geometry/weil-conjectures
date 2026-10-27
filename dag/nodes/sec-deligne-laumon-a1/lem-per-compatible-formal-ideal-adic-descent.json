@@ -1,0 +1,291 @@
+{
+ "id": "lem-per-compatible-formal-ideal-adic-descent",
+ "kind": "statement",
+ "title": "Adic descent of compatible formal ideal thickenings",
+ "statement": "Let $B$ be a commutative Noetherian semilocal ring [def-weil-pbc-noetherian-ring], with Jacobson radical $\\mathfrak r$ the intersection of its finitely many maximal ideals. Let $J\\subseteq\\mathfrak r$ and $C=\\varprojlim_nB/\\mathfrak r^n$. For each nonmaximal prime $\\mathfrak Q\\subset C$ containing $JC$, put $\\mathfrak p=\\mathfrak Q\\cap B$, $U_{\\mathfrak p}=\\widehat{B_{\\mathfrak p}}$, $T_{\\mathfrak Q}=\\widehat{C_{\\mathfrak Q}}$, with maximal-ideal completions. Completions are inverse limits of quotients by ideal powers [def-weil-pbc-adic-completion], and localization at a prime is [def-weil-pbc-localization-at-prime]. Assume that the canonical maps $\\alpha_{\\mathfrak Q}:U_{\\mathfrak p}\\to T_{\\mathfrak Q}$ are faithfully flat [def-weil-pbc-faithfully-flat-ring-map] and that $\\mathfrak pC$ is radical for every prime $\\mathfrak p\\subset B$ containing $J$; radical means $z^h\\in\\mathfrak pC$, $h\\ge1$, implies $z\\in\\mathfrak pC$. Let $E\\subseteq C$ be an ideal. Suppose that for every prime $\\mathfrak p\\subset B$ containing $J$ there is a single ideal $e_{\\mathfrak p}\\subseteq U_{\\mathfrak p}$ such that\n$$ET_{\\mathfrak Q}=e_{\\mathfrak p}T_{\\mathfrak Q}$$\nfor every nonmaximal $\\mathfrak Q\\supseteq JC$ with $\\mathfrak Q\\cap B=\\mathfrak p$. Define $a_n=(E+J^nC)\\cap B$ using inverse image under $B\\to C$. Then for every $n\\ge1$ one has\n$$a_nC=E+J^nC,\\qquad a_{n+1}+J^n=a_n.$$\nNo $J$-adic completeness of $B$, nonzero condition on $E$, or singular-locus interpretation of the ideals $e_{\\mathfrak p}$ is assumed.",
+ "source": {
+  "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+  "place": "Rotthaus (1979), proof of Theorem 3, Claim 4 and (4.1)–(4.3), pp.178–179, extracted for an arbitrary compatible ideal E. The associated-prime input is reducedness of pC; the same local ideal e_p must be used over every Q above p. J-adic completeness first enters later, in Lemma 2, not in Claim 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-trf-formal-local-presentation",
+  "lem-weil-pbc-completion-local-map-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "The ring $C$ is Noetherian, and $B\\to C$ is faithfully flat by completion along $\\mathfrak r\\subseteq\\operatorname{Jac}(B)$. The finite-quotient theorem gives $B/\\mathfrak r^h\\simeq C/\\mathfrak r^hC$ for every $h\\ge1$. Every maximal ideal of $C$ contains $\\mathfrak rC$: if $z\\in\\mathfrak rC$ and $c\\in C$, the sums $\\sum_{j=0}^{N-1}(cz)^j$ are compatible modulo $\\mathfrak r^NC$ and their inverse-limit element is an inverse of $1-cz$. An ideal all of whose elements $z$ satisfy this unit test lies in every maximal ideal (if $z\\notin M$, choose $c$ with $cz\\equiv1\\pmod M$). Hence every maximal $M$ of $C$ corresponds under $B/\\mathfrak r\\simeq C/\\mathfrak rC$ to a maximal ideal of $B$. Moreover, a prime of $C$ contracting to a maximal $\\mathfrak m$ of $B$ contains $\\mathfrak rC$ and corresponds to $\\mathfrak m/\\mathfrak r$, so it is maximal. Thus a nonmaximal prime of $C$ contracts to a nonmaximal prime of $B$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-per-jacobson-adic-completion-faithfully-flat",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Completion and finite quotients; the elementary inverse-limit geometric-series argument gives the maximal-ideal correspondence."
+   }
+  },
+  {
+   "text": "Fix $n\\ge1$ and put $K=E+J^nC$. Choose a finite primary decomposition $K=\\bigcap_iQ_i$ in $C$. For each component write $P_i=\\sqrt{Q_i}$, $q_i=Q_i\\cap B$ and $p_i=P_i\\cap B$. Contraction is primary: if $ab\\in q_i$ and $a\\notin q_i$, apply primaryness in $C$ to get $b^h\\in q_i$; the same power test gives $\\sqrt{q_i}=p_i$. Each $P_i$ contains $JC$, since $J^nC\\subseteq Q_i$, so $p_i\\supseteq J$. If $K=C$, the decomposition is empty and the later finite-intersection argument includes this case.",
+   "uses": [
+    "lem-per-noetherian-primary-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lasker–Noether decomposition, followed by contraction; Rotthaus Claim 4 is applied to each primary component."
+   }
+  },
+  {
+   "text": "First let $Q=Q_i$ have maximal radical $P=P_i$. By Step 1, $\\mathfrak rC\\subseteq P=\\sqrt Q$. Finite generation and the radical-power bound give $\\mathfrak r^hC\\subseteq Q$ for some $h\\ge1$. Under the canonical isomorphism $B/\\mathfrak r^h\\simeq C/\\mathfrak r^hC$, the ideal $Q/\\mathfrak r^hC$ has inverse image $q/\\mathfrak r^h$, where $q=Q\\cap B$. Taking preimages in $C$ gives $qC=Q$: each class of $Q$ is represented by a member of $q$, and $\\mathfrak r^hC\\subseteq qC$ because $\\mathfrak r^h\\subseteq q$. In particular $K\\subseteq qC$.",
+   "uses": [
+    "lem-weil-pbc-fg-ideal-radical-power",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "The maximal-primary case of Rotthaus Claim 4, expanded using finite adic quotients."
+   }
+  },
+  {
+   "text": "Now fix a component $Q$ with nonmaximal radical $P$, and put $p=P\\cap B$, $q=Q\\cap B$, $U=\\widehat{B_p}$, $T=\\widehat{C_P}$. The localizations are Noetherian, their completions are Noetherian local, and $C_P\\to T$ is faithfully flat. Primaryness gives $(QC_P)\\cap C=Q$: if $sb\\in Q$ with $s\\notin P$, $b\\notin Q$ would force a power of $s$ into $Q$, a contradiction. Therefore $(QT)\\cap C=Q$ by faithful-flat ideal contraction. The radical-power bound applied to $PC_P\\subseteq\\sqrt{QC_P}$ gives $(PC_P)^h\\subseteq QC_P$ for some $h$. Hence $QT$ contains $(PT)^h$, is proper, and has radical the maximal ideal $PT$ of $T$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Rotthaus (4.1): localization and completion at the radical of a primary component."
+   }
+  },
+  {
+   "text": "Let $A=\\alpha_P^{-1}(QT)\\subset U$. The canonical map $\\alpha_P$ is local: its source maximal ideal is $pU$, generated by images of $p$, all of which map into $PT$; every source unit remains a unit. Thus $\\sqrt A=pU$, and the radical-power bound gives $(pU)^h\\subseteq A$ after increasing $h$. For $b/s\\in B_p$, $s\\notin p$ maps to a unit in $T$, so $b/s$ maps into $A$ exactly when the image of $b$ lies in $QT$, exactly when $b\\in q$ by Step 4. Consequently $A\\cap B_p=qB_p$. Using $B_p/p^hB_p\\simeq U/(pU)^h$, each member of $A$ is congruent modulo $(pU)^h$ to an element of $qB_p$; and $p^hB_p\\subseteq qB_p$ by contraction. Therefore $A=qU$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-fg-ideal-radical-power",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Rotthaus (4.1)–(4.2): the contracted ideal in the source completion is open and therefore extended from its local ring."
+   }
+  },
+  {
+   "text": "Since $K\\subseteq Q$, compatibility at $P$ gives $(e_p+J^nU)T=KT\\subseteq QT$. On contracting along $\\alpha_P$ this says $e_p+J^nU\\subseteq A=qU$. Let $P'$ be any prime of $C$ contracting to $p$. Step 1 and nonmaximality of $p$ imply that $P'$ is nonmaximal; it contains $JC$, since $p\\supseteq J$. The hypothesis uses the same ideal $e_p$ at this $P'$. Extending the preceding inclusion along $U\\to T_{P'}$ therefore gives\n$$KT_{P'}=(e_p+J^nU)T_{P'}\\subseteq qT_{P'}.$$\nFaithful flatness of $C_{P'}\\to T_{P'}$ and ideal contraction imply $KC_{P'}\\subseteq qC_{P'}$. No identification between $T$ and $T_{P'}$ is used.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Rotthaus (4.3): the single ideal e_p transfers the inclusion across every prime over p."
+   }
+  },
+  {
+   "text": "Apply flat-primary fibre recovery to the flat map $B\\to C$ and the $p$-primary ideal $q$. Step 6 shows that every element of $K$ lies in every inverse image $qC_{P'}\\cap C$ for $P'\\cap B=p$. Their intersection is $qC$, so $K\\subseteq qC$. This version tests the whole fibre over $p$, rather than only its minimal primes. Accordingly the retained hypothesis that $pC$ is radical is not needed by this stronger argument; it has not been removed from the statement.",
+   "uses": [
+    "lem-per-flat-primary-fibre-recovery"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Whole-fibre form of Rotthaus (4.3); associated-prime detection replaces the reduced-minimal-prime indexing."
+   }
+  },
+  {
+   "text": "Contraction commutes with intersections by its membership definition, so $a_n=K\\cap B=\\bigcap_iq_i$. Steps 3 and 7 give $K\\subseteq q_iC$ for every component, while $q_iC\\subseteq Q_i$. Flat extension commutes with finite intersections, whence\n$$a_nC=\\bigcap_iq_iC=K.$$\nIndeed the middle intersection contains $K$ and lies in $\\bigcap_iQ_i=K$. For the empty decomposition both intersections are unit ideals, as required.",
+   "uses": [
+    "lem-per-flat-ideal-finite-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Rotthaus Claim 4, final primary-decomposition assembly."
+   }
+  },
+  {
+   "text": "Extension preserves sums and inclusions directly from the definition as the ideal generated by the images. Therefore\n$$(a_{n+1}+J^n)C=a_{n+1}C+J^nC=E+J^{n+1}C+J^nC=E+J^nC=a_nC.$$\nThe map $B\\to C$ is faithfully flat by Step 1, so contracting the two extended ideals gives $a_{n+1}+J^n=a_n$. This completes both clauses for every $n\\ge1$; no $J$-adic completeness or nonzero condition on $E$ was used.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Contraction of the equality of extended sums; this is the compatibility used later in Rotthaus Lemma 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-flat-ideal-finite-intersection",
+  "lem-per-flat-primary-fibre-recovery",
+  "lem-per-jacobson-adic-completion-faithfully-flat",
+  "lem-per-noetherian-primary-decomposition",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly from the cited completion and primary-decomposition facts, following the structure of Rotthaus Theorem 3 Claim 4 (4.1)–(4.3), with whole-fibre recovery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-compatible-formal-ideal-adic-descent: An ideal of a semilocal completion whose completed localizations above J descend compatibly to completions of the base prime localizations has extended thickenings modulo powers of J",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdic\", \"module\": \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → [H : TopologicalSpace R] → Ideal R → Prop\", \"doc\": \"The proposition that a given topology $ H $ on a commutative ring $ R $ is equal to the adic topology induced by the ideal $ J $.\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {n : ℕ} {y : N ⧸ I ^ n • ⊤} {y' : N ⧸ I ^ (n +\", \"doc\": \"Given a surjective composition of the canonical quotient map $ N \\\\to N/(I^n \\\\bullet \\\\top) $ with an $ R $-linear map $ f: M \\\\to N $, for any $ x \\\\in M $, $ n \\\\in \\\\mathbb{N} $, and compatible elements \"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {y : N} {n : ℕ}, y ∈ I ^ n • ⊤ → ∃ x ∈ I ^ n • ⊤, f x \", \"doc\": \"Given a surjective linear map from the quotient module $ M/(I \\bullet M) $ to $ N/(I \\bullet N) $, for any element $ y $ in the $ n $-th power submodule $ I^n \\bullet N $ and natural number $ n $, there \"}\n  {\"name\": \"AdicCompletion.subalgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Subalgebra R ((n : ℕ) → R ⧸ I ^ n • ⊤)\", \"doc\": \"The subalgebra of the inverse limit $\\\\varprojlim R/I^n$ consisting of compatible sequences $(x_n)$ where each $x_n \\\\in R/I^n$ and the transition maps $\\\\varphi_{m,n}: R/I^n \\\\to R/I^m$ satisfy $\\\\varphi_\"}\n  {\"name\": \"is_ideal_adic_pow\", \"module\": \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : TopologicalSpace R] [IsTopologicalRing R] {J : Ideal R},\\n  IsAdic J → ∀ {n : ℕ}, 0 < n → IsAdic (J ^ n)\", \"doc\": \"If the topology on a commutative ring $ R $ is adic with respect to an ideal $ J $, then it is also adic with respect to $ J^n $ for any positive integer $ n $. This means the adic topology structure \"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {y : N} {n : ℕ},\\n      f x ≡ y [SMOD I ^ n • ⊤\", \"doc\": \"Given a surjective linear map $ f : M \\\\to N $ composed with the quotient map to $ N/(I^n \\\\cdot N) $, for any $ x \\\\in M $, $ y \\\\in N $, and natural number $ n $, if $ f(x) \\\\equiv y \\\\mod I^n \\\\cdot N $, \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-compatible-formal-ideal-adic-descent: Primary decomposition and reduced prime extensions give descent of ideal thickenings in a semilocal completion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.isPrimary_decomposition_pairwise_ne_radical\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \"{I : Ideal R} {s : Finset (Ideal R)} (hs : s.inf id = I) (hs' : ∀ ⦃J⦄, J ∈ s → J.IsPrimary) :\\n  ∃ t : Finset (Ideal R),\\n    t.inf id = I ∧ (∀ ⦃J⦄, J ∈ t → J.IsPrimary) ∧ (t : Set (Ideal R)).Pairwise ((· ≠ ·) on radical)\", \"doc\": \"Given an ideal $ I $ in a semiring $ R $ with a primary decomposition into a finite set $ s $ of primary ideals, there exists another finite set $ t $ of primary ideals such that the intersection of $\"}\n  {\"name\": \"Ideal.IsLasker.exists_isMinimalPrimaryDecomposition\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \"[DecidableEq (Ideal R)] (h : IsLasker R) (I : Ideal R) : ∃ t : Finset (Ideal R), I.IsMinimalPrimaryDecomposition t\", \"doc\": \"In a Lasker ring $ R $, every ideal $ I $ has a minimal primary decomposition. Specifically, there exists a finite set $ t $ of primary ideals in $ R $ such that $ t $ forms a minimal primary decompos\"}\n  {\"name\": \"Ideal.exists_minimal_isPrimary_decomposition_of_isPrimary_decomposition\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \"[DecidableEq (Ideal R)] {I : Ideal R} {s : Finset (Ideal R)} (hs : s.inf id = I) (hs' : ∀ ⦃J⦄, J ∈ s → J.IsPrimary) :\\n  ∃ t : Finset (Ideal R),\\n    t.inf id = I ∧\\n      (∀ ⦃J⦄, J ∈ t → J.IsPrimary) ∧\\n        ((t : Set (Ideal R)).Pairwise ((· ≠ ·) on radical)) ∧ (∀ ⦃J⦄, J ∈ t → ¬(t.erase J).inf id ≤ \", \"doc\": \"Given an ideal $ I $ in a semiring $ R $ with a primary decomposition $ I = \\\\bigcap_{J \\\\in s} J $ where each $ J \\\\in s $ is a primary ideal, there exists a finite set $ t $ of primary ideals such that\"}\n  {\"name\": \"Ideal.IsPrimary\", \"module\": \"Mathlib.RingTheory.Ideal.IsPrimary\", \"type\": \"(I : Ideal R) : Prop\", \"doc\": \"An ideal $ I $ in a semiring $ R $ is primary if it is proper ($ I \\\\neq R $) and for any $ a, b \\\\in R $, if $ a \\\\cdot b \\\\in I $, then either $ b \\\\in I $ or there exists $ n \\\\in \\\\mathbb{N} $ such that \"}\n  {\"name\": \"IsLocalization.comap_map_of_isPrimary_disjoint\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \"{I : Ideal R} (hI : I.IsPrimary) (hM : Disjoint (M : Set R) I) :\\n  Ideal.comap (algebraMap R S) (Ideal.map (algebraMap R S) I) = I\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ a submonoid of $ R $, and $ S $ the localization of $ R $ at $ M $. If $ I $ is a primary ideal in $ R $ such that $ M $ and $ I $ are disjoint, then the pre\"}\n  {\"name\": \"Ideal.IsMinimalPrimaryDecomposition\", \"module\": \"Mathlib.RingTheory.Lasker\", \"type\": \"{R : Type u_1} → [inst : CommSemiring R] → [DecidableEq (Ideal R)] → Ideal R → Finset (Ideal R) → Prop\", \"doc\": \"Given a commutative semiring $ R $, an ideal $ I $ in $ R $, and a finite set of ideals $ S $ in $ R $, this proposition states that $ S $ is a minimal primary decomposition of $ I $.\"}\n  {\"name\": \"Ideal.exists_ltSeries_of_hasGoingDown\", \"module\": \"Mathlib.RingTheory.Ideal.GoingDown\", \"type\": \"[Algebra.HasGoingDown R S] (l : LTSeries (PrimeSpectrum R)) (P : Ideal S) [P.IsPrime]\\n  [lo : P.LiesOver l.last.asIdeal] :\\n  ∃ (L : LTSeries (PrimeSpectrum S)),\\n    L.length = l.length ∧\\n      L.last = ⟨P, inferInstance⟩ ∧ List.map (PrimeSpectrum.comap (algebraMap R S)) L.toList = l.toList\", \"doc\": \"Given that the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property, for any chain of prime ideals in the prime spectrum of $ R $ and a prime ideal $ P $ in $ S $ lying over\"}\n  {\"name\": \"IsLocalization.isPrime_of_isPrime_disjoint\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \"(I : Ideal R) (hp : I.IsPrime) (hd : Disjoint (M : Set R) ↑I) : (Ideal.map (algebraMap R S) I).IsPrime\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ a submonoid of $ R $, and $ I $ a prime ideal of $ R $ disjoint from $ M $. Then the extension of $ I $ to the localization $ S = R[M^{-1}] $ is a prime idea\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimary\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Submodule.IsPrimary\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] (S : Submodule R M) : Prop\", \"doc\": \"A proper submodule `S : Submodule R M` is primary iff\\n`r • x ∈ S` implies `x ∈ S` or `∃ n : ℕ, r ^ n • (⊤ : Submodule R M) ≤ S`.\\nThis generalizes `Ideal.IsPrimary`.\"}\n  {\"name\": \"Submodule.IsPrimary.isPrime_radical_colon\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {S : Submodule R M} (hI : S.IsPrimary) : (S.colon Set.univ).radical.IsPrime\", \"doc\": \"\"}\n  {\"name\": \"Submodule.IsPrimary.ne_top\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {S : Submodule R M} (h : S.IsPrimary) : S ≠ ⊤\", \"doc\": \"\"}\n  {\"name\": \"Submodule.IsPrimary.radical_colon_singleton_of_notMem\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {S : Submodule R M} (hI : S.IsPrimary) {m : M} (hm : m ∉ S) : (S.colon {m}).radical = (S.colon Set.univ).radical\", \"doc\": \"\"}\n  {\"name\": \"Submodule.IsPrimary.inf\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {S T : Submodule R M} (hS : S.IsPrimary) (hT : T.IsPrimary) (h : (S.colon Set.univ).radical = (T.colon Set.univ).radical) : (S ⊓ T).IsPrimary\", \"doc\": \"\"}\n  {\"name\": \"Submodule.IsPrimary.radical_colon_singleton_eq_ite\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {S : Submodule R M} (hS : S.IsPrimary) (m : M) [Decidable (m ∈ S)] : (S.colon {m}).radical = if m ∈ S then ⊤ else (S.colon Set.univ).radical\", \"doc\": \"\"}\n  {\"name\": \"Submodule.isPrimary_finsetInf\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {ι : Type u_3} {s : Finset ι} {f : ι → Submodule R M} {i : ι} (hi : i ∈ s) (hs : ∀ ⦃y : ι⦄, y ∈ s → (f y).IsPrimary) (hs' : ∀ ⦃y : ι⦄, y ∈ s → ((f y).colon Set.univ).radical = ((f i).colon Set.univ).radical) : (s.inf f).I\", \"doc\": \"\"}\n  {\"name\": \"Submodule.IsPrimary.mem_or_mem\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {S : Submodule R M} (h : S.IsPrimary) {r : R} {m : M} (hrm : r • m ∈ S) : m ∈ S ∨ r ∈ (S.colon Set.univ).radical\", \"doc\": \"\"}\n  {\"name\": \"Submodule.isPrimary_iff_zero_divisor_quotient_imp_nilpotent_smul\", \"module\": \"Mathlib.RingTheory.IsPrimary\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommRing R] [AddCommGroup M] [Module R M] {S : Submodule R M} : S.IsPrimary ↔ S ≠ ⊤ ∧ ∀ (r : R) (x : M ⧸ S), x ≠ 0 → r • x = 0 → ∃ n, r ^ n • ⊤ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"Ideal.IsPrimary\", \"module\": \"Mathlib.RingTheory.Ideal.IsPrimary\", \"type\": \" {R : Type u_1} [CommSemiring R] (I : Ideal R) : Prop\", \"doc\": \"A proper ideal `I` is primary as a submodule.\"}\n  {\"name\": \"Ideal.IsPrime.isPrimary\", \"module\": \"Mathlib.RingTheory.Ideal.IsPrimary\", \"type\": \" {R : Type u_1} [CommSemiring R] {I : Ideal R} (hi : I.IsPrime) : I.IsPrimary\", \"doc\": \"\"}\n  {\"name\": \"Ideal.isPrimary_of_isMaximal_radical\", \"module\": \"Mathlib.RingTheory.Ideal.IsPrimary\", \"type\": \" {R : Type u_1} [CommSemiring R] {I : Ideal R} (hi : I.radical.IsMaximal) : I.IsPrimary\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rimary.*[Cc]ompletion|[Cc]ompletion.*[Pp]rimary|Rotthaus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic descent of an ideal in a semilocal completion from its compatible completed localizations over each base prime",
+   "results": "{\"t\": \"2026-10-24T07:06:11Z\", \"tool\": \"leanfinder\", \"query\": \"Adic descent of an ideal in a semilocal completion from its compatible completed localizations over each base prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"AdicCompletion.instCommRing\", \"AdicCompletion.instAlgebra\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"isLocalRing_of_isAdicComplete_maximal\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"AdicCompletion.mkₐ\", \"IsAdicComplete.toIsPrecomplete\"], \"digest\": \"0678a909a2f6e87d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern henselianity, construction of completion and localization, or contraction/local equality; none states the compatible-formal-ideal descent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimary\", \"map\"",
+   "results": "{\"t\": \"2026-10-24T07:06:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPrimary\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Ideal.IsPrimary.comap\", \"IsLocalization.under_map_of_isPrimary_disjoint\"], \"digest\": \"51c304f2d0b62efe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern henselianity, construction of completion and localization, or contraction/local equality; none states the compatible-formal-ideal descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "primary.*completion|completion.*primary|compatible.*ideal.*descent",
+   "results": "{\"t\": \"2026-10-24T07:06:16Z\", \"tool\": \"grep\", \"query\": \"primary.*completion|completion.*primary|compatible.*ideal.*descent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern henselianity, construction of completion and localization, or contraction/local equality; none states the compatible-formal-ideal descent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible local ideals on completions of prime localizations descend ideal thickenings in a semilocal completion",
+   "results": "{\"t\": \"2026-10-24T07:06:17Z\", \"tool\": \"leansearch\", \"query\": \"Compatible local ideals on completions of prime localizations descend ideal thickenings in a semilocal completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.liesOver_comap_of_liesOver\", \"AdicCompletion.liftRingHom.congr_simp\", \"Ideal.IsLocal\", \"IsLocalization.AtPrime.comap_map_eq_map\", \"IsLocalization.AtPrime.liesOver_maximalIdeal\", \"LocalSubring.ofPrime\", \"Localization.isLocalHom_localRingHom\", \"Ideal.le_of_localization_maximal\"], \"digest\": \"204a44e0f70cd67f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern henselianity, construction of completion and localization, or contraction/local equality; none states the compatible-formal-ideal descent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-g-ring-adic-lifting",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), through the existing small-singular-locus / ideal-adic quasi-excellence chain: the local G-ring lifting input to Kurano–Shimomoto Theorem 5.1 Step 2 equation (5.1). Refined using Rotthaus (1979), Theorem 3, pp.176–179. Rotthaus (1979), proof of Theorem 3, Claim 4 and (4.1)–(4.3), pp.178–179, extracted for an arbitrary compatible ideal E. The associated-prime input is reducedness of pC; the same local ideal e_p must be used over every Q above p. J-adic completeness first enters later, in Lemma 2, not in Claim 4.",
+   "via": [
+    "lem-per-local-g-ring-adic-lifting",
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-compatible-formal-ideal-adic-descent",
+  "worker": "stage1",
+  "summary": "Nine-step primary-component descent, with explicit maximal case and transport through the same e_p. Three general supporting statements; flat finite intersections has an exact project attachment candidate. Statement unchanged.",
+  "blueprint": "Ancestor Step 3, regular local model and purity, through the small-singular-locus / ideal-adic G-ring lifting chain; Rotthaus Theorem 3 Claim 4, equations (4.1)–(4.3). The nine steps realize the compatible-ideal descent input of local G-ring lifting.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "General commutative-algebra tool used for completion/ideal contraction in the prescribed G-ring lifting chain; this unit has no competing statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NC-f0b08116f",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-f0b08116f (reviewer sub-agent of L); spot-checked: I read all 9 steps of the item and the 3 new nodes in full, plus every cited statement and the Stacks sources (00MC, 0BBY, 0311, 0312, labels checked against the tag table). Step 1 is correct: B→C is faithfully flat by the new 00MC node, and the geometric-series argument via ker π_N=𝔯^NC shows that every maximal ideal of C contains 𝔯C, so a nonmaximal prime of C contracts to a nonmaximal prime of B. Step 2 is a Lasker decomposition; contraction keeps ideals primary. Step 3 (maximal-radical component) gives Q=qC through B/𝔯^h≅C/𝔯^hC. Steps 4–5 show QT∩C=Q and A=α^{-1}(QT)=qU; I checked each inclusion, including p^hB_p⊆qB_p. Step 6 moves e_p+J^nU⊆qU to every P' over p using the same e_p, then contracts along the faithfully flat map C_{P'}→T_{P'}. Steps 7–9 (recovery, finite-intersection 0BBY, ff contraction) are correct. The empty decomposition, J=0 and Artinian B were also checked. The hypotheses 'α faithfully flat' and 'pC radical' are not used; step 7 says so, and the statement keeps them (not weakened, unchanged from base). New nodes: the Jacobson-completion faithful flatness is exactly Stacks 00MC; it generalizes the local-only lem-weil-pbc-local-completion-faithfully-flat and is needed because B is semilocal; no duplicate. The finite flat intersection is 0BBY by induction and is exactly the project lemma Ideal.map_iInf_of_flat (Equalizer.lean:84, no sorry), recorded as a lean_candidate. The flat primary fibre recovery is true: by flatness s∉p stays a nonzerodivisor on S/qS, so every associated prime lies over p; then 0311 finishes. I tested it on k[x]→k[x,y] with q=(x²) and on the zero ring. None of the three restates a clause of the item. Mechanical finding (cites dropped node lem-per-noetherian-primary-decomposition): justified at step 2. That node is a status-mathlib leaf (Submodule.isLasker, Lasker.lean:299) and the DAG's only Lasker–Noether node. It carries no Qbar_l, adic, duality, t-structure, Gabber, alteration or stable-reduction content and brings back no unfinished dropped work; the finite-coefficient route of lem-per-artin-gabber-affine-curve is untouched. I accept the tool_use of lem-weil-pbc-adic-completion-noetherian (generic Stacks 0316; no node of this unit gives it). No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompatibleFormalIdealAdicDescent",
+  "declaration": "Algebra.compatible_formal_ideal_adic_descent",
+  "declarations": [
+   "Algebra.completedLocalizationMap",
+   "Algebra.formalIdealAdicContraction",
+   "Algebra.compatible_formal_ideal_adic_descent"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompatibleFormalIdealAdicDescent.lean",
+  "statement": "theorem compatible_formal_ideal_adic_descent (B : Type u) [CommRing B] [IsNoetherianRing B] [Finite (MaximalSpectrum B)] (J : Ideal B) (hJ : J ≤ Ideal.jacobson (⊥ : Ideal B)) (E : Ideal (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)) (hflat : ∀ Q : PrimeSpectrum (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B), ¬ Q.asIdeal.IsMaximal → J.map (algebraMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)) ≤ Q.asIdeal → RingHom.FaithfullyFlat (completedLocalizationMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B) Q)) (hradical : ∀ p : PrimeSpectrum B, J ≤ p.asIdeal → (p.asIdeal.map (algebraMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B))).IsRadical) (hcompatible : ∀ p : PrimeSpectrum B, J ≤ p.asIdeal → ∃ e : Ideal (LocalCompletion (Localization.AtPrime p.asIdeal)), ∀ (Q : PrimeSpectrum (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)), ¬ Q.asIdeal.IsMaximal → J.map (algebraMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)) ≤ Q.asIdeal → ∀ hp : p = Q.comap (algebraMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)), E.map (algebraMap (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B) (LocalCompletion (Localization.AtPrime Q.asIdeal))) = Ideal.map (completedLocalizationMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B) Q) (hp ▸ e)) : ∀ n : ℕ, 1 ≤ n → (formalIdealAdicContraction B J E n).map (algebraMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)) = E ⊔ (J ^ n).map (algebraMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)) ∧ formalIdealAdicContraction B J E (n + 1) ⊔ J ^ n = formalIdealAdicContraction B J E n",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two helper definitions name the uniquely coordinate-characterized canonical completion map and the contractions a_n. The added landed dependencies provide that map existence theorem and the existing LocalCompletion abbreviation; no new definition of completion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48bb19f92",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Clause-by-clause match. Semilocal Noetherian B (Finite MaximalSpectrum + IsNoetherianRing); r = jacobson ⊥; C, U_p, T_Q are AdicCompletion/LocalCompletion; hflat and hradical cover exactly the node's primes; one e_p per p with ∃ before ∀Q (hp ▸ only retypes e); a_n is a real comap; both conclusions for n≥1; no extra hypotheses; statement verbatim in the file; only stmt_deps (+2 landed deps) and lean changed vs live. Mechanical theorem stmt_dep finding: the module of lem-weil-pbc-completion-local-map-at-prime has no defs; the item uses the map the theorem constructs (Classical.choose of exists_completion_map_atPrime), unique by its coordinate formula, so canonical → PASS on that point. No definition-node owner or duplicate (exists_adicCompletion_map_of_local and localMapCompletionMap are also theorem-constructed). Edge cases checked: zero ring, Artinian B, E=0/⊤, J=0, n=0 excluded, primes with no Q above, several Q over one p. Docstrings, source places, 9-step proof, sorry only, report sections all present. Not compiled (no file changed; worker reports clean compiles)."
+ }
+}

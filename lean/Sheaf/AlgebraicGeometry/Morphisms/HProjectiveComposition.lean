@@ -6,9 +6,6 @@ Authors: SHEAF group Q20
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
 
 /-!
@@ -52,6 +49,17 @@ Proof plan:
 -/
 theorem IsHProjective.comp {X Y S : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ S)
     [IsHProjective g] [IsHProjective h] : IsHProjective (g ≫ h) := by
-  sorry
+  obtain ⟨n, _, i, hi, hgi⟩ := IsHProjective.exists_isClosedImmersion (f := g)
+  obtain ⟨m, _, j, hj, hhj⟩ := IsHProjective.exists_isClosedImmersion (f := h)
+  have : IsClosedImmersion (ProjectiveSpace.map n j) :=
+    MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map n j).flip hj
+  let e := (ProjectiveSpace.isPullback_map n (ℙ(m; S) ↘ S)).isoPullback
+  refine ⟨⟨n × m, inferInstance,
+    i ≫ ProjectiveSpace.map n j ≫ e.hom ≫ ProjectiveSpace.segre n m S,
+    inferInstance, ?_⟩⟩
+  simp only [Category.assoc, ProjectiveSpace.segre_over, e,
+    IsPullback.isoPullback_hom_fst_assoc, ProjectiveSpace.map_over,
+    ProjectiveSpace.map_over_assoc]
+  rw [← Category.assoc i, hgi, hhj]
 
 end AlgebraicGeometry

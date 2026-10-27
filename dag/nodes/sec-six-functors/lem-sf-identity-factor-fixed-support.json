@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-identity-factor-fixed-support",
+ "kind": "statement",
+ "title": "Fixed-scalar identity-factor evaluation of geometric compact support",
+ "statement": "Let Λ be a finite commutative ring and X, Z, Y Noetherian schemes. Let i:X→Z be a quasi-compact open immersion and p:Z→Y proper. For the compactifications ci=(i,id), cp=(id,p), c=(i,p), the pro-etale compositor of [lem-pur-compact-support-site-coherence] at a bounded-below etale object L equals the canonical identity-open unit followed by proper image of the identity-direct-image unit at ν_X^*L. The identity-open unit is obtained by deriving the left-adjoint identity isomorphism; the identity-direct-image unit is rightDerivedLowerStarId. Their pair is identityFactorFixedIso. All functors are ordinary fixed-Λ module sheaf functors of [lem-amb-etale-compact-comparisons]; there is no intrinsic coefficient presentation and no retained finite witness.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "def-sf-operation-stages, finiteCompositionNormalization,\nfiniteOpenNormalization and finiteProperNormalization; prop-sf-pf-coherence.proof.md,\ncompatibility of comparisons with counits and j_!."
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-site-coherence",
+  "lem-amb-etale-compact-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the etale arbitrary-triangle formula for ci, cp and c, with both middle maps identity on Z. The middle square is Cartesian. Apply the identity exchange law, the right open-composition unit and the left proper-composition unit to evaluate the model compositor.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized composition site square identifies the etale compositor with the pro-etale compositor. The extension-by-zero comparison respects the identity open unit; the direct-image counit mate respects the identity direct-image unit. Naturality of proper image pastes these two unit equations. Cancel the invertible source comparison to give the asserted fixed-scalar compositor equation.",
+   "uses": [
+    "lem-pur-compact-support-site-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-etale-compact-comparisons",
+  "lem-pur-compact-support-site-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Identity-factor triangle calculation before coefficient realization in lem-sf-finite-support-identity-factor-compositor, proof step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical natural isomorphism from a transported adjoint endofunctor to identity respects equivalence unit and counit",
+   "results": "Adjunction.leftAdjointIdIso and its hom-app formula, toEquivalence unit/counit formulas. These give generic identity comparisons, not the compact-support coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic adjunction and equivalence identities in the planned component calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compact support composition for an open immersion followed by a proper map identity compactifications",
+   "results": "Generic open immersion factorization and restriction-composition lemmas; no compact-support coefficient or geometric compositor evaluation.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement for the required fixed-support identity evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "rightAdjointUniq, its unit and counit compatibility, and transitivity.",
+   "date": "2026-10-27",
+   "verdict": "Provides identity direct-image uniqueness, not the complete comparison calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "identity.*[Cc]ompos|[Cc]ompos.*[Ii]dentity; sfIntrinsic.*[Ii]d|compIso.*[Ii]d",
+   "results": "Found the arbitrary-triangle etale compositor formula, CompactSupportFormalism identity exchange and composition unit laws, coefficient open/direct identity definitions, and site coherence. No theorem states the fixed-support or intrinsic-coefficient identity-factor calculation.",
+   "date": "2026-10-27",
+   "verdict": "Separate the geometric unit calculation from coefficient transport; retain the already specified maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSupportIdentityFactorCompositor",
+  "date": "2026-10-27",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-support-identity-factor-compositor",
+   "place": "Identity-factor triangle calculation before coefficient realization in lem-sf-finite-support-identity-factor-compositor, proof step 1.",
+   "via": [
+    "lem-sf-finite-support-identity-factor-compositor",
+    "lem-sf-finite-support-factor-realization",
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IdentityFactorFixedSupport",
+  "file": "lean/Sheaf/Paper/IdentityFactorFixedSupport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.identityFactorFixedCompositor",
+  "statement": "theorem identityFactorFixedCompositor (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Z Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z] [IsNoetherian Y]\n    (i : X ⟶ Z) (p : Z ⟶ Y) [IsOpenImmersion i] [IsProper p] [QuasiCompact i]\n    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    coherenceProEtaleCompositor Λ (Compactification.ofIsOpenImmersion i)\n        (Compactification.ofIsProper p) (identityFactorPair i p) L =\n      (identityFactorFixedIso Λ i p).hom.app ((coherenceBoundedSiteFunctor Λ X).obj L)",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.identityFactorPair",
+   "AlgebraicGeometry.ProEtale.identityFactorFixedProper",
+   "AlgebraicGeometry.ProEtale.identityFactorFixedOpen",
+   "AlgebraicGeometry.ProEtale.identityFactorFixedIso",
+   "AlgebraicGeometry.ProEtale.identityFactorFixedCompositor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T123458-L-2304837",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T123458-L-2304837",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

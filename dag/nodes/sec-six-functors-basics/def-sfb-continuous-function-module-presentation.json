@@ -1,0 +1,108 @@
+{
+ "id": "def-sfb-continuous-function-module-presentation",
+ "kind": "definition",
+ "title": "Natural continuous-function presentations of internal modules",
+ "statement": "Let $X$ be a scheme, $A$ a totally disconnected topological commutative ring and $N$ a topological additive group with a continuous $A$-module action. Let $Q$ be an internal module over the continuous coefficients $A_X$ [sk-def-sfb-module-objects]. Using the actual sectionwise encoding $F_X$ of [def-weil-pbc-continuous-coefficient-module-encoding], a continuous-function presentation consists of additive equivalences $(F_XQ)(V)\\simeq C(|V|,N)$ for every pro-etale $V\\to X$. They commute with restriction by precomposition and satisfy $e_V(a\\cdot x)=a\\cdot e_V(x)$ for every continuous scalar function $a:|V|\\to A$, with the universe lift used by the section ring. No basis or freeness of $N$ is part of this data.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "sk-def-sfb-module-objects"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, second paragraph: actual continuous-function description of the sum lattice"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, second paragraph: actual continuous-function description of the sum lattice"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural additive scalar-linear presentation of a sheaf of modules by continuous functions",
+   "results": "8 hits: ContinuousMap.module', continuousSubmodule, ContinuousMap.module, ZeroAtInftyContinuousMap.instModule, PresheafOfModules.Sheafify.SMulCandidate, PresheafOfModules.Sheafify.SMulCandidate.ctorIdx, ContinuousMap.module.congr_simp, ContinuousMap.instSMul'. These provide actions on functions, not the presentation with naturality.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural scalar-linear sectionwise continuous function presentation of a sheaf of modules gives a finite free module when the value module is a full lattice",
+   "results": "8 hits, including SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType and SheafOfModules.GeneratingSections.IsFiniteType. No matching equivalence.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtaleTraceFormula|ContinuousFunctionPresentation|trace.*[Ii]mage.*[Cc]hart|continuous.*[Ll]attice.*[Ff]ree",
+   "results": "0 hits",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleTraceLattice",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, second paragraph: actual continuous-function description of the sum lattice",
+   "via": [
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousLatticeSumFree",
+  "file": "lean/Sheaf/Paper/ContinuousLatticeSumFree.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ContinuousFunctionPresentation",
+  "statement": "structure ContinuousFunctionPresentation (X : Scheme.{u}) (A : Type)\n    [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] [TotallyDisconnectedSpace A]\n    (N : Type v) [AddCommGroup N] [Module A N] [TopologicalSpace N]\n    [IsTopologicalAddGroup N] [ContinuousSMul A N]\n    (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj A) X))",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022850-L-489971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022850-L-489971",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -19,91 +19,51 @@
  ],
  "proof": [
   {
-   "text": "Put $A=A_F$. Use the internal-to-sectionwise equivalence in [def-weil-pbc-internal-abelian-sheaf-module-equivalence] on the small coherent profinite site. Its hypotheses hold for the sheafified abelian tensor of [sk-def-sfb-sheaf-tensor]. It leaves sections, restrictions and the regular coefficient module unchanged. By [lem-pe-internal-section-tensor-comparison] it is exact and preserves tensor, hence identifies right adjoints by their adjunction bijections. The sectionwise tensor right adjoint is exactly the slice sheaf Hom of [def-pur-sheaf-hom], by [lem-pc-sheaf-modules-tensor-closed]; thus this is the transported internal Hom. The abelian sheaf category is Grothendieck, with additive closed tensor, by [lem-weil-pbc-sheaf-tensor-closed] applied to $\\mathcal A=\\operatorname{Ab}$. The internal module category is consequently Grothendieck by [lem-sfb-modobj-grothendieck], so [lem-sp-grothendieck-enough-injectives] supplies a nonnegative injective resolution $A\\to I^\\bullet$. An exact equivalence preserves injectivity, since its inverse carries monomorphisms to monomorphisms and its Hom bijections carry the injective lifting property to the same property. We may therefore compute in sectionwise $A$-modules.",
+   "text": "Use [lem-sfb-profinite-free-hom-resolution-evaluation] and transport its normalized evaluation to the chosen adjoint model using [lem-sfb-profinite-actual-free-hom-evaluation]. At the regular coefficient module this is exactly the counit-defined evaluation in the statement, followed by ULift.down. The additive natural isomorphism gives bijectivity and additivity. Its scalar law, the multiplication-extension equation for the continuous ring sheaf, and its two restriction laws give the stated scalar action and both pointwise restriction formulas.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-pe-internal-section-tensor-comparison",
-    "lem-sfb-modobj-grothendieck",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-weil-pbc-sheaf-tensor-closed",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-hom"
+    "lem-sfb-profinite-free-hom-resolution-evaluation",
+    "lem-sfb-profinite-actual-free-hom-evaluation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J7 and 03FD (injective module resolutions), and sites-modules.tex Tag 03EO (lemma-internal-hom-adjoint-tensor), for the sheaf-Hom identification"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor; free-generator normalization in parent proof steps 1 and 3."
    }
   },
   {
-   "text": "For an $A$-module $N$ and a profinite $S$, the definition [def-pur-sheaf-hom] gives $\\mathcal Hom_A(A[P],N)(S)=\\operatorname{Hom}_{A|_S}(A[P]|_S,N|_S)$. A map on the right is specified by the image of the universal generator: it is a section $x\\in N(S\\times P)$. Explicitly a generator over $U\\to S$ given by $p:U\\to P$ is sent to $(U\\to S\\times P)^*x$, and a linear combination $\\sum_i a_i[p_i]$ is sent to $\\sum_i a_i(U\\to S\\times P)^*_ix$. Conversely evaluating on the tautological $P$-coordinate of $S\\times P$ recovers $x$. These operations are inverse, natural in $N,S,P$, and respect sheafification by the defining universal property of the free internal module $A[P]$. Thus the complex $J^\\bullet=\\mathcal Hom_A(A[P],I^\\bullet)$ has $J^n(S)=I^n(S\\times P)$, with the same differentials. At $N=A$ this gives $C(S\\times P,F)$, and scalar multiplication uses the $S$-coordinate. By derivation in the second variable using the chosen nonnegative injective resolution, $J^\\bullet$ represents the required derived Hom. The comparison map on $S$ is $A(S\\times P)[0]\\to I^\\bullet(S\\times P)$ induced by the resolution augmentation.",
+   "text": "Completeness follows from finite dimensionality over the complete field Q_ell. For any injective resolution I, [lem-sfb-finite-normed-scalar-section-acyclicity] gives that its evaluated augmentation at each V is a quasi-isomorphism: degree zero is its asserted isomorphism; in positive degree both homologies are zero. Apply this with V=S times P and conjugate by the additive natural evaluation isomorphism from step 1. This proves that every section evaluation of resolutionAugmentation is a quasi-isomorphism. Forget the module structure, regard the resulting map as a presheaf map of complexes, use sectionwise detection of quasi-isomorphisms, and apply exact sheafification. The sheafification counit identifies the result with the original sheaf map. The exact conservative module forgetful functor then reflects the quasi-isomorphism. Extension from natural to integer degrees preserves quasi-isomorphisms, and derived localization makes it invertible.",
    "uses": [
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J7, definition of derived sheaf Hom and the free-module evaluation identification"
-   }
-  },
-  {
-   "text": "Let $\\mathcal F$ be the underlying abelian sheaf of $A$, so $\\mathcal F(V)=C(V,F)$. For a finite jointly surjective cover $\\{T_i\\to V\\}$, form the continuous surjection $q:T=\\coprod_iT_i\\to V$. Apply [lem-sfb-normed-scalar-profinite-cech-exact] to $q$. Each fibre power $T_V^{n+1}$ is the finite disjoint union of $(T_{i_0}\\times_V\\cdots\\times_VT_{i_n})$ over tuples of indices. A function on this disjoint union is continuous exactly when its restrictions are continuous. Therefore its function group is the product of the groups in degree $n$ of [def-weil-pbc-site-cech-complex]. Omitting coordinates has the corresponding tuple-of-indices restrictions, so the differential is precisely the alternating Cech differential. The cited analytic exactness says that every positive Cech cocycle for this cover is a coboundary, hence its positive Cech cohomology vanishes.",
-   "uses": [
-    "def-sfb-continuous-map-condensed-ring",
-    "lem-sfb-normed-scalar-profinite-cech-exact",
-    "def-weil-pbc-site-cech-complex"
+    "lem-sfb-finite-normed-scalar-section-acyclicity",
+    "lem-sfb-profinite-actual-free-hom-evaluation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(2)–(4), finite complete E case; agent passage from the analytic Cech lemma to finite covering families"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image input, below the trivial scalar prime-to-ell acyclicity input: profinite-parameter column computation before totalizing the internal group nerve. Agent-formulated analytic input; an exact reference for ordinary condensed modules and noncomplete norm-topological Omega is WANTED."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] to this coherent profinite site with $\\mathcal B$ all its objects and $\\mathrm{Cov}$ all its defining finite jointly surjective covering families. Every iterated fibre product is profinite, so lies in $\\mathcal B$. These families are the coverings in the defining pretopology, hence cofinal as required; equivalently any generated covering sieve contains such a family. Step 3 verifies the positive Cech-vanishing hypothesis for every member of $\\mathrm{Cov}$. We obtain $H^q(V,\\mathcal F)=0$ for all profinite $V$ and $q>0$. Now [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison], for the actual ring sheaf $A$, identifies $H^q(I^\\bullet(V))$ with these abelian-sheaf groups and identifies degree zero with $A(V)$. Its smallness and enough-injectives hypotheses were checked in Step 1; it imposes no constant-ring condition; completeness of E is used only in the analytic input of Step 3. In particular $A(S\\times P)[0]\\to I^\\bullet(S\\times P)$ is a quasi-isomorphism of abelian-group complexes for every $S$.",
-   "uses": [
-    "lem-weil-pbc-site-cech-vanishing-criterion",
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03F9 (lemma-cech-vanish-collection) followed by Tag 03FD (lemma-cohomology-modules-abelian-agree)"
-   }
-  },
-  {
-   "text": "By Steps 2 and 4 the augmentation $\\mathcal C_F(P)[0]\\to J^\\bullet$ is exact on section complexes on every profinite test object. For each positive degree, the presheaf kernel equals the presheaf image; at degree zero its kernel is the image of $\\mathcal C_F(P)$. Thus these presheaf images are already the corresponding kernel sheaves, so the same equality holds for sheaf images. This proves that the augmentation is a quasi-isomorphism of module sheaves, hence an isomorphism after derived localization [sk-def-sfb-derived-categories]. For a continuous $v:P'\\to P$, the map between section complexes is restriction along $1_S\\times v$. It commutes with $I^\\bullet$'s differentials and augmentation by naturality of the resolution maps as sheaf maps. The free-generator description in Step 2 identifies this map with precomposition by $A[P']\\to A[P]$. Consequently the square of comparison chain maps commutes before localization and therefore afterwards. In degree zero it sends $f(s,p)$ to $f(s,v(p'))$, exactly the prescribed evaluation identification and its parameter naturality. All arguments used $C(-,F)$ itself.",
+   "text": "Take any injective resolution I of the regular module. Step 2 also says that applying H_P to its augmentation is a quasi-isomorphism. Extend to integer degrees and use the natural map/extension isomorphisms to deduce the same for H_P applied to I.iota-prime. Naturality of the ordinary right-derived unit gives a square with this map on the left, the derived image of I.iota-prime on the right, and the unit at the bounded-below injective complex I at the bottom. These three maps are invertible; hence the unit at the single regular module is invertible. Its specified single-complex normalization differs only by an isomorphism. The parameter naturality square for nonnegative augmentations is checked degreewise: degree zero is naturality of parameterMap at I.iota.f 0; every other degree has zero source. The canonical degree-zero identity is the already proved rightDerivedSingleUnit_zero formula.",
    "uses": [
     "sk-def-sfb-derived-categories"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J7, the fixed augmentation and functoriality of restriction in the Hom-complex model"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Ordinary right-derived computation on injective resolutions; library RightDerivedSingleZeroUnit, canonical degree-zero normalization."
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-sfb-continuous-map-condensed-ring",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-weil-pbc-site-cech-complex",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-sfb-modobj-grothendieck",
-  "lem-sfb-normed-scalar-profinite-cech-exact",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-weil-pbc-sheaf-tensor-closed",
-  "lem-weil-pbc-site-cech-vanishing-criterion",
-  "sk-def-sfb-derived-categories",
-  "sk-def-sfb-sheaf-tensor"
+  "lem-sfb-profinite-free-hom-resolution-evaluation",
+  "lem-sfb-profinite-actual-free-hom-evaluation",
+  "lem-sfb-finite-normed-scalar-section-acyclicity",
+  "sk-def-sfb-derived-categories"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), finite E branch: agent expansion with Stacks 03EO, 03F9 and 03FD. Positive continuous Cech exactness is a separate statement-only input, supported for finite complete E by Bhatt–Scholze Lemma 4.3.9(2)–(4). The former norm-topological Omega branch is refuted in the repair report."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO and finite-normed section acyclicity; Lean assembly of evaluation, sheafification, nonnegative resolution quasi-isomorphisms, derived unit naturality, and canonical degree-zero comparison."
  },
  "mathlib_searches": [
   {
@@ -428,55 +388,18 @@
   "date": "2026-10-22",
   "item": "lem-sfb-normed-scalar-profinite-hom-acyclic",
   "worker": "stage1",
-  "summary": "Repair of E2: corrected the false all-continuous norm-topological Omega case by restricting this item and its analytic Cech input to finite complete E. Retained the five-step derived argument, its free-generator formula, specified augmentation and parameter naturality. Added the sheaf-module tensor/Hom adjunction citation and the missing module-Grothendieck tool declaration. Report records the Cantor-set counterexample, source-topology distinction, and parent/polynomial-sibling audit. One new statement-only analytic node, no Mathlib leaves.",
-  "blueprint": "Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md: the finite E open-coefficient branch only. The paragraph delegates to sk-prop-open-coefficients and makes no all-continuous norm-topological Omega acyclicity claim. The imported Qlb coefficient is the finite-subextension sheaf; the rejected Omega addition was an agent expansion. Inherited blueprint ancestor is None, with the existing via chain retained. Chapter and unit records are unchanged.",
-  "tool_uses": [
-   {
-    "node": "lem-pe-internal-section-tensor-comparison",
-    "why": "Generic exact monoidal internal/sectionwise equivalence; used to compare internal Hom, not to replace a geometric unit step."
-   },
-   {
-    "node": "lem-sp-grothendieck-enough-injectives",
-    "why": "Generic injective-resolution existence in a Grothendieck abelian category."
-   },
-   {
-    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
-    "why": "Generic all-site Cech criterion converts analytic Cech exactness to abelian derived-evaluation vanishing."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-    "why": "Generic arbitrary-ring comparison computes the section complex of a module injective resolution from abelian-sheaf cohomology."
-   },
-   {
-    "node": "lem-weil-pbc-sheaf-tensor-closed",
-    "why": "Generic Grothendieck and additive closed tensor structure for sheaves of abelian groups on a small site; needed to check the module-Grothendieck theorem hypotheses."
-   },
-   {
-    "node": "lem-sfb-modobj-grothendieck",
-    "why": "Generic Grothendieck-category theorem for modules over a commutative monoid, applied after checking additive closed tensor; the open-direct-image unit does not supply this categorical existence input."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Generic tensor–sheaf-Hom adjunction identifies the transported internal right adjoint with the slice sheaf Hom used in Step 2; it supplies no geometric direct-image argument."
-   }
-  ]
+  "summary": "Q54 repair of the 2026-10-22 re-split return: two comparable statement-only nodes carry old steps 1–2 (transport and resolution evaluation) and 3–4 (finite-family Cech and section acyclicity). Parent statement is unchanged; final sheaf quasi-isomorphism, parameter naturality and degree-zero assembly remain in the parent. Full old arguments retained verbatim in report.md. Rebased again after the L side-completion promotion return: current live statement, statement dependencies, Lean metadata and reviews retained; current cited statements and newly appearing 03EO duplicate candidate re-read. Current-head repair retry: reconstructed parent from the current live record, retaining only the two-node split changes; rechecked all parent quotations and current helper inputs. Clarified final assembly: the resolution augmentation induces the identity on degree-zero section cohomology, whereas the parameter map is pullback along 1_S times v.",
+  "blueprint": "Paragraph (3), finite-E open-direct-image profinite columns: first new node realizes old steps 1–2, second old steps 3–4, and parent assembles the canonical comparison and parameter naturality.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-site-cech-vanishing-criterion",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-weil-pbc-sheaf-tensor-closed",
-  "lem-sfb-modobj-grothendieck",
-  "lem-pc-sheaf-modules-tensor-closed"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NY-6160a3934",
-  "group": "NY",
+  "reviewer": "NT-cc-Q54-427cfe747",
+  "group": "Q54",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-6160a3934 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It answers the E2 RETURN of 6f0dfe97, and every point of that RETURN is repaired. (1) Statement: both nodes now take F=E, any finite extension of Q_ell, with the report section 'Source error'. I verified the Omega counterexample myself: on the Cantor set, with T=beta(S_disc) and an alpha-orthogonal basis, f=W(y)-W(x) is an Omega-valued Cech 1-cocycle, and a primitive would give h with h-w in Omega; Baire gives a point with infinitely many nonzero coordinates. So H^1(S,C(-,Omega)) is nonzero and the old item fails at P = Cantor set. The narrowing is forced by falsity, not a weakening. main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md lines 19-25 (paragraph (3)) makes no Omega claim; the clause was an agent addition, so no unit or target changes. (2) Step 1 now cites lem-pc-sheaf-modules-tensor-closed (C1/C4). (3) lem-sfb-modobj-grothendieck is now in tool_uses. Steps: the Grothendieck chain (Step 1), Hom(A[P]|_S,N|_S)=N(S x P) by Yoneda on the slice (Step 2), the Cech identification over the disjoint union of the cover (Step 3), the general-site Cech criterion hypotheses (1)-(3) and the arbitrary-ring module/abelian comparison (Step 4), and the sectionwise quasi-isomorphism and naturality in P (Step 5) all hold. The new node lem-sfb-normed-scalar-profinite-cech-exact is true for E: Bhatt-Scholze Lemma 4.3.9(2)-(4) with G=1 and Lemma 4.3.7 give H^i(S,C(-,E))=0 for i>0, and applied to the fibre powers this gives Cech exactness. It is self-contained, statement only, and strictly smaller than the item. rg -L found no duplicate (read: lem-exc-coinduced-continuous-acyclic, lem-sc-group-coinduced-acyclic, lem-exc-cochains-derived-invariants, lem-sfb-continuous-coefficient-free-rank). No SGA is cited. Edge cases checked: P empty, P a point, empty surjection. Maintainer note: two other-group citers rely on the removed Omega case and must be reopened. One is lem-sfb-prime-to-ell-condensed-acyclicity step 2, named in the report. The other is NR's lem-sfb-profinite-algcl-derived-invariants-comparison step 2, which applies the item to B=C(-,Omega) and is missing from the report's citer audit."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-427cfe747 (reviewer sub-agent of L); spot-checked: Released re-split order (human 2026-10-21; old proof 5 steps, 5419 chars). This head is the PASSed b6339d06 split with item step 3 reworded: degree-zero normalization and the parameter pullback f↦((s,p')↦f(s,v(p'))) are now separate sentences. The base moved de5ca6d→7e94636. Both new statements and the item statement are byte-identical to b6339d06, so this is not an A6 re-push. Step mapping: old steps 1–2 (sectionwise transport, Grothendieck category and injective resolutions, injectives preserved, slice Hom, H_P(N)(S)=N(S×P), both restriction formulas, J=H_P(I) representing RH_P) are in node A, lem-sfb-profinite-free-hom-resolution-evaluation (~2100 chars). Old steps 3–4 (finite cover replaced by ⊔T_i→V, Čech identification, 03F9 criterion on all profinite objects, 03FD comparison, exactness of 0→C(V,E)→I^•(V)) are in node B, lem-sfb-finite-normed-scalar-section-acyclicity (~1650 chars). Old step 5 is item steps 2–3 (~1900 chars), a genuine assembly. Truth: A is Yoneda on the slice of the subcanonical coherent profinite site, since h_P restricted over S is represented by S×P→S, and bounded-below injective complexes are K-injective. B follows from live lem-sfb-normed-scalar-profinite-cech-exact (Bhatt–Scholze 4.3.9(2)–(4)) applied to ⊔T_i→V, then lem-weil-pbc-site-cech-vanishing-criterion with hypotheses (1)–(3) checked, then lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison (small site, enough injectives, arbitrary ring). E is complete and Ω is never used. Edge cases P=∅, P=pt, S=∅, V=∅ and the empty cover all hold. stmt_deps equal the brackets in both new nodes; searches cover three tools, with LeanSearch recorded as unavailable for B; neither new id exists on the base; no SGA source. New-base duplicate search with rg -L: the N5 siblings lem-sfb-condensed-product-bar-resolution-model and lem-sfb-condensed-action-injective-restriction (2026-10-22) share only the clause 'Hom(A[P],I^•) represents RHom', not the evaluation N(S×P) or the restriction formulas, so they are not duplicates. Inherited tool_uses are accepted. Maintainer notes: (1) live lem-sfb-normed-scalar-profinite-cech-exact now has no DAG citer and is named only in B's source.place, so B's prover should cite it; (2) A shares its RHom-representation clause with the N5 node. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.NormedScalarProfiniteHomAcyclic",
@@ -505,5 +428,27 @@
   "group": "NA",
   "result": "pass",
   "note": "Re-delivery answering the H2 RETURN of e8abced2b64d. The Lean module is byte-identical (sha256 1f5968db…), and the clause-by-clause H3 re-check is clean: finite normed E/Q_ell, continuousScalarRing, actual free module and Mod.ihom, evaluation bijective, additive, with S-coordinate action and both restriction laws, IsIso of rightDerivedSingleUnit and of Q.map of every injective-resolution augmentation, chain-level parameter naturality, degree-zero normalization, CompleteSpace E as a conclusion; edge cases P=∅/pt and S=∅ are covered. H2 is repaired by the new existing:true definition nodes def-sfb-condensed-free-module-adjunction (InternalBar.free/freeAdjunction, CondensedInternalBarResolution.lean:53,60) and def-sfb-right-derived-single-unit (Functor.rightDerivedSingleUnit, RightDerivedSingleZeroUnit.lean:34). Their TeX matches the Lean constructions, their deps exist live, their statements are verbatim, and no live definition node owns these declarations. The item node differs from live only in stmt_deps/lean, the six other dep records are byte-identical to live, and the dropped theorem deps supply nothing still used. Advisory: conjunct 9 restates rightDerivedSingleUnit_zero and conjunct 8 is formal naturality. No file changed, so no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T082243-L-2154380",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

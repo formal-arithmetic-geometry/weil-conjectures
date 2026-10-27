@@ -8,15 +8,9 @@ module
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.FdCoefficientComparison
 public import Sheaf.Paper.IntegralPullbackComparisonRealization
-import Sheaf.Paper.FiniteFreeConstructibleScalarTransport
-import Sheaf.Paper.QuotientScalarComparisonDescent
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.SfIntegralConstructibleTriangulated
-import Sheaf.Paper.CompletedScalarShift
-import Sheaf.Paper.ScalarCompletionAssociator
-import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
-import Sheaf.CategoryTheory.SemilinearScalarLocalization
+import Sheaf.Paper.FdRawLocalizationScalarCoherence
+import Sheaf.Paper.FdIntegralScalarDescentInputs
+import Sheaf.Paper.FdRawScalarComparisonPackaging
 
 /-! # Coherence of the completion-inverse scalar comparisons
 
@@ -34,8 +28,16 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
+set_option linter.all false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
+attribute [local irreducible] HasDerivedCategory.standard
+  WeilConjectures.FdOrdinaryScalarTransport.complex
+  WeilConjectures.FdOrdinaryScalarTransport.completion
+  WeilConjectures.fdCoefficientTransportFactors
+  AlgebraicGeometry.Scheme.pbcIntegralDatum
+  AlgebraicGeometry.Scheme.completedAdicChangeData
+  AlgebraicGeometry.Scheme.integralDetailedCoefficientComparison
 universe d u w v u' v'
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -93,28 +95,108 @@ def FdInverseScalarCoherence
           (S.assoc (h.trans k) m).hom.app K) ≫
       (F.β ((h.trans k).trans m)).inv.app K))
 
-/-- The quotient-normalized integral comparison retained by the scalar-coherence theorem.
-This records exactly the tensor transport and chi lift of the coefficient datum, without
-its downstream rational or pair-category conclusions.
-Source: trace-definition final sentence, comparison steps 1--3
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
-structure FdCompletionIntegralComparison
+private theorem inverseScalarCocycle
+    {I : Type w} [Preorder I]
+    {C : I → Type u} [∀ i, Category.{v} (C i)]
+    {D : I → Type u'} [∀ i, Category.{v'} (D i)]
+    {S : StageSystem C} {P : StageSystem D} (F : S.Morphism P)
+    {E L M : I} (h : E ≤ L) (k : L ≤ M) (K : C E) :
+    (F.β k).inv.app ((S.T h).obj K) ≫
+      (P.T k).map ((F.β h).inv.app K) ≫
+      (P.assoc h k).hom.app ((F.Φ E).obj K) =
+    (F.Φ M).map ((S.assoc h k).hom.app K) ≫
+      (F.β (h.trans k)).inv.app K := by
+  apply (cancel_epi ((F.Φ M).map ((S.assoc h k).inv.app K))).mp
+  have he := congrArg
+    (fun f ↦ f ≫ (P.assoc h k).hom.app ((F.Φ E).obj K)) (F.coh_inv h k K)
+  simp only [Category.assoc, Iso.inv_hom_id_app] at he
+  erw [Category.comp_id] at he
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  exact he
+
+private theorem inverseScalarCoherence
+    {I : Type w} [Preorder I]
+    {C : I → Type u} [∀ i, Category.{v} (C i)]
+    {D : I → Type u'} [∀ i, Category.{v'} (D i)]
+    {S : StageSystem C} {P : StageSystem D} (F : S.Morphism P) :
+    FdInverseScalarCoherence F := by
+  refine ⟨inverseScalarCocycle F, ?_⟩
+  intro E L M N h k m K
+  have hleft :
+      (F.β m).inv.app ((S.T k).obj ((S.T h).obj K)) ≫
+        (P.T m).map ((F.β k).inv.app ((S.T h).obj K)) ≫
+        (P.T m).map ((P.T k).map ((F.β h).inv.app K)) ≫
+        (P.T m).map ((P.assoc h k).hom.app ((F.Φ E).obj K)) ≫
+        (P.assoc (h.trans k) m).hom.app ((F.Φ E).obj K) =
+      (F.Φ N).map ((S.T m).map ((S.assoc h k).hom.app K) ≫
+        (S.assoc (h.trans k) m).hom.app K) ≫
+        (F.β ((h.trans k).trans m)).inv.app K := by
+    rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
+      Category.assoc, inverseScalarCocycle F h k K, Functor.map_comp, Category.assoc]
+    have hn := (F.β m).inv.naturality ((S.assoc h k).hom.app K)
+    dsimp only [Functor.comp_map] at hn
+    rw [← reassoc_of% hn]
+    rw [inverseScalarCocycle F (h.trans k) m K, ← Functor.map_comp_assoc]
+  refine ⟨hleft, ?_⟩
+  rw [← P.cocycle h k m ((F.Φ E).obj K)]
+  exact hleft
+
+/-- The existing ordinary family, named to share its type across structure declarations.
+Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionOrdinaryFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
     (T : Scheme.{u}) [IsNoetherian T]
     [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
-    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E) where
-  ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
+ :=
+  ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       FdOrdinaryScalarTransport l Ω T h
-  comparison : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
+
+/-- The existing comparison family, named to share its type across structure declarations.
+Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionAmbientFamily
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+ :=
+  ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T).ι ⋙
           integralDetailedTransport T l (pbcFiniteField.{u} l Ω E) ⋙
             pbcAmbientScalarExtension l Ω T h ≅
         GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω T E L h ⋙
           (sfIntegralConstructible l (pbcFiniteField.{u} l Ω L) T).ι ⋙
             integralDetailedTransport T l (pbcFiniteField.{u} l Ω L)
-  chi : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
+
+/-- The existing integral family, named to share its type across structure declarations.
+Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionIntegralFamily
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E) :=
+  ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
+      (stage E).integral.functor ⋙ pbcIntegralScalarExtension l Ω T dT.out iT.out h ≅
+        GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω T E L h ⋙
+          (stage L).integral.functor
+
+/-- The existing quotient-cocone equation, named to keep generated structure recursors
+from repeatedly expanding the derived coefficient presentations.
+Source: the chi field below (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionChi
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [_dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [_iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (ordinary : FdCompletionOrdinaryFamily l Ω T)
+    (comparison : FdCompletionAmbientFamily l Ω T) : Prop :=
+  ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (P : (integralOperationsGoodComplex l (pbcFiniteField.{u} l Ω E) T).FullSubcategory)
     (hP : sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T
       (DerivedCategory.Q.obj P.obj)),
@@ -131,13 +213,180 @@ structure FdCompletionIntegralComparison
         (((fdCoefficientTransport l (pbcFiniteField.{u} l Ω E) T).mapHomologicalComplex
           (.up ℤ)).obj P.obj) ≫
       DerivedCategory.Q.map ((ordinary h).completion l Ω P.obj))
-  integral : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
-      (stage E).integral.functor ⋙ pbcIntegralScalarExtension l Ω T dT.out iT.out h ≅
-        GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω T E L h ⋙
-          (stage L).integral.functor
-  restriction : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
+
+attribute [local irreducible] FdCompletionChi
+
+attribute [local irreducible] AlgebraicGeometry.Scheme.integralDetailedTransport
+
+/-- The original ambient restriction equation.
+Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionRestriction
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
+    (comparison : FdCompletionAmbientFamily l Ω T)
+    (integral : FdCompletionIntegralFamily l Ω T stage) : Prop :=
+  ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
       (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T),
       HEq ((integral h).hom.app K).hom ((comparison h).hom.app K)
+
+attribute [local irreducible] FdCompletionRestriction FdCompletionOrdinaryFamily
+  FdCompletionAmbientFamily FdCompletionIntegralFamily
+
+/-- The quotient-normalized integral comparison retained by the scalar-coherence theorem.
+This records exactly the tensor transport and chi lift of the coefficient datum, without
+its downstream rational or pair-category conclusions.
+Source: trace-definition final sentence, comparison steps 1--3
+(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+structure FdCompletionIntegralComparison
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E) where
+  ordinary : FdCompletionOrdinaryFamily l Ω T
+  comparison : FdCompletionAmbientFamily l Ω T
+  chi : FdCompletionChi l Ω T (@ordinary) (@comparison)
+  integral : FdCompletionIntegralFamily l Ω T stage
+  restriction : FdCompletionRestriction l Ω T stage comparison integral
+
+attribute [local semireducible] FdCompletionOrdinaryFamily FdCompletionAmbientFamily
+  FdCompletionIntegralFamily
+
+/-- The existing finite_functor predicate, shared by the constructor and projections.
+Source: the corresponding scalar-comparison field
+(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionFiniteFunctor
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
+    (family : StageSystem.Morphism
+    (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)
+    (D := pbcStageCategory l Ω T)
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)
+    (pbcScalarSystem l Ω T dT.out iT.out)) : Prop :=
+  ∀ E, HEq (family.Φ E) (stage E).rational.functor
+
+attribute [local irreducible] FdCompletionFiniteFunctor
+
+/-- The existing finite_shift_normalization predicate, shared by the constructor and projections.
+Source: the corresponding scalar-comparison field
+(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionShiftNormalization
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
+    (family : StageSystem.Morphism
+    (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)
+    (D := pbcStageCategory l Ω T)
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)
+    (pbcScalarSystem l Ω T dT.out iT.out))
+    [s : ∀ E, (family.Φ E).CommShift ℤ] : Prop :=
+  ∀ E (n : ℤ),
+    HEq ((family.Φ E).commShiftIso n) ((stage E).rational.functor.commShiftIso n)
+
+attribute [local irreducible] FdCompletionShiftNormalization
+
+/-- The existing scalar_lift predicate, shared by the constructor and projections.
+Source: the corresponding scalar-comparison field
+(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionScalarLift
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
+    (integral : FdCompletionIntegralComparison l Ω T stage)
+    (family : StageSystem.Morphism
+    (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)
+    (D := pbcStageCategory l Ω T)
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)
+    (pbcScalarSystem l Ω T dT.out iT.out)) : Prop :=
+  ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
+    (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T)
+    (K' : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),
+    HEq K' ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) T).obj K) →
+    HEq ((family.β h).hom.app K')
+      ((pbcScalarIntegralComparison l Ω T dT.out iT.out h).hom.app
+          ((stage E).integral.functor.obj K) ≫
+        (pbcStageLocalization l Ω T L).map ((integral.integral h).hom.app K))
+
+attribute [local irreducible] FdCompletionScalarLift
+
+/-- The existing scalar_shift predicate, shared by the constructor and projections.
+Source: the corresponding scalar-comparison field
+(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionScalarShift
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (_stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
+    (family : StageSystem.Morphism
+    (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)
+    (D := pbcStageCategory l Ω T)
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)
+    (pbcScalarSystem l Ω T dT.out iT.out))
+    [s : ∀ E, (family.Φ E).CommShift ℤ] : Prop :=
+  ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
+    NatTrans.CommShift (family.β h).hom ℤ ∧ NatTrans.CommShift (family.β h).inv ℤ
+
+attribute [local irreducible] FdCompletionScalarShift
+
+/-- The existing exact predicate, shared by the constructor and projections.
+Source: the corresponding scalar-comparison field
+(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionExact
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (_stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
+    (family : StageSystem.Morphism
+    (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)
+    (D := pbcStageCategory l Ω T)
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)
+    (pbcScalarSystem l Ω T dT.out iT.out))
+    [s : ∀ E, (family.Φ E).CommShift ℤ] : Prop :=
+  ∀ E, (family.Φ E).IsTriangulated
+
+attribute [local irreducible] FdCompletionExact
+
+/-- The existing unit predicate, shared by the constructor and projections.
+Source: the corresponding scalar-comparison field
+(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+def FdCompletionUnit
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (T : Scheme.{u}) [IsNoetherian T]
+    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    (_stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)
+    (family : StageSystem.Morphism
+    (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)
+    (D := pbcStageCategory l Ω T)
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)
+    (pbcScalarSystem l Ω T dT.out iT.out)) : Prop :=
+  ∀ (E : Padic.FiniteCoefficientFields l Ω)
+    (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),
+    HEq ((family.β (le_refl E)).inv.app K)
+      ((family.Φ E).map
+        ((GeneralAlgebraicallyClosedCoefficients.unitor l Ω T E).hom.app K))
+
+attribute [local irreducible] FdCompletionUnit
 
 /-- Coherence data for the specified integral comparison and its rationalized inverse.
 The stage-system components are identified with the supplied raw identity equivalences;
@@ -153,28 +402,17 @@ structure FdCompletionScalarComparison
     (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E) where
   integral : FdCompletionIntegralComparison l Ω T stage
   family : StageSystem.Morphism
+    (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)
+    (D := pbcStageCategory l Ω T)
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)
     (pbcScalarSystem l Ω T dT.out iT.out)
-  finite_functor : ∀ E, HEq (family.Φ E) (stage E).rational.functor
+  finite_functor : FdCompletionFiniteFunctor l Ω T stage family
   [finite_shift : ∀ E, (family.Φ E).CommShift ℤ]
-  finite_shift_normalization : ∀ E (n : ℤ),
-    HEq ((family.Φ E).commShiftIso n) ((stage E).rational.functor.commShiftIso n)
-  scalar_lift : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
-    (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T)
-    (K' : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),
-    HEq K' ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) T).obj K) →
-    HEq ((family.β h).hom.app K')
-      ((pbcScalarIntegralComparison l Ω T dT.out iT.out h).hom.app
-          ((stage E).integral.functor.obj K) ≫
-        (pbcStageLocalization l Ω T L).map ((integral.integral h).hom.app K))
-  scalar_shift : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
-    NatTrans.CommShift (family.β h).hom ℤ ∧ NatTrans.CommShift (family.β h).inv ℤ
-  exact : ∀ E, (family.Φ E).IsTriangulated
-  unit : ∀ (E : Padic.FiniteCoefficientFields l Ω)
-    (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),
-    HEq ((family.β (le_refl E)).inv.app K)
-      ((family.Φ E).map
-        ((GeneralAlgebraicallyClosedCoefficients.unitor l Ω T E).hom.app K))
+  finite_shift_normalization : FdCompletionShiftNormalization l Ω T stage family
+  scalar_lift : FdCompletionScalarLift l Ω T stage integral family
+  scalar_shift : FdCompletionScalarShift l Ω T stage family
+  exact : FdCompletionExact l Ω T stage family
+  unit : FdCompletionUnit l Ω T stage family
   coherence : FdInverseScalarCoherence family
 
 /-- The specified completion map restricts to an integral isomorphism, and its inverse
@@ -220,6 +458,36 @@ theorem fdCompletionInverseScalarCoherence
     [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
     (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E) :
     Nonempty (FdCompletionScalarComparison l Ω T stage) := by
-  sorry
+  classical
+  obtain ⟨ordinary, comparison, b, hrestriction, hchi, hI, hshift, hexact,
+    hlift, hcocycle, hunit⟩ := fdIntegralScalarDescentInputs _D l _hl Ω T stage
+  obtain ⟨rawFamily, j, hjshift, hjlift, hjunit, hjcocycle, _, _, _⟩ :=
+    FdRawLocalization.rawLocalizationScalarCoherence l Ω T stage _D _hl hI ordinary b
+      hshift hexact hlift hcocycle hunit
+  obtain ⟨F, s, hfinite, hnormalization, hscalarShift, hfiniteExact, hscalarUnit,
+    hscalarLift⟩ := fdRawScalarComparisonPackaging l Ω T stage b rawFamily j
+      hjshift hjlift hjunit hjcocycle
+  let _ : ∀ E, (F.Φ E).CommShift ℤ := s
+  let integral : FdCompletionIntegralComparison l Ω T stage := {
+      ordinary := by unfold FdCompletionOrdinaryFamily; exact @ordinary
+      comparison := by unfold FdCompletionAmbientFamily; exact @comparison
+      chi := by
+        unfold FdCompletionChi
+        exact hchi
+      integral := by unfold FdCompletionIntegralFamily; exact @b
+      restriction := by unfold FdCompletionRestriction; exact hrestriction }
+  exact ⟨{
+    integral := integral
+    family := F
+    finite_functor := by unfold FdCompletionFiniteFunctor; exact hfinite
+    finite_shift := s
+    finite_shift_normalization := by unfold FdCompletionShiftNormalization; exact hnormalization
+    scalar_lift := by unfold FdCompletionScalarLift; exact hscalarLift
+    scalar_shift := by unfold FdCompletionScalarShift; exact hscalarShift
+    exact := by unfold FdCompletionExact; exact hfiniteExact
+    unit := by unfold FdCompletionUnit; exact hscalarUnit
+    coherence := inverseScalarCoherence
+      (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)
+      (D := pbcStageCategory l Ω T) F }⟩
 
 end WeilConjectures

@@ -1,0 +1,122 @@
+{
+ "id": "lem-dl-a1-local-heart-cover-basis-zero",
+ "kind": "statement",
+ "title": "Vanishing on a cover implies vanishing on every basis open",
+ "statement": "Fix a finite-field datum D and coefficient datum c [def-weil-finite-field-fiber], a locally finite-type k0-scheme T, and K in the literal cartesian local heart [def-dl-a1-locally-constructible-adic-heart]. Let I be any indexing type and U_i separated finite-type opens with supremum T. If every component K_(U_i) is a zero object in its common-stage standard heart [def-weil-constructible-heart], then K_V is a zero object for every separated finite-type basis open V. No global Abelian structure on the cartesian category, finite cover, or common coefficient field on T is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.8, Proposition 6.8.14 and Remark 6.8.15; local cartesian heart defects on finite-type affine opens (returned proof Step 12). Stacks Tag 04TQ, sites-lemma-glue-maps."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-dl-a1-locally-constructible-adic-heart",
+  "def-weil-constructible-heart"
+ ],
+ "proof": [
+  {
+   "text": "Assume $K_{U_i}=0$ for all covering members. Fix a basis open $V$ and any geometric point $\\bar v:\\operatorname{Spec}\\Omega\\to V$. Choose $i$ with its underlying point in $U_i$, and then a basis open $W$ containing that point and contained in $V\\cap U_i$. The basis property is stated in [def-dl-a1-locally-constructible-adic-heart]. The cartesian comparison identifies $K_W$ with $r_{W,U_i}K_{U_i}=0$. The geometric point factors through $W$; the pullback-fibre comparison of [lem-per-adic-heart-pullback-fibres] identifies its fibre on $K_V$ with that on $K_W$, hence with zero. The joint conservativity of those fibres on $\\mathcal H_V$ gives $K_V=0$. This proves the asserted vanishing on each basis open. No global abelian structure or defect computation is used.",
+   "uses": [
+    "def-dl-a1-locally-constructible-adic-heart",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent cover detection using the normalized geometric fibres of Section 6.8; blueprint p-dl-a1-exact Steps 1 and 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-dl-a1-locally-constructible-adic-heart",
+  "lem-per-adic-heart-pullback-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Componentwise universal-property argument from local-heart Steps 1--8, following BS Proposition 6.8.14 and Remark 6.8.15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A category of cartesian families of abelian categories is abelian and evaluation preserves finite limits and colimits",
+   "results": "8 hits: Abelian.hasFiniteLimits and evaluation preservation of limits/colimits in ordinary functor categories and homological complexes. These do not construct the specified varying cartesian heart or establish open-cover detection.",
+   "date": "2026-10-25",
+   "verdict": "No match: the local category is not an ordinary functor category in a fixed target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of cartesian families in abelian categories with exact restriction functors is abelian, and evaluation is exact",
+   "results": "8 hits: condensed AB4/AB4Star instances, Grothendieck AB4, AddCommGrp AB4Star, and Functor.exact_tfae. None constructs the literal cartesian adic heart.",
+   "date": "2026-10-25",
+   "verdict": "No match. Exact-functor comparison results are useful after the cartesian abelian construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero",
+   "results": "12 hits including IsZero, IsZero.hasZeroObject, IsZero.iso and isZero_zero. These concern generic zero objects, not cartesian adic families. The separate query kernelComparison, IsIso returned no hits.",
+   "date": "2026-10-25",
+   "verdict": "No match for either cartesian abelian construction or cover detection."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*(heart|[Aa]belian)|isZero.*[Cc]over",
+   "results": "msearch Mathlib grep: 0 hits. Local rg additionally found no cartesian abelian theorem. Sheaf SfConstructibleHeart has abelianity only over the fixed algebraic closure D.k; the existing AdicHeartIntrinsicFibres handles arbitrary base fields via normalized presentation transport.",
+   "date": "2026-10-25",
+   "verdict": "No existing statement of the required two local-heart steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DlLocalHeartCoverDefects",
+  "date": "2026-10-25",
+  "group": "H1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "p-dl-a1-exact",
+   "place": "p-dl-a1-exact.proof.md, Step 1 final sentence and Step 5 final sentence: detection on geometric stalks; componentwise heart construction of lem-dl-a1-local-heart-cover-defects.",
+   "via": [
+    "lem-dl-a1-local-heart-cover-defects"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DlLocalHeartCoverBasisZero",
+  "file": "lean/Sheaf/Paper/DlLocalHeartCoverBasisZero.lean",
+  "declaration": "WeilConjectures.dlLocalHeartCoverBasisZero",
+  "declarations": [
+   "WeilConjectures.dlLocalHeartCoverBasisZero"
+  ],
+  "statement": "theorem dlLocalHeartCoverBasisZero [LocallyOfFiniteType T.hom]\n    (I : Type w) (U : I → DlAdicFiniteOpen D T) (hU : (⨆ i : I, (U i).val) = ⊤)\n    (K : DlLocallyConstructibleAdicHeart D c T)\n    (hK : ∀ i : I, IsZero ((dlAdicLocalEvaluation D c T (U i)).obj K)) :\n    ∀ V : DlAdicFiniteOpen D T, IsZero ((dlAdicLocalEvaluation D c T V).obj K)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T123026-L-1825057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T123026-L-1825057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-quotient-geometric-normalization",
+ "kind": "statement",
+ "title": "Section normalization of the specified geometric tensor and adjunction",
+ "statement": "For every commutative condensed ring Λ and scheme morphism f:X→Y, the actual internal derived pullback tensor transformation and the specified derived adjunction unit and counit obey GeometricCondition of [def-sfb-quotient-section-tensor-data] under the fixed section tensor and derived operation comparisons.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0G7E, 07A4, 07A6; sites-modules.tex Tags 03EK and 03EL. Extracted from lem-sfb-quotient-section-tensor-normalization."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing proved identification leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison and the existing internalDelta_eq_canonical. Then apply section_derived_tensor_normalization and cancel its invertible tensor and pullback comparisons. Finally take the unit and counit clauses of sectionDerivedPushpullNormalization. The native/generic equality is used as a theorem, not rederived here.",
+   "uses": [
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-section-derived-pushpull-normalization",
+    "def-sfb-module-object-projection-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-section-derived-tensor-normalization",
+  "lem-pd-section-derived-pushpull-normalization",
+  "def-sfb-module-object-projection-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The parent proof steps, specialized to the actual condensed coefficient map and fixed internal/section comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars is monoidal and its canonical tensor comparison commutes with pullback and computation counits",
+   "results": "Ordinary module extension, its counit and pseudofunctor composition; monoidal adjunction counit. No exact match for the specified unbounded internal/section comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project generic derived-monoidal API and section comparison interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedTensorComparison",
+   "results": "Unknown identifier: a project declaration outside the Mathlib search environment.",
+   "date": "2026-10-27",
+   "verdict": "Read the existing project declaration directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is a strong monoidal functor, computed on K-flat complexes by the tensor balancing map",
+   "results": "Tor, exact mapDerivedCategory, and ordinary tensor constructions; no direct normalized section comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic derived comparison found locally in WeilConjectures."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalized|ScalarSectionNormalized|SectionPullNormalized",
+   "results": "Mathlib search has no matches. Local search finds the fixed project definitions, the restricted coefficient normalization and the downstream private canonicalScalarTensorIso computations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic computations without importing the circular downstream module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorNormalization",
+  "date": "2026-10-27",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-normalization",
+   "place": "Separated construction and normalization steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientGeometricNormalization",
+  "file": "lean/Sheaf/Paper/QuotientGeometricNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.geometric_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.geometric_normalization"
+  ],
+  "statement": "theorem geometric_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    GeometricCondition Λ f",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "independent cc review: Data split diffed byte-for-byte vs clone item (only blueprint tags differ); item proof vs ComparisonSpec; 3 holes vs plan steps 1/2-5/8; nodes vs Lean; 3 direct importers + all 11 delivered modules compiled in /tmp/t3rev (all OK); #print axioms clean except sorryAx via the 3 holes"
+ }
+}

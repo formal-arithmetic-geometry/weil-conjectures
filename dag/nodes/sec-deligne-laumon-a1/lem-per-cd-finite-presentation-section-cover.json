@@ -1,0 +1,257 @@
+{
+ "id": "lem-per-cd-finite-presentation-section-cover",
+ "kind": "statement",
+ "title": "Finite immersion cover with sections for a completely decomposed morphism",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], locally of finite presentation [def-sbc-locally-finite-presentation]. Assume that $Y$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions] and that for every $y\\in Y$ there is $x\\in X$ with $f(x)=y$ for which the induced map $\\kappa(y)\\to\\kappa(x)$ is an isomorphism [def-weil-residue-field]. Then there exist an integer $n\\geq0$, schemes $Z_1,\\ldots,Z_n$, immersions $i_a:Z_a\\to Y$ [def-weil-closed-immersion] of finite presentation [def-sbc-locally-finite-presentation], and morphisms $s_a:Z_a\\to X$ such that $f\\circ s_a=i_a$ for every $a$ and $|Y|=\\bigcup_{a=1}^n i_a(|Z_a|)$. In particular, $X\\times_Y Z_a\\to Z_a$ has the section induced by $(s_a,1_{Z_a})$ [def-pc-fibre-product]. The empty target permits $n=0$. No Noetherian, separatedness or quasi-compactness hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GTL, label lemma-decompose, all four clauses; the section morphisms are the equivalent reformulation used in the proof of Tag 0GTM, label lemma-descend-cd."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-residue-field",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$. Choose $x\\in X$ as in the hypothesis and write $r:\\kappa(y)\\xrightarrow{\\sim}\\kappa(x)$ for the induced field map. By [lem-weil-pbc-morphism-from-spec-field] there is a canonical $j_x:\\operatorname{Spec}\\kappa(x)\\to X$. Set $\\sigma=j_x\\circ\\operatorname{Spec}(r^{-1})$. The identity $f\\circ j_x=j_y\\circ\\operatorname{Spec}(r)$ of [lem-weil-pbc-residue-field-point-naturality] gives $f\\circ\\sigma=j_y$. Choose an affine open $V=\\operatorname{Spec}A\\subseteq Y$ containing $y$, corresponding to a prime $\\mathfrak p$. The open-immersion clause of the latter node and [lem-weil-pbc-spec-residue-field-identification] identify this pointed map with $\\operatorname{Spec}\\kappa(\\mathfrak p)\\to V\\to Y$ and give a $Y$-map $\\sigma:\\operatorname{Spec}\\kappa(\\mathfrak p)\\to X$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTL, lemma-decompose, proof, first two sentences; Schemes Tags 01J5 and 01HV for the pointed identifications."
+   }
+  },
+  {
+   "text": "Use the following small nonempty directed poset: pairs $(I,F)$ where $I\\subseteq\\mathfrak p$ is a finitely generated ideal and $F\\subseteq A\\setminus\\mathfrak p$ is finite, ordered by inclusion in both coordinates. The upper bound is $(I+J,F\\cup G)$, and $(0,\\varnothing)$ is a least element. Put $t_F=\\prod_{a\\in F}a$ and $B_{I,F}=(A/I)_{t_F}$, with the canonical transition maps. Here localization is as in [def-weil-ring-localization-away]. We verify its colimit directly using [def-weil-pbc-category-colimit]. A cocone of ring maps $B_{I,F}\\to C$ is exactly a ring map $h:A\\to C$ killing $\\mathfrak p$ and sending $A\\setminus\\mathfrak p$ to units: the stage $((a),\\varnothing)$ forces $h(a)=0$ for each $a\\in\\mathfrak p$, and $(0,\\{b\\})$ forces $h(b)$ invertible for each $b\\notin\\mathfrak p$. Conversely these conditions give unique compatible maps from every quotient-localization $B_{I,F}$ by their defining relations. By clauses (c),(d) of [lem-weil-pbc-prime-residue-field-algebra], such $h$ corresponds uniquely to a ring map $\\kappa(\\mathfrak p)\\to C$. This is precisely the colimit universal property, with the canonical maps $B_{I,F}\\to\\kappa(\\mathfrak p)$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTL, lemma-decompose, proof, explicit filtered-colimit sentence; Algebra Tag 00CT, proposition-localize-quotient, and the residue-field discussion."
+   }
+  },
+  {
+   "text": "Let $Z_{I,F}=\\operatorname{Spec}B_{I,F}$ with its structural map $i_{I,F}:Z_{I,F}\\to Y$ through $V$. It is an immersion: first the principal open immersion $\\operatorname{Spec}(A/I)_{t_F}\\to\\operatorname{Spec}(A/I)$ from [lem-weil-pbc-principal-localization-open-immersion], then the quotient closed immersion from [lem-weil-pbc-spec-quotient-closed-immersion], then the open inclusion $V\\to Y$. More explicitly it is a closed immersion into the open $D(t_F)\\subseteq V\\subseteq Y$, cut out by $I A_{t_F}$; this is the factorization in [def-weil-closed-immersion]. If $I=(a_1,\\ldots,a_m)$ then $B_{I,F}=A[T]/(a_1,\\ldots,a_m,t_F T-1)$. Thus at every point the affine source $Z_{I,F}$ and affine target open $V$ witness local finite presentation by [def-sbc-locally-finite-presentation]. The source is affine, hence qcqs by [lem-weil-pbc-affine-scheme-qcqs], and $Y$ is quasi-separated. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] now says $i_{I,F}$ is quasi-compact and quasi-separated, hence of finite presentation. Finally $t_F\\notin\\mathfrak p$ and $I\\subseteq\\mathfrak p$, so the canonical map $B_{I,F}\\to\\kappa(\\mathfrak p)$ yields a point over $y$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "def-weil-closed-immersion",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTL, lemma-decompose, proof, construction of the immersions; Schemes Tags 01I3, 01IG, 03GI and 01KV; Morphisms Tag 01TP."
+   }
+  },
+  {
+   "text": "By Step 2 and [lem-weil-pbc-spec-colimit-limit], the inverse system of affine $Y$-schemes $Z_{I,F}$ has limit $\\operatorname{Spec}\\kappa(\\mathfrak p)$, with its specified map to $Y$. Apply [lem-sfb-scheme-affine-limit-lfp-criterion] with $B=Y$, $U=X$, $g=f$ and this small nonempty directed index set. Its surjectivity says the $Y$-map $\\sigma$ from Step 1 is represented at a stage: for some $(I,F)$ there is $s:Z_{I,F}\\to X$ with $f\\circ s=i_{I,F}$, whose restriction to the limit is $\\sigma$. Step 3 shows that this stage is an immersion of finite presentation and its image contains $y$. No property of $X$ beyond the assumed local finite presentation of $f$ is required by the cited criterion.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-sfb-scheme-affine-limit-lfp-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTL, lemma-decompose, proof, application of Limits Tag 01ZC, proposition-characterize-locally-finite-presentation, (1) implies (2); Limits Tag 01YW."
+   }
+  },
+  {
+   "text": "Choose one resulting pair $(i_y:Z_y\\to Y,s_y:Z_y\\to X)$ for each $y\\in |Y|$. Its images $E_y=i_y(|Z_y|)$ cover $Y$. Each $i_y$ is quasi-compact and locally of finite presentation by Step 3, and $Y$ is qcqs, so [lem-weil-pbc-chevalley-constructible-image] applied to the whole source gives that $E_y$ is constructible. By [lem-weil-pbc-qcqs-scheme-spectral] the underlying space of $Y$ is spectral, and [lem-weil-pbc-spectral-constructible-clopen-constructible-topology] says every $E_y$ is open in its constructible topology. Apply [lem-weil-pbc-spectral-constructible-topology-quasi-compact] to this open covering. Choose its finite subcover, enumerate it by $1,\\ldots,n$, and retain the corresponding immersions and lifts. They have every required property.",
+   "uses": [
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTL, lemma-decompose, proof, final paragraph; Morphisms Tag 054J, lemma-chevalley; Properties Tag 094L; Topology Tag 0901 and its preceding constructible-topology paragraph."
+   }
+  },
+  {
+   "text": "For each retained index $a$, $f\\circ s_a=i_a\\circ 1_{Z_a}$, so the universal property in [def-pc-fibre-product] gives $(s_a,1_{Z_a}):Z_a\\to X\\times_Y Z_a$. Its composite with the second projection is $1_{Z_a}$, which is exactly a section. If $Y$ is empty, take $n=0$; the union of the empty family is empty and all remaining clauses are vacuous.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GTL, lemma-decompose, proof, section of the projection; Tag 0GTM, lemma-descend-cd, notation sigma_i for lifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-sfb-scheme-affine-limit-lfp-criterion",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GTL, lemma-decompose, entire proof (residue-field approximation and compactness in the constructible topology)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completely.decomposed|Nisnevich|decompose.*section",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"1e61aad39c467298\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite covering by immersions of finite presentation with sections of a completely decomposed morphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_openCover_source\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"dfc07f9c0fb0a93c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsImmersion\", \"LocallyOfFinitePresentation\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cover a scheme by finitely many locally closed subschemes on which a rational point lifting morphism has a section",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.OpenCover\"], \"digest\": \"7d5d726cd22e5810\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completely decomposed locally finitely presented morphism over a quasi compact quasi separated scheme has a finite covering by finitely presented immersions with sections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\"], \"digest\": \"a9ca3f5f68308051\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "grep",
+   "query": "completely.decomposed|CompletelyDecomposed|Nisnevich|decompose.*section",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"1e61aad39c467298\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits provide definitions, ordinary scheme covers, or constructibility of images, not finitely presented immersion pieces carrying sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite covering by locally closed finitely presented subschemes with sections of a morphism lifting every residue field point",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.Over\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.Cover.Over.mk.noConfusion\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.Cover.mkOfCovers\", \"AlgebraicGeometry.Scheme.Cover.sigma\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"98dfdfdf99b39363\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits provide definitions, ordinary scheme covers, or constructibility of images, not finitely presented immersion pieces carrying sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsImmersion\", \"LocallyOfFinitePresentation\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits provide definitions, ordinary scheme covers, or constructibility of images, not finitely presented immersion pieces carrying sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completely decomposed locally finitely presented scheme morphism has a finite cover by finitely presented immersions admitting sections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"430e28884c2a71ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits provide definitions, ordinary scheme covers, or constructibility of images, not finitely presented immersion pieces carrying sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism with rational points in every fibre splits over finitely many constructible locally closed subschemes of a quasi compact quasi separated base",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\"], \"digest\": \"76c30d9848ea4ba9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits provide definitions, ordinary scheme covers, or constructibility of images, not finitely presented immersion pieces carrying sections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-nisnevich-cover-limit-descent",
+  "date": "2026-10-24",
+  "group": "Q145"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3 finiteness/duality branch, via the III 3.1.1 approximation input: finite locally closed pieces carrying sections, used to descend the Nisnevich cover. Stacks 0GTL gives the finite-presentation form of this certificate.",
+   "via": [
+    "lem-per-nisnevich-cover-limit-descent",
+    "lem-per-alteration-cover-approximation",
+    "lem-per-uniformization-complete-local-descent",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-cd-finite-presentation-section-cover",
+  "worker": "stage1",
+  "summary": "Followed the complete proof of Stacks 0GTL. Reused all existing generic lemmas: wrote the small directed residue-field approximation and its ring-colimit universal property, checked finite presentation of every immersion using affine presentations and qcqs permanence, factored the pointed lift through the existing 01ZC criterion, and extracted a finite subcover in the constructible topology. No new node or statement change.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, Step 3 finiteness/duality branch, via III 3.1.1 approximation: this proof supplies the finite-presentation immersion certificate used by lem-per-nisnevich-cover-limit-descent. Latest blueprint proof and unit read; this is a generic approximation tool below the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-scheme-affine-limit-lfp-criterion",
+    "why": "Generic Scheme local finite presentation characterized by affine limit tests tool, used with its stated hypotheses in the 0GTL approximation/compactness argument; this unit has no replacement for this scheme/topology fact."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+    "why": "Generic Constructible subsets of a spectral space are open and closed in the constructible topology tool, used with its stated hypotheses in the 0GTL approximation/compactness argument; this unit has no replacement for this scheme/topology fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-scheme-affine-limit-lfp-criterion",
+  "lem-weil-pbc-spectral-constructible-clopen-constructible-topology"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-77c79d56d",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-77c79d56d (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement matches Stacks 0GTL (more-morphisms.tex, lemma-decompose) clause by clause: completely decomposed is defined inline, f is locally of finite presentation, Y is qcqs, and the conclusions are covering, immersions and finite presentation. The section clause (4) is given in the equivalent form f∘s_a=i_a. The empty case n=0 is correct. The delivery has no new nodes and is not a re-split. Step 1: σ=j_x∘Spec(r^{-1}) satisfies f∘σ=j_y by the naturality node. Passing to Spec κ(p)→V→Y uses the open-immersion clause and j_p=Spec(e^{-1}∘π). Step 2 (elementary): the index of finitely generated I⊆p and finite F⊆A∖p is small and directed, with t_F|t_G for F⊆G. The cocone characterisation is correct, and prime-residue-field-algebra (c),(d) give κ(p) as the colimit. Step 3: (A/I)_{t_F}=A_{t_F}/IA_{t_F} is closed in D(t_F)⊆V⊆Y, the presentation A[T]/(a_i,t_FT−1) is correct, and qcqs-permanence (1) gives finite presentation. Step 4: Spec κ(p) is the limit by 01YW, and the 01ZC criterion (no condition on X) gives a stage lift over Y. Step 5: 054J, 094L, the clopen node and 0901 give a finite subcover, each with its hypotheses checked. Step 6: the section comes from the fibre-product universal property. Edge cases checked: empty Y, a field, a prime that is not finitely generated, and X neither quasi-compact nor separated. Duplicates: only the Noetherian ILO II 2.2.3/2.2.4 nodes come close, and they do not apply to an arbitrary qcqs Y. There is no cycle. I accept the declared tool uses of lem-sfb-scheme-affine-limit-lfp-criterion and the spectral-clopen node."
+ }
+}

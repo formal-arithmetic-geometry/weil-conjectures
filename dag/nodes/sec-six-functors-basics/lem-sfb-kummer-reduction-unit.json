@@ -1,0 +1,182 @@
+{
+ "id": "lem-sfb-kummer-reduction-unit",
+ "kind": "statement",
+ "title": "Unshifted Kummer reduction with its positive boundary adjunct",
+ "statement": "Let l be prime, T a scheme with l invertible in global sections, k the Kummer short exact sequence of [def-sp-tower-class-systems], and r any Reduction [def-sp-tower-class-reduction] for the actual ring system Rrings of [def-sp-tower-class-coefficients]. There are an Rrings-module system M, an isomorphism i from its underlying abelian tower to roots l T, and an isomorphism a from r applied to degree-zero units to M[1]. The adjunct of a, followed by the forgetful shift comparison, the shifted single comparison and i[1], equals k.exact.singleδ. This asserts only the unshifted target comparison; the integer source and the shift from degree one to degree two are absent.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+ },
+ "proof": [
+  {
+   "text": "Apply the variable-power reduction triangle to k.power and its prescribed components. Its second arrow is the actual unit of the supplied derived adjunction, and its first arrow is single(k.power).",
+   "uses": [
+    "lem-sfb-power-system-reduction-triangle",
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous reduction; triangle and cohomology realization"
+   }
+  },
+  {
+   "text": "Rotate the distinguished single triangle of the supplied Kummer short exact sequence once. Its first map is also single(k.power) and its second map is the positive boundary k.exact.singleδ. Complete the identity square on the first two objects to a morphism of distinguished triangles. The triangulated five lemma makes its third map e an isomorphism from the underlying derived reduction to roots[1], with unit followed by e equal to the positive Kummer boundary. This is the proved helper boundary_comparison; no equality is inferred by levelwise evaluation.",
+   "uses": [
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous reduction; triangle and cohomology realization"
+   }
+  },
+  {
+   "text": "The section and morphism prescriptions make r.forget.F faithful, as proved by forget_faithful. Its exact derived functor reflects concentration in degree -1. The isomorphism e therefore makes the actual Rrings-linear reduction pure of degree -1. The existing derived-category single-object representation supplies M and a: reduction ≅ M[1]. Form q by the inverse canonical forgetful shift/single comparisons, the inverse image of a, and e. The shifted degree-zero single functor on abelian towers is fully faithful, so q uniquely comes from an abelian-tower isomorphism i:forget(M) ≅ roots. Its preimage equation gives forget(a) followed by the canonical comparisons and i[1] equal to e. These steps are all proved in lift_shifted_single, with no full faithfulness assertion about derived forgetting.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous reduction; triangle and cohomology realization"
+   }
+  },
+  {
+   "text": "Expand the derived-adjunction homEquiv as its unit followed by the forgetful image. Substitute the equation of lift_shifted_single and then the unit-boundary equation of boundary_comparison. The resulting equality is exactly the statement.",
+   "uses": [
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous reduction; triangle and cohomology realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-power-system-reduction-triangle",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), coefficient resolution and its adjunction unit; F7 triangle and pure-cohomology assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The left adjoint of forgetting sheaves of modules sends the constant integer sheaf to the coefficient ring, including derived extension",
+   "results": "constantSheafΓAdj, constantSheafAdj, PullbackConstruction.adjunction, forgetToSheafModuleCat; no normalized derived extension on abelian towers",
+   "date": "2026-10-27",
+   "verdict": "Ordinary sheaf adjunction APIs only; no match for these tower comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with quotient ring applied to multiplicative units sheaf is Kummer roots of unity shifted by one",
+   "results": "CommRing.Pic.mapAlgebra, CommRing.Pic.mk_tensor, relativeDifferentials_obj and tensorH1CotangentOfIsLocalization; no Kummer-derived-system comparison",
+   "date": "2026-10-27",
+   "verdict": "No match for the unshifted system comparison or the integer source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCommShift",
+   "results": "leftAdjointCommShift, commShift_of_rightAdjoint, leftAdjointCommShift_commShiftIso",
+   "date": "2026-10-27",
+   "verdict": "Used for the proved assembly after the unshifted comparisons; does not supply either existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_normalizedKummerReduction|DerivedExtension|sourceNormalization|targetNormalization|IntegerModules",
+   "results": "TowerClassReduction defines normalizations. ReductionSingleCohomologyNormalization treats one constant exponent on a site. SystemScalarModel supplies normalized derived adjunctions for ringed-site module endpoints. No theorem identifies the present variable-exponent system.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic APIs in the source plan; retain the variable-exponent Kummer step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedKummerReduction",
+  "date": "2026-10-27",
+  "group": "G8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "Unshifted Kummer reduction with its positive boundary adjunct",
+   "via": [
+    "lem-sfb-normalized-kummer-reduction",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerReductionUnit",
+  "file": "lean/Sheaf/Paper/KummerReductionUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_kummerReductionUnit",
+  "statement": "theorem exists_kummerReductionUnit (l : ℕ) [Fact l.Prime]\n    (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (k : Kummer l T)\n    (r : Reduction T (Rrings l T)) :\n    ∃ (M : Systems T (Rrings l T)) (i : r.forget.F.obj M ≅ roots l T)\n      (a : r.derived.obj ((DerivedCategory.singleFunctor (Ab T) 0).obj (units T)) ≅\n        ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj M)⟦(1 : ℤ)⟧),\n      (r.derivedAdjunction.homEquiv _ _) a.hom ≫\n        (r.forget.F.mapDerivedCategory.commShiftIso (1 : ℤ)).hom.app\n          ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj M) ≫\n        ((r.forget.F.mapDerivedCategorySingleFunctor 0).hom.app M)⟦(1 : ℤ)⟧' ≫\n        ((DerivedCategory.singleFunctor (Ab T) 0).map i.hom)⟦(1 : ℤ)⟧' =\n          k.exact.singleδ",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.NormalizedKummerReduction",
+  "worker": "stage3",
+  "summary": "Unshifted Kummer reduction with its positive boundary adjunct",
+  "blueprint": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The existing K-flat universal pair on the sequence site, preserving its counit."
+   },
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Uniqueness of quotient actions makes the roots comparison linear."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T034652-L-3672577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261027T050556-L-239387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

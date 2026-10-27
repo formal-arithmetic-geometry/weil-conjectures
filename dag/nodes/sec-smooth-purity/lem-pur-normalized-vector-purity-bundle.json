@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-normalized-vector-purity-bundle",
+ "kind": "statement",
+ "title": "Normalized vector-bundle purity family",
+ "statement": "The independently integration-normalized family exists and is invertible on every ordinary unbounded input, with the unique restricted purity isomorphism and coefficient-unit orientation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2; assembly step 3, normalized transpose in the published vector-purity coordinates"
+ },
+ "stmt_deps": [
+  "def-pur-vector-purity-normalization"
+ ],
+ "proof": [
+  {
+   "text": "The adopted finite-coefficient projection theorem isIso_projectionMap_of_finite makes the twist-first natural projection invertible. Define c as inverse projection followed by tensoring the integration trace and the left unitor. Transpose each component under the Brown adjunction. Naturality of c and homEquiv_naturality_left_square give a natural transformation gamma, and the adjunction inverse identity gives its counit equation. These are the construction and normalization in private normalized_of_iso_mates. Private normalized_etale_general specializes the categorical construction at the abstract coefficient-category interface, private normalized_finite_general then specializes to ModuleCat A while retaining the native ordinaryFiniteUnit target of the trace; the public proof substitutes the vector projection; this preserves all canonical functors and projection components.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Private swap_mate_isIso conjugates the coefficient-first counit by the canonical source braiding. Expand the coefficient-first projection, invert its three factors, cancel the source braiding, and use braiding naturality at the trace and braiding-unit compatibility to obtain exactly the twist-first counit c. Adjunction naturality identifies its adjunct with the source braiding followed by the established vectorIntegrationMate_isIso adjunct. Both factors are invertible. The finite-unit comparison hom is the identity by singleFunctorObjUnitIso_inv and hom_inv_id. This proves invertibility of gamma at every ordinary unbounded input.",
+   "uses": [
+    "lem-amb-vector-integration-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the inverse of the natural isomorphism gamma to the constructible finite-Tor full subcategory. Its inverse has the required normalization. Any other normalized restricted isomorphism has the same inverse components: cancel the invertible projection, then apply injectivity of the adjunction Hom bijection. This proves the unique restricted purity family.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let e be tensoring the pullback-unit comparison with W followed by the right unitor. The source-library projectionMap_rightUnitality gives projection at the unit followed by L(e.hom) equal to the right unitor. Invert this equation. Compose the unit component of gamma with e.inv and transpose: naturality of the right unitor and equality of the two unit unitors reduce the resulting counit to t. Thus inverse gamma at the unit followed by e is the required coefficient orientation. Injectivity of the same adjunction Hom bijection proves uniqueness of this orientation. All of this is a categorical calculation and does not impose any additional geometric, rank or coefficient hypothesis.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-vector-integration-mate"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Integration transpose and unit normalization; K7 implements the categorical assembly from the established integration mate, keeping the stated unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change and direct sums and scalar extension preserve integration normalized vector bundle purity",
+   "results": "IsBaseChange.directSum; IsBaseChange.directSumPow; LinearMap.baseChangeHom; TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "date": "2026-10-25",
+   "verdict": "No match: algebraic module base change does not state the compact-support trace transpose with these canonical maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transposes of compact support trace are compatible with base change direct sums and change of coefficients",
+   "results": "LinearMap.trace_baseChange; LinearMap.trace_comp_comm; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-25",
+   "verdict": "No match: generic linear traces and scalar adjunctions are not the specified ordinary-etale compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "integrationCounit|IntegrationGammaNormalized|PurityBaseChangeEquation|PurityDirectSumEquation|PurityScalarReductionEquation",
+   "results": "0 Mathlib matches for the project-specific counit and compatibility predicates",
+   "date": "2026-10-25",
+   "verdict": "No published Mathlib result uses this project-specific integration normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vector bundle integration counit compatibility with geometric base change and scalar extension",
+   "results": "VectorBundleCore.inCoordinates_eq; inCoordinates_apply_eq₂; hom_trivializationAt; ContinuousLinearMap.inCoordinates_eq; Pretrivialization.continuousLinearMap; Bundle.ContinuousLinearMap.vectorPrebundle",
+   "date": "2026-10-25",
+   "verdict": "No match: these are topological coordinate formulas, not ordinary-etale integration counits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorBundlePurity",
+  "date": "2026-10-25",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "integration and Steps 4--6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedVectorPurityBundle",
+  "file": "lean/Sheaf/Paper/NormalizedVectorPurityBundle.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorBundleNormalized",
+  "statement": "theorem vectorBundleNormalized (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (B : Scheme.{u}) [IsNoetherian B] (hB : IsUnit (N : Γ(B, ⊤))) (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d] : let := (Etale.vectorIntegration_geometry B d F).1 let := (Etale.vectorIntegration_geometry B d F).2.1 VectorPurityFunctorConclusion A (VectorBundleZeroSection.π B d F) (Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) B) (Etale.vectorIntegrationCoefficient A N hA B d F) (Etale.vectorBundleIntegration N hN A hA B hB d F ≫ (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) B).hom) ∧ ∃ γ : VectorPurityGamma A N hA B d F, VectorPurityGammaNormalized A N hN hA B hB d F γ ∧ ∀ K : Etale.DerivedCategoryModule A B, IsIso (γ.app K)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261025T210755-L-3589124",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261026T235915-L-1467693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

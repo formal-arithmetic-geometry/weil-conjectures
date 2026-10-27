@@ -1,0 +1,394 @@
+{
+ "id": "lem-trf-finite-algebra-affinoid-presentation",
+ "kind": "statement",
+ "title": "Finite algebras over strict affinoids admit Tate quotient presentations",
+ "statement": "Let $K$ be a field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. Let $A\\ne0$ be a commutative $K$-algebra admitting a surjective $K$-algebra map $K\\langle X_1,\\ldots,X_r\\rangle\\to A$ from the restricted-series ring [def-trf-restricted-series-presentation]. Let $B\\ne0$ be a commutative unital $A$-algebra which is a finitely generated $A$-module [def-weil-finitely-generated-module]; its $K$-algebra structure is the composite through $A$. There exist $m\\ge0$ and a surjective $K$-algebra homomorphism $q:K\\langle Y_1,\\ldots,Y_m\\rangle\\to B$ such that $\\|b\\|_q=\\inf_{q(f)=b}\\|f\\|_G$ is a complete nonarchimedean submultiplicative $K$-algebra norm on $B$, with $\\|\\lambda b\\|_q=|\\lambda|\\|b\\|_q$. Thus $B$ has an affinoid quotient presentation in the sense of [def-trf-restricted-series-presentation]. No injectivity of $A\\to B$, reducedness, or separability is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Theorem 1.2.6(3), printed p.6 (PDF p.6), with the quotient-norm construction immediately preceding Exercise 1.2.4, printed pp.5–6. Read online 2026-10-24; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $T=K\\langle X_1,\\ldots,X_r\\rangle$ and let $\\alpha:T\\twoheadrightarrow A$ be the given map. Choose $A$-module generators $b_1,\\ldots,b_s$ of $B$ using [def-weil-finitely-generated-module]. They also generate $B$ as an $A$-algebra, since every element is already an $A$-linear combination of them. By [lem-weil-pbc-finite-algebra-is-integral], for each $i$ choose a monic relation $b_i^{d_i}+\\sum_{j<d_i}u_{ij}b_i^j=0$, with $u_{ij}\\in A$. Here $d_i\\ge1$: a degree-zero monic relation would assert $1=0$ in the nonzero ring $B$. Lift each $u_{ij}$ to $v_{ij}\\in T$ by surjectivity of $\\alpha$. No lift of a ring homomorphism or injectivity of $A\\to B$ is required.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00GK (lemma-finite-is-integral); finite-module generators and coefficient lifting."
+   }
+  },
+  {
+   "text": "All $\\|v_{ij}\\|_G$ are finite by [lem-trf-restricted-series-gauss-completion]. Choose $\\pi\\in K$ with $0<|\\pi|<1$, possible by nontriviality of the absolute value (invert an element of absolute value greater than one if necessary). For each $i$ choose $N_i\\ge0$ large enough that $|\\pi|^{N_i(d_i-j)}\\|v_{ij}\\|_G\\le1$ for every $j<d_i$, and put $c_i=\\pi^{N_i}$, $e_i=c_ib_i$, $a_{ij}=c_i^{d_i-j}v_{ij}$. The choice exists because there are finitely many positive exponents $d_i-j$ and $|\\pi|^N\\to0$. Coefficientwise scaling gives $\\|a_{ij}\\|_G\\le1$. Multiplying the relation of step 1 by $c_i^{d_i}$ yields $e_i^{d_i}+\\sum_{j<d_i}\\alpha(a_{ij})e_i^j=0$. Since $c_i$ is a nonzero scalar, $b_i=c_i^{-1}e_i$, so the $e_i$ still generate $B$ over $A$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent scaling argument for the finite-algebra assertion of Conrad Theorem 1.2.6(3); coefficient Gauss norms as in Bosch section 1.2."
+   }
+  },
+  {
+   "text": "Set $P=T[Y_1,\\ldots,Y_s]$, $D=K\\langle X_1,\\ldots,X_r,Y_1,\\ldots,Y_s\\rangle$ and $f_i=Y_i^{d_i}+\\sum_{j<d_i}a_{ij}Y_i^j$. The polynomial universal property [def-weil-pbc-mv-polynomial-ring] gives evaluation $P\\to B$ through $\\alpha$ and $Y_i\\mapsto e_i$. It is surjective: lift the finitely many $A$-coefficients in any linear combination of the $e_i$ to $T$. The relations of step 2 vanish under this map, so it factors through a surjection $P/(f_i)\\to B$; explicitly two representatives differing by $\\sum h_if_i$ have the same evaluation. Apply [lem-trf-tate-separated-monic-quotient], whose hypotheses $d_i\\ge1$, separate $Y_i$ dependence, and coefficient norms at most one were verified in steps 1–2. Its canonical isomorphism $P/(f_i)\\simeq D/(f_i)$ gives a surjection $q:D\\twoheadrightarrow B$ by composing the quotient map, the inverse isomorphism, and evaluation. It is a $K$-algebra map by construction. Set $m=r+s$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-tate-separated-monic-quotient",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2 Theorem 8 and Proposition 14 proof; separate-monic quotient comparison followed by evaluation."
+   }
+  },
+  {
+   "text": "Put $I=\\ker(q)$. The fibres of $q$ are exactly the cosets of $I$, so $D/I\\to B$, $f+I\\mapsto q(f)$, is a bijective $K$-algebra homomorphism. By [lem-trf-tate-ideal-best-approximation], the infimum of the Gauss norms in every coset of $I$ is attained. In particular, $I$ is closed: if $f$ is a limit of elements of $I$, its distance to $I$ is zero, and a minimizing $g\\in I$ satisfies $\\|f-g\\|_G=0$, hence $f=g\\in I$. The algebra $D$ has a complete submultiplicative norm by [lem-trf-restricted-series-gauss-completion]; its scalar equality follows directly from the coefficient supremum. Thus [lem-trf-banach-closed-ideal-quotient] applies to $R=D$ and this closed ideal $I$. Transfer its complete submultiplicative homogeneous quotient norm through the displayed bijection. Since $q^{-1}(q(f))=f+I$, its formula is exactly $\\|b\\|_q=\\inf_{q(f)=b}\\|f\\|_G$ required in the statement.",
+   "uses": [
+    "lem-trf-tate-ideal-best-approximation",
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-banach-closed-ideal-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3 Corollary 9 and section 1.4 Proposition 4(i)–(iii), printed pp.21 and 23; generic quotient completeness supplied by Mathlib."
+   }
+  },
+  {
+   "text": "For $b,b'\\in B$, choose minimizing representatives $f,f'\\in D$ by [lem-trf-tate-ideal-best-approximation]. Then $q(f+f')=b+b'$ and the Gauss maximum bound of [lem-trf-restricted-series-gauss-completion] gives $\\|b+b'\\|_q\\le\\|f+f'\\|_G\\le\\max(\\|f\\|_G,\\|f'\\|_G)=\\max(\\|b\\|_q,\\|b'\\|_q)$. This proves the additional nonarchimedean inequality. Also $\\|1\\|_q\\le\\|1\\|_G=1$, while $B\\ne0$ and submultiplicativity give $0<\\|1\\|_q\\le\\|1\\|_q^2$, so $\\|1\\|_q=1$. All clauses of an affinoid quotient presentation [def-trf-restricted-series-presentation] now hold for $q$. The construction applies to nonreduced algebras and noninjective structure maps; it uses only the finite-module hypothesis and the assumed nonzero rings.",
+   "uses": [
+    "lem-trf-tate-ideal-best-approximation",
+    "lem-trf-restricted-series-gauss-completion",
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Proposition 4, explicit maximum-inequality and unit checks from minimizing representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-trf-restricted-series-gauss-completion",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-tate-separated-monic-quotient",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-trf-tate-ideal-best-approximation",
+  "lem-trf-banach-closed-ideal-quotient",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Theorem 1.2.6(3), PDF p.6, gives the result without a proof here. Agent proof by scaled monic relations, using Bosch (2008) section 1.2 Theorem 8 and section 1.4 Proposition 4, both read online; archival copies WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite commutative algebra over an affinoid algebra is an affinoid algebra with a Banach quotient norm",
+   "results": {
+    "t": "2026-10-24T09:31:54Z",
+    "tool": "leanfinder",
+    "query": "Every finite commutative algebra over an affinoid algebra is an affinoid algebra with a Banach quotient norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "instFiniteTypeCarrierObjCommAlgCat",
+     "Algebra.instEssFiniteTypeQuotientIdeal",
+     "AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "spectralNorm.completeSpace",
+     "AlgebraicGeometry.Scheme.Hom.finite_app"
+    ],
+    "digest": "005bc386b9354c7a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion surjectivity and ordinary finite-algebra definitions do not construct a strict affinoid quotient presentation or its Banach norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module finite commutative algebra over a Tate algebra admits a surjective homomorphism from a Tate algebra and a complete quotient Gauss norm",
+   "results": {
+    "t": "2026-10-24T09:36:05Z",
+    "tool": "leanfinder",
+    "query": "A module finite commutative algebra over a Tate algebra admits a surjective homomorphism from a Tate algebra and a complete quotient Gauss norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AdicCompletion.surjective_evalₐ",
+     "AdicCompletion.evalOneₐ_surjective",
+     "Algebra.SubmersivePresentation.cotangentComplexAux_surjective",
+     "AdicCompletion.ofTensorProduct_surjective_of_finite",
+     "AdicCompletion.kerProj_surjective",
+     "AdicCompletion.kerProj",
+     "surjective_fontaineTheta",
+     "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq"
+    ],
+    "digest": "65d879c2800547ad"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion surjectivity and ordinary finite-algebra definitions do not construct a strict affinoid quotient presentation or its Banach norm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite commutative algebra over a strict affinoid algebra is a strict affinoid algebra",
+   "results": {
+    "t": "2026-10-24T09:39:36Z",
+    "tool": "leansearch",
+    "query": "Every finite commutative algebra over a strict affinoid algebra is a strict affinoid algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgHom.Finite",
+     "Algebra.Etale.formallyEtale",
+     "AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+     "Algebra.Smooth.finitePresentation",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "Algebra.QuasiFinite.recOn",
+     "Algebra.smooth_iff",
+     "Algebra.IsAlgebraic.of_finite"
+    ],
+    "digest": "9e4dc6d65d33cfe1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion surjectivity and ordinary finite-algebra definitions do not construct a strict affinoid quotient presentation or its Banach norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite\", \"NormedAlgebra\"",
+   "results": {
+    "t": "2026-10-24T09:39:36Z",
+    "tool": "loogle",
+    "query": "\"Module.Finite\", \"NormedAlgebra\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion surjectivity and ordinary finite-algebra definitions do not construct a strict affinoid quotient presentation or its Banach norm."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|restricted.*series|affinoid",
+   "results": {
+    "t": "2026-10-24T09:36:00Z",
+    "tool": "grep",
+    "query": "TateAlgebra|RestrictedPowerSeries|restricted.*series|affinoid",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean"
+    ],
+    "digest": "d9971d9d4126cfac"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AdicCompletion surjectivity and ordinary finite-algebra definitions do not construct a strict affinoid quotient presentation or its Banach norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite commutative algebra over a strict affinoid algebra is a quotient of a Tate algebra with complete quotient Gauss norm",
+   "results": {
+    "t": "2026-10-24T13:51:55Z",
+    "tool": "leanfinder",
+    "query": "Every finite commutative algebra over a strict affinoid algebra is a quotient of a Tate algebra with complete quotient Gauss norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.instEssFiniteTypeQuotientIdeal",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient_apply",
+     "AlgHom.IsArithFrobAt.finite_quotient",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply",
+     "exists_integral_inj_algHom_of_quotient",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient",
+     "PowerSeries.algEquivQuotientWeierstrassDistinguished",
+     "IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion"
+    ],
+    "digest": "0cbf14320c99392f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary module-finite/integral and formal adic statements do not construct a Tate quotient presentation. The general closed-ideal quotient norm is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module finite algebra over a Tate algebra is a strict affinoid Banach algebra",
+   "results": {
+    "t": "2026-10-24T13:54:52Z",
+    "tool": "leansearch",
+    "query": "A module finite algebra over a Tate algebra is a strict affinoid Banach algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.finite_algebraMap",
+     "AlgHom.Finite",
+     "Algebra.QuasiFinite.recOn",
+     "Algebra.finite_iff_isIntegral_and_finiteType",
+     "Module.Finite.finiteType",
+     "Algebra.finite_of_essFiniteType_of_isAlgebraic",
+     "RingHom.Finite",
+     "Algebra.QuasiFinite.casesOn"
+    ],
+    "digest": "59b442ea953a97b2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary module-finite/integral and formal adic statements do not construct a Tate quotient presentation. The general closed-ideal quotient norm is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite\", \"NormedAlgebra\"",
+   "results": {
+    "t": "2026-10-24T13:54:52Z",
+    "tool": "loogle",
+    "query": "\"Module.Finite\", \"NormedAlgebra\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary module-finite/integral and formal adic statements do not construct a Tate quotient presentation. The general closed-ideal quotient norm is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|restricted.*series",
+   "results": {
+    "t": "2026-10-24T13:54:51Z",
+    "tool": "grep",
+    "query": "TateAlgebra|affinoid|restricted.*series",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean"
+    ],
+    "digest": "d9971d9d4126cfac"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary module-finite/integral and formal adic statements do not construct a Tate quotient presentation. The general closed-ideal quotient norm is separately recorded as a Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-finite-galois-envelope",
+  "date": "2026-10-24",
+  "group": "Q64"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid. Supporting input: Finite Galois envelopes after Tate normalization. Supporting input after finite integral closure: algebraically finite algebras remain strict affinoid.",
+   "via": [
+    "lem-trf-affinoid-finite-galois-envelope",
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-finite-algebra-affinoid-presentation",
+  "worker": "stage1",
+  "summary": "Q21 constructs the surjection using scaled integral module generators and separate bounded monic relations. One new statement-only analytic comparison lemma isolates the non-elementary polynomial/Tate quotient identification. One general closed-ideal quotient norm fact is a Mathlib leaf. Existing Tate best approximation and Gauss completeness supply closedness and the maximum norm bound. Statement unchanged; no Lean attachment.",
+  "blueprint": "Historical analytic input under lem-trf-local-term-locality through the finite-Galois-envelope normalization chain, as already recorded in blueprint.from. The current latest blueprint local-term proof uses contracting correspondences, and this below-node analytic split does not change that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic finite-ring-map integrality tool (Stacks 00GK), used only to obtain monic equations for module generators; the analytic unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-algebra-is-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-a57d6a33b",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-a57d6a33b (reviewer sub-agent of L); spot-checked: Read in full: the item (statement byte-identical to the live base), both new nodes, every cited statement, and Mathlib/Analysis/Normed/Group/Quotient.lean. Step 1: the 00GK integrality leaf gives monic relations; d_i>=1 because B is nonzero; coefficients lift because alpha is surjective. Step 2: the scaling exponents c_i^{d_i-j} check out and the step is elementary. Step 3: polynomial evaluation P->B is surjective and kills the f_i; the hypotheses of the separated-monic lemma (d_i>=1, coefficients in T, norm <=1) are met, and q is a K-algebra surjection. Step 4: ker q is closed by best approximation (any ideal of T_{r+s}); the leaf gives the complete quotient norm, and the infimum formula transfers exactly because q^{-1}(q f)=f+I. Step 5: the maximum bound and norm(1)=1 hold, using B nonzero. New lem-trf-tate-separated-monic-quotient: true (one relation follows from the existing lem-trf-tate-weierstrass-norm-division with a unique remainder; several relations need a genuine induction because the coefficient ring stops being a Tate algebra). Tested on s=0, Y-a with |a|<=1, and Y^d; with |a|>1, Y-a is a unit of K<Y>, so the coefficient bound is needed. Not a duplicate and not a restatement of the item. New Mathlib leaf: lines 267, 434, 513 and 518 (normedSpace at 463) checked, one declaration per clause. FIX (B3): the leaf cited 'normed field' to def-weil-field, which defines only a field; I wrote out the absolute-value axioms (fixes/dag/nodes/sec-trace-formula/lem-trf-banach-closed-ideal-quotient.json). There is no cycle and the blueprint has no matching text, so same_as [] is right. The worker's tool_uses entry for the Mathlib leaf lem-weil-pbc-finite-algebra-is-integral is harmless and accepted. Conrad and Bosch are not local (WANTED). No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteAlgebraAffinoidPresentation",
+  "declaration": "RestrictedSeries.finite_algebra_affinoid_presentation",
+  "file": "lean/Sheaf/RingTheory/FiniteAlgebraAffinoidPresentation.lean",
+  "statement": "theorem finite_algebra_affinoid_presentation (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (A : Type v) [CommRing A] [Nontrivial A] [Algebra K A] (B : Type w) [CommRing B] [Nontrivial B] [Algebra A B] [Algebra K B] [IsScalarTower K A B] [Module.Finite A B] (hA : ∃ (r : ℕ) (α : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* A), Function.Surjective α ∧ α.comp (constants K r) = algebraMap K A) : ∃ N : RingNorm B, @IsAffinoidQuotient K _ _ B { N.toNormedRing, ‹CommRing B› with } (algebraMap K B) ∧ IsNonarchimedean (N : B → ℝ) ∧ ∀ (c : K) (b : B), N (c • b) = ‖c‖ * N b",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bbd81bd2",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Item node changed only in its lean record; statement verbatim. Lean hypotheses match the node with nothing stronger: complete nontrivially normed ultrametric K; nonzero A with a surjective ring map from the restricted-series ring compatible with constants; nonzero B, Module.Finite A B, K-structure via IsScalarTower. Conclusion: ∃ RingNorm N on the given ring with the dependency's IsAffinoidQuotient (complete, ∃ m q surjective K-compatible, N = sInf of Gauss norms over the fibre of q), IsNonarchimedean, and the scalar equality; true by the closed-ideal quotient norm. Edge cases r=m=0, sInf sets nonempty and bounded below, independent universes. Docstrings carry the source and blueprint id and all 5 proof steps; only sorry; no definitions; report has both sections; no duplicate found in project lean. No file changed, no compile run; the worker reports a clean scompile. No findings."
+ }
+}

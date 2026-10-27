@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-space-smooth-reduced-locality",
+ "kind": "statement",
+ "title": "Reducedness is local for smooth maps of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a smooth morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Smoothness is tested on etale scheme charts using [def-sbc-smooth-morphisms]. An algebraic space is reduced if its etale scheme charts are reduced, meaning that all their local rings have no nonzero nilpotents. If $Y$ is reduced, then $X$ is reduced. If $f$ is surjective on underlying field-valued point classes [def-a1-space-point-topology] and $X$ is reduced, then $Y$ is reduced.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0GB3 (lemma-reduced-local-smooth), both assertions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-reduced-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "First establish the scheme ascent implication. Let $h:T\\to W$ be a smooth map of schemes and suppose $W$ reduced. For each $t\\in T$, take smooth affine charts $\\operatorname{Spec}B\\subset T$, $\\operatorname{Spec}A\\subset W$ around $t,h(t)$, with image in the latter. By [def-sbc-smooth-morphisms], smoothness is affine-locally smoothness of $A\\to B$. The ring $A$ is reduced by [def-pc-reduced-scheme], so [lem-sfb-smooth-algebra-over-reduced-ring] gives that $B$ is reduced. These neighbourhoods cover $T$, and their reduced local rings are the local rings of $T$. Thus $T$ is reduced. This applies in particular to etale scheme maps in the sense of [def-weil-etale-morphism], used for the charts of [def-trf-algebraic-space]: they are smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres].",
+   "uses": [
+    "lem-sfb-smooth-algebra-over-reduced-ring",
+    "def-sbc-smooth-morphisms",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-weil-etale-morphism",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 033B (lemma-reduced-goes-up), 00TA (lemma-smooth-syntomic), 00HT (lemma-flat-localization), 00HR (lemma-local-flat-ff), 05CK (lemma-faithfully-flat-universally-injective); scheme localization of descent.tex Tag 034E (lemma-reduced-local-smooth)."
+   }
+  },
+  {
+   "text": "Next establish scheme descent for a surjective smooth $h:T\\to W$ with $T$ reduced. For $w\\in W$, choose $t$ over $w$ and smooth affine charts $A\\to B$ as in step 1. Smoothness gives flatness by [lem-weil-pbc-smooth-ring-map-flat]. The map $\\mathcal O_{W,w}\\to\\mathcal O_{T,t}$ is flat and local by [lem-weil-pbc-flat-local-ring-maps], hence faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. Apply [lem-weil-pbc-faithfully-flat-universally-injective] with $N=\\mathcal O_{W,w}$; under $N\\otimes_N\\mathcal O_{T,t}\\cong\\mathcal O_{T,t}$ it says this ring map is injective. A nilpotent in $\\mathcal O_{W,w}$ maps to zero in the reduced ring $\\mathcal O_{T,t}$ and is therefore zero. Every target local ring is reduced, which proves descent, also for a surjective etale map. No quasi-compactness is used.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 033B (lemma-reduced-goes-up), 00TA (lemma-smooth-syntomic), 00HT (lemma-flat-localization), 00HR (lemma-local-flat-ff), 05CK (lemma-faithfully-flat-universally-injective); scheme localization of descent.tex Tag 034E (lemma-reduced-local-smooth)."
+   }
+  },
+  {
+   "text": "The definition of reducedness in the item can now be tested on one atlas. For an algebraic space $Z$, let $a:W\\to Z$ be a surjective etale scheme atlas. If $Z$ is reduced then $W$ is reduced by definition. Conversely suppose $W$ reduced and take any etale scheme chart $b:T\\to Z$. By [lem-trf-space-fibre-products-etale-covers], $P=W\\times_Z T$ is a scheme and $P\\to T$ is surjective etale. Its other projection $P\\to W$ is the scheme base change of the representable etale map $T\\to Z$ along $W\\to Z$, hence etale by the definition of representable etale maps in [def-trf-algebraic-space]. Step 1 makes $P$ reduced, and step 2 makes $T$ reduced. This proves reducedness of every chart, hence of $Z$. For representable $Z$ the identity chart shows that this agrees with scheme reducedness.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E8 (lemma-type-property), proof applied to reducedness, and section-types-properties, reduced entry in remark-list-properties-local-etale-topology."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $V\\to Y$. The space $X_V=X\\times_YV$ exists by [lem-trf-space-fibre-products-etale-covers] and has a surjective etale scheme atlas $U\\to X_V$ by [def-trf-algebraic-space]. The map $X_V\\to X$ is surjective etale by base change, so $U\\to X$ is etale and surjective by [lem-trf-space-chartwise-etale-permanence]. Write $g:U\\to V$ for the composite. Smoothness is etale local on source and target for schemes by [lem-sfb-scheme-etale-source-target-properties]. Apply [lem-sfb-space-etale-presentation-property-criterion] with this property to the presentation square $U\\to V$, $X\\to Y$: because $f$ is smooth, $g$ is smooth.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0GB3 (lemma-reduced-local-smooth), construction of U,V; spaces-morphisms.tex Tag 03ZF (lemma-smooth-local), condition (7). Implementation of smooth chart test through Tags 03MJ and 04R3."
+   }
+  },
+  {
+   "text": "If $Y$ is reduced, then its chart $V$ is reduced. Step 1 applied to the smooth scheme morphism $g:U\\to V$ gives that $U$ is reduced. Since $U\\to X$ is the surjective etale atlas of step 4, step 3 gives that $X$ is reduced. This proves the first assertion. For the empty source the same conclusion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0GB3 (lemma-reduced-local-smooth), first assertion after choosing charts."
+   }
+  },
+  {
+   "text": "Assume now that $f$ is surjective and $X$ reduced. The surjectivity base-change clause of [lem-sfb-space-smooth-surjective-fppf-locality] gives that $X_V\\to V$ is surjective on field-valued point classes. Since $U\\to X_V$ is surjective, so is $g:U\\to V$; images compose as functions on point classes, and for schemes these are the ordinary scheme points. The chart $U$ is reduced by reducedness of $X$. Scheme descent (step 2) along the smooth surjection $g$ gives that $V$ is reduced; the atlas test (step 3) gives that $Y$ is reduced. The empty-source case forces $Y$ empty by surjectivity.",
+   "uses": [
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0GB3 (lemma-reduced-local-smooth), last sentence, and spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-smooth-algebra-over-reduced-ring",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-smooth-ring-map-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0GB3 (lemma-reduced-local-smooth); its scheme input Tag 034E expanded through Tags 033B, 00HR and 05CK, and the atlas test Tag 03E8 proved explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a morphism of algebraic spaces is smooth and its target is reduced then its source is reduced",
+   "results": "Read returned hits: AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension; 8 hits; digest 4cd1fb0b69b60092",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned reducedness results concern schemes and open immersions, or normalization; the group-scheme smoothness result goes in the reverse direction. No result covers general smooth morphisms of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reducedness of algebraic spaces is local for the smooth topology",
+   "results": "Read returned hits: AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier; 8 hits; digest c29f6ef97ff97c0f",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned reducedness results concern schemes and open immersions, or normalization; the group-scheme smoothness result goes in the reverse direction. No result covers general smooth morphisms of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"IsReduced\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned reducedness results concern schemes and open immersions, or normalization; the group-scheme smoothness result goes in the reverse direction. No result covers general smooth morphisms of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"IsReduced\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned reducedness results concern schemes and open immersions, or normalization; the group-scheme smoothness result goes in the reverse direction. No result covers general smooth morphisms of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSmooth.*[iI]sReduced|[iI]sReduced.*[sS]mooth|reduced.*smooth",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean; 2 hits; digest 0ad3a15bf23e03c8",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned reducedness results concern schemes and open immersions, or normalization; the group-scheme smoothness result goes in the reverse direction. No result covers general smooth morphisms of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|AlgebraicStack",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned reducedness results concern schemes and open immersions, or normalization; the group-scheme smoothness result goes in the reverse direction. No result covers general smooth morphisms of algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The source of a smooth morphism over a reduced algebraic space is reduced",
+   "results": "Read returned hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsReduced, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.IsReduced.mk; 8 hits; digest 345f79088ce9484f",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned reducedness results concern schemes and open immersions, or normalization; the group-scheme smoothness result goes in the reverse direction. No result covers general smooth morphisms of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Smooth.*IsReduced|IsReduced.*Smooth|smooth.*reduced",
+   "results": "Read results: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ring/field or restricted scheme results do not state smooth locality of reducedness for algebraic spaces; no unrestricted smooth-reducedness match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth algebra over any reduced commutative ring is reduced",
+   "results": "Read results: Algebra.isReduced_of_isGeometricallyReduced, Algebra.FormallyUnramified.isReduced_of_field, Algebra.IsGeometricallyReduced, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, Algebra.instSmoothOfIsStandardSmooth, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsStandardSmooth, Algebra.IsGeometricallyReduced.of_forall_fg; 8 hits; digest abf1c7c7bab854b0",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ring/field or restricted scheme results do not state smooth locality of reducedness for algebraic spaces; no unrestricted smooth-reducedness match"
+  },
+  {
+   "tool": "grep",
+   "query": "isReduced_of|IsReduced",
+   "results": "Read results: 23, 45, 48, 70, 71; 5 hits; digest 61f124e3cfc13dd3",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ring/field or restricted scheme results do not state smooth locality of reducedness for algebraic spaces; no unrestricted smooth-reducedness match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth algebra over a reduced ring is reduced",
+   "results": "Read results: Algebra.isReduced_of_isGeometricallyReduced, Algebra.Smooth.of_equiv, Algebra.Smooth.mk, RingHom.Smooth, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.Smooth.flat, Algebra.Smooth.finitePresentation, Algebra.FormallyUnramified.isReduced_of_field; 8 hits; digest e5663c679abb1d96",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ring/field or restricted scheme results do not state smooth locality of reducedness for algebraic spaces; no unrestricted smooth-reducedness match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReduced\", \"Flat\"",
+   "results": "Read results: IsReduced.tensorProduct_of_flat_of_forall_fg, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian, AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian, AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents, FreeAddGroup.IsReduced.append_flatten_replicate_append, FreeGroup.IsReduced.append_flatten_replicate_append; 7 hits; digest 25693ec036d20156",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ring/field or restricted scheme results do not state smooth locality of reducedness for algebraic spaces; no unrestricted smooth-reducedness match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth algebras preserve reducedness without any Noetherian assumption",
+   "results": "Read results: Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.FormallyUnramified.isReduced_of_field, Algebra.IsGeometricallyReduced.of_forall_fg, isReduced_localizationPreserves, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.Smooth; 8 hits; digest 3d5eac8a0e6d0fdd",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ring/field or restricted scheme results do not state smooth locality of reducedness for algebraic spaces; no unrestricted smooth-reducedness match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme is reduced if it admits a flat surjective morphism from a reduced scheme",
+   "results": "Read results: AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme; 8 hits; digest 5ca61696b015a746",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ring/field or restricted scheme results do not state smooth locality of reducedness for algebraic spaces; no unrestricted smooth-reducedness match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space|Smooth.*IsReduced|IsReduced.*Smooth",
+   "results": "Read results: Mathlib/AlgebraicGeometry/Group/Smooth.lean; 1 hits; digest 27ed5d47dec4ba2f",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ring/field or restricted scheme results do not state smooth locality of reducedness for algebraic spaces; no unrestricted smooth-reducedness match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-presentation-closed-subsets",
+  "date": "2026-10-23",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Smooth atlas topology, invariant closed subsets, and their reduced closed substacks used for the affine invariant quotient. Supporting input: reducedness of the two pullbacks of Z to R in Stacks 0509, and independence of the reduced smooth chart.",
+   "via": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-affine-pgl-quotient-orbit-topology",
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-smooth-reduced-locality",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0GB3 into scheme ascent on affine charts, local-ring descent, independence of the reduced etale atlas, construction of a compatible smooth chart square, and the two assertions. One new arbitrary-base smooth-algebra reducedness input; no locally Noetherian assumption added. All citations read and quoted.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Smooth atlas topology, invariant closed subsets, and their reduced closed substacks used for the affine invariant quotient. Supporting input: reducedness of the two pullbacks of Z to R in Stacks 0509, and independence of the reduced smooth chart. The existing imported ancestry terminates at a module-created node rather than a blueprint node (ancestor command returns None); its null from.node and via chain are retained. The current latest blueprint direct-image proof (3) is the contextual ancestor; this is the reduced-chart input in the existing expansion, not a change of unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General algebraic-space fibre product and etale-cover base-change input for the compatible charts; this unit has no separate statement supplying it."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "General etale composition and cover-composition input used only to construct U -> X; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
+    "why": "General injectivity of a faithfully flat ring map, specialized to stalks for reducedness descent; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic comparison: an etale morphism in the sense of def-weil-etale-morphism (the charts of def-trf-algebraic-space) is smooth; used in step 1 so that the scheme ascent/descent applies to etale charts. No node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-4f44745aa",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-4f44745aa (reviewer sub-agent of L); spot-checked: Read the 0GB3, 034E, 033B and 03E8 sources, the item, the new node and every cited statement. The item statement and stmt_deps are byte-identical to live; live is still unsplit, so this is not superseded and not a re-split. Steps 1-6 realize 0GB3, 034E (stalkwise 00TA, 00HT, 00HR, 05CK descent) and 03E8, and they are correct. The new node lem-sfb-smooth-algebra-over-reduced-ring is exactly 033B for an arbitrary reduced base. It is true without a Noetherian hypothesis, has no DAG duplicate (the near matches assume a Noetherian, field or normal base) and no Mathlib match, and it does not restate a clause of the item. FIX (C4): step 1 said the étale chart maps are smooth by def-sbc-smooth-morphisms, but the charts are def-weil-etale-morphism (lfp + flat + unramified), so step 1 now cites lem-weil-pbc-etale-smooth-zero-dimensional-fibres (a generic tool, declared in tool_uses; no trf/PD nodes in its closure, no cycle). Step 3 justified P->W étale by the jointly surjective base-change clause; it now uses the representable-étale definition in def-trf-algebraic-space. proof_deps = union of uses. Batch-5: lem-sfb-scheme-etale-source-target-properties, lem-sfb-space-etale-presentation-property-criterion, lem-sfb-space-smooth-surjective-fppf-locality, lem-trf-space-chartwise-etale-permanence and lem-trf-space-fibre-products-etale-covers are generic algebraic-space and étale foundations (04R1, 03MJ, 0429/041Q, 03FT/03FU, 02X2), not part of the trace formula or Poincaré duality, so they are accepted. The declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSmoothReducedLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.smooth_reduced_locality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSmoothReducedLocality.lean",
+  "statement": "theorem smooth_reduced_locality {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsLocally (@Smooth) f) : (IsReduced Y → IsReduced X) ∧ ((∀ p : Point Y.obj.obj, p ∈ pointImage f.hom.hom) → IsReduced X → IsReduced Y)",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53a9d2b1e",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Checked against Stacks 0GB3 (spaces-descent.tex l.948-975). MapIsLocally (@Smooth) f tests every compatible pair of representable étale charts, which is equivalent to Stacks 03ZF and not stronger. New def AlgebraicSpace.IsReduced = every EtaleSite scheme is reduced (Mathlib IsReduced), matching 03E8 / definition-type-property; it is real, and no duplicate exists in Mathlib, Sheaf or the DAG. Point-surjectivity uses the recorded pointImage. The conclusion is exactly ascent and conditional descent, with no extra hypotheses or universes; the empty and identity cases work. Live node differs only in lean and in two added stmt_deps (landed owner of MapIsLocally and the new def node), with no cycle. lean.statement verbatim; sorry only; source and blueprint docstrings and all 6 proof steps present; proof_dep imports exist in live. Advisory: Point's owner is reached only through def-a1-space-point-topology; the report's second reading is a self-review. No files changed, no compile."
+ }
+}

@@ -1,0 +1,315 @@
+{
+ "id": "lem-trf-tate-fraction-weak-stability",
+ "kind": "statement",
+ "title": "Weak stability of the Gauss fraction field of restricted series",
+ "statement": "Let $k$ be a field [def-weil-field], complete for a nontrivial real-valued multiplicative nonarchimedean absolute value. Let $n\\ge1$, let $T=k\\langle X_1,\\ldots,X_n\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation] with Gauss norm $G(\\sum a_\\nu X^\\nu)=\\sup_\\nu|a_\\nu|$, and let $F=\\operatorname{Frac}(T)$ carry the Gauss absolute value $|f/g|_F=G(f)/G(g)$. For every finite field extension $E/F$, equip $E$ with the minimal-polynomial spectral norm $s_{E/F}$ [lem-trf-incomplete-spectral-algebra-norm]. For every $F$-basis $w_1,\\ldots,w_m$ of $E$ there are real constants $c,C>0$ such that $$c\\max_i |a_i|_F\\ \\le\\ s_{E/F}\\left(\\sum_i a_iw_i\\right)\\ \\le\\ C\\max_i|a_i|_F\\qquad(a_i\\in F).$$ Thus the spectral norm induces the product vector-space topology on each finite extension (weak stability); no exact orthogonal basis, stability of $k$, or separability of $E/F$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis. Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finite extension $E/F$ and an arbitrary $F$-basis $w_1,\\ldots,w_m$. The constant embedding $k\\hookrightarrow T\\hookrightarrow F$ is injective, so $F$ has the same characteristic as $k$, and its absolute value is nontrivial on the constants. If this characteristic is zero, apply [lem-trf-char-zero-spectral-coordinate-topology] with $K=F,L=E$ to obtain exactly the requested two inequalities. No completeness of $F$ is used.",
+   "uses": [
+    "lem-trf-char-zero-spectral-coordinate-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 5.3.1/1, first sentence of proof, printed p.212; Proposition 3.5.1/4."
+   }
+  },
+  {
+   "text": "Otherwise write $p=\\operatorname{char}(k)=\\operatorname{char}(F)>0$. In a fixed algebraic closure of $F$ put $T^{1/p}=\\{z:z^p\\in T\\}$, with $N(z)=G(z^p)^{1/p}$. If $M=\\sum_{j=1}^r Tm_j\\subseteq T^{1/p}$ is finitely generated, its $F$-span is spanned by the same $r$ elements, hence has dimension at most $r$. Thus [lem-trf-tate-root-finite-rank-bseparation] applies to $M$: for every $0\\ne x\\in M$ it gives a $T$-linear $\\lambda:M\\to T$ nonzero at $x$ and a bound $G(\\lambda(y))\\le BN(y)$. This includes the zero module, where there is no nonzero $x$ to check.",
+   "uses": [
+    "lem-trf-tate-root-finite-rank-bseparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 5.3.1/1, reduction to Lemma 3.5.3/2 and Lemma 5.3.1/2, printed pp.212-213."
+   }
+  },
+  {
+   "text": "First check that $A=T$ with $G$ satisfies the criterion's standing hypotheses. Since $k$ is complete, [lem-trf-restricted-series-gauss-completion] shows that $G$ is finite-valued, vanishes exactly at $0$, satisfies $G(1)=1$ and $G(f+g)\\le\\max(G(f),G(g))$; by [lem-trf-tate-gauss-multiplicative], $G(fg)=G(f)G(g)$. If $fg=0$ with $f,g\\ne0$, then $0=G(f)G(g)>0$, a contradiction, so $T$ is an integral domain and $G$ is a real-valued multiplicative nonarchimedean absolute value on it; on constants it is $|\\cdot|$, so $|\\cdot|_F$ is nontrivial. Apply [lem-trf-fraction-root-module-weak-stability-criterion] with $A=T$, $K=F$, and the Gauss absolute value. The root ring and its norm are exactly those of step 2, and that step verifies its bounded-separation hypothesis for every finitely generated module. The criterion gives both inequalities for the fixed extension $E/F$ and basis $w_i$, including inseparable extensions. In either characteristic the inequalities imply continuity in both directions between the spectral norm and the coordinate maximum norm, so their open balls induce the same topology. The extension and basis were arbitrary.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-tate-gauss-multiplicative",
+    "lem-trf-fraction-root-module-weak-stability-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 5.3.1/1 via Lemma 3.5.3/2; Definition 3.5.2/1, printed pp.153,155,212-213."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-char-zero-spectral-coordinate-topology",
+  "lem-trf-fraction-root-module-weak-stability-criterion",
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-gauss-multiplicative",
+  "lem-trf-tate-root-finite-rank-bseparation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR 5.3.1/1, printed pp.212-213; online primary scan read, local archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ww]eak.*[Ss]tab|[Tt]ate.*[Ff]raction|[Gg]auss.*[Cc]ompletion",
+   "results": {
+    "t": "2026-10-24T15:01:31Z",
+    "tool": "grep",
+    "query": "[Ww]eak.*[Ss]tab|[Tt]ate.*[Ff]raction|[Gg]auss.*[Cc]ompletion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean",
+     "Mathlib/Algebra/Homology/ModelCategory/Injective.lean",
+     "Mathlib/RingTheory/Regular/Flat.lean",
+     "Mathlib/RingTheory/FractionalIdeal/Operations.lean",
+     "Mathlib/RingTheory/Localization/FractionRing.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/Instances.lean"
+    ],
+    "digest": "30a803c211033fb2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm.completeSpace and FiniteDimensional.complete require a complete base; F is not asserted complete. LaurentSeries.RatFuncAdicCompl concerns a different valuation and no finite spectral-extension topology assertion. Grep hits for weak equivalences are unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of every finite extension of the fraction field of restricted power series with the spectral norm preserves its vector space dimension",
+   "results": {
+    "t": "2026-10-24T15:01:31Z",
+    "tool": "leansearch",
+    "query": "Completion of every finite extension of the fraction field of restricted power series with the spectral norm preserves its vector space dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "FiniteDimensional.complete",
+     "FiniteDimensional.of_locallyCompactSpace",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "UniformSpace.Completion.instNormedSpace",
+     "spectralNorm.normedSpace",
+     "spectralNorm.normedField",
+     "Valued.extension"
+    ],
+    "digest": "125fe475243060aa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm.completeSpace and FiniteDimensional.complete require a complete base; F is not asserted complete. LaurentSeries.RatFuncAdicCompl concerns a different valuation and no finite spectral-extension topology assertion. Grep hits for weak equivalences are unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"finrank\"",
+   "results": {
+    "t": "2026-10-24T15:01:31Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"finrank\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm.completeSpace and FiniteDimensional.complete require a complete base; F is not asserted complete. LaurentSeries.RatFuncAdicCompl concerns a different valuation and no finite spectral-extension topology assertion. Grep hits for weak equivalences are unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fraction field of a Tate algebra over any complete nonarchimedean field is weakly stable meaning finite extensions preserve dimension on completion",
+   "results": {
+    "t": "2026-10-24T15:01:32Z",
+    "tool": "leanfinder",
+    "query": "The fraction field of a Tate algebra over any complete nonarchimedean field is weakly stable meaning finite extensions preserve dimension on completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "LaurentSeries.RatFuncAdicCompl",
+     "LaurentSeries.ratfuncAdicComplPkg",
+     "LaurentSeries.LaurentSeriesPkg",
+     "LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers",
+     "LaurentSeries.ratfuncAdicComplRingEquiv_apply",
+     "LaurentSeries.ratfuncAdicComplRingEquiv",
+     "Tilt.instField"
+    ],
+    "digest": "632d1a3c48c17c69"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm.completeSpace and FiniteDimensional.complete require a complete base; F is not asserted complete. LaurentSeries.RatFuncAdicCompl concerns a different valuation and no finite spectral-extension topology assertion. Grep hits for weak equivalences are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.?stable|weak.?stability|b.?separable|spectralNorm.*equiv",
+   "results": {
+    "t": "2026-10-24T15:35:14Z",
+    "tool": "grep",
+    "query": "weakly.?stable|weak.?stability|b.?separable|spectralNorm.*equiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Field/Krasner.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "63a5313e21fc04df"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm axioms and complete-base extension theorems are not weak stability of this incomplete Gauss fraction field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite separable extension of an incomplete nonarchimedean valued field has spectral norm equivalent to every coordinate norm",
+   "results": {
+    "t": "2026-10-24T15:35:14Z",
+    "tool": "leansearch",
+    "query": "A finite separable extension of an incomplete nonarchimedean valued field has spectral norm equivalent to every coordinate norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm_extends",
+     "spectralNorm.seminormedAddCommGroup",
+     "spectralNorm.normedSpace",
+     "spectralAlgNorm",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm_unique_field_norm_ext",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow"
+    ],
+    "digest": "1d8480eaa1b5a125"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm axioms and complete-base extension theorems are not weak stability of this incomplete Gauss fraction field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"FiniteDimensional\"",
+   "results": {
+    "t": "2026-10-24T15:35:14Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"FiniteDimensional\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "spectralNorm_unique_of_finiteDimensional_normal"
+    ],
+    "digest": "6b29d030ab781f7f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm axioms and complete-base extension theorems are not weak stability of this incomplete Gauss fraction field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fraction field of a Tate algebra over a complete nonarchimedean field is weakly stable: finite spectral extensions have the coordinate vector space topology",
+   "results": {
+    "t": "2026-10-24T15:35:15Z",
+    "tool": "leanfinder",
+    "query": "The fraction field of a Tate algebra over a complete nonarchimedean field is weakly stable: finite spectral extensions have the coordinate vector space topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "LaurentSeries.RatFuncAdicCompl",
+     "LaurentSeries.instUniformSpaceRatFuncAdicCompl",
+     "LaurentSeries.instTopologicalSpaceSpaceRatFuncLaurentSeriesPkg",
+     "LaurentSeries.ratfuncAdicComplPkg",
+     "LaurentSeries.LaurentSeriesPkg",
+     "LaurentSeries.algebraMap_C_mem_adicCompletionIntegers",
+     "LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers"
+    ],
+    "digest": "6ea5bf08bf894bd5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectral norm axioms and complete-base extension theorems are not weak stability of this incomplete Gauss fraction field."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-gauss-fraction-stability",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis.",
+   "via": [
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-fraction-weak-stability",
+  "worker": "stage1",
+  "summary": "Followed BGR characteristic split, exposed the characteristic-zero input, general root-module criterion, and Tate root-module b-separation as three statement-only nodes; checked incomplete-base and inseparable cases. Statement retained.",
+  "blueprint": "Historical analytic branch below lem-trf-local-term-locality, through the recorded Temkin distinguished-presentation chain; realizes BGR 5.3.1/1 proof, not a replacement of the current contracting-correspondence unit."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-ND-91b39d5f1",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-91b39d5f1 (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes and the statements of every cited and neighbouring node. BGR is not in the local literature, so I could not open the cited pages (BGR 3.5.1/4, 3.5.2/1, 3.5.3/2, 5.3.1/1–2). The item is correctly marked agent-written with WANTED recorded, and I checked the mathematics myself instead. The split follows BGR's proof of 5.3.1/1: step 1 handles characteristic 0 through lem-trf-char-zero-spectral-coordinate-topology; step 2 shows that a finitely generated M ⊆ T^{1/p} has finite rank, so lem-trf-tate-root-finite-rank-bseparation applies; step 3 applies the criterion lem-trf-fraction-root-module-weak-stability-criterion with A=T and K=F, using the same root norm. Checks: the char-0 node holds by a trace and dual-basis argument, since |Tr y| ≤ max|roots| = s(y); the criterion with a finitely-generated hypothesis still makes every finite-dimensional subspace of K^{1/p} weakly cartesian, by rescaling denominators and extending bounded functionals K-linearly; the Tate node holds for perfect k (monomial coefficient projections) and for rank one. Cases L=K and M=0 checked. No new node restates the item (D1). blueprint.via = [item] + item.via was checked, and every citation stays in unit sk-i-curve-zero, so no tool_uses are needed. rg -L found no duplicate in the DAG. Two faults repaired. (1) C1/E1: step 3 used, without any citation, that T is an integral domain with a multiplicative absolute value G (Gauss's lemma, which is not elementary). Step 3 now cites lem-trf-restricted-series-gauss-completion and lem-trf-tate-gauss-multiplicative and derives the domain property in one line; proof_deps updated. (2) B2: the Tate root node now writes out the Gauss norm formula. The item statement is unchanged; no nodes dropped.; 2 file(s) fixed by the reviewer"
+ }
+}

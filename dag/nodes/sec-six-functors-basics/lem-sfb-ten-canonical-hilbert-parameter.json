@@ -1,0 +1,435 @@
+{
+ "id": "lem-sfb-ten-canonical-hilbert-parameter",
+ "kind": "statement",
+ "title": "The ten-canonical Hilbert parameter and projective-frame torsors",
+ "statement": "Let $k$ be any field [def-weil-field] and $g\\geq2$. Put $d=20(g-1)$, $r=19(g-1)$ and $P(m)=dm+1-g$. Let $Z=\\operatorname{Hilb}^{P}(\\mathbf P^{r-1}_k)$ be the projective finite-type $k$-scheme $H_P$ of [lem-sfb-projective-hilbert-polynomial-representability] for $S=\\operatorname{Spec}k$ and the identity embedding $E=\\mathbf P^{r-1}_k$: it represents flat finitely presented closed families in $\\mathbf P^{r-1}$ with fibre Hilbert polynomial $P$. For the curves $C\\subset\\mathbf P^{r-1}$ described below, this index polynomial is $m\\mapsto\\chi(C,\\mathcal O_C(m))=dm+1-g$. It contains a $G=\\operatorname{PGL}_{r,k}$-invariant locally closed subscheme $J$ representing the following functor: over a $k$-scheme $T$, its points are unpointed stable genus-$g$ curves $f:C\\to T$ [def-sfb-stable-pointed-moduli-groupoids] together with a projective frame $\\mathbf P(f_*\\omega_{C/T}^{\\otimes10})\\simeq\\mathbf P^{r-1}_T$, identified up to isomorphism of the framed curve. Here $\\omega_{C/T}$ is the relative dualizing invertible module (the relative Serre-duality line), and $\\mathbf P(E)$ is the projective bundle of one-dimensional quotients of a finite-rank locally free module $E$. For these families $f_*\\omega_{C/T}^{\\otimes10}$ is locally free of rank $r$, commutes with every base change, and evaluation gives the closed ten-canonical embedding. The line $\\mathcal O_C(1)$ of a framed embedding is only required locally on $T$ to be isomorphic to $\\omega_{C/T}^{\\otimes10}$; a line pulled back from $T$ is allowed. The sheaf of projective frames of each such family is a Zariski locally trivial $G$-torsor. A $G$-torsor means a scheme locally isomorphic to $G\\times T$ with its usual simply transitive action. Forgetting the frame gives an equivalence of groupoids, natural in $T$, between stable genus-$g$ curves over $T$ and pairs consisting of a $G$-torsor $E\\to T$ and a $G$-equivariant morphism $E\\to J$. These pairs, with equivariant isomorphisms as arrows, define $[J/G]$. Here $G$ is the group scheme of linear automorphisms of $\\mathbf A^r$ modulo scalar automorphisms. Projective and finite type are [def-kun-projective, def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.3, Definition 9 and the projective-frame discussion, printed pp.15--16; equivalence after forgetting the frame: paragraph after Corollary 11, printed p.17. Local PDF WANTED; author exposition read online. Arbitrary-field projective-frame descent formulation written by agent.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-projective-hilbert-polynomial-representability",
+  "def-trf-nodal-dualizing-datum",
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-per-projective-bundle-quotient-data",
+  "def-sc-invertible-module",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-projective-hilbert-polynomial-representability] over $\\operatorname{Spec}k$ to obtain $Z=H_P$, projective and finite type, with its universal flat finitely presented closed family $p:\\mathcal C\\to Z$. The polynomial in this representability statement agrees with $\\chi(\\mathcal C_z,\\mathcal O(m))$ by [lem-sfb-flat-projective-hilbert-polynomial-locality]. Since $d=20(g-1)>0$, [lem-sfb-projective-hilbert-polynomial-dimension] shows that every geometric fibre has dimension one. Thus the universal family is a family to which the curve-stack open-locus statement applies.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-flat-projective-hilbert-polynomial-locality",
+    "lem-sfb-projective-hilbert-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "0BEM and 0BEV; universal family from the item statement and Hilbert representability"
+   }
+  },
+  {
+   "text": "Let $U\\subset Z$ be the open subscheme where the universal family is stable of genus $g$, using [lem-sfb-stable-and-smooth-family-open-loci]. This has the required universal property on every test scheme, rather than only on geometric points. Over $U$ the line $\\omega=\\omega_{\\mathcal C/U}$ exists and commutes with all base changes by [lem-sfb-gorenstein-curve-relative-dualizing]. Also $p_*\\mathcal O_{\\mathcal C}=\\mathcal O_U$ universally by [lem-sc-proper-flat-global-sections], since stable fibres are geometrically reduced and nonempty connected.",
+   "uses": [
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sc-proper-flat-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "0E76, 0E78, 0E6R; perfect.tex 0E0L"
+   }
+  },
+  {
+   "text": "For any stable family $f:C\\to T$, set $L=\\omega_{C/T}^{\\otimes10}$. The preceding dualizing construction and [lem-sfb-stable-curve-pluricanonical-linear-series] show on every geometric fibre that $H^q(C_t,L_t)=0$ for $q>0$ and $h^0(C_t,L_t)=19(g-1)=r$. Apply the general form of [sk-thm-picard-perfect] with $i=0$ and this $r$. It gives $V=f_*L$ locally free of rank $r$ and commuting with every base change, on all of $T$. Its hypotheses hold: $f$ is proper and finitely presented, and $L$ is finitely presented and flat over $T$ because $f$ is flat and $L$ invertible. No reducedness or Noetherian hypothesis on $T$ enters.",
+   "uses": [
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-stable-curve-pluricanonical-linear-series",
+    "sk-thm-picard-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "0E8X and 0BS6; perfect-complex degree-zero locus as in sk-thm-picard-perfect"
+   }
+  },
+  {
+   "text": "The evaluation $f^*V\\to L$ is surjective. Indeed its finite-type cokernel has zero reduction at each point of $C$, since base change identifies the fibre map with evaluation of the very ample complete series in [lem-sfb-stable-curve-pluricanonical-linear-series]; [lem-weil-pbc-nakayama-local-generators] then annihilates that cokernel stalk. The quotient property [lem-trf-projective-bundle-quotient-geometry] gives $i:C\\to\\mathbf P_T(V)$ pulling back $\\mathcal O(1)$ to $L$. Its geometric fibre maps are closed immersions by the same field lemma.",
+   "uses": [
+    "lem-sfb-stable-curve-pluricanonical-linear-series",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "01OA quotient construction; curves.tex 0E8X; local Nakayama argument"
+   }
+  },
+  {
+   "text": "The map $i$ is proper by [lem-weil-pbc-proper-to-separated], since its target is separated by [lem-trf-projective-bundle-quotient-geometry]. Each fibre of $i$ over a target point is either empty or a single closed point: this follows by taking the geometric fibre over its image in $T$, where $i$ is a closed immersion. Thus $i$ is locally quasi-finite, by [pqf-def-quasifinite], and [pqf-lem-proper-lqf-finite] makes it finite. On an affine target open its algebra map $A\\to B$ has finite cokernel $Q$. By [lem-weil-pbc-affine-pushforward-base-change] its reduction over each residue field of $T$ is surjective, since the fibre map is closed. At a target point $y$ over $t$, $Q_y/\\mathfrak m_tQ_y=0$; reducing further modulo $\\mathfrak m_y$ and applying [lem-weil-pbc-nakayama-local-generators] gives $Q_y=0$. Hence $A\\to B$ is surjective and $i$ is a closed immersion. This proves the relative embedding assertion by an explicit affine cokernel argument.",
+   "uses": [
+    "lem-weil-pbc-proper-to-separated",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "pqf-def-quasifinite",
+    "pqf-lem-proper-lqf-finite",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "02LS, (3) implies (1), followed by finite-algebra Nakayama; no extra fibrewise-immersion lemma"
+   }
+  },
+  {
+   "text": "On the universal stable curve over $U$, put $M=\\mathcal O_{\\mathcal C}(1)\\otimes\\omega^{-10}$. Apply [lem-sc-picard-diagonal-locally-closed] to this invertible module. Its universal $p_*\\mathcal O=\\mathcal O$ hypothesis was checked in step 2. It gives an immersion $K\\to U$ of finite presentation such that a test map $T\\to U$ factors through $K$ exactly when $M_T\\simeq f_T^*N$ for a finite locally free $N$ on $T$. Here $N$ has rank one: every fibre of $f_T$ is nonempty and the pullback has rank one. Thus $N$ is invertible. Conversely, Zariski local isomorphisms $M_T\\simeq\\mathcal O$ give a global such $N$: on overlaps their ratios are units on $C$, and these are exactly base units because $f_*\\mathcal O_C=\\mathcal O_T$ universally. The ratios satisfy the cocycle condition, so glue $N$. This is precisely the base-line-twist condition, including nilpotent test schemes.",
+   "uses": [
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-proper-flat-global-sections",
+    "lem-sc-glue-component-transition-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "0BDP, lemma-diagonal-picard-flat-proper; local trivializations glue the rank-one base module"
+   }
+  },
+  {
+   "text": "Over $K$, the module $W=p_*\\mathcal O_{\\mathcal C}(1)$ is locally free of rank $r$ and commutes with arbitrary base change: locally trivialize the base line $N$ of step 6 and use step 3. The coordinate restrictions form a map $\\alpha:\\mathcal O_K^r\\to W$. Let $J\\subset K$ be its isomorphism open, given by [lem-sc-finite-locally-free-map-iso-open]; locally it is the open where $\\det\\alpha$ is a unit. Therefore $J\\to Z$ is an immersion (a locally closed subscheme). This open is essential: equality of the hyperplane line with $\\omega^{10}$ up to a base twist alone does not force an embedding into $\\mathbf P^{r-1}$ to be a complete linear series. The construction of $K$ and this open both commute with arbitrary base change.",
+   "uses": [
+    "lem-sc-finite-locally-free-map-iso-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "0BDP followed by the determinant isomorphism open; Morrison Definition 9 with completeness imposed explicitly"
+   }
+  },
+  {
+   "text": "Given a stable family and a projective frame $\\phi:\\mathbf P_T(V)\\simeq\\mathbf P^{r-1}_T$, compose its embedding from step 5 with $\\phi$. By [lem-sfb-projective-frames-pgl], Zariski locally $\\phi$ is induced by a matrix, and its hyperplane line differs from $L$ by a line from $T$. On such opens the coordinate restrictions are a basis of $V$, so the resulting Hilbert map factors through $J$. Its fibre polynomial is $20(g-1)m+1-g$ by [lem-sfb-stable-curve-pluricanonical-linear-series], which is its coordinate-ring Hilbert polynomial by [lem-sfb-flat-projective-hilbert-polynomial-locality]; so [lem-sfb-projective-hilbert-polynomial-representability] puts it in the specified $Z$, not a different Hilbert component.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-stable-curve-pluricanonical-linear-series",
+    "lem-sfb-flat-projective-hilbert-polynomial-locality",
+    "lem-sfb-projective-hilbert-polynomial-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+    "place": "4.2.3 and 4.2.7, composed with the complete linear series; curves.tex 0BS6"
+   }
+  },
+  {
+   "text": "Conversely a $T$-point of $J$ gives a stable family with $\\mathcal O_C(1)\\simeq L\\otimes f^*N$ and the coordinate isomorphism $\\mathcal O_T^r\\simeq f_*\\mathcal O_C(1)$. Locally trivialize $N$. The latter isomorphism gives a frame of $V=f_*L$, hence a projective frame. Changing the trivialization multiplies that frame by a unit from $T$, so its projectivization is unchanged by [lem-sfb-projective-frames-pgl]; the projective frames glue. Evaluation recovers the original embedding, so this construction and step 8 are inverse. A different chosen line comparison also differs by a base unit, by universal $f_*\\mathcal O_C=\\mathcal O_T$, and gives the same result. This proves the representing property independently of all auxiliary choices.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl",
+    "lem-sc-proper-flat-global-sections",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+    "place": "4.1.4 and 4.2.3, inverse construction and scalar ambiguity"
+   }
+  },
+  {
+   "text": "The two constructions preserve arrows and every base change. An isomorphism of framed families gives the same embedded closed subscheme; conversely equality of subschemes supplies the unique compatible curve isomorphism. There are no residual automorphisms of a framed curve: a compatible automorphism commutes with its closed immersion, hence is the identity, and the completeness isomorphism in step 7 determines the projective frame uniquely. Change of coordinates in $G$ preserves stability, the base-line-twist condition and invertibility of $\\alpha$; hence the $G$-action on $Z$ preserves $J$ scheme-theoretically by its universal property. Thus the representing property and $G$-invariance hold over all test schemes, not only over fields.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-sfb-projective-frames-pgl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+    "place": "4.2.3 universal quotient property and the Hilbert universal property"
+   }
+  },
+  {
+   "text": "For a stable $C/T$, apply [lem-sfb-projective-frames-pgl] to $V=f_*\\omega^{10}$. Its projective-frame scheme $E$ is a Zariski locally trivial $G$-torsor. The universal frame on $E$ gives $E\\to J$ by steps 8--10; changing frame is exactly changing coordinates, so this map is equivariant. A curve isomorphism induces the canonical map on its dualizing line and on $V$, hence an equivariant isomorphism of these pairs.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-gorenstein-curve-relative-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+    "place": "4.2.7, frame torsor; moduli-curves.tex 0E6R for functoriality"
+   }
+  },
+  {
+   "text": "For the inverse, let $E\\to T$ be a $G$-torsor with an equivariant map to $J$. For an fppf torsor, [lem-sfb-projective-frames-pgl] supplies an etale trivializing cover; for a Zariski torsor use its given cover. Pull back the universal stable curves on $J$ to this cover. They are flat proper finitely presented curves with one-dimensional geometric fibres, hence objects of $\\mathfrak C$ in [lem-sfb-nodal-curve-stack-smooth]. Torsor transitions give coordinate changes and curve isomorphisms; equivariance gives their cocycle identities. That node explicitly asserts effective etale descent and the etale sheaf property for isomorphisms. Thus the datum descends to an algebraic-space curve over $T$, with uniquely descending compatible arrows. The universal stable-genus-$g$ open of [lem-sfb-stable-and-smooth-family-open-loci] is all of $T$: its pullback to the surjective cover is the whole cover. That statement ensures the descended curve is a scheme with the required projective-bundle projectivity. No descent of $\\mathcal O(1)$ as a $G$-linearized line is needed.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-stable-and-smooth-family-open-loci"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "quot.tex Tags 0D52 (lemma-curves-stack), 0D5A (theorem-curves-algebraic); moduli-curves.tex 0E76 and 0E78: effective etale descent followed by the universal stable open"
+   }
+  },
+  {
+   "text": "On the trivializing cover, steps 8--9 identify the given torsor with the projective-frame torsor of the descended curve. These identifications agree on overlaps: their transitions are exactly the given projective coordinate changes. They glue to an equivariant isomorphism preserving the map to $J$. In particular an initially fppf torsor admitting such a map is Zariski locally trivial. Starting with a stable curve, reconstruction from its local framed embeddings descends its own identity cocycle and recovers that curve. By the explicit etale sheaf property for isomorphisms in [lem-sfb-nodal-curve-stack-smooth], compatible curve isomorphisms glue uniquely; the frame-scheme assertion in [lem-sfb-projective-frames-pgl] does the same for compatible torsor maps. The two constructions are therefore inverse and fully faithful on arrows. After any $T^{\\prime}\\to T$, the pulled-back cover and all evaluation and transition maps are the same construction for the pullback family; uniqueness of descended isomorphisms gives the natural comparison. This proves the natural equivalence with $[J/G]$.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-nodal-curve-stack-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "quot.tex Tag 0D52 (lemma-curves-stack): sheaf property for isomorphisms, descent uniqueness, and projective-frame transition maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-sc-finite-locally-free-map-iso-open",
+  "lem-sc-glue-component-transition-cocycle",
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-sc-proper-flat-global-sections",
+  "lem-sfb-flat-projective-hilbert-polynomial-locality",
+  "lem-sfb-gorenstein-curve-relative-dualizing",
+  "lem-sfb-nodal-curve-stack-smooth",
+  "lem-sfb-projective-frames-pgl",
+  "lem-sfb-projective-hilbert-polynomial-dimension",
+  "lem-sfb-projective-hilbert-polynomial-representability",
+  "lem-sfb-stable-and-smooth-family-open-loci",
+  "lem-sfb-stable-curve-pluricanonical-linear-series",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-proper-to-separated",
+  "pqf-def-quasifinite",
+  "pqf-lem-proper-lqf-finite",
+  "sk-thm-picard-perfect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "0E6R, 0E76, 0E78; more-morphisms.tex 0BDP; EGA II 4.2.3 and 4.2.7. Agent assembly of the arbitrary-base framed Hilbert construction, guided by Morrison Section 3.3 Definition 9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stable curves embedded by the tenth power of their dualizing sheaf have a finite type Hilbert parameter scheme and its projective frame bundle is a PGL torsor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and affine space do not represent the pluricanonical Hilbert functor or its projective-frame torsors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pluricanonical embeddings identify the quotient stack of the stable Hilbert locus by PGL with the groupoid of stable curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.IsPreimmersion (I.glueDataObjι U)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the morphism associated to the gluing data of the closed subscheme defined by $\\\\mathcal{I}$ is a preimme\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) {V : AlgebraicGeometry.Scheme} (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ V)\\n  (g : V ⟶ AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing })\\n  [AlgebraicGeometry.IsImmersion g] [CompactSpace ↥V],\\n  CategoryTheory.CategoryStruct.c\", \"doc\": \"Let $ V $ be a scheme, and let $ f: \\\\coprod_{i} \\\\operatorname{Spec}(R_i) \\\\to V $ and $ g: V \\\\to \\\\operatorname{Spec}\\\\left( \\\\prod_{i} R_i \\\\right) $ be morphisms of schemes. If $ g $ is an immersion, $ V\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → (U : ↑X.affineOpens) → I.glueDataObj U ⟶ ↑↑U\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, this morphism is defined as the composition of the canonical ring homomorphism $\\\\mathcal{O}_X(U) \\\\to \\\\ma\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and affine space do not represent the pluricanonical Hilbert functor or its projective-frame torsors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hilbert\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and affine space do not represent the pluricanonical Hilbert functor or its projective-frame torsors"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|hilbertScheme|pluricanonical|PGL",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"95\", \"text\": \"    IsBoundedAt c f k ↔ ∃ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c ∧ IsBoundedAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"103\", \"text\": \"    IsZeroAt c f k ↔ ∃ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c ∧ IsZeroAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"111\", \"text\": \"    IsBoundedAt c f k ↔ ∀ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c → IsBoundedAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"117\", \"text\": \"    IsZeroAt c f k ↔ ∀ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c → IsZeroAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"147\", \"text\": \"  exists_bound_of_subgroup_invariant_of_isBigO hf_cont ht hf_infinity (Γ := Γ.comap (mapGL ℝ))\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"198\", \"text\": \"    simpa [(show Rat.castHom ℝ = algebraMap ℚ ℝ by rfl), map_inv, map_mapGL]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"199\", \"text\": \"      using! Subgroup.IsArithmetic.conj Γ (mapGL ℚ g)⁻¹\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/SlashActions.lean\", \"line\": \"153\", \"text\": \"  monoidHomSlashAction (Matrix.SpecialLinearGroup.mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"35\", \"text\": \"    ∃ g : SL(2, A), (mapGL K g) • ∞ = c := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"119\", \"text\": \"    simpa only [hgp.smul_eq_self_iff.mp hgc] using ⟨(mapGL ℚ g).parabolicFixedPoint,\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"124\", \"text\": \"    · suffices (mapGL ℝ ModularGroup.T).IsParabolic by simpa\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"133\", \"text\": \"lemma isCusp_SL2Z_iff' {c : OnePoint ℝ} : IsCusp c 𝒮ℒ ↔ ∃ g : SL(2, ℤ), c = mapGL ℝ g • ∞ := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"140\", \"text\": \"      ← (Rat.castHom ℝ).algebraMap_toAlgebra, g.map_mapGL]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"59\", \"text\": \"    HasDetOne (Γ.map <| mapGL S) where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"63\", \"text\": \"    HasDetOne (mapGL (n := n) (R := R) S).range where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"93\", \"text\": \"scoped[MatrixGroups] notation \\\"𝒮ℒ\\\" => MonoidHom.range (mapGL ℝ : SL(2, ℤ) →* GL (Fin 2) ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"98\", \"text\": \"  coe := map (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"111\", \"text\": \"      comap_map_eq_self_of_injective mapGL_injective] using h\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"202\", \"text\": \"  ((toConjAct g⁻¹) • (Γ.map <| mapGL ℝ)).comap (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"206\", \"text\": \"  simp [conjGL, mapGL, Subgroup.mem_inv_pointwise_smul_iff, toConjAct_smul]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"229\", \"text\": \"    ∃ N ≠ 0, ∀ x ∈ Gamma N, g * (mapGL ℚ x) * g⁻¹ ∈ (Gamma M).map (mapGL ℚ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"280\", \"text\": \"    ∃ N ≠ 0, (toConjAct <| g.map (Rat.castHom ℝ)) • (Gamma N).map (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"281\", \"text\": \"      ≤ (Gamma M).map (mapGL ℝ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"717\", \"text\": \"  exact ⟨g, by simp [mapGL]⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"724\", \"text\": \"  exact ⟨g, by simp [mapGL]⟩\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and affine space do not represent the pluricanonical Hilbert functor or its projective-frame torsors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable curves embedded by the tenth power of their dualizing sheaf have a finite type Hilbert parameter scheme and its projective frame bundle is a PGL torsor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"[Algebra.FiniteType (𝒜 0) A] : IsProper (Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"[Algebra.FiniteType (𝒜 0) A] : LocallyOfFiniteType (Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"[Algebra.FiniteType (𝒜 0) A] : QuasiCompact (Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[EssFiniteType R A] [FormallySmooth R A] : Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \": IsStableUnderBaseChange @IsPreimmersion\", \"doc\": \"The property of being a preimmersion of schemes is stable under base change; that is, any base change (pullback) of a preimmersion is also a preimmersion.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and affine space do not represent the pluricanonical Hilbert functor or its projective-frame torsors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable curve tenth canonical Hilbert parameter scheme projective frames PGL torsor quotient stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.Projective.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The quotient of the type of triples $(x_0, x_1, x_2)$ in $R^3$ by the equivalence relation identifying triples that are scalar multiples of each other under the action of the multiplicative group of u\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    AlgebraicGeometry.AffineSpace n S ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{max u v, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"The morphism from the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ to the affine $n$-space over the integers $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\\\\dots,x_n])$, defined as the second projection in th\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Projective R → Type r\", \"doc\": \"The type of points on a projective Weierstrass curve over a commutative ring $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Projective.toAffine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve.Projective R → WeierstrassCurve.Affine R\", \"doc\": \"The function maps a projective Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ to its affine counterpart $ Y^2 = X^3 + aX + b $ by dehomogenizing with respect to the $ Z $-coordinate.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pluricanonical stable curves locally closed Hilbert locus quotient by projective linear group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any immersion $ f : X \\\\to Y $ of schemes, the image of $ f $ is a locally closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"ProjectiveSpectrum.isClosed_zeroLocus\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubmonoidClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (s : Set A), IsClosed (ProjectiveSpectrum.zeroLocus 𝒜 s)\", \"doc\": \"For any subset $ s $ of a graded ring $ A $, the zero locus of $ s $ in the projective spectrum $ \\\\text{Proj}(A) $—defined as the set of all homogeneous prime ideals containing $ s $—is a closed set i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hilbert\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|hilbertScheme|pluricanonical|projectiveFrame",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable curve tenth canonical Hilbert parameter scheme projective frames PGL torsor quotient stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \": IsAffineHom (𝔸(n; S) ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \": Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": IsSeparated (toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": Scheme.IsSeparated (Proj 𝒜)\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": QuasiCompact I.subschemeι\", \"doc\": \"The canonical morphism from the closed subscheme defined by an ideal sheaf to the original scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"(X : Scheme.{u}) (x : X) : (Spec (X.presheaf.stalk x)).Over X\", \"doc\": \"For any scheme $X$ and a point $x$ in its underlying topological space, there is a canonical morphism of schemes from the spectrum of the stalk at $x$ to $X$. This morphism is denoted as $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.CanonicallyOver\", \"module\": \"Mathlib.AlgebraicGeometry.Over\", \"type\": \"(X S : Scheme.{u})\", \"doc\": \"The abbreviation denotes the class of schemes equipped with a canonical morphism to a given scheme $X$, forming the over category of schemes over $X$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unpointed-stable-coarse-projective",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors.",
+   "via": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-ten-canonical-hilbert-parameter",
+  "worker": "stage1",
+  "summary": "Separated the field pluricanonical input, arbitrary-base nodal dualizing input, projective Hilbert dimension, and projective automorphism geometry. Reused the universal Picard pullback locus and degree-zero perfect-locus theorem. Constructed the complete-series open and wrote the quotient equivalence on objects and arrows. No change to the item statement. Repair of the refused landing: re-read the current curve-stack statement, checked its explicit etale descent and isomorphism-sheaf clauses against steps 12--13, and rewrote those steps and citation quotes for the current DAG.",
+  "blueprint": "Implements the recorded from.place chain: det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction, de Jong Lemma 3.7 moduli prerequisite; specifically projectivity of the unpointed stable coarse parameter, ten-canonical Hilbert atlas before the Gieseker quotient. The seeded ancestor is null, retained; no blueprint counterpart found.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-locally-free-map-iso-open",
+    "why": "Generic scheme/module tool used in the explicit Hilbert-and-frame construction; no statement in this unit supplies its assertion, and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-glue-component-transition-cocycle",
+    "why": "Generic scheme/module tool used in the explicit Hilbert-and-frame construction; no statement in this unit supplies its assertion, and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-picard-diagonal-locally-closed",
+    "why": "Generic scheme/module tool used in the explicit Hilbert-and-frame construction; no statement in this unit supplies its assertion, and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-proper-flat-global-sections",
+    "why": "Generic scheme/module tool used in the explicit Hilbert-and-frame construction; no statement in this unit supplies its assertion, and no unit step is replaced."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic scheme/module tool used in the explicit Hilbert-and-frame construction; no statement in this unit supplies its assertion, and no unit step is replaced."
+   },
+   {
+    "node": "sk-thm-picard-perfect",
+    "why": "Step 3 takes only its stated General form (proper finitely presented f, T-flat finitely presented module, locus U_{0,r} with locally free base-change-compatible direct image); a generic cohomology-and-base-change tool, no node of this unit gives it, no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Step 5 uses its base-change isomorphism for the affine (finite) morphism i to identify the residue-field reduction of i_*O with the fibre algebra; generic scheme tool, no node of this unit gives it, no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-locally-free-map-iso-open",
+  "lem-sc-glue-component-transition-cocycle",
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-sc-proper-flat-global-sections",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "sk-thm-picard-perfect",
+  "lem-weil-pbc-affine-pushforward-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-c1148f885",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-c1148f885 (reviewer sub-agent of L); spot-checked: This redelivers dc0ab84fe505, whose landing was refused after lem-sfb-nodal-curve-stack-smooth changed. Against the dc0ab84f snapshot and fix: the four new nodes are byte-identical, the item statement, stmt_deps, blueprint, unit and chapter are unchanged, and steps 12-13 were rewritten. The two item-only repairs of the earlier FIX were lost, so I re-applied them. (1) C1: step 8 identified the fibre Hilbert index with chi(omega^{10m}) without citing the locality theorem; it now cites [lem-sfb-flat-projective-hilbert-polynomial-locality] in its text and uses (already in proof_deps). (2) Route: sk-thm-picard-perfect (General form, step 3) and lem-weil-pbc-affine-pushforward-base-change (step 5) are now declared in split_report.tool_uses. I read all 13 steps against every cited statement. Step 3: U_{0,r}=T with r=19(g-1)=20(g-1)+1-g. Step 5: the finite cokernel Q has Q/m_tQ=0, then Nakayama at m_y gives Q_y=0. Step 6: the Picard pullback locus with universal f_*O=O, N of rank 1, cocycle gluing. Step 7: the iso-open of O^r->W gives completeness. Steps 12-13 match the current curve-stack statement: etale sheaf of isomorphisms plus effective etale descent over k-schemes; the cover's objects lie in the stack; the stable open contains a surjective cover, so it is all of T and gives a scheme with a projective-bundle embedding; morphisms glue uniquely. Sources: Stacks 0E6R (moduli-curves.tex:1985) is stated over an arbitrary base with base change; DM 1.2 / 0E8X for n>=3; Morrison is WANTED and the proof is marked agent. The new nodes are true and are not duplicates, tested on g=2 with n=3 and n=10 (P=20m-1), elliptic tails, a point, P^1 and embedded points. The frames node uses PGL_r=D_+(det), the Zariski GL/G_m quotient and etale sections for torsors of a smooth G. Batch 5: def-trf-nodal-geometric-fibres, def-trf-projective-bundle-morphism, def-trf-algebraic-space and def-pod-ring-scalar-extension are definitions; lem-trf-projective-bundle-quotient-geometry is the functor of points of P(E); lem-trf-standard-graded-hilbert-function is graded algebra. None is a trace-formula or Poincare step, so all are accepted. The 5 declared tool uses are accepted. No SGA is used. Corrected item: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-ten-canonical-hilbert-parameter.json; no node dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TenCanonicalHilbertParameter",
+  "declaration": "AlgebraicGeometry.ten_canonical_hilbert_parameter",
+  "file": "lean/Sheaf/AlgebraicGeometry/TenCanonicalHilbertParameter.lean",
+  "statement": "theorem ten_canonical_hilbert_parameter (k : Type u) [Field k] (g : ℕ) (_hg : 2 ≤ g) : Nonempty (TenCanonicalHilbert.Presentation k g)",
+  "branch": "sheaf-dag",
+  "by": "Q70",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.TenCanonicalHilbert.Coordinates",
+   "AlgebraicGeometry.TenCanonicalHilbert.standard",
+   "AlgebraicGeometry.TenCanonicalHilbert.polynomial",
+   "AlgebraicGeometry.TenCanonicalHilbert.sections",
+   "AlgebraicGeometry.TenCanonicalHilbert.evaluation",
+   "AlgebraicGeometry.TenCanonicalHilbert.bundle",
+   "AlgebraicGeometry.TenCanonicalHilbert.Series",
+   "AlgebraicGeometry.TenCanonicalHilbert.Frame",
+   "AlgebraicGeometry.TenCanonicalHilbert.baseEmbedding",
+   "AlgebraicGeometry.TenCanonicalHilbert.Action",
+   "AlgebraicGeometry.TenCanonicalHilbert.Action.act",
+   "AlgebraicGeometry.TenCanonicalHilbert.Pair",
+   "AlgebraicGeometry.TenCanonicalHilbert.Pair.Hom",
+   "AlgebraicGeometry.TenCanonicalHilbert.Pair.forget",
+   "AlgebraicGeometry.TenCanonicalHilbert.Pair.IsZariskiLocallyTrivial",
+   "AlgebraicGeometry.TenCanonicalHilbert.Hilbert",
+   "AlgebraicGeometry.TenCanonicalHilbert.Hilbert.ideal",
+   "AlgebraicGeometry.TenCanonicalHilbert.Hilbert.Classifies",
+   "AlgebraicGeometry.TenCanonicalHilbert.Presentation",
+   "AlgebraicGeometry.ten_canonical_hilbert_parameter"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06411264f",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Repair of the 154e RETURN (A6+H12), done exactly as prescribed: new def node dropped, helper block moved into the item module byte-identical except the blueprint tag (diff checked), stmt_deps = base 5 + the 8 prescribed landed nodes, each owning what the Lean uses; item differs from live only in lean/stmt_deps, statement field verbatim, all 13 dep records equal live, one sorry, lines <= 100, Worker/Second reading sections present. Mathematics re-read and sound: Hilbert component with P=20(g-1)m+1-g; J is an immersion into it and represents framed stable curves (Classifies, represents, all_points); omega fixed by NodalDualizingDatum; f_*omega^10 of rank r with canonical moduleBaseChangeMap iso and epi counit; G = Aut P^{r-1} naturally = PGL_r; action, frame torsors and equivalence pinned by the frames/classify/arrows fields; conventions consistent. Mechanical theorem-stmt_dep finding judged PASS: the node's statement defines the base-change map, no def node owns moduleBaseChangeMap, the item is unreached so a new def node would be refused for reach, and the 154e route was simulated []. Maintainer note: add an existing:true def owner for moduleBaseChangeMap and re-point citers. Not recompiled (no change)."
+ }
+}

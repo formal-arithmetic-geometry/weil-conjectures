@@ -21,79 +21,69 @@
  ],
  "proof": [
   {
-   "text": "Work over an arbitrary nonempty affine open $U=\\operatorname{Spec}A\\subset S$. It contains $\\xi$, since its complement is closed and cannot contain the generic point unless it is all of $S$. Put $Y=f^{-1}(U)$ and $g:Y\\to U$. The morphism $g$ is proper by [lem-weil-pbc-proper-fp-permanence](b), and $Y$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine]. It is reduced because its local rings are local rings of $X$ [def-pc-reduced-scheme]. The ring $A$ is a domain by [def-pc-integral-scheme]. Put $K=\\kappa(\\xi)$; [lem-weil-pbc-spec-domain-stalks-function-field](2) identifies the stalk at $\\xi$ with the fraction field of $A$, so its maximal ideal is zero and its residue field $K$ is that same fraction field. In particular $A\\to K$ is injective. The generic fibre $Y_\\xi$ is canonically $X_\\xi$, since $\\xi\\in U$.",
+   "text": "Fix a nonempty affine open $U=\\operatorname{Spec}A\\subset S$. It contains $\\xi$, since $\\overline{\\{\\xi\\}}=S$. Put $Y=f^{-1}U$ and $K=\\kappa(\\xi)$. By [lem-weil-pbc-proper-fp-permanence](b), $g:Y\\to U$ is proper, hence finite type and separated [def-weil-proper-morphism]; [lem-weil-pbc-qcqs-over-affine] makes $Y$ quasi-compact and quasi-separated. It is reduced, its local rings being those of $X$ [def-pc-reduced-scheme]. By [def-pc-integral-scheme], $A$ is a domain; it has fraction field $K$ by [lem-weil-pbc-spec-domain-stalks-function-field](2): the generic stalk is a field and hence equals its residue field. Also $Y_\\xi=X_\\xi$.",
    "uses": [
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
     "def-pc-reduced-scheme",
     "def-pc-integral-scheme",
-    "lem-weil-pbc-spec-domain-stalks-function-field"
+    "def-weil-proper-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0AY8, lemma-geometrically-connected-fibres-towards-normal; affine-local preparation for the proof"
+    "place": "Tag 0AY8, label lemma-geometrically-connected-fibres-towards-normal, proof; affine Stein-factorization assembly."
    }
   },
   {
-   "text": "The ring $A$ is integrally closed in $K$. Indeed [lem-weil-pbc-spec-domain-stalks-function-field](1) identifies every $A_{\\mathfrak p}$ with the local ring of $S$ at the corresponding point of $U$. These are integrally closed domains by hypothesis, so $A$ is a normal ring in precisely the sense of [def-weil-pbc-normal-ring]. A domain is reduced and its only minimal prime is $(0)$, since $(0)$ is prime and is contained in every prime. Its nonzerodivisors are exactly its nonzero elements, so its total ring of fractions is $K$. Thus [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions], implication (1)$\\Rightarrow$(2), applies and says that every element of $K$ integral over $A$ belongs to $A$.",
+   "text": "Apply [lem-weil-pbc-stein-factorization-affine] to $g$: with $B=\\Gamma(Y,\\mathcal O_Y)$ it gives $Y\\xrightarrow{q}\\operatorname{Spec}B\\xrightarrow{\\pi}U$, where $A\\to B$ is integral and $q$ has geometrically connected fibres. By [lem-trf-reduced-dominant-generic-restriction] applied to the original $f$ and the quasi-compact open $V=Y$, restriction $B\\to\\Gamma(Y_\\xi,\\mathcal O)$ is injective. With $\\alpha:K\\xrightarrow{\\sim}\\Gamma(X_\\xi,\\mathcal O)$ the hypothesis isomorphism, $r=\\alpha^{-1}\\circ\\mathrm{res}:B\\hookrightarrow K$ sends the image of $a\\in A$ to $a/1$.",
+   "uses": [
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-trf-reduced-dominant-generic-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0AY8, label lemma-geometrically-connected-fibres-towards-normal, proof; affine Stein-factorization assembly."
+   }
+  },
+  {
+   "text": "Via $r$, $B$ is a subring of $K$ containing $A$, so $B$ is a domain and $A\\to B$ is injective. The induced $\\operatorname{Frac}(B)\\to K$, $b/c\\mapsto r(b)/r(c)$ ($c\\ne0$), is injective, and surjective as $K=\\operatorname{Frac}(A)$. As $A\\to B$ is injective, $(0)_B$ lies over $(0)_A$, so [lem-weil-pbc-spec-domain-stalks-function-field](2) identifies both schemes as integral and the generic-stalk map as this function-field isomorphism. The map $\\pi$ is integral [def-weil-finite-integral-morphism]: for affine $W=\\operatorname{Spec}R\\subseteq U$, $\\pi^{-1}W=W\\times_U\\operatorname{Spec}B\\cong\\operatorname{Spec}(R\\otimes_AB)$ [def-pc-fibre-product, lem-a1-locally-ringed-space-affine-adjunction], integral over $R$ by [lem-weil-pbc-integral-base-change]. Local rings of $U$ are those of $S$, hence normal. Therefore [lem-trf-integral-birational-normal-isomorphism] makes $\\pi$ an isomorphism. Then [def-weil-affine-spectrum] makes the canonical $A\\to B$ an isomorphism.",
    "uses": [
     "lem-weil-pbc-spec-domain-stalks-function-field",
-    "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 030C, lemma-characterize-reduced-ring-normal, (1) implies (2); affine algebra used in Morphisms Tag 0AB1, lemma-finite-birational-over-normal"
-   }
-  },
-  {
-   "text": "Set $B=\\Gamma(Y,\\mathcal O_Y)$. Apply [lem-weil-pbc-stein-factorization-affine] to the proper $g$. It gives the canonical factorization $Y\\xrightarrow{q}\\operatorname{Spec}B\\xrightarrow{\\pi}\\operatorname{Spec}A$, with $A\\to B$ integral and $q$ proper with geometrically connected fibres. In particular no finiteness of $B$ as an $A$-module is being assumed. Restriction to the generic fibre, followed by the assumed structural isomorphism $\\Gamma(X_\\xi,\\mathcal O)=K$, gives an $A$-algebra homomorphism $r:B\\to K$ whose composite with $A\\to B$ is the inclusion $A\\to K$.",
-   "uses": [
-    "lem-weil-pbc-stein-factorization-affine"
+    "def-weil-finite-integral-morphism",
+    "lem-trf-integral-birational-normal-isomorphism",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-integral-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 03H2, theorem-stein-factorization-general, (1), (2), (4), affine case; Tag 0AY8, proof, first sentence"
+    "place": "Tag 0AY8, label lemma-geometrically-connected-fibres-towards-normal, proof; affine Stein-factorization assembly."
    }
   },
   {
-   "text": "The homomorphism $r$ is injective. Let $h\\in B$ have $r(h)=0$, so its pullback to $X_\\xi$ is the zero section. Given $y\\in Y$, choose an irreducible component $C$ of $X$ containing $y$ by [lem-sc-irreducible-components-cover], and its generic point $\\zeta$ by [lem-sc-scheme-sober]. Because $Y\\subset X$ is open and contains $y\\in\\overline{\\{\\zeta\\}}$, it contains $\\zeta$ too. By hypothesis $f(\\zeta)=\\xi$. The canonical morphism $\\operatorname{Spec}\\kappa(\\zeta)\\to X$ therefore factors through $X_\\xi$, by the residue-field map $\\kappa(\\xi)\\to\\kappa(\\zeta)$ of [def-weil-residue-field] and the defining fibre product [def-pc-scheme-fibre]. Hence $h(\\zeta)=0$. The locus where a section has zero residue is closed: on each affine chart of $Y$, it is the closed set $V(h)$. Its complement is the basic open where $h$ is invertible. This closed locus contains $\\zeta$, and therefore contains $C\\cap Y=\\overline{\\{\\zeta\\}}\\cap Y$, in particular $y$. Thus $h(y)=0$ for every $y\\in Y$. Since $Y$ is quasi-compact, [lem-weil-pbc-qc-scheme-vanishing-section-nilpotent] makes $h$ nilpotent. Since $Y$ is reduced, its section ring is reduced by [def-pc-reduced-scheme], so $h=0$. Applying this to a difference proves injectivity.",
-   "uses": [
-    "lem-sc-irreducible-components-cover",
-    "lem-sc-scheme-sober",
-    "def-weil-residue-field",
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
-    "def-pc-reduced-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0AY8, proof, reducedness and dominance of all components; affine verification of the injectivity implicit in the normalization argument"
-   }
-  },
-  {
-   "text": "For $b\\in B$, integrality supplies a monic polynomial over $A$ annihilating $b$. Applying $r$ shows that $r(b)\\in K$ is integral over $A$, so Step 2 gives $r(b)=a$ for some $a\\in A$. Since $r$ restricts to the inclusion on $A$, injectivity from Step 4 gives $b=\\operatorname{image}(a)$. Thus $A\\to B$ is surjective. It is also injective, because its composite with $r$ is the injective map $A\\to K$. This proves that the canonical structure homomorphism $\\mathcal O_S(U)\\to\\mathcal O_X(f^{-1}U)$ is an isomorphism for every nonempty affine $U$. On an empty affine both section rings are the zero ring. These are the components of the canonical map of sheaves; their inverses commute with restriction by uniqueness of inverses. On any open, use an affine covering, apply the inverses to the local restrictions, and glue: agreement on overlaps can be checked on affine subopens and follows from injectivity there. This constructs an inverse sheaf morphism, proving $\\mathcal O_S\\xrightarrow{\\sim}f_*\\mathcal O_X$.",
+   "text": "The canonical sheaf map is thus an isomorphism over every nonempty affine open; on the empty open both rings are zero. Its inverse maps commute with restriction by uniqueness. On an arbitrary open, restrict a section to an affine cover and apply these inverses. Agreement on overlaps is checked on affine subopens using injectivity there, so the sheaf axiom glues them uniquely. This is an inverse to $\\mathcal O_S\\to f_*\\mathcal O_X$.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0AY8, proof, affine integral-birational-normal argument (Morphisms Tag 0AB1) and the first conclusion"
+    "place": "Tag 0AY8, label lemma-geometrically-connected-fibres-towards-normal, proof; affine Stein-factorization assembly."
    }
   },
   {
-   "text": "Finally fix $s\\in S$ and a field extension $L/\\kappa(s)$, and choose a nonempty affine $U$ containing $s$. For its factorization in Step 3, the canonical $A\\to B$ is the isomorphism just proved, so $\\pi=\\operatorname{Spec}(A\\to B)$ is an isomorphism by the contravariant affine-spectrum construction [def-weil-affine-spectrum]. Under this isomorphism, $g=\\pi q$ is identified with $q$. Consequently $X_s\\times_{\\kappa(s)}L$ is the fibre of $q$ after the corresponding field extension, by the defining fibre products. The geometric connectedness conclusion of [lem-weil-pbc-stein-factorization-affine](iii) says this scheme is nonempty and connected. Since $s,L$ were arbitrary, this proves the second conclusion.",
+   "text": "For $s\\in S$ and a field extension $L/\\kappa(s)$ choose $U$ containing $s$. Since $g=\\pi q$ and $\\pi$ is an isomorphism, the defining fibre products [def-pc-scheme-fibre] identify $X_s\\times_{\\kappa(s)}L$ with the fibre of $q$ over the corresponding field-valued point of $\\operatorname{Spec}B$. It is nonempty and connected by [lem-weil-pbc-stein-factorization-affine](iii).",
    "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-stein-factorization-affine"
+    "lem-weil-pbc-stein-factorization-affine",
+    "def-pc-scheme-fibre"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0AY8, proof, first two sentences after invoking Tag 03H2, and conclusion"
+    "place": "Tag 0AY8, label lemma-geometrically-connected-fibres-towards-normal, proof; affine Stein-factorization assembly."
    }
   }
  ],
@@ -102,21 +92,22 @@
   "def-pc-reduced-scheme",
   "def-pc-scheme-fibre",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-normal-ring",
-  "def-weil-residue-field",
-  "lem-sc-irreducible-components-cover",
-  "lem-sc-scheme-sober",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism",
+  "lem-trf-integral-birational-normal-isomorphism",
+  "lem-trf-reduced-dominant-generic-restriction",
   "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
   "lem-weil-pbc-qcqs-over-affine",
-  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
   "lem-weil-pbc-spec-domain-stalks-function-field",
-  "lem-weil-pbc-stein-factorization-affine"
+  "lem-weil-pbc-stein-factorization-affine",
+  "def-pc-fibre-product",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-integral-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0AY8, lemma-geometrically-connected-fibres-towards-normal; its Stein/integral-birational route written affine-locally using reduced-section detection instead of introducing another relative-normalization package. Algebra input: Tag 030C."
+  "place": "Tag 0AY8, label lemma-geometrically-connected-fibres-towards-normal, proof; affine Stein-factorization assembly."
  },
  "mathlib_searches": [
   {
@@ -208,38 +199,45 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-proper-normal-geometric-connectedness",
   "worker": "stage1",
-  "summary": "All six hypotheses and both conclusions of Stacks 0AY8 retained unchanged. Split into affine preparation, normal-ring integral closedness, existing general Stein factorization, explicit injectivity of restriction to the generic fibre, the integral-closure sandwich, and geometric fibres. All inputs are existing nodes; no new nodes. No Noetherian/finitely presented assumption and no finite Stein algebra.",
-  "blueprint": "Auxiliary Zariski connectedness input to the smooth-target exceptional-tree argument in the existing ancestry from lem-trf-local-term-locality, proof (1)--(2), nearby-cycle specialization branch; this split supplies precisely the 0AY8 input recorded by blueprint.from.place. No unit statement or route is changed.",
+  "summary": "Repair of the 5068-character split: extracted generic-fibre section detection and the integral (not merely finite) birational normal-target comparison into two self-contained statement-only unsplit nodes. The statement is unchanged. Proper restriction, general Stein factorization, the common fraction-field identification, sheaf gluing, and transfer of geometric fibres form the short assembly. The report preserves every old argument and assigns it to a new node or assembly step. Rebased after the side-completion promotion return against the current live DAG; retained the two independent work packages and refreshed the explicit integral/reduced definition citations in Step 1. Latest landing-return retry: reconstructed the item from the current shared DAG while retaining only the four authorized split fields, made the prime-zero calculation explicit, and added properness and fibre-definition citations with current verbatim quotations. Rebased anew on 2026-10-23 from the current shared item, preserving every field outside those four split fields. Step 2 now defines the restriction injection using the inverse of the structural K-algebra isomorphism, and Step 3 identifies the induced fraction-field map explicitly on fractions; all current citation statements and definitions were reread. Latest repair: refreshed from the current shared record, made the nonzero denominator and integral Stein map explicit, and distinguished the newly detected finite-section-extension node from the integral birational isomorphism input.",
+  "blueprint": "Same lem-trf-local-term-locality ancestry and auxiliary Stacks 0AY8 argument as before; no chapter or unit route change. New lemmas isolate the reduced horizontal source and integral-birational-normal subarguments.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
-    "why": "Generic algebraic-geometry input to the Stacks 0AY8 proof; the local-term unit has no result supplying this statement. Used as a black box, without replacing any step of the local-term unit."
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic algebraic-geometric input to the same auxiliary Stacks 0AY8 argument; the local-term unit has no replacement. No unit-route step is changed."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic algebraic-geometric input to the same auxiliary Stacks 0AY8 argument; the local-term unit has no replacement. No unit-route step is changed."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Generic algebraic-geometric input to the same auxiliary Stacks 0AY8 argument; the local-term unit has no replacement. No unit-route step is changed."
    },
    {
     "node": "lem-weil-pbc-stein-factorization-affine",
-    "why": "Generic algebraic-geometry input to the Stacks 0AY8 proof; the local-term unit has no result supplying this statement. Used as a black box, without replacing any step of the local-term unit."
-   },
-   {
-    "node": "lem-sc-scheme-sober",
-    "why": "Generic algebraic-geometry input to the Stacks 0AY8 proof; the local-term unit has no result supplying this statement. Used as a black box, without replacing any step of the local-term unit."
+    "why": "Generic algebraic-geometric input to the same auxiliary Stacks 0AY8 argument; the local-term unit has no replacement. No unit-route step is changed."
    }
   ]
  },
  "tool_uses": [
   "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
   "lem-weil-pbc-stein-factorization-affine",
-  "lem-sc-scheme-sober"
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q58-eac7a14fc",
-  "group": "Q58",
+  "reviewer": "NT-cc-Q99-914d3948e",
+  "group": "Q99",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-eac7a14fc (reviewer sub-agent of L); spot-checked: I read the item in full: all six steps, the statement of every cited node and the proof of the Stein node. The statement matches Stacks 0AY8 (more-morphisms.tex l.15358) hypothesis by hypothesis; both conclusions are spelled out, nonempty fibres included, and nothing is weakened. Step 1: proper-fp-permanence (b) and qcqs-over-affine apply; spec-domain-stalks (2) gives kappa(xi)=Frac A; Y_xi=X_xi because xi lies in U. Step 2: A_p is the local ring of S at p, so Algebra 030C (1)=>(2), which holds in general, makes A integrally closed in K; a domain has one minimal prime and Q(A)=K. Step 3: the Stein node (from 03H2) holds for any ring A and gives integral, not finite; r: B->K is an A-algebra map. Step 4: the injectivity argument is correct: the generic point of a component lies in the open Y, maps to xi so the section vanishes there, the zero-residue locus is closed, the qc-vanishing-section lemma makes h nilpotent, and reducedness makes it zero. Step 5: the integral-closure sandwich is correct; iso on affines gives iso of sheaves (elementary). Step 6: pi=Spec(iso), and Stein (iii) gives geometric connectedness and nonemptiness over every field. Small cases: cusp normalization, a nilpotent thickening, an extra vertical point and a finite extension each show one hypothesis is needed; nothing assumes Noetherian. No new nodes; no duplicate in the DAG (rg for 0AY8 and for statements about proper, normal, connected); no cycle; proof_deps equals the union of the steps' uses. Missing def-weil-pbc-ideal-module-product-stalk is pre-existing, not from this delivery. Accepted tool_uses: lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions and lem-weil-pbc-stein-factorization-affine (generic sk-thm-p1 tools); lem-sc-scheme-sober is a Mathlib leaf (harmless). No SGA cited. Not a target node."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-914d3948e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, Stacks 0AY8 (more-morphisms.tex) and 0AB1 (morphisms.tex l.14631, 'or even integral'). Both new nodes are byte-identical to the 0fe91980 push and the item statement is unchanged. Only the item's proof and split_report changed. The landing of 0fe91980 was refused by a duplicate-tag diagnostic against lem-sfb-finite-normal-generic-section-extension. That node is about extending sections of a finite morphism; it does not cover integral maps and does not conclude an isomorphism, so it is not a duplicate. The other 0AB1/0AY8-tagged nodes are also not duplicates: lem-trf-finite-birational-normal-iso (finite only), lem-sfb-normalization-normal-locally-finite, and the locally Noetherian lem-sbc/lem-trf dense-open nodes. Both new statements are true. Node B reduces to the affine case: B lies in Frac A and is integral over the normal domain A, so B = A. Node A holds because in a reduced ring an element that vanishes at every minimal prime is nilpotent, hence zero. I tested the empty V, a vertical component, the nilpotent in k[t,ε]/(ε²,tε), the cusp and Spec Q→Spec Z_(p). Re-split coverage is intact: old step 4 is node A, old step 2 plus the sandwich of old step 5 is node B, and old steps 1, 3, 5-gluing and 6 are the assembly. Fault (C1/C4): the 0fe91980 Step-3 fix was lost at the refused landing. Step 3 again cites def-weil-finite-integral-morphism for π, which needs R→Γ(π⁻¹W) integral for every affine W=Spec R⊆U, while the Stein node only gives A→B integral. I re-applied the fix: π⁻¹W = W×_U Spec B ≅ Spec(R⊗_A B) [def-pc-fibre-product, lem-a1-locally-ringed-space-affine-adjunction], integral over R by [lem-weil-pbc-integral-base-change]. All three cited nodes exist on the base and none is a trace-formula or Poincaré-duality node. proof_deps is the union of the step uses. I tightened wording only, with no argument removed, to 2988 characters, under the 3000 re-split limit. Only proof and proof_deps changed. Batch-5: both flagged citations are general scheme theory (0AB1, and the 0AY8/03GY generic-fibre section detection) with only definition dependencies and no proofs. Neither assumption gives them and neither is part of the trace-formula or Poincaré-duality proofs, so I accepted them. The four declared tool uses (proper-fp-permanence, qcqs-over-affine, spec-domain-stalks, Stein-affine) are generic Stacks inputs; accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProperNormalGeometricConnectedness",
@@ -259,5 +257,16 @@
   "result": "pass",
   "note": "Statement matches Stacks 0AY8 and the node clause by clause, using the recorded dependency declarations: IsProper, IsIntegral, IsGenericPoint ξ univ, stalkwise IsDomain∧IsIntegrallyClosed, IsReduced, every irreducible-component generic point maps to ξ, IsIso of (fiberToSpecResidueField ξ).appTop for H^0=κ(ξ); conclusions IsIso f.toLRSHom.toHom.c (O_S→f_*O_X) and ∀ s, GeometricallyConnected of each fibre (nonempty and connected over every field extension). Test fields in universe u: project-standard and equivalent via the algebraic closure. No Noetherian, finite-presentation or other extra assumptions; empty X fails the H^0 hypothesis as in the source. No definitions, proof sorry only, docstrings give the source place, blueprint id and the six node proof steps. lean.statement matches the file verbatim; node unchanged from live apart from its lean record. No duplicate: live node has no lean record, nothing in Mathlib or the project states 0AY8, NK/Q18 deliveries of this item have not landed. nt_compile --json clean in 1.9 s. Advisory: IsDomain in hnormal is redundant; the two Sheaf.* imports serve only the planned proof."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

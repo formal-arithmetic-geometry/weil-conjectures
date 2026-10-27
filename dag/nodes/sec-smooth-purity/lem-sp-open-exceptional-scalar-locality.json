@@ -23,81 +23,56 @@
   "def-weil-pbc-composite-adjunction",
   "lem-sp-et-proet-coefficient-compatibility",
   "det-sp-reduction-direct-image",
-  "def-sp-constant-scalar-pullback-comparison"
+  "def-sp-constant-scalar-pullback-comparison",
+  "sk-def-sp-normalized-towers",
+  "def-sp-reduction-direct-image-comparison",
+  "def-sp-finite-intrinsic-open-square",
+  "def-trf-finite-pullback-coordinate-comparison"
  ],
  "proof": [
   {
-   "text": "Fix $K$ and put $M=G_{f,A}K$ and $L=U_AM$. Use the adjunction-preserving composition identifications in the statement throughout; thus $F_{g,R}=F_{f,R}J_R$, $G_{g,R}=U_RG_{f,R}$. The composite-adjunction definition gives\n$$\\epsilon_{g,R,K}=\\epsilon_{f,R,K}\\circ F_{f,R}(v_{R,G_{f,R}K}).$$\nThe coefficient/composition square of [lem-sp-et-proet-coefficient-compatibility], applied to $U\\xrightarrow{j}X\\xrightarrow{f}Y$, gives, in these identifications,\n$$b_g(L)=F_{f,B}(b_j(L))\\circ b_f(J_AL).$$\nHere $b_j:T_XJ_A\\simeq J_BT_U$ is the normalized open tensor map. The refinement clause of that same node ensures this formula for the chosen compactifications, including comparison through a common refinement. All inputs are in the finite-Tor categories stipulated in the statement. That node states the pro-etale composition square for etale-origin objects; by [det-pe-finite-tor-comparison-noetherian] (the schemes are qcqs and $A,B$ are finite, hence Noetherian) $\\nu_U^*$ is an equivalence $D^b_{ctf}(U_{\\mathrm{et}},A)\\simeq\\mathcal C_{U,A}$, so $L\\simeq\\nu_U^*L'$ with $L'$ etale bounded constructible of finite Tor amplitude, and naturality of both sides of the square in $L$ transfers it to $L$. The site/composition identifications are thus the specified etale-origin ones of that node and the adjunction transfer, not arbitrary isomorphisms of the underlying functors.",
+   "text": "Fix K and put M = G_f,A K, L = U_A M, r = c_f,K, and d = a_j(M)^(-1) followed by U_B(r), in the canonical constant-pullback coordinates used by the Lean statement. The Hom-equivalence inverse law gives the defining counit equation for r. Apply the open-counit clause of lem-sp-open-scalar-restricted-transpose-expansion. Transport its normalized open extension to the intrinsic extension using reductionOpenModel: compatibility of termwise adjunction counits descends through the standard exact-derived localization factors, and restriction along the full inclusions preserves that counit. Naturality of the B open counit at r then gives J_B(d) followed by v_B = b_j(L)^(-1) followed by T_X(v_A) followed by r. This does not invert r.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-sp-et-proet-coefficient-compatibility",
-    "det-pe-finite-tor-comparison-noetherian"
+    "lem-sp-open-scalar-restricted-transpose-expansion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
+    "place": "Locality paragraph, short assembly of the two counit calculations"
    }
   },
   {
-   "text": "Apply [lem-sp-open-proetale-counit-scalar] to $M$. Its identity for the actual open counit is\n$$v_{B,T_XM}\\circ J_B(a_{j,M})\\circ b_j(L)=T_X(v_{A,M}).$$\nSince $b_j(L)$ is invertible, right-composition with its inverse gives the precisely typed equality\n$$v_{B,T_XM}\\circ J_B(a_{j,M})=T_X(v_{A,M})\\circ b_j(L)^{-1}.$$\nBoth sides go from $J_BT_UL$ to $T_XM$. This uses no inverse of an exceptional comparison.",
+   "text": "Apply the coefficient-composition-square clause of lem-sp-open-scalar-inverse-transpose-factorization to the chosen compactification c of f and c.precomp(j). The canonical refinement of a compactification to itself is the identity: its normalization is the self comparison through the two equal infimum refinements, and uniqueness identifies it with the identity. Thus its restricted compositor has exactly the underlying map supportComposition. Transport the square from intrinsic pullback to constant pullback by naturality along openSquareDerivedPullbackModel, carrying finite-Tor membership across this isomorphism. Combine the square with step 1, the defining counit equation for r, and naturality of b_f at v_A. Cancel only the specified coefficient isomorphisms b_j, b_f, and b_g. The result is F_g,B(d) followed by epsilon_g,B = b_g(L)^(-1) followed by T_Y(epsilon_g,A), using the actual transported composite counit formula.",
    "uses": [
-    "lem-sp-open-proetale-counit-scalar"
+    "lem-sp-open-scalar-inverse-transpose-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
+    "place": "Locality paragraph, short assembly of the two counit calculations"
    }
   },
   {
-   "text": "Set $d_K=U_B(c_{f,K})\\circ a_{j,M}:T_UL\\to U_BG_{f,B}T_YK$ and take its counit transpose\n$$\\tau=\\epsilon_{g,B,T_YK}\\circ F_{f,B}J_B(d_K).$$\nNaturality of $v_B:J_BU_B\\to1$, evaluated at $c_{f,K}:T_XM\\to G_{f,B}T_YK$, says\n$$v_{B,G_{f,B}T_YK}\\circ J_BU_B(c_{f,K})=c_{f,K}\\circ v_{B,T_XM}.$$\nInsert the composite counit from step 1, then this equality, and then step 2. The defining counit equation for $c_f$ in the statement yields\n$$\\begin{aligned}\n\\tau&=\\epsilon_{f,B,T_YK}\\circ F_{f,B}(c_{f,K})\\circ F_{f,B}\\bigl(v_{B,T_XM}\\circ J_B(a_{j,M})\\bigr)\\\\\n&=T_Y(\\epsilon_{f,A,K})\\circ b_f(M)^{-1}\\circ F_{f,B}(T_X(v_{A,M}))\\circ F_{f,B}(b_j(L)^{-1}).\n\\end{aligned}$$\nThis is just naturality, functoriality and substitution of the displayed identities.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-sp-open-proetale-counit-scalar"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
-   }
-  },
-  {
-   "text": "The comparison $b_f$ is natural by [det-sp-reduction-direct-image]. Apply its naturality square to $v_{A,M}:J_AL\\to M$ and compose with inverses of its two isomorphism components. This gives\n$$b_f(M)^{-1}\\circ F_{f,B}(T_X(v_{A,M}))=T_Y(F_{f,A}(v_{A,M}))\\circ b_f(J_AL)^{-1}.$$\nSubstitute in step 3. Functoriality of $T_Y$, the composite-counit equation in step 1, and inversion of the two-factor expression for $b_g(L)$ in step 1 give\n$$\\begin{aligned}\n\\tau&=T_Y\\bigl(\\epsilon_{f,A,K}\\circ F_{f,A}(v_{A,M})\\bigr)\\circ b_f(J_AL)^{-1}\\circ F_{f,B}(b_j(L)^{-1})\\\\\n&=T_Y(\\epsilon_{g,A,K})\\circ b_g(L)^{-1}.\n\\end{aligned}$$\nThe order of the inverse factors is reversed, so their composite has source $F_{g,B}T_UL$ and target $T_YF_{g,A}L$.",
-   "uses": [
-    "det-sp-reduction-direct-image",
-    "def-weil-pbc-composite-adjunction",
-    "lem-sp-et-proet-coefficient-compatibility"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
-   }
-  },
-  {
-   "text": "By definition in the statement, $c_{g,K}$ has counit transpose $T_Y(\\epsilon_{g,A,K})\\circ b_g(G_{g,A}K)^{-1}$; here $G_{g,A}K=L$. Step 4 proves that $d_K$ has this very transpose. The composite adjunction's Hom bijection in [def-weil-pbc-composite-adjunction] is a bijection, hence injective. Therefore $d_K=c_{g,K}$, which is the required equality for each $K$. No assertion about smoothness, a chart, or invertibility of either right mate enters this argument.",
+   "text": "The inverse Hom-equivalence of the B composite adjunction sends component at g to b_g(L)^(-1) followed by T_Y(epsilon_g,A), by its definition. Steps 1 and 2 give exactly the same transpose for d. Apply injectivity of this inverse Hom-equivalence, then the full-subcategory inclusion, to obtain the displayed equality of underlying derived morphisms. The composite adjunction is the specified one from def-weil-pbc-composite-adjunction; no exceptional component is assumed invertible.",
    "uses": [
     "def-weil-pbc-composite-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument"
+    "place": "Locality paragraph, short assembly of the two counit calculations"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-composite-adjunction",
-  "lem-sp-et-proet-coefficient-compatibility",
-  "lem-sp-open-proetale-counit-scalar",
-  "det-sp-reduction-direct-image",
-  "det-pe-finite-tor-comparison-noetherian"
+  "lem-sp-open-scalar-restricted-transpose-expansion",
+  "lem-sp-open-scalar-inverse-transpose-factorization",
+  "def-weil-pbc-composite-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument; composite counit formula from Stacks Tag 0DV0 (lemma-compose-counits)"
+  "place": "Locality paragraph: source-open restriction and composition of counit transposes; explicit cancellation argument; composite counit formula from Stacks Tag 0DV0 (lemma-compose-counits); Lean assembly uses the open-counit and coefficient-square clauses with explicit exact-localization and canonical pullback-coordinate transport"
  },
  "mathlib_searches": [
   {
@@ -191,19 +166,79 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-open-exceptional-scalar-locality",
   "worker": "stage1",
-  "summary": "Expanded the Locality paragraph into the actual open-counit equation, the coefficient/composition square and a typed counit-transpose cancellation. Reused existing nodes; no new nodes, no statement change, no geometric or Tor hypotheses added. Searched the project and Mathlib; general mate calculus is available but not the normalized geometric assertion. Maintainer reader (Q10): step 1 now cites det-pe-finite-tor-comparison-noetherian for the etale origin of the pro-etale input L, which the composition square of lem-sp-et-proet-coefficient-compatibility requires.",
-  "blueprint": "det-sp-reduction-exceptional.proof.md, Locality paragraph: steps 1-2 give the composition and open counit identities, steps 3-4 calculate their transpose, step 5 proves equality by the adjunction bijection."
+  "summary": "Repair of human re-split request: retain the statement verbatim; extract two independent statement-only arguments. The inverse-transpose factorization carries returned steps 1 and 4, including essential-surjectivity transport to all pro-etale finite-Tor inputs and inverse naturality. The restricted-transpose expansion carries returned steps 2 and 3, with the actual open counit and no inverse exceptional mate. The parent only compares their outputs and invokes injectivity, retaining returned step 5. Both new nodes are searched and unsplit.",
+  "blueprint": "det-sp-reduction-exceptional.proof.md Locality paragraph: the normalized compact-support composition and open-counit transpose computations are separated, with their equality assembled here.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic Hom bijection of composite adjunctions, used only for injectivity after the two local calculations; no route is replaced."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q10-290a13ef8",
-  "group": "Q10",
+  "reviewer": "NT-cc-Q04-fb8797a1b",
+  "group": "Q04",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-290a13ef8 (reviewer sub-agent of L); spot-checked: Read the Locality paragraph of the blueprint sk-lem-sp-reduction-exceptional (lines 12-18), Stacks 0DV0 (lemma-compose-counits) and the statements of every cited node. The delivery is a one-level split with no new nodes and no statement change; it answers no repair note and the item is not dropped. All five steps are correct. I recomputed each one with types: the composite counit eps_f F_f(v); b_g(L) = F_f(b_j(L)) b_f(J_A L) from the (j,f) composition clause of lem-sp-et-proet-coefficient-compatibility; the open-counit equation of lem-sp-open-proetale-counit-scalar with right-composition by b_j^{-1}; naturality of v at c_f and of b_f at v_{A,M}, with the inverse order correct; and injectivity of the composite Hom bijection. Only b_f, b_j and b_g are inverted, never c_f, so the proof holds for arbitrary f and a non-flat A to B. Edge cases checked: j = id, U empty, phi = id, Z/l^2 to Z/l. One C1/C4 fault, fixed: the composition square of lem-sp-et-proet-coefficient-compatibility is stated only for etale-origin pro-etale objects, but step 1 used it for an arbitrary L in C_{U,A} with no citation. I added det-pe-finite-tor-comparison-noetherian (nu^* : D^b_ctf(et) to D^b_ctf(proet) is an equivalence for qcqs X and Noetherian Lambda) to step 1 and to proof_deps; it creates no cycle and is already an accepted tool_use of the parent det-sp-reduction-exceptional. Accepted tool uses: lem-sp-et-proet-coefficient-compatibility, def-weil-pbc-composite-adjunction and det-pe-finite-tor-comparison-noetherian, all already parent tool_uses. No SGA citation. Maintainer note: O2 delivered a parallel zero-new-node split of the same item (e1ed043b); whichever lands second is superseded.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-fb8797a1b (reviewer sub-agent of L); spot-checked: I read the re-split note (released 2026-10-22: 3725 chars, at least 2 nodes, assembly of at most 3000) and the live 5-step Q10 split (290a13ef plus the det-pe-finite-tor fix). I read the Locality paragraph of main-20261015 sk-lem-sp-reduction-exceptional.proof.md and the statements of composite-adjunction, et-proet-coefficient-compatibility, open-proetale-counit-scalar, reduction-direct-image, constant-scalar-pullback-comparison and pe-finite-tor-comparison-noetherian. The statement and stmt_deps are byte-identical to live, there is no SGA citation and no parallel landing. Old steps map in full. Steps 1 and 4 (composite counit; b_g = F_f(b_j)b_f(J_A) extended to arbitrary pro-etale finite-Tor L; naturality of b_f at v_A) become new node lem-sp-open-scalar-inverse-transpose-factorization. Steps 2 and 3 (open-counit equation with b_j cancelled; tau expanded by v_B naturality at any r satisfying c_f's counit equation) become lem-sp-open-scalar-restricted-transpose-expansion. Step 5 (injectivity of the Hom bijection) stays as parent step 3. The parent is a 1111-character assembly. The two nodes are comparable (about 2100 and 1150 chars of old work), are not restatements of the item (neither mentions c_g) and are not circular. I recomputed every equation of both new statements with types and checked U empty, j=id, phi=id, K=0 and non-flat Z/l^2 to Z/l; only b_f, b_j and b_g are inverted, never r. Both nodes are self-contained and statement-only, carry blueprint.from det-sp-reduction-exceptional via the item, and record real searches (one leansearch honestly logged as unavailable). The duplicate search found no node stating either one. The tool use def-weil-pbc-composite-adjunction (a generic Mathlib-status definition) is accepted. Batch-5 flags: the four cited constructions (det-sp-scalar-extension-functor, det-sf-mate-open-restriction, lem-sp-et-proet-coefficient-compatibility, det-sp-reduction-direct-image) are already stmt_deps of the item on live, so the b5 closure is unchanged. They are general six-functor definitions used only to name maps, not steps of the trace formula or Poincare duality, so I accept them. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "tool_uses": [
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.OpenExceptionalScalarLocality",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarLocality.openExceptionalScalarLocality",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.support",
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.SupportAdjunction",
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.extension",
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.restriction",
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.openAdjunction",
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.supportComposition",
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.composite",
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.component",
+   "AlgebraicGeometry.ProEtale.OpenScalarLocality.openExceptionalScalarLocality"
+  ],
+  "file": "lean/Sheaf/Paper/OpenExceptionalScalarLocality.lean",
+  "statement": "theorem openExceptionalScalarLocality (ℓ pchar : ℕ) [Fact ℓ.Prime] (_hp : 0 < pchar) (_hℓ : pchar ≠ ℓ) (k : Type u) [Field k] [CharP k pchar] {U X Z Y : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (.of k))] (i : X ⟶ Z) [IsOpenImmersion i] [i.IsOver (Spec (.of k))] (p : Z ⟶ Y) [IsProper p] [p.IsOver (Spec (.of k))] (_hf : i ≫ p = f) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (n : ℕ) (_hA : (ℓ ^ n : A) = 0) (_hB : (ℓ ^ n : B) = 0) (a : SupportAdjunction A i p) (b : SupportAdjunction B i p) (hJA : ∀ L : spFiniteConstructibleTorCategory U A, spFiniteConstructibleTor X A ((sfIntrinsicDerivedOpen A j).obj L.obj)) (hUA : ∀ M : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor U A ((proEtaleConstantRingDerivedPullback A j).obj M.obj)) (hGA : ∀ L : spFiniteConstructibleTorCategory U A, spFiniteConstructibleTor Y A ((reductionCompactSupport A (j ≫ i) p).obj L.obj)) (hJB : ∀ L : spFiniteConstructibleTorCategory U B, spFiniteConstructibleTor X B ((sfIntrinsicDerivedOpen B j).obj L.obj)) (hUB : ∀ M : spFiniteConstructibleTorCategory X B, spFiniteConstructibleTor U B ((proEtaleConstantRingDerivedPullback B j).obj M.obj)) (hGB : ∀ L : spFiniteConstructibleTorCategory U B, spFiniteConstructibleTor Y B ((reductionCompactSupport B (j ≫ i) p).obj L.obj)) (hSU : ∀ L : spFiniteConstructibleTorCategory U A, spFiniteConstructibleTor U B ((scalarExtensionFunctor φ U).obj L.obj)) (hSX : ∀ M : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor X B ((scalarExtensionFunctor φ X).obj M.obj)) (hSY : ∀ K : spFiniteConstructibleTorCategory Y A, spFiniteConstructibleTor Y B ((scalarExtensionFunctor φ Y).obj K.obj)) (hbf : ∀ M : spFiniteConstructibleTorCategory X A, IsIso ((reductionDirectImageComparison φ i p).app M.obj)) (hbg : ∀ L : spFiniteConstructibleTorCategory U A, IsIso ((reductionDirectImageComparison φ (j ≫ i) p).app L.obj)) (K : spFiniteConstructibleTorCategory Y A) : component φ (j ≫ i) p (composite A j i p a hJA hUA hGA) (composite B j i p b hJB hUB hGB) hSU hSY hbg K = (directImageScalarPullbackIso φ j).inv.app (a.right.obj K).obj ≫ (proEtaleConstantRingDerivedPullback B j).map (component φ i p a b hSX hSY hbf K)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The equation uses the adjunction-preserving source-open coordinates required by the node. supportComposition constructs the open compositor inline using leftAdjointUniq on the composite sfIntrinsicOpenAdjunctions, then descends it termwise. The definition owners def-sp-finite-intrinsic-open-square and def-trf-finite-pullback-coordinate-comparison supply the open adjunction/functor and canonical pullback coordinates. No exchange theorem conclusion is used or cited as a statement dependency. component is the B-adjunction Hom transpose of the inverse of the specified reductionDirectImageComparison followed by scalar extension of the A-counit. The theorem signature and proof plan are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4bd8f954",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Re-delivery after the fe73 H2 RETURN. The theorem stmt_dep lem-trf-open-square-exchange is removed; added stmt_deps are the definition owners def-sp-finite-intrinsic-open-square and def-trf-finite-pullback-coordinate-comparison, plus sk-def-sp-normalized-towers and def-sp-reduction-direct-image-comparison, all kind definition. supportComposition now inlines the published sfIntrinsicDerivedOpenComp term: leftAdjointUniq of the composite intrinsic open adjunctions along sfIntrinsicPullbackComp, then mapDerivedCategoryNatIso and mapDerivedCategoryCompIso; compared line by line, it is the same canonical map. All other snapshot node records are byte-identical to side-live; the item node changes only in its lean record and stmt_deps. Statement verbatim in the file, 1 sorry, max line 97. All clauses re-checked: hbf/hbg = first conjunct of reductionDirectImage_isIso under the item's hypotheses; a_j inverse direction correct; edge cases U empty, j=id, phi=id, n=0, non-flat phi covered. Advisory: sfIntrinsicPullbackComp and sfIntrinsicExtensionByZero owners are cited only transitively. No file changed, so nothing compiled; worker reports clean compiles in sandbox and library modes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261025T013159-L-3937347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,182 @@
+{
+ "id": "lem-sfb-reduction-sections-normalized-resolution",
+ "kind": "statement",
+ "title": "Normalized resolution of reduction sections",
+ "statement": "Fix $\\ell,E,U,\\mathcal M,\\Gamma,R\\Gamma$ and $\\lambda_I$ as in [def-sfb-complete-reduction-sections-model]. For every K-flat complex $P$ in $\\mathcal M$, let $T_n=P\\otimes B/\\pi^{n+1}$ with its actual quotient transitions and tensor units $u_n$ [sk-def-pe-derived-completion]. There exist a K-injective complex $I$ of strict module towers, with every term injective, a strict tower map $j:T\\to I$ whose evaluations are quasi-isomorphisms, and a map $a:P\\to\\lim I$ satisfying $a\\operatorname{pr}_n=u_nj_n$. There is an isomorphism $c:R\\Gamma(Q\\lim I)\\simeq Q\\operatorname{Roos}(\\Gamma^{\\mathrm{Tow}}I)$ such that the derived-sections unit followed by $c$ is $Q(\\lambda_I)$. Moreover, if the specified map $Q(P)\\to Q\\operatorname{Roos}(T)$ with zero nullhomotopy is invertible, then $Q(a)$ is invertible. No completeness assumption or cohomology bound is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; Tag 0A07, lemma-Rf-commutes-with-Rlim; Tag 0941, lemma-derived-limit-is-ok"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "def-weil-derived-limit",
+  "def-weil-strict-roos-model",
+  "def-sfb-complete-reduction-sections-model"
+ ],
+ "proof": [
+  {
+   "text": "The internal/sectionwise equivalence leaves the underlying abelian sheaf and all sections unchanged. Its two additive inverse equivalences preserve kernels, cokernels, acyclic complexes and the Hom/homotopy test for K-injectivity. Thus ringed-site resolutions compute the same ordinary derived sections as the internal-module functor.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Global sections is direct image to the point. The inverse image on sheaves of sets is sheafification of the constant presheaf. The sheafification universal property gives its adjunction with global sections, and exact sheafification makes it left exact. The integer-to-coefficient ring map sends an integer a to a times one. Hence these data define the global-section ringed-topos morphism.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the actual tensor-reduction tower to a complex of towers and take its functorial K-injective resolution with injective terms. Evaluation is exact, hence gives the pointwise quasi-isomorphisms j_n. The compatible tensor-unit composites define a by the ordinary-limit universal property. Inverse limit preserves K-injectives because its constant-tower left adjoint is exact.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ringed direct-image/derived-limit comparison to the global-section morphism. It identifies RΓ(Q lim I) with the Roos fibre of the termwise sections, computed on I, with its universal-unit normalization. Under ordinary sections the strict ordinary-limit inclusion is precisely lambda_I, so the normalization is the displayed equality for c.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized ordinary-limit/Roos comparison for I, and the Roos map induced by j, identify Q(a) with the specified (unit,0) tensor augmentation followed by an isomorphism. Countable products are exact in the internal module category on the replete pro-etale site, so the pointwise quasi-isomorphisms j_n induce a quasi-isomorphism of Roos fibres. Cancellation proves that invertibility of Q(augmentation P) implies invertibility of Q(a). Completeness and cohomology vanishing are not used.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-ringed-topos-morphism",
+  "sk-def-pe-derived-completion",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; Tag 0A07, lemma-Rf-commutes-with-Rlim; Tag 0941, lemma-derived-limit-is-ok"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of a tower of complexes with cohomology zero above h has cohomology zero above h+1",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CochainComplex.isZero_of_isLE, DerivedCategory.isLE_iff, CochainComplex.isZero_of_isGE, DerivedCategory.isGE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, CategoryTheory.Limits.limit",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "grep",
+   "query": "milnor_shortExact|rightDerivedFunctorUnit.*roos|limitToRoos",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Milnor exact sequence for sections of the inverse limit of a strict tower of module complexes",
+   "results": "8 hits: SheafOfModules.sections, Module.DirectLimit.module, PresheafOfModules.sections, groupCohomology.H1InfRes, PresheafOfModules.sectionsMk, AdicCompletion, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, CategoryTheory.Abelian.Ext.covariantSequence_exact",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteReductionRgammaUpperBound",
+  "date": "2026-10-25",
+  "group": "T5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Current det-sf-comp-coherence-cocycle proof, Refinement isomorphisms paragraph: the use of det-sf-comp-coherence-refinement (2) on the localizing closure. This descendant supplies the scalar complete-reduction sections bound used below the proper direct-image coproduct argument; the ancestor does not itself state this estimate. This node isolates the normalized resolution of reduction sections.",
+   "via": [
+    "lem-sfb-complete-reduction-rgamma-upper-bound",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReductionSectionsNormalizedResolution",
+  "file": "lean/Sheaf/Paper/ReductionSectionsNormalizedResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteReductionSections.reduction_sections_normalized_resolution",
+  "statement": "theorem reduction_sections_normalized_resolution\n    (P : CochainComplex (AdicCompletion.Modules l E U) ℤ)\n    (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E U) (.up ℤ)).kFlat P) :\n    ∃ (I : CochainComplex (ℕᵒᵖ ⥤ AdicCompletion.Modules l E U) ℤ)\n      (j : Functor.ofOpSequence\n        (X := fun n : ℕ ↦ (AdicCompletion.level l E U n).obj P)\n        (AdicCompletion.levelStep l E U P) ⟶ I.asFunctor),\n      I.IsKInjective ∧ (∀ q : ℤ, Injective (I.X q)) ∧\n      (∀ n : ℕ, QuasiIso (j.app (op n))) ∧\n      ∃ a : P ⟶ limit I.asFunctor,\n        (∀ n : ℕ, a ≫ limit.π I.asFunctor (op n) =\n          AdicCompletion.levelUnit l E U P n ≫ j.app (op n)) ∧\n        ∃ c : (rgamma l E U).obj (DerivedCategory.Q.obj (limit I.asFunctor)) ≅\n            DerivedCategory.Q.obj (roosF.obj (sectionTower l E U I)),\n          (sections l E U).rightDerivedFunctorUnit.app\n              ((HomotopyCategory.quotient _ _).obj (limit I.asFunctor)) ≫ c.hom =\n            DerivedCategory.Q.map (limitToRoos l E U I) ∧\n          (IsIso (DerivedCategory.Q.map (AdicCompletion.augmentation l E U P)) →\n            IsIso (DerivedCategory.Q.map a))",
+  "branch": "sheaf-dag",
+  "by": "T5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4974a",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T144105-L-1177264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4974a",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T144105-L-1177264",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 4 moved decls verbatim vs change record; new sorried statements read against their nodes and Stacks 0D6K/0941/BS products-exact; unit realized list vs removed imports; node proof_deps vs Lean"
+ }
+}

@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-dominant-flag-line-kempf-vanishing",
+ "kind": "statement",
+ "title": "Kempf vanishing for dominant flag line bundles",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: it is smooth, connected, affine and of finite type, has no nontrivial smooth connected solvable normal subgroup, and every surjective homomorphism from a semisimple group with finite central kernel is an isomorphism. Solvable means that successive commutator subgroup schemes become trivial; finite central means finite-dimensional coordinate algebra and commuting after every scalar extension. Fix a split maximal torus $T\\subseteq S$ and a Borel subgroup $B\\supseteq T$ with unipotent radical $U$, with these notions as in [lem-sfb-rho-section-modules]. Use the character lattice $X=X^*(T)$, roots $\\Phi$, positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, simple roots $\\Delta$, coroots and integer pairing of [lem-sfb-reductive-borel-pair-structure]. Put $\\rho=\\tfrac12\\sum_{\\alpha\\in\\Phi^+}\\alpha\\in X$ as in [lem-sfb-rho-section-modules]. Let $\\lambda\\in X$ satisfy $\\langle\\lambda,\\alpha^\\vee\\rangle\\ge0$ for every $\\alpha\\in\\Delta$. Extend $\\lambda$ to $\\widetilde\\lambda=\\lambda\\circ(B\\to T)$ and let $Q=S/B$. Let $\\mathcal L_{-\\widetilde\\lambda}$ be the homogeneous invertible sheaf of [lem-sfb-homogeneous-line-bundle-sections], defined by the right action $(g,z)\\cdot b=(gb,\\widetilde\\lambda(b)z)$ on $S\\times\\mathbf A^1$. Write $H^i(Q,-)=R^i\\Gamma(Q,-)$ for Zariski sheaf cohomology, computed by an injective resolution of sheaves of $\\mathcal O_Q$-modules. Then\n$$H^i(Q,\\mathcal L_{-\\widetilde\\lambda})=0\\qquad\\text{for every integer }i>0.$$\nThis holds in every characteristic, including for an empty root system.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 22d, pp.479--480, Theorems 22.50--22.51, with signs corrected to the line-bundle definition in 18c and 22.48; Jantzen 2003 II.4.5 and II.5.10--5.12 are WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For every character $\\mu$ write $M_\\mu=\\mathcal L_{-\\widetilde\\mu}$. The homogeneous-line-bundle statement supplies these actual invertible coherent modules and their trivializations on $S$. The multiplication map of trivial lines sends $(z,w)$ to $zw$: under $b\\in B$ its factor is $\\widetilde\\mu(b)\\widetilde\\nu(b)=\\widetilde{\\mu+\\nu}(b)$. The fpqc descent equivalence therefore gives $M_\\mu\\otimes M_\\nu\\simeq M_{\\mu+\\nu}$ and $M_0\\simeq\\mathcal O_Q$, compatibly with these trivializations. Consequently $M_\\mu^{\\otimes a}\\simeq M_{a\\mu}$ for $a\\ge0$, and $M_\\mu^{-1}\\simeq M_{-\\mu}$. These are sheaf identities, not just equalities of global sections.",
+   "uses": [
+    "lem-sfb-homogeneous-line-bundle-sections",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18c, pp.389--390, tensoring the specified descent data; 22.48, p.479."
+   }
+  },
+  {
+   "text": "The regular-dominant ampleness statement makes $Q$ smooth projective geometrically integral. The Borel-pair statement also gives properness. By the rho-pairing statement, $\\langle\\rho,\\alpha^\\vee\\rangle=1$ for each simple root. Since $\\lambda$ is dominant, both $\\lambda+\\rho$ and $\\lambda+2\\rho$ have strictly positive simple-coroot pairings, even if some pairings of $\\lambda$ vanish. Hence $A=M_{\\lambda+\\rho}$ and $A'=M_{\\lambda+2\\rho}$ are ample. These applications include the empty root system by the explicit rank-zero clause of the ampleness node.",
+   "uses": [
+    "lem-sfb-strict-dominant-flag-line-ample",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-regular-weyl-orbit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.49--22.51, p.480; regular-dominant geometric inputs made explicit."
+   }
+  },
+  {
+   "text": "Suppose first that $\\operatorname{char}F=p_0>0$. By properness and the proper-field coherence statement, $Q$ is Noetherian and $M_{-\\rho}$ is coherent. Apply Serre vanishing to this module and the ample invertible module $A=M_{\\lambda+\\rho}$. Choose $n_0$ so that $H^i(Q,M_{-\\rho}\\otimes A^{\\otimes n})=0$ for all $n\\ge n_0$ and $i>0$. Choose $r\\ge1$ with $q=p_0^r\\ge n_0$; this is possible since $p_0\\ge2$. Step 1 identifies the vanishing module at $n=q$ with $M_{q(\\lambda+\\rho)-\\rho}=M_{q\\lambda+(q-1)\\rho}$.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-weil-pbc-coherent-serre-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "II.4.5, local book WANTED; explicit Serre twisting assembly in the Andersen–Haboush argument cited by Milne 22.51."
+   }
+  },
+  {
+   "text": "Let $f=f_r=\\operatorname{Fr}_Q^r$ and $D=M_{(q-1)\\rho}$. The Andersen–Haboush input gives finiteness of $f$ and $f_*D\\simeq\\mathcal O_Q^{\\oplus d_r}$ with $d_r\\ge1$. In a Zariski frame of $M_\\lambda$, pullback by $f$ raises every transition unit $u_{ab}$ to $u_{ab}^{q}$. These are exactly the transition units of $M_\\lambda^{\\otimes q}$, so $f^*M_\\lambda\\simeq M_{q\\lambda}$ by step 1. Apply the finite ideal-twist cohomology comparison with $Y=X=Q$, its coherent module $\\mathcal F=D$, ideal $\\mathcal J=\\mathcal O_Q$, invertible module $\\mathcal L=M_\\lambda$ and exponent $n=1$. Its local-Noetherian hypotheses hold by step 3, and $D$ is coherent by the homogeneous-line-bundle statement. It gives\n$$H^i(Q,f_*D\\otimes M_\\lambda)\\simeq H^i(Q,D\\otimes f^*M_\\lambda)=H^i(Q,M_{q\\lambda+(q-1)\\rho})=0\\quad(i>0).$$\nHere the last equality is step 3; no ampleness of $M_\\lambda$ was assumed.",
+   "uses": [
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-trf-finite-ideal-twist-cohomology-comparison",
+    "lem-sfb-homogeneous-line-bundle-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "II.4.4--4.5, local book WANTED; sheaf pushforward formula and projection/cohomology assembly. Stacks coherent.tex Tags 0B5V (lemma-surjective-finite-morphism-ample), 01YP (lemma-affine-morphism-projection-ideal), 089W (lemma-relative-affine-cohomology), and cohomology.tex Tag 01E8 (lemma-projection-formula), as recorded by the cited finite comparison."
+   }
+  },
+  {
+   "text": "The sheaf isomorphism $f_*D\\simeq\\mathcal O_Q^{\\oplus d_r}$ identifies $f_*D\\otimes M_\\lambda$ with $M_\\lambda^{\\oplus d_r}$. Since $d_r\\ge1$, injection into its first summand and projection out of it compose to $\\mathrm{id}_{M_\\lambda}$. Applying the cohomology functor preserves this composite, so $H^i(Q,M_\\lambda)$ is a retract of the zero group in step 4, and is zero. This proves the positive-characteristic case, including $p_0=2$, $\\lambda=0$ and empty roots.",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "II.4.5, local book WANTED; elementary retract argument concluding the positive-characteristic proof."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}F=0$, the canonical-character statement gives $\\omega_Q\\simeq M_{-2\\rho}$. With $A'=M_{\\lambda+2\\rho}$ from step 2, step 1 gives $\\omega_Q\\otimes A'\\simeq M_\\lambda$. The flag scheme satisfies all the Kodaira hypotheses: smooth, projective and geometrically integral by step 2, pure dimension $|\\Phi^+|$ by the canonical-character statement, over the given algebraically closed characteristic-zero field, with $A'$ ample. Kodaira vanishing therefore gives $H^i(Q,M_\\lambda)=0$ for every $i>0$. Its dimension-zero case includes the empty root system. A field has characteristic zero or prime positive characteristic, so these two cases exhaust the statement.",
+   "uses": [
+    "lem-sfb-flag-canonical-character",
+    "lem-sfb-kodaira-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 22.51 proof, p.480, characteristic-zero Kodaira argument with the canonical character and ample twist written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-strict-dominant-flag-line-ample",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-rho-regular-weyl-orbit",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "lem-sfb-flag-frobenius-rho-pushforward",
+  "lem-trf-finite-ideal-twist-cohomology-comparison",
+  "pqf-def-cohomology",
+  "lem-sfb-flag-canonical-character",
+  "lem-sfb-kodaira-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "22.51, p.480, following its characteristic-zero Kodaira / positive-characteristic Andersen–Haboush branches. Jantzen II.4.4--4.5 is WANTED; Q49 spells out the Serre/projection/retract assembly, with the cited named supporting statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Weyl.*dimension|Weyl.*character|Kempf|Borel.Weil",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Kempf|kempf|dominant.*cohomolog|flag.*vanish",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"dominant\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher cohomology of a dominant line bundle on a flag variety vanishes in positive characteristic",
+   "results": "8 hits: isZero_groupCohomology_succ_of_subsingleton, Algebra.FormallySmooth.subsingleton_h1Cotangent, groupCohomology, groupCohomology.coboundaries₁_le_cocycles₁, groupCohomology_induction_on, CochainComplex.HomComplex.CohomologyClass.mk, CochainComplex.HomComplex.CohomologyClass.mk_eq_zero_iff, CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kempf vanishing: higher cohomology of a dominant homogeneous line bundle on G/B vanishes over any algebraically closed field",
+   "results": "8 hits: Rep.standardComplex.x_projective, Rep.instProjective, Rep.standardResolution.extIso, Rep.isZero_Tor_succ_of_projective, groupCohomology.shortComplexH0_exact, groupCohomology, groupCohomology.H0_induction_on, isZero_groupCohomology_succ_of_subsingleton",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For roots chosen in Lie B and dominant lambda, the associated line bundle with fibre character negative lambda has zero higher sheaf cohomology on G/B",
+   "results": "8 hits: Rep.standardResolution.extIso, Rep.isZero_Tor_succ_of_projective, LieModule.genWeightSpace_neg_add_chainBot, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, isZero_groupCohomology_succ_of_subsingleton, LieModule.genWeightSpace_add_chainTop, groupCohomology, LieModule.exists₂_genWeightSpace_smul_add_eq_bot",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; ordinary-group trace characters, Lie-algebra weights and root bilinear forms do not state the algebraic-group line-bundle or Weyl-alternant assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kempf vanishing higher sheaf cohomology of dominant line bundles on flag varieties",
+   "results": "8 hits: Rep.isZero_Tor_succ_of_projective, DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, CategoryTheory.Sheaf.cohomologyPresheaf, isZero_Ext_succ_of_projective, CategoryTheory.Sheaf.H",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract group homology, Lie-module root strings, Proj charts and derived truncation do not state flag-line vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "Kempf|kempf|Kodaira|Borel.Weil",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract group homology, Lie-module root strings, Proj charts and derived truncation do not state flag-line vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dominant homogeneous invertible sheaves on a flag variety have vanishing higher cohomology",
+   "results": "8 hits: AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.Proj.mul_apply, AlgebraicGeometry.Proj.basicOpenIsoAway_hom, AlgebraicGeometry.Scheme.Modules.Hom, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract group homology, Lie-module root strings, Proj charts and derived truncation do not state flag-line vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel Weil higher derived induction dominant algebraic group characters is acyclic",
+   "results": "8 hits: Rep.standardComplex.x_projective, Rep.standardResolution, groupCohomology.shortComplexH0_exact, Rep.isZero_Tor_succ_of_projective, Rep.standardResolution.extIso, Rep.Tor_obj, Rep.Tor, Rep.barResolution",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract group homology, Lie-module root strings, Proj charts and derived truncation do not state flag-line vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly dominant characters give ample homogeneous line bundles on a smooth projective flag variety and rho pairs to one with simple coroots",
+   "results": "8 hits: LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieModule.exists₂_genWeightSpace_smul_add_eq_bot, LieModule.exists_genWeightSpace_smul_add_eq_bot, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, LieModule.exists_nontrivial_weightSpace_of_lieIdeal, LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract group homology, Lie-module root strings, Proj charts and derived truncation do not state flag-line vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract group homology, Lie-module root strings, Proj charts and derived truncation do not state flag-line vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "strictly.?dominant|flag.*ample|ample.*flag|rho.*coroot",
+   "results": "2 hits: Mathlib/LinearAlgebra/Matrix/Gershgorin.lean, Mathlib/LinearAlgebra/Matrix/Gershgorin.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract group homology, Lie-module root strings, Proj charts and derived truncation do not state flag-line vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Frobenius pushforward of the line bundle with weight p to r minus one times rho on a flag variety is a nonzero trivial vector bundle Andersen Haboush",
+   "results": "8 hits: LieModule.chainTop_isNonZero', LieModule.chainTop_isNonZero, LieModule.genWeightSpace_nsmul_add_ne_bot_of_le, LieModule.Weight.IsNonZero, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat, LieModule.Weight.exists_ne_zero, LieModule.Weight.genWeightSpaceOf_ne_bot",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; abstract group homology, Lie-module root strings, Proj charts and derived truncation do not state flag-line vanishing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-induced-weyl-dimension-formula",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles.",
+   "via": [
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dominant-flag-line-kempf-vanishing",
+  "worker": "stage1",
+  "summary": "Q49 checked Milne 18c/22.48--22.51 and the cited geometric/Serre/finite-comparison statements. Kept the corrected dominant sign and all characteristics; normalized inherited doubled TeX escapes. Split into tensor descent, regular-dominant ampleness, Serre twisting, Andersen–Haboush finite pushforward and a cohomological retract, with Kodaira for characteristic zero. Four new statement-only nodes; no Mathlib leaf. Missing books/notes listed WANTED in the report. Avoided the existing Steinberg irreducibility node because its proof depends on the parent Weyl dimension formula and hence on this item.",
+  "blueprint": "Current latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, frontmatter det-thm-sf-ctf-stability-direct-images, paragraph (3). The inherited alteration/quotient/Haboush chain reaches the Weyl-dimension prerequisite; this split supplies its Kempf-vanishing input in the two characteristic cases. blueprint_refs ancestor prints None for this inherited created.item chain, so its null ancestor and full inherited via/place are retained. Whole-blueprint searches found no equivalent vanishing/geometric nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic fully faithful fpqc descent of modules; identifies tensor products of the explicitly given homogeneous lines."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic proper-field Noetherian/coherence tool needed for Serre and finite cohomology comparison."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-serre-vanishing",
+    "why": "Generic Serre theorem applied to the ample regular twist, preserving the unit route."
+   },
+   {
+    "node": "lem-trf-finite-ideal-twist-cohomology-comparison",
+    "why": "Generic projection formula and finite pushforward cohomology comparison with unit ideal, used on absolute Frobenius."
+   },
+   {
+    "node": "pqf-def-cohomology",
+    "why": "Definition of the right-derived global-section functor, used for functoriality of the retract argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "lem-trf-finite-ideal-twist-cohomology-comparison",
+  "pqf-def-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-f46754471",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-f46754471 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and all 4 new nodes in full, plus every cited statement, the definitions they use and Milne iAG2017 22.48-22.52 (pp.479-480). Live and side-live: the item is still unsplit with an identical statement and no repair note, and none of the new ids exists there. Sign check: DAG L_chi uses the action chi(b)^-1, as Milne 22.48 does, so M_mu=L_{-mu~} has sections f(gb)=mu~(b)f(g). For SL2 this gives M_n=O(n) on P1, so the dominant statement is right and was not weakened. Steps: (1) multipliers multiply and fpqc descent along pi gives M_mu tensor M_nu = M_{mu+nu}; (2) <rho,alpha^vee>=1, so lambda+rho and lambda+2rho are strictly dominant and the ample node applies; (3) Q is Noetherian and proper over Spec F, and Serre with the fixed coefficient M_{-rho} at n=q=p^r gives vanishing for M_{q lambda+(q-1)rho}; (4) finite ideal-twist comparison with J=O, F=D=M_{(q-1)rho}, L=M_lambda, n=1, and f^*M_lambda=M_{q lambda} by q-powers of transition units; (5) M_lambda is a retract of M_lambda^{d_r} with d_r>=1; (6) char 0: omega=M_{-2rho}, omega tensor M_{lambda+2rho}=M_lambda, and Kodaira's hypotheses all hold. This is the Andersen-Haboush and Kodaira proof that Milne 22.51 names. New nodes: ample cone, omega_Q=M_{-2rho}, (Fr^r)_*M_{(q-1)rho}=O^{d_r}, and general Kodaira vanishing are all true; I tested them on S=1, P1 and p=2. They are statement-only, self-contained and do not restate the item. They are not duplicates of flag-projective-linear-system, flag-torus-fixed-geometry, steinberg-induced-irreducible or restricted-frobenius-tensor-simplicity. There is no cycle, and the delivery rightly avoids steinberg-induced-module-irreducible, which depends on this item through the Weyl-dimension node. Advisory: the later split of lem-sfb-flag-frobenius-rho-pushforward must use an independent proof (Mathieu Lemma 3.1), not the Steinberg or Weyl-dimension chain. Batch-5 flags: proper-field coherence, finite projection formula, fppf covering base change (a Mathlib leaf) and split-lattice torus algebra are all generic tools, outside the trace formula and Poincare duality and their proofs, so I accept them. The off-unit tool_uses (fpqc descent, Serre vanishing, proper-field coherence, finite comparison, cohomology definition) are generic, so I accept them. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.DominantFlagLineKempfVanishing",
+  "declaration": "AlgebraicGeometry.dominant_flag_line_kempf_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/DominantFlagLineKempfVanishing.lean",
+  "statement": "theorem dominant_flag_line_kempf_vanishing {F : Type u} [Field F] [IsAlgClosed F] (S : Grp (Over (Spec (.of F)))) (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (T B : Grp (Over (Spec (.of F)))) (iT : T ⟶ S) (iB : B ⟶ S) (j : T ⟶ B) (hTB : IsRhoBorelPair iT iB j) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aS : ModObj T.X S.X) (aB : ModObj T.X B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) [P.IsReduced] (hconjS : aS.smul = (iT.hom.hom ⊗ₘ 𝟙 S.X) ≫ GrpObj.conj S.X) (hconjB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T S aS χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (ρ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hρ : 2 • ρ = ∑ α ∈ (@Finset.filter Φ b.IsPos (Classical.decPred _) Finset.univ), P.root α) (lam : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hlam : ∀ α ∈ b.support, 0 ≤ P.toLinearMap lam (P.coroot α)) (U : Grp (Over (Spec (.of F)))) (iU : U ⟶ B) (p : B ⟶ T) (hUc : IsClosedSubgroupScheme iU.hom.hom) (hUn : IsNormalSubgroupScheme iU.hom.hom) (hUs : Smooth U.X.hom) (hUconn : ConnectedSpace U.X.left) (hUu : SolvableGroupStructure.IsUnipotent U) (hUmax : ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) (hp : j ≫ p = 𝟙 T) (hker : IsPullback iU.hom.hom (toUnit U.X) p.hom.hom η[T.X]) (hsplit : IsIso ((fst U.X T.X ≫ iU.hom.hom) * (snd U.X T.X ≫ j.hom.hom))) (Q : Over (Spec (.of F))) (π : S.X ⟶ Q) (hQ : IsProper Q.hom) (hQft : LocallyOfFiniteType Q.hom) (hQqc : QuasiCompact Q.hom) (hπf : Flat π.left) (hπs : Surjective π.left) (hπi : (fst S.X B.X * (snd S.X B.X ≫ iB.hom.hom)) ≫ π = fst S.X B.X ≫ π) (hπt : IsPullback (fst S.X B.X) (fst S.X B.X * (snd S.X B.X ≫ iB.hom.hom)) π π) (L : AssociatedCharacterLineBundle.Presentation S B iB Q π (p ≫ (-lam).toMul)) : ∀ i : ℕ, 0 < i → IsZero ((RingedSpace.moduleCohomology Q.left.toRingedSpace i).obj L.L)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the actual character root datum, its conjugation-weight positive base, the Borel radical/complement projection, and AssociatedCharacterLineBundle.Presentation for p composed with the negative dominant weight. Positive natural degrees are exactly the positive integer cohomological degrees in the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccfd2bd4e",
+  "group": "NX",
+  "result": "pass",
+  "note": "Every clause matches. hS/hsc are verbatim the rho-section binders; IsRhoBorelPair = maximal split torus in a Borel. Root datum, base, pairing, weights, U, p, Q and π are verbatim the reductive_borel_pair_structure conclusions as binders: actions pinned to conjugation, pairing to composition, p unique via kernel square and U×T≅B. Φ spans, so dominance pairings are determined. hρ is integral, no division in F. Presentation for χ = p≫(-λ) has orbit relation (gb, λ(pb)z), the node's action (stage-1 sign: SL2 dominant n gives O(n)). Conclusion: moduleCohomology vanishes for all i>0. Edge cases S=1/empty Φ, λ=0, char 2 and char 0 covered; single universe matches deps. Node differs from live only in lean; statement verbatim; one sorry, no defs; source and blueprint docstrings with all 6 steps; imports exist; no name clash. Report has both headings (second reading is the standard post-2026-10-17 stub). Theorem stmt_deps come from stage 1, not added. No file changed, no compile."
+ }
+}

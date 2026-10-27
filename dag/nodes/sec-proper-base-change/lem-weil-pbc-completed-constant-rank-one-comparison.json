@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-completed-constant-rank-one-comparison",
+ "kind": "statement",
+ "title": "The rank-one free completed constant comparison",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring, I an ideal, C=AdicCompletion I A and H=lim constant(A/I^(n+1)). Let phi:constant C -> H have projections given by the completion evaluations. For the fixed free rank-one C-module C, the already constructed completedConstantComparisonMap is an isomorphism. No assertion about other finite modules or preservation of cokernels is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 093M; algebra.tex Tag 05GG (lemma-hathat-finitely-generated)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-constant-projection-maps"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary A-linear map from C/I^(n+1)C to A/I^(n+1) induced by completion evaluation. Its surjectivity follows from surjective_evalₐ; its injectivity follows from pow_smul_top_eq_ker_eval. Give it its quotient-ring linearity. The constant rank-one module maps canonically to the unit module of its constant ring sheaf; the constant ring sheafification unit and the additive sheafification unit are locally bijective, so this map is an isomorphism. Applying constant modules to the quotient evaluation and composing with this unit isomorphism gives finite-level isomorphisms of additive presheaves.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-completed-constant-residue-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-level maps send a constant class of c to the constant value evalₐ(c). Their compatibility with successor transitions follows on these generators from hφ and the ring-limit projection identity. Additive sheafification extends the identity to all sections. They therefore form an isomorphism between the underlying additive-presheaf module system and the underlying ring system.",
+   "uses": [
+    "def-weil-pbc-completed-constant-residue-data",
+    "def-weil-pbc-completed-constant-projection-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing constantChange_unit isomorphism for extension of the rank-one constant module along φ. Its inverse sends a ring section r to the local tensor r tensor 1, as follows directly from its construction by unitHomEquiv. Restrict scalars to A and forget to additive presheaves.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-completed-constant-residue-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the constructed comparison cone with the finite-level system isomorphism. Precompose its projections with the inverse of the scalar-extension unit isomorphism. The fixed projection formula sends r tensor 1 to projected(r) times the class of 1. The finite-level map is quotient-ring linear and sends that class to 1, so this is exactly the ring-limit projection. Thus the transported cone is isomorphic to the ring limit cone and is a limit. The additive forgetful functor preserves and reflects these limits; hence the original comparison cone is a limit and its canonical lift to the chosen limit is an isomorphism. No nonzero or proper-ideal hypothesis is used.",
+   "uses": [
+    "def-weil-pbc-completed-constant-projection-maps",
+    "def-weil-pbc-completed-constant-residue-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-mod-power",
+  "def-weil-pbc-completed-constant-residue-data",
+  "def-weil-pbc-completed-constant-projection-maps",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 093M; algebra.tex Tag 05GG (lemma-hathat-finitely-generated); implemented by G4 using the existing scalar-extension unit isomorphism, quotient evaluation, and transport of limit cones"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module over a Noetherian adic completion, scalar extension of its constant sheaf to the completed constant ring is the inverse limit of its constant finite quotients",
+   "results": "Ordinary AdicCompletion.ofTensorProductEquivOfFiniteNoetherian and related equivalences; no matching sheaf map or right-exactness result. A second query for constant quotient sheaf cokernels returned AdicCompletion.map_exact, again for ordinary modules.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "results": "Five ordinary completion/tensor declarations, with no site or constant-sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*completion|completion.*constant|limMap_add",
+   "results": "No matching declaration in the Mathlib grep search. Separate project rg inspection found CompletedConstantProjectionMaps and CompletedConstantSheafReduction, which supply the constructions used by the proof.",
+   "date": "2026-10-27",
+   "verdict": "use existing constructions and ordinary adjunction; isolate two distinct missing steps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of constant quotient sheaves of finite modules over a Noetherian completed ring preserves cokernels, and the completed constant comparison is an isomorphism for the rank one free module",
+   "results": "Eight results: generic cokernel preservation and module/sheaf limits, ordinary AdicCompletion, and ModuleCat.cokernelIsoRangeQuotient. None establishes the constant quotient sheaf comparison or its right exactness.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedConstantComparisonIsIso",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-constant-comparison-is-iso",
+   "place": "The rank-one free completed constant comparison"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantRankOneComparison",
+  "file": "lean/Sheaf/Paper/CompletedConstantRankOneComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedConstantComparisonMap_rankOne_isIso",
+  "statement": "theorem completedConstantComparisonMap_rankOne_isIso (X : Scheme.{u})\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)\n    (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)\n    (hφ : ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem X I) (op n) =\n      (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (AdicCompletion.evalₐ I (n + 1)).toRingHom)) :\n    IsIso (completedConstantComparisonMap X I φ hφ\n      (ModuleCat.of (AdicCompletion I A) (AdicCompletion I A)))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T054604-L-967842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T070606-L-2636686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

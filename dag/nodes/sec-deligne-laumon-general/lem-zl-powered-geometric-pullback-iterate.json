@@ -1,0 +1,133 @@
+{
+ "id": "lem-zl-powered-geometric-pullback-iterate",
+ "kind": "statement",
+ "title": "Iterated Weil-map square for the explicit powered geometric pullback",
+ "statement": "Let k0 and k1 be finite fields, l a prime invertible in both, X/k0 and C/k1 schemes, r a natural number, and v: Cbar -> Xbar intertwine Fr_C with Fr_X^r. Let P be the explicit powered geometric pullback [def-zl-powered-geometric-pullback]. Specify the induced equality Fr_C^m v = v Fr_X^(r*m) (automatically obtained by powering the given square). For a constructible source Weil sheaf G [def-weil-weil-sheaf-complex] and m >= 0, let theta:v^*G -> P(G) be its canonical carrier identification. The square of underlying pro-etale sheaf morphisms intertwines the m-fold Weil map of P(G) with the pulled-back (r*m)-fold Weil map of G [def-weil-local-frobenius-trace]: upperStarComp(Fr_C^m,v) ; (Fr_C^m)^*(theta) ; phi_PG,m equals upperStarCongr(Fr_C^m v = v Fr_X^(r*m)) ; upperStarComp(v,Fr_X^(r*m)) ; v^*(phi_G,r*m) ; theta. These are actual sheaf morphisms before choosing any points, residue fields, or characteristic polynomials.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3: local Frobenius under finite constant extension and restriction; the iterated Weil map groups into blocks of length r."
+ },
+ "stmt_deps": [
+  "def-zl-powered-geometric-pullback",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Prove a private composition lemma for squares of underlying sheaf maps using naturality of upperStarComp, upperStarCompIso, and upperStarCompIso_hom_app_paste. Derive the identity exchange from the compositor unit laws at the level of natural isomorphisms, then prove its sheaf square generically. The zero Weil maps are the identity-pullback units; generic substitution of these structure maps gives the zero square. Keeping functors abstract avoids unfolding concrete pullback constructions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3: local Frobenius under finite constant extension and restriction; the iterated Weil map groups into blocks of length r."
+   }
+  },
+  {
+   "text": "Use the completely proved first structure-map compatibility from the helper module. Unfold only the original poweredPullbackCarrierIso to match its canonical carrier identification.",
+   "uses": [
+    "lem-zl-powered-geometric-pullback-first-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3: local Frobenius under finite constant extension and restriction; the iterated Weil map groups into blocks of length r."
+   }
+  },
+  {
+   "text": "Prove the scheme-level commutation of powers for arbitrary category automorphisms. Prove the sheaf square by a generic induction on m for arbitrary automorphisms and arbitrary families of structure maps satisfying zero, successor and source-block composition laws: paste the preceding square and the first square by the private composition lemma. Specialize this induction to the actual Weil structure maps, spelling out the sheaf objects in the composition and the actual Frobenius automorphisms, without local let aliases, so elaboration and kernel checking do not unfold the concrete constructions. The zero law is frobeniusPowStr_zero and the generic identity-square calculation. The target successor law is upperStarFactor_hom_app_comp_frobeniusPowStr_succ. The source-block law is upperStarFactor_hom_app_comp_frobeniusPowStr_add, extended to a zero second index using the identity-pullback unit law, and to a specified result index so arithmetic rewrites stay outside concrete pullback functors. A generic compositor-cancellation lemma recovers exactly the original displayed theorem.",
+   "uses": [
+    "def-zl-powered-geometric-pullback",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3: local Frobenius under finite constant extension and restriction; the iterated Weil map groups into blocks of length r."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-zl-powered-geometric-pullback",
+  "def-weil-local-frobenius-trace",
+  "lem-zl-powered-geometric-pullback-first-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3: local Frobenius under finite constant extension and restriction; the iterated Weil map groups into blocks of length r. Implemented by B5 using the existing sheaf compositor, unit, successor and addition laws."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Iterated Weil structure of pullback commuting with a power of Frobenius equals the pulled-back source Weil structure iterated r times m",
+   "results": "8 Frobenius iteration results for rings; no Weil sheaf structure identity.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The m-fold iterated Weil isomorphism of a powered pullback equals pullback of the r m-fold iterated source Weil isomorphism by pullback composition coherence",
+   "results": "8 scheme module pullback composition and pullbackSpecIso results; no Weil map identity.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusPowStr|frobeniusPowIso|poweredGeometricPullback",
+   "results": "msearch.py: 0 Mathlib matches. Local source search found ordinary same-field pullback and lowerStar iteration, but no powered inverse-image iteration.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.PoweredGeometricPullbackStalk",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 1--3: local Frobenius under finite constant extension and restriction; the iterated Weil map groups into blocks of length r.",
+   "via": [
+    "lem-zl-powered-geometric-pullback-stalk"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.PoweredGeometricPullbackIterate",
+  "file": "lean/Sheaf/DeligneLaumon/PoweredGeometricPullbackIterate.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.poweredGeometricPullback_frobeniusPowStr",
+  "statement": "theorem poweredGeometricPullback_frobeniusPowStr (G : WeilSheaf k₀ l X) (m : ℕ)\n    (hvm : ((C ↘ Spec (.of k₁)).geometricGaloisFrobenius ^ m).hom ≫ v =\n      v ≫ ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ (r * m)).hom) :\n    (ProEtale.upperStarComp _\n      ((C ↘ Spec (.of k₁)).geometricGaloisFrobenius ^ m).hom v).hom.app G.obj.carrier.X ≫\n      (((C ↘ Spec (.of k₁)).geometricGaloisFrobenius ^ m).hom)^*[_].map\n        (poweredPullbackCarrierIso v r hv G).hom ≫\n      ((poweredGeometricPullback v r hv).obj G).frobeniusPowStr m =\n    (ProEtale.upperStarCongr _ hvm).hom.app G.obj.carrier.X ≫\n      (ProEtale.upperStarComp _ v\n        ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ (r * m)).hom).hom.app G.obj.carrier.X ≫\n      (v)^*[_].map (G.frobeniusPowStr (r * m)) ≫\n      (poweredPullbackCarrierIso v r hv G).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T065729-L-3211821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T222556-L-669673",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

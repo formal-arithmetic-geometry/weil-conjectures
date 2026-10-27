@@ -1,0 +1,176 @@
+{
+ "id": "lem-sfb-stack-universal-homeomorphism-geometric-points",
+ "kind": "statement",
+ "title": "Geometric points of a universal homeomorphism from a stack",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Deligne--Mumford stacks, representability by algebraic spaces, stacks in groupoids, and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. Let $\\mathcal A/S$ be Deligne--Mumford and $Y/S$ an algebraic space. Suppose $q:\\mathcal A\\to Y$ is a universal homeomorphism. It is a universal homeomorphism when every base change by an algebraic stack induces a homeomorphism on underlying point spaces. An algebraic stack means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; smooth uses [def-sbc-smooth-morphisms]. The underlying points are field-valued objects modulo isomorphism after common field extension, with topology detected by a smooth scheme atlas. Then for every algebraically closed field $K$ [def-weil-field, def-weil-algebraic-closure] and $\\operatorname{Spec}K\\to S$, $q$ induces a bijection $\\pi_0(\\mathcal A(K))\\xrightarrow{\\sim}Y(K)$, where $\\pi_0$ means isomorphism classes in the fibre groupoid. The same conclusion holds for every base change $\\mathcal A\\times_Y Y_1\\to Y_1$ by an algebraic space $Y_1\\to Y$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0CPN (lemma-universally-injective), 0DTM (lemma-universally-injective-point), and 0CI7 (definition-universal-homeomorphism). Target is an algebraic space, so the induced map on isomorphism classes is bijective."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "For each algebraic-stack test $\\mathcal Z\\to Y$, the homeomorphism $|\\mathcal A\\times_Y\\mathcal Z|\\to|\\mathcal Z|$ is injective. Thus $q$ is universally injective in the point-space sense. Taking the identity test $Y\\to Y$ also makes $|q|$ surjective. Composition with $q$ sends isomorphic objects to the same element of $Y(K)$, since an algebraic space is regarded as a discrete groupoid. Hence it defines the asserted map on isomorphism classes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CI7 (definition-universal-homeomorphism); pointwise consequences of the definition."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed $K$ and $y\\in Y(K)$. Surjectivity of $|q|$ puts $[y]$ in its image. Apply [lem-sfb-stack-universally-injective-point-lift] to $q$ and $y$, using universal injectivity from step 1. This gives $a\\in\\mathcal A(K)$ and an isomorphism $q(a)\\simeq y$. In the discrete groupoid $Y(K)$ this is equality. The class $[a]$ is therefore a preimage of $y$, proving surjectivity over this same field $K$.",
+   "uses": [
+    "lem-sfb-stack-universally-injective-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTM (lemma-universally-injective-point)."
+   }
+  },
+  {
+   "text": "If $a,b\\in\\mathcal A(K)$ have $q(a)=q(b)$, this equality supplies an isomorphism $\\beta:q(a)\\simeq q(b)$ in $Y(K)$. By the implication (1) to (3) of [lem-sfb-stack-universal-injectivity-criteria], universal injectivity of $q$ gives an isomorphism $\\alpha:a\\simeq b$ with $q(\\alpha)=\\beta$. Thus $[a]=[b]$. Together with step 2 this proves the desired bijection. No claim that $\\alpha$ is unique is needed.",
+   "uses": [
+    "lem-sfb-stack-universal-injectivity-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPN (lemma-universally-injective), implication (1) to (3)."
+   }
+  },
+  {
+   "text": "Let $h:Y_1\\to Y$ be any algebraic-space map. By the definition of the 2-fibre product, an object of $(\\mathcal A\\times_Y Y_1)(K)$ is a triple $(a,z,\\gamma)$ with $z\\in Y_1(K)$ and $\\gamma:q(a)\\simeq h(z)$. As $Y(K)$ is discrete, $\\gamma$ is the unique arrow witnessing the equality. For any $z$, step 2 supplies $a$ with $q(a)=h(z)$, giving such a triple. Two triples above the same $z$ have isomorphic $a$ components by step 3, and that isomorphism is automatically compatible with their structural arrows: both images in the discrete groupoid $Y(K)$ are the unique arrow between the same objects. It therefore gives an isomorphism of triples. The projection to $z$ is bijective on isomorphism classes, proving the base-change clause without any restriction on $h$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CI7 (definition-universal-homeomorphism), base-change clause; direct computation with 2-fibre-product groupoids."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-universal-injectivity-criteria",
+  "lem-sfb-stack-universally-injective-point-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0CI7, 0DTM and 0CPN; assemble the image-lifting and fullness statements, then compute the algebraic-space base-change fibre groupoid."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A universal homeomorphism from an algebraic stack to an algebraic space induces a bijection on isomorphism classes over every algebraically closed field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it induces a homeomorphism on the underlying topological spaces and the induced maps on the stalks are bijective.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsDominant\", \"doc\": \"Every isomorphism of schemes is a dominant morphism, meaning the property of being dominant holds for all isomorphisms in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.homeomorph\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → [CategoryTheory.IsIso f] → ↥X ≃ₜ ↥Y\", \"doc\": \"Given an isomorphism $ f $ between schemes $ X $ and $ Y $, this constructs the homeomorphism between their underlying topological spaces induced by forgetting the sheaf structure of the scheme isomor\"}\n  {\"name\": \"CategoryTheory.Iso.schemeIsoToHomeo\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ≅ Y) → ↥X ≃ₜ ↥Y\", \"doc\": \"Given an isomorphism between schemes $X$ and $Y$, this constructs a homeomorphism between their underlying topological spaces by applying the forgetful functor to topological spaces and converting the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.homeoOfIso\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ≅ Y) → ↥X ≃ₜ ↥Y\", \"doc\": \"Given an isomorphism $ e $ between schemes $ X $ and $ Y $, this constructs a homeomorphism between their underlying topological spaces by applying the forgetful functor to topological spaces and conv\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.coe_homeoOfIso\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  ⇑(AlgebraicGeometry.Scheme.homeoOfIso e) = ⇑(CategoryTheory.ConcreteCategory.hom e.hom.base)\", \"doc\": \"Given an isomorphism $ e $ between schemes $ X $ and $ Y $, this constructs a homeomorphism between their underlying topological spaces by applying the forgetful functor to topological spaces and conv\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.homeomorph_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : CategoryTheory.IsIso f] (x : ↥X),\\n  (AlgebraicGeometry.Scheme.Hom.homeomorph f) x = (CategoryTheory.ConcreteCategory.hom f.base) x\", \"doc\": \"Given an isomorphism $ f $ between schemes $ X $ and $ Y $, the underlying continuous map of $ f $ induces a homeomorphism between the topological spaces of $ X $ and $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyInjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"(AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Function.Injective).RespectsIso\", \"doc\": \"Every isomorphism of schemes has an injective underlying continuous map.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalHomeomorph\", \"point\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversalHomeomorph|universally.injective.*point|algebraic.stack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universally injective surjective morphisms of algebraic stacks lift algebraically closed field points uniquely up to isomorphism when the target is an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally injective if for every base change, the induced morphism on the underlying topological spaces is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"(f : X ⟶ Y) [UniversallyInjective f] : Function.Injective f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally injective if for every base change, the induced morphism on the underlying topological spaces is injective.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x =>\\n          Function.Injective x).universally\\n      f →\\n    AlgebraicGeometry.UniversallyInjective f\", \"doc\": \"If for every base change, the induced continuous map on topological spaces is injective, then the morphism $ f: X \\to Y $ of schemes is universally injective.\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \": @UniversallyInjective = universally (topologically (Injective ·))\", \"doc\": \"A morphism of schemes is universally injective if and only if it is injective on the underlying topological space and this injectivity is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.universally_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyInjective f],\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x =>\\n        Function.Injective x).universally\\n    f\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is universally injective if and only if the property of its underlying continuous map being injective is preserved under all base changes. This establishes that un\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyInjective f ↔\\n    (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x =>\\n          Function.Injective x).universally\\n      f\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, $ f $ is universally injective if and only if the topological property of injectivity is preserved under all base changes. This means that for every pullback\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.iff_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \": UniversallyInjective f ↔ Surjective (pullback.diagonal f)\", \"doc\": \"A morphism of schemes $ f $ is universally injective if and only if the diagonal morphism in the pullback of $ f $ with itself is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \": @UniversallyInjective = diagonal @Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-keel-mori-finite-inertia-quotient",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Geometric points of a universal homeomorphism from a stack.",
+   "via": [
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-universal-homeomorphism-geometric-points",
+  "worker": "stage1",
+  "summary": "Read Tags 0CI7, 0CPN and 0DTM. Separate the two general stack-theoretic inputs (fullness criterion and same-field image lifting) from the elementary universal-homeomorphism and discrete-target arguments. Keep the statement unchanged and prove arbitrary algebraic-space base change by triples. Mathlib candidates cover schemes only.",
+  "blueprint": "Realizes the inherited alteration/moduli prerequisite of det-thm-sf-ctf-stability-direct-images, proof (3), in literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md: geometric-point property of the Keel--Mori quotient below the open direct-image finiteness input. The ancestry command returns None because the historical creation chain ends at a Lean module rather than a DAG node; keep its computed null node and explicit textual anchor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-201cbca81",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-201cbca81 (reviewer sub-agent of L); spot-checked: I read Stacks stacks-morphisms.tex in full at 0CI7 (l.2928), 0CPN (l.2693-2760) and 0DTM (l.2762-2817), with their proofs. The new node lem-sfb-stack-universal-injectivity-criteria is exactly 0CPN: universal injectivity iff the relative diagonal is surjective iff every prescribed β lifts to an α on geometric fibre groupoids. The new node lem-sfb-stack-universally-injective-point-lift is exactly 0DTM, keeping the image hypothesis and the same-field conclusion. Both are statement-only, self-contained, cite only existing definitions and record 4 searches; Mathlib has only the scheme UniversallyInjective.iff_diagonal. grep -R of the DAG found no duplicate. The other stack universal-homeomorphism nodes (etale locality, separated target, invariant quotient) state different things. Neither new node restates the item. The item statement is unchanged against live, and live is still unsplit, so there is no supersession. The steps check out: step 1 (elementary) gets universal injectivity and |q| surjective from 0CI7, using the test Y->Y. Step 2 applies the lift node with all hypotheses in force and uses discreteness of Y(K). Step 3 applies (1)=>(3) of the criteria node with β = id, and no uniqueness of α is claimed. Step 4 (elementary) computes the 2-fibre product (a,z,φ) with the formula of def-sfb-stable-pointed-moduli-groupoids; the discrete Y(K) and Y_1(K) give a bijection for any h. Small cases agree: BG -> Spec K (one class, nontrivial automorphisms, fullness without faithfulness), a transcendental K'/K is not universally injective, an open immersion shows the image hypothesis is needed, and an empty source makes 0DTM vacuous. The route stays inside unit sk-thm-sf-ctf-stability and there is no SGA. All four batch-5 flags are accepted: def-trf-algebraic-space and def-sfb-stable-pointed-moduli-groupoids (whose closure reaches only the def-trf-projective-bundle-morphism convention) are general definitions, already stmt_deps of the item on the base, and not part of the trace-formula or Poincaré-duality proofs. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackUniversalHomeomorphismGeometricPoints",
+  "declaration": "CategoryTheory.stack_universalHomeomorphism_geometricPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackUniversalHomeomorphismGeometricPoints.lean",
+  "statement": "theorem stack_universalHomeomorphism_geometricPoints {S : Scheme.{u}} (A : BasedCategory.{max u v, max (u + 1) w} (Over S)) (Y : AlgebraicSpace S) (q : BasedFunctor A (discreteModuli Y.obj.obj)) (hA : IsDeligneMumfordModuliStack A) (hq : ∀ (Z : BasedCategory.{max u v v', max (u + 1) w w'} (Over S)), IsAlgebraicModuliStack Z → ∀ g : BasedFunctor Z (discreteModuli Y.obj.obj), IsHomeomorph (moduliPointMap (moduliTwoFiberFst g q))) : (∀ (K : Type u) [Field K] [IsAlgClosed K] (a : Spec (.of K) ⟶ S), Function.Bijective ((moduliFiberMap q (Over.mk a)).mapSkeleton.obj)) ∧ (∀ (Y1 : AlgebraicSpace S) (h : Y1 ⟶ Y) (K : Type u) [Field K] [IsAlgClosed K] (a : Spec (.of K) ⟶ S), Function.Bijective ((moduliFiberMap (moduliTwoFiberFst (discreteModuliMap h.hom.hom) q) (Over.mk a)).mapSkeleton.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-217dc5d5a",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read node, report, module and dependency declarations (discreteModuli, moduliTwoFiberProduct/Fst, moduliFiberMap, IsDeligneMumfordModuliStack, IsAlgebraicModuliStack, moduliPointMap, moduliPointTopologicalSpace, Mathlib Skeleton/mapSkeleton). Every clause matches: DM A, algebraic space Y as discreteModuli, hq is the all-algebraic-stack-base-change homeomorphism on landed point spaces, conclusions are skeleton bijectivity of actual fibre maps for every alg. closed K : Type u and Spec K→S, directly and after any algebraic space Y1→Y via the actual 2-fibre projection. No extra hypotheses; test universes max u v v' / max (u+1) w w' do not weaken the theorem; edge cases (empty, BG, inseparable) fine. Node diff vs live: only lean and stmt_deps; the 3 added landed def stmt_deps are byte-identical to side-live and own the used declarations; statement verbatim; no existing stack universal-homeomorphism def node; docstrings with tags, blueprint and proof steps; only sorry; Worker report and Second reading sections present. No findings."
+ }
+}

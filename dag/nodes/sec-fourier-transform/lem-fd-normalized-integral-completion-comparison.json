@@ -1,0 +1,264 @@
+{
+ "id": "lem-fd-normalized-integral-completion-comparison",
+ "kind": "statement",
+ "title": "Normalized exact integral completion comparison",
+ "statement": "Fix a finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a noetherian finite-dimensional scheme $T$ on which $\\ell$ is invertible. For every finite $F\\subset\\Omega$ over $\\mathbf Q_\\ell$, let $\\mathcal I_F^s(T)$ and $\\mathcal I_F^p(T)$ be the framework and PBC integral full categories underlying [def-weil-rationalization-karoubi, def-weil-pbc-rational-category]. Let $I_F$ be their exact integral identity identification, as in [lem-weil-pbc-integral-stratified-perfect-characterization]. Put $R_F=\\widehat{\\mathcal O}_{F,T}$, and for $E\\subseteq L$ write $C_{L/E}(K)=K\\otimes^L_{R_E}R_L$ for ordinary derived extension and $U_{L/E}$ for the strict quotient-tower extension [lem-weil-finite-free-completed-scalar-comparison]. Integral formulas below are written in the common full categories using $I_F$.\nFor every $E\\subseteq L$, the actual quotient-map comparison $b_{L/E}=\\chi_{L/E}:C_{L/E}\\to U_{L/E}$ restricts, together with its inverse, to natural isomorphisms of these integral categories. Both restricted functors are exact with the specified shifts. The comparison and its inverse are exact natural isomorphisms, and for every $m\\in\\mathbf Z$,\n$$\\sigma^U_{m,K}b_{L/E,K[m]}=b_{L/E,K}[m]\\sigma^C_{m,K},\\qquad\n\\sigma^C_{m,K}b_{L/E,K[m]}^{-1}=b_{L/E,K}^{-1}[m]\\sigma^U_{m,K}.$$\nThe ordinary coefficient-presentation transport sends every tensor generator to the same generator under the identity coefficient identifications. On any flat-term K-flat representative $P\\to K$ [def-pc-kflat-complex], the transported comparison into the strict cone has $n$th quotient coordinate $p\\otimes s\\mapsto p\\otimes\\bar s$, with $\\bar s$ the actual image in $(\\mathcal O_L/\\varpi_L^n)_T$, and zero shifted-product coordinate. Its derived localization equation uses the canonical resolving comparisons of [lem-pur-quotient-scalar-comparison-descent], independently of the representative. Thus its localization is the specified integral scalar lift required in [def-fd-coefficient-comparison-datum]. The specified cone shift is $(x,y)\\mapsto(x,(-1)^m y)$ and carries the completion-map value $(c(z),0)$ to $(c(z),0)$, where $c$ is the quotient cocone. These assertions hold also for $E=L$, under ordinary tensor multiplication, with $b_{E/E}$ the natural completeness unit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final coefficient-category sentence; agent-written auxiliary extraction from lem-fd-completion-inverse-scalar-coherence, Old proof steps 1–3: restriction, quotient normalization, derived descent and signed cone shift/exactness"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-pc-kflat-complex",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "def-fd-coefficient-comparison-datum",
+  "def-fd-completed-scalar-shift-representative-property",
+  "def-pur-completed-scalar-shift-coordinates",
+  "def-pur-completed-coefficient-presentation-transport"
+ ],
+ "proof": [
+  {
+   "text": "Obtain eChain, eOrd, eStrict and the complete signed representative and comparison-shift property from [lem-weil-point-completed-scalar-shift]. Apply [lem-fd-ordinary-scalar-normalized-exact] to its ordinary counit normalization.",
+   "uses": [
+    "lem-weil-point-completed-scalar-shift",
+    "lem-fd-ordinary-scalar-normalized-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Intrinsic integral completeness implies legacy completeness by [lem-sf-derived-complete-legacy-comparison]. Choose an auxiliary finite-field datum of characteristic greater than l, so legacy completeness gives IsDerivedCompleteUnrestricted. The finite-free theorem makes the actual completedScalarComparison invertible. Strict scalar extension preserves intrinsic constructibility; isomorphism closure transfers this to ordinary extension. Fullness restricts the actual comparison to b, without changing its hom components.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use fully faithful descent of CommShift along the target full-subcategory inclusion for each restriction. Its compatibility equation is exactly the required inclusion normalization. Apply the faithful inclusion to the shift square of b; the two normalization equations, naturality of the target inclusion shift and the ambient comparison square prove it. The inverse square follows by cancellation. Exactness of ordinary extension restricts along the exact fully faithful inclusion, and exactness of strict extension follows from its shift-compatible isomorphism b.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the localization equation and the two chain coordinates from the unique normalized constructions of [lem-weil-finite-free-completed-scalar-comparison]. Its identity specialization is the required multiplication and completeness-unit equation. Apply [lem-fd-coefficient-scalar-lift-normalization] for the final coefficient-presentation clause.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-fd-coefficient-scalar-lift-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-completed-scalar-shift",
+  "lem-fd-ordinary-scalar-normalized-exact",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-triangulated-category",
+  "lem-fd-coefficient-scalar-lift-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY and parent original steps 1–5; W5 Lean assembly using normalized completed scalar shifts and two strictly smaller auxiliary lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completion.*shift|completed.*scalar|scalar.*completion",
+   "results": "25 hits; Mathlib/Topology/Algebra/UniformMulAction.lean, Mathlib/Topology/Algebra/UniformMulAction.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completions and generic shift compatibility do not identify the quotient-normalized strict-tower comparison on the constructible integral categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient completion map from derived tensor product to the strict inverse limit is exact and compatible with shifts on constructible adic sheaves",
+   "results": "8 hits; AdicCompletion.map_exact, rTensor.inverse_comp_rTensor, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.eval_comp_of, IsAdicComplete.of_lift, AdicCompletion.of",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completions and generic shift compatibility do not identify the quotient-normalized strict-tower comparison on the constructible integral categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits; CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor, CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completions and generic shift compatibility do not identify the quotient-normalized strict-tower comparison on the constructible integral categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the quotient normalized finite free completed coefficient comparison to constructible derived complete complexes is an exact natural isomorphism with the specified cochain shifts",
+   "results": "8 hits; CochainComplex.ConnectData.restrictionLEIso, CochainComplex.ConnectData.restrictionGEIso, CochainComplex.ConnectData.restrictionLEIso_hom_f, CochainComplex.ConnectData.restrictionGEIso_hom_f, DerivedCategory.singleFunctorIsoCompQ, CochainComplex.ConnectData.restrictionLEIso_inv_f, CochainComplex.ConnectData.restrictionGEIso_inv_f, CochainComplex.cm5b.instQuasiIsoIntP",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completions and generic shift compatibility do not identify the quotient-normalized strict-tower comparison on the constructible integral categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete constructible sheaves ordinary coefficient extension versus completed scalar extension canonical quotient chain map and exact comparison",
+   "results": "8 hits; localCohomology.diagram, SheafOfModules.Presentation.map_π_eq, AdicCompletion.map_exact, AdicCompletion.eval_comp_of, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.of_comp_lift, IsAdicComplete.StrictMono.of_lift, Condensed.profiniteSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: module adic completions and generic shift compatibility do not identify the quotient-normalized strict-tower comparison on the constructible integral categories"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*shift|completed.*scalar|scalar.*completion",
+   "results": "25 hits; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/Topology/Algebra/UniformMulAction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and generic shift transformations do not state this normalized comparison of constructible derived sheaf coefficient functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived completion comparison is an exact natural isomorphism between ordinary and completed tensor extension for constructible adic sheaves",
+   "results": "8 hits; AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, IsAdicComplete.of_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and generic shift transformations do not state this normalized comparison of constructible derived sheaf coefficient functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits; CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor, CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and generic shift transformations do not state this normalized comparison of constructible derived sheaf coefficient functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical quotient map compares ordinary derived coefficient extension with completed scalar extension on derived complete constructible sheaves and commutes with shifts",
+   "results": "8 hits; SheafOfModules.Presentation.map_π_eq, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, localCohomology.diagram, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, PresheafOfModules.Derivation.Universal.fac, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and generic shift transformations do not state this normalized comparison of constructible derived sheaf coefficient functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete constructible adic sheaves finite extension of coefficient fields ordinary tensor strict inverse limit comparison normalized quotient maps",
+   "results": "8 hits; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and generic shift transformations do not state this normalized comparison of constructible derived sheaf coefficient functors"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-completion-inverse-scalar-coherence",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence: local Frobenius trace in the PBC coefficient category; Old proof steps 1–3: restriction, quotient normalization, derived descent and signed cone shift/exactness",
+   "via": [
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-normalized-integral-completion-comparison",
+  "worker": "stage1",
+  "summary": "Restrict the existing finite-free comparison using integral constructibility; retain coefficient-generator transport and resolving comparisons; descend the signed chain square, cancel for the inverse, and prove exactness by an isomorphism of image triangles. No new nodes are needed. Statement unchanged.",
+  "blueprint": "Realizes the final coefficient-category sentence of def-fd-trace-function, through lem-fd-rational-coefficient-category-comparison and lem-fd-completion-inverse-scalar-coherence: integral restriction, generator normalization, quotient localization, specified signed shifts and exactness.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-pur-quotient-scalar-comparison-descent",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-weil-completed-scalar-chain-shift",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-weil-completed-scalar-shift-descent",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic integral coefficient/derived-category tool used through its statement for restriction, normalized descent or shift/exactness; sk-def-trace supplies no such theorem and its coefficient-category route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-75617d197",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-75617d197 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and Q14's handed-off old steps 1–3 in full. There are no new nodes. The statement and stmt_deps are identical to the node Q14 created, proof_deps equal the union of the step uses, and there is no cycle and no SGA source. The steps keep every old argument and do not compress any.\n- Step 1: lem-weil-integral-scalar-extension-constructible says U preserves D^b_c. The finite-free comparison χ applies because D^b_c objects are derived complete, so C(K) lies in the category by isomorphism closure. The stratified characterization's hypotheses (T noetherian, finite-dimensional, ℓ invertible) are exactly the item's.\n- Step 2: the generator transport a⊗x↦e_L(a)⊗x of def-pur-completed-coefficient-presentation-transport is fixed on generators after the identifications e_E, e_L.\n- Step 3: the quotient descent lemma applies with R=R_E, S=R_L, B_n=(O_L/ϖ_L^n)_T; exact countable products of R_L-modules come from the pro-etale products lemma. The descended map is the same χ, and the datum is used only as a normalization.\n- Step 4: the chain-shift equation for every m, descended by lem-weil-completed-scalar-shift-descent. The sign (−1)^m multiplies only the zero shifted coordinate. I accept the ordinary-side σ^C as the standard shift of the left-derived termwise functor.\n- Step 5: the inverse equation follows by cancellation, and exactness of U by an isomorphism of image triangles, with the third square from naturality and m=1.\n- Edge cases E=L (completeness unit), m≤0, empty T and ramified L/E all hold.\n- Batch-5 flag: lem-weil-pbc-integral-coefficient-presentation-comparison reaches lem-pod-derived-exact-square-composition, a generic derived-functor pasting lemma (Stacks 05S7/014F). It is not part of the trace formula or Poincaré duality or their proofs, so I accept it.\n- I accept the generic tool_uses. No existing node duplicates the item."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdNormalizedIntegralCompletionComparison",
+  "declaration": "WeilConjectures.fdNormalizedIntegralCompletionComparison",
+  "declarations": [
+   "WeilConjectures.fdIntegralOrdinaryRestriction",
+   "WeilConjectures.fdIntegralStrictRestriction",
+   "WeilConjectures.fdNormalizedIntegralCompletionComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FdNormalizedIntegralCompletionComparison.lean",
+  "statement": "theorem fdNormalizedIntegralCompletionComparison (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] : ∃ (eChain : (integralScalarComplexFunctor l E L ι T).CommShift ℤ) (eOrd : (completedDerivedScalarExtension l E L ι T).CommShift ℤ) (eStrict : (integralScalarExtensionOfUniverses l E L ι T).CommShift ℤ), completedScalarShiftRepresentativeProperty ι T eChain eOrd eStrict ∧ ∃ (hC : ∀ K, sfIntegralConstructible l E T K → sfIntegralConstructible l L T ((completedDerivedScalarExtension l E L ι T).obj K)) (hU : ∀ K, sfIntegralConstructible l E T K → sfIntegralConstructible l L T ((integralScalarExtensionOfUniverses l E L ι T).obj K)) (b : fdIntegralOrdinaryRestriction l E L ι T hC ≅ fdIntegralStrictRestriction l E L ι T hU) (sC : (fdIntegralOrdinaryRestriction l E L ι T hC).CommShift ℤ) (sU : (fdIntegralStrictRestriction l E L ι T hU).CommShift ℤ), (∀ K, (b.hom.app K).hom = (completedScalarComparison l E L ι T).app K.obj) ∧ (fun [_s : (fdIntegralOrdinaryRestriction l E L ι T hC).CommShift ℤ] ↦ (fdIntegralOrdinaryRestriction l E L ι T hC).IsTriangulated) (_s := sC) ∧ (fun [_s : (fdIntegralStrictRestriction l E L ι T hU).CommShift ℤ] ↦ (fdIntegralStrictRestriction l E L ι T hU).IsTriangulated) (_s := sU) ∧ (fun [_sC : (fdIntegralOrdinaryRestriction l E L ι T hC).CommShift ℤ] [_sU : (fdIntegralStrictRestriction l E L ι T hU).CommShift ℤ] ↦ NatTrans.CommShift b.hom ℤ ∧ NatTrans.CommShift b.inv ℤ) (_sC := sC) (_sU := sU) ∧ (∀ (m : ℤ) K, HEq (((sfIntegralConstructible l L T).ι).map ((Functor.commShiftIso _ (self := sC) m).hom.app K) ≫ (((sfIntegralConstructible l L T).ι).commShiftIso m).hom.app ((fdIntegralOrdinaryRestriction l E L ι T hC).obj K)) ((completedDerivedScalarExtension l E L ι T).map ((((sfIntegralConstructible l E T).ι).commShiftIso m).hom.app K) ≫ (Functor.commShiftIso _ (self := eOrd) m).hom.app K.obj)) ∧ (∀ (m : ℤ) K, HEq (((sfIntegralConstructible l L T).ι).map ((Functor.commShiftIso _ (self := sU) m).hom.app K) ≫ (((sfIntegralConstructible l L T).ι).commShiftIso m).hom.app ((fdIntegralStrictRestriction l E L ι T hU).obj K)) ((integralScalarExtensionOfUniverses l E L ι T).map ((((sfIntegralConstructible l E T).ι).commShiftIso m).hom.app K) ≫ (Functor.commShiftIso _ (self := eStrict) m).hom.app K.obj)) ∧ (∀ P : (integralOperationsGoodComplex l E T).FullSubcategory, (completedScalarComparison l E L ι T).app (DerivedCategory.Q.obj P.obj) ≫ (integralScalarExtensionComparisonOfUniverses l E L ι T).hom.app P = completedScalarCounit l E L ι T P.obj ≫ DerivedCategory.Q.map ((completedScalarChainComparison l E L ι T).app P.obj)) ∧ (∀ (P : (integralOperationsGoodComplex l E T).FullSubcategory) (i : ℤ) (n : ℕ) (U : T.ProEtᵒᵖ) (s : (completedIntegralCommRingSheafUnrestricted l L T).obj.obj U) (x : (P.obj.X i).val.obj U), ((((completedScalarChainComparison l E L ι T).app P.obj).f i ≫ (CochainComplex.mappingCocone.fst (completedScalarRoosEndomorphism l E L ι T P.obj)).f i ≫ (Pi.π (fun n ↦ ((integralScalarTowerFunctor l E L ι T).obj P.obj).obj (op n)) n).f i).val.app U) (completedScalarTensorSection l E L ι T (P.obj.X i) U s x) = integralScalarTensorSection l E L ι T n (P.obj.X i) U ((completedIntegralCommRingProjectionUnrestricted l L T n).hom.app U s) x) ∧ (∀ (P : (integralOperationsGoodComplex l E T).FullSubcategory) (i : ℤ), ((completedScalarChainComparison l E L ι T).app P.obj).f i ≫ (CochainComplex.mappingCocone.snd (completedScalarRoosEndomorphism l E L ι T P.obj)).v i (i - 1) (by omega) = 0) ∧ (∀ P : (integralOperationsGoodComplex l E T).FullSubcategory, (completedScalarComparison l E E (AlgHom.id ℚ_[l] E) T).app (DerivedCategory.Q.obj P.obj) ≫ (integralScalarExtensionComparisonOfUniverses l E E (AlgHom.id ℚ_[l] E) T).hom.app P = completedScalarCounit l E E (AlgHom.id ℚ_[l] E) T P.obj ≫ DerivedCategory.Q.map ((completedScalarIdentityMultiplication l E T).hom.app P.obj) ≫ DerivedCategory.Q.map ((completedScalarIdentityUnit l E T).app P.obj)) ∧ (∀ {A B : Padic.FiniteCoefficientFields l Ω} (h : A ≤ B), ∃ (o : FdOrdinaryScalarTransport l Ω T h) (a : (sfIntegralConstructible l (pbcFiniteField.{u} l Ω A) T).ι ⋙ integralDetailedTransport T l (pbcFiniteField.{u} l Ω A) ⋙ pbcAmbientScalarExtension l Ω T h ≅ sfConstructibleIntegralScalarExtension D.p l hl (pbcFiniteField.{u} l Ω A) (pbcFiniteField.{u} l Ω B) (pbcFiniteFieldInclusion l Ω h) T ⋙ (sfIntegralConstructible l (pbcFiniteField.{u} l Ω B) T).ι ⋙ integralDetailedTransport T l (pbcFiniteField.{u} l Ω B)), ∀ (P : (integralOperationsGoodComplex l (pbcFiniteField.{u} l Ω A) T).FullSubcategory) (hP : sfIntegralConstructible l (pbcFiniteField.{u} l Ω A) T (DerivedCategory.Q.obj P.obj)), HEq (a.hom.app ⟨DerivedCategory.Q.obj P.obj, hP⟩ ≫ (integralDetailedTransport T l (pbcFiniteField.{u} l Ω B)).map ((integralScalarExtensionComparison l (pbcFiniteField.{u} l Ω A) (pbcFiniteField.{u} l Ω B) (pbcFiniteFieldInclusion l Ω h) T).hom.app P) ≫ (fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω B) T).hom.app ((integralScalarComplexFunctor l (pbcFiniteField.{u} l Ω A) (pbcFiniteField.{u} l Ω B) (pbcFiniteFieldInclusion l Ω h) T).obj P.obj)) ((pbcAmbientScalarExtension l Ω T h).map ((fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω A) T).hom.app P.obj) ≫ pbcComplexCounit (pbcCompletedScalarMap l Ω T h) (((fdCoefficientTransport l (pbcFiniteField.{u} l Ω A) T).mapHomologicalComplex (.up ℤ)).obj P.obj) ≫ DerivedCategory.Q.map (o.completion l Ω P.obj)))",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The common integral categories use the recorded sfIntegralConstructibleCategory and integralDetailedTransport. The two helpers are literal full-subcategory restrictions. The sole postponed theorem fixes its natural isomorphism to the actual completedScalarComparison, normalizes both restricted shifts through the inclusions, retains the full signed-cone representative property, explicit quotient coordinates, canonical descent equation, identity completeness unit, and the FdCoefficientComparison integral-lift equation. Repair of returned head 4eb8f99f1b5a: the three plain shift predicates are attached to def-fd-completed-scalar-shift-representative-property with existing:true; the theorem lem-weil-point-completed-scalar-shift is no longer a statement dependency. The Lean module and statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d43d64360",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Re-delivery of 4eb8 H2 RETURN. Item Lean byte-identical (sha 62963740…, single sorry); only delta: stmt_dep lem-weil-point-completed-scalar-shift → new def-fd-completed-scalar-shift-representative-property (existing:true on unchanged Sheaf.Paper.CompletedScalarShift: completedScalarShiftChainEquation/OrdinaryNormalization/RepresentativeProperty, theorem excluded) + lean.note + report sections. check_existing/check_new_node/check_record all clean; lean.statement verbatim; TeX matches the three Prop bodies (chain eq, counit normalization, 5-conjunct property); universes u coefficient/t scheme independent; body owners cited except integralScalarComplexFunctor (def-trf-integral-scalar-tower-functors), reached via the finite-free comparison as in the landed coordinates sibling → advisory. Added stmt_deps def-pur-coordinates/transport are landed with lean records; no base stmt_dep lost. Earlier clause-by-clause check (b=χ, sC/sU pinned, IsTriangulated, CommShift b/b⁻¹, quotient/zero coordinates, localization eq, E=L unit, FdCoefficientComparison chi lift) unaffected. Worker report and Second reading by Q88 present. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T164704-L-1052430",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

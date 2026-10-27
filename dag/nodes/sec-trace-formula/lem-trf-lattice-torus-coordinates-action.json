@@ -1,0 +1,307 @@
+{
+ "id": "lem-trf-lattice-torus-coordinates-action",
+ "kind": "statement",
+ "title": "Lattice torus coordinates, glued actions and Laurent base-change charts",
+ "statement": "Let $k$ be a field, let $L$ be an abelian group with a basis $b_1,\\ldots,b_r$ over $\\mathbf Z$, $r\\geq0$, and put $k[L]=\\bigoplus_{l\\in L}ke^l$ with $e^le^{l'}=e^{l+l'}$ and $T=\\operatorname{Spec}k[L]$ [def-weil-affine-spectrum]. The $k$-algebra isomorphism $k[L]\\simeq k[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$ sending $e^{\\sum n_i b_i}$ to $\\prod_i t_i^{n_i}$, with inverse $t_i\\mapsto e^{b_i}$, identifies the group scheme [def-sc-group-scheme] with comultiplication $e^l\\mapsto e^l\\otimes e^l$, counit $e^l\\mapsto1$, and antipode $e^l\\mapsto e^{-l}$ with the coordinate torus, whose multiplication, identity and inverse are coordinate multiplication, the tuple of ones and coordinate inversion.\n\nIf $N$ is a nonempty connected fine torsion-free monoscheme with a finite affine cover [def-trf-monoscheme-toric-realization] and its generic stalk is identified with $L$, the chart coactions $k[P]\\to k[L]\\otimes_k k[P]$, $e^p\\mapsto e^p\\otimes e^p$, agree on overlaps and define an action of this group scheme on $k[N]$ satisfying the associativity and unit identities. For every $k$-scheme $Y$, the inverse image of every affine open $V=\\operatorname{Spec}R\\subseteq Y$ under $T\\times_kY\\to Y$ [def-pc-fibre-product] is canonically\n$$\\operatorname{Spec}(R\\otimes_k k[L])\\simeq\\operatorname{Spec}R[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]\\simeq\\operatorname{Spec}\\bigl(R[t_1,\\ldots,t_r,u_1,\\ldots,u_r]/(t_i u_i-1\\mid1\\leq i\\leq r)\\bigr),$$\nwhere $c\\otimes e^{\\sum n_i b_i}\\mapsto c\\prod_i t_i^{n_i}$. These identifications commute with restriction to affine opens. The projection is locally of finite presentation [def-sbc-locally-finite-presentation]; if $Y$ is of finite type over $k$, so is $T\\times_kY$ [def-weil-finite-type-morphism]. In particular $T$ is of finite type over $k$. Rank zero and empty $Y$ are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-trf-monoscheme-toric-realization",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib MonoidAlgebra.domCongr k k b for the algebra coordinate map, and domCongrBialgEquiv for its comultiplication and counit compatibility. Its monomial formulas give the displayed formulas for the map and inverse. Induction over finite monomial sums and antipode_single proves antipode compatibility. Applying the contravariant hopfSpec functor to CommHopfAlgCat.isoMk of the inverse bialgebra equivalence gives the required group-scheme isomorphism, with exactly Spec.map of the inverse algebra map as its underlying map.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison."
+   }
+  },
+  {
+   "text": "Connectedness makes all connected-component classes equal. Each affine chart is therefore a component chart, and joint surjectivity of the realization colimit injections makes componentOpen the entire realization. Thus its open-subscheme inclusion is an isomorphism. The specification of existsUnique_torusAction gives its canonical chart formula. Construct the component-chart open cover directly from the union defining componentOpen. Pulling it back along the second projection and using the affine coaction scalar equation shows that torusAction is over k. Package this actual morphism as an Over morphism, and supply separately the unit and associativity diagrams from the two cited canonical-coaction lemmas. These are precisely the two proof fields of ModObj, whose smul is the prescribed torusAction.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-canonical-torus-coaction-unit",
+    "lem-trf-canonical-torus-coaction-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison."
+   }
+  },
+  {
+   "text": "For every coefficient algebra R, compose MonoidAlgebra.scalarTensorEquiv k R with MonoidAlgebra.domCongr R R b. The scalarTensorEquiv_tmul and domCongr_single formulas send c tensor e^l to single (b l) c. Prove naturality by induction on tensor sums, followed by induction on monoid-algebra sums in the second factor; the single-monomial case is the fact that a k-algebra homomorphism commutes with the scalar map. This works for the zero coefficient ring as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison."
+   }
+  },
+  {
+   "text": "Let Q be the displayed polynomial quotient. The residue classes t_i and u_i multiply to one because their product minus one lies in the spanning relation ideal. They form explicit units v_i=(t_i,u_i). Send an integer vector n to the unit product of v_i raised to n_i, and extend its value to an R-algebra homomorphism from the group algebra to Q using MonoidAlgebra.lift. In the other direction evaluate the polynomial variables at positive and negative standard monomials; every relation evaluates to zero, so Ideal.Quotient.liftₐ descends this map. The composite on Q fixes its polynomial generators. For the group-algebra composite, decompose every vector as the sum of its integer multiples of standard vectors; the unit homomorphism preserves this product and all integer powers, hence fixes every monomial. Algebra-hom extensionality gives both inverse identities. AlgEquiv.ofAlgHom packages the equivalence, whose evaluation formulas on both kinds of generators are the original polynomial evaluations. Empty products prove the rank-zero case, and no nontriviality hypothesis is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison."
+   }
+  },
+  {
+   "text": "Use pullbackLeftPullbackSndIso to paste the pullback along j with the torus projection. The Over equation j.left followed by Y.hom equals the scalar spectrum map identifies its base map with Spec R to Spec k. Apply pullback.congrHom, then pullbackSymmetry, then pullbackSpecIso k R k[L]. The two projection formulas follow by pullback extensionality, the pasting and symmetry projection equations, and pullbackSpecIso_hom_fst and pullbackSpecIso_hom_snd. This is valid for every j over the base, in particular every affine open chart.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison."
+   }
+  },
+  {
+   "text": "The coordinate group of integer vectors is finitely generated, and transfer along b gives Group.FG L. Mathlib MonoidAlgebra.finiteType_of_fg therefore gives Algebra.FiniteType k k[L]. Since k is a field it is Noetherian, and Algebra.FinitePresentation.of_finiteType makes this algebra finitely presented. LocallyOfFinitePresentation.SpecMap_iff gives the local finite presentation of its spectrum map. Stability under arbitrary base change gives the asserted projection property for every Y. Local finite type follows from local finite presentation; affine spectrum maps are quasi-compact. Base change preserves both properties, and composition with the finite-type structure map of Y proves the conjunction for the composite. This argument handles rank zero and empty Y without additional cases.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-trf-monoscheme-toric-realization",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-canonical-torus-coaction-unit",
+  "lem-trf-canonical-torus-coaction-associativity",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison.",
+  "note": "B8, 2026-10-26: five direct proofs from Mathlib primitives; action constructed from the recorded chart morphism and two strictly smaller action-diagram obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-lattice-torus-coordinates-action: A basis of a finite free abelian group identifies its group algebra spectrum with a split multiplicative torus, gives monomial torus actions on monoid algebra charts, and identifies base changes with finitely presented Laurent algebras",
+   "results": "OK: 8 hits; AddChar.complexBasis_apply, AddChar.complexBasis, NumberField.Units.fun_eq_repr, AddChar.coe_complexBasis, NumberField.Units.basisModTorsion, NumberField.Units.logEmbeddingEquiv, NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne, PeriodPair.latticeEquivProd",
+   "date": "2026-10-22",
+   "verdict": "no match: domain congruences and Hopf/coalgebra structures are useful primitives, but do not give the group-scheme coordinate comparison, glued chart action and arbitrary-base Laurent presentation in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*(equiv|tensor|hopf)|(Laurent|torus).*(presentation|action)",
+   "results": "OK: 25 hits; Mathlib/FieldTheory/Laurent.lean, Mathlib/FieldTheory/Laurent.lean, Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean, Mathlib/FieldTheory/Finite/Polynomial.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/Algebra/FreeAlgebra/Cardinality.lean, Mathlib/Algebra/FreeAlgebra/Cardinality.lean, Mathlib/Algebra/FreeAlgebra/Cardinality.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: domain congruences and Hopf/coalgebra structures are useful primitives, but do not give the group-scheme coordinate comparison, glued chart action and arbitrary-base Laurent presentation in this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"TensorProduct\"",
+   "results": "OK: 1 hits; LieAlgebra.LoopAlgebra.instGradedLieAlgebraTensorProductAddMonoidAlgebraDecomposeTensorGrade",
+   "date": "2026-10-22",
+   "verdict": "no match: domain congruences and Hopf/coalgebra structures are useful primitives, but do not give the group-scheme coordinate comparison, glued chart action and arbitrary-base Laurent presentation in this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group algebra spectrum finite free abelian group split torus monomial coaction finite presentation Laurent polynomial algebra after base change",
+   "results": "OK: 8 hits; Algebra.FinitePresentation.baseChange, LaurentPolynomial.instIsCocomm, Algebra.Presentation.baseChange, AddMonoidAlgebra.finiteType_iff_group_fg, LaurentPolynomial.instCoalgebra, MonoidAlgebra.instHopfAlgebra, MonoidAlgebra, LaurentPolynomial.instHopfAlgebra",
+   "date": "2026-10-22",
+   "verdict": "no match: domain congruences and Hopf/coalgebra structures are useful primitives, but do not give the group-scheme coordinate comparison, glued chart action and arbitrary-base Laurent presentation in this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of the group ring of Z to the power r represents r invertible elements; monomial comultiplication gives the product multiplicative group and localization compatible actions on toric schemes",
+   "results": "OK: 8 hits; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.AffineSpace.toSpecMvPoly, LaurentPolynomial.comul_T",
+   "date": "2026-10-22",
+   "verdict": "no match: domain congruences and Hopf/coalgebra structures are useful primitives, but do not give the group-scheme coordinate comparison, glued chart action and arbitrary-base Laurent presentation in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "domCongr|comul_T|instHopfAlgebra|antipode_single",
+   "results": "OK: 5 hits; 307, 310, 311, 316, 317; subdirectory Algebra/MonoidAlgebra/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: domain congruences and Hopf/coalgebra structures are useful primitives, but do not give the group-scheme coordinate comparison, glued chart action and arbitrary-base Laurent presentation in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "comul_T|instHopfAlgebra|antipode_single",
+   "results": "OK: 7 hits; Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Coalgebra/TensorProduct.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean; subdirectory RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: domain congruences and Hopf/coalgebra structures are useful primitives, but do not give the group-scheme coordinate comparison, glued chart action and arbitrary-base Laurent presentation in this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A basis of a free abelian group identifies its group algebra with Laurent polynomials, compatible with Hopf structure and monomial torus actions",
+   "results": "OK: 8 hits; FreeAbelianGroup.basis, FreeGroupBasis, Representation.freeAsModuleBasis, Module.Basis.symmetricAlgebra, FreeGroupBasis.ofFreeGroup, Polynomial.basisMonomials, FreeAddGroup, Polynomial.toLaurentAlg",
+   "date": "2026-10-23",
+   "verdict": "no match: read the Hopf algebra source and returned signatures; they give algebra primitives, not the finite-rank scheme coordinate isomorphism, overlap-glued action and arbitrary-base chart comparison together."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|comul_single|antipode_single|domCongr",
+   "results": "OK: 3 hits; Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean; subdirectory RingTheory/HopfAlgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: read the Hopf algebra source and returned signatures; they give algebra primitives, not the finite-rank scheme coordinate isomorphism, overlap-glued action and arbitrary-base chart comparison together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"HopfAlgebra\"",
+   "results": "OK: 4 hits; AddMonoidAlgebra.instHopfAlgebra, AddMonoidAlgebra.instHopfAlgebraStruct, MonoidAlgebra.instHopfAlgebra, MonoidAlgebra.instHopfAlgebraStruct",
+   "date": "2026-10-23",
+   "verdict": "no match: read the Hopf algebra source and returned signatures; they give algebra primitives, not the finite-rank scheme coordinate isomorphism, overlap-glued action and arbitrary-base chart comparison together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of a lattice group algebra is a product of multiplicative groups, and its monomial comultiplication acts compatibly on toric charts",
+   "results": "OK: 8 hits; LaurentPolynomial.comul_T, LaurentPolynomial.comul_C_mul_T, LaurentPolynomial.comul_C_mul_T_self, LaurentPolynomial.comul_C, MonoidAlgebra.comul_single, AddMonoidAlgebra.comul_single, Pi.comul_comp_finsuppLcoeFun, Finsupp.comul_comp_lsingle",
+   "date": "2026-10-23",
+   "verdict": "no match: read the Hopf algebra source and returned signatures; they give algebra primitives, not the finite-rank scheme coordinate isomorphism, overlap-glued action and arbitrary-base chart comparison together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-toric-realization-finite-type",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Remark 3.1.4 and 3.1.10(ii), Proposition 3.2.2 and 3.2.4--3.2.5, printed pp.98--100,103; smooth torus input in 2.3.16--2.3.17 and application in 3.2.19. No Stacks tag states the complete monoscheme realization assertion. New subargument: Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison.",
+   "via": [
+    "lem-trf-toric-realization-finite-type",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lattice-torus-coordinates-action",
+  "worker": "stage1",
+  "summary": "Q16 checked the unchanged statement against ILO VIII, proved the coordinates and Laurent presentation explicitly, checked the coaction on monoid-localization overlaps, and reused the existing generic-stalk and general scheme gluing/base-change nodes. No new nodes. Every cited statement was read and quoted in citations.json.",
+  "blueprint": "Historical auxiliary toric-resolution branch from lem-trf-local-term-locality via the existing from.via chain; realizes the lattice-coordinate, action and arbitrary-base Laurent-chart subargument of lem-trf-toric-realization-finite-type. Read latest blueprint locality statement/proof; no same-statement blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic tensor-product description of affine fibre products; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Generic identification of products with chart opens and inverse images of base opens; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic existence and uniqueness of gluing scheme morphisms; no node of this unit states it."
+   },
+   {
+    "node": "def-weil-affine-spectrum",
+    "why": "Affine spectrum contravariance and correspondence with ring homomorphisms."
+   },
+   {
+    "node": "def-sc-group-scheme",
+    "why": "Definition of the group diagrams checked on monomials."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Finite-polynomial-presentation criterion, applied to the explicit quotient."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Finite affine cover criterion applied to explicitly finitely generated algebras."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-7a96187f8",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-7a96187f8 (reviewer sub-agent of L); spot-checked: Read ILO VIII printed pp.103-104 (Prop 3.2.2: S[Spec P]=Spec O_S[P], gluing compatible with localization; 3.2.4 torus and 'action naturally extends'; 3.2.5; 3.2.12). Read the item in full and all ten cited statements: 01I4/01JQ affine fibre product, def-weil-affine-spectrum, def-sc-group-scheme, the generic-stalk clause of lem-trf-monoscheme-finite-chart-components (empty proof_deps, so no cycle), the realization definition, 01JR open fibre product, scheme-morphism gluing (arbitrary cover, no separatedness), 01TP, 01T0. The statement and stmt_deps are unchanged against side-live, where the item is unsplit. No repair note, no new nodes, no SGA. Steps 1-4 and 6-10 are correct: basis/Laurent bijection; Hopf identities on monomials; R-points are tuples of units; chart coaction e^{p-bar} tensor e^p; gluing and chartwise associativity and unit; q^{-1}(V)=Spec(R tensor k[L]) with naturality for an arbitrary k-map R to R'; explicit inverse for R[t,u]/(t_iu_i-1); lfp and finite type via a finite cover, with the r=0 and empty-Y cases covered. Tested r=0, r=1 with negative exponents, nonsaturated <2,3>, the zero ring and nonseparated N. FIX (E5/D5-type gap): Step 5 asserted 'refining chart overlaps by monoid basic opens' without showing that an overlap is covered by opens basic in both charts. I wrote out that D(a), with a the sum of the generators in the face of P outside the prime, is the smallest open U_x, equal to D(b) in Q with P[a^-1]=M(U_x)=Q[b^-1] compatibly with L, and added def-trf-fine-fan-blowup to the step's uses and to proof_deps. No duplicate: def-sc-gm-ga covers only rank 1; lem-trf-split-lattice-torus-projection is about smoothness and reducedness. The declared generic tool_uses (three Stacks leaves plus definitions) are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LatticeTorusCoordinatesAction",
+  "declaration": "AlgebraicGeometry.latticeTorus_coordinates",
+  "declarations": [
+   "AlgebraicGeometry.latticeTorus_coordinates",
+   "AlgebraicGeometry.latticeTorus_action",
+   "AlgebraicGeometry.latticeTorus_baseChange",
+   "AlgebraicGeometry.latticeTorus_presentation",
+   "AlgebraicGeometry.latticeTorus_affineCharts",
+   "AlgebraicGeometry.latticeTorus_finiteType"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LatticeTorusCoordinatesAction.lean",
+  "statement": "theorem latticeTorus_coordinates (k : Type u) [Field k] (L : Type u) [CommGroup L] (r : ℕ) (b : L ≃* Multiplicative (Fin r → ℤ)) : ∃ e : MonoidAlgebra k L ≃ₐ[k] MonoidAlgebra k (Multiplicative (Fin r → ℤ)), (∀ l : L, e (MonoidAlgebra.single l 1) = MonoidAlgebra.single (b l) 1) ∧ (∀ n : Multiplicative (Fin r → ℤ), e.symm (MonoidAlgebra.single n 1) = MonoidAlgebra.single (b.symm n) 1) ∧ (∀ x : MonoidAlgebra k L, (Algebra.TensorProduct.map e.toAlgHom e.toAlgHom) (Coalgebra.comul x) = Coalgebra.comul (e x)) ∧ (∀ x : MonoidAlgebra k L, Coalgebra.counit (e x) = (Coalgebra.counit x : k)) ∧ (∀ x : MonoidAlgebra k L, e (HopfAlgebra.antipode k x) = HopfAlgebra.antipode k (e x)) ∧ ∃ i : Grp.mk ((Spec (.of (MonoidAlgebra k L))).asOver (Spec (.of k))) ≅ Grp.mk ((Spec (.of (MonoidAlgebra k (Multiplicative (Fin r → ℤ))))).asOver (Spec (.of k))), i.hom.hom.hom.left = Spec.map (CommRingCat.ofHom e.symm.toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All six theorem bodies are complete. Coordinates, natural base change, the explicit Laurent quotient presentation, affine charts and finite type are proved directly. The action theorem constructs its component isomorphism and Over morphism and assembles ModObj from the separately stated unit and associativity diagrams. Statements and public imports are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86db5cb52",
+  "group": "Q28",
+  "result": "pass",
+  "note": "All six declarations match the node clause by clause: coordinate algebra iso pinned on monomials in both directions with comul/counit/antipode preserved and a Grp(Over Spec k) iso pinned to Spec.map e.symm; connected fine torsion-free action via the dependency's IsCanonicalTorusAction(torusAction) plus a ModObj for the canonical Hopf monoid with smul.left = torusAction and IsIso componentι; base change pinned by c⊗e^l ↦ single (b l) c and natural in every k-algebra map; quotient presentation pinned on generators; affine-chart iso fixed by both projections; LFP of the projection for every Y and finite type of T×Y and of T. Records: only the item's lean field differs from side-live, dependency nodes identical, statement verbatim, new module with no duplicate or parallel delivery. Edge cases r=0, empty Y, zero ring, any characteristic covered; single universe u forced by Over (Spec k) and harmless. No definitions, sorry-only proofs, source and blueprint docstrings, no pro-etale content. Advisories: L and j unused in latticeTorus_action (action stated for Spec k[C.lattice], equivalent by transport along j); coordinate torus's description on points implicit in the Hopf structure. Nothing compiled because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T081127-L-1826814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

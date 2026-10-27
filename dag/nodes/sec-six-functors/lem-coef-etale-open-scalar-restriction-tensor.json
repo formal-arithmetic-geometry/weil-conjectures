@@ -1,0 +1,127 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-coef-etale-open-scalar-restriction-tensor",
+ "kind": "statement",
+ "title": "The fixed scalar/open restriction mate respects the normalized tensor comparisons",
+ "statement": "For arbitrary commutative rings A and B in Type (u+1), a ring homomorphism φ:A→B, schemes U and X in universe u, and an open immersion j:U→X, let F_T be the fixed derived scalar extension, G_A and G_B the exact derived restrictions, r:G_A;F_U≅F_X;G_B the fixed scalar/restriction mate of [lem-coef-etale-open-comparison-data], δ_A and δ_B its exact restriction tensor isomorphisms, and t_T the uniquely normalized scalar tensor comparisons of [lem-coef-etale-hom-thick-locus]. For all K,M in D(X_et,A), F_U(δ_A(K,M));r_(K tensor M);G_B(t_X(K,M)^(-1)) = t_U(G_A K,G_A M)^(-1);(r_K tensor id);(id tensor r_M);δ_B(F_X K,F_X M). Both are maps from F_U(G_A K tensor G_A M) to G_B(F_X K tensor F_X M). There is no boundedness, flat coefficient-map, constructibility or quasi-compactness hypothesis.",
+ "stmt_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-coef-etale-hom-thick-locus"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "The coefficient-tensor compatibility for extension by zero, reduced to the ordinary monoidal scalar/restriction square; Stacks sites-modules.tex Tags 03EL and 0E8J, sites-cohomology.tex Tags 06YY and 07A4."
+ },
+ "proof": [
+  {
+   "text": "The ordinary scalar/restriction comparison is the conjugate of the sectionwise commutation of restriction of coefficients with direct image from the open slice site. This sectionwise comparison is monoidal: both maps on local pure tensors are the same balancing map. Conjugation under the ordinary scalar and geometric adjunctions gives the oplax monoidality of the ordinary scalar/restriction isomorphism. Its inverse is the fixed r-zero, since both are the left-adjoint comparison for the same sectionwise square.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this ordinary tensor equation in each bidegree of two flat-term K-flat resolutions and form signed direct-sum totalizations. Exact restriction preserves flat objects and integer-indexed colimits. Scalar extension preserves flat resolving models and their K-flatness over the new coefficient ring. The representative maps and localization tensorators on these models are invertible. The definition of r as the scalar-adjunction mate gives its model normalization by transposing to the localized ordinary scalar unit. The defining normalization of t identifies t inverse with the localized ordinary oplax tensorator. Substitute these identities into the totalized ordinary square and cancel the representative isomorphisms to obtain the displayed square on the chosen resolving objects.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data",
+    "lem-coef-etale-hom-thick-locus",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every unbounded derived object has a flat-term K-flat representative. Naturality of the tensorators and r in both variables transports the square from those representatives to arbitrary K,M. All ordinary maps preserve bidegrees, so no additional signs occur. The argument also applies to empty schemes and zero coefficient rings.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Restriction/tensor portion of the proof of lem-coef-etale-open-mixed-tensor-scalar; the remaining passage to extension by zero is implemented in that parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with open restriction as a monoidal natural isomorphism",
+   "results": "Eight ordinary scalar-extension and restriction adjunction hits; none specifies the derived scalar/open tensor square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.IsMonoidal",
+   "results": "Unknown identifier in the remote search index; no hits. Local source searches locate the ordinary monoidal conjugation API, not the normalized derived square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openScalarRestriction|scalarPullback.*[Tt]ensor",
+   "results": "No Mathlib hits. Local library searches found only exact-functor derived square APIs and ringed-module presentation APIs. The former require flat coefficient extension and the latter require additional presentation comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no matching native constant-coefficient statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenMixedTensorScalar",
+  "date": "2026-10-27",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph on extension by zero commuting with coefficient tensor: the ordinary scalar/restriction monoidality square and its K-flat descent, before applying the open adjunctions.",
+   "via": [
+    "lem-coef-etale-open-mixed-tensor-scalar",
+    "lem-coef-etale-open-scalar-coherence",
+    "lem-coef-etale-open-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenScalarRestrictionTensor",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenScalarRestrictionTensor.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenScalarRestrictionTensor",
+  "statement": "theorem etaleOpenScalarRestrictionTensor\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    (K M : DerivedCategoryModule A X) :\n    (scalarExtension φ U).map\n        (openExactRestrictionTensor (ModuleCat.{u + 1} A) j K M).hom ≫\n      (openScalarRestriction φ j).hom.app\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj K).obj M) ≫\n      (derivedRestriction (A := B) j).map (etaleHomTensorComparison X φ K M).inv =\n    (etaleHomTensorComparison U φ\n        ((derivedRestriction (A := A) j).obj K)\n        ((derivedRestriction (A := A) j).obj M)).inv ≫\n      ((derivedTensor (ModuleCat.{u + 1} B) U).map\n        ((openScalarRestriction φ j).hom.app K)).app\n          ((scalarExtension φ U).obj ((derivedRestriction (A := A) j).obj M)) ≫\n      ((derivedTensor (ModuleCat.{u + 1} B) U).obj\n        ((derivedRestriction (A := B) j).obj ((scalarExtension φ X).obj K))).map\n          ((openScalarRestriction φ j).hom.app M) ≫\n      (openExactRestrictionTensor (ModuleCat.{u + 1} B) j\n        ((scalarExtension φ X).obj K) ((scalarExtension φ X).obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-coef-etale-hom-thick-locus",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T094332-L-215299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T094332-L-215299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-constant-module-derived-projection-identification",
+ "kind": "statement",
+ "title": "Constant-module realization identifies derived tensors, adjunctions and projection maps",
+ "statement": "Let $(C,J)$ and $(D,K)$ be sites small in the chosen module universe [def-weil-size-convention], $A$ a finite discrete commutative ring, and $w:\\operatorname{Sh}(D,K)\\to\\operatorname{Sh}(C,J)$ a geometric morphism. Give it the constant-section-preserving ring isomorphism $c:w^{-1}\\underline A_C\\xrightarrow{\\sim}\\underline A_D$ [def-weil-pbc-constant-sheaf, def-weil-pbc-ringed-topos-morphism]. Let $E_C:\\operatorname{Sh}(C,J;\\operatorname{Mod}_A)\\simeq\\operatorname{Mod}(\\underline A_C)$ and $E_D$ be the constant-scalar equivalences, normalized to preserve the underlying additive sheaf and constant scalar actions [lem-weil-pbc-site-module-sheaf-constant-ring-equivalence]. On the fixed-$A$ side use the sheafified tensor over $A$, its direct-sum K-flat derived tensor, the exact module inverse image $w_A^*$ and the canonical derived adjunction $w_A^*\\dashv Rw_{*,A}$ obtained from the ordinary constant-scalar comparison [lem-sfb-constant-scalar-geometric-adjunctions]; on the ringed side use extension of scalars along $c$, canonical K-flat derived pullback, derived tensor and the K-injective derived adjunction [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-ringed-projection-mate-exact]. All derived categories are ordinary and uncompleted [def-weil-abstract-derived-category]. Flatness and K-flatness mean exactness of tensor and preservation of acyclic complexes by total tensor, respectively [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. The equivalences $E_C,E_D$ are the constant-scalar restrictions with their tensor comparisons, flat/K-flat preservation and signed total-tensor identifications of [lem-sfb-constant-scalar-restriction-tensor]. The fixed-$A$ pullback tensor comparison $w_A^*(M\\otimes_A^{\\mathbf L}N)\\to w_A^*M\\otimes_A^{\\mathbf L}w_A^*N$ is the one computed on flat-term K-flat representatives by the map $w_A^*(P\\otimes_AQ)\\to w_A^*P\\otimes_Aw_A^*Q$ sending each local pure tensor to the corresponding pure tensor.\nThe induced equivalences $D(E_C),D(E_D)$ identify these derived tensors and pullback/direct-image functors, including their specified adjunction Hom bijections, units and counits. Under these identifications the fixed-$A$ pullback tensor comparison is exactly the ringed comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], for every pair of unbounded inputs. Consequently the fixed-$A$ projection map defined as the adjunct of counit tensor identity after this comparison is the specified ringed projection map, naturally in both inputs. These identifications also commute with the canonical inclusions $D^+\\hookrightarrow D$ and the bounded-below/unbounded direct-image comparisons; the included bounded-below counit is the unbounded counit at the included object. Here $D^+$ is the full subcategory of complexes with cohomology zero in all sufficiently negative degrees. In particular, when $(C,J),(D,K)$ are the small etale sites of schemes $Y,X$ and $w=f_{\\mathrm{et}}$ for a morphism $f:X\\to Y$, the module inverse image of [prop-weil-pbc-inverse-image-modules-exact] (the inverse image of the underlying abelian sheaf with transported action, with the abelian unit and counit) corresponds under $E_C,E_D$ to $w_A^*$ with its adjunction, the comparison of [lem-kun-inverse-image-monoidal] corresponds to the inverse of the fixed-$A$ pullback tensor comparison, and the projection-formula morphism $\\mathrm{PF}_f$ of [def-kun-projection-formula-map] (with $\\Lambda=A$) corresponds to the fixed-$A$ projection map; hence $\\mathrm{PF}_f$ is the specified ringed projection map of $f_{\\mathrm{et}}$ along $c$. No bound on a tensor factor, invertibility of the projection map, or existence of points is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, flat-term K-flat total models; Tag 07A6, lemma-adjoint, canonical derived Hom adjunction; constant-scalar specialization of the constructions"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-constant-scalar-geometric-adjunctions",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-inverse-image-monoidal",
+  "def-kun-projection-formula-map",
+  "def-sfb-derived-projection-comparison-squares",
+  "def-sfb-constant-module-geometric-comparison-data",
+  "def-sfb-constant-module-derived-comparison-data",
+  "def-sfb-constant-module-plus-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-constant-module-ordinary-realization to obtain the normalized ordinary scalar comparison and fixed inverse-image tensor data. The fixed inverse image is additive since it is a left adjoint between abelian categories, and the fixed direct image is additive since it is a right adjoint. The underlying fixed-module sheaf functor reflects finite limits. The geometric underlying comparison therefore makes the fixed inverse image left exact. Its adjunction supplies colimits. Reflect left exactness of the ringed inverse image along the exact scalar-restriction equivalence, using the ordinary left comparison; its adjunction supplies colimits. These constructions give ExactData without another assumption.",
+   "uses": [
+    "lem-sfb-constant-module-ordinary-realization",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 07A6; canonical exact localization and adjunction transpose."
+   }
+  },
+  {
+   "text": "Define the left derived comparison by the exact-functor composition isomorphisms and the localized ordinary left isomorphism. The composition and natural-isomorphism factorization equations prove its complex and homotopy localization formulas. Its inverse has the inverse formula by cancellation. Define the right comparison to be its mate under the canonical exact/right-derived adjunctions. The vertical scalar functors are derived equivalences, so the standard iterated-mate argument makes that mate invertible. The derived exact-mate normalization lemma identifies its localization formula with the ordinary right comparison; the ordinary Hom equation identifies the latter with the ordinary mate. The unit-mate equation and naturality prove the derived Hom equation on every object. Applying this to identities and to counits proves the unit and counit squares.",
+   "uses": [
+    "lem-pur-exact-derived-mate",
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 07A6; canonical exact localization and adjunction transpose."
+   }
+  },
+  {
+   "text": "Apply lem-sfb-constant-module-tensor-square-descent to the just constructed left comparison and its localization formula. This supplies the ordinary ringed monoidal structure with the specified tensorator, the two normalized derived monoidal structures, and their tensor square.",
+   "uses": [
+    "lem-sfb-constant-module-tensor-square-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 07A6; canonical exact localization and adjunction transpose."
+   }
+  },
+  {
+   "text": "Apply the existing abstract projection-map mate compatibility theorem to the inverse left comparison. The tensor square is its comparison-compatibility hypothesis. The counit square identifies its mate with the chosen right comparison. Its conclusion is exactly ProjectionSquare. Package the comparisons, normalizations, tensor data, adjunction square and projection square into DerivedIdentification.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 07A6; canonical exact localization and adjunction transpose."
+   }
+  },
+  {
+   "text": "Restrict the exact/right-derived unbounded adjunction along the two fully faithful bounded-below inclusions using the canonical plus compatibility isomorphisms. Its unit has the same homotopy localization equation as derivedPlus, so uniqueness of that unit identifies the two adjunctions. The restriction counit and Hom formulas give the included counit and Hom equations. Restrict the left comparison componentwise; conjugate the right comparison by the canonical plus direct-image compatibilities. Naturality follows from their three naturality squares. Faithfulness of the inclusion and cancellation of the fixed direct-image compatibility prove the bounded-below Hom square. This constructs PlusIdentification, including both included counit equations.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 07A6; canonical exact localization and adjunction transpose."
+   }
+  },
+  {
+   "text": "Construct the ordinary etale geometric datum with its published fixed-module adjunction and canonical ordinary tensor data using lem-sfb-etale-constant-module-geometric-realization. Reuse the exactness, derived-identification and bounded-below constructors from the general comparison, retaining the canonical ordinary tensor data supplied by this realization, and choose the normalized scalar derived comparisons. This gives x,o,t,e and the bounded-below package. Use lem-sfb-etale-constant-module-tensor-normalization with the fixed tensor normalization field of e to identify its tensorator with the published K-flat etale tensorator under the canonical exact/left-derived isomorphism. The existing mapDerivedUpperStarLowerStarAdjunction_eq identifies the derived adjunctions under the same isomorphism; its Hom equation gives the full adjunction square, and identities and counits give the unit and counit squares. The abstract projection-map mate compatibility already proved in this module now supplies the projection square from the tensor and adjunction squares. Package these specified left and right isomorphisms, their reflexive normalization equations and the two squares into EtaleIdentification. No projection map is assumed invertible and no tensor bound or points are used.",
+   "uses": [
+    "lem-sfb-etale-constant-module-geometric-realization",
+    "lem-sfb-etale-constant-module-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6: etale constant-coefficient specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-module-ordinary-realization",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-pur-exact-derived-mate",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-constant-module-tensor-square-descent",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-etale-constant-module-geometric-realization",
+  "lem-sfb-etale-constant-module-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Y2 completes the etale assembly from ordinary geometric realization and the normalized tensor bridge; the exact/K-flat adjunction comparison and projection mate argument are proved using existing APIs. General comparison proof unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(equiv|counit)|projectionFormula|rightAdjointProjectionMap",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"counit\"",
+   "results": "Hits read: PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction, PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app, AlgebraicGeometry.tildeEquiv_counitIso_hom_app_hom.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor and projection formula morphisms agree under the constant ring module sheaf equivalence and preserve the normalized direct image comparison mate",
+   "results": "Hits read: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforward.congr_simp, SheafOfModules.pushforwardCongr.congr_simp, SheafOfModules.sheafificationCompPullback, SheafOfModules.pushforwardCongr_inv_app_val_app, SheafOfModules.unitHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.Monoidal.tensorHom.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport between module valued sheaves and modules over the constant ring sheaf preserves derived adjunction counits and the counit defined projection formula map",
+   "results": "Hits read: SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.constantSheafAdj_counit_w, LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, CategoryTheory.Sheaf.adjunction_counit_app_val, SheafOfModules.PullbackConstruction.adjunction, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CategoryTheory.constantSheafAdj_counit_app.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant ring scalar restriction equivalence identifies K flat derived tensor models and derived adjunction counits and therefore their projection transposes",
+   "results": "Hits read: ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.homEquiv_extendScalarsId, ModuleCat.extendRestrictScalarsAdj_unit_app_apply.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ee]quivalence|derived.*[Aa]djunction|projectionFormula",
+   "results": "No hits. These give ordinary sheaf operations or general derived adjunction formulas, not the combined constant-scalar realization and projection-map identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaf categories preserves K injective derived adjunctions and K flat tensor comparison maps",
+   "results": "Hits read: CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongrPrecoherent, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.enoughInjectives_iff, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.sheafCongr.functor. These give ordinary sheaf operations or general derived adjunction formulas, not the combined constant-scalar realization and projection-map identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"adjunction\"",
+   "results": "Hits read: PresheafOfModules.sheafificationAdjunction, PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. These give ordinary sheaf operations or general derived adjunction formulas, not the combined constant-scalar realization and projection-map identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport canonical derived adjunction unit counit along exact equivalences and compare projection formula via K flat tensor resolutions",
+   "results": "Hits read: CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedε_fac_app_assoc. These give ordinary sheaf operations or general derived adjunction formulas, not the combined constant-scalar realization and projection-map identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant ring module sheaf equivalence identifies unbounded derived pullback pushforward adjunction tensor comparison and projection formula morphism",
+   "results": "Hits read: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackComp, SheafOfModules.pullback_id_comp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackId_hom. These give ordinary sheaf operations or general derived adjunction formulas, not the combined constant-scalar realization and projection-map identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projection-comparison-etale-proetale",
+  "date": "2026-10-22",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3): canonical projection map transport, not only its endpoints; equality of the tensor and counit constructions in returned item steps 2-4.",
+   "via": [
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-constant-module-derived-projection-identification",
+  "worker": "stage1",
+  "summary": "Q58: retained the full statement, supplied eight model-level proof steps using existing nodes only; checked specified units, counits, pure-tensor maps and bounded-below inclusions without points or tensor bounds. No exact project or Mathlib attachment found.",
+  "blueprint": "det-thm-sfb-proper-base-change-finite proof paragraph (3): equality of the canonical projection morphism under constant-module realization, serving the etale/pro-etale transport.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-constant-scalar-restriction-tensor",
+    "why": "Generic Constant scalar restriction preserves tensor, total complexes and K-flat localization used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "lem-sfb-constant-scalar-geometric-adjunctions",
+    "why": "Generic Constant scalar restriction identifies geometric module adjunctions used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic Signed tensor comparison and composition on cochain sheaf pullbacks used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+    "why": "Generic Transfer of ringed-site resolving tensor localization across an exact equivalence used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic Grothendieck abelian categories have enough injectives used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic Right derived functor on bounded below derived categories, computed on bounded below complexes of injectives used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic Monoidality of the derived inverse image used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Generic The projection-formula morphism used only for scalar realization, tensor models or resolution/adjunction comparison; it does not replace the finite proper base-change unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-kun-inverse-image-monoidal",
+  "def-kun-projection-formula-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-4481905d9",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-4481905d9 (reviewer sub-agent of L); spot-checked: FIX: two small gaps repaired in the item's proof; the mathematics is sound and the statement and stmt_deps are unchanged (identical to the Q87 reviewer fix). There are no new nodes. Repairs: (1) Step 1 justified exactness of w_R^* only as 'the stipulated exact w_A^*' (C1/E5). It now argues that w^{-1} preserves finite limits, so w_A^* preserves kernels, and that w_A^* preserves cokernels as the left adjoint of w_{*,A}. It cites def-weil-pbc-ringed-topos-morphism and lem-sfb-constant-scalar-geometric-adjunctions, and concludes w_R^* = E_D w_A^* C_C is exact. (2) Step 2 applied lem-derived-exact-equivalence-squares, which needs universal right-derived pairs on both sides, before step 3 showed that the fixed-A side has them. Step 2 now derives them itself, citing prop-pur-kinjective-resolutions-exist, lem-weil-pbc-right-adjoint-preserves-kinjective and lem-weil-pbc-kinjective-total-derived; proof_deps was recomputed. Checks: all 24 cited statements were read. lem-sfb-constant-scalar-geometric-adjunctions matches the item's direction and constant-section hypothesis. The η/ε formulas in step 3 are exactly those of termwise-adjunction-homotopy (b). The step-4 mate s⊗x↦s·w^{-1}x was checked on generators; both routes give (s w^{-1}x)⊗w^{-1}y. The NL statement of the ringed derived tensor pullback comparison says only 'canonical'; its Lean record pins it on flat-term K-flat models to the pure-tensor CanonicalRingedTensorComparison, as in Stacks 07A4 (sites-cohomology lemma-pullback-tensor-product, read). The D+ counit clause is checked through the bounded-below injective (hence K-injective) representative. The étale clause matches prop-weil-pbc-inverse-image-modules-exact (1)-(3), lem-kun-inverse-image-monoidal (07A4, reverse orientation) and def-kun-projection-formula-map. Edge cases: A=0, w=id, an empty topos, A=Z/4 with unbounded inputs. Accepted tool uses: the constant-scalar nodes of sk-prop-sf-rf-shriek-preservation, lem-pur-cochain-pullback-tensor-coherence, lem-kun-inverse-image-monoidal and def-kun-projection-formula-map; all are generic, and blueprint main-20261015 det-thm-sfb-proper-base-change-finite paragraph (3) route is kept. No SGA cited; no duplicate found among the existing constant-scalar nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantModuleDerivedProjectionIdentification",
+  "declaration": "CategoryTheory.ConstantModuleDerivedProjection.constant_module_derived_projection_identification",
+  "declarations": [
+   "CategoryTheory.ConstantModuleDerivedProjection.constant_module_derived_projection_identification",
+   "CategoryTheory.ConstantModuleDerivedProjection.EtaleIdentification",
+   "CategoryTheory.ConstantModuleDerivedProjection.etale_constant_module_derived_projection_identification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConstantModuleDerivedProjectionIdentification.lean",
+  "statement": "theorem constant_module_derived_projection_identification [Finite A] (d : GeometricData J K A) : ∃ x : ExactData d, ∃ o : OrdinaryIdentification d, ∃ t : FixedTensorData d, ∀ (cJ : DerivedComparison.{u, v, w, w} J A) (cK : DerivedComparison.{u, v, w, w} K A), Nonempty (Σ e : DerivedIdentification d x o t cJ cK, PlusIdentification d x o t cJ cK e)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df5e8cb69",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Re-delivery after RETURN 6574ec19 (H13). Both dependency node files are now byte-identical to live; the three OfUniverses helpers moved into the def-sfb-constant-module-geometric-comparison-data module (bodies identical to the deleted helper modules); item, derived, plus and squares modules unchanged since the fully reviewed previous delivery. New fault H4/H9/H12: CategoryTheory.RingedToposMorphismOfUniverses is already landed in Sheaf.Paper.SequenceSiteCompletionProjection, owned by def-pur-ringed-topos-morphism-of-universes (Q111, on the base since 2026-10-21 13:57 UTC; EssentiallySmall.{r}, same fields), so the delivery's copy clashes by full name and duplicates the notion. FIX: geometric module imports the landed structure and uses it as @RingedToposMorphismOfUniverses D C _ _ (essentiallySmallSelf.{v} D) (essentiallySmallSelf.{v} C) K J; item module adds file-local attribute [-instance] WeilConjectures.SemilinearSections.hasDerived, because that imported global instance hijacked etale HasDerivedCategory synthesis (7 errors); #synth confirms ofIsGrothendieckAbelian as before. Geometric node json adds stmt_dep def-pur-ringed-topos-morphism-of-universes, cites it in its statement and drops the removed declaration; item lean-record pins the verbatim statement; report gets an appended maintainer section. nt_compile --json of all 5 siblings clean: 4.6/19.0/48.5/4.4/7.9 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T222810-L-697822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

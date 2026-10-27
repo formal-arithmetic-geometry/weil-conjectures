@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-graded-sheaf-module-grothendieck",
+ "kind": "statement",
+ "title": "Graded sheaf modules form a Grothendieck category",
+ "statement": "Let $X$ be a topological space with a sheaf of commutative rings $\\mathcal O$, in the universes of [def-weil-size-convention], and let $\\mathcal A$ be a sheaf dg $\\mathcal O$-algebra. Use left sheaf dg modules and signed shifts as in [def-sfb-sheaf-dg-module-localization]. Write $\\operatorname{Gr}(\\mathcal A)$ for the category whose objects are integer-graded $\\mathcal O$-module sheaves $N=\\bigoplus_n N^n$ with associative unital graded left action $\\mathcal A^i\\otimes_{\\mathcal O}N^j\\to N^{i+j}$, without any differential on $N$; its maps are action-preserving maps of degree zero. Then $\\operatorname{Gr}(\\mathcal A)$ is Grothendieck abelian [def-sp-grothendieck-abelian].",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FRD (lemma-gm-grothendieck-abelian), with Tag 0FR0 (lemma-gm-abelian); left modules by the graded opposite algebra."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-sp-grothendieck-abelian",
+  "def-sfb-graded-sheaf-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Work on the small open site of $X$. The cited ordinary module category is abelian; its kernels are sectionwise and its cokernels are sheafified sectionwise cokernels. For $f:M\\to N$ of degree zero, put $K^q=\\ker f^q$ and $C^q=\\operatorname{coker}f^q$ in that category. The identity $f(am)=af(m)$ restricts the action to $K$. For $C$, tensor-colimit preservation makes $\\mathcal A^i\\otimes C^q$ the cokernel of $\\mathcal A^i\\otimes M^q\\to\\mathcal A^i\\otimes N^q$. The composite to $C^{i+q}$ kills that map and hence induces the quotient action. Its unit and associativity follow from those on $N$ by precomposing with these epimorphic quotient maps, tensoring twice for associativity. Degreewise kernel and cokernel factorizations preserve actions by the same identities, so they have the graded universal properties. Addition, zero and finite biproducts are componentwise. The canonical coimage-to-image map is an isomorphism in every degree, since ordinary module sheaves are abelian. Its inverse respects the action by composing the action square with the degreewise inverses. Thus the graded category is abelian. This also shows that a sequence is exact precisely when it is exact in every degree.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FR0 (lemma-gm-abelian), kernel and cokernel paragraph; quotient actions expressed using Tag 03EP (sites-modules-lemma-tensor-commute-colimits)."
+   }
+  },
+  {
+   "text": "For any small diagram $(M_t)$, take $Q^q=\\operatorname{colim}_t M_t^q$ in ordinary module sheaves, with maps $c_t^q$. Such colimits exist by the cited ordinary Grothendieck assertion. Tensor-colimit preservation gives the unique maps $\\mu_{i,q}:\\mathcal A^i\\otimes Q^q\\to Q^{i+q}$ satisfying $\\mu_{i,q}(1\\otimes c_t^q)=c_t^{i+q}\\mu^t_{i,q}$. The unit identity follows after precomposing with every $c_t^q$. The two associativity composites from $\\mathcal A^i\\otimes\\mathcal A^j\\otimes Q^q$ agree after precomposing with $1\\otimes1\\otimes c_t^q$, because the actions on $M_t$ are associative; these maps jointly determine a morphism by two applications of tensor-colimit preservation. Hence $Q$ is a graded module. Given a graded cocone to $T$, its unique degreewise factorization $Q^q\\to T^q$ respects actions by testing after $1\\otimes c_t^q$. This proves the colimit universal property, including the empty diagram. Thus all small colimits exist and are computed degreewise.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FR0 (lemma-gm-abelian), colimit paragraphs; direct construction of arbitrary colimits using Tag 03EP."
+   }
+  },
+  {
+   "text": "For a small filtered diagram of short exact sequences of graded modules, step 1 makes each degree a diagram of short exact sequences of ordinary $\\mathcal O$-module sheaves. Their colimit sequence is exact by the cited ordinary Grothendieck assertion. Step 2 identifies this sequence in each degree with the corresponding degree of the graded colimit sequence. Applying degreewise detection of exactness from step 1 proves exactness of filtered colimits in $\\operatorname{Gr}(\\mathcal A)$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FR0 (lemma-gm-abelian), final paragraph; ordinary input sites-cohomology.tex Tag 07A5, section-unbounded."
+   }
+  },
+  {
+   "text": "For an open $U$ and $n\\in\\mathbf Z$, let $F_{U,n}$ be the underlying graded left module of the signed shift $\\mathcal A_U[-n]$. Explicitly $F_{U,n}^q=\\mathcal A_U^{q-n}$, and $a\\cdot b=(-1)^{n|a|}ab$. Ignore its differential. For any graded $M$, evaluation at $1$ is a bijection $\\operatorname{Hom}_{\\operatorname{Gr}(\\mathcal A_U)}(F_{U,n},M|_U)\\simeq\\Gamma(U,M^n)$. Indeed, a section $m$ has inverse map $b\\mapsto(-1)^{n|b|}bm$ on each open inside $U$. It respects restrictions and is degree zero. For homogeneous $a,b$ its value on $a\\cdot b$ is $(-1)^{n|a|+n(|a|+|b|)}abm=(-1)^{n|b|}abm$, which equals $a$ times the value on $b$. Conversely $b=(-1)^{n|b|}(b\\cdot1)$ forces this formula for every linear map; evaluation at $1$ returns $m$. The cited graded extension adjunction now yields a natural bijection $\\operatorname{Hom}_{\\operatorname{Gr}(\\mathcal A)}(j_{U!}F_{U,n},M)\\simeq\\Gamma(U,M^n)$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-sfb-graded-open-extension-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRD (lemma-gm-grothendieck-abelian), displayed Hom calculation; Tag 0FRA (lemma-extension-by-zero-graded), with signed left shift and its explicit evaluation formula."
+   }
+  },
+  {
+   "text": "The opens $U$ and integers $n$ form a set in the chosen universe. Form $G=\\bigoplus_{U,n}j_{U!}F_{U,n}$ using step 2. To prove that $\\operatorname{Hom}(G,-)$ is faithful, take distinct maps $f,g:M\\to N$. Some degree $n$, open $U$ and section $m\\in M^n(U)$ satisfy $f(m)\\ne g(m)$, since maps of sheaves are determined by sections. Step 4 supplies $h:j_{U!}F_{U,n}\\to M$ corresponding to $m$, and by naturality $fh\\ne gh$. Extend $h$ to $G$ by assigning zero to every other summand. The composites with $f$ and $g$ remain distinct on this summand. Thus $G$ is a generator. Abelianness from step 1, small colimits from step 2, exact filtered colimits from step 3, and this generator give precisely the cited definition of Grothendieck abelian.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRD (lemma-gm-grothendieck-abelian), generator paragraph; faithfulness verified directly on distinct maps, strengthening the source's zero-object detection argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-graded-open-extension-adjunction",
+  "def-weil-size-convention",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FR0 (lemma-gm-abelian) and 0FRD (lemma-gm-grothendieck-abelian); explicit signed left-module translation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The category of sheaves of graded modules over a sheaf of graded algebras is Grothendieck abelian",
+   "results": "{\"t\": \"2026-10-24T08:09:48Z\", \"tool\": \"leanfinder\", \"query\": \"The category of sheaves of graded modules over a sheaf of graded algebras is Grothendieck abelian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"SheafOfModules.instAbelian\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"CategoryTheory.sheafIsAbelian\", \"SheafOfModules.instCategory\", \"SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf\"], \"digest\": \"7e5cccefeb3a19b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian concerns sheaves valued in a fixed category; SheafOfModules concerns an ordinary sheaf of rings. GradedModule.lean:39-54 has graded actions, but not this category of graded module sheaves over a varying graded algebra. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-45. Constructing the graded category and comparing it to another category is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of graded modules have a generator and exact filtered colimits",
+   "results": "{\"t\": \"2026-10-24T08:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of graded modules have a generator and exact filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.isColimitFreeCofan\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.GeneratingSections\", \"SheafOfModules.free\", \"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"ecf66236458486c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian concerns sheaves valued in a fixed category; SheafOfModules concerns an ordinary sheaf of rings. GradedModule.lean:39-54 has graded actions, but not this category of graded module sheaves over a varying graded algebra. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-45. Constructing the graded category and comparing it to another category is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGrothendieckAbelian\", \"Graded\"",
+   "results": "{\"t\": \"2026-10-24T08:10:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGrothendieckAbelian\\\", \\\"Graded\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian concerns sheaves valued in a fixed category; SheafOfModules concerns an ordinary sheaf of rings. GradedModule.lean:39-54 has graded actions, but not this category of graded module sheaves over a varying graded algebra. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-45. Constructing the graded category and comparing it to another category is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Graded.*(Sheaf|Module)|Sheaf.*Graded",
+   "results": "{\"t\": \"2026-10-24T08:10:44Z\", \"tool\": \"grep\", \"query\": \"Graded.*(Sheaf|Module)|Sheaf.*Graded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Grading.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Grading.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Grading.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean\", \"Mathlib/Algebra/DirectSum/Internal.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\"], \"digest\": \"bea73dada3fb7a9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian concerns sheaves valued in a fixed category; SheafOfModules concerns an ordinary sheaf of rings. GradedModule.lean:39-54 has graded actions, but not this category of graded module sheaves over a varying graded algebra. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-45. Constructing the graded category and comparing it to another category is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of graded modules over a sheaf of graded algebras form a Grothendieck abelian category",
+   "results": "{\"t\": \"2026-10-24T08:10:44Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of graded modules over a sheaf of graded algebras form a Grothendieck abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"instIsGrothendieckAbelianModuleCat\", \"SheafOfModules.instAbelian\", \"SheafOfModules\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"SheafOfModules.noConfusionType\", \"SheafOfModules.mk\", \"AlgebraicGeometry.Scheme.Modules\"], \"digest\": \"ddb17927f9c5e1f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian concerns sheaves valued in a fixed category; SheafOfModules concerns an ordinary sheaf of rings. GradedModule.lean:39-54 has graded actions, but not this category of graded module sheaves over a varying graded algebra. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-45. Constructing the graded category and comparing it to another category is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graded sheaves of modules over a sheaf of graded algebras form a Grothendieck abelian category",
+   "results": "{\"t\": \"2026-10-24T08:33:57Z\", \"tool\": \"leanfinder\", \"query\": \"Graded sheaves of modules over a sheaf of graded algebras form a Grothendieck abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"SheafOfModules.instAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"instIsGrothendieckAbelianModuleCat\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"instAbelianLightCondMod\", \"instAbelianCondensedMod\"], \"digest\": \"b6a039aa9d19c03c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian and Sheaf.ab5ofSize concern sheaves valued in one fixed category, SheafOfModules concerns ordinary ring sheaves, and Gmodule is an action on graded families of types. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84, Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-42 and Algebra/Module/GradedModule.lean:39-54. None constructs this category of sheaves with a varying graded algebra action; a comparison would be a theorem, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Graded.*(Sheaf|Module)|Sheaf.*Graded",
+   "results": "{\"t\": \"2026-10-24T08:34:41Z\", \"tool\": \"grep\", \"query\": \"Graded.*(Sheaf|Module)|Sheaf.*Graded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\"], \"digest\": \"690acbe31c0bd7bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian and Sheaf.ab5ofSize concern sheaves valued in one fixed category, SheafOfModules concerns ordinary ring sheaves, and Gmodule is an action on graded families of types. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84, Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-42 and Algebra/Module/GradedModule.lean:39-54. None constructs this category of sheaves with a varying graded algebra action; a comparison would be a theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of graded modules have a generator and exact filtered colimits",
+   "results": "{\"t\": \"2026-10-24T08:34:42Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of graded modules have a generator and exact filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"ModuleCat.FilteredColimits.M\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"ModuleCat.FilteredColimits.M.mk\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.hasLimit\"], \"digest\": \"3225bfb021506f5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian and Sheaf.ab5ofSize concern sheaves valued in one fixed category, SheafOfModules concerns ordinary ring sheaves, and Gmodule is an action on graded families of types. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84, Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-42 and Algebra/Module/GradedModule.lean:39-54. None constructs this category of sheaves with a varying graded algebra action; a comparison would be a theorem, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGrothendieckAbelian\", \"Graded\"",
+   "results": "{\"t\": \"2026-10-24T08:34:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGrothendieckAbelian\\\", \\\"Graded\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian and Sheaf.ab5ofSize concern sheaves valued in one fixed category, SheafOfModules concerns ordinary ring sheaves, and Gmodule is an action on graded families of types. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84, Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-42 and Algebra/Module/GradedModule.lean:39-54. None constructs this category of sheaves with a varying graded algebra action; a comparison would be a theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of graded modules have a generator and exact filtered colimits",
+   "results": "{\"t\": \"2026-10-24T08:34:44Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of graded modules have a generator and exact filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.isColimitFreeCofan\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.GeneratingSections\", \"SheafOfModules.free\", \"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"ecf66236458486c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sheaf.instIsGrothendieckAbelian and Sheaf.ab5ofSize concern sheaves valued in one fixed category, SheafOfModules concerns ordinary ring sheaves, and Gmodule is an action on graded families of types. Read CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-84, Algebra/Category/ModuleCat/Sheaf/Abelian.lean:34-42 and Algebra/Module/GradedModule.lean:39-54. None constructs this category of sheaves with a varying graded algebra action; a comparison would be a theorem, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-injectivity-tests",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Resolution prerequisite: set of acyclic extension tests before the pushout construction of 0FT0. Independent prerequisite in the injectivity-test proof: graded category used to choose a generator and apply the existing Baer criterion before forming acyclic tests.",
+   "via": [
+    "lem-sfb-sheaf-dg-injectivity-tests",
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-graded-sheaf-module-grothendieck",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0FR0 and 0FRD on the small open site. Constructed kernels, quotient actions, degreewise colimits and exact filtered colimits; proved the signed shifted regular-module evaluation and faithfulness of the explicit generator. Created only the graded open extension adjunction (0FRA), with no differential hypothesis. Reused ordinary module Grothendieck and tensor-colimit nodes. Kept the item statement unchanged.",
+  "blueprint": "The inherited source chain serves det-thm-sf-ctf-stability-direct-images, paragraph (3), as recorded in blueprint.from.place; the current latest unit sk-thm-sf-ctf-stability is unchanged. At this prerequisite level steps 1-3 realize Stacks 0FR0 and steps 4-5 the generator argument of 0FRD used by the existing injectivity-test branch. The ancestor tool returns null for this inherited non-blueprint chain; that recorded ancestry is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ordinary sheaf-module abelianness, colimits and AB5 on the small open site, explicitly invoked in the proof of 0FR0; not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic sheaf tensor preserves small colimits (03EP), used for quotient actions and degreewise colimits; no graded-module construction is taken from another unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-ded8b9a40",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-ded8b9a40 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node against Stacks sdga.tex: 0FQZ definition-gm (l.121), 0FR0 lemma-gm-abelian (l.169), the j_! construction and 0FRA lemma-extension-by-zero-graded (l.840-872), and 0FRD lemma-gm-grothendieck-abelian (l.1036). The item statement and stmt_deps are byte-identical to base e1324e23, which had no proof. Only split-owned fields changed, and there is no cycle. Step 1: the kernel action comes from f(am)=af(m); the cokernel action descends because A^i⊗- preserves cokernels (lem-weil-pbc-independent-sheaf-tensor-colimits, applied twice for associativity); the coimage→image inverse preserves the action; exactness is degreewise. Step 2 builds colimits degreewise, the empty diagram included. Step 3 takes AB5 from lem-pur-ringed-site-grothendieck-abelian. Step 4: I recomputed the sign from def-sfb-sheaf-dg-module-localization. M[k] has action (-1)^{k|a|}, so F=A_U[-n] has 1 in degree n and φ(b)=(-1)^{n|b|}bm is action-preserving and unique; I checked odd n, characteristic 2 and negative degrees. This agrees with 0FRD's Γ(U,M^{-k}). Step 5 shows a separator on distinct maps, which is stronger than the source's argument from zero objects. New node lem-sfb-graded-open-extension-adjunction: true (restriction of j_!L to U is L, the action sheafifies, Hom adjunction through presheaves), tested on U=∅, U=X, the zero ring and a one-point space. It is statement-only and smaller than the item. It is not a duplicate of lem-sfb-sheaf-dg-open-extension-adjunction, because a graded module over a dg algebra need not carry a differential. FIX: in the new node, Gr(A) said 'bilinear left actions' without the ring; I changed it to 'O-bilinear … O-linear maps' to match 0FQZ and the item's ⊗_O. Otherwise step 4/5 would need j_! to preserve O-bilinearity, which the node does not state. Whole file in fixes/dag/nodes/sec-six-functors-basics/. Accepted tool_uses: lem-pur-ringed-site-grothendieck-abelian and lem-weil-pbc-independent-sheaf-tensor-colimits, the generic inputs of 0FR0.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GradedSheafModuleGrothendieck",
+  "declaration": "CategoryTheory.SheafDg.gradedLeftModule_grothendieckAbelian",
+  "file": "lean/Sheaf/CategoryTheory/GradedSheafModuleGrothendieck.lean",
+  "statement": "theorem gradedLeftModule_grothendieckAbelian {X : TopCat.{u}} (S : TopCat.Sheaf CommRingCat.{w} X) [EssentiallySmall.{w} (TopologicalSpace.Opens X)] (A : Algebra S) : ∃ h : Abelian (GradedLeftModule (underlyingGradedAlgebra A)), @IsGrothendieckAbelian.{w} (GradedLeftModule (underlyingGradedAlgebra A)) _ h",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a990055d",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read item node, 4 stmt_deps, both modules, report, Mathlib Mod/ModObj (left action smul: A⊗X→X), IsGrothendieckAbelian (l.70), fromInducedMonoidal, Stacks sdga definition-gm l.125 and 0FRD l.1036. All clauses match: X:TopCat.{u}; S sheaf of CommRingCat.{w}; EssentiallySmall.{w} Opens = size convention as in the dep module; A : Algebra S = Mon(Complex S); Graded = GradedObject ℤ of sheaf modules with convolution tensor from the single global cochainModulesMonoidal (def-pur-sheaf-tensor-product, cited by the new node); underlyingGradedAlgebra = forget.mapMon with induced monoidal structure (real mult/unit); GradedLeftModule = Mod (no differential, degree-0 action-preserving maps). Conclusion ∃ Abelian + @IsGrothendieckAbelian.{w} on that structure; abelianness is proved not assumed; precedent CondensedGroupAlgebraExactForgetful.exists_abelian; the semiadditive structure is unique. New def node def-sfb-graded-sheaf-module-category matches the source, is not hollow, has no sorry and no duplicate in side-live/Mathlib. Item node diff vs side-live: lean + added stmt_dep only; statement/proof/proof_deps unchanged. Edge cases (empty X, zero ring, negative degrees, empty colimit) are covered. Theorem body is only sorry; docstrings carry source, blueprint and the 5 proof steps; report has Worker report + Second reading by Q25. No change, so no compile; worker scompile clean."
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-diagonal-trace-completed-scalar-square",
+ "kind": "statement",
+ "title": "Completed ordinary direct image commutes with constant scalar restriction",
+ "statement": "For a prime l and a scheme morphism f:X→S, the actual completed direct image and constant scalar restriction [def-sfb-diagonal-trace-models, def-sfb-diagonal-limit-interface] have a natural isomorphism diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅ diagonalCompletedRestriction l X ⋙ lowerStar (ModuleCat (ULift Z_l)) f. The map on every section is heterogeneously the identity. No localization, varying coefficient system, Chern datum or coefficient cone is assumed.",
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-limit-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary scalar restrictions before right derivation"
+ },
+ "proof": [
+  {
+   "text": "Compose the completed inverse-image coefficient map with each finite projection. Its limit-lift equation, the two completion-map projection equations and naturality of the constant inverse-image comparison give compatibility with the constant Z_l structure map. The limit projections jointly detect equality.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the adjunction transpose. The constant direct-image comparison sends a sheafified constant section to the same constant on the pulled-back chart. The constantCommuteCompose inverse has this same normalization by sheafComposeIso_hom_fac. Hence both fixed Z_l scalar actions agree on each module section.",
+   "uses": [
+    "def-sfb-diagonal-trace-models",
+    "def-sfb-diagonal-limit-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define both components of the isomorphism by identity functions, linear by the scalar equality. Chart naturality, inverse identities and naturality in the module hold by extensionality and reflexivity. The section normalization is HEq.rfl.",
+   "uses": [
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-limit-interface",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F8",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary scalar restrictions before right derivation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ring of integers of the p-adic field modulo p to the n is ZMod p to the n",
+   "results": "PadicInt.toZModPow, PadicInt.ker_toZModPow, PadicInt.ext_of_toZModPow and five related residue-map results.",
+   "date": "2026-10-27",
+   "verdict": "Residue-map ingredients, no normalized scalar restriction, coefficient cones or direct-image square for the project presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules commutes with direct image",
+   "results": "SheafOfModules.restrictScalars, its obj_val/map_val equations, PresheafOfModules.pushforward_obj_obj, SheafOfModules.pushforwardSections and generic forgetful comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary ingredients only; no result states the project-specific normalized coefficient cones or the required squares."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*pushforward|pushforward.*restrictScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:90 defines pushforward by pushforward0 followed by restriction. Also inspected ConstantSheaf.lean constantCommuteCompose and PreservesSheafification.lean sheafComposeIso_hom_fac.",
+   "date": "2026-10-27",
+   "verdict": "Use ordinary scalar and sheafification definitions; finite-system assembly and completed structural-map compatibility require a separate argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceOrdinaryScalars",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), ordinary scalar restrictions before right derivation",
+   "via": [
+    "lem-sfb-diagonal-trace-ordinary-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceCompletedScalarSquare",
+  "file": "lean/Sheaf/Paper/DiagonalTraceCompletedScalarSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTraceCompletedScalarSquare",
+  "statement": "theorem diagonalTraceCompletedScalarSquare (l : ℕ) [Fact l.Prime]\n    {X S : Scheme.{u}} (f : X ⟶ S) :\n    ∃ e : diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅\n        diagonalCompletedRestriction l X ⋙\n          lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f,\n      ∀ (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)\n        (x : ((diagonalTracePush l f ⋙ diagonalCompletedRestriction l S).obj M).obj.obj U),\n        HEq ((e.hom.app M).hom.app U x) x",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T034642-L-3670718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T034642-L-3670718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

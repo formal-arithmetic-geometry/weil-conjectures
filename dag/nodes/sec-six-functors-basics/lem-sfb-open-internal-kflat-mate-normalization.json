@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-open-internal-kflat-mate-normalization",
+ "kind": "statement",
+ "title": "Internal-module transport of the balanced K-flat scalar mate and its transpose",
+ "statement": "Let $a:\\Lambda\\to\\Lambda'$ be a map of commutative condensed rings and $j:U\\hookrightarrow X$ an open immersion of schemes [sk-def-sfb-coefficient-change, def-weil-open-immersion]. Put $A_T=\\Lambda_T$, $B_T=\\Lambda'_T$ for $T=U,X$, with coefficient maps $a_T$ and canonical isomorphisms $\\alpha_A:j^{-1}A_X\\cong A_U$, $\\alpha_B:j^{-1}B_X\\cong B_U$ [lem-sfb-alpha-iso]. Work in ordinary unbounded derived module-object categories [sk-def-sfb-derived-categories]. Write $T_T=B_T\\otimes^{\\mathbf L}_{A_T}-$ and $r_T=D(\\operatorname{Res}_{a_T})$, with the specified scalar adjunctions $T_T\\dashv r_T$ and their units $\\eta_T$. Let $R_A=D(j_A^*)$, $R_B=D(j_B^*)$ be the levelwise module-object pullbacks [sk-def-sfb-module-pushforward-pullback]. Define $d:R_Ar_X\\xrightarrow{\\sim}r_UR_B$ to be the degreewise localized action identification: after the balanced collapses $x\\otimes n\\mapsto\\alpha^{-1}(x)n$, it is the identity on $j^{-1}N$, whose two $A_U$-actions agree by $\\alpha_B^{-1}a_U=j^{-1}(a_X)\\alpha_A^{-1}$ [sk-def-sfb-change-of-scalars].\n\nFor each coefficient ring $R_T=A_T,B_T$, use the canonical exact underlying-sheaf-preserving equivalence $E_{R_T}$ from internal modules to modules over its reconstructed section-ring sheaf [lem-sfb-internal-section-scalar-adjunction]. Use the canonical scalar-extension/restriction comparisons, including their units and counits, of that node, and the pullback comparisons for the section-ring isomorphisms induced by $\\alpha$ [lem-sfb-internal-module-operations-transport]. Transport the inverse balanced K-flat tensor/pullback comparison of [lem-sfb-kflat-scalar-comparison-normalization] through these fixed equivalences and comparisons; denote the resulting natural transformation by $\\theta:T_UR_A\\to R_BT_X$. Here the sectionwise comparison is taken for $h=j^{-1}$ with the section rings identified via $\\alpha$, and its value on a flat-term K-flat representative is the inverse of the localized balanced comparison $\\chi_j$ of that node.\n\nThen $\\theta$ is an isomorphism on the entire unbounded derived category, is precisely the scalar-adjunction mate of $d$ [def-weil-pbc-adjunction-mate], and for every $V\\in D(\\operatorname{Mod}_{A_X})$ has the specified transpose\n$$r_U(\\theta_V)\\circ\\eta_{U,R_AV}=d_{T_XV}\\circ R_A(\\eta_{X,V}).$$\nThis uses the specified internal derived scalar units, rather than independently chosen adjunction structures. No flatness of $a$ or boundedness of $V$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(1), balanced K-flat scalar/pullback comparison, transferred to internal module objects for j; extracted transfer and inverse-mate unit/counit calculation from the reviewed parent proof, step 5; used by (2), alternative open-adjunction argument"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-coefficient-change",
+  "def-weil-open-immersion",
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-weil-pbc-adjunction-mate",
+  "def-derived-cochain-counit",
+  "def-sfb-scalar-hom-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "For $R=A,B$, collapse $j_R^*M=R_U\\otimes_{j^{-1}R_X}j^{-1}M$ by $x\\otimes m\\mapsto\\alpha_R^{-1}(x)m$. Its inverse is $m\\mapsto1\\otimes m$: balancing gives $x\\otimes m=1\\otimes\\alpha_R^{-1}(x)m$. Thus this is the lift of geometric inverse image after the ring isomorphism $\\alpha_R$. The latter is invertible by [lem-sfb-alpha-iso]; the transported inverse image is exact by [lem-trf-geometric-inverse-image-exact]. Underlying-sheaf-preserving exact reconstruction [lem-sfb-internal-module-operations-transport] therefore identifies both internal pullbacks with these exact section-module pullbacks. In particular their ordinary unbounded derived functors are obtained termwise, as in [lem-weil-pbc-exact-functor-derived-factorization]. No hypothesis on flatness of $a$ enters this argument.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-alpha-iso",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1), balanced K-flat scalar/pullback comparison, transferred to internal module objects for j; extracted transfer and inverse-mate unit/counit calculation from the reviewed parent proof, step 5; used by (2), alternative open-adjunction argument"
+   }
+  },
+  {
+   "text": "Use a bar for the section-module derived functors and $E_{R_T}$ also for the exact derived equivalences. Set $u_T:E_{A_T}r_T\\cong\\bar r_TE_{B_T}$ and $c_T:E_{B_T}T_T\\cong\\bar T_TE_{A_T}$. By [lem-sfb-internal-section-scalar-adjunction] these are the specified scalar comparisons, and $c_T$ identifies the entire adjunction with the barred one, including units and counits. Set $p:E_{A_U}R_A\\cong\\bar R_AE_{A_X}$ and $q:E_{B_U}R_B\\cong\\bar R_BE_{B_X}$, using the canonical pullback comparisons of [lem-sfb-internal-module-operations-transport], localized termwise. Exactness from step 1 ensures that this localization needs no resolution. Consequently $c_T$ is exactly the normalized left-adjoint comparison associated with $u_T$ in part (1) of [lem-sfb-equivalence-square-inverse-mate-coherence]; uniqueness there excludes a different choice of scalar-adjunction normalization.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-equivalence-square-inverse-mate-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1), balanced K-flat scalar/pullback comparison, transferred to internal module objects for j; extracted transfer and inverse-mate unit/counit calculation from the reviewed parent proof, step 5; used by (2), alternative open-adjunction argument"
+   }
+  },
+  {
+   "text": "Let $\\bar d:\\bar R_A\\bar r_X\\cong\\bar r_U\\bar R_B$ be the section action identification, using the section-ring isomorphisms induced by $\\alpha_A,\\alpha_B$. The right-square compatibility required by part (3) of the equivalence-square lemma is\n$$(\\bar d E_{B_X})\\circ(\\bar R_Au_X)\\circ(pr_X)=(\\bar r_Uq)\\circ(u_UR_B)\\circ E_{A_U}(d).$$\nCheck this before localization. After the balanced collapses of step 1, each route is the identity on $j^{-1}N$: reconstruction preserves the underlying sheaf and restriction is the identity on it. Its $A_U$-action on either route sends $(x,n)$ to $(j^{-1}a_X)(\\alpha_A^{-1}(x))n=\\alpha_B^{-1}(a_U(x))n$. The equality is exactly the coefficient square of [sk-def-sfb-coefficient-change]. This checks linearity as well as equality of the maps. Naturality follows because these identity maps commute with every module morphism. Apply the equality in each degree of a complex and localize; the fixed restriction and pullback comparisons are those localizations by step 2, so the displayed derived square follows.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-coefficient-change",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1), balanced K-flat scalar/pullback comparison, transferred to internal module objects for j; extracted transfer and inverse-mate unit/counit calculation from the reviewed parent proof, step 5; used by (2), alternative open-adjunction argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-kflat-scalar-comparison-normalization] to $h=j^{-1}$ on the small pro-étale sites, identifying the pulled-back section rings via $\\alpha_A,\\alpha_B$. Its $A_X=h^{-1}A_Y,B_X=h^{-1}B_Y$ convention corresponds here to the sites $U,X$, respectively; the commuting coefficient square checked in step 3 supplies the ring-map compatibility. It gives a natural isomorphism $\\bar\\theta:\\bar T_U\\bar R_A\\to\\bar R_B\\bar T_X$, the inverse scalar-adjunction mate of $\\bar d$. On flat-term K-flat representatives it is precisely the inverse of the localized balanced comparison. The conclusion of that node already holds on the entire ordinary unbounded derived category, without flatness of the coefficient map. Thus no inference from degreewise cohomology or from bounded representatives is needed here.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1), balanced K-flat scalar/pullback comparison, transferred to internal module objects for j; extracted transfer and inverse-mate unit/counit calculation from the reviewed parent proof, step 5; used by (2), alternative open-adjunction argument"
+   }
+  },
+  {
+   "text": "Let $\\beta:T_UR_A\\to R_BT_X$ be the inverse mate of $d$ for the specified internal scalar adjunctions. Apply part (3) of [lem-sfb-equivalence-square-inverse-mate-coherence] with $(J,U)=(T_X,r_X)$, $(J',U')=(T_U,r_U)$, $(P,Q)=(R_A,R_B)$ and four equivalences $(E_{A_X},E_{B_X},E_{A_U},E_{B_U})$. Its $u,u',j,j',p,q$ are $u_X,u_U,c_X,c_U,p,q$ from step 2. Step 3 proves its right-square hypothesis. Its conclusion is the actual equality\n$$(\\bar R_Bc_X)\\circ(qT_X)\\circ E_{B_U}(\\beta)=(\\bar\\theta E_{A_X})\\circ(\\bar T_Up)\\circ(c_UR_A).$$\nSolving this equality for $E_{B_U}(\\beta)$ gives exactly the transport defining $\\theta$ in the statement, since step 4 identifies $\\bar\\theta$ with the prescribed inverse balanced comparison. The equivalence is faithful, so $\\beta=\\theta$. Every comparison in this equation and $\\bar\\theta$ is invertible; equivalently the invertibility conclusion of the same lemma gives that $\\theta$ is invertible. This proves both the global isomorphism and the specified mate assertion, retaining all comparison maps.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sfb-equivalence-square-inverse-mate-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1), balanced K-flat scalar/pullback comparison, transferred to internal module objects for j; extracted transfer and inverse-mate unit/counit calculation from the reviewed parent proof, step 5; used by (2), alternative open-adjunction argument"
+   }
+  },
+  {
+   "text": "Write $\\varepsilon_U$ for the counit of the specified internal scalar adjunction. The inverse-mate formula in [def-weil-pbc-adjunction-mate], now for $\\theta=\\beta$, is\n$$\\theta_V=\\varepsilon_{U,R_BT_XV}\\circ T_U(d_{T_XV})\\circ T_UR_A(\\eta_{X,V}).$$\nPut $k=d_{T_XV}\\circ R_A(\\eta_{X,V}):R_AV\\to r_UR_BT_XV$. Naturality of the actual unit $\\eta_U$ gives\n$$r_U(\\theta_V)\\circ\\eta_{U,R_AV}=r_U(\\varepsilon_{U,R_BT_XV})\\circ r_UT_U(k)\\circ\\eta_{U,R_AV}=r_U(\\varepsilon_{U,R_BT_XV})\\circ\\eta_{U,r_UR_BT_XV}\\circ k=k,$$\nwhere the last equality is the right-adjoint triangle identity for $T_U\\dashv r_U$. This is the required transpose. The units and counit here are precisely those fixed in step 2, so the calculation does not replace the published adjunction by an independently chosen structure.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1), balanced K-flat scalar/pullback comparison, transferred to internal module objects for j; extracted transfer and inverse-mate unit/counit calculation from the reviewed parent proof, step 5; used by (2), alternative open-adjunction argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-equivalence-square-inverse-mate-coherence",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(1), balanced inverse-image tensor comparison, and (2), alternative open-adjunction argument; explicit internal/section four-corner mate transport and triangle-identity calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|conjugateEquiv_pullbackComp|ScalarPullback",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and ordinary sheaf pullback do not identify the transported balanced K-flat comparison under the specified internal derived scalar adjunctions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "1 hits: CategoryTheory.unit_mateEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and ordinary sheaf pullback do not identify the transported balanced K-flat comparison under the specified internal derived scalar adjunctions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal module to sheaf of modules equivalence preserves the scalar pullback mate and its unit transpose equation",
+   "results": "8 hits: PresheafOfModules.unitHomEquiv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, PresheafOfModules.Sheafify.map_smul_eq, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and ordinary sheaf pullback do not identify the transported balanced K-flat comparison under the specified internal derived scalar adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On unbounded derived categories of internal module objects the balanced K flat scalar pullback comparison transported from sectionwise module sheaves is the mate of the published restriction square with the actual scalar adjunction units",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.sheafificationCompPullback, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and ordinary sheaf pullback do not identify the transported balanced K-flat comparison under the specified internal derived scalar adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfer the K flat base change tensor comparison from sheaves of modules to internal modules under the underlying sheaf preserving equivalence including the extension restriction adjunction",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_flat_tensorProduct, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.of_flat_tensorProduct, Module.Flat.isBaseChange, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and ordinary sheaf pullback do not identify the transported balanced K-flat comparison under the specified internal derived scalar adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|kFlat.*[Mm]ate|[Mm]ate.*kFlat",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ordinary scalar adjunction and mate identities do not state the internal/section unbounded K-flat normalization; inspected Mathlib/CategoryTheory/Adjunction/Mates.lean:136-155"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with inverse image of sheaves of internal modules and its adjunction mate is scalar restriction commutation",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.homEquiv, PresheafOfModules.pullback, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, PresheafOfModules.pullbackPushforwardAdjunction, RestrictScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ordinary scalar adjunction and mate identities do not state the internal/section unbounded K-flat normalization; inspected Mathlib/CategoryTheory/Adjunction/Mates.lean:136-155"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "1 hits: CategoryTheory.unit_mateEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ordinary scalar adjunction and mate identities do not state the internal/section unbounded K-flat normalization; inspected Mathlib/CategoryTheory/Adjunction/Mates.lean:136-155"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a derived scalar extension pullback comparison through internal module equivalences preserving scalar adjunction units and identify its mate",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, PresheafOfModules.pullbackComp, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, PresheafOfModules.pullback_comp_id, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.extendRestrictScalarsAdj, ModuleCat.homEquiv_extendScalarsId",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ordinary scalar adjunction and mate identities do not state the internal/section unbounded K-flat normalization; inspected Mathlib/CategoryTheory/Adjunction/Mates.lean:136-155"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse balanced tensor comparison for inverse image on unbounded derived module sheaves is the scalar extension restriction adjunction mate, preserved by equivalence",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, LightCondensed.ihomPoints_symm_comp, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ordinary scalar adjunction and mate identities do not state the internal/section unbounded K-flat normalization; inspected Mathlib/CategoryTheory/Adjunction/Mates.lean:136-155"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-open-scalar-conjugate-normalization",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(1), balanced K-flat comparison, and (2), alternative open-adjunction argument: identify the normalized tensor comparison under the actual internal scalar adjunctions",
+   "via": [
+    "lem-sfb-open-scalar-conjugate-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-open-internal-kflat-mate-normalization",
+  "worker": "stage1",
+  "summary": "NS: retained the statement and split it into six steps, explicitly verifying the action square, specializing the existing four-corner inverse-mate transport lemma, and computing the prescribed transpose with the actual unit and counit. No new nodes; no Lean writing or compilation.",
+  "blueprint": "det-prop-scalar-six-pullback proof (1), balanced tensor inverse-image comparison and internal-module realization; (2), alternative open-adjunction argument: normalize its scalar mate.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Invertibility of the coefficient isomorphisms alpha_A, alpha_B for the open immersion, needed for the balanced collapse of the module pullbacks in step 1; this is the cartesian-coefficients input that det-prop-scalar-six-pullback (1) itself uses, and no node of the scalar-six unit states it."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness of geometric inverse image on transported module sheaves, used to localize the pullback comparisons termwise; no step of the scalar-six unit is replaced."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Canonical exact reconstruction and ordinary pullback comparisons; generic transport interface required by the scalar-six comparison."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Termwise passage of exact functors to ordinary unbounded derived categories, used solely for the fixed exact equivalences and pullbacks."
+   },
+   {
+    "node": "lem-sfb-equivalence-square-inverse-mate-coherence",
+    "why": "Four-corner transport of the actual inverse mate under normalized adjunction comparisons; the unit has no generic categorical coherence lemma."
+   },
+   {
+    "node": "sk-def-sfb-coefficient-change",
+    "why": "Compatibility of coefficient ring maps with alpha, needed to verify the restriction square on actions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-equivalence-square-inverse-mate-coherence",
+  "sk-def-sfb-coefficient-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NS-2e0f54e03",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-2e0f54e03 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full against the source det-prop-scalar-six-pullback.proof.md (1) and the alternative argument in (2), and against every cited statement. No new nodes. The statement, stmt_deps and blueprint are unchanged from live, where the item is still unsplit and unreviewed; it is not in the drop list and has no repair note. Step 1: the module pullback is Ext_alpha of mapMod(f^*); alpha is invertible (alpha-iso), so the balanced collapse and its inverse 1⊗m are correct and j_R^* is exact with a termwise derived functor. Step 2: the internal-section-scalar-adjunction identification of the adjunctions is exactly the normalized j of part (1) of the equivalence-square lemma; types checked. Step 3: the displayed square is letter for letter the hypothesis of (3). The action equality j^{-1}a_X∘alpha_A^{-1}=alpha_B^{-1}∘a_U is the rearranged coefficient-change square alpha'_f∘f^*a_Y=a_X∘alpha_f. Step 4: the kflat node's theta_h is the inverse mate T_U R_A→R_B T_X, invertible on the whole unbounded category with no flatness. Matching it with the alpha-identified section rings is restriction along a ring isomorphism, and the item's statement itself defines theta that way. Step 5: the conclusion of (3) with j=c_X, j'=c_U matches; E is fully faithful, so beta=theta and theta is invertible. Step 6: the inverse-mate formula, naturality of eta_U and the triangle identity are verified. Edge cases j=id, U empty, a=id and non-flat Z→F_p hold. Batch-5 flag on lem-trf-geometric-inverse-image-exact accepted: it is a general fact that inverse image along a geometric morphism is exact, not a step of the trace-formula or Poincaré-duality proofs. Its closure reaches only two trf definitions and no nt-* or Poincaré nodes, and it is already in the item's closure through lem-sfb-kflat-scalar-comparison-normalization, so the new citation adds 0 nodes. FIX: step 1 uses the off-route statement lem-sfb-alpha-iso (unit sk-prop-sfb-cartesian-coefficients, not reachable from sk-prop-scalar-six) without declaring it, so I added it to split_report.tool_uses; nothing else changed. Advisory: step 3 assumes the operations-transport pullback comparison preserves the 1⊗m generators, which is the canonical choice.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenInternalKFlatMateNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenInternalScalar.normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.restrictionComparison",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.ScalarTransport",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.extension",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.adjunction",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.counit",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.scalarTransport",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.pullbackComparison",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.sectionAction",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.sectionTheta",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.TransportNormalization",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.RepresentativeNormalization",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.normalization",
+   "AlgebraicGeometry.ProEtale.OpenInternalScalar.theta"
+  ],
+  "file": "lean/Sheaf/Paper/OpenInternalKFlatMateNormalization.lean",
+  "statement": "theorem normalization [IsOpenImmersion j] : ∃! θ : (CondensedRing.upperStar Λ j).mapDerivedCategory ⋙ extension a U ⟶ extension a X ⋙ (CondensedRing.upperStar Λ' j).mapDerivedCategory, RepresentativeNormalization a j θ ∧ TransportNormalization a j θ ∧ IsIso θ ∧ (mateEquiv (adjunction a X) (adjunction a U) (.mk _ _ _ _ θ)).natTrans = (CondensedRing.derivedComapUpperStarIso a j).inv ∧ ∀ V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), (adjunction a U).unit.app ((CondensedRing.upperStar Λ j).mapDerivedCategory.obj V) ≫ (Mod.comap (coefficientMap a U)).mapDerivedCategory.map (θ.app V) = (CondensedRing.upperStar Λ j).mapDerivedCategory.map ((adjunction a X).unit.app V) ≫ (CondensedRing.derivedComapUpperStarIso a j).inv.app ((extension a X).obj V)",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The existing internal scalar pair and coefficient pullback/restriction square are used literally. The canonical theta is uniquely specified by the full fixed-section transport and inverse balanced K-flat representative equations; all helper definitions have real data. Only normalization is postponed. The small pro-etale object and morphism universes remain distinct. Two already landed definition nodes used by the signature are added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-524b5462e",
+  "group": "O3",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node to the Lean. d = derivedComapUpperStarIso.inv, orientation checked. mateEquiv TwoSquare types checked. Transpose equation matches. RepresentativeNormalization pins θ on flat-term K-flat reps (read via E) to pullIso.hom, i.e. χ_j^{-1}. IsIso on the whole unbounded category. No flatness of a (framework derived adjunction needs none), no boundedness. ScalarTransport data pinned (normalized ScalarDerivedPair, identity-on-sections restriction, mate-fixed comparison). ∃! is meaningful, theta = .choose. Universes u+1/u kept. lean.statement verbatim. Node diff = lean + 2 landed def stmt_deps that are used. Only the main theorem sorry; docstrings and 6 proof steps present. Not recompiled (no file changed); worker reports clean compile 42.6 s and deliver2 dry-run OK. Advisories: base-era theorem stmt_deps internal-section-scalar-adjunction and kflat-normalization supply only plain defs (sectionScalarMap is owned by def-sfb-section-scalar-map-data, ScalarPullback.mate); TransportNormalization follows from the mate clause by four-corner coherence; non-stmt_dep owners reached via dep records; 3 proof-only imports."
+ }
+}

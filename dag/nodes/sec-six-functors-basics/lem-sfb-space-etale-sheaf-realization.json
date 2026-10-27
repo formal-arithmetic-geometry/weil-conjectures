@@ -1,0 +1,405 @@
+{
+ "id": "lem-sfb-space-etale-sheaf-realization",
+ "kind": "statement",
+ "title": "Realization of an etale sheaf over an algebraic-space base",
+ "statement": "Let $B$ be a scheme and $H$ an algebraic space over $B$ [def-trf-algebraic-space]. Use the universes and small skeletons of [def-weil-size-convention], the small etale scheme site of $H$, and sheaves of sets on it [def-weil-pbc-sites-and-cohomology]. Use chartwise etale maps of algebraic spaces [lem-trf-space-chartwise-etale-permanence], with no representability requirement on their structure maps to $H$, and the canonical inverse images of [lem-trf-space-enlarged-etale-ringed-site-model]. For a sheaf $F$, define the functor on $B$-schemes\n$$E_H(F)(T)=\\{(h,s)\\mid h:T\\to H,\\ s\\in\\Gamma(T_{\\mathrm{et}},h^{-1}F)\\},$$\nwith restriction along $g:T'\\to T$ sending $(h,s)$ to $(hg,g^{-1}s)$, using the canonical composition comparison. Impose the following explicit size convention: the ambient scheme site contains the coproduct of the scheme generators with sections used to present each sheaf under consideration; equivalently one may enlarge the ambient universe before making the construction. Then $E_H(F)$ is an algebraic space, the map $E_H(F)\\to H$ is chartwise etale, and the functor\n$$V\\longmapsto h_V,\\qquad h_V(U)=\\operatorname{Hom}_H(U,V),$$\nfrom chartwise etale algebraic spaces over $H$ to sheaves on $H_{\\mathrm{et}}$ is an equivalence, with quasi-inverse $E_H$. Here the spaces and sheaves are taken in the common bound just specified. The unit $F\\simeq h_{E_H(F)}$ and counit $E_H(h_V)\\simeq V$ are natural in all sheaf maps and all $H$-morphisms of spaces. This statement does not assume that $H$ is a scheme or that $V\\to H$ is representable, separated, quasi-compact or finite.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0GF6 (lemma-sheaf-gives-space), construction preceding the lemma, parts (1)-(3), and its size condition; full faithfulness is the natural counit of that construction."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-space-enlarged-composition-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the common size bound in the statement and [def-weil-size-convention]. Schemes are fppf sheaves by [def-trf-scheme-algebraic-space]. More generally, for every algebraic space $A$ over $B$, the presheaf $U\\mapsto\\operatorname{Hom}_H(U,A)$ on $H_{\\mathrm{et}}$ is a sheaf: a small etale covering is an fppf covering by [def-weil-etale-morphism] and [def-pc-fppf-site]; the fppf sheaf axiom for $A$ glues the maps, and their composites to $H$ agree with the structure map because $H$ is an fppf sheaf. Thus representables of scheme objects, and all the displayed $h_A$, are sheaves. We may compute their fibre products sectionwise.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-trf-scheme-algebraic-space",
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, representable sheaves and the two sheaf categories used in the presentation."
+   }
+  },
+  {
+   "text": "For each pair $(U,a)$ with $U$ in the small skeleton of $H_{\\mathrm{et}}$ and $a\\in F(U)$, take one copy of $U$. This is a set of pairs. Form its scheme coproduct $P$ by [lem-weil-pbc-scheme-coproduct-family], allowed by the explicit size hypothesis. The summand maps to $H$ glue using the fppf sheaf axiom for $H$. For every scheme $T\\to H$, $T\\times_HP$ is a scheme by the representable diagonal of $H$. Its open summands $T\\times_HU$ cover it and are etale over $T$. Hence [lem-weil-pbc-etale-local-on-source] makes $T\\times_HP\\to T$ etale. Thus $P\\to H$ is representable etale. The sections $a$ glue on the disjoint summands to $a_P\\in F(P)$. Yoneda gives $p:h_P\\to F$. Every $a\\in F(U)$ is the image of its summand inclusion $U\\to P$; hence $p$ is surjective on sections and is an epimorphism: two maps agreeing after $p$ agree on every section.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, representable generators and the set-theoretic condition; Tag 00WS, lemma-sheaf-coequalizer-representable, first proof paragraph."
+   }
+  },
+  {
+   "text": "Put $W=P\\times_HP$, a scheme since $H$ has representable diagonal. It is etale over $H$ by [lem-trf-space-chartwise-etale-permanence]. On $W_{\\mathrm{et}}$ consider the presheaf with one element on $Z\\to W$ exactly when the two restrictions of $a_P$ agree, and empty otherwise. It is a subsheaf of the final sheaf: equality is preserved by restriction and can be checked on covers. By [lem-weil-pbc-etale-subsheaf-final-open] it is represented by an open subscheme $R\\subset W$. Every $H$-map $Z\\to W$ between scheme objects of $H_{\\mathrm{et}}$ is etale by the same permanence node, so the representing property applies to every pair of maps $b,c:Z\\to P$ over $H$. It says precisely $(b,c)$ factors through $R$ if and only if $p(b)=p(c)$. Thus $h_R=h_P\\times_Fh_P$ on $H_{\\mathrm{et}}$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-etale-subsheaf-final-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, paragraph beginning Observe; the omitted support detail uses Tag 04HV (lemma-support-subsheaf-final)."
+   }
+  },
+  {
+   "text": "The projections $R\\rightrightarrows P$ are etale: $R\\subset W$ is open, and $W\\rightrightarrows P$ is the base change of the representable etale map $P\\to H$. Reflexivity, symmetry and transitivity of equality in $F$ give maps $P\\to R$, $R\\to R$ and $R\\times_PR\\to R$ by the kernel-pair identity of Step 3 and Yoneda. All these domains are scheme objects etale over $H$, by permanence. Their projection identities prove reflexivity, symmetry and transitivity on every $B$-scheme test, not merely on etale tests. The map $R\\to P\\times_BP$ is a monomorphism: a section is determined by its two projections, since $R\\subset P\\times_HP$. Apply [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer] to the epimorphism $p$. It follows that $F$ is the coequalizer of $h_R\\rightrightarrows h_P$ on $H_{\\mathrm{et}}$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, etale equivalence relation and first coequalizer diagram; Tag 086K (lemma-coequalizer-surjection)."
+   }
+  },
+  {
+   "text": "By [lem-trf-etale-relation-quotient], the fppf sheaf quotient $Q=P/R$ is an algebraic space over $B$, with representable surjective etale atlas $q:P\\to Q$ and kernel pair $R$. The two maps $R\\rightrightarrows P\\to H$ agree, so the universal property in that node gives $Q\\to H$. Its composite with $q$ is the representable etale map $P\\to H$. The source-atlas criterion [lem-trf-space-etale-source-atlas-detection](3) now makes $Q\\to H$ chartwise etale. This asserts no representability of $Q\\to H$.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-space-etale-source-atlas-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, quotient construction and parts (1),(2); Tag 02WW (theorem-presentation) and Tag 03FS (lemma-etale-local)."
+   }
+  },
+  {
+   "text": "For a scheme object $U\\to H$ and a map $U\\to Q$, $U\\times_QP\\to U$ is a representable surjective etale scheme map and is a covering in $H_{\\mathrm{et}}$. Thus every section of $h_Q$ locally lifts to $h_P$. If two sheaf maps out of $h_Q$ agree after $h_P$, apply these lifts and the separatedness axiom of their target to show they agree on every section. Hence $h_P\\to h_Q$ is epimorphic. Its sectionwise kernel pair is $h_R$, by the quotient node. The effective-epimorphism coequalizer theorem makes $h_Q$ the coequalizer of the same pair as $F$. The two universal properties yield a unique isomorphism $c:F\\xrightarrow{\\sim}h_Q$ carrying $p$ to $q$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-etale-relation-quotient",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6(3), matching the two presentations; Tag 086K."
+   }
+  },
+  {
+   "text": "On the enlarged site $\\mathcal C_H$, every represented presheaf $h_A$ is a sheaf. Here is the descent check needed for the adjunction below. Given a covering $Z_i\\to Z$ and compatible maps $Z_i\\to A$, choose a scheme atlas $U\\to Z$. Choose scheme atlases $U_{ij}\\to Z_i\\times_ZU$. By chartwise permanence, the maps $U_{ij}\\to U$ are etale and jointly surjective; hence they are an fppf covering. The maps $U_{ij}\\to A$ agree on overlaps (their composites through the $Z_i$ do), and the fppf sheaf axiom for $A$ glues them to $U\\to A$. The two maps on $U\\times_ZU$ agree after the covering obtained by pulling back the $U_{ij}$, hence agree by the same axiom. For any scheme $T\\to Z$, the map $T\\times_ZU\\to T$ is a surjective etale scheme map, so the map to $A$ descends uniquely to $T$. These descents commute with every $T'\\to T$ by uniqueness and define $Z\\to A$ as a morphism of fppf sheaves. They restrict to the specified maps on every $Z_i$, tested on scheme atlases; uniqueness follows by the same test. Scheme-density identifies the restriction of this represented sheaf with the small-site $h_A$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-enlarged-site-scheme-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G0 and 03G1, subcanonical enlarged site and scheme-atlas comparison; elementary fppf descent of maps spelled out."
+   }
+  },
+  {
+   "text": "We will use the following elementary adjunction calculation. Work on the enlarged sites of [lem-trf-space-enlarged-etale-ringed-site-model]. Representable presheaves there are sheaves by Step 7. For $h:T\\to H$, an etale space $A\\to H$ and any sheaf $G$ on the enlarged site of $T$, adjunction and Yoneda give\n$$\\operatorname{Hom}(h^{-1}h_A,G)=\\operatorname{Hom}(h_A,h_*G)=(h_*G)(A)=G(T\\times_HA)=\\operatorname{Hom}(h_{T\\times_HA},G).$$\nThus $h^{-1}h_A\\simeq h_{T\\times_HA}$, naturally in $A$, $h$ and $G$. The direct-image evaluation here is precisely precomposition by $A\\mapsto T\\times_HA$ in [lem-trf-space-enlarged-chart-ringed-morphism]. Transport across the scheme-restriction equivalences gives the same formula on the small sites. This calculation does not require $A\\to H$ representable.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G2 (lemma-functoriality-etale-site), base-change functor; Tag 001P (categories-lemma-yoneda)."
+   }
+  },
+  {
+   "text": "Apply Step 8 directly with $A=Q$ and then apply $h^{-1}$ to $c$ of Step 6. Since $T\\times_HQ\\to T$ is chartwise etale by permanence, it is an object of the enlarged site of $T$. Its represented sheaf evaluated at the terminal object $T/T$ is $\\operatorname{Hom}_T(T,T\\times_HQ)$. Consequently\n$$\\Gamma(T_{\\mathrm{et}},h^{-1}F)\\simeq\\operatorname{Hom}_T(T,T\\times_HQ)=\\operatorname{Hom}_H(T,Q).$$\nThe first equality of section functors uses the scheme-restriction equivalence, which contains $T/T$. The last bijection sends a section to its $Q$-component and sends $a:T\\to Q$ over $H$ to $(1_T,a)$. By the adjunction and Yoneda naturalities in Step 8, pulling a section back along $g:T'\\to T$ sends its corresponding map $a$ to $ag$. Taking the disjoint union over $h:T\\to H$ therefore gives an isomorphism of the stated presheaf $E_H(F)$ with the underlying fppf sheaf of $Q$, over $H$. This proves its algebraicity and chartwise etaleness.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, construction before the lemma and parts (1)-(3); Tag 03G2 and the representable adjunction calculation."
+   }
+  },
+  {
+   "text": "For completeness, the representable adjunction of Step 8 applies to every chartwise etale algebraic space $V\\to H$, with no presentation choice. The presheaf $h_V$ is a sheaf by Step 1. It yields natural bijections\n$$\\Gamma(T_{\\mathrm{et}},h^{-1}h_V)\\simeq\\operatorname{Hom}_H(T,V).$$\nTheir disjoint union over $h:T\\to H$ defines the counit $E_H(h_V)\\simeq V$. The adjunction bijections commute with postcomposition by every $H$-morphism $V\\to V'$ and with restriction by every $T'\\to T$; hence the counit is natural in all these morphisms. The fibre-product bijection is again $a\\mapsto(1_T,a)$, so it introduces no extra representability condition.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, natural counit of the displayed construction; Tag 03G2."
+   }
+  },
+  {
+   "text": "If $u:U\\to H$ is a scheme object of $H_{\\mathrm{et}}$, its inverse image is restriction to the localized site, by [lem-trf-space-enlarged-etale-ringed-site-model]. Therefore $\\Gamma(U_{\\mathrm{et}},u^{-1}F)=F(U)$. On the other hand, from the definition of $E_H(F)$ a map over $H$ from $U$ to this space is exactly a pair with fixed first component $u$, hence exactly such a section. This gives $F(U)\\simeq h_{E_H(F)}(U)$. Restriction precomposes the first component and pulls back the second, so these bijections commute with every arrow of $H_{\\mathrm{et}}$. They commute with every sheaf map $F\\to F'$ because that map acts on the second component by its inverse image. Thus they form the natural unit. The natural unit and counit exhibit the two functors as quasi-inverse equivalences.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6(3), localization formula for etale scheme objects; Tag 03LP (lemma-etale-morphism-topoi)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-size-convention",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-etale-source-atlas-detection",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-subsheaf-final-open",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0GF6 (lemma-sheaf-gives-space), generator/open-relation/quotient proof, with the omitted support argument supplied from Tag 04HV; Tags 03G2 and 03LP give the explicit natural representable adjunction and localization identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space Y sheaves on its small etale site are equivalent to algebraic spaces etale over Y and inverse image corresponds to base change",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Etale\"",
+   "results": "Actual logged search: 12 hits; AlgebraicGeometry.Scheme.instHasSheafifyAffineEtaleTopology, AlgebraicGeometry.Scheme.instHasSheafifyEtaleSmallEtaleTopology, AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv, AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology, AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec_1, AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_affineEtaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|sheaf.*gives.*space|etaleRealization",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realization of a sheaf on the small etale site as an etale algebraic space is natural under arbitrary base change",
+   "results": "Actual logged search: 8 hits; Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale algebraic space is the espace etale of a sheaf on the small etale site of an algebraic space",
+   "results": "Actual logged search: 8 hits; Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Etale, AlgebraicGeometry.Scheme.Etale, RingHom.Etale, Algebra.FormallyEtale, Algebra.Etale.finitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T18:33:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasSheafifyAffineEtaleTopology\", \"AlgebraicGeometry.Scheme.instHasSheafifyEtaleSmallEtaleTopology\", \"AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv\", \"AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology\", \"AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology\", \"AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec\", \"AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec_1\", \"AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_affineEtaleTopology\"], \"digest\": \"f03a12e62219ca7e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, affine etale-site comparison or topological espace etale, not sheaves over an algebraic-space base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of sets on the small etale site of an algebraic space are equivalent to algebraic spaces etale over it",
+   "results": "{\"t\": \"2026-10-23T18:33:10Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of sets on the small etale site of an algebraic space are equivalent to algebraic spaces etale over it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"3dccc9665a918214\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, affine etale-site comparison or topological espace etale, not sheaves over an algebraic-space base."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|sheaf.*gives.*space|etaleRealization",
+   "results": "{\"t\": \"2026-10-23T18:33:40Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|sheaf.*gives.*space|etaleRealization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, affine etale-site comparison or topological espace etale, not sheaves over an algebraic-space base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The espace etale construction realizes a sheaf as an algebraic space over an algebraic space base",
+   "results": "{\"t\": \"2026-10-23T18:33:41Z\", \"tool\": \"leansearch\", \"query\": \"The espace etale construction realizes a sheaf as an algebraic space over an algebraic space base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.sheaf\", \"AlgebraicGeometry.LocallyRingedSpace.toSheafedSpace\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.LocallyRingedSpace\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Spec.sheafedSpaceObj\"], \"digest\": \"07945eb8e701744d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, affine etale-site comparison or topological espace etale, not sheaves over an algebraic-space base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a sheaf on a site is locally represented by a section on an object of the source site with a morphism to its base change",
+   "results": "{\"t\": \"2026-10-23T18:35:02Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of a sheaf on a site is locally represented by a section on an object of the source site with a morphism to its base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.isoSheafify_inv\", \"CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app\", \"CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply\", \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_obj\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj\", \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map\", \"CategoryTheory.sheafSections\"], \"digest\": \"2a2dbcb5423b1503\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, affine etale-site comparison or topological espace etale, not sheaves over an algebraic-space base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of inverse image sheaves under a morphism of algebraic spaces are etale locally pullbacks of sections on etale scheme charts of the target",
+   "results": "{\"t\": \"2026-10-23T18:35:03Z\", \"tool\": \"leanfinder\", \"query\": \"Sections of inverse image sheaves under a morphism of algebraic spaces are etale locally pullbacks of sections on etale scheme charts of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\"], \"digest\": \"c921eeb6e870c84a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, affine etale-site comparison or topological espace etale, not sheaves over an algebraic-space base."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-integral-radicial-etale-invariance",
+  "date": "2026-10-23",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2). Input for lifting a scheme object across U -> Y and X -> Z: Stacks 05ZS, lemma-thickening-equivalence. Supporting theorem for 05ZS: spaces-more-morphisms.tex Tag 05ZH (theorem-topological-invariance), equivalence on etale algebraic-space objects before restricting to schemes. Realization input: spaces-properties.tex Tag 0GF6, used after atlas descent has produced an equivalence of small etale sheaf categories.",
+   "via": [
+    "lem-sfb-space-integral-radicial-etale-invariance",
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-etale-sheaf-realization",
+  "worker": "stage1",
+  "summary": "Retained the statement and its explicit universe convention. Constructed the generator scheme and open kernel relation, used the existing etale quotient and atlas-detection nodes, and proved the specified realization and both natural isomorphisms by the enlarged-site representable adjunction. No new nodes and no attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2). Input for lifting a scheme object across U -> Y and X -> Z: Stacks 05ZS, lemma-thickening-equivalence. Supporting theorem for 05ZS: spaces-more-morphisms.tex Tag 05ZH (theorem-topological-invariance), equivalence on etale algebraic-space objects before restricting to schemes. Realization input: spaces-properties.tex Tag 0GF6, used after atlas descent has produced an equivalence of small etale sheaf categories.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic input for the generator/open-equivalence-relation presentation or its canonical site adjunction, not a replacement for the unit route; the unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic input for the generator/open-equivalence-relation presentation or its canonical site adjunction, not a replacement for the unit route; the unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-trf-space-enlarged-chart-ringed-morphism",
+    "why": "Generic input for the generator/open-equivalence-relation presentation or its canonical site adjunction, not a replacement for the unit route; the unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic input for the generator/open-equivalence-relation presentation or its canonical site adjunction, not a replacement for the unit route; the unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "Generic input for the generator/open-equivalence-relation presentation or its canonical site adjunction, not a replacement for the unit route; the unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic input for the generator/open-equivalence-relation presentation or its canonical site adjunction, not a replacement for the unit route; the unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-subsheaf-final-open",
+    "why": "Generic input for the generator/open-equivalence-relation presentation or its canonical site adjunction, not a replacement for the unit route; the unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-trf-space-enlarged-site-scheme-density",
+    "why": "Generic scheme-density tool for checking represented sheaves on the enlarged etale site; it does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-etale-source-atlas-detection",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-subsheaf-final-open",
+  "lem-trf-space-enlarged-site-scheme-density"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-7b4bca438",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-7b4bca438 (reviewer sub-agent of L); spot-checked: I read all eleven steps of the item against Stacks 0GF6 (spaces-properties.tex, the construction and full proof) and against the statements of all 18 cited nodes. There are no new nodes, and the statement and stmt_deps are unchanged from side-live, where the item is still unsplit. Steps 1-6 follow 0GF6. Generators come from 00WS: the coproduct P exists by the explicit size hypothesis and P->H is representable etale by 02GJ. The open relation R comes from 04HV on the scheme W=PxHP, and permanence makes every test map etale. The equivalence relation is proved on arbitrary B-scheme tests through Yoneda maps, and R->PxBP is a monomorphism. 086K makes F the coequalizer of h_R over h_P. The quotient node (02WW) has all its hypotheses met and gives Q, and atlas-detection (3) makes Q->H chartwise etale. Step 6 gives F≅h_Q. Steps 7-11 replace the source's colimit-preservation sentence with a sound representable calculation. Step 7 shows represented presheaves are sheaves on the enlarged site by descent. Step 8 computes h^{-1}h_A≅h_{TxHA} from the exact formula f_*G(V)=G(XxYV) and the adjunction of enlarged-chart-ringed-morphism. Step 9 gives E_H(F)≅Q, so E_H(F) is an algebraic space and E_H(F)->H is chartwise etale. Step 10 gives the counit, and step 11 gives the unit via the localization clause. Edge cases: an empty sheaf or base gives P=R=Q=∅, and no finiteness or separation is used. lem-a1-etale-sheaf-algebraic-space-realization has a scheme base, so it is a specialization, not a duplicate. Batch-5 check: all six newly cited trf nodes (def-trf-scheme-algebraic-space, lem-trf-etale-relation-quotient, lem-trf-space-enlarged-chart-ringed-morphism, lem-trf-space-enlarged-site-scheme-density, lem-trf-space-etale-source-atlas-detection, lem-trf-space-fibre-products-etale-covers) are generic algebraic-space foundations in unit sk-i-curve-zero (Stacks 02WW/03G1/03G2/03FS/02X2). Their closures contain no sec-poincare-duality, sk-thm-trace-transport or nt-assume/nt-target node, so they are outside the assumed statements. I accept the eight split_report.tool_uses as generic tools. No SGA is cited. Maintainer note: blueprint.from.node is null in the inherited record and the delivery did not change it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleSheafRealization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceEtaleSheaf_realization",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleHomPresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleHom_isSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleHomFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceEtaleSheafInBound",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceEtaleSheaves",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleHom_inBound",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleBoundedHomFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRealizationInverse",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRealizationAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRealizationPullSection",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRealizationSchemeMap",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceRealizationPairs",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRealizationPairRestrict",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRealizationPairMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleSheaf_realization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleSheafRealization.lean",
+  "statement": "theorem spaceEtaleSheaf_realization (H : AlgebraicSpace B) : ∃ e : SpaceEtaleSheaves H ≌ H.EnlargedEtaleSite, e.inverse = spaceEtaleBoundedHomFunctor H ∧ ∃ b : ∀ (F : SpaceEtaleSheaves H) (T : Over B), (schemeSpace T ⟶ (e.functor.obj F).obj.left) ≃ SpaceRealizationPairs H F.obj T, (∀ (F : SpaceEtaleSheaves H) (T : Over B) (a : schemeSpace T ⟶ (e.functor.obj F).obj.left), (b F T a).1 = a ≫ (e.functor.obj F).obj.hom) ∧ (∀ (F : SpaceEtaleSheaves H) (T T' : Over B) (g : T' ⟶ T) (a : schemeSpace T ⟶ (e.functor.obj F).obj.left), b F T' (spaceRealizationSchemeMap g ≫ a) = spaceRealizationPairRestrict H F.obj g (b F T a)) ∧ (∀ (F G : SpaceEtaleSheaves H) (a : F ⟶ G) (T : Over B) (s : schemeSpace T ⟶ (e.functor.obj F).obj.left), b G T (s ≫ (e.functor.map a).hom.left) = spaceRealizationPairMap H a.hom T (b F T s))",
+  "branch": "sheaf-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem gives an equivalence whose inverse is the actual relative Hom functor, and natural pair-formula bijections on every B-scheme test fixing the projection to H. The common size bound is a scheme presentation (an epi from a scheme Hom sheaf), exactly the coproduct-presentation condition in Stacks 0GF6. Helpers belong to this realization and retain the existing algebraic spaces, chartwise etale category, enlarged inverse images, and projection-normalized inverse-composition comparison. No representability or finiteness hypothesis on the realized structure maps. Repair of return H2: cites the new existing-definition owner def-trf-space-enlarged-composition-comparisons for the five published plain comparison definitions, instead of the composition/localization theorem node. Lean source and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f3990e3f",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 (3c5645280fe3). Snapshot diff: Lean module byte-identical (mathematics already accepted against Stacks 0GF6: equivalence with inverse = relative-Hom functor, pair bijections with projection/restriction/sheaf-map naturality, presentation bound, no representability/finiteness binders, no hollow defs, sorry only in the 3 theorems, docstrings with source and blueprint tags). Item node: stmt_deps swap theorem lem-trf-space-enlarged-ringed-composition-localization -> new existing:true def node def-trf-space-enlarged-composition-comparisons; statement, lean.statement and declarations unchanged. New node: five plain defs in side-live EnlargedRingedCompositionLocalization.lean L48-135 have real bodies (pullbackRightPullbackFstIso, asIso pullback.snd, sheafPushforwardContinuousComp'/Id', leftAdjointCompIso); lean.statement matches the source signature verbatim; no added hypotheses; all 8 stmt_deps exist on base; same ownership pattern as landed def-sfb-space-chartwise-etale-morphism. Item not landed in side-live (no rebind). Report has real Worker report and Second reading by Q75 sections. No compile: no file changed."
+ }
+}

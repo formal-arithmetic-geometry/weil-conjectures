@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+ "kind": "statement",
+ "title": "Flat locally quasi-finite scheme self-relation near a finite-inertia stack point",
+ "statement": "Work over a field $k$ [def-weil-field], in the universes of [def-weil-size-convention]. Schemes and affine schemes mean [def-pc-scheme], algebraic spaces mean [def-trf-algebraic-space], and algebraic stacks mean [def-sfb-algebraic-moduli-stack]. Stacks, representability by algebraic spaces and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids]. Flatness, local finite presentation and etaleness of representable maps are tested after scheme base change on etale scheme charts, using [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-etale-morphism]. A scheme morphism is separated when its diagonal is a closed immersion [def-weil-proper-morphism]. A scheme groupoid has the laws of [def-a1-groupoid-scheme]. Let $\\mathcal X/k$ be an algebraic stack. Its inertia has objects $(a,\\alpha)$ with $\\alpha\\in\\operatorname{Aut}(a)$ and arrows the isomorphisms conjugating these automorphisms; its projection forgets $\\alpha$. Suppose this projection is finite, meaning every scheme base change is a finite scheme morphism [def-weil-finite-integral-morphism]. For every $x\\in|\\mathcal X|$ [lem-sfb-stack-point-topology], there are an affine $k$-scheme $U$, a morphism $p:U\\to\\mathcal X$ representable by algebraic spaces, flat and locally of finite presentation, and $u\\in U$ mapping to $x$, such that the self $2$-fibre product $R=U\\times_{\\mathcal X}U$ is a scheme. With its canonical self-relation groupoid structure, both projections $s,t:R\\to U$ are separated, flat, locally of finite presentation and locally quasi-finite [pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-stack-point-topology",
+  "pqf-def-quasifinite",
+  "def-sfb-moduli-inertia",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "On every scheme test $T\\to\\mathcal X$, the inertia base change $I_T\\to T$ is a finite scheme morphism. A finite scheme map is quasi-finite, and a quasi-finite morphism is locally quasi-finite (the quasi-finite iff locally quasi-finite and quasi-compact lemma). For every etale scheme chart $V\\to I_T$, the composite $V\\to I_T\\to T$ is then locally quasi-finite by the etale-precomposition clause of the etale source-locality lemma. A finite map is proper and in particular separated, i.e. its diagonal is a closed immersion. Thus the inertia projection has both chartwise properties. Apply the relative-inertia criterion to $\\mathcal X\\to\\operatorname{Spec}k$ to obtain a locally quasi-finite diagonal. The separated-inertia implication in the separated-source lemma gives that this diagonal is separated as a representable map (a closed-immersion diagonal on tests), not that $\\mathcal X$ itself is separated.",
+   "uses": [
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-locqf-qc",
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-inertia-locally-quasifinite-diagonal",
+    "lem-sfb-separated-source-finite-inertia-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0, parts (1),(5); preparation of Tag 0DU4"
+   }
+  },
+  {
+   "text": "Apply the atlas theorem to obtain $q:W\\to\\mathcal X$ flat, locally of finite presentation and locally quasi-finite, with field-extension local lifting. Represent $x$ over a field $K$ and lift after $K\\subset L$ to an $L$-point of $W$. Its image $w\\in W$ maps to $x$. Choose an affine open neighbourhood $U$ of $w$ and put $p=q|_U$, $u=w$. The inclusion $U\\to W$ is etale, hence smooth, flat and locally of finite presentation. Composition in the chartwise calculus gives these last two properties for $p$. It remains representable by the space-source criterion. For each scheme test $T\\to\\mathcal X$, $U\\times_{\\mathcal X}T$ is the open subspace of $W\\times_{\\mathcal X}T$ cut out by $U\\subset W$. By the open-chart lemma, every etale scheme chart $V$ of the former is also an etale scheme chart of the latter. Thus $V\\to T$ is locally quasi-finite by the scheme-test property of $q$. This proves the required local quasi-finiteness of $p$ without assuming that $p$ is globally surjective.",
+   "uses": [
+    "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-a1-space-open-chart-tests",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF; first paragraph of lemma-etale-local-quasi-DM as invoked by Tag 0DU4"
+   }
+  },
+  {
+   "text": "Form $R=U\\times_{\\mathcal X}U$. It is an algebraic space since $p$ is representable, using the representable pullback over a space. Each projection is a scheme base change of $p$, so flatness and local finite presentation follow from the chartwise base-change calculus. Its local quasi-finiteness follows directly from the scheme-test definition: composing any scheme chart $V\\to R$ with either projection is a chart of the corresponding base change of $p$.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "First proof paragraph of lemma-etale-local-quasi-DM, before the quasi-splitting step"
+   }
+  },
+  {
+   "text": "The map $d:R\\to U\\times_kU$ is the base change of $\\Delta_{\\mathcal X/k}$: on a test scheme its point is a pair $(a,b)$ with an isomorphism $p(a)\\simeq p(b)$. This is exactly the diagonal comparison square. The projection $U\\times_kU\\to U$ is a base change of $U\\to\\operatorname{Spec}k$, which is separated because $U$ is affine. Separatedness is preserved by base change and composition, and for representable maps agrees with closed-immersion diagonal on tests. Therefore both composites $R\\xrightarrow d U\\times_kU\\to U$ are separated.",
+   "uses": [
+    "lem-sfb-groupoid-diagonal-two-pullback-identities",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-stack-separation-compactness-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "First proof paragraph of lemma-etale-local-quasi-DM: separatedness of the relation projections"
+   }
+  },
+  {
+   "text": "Apply the separated locally quasi-finite algebraic-space representability criterion to $s:R\\to U$ over $\\operatorname{Spec}k$. Its target is a scheme, and steps 3--4 give precisely the chartwise local quasi-finiteness and closed-immersion diagonal required there. It gives a scheme representing $R$ over $U$. Under this identification both projections are separated, flat, locally of finite presentation and locally quasi-finite scheme morphisms: the flat and local-presentation chart properties agree with their scheme versions. No quasi-compactness of $R$ is needed.",
+   "uses": [
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme)"
+   }
+  },
+  {
+   "text": "For every test scheme $T$, identify $R(T)$ with triples $(a,b,\\alpha)$ where $a,b\\in U(T)$ and $\\alpha:p(a)\\simeq p(b)$. There are no nontrivial arrows between such triples, since $U$ is a sheaf. Take $s(a,b,\\alpha)=a$, $t(a,b,\\alpha)=b$, unit $(a,a,1)$, inverse $(b,a,\\alpha^{-1})$, and composition $(b,c,\\beta)\\circ(a,b,\\alpha)=(a,c,\\beta\\alpha)$. These formulas commute with pullback and thus define morphisms of the representing schemes by Yoneda. Identity, inverse and associativity equations hold on every test scheme because they are the corresponding equations in the fibre groupoid of $\\mathcal X$. This is exactly the required canonical self-relation groupoid; together with $u\\mapsto x$ it finishes every clause.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack), groupoid construction expanded on triples"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-locqf-qc",
+  "lem-a1-scheme-lqf-etale-source-locality",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-inertia-locally-quasifinite-diagonal",
+  "lem-sfb-separated-source-finite-inertia-target",
+  "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-a1-space-open-chart-tests",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-groupoid-diagonal-two-pullback-identities",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-stack-separation-compactness-permanence",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-a1-groupoid-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU4 first paragraph, referring to the first paragraph of lemma-etale-local-quasi-DM; Tags 0CL0, 06MF, 03XX. Self-relation laws expanded from algebraic.tex 04T4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with separated locally quasi finite inertia admits near each point a flat locally finitely presented locally quasi finite affine scheme presentation with separated scheme relation",
+   "results": "OK; 8 hits; AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with finite inertia has through every point an affine flat locally finitely presented locally quasi finite scheme morphism whose self fibre product is a scheme with separated projections",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Flat, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.flat_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack with locally quasi finite separated inertia has an affine flat locally finitely presented quasi finite presentation near any point",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"IsLocallyQuasiFinite\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|QuasiDM|quasi.DM",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme).",
+   "via": [
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+  "worker": "stage1",
+  "summary": "Split the finite-inertia preparation into inertia/diagonal reduction, a general quasi-DM atlas, affine restriction, separated base-change comparison, space-to-scheme representability, and explicit groupoid laws. Reused the existing general separated-inertia implication and Tag 03XX criterion. Added only the general relative local-quasi-finite inertia criterion and the global quasi-DM atlas theorem. No statement change.",
+  "blueprint": "Read current latest sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3). The inherited moduli/alteration support chain remains in place. This item realizes its local finite-inertia groupoid preparation, precisely the first proof paragraph of 0DU4 via lemma-etale-local-quasi-DM. The ancestor tool returns None; inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-finite-qf",
+    "why": "Generic scheme or algebraic-space statement used in the local presentation argument, with its stated hypotheses; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic scheme or algebraic-space statement used in the local presentation argument, with its stated hypotheses; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic scheme or algebraic-space statement used in the local presentation argument, with its stated hypotheses; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme or algebraic-space statement used in the local presentation argument, with its stated hypotheses; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "Generic scheme or algebraic-space statement used in the local presentation argument, with its stated hypotheses; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic scheme or algebraic-space statement used in the local presentation argument, with its stated hypotheses; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic scheme or algebraic-space statement used in the local presentation argument, with its stated hypotheses; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "def-a1-groupoid-scheme",
+    "why": "Generic scheme or algebraic-space statement used in the local presentation argument, with its stated hypotheses; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic scheme statement used in step 1 to pass from a finite inertia base change to chartwise local quasi-finiteness; no same-unit replacement and no change to the unit route."
+   },
+   {
+    "node": "lem-a1-scheme-lqf-etale-source-locality",
+    "why": "Generic scheme statement used in step 1 to pass from a finite inertia base change to chartwise local quasi-finiteness; no same-unit replacement and no change to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-finite-qf",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-a1-space-open-chart-tests",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-a1-separated-locally-qf-space-representable",
+  "def-a1-groupoid-scheme",
+  "pqf-lem-qf-locqf-qc",
+  "lem-a1-scheme-lqf-etale-source-locality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-e1b53a841",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-e1b53a841 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus every cited statement and the source: Stacks 0DU4 and the first paragraph of 0DU3, 0CL0(1),(5), 06MF, 03XX and 04T4. The statement is unchanged and is the 0DU3 preparation, with finite inertia in place of quasi-DM with separated diagonal. The item is unsplit on live and side-live, so the delivery is not superseded. The two new nodes are true and faithful: lem-sfb-inertia-locally-quasifinite-diagonal is 0CL0(5) for any morphism of algebraic stacks, and lem-sfb-quasidm-flat-locally-quasifinite-atlas is the relative 06MF. I tested them on BG_m, Bmu_p in characteristic p, identity maps and the empty stack. Neither is a duplicate: the candidates (relative-inertia-second-diagonal-geometry, stack-inertia-separated-diagonal (DM only), smooth-atlas-automorphism-diagonal-test (0CL0(4)), dm-relative-diagonal-quasifinite, dm-lqf-atlas-test) state different things. Neither restates a clause of the item. Steps 2-6 check out. The open-chart lemma hypotheses hold with H x_W U open in H. Groupoid-diagonal clause (2) with A=B=U, C=X, D=Spec k shows R -> U x_k U is a base change of the diagonal. 03XX gets its hypotheses from steps 3-4 through the separation-permanence node, and step 6 is genuinely elementary. FIX (C1/C4): step 1 went from 'finite on scheme tests' to chartwise local quasi-finiteness with no node for two facts. I added pqf-lem-qf-locqf-qc for quasi-finite implies locally quasi-finite (01TJ) and lem-a1-scheme-lqf-etale-source-locality for etale precomposition (03X4). I updated proof_deps and declared both in split_report.tool_uses. Batch-5 flags: every listed citation reaches sec-trace-formula only through the general definitions def-trf-algebraic-space and def-trf-projective-bundle-morphism, not trace-formula or Poincare steps, so I accept them. The two added nodes reach neither chapter. There is no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteInertiaFlatQuasifinitePresentation",
+  "declaration": "CategoryTheory.finite_inertia_flat_quasifinite_presentation",
+  "declarations": [
+   "CategoryTheory.moduliSelfRelationArrow",
+   "CategoryTheory.finite_inertia_flat_quasifinite_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteInertiaFlatQuasifinitePresentation.lean",
+  "statement": "theorem finite_inertia_flat_quasifinite_presentation (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (CommRingCat.of k)))) (hF : IsAlgebraicModuliStack F) (hfinite : IsRepresentableFiniteModuliMap (moduliInertiaProjection F)) : ∀ x : ModuliPoints F, ∃ (U : Over (Spec (CommRingCat.of k))) (p : BasedFunctor (discreteModuli (yoneda.obj U)) F) (u : U.left), IsAffine U.left ∧ moduliPointMap p (Quot.mk _ ⟨CostructuredArrow.mk (yoneda.map (Over.homMk (U.left.fromSpecResidueField u) rfl : Over.mk (U.left.fromSpecResidueField u ≫ U.hom) ⟶ U)), ⟨U.left.residueField u, inferInstance, ⟨Iso.refl _⟩⟩⟩) = x ∧ IsRepresentableByAlgebraicSpaces p ∧ ModuliSpaceTest (fun (X Y : Scheme.{u}) (f : X ⟶ Y) ↦ Flat f ∧ LocallyOfFinitePresentation f) p ∧ ∃ (R : Over (Spec (CommRingCat.of k))) (s t : R ⟶ U) (E : BasedFunctor (discreteModuli (yoneda.obj R)) (moduliTwoFiberProduct p p)) (α : ModuliTwoIso (E.comp (moduliTwoFiberFst p p)) (discreteModuliMap (yoneda.map s))) (β : ModuliTwoIso (E.comp (moduliTwoFiberSnd p p)) (discreteModuliMap (yoneda.map t))) (e : U.left ⟶ R.left) (i : R.left ⟶ R.left) (c : pullback s.left t.left ⟶ R.left), E.toFunctor.IsEquivalence ∧ IsGroupoidScheme s.left t.left e i c ∧ IsSeparated s.left ∧ IsSeparated t.left ∧ Flat s.left ∧ Flat t.left ∧ LocallyOfFinitePresentation s.left ∧ LocallyOfFinitePresentation t.left ∧ Scheme.Hom.IsLocallyQuasiFinite s.left ∧ Scheme.Hom.IsLocallyQuasiFinite t.left ∧ ∀ (T : Over (Spec (CommRingCat.of k))) (a b d : T ⟶ R) (q : T.left ⟶ pullback s.left t.left) (h : a ≫ t = b ≫ s), q ≫ pullback.fst s.left t.left = b.left → q ≫ pullback.snd s.left t.left = a.left → q ≫ c = d.left → ∀ (hs : a ≫ s = d ≫ s) (ht : b ≫ t = d ≫ t), moduliSelfRelationArrow p s t E α β a ≫ eqToHom (congrArg (fun f ↦ p.obj (CostructuredArrow.mk (yoneda.map f))) h) ≫ moduliSelfRelationArrow p s t E α β b = eqToHom (congrArg (fun f ↦ p.obj (CostructuredArrow.mk (yoneda.map f))) hs) ≫ moduliSelfRelationArrow p s t E α β d ≫ eqToHom (congrArg (fun f ↦ p.obj (CostructuredArrow.mk (yoneda.map f))) ht.symm)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The self-relation equivalence retains both projections and its actual comparison isomorphisms. The final equation identifies composition with those isomorphisms, pinning the canonical groupoid, including its unique identity and inverse. Uses landed inertia, finite-scheme-test, source-local chart-test and second-projection definitions; no statement correction. Reviewer FIX (stage-2 second reader): the point clause moduliSchemePointMap p u = x is replaced by its exact definitional body moduliPointMap p (Quot.mk _ ⟨residue-field Yoneda object of u, ⟨κ(u), _, Iso.refl⟩⟩) = x, using only def-sfb-dm-stack-morphism-properties declarations; moduliSchemePointMap is a plain def owned by the theorem node lem-sfb-stack-point-topology-flat-lfp-open, which is not a stmt_dep. Sheaf.AlgebraicGeometry.StackPointTopology is now a plain (proof) import.",
+  "fixed_by": "NT-stage2-cc-e0f156d7d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0f156d7d",
+  "group": "Q34",
+  "result": "fix",
+  "note": "Read item, all stmt_dep declarations (IsGroupoidScheme, moduliTwoFiberProduct/Fst/Snd, discreteModuli, IsRepresentableByAlgebraicSpaces, moduliInertiaProjection, IsRepresentableFiniteModuliMap, ModuliPoints/moduliPointMap/ModuliSpaceTest), report and module. All clauses faithful: field k, algebraic stack, finite inertia on every scheme test, affine representable flat+lfp chart (no surjectivity, no lqf on p), R a scheme via an equivalence with alpha/beta pinning s,t, IsGroupoidScheme with the composition equation in the IsGroupoidScheme order (snd = first arrow) pinning c (then e, i), s,t separated/flat/lfp/lqf. moduliSelfRelationArrow is real data. Edge cases (empty stack, scheme, Bmu_p char p, BG_m excluded) OK; no extra hypotheses. Fault (H4/H9): moduliSchemePointMap is a plain def owned by theorem node lem-sfb-stack-point-topology-flat-lfp-open (not a stmt_dep) -> FIX: replaced by its exact body moduliPointMap p (Quot.mk _ <residue-field Yoneda object of u>) = x (def-sfb-dm-stack-morphism-properties); StackPointTopology demoted to plain import; stmt_deps unchanged. Fixed module compiled clean via nt_compile --json (18.8 s, exit 0). Fixes: FiniteInertiaFlatQuasifinitePresentation.lean + lean-record.json (verbatim statement, note)."
+ }
+}

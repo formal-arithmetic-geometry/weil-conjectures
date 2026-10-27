@@ -507,8 +507,9 @@ theorem isIso_etaleSetDegreeZeroBaseChange_of_flat
   refine Sheaf.isIso_of_isIso_app_of_generate_mem _ (𝟭 (Type (u + 1))) _ fun W₀ ↦ ?_
   have : Etale W₀.hom := W₀.prop
   have : GeometricallyReduced (W₀.hom ≫ f) := GeometricallyReduced.comp_of_etale _ _
-  obtain ⟨ι, U, a, V, q, r, ha, hcov, hr, hq₁, -, hq₃, -, hq₄, -, hfac⟩ :=
+  obtain ⟨ι, U, a, V, q, r, ha, hcov, hr, hq₁, -, hq₃, -, hq₄, -, hrest⟩ :=
     exists_etaleCover_factorization (W₀.hom ≫ f)
+  have hfac : ∀ i, q i ≫ r i = a i ≫ (W₀.hom ≫ f) := by tauto
   let W (i : ι) : X.Etale := Scheme.Etale.mk (a i ≫ W₀.hom)
   let ι' (i : ι) : W i ⟶ W₀ := MorphismProperty.Over.homMk (a i)
   refine ⟨Presieve.ofArrows W ι', (Scheme.ofArrows_mem_smallEtaleTopology_iff ι').2 ?_, ?_⟩

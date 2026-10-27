@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-adic-slice-native-tensor",
+ "kind": "statement",
+ "title": "Normalized native balanced tensor pullback",
+ "statement": "Fix a prime l, a scheme X and an object U of its pro-etale site. For all native adic modules M,N, the explicitly constructed adicSliceNativeTensorIso identifies the balanced tensor of their native pullbacks with the pullback of their balanced tensor. Its composite after the native quotient is the monoidal inverse-image tensor map followed by the inverse image of the original quotient. The construction applies without freeness or flatness hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections Localization of ringed sites, Tensor product and Internal Hom; definition-localize-ringed-site, lemma-tensor-product-pullback, lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor. Specialization and normalization steps of lem-sf-adic-module-slice-compatibility; the native constructions in lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Evaluation.lean and lean/WeilConjectures/SixFunctors/ProEtale/Adic/InternalHomEvaluation.lean."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-module-section-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved native Mod.tensorLeftCompMapModComapIso to the actual adicUpperStarRingIso, providing its coequalizer preservation through the actual adicUpperStar functor. Take its inverse component. Apply the already proved Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom, compose with the invertible tensor map and inverse component, and cancel the two iso pairs.",
+   "uses": [
+    "lem-sf-adic-module-section-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-module-section-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit refinement of the corresponding action, pure-tensor or transpose step of lem-sf-adic-module-slice-compatibility; the Lean assembly uses the existing native and base normalization APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a localized ringed site commutes with tensor products and internal Hom through the canonical section maps",
+   "results": "LocallyRingedSpace.restrict; IsLocalization.instIsLocalizedModuleTensorProductMap; PresheafOfModules.Monoidal.tensorObjMap; Sheaf.ΓRes; ModuleCat.Tilde.res_apply; LocallyRingedSpace.ofRestrict; LocallyRingedSpace.toΓSpecCApp_spec; LocallyRingedSpace.ofRestrict_stalkMap_isIso.",
+   "date": "2026-10-26",
+   "verdict": "None compares the native internal adic modules with the supplied normalized section-module equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules along a site object commutes with tensor products and internal Hom, with pullback comparison on sections",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; pullbackObjFreeIso; conjugateEquiv_pullbackComp_inv; pullbackObjFreeIso_hom_naturality; freeFunctorCompPullbackIso; pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc (8 hits including duplicate indexed variants).",
+   "date": "2026-10-26",
+   "verdict": "These supply module-sheaf pullback APIs but no native adic comparison normalized on sections."
+  },
+  {
+   "tool": "grep",
+   "query": "rg isoMk|isoOfComponents Mathlib/CategoryTheory/Sites/Sheaf.lean; rg isoToLinearEquiv|def.*toLinearEquiv Mathlib/Algebra/Category/ModuleCat*; rg siteSheafTensorSecondMap.*(id|comp)|isIso.*siteSheafTensorSecondMap lean/Sheaf; rg adic.*(Slice|slice)|nativeTensorSlice|hom_slice|evaluation_slice|coefficientSlice lean/Sheaf/SixFunctors lean/WeilConjectures/SixFunctors/ProEtale",
+   "results": "Mathlib supplies fullyFaithfulSheafToPresheaf, Iso.toLinearEquiv, PresheafOfModules.isoMk and existing sheafification. The project supplies the assigned parent, its assembled consumer AdicModuleSliceHomComparison, and normalized native evaluation. No pre-existing normalized restriction/tensor/closed comparison theorem was found. Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom supplies the native quotient normalization.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing isomorphism and coequalizer APIs; separate only the action, pure-tensor and closed normalization obligations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleSliceCompatibility",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Parent proof step 2: the native balanced coequalizer comparison is characterized before the quotient. The inherited computed ancestor is null because the older maintainer-created parent has created.item=null; its recorded mathematical ancestor is lem-a1-local-boundary-duality.",
+   "via": [
+    "lem-sf-adic-module-slice-compatibility",
+    "lem-sf-adic-module-slice-hom-comparison",
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicSliceNativeTensorComparison",
+  "file": "lean/Sheaf/SixFunctors/AdicSliceNativeTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicSliceNativeTensorIso_quotient",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.adicSliceNativeTensorIso",
+   "AlgebraicGeometry.ProEtale.adicSliceNativeTensorIso_quotient"
+  ],
+  "statement": "theorem adicSliceNativeTensorIso_quotient {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}\n    (U : X.ProEt) (M N : AdicSheaf l X) :\n    Mod.tensorπ ((adicUpperStar l U.hom).obj M) ((adicUpperStar l U.hom).obj N) ≫\n        (adicSliceNativeTensorIso U M N).hom.hom =\n      Functor.LaxMonoidal.μ (upperStar (WeilCoefficients.{u} l) U.hom) M.X N.X ≫\n        (upperStar (WeilCoefficients.{u} l) U.hom).map (Mod.tensorπ M N)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T182338-L-3549900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T182338-L-3549900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

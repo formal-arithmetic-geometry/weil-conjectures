@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-native-closed-transposition",
+ "kind": "statement",
+ "title": "Evaluation and biduality under normalized closed comparison",
+ "statement": "Let $C,D$ be categories, let $H_C:C^{op}\\times C\\to C$ and $H_D:D^{op}\\times D\\to D$ be functors with specified closed monoidal structures as in [def-sf-native-weil-closed-models]. The bidual arrow is the transpose of evaluation after symmetry. It is natural in its input, for every chosen symmetric structure, with no reflexivity assumption. Given a functor $U:C\\to D$, an invertible natural tensor comparison $\\tau$, and an invertible natural Hom comparison $\\eta$ whose arrows are exactly the transposes of mapped evaluations, the evaluation square commutes. If $\\tau$ preserves the two symmetries, $U$ carries the bidual arrow to the ordinary bidual arrow under the iterated Hom comparison, using the inverse of $\\eta$ in the contravariant argument.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison, naturality of evaluation, and transposition paragraph; native refinement of lem-sf-weil-native-closed-forgetful."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "proof": [
+  {
+   "text": "For naturality uncurry the two bidual arrows. Adjunction naturality moves precomposition past uncurry; evaluation_naturality handles the internal-Hom source. The two braiding naturality squares make the uncurried maps equal. Injectivity of uncurry gives naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Uncurry the definition of nativeHomComparison. Equiv.symm_apply_apply identifies it with inverse tensor comparison followed by mapped evaluation. Compose with the tensor comparison and cancel its inverse to obtain the evaluation square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For bidual compatibility first uncurry the contravariant Hom map. Naturality of the inverse tensor comparison gives the formula for uncurry after the derived comparison. Symmetry preservation moves the inverse tensor comparison past the braiding. The evaluation square cancels the remaining Hom comparison and its inverse. Injectivity of uncurry concludes. These arguments are the explicit nativeBidual_natural, nativeComparison_evaluation and nativeComparison_bidual proofs in the Lean module.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Explicit categorical proof of the evaluation/transposition paragraph, using Adjunction.homEquiv, evaluation naturality, braiding naturality and functoriality of tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed symmetric monoidal structure with a specified internal Hom bifunctor evaluation and tensor comparison",
+   "results": "MonoidalClosed, exp.ev, MonoidalClosed.closed and internalHom provide abstract closedness, but not the specified native representative models or derived forgetful comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed symmetric monoidal functor preserving evaluation preserves the canonical map to the double dual",
+   "results": "Groupoid closedCounit and expComparison_ev were returned; the latter is a Cartesian specialization, not this arbitrary closed monoidal statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv_naturality_left_symm\"",
+   "results": "Adjunction.homEquiv_naturality_left_symm is used in the proof, but does not state the complete bidual comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientClosedStructure|nativeBidual|nativeHomComparison",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilClosedForgetful",
+  "date": "2026-10-25",
+  "group": "V6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The ancestor command returns None for the native obligation. This is the stated native refinement of the internal-Hom/evaluation/transposition paragraph in cor-coef-verdier-weil-equivariance.",
+   "via": [
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeClosedTransposition",
+  "file": "lean/Sheaf/Paper/NativeClosedTransposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeComparison_bidual",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeBidual_natural",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeComparison_evaluation",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeComparison_bidual"
+  ],
+  "statement": "theorem nativeComparison_bidual (βC : @SymmetricCategory C _ SC.monoidal) (βD : @SymmetricCategory D _ SD.monoidal) (hβ : NativeSymmetryCompatibility SC SD βC βD U τ) : NativeBidualCompatibility SC SD βC βD U η",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-556bf",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T124141-L-1939079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-556bf",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T124141-L-1939079",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules/nodes against clone (byte-identical moved defs and unchanged item statement), node statements vs Lean, 6 direct importers compiled in sandbox, #print axioms"
+ }
+}

@@ -1,0 +1,42 @@
+# Worker report
+
+Files written:
+- dag/nodes/sec-six-functors-basics/lem-sfb-invariant-closed-substack-descent.json: split statement, six steps, unchanged statement, no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-groupoid-source-cartesian-quotient-square.json: new statement-only input, Stacks 04ZN; no Mathlib match.
+- citations.json: one verbatim quotation per step/node pair.
+
+Attachments: none. Searching the project library for the blueprint tag and for substack, quotient-stack and invariant-closed terminology found no declaration of this item. No Lean was written or compiled.
+
+WANTED: none. All mathematical sources used here are available locally in the Stacks source.
+
+The original node was unsplit, not false. No statement, hypothesis or conclusion was changed. The pre-existing sandbox contained only search logs and dispatcher markers; I read and reused the earlier search results. The current repository supplied the item and its original Q27 searches, which were retained. The latest blueprint's direct-images proof (3) is the inherited high-level context; it does not separately state this auxiliary foundational result. I did not change the unit or chapter route.
+
+Unfinished work: the new 04ZN input is intentionally unsplit; all the remaining steps of this item are supplied. Its argument is not a renamed invariant-closed-substack correspondence: it concerns arbitrary functors of algebraic-space groupoids, assumes a cartesian source square, and concludes a single 2-pullback square. It supplies no closedness, substack, restriction construction or uniqueness.
+
+## Not duplicates
+
+The whole DAG and blueprint were searched for 04ZN, criterion-fibre-product, cartesian source, quotient stack and invariant closed. No existing node carries 04ZN or states the new criterion. There is therefore no same-tag pair to resolve. In particular:
+
+lem-sfb-groupoid-source-cartesian-quotient-square vs lem-sfb-smooth-groupoid-fppf-quotient: the existing theorem establishes algebraicity and the self-relation square of a smooth quotient; the new input concerns the square induced by a functor between two distinct groupoids, without smoothness.
+
+lem-sfb-groupoid-source-cartesian-quotient-square vs lem-sfb-fppf-groupoid-stack-presentations: the existing restriction-equivalence clause assumes a surjective flat locally finitely presented change of object space, and the other clauses describe a single presentation. A closed inclusion Z into U need not be flat or surjective. The new criterion does not assert an equivalence of quotients, only its object-space pullback square.
+
+lem-sfb-groupoid-source-cartesian-quotient-square vs lem-sfb-self-relation-quotient-embedding: the existing node proves full faithfulness and representability of a quotient formed from a self-relation; it does not give its base change along U. We use both nodes for precisely these different conclusions.
+
+The closed-immersion-atlas-locality node was found during duplicate searches and reused. I did not introduce the initially considered smooth-cover descent lemma: etale sections of the smooth cover reduce the step directly to this existing node.
+
+## Review by Q96
+
+I read stacks-properties.tex Tags 0507 (lemma-substacks-presentation), 04YN (lemma-immersion-presentation), and the essential-image assertion 0506 (lemma-substack-image). I followed their restricted-groupoid route. I also read spaces-groupoids.tex Tag 04ZN (lemma-criterion-fibre-product) and its functoriality setup for the new node: the maps are a functor commuting with the groupoid structure, and the source square, not merely a square of point sets, must be cartesian. The node states that exact criterion with all its objects and stackification convention introduced. Its proof is left empty as required.
+
+For step 1 I checked the fibred-groupoid conventions: an R-object includes an isomorphism, so strict fullness makes the two pullback subfunctors identical, including their nilpotent tests. I do not infer equality of closed subschemes from equality of supports. Before step 2 I explicitly apply the existing etale-stack/smooth-atlas fppf-descent node (criteria.tex 076V) so the self-relation theorem's fppf-stack hypothesis is satisfied. This corrects a convention gap found in self-review. Step 2 then uses the statement of the self-relation embedding node to construct R and its operations, the chartwise smooth calculus for base changes, and the smooth quotient theorem for algebraicity and the atlas. I read the matching algebraic.tex 04T4 and 04TK statements. Restriction of identity, inverse and composition is written out, and the equality R_Z = Z times_X Z follows from both endpoints lying in Z.
+
+In step 3 the presentation equivalence is exactly clause (2) of the fppf-groupoid-stack-presentations node, whose hypotheses hold because p is smooth surjective and smooth implies flat and locally of finite presentation. I read algebraic.tex 04WY. The new criterion applies because R_Z = Z times_{U,s} R. The representability assertion is taken from the self-relation embedding node only after step 2 establishes that the quotient is algebraic; it is not inferred just from a formal pullback square.
+
+Step 4 avoids an unstated smooth-local closedness theorem. The etale sections input says precisely that a smooth surjective algebraic space V over the scheme T has a jointly surjective etale scheme family with lifts to V; I read spaces-topologies.tex 0CFV. After those lifts, the scheme test is T_a times_U Z, a scheme and a closed immersion by the closed-immersion-base-change node. The existing closed-immersion-atlas-locality statement (spaces-morphisms.tex 03M4, read) then proves E is a closed subscheme, including representability. It assumes E and T are algebraic spaces, which step 3 supplies, and does not require a pre-existing scheme E or a quasi-compact cover. This is the single off-unit tool use: scheme closed-immersion base change is a generic foundation, not a replacement of the unit's argument.
+
+Step 5 expands the source's omitted essential-image argument. I checked the two definition nodes used here: stack descent provides effective gluing, full faithfulness lifts the overlap arrows uniquely and reflects the cocycle, and strict fullness puts an isomorphic descended object in the image. The equivalence carries the already-proved scheme tests, representable diagonal and atlas to the actual strictly full substack. There is no unproved assertion that an arbitrary image subcategory is already a substack. In step 6 the same etale sections statement applies to each scheme test of the original atlas. Equality of the pulled-back closed subschemes gives the same factorization test for each local atlas lift. Effective descent and strict fullness make membership local, and fullness identifies arrows. This proves equality of substacks, not merely equality of supports or equivalence of chosen presentations.
+
+I checked B--E against the actual node files: the new statement is self-contained, uses single TeX escapes, cites definitions that give its notions, records only executed searches, and has no proof or proof dependencies. The item and new node have filled blueprint places and same_as searches; its inherited nearest-ancestor value is null, as blueprint_refs.py ancestor reports, so I retained that value and the explicit existing place. Every proof citation was opened and quotations in citations.json are verbatim substrings. The new input is strictly smaller and no argument is replaced by a newly named copy of the item. All six steps are shorter than 2000 characters. No SGA source is used.
+
+Edge cases checked: Z empty and Z = U give respectively the empty and whole substack, including an empty atlas over the empty stack. For the identity atlas all constructions return the original closed subscheme. For Spec(k[epsilon]/epsilon^2), the whole scheme and its reduction have the same support but remain different scheme-theoretic tests; our argument preserves that distinction. Nontrivial stabilizers are retained in R_Z and its quotient; the resulting atlas is never assumed to be a monomorphism. For the new criterion the identity functor gives the expected square; the map from the trivial groupoid on a point to the groupoid of a nontrivial group has a noncartesian source square and is rightly excluded. No reducedness, finite type, quasi-compactness or separatedness was added.

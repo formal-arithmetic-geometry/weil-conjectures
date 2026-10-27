@@ -1,0 +1,141 @@
+{
+ "id": "lem-sp-varying-ring-ordinary-clopen-projector-evaluation",
+ "kind": "statement",
+ "title": "Ordinary realization preserves the bare clopen projector",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let R_n be any sequence of commutative rings with transition homomorphisms, let n be a natural number, and let s:U→X be a clopen immersion. For any ordinary varying-ring module system M on X, write E_X for ordinaryRealization and g_s,j_s for the specified ordinaryPullComparison and ordinaryOpenComparison of [lem-sp-varying-ring-ordinary-evaluation-comparisons]. With modulePi of [def-sp-varying-ring-proper-open-arrows] and strict pi of [lem-cbc-strict-tower-proper-open-calculus], E_X(modulePi_s(M)); j_s(s^*M); J_s(g_s(M)) equals pi_s(E_X M). Only one immersion and its projector enter this identity: there is no cartesian beta, no outgoing open extension and no outgoing compositor.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AE, Definition extension-zero and Lemma open-immersion; together with more-etale.tex, Tag 0F7B, open case, and Zheng Construction 4.1. The ordinary-to-constant-derived-tower normalization is an agent-formulated consequence, not a verbatim assertion of these sources."
+ },
+ "stmt_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof": [
+  {
+   "text": "For an adjoint triple J⊣G⊣P with fully faithful J and invertible canonical J→P comparison, cancel G of this comparison and use the triangle identity to show G(pi_M)=unit_(GM). Apply this to the ordinary varying-ring triple. The strict-tower version is the existing pi_image calculation of its calculus.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strict G to the realized ordinary projector and precompose with the invertible ordinary pullback comparison. Its naturality turns G of the realized projector into the realization of ordinary G(pi). Substitute the image identity and ordinaryOpen_mate. Naturality of the strict open unit then identifies the result with strict G(pi).",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+    "lem-sp-varying-ring-ordinary-open-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both arrows have codomain strict J applied to strict G(E_X M). Postcompose with the invertible strict J→P comparison and transpose under strict G⊣P. Each transpose is strict G of the arrow followed by the same counit; the preceding equality makes them equal. Injectivity of the adjunction equivalence and cancellation of J→P prove the desired equality.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+  "lem-sp-varying-ring-ordinary-open-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AE, open immersion adjunctions and fully faithful extension; categorical calculation with the adjoint triple and the specified realization unit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserves the canonical clopen component projection from a sheaf to extension by zero of its restriction",
+   "results": "msearch found preserves sheafification and map_zero, no normalized clopen projector comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor comparison preserves clopen projector from identity to open extension of restriction, compatible with composition of functors",
+   "results": "msearch found general adjunction and idempotent extension lemmas; none concerns the specified sheaf coefficient realization. Loogle also found NatTrans.naturality, used in the parent transport calculation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pi.*(eval|constant|single)|ordinary.*[Pp]rojector",
+   "results": "msearch Mathlib grep has no relevant match. Local rg in Sheaf and WeilConjectures found pi_components for the two separate calculi and clopenSectionEvaluation, which additionally contains both outgoing compositors and concerns derived evaluation to a single coefficient category, not ordinary realization.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingOrdinarySectionEvaluation",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs: the clopen projector calculation inside ordinary realization of the section factor.",
+   "via": [
+    "lem-sp-varying-ring-ordinary-section-evaluation",
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenProjectorEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOrdinaryClopenProjectorEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryClopenProjectorEvaluation",
+  "statement": "theorem ordinaryClopenProjectorEvaluation (n : ℕ) {U X : Scheme.{u}} (s : U ⟶ X)\n    [IsOpenImmersion s] [IsClosedImmersion s] (M : Modules R φ X) :\n    (ordinaryRealization R φ n X).map ((modulePi R φ s).app M) ≫\n        (ordinaryOpenComparison R φ n U X s).hom.app ((pull R φ s).obj M) ≫\n        (StrictTower.J (R n) s).map ((ordinaryPullComparison R φ n U X s).hom.app M) =\n      (StrictTower.pi (R n) s).app ((ordinaryRealization R φ n X).obj M)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T112331-L-1571942",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T112331-L-1571942",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

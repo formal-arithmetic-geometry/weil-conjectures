@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-blowup-rees-symmetric-presentation",
+ "kind": "statement",
+ "title": "The symmetric quotient and Rees presentation of the ordinary blowup",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $\\mathcal I\\subseteq\\mathcal O_T$ a quasi-coherent ideal [pqf-def-coherent]. Let $b:B=\\operatorname{Bl}_{\\mathcal I}(T)\\to T$ be the ordinary glued blowup [def-nagata-global-blowup]. Write $\\mathcal R=\\bigoplus_{n\\ge0}\\mathcal I^n$ for the quasi-coherent sheaf Rees algebra [def-nagata-sheaf-rees-algebra], with $\\mathcal R_0=\\mathcal O_T$, and $\\operatorname{Sym}(\\mathcal I)$ for the quasi-coherent symmetric algebra [lem-weil-pbc-quasi-coherent-symmetric-algebra], graded by symmetric degree [lem-weil-pbc-symmetric-algebra-graded]. The degree-one inclusion induces a canonical surjective degree-preserving morphism of graded $\\mathcal O_T$-algebras $q:\\operatorname{Sym}(\\mathcal I)\\twoheadrightarrow\\mathcal R$ whose degree-zero map is the identity. On every affine open $V=\\operatorname{Spec}A$, with $I=\\Gamma(V,\\mathcal I)$, there are canonical graded identifications $\\Gamma(V,\\mathcal R)=\\bigoplus_{n\\ge0}I^n$ and $\\Gamma(V,\\operatorname{Sym}(\\mathcal I))=\\operatorname{Sym}_A(I)$; in particular $\\Gamma(V,\\mathcal I^n)=I^n$. Under these identifications, $q_V$ is surjective and sends $x_1\\cdots x_n\\in\\operatorname{Sym}^n_A(I)$ to $x_1\\cdots x_n\\in I^n$. There is a canonical isomorphism $e:B\\xrightarrow{\\sim}\\operatorname{Proj}_T(\\mathcal R)$ over $T$ [def-nagata-relative-proj]. Its restriction over every affine $V$ is the identification of both schemes with $\\operatorname{Proj}(\\bigoplus_{n\\ge0}I^n)$, and these identifications commute with the restriction maps on affine refinements, namely coefficientwise localization of the Rees algebras.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02NS (lemma-blowing-up-projective), proof: the displayed graded surjection and identification of the blowup with relative Proj; Tag 0804 (lemma-blowing-up-affine) for affine restrictions. Returned Step 3 before applying relative-Proj functoriality."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-nagata-sheaf-rees-algebra",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-nagata-relative-proj",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-sheaf-rees-symmetric-presentation] to $T,\\mathcal I$. It supplies the canonical $\\varphi$, the affine symmetric-algebra identification, $\\Gamma(V,\\mathcal I^n)=I^n$, and the graded coefficient identification $\\theta_V$ with the polynomial Rees ring. Identify that ring with $\\bigoplus_n I^n$ by $\\sum_n a_nt^n\\mapsto(a_n)_n$; its inverse is $(a_n)_n\\mapsto\\sum_n a_nt^n$. Both expressions have finite support, and the convolution formula for polynomial multiplication is precisely the product on the direct sum, so these are inverse graded algebra maps. Set $q=\\varphi$. The cited statement gives degree preservation, identity in degree zero, degreewise affine surjectivity and the displayed monomial formula. Taking the finite sum of homogeneous preimages gives surjectivity of $q_V$ on the whole algebra; affine opens cover $T$, so this also proves surjectivity as a sheaf morphism. The same cited coefficient formulas give compatibility with affine restrictions.",
+   "uses": [
+    "lem-sfb-sheaf-rees-symmetric-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective), displayed symmetric-to-Rees surjection; its affine coefficients"
+   }
+  },
+  {
+   "text": "Choose the affine cover $(V_i)$ used in the ordinary blowup. By [def-nagata-global-blowup-local-model] and [def-nagata-affine-blowup], its local schemes are $\\operatorname{Proj}(\\mathcal R_{A_i}(I_i))$. By [lemma-nagata-relative-proj-exists], the relative Proj restricts over $V_i$ to $\\operatorname{Proj}(\\Gamma(V_i,\\mathcal R))$. Step 1 identifies their graded rings, including the degree-zero structural maps, and hence identifies these local schemes over $V_i$. Here the identification on homogeneous prime ideals is inverse image under the coefficient isomorphism, and on the structure sheaf it sends each equal-degree fraction $a/f^k$ to the fraction with the same coefficients; this is exactly the Proj construction of [def-nagata-affine-proj].",
+   "uses": [
+    "def-nagata-global-blowup-local-model",
+    "def-nagata-affine-blowup",
+    "lemma-nagata-relative-proj-exists",
+    "def-nagata-affine-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804 (lemma-blowing-up-affine), first assertion and proof; Constructions Tag 01NQ (lemma-glue-relative-proj)"
+   }
+  },
+  {
+   "text": "Check the transitions, rather than just the local schemes. The relative-Proj transitions are induced by graded restriction [lem-nagata-proj-affine-restriction], with the chart formulas specified in [def-nagata-relative-proj]. On $D(s)\\subset V_i$ Step 1 makes this $a_nt^n\\mapsto(a_n/1)t^n$. This is the coefficient map $\\rho_s$ of [def-nagata-rees-localization-map], and [def-nagata-affine-blowup-restriction-map] defines a map to the base-change fibre product from precisely this map. Compose it with the first projection to compare maps into the original blowup. The tensor-product version $\\rho_s$ is viewed as an $A$-algebra map by $a\\mapsto1\\otimes a$. The resulting map agrees with the relative-Proj restriction on the charts below, so [lem-nagata-proj-affine-restriction] identifies its image with the restricted open and supplies its inverse there. On a standard Proj chart both thus act on equal-degree fractions by $a/f^k\\mapsto(a/1)/(f/1)^k$. Cover $V_i\\cap V_j$ by opens principal in both affines using [lem-sc-affine-inter-principal-both]. On each such open the two overlap isomorphisms are the same composite $r_{j,s}\\circ r_{i,s}^{-1}$, the explicit definition of [def-nagata-global-blowup-overlap-basic-map]. Equality on the whole overlap follows from uniqueness in [lem-weil-pbc-scheme-morphism-gluing]. Thus the identifications of Step 2 intertwine the full overlap maps of [def-nagata-global-blowup-glue-data]. No intersection of affines has been assumed affine.",
+   "uses": [
+    "lem-nagata-proj-affine-restriction",
+    "def-nagata-relative-proj",
+    "def-nagata-rees-localization-map",
+    "def-nagata-affine-blowup-restriction-map",
+    "lem-sc-affine-inter-principal-both",
+    "def-nagata-global-blowup-overlap-basic-map",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-nagata-global-blowup-glue-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NO (lemma-proj-inclusion), 01NP (lemma-transitive-proj); Schemes Tag 01IW (lemma-standard-open-two-affines)"
+   }
+  },
+  {
+   "text": "By [def-nagata-global-blowup], $B$ is the scheme glued from the ordinary datum. Step 3 says that the local identifications into $\\operatorname{Proj}_T(\\mathcal R)$ agree on its overlaps. Apply [lem-weil-pbc-scheme-morphism-gluing] to obtain $e$ and, to the inverse local identifications, a map in the other direction. The two composites restrict to identities on their respective open covers, so uniqueness in the same lemma makes them identities. The structural maps agree on the cover as well, so $e$ lies over $T$. To check any affine $V$, enlarge the original affine cover by $V$. The ordinary glued model for this cover identifies with $B$ by [prop-nagata-global-blowup-cover-independent], with identity comparison on common affine refinements. The relative-Proj chart identifications are cover-independent by [lemma-nagata-relative-proj-exists]. Repeating the same local comparison on this enlarged cover therefore gives $e$ again, since it agrees on the original cover. Its restriction over $V$ is the coefficient identification of Step 2. Further affine restrictions commute because the coefficient maps in Step 1 do; on principal refinements they are exactly the localization maps checked in Step 3. This proves all the asserted compatibility and canonicity.",
+   "uses": [
+    "def-nagata-global-blowup",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "prop-nagata-global-blowup-cover-independent",
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01LH (lemma-relative-glueing), 01NQ (lemma-glue-relative-proj); Schemes Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sheaf-rees-symmetric-presentation",
+  "def-nagata-global-blowup-local-model",
+  "def-nagata-affine-blowup",
+  "lemma-nagata-relative-proj-exists",
+  "def-nagata-affine-proj",
+  "lem-nagata-proj-affine-restriction",
+  "def-nagata-relative-proj",
+  "def-nagata-rees-localization-map",
+  "def-nagata-affine-blowup-restriction-map",
+  "lem-sc-affine-inter-principal-both",
+  "def-nagata-global-blowup-overlap-basic-map",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-nagata-global-blowup-glue-data",
+  "def-nagata-global-blowup",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02NS (lemma-blowing-up-projective), 0804 (lemma-blowing-up-affine), with the explicit gluing comparison of Constructions Tags 01LH, 01NO, 01NP, 01NQ and Schemes Tag 01JB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reesAlgebra|ReesAlgebra|blowup",
+   "results": "10 hits; Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean; digest a023dd695a07bfbb",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-level Rees generation, symmetric universal properties and ordinary Proj constructions do not state the sheaf graded quotient together with the restriction-compatible global blowup comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The global blowup is relative Proj of the Rees algebra and the canonical symmetric algebra map to this graded algebra is surjective",
+   "results": "8 hits; SymAlg.sym_surjective, Algebra.Extension.algebraMap_surjective, SymmetricAlgebra.algHom_surjective, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective, Algebra.Generators.algebraMap_surjective, SymmetricAlgebra.isSymmetricAlgebra_ι, IsSymmetricAlgebra, AlgebraicGeometry.Proj.toSpecZero; digest 54216b4590a135b7",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-level Rees generation, symmetric universal properties and ordinary Proj constructions do not state the sheaf graded quotient together with the restriction-compatible global blowup comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"reesAlgebra\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-level Rees generation, symmetric universal properties and ordinary Proj constructions do not state the sheaf graded quotient together with the restriction-compatible global blowup comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent finite type ideal sheaf has a graded surjection from its symmetric algebra to its Rees algebra and the ordinary glued blowup is the relative Proj of that algebra",
+   "results": "8 hits; AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Proj.awayι; digest ec5cf8fb00a14602",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-level Rees generation, symmetric universal properties and ordinary Proj constructions do not state the sheaf graded quotient together with the restriction-compatible global blowup comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Rees graded algebra sheaf is a quotient of the symmetric algebra of an ideal sheaf and its relative projective spectrum agrees canonically with the scheme glued from affine blowups",
+   "results": "8 hits; AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.Proj; digest 49b0f2f844b18688",
+   "date": "2026-10-22",
+   "verdict": "no match: ring-level Rees generation, symmetric universal properties and ordinary Proj constructions do not state the sheaf graded quotient together with the restriction-compatible global blowup comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The blowup glued from affine Rees algebra projective spectra is canonically isomorphic to relative Proj of the sheaf Rees algebra, a quotient of the symmetric algebra of the ideal sheaf",
+   "results": "8 hits; AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec; digest d164665d4ddd00ed",
+   "date": "2026-10-22",
+   "verdict": "no match: local Rees-ring and ordinary Proj results do not state the sheaf quotient together with the global blowup comparison and its affine compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"reesAlgebra\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: local Rees-ring and ordinary Proj results do not state the sheaf quotient together with the global blowup comparison and its affine compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "reesAlgebra|ReesAlgebra|relativeProj|RelativeProj",
+   "results": "10 hits; Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean; digest abf8cacb95750fe1",
+   "date": "2026-10-22",
+   "verdict": "no match: local Rees-ring and ordinary Proj results do not state the sheaf quotient together with the global blowup comparison and its affine compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Rees algebra sheaf is a graded quotient of the symmetric algebra of a quasi coherent ideal and its relative Proj is the ordinary glued blowup",
+   "results": "8 hits; reesAlgebra, adjoin_monomial_eq_reesAlgebra, mem_reesAlgebra_iff_support, reesAlgebra.monomial_mem, mem_reesAlgebra_iff, reesAlgebra.fg, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.toSheafedSpace; digest 460366ff5b145da0",
+   "date": "2026-10-22",
+   "verdict": "no match: local Rees-ring and ordinary Proj results do not state the sheaf quotient together with the global blowup comparison and its affine compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A blowup of a scheme in a quasi coherent ideal is obtained by gluing Proj of the local Rees rings, compatibly with affine restriction and localization",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor; digest 8a9e541aa3e93b2a",
+   "date": "2026-10-22",
+   "verdict": "no match: local Rees-ring and ordinary Proj results do not state the sheaf quotient together with the global blowup comparison and its affine compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-blowup-projective-geometry",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; ordinary finite-type blowup geometry in steps 8 and 12 of the one-curve resolution. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Re-split of the integral-blowup geometry input: Tag 02NS (lemma-blowing-up-projective), proof: the displayed graded surjection and identification of the blowup with relative Proj; Tag 0804 (lemma-blowing-up-affine) for affine restrictions. Returned Step 3 before applying relative-Proj functoriality.",
+   "via": [
+    "lem-sfb-integral-blowup-projective-geometry",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-blowup-rees-symmetric-presentation",
+  "worker": "stage1",
+  "summary": "Reused the existing sheaf symmetric-to-Rees presentation, then compared the ordinary and relative-Proj local models, their coefficientwise localization transitions, and their glued schemes. Explicitly checked simultaneous principal refinements and all-affine cover independence; no finite-generation or Noetherian hypotheses, no new nodes, and no Lean changes. Repair of return L (returned head 4512e078a14): rebased onto the current unsplit live item, re-read all fifteen cited node statements, checked every retained quotation, and clarified the fibre-product projection and restricted-open inverse used in Step 3. The current item statement, statement dependencies and blueprint metadata agree with the retained delivery.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; ordinary finite-type blowup geometry in steps 8 and 12 of the one-curve resolution. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Re-split of the integral-blowup geometry input: Tag 02NS (lemma-blowing-up-projective), proof: the displayed graded surjection and identification of the blowup with relative Proj; Tag 0804 (lemma-blowing-up-affine) for affine restrictions. Returned Step 3 before applying relative-Proj functoriality.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Generic existence, affine restriction and cover independence of relative Proj, applied to the sheaf Rees algebra; this unit does not construct relative Proj."
+   },
+   {
+    "node": "lem-nagata-proj-affine-restriction",
+    "why": "Generic restriction theorem for relative Proj; supplies the open models and composition maps for the comparison."
+   },
+   {
+    "node": "prop-nagata-global-blowup-cover-independent",
+    "why": "Generic independence of the affine cover in the ordinary blowup construction; used to include an arbitrary affine open in the chosen cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-proj-exists",
+  "lem-nagata-proj-affine-restriction",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-6bc4cd2bc",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-6bc4cd2bc (reviewer sub-agent of L); spot-checked: PASS. Re-delivery after return L; 0 new nodes and no fixes. Compared with the returned head 4512e078a14a, only the Step 3 text and the split_report summary changed. The new Step 3 composes r_s with the fibre-product projection, treats A_s⊗R_A(I) as an A-algebra, and gets the restricted-open inverse from lem-nagata-proj-affine-restriction; this is correct. The live item is still unsplit; its statement, stmt_deps, source and created fields are identical to the delivery, and there is no repair note. The proof_deps closure (258 nodes) has no cycle, and there is no SGA citation. I read all four steps and the statements of all 15 cited nodes. Step 1: lem-sfb-sheaf-rees-symmetric-presentation gives θ_V, Γ(V,I^n)=I^n and φ, which is surjective in each degree on affines and has the monomial formula; the identification R_R(I)≅⊕I^n is elementary. Step 2: the local models Proj(R_A(I)) match Proj(Γ(V,R)) via θ, using lemma-nagata-relative-proj-exists. Step 3: ρ_s is the same coefficient map; it is an isomorphism because A_s is flat. ω_{ij,s}=r_{j,s}∘r_{i,s}^{-1} agree on simultaneous principal opens (lem-sc-affine-inter-principal-both), and morphism-gluing uniqueness gives agreement on the full overlap. Step 4: e and its inverse are glued, and uniqueness makes them inverse over T. Any affine V is handled by adding it to the cover and using blowup cover independence plus relative-Proj chart independence. Sources: divisors.tex Tag 02NS, whose displayed surjection needs no finite type (that hypothesis serves only projectivity), and Tag 0804, which gives b^{-1}(U)=Proj(⊕I^d). Edge cases: I=0 (both schemes empty), I=O_T (both equal T), nilpotent I (both empty), infinitely generated I (only finite supports used). The three tool_uses are generic relative-Proj and blowup infrastructure and are accepted. Maintainer note: lem-sfb-rees-presentation-blowup-immersion (unsplit, created by Q56 on 2026-10-22) overlaps the e-clause for finite-type I and an abstract C≅Rees. This item is the general case with C=R; that node should cite this item when it is split. The inherited source.place ends with a stray 'Returned Step 3…' phrase; it is identical to the live item and not split-owned, so I left it unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlowupReesSymmetricPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.blowup_rees_symmetric_presentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupReesSymmetricPresentation.lean",
+  "statement": "theorem blowup_rees_symmetric_presentation {T : Scheme.{u}} (I : T.IdealSheafData) : ∃ hqc : I.toModules.IsQuasicoherent, ∃ q : (@SymmetricAlgebraSheaf.gradedAlgebraData T I.toModules hqc ⟶ I.reesData), (∀ U : T.affineOpens, Function.Surjective (q.app U)) ∧ (∀ (U : T.affineOpens) (n : ℕ) (x : Fin n → Γ(I.toModules, U.1)), (reesAlgebra (I.ideal U)).subtype (q.app U (∏ i, SymmetricAlgebra.ι (T.presheaf.obj (op U.1)) (I.toModules.val.obj (op U.1)) (x i))) = Polynomial.monomial n (∏ i, @id (T.presheaf.obj (op U.1)) (I.toModulesι.app U.1 (x i)))) ∧ (∀ U : T.affineOpens, Function.Bijective (SymmetricAlgebraSheaf.sectionMap I.toModules (op U.1))) ∧ (∀ (U : T.affineOpens) (n : ℕ), Set.range (fun x : Γ((I ^ n).toModules, U.1) ↦ @id (T.presheaf.obj (op U.1)) ((I ^ n).toModulesι.app U.1 x)) = (↑((I.ideal U) ^ n) : Set (T.presheaf.obj (op U.1)))) ∧ (∀ (U : T.affineOpens) (F : reesAlgebra (I.ideal U)) (n : ℕ), (reesGradingEquivPow (I.ideal U) n ((DirectSum.decomposeAlgEquiv (reesGrading (I.ideal U)) F) n) : T.presheaf.obj (op U.1)) = (F : Polynomial (T.presheaf.obj (op U.1))).coeff n) ∧ I.relProjReesIso.inv ≫ I.reesData.relProjHom = I.blowupMap ∧ (∀ U : T.affineOpens, I.blowupι U ≫ I.relProjReesIso.inv = I.reesData.relProjι U) ∧ (∀ (U V : T.affineOpens) (h : U ≤ V), I.blowupFunctor.map (homOfLE h) ≫ I.blowupι V ≫ I.relProjReesIso.inv = I.reesData.relProjFunctor.map (homOfLE h) ≫ I.reesData.relProjι V) ∧ (∀ (U V : T.affineOpens) (h : U ≤ V) (F : reesAlgebra (I.ideal V)), (reesAlgebra (I.ideal U)).subtype (I.reesData.res h F) = (F : Polynomial (T.presheaf.obj (op V.1))).map (T.presheaf.map (homOfLE (X := T.Opens) h).op).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the recorded equivalent affine-basis interface for graded quasi-coherent algebra sheaves. The quotient is characterized on symmetric monomials. The actual symmetric sheaf is identified through its canonical sectionMap; reesData is the recorded sheaf Rees algebra. The comparison is the existing relProjReesIso inverse, not a new choice of blowup or relative Proj."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f89eb3c19",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 02NS/0804: q is a GradedAlgebraData.Hom from SymmetricAlgebraSheaf.gradedAlgebraData to reesData, surjective on every affine, pinned by the monomial formula for all n (with app_algebraMap this makes it unique); sectionMap bijective on affines; Γ(U,I^n)=I(U)^n; Rees ring ≅ ⊕I^n by coefficients; e = upstream relProjReesIso.inv (genuine construction), over T, chart identity, compatible with affine refinements, Rees restriction coefficientwise. No extra hypotheses, single universe u; edge cases I=0, I=O_T, nilpotent I, n=0, infinitely generated I and empty scheme OK. Snapshot vs live node: only lean added and 2 landed stmt_deps added; statement unchanged. Docstrings and proof steps present, sorry only, report sections present. Advisory: sectionMap is owned by def node lem-weil-pbc-symmetric-algebra-sheaf-construction, not cited (same pattern as the NX positive-copy PASS); several clauses restate upstream lemmas; Q56 node lem-sfb-rees-presentation-blowup-immersion should cite this item. No compile (no file changed)."
+ }
+}

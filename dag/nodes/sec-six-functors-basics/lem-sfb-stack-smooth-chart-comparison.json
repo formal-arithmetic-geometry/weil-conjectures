@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-stack-smooth-chart-comparison",
+ "kind": "statement",
+ "title": "Smooth chart comparison for properties of Deligne--Mumford stack morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Use Deligne--Mumford stacks, algebraic spaces, representability and 2-fibre products as in [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space, def-pc-fibre-product]. Smooth maps of algebraic spaces are tested on etale scheme charts using [def-sbc-smooth-morphisms]; smooth representable stack maps are tested after scheme base change. Let $\\mathcal P$ be an isomorphism-invariant property of morphisms of algebraic spaces over $S$. Suppose $\\mathcal P$ is smooth local on source-and-target, meaning: (i) precomposing a map having $\\mathcal P$ with a smooth map preserves $\\mathcal P$; (ii) smooth base change preserves $\\mathcal P$; (iii) a map $r:X\\to Y$ of algebraic spaces has $\\mathcal P$ if and only if for every field-valued point class $x\\in|X|$ there is a commutative diagram $U\\xrightarrow{h}V$ above $X\\xrightarrow{r}Y$, with smooth vertical maps $a:U\\to X$, $b:V\\to Y$ and a point $u\\in|U|$ above $x$, for which $h$ has $\\mathcal P$. Here point classes identify field maps that agree after a common field extension [def-weil-field]. For a morphism $f:\\mathcal X\\to\\mathcal Y$ of Deligne--Mumford stacks, consider 2-commutative diagrams $U\\xrightarrow{h}V$ above $f$, with $U,V$ algebraic spaces and smooth vertical maps $a:U\\to\\mathcal X$, $b:V\\to\\mathcal Y$. The following conditions are equivalent: (A) every such diagram whose induced map $U\\to\\mathcal X\\times_{\\mathcal Y}V$ is smooth has $\\mathcal P(h)$; (B) there exists such a diagram with $a$ surjective and $\\mathcal P(h)$. Requiring $U,V$ to be schemes in (A) and (B) gives the same conditions. If $\\mathcal X,\\mathcal Y$ are algebraic spaces, these conditions are also equivalent to $\\mathcal P(f)$ for their ordinary map. If additionally arbitrary algebraic-space base change preserves $\\mathcal P$ and $\\mathcal P$ is fppf local on the target, then for $f$ representable by algebraic spaces, (A) and (B) are equivalent to $\\mathcal P(\\mathcal X\\times_{\\mathcal Y}T\\to T)$ for every scheme $T\\to\\mathcal Y$. Fppf local means that a map has $\\mathcal P$ if and only if all its pullbacks by an fppf covering of its target have $\\mathcal P$; coverings of spaces are tested on schemes using [def-pc-fppf-site].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06FM (lemma-local-source-target); smooth-local hypothesis as in spaces-descent.tex Tag 06F8 (definition-local-source-target). Scheme-chart version by etale atlas refinement. For the etale-stack convention, criteria.tex Tag 076V (lemma-stacks-etale)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-field",
+  "def-pc-fppf-site",
+  "def-sfb-space-smooth-local-source-target",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-surjective-moduli-map",
+  "def-sfb-space-fppf-cover",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $A_{\\mathrm{sp}},B_{\\mathrm{sp}}$ for (A),(B) and $A_{\\mathrm{sch}},B_{\\mathrm{sch}}$ for their scheme-chart versions. The etale atlas in the definition of a Deligne--Mumford stack is smooth by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Thus [lem-sfb-etale-smooth-atlas-fppf-descent] applies: the diagonal is representable and the scheme atlas is smooth and surjective, so the etale stacks used here are also fppf algebraic stacks. We may use the cited stack base-change calculus with exactly the original stacks and 2-fibre products. All the vertical maps from spaces below are understood as representable by algebraic spaces, as in the statement's chart convention.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-etale-smooth-atlas-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, setting; criteria.tex Tag 076V (lemma-stacks-etale), etale/fppf convention"
+   }
+  },
+  {
+   "text": "Prove $A_{\\mathrm{sch}}\\Rightarrow B_{\\mathrm{sch}}$. Choose a surjective etale scheme atlas $V\\to\\mathcal Y$. By [lem-sfb-dm-etale-atlas-calculus], $Q=\\mathcal X\\times_{\\mathcal Y}V$ is Deligne--Mumford and has a surjective etale scheme atlas $U\\to Q$. The map $Q\\to\\mathcal X$ is the base change of $V\\to\\mathcal Y$, so its composite $a:U\\to\\mathcal X$ is smooth and surjective by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Both $b:V\\to\\mathcal Y$ and $U\\to Q$ are smooth. Hence this is an admissible scheme diagram in (A); $A_{\\mathrm{sch}}$ gives $\\mathcal P(U\\to V)$, proving $B_{\\mathrm{sch}}$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, first proof paragraph: choose presentations of the target and its pullback"
+   }
+  },
+  {
+   "text": "Assume $B_{\\mathrm{sp}}$, witnessed by $(U,V,a,b,h)$, and fix an arbitrary admissible diagram $(U',V',a',b',h')$ of $A_{\\mathrm{sp}}$. Put $W=U\\times_{\\mathcal X}U'$, $D_0=V\\times_{\\mathcal Y}V'$ and $R_0=U\\times_VD_0$. The first two are spaces by [lem-sfb-representable-pullback-over-space], applied respectively to $a$ and $b$ with space bases $U'$ and $V'$; the third is a space by [lem-trf-space-fibre-products-etale-covers]. There is a canonical identification $R_0\\simeq U\\times_{\\mathcal Y}V'$. Set $Q'=\\mathcal X\\times_{\\mathcal Y}V'$. Then $W\\simeq R_0\\times_{Q'}U'$: on each scheme, both sides specify $u,u'$ and an isomorphism $a(u)\\simeq a'(u')$, with the isomorphism to the $V'$-object determined by this and the two diagram 2-isomorphisms. Thus $W\\to R_0$ is the base change of the assumed smooth map $U'\\to Q'$. Moreover $W\\to U'$ is the base change of $a$, hence smooth surjective; $D_0\\to V'$ and $D_0\\to V$ are the smooth base changes of $b$ and $b'$. These assertions use [lem-sfb-stack-chartwise-smooth-etale-calculus].",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-sfb-representable-pullback-over-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, converse: comparison diagram and the cartesian square above the middle column"
+   }
+  },
+  {
+   "text": "The map $R_0\\to D_0$ is the smooth base change of $h$, so hypothesis (ii) gives $\\mathcal P(R_0\\to D_0)$. Since $W\\to R_0$ is smooth, (i) gives $\\mathcal P(W\\to D_0)$. For each $u'\\in|U'|$, surjectivity of $W\\to U'$ supplies a point $w$ above it. The square $W\\to D_0$ above $h':U'\\to V'$ has smooth vertical arrows, so hypothesis (iii), using this $w$ for each $u'$, gives $\\mathcal P(h')$. This proves $B_{\\mathrm{sp}}\\Rightarrow A_{\\mathrm{sp}}$ directly from the assumed locality; no separate smooth-locality lemma or stability under arbitrary base change has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, converse, last four sentences; spaces-descent.tex Tag 06F8 (definition-local-source-target), clauses (i)--(iii)"
+   }
+  },
+  {
+   "text": "A scheme is an algebraic space by [def-trf-scheme-algebraic-space], so $A_{\\mathrm{sp}}\\Rightarrow A_{\\mathrm{sch}}$ and $B_{\\mathrm{sch}}\\Rightarrow B_{\\mathrm{sp}}$ are restriction and inclusion of the chart classes. Together with steps 2--4, these give the cycle $A_{\\mathrm{sp}}\\Rightarrow A_{\\mathrm{sch}}\\Rightarrow B_{\\mathrm{sch}}\\Rightarrow B_{\\mathrm{sp}}\\Rightarrow A_{\\mathrm{sp}}$, proving all four conditions equivalent. If $\\mathcal X=X$ and $\\mathcal Y=Y$ are spaces, $A_{\\mathrm{sp}}$ applied to $U=X,V=Y$ and the identity vertical maps gives $\\mathcal P(f)$. Conversely, if $\\mathcal P(f)$ holds, (ii) gives $\\mathcal P(X\\times_YV\\to V)$ for any diagram in (A), and (i) gives $\\mathcal P(h)$ after the assumed smooth map $U\\to X\\times_YV$.",
+   "uses": [
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, representable-spaces paragraph; scheme version via scheme presentations in the first paragraph"
+   }
+  },
+  {
+   "text": "Assume now the additional hypotheses and that $f$ is representable by spaces. Given a scheme $T\\to\\mathcal Y$, put $Z=\\mathcal X\\times_{\\mathcal Y}T$, which is a space. For a witness to $B_{\\mathrm{sp}}$, put $H=T\\times_{\\mathcal Y}V$ and $G_0=Z\\times_{\\mathcal X}U$. These are spaces by [lem-sfb-representable-pullback-over-space], using the representable maps $b$ and $a$. The defining triples of the 2-fibre products identify $G_0$ with $T\\times_{\\mathcal Y}U$ and with $H\\times_VU$. Thus $G_0\\to H$ is the base change of $h$ along $H\\to V$, so has $\\mathcal P$ by arbitrary-base-change stability. In the square $G_0\\to H$ above $Z\\to T$, the vertical maps are respectively the base changes of $a$ and $b$; they are smooth, and the left one is surjective, by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Hypothesis (iii) at each point of $Z$ therefore gives $\\mathcal P(Z\\to T)$. The assumed fppf locality is not needed for this direction: the explicitly assumed pointwise source-and-target locality already gives the descent used here.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, final proof paragraph: base change of the witness diagram by a scheme"
+   }
+  },
+  {
+   "text": "Conversely suppose $\\mathcal P(\\mathcal X\\times_{\\mathcal Y}T\\to T)$ for every scheme $T\\to\\mathcal Y$. Choose a surjective etale scheme atlas $V\\to\\mathcal Y$. Representability of $f$ makes $Z=\\mathcal X\\times_{\\mathcal Y}V$ a space, with $\\mathcal P(Z\\to V)$ by the assumption at $T=V$. Choose an etale surjective scheme atlas $U\\to Z$ by [def-trf-algebraic-space]. It is smooth, so (i) gives $\\mathcal P(h)$ for $h:U\\to Z\\to V$. The map $Z\\to\\mathcal X$ is a base change of the smooth surjective atlas $V\\to\\mathcal Y$; hence $U\\to\\mathcal X$ is smooth surjective by [lem-sfb-stack-chartwise-smooth-etale-calculus]. This is a scheme witness to (B), and completes the final equivalence.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, representable compatibility; converse by the first paragraph's atlas construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-dm-etale-atlas-calculus",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-scheme-algebraic-space",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06FM (lemma-local-source-target), with spaces-descent.tex Tag 06F8 and criteria.tex Tag 076V; pointwise locality applied directly to the comparison square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth local property of algebraic space morphisms induces an atlas independent property of algebraic stack morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $ P $ on schemes is Zariski-local at the source if it satisfies the condition of being local at the source with respect to the Zariski precoverage, generated by open immersions for\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (RingHom.OfLocalizationPrime fun {R S} [CommRing R] [C\", \"doc\": \"If a ring homomorphism property $ Q $, which is preserved under localization at prime ideals, holds for all stalk maps $ (f_{\\\\text{stalkMap}} x).\\\\text{hom} $ of a morphism $ f $, then the correspondin\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $P$ on schemes is local at the target if, for any morphism $f$ with property $P$ and any covering sieve $S$ on the target of $f$ (in some Grothendieck topology), there exists a mor\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism property of schemes defined by requiring that for every point $x$ in the domain scheme, the induced ring homomorphism on the stalk at $x$ satisfies the predicate $P$ applied to the correspo\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_isLocalAtSource_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    AlgebraicGeometry.IsZariskiLocalAtSource (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P)\", \"doc\": \"If a property $ P $ of commutative ring homomorphisms is invariant under composition with ring isomorphisms, then the corresponding stalkwise property for morphisms of schemes (defined by requiring $ \"}\n  {\"name\": \"AlgebraicGeometry.stalkwise_isZariskiLocalAtSource_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    AlgebraicGeometry.IsZariskiLocalAtSource (AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] => P)\", \"doc\": \"If a ring homomorphism property $P$ is invariant under composition with isomorphisms, then the corresponding stalk-wise morphism property for schemes is Zariski-local at the source. Specifically, for \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwaySource fun {R S} [CommRing R] [CommRing S] => \", \"doc\": \"A morphism $ f $ satisfies property $ P $ if and only if for every point $ x $ in $ X $, there exist affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ containing $ x $ such that $ V \\\\subseteq f^{-\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MorphismProperty\", \"IsLocal\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.LeftFraction.Localization.instIsLocalizationQ\", \"module\": \"Mathlib.CategoryTheory.Localization.CalculusOfFractions\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (W : CategoryTheory.MorphismProperty C) [W.HasLeftCalculusOfFractions] : (CategoryTheory.MorphismProperty.LeftFraction.Localization.Q W).IsLocalization W\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.LeftFraction.instIsIsoMapSOfIsLocalization\", \"module\": \"Mathlib.CategoryTheory.Localization.CalculusOfFractions\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {W : CategoryTheory.MorphismProperty C} {X Y : C} {L : CategoryTheory.Functor C D} [L.IsLocalization W] (z : W.LeftFraction X Y) : CategoryTheory.IsIso (L.map z.s)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.RightFraction.instIsIsoMapSOfIsLocalization\", \"module\": \"Mathlib.CategoryTheory.Localization.CalculusOfFractions\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {W : CategoryTheory.MorphismProperty C} {X Y : C} {L : CategoryTheory.Functor C D} [L.IsLocalization W] (z : W.RightFraction X Y) : CategoryTheory.IsIso (L.map z.s)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q'\", \"module\": \"Mathlib.CategoryTheory.Localization.HasLocalization\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) [W.HasLocalization] : W.Q'.IsLocalization W\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsLocalizedEquivalenceShiftLocalizerMorphism\", \"module\": \"Mathlib.CategoryTheory.Shift.Localization\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (W : CategoryTheory.MorphismProperty C) (G : Type w) [AddGroup G] [CategoryTheory.HasShift C G] [W.IsCompatibleWithShift G] (g : G) : (W.shiftLocalizerMorphism g).IsLocalizedEquivalence\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isLocal\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) : CategoryTheory.ObjectProperty C\", \"doc\": \"Given `W : MorphismProperty C`, this is the property of `W`-local objects, i.e.\\nthe objects `Z` such that for any `f : X ⟶ Y` such that `W f` holds, the precomposition\\nwith `f` gives a bijection `(Y ⟶\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsClosedUnderIsomorphismsIsLocal\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) : W.isLocal.IsClosedUnderIsomorphisms\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsClosedUnderLimitsOfShapeIsLocal\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (J : Type u') [CategoryTheory.Category.{v', u'} J] : W.isLocal.IsClosedUnderLimitsOfShape J\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isLocal_single_iff_bijective\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y) (Z : C) : (CategoryTheory.MorphismProperty.single f).isLocal Z ↔ Function.Bijective fun g => CategoryTheory.CategoryStruct.comp f g\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isLocal_iff\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (Z : C) : W.isLocal Z ↔ ∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → Function.Bijective fun g => CategoryTheory.CategoryStruct.comp f g\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isLocal_iSup\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {ι : Sort u_1} (W : ι → CategoryTheory.MorphismProperty C) : (⨆ i, W i).isLocal = ⨅ i, (W i).isLocal\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isLocal_antitone\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {W W' : CategoryTheory.MorphismProperty C} (h : W ≤ W') : W'.isLocal ≤ W.isLocal\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|smoothLocal|SmoothLocal|source.and.target",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Algebra/Opposite.lean\", \"line\": \"21\", \"text\": \"* `AlgEquiv.op`/`AlgEquiv.unop`: simultaneously convert the source and target of an isomorphism to\"}\n  {\"file\": \"Mathlib/Logic/Equiv/PartialEquiv.lean\", \"line\": \"24\", \"text\": \"the source and target to the maximal set where the composition makes sense.\"}\n  {\"file\": \"Mathlib/Logic/Equiv/PartialEquiv.lean\", \"line\": \"45\", \"text\": \"* pairs of functions defined everywhere, keeping the source and target as additional data\"}\n  {\"file\": \"Mathlib/Logic/Equiv/PartialEquiv.lean\", \"line\": \"59\", \"text\": \"  source and target and equality there. Moreover, there are no partial equivs in this sense between\"}\n  {\"file\": \"Mathlib/Logic/Equiv/PartialEquiv.lean\", \"line\": \"755\", \"text\": \"/-- Two equivalent partial equivs are equal when the source and target are `univ`. -/\"}\n  {\"file\": \"Mathlib/Logic/Equiv/PartialEquiv.lean\", \"line\": \"957\", \"text\": \"We modify the source and target to have better definitional behavior. -/\"}\n  {\"file\": \"Mathlib/Topology/OpenPartialHomeomorph/Constructions.lean\", \"line\": \"15\", \"text\": \"  whose source and target are necessarily singleton sets\"}\n  {\"file\": \"Mathlib/Topology/OpenPartialHomeomorph/Constructions.lean\", \"line\": \"50\", \"text\": \"whose source and target are necessarily singleton sets.\"}\n  {\"file\": \"Mathlib/Topology/OpenPartialHomeomorph/Constructions.lean\", \"line\": \"223\", \"text\": \"We modify the source and target to have better definitional behavior. -/\"}\n  {\"file\": \"Mathlib/Topology/OpenPartialHomeomorph/Basic.lean\", \"line\": \"171\", \"text\": \"/-- An open partial homeomorphism defines a homeomorphism between its source and target. -/\"}\n  {\"file\": \"Mathlib/Topology/OpenPartialHomeomorph/Basic.lean\", \"line\": \"187\", \"text\": \"/-- If an open partial homeomorphism has source and target equal to univ, then it induces a\"}\n  {\"file\": \"Mathlib/Topology/OpenPartialHomeomorph/Composition.lean\", \"line\": \"204\", \"text\": \"We modify the source and target to have better definitional behavior. -/\"}\n  {\"file\": \"Mathlib/Topology/OpenPartialHomeomorph/IsImage.lean\", \"line\": \"351\", \"text\": \"/-- Two equivalent open partial homeomorphisms are equal when the source and target are `univ`. -/\"}\n  {\"file\": \"Mathlib/Topology/PartialHomeomorph/Basic.lean\", \"line\": \"142\", \"text\": \"/-- A partial homeomorphism defines a homeomorphism between its source and target. -/\"}\n  {\"file\": \"Mathlib/Topology/PartialHomeomorph/Basic.lean\", \"line\": \"151\", \"text\": \"/-- If a partial homeomorphism has source and target equal to univ, then it induces a\"}\n  {\"file\": \"Mathlib/Topology/PartialHomeomorph/Basic.lean\", \"line\": \"187\", \"text\": \"/-- If a `PartialEquiv` is a homeomorphism when restricted to source and target, then it is a\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"line\": \"290\", \"text\": \"-- it is possible to see its source and target\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"line\": \"164\", \"text\": \"-- of the compositions of functors which appear in both the source and target of\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean\", \"line\": \"10\", \"text\": \"/-! # Local properties of smooth functions which depend on both the source and target\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"line\": \"980\", \"text\": \"/-- Restrict an open partial homeomorphism to the subsets of the source and target\"}\n  {\"file\": \"Mathlib/Algebra/Group/ForwardDiff.lean\", \"line\": \"86\", \"text\": \"use, as the source and target types of the maps have to be specified each time, and various\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/HasGroupoid.lean\", \"line\": \"464\", \"text\": \"/-- Each chart of a charted space is a structomorphism between its source and target. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"774\", \"text\": \"/-- The restriction of a morphism `f : X ⟶ Y` to open sets on the source and target. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"line\": \"239\", \"text\": \"but may be needed separately when you have specified limits for the source and target functors,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"line\": \"246\", \"text\": \"but may be needed separately when you have specified colimits for the source and target functors,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare smooth chart tests and representable base change tests for properties of morphisms of stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"Algebra.Smooth.baseChange\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[Smooth R A] : Smooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the tensor product $ B \\\\otimes_R A $ is a smooth algebra over $ B $.\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": IsStableUnderBaseChange F.relativelyRepresentable\", \"doc\": \"The property of being relatively representable with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is stable under base change. That is, if a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{D} $ is r\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \": IsStableUnderBaseChange @IsStandardSmooth\", \"doc\": \"The property of a ring homomorphism being standard smooth is stable under base change. That is, if $ f : R \\\\to S $ is standard smooth, then for any commutative rings $ R', S' $ with compatible algebra\"}\n  {\"name\": \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": IsStableUnderBaseChange @FormallySmooth\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally smooth, then the base changed homomorphism $ R' \\\\t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A property of maps of algebraic stacks can be checked on one smooth surjective source presentation and all compatible smooth diagrams",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|Deligne.?Mumford|local.*source.*target",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme Zariski-local properties, ring smoothness, manifolds, or ordinary categorical localization, not this stack/space chart-comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth local property of morphisms of algebraic spaces can be checked on any smooth atlas of an algebraic stack",
+   "results": "Hits: RingHom.Smooth.propertyIsLocal, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsZariskiLocalAtTarget.of_forall_source_exists_preimage, AlgebraicGeometry.IsSmooth.mk; ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme Zariski-local properties, ring smoothness, manifolds, or ordinary categorical localization, not this stack/space chart-comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MorphismProperty\", \"IsLocal\"",
+   "results": "Hits: CategoryTheory.MorphismProperty.LeftFraction.Localization.instIsLocalizationQ, CategoryTheory.MorphismProperty.LeftFraction.instIsIsoMapSOfIsLocalization, CategoryTheory.MorphismProperty.RightFraction.instIsIsoMapSOfIsLocalization, CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q', CategoryTheory.MorphismProperty.instIsLocalizedEquivalenceShiftLocalizerMorphism, CategoryTheory.MorphismProperty.isLocal, CategoryTheory.MorphismProperty.instIsClosedUnderIsomorphismsIsLocal, CategoryTheory.MorphismProperty.instIsClosedUnderLimitsOfShapeIsLocal; ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme Zariski-local properties, ring smoothness, manifolds, or ordinary categorical localization, not this stack/space chart-comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth local properties of algebraic space morphisms define atlas independent properties of Deligne Mumford stack morphisms",
+   "results": "Hits: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsLocalAtSource, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsLocalAtTarget, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat; ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme Zariski-local properties, ring smoothness, manifolds, or ordinary categorical localization, not this stack/space chart-comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|DeligneMumford|smooth.local|smoothLocal",
+   "results": "Hits: Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/StandardSmooth.lean, Mathlib/RingTheory/Smooth/StandardSmooth.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/RingHom/LocallyStandardSmooth.lean, Mathlib/RingTheory/RingHom/Smooth.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme Zariski-local properties, ring smoothness, manifolds, or ordinary categorical localization, not this stack/space chart-comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of morphism properties along smooth source covers and target charts in a two commutative square of stacks",
+   "results": "Hits: Manifold.LiftSourceTargetPropertyAt.property, Manifold.LiftSourceTargetPropertyAt, Manifold.LiftSourceTargetPropertyAt.localPresentationAt, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.IsLocalAtSource, Manifold.IsLocalSourceTargetProperty, Manifold.LocalPresentationAt.property, AlgebraicGeometry.HasRingHomProperty.descendsAlong; ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme Zariski-local properties, ring smoothness, manifolds, or ordinary categorical localization, not this stack/space chart-comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-finite-type-calculus",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Finite-type calculus and representable compatibility for stacks. Input to the present split: General chart comparison used in the finite-type supporting input; Stacks 06FM, not a finite-type clause.",
+   "via": [
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-smooth-chart-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved the four chart conditions by a cycle of implications, explicitly identified the comparison pullback and applied the assumed pointwise locality. Verified the algebraic-space and representable scheme-base-change clauses. Reused existing atlas, smoothness, representability and space-fibre-product nodes; no new node.",
+  "blueprint": "Supporting chart-comparison input in the inherited alteration/moduli chain for det-thm-sf-ctf-stability-direct-images, direct-images proof (3). Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. The inherited creation chain has blueprint.from.node null, as blueprint_refs.py ancestor reports; retain that provenance and its precise supporting-input place. This split proves Stacks 06FM, and does not change the six-functor unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of fibre products of algebraic spaces, used only for U times_V (V times_Y V prime); the item unit has no different construction of space fibre products."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-4f9a29233",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-4f9a29233 (reviewer sub-agent of L); spot-checked: The item statement is unchanged against clones/live (statement, stmt_deps, source and blueprint all match). It is a faithful DM-stack restriction of Stacks 06FM (stacks-morphisms.tex, lemma-local-source-target), and its clauses (i)-(iii) are the 06F8 definition. This is the item's first split (it was unsplit, created 2026-10-22, and is still unsplit in live), with no new nodes. proof_deps equals the union of the step uses, there is no cycle (closure walk), there is no SGA, and no DAG node duplicates the 06FM stack comparison (the hits are scheme 04QZ, spaces 03MJ and the 06UF/04YS tests). Steps checked against the 06FM proof: step 2 builds the (A) diagram from an etale atlas V->Y and the DM fibre-product atlas U->X x_Y V; etale gives smooth and base change gives a smooth surjective, both by the chartwise calculus. Step 3 makes W, D_0 and R_0 spaces through representable-pullback-over-space and trf space fibre products; the identification W = R_0 x_{Q'} U' is the 06FM cartesian square, and the order of the base changes is correct. Step 4 (elementary) is (ii), then (i), then the 'if' direction of (iii) on the square W->D_0 over h'; the square commutes and W->U' is surjective, which validly replaces the 06F9 uses. Step 5 closes the cycle of four implications and proves the spaces clause with the identity diagram, then (ii) and (i). Steps 6 and 7 prove the representable clause: G_0 = H x_V U, arbitrary base change and (iii); the converse uses an etale atlas of Z and (i). Edge cases: empty source, scheme case, and a nonrepresentable BG where the fibre product is never treated as a space. The citation of the fppf-descent lemma in step 1 is redundant but harmless. Batch-5: the three sfb lemmas reach trf only through the general definition def-trf-algebraic-space; lem-trf-space-fibre-products-etale-covers is generic existence of space fibre products; def-trf-scheme-algebraic-space is a definition. None is part of the trace formula or Poincare duality statement or proof, so all are accepted. I accept the recorded tool_use lem-trf-space-fibre-products-etale-covers, since no unit node gives fibre products of spaces over a space."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSmoothChartComparison",
+  "declaration": "CategoryTheory.stack_smooth_chart_comparison",
+  "declarations": [
+   "CategoryTheory.SmoothChartAll",
+   "CategoryTheory.SmoothChartSome",
+   "CategoryTheory.stack_smooth_chart_comparison",
+   "CategoryTheory.space_smooth_chart_comparison",
+   "CategoryTheory.representable_smooth_chart_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSmoothChartComparison.lean",
+  "statement": "theorem stack_smooth_chart_comparison {S : Scheme.{u}} (P : MorphismProperty (AlgebraicSpace S)) [P.RespectsIso] (hP : IsSmoothLocalOnSourceAndTarget P) {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} (hF : IsDeligneMumfordModuliStack F) (hG : IsDeligneMumfordModuliStack G) (f : BasedFunctor F G) : (SmoothChartAll P (fun _ ↦ True) f ↔ SmoothChartSome P (fun _ ↦ True) f) ∧ (SmoothChartAll P (fun _ ↦ True) f ↔ SmoothChartAll P (fun U ↦ U.obj.obj.IsRepresentable) f) ∧ (SmoothChartSome P (fun _ ↦ True) f ↔ SmoothChartSome P (fun U ↦ U.obj.obj.IsRepresentable) f)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17e13d8b1",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 17ed3529a3d7. Compared with side-live, the item differs only in lean and stmt_deps: the theorem stmt_deps were replaced by definition owners (def-sfb-surjective-moduli-map, the new existing:true def-sfb-space-fppf-cover for IsFppfCover/03Y8, def-trf-scheme-algebraic-space for schemeSpace, plus the dm-stack-morphism-properties and moduli-chart-normalization definitions). Statement, proof and proof_deps are unchanged. New def-sfb-space-smooth-local-source-target matches 06F8 (i)-(iii) (IsPullback orientation correct; pointImage = exists u over x); not hollow, no existing duplicate. SmoothChartAll/Some match 06FM (1)/(2): ModuliSpaceTest @Smooth includes representability; the comparison is the canonical moduliTwoFiberLift into F x_G V; (B) asks only a surjective. Scheme charts = IsRepresentable, equivalent with RespectsIso. Main theorem gives all four equivalences; space clause and representable base-change clause correct (all presentations equivalent under RespectsIso). hfppf unused and its index universe pinned at u+1: weaker hypothesis only. lean.statement verbatim; 3 sorry; docstrings OK. No file changed, so no compile."
+ }
+}

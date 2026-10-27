@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-smooth-tangent-isomorphism-etale",
+ "kind": "statement",
+ "title": "Isomorphisms on rational tangent spaces detect etaleness between smooth schemes",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $X$ and $Y$ be smooth schemes of finite type over $k$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and let $f:X\\to Y$ be a $k$-morphism. For each $x\\in X(k)$, let $df_x:T_{X/k,x}\\to T_{Y/k,f(x)}$ be the tangent map [def-sc-scheme-tangent-space]. If $df_x$ is a $k$-linear isomorphism for every $x\\in X(k)$, then $f$ is etale [def-weil-etale-morphism]. Empty schemes and disconnected schemes are allowed; no restriction is imposed on the characteristic of $k$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GU (lemma-etale-at-point), smooth-source and smooth-target tangent-isomorphism consequence; global detection by Tags 02J4 (lemma-enough-finite-type-points) and 01TB (lemma-jacobson-finite-type-points). The rational-point differential criterion is also stated in Milne, Algebraic Groups, printed p.267, before Lemma 13.35."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-scheme-tangent-space",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in X(k)$ and put $y=f(x)\\in Y(k)$; their structural residue-field maps identify both residue fields with $k$. Write $R_z=\\mathcal O_{Z,z}$, $\\mathfrak m_z=\\ker(R_z\\to k)$ and $E_z=\\Omega_{Z/k,z}\\otimes_{R_z}k$ for $(Z,z)=(X,x),(Y,y)$. Here is the elementary differential-fibre comparison used below. On an affine chart the universal differential presentation [def-weil-pbc-kahler-differentials] and the definition [def-sc-relative-differential-sheaf] identify $E_z$ with $\\Omega_{R_z/k}\\otimes_{R_z}k$: localization sends $d(a/s)$ to $s^{-1}da-as^{-2}ds$, and this formula gives the inverse to localization of differentials. The maps\n$$c_z:\\mathfrak m_z/\\mathfrak m_z^2\\longrightarrow E_z,\\quad[b]\\longmapsto db\\otimes1,\\qquad c_z^{-1}(da\\otimes\\lambda)=\\lambda[a-\\bar a]$$\nare well defined and inverse. Indeed $a\\mapsto[a-\\bar a]$ is a $k$-derivation into $\\mathfrak m_z/\\mathfrak m_z^2$ since $ab-\\bar a\\bar b\\equiv\\bar a(b-\\bar b)+\\bar b(a-\\bar a)$ modulo $\\mathfrak m_z^2$; the universal property gives the inverse, and the two composites fix the displayed generators. These formulas also show that $c_x,c_y$ commute with the local-ring map of $f$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, first isomorphism, rational residue-field case; the explicit inverse uses the structural splitting k -> R_z -> k."
+   }
+  },
+  {
+   "text": "Let $u:\\mathfrak m_y/\\mathfrak m_y^2\\to\\mathfrak m_x/\\mathfrak m_x^2$ be induced by $f$. By [lem-sc-rational-tangent-cotangent-duality], $df_x$ is $u^*$, so $u^*$ is bijective. Its injectivity implies that $u$ is surjective by [lem-sc-dual-map-injective-iff-surjective]. If $u(b)=0$ and $b\\ne0$, choose $\\ell$ with $\\ell(b)\\ne0$ by [lem-weil-pbc-vector-space-dual-separates]. Surjectivity of $u^*$ writes $\\ell=\\psi\\circ u$, contradicting $u(b)=0$. Thus $u$ is also injective. The comparisons of Step 1 therefore identify the pullback differential map $E_y\\to E_x$, $da\\otimes1\\mapsto d(f^\\sharp a)\\otimes1$, with an isomorphism.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-sc-dual-map-injective-iff-surjective",
+    "lem-weil-pbc-vector-space-dual-separates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2E and 0B2F, cotangent description and naturality of tangent maps; dual-vector-space argument written out."
+   }
+  },
+  {
+   "text": "Choose finite-type affine neighbourhoods $V=\\operatorname{Spec}A$ of $y$ and $W=\\operatorname{Spec}B$ of $x$ with $f(W)\\subseteq V$. For this elementary shrinking, use the finite-type affine covers in [def-weil-finite-type-morphism], then a principal open of a source chart contained in $f^{-1}(V)$; if that chart has algebra $B_0$, its new algebra $(B_0)_s$ is still finitely generated, by adjoining $s^{-1}$. Both neighbourhoods are smooth over $k$, since smoothness is local on the source in [def-sbc-smooth-morphisms]. Choose algebra generators $a_1,\\ldots,a_n$ of $A$. Their differentials span $E_y$: write every element of $A$ as a polynomial in the $a_i$ and apply the Leibniz rule; passage to the stalk and fibre uses the localization formula of Step 1. Choose a subfamily $h_1,\\ldots,h_d$ of the $a_i$ whose differential classes form a basis, allowing $d=0$. By Step 2, the classes of $d(f^*h_j)$ form a basis of $E_x$. Thus the morphisms $h_Y:V\\to\\mathbf A^d_k$ with coordinates $h_j$ and $h_X:W\\to\\mathbf A^d_k$ with coordinates $f^*h_j$ satisfy $h_X=h_Y\\circ f|_W$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T1, finite-type affine charts; the chosen-coordinate setup for Tag 02GU (8). Polynomial differentiation and selecting a basis from a finite spanning list are elementary."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-etale-at-point-from-differentials] to $(V,y,h_1,\\ldots,h_d)$ and to $(W,x,f^*h_1,\\ldots,f^*h_d)$. Both schemes are smooth and finite type over the field $k$, and Step 3 verifies the respective differential-basis hypotheses. We obtain neighbourhoods $V'\\subseteq V$ and $W'\\subseteq W$ on which $h_Y$ and $h_X$ are etale. Set $U_x=W'\\cap f^{-1}(V')$. The restriction $h_X|_{U_x}$ is etale, since its factorization through $W'$ is an open immersion followed by an etale map, by parts (1),(2) of [lem-weil-pbc-etale-composition-cancellation]. It equals $(h_Y|_{V'})\\circ(f|_{U_x}:U_x\\to V')$. Part (3) of that node gives etaleness of $U_x\\to V'$. Composing with the open immersion $V'\\to Y$ and using parts (1),(2) again shows $f|_{U_x}:U_x\\to Y$ is etale. In particular $U_x$ is an open neighbourhood of the original rational point $x$.",
+   "uses": [
+    "lem-pur-etale-at-point-from-differentials",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GU (8) via the existing prescribed-coordinate lemma (Tags 01V7 and 00T7); Tags 02GP, 02GN and 02GW for open immersions, composition and cancellation."
+   }
+  },
+  {
+   "text": "Let $O=\\bigcup_{x\\in X(k)}U_x$. It contains every rational point. If $z$ is a finite type point of $X$, apply [lem-sfb-finite-type-field-point-characterization] to the canonical finite-type morphism $\\operatorname{Spec}\\kappa(z)\\to X$. It gives an affine open neighbourhood $Z$ in which $z$ is closed. This open subscheme is locally of finite type over $k$ by the affine-local definition [def-weil-finite-type-morphism]. Applying [lem-weil-pbc-closed-point-residue-field-base] to $Z\\to\\operatorname{Spec}k$, with $k$ algebraically closed, gives $k\\simeq\\kappa(z)$ as structural fields. Thus $z$ comes from a $k$-point of $X$ and lies in $O$. The conclusion of [lem-sfb-finite-type-points-detect-open] is therefore $O=|X|$. Finally the neighbourhoods $U_x$ cover $X$, and their restrictions of $f$ are etale by Step 4, so [lem-weil-pbc-etale-local-on-source] gives that $f$ is etale. If $X$ is empty the same argument uses the empty open cover; varying $d$ with $x$ permits disconnected schemes. None of the steps restricts the characteristic.",
+   "uses": [
+    "lem-sfb-finite-type-field-point-characterization",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-finite-type-points-detect-open",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TA, 02J4 and 01TB, with algebra.tex Tag 00FV for algebraically closed residue fields; Tag 02GJ for locality of etaleness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-relative-differential-sheaf",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-dual-map-injective-iff-surjective",
+  "lem-weil-pbc-vector-space-dual-separates",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "lem-pur-etale-at-point-from-differentials",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-finite-type-field-point-characterization",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-finite-type-points-detect-open",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Explicit rational cotangent and chosen-coordinate proof of the 02GU smooth tangent consequence, assembled from varieties.tex Tags 0B2E/0B2F, the existing 02GU/01V7/00T7 coordinate criterion, 02GW cancellation, and 01TA/02J4/02GJ point detection/locality. Milne, Algebraic Groups, printed p.267, gives the motivating smooth-variety criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(tangent|Tangent).*(etale|Etale)|([Ee]tale).*(tangent|Tangent)",
+   "results": "Actual output: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map between smooth schemes of finite type over an algebraically closed field with bijective differential at every rational point is etale",
+   "results": "Actual output: 8 hits; AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, RingHom.Etale, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth, Algebra.FormallyEtale.of_unramified_and_smooth, RingHom.etale_iff_formallyUnramified_and_smooth, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, TangentSpace",
+   "results": "Actual output: 0 hits; . loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between smooth finite type schemes over an algebraically closed field is etale if its tangent map is an isomorphism at every rational point",
+   "results": "Actual output: 8 hits; AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(tangent|cotangent)|[Tt]angent.*[Ee]tale|[Ee]tale.*[Cc]otangent",
+   "results": "Actual output: 7 hits; Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Locus.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "Actual output: 12 hits; AlgebraicGeometry.Etale.etale_isStableUnderBaseChange, AlgebraicGeometry.Etale.instIsMultiplicativeScheme, AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Etale, AlgebraicGeometry.Etale.instHasRingHomPropertyEtale, AlgebraicGeometry.Scheme.Etale.mk, AlgebraicGeometry.Etale.instFormallyUnramified, AlgebraicGeometry.Etale.instOfIsOpenImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic geometry inverse function theorem a morphism of smooth varieties whose differential is invertible is etale",
+   "results": "Actual output: 8 hits; AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.Etale, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale definitions, permanence, algebra cotangent complexes, or analytic Lie groups, not this criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-transverse-subgroup-product-open",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Identify the actual Lie(B) weights with an integral positive half-space; the simple-root base is subsequently constructed in the item. Supporting input: Milne 21.29, first paragraph: limit-group representability, smoothness, connectedness, unipotence and nonnegative Lie weights, before regularity is imposed. Supporting input: Open multiplication for transverse smooth closed subgroups. Differential-isomorphism criterion for etaleness, applied after translating the multiplication map at every rational point.",
+   "via": [
+    "lem-sfb-transverse-subgroup-product-open",
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-tangent-isomorphism-etale",
+  "worker": "stage1",
+  "summary": "Preserved the statement, provenance and blueprint route. Replaced the draft restatement nodes by a five-step coordinate proof using existing tangent-cotangent duality, prescribed-coordinate etaleness, etale cancellation, finite-type-point detection, and source locality. The rational differential comparison and coordinate selection are written explicitly as elementary steps; no new nodes are needed.",
+  "blueprint": "Realizes the inherited supporting-input sentence: Differential-isomorphism criterion for etaleness, applied after translating the multiplication map at every rational point. The item is not a unit key node; inherited from.node=null and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Uses the natural dual description of the rational tangent map to pass from df_x to the cotangent map; the unit has no alternative linearization statement."
+   },
+   {
+    "node": "lem-sc-dual-map-injective-iff-surjective",
+    "why": "The general vector-space duality implication converts injectivity of u* into surjectivity of u; it supplies no geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-vector-space-dual-separates",
+    "why": "Separates a nonzero cotangent vector to prove injectivity of u from surjectivity of u*; generic linear algebra."
+   },
+   {
+    "node": "lem-pur-etale-at-point-from-differentials",
+    "why": "Applies the prescribed-coordinate square-Jacobian criterion separately on smooth source and target charts; no node in this unit supplies the coordinate criterion. This implements, rather than replaces, the required differential-isomorphism route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Etale permanence restricts the two coordinate maps, cancels their common etale target map, and composes with the target open immersion; generic permanence."
+   },
+   {
+    "node": "lem-sfb-finite-type-field-point-characterization",
+    "why": "Turns a finite-type point into a point closed in an affine neighbourhood, allowing the existing closed-point residue-field theorem to apply without assuming global closedness."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Identifies the residue field of a closed point of the affine neighbourhood with the algebraically closed base; generic Nullstellensatz input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-on-source",
+    "why": "Assembles the etale restrictions along the covering constructed by the proof; generic source locality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-dual-map-injective-iff-surjective",
+  "lem-weil-pbc-vector-space-dual-separates",
+  "lem-pur-etale-at-point-from-differentials",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-finite-type-field-point-characterization",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-499556dde",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-499556dde (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps in full. Read the full statements of the 13 cited nodes. Read Stacks 02GU (morphisms.tex l.8318) and 02J4 (l.2963), and checked the 10 tag/label pairs against tags/tags. Shape: one commit; no new nodes. Compared with clones/live, the node is still unsplit and only proof, proof_deps, proof_origin and status changed; statement, stmt_deps, source, searches and blueprint are identical. proof_deps equals the union of the step uses; no SGA. Step 1: the elementary isomorphism m/m^2 → Ω⊗k at a rational point, with inverse da⊗λ ↦ λ[a−ā]; the derivation identity was checked ((a−ā)(b−b̄) ∈ m^2). Step 2: the duality node gives df_x = u^*; u is surjective by the dual-injective node and injective by the separating functional. Step 3: shrinking to a principal open keeps W finitely generated; the generators' differentials span E_y, a basis subfamily is chosen, and Step 2 gives the pulled-back basis. Step 4: lem-pur-etale-at-point-from-differentials applies to both V and W (all hypotheses hold). U_x = W' ∩ f^{-1}(V') contains x; open-immersion/composition/cancellation give that f|U_x is étale, and no affineness of the intersection is used. Step 5: a finite-type point is closed in an affine open Z, where the algebraically-closed residue-field node makes it rational. Detect-open then gives O = |X|, and étale-local-on-source finishes; no global closedness is claimed. Whole-DAG searches found no duplicate of the criterion: the nearest nodes (cotangent-isomorphism-coordinate-lift, finite-flat-unramified-tangent-criterion, rational-tangent-differential-fibre-duality, the smooth-curve cotangent nodes) all differ. The parent lem-sfb-transverse-subgroup-product-open uses exactly the item's hypotheses. Accepted tool_uses: rational tangent–cotangent duality, the coordinate étale criterion, and the generic Mathlib-leaf permanence, residue-field and locality nodes, each used for its statement only. Edge cases checked: empty X, disconnected X, d = 0, Frobenius (hypothesis fails), identity. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothTangentIsomorphismEtale",
+  "declaration": "AlgebraicGeometry.etale_of_bijective_rational_tangentMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothTangentIsomorphismEtale.lean",
+  "statement": "theorem etale_of_bijective_rational_tangentMap (k : Type u) [Field k] [IsAlgClosed k] (X Y : Scheme.{u}) (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) [Smooth pX] [LocallyOfFiniteType pX] [QuasiCompact pX] [Smooth pY] [LocallyOfFiniteType pY] [QuasiCompact pY] (f : X ⟶ Y) (hf : f ≫ pY = pX) (hdf : ∀ x : X, Function.Bijective (pX.residueFieldMap x).hom → ∃ he : Function.Bijective (f.residueFieldMap x).hom, Function.Bijective (schemeTangentMap k X Y pX pY f hf x he)) : Etale f",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34a0f5212",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Only the lean record was added to the node (statement, stmt_deps and proof unchanged); lean.statement matches the file signature verbatim; proof is sorry. Clauses: IsAlgClosed k; Smooth plus LocallyOfFiniteType and QuasiCompact for pX and pY (the finite-type node's conjunction); f ≫ pY = pX; a rational point is bijectivity of pX.residueFieldMap x (residue field of Spec k is canonically k); the ∃ he wrapper is equivalent because he is automatic at rational points (injective field maps whose composite is onto); bijectivity of the canonical κ(x)-linear schemeTangentMap equals a k-linear isomorphism; conclusion Etale f. No extra hypotheses. Edge cases empty X/Y, dimension 0, disconnected, characteristic p (Frobenius fails the hypothesis) are covered; the shared universe u is the recorded schemeTangentMap convention. Docstrings carry source and blueprint tag plus the 5-step proof. No duplicates (finiteLocallyFree_etale_iff_tangentMap_injective and the CotangentIsomorphismCoordinateLift lemmas differ). No fixes, no compile run."
+ }
+}

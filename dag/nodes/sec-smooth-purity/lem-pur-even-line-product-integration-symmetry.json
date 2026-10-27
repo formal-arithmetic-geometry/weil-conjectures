@@ -1,0 +1,243 @@
+{
+ "id": "lem-pur-even-line-product-integration-symmetry",
+ "kind": "statement",
+ "title": "Symmetry of integration of even Tate-line products",
+ "statement": "Fix the finite-coefficient conventions [def-pur-conventions], with $A=A_{E,n}$ for arbitrary $n\\geq1$, and a separated finite-type $k$-scheme $Y$. Write $p_m:X_m=\\mathbf A^m_Y\\to Y$, $T_m=A_{X_m}(m)[2m]$, $V_m=Rp_{m!}T_m$ for $m\\geq1$ [def-sbc-affine-space], [def-coefficient-twists-detailed]. Put $U=V_1$ and let $t_Y:U\\to A_Y$ be the normalized integration [def-pur-affine-line-purity-comparison]. Use the concrete finite constant-$A$ pro-etale compact-support, exchange and projection maps [def-compact-support-direct-image-detailed], [def-exchange-projection], and their canonical composition comparisons. Suppose $U\\cong A_Y$, and suppose every $V_m$ is bounded constructible of finite Tor amplitude and every canonical relative-product map\n$$\\kappa_{m,1}:V_{m+1}\\xrightarrow{\\sim}V_m\\otimes_A^LU$$\nis invertible. This map means the specific inverse of the forward compact-support product (the displayed construction in [thm-sf-kunneth-relative]), not an arbitrary isomorphism between these objects. Set $\\kappa_1=1_U$ and $\\kappa_{m+1}=(\\kappa_m\\otimes1_U)\\kappa_{m,1}$. Suppose given maps $J_m:V_m\\to A_Y$ with $J_1=t_Y$ and $J_{m+1}=(J_m\\otimes t_Y)\\kappa_{m,1}$, with tensor-unit constraints understood.\nThen $J_m=t_Y^{\\otimes m}\\kappa_m$. For a coordinate permutation $s_\\sigma:X_m\\xrightarrow{\\sim}X_m$, let $S_\\sigma:V_m\\xrightarrow{\\sim}V_m$ be the map induced by that scheme isomorphism and its pullback on $T_m$, identified with $T_m$ using twist additivity. The concrete $\\kappa_m$ are compatible with reassociation and permutations on these finite-Tor inputs: every parenthesization of the iterated relative product $V_m\\to U^{\\otimes_A^Lm}$ formed from the same specified maps equals $\\kappa_m$ after the derived-tensor associators, and $\\kappa_m\\circ S_\\sigma=P_\\sigma\\circ\\kappa_m$, where $P_\\sigma$ permutes the factors of $U^{\\otimes_A^Lm}$ by the signed symmetry of derived tensor. Moreover\n$$J_m\\circ S_\\sigma=J_m.$$\nHere the signed external-tensor interchange of two coordinate Tate lines agrees with the untwisted coordinate identification: on $A(1)[2]$ the sign is $(-1)^{(-2)(-2)}=1$, and on blocks of lengths $d,e$ it is $(-1)^{(-2d)(-2e)}=1$. For every $K\\in D^b_{ctf}(Y,A)$, the induced coordinate permutation also preserves $(1_K\\otimes J_m)\\Pi_{m,K}:Rp_{m!}(Lp_m^*K\\otimes^LT_m)\\to K$, where $\\Pi_{m,K}$ is the inverse projection map with $K$ first. No six-functor datum with a duality axiom, exceptional-purity theorem, or coordinate invariance hypothesis is an input.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Proof Steps 3--4, returned Steps 9--10: tensor-power induction, concrete product coherence and even-degree permutation calculation; agent-written extraction of the detailed argument"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-coefficient-twists-detailed",
+  "def-pur-affine-line-purity-comparison",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "thm-sf-kunneth-relative",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-even-line-product-maps"
+ ],
+ "proof": [
+  {
+   "text": "Induct on r using the given recursion for J and the definitions of kappa and powerTrace. The successor step is tensor functoriality: tensor of a composite equals the composite of tensor maps. This is tensorPowerRecursion in Lean.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the concrete binary normalization equation. Induct on ProductTree: the leaf is the identity; the join is the tensor of the two induction hypotheses followed by forward. Tensor functoriality and binary normalization give exactly the recursive tree normalize followed by kappa inverse. Both factors are isomorphisms, so treeForward is invertible.",
+   "uses": [
+    "lem-pur-even-line-binary-product-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The canonical signed braiding of U with itself is the identity because U is isomorphic to the tensor unit. By braiding naturality it suffices to check the unit, where braiding followed by the left unitor is the right unitor and the two unitors coincide by monoidal coherence. Induct in the explicit lastAdjacent, lastSwap and permutation recursions: every adjacent interchange is the identity and each conjugation is therefore the identity. Apply coordinateIntertwining and cancel kappa to get coordinateAction=id. This proves its invertibility and fixes every J_r, without assuming the trace is an isomorphism.",
+   "uses": [
+    "lem-pur-even-line-coordinate-intertwining",
+    "lem-sfb-braiding-naturality",
+    "lem-sfb-braiding-unitors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply evenTateLineSelfSymmetry and the same recursive identity-permutation argument. Functoriality of inverse image and the right identity law prove the coordinateTate equation. The integer scalar identity follows by rewriting the exponent as 2 times d*(2*e) and applying pow_mul with (-1)^2=1.",
+   "uses": [
+    "lem-pur-even-tate-line-self-symmetry"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use coefficientProjectionNaturality and coordinateAction=id. Tensoring two identities is the identity, so the invertible forward projection followed by coefficientAction equals itself. Cancel the projection, using projection_isIso, to obtain coefficientAction=id. It therefore fixes coefficientTrace for the supplied J.",
+   "uses": [
+    "lem-pur-even-line-coefficient-projection-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-even-line-binary-product-normalization",
+  "lem-pur-even-line-coordinate-intertwining",
+  "lem-pur-even-tate-line-self-symmetry",
+  "lem-pur-even-line-coefficient-projection-naturality",
+  "lem-sfb-braiding-naturality",
+  "lem-sfb-braiding-unitors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 3--4; concrete finite-product expansion in lem-pur-even-line-product-integration-symmetry",
+  "note": "J4: tensor and tree induction, unit-object self-braiding cancellation, explicit finite permutation recursion, and projection cancellation; four strictly smaller concrete comparison obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordered compact support integration of affine coordinate products equals tensor powers of the affine line trace and is invariant under coordinate permutations",
+   "results": "; 8 hits: MeasureTheory.GridLines.T, torusIntegral, MeasureTheory.GridLines.T_univ, BoxIntegral.BoxAdditiveMap.volume, MeasureTheory.integral_fintype_prod_volume_eq_pow, torusIntegral_succAbove, torusIntegral_succ, BoxIntegral.BoxAdditiveMap.volume_apply. Generic mates, counits, braiding or unrelated algebra/analysis hits do not state this ordered-tower or concrete compact-support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory, CategoryTheory.MonoidalCategory",
+   "results": "; 12 hits: CategoryTheory.BraidedCategory, CategoryTheory.reverseBraiding, CategoryTheory.SymmetricCategory.toBraidedCategory, CategoryTheory.instBraidedCategoryOpposite, CategoryTheory.MonoidalOpposite.instBraiding, CategoryTheory.LaxBraidedFunctor, CategoryTheory.Functor.Braided.instId, CategoryTheory.Functor.LaxBraided.id. Generic mates, counits, braiding or unrelated algebra/analysis hits do not state this ordered-tower or concrete compact-support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth|Koszul|koszul",
+   "results": "; 3 hits: Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean. Generic mates, counits, braiding or unrelated algebra/analysis hits do not state this ordered-tower or concrete compact-support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kunneth symmetry gives permutation invariant integration for an even shifted invertible Tate sheaf",
+   "results": "; 8 hits: MeasureTheory.integral_prod_swap, ContDiffAt.domDomCongr_iteratedFDeriv, SymmetricPower.domDomCongr_tprod, MeasureTheory.integrable_swap_iff, MeasureTheory.setIntegral_prod_swap, SymmetricPower.Rel.perm, MeasureTheory.IntegrableOn.swap, SymmetricPower.tprod_equiv. Generic mates, counits, braiding or unrelated algebra/analysis hits do not state this ordered-tower or concrete compact-support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support integration of even shifted Tate line tensor powers is invariant under coordinate permutations",
+   "results": "8 hits: ContDiffWithinAt.iteratedFDerivWithin_comp_perm, AnalyticOn.iteratedFDerivWithin_comp_perm, MeasureTheory.integral_prod_swap, ContDiffAt.iteratedFDeriv_comp_perm, SymmetricPower.tprod_equiv, MeasureTheory.setIntegral_prod_swap, ContDiffWithinAt.domDomCongr_iteratedFDerivWithin, SymmetricPower.domDomCongr_tprod.  Read the actual results. Ordinary sheaf composition, diagram external tensors, Over-category adjoints and generic monoidal counit laws do not state the specified geometric derived product comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor powers of the normalized affine line compact support integration commute with coordinate permutation and even degree symmetry",
+   "results": "8 hits: torusIntegral_succAbove, Complex.betaIntegral_symm, SymmetricPower.domDomCongr_tprod, SymmetricPower.tprod_equiv, SymmetricPower.Rel.perm, curveIntegralFun_trans_aeeq_right, AlternatingMap.domCoprod.summand_add_swap_smul_eq_zero, SymmetricPower.Rel.  Read the actual results. Ordinary sheaf composition, diagram external tensors, Over-category adjoints and generic monoidal counit laws do not state the specified geometric derived product comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-affine-space-composition-law",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4, returned Steps 9--10: tensor-power induction, concrete product coherence and even-degree permutation calculation",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-even-line-product-integration-symmetry",
+  "worker": "stage1",
+  "summary": "Prove tensor-power induction and permutation invariance using existing finite forward symmetry, two new ordinary triple-product comparison obligations, and the actual projection/exchange square. No abstract datum or purity is supplied. Statement and its hypotheses unchanged.",
+  "blueprint": "Ancestor Steps 3--4: concrete product reassociation, even signs, tensor-power induction, and invariance of the coefficient-first transpose.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "lem-pur-derived-tensor-additive-constraints",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "lem-pur-co-smooth-pf-exchange-coherence",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic concrete finite-coefficient tensor, witness, or projection comparison, used only in the stated clause; it supplies no purity, exceptional inverse image or duality input and does not replace the affine-line route."
+   },
+   {
+    "node": "lem-fix-projection-compactification-comparison",
+    "why": "Step 6 only: the projection transformation is compatible with the compactification comparison between the permuted and the standard compactification of p_m; generic compact-support bookkeeping, no purity, duality or exceptional input; added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-twist-preserves",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ctf-stability",
+  "thm-sf-comp-composition",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-co-smooth-pf-exchange-coherence",
+  "lem-fix-projection-compactification-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-901ac2b3d",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-901ac2b3d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the parent prop-pur-affine-space-composition-law (Steps 3-4 of main-20261015), the paragraph of lem-sf-kunneth-coherence.proof.md and unit sk-prop-an Step 6. The mathematics is sound and the steps are correct. Steps 1-4: lem-pur-affine-space-product-domain gives V_m≅A_Y and invertible κ_{m,1}. Associativity follows from the two separate normal forms, the ordinary triple transpose (applied with proper a_i) and e_L=e_R via full faithfulness of u_!. The swap uses lem-pur-finite-forward-product-symmetry with sign (-1)^{4ab}=1, and the swap on L⊗L for a line L is the identity. The J recursion is a written-out induction. New nodes: both are statement-only and strictly smaller than the item. I tested both. The ordinary triple transpose follows from the binary leg and composite transposes plus counit naturality. The normal forms follow from applying lem-pur-finite-product-compactification twice and moving e12 through Ω by naturality. Neither duplicates lem-sf-proper-triple-counit-transpose or lem-sf-triple-compactification-normal-form, both of which need def-sf-datum. Batch-5: both flagged citations are generic and already cited by the parent. lem-pur-affine-space-product-domain reaches only lem-trf-right-fraction-dense-subcategory (calculus of fractions). lem-weil-finite-compact-projection-formula reaches only lem-pod-lisse-module-sheaves-as-module-objects (FLC module objects). Neither is a step of the trace formula or of Poincare duality. There is no cycle and no SGA. FIXES: (1) C4: Step 5 took λ_1=ρ_1 from lem-sfb-braiding-unitors, which does not state it. It now cites lem-sf-ringed-derived-closed-symmetric-monoidal: both unit constraints of the flat unit are multiplication, and A is commutative. (2) C1: Step 6 silently replaced the base-changed compactification c'=(j s_σ,p) by c, although def-exchange-projection says the PF intertwining needs a separate theorem. Step 6 now cites lem-fix-projection-compactification-comparison (reviewed pass, already in the item's closure) and it is added to tool_uses. (3) The new nodes' source.place named nonexistent 'Steps 3-4' of the single-paragraph Kunneth-coherence proof; it now names the actual clauses.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EvenLineProductIntegrationSymmetry",
+  "declaration": "AlgebraicGeometry.ProEtale.EvenLineProduct.evenLineProductIntegrationSymmetry",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.evenLineProductIntegrationSymmetry"
+  ],
+  "file": "lean/Sheaf/Paper/EvenLineProductIntegrationSymmetry.lean",
+  "statement": "theorem evenLineProductIntegrationSymmetry (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (hU : Nonempty (integral P Y 0 ≅ 𝟙_ (D P Y))) (hV : ∀ r : ℕ, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) Y (integral P Y r)) (hprod : ∀ r : ℕ, IsIso (forward P Y aY r 0)) (J : (r : ℕ) → integral P Y r ⟶ 𝟙_ (D P Y)) (hJ₁ : J 0 = trace P Y aY) (hJsucc : ∀ r : ℕ, J (r + 1) = (binaryInverse P Y aY r 0 (hprod r)).hom ≫ tensorHom (J r) (trace P Y aY) ≫ (λ_ (𝟙_ (D P Y))).hom) : (∀ r : ℕ, J r = (kappa P Y aY hprod r).hom ≫ powerTrace (trace P Y aY) r) ∧ (∀ t : ProductTree, IsIso (treeForward P Y aY t) ∧ treeForward P Y aY t = (t.normalize (integral P Y 0)).hom ≫ (kappa P Y aY hprod t.index).inv) ∧ (∀ (r : ℕ) (σ : Equiv.Perm (Fin (r + 1))), IsIso (coordinateAction P Y aY r σ) ∧ coordinateAction P Y aY r σ ≫ (kappa P Y aY hprod r).hom = (kappa P Y aY hprod r).hom ≫ (permutation (signedSymmetry P Y) (integral P Y 0) r σ).hom ∧ coordinateAction P Y aY r σ ≫ J r = J r) ∧ (∀ (r : ℕ) (σ : Equiv.Perm (Fin (r + 1))), (coordinateTate P Y r σ).hom ≫ (inverseImage (Ring P) (proj Y r)).map (permutation (signedSymmetry P Y) (shiftedLine P Y) r σ).hom = (coordinateTate P Y r σ).hom) ∧ (∀ d e : ℕ, (-1 : ℤ) ^ ((2 * d) * (2 * e)) = 1) ∧ (∀ (r : ℕ) (K : D P Y) (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) Y K) (σ : Equiv.Perm (Fin (r + 1))), coefficientAction P Y aY r σ K hK ≫ coefficientTrace P Y aY r K hK (J r) = coefficientTrace P Y aY r K hK (J r))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fc73dc21",
+  "group": "N9",
+  "result": "fix",
+  "note": "Maths and Lean accepted unchanged: all hypotheses (finite setting, sep. f.t. Y, U≅A_Y object iso, ctf V_m, IsIso of the actual forward word, κ recursion, J recursion) and all six clauses (J=t^⊗κ, every tree = normalize≫κ⁻¹, κS=Pκ and JS=J, signed Tate swap = coordinate identification, even sign, coefficient-first counit invariance with K first) match the node. Tate presentation p^*(L^⊗m) is canonical; σ convention irrelevant since P_σ is trivial under U≅1. Postponed theorems true and in the node TeX; no hollow defs. H12/H2 FIX of new node def-pur-even-line-product-maps: stmt_dep lem-pur-finite-product-compactification → def-pur-finite-product-compactification-data (owner of finiteProductChosenForward/FiniteProductGeometry/finiteProductExternal), + def-pur-finite-site-tensor-projection (VectorIntegrationSite.symmetry/projection); TeX brackets updated; lem-pur-finite-forward-product-symmetry kept (finiteForwardCompactificationComparison has no def owner); all on base 7bf54a6. Record-only fix, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T202257-L-2701954",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

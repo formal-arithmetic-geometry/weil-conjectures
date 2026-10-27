@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-algebra-diagram-derived-comparison-coherence",
+ "kind": "statement",
+ "title": "Coherence of already constructed normalized derived comparisons",
+ "statement": "For a cartesian algebra-diagram adjunction presentation p as defined in [def-pur-algebra-diagram-normalization-interface], take the canonical unbounded derived categories and the proved exactness structures on its constant evaluations. Given normalized ordinary comparisons o from [lem-pur-algebra-diagram-normalized-ordinary-comparisons] and derived comparisons d, beta, delta, dj, qaB, qaA satisfying the six right-derived-unit square equations, the derived counit and arbitrary transpose equations, coefficient cube, and the actual-arrow transition equations on varying and constant coefficients hold. This result assumes the comparisons and proves their coherence.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6E, normalized diagram direct image and derived composition."
+ },
+ "stmt_deps": [
+  "def-pur-algebra-diagram-normalization-interface"
+ ],
+ "proof": [
+  {
+   "text": "The normalized square counit theorem identifies the derived counit with the localized ordinary mate. The transpose formula follows from counit naturality. For coefficients, the two ordinary routes agree after faithful forgetting to set-valued sheaves; naturality of unit-normalized derived squares yields the cube. For each actual arrow apply the analogous ordinary transition equation and the normalized derived transition theorem.",
+   "uses": [
+    "lem-pur-derived-square-normalization-naturality",
+    "lem-weil-pbc-exact-square-derived-counit",
+    "lem-pur-algebra-diagram-normalized-ordinary-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-square-normalization-naturality",
+  "lem-weil-pbc-exact-square-derived-counit",
+  "lem-pur-algebra-diagram-normalized-ordinary-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The ordinary and derived normalization parts of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of modules over a diagram of sheaf algebras commutes with geometric module direct image and its inverse-image adjunction",
+   "results": "No directly applicable library declaration; componentwise transport and induced module functors supply the construction.",
+   "date": "2026-10-25",
+   "verdict": "Construct normalized ordinary comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"counit\"",
+   "results": "CategoryTheory.mateEquiv_counit and mateEquiv_counit_symm.",
+   "date": "2026-10-25",
+   "verdict": "Used to normalize the inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans.*(comp|fac)|mateEquiv_counit",
+   "results": "Mathlib adjunction-mates and right-derived natural-transformation APIs.",
+   "date": "2026-10-25",
+   "verdict": "Use these APIs with the concrete module comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramEvaluationAdjunctionNormalization",
+  "date": "2026-10-25",
+  "group": "A5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+   "place": "Coherence of already constructed normalized derived comparisons"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlgebraDiagramDerivedComparisonCoherence",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraDiagramDerivedComparisonCoherence.lean",
+  "declaration": "CategoryTheory.AlgebraDiagramAdjunctionPresentation.derivedComparisonCoherence",
+  "statement": "theorem derivedComparisonCoherence\n    (hd : AlgebraDiagramDerivedSquareNormalized p.fB.modules p.fA.modules\n      p.rX p.rY o.c d)\n    (hbeta : ∀ j : J, AlgebraDiagramDerivedSquareNormalized\n      p.fB.modules (p.fj j).modules (p.eBX j) (p.eBY j) (o.cB j) (beta j))\n    (hdelta : ∀ j : J, AlgebraDiagramDerivedSquareNormalized\n      p.fA.modules p.s.modules (p.eAX j) (p.eAY j) (o.cA j) (delta j))\n    (hdj : ∀ j : J, AlgebraDiagramDerivedSquareNormalized\n      (p.fj j).modules p.s.modules (p.rXj j) (p.rYj j) (o.cj j) (dj j))\n    (hqaB : ∀ {j k : J} (a : j ⟶ k), AlgebraDiagramDerivedSquareNormalized\n      (p.fj k).modules (p.fj j).modules\n      (SheafOfModules.restrictScalars.{u} (algebraDiagramRingArrow p.BX a))\n      (SheafOfModules.restrictScalars.{u} (algebraDiagramRingArrow p.BY a))\n      (o.caB a) (qaB a))\n    (hqaA : ∀ {j k : J} (a : j ⟶ k), AlgebraDiagramDerivedSquareNormalized\n      p.s.modules p.s.modules\n      (SheafOfModules.restrictScalars.{u} (algebraDiagramRingArrow p.AX a))\n      (SheafOfModules.restrictScalars.{u} (algebraDiagramRingArrow p.AY a))\n      (o.caA a) (qaA a)) :\n    p.DerivedComparisonCoherence o d beta delta dj qaB qaA",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.AlgebraDiagramAdjunctionPresentation.DerivedComparisonCoherence",
+   "CategoryTheory.AlgebraDiagramAdjunctionPresentation.derivedComparisonCoherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "independent cc review: dda572889e4d vs passed delivery 983832b9a42f (diff -r: only module/node rename + one local irreducible attr) and vs clone original module/node (Defs interface line-diffed; item node field-diffed: only lean/proof/proof_deps/proof_origin); 0 importers by grep"
+ }
+}

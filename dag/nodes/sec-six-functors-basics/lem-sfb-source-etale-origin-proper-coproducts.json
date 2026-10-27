@@ -1,0 +1,102 @@
+{
+ "id": "lem-sfb-source-etale-origin-proper-coproducts",
+ "kind": "statement",
+ "title": "Proper direct image preserves coproducts of complexes with etale-origin cohomology",
+ "statement": "Let $A$ be a finite commutative ring, let $k$ be a field, and let $f:X\\to Y$ be a proper morphism of finite-type $k$-schemes [def-weil-finite-type-morphism] [def-weil-proper-morphism]. Work with ordinary constant-$A$ module sheaves on the small pro-etale sites and their unbounded derived categories [def-weil-pbc-proetale-modules] [sk-def-sfb-derived-categories]. For every small family $(K_i)_{i\\in I}$ such that each cohomology sheaf of every $K_i$ is in the essential image of the etale-to-pro-etale comparison inverse image [det-pe-classical-sheaves-modules], the canonical coproduct comparison $\\bigoplus_i Rf_*K_i\\to Rf_*(\\bigoplus_i K_i)$ is an isomorphism [def-weil-pbc-proetale-operations]. The comparison is characterized by its composites with coprojections, namely $Rf_*(\\iota_i)$. No boundedness or nonemptiness condition on the family, characteristic restriction on $k$, or invertibility condition on $A$ is imposed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/LowerStarCoproducts.lean",
+  "place": "isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology, lines 145-163; blueprint finite proper localizing proof, Transfer: direct sums."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-proetale-modules",
+  "sk-def-sfb-derived-categories",
+  "det-pe-classical-sheaves-modules",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing complete adopted-source theorem isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology. Its proof first obtains a uniform upper amplitude for direct image on complexes with etale-origin cohomology. For bounded inputs, descend to the etale site and use finite cohomological dimension and the bounded-below direct-image comparison. Exact countable products and left completeness extend the bound to bounded-above inputs, with harmless slack one. On uniformly bounded families, the etale direct image and comparison inverse images preserve coproducts. Truncate an arbitrary family to a common finite window for each cohomology degree. The amplitude bound and the good-truncation triangles identify its comparison on that degree with the bounded-family comparison. Since all derived cohomology functors jointly reflect isomorphisms, the original comparison is invertible. The empty family is covered by the same colimit argument. This attaches an existing proved source declaration; no new Lean obligation is introduced.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/LowerStarCoproducts.lean",
+  "place": "Complete proofs of exists_isLE_rightDerivedLowerStar_of_etaleOriginHomology, isIso_sigmaComparison_rightDerivedLowerStar_of_bounded, and isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper pro-etale direct image preserves coproducts of complexes with etale origin cohomology",
+   "results": "8 hits: CategoryTheory.Limits.PreservesCoproduct.iso, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.Limits.PreservesFiniteCoproducts, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesFiniteCoproducts, CategoryTheory.Limits.comp_preservesFiniteCoproducts, AlgebraicGeometry.LocallyRingedSpace.coproduct, CategoryTheory.Limits.instPreservesFiniteCoproductsOfPreservesFiniteColimits, CategoryTheory.MorphismProperty.IsStableUnderCoproducts",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib match. The exact statement is already proved in the adopted source module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper pro-etale direct image preserves coproducts of complexes with etale origin cohomology",
+   "results": "8 hits: AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall, AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteSpecOfFinite, AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instPreservesColimitOverSchemeTopMorphismPropertyOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib match. The exact statement is already proved in the adopted source module."
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaComparison.*rightDerived|etaleOriginHomology",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib match. The exact statement is already proved in the adopted source module."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperLocalizing",
+  "date": "2026-10-25",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-proper-localizing",
+   "place": "Transfer: preservation of arbitrary direct sums of classical complexes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-proper",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarCoproducts",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology",
+  "statement": "theorem isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology {Z Y : Scheme.{u}}\n    (p : Z ⟶ Y) [IsProper p] (aZ : Z ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))\n    [LocallyOfFiniteType aZ] [QuasiCompact aZ] [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (hp : p ≫ aY = aZ) {J : Type (u + 1)}\n    (M : J → _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)))\n    (hM : ∀ j, DerivedCategory.etaleOriginHomology Λ Z (M j)) :\n    IsIso (sigmaComparison (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctor M)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-25",
+  "note": "Section variables: (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]. Existing complete source proof; no source file is changed. Blueprint duplicate search: blueprint_refs search classical coproduct and proper coproduct both returned zero; direct DAG search found the intrinsic coefficient variant lem-sfb-finite-proper-classical-coproducts, which additionally assumes a supplied fibre bound and uses a different coefficient presentation."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T180630-L-4013181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T180630-L-4013181",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

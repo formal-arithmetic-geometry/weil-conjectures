@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-adequate-closed-substack-affinization",
+ "kind": "statement",
+ "title": "Adequate affinization of a closed substack over its closed image",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\phi:\\mathcal X\\to Y$ be an adequate moduli space [def-sfb-adequate-moduli-space], and let $i:\\mathcal Z\\hookrightarrow\\mathcal X$ be an algebraic closed substack, meaning a closed immersion as in [lem-sfb-stack-closed-immersion-calculus]. Here $Y$ is an algebraic space over $k$ [def-trf-algebraic-space]. Write $j=\\phi\\circ i$ and $\\mathcal B=j_*\\mathcal O_{\\mathcal Z}$, using [def-sfb-stack-quasi-coherent-algebra]. Then $\\mathcal B$ is a quasi-coherent $\\mathcal O_Y$-algebra. Write $E=\\operatorname{Spec}_Y\\mathcal B$ for its relative spectrum [lem-sfb-space-relative-spec-correspondence], and let $W\\hookrightarrow Y$ be the closed subspace cut out by the quasi-coherent ideal $\\ker(\\mathcal O_Y\\to\\mathcal B)$; equivalently $W$ is the scheme-theoretic image of $j$. The canonical morphisms give a factorization $j:\\mathcal Z\\xrightarrow{b}E\\xrightarrow{e}W\\hookrightarrow Y$ in which $b$ is an adequate moduli space. The morphism $e$ is a universal homeomorphism: for every algebraic-space morphism $W'\\to W$, the map $|E\\times_WW'|\\to|W'|$ is a homeomorphism, with point spaces as in [lem-sfb-smooth-presentation-closed-subsets]. No reducedness, finite-type, Noetherian or finite-inertia assumption is imposed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Lemma 5.2.11, printed p.510, closed-substack specialization; Definition 3.3.1 for the underlying universal homeomorphism; published primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-sfb-stack-closed-immersion-calculus",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-space-module-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-disjoint-closed-substacks-algebra-quotient] to $\\mathcal Z$ and the empty closed substack. The second algebra is the zero algebra, so the product is $\\mathcal A=i_*\\mathcal O_{\\mathcal Z}$ and the result gives a quasi-coherent quotient $\\mathcal O_{\\mathcal X}\\twoheadrightarrow\\mathcal A$. On a scheme chart the closed immersion is $\\operatorname{Spec}(D/J)\\hookrightarrow\\operatorname{Spec}D$, and its algebra is $D/J$; hence the defining functor of relative spectrum identifies $\\operatorname{Spec}_{\\mathcal X}\\mathcal A$ with $\\mathcal Z$. Apply [lem-sfb-adequate-relative-spectrum] to $\\mathcal A$: its pushforward is quasi-coherent and its canonical relative-spectrum map is adequate. On every etale scheme $U\\to Y$, the section convention in [def-sfb-stack-quasi-coherent-algebra] identifies $\\Gamma(\\mathcal X_U,\\mathcal A)$ with $\\Gamma(\\mathcal Z_U,\\mathcal O)$, by the explicit formula for $\\mathcal A$ in the first citation. Thus $\\phi_*\\mathcal A=\\mathcal B$ and the adequate map is the required $b:\\mathcal Z\\to E$. Its evaluation map gives $j$ after composition with $E\\to Y$.",
+   "uses": [
+    "lem-sfb-disjoint-closed-substacks-algebra-quotient",
+    "lem-sfb-adequate-relative-spectrum",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 5.2.11, first assertion and closed-substack specialization, printed p.510; published primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-qcoh-affine-chart-calculus], the kernel $\\mathcal I=\\ker(\\mathcal O_Y\\to\\mathcal B)$ is quasi-coherent, and on $U=\\operatorname{Spec}R\\to Y$ affine etale it is the kernel of $R\\to B=\\mathcal B(U)$. By [lem-sfb-space-closed-ideal-correspondence] it defines a closed subspace $W$ with algebra $\\mathcal O_Y/\\mathcal I$. The inclusion of this quotient into $\\mathcal B$ gives $e:E\\to W$ by [lem-sfb-space-relative-spec-correspondence]. Its composite with $W\\hookrightarrow Y$ is the original structure map of $E$, since the corresponding algebra maps compose to $\\mathcal O_Y\\to\\mathcal B$. The quotient kills exactly the functions pulled back to zero on $\\mathcal Z$: a factorization through any other closed subspace with ideal $\\mathcal J$ forces $\\mathcal J\\subseteq\\mathcal I$, by evaluating these pulled-back functions. Conversely the map through $E$ gives a factorization through $W$. This is the minimal closed-subspace factorization, so $W$ is the scheme-theoretic image.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-closed-ideal-correspondence",
+    "lem-sfb-space-relative-spec-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 5.2.11, closed-image identification, printed p.510; published primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Fix an affine etale $U=\\operatorname{Spec}R\\to Y$, and put $\\mathcal V=\\mathcal X_U$ and $\\mathcal A_U=\\mathcal A|_{\\mathcal V}$. The map $\\mathcal V\\to U$ is adequate by [lem-sfb-adequate-moduli-etale-locality], and therefore $R=\\Gamma(\\mathcal V,\\mathcal O)$ and $R\\to B=\\Gamma(\\mathcal V,\\mathcal A_U)$ is its restriction map. It is adequately affine by [lem-sfb-affine-target-adequacy-criterion], using the power-lifting clause of the preceding citation. For $P=R[t_1,\\ldots,t_n]$, the ring map $R\\to P$ is flat directly from the definition [def-weil-pbc-flat-ring-map]: a tensor with $P$, the free module on monomials, is the direct sum of copies of the given module; tensoring an injection is therefore coefficientwise injective. By [lem-sfb-stack-flat-scalar-sections], the quotient $\\mathcal O\\twoheadrightarrow\\mathcal A_U$ remains a quasi-coherent quotient on $\\mathcal V_P$, and its section rings identify with $P$ and $B\\otimes_RP=B[t_1,\\ldots,t_n]$. By [lem-sfb-adequately-affine-affine-target-base-change], $\\mathcal V_P\\to\\operatorname{Spec}P$ is adequately affine. Apply [lem-sfb-affine-target-adequacy-criterion] to this quotient: every polynomial in $B[t_1,\\ldots,t_n]$ has a positive power in the image of $R[t_1,\\ldots,t_n]$. This works for every $n\\geq0$.",
+   "uses": [
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-affine-target-adequacy-criterion",
+    "def-weil-pbc-flat-ring-map",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequately-affine-affine-target-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 5.2.11, final assertion; polynomial test of Remark 3.2.2 and Proposition 3.3.5, printed pp.496,498,510; published primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Write $I=\\ker(R\\to B)$ and $R_0=R/I$, so $R_0\\hookrightarrow B$ is injective; by [lem-sfb-space-relative-spec-correspondence] applied to $\\mathcal O_Y/\\mathcal I$ and $\\mathcal B$, $W_U=W\\times_YU=\\operatorname{Spec}R_0$ and $e$ restricts over it to $\\operatorname{Spec}B\\to\\operatorname{Spec}R_0$. Step 3 implies the polynomial power-lifting hypothesis for $R_0\\hookrightarrow B$: compose each polynomial lift with $R[t_1,\\ldots,t_n]\\twoheadrightarrow R_0[t_1,\\ldots,t_n]$. Apply [lem-sfb-polynomial-power-lifting-universal-homeomorphism]. For every $R_0$-algebra $C$ it gives a homeomorphism $\\operatorname{Spec}(C\\otimes_{R_0}B)\\to\\operatorname{Spec}C$; by the base-change clause of [lem-sfb-space-relative-spec-correspondence] this is the base change of $e_U:E_U\\to W_U$ along $\\operatorname{Spec}C\\to W_U$. Applying this to each summand, $|E_U\\times_{W_U}V|\\to|V|$ is a homeomorphism for every scheme $V\\to W_U$ which is a disjoint union of affine schemes; in particular its fibres are singletons.",
+   "uses": [
+    "lem-sfb-polynomial-power-lifting-universal-homeomorphism",
+    "lem-sfb-space-relative-spec-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 5.2.11, final assertion; Proposition 3.3.5; stacks-morphisms.tex Tag 0DTQ (lemma-check-universal-homeomorphism-covering); published primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Let $e_U:E_U\\to W_U$ be as in step 4. Now let $\\mathcal T\\to W_U$ be any algebraic stack and $p:\\mathcal T_E=E_U\\times_{W_U}\\mathcal T\\to\\mathcal T$; these fibre products are algebraic by [lem-sfb-algebraic-stack-fibre-products]. Choose a smooth surjective scheme atlas $V\\to\\mathcal T$ with $V$ a disjoint union of affine schemes; its base change $V_E=E_U\\times_{W_U}V\\to\\mathcal T_E$ is a smooth surjective atlas, and $V_E\\to V$ is the homeomorphism above. Put $R'=V\\times_{\\mathcal T}V$. By [lem-sfb-smooth-presentation-closed-subsets], $|p|$ is continuous, $|V|\\to|\\mathcal T|$ and $|V_E|\\to|\\mathcal T_E|$ are open surjections defining the quotient topologies, the fibres of $|V|\\to|\\mathcal T|$ are the classes of the image of $|R'|$, and points of $2$-fibre products surject onto fibre products of point sets. Surjectivity of $|p|$: lift $\\tau\\in|\\mathcal T|$ to $v\\in|V|$ and take the point of $|V_E|$ over $v$. Injectivity: let $z_1,z_2\\in|\\mathcal T_E|$ lie over $\\tau$, lift them to $e_1,e_2\\in|V_E|$ over $v_1,v_2\\in|V|$; some $r\\in|R'|$ has $s(r)=v_1$, $t(r)=v_2$, and some point of $|E_U\\times_{W_U}R'|$ lies over $r$. Its two images in $|V_E|$ lie over $v_1,v_2$, hence are $e_1,e_2$ because the fibres of $|V_E|\\to|V|$ are singletons; the two composites $E_U\\times_{W_U}R'\\to\\mathcal T_E$ are $2$-isomorphic, so $z_1=z_2$. Closedness: for closed $F\\subseteq|\\mathcal T_E|$ its inverse image in $|V_E|$ is closed, its image in $|V|$ is closed, and by bijectivity this image is the inverse image of $|p|(F)$, which is therefore closed. So $|p|$ is a continuous closed bijection, a homeomorphism: $e_U$ is a universal homeomorphism in the sense of [lem-sfb-stack-etale-local-qcqs-homeomorphism].",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 5.2.11, final assertion; Proposition 3.3.5; stacks-morphisms.tex Tag 0DTQ (lemma-check-universal-homeomorphism-covering); published primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "By step 5, each $e_U$ is a universal homeomorphism. Finally the $W_U\\to W$ form a jointly surjective etale family: they are the base changes of the affine etale cover of $Y$. Apply [lem-sfb-stack-etale-local-qcqs-homeomorphism] to descend the universal-homeomorphism property to $e$; its base change by every algebraic-space morphism $W'\\to W$ gives the homeomorphism $|E\\times_WW'|\\to|W'|$ of the statement.",
+   "uses": [
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 5.2.11, final assertion; Proposition 3.3.5; stacks-morphisms.tex Tag 0DTQ (lemma-check-universal-homeomorphism-covering); published primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-disjoint-closed-substacks-algebra-quotient",
+  "lem-sfb-adequate-relative-spectrum",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-sfb-space-closed-ideal-correspondence",
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-sfb-adequate-moduli-etale-locality",
+  "lem-sfb-affine-target-adequacy-criterion",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sfb-stack-flat-scalar-sections",
+  "lem-sfb-adequately-affine-affine-target-base-change",
+  "lem-sfb-polynomial-power-lifting-universal-homeomorphism",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-sfb-stack-etale-local-qcqs-homeomorphism",
+  "lem-sfb-algebraic-stack-fibre-products"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper Lemma 5.2.11 (arXiv 1005.2398 numbering; printed p.510 of the published version), expanded using polynomial power lifting: Remark 3.2.2 (universal adequacy is tested on the polynomial extensions) and Lemma 3.1.4 (an adequate inclusion is an integral homeomorphism), as in the proof of Proposition 3.3.5 (2)=>(1); Proposition 3.3.5 itself, which in arXiv v3 needs finite presentation, is not used. Read primary published PDF online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an adequate moduli space phi and a quasi coherent algebra A the map Spec_X A to Spec_Y phi_* A is an adequate moduli space and quotient algebras give a universal homeomorphism onto the closed image",
+   "results": "{\"t\": \"2026-10-23T11:53:27Z\", \"tool\": \"leanfinder\", \"query\": \"For an adequate moduli space phi and a quasi coherent algebra A the map Spec_X A to Spec_Y phi_* A is an adequate moduli space and quotient algebras give a universal homeomorphism onto the closed image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.AffineScheme.Spec_full\", \"AlgebraicGeometry.Spec.fullyFaithful\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.essImage_Spec\", \"AlgebraicGeometry.Scheme.toSpecΓ\"], \"digest\": \"daee8047ffa6bf9e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed substack of an adequate moduli space has an adequate moduli space integral and universally homeomorphic to its scheme theoretic image",
+   "results": "{\"t\": \"2026-10-23T11:53:29Z\", \"tool\": \"leanfinder\", \"query\": \"A closed substack of an adequate moduli space has an adequate moduli space integral and universally homeomorphic to its scheme theoretic image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsClosedImmersion\"], \"digest\": \"5689ac11b872db30\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"relativeSpec\"",
+   "results": "{\"t\": \"2026-10-23T11:53:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"relativeSpec\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|adequatelyAffine",
+   "results": "{\"t\": \"2026-10-23T11:53:22Z\", \"tool\": \"grep\", \"query\": \"adequateModuli|adequate_moduli|adequatelyAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli spaces are compatible with relative spectra of quasi coherent algebras and closed substacks have adequate affinization",
+   "results": "{\"t\": \"2026-10-23T11:53:22Z\", \"tool\": \"leansearch\", \"query\": \"Adequate moduli spaces are compatible with relative spectra of quasi coherent algebras and closed substacks have adequate affinization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.AffineScheme.mk\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\"], \"digest\": \"cf925e980d19fbde\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|adequatelyAffine",
+   "results": "{\"t\": \"2026-10-23T12:59:11Z\", \"tool\": \"grep\", \"query\": \"adequateModuli|adequate_moduli|adequatelyAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results only cover scheme spectra or closed immersions, not adequate moduli morphisms of algebraic stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed substack adequate moduli space relative spectrum universal homeomorphism",
+   "results": "{\"t\": \"2026-10-23T12:59:12Z\", \"tool\": \"leansearch\", \"query\": \"Closed substack adequate moduli space relative spectrum universal homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"SpectrumRestricts.homeomorph\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.IsClosedImmersion\"], \"digest\": \"ff132d461b831889\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results only cover scheme spectra or closed immersions, not adequate moduli morphisms of algebraic stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "{\"t\": \"2026-10-23T12:59:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"adequate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results only cover scheme spectra or closed immersions, not adequate moduli morphisms of algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed substack of an adequate moduli space has adequate affinization universally homeomorphic to its closed image",
+   "results": "{\"t\": \"2026-10-23T12:59:13Z\", \"tool\": \"leanfinder\", \"query\": \"A closed substack of an adequate moduli space has adequate affinization universally homeomorphic to its closed image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.isAffineHom_of_isInducing\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.essImage_Spec\", \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\"], \"digest\": \"e48b2f91a365feee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results only cover scheme spectra or closed immersions, not adequate moduli morphisms of algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative spectrum of the direct image of a closed substack structure sheaf under adequate moduli",
+   "results": "{\"t\": \"2026-10-23T13:06:39Z\", \"tool\": \"leanfinder\", \"query\": \"Relative spectrum of the direct image of a closed substack structure sheaf under adequate moduli\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specTargetImage\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.specTargetImageRingHom\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.specTargetImageIdeal\", \"AlgebraicGeometry.Spec.preimage\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ\"], \"digest\": \"fdde4c36922e4596\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results only cover scheme spectra or closed immersions, not adequate moduli morphisms of algebraic stacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-moduli-universal-closed-topology",
+  "date": "2026-10-23",
+  "group": "Q160"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes. Universal invariant closed-image assertion: apply the topology theorem for adequate moduli spaces on each invariant affine chart. Repair of the universal-closed-topology input: Alper Lemma 5.2.11, the algebraic closed-substack construction preceding the closed-map proof.",
+   "via": [
+    "lem-sfb-adequate-moduli-universal-closed-topology",
+    "lem-sfb-projective-pgl-invariant-quotient",
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-closed-substack-affinization",
+  "worker": "stage1",
+  "summary": "Reuse the general adequate relative-spectrum theorem; construct the closed image by its kernel; derive polynomial power lifting on affine etale charts; apply one general commutative-algebra criterion and descend the topology. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes. Universal invariant closed-image assertion: apply the topology theorem for adequate moduli spaces on each invariant affine chart. Repair of the universal-closed-topology input: Alper Lemma 5.2.11, the algebraic closed-substack construction preceding the closed-map proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-644ba3f15",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-644ba3f15 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement, and checked them against Alper arXiv 1005.2398 (Lemma 5.2.11, Lemmas 3.1.2-3.1.4, Remark 3.2.2, Propositions 3.3.3 and 3.3.5 with the finite-presentation footnote, Definition 4.1.1) and Stacks Tag 0BR8. The item statement is unchanged and correct. Step 1 is right: the disjoint-substacks node with Z_2 empty gives the quotient A, Spec_X A = Z, and phi_*A = j_*O_Z because Z -> X is a monomorphism. Step 2 is right: kernel ideal, closed subspace and the minimality argument. Step 3 is right: etale-locality plus the affine-target criterion make X_U -> U adequately affine, base change to R[t] keeps that with no diagonal hypothesis, and flat scalar sections give power lifting for R[t] -> B[t] for all n. The new ring node lem-sfb-polynomial-power-lifting-universal-homeomorphism is true. Remark 3.2.2 makes C -> C(x)B adequate. R -> B is integral and injective, so it is surjective on spectra, surjectivity survives base change, and the kernel is nil; then Lemma 3.1.4 or 0BR8 gives the homeomorphism. I tested it on F_q in F_{q^2} (hypothesis fails at t+alpha, conclusion also false, consistent), on a purely inseparable field inclusion, on Z in Z[x]/(2x,x^2) and on the zero ring. It is not a duplicate of the 0BR8 or 0BRA nodes, of pc-integral-radicial, of adequate-algebra-unit-power-kernel or of pc-homeo-pure-insep, and it does not restate the item. Two faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/. (1) Step 4 only sketched the argument for stack tests: it used the overlap V x_T V as a test, which is only an algebraic space, and never argued injectivity. I rewrote it as steps 4-6: affine tests, then the full stack-test argument as in the sibling lem-sfb-adequate-base-change-affinization step 7 (surjectivity, injectivity from singleton fibres, closedness), then etale descent. I added lem-sfb-algebraic-stack-fibre-products, which creates no cycle. (2) The new node's source.place and the item's proof_origin.place cited Alper Proposition 3.3.5 (2)=>(1) 'with no finiteness assumption'. In the arXiv document that proposition needs finite presentation, and its footnote says the published version is wrong. I changed both places to Remark 3.2.2 plus Lemma 3.1.4. Batch-5: all seven flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space; none is a step of the trace formula or of Poincare duality, so I accept them. No SGA, no tool_uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateClosedSubstackAffinization",
+  "declaration": "CategoryTheory.adequate_closed_substack_affinization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateClosedSubstackAffinization.lean",
+  "statement": "theorem adequate_closed_substack_affinization (k : Type u) [Field k] (X : BasedCategory.{v, w} (Over (Spec (.of k)))) (Z : BasedCategory.{v', w'} (Over (Spec (.of k)))) (hX : IsAlgebraicModuliStack X) (hZ : IsAlgebraicModuliStack Z) (Y : AlgebraicSpace (Spec (.of k))) (φ : BasedFunctor X (discreteModuli Y.obj.obj)) (hφ : IsAdequateModuliSpace X hX Y φ) (i : BasedFunctor Z X) (hi : ModuliSchemeTest @IsClosedImmersion i) : ∃ (B : Y.QCAlg) (β : ∀ V : Y.EtaleSite, B.obj.right.obj.obj (op V) ≃+* (moduliDirectImage hZ.1.1 Y (i.comp φ) (moduliStructureSheaf Z hZ.1.1)).obj.obj (op V)), (∀ (V U : Y.EtaleSite) (a : V ⟶ U) (s : B.obj.right.obj.obj (op U)), β V (B.obj.right.obj.map a.op s) = (moduliDirectImage hZ.1.1 Y (i.comp φ) (moduliStructureSheaf Z hZ.1.1)).obj.map a.op (β U s)) ∧ (∀ (V : Y.EtaleSite) (r : Y.commStructureSheaf.obj.obj (op V)), β V (B.obj.hom.hom.app (op V) r) = moduliStructureMapApp hZ.1.1 Y (i.comp φ) V r) ∧ ∀ C : RelativeSpecData Y, ∃ (W : ClosedSubspace Y) (b : BasedFunctor Z (discreteModuli (C.relativeSpec B).obj.left.obj.obj)) (e : (C.relativeSpec B).obj.left ⟶ (W.val : AlgebraicSpace (Spec (.of k)))) (h : i.comp φ ≅ b.comp (discreteModuliMap (C.relativeSpec B).obj.hom.hom.hom)), IsAdequateModuliSpace Z hZ (C.relativeSpec B).obj.left b ∧ e ≫ W.val.arrow = (C.relativeSpec B).obj.hom ∧ (∀ (V : Y.EtaleSite) (r : Y.structureSheaf.obj.obj (op V)), (moduleStructureMap W.val.arrow).val.app (op V) r = 0 ↔ B.obj.hom.hom.app (op V) r = 0) ∧ (∀ (V : Y.EtaleSite) (q : ModuleChart (C.relativeSpec B).obj.hom V) (z : ModuliPushforwardIndex (C.relativeSpec B).obj.left b q.left) (s : B.obj.right.obj.obj (op V)), ((β V s).1 (op (CostructuredArrow.mk (h.hom.toNatTrans.app z.left ≫ (discreteModuliMap (C.relativeSpec B).obj.hom.hom.hom).map z.hom ≫ q.hom)))).down = (Scheme.Γ.map (moduliChartSchemeMap (C.relativeSpec B).obj.left b q.left z).op) ((C.directImage (C.relativeSpec B)).projection V q ((C.counitAlgebra B).hom.right.hom.app (op V) s))) ∧ (∀ (D : ClosedSubspace Y) (a : BasedFunctor Z (discreteModuli (D.val : AlgebraicSpace (Spec (.of k))).obj.obj)), Nonempty (i.comp φ ≅ a.comp (discreteModuliMap D.val.arrow.hom.hom)) → W.val ≤ D.val) ∧ ∀ (W' : AlgebraicSpace (Spec (.of k))) (f : W' ⟶ (W.val : AlgebraicSpace (Spec (.of k)))), ∃ H : @Homeomorph (ModuliPoints (moduliTwoFiberProduct (discreteModuliMap e.hom.hom) (discreteModuliMap f.hom.hom))) (ModuliPoints (discreteModuli W'.obj.obj)) (moduliSmoothPointTopology (moduliTwoFiberProduct (discreteModuliMap e.hom.hom) (discreteModuliMap f.hom.hom))) (moduliSmoothPointTopology (discreteModuli W'.obj.obj)), ∀ x, H x = moduliPointMap (moduliTwoFiberSnd (discreteModuliMap e.hom.hom) (discreteModuliMap f.hom.hom)) x",
+  "branch": "sheaf-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The direct image is represented in the existing small QCAlg category by natural ring equivalences to the actual compatible-family direct-image rings, normalized on structure maps. Relative Spec uses the existing normalized anti-equivalence. Evaluation on every source object and compatible etale chart fixes b; the kernel equality fixes W including nilpotents, with its scheme-theoretic-image minimality. Universal homeomorphism uses the actual 2-fibre product and its second projection on the existing smooth-atlas point spaces. The added statement dependencies are the owning definition nodes def-sfb-space-closed-subspace (ClosedSubspace) and def-sfb-space-module-structure-map (moduleStructureMap), with public imports of their modules. The closed-ideal-correspondence theorem remains only a proof dependency and a plain import. Repair of return on head 5a95e9e11d33; theorem signature unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8a53f06d",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Re-delivery of returned head 5a95e9e11d33 makes exactly the H2 correction: stmt_deps drop theorem lem-sfb-space-closed-ideal-correspondence and add owning def nodes def-sfb-space-closed-subspace (ClosedSubspace) and def-sfb-space-module-structure-map (moduleStructureMap); public imports switched to their modules, correspondence kept as plain proof import and in proof_deps. Signature/body/docstrings byte-identical to the returned version; item node differs from live only in lean (null live) and stmt_deps; all 9 dep nodes byte-identical to live; lean.statement verbatim; single sorry, no defs. Substance re-read: field, adequate phi, algebraic closed substack via ModuliSchemeTest IsClosedImmersion, B pinned to moduliDirectImage by natural structure-compatible ring isos, E = relativeSpec for all RelativeSpecData, W by sectionwise kernel equality (nilpotents kept) plus subobject minimality, b adequate and pinned by chart formula, homeomorphism = moduliTwoFiberSnd point map for every W' -> W; no extra hypotheses; independent universes; edge cases covered. Docstrings/source place/report sections present. No compile by me (no file changed); worker reports clean scompile 13.2 s / 5.1 s."
+ }
+}

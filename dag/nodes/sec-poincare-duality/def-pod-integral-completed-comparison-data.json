@@ -76,16 +76,20 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-poincare-duality",
  "unit": "sk-lem-finite",
  "lean": {
-  "module": "Sheaf.Paper.IntegralPullbackCompletedComparison",
+  "module": "Sheaf.Paper.IntegralPullbackCompletedComparisonData",
   "declaration": "WeilConjectures.IntegralCompletedComparison.Comparison",
   "declarations": [
    "WeilConjectures.IntegralCompletedComparison.modules",
@@ -100,22 +104,21 @@
    "WeilConjectures.IntegralCompletedComparison.towerIso",
    "WeilConjectures.IntegralCompletedComparison.completedProjection",
    "WeilConjectures.IntegralCompletedComparison.finiteComputation",
-   "WeilConjectures.IntegralCompletedComparison.levelShift",
-   "WeilConjectures.IntegralCompletedComparison.productShift",
-   "WeilConjectures.IntegralCompletedComparison.roosEnd",
-   "WeilConjectures.IntegralCompletedComparison.ShiftCoordinates",
-   "WeilConjectures.IntegralCompletedComparison.ShiftDescent",
    "WeilConjectures.IntegralCompletedComparison.integral",
    "WeilConjectures.IntegralCompletedComparison.completed",
    "WeilConjectures.IntegralCompletedComparison.Complete",
-   "WeilConjectures.IntegralCompletedComparison.Comparison"
+   "WeilConjectures.IntegralCompletedComparison.Comparison",
+   "WeilConjectures.IntegralCompletedComparison.derived_commShift",
+   "WeilConjectures.IntegralCompletedComparison.finiteIntegral_additive",
+   "WeilConjectures.IntegralCompletedComparison.finiteCompleted_additive"
   ],
   "statement": "structure Comparison",
   "branch": "newtargets-dag",
   "by": "Q19",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Definition ownership only, as requested by the independent return at 852730d93a64. Records the unchanged Comparison structure, ShiftCoordinates, ShiftDescent and their existing field helpers; no existence theorem is owned or invoked by this node. The item uses the type and fields, not integralPullback_completedComparison."
+  "note": "Unchanged comparison interface moved to its own module and publicly reexported by IntegralPullbackCompletedComparison. Signed shift helpers remain in IntegralPullbackShiftCoordinates, owned by def-fd-integral-pullback-shift-coordinates. No construction, proposition, universe, name or visibility changed.",
+  "file": "lean/Sheaf/Paper/IntegralPullbackCompletedComparisonData.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -132,5 +135,15 @@
   "group": "Q19",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN at 852730d9. Item Lean module byte-identical (sha256 68d0b0fa), so the earlier full substance check holds: c± pinned, mapOfNatIso structures, ι/π/third-arrow equations, H^i, pinned Roos/descent/localization shift, point clauses. Item record changes only stmt_deps (theorem lem-a1-integral-pullback-completed-comparison replaced by new def-pod-integral-completed-comparison-data), proof_deps and Step 4 uses (+theorem), and lean.note; statement and proof verbatim unchanged. New node existing:true on unchanged Sheaf.Paper.IntegralPullbackCompletedComparison: all 21 recorded decls exist; the item uses only Comparison (primary decl). Statement matches ShiftCoordinates/ShiftDescent/Comparison fields (1)-(5), asserts no inhabitation, citations = stmt_deps (6 live nodes); towerIso is the ∃!-choose owned by cited def-weil-pbc-completed-pullback; coefficient nodes reachable transitively. No compile (no file changed); maintainer dry run passed preflight. Advisories: Second reading section is direct-delivery, not independent; Comparison.shifts uses canonical pbcActualCompletedPullShift owned by lem-weil-pbc-ringed-topoi-module-adjunction, outside the new node's stmt_deps (inherited, maintainer note)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-48c08",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261025T124343-L-1983617",
+  "kind": "interface",
+  "note": "independent cc review: item lem-a1-integral-pullback-completed-comparison (Nonempty Comparison) assembled from finite_pullback_strict_tower_comparison + proved integralPullback_signedShift + sorried integralPullback_roosFiniteTower / completedIntegral_finiteTowerTransport (read against their new nodes, true); moved interface type hashes compared old olean vs sandbox build; 12 direct importers compiled rc 0 against sandbox"
  }
 }

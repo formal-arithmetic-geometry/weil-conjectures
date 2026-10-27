@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-nodal-geometric-branch-square",
+ "kind": "statement",
+ "title": "Geometric scalar extension of the actual normalization residue algebra",
+ "statement": "Let C→Spec k be locally of finite type and pure of dimension one. Let x be closed with finite separable residue extension, and let y above x in C_Ω for an algebraic closure Ω/k have geometric completed local ring Ω[[u,v]]/(uv). Using the actual rings and structural maps of [def-sfb-nodal-tangent-comparison-data], there is a residue-field isomorphism κ(y)≅Ω inverse to the scalar map, the induced embedding ρ:κ(x)→Ω, a homomorphism from the normalization of O_C,x to the normalization of the completed O_CΩ,y extending the geometric completion map, and its quotient map r:E→E_y. The square Spec E_y→Spec E over Spec Ω→Spec κ(x) with arrows Spec r and the structural scalar map is cartesian, and Spec E_y has exactly two points. This asserts no Proj comparison or scheme-normalization fibre.",
+ "stmt_deps": [
+  "def-sfb-nodal-tangent-comparison-data",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-associated-graded-ring",
+  "def-nagata-affine-proj",
+  "def-weil-affine-spectrum",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CBT (constructions (2) and (3)), 0CBU and 0CBW; the explicit comparison calculations below."
+ },
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood Spec S of x. Its geometric inverse image is\nSpec(S tensor_k Omega), and the chosen point corresponds to evaluation through an\nembedding rho:kappa(x) → Omega. The residue field at this maximal point is Omega,\nwith inverse to the structural field map. The separable closed-point formal\npresentation theorem identifies the completed geometric stalk with the power-series\npresentation over extended coefficients of the original completed stalk. For a nodal\nquadratic q, arrange its X² coefficient nonzero. The normalized completed ring is\nL[[t]], L = kappa[Z]/q(Z,1), by the explicit quadratic integral-closure calculation;\nafter the specified scalar extension it is (L tensor_kappa Omega)[[t]]. The two distinct\nroots identify L tensor_kappa Omega with Omega×Omega, so the completed branch residue\nis Omega×Omega and its spectrum has two points. Normalization/completion identifies\nthe original normalization tensored with the original completion with L[[t]].\nExtend coefficients on series and transport through these identifications to obtain\nnu into the actual geometric completed normalization. This extends the geometric\ncompletion map on the stalk, since all normalization maps extend fractions with their\noriginal denominators. Its map on residues is r, and reduction of the tensor\ncomparison gives the canonical isomorphism E tensor_kappa Omega ≅ completedBranchAlgebra.\nConsequently Spec of this algebra is the pullback of Spec E along Spec rho, with\nprojections Spec r and the structural Omega map. The residue-field and quotient\nformulas follow on representatives from evaluation, tensor balancing, and the\nnormalization map. They fix all arrows and are independent of root order.",
+   "uses": [
+    "lem-sfb-separable-node-quadratic-completion",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-curve-normalization-completion",
+    "lem-sfb-quadratic-series-integral-closure",
+    "lem-sfb-quadratic-coefficient-proj-branches",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-separable-node-quadratic-completion",
+  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-trf-curve-normalization-completion",
+  "lem-sfb-quadratic-series-integral-closure",
+  "lem-sfb-quadratic-coefficient-proj-branches",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Explicit argument filling the omitted equivalence (2)=(3) of Tag 0CBT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a geometric node has two branches and its residue algebra is obtained by separable scalar extension",
+   "results": "{\"t\": \"2026-10-23T11:28:30Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of a geometric node has two branches and its residue algebra is obtained by separable scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"instIsSeparableResidueFieldOfQuotientIdeal\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"instIsSeparableQuotientIdealOfResidueField\"], \"digest\": \"9b7fed2fd42f862d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue and normalization APIs do not identify the geometric completed branch square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"residueField\"",
+   "results": "{\"t\": \"2026-10-23T11:42:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"residueField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField\", \"AlgebraicGeometry.LocallyRingedSpace.residueFieldMap\", \"AlgebraicGeometry.LocallyRingedSpace.residueFieldMap_id\", \"AlgebraicGeometry.LocallyRingedSpace.residueFieldMap_comp\", \"AlgebraicGeometry.LocallyRingedSpace.residue_comp_residueFieldMap_eq_stalkMap_comp_residue\", \"AlgebraicGeometry.LocallyRingedSpace.residue_comp_residueFieldMap_eq_stalkMap_comp_residue_assoc\", \"AlgebraicGeometry.Scheme.residueField\"], \"digest\": \"5f69ef77dae79456\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue and normalization APIs do not identify the geometric completed branch square."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*normalization|normalization.*residue|geometric.*branch",
+   "results": "{\"t\": \"2026-10-23T11:31:56Z\", \"tool\": \"grep\", \"query\": \"residue.*normalization|normalization.*residue|geometric.*branch\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue and normalization APIs do not identify the geometric completed branch square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NodalLocalTangentNormalization",
+  "date": "2026-10-23",
+  "group": "K7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices.; Geometric scalar extension of the actual normalization residue algebra",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NodalGeometricBranchSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalGeometricBranchSquare.lean",
+  "declaration": "AlgebraicGeometry.NodalLocal.geometric_branch_square",
+  "statement": "theorem geometric_branch_square {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (hpure : C.IsPureDimension 1) (x : C) (hx : x ∈ closedPoints C) (hfinite : (f.residueFieldAlgebraMap x).Finite) (hsep : @Algebra.IsSeparable k (C.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra) (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (y : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) (hy : pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) y = x) (hnode : Nonempty (CompletedLocalRing (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) y ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1}))) : let Y := pullback f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) let p := pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) let g := pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) ∃ (ω : Y.residueField y ≃+* Ω) (ρ : C.residueField x →+* Ω) (ν : Normalization (C.presheaf.stalk x) →+* Normalization (CompletedLocalRing Y y)) (r : ResidueAlgebra (C.presheaf.stalk x) →+* CompletedBranchAlgebra Y y), (∀ c : Ω, ω (IsLocalRing.residue (Y.presheaf.stalk y) (stalkScalarMap g y c)) = c) ∧ (∀ a : C.presheaf.stalk x, ρ (IsLocalRing.residue (C.presheaf.stalk x) a) = ω (IsLocalRing.residue (Y.presheaf.stalk y) (((C.presheaf.stalkCongr (.of_eq hy.symm)).hom ≫ p.stalkMap y).hom a))) ∧ (∀ a : C.presheaf.stalk x, ν (algebraMap (C.presheaf.stalk x) (Normalization (C.presheaf.stalk x)) a) = algebraMap (CompletedLocalRing Y y) (Normalization (CompletedLocalRing Y y)) (geometricCompletionMap p x y hy a)) ∧ (∀ a : Normalization (C.presheaf.stalk x), r (Ideal.Quotient.mk (normalizationIdeal (C.presheaf.stalk x)) a) = Ideal.Quotient.mk (completedBranchIdeal Y y) (ν a)) ∧ IsPullback (Spec.map (CommRingCat.ofHom r)) (Spec.map (CommRingCat.ofHom (completedBranchScalars g y))) (Spec.map (CommRingCat.ofHom (algebraMap (C.residueField x) (ResidueAlgebra (C.presheaf.stalk x))))) (Spec.map (CommRingCat.ofHom ρ)) ∧ Nat.card (Spec (.of (CompletedBranchAlgebra Y y))) = 2",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 6 new modules vs live item (verbatim def move, IsNatural defeq via IsNaturalIso), item/new node records vs Lean, 3 sorry halves vs Stacks 0CBT/0CDV and nodes"
+ }
+}

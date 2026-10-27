@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-relative-central-multiplicative-preimage",
+ "kind": "statement",
+ "title": "Central multiplicative preimages in smooth connected group extensions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An $S$-group scheme has multiplication, identity and inverse satisfying the group diagrams; a homomorphism respects them. A group of multiplicative type of finite presentation is an fppf-local form of $D(M)=\\operatorname{Spec}\\mathcal O_S[M]$ for a finitely generated abelian group $M$, with $e_m\\mapsto e_m\\otimes e_m$ as comultiplication [def-sfb-ring-diagonalizable-group]. Fppf means faithfully flat and locally of finite presentation [def-pc-fppf-site]. Let $H,J$ be smooth affine $S$-groups of finite presentation with connected geometric fibres [def-sbc-smooth-morphisms] [def-weil-pbc-scheme-conventions] [def-weil-connected-scheme]. Let $q:H\\to J$ be a faithfully flat finitely presented homomorphism whose scheme-theoretic kernel $N$ is central and of multiplicative type. Central means that all its points commute with all group points after every further base change. If $D\\hookrightarrow J$ is a closed central subgroup of multiplicative type of finite presentation, then $q^{-1}(D)=H\\times_JD$ is a central subgroup of $H$ of multiplicative type of finite presentation. This is a scheme-theoretic assertion, commutes with arbitrary base change, and does not require $N$ or $D$ to be smooth.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity. WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fppf-site",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=H\\times_JD$ and let $p:E\\to D$ be the second projection. The group operations restrict to this fibre product because $D$ is a subgroup and $q$ is a homomorphism; its kernel is $N$. By [lem-weil-pbc-closed-immersion-base-change], $E\\hookrightarrow H$ is a closed immersion. It is affine by the affine-chart characterization in [def-weil-closed-immersion]; composing with the affine structure morphism of $H$ gives $E\\to S$ affine by [lem-weil-pbc-affine-composition]. The singleton $\\{q:H\\to J\\}$ is an fppf covering, and [lem-trf-fppf-covering-base-change] gives the fppf covering $\\{p:E\\to D\\}$. In particular every section of $D$ lifts to $E$ after an fppf covering.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-composition",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.1(2), proof, printed p.97: preimage and quotient; Stacks Tags 01QR, 01SC, 021O for the scheme-theoretic permanence used here."
+   }
+  },
+  {
+   "text": "For sections $h\\in H(T)$ and $x\\in E(T)$ define $c(h,x)=hxh^{-1}x^{-1}$. Since $q(x)\\in D(T)$ is central in $J(T)$, $q(c(h,x))=1$, so this is a morphism $H\\times_SE\\to N$. If $p(x)=p(y)$ then $y=xn$ for $n=x^{-1}y\\in N(T)$; centrality of $N$ gives $c(h,xn)=c(h,x)$. Thus this morphism agrees on both projections from the relation of $H\\times_SE\\to H\\times_SD$. This latter map is an fppf covering by [lem-trf-fppf-covering-base-change], hence fpqc by [lem-trf-fppf-covering-is-fpqc]. Descent [lem-weil-pbc-fpqc-representable-descent] supplies a unique morphism $b:H\\times_SD\\to N$ with $b(h,p(x))=c(h,x)$. All these identities are identities on arbitrary scheme-valued points, not just geometric points.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.1(2), proof, printed p.97: map to the Hom-functor via a local lift; Stacks Tags 021O, 022C and 023Q for descent."
+   }
+  },
+  {
+   "text": "For $x,y\\in E(T)$, the centrality of $c(h,x),c(h,y)\\in N(T)$ gives $c(h,xy)=c(h,x)c(h,y)$ by expanding $hxyh^{-1}(xy)^{-1}$. After lifting two sections of $D$ along the fppf cover $p$, this identity proves $b(h,d_1d_2)=b(h,d_1)b(h,d_2)$, and $b(h,1)=1$. Equality descends by [lem-weil-pbc-fpqc-representable-descent], with the needed pulled-back coverings provided by [lem-trf-fppf-covering-base-change] and [lem-trf-fppf-covering-is-fpqc]. Thus $b$ is an $H$-family of group homomorphisms $D\\to N$. At the identity section of $H$ this homomorphism is zero because $c(1,x)=1$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.1(2), proof, printed p.97: explicit commutator calculation underlying its Hom-functor; Stacks 023Q for equality descent."
+   }
+  },
+  {
+   "text": "Work locally on an affine open of $S$ and choose successive fppf covers splitting $D$ and $N$. Refine the first covering by affine schemes using [lem-pc-fppf-affine-refinement], and then refine a splitting cover for $N$ over each resulting affine base in the same way. Base change of these coverings is permitted by [lem-trf-fppf-covering-base-change]. Over one such affine base $U=\\operatorname{Spec}A$, write $D_U=D_A(M)$ and $N_U=D_A(L)$. Since $H_U$ is affine, $b$ is a homomorphism between the split diagonalizable groups with character groups $M,L$ over the affine scheme $H_U$. By [lem-sfb-relative-diagonalizable-character-duality], it is described by a locally constant function on $H_U$ with values in $\\operatorname{Hom}(L,M)$. On each connected geometric fibre of $H_U\\to U$ this function is constant; that fibre contains its identity point, where the value is zero by step 3. Every point lies under a geometric fibre, so the function is zero everywhere. The quoted character-duality theorem, including its validity over nonreduced rings, implies $b=1$ as a morphism over $U$. Successive uniqueness descent [lem-weil-pbc-fpqc-representable-descent], using [lem-trf-fppf-covering-is-fpqc], gives $b=1$ globally.",
+   "uses": [
+    "lem-pc-fppf-affine-refinement",
+    "lem-trf-fppf-covering-base-change",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.1(2), printed p.97, Hom-functor rigidity; direct character-duality variant using Appendix B.1, printed pp.280--281, instead of reducing to finite torsion; Stacks 021P for affine refinement."
+   }
+  },
+  {
+   "text": "Consequently $c(h,x)=b(h,p(x))=1$ for every $T,h,x$, and this remains true after every further base change. Thus $E$ is central in $H$, in precisely the functorial sense of the statement, and in particular $E$ is commutative. Apply [lem-sfb-relative-commutative-multiplicative-extension] to $p:E\\to D$: $E$ is affine by step 1, $p$ is faithfully flat and locally of finite presentation by that step, its kernel is $N$, and both ends have the stipulated multiplicative type. This proves that $E$ has multiplicative type of finite presentation.",
+   "uses": [
+    "lem-sfb-relative-commutative-multiplicative-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.1(2), proof, printed p.97, last use of Corollary B.4.2(2), printed pp.299--301."
+   }
+  },
+  {
+   "text": "For any $S'\\to S$, the fibre-product universal property identifies $(H\\times_JD)\\times_SS'$ with $H_{S'}\\times_{J_{S'}}D_{S'}$, including its group operations and inclusion in $H_{S'}$. The centrality just proved was tested on all scheme-valued points and therefore already asserts centrality after this change of base. Pull back the fppf covers on which $E$ has the prescribed diagonalizable presentation; they remain coverings by [lem-trf-fppf-covering-base-change]. The Hopf formulas pull back to the identical formulas on the group algebras of the new base, so this proves the multiplicative-type assertion there. In particular neither this argument nor any preceding step assumes that $N$ or $D$ is smooth.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 3.3.1(2), scheme-theoretic formulation; base-change identity and the local definition of multiplicative type; Stacks 021O."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-composition",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-fppf-affine-refinement",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "def-weil-connected-scheme",
+  "lem-sfb-relative-commutative-multiplicative-extension",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Proof (3), relative structural prerequisite on the alteration route recorded in blueprint.from.place; commutator argument following Conrad Lemma 3.3.1(2), with the direct character-duality rigidity variant. The external Conrad source was read online; its local archival copy is WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|central.*preimage",
+   "results": "{\"t\": \"2026-10-24T08:18:23Z\", \"tool\": \"grep\", \"query\": \"multiplicative.?type|central.*preimage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"multiplicativeType\"",
+   "results": "{\"t\": \"2026-10-24T08:18:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"multiplicativeType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of a central subgroup of multiplicative type under a central multiplicative type quotient is central and multiplicative type",
+   "results": "{\"t\": \"2026-10-24T08:18:24Z\", \"tool\": \"leansearch\", \"query\": \"The inverse image of a central subgroup of multiplicative type under a central multiplicative type quotient is central and multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.comap\", \"Subgroup.normal_comap\", \"Set.subset_center_units\", \"QuotientGroup.comap_comap_center\", \"QuotientAddGroup.comap_comap_center\", \"Subsemigroup.centerCongr_symm_apply_coe\", \"Set.center_units_subset\", \"QuotientGroup.preimageMkEquivSubgroupProdSet\"], \"digest\": \"7f655e6b789fd2ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected affine group scheme central extension multiplicative type subgroups preimage rigidity",
+   "results": "{\"t\": \"2026-10-24T08:18:31Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected affine group scheme central extension multiplicative type subgroups preimage rigidity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Section.exists_eq_mul_inl\", \"upperCentralSeriesStep_eq_comap_center\", \"GroupExtension.Section.exists_mul_eq_inl_mul_mul\", \"GroupExtension.Section.exists_mul_eq_mul_mul_inl\", \"GroupExtension.Section.exists_eq_inl_mul\", \"QuotientGroup.comap_comap_center\", \"GroupExtension.Section.mul_mul_mul_inv_mem_range_inl\", \"GroupExtension\"], \"digest\": \"7aa7f36342277081\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse images of central diagonalizable subgroups in a smooth connected affine group scheme quotient are central diagonalizable",
+   "results": "{\"t\": \"2026-10-24T08:39:31Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse images of central diagonalizable subgroups in a smooth connected affine group scheme quotient are central diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesStep_eq_comap_center\", \"QuotientGroup.comap_comap_center\", \"comap_upperCentralSeries_quotient_center\", \"QuotientAddGroup.comap_comap_center\", \"Subgroup.quotientCentralizerEmbedding_apply\", \"commutative_of_cyclic_center_quotient\", \"Subgroup.quotientCentralizerEmbedding\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\"], \"digest\": \"ac6c7cd8b618a6e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|central.*preimage",
+   "results": "{\"t\": \"2026-10-24T09:29:24Z\", \"tool\": \"grep\", \"query\": \"multiplicative.?type|central.*preimage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central multiplicative type subgroup has central multiplicative type inverse image in a smooth connected affine group scheme",
+   "results": "{\"t\": \"2026-10-24T09:29:25Z\", \"tool\": \"leansearch\", \"query\": \"A central multiplicative type subgroup has central multiplicative type inverse image in a smooth connected affine group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.center_units_subset\", \"Set.subset_center_units\", \"Subgroup.center.isMulCommutative\", \"Subgroup.center\", \"Subsemigroup.centerCongr_symm_apply_coe\", \"AddSubgroup.center\", \"Subgroup.val_centerUnitsEquivUnitsCenter_symm_apply_coe\", \"Subgroup.map_centralizer_le_centralizer_image\"], \"digest\": \"970caa276a3c9536\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"multiplicativeType\"",
+   "results": "{\"t\": \"2026-10-24T09:29:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"multiplicativeType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a central multiplicative type subgroup under a central quotient of smooth connected affine group schemes is central and of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T09:29:27Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse image of a central multiplicative type subgroup under a central quotient of smooth connected affine group schemes is central and of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.comap_comap_center\", \"upperCentralSeriesStep_eq_comap_center\", \"comap_upperCentralSeries_quotient_center\", \"QuotientAddGroup.comap_comap_center\", \"Subgroup.quotientCentralizerEmbedding_apply\", \"commutative_of_cyclic_center_quotient\", \"Subgroup.quotientCenterEmbedding_apply\", \"Subgroup.quotientCentralizerEmbedding\"], \"digest\": \"03cc16711ec52647\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine connected group scheme acts trivially by conjugation on the preimage of a central diagonalizable subgroup in a central quotient",
+   "results": "{\"t\": \"2026-10-24T09:30:03Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine connected group scheme acts trivially by conjugation on the preimage of a central diagonalizable subgroup in a central quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.comap_comap_center\", \"upperCentralSeriesStep_eq_comap_center\", \"Subgroup.quotientCentralizerEmbedding_apply\", \"QuotientAddGroup.comap_comap_center\", \"commutative_of_cyclic_center_quotient\", \"Action.FintypeCat.toEndHom_trivial_of_mem\", \"Subgroup.quotientCenterEmbedding_apply\", \"Subgroup.quotientCentralizerEmbedding\"], \"digest\": \"cbab93952082a187\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|central.*preimage",
+   "results": "{\"t\": \"2026-10-24T09:29:24Z\", \"tool\": \"grep\", \"query\": \"multiplicative.?type|central.*preimage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central multiplicative type subgroup has central multiplicative type inverse image in a smooth connected affine group scheme",
+   "results": "{\"t\": \"2026-10-24T09:29:25Z\", \"tool\": \"leansearch\", \"query\": \"A central multiplicative type subgroup has central multiplicative type inverse image in a smooth connected affine group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.center_units_subset\", \"Set.subset_center_units\", \"Subgroup.center.isMulCommutative\", \"Subgroup.center\", \"Subsemigroup.centerCongr_symm_apply_coe\", \"AddSubgroup.center\", \"Subgroup.val_centerUnitsEquivUnitsCenter_symm_apply_coe\", \"Subgroup.map_centralizer_le_centralizer_image\"], \"digest\": \"970caa276a3c9536\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"multiplicativeType\"",
+   "results": "{\"t\": \"2026-10-24T09:29:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"multiplicativeType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a central multiplicative type subgroup under a central quotient of smooth connected affine group schemes is central and of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T09:29:27Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse image of a central multiplicative type subgroup under a central quotient of smooth connected affine group schemes is central and of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.comap_comap_center\", \"upperCentralSeriesStep_eq_comap_center\", \"comap_upperCentralSeries_quotient_center\", \"QuotientAddGroup.comap_comap_center\", \"Subgroup.quotientCentralizerEmbedding_apply\", \"commutative_of_cyclic_center_quotient\", \"Subgroup.quotientCenterEmbedding_apply\", \"Subgroup.quotientCentralizerEmbedding\"], \"digest\": \"03cc16711ec52647\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine connected group scheme acts trivially by conjugation on the preimage of a central diagonalizable subgroup in a central quotient",
+   "results": "{\"t\": \"2026-10-24T09:30:03Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine connected group scheme acts trivially by conjugation on the preimage of a central diagonalizable subgroup in a central quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.comap_comap_center\", \"upperCentralSeriesStep_eq_comap_center\", \"Subgroup.quotientCentralizerEmbedding_apply\", \"QuotientAddGroup.comap_comap_center\", \"commutative_of_cyclic_center_quotient\", \"Action.FintypeCat.toEndHom_trivial_of_mem\", \"Subgroup.quotientCenterEmbedding_apply\", \"Subgroup.quotientCentralizerEmbedding\"], \"digest\": \"cbab93952082a187\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-central-multiplicative-quotient",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity.",
+   "via": [
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-central-multiplicative-preimage",
+  "worker": "stage1",
+  "summary": "Kept the full relative statement. Constructed and descended the commutator, proved its lift independence and multiplicativity explicitly, killed the resulting family by the existing relative character-duality statement and connected geometric fibres, and applied one new generic relative commutative-extension theorem. Checked arbitrary base change, nonreduced bases and nonsmooth multiplicative-type kernels; searched the source, DAG, current blueprint and Mathlib.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic refinement of splitting fppf covers by affine schemes, so relative character duality over rings applies; no node of this unit supplies the refinement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-f7df4a22f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-f7df4a22f (reviewer sub-agent of L); spot-checked: Read the item's statement and all six steps, the new node, and the statements of all 14 cited nodes. Not a re-split delivery (no repair order) and the item statement is unchanged. Conrad (3.3.1(2), B.4.2(2)) is not in the local literature and is recorded as WANTED, so I checked the mathematics directly. Step 1: E=H×_J D is a closed immersion into H by 01QR, affine by the chart criterion in def-weil-closed-immersion and 01SC, and p:E→D is an fppf covering by 021O(3); ker p=N. Step 2: q(c(h,x))=1 because D is central in J; c(h,xn)=c(h,x) because N is central in H; the commutator descends to b:H×D→N along the fpqc covering by 022C and 023Q (target an arbitrary scheme). Step 3: c(h,xy)=c(h,x)c(h,y) by centrality, and the identity descends by two uniqueness descents. Step 4: on affine splitting pieces (021P refinement), the existing character-duality node gives a locally constant u:L→M on the nonempty affine H_U, valid for nonreduced rings; u is 0 on the identity section and constant on each connected geometric fibre, so u=0 everywhere and b=1, then uniqueness descent globalizes. This is Conrad's Hom-rigidity made explicit. Step 5: E is central, hence commutative, and every hypothesis of the new node holds (E affine, p flat, surjective and lfp, N fp as a base change of q). Step 6: base change of the fibre product and of the splitting covers. Edge cases: D=1, N=1, S empty; the Q8 example over C shows the connected-fibre hypothesis is essential. New node: statement-only, self-contained, every notion cited. I believe it is true (commutative case of SGA3 XVII 7.1.1 / Conrad B.4.2, via local exactness of the character sheaf and Cartier duality). Tested on mu_{p^2} over F_p[eps] and on a commutative extension of Z/l by G_m; the Heisenberg group shows commutativity is needed. It is the relative generalization of the field node lem-sfb-commutative-multiplicative-type-extension, not a duplicate or a restatement of the item. I swept the 138 multiplicative-type nodes; Mathlib has no such theorem. Batch-5 flags: lem-trf-fppf-covering-base-change (021O) and lem-trf-fppf-covering-is-fpqc (022C) are generic topology facts outside both assumptions and are not steps of the trace-formula or Poincare-duality proofs; character-duality reaches the trace-formula chapter only through generic 022C. Accepted. tool_uses: lem-pc-fppf-affine-refinement is accepted as a generic off-unit tool. No fixes."
+ }
+}

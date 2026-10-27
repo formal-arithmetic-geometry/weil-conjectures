@@ -103,11 +103,17 @@ theorem composition_laws :
       | add g g' hg hg' => simp [map_add, hg, hg']
     | add h h' hh hh' => simp [map_add, hh, hh']
 
+/-- The tensor Hom type, named before the category instance to share its reduction.
+Source: the displayed Hom formula of `def-weil-rationalization-karoubi`
+(blueprint: def-weil-linear-scalar-localization). -/
+@[reducible] def tensorHom (K L : ScalarLocalization R C p) : Type (max r v) :=
+  Localization.Away p ⊗[R] (K.obj ⟶ L.obj)
+
 /-- The tensor-Hom category, with identities tensored with one and extended composition.
 Source: blueprint `def-weil-rationalization-karoubi`
 (blueprint: def-weil-linear-scalar-localization). -/
 noncomputable instance category : Category.{max r v} (ScalarLocalization R C p) where
-  Hom K L := Localization.Away p ⊗[R] (K.obj ⟶ L.obj)
+  Hom K L := tensorHom R C p K L
   id K := (1 : Localization.Away p) ⊗ₜ[R] 𝟙 K.obj
   comp {K L M} f g := composition R C p K.obj L.obj M.obj g f
   id_comp {K L} f := (composition_laws R C p).1 K.obj L.obj f

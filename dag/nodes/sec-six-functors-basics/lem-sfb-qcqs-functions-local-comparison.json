@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-qcqs-functions-local-comparison",
+ "kind": "statement",
+ "title": "Localization, stalks and the local coefficient criterion for qcqs regular functions",
+ "statement": "Let $f:Y\\to T$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]. Let $\\beta:\\mathcal O_T\\to f_*\\mathcal O_Y$ be its canonical map of sheaves of rings [def-weil-locally-ringed-space-morphism]. For an affine open $V=\\operatorname{Spec}R\\subseteq T$, put $Y_V=f^{-1}V$ and $M=\\Gamma(Y_V,\\mathcal O_{Y_V})$, with its structural $R$-algebra structure [def-weil-affine-spectrum]. For every multiplicative subset $S\\subseteq R$ (containing $1$ and closed under multiplication), put $Y_{V,S}=Y_V\\times_V\\operatorname{Spec}(S^{-1}R)$ [def-pc-fibre-product], with $S^{-1}R$ and $S^{-1}M$ the localizations in the ordinary fraction sense [def-weil-pbc-module-localization]. The canonical map\n$$S^{-1}M\\longrightarrow\\Gamma(Y_{V,S},\\mathcal O),\\qquad m/s\\longmapsto (1/s)\\,\\operatorname{pr}_1^\\sharp(m),$$\nis an isomorphism of $S^{-1}R$-algebras, compatible with further localization and the structural coefficient maps. If $y\\in V$ corresponds to $\\mathfrak p\\subset R$, and $A=\\mathcal O_{T,y}=R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], there are canonical isomorphisms of $A$-algebras\n$$(f_*\\mathcal O_Y)_y\\cong M_{\\mathfrak p}\\cong\\Gamma(Y_V\\times_V\\operatorname{Spec}A,\\mathcal O).$$\nThe first sends the germ of $m/h^n$ on $D(h)$, $h\\notin\\mathfrak p$, to that same fraction. Their composite sends a germ to its pullback to the local base change, and identifies $\\beta_y$ with the coefficient map from $A$ [def-weil-pbc-module-stalk]. Moreover, $\\beta$ is an isomorphism if and only if these coefficient maps are isomorphisms for all $y\\in T$. When they are, every $\\beta_U$ on an arbitrary open $U$ is a ring isomorphism, and its inverse commutes with restriction.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02KH, lemma-flat-base-change-cohomology, i=0; localization and elementary fraction/germ comparison, followed by the germ-and-gluing argument for sheaf invertibility"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "The restriction $f_V:Y_V\\to V$ is the base change of $f$ along $V\\hookrightarrow T$: by [lem-weil-pbc-open-preimage-fibre-product] the inverse-image open subscheme $Y_V=f^{-1}V$, with its inclusion and the restriction of $f$, is a fibre product $Y\\times_TV$ [def-pc-fibre-product]. By [lem-weil-pbc-qcqs-morphism-permanence](3), $f_V$ is quasi-compact and quasi-separated. Since $V$ is affine, [lem-weil-pbc-qcqs-over-affine] implies that $Y_V$ is a quasi-compact quasi-separated scheme. Thus it satisfies the source hypothesis of the global-sections base-change theorem, without any affineness, separatedness or Noetherian hypothesis on $Y_V$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K5 (lemma-quasi-compact-preserved-base-change), 01KU (lemma-separated-permanence), 01K4 (lemma-quasi-compact-affine); affine-base reduction preceding coherent.tex Tag 02KH"
+   }
+  },
+  {
+   "text": "For any multiplicative subset $S\\subseteq R$, the ring map $R\\to S^{-1}R$ is flat by [lem-weil-pbc-localization-flat]. Consequently $g_S:\\operatorname{Spec}(S^{-1}R)\\to V=\\operatorname{Spec}R$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Both its source and target are affine. These assertions allow $0\\in S$; then the source is the empty affine scheme. No finite-generation hypothesis on $S$ is used.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT (lemma-flat-localization), part (1); morphisms.tex Tag 01U5 (lemma-flat-characterize)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-base-change] to $R\\to M$ and $R\\to S^{-1}R$. It identifies $M\\otimes_R S^{-1}R$ with the localization of $M$ at the image of $S$. This is the ordinary $S^{-1}M$ of [def-weil-pbc-module-localization]: the fraction relations on both sides are $m/s=n/t$ iff $u(tm-sn)=0$ for some $u\\in S$, with the coefficients acting through $R\\to M$. Explicitly the mutually inverse maps are $m\\otimes(a/s)\\mapsto am/s$ and $m/s\\mapsto m\\otimes(1/s)$. The latter agrees with the inverse supplied by the localization isomorphism since both maps send $m/1$ to $m\\otimes1$ and invert the same denominators. They preserve multiplication, since $(m/s)(n/t)=mn/(st)$. Hence this is an isomorphism of $S^{-1}R$-algebras.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), with the fraction construction preceding Tag 07JZ (definition-localization-module)"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-flat-base-change-global-sections-qcqs] for $X=Y_V$, $S$ there equal to $V$, and $S'$ there equal to $\\operatorname{Spec}(S^{-1}R)$. Steps 1 and 2 verify all its hypotheses. Its isomorphism sends $m\\otimes(a/s)$ to $\\operatorname{pr}_1^\\sharp(m)\\operatorname{pr}_2^\\sharp(a/s)$. Composing with step 3 gives the required isomorphism $\\theta_S:S^{-1}M\\to\\Gamma(Y_{V,S},\\mathcal O)$ with $\\theta_S(m/s)=\\operatorname{pr}_2^\\sharp(1/s)\\operatorname{pr}_1^\\sharp(m)$. In particular $\\theta_S(a/s)=\\operatorname{pr}_2^\\sharp(a/s)$ for $a\\in R$, so it respects the specified coefficient map and is an $S^{-1}R$-algebra isomorphism, rather than merely an abstract ring isomorphism.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH (lemma-flat-base-change-cohomology), part (2), i=0 and F=O_X; the explicit map in the cited global-sections node"
+   }
+  },
+  {
+   "text": "The compatibility with further localization follows on fractions. For $S\\subseteq S'$ let $q:Y_{V,S'}\\to Y_{V,S}$ be the projection induced by $S^{-1}R\\to(S')^{-1}R$ using [def-pc-fibre-product]. Pullback gives $q^\\sharp\\theta_S(m/s)=\\operatorname{pr}_{2,S'}^\\sharp(1/s)\\operatorname{pr}_{1,S'}^\\sharp(m)=\\theta_{S'}(m/s)$. Every element of $S^{-1}M$ has this form. More generally, for a localization of $S^{-1}R$ at a multiplicative set of fractions, write a further denominator as $a/t$ with $t\\in S$. Its inverse maps to $t/a$; both iterated maps therefore send $(m/s)/(a/t)$ to the pullback of $mt/(sa)$. Finite products of these denominators give the general case. This proves the iterated-localization compatibility by explicit multiplication, including the structural coefficients.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), fraction arithmetic; coherent.tex Tag 02KH, explicit degree-zero map"
+   }
+  },
+  {
+   "text": "For $h\\in R$, [lem-weil-pbc-affine-open-section-vanishing-prime](b) says that $D(h)$ is affine and has sections $R_h$ through restriction. Thus the affine-spectrum correspondence [def-weil-affine-spectrum] identifies its inclusion into $V$ with $\\operatorname{Spec}(R_h)\\to\\operatorname{Spec}R$: both induce $R\\to R_h$ on sections. Applying [lem-weil-pbc-open-preimage-fibre-product] to $f_V:Y_V\\to V$ and the open $D(h)$, and using the uniqueness of fibre products [def-pc-fibre-product], identifies $Y_V\\times_V\\operatorname{Spec}R_h$ with $f^{-1}D(h)$. Specializing step 4 to $S=\\{h^n:n\\geq0\\}$ now gives $\\Gamma(f^{-1}D(h),\\mathcal O)=M_h$, sending $m/h^n$ to the restriction of $m$ multiplied by the inverse of the restriction of $h^n$. By [lem-weil-pbc-spec-localization-away-basic-open](i), the opens $D(h)$ with $h\\notin\\mathfrak p$ form a neighbourhood basis of $y$ inside $V$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I3 (lemma-standard-open-affine), 01HV (lemma-spec-sheaves); algebra.tex Tag 00E0 (lemma-Zariski-topology), principal-open basis"
+   }
+  },
+  {
+   "text": "Put $F=f_*\\mathcal O_Y$. Its sections on $U$ are $\\Gamma(f^{-1}U,\\mathcal O_Y)$, and $\\beta$ gives compatible maps from $\\mathcal O_T(U)$ by [def-weil-locally-ringed-space-morphism]. By [lem-weil-pbc-affine-open-stalk-localization](c) applied to the affine open $V$ of $T$, the germ map $R\\to\\mathcal O_{T,y}$ is a localization at $R\\setminus\\mathfrak p$, which identifies $A=\\mathcal O_{T,y}$ with $R_{\\mathfrak p}$ by $r/s\\mapsto r_ys_y^{-1}$. For $s\\notin\\mathfrak p$, the germ $s_y=s/1$ is therefore a unit of $A$, so its image $\\beta_y(s/1)$ in $F_y$ is a unit. The germ map therefore extends to a ring map $\\lambda:M_{\\mathfrak p}\\to F_y$, $m/s\\mapsto\\beta_y(s/1)^{-1}m_y$. Indeed if $u(tm-sn)=0$ with $u\\notin\\mathfrak p$, taking germs and multiplying by the inverses of the images of $u,s,t$ gives the equality of the two proposed images. The fraction addition and multiplication formulas show this is a ring map; for $r/s\\in A$ its value is $\\beta_y(r/s)$, so it is $A$-linear and respects the structural algebra maps.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 0078 (section-stalks), 007J (lemma-stalk-module); algebra.tex Tag 00CO (definition-localization)"
+   }
+  },
+  {
+   "text": "Every element of $F_y$ is represented by a section on a neighbourhood of $y$, by [def-weil-pbc-module-stalk]. Shrinking to $D(h)$ with $h\\notin\\mathfrak p$ using the basis in step 6, that section is $m/h^n$ by step 6, and its germ equals $\\lambda(m/h^n)$. Thus $\\lambda$ is surjective. If $\\lambda(m/s)=0$, multiplication by the unit $\\beta_y(s/1)$ gives $m_y=0$. The same stalk description gives a neighbourhood where $m$ restricts to zero; shrink it to $D(h)$ with $h\\notin\\mathfrak p$. Step 6 says $m/1=0$ in $M_h$, so the fraction relation in [def-weil-pbc-module-localization] gives $h^n m=0$ for some $n\\geq0$. Since $h^n\\notin\\mathfrak p$, $m/s=0$ in $M_{\\mathfrak p}$. Thus $\\lambda$ is injective. Its inverse $F_y\\cong M_{\\mathfrak p}$ sends the germ represented by $m/h^n$ to that fraction, as required.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0078 (section-stalks), germ representatives and equality; algebra.tex Tag 07JZ (definition-localization-module), zero criterion"
+   }
+  },
+  {
+   "text": "Apply step 4 to $S=R\\setminus\\mathfrak p$ and use $A=R_{\\mathfrak p}$ to get $\\theta_{R\\setminus\\mathfrak p}:M_{\\mathfrak p}\\cong\\Gamma(Y_V\\times_V\\operatorname{Spec}A,\\mathcal O)$. Compose with the inverse of $\\lambda$ from step 8. For a germ represented on $D(h)$ by $m/h^n$, the result is exactly $\\operatorname{pr}_1^\\sharp(m)/h^n$, the pullback of that section. Here $\\operatorname{Spec}A\\to V$ factors through $D(h)$ because $h$ becomes invertible in $A$: the induced ring map is $R_h\\to A$, $r/h^n\\mapsto r/h^n$, and the affine identifications of step 6 give that factorization. Any representative on a larger neighbourhood restricts to such a $D(h)$; equality of germs and step 8 make this independent of the restriction. For $r/h^n\\in A$ (identified with $r_yh_y^{-n}$ by [lem-weil-pbc-affine-open-stalk-localization](c)), the germ of $\\beta_{D(h)}(r/h^n)$ goes to the coefficient $r/h^n$ in the local base change by step 4. Thus the composite identifies $\\beta_y$ with precisely the asserted coefficient map.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH (lemma-flat-base-change-cohomology), i=0; elementary comparison on fractions and germs from steps 4, 6-8"
+   }
+  },
+  {
+   "text": "By step 9, all local coefficient maps are isomorphisms exactly when all $\\beta_y$ are isomorphisms. Apply [lem-weil-pbc-sets-sheaf-iso-on-stalks] to the underlying sheaves of sets of $\\beta$ (their stalk sets and maps are the same germs). It yields precisely that every $\\beta_U$ is bijective, equivalently that the underlying sheaf map is an isomorphism. Each bijective ring map has a ring-homomorphic inverse: apply $\\beta_U$ to the proposed identities for the inverse of sums, products and $1$, and use injectivity. Write this inverse as $\\gamma_U$. For $W\\subseteq U$ and $t\\in F(U)$, naturality of $\\beta$ gives $\\beta_W(\\gamma_U(t)|_W)=t|_W=\\beta_W(\\gamma_W(t|_W))$; injectivity implies $\\gamma_U(t)|_W=\\gamma_W(t|_W)$. Hence the inverses commute with restrictions and define the inverse as a sheaf of rings. Conversely an inverse sheaf map induces inverse stalk maps, proving both directions.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 007T (lemma-points-exactness), part (3), followed by the elementary ring and naturality identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02KH (lemma-flat-base-change-cohomology), degree zero; Q88 spells out localization, fraction/germ comparisons and applies sheaves.tex Tag 007T, using existing DAG leaves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism the stalk of the direct image of the structure sheaf equals global functions after base change to the local ring and the structure map is an isomorphism iff these local coefficient maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:25:53Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact quasi separated scheme morphism the stalk of the direct image of the structure sheaf equals global functions after base change to the local ring and the structure map is an isomorphism iff these local coefficient maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.stalkwise_SpecMap_iff\", \"AlgebraicGeometry.stalkwise_Spec_map_iff\", \"AlgebraicGeometry.HasRingHomProperty.stalkMap_of_respectsIso\", \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"AlgebraicGeometry.Spec_map_localization_isIso\", \"AlgebraicGeometry.stalkwise_respectsIso\", \"AlgebraicGeometry.Scheme.arrowStalkMapSpecIso\"], \"digest\": \"596606c305d3be74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec.toPushforwardStalk results assume an affine source; the qcqs basic-open localization theorem gives neither arbitrary localization base change nor the pinned stalk comparison and sheaf criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stalk\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-22T06:25:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"stalk\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"AlgebraicGeometry.StructureSheaf.instAlgebraCarrierStalkCommRingCatObjPresheafTopObjPushforwardTopMapObjFunctorOppositeOpensCarrierTopIsSheafGrothendieckTopologyStructureSheaf\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom\", \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\"], \"digest\": \"fb9a1de049373db9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec.toPushforwardStalk results assume an affine source; the qcqs basic-open localization theorem gives neither arbitrary localization base change nor the pinned stalk comparison and sheaf criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*pushforward|pushforward.*stalk|isIso.*stalk",
+   "results": "{\"t\": \"2026-10-22T06:25:42Z\", \"tool\": \"grep\", \"query\": \"stalk.*pushforward|pushforward.*stalk|isIso.*stalk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/Spec.lean\"], \"digest\": \"be50d97a970f0c51\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec.toPushforwardStalk results assume an affine source; the qcqs basic-open localization theorem gives neither arbitrary localization base change nor the pinned stalk comparison and sheaf criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of global regular functions for a quasi compact quasi separated morphism and comparison of direct image stalks with the local base change",
+   "results": "{\"t\": \"2026-10-22T06:25:42Z\", \"tool\": \"leansearch\", \"query\": \"Localization of global regular functions for a quasi compact quasi separated morphism and comparison of direct image stalks with the local base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk\", \"ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap\", \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_comp\"], \"digest\": \"fb27746a970fec12\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Spec.toPushforwardStalk results assume an affine source; the qcqs basic-open localization theorem gives neither arbitrary localization base change nor the pinned stalk comparison and sheaf criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization_basicOpen_of_qcqs|isIso_pushoutSection|stalk.*pushforward|isLocalization_stalk",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T04:03:55Z\", \"tool\": \"grep\", \"query\": \"isLocalization_basicOpen_of_qcqs|isIso_pushoutSection|stalk.*pushforward|isLocalization_stalk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\"], \"digest\": \"4ef28fc67f922fab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: qcqs basic-open localization, affine pushforward stalks and flat base change cover components only; no hit supplies all the stated canonical comparisons and sheaf criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"localization\", \"stalk\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T04:03:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"localization\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"AlgebraicGeometry.isIso_specMap_stalkMap_localization\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'\", \"AlgebraicGeometry.homogeneousLocalizationToStalk\", \"AlgebraicGeometry.homogeneousLocalizationToStalk_stalkToFiberRingHom\", \"AlgebraicGeometry.stalkToFiberRingHom_homogeneousLocalizationToStalk\"], \"digest\": \"5de0c73464b5aab5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: qcqs basic-open localization, affine pushforward stalks and flat base change cover components only; no hit supplies all the stated canonical comparisons and sheaf criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of global sections of a quasi compact quasi separated scheme and stalk of its structure sheaf direct image",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T04:03:56Z\", \"tool\": \"leansearch\", \"query\": \"Localization of global sections of a quasi compact quasi separated scheme and stalk of its structure sheaf direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.localizationToStalk\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"ModuleCat.Tilde.localizationToStalk\", \"ModuleCat.Tilde.localizationToStalk_mk\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\"], \"digest\": \"7cd5cf1a3e50e70e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: qcqs basic-open localization, affine pushforward stalks and flat base change cover components only; no hit supplies all the stated canonical comparisons and sheaf criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism localization of global regular functions agrees with base change and direct image stalks identify with local base change sections",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T04:04:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact quasi separated scheme morphism localization of global regular functions agrees with base change and direct image stalks identify with local base change sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map\", \"AlgebraicGeometry.StructureSheaf.comapFunIsLocallyFraction\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\"], \"digest\": \"fca1acf9cd9beb55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: qcqs basic-open localization, affine pushforward stalks and flat base change cover components only; no hit supplies all the stated canonical comparisons and sheaf criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the pushforward structure sheaf under a quasi compact quasi separated scheme morphism is canonically the ring of sections over base change to the local ring",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T04:07:40Z\", \"tool\": \"leanfinder\", \"query\": \"The stalk of the pushforward structure sheaf under a quasi compact quasi separated scheme morphism is canonically the ring of sections over base change to the local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom\", \"AlgebraicGeometry.StructureSheaf.instAlgebraCarrierStalkCommRingCatObjPresheafTopObjPushforwardTopMapValOpensCarrierTopStructureSheaf\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\"], \"digest\": \"d6f2d1124a1eef23\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: qcqs basic-open localization, affine pushforward stalks and flat base change cover components only; no hit supplies all the stated canonical comparisons and sheaf criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-point-blowup-functions",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; the regular-functions input in the first paragraph of the point-blowdown factorization proof.; finer split of lem-sfb-regular-point-blowup-functions, old steps 2, 3 and 11: localization of functions, exceptional stalk comparison, and stalk-to-section gluing",
+   "via": [
+    "lem-sfb-regular-point-blowup-functions",
+    "lem-sfb-point-blowdown-factorization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qcqs-functions-local-comparison",
+  "worker": "stage1",
+  "summary": "Repair of the returned side-project delivery: rebased the retained ten-step split onto the current live unsplit item, preserving its statement, statement dependencies and current metadata. Reread every current cited statement and checked all 21 retained verbatim quotations; no replacement dependency or change of proof route was needed. Reused existing Mathlib leaves for flat localization, affine flatness, qcqs permanence, flat base change, tensor localization, principal opens and stalkwise sheaf isomorphisms. The fraction, germ and natural-inverse arguments remain explicit; no new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; the regular-functions input in the first paragraph of the point-blowdown factorization proof.; finer split of lem-sfb-regular-point-blowup-functions, old steps 2, 3 and 11: localization of functions, exceptional stalk comparison, and stalk-to-section gluing; steps 1-6 give localization, steps 7-9 the pinned exceptional-stalk comparison, step 10 the stalk-to-section sheaf criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-e0dad5913",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-e0dad5913 (reviewer sub-agent of L); spot-checked: This head is a re-push after a promotion-only return. It matches the earlier head 1d0d3ba7 except for the split_report and one wording change in step 7 ('inverses of the images of u,s,t', which is correct). Statement and stmt_deps are unchanged, so no target is weakened. There are no new nodes. It is a first split of a statement-only node, so the re-split rule does not apply. The earlier review of 1d0d3ba7 was a FIX, and it is missing here: proof_deps lack lem-weil-pbc-open-preimage-fibre-product and lem-weil-pbc-affine-open-stalk-localization. I re-read all ten steps against the cited statements in this snapshot and re-applied that FIX, keeping the new step-7 wording. The FIX is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-qcqs-functions-local-comparison.json. C1 (steps 1 and 6): f^{-1}V = Y x_T V and f^{-1}D(h) = Y_V x_V Spec R_h were justified only by def-pc-fibre-product; they now cite the Mathlib leaf lem-weil-pbc-open-preimage-fibre-product. C1 (steps 7 and 9): O_{T,y} = R_p via r/s -> r_y s_y^{-1} cited only the definition; they now cite lem-weil-pbc-affine-open-stalk-localization(c). Both leaves are added to proof_deps; the step uses now equal proof_deps, and the longest step is 1027 characters. Mathematics checked: qcqs base change and affine reduction (step 1); localization is flat even with 0 in S (step 2); tensor equals fractions for any R->M (step 3); flat base change on global sections (Stacks coherent.tex 02KH(2), i=0, line 948) with theta(a/s) = pr2#(a/s) (step 4); further localization (step 5); D(h) sections M_h and the basic-open basis (step 6); lambda: M_p -> F_y well-defined and A-linear (step 7); surjectivity, and injectivity via h^n m = 0 (step 8); the coefficient-map identification (step 9); the stalk criterion (sheaves.tex 007T) and the natural ring inverse (step 10). Edge cases checked: 0 in S, S={1}, Y empty, f=id, zero divisors, and Z -> Z[1/2] at (2). No duplicate found; lem-sc-affine-pushforward-stalk-localization is only the affine special case. No SGA is cited, and no tool_uses are needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsFunctionsLocalComparison",
+  "declaration": "AlgebraicGeometry.qcqs_functions_local_comparison",
+  "declarations": [
+   "AlgebraicGeometry.qcqsFunctionsChart",
+   "AlgebraicGeometry.qcqsFunctionsBaseChange",
+   "AlgebraicGeometry.qcqsFunctionsNumerator",
+   "AlgebraicGeometry.qcqsFunctionsCoefficient",
+   "AlgebraicGeometry.qcqsFunctionsLocalization",
+   "AlgebraicGeometry.qcqsFunctionsFraction",
+   "AlgebraicGeometry.qcqsFunctionsPushforward",
+   "AlgebraicGeometry.qcqs_functions_local_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsFunctionsLocalComparison.lean",
+  "statement": "theorem qcqs_functions_local_comparison {Y T : Scheme.{u}} (f : Y ⟶ T) [QuasiCompact f] [QuasiSeparated f] : (∀ (V : T.Opens) (hV : IsAffineOpen V), ∃ θ : ∀ (S : Submonoid Γ(T, V)) (B : CommRingCat.{u}) (φ : Γ(T, V) →+* B), @IsLocalization Γ(T, V) _ S B _ φ.toAlgebra → qcqsFunctionsLocalization f V S ≃+* Γ(qcqsFunctionsBaseChange f V B φ, ⊤), (∀ (S : Submonoid Γ(T, V)) (B : CommRingCat.{u}) (φ : Γ(T, V) →+* B) (hB : @IsLocalization Γ(T, V) _ S B _ φ.toAlgebra) (m : Γ(Y, f ⁻¹ᵁ V)) (s : S), θ S B φ hB (qcqsFunctionsFraction f V S m s) * qcqsFunctionsCoefficient f V B φ (φ s) = qcqsFunctionsNumerator f V B φ m) ∧ (∀ (S : Submonoid Γ(T, V)) (B : CommRingCat.{u}) (φ : Γ(T, V) →+* B) (hB : @IsLocalization Γ(T, V) _ S B _ φ.toAlgebra) (a : Γ(T, V)) (s : S), θ S B φ hB (qcqsFunctionsFraction f V S (f.app V a) s) * qcqsFunctionsCoefficient f V B φ (φ s) = qcqsFunctionsCoefficient f V B φ (φ a)) ∧ (∀ (S S' : Submonoid Γ(T, V)) (B C : CommRingCat.{u}) (φ : Γ(T, V) →+* B) (ψ : Γ(T, V) →+* C) (hB : @IsLocalization Γ(T, V) _ S B _ φ.toAlgebra) (hC : @IsLocalization Γ(T, V) _ S' C _ ψ.toAlgebra) (t : B →+* C) (_ : t.comp φ = ψ) (q : qcqsFunctionsBaseChange f V C ψ ⟶ qcqsFunctionsBaseChange f V B φ) (_ : q ≫ pullback.fst _ _ = pullback.fst _ _) (_ : q ≫ pullback.snd _ _ = pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom t)) (l : qcqsFunctionsLocalization f V S →+* qcqsFunctionsLocalization f V S') (_ : ∀ m : Γ(Y, f ⁻¹ᵁ V), l (qcqsFunctionsFraction f V S m 1) = qcqsFunctionsFraction f V S' m 1) (z : qcqsFunctionsLocalization f V S), θ S' C ψ hC (l z) = q.appTop (θ S B φ hB z)) ∧ (∀ y : V, ∃ e : qcqsFunctionsLocalization f V (hV.primeIdealOf y).asIdeal.primeCompl ≃+* (qcqsFunctionsPushforward f).stalk y, (∀ (m : Γ(Y, f ⁻¹ᵁ V)) (s : (hV.primeIdealOf y).asIdeal.primeCompl), e (qcqsFunctionsFraction f V _ m s) * (qcqsFunctionsPushforward f).germ V y y.property (f.app V s) = (qcqsFunctionsPushforward f).germ V y y.property m) ∧ (∀ (W : T.Opens) (i : W ⟶ V) (hy : (y : T) ∈ W) (m : Γ(Y, f ⁻¹ᵁ V)) (s : (hV.primeIdealOf y).asIdeal.primeCompl) (z : Γ(Y, f ⁻¹ᵁ W)), (qcqsFunctionsPushforward f).map i.op m = (qcqsFunctionsPushforward f).map i.op (f.app V s) * @id ((qcqsFunctionsPushforward f).obj (op W)) z → e.symm ((qcqsFunctionsPushforward f).germ W y hy z) = qcqsFunctionsFraction f V _ m s) ∧ (∀ a : T.presheaf.stalk y, θ (hV.primeIdealOf y).asIdeal.primeCompl (T.presheaf.stalk y) (T.presheaf.germ V y y.property).hom (hV.isLocalization_stalk y) (e.symm (((TopCat.Presheaf.stalkFunctor CommRingCat.{u} y).map f.c) a)) = qcqsFunctionsCoefficient f V (T.presheaf.stalk y) (T.presheaf.germ V y y.property).hom a))) ∧ (IsIso f.c ↔ ∀ (V : T.Opens) (_ : IsAffineOpen V) (y : V), Function.Bijective (qcqsFunctionsCoefficient f V (T.presheaf.stalk y) (T.presheaf.germ V y y.property).hom)) ∧ (IsIso f.c → ∃ σ : ∀ U : T.Opens, Γ(Y, f ⁻¹ᵁ U) ≃+* Γ(T, U), (∀ (U : T.Opens) (a : Γ(T, U)), σ U (f.app U a) = a) ∧ (∀ (U : T.Opens) (b : Γ(Y, f ⁻¹ᵁ U)), f.app U (σ U b) = b) ∧ (∀ (U W : T.Opens) (i : W ⟶ U) (b : Γ(Y, f ⁻¹ᵁ U)), σ W ((qcqsFunctionsPushforward f).map i.op b) = T.presheaf.map i.op (σ U b)))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The ring-localization presentation uses Mathlib Localization at the image of S in M. Canonical comparison equivalences are specified by fraction, coefficient and germ equations, including arbitrary presentations of the localized base ring. The auxiliary declarations construct the chart, pullback and section maps directly; no extra node or dependency repair is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9904244ea",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read node (02KH i=0, 007T), all 9 stmt_dep records, module, report. Only lean field differs from live node; lean.statement verbatim. Hypotheses only qcqs f. θ pinned on every fraction by θ(m/s)·coeff(φs)=pr1♯m with coefficient equation (S⁻¹R-algebra iso). Further-localization square checked true for arbitrary normalized q, l, t (no S≤S' needed). Stalk iso e pinned by e(m/s)·β_y(s)=m_y; inverse germ formula true; θ_A∘e⁻¹∘β_y=coeff_A checked on r/s. IsIso f.c ↔ ∀ affine V ∋ y bijective coeff equivalent to node; σ inverses with both laws and restriction naturality. Edge cases 0∈S, S={1}, empty Y/V/T, id, zero divisors, empty fibre OK; single universe u. Helpers are real constructions with source+blueprint docstrings; only proof is sorry; no duplicate found. Notes: Mathlib ring Localization at image submonoid used for S⁻¹M (canonically LocalizedModule); germ-pullback clause follows from pinned maps; NK second reading is a declared self-audit. No compile (no file changed)."
+ }
+}

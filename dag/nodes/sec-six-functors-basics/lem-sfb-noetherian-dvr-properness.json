@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-noetherian-dvr-properness",
+ "kind": "statement",
+ "title": "Noetherian valuative properness test using discrete valuation rings",
+ "statement": "Let $S$ be a locally Noetherian scheme [pqf-def-locnoeth], and let $f:X\\to S$ be a finite-type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Then $f$ is proper [def-weil-proper-morphism] if and only if for every discrete valuation ring $R$ [def-sc-discrete-valuation-ring], with fraction field $K$, and every pair of morphisms $a:\\operatorname{Spec}K\\to X$ and $b:\\operatorname{Spec}R\\to S$ [def-weil-affine-spectrum] satisfying $f a=b|_{\\operatorname{Spec}K}$, there exists a unique morphism $\\widetilde a:\\operatorname{Spec}R\\to X$ such that $f\\widetilde a=b$ and $\\widetilde a|_{\\operatorname{Spec}K}=a$. The DVR is not assumed of finite type over $S$ or excellent, and the generic point of $\\operatorname{Spec}R$ need not map to a generic point of $S$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equivalence (1) and (3)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "If $f$ is proper, it is separated by definition. A DVR is a valuation ring, as included in the equivalent characterization in [def-sc-discrete-valuation-ring]. Apply [lemma-nagata-proper-separated-valuation-extension] to any of the stated DVR squares to obtain exactly the required unique lift. This proves the forward implication without a Noetherian hypothesis.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-sc-discrete-valuation-ring",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), (1) implies (2) implies (3)."
+   }
+  },
+  {
+   "text": "Assume the unique-DVR-lifting condition. Choose an affine open cover $S=\\bigcup_i S_i$ with Noetherian coordinate rings, as in [pqf-def-locnoeth], and put $X_i=X\\times_S S_i$. Finite type survives this base change by [lem-sfb-finite-type-composition-base-change]. The lifting condition survives too: compose a square over $S_i$ with $S_i\\to S$; its lift to $X$, together with the prescribed map to $S_i$, gives a lift to $X_i$ by the fibre-product universal property. Two such lifts have the same projection to $X$ by the original uniqueness assumption and the same projection to $S_i$, hence coincide. By [lemma-nagata-projective-target-local] it suffices to prove properness of each $X_i\\to S_i$. Relabel one such pair as $X\\to S$. Now $S$ is affine Noetherian and $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; in particular $X$ is quasi-compact.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-fibre-product",
+    "lemma-nagata-projective-target-local",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, first paragraph of (4) implies (1): reduction to an affine Noetherian base; the same argument applies to condition (3)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-noetherian-dvr-closed-diagonal] to the Noetherian base and finite-type $f$. The assumed unique lifts imply its equality condition: two maps with the same base and generic restriction are lifts of the same square. Thus the diagonal is a closed immersion and $f$ is separated [def-weil-proper-morphism].",
+   "uses": [
+    "lem-sfb-noetherian-dvr-closed-diagonal",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0207 (lemma-Noetherian-dvr-valuative-separation), (3) implies (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-chow-noetherian] to the separated finite-type map $f$ over our Noetherian $S$. Obtain $\\pi:X'\\to X$ proper and surjective, and an immersion $i:X'\\to P=\\mathbf P^n_S$ with $qi=f\\pi$, where $q:P\\to S$ is proper by [lemma-nagata-projective-space-base-change-proper]. Proper morphisms are of finite type [def-weil-proper-morphism]. Hence $X'\\to S$ is of finite type by composition [lem-sfb-finite-type-composition-base-change]; so both $X'$ and $P$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. We only need properness and surjectivity of $\\pi$; the birational refinement of Chow is unnecessary for condition (3), which tests every DVR square.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, second paragraph of (4) implies (1), Chow construction; Tag 0200 (coherent-lemma-chow-Noetherian)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dvr-proper-domination-closed-immersion] with $Y=X'$, the Chow maps $\\pi,i$, and the projective structural map $q$. Here $X'$ is quasi-compact, $P$ is Noetherian, $\\pi$ is proper, and $q$ is separated by its properness [def-weil-proper-morphism]. The existence part of the hypothesis on $f$ supplies exactly the required DVR lifts. Hence $i$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-dvr-proper-domination-closed-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equation-solid and final contradiction."
+   }
+  },
+  {
+   "text": "Since $q$ is proper and $i$ is a closed immersion, [lem-weil-pbc-closed-immersion-proper](b) makes $qi=f\\pi$ proper, hence universally closed [def-weil-proper-morphism]. Surjectivity of $\\pi$ and [lem-weil-pbc-image-universally-closed] give that $f$ is universally closed, and its final assertion gives properness since $f$ is separated and locally of finite type. Step 2 returns to the original base.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-image-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), descent from the closed Chow immersion; Tag 03GN (morphisms-lemma-image-proper-is-proper)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-proper-morphism",
+  "lem-sfb-dvr-proper-domination-closed-immersion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-noetherian-dvr-closed-diagonal",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-image-universally-closed",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-target-local",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), (1) iff (3), with the finite-type diagonal argument of Tag 0207 and boundary-point case of Tag 0CM2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism to a locally Noetherian scheme is proper if and only if every discrete valuation ring valuative square has a unique lift",
+   "results": "{\"t\": \"2026-10-22T03:45:18Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism to a locally Noetherian scheme is proper if and only if every discrete valuation ring valuative square has a unique lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.iff\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.existence\"], \"digest\": \"ee5719213fbfa4ac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion quantifies over all valuation rings, not just DVRs. Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29 explicitly lists the Noetherian DVR reduction as future work; it is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.ValuativeCriterion",
+   "results": "{\"t\": \"2026-10-22T03:45:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.ValuativeCriterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.eq_valuativeCriterion\"], \"digest\": \"978b60fcac9bacd3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion quantifies over all valuation rings, not just DVRs. Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29 explicitly lists the Noetherian DVR reduction as future work; it is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "valuativeCriterion|valuative_criterion|discrete.*valuation",
+   "results": "{\"t\": \"2026-10-22T03:45:12Z\", \"tool\": \"grep\", \"query\": \"valuativeCriterion|valuative_criterion|discrete.*valuation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"cfc656dbbc137859\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion quantifies over all valuation rings, not just DVRs. Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29 explicitly lists the Noetherian DVR reduction as future work; it is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian valuative criterion for properness using only discrete valuation rings",
+   "results": "{\"t\": \"2026-10-22T03:45:13Z\", \"tool\": \"leansearch\", \"query\": \"Noetherian valuative criterion for properness using only discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"of_isDiscreteValuationRing\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"IsDiscreteValuationRing.mk\", \"IsDedekindDomainDvr.toIsNoetherian\", \"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\", \"ValuativeRel.isDiscrete_trivialRel\", \"IsDiscreteValuationRing.ofHasUnitMulPowIrreducibleFactorization\"], \"digest\": \"25b6921b6d71320c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion quantifies over all valuation rings, not just DVRs. Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29 explicitly lists the Noetherian DVR reduction as future work; it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Checking properness over a Noetherian base by discrete valuation rings suffices",
+   "results": "{\"t\": \"2026-10-22T03:45:19Z\", \"tool\": \"leanfinder\", \"query\": \"Checking properness over a Noetherian base by discrete valuation rings suffices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\"], \"digest\": \"508b2816b68ca8df\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion quantifies over all valuation rings, not just DVRs. Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29 explicitly lists the Noetherian DVR reduction as future work; it is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.ValuativeCriterion\"",
+   "results": "{\"t\": \"2026-10-22T04:03:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.ValuativeCriterion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\"], \"digest\": \"4b6b6faa83eee80b\"}; IsProper.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:341) assumes the condition for all valuation rings; the Noetherian-DVR reduction is explicitly future work at line 29. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian valuative criterion for properness using only discrete valuation rings",
+   "results": "{\"t\": \"2026-10-22T04:03:26Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian valuative criterion for properness using only discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.ValuativeCriterion.iff\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\"], \"digest\": \"d771ee84275b0ba3\"}; IsProper.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:341) assumes the condition for all valuation rings; the Noetherian-DVR reduction is explicitly future work at line 29. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-noetherian-dvr-properness",
+  "worker": "stage1",
+  "summary": "Repair of the human-requested re-split: unchanged statement, two independent statement-only nodes of comparable argument size. Old steps 3-4 become the DVR closed-diagonal lemma; old steps 6-7 and the closed-immersion inference of step 8 become the proper-domination immersion lemma. The parent retains localization, Chow construction, forward implication and proper-surjective descent in fewer than 3000 characters. Full original argument and extraction map are retained in report.md.",
+  "blueprint": "Realizes the Noetherian DVR properness prerequisite at the recorded alteration/stable-pointed-Isom place of det-thm-sf-ctf-stability-direct-images proof (3), below the unit route. No replacement of a unit step. blueprint_refs ancestor returns None for this imported-created chain, retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-chow-noetherian",
+    "why": "Generic Chow domination over an affine Noetherian base, used as a geometric tool to prove the DVR properness prerequisite; no node in the constructibility-stability unit states Chow domination."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-chow-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-38ee7ebd6",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-38ee7ebd6 (reviewer sub-agent of L); spot-checked: This is the batch-5 re-split note (repair-notes, released 2026-10-22); there is no parallel live re-split, and the live item is still O3's 8-step split. The statement and stmt_deps are unchanged. The proof goes from 5251 characters in 8 steps to 3000 characters in 6 steps. I checked in Python against the live node: new steps 1, 2 and 4 are old steps 1, 2 and 5 verbatim; new step 6 is old step 8 minus its first sentence (the closed-image conversion), which moved to the new node; steps 3 and 5 are assemblies. Every old step appears verbatim in the report, so nothing was shortened or blurred. There are two independent statement-only nodes of comparable size (about 1450 characters of old argument each). (1) lem-sfb-noetherian-dvr-closed-diagonal (Stacks limits.tex Tag 0207 (3)=>(1), finite-type paragraph): finite type over a Noetherian S plus DVR uniqueness gives a closed diagonal. It is true: Delta is a finite-type immersion, lem-sfb-noetherian-image-boundary-dvr gives c, and p1c=p2c by the hypothesis gives c=Delta h1, a contradiction. I tested it on the doubled-origin line and on X empty. (2) lem-sfb-dvr-proper-domination-closed-immersion (Tag 0208 proof, diagram equation-solid): qi=f pi, pi proper, q separated, Y quasi-compact, P Noetherian, plus DVR existence for f gives i closed. I checked the squares f pi u=qiu=qv|K, then w from the properness of pi, then iw=v from the separatedness of q. Birationality is not needed under the all-DVR condition. I tested it on G_m in A^1 (existence fails at the origin) and with X proper. Parent steps 3, 5 and 6 match the hypotheses of the cited nodes (S affine Noetherian after step 2; X' and P Noetherian; q proper; closed-immersion-proper(b); image-universally-closed with its final clause). proof_deps equals the union of uses. tool_use lem-weil-pbc-chow-noetherian is generic Chow, accepted. I found no duplicate in the DAG; lem-sfb-generic-dvr-properness-criterion (Tag 0208 (4)) only runs a similar argument inside its proof (advisory). No SGA. FIX: lem-sfb-noetherian-dvr-closed-diagonal cited def-pc-scheme and def-weil-finite-type-morphism in its statement but had neither in stmt_deps; I added both in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-noetherian-dvr-closed-diagonal.json. Maintainer note: NI's reviewed_lean module (sorry) follows the old 8 steps; stage 3 should now cite the two new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianDvrProperness",
+  "declaration": "AlgebraicGeometry.isProper_iff_unique_dvr_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianDvrProperness.lean",
+  "statement": "theorem isProper_iff_unique_dvr_lift {X S : Scheme.{u}} (f : X ⟶ S) [IsLocallyNoetherian S] [LocallyOfFiniteType f] [QuasiCompact f] : IsProper f ↔ ∀ (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (a : Spec (CommRingCat.of K) ⟶ X) (b : Spec (CommRingCat.of R) ⟶ S), a ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ b → ∃! l : Spec (CommRingCat.of R) ⟶ X, l ≫ f = b ∧ Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ l = a",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e86ce353",
+  "group": "NI",
+  "result": "pass",
+  "note": "isProper_iff_unique_dvr_lift matches Stacks 0208 (1)<=>(3) and the node clause by clause: IsLocallyNoetherian S, LocallyOfFiniteType+QuasiCompact f (the recorded finite-type interface), IsProper f, all DVRs R and all fraction fields K in Type u (Mathlib ValuativeCommSq convention; equivalent, because the DVRs the proof needs are in Type u), commuting square, ∃! lift with both equations, no added separatedness/excellence/generic-image restriction. No Mathlib or project duplicate (Mathlib ValuativeCriterion.lean:29 lists the DVR reduction as future work). Item node changed only in lean; record complete; statement verbatim; public imports are the stmt_dep modules, plain imports are the recorded proof-dep modules (ValuativeCriterion, ChowLemma, ProjectiveSpace); docstrings have source, blueprint id and all 8 proof steps; lines <=95; sorry only; report has Worker report and Second reading by NI. No compile reproduced, no files changed."
+ }
+}

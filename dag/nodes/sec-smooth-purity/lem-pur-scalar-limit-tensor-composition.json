@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-scalar-limit-tensor-composition",
+ "kind": "statement",
+ "title": "Horizontal coherence of normalized finite-free tensor/limit comparison",
+ "statement": "Fix a prime l, finite extensions E,F,L of Q_l and algebra embeddings i:E→F, j:F→L and k:E→L, allowing identity embeddings. Let W be any scheme. Let B_i,B_j,B_k be ordinary scalar extension along the constant integral coefficient maps, T_i,T_j,T_k their pointwise exact derived tower functors, and R_H the total right derived inverse limit on constant integral H-module towers, all from [lem-pur-compact-support-scalar-limit-reduction]. For any natural isomorphism alpha:B_i⋙B_j≅B_k, let a_B be its exact localization through the inverse derived-composition comparison, and let a_T be the analogous localization of its pointwise tower isomorphism. If tau_i:R_E⋙D(B_i)≅T_i⋙R_F denotes the specified scalarLimitTensor, then for every unbounded derived tower K the equation a_B(R_E K) followed by tau_k(K) equals D(B_j)(tau_i(K)) followed by tau_j(T_i K) followed by R_L(a_T(K)). The assertion imposes no constructibility or compact-support hypothesis and uses the canonical composition units.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), canonical derived-limit units; agent auxiliary Step 7 of lem-pur-compact-support-strict-scalar-composition."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "lem-pur-compact-support-scalar-limit-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Use the definition of scalarLimitTensor as inverse exact-right derivation, the right-derived image of the ordinary limit comparison, and exact-left derivation. Apply the universal equations for rightDerivedUnique and rightDerivedNatTrans on homotopy representatives. Cancelling the exact-localization factors proves that this square satisfies unitNormalized for the canonical cochain units, for each of i,j,k.",
+   "uses": [
+    "lem-pur-compact-support-scalar-limit-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the first two normalized squares using normalized_comp from the derived-square normalization library. The inverse derived-composition comparison followed by mapDerivedCategoryNatIso alpha has the required localization factorization: cancel the composition isomorphism and apply mapDerivedCategoryCompIso_hom_app_factors and mapDerivedCategoryNatIso_fac. Apply normalized_naturality to compare this pasted square with the direct square for k.",
+   "uses": [
+    "lem-pur-derived-square-normalization-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Verify the remaining ordinary square by postcomposing with each inverse-limit projection. The defining projection equation of preservesLimitIso turns it into naturality of alpha at that projection. Take the component of the equality of normalized natural transformations at K. This gives the stated equation with the canonical composition units for every unbounded derived tower, including zero towers and identity maps.",
+   "uses": [
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-derived-square-normalization-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-pur-derived-square-normalization-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), canonical total derived inverse limit; direct universal-unit proof of comparison coherence, using the existing derived-square normalization naturality theorem. J5, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limit tensor comparison compatibility with tensor composition and arithmetic restriction",
+   "results": "TensorProduct.AlgebraTensorModule.map_comp, directLimitLeft, directLimitRight and Cartesian monoidal tensor comparisons. No normalized unbounded derived inverse-limit coherence statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical tensor inverse limit comparison commutes with composition of exact functors and restriction to arithmetic subsequences",
+   "results": "No exact Mathlib match. Returned limit/product comparisons and local-cohomology diagram composition; these do not give the normalized unbounded derived tower square.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedPullback_comp",
+   "results": "Search service does not index this adopted source declaration. Local source inspection finds its complete proof in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback; it supplies cofinal composition, but not tensor/limit coherence.",
+   "date": "2026-10-26",
+   "verdict": "use source for arithmetic composition; no exact match for this step"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarLimitTensor_composition|scalarLimitTensor_restriction|scalarLimitTensor|roosComparison_horizontal_coherence|compactSupportRoosFiniteFree in lean/Sheaf and lean/WeilConjectures",
+   "results": "No existing normalized tensor/limit composition or restriction equation. CompactSupportScalarLimitReduction defines scalarLimitTensor and records scalarRoosTensorNormalization. RoosComparisonHorizontalCoherence states the cochain horizontal equation. CompactSupportRoosCofinality records compatibility of the finite-free Roos comparison with the arithmetic map.",
+   "date": "2026-10-26",
+   "verdict": "combine declared cochain results with existing normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "date": "2026-10-26",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; strict-scalar auxiliary Step 7, compatibility of actual tensor/limit maps.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-composition",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarLimitTensorComposition",
+  "file": "lean/Sheaf/Paper/ScalarLimitTensorComposition.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarLimitTensor_composition",
+  "statement": "theorem scalarLimitTensor_composition\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (j : F →ₐ[ℚ_[l]] L) (k : E →ₐ[ℚ_[l]] L) (W : Scheme.{u})\n    (α : pbcExtend (constantMap l E F i W) ⋙ pbcExtend (constantMap l F L j W) ≅\n      pbcExtend (constantMap l E L k W))\n    (K : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) :\n    (letI := (baseTensor_exact l E F i W).1\n     letI := (baseTensor_exact l E F i W).2\n     letI := (baseTensor_exact l F L j W).1\n     letI := (baseTensor_exact l F L j W).2\n     letI := (baseTensor_exact l E L k W).1\n     letI := (baseTensor_exact l E L k W).2\n     ((Functor.mapDerivedCategoryCompIso\n       (pbcExtend (constantMap l E F i W)) (pbcExtend (constantMap l F L j W))).symm ≪≫\n       Functor.mapDerivedCategoryNatIso α).hom.app ((scalarLimit l E W).obj K)) ≫\n        (scalarLimitTensor l E L k W).hom.app K =\n      (baseTensor l F L j W).map ((scalarLimitTensor l E F i W).hom.app K) ≫\n        (scalarLimitTensor l F L j W).hom.app ((T l E F i W).obj K) ≫\n        (scalarLimit l L W).map\n          ((letI := (tensor_exact l E F i W).1\n            letI := (tensor_exact l E F i W).2\n            letI := (tensor_exact l F L j W).1\n            letI := (tensor_exact l F L j W).2\n            letI := (tensor_exact l E L k W).1\n            letI := (tensor_exact l E L k W).2\n            (Functor.mapDerivedCategoryCompIso (tensor l E F i W)\n              (tensor l F L j W)).symm ≪≫\n              Functor.mapDerivedCategoryNatIso\n                (show tensor l E F i W ⋙ tensor l F L j W ≅ tensor l E L k W from\n                  (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso α)).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T065838-L-3263295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261026T182837-L-3588969",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

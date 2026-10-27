@@ -1,0 +1,113 @@
+{
+ "id": "def-trf-etale-power-product-normalization",
+ "kind": "definition",
+ "title": "Canonical chart and product normalizations of etale tensor powers",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $L$ a module sheaf on its small etale site [def-weil-sheaf-of-modules-category]. Use the small affine model and its restriction equivalence [def-sfb-space-small-ringed-model] and the existing tensor powers $P_d=L^{\\otimes d}$ [def-trf-etale-module-evaluation-tensor-powers]. Define the chart identification $rP_d\\simeq(rL)^{\\otimes d}$ as the counit of that equivalence, and $P_1\\simeq L$ as the inverse-equivalence image of the right unitor followed by the inverse equivalence unit. For a homogeneous algebra $A$ on $P_d$ [def-trf-etale-graded-module-algebra], say its products are canonical if its unit is invertible, on every small affine chart the product transported by this counit is the pure-tensor pairing followed by inverse concatenation, and the transported degree-zero unit is the identity on regular functions. These are equalities of actual sheaf sections, including degree zero; no global tensor-generation condition is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL, lemma-tensor-product-pullback and its preceding tensor universal property; spaces-descent.tex Tag 0D3C, lemma-descending-property-ample, the power algebra and the maps psi_d."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-small-ringed-model",
+  "def-trf-etale-module-evaluation-tensor-powers",
+  "def-trf-etale-graded-module-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical ordinary commutative graded algebra on sheaf tensor powers of locally free rank one modules and etale restriction tensor power comparison",
+   "results": "OK 8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Algebra.Etale.baseChange; Algebra.Etale.exists_subalgebra_fg; KaehlerDifferential.tensorKaehlerEquivBase; Algebra.FormallyEtale.instTensorProduct; KaehlerDifferential.isBaseChange_of_formallyEtale.",
+   "date": "2026-10-26",
+   "verdict": "No match: these are algebraic etaleness or differential-module base changes, not canonical power algebras or normalized module-sheaf tensor comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPowNat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-26",
+   "verdict": "No match; tensorPowNat is a source-library construction."
+  },
+  {
+   "tool": "grep",
+   "query": "(tensorPowNat|canonical.*[Pp]ower|[Pp]ower.*canonical)",
+   "results": "OK 15 hits: divided power algebras, formal power series, power bases, ZMod unit powers, TensorAlgebra.ToTensorPower, TensorPower.Symmetric, and ExteriorPower. No module-sheaf canonical power algebra or normalized etale comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; tensor-algebra embeddings are not an ordinary commutative algebra of powers of a line sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.GradedPushforwardEtaleRestriction",
+  "date": "2026-10-26",
+  "group": "W4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical polarized-descent branch, via lem-trf-algebraic-space-ample-local Step 3: tensor powers in the graded section algebra of Stacks 0D3C; Step 6 of lem-trf-graded-pushforward-etale-restriction. Canonical chart and product normalizations of etale tensor powers",
+   "via": [
+    "lem-trf-graded-pushforward-etale-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.EtalePowerProductNormalization",
+  "file": "lean/Sheaf/TraceFormula/EtalePowerProductNormalization.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.gradedPowerChartIso",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.gradedPowerChartIso",
+   "AlgebraicGeometry.AlgebraicSpace.gradedPowerOneIso",
+   "AlgebraicGeometry.AlgebraicSpace.HasCanonicalEtalePowerProducts"
+  ],
+  "statement": "def gradedPowerChartIso (X : AlgebraicSpace S) (L : X.Modules) (n : ℕ) :\n    X.smallModuleRestriction.obj (evaluationLinePower X L n) ≅ evaluationSmallPower X L n",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-26",
+  "note": "Relocated verbatim from the assigned item; names, signatures and construction bodies are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-724b9",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261026T083436-L-2354896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-724b9",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261026T083436-L-2354896",
+  "kind": "interface",
+  "note": "independent cc review: Relocated defs in EtalePowerProductNormalization vs the clone's item module (byte-identical); item node vs the clone (only proof/proof_deps/proof_origin/lean changed); new lemma statements vs their nodes and the EtaleGradedModuleAlgebra/IsLineModule definitions"
+ }
+}

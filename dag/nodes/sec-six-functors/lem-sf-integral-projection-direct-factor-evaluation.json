@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-integral-projection-direct-factor-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the unary proper-image coefficient mate",
+ "statement": "The following fully quantified Lean statement is the unary/finite component in the support-coordinate argument. All operations and normalizations are those of [def-sf-operation-stages], and its explicit coordinate maps are those of [def-sf-integral-projection-factor-evaluation-data] and [def-sf-integral-projection-middle-map].\n\ntheorem integralProjectionDirectFactorEvaluation\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    (c : Compactification f.hom.left) (m : ℕ)\n    (M : sfIntegralConstructibleCategory C.l E (identitySquare f c).Z.obj.left) :\n    (coefficientSequenceDerivedEvaluation C.l E Y.obj.left m).map\n        (ProjectionFactors.directReduction D C E n hn S hl o z f c M) ≫\n      ((o.evaluation c.g).evaluation m).hom.app\n        ((calculus C.l E c.Z).reduction.obj M.obj) ≫\n      (proEtaleConstantDerivedDirectImage c.g\n        (Padic.coefficientExtensionRing C.l E (m + 1))).map\n          (((calculus C.l E c.Z).reductionEvaluation m).hom.app M.obj) =\n    ((calculus C.l E Y.obj.left).reductionEvaluation m).hom.app\n        (((S.higher.integralExchange (identitySquare f c)).stage.properPush.obj M).obj) ≫\n      (FactorEvaluation.direct D C E n hn S f c m M).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "prop-sf-pf-coherence.proof.md, the proper counit transpose;\ndef-sf-operation-stages, pullProjection and the coefficient counit equation."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-integral-projection-factor-evaluation-data",
+  "def-sf-integral-projection-middle-map"
+ ],
+ "proof": [
+  {
+   "text": "Compose the direct-adjunction coefficient comparison for integral reduction with the finite stage's normalized direct-adjunction comparison. Their counit equations compose by naturality of the inverse left comparison. Transport this counit equation from integral.pullDirectAdjunction to the exchange stage using its properPull, properPush and properAdjunction fields.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-integral-projection-factor-evaluation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralProjectionPullEvaluation to the proper morphism and each integral constructible input. Postcompose with finitePullback to cancel its inverse, then move the exchange-stage properPull equality transport through reductionEvaluation by naturality. This identifies evaluation of properPullReduction with the composite normalized finite left comparison.",
+   "uses": [
+    "lem-sf-integral-projection-pull-evaluation",
+    "def-sf-integral-projection-middle-map",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private evaluateTranspose lemma transports any adjunction transpose through an evaluation square satisfying the counit equation; it follows by injectivity of the finite Hom equivalence, counit naturality and the triangle identity. The private mateEvaluation lemma additionally conjugates the source and target coordinates by their specified isomorphisms. Apply these to directReduction, the evaluated properPullReduction equation, and the transported finite counit equation. Naturality of reductionEvaluation identifies the remaining counit coordinates. Expanding the right comparison gives precisely FactorEvaluation.direct.",
+   "uses": [
+    "def-sf-integral-projection-middle-map",
+    "def-sf-integral-projection-factor-evaluation-data",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-projection-factor-evaluation-data",
+  "def-sf-integral-projection-middle-map",
+  "lem-sf-integral-projection-pull-evaluation",
+  "def-sf-operation-stages"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proper counit transpose and normalized coefficient comparison; complete combining proof by W5, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving a composition of adjunction mates and the naturality of an adjunction Hom equivalence",
+   "results": "Eight generic adjunction results, including CategoryTheory.Adjunction.homEquiv_naturality_left and homEquiv_naturality_right_square_iff in Mathlib.CategoryTheory.Adjunction.Basic. None identifies the specified geometric coefficient comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality supports the combining proof; no exact normalized proper/open realization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate of a composite natural transformation is composition of mates",
+   "results": "Generic mateEquiv composition lemmas, no normalized geometric coefficient statement.",
+   "date": "2026-10-27",
+   "verdict": "Use generic adjunction identities in the assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic homEquiv naturality and unit/counit formulas only.",
+   "date": "2026-10-27",
+   "verdict": "No exact geometric result."
+  },
+  {
+   "tool": "grep",
+   "query": "factoredSupport|support.*factor|factor.*support",
+   "results": "No Mathlib geometric match; local library has the finite support adjunct coordinates, but not the separate unary proper/open evaluation equations.",
+   "date": "2026-10-27",
+   "verdict": "This strictly smaller missing factor is stated separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionSupportFactorCoordinates",
+  "date": "2026-10-27",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-projection-support-factor-coordinates",
+   "place": "One separate factor of the proper/open compatibility, before the two factors are pasted.",
+   "via": [
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionDirectFactorEvaluation",
+  "file": "lean/Sheaf/Paper/IntegralProjectionDirectFactorEvaluation.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.integralProjectionDirectFactorEvaluation",
+  "statement": "theorem integralProjectionDirectFactorEvaluation\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    (c : Compactification f.hom.left) (m : ℕ)\n    (M : sfIntegralConstructibleCategory C.l E (identitySquare f c).Z.obj.left) :\n    (coefficientSequenceDerivedEvaluation C.l E Y.obj.left m).map\n        (ProjectionFactors.directReduction D C E n hn S hl o z f c M) ≫\n      ((o.evaluation c.g).evaluation m).hom.app\n        ((calculus C.l E c.Z).reduction.obj M.obj) ≫\n      (proEtaleConstantDerivedDirectImage c.g\n        (Padic.coefficientExtensionRing C.l E (m + 1))).map\n          (((calculus C.l E c.Z).reductionEvaluation m).hom.app M.obj) =\n    ((calculus C.l E Y.obj.left).reductionEvaluation m).hom.app\n        (((S.higher.integralExchange (identitySquare f c)).stage.properPush.obj M).obj) ≫\n      (FactorEvaluation.direct D C E n hn S f c m M).hom",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "summary": "A strictly smaller independent factor, not the parent equality in new coordinates.",
+  "blueprint": "Same unit route and same prescribed operation normalizations."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T050655-L-253002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T094534-L-240471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

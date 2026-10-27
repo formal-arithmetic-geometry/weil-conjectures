@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-support-scalar-data",
+ "kind": "definition",
+ "title": "Open-then-closed module support extension and canonical scalar comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\Lambda,\\Lambda\\prime$ be commutative condensed rings, $\\rho:\\Lambda\\to\\Lambda\\prime$ a ring-object morphism, and $S\\xrightarrow{j}C\\xrightarrow{i}Z$ morphisms of schemes with $j$ an open immersion. Use the internal module categories over the pulled-back rings [sk-def-sfb-module-objects, sk-def-sfb-pulled-back-coefficients]. Define the support-extension functor $F_\\Lambda=j_!^\\Lambda\\mathbin{;}i_*^\\Lambda$ from $\\Lambda_S$-modules to $\\Lambda_Z$-modules, using the open extension by zero [def-sfb-module-open-lower-shriek] and module direct image [def-sfb-module-lower-star]. For a $\\Lambda_S$-module $N$, define the canonical scalar/support arrow $\\operatorname{Ext}_{\\rho_Z}(F_\\Lambda N)\\to F_{\\Lambda\\prime}(\\operatorname{Ext}_{\\rho_S}N)$, with coefficient maps $\\rho_T$ [def-sfb-coefficient-map] and scalar extension [sk-def-sfb-change-of-scalars], as the composite of the closed/direct-image scalar mate $\\operatorname{Ext}_{\\rho_Z}i_*^\\Lambda j_!^\\Lambda N\\to i_*^{\\Lambda\\prime}\\operatorname{Ext}_{\\rho_C}j_!^\\Lambda N$ [def-sfb-push-hom] and $i_*^{\\Lambda\\prime}$ applied to the open scalar isomorphism [def-sfb-open-immersion-shriek-iso]. The construction is defined for arbitrary $i$; when $i$ is closed it is the open-then-closed support comparison. No flatness hypothesis and no claim of invertibility are part of this definition.",
+ "stmt_deps": [
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-push-hom",
+  "def-sfb-open-immersion-shriek-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted supported-lattice step 2: the all-continuous coefficient map, its derived scalar extension, and the canonical open-then-closed support comparison, as specified in the reviewed four-step proof of lem-sfb-continuous-algcl-scalar-extension-constructible."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous normed field inclusion induces condensed ring scalar extension and module support scalar comparison",
+   "results": "[leansearch] OK 8 hit(s): ContinuousLinearMap.continuous_restrictScalars, Subfield.continuousSMul, ContinuousLinearMap.continuousSMul, IntermediateField.botContinuousSMul, Module.RestrictScalars.normedSpaceOrig, instNormedAddCommGroupRestrictScalars, ContinuousLinearMap.isEmbedding_restrictScalars, RestrictScalars.normedSpace",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction; these concern ordinary normed modules rather than the pulled-back condensed coefficients and supported module comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extension coefficient inclusion and open closed support extension of condensed modules",
+   "results": "[leanfinder] OK 8 hit(s): CondensedMod.IsSolid, CondensedMod.LocallyConstant.functor, Condensed.profiniteSolid, CondensedMod, Condensed.free, CondensedMod.LocallyConstant.functorToPresheaves, LightCondMod.LocallyConstant.functor, LightCondensed.free",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction: these are condensed modules over an ordinary ring, not internal modules over the continuous-map ring sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteStageSupportExtension|finiteStageSupportScalarMap|coefficientInclusion|scalarExtension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Direct project searches below locate the existing construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l ContinuousAlgclScalar.(inclusion|coefficientInclusion|scalarExtension)|CondensedRing.finiteStageSupport(Extension|ScalarMap) dag/nodes; rg -n finiteStageSupportExtension|finiteStageSupportScalarMap|coefficientInclusion|scalarExtension lean/WeilConjectures lean/Sheaf/Paper/ContinuousAlgclScalarConstructibility.lean lean/Sheaf/Paper/ContinuousAlgClFiniteStageDevissage.lean",
+   "results": "DAG: only lem-sfb-continuous-algcl-scalar-constructibility and lem-sfb-continuous-algcl-finite-stage-devissage list the relevant declarations; neither is a definition node. Sheaf: ContinuousAlgclScalarConstructibility.lean:75 inclusion, :86 coefficientInclusion, :94 coefficientInclusion_isMonHom, :114 scalarExtension; ContinuousAlgClFiniteStageDevissage.lean:48 finiteStageSupportExtension, :61 finiteStageSupportScalarMap. WeilConjectures: other ordinary scalarExtension names, no these fully qualified constructions.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing Sheaf declarations, no owning definition node. Record existing:true without duplicating any Lean definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-algcl-scalar-extension-constructible",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), extracted supported-lattice step 2: the all-continuous coefficient map, its derived scalar extension, and the canonical open-then-closed support comparison, as specified in the reviewed four-step proof of lem-sfb-continuous-algcl-scalar-extension-constructible.",
+   "via": [
+    "lem-sfb-continuous-algcl-scalar-extension-constructible",
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousAlgClFiniteStageDevissage",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteStageSupportScalarMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteStageSupportExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteStageSupportScalarMap"
+  ],
+  "statement": "def finiteStageSupportScalarMap\n    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']\n    (ρ : Λ ⟶ Λ') [IsMonHom ρ] {S Z T : Scheme.{u}}\n    (j : S ⟶ Z) (hj : IsOpenImmersion j) (i : Z ⟶ T)\n    (N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)) :\n    (Mod.extendScalars (coefficientMap ρ T)).obj\n        ((finiteStageSupportExtension Λ j hj i).obj N) ⟶\n      (finiteStageSupportExtension Λ' j hj i).obj\n        ((Mod.extendScalars (coefficientMap ρ S)).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership record requested by the independent H2 return of 89c9bd0cea93. Owns only these existing plain construction declarations; does not cite or claim the theorem in the same module. The data is the displayed actual continuous inclusion / inverse image / derived extension, respectively actual composite support functor and adjunction-mate scalar arrow. No new Lean declaration or theorem is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-739c958c5",
+  "group": "Q80",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-739c958c5",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 89c9: stmt_deps now cite new existing:true def nodes def-sfb-continuous-algcl-scalar-data (inclusion/coefficientInclusion/+isMonHom/scalarExtension in ContinuousAlgclScalarConstructibility) and def-sfb-support-scalar-data (finiteStageSupportExtension/finiteStageSupportScalarMap in ContinuousAlgClFiniteStageDevissage) instead of theorem nodes; both node statements match the Lean source read in side-live and the recorded signatures are verbatim; their stmt_deps exist and the source path exists; no prior owner. Item node differs from live only in lean and in stmt_deps (+2 def nodes); Lean file is identical to 89c9 except two comments; lean.statement is verbatim. Maths re-checked: ℓ/Ω (NormedAlgebra+IsAlgClosure, not complete)/finite E/Noetherian Z; all-continuous A,B; T_Z K-flat leftDerived; constructibility+finiteTorAmplitude; supported clause covers every open j/closed i with closure, lisse+rank for all V,r incl. 0, IsIso of the canonical lisseSupportDerivedScalarMap (real data, true iso). Edge cases OK; single universe u; only sorry; report sections present. No compile (no file changed)."
+ }
+}

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import Mathlib.Algebra.MonoidAlgebra.MapDomain
-import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+module
 
-import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.Algebra.MonoidAlgebra.MapDomain
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+
+public import Mathlib.LinearAlgebra.FreeModule.PID
 import Sheaf.Paper.GordanRationalCone
 
 /-!
@@ -16,6 +18,8 @@ import Sheaf.Paper.GordanRationalCone
 Source: Illusie--Laszlo--Orgogozo, Exposé VIII, 3.1.17 and 3.2.9, printed pp. 101 and 104
 (blueprint: lem-trf-fine-monoid-finite-saturation).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

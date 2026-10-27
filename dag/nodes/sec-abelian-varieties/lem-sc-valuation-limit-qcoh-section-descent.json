@@ -28,61 +28,44 @@
  ],
  "proof": [
   {
-   "text": "Replace the directed system by the cofinal tail $I_{\\ge i}$. The projections $g_j:X_j\\to X_i$ and $g:X\\to X_i$ remain affine, and the limit construction applies to this tail by [lem-weil-pbc-limit-affine-transition].",
+   "text": "Restrict to the nonempty directed upper tail of i₀. Construct the functor of pushforward structure algebras: on U, a transition is the scheme section map appLE. Obtain its algebra colimit and underlying module diagram from lem-weil-pbc-sheaf-algebras-directed-colimit. The construction uses actual sheafification and colimit objects, not an arbitrary existence witness.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition"
+    "lem-weil-pbc-sheaf-algebras-directed-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01Z0 proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sc-valuation-limit-affine-pushforward-colimit] with $S_0=X_i$ and $\\mathcal F_0=\\mathcal F_i$. Writing $\\mathcal A_j=(g_j)_*\\mathcal O_{X_j}$, $\\mathcal A=\\varinjlim_{j\\ge i}\\mathcal A_j$, $\\mathcal M_j=\\mathcal F_i\\otimes_{\\mathcal O_{X_i}}\\mathcal A_j$ and $\\mathcal M=\\mathcal F_i\\otimes_{\\mathcal O_{X_i}}\\mathcal A$, it identifies $g_*\\mathcal F$ with $\\mathcal M$ and $(g_j)_*\\mathcal F_j$ with $\\mathcal M_j$, and identifies $\\mathcal M$ with the directed colimit of the $\\mathcal M_j$ in the category of $\\mathcal O_{X_i}$-modules.",
+   "text": "Apply lem-sc-valuation-limit-affine-pushforward-colimit to this algebra diagram and its underlying module cocone. This gives the projection-formula isomorphisms at every stage and at the limit, and the colimit cocone after tensoring with F. On pure tensor sections, module linearity and the adjunction-unit equations hr and ht show that these isomorphisms intertwine the specified transitions r and legs t. Use the existing proved public theorem AlgebraicGeometry.tensorResolution_tensor_hom_ext from WeilConjectures.AlgebraicGeometry.QCohTensorResolutionRestrictionTensor to extend these equalities on pure tensors to sheaf tensor morphisms.",
    "uses": [
     "lem-sc-valuation-limit-affine-pushforward-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01Z0 proof, first and second paragraphs"
-   }
+   "elementary": false
   },
   {
-   "text": "The scheme $X_i$ is quasi-compact and quasi-separated, so its quasi-compact opens form a basis and the intersection of two quasi-compact opens is quasi-compact. Apply [lem-weil-pbc-qs-scheme-cohomology-directed-colimit] with $q=0$ and $U=X_i$ to the directed system $(\\mathcal M_j)_{j\\ge i}$ with colimit $\\mathcal M$ (Step 2); since $H^0(X_i,-)=\\Gamma(X_i,-)$, the canonical map $\\varinjlim_{j\\ge i}\\Gamma(X_i,\\mathcal M_j)\\to\\Gamma(X_i,\\mathcal M)$ is bijective (Limits 01Z0 uses Sheaves 009F with Topology 0069 here).",
+   "text": "The affine opens form a compact-open basis on the qcqs base, and intersections of compact opens are compact. Apply lem-sc-topological-abelian-sections-filtered-colimit at the whole open. Forgetting modules to abelian sheaves preserves colimits (the proved source-library instance SheafOfModules.preservesColimitsOfShape_toSheaf), so global module sections preserve the tensor cocone.",
    "uses": [
-    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit"
+    "lem-sc-topological-abelian-sections-filtered-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01Z0 proof, third equality"
-   }
+   "elementary": false
   },
   {
-   "text": "For every $j\\ge i$, the identification of Step 2 gives $\\Gamma(X_i,\\mathcal M_j)=\\Gamma(X_i,(g_j)_*\\mathcal F_j)=\\Gamma(X_j,\\mathcal F_j)$, and likewise $\\Gamma(X_i,\\mathcal M)=\\Gamma(X,\\mathcal F)$. Substituting these identifications into Step 3 yields the canonical bijection $\\varinjlim_{j\\ge i}\\Gamma(X_j,\\mathcal F_j)\\to\\Gamma(X,\\mathcal F)$. The final assertion follows from the zero criterion for a directed colimit of modules [lem-weil-pbc-filtered-colimit-modules-elementwise]: a section at stage $i$ whose image in $\\Gamma(X,\\mathcal F)$ is zero has zero image in the colimit, hence becomes zero in $\\Gamma(X_j,\\mathcal F_j)$ for some $j\\ge i$.",
+   "text": "Identify sections of each pushforward with sections on its source, using preimage_top. The naturality established on pure tensors gives a natural isomorphism from the supplied diagram M to the tensor-section diagram, using e and hM; ht and hq identify the limit leg with q. Transport the section colimit along these isomorphisms. Uniqueness of colimit cocones makes q an isomorphism. Its injectivity sends the vanishing hypothesis to equality with the zero representative in colimit M; the concrete filtered-colimit equality criterion gives a later arrow f with M.map f x = 0.",
    "uses": [
-    "lem-sc-valuation-limit-affine-pushforward-colimit",
     "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01Z0 proof, displayed chain and colimit zero criterion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-sheaf-algebras-directed-colimit",
   "lem-sc-valuation-limit-affine-pushforward-colimit",
-  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lem-sc-topological-abelian-sections-filtered-colimit",
   "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Limits, Lemma 01Z0 (lemma-descend-section), proof"
+  "place": "Lemma 01Z0 (lemma-descend-section), proof, with the degree-zero compact-open preservation theorem (Sheaves 009F(4)) and explicit naturality glue by U4"
  },
  "mathlib_searches": [
   {
@@ -168,5 +151,26 @@
   "note": "directed nonempty Preorder I, D : Iᵒᵖ ⥤ Scheme.{u} with limiting cone s, qcqs stages (CompactSpace/QuasiSeparatedSpace), affine transitions haff, i₀ and quasi-coherent F (Mathlib IsQuasicoherent); F_j, F as tensorPullback along the tied projections g/hg and s.π; transition maps r and limit maps t uniquely pinned by exists_tensorPullbackAdjunction unit equations hr/ht; section system M tied objectwise (e) and on arrows (hM); q tied on every coprojection (hq); IsIso q = bijectivity, eventual-zero clause over every tail stage; universes I : Type u = Scheme.{u} = AddCommGrpCat.{u}; singleton index sanity-checked"
  },
  "lead_note": "L 2026-10-11 14:18 UTC (B-1418): source field corrected (stage-1 correction not applied; the node is 01Z0 only; F1 R-vls); was literature/stacks-project/limits.tex / Limits, Lemma 01ZR (lemma-descend-modules-finite-presentation) and Lemma 01Z0 (lemma-descend-section).",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T191354-L-318816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

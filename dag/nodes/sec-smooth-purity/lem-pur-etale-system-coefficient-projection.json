@@ -1,0 +1,258 @@
+{
+ "id": "lem-pur-etale-system-coefficient-projection",
+ "kind": "statement",
+ "title": "Constant coefficient projection maps for ordinary etale system compact supports",
+ "statement": "Let $k=\\overline{\\mathbf F}_q$ have characteristic $p$ and let $\\ell\\ne p$ be prime [def-weil-finite-field-fiber]. Let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes, with no separatedness assumption on $Y$, and fix a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p_f}Y$ [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. For an inverse sequence $C_\\bullet$ of finite commutative rings annihilated by powers of $\\ell$, write $\\mathscr S_C(W)$ for strict systems of $(C_n)_{W_{\\mathrm{et}}}$-module sheaves, with $C_{n+1}$-linear transitions $M_{n+1}\\to\\operatorname{Res}_{C_{n+1}\\to C_n}M_n$ and compatible componentwise morphisms, and use its ordinary unbounded derived category and evaluation $e_n$ [lem-pur-system-level-left-extension]. Set $F_C=Rp_{f,C,*}j_{!,C}$ and $F_{C_n}=Rp_{f,*,C_n}j_!$, where open extension and ordinary etale direct image act termwise before derivation [lem-coef-semilinear-derived-sections]. \nFor any compatible map $a:C_\\bullet\\to D_\\bullet$ of such ring sequences let $T_a^W=-\\otimes^L_{C_\\bullet}D_\\bullet$ and let $U_a^W$ be exact restriction of scalars. The derived tensor/restriction adjunction is the one with unit $x\\mapsto x\\otimes1$ [lem-pur-sheaf-ring-derived-coefficient-adjunction]. There are canonical restriction identifications $U_a^YF_D\\cong F_CU_a^X$ and canonical natural isomorphisms\n$$q_a:T_a^YF_C\\xrightarrow{\\sim}F_DT_a^X.$$\nThe coefficient-adjunction transpose of $q_a$ is $F_C$ applied to its scalar unit followed by the inverse restriction identification. At level $n$ this is the ordinary constant-coefficient compact-support projection for $C_n\\to D_n$, in the $D_n$-linear derived category. The same assertion holds for a single map of finite rings. No flatness or cohomological bound on the input is required.\n\nThese are actual maps of derived systems, natural on derived morphisms and independent of resolutions. Under canonical balanced tensor associators $\\tau_W:T_b^WT_a^W\\cong T_{ba}^W$, for composable coefficient maps $a,b$ they satisfy\n$$q_{ba}\\circ\\tau_YF_C=F_H\\tau_X\\circ(q_bT_a^X)\\circ T_b^Yq_a,$$\nwhere $H_\\bullet$ is the final ring sequence. An identity ring map gives the identity comparison. These identities also hold in mixed quotient/extension diagrams, before evaluation.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Theorem 2.18(2), Construction 2.26, Constructions 5.14–5.15 and Lemma 5.16; agent extraction of returned item step 2, including its scalar-unit/composition argument. The general projection cocycle is also stated in lem-pur-ringed-coefficient-projection-cocycle."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-system-level-left-extension",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized ordinary system presentation t using the sequence-site existence lemma. Its functors and comparisons are fixed by actual direct image, adjunction and identity-on-sections normalization; no projection isomorphism is assumed.",
+   "uses": [
+    "lem-pur-etale-system-projection-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The definition of q is the inverse scalar-adjunction mate of the inverse restriction comparison. Mathlib unit_mateEquiv_symm gives exactly the scalar transpose equation, without any new proof obligation.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the evaluation-normalization equation. At every level the compact scalar map is invertible: proper_scalarMate_isIso applies to the finite source ring and proper compactification map, and the open scalar comparison is an isomorphism. Every level of q is therefore invertible after cancelling the specified evaluation isomorphisms. The ordinary evaluations jointly reflect isomorphisms since they retain all component section maps; the proof passes through the faithful forgetful functor to presheaves of abelian groups and ConcreteCategory.isIso_iff_bijective. Functor.jointlyReflectIsomorphisms_mapDerivedCategory lifts this criterion to the ordinary unbounded derived categories. Hence q is an isomorphism.",
+   "uses": [
+    "lem-pur-etale-system-projection-evaluation",
+    "lem-fix-etale-proper-coefficient-tensor-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient coherence lemma gives q(a followed by b)=path(a,b) and the unit equation. Rewrite both mixed paths as q of their composites. congr_arg_heq applied to the dependent function sending a coefficient map to q proves the mixed-square assertion from equality of composites.",
+   "uses": [
+    "lem-pur-etale-system-projection-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The single-ring normalization lemma supplies the proper/open restriction isomorphism, the scalar adjunct equation and the coefficient cocycle. The same proper_scalarMate_isIso and open-isomorphism argument proves the single-ring isomorphism clause. These are independent of the finite-field geometry hypotheses and apply to the compactification in the unchanged statement.",
+   "uses": [
+    "lem-pur-etale-single-coefficient-projection",
+    "lem-fix-etale-proper-coefficient-tensor-unit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-fix-etale-proper-coefficient-tensor-unit",
+  "lem-pur-etale-single-coefficient-projection",
+  "lem-pur-etale-system-projection-coherence",
+  "lem-pur-etale-system-projection-evaluation",
+  "lem-pur-etale-system-projection-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings. J3 Lean reduction through normalized presentation, evaluation and coherence; finite-ring invertibility uses the already proved proper scalar mate helper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an ordinary etale compact-support functor Rp_* j_!, derived extension of finite constant coefficients commutes with the functor, coherently on strict inverse systems",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"LightCondensed.lanLightCondSet\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type u → LightCondSet\", \"doc\": \"For each type $X$, this constructs a sheaf in the category of light condensed sets by taking the pointwise left Kan extension of the locally constant function presheaf $\\\\mathrm{LocallyConstant}(-, X)$\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R],\\n  (Condensed.profiniteSolid R).IsRightKanExtension (Condensed.profiniteSolidCounit R)\", \"doc\": \"The profinite solid module functor from profinite spaces to condensed $ R $-modules is defined as the right Kan extension of the embedding functor from finite types to profinite spaces along the free \"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"LightCondensed.isoLocallyConstantOfIsColimit\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n    ((S : LightProfinite) →\\n        CategoryTheory.Limits.IsColimit (F.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))) →\\n      (F ≅\\n        LightCondensed.locallyConst\", \"doc\": \"Given a contravariant functor $ F : \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{Type} $, if for every light profinite space $ S $ the cocone constructed from $ S $'s limit cone is a colimit for the co\"}\n  {\"name\": \"Condensed.isoLocallyConstantOfIsColimit\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(F : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n    ((S : Profinite) → CategoryTheory.Limits.IsColimit (F.mapCocone S.asLimitCone.op)) →\\n      (F ≅\\n        Condensed.locallyConstantPresheaf\\n          (F.obj (FintypeCat.toProfinite.op.ob\", \"doc\": \"Given a functor $ F : \\text{Profinite}^{\\text{op}} \\to \\text{Type} $ such that for every profinite space $ S $, the image of the limit cone $ S.asLimitCone $ under $ F $ satisfies the colimit condition, t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image projection formula for unbounded complexes and change of coefficient rings, including nonflat quotient maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.CC_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n      {f : LocallyConstant ↑C ℤ},\\n      (Profinite.NobelingProof.Linea\", \"doc\": \"In Nobeling's profinite construction, for any locally constant $\\\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\\\text{Linear}_{C\\\\to C'}(f) = 0$ (where $\\\\text{Linear}_{C\\\\to C'}$ denotes the $\\\\mathbb\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n  Profinite.NobelingProof.GoodProducts.SumEval C ho ∘ Sum.inl =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (ModuleCat.ofHom (Profinite.NobelingProof.\", \"doc\": \"The composition of the evaluation map for good products with the left injection into the disjoint union of good and maximal products equals the composition of the module homomorphism induced by the No\"}\n  {\"name\": \"Profinite.NobelingProof.CC_comp_zero\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n  (y : LocallyConstant ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord \", \"doc\": \"The ℤ-linear map from the space of locally constant ℤ-valued functions on $ C $ to the space of locally constant ℤ-valued functions on $ C' $, defined as the difference between the ℤ-linear map induce\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n), AdicCompletion.transitionMap I M hmn ∘ₗ AdicCompletion.eval I M n = AdicCompletion.eval I M m\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the transition map $M/I^nM \\\\to M/I^mM$ with the evaluation map at level $n$ equals the evaluation map at level $m$. In other words, projecting an ele\"}\n  {\"name\": \"ComplexShape.Embedding.HasLift\", \"module\": \"Mathlib/Algebra/Homology/Embedding/HomEquiv\", \"type\": \"{ι : Type u_1} →\\n  {ι' : Type u_2} →\\n    {c : ComplexShape ι} →\\n      {c' : ComplexShape ι'} →\\n        (e : c.Embedding c') →\\n          {C : Type u_3} →\\n            [inst : CategoryTheory.Category.{v_1, u_3} C] →\\n              [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n                {K \", \"doc\": \"Given homological complexes $ K $ and $ L $ in a category $ \\\\mathcal{C} $ with zero morphisms, and an embedding $ e $ between complex shapes, this proposition asserts that a morphism $ \\\\phi: K_{\\\\text{\"}\n  {\"name\": \"HomologicalComplex.extend.leftHomologyData_π\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] (K : HomologicalComplex C c) (e : c.Embedding c') {i j k \", \"doc\": \"Given a homological complex $ K $ in a category $ \\\\mathcal{C} $ with zero morphisms, a shape embedding $ e $, and compatible index relations between original indices $ i,j,k $ and extended indices $ i\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n) (x : AdicCompletion I M), (AdicCompletion.transitionMap I M hmn) (↑x n) = ↑x m\", \"doc\": \"For natural numbers $ m \\\\leq n $ and any element $ x $ in the $ I $-adic completion of an $ R $-module $ M $, applying the transition map from $ M/I^nM $ to $ M/I^mM $ to the $ n $-th component of $ x\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor.rightDerived",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.rightDerived'",
+   "date": "2026-10-22",
+   "verdict": "query rejected (unknown identifier); not evidence of absence; corrected named query recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|changeOfRings|change_of_rings",
+   "results": "[grep] OK 0 hit(s) Searched Mathlib/CategoryTheory/",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived constant coefficient projection comparison for etale compact supports on inverse systems",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"InverseSystem.piLTProj.congr_simp\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_1} [inst : Preorder ι] {X : ι → Type u_5} ⦃i j : ι⦄ (h : i ≤ j) (f f_1 : InverseSystem.piLT X j),\\n  f = f_1 → ∀ (l : ↑(Set.Iio i)), InverseSystem.piLTProj h f l = InverseSystem.piLTProj h f_1 l\", \"doc\": \"For an inverse system indexed by a preorder $\\\\iota$ with a family of types $X : \\\\iota \\\\to \\\\mathrm{Type}$, if two elements $f$ and $f_1$ in the product type $\\\\prod_{l < j} X_l$ are equal, then their pr\"}\n  {\"name\": \"InverseSystem.invLimEquiv.congr_simp\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} {i : ι} [inst : LinearOrder ι]\\n  {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} {equiv equiv_1 : (j : ↑(Set.Iio i)) → F ↑j ≃ InverseSystem.piLT X ↑j}\\n  (e_equiv : equiv = equiv_1) (nat : InverseSystem.IsNatEquiv f equiv),\\n  InverseSystem.invLimEquiv nat = \", \"doc\": \"Given an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, if two families of equivalences $\\\\{F_j \\\\simeq \\\\prod_{l < j} X_l\\\\}$ are equal and sati\"}\n  {\"name\": \"InverseSystem.invLimEquiv_apply_coe\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {F : ι → Type u_7} {X : ι → Type u_8} {i : ι} [inst : LinearOrder ι]\\n  {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} {equiv : (j : ↑(Set.Iio i)) → F ↑j ≃ InverseSystem.piLT X ↑j}\\n  (nat : InverseSystem.IsNatEquiv f equiv) (t : ↑(InverseSystem.limit f i)) (l : ↑(Set.Iio i)) (l_1 : ↑(Set.Iio ↑l\", \"doc\": \"For an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, and a family of equivalences $F_j \\\\simeq \\\\prod_{l < j} X_l$ satisfying the naturality c\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMap\", \"module\": \"Mathlib.Topology.Category.LightProfinite.AsLimit\", \"type\": \"(n : ℕ) : S.proj (n + 1) ≫ S.diagram.map ⟨homOfLE (Nat.le_succ _)⟩ = S.proj n\", \"doc\": \"For any natural number $n$ and light profinite space $S$, the composition of the projection morphism $S_{n+1} \\\\to S$ with the transition map induced by the diagram's morphism $n+1 \\\\to n$ in $\\\\mathbb{N\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMap'\", \"module\": \"Mathlib.Topology.Category.LightProfinite.AsLimit\", \"type\": \"(n : ℕ) : S.transitionMap n ∘ S.proj (n + 1) = S.proj n\", \"doc\": \"For any natural number $n$ and a light profinite space $S$ constructed as an inverse limit of finite discrete spaces, the composition of the transition map $S_{n+1} \\to S_n$ with the projection $S \\to S\"}\n  {\"name\": \"InverseSystem.piEquivLim\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \": ∀ j : Iic i, F j ≃ piLT X j\", \"doc\": \"For a linearly ordered index set $\\\\iota$ and an inverse system $F$ with objects $F_j$ and transition maps satisfying a naturality condition, there is a canonical equivalence between the inverse limit \"}\n  {\"name\": \"InverseSystem.invLimEquiv\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \": limit f i ≃ limit (piLTProj (X := X)) i\", \"doc\": \"Given an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, and a family of equivalences $F_j \\\\simeq \\\\prod_{l < j} X_l$ satisfying the naturality\"}\n  {\"name\": \"InverseSystem.IsNatEquiv\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"{s : Set ι} (equiv : ∀ j : s, F j ≃ piLT X j) : Prop\", \"doc\": \"For a set $ S $ of indices in a preorder $ \\\\iota $, a family of equivalences $ \\\\{F_j \\\\simeq \\\\prod_{l < j} X_l\\\\}_{j \\\\in S} $ satisfies this condition if, whenever $ k \\\\leq j $ in $ S $, the equivalence\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : Type (max (max (max u u₁) (v + 1)) v₁)\", \"doc\": \"A presheaf of modules over `R : Cᵒᵖ ⥤ RingCat` consists of family of\\nobjects `obj X : ModuleCat (R.obj X)` for all `X : Cᵒᵖ` together with\\nfunctorial maps `obj X ⟶ (ModuleCat.restrictScalars (R.map f)\"}\n  {\"name\": \"PresheafOfModules.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : PresheafOfModules R\", \"doc\": \"The obvious free presheaf of modules of rank `1`.\"}\n  {\"name\": \"PresheafOfModules.instCategory\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} : CategoryTheory.Category.{max u₁ v, max (max (max (v + 1) u) u₁) v₁} (PresheafOfModules R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) : Type (max u₁ v)\", \"doc\": \"The type of sections of a presheaf of modules.\"}\n  {\"name\": \"PresheafOfModules.Hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M₁ M₂ : PresheafOfModules R) : Type (max u₁ v)\", \"doc\": \"A morphism of presheaves of modules consists of a family of linear maps which\\nsatisfy the naturality condition.\"}\n  {\"name\": \"PresheafOfModules.instPreadditive\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} : CategoryTheory.Preadditive (PresheafOfModules R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.presheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) : CategoryTheory.Functor Cᵒᵖ Ab\", \"doc\": \"The underlying presheaf of abelian groups of a presheaf of modules.\"}\n  {\"name\": \"PresheafOfModules.toPresheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : CategoryTheory.Functor (PresheafOfModules R) (CategoryTheory.Functor Cᵒᵖ Ab)\", \"doc\": \"The forgetful functor `PresheafOfModules R ⥤ Cᵒᵖ ⥤ Ab`.\"}\n  {\"name\": \"PresheafOfModules.instFaithfulFunctorOppositeAbToPresheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} : (PresheafOfModules.toPresheaf R).Faithful\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (self : PresheafOfModules R) (X : Cᵒᵖ) : ModuleCat ↑(R.obj X)\", \"doc\": \"a family of modules over `R.obj X` for all `X`\"}\n  {\"name\": \"PresheafOfModules.instAddCommGroupHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : AddCommGroup (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instAddHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Add (M₁ ⟶ M₂)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module declarations or unrelated hits; none states the specified etale derived-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(derived|adjoint)|strict.*coefficient|exceptional.*adjoint",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"310\", \"text\": \"If `h` is a positive strict period of `f`, then the `q`-expansion coefficient can be expressed\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"line\": \"238\", \"text\": \"/-- Simultaneously restrict both the domains and scalars of a perfect pairing with coefficients in a\"}\n  {\"file\": \"Mathlib/Topology/ContinuousMap/Polynomial.lean\", \"line\": \"52\", \"text\": \"with domain restricted to some subset of the semiring of coefficients.\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/Order.lean\", \"line\": \"251\", \"text\": \"/-- If `n` is strictly smaller than the order of `ψ`, then the `n`th coefficient of its product\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module declarations or unrelated hits; none states the specified etale derived-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|coefficient.*projection|projection.*coefficient",
+   "results": "[]; ; 0 hits; see searches.jsonl digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary module/presheaf scalar extension, Ext, perfectoid rings, or algebraic etaleness; none states this unbounded etale strict-system coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of coefficient rings for compactly supported etale cohomology of inverse systems",
+   "results": "['Algebra.Etale.baseChange', 'RingHom.Etale', 'RingHom.Etale.respectsIso', 'RingHom.Etale.isStableUnderBaseChange', 'KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply', 'RingHom.Etale.toAlgebra', 'Ring.DirectLimit.congr_symm_apply_of', 'KaehlerDifferential.isBaseChange_of_formallyEtale']; ; 8 hits; see searches.jsonl digest 85865aeee8227ac0",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary module/presheaf scalar extension, Ext, perfectoid rings, or algebraic etaleness; none states this unbounded etale strict-system coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\"",
+   "results": "['PresheafOfModules', 'PresheafOfModules.unit', 'PresheafOfModules.instCategory', 'PresheafOfModules.sections', 'PresheafOfModules.Hom', 'PresheafOfModules.instPreadditive', 'PresheafOfModules.presheaf', 'PresheafOfModules.toPresheaf']; ; 12 hits; see searches.jsonl digest 469f45eef2400797",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary module/presheaf scalar extension, Ext, perfectoid rings, or algebraic etaleness; none states this unbounded etale strict-system coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of finite constant coefficient rings commutes with unbounded etale compact support on strict inverse systems, with scalar unit and composition coherence",
+   "results": "['BDeRhamPlus', 'BDeRham', 'Algebra.FormallyEtale.instForallOfFinite', 'IsAdicComplete.StrictMono.factorPow_comp_extend', 'instCommRingBDeRhamPlus', \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq'\", 'IsAdicComplete.StrictMono.extend_eq', 'IsAdicComplete.StrictMono.of_comp_lift']; ; 8 hits; see searches.jsonl digest 68a910e2635353c8",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary module/presheaf scalar extension, Ext, perfectoid rings, or algebraic etaleness; none states this unbounded etale strict-system coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived proper direct image and extension by zero commute with nonflat scalar extension; comparisons are natural and transitive",
+   "results": "['CategoryTheory.Functor.mapExactFunctor_smul', \"ModuleCat.extendScalars_assoc'\", 'CategoryTheory.Abelian.Ext.mapExactFunctor_hom', 'ModuleCat.extendScalars_assoc_assoc', 'ModuleCat.extendScalars_assoc', 'ModuleCat.extendScalars_id_comp_assoc', 'CategoryTheory.Functor.mapExtLinearMap_apply', 'Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit']; ; 8 hits; see searches.jsonl digest bf5e73cad48e185c",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern ordinary module/presheaf scalar extension, Ext, perfectoid rings, or algebraic etaleness; none states this unbounded etale strict-system coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-coefficient-system-adjoint",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph of def-weil-exceptional-inverse-image: compatible finite-level functors before derived inverse limits; coefficient projection and scalar-unit/composition normalization for the ordinary etale system compact-support functor.",
+   "via": [
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-system-coefficient-projection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the coefficient comparisons on whole ringed sequence topoi by scalar adjunction, identified their proper/open projection words and proved levelwise invertibility without boundedness or flatness. Proved coefficient composition and mixed-square coherence before evaluation. Reused existing generic lemmas; no new nodes. Avoided the bounded-below-only etale scalar-mate lemma.",
+  "blueprint": "Realizes the compatible finite-level functors in the adic-stage paragraph of def-weil-exceptional-inverse-image, before inverse limits, via the ordinary etale compact-support constructions of Zheng 5.14–5.16.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic ordinary ringed sequence-topos calculus, evaluation and adjunction normalization; needed to construct maps before evaluation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic unbounded composition comparison for the two coefficient/direct-image factorizations."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Generic counit-defined coefficient projection and its composition law, including sequence topoi; no geometric route is replaced."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "General categorical adjunction-transpose definition."
+   },
+   {
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Generic unbounded etale open scalar comparison and its canonical normalization; used only for the open factor."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "General balanced scalar associator and composite scalar-unit identity."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-restriction-counit",
+    "why": "Generic counit equation for the K-injective restriction/direct-image comparison over a constant ring; identifies the D_n-geometric transpose with the C_n one at each level (reviewer repair)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-89186d583",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-89186d583 (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged against base dagsnap b83d723f, 8 steps, no new nodes), every cited statement, Stacks 0GL6 (remark-Rf-lower-shriek-change-of-rings), 0D6E (whose proof identifies R(gf)_* with Rg_*Rf_* by uniqueness of adjoints), Zheng Lemma 5.13, Constructions 5.14–5.15 and Lemma 5.16, and the blueprint def-weil-exceptional-inverse-image finite-level paragraph. The item is still unsplit live, there is no re-split note, there is no cycle, proof_deps equals the union of uses, and no SGA is cited. The coefficient category (strict C_•-systems, ordinary unbounded D) and the counit-defined projection map match the source. The level-n map D_n⊗^L Rp_*j_!M→Rp_*j_!(D_n⊗^L M) is exactly 0GL6/Zheng 5.13, holds unbounded, and lem-pur-etale-support-projection-shift-unit states it. I checked q_a = P_D(o_a)∘χ_aJ_C by transposes in step 4 and expanded the cocycle in step 7 (χ naturality, system cocycle lemma, open associativity via composite units). Fault fixed (C1/C4/E5): step 5 passed from the D_n-geometric adjunct χ to the C_n-geometric projection word ('after geometric transposition … therefore ε⊗1') with no cited statement for U(ε_D)∘τ = ε_C∘p^{-1}(κ). It now cites lem-pur-ringed-coefficient-restriction-counit (A=C_n constant ring, R=D_n constant algebra, κ = level-n d^p) and writes the equation. Step 6 cites the same lemma for the single-map case. proof_deps and split_report.tool_uses are updated, and the statement is untouched. Advisory: the system-level counit compatibility of d^p in step 2 rests on 0D6E's uniqueness-of-adjoints and the mate-word clause of lem-coef-semilinear-derived-sections. Tool uses accepted: generic semilinear calculus, pushforward composition, the cocycle lemma, the mate definition, the étale open tensor, the balanced associator, plus the added restriction-counit lemma.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSystemCoefficientProjection",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleSystemCoefficientProjection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SystemProjection.etaleSystemCoefficientProjection"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleSystemCoefficientProjection.lean",
+  "statement": "theorem etaleSystemCoefficientProjection (k : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) (hl : l.Prime) (hlp : l ≠ k.p) (X Y : Over (Spec (CommRingCat.of k.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (c : Compactification f.left) : ∃ t : Theory c l, (∀ (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings), IsIso (t.q a)) ∧ (∀ (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (M : Derived X.left B.rings), (t.scalarY a).adjunction.homEquiv _ _ ((t.q a).app M) = (t.support B).F.map ((t.scalarX a).adjunction.unit.app M) ≫ (t.restriction a).iso.inv.app ((t.scalarX a).model.T.obj M)) ∧ (∀ (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ) (M : Derived X.left B.rings), (scalarExtension (a.app (op n)).hom Y.left).map ((t.supportEvaluation B n).iso.inv.app M) ≫ (t.scalarEvaluationY a n).iso.inv.app ((t.support B).F.obj M) ≫ (t.evaluationY C n).E.map ((t.q a).app M) ≫ (t.supportEvaluation C n).iso.hom.app ((t.scalarX a).model.T.obj M) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (C.rings.obj (op n))) c).map ((t.scalarEvaluationX a n).iso.hom.app M) = (compactScalarMap (a.app (op n)).hom c).app ((t.evaluationX B n).E.obj M)) ∧ (∀ (B C D : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (b : C.rings ⟶ D.rings), t.q (a ≫ b) = t.path a b) ∧ (∀ (B : Coefficients.{u} l) (M : Derived X.left B.rings), (t.q (𝟙 B.rings)).app M ≫ (t.support B).F.map ((unit X.left B.rings (t.scalarX (𝟙 B.rings))).hom.app M) = (unit Y.left B.rings (t.scalarY (𝟙 B.rings))).hom.app ((t.support B).F.obj M)) ∧ (∀ (B C D H : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (b : C.rings ⟶ H.rings) (d : B.rings ⟶ D.rings) (e : D.rings ⟶ H.rings), a ≫ b = d ≫ e → HEq (t.path a b) (t.path d e)) ∧ (∀ (A B : CommRingCat.{u + 1}) (_hA : Finite A) (_hB : Finite B) (_htA : ∃ m : ℕ, (l ^ m : A) = 0) (_htB : ∃ m : ℕ, (l ^ m : B) = 0) (a : A ⟶ B), IsIso (compactScalarMap a.hom c) ∧ ∃ d : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c ⋙ Sheaf.derivedRestrictScalars Y.left.smallEtaleTopology a.hom ≅ Sheaf.derivedRestrictScalars X.left.smallEtaleTopology a.hom ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c, d.hom = singleRestriction a c ∧ ∀ M : DerivedCategoryModule A X.left, (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.left.smallEtaleTopology a.hom)).homEquiv _ _ ((compactScalarMap a.hom c).app M) = (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map ((Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.left.smallEtaleTopology a.hom)).unit.app M) ≫ d.inv.app ((scalarExtension a.hom X.left).obj M)) ∧ (∀ (A B D : CommRingCat.{u + 1}) (_hA : Finite A) (_hB : Finite B) (_hD : Finite D) (_htA : ∃ m : ℕ, (l ^ m : A) = 0) (_htB : ∃ m : ℕ, (l ^ m : B) = 0) (_htD : ∃ m : ℕ, (l ^ m : D) = 0) (a : A ⟶ B) (b : B ⟶ D), compactScalarMap (a ≫ b).hom c = singlePath a b c)",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea3ec7ddb",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Item statement unchanged vs side-live; the only added stmt_dep is the new def node def-pur-etale-system-projection-data. Clause table matches the node: FiniteFieldDatum (k.k closure), l prime and l≠p, finite type + separated f with nothing on Y, Compactification, Coefficients (finite, level-wise l-power torsion, zero ring ok), Systems/DS unbounded, F = ext.mapDerivedCategory ⋙ R push, SystemScalarModel unit 1⊗x; conjuncts: IsIso q, transpose F(η)≫d⁻¹, level n = compactScalarMap(a_n) via pinned evaluation isos (types checked), cocycle q(a≫b)=path (whisker order checked), identity via systemScalarModelDerivedUnit, square HEq, single-ring IsIso/restriction/transpose/composition. ∃ t : Theory is not hollow: structural map fixed on constants, inverse/extension fixed as adjoints, every comparison fixed by identity-on-sections HEq (same Over.pullback carriers as Etale.lowerStar) or by mates/termwise localization; no field assumes invertibility or a cocycle. Not a duplicate of SemilinearProperOpen (pro-étale) or StrictEtale* (O/l^n, owned by a citer). lean.statement verbatim for both nodes; declaration set exact; proof_deps = union of uses; one sorry; docstrings complete. No compile (no change; worker reports 22.7 s and 4.2 s). Advisory: new def node cites theorem nodes for plain compactScalarMap (no def node) and scalar coherence (owned by def-weil-pbc-system-scalar-coherence; def-weil-pbc-system-scalar-model not cited); conjunct 2 is definitional and conjunct 6 follows from conjunct 4; single-ring identity case not stated."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T033908-L-157017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

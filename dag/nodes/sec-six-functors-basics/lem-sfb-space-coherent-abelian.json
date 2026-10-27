@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-space-coherent-abelian",
+ "kind": "statement",
+ "title": "Kernels and cokernels of coherent modules on locally Noetherian algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], locally Noetherian on etale scheme charts [pqf-def-locnoeth]. Modules and quasi-coherence are on the small etale ringed site [def-trf-space-quasi-coherent-module]. A module is coherent when it is quasi-coherent and its pullback to every etale scheme chart is coherent [pqf-def-coherent]. The kernel and cokernel, in module sheaves, of any morphism of coherent $\\mathcal O_X$-modules are coherent. The zero module, every finite direct sum of coherent modules, and every extension of coherent modules are coherent.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UC, lemma-coherent-abelian-Noetherian, statement and proof; finite direct sums are split extensions and the zero module is coherent by Tag 07UB, lemma-coherent-Noetherian."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "First compare the two formulations of coherence. On a locally Noetherian scheme chart $T$, [pqf-lem-coherent-ft-locnoeth] says that a scheme module is coherent exactly when it is quasi-coherent of finite type. By [lem-weil-pbc-quasi-coherent-finite-type-affine], finite type is equivalent to finite generation of sections on affine opens; [lem-weil-pbc-affine-tilde-gamma-adjunction](3) identifies each such quasi-coherent restriction with the tilde sheaf of its section module. Under [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], a scheme quasi-coherent module corresponds to its tensor-sections sheaf: on an affine etale map $\\operatorname{Spec}B\\to\\operatorname{Spec}R$, the sheaf associated to $N$ has value $B\\otimes_RN$, by [lem-weil-pbc-tilde-pullback-base-change] and [lem-weil-pbc-spec-module-tilde-sections] (the latter at $D(1)$). Thus the affine-chart predicate used in [lem-sfb-space-coherent-kernel-cokernel-extension] is precisely the chartwise coherence predicate in this item. Conversely these affine descriptions give quasi-coherent Zariski modules by [pqf-def-coherent], coherent by the same finite-type criteria, and also imply site quasi-coherence: locally on every chart they are associated-module sheaves, hence have the free presentations of [def-trf-space-quasi-coherent-module]; the same presentations on these covering slice sites give quasi-coherence on $X$. This comparison concerns module sheaves themselves, not merely their groups of global sections.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-coherent-kernel-cokernel-extension",
+    "def-trf-space-quasi-coherent-module",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB, lemma-coherent-Noetherian, together with coherent.tex Tag 01XZ, properties.tex Tag 01PB, and descent.tex Tag 03DX(2)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-coherent-kernel-cokernel-extension] with $Z=X$. Its base is an arbitrary scheme $S$, its local Noetherian condition is the same condition on etale scheme charts, and its kernels, cokernels and short exact sequences are in the same small-etale category of $\\mathcal O_X$-module sheaves. With the predicate identified in step 1, its zero-module assertion gives the zero clause; its assertion for every morphism gives both the kernel and the cokernel clauses; and its assertion for $0\\to F\\to E\\to G\\to0$ gives the extension clause. No quasi-coherence assumption on $E$ is added.",
+   "uses": [
+    "lem-sfb-space-coherent-kernel-cokernel-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UC, lemma-coherent-abelian-Noetherian, reused through the existing DAG theorem, with Tag 07UB for zero."
+   }
+  },
+  {
+   "text": "For coherent $F,G$, form the finite direct sum sheaf $F\\oplus G$ sectionwise. The maps $a\\mapsto(a,0)$ and $(a,b)\\mapsto b$ give $0\\to F\\to F\\oplus G\\to G\\to0$: the kernel of the projection is exactly the pairs $(a,0)$, and $b\\mapsto(0,b)$ is a section of the projection. Hence the extension assertion of [lem-sfb-space-coherent-kernel-cokernel-extension] makes $F\\oplus G$ coherent. Induction on the number of summands, with the zero module as the empty sum, proves the finite-sum clause.",
+   "uses": [
+    "lem-sfb-space-coherent-kernel-cokernel-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UC, extension assertion applied to the explicitly split sequence; finite induction, with zero from Tag 07UB."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-space-coherent-kernel-cokernel-extension",
+  "def-trf-space-quasi-coherent-module",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tags 07UB and 07UC; reuse the existing affine-form closure theorem and assemble finite sums by split extensions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent modules on a locally Noetherian algebraic space form an abelian category closed under finite direct sums kernels images and cokernels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"instAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Abelian (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules forms an abelian category. This follows from the fact that the category of sheaves on the site of light profinite spaces (equipped wit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"FGModuleCat.instAbelian\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Abelian\", \"type\": \"{k : Type u} → [inst : Ring k] → [IsNoetherianRing k] → CategoryTheory.Abelian (FGModuleCat k)\", \"doc\": \"For any Noetherian ring $ k $, the category of finitely generated left $ k $-modules forms an abelian category. This means it has all finite limits and colimits, kernels and cokernels for every morphi\"}\n  {\"name\": \"instIsGrothendieckAbelianModuleCat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/AB\", \"type\": \"∀ (R : Type u) [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u, u + 1} (ModuleCat R)\", \"doc\": \"For any ring $ R $, the category of left $ R $-modules is a Grothendieck abelian category. This means it satisfies the additional conditions required for a Grothendieck abelian category beyond being a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all hits; abelian categories of all module sheaves or finitely generated affine modules do not state closure of coherent modules on an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"kernel\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all hits; abelian categories of all module sheaves or finitely generated affine modules do not state closure of coherent modules on an algebraic space"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*abelian|abelian.*coherent|coherent.*cokernel|AlgebraicSpace",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"249\", \"text\": \"/-- A sheaf of modules is quasi-coherent if it is locally the cokernel of a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all hits; abelian categories of all module sheaves or finitely generated affine modules do not state closure of coherent modules on an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernels and cokernels and extensions of coherent sheaves on locally Noetherian algebraic spaces are coherent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) : IdealSheafData Y\", \"doc\": \"For a morphism of schemes $f : X \\\\to Y$, the kernel of $f$ is the ideal sheaf data on $Y$ constructed from the kernels of the ring homomorphisms on sections over affine open sets. Specifically, for ea\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coequalizer\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": LocallyRingedSpace\", \"doc\": \"Given two morphisms $ f, g : X \\to Y $ in the category of locally ringed spaces, their coequalizer exists and is constructed as the coequalizer in the category of sheafed spaces over commutative rings,\"}\n  {\"name\": \"CategoryTheory.Abelian.epiIsCokernelOfKernel\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \"[Epi f] (s : Fork f 0) (h : IsLimit s) : IsColimit (CokernelCofork.ofπ f (KernelFork.condition s))\", \"doc\": \"In an abelian category, for any epimorphism $ f : X \\to Y $, if $ s $ is a kernel fork of $ f $ (i.e., a limit cone over $ f $ and the zero morphism), then the cokernel cofork constructed from $ f $ an\"}\n  {\"name\": \"ModuleCat.cokernelIsColimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Kernels\", \"type\": \": IsColimit (cokernelCocone f)\", \"doc\": \"For a ring $ R $ and a module homomorphism $ f : M → N $, the cokernel of $ f $, defined as the quotient module $ N / \\\\text{im}(f) $, satisfies the universal property of a colimit in the category of l\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizers\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": HasCoequalizers LocallyRingedSpace\", \"doc\": \"The category of locally ringed spaces admits coequalizers for all pairs of parallel morphisms.\"}\n  {\"name\": \"CategoryTheory.Abelian.monoIsKernelOfCokernel\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \"[Mono f] (s : Cofork f 0) (h : IsColimit s) : IsLimit (KernelFork.ofι f (CokernelCofork.condition s))\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, for any monomorphism $f : X \\\\to Y$, the cokernel of the parallel pair $(f, 0)$ forms a colimit cofork. Constructing the kernel fork from this cokernel satisfies t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all hits; abelian categories of all module sheaves or finitely generated affine modules do not state closure of coherent modules on an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact abelian subcategory of coherent sheaves on an etale ringed algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"instAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Abelian (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules forms an abelian category. This follows from the fact that the category of sheaves on the site of light profinite spaces (equipped wit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"Condensed.instAB4StarCondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4Star (CondensedMod R)\", \"doc\": \"The category of condensed modules over a ring $ R $ satisfies the AB4* axiom, meaning it has all products and the product of any family of epimorphisms is an epimorphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all hits; abelian categories of all module sheaves or finitely generated affine modules do not state closure of coherent modules on an algebraic space"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*abelian|abelian.*coherent|coherent.*cokernel|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T12:00:34Z\", \"tool\": \"grep\", \"query\": \"coherent.*abelian|abelian.*coherent|coherent.*cokernel|AlgebraicSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"8380e50801ae7abd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ambient module-sheaf abelianness, condensed modules, finite direct sums of finite modules, or definitions of quasi-coherence; none proves coherent closure on a locally Noetherian algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"kernel\"",
+   "results": "{\"t\": \"2026-10-23T12:00:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCoherent\\\", \\\"kernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ambient module-sheaf abelianness, condensed modules, finite direct sums of finite modules, or definitions of quasi-coherence; none proves coherent closure on a locally Noetherian algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite direct sums kernels cokernels and extensions of coherent sheaves on algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T12:00:34Z\", \"tool\": \"leansearch\", \"query\": \"Finite direct sums kernels cokernels and extensions of coherent sheaves on algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.instDirectSum\", \"DirectSum.ker_map\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"DirectSum.ker_lmap\", \"AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"DirectSum.mker_map\"], \"digest\": \"36ad213579e9128c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ambient module-sheaf abelianness, condensed modules, finite direct sums of finite modules, or definitions of quasi-coherence; none proves coherent closure on a locally Noetherian algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels cokernels and extensions of coherent modules on a locally Noetherian algebraic space are coherent",
+   "results": "{\"t\": \"2026-10-23T12:00:43Z\", \"tool\": \"leanfinder\", \"query\": \"Kernels cokernels and extensions of coherent modules on a locally Noetherian algebraic space are coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"instAbelianLightCondMod\", \"Condensed.instAB4CondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"Condensed.instAB5CondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"instAbelianCondensedMod\", \"instIsGrothendieckAbelianModuleCat\"], \"digest\": \"23b40ed2e6b5e954\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ambient module-sheaf abelianness, condensed modules, finite direct sums of finite modules, or definitions of quasi-coherence; none proves coherent closure on a locally Noetherian algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent module sheaves form an exact abelian subcategory of modules on the small etale site of a Noetherian algebraic space",
+   "results": "{\"t\": \"2026-10-23T12:00:44Z\", \"tool\": \"leanfinder\", \"query\": \"The coherent module sheaves form an exact abelian subcategory of modules on the small etale site of a Noetherian algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"instAbelianCondensedMod\", \"instAbelianLightCondMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.instAB4CondensedMod\", \"Condensed.instAB5CondensedMod\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"Condensed.instAB4StarCondensedMod\"], \"digest\": \"1f03e76d4b3f3378\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ambient module-sheaf abelianness, condensed modules, finite direct sums of finite modules, or definitions of quasi-coherence; none proves coherent closure on a locally Noetherian algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-devissage",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, last paragraph: coherence of finite sums and the comparison cokernel, from Tag 07UC.",
+   "via": [
+    "lem-sfb-space-coherent-devissage",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-abelian",
+  "worker": "stage1",
+  "group": "Q21",
+  "summary": "Reused the existing space coherent kernel/cokernel/extension theorem instead of creating a duplicate. Compared its affine-chart predicate with chartwise scheme coherence using the existing Zariski/etale comparison and finite-type criteria. Derived finite sums by explicit split extensions. Statement unchanged; no new nodes.",
+  "blueprint": "The inherited from.place locates this supporting input in det-thm-sf-ctf-stability-direct-images proof (3), through coherent devissage Tag 07UT: coherence of finite sums and the comparison cokernel. The current latest proof (3) still concerns direct-image stability. Steps 1-2 identify and reuse coherent closure; step 3 assembles finite sums. blueprint_refs ancestor returns None for the inherited chain, retained rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "The generic scheme Zariski/small-etale quasi-coherent comparison identifies the affine-chart predicate of the reused closure theorem; this unit has no such comparison theorem."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "The generic locally Noetherian scheme coherent/finite-type criterion identifies the two chartwise predicates; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "The generic finite-type affine criterion converts scheme coherence to finite affine modules in the reused theorem; this unit has no competing criterion."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "The generic tilde-section calculation at D(1) identifies affine chart sections with their module; no replacement in this unit. The tensor pullback comparison is already Lean-closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-fbbfc79a6",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-fbbfc79a6 (reviewer sub-agent of L); spot-checked: Read Stacks 07UB and 07UC (spaces-cohomology.tex l.1877-1925); the item states them faithfully and the statement is unchanged. The delivery has no new nodes. Step 1 checks that the item's coherence (quasi-coherent on the site plus coherent on every chart) matches the predicate of the existing unsplit node lem-sfb-space-coherent-kernel-cokernel-extension (07UC, same unit, empty proof_deps, no cycle), in both directions. It uses 01XZ, 01PB(a,c), the tilde counit (3), the 03DX equivalence (its inverse is restriction, its forward functor is the right-exact tensor pullback) and 01I9 with D(1) sections to get B⊗N. Noetherian R comes from the Noetherian affine cover of each locally Noetherian chart. Step 2 takes the zero, kernel/cokernel and extension clauses from that node exactly. Step 3 gets finite sums from split extensions by induction, with the empty sum covered by the zero clause; it is elementary. Tested X empty, Spec k, zero and identity maps, and k[ε]. Reusing the existing 07UC node follows C5, not D1. Batch-5: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the general Zariski/etale quasi-coherent comparison (03DX). Its 956-node closure has no trace, Poincaré or assumption node, so it is outside both assumptions and accepted. The four tool_uses were written by the worker (C8) and are accepted as generic. Advisory: blueprint.from.node null and created=Q48 come from the base. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoherentAbelian",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherent_kernel_cokernel_zero_finite_sum_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoherentAbelian.lean",
+  "statement": "theorem coherent_kernel_cokernel_zero_finite_sum_extension {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) : (∀ (F G : X.Modules) (f : F ⟶ G), F.IsFinitePresentation → G.IsFinitePresentation → (∀ k : KernelFork f, IsLimit k → k.pt.IsFinitePresentation) ∧ (∀ c : CokernelCofork f, IsColimit c → c.pt.IsFinitePresentation)) ∧ SheafOfModules.IsFinitePresentation (⊤_ X.Modules) ∧ (∀ (I : Type v) [Finite I] (F : I → X.Modules), (∀ i : I, (F i).IsFinitePresentation) → ∀ b : Bicone F, b.IsBilimit → b.pt.IsFinitePresentation) ∧ (∀ c : ShortComplex X.Modules, c.ShortExact → c.X₁.IsFinitePresentation → c.X₃.IsFinitePresentation → c.X₂.IsFinitePresentation)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Coherence is the existing Mathlib IsFinitePresentation predicate, equivalent to site quasi-coherence and coherent scheme-chart pullbacks by Stacks 07UB, on the locally Noetherian spaces in this statement. Kernels, cokernels and finite sums are quantified by their universal properties in all module sheaves. The terminal module is the zero module. No extra global sheafification instance or arbitrary replacement category is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6e1d4e2c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps (unchanged vs side-live), Stacks 07UB/07UC (spaces-cohomology l.1855-1927), Mathlib Quasicoherent.lean l.195-290, delivered module and report. Clause match: S scheme, X : AlgebraicSpace S, hln over every EtaleSite object = locally Noetherian charts; coherence = Mathlib IsFinitePresentation, equivalent to QC + coherent chart pullbacks under hln by 07UB (3)<=>(4), cover index in site universe, same encoding as landed lem-sfb-space-coherent-filtered-union (PASS); kernel/cokernel via all limiting KernelFork/colimiting CokernelCofork in X.Modules; zero = ⊤_ X.Modules; finite sums via any bilimit Bicone over Finite I (empty included); extensions via ShortExact with free middle term. No added hypotheses, no definitions, only sorry; docstrings with source/blueprint/proof steps; lean.statement verbatim; item diff only lean field; imports exist; no name clash. Advisory: unused public import CoherentFiniteType; second reading is a same-session self-reading but clause-by-clause. No compile (no file changed)."
+ }
+}

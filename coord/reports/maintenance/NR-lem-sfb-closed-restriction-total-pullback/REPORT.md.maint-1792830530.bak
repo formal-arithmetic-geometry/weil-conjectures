@@ -1,0 +1,44 @@
+# NR maintenance: lem-sfb-closed-restriction-total-pullback
+
+2026-10-24. Stage 2, dispatcher key `lem-sfb-closed-restriction-total-pullback@19766f611`.
+
+**Cause confirmed; corrective implementation is blocked by the task's prohibition on editing landing tools.** The worker's authorized downstream repair is excluded by the server's shared stage-2 delivery reader, not by the local packet builder. No mathematical work or further worker retry can repair that classification. No protected tool was changed and no delivery was pushed.
+
+## Cause and evidence
+
+The return in `/home/ubuntu/weil-conjectures-sheaf/coord/returns/NR.md`, dated 2026-10-24 07:05 UTC, explicitly requests F1/F2: move shared constructions into definition modules and make the downstream `FiniteClosedResolution` extend `FiniteClosedAugmentedRows`. It authorizes a lean-only repair of `lem-sfb-finite-closed-cover-resolution`, or reporting the merge tool's refusal. That theorem's `proof_deps` already contains this item. Adding the cover theorem to the item's dependencies would create a DAG cycle.
+
+The retained sandbox at `/home/ubuntu/weil-newtargets-stage2-sandbox/NR/lem-sfb-closed-restriction-total-pullback` contains the requested four modules and four node records. The two definition nodes are new; the item differs from the shared base only in `lean` and `stmt_deps`; the cover node differs only in `lean`. The item's Lean source equals its returned baseline byte for byte. Every module has its matching `lean.file` in the packet.
+
+The precise defect is in server file `/home/ubuntu/weil-conjectures-sheaf/tools/stage2_delivery.py`, function `read_delivery`:
+
+1. Lines 953–957 detect an existing node outside the item's prerequisite closure, record a scope finding, and execute `continue`.
+2. That skips insertion of the cover node into `D["deps"]` at line 959.
+3. Module owners are collected only from the item, `D["new"]`, and `D["deps"]` (around line 1137). The supplied cover owner is consequently invisible.
+4. Lines 1231–1235 report its module as having no owning node. This is an enforced failure under `ENFORCED` at line 748.
+5. The original scope finding becomes advisory only at lines 1296–1299, after it has already caused the enforced ownership failure. This contradicts the 2026-10-23 policy documented at lines 732–737: scope of repairs is advisory for the reviewer.
+
+`batch2/deliver2.py` passes all four node records and modules to `tools/nt_preflight2.py`, which calls this reader. `tools/preflight_delivery.py`, `tools/merge_delivery.py`, and parallel stage-2 landing also use the same reader. Editing only the local wrapper would not correct landing. The shared reader is a landing tool covered by the user's explicit “must NOT edit ... the review service and the landing tools” rule.
+
+Observed reader SHA-256: `a1cfde63e885ab52ae48a6fe13d6daee107bd40f2f3623b9200ab226b2edc537`. Its latest file commit at inspection was `6f676dd9248e984c05227c739fa0102aa3a45c45`.
+
+## Verification
+
+- Dispatcher state records 9 tries for the supplied key and the repeated ownerless-module note. The dispatcher log records maintenance starting at 2026-10-24 16:09:29.
+- Run `/home/ubuntu/weil-launcher-all/run/NR/lem-sfb-closed-restriction-total-pullback.1792829154/log.txt` shows all four files compiled and staged before the single enforced reason (c). The contemporaneous `1792829375` run shows the same result. The sandbox report preserves earlier successful four-module compile times and repeated identical refusals. No compile was repeated during maintenance because no Lean source changed.
+- A temporary Git fixture on the server exercised the **unmodified** `stage2_delivery.read_delivery`, using the existing `tools/test_stage2_prerequisites.py:Prerequisites` fixture. An existing supplied node was made downstream by setting its `proof_deps` to the item; its delivery changed only `lean` and supplied its module. Result: one advisory about prerequisite closure, node absent from `D["deps"]`, and exactly one enforced ownerless-module failure. The fixture's temporary repository was cleaned up; no project source or test file was edited.
+- Live server records confirm the reverse proof dependency and the cover node's exact `lean.file`. No matching entry was found in the available `~/cc1/*.log`; rejection occurs before delivery/landing. No provider error was encountered in maintenance.
+
+## Required correction by the landing-tool owner
+
+Keep a well-formed delivered existing node available for ordinary lean-record validation, module ownership, compile ordering, graph validation, and eventual lean-only application when its scope finding is advisory. In the present implementation, the scope branch's `continue` at line 957 is the causal exclusion. Retain the scope advisory for independent review and all genuine ownership, signature, declaration, compile, and DAG checks. Do not suppress the ownerless-module failure globally, fabricate a dependency, or special-case this item's name.
+
+Add regression coverage through the complete reader for a downstream consumer with a reverse proof edge, a lean-only node repair, and a matching module. Check that it retains the advisory, owns the module, and proceeds through the ordinary checks. Preserve rejection of modules with no supplied owner and of duplicate ownership. Check the effective landing plan includes the cover node and module as well as both new definitions. Existing scope tests expecting hard rejection need reconciliation with the documented advisory policy.
+
+Then run the retained packet's normal `deliver2.py NR lem-sfb-closed-restriction-total-pullback --no-push`; only a successful preflight permits normal delivery and independent review. Compile any changed Lean files individually with `tools/lean_file.sh`, 60 seconds each; never run `lake build` for this repair.
+
+## Changes and next-worker handoff
+
+Created this `REPORT.md` and its `.bak` snapshot. A copy is recorded on the server at `coord/reports/maintenance/NR-lem-sfb-closed-restriction-total-pullback/REPORT.md`, with a `.bak` snapshot; the documentation commit receipt is appended below after committing under `SHEAF_LEAD=L-only flock coord/.merge.lock` with the required Git identity. No tool, brief, module, DAG node, dispatcher state, failure counter, concurrency setting, review record, or claim was changed.
+
+The next worker should retain the existing F1/F2 packet and rebase its non-owned metadata when necessary. The mathematical statement remains unchanged. The cover node must stay downstream; dropping its repair leaves the duplicate definitions/import inversion unresolved. Repeating the unchanged packet against the unchanged reader reproduces the failure. Resume normal delivery after the landing-tool correction; do not work around preflight. The present maintenance session has not fixed the protected implementation.

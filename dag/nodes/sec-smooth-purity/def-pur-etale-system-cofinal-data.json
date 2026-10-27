@@ -1,0 +1,148 @@
+{
+ "id": "def-pur-etale-system-cofinal-data",
+ "kind": "definition",
+ "title": "Normalized geometric interfaces for cofinal extension and repetition",
+ "statement": "For the coefficient systems and compact-support presentations of [def-pur-etale-system-projection-data], let $r:\\mathbf N\\hookrightarrow\\mathbf N$ be an order embedding and let $C_r$ denote the selected tower. On the ordinary unbounded derived category of actual strict systems [lem-coef-semilinear-derived-sections], define $U_r$ by sectionwise restriction. Record the normalized selected left extension $L_r\\dashv U_r$ of [lem-pur-system-level-left-extension], ordinary restriction compositors that are identity on selected sections, finite-block repetition at $t(m)=\\min\\{i:m\\le r(i)\\}$ [lem-pur-system-block-repetition], and factorization of selected extension as repetition followed by coefficient extension for $D_m=C_{r(t(m))}\\to C_m$. A CofinalSupport consists of a normalized projection Theory, these extension, repetition, factorization and compositor data on X and Y, and an isomorphism $h_r:F_C L_r^X\\cong L_r^Y F_{C_r}$. Its normalization says that composing $q_{D\\to C}$, inverse X factorization, $h_r$, and Y factorization is the coefficient extension of the canonical repetition comparison. Its evaluation at m is the inverse of the single-ring compact-support projection for $C_{r(t(m))}\\to C_m$, under the recorded derived-evaluation and factorization isomorphisms. These are exactly the previously existing interfaces, with unchanged definitions and normalization fields.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, printed pp. 21--23; finite-block generalization already in parent proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-system-level-left-extension",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-etale-system-coefficient-projection",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-etale-system-projection-data",
+  "lem-pur-system-block-repetition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, printed pp. 21--23; finite-block generalization already in parent proof steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal selected extension of inverse systems is repetition followed by derived extension of coefficients, commuting with compact support",
+   "date": "2026-10-25",
+   "results": "Eight inverse-system results; none states this geometric comparison.",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-25",
+   "results": "Adjunction.leftAdjointUniq and its unit, counit and composition API.",
+   "verdict": "Used for the proved mate calculation, not a geometric realization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleCofinalSupport|CofinalSupport|systemNextSelected_trans|blockDerivedComparison_comp",
+   "date": "2026-10-25",
+   "results": "msearch: no hits. Local rg: existing cofinal interface, systemNextSelected_trans, blockDerivedComparison_comp and coefficient projection; no realization/coherence theorem.",
+   "verdict": "Reuse stated geometric dependencies; isolate the two remaining geometric steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived extension of coefficient systems along a cofinal subsequence and compact support projection formula",
+   "results": "Eight returned hits were read: Profinite.NobelingProof.πJ; Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization and its assoc variant; FirstOrder.Language.IsExtensionPair.definedAtRight; Condensed.lanCondensedSet; ContDiffMapSupportedIn.coe_coeHom; two Scheme.Hom.toNormalization normalization-coproduct equations. None concerns derived strict coefficient systems or compact-support projection.",
+   "date": "2026-10-25",
+   "verdict": "No matching mathematical statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemCofinalMate",
+  "date": "2026-10-25",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-system-cofinal-mate",
+   "place": "Separate geometric part of the parent argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleSystemCofinalData",
+  "file": "lean/Sheaf/Paper/EtaleSystemCofinalData.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.CofinalSupport",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalCoefficients",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalSite",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalSite_continuous",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalSiteContinuous",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRing",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRestriction",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRestriction_exact",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRestrictionAdditive",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRestrictionLimits",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRestrictionColimits",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalU",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalResolving",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalMate",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalQuotientTower",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRamification_strictMono",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRamification",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalSheafRings",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalEncoding",
+   "AlgebraicGeometry.Etale.SystemProjection.Evaluation.cofinalComplex",
+   "AlgebraicGeometry.Etale.SystemProjection.Evaluation.cofinalFactor",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalLevelComplex",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalOrdinaryLevelUnit",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalLevelNormalization",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalExtension",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalComposition",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalComposition.derived",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalNext",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalRepeated",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalCoefficient_naturality",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalCoefficient",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalRepeat",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalRepeatSupport",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalRepeatSupport.kappa",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalFactor",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalSupport",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalExtensionComposition",
+   "AlgebraicGeometry.Etale.SystemProjection.CofinalSupport.rho"
+  ],
+  "statement": "structure CofinalSupport {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-25",
+  "note": "Declaration ownership relocation only; public signatures and definition bodies unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6819f",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T060753-L-2371545",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6819f",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T060753-L-2371545",
+  "kind": "interface",
+  "note": "independent cc review: EtaleSystemCofinalData vs the clone's old EtaleSystemCofinalMate lines 1-617 (byte-identical); item statement vs the clone (only sorry→proof); two new sorry statements vs their nodes and the published coefficient-projection theorem; both direct importers compiled against the delivered modules"
+ }
+}

@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-integral-models-flat-residue",
+ "kind": "statement",
+ "title": "Flat scalar map and first residue quotient in internal integral coefficients",
+ "statement": "For a prime l, a finite extension E of Q_l and any scheme X, put phi = smallMap X (scalarMap l E X) and let I be the kernel ideal of smallMap X (residueMap l E X), using [def-sfb-integral-models-stacks-data]. The module sheaf I is finite type, the continuous coefficient ring restricted along phi is a flat module sheaf, and phi identifies the quotient by I with the quotient by its extended ideal. These are ordinary sheaf-of-module assertions and impose no derived-completeness condition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1): flatness and quotient identification (Stacks 099L), and coefficient-presentation comparison"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-weil-pbc-ringed-site-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Construct the point constant-abelian-sheaf isomorphism using constantCommuteCompose, prove that it respects the actual ring-object structures via sheafification, and pull it to X through the monoidal constantSchemeIso. Reconstruct commutative section rings using the proved constantRingMap API. The comparison is natural in every coefficient ring homomorphism, including the first residue map.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data",
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "lem-sfb-admissible-scalar-realization-exact",
+    "lem-sf-finite-discrete-normalized-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The DVR theorem makes the integer ring Noetherian and its chosen uniformizer nonzero. The integers-profinite-tower and coset-basis theorems supply compactness, finite positive quotients and the neighbourhood basis. Apply compact_adic_continuous_identification, with the spectral topology used by the actual integer object. Check by the sheafification adjunction that the scalar map is exactly its normalized constant-function map. Thus its finite projections equal the prescribed quotient maps.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-integers-profinite-tower",
+    "lem-sfb-integers-coset-basis",
+    "lem-sfb-compact-adic-continuous-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the constant and completion comparison isomorphisms for AsSmall pushforward, and descend ULift.down to the first coefficient quotient. Their naturality and finite-projection equations give commuting scalar and residue squares on the identical coefficient-sized small site. The lifted Noetherian integer and ideal are the existing IntegralConstantCompletion definitions.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "def-sfb-integral-models-stacks-data",
+    "det-prop-integral-criterion-constant-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply flat_and_quotients to the Noetherian lifted integer ring and its principal ideal. Transport flatness through the scalar square by the local equational criterion. Transport finite generators of the discrete kernel through the constant-ring isomorphism to obtain finite type. The completed kernel is the ideal spanned by images of the discrete kernel. Pull this ideal back through the completion isomorphism, use the sectionwise-surjective quotient maps for the quotient local-lifting clause, and the commuting squares for its kernel clause. This proves the displayed unchanged conjunction.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-flat-local-relations-universes",
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "lem-sfb-admissible-scalar-realization-exact",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-integers-coset-basis",
+  "lem-sfb-compact-adic-continuous-identification",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-local-relations-universes",
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1), Stacks 093M and 099L. T9: constant-ring reconstruction, compact-adic normalized comparison, and explicit transport of finite type, flatness and residue quotients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flatness and finite quotient comparison for constant sheaves of a Noetherian ring and its adic completion",
+   "results": "AdicCompletion.flat_of_isNoetherian and AdicCompletion.ofTensorProductEquivOfFiniteNoetherian concern rings, not the specified internal coefficient ring sheaves.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the coefficient-presentation identification is still needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars preserves locally derived completeness on a ringed site, identifying the kernel of a residue quotient",
+   "results": "SheafOfModules.restrictScalars and restrictScalars_obj_val; no comparison of the discrete and continuous integral sheaves.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the coefficient-presentation identification is still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFlat\", \"IsFiniteType\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the coefficient-presentation identification is still needed."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyDerivedRingedIdealComplete|IsSfbAdicComplete",
+   "results": "0 hits in Mathlib. The project has general flat_and_quotients but its coefficient sheaves must first be identified with the specified section rings.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the coefficient-presentation identification is still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsCompletionTransport",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1): Flat scalar map and first residue quotient in internal integral coefficients",
+   "via": [
+    "lem-sfb-integral-models-completion-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralModelsFlatResidue",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelsFlatResidue.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integralModels_flat_residue",
+  "statement": "theorem integralModels_flat_residue (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) :\n    let φ := smallMap X (scalarMap l E X)\n    let I := ConstantCompletion.kernelIdeal (smallMap X (residueMap l E X))\n    SheafOfModules.IsFiniteType I.module ∧\n      SheafOfModules.IsFlat ((ConstantCompletion.res φ).obj\n        (SheafOfModules.unit (siteModuleRings _))) ∧ I.IsQuotientIso φ",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122450-L-1774752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T181207-L-4096813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-closed-restriction-signed-refinements",
+ "kind": "statement",
+ "title": "Signed closed-restriction complexes and ordered refinement chain maps",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $A$ a sheaf of commutative rings on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and use module sheaves [def-weil-sheaf-of-modules-category] with inverse-image coefficient rings and the actual module inverse and direct images [def-weil-proetale-inverse-image]. Use the canonical unit-normalized adjunctions [def-sfb-proetale-unit-normalized-adjunction]. Let $i:Z\\hookrightarrow X$ and $i_a:Z_a\\hookrightarrow X$, $1\\leq a\\leq m$, be closed immersions [def-weil-closed-immersion], with each $i_a$ factoring through $i$. Let $M$ range over $A$-module sheaves. Assume their complementary open immersions [def-weil-open-immersion] are quasi-compact morphisms [def-weil-finite-type-morphism]. Assume $m\\geq1$; no covering hypothesis is needed. For a nonempty subset $J\\subseteq\\{1,\\ldots,m\\}$ let $Z_J$ be the scheme-theoretic intersection (the iterated fibre product over $X$ [def-pc-fibre-product]), and put $E_J=i_{J,*}i_J^*$ and $E_Z=i_*i^*$. For $J\\subseteq L$, let $r_{J,L}:E_J\\to E_L$ be the actual unit of $Z_L\\hookrightarrow Z_J$ pushed to $X$, with inverse-image composition identifications; define $r_{Z,J}$ similarly. Write $D^{-1}(M)=E_Z(M)$, $D^p(M)=\\bigoplus_{|J|=p+1}E_J(M)$ for $0\\leq p<m$, and $D^p=0$ otherwise. Use cochain complexes [def-weil-abstract-derived-category]. The proposed differential is\n$$ (dc)_{(a_0<\\cdots<a_{p+1})}=\\sum_{t=0}^{p+1}(-1)^t r_{L\\setminus\\{a_t\\},L}(c_{L\\setminus\\{a_t\\}}),\\qquad d^{-1}=(r_{Z,\\{a\\}})_a. $$\nThese formulas define an augmented cochain complex, additive and natural in $M$, with\n$$r_{L,H}r_{J,L}=r_{J,H},\\qquad r_{Z,J}\\eta_i=\\eta_{i_J},\\qquad d^2=0.$$\nIn particular its degree-zero augmentation $\\alpha_M:E_Z(M)[0]\\to D^{\\geq0}(M)$ satisfies $\\alpha_M\\eta_i=(\\eta_{i_a})_a$.\nLet $W_b\\hookrightarrow Z$, $1\\leq b\\leq n$, $n\\geq1$, be a second ordered closed family with quasi-compact complementary open immersions in $X$. Let $f:\\{1,\\ldots,n\\}\\to\\{1,\\ldots,m\\}$ be any function and choose factorizations $W_b\\hookrightarrow Z_{f(b)}$ over $Z$. For an increasing tuple $B=(b_0<\\cdots<b_p)$ define the component of $\\rho_f:D_Z^p(M)\\to D_W^p(M)$ as zero if the tuple $(f(b_0),\\ldots,f(b_p))$ repeats an index; otherwise use its sorting-permutation sign times the actual restriction $E_{\\{f(b_0),\\ldots,f(b_p)\\}}(M)\\to i_{W_B,*}i_{W_B}^*M$ from that summand, and zero from all other summands. Set its degree $-1$ component to the identity of $E_Z(M)$.\nThen $\\rho_f$ is a chain map, $\\rho_f\\alpha_Z=\\alpha_W$, identity refinements give identity maps, and maps for iterated refinements compose. The construction, differential, and refinement maps commute with morphisms of $M$ and with parameter diagrams, meaning application objectwise to any small category of such data. Applied termwise to a cochain complex $K$, they commute with its differential and give maps of the finite total complexes with differential $d_D+(-1)^p d_K$. No exactness of the augmented rows is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, supplies the actual closed unit; signed-complex and refinement identities are agent deductions, not assertions of this tag. Extracted from old steps 2 and 8 of lem-sfb-finite-closed-cover-resolution."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-proetale-unit-normalized-adjunction",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-signed-closed-row-exists] separately to every ordered closed family and assemble a collection of rows by classical choice inside this existence proof. Apply [lem-sfb-signed-closed-row-maps] to this supplied collection to obtain the mixed restrictions and natural row chain maps, with their matrix, augmentation, identity and composition equations. This is only logical assembly of existential witnesses; no definition chooses data from either unproved existence statement.",
+   "uses": [
+    "lem-sfb-signed-closed-row-exists",
+    "lem-sfb-signed-closed-row-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+   }
+  },
+  {
+   "text": "For each row chain map rho, apply NatTrans.mapHomologicalComplex termwise to the input complex K, then whisker by the flip functor and the total functor. This is a chain map by construction, natural in K. HomologicalComplex₂.ιTotal_map gives its component on every (p,q) diagonal inclusion. The chosen flip is exactly the existing finiteClosedDouble convention, so the component is rho_(K^q)^p, and the differential is d_D+(-1)^p d_K for arbitrary unbounded K.",
+   "uses": [
+    "def-sfb-finite-closed-row-constructions",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+   }
+  },
+  {
+   "text": "Evaluate the row augmentation equation alpha_F ≫ rho = alpha_G at M and at degree zero. Rewrite alpha_f and cancel the canonical isomorphism from the degree-zero term of the single complex. This gives augment_F(M) ≫ rho_M^0 = augment_G(M). In degree n rewrite both total augmentation formulas. The diagonal-inclusion equation for the total map at (0,n), followed by this augment equation, proves preservation of total augmentation. Natural-transformation and complex-morphism extensionality yield the required equation. Insert these maps and equations, together with all row-level fields, into SignedClosedRefinementSystem.",
+   "uses": [
+    "def-sfb-signed-closed-row-data",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-signed-closed-row-exists",
+  "lem-sfb-signed-closed-row-maps",
+  "def-sfb-finite-closed-row-constructions",
+  "def-sp-double-complex-total",
+  "def-sfb-signed-closed-row-data",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), technical finite closed-support resolution; C4 formal decomposition of the existing signed-refinement deduction.",
+  "note": "Rows and row refinements are split into two strictly smaller obligations. The parent proves termwise totalization, its diagonal component formula, and preservation of total augmentation using Mathlib TotalComplex. No covering or exactness claim is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Signed alternating complex of closed restriction functors has chain maps for refinements with repeated indices sent to zero preserving adjunction augmentations",
+   "results": "8 hits: AlgebraicTopology.AlternatingFaceMapComplex.ε, ChainComplex.alternatingConst, ComplexShape.Embedding.HasLift, ComplexShape.Embedding.homRestrict.f_eq, AlgebraicTopology.inclusionOfMooreComplexMap, ComplexShape.Embedding.homRestrict.comm, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ, ChainComplex.alternatingConst_obj; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the full simplicial alternating-face functor does not state this finite strictly increasing intersection complex or its sorting-sign refinement maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating Cech refinement chain map sorting sign repeated indices zero compatible with augmentation",
+   "results": "8 hits: AlgebraicTopology.AlternatingFaceMapComplex.ε, MultilinearMap.alternatization_def, AlternatingMap.map_congr_perm, MultilinearMap.alternatization, MultilinearMap.alternatization_coe, AlternatingMap.map_perm, ChainComplex.alternatingConst, CochainComplex.augment; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the full simplicial alternating-face functor does not state this finite strictly increasing intersection complex or its sorting-sign refinement maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ordered Cech complex refinement morphism using signs of sorting permutations and degeneracy zero",
+   "results": "8 hits: SimplicialObject.Splitting.IndexSet.pull, SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible, SSet.stdSimplex.asOrderHom, SimplexCategory.mkOfLeComp, SSet.prodStdSimplex.orderHomOfSimplex, SimplexCategory.mkOfLe, SimplicialObject.Splitting.summand, AlgebraicTopology.DoldKan.Γ₀.Obj.summand; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the full simplicial alternating-face functor does not state this finite strictly increasing intersection complex or its sorting-sign refinement maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlternatingFaceMapComplex\"",
+   "results": "12 hits: AlgebraicTopology.AlternatingFaceMapComplex.obj, AlgebraicTopology.AlternatingFaceMapComplex.objD, AlgebraicTopology.AlternatingFaceMapComplex.obj_X, AlgebraicTopology.alternatingFaceMapComplex, AlgebraicTopology.instPreservesMonomorphismsSimplicialObjectChainComplexNatAlternatingFaceMapComplexOfHasPullbacks, AlgebraicTopology.instAdditiveSimplicialObjectChainComplexNatAlternatingFaceMapComplex, AlgebraicTopology.alternatingFaceMapComplex_obj_X, AlgebraicTopology.AlternatingFaceMapComplex.map; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the full simplicial alternating-face functor does not state this finite strictly increasing intersection complex or its sorting-sign refinement maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(refin.*(alternat|[Cc]ech)|alternat.*refin|sorting.*sign)",
+   "results": "12 hits: Mathlib/NumberTheory/LSeries/Positivity.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/LinearAlgebra/Alternating/Basic.lean, Mathlib/Topology/ExtremallyDisconnected.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Topology/VectorBundle/ContinuousAlternatingMap.lean, Mathlib/Topology/VectorBundle/ContinuousAlternatingMap.lean, Mathlib/LinearAlgebra/Determinant.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the full simplicial alternating-face functor does not state this finite strictly increasing intersection complex or its sorting-sign refinement maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite alternating intersection cochain complex of module sheaves and sorting sign refinement chain maps sending repeated indices to zero",
+   "results": "8 hits: ChainComplex.alternatingConst, AlgebraicTopology.alternatingCofaceMapComplex, CochainComplex.ConnectData.X, CochainComplex.ConnectData.cochainComplex, HomologicalComplex.alternatingConst, HomologicalComplex.alternatingConst_iCycles_even_comp_apply, AlgebraicTopology.AlternatingCofaceMapComplex.obj, HomologicalComplex.alternatingConst_iCycles_odd_comp_apply",
+   "date": "2026-10-23",
+   "verdict": "no exact match: generic cosimplicial complexes and permutation-sign tools do not state this finite ordered closed-intersection construction with its actual module units and arbitrary signed refinements; the existing DAG signed-face lemma is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlternatingFaceMapComplex\"",
+   "results": "12 hits: AlgebraicTopology.AlternatingFaceMapComplex.obj, AlgebraicTopology.AlternatingFaceMapComplex.objD, AlgebraicTopology.AlternatingFaceMapComplex.obj_X, AlgebraicTopology.alternatingFaceMapComplex, AlgebraicTopology.instPreservesMonomorphismsSimplicialObjectChainComplexNatAlternatingFaceMapComplexOfHasPullbacks, AlgebraicTopology.instAdditiveSimplicialObjectChainComplexNatAlternatingFaceMapComplex, AlgebraicTopology.alternatingFaceMapComplex_obj_X, AlgebraicTopology.AlternatingFaceMapComplex.map",
+   "date": "2026-10-23",
+   "verdict": "no exact match: generic cosimplicial complexes and permutation-sign tools do not state this finite ordered closed-intersection construction with its actual module units and arbitrary signed refinements; the existing DAG signed-face lemma is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered Cech cochain complex refinement maps alternating sorting signs repeated indices zero",
+   "results": "8 hits: HomologicalComplex.alternatingConst, CochainComplex.shiftFunctor, ComplexShape.ε, AlgebraicTopology.alternatingCofaceMapComplex, ComplexShape.ε₂, AlgebraicTopology.alternatingCofaceMapComplex_map, AlgebraicTopology.AlternatingCofaceMapComplex.objD, AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+   "date": "2026-10-23",
+   "verdict": "no exact match: generic cosimplicial complexes and permutation-sign tools do not state this finite ordered closed-intersection construction with its actual module units and arbitrary signed refinements; the existing DAG signed-face lemma is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "(refin.*(alternat|[Cc]ech)|alternat.*refin|sorting.*sign)",
+   "results": "12 hits: Mathlib/NumberTheory/LSeries/Positivity.lean, Mathlib/Topology/ExtremallyDisconnected.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/Topology/VectorBundle/ContinuousAlternatingMap.lean, Mathlib/Topology/VectorBundle/ContinuousAlternatingMap.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/LinearAlgebra/Determinant.lean, Mathlib/LinearAlgebra/Alternating/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no exact match: generic cosimplicial complexes and permutation-sign tools do not state this finite ordered closed-intersection construction with its actual module units and arbitrary signed refinements; the existing DAG signed-face lemma is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "(sign.*(remove|erase|succAbove|decomp)|((remove|erase|succAbove|decomp).*sign))",
+   "results": "4 hits: Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Option.lean, Mathlib/GroupTheory/Perm/Option.lean",
+   "date": "2026-10-23",
+   "verdict": "no exact match: generic cosimplicial complexes and permutation-sign tools do not state this finite ordered closed-intersection construction with its actual module units and arbitrary signed refinements; the existing DAG signed-face lemma is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sign of sorting permutation after deleting entry at position t with rank r differs by minus one to power t plus r",
+   "results": "8 hits: Equiv.Perm.signAux2, Equiv.Perm.signBijAux, Equiv.Perm.signAux3, Equiv.Perm.signAux, Equiv.Perm.decomposeFin.symm_sign, Equiv.Perm.signAux_eq_signAux2, Equiv.Perm.sign_eq_prod_prod_Iio, Equiv.Perm.sign_eq_prod_prod_Ioi",
+   "date": "2026-10-23",
+   "verdict": "no exact match: generic cosimplicial complexes and permutation-sign tools do not state this finite ordered closed-intersection construction with its actual module units and arbitrary signed refinements; the existing DAG signed-face lemma is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial finite ordered Cech complex for a covariant subset diagram of abelian groups, with arbitrary reindexing refinements and signs",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, AlgebraicTopology.DoldKan.c, CategoryTheory.Abelian.DoldKan.N, AlgebraicTopology.DoldKan.Γ₀.Obj.map, AlgebraicTopology.DoldKan.Γ₀.obj, CategoryTheory.Idempotents.DoldKan.N, AlgebraicTopology.DoldKan.Γ₀.Obj.summand, LightProfinite.fintypeDiagram",
+   "date": "2026-10-23",
+   "verdict": "no exact match: generic cosimplicial complexes and permutation-sign tools do not state this finite ordered closed-intersection construction with its actual module units and arbitrary signed refinements; the existing DAG signed-face lemma is reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-closed-cover-resolution",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct-image finiteness of det-thm-sf-ctf-stability-direct-images: technical finite closed-support resolution, actual closed restriction units and signed refinement assembly extracted through lem-sfb-finite-closed-cover-resolution.",
+   "via": [
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-restriction-signed-refinements",
+  "worker": "stage1",
+  "summary": "Q22 retained the full statement and supplied eight steps. Reused the arbitrary-ring module unit-composition theorem and the generic deleted-index permutation-sign lemma; all finite-sum, repeated-index, augmentation, refinement-composition, naturality and total-sign calculations are written out. No new nodes and no statement change.",
+  "blueprint": "Newest blueprint latest, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3); technical support-resolution subargument below open direct-image finiteness, not a replacement for the unit route. No blueprint node states this signed refinement construction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic additivity of the underlying abelian inverse image in Step 1; applies to the base-change functor already defining the item, and is not a replacement for the unit route."
+   },
+   {
+    "node": "lem-sf-proetale-tensor-composition-unit",
+    "why": "Generic arbitrary-ring coefficient unit equation specializes to inverse-image coefficient rings and proves transitivity of the actual closed restriction arrows in Step 2. Constant-coefficient module-composition nodes do not suffice."
+   },
+   {
+    "node": "lem-pc-signed-face-permutation",
+    "why": "Pure finite-permutation deleted-index sign identity in Steps 4 and 5; independent of the geometry and supplies the exact sorting-face sign, without using an open-cover theorem for closed restrictions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-sf-proetale-tensor-composition-unit",
+  "lem-pc-signed-face-permutation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-29cf4cdbf",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-29cf4cdbf (reviewer sub-agent of L); spot-checked: Read all of item lem-sfb-closed-restriction-signed-refinements (statement unchanged, 8 steps, no new nodes). Also read every cited statement, Stacks proetale.tex lemma-ses-associated-to-open (09AH; only its adjunction unit is used, no exactness), blueprint latest direct-images proof (3), and the parent finite-closed-cover-resolution steps 1/3/4 that cite the item. The item is not a 2026-10-21 re-split item (no repair note). It is still unsplit in live and side-live. There is no citation cycle and no SGA citation. I checked the sign algebra myself. Step 4: with t=s∘σ, the signed-face lemma gives (−1)^r ε(t∖k)=ε(t)(−1)^k, which is equivalent to the displayed formula. Step 5: (−1)^aε(t∖a)=−(−1)^bε(t∖b), checked through the move of one entry over b−a−1 places and through σ=(a b), k=a. Also checked: the d² pair cancellation, the augmentation, the composition sign ε(f(g(C)))=ε(g(C))ε(f(s')), the total-complex mixed terms, and the cases m=1 with f constant, swap f, repeated entries and empty Z_J. The unit η^f of the composition lemma, as defined in def-weil-pbc-proetale-operations, is the normalized actual unit. The Zariski/Opens Cech nodes are not duplicates. FIX (C1/C3): Step 2 claimed coherence of the triple comparisons from 'unique adjoint comparisons' without citing the uniqueness, and the cited lemma's uniqueness covers only single pairs. Step 2 now spells out the argument: each composite of t's and the composite of d's satisfy the conjugate unit equation for the composite adjunction; the d's agree by fibre-product uniqueness. It cites lem-weil-pbc-conjugate-iso-unit-equation and def-weil-pbc-composite-adjunction (both Mathlib nodes, added to uses and proof_deps) plus def-pc-fibre-product. The three declared tool_uses (additivity, unit composition, sign lemma) are accepted. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-closed-restriction-signed-refinements.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedRestrictionSignedRefinements",
+  "declaration": "AlgebraicGeometry.closedRestriction_signed_refinements",
+  "declarations": [
+   "AlgebraicGeometry.SignedClosedRefinementSystem",
+   "AlgebraicGeometry.closedRestriction_signed_refinements"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedRestrictionSignedRefinements.lean",
+  "statement": "theorem closedRestriction_signed_refinements {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (_hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) : Nonempty (SignedClosedRefinementSystem i A)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Signed rows and simultaneous ordered refinement maps without a cover or exactness assertion. Existing finiteClosed* formulas are reused. The normalized closed unit characterizes each actual restriction uniquely by its unit equation (09AH). No data are chosen from this theorem. The augmented column is encoded equivalently by its degree-zero chain augmentation and the identity on its source. C4: SignedClosedFamily and SignedClosedRow relocated unchanged to ClosedRestrictionSignedData, publicly re-exported here; the theorem and refinement-system signatures remain identical."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-887fe30b2",
+  "group": "NN",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Closed families with qc complements, no cover. Restriction, mixed and support maps fixed by unit equations; the closed units are epimorphisms by Stacks 09AH (qc complements, finite unions stay qc). Signed differential with (-1)^j face sign. Augmentation is a chain map from E_Z in degree 0 and is pinned on components. Refinement maps are zero on repetitions and otherwise carry the sorting sign via finiteClosedRefinementSign; identity and composition stated. Naturality via functors. Totals: flip then Mathlib total, d_D+(-1)^p d_K, pinned on every summand, unbounded K. Edge cases m=1, n>m, constant f, empty Z, empty intersection, char 2 consistent. Records: only the item's lean field changed, dependency records identical to live, statement verbatim, docstrings, lines and universes OK, single sorry, report sections present. No compile (no file changed). Maintainer note: the item imports the finiteClosed* helpers of FiniteClosedCoverResolution, owned by theorem lem-sfb-finite-closed-cover-resolution whose proof_deps cite this item, so a stage-3 import cycle remains. Move the helpers into a def-node-owned upstream module re-exported by the parent; the siblings total-pullback and vertex-contraction are in the same position. Advisory: proEtaleRingedDirectImage is owned only by a theorem node (inherited)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0260",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T081218-L-1873471",
+  "kind": "interface",
+  "note": "independent cc review: the moved SignedClosedFamily/SignedClosedRow against the clone (identical bodies), SignedClosedRowMaps fields against SignedClosedRefinementSystem's row-level fields, finiteClosedRefinementMap's use of mixed against mixed_unit's domain, item node changes against the change record"
+ }
+}

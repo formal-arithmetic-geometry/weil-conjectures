@@ -1,0 +1,215 @@
+{
+ "id": "lem-trf-fp-factorization-product-kernel",
+ "kind": "statement",
+ "title": "A finitely presented factorization kills lifted product-comparison kernels",
+ "statement": "Let $R$ be a commutative ring, let $P,Q,T$ be $R$-modules, and let $a:P\\to Q$, $b:P\\to T$, $c:Q\\to T$ be $R$-linear maps with $b=c\\circ a$. Suppose $Q$ is finitely presented [def-sc-finitely-presented-module] and for every $R$-module $L$ one has $\\ker(b\\otimes_R\\mathrm{id}_L)\\subseteq\\ker(a\\otimes_R\\mathrm{id}_L)$. For any set $A$ and family $(L_\\alpha)_{\\alpha\\in A}$ of $R$-modules, put $V=\\prod_{\\alpha\\in A}L_\\alpha$, with componentwise operations. Define $\\theta_{T,(L_\\alpha)}:T\\otimes_RV\\to\\prod_{\\alpha\\in A}(T\\otimes_RL_\\alpha)$ by $t\\otimes(\\ell_\\alpha)_\\alpha\\mapsto(t\\otimes\\ell_\\alpha)_\\alpha$. If $z\\in P\\otimes_RV$ satisfies $\\theta_{T,(L_\\alpha)}((b\\otimes_R\\mathrm{id}_V)(z))=0$, then $(a\\otimes_R\\mathrm{id}_V)(z)=0$ and $(b\\otimes_R\\mathrm{id}_V)(z)=0$. Tensor products are [def-weil-pbc-module-tensor-product]. Neither $P$ nor $T$ is assumed finitely presented or flat, and $A$ may be infinite or empty.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059M (proposition-ML-tensor), proof of (1) implies (2), the three-row tensor/product diagram after choosing the dominating stage; extracted for arbitrary maps factoring through a finitely presented target."
+ },
+ "stmt_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For each $\\alpha\\in A$ write $\\pi_\\alpha:V\\to L_\\alpha$ for the projection and put $z_\\alpha=(\\mathrm{id}_P\\otimes\\pi_\\alpha)(z)$. For any module $M$, the map $\\mathrm{id}_M\\otimes\\pi_\\alpha$ is defined by the universal property in [def-weil-pbc-module-tensor-product], sending $m\\otimes v$ to $m\\otimes\\pi_\\alpha(v)$; it is the $\\alpha$-coordinate of $\\theta_{M,(L_\\alpha)}$. For any linear $f:P\\to M$, the identity $(\\mathrm{id}_M\\otimes\\pi_\\alpha)\\circ(f\\otimes\\mathrm{id}_V)=(f\\otimes\\mathrm{id}_{L_\\alpha})\\circ(\\mathrm{id}_P\\otimes\\pi_\\alpha)$ holds: both sides send $p\\otimes v$ to $f(p)\\otimes\\pi_\\alpha(v)$, and pure tensors generate. Apply this with $f=b$. The hypothesis that the comparison image is zero gives $(b\\otimes\\mathrm{id}_{L_\\alpha})(z_\\alpha)=0$ for every $\\alpha$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), proof (1) implies (2), commutativity of the three-row diagram and the coordinate kernels; Tag 00CX (lemma-tensor-product), universal property and pure-tensor generation."
+   }
+  },
+  {
+   "text": "For each $\\alpha$, apply the assumed kernel inclusion with the test module $L=L_\\alpha$ to $z_\\alpha$. Step 1 places it in $\\ker(b\\otimes\\mathrm{id}_{L_\\alpha})$, so $(a\\otimes\\mathrm{id}_{L_\\alpha})(z_\\alpha)=0$. Taking $f=a$ in the identity of Step 1 shows that these are exactly the coordinates of $\\theta_{Q,(L_\\alpha)}((a\\otimes\\mathrm{id}_V)(z))$. Hence that comparison image is zero, by equality of families coordinatewise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), proof (1) implies (2), the sentence identifying product kernels using domination."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-presentation-tensor-products] with its finitely presented module $P$ replaced by our $Q$, and its family $(Q_\\alpha)$ replaced by $(L_\\alpha)$. Its comparison is exactly $\\theta_{Q,(L_\\alpha)}$, and is bijective, hence injective. Step 2 therefore gives $(a\\otimes\\mathrm{id}_V)(z)=0$, the first conclusion. The cited theorem allows arbitrary sets and arbitrary modules, so it imposes no finiteness on $A$ and no flatness on any $L_\\alpha$.",
+   "uses": [
+    "lem-trf-finite-presentation-tensor-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), proof (1) implies (2), injectivity of the bottom horizontal map supplied by Tag 059K (proposition-fp-tensor), (1) implies (2)."
+   }
+  },
+  {
+   "text": "Finally, the composition rule in [def-weil-pbc-module-tensor-product] and $b=c\\circ a$ give $(b\\otimes\\mathrm{id}_V)(z)=(c\\otimes\\mathrm{id}_V)((a\\otimes\\mathrm{id}_V)(z))=(c\\otimes\\mathrm{id}_V)(0)=0$. This is the second conclusion. If $A$ is empty, Step 2 still holds because two empty families agree, and Step 3 applies to the empty product; none of the steps chooses an index.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), proof (1) implies (2), final vanishing after passage to the later stage; Tag 00CX (lemma-tensor-product), induced maps and composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-finite-presentation-tensor-products"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059M (proposition-ML-tensor), proof (1) implies (2), three-row diagram after choosing a dominating stage; Tag 059K (proposition-fp-tensor), (1) implies (2). The diagram chase is specialized to the stated factorization; no finiteness of its source P is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "piRightHom|ker.*[Pp]roduct|[Pp]roduct.*ker",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"grep\", \"query\": \"piRightHom|ker.*[Pp]roduct|[Pp]roduct.*ker\", \"sub\": \"LinearAlgebra/TensorProduct\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\", \"Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Matrix.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Matrix.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\"], \"digest\": \"d03c9aa44e888a8e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: TensorProduct.piRightHom (LinearAlgebra/TensorProduct/Pi.lean:56) constructs the comparison, while piRight at line 100 requires a finite index. Flat.Equalizer results require flatness and compute different kernels; RightExactness.map_ker concerns exact sequences, not an arbitrary-product comparison controlled by another map."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.piRightHom, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-22T06:47:20Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct.piRightHom, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: TensorProduct.piRightHom (LinearAlgebra/TensorProduct/Pi.lean:56) constructs the comparison, while piRight at line 100 requires a finite index. Flat.Equalizer results require flatness and compute different kernels; RightExactness.map_ker concerns exact sequences, not an arbitrary-product comparison controlled by another map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor product comparison kernel intersects image of a map trivially when tensor kernels are controlled by a factorization through a finitely presented module",
+   "results": "{\"t\": \"2026-10-22T06:47:20Z\", \"tool\": \"leansearch\", \"query\": \"Canonical tensor product comparison kernel intersects image of a map trivially when tensor kernels are controlled by a factorization through a finitely presented module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKerEquiv_apply\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"LinearMap.tensorKerBil\", \"LinearMap.tensorKerEquiv\", \"LinearMap.tensorKer_coe\", \"LinearMap.kerLTensorEquivOfSurjective\", \"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"TensorProduct.map_ker\"], \"digest\": \"ccdc618210f9a946\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: TensorProduct.piRightHom (LinearAlgebra/TensorProduct/Pi.lean:56) constructs the comparison, while piRight at line 100 requires a finite index. Flat.Equalizer results require flatness and compute different kernels; RightExactness.map_ker concerns exact sequences, not an arbitrary-product comparison controlled by another map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For maps a from P to a finitely presented module Q and b from P to M with b factoring through a and tensor kernel of b contained in tensor kernel of a the product comparison is injective on the image of b tensor a product",
+   "results": "{\"t\": \"2026-10-22T06:47:30Z\", \"tool\": \"leanfinder\", \"query\": \"For maps a from P to a finitely presented module Q and b from P to M with b factoring through a and tensor kernel of b contained in tensor kernel of a the product comparison is injective on the image of b tensor a product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"LinearMap.rTensor_injective_iff_subtype\", \"LinearMap.rTensor_injective_of_fg\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\", \"LinearMap.lTensor_injective_of_exact_of_flat\", \"Module.Invertible.lTensor_injective_iff\", \"Module.Invertible.rTensor_injective_iff\", \"lTensor_injective_of_exact_of_exact_of_rTensor_injective\"], \"digest\": \"10029ce97f184d9e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: TensorProduct.piRightHom (LinearAlgebra/TensorProduct/Pi.lean:56) constructs the comparison, while piRight at line 100 requires a finite index. Flat.Equalizer results require flatness and compute different kernels; RightExactness.map_ker concerns exact sequences, not an arbitrary-product comparison controlled by another map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a tensor product to product comparison diagram the kernel is disjoint from the image of a map dominated on every tensor test by a map to a finitely presented module",
+   "results": "{\"t\": \"2026-10-22T06:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"In a tensor product to product comparison diagram the kernel is disjoint from the image of a map dominated on every tensor test by a map to a finitely presented module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.map_ker\", \"lTensor_mkQ\", \"rTensor_mkQ\", \"LinearMap.kerLTensorEquivOfSurjective\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\", \"LinearMap.tensorKerEquiv\", \"Module.FaithfullyFlat.range_le_ker_of_exact_rTensor\", \"Ideal.ker_tensorProductMk_quotient\"], \"digest\": \"6c3122680e4a35ce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: TensorProduct.piRightHom (LinearAlgebra/TensorProduct/Pi.lean:56) constructs the comparison, while piRight at line 100 requires a finite index. Flat.Equalizer results require flatness and compute different kernels; RightExactness.map_ker concerns exact sequences, not an arbitrary-product comparison controlled by another map."
+  },
+  {
+   "tool": "grep",
+   "query": "piRightHom|rTensor_injective_of_fg|tensorKerEquiv",
+   "results": "{\"t\": \"2026-10-23T14:59:18Z\", \"tool\": \"grep\", \"query\": \"piRightHom|rTensor_injective_of_fg|tensorKerEquiv\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\"], \"digest\": \"96692654a003788d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: piRightHom in LinearAlgebra/TensorProduct/Pi.lean:56 defines the map, and piRight at line 100 assumes a finite index; neither states the arbitrary-product factorization-kernel assertion. TensorProduct.map_ker treats exact-sequence tensor kernels. The flatness, invertibility and adic-completion injection results returned by semantic searches have different hypotheses and conclusions. LinearMap.rTensor_injective_of_fg (RingTheory/Flat/Basic.lean:85) assumes injections on all finite submodule restrictions and does not supply our product comparison. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product product comparison injective on the image of a map factoring through a finitely presented module with universally contained tensor kernels",
+   "results": "{\"t\": \"2026-10-23T14:59:18Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product product comparison injective on the image of a map factoring through a finitely presented module with universally contained tensor kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"LinearMap.rTensor_injective_iff_subtype\", \"IsTensorProduct.map_injective_of_flat_right_left\", \"Module.Invertible.rTensor_injective_iff\", \"IsTensorProduct.map_id_injective_of_flat_left\", \"Module.FaithfullyFlat.tensorProduct_mk_injective\", \"LinearMap.rTensor_injective_of_fg\", \"IsTensorProduct.map_injective_of_flat_left_right\"], \"digest\": \"28e5b6d002cf0315\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: piRightHom in LinearAlgebra/TensorProduct/Pi.lean:56 defines the map, and piRight at line 100 assumes a finite index; neither states the arbitrary-product factorization-kernel assertion. TensorProduct.map_ker treats exact-sequence tensor kernels. The flatness, invertibility and adic-completion injection results returned by semantic searches have different hypotheses and conclusions. LinearMap.rTensor_injective_of_fg (RingTheory/Flat/Basic.lean:85) assumes injections on all finite submodule restrictions and does not supply our product comparison. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.piRightHom, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-23T14:59:18Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct.piRightHom, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: piRightHom in LinearAlgebra/TensorProduct/Pi.lean:56 defines the map, and piRight at line 100 assumes a finite index; neither states the arbitrary-product factorization-kernel assertion. TensorProduct.map_ker treats exact-sequence tensor kernels. The flatness, invertibility and adic-completion injection results returned by semantic searches have different hypotheses and conclusions. LinearMap.rTensor_injective_of_fg (RingTheory/Flat/Basic.lean:85) assumes injections on all finite submodule restrictions and does not supply our product comparison. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a map factors through a finitely presented module and its tensor kernels are contained in those of the factor map then vanishing of all product tensor coordinates forces the factor map to vanish",
+   "results": "{\"t\": \"2026-10-23T14:59:19Z\", \"tool\": \"leanfinder\", \"query\": \"If a map factors through a finitely presented module and its tensor kernels are contained in those of the factor map then vanishing of all product tensor coordinates forces the factor map to vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.map_ker\", \"TensorProduct.VanishesTrivially\", \"TensorProduct.VanishesTrivially.of_fintype\", \"TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero_of_rTensor_injective\", \"TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.tfae_equational_criterion\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\"], \"digest\": \"158c1914fc1a543c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: piRightHom in LinearAlgebra/TensorProduct/Pi.lean:56 defines the map, and piRight at line 100 assumes a finite index; neither states the arbitrary-product factorization-kernel assertion. TensorProduct.map_ker treats exact-sequence tensor kernels. The flatness, invertibility and adic-completion injection results returned by semantic searches have different hypotheses and conclusions. LinearMap.rTensor_injective_of_fg (RingTheory/Flat/Basic.lean:85) assumes injections on all finite submodule restrictions and does not supply our product comparison. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor to arbitrary product map is injective on images when the original map has the same tensor kernels as a map to a finitely presented module",
+   "results": "{\"t\": \"2026-10-23T15:01:53Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor to arbitrary product map is injective on images when the original map has the same tensor kernels as a map to a finitely presented module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.rTensor_injective_of_fg\", \"IsTensorProduct.map_injective_of_flat_right_left\", \"IsTensorProduct.map_id_injective_of_flat_right\", \"IsTensorProduct.map_id_injective_of_flat_left\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"IsTensorProduct.map_injective_of_flat_left_right\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"LinearMap.rTensor_injective_iff_subtype\"], \"digest\": \"5a0ab2e96484d96e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: piRightHom in LinearAlgebra/TensorProduct/Pi.lean:56 defines the map, and piRight at line 100 assumes a finite index; neither states the arbitrary-product factorization-kernel assertion. TensorProduct.map_ker treats exact-sequence tensor kernels. The flatness, invertibility and adic-completion injection results returned by semantic searches have different hypotheses and conclusions. LinearMap.rTensor_injective_of_fg (RingTheory/Flat/Basic.lean:85) assumes injections on all finite submodule restrictions and does not supply our product comparison. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_ker|lemma map_ker|rTensor_injective_of_fg|lTensor_injective_iff_injective",
+   "results": "{\"t\": \"2026-10-23T15:04:01Z\", \"tool\": \"grep\", \"query\": \"theorem map_ker|lemma map_ker|rTensor_injective_of_fg|lTensor_injective_iff_injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"Mathlib/Algebra/Group/Subgroup/Ker.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"049615824b12c9c3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: piRightHom in LinearAlgebra/TensorProduct/Pi.lean:56 defines the map, and piRight at line 100 assumes a finite index; neither states the arbitrary-product factorization-kernel assertion. TensorProduct.map_ker treats exact-sequence tensor kernels. The flatness, invertibility and adic-completion injection results returned by semantic searches have different hypotheses and conclusions. LinearMap.rTensor_injective_of_fg (RingTheory/Flat/Basic.lean:85) assumes injections on all finite submodule restrictions and does not supply our product comparison. No exact match or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-mittag-leffler-eventual-domination",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of lem-trf-local-term-locality, inherited local projectivity/faithfully-flat descent support chain; supporting proof of eventual domination: Tag 059M (proposition-ML-tensor), proof of (1) implies (2), the three-row tensor/product diagram after choosing the dominating stage; extracted for arbitrary maps factoring through a finitely presented target.",
+   "via": [
+    "lem-trf-mittag-leffler-eventual-domination",
+    "lem-trf-mittag-leffler-faithfully-flat-descent",
+    "lem-trf-countable-projective-faithfully-flat-descent",
+    "lem-trf-local-projective-faithfully-flat-descent",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-fp-factorization-product-kernel",
+  "worker": "stage1",
+  "summary": "Read Stacks 059M and 059K and every cited statement. The four steps write coordinate naturality on pure tensors, apply the assumed kernel inclusion separately to each coordinate, use the existing finite-presentation/product comparison for Q, and use b=c composed with a. The statement and statement dependencies are unchanged; no new nodes, attachments, or hypotheses. Reused the original searches and added actual Q68 searches in two semantic phrasings.",
+  "blueprint": "Supports the inherited local-projectivity/descent chain of lem-trf-local-term-locality, proof (1)--(2), through eventual domination. Precisely realizes Stacks 059M, proof (1) implies (2), the three-row tensor/product diagram after choosing a dominating finitely presented stage. The current latest blueprint ancestor was read; this algebraic support fact is not a separate blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-97060f034",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-97060f034 (reviewer sub-agent of L); spot-checked: Read Stacks 059M (algebra-proposition-ML-tensor) proof (1)=>(2) and 059K. The item abstracts the three-row chase of 059M with P=M_i, Q=M_j finitely presented, T=M, a=f_ij, b=f_i, c=f_j. It keeps only the domination direction actually used, and its statement is unchanged from the base. The single citer, eventual-domination step 4, uses the same direction. Steps 1, 2 and 4 are elementary: naturality of id⊗π_α on pure tensors, the kernel inclusion applied for each coordinate, and the composition rule from def-weil-pbc-module-tensor-product. Step 3 cites lem-trf-finite-presentation-tensor-products (same unit sk-i-curve-zero, source 059K): θ is bijective for finitely presented Q and an arbitrary family, substituted exactly. proof_deps equals the union of uses. There are no new nodes, no tool_uses and no SGA. The DAG search (059M and product-comparison nodes: universal-tensor-kernel-witness, tensor-witness-eventual-factorization, tail-factorizations-tensor-kernel) found no duplicate. Edge cases tested: A empty, A infinite, Q=0, the ℤ/2 non-flat example, and the necessity of Q finitely presented (ℚ over ℤ). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FpFactorizationProductKernel",
+  "declaration": "LinearMap.rTensor_eq_zero_of_fp_factorization_product_kernel",
+  "file": "lean/Sheaf/RingTheory/FpFactorizationProductKernel.lean",
+  "statement": "theorem rTensor_eq_zero_of_fp_factorization_product_kernel (R : Type u) [CommRing R] (P : Type v) [AddCommGroup P] [Module R P] (Q : Type w) [AddCommGroup Q] [Module R Q] [Module.FinitePresentation R Q] (T : Type x) [AddCommGroup T] [Module R T] (a : P →ₗ[R] Q) (b : P →ₗ[R] T) (c : Q →ₗ[R] T) (hfactor : b = c.comp a) (hker : ∀ (L : Type (max u v w x t)) [AddCommGroup L] [Module R L], LinearMap.ker (b.rTensor L) ≤ LinearMap.ker (a.rTensor L)) (A : Type y) (L : A → Type (max u v w x t)) [∀ i : A, AddCommGroup (L i)] [∀ i : A, Module R (L i)] (z : P ⊗[R] (∀ i : A, L i)) (hz : TensorProduct.piRightHom R R T L (b.rTensor (∀ i : A, L i) z) = 0) : a.rTensor (∀ i : A, L i) z = 0 ∧ b.rTensor (∀ i : A, L i) z = 0",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e8b88642",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Node unchanged except the new lean field; lean.statement verbatim in FpFactorizationProductKernel.lean. Clause by clause: CommRing R; P,Q,T in independent universes; hfactor b = c.comp a; Module.FinitePresentation on Q only; hker ker(b.rTensor L) ≤ ker(a.rTensor L) over the universe max u v w x t (weaker hypothesis, same universe as the family, t free, so no restriction); A : Type y arbitrary (empty/infinite allowed); θ = TensorProduct.piRightHom R R T L (Pi.lean:56, piRightHom_tmul checked); both conclusions in node order. Proof dep piRightHom_bijective_of_finitePresentation has independent universes and applies. Statement deps Module.FinitePresentation and TensorProduct/rTensor match the recorded mathlib declarations. No H4 duplicate (IsMittagLeffler and completion files are different notions). Stacks 059M (1)=>(2) three-row diagram plus 059K. Docstrings carry source, blueprint tag and 4 steps; sorry only; no definitions; report has Worker report and Second reading by Q17 sections. No changes, so no compile."
+ }
+}

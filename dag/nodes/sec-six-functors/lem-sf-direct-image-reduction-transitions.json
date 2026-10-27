@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-direct-image-reduction-transitions",
+ "kind": "lemma",
+ "title": "Quotient compatibility of integral direct-image projection adjuncts",
+ "statement": "Let ell be prime, E/Q_ell finite, f:X→Y any scheme morphism, and K any unbounded completed-integral complex. Use the prescribed finite direct-image tower and any product witness and SfIntegralDirectImage Roos triangle L [def-weil-derived-direct-image]. For every n≥0, writing c_n for the scalar-extension adjunct of its n-th projection, U_(n+1)(c_(n+1)) followed by the finite-image tower transition t_n equals the canonical restricted-reduction transition of L.obj [def-weil-integral-reduction-tower] followed by U_n(c_n). This is an equality of the specified maps in the completed-integral derived category, without completeness, constructibility, dimension, or invertibility hypotheses.",
+ "stmt_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 06YY and 08TC; lem-sf-tensor-exchange-ctf-domains, proof Step 5 (quotient transitions)"
+ },
+ "proof": [
+  {
+   "text": "The first two maps of the distinguished Roos triangle compose to zero. Project the product endomorphism 1-s onto level n, obtaining p_(n+1) followed by t_n equal to p_n.",
+   "uses": [
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute scalar adjunctions on K-flat representatives. The consecutive quotient transition is s tensor x mapped to rho(s) tensor x, with unit x mapped to 1 tensor x. The section-normalized direct-image/restriction comparison preserves these quotient maps, also on its K-injective derived representatives.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two restricted adjunct composites admit the same lift to the n+1 quotient coefficient category. Applying the n+1 scalar adjunction identifies them with the projection relation of the first step. Its injectivity gives equality, and localization gives the asserted square for arbitrary complexes. This does not assert faithfulness of derived restriction of scalars.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 06YY and 08TC; lem-sf-tensor-exchange-ctf-domains, proof Step 5 (quotient transitions)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension restriction adjunction converts limit projections into compatible quotient reduction comparisons",
+   "results": "Eight hits, including ModuleCat.extendRestrictScalarsAdj and its ordinary homEquiv. No derived quotient square for the prescribed Roos image tower.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension restriction quotient transition square",
+   "results": "Eight hits, including ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendRestrictScalarsAdj and extendScalars_assoc′. None identifies the prescribed derived Roos projection square.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic adjunction interface; does not identify the project-specific derived quotient comparison square.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality; sfDirectImageReductionComparison",
+   "results": "Mathlib supplies generic adjunction naturality. Project search finds the definition and reduction-isomorphism theorem, but no transition square theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorExchangeCtfDomains",
+  "date": "2026-10-25",
+  "group": "K9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof Step 2; quotient-transition compatibility of integral direct-image reductions",
+   "via": [
+    "lem-sf-tensor-exchange-ctf-domains"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfDirectImageReductionTransitions",
+  "file": "lean/Sheaf/Paper/SfDirectImageReductionTransitions.lean",
+  "declaration": "WeilConjectures.sfDirectImageReductionComparison_transition",
+  "statement": "theorem sfDirectImageReductionComparison_transition\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (scalarReductionSource.{u, u} l E X))\n    [HasProduct (sfDirectImageTerm l E f K)] (L : SfIntegralDirectImage l E f K)\n    (n : ℕ) :\n    (scalarReductionDerivedRestriction.{u, u} l E Y (n + 1)).map\n          (sfDirectImageReductionComparison l E f L (n + 1)) ≫\n        sfDirectImageTransition l E f K n =\n      (sfDerivedReductionTransition l E Y n).app L.obj ≫\n        (scalarReductionDerivedRestriction.{u, u} l E Y n).map\n          (sfDirectImageReductionComparison l E f L n)",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163835-L-861613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163835-L-861613",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

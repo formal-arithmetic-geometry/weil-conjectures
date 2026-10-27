@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-universal-conormal-chart-transitivity",
+ "kind": "statement",
+ "title": "Etale localization and right exact transitivity of universal conormals",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $Z\\xrightarrow{u}Y\\xrightarrow{v}X$ formally unramified morphisms of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use universal first-order thickenings and their quasi-coherent conormal modules as in [lem-sfb-space-universal-conormal]. The composite $vu$ is formally unramified. There is a canonical map $W_{vu}\\to W_v$ extending $u$, and $Y\\times_{W_v}W_{vu}$ is the universal first-order thickening of $Z$ over $Y$. Its ideal maps give a right exact sequence\n$$u^*\\mathcal C_{Y/X}\\xrightarrow{\\lambda}\\mathcal C_{Z/X}\\xrightarrow{\\rho}\\mathcal C_{Z/Y}\\longrightarrow0.$$\nHere tensor pullback is [def-trf-space-etale-module-functors]. For any commutative square $V\\to U$ over a formally unramified map $B\\to A$, whose vertical maps $V\\to B$ and $U\\to A$ are etale [def-weil-etale-morphism], $V\\to U$ is formally unramified, $W_{V/U}\\to W_{B/A}$ is etale, and the induced conormal map identifies $\\mathcal C_{V/U}$ with the restriction of $\\mathcal C_{B/A}$ to $V$. In particular, if $B\\hookrightarrow W_{B/A}$ is universal and $D\\to W_{B/A}$ is etale, then $B_D=B\\times_{W_{B/A}}D\\hookrightarrow D$ is the universal first-order thickening of $B_D$ over $A$. These identifications are functorial in squares and identify the maps $\\lambda,\\rho$ above with the corresponding maps on any compatible etale charts of the tower, including charts with the identity on $X$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 060D (lemma-universal-thickening-localize), 0605 (lemma-etale-morphism-of-universal-thickenings), part (1), 060A (lemma-universal-thickening-functorial), and 06BF (lemma-transitivity-conormal-unramified); composition follows directly from the square-zero uniqueness test."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-sfb-space-universal-conormal",
+  "def-trf-space-etale-module-functors",
+  "def-weil-etale-morphism",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-module-base-change",
+  "def-sfb-space-universal-first-order-thickening",
+  "def-sfb-space-module-structure-map",
+  "lem-trf-space-etale-module-pushforward-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Composition and canonical maps. For two $X$-maps $a,b:T'\\to Z$ agreeing on a square-zero closed subscheme $T$, formal unramifiedness of $v$ gives $ua=ub$, and that of $u$ then gives $a=b$. Thus $vu$ is formally unramified, so its universal thickening exists by [lem-sfb-space-universal-conormal]. More generally, for a square $B\\to A$ over $B_0\\to A_0$ with both horizontal maps formally unramified, regard $B\\hookrightarrow W_{B/A}$ as a test thickening over $A_0$. The universal property of $W_{B_0/A_0}$ gives its unique map extending $B\\to B_0$. Identity and composition of these maps follow from the same uniqueness. In the tower this gives $h:W_{vu}\\to W_v$. Its map on ideals gives $\\lambda$: [lem-sfb-space-stalk-ideal-pullback] specifies this canonical map, rather than an arbitrary morphism of conormal modules.",
+   "uses": [
+    "lem-sfb-space-universal-conormal",
+    "lem-sfb-space-stalk-ideal-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 060A, lemma-universal-thickening-functorial; Tag 06BF, lemma-transitivity-conormal-unramified, construction of h. Composition is the defining square-zero uniqueness test."
+   }
+  },
+  {
+   "text": "The intermediate thickening. Form $P=Y\\times_{W_v}W_{vu}$ using [lem-trf-space-fibre-products-etale-covers]. Let $\\mathcal I$ and $\\mathcal K$ be the ideals of $Y\\hookrightarrow W_v$ and $Z\\hookrightarrow W_{vu}$. The closed-subspace correspondence [lem-sfb-space-ideal-closed-subspace-correspondence] identifies $P\\subset W_{vu}$ with the ideal $\\mathcal L=\\operatorname{im}(h^*\\mathcal I\\to\\mathcal O_{W_{vu}})\\subseteq\\mathcal K$. Hence $Z\\hookrightarrow P$ has ideal $\\mathcal K/\\mathcal L$, with square zero. Given $T\\hookrightarrow T'$ over $Y$ and $T\\to Z$, the universal property of $W_{vu}$ gives a unique $b:T'\\to W_{vu}$ over $X$. The two maps $hb$ and $T'\\to Y\\hookrightarrow W_v$ are equal: they are extensions over $X$ of the same $T\\to Y$, so uniqueness for $W_v$ applies. Thus $b$ factors uniquely through $P$, proving its universal property over $Y$. Uniqueness of universal thickenings identifies $P$ with $W_u$ and its ideal with $\\mathcal C_{Z/Y}$; [lem-sfb-space-universal-conormal] identifies the other two ideals with $\\mathcal C_{Y/X}$ and $\\mathcal C_{Z/X}$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-universal-conormal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06BF, lemma-transitivity-conormal-unramified, part (1) and its universal-property argument; Tag 03MB in spaces-morphisms.tex for ideals and factorization."
+   }
+  },
+  {
+   "text": "Right exactness, including the specified arrows. At a geometric point $\\bar z$ write $A'=\\mathcal O_{W_v,u\\bar z}$, $B'=\\mathcal O_{W_{vu},\\bar z}$, $I=\\mathcal I_{u\\bar z}$, $K=\\mathcal K_{\\bar z}$, $A=A'/I$ and $B=B'/K$. By [lem-sfb-space-stalk-ideal-pullback], the stalk of $u^*\\mathcal C_{Y/X}$ is $I\\otimes_A B$ and $\\lambda(i\\otimes b)=h^\\sharp(i)\\widetilde b$, where $\\widetilde b$ is any lift to $B'$. The same node identifies $\\mathcal L_{\\bar z}=IB'\\subseteq K$. Since $K^2=0$, $K$ annihilates $h^\\sharp(I)$, so the displayed map is well-defined and its image is exactly $IB'$. Step 2 and [lem-sfb-space-universal-conormal] identify the third stalk with $K/IB'$. The ideal map for $P\\to W_{vu}$ gives $\\rho(k)=k\\bmod IB'$. Consequently $\\rho$ is onto and $\\ker\\rho=IB'=\\operatorname{im}\\lambda$. The exact and conservative geometric stalks of [lem-sfb-space-stalk-ideal-pullback] give the asserted right exact sequence: stalks of its kernel modulo its image are zero, hence that module is zero. This uses no injectivity assertion for $\\lambda$.",
+   "uses": [
+    "lem-sfb-space-stalk-ideal-pullback",
+    "lem-sfb-space-universal-conormal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06BF, lemma-transitivity-conormal-unramified, part (2); the square-zero ideal calculation supplies the uses of Tags 06BD and 04CQ in its proof without importing their more general immersion statements."
+   }
+  },
+  {
+   "text": "The lifting input for etale maps. A representable etale map $E\\to H$ has a unique lift in every square-zero lifting problem with affine scheme tests $T\\hookrightarrow T'$: by [def-trf-algebraic-space], $E\\times_H T'$ is an etale scheme over $T'$, hence flat and unramified by [def-weil-etale-morphism]. Apply [lem-weil-pbc-flat-unramified-formally-etale] to this scheme map and the given section over $T$. For an arbitrary scheme $T'$, do this on affine opens (their inverse images in $T$ are affine by the affine-quotient characterization in [def-weil-closed-immersion]); the unique lifts agree on affine covers of their intersections and glue. For algebraic-space tests, choose a surjective etale scheme atlas of $T'$ and pull it back to $T$ using [lem-trf-space-fibre-products-etale-covers]. The scheme lifts agree on the scheme relation of the atlas, by uniqueness, and descend because $E$ is a sheaf [def-trf-algebraic-space]. Thus the same existence and uniqueness holds for algebraic-space tests. This is the representable case of formal etaleness; it uses no finiteness of the test spaces.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AL, lemma-representable-property-formally-property, part (2), with the affine-test scheme lifting theorem; Tag 0604, lemma-universal-thickening-over-formally-etale, for the following application."
+   }
+  },
+  {
+   "text": "Localize both source and target. In the square of the statement, two maps $T'\\to V$ over $U$ agreeing on $T$ have equal composites into $B$ by formal unramifiedness of $B/A$, and are then equal by the uniqueness of the lift along $V\\to B$ from step 4. This proves that $V/U$ is formally unramified; the same argument proves that $V/A$ is formally unramified. Apply [lem-sfb-space-universal-thickening-etale-transfer] to the etale map $V\\to B$ and the universal thickening $B\\hookrightarrow W_{B/A}$. It provides a universal thickening $V\\hookrightarrow W$ over $A$, with $W\\to W_{B/A}$ etale and $V=B\\times_{W_{B/A}}W$. Step 4 applied to $U\\to A$ gives a unique map $W\\to U$ extending $V\\to U$. Given a test thickening over $U$ mapping into $V$, extend uniquely to $W$ over $A$. Its composite into $U$ is the prescribed structural map, since both extend the same map on $T$ and $U\\to A$ has unique lifting. Therefore $W$ is universal over $U$. The uniqueness of universal thickenings in [lem-sfb-space-universal-conormal] identifies $W$ with $W_{V/U}$ and its map with the canonical map of step 1. No cartesianness of the original square was used.",
+   "uses": [
+    "lem-sfb-space-universal-thickening-etale-transfer",
+    "lem-sfb-space-universal-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 060D, lemma-universal-thickening-localize, using Tag 0605, lemma-etale-morphism-of-universal-thickenings, part (1), and the lifting argument of Tag 0604."
+   }
+  },
+  {
+   "text": "The conormal identification and the stated special case. The square $V\\hookrightarrow W$ over $B\\hookrightarrow W_{B/A}$ in step 5 is cartesian with etale ambient map. By [lem-sfb-space-ideal-closed-subspace-correspondence], its ideal is precisely the etale restriction of the ideal of $B$, and [lem-sfb-space-universal-conormal] identifies these square-zero ideals with the two conormal modules. The ideal map is the restriction isomorphism itself: it sends a restricted section $i$ to that same section. Tensor pullback along the etale map agrees with restriction by [lem-trf-space-etale-module-pushforward-restriction]. This proves the claimed identification for the induced map. If $D\\to W_{B/A}$ is etale, put $B_D=B\\times_{W_{B/A}}D$. Its map to $B$ is etale by [lem-trf-space-fibre-products-etale-covers]. Now $(B_D\\hookrightarrow D)\\to(B\\hookrightarrow W_{B/A})$ is an etale cartesian map of first-order thickenings. Part (1) of [lem-sfb-space-universal-thickening-etale-transfer], and its uniqueness of the etale thickening extending $B_D\\to B$, identify $D$ with the universal thickening of $B_D$ over $A$.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-universal-conormal",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-universal-thickening-etale-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 060D and 0605, lemma-universal-thickening-localize and lemma-etale-morphism-of-universal-thickenings (1); Tag 03MB in spaces-morphisms.tex for etale restriction of the closed-subspace ideal."
+   }
+  },
+  {
+   "text": "Compatibility with squares and tower charts. The construction in step 1 commutes with composition by uniqueness. For compatible etale charts $Z_0\\to Y_0\\to X_0$ of $Z\\to Y\\to X$, the maps of the universal thickenings over $X_0$ and $X$ therefore commute with $h$. The induced map $Y_0\\times_{W_{Y_0/X_0}}W_{Z_0/X_0}\\to Y\\times_{W_v}W_{vu}$ commutes with their inclusions into the ambient universal thickenings, by the fibre-product equations. For $\\lambda$, pulling an ideal section along either path gives the same section, and on tensors the value is in both cases $h^\\sharp(i)\\widetilde b$. For $\\rho$, both paths send $k$ to its image modulo the pulled-back ideal $\\mathcal L$. These are the canonical ideal-map formulas of [lem-sfb-space-stalk-ideal-pullback]; equality may be checked on its conservative stalks. Step 6 identifies the vertical ideal maps with the restriction isomorphisms. To identify the tensor-pullback sources, [lem-trf-space-enlarged-etale-ringed-site-model] supplies composition of the ringed morphisms; the tensor definition [def-trf-space-etale-module-functors] identifies the two pullbacks by multiplication of scalar coefficients. The equality follows from the commuting square of ring maps, including for squares that are not cartesian. Hence the restriction isomorphisms identify both $\\lambda$ and $\\rho$ with their chart versions. Nothing requires a nonidentity change on $X$; taking $X_0=X$ gives the asserted identity-base charts.",
+   "uses": [
+    "lem-sfb-space-stalk-ideal-pullback",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 060A, lemma-universal-thickening-functorial; Tag 060D and Tag 06BF, naturality of the ideal maps. The equality is explicitly checked on representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-universal-conormal",
+  "lem-sfb-space-stalk-ideal-pullback",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-universal-thickening-etale-transfer",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 060A, 06BF, 04AL, 0604, 0605 and 060D, with the square-zero ideal computation written out in place of the general immersion conormal sequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal first order thickenings and their conormal right exact transitivity sequence commute with etale localization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R S] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra S Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (M : Submonoid R) [inst_3 : Algebra R Sₘ] [inst_4 : Algebra R Rₘ] [inst_5 : Algebra Rₘ Sₘ] [IsScalarTower R Rₘ Sₘ]\\n  [IsLocalization M Rₘ] [Algebra.FormallyEtale R Sₘ], Algebra.Formal\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ring presentation cotangent sequences do not construct or localize universal thickenings and canonical conormal sequences of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conormal sheaves for formally unramified morphisms: etale charts and transitivity via universal square zero neighborhoods",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.FormallyUnramified (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes is formally unramified, then $ f $ is formally unramified.\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyEtale R A], Algebra.FormallyUnramified R A\", \"doc\": \"For any commutative ring $ R $ and $ R $-algebra $ A $, if $ A $ is formally étale over $ R $, then $ A $ is formally unramified over $ R $. This instance asserts that formal étaleness implies formal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ring presentation cotangent sequences do not construct or localize universal thickenings and canonical conormal sequences of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"exact\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) [CommRing R] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] (h : Function.Surjective ⇑(algebraMap A B)) : Function.Exact ⇑(KaehlerDifferential.kerCotangentToTensor R A B) ⇑(KaehlerDifferential.mapBaseChange R A B)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.Extension.exact_hCotangentι_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {P : Algebra.Extension R S} : Function.Exact ⇑Algebra.Extension.h1Cotangentι ⇑P.cotangentComplex\", \"doc\": \"The sequence `H¹(L_{S/R}) → P.Cotangent → P.CotangentSpace` is exact.\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {P : Algebra.Extension R S} : Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" (R : Type u₁) (S : Type u₂) [CommRing R] [CommRing S] [Algebra R S] (T : Type u₃) [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] : Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"Given algebras $R \\\\to S \\\\to T$, the sequence\\n$H_1(L_{T/R}) \\\\to H_1(L_{T/S}) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$\\nis exact.\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" (R : Type u₁) (S : Type u₂) [CommRing R] [CommRing S] [Algebra R S] (T : Type u₃) [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] : Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T)\", \"doc\": \"Given algebras $R \\\\to S \\\\to T$, the sequence\\n$H_1(L_{T/S}) \\\\to T \\\\otimes_S \\\\Omega_{S/R} \\\\to \\\\Omega_{T/R}$\\nis exact.\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] [Algebra R S] {T : Type u₃} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] {ι : Type w₁} {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ) : Function.Exact ⇑(Algebra.Generators.H1Cotangent.δ Q P) ⇑(Kaehl\", \"doc\": \"\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] [Algebra R S] {T : Type u₃} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] {ι : Type w₁} {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ) (W : Algebra.Generators R T τ) (f : W.Hom Q) : Fun\", \"doc\": \"A variant of `exact_map_δ` that takes in an arbitrary map between generators.\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] [Algebra R S] {T : Type u₃} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] {ι : Type w₁} {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ) : Function.Exact ⇑(Algebra.Extension.H1Cotangent.map (Q.ofComp P\", \"doc\": \"\"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] [Algebra R S] {T : Type u₃} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] {ι : Type w₁} {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ) : Function.Exact ⇑(LinearMap.liftBaseChange T (Algebra.Extension\", \"doc\": \"Given representations `0 → I → R[X] → S → 0` and `0 → K → S[Y] → T → 0`,\\nwe may consider the induced representation `0 → J → R[X, Y] → T → 0`, and the sequence\\n`T ⊗[S] (I/I²) → J/J² → K/K²` is exact.\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" (R : Type u₁) (S : Type u₂) [CommRing R] [CommRing S] [Algebra R S] (T : Type u₃) [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Module.Flat S T] : Function.Exact ⇑(LinearMap.liftBaseChange T (Algebra.H1Cotangent.map R R S T)) ⇑(Algebra.H1Cotangent.map R S T T)\", \"doc\": \"Given algebras $R \\\\to S \\\\to T$ and $T$ flat over $S$, the sequence\\n$T \\\\otimes_S H_1(L_{S/R}) \\\\to H_1(L_{T/R}) \\\\to H_1(L_{T/S})$\\nis exact.\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_liftBaseChange_map_of_flat'\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] [Algebra R S] {T : Type u₃} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] {ι : Type w₁} {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ) (W : Algebra.Generators R T τ) [Module.Flat S T] (\", \"doc\": \"A variant of `exact_liftBaseChange_map_of_flat` that takes in\\narbitrary maps between generators.\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_liftBaseChange_map_of_flat\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] [Algebra R S] {T : Type u₃} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] {ι : Type w₁} {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ) [Module.Flat S T] : Function.Exact ⇑(LinearMap.liftBaseChange T \", \"doc\": \"When $T$ is flat over $S$, the left bottom part of the snake lemma diagram used in\\nthe construction of the connecting homomorphism `Algebra.Generators.H1Cotangent.δ`\\nnaturally extends via a base chang\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ring presentation cotangent sequences do not construct or localize universal thickenings and canonical conormal sequences of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*[Tt]hicken|conormal.*transitiv|[Tt]hicken.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Ring presentation cotangent sequences do not construct or localize universal thickenings and canonical conormal sequences of algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conormal transitivity exact at middle and right for formally unramified maps and etale localization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.FormallyUnramified.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[IsLocalization M Rₘ] : FormallyUnramified R Rₘ\", \"doc\": \"If $ R_m $ is the localization of a commutative ring $ R $ at a multiplicative set $ M $, then $ R_m $ is formally unramified as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallyUnramified.localization_map\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R S] : FormallyUnramified Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally unramified $ R_M $-algebra, where $ R_M $ denotes the localization of $ R $ at $ M $.\"}\n  {\"name\": \"RingHom.FormallyUnramified.holdsForLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \": HoldsForLocalizationAway FormallyUnramified\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is formally unramified.\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_comp\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R B], Algebra.FormallyUnramified A B\", \"doc\": \"Given commutative rings $ R $, $ A $, and $ B $ with $ A $ and $ B $ equipped with $ R $-algebra structures, and $ B $ equipped with an $ A $-algebra structure forming a scalar tower $ R \\to A \\to B $, \"}\n  {\"name\": \"Algebra.IsUnramifiedAt.comp\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsUnramifiedAt R p] [IsUnramifiedAt A P] :\\n  IsUnramifiedAt R P\", \"doc\": \"If $ A $ is unramified over $ R $ at a prime ideal $ p $, and $ B $ is unramified over $ A $ at a prime ideal $ P $ lying over $ p $, then $ B $ is unramified over $ R $ at $ P $. This holds under the\"}\n  {\"name\": \"RingHom.FormallyUnramified.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \": OfLocalizationSpanTarget FormallyUnramified\", \"doc\": \"A ring homomorphism whose target is a localization of the source ring is formally unramified, meaning there are no nontrivial derivations from the target ring to modules over the source ring.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ring presentation cotangent sequences do not construct or localize universal thickenings and canonical conormal sequences of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conormal\"",
+   "results": "Hits read: ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme unramifiedness and algebra-presentation cotangent sequences do not give universal thickenings of algebraic spaces, their etale localization and the canonical transitivity maps."
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*thicken|thicken.*universal|conormal.*[Tt]ransitiv|[Tt]ransitiv.*conormal",
+   "results": "Hits read: ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme unramifiedness and algebra-presentation cotangent sequences do not give universal thickenings of algebraic spaces, their etale localization and the canonical transitivity maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal first order thickenings of formally unramified algebraic spaces commute with etale localization and their conormal modules have a right exact transitivity sequence",
+   "results": "Hits read: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, Algebra.FormallyEtale.localization_map, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme unramifiedness and algebra-presentation cotangent sequences do not give universal thickenings of algebraic spaces, their etale localization and the canonical transitivity maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conormal module of a formally unramified morphism defined by the universal first order thickening is compatible with etale localization",
+   "results": "Hits read: AlgebraicGeometry.FormallyUnramified.recOn, Algebra.FormallyUnramified.localization_map, RingHom.FormallyUnramified.holdsForLocalizationAway, RingHom.Etale.propertyIsLocal, Algebra.FormallyUnramified.localization_base, KaehlerDifferential.isLocalizedModule_map, Algebra.FormallyUnramified.of_isLocalization, RingHom.Etale.ofLocalizationSpanTarget",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme unramifiedness and algebra-presentation cotangent sequences do not give universal thickenings of algebraic spaces, their etale localization and the canonical transitivity maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For nested square zero closed immersions of algebraic spaces the sequence of ideal conormal sheaves is right exact and commutes with restriction to etale charts",
+   "results": "Hits read: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, Algebra.H1Cotangent.exact_map_δ, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, Algebra.Generators.Cotangent.exact, Algebra.Generators.CotangentSpace.exact, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.H1Cotangent.exact_δ_mapBaseChange, Algebra.Generators.H1Cotangent.exact_δ_map",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme unramifiedness and algebra-presentation cotangent sequences do not give universal thickenings of algebraic spaces, their etale localization and the canonical transitivity maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-lci-conormal-splitting",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed). Supporting input in criteria.tex lemma-lci-unobstructed, first paragraph: short exact conormal transitivity and its affine splitting. Supporting input: Universal-thickening localization and right-exact transitivity, independently of any lci hypothesis or affine splitting.",
+   "via": [
+    "lem-sfb-affine-lci-conormal-splitting",
+    "lem-sfb-relative-finite-hilbert-lci-lift",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-universal-conormal-chart-transitivity",
+  "worker": "stage1",
+  "summary": "Checked Stacks 060A/06BF/060D/0605 and their 0604/04AL inputs. Reused existing universal conormal, etale transfer, closed-subspace ideal and geometric-stalk nodes. Wrote the intermediate universal-property argument, the square-zero quotient calculation, etale lifting from the scheme theorem, and canonical-map compatibility explicitly. No new nodes, no statement correction, no Lean attachment.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the existing alteration/groupoid/bootstrap/lci chain in blueprint.from.place: right-exact universal conormal transitivity and arbitrary compatible etale charts, before the lci left-injectivity argument. The ancestor command returns None for this imported created.item chain; retained its existing from.node and via unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic input for the existing universal-conormal route: space fibre products and base change of etale atlases. It does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Generic input for the existing universal-conormal route: unique scheme lifts in square-zero tests for representable etale maps. It does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic input for the existing universal-conormal route: etale tensor pullback is restriction. It does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic input for the existing universal-conormal route: composition of ringed morphisms and localization of etale sites. It does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-4ceff252c",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-4ceff252c (reviewer sub-agent of L); spot-checked: Read the item in full (7 steps; no new nodes; statement and stmt_deps unchanged from the Q13 seed of 2026-10-24; no repair note), every cited statement, and Stacks spaces-more-morphisms 060A, 06BF, 060D, 0605, 0604 and lemma-formally-unramified (tags checked). Step 1: the composite is formally unramified by two uniqueness applications, and the canonical maps come from the space-test universal property. Step 2: P=Y×_{W_v}W_vu has ideal im(h^*I)⊆K, and the universal property over Y follows from uniqueness for W_v (existence and uniqueness both checked). Step 3: the stalk formula I⊗_{A'/I}B and the image IB' match lem-sfb-space-stalk-ideal-pullback; ρ is the quotient; right exactness holds on conservative stalks, with no injectivity claim. Step 4: the representable-etale lift applies lem-weil-pbc-flat-unramified-formally-etale on affine tests (hypotheses met), then glues on affine opens and descends along an atlas. Step 5: the 0604+0605 argument via transfer (1) and step 4 on U→A, correctly without assuming the square is cartesian. Step 6: etale restriction of the ideal; the D case uses the uniqueness in transfer (1). Step 7: functoriality and charts by uniqueness and the local-tensor formula. Small cases tested: nested closed immersions (sequence I/I²⊗R/J→J/J²→J/(I+J²)→0), u=id, v=id, finite separable fields, and a non-cartesian U=A⊔A chart. Duplicates checked: lem-sfb-space-formally-unramified-etale-charts (scheme-chart clause only), the pbc open-restriction and conormal scheme nodes, and the smoothness criterion; none duplicates the item. Accepted the 4 generic tool uses. Batch-5: all 5 flagged citations (stalk-ideal-pullback, space fibre products, ideal-closed-subspace correspondence, etale-module restriction, enlarged ringed-site model) are foundational space/fppf/etale-module nodes; their closures contain no trace-formula or Poincaré-duality step, no sk-thm-trace-transport and no nt-assume node, so all are accepted. Advisory: inherited from.node null; etale for spaces is read in the DAG's representable sense. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalConormalChartTransitivity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.universal_conormal_transitivity",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.UniversalConormalThickening",
+   "AlgebraicGeometry.AlgebraicSpace.UniversalConormalThickening.conormal",
+   "AlgebraicGeometry.AlgebraicSpace.universalConormalThickening_map_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.UniversalConormalThickening.map",
+   "AlgebraicGeometry.AlgebraicSpace.UniversalConormalThickening.conormalMap",
+   "AlgebraicGeometry.AlgebraicSpace.universalConormalThickening_map_spec",
+   "AlgebraicGeometry.AlgebraicSpace.space_formallyUnramified_comp",
+   "AlgebraicGeometry.AlgebraicSpace.universalConormalQuotient_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.universalConormalQuotient",
+   "AlgebraicGeometry.AlgebraicSpace.universal_conormal_transitivity",
+   "AlgebraicGeometry.AlgebraicSpace.universal_conormal_etale_localization",
+   "AlgebraicGeometry.AlgebraicSpace.universal_conormal_etale_ambient",
+   "AlgebraicGeometry.AlgebraicSpace.universalConormalThickening_map_functorial",
+   "AlgebraicGeometry.AlgebraicSpace.universalConormalTower_square",
+   "AlgebraicGeometry.AlgebraicSpace.universal_conormal_transitivity_etale_charts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalConormalChartTransitivity.lean",
+  "statement": "theorem universal_conormal_transitivity {S : Scheme.{u}} {Z Y X : AlgebraicSpace S} (a : Z ⟶ Y) (b : Y ⟶ X) (ha : SpaceFormallyUnramified a) (hb : SpaceFormallyUnramified b) (D : UniversalConormalThickening (a ≫ b)) (E : UniversalConormalThickening a) (F : UniversalConormalThickening b) : IsPullback E.projection (E.map D (𝟙 Z) b (Category.id_comp (a ≫ b))) F.inclusion (D.map F a (𝟙 X) (Category.comp_id (a ≫ b)).symm) ∧ ∃ w : D.conormalMap F a (𝟙 X) (Category.comp_id (a ≫ b)).symm ≫ universalConormalQuotient a b D E = 0, (ShortComplex.mk _ _ w).Exact ∧ Epi (universalConormalQuotient a b D E)",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical maps are selected only from unique universal properties, and the conormal arrows retain the local ideal-section normalization. The same module states composition, arbitrary etale-square localization, ambient etale pullbacks, functoriality and both tower-chart compatibility equations. UniversalConormalThickening only packages the existing universal-property predicate; it does not replace it. The existing tensor composition and square comparisons are cited through their landed definition nodes. Repair of returned head 344f09e21394: stmt_deps directly names the owners of IsUniversalSpaceFirstOrderThickening, moduleStructureMap and moduleTensorPullback_etale_restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12fabc6f9",
+  "group": "NX",
+  "result": "pass",
+  "note": "Read the node, every stmt_dep record and the Lean signatures of IsUniversalSpaceFirstOrderThickening, SpaceFormallyUnramified, spaceConormal(Section), IsSpaceConormalMap, space_conormal_map, moduleTensorComposition, moduleTensorSquare and moduleTensorPullback_etale_restriction, plus Stacks 060A/06BF/060D/0605. All clauses match: W_{vu}→W_v from ∃!; IsPullback orientation correct for Y×_{W_v}W_{vu}=W_u; λ via the normalized IsSpaceConormalMap; ρ unique by section formula n=r^♯m (correct direction); exact + Epi with no mono claim; localization over arbitrary non-cartesian étale squares (cartesian reduction square is a proved conclusion); B_D special case; functoriality via moduleTensorComposition.inv (direction checked); λ/ρ chart squares via moduleTensorSquare.inv, x may be the identity. No extra hypotheses, single universe u, all 10 theorems sorry, defs choose from ∃!, docstrings carry source and blueprint, lean.statement verbatim, node diff vs live = lean+stmt_deps only, earlier H2 return items fixed. Mechanical theorem stmt_dep lem-trf-space-etale-module-pushforward-restriction: the statement genuinely uses the comparison iso that only this theorem constructs (no def node owns it), needed for the 'identifies with restriction' clause → PASS on that point. Advisory: the ∃ e factorization is implied by IsIso but correct. No compile run (no file changed); worker's scompile evidence recorded."
+ }
+}

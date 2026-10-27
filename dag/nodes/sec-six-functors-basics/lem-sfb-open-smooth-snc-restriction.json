@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-open-smooth-snc-restriction",
+ "kind": "statement",
+ "title": "Open restriction of a smooth projective strict normal crossings pair",
+ "statement": "Let $F$ be a field [def-weil-field], let $R$ be a smooth projective $F$-scheme [def-sbc-smooth-morphisms, def-kun-projective], and let $E\\subseteq R$ be a reduced relative strict normal crossings divisor [def-trf-smooth-strict-normal-crossings-divisor]. Thus it is an effective Cartier divisor [def-nagata-effective-cartier-ideal] with finitely many distinct integral components $E_i$, each smooth over $F$ of codimension one, and every intersection of $r$ distinct components is empty or smooth over $F$ of pure codimension $r$. Suppose also that $R$ is regular, $E$ is a strict normal crossings boundary on $R$ [def-weil-regular-scheme, def-trf-strict-normal-crossings-boundary], and at every point the equations of its components through that point are distinct members of a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. Let $U\\subseteq R$ be any open subscheme [def-weil-open-immersion]. Then $U$ is smooth over $F$ and admits a locally closed immersion into a finite-dimensional projective space over $F$. The restriction $E_U=E\\times_R U$ [def-pc-fibre-product] is reduced and effective Cartier. Its distinct integral irreducible components are exactly the nonempty $E_i\\times_R U$, and the intersection indexed by $J$ is $(\\bigcap_{i\\in J}E_i)\\times_R U$, smooth over $F$ of pure codimension $|J|$ whenever nonempty. At $u\\in U$ the canonical isomorphism $\\mathcal O_{U,u}\\cong\\mathcal O_{R,u}$ identifies all component ideals and their regular-parameter equations. The scheme $U$ is regular and $E_U$ is a strict normal crossings boundary on $U$. These assertions include $U=\\varnothing$, $E=\\varnothing$ and the empty index subset $J$, whose intersection is $U$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150 (return to the original dense open), and the end of Step 3, p.152; relative SNC definition following X 2.1, p.149, and VIII Remark 4.2.2(i), p.118."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-trf-smooth-strict-normal-crossings-divisor",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-trf-marked-ideal-order"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-open-immersion], $\\mathcal O_U=\\mathcal O_R|_U$. At $u\\in U$, sending a representative $(V,s)$ to $(V\\cap U,s|_{V\\cap U})$ identifies germs on $R$ with germs on $U$: conversely an open neighbourhood of $u$ in $U$ is already open in $R$, with the same sections. The two maps are inverse, since restriction does not change a germ. This gives the canonical local ring isomorphism $\\mathcal O_{U,u}\\cong\\mathcal O_{R,u}$, as rings with their maximal ideals. The same argument applies to every open subscheme used below.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HE (definition-immersion-locally-ringed-spaces), Example Tag 01HF (example-open-subspace), and Tag 01IO (definition-immersion)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-open-immersion-smooth-composition] to $U\\hookrightarrow R$ and the given smooth structure map $R\\to\\operatorname{Spec}F$. It gives that $U\\to\\operatorname{Spec}F$ is smooth. More generally, if $T$ is any one of the smooth intersections $E_J=\\bigcap_{i\\in J}E_i$ appearing in [def-trf-smooth-strict-normal-crossings-divisor], the open subscheme $T\\cap U\\hookrightarrow T$ is smooth over $F$ by the same lemma. This includes the empty intersection $E_\\varnothing=R$.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "def-trf-smooth-strict-normal-crossings-divisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VC (lemma-open-immersion-smooth) and 01VA (lemma-composition-smooth)"
+   }
+  },
+  {
+   "text": "By [def-kun-projective] choose a closed immersion $i:R\\hookrightarrow P=\\mathbf P^N_F$ with $N$ finite. The subset $i(R\\setminus U)$ is closed in $P$: $R\\setminus U$ is closed in $R$, and $i$ is a homeomorphism onto a closed subset by [def-weil-closed-immersion]. Put $W=P\\setminus i(R\\setminus U)$. Then $i^{-1}(W)=U$. Apply clause (1) of [lem-weil-pbc-thickening-open-restriction] to $i$ and the open $W$; it gives a closed immersion $U\\hookrightarrow W$. Composing with $W\\hookrightarrow P$ is a locally closed immersion, by the immersion definition in [def-weil-closed-immersion]. These maps are over $F$, since they are restrictions of $i$.",
+   "uses": [
+    "def-kun-projective",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-thickening-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IO (definition-immersion); open restriction of a closed immersion as in morphisms.tex Tag 01QO (lemma-closed-immersion)"
+   }
+  },
+  {
+   "text": "For each closed subscheme $T\\hookrightarrow R$ among $E$, the $E_i$, and their intersections, apply clauses (1) and (2) of [lem-weil-pbc-thickening-open-restriction]. Its restriction is a closed subscheme $T\\cap U\\hookrightarrow U$ with exactly the restricted ideal sheaf. It represents $T\\times_R U$: a pair of maps to $T$ and $U$ over $R$ has its unique map into $T$ landing in the open preimage of $U$, and hence factors uniquely through this open subscheme. This verifies the universal property of [def-pc-fibre-product]. In particular $E_U$ and $E_{i,U}$ are these open subschemes. On an open $V\\subseteq U$ the ambient rings and all these defining ideals are literally their values on the same open $V\\subseteq R$; on stalks they correspond under step 1.",
+   "uses": [
+    "lem-weil-pbc-thickening-open-restriction",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO (lemma-closed-immersion); schemes.tex Tag 01IO (definition-immersion); more-morphisms.tex Tag 09ZU (lemma-base-change-thickening), applied only to the underlying closed immersion"
+   }
+  },
+  {
+   "text": "The local rings of $E_U$, as an open subscheme of $E$, are those of $E$ by step 1; they are reduced, so $E_U$ is reduced by [def-pc-reduced-scheme]. The Cartier generator condition restricts directly: around $u\\in U$ choose a Cartier chart $V=\\operatorname{Spec}A\\subseteq R$ with ideal $(f)$, $f$ a non-zero-divisor, and shrink to a principal open $D(g)\\subseteq V\\cap U$ containing $u$. In $A_g$, $f(a/g^n)=0$ implies $g^mfa=0$ for some $m$; cancellation of $f$ gives $g^ma=0$, hence $a/g^n=0$. Thus $f$ remains a non-zero-divisor and generates the restricted ideal on $D(g)$. These charts cover $U$, giving [def-nagata-effective-cartier-ideal]. Finally, every nonempty affine open of a nonempty $E_{i,U}$ is an affine open of $E_i$ with the same ring, an integral domain. Therefore $E_{i,U}$ is integral by [def-pc-integral-scheme].",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J0 (definition-reduced), 01J1 (lemma-reduced); properties.tex Tag 01OK (definition-integral); divisors.tex Tag 01WS (lemma-characterize-effective-Cartier-divisor)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] to the open subspace $|E_U|\\subseteq|E|$. Its order-preserving bijection of irreducible closed subsets, with inverse closure, identifies the maximal ones with the components $|E_i|$ that meet $U$. Indeed the closure in $E$ of an irreducible closed subset of $E_U$ lies in some $E_i$: an irreducible set contained in a finite union of closed sets lies in one of them (induct on the number of closed sets using the definition of irreducibility). Maximality in either space is then equivalent by that order correspondence. Distinct surviving components remain distinct by injectivity. Step 5 already proves that their open subschemes are integral, hence reduced, so their scheme structures are the claimed integral component structures. They exhaust $E_U$ and are pairwise incomparable. For scheme-theoretic union use [lem-weil-pbc-scheme-theoretic-union] repeatedly: its ideal-intersection formula on an affine open $V\\subseteq U$ is identical to the formula on the same affine open of $R$, and the given equality $E=\\bigcup_i E_i$ therefore restricts to $E_U=\\bigcup_i E_{i,U}$. Empty members have unit ideal and can be removed.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-scheme-theoretic-union"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0B7I (lemma-dimension-supremum-local-dimensions), irreducible-closed open/closure correspondence in its proof; morphisms.tex Tags 0C4H (definition-scheme-theoretic-intersection-union) and 0C4J (lemma-scheme-theoretic-union)"
+   }
+  },
+  {
+   "text": "For any subset $J$ of the original component labels, $\\bigcap_{i\\in J}E_{i,U}=E_J\\times_R U$. To check the identification, a map into either scheme is exactly a map into $U$ whose composite into $R$ factors through every $E_i$ for $i\\in J$; uniqueness follows from the closed immersions being inclusions. This is the same fibre-product universal property [def-pc-fibre-product]. Smoothness is step 2. For pure codimension use precisely the affine formulation of [def-trf-smooth-strict-normal-crossings-divisor]: every affine open $V\\subseteq U$ is an affine open of $R$ with the same ring and the same defining ideal of $E_J$ by step 4. Its minimal primes consequently have the same heights $|J|$ as before. This proves the pure codimension assertion with no dimension-of-open comparison. At $u\\in U$ the component ideals correspond by step 4; the very same generators in the local ring remain distinct members of the same regular system of parameters under step 1, since its maximal ideal and Krull dimension are unchanged [def-weil-pbc-regular-system-of-parameters].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-smooth-strict-normal-crossings-divisor",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HF (example-open-subspace) and 01IO (definition-immersion); ILO Expose X, definition after Theorem 2.1, printed p.149; algebra.tex Tag 00KU (definition-regular-local)"
+   }
+  },
+  {
+   "text": "Finally use the regularity criterion in [def-weil-regular-scheme]. The scheme $R$ and every $E_J$ are locally Noetherian with regular local rings, the latter assertions being part of [def-trf-strict-normal-crossings-boundary]. Their open restrictions remain locally Noetherian by the explicit open-subscheme assertion in [pqf-def-locnoeth], and have the same regular local rings by step 1. They are therefore regular. At every $u\\in E_J\\cap U$ both local rings in $\\dim\\mathcal O_{R,u}=\\dim\\mathcal O_{E_J,u}+|J|$ are unchanged, so the same equation holds for $U$ and $E_J\\cap U$. The restricted ideal is radical directly as well: on any open $V\\subseteq U$, it is the original ideal on the same open of $R$ by step 4, so $a^n$ in that ideal implies $a$ is in it by the original boundary hypothesis. Together with the reduced Cartier divisor of step 5 and its finite distinct integral components of step 6, these are exactly all clauses of [def-trf-strict-normal-crossings-boundary] for $E_U\\subseteq U$. If $U$ is empty all pointwise conditions are vacuous and its immersion is the empty closed subscheme of $P$. If $E$ is empty its ideal is the unit ideal, generated by $1$, and it has no components. If $J=\\varnothing$, both intersections are the ambient scheme and the codimension is zero. Thus none of the arguments imposes a nonemptiness hypothesis beyond the stated nonempty components.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-trf-strict-normal-crossings-boundary",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 02IT (lemma-characterize-regular), 02IU (lemma-locally-regular); ILO Expose VIII Remark 4.2.2(i), printed p.118"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-pc-open-immersion-smooth-composition",
+  "def-trf-smooth-strict-normal-crossings-divisor",
+  "def-kun-projective",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-thickening-open-restriction",
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-scheme-theoretic-union",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150, return to the original open; open-restriction details supplied from the cited definitions and Stacks sources, with VIII Remark 4.2.2(i), p.118."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a smooth projective pair with a strict normal crossings divisor to an open subscheme preserves smooth intersections local parameters codimensions and quasi projectivity",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"IsSmooth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCrossing|normal_crossing|IsQuasiProjective",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict normal crossings divisor and smoothness restrict to any open subscheme",
+   "results": "8 hits: AlgebraicGeometry.IsLocalAtSource.resLE, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.instIsSmoothOfIsOpenImmersion, AlgebraicGeometry.Scheme.Opens.stalkIso, AlgebraicGeometry.Flat.instResLE",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open in a smooth projective scheme is quasi projective and the restriction of a strict normal crossings boundary has the same local parameter equations",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage, AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Proj",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"IsSmooth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the combined smooth-projective SNC open-restriction assertion; useful individual open-restriction facts are handled by existing DAG nodes and the explicit elementary steps."
+  },
+  {
+   "tool": "grep",
+   "query": "normalCrossing|normal_crossing|strict normal crossing",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the combined smooth-projective SNC open-restriction assertion; useful individual open-restriction facts are handled by existing DAG nodes and the explicit elementary steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict normal crossings divisor restricts to any open subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.Scheme.Opens.stalkIso, AlgebraicGeometry.Scheme.restrict, AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.IsLocalAtSource.resLE, AlgebraicGeometry.IsOpenImmersion.ofRestrict, AlgebraicGeometry.Scheme.restrict_carrier, AlgebraicGeometry.Scheme.ofRestrict_appLE",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the combined smooth-projective SNC open-restriction assertion; useful individual open-restriction facts are handled by existing DAG nodes and the explicit elementary steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a smooth projective scheme and a strict normal crossings divisor to an open subscheme preserves component ideals and local parameters",
+   "results": "8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Scheme.restrict, AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.Scheme.OpenCover.restrict_f, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.ofRestrict, AlgebraicGeometry.IsImmersion.instResLE",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the combined smooth-projective SNC open-restriction assertion; useful individual open-restriction facts are handled by existing DAG nodes and the explicit elementary steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty open of an integral scheme is integral; open restriction of a reduced Cartier divisor preserves all its smooth normal crossings strata",
+   "results": "8 hits: AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the combined smooth-projective SNC open-restriction assertion; useful individual open-restriction facts are handled by existing DAG nodes and the explicit elementary steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gabber-global-snc-alteration",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), alteration/tame-boundary reduction: return to the original open, old item Step 8 in full; this added input has no imported blueprint ancestor.",
+   "via": [
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-open-smooth-snc-restriction",
+  "worker": "stage1",
+  "summary": "Eight explicit steps prove smoothness, a locally closed projective-space embedding, restriction of the Cartier ideal and components, smooth intersections with unchanged affine codimension, local parameters, and the regular SNC boundary. Reuses the existing smooth-open, closed-open restriction, irreducible-closed open correspondence and union nodes; creates no nodes. Restores all definition dependencies actually named in the statement and checks the three empty cases. No mathematical statement change. Repair of the promotion return at 1311ae75328: rebased by the delivery tool onto current origin/sheaf-dag; reread every live statement dependency and proof citation, verified all 21 quotation matches, and made radicality of the restricted ideal explicit in step 8. Retained the full eight-step proof, source citations and actual Mathlib search records.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None). Realizes det-thm-sf-ctf-stability-direct-images proof (3), alteration/tame-boundary reduction, return to the original open: old Step 8 of lem-sfb-gabber-global-snc-alteration, retained in this child. Blueprint searches for normal crossing and open restriction yield no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-union",
+    "why": "Generic ideal-intersection description of a finite closed union, used solely to restrict the given component union to an open; this does not change the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-theoretic-union"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-d93387993",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-d93387993 (reviewer sub-agent of L); spot-checked: PASS: the eight-step proof is correct and nothing needed changing. There are no new nodes. The statement is unchanged from the prior head 1311ae75328; the only text change is a radicality sentence added to step 8. Step 1: open immersion identifies the local rings. Step 2: lem-pc-open-immersion-smooth-composition gives smoothness of U and of each C_J∩U. Step 3: the def-kun-projective embedding plus clause (1) of lem-weil-pbc-thickening-open-restriction gives a closed-then-open immersion via W=P∖i(R∖U). Step 4: clauses (1)-(2) of that node give the restricted ideals, and the universal property of T×_R U holds. Step 5: the non-zero-divisor cancellation g^m f a=0 ⇒ g^m a=0 is correct, and integrality follows from the affine-ring form. Step 6: the order-reflecting open/irreducible-closed bijection gives the components, and lem-weil-pbc-scheme-theoretic-union is an accepted generic tool_use for the restricted union. Step 7: heights of minimal primes are the same because affine opens of U are affine opens of R with the same ring and ideal; the parameters carry over. Step 8: regularity via pqf-def-locnoeth and the same stalks; the dimension formula and radicality carry over. Small cases checked: U=∅, E=∅, J=∅, and the axes V(xy) restricted to D(x). Source: ILO X 2.2-2.3, pp.149-150; no SGA. Duplicate search found no equivalent node; lem-per-snc-boundary-parameter-criterion is related but not a duplicate. Advisory: the item tacitly identifies the boundary components C_i with the divisor components E_i; this follows from the boundary definition's own remark and its dimension formula. The step-5 Cartier chart is taken as affine, which is the Stacks convention. Batch-5 flag: def-trf-strict-normal-crossings-boundary is a general definition, not part of the trace formula or Poincaré duality or their proofs, so it is accepted. The parent lem-sfb-gabber-global-snc-alteration is fully served by the statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenSmoothSNCRestriction",
+  "declaration": "AlgebraicGeometry.open_smooth_snc_restriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSmoothSNCRestriction.lean",
+  "statement": "theorem open_smooth_snc_restriction {F : Type u} [Field F] {R : Scheme.{u}} (f : R ⟶ Spec (.of F)) [Smooth f] [IsHProjective f] [IsLocallyNoetherian R] [IsRegular R] (E : R.IdealSheafData) (_hE : E.IsSmoothStrictNormalCrossingsDivisor f) (_hboundary : IsStrictNormalCrossingsBoundary E) (n : ℕ) (C : Fin n → R.IdealSheafData) (_hunion : E = ⨅ i, C i) (_hintegral : ∀ i, IsIntegral (C i).subscheme) (_hdistinct : ∀ i j, (C i).support ≤ (C j).support → i = j) (_hparameters : ∀ x : R, ∃ (t : List (R.presheaf.stalk x)) (a : {i : Fin n // x ∈ (C i).support} ↪ Fin t.length), IsLocalRing.IsRegularSystemOfParameters t ∧ ∀ i, HilbertSamuel.stalkIdeal (C i.1) x = Ideal.span {t.get (a i)}) (U : R.Opens) : Smooth (U.ι ≫ f) ∧ (∃ (N : ℕ) (j : U.toScheme ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of F))), IsImmersion j ∧ j ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of F)) ↘ Spec (.of F) = U.ι ≫ f) ∧ IsReduced (E.comap U.ι).subscheme ∧ (E.comap U.ι).IsInvertible ∧ (E.comap U.ι = ⨅ i, (C i).comap U.ι) ∧ (∀ i, Nonempty ((C i).comap U.ι).subscheme → IsIntegral ((C i).comap U.ι).subscheme) ∧ (∀ i j, Nonempty ((C i).comap U.ι).subscheme → Nonempty ((C j).comap U.ι).subscheme → ((C i).comap U.ι).support = ((C j).comap U.ι).support → i = j) ∧ (Set.image (fun Z : Set (E.comap U.ι).subscheme ↦ (E.comap U.ι).subschemeι '' Z) (irreducibleComponents (E.comap U.ι).subscheme) = {Z | ∃ i, Nonempty ((C i).comap U.ι).subscheme ∧ Z = (((C i).comap U.ι).support : Set U.toScheme)}) ∧ (∀ J : Finset (Fin n), J.sup (fun i ↦ (C i).comap U.ι) = (J.sup C).comap U.ι ∧ Smooth ((J.sup (fun i ↦ (C i).comap U.ι)).subschemeι ≫ U.ι ≫ f) ∧ ∀ (V : U.toScheme.affineOpens) (p : Ideal Γ(U.toScheme, V.1)), p ∈ ((J.sup (fun i ↦ (C i).comap U.ι)).ideal V).minimalPrimes → p.height = (J.card : ℕ∞)) ∧ (∀ x : U.toScheme, (∀ i, (HilbertSamuel.stalkIdeal (C i) x.1).map (U.stalkIso x).inv.hom = HilbertSamuel.stalkIdeal ((C i).comap U.ι) x) ∧ ∀ t : List (R.presheaf.stalk x.1), IsLocalRing.IsRegularSystemOfParameters t → IsLocalRing.IsRegularSystemOfParameters (t.map (U.stalkIso x).inv.hom) ∧ ∀ (i : Fin n) (a : Fin t.length), HilbertSamuel.stalkIdeal (C i) x.1 = Ideal.span {t.get a} → HilbertSamuel.stalkIdeal ((C i).comap U.ι) x = Ideal.span {(U.stalkIso x).inv.hom (t.get a)}) ∧ IsRegularScheme U.toScheme ∧ IsStrictNormalCrossingsBoundary (E.comap U.ι)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5405b6fe8",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Item lem-sfb-open-smooth-snc-restriction (Q31, 5405b6fe). Read the node, all stmt_dep Lean sources and the module. Hypotheses match the node with nothing extra: the exposed C/_hunion/_hintegral/_hdistinct are the same clauses as the existential in IsSmoothStrictNormalCrossingsDivisor and determine the components up to reindexing; [IsLocallyNoetherian][IsRegular] are exactly IsRegularScheme; _hparameters renders the distinct regular-parameter equations through an embedding of active labels. Every conclusion clause is present: smoothness of U, IsImmersion into a ULift-Fin projective space over F, comap reduced/IsInvertible (fibre product via comapIso), union, integral distinct nonempty restrictions, exact irreducible-components set, J.sup comap equality with smoothness and minimal-prime heights |J|, stalk transport via stalkIso.inv of the ideals, parameter lists and equations, IsRegularScheme U and the boundary. Edge cases U, E and J empty are covered. lean.statement is verbatim and the proof is a single sorry; docstrings carry the source and blueprint. The added stmt_dep def-trf-marked-ideal-order is landed and owns stalkIdeal. No compile run (no file changed)."
+ }
+}

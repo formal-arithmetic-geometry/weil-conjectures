@@ -18,9 +18,144 @@
   "def-pc-fibre-product",
   "def-sc-etale-qcoherent-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-sbc-locally-finite-presentation], $V$ is covered by affine opens $\\operatorname{Spec}A$ mapping into affine $\\operatorname{Spec}R\\subset W$ with $A$ finitely presented over $R$. On these charts $\\Omega^1_{V/W}$ is the sheaf of $\\Omega_{A/R}$ by [def-sc-relative-differential-sheaf]. The latter module is finitely presented by [lem-sfb-ring-finite-presentation-differentials]. These affine descriptions also give quasi-coherence directly. The affine criterion [lem-weil-pbc-quasi-coherent-finite-type-affine] therefore makes $\\Omega^1_{V/W}$ finitely presented as a sheaf. By [lem-pc-tensor-pullback-finite-presentation], $\\mathcal E$ is finitely presented; no flatness of $a_0$ is needed. The ideal $\\mathcal I$ is quasi-coherent on $T$ by [def-sbc-first-order-thickening]. As a module on $T_0$ it is also quasi-coherent: on $\\operatorname{Spec}A\\subset T$ with ideal $J$, it is the sheaf of the $A/J$-module $J$ because $J^2=0$, and localization agrees on principal opens. Thus [lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent] applies to $K=\\underline{\\operatorname{Hom}}(\\mathcal E,\\mathcal I)$ on $T_0$. Its closed pushforward $\\mathcal H=i_*K$ is quasi-coherent by [lem-weil-pbc-closed-immersion-pushforward-annihilated](1).",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-sc-relative-differential-sheaf",
+    "lem-sfb-ring-finite-presentation-differentials",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H6 (lemma-smooth-formally-smooth), final paragraph, using scheme Tags 01V3, 00RY, 01BQ, 01LA(10), 01QY"
+   }
+  },
+  {
+   "text": "For an etale covering $\\{U_j\\to U\\}$, compatible maps $a_j:U_j\\to V$ glue uniquely by [lem-weil-pbc-fpqc-finer-than-etale] and [lem-weil-pbc-fpqc-representable-descent]. Their composites with $f$ equal $bu$ because equality of maps into $W$ can be checked on the same covering. The base-changed family $\\{U_{j,0}=T_0\\times_TU_j\\to U_0\\}$ is again an fpqc covering by [lem-weil-pbc-fpqc-covering-axioms](3), so the uniqueness clause of [lem-weil-pbc-fpqc-representable-descent] on it checks the equality with $a_0\\operatorname{pr}_{T_0}$. Thus the glued map is a lift. Restrictions are composition and uniqueness is uniqueness of the glued map into $V$, proving that $\\mathcal L$ is a sheaf.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 061A (lemma-sheaf), scheme case; Descent Tag 023Q"
+   }
+  },
+  {
+   "text": "Fix $u:U\\to T$ etale, put $i_U:U_0\\hookrightarrow U$, and let $u_0:U_0\\to T_0$ be the projection. Etale maps are flat by [def-weil-etale-morphism]. On affine charts $A\\to B$, [lem-weil-pbc-flat-tensor-exact] applied to $0\\to J\\to A\\to A/J\\to0$ identifies the ideal of $U_0$ with $J\\otimes_AB=JB$. It has square zero. Moreover $A/J\\to B/JB$ is flat: for an injection of $A/J$-modules $N\\to N'$, the tensors with $B/JB$ over $A/J$ identify with their tensors with $B$ over $A$, and the latter map is injective by [def-weil-pbc-flat-ring-map]. The affine pullback formula [lem-weil-pbc-tilde-pullback-base-change] therefore identifies the ideal $\\mathcal I_U$ with $u_0^*\\mathcal I$. Put $K=\\underline{\\operatorname{Hom}}(\\mathcal E,\\mathcal I)$ and $\\mathcal E_U=u_0^*\\mathcal E$. The finite presentation established in step 1 permits [lem-weil-pbc-flat-base-change-hom-finitely-presented] on every affine chart. Via [lem-weil-pbc-affine-tilde-gamma-adjunction] and the affine pullback formula this identifies $u_0^*K$ with $\\underline{\\operatorname{Hom}}(\\mathcal E_U,\\mathcal I_U)$. The comparison sends $c\\otimes h$ to $c(1\\otimes h)$; this same formula after localization shows the chartwise maps agree.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/coherent.tex",
+    "place": "Tag 087R (lemma-pseudo-coherence-and-base-change-ext)(1), q=0; Tag 02KG (lemma-affine-base-change)"
+   }
+  },
+  {
+   "text": "The immersion $i$ is affine: over $\\operatorname{Spec}A\\subset T$ its inverse image is $\\operatorname{Spec}(A/J)$ by [def-sbc-first-order-thickening], as required by [pqf-def-affine-morphism]. Since $K$ is quasi-coherent by step 1, [lem-weil-pbc-affine-pushforward-base-change](1) applies and gives $u^*i_*K\\simeq i_{U,*}u_0^*K$. Combining with step 3 and taking sections gives the canonical identification\n$$\\mathcal H_{\\mathrm{et}}(U)=\\operatorname{Hom}_{\\mathcal O_{U_0}}(\\mathcal E_U,\\mathcal I_U).$$\nHere [def-sc-etale-qcoherent-module] specifies the left-hand sections and their pullback restrictions; [lem-sc-etale-qcoherent-descent] guarantees this coefficient presheaf is a sheaf. These identifications commute with further etale restriction: the Hom comparison uses the same tensor formula after another pullback, and the pushforward comparison commutes with composition by part (3) of the affine base-change node.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-sc-etale-qcoherent-module",
+    "lem-sc-etale-qcoherent-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/descent.tex",
+    "place": "Tag 02KG (lemma-affine-base-change), its tensor comparison; Tag 03DR (section-quasi-coherent-sheaves)."
+   }
+  },
+  {
+   "text": "Fix a lift $a\\in\\mathcal L(U)$ and let $g:U_0\\to V$ be its reduction. The pullback composition isomorphism in [lem-pc-module-pullback-identity-composition] identifies $\\mathcal E_U=g^*\\Omega^1_{V/W}$. By [lem-pc-module-pullback-adjunction], its homomorphisms to $\\mathcal I_U$ are homomorphisms $\\Omega^1_{V/W}\\to g_*\\mathcal I_U$. By [lem-sfb-relative-differentials-sheaf-universal-property], these are exactly the $W$-derivations $D:\\mathcal O_V\\to g_*\\mathcal I_U$. Both bijections commute with restriction. Thus steps 3--4 identify a coefficient $h$ with precisely such a relative derivation, with no choice of coordinates or finite free basis.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sfb-relative-differentials-sheaf-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04FG (lemma-difference-derivation), equation-D and the adjunction immediately following it"
+   }
+  },
+  {
+   "text": "For the derivation $D$ of step 5 define the ring-sheaf map $\\alpha=a^\\sharp+D$ with the same underlying continuous map as $a$. On local sections $x,y$, the expansion of $\\alpha(x)\\alpha(y)$ is $a^\\sharp(x)a^\\sharp(y)+a^\\sharp(x)D(y)+a^\\sharp(y)D(x)$ since $D(x)D(y)=0$. The middle terms equal the actions of the reduction $g^\\sharp$ on $\\mathcal I_U$, so Leibniz gives $\\alpha(xy)=\\alpha(x)\\alpha(y)$. Additivity and $\\alpha(1)=1$ follow from the derivation identities, and $D$ vanishes on the base. The stalk maps are local: reduction modulo the square-zero ideal agrees with the local map of $a$, and an element of $\\mathcal O_{U,x}$ lies in its maximal ideal exactly when its reduction in $\\mathcal O_{U_0,x}$ does. Thus $\\alpha$ defines a morphism of locally ringed spaces, hence a scheme morphism by [def-weil-locally-ringed-space-morphism]. It is over $W$ and reduces to $g$. This is the lift $h\\cdot a$, uniquely specified by the displayed ring-sheaf map.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "lemma-action-by-derivations following Tag 04FG; Tag 04FK (remark-special-case); multiplicativity and locality checked directly."
+   }
+  },
+  {
+   "text": "Conversely take another lift $c\\in\\mathcal L(U)$. Its underlying map is the same as that of $a$, since both reduce to $g$ and $U_0\\to U$ is a homeomorphism. Their difference $D=c^\\sharp-a^\\sharp$ lands in $\\mathcal I_U$. On sections, write $c^\\sharp(x)=a^\\sharp(x)+D(x)$. Expanding the product and using $\\mathcal I_U^2=0$ gives $D(xy)=g^\\sharp(x)D(y)+g^\\sharp(y)D(x)$. The difference is additive and zero on sections from $W$, since $fa=fc=bu$. It is therefore a relative derivation of exactly the kind identified in step 5, and determines a unique $h\\in\\mathcal H_{\\mathrm{et}}(U)$. Addition and subtraction are inverse, so the orbit map $h\\mapsto h\\cdot a$ is bijective. Zero acts as the identity. Acting successively by coefficients with derivations $D_1,D_2$ gives $a^\\sharp+D_1+D_2$; reductions and hence the module actions remain fixed throughout. This proves the additive action law.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04FG (lemma-difference-derivation), special case of zero target thickening; Tag 04FJ (lemma-action-sheaf)"
+   }
+  },
+  {
+   "text": "Every morphism $v:U'\\to U$ in $T_{\\mathrm{et}}$ restricts the coefficient of steps 3--4 by the tensor formula there. Pullback of the ring-sheaf sum is the sum of the pulled-back maps, so $(h\\cdot a)|_{U'}$ and $h|_{U'}\\cdot a|_{U'}$ have the same ring-sheaf map and reduction. Uniqueness in step 6 makes them equal. Thus these actions define a sheaf action. If $\\mathcal L(U)$ is empty, its action map is the unique map from $\\mathcal H_{\\mathrm{et}}(U)\\times\\varnothing=\\varnothing$ to $\\varnothing$; all action identities on that object are vacuous. No existence claim has entered. Steps 6 and 7 give the specified formula and all orbit bijections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 061C (lemma-action-sheaf), 061D (remark-special-case)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-sc-relative-differential-sheaf",
+  "lem-sfb-ring-finite-presentation-differentials",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-sc-etale-qcoherent-module",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sfb-relative-differentials-sheaf-universal-property",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 061A, 061C, 061D, scheme case; Tag 04AM final paragraph, with scheme algebra and pullback comparisons made explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +205,45 @@
    "results": "{\"t\": \"2026-10-19T00:01:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Derivation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Meta.Grind.Arith.CommRing.PolyDerivation\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.input\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.p\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.normEq0\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.step\", \"Lean.Meta.Grind.Arith.CommRing.PolyDerivation.denoteExpr\", \"Derivation\", \"Derivation.instAdd\"], \"digest\": \"2aa0a850a6b9bcbe\"}; First query rejected the identifier Sheaf.H; this is an invalid pattern, not an absence result. The second name search gives Derivation and its algebraic instances (plus unrelated Lean tactic PolyDerivation declarations); none asserts the scheme sheaf action or quasi-coherence.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of lifts over a square zero thickening is acted on simply transitively by a quasi coherent module of derivations",
+   "results": "{\"t\": \"2026-10-24T00:42:39Z\", \"tool\": \"leanfinder\", \"query\": \"The sheaf of lifts over a square zero thickening is acted on simply transitively by a quasi coherent module of derivations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivationToSquareZeroEquivLift\", \"PresheafOfModules.Derivation.Universal\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"PresheafOfModules.Derivation.Universal.desc\", \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"PresheafOfModules.Derivation'.Universal.mk\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.Derivation.instSubsingletonUniversal\"], \"digest\": \"cba2ee1d4c04bbbd\"}; Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:81--124. The ring-level bijection gives no scheme lift sheaf, etale coefficient comparison, or quasi-coherence assertion; the presheaf differentials and presentation hits cover only ingredients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?torsor|[Ll]ift.*[Dd]erivation|[Dd]erivation.*[Ll]ift",
+   "results": "{\"t\": \"2026-10-24T00:43:09Z\", \"tool\": \"grep\", \"query\": \"pseudo.?torsor|[Ll]ift.*[Dd]erivation|[Dd]erivation.*[Ll]ift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\"], \"digest\": \"86ef6901049fcc3b\"}; Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:81--124. The ring-level bijection gives no scheme lift sheaf, etale coefficient comparison, or quasi-coherence assertion; the presheaf differentials and presentation hits cover only ingredients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivationToSquareZeroEquivLift\"",
+   "results": "{\"t\": \"2026-10-24T00:43:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"derivationToSquareZeroEquivLift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"derivationToSquareZeroEquivLift\", \"derivationToSquareZeroEquivLift_apply_coe_apply\", \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\"], \"digest\": \"8c23101e63e6de2c\"}; Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:81--124. The ring-level bijection gives no scheme lift sheaf, etale coefficient comparison, or quasi-coherence assertion; the presheaf differentials and presentation hits cover only ingredients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of lifts of a scheme map across a square zero thickening is a pseudo torsor under Hom of differentials into the ideal sheaf",
+   "results": "{\"t\": \"2026-10-24T00:43:09Z\", \"tool\": \"leansearch\", \"query\": \"The sheaf of lifts of a scheme map across a square zero thickening is a pseudo torsor under Hom of differentials into the ideal sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivationToSquareZeroEquivLift\", \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.IsOpenImmersion.lift_app\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"liftOfDerivationToSquareZero_apply\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp\", \"retractionOfSectionOfKerSqZero\"], \"digest\": \"ba0191ecdfbdfb67\"}; Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:81--124. The ring-level bijection gives no scheme lift sheaf, etale coefficient comparison, or quasi-coherence assertion; the presheaf differentials and presentation hits cover only ingredients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a finitely presented quasi coherent module to a quasi coherent ideal commutes with etale pullback and acts on infinitesimal lifts",
+   "results": "{\"t\": \"2026-10-24T00:43:10Z\", \"tool\": \"leanfinder\", \"query\": \"Internal Hom from a finitely presented quasi coherent module to a quasi coherent ideal commutes with etale pullback and acts on infinitesimal lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.Presentation.mapGenerators\", \"Algebra.Extension.H1Cotangent.map\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.derivation'\"], \"digest\": \"ba6655a72f58861a\"}; Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:81--124. The ring-level bijection gives no scheme lift sheaf, etale coefficient comparison, or quasi-coherence assertion; the presheaf differentials and presentation hits cover only ingredients.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-etale-local-infinitesimal-lifts-smooth",
@@ -104,5 +274,119 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-etale-local-lift-torsor-quasi-coherent",
+  "worker": "stage1",
+  "summary": "Checked the square-zero lift sheaf and derivation action against Stacks 061A/061C/061D and the quasi-coherence argument of 04AM. Reused existing general finite-presentation, descent and flat Hom/base-change nodes; wrote out the coefficient comparison, ring-map addition, locality on stalks, inverse difference and restriction compatibility. No new nodes, no existence claim and no change of statement. The identical existing sfb item was read as reference material, not used as a substitute for this proof.",
+  "blueprint": "Supporting scheme-theoretic infinitesimal criterion used by lem-per-strict-log-jacobian-criterion, proof Steps 3--5 (a descendant in the inherited lem-per-artin-gabber-affine-curve lineage). The current ancestor proof no longer has the historical local-model Step 3; lineage is retained, not presented as a quotation of its current proof. This node supplies only the derivation action and quasi-coherence of its coefficient sheaf.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Step 1 uses the generic affine finite-presentation criterion for module sheaves. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Step 1 uses preservation of finite presentation under arbitrary module pullback, without flatness. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+    "why": "Step 1 uses quasi-coherence of internal Hom from a finitely presented module. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "why": "Step 1 uses quasi-coherence under closed pushforward. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Step 2 converts an etale covering into an fpqc covering. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Step 3 uses the affine module pullback tensor formula. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Step 4 uses affine pushforward base change and its composition compatibility. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent",
+    "why": "Step 4 uses descent to ensure the associated coefficient presheaf is a sheaf. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Step 5 identifies the iterated pullback of relative differentials. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Step 5 uses the Hom adjunction for module pullback. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   },
+   {
+    "node": "lem-sfb-relative-differentials-sheaf-universal-property",
+    "why": "Step 5 uses the full universal property of the relative differential sheaf, not merely its affine definition. No node of this unit states this general tool; using it preserves the source infinitesimal-lifting route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sfb-relative-differentials-sheaf-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-4e4fd5dae",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-4e4fd5dae (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, with every cited statement. The statement matches Stacks spaces-more-morphisms 061A (lemma-sheaf, l.3791), 061C (lemma-action-sheaf, l.3827) and 061D (remark-special-case, l.3848) for schemes, with B=W, X'=T, Y=Y'=V and a=a0; quasi-coherence is 04AM, final paragraph. No existence of lifts is claimed, and the statement is byte-identical to the live side node (still unsplit). Mechanical checks: there are no new nodes; uses over the 8 steps equal proof_deps; there is no cycle (closure of 234 nodes); the closure contains no drop-list node; there is no SGA citation. Step checks: (1) Omega is finitely presented on lfp charts, through quasi-coherence from the affine description and then criterion (b); pullback keeps finite presentation without flatness; I is a quasi-coherent O_{T0}-module (sheaf of the A/J-module J); Hom(fp, qc) is quasi-coherent; closed pushforward part (1). (2) Lifts glue by fpqc representable descent, and the reduction equation is checked on the base-changed covering (part (3) of the covering axioms). (3) J⊗B=JB, and A/J→B/JB is flat via N⊗_{A/J}B/JB=N⊗_A B; the flat Hom base change applies because the chart module of E is finitely presented. (4) i is affine; affine pushforward base change parts (1) and (3) apply; the sheaf property is taken from lem-sc-etale-qcoherent-descent, not from the definition. (5) g=a0∘u0, so E_U≅g*Ω; then the adjunction and the universal property for arbitrary module sheaves. (6) a♯+D is multiplicative; stalk maps are local because the ideal is nilpotent; a scheme morphism is a morphism of locally ringed spaces. (7) Difference derivation and bijectivity. (8) Naturality and the empty case. Small cases: A^1 over k[ε], I=0, f=id, an obstructed empty L(U). The 11 tool_uses are generic and accepted. Maintainer notes: (a) the item and its citer infinitesimal-lifts-smooth are on route-pivot-dropped.txt (lines 1524 and 1523), but the item is still reached from nt-target-weil-conjectures via lem-sfb-field-log-smooth-gabber-modification → lem-per-gabber-fixed-locus-log-chart → …, so it was judged on its merits (Q36 exception); re-admit it or cut that edge. (b) The statement is string-equal to the reviewed lem-sfb-etale-local-lift-torsor-quasi-coherent (NY d9c8618f8 PASS, already has a Lean record). The worker gave a correct independent proof instead of citing that node; merge the two nodes so that stage 2/3 is not duplicated."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalLiftDerivationAction",
+  "declaration": "AlgebraicGeometry.Scheme.InfinitesimalLifts.exists_derivationAction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.idealOnReduction",
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.coefficients",
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.IsLift",
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.isLift_precomp",
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.liftSubfunctor",
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.liftPresheaf",
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.CoefficientComparison",
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.DerivationAction",
+   "AlgebraicGeometry.Scheme.InfinitesimalLifts.exists_derivationAction"
+  ],
+  "statement": "theorem exists_derivationAction {V W T₀ T : Scheme.{u}} (f : V ⟶ W)\n    [LocallyOfFinitePresentation f] (i : T₀ ⟶ T) (hi : IsFirstOrderThickening i)\n    (a₀ : T₀ ⟶ V) (b : T ⟶ W) (comm : a₀ ≫ f = i ≫ b) :\n    (coefficients f i a₀).IsQuasicoherent ∧\n      Presheaf.IsSheaf T.smallEtaleTopology (liftPresheaf f i a₀ b) ∧\n      Nonempty (DerivationAction f i a₀ b)",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing statement of lem-sfb-etale-local-lift-torsor-quasi-coherent: the two natural-language statements are string-equal. Reuse the already landed theorem and its canonical coefficient, lift-presheaf and normalized derivation-action definitions; no duplicate module or declaration."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d98723e0",
+  "group": "Q83",
+  "result": "pass",
+  "note": "existing:true reuse of the landed Q14 InfinitesimalLifts.exists_derivationAction (owner lem-sfb-etale-local-lift-torsor-quasi-coherent). Statements string-equal; stmt_deps identical; lean.statement verbatim in the side-live and live module; declarations match the owner record; no file field, as merge_delivery expects for existing:true; worker dry run OK. Read against Stacks 061A/061C/061D: lfp f, IsFirstOrderThickening, comm, H = i_* Hom(a0^*Ω, i^*I) with IsQuasicoherent, IsLift with both equations, sheaf condition on smallEtaleTopology, DerivationAction with normalized comparisons, naturality, bijective orbit maps and a^♯+D formula. No existence of lifts, no extra hypotheses, single universe u. Edge cases I=0, f=id, empty L(U), empty schemes OK. No compile (no file changed). Advisory: two DAG nodes share one theorem (merge suggested by Q51); homObj/toModules owner nodes not in stmt_deps (prior advisory)."
+ }
 }

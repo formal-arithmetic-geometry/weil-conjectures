@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-dc-hom-single",
+ "kind": "statement",
+ "title": "Derived internal Hom of constructible degree-zero sheaves",
+ "statement": "Let k be a field, X a separated finite-type k-scheme, ell a natural number, and Λ an ell-adic finiteness coefficient (finite normed Q_ell extension, its integral valuation ring or closed unit ball, or the finite-stage condensed algebraic closure) as in [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed]. Assume ringChar(k) ≠ ell. For constructible Λ_X-module objects F,G in the sense of [sk-def-sfb-constructible], RHom(F[0],G[0]) in the ambient derived category [sk-def-sfb-derived-tensor-hom] is bounded and has constructible homology [sk-def-sfb-bounded-constructible]. This includes characteristic zero; no positive-characteristic assumption is added.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, using the integral criterion of Proposition 6.6.11, Proposition 6.8.11(3) and rationalization Proposition 6.8.14."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient certificate includes primality of $\\ell$. For an abstract finite normed extension or its closed unit ball, use the realization lemma to obtain an embedded coefficient and an exact equivalence $J$, preserving and reflecting bounded constructibility. Extension along a ring isomorphism is inverse restriction along that isomorphism, hence exact on every scheme. The scalar tensor comparison therefore gives $J(M\\otimes^LN)\\cong JM\\otimes^LJN$. For every test object $T$, the closed adjunction gives natural bijections\n$$\\operatorname{Hom}(T,J\\,R\\mathcal Hom(K,L))\\cong\\operatorname{Hom}(J^{-1}T\\otimes^LK,L)\\cong\\operatorname{Hom}(T\\otimes^LJK,JL).$$\nThus the transported Hom represents the defining right adjoint for the embedded coefficient. It suffices to treat embedded integral and rational coefficients and the finite-stage algebraic closure.",
+   "uses": [
+    "lem-sfb-normed-coefficient-realization",
+    "def-sfb-internal-scalar-tensor-comparison",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15: coefficient normalization; the displayed right-adjoint argument is the explicit transport of the closed structure."
+   }
+  },
+  {
+   "text": "The spectrum of a field is Noetherian: its only ideals are $0$ and $k$. The finite-type Noetherian theorem and the dimension theorem imply that $X$ is Noetherian and finite-dimensional. Since $\\ell$ is prime and $\\operatorname{char}k\\ne\\ell$, its image in $k$ is nonzero and has an inverse; the same inverse maps to every local ring of $X$. This also applies when $\\operatorname{char}k=0$.\nFor integral coefficients put $R=\\mathcal O_E$ and $B=p_X^*\\underline R$. The coefficient-limit identification is an isomorphism $B\\cong\\widehat R_X=\\varprojlim_n(R/\\varpi^n)_X$, not a completion functor on input objects. For any bounded constructible integral complexes $K,L$ (not only degree-zero inputs), condition (i)$\\Rightarrow$(ii) of the constructibility/completion bridge places these same objects in the derived-complete integral constructible category. Section-action identifies internal module objects with ordinary modules, retaining their underlying sheaves and finite presentation matrices.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-sfb-integral-constructible-completion-bridge",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1, Proposition 6.6.11 and Proposition 6.8.11(3): conversion to complete constructible integral objects, with coefficient and module presentations made explicit."
+   }
+  },
+  {
+   "text": "Apply the arbitrary-field adic closed-constructibility theorem to the images $P,Q$ of $K,L$ from step 2. Its hypotheses are precisely a field, invertibility of $\\ell$, and separated finite type; it imposes no positive-characteristic restriction. It gives $H_R(P,Q)$ in that same complete constructible category. The module-object/ringed-site Hom comparison identifies this object with the image of the ambient relative $R\\mathcal Hom_B(K,L)$, including its evaluation. Apply (ii)$\\Rightarrow$(i) of the bridge to this Hom object. It is bounded constructible in the general ring-object sense. This proves the integral assertion for all bounded constructible inputs, including torsion, and can therefore be used on the integral representatives in the next step.",
+   "uses": [
+    "lem-per-adic-closed-constructible",
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-sfb-integral-constructible-completion-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13, Proposition 6.6.11 and Proposition 6.8.11(3); the existing arbitrary-field theorem supplies integral completeness and finite residue finiteness."
+   }
+  },
+  {
+   "text": "For bounded constructible $E_X$-complexes $K,L$, rationalization gives bounded constructible integral representatives $K_0,L_0$ and isomorphisms $(K_0)_E\\cong K$, $(L_0)_E\\cong L$. The inversion theorem applies: $K_0$ is bounded constructible and $L_0$ is bounded below. Its canonical comparison identifies $R\\mathcal Hom_{E_X}(K,L)$ with the scalar extension of $R\\mathcal Hom_{B}(K_0,L_0)$. Step 3 proves that the latter integral Hom is bounded constructible, and integral-to-rational extension preserves this condition. Thus the rational assertion also holds for arbitrary bounded constructible inputs, regardless of the degrees of the chosen integral representatives.",
+   "uses": [
+    "def-sfb-rationalization-equivalence",
+    "lem-sfb-integral-general-lfp-hom-inversion",
+    "lem-sfb-extend-scalars-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Proposition 6.8.14(2): integral representatives followed by internal-sheaf coefficient inversion."
+   }
+  },
+  {
+   "text": "For the finite-stage algebraic-closure coefficient, predicate comparison on the Noetherian $X$ puts the given inputs in the finite constant local-model category. Since the underlying space of $X$ is Noetherian (step 2), the object-descent property (Obj) of the constructible cocone writes each as $T_{F,\\overline{\\mathbf Q}_\\ell}$ of a bounded constructible complex over some finite extension $F$; this property assumes no characteristic of $k$. Extend both to their compositum using finite-extension preservation, obtaining $K_E,L_E$ over one finite $E$ with their extensions isomorphic to the original inputs. Predicate comparison identifies their finite-model and general-lfp constructibility. In particular the finite-model hypothesis on $K_E$ in internal-Hom continuity holds. That theorem proves exactly the continuity property for all small filtered diagrams with a common termwise lower bound required by the closure Hom comparison. Since $L_E$ is bounded below, that comparison identifies the closure Hom with scalar extension of $R\\mathcal Hom_{E_X}(K_E,L_E)$. This finite-stage Hom is bounded constructible by step 4. Extension to the closure preserves bounded constructibility; predicate comparison returns the general-lfp conclusion. Taking $K=F[0]$ and $L=G[0]$ in the relevant coefficient case proves the statement.",
+   "uses": [
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-sfb-constructible-cocone-obj",
+    "lem-sfb-extend-subfield-constructible",
+    "lem-sfb-constructible-internal-hom-continuity",
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "lem-sfb-extend-to-qlbar-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15: common finite-stage descent, explicit continuity hypothesis, and scalar extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-coefficient-realization",
+  "def-sfb-internal-scalar-tensor-comparison",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sfb-integral-constructible-completion-bridge",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-per-adic-closed-constructible",
+  "def-sfb-rationalization-equivalence",
+  "lem-sfb-integral-general-lfp-hom-inversion",
+  "lem-sfb-extend-scalars-bounded-constructible",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-constructible-cocone-obj",
+  "lem-sfb-extend-subfield-constructible",
+  "lem-sfb-constructible-internal-hom-continuity",
+  "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "lem-sfb-extend-to-qlbar-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.13, Definition 6.5.1, Propositions 6.6.11, 6.8.11(3), 6.8.14 and Remark 6.8.15; assembly using existing comparison nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of constructible ell adic module sheaves in degree zero is bounded constructible over a finite type scheme over a field",
+   "date": "2026-10-24",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, LightCondMod.ofSheafLightProfinite",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructibleModuleObject\", \"derivedHom\"",
+   "date": "2026-10-24",
+   "results": "No hits.",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*hom_single|constructible.*[iI][hH]om",
+   "date": "2026-10-24",
+   "results": "No hits.",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom preserves bounded constructibility for ell adic sheaves",
+   "date": "2026-10-24",
+   "results": "CategoryTheory.ihom, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.isInternallyProjective, CategoryTheory.InternallyProjective.preserves_epi, CategoryTheory.sheafHom, LightCondensed.ihom_map_val_app, DerivedCategory.instAdditiveHomotopyCategoryIntUpQh, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.mk",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible l adic sheaves internal Ext sheaves are constructible and vanish in high degrees",
+   "date": "2026-10-24",
+   "results": "CategoryTheory.Sheaf.H, LightCondensed.instIsGrothendieckAbelianLightCondMod, localCohomology.diagram, DerivedCategory.IsGE, instAbelianCondensedMod, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isGE_Q_obj_iff",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme of finite type over a field of characteristic zero internal Hom of bounded constructible finite field coefficient complexes is bounded constructible",
+   "date": "2026-10-24",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, chevalley_mvPolynomial_mvPolynomial, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"Hom\"",
+   "date": "2026-10-24",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[hH]om|[hH]om.*constructible",
+   "date": "2026-10-24",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient constructible sheaves on a scheme in characteristic zero have bounded constructible derived internal Hom",
+   "date": "2026-10-24",
+   "results": "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.IsFiniteType.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, CategoryTheory.sheafHom, SheafOfModules.IsFinitePresentation.mk, CategoryTheory.Sheaf.Hom.recOn, AlgebraicGeometry.Scheme.Modules.Hom, CategoryTheory.Pseudofunctor.sheafHom",
+   "verdict": "no match: these are generic condensed, derived, or constructible-topology facts, not ell-adic internal-Hom finiteness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of constructible ell adic sheaves in degree zero is bounded constructible",
+   "date": "2026-10-24",
+   "results": "CategoryTheory.Abelian.Ext.mk₀_hom, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.Abelian.Ext.homEquiv₀, DerivedCategory.instHasZeroObject, DerivedCategory.isZero_of_isLE, CochainComplex.HomComplex.Cochain.ofHom_zero, DerivedCategory.isZero_of_isGE, ChainComplex.alternatingConstHomologyZero",
+   "verdict": "no match: generic derived-category or condensed structure results do not state constructible ell-adic internal-Hom finiteness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-23",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Proof, integral paragraph and final coefficient-descent paragraph: degree-zero inputs to the ambient internal Hom finiteness assertion.",
+   "via": [
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleHomSingle",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleHomSingle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_hom_single",
+  "statement": "theorem boundedConstructible_hom_single\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]\n    [IsCommMonObj Λ] {k : Type u} [Field k]\n    (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]\n    [QuasiCompact X.hom] [IsSeparated X.hom]\n    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)]\n    (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj Λ X.left))\n    (hF : IsConstructibleModuleObject (condensedRingObj Λ X.left) F)\n    (hG : IsConstructibleModuleObject (condensedRingObj Λ X.left) G) :\n    boundedConstructible (condensedRingObj Λ X.left)\n      (((derivedHom Λ X.left).obj (op ((DerivedCategory.singleFunctor _ 0).obj F))).obj\n        ((DerivedCategory.singleFunctor _ 0).obj G))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-23"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dc-hom-single",
+  "worker": "stage1",
+  "summary": "Repaired the positive-characteristic-only citation without changing the statement. Reused the existing arbitrary-field complete integral Hom theorem and the general-lfp/completion bridge, with dimension and module-Hom comparisons explicit. Integral and rational intermediate assertions cover bounded complexes, so descent representatives need not be degree-zero. No new nodes. All citations quoted in citations.json and all current Mathlib searches recorded from msearch.py.",
+  "blueprint": "Realizes lem-sfb-dc-hom-preserves.proof.md: integral paragraph via the same complete/residue argument already stated in lem-per-adic-closed-constructible; final paragraph via inverting ell and finite-stage descent. The degree-zero item is the terminal specialization. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-normed-coefficient-realization",
+    "why": "Normalizes abstract normed coefficient extensions and their unit balls to embedded coefficients while preserving the object predicate."
+   },
+   {
+    "node": "def-sfb-internal-scalar-tensor-comparison",
+    "why": "Generic coefficient or module comparison used under its stated hypotheses."
+   },
+   {
+    "node": "sk-def-sfb-derived-tensor-hom",
+    "why": "Generic coefficient or module comparison used under its stated hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Verifies Noetherianity for the adic and model-comparison hypotheses; the unit supplies no scheme-theoretic finiteness lemma."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Verifies the finite-dimensional hypothesis of the integral completion bridge for a finite-type scheme over any field."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Identifies the pulled-back integral ring with the inverse-limit coefficient sheaf used by the integral category."
+   },
+   {
+    "node": "lem-sfb-integral-constructible-completion-bridge",
+    "why": "Identifies the general ring-object bounded-constructibility predicate with the complete integral category, without completing an input."
+   },
+   {
+    "node": "lem-per-adic-closed-constructible",
+    "why": "Supplies the same complete-integral Hom finiteness argument of the blueprint for every field with ell invertible; the old cited lemma excludes characteristic zero."
+   },
+   {
+    "node": "def-sfb-rationalization-equivalence",
+    "why": "Provides integral bounded constructible representatives for finite rational coefficients."
+   },
+   {
+    "node": "lem-sfb-extend-scalars-bounded-constructible",
+    "why": "Transfers constructibility from integral Hom to its rational scalar extension."
+   },
+   {
+    "node": "lem-sfb-adic-constructibility-predicate-comparison",
+    "why": "Converts the general-lfp predicate to the finite constant local models required by two-colimit descent and internal-Hom continuity."
+   },
+   {
+    "node": "lem-sfb-extend-subfield-constructible",
+    "why": "Moves the two finite-stage models to their compositum while preserving constructibility."
+   },
+   {
+    "node": "lem-sfb-extend-to-qlbar-constructible",
+    "why": "Transfers bounded constructibility of the finite-stage Hom to the algebraic-closure stage."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-normed-coefficient-realization",
+  "def-sfb-internal-scalar-tensor-comparison",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sfb-integral-constructible-completion-bridge",
+  "lem-per-adic-closed-constructible",
+  "def-sfb-rationalization-equivalence",
+  "lem-sfb-extend-scalars-bounded-constructible",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-extend-subfield-constructible",
+  "lem-sfb-extend-to-qlbar-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-7071fa3a7",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-7071fa3a7 (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps and every cited statement, and checked the sources in the local Bhatt–Scholze PDF: Lemma 6.7.13 (any quasi-excellent ℓ-coprime X, so finite type over any field), Prop 6.6.11, 6.8.11(3), 6.8.14(2) and Remark 6.8.15. The statement is not weakened. No new nodes. One fault (C/E hypothesis mismatch), fixed. Step 5 cited sk-thm-sfb-qlbar-two-colimit, but that node is stated for a 'standing scheme' and has stmt_dep sk-def-sfb-dc-setting (char k = p > 0), so it does not apply in the characteristic-zero case the item explicitly includes. Fix: step 5 now uses (Obj) of lem-sfb-constructible-cocone-obj, a node of the same unit that holds for any X with Noetherian underlying space (supplied by step 2). proof_deps changed to match, and the sk-thm tool_use entry was removed. The other citations assume only a Noetherian scheme, an arbitrary scheme or an arbitrary field: the realization and tensor comparison, the Noetherian and dimension lemmas, the coefficient-limit identification, the bridge (i)⇔(ii)⇔(iii), the module-object Hom comparison, the rationalization equivalence, the Hom inversion (needs K₀ bounded constructible and L₀ bounded below), the extend-scalars nodes, predicate comparison, internal-Hom continuity (gives exactly the filtered-colimit hypothesis with a common lower bound) and the Q̄_ℓ Hom comparison. Step 1's Yoneda transport is correct. Edge cases checked: X empty, zero inputs, k=Q with ℓ=2, torsion integral inputs, and descent representatives not in degree zero. Batch-5 check: with this edge removed, lem-trf-proetale-pullback-stalk-coherence (via det-sf-flat-model-generation) is already in the target closure. It is general pro-étale stalk calculus, not part of what the trace formula or Poincaré duality state or of their proofs. The edge adds only lem-per-adic-closed-constructible and lem-per-finite-tor-internal-hom-any-field, which are integral and finite internal-Hom finiteness and are not given by either assumption: accepted. Artin–Gabber route check: lem-per-adic-closed-constructible is a Q05 child of the dropped Q144 route and is on the 10-19 drop list. The human's lock covers only artin-gabber and its three children, and this sfb item is outside them. Neither revived node uses Q̄_ℓ duality or biduality, the middle t-structure, Gabber finiteness, uniformization, alterations or stable reduction. Their proofs go through finite dévissage, thm-dg-finite-type-constructibility and ringed-site perfect duality, and both passed NY stage-1 review. The delivery justifies the use at step 3: the item's char-0 clause needs an arbitrary-field Hom finiteness that no live node gives (every other candidate assumes char p, F̄_q or a separably closed field). Accepted on the merits. Maintainer note: re-admit both nodes in route-pivot-dropped.txt at merge. Accepted tool_uses: the declared generic coefficient and geometry lemmas, now without sk-thm-sfb-qlbar-two-colimit. lem-sfb-integral-general-lfp-hom-finiteness is now uncited.; 1 file(s) fixed by the reviewer"
+ }
+}

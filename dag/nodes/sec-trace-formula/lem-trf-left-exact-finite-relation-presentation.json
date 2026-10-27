@@ -1,0 +1,199 @@
+{
+ "id": "lem-trf-left-exact-finite-relation-presentation",
+ "kind": "statement",
+ "title": "Finite generator-relation presentations and their left exact transport",
+ "statement": "Let $\\mathcal E=\\operatorname{Sh}(\\mathcal C)$ and $\\mathcal F=\\operatorname{Sh}(\\mathcal B)$ be categories of set sheaves on small sites [def-weil-pbc-sites-and-cohomology], in the containing universes [def-weil-size-convention]. Let $(G_i)_{i\\in I}$ be a small family of quasi-compact objects generating $\\mathcal E$: every object receives an epimorphism from a coproduct of members of this family. Let $L:\\mathcal E\\to\\mathcal F$ be a finite-limit-preserving left adjoint (with its adjunction as in [def-trf-geometric-morphism]), and suppose every $LG_i$ is coherent [def-trf-coherent-topos]. For every coherent object $A$ of $\\mathcal E$, there are finite sets $J,K$, maps $i:J\\to I$, $j:K\\to I$, and epimorphisms\n$$p:P=\\coprod_{a\\in J}G_{i(a)}\\longrightarrow A,\\qquad q:Q=\\coprod_{b\\in K}G_{j(b)}\\longrightarrow R=P\\times_A P.$$\nThe object $R$ is quasi-compact. The functor $L$ preserves coproducts and epimorphisms, $LP$ is coherent, $LQ$ is quasi-compact, and $Lq:LQ\\to LR$ is an epimorphism onto a quasi-compact object. The canonical comparison $LR\\xrightarrow{\\sim}LP\\times_{LA}LP$ is an isomorphism compatible with both kernel-pair projections. Both finite sets are allowed to be empty; no representability of $R$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WS (lemma-sheaf-coequalizer-representable), finite object-and-relation version for coherent objects and its agent-formulated transport under a left exact left adjoint; extracted from returned parent steps 3, 9 and 10. Context: literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, Exposé XI, proof of Lemma 2.5, printed p. 179."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-trf-geometric-morphism",
+  "def-trf-coherent-topos"
+ ],
+ "proof": [
+  {
+   "text": "By the generating hypothesis choose a small epimorphic family $(G_{i(t)}\\to A)_{t\\in T}$. Coherence of $A$ implies quasi-compactness [def-trf-coherent-topos], so a finite subset $J\\subseteq T$ still covers $A$. Its coproduct map is the required $p:P\\to A$, with $i$ the restricted index map. The summands of $P$ are quasi-compact by hypothesis, so $P$ is quasi-compact by clause (3) of [lem-trf-topos-finite-cover-calculus]. Since $A$ is quasi-separated, its defining condition applied to the two maps $p:P\\to A$ says that $R=P\\times_A P$ is quasi-compact [def-trf-coherent-topos]. Apply the generating hypothesis again, now to $R$, and use its quasi-compactness to select a finite subfamily indexed by $K$. Its restricted index map $j:K\\to I$ and coproduct give the required epimorphism $q:Q\\to R$. These are arbitrary sheaf morphisms, so this construction never requires $R$ to be representable.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-trf-topos-finite-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WS (lemma-sheaf-coequalizer-representable), generator cover followed by a cover of the kernel pair; finite extraction is from the definition of quasi-compactness; Tag 0GMQ (lemma-coproduct-quasi-compact)."
+   }
+  },
+  {
+   "text": "Write $L\\dashv U$ for the assumed adjunction [def-trf-geometric-morphism]. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to discrete small indexing categories: $L$ preserves all coproducts in the containing universes, in particular $LP\\simeq\\coprod_{a\\in J}LG_{i(a)}$ and $LQ\\simeq\\coprod_{b\\in K}LG_{j(b)}$. Epimorphisms are also preserved, directly by right cancellation: if $e:X\\to Y$ is epic and $r,s:LY\\to Z$ satisfy $r\\circ Le=s\\circ Le$, their adjoint transposes $\\widetilde r,\\widetilde s:Y\\to UZ$ satisfy $\\widetilde r\\circ e=\\widetilde s\\circ e$ by naturality. Epicity gives $\\widetilde r=\\widetilde s$, and the adjunction bijection gives $r=s$. Thus $Le$ is epic. In particular $Lp$ and $Lq$ are epimorphisms. This argument uses ordinary categorical epimorphisms, without any sectionwise-surjectivity assertion.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), part (1), for coproducts; the epimorphism assertion is the displayed elementary adjunction/cancellation argument."
+   }
+  },
+  {
+   "text": "Each $LG_i$ is coherent by hypothesis. The finite coproduct assertion of [lem-trf-sheaf-quasicompact-coproduct-calculus], applied in $\\mathcal F$, and the coproduct comparisons of step 2 show that $LP$ is coherent. Each $LG_i$ is also quasi-compact by [def-trf-coherent-topos], so clause (3) of [lem-trf-topos-finite-cover-calculus] shows that $LQ$ is quasi-compact. Apply clause (2) of that node to the epimorphism $Lq:LQ\\to LR$ from step 2: $LR$ is quasi-compact. Both cited coproduct statements include the empty coproduct, so these arguments impose no nonemptiness condition on $J$ or $K$.",
+   "uses": [
+    "lem-trf-sheaf-quasicompact-coproduct-calculus",
+    "def-trf-coherent-topos",
+    "lem-trf-topos-finite-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact); coherent finite sums and the empty cases use the explicitly cited existing extensions."
+   }
+  },
+  {
+   "text": "Let $r_1,r_2:R\\rightrightarrows P$ be the two projections. The assumed finite-limit preservation [def-trf-geometric-morphism] sends the pullback square defining $R$ to a pullback square with vertex $LR$ and legs $Lr_1,Lr_2$. Its canonical map $c:LR\\to LP\\times_{LA}LP$ is defined by $\\pi_1c=Lr_1$ and $\\pi_2c=Lr_2$. Conversely, the pullback property of the image square supplies a unique map $d:LP\\times_{LA}LP\\to LR$ with $Lr_1d=\\pi_1$ and $Lr_2d=\\pi_2$. The composites $cd$ and $dc$ have the same two projections as the corresponding identity maps; uniqueness in each pullback gives $cd=1$ and $dc=1$. Thus $c$ is the asserted isomorphism with both required compatibilities. If either finite family chosen in step 1 is empty, the same pullback argument applies without change; finite extraction and the coproduct calculus already covered those choices.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Universal property of a pullback, applied to the assumed finite-limit-preserving functor; explicit comparison and inverse."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-topos",
+  "lem-trf-topos-finite-cover-calculus",
+  "def-trf-geometric-morphism",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-trf-sheaf-quasicompact-coproduct-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Finite-cover argument expanding Tag 00WS (lemma-sheaf-coequalizer-representable) for the assumed generators, with Tags 0GMP and 0GMQ and categories.tex Tag 0038; context Exposé XI Lemma 2.5, printed pp. 178–179."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent object in a sheaf topos with quasi-compact generators has a finite generator epimorphism with kernel pair finitely covered by generators; left exact left adjoints transport this presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.presheafIsFinite_of_epi\", \"module\": \"Mathlib/CategoryTheory/Subfunctor/Finite\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor Cᵒᵖ (Type w))\\n  [CategoryTheory.PresheafIsFinite F] {F' : CategoryTheory.Functor Cᵒᵖ (Type w)} (f : F ⟶ F') [CategoryTheory.Epi f],\\n  CategoryTheory.PresheafIsFinite F'\", \"doc\": \"If $ F $ is a finite presheaf and there exists an epimorphism $ f : F \\to F' $, then the presheaf $ F' $ is also finite. This follows from the fact that the finiteness condition for subfunctors is main\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every effective epimorphism has a pullback, and let $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a functor reflecting finite limits. If a pr\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"If $\\\\mathcal{C}$ is a preregular and finitary extensive category where every effective epimorphism $f: Y \\\\to X$ admits a pullback of $f$ with itself, and $s: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor \"}\n  {\"name\": \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C] [inst_3 : CategoryTheory.Limits.HasLimitsOfShape ℕᵒᵖ C],\\n  (∀ (G : CategoryTheory.Functor ℕᵒᵖ C),\\n      (∀ (n : ℕ), CategoryTheory.EffectiveEpi (G.map (Cate\", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a coherent Grothendieck topology, given a sheaf-valued functor $F : \\\\mathbb{N}^{\\\\text{op}} \\\\to \\\\text{Sh}(\\\\mathcal{C}, \\\\text{Type}\\\\, v)$ and a limit cone $c$ o\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective, and let $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a functor reflecting finite products. If a presheaf $F : \\\\m\"}\n  {\"name\": \"CategoryTheory.isSheaf_coherent\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentSheaves\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C]\\n  (P : CategoryTheory.Functor Cᵒᵖ (Type w)),\\n  CategoryTheory.Presieve.IsSheaf (CategoryTheory.coherentTopology C) P ↔\\n    ∀ (B : C) (α : Type) [Finite α] (X : α → C) (π : (a : α) → X a ⟶ B),\\n     \", \"doc\": \"A presheaf $ P $ is a sheaf with respect to the coherent topology on a category $ \\\\mathcal{C} $ if and only if for every object $ B $ in $ \\\\mathcal{C} $, every finite effective epimorphic family $ \\\\{X\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective. If $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor preserving finite products and $F : \\\\mathcal{C}^{\\\\text\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A)\\n  [inst_2 : CategoryTheory.Preregular C] [inst_3 : CategoryTheory.FinitaryPreExtensive C],\\n  CategoryTheory.Presheaf.IsSheaf (CategoryTheory\", \"doc\": \"For a category $\\\\mathcal{C}$ that is both preregular and finitary pre-extensive, a presheaf $F$ satisfies the sheaf condition with respect to the coherent Grothendieck topology if and only if it satis\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and kernel-pair or coherent-topology sheaf criteria do not give finite generator-relation covers or their quasi-compact/coherent transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport finite object and relation presentations along a geometric inverse image with coherent images of generators giving a coherent source and quasi-compact kernel pair",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Epi",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsEpimorphisms\", \"module\": \"Mathlib.CategoryTheory.Functor.EpiMono\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {F' : CategoryTheory.Functor D C} (adj : F' ⊣ F) {X : C} {Y : D} (f : Y ⟶ F.obj X) [hf : CategoryTheory.Epi f] [F.ReflectsEpimorphisms] : CategoryTheory.Epi (\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.counit_epi_of_R_faithful\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [R.Faithful] (X : D) : CategoryTheory.Epi (h.counit.app X)\", \"doc\": \"If the right adjoint is faithful, then each component of the counit is an epimorphism.\"}\n  {\"name\": \"CategoryTheory.Adjunction.faithful_R_of_epi_counit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [∀ (X : D), CategoryTheory.Epi (h.counit.app X)] : R.Faithful\", \"doc\": \"If each component of the counit is an epimorphism, then the right adjoint is faithful.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.localEpi_mem_range_iff_epi\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.LocalEpi\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [G.Faithful] [G.Full] {X Y : C} (f : X ⟶ Y) : CategoryTheory.ObjectProperty.localEpi (fun x => x ∈ Set.range G.\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and kernel-pair or coherent-topology sheaf criteria do not give finite generator-relation covers or their quasi-compact/coherent transport."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoherentObject|quasi[Cc]ompact|kernelPair|kernel.pair",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/RegularEpi.lean\", \"line\": \"86\", \"text\": \"    -- The underlying presheaf of the kernel pair of `f` is a kernel pair for `p`, and since\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/RegularEpi.lean\", \"line\": \"88\", \"text\": \"    -- kernel pair. The result follows.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean\", \"line\": \"54\", \"text\": \"if it takes its kernel pair to an equalizer diagram.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean\", \"line\": \"61\", \"text\": \"A contravariant functor on `C` satisfies `EqualizerCondition` if it takes kernel pairs of effective\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and kernel-pair or coherent-topology sheaf criteria do not give finite generator-relation covers or their quasi-compact/coherent transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a topos quasi-separated objects have quasi-compact relations for finite epimorphic covers by compact generators, and inverse image preserves the kernel pair",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.precoherent\", \"module\": \"Mathlib/Topology/Category/CompHausLike/EffectiveEpi\", \"type\": \"∀ {P : TopCat → Prop} [CompHausLike.HasExplicitPullbacks P] [CompHausLike.HasExplicitFiniteCoproducts P],\\n  (∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n    CategoryTheory.Precoherent (CompHausLike P)\", \"doc\": \"If the category of compact Hausdorff-like spaces has explicit pullbacks and explicit finite coproducts, and every effective epimorphism in this category is surjective, then it forms a precoherent cate\"}\n  {\"name\": \"CategoryTheory.instPrecoherentOfFinitaryPreExtensiveOfPreregular\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Comparison\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.FinitaryPreExtensive C]\\n  [CategoryTheory.Preregular C], CategoryTheory.Precoherent C\", \"doc\": \"If a category $ \\\\mathcal{C} $ is finitary pre-extensive (having finite coproducts with disjoint and pullback-stable coproducts) and preregular (every pair of parallel morphisms admits a kernel pair wi\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"If $\\\\mathcal{C}$ is a preregular and finitary extensive category where every effective epimorphism $f: Y \\\\to X$ admits a pullback of $f$ with itself, and $s: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor \"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A)\\n  [inst_2 : CategoryTheory.Preregular C] [inst_3 : CategoryTheory.FinitaryPreExtensive C],\\n  CategoryTheory.Presheaf.IsSheaf (CategoryTheory\", \"doc\": \"For a category $\\\\mathcal{C}$ that is both preregular and finitary pre-extensive, a presheaf $F$ satisfies the sheaf condition with respect to the coherent Grothendieck topology if and only if it satis\"}\n  {\"name\": \"CategoryTheory.presheafIsFinite_of_epi\", \"module\": \"Mathlib/CategoryTheory/Subfunctor/Finite\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor Cᵒᵖ (Type w))\\n  [CategoryTheory.PresheafIsFinite F] {F' : CategoryTheory.Functor Cᵒᵖ (Type w)} (f : F ⟶ F') [CategoryTheory.Epi f],\\n  CategoryTheory.PresheafIsFinite F'\", \"doc\": \"If $ F $ is a finite presheaf and there exists an epimorphism $ f : F \\to F' $, then the presheaf $ F' $ is also finite. This follows from the fact that the finiteness condition for subfunctors is main\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every effective epimorphism has a pullback, and let $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a functor reflecting finite limits. If a pr\"}\n  {\"name\": \"CategoryTheory.Precoherent\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Basic\", \"type\": \"(C : Type u_1) → [CategoryTheory.Category.{v_1, u_1} C] → Prop\", \"doc\": \"A property of a category requiring it to satisfy conditions necessary for coherence, typically involving finite limits and covering families in the context of Grothendieck topologies.\"}\n  {\"name\": \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D)\\n  [F.PreservesFiniteEffectiveEpiFamilies] [F.ReflectsFiniteEffectiveEpiFamilies] [inst_4 : F.Full] [inst_5 : F.Faithful]\\n  [inst_6 : F.Effe\", \"doc\": \"A sieve $ S $ on an object $ X $ in a precoherent category $ \\\\mathcal{C} $ belongs to the Grothendieck topology induced by the coherent topology if and only if there exists a finite effective epimorph\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and kernel-pair or coherent-topology sheaf criteria do not give finite generator-relation covers or their quasi-compact/coherent transport."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoherentObject|QuasiCompactObject|finite.*relation.*presentation",
+   "results": "{\"t\": \"2026-10-23T10:59:26Z\", \"tool\": \"grep\", \"query\": \"IsCoherentObject|QuasiCompactObject|finite.*relation.*presentation\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-topology sheaf criteria, finite presheaves, and module finite presentations do not assert coherent-object finite generator and relation covers in a sheaf topos."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.PreservesColimits",
+   "results": "{\"t\": \"2026-10-23T10:59:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Limits.PreservesColimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-topology sheaf criteria, finite presheaves, and module finite presentations do not assert coherent-object finite generator and relation covers in a sheaf topos."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of coherent objects of a Grothendieck topos using quasi compact generators and preservation by geometric inverse image",
+   "results": "{\"t\": \"2026-10-23T10:59:27Z\", \"tool\": \"leansearch\", \"query\": \"Finite presentation of coherent objects of a Grothendieck topos using quasi compact generators and preservation by geometric inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.Presentation.IsFinite.isFiniteType_generators\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"7e4d20d6bf4ee9e5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-topology sheaf criteria, finite presheaves, and module finite presentations do not assert coherent-object finite generator and relation covers in a sheaf topos."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent object of a sheaf topos with quasi-compact generators has a finite epimorphic cover and a finite cover of its kernel pair; left exact left adjoints transport these covers",
+   "results": "{\"t\": \"2026-10-23T10:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent object of a sheaf topos with quasi-compact generators has a finite epimorphic cover and a finite cover of its kernel pair; left exact left adjoints transport these covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\"], \"digest\": \"88af0d015978d666\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-topology sheaf criteria, finite presheaves, and module finite presentations do not assert coherent-object finite generator and relation covers in a sheaf topos."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjoint_preservesColimits|preservesColimitIso",
+   "results": "{\"t\": \"2026-10-23T11:02:01Z\", \"tool\": \"grep\", \"query\": \"leftAdjoint_preservesColimits|preservesColimitIso\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\"], \"digest\": \"5cd2626607a43281\"}",
+   "date": "2026-10-23",
+   "verdict": "partial match only: Adjunction.leftAdjoint_preservesColimits (Mathlib/CategoryTheory/Adjunction/Limits.lean:92) supplies coproduct preservation; already represented by lem-weil-pbc-left-adjoint-preserves-colimits, which is cited. It does not give the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite epimorphic family of compact generators presents a quasi-separated object with a compact kernel pair in a category of sheaves of sets",
+   "results": "{\"t\": \"2026-10-23T11:02:09Z\", \"tool\": \"leanfinder\", \"query\": \"A finite epimorphic family of compact generators presents a quasi-separated object with a compact kernel pair in a category of sheaves of sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.presheafIsFinite_of_epi\", \"TopCat.toSheafCompHausLike\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.isSheaf_coherent\", \"Condensed.ofSheafCompHaus\", \"CategoryTheory.Precoherent\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp\", \"CompHausLike.precoherent\"], \"digest\": \"1ad00de6e56de454\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-topology sheaf criteria, finite presheaves, and module finite presentations do not assert coherent-object finite generator and relation covers in a sheaf topos."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finitary-site-coherent-generators",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input in the ancestor proof, through constructibility descent: Orgogozo §8.1, paragraph proving coherence from the site, and proof of Lemma 9.1.5, assertion that the induced geometric morphism is coherent. Tag 00WS (lemma-sheaf-coequalizer-representable), finite object-and-relation version for coherent objects and its agent-formulated transport under a left exact left adjoint; extracted from returned parent steps 3, 9 and 10. Context: literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, Exposé XI, proof of Lemma 2.5, printed p. 179.",
+   "via": [
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-proper-base-change-coherent-conservative",
+    "lem-trf-psi-constructibility-descent",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-left-exact-finite-relation-presentation",
+  "worker": "stage1",
+  "summary": "Q84 constructs both finite covers by the given generating property and quasi-compactness, proves kernel-pair quasi-compactness using quasi-separatedness of A, and checks every transport clause. Reuses two existing topos-calculus nodes and the existing Mathlib leaf for preservation of colimits; proves epi preservation directly by adjunction and writes both inverse maps of the pullback comparison. No new nodes and no statement change.",
+  "blueprint": "The inherited constructibility/coherence input through lem-trf-finitary-site-coherent-generators, descendant of lem-trf-local-term-locality: finite object-and-relation presentation used in the coherent inverse-image criterion (parent proof step 2), context Exposé XI Lemma 2.5, pp. 178–179. The newest blueprint ancestor proof is read; it does not restate this auxiliary or supply a different finite-presentation route. Searches of all blueprint nodes for finite relation and coherent found no equivalent auxiliary."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-29c05ac32",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-29c05ac32 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The delivery is one commit changing only the item and its report; it adds no new nodes and leaves the statement and stmt_deps unchanged. It is not a 2026-10-21 re-split: no repair note in the snapshot names it. The item covers what the parent lem-trf-finitary-site-coherent-generators step 2 uses: Lp epic with LP coherent, LR ≅ LP×_{LA}LP compatible with both projections, LR quasi-compact, and empty families allowed. Step 1: quasi-compactness of A (part of coherence in def-trf-coherent-topos) gives a finite subfamily J; clause (3) of lem-trf-topos-finite-cover-calculus makes P quasi-compact; quasi-separatedness of A with B=C=P makes R quasi-compact; a second finite selection gives q. Step 2: the Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits (Adjunction.leftAdjoint_preservesColimits) applied to discrete diagrams gives coproduct preservation; it is a generic tool, so its use across units is fine. The epimorphism argument by adjoint transposes is complete. Step 3: lem-trf-sheaf-quasicompact-coproduct-calculus, applied in Sh(B) with no coherence assumption on that category, gives LP coherent; clause (3) of the calculus node gives LQ quasi-compact and clause (2) gives LR quasi-compact. Step 4 is genuinely elementary: the pullback comparison c and its inverse d come from the two universal properties. Sources checked: Stacks sites.tex 00WS (l.2441), whose proof covers F and then its kernel pair; tags 0GMP, 0GMQ and 0038 exist. Small cases checked: Sets with a singleton generator, A initial (J=K=∅), and nonempty A (forces J nonempty, which the statement allows). There is no SGA citation, no cycle, no duplicate node, and no tool_uses to accept."
+ }
+}

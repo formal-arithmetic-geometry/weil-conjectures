@@ -1,0 +1,290 @@
+{
+ "id": "lem-pur-chart-cartesian-domain",
+ "kind": "statement",
+ "title": "Separated finite-type Cartesian diagonal neighbourhood of a coordinate chart",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, $n\\geq1$ and $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, at $E=\\mathbf Q_\\ell$ in [def-pur-conventions]. Let $X,Y$ be finite-type $k$-schemes, $f:X\\to Y$ smooth, separated, of finite type and pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Let $j:U\\hookrightarrow X$ be open [def-weil-open-immersion], and $e:U\\to A=\\mathbf A^d_Y$ etale over $Y$ [def-weil-etale-morphism, def-sbc-affine-space]. Put $p:A\\to Y$ and $h=fj=pe$. The schemes $Y,X,U,A$ are Noetherian, $h$ and $e$ are separated of finite type, and every indicated open inclusion is quasi-compact and of finite type. For every affine open $V\\subseteq Y$, put $X_V=f^{-1}V$, $U_V=U\\cap X_V$, $A_V=\\mathbf A^d_V$. The schemes $V,X_V,U_V,A_V$, $U_V\\times_VU_V$ and $A_V\\times_VA_V$ are separated finite type over $k$; the maps $X_V\\to V$, $U_V\\to V$, $A_V\\to V$ and the first and second projections from each displayed product are smooth of pure relative dimension $d$. No absolute separatedness of $Y$ is assumed.\n\nFor such $V$, write $W=U_V\\times_VU_V$, $W_A=A_V\\times_VA_V$ [def-pc-fibre-product], $Z=U_V\\times_{A_V}U_V\\subseteq W$, and let $\\Delta_U,\\Delta_A$ be the diagonals [def-weil-closed-immersion]. The section $\\Delta_U:U_V\\to Z$ is open and closed, so $Z\\setminus\\Delta_U(U_V)$ is closed in $W$. Its complement $O$ is an open neighbourhood of the diagonal. The restriction $q=(e_V\\times e_V)|_O:O\\to W_A$ is etale, and\n$$\\begin{array}{ccc}U_V&\\xrightarrow{\\Delta_U}&O\\\\\ne_V\\downarrow&&\\downarrow q\\\\\nA_V&\\xrightarrow{\\Delta_A}&W_A\\end{array}$$\nis Cartesian as a square of schemes. The map $p_U:O\\to U_V$ induced by the first projection is smooth separated of finite type and dimension $d$, with closed section $\\Delta_U$. The factorization $O\\xrightarrow{(p_U,e_Vp_{2,U})}U_V\\times_VA_V\\xrightarrow{(e_V,1)}W_A$ has first arrow etale over $U_V$ and second arrow the base change along $e_V$; the inverse image of the graph section $u\\mapsto(u,e_Vu)$ under the first arrow is precisely $\\Delta_U$. All its schemes are separated finite type over $k$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Before Step 1 and Step 1: relative separatedness and the Cartesian square of centres; inherited proof Steps 1–3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Mathlib finite-type-over-Noetherian results to aY and f. Open subschemes of Noetherian schemes are locally Noetherian and compact. The Mathlib instance quasiCompact_of_noetherianSpace_source proves quasi-compactness of every morphism from these Noetherian sources, in particular the open inclusions. Open immersions are locally of finite type. Composition gives their structure morphisms finite type.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex Tags 01OW, 01OZ; schemes.tex Tag 03GI; finite type Tags 01T1, 01T3"
+   }
+  },
+  {
+   "text": "The affine-space projection is affine and smooth of relative dimension d, hence separated and of finite type. Consequently A is Noetherian. The open immersion U into X and f are separated, so h is separated; separated cancellation in e followed by p gives separatedness of e. The etale e is locally of finite type, and its Noetherian source gives quasi-compactness directly.",
+   "uses": [
+    "def-sbc-affine-space",
+    "pqf-def-affine-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "constructions.tex Tag 01M0 (definition-affine-n-space); Tags 01S6, 01S7, 01T8; schemes.tex Tags 01KU, 01KV"
+   }
+  },
+  {
+   "text": "Base change preserves separated finite-type morphisms by [lem-pod-separated-finite-type-base-change]; apply this to $f,h,p,e$ along $V\\to Y$ (for $e$ equivalently along $A_V\\to A$), and to $U_V\\to V$, $A_V\\to V$ along themselves for the product projections. Since $V$ is affine, its morphism to $\\operatorname{Spec}k$ is separated by [lem-weil-pbc-affine-source-morphism-separated]. Composing separated and finite-type maps using [lem-weil-pbc-proper-fp-permanence](e) and [lem-sfb-finite-type-composition-base-change] proves that $V,X_V,U_V,A_V,W,W_A$ are separated finite type over $k$. In particular the products are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Their open subschemes and open inclusions have the finiteness properties of Step 1.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T3, 01T4, 01T6; schemes.tex Tags 01KN, 01KU"
+   }
+  },
+  {
+   "text": "Mathlib identifies etale with SmoothOfRelativeDimension 0. Apply this to U into X and compose with f, obtaining relative dimension 0+d=d for h. AffineSpace.smoothOfRelativeDimension_over supplies dimension d for p. Base change gives fV,hV,pV and both projections from W and WA the claimed relative dimensions. The same dimension-zero composition proves the assertion for the projection from O.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-sbc-smooth-morphisms",
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GP, 01VA, 01VB, 02NK, 02NL; affine-space smoothness as in sbc-lem-affine-space-smooth"
+   }
+  },
+  {
+   "text": "Mathlib pullback_map_diagonal_isPullback identifies Z with the inverse image of the diagonal of AV under ee. Its map z is closed by the existing separated mapDesc instance. The diagonal i of eV is open by etaleness and closed by separatedness. Therefore z maps the closed complement of its range to a closed set. Define O as the complement of this exact image. Injectivity of z proves z^{-1}(O)=range(i). The open-immersion lifting property constructs delta, and IsOpenImmersion.isPullback proves its square with i, O into W and z Cartesian.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Blueprint det-sp-orientation-charts proof Step 1; Stacks Tag 01QR (lemma-base-change-closed-immersion), Tag 02GE (lemma-unramified-diagonal)"
+   }
+  },
+  {
+   "text": "The canonical morphisms of pullbacks changing one leg give the Cartesian squares for r and s (isPullback_pullback_map and isPullback_pullback_map_left). Hence r,s,ee=r followed by s and the restriction of ee to O are etale. Paste the Cartesian open-cut square with pullback_map_diagonal_isPullback. Simplifying the diagonal projection gives exactly IsPullback delta eV (O.ι followed by ee) (diagonal pV).",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Blueprint proof Step 1; Stacks Tags 02GO (lemma-base-change-etale), 02GN (lemma-composition-etale), 02GP (lemma-open-immersion-etale)"
+   }
+  },
+  {
+   "text": "Separatedness of b makes its diagonal closed; cancellation along O.ι proves delta closed. Its composite with the first projection is the identity. Noetherianity of W makes O.ι quasi-compact, and open immersions are locally of finite type and separated. Compose to obtain all finiteness and separation assertions. The graph square before restriction is proved directly by the universal property of pullback eV eV: a test cone determines the two morphisms to UV and equality of their eV-composites, and uniqueness follows from the projections. Paste it with the open-cut square to obtain the graph square over O. Base change and composition give the properties of every listed structure morphism. No nonemptiness or positive-dimension assumption is used.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Blueprint proof Step 1 and its projection factorization; Stacks Tags 01QR, 01T3, 01T4, 01KU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-sbc-affine-space",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-sbc-smooth-morphisms",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 1; R8 formalization using Mathlib pullback diagonal and open immersion APIs, with the graph universal property proved directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated finite type morphism an etale affine coordinate chart yields after affine target localization a separated finite type Cartesian square of diagonal centres on an open neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Remove the complement of the clopen diagonal in U times over affine space U to obtain a Cartesian diagonal square for an etale chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (𝒱 : (i : 𝒰.I₀) → (CategoryTheory.Limits.pullback f (𝒰.f i)).OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  [∀ (i : 𝒰.I₀) (j : (𝒱 i).I₀), AlgebraicGeometry.IsAffine ((𝒱 i).X j)],\\n  AlgebraicGeometry.IsClosedImmersi\", \"doc\": \"Given a morphism $ f $ of schemes and affine open covers $ \\\\mathcal{U} $ and $ \\\\mathcal{V} $, the diagonal morphism $ \\\\Delta_f $ restricted to the diagonal cover's diagonal range (constructed from the\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  (𝒰 : X.OpenCover) [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] [inst_1 : AlgebraicGeometry.IsAffine Y],\\n  (∀ (i j : 𝒰.I₀), Q (CategoryTheory.Limits.pullback.mapDesc (𝒰.f i) \", \"doc\": \"Given a local property $ Q $ of morphisms with affine targets, if $ Y $ is an affine scheme, $ X $ admits an affine open cover $ \\\\mathcal{U} $, and for all indices $ i,j $ the pullbacks of $ \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y U V : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : U ⟶ Y}\\n  [inst : AlgebraicGeometry.IsAffine U] [AlgebraicGeometry.IsOpenImmersion g]\", \"doc\": \"Given a pullback square involving morphisms with affine targets, if the diagonal morphism of the original morphism satisfies property $P$, then the diagonal morphism of the pulled-back morphism satisf\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  (∀ (i : 𝒰.to\", \"doc\": \"Let $ f : X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ by affine schemes. If for each $ i $, the pullback of $ f $ to $ \\\\mathcal{U}_i $ satisfies the diagonal p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (𝒰 : Y.OpenCover) →\\n      ((i : (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰).I₀) →\\n          ((CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰).X i).OpenCover) →\\n        (CategoryTheory.Limits.pullback.diagonalObj f).Opens\", \"doc\": \"The open subsets of the diagonal object in the pullback of a morphism $ f $ with itself are defined as the union over all indices $ i $ and elements $ j $ in the zeroth component of the cover $ \\\\mathc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback.diagonal",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "isOpenImmersion_diagonal|isClosedImmersion_diagonal|IsSeparated.of_comp",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"248\", \"text\": \"  isClosedImmersion_diagonal := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"203\", \"text\": \"  have := isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange f 𝒰 𝒱\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"126\", \"text\": \"instance isOpenImmersion_diagonal [FormallyUnramified f] [LocallyOfFiniteType f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"46\", \"text\": \"  isClosedImmersion_diagonal : IsClosedImmersion (pullback.diagonal f) := by infer_instance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"49\", \"text\": \"alias IsSeparated.diagonal_isClosedImmersion := IsSeparated.isClosedImmersion_diagonal\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"208\", \"text\": \"lemma isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"234\", \"text\": \"  exact isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange f 𝒰 𝒱\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"256\", \"text\": \"lemma IsSeparated.of_comp [IsSeparated (f ≫ g)] : IsSeparated f := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth separated finite type morphism an etale affine coordinate chart yields after affine target localization a separated finite type Cartesian square of diagonal centres on an open neighbourhood",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y : Scheme.{u}} {f : X ⟶ Y} [IsAffine Y] : Q.diagonal f ↔ P.diagonal f\", \"doc\": \"Given properties $P$ and $Q$ satisfying the affine-target relation, for any morphism $f: X \\to Y$ with affine target $Y$, the diagonal property of $Q$ holds for $f$ if and only if the diagonal property\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Remove the complement of the clopen diagonal in U times over affine space U to obtain a Cartesian diagonal square for an etale chart",
+   "results": "{\"t\": \"2026-10-22T12:11:30Z\", \"tool\": \"leansearch\", \"query\": \"Remove the complement of the clopen diagonal in U times over affine space U to obtain a Cartesian diagonal square for an etale chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sym2.diagSet_compl_eq_setOf_not_isDiag\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"TopologicalSpace.exists_open_prod_subset_of_mem_nhds_diagonal\", \"Set.offDiag_univ\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"9bd4d43011323eaf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states the constructed chart neighbourhood and all domain and factorization clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, CategoryTheory.Limits.pullback.diagonal",
+   "results": "{\"t\": \"2026-10-22T12:11:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, CategoryTheory.Limits.pullback.diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no usable result: Loogle reports unknown identifier AlgebraicGeometry.IsEtale; this query is not evidence of absence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-orientation-charts",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-orientation-charts",
+   "place": "Before Step 1 and Step 1: relative separatedness and the Cartesian square of centres; inherited proof Steps 1–3",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-chart-cartesian-domain",
+  "worker": "stage1",
+  "summary": "Kept the complete chart-domain statement. Proved the finiteness and separation clauses with existing DAG results, and the Cartesian diagonal and graph claims by fibre-product universal properties and restriction to the clopen diagonal component. No new nodes; no attachment.",
+  "blueprint": "det-sp-orientation-charts proof Step 1: separated etale chart, removal of the off-diagonal closed complement, Cartesian square of centres; its projection factorization makes the domain checks explicit.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic scheme geometry tool for smooth relative dimension or affine-space projection; it supplies the coordinate-chart domain checks and does not replace the diagonal/deformation purity route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic scheme geometry tool for smooth relative dimension or affine-space projection; it supplies the coordinate-chart domain checks and does not replace the diagonal/deformation purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-8763e3f6e",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-8763e3f6e (reviewer sub-agent of L); spot-checked: Read in full the item, every cited statement, and Step 1 of blueprint main-20261015 sk-prop-sp-orientation-charts.proof.md (the Cartesian square of centres, with the diagonal clopen in U×_A U because e is separated and étale). The statement is byte-identical to the node Q127 imported. Only three definition stmt_deps were added (separated/finite type/locally Noetherian), and the target is not weakened. This is an ordinary first split: there is no repair note, no new node and no cycle, and no SGA is used. Every off-chapter node it cites is on the route of sk-prop-sp-orientation (sk-def-smooth, sk-thm-vanishing, sk-thm-p1) or is a Mathlib leaf, so the two declared tool_uses are on route and accepted. Steps 1-3, 5, 6 and 7 are correct. Step 1: Noetherian opens, qc and finite-type inclusions. Step 2: p affine and separated; e separated by cancellation, and of finite type by nagata (b) since p is separated; absolute separatedness of Y is never used. Step 3: base change along V→Y, with e_V the base change of e because U_V=e⁻¹(A_V). Step 5: Z≅W×_{W_A}A_V, the diagonal of the étale, separated e_V is clopen, and C is closed in W. Step 6: each factor of e_V×e_V is a base change of e_V, and O×_{W_A}A_V=Z∩O=Δ_U(U_V) as schemes. Step 7: closed section, p_U separated and of finite type, and the graph's inverse image is Z∩O=Δ_U. Edge cases checked: d=0 with two sheets (the off-diagonal components are removed), e an open immersion (O=W), empty V, and a non-separated Y. One fault, C1/C4, now fixed: Step 4 went from 'étale' in the def-weil-etale-morphism sense (open immersions, and O⊂W) to 'smooth of relative dimension 0' in the def-sbc sense without a bridge. It now cites the existing node lem-weil-pbc-etale-smooth-zero-dimensional-fibres (in step uses and proof_deps). Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-chart-cartesian-domain.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartCartesianDomain",
+  "declaration": "WeilConjectures.PurityFiniteSetting.chartCartesianDomain",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ChartCartesianDomainConclusion",
+   "WeilConjectures.PurityFiniteSetting.chartCartesianDomain"
+  ],
+  "file": "lean/Sheaf/Paper/ChartCartesianDomain.lean",
+  "statement": "theorem chartCartesianDomain (P : PurityFiniteSetting.{u}) (_hE : P.extension = ⊥) {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [SmoothOfRelativeDimension d f] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (U : X.Opens) (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e] (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = U.ι ≫ f) : P.ChartCartesianDomainConclusion d f aY U e w",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d655eabb",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Statement matches node and blueprint Step 1 (main-20261015). Hypotheses: aY finite type, f separated/finite type/SmoothOfRelativeDimension d, U opens, e Etale over Y into AffineSpace (ULift (Fin d)) Y, P.extension=⊥ for E=Q_ℓ; no extra assumptions, arbitrary universe. Conclusion uses canonical Mathlib pullbacks only: Noetherian Y/X/U/A; h,e sep. finite type; qc/finite-type open inclusions; sep. finite type over k incl. true extras Z,M; seven smoothness clauses; diagonal of eV clopen; z closed immersion; O fixed by exact carrier; IsPullback δ eV q Δ_A in correct orientation; q étale; p_U smooth dim d with closed section; ee=r≫s, r étale over U_V, s base change of eV along first projection (Step 6); graph inverse image = Δ_U as IsPullback. All clauses checked true. Statement field verbatim; only lean field changed vs live; no live module/declaration for item (no parallel landing); sorry only; real Prop def; docstrings carry source and blueprint tag. Edge cases d=0, empty U/V, open-immersion e, non-separated Y. Advisory: docstring uses blueprint/latest path; no stmt_dep for affine open. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261024T190943-L-190113",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

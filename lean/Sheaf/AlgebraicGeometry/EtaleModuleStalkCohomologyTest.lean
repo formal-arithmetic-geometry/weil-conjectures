@@ -6,14 +6,9 @@ Authors: SHEAF group Q44
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
-public import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Module geometric stalks compute and detect unbounded cohomology
 
@@ -73,7 +68,21 @@ theorem etaleModuleForget_preserves_cohomology
             (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (ComplexShape.up ℤ) i ⋙
           sheafCompose T.smallEtaleTopology
             (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}))) := by
-  sorry
+  let F := sheafCompose T.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
+  have : PreservesFiniteLimits (F ⋙ sheafToPresheaf _ _) :=
+    inferInstanceAs (PreservesFiniteLimits (sheafToPresheaf _ _ ⋙
+      (Functor.whiskeringRight _ _ _).obj
+        (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})))
+  have : PreservesFiniteLimits F :=
+    preservesFiniteLimits_of_reflects_of_preserves F (sheafToPresheaf _ _)
+  have : PreservesColimits F :=
+    (Sheaf.forget₂CoinduceAdj T.smallEtaleTopology A).leftAdjoint_preservesColimits
+  refine ⟨inferInstance, inferInstance, ?_, ?_⟩
+  · intro G H f
+    exact ⟨PreservesImage.iso F f⟩
+  · intro i
+    exact ⟨F.mapHomologicalComplexHomologyIso (ComplexShape.up ℤ) i⟩
 
 /-- Forgetting an ordinary module structure preserves kernels, images, quotients
 and cohomology, naturally in arbitrary integer-indexed complexes.
@@ -97,7 +106,13 @@ theorem moduleForget_preserves_cohomology (A : Type (u + 1)) [CommRing A] :
           HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (ComplexShape.up ℤ) i ≅
         HomologicalComplex.homologyFunctor (ModuleCat.{u + 1} A) (ComplexShape.up ℤ) i ⋙
           forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})) := by
-  sorry
+  let F := forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}
+  have : PreservesColimits F := (ModuleCat.forget₂CoinduceAdj A).leftAdjoint_preservesColimits
+  refine ⟨inferInstance, inferInstance, ?_, ?_⟩
+  · intro M N f
+    exact ⟨PreservesImage.iso F f⟩
+  · intro i
+    exact ⟨F.mapHomologicalComplexHomologyIso (ComplexShape.up ℤ) i⟩
 
 /-- The geometric module stalk is additive and exact.
 Source: Stacks Project, etale-cohomology.tex, Tag 03PT(3), and sites-modules.tex,
@@ -116,7 +131,7 @@ theorem etaleModuleStalk_exact
     ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).Additive ∧
     PreservesFiniteLimits ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)) ∧
     PreservesFiniteColimits ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)) := by
-  sorry
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Applying the geometric module stalk termwise preserves quasi-isomorphisms.
 Source: Stacks Project, homology.tex, Tag 010N; derived.tex, Tag 015F
@@ -135,7 +150,8 @@ theorem etaleModuleStalk_preserves_quasiIso
     (f : C ⟶ D) (hf : QuasiIso f) :
     QuasiIso ((((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).mapHomologicalComplex
       (ComplexShape.up ℤ)).map f) := by
-  sorry
+  have : QuasiIso f := hf
+  infer_instance
 
 /-- The unbounded derived module stalk is induced by the termwise stalk functor.
 Source: Stacks Project, derived.tex, Tag 015F(3)-(4), Definition 05RU
@@ -153,7 +169,8 @@ theorem etaleModuleStalk_derived_factors
           ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).mapDerivedCategory ≅
         ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).mapHomologicalComplex
           (ComplexShape.up ℤ) ⋙ _root_.DerivedCategory.Q) := by
-  sorry
+  exact ⟨((pointSmallEtale t).sheafFiber
+    (A := ModuleCat.{u + 1} A)).mapDerivedCategoryFactors⟩
 
 /-- Cohomology commutes naturally and A-linearly with the unbounded derived stalk.
 Source: Stacks Project, sites-cohomology.tex, Tag 0DJJ, converse proof;
@@ -176,7 +193,8 @@ theorem etaleModuleStalk_cohomology_iso
           (pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A) ≅
         ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).mapDerivedCategory ⋙
           _root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i) := by
-  sorry
+  exact ⟨((pointSmallEtale t).sheafFiber
+    (A := ModuleCat.{u + 1} A)).mapDerivedCategoryHomologyFunctorIso i⟩
 
 /-- Vanishing of each cohomology sheaf is detected by all derived geometric stalks.
 Source: Stacks Project, etale-cohomology.tex, Tag 03PU; sites-cohomology.tex,
@@ -210,6 +228,17 @@ theorem etaleModuleStalk_cohomology_test
         IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i).obj
           (((pointSmallEtale t).sheafFiber
             (A := ModuleCat.{u + 1} A)).mapDerivedCategory.obj E)) := by
-  sorry
+  constructor
+  · intro h Ω _ _ t
+    obtain ⟨e⟩ := etaleModuleStalk_cohomology_iso A t i
+    exact (Functor.map_isZero ((pointSmallEtale t).sheafFiber) h).of_iso (e.app E).symm
+  · intro h
+    apply (IsZero.iff_id_eq_zero _).2
+    apply Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint
+    intro s
+    obtain ⟨e⟩ := etaleModuleStalk_cohomology_iso A (T.algClosurePoint s) i
+    have hz := (h _ (T.algClosurePoint s)).of_iso (e.app E)
+    rw [CategoryTheory.Functor.map_id, Functor.map_zero]
+    exact (IsZero.iff_id_eq_zero _).1 hz
 
 end AlgebraicGeometry.Etale

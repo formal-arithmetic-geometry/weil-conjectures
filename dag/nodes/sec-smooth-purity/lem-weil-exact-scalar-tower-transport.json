@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-exact-scalar-tower-transport",
+ "kind": "statement",
+ "title": "Unique exact-derived transport of scalar coherence",
+ "statement": "Let an arbitrary preorder index two families of abelian categories with derived categories, exact additive scalar functors T and t, and exact additive section functors G. Let theta identify G followed by t with T followed by G. Given coherent ordinary associators and units O and prescribed isomorphisms c from each exact derived T to a chosen TD, there exists a unique family D of derived sheaf and module associators and units. Its cochain representative equations use sigma=Q(c inverse) followed by the exact factorization, its section comparison is inverse source compositor, localized theta, target compositor and c, and it satisfies the derived section, unit and four-stage equations. Equality of section identifications preserves this normalized comparison.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VG, localization of natural transformations; localization portion of lem-weil-sections-scalar-derived-transport, proof steps 5--8, with exactness supplied"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct binary maps using the inverse exact-derived compositor, localized ordinary associator, and c at the edges. Construct units using the exact-derived identity comparison. Factorization equations give all cochain representative equations.",
+   "uses": [
+    "lem-pur-exact-restriction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pasting of exact-derived transformations preserves every ordinary square, unit and four-stage equation. Conjugate by c; internal inverse comparisons cancel. The section comparison is precisely thetaDerived.",
+   "uses": [
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose any competing map with Q and use its representative equation. Cancel the invertible target sigma or module factorization. Full faithfulness of precomposition with localization gives equality. An isomorphism is determined by its hom.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-exact-restriction-composition",
+  "lem-sp-exact-derived-transformation-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VG, localization of natural transformations; localization portion of lem-weil-sections-scalar-derived-transport, proof steps 5--8, with exactness supplied"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization of natural transformations preserves composition associators units and coherence squares",
+   "results": "8 hits: Localization.comp_liftNatTrans_assoc, Localization.comp_liftNatTrans, LocalizerMorphism.homMap_comp_assoc, four Guitart-exactness lemmas, LocalizerMorphism.homMap_apply_assoc. No prescribed scalar-tower transport statement.",
+   "date": "2026-10-24",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "11 hits including ModuleCat.extendScalarsComp, extendScalars_id_comp, extendScalars_comp_id, extendScalarsComp_hom_app_one_tmul, extendScalars_assoc, homEquiv_extendScalarsComp. These only address ordinary module associators.",
+   "date": "2026-10-24",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_associator|mapDerivedCategoryCompIso|exact_derived_transformation_pasting",
+   "results": "msearch grep returned 0 hits. Local rg found RingedKFlatWord.scalar_associator, Functor.exactDerivedRestrictionComposition and ExactDerivedPasting.exact_derived_transformation_pasting; these cover constituent constructions.",
+   "date": "2026-10-24",
+   "verdict": "constituents only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointDerivedTensorTowerCoherence",
+  "date": "2026-10-24",
+  "group": "H6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Final paragraph, coherence of point sections and ordinary scalar extension in finite coefficient towers; counit-normalized exact derived transport",
+   "via": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-point-derived-tensor-tower-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactScalarTowerTransport",
+  "file": "lean/Sheaf/CategoryTheory/ExactScalarTowerTransport.lean",
+  "declaration": "CategoryTheory.ScalarTower.exact_transport",
+  "statement": "theorem exact_transport (_hO : Coherent G θ O) :\n    ∃! D : DerivedMaps S M t TD, DerivedLaws (S := S) (M := M) (T := T) (t := t) (G := G)\n      (TD := TD) (c := c) θ O D",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-24",
+  "declarations": [
+   "CategoryTheory.ScalarTower.td",
+   "CategoryTheory.ScalarTower.gd",
+   "CategoryTheory.ScalarTower.sigma",
+   "CategoryTheory.ScalarTower.DerivedMaps",
+   "CategoryTheory.ScalarTower.thetaDerived",
+   "CategoryTheory.ScalarTower.DerivedLaws",
+   "CategoryTheory.ScalarTower.representative_counit_iff",
+   "CategoryTheory.ScalarTower.unit_counit_iff",
+   "CategoryTheory.ScalarTower.normalizedComparison_heq",
+   "CategoryTheory.ScalarTower.normalizedComparison_localized_heq",
+   "CategoryTheory.ScalarTower.localizedComparison_eq",
+   "CategoryTheory.ScalarTower.exact_transport",
+   "CategoryTheory.ScalarTower.laws_of_ordinary_eq",
+   "CategoryTheory.ScalarTower.RepresentativeLaws",
+   "CategoryTheory.ScalarTower.derived_unique_of_ordinary_eq",
+   "CategoryTheory.ScalarTower.exact_transport_unique"
+  ],
+  "note": "Exact derived transport and uniqueness are proved. RepresentativeLaws isolates the four localization normalizations; exact_transport_unique returns uniqueness from those equations across equal ordinary data."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5b97f",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T202213-L-2692230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5b97f",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T202213-L-2692230",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointDerivedTensorTowerCoherence + 2 new modules vs published item; original OrdinaryLaws/DerivedLaws/ChainLaws/PreservesModels text re-elaborated and proved equivalent field-by-field to the new records (modules = integralTowerModules by rfl); both direct importers compile unchanged; axioms of the new general results clean"
+ }
+}

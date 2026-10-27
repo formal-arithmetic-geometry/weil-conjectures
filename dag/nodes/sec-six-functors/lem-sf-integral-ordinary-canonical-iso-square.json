@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-integral-ordinary-canonical-iso-square",
+ "kind": "lemma",
+ "title": "Ordinary reduction squares for forward structural isomorphisms",
+ "statement": "Fix l,E,o and normalized ambient models a [def-sf-integral-realization-assembly-data], an arbitrary scheme B, family X:I→Over B and ordinary integral inputs K. If the independently specified system and ringed isomorphisms s:e_system(RK)≅t_system(RK) and r:e_ringed(K)≅t_ringed(K) form a CanonicalIsoPair [def-sf-integral-system-realization-data], then rho_e followed by s.hom equals R(r.hom) followed by rho_t, where rho is the explicit ordinary coefficient recursion [def-sf-integral-ordinary-expression-reduction]. Only the listed forward isomorphism generators are covered. There is no realization comparison, completion transport, BasicPair unit/counit or arbitrary outer context in the assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction; coherence inherited from individual maps."
+ },
+ "stmt_deps": [
+  "def-sf-integral-realization-assembly-data",
+  "def-sf-integral-ordinary-expression-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Case split on the nine constructors of CanonicalIsoPair. For pull composition use canonicalReductionPullComposition and naturality in the child coefficient map. Apply mate_compositor_square to its inverse-component equation for proper composition; naturality again inserts the child map.",
+   "uses": [
+    "lem-sf-canonical-reduction-pull-composition",
+    "lem-sf-tensor-adjunction-reduction-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor reassociation follows from comparison_associator, which derives associativity from reduction_compatible and transports across tensorClosed. It allows arbitrary three child coefficient maps, including repeated inputs.",
+   "uses": [
+    "lem-sf-tensor-adjunction-reduction-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For tensor/pullback use the primitive two-object coefficient square, and naturality of the system tensor/pullback comparison to insert both child coefficient maps.",
+   "uses": [
+    "lem-sf-canonical-reduction-tensor-pull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fixed open reduction mate is invertible at every ordinary input. For open composition, apply injectivity of mateEquiv to the composition square and use canonical pull composition; invert this equality and use compositor naturality. For cartesian open base change, transpose the inverse comparison under the open adjunction. Substitute the given beta_transpose fields. Paste the open-unit square with the pullback square, obtained from two pull compositors and equality transport. This proves the inverse coefficient square; cancellation of the two structural isomorphisms gives the forward square. For the clopen comparison, transpose under the direct-image adjunction and cancel the invertible open units; the open-unit square and direct counit mate square give the required equality.",
+   "uses": [
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-sf-canonical-reduction-pull-composition",
+    "lem-sf-tensor-adjunction-reduction-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For open projection transpose its inverse under the open adjunction. Substitute projection_transpose on both sides, factor the tensor of the open-unit square and the second pullback coefficient map, and apply tensor-reduction naturality. The inverse primitive tensor/pullback coefficient square and pullback/tensor naturality identify the remaining factors. Invert the resulting structural square. This argument uses no completion or arbitrary realization comparisons.",
+   "uses": [
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-sf-canonical-reduction-tensor-pull",
+    "lem-sf-tensor-adjunction-reduction-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compactification expansion has identity structural arrows and identical open-then-proper ordinary reduction recursions; simplification of identities and reflexivity close this case.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-canonical-reduction-pull-composition",
+  "lem-sf-tensor-adjunction-reduction-squares",
+  "lem-sf-canonical-reduction-tensor-pull",
+  "lem-sf-open-reconstruction-effectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The individual-map coefficient sentence, using formal mate calculus for all open cases and one primitive two-object pullback/tensor coefficient square; B5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient reduction functor intertwines associators, adjunction units counits, exchange projection maps and their composites; transpose recursive coefficient maps under an adjunction",
+   "results": "conjugateEquiv_associator_hom; mateEquiv_apply; mateEquiv_counit and its inverse; iterated_mateEquiv_conjugateEquiv. No project expression coefficient theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the general adjunction API and the project normalized primitive maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "mateEquiv, mateEquiv_counit, unit_mateEquiv, mateEquiv_vcomp/hcomp, conjugateEquiv_mateEquiv_vcomp, iterated_mateEquiv_conjugateEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate calculus, not the project-specific coefficient diagrams."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*(Square|Reduction)|transpose_substitution; homEquiv_naturality_right_square_iff|iso.*naturality",
+   "results": "Mathlib generic adjunction naturality and project private ordinaryR/tensorOrdinaryR/pushOrdinaryR in TensorAdjunctionReductionSquares. Those private word APIs require GeneratorReduction.Operations, including unitReduction/unitNormalization not supplied by AmbientModels. No independent coefficient recursion for Expression.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary coefficient maps on Expression and transpose with the actual adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralBasicGeneratorSquare",
+  "date": "2026-10-27",
+  "group": "J7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction; coherence inherited from individual maps.",
+   "via": [
+    "lem-sf-integral-basic-generator-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOrdinaryCanonicalIsoSquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralOrdinaryCanonicalIsoSquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryCanonicalIsoSquare",
+  "statement": "theorem ordinaryCanonicalIsoSquare\n    (o : Operations l E) (a : AmbientModels l E o)\n    {B : Scheme.{u}} {I : Type u} {X : I → Over B}\n    (K : ∀ i, Integral l E (X i).left)\n    {W : Over B} (e t : Expression B I X W)\n    (s : e.systemObj l E o ((inputReduction l E X).obj K) ≅\n      t.systemObj l E o ((inputReduction l E X).obj K))\n    (r : e.ringedObj l E a.ringedModels K ≅ t.ringedObj l E a.ringedModels K)\n    (h : CanonicalIsoPair l E o a.compositors a.openComparisons a.ringedModels\n      a.ringedOpenComparisons ((inputReduction l E X).obj K) K e t s r) :\n    e.ordinaryReduction l E o a K ≫ s.hom =\n      (calculus l E W.left).reduction.map r.hom ≫ t.ordinaryReduction l E o a K",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T235911-L-1467113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T050538-L-235369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -25,6 +25,8 @@ import Sheaf.AlgebraicGeometry.CondensedDualizableLocalPerfectModels
 import Sheaf.Paper.TAdmissibleDualizableTruncations
 import WeilConjectures.ConstructibleSheaf.Refinement
 import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Finite generation for all-continuous algebraic-closure coefficients

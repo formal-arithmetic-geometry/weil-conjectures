@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-relative-module-flat-locus-base-change",
+ "kind": "statement",
+ "title": "Relative flat locus of a finitely presented module commutes with parameter base change",
+ "statement": "Let $S,X,Z$ be schemes [def-pc-scheme], with morphisms $p:X\\to S$, $a:Z\\to S$ and $f:X\\to Z$ satisfying $a\\circ f=p$. Assume $p$ is locally of finite presentation [def-sbc-locally-finite-presentation] and $a$ is locally of finite type [def-weil-finite-type-morphism]. Let $\\mathcal M$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent] of finite presentation [def-weil-pbc-module-finite-type-presentation], flat over $S$ [def-pc-scheme-module-flat-over]. Define\n$$U=\\{x\\in X:\\mathcal M_x\\text{ is flat over }\\mathcal O_{Z,f(x)}\\},$$\nwhere the scalar action is induced by $f$ and stalks are [def-weil-pbc-module-stalk]. Then $U$ is open. For every scheme $S'$ and morphism $v:S'\\to S$, put $X'=X\\times_SS'$, $Z'=Z\\times_SS'$, let $b:X'\\to X$ be the projection and $f':X'\\to Z'$ the induced morphism [def-pc-fibre-product], and set $\\mathcal M'=b^*\\mathcal M$ [def-pc-module-pullback]. One has\n$$\\{x'\\in X':\\mathcal M'_{x'}\\text{ is flat over }\\mathcal O_{Z',f'(x')}\\}=b^{-1}(U).$$\nNo flatness hypothesis is imposed on $p$, $a$, $f$ or $v$, and no Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, complete statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-pbc-module-stalk",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-a1-map-over-base-finite-presentation], $f$ is locally of finite presentation: its composite with $a$ is $p$, and $a$ is locally of finite type. Around each $x$ choose affine opens $V=\\operatorname{Spec}B\\subseteq Z$ and $W=\\operatorname{Spec}C\\subseteq f^{-1}V$ containing $f(x)$ and $x$, using [lem-weil-pbc-affine-opens-basis]. Shrink $W$ within a quasi-coherent chart of $\\mathcal M$ [pqf-def-coherent]. The ring map $B\\to C$ is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. On $W$, write $\\mathcal M=\\widetilde N$, with $N=\\Gamma(W,\\mathcal M)$ via the affine tilde counit [lem-weil-pbc-affine-tilde-gamma-adjunction]; $N$ is a finitely presented $C$-module by [lem-weil-pbc-finite-presentation-affine-sections].",
+   "uses": [
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-weil-pbc-affine-opens-basis",
+    "pqf-def-coherent",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-finite-presentation-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, first sentence; Tag 0399, affine reduction"
+   }
+  },
+  {
+   "text": "For $w\\in W$ represented by $\\mathfrak r\\subset C$, let $\\mathfrak b=\\mathfrak r\\cap B$. The affine stalk identifications [lem-weil-pbc-affine-open-stalk-localization, lem-weil-pbc-spec-tilde-stalk-localization] identify $\\mathcal O_{Z,f(w)}=B_{\\mathfrak b}$ and $\\mathcal M_w=N_{\\mathfrak r}$ with their structural actions. Since $B\\setminus\\mathfrak b$ acts invertibly on $N_{\\mathfrak r}$, [lem-weil-pbc-flat-over-localization] identifies flatness over $B_{\\mathfrak b}$ with flatness over $B$. Thus $U\\cap W$ is exactly the open flat locus given by [lem-weil-pbc-openness-of-flatness] for $B\\to C,N$. The $W$ cover $X$, so $U$ is open.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-openness-of-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, openness via Tag 0399; the affine theorem is Algebra 00RC"
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and $s=p(x)$, and put $\\mathcal M_s=i_s^*\\mathcal M$ on $X_s$ [def-pc-scheme-fibre]. By [def-pc-scheme-module-flat-over], $\\mathcal M_x$ is flat over $\\mathcal O_{S,s}$. If $\\mathcal M_x\\ne0$, [lem-sfb-fibrewise-module-flatness-criterion] shows that flatness of $(\\mathcal M_s)_{\\widetilde x}$ over $Z_s$ implies $x\\in U$. Conversely, if $x\\in U$, apply clause (1) of [lem-sfb-pointwise-module-flatness-base-change] to $X_s=X\\times_Z Z_s$ to obtain flatness on the fibre; this square is cartesian by the universal property [def-pc-fibre-product]. If $\\mathcal M_x=0$, the pullback stalk formula [lem-weil-pbc-module-stalk-pullback] gives $(\\mathcal M_s)_{\\widetilde x}=0$, and both flatness conditions hold since tensoring with zero is the zero exact functor. Hence $x\\in U$ if and only if $\\mathcal M_s$ is flat over $Z_s$ at $\\widetilde x$, including the zero-stalk case.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-scheme-module-flat-over",
+    "lem-sfb-fibrewise-module-flatness-criterion",
+    "lem-sfb-pointwise-module-flatness-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, fibrewise description and parenthetical zero-stalk case"
+   }
+  },
+  {
+   "text": "For any $v:S'\\to S$, the projection $p':X'\\to S'$ is locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3), and $a':Z'\\to S'$ is locally of finite type by [lem-weil-pbc-lft-base-change]. The module $\\mathcal M'=b^*\\mathcal M$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent], of finite presentation by [lem-pc-tensor-pullback-finite-presentation], and flat over $S'$ by [lem-pc-relatively-flat-module-pullback]. Thus the argument of step 3 applies with primes on all objects. In particular $x'\\in U'$ if and only if $(\\mathcal M')_{s'}$ is flat over $Z'_{s'}$ at the point above $x'$, for $s'=p'(x')$. No flatness of $v$ was used.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-pc-relatively-flat-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, hypotheses remain in force after parameter base change"
+   }
+  },
+  {
+   "text": "Put $s=v(s')$. Apply [lem-sfb-flat-residue-fibre-square] with $Y=Z$ and $T=S'$. It gives the cartesian square $X'_{s'}\\to X_s$ over $Z'_{s'}\\to Z_s$, with both horizontal maps flat, and $i_s\\circ c=b\\circ i'_{s'}$ for $c:X'_{s'}\\to X_s$. The composition comparison for ordinary tensor pullback [def-pc-module-pullback] therefore gives\n$$(\\mathcal M')_{s'}=(i'_{s'})^*b^*\\mathcal M\\cong c^*i_s^*\\mathcal M=c^*\\mathcal M_s.$$ Here $\\mathcal M_s$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent], as the pointwise lemma applied below requires.\nThe point above $x'$ maps to the point of $X_s$ above $b(x')$ by the same projection identity. Clause (1) and clause (2) of [lem-sfb-pointwise-module-flatness-base-change] applied to this square identify the two fibrewise flatness conditions, since the bottom horizontal map is flat. Using steps 3 and 4, we conclude $x'\\in U'\\iff b(x')\\in U$. This holds for every $x'$, so $U'=b^{-1}(U)$; as opens this is also the fibre product $U\\times_S S'$.",
+   "uses": [
+    "lem-sfb-flat-residue-fibre-square",
+    "def-pc-module-pullback",
+    "lem-sfb-pointwise-module-flatness-base-change",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, final cartesian square and application of Tag 047C"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-affine-opens-basis",
+  "pqf-def-coherent",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-finite-presentation-affine-sections",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-openness-of-flatness",
+  "def-pc-scheme-fibre",
+  "def-pc-scheme-module-flat-over",
+  "lem-sfb-fibrewise-module-flatness-criterion",
+  "lem-sfb-pointwise-module-flatness-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-sfb-flat-residue-fibre-square",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, entire proof, with the affine proof of Tag 0399 written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|locus.*flat|flatness.*fib",
+   "results": "{\"t\": \"2026-10-23T13:53:28Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|locus.*flat|flatness.*fib\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/Algebra/Category/Ring/EqualizerPushout.lean\", \"Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean\"], \"digest\": \"e0c6da42ca595ce6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: UniversallyOpen.of_flat concerns openness of an already flat morphism; Flat.isStableUnderBaseChange and Module.Flat.isBaseChange only give ascent. FreeLocus.lean:160-174 concerns freeness over the module ring; Flat.EquationalCriterion.projective_of_finitePresentation concerns total flatness. None states the module flat-locus equality for arbitrary parameter change."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-23T13:53:29Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.FinitePresentation.isBaseChange_map\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.exists_factorization_of_finitePresentation\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.exists_basis_of_span_of_flat\", \"Module.isLocallyConstant_rankAtStalk\"], \"digest\": \"d41d37d9f655675c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: UniversallyOpen.of_flat concerns openness of an already flat morphism; Flat.isStableUnderBaseChange and Module.Flat.isBaseChange only give ascent. FreeLocus.lean:160-174 concerns freeness over the module ring; Flat.EquationalCriterion.projective_of_finitePresentation concerns total flatness. None states the module flat-locus equality for arbitrary parameter change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative flat locus of a finitely presented module sheaf flat over the parameter scheme is open and compatible with arbitrary change of parameters",
+   "results": "{\"t\": \"2026-10-23T13:53:29Z\", \"tool\": \"leansearch\", \"query\": \"Relative flat locus of a finitely presented module sheaf flat over the parameter scheme is open and compatible with arbitrary change of parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"Module.Flat.isBaseChange\", \"Module.isOpen_freeLocus\", \"Module.isLocallyConstant_rankAtStalk\", \"Module.flat_of_isLocalized_span\", \"Module.flat_of_isLocalized_maximal\", \"Module.freeLocus_eq_univ\", \"AlgebraicGeometry.Flat.instMorphismRestrict\"], \"digest\": \"ad50088cfcd412c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: UniversallyOpen.of_flat concerns openness of an already flat morphism; Flat.isStableUnderBaseChange and Module.Flat.isBaseChange only give ascent. FreeLocus.lean:160-174 concerns freeness over the module ring; Flat.EquationalCriterion.projective_of_finitePresentation concerns total flatness. None states the module flat-locus equality for arbitrary parameter change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented quasi coherent module flat over S on a scheme X locally of finite presentation over S and a map X to Y with Y locally of finite type over S, its flat locus over Y commutes with arbitrary base change of S",
+   "results": "{\"t\": \"2026-10-23T13:53:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely presented quasi coherent module flat over S on a scheme X locally of finite presentation over S and a map X to Y with Y locally of finite type over S, its flat locus over Y commutes with arbitrary base change of S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"a23435fc89cdfa95\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: UniversallyOpen.of_flat concerns openness of an already flat morphism; Flat.isStableUnderBaseChange and Module.Flat.isBaseChange only give ascent. FreeLocus.lean:160-174 concerns freeness over the module ring; Flat.EquationalCriterion.projective_of_finitePresentation concerns total flatness. None states the module flat-locus equality for arbitrary parameter change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The points where a relatively flat finitely presented sheaf is flat over another family form an open subset whose formation commutes with any base change",
+   "results": "{\"t\": \"2026-10-23T13:53:31Z\", \"tool\": \"leanfinder\", \"query\": \"The points where a relatively flat finitely presented sheaf is flat over another family form an open subset whose formation commutes with any base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.flat_iff\", \"CategoryTheory.compatiblePreservingOfFlat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"c5aaebfb493d5145\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: UniversallyOpen.of_flat concerns openness of an already flat morphism; Flat.isStableUnderBaseChange and Module.Flat.isBaseChange only give ascent. FreeLocus.lean:160-174 concerns freeness over the module ring; Flat.EquationalCriterion.projective_of_finitePresentation concerns total flatness. None states the module flat-locus equality for arbitrary parameter change."
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|isOpen.*flat|flat.*isOpen",
+   "results": "{\"t\": \"2026-10-23T14:43:24Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|isOpen.*flat|flat.*isOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"15f125e39e383c71\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the openness results concern smoothness, etaleness or absolute freeness, and flat-morphism base change only gives ascent, not this parameter-flat module locus equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-23T14:43:25Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.FinitePresentation.isBaseChange_map\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.exists_factorization_of_finitePresentation\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.exists_basis_of_span_of_flat\", \"Module.isLocallyConstant_rankAtStalk\"], \"digest\": \"d41d37d9f655675c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the openness results concern smoothness, etaleness or absolute freeness, and flat-morphism base change only gives ascent, not this parameter-flat module locus equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The flatness locus of a finitely presented module over a finitely presented algebra is open in the prime spectrum",
+   "results": "{\"t\": \"2026-10-23T14:55:30Z\", \"tool\": \"leansearch\", \"query\": \"The flatness locus of a finitely presented module over a finitely presented algebra is open in the prime spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"Algebra.isOpen_etaleLocus\", \"Module.flat_of_isLocalized_maximal\", \"Algebra.smoothLocus\", \"Module.isOpen_freeLocus\", \"Module.basicOpen_subset_freeLocus_iff\", \"Module.flat_of_isLocalized_span\", \"Module.freeLocus_eq_univ\"], \"digest\": \"6d4c40e4205ac439\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the openness results concern smoothness, etaleness or absolute freeness, and flat-morphism base change only gives ascent, not this parameter-flat module locus equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The flat locus of a finitely presented sheaf flat over S for a morphism between S schemes commutes with arbitrary base change S prime to S",
+   "results": "{\"t\": \"2026-10-23T14:55:30Z\", \"tool\": \"leanfinder\", \"query\": \"The flat locus of a finitely presented sheaf flat over S for a morphism between S schemes commutes with arbitrary base change S prime to S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Flat.instSndScheme\"], \"digest\": \"efdba8db174a7e00\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the openness results concern smoothness, etaleness or absolute freeness, and flat-morphism base change only gives ascent, not this parameter-flat module locus equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-free-locus-base-change",
+  "date": "2026-10-23",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Algebraicity part: inclusion of line bundles into the ambient coherent stack. Supporting source-local input: Stacks 0D03 proof, the sentence invoking finite-free-open (0CZT); scheme version 0CZR. In the 0CZR proof, final sentence: apply the module flat-locus theorem 05VJ to the identity morphism of Y over T.",
+   "via": [
+    "lem-sfb-relative-finite-free-locus-base-change",
+    "lem-sfb-invertible-open-in-coherent-stack",
+    "lem-sfb-picard-stack-curve-geometry",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-module-flat-locus-base-change",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Stacks 05VJ and supplied its affine openness, fibrewise test including zero stalks, base-change permanence and flat residue-fibre comparison. Added only the general module version of the 039C implication and the pointwise 047C ascent/reflection theorem; existing nodes cover only structure sheaves. Reused all remaining generic inputs. No Lean was written or compiled.",
+  "blueprint": "Supporting input to the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/Picard-stack prerequisite, through 0D03, 0CZT and 0CZR. Realizes the final 0CZR application of 05VJ. The latest direct-images proof (3) now uses compactification and coefficient results; retained ancestry is a historical supporting route, not a change to that unit. blueprint_refs.py ancestor returns null because created.item terminates at a Lean module item, while the retained chain and lem-sfb-admissible-direct-image explicitly identify det-thm-sf-ctf-stability-direct-images; retained the computed null ancestor as required by preflight B9 and recorded the historical named ancestor in this narrative.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-presentation-affine-sections",
+    "why": "Generic scheme/module tool used in the affine openness or base-change argument of Stacks 05VJ; no same-unit node states this input in the required module generality."
+   },
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "Generic scheme/module tool used in the affine openness or base-change argument of Stacks 05VJ; no same-unit node states this input in the required module generality."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic scheme/module tool used in the affine openness or base-change argument of Stacks 05VJ; no same-unit node states this input in the required module generality."
+   },
+   {
+    "node": "lem-pc-relatively-flat-module-pullback",
+    "why": "Generic scheme/module tool used in the affine openness or base-change argument of Stacks 05VJ; no same-unit node states this input in the required module generality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-presentation-affine-sections",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-pc-relatively-flat-module-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-140612208",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-140612208 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, each cited statement and the sources. Item statement against Stacks more-morphisms 05VJ: it has the four hypotheses lfp, fp, flat over S and lft, the same locus U and arbitrary base change v. It is unchanged from base and not weakened. No re-split repair note exists for this item. Live and side-live still have it unsplit, so nothing supersedes it. Steps: (1) the 02FV permanence node, the affine basis, lfp ⇒ B→C finitely presented, the tilde counit and fp sections. (2) The stalk localizations, flatness over B_b ⇔ over B, and the algebraic 00RC openness node with exactly its hypotheses. (3) Stalkwise relative flatness, the new 039C node when M_x ≠ 0, the 047C node (1) on X_s = X ×_Z Z_s for the converse, and the zero stalk through the module-stalk-pullback formula. (4) Base-change permanence, all five cited statements checked. (5) The flat-residue-fibre-square node gives a cartesian square with flat horizontal maps and ι_s∘a = π_X∘ι'. The pullback composition iso and 047C (1),(2) then give U' = b^{-1}(U). New node lem-sfb-fibrewise-module-flatness-criterion matches 039C (1)⇒(2) with F_x ≠ 0. It is needed because the existing algebraic 00R7 node needs essentially-fp for both rings, while 039C/05UV has only essentially-ft for O_{Y,y}. Small cases: the origin in A^1_k fails the hypothesis, consistent with O_X not being flat over the line. Without F_x ≠ 0 the conclusion would be false. New node lem-sfb-pointwise-module-flatness-base-change matches 047C (1),(2) for any quasi-coherent F, and needs flatness of g only at y'. An rg -L search of the DAG for 039C, 047C, 05VJ, 0399, 00MQ, 05UV, 02KE and module 'flat at' found only structure-sheaf versions (fibrewise/pointwise/05VK/relative-flat-fibre-test), algebraic 00R7, 00MP and 06A5, and a fibre-square node: no duplicate. Neither new node restates the item. The declared tool_uses (finite-presentation-affine-sections, 00RC openness, tensor-pullback fp, relatively-flat pullback) are accepted as generic. The undeclared off-unit nodes are Lean-closed. No SGA source is used. Defect fixed (C1): step 5 applies the 047C node to M_s = i_s^*M without citing that it is quasi-coherent. I added lem-weil-pbc-module-pullback-quasi-coherent (already in proof_deps) to the step's uses and text, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-relative-module-flat-locus-base-change.json. Advisory: lem-pc-tensor-pullback-finite-presentation cites the ring-module definition def-sc-finitely-presented-module for a sheaf notion; that is a fault of that node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeModuleFlatLocusBaseChange",
+  "declaration": "AlgebraicGeometry.isOpen_moduleFlatLocus_and_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeModuleFlatLocusBaseChange.lean",
+  "statement": "theorem isOpen_moduleFlatLocus_and_baseChange {S X Z : Scheme.{u}} (p : X ⟶ S) (a : Z ⟶ S) (f : X ⟶ Z) (hf : f ≫ a = p) [LocallyOfFinitePresentation p] [LocallyOfFiniteType a] (M : X.Modules) [SheafOfModules.IsQuasicoherent.{u} M] [SheafOfModules.IsFinitePresentation.{u} M] (hflat : M.IsFlatOver p) : IsOpen {x : X | Module.Flat (Z.presheaf.stalk (f x)) ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj M))} ∧ ∀ (S' : Scheme.{u}) (v : S' ⟶ S), {x' : ↥(pullback p v) | Module.Flat ((pullback a v).presheaf.stalk ((pullback.map p v a v f (𝟙 S') (𝟙 S) (by simpa only [Category.comp_id] using hf.symm) (by simp)) x')) ((ModuleCat.restrictScalars ((pullback.map p v a v f (𝟙 S') (𝟙 S) (by simpa only [Category.comp_id] using hf.symm) (by simp)).stalkMap x').hom).obj ((RingedSpace.moduleStalkFunctor (pullback p v).toRingedSpace x').obj ((Scheme.Modules.tensorPullback (pullback.fst p v)).obj M)))} = (pullback.fst p v) ⁻¹' {x : X | Module.Flat (Z.presheaf.stalk (f x)) ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj M))}",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c8a2105f",
+  "group": "NM",
+  "result": "pass",
+  "note": "Only the item's lean field changed vs side-live; no new nodes or changed dependency records. Lean matches Stacks 05VJ and the node clause by clause: [LocallyOfFinitePresentation p], [LocallyOfFiniteType a], IsQuasicoherent.{u}/IsFinitePresentation.{u} in M's own universe, hflat : M.IsFlatOver p (affine-pair def read verbatim), U = Module.Flat over Z.stalk(f x) of RingedSpace.moduleStalkFunctor restricted along f.stalkMap; conclusions IsOpen U and, for all S' and v, U' = pullback.fst⁻¹'U with f' = pullback.map p v a v f 𝟙 𝟙 (canonical) and M' = tensorPullback (pullback.fst). No flatness on p/a/f/v, no Noetherian hypothesis, all universes bound. Edge cases (empty schemes, zero stalks, identity or closed-immersion v) handled. H4: no duplicate; isOpen_flatLocus_and_baseChange is the structure-sheaf case 05VK, moduleFlatLocusOverSpectrum is algebraic spaces (08VP). Pilot gates hold: proof sorry only, docstrings carry source/blueprint and the 5 proof steps, imports exist, no cycle, report has both sections. Not recompiled (no change); worker's clean scompile accepted. Advisory: stalk stmt_dep is def-weil-pbc-module-stalk (presheaf-level) while the Lean uses the record-sanctioned RingedSpace.moduleStalkFunctor (same carrier, rfl)."
+ }
+}

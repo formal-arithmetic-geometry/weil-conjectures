@@ -1,0 +1,177 @@
+{
+ "id": "lem-route-small-model-comparison-inclusion-is-continuous",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "via": [
+    "det-pe-finite-local-systems-twist"
+   ],
+   "place": "Constructible-comparison proof, opening single-stratum reduction to sk-prop-pe-finite-local-systems; its twist construction det-pe-finite-local-systems-twist uses the comparison inverse image. This lemma supplies continuity of that same inclusion after the canonical coefficient-universe equivalences (ProEtaleSmallModelComparison.lean:26-51), using the original inclusion of def-weil-pbc-site-comparison-morphism."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The transported inclusion is continuous, retaining the original covers.",
+ "statement": "Let $X$ be any scheme and use the small etale and pro-etale sites $C=X_{\\mathrm{Et}}$ and $D=X_{\\mathrm{proet}}$, with their original Grothendieck topologies $J$ and $K$ [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. Write $i:C\\to D$ for the inclusion [def-weil-pbc-site-comparison-morphism]. For arbitrary universe parameters $u,v$ with $X:\\mathrm{Scheme}_u$, put $w=\\max(v,u+1)$ and take the canonical equivalent copies $C^s=\\operatorname{AsSmall}_w(C)$ and $D^s=\\operatorname{AsSmall}_w(D)$, in the size convention [def-weil-size-convention]. Denote the canonical equivalences and their quasi-inverses by $d_C:C^s\\to C$, $a_C:C\\to C^s$, $d_D:D^s\\to D$ and $a_D:D\\to D^s$ (the named functors AsSmall.down and AsSmall.up).\n\nEquip $C^s$ and $D^s$ with the topologies $J^s=d_C.\\operatorname{inducedTopology}(J)$ and $K^s=d_D.\\operatorname{inducedTopology}(K)$: a sieve is covering exactly when its image under the corresponding down equivalence generates a covering sieve on the original site [lem-weil-pbc-site-equivalence-sheaf-transport]. Thus these are the original topologies transported along the equivalences, with every original object retained in an equivalent copy. Then\n$$i^s=a_D\\circ i\\circ d_C:(C^s,J^s)\\longrightarrow(D^s,K^s)$$\nis continuous: for every sheaf of sets $G$ on $(D^s,K^s)$, the presheaf $(i^s)^{\\mathrm{op}}\\mathbin{\\cdot}G$ on $C^s$, taking $U$ to $G(i^s(U))$ and $f$ to $G(i^s(f))$, is a $J^s$-sheaf. Here $i^s$, $J^s$ and $K^s$ are precisely smallModelComparisonInclusion, smallModelComparisonEtaleTopology and coefficientProEtaleModelTopology.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "det-pe-finite-local-systems-twist: the Lean of this node (its module Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist imports Sheaf.AlgebraicGeometry.ProEtaleSmallModelComparison (1 step)) reaches AlgebraicGeometry.Scheme.smallModelComparisonInclusion_isContinuous, a sorry on the sorry route of batch3, batch4, batch5 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/ProEtaleSmallModelComparison.lean, declaration AlgebraicGeometry.Scheme.smallModelComparisonInclusion_isContinuous (module Sheaf.AlgebraicGeometry.ProEtaleSmallModelComparison, lines 41-51, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-size-convention",
+  "lem-weil-pbc-site-equivalence-sheaf-transport"
+ ],
+ "proof": [
+  {
+   "text": "AsSmall.down is continuous from its induced etale topology by Mathlib CategoryTheory.Sites.InducedTopology. The original inclusion toProEt X is continuous by AlgebraicGeometry.Scheme.isContinuous_toProEt, and AsSmall.up is continuous for the coefficient-sized induced pro-etale topology by AlgebraicGeometry.Scheme.coefficientProEtaleModelUp_isContinuous. Apply Functor.isContinuous_comp twice, first to toProEt X and AsSmall.up, then to AsSmall.down and their composite. This proves the unchanged statement in every coefficient universe.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stacks Project, Tag 099R and Sites composition of continuous functors; realized directly with Mathlib Functor.isContinuous_comp and induced-topology continuity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'smallModelComparisonInclusion_isContinuous' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "isContinuous_comp|isContinuous_inducedTopology|isContinuous.*induced|induced.*[Cc]ontinuous",
+   "results": "11 hits: Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/InducedTopology.lean, Mathlib/CategoryTheory/Sites/InducedTopology.lean, Mathlib/CategoryTheory/Sites/InducedTopology.lean",
+   "date": "2026-10-26",
+   "verdict": "no match for the transported scheme-specific inclusion; generic continuity and induced-topology ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of continuous functors between Grothendieck sites is continuous; equivalences with the induced topology are continuous in both directions",
+   "results": "8 hits: CategoryTheory.Functor.isContinuous_comp', CategoryTheory.Functor.isContinuous_comp, TopologicalSpace.Opens.instIsContinuousCompGrothendieckTopology, CategoryTheory.Functor.instIsContinuousCompId, CategoryTheory.Functor.instIsContinuousCompId_1, CategoryTheory.Functor.isContinuous_of_iso, CategoryTheory.Functor.IsContinuous, CategoryTheory.isCocontinuous_comp",
+   "date": "2026-10-26",
+   "verdict": "no match for the transported scheme-specific inclusion; generic continuity and induced-topology ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport a continuous functor between sites along equivalences with induced Grothendieck topologies",
+   "results": "8 hits: CategoryTheory.Functor.inducedTopology, CategoryTheory.Functor.inducedTopology_isCocontinuous, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_map, CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.IsContinuous.mk, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport, CategoryTheory.Equivalence.transportAndSheafify",
+   "date": "2026-10-26",
+   "verdict": "no match for the transported scheme-specific inclusion; generic continuity and induced-topology ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.inducedTopology",
+   "results": "4 hits: CategoryTheory.Functor.instIsContinuousInducedTopology, CategoryTheory.Functor.le_inducedTopology_iff, CategoryTheory.Functor.restrictedTopology_eq_inducedTopology, CategoryTheory.Functor.restrictedTopology_eq_inducedTopology_of_isContinuous",
+   "date": "2026-10-26",
+   "verdict": "no match for the transported scheme-specific inclusion; generic continuity and induced-topology ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "inducedTopology|IsContinuous",
+   "results": "5 hits: 8, 66, 67, 69, 74",
+   "date": "2026-10-26",
+   "verdict": "no match for the transported scheme-specific inclusion; generic continuity and induced-topology ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of categories is continuous for the Grothendieck topology induced by the inverse functor",
+   "results": "8 hits: CategoryTheory.Equivalence.instIsDenseSubsiteInducedTopologyInverseFunctor, CategoryTheory.Functor.isContinuous_of_iso, CategoryTheory.Functor.IsContinuous, CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous, CategoryTheory.Functor.IsCoverDense.isContinuous, CategoryTheory.Functor.IsDenseSubsite.instIsContinuous, CategoryTheory.Functor.inducedTopology_isCocontinuous, CategoryTheory.Functor.isContinuous_of_coverPreserving",
+   "date": "2026-10-26",
+   "verdict": "no match for the transported scheme-specific inclusion; generic continuity and induced-topology ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "smallModelComparisonInclusion|smallModelComparisonEtaleTopology|toProEt",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no match for the transported scheme-specific inclusion; generic continuity and induced-topology ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the etale to proetale inclusion remains continuous after replacing both sites by AsSmall equivalent categories with induced topologies",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, CategoryTheory.Functor.IsContinuous, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, CategoryTheory.Functor.IsDenseSubsite.instIsContinuous",
+   "date": "2026-10-26",
+   "verdict": "no match for the transported scheme-specific inclusion; generic continuity and induced-topology ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "det-pe-finite-local-systems-twist",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-finite-local-systems",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSmallModelComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSmallModelComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.smallModelComparisonInclusion_isContinuous",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.smallModelComparisonInclusion_isContinuous"
+  ],
+  "statement": "theorem smallModelComparisonInclusion_isContinuous (X : Scheme.{u}) :\n    (smallModelComparisonInclusion.{u, v} X).IsContinuous\n      (smallModelComparisonEtaleTopology.{u, v} X)\n      (coefficientProEtaleModelTopology.{u, v} X)",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "F4 stage 3: proved without new holes, retaining the declaration signature and every definition."
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-route-small-model-comparison-inclusion-is-continuous",
+  "worker": "stage1",
+  "summary": "Replaced the provisional Lean/docstring dump by the exact arbitrary-universe transported-inclusion statement. Proved continuity by tracking a set-valued sheaf through the reverse pro-etale equivalence, original inclusion, and forward etale equivalence, citing existing statements for each non-elementary step. No new nodes; no statement dispute or extra hypotheses. Searches and source checks recorded in report.md.",
+  "blueprint": "Supports the opening single-stratum reduction in sk-thm-pe-constructible-comparison through the finite-local-system twist construction: the coefficient-sized comparison uses the same original inclusion. Implements the three continuity factors described in ProEtaleSmallModelComparison.lean:41-45 without changing either topology.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-site-comparison-morphism",
+    "why": "The original etale-to-pro-etale inclusion is continuous for every scheme; the local-systems unit uses this geometric comparison and does not reprove its site-theoretic foundation."
+   },
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Generic restriction of sheaves along an original-site continuous functor, used only to convert the existing inclusion-continuity statement into its action on an arbitrary sheaf; no local-systems descent theorem is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NF-a475c01d4",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-a475c01d4 (reviewer sub-agent of L); spot-checked: I read the item in full; no new nodes. The statement matches the Lean target exactly: smallModelComparisonInclusion = AsSmall.down ⋙ toProEt ⋙ AsSmall.up, with both topologies induced along AsSmall.down from smallEtaleTopology and ProEt.topology, w = max v (u+1), and X an arbitrary scheme. No hypothesis is added and nothing is weakened. Step 1 uses the quasi-inverse clause of the sheaf-transport leaf lem-weil-pbc-site-equivalence-sheaf-transport with e' = a_D, so G∘a_D is a K-sheaf; the direction is right. Step 2 takes the continuity of the inclusion from the first sentence of def-weil-pbc-site-comparison-morphism, read as Stacks 00WV, and applies lem-weil-pbc-site-continuous-pushforward-sheaf (Stacks 00WW, sets only). Step 3 uses the forward clause with d_C. Step 4 is associativity and is genuinely elementary. Advisory: steps 1 and 3 work with sheaves for the Grothendieck topologies, while 00WW uses the condition on covering families. The DAG identifies the two throughout through the smallEtaleTopology and ProEt.topology leaves (Mathlib isSheaf_pretopology), so I treat this as convention, not an uncited fact. Sources checked: proetale.tex section-comparison (099R) with its footnote, sites.tex 00WV, 00WW (l.2548) and 03A0 (l.6774). Small cases: X empty and enlarging v change nothing. The DAG search (AsSmall, inducedTopology, transported topology with 'continuous', smallModelComparison) finds no duplicate, and the dependencies have no cycle. I accept the tool_uses def-weil-pbc-site-comparison-morphism and lem-weil-pbc-site-continuous-pushforward-sheaf: they are generic site tools that no node of sk-prop-pe-finite-local-systems gives. The worker wrote them itself (C8). No SGA is used, and no fixes were made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T180647-L-4016726",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

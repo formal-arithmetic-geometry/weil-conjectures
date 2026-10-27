@@ -1,0 +1,239 @@
+{
+ "id": "lem-a1-local-trivialization-residue-rank",
+ "kind": "statement",
+ "title": "Local trivialization determines maximal localization and residue rank",
+ "statement": "Let $E$ be a commutative ring, $P$ an $E$-module, $\\mathfrak q$ a maximal ideal, $f\\in E\\setminus\\mathfrak q$, and $r\\geq0$ an integer. Suppose $P_f\\cong E_f^{\\oplus r}$, where localization away from $f$ is [def-weil-pbc-module-localization-away]. Write $S=E\\setminus\\mathfrak q$, $E_{\\mathfrak q}=S^{-1}E$, $P_{\\mathfrak q}=S^{-1}P$ [def-weil-pbc-module-localization], [def-weil-pbc-localization-at-prime], and $k_{\\mathfrak q}=E/\\mathfrak q$. Then $P_{\\mathfrak q}\\cong E_{\\mathfrak q}^{\\oplus r}$. The canonical map $P/\\mathfrak qP\\longrightarrow P_{\\mathfrak q}/\\mathfrak qP_{\\mathfrak q}$, $[p]\\longmapsto[p/1]$, is an isomorphism over $k_{\\mathfrak q}\\cong E_{\\mathfrak q}/\\mathfrak qE_{\\mathfrak q}$, and $P/\\mathfrak qP$ has dimension $r$ over $k_{\\mathfrak q}$ [def-weil-vector-space-dimension].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02M9 (algebra-lemma-locally-free-semi-local-free), proof, first hint: maximal residue modules have the constant rank; localization comparisons made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=E/\\mathfrak q$. By [lem-weil-common-extension-fields-quotient-field], $k$ is a field. Thus every $s\\in S=E\\setminus\\mathfrak q$ has nonzero, invertible image $\\bar s\\in k$; in particular $S$ is multiplicatively closed and contains every $f^n$. Using the fraction relations in [def-weil-pbc-module-localization-away] and [def-weil-pbc-module-localization], the formula $j:E_f\\to E_{\\mathfrak q}$, $a/f^n\\mapsto a/f^n$, defines a ring map: any annihilating power of $f$ becomes a unit, so equal fractions have equal images. The fraction formula $\\lambda:E_{\\mathfrak q}\\to k$, $a/s\\mapsto\\bar a\\bar s^{-1}$, is also a well-defined ring map: an equality witnessed by $u\\in S$ remains an equality after division by $\\bar u\\bar s\\bar t$ in $k$. It is surjective since $a/1\\mapsto\\bar a$. Its kernel is $\\mathfrak qE_{\\mathfrak q}$: it kills every generator from $\\mathfrak q$, and $\\lambda(a/s)=0$ implies $a\\in\\mathfrak q$, hence $a/s=(a/1)(1/s)\\in\\mathfrak qE_{\\mathfrak q}$. Consequently it induces the asserted canonical ring identification $E_{\\mathfrak q}/\\mathfrak qE_{\\mathfrak q}\\cong k$, inverse to $\\bar a\\mapsto[a/1]$.",
+   "uses": [
+    "lem-weil-common-extension-fields-quotient-field",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9 (lemma-locally-free-semi-local-free), first proof hint; explicit residue-ring calculation using the fraction construction of Definition 07JZ (definition-localization-module)."
+   }
+  },
+  {
+   "text": "Regard $E_{\\mathfrak q}$ as an $E_f$-algebra via $j$. Write $C=E_{\\mathfrak q}\\otimes_{E_f}P_f$ using [def-weil-pbc-module-tensor-product]. The formulas\n$$L:C\\longrightarrow P_{\\mathfrak q},\\quad (a/s)\\otimes(p/f^n)\\longmapsto ap/(sf^n),\\qquad B:P_{\\mathfrak q}\\longrightarrow C,\\quad p/s\\longmapsto(1/s)\\otimes(p/1)$$\ndefine inverse $E_{\\mathfrak q}$-linear maps. Here are the well-definedness checks from [def-weil-pbc-module-localization] and [def-weil-pbc-module-localization-away]. For $L$, a relation $f^h(f^{n'}p-f^np')=0$ becomes zero in $P_{\\mathfrak q}$ because $f^h$ is invertible there; a relation between $a/s$ and $a'/s'$ is treated by the same cancellation of its witness $u\\in S$. Additivity follows from the fraction addition formulas, and balancing by $b/f^h\\in E_f$ gives $abp/(sf^{n+h})$ on either side. For $B$, if $p/s=p'/s'$ with witness $u\\in S$, the difference of the proposed images is\n$$(1/(uss'))\\otimes\\bigl(u(s'p-sp')/1\\bigr)=0.$$\nThe fraction addition and scalar formulas give linearity. Finally $LB(p/s)=p/s$, and on a generating pure tensor\n$$BL((a/s)\\otimes(p/f^n))=(a/(sf^n))\\otimes(p/1)=(a/s)\\otimes(p/f^n),$$\nthe last equality being the tensor balancing relation for the unit $f^n\\in E_f$. Thus $L$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), explicit inverse calculation; adapted to the scalar tower E to E_f to E_q, with Definition 07JZ (definition-localization-module)."
+   }
+  },
+  {
+   "text": "Choose the $r$ basis vectors $b_1,\\ldots,b_r$ of $P_f$ supplied by the assumed isomorphism $P_f\\cong E_f^{\\oplus r}$; basis means unique finite coordinates as in [def-weil-pbc-free-module]. Apply [lem-weil-pbc-free-module-base-change-free] with $R=E_f$, $A=E_{\\mathfrak q}$, $F=P_f$ and index set $\\{1,\\ldots,r\\}$. Its statement gives the basis $(1\\otimes b_i)_i$ of $C$. Through $L$ these give a basis $v_i=L(1\\otimes b_i)$ of $P_{\\mathfrak q}$, and hence an $E_{\\mathfrak q}$-linear isomorphism $P_{\\mathfrak q}\\cong E_{\\mathfrak q}^{\\oplus r}$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-free-module-base-change-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9 (lemma-locally-free-semi-local-free), first proof hint, base change of the chosen principal-local basis; Mathlib Module.Basis.baseChange supplies precisely this operation."
+   }
+  },
+  {
+   "text": "Here $\\mathfrak qP$ and $\\mathfrak qP_{\\mathfrak q}$ mean submodules of finite sums of products $ap$, with $a\\in\\mathfrak q$ and $p$ in the respective module. The map $p\\mapsto[p/1]$ kills $\\mathfrak qP$ and induces $\\eta:P/\\mathfrak qP\\to P_{\\mathfrak q}/\\mathfrak qP_{\\mathfrak q}$. Define\n$$d:P_{\\mathfrak q}\\longrightarrow P/\\mathfrak qP,\\qquad d(p/s)=\\bar s^{-1}[p].$$\nIt is well defined: if $u(s'p-sp')=0$, reduction modulo $\\mathfrak qP$ followed by multiplication by $(\\bar u\\bar s\\bar s')^{-1}$ gives $\\bar s^{-1}[p]=\\bar s'^{-1}[p']$. The addition formula for fractions proves additivity, and $d((a/t)(p/s))=(\\bar a/\\bar t)d(p/s)$ proves scalar compatibility through $\\lambda$. In particular $d$ kills every $a(p/s)$ with $a\\in\\mathfrak q$, and so induces $\\bar d$ on the target quotient. Now $\\bar d\\eta([p])=[p]$. Conversely, for $s\\in S$, choose $t\\in E$ lifting $\\bar s^{-1}$; then $ts-1\\in\\mathfrak q$ and\n$$[tp/1]-[p/s]=[(ts-1)p/s]=0.$$\nHence $\\eta\\bar d([p/s])=[p/s]$. These calculations prove both that the specified canonical map is bijective and that it is $k$-linear under the ring identification in step 1. No finiteness assumption on $P$ has been used here.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-common-extension-fields-quotient-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9 (lemma-locally-free-semi-local-free), first proof hint: explicit comparison of maximal residue modules, using the fractions of Definition 07JZ (definition-localization-module)."
+   }
+  },
+  {
+   "text": "The coordinate isomorphism from step 3 carries $\\mathfrak qP_{\\mathfrak q}$ onto $(\\mathfrak qE_{\\mathfrak q})^{\\oplus r}$. Indeed a finite sum of $\\mathfrak q$-multiples has each coordinate in $\\mathfrak qE_{\\mathfrak q}$; conversely expand each of the finitely many coordinates as a finite sum of $\\mathfrak q$-multiples and put those terms in the corresponding coordinate vector. Reducing coordinates therefore gives\n$$P_{\\mathfrak q}/\\mathfrak qP_{\\mathfrak q}\\cong(E_{\\mathfrak q}/\\mathfrak qE_{\\mathfrak q})^{\\oplus r}\\cong k^{\\oplus r}.$$\nFor completeness, the coordinate quotient map is onto by lifting each coordinate, and its kernel is exactly the coordinate ideal submodule just computed. Composing with $\\eta$ gives $P/\\mathfrak qP\\cong k^{\\oplus r}$. The inverse images of the $r$ standard coordinate vectors form a basis by unique coordinates [def-weil-pbc-free-module]; hence [def-weil-vector-space-dimension] gives dimension $r$. When $r=0$, all these direct sums and coordinate families are empty and the same computations give the zero modules. The zero ring has no maximal ideal, so it supplies no exceptional case.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9 (lemma-locally-free-semi-local-free), first proof hint: compute the dimension of the maximal residue module by the chosen basis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields-quotient-field",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-free-module-base-change-free",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02M9 (lemma-locally-free-semi-local-free), first omitted-proof hint, expanded using the explicit fraction construction (07JZ) and tensor-localization calculation (00DK)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A module free of rank r on a principal open containing a maximal ideal has localization free of rank r and residue quotient dimension r",
+   "results": "{\"t\": \"2026-10-22T07:52:53Z\", \"tool\": \"leanfinder\", \"query\": \"A module free of rank r on a principal open containing a maximal ideal has localization free of rank r and residue quotient dimension r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk\", \"Module.rankAtStalk_eq\", \"Module.rankAtStalk_self\", \"Module.rankAtStalk_eq_finrank_of_free\", \"IsLocalRing.finrank_quotient_map\", \"Module.rankAtStalk_eq_finrank_tensorProduct\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\"], \"digest\": \"3fed496bcbfed875\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization of an existing basis is Module.Basis.ofIsLocalizedModule (Localization/Module.lean:112), but the iterated localization and canonical quotient comparison in this statement require separate arguments. FreeLocus.lean:379-389 uses finite flat modules and tensor fibres; IsLocalRing.finrank_quotient_map (LocalRing/Quotient.lean:65) is for an algebra, not an arbitrary module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a module localized away from f has a finite basis and f is outside a maximal ideal q then the localization at q has that rank and the quotient M by q M has dimension r",
+   "results": "{\"t\": \"2026-10-22T07:52:47Z\", \"tool\": \"leansearch\", \"query\": \"If a module localized away from f has a finite basis and f is outside a maximal ideal q then the localization at q has that rank and the quotient M by q M has dimension r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finrank_of_isLocalizedModule_of_free\", \"IsLocalizedModule.lift_rank_eq\", \"Module.lift_rank_of_isLocalizedModule_of_free\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"Module.rankAtStalk\", \"IsLocalizedModule.rank_eq\", \"IsLocalization.rank_eq\", \"IsLocalizedModule.finrank_eq\"], \"digest\": \"1b3ab4e4f10fbd00\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization of an existing basis is Module.Basis.ofIsLocalizedModule (Localization/Module.lean:112), but the iterated localization and canonical quotient comparison in this statement require separate arguments. FreeLocus.lean:379-389 uses finite flat modules and tensor fibres; IsLocalRing.finrank_quotient_map (LocalRing/Quotient.lean:65) is for an algebra, not an arbitrary module."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, Module.Basis",
+   "results": "{\"t\": \"2026-10-22T07:52:47Z\", \"tool\": \"loogle\", \"query\": \"LocalizedModule, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.FinitePresentation.exists_basis_localizedModule_powers\"], \"digest\": \"84efbf9dc6a5eda5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization of an existing basis is Module.Basis.ofIsLocalizedModule (Localization/Module.lean:112), but the iterated localization and canonical quotient comparison in this statement require separate arguments. FreeLocus.lean:379-389 uses finite flat modules and tensor fibres; IsLocalRing.finrank_quotient_map (LocalRing/Quotient.lean:65) is for an algebra, not an arbitrary module."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*(quotient|residue|baseChange)|basis.*(atPrime|AtPrime)|IsLocalizedModule.*(basis|Basis)",
+   "results": "{\"t\": \"2026-10-22T07:52:47Z\", \"tool\": \"grep\", \"query\": \"finrank.*(quotient|residue|baseChange)|basis.*(atPrime|AtPrime)|IsLocalizedModule.*(basis|Basis)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean\", \"Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean\", \"Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean\", \"Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean\", \"Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean\"], \"digest\": \"12c4d03f7833d7ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization of an existing basis is Module.Basis.ofIsLocalizedModule (Localization/Module.lean:112), but the iterated localization and canonical quotient comparison in this statement require separate arguments. FreeLocus.lean:379-389 uses finite flat modules and tensor fibres; IsLocalRing.finrank_quotient_map (LocalRing/Quotient.lean:65) is for an algebra, not an arbitrary module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a basis of P localized away from f outside a maximal ideal q, construct a basis of P localized at q and identify P/qP with its localized residue module of the same finite rank",
+   "results": "{\"t\": \"2026-10-22T08:03:53Z\", \"tool\": \"leanfinder\", \"query\": \"Given a basis of P localized away from f outside a maximal ideal q, construct a basis of P localized at q and identify P/qP with its localized residue module of the same finite rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.localizationLocalization\", \"IsLocalRing.basisQuotient\", \"Module.Basis.localizationLocalization_apply\", \"Module.Basis.ofIsLocalizedModule\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"IsLocalRing.basisQuotient_apply\", \"IsLocalRing.finrank_quotient_map\", \"Ideal.finrank_quotient_map\"], \"digest\": \"7df9b120e4e9795d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization of an existing basis is Module.Basis.ofIsLocalizedModule (Localization/Module.lean:112), but the iterated localization and canonical quotient comparison in this statement require separate arguments. FreeLocus.lean:379-389 uses finite flat modules and tensor fibres; IsLocalRing.finrank_quotient_map (LocalRing/Quotient.lean:65) is for an algebra, not an arbitrary module."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_quotient_map|rankAtStalk_eq_finrank|rankAtStalk_eq|ofIsLocalizedModule",
+   "results": "{\"t\": \"2026-10-22T08:03:49Z\", \"tool\": \"grep\", \"query\": \"finrank_quotient_map|rankAtStalk_eq_finrank|rankAtStalk_eq|ofIsLocalizedModule\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\"], \"digest\": \"7aa11bad94b15244\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization of an existing basis is Module.Basis.ofIsLocalizedModule (Localization/Module.lean:112), but the iterated localization and canonical quotient comparison in this statement require separate arguments. FreeLocus.lean:379-389 uses finite flat modules and tensor fibres; IsLocalRing.finrank_quotient_map (LocalRing/Quotient.lean:65) is for an algebra, not an arbitrary module."
+  },
+  {
+   "tool": "grep",
+   "query": "basisQuotient|ofIsLocalizedModule|localizationLocalization",
+   "results": "{\"t\": \"2026-10-24T00:37:16Z\", \"tool\": \"grep\", \"query\": \"basisQuotient|ofIsLocalizedModule|localizationLocalization\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/AsSubring.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/NormTrace.lean\", \"Mathlib/RingTheory/Localization/NormTrace.lean\"], \"digest\": \"119e2ba600c4aba5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give localization of an already free module, a flat finite-module stalk rank, or a quotient of an algebra; none supplies both the principal-to-maximal comparison and the specified arbitrary-module residue quotient map. The generic free base-change fact is already lem-weil-pbc-free-module-base-change-free and is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a module free on a principal open at a maximal ideal and quotienting by the maximal ideal preserves its finite rank",
+   "results": "{\"t\": \"2026-10-24T00:37:16Z\", \"tool\": \"leansearch\", \"query\": \"Localizing a module free on a principal open at a maximal ideal and quotienting by the maximal ideal preserves its finite rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_quotient_map\", \"Module.finrank_of_isLocalizedModule_of_free\", \"Module.lift_rank_of_isLocalizedModule_of_free\", \"Module.rankAtStalk_eq_finrank_of_free\", \"ModuleCat.Tilde.Localizations\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Module.mem_freeLocus_of_isLocalization\", \"IsLocalizedModule.rank_eq\"], \"digest\": \"acf174cb2503e425\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give localization of an already free module, a flat finite-module stalk rank, or a quotient of an algebra; none supplies both the principal-to-maximal comparison and the specified arbitrary-module residue quotient map. The generic free base-change fact is already lem-weil-pbc-free-module-base-change-free and is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule, Module.Basis",
+   "results": "{\"t\": \"2026-10-24T00:37:17Z\", \"tool\": \"loogle\", \"query\": \"IsLocalizedModule, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Module.Basis.ofIsLocalizedModule\", \"Module.Basis.ofIsLocalizedModule_span\", \"Module.Basis.ofIsLocalizedModule_apply\", \"Module.Basis.ofIsLocalizedModule_repr_apply\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\"], \"digest\": \"3c0e6260a09373cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give localization of an already free module, a flat finite-module stalk rank, or a quotient of an algebra; none supplies both the principal-to-maximal comparison and the specified arbitrary-module residue quotient map. The generic free base-change fact is already lem-weil-pbc-free-module-base-change-free and is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module free after localization away from f has the same finite rank at a maximal ideal not containing f and in its residue quotient",
+   "results": "{\"t\": \"2026-10-24T00:37:18Z\", \"tool\": \"leanfinder\", \"query\": \"A module free after localization away from f has the same finite rank at a maximal ideal not containing f and in its residue quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finrank_of_isLocalizedModule_of_free\", \"IsLocalizedModule.finrank_eq\", \"IsLocalizedModule.rank_eq\", \"IsBaseChange.finrank_eq_of_le_nonZeroDivisors\", \"Module.rankAtStalk_eq_finrank_of_free\", \"IsLocalRing.finrank_quotient_map\", \"Module.rankAtStalk_eq\", \"Module.lift_rank_of_isLocalizedModule_of_free\"], \"digest\": \"62066f3397716cb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give localization of an already free module, a flat finite-module stalk rank, or a quotient of an algebra; none supplies both the principal-to-maximal comparison and the specified arbitrary-module residue quotient map. The generic free base-change fact is already lem-weil-pbc-free-module-base-change-free and is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientEquiv|quotient.*[Ee]quiv|basisQuotient",
+   "results": "{\"t\": \"2026-10-24T00:38:34Z\", \"tool\": \"grep\", \"query\": \"quotientEquiv|quotient.*[Ee]quiv|basisQuotient\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/NonLocalRing.lean\", \"Mathlib/RingTheory/LocalRing/Quotient.lean\", \"Mathlib/RingTheory/LocalRing/Quotient.lean\", \"Mathlib/RingTheory/LocalRing/Quotient.lean\", \"Mathlib/RingTheory/LocalRing/Quotient.lean\", \"Mathlib/RingTheory/LocalRing/Quotient.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean\"], \"digest\": \"dd49d0451e90d672\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give localization of an already free module, a flat finite-module stalk rank, or a quotient of an algebra; none supplies both the principal-to-maximal comparison and the specified arbitrary-module residue quotient map. The generic free base-change fact is already lem-weil-pbc-free-module-base-change-free and is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from M modulo a maximal ideal times M to its localized residue quotient is a linear equivalence, and a basis over R localized away from f descends to the residue field when f is outside that ideal",
+   "results": "{\"t\": \"2026-10-24T00:38:34Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical map from M modulo a maximal ideal times M to its localized residue quotient is a linear equivalence, and a basis over R localized away from f descends to the residue field when f is outside that ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.basisQuotient\", \"IsLocalRing.basisQuotient_apply\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"Module.Basis.ofIsLocalizedModule\", \"IsLocalRing.basisQuotient_repr\", \"Module.exists_basis_of_basis_baseChange\", \"Module.Basis.localizationLocalization_apply\", \"Module.Basis.localizationLocalization\"], \"digest\": \"147c172a2688f392\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give localization of an already free module, a flat finite-module stalk rank, or a quotient of an algebra; none supplies both the principal-to-maximal comparison and the specified arbitrary-module residue quotient map. The generic free base-change fact is already lem-weil-pbc-free-module-base-change-free and is reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-semilocal-submodule-basis",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting Tags 03C1 (algebra-lemma-semi-local-module-basis-in-submodule) and 02M9 (algebra-lemma-locally-free-semi-local-free). Supporting semilocal basis argument, original steps 2–3: principal trivialization, maximal localization and residue rank.",
+   "via": [
+    "lem-a1-semilocal-submodule-basis",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-local-trivialization-residue-rank",
+  "worker": "stage1",
+  "summary": "Q98 expands the first hint of Stacks 02M9 with an explicit tensor/fraction comparison, reuses the existing Mathlib free-base-change node, constructs the inverse of the specified residue map, and computes residue dimension by coordinates. No new nodes or statement changes. All fraction maps are checked on their defining relations; arbitrary modules and rank zero are covered.",
+  "blueprint": "Existing ancestor lem-a1-affine-hc0, historical finite-flat-affine-quotient support chain recorded in blueprint.from, via lem-a1-semilocal-submodule-basis: realizes the constant-residue-rank hint of 02M9 used in the supporting 03C1 argument. Current latest blueprint moves lem-a1-affine-hc0 to sk-lem-wrp-hc2 and gives a different cohomological proof; this delivery only splits the assigned algebra support node and does not alter the ancestor or its route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-40125209e",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-40125209e (reviewer sub-agent of L); spot-checked: Shape: one commit touching only the item and the report, no new nodes. Not a re-split order: no repair note for this item. Not superseded: the item is still unsplit with no proof in clones/live and clones/side-live. Statement and stmt_deps are unchanged, proof_deps equals the union of the step uses, proof_origin is agent (Stacks omits the proof), same_as=[], no tool_uses. Source: tag 02M9 = algebra-lemma-locally-free-semi-local-free, read at algebra.tex:19291-19305; the item states its first hint (constant residue dimension) for one principal trivializing open. No SGA source. Statement re-tested: E=Z, q=(2), P=Z+Z/3, f=3 gives r=1 and residue rank 1 although P is not free; for r=0 every element is killed by a power of f, which is a unit mod q, so P/qP=0; field case trivial; the zero ring has no maximal ideal. The citers (lem-sfb-semilocal-constant-rank-basis step 2, lem-a1-semilocal-submodule-basis step 2) use exactly these clauses. All cited nodes are Mathlib leaves or definitions, so there is no route issue; I read each statement. Step 1: j and lambda are well defined (the f^k witness lies in S; a witness u has nonzero image in the field E/q by the quotient-field node) and ker lambda = qE_q. Step 2: I re-derived the well-definedness and balancing of L, and the well-definedness of B ((1/s)x(p/1) - (1/s')x(p'/1) = (1/(uss'))x(u(s'p-sp')/1) = 0); LB = id and BL = id on pure tensors via j(1/f^n). Step 3: the cited base-change lemma with R=E_f, A=E_q, F=P_f gives the basis, transported through L; its hypotheses hold. Step 4: d(p/s) = s^-1[p] is well defined, lambda-semilinear and kills qP_q; with t lifting s^-1, tp/1 - p/s = (ts-1)(p/s) lies in qP_q, so both composites are the identity for arbitrary P. Step 5: coordinates carry qP_q onto (qE_q)^r, giving P/qP = k^r and dimension r, including r=0. The steps marked elementary are elementary. The rg -L search found no duplicate or generalization (lem-a1-basis-of-maximal-residue-bases is the converse assembly; lem-weil-pbc-residue-extension-minimal-generators counts generators over a local ring). Mathlib searches give partial tools only (Basis.ofIsLocalizedModule, IsLocalRing.finrank_quotient_map for algebras), so the node stays split. Cosmetic only: step 1 uses the ring structure of E_q, whose node (def-weil-pbc-localization-at-prime) is in stmt_deps but not in that step's uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalTrivializationResidueRank",
+  "declaration": "Module.local_trivialization_residue_rank",
+  "file": "lean/Sheaf/RingTheory/LocalTrivializationResidueRank.lean",
+  "statement": "theorem local_trivialization_residue_rank {E : Type u} [CommRing E] (P : Type v) [AddCommGroup P] [Module E P] (q : Ideal E) [q.IsMaximal] (f : E) (hf : f ∉ q) (r : ℕ) (hfree : Nonempty (Module.Basis (Fin r) (Localization.Away f) (LocalizedModule.Away f P))) : Nonempty (Module.Basis (Fin r) (Localization.AtPrime q) (LocalizedModule q.primeCompl P)) ∧ (∃ e : (E ⧸ q) ≃+* (Localization.AtPrime q ⧸ Ideal.map (algebraMap E (Localization.AtPrime q)) q), ∀ a : E, e (Ideal.Quotient.mk q a) = Ideal.Quotient.mk (Ideal.map (algebraMap E (Localization.AtPrime q)) q) (algebraMap E (Localization.AtPrime q) a)) ∧ (∃ e : (P ⧸ q • (⊤ : Submodule E P)) ≃ₗ[E ⧸ q] ((LocalizedModule q.primeCompl P) ⧸ q • (⊤ : Submodule E (LocalizedModule q.primeCompl P))), ∀ p : P, e (Submodule.Quotient.mk p) = Submodule.Quotient.mk (LocalizedModule.mkLinearMap q.primeCompl P p)) ∧ Module.Finite (E ⧸ q) (P ⧸ q • (⊤ : Submodule E P)) ∧ Module.finrank (E ⧸ q) (P ⧸ q • (⊤ : Submodule E P)) = r",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b8122c352",
+  "group": "NK",
+  "result": "pass",
+  "note": "Every node hypothesis and conclusion clause matches: maximal q, f∉q, r:ℕ, Fin r basis of LocalizedModule.Away f P; conclusions are a basis of P_q, the canonical ring equivalence E/q≃E_q/qE_q pinned by [a]↦[a/1], the E/q-linear equivalence P/qP≃P_q/qP_q pinned by [p]↦[p/1] (q•⊤ over E equals (qE_q)P_q), and Module.Finite plus finrank=r. Arbitrary module P, independent universes, r=0 and zero-ring cases covered. All five stmt_deps are existing Mathlib records used exactly. Item node differs from live only in lean; no supersession. lean.statement verbatim; source and blueprint docstrings with 5 proof steps; no defs; proof is sorry; both report sections present. No duplicate in Mathlib. No findings; no compile needed (no changes)."
+ }
+}

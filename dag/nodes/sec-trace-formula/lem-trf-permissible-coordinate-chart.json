@@ -19,91 +19,72 @@
  ],
  "proof": [
   {
-   "text": "Order the elements of J with j first. The regular-parameter node [lem-weil-pbc-regular-local-generators-regular-sequence] applies after this permutation: the sequence (t_j,(t_i)_{i\\in J\\{j}}) is regular, and R/(t_i:i\\in J) is regular local. The chart presentation is the specialization of [lem-trf-blowup-chart-regular-sequence-presentation] with a=t_j and a_i=t_i. Its quotient by t_j is (R/(t_i:i\\in J))[u_i\\mid i\\in J\\{j}], which is regular by [lem-trf-polynomial-ring-regular-base] and the regular-local-to-regular-ring consequence in [lem-weil-pbc-regular-local-localization]. Multiplication by t_j on the chart is injective by the closed chart-generator lemma [lemma-nagata-chart-generator-regular]. If a prime P does not contain t_j, the chart localization is the corresponding localization of R and is regular by [lem-weil-pbc-regular-local-localization]. If P contains t_j, localize at P and apply [lem-exc-regular-local-lift-regular-sequence-quotient] to the nonzerodivisor t_j and the regular quotient just described. Thus every chart local ring is regular.",
+   "text": "Permute the parameter system with $t_j$ first. The regular-sequence assertion of [lem-weil-pbc-regular-local-generators-regular-sequence] and [lem-trf-blowup-chart-regular-sequence-presentation] identify the stated quotient with the standard chart, sending $u_i$ to $t_i/t_j$. Apply [lem-trf-parameter-blowup-algebra-regular] to this quotient to obtain its regularity.",
    "uses": [
     "lem-weil-pbc-regular-local-generators-regular-sequence",
     "lem-trf-blowup-chart-regular-sequence-presentation",
-    "lem-trf-polynomial-ring-regular-base",
-    "lem-weil-pbc-regular-local-localization",
-    "lemma-nagata-chart-generator-regular",
-    "lem-exc-regular-local-lift-regular-sequence-quotient"
+    "lem-trf-parameter-blowup-algebra-regular"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
+    "place": "Expose VIII, Lemma 4.2.9 coordinate-chart proof, printed p. 121"
    }
   },
   {
-   "text": "On the chart, the pullback of t_i is t_j for i=j, t_j u_i for i in J\\{j}, and t_i for i not in J. The chart extended center ideal is (t_j) by [lemma-nagata-chart-extended-ideal-principal]. Therefore the pullback of t_1\\cdots t_r has support exactly the union of t_j=0, u_i=0 for i in (J\\{j})\\cap\\{1,\\ldots,r\\}, and t_k=0 for k\\le r with k not in J. Passing to the reduction removes nilpotents but preserves this support by [def-weil-pbc-scheme-reduction], and the equations define closed immersions by [def-weil-closed-immersion].",
+   "text": "In $A_j$, the pullback of $t_i$ is $t_j$, $t_j u_i$, or $t_i$ according as $i=j$, $i\\in J\\setminus\\{j\\}$, or $i\\notin J$. Thus $\\prod_{i=1}^r t_i=t_j^{|J\\cap\\{1,\\ldots,r\\}|}\\prod_{i\\in(J\\setminus\\{j\\})\\cap\\{1,\\ldots,r\\}}u_i\\prod_{k\\leq r,\\ k\\notin J}t_k$. The exponent is positive. A prime contains this product exactly when it contains a displayed factor, so reduction gives precisely the asserted reduced union [def-weil-pbc-scheme-reduction].",
    "uses": [
-    "lemma-nagata-chart-extended-ideal-principal",
-    "def-weil-pbc-scheme-reduction",
-    "def-weil-closed-immersion"
+    "def-weil-pbc-scheme-reduction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
+    "place": "Expose VIII, Lemma 4.2.9 coordinate-chart proof, printed p. 121"
    }
   },
   {
-   "text": "Fix a prime P and a selected subset of the displayed hyperplanes. A listed equation that is a unit at P gives an empty local intersection. For the remaining equations, first consider P with t_j not in P: the chart is a localization of R, and the surviving u_i equations are associates of t_i because t_i=t_j u_i; the selected t_i and t_k classes are independent members of the cotangent basis supplied by the permuted parameter system. If t_j is in P, the chart relations give t_i=t_j u_i: when u_i is in P this term is in the square of the maximal ideal, and when u_i is a unit t_i is an associate of t_j. Hence the classes of the vanishing coordinates t_j, the u_i in P, and the t_k in P with k not in J are linearly independent in the cotangent space; extend them to a minimal generating set of the maximal ideal. The resulting regular system of parameters is a regular sequence by [lem-weil-pbc-regular-local-generators-regular-sequence]. Quotienting successively by the selected equations therefore leaves a regular local ring and lowers dimension by one for each equation; localization is covered by [lem-weil-pbc-regular-local-localization]. Thus each nonempty intersection is regular and has codimension equal to the number of selected hyperplanes, with codimension interpreted by [def-weil-pbc-krull-dimension-ring].",
+   "text": "Apply [lem-trf-parameter-blowup-coordinate-quotients] to $A_j$, regular by Step 1. The boundary equations are a subfamily of its labelled coordinates. Its parameter assertion applies simultaneously to every equation vanishing at a chosen prime. Its quotient and dimension formulas, with $c$ the number of chosen labels, give regularity and codimension for every scheme-theoretic intersection; a unit equation gives an empty local intersection.",
    "uses": [
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-regular-local-localization",
-    "def-weil-pbc-krull-dimension-ring"
+    "lem-trf-parameter-blowup-coordinate-quotients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII, Lemma 4.2.9 proof and Remark 4.2.2(i), printed pp. 118, 121"
+    "place": "Expose VIII, Lemma 4.2.9 coordinate-chart proof, printed p. 121"
    }
   },
   {
-   "text": "Use the strict-transform closure definition [def-nagata-strict-transform] with the complement of the center. On the j-chart the extended center ideal is (t_j) by [lemma-nagata-chart-extended-ideal-principal], so the part away from the center is D(t_j). For i=j, the relation t_i=t_j u_i forces every point with t_j=0 on V(t_j) to lie over the center, hence the chart contribution to the strict transform is empty. For i in J\\{j}, on D(t_j) the equation t_i=0 is equivalent to u_i=0; its closure is V(u_i), because t_j is a nonzerodivisor on A_j/(u_i) by [lem-trf-chart-coordinate-nonzerodivisors]. For i not in J, the equation remains t_i=0 on D(t_j), and its closure is V(t_i), because t_j is a nonzerodivisor on A_j/(t_i) by the same node. Reduction and the closed-immersion interpretation are supplied by [def-weil-pbc-scheme-reduction] and [def-weil-closed-immersion].",
+   "text": "The extended center is $(t_j)$ by [lemma-nagata-chart-extended-ideal-principal], so [def-nagata-strict-transform] takes schematic closure from $D(t_j)$. For $i=j$ the off-center hyperplane is empty. For $i\\in J\\setminus\\{j\\}$ its equation there is $u_i$, and for $i\\notin J$ it is $t_i$. Write this equation as $q$. By [lem-trf-chart-coordinate-nonzerodivisors], multiplication by $t_j$ on $A_j/(q)$ is injective. Hence if $t_j^n x\\in(q)$ then $x\\in(q)$, by $n$ successive cancellations. The localization kernel is therefore exactly $(q)$, giving schematic closure $V(q)$, not just its support.",
    "uses": [
-    "def-nagata-strict-transform",
     "lemma-nagata-chart-extended-ideal-principal",
-    "lem-trf-chart-coordinate-nonzerodivisors",
-    "def-weil-pbc-scheme-reduction",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
-   }
-  },
-  {
-   "text": "The standard charts are charts of one blowup [def-nagata-global-blowup], so the local descriptions agree on overlaps. Steps 2 and 3 give the reduced coordinate union and all scheme-theoretic intersections; Step 4 gives the exceptional component and each strict transform. If I is empty, H is empty and only the exceptional hyperplane remains. This proves the asserted chartwise statement, including the empty-product case.",
-   "uses": [
-    "def-nagata-global-blowup",
-    "def-weil-pbc-scheme-reduction",
     "def-nagata-strict-transform",
-    "def-weil-pbc-krull-dimension-ring"
+    "lem-trf-chart-coordinate-nonzerodivisors"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII, Lemma 4.2.9 proof, printed p. 121"
+    "place": "Expose VIII, Lemma 4.2.9 coordinate-chart proof, printed p. 121"
+   }
+  },
+  {
+   "text": "For $H\\cup M$, the inverse-image support is the exceptional $V(t_j)$ together with the pullbacks of $V(t_i)$ for $i\\in I$. The substitution in Step 2 and the strict equations in Step 4 give the asserted reduced union. For $I=\\varnothing$ only $V(t_j)$ remains. These are restrictions of the intrinsic inverse image and schematic closure on the same blowup, so agree on overlaps. This completes every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9 coordinate-chart proof, printed p. 121"
    }
   }
  ],
  "proof_deps": [
-  "def-nagata-global-blowup",
   "def-nagata-strict-transform",
-  "def-weil-closed-immersion",
-  "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-scheme-reduction",
-  "lem-exc-regular-local-lift-regular-sequence-quotient",
   "lem-trf-blowup-chart-regular-sequence-presentation",
   "lem-trf-chart-coordinate-nonzerodivisors",
-  "lem-trf-polynomial-ring-regular-base",
+  "lem-trf-parameter-blowup-algebra-regular",
+  "lem-trf-parameter-blowup-coordinate-quotients",
   "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-weil-pbc-regular-local-localization",
-  "lemma-nagata-chart-extended-ideal-principal",
-  "lemma-nagata-chart-generator-regular"
+  "lemma-nagata-chart-extended-ideal-principal"
  ],
  "proof_origin": {
   "by": "document",
@@ -196,10 +177,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-permissible-coordinate-chart",
   "worker": "stage1",
-  "summary": "Repaired the returned split. Step 1 now uses Stacks 0BIQ for the chart quotient, the existing regular-parameter quotient theorem, the chart-generator nonzerodivisor lemma, polynomial regularity, and Tag 00NU to prove chart regularity. Step 3 replaces the false maximal-ideal count by a two-case cotangent-space independence argument. Step 4 proves strict-transform closure using the chart principalization and an explicit nonzerodivisor sublemma for each coordinate quotient. Four supporting nodes were added; the Mathlib polynomial node is a leaf. The statement and source remain unchanged.",
+  "summary": "Repair of the human-requested re-split: extracted the independent regularity and simultaneous-coordinate-quotient arguments as two comparable statement-only unsplit nodes, with logged searches. Kept the statement and all original transform arguments; assembly proof is below 3000 characters. Original five-step proof and the allocation of all its arguments are preserved in report.md.",
   "blueprint": "Realizes ILO VIII Lemma 4.2.9, printed p. 121: standard chart presentation and regularity, total-transform equations, regular intersections and codimensions, strict-transform closures, and compatibility of chart descriptions.",
   "tool_uses": [
    {
@@ -207,20 +188,8 @@
     "why": "Step 1 uses its parameter-permutation and regular-quotient conclusions, and Step 3 uses its regular-sequence conclusion for the cotangent generators; this is a generic regular-local tool from sk-thm-p1."
    },
    {
-    "node": "lem-weil-pbc-regular-local-localization",
-    "why": "Steps 1 and 3 use localization of regular local rings and the consequence that a regular local ring is regular; this generic localization tool is from sk-thm-p1."
-   },
-   {
-    "node": "lemma-nagata-chart-generator-regular",
-    "why": "Step 1 uses injectivity of multiplication by the chart generator on the affine blowup chart; this generic blowup-chart tool is from sk-lem-nagata-sketch-blowups."
-   },
-   {
     "node": "lemma-nagata-chart-extended-ideal-principal",
     "why": "Steps 2 and 4 use that the extended center ideal is generated by the chart generator; this generic blowup-chart tool is from sk-lem-nagata-sketch-blowups."
-   },
-   {
-    "node": "lem-exc-regular-local-lift-regular-sequence-quotient",
-    "why": "Step 1 uses its general regular-sequence quotient lifting criterion, specialized to the singleton sequence (t_j); this is a generic tool from sk-prop-a1-kummer."
    }
   ]
  },
@@ -232,12 +201,12 @@
   "lem-exc-regular-local-lift-regular-sequence-quotient"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NZ-ce538cc1c",
-  "group": "NZ",
+  "reviewer": "NT-cc-Q02-d47ec0c6f",
+  "group": "Q02",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-ce538cc1c (reviewer sub-agent of L); spot-checked: Read the required governance, unit/chapter route, item, report, every new node, cited statements, ILO Lemma 4.2.9, Stacks Tags 0BIQ and 00NU, and Mathlib polynomial source. Checked all five proof steps, hypotheses, edge cases, chart algebra, regularity, intersections, strict-transform closures, duplicate candidates, searches, blueprint fields, and route-pivot/SGA restrictions. Wrote review.md with concrete source and step checks; no mathematical or procedural fault found."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-d47ec0c6f (reviewer sub-agent of L); spot-checked: I read the re-split note (2026-10-22, 4217-character proof, at least 2 new nodes, assembly at most 3000 characters), ILO VIII Lemma 4.2.9 on printed p. 121, the item, both new nodes in full and every cited statement. The two substantive old arguments became one comparable node each. Old Step 1 (exceptional quotient, t_j injective, regularity away from and above t_j) is now lem-trf-parameter-blowup-algebra-regular. Old Step 3 (simultaneous coordinate quotients, codimension c, part of a regular system of parameters at every prime) is now lem-trf-parameter-blowup-coordinate-quotients; this also repairs the old step's gap in the cotangent-independence argument. Steps 2, 4 and 5 are kept in full and made more explicit: the product formula with exponent |J∩[r]| ≥ 1, and the schematic closure through the localization kernel (q) using lem-trf-chart-coordinate-nonzerodivisors. The assembly is 2257 characters. Neither node restates the item: both are pure chart algebra with no boundary or transforms. Both are statement-only and self-contained, cite their definition nodes, and record five searches each. I checked both statements and found them true: A/(t_j) ≅ (R/(t_J))[u], A[1/t_j] ≅ R[1/t_j], and the quotients A/Q are again charts or polynomial rings over regular local rings. Small cases checked: d=1; J = all; k[x,y] with y = xu at P=(x,u) and P=(x,u-1); Z_(p)[x] with x = pu; Q=0; c=d. The rg search of the DAG (blowup charts, 0BIQ, cotangent, regular centre) found no duplicate; nc-coordinate-blowup-branch-drop cites the item, so using it would make a cycle. There is no cycle. The two declared tool uses (regular-local-generators-regular-sequence, chart-extended-ideal-principal) are generic black boxes and accepted. No SGA. Maintainer note: the node-level tool_uses still lists three nodes the new assembly no longer cites (regular-local-localization, chart-generator-regular, exc-regular-local-lift); the merge should recompute that field."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.PermissibleCoordinateChart",
@@ -273,5 +242,16 @@
   "result": "pass",
   "note": "Reviewed packet, node, dependencies, source mapping, definitions, edge cases, route-pivot compliance, and reproduced scompile successfully; no findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

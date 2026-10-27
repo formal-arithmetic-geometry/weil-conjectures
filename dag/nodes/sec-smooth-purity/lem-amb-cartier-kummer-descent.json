@@ -12,44 +12,31 @@
  ],
  "proof": [
   {
-   "text": "For each coefficient level choose an annihilating exponent. Exact comparison and the open-closed quotient give an invertible supported-source mate preserving the constant quotient. Finite Tate descent supplies the comparison with the published Tate sheaf. Transport κ by these two isomorphisms to construct c.",
+   "text": "Use the existence component, which supplies a family realizing all annihilating exponents. It includes construction and exponent independence, but no uniqueness.",
    "uses": [
-    "lem-amb-finite-tate-site-descent",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-sf-proetale-open-closed-sequence",
-    "def-sf-comparison-derived-pullback"
+    "lem-amb-cartier-kummer-realization-existence"
    ],
    "elementary": false
   },
   {
-   "text": "For two exponents use their maximum. The diagram of Kummer sequences has identity on the right G_m and the intervening power on the middle G_m and roots. Naturality identifies the relative boundaries and hence their unique supported Ext representatives. Successive scalar extension agrees with direct scalar extension. The root identity p_r=p_(s,r)p_s and the transition square in finite Tate descent show that the two transported arrows agree. This is also the exponent comparison already supplied by the ordinary pro-etale Cartier class.",
+   "text": "The ordinary closed-support quotient unit is epic by the etale open-closed short exact sequence. Exact inverse image preserves its epimorphism, so the quotient normalization uniquely fixes the supported-source isomorphism. Uniqueness of normalized root comparisons fixes the target isomorphism. Cancel precomposition by the source isomorphism in Ext; function extensionality gives uniqueness of the family. All formulas also apply to empty schemes, empty divisors and the zero coefficient ring.",
    "uses": [
-    "sk-lem-geo-cartier",
-    "lem-amb-finite-tate-site-descent",
-    "lem-amb-kummer-any-base"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The supported quotient unit is epic, so normalization fixes the source isomorphism. The Tate comparison is fixed on local pure root tensors: locally refine a root-trivializing etale object by the pro-etale tower of compatible roots. The tensor sheafification universal property fixes the comparison on that cover and then globally. Cancel the source isomorphism in the realization equation; function extensionality proves uniqueness. Empty divisors, empty schemes and the zero coefficient ring obey the same equations.",
-   "uses": [
-    "lem-amb-finite-tate-site-descent"
+    "lem-weil-pbc-open-closed-short-exact",
+    "def-pur-adic-root-comparisons"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-amb-finite-tate-site-descent",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-sf-proetale-open-closed-sequence",
-  "def-sf-comparison-derived-pullback",
-  "sk-lem-geo-cartier",
-  "lem-amb-kummer-any-base"
+  "lem-amb-cartier-kummer-realization-existence",
+  "lem-weil-pbc-open-closed-short-exact",
+  "def-pur-adic-root-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
-  "place": "Final scalar-extension sentence of paragraph 4; expanded existing proof steps 8--11 and the comparison-uniqueness portion of step 13."
+  "group": "Q6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Separate the existence component from the uniqueness argument. The latter is proved in Lean: epic quotient unit, preservation of epimorphisms by comparison inverse image, normalized root-comparison uniqueness, cancellation of Ext precomposition, and function extensionality."
  },
  "mathlib_searches": [
   {
@@ -112,10 +99,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "reviewed": {
@@ -129,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-ee41a",
-  "group": "Q3",
-  "result": "fix",
-  "landing": "20261021T154041-L-2777332",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261025T164133-L-958786",
   "kind": "interface",
-  "note": "independent cc review: delivered CartierKummerData/Map/Descent/Naturality vs clones/live CartierKummerMap (moved block identical apart from docstring node ids; item statement byte-identical); importer FiniteTypeCoordinateSupportOrientation compiled against the delivered modules (37.4 s, clean); axioms of cartier_kummer_map = std + sorryAx from the two new sorried nodes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

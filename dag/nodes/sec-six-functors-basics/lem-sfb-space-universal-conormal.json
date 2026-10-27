@@ -1,0 +1,394 @@
+{
+ "id": "lem-sfb-space-universal-conormal",
+ "kind": "statement",
+ "title": "Universal first-order thickenings and conormal sheaves for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. A first-order thickening of spaces means a representable closed immersion, tested on scheme charts [def-weil-closed-immersion], whose quasi-coherent ideal has square zero. A map $h:Z\\to X$ is formally unramified if, for every first-order thickening $T\\hookrightarrow T'$ of schemes over $X$, restriction $\\operatorname{Hom}_X(T',Z)\\to\\operatorname{Hom}_X(T,Z)$ is injective. Every unramified map of spaces (unramified on etale scheme charts [def-weil-unramified-morphism]) is formally unramified. For every formally unramified $h$ there exist a first-order thickening $k:Z\\hookrightarrow W_h$ and $h^+:W_h\\to X$ with $h^+k=h$, such that every $X$-map $a:T\\to Z$ from a first-order thickening $T\\hookrightarrow T'$ over $X$ extends uniquely to an $X$-map $a^+:T'\\to W_h$ with $a^+|_T=ka$. This property also holds for algebraic-space tests $T,T'$. On the common small etale topos of $Z$ and $W_h$, the ideal $\\mathcal I_h=\\ker(\\mathcal O_{W_h}\\to\\mathcal O_Z)$ is a quasi-coherent $\\mathcal O_Z$-module [def-trf-space-quasi-coherent-module, def-weil-sheaf-of-modules-category]; write $\\mathcal C_{Z/X}=\\mathcal I_h$. If $h$ is a closed immersion with ideal $\\mathcal K$, then $W_h$ is the closed subspace defined by $\\mathcal K^2$, and this identification identifies $\\mathcal C_{Z/X}$ with $\\mathcal K/\\mathcal K^2$. These identifications respect the canonical maps of ideals induced by maps of the corresponding thickenings.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 04GA (lemma-unramified-formally-unramified), 0606 (lemma-universal-thickening), 0607 (definition-universal-thickening), 0608 (lemma-immersion-universal-thickening); Tag 05ZS (lemma-thickening-equivalence) for the common etale topos; section-universal-thickening for its universal property."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-unramified-morphism",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-square-zero-extension-data",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-universal-first-order-thickening",
+  "def-sfb-space-small-etale-direct-image",
+  "def-sfb-space-ideal-power-products"
+ ],
+ "proof": [
+  {
+   "text": "Choose compatible surjective etale scheme charts $V\\to Z$, $U\\to X$ by the chart criterion. If $h$ is unramified, $V\\to U$ is unramified by the meaning of chartwise unramifiedness, hence formally unramified by the scheme lemma. The reverse implication of the chart criterion proves formal unramifiedness of $h$. Conversely, when $h$ is formally unramified the forward implication gives formal unramifiedness of every scheme map $V\\to U$ in such a square.",
+   "uses": [
+    "lem-sfb-space-formally-unramified-etale-charts",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-formally-unramified",
+    "lem-sfb-unramified-etale-compatible-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 04G8 (lemma-formally-unramified) and 04GA (lemma-unramified-formally-unramified)."
+   }
+  },
+  {
+   "text": "For later use, universality against schemes implies universality against spaces: cover a test $T'$ by etale scheme charts and take their reductions over $T$. Base change of the defining square-zero ideal remains square zero by the ideal correspondence. Scheme-test lifts agree on overlaps, after an etale scheme cover of each overlap, by uniqueness. Since the target space is an fppf sheaf, these compatible maps glue uniquely. The same argument extends affine-test uniqueness or existence to nonaffine tests, using affine open covers of the charts.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0603 (lemma-check-universal-first-order-thickening), its presentation descent argument."
+   }
+  },
+  {
+   "text": "Fix compatible surjective charts $V\\to Z$, $U\\to X$. The scheme existence theorem gives a universal thickening $V\\hookrightarrow V^+$ over $U$; step 2 permits space tests. It is universal over $X$ as well: for an affine test $T\\hookrightarrow T'$ and $T\\to V$, the induced $T\\to U$ lifts uniquely over $X$ as follows. The pullback $E=T'\\times_XU$ is a scheme etale over $T'$ by representable etaleness. The given $T\\to U$ gives a section $T\\to E$ over $T'$. The scheme flat-unramified lifting lemma, applied to $E\\to T'$, gives its unique lift $T'\\to E$, equivalently the desired lift $T'\\to U$; then universality over $U$ supplies the unique map to $V^+$. For uniqueness, any proposed map to $V^+$ induces this same lift to $U$. Apply step 2 again. For $R=V\\times_ZV$, etale permanence makes $R\\to Z$ etale, and the map $R\\to U$ through either projection is formally unramified by the chart criterion. Thus the same construction gives a scheme $R^+$ universal over $X$. Lift both projections to $s^+,t^+:R^+\\to V^+$ by universality of $V^+$. Etale transport says both are etale, and both squares with $R\\hookrightarrow R^+$ and $V\\hookrightarrow V^+$ are cartesian.",
+   "uses": [
+    "lem-sfb-space-formally-unramified-etale-charts",
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-universal-thickening-etale-transfer",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-unramified-etale-compatible-charts",
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0606 (lemma-universal-thickening), first two paragraphs, using Tags 0604 and 0605(1)."
+   }
+  },
+  {
+   "text": "The atlas presentation identifies $R\\rightrightarrows V$ with the kernel-pair relation of $V\\to Z$. Lift its identity $V\\to R$ to $V^+\\to R^+$, and its inverse $R\\to R$ to $R^+\\to R^+$ using universality of $R^+$. Put $D^+=R^+\\times_{t^+,V^+,s^+}R^+$. Since both projection squares in step 3 are cartesian, the inverse image of $V$ under the common middle-point map $D^+\\to V^+$ is $D=R\\times_{t,V,s}R$. Hence $D\\hookrightarrow D^+$ is first order by the ideal pullback criterion. Lift composition $D\\to R$ to $D^+\\to R^+$. Each required equation for the endpoints follows from uniqueness for maps to $V^+$: its two sides restrict to the same endpoint map on the reduced test thickening. Every map from a field spectrum to $V^+$ or $R^+$ factors uniquely through $V$ or $R$, because a field has no nonzero square-zero elements. Thus the relation on algebraically closed field points is precisely that of $R\\rightrightarrows V$. The geometric-point criterion, with base $S$, now proves that $(s^+,t^+)$ is a monomorphism and an equivalence relation on all scheme tests.",
+   "uses": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-sfb-space-universal-thickening-etale-transfer",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-unramified-geometric-equivalence-relation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0606, paragraph constructing the etale equivalence relation; groupoids.tex Tag 0DT7 (lemma-etale-equivalence-relation)."
+   }
+  },
+  {
+   "text": "Take the algebraic-space quotient $W=V^+/R^+$, whose atlas $q:V^+\\to W$ is etale surjective and whose kernel pair is $R^+$. The $X$-maps on $V^+$ agree along $s^+,t^+$ by their construction, so the quotient property gives $W\\to X$. Likewise $V\\to V^+\\to W$ descends through $Z=V/R$ to $k:Z\\to W$. This is a monomorphism: locally lift two sections of $Z$ to $V$; equality in $W$ is a section of $R^+$ joining their lifts, which lies in $R$ by the cartesian $s^+$ square. The two sections therefore agree in $Z$. Moreover $Z\\times_WV^+=V$ as sheaves. Indeed etale locally a section of this pullback is represented by $v\\in V$ and an arrow in $R^+$ from $v$ to a section of $V^+$. The cartesian $s^+$ square puts that arrow in $R$ and its other endpoint in $V$; the converse inclusion and uniqueness follow from monicity. Closed-immersion atlas locality therefore makes $k$ a representable closed immersion. Its ideal is square zero because its restriction to the covering $V^+\\to W$ is the ideal of $V\\hookrightarrow V^+$ (ideal correspondence). Hence $k$ is first order, and etale descent of universality applied to this cartesian atlas square proves it universal over $X$.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-a1-etale-atlas-presentation",
+    "lem-sfb-space-closed-immersion-atlas-locality",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-universal-thickening-etale-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0606, last paragraph: quotient and descent; Tags 0605(2), 03MB (lemma-closed-immersion-ideals)."
+   }
+  },
+  {
+   "text": "On every scheme base change, the square-zero closed immersion $k:Z\\hookrightarrow W$ is integral, universally injective and surjective: affine-locally it is a quotient by a square-zero ideal, and primes correspond bijectively because they contain that ideal. The integral-radicial invariance theorem therefore identifies the categories of etale algebraic spaces over $Z$ and $W$. This equivalence preserves coverings: etale families cover if and only if their pullbacks cover, since the base map is surjective on field-valued points (nilpotents vanish in fields). The enlarged-site comparison identifies sheaves on these sites with sheaves on the small etale scheme sites. Thus $Z$ and $W$ have the common small etale topos claimed, without asserting that every lifted etale space is a scheme. The closed-immersion module theorem makes $\\mathcal I=\\ker(\\mathcal O_W\\to k_*\\mathcal O_Z)$ quasi-coherent over $\\mathcal O_W$. Since $\\mathcal I^2=0$, its action factors through $\\mathcal O_Z$; the same theorem's essential-image assertion makes it quasi-coherent over $\\mathcal O_Z$. Under the common topos this is exactly the claimed $\\mathcal C_{Z/X}$.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-integral-radicial-etale-invariance",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZH (theorem-topological-invariance), the small/enlarged etale-site comparison of spaces-properties.tex 03G1, and 0607 (definition-universal-thickening)."
+   }
+  },
+  {
+   "text": "Suppose $h:Z\\hookrightarrow X$ is closed with ideal $\\mathcal K$. Form the closed subspace $X_1=V(\\mathcal K^2)$ by the ideal correspondence. The ideal $\\mathcal K^2$ is quasi-coherent: on each affine etale chart it is the module of finite sums of products of elements of the ideal, and these products localize, giving compatible local module presentations. The induced $Z\\hookrightarrow X_1$ has square-zero ideal $\\mathcal K/\\mathcal K^2$. Given a test thickening with ideal $\\mathcal J$ and $b:T'\\to X$ restricting through $Z$, the factorization criterion gives $b^\\sharp(\\mathcal K)\\subseteq\\mathcal J$. Thus $b^\\sharp(\\mathcal K^2)\\subseteq\\mathcal J^2=0$, and $b$ factors uniquely through $X_1$. Its restriction is the prescribed map to $Z$, since $Z\\to X$ is a monomorphism. This proves universality directly. Comparing the two universal thickenings on their identity maps of $Z$ gives inverse maps $W\\simeq X_1$: both composites are identities by uniqueness. Their ring-sheaf maps identify the kernels, so $\\mathcal C_{Z/X}=\\mathcal K/\\mathcal K^2$.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 05ZW (lemma-first-order-infinitesimal-neighbourhood), 0608 (lemma-immersion-universal-thickening), and spaces-morphisms.tex Tag 03MB."
+   }
+  },
+  {
+   "text": "For a map of thickenings, the ring-sheaf map sends each kernel into the other kernel: a section killed by the structure quotient still maps to zero after the commuting quotient square. Under $W\\simeq V(\\mathcal K^2)$ this sends a class $a\\bmod\\mathcal K^2$ to the class of its ring-map image modulo the target ideal squared. This is exactly the induced map of ideals. The square-zero description uses the identical kernel map. Thus the identifications preserve all the canonical ideal maps asserted in the statement; no arbitrary choice of a module isomorphism enters.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Definition 0607 and the canonical kernel calculation in 0608; spaces-more-morphisms.tex definition-conormal-sheaf and the paragraph on functoriality preceding it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-a1-etale-atlas-presentation",
+  "lem-sfb-space-closed-immersion-atlas-locality",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-sfb-space-formally-unramified-etale-charts",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-space-integral-radicial-etale-invariance",
+  "lem-sfb-space-universal-thickening-etale-transfer",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "lem-sfb-unramified-geometric-equivalence-relation",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-weil-pbc-universal-first-order-thickening-exists",
+  "lem-weil-pbc-unramified-formally-unramified"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 04GA, 0603-0608, especially the etale-presentation construction of 0606; Tag 0DT7 supplies the equivalence-relation check."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal first order thickening and conormal sheaf of a formally unramified morphism of algebraic spaces",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: ring infinitesimal extensions and scheme formal unramifiedness do not construct universal thickenings of algebraic spaces or their conormal sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal square zero thickening of a formally unramified morphism of algebraic spaces represents all infinitesimal extensions",
+   "results": "8 hits; RingHom.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.Extension.infinitesimal, AlgebraicGeometry.FormallyUnramified, Algebra.FormallyUnramified.ext', Algebra.FormallyUnramified, Algebra.Extension.toInfinitesimal",
+   "date": "2026-10-23",
+   "verdict": "no match: ring infinitesimal extensions and scheme formal unramifiedness do not construct universal thickenings of algebraic spaces or their conormal sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally unramified algebraic space map has a universal nilpotent first infinitesimal neighbourhood with quasi coherent conormal ideal",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.FormallyUnramified.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: ring infinitesimal extensions and scheme formal unramifiedness do not construct universal thickenings of algebraic spaces or their conormal sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Extension\", \"infinitesimal\"",
+   "results": "7 hits; Algebra.Extension.infinitesimal, Algebra.Extension.toInfinitesimal, Algebra.Extension.ker_infinitesimal, Algebra.Extension.Cotangent.map_toInfinitesimal_bijective, Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective, Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective, Algebra.Extension.homInfinitesimal",
+   "date": "2026-10-23",
+   "verdict": "no match: ring infinitesimal extensions and scheme formal unramifiedness do not construct universal thickenings of algebraic spaces or their conormal sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*thicken|unramified.*conormal|conormal.*unramified",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring infinitesimal extensions and scheme formal unramifiedness do not construct universal thickenings of algebraic spaces or their conormal sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal first order thickening of a formally unramified algebraic space and its quasi coherent conormal sheaf",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.formallyUnramified_iff, Algebra.formallyUnramified_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyUnramified\"",
+   "results": "12 hits: Algebra.FormallyUnramified.inst, Algebra.FormallyUnramified, Algebra.Unramified.formallyUnramified, Algebra.FormallyUnramified.mk, Algebra.FormallyUnramified.subsingleton_kaehlerDifferential, Algebra.formallyUnramified_iff, Algebra.FormallyUnramified.of_isLocalization, Algebra.FormallyUnramified.quotient",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal infinitesimal neighbourhood of a formally unramified algebraic space morphism",
+   "results": "8 hits: RingHom.FormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.Unramified.formallyUnramified, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, Algebra.FormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal.*unramified|unramified.*conormal|universal.*thicken",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally unramified map has a universal square zero extension with ideal equal to the conormal module",
+   "results": "8 hits: Algebra.FormallyUnramified, RingHom.FormallyUnramified, Algebra.Unramified.formallyUnramified, Algebra.formallyUnramified_iff, Algebra.FormallyUnramified.lift_unique, Algebra.FormallyUnramified.lift_unique', Algebra.FormallyUnramified.iff_comp_injective, Algebra.FormallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|universalThickening|universal_thickening",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-hilbert-lci-lift",
+  "date": "2026-10-23",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed). Supporting input in the conormal construction of criteria.tex lemma-lci-unobstructed: existence of the universal first-order thickening and interpretation of its ideal.",
+   "via": [
+    "lem-sfb-relative-finite-hilbert-lci-lift",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-universal-conormal",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Wrote the etale-atlas construction, explicit lifted-relation verification and cartesian quotient calculation, then computed the kernel and closed-immersion case. Added only the general formal chart criterion and etale transport/descent for a given universal thickening. Searches find schemes and rings only. Checked each cited statement and edge cases; corrected two cross-reference slips in the proof of Stacks 0606 without changing its route. Repaired the server-detected cycle: use representable scheme tests for etale lifting and the existing integral-radicial etale-space equivalence plus enlarged-site comparison for the common topos; do not cite scheme-lift invariance whose current proof reaches this item.",
+  "blueprint": "Historical det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli/algebraicity prerequisite chain already recorded in blueprint.from: criteria.tex 06D8 requires universal conormal ideals. Realizes the existing from.place through Stacks 0606 and 0607, not a replacement of a unit step. The nearest blueprint ancestor is null, as printed by blueprint_refs.py ancestor; inherited via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "def-trf-space-quasi-coherent-module",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "def-weil-unramified-morphism",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-universal-first-order-thickening-exists",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-formally-unramified",
+    "why": "Generic chart, scheme infinitesimal, etale-site or ideal input to the Stacks construction; no unit theorem is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-a1-etale-atlas-presentation",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-weil-pbc-universal-first-order-thickening-exists",
+  "lem-weil-pbc-unramified-formally-unramified"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-af0848869",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-af0848869 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-more-morphisms 04G8/04GA and 0601–0608 in full. The item statement (unchanged) matches 04GA(1⇒3), 0606/0607 and 0608 for closed immersions. The worker's source error is correct: the 0606 proof cites nonexistent parts of 0604 where 0605(1)/(2) is meant. All 8 steps checked against the cited statements. Step 3 replaces 0604 by a direct formal-étale lift on E=T'×_X U (04FF node, affine T'); s+,t+ étale with cartesian squares by transfer (1). Step 4 proves the equivalence relation via 0DT7 with explicitly lifted e/i/c; I checked D=D+×_{V+}V and field points. Step 5: the monomorphism and Z×_W V+=V arguments hold, then atlas locality (no prior representability) and transfer (2) with all hypotheses present. Step 6: 05ZH equivalence of étale spaces plus the 03G0/03G1 enlarged site; I·I=0 puts the kernel in the essential image. Steps 7–8 are correct. New nodes: 04G8 iff and 0605(1)(2) are true and self-contained statement-only nodes; tested on open immersions, empty spaces and Y+=Y étale. I verified 0605(2) needs the cartesian hypothesis, which the node includes. No duplicates: 04GD formal-étale node is different, chart-transitivity depends on the item. Closure computation: no cycle. Batch-5: every flagged trf/a1 citation is a definition or a foundational algebraic-space lemma (02X2, 02WW, 0262, 03FR, 03G0), not part of the trace formula or Poincaré duality. tool_uses accepted. No SGA. Minor, not fixed: step 1 relies on step 2's affine→scheme-test extension without citing it, and the chart node lists an unused stmt_dep."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUniversalConormal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_universal_firstOrderThickening_exists",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SpaceFormallyUnramified",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceChartwiseUnramified",
+   "AlgebraicGeometry.AlgebraicSpace.spaceKernel",
+   "AlgebraicGeometry.AlgebraicSpace.spaceConormal",
+   "AlgebraicGeometry.AlgebraicSpace.spaceConormalSection",
+   "AlgebraicGeometry.AlgebraicSpace.IsSpaceConormalIdentification",
+   "AlgebraicGeometry.AlgebraicSpace.IsSpaceConormalMap",
+   "AlgebraicGeometry.AlgebraicSpace.space_unramified_formally_unramified",
+   "AlgebraicGeometry.AlgebraicSpace.space_universal_firstOrderThickening_exists",
+   "AlgebraicGeometry.AlgebraicSpace.space_universal_conormal",
+   "AlgebraicGeometry.AlgebraicSpace.space_universal_conormal_closed",
+   "AlgebraicGeometry.AlgebraicSpace.space_conormal_map"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceUniversalConormal.lean",
+  "statement": "theorem space_universal_firstOrderThickening_exists {S : Scheme.{u}} {Z X : AlgebraicSpace S} (h : Z ⟶ X) (hh : SpaceFormallyUnramified h) : ∃ (W : AlgebraicSpace S) (k : Z ⟶ W) (q : W ⟶ X), IsUniversalSpaceFirstOrderThickening h k q",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Five theorems jointly render the node. Helpers define only the formal unramifiedness and conormal presentations introduced by this node. Uses the landed all-space universal property, actual structural kernel and normalized tensor adjunction. Closed case identifies the defining ideal with the locally generated square and fixes the conormal identification and all ideal maps on chart tensor generators. No statement correction. H2 repair: statement dependencies use definition owners for the universal predicate, small-etale direct image, and ideal powers. The recorded theorem proof dependencies are retained unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac9051790",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of c5ece337eebe. Lean byte-identical (sha 518cd662). Item node changes only stmt_deps: theorem deps swapped for def-sfb-space-universal-first-order-thickening (new existing:true, IsUniversalSpaceFirstOrderThickening, matches Stacks 0601 and live def clause by clause, signature verbatim), def-sfb-space-small-etale-direct-image (new existing:true, enlargedSmallDirectImage = transported enlarged direct image, Stacks 03G0-03G2(3), verbatim), def-sfb-space-ideal-power-products (live, unchanged). Theorem nodes kept in proof_deps. Every declaration in the signatures is owned by a stmt_dep definition node; no theorem stmt_dep remains; no live def owner existed for either declaration. Independent reading confirms formal/chartwise unramified helpers, all-space universal existence, common topos + qcoh kernel + unit iso, closed case V(K^2) with sheaf-local K^2 and uniquely normalized conormal iso, normalized canonical maps for all thickening squares; no extra hypotheses or universe restrictions, sorry-only, statement verbatim, report sections present. Live item still unlanded. Advisory: transfer theorem record also lists IsUniversalSpaceFirstOrderThickening (usual existing:true overlap)."
+ }
+}

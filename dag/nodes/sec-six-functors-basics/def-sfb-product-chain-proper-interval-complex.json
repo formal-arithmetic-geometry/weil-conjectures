@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-product-chain-proper-interval-complex",
+ "kind": "definition",
+ "title": "Augmented rational complex of a proper product interval",
+ "status": "split",
+ "statement": "Let $r\\geq0$ and $m\\in\\mathbf N^r$. Give $\\mathbf N^r$ its coordinatewise order and put $T_m=\\{v\\in\\mathbf N^r:v\\leq m,\\ v\\ne0,\\ v\\ne m\\}$. For $n\\geq0$ let $B_{m,n}$ be the set of strict chains with $n$ vertices in $T_m$, equivalently order embeddings $\\{0,\\ldots,n-1\\}\\hookrightarrow T_m$, and let $C_{m,n}=\\mathbf Q^{(B_{m,n})}$. In particular $B_{m,0}$ consists of the empty chain. Define $d_n:C_{m,n+1}\\to C_{m,n}$ by $d_n[v_0<\\cdots<v_n]=\\sum_{a=0}^n(-1)^a[v_0<\\cdots<\\widehat v_a<\\cdots<v_n]$. Thus $d_0$ sends each vertex to the empty-chain generator. Double-deletion cancellation gives $d_n d_{n+1}=0$. Define the augmented chain complex $A(m)$ [def-weil-pbc-module-chain-complex-homology] by placing $C_{m,n}$ in integer degree $n-1$, with these differentials, and extending by zero below degree $-1$. Its degree $-1$ term is canonically $\\mathbf Q$ on the empty chain and its degree $k\\geq0$ term is free on strict chains with $k+1$ vertices.",
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated finite combinatorial input below the trivial-lattice polynomial-bar calculation: the definition of A(m) in lem-sfb-ordered-composition-complex-homology and lem-sfb-product-chain-proper-interval-homology. The blueprint supplies the motivation, not this combinatorial definition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Augmented rational chain complex of strict chains in the proper interval of a product of finite chains",
+   "results": "{\"t\": \"2026-10-23T12:03:01Z\", \"tool\": \"leansearch\", \"query\": \"Augmented rational chain complex of strict chains in the proper interval of a product of finite chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.augment\", \"ChainComplex.augment_d_one_zero\", \"ChainComplex.toSingle₀AsComplex\", \"ChainComplex.augment_X_zero\", \"ChainComplex.truncateAugment\", \"ChainComplex.augment_X_succ\", \"CochainComplex.augment_d_succ_succ\", \"ChainComplex.of\"], \"digest\": \"a8a73999375b60c8\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. Reuse the existing specialized ProductChainProperInterval construction rather than construct another complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmented chain complex with empty chain and alternating vertex deletion on a proper product interval",
+   "results": "{\"t\": \"2026-10-23T12:03:02Z\", \"tool\": \"leanfinder\", \"query\": \"Augmented chain complex with empty chain and alternating vertex deletion on a proper product interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.alternatingConst\", \"ChainComplex.augment\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj\", \"AlgebraicTopology.DoldKan.c\", \"ChainComplex.augment_X_succ\", \"ChainComplex.augment_X_zero\", \"ChainComplex.alternatingConst_obj\"], \"digest\": \"575ad36e461b4d54\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. Reuse the existing specialized ProductChainProperInterval construction rather than construct another complex."
+  },
+  {
+   "tool": "grep",
+   "query": "ProductChainProperInterval|proper.interval|augmented.*[Cc]hain",
+   "results": "{\"t\": \"2026-10-23T12:03:00Z\", \"tool\": \"grep\", \"query\": \"ProductChainProperInterval|proper.interval|augmented.*[Cc]hain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/Algebra/Homology/Augment.lean\", \"Mathlib/Algebra/Homology/Augment.lean\"], \"digest\": \"9360e5fcd6068e14\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. Reuse the existing specialized ProductChainProperInterval construction rather than construct another complex."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ProductChainProperInterval|proper.interval|augmented.*[Cc]hain lean/WeilConjectures lean/Sheaf/Combinatorics; rg -l ProductChainProperInterval|proper-interval-complex dag/nodes; tools/blueprint_refs.py search product-chain-proper",
+   "results": "The project search found the exact proper-interval construction only in lean/Sheaf/Combinatorics/ProductChainProperIntervalHomology.lean. Upstream hits concern unrelated augmented resolutions. DAG hits: lem-sfb-product-chain-proper-interval-homology, def-sfb-augmented-poset-chains, lem-sfb-poset-augmented-chain-prism. The general augmented-poset complex uses list bases and does not own the existing specialized order-embedding declarations. No definition node owns these declarations. Blueprint search: 0 blueprint nodes match product-chain-proper.",
+   "date": "2026-10-23",
+   "verdict": "Exact existing specialized declaration; add its missing definition-node record, existing:true."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ordered-composition-complex-homology",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details. The proper-interval chain complex used as the target of cumulative sums.",
+   "via": [
+    "lem-sfb-ordered-composition-complex-homology",
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Combinatorics.ProductChainProperIntervalHomology",
+  "declaration": "ProductChainProperInterval.complex",
+  "declarations": [
+   "ProductChainProperInterval.ProperInterval",
+   "ProductChainProperInterval.ChainBasis",
+   "ProductChainProperInterval.Chains",
+   "ProductChainProperInterval.boundary",
+   "ProductChainProperInterval.boundary_squared",
+   "ProductChainProperInterval.complexNat",
+   "ProductChainProperInterval.augmentedDegreeEmbedding",
+   "ProductChainProperInterval.complex"
+  ],
+  "statement": "def complex {r : ℕ} (m : Fin r → ℕ) : ChainComplex (ModuleCat ℚ) ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Owns the existing specialized proper-interval construction in the unchanged published module. Only the construction and its square-zero obligation are recorded here; ProductChainProperInterval.homology remains on its theorem node. Added at the maintainer return request for immutable head 0a1917a9af6a."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4010c7cd1",
+  "group": "Q104",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4010c7cd1",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Re-delivery after landing return L (2c690ef71e93: boundary_squared reported as the same statement as ProductChainProperInterval.boundary_squared). The delta is only explicit qualification of boundary_squared (OrderedCompositionComplex.boundary (r := r), with 0 typed Terms m (n+2) →ₗ Terms m n) plus lean.note; the def node is byte-identical. The duplicate finding was a false positive: merge on Terms vs deletion on Chains, related only by the cumulative comparison with sign and shift (m=(2), n=0: 0 vs augmentation), and explicit binders are the remedy the return allows. Fresh full reading: merge sign (-1)^(a+1) zero-based via succAbove; dualMap differential unsigned; F∂=-dF checked against the published deletion sign (-1)^a, at 1 and 2 blocks; e pinned to (-1)^(n+1)F; derived iso = Q.mapIso of the extended e; finiteness, vanishing above Σm, dim H^n(V*)=dim H_n=if-formula, acyclicity for a coordinate ≥2; edge cases r=0/m=0, unit vector, n=0/1. Statement verbatim; 25 declarations match; item on live unchanged with no Lean record; new existing:true def node not on live. No file changed, no compile (worker scompile clean 2.0/1.9 s). Advisory: ℤ-graded complex unused."
+ }
+}

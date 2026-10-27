@@ -1,0 +1,348 @@
+{
+ "id": "lem-trf-common-power-hilbert-marking",
+ "kind": "statement",
+ "title": "Combining Hilbert coefficients into a controlled common-power marking",
+ "statement": "Let $X\\hookrightarrow Z$ be a reduced closed finite-type $\\mathbf Q$-scheme in a smooth scheme, $a\\in X$, and $H_0=H_X(a)$, with $H_X\\le_{\\rm lex}H_0$ on the neighbourhood considered [def-pc-reduced-scheme] [def-weil-closed-immersion] [def-weil-finite-type-morphism] [def-sbc-smooth-morphisms] [def-trf-hilbert-samuel-invariant]. Work locally about $a$, allowing a further restriction of the supplied neighbourhood. Supply a regular Hilbert coefficient datum [def-trf-regular-hilbert-coefficient-datum]: a smooth closed $N\\hookrightarrow Z$, regular coefficient functions $c_{i\\gamma}$, vertex degrees $d_i$, and division-adapted Taylor generators satisfying its five homogeneous-division, generation and Jacobian conditions, with jet bound $Q\\ge\\max_i d_i-1$ (vacuous for an empty vertex list). Put $m_{i\\gamma}=d_i-|\\gamma|>0$ for $|\\gamma|<d_i$. For any positive common multiple $b$ of these finitely many weights, define the actual ideal\n$$I_b=\\sum_{i,\\,|\\gamma|<d_i}(c_{i\\gamma}^{\\,b/m_{i\\gamma}})\\subset\\mathcal O_N.$$\nFor an empty vertex list take $b=1$ and $I_b=0$. This ideal is coherent [pqf-def-coherent]. Its order cosupport [def-trf-marked-ideal-order] is exactly the coefficient order locus and, as a subset of $Z$, exactly $\\{x\\in X:H_X(x)=H_0\\}$.\nLet $C$ be a smooth closed center in that locus, having normal crossings with a supplied ordered coordinate-hyperplane boundary transverse to $N$; this means etale coordinates make $N,C$ coordinate subspaces and each boundary component a distinct coordinate hyperplane [def-weil-etale-morphism]. Let $\\sigma:Z'\\to Z$ be its blowup and let $X',N'$ be scheme-theoretic strict transforms [def-nagata-global-blowup] [def-nagata-strict-transform]. On every chart meeting $N'$ with exceptional equation $e$, the functions $c'_{i\\gamma}=e^{-m_{i\\gamma}}\\sigma^*c_{i\\gamma}$ are regular, and their combined ideal satisfies\n$$\\sum_{i,\\gamma}((c'_{i\\gamma})^{b/m_{i\\gamma}})=e^{-b}\\sigma^*I_b.$$\nAt every point $x'\\in X'$ over $C$, $H_{X'}(x')\\le_{\\rm lex}H_0$; equality holds exactly on this transformed ideal's cosupport on $N'$. At equality points the transformed generators retain the same diagram and all five conditions of the supplied coefficient datum. Charts missing $N'$ have no equality points. Outside $C$, the schemes, ideal and Hilbert--Samuel values are identified with the original ones. More generally, for any smooth center in $X$ on which $H_X$ is locally constant, its ambient blowup satisfies $H_{X'}(x')\\le_{\\rm lex}H_X(\\sigma(x'))$ at every point of the strict transform, using local coefficient data near the center.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13, pp.93--94; BM 1997 Theorems 7.20, 9.4, 9.6; BMT 6.2. Common-power construction and one-step transform from old proof steps 3,4. No Stacks tag states the Hilbert coefficient transform package."
+ },
+ "stmt_deps": [
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-trf-hilbert-samuel-invariant",
+  "def-trf-marked-ideal-order",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-trf-etale-coordinate-flag",
+  "def-trf-controlled-transform-ideal",
+  "def-trf-coefficient-order-locus-transform"
+ ],
+ "proof": [
+  {
+   "text": "On the smooth coefficient scheme N, local finite type over the field gives local Noetherianity. Every quasi-coherent ideal is then of finite type. Convert this to finite type of its module by [lem-pqf-finite-type-ideal-module]. Its module is the kernel of O_N to the closed-subscheme pushforward of its structure sheaf; the closed-immersion pushforward theorem in [lem-pc-closed-immersion-coherent-cohomology] and [lem-weil-pbc-quasi-coherent-module-kernel] give quasi-coherence. Apply [pqf-lem-coherent-ft-locnoeth]. This applies to the actual common-power ideal, also for an empty list. Smoothness and [lem-weil-pbc-smooth-scheme-over-field-regular] give regular local stalk rings for step 2.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-pqf-finite-type-ideal-module",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, lemma-coherent-Noetherian; varieties.tex Tag 056S, lemma-smooth-regular."
+   }
+  },
+  {
+   "text": "At each stalk of N choose a minimal finite generating set of its maximal ideal. Its size is the dimension by regularity, so [lem-weil-pbc-regular-local-generators-regular-sequence] makes it a regular sequence. By [lem-pur-regular-sequence-graded-polynomial] the associated graded ring is a polynomial ring over the residue field, hence a domain. The product formula [lem-weil-pbc-associated-graded-ring-structure] gives [c]^q=[c^q] in degree q times the degree of c. If c is not in m^d, choose its first nonzero initial form in degree r<d. For q>0 its qth power is nonzero, whereas c^q in m^(dq) would put it in m^(rq+1), a contradiction. Conversely, c in m^d implies c^q in m^(dq) by ideal multiplication. Thus c^(b/w) in m^b iff c in m^w when w divides b>0. Directly from the supremum definition of ideal order, b<=ord(I) iff I is contained in m^b: if containment fails, every admissible exponent is at most b-1. On affine N the stalk of ofIdealTop is the image of the global ideal under the germ map, by germ-restriction compatibility. Map the generating span and test containment on each displayed coefficient power; apply the preceding power equivalence and w*(b/w)=b. Empty lists give the zero ideal and vacuous inequalities.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-pur-regular-sequence-graded-polynomial",
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00KU, 00NQ and 00LN; associated-graded initial-form argument implementing ILO VIII 2.3.11--2.3.13 common-power order calculation."
+   }
+  },
+  {
+   "text": "Apply the existing coefficient_equality_germ declaration of [lem-trf-formal-coefficient-transform-criterion] to p,i,a, the ordered vertices, Q bound and supplied datum. It already compares the intrinsic normalized HilbertSamuel.function at every point, including nonclosed points, so no separate jet theorem is invoked. Retain its open neighbourhood V. Rewrite membership in the image of the coefficient order locus as an existential coefficient point and use the pointwise equivalence of step 2. For s=0 the generating span is empty and its ideal sheaf is zero, directly from the definition.",
+   "uses": [
+    "lem-trf-formal-coefficient-transform-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, pp.93--94, historical resolution input. Agent assembly using the separately stated formal coefficient transform criterion; BM 1997 Theorems 7.20, 9.4, 9.6 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "For each low coefficient apply [lem-trf-marked-controlled-blowup-charts] on the same smooth flag to $J=(c_{i\\gamma})$ with mark $m_{i\\gamma}$. Its coherence follows as in step 1, and the center-order hypothesis is step 2. It gives $c_{i\\gamma}\\in\\mathcal I_{C,N}^{m_{i\\gamma}}$ and regular quotients $c\\prime_{i\\gamma}=e^{-m_{i\\gamma}}\\sigma^*c_{i\\gamma}$ on the smooth $N\\prime$. This node also gives the chart description, including components removed by the center. The same application to $(I_b,b)$ gives the regular coherent controlled ideal on every chart meeting $N\\prime$.",
+   "uses": [
+    "lem-trf-marked-controlled-blowup-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, pp.93--94, historical resolution input. Agent assembly using the separately stated formal coefficient transform criterion; BM 1997 Theorems 7.20, 9.4, 9.6 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "In a chart of step 4, integer exponentiation gives $(e^{-m}c)^{b/m}=e^{-b}c^{b/m}$, because $m(b/m)=b$. Pullback of a generated ideal is generated by the pulled-back generators, so summing this identity proves $\\sum((c\\prime_{i\\gamma})^{b/m_{i\\gamma}})=e^{-b}\\sigma^*I_b$. Changing $e$ by a unit changes each generator by a unit power and preserves this ideal identity. Empty sums on both sides are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, pp.93--94, historical resolution input. Agent assembly using the separately stated formal coefficient transform criterion; BM 1997 Theorems 7.20, 9.4, 9.6 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "At a point above $C$, use the blowup part of [lem-trf-formal-coefficient-transform-criterion] on the supplied datum at its image in $C$. Its five conditions hold there because $C$ lies in the coefficient locus; the center is coordinate by hypothesis. It proves $H_{X\\prime}\\le H_0$, equality exactly on $N\\prime$ with the transformed coefficient inequalities, and persistence of all five conditions and the diagram at equality. [lem-trf-jet-diagram-hilbert-control] again identifies these extended jet functions with the stated $H$. Apply the product-order and sum-order assertions of [lem-trf-logarithmic-differential-transform] on the smooth $N\\prime$ (the computation of step 2) to its regular coefficients from step 4: the inequalities are exactly cosupport of the ideal in step 5. The formal criterion excludes equality on all charts missing $N\\prime$.",
+   "uses": [
+    "lem-trf-formal-coefficient-transform-criterion",
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-logarithmic-differential-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, pp.93--94, historical resolution input. Agent assembly using the separately stated formal coefficient transform criterion; BM 1997 Theorems 7.20, 9.4, 9.6 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "Over $Z\\setminus C$, [thm-nagata-global-blowup-complement] identifies the ambient schemes and [lemma-nagata-strict-transform-over-complement] identifies both strict transforms with their original restrictions. The exceptional ideal is the unit ideal there, so the controlled ideal identifies with $I_b$. The local rings are isomorphic, hence their maximal-ideal quotients and residue-field transcendence degrees agree; thus $H$ agrees as well.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lemma-nagata-strict-transform-over-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, pp.93--94, historical resolution input. Agent assembly using the separately stated formal coefficient transform criterion; BM 1997 Theorems 7.20, 9.4, 9.6 (local copy WANTED)."
+   }
+  },
+  {
+   "text": "For a general smooth locally $H$-constant center $C$, fix $x\\in C$ and restrict so that $H_X=H_X(x)$ on $C$. [lem-trf-regular-hilbert-coefficient-data] supplies data at $x$ for a sufficiently large $Q$ on an etale neighbourhood $U$ with $H\\le H_X(x)$. The initial equality criterion of step 3 places this portion of $C$ in $N$ as a set; $C$ is smooth, hence reduced, so it factors through the closed $N$. Coordinates: [lem-pur-smooth-pair-local-coordinates] over $\\operatorname{Spec}\\mathbf Q$ for $N\\hookrightarrow U$ gives, on an open $U_1\\ni x$, an etale $h:U_1\\to\\mathbf A^{a+r}$ with $N\\cap U_1=V(h_{a+1},\\ldots,h_{a+r})$, these pullbacks generating the ideal of $N$ and forming a regular sequence, and $N\\cap U_1\\to\\mathbf A^a$ etale, so $N$ has dimension $a$ at $x$. The same lemma for $C\\hookrightarrow N$ gives an open $N_0\\ni x$ of $N$ and an etale $g:N_0\\to\\mathbf A^a$ with $C\\cap N_0$ the vanishing locus of its last coordinates. Shrink $U_1$ to an affine open with $U_1\\cap N\\subseteq N_0$; the closed subscheme $U_1\\cap N$ is affine, so the $g_j$ lift to $\\tilde g_j\\in\\mathcal O(U_1)$. Then $h'=(\\tilde g,h_{a+1},\\ldots,h_{a+r})$ restricts to $g$ on $N$, and $h'^{-1}(\\mathbf A^a\\times0)=N\\cap U_1$, so the square with the coordinate inclusion is cartesian. [lem-pur-etale-near-regular-coordinate-fibre] makes $h'$ etale near $x$: in these coordinates $N$ and $C$ are coordinate subspaces. Take empty boundary. Steps 4--6 give nonincrease above $x$; step 7 gives equality away from the center. This proves the pointwise comparison with the image, even when different components of the center have different constant values.",
+   "uses": [
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-pur-smooth-pair-local-coordinates",
+    "lem-pur-etale-near-regular-coordinate-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, lemma-etale-local-structure (lifted etale coordinates of the closed smooth subscheme plus its regular equations); coefficient data as in ILO VIII 2.3.11--2.3.13, pp.93--94 (agent assembly)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pqf-finite-type-ideal-module",
+  "lem-pur-etale-near-regular-coordinate-fibre",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-trf-formal-coefficient-transform-criterion",
+  "lem-trf-jet-diagram-hilbert-control",
+  "lem-trf-logarithmic-differential-transform",
+  "lem-trf-marked-controlled-blowup-charts",
+  "lem-trf-regular-hilbert-coefficient-data",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lemma-nagata-strict-transform-over-complement",
+  "pqf-lem-coherent-ft-locnoeth",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "V8 stage 3, 2026-10-26: steps 1--3 implemented in Lean using Tags 00KU, 00NQ, 00LN and 01XZ and coefficient_equality_germ. Steps 4--8 retain the original ILO VIII 2.3.11--2.3.13 / BM 7.20, 9.4, 9.6 plan for the three remaining named theorem holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Combine weighted coefficient functions into a coherent marked ideal using common powers with controlled blowup transform and Hilbert Samuel equality locus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal (PowerSeries R)} [I.IsPrime],\\n  PowerSeries.X ∉ I →\\n    ∀ {S : Set R},\\n      Ideal.span S = Ideal.map PowerSeries.constantCoeff I →\\n        S.Finite → ∃ T, I = Ideal.span T ∧ T.Finite ∧ T.ncard = S.ncard\", \"doc\": \"If the formal variable $ X $ is not in the ideal $ I $ of univariate power series over a ring $ R $, and the image of $ I $ under the constant coefficient homomorphism is finitely generated by a set $\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  (f : PowerSeries A) (k i : ℕ), (PowerSeries.coeff i) (H.seq f (k + 1) - H.seq f k) ∈ I ^ k\", \"doc\": \"For any natural numbers $k$ and $i$, the coefficient of $X^i$ in the difference $H_{k+1} - H_k$ of the Weierstrass divisor sequence lies in the $k$-th power of the ideal $I$, i.e., $\\\\text{coeff}_i(H_{\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  (f : PowerSeries A) (k : ℕ) {i : ℕ},\\n  i ≥ ((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat → (PowerSeries.coeff i) (f - g * H.seq f k) ∈ I ^ k\", \"doc\": \"For a power series $ g $ satisfying the Weierstrass divisor condition at an ideal $ I $, and for any natural number $ k $ and index $ i \\\\ge \\\\text{ord}(g) $, the coefficient of $ X^i $ in the differenc\"}\n  {\"name\": \"mem_reesAlgebra_iff\", \"module\": \"Mathlib/RingTheory/ReesAlgebra\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (f : Polynomial R), f ∈ reesAlgebra I ↔ ∀ (i : ℕ), f.coeff i ∈ I ^ i\", \"doc\": \"A polynomial $ f $ belongs to the Rees algebra of an ideal $ I $ in a commutative ring $ R $ if and only if, for every natural number $ i $, the coefficient of $ X^i $ in $ f $ is an element of the $ \"}\n  {\"name\": \"reesAlgebra\", \"module\": \"Mathlib/RingTheory/ReesAlgebra\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → Subalgebra R (Polynomial R)\", \"doc\": \"The Rees algebra of an ideal $ I $ in a commutative ring $ R $ is the subalgebra of the polynomial ring $ R[X] $ consisting of all polynomials $ f $ such that the coefficient of $ X^i $ in $ f $ belon\"}\n  {\"name\": \"mem_reesAlgebra_iff_support\", \"module\": \"Mathlib/RingTheory/ReesAlgebra\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (f : Polynomial R),\\n  f ∈ reesAlgebra I ↔ ∀ i ∈ f.support, f.coeff i ∈ I ^ i\", \"doc\": \"A polynomial $ f \\\\in R[X] $ belongs to the Rees algebra of an ideal $ I $ in a commutative ring $ R $ if and only if for every exponent $ i $ in the support of $ f $, the coefficient $ \\\\text{coeff}(f,\"}\n  {\"name\": \"Polynomial.coeff_prod_mem_ideal_pow_tsub\", \"module\": \"Mathlib/RingTheory/Polynomial/Basic\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {ι : Type u_2} (s : Finset ι) (f : ι → Polynomial R) (I : Ideal R) (n : ι → ℕ),\\n  (∀ i ∈ s, ∀ (k : ℕ), (f i).coeff k ∈ I ^ (n i - k)) → ∀ (k : ℕ), (s.prod f).coeff k ∈ I ^ (s.sum n - k)\", \"doc\": \"Given a finite set $ s $, polynomials $ f_i \\\\in R[X] $, an ideal $ I \\\\subseteq R $, and natural numbers $ n_i $, if for each $ i \\\\in s $ and all $ k $, the coefficient of $ X^k $ in $ f_i $ lies in $ \"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  (f : PowerSeries A) [inst_1 : IsPrecomplete I A] (k i : ℕ), (PowerSeries.coeff i) (H.div f - H.seq f k) ∈ I ^ k\", \"doc\": \"For any natural numbers $k$ and $i$, the $i$-th coefficient of the difference between the Weierstrass division quotient $H.\\text{div}(f)$ and the $k$-th term $H.\\text{seq}(f, k)$ of the approximating se\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A common multiple of coefficient markings gives the same ideal order inequalities and exceptional power division after blowing up",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  (f : PowerSeries A) (k : ℕ) {i : ℕ},\\n  i ≥ ((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat → (PowerSeries.coeff i) (f - g * H.seq f k) ∈ I ^ k\", \"doc\": \"For a power series $ g $ satisfying the Weierstrass divisor condition at an ideal $ I $, and for any natural number $ k $ and index $ i \\\\ge \\\\text{ord}(g) $, the coefficient of $ X^i $ in the differenc\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} (f h : PowerSeries R) {g : Polynomial R}\\n  (distinguish : g.IsDistinguishedAt I) (notMem : PowerSeries.constantCoeff h ∉ I) (eq : f = ↑g * h),\\n  g.degree = ↑(((PowerSeries.map (Ideal.Quotient.mk I)) f).order.lift ⋯)\", \"doc\": \"If a polynomial $ g $ is distinguished at an ideal $ I $ of a commutative ring $ R $, another polynomial $ h $ has a constant term not in $ I $, and $ f = g \\\\cdot h $, then the degree of $ g $ equals \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A},\\n  g.IsWeierstrassFactorizationAt f h I → I ≠ ⊤ → f.natDegree = ((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat\", \"doc\": \"For a proper ideal $ I $ in a commutative ring, the natural degree of the polynomial $ f $ in the Weierstrass factorization of a power series equals the order of the image of the power series under th\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.coe_natDegree_eq_order_map\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} (f h : PowerSeries R) {g : Polynomial R},\\n  g.IsDistinguishedAt I →\\n    PowerSeries.constantCoeff h ∉ I → f = ↑g * h → ↑g.natDegree = ((PowerSeries.map (Ideal.Quotient.mk I)) f).order\", \"doc\": \"If a polynomial $ f $ over a commutative ring $ R $ factors as $ f = g \\\\cdot h $, where $ g $ is distinguished at an ideal $ I $ and the constant term of $ h $ is not in $ I $, then the natural degree\"}\n  {\"name\": \"PowerSeries.isWeierstrassDivisionAt_iff\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] (f g q : PowerSeries A) (r : Polynomial A) (I : Ideal A),\\n  f.IsWeierstrassDivisionAt g q r I ↔\\n    r.degree < ↑((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat ∧ f = g * q + ↑r\", \"doc\": \"For a commutative ring $ A $, power series $ f, g, q \\\\in A[[X]] $, polynomial $ r \\\\in A[X] $, and ideal $ I \\\\subseteq A $, the Weierstrass division condition $ f = g \\\\cdot q + r $ holds if and only if\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {f g q : PowerSeries A} {r : Polynomial A} {I : Ideal A},\\n  f.IsWeierstrassDivisionAt g q r I →\\n    ∀ {i : ℕ}, i < ((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat → (PowerSeries.coeff i) (f - ↑r) ∈ I\", \"doc\": \"For a commutative ring $ A $, power series $ f, g $, quotient $ q $, remainder $ r $, and ideal $ I $, if the Weierstrass division of $ f $ by $ g $ yields $ q $, $ r $, and $ I $, then for any natura\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) (hI : I ≠ ⊤),\\n  f.degree = ↑(((PowerSeries.map (Ideal.Quotient.mk I)) g).order.lift ⋯)\", \"doc\": \"For a proper ideal $ I $ in a commutative ring $ A $, the degree of the polynomial factor in the Weierstrass factorization of a power series $ f $ equals the order of the image of the unit factor unde\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {f g q : PowerSeries A} {r : Polynomial A} {I : Ideal A},\\n  f.IsWeierstrassDivisionAt g q r I → r.degree < ↑((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat\", \"doc\": \"Given a commutative ring $ A $, power series $ f, g, q $, polynomial $ r $, and ideal $ I $, if $ f $ admits a Weierstrass division by $ g $ with quotient $ q $, remainder $ r $, and ideal $ I $, then\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal, \"order\", \"pow\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"Ideal.torsionOf_eq_span_pow_pOrder\", \"module\": \"Mathlib.Algebra.Module.PID\", \"type\": \" {R : Type u} [CommRing R] [IsPrincipalIdealRing R] {M : Type v} [AddCommGroup M] [Module R M] [IsDomain R] {p : R} (hp : Irreducible p) (hM : Module.IsTorsion' M ↥(Submonoid.powers p)) [dec : (x : M) → Decidable (x = 0)] (x : M) : Ideal.torsionOf R M x = Ideal.span {p ^ Submodule.pOrder hM x}\", \"doc\": \"\"}\n  {\"name\": \"DividedPowers.SubDPIdeal.instPartialOrder\", \"module\": \"Mathlib.RingTheory.DividedPowers.SubDPIdeal\", \"type\": \" {A : Type u_1} [CommSemiring A] {I : Ideal A} {hI : DividedPowers I} : PartialOrder hI.SubDPIdeal\", \"doc\": \"\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \" {A : Type u_1} [CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassFactorizationAt f h I) (hI : I ≠ ⊤) : f.natDegree = ((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat\", \"doc\": \"\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \" {A : Type u_1} [CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassFactorizationAt f h I) (hI : I ≠ ⊤) : f.degree = ↑(((PowerSeries.map (Ideal.Quotient.mk I)) g).order.lift ⋯)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "controlledTransform|markedIdeal|coefficientIdeal|cosupport",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weighted coefficient functions form a marked ideal whose controlled transform detects equality of Hilbert Samuel functions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.coeff_weightedHomogeneousComponent\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"[DecidableEq M] (d : σ →₀ ℕ) : coeff d (weightedHomogeneousComponent w n φ) = if weight w d = n then coeff d φ else 0\", \"doc\": \"For a multivariate polynomial $\\\\varphi$ over a commutative semiring $R$ with variables indexed by $\\\\sigma$, and a weight function $w: \\\\sigma \\\\to M$, the coefficient of a monomial $d$ in the weighted h\"}\n  {\"name\": \"MvPowerSeries.coeff_weightedHomogeneousComponent\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(p : ℕ) (d : σ →₀ ℕ) (f : MvPowerSeries σ R) :\\n  coeff d (weightedHomogeneousComponent w p f) = if weight w d = p then coeff d f else 0\", \"doc\": \"For a multivariate power series $ f $, the coefficient of a monomial $ d $ in its weighted homogeneous component of degree $ p $ with respect to weight $ w $ is equal to the coefficient of $ d $ in $ \"}\n  {\"name\": \"MvPowerSeries.coeff_mul_left_one_sub_of_lt_weightedOrder\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{d : σ →₀ ℕ} (h : (weight w d) < g.weightedOrder w) : coeff d (f * (1 - g)) = coeff d f\", \"doc\": \"For multivariate power series $ f $ and $ g $ over a semiring $ R $ with variables indexed by $ \\\\sigma $, and a weight function $ w : \\\\sigma \\\\to \\\\mathbb{N} $, if the weighted order of $ g $ (the minim\"}\n  {\"name\": \"MvPowerSeries.IsWeightedHomogeneous.coeff_eq_zero\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{f : MvPowerSeries σ R} {p : ℕ} (hf : f.IsWeightedHomogeneous w p) {d : σ →₀ ℕ} (hd : weight w d ≠ p) : f.coeff d = 0\", \"doc\": \"Let $ f $ be a weighted homogeneous multivariate power series of degree $ p $ with weight vector $ w $. For any monomial $ d $, if the weighted degree $ \\\\sum_{i \\\\in \\\\sigma} w_i \\\\cdot d_i $ of $ d $ is\"}\n  {\"name\": \"Ideal.smithCoeffs\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.PID\", \"type\": \"(b : Basis ι R S) (I : Ideal S) (hI : I ≠ ⊥) : ι → R\", \"doc\": \"Given a free module $ S $ over a principal ideal domain (PID) $ R $, a basis $ \\\\{b_i\\\\} $ of $ S $, and a nonzero ideal $ I \\\\subseteq S $, this function returns the coefficients $ a_i \\\\in R $ in the Sm\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousSubmodule\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"(w : σ → M) (m : M) : Submodule R (MvPolynomial σ R)\", \"doc\": \"For a commutative semiring $ R $, a type $ \\\\sigma $, an additive commutative monoid $ M $, a weight function $ w : \\\\sigma \\\\to M $, and a weight $ m \\\\in M $, this is the submodule of the multivariate p\"}\n  {\"name\": \"MvPolynomial.IsWeightedHomogeneous.inj_right\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"{w : σ → M} (hφ : φ ≠ 0) (hm : IsWeightedHomogeneous w φ m) (hn : IsWeightedHomogeneous w φ n) : m = n\", \"doc\": \"For any non-zero multivariate polynomial $\\\\varphi$ and weight function $w : \\\\sigma \\\\to M$, if $\\\\varphi$ is weighted homogeneous of weight $m$ and also of weight $n$ with respect to $w$, then $m = n$.\"}\n  {\"name\": \"MvPolynomial.isWeightedHomogeneous_monomial\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"(w : σ → M) (d : σ →₀ ℕ) (r : R) {m : M} (hm : weight w d = m) : IsWeightedHomogeneous w (monomial d r) m\", \"doc\": \"For a weight function $ w : \\\\sigma \\\\to M $, a monomial $ r \\\\cdot X^d $ in the polynomial ring $ R[\\\\sigma] $, and a weight $ m \\\\in M $, if the weighted sum $ \\\\sum_{i \\\\in \\\\text{support } d} d(i) \\\\cdot w\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general smooth/etale algebra, power-series orders, filtrations, analytic Taylor series or general semicontinuity; none states this coefficient-presentation/jet-history assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertSamuel|hilbert_samuel|controlledTransform|coefficientIdeal",
+   "results": "{\"t\": \"2026-10-23T11:09:48Z\", \"tool\": \"grep\", \"query\": \"hilbertSamuel|hilbert_samuel|controlledTransform|coefficientIdeal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned adic, power-series, coefficient or general smooth algebra results do not state the Hilbert coefficient presentation and controlled strict-transform package; the power-order lower bound is only one part of the order calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Combining marked functions by powers detects Hilbert Samuel equality after blowup",
+   "results": "{\"t\": \"2026-10-23T11:09:48Z\", \"tool\": \"leansearch\", \"query\": \"Combining marked functions by powers detects Hilbert Samuel equality after blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Filter.Germ.instPow\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"MvPolynomial.aeval_comp_expand\", \"HomogeneousLocalization.mk_pow\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"HomogeneousLocalization.hasPow\", \"IsHausdorff.StrictMono.funext'\", \"DividedPowers.DPMorphism.ext\"], \"digest\": \"ed07a68678639f61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned adic, power-series, coefficient or general smooth algebra results do not state the Hilbert coefficient presentation and controlled strict-transform package; the power-order lower bound is only one part of the order calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.weightedOrder_pow",
+   "results": "{\"t\": \"2026-10-23T11:09:48Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.weightedOrder_pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MvPowerSeries.weightedOrder_pow'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned adic, power-series, coefficient or general smooth algebra results do not state the Hilbert coefficient presentation and controlled strict-transform package; the power-order lower bound is only one part of the order calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weighted coefficient ideals for Hilbert Samuel strata and their controlled transforms under permissible blowups",
+   "results": "{\"t\": \"2026-10-23T11:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"Weighted coefficient ideals for Hilbert Samuel strata and their controlled transforms under permissible blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.adic_basis\", \"Polynomial.coeff_prod_mem_ideal_pow_tsub\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"mem_reesAlgebra_iff\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"localCohomology.ideal_powers_initial\", \"mem_reesAlgebra_iff_support\"], \"digest\": \"09dd412993bf8033\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned adic, power-series, coefficient or general smooth algebra results do not state the Hilbert coefficient presentation and controlled strict-transform package; the power-order lower bound is only one part of the order calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local coefficient presentation of the Hilbert Samuel function is stable under blowing up smooth equimultiple centers",
+   "results": "{\"t\": \"2026-10-23T11:16:37Z\", \"tool\": \"leanfinder\", \"query\": \"A local coefficient presentation of the Hilbert Samuel function is stable under blowing up smooth equimultiple centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\"], \"digest\": \"0ee9603468521056\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned adic, power-series, coefficient or general smooth algebra results do not state the Hilbert coefficient presentation and controlled strict-transform package; the power-order lower bound is only one part of the order calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.weightedOrder, HPow.hPow",
+   "results": "{\"t\": \"2026-10-23T11:18:02Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.weightedOrder, HPow.hPow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.le_weightedOrder_pow\"], \"digest\": \"1b2d75fb343d85ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned adic, power-series, coefficient or general smooth algebra results do not state the Hilbert coefficient presentation and controlled strict-transform package; the power-order lower bound is only one part of the order calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "le_weightedOrder_pow|weightedOrder_pow",
+   "results": "{\"t\": \"2026-10-23T11:32:32Z\", \"tool\": \"grep\", \"query\": \"le_weightedOrder_pow|weightedOrder_pow\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\"], \"digest\": \"c45a697cb72dfa47\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned adic, power-series, coefficient or general smooth algebra results do not state the Hilbert coefficient presentation and controlled strict-transform package; the power-order lower bound is only one part of the order calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "weightedOrder_mul|order_pow|order_mul",
+   "results": "{\"t\": \"2026-10-23T11:37:08Z\", \"tool\": \"grep\", \"query\": \"weightedOrder_mul|order_pow|order_mul\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\"], \"digest\": \"7a60bcd8d404589a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned adic, power-series, coefficient or general smooth algebra results do not state the Hilbert coefficient presentation and controlled strict-transform package; the power-order lower bound is only one part of the order calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-hilbert-samuel-local-presentations",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. This split supplies the finite-jet/diagram, regular-coefficient, and transform calculation behind that local presentation input; the active contracting-correspondence proof of the blueprint ancestor is unchanged. Re-split: ILO VIII 2.3.11--2.3.13, pp.93--94; BM 1997 Theorems 7.20, 9.4, 9.6; BMT 6.2. Common-power construction and one-step transform from old proof steps 3,4. No Stacks tag states the Hilbert coefficient transform package.",
+   "via": [
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-common-power-hilbert-marking",
+  "worker": "stage1",
+  "summary": "Reused the existing formal coefficient transform criterion, marked chart lemma and order calculus; no new nodes. Explicitly added the large-Q condition needed by the five-condition criterion and the local restriction convention. Common-power construction and ideal identity are proved directly. Reviewer FIX (2026-10-23): step 6 cites the order calculus it re-applies on N'; step 8 obtains the simultaneous flag coordinates from lem-pur-etale-near-regular-coordinate-fibre instead of the implicit Taylor node, whose statement does not give them.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality proof (1)--(2), through the existing Hilbert--Samuel local-presentations support; realizes its extracted common-power construction and one-step transform input. The current blueprint uses contracting correspondences; its unit and chapter are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic smooth-over-a-field regularity/local-Noetherianity for coherence; the Hilbert coefficient route supplies no substitute."
+   },
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "Generic simultaneous etale coordinates for the smooth center inside the smooth coefficient scheme; used only to apply the existing formal transform criterion."
+   },
+   {
+    "node": "lem-pur-etale-near-regular-coordinate-fibre",
+    "why": "Generic criterion that lifted etale coordinates of a smooth closed subscheme plus its regular equations are etale coordinates of the ambient scheme; used in step 8 to obtain simultaneous coordinates for the smooth flag C in N in U, which no node of the Hilbert coefficient route states."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-pur-etale-near-regular-coordinate-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-8df3c9026",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-8df3c9026 (reviewer sub-agent of L); spot-checked: Read the whole item (8 steps), the parent lem-trf-hilbert-samuel-local-presentations, every cited statement and the full proof of the formal coefficient transform criterion. Sources checked: ILO VIII 2.3.9-2.3.14 (pp.93-94; they do not prove this calculation, so proof_origin agent and the BM/BMT WANTED lines are correct) and Stacks 0FUE (statement and proof). Both statement changes are accepted. (1) The bound Q>=max d_i-1 is needed by the criterion's condition (5) (with Q=0, d=3 the degree-1 and degree-2 tests are missing), and the parent gets data for any large Q. (2) The local-restriction convention matches the criterion's germ assertion. Steps 1-5 and 7 are correct; step 5 is genuinely elementary. Two repairs, both under C3/C4. Step 6 re-applies step 2's order calculus on N' without citing lem-trf-logarithmic-differential-transform; added. Step 8 cited lem-trf-implicit-taylor-coordinate-calculus for etaleness of lifted flag coordinates, which that node's statement does not give. Rewritten as in Stacks 0FUE: lem-pur-smooth-pair-local-coordinates for N in U and for C in N, lift g, then lem-pur-etale-near-regular-coordinate-fibre. implicit-taylor is removed, proof_deps is recomputed, the new tool use is declared in split_report.tool_uses, and there is no cycle. There are no new nodes; the siblings coefficient-test-sequence-propagation and minimal-envelope-comparison are not duplicates. Advisory: coefficient-test-sequence-propagation needs the same Q bound when it is split. Edge cases checked: the node V(xy), the empty vertex list, zero and unit coefficients, b equal to a weight, and nonclosed points.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CommonPowerHilbertMarking",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.commonPowerHilbertMarking",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.commonPowerIdeal",
+   "AlgebraicGeometry.HilbertCoefficient.commonPowerRingIdeal",
+   "AlgebraicGeometry.HilbertCoefficient.commonPowerHilbertMarking",
+   "AlgebraicGeometry.HilbertCoefficient.commonPowerHilbertMarking_charts",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientModifiedX",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientModifiedMap",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientModifiedSupportMap",
+   "AlgebraicGeometry.HilbertCoefficient.commonPowerHilbertMarking_transform",
+   "AlgebraicGeometry.HilbertCoefficient.hilbertSamuel_le_of_smooth_locally_constant_center"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CommonPowerHilbertMarking.lean",
+  "statement": "theorem commonPowerHilbertMarking {X M : Scheme.{u}} (p : M ⟶ Spec (.of (ULift.{u} ℚ))) (i : X ⟶ M) [IsClosedImmersion i] [IsReduced X] [Smooth p] [LocallyOfFiniteType (i ≫ p)] [QuasiCompact (i ≫ p)] (a : X) (hH : ∀ x : X, HilbertSamuel.le (HilbertSamuel.function (k := ULift.{u} ℚ) (i ≫ p) x) (HilbertSamuel.function (k := ULift.{u} ℚ) (i ≫ p) a)) {m n s Q : ℕ} (α : Fin s → Fin n →₀ ℕ) (hα : orderedVertices α) (hQ : ∀ l : Fin s, (α l).degree - 1 ≤ Q) (D : RegularHilbertCoefficientDatum (k := ULift.{u} ℚ) p i a m n s α Q) (b : ℕ) (hb : 0 < b) (hempty : s = 0 → b = 1) (hdiv : ∀ (l : Fin s) (γ : Fin n →₀ ℕ), γ.degree < (α l).degree → (α l).degree - γ.degree ∣ b) : RingedSpace.IsCoherent D.N.toRingedSpace (commonPowerIdeal α D.coeff b).toModules ∧ {x : D.N | (b : ℕ∞) ≤ HilbertSamuel.order (commonPowerIdeal α D.coeff b) x} = D.orderLocus ∧ (s = 0 → commonPowerIdeal α D.coeff b = 0) ∧ ∃ V : D.U.Opens, D.center ∈ V ∧ ∀ y : D.U, y ∈ V → ((∃ x : pullback (C := Scheme.{u}) i D.e, pullback.snd i D.e x = y ∧ HilbertSamuel.function (k := ULift.{u} ℚ) (pullback.snd i D.e ≫ D.e ≫ p) x = HilbertSamuel.function (k := ULift.{u} ℚ) (i ≫ p) a) ↔ ∃ z : D.N, D.j z = y ∧ (b : ℕ∞) ≤ HilbertSamuel.order (commonPowerIdeal α D.coeff b) z)",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24a7de3d8",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Re-delivery of RETURN d847f1bff96d (H2/H12 theorem stmt_dep). The Lean module is byte-identical (sha256 61e4adaf). The item record differs from live only in stmt_deps (theorem node replaced by new def node def-trf-coefficient-order-locus-transform; flag and controlled-transform def nodes kept) and lean; the theorem stays in proof_deps. New node: existing:true on RegularHilbertCoefficientDatum.orderLocus and RegularCoefficientTransform in the unchanged landed FormalCoefficientTransformCriterion. Its TeX matches the Lean field by field (order locus; datum, supportMap/square, principal exceptional, coefficient identities in both degree ranges). stmt_deps equal the cited ids, all §5 fields are present, lean.statement is verbatim, no duplicate node exists, plain defs only. Item clauses re-read: coherence, cosupport=orderLocus, s=0 zero ideal, germ ambient equality, fraction-free charts identity via controlledTransformIdeal, transform nonincrease/equality on N'/persistence/off-centre isos, locally-constant general centre. Edge cases s=0, b=weight, empty centre, nonclosed points. Advisories: hH global on X; pqf-def-coherent record is a finite-type helper while the item correctly uses RingedSpace.IsCoherent (01BV); the second reading is a self-audit. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261026T092932-L-3481247",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

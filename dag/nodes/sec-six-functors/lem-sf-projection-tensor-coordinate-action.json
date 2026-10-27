@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-projection-tensor-coordinate-action",
+ "kind": "statement",
+ "title": "Projection tensor action with separate target images",
+ "statement": "Let A be a Grothendieck abelian symmetric monoidal closed coefficient category, with monoidal preadditivity, a functorial flat resolution, and flat-preserving inverse image. Let f:X -> Y be a separated locally finite-type quasi-compact scheme morphism and c a compactification. Write T_X,T_Y for the specified derived tensors, U for the derived inverse image, F for compact support through c, P(k,q) for projectionTensorCoordinateComponent of [def-sf-constructible-projection-mates], and alpha for the canonical action associator from [lem-pur-finite-projection-action-laws]. For arbitrary derived sheaves k on X and q,N on Y, the composite tensor(P(k,q),1_N);P(T_X(k,Uq),N) equals alpha_Y(Fk,q,N);P(k,T_Y(q,N));F(T_X(k,mu_f(q,N)));F(alpha_X(k,Uq,UN).inverse), where mu_f is the canonical pullback/tensor comparison. The two target images under F are separate. These are the actual canonical maps of [def-exchange-projection], without invertibility of a projection being assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Final all-ideal reduction paragraph; the general compactification tensor-action calculation already proved in FiniteProjectionActionLaws"
+ },
+ "stmt_deps": [
+  "def-exchange-projection",
+  "def-sf-constructible-projection-mates",
+  "lem-pur-finite-projection-action-laws"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved general coefficient-category library declaration AlgebraicGeometry.ProEtale.genericProjectionAction_compactification in Sheaf.Paper.FiniteProjectionActionLaws (the module realizing [lem-pur-finite-projection-action-laws]). Its actual Lean signature quantifies over the arbitrary coefficient category A and the schemes here; no extension of the narrower paper specialization is assumed. Reverse its equation and unfold projectionTensorCoordinateComponent.",
+   "uses": [
+    "lem-pur-finite-projection-action-laws",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functor.map_comp for F separates its image of the tensor comparison followed by the inverse target associator. Compose this equality with the two preceding maps; this is precisely the displayed equation. The generic private splitProjectionActionImage lemma proves this elementary categorical rewriting before specialization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-constructible-projection-mates",
+  "lem-pur-finite-projection-action-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Finite all-ideal reduction: expose the already proved generic library action equation with its final functor image expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor maps the composite of two morphisms to the composite of their images",
+   "results": "Eight hits, including CategoryTheory.Functor.map_comp in Mathlib.CategoryTheory.Functor.Basic.",
+   "date": "2026-10-27",
+   "verdict": "Use map_comp for the last elementary expansion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Six hits; exact Functor.map_comp found.",
+   "date": "2026-10-27",
+   "verdict": "Used in the generic private rewriting lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "genericProjectionAction_compactification|projectionTensorCoordinateComponent",
+   "results": "Remote Mathlib grep returned zero hits. Local repository search finds the existing general proved private compactification action lemma and the named projection coordinate component.",
+   "date": "2026-10-27",
+   "verdict": "Reuse that library proof; no new mathematical obligation is introduced."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "date": "2026-10-27",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Final all-ideal reduction paragraph: associativity of the proper/open projection with right tensor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionTensorActionExpansion",
+  "file": "lean/Sheaf/Paper/ProjectionTensorActionExpansion.lean",
+  "declaration": "WeilConjectures.projectionTensorCoordinateComponent_tensorAction",
+  "declarations": [
+   "WeilConjectures.projectionTensorCoordinateComponent_tensorAction"
+  ],
+  "statement": "theorem projectionTensorCoordinateComponent_tensorAction (A : Type v) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (k : DerivedCategory (Sheaf (ProEt.topology X) A)) (q N : DerivedCategory (Sheaf (ProEt.topology Y) A)) : let T := derivedTensor A X let U := (upperStar A f).leftDerivedFunctor let F := rightDerivedLowerShriekOfCompactification A c ((derivedTensor A Y).flip.obj N).map (projectionTensorCoordinateComponent A c k q) ≫ projectionTensorCoordinateComponent A c ((T.obj k).obj (U.obj q)) N = (projectionActionAssociator A Y (F.obj k) q N).hom ≫ projectionTensorCoordinateComponent A c k (((derivedTensor A Y).obj q).obj N) ≫ F.map ((T.obj k).map (leftDerivedUpperStarTensorIso A f q N).hom) ≫ F.map (projectionActionAssociator A X k (U.obj q) (U.obj N)).inv",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b30f0",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T222721-L-685893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b30f0",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T222721-L-685893",
+  "kind": "interface",
+  "note": "independent cc review: routes_realization (new sorry) against diamondLeft/diamondRight, finiteExchangeProjection, component/source/targetComparison and finitePullCompositionNormalization in the clone; the moved Mu/Exchange/TensorRealization diffed verbatim against the published item; item has no importers"
+ }
+}

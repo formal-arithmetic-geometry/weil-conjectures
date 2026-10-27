@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Modules.PullbackLocalCoefficient
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-!
 # Pullback compatibility of the zero locus
@@ -54,6 +52,13 @@ by affine-cover locality they hold globally, and antisymmetry gives equality. -/
 theorem Hom.comap_zeroLocus_tensorPullback {X Y : Scheme.{u}} {M N : X.Modules}
     [M.IsInvertible] [N.IsInvertible] (g : Y ⟶ X) (φ : M ⟶ N) :
     φ.zeroLocus.comap g = ((tensorPullback g).map φ).zeroLocus := by
-  sorry
+  have := IsInvertible.sheafOfModules_isInvertible M
+  have := IsInvertible.sheafOfModules_isInvertible N
+  obtain ⟨adj⟩ := nonempty_tensorPullbackAdjunction g
+  let e : tensorPullback g ≅ pullback g :=
+    adj.leftAdjointUniq (pullbackPushforwardAdjunction g)
+  rw [Hom.comap_zeroLocus]
+  exact Hom.zeroLocus_eq_of_arrowIso _ _
+    (Arrow.isoMk (e.symm.app M) (e.symm.app N) (e.inv.naturality φ).symm)
 
 end AlgebraicGeometry.Scheme.Modules

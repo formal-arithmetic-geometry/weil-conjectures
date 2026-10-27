@@ -18,138 +18,48 @@
  ],
  "proof": [
   {
-   "text": "Put $u(U)=p^{-1}(h_U^\\#)$. Apply [lem-trf-site-point-reconstruction-sets] on the small skeleton of $S_{\\mathrm{Et}}$ fixed by [def-weil-size-convention]. It supplies preservation of finite limits, joint surjectivity for covers, and reconstruction of $p^{-1}$ from the pointed $u$-objects. In particular $u(S)$ is a singleton and $u(\\varnothing)=\\varnothing$ (the empty covering). An open immersion gives an injection on $u$, since it is a monomorphism and $u$ preserves its diagonal pullback. For any disjoint union $T=\\coprod T_i$, the covering by the summands gives a surjection $\\coprod u(T_i)\\to u(T)$. It is injective: different summands have empty intersection, and the diagonal pullback proves injectivity within each summand. Thus $u(T)=\\coprod u(T_i)$ via the inclusions.",
+   "text": "Apply [lem-trf-etale-topos-point-fiber-comparison] to p. Obtain Ω, its field and algebraically closed instances, s, and a natural comparison c:ULift Hom_S(Spec Ω,-)→L with the stated support criterion. This retains original classification proof steps 1--6 as a genuine separate existence step without bijectivity.",
    "uses": [
-    "lem-trf-site-point-reconstruction-sets",
-    "def-weil-size-convention",
-    "def-weil-pbc-etale-site"
+    "lem-trf-etale-topos-point-fiber-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; first paragraph (site/topos comparison and fibre functor properties)."
+    "place": "Tag 04HU, lemma-points-small-etale-site: support, finite affine fibers, coherent choice, and affine-cover descent."
    }
   },
   {
-   "text": "For an open $O\\subset S$, the set $u(O)$ has at most one element. Let $W$ be the union of all opens with empty $u$-value. The open cover of $W$ by these opens gives $u(W)=\\varnothing$. Set $Z=S\\setminus W$; it is nonempty because $u(S)\\ne\\varnothing$. If $Z=Z_1\\cup Z_2$ for closed subsets of $S$, then $W=(S\\setminus Z_1)\\cap(S\\setminus Z_2)$. Preservation of intersections implies that one of $u(S\\setminus Z_i)$ is empty, so maximality of $W$ gives $Z=Z_i$. Thus $Z$ is irreducible. By [lem-weil-pbc-scheme-sober] it has a unique generic point $s$. An open $O$ has empty $u$-value exactly when $O\\subset W$, equivalently $O\\cap Z=\\varnothing$, equivalently $s\\notin O$. Finally, for any etale $T\\to S$, its image $O$ is open by [def-weil-etale-morphism, lem-weil-pbc-flat-lfp-open], and $\\{T\\to O\\}$ is a covering. The map $u(T)\\to u(O)$ and joint surjectivity give $u(T)\\ne\\varnothing$ exactly when $s$ lies in that image.",
+   "text": "Apply [lem-trf-etale-topos-point-comparison-bijective] to this same c and its support criterion. For each U use CategoryTheory.isIso_iff_bijective to make c.app U an isomorphism; then NatIso.isIso_of_isIso_app makes c an isomorphism of functors. Invert it to obtain L≅ULift Hom_S(Spec Ω,-).",
    "uses": [
-    "lem-weil-pbc-scheme-sober",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-etale-composition-cancellation"
+    "lem-trf-etale-topos-point-comparison-bijective"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; second paragraph, with the sober-space argument of sites.tex Tag 04EJ written out."
+    "place": "Tag 04HU, lemma-points-small-etale-site: support, finite affine fibers, coherent choice, and affine-cover descent."
    }
   },
   {
-   "text": "Choose an affine open $A\\subset S$ containing $s$. Then $u(A)$ is a singleton. Restrict $u$ to the small etale site of $A$, regarding its objects as etale $S$-schemes; this is legitimate by [lem-weil-pbc-etale-composition-cancellation]. The restricted functor still preserves finite limits and sends covers to jointly surjective families, with terminal value $u(A)=\\{*\\}$. Choose an algebraic closure $\\Omega$ of $\\kappa(s)$ by [lem-pc-algebraic-closure-exists-unique]. The description in [def-weil-geometric-point] gives a geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to A\\to S$ over $s$. All later affine objects used for the finite-fibre argument map to this fixed affine base $A$.",
+   "text": "Apply the proved [lem-trf-etale-topos-point-stalk-reconstruction] to this fiber isomorphism. This gives p.inverse≅(pointSmallEtale s).sheafFiber on all set sheaves. Return the same Ω and s as the required existential witnesses. Their instances are used only within this proof; no definition selects data from an unproved existence theorem.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-pc-algebraic-closure-exists-unique",
-    "def-weil-geometric-point"
+    "lem-trf-etale-topos-point-stalk-reconstruction"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; second and third paragraphs, making the affine-base restriction explicit."
-   }
-  },
-  {
-   "text": "For an affine etale $A$-scheme $U$, apply [lem-trf-affine-etale-split-neighbourhood] at $\\bar s$ to obtain an affine $(V,\\bar v)$ and $U\\times_A V=(\\coprod_{i=1}^n V)\\amalg W$, with no point of $W$ mapping to $s$. Step 2 gives $u(W)=\\varnothing$ and $u(V)\\ne\\varnothing$. By step 1 and preservation of fibre products,\n$$u(U)\\times u(V)\\simeq\\coprod_{i=1}^n u(V)$$\nover $u(V)$. Taking the fibre over any $b\\in u(V)$ shows that $u(U)$ has exactly $n$ elements. If $U$ is a pointed neighbourhood of $\\bar s$, step 2 also shows $u(U)\\ne\\varnothing$. This includes $n=0$: in that case $u(U)$ and the geometric fibre are both empty.",
-   "uses": [
-    "lem-trf-affine-etale-split-neighbourhood"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; third paragraph (finite cardinality of affine fibre values)."
-   }
-  },
-  {
-   "text": "Take the full category of affine pointed neighbourhoods of $\\bar s$ which factor through $A$. It has a small skeleton $\\mathcal J$: [lem-weil-pbc-affine-etale-essentially-small-cover] gives a set of affine etale $A$-objects, and the lifts of $\\bar s$ into each form a set. It is cofiltered. Indeed [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] on $A$ provides common sources and equalizers among all pointed neighbourhoods; take an affine open containing the marked point in each such source to remain among affine objects. The same refinement shows nonemptiness. For $(V,\\bar v)\\in\\mathcal J$, the sets $u(V)$ are finite nonempty by step 4. Apply [lem-trf-cofiltered-finite-sets-section] to the covariant diagram $(V,\\bar v)\\mapsto u(V)$. Obtain elements $x_{V,\\bar v}$ compatible with every pointed arrow; surjectivity of transition maps is not assumed.",
-   "uses": [
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-trf-cofiltered-finite-sets-section"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; fourth paragraph (small cofiltered limit and compatible choice)."
-   }
-  },
-  {
-   "text": "Extend this family to every pointed etale $S$-neighbourhood $(T,\\bar t)$ as follows. Refine it by pulling back the open $A$, then taking an affine open around its marked point, and replacing it by an isomorphic object of $\\mathcal J$. For such a pointed arrow $a:(V,\\bar v)\\to(T,\\bar t)$ set $x_{T,\\bar t}=u(a)(x_{V,\\bar v})$. This is independent of the refinement: for two refinements use [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] to find a common source, equalize its two resulting arrows into $T$, and refine that source to an affine object over $A$. Compatibility in $\\mathcal J$ makes the two images equal. The same argument applied to a refinement and its composite with a pointed arrow shows $u(f)(x_{T,\\bar t})=x_{T',\\bar t'}$ for every pointed $f:(T,\\bar t)\\to(T',\\bar t')$. Consequently\n$$c_T:\\operatorname{Hom}_S(\\operatorname{Spec}\\Omega,T)\\to u(T),\\qquad \\bar t\\mapsto x_{T,\\bar t},$$\nis natural in all etale $T$, not only the affine ones.",
-   "uses": [
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-affine-etale-essentially-small-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; last three paragraphs, replacing the omitted independence and functoriality checks by coherent neighbourhood elements."
-   }
-  },
-  {
-   "text": "For $U$ affine over $A$, use the splitting of step 4 and take $b=x_{V,\\bar v}$. Let $a_i:V\\to U$ be the maps obtained from its $n$ copy sections and the projection. The final clause of [lem-trf-affine-etale-split-neighbourhood] says that $\\bar u_i=a_i\\bar v$ exhaust all geometric lifts into $U$, without repetitions. Compatibility from step 6 gives $c_U(\\bar u_i)=u(a_i)(b)$. The fibre over $b$ of the isomorphism of step 4 sends its $i$-th point precisely to $u(a_i)(b)\\in u(U)$. Therefore these elements exhaust $u(U)$ without repetitions. Thus $c_U$ is bijective, also for an empty fibre.",
-   "uses": [
-    "lem-trf-affine-etale-split-neighbourhood"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; last paragraph, explicit bijectivity on affine objects."
-   }
-  },
-  {
-   "text": "For an arbitrary etale $T\\to S$, put $T_A=T\\times_S A$. Since $u(A)$ is a singleton, finite-limit preservation identifies $u(T_A)$ with $u(T)$; geometric lifts into $T_A$ and $T$ also agree because $\\bar s$ factors through $A$. Cover $T_A$ by affine opens, as in [lem-weil-pbc-affine-etale-essentially-small-cover]. Joint surjectivity of their $u$-values and step 7 give surjectivity of $c_{T_A}$. For injectivity, lifts $t_1,t_2$ with equal $c$-images factor through affine opens $B_1,B_2$. Their corresponding elements in $u(B_1)$ and $u(B_2)$ have the same image in $u(T_A)$, so define an element of $u(B_1\\times_{T_A}B_2)$. Lift that element along an affine open cover of this fibre product to an element of some $u(C)$ with $C$ affine over $A$. Bijectivity of $c_C$ gives a geometric lift into $C$. By naturality its images in $B_1,B_2$ have the same $c$-images as the original lifts; injectivity of $c_{B_1},c_{B_2}$ identifies them with those lifts. Their composites in $T_A$ coincide, proving $t_1=t_2$. Thus $c$ is a natural isomorphism on the whole site. No affineness of the overlap is asserted.",
-   "uses": [
-    "lem-weil-pbc-affine-etale-essentially-small-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; claim that affine objects suffice, whose proof the source omits; full cover argument."
-   }
-  },
-  {
-   "text": "The natural bijections $c_T$ identify the category of geometric pointed neighbourhoods with $\\mathcal N_u$ of [lem-trf-site-point-reconstruction-sets], keeping underlying objects $T$ and arrows fixed. Reindexing its colimit formula therefore gives, naturally in every set sheaf $F$,\n$$p^{-1}F\\simeq\\varinjlim_{(T,\\bar t)\\in\\mathcal N_{\\bar s}^{\\mathrm{op}}}F(T).$$\nBy [lem-fix-geometric-stalk-topos-point] in its etale case, this is the inverse image of the actual point associated to $\\bar s$. Its adjunction and the given adjunction for $p$ identify the right adjoints as well: the natural inverse-image isomorphism has its invertible right-adjoint mate as specified in [def-trf-geometric-morphism]. Hence $p$ is isomorphic to this geometric point. All indexing categories, field choices, and colimits lie in the common enlarged universe of the statement.",
-   "uses": [
-    "lem-trf-site-point-reconstruction-sets",
-    "lem-fix-geometric-stalk-topos-point",
-    "def-trf-geometric-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HU, lemma-points-small-etale-site; first and last paragraphs; Tag 04FM identifies the geometric stalk point."
+    "place": "Tag 04HU, lemma-points-small-etale-site: support, finite affine fibers, coherent choice, and affine-cover descent."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-site-point-reconstruction-sets",
-  "def-weil-size-convention",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-scheme-sober",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-pc-algebraic-closure-exists-unique",
-  "def-weil-geometric-point",
-  "lem-trf-affine-etale-split-neighbourhood",
-  "lem-weil-pbc-affine-etale-essentially-small-cover",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-trf-cofiltered-finite-sets-section",
-  "lem-fix-geometric-stalk-topos-point",
-  "def-trf-geometric-morphism"
+  "lem-trf-etale-topos-point-fiber-comparison",
+  "lem-trf-etale-topos-point-comparison-bijective",
+  "lem-trf-etale-topos-point-stalk-reconstruction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04HU, lemma-points-small-etale-site; coherent-choice and affine-cover details supplied explicitly."
+  "place": "Tag 04HU. Steps 1--6 and 7--8 isolated as strictly smaller geometric lemmas; step 9 proved by Mathlib cocontinuous extension uniqueness and sheafification localization."
  },
  "mathlib_searches": [
   {
@@ -247,9 +157,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-fix-geometric-stalk-topos-point"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -276,5 +184,26 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T080807-L-1590425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

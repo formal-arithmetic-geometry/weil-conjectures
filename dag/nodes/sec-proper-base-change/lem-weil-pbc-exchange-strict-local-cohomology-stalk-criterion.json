@@ -14,24 +14,48 @@
  ],
  "proof": [
   {
-   "text": "Equip the two strict henselization rings with their canonical strictly henselian local structures. The evaluation equality makes a local ring homomorphism, and the structural equality gives the induced pullback square. Apply the canonical strict-henselization stalk exchange comparison and the strict-local total cohomology exchange comparison. The resulting additive equivalences conjugate the stalk map to the displayed cohomology pullback, so bijectivity is equivalent.",
+   "text": "Give the small strict-henselization rings their existing strictly henselian local structures. Evaluation factors through the surjective map onto the relative separable closure, then a field embedding, hence is local. The evaluation equation makes a local by isLocalHom_of_comp. Factor evaluation through the residue field using ResidueField.lift. The residue square follows from the evaluation equation by quotient extensionality. The structural pointed equations are strictHenselizationClosedLift_over.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "lem-weil-pbc-abelian-stalk-exchange-localization",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Spec of the inverse smallStrictHenselizationColimitIso as each comparison to the full strict localization. The theorem smallStrictHenselizationColimitIso_toBase identifies their structural maps. Take the total spaces to be the two displayed products. Pullback cancellation constructs the cartesian square of the induced pullback.map with the projections to the strict-local bases. For the identity reparametrizations of the points, a private equality-elimination lemma transports the model isomorphism together with its structural composite; it is proved by substitution.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_addEquiv_strictHenselization_abelian_stalkExchange to the flipped chosen pullback square, with both point fields equal to Ω and the two connecting field maps identities. This gives additive equivalences conjugating the original exchange stalk to exchange on the strict-local bases.",
+   "uses": [
+    "lem-weil-pbc-abelian-stalk-exchange-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_addEquiv_strictLocal_abelian_total_exchange to that strict-local cartesian square and the inverse image of F. Compose the additive equivalences and their intertwining equations. Replace α using its required equality to canonical exchange. An additive-group morphism is invertible exactly when its underlying function is bijective; bijectivity is unchanged by composition with either equivalence. This proves the claimed equivalence without new holes.",
+   "uses": [
     "lem-weil-pbc-strict-local-abelian-total-exchange"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
   "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
   "lem-weil-pbc-abelian-stalk-exchange-localization",
   "lem-weil-pbc-strict-local-abelian-total-exchange"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks"
+  "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, with the existing strict-local comparison interfaces. Lean glue and small/full-model transport by M1, 2026-10-25."
  },
  "mathlib_searches": [
   {
@@ -90,10 +114,11 @@
   "module": "Sheaf.AlgebraicGeometry.ExchangeStrictLocalCohomologyStalk",
   "declaration": "AlgebraicGeometry.Etale.isIso_exchange_stalk_iff_strictLocalCohomology",
   "file": "lean/Sheaf/AlgebraicGeometry/ExchangeStrictLocalCohomologyStalk.lean",
-  "statement": "theorem isIso_exchange_stalk_iff_strictLocalCohomology {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) [QuasiCompact g] [QuasiSeparated g] (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (α : (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj (((g)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus ⋙ (f)^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ⟶ (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj (((pullback.snd f g)^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus ⋙ (pullback.fst f g)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (a : Scheme.strictHenselizationRing (x ≫ f) ⟶ Scheme.strictHenselizationRing x) (_ : Scheme.strictHenselizationPointEvaluation (x ≫ f) = (Scheme.strictHenselizationPointEvaluation x).comp a.hom) (ha : Spec.map a ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) = Scheme.strictHenselizationStructuralMap x ≫ f) : IsIso ((Scheme.pointSmallEtale x).sheafFiber.map α) ↔ Function.Bijective (cohomologyMap (pullback.map (Scheme.strictHenselizationStructuralMap x ≫ f) g (Scheme.strictHenselizationStructuralMap (x ≫ f)) g (Spec.map a) (𝟙 T) (𝟙 S) ((Category.comp_id _).trans ha.symm) ((Category.comp_id g).trans (Category.id_comp g).symm)) ((upperStar AddCommGrpCat.{u + 1} (pullback.snd (Scheme.strictHenselizationStructuralMap (x ≫ f)) g)).obj F) q)",
+  "statement": "theorem isIso_exchange_stalk_iff_strictLocalCohomology\n    {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)\n    [QuasiCompact g] [QuasiSeparated g]\n    (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)\n    (α : (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      (((g)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus ⋙\n        (f)^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus).obj\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ⟶\n      (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      (((pullback.snd f g)^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus ⋙\n        (pullback.fst f g)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus).obj\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))\n    (hα : α = (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n      ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}\n        (IsPullback.of_hasPullback f g).toCommSq.flip).app\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (x : Spec (.of Ω) ⟶ X)\n    (a : Scheme.strictHenselizationRing (x ≫ f) ⟶ Scheme.strictHenselizationRing x)\n    (heval : Scheme.strictHenselizationPointEvaluation (x ≫ f) =\n      (Scheme.strictHenselizationPointEvaluation x).comp a.hom)\n    (ha : Spec.map a ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) =\n      Scheme.strictHenselizationStructuralMap x ≫ f) :\n    IsIso ((Scheme.pointSmallEtale x).sheafFiber.map α) ↔\n      Function.Bijective (cohomologyMap\n        (pullback.map (Scheme.strictHenselizationStructuralMap x ≫ f) g\n          (Scheme.strictHenselizationStructuralMap (x ≫ f)) g\n          (Spec.map a) (𝟙 T) (𝟙 S)\n          ((Category.comp_id _).trans ha.symm)\n          ((Category.comp_id g).trans (Category.id_comp g).symm))\n        ((upperStar AddCommGrpCat.{u + 1}\n          (pullback.snd (Scheme.strictHenselizationStructuralMap (x ≫ f)) g)).obj F) q)",
   "branch": "sheaf-dag",
   "by": "A7",
-  "date": "2026-10-18"
+  "date": "2026-10-18",
+  "note": "Correct the unintended arbitrary-arrow quantifier: hα requires α to equal canonical degree-q exchange, as the node and Stacks 0EZU already require. Both existing Lean calls specialize α to this map definitionally."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -106,14 +131,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A7",
+  "reviewer": "C-9fd3f",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261018T071132-L-1662921",
+  "landing": "20261025T101238-L-3675252",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered isIso_exchange_stalk_iff_strictLocalCohomology (+hα canonical exchange) against node lem-weil-pbc-exchange-strict-local-cohomology-stalk-criterion, Stacks 0EZU, the change record and the published ExchangeStrictLocalCohomology; compiled item+adapted+IndEtaleQcqsDirectImageBaseChange+axioms (no sorryAx)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

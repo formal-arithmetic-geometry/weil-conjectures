@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-rank-one-opposite-borel-intersection",
+ "kind": "statement",
+ "title": "The two rank-one Borels intersect scheme-theoretically in the torus",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Let $G$ be reductive and $T\\subseteq G$ a maximal torus, as in [def-sfb-reductive-torus-centralizer-terminology]. Let $R(G)$ be the largest smooth connected solvable normal subgroup, where solvable means that successive scheme-theoretic commutator subgroup schemes eventually become trivial. Assume every maximal torus of the represented fppf quotient $G/R(G)$ [lem-sfb-affine-normal-quotient-geometry] has dimension one [def-kun-topological-krull-dimension]. There are exactly two Borel subgroups $B^+,B^-\\supseteq T$ [def-sfb-borel-subgroup-scheme], and their scheme-theoretic intersection is $T$: for every commutative $F$-algebra $A$, $B^+(A)\\cap B^-(A)=T(A)$ inside $G(A)$. This includes nonreduced $A$ and characteristic two.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.16 (a) implies (b), Proposition 20.18 and Lemma 20.21, printed pp.412--415."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-borel-subgroup-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=R(G)$. The algebraically closed field $F$ is perfect (every irreducible polynomial has degree one). Apply [lem-sfb-perfect-solvable-unipotent-torus] to $R$: its smooth connected unipotent subgroup $R_u$ is normal in $G$, hence trivial by reductivity. Thus $R$ is a torus. Conjugation by $G$ on $R$ is trivial by [lem-sfb-connected-action-torus-rigidity], so $R$ is central. Let $q:G\\to Q=G/R$ be [lem-sfb-affine-normal-quotient-geometry]; it is faithfully flat and finitely presented, with kernel $R$, and $Q$ is smooth and connected. The group $Q$ is semisimple: if $N\\subseteq Q$ is smooth connected normal solvable, its inverse image is smooth connected normal by that quotient node. It is solvable because a derived series for $N$ lifts to a series ending in the commutative $R$, and the next commutator kills $R$. By maximality of $R$ the inverse image is $R$, hence $N=1$. By [lem-sfb-smooth-unipotent-solvable], every smooth connected normal unipotent subgroup of $Q$ is solvable and therefore trivial; $Q$ is reductive. Now [lem-sfb-reductive-semisimple-rank-formula] gives $R\\subseteq T$ and a maximal torus $S=T/R\\subseteq Q$, of dimension one by the assumed dimension of every maximal torus of $G/R(G)$. The subgroup correspondence in [lem-sfb-affine-normal-quotient-geometry] identifies $q(T)$ with $S$ and gives $q^{-1}(S)=T$ scheme-theoretically.",
+   "uses": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-connected-action-torus-rigidity",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-reductive-semisimple-rank-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.62(b),(d), pp.372--373; Proposition 17.20, pp.357--358; Theorem 5.55, p.113."
+   }
+  },
+  {
+   "text": "The maps $B\\mapsto q(B)$ and $D\\mapsto q^{-1}(D)$ give inverse bijections between Borels of $G$ containing $T$ and Borels of $Q$ containing $S$. Here are the details. For $B\\supseteq T$, its image is Borel by [lem-sfb-quotient-borel-torus-images], and $q^{-1}(q(B))=B$ by the subgroup correspondence because $R\\subseteq B$. Conversely let $D\\supseteq S$ be Borel. By [lem-sfb-affine-normal-quotient-geometry], $P=q^{-1}(D)$ is smooth and connected, since both $R$ and $D$ are. It is solvable: a derived series for $D$ pulls back to a series ending in $R$, and one further commutator kills the commutative group $R$. Choose a maximal smooth connected solvable overgroup $B$ of $P$: a maximal dimension exists, and the strict dimension inequality in [lem-sfb-solvable-normal-subgroup-products] makes it maximal under inclusion. Thus $B$ is Borel. Its image is a Borel containing $D$, hence equals $D$. As $R\\subseteq P\\subseteq B$, the subgroup correspondence gives $B=q^{-1}(D)=P$. These arguments also show that containing $S$ corresponds exactly to containing $T$.",
+   "uses": [
+    "lem-sfb-quotient-borel-torus-images",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, pp.357--358; Theorem 5.55, p.113; inverse-image argument for a smooth central torus."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-semisimple-rank-one-tangent-dimension] to $(Q,S)$: choose $\\lambda:\\mathbf G_m\\simeq S$, and write $\\mathfrak q=T_eQ$, of dimension three. Regard $\\lambda$ as a cocharacter of $Q$. By [lem-sfb-reductive-torus-self-centralizer], its centralizer is $S$. Define $P_\\pm=P_{\\pm\\lambda}$ and $U_\\pm=U_{\\pm\\lambda}$ using [lem-sfb-cocharacter-limit-smooth-structure]. These groups are smooth connected, $U_\\pm$ are normal unipotent in $P_\\pm$, $P_\\pm=U_\\pm\\rtimes S$, and\n$$\\mathfrak q=\\operatorname{Lie}(U_-)\\oplus\\operatorname{Lie}(S)\\oplus\\operatorname{Lie}(U_+).$$\nThe middle summand has dimension one: in $\\mathbf G_m(F[\\epsilon]/\\epsilon^2)$ the elements based at $1$ are exactly $1+a\\epsilon$. Neither outside summand is zero. For example, if $\\operatorname{Lie}(U_-)=0$, then $\\operatorname{Lie}(P_+)=\\mathfrak q$, so [lem-sfb-smooth-subgroup-tangent-generation] gives $P_+=Q$. Reductivity now kills its smooth connected normal unipotent subgroup $U_+$, whence $Q=S$ by the semidirect decomposition, contradicting dimensions three and one. The other sign is identical. Consequently both outside summands have dimension one, and both $P_\\pm$ have tangent dimension two.",
+   "uses": [
+    "lem-sfb-semisimple-rank-one-tangent-dimension",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 20.20, first proof paragraph, p.415; Theorem 13.33(a)--(c),(e), pp.265--266; Proposition 17.61(a), p.372."
+   }
+  },
+  {
+   "text": "Both $P_\\pm$ are solvable. Indeed [lem-sfb-smooth-unipotent-solvable] makes $U_\\pm$ solvable, and in $P_\\pm=U_\\pm\\rtimes S$ the quotient $S$ is commutative, so the first commutator is contained in $U_\\pm$ and its derived series then terminates. Let $K$ be any smooth connected solvable closed subgroup of $Q$ containing $P_+$. Closed immersions inject tangent spaces, so its tangent dimension is two or three. In the first case [lem-sfb-smooth-subgroup-tangent-generation], applied inside $K$ to $P_+$, gives $K=P_+$. In the second case the same statement inside $Q$ gives $K=Q$, impossible: a nontrivial semisimple group cannot itself be solvable. Thus $P_+$ is Borel, and the same proof applies to $P_-$. They are distinct because their tangent spaces contain respectively the nonzero positive and negative summands of step 3. Both contain $S$ by their semidirect decompositions [lem-sfb-cocharacter-limit-smooth-structure].",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-smooth-subgroup-tangent-generation",
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 20.20, first proof paragraph, p.415; Theorem 13.33, pp.265--266."
+   }
+  },
+  {
+   "text": "There are at most two Borels of $Q$ containing $S$. By [lem-sfb-torus-normalizer-borel-transitivity], any such Borel is $nP_+n^{-1}$ for some $n\\in N_Q(S)(F)$. Conjugation defines a homomorphism from this normalizer group to $\\operatorname{Aut}_{F\\text{-grp}}(S)$. Its kernel is $C_Q(S)(F)=S(F)$ by [lem-sfb-reductive-torus-self-centralizer]; equality on group schemes follows from the definition of centralizing, not from a test on $F$-points alone. By the character equivalence of [lem-sfb-multiplicative-character-antiduality] and $S\\simeq\\mathbf G_m$, its automorphism group is $\\operatorname{Aut}(\\mathbf Z)=\\{1,-1\\}$. Thus $N_Q(S)(F)/S(F)$ has at most two elements. Conjugation by $S(F)\\subseteq P_+(F)$ fixes $P_+$, so its normalizer orbit has at most two Borels. Step 4 already supplies two distinct ones, hence they are exactly $P_+$ and $P_-$. The two automorphisms of $\\mathbf G_m$ remain distinct in characteristic two, since their characters are the different integers $1$ and $-1$.",
+   "uses": [
+    "lem-sfb-torus-normalizer-borel-transitivity",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (a) implies (b), p.412; Corollary 17.11, p.355; Theorem 12.9, pp.233--234."
+   }
+  },
+  {
+   "text": "Compute the intersection on an arbitrary commutative $F$-algebra $A$. For $x\\in P_+(A)\\cap P_-(A)$, let $c_x(t)=\\lambda(t)x\\lambda(t)^{-1}$, a morphism $\\mathbf G_{m,A}\\to Q_A$. By the defining limit conditions in [lem-sfb-cocharacter-limit-smooth-structure], $c_x(t)$ extends across $t=0$ and $c_x(t^{-1})$ extends across $t^{-1}=0$. For every affine coordinate $f\\in F[Q]$, the Laurent polynomial $c_x^*(f)\\in A[t,t^{-1}]$ therefore belongs to both $A[t]$ and $A[t^{-1}]$. Uniqueness of the coefficients in a finite Laurent sum gives $A[t]\\cap A[t^{-1}]=A$, even with nilpotents in $A$. Hence every coordinate of $c_x$ is constant; evaluation at $t=1$ shows that $c_x$ is the constant morphism $x$. After every $A$-algebra extension and evaluation at any unit, $x$ therefore commutes with $\\lambda(\\mathbf G_m)$. Thus $x\\in C_Q(S)(A)=S(A)$ by [lem-sfb-reductive-torus-self-centralizer]. The reverse inclusion follows from the constant orbit of every element of the commutative torus $S$. This proves $P_+(A)\\cap P_-(A)=S(A)$ for every $A$.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definitions 13.21, 13.27 and 13.29, pp.261--264; limit-subgroup argument giving Lemma 20.21, p.415."
+   }
+  },
+  {
+   "text": "Let $B^+=q^{-1}(P_+)$ and $B^-=q^{-1}(P_-)$. Step 2 and step 5 show that these are exactly the two Borels of $G$ containing $T$. For every commutative $F$-algebra $A$, inverse images commute with intersections, so\n$$B^+(A)\\cap B^-(A)=\\{g\\in G(A):q(g)\\in S(A)\\}=T(A).$$\nThe last equality is $q^{-1}(S)=T$ from the subgroup correspondence of [lem-sfb-affine-normal-quotient-geometry], as applied in step 1. Equality on all test algebras is equality of the closed subgroup schemes. The calculation of step 6 made no reducedness assumption and used integer exponents, so it covers nonreduced algebras and characteristic two.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, pp.357--358; Lemma 20.21, p.415; Theorem 5.55, p.113."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-connected-action-torus-rigidity",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-reductive-semisimple-rank-formula",
+  "lem-sfb-quotient-borel-torus-images",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-semisimple-rank-one-tangent-dimension",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-torus-normalizer-borel-transitivity",
+  "lem-sfb-multiplicative-character-antiduality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Adaptation of Theorem 20.16 (a) implies (b), p.412, and Lemma 20.20, pp.414--415, using Theorem 13.33 to compute the intersection by the two limit conditions instead of the finite-subgroup argument in Proposition 20.18."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Borel.*[Ii]nter|[Ii]nter.*Borel|[Oo]pposite.*[Tt]orus",
+   "results": "{\"t\": \"2026-10-23T21:50:00Z\", \"tool\": \"grep\", \"query\": \"Borel.*[Ii]nter|[Ii]nter.*Borel|[Oo]pposite.*[Tt]orus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Borel Lie subalgebras and abstract subgroup intersections do not give scheme-theoretic Borel intersections in reductive algebraic groups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In rank one a maximal torus is contained in exactly two Borel subgroups and their intersection has no infinitesimal unipotent part",
+   "results": "{\"t\": \"2026-10-23T21:50:00Z\", \"tool\": \"leansearch\", \"query\": \"In rank one a maximal torus is contained in exactly two Borel subgroups and their intersection has no infinitesimal unipotent part\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.rank_eq_one_iff\", \"Subalgebra.bot_eq_top_of_rank_eq_one\", \"Subalgebra.bot_eq_top_of_finrank_eq_one\", \"Valuation.RankOne.noConfusionType\", \"Subfield.relrank_eq_one_of_le\", \"Subalgebra.LinearDisjoint.rank_inf_eq_one_of_commute_of_flat_right_of_inj\", \"Valuation.RankOne.rankLeOneStruct\", \"IntermediateField.rank_adjoin_eq_one_iff\"], \"digest\": \"e92fb025e576a13c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Borel Lie subalgebras and abstract subgroup intersections do not give scheme-theoretic Borel intersections in reductive algebraic groups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\"",
+   "results": "{\"t\": \"2026-10-23T21:50:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis.borelLower\", \"LieAlgebra.Basis.borelUpper\", \"LieAlgebra.Basis.iSup_cartan_borelLower_borelUpper_eq_top\", \"LieAlgebra.Basis.borelUpper_eq\", \"LieAlgebra.Basis.borelUpper_le_biSup\", \"LieAlgebra.Basis.borelLower_eq\", \"LieAlgebra.Basis.borelLower_le_biSup\", \"Mathlib.Tactic.Borelize.tacticBorelize___\"], \"digest\": \"f6a7c18a77802c4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Borel Lie subalgebras and abstract subgroup intersections do not give scheme-theoretic Borel intersections in reductive algebraic groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two opposite Borel subgroups in a split reductive group of semisimple rank one intersect scheme theoretically in their common maximal torus, in every characteristic",
+   "results": "{\"t\": \"2026-10-23T21:50:01Z\", \"tool\": \"leanfinder\", \"query\": \"Two opposite Borel subgroups in a split reductive group of semisimple rank one intersect scheme theoretically in their common maximal torus, in every characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"LieAlgebra.IsKilling.iInf_ker_weight_eq_bot\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"AddSubgroup.inertia_map_subtype\", \"MonoidHom.ker_transferSylow_isComplement'\"], \"digest\": \"57f8980aa114c4aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Borel Lie subalgebras and abstract subgroup intersections do not give scheme-theoretic Borel intersections in reductive algebraic groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic intersection of the two Borel subgroups containing a maximal torus in semisimple rank one equals the torus over arbitrary test algebras",
+   "results": "{\"t\": \"2026-10-23T22:28:22Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme theoretic intersection of the two Borel subgroups containing a maximal torus in semisimple rank one equals the torus over arbitrary test algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"LieAlgebra.zeroRootSubalgebra_eq_of_is_cartan\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\"], \"digest\": \"2f4f77589b2c7440\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Borels, root-pairing constructions, abstract subgroup intersections and measure-theoretic Borels do not state this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"borel\"",
+   "results": "{\"t\": \"2026-10-23T22:29:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis.borelLower\", \"LieAlgebra.Basis.borelUpper\", \"LieAlgebra.Basis.iSup_cartan_borelLower_borelUpper_eq_top\", \"LieAlgebra.Basis.borelUpper_eq\", \"LieAlgebra.Basis.borelUpper_le_biSup\", \"LieAlgebra.Basis.borelLower_eq\", \"LieAlgebra.Basis.borelLower_le_biSup\", \"Mathlib.Tactic.Borelize.tacticBorelize___\"], \"digest\": \"f6a7c18a77802c4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Borels, root-pairing constructions, abstract subgroup intersections and measure-theoretic Borels do not state this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*[Ii]nter|[Ii]nter.*Borel|[Oo]pposite.*[Tt]orus",
+   "results": "{\"t\": \"2026-10-23T22:29:07Z\", \"tool\": \"grep\", \"query\": \"Borel.*[Ii]nter|[Ii]nter.*Borel|[Oo]pposite.*[Tt]orus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Probability/Kernel/Disintegration/Unique.lean\", \"Mathlib/Probability/Kernel/Disintegration/CDFToKernel.lean\", \"Mathlib/MeasureTheory/Group/Measure.lean\", \"Mathlib/MeasureTheory/Constructions/BorelSpace/Real.lean\", \"Mathlib/MeasureTheory/Constructions/Polish/Basic.lean\", \"Mathlib/MeasureTheory/Constructions/BorelSpace/Order.lean\", \"Mathlib/MeasureTheory/Constructions/BorelSpace/Order.lean\", \"Mathlib/MeasureTheory/Constructions/BorelSpace/Order.lean\"], \"digest\": \"3589d47e2cae5347\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Borels, root-pairing constructions, abstract subgroup intersections and measure-theoretic Borels do not state this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A one dimensional maximal torus in a reductive group is contained in exactly two Borel subgroups whose scheme theoretic intersection is the maximal torus",
+   "results": "{\"t\": \"2026-10-23T22:29:07Z\", \"tool\": \"leansearch\", \"query\": \"A one dimensional maximal torus in a reductive group is contained in exactly two Borel subgroups whose scheme theoretic intersection is the maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IsBlock.of_subsingleton\", \"Subgroup.inf_subgroupOf_inf_normal_of_right\", \"Subgroup.top_subgroupOf\", \"MulArchimedeanClass.closedBallSubgroup_top\", \"frattini_le_coatom\", \"Subgroup.instFiniteIndexMin\", \"OpenSubgroup.mem_inf\", \"OpenSubgroup.instInfOpenSubgroup\"], \"digest\": \"864610b9a6d5d7ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Borels, root-pairing constructions, abstract subgroup intersections and measure-theoretic Borels do not state this algebraic-group-scheme assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-one-adjoint-projective-linear",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Theorem 20.16 (a) implies (b), Proposition 20.18 and Lemma 20.21, printed pp.412--415.",
+   "via": [
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-one-opposite-borel-intersection",
+  "worker": "stage1",
+  "summary": "Reduced by the smooth central radical and proved the Borel correspondence explicitly. One new numerical semisimple-rank-one input supplies the multiplicative torus parameter and three-dimensional tangent space. Limit subgroups are shown to be the two Borels using tangent generation, solvability and the normalizer action; Laurent coefficients prove their intersection on every test algebra. Statement and hypotheses unchanged. Searches and every cited statement were read. The first dry run exposed a cycle through the existing radical-quotient node; its citation was removed and its needed conclusions assembled from the earlier solvable-group structure and connected torus-action rigidity, with the quotient semisimplicity argument written out.",
+  "blueprint": "Preserves the inherited null nearest-blueprint ancestor and via chain returned by blueprint_refs.py ancestor. Realizes the rank-one-opposite-Borel supporting input identified in the inherited from.place for det-thm-sf-ctf-stability-direct-images proof (3), through the rank-one adjoint/PGL and moduli/alteration prerequisites. Whole imported/current-blueprint searches found no equivalent statement. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-db27b0be0",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-db27b0be0 (reviewer sub-agent of L); spot-checked: I read the item's 7 steps, the new node and every cited statement in full, and checked the source in Milne iAG pp.412-415 (20.15, 20.16, 20.17, 20.18, 20.20, 20.21). The item statement is identical to live, and the item is still unsplit in live/side-live, so no other group has superseded it. No closure of any cited node reaches the item or its parents (no cycle). All cited lemmas are in the item's own unit sk-thm-sf-ctf-stability, and no SGA is cited. Steps: (1) the radical is a central torus by perfect-solvable-unipotent-torus (normal in G) and torus rigidity; Q=G/R is semisimple by maximality of R and reductive by unipotent=>solvable; the rank formula gives S=T/R maximal and q^{-1}(S)=T. (2) Both directions of the Borel correspondence are checked via the image theorem, the inverse-image smoothness clause and the strict dimension inequality. (3) The cocharacter weight decomposition with tangent generation forces both outside summands to be nonzero, so the dimensions are 1+1+1. (4) P_+ and P_- are solvable and maximal by tangent dimension 2 vs 3, and they are distinct. (5) Normalizer transitivity, the centralizer kernel and Aut(G_m)={±1} from antiduality give at most two Borels containing S. (6) A[t]∩A[t^{-1}]=A gives P_+∩P_-=Z_λ=S on every test algebra, including nonreduced ones; the elementary flag is justified. (7) The preimage computation is correct. Small cases tested: SL2 and PGL2 in characteristic 2, SL2 over F[ε], and G_m×SL2. The new node lem-sfb-semisimple-rank-one-tangent-dimension is true (only SL2 and PGL2 occur, both of dimension 3). It is self-contained with definitions cited, matches Milne 20.20 p.415 paragraph 1, and restates no clause of the item. No existing node states dim=3 (rank-one-flag-curve gives dim G/B=1; the classification and adjoint nodes cite the item). Maintainer note: a future split of this node must avoid the item and its ancestors and go via the flag curve (Weyl bound only) plus a finite-kernel PGL2 action. Batch-5: all 9 flagged citations are generic algebraic-group structure nodes whose trace-formula-chapter reach is only through descent, algebraic-space, fppf base change, smooth-fibre-criterion and torus/lattice foundations, not the trace formula or Poincaré duality or a step of their proofs. They are outside the assumptions, so no change is needed. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RankOneOppositeBorelIntersection",
+  "declaration": "AlgebraicGeometry.rank_one_opposite_borel_intersection",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RankOneOppositeBorelIntersection.lean",
+  "statement": "theorem rank_one_opposite_borel_intersection {F : Type u} [Field F] [IsAlgClosed F] (G T R Q : Grp (Over (Spec (.of F)))) (i : T ⟶ G) (r : R ⟶ G) (q : G ⟶ Q) (hG : ReductiveTorusCentralizer.IsReductive G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) (hR : SolvableGroupStructure.IsAlgebraic R) (hQ : SolvableGroupStructure.IsAlgebraic Q) (hr : IsClosedSubgroupScheme r.hom.hom) (hrn : IsNormalSubgroupScheme r.hom.hom) (hRs : Smooth R.X.hom) (hRc : ConnectedSpace R.X.left) (hRsol : IsSolvableGroupScheme R.X) (hRmax : ∀ (N : Grp (Over (Spec (.of F)))) (n : N ⟶ G), IsClosedSubgroupScheme n.hom.hom → IsNormalSubgroupScheme n.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → IsSolvableGroupScheme N.X → ∃ f : N ⟶ R, f ≫ r = n) (hq : IsFppfGroupQuotient r q) (hrank : ∀ (S : Grp (Over (Spec (.of F)))) (s : S ⟶ Q), ReductiveTorusCentralizer.IsMaximalTorus s → topologicalKrullDim S.X.left = 1) : ∃ (Bplus Bminus : Grp (Over (Spec (.of F)))) (bplus : Bplus ⟶ G) (bminus : Bminus ⟶ G), IsBorelGroupScheme bplus.hom.hom ∧ IsBorelGroupScheme bminus.hom.hom ∧ (∃ tplus : T ⟶ Bplus, tplus ≫ bplus = i) ∧ (∃ tminus : T ⟶ Bminus, tminus ≫ bminus = i) ∧ (¬ ∃ e : Bplus ≅ Bminus, e.hom ≫ bminus = bplus) ∧ (∀ (B : Grp (Over (Spec (.of F)))) (b : B ⟶ G), IsBorelGroupScheme b.hom.hom → (∃ t : T ⟶ B, t ≫ b = i) → (∃ e : B ≅ Bplus, e.hom ≫ bplus = b) ∨ (∃ e : B ≅ Bminus, e.hom ≫ bminus = b)) ∧ ∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun x : StandardGroupSchemes.affine F A ⟶ Bplus.X ↦ x ≫ bplus.hom.hom) ∩ Set.range (fun x : StandardGroupSchemes.affine F A ⟶ Bminus.X ↦ x ≫ bminus.hom.hom) = Set.range (fun x : StandardGroupSchemes.affine F A ⟶ T.X ↦ x ≫ i.hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e455a6126",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Item JSON differs from live only in lean; statement verbatim; sorry-only, no defs; docstrings carry the source and blueprint and all 7 steps; report has the Worker report and Second reading by Q22 sections. Clause check vs Milne 20.16/20.18/20.21: IsAlgClosed F; IsReductive G; IsMaximalTorus i; R(G) via closed+normal+smooth+connected+IsSolvableGroupScheme+largest-by-factorization; Q via the actual IsFppfGroupQuotient; hR/hQ follow from the others; hrank over every maximal torus of Q with topologicalKrullDim=1; conclusion gives two Borels containing T, distinct as embedded subgroups, exhaustive, and B+(A)∩B-(A)=T(A) as Set.range equality for all A:Type u (nilpotents, zero algebra, char 2 included). Edge cases torus G, F[eps], SL2/PGL2, central torus factor OK. Not a duplicate of HasSemisimpleRankOne (different quotient predicate, not cited). Maintainer note: theorem stmt_dep lem-sfb-affine-normal-quotient-geometry for IsFppfGroupQuotient was in the base stage-1 node, not added (no mechanical finding; H2 forbids removal); swap to def-sfb-fppf-group-quotient-presentation in maintenance. No compile needed (no change); worker compile 1.8 s clean and dry run OK."
+ }
+}

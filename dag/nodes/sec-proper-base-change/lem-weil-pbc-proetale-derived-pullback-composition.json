@@ -27,56 +27,48 @@
  ],
  "proof": [
   {
-   "text": "First construct the ordinary module comparison. By [def-weil-pbc-proetale-operations], each module pullback is left adjoint to its module direct image. On a pro-etale object T over V the direct images of an R_Z-module M have values M(Z×_V T) and M(Z×_W(W×_V T)). The canonical fibre-product isomorphism sends (z,(w,t)) to (z,t), and its inverse inserts h(z); the maps commute with arrows of T. The compatible coefficient identifications in the hypothesis give the same R_V action on these sections, since their structure maps are the adjuncts of the same composite coefficient map. Thus there is a natural module-direct-image isomorphism (kh)_*≅k_*h_*. Form the composite module adjunction using [def-weil-pbc-composite-adjunction] and apply [lem-weil-pbc-conjugate-iso-unit-equation] to obtain the canonical natural module isomorphism a:(kh)^*≅h^*k^*. This is the ordinary module pullback comparison: its adjunct carries the single pullback unit to the two successive units. Write c_h:h^{-1}R_W→R_Z for the given coefficient identification. In the inverse-image/tensor presentations it sends m⊗r to (m⊗1)⊗r, and the inverse sends (m⊗s)⊗r to m⊗c_h(h^{-1}s)r, after the canonical inverse-image identification. The inverse after the forward map sends m⊗r to m⊗r because c_h(1)=1. The forward after the inverse sends (m⊗s)⊗r to (m⊗1)⊗c_h(h^{-1}s)r=(m⊗s)⊗r by balancing over h^{-1}R_W. Both maps are balanced over the other coefficient ring because the composite coefficient map is c_h composed with h^{-1}c_k under the inverse-image identification. They commute with restrictions and module maps; these calculations identify the adjunction comparison with the stated canonical termwise map.",
+   "text": "Choose the canonical module adjunctions supplied by def-weil-pbc-proetale-operations. Their existsUnique normalization theorem, evaluated at the identity map and then at the model pullback unit, proves the required sectionwise tensor-unit normalization. Apply lem-sf-proetale-tensor-composition-unit to obtain the module direct-image pasting isomorphism. Invert it; its section formula follows by applying restriction along the inverse pasting map to its given section equation and cancelling the two inverse maps. Define a as its inverse image under conjugateIsoEquiv for the composite and single module adjunctions. The equivalence inverse identity proves the conjugation equation.",
    "uses": [
     "def-weil-pbc-proetale-operations",
+    "lem-sf-proetale-tensor-composition-unit",
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0D6D final identity; Modules on Sites Lemma 03D8 (lemma-push-pull-composition-modules)"
-   }
+   "elementary": false
   },
   {
-   "text": "In the identified-coefficient case of the item, all three module pullbacks are exact and their derived functors are induced by applying them termwise, as explicitly specified in [def-weil-pbc-proetale-operations]. Their termwise functors therefore invert quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property] (2) to the natural isomorphism a of step 1, composed with localization to D(R_Z). It descends to a unique natural isomorphism c_{h,k}:L(kh)^*≅Lh^*Lk^*. The endpoint identifications are those of the derived operations: the latter composite applied to a complex is the class of h^*k^* of that complex. This establishes naturality on all derived morphisms, including inverses of quasi-isomorphisms, rather than merely on chosen resolutions.",
+   "text": "Apply NatIso.mapHomologicalComplex to a and the canonical comparison for the composite of additive functors to obtain b; its degree component is exactly a. The exact module pullbacks have the published derived factorization isomorphisms on every complex. Descend a with Functor.mapDerivedCategoryNatIso, then compose with Functor.mapDerivedCategoryCompIso. These proved source-library APIs implement the quasi-isomorphism localization universal property. The equations mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_hom_app_factors give the required representative formula on every complex. The termwise map of a agrees with b by homological-complex extensionality, so no resolution choice is needed.",
    "uses": [
     "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-localization-universal-property"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0D6D; derived functor construction of Lemma 06YY"
-   }
+   "elementary": false
   },
   {
-   "text": "For any complex representing an input derived object choose a quasi-isomorphism P→K from a K-flat complex with flat terms by [lem-pc-kflat-resolution], applied to the small site V_proet and the commutative ring sheaf R_V. The computation clause of [def-weil-pbc-proetale-operations] identifies Lk^*K with k^*P and L(kh)^*K with (kh)^*P. Apply [lem-weil-pbc-ringed-pullback-preserves-kflat] to k, using its specified ring isomorphism as the ring map: k^*P is K-flat with flat terms over R_W. Hence it also computes Lh^*Lk^*K. The component of the descended comparison from step 2, under these identifications, is exactly the class of the termwise comparison (kh)^*P≅h^*k^*P. For an input already K-flat with flat terms take the identity resolution; this gives precisely the normalization asserted in the item. No boundedness, properness, or flatness of a scheme morphism has been used.",
+   "text": "Apply lem-sp-proetale-algebraic-inverse-image to k and R_V. Its module-functor equality identifies the existing pullback object and map formulas with the tensor extension of that algebraic inverse image. The finite-limit preservation clause of det-pe-topos-functoriality-inverse-image supplies the geometric-morphism hypothesis on the specified set inverse image. Apply lem-weil-pbc-ringed-pullback-preserves-kflat with these formulas and c_k.hom. It gives K-flatness and flatness of all terms of the pulled-back complex. Combine these two conclusions with the localization equation from the preceding step. The argument does not choose a K-flat resolution: exact termwise descent already supplies the comparison on every complex.",
    "uses": [
-    "lem-pc-kflat-resolution",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
     "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "det-pe-topos-functoriality-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0D6D proof; Lemmas 06YS, 06YY, 0G7E"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proetale-operations",
+  "lem-sf-proetale-tensor-composition-unit",
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-localization-universal-property",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+  "lem-sp-proetale-algebraic-inverse-image",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "det-pe-topos-functoriality-inverse-image"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 0D6D"
+  "place": "Lemma 0D6D; reuse of the proved tensor-composition comparison and exact termwise localization"
  },
  "mathlib_searches": [
   {
@@ -137,7 +129,18 @@
   "item": "def-weil-pbc-ambient-ringed-exchange",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -153,9 +156,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-kflat-resolution"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -190,17 +191,13 @@
   "note": "Wrote review.md. Checked both immutable modules, all eight statement dependencies, sources, canonical reductions, associativity, universes, edge cases, docstrings, and verbatim signatures. Both modules passed scompile.py with no diagnostics. No fixes needed; branch unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "N4",
+  "reviewer": "COMPILER",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261018T135209-L-2847375",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.integralFinitePullbackModel_existsUnique"
-  ],
-  "sorry_after": []
+  "landing": "20261024T191459-L-397006",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

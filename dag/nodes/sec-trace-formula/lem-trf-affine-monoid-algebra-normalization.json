@@ -45,35 +45,17 @@
    }
   },
   {
-   "text": "The finite generators of $P$ generate $G$ as a group. Since $G$ is torsion free, [lem-trf-fg-torsionfree-group-free] gives a finite basis $u_1,\\ldots,u_r$ of $G$. Put $B_0=k$ and $B_i=B_{i-1}[X_i]$ for $1\\leq i\\leq r$. The field $k$ is a normal domain: its fraction field is itself. Inductively [lem-weil-pbc-polynomial-ring-normal-domain] says that $B_i$ is a normal domain whenever $B_{i-1}$ is one. Hence $B=B_r=k[X_1,\\ldots,X_r]$ is a normal domain, including $B=k$ when $r=0$.",
+   "text": "The finite generators of $P$ generate $G$ as a group, and $G$ is torsion free by hypothesis. By [lem-trf-fg-torsionfree-group-free], choose a finite basis $u_1,\\ldots,u_r$. Put $H=\\sum_i\\mathbf N u_i$ and $C=k[H]$. By [lem-trf-basis-cone-polynomial-normal], $C$ is a normal domain, identified with the iterated polynomial ring by $X_i\\mapsto e^{u_i}$. By [lem-trf-basis-cone-group-localization], $\\theta:S^{-1}C\\simeq k[G]$ for the basis monomials $S$, with $0\\notin S$ and the explicit positive/negative-coordinate inverse. Apply [lem-weil-pbc-localization-normal-domain] to $C,S$: $S^{-1}C$ is a normal domain. The ring isomorphism $\\theta$ transports this, so $k[G]$ is a normal domain, i.e. integrally closed in $\\operatorname{Frac}(k[G])=K$. Thus every element of $K$ satisfying a monic equation over $k[G]$ lies in $k[G]$, also when $r=0$.",
    "uses": [
     "lem-trf-fg-torsionfree-group-free",
-    "lem-weil-pbc-polynomial-ring-normal-domain"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 030A, lemma-polynomial-domain-normal, iterated r times; finite-basis input is the existing Mathlib leaf lem-trf-fg-torsionfree-group-free."
-   }
-  },
-  {
-   "text": "Let $S=\\{X_1^{b_1}\\cdots X_r^{b_r}:b_i\\in\\mathbf N\\}\\subset B$. Since $B$ is a domain and these monomials are nonzero, $0\\notin S$. The map $X_i\\mapsto e^{u_i}$ defines $B\\to k[G]$; the elements of $S$ map to units, with $(e^{u_i})^{-1}=e^{-u_i}$, so it extends to $\\theta:S^{-1}B\\to k[G]$. Define its inverse on the monomial basis by $e^{\\sum_i n_i u_i}\\mapsto\\prod_iX_i^{n_i^+}/\\prod_iX_i^{n_i^-}$, where $n_i^+=\\max(n_i,0)$ and $n_i^-=\\max(-n_i,0)$, and extend $k$-linearly. The unique basis coordinates make this well defined; multiplying fractions adds the exponent vectors, so this is a ring map. Both composites fix the coefficients, all $X_i$ and $X_i^{-1}$, respectively every $e^g$, and hence are identities. Thus $k[G]\\simeq S^{-1}B$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104, identification k[P^gp] with k[Z^n]; explicit monomial maps and inverses."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-localization-normal-domain] to the normal domain $B$ and the multiplicative subset $S$, which does not contain zero. It gives that $S^{-1}B$ is a normal domain. The explicit isomorphism of the previous step therefore shows that $k[G]$ is integrally closed in its fraction field $K$: every $z\\in K$ satisfying a monic polynomial over $k[G]$ lies in $k[G]$. This is the ambient-field assertion needed before discussing support.",
-   "uses": [
+    "lem-trf-basis-cone-polynomial-normal",
+    "lem-trf-basis-cone-group-localization",
     "lem-weil-pbc-localization-normal-domain"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00GY, lemma-localize-normal-domain (lines 8048--8062): any localization of a normal domain is normal; Tag 0309, definition-domain-normal."
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII Lemma 3.2.12 proof, p.104; normal polynomial basis-cone algebra and explicit lattice localization; Stacks Tag 00GY, algebra.tex, lemma-localize-normal-domain."
    }
   },
   {
@@ -88,7 +70,7 @@
    }
   },
   {
-   "text": "Finally let $y\\in K$ be integral over $k[Q]$. Its monic equation also has coefficients in $k[G]$, so Step 6 gives $y\\in k[G]$. By Step 1, $Q$ is finitely generated and saturated, with torsion-free group completion $G$. Apply [lem-trf-saturated-monoid-algebra-normal] to $Q$ and this element $y$ of $k[G]$: its statement gives $y\\in k[Q]$. This proves integral closedness in the full field $K$, rather than only in the group algebra. All arguments allow $r=0$ and negative basis coordinates, so neither the zero-rank case nor monoids with units require an exception.",
+   "text": "Finally let $y\\in K$ be integral over $k[Q]$. Its monic equation also has coefficients in $k[G]$, so Step 4 gives $y\\in k[G]$. By Step 1, $Q$ is finitely generated and saturated, with torsion-free group completion $G$. Apply [lem-trf-saturated-monoid-algebra-normal] to $Q$ and this element $y$ of $k[G]$: its statement gives $y\\in k[Q]$. This proves integral closedness in the full field $K$, rather than only in the group algebra. All arguments allow $r=0$ and negative basis coordinates, so neither the zero-rank case nor monoids with units require an exception.",
    "uses": [
     "lem-trf-saturated-monoid-algebra-normal"
    ],
@@ -104,7 +86,8 @@
   "lem-trf-monoid-algebra-domain-fraction",
   "lem-trf-monomial-integrality",
   "lem-trf-fg-torsionfree-group-free",
-  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-trf-basis-cone-polynomial-normal",
+  "lem-trf-basis-cone-group-localization",
   "lem-weil-pbc-localization-normal-domain",
   "lem-trf-integral-support-saturation",
   "lem-trf-saturated-monoid-algebra-normal"
@@ -174,20 +157,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-affine-monoid-algebra-normalization",
   "worker": "stage1",
-  "summary": "Repair of E4/E5: removed the false inclusion Frac(k[G]) subset k[G]. Proved normality of k[G] in its actual fraction field using the existing finite-basis, polynomial-normality and localization-normality Mathlib leaves, with explicit inverse monomial maps. Applied support only after the monic equation and ambient normality place the integral element in k[G]. Applied the same ambient reduction before the relative normality lemma in the final clause. Reordered finite saturation before its finite-generation hypothesis is used. Item statement and the five retained supporting nodes are unchanged.",
-  "blueprint": "Retains the affine-normalization input for ILO Expose VIII Lemma 3.2.9 in the toric comparison. Steps 1--3 give the finite integral birational inclusion, Steps 4--6 supply ambient-field normality, Step 7 identifies the integral closure by support, and Step 8 proves normality in K.",
+  "summary": "Repair of the human re-split return: added two independent statement-only work items of comparable size, the positive-basis polynomial/normal-domain identification and the lattice localization with explicit signed-exponent inverse. Returned Steps 4--5 are allocated to these nodes; Step 6 remains a short application of the existing localization-normality leaf. All other arguments and the entire parent statement are retained. Full old proof and detailed allocation are preserved in report.md.",
+  "blueprint": "Same historical toric-normalization input to ILO VIII Lemma 3.2.9; the new nodes realize the finite-basis polynomial and Laurent identifications in the inherited proof. Parent Steps 1--3 retain finite integral birational saturation; Step 4 assembles ambient normality; Steps 5--6 retain support and saturated relative-normality arguments. No unit or chapter route change.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-N2-82c6c40fe",
-  "group": "N2",
+  "reviewer": "NT-cc-NS-5a3d86add",
+  "group": "NS",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-82c6c40fe (reviewer sub-agent of L); spot-checked: Reviewed item and all five new nodes, cited DAG statements, unit route, ILO Exposé VIII §3.2.9, and Stacks Tags 030A/00GY. The repaired proof correctly establishes ambient group-algebra normality before applying support, handles edge cases, avoids duplicates/cycles and prohibited routes, and is documented in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-5a3d86add (reviewer sub-agent of L); spot-checked: Re-split note (2026-10-22: at least 2 nodes, assembly of at most 3000 chars, nothing shortened away) is met. The base is identical to live (8 steps 349/368/275/481/745/445/487/565), and the statement, stmt_deps and lean record are unchanged. Old steps 1-3 and 7-8 were already one-citation applications of existing nodes and are kept verbatim. Old step 4's polynomial induction and the identification with the cone algebra became lem-trf-basis-cone-polynomial-normal; old step 5's localization isomorphism and signed n+/n- inverse became lem-trf-basis-cone-group-localization; old step 6 stays as an application of the localization-normal-domain leaf. Both new nodes are true and statement-only, of comparable size, and do not restate the item. I checked r=0, r=1 (k[X]_X = k[X,X^-1]) and Z^2 with a non-standard basis and mixed signs. Sources read: ILO VIII Lemma 3.2.12 proof, printed p.104 (k[P] ⊆ k[P^gp] ≅ k[Z^n]), and Stacks 030A, algebra.tex lemma-polynomial-domain-normal (label checked in tags/tags). Searches of three kinds are recorded, with LeanSearch honestly marked unavailable. An rg -L search of the DAG for monoid/group-algebra with polynomial/normal/localization/Laurent found no duplicate; lem-trf-monoid-algebra-domain-fraction gives only fraction fields. Hypotheses of all 9 cited nodes checked per step. The dropped dep lem-weil-pbc-polynomial-ring-normal-domain still has 9 citers. Same unit, no tool_uses, no SGA. FIX, step 4 text only: restored the torsion-free hypothesis check for lem-trf-fg-torsionfree-group-free, and the step that carries normality from S^{-1}C to k[G] through θ with Frac(k[G]) = K, which the compressed text had skipped. Proof is 2889 chars after the fix.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.RingTheory.AffineMonoidAlgebraNormalization",
@@ -202,18 +185,30 @@
   ],
   "file": "lean/Sheaf/RingTheory/AffineMonoidAlgebraNormalization.lean",
   "statement": "theorem affine_monoid_algebra_normalization (k : Type v) [Field k] (P : Type u) [CommMonoid P] (hP : FineFan.IsFine P) [IsMulTorsionFree (GrothendieckGroup P)] : Function.Injective (normalizationAlgebraMap k P) ∧ Function.Injective (normalizationAmbientMap k P) ∧ Function.Injective (algebraMap (MonoidAlgebra k (GrothendieckGroup P)) (FractionRing (MonoidAlgebra k (GrothendieckGroup P)))) ∧ IsDomain (MonoidAlgebra k P) ∧ IsDomain (MonoidAlgebra k (FineFan.saturation (MonoidHom.mrange (GrothendieckGroup.of (M := P))))) ∧ IsDomain (MonoidAlgebra k (GrothendieckGroup P)) ∧ @IsFractionRing (MonoidAlgebra k P) _ (FractionRing (MonoidAlgebra k (GrothendieckGroup P))) _ (normalizationFractionMap k P).toAlgebra ∧ @IsFractionRing (MonoidAlgebra k (FineFan.saturation (MonoidHom.mrange (GrothendieckGroup.of (M := P))))) _ (FractionRing (MonoidAlgebra k (GrothendieckGroup P))) _ (normalizationSaturatedFractionMap k P).toAlgebra ∧ (∀ x : FractionRing (MonoidAlgebra k (GrothendieckGroup P)), (normalizationFractionMap k P).IsIntegralElem x ↔ x ∈ Set.range (normalizationSaturatedFractionMap k P)) ∧ (normalizationAlgebraMap k P).Finite ∧ (∀ x : FractionRing (MonoidAlgebra k (GrothendieckGroup P)), (normalizationSaturatedFractionMap k P).IsIntegralElem x → x ∈ Set.range (normalizationSaturatedFractionMap k P))",
-  "branch": "newtargets-dag",
-  "by": "Q47",
-  "date": "2026-10-18",
-  "existing": false
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Dependency interface repair under brief-stage2 §1(B): the live source was a legacy non-module file, so a required module-mode consumer could not import it. Add module mode, expose the original declarations and mark signature imports public, keeping proof imports private. All definition bodies, theorem signatures, proof docstrings and sorry proofs are unchanged. This repair is required by the complete-local comparison through characteristic-zero independence and its toric-realization proof import."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-9e4bab89f",
-  "group": "Q47",
-  "result": "pass",
-  "note": "Every node clause matches the Lean. Fine via the recorded FineFan.IsFine, P^sat via the recorded FineFan.saturation of mrange GrothendieckGroup.of, torsion-free via IsMulTorsionFree on the completion. Conclusions: 3 canonical injective embeddings into FractionRing k[G]; 3 IsDomain; 2 IsFractionRing via .toAlgebra of canonical composites; integral closure iff over all of K; RingHom.Finite; integrally closed in K. No extra hypotheses (no sharpness/saturation/rank/char); universes u,v independent; rank-0, units and non-saturated cases covered. Node differs from live only in lean; statement verbatim; 5 helpers are Mathlib mapDomainRingHom/algebraMap compositions with the recorded intoSaturation, no duplicate in side lean, runs/2 or Mathlib. Only sorry is the theorem proof; docstrings carry source, blueprint and all 8 proof steps; lines <=100; imports are the stmt_dep, proof-dep and Mathlib-leaf modules. nt_compile --json clean (4.1 s, exit 0, no warnings). Advisory: proof deps from Q57/Q59/Q54/Q74 now have lean records (absent at the worker's base), so stage 3 should import them; additive/multiplicative presentations differ among proof deps."
+  "reviewer": "NT-stage2-cc-a21433971",
+  "group": "Q92",
+  "result": "fix",
+  "note": "Lean exact against node and ILO VIII 5.5.2 (all hypotheses: regular local + IsAdicComplete + IsSepClosed residue field; ∐ Spec A_i with m=0 allowed; Pair extras implied for affine X; sameScheme/sameAction/sameBoundary keep log structures independent; IsFanInduced D.fanRule P with D : InducedNormalizedLogResolution F). Conclusion: Nonempty UnderlyingIso = full ordered towers equal with center ideals by comap, over the identity of X, no contraction; same content as CenterIso/IsIsoOver, needed because Construction towers lack reduced. Construction is unique up to unique iso (fs-Cartesian full pullback), so the ∀ C₁ C₂ form is right. Statement verbatim; char-0 dep record lean-only; 8 header-only module-mode (B) conversions (char-0 + 7 trf algebra modules) with bodies identical to live. Only fault H11: the second reading was the worker's own self-audit → replaced in fixes/lem-per-complete-local-rigidification-comparison.report.md (worker report verbatim + real clause-by-clause reading). Advisories: base-era theorem stmt_deps carry Pair/Construction and route the induced-resolution structures, whose owner def nodes are not in stmt_deps; Q03 15fcd14a competing char-0 module re-delivery needs a rebase at landing. No compile (no Lean changed).; reverted the delivery's change of existing node(s) lem-per-characteristic-zero-log-resolution-independence (--revert-nodes; kept as on sheaf-dag)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

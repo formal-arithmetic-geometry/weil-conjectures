@@ -1,0 +1,412 @@
+{
+ "id": "lem-sfb-fppf-groupoid-restriction-quotient",
+ "kind": "statement",
+ "title": "Fppf restriction preserves a groupoid quotient and reflects relation monicity",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention], and let $(U,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme]. Let $q:U'\\to U$ be a surjective [def-weil-surjective-morphism], flat [def-weil-flat-morphism], locally finitely presented morphism [def-sbc-locally-finite-presentation], so that $\\{q\\}$ is an fppf covering [def-pc-fppf-site]. Form the restriction $R'=U'\\times_{q,U,s}R\\times_{t,U,q}U'$ [def-pc-fibre-product], with its groupoid structure on $U'$. If $(s',t'):R'\\to U'\\times_SU'$ is a monomorphism, then $(s,t):R\\to U\\times_SU$ is a monomorphism. Here monomorphism means injectivity on sections over every test $S$-scheme; consequently the two groupoids in this case are equivalence relations. Without any monicity assumption, write $U/R$ and $U'/R'$ for the fppf sheafifications [def-weil-pbc-sheafification] of the presheaves of isomorphism classes of their test-scheme groupoids. The canonical morphism $U'/R'\\longrightarrow U/R$ induced by $q$ is an isomorphism of fppf sheaves. No separatedness, finiteness, or affineness hypothesis on $U,R,q$ is imposed beyond the stated fppf covering condition. All schemes and fibre products are in the chosen site bound.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VH (lemma-quotient-groupoid-restrict), fppf covering case. Reflection of monicity is descent.tex Tag 02YK (lemma-descending-property-monomorphism), applied to (s,t) after the product fppf covering U-prime x_S U-prime -> U x_S U."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-weil-surjective-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sheafification",
+  "def-sfb-restricted-groupoid-relation"
+ ],
+ "proof": [
+  {
+   "text": "For each test $S$-scheme $T$, the fibre-product universal property identifies $R'(T)$ with triples $(x,r,y)$ such that $qx=sr$ and $tr=qy$. Give this triple source $x$, target $y$, identity $(x,e(qx),x)$ and inverse $(y,i(r),x)$. Compose $(x,h,y)$ followed by $(y,r,z)$ as $(x,c(r,h),z)$. The endpoint equalities follow from those for $c$; the identity, inverse and associativity laws hold in the middle coordinate by the groupoid laws and in the outer coordinates by equality. All formulas commute with precomposition in $T$, hence define scheme morphisms by the fibre-product universal property applied to the displayed component morphisms. This constructs the restricted groupoid and the forgetful groupoid morphism induced by $q$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VB (lemma-restrict-groupoid), explicit verification of the omitted construction"
+   }
+  },
+  {
+   "text": "Assume $(s',t')$ is monic. Given $r_1,r_2:T\\to R$ with common source $a:T\\to U$ and common target $b:T\\to U$, first pull back $q$ along $a$, obtaining an fppf cover $p:T_a\\to T$ with a lift $x:T_a\\to U'$. Pull back $q$ again along $bp$, obtaining an fppf cover $v:W\\to T_a$ with a lift $y:W\\to U'$. On $W$ the triples $(xv,r_1pv,y)$ and $(xv,r_2pv,y)$ have the same endpoints, so are equal by the assumed monicity; their middle coordinates give $r_1pv=r_2pv$. Each of $\\{v\\}$ and $\\{p\\}$ is fpqc by the fppf-to-fpqc comparison. Uniqueness in representable fpqc descent, first for maps $T_a\\to R$ on $v$ and then for maps $T\\to R$ on $p$, gives $r_1p=r_2p$ and $r_1=r_2$. Thus $(s,t)$ is monic. In any groupoid, existence of an arrow is reflexive by $e$, symmetric by $i$ and transitive by $c$. Monicity makes this arrow unique, so both groupoids are equivalence relations on every test scheme.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02YK (lemma-descending-property-monomorphism), its test-morphism argument; Tag 023Q (lemma-fpqc-universal-effective-epimorphisms); topologies.tex Tags 021O and 022C"
+   }
+  },
+  {
+   "text": "Now drop the monicity assumption. Put $P(T)=\\pi_0(U(T),R(T))$ and $P'(T)=\\pi_0(U'(T),R'(T))$, with restrictions induced by precomposition. Two objects of a groupoid represent the same isomorphism class exactly when an arrow joins them: identity, inverse and composition show arrow existence is already an equivalence relation. The functor in step 1 therefore gives a natural map $v:P'\\to P$, $[x]\\mapsto[qx]$. If $v_T([x])=v_T([y])$, choose an arrow $r$ from $qx$ to $qy$. The triple $(x,r,y)$ lies in $R'(T)$ and joins $x$ to $y$. Hence $[x]=[y]$, proving $v_T$ injective for every $T$. This uses no uniqueness of arrows.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VH (lemma-quotient-groupoid-restrict), injectivity argument before sheafification"
+   }
+  },
+  {
+   "text": "For $z\\in P(T)$ choose a representative $u:T\\to U$. The pullback $W=T\\times_{u,U,q}U'$ has projections $p:W\\to T$ and $x:W\\to U'$ with $qx=up$. Its singleton $\\{p\\}$ is an fppf covering by base change, and $v_W([x])=[up]=z|_W$. Thus $v$ is locally surjective. Every arrow in the sieve generated by $p$ factors through $p$, so pulling back $[x]$ supplies the lifts required in the covering-sieve formulation as well. Sectionwise injectivity from step 3 implies local injectivity, using the maximal covering sieve.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VH (lemma-quotient-groupoid-restrict), covering case; topologies.tex Tag 021O (lemma-fppf), part (3)"
+   }
+  },
+  {
+   "text": "Apply the set-presheaf local-bijection criterion to $v$ on the big fppf site. The size convention replaces this site by a small skeleton within a universe containing its objects and arrows, as required by that criterion. Steps 3 and 4 verify its two conditions, so $v^\\#:P'^\\#\\to P^\\#$ is an isomorphism. By the sheafification universal property this is precisely the canonical morphism $U'/R'\\to U/R$ induced by $q$. No argument used separatedness, quasi-compactness, affineness, or a finiteness condition beyond the given fppf cover.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-size-convention",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VH (lemma-quotient-groupoid-restrict), covering case; Mathlib/CategoryTheory/Sites/LocallyBijective.lean:114-116 and 160-161"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "def-weil-size-convention",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VH (lemma-quotient-groupoid-restrict), covering specialization, with descent.tex Tag 02YK and its representable-descent proof. The restricted groupoid formulas spell out Tag 02VB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*groupoid|groupoid.*quotient|pre.equivalence.relation",
+   "results": {
+    "t": "2026-10-23T11:59:32Z",
+    "tool": "grep",
+    "query": "quotient.*groupoid|groupoid.*quotient|pre.equivalence.relation",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: dense-subsite comparison and sheafification universal properties do not state invariance of an internal scheme-groupoid orbit sheaf under a covering restriction or reflection of relation monicity; manifold structure groupoids are different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T11:59:33Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "StructureGroupoid.LocalInvariantProp.sheaf",
+     "StructureGroupoid.LocalInvariantProp.sheafHasCoeToFun"
+    ],
+    "digest": "ce052d3526042c87"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: dense-subsite comparison and sheafification universal properties do not state invariance of an internal scheme-groupoid orbit sheaf under a covering restriction or reflection of relation monicity; manifold structure groupoids are different objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf covering restriction of a scheme groupoid induces an isomorphism of quotient sheaves",
+   "results": {
+    "t": "2026-10-23T11:59:33Z",
+    "tool": "leansearch",
+    "query": "Fppf covering restriction of a scheme groupoid induces an isomorphism of quotient sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.IsCoverDense.sheafIso",
+     "CategoryTheory.Functor.IsCoverDense.presheafIso",
+     "CategoryTheory.Functor.IsCoverDense.Types.sheafIso",
+     "AlgebraicGeometry.SheafedSpace.restrictTopIso",
+     "AlgebraicGeometry.Scheme.coverOfIsIso_f",
+     "CategoryTheory.GrothendieckTopology.isoSheafify",
+     "CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom",
+     "CategoryTheory.GrothendieckTopology.isoToPlus"
+    ],
+    "digest": "f729804cf598ab19"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: dense-subsite comparison and sheafification universal properties do not state invariance of an internal scheme-groupoid orbit sheaf under a covering restriction or reflection of relation monicity; manifold structure groupoids are different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a groupoid scheme along an fppf surjective morphism preserves its sheaf quotient and reflects monicity of its relation",
+   "results": {
+    "t": "2026-10-23T11:59:43Z",
+    "tool": "leanfinder",
+    "query": "Restriction of a groupoid scheme along an fppf surjective morphism preserves its sheaf quotient and reflects monicity of its relation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite",
+     "AlgebraicGeometry.Scheme.instLocallyCoverDenseOverTopMorphismPropertyOverForgetOverGrothendieckTopology",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "PresheafOfModules.restrictHomEquivOfIsLocallySurjective",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf",
+     "AlgebraicGeometry.Scheme.OpenCover.restrict",
+     "AlgebraicGeometry.Scheme.grothendieckTopology",
+     "AlgebraicGeometry.Scheme.overGrothendieckTopology"
+    ],
+    "digest": "6f360b0ae8a446da"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: dense-subsite comparison and sheafification universal properties do not state invariance of an internal scheme-groupoid orbit sheaf under a covering restriction or reflection of relation monicity; manifold structure groupoids are different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence relation descends from a covering restriction of an internal groupoid and has the same orbit sheaf",
+   "results": {
+    "t": "2026-10-23T11:59:43Z",
+    "tool": "leanfinder",
+    "query": "An equivalence relation descends from a covering restriction of an internal groupoid and has the same orbit sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.generateEquivalenceOpensLe_functor",
+     "TopCat.Presheaf.generateEquivalenceOpensLe",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_left",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_unitIso",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'"
+    ],
+    "digest": "7beba176552dbed6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: dense-subsite comparison and sheafification universal properties do not state invariance of an internal scheme-groupoid orbit sheaf under a covering restriction or reflection of relation monicity; manifold structure groupoids are different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*groupoid|groupoid.*quotient|groupoid.*restrict",
+   "results": {
+    "t": "2026-10-23T13:14:44Z",
+    "tool": "grep",
+    "query": "quotient.*groupoid|groupoid.*quotient|groupoid.*restrict",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: internal scheme-groupoid orbit quotients and reflection of relation monicity are not stated by the returned manifold, cover-dense-subsite, or generic topology declarations; the local-bijection ingredient is reused through existing Mathlib leaf lem-cbc-set-presheaf-sheafification-local-bijection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T13:14:44Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "StructureGroupoid.LocalInvariantProp.sheaf",
+     "StructureGroupoid.LocalInvariantProp.sheafHasCoeToFun"
+    ],
+    "digest": "ce052d3526042c87"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: internal scheme-groupoid orbit quotients and reflection of relation monicity are not stated by the returned manifold, cover-dense-subsite, or generic topology declarations; the local-bijection ingredient is reused through existing Mathlib leaf lem-cbc-set-presheaf-sheafification-local-bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a groupoid scheme along an fppf surjective morphism preserves the sheaf of isomorphism classes and reflects monicity of the arrow relation",
+   "results": {
+    "t": "2026-10-23T13:14:47Z",
+    "tool": "leanfinder",
+    "query": "Restriction of a groupoid scheme along an fppf surjective morphism preserves the sheaf of isomorphism classes and reflects monicity of the arrow relation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.jointlySurjectiveTopology",
+     "AlgebraicGeometry.Scheme.instLocallyCoverDenseOverTopMorphismPropertyOverForgetOverGrothendieckTopology",
+     "CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport",
+     "AlgebraicGeometry.Scheme.overGrothendieckTopology",
+     "AlgebraicGeometry.Scheme.grothendieckTopology",
+     "AlgebraicGeometry.Scheme.smallGrothendieckTopology",
+     "AlgebraicGeometry.PresheafedSpace.ofRestrict_mono",
+     "AlgebraicGeometry.Scheme.etaleTopology"
+    ],
+    "digest": "e9136a5b2e8ed60d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: internal scheme-groupoid orbit quotients and reflection of relation monicity are not stated by the returned manifold, cover-dense-subsite, or generic topology declarations; the local-bijection ingredient is reused through existing Mathlib leaf lem-cbc-set-presheaf-sheafification-local-bijection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf covering restriction of a scheme groupoid induces an isomorphism of quotient sheaves",
+   "results": {
+    "t": "2026-10-23T13:20:55Z",
+    "tool": "leansearch",
+    "query": "Fppf covering restriction of a scheme groupoid induces an isomorphism of quotient sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.IsCoverDense.sheafIso",
+     "CategoryTheory.Functor.IsCoverDense.presheafIso",
+     "CategoryTheory.Functor.IsCoverDense.Types.sheafIso",
+     "AlgebraicGeometry.SheafedSpace.restrictTopIso",
+     "AlgebraicGeometry.Scheme.coverOfIsIso_f",
+     "CategoryTheory.GrothendieckTopology.isoSheafify",
+     "CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom",
+     "CategoryTheory.GrothendieckTopology.isoToPlus"
+    ],
+    "digest": "f729804cf598ab19"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: internal scheme-groupoid orbit quotients and reflection of relation monicity are not stated by the returned manifold, cover-dense-subsite, or generic topology declarations; the local-bijection ingredient is reused through existing Mathlib leaf lem-cbc-set-presheaf-sheafification-local-bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal groupoid restricted along a covering has the same associated sheaf of orbits",
+   "results": {
+    "t": "2026-10-23T13:21:03Z",
+    "tool": "leanfinder",
+    "query": "An internal groupoid restricted along a covering has the same associated sheaf of orbits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.generateEquivalenceOpensLe_functor'_obj_obj",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_left",
+     "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff'",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_functor'",
+     "CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber",
+     "TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map"
+    ],
+    "digest": "2ba73715cec93d7f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: internal scheme-groupoid orbit quotients and reflection of relation monicity are not stated by the returned manifold, cover-dense-subsite, or generic topology declarations; the local-bijection ingredient is reused through existing Mathlib leaf lem-cbc-set-presheaf-sheafification-local-bijection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-relation-etale-replacement",
+  "date": "2026-10-23",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Fppf restriction preserves a groupoid quotient and reflects relation monicity.",
+   "via": [
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-groupoid-restriction-quotient",
+  "worker": "stage1",
+  "summary": "NR: preserved the full statement and gave the restriction formulas, a two-cover test-section proof of reflection of monicity, sectionwise injectivity of the orbit-presheaf map, local surjectivity by pulling back q, and the set-valued sheafification criterion. All non-elementary inputs are existing nodes; no new nodes. Exact project-Lean attachment search was empty.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Fppf restriction preserves a groupoid quotient and reflects relation monicity. The current latest blueprint direct-image proof (3) remains the ancestor route; the present supporting lemma is proved using Stacks 02VH and the test-section argument of 02YK, not by replacing a unit-level step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-8f43dd637",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-8f43dd637 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement; the delivery has no new nodes, and the statement and stmt_deps are byte-identical to live, where the item is still unsplit. Sources checked against Stacks: groupoids.tex 02VH (injectivity through 02VG/pre-equivalence restriction; the surjective case for a covering {g}) and descent.tex 02YK (base-change the two maps, use monicity upstairs, then the 023Q epimorphism). Step 1: the restricted groupoid formulas are correct, including the orientation of the composite c(r,h), which needs s r = t h = qy. Step 2: the two successive base changes of q along a and then bp give fppf covers by 021O; on W both triples lie in R' with equal endpoints, so monicity gives r1pv = r2pv; 022C makes both covers fpqc and the uniqueness clause of 023Q gives r1 = r2. Step 3: sectionwise injectivity of [x] -> [qx] via the triple (x,r,y), with no uniqueness of arrows needed. Step 4: local surjectivity on the single base-change cover. Step 5: the set-valued local-bijection criterion on the small skeleton from the size convention. Edge cases: q = id, U empty, fold cover, a nontrivial group scheme where the monicity clause stays conditional. Not duplicates: lem-sfb-relation-restriction-quotient needs an equivalence relation, and the trf etale-relation and generator-comparison nodes need etale maps. Batch-5: lem-trf-fppf-covering-base-change and lem-trf-fppf-covering-is-fpqc are Mathlib leaves of sk-i-curve-zero with no proof_deps and only definition stmt_deps; they are general site facts (021O, 022C), not steps of the trace formula or Poincare duality, so I accept both. No SGA is cited and no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfGroupoidRestrictionQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fppf_groupoid_restriction_quotient",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.restrictedGroupoidMiddle",
+   "AlgebraicGeometry.AlgebraicSpace.restrictedGroupoidComposableMap",
+   "AlgebraicGeometry.AlgebraicSpace.restrictedGroupoidQuotientMap",
+   "AlgebraicGeometry.AlgebraicSpace.fppf_groupoid_restriction_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfGroupoidRestrictionQuotient.lean",
+  "statement": "theorem fppf_groupoid_restriction_quotient {S : Scheme.{u}} {R U U' : Over S} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s.left t.left ⟶ R.left) (hG : IsGroupoidScheme s.left t.left e.left i.left c) (q : U' ⟶ U) [Surjective q.left] [Flat q.left] [LocallyOfFinitePresentation q.left] : (∃ (e' : U' ⟶ restrictedEtaleRelation s t q) (i' : restrictedEtaleRelation s t q ⟶ restrictedEtaleRelation s t q) (c' : pullback (restrictedEtaleRelationSource s t q).left (restrictedEtaleRelationTarget s t q).left ⟶ (restrictedEtaleRelation s t q).left), IsGroupoidScheme (restrictedEtaleRelationSource s t q).left (restrictedEtaleRelationTarget s t q).left e'.left i'.left c' ∧ e' ≫ restrictedGroupoidMiddle s t q = q ≫ e ∧ i' ≫ restrictedGroupoidMiddle s t q = restrictedGroupoidMiddle s t q ≫ i ∧ c' ≫ (restrictedGroupoidMiddle s t q).left = restrictedGroupoidComposableMap s t q ≫ c) ∧ (Mono (prod.lift (restrictedEtaleRelationSource s t q) (restrictedEtaleRelationTarget s t q)) → Mono (prod.lift s t) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ U' ↦ ∃ r : T ⟶ restrictedEtaleRelation s t q, r ≫ restrictedEtaleRelationSource s t q = a ∧ r ≫ restrictedEtaleRelationTarget s t q = b))) ∧ IsIso ((presheafToSheaf (Scheme.fppfTopology.over S) (Type (u + 1))).map (restrictedGroupoidQuotientMap s t q))",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The unrestricted iterated-pullback definitions and endpoint maps are reused through def-sfb-restricted-groupoid-relation (existing: true), not through a theorem dependency. The canonical orbit map is constructed by coequalizer.desc on lifted Yoneda presheaves and sheafified in Type (u+1); no monicity hypothesis is imposed on the quotient isomorphism. Restricted groupoid operations are characterized by their middle coordinates and groupoid laws."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d7acb891",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN on 48ef2a5c1878. Item Lean is byte-identical (sha256 107ee5d5…). The only item-node change is in stmt_deps: lem-trf-etale-relation-restriction-quotient is replaced by the new def-sfb-restricted-groupoid-relation, which owns restrictedEtaleRelation/Source/Target with existing:true on the unchanged Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient (side-live lines 34-48 are plain pullbacks with no hypotheses, matching Stacks 02VB). Its statement is verbatim from def, import_flags is [], and no concurrent owner exists live. Re-checked H3 clauses (fppf instances, canonical restricted operations via middle equations, composition orientation, conditional monicity plus Equivalence, coequalizer orbit presheaves, desc map [x]->[qx], IsIso of the sheafified map outside the implication, u+1/u universes), edge cases and gates. No compile, since no file was changed. No findings."
+ }
+}

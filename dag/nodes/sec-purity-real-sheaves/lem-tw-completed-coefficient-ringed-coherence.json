@@ -1,0 +1,265 @@
+{
+ "id": "lem-tw-completed-coefficient-ringed-coherence",
+ "kind": "statement",
+ "title": "Composition and slice localization of projection-defined completed coefficient maps",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$ [def-weil-l-adic-coefficient-extension]. For every scheme $T$ use its small pro-etale site [def-weil-pbc-proetale-site], the constant ring sheaves $C_{n,T}=(R/t^n)_T$, and $B_T=\\varprojlim_{n\\geq1}C_{n,T}$ with projections $\\pi_{T,n}$ [def-weil-completed-integral-coefficients]. For a scheme morphism $g:T\\to W$ [def-weil-scheme-morphism-properties], let $g^{-1}$ and $c^g_{R/t^n}$ be the inverse image and constant-section maps [def-weil-proetale-inverse-image]. Give it the structural ring map $c_g:g^{-1}B_W\\to B_T$ characterized by $\\pi_{T,n}c_g=c^g_{R/t^n}g^{-1}(\\pi_{W,n})$.\n\nFor composable maps $T\\xrightarrow h W\\xrightarrow k Z$, under the canonical inverse-image compositor $\\alpha_{h,k}:(kh)^{-1}\\cong h^{-1}k^{-1}$, the structural ring maps obey\n$$c_{kh}=c_h\\,h^{-1}(c_k)\\,\\alpha_{h,k,B_Z},\\qquad\n\\pi_{T,n}c_hh^{-1}(c_k)\\alpha_{h,k,B_Z}=c^{kh}_{R/t^n}(kh)^{-1}(\\pi_{Z,n})\\quad(n\\geq1).$$\nConsequently, the two coefficient maps for any equal composites of scheme maps coincide under the specified geometric inverse-image comparison, including every finite projection.\n\nFor a morphism $g:T\\to W$ and an object $u:U\\to W$ of $W_{\\mathrm{proet}}$, put $V=T\\times_W U$ and $v:V\\to U$. Under the canonical equivalences $U_{\\mathrm{proet}}\\simeq W_{\\mathrm{proet}}/U$ and $V_{\\mathrm{proet}}\\simeq T_{\\mathrm{proet}}/V$, the restricted rings $C_{n,W}|_U$, $B_W|_U$, and their projections identify respectively with $C_{n,U}$, $B_U$, and $\\pi_{U,n}$; similarly on $V$. Restriction is the slice restriction of [def-pur-localized-ringed-site]. The constant-ring identifications are the identity on all constant sections. Write $j_U^{-1},j_V^{-1}$ for these two restriction functors and $g_U$ for the localized ringed-site morphism for $g$. With these identifications, $g_U$ is canonically the ringed morphism for $v$, with inverse-image comparison $(g_U)^{-1}j_U^{-1}\\cong j_V^{-1}g^{-1}$ and structural ring map exactly $c_v$ at every finite projection. No flatness or invertibility of $c_g$ is a hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; projection-defined completed coefficients and composition: Bhatt--Scholze Proposition 6.6.11 and Remark 6.8.15. Extraction of returned proof steps 2-3 (agent argument)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proetale-inverse-image",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "For each $g:T\\to W$ put $A_n=R/t^n$. The constant-section construction [def-weil-proetale-inverse-image] is natural in a ring homomorphism $A_{n+1}\\to A_n$: both composites send each constant section $a$ to its reduction, so uniqueness of the sheaf extension makes them equal. Thus $d_n=c^g_{A_n}g^{-1}(\\pi_{W,n})$ is a compatible cone with vertex $g^{-1}B_W$. The limit universal property [def-pur-sheaf-inverse-limit] gives the unique $c_g$ with these projections. This uses a limit in the target site, not preservation of an infinite limit by $g^{-1}$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, including its proof; Tags 03CO, lemma-limits-colimits-abelian-sheaves, and 03DB, lemma-limits-colimits; proetale.tex Tag 09A5 and sites.tex Tag 03CF. Agent projection calculation."
+   }
+  },
+  {
+   "text": "Use naturality of the constant-section adjunct in an arbitrary ring homomorphism, proved by sheafification uniqueness. The same calculation on constant sections identifies direct-image composition, and its adjunction mate gives constant-ring composition in the independent coefficient universe. Substitute the two completed-map projection equations and naturality of the compositor, then cancel the jointly monic limit projections. No finiteness of the quotient ring is needed.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, including its proof; Tags 03CO, lemma-limits-colimits-abelian-sheaves, and 03DB, lemma-limits-colimits; proetale.tex Tag 09A5 and sites.tex Tag 03CF. Agent projection calculation."
+   }
+  },
+  {
+   "text": "Apply the completed composition identity to both pairs. Transport the completed map along the equality of composites by equality elimination, and cancel the inverse compositor against its hom. This gives exactly the displayed geometric comparison.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, including its proof; Tags 03CO, lemma-limits-colimits-abelian-sheaves, and 03DB, lemma-limits-colimits; proetale.tex Tag 09A5 and sites.tex Tag 03CF. Agent projection calculation."
+   }
+  },
+  {
+   "text": "Use the recorded sliceFrom/sliceDense identification of weakly etale localization [lem-weil-proetale-weakly-etale-localization]. Its restriction [def-pur-localized-ringed-site] is definitionally precomposition with Over.map for the weakly etale object. This functor is continuous and cocontinuous. Mathlib pushforwardContinuousSheafificationCompatibility therefore identifies each restricted constant ring with the same constant ring on U, and its unit equation identifies every constant section. Naturality of this comparison in the coefficient ring gives compatibility with all quotient reductions. Precomposition preserves the inverse sequence limit [def-pur-sheaf-inverse-limit]; preservesLimitIso and the natural quotient-diagram isomorphism give the completed ring isomorphism and its projection equations. Forgetting commutativity is fully faithful, so the construction and projection equations lift to commutative ring sheaves. Repeat for the base-changed object V.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-inverse-image",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, including its proof; Tags 03CO, lemma-limits-colimits-abelian-sheaves, and 03DB, lemma-limits-colimits; proetale.tex Tag 09A5 and sites.tex Tag 03CF. Agent projection calculation."
+   }
+  },
+  {
+   "text": "Let j_U and j_V be the postcomposition functors for U->W and V->T. Their postcomposition/base-change adjunctions induce sheaf adjunctions whose left adjoints are the restriction functors. The fibre-product associativity comparisons for the equal composites v followed by U->W and V->T followed by g give an invertible square of the right adjoints. Take its inverse mate along the restriction adjunctions to obtain beta. On each H->U, the unit and counit are the pullback projections and lifts; pullback hom-ext identifies beta exactly with restriction along H x_U V isomorphic to H x_W T. Thus beta is invertible. Take its inverse mate along the recorded g and v inverse-image adjunctions [def-weil-proetale-inverse-image] to obtain lambda. Mathlib iterated_mateEquiv_conjugateEquiv_symm identifies this second mate with the conjugate of the original invertible square, so lambda is invertible. Its explicit component is the required unit/beta/counit formula. Applying the hom equivalence to the finite constant-ring square, the constant-section unit equations and naturality along the fibre-product comparison identify both adjuncts. Hence the finite structural maps commute with lambda. Naturality at every quotient projection and the completed restriction projection equations now give the requested finite completed-map equation. Joint uniqueness of limit projections [def-pur-sheaf-inverse-limit] gives the completed structural-map equality. No flatness or invertibility assumption on a structural coefficient map enters.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, including its proof; Tags 03CO, lemma-limits-colimits-abelian-sheaves, and 03DB, lemma-limits-colimits; proetale.tex Tag 09A5 and sites.tex Tag 03CF. Agent projection calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, including its proof; Tags 03CO, lemma-limits-colimits-abelian-sheaves, and 03DB, lemma-limits-colimits; proetale.tex Tag 09A5 and sites.tex Tag 03CF. Agent projection calculation. K5: steps 1-3 proved by direct independent-universe constant-section adjunction and projection calculations. F1: slice steps constructed directly in the independent universes from Mathlib sheafification compatibility, preservation of inverse-sequence limits by restriction, and twice-transposed geometric adjunction mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral coefficient sheaves on pro-etale sites: projection-defined structural ring maps compose and localize to the same maps on weakly etale slices",
+   "results": "Hits read: RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, RingHom.Etale.propertyIsLocal, StandardEtalePair.HasMap.map, StandardEtalePair.homEquiv_symm_apply, Algebra.Etale.comp. Constant-sheaf composition, abstract module-sheaf limits and algebraic etale localization do not identify the completed pro-etale coefficient ring map on the slice together with all its projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constant\", \"comp\"",
+   "results": "Hits read: CategoryTheory.instIsConstantObjSheafSheafCompose, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.presheaf_ext, CondensedMod.LocallyConstant.instFaithfulSheafCompHausCoherentTopologyTypeConstantSheaf, CondensedMod.LocallyConstant.instFullSheafCompHausCoherentTopologyTypeConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf. Constant-sheaf composition, abstract module-sheaf limits and algebraic etale localization do not identify the completed pro-etale coefficient ring map on the slice together with all its projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Cc]omp|[Cc]omp.*constantSheaf|pro[Ee]tale.*[Ll]ocal",
+   "results": "Hits read: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean. Constant-sheaf composition, abstract module-sheaf limits and algebraic etale localization do not identify the completed pro-etale coefficient ring map on the slice together with all its projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of constant finite ring sheaves has functorial structural maps compatible with composition and restriction to a slice site",
+   "results": "Hits read: PresheafOfModules.limitPresheafOfModules, SheafOfModules.hasLimit, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.Sheaf.ΓNatIsoLim, CategoryTheory.instIsConstantObjSheafSheafCompose, PresheafOfModules.limitCone, PresheafOfModules.limitPresheafOfModules_map, SheafOfModules.Finite.hasFiniteLimits. Constant-sheaf composition, abstract module-sheaf limits and algebraic etale localization do not identify the completed pro-etale coefficient ring map on the slice together with all its projections.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit sheaves of rings: maps defined by finite projections compose and restrict to slice sites",
+   "results": "Read hits: TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Presheaf.SheafConditionEqualizerProducts.w, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π_apply, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse_obj_π_app, LightProfinite.proj_comp_transitionMapLE. General limits, constant-sheaf coefficient composition, continuous abelian coefficient sheaves, or algebraic etale maps; none states this combined projection-normalized completed ring-map and slice coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.hom_ext|preservesLimits.*[Rr]estrict|constantSheaf.*[Cc]omp",
+   "results": "Read hits: Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/LeftExact.lean, Mathlib/CategoryTheory/Sites/LeftExact.lean, Mathlib/CategoryTheory/Sites/LeftExact.lean. General limits, constant-sheaf coefficient composition, continuous abelian coefficient sheaves, or algebraic etale maps; none states this combined projection-normalized completed ring-map and slice coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of constant ring sheaves commutes with restriction to a slice and structural inverse image maps compose",
+   "results": "Read hits: AlgebraicGeometry.StructureSheaf.res_const, CategoryTheory.constantCommuteCompose, PresheafOfModules.limitPresheafOfModules, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.StructureSheaf.res_const', PresheafOfModules.limitPresheafOfModules_map, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_assoc. General limits, constant-sheaf coefficient composition, continuous abelian coefficient sheaves, or algebraic etale maps; none states this combined projection-normalized completed ring-map and slice coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"limit.hom_ext\"",
+   "results": "Read hits: AddCommGroup.DirectLimit.hom_ext, AddCommGroup.DirectLimit.hom_ext_iff, Module.DirectLimit.hom_ext, Module.DirectLimit.hom_ext_iff, CategoryTheory.Limits.IsColimit.hom_ext, CategoryTheory.Limits.IsLimit.hom_ext, CategoryTheory.Limits.colimit.hom_ext, CategoryTheory.Limits.limit.hom_ext. General limits, constant-sheaf coefficient composition, continuous abelian coefficient sheaves, or algebraic etale maps; none states this combined projection-normalized completed ring-map and slice coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completedIntegralSheaf|[Pp]ro[Ee]tale|constant.*[Ss]heaf.*[Pp]ullback",
+   "results": "Read hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. General limits, constant-sheaf coefficient composition, continuous abelian coefficient sheaves, or algebraic etale maps; none states this combined projection-normalized completed ring-map and slice coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed pro-etale coefficient ring maps are determined by quotient projections and satisfy composition and ringed site localization compatibility",
+   "results": "Read hits: StandardEtalePair.hom_ext, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.hom_ext_iff, StandardEtalePair.HasMap.map, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallyEtale.localization_map. General limits, constant-sheaf coefficient composition, continuous abelian coefficient sheaves, or algebraic etale maps; none states this combined projection-normalized completed ring-map and slice coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-ordinary-pullback-stratified-models",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. Proposition 6.6.11 and Remark 6.8.15: base-changed strata, covering slices and finite-projective ordinary pullback models. Agent extraction of original steps 2-3, with the model interfaces used by steps 1 and 4. Returned ordinary-model proof steps 2-3: completed coefficient composition and covering-slice ringed identification.",
+   "via": [
+    "lem-tw-ordinary-pullback-stratified-models",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-tw-completed-coefficient-ringed-coherence",
+  "worker": "stage1",
+  "summary": "Projection calculation, using existing finite constant-ring composition and generic ringed-site localization. Pro-etale slice equivalence and sectionwise inverse limits give the precise coefficient identifications. No new nodes, no statement change, no preservation of infinite limits by an arbitrary inverse image.",
+  "blueprint": "lem-tw-dual-negation proof first sentence (dual representation), through the inherited ordinary integral pullback and stratified-model branch: establishes the extracted completed-coefficient composition and covering-slice normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "Generic finite constant-ring composition supplies the finite-level calculation; this linear-algebra unit has no site-composition theorem."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic weakly etale slice equivalence and identity-on-constants comparison; needed for the existing stratified-model route."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic localization of arbitrary ringed-site morphisms, used with the actual completed coefficient map; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-2fafd2634",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-2fafd2634 (reviewer sub-agent of L); spot-checked: Ordinary first split of a node that Q39's re-split of lem-tw-ordinary-pullback-stratified-models created on 2026-10-22 (old steps 2-3). The item is unsplit live and in side-live, has no repair note and is not in the dropped list. There are no new nodes, and the statement, stmt_deps and blueprint are unchanged. All seven cited statements were read. Step 1: the compatible cone is checked through the adjunct, where both sides send a constant to its reduction; the limit gives c_g without g^{-1} commuting with limits. Step 2: the projection chain was recomputed using naturality of alpha at pi_{Z,n} and lem-pur-proetale-constant-ring-composition (A_n finite by def-weil-l-adic-coefficient-extension(4)); joint uniqueness gives c_{kh}. Step 3: equal composites follow from Step 2, with the iterated compositors agreeing because the fibre-product comparisons have the same projections. Step 4: lem-weil-proetale-weakly-etale-localization (1)-(2) applies to U->W and to V=TxU->T, and the sectionwise limits (def-pur-sheaf-inverse-limit, def-pur-localized-ringed-site) give B_W|_U=B_U with its projections. Step 5: compared with Stacks 04J0 (sites-modules.tex l.2369-2409), the ring map j^{-1}f^sharp is the one of lem-weil-pbc-localize-ringed-site-morphism; u_U(H)=TxH is isomorphic to VxH; lambda is the mate of the identity direct-image comparison, so the finite adjunct equals rho^v on constants and c~=c_v; no flatness or invertibility is used. Edge cases checked: empty schemes, n=1, identity maps, any weakly etale U. No SGA is cited. The three tool_uses are generic and accepted, since unit sk-r-real-linear is a linear-algebra remark. Advisory: the composition clause is a precise special case of the composition clause of lem-weil-pbc-profinite-coefficient-inverse-image; this is not a fault, because the item exists by an accepted re-split and the proof re-derives the clause correctly."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedCoefficientRingedCoherence",
+  "declaration": "WeilConjectures.completedRingMap_comp",
+  "declarations": [
+   "WeilConjectures.completedRingPull",
+   "WeilConjectures.completedRingAdj",
+   "WeilConjectures.completedRingConstantMap",
+   "WeilConjectures.completedRingMap_existsUnique",
+   "WeilConjectures.completedRingMap",
+   "WeilConjectures.completedRingComp",
+   "WeilConjectures.completedRingMap_comp",
+   "WeilConjectures.completedRingMap_equal_composites",
+   "WeilConjectures.completedRingRestriction",
+   "WeilConjectures.completedRingSliceArrow",
+   "WeilConjectures.completedRingSlicePointIso",
+   "WeilConjectures.completedRingMap_slice"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedCoefficientRingedCoherence.lean",
+  "statement": "theorem completedRingMap_comp {T W Z : Scheme.{t}} (h : T ⟶ W) (k : W ⟶ Z) : completedRingMap l E (h ≫ k) = (completedRingComp.{t, u} h k).hom.app (completedIntegralCommRingSheafUnrestricted l E Z) ≫ (completedRingPull.{t, u} h).map (completedRingMap l E k) ≫ completedRingMap l E h ∧ ∀ n : ℕ, ((completedRingComp.{t, u} h k).hom.app (completedIntegralCommRingSheafUnrestricted l E Z) ≫ (completedRingPull.{t, u} h).map (completedRingMap l E k) ≫ completedRingMap l E h) ≫ completedIntegralCommRingProjectionUnrestricted l E T n = (completedRingPull.{t, u} (h ≫ k)).map (completedIntegralCommRingProjectionUnrestricted l E Z n) ≫ completedRingConstantMap (h ≫ k) (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Projection-defined maps use the recorded completion and quotient projections, with independent scheme and coefficient universes. The slice theorem uses the recorded slice equivalence and Mathlib overPullback, identity-on-constants finite identifications, and the unit/comparison/counit mate of the specified geometric direct-image comparison. No structural-map flatness or invertibility is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcfad43c3",
+  "group": "NY",
+  "result": "pass",
+  "note": "Only the item's lean field changed; stmt_deps and statement are unchanged, and lean.statement matches the file exactly. All node clauses are rendered. c_g: ∃! by projection equations, using the recorded ρ adjunct. Compositor: mate of Over.pullbackComp. Both composition equations and the equal-composites clause (arbitrary e) are stated. Slice: aU/aV pinned identity-on-constants via toSheafify, eU/eV pinned by projections, beta pinned componentwise by pullbackRightPullbackFstIso, lambda pinned as the unit/beta/counit mate, plus equality with c_v at the completed level and every finite projection. No extra hypotheses; universes t and u independent. No hollow defs, all theorems sorry, docstrings ok. H4: ProfiniteCoefficientInverseImage is single-universe with no slice clause; OrdinaryCompletedIntegralPullback is downstream. Advisories only: sliceFrom/sliceDense owned by a non-stmt_dep theorem node; local general-universe copies of pull/comp (accepted precedent); two proof-only imports; unlisted record declarations. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261024T185119-L-3404873",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

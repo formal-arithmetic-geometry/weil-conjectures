@@ -10,9 +10,25 @@
  "stmt_deps": [
   "def-weil-pbc-module-chain-complex-homology"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For any function f from lists to an R-module, let D(f)(l) be the alternating sum of f(l.eraseIdx a). Splitting off index zero shows D(f)(x :: l) = f(l) - D(t ↦ f(x :: t))(l). The same finite sum preserves subtraction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Induct on l, generalizing f, to prove D(D(f))(l) = 0. The empty list gives the empty sum. For x :: l, the preceding recurrence and additivity give D(f)(l) - (D(f)(l) - D(D(t ↦ f(x :: t)))(l)); the induction hypothesis and additive cancellation finish.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The off-shape boundary is zero by definition. For adjacent degrees evaluate each boundary on a strict-chain basis generator using linearCombination_single. Every deletion remains pairwise strict, and its length decreases by one. Thus the composite on a generator is D(D(bracket))(l), which vanishes by the list induction. Linear-map and Finsupp extensionality finish. The empty-list case includes the augmentation and all negative degrees.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": "Agent-written formal proof of the existing double-deletion cancellation argument, using list induction to pair terms; source: the augmented strict-poset adaptation already recorded in this node and the boundary_laws docstring. H5, 2026-10-26.",
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -73,10 +89,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -114,5 +134,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Read item, stmt_deps, new def node def-sfb-augmented-poset-chains, both modules, report. Item node changes only lean + added (A) stmt_dep; signatures verbatim (def statement from keyword). Clause check: Simplex = Pairwise(<) lists of length n+1 (deg -1 = [∅], below zero), boundary = alternating eraseIdx on down shape, bracket kills repeated tuples, mapComponent = bracket(map f), map_comm/map/map_id/map_comp, prismComponent = Σ(-1)^k [f(take(k+1)) ++ g(drop k)] guarded 0≤i so h_{-1}=0, prism_identity h≫d + d≫h = g_*-f_* for all n:ℤ (n=0 sign and n=-1 checked). No extra assumptions; empty P/Q, f=g, zero ring fine. Named sorry obligation boundary_laws, real data, docstrings with source/blueprint. Not a duplicate: Mathlib DoldKan/augment not exact; parent ProductChainProperInterval.complex is ℚ/proper-interval specialized. Advisory: P,Q share universe v (forced by chain map in one ModuleCat); unused Finite instances; parent could later use the general complex. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T091733-L-3371317",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

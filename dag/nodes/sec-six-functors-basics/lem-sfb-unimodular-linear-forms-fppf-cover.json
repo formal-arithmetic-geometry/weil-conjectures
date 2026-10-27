@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-unimodular-linear-forms-fppf-cover",
+ "kind": "statement",
+ "title": "Fppf cover simultaneously avoiding unimodular affine linear forms",
+ "statement": "Let $R$ be a commutative ring and $n\\geq0$. For $1\\leq i\\leq n$ let $b_i,d_i\\in R$ generate the unit ideal, meaning that $r_i b_i+s_i d_i=1$ for some $r_i,s_i\\in R$. Put $P(Z)=\\prod_{i=1}^n(b_iZ+d_i)$ in the polynomial ring $R[Z]$ [def-weil-polynomial-ring], with empty product $1$, and put $B=R[Z][1/P(Z)]$ [def-weil-ring-localization-away]. The morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is flat, surjective, and locally of finite presentation [def-weil-affine-spectrum, def-weil-flat-morphism, def-weil-surjective-morphism, def-sbc-locally-finite-presentation]. If $z\\in B$ is the image of $Z$, then every $b_i z+d_i$ is a unit of $B$. Thus this single morphism is an fppf covering, where fppf coverings are jointly surjective families of flat morphisms locally of finite presentation. No Noetherian or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00HQ, lemma-ff-rings; Tag 00HT, lemma-flat-localization; Tag 00HC, lemma-composition-flat. Explicit principal-polynomial-open specialization of the common-translate argument in Conrad Proposition 4.3.1, printed p.130, before (4.3.2)."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=R[Z]$ and $L_i=b_iZ+d_i$. By [def-weil-polynomial-ring], the powers $(Z^m)_{m\\geq0}$ form an $R$-basis of $A$: the coefficients are exactly the unique finitely supported coordinates. In particular $A$ is free over $R$, so [lem-weil-pbc-projective-module-flat], whose last sentence applies to every free module, makes $R\\to A$ flat.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051G, lemma-local-artinian-characterize-flat, proof, first sentence (the unrestricted free-implies-flat fact); power basis from the definition of a polynomial."
+   }
+  },
+  {
+   "text": "The ring $B=A[1/P]$ is the localization of $A$ at $\\{P^m:m\\geq0\\}$ by [def-weil-ring-localization-away], including when this set contains zero. Apply [lem-weil-pbc-localization-flat] to obtain flatness of $A\\to B$. Together with step 1, [lem-weil-pbc-flat-ring-map-comp] gives flatness of $R\\to B$. Finally [lem-weil-pbc-flat-ring-map-iff-flat-affine] makes the specified morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ flat.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT, lemma-flat-localization (1), and 00HC, lemma-composition-flat; scheme translation: morphisms.tex Tag 01U5, lemma-flat-characterize."
+   }
+  },
+  {
+   "text": "For finite presentation use the explicit $R$-algebra $C=R[Z,T]/(TP(Z)-1)$. The assignment $Z\\mapsto z$, $T\\mapsto P(z)^{-1}$ defines $C\\to B$. Its inverse sends the fraction $a(Z)/P(Z)^m$ to the class of $a(Z)T^m$. Indeed, equality of two fractions means $P^k(aP^l-cP^m)=0$ for some $k$; multiplying its image in $C$ by $T^{k+m+l}$ gives $aT^m=cT^l$, since $TP=1$. The formulas preserve addition and multiplication and their composites fix $Z,T$ and every fraction. Hence $B\\cong C$ has two generators and one relation over $R$. Taking the whole source and target as affine neighbourhoods in [def-sbc-locally-finite-presentation] proves that the morphism is locally of finite presentation.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, section-localization, fraction equality; explicit one-relation presentation of localization, applied to R[Z]."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p$ be any prime ideal of $R$. The coefficient reduction homomorphism $A\\to(R/\\mathfrak p)[Z]$ has kernel $\\mathfrak q=\\{\\sum_m a_mZ^m:a_m\\in\\mathfrak p\\text{ for every }m\\}$. The ring $R/\\mathfrak p$ is a nonzero domain: if $ac\\in\\mathfrak p$, primeness puts $a$ or $c$ in $\\mathfrak p$, and $1\\notin\\mathfrak p$. Apply [lem-weil-pbc-polynomial-ring-domain] with one variable to see that $(R/\\mathfrak p)[Z]$ is a domain. Thus the kernel $\\mathfrak q$ is proper and prime: a product mapping to zero has a zero factor. Its contraction to $R$ is $\\mathfrak p$, since the reduction of a constant polynomial vanishes exactly when its constant lies in $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FB, lemma-affineline-open, proof, coefficient reduction of a polynomial at a prime; here use R/p directly and its coefficientwise kernel."
+   }
+  },
+  {
+   "text": "For each $i$, the equality $r_ib_i+s_id_i=1$ prevents both $b_i$ and $d_i$ from lying in $\\mathfrak p$. Therefore $L_i\\notin\\mathfrak q$ by its coefficient description. Since $\\mathfrak q$ is prime, the finite product $P=\\prod_iL_i$ is not in $\\mathfrak q$; for the empty product this is $1\\notin\\mathfrak q$. Consequently every $P^m$ avoids $\\mathfrak q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FB, lemma-affineline-open, proof, nonvanishing coefficient criterion; unimodular linear-factor specialization."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-spectrum-embedding] to $A$ and the multiplicative set $\\{P^m:m\\geq0\\}$. Step 5 puts $\\mathfrak q$ in its stated image, so some prime $\\mathfrak Q$ of $B$ contracts to $\\mathfrak q$ in $A$ and hence to $\\mathfrak p$ in $R$. The contravariant spectrum map of [def-weil-affine-spectrum] sends $\\mathfrak Q$ to that contraction. Every prime $\\mathfrak p$ therefore has a preimage, which is exactly surjectivity as defined in [def-weil-surjective-morphism]. If $R$ is the zero ring there is no prime $\\mathfrak p$ to check, and surjectivity is vacuous.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "def-weil-affine-spectrum",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization, image description and inverse prime; Tag 00E2, lemma-spec-functorial."
+   }
+  },
+  {
+   "text": "In $B$, write $u=P(z)^{-1}$, which exists by [def-weil-ring-localization-away]. For every $i$, the element $u\\prod_{j\\ne i}(b_jz+d_j)$ is an inverse of $b_iz+d_i$, since their product is $uP(z)=1$. Thus all required linear forms are units. Steps 2, 3 and 6 give flatness, local finite presentation and surjectivity, respectively; by the definition of fppf covering in the statement the singleton family is an fppf cover. For $n=0$ the unit assertions are empty and $P=1$, so the same arguments apply. They also apply to the zero ring, in which $0=1$ and the unique element is a unit.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, section-localization, inverted element and fraction multiplication; definition of fppf covering as stated in the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-projective-module-flat",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-weil-affine-spectrum",
+  "def-weil-surjective-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit assembly from Tags 00HT (lemma-flat-localization), 00HC (lemma-composition-flat), 00E3 (lemma-spec-localization), and the coefficient argument in 00FB (lemma-affineline-open); the finite-presentation and unit formulas are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FaithfullyFlat|[Pp]rimitive",
+   "results": "{\"t\": \"2026-10-24T08:27:18Z\", \"tool\": \"grep\", \"query\": \"FaithfullyFlat|[Pp]rimitive\", \"sub\": \"RingTheory/Polynomial\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/ContentIdeal.lean\", \"Mathlib/RingTheory/Polynomial/ContentIdeal.lean\", \"Mathlib/RingTheory/Polynomial/ContentIdeal.lean\"], \"digest\": \"67b9eb3c2891a3cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern standard smooth presentations, primitive polynomial content, or flatness criteria, not simultaneous invertibility of linear forms over an arbitrary ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a polynomial ring at a polynomial with coefficients generating the unit ideal is faithfully flat",
+   "results": "{\"t\": \"2026-10-24T08:27:18Z\", \"tool\": \"leansearch\", \"query\": \"Localization of a polynomial ring at a polynomial with coefficients generating the unit ideal is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.holdsForLocalizationAway\", \"Module.Flat.of_isLocalizedModule\", \"RingHom.FaithfullyFlat\", \"Module.FaithfullyFlat.toFlat\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"Module.flat_iff_of_isLocalization\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"35b9a90615d46985\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern standard smooth presentations, primitive polynomial content, or flatness criteria, not simultaneous invertibility of linear forms over an arbitrary ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.IsPrimitive, FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T08:27:18Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.IsPrimitive, FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'FaithfullyFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern standard smooth presentations, primitive polynomial content, or flatness criteria, not simultaneous invertibility of linear forms over an arbitrary ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finitely many unimodular pairs in a commutative ring there is a faithfully flat finitely presented algebra with an element where all associated linear polynomials are units",
+   "results": "{\"t\": \"2026-10-24T08:27:19Z\", \"tool\": \"leanfinder\", \"query\": \"For finitely many unimodular pairs in a commutative ring there is a faithfully flat finitely presented algebra with an element where all associated linear polynomials are units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.SubmersivePresentation.ofHasCoeffs\", \"Algebra.IsStandardSmooth.out\", \"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Algebra.SubmersivePresentation\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\"], \"digest\": \"c8a2220f52189140\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern standard smooth presentations, primitive polynomial content, or flatness criteria, not simultaneous invertibility of linear forms over an arbitrary ring."
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat|faithfully_flat|FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T08:30:39Z\", \"tool\": \"grep\", \"query\": \"faithfullyFlat|faithfully_flat|FaithfullyFlat\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern standard smooth presentations, primitive polynomial content, or flatness criteria, not simultaneous invertibility of linear forms over an arbitrary ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a faithfully flat algebra of finite presentation with an element avoiding finitely many unimodular affine linear forms",
+   "results": "{\"t\": \"2026-10-24T08:30:39Z\", \"tool\": \"leansearch\", \"query\": \"There exists a faithfully flat algebra of finite presentation with an element avoiding finitely many unimodular affine linear forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"RingHom.FaithfullyFlat\", \"Module.Flat.of_forall_exists_factorization\", \"Module.FaithfullyFlat.toFlat\", \"Module.Flat.exists_factorization_of_apply_eq_zero_of_free\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"Module.FaithfullyFlat.instOfNontrivialOfFree\", \"Module.FaithfullyFlat.finsupp\"], \"digest\": \"f19bd8c37c644fe6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern standard smooth presentations, primitive polynomial content, or flatness criteria, not simultaneous invertibility of linear forms over an arbitrary ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.FaithfullyFlat, Polynomial",
+   "results": "{\"t\": \"2026-10-24T08:30:39Z\", \"tool\": \"loogle\", \"query\": \"RingHom.FaithfullyFlat, Polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern standard smooth presentations, primitive polynomial content, or flatness criteria, not simultaneous invertibility of linear forms over an arbitrary ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given finitely many pairs of ring elements generating the unit ideal, simultaneously make their affine linear polynomials invertible after a faithfully flat finitely presented extension",
+   "results": "{\"t\": \"2026-10-24T08:30:41Z\", \"tool\": \"leanfinder\", \"query\": \"Given finitely many pairs of ring elements generating the unit ideal, simultaneously make their affine linear polynomials invertible after a faithfully flat finitely presented extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.ofHasCoeffs\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.IsStandardSmooth.out\", \"Algebra.IsStandardSmooth\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"RingHom.IsStandardSmooth\", \"Algebra.FinitePresentation.of_span_eq_top_target_aux\"], \"digest\": \"0a3a95ebdf6dcfe2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern standard smooth presentations, primitive polynomial content, or flatness criteria, not simultaneous invertibility of linear forms over an arbitrary ring."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive.*[Ff]lat|[Ff]lat.*primitive|[Ff]lat.*[Pp]olynomial|[Pp]olynomial.*[Ff]lat",
+   "results": "{\"t\": \"2026-10-24T09:00:44Z\", \"tool\": \"grep\", \"query\": \"primitive.*[Ff]lat|[Ff]lat.*primitive|[Ff]lat.*[Pp]olynomial|[Pp]olynomial.*[Ff]lat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\"], \"digest\": \"f9c1dca4827e06bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration states all clauses of this cover; hits are generic polynomial, localization, affine-space or presentation results. The item requires the explicit prime-avoidance and inverse arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection from the principal open defined by a primitive polynomial in the affine line is flat surjective and finitely presented",
+   "results": "{\"t\": \"2026-10-24T09:00:46Z\", \"tool\": \"leanfinder\", \"query\": \"The projection from the principal open defined by a primitive polynomial in the affine line is flat surjective and finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Polynomial.isOpen_imageOfDf\", \"Polynomial.comap_C_surjective\", \"Polynomial.instFinitePresentationUniversalFactorizationRing\", \"Polynomial.isOpenMap_comap_C\", \"AlgebraicGeometry.Polynomial.isOpenMap_comap_C\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\"], \"digest\": \"bb97e8e50744cb48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The polynomial basic-open image criterion is useful but does not itself state the product-of-unimodular-forms cover or its flatness, finite presentation and unit clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial ring localized at the product of finitely many unimodular linear polynomials gives an fppf cover",
+   "results": "{\"t\": \"2026-10-24T09:01:36Z\", \"tool\": \"leansearch\", \"query\": \"A polynomial ring localized at the product of finitely many unimodular linear polynomials gives an fppf cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.mvPolynomialQuotientEquiv\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"Algebra.Unramified.of_isLocalization_Away\", \"Algebra.FormallyUnramified.of_isLocalization\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"MvPolynomial.isLocalization\"], \"digest\": \"17b89709f0cd2fb2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration states all clauses of this cover; hits are generic polynomial, localization, affine-space or presentation results. The item requires the explicit prime-avoidance and inverse arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The polynomial algebra over any commutative ring is a flat module over its coefficient ring",
+   "results": "{\"t\": \"2026-10-24T09:02:34Z\", \"tool\": \"leanfinder\", \"query\": \"The polynomial algebra over any commutative ring is a flat module over its coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.polynomial\", \"Algebra.mvPolynomial\", \"Algebra.Smooth.flat\", \"RingHom.flat_algebraMap_iff\", \"RingHom.Flat.id\", \"instIsPushoutPolynomial\", \"instIsPushoutPolynomial_1\", \"Algebra.FinitePresentation.polynomial\"], \"digest\": \"6c33641e1b8b9735\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general flatness, smoothness or finite-presentation facts; they do not state the item. Existing DAG leaves supply the relevant flatness facts."
+  },
+  {
+   "tool": "grep",
+   "query": "Flat|flat",
+   "results": "{\"t\": \"2026-10-24T09:02:34Z\", \"tool\": \"grep\", \"query\": \"Flat|flat\", \"sub\": \"RingTheory/Polynomial/Basic.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general flatness, smoothness or finite-presentation facts; they do not state the item. Existing DAG leaves supply the relevant flatness facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite list of pairs generating the unit ideal the localization of R X at the product of b X plus d has surjective spectrum map",
+   "results": "{\"t\": \"2026-10-24T09:05:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite list of pairs generating the unit ideal the localization of R X at the product of b X plus d has surjective spectrum map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.piLocalizationToMaximal_surjective\", \"RingHom.surjective_ofLocalizationSpan\", \"surjective_of_isLocalization_of_span_eq_top\", \"PrimeSpectrum.finite_of_toPiLocalization_surjective\", \"MaximalSpectrum.finite_of_toPiLocalization_surjective\", \"IsLocalization.algebraMap_pi_surjective_of_isLocalization\", \"PrimeSpectrum.finite_of_toPiLocalization_pi_surjective\", \"IsLocalization.Away.mapₐ_surjective_of_surjective\"], \"digest\": \"3a23113e993ad851\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration states all clauses of this cover; hits are generic polynomial, localization, affine-space or presentation results. The item requires the explicit prime-avoidance and inverse arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "imageOfDf_eq|localization_comap_range|comap_C_surjective",
+   "results": "{\"t\": \"2026-10-24T09:05:42Z\", \"tool\": \"grep\", \"query\": \"imageOfDf_eq|localization_comap_range|comap_C_surjective\", \"sub\": \"RingTheory/Spectrum/Prime\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/IsOpenComapC.lean\", \"Mathlib/RingTheory/Spectrum/Prime/IsOpenComapC.lean\", \"Mathlib/RingTheory/Spectrum/Prime/IsOpenComapC.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\"], \"digest\": \"52794d725292cfa3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration states all clauses of this cover; hits are generic polynomial, localization, affine-space or presentation results. The item requires the explicit prime-avoidance and inverse arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-open-cell-sheaf-extension",
+  "date": "2026-10-24",
+  "group": "Q121"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: unique splitting of the central extension of SL2 in both centre cases. Supporting subargument: Proposition 4.3.1, final paragraphs, printed pp.130--131: extension from the open cell by finite-word comparison and an fppf-local common translate. Supporting input: simultaneous invertibility of unimodular affine linear forms, providing the fppf-local common translate in Conrad (4.3.2).",
+   "via": [
+    "lem-sfb-sl2-open-cell-sheaf-extension",
+    "lem-sfb-relative-sl2-central-extension-splitting",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unimodular-linear-forms-fppf-cover",
+  "worker": "stage1",
+  "summary": "Q149: statement and all hypotheses retained. Reused existing Mathlib leaves for free-module flatness, localization flatness, flat composition, affine flatness, polynomial domains and the localization spectrum image. Wrote the one-relation presentation, the prime avoiding the unimodular product and the inverses explicitly. No new nodes; checked n=0, zero rings, finite fields and zero divisors. No project attachment found.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images (3) supporting chain, specifically the fppf-local common translate in the proof of Conrad Proposition 4.3.1 before (4.3.2). The existing blueprint.from.node is null, as confirmed by tools/blueprint_refs.py ancestor; the detailed inherited place and via chain are retained. Whole-blueprint searches found no same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-f5b28f931",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-f5b28f931 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and every cited statement in full. The delivery is one commit with the item and report and adds no new nodes. Statement, stmt_deps and source are unchanged from the base copy (clones/side-live); this is a first split of an empty proof, not a re-split. The statement is true and matches how lem-sfb-sl2-open-cell-sheaf-extension step 1 uses it (pairs (g12, g22), unimodular because det = 1). Step checks: (1) the free monomial basis is flat via the free clause of lem-weil-pbc-projective-module-flat; (2) localization is flat (lem-weil-pbc-localization-flat), composition is flat, and the ring-flat ⇔ Spec-flat leaf turns this into flatness of the morphism; (3) B ≅ R[Z,T]/(TP−1), and I checked the inverse's well-definedness: T^{k+m+l}P^k(aP^l−cP^m) = aT^m−cT^l; (4) q = pR[Z] is prime by the polynomial-domain leaf over R/p and contracts to p; (5) unimodularity gives L_i ∉ q, so P^m ∉ q; (6) the image clause of the localization-spectrum embedding gives surjectivity, and the zero ring is vacuous; (7) the inverses are explicit. All cited non-definition nodes are status-mathlib leaves, so there are no tool_uses and no SGA. Tested n=0, the zero ring, Z/6 with (2,3), and F2 with Z and Z+1. Duplicate search: lem-sfb-polynomial-basic-open-image-coefficients (same unit) could replace step 6 but still needs step 4, so it is not a duplicate of the item; lem-sfb-monic-principal-open-fppf covers only monic P. Read Stacks algebra.tex at labels 00HT, 00HC, 00E3 and 00FB. blueprint.from.node is inherited as null and was left unchanged. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnimodularLinearFormsFppfCover",
+  "declaration": "AlgebraicGeometry.unimodular_linear_forms_fppf_cover",
+  "declarations": [
+   "AlgebraicGeometry.unimodularLinearFormsPolynomial",
+   "AlgebraicGeometry.unimodularLinearFormsAlgebra",
+   "AlgebraicGeometry.unimodularLinearFormsCover",
+   "AlgebraicGeometry.unimodular_linear_forms_fppf_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnimodularLinearFormsFppfCover.lean",
+  "statement": "theorem unimodular_linear_forms_fppf_cover {R : Type u} [CommRing R] {n : ℕ} (b d : Fin n → R) (hunimodular : ∀ i, ∃ r s : R, r * b i + s * d i = 1) : Flat (unimodularLinearFormsCover b d) ∧ Surjective (unimodularLinearFormsCover b d) ∧ LocallyOfFinitePresentation (unimodularLinearFormsCover b d) ∧ ∀ i : Fin n, IsUnit (algebraMap (Polynomial R) (unimodularLinearFormsAlgebra b d) (Polynomial.C (b i) * Polynomial.X + Polynomial.C (d i)))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc78d8c97",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Only the node's lean field changed versus side-live. The statement matches the node clause by clause: arbitrary CommRing R : Type u; Fin n with n=0 covered; the node's exact r*b+s*d=1 hypothesis; P = ∏(C b*X + C d) with empty product 1; B = Localization.Away P, the canonical localization; Spec.map of R→R[X]→B, correct direction; the three properties are the recorded Mathlib AlgebraicGeometry.Flat, Surjective and LocallyOfFinitePresentation; IsUnit of the image of C b*X + C d equals b_i z + d_i. All 6 stmt_deps are mathlib leaves with the declarations used. lean.statement is verbatim in the file, one universe is bound, autoImplicit is false, helpers are concrete Mathlib constructions, docstrings carry the source place, blueprint id and 7-step plan, and the proof is only sorry with no Nontrivial or other extra assumption. Edge cases n=0, zero ring, zero coefficient and finite residue field are fine. The sl2-open-cell citer uses exactly this form. No duplicate in Mathlib or project Lean. Report has a real Worker report and Second reading by Q96. No changes, so no compile was run."
+ }
+}

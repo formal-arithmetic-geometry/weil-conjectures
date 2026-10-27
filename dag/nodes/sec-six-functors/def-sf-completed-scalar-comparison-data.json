@@ -1,0 +1,104 @@
+{
+ "id": "def-sf-completed-scalar-comparison-data",
+ "kind": "definition",
+ "title": "Canonical completed scalar comparison data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, an algebra embedding $\\iota:E\\to L$, and a scheme $Y$. Use the residue-normalized completed coefficient map $c:R_E\\to R_L$ and its ordinary sheafified scalar extension [def-weil-completed-integral-scalar-data] on the small pro-etale site [def-weil-pbc-proetale-site]. Let $T$ be its ordinary extension functor on sheaves of modules [def-weil-sheaf-of-modules-category], $\\mathbf LT$ its derived extension [def-weil-abstract-derived-category], and $\\varepsilon_P:\\mathbf LT(QP)\\to Q(TP)$ its universal computation counit on a K-flat complex [def-pc-kflat-complex]. Let $S$ be the completed integral scalar extension, formed from the quotient extension tower [def-weil-integral-scalar-extension] using its derived inverse limit [def-weil-derived-limit]. Define $\\chi:\\mathbf LT\\to S$ to be the uniquely normalized natural transformation whose restriction to good representatives, followed by the canonical comparison $S(QP)\\simeq S_{\\mathrm{good}}(P)$, is $\\varepsilon_P$ followed by $Q$ of the strict quotient-Roos comparison. The latter sends a tensor $s\\otimes x$ to its sequence of finite quotient tensors in the unshifted product coordinate and zero in the shifted coordinate. Thus $\\chi$ is the published unique derived descent of that strict comparison; no invertibility assertion is part of this definition. Coefficient and scheme universes are independent.",
+ "stmt_deps": [
+  "def-weil-completed-integral-scalar-data",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-limit"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), Definition 3.4.10, Lemma 3.4.12 and Proposition 3.5.1; canonical completed scalar comparison used in Proposition 6.8.14."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical map from derived extension of complete integral coefficient sheaves to completed scalar extension",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.mkₐ\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.of_lift\", \"AdicCompletion.map_of\", \"ContinuousLinearMap.completion\", \"AdicCompletion.mk\", \"IsAdicComplete.liftRingHom\", \"AdicCompletion.of\"]}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib sheaf-level definition; reuse the published project construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical completed coefficient map and derived scalar comparison definitions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniformSpace.Completion.map_smul_eq_mul_coe\", \"UniformSpace.Completion.smul_def\", \"UniformSpace.Completion.coe_smul\", \"CauSeq.Completion.mk_smul\", \"AdicCompletion.map\", \"LaurentSeries.comparePkg_eq_extension\", \"UniformSpace.Completion.algebraMap_def\", \"AdicCompletion.val_smul_apply\"]}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib sheaf-level definition; reuse the published project construction"
+  },
+  {
+   "tool": "grep",
+   "query": "completedCoefficientMap|completedScalarComparison|rationalBalancedCoefficient",
+   "results": "Mathlib Algebra/Homology: 0 hits. rg in lean/WeilConjectures found no exact comparison. rg in lean/Sheaf found completedCoefficientMap and completedScalarComparison in Sheaf.Paper.FiniteFreeCompletedScalarComparison. DAG search found def-weil-completed-integral-scalar-data owns the former map and ordinary scalar data but no definition node owns the latter comparison. blueprint_refs.py search completed scalar comparison: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "reuse published definitions; add missing definition ownership"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-common-stage-descent-equivalence",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical coefficient maps and normalized completed scalar comparison in the conditional common-stage descent obligation; the parent is a maintainer-created obligation with no blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-common-stage-descent-equivalence",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.SfCompletedScalarComparisonData",
+  "declaration": "WeilConjectures.completedIntegralScalarComparison",
+  "file": "lean/Sheaf/Paper/SfCompletedScalarComparisonData.lean",
+  "statement": "abbrev completedIntegralScalarComparison : completedDerivedScalarExtension l E L ι Y ⟶ integralScalarExtensionOfUniverses l E L ι Y",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definition ownership only: publicly reexports the existing residue-normalized coefficient-map owner and published scalar data; the sole new declaration is a transparent abbreviation of completedScalarComparison, the unique normalized descent. No definition or proof is copied, no new choice is made, and the finite-free comparison theorem is not assumed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-184fde136",
+  "group": "Q70",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-184fde136",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Re-delivery of returned 4017973c fixes all three return points; only the dependency records, two aliases and the shift instance changed, statement unchanged. (1) The four locally finite realization helpers are cited from landed def-sf-locally-finite-adic-realization-data. (2) completedIntegralScalarCoefficientMap is the landed def-weil-completed-integral-scalar-data alias; the new node def-sf-completed-scalar-comparison-data owns an alias of completedScalarComparison with the same type and the same normalization, no invertibility claim, no other owner and no name clash. (3) The new node def-sf-rational-coefficient-inclusion records the published rationalBalancedCoefficient as existing; its signature is word-for-word the live source. scalarCommShift is now a definition used as a local instance, so importers get no second global shift instance on pbcDerivedExtend; the five advisory owners were added. Re-read the statement against the node: hypotheses, conclusions and edge cases unchanged and correct; recorded signature matches the file; report sections present. Minor, not blocking: integralRationalCoefficientMap's owner def-sfb-continuous-coefficient-pullback-maps is reached only through the new node; lem-weil-scalar-extension-composition stays a theorem dependency cited only by the node text; completedDerivedScalarExtension is still defined in a theorem's module. No compile run, as no file was changed; worker reports clean compiles (8.7 s and 36.4 s)."
+ }
+}

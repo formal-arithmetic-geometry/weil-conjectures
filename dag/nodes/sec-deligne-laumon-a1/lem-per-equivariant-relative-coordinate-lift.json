@@ -1,0 +1,237 @@
+{
+ "id": "lem-per-equivariant-relative-coordinate-lift",
+ "kind": "statement",
+ "title": "Equivariant relative coordinate lifts through a Cohen presentation",
+ "statement": "Let $C$ be a Cohen ring of residue characteristic $p>0$, with residue field $k$ [def-weil-pbc-cohen-ring], and let $R=C[[t_1,\\ldots,t_d]]$ for $d\\geq0$ [def-weil-pbc-multivariate-power-series]. Let $H$ be a finite abelian group of order $N$ invertible in $C$. Suppose $C$ contains a unit $\\zeta$ with $\\zeta^N=1$ and $1-\\zeta^a$ invertible for $1\\leq a<N$. Let $H$ act continuously on $R$, fixing $C$ pointwise and satisfying $h(t_i)=\\chi_i(h)t_i$ for characters $\\chi_i:H\\to\\langle\\zeta\\rangle$. Let $(A,\\mathfrak m)$ be a complete Noetherian regular local ring with residue field identified with $k$ [def-weil-pbc-adic-completion], [def-weil-regular-scheme], let $H$ act on $A$ by local ring automorphisms, and let $f:R\\twoheadrightarrow A$ be an $H$-equivariant local ring homomorphism inducing this residue identification. Assume $z_i=f(t_i)$ form a regular system of parameters of $A$ [def-weil-pbc-regular-system-of-parameters]. Let $z'_1,\\ldots,z'_d$ be another regular system of parameters with $h(z'_i)=\\chi'_i(h)z'_i$ for characters $\\chi'_i:H\\to\\langle\\zeta\\rangle$, and suppose $z'_i=z_i$ for $1\\leq i\\leq l$, where $0\\leq l\\leq d$. Character values on $A$ mean their images under $C\\to A$.\n\nThere are $t'_1,\\ldots,t'_d\\in(t_1,\\ldots,t_d)R$ with $f(t'_i)=z'_i$, $t'_i=t_i$ for $i\\leq l$, and $h(t'_i)=\\chi'_i(h)t'_i$. The list $p,t'_1,\\ldots,t'_d$ is a regular system of parameters of $R$. The continuous substitution homomorphism $C[[s_1,\\ldots,s_d]]\\to R$, $s_i\\mapsto t'_i$, is a $C$-algebra isomorphism and is $H$-equivariant when $h(s_i)=\\chi'_i(h)s_i$. Empty lists and $l=d$ are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 5.5.2, proof, printed p.128, second eigenparameter lifts; relative coordinate condition made explicit using Stacks more-algebra.tex Tag 07NM (lemma-quotient-power-series-ring-over-Cohen), clause (3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=(t_1,\\ldots,t_d)$ and $\\mathfrak n=(p)+I$. By [lem-weil-pbc-power-series-field-cohen-regular-complete], $R$ is complete Noetherian regular local, with maximal ideal $\\mathfrak n$, residue field $k$ and dimension $d+1$. By [def-weil-pbc-regular-system-of-parameters], $\\mathfrak m=(z_1,\\ldots,z_d)=(z'_1,\\ldots,z'_d)$ and $\\dim A=d$. Since $A$ is regular local, [lem-weil-pbc-regular-local-cotangent-dimension] gives $\\dim_k\\mathfrak m/\\mathfrak m^2=\\dim A=d$. Thus both parameter lists give bases of that vector space: they span it and each has exactly $d$ members. In particular each $z_i$ has nonzero class when its index exists.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "def-weil-pbc-regular-system-of-parameters",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032C (remark-Noetherian-complete-local-ring-universally-catenary), 00NO (lemma-regular-graded), 00KU (definition-regular-local); ILO VIII 5.5.2, printed p.128"
+   }
+  },
+  {
+   "text": "For $i\\leq l$, the eigenvector equations for $z'_i=z_i$ imply $(\\chi_i(h)-\\chi'_i(h))z_i=0$. Two distinct elements of $\\langle\\zeta\\rangle$ differ by a unit: their difference is a unit multiple of $1-\\zeta^a$ for some $1\\leq a<N$. Its image in $A$ is a unit. The nonzero class of $z_i$ from Step 1 therefore forces $\\chi_i(h)=\\chi'_i(h)$ in $C$. Set $t'_i=t_i$ for these indices. For $i>l$, write $z'_i=\\sum_j a_{ij}z_j$, lift each $a_{ij}$ to $r_{ij}\\in R$ using surjectivity of $f$, and put $u_i=\\sum_j r_{ij}t_j$. Then $u_i\\in I$ and $f(u_i)=z'_i$. This choice, rather than an arbitrary lift in $R$, gives the required zero constant term.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.5.2, printed p.128, common parameters and choice of lifts, with the variables-ideal condition expanded"
+   }
+  },
+  {
+   "text": "For $i>l$ define $t'_i=N^{-1}\\sum_{h\\in H}\\chi'_i(h)^{-1}h(u_i)$. The ideal $I$ is $H$-stable since $h(t_j)=\\chi_j(h)t_j$, so $t'_i\\in I$. Equivariance of $f$ gives $f(t'_i)=N^{-1}\\sum_h\\chi'_i(h)^{-1}\\chi'_i(h)z'_i=z'_i$. For $g\\in H$ reindex by $q=gh$; since $H$ fixes $C$ and $\\chi'_i(g^{-1}q)^{-1}=\\chi'_i(g)\\chi'_i(q)^{-1}$, this gives $g(t'_i)=\\chi'_i(g)t'_i$. For $i\\leq l$ the same eigenvector equation follows from Step 2 and the original action on $t_i$. The argument is a finite-sum identity, requiring no diagonalization or assertion about exactness of invariants.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.5.2, printed p.128, weighted H-averaging (using the primed character of the vector being lifted)"
+   }
+  },
+  {
+   "text": "Coefficientwise expansion in [def-weil-pbc-multivariate-power-series] identifies $W=I/(pI+I^2)$ with $k^d$, by the coefficients of the degree-one monomials $t_j$. Indeed series in $I$ have zero constant term, terms of degree at least two belong to $I^2$, and the remaining linear coefficients vanish in $k$ exactly when they are divisible by $p$. The map $f$ induces a surjection $W\\to\\mathfrak m/\\mathfrak m^2$: it sends $[t_j]$ to $[z_j]$, kills $pI+I^2$ because $f(p)\\in\\mathfrak m$, and induces the given residue identification. Step 1 makes it an isomorphism between $d$-dimensional spaces. Therefore $[t'_i]$ form a basis of $W$. Since $pI+I^2\\subset\\mathfrak n^2$ and $\\mathfrak n=(p)+I$, the classes of $p,t'_1,\\ldots,t'_d$ span $\\mathfrak n/\\mathfrak n^2$. Apply [lem-weil-pbc-nakayama-local-generators] to the finite $R$-module $\\mathfrak n$, generated by $p,t_1,\\ldots,t_d$: the new list generates $\\mathfrak n$. Its length $d+1$ equals $\\dim R$ by Step 1, so [def-weil-pbc-regular-system-of-parameters] says it is a regular system of parameters.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK), generator form; ILO VIII 5.5.2, printed p.128, verification that the averaged lifts are parameters"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-power-series-full-coordinates-cohen] to the regular parameter system just proved, with coefficient parameter $p$. It gives a $C$-algebra isomorphism $e:C[[s_1,\\ldots,s_d]]\\to R$ sending $s_i$ to $t'_i$. A ring isomorphism between local rings carries their unique maximal ideals onto one another, hence is continuous in the maximal-ideal-adic topologies. It is the stated substitution: truncating a series $F=\\sum_E a_Es^E$ in total variable degree gives polynomials converging in the maximal-ideal-adic topology; continuity gives $e(F)=\\sum_Ea_E(t')^E$. The same expansion verifies equivariance explicitly: $h(e(F))=\\sum_Ea_E\\prod_i\\chi'_i(h)^{E_i}(t')^E=e(h(F))$, using continuity of the action, fixed coefficients, and Step 3. For $d=0$ these sums reduce to constants and $e$ is the identity on $C$; for $l=d$ Step 2 fixes every variable. Thus all claimed clauses, including the empty cases, hold.",
+   "uses": [
+    "lem-weil-pbc-power-series-full-coordinates-cohen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NM (lemma-quotient-power-series-ring-over-Cohen), clause (3) and its proof; ILO VIII 5.5.2, printed p.128"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-power-series-full-coordinates-cohen"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 5.5.2, printed p.128, eigenparameter lifts; parameter and coordinate verification expanded using Stacks 032C, the discussion before 00KU (cotangent dimension of a regular local ring), 00DV and 07NM (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two eigenvector parameter systems lift through a Cohen power series presentation to relative coordinate systems with common boundary parameters",
+   "results": "{\"t\": \"2026-10-24T01:33:17Z\", \"tool\": \"leanfinder\", \"query\": \"Two eigenvector parameter systems lift through a Cohen power series presentation to relative coordinate systems with common boundary parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.ofHasCoeffs\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.toPresentation_val\", \"StandardEtalePresentation.toPresentation\", \"StandardEtalePair.lift_X\", \"StandardEtalePresentation.toSubmersivePresentation_map\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\"], \"digest\": \"0584d1e43f54f971\"}; Hits read: no equivariant lift of regular parameter systems or simultaneous logarithmic ambient lift. Formal smoothness of nilpotent quotients, coefficient maps and the polynomial-completion equivalence do not supply these assertions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(equivariant|eigenvector|parameter).*(lift|substitut)|(lift|substitut).*(equivariant|eigenvector|parameter)",
+   "results": "{\"t\": \"2026-10-24T01:34:36Z\", \"tool\": \"grep\", \"query\": \"(equivariant|eigenvector|parameter).*(lift|substitut)|(lift|substitut).*(equivariant|eigenvector|parameter)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read: no equivariant lift of regular parameter systems or simultaneous logarithmic ambient lift. Formal smoothness of nilpotent quotients, coefficient maps and the polynomial-completion equivalence do not supply these assertions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given an equivariant Cohen power series surjection onto a regular local ring lift a second eigenvector system of parameters to a coefficient algebra automorphism fixing a common prefix",
+   "results": "{\"t\": \"2026-10-24T01:34:36Z\", \"tool\": \"leansearch\", \"query\": \"Given an equivariant Cohen power series surjection onto a regular local ring lift a second eigenvector system of parameters to a coefficient algebra automorphism fixing a common prefix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.liftOfSurjective\", \"PowerSeries.mapAlgHom\", \"PowerSeries.mapAlgHom_apply\", \"PowerSeries.coeff\", \"MvPowerSeries.coeff\", \"MvPowerSeries.algebraMap_apply''\", \"MvPowerSeries.mapAlgHom\", \"MvPolynomial.coeToMvPowerSeries.algHom\"], \"digest\": \"d3d5b321d212f579\"}; Hits read: no equivariant lift of regular parameter systems or simultaneous logarithmic ambient lift. Formal smoothness of nilpotent quotients, coefficient maps and the polynomial-completion equivalence do not supply these assertions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"AlgEquiv\"",
+   "results": "{\"t\": \"2026-10-24T01:34:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"AlgEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"MvPolynomial.toMvPowerSeries_pUnitAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\"], \"digest\": \"45a010d5d8f09bc7\"}; Hits read: no equivariant lift of regular parameter systems or simultaneous logarithmic ambient lift. Formal smoothness of nilpotent quotients, coefficient maps and the polynomial-completion equivalence do not supply these assertions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant lifting of a regular parameter coordinate change through a power series quotient over a complete discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T01:34:37Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant lifting of a regular parameter coordinate change through a power series quotient over a complete discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"inCoordinates_apply_eq₂\", \"hom_chart\", \"Trivialization.coordChange\", \"Trivialization.mk_coordChange\", \"VectorPrebundle.coordChange\", \"Trivialization.coordChange_same\", \"Trivialization.coordChange_coordChange\"], \"digest\": \"54c7de8daf39debb\"}; Hits read: no equivariant lift of regular parameter systems or simultaneous logarithmic ambient lift. Formal smoothness of nilpotent quotients, coefficient maps and the polynomial-completion equivalence do not supply these assertions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(equivariant|eigenvector|character).*(lift|parameter)|(lift|parameter).*(equivariant|eigenvector)",
+   "results": "{\"t\": \"2026-10-24T02:26:34Z\", \"tool\": \"grep\", \"query\": \"(equivariant|eigenvector|character).*(lift|parameter)|(lift|parameter).*(equivariant|eigenvector)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Tensor.lean\"], \"digest\": \"0fd695204b9186e6\"}; Read hits: power-basis finite-algebra lifts, formally smooth nilpotent lifting, adic-completion equivalences and substitution admissibility do not give equivariant regular-parameter lifts through a Cohen quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a regular system of eigenvector parameters through an equivariant surjection from a power series ring over a Cohen ring",
+   "results": "{\"t\": \"2026-10-24T02:26:34Z\", \"tool\": \"leansearch\", \"query\": \"Lift a regular system of eigenvector parameters through an equivariant surjection from a power series ring over a Cohen ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"LinearMap.codLift\", \"RingHom.liftOfSurjective\", \"AlgHom.liftOfSurjective\", \"Polynomial.fiberEquivQuotient\", \"IsAdjoinRootMonic.liftPolyₗ\", \"PowerBasis.lift.congr_simp\"], \"digest\": \"b486b65fd3bea1f0\"}; Read hits: power-basis finite-algebra lifts, formally smooth nilpotent lifting, adic-completion equivalences and substitution admissibility do not give equivariant regular-parameter lifts through a Cohen quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"AlgEquiv\"",
+   "results": "{\"t\": \"2026-10-24T02:26:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"AlgEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"MvPolynomial.toMvPowerSeries_pUnitAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\"], \"digest\": \"45a010d5d8f09bc7\"}; Read hits: power-basis finite-algebra lifts, formally smooth nilpotent lifting, adic-completion equivalences and substitution admissibility do not give equivariant regular-parameter lifts through a Cohen quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant eigenvector lifting through a Cohen power series quotient preserving a common parameter prefix and yielding a coordinate automorphism",
+   "results": "{\"t\": \"2026-10-24T02:26:35Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant eigenvector lifting through a Cohen power series quotient preserving a common parameter prefix and yielding a coordinate automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerBasis.liftEquiv_symm_apply\", \"PowerBasis.liftEquiv'_apply_coe\", \"WittVector.liftEquiv_apply\", \"PowerBasis.liftEquiv_apply_coe\", \"PreTilt.untiltFun\", \"PreTilt.exists_smodEq_untiltAux\", \"StandardEtalePair.lift_X\", \"PowerBasis.lift_aeval\"], \"digest\": \"f4bb9decdc71f567\"}; Read hits: power-basis finite-algebra lifts, formally smooth nilpotent lifting, adic-completion equivalences and substitution admissibility do not give equivariant regular-parameter lifts through a Cohen quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series coordinate substitution with invertible linear coefficient matrix over a complete discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T02:26:36Z\", \"tool\": \"leanfinder\", \"query\": \"Formal power series coordinate substitution with invertible linear coefficient matrix over a complete discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.HasSubst\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.HasSubst.X'\", \"MvPowerSeries.HasSubst\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassDivision\", \"MvPowerSeries.hasSubst_of_constantCoeff_nilpotent\", \"PowerSeries.HasSubst.X\"], \"digest\": \"03b7a55826a5a370\"}; Read hits: power-basis finite-algebra lifts, formally smooth nilpotent lifting, adic-completion equivalences and substitution admissibility do not give equivariant regular-parameter lifts through a Cohen quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-simultaneous-cohen-rigidification-lift",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the equivariant modification subroute: ILO VIII 5.5.2, printed p.128, lifting the second eigenparameter family while retaining the common original-boundary parameters.",
+   "via": [
+    "lem-per-simultaneous-cohen-rigidification-lift",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-equivariant-relative-coordinate-lift",
+  "worker": "stage1",
+  "summary": "Expanded ILO VIII 5.5.2 weighted averaging into a complete relative coordinate-lifting proof. Choose lifts in the variables ideal, prove equality of common-prefix characters using separated roots of unity, and use the relative cotangent space I/(pI+I^2), not the quotient by p in A. Reuse existing regularity, cotangent-dimension, Nakayama and Cohen-coordinate nodes; no new nodes. Verify continuity, equivariance, and d=0 and l=d.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3 regular-local purity subroute, through the recorded equivariant modification and simultaneous Cohen-rigidification ancestors; realizes the ILO VIII 5.5.2 sentence lifting the second eigenparameter family and retaining common boundary parameters.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic Cohen power-series regularity/completeness and maximal ideal; the perverse unit supplies no commutative algebra replacement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-full-coordinates-cohen",
+    "why": "Generic coefficient-preserving coordinate theorem, Stacks 07NM (3), after this item has proved p,t-prime is a parameter system; it does not supply equivariant lifts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-full-coordinates-cohen"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-2d4bb23fa",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-2d4bb23fa (reviewer sub-agent of L); spot-checked: I read the item (statement unchanged from the live base, no new nodes) against ILO VIII 5.5.2 p.128 and Stacks 07NM(3). Step 1 gets R's maximal ideal (p,t), residue field and dimension d+1 from the Cohen power-series node, and m=(z)=(z'), dim A=d from 00KU. Step 2 is correct: two distinct powers of ζ differ by a unit and z_i has a nonzero cotangent class, so χ_i=χ'_i on common indices; the lifts are chosen in I. Step 3, the χ'-weighted averaging, is correct because N is invertible, I is H-stable and H fixes the image of C in A. ILO's χ_i there is a misprint for χ'_i. Step 4 is correct: I/(pI+I^2)≅k^d maps isomorphically onto m/m^2, so p,t' span n/n^2, Nakayama gives generation of n, and length d+1 makes it a regular system of parameters. Step 5 is correct: 07NM(3) gives the isomorphism, and continuity gives the substitution form and equivariance. Edge cases d=0, l=0, l=d, N=1, repeated characters, and Z_p[[t]]/(p-t) all hold. Batch 5: the cited lem-sfb-regular-local-graded-cotangent-criterion reaches lem-trf-hilbert-samuel-growth-dimension. That node is general dimension theory, not part of the trace formula, but the step needs only dim m/m^2=dim A, which is the Mathlib leaf lem-weil-pbc-regular-local-cotangent-dimension (also cited by the parent; no trf closure). FIX: Step 1 uses/text, proof_deps and proof_origin now cite it, and its tool_uses entry is dropped. Accepted tool_uses: the Cohen regular-complete node (032C) and the full-coordinates node (07NM(3)). No SGA, no duplicates.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EquivariantRelativeCoordinateLift",
+  "declaration": "MvPowerSeries.exists_equivariant_relative_coordinate_lift",
+  "file": "lean/Sheaf/RingTheory/EquivariantRelativeCoordinateLift.lean",
+  "statement": "theorem exists_equivariant_relative_coordinate_lift (C : Type u) [CommRing C] [IsLocalRing C] [IsNoetherianRing C] (p d : ℕ) (hC : IsCohenRing p C) (H : Type v) [CommGroup H] [Fintype H] (hN : IsUnit (Fintype.card H : C)) (ζ : Cˣ) (hζ : ζ ^ Fintype.card H = 1) (hsep : ∀ a : ℕ, 1 ≤ a → a < Fintype.card H → IsUnit (1 - (ζ : C) ^ a)) (χ χ' : Fin d → H →* Cˣ) (hχ : ∀ (i : Fin d) (h : H), χ i h ∈ Subgroup.zpowers ζ) (hχ' : ∀ (i : Fin d) (h : H), χ' i h ∈ Subgroup.zpowers ζ) (ρ : H →* RingAut (MvPowerSeries (Fin d) C)) (hcontinuous : ∀ h : H, @Continuous (MvPowerSeries (Fin d) C) (MvPowerSeries (Fin d) C) (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) C)).adicTopology (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) C)).adicTopology (ρ h)) (hfixed : ∀ (h : H) (c : C), ρ h (MvPowerSeries.C c) = MvPowerSeries.C c) (heigen : ∀ (h : H) (i : Fin d), ρ h (X i) = MvPowerSeries.C (χ i h).val * X i) (A : Type w) [CommRing A] [IsRegularLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (α : H →* RingAut A) (f : MvPowerSeries (Fin d) C →+* A) [IsLocalHom f] (hfsurj : Function.Surjective f) (hf : ∀ (h : H) (r : MvPowerSeries (Fin d) C), f (ρ h r) = α h (f r)) (residueIdentification : IsLocalRing.ResidueField C ≃+* IsLocalRing.ResidueField A) (hresidue : ∀ c : C, IsLocalRing.residue A (f (MvPowerSeries.C c)) = residueIdentification (IsLocalRing.residue C c)) (hparameters : IsLocalRing.IsRegularSystemOfParameters (List.ofFn (fun i : Fin d ↦ f (X i)))) (z' : Fin d → A) (hparameters' : IsLocalRing.IsRegularSystemOfParameters (List.ofFn z')) (heigen' : ∀ (h : H) (i : Fin d), α h (z' i) = f (MvPowerSeries.C (χ' i h).val) * z' i) (l : ℕ) (hl : l ≤ d) (hprefix : ∀ i : Fin d, i.val < l → z' i = f (X i)) : ∃ t' : Fin d → MvPowerSeries (Fin d) C, (∀ i : Fin d, t' i ∈ Ideal.span (Set.range (X : Fin d → MvPowerSeries (Fin d) C))) ∧ (∀ i : Fin d, f (t' i) = z' i) ∧ (∀ i : Fin d, i.val < l → t' i = X i) ∧ (∀ (h : H) (i : Fin d), ρ h (t' i) = MvPowerSeries.C (χ' i h).val * t' i) ∧ IsLocalRing.IsRegularSystemOfParameters (MvPowerSeries.C (p : C) :: List.ofFn t') ∧ ∃ e : MvPowerSeries (Fin d) C ≃ₐ[C] MvPowerSeries (Fin d) C, (∀ i : Fin d, e (X i) = t' i) ∧ (∀ F : MvPowerSeries (Fin d) C, e F = subst t' F) ∧ @Continuous (MvPowerSeries (Fin d) C) (MvPowerSeries (Fin d) C) (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) C)).adicTopology (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) C)).adicTopology e ∧ ∀ (h : H) (F : MvPowerSeries (Fin d) C), e (rescale (fun i : Fin d ↦ (χ' i h).val) F) = ρ h (e F)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3d00fa0a",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Snapshot vs side-live: only the item's lean field changed, plus the new module; no dependency records changed, no new nodes, no other run for this item. Hypotheses: Cohen C via IsCohenRing (the extra local/Noetherian Prop instances follow from it); MvPowerSeries (Fin d) C; finite commutative H with card invertible; ζ unit with ζ^N=1 and the separation condition; characters H→*Cˣ with values in zpowers ζ; ρ into RingAut, continuous for the explicit maximal-ideal-adic topologies, fixing C, eigen on X_i; A IsRegularLocalRing and IsAdicComplete at its maximal ideal; α into RingAut; f local, surjective, equivariant, with a residue identification (always exists, harmless); both parameter lists regular systems of parameters; prefix i.val<l. Conclusion: t' in the variables ideal, f t'=z', prefix t'_i=X_i, primed eigen equation, C p :: t' a regular system of parameters, ∃ C-algebra equivalence e with e X_i=t'_i, e=subst t', adic-continuous, e∘rescale χ'(h)=ρ h∘e: all node clauses, quantifier order matches. Mathematics checked true: prefix characters agree via unit differences of ζ-powers, averaging works, e=subst by continuity and Hausdorffness. Edge cases d=0, l=0, l=d, N=1, ramified f(p), independent universes u/v/w all covered. Statement field verbatim; one sorry theorem, no definitions; docstrings give source place, blueprint id and 5 proof steps; all stmt_deps are definition nodes; private imports are proof_dep modules; no duplicate found; no pro-etale content. No compile run (no file changed); worker reports clean scompile. Advisory: def-weil-regular-scheme's recorded declaration is the scheme predicate; the item uses Mathlib IsRegularLocalRing per that node's ring-level mathlib_match (established pattern)."
+ }
+}

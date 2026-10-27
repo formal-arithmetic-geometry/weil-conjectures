@@ -1,0 +1,611 @@
+{
+ "id": "lem-sfb-ring-square-zero-extension-classification",
+ "kind": "statement",
+ "title": "Square-zero ring extensions and functorial cotangent extension classes",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings and $M$ an $A$-module. Write $L_{A/R}$ for the full standard polynomial cotangent complex [def-trf-cotangent-resolution-data] and $E^1_R(A,M)=\\operatorname{Hom}_{D(A)}(L_{A/R},M[1])$, where $M$ is in degree zero and $D(A)$ is the derived category of ordinary modules [def-weil-abstract-derived-category]. An extension is an exact sequence $0\\to M\\xrightarrow{i}E\\xrightarrow{p}A\\to0$ of additive groups, where $E$ is a commutative $R$-algebra, $p$ is a surjective $R$-algebra map, $i$ identifies $M$ with the square-zero ideal $\\ker(p)$, and the action induced on this ideal is the specified $A$-module action; an extension isomorphism induces the identity on $M$ and $A$. There is a canonical bijection $\\mathrm{cl}$ from their isomorphism classes to $E^1_R(A,M)$, sending $A\\oplus M$ with multiplication $(a,m)(b,n)=(ab,an+bm)$ to zero. Pushout along an $A$-linear map $M\\to M_1$ corresponds to the coefficient map on $E^1$. The Baer sum (fibre product of two extensions over $A$, followed by pushout along addition $M\\oplus M\\to M$) corresponds to addition on $E^1$. More generally let $f:A\\to B$ be an $R$-algebra map, $N$ a $B$-module, and $u:M\\to N$ an $A$-linear map. For extensions $E$ of $A$ by $M$ and $F$ of $B$ by $N$, an $R$-algebra map $E\\to F$ inducing $f$ and $u$ exists if and only if $u_*\\mathrm{cl}(E)=f^*\\mathrm{cl}(F)$ in $E^1_R(A,N)$. Here $f^*$ is restriction to $D(A)$ followed by precomposition with the standard cotangent map $L_{A/R}\\to L_{B/R}$. These class maps preserve identity maps and composition. No flatness or finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tags 0GPT (lemma-extensions-of-algebras), 0GPU (remark-extensions-of-algebras), 0GPV (lemma-extensions-of-algebras-functorial), 0GPW (remark-extensions-of-algebras-functorial). Full-complex form follows from cotangent.tex Tag 08RB (lemma-relation-with-naive-cotangent-complex). Baer addition follows from the presentation formula in 0GPU: fibre product pairs the two maps on J/J^2 and coefficient addition adds them."
+ },
+ "stmt_deps": [
+  "def-trf-cotangent-resolution-data",
+  "def-weil-abstract-derived-category",
+  "def-sfb-square-zero-algebra-extension",
+  "def-trf-naive-cotangent-comparison-data",
+  "def-sc-trivial-square-zero-extension"
+ ],
+ "proof": [
+  {
+   "text": "Use the standard polynomial presentation $\\alpha:P=R[x_a\\mid a\\in A]\\twoheadrightarrow A$, $x_a\\mapsto a$, and put $J=\\ker\\alpha$, $V=\\bigoplus_{a\\in A}A\\,dx_a$ and $C=[J/J^2\\xrightarrow d V]$ in degrees $-1,0$. The universal property of differentials identifies $A\\otimes_P\\Omega_{P/R}$ with $V$: an assignment to the $dx_a$ extends uniquely by $D(g)=\\sum_a\\alpha(\\partial g/\\partial x_a)D(x_a)$, which is a derivation by the product rule on monomials. Thus $d([j])=\\sum_a\\alpha(\\partial j/\\partial x_a)dx_a$. The natural truncation comparison gives $\\lambda_A:L_{A/R}\\to C$ and $\\tau_{\\ge-1}L_{A/R}\\simeq C$. In particular this is a statement about the full standard complex; nothing asserts its lower cohomology vanishes.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-kahler-differentials",
+    "lem-trf-lci-naive-cotangent-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU (remark-extensions-of-algebras); cotangent.tex Tag 08RB (lemma-relation-with-naive-cotangent-complex)"
+   }
+  },
+  {
+   "text": "Precomposition by $\\lambda_A$ gives an additive bijection $\\operatorname{Hom}_{D(A)}(C,M[1])\\to E^1_R(A,M)$. Indeed the truncation triangle has the form $T\\to L_{A/R}\\to C\\to T[1]$, with $T=\\tau_{\\le-2}L_{A/R}$ in $D^{\\le-2}$. Both $\\operatorname{Hom}(T,M[1])$ and $\\operatorname{Hom}(T[1],M[1])$ vanish by orthogonality (the target is in $D^{\\ge-1}$ and $T[1]\\in D^{\\le-3}$). Exactness of contravariant Hom on this triangle and its rotation gives surjectivity and injectivity, respectively.",
+   "uses": [
+    "lem-trf-lci-naive-cotangent-model",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-derived-tstructure-orthogonality",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08J5 (remark-truncation-distinguished-triangle), 0149 (lemma-representable-homological), 06XS (lemma-negative-exts)"
+   }
+  },
+  {
+   "text": "Let $q:C\\to(J/J^2)[1]$ be the quotient chain map. The two-term boundary sends $h:J/J^2\\to M$ to $h[1]q$ and has kernel the maps $\\theta d$ for $\\theta:V\\to M$. It is surjective: $C$ is the cone of $d$, so $J/J^2\\to V\\to C\\to(J/J^2)[1]$ is a distinguished cone triangle of $D(A)$, whose rotation is the distinguished triangle $V[0]\\to C\\xrightarrow{\\pm q}(J/J^2)[1]\\to V[1]$ (the sign does not change the image of precomposition). In it contravariant Hom into $M[1]$ is exact, and $\\operatorname{Hom}(V[0],M[1])=\\operatorname{Ext}^1_A(V,M)=0$, since $V$ is free, hence projective. The identification $\\operatorname{Hom}_{D(A)}(J/J^2,M)=\\operatorname{Hom}_A(J/J^2,M)$ is also the Ext-zero clause of the two-term boundary node applied to $[0\\to J/J^2]$. Consequently $\\kappa_M(h)=h[1]q\\lambda_A$ identifies $\\operatorname{coker}(\\operatorname{Hom}_A(V,M)\\xrightarrow{d^*}\\operatorname{Hom}_A(J/J^2,M))$ additively with $E^1_R(A,M)$. The stated naturality of the boundary makes this identification commute with coefficients and with maps of presentations.",
+   "uses": [
+    "lem-sfb-two-term-derived-hom-boundary",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-projective-ext-criterion",
+    "def-weil-pbc-projective-module",
+    "def-pc-ext",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU (remark-extensions-of-algebras), displayed cokernel; derived.tex Tag 0149; algebra.tex Tag 05CF"
+   }
+  },
+  {
+   "text": "For an extension $E$, choose a lift $y_a\\in E$ of every $a\\in A$. Polynomial evaluation gives $t:P\\to E$ over $R$. Its restriction to $J$ lands in $i(M)$ and annihilates $J^2$, because $i(M)^2=0$; $t(pj)=t(p)i(h([j]))=i(\\alpha(p)h([j]))$ proves the resulting $h_t:J/J^2\\to M$ is $A$-linear. Set $\\mathrm{cl}(E)=\\kappa_M(h_t)$. For another lift $t'$, set $D(p)=i^{-1}(t'(p)-t(p))$. Expanding $t'(p)t'(r)$ and using $i(M)^2=0$ gives $D(pr)=\\alpha(p)D(r)+\\alpha(r)D(p)$; also $D$ is additive and zero on $R$. Thus $D$ corresponds to $\\theta:V\\to M$ and $h_{t'}-h_t=\\theta d$. Step 3 makes the class independent of the choices. An extension isomorphism transports $t$ and leaves $h_t$ unchanged, so this defines a map on isomorphism classes.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-kahler-differentials",
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU (remark-extensions-of-algebras), class formula; Tag 08S5 (lemma-huge-diagram), change of lifts"
+   }
+  },
+  {
+   "text": "Here is the explicit inverse construction, not an appeal to classification. For an $A$-linear $h:J/J^2\\to M$, regard $M$ as a $P$-module via $\\alpha$ and form the trivial extension $P\\oplus M$. The additive subgroup $I_h=\\{(j,-h([j])):j\\in J\\}$ is an ideal: multiplication by $(p,m)$ sends its displayed element to $(pj,-\\alpha(p)h([j]))=(pj,-h([pj]))$, since $\\alpha(j)=0$. Set $E_h=(P\\oplus M)/I_h$. The map $M\\to E_h$, $m\\mapsto[(0,m)]$, is injective since $I_h\\cap(0\\oplus M)=0$. The quotient map $[(p,m)]\\mapsto\\alpha(p)$ has precisely this image as its kernel: for $p\\in J$, $[(p,m)]=[(0,m+h([p]))]$. Its kernel is square-zero with the specified action. The lift $p\\mapsto[(p,0)]$ has restriction $h$, so $\\mathrm{cl}(E_h)=\\kappa_M(h)$. Step 3 therefore proves surjectivity.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08S7 (lemma-choices), pushout construction, and Tag 0GPU (remark-extensions-of-algebras); explicit quotient verification"
+   }
+  },
+  {
+   "text": "For any lift $t:P\\to E$, the map $(p,m)\\mapsto t(p)+i(m)$ is an $R$-algebra homomorphism $P\\oplus M\\to E$: its multiplication formula follows from $i(M)^2=0$ and the specified $A$-action. It is surjective since $\\alpha$ is surjective. Its kernel is exactly $I_{h_t}$: an element in the kernel first has $p\\in J$, then $m=-h_t([p])$. Thus it induces $E_{h_t}\\simeq E$ respecting kernel and quotient. If $\\mathrm{cl}(E)=\\mathrm{cl}(F)$ for two extensions of the same $A$ by $M$, Step 3 gives $h_t-h_s=\\theta d$. Replace $s(x_a)$ by $s(x_a)+i_F(\\theta(dx_a))$. Polynomial evaluation defines a new lift $s'$; its difference derivation has value $\\theta(dx_a)$ on the generators, hence $h_{s'}=h_t$. The two displayed quotient isomorphisms give $E\\simeq F$. This proves injectivity. In $A\\oplus M$, the lift $p\\mapsto(\\alpha(p),0)$ restricts to zero, so its class is zero.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-kahler-differentials",
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tags 08S7 (lemma-choices), 0GPU (remark-extensions-of-algebras); change-of-lifts calculation in Tag 08S5"
+   }
+  },
+  {
+   "text": "For $u:M\\to N$ $A$-linear, give $E\\oplus N$ multiplication $(e,n)(e',n')=(ee',p(e)n'+p(e')n)$. The antidiagonal subgroup $\\{(i(m),-u(m)):m\\in M\\}$ is an ideal, as multiplication by $(e,n)$ sends its element to $(i(p(e)m),-u(p(e)m))$. Its quotient $E^u$ maps onto $A$ with kernel $N$ embedded by $n\\mapsto[(0,n)]$: intersection with $0\\oplus N$ is zero, and $[(i(m),n)]=[(0,n+u(m))]$. This is the coefficient pushout, since a compatible map into any other extension is forced to send $[(e,n)]$ to the sum of the images of $e$ and $n$, and that formula is multiplicative. The lift $p_0\\mapsto[(t(p_0),0)]$ has conormal map $u h_t$. Thus $\\mathrm{cl}(E^u)=u_*\\mathrm{cl}(E)$ by the naturality of the boundary.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension",
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW (remark-extensions-of-algebras-functorial), coefficient pushout; Tag 0GPU, formula for its class"
+   }
+  },
+  {
+   "text": "For the fibre product $E_1\\times_A E_2$, its kernel is $M\\oplus M$ and paired polynomial lifts give conormal map $(h_1,h_2)$. Pushing out by $(m_1,m_2)\\mapsto m_1+m_2$ gives conormal map $h_1+h_2$. Since the two-term boundary is additive, the resulting class is $\\kappa_M(h_1+h_2)=\\kappa_M(h_1)+\\kappa_M(h_2)$. This is exactly the asserted Baer-sum compatibility.",
+   "uses": [
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU (remark-extensions-of-algebras), presentation formula, applied to paired lifts and addition"
+   }
+  },
+  {
+   "text": "Let $f:A\\to B$ and let $F$ be an extension of $B$ by $N$. Put $P_B=R[x_b\\mid b\\in B]$ with kernel $K$ and let $\\varphi:P\\to P_B$ send $x_a$ to $x_{f(a)}$. If $s:P_B\\to F$ is a polynomial lift, the ring fibre product $F_f=A\\times_B F$ is an extension of $A$ by $N$, with lift $p_0\\mapsto(\\alpha(p_0),s\\varphi(p_0))$. Its conormal map is $h_s\\bar\\varphi:J/J^2\\to N$, where $\\bar\\varphi([j])=[\\varphi(j)]\\in K/K^2$. The naturality of the comparison $L\\to C$ identifies the chain map induced by $\\varphi$ with the standard cotangent map after restricting coefficients to $A$. The boundary commutes with this chain map, so $\\mathrm{cl}(F_f)=\\kappa_N(h_s\\bar\\varphi)=f^*\\mathrm{cl}(F)$. No derived tensor base-change is used: this is restriction of the target complex followed by precomposition, precisely as in the statement.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-lci-naive-cotangent-model",
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW (remark-extensions-of-algebras-functorial), final presentation diagram; cotangent.tex Tag 08RB"
+   }
+  },
+  {
+   "text": "An $R$-algebra map $H:E\\to F$ inducing $f,u$ defines a map of extensions of $A$ by $N$,\n$E^u\\to F_f$, $[(e,n)]\\mapsto(p(e),H(e)+i_F(n))$. It kills the antidiagonal relations; multiplication follows from the square-zero product and the specified module action. It induces the identity on $A$ and $N$, and hence is bijective: a kernel element lies in $N$ and is zero; for surjectivity lift the quotient coordinate and then correct the difference by an element of $N$. Conversely an isomorphism $E^u\\simeq F_f$ composed with $E\\to E^u$ and $F_f\\to F$ gives the required $H$. By injectivity of the classification already proved, such an isomorphism exists exactly when $\\mathrm{cl}(E^u)=\\mathrm{cl}(F_f)$. Steps 7 and 9 identify this with $u_*\\mathrm{cl}(E)=f^*\\mathrm{cl}(F)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW (remark-extensions-of-algebras-functorial), explicit diagram chase"
+   }
+  },
+  {
+   "text": "Finally the class maps preserve identity and composition. On standard polynomial presentations the maps $x_a\\mapsto x_{f(a)}$ have these properties strictly, as do the standard cotangent maps. The comparison and boundary are natural. Thus for $A\\xrightarrow f B\\xrightarrow g C$ restriction and precomposition give $(gf)^*=f^*g^*$, and for coefficient maps $M\\xrightarrow u N\\xrightarrow v N'$ postcomposition gives $(vu)_*=v_*u_*$. Precomposition and postcomposition commute by associativity, and both send identities to identities. All the constructions used arbitrary sets of generators and arbitrary modules, so impose no finiteness or flatness condition.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-naive-cotangent-model",
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW (remark-extensions-of-algebras-functorial); cotangent.tex Tag 08QL (section-functoriality)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-lci-naive-cotangent-model",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sfb-two-term-derived-hom-boundary",
+  "lem-weil-pbc-projective-ext-criterion",
+  "def-weil-pbc-projective-module",
+  "def-pc-ext",
+  "def-sc-trivial-square-zero-extension",
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tags 08S5/08S7 (lemma-huge-diagram/lemma-choices), 0GPU/0GPW (presentation descriptions), with the full-complex comparison of cotangent.tex Tag 08RB and the derived Hom calculation of derived.tex Tags 0149, 08J5, 06XS. Quotient kernels and the Baer-sum calculation are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Square zero extensions of an algebra correspond to Ext one classes and a fixed base map is the fibre of restriction",
+   "results": {
+    "t": "2026-10-23T09:29:42Z",
+    "tool": "leanfinder",
+    "query": "Square zero extensions of an algebra correspond to Ext one classes and a fixed base map is the fibre of restriction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TrivSqZeroExt.liftEquiv",
+     "TrivSqZeroExt.liftEquiv_apply",
+     "Algebra.Extension.H1Cotangent",
+     "TrivSqZeroExt.liftEquivOfComm_apply",
+     "Algebra.Extension.h1Cotangentι_ext_iff",
+     "Algebra.Extension.H1Cotangent.map",
+     "TrivSqZeroExt.liftEquiv_symm_apply_coe",
+     "TrivSqZeroExt.liftEquivOfComm"
+    ],
+    "digest": "8f1c99eab750ca61"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern trivial square-zero extension maps or naive conormal modules, not classification of arbitrary algebra extensions by derived Ext"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero algebra extension classes form a fibre of restriction on the first derived Hom of cotangent complexes",
+   "results": {
+    "t": "2026-10-23T09:32:58Z",
+    "tool": "leanfinder",
+    "query": "Square zero algebra extension classes form a fibre of restriction on the first derived Hom of cotangent complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.H1Cotangent.map",
+     "Algebra.Extension.CotangentSpace.map_cotangentComplex",
+     "Algebra.Extension.cotangentComplex",
+     "Algebra.H1Cotangent.map",
+     "Algebra.Extension.H1Cotangent.map_eq",
+     "Algebra.Extension.homInfinitesimal",
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.Extension.Cotangent.map"
+    ],
+    "digest": "9bcb85d619151f97"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern trivial square-zero extension maps or naive conormal modules, not classification of arbitrary algebra extensions by derived Ext"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero algebra extensions classified by first derived cotangent Ext with functoriality under pullback pushout and Baer sum",
+   "results": {
+    "t": "2026-10-23T09:46:15Z",
+    "tool": "leanfinder",
+    "query": "Square zero algebra extensions classified by first derived cotangent Ext with functoriality under pullback pushout and Baer sum",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.H1Cotangent.map",
+     "Algebra.H1Cotangent.map",
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.Extension.H1Cotangent.map_comp",
+     "Algebra.Extension.Cotangent.map",
+     "Algebra.Extension.CotangentSpace.map",
+     "Algebra.Generators.H1Cotangent.δ",
+     "Algebra.Extension.h1Cotangentι"
+    ],
+    "digest": "b9a87b0d581ae3e9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern trivial square-zero extension maps or naive conormal modules, not classification of arbitrary algebra extensions by derived Ext"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"Ext\"",
+   "results": {
+    "t": "2026-10-23T09:29:43Z",
+    "tool": "loogle",
+    "query": "\"cotangent\", \"Ext\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.Extension.Cotangent",
+     "Algebra.Extension.instAddCommGroupCotangent",
+     "Algebra.Extension.Cotangent.module",
+     "Algebra.Extension.Cotangent.of",
+     "Algebra.Extension.Cotangent.val",
+     "Algebra.Extension.Cotangent.of_val",
+     "Algebra.Extension.instModuleCotangent",
+     "Algebra.Extension.Cotangent.val_of"
+    ],
+    "digest": "06fd845df43d9cf6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern trivial square-zero extension maps or naive conormal modules, not classification of arbitrary algebra extensions by derived Ext"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism classes of square zero ring extensions are classified by first Ext of cotangent complex",
+   "results": {
+    "t": "2026-10-23T09:29:44Z",
+    "tool": "leansearch",
+    "query": "Isomorphism classes of square zero ring extensions are classified by first Ext of cotangent complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.H1Cotangent",
+     "CategoryTheory.Abelian.Ext.mk₀",
+     "TrivSqZeroExt.liftEquiv",
+     "TrivSqZeroExt.ext",
+     "derivationToSquareZeroEquivLift",
+     "TrivSqZeroExt.liftEquivOfComm",
+     "TrivSqZeroExt",
+     "TrivSqZeroExt.ext_iff"
+    ],
+    "digest": "b4fa43b0b67cdcd6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern trivial square-zero extension maps or naive conormal modules, not classification of arbitrary algebra extensions by derived Ext"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Square zero extension classes Baer sum cotangent complex naturality restriction of scalars",
+   "results": {
+    "t": "2026-10-23T09:46:15Z",
+    "tool": "leansearch",
+    "query": "Square zero extension classes Baer sum cotangent complex naturality restriction of scalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TrivSqZeroExt",
+     "TrivSqZeroExt.lift",
+     "liftOfDerivationToSquareZero",
+     "TrivSqZeroExt.algebra'.congr_simp",
+     "liftOfDerivationToSquareZero_apply",
+     "TrivSqZeroExt.liftEquiv_apply",
+     "TrivSqZeroExt.isCentralScalar",
+     "TrivSqZeroExt.algebra'"
+    ],
+    "digest": "57150ec19451559c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern trivial square-zero extension maps or naive conormal modules, not classification of arbitrary algebra extensions by derived Ext"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext|extension|obstruction",
+   "results": {
+    "t": "2026-10-23T09:32:48Z",
+    "tool": "grep",
+    "query": "Ext|extension|obstruction",
+    "sub": "RingTheory/Extension",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean"
+    ],
+    "digest": "586b3a5a3a50d5b5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern trivial square-zero extension maps or naive conormal modules, not classification of arbitrary algebra extensions by derived Ext"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext|extension|Baer",
+   "results": {
+    "t": "2026-10-23T09:51:29Z",
+    "tool": "grep",
+    "query": "Ext|extension|Baer",
+    "sub": "RingTheory/Kaehler",
+    "ok": true,
+    "n_hits": 16,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Kaehler/TensorProduct.lean",
+     "Mathlib/RingTheory/Kaehler/TensorProduct.lean",
+     "Mathlib/RingTheory/Kaehler/TensorProduct.lean",
+     "Mathlib/RingTheory/Kaehler/TensorProduct.lean",
+     "Mathlib/RingTheory/Kaehler/TensorProduct.lean",
+     "Mathlib/RingTheory/Kaehler/Polynomial.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean"
+    ],
+    "digest": "6d404d4e89b551d2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern trivial square-zero extension maps or naive conormal modules, not classification of arbitrary algebra extensions by derived Ext"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext|extension|Baer",
+   "results": {
+    "t": "2026-10-23T12:06:47Z",
+    "tool": "grep",
+    "query": "Ext|extension|Baer",
+    "sub": "RingTheory/Extension",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/Generators.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean"
+    ],
+    "digest": "586b3a5a3a50d5b5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: H1Cotangent is naive cotangent homology, not classification by derived Ext; the returned derivation and trivial-extension maps require an existing split or lift and do not classify arbitrary algebra extensions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Square zero ring extension isomorphism classes correspond to derived cotangent Ext one",
+   "results": {
+    "t": "2026-10-23T12:06:47Z",
+    "tool": "leansearch",
+    "query": "Square zero ring extension isomorphism classes correspond to derived cotangent Ext one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "KaehlerDifferential.quotientCotangentIdealRingEquiv",
+     "TrivSqZeroExt.liftEquiv",
+     "KaehlerDifferential.quotientCotangentIdeal",
+     "derivationToSquareZeroEquivLift_symm_apply_apply_coe",
+     "TrivSqZeroExt.liftEquivOfComm",
+     "liftOfDerivationToSquareZero",
+     "derivationToSquareZeroEquivLift",
+     "TrivSqZeroExt.ext_iff"
+    ],
+    "digest": "99d948d9d5702007"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: H1Cotangent is naive cotangent homology, not classification by derived Ext; the returned derivation and trivial-extension maps require an existing split or lift and do not classify arbitrary algebra extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero extensions of commutative algebras are classified by Ext one of the cotangent complex naturally under algebra maps and coefficient maps",
+   "results": {
+    "t": "2026-10-23T12:06:48Z",
+    "tool": "leanfinder",
+    "query": "Square zero extensions of commutative algebras are classified by Ext one of the cotangent complex naturally under algebra maps and coefficient maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.H1Cotangent",
+     "Algebra.Extension.h1Cotangentι_ext_iff",
+     "Algebra.Extension.H1Cotangent.map",
+     "Algebra.H1Cotangent.map",
+     "Algebra.Extension.h1Cotangentι_ext",
+     "Algebra.Extension.H1Cotangent.map_eq",
+     "Algebra.Extension.cotangentComplex"
+    ],
+    "digest": "9246a1683cc812ee"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: H1Cotangent is naive cotangent homology, not classification by derived Ext; the returned derivation and trivial-extension maps require an existing split or lift and do not classify arbitrary algebra extensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"Ext\"",
+   "results": {
+    "t": "2026-10-23T12:06:48Z",
+    "tool": "loogle",
+    "query": "\"cotangent\", \"Ext\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.Extension.Cotangent",
+     "Algebra.Extension.instAddCommGroupCotangent",
+     "Algebra.Extension.Cotangent.module",
+     "Algebra.Extension.Cotangent.of",
+     "Algebra.Extension.Cotangent.val",
+     "Algebra.Extension.Cotangent.of_val",
+     "Algebra.Extension.instModuleCotangent",
+     "Algebra.Extension.Cotangent.val_of"
+    ],
+    "digest": "06fd845df43d9cf6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: H1Cotangent is naive cotangent homology, not classification by derived Ext; the returned derivation and trivial-extension maps require an existing split or lift and do not classify arbitrary algebra extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial presentation kernel modulo its square maps into a module classify square zero algebra extensions modulo derivations",
+   "results": {
+    "t": "2026-10-23T12:06:50Z",
+    "tool": "leanfinder",
+    "query": "Polynomial presentation kernel modulo its square maps into a module classify square zero algebra extensions modulo derivations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "derivationQuotKerSq_mk",
+     "derivationToSquareZeroEquivLift",
+     "derivationQuotKerSq",
+     "derivationToSquareZeroOfLift",
+     "liftOfDerivationToSquareZero_mk_apply",
+     "liftOfDerivationToSquareZero",
+     "derivationOfSectionOfKerSqZero",
+     "derivationToSquareZeroEquivLift_apply_coe_apply"
+    ],
+    "digest": "1876d188ef850980"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: H1Cotangent is naive cotangent homology, not classification by derived Ext; the returned derivation and trivial-extension maps require an existing split or lift and do not classify arbitrary algebra extensions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-algebra-small-extension-control",
+  "date": "2026-10-23",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: the first arrow of Tag 0DZF: obstruction vanishing and adjustment of a chosen lift, for one small extension; Supporting algebra: the extension-class fibre used to construct the obstruction and the marked torsor, before flatness is imposed.",
+   "via": [
+    "lem-sfb-flat-algebra-small-extension-control",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ring-square-zero-extension-classification",
+  "worker": "stage1",
+  "summary": "Q40: explicit polynomial-presentation class, its cokernel-to-full-derived-Hom identification, quotient inverse, change of lifts, coefficient pushout, Baer sum, base pullback and morphism criterion. Reused the existing cotangent comparison and homological tools, creating no nodes. All cited statements read; arbitrary modules and infinite presentations retained. STATEMENT-DISPUTED typing clarification: M is a module with zero multiplication, not a unital R-algebra; exactness is on additive groups and E -> A is an R-algebra map, as intended by Stacks 0GPT.",
+  "blueprint": "The inherited from.place identifies the supporting algebra for the obstruction fibre below flat-algebra-small-extension-control, ultimately serving det-thm-sf-ctf-stability-direct-images proof (3). The current blueprint does not itself state ring extension classification; this split supplies that inherited supporting input, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-lci-naive-cotangent-model",
+    "why": "Generic natural truncation comparison for full ring cotangent complexes, needed to pass from the standard polynomial presentation to the full derived Ext; the unit has no other statement of this comparison."
+   },
+   {
+    "node": "lem-trf-cotangent-resolution-coherence",
+    "why": "Strict identity and composition of standard ring-square cotangent maps; this is a generic cotangent construction used within the inherited deformation-theoretic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-3c58be32a",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-3c58be32a (reviewer sub-agent of L); spot-checked: I read the whole item at 3c58be32. It is a first split with 0 new nodes; live and side-live are still unsplit and there is no repair note. Statement: the only change replaces 'exact sequence of R-algebras' by an exact sequence of additive groups with E a commutative R-algebra, p a surjective R-algebra map and i identifying M with the square-zero ideal ker p. This matches Stacks 0GPT, does not weaken anything, and all three citers (flat-algebra-small-extension-control, exal-completion-smooth-complement, ring-deformation-smoothness-test) still match. Sources checked against defos.tex 0GPT/0GPU/0GPV/0GPW and cotangent.tex 08RB, with every tag verified in tags/tags. The proof follows the 0GPU presentation class and the 0GPW pushout/pullback/diagram chase, and it writes out the compatibility that 0GPV's proof omits. All 11 steps checked: the t-structure bounds (T in D^{<=-2}, T[1] in D^{<=-3}, M[1] in D^{>=-1}); the derivation difference; the ideal property of I_h and of the antidiagonal; the kernel and quotient computations; well-definedness of the pullback lift (alpha_B phi = f alpha on generators); naturality via the lci node and the boundary node; and the iff in step 10. Edge cases: M=0, A=0, u=0, R=A, and Z -> F_p with E=Z/p^2 (a nonzero class). No duplicate found by rg over 0GPT-0GPW and square-zero keywords. tool_uses for the two trf nodes accepted. Batch-5 check: lem-trf-lci-naive-cotangent-model (08RB comparison) and lem-trf-cotangent-resolution-coherence (08QL standard-resolution functoriality) are general cotangent algebra in sk-i-curve-zero. Their closures (523 and 515 nodes) contain no trace or Poincare theorem, no sec-poincare-duality node and no nt-assume leaf, so they lie genuinely outside the assumptions. One FIX (C1/C4): step 3 used the triangle V -> C -> (J/J^2)[1] -> V[1] as distinguished without justification. The corrected item file now says it is the rotated cone triangle of d, and def-weil-abstract-derived-category is added to step 3 uses and to proof_deps; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SquareZeroExtensionClassification",
+  "declaration": "Algebra.SquareZero.exists_unique_extension_classification",
+  "declarations": [
+   "Algebra.SquareZero.E1",
+   "Algebra.SquareZero.coefficientMap",
+   "Algebra.SquareZero.pullbackClass",
+   "Algebra.SquareZero.baseSquare",
+   "Algebra.SquareZero.HasPresentationFormula",
+   "Algebra.SquareZero.Classification",
+   "Algebra.SquareZero.ClassMapsFunctorial",
+   "Algebra.SquareZero.exists_unique_extension_classification"
+  ],
+  "file": "lean/Sheaf/RingTheory/SquareZeroExtensionClassification.lean",
+  "statement": "theorem exists_unique_extension_classification (C : Coherence.{u}) (D : Naive.Comparison C) : (∃! cl : ∀ (a : Arrow CommRingCat.{u}) (M : ModuleCat.{u} a.right), Extension a M → E1 C a M, Classification C D cl) ∧ ClassMapsFunctorial C",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25adfaa8e",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Byte-identical Lean to eedc037676b2 (PASS, then RETURNed at landing for a source-index collision). The colliding names Algebra.SquareZero.{Extension,Hom,IsSplit} come from NY's unlanded parallel delivery lem-per-conormal-extension-class-cokernel defd38acc (MarkedSquareZeroExtension, PASS at 16:29, stuck in LAND2 retries). It is absent from side-live and from the current parallel source index (22:52), so it cannot be imported, and renaming would hide the clash. This is a parallel definition race: the first to land owns the names and the other must rebind. Both encode Stacks 0GPT correctly. Clause check: E1 = Hom_D(A)(full cotangentComplex, M[1]); Extension (exact sequence, square-zero, action) and IsIsomorphic fixing the ends; cl pinned by HasPresentationFormula via D.comparison (comparison_formula) and shiftIso, which fixes the sign; bijection as surjective plus cl E = cl F iff isomorphic; split extension on the TrivSqZeroExt carrier exists with class 0; pushout and Baer sum exist with classes coefficientMap and sum; the f,u iff uses pullbackClass = cotangentMap, then restriction, then commShift and the single-functor comparison; functoriality via HEq on equal restricted modules. Edge cases M=0, A=0, R=A, u=0, Z/p^2 checked. Universe u loses no isomorphism class. All stmt_deps are def nodes and the 4 existing dep records are byte-identical to side-live. lean.statement is verbatim for both nodes. Docstrings and the 11 proof steps are present, the only sorry is the theorem proof, and the report sections are present. No compile (no file changed)."
+ }
+}

@@ -42,281 +42,38 @@
  ],
  "proof": [
   {
-   "text": "Choose nonnegative integers $D_X,D_Y$ bounding $\\dim X,\\dim Y$ by [lem-kun-dimension-finite-type], taking $0$ for an empty scheme. The compact-support bound of [lem-coef-integral-compact-support] sends a common interval $[a,b]$ to $[a,b+2D_X]$, while the exceptional-adjoint bound of [prop-coef-integral-exceptional-adjoint] sends it into $[a-2D_X,b+2D_Y]$. Thus $P_E=Rf_{!,E}$ and $G_E=Rf_E^!$ preserve the uniform finite-Tor domains, so the adjunction used below restricts to the stated full subcategories.",
+   "text": "Obtain S and ComparisonData P, the purity scalar square, and gamma shift compatibility from [lem-pur-adic-normalized-comparison-construction].",
    "uses": [
-    "lem-coef-integral-compact-support",
-    "prop-coef-integral-exceptional-adjoint",
-    "lem-kun-dimension-finite-type"
+    "lem-pur-adic-normalized-comparison-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Steps 2-3, checking the completed finite-Tor domains before coefficient passage"
-   }
+   "elementary": false
   },
   {
-   "text": "The pullback and completed tensor preserve derived-complete constructible objects by [lem-pur-integral-operations-preserve-constructible], and finite pullback preserves the Tor interval by [lem-sf-pullback-tor-amplitude]. The locally free rank-one twists of [lem-pur-twist-sheaf-locally-free] shift $[a,b]$ to $[a-2d,b-2d]$. The uniform domain is triangulated by [lem-weil-integral-ctf-triangulated].",
+   "text": "Apply [lem-pur-adic-canonical-source-coherence] to P.a and P.aCanonical, giving source unit, composition and shift equations.",
    "uses": [
-    "lem-pur-integral-operations-preserve-constructible",
-    "lem-sf-pullback-tor-amplitude",
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-weil-integral-ctf-triangulated"
+    "lem-pur-adic-canonical-source-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Steps 2-3, checking the completed finite-Tor domains before coefficient passage"
-   }
+   "elementary": false
   },
   {
-   "text": "For $C_{F/E}$, exactness and associativity come from [lem-pur-derived-change-of-rings], comparison with strict scalar extension from [lem-weil-finite-free-completed-scalar-comparison], and constructible preservation from [lem-weil-integral-scalar-extension-constructible]. The same Tor interval survives each ramified extension by [lem-pur-adic-scalar-extension-tor-bound], without assuming quotient flatness.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-integral-scalar-extension-constructible",
-    "lem-pur-adic-scalar-extension-tor-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, scalar-extension domain and associativity checks"
-   }
+   "text": "Precompose the exceptional unit equation with C_X(gamma_E), apply the purity square and naturality of gamma, and use the source unit equation; naturality of the scalar unit gives the result. For composition precompose with C_L/F C_F/E(gamma_E), use naturality of the scalar associator and the purity square, substitute source composition, then gamma naturality and the two successive purity squares. Both precomposition maps are isomorphisms, so cancellation proves the equations.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "In the strict K-flat models of [lem-pur-integral-operations-well-defined], inverse image, tensor with a fixed twist, reduction, cone and shift are termwise compatible. The exact strict-tower derived-limit functor [lem-weil-pbc-ringed-strict-tower-homotopy-limit] therefore makes $H_E$ exact; termwise scalar multiplication makes it $\\mathcal O_E$-linear.",
-   "uses": [
-    "lem-pur-integral-operations-well-defined",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Steps 2-3, exact strict limits and linearity"
-   }
-  },
-  {
-   "text": "Construct $a_{F/E}$ from the pullback and tensor comparisons of [lem-pur-integral-operations-scalar-extension], the twists of [def-coefficient-twists-detailed], and the shift identification, transporting through $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison]. The compact-support comparison $c_{F/E}$ is [lem-pur-compact-support-integral-coefficient-comparison]. Balancing maps on K-flat representatives send $((x\\otimes s)\\otimes t)$ to $x\\otimes st$ and $x\\otimes1$ to $x$; [lem-pur-derived-change-of-rings] descends these identities and gives the unit, composition and shift laws for $a$.",
-   "uses": [
-    "lem-pur-integral-operations-scalar-extension",
-    "def-coefficient-twists-detailed",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, scalar reassociations and compact-support coefficient comparisons"
-   }
-  },
-  {
-   "text": "Put $E_0=\\mathbf Q_\\ell$, $\\mathbf1_{0,W}=\\widehat{\\mathbf Z}_{\\ell,W}$ and $T_0=\\mathbf1_{0,X}(d)[2d]$. By [lem-weil-constant-coefficient-objects-constructible] it is constructible, derived complete and has reduction interval $[0,0]$. Apply [thm-pur-adic-reconstruction] once to choose $g_0:T_0\\xrightarrow{\\sim}G_0\\mathbf1_{0,Y}$ with prescribed finite reductions, and define $t_0=\\epsilon_{0,\\mathbf1_0}\\circ P_0(g_0)$. Its twist interval is $[-2d,-2d]$; [lem-coef-integral-compact-support] with absolute bound $D_X$ gives $P_0T_0$ and interval $[-2d,-2d+2D_X]$. Counit compatibility in [prop-coef-integral-exceptional-adjoint] identifies reductions of $t_0$ with [def-pur-smooth-trace].",
-   "uses": [
-    "lem-weil-constant-coefficient-objects-constructible",
-    "thm-pur-adic-reconstruction",
-    "lem-coef-integral-compact-support",
-    "prop-coef-integral-exceptional-adjoint",
-    "def-pur-smooth-trace",
-    "lem-kun-dimension-finite-type"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 2, choosing one reconstructed unit-coefficient morphism"
-   }
-  },
-  {
-   "text": "For finite $E$ put $T_E=\\mathbf1_{E,X}(d)[2d]$, $C_{E/0}=C_{E/\\mathbf Q_\\ell}$, and let $\\theta_E:C_{E/0,X}T_0\\xrightarrow{\\sim}T_E$ be the Step 5 comparison (the twist and scalar-extension comparison $a$ at the unit, for $\\mathbf Q_\\ell\\subset E$). Define $t_E=C_{E/0,Y}(t_0)c_{E/0,T_0}^{-1}P_E(\\theta_E^{-1})$. For $K$ define $u_{E,K}$ as inverse projection followed by $t_E\\widehat\\otimes1$, using the order $T_E\\widehat\\otimes^LLf_E^*K$.",
-   "uses": [
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "fix-prop-projection-formula",
-    "prop-coef-integral-exceptional-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Steps 2-3, scalar extension of the single integral trace"
-   }
-  },
-  {
-   "text": "Take $\\gamma_{E,K}$ to be the adjoint transpose of $u_{E,K}$, precomposed with the canonical identification $H_EK\\cong T_E\\widehat\\otimes^LLf_E^*K$ (twist reassociation and tensor symmetry). For a morphism $v:K\\to K'$, naturality of the projection map, tensor maps and counit gives $G_E(v)\\gamma_{E,K}=\\gamma_{E,K'}H_E(v)$ after applying the injective adjunction Hom bijection. The same Hom bijection is additive and $\\mathcal O_E$-linear because $P_E,G_E,H_E$ and the counit are linear; hence the transpose is $\\mathcal O_E$-linear in morphisms. This is the elementary adjoint-transpose calculation in the additive linear categories supplied by [prop-coef-integral-exceptional-adjoint], [lem-weil-compact-support-reduction-tower-functor] and [lem-weil-pbc-ringed-strict-tower-homotopy-limit].",
-   "uses": [
-    "prop-coef-integral-exceptional-adjoint",
-    "lem-weil-compact-support-reduction-tower-functor",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Steps 2-3, integral naturality and linearity"
-   }
-  },
-  {
-   "text": "At cofinal $E$-levels $er$, [lem-pur-compact-support-integral-coefficient-comparison] reduces $t_E$ to the extension of $t_{A_r}$, which is the finite smooth trace by [lem-pur-finite-universal-smooth-trace]. Reducing $u_{E,K}$ with [fix-prop-projection-formula] gives the finite counit composite [def-pur-smooth-trace], and [prop-coef-integral-exceptional-adjoint] identifies its transpose with the reduction of $\\gamma_{E,K}$. For arbitrary $m$, choose $er\\ge m$ and use [thm-pur-finite-reduction-of-purity]. Thus reductions are the prescribed maps from [thm-pur-adic-reconstruction], invertible by [thm-pur-finite-coefficient-smooth-purity]. If $Q$ is the cone, [lem-weil-integral-ctf-triangulated] makes it derived complete; exact reduction [lem-pur-derived-change-of-rings] makes every reduction zero, and [def-weil-derived-complete] plus [lem-kun-distinguished-cone-zero] gives $Q=0$.",
-   "uses": [
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "lem-pur-finite-universal-smooth-trace",
-    "fix-prop-projection-formula",
-    "def-pur-smooth-trace",
-    "prop-coef-integral-exceptional-adjoint",
-    "thm-pur-finite-reduction-of-purity",
-    "thm-pur-adic-reconstruction",
-    "thm-pur-finite-coefficient-smooth-purity",
-    "lem-weil-integral-ctf-triangulated",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-derived-complete",
-    "lem-kun-distinguished-cone-zero",
-    "def-pur-smooth-purity-map",
-    "def-pur-co-smoothness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Steps 1-3, cofinal reductions and zero-cone detection"
-   }
-  },
-  {
-   "text": "Define $b_{F/E,K}$ as the transpose of $C_Y(\\epsilon_{E,K})c_{F/E,G_EK}^{-1}$ using [prop-coef-integral-exceptional-adjoint]. Naturality follows from naturality of $c$ and the counit.",
-   "uses": [
-    "prop-coef-integral-exceptional-adjoint",
-    "lem-pur-compact-support-integral-coefficient-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, exceptional coefficient comparison"
-   }
-  },
-  {
-   "text": "The scalar-extended traces satisfy $t_F P_F(a_{F/E,\\mathbf1_E})c_{F/E,T_E}=C_Y(t_E)$ by [lem-pur-adic-scalar-trace-coherence].",
-   "uses": [
-    "lem-pur-adic-scalar-trace-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, scalar trace transitivity"
-   }
-  },
-  {
-   "text": "Tensor this trace identity with $C_YK$ and use the coefficient and projection compatibility of [fix-prop-projection-formula] to obtain $u_{F,C_YK}P_F(a_{F/E,K})c_{F/E,H_EK}=C_Y(u_{E,K})$.",
-   "uses": [
-    "fix-prop-projection-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, projection compatibility of trace-valued maps"
-   }
-  },
-  {
-   "text": "Transpose the two sides under $P_F\\dashv G_F$. Naturality of $c^{-1}$ and the definition of $b$ make the transpose of $b_KC_X(\\gamma_{E,K})$ equal to $C_Y(u_{E,K})c_{H_EK}^{-1}$, while the transpose of $\\gamma_{F,C_YK}a_K$ is $u_{F,C_YK}P_F(a_K)$. The preceding identity and injectivity of the adjunction Hom bijection prove the purity square. Since $a$ and both purity maps are isomorphisms, $b$ is an isomorphism.",
-   "uses": [
-    "prop-coef-integral-exceptional-adjoint",
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "fix-prop-projection-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, scalar purity square"
-   }
-  },
-  {
-   "text": "The tensor formula of Step 5 gives the associator and identity equations for $a$. Apply [lem-weil-pbc-mate-pasting] to the three adjunctions and inverse coefficient squares $c_{F/E}^{-1},c_{L/F}^{-1}$. The mate of the pasted square is $b_{L/F,C_{F/E,Y}K}C_{L/F,X}(b_{F/E,K})$, and the composition equation for $c$ in [lem-pur-compact-support-integral-coefficient-comparison] identifies the paste with $c_{L/E}^{-1}$. This is the displayed equation for $b$; the identity extension gives $b_{E/E}=1$.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "lem-pur-compact-support-integral-coefficient-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, three-field coherence"
-   }
-  },
-  {
-   "text": "The compact-support functor is exact and has its specified shifts by [lem-weil-compact-support-reduction-tower-functor] and [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The canonical adjunction shift comparison for $G_E$ is characterized by the counit through $\\operatorname{Hom}(M,G_E(K[1]))\\cong\\operatorname{Hom}(P_EM,K[1])\\cong\\operatorname{Hom}(P_E(M[-1]),K)\\cong\\operatorname{Hom}(M[-1],G_EK)$.",
-   "uses": [
-    "lem-weil-compact-support-reduction-tower-functor",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "prop-coef-integral-exceptional-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, canonical shift comparisons"
-   }
-  },
-  {
-   "text": "The compact-support projection map commutes with shifting its second input, including proper and open constituents, by [lem-pur-adic-projection-shift-coherence]. Its proof uses [def-exchange-projection], the proper mate shift [lem-weil-pbc-ringed-projection-mate-exact], and exact extension by zero and its projection formula [lem-cbc-proetale-extension-zero, lem-cbc-extension-zero-projection-formula].",
-   "uses": [
-    "lem-pur-adic-projection-shift-coherence",
-    "def-exchange-projection",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-cbc-proetale-extension-zero",
-    "lem-cbc-extension-zero-projection-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, projection-formula shift calculation"
-   }
-  },
-  {
-   "text": "Consequently $u_{E,K[1]}=u_{E,K}[1]$ and $\\gamma_{E,K[1]}=\\gamma_{E,K}[1]$ by [lem-pur-adic-projection-shift-coherence] applied with $T=T_E$ and $t=t_E$; the identification $H_EK\\cong T_E\\widehat\\otimes^LLf_E^*K$ of Step 8 commutes with the shift in $K$, the Koszul sign of moving the shift past $T_E$ (in degree $-2d$) being $(-1)^{2d}=1$. Exactness of $H_E$ and the shifted adjunction make $G_E$ exact on the finite-Tor categories. Since $c$ commutes with shift by [lem-pur-compact-support-integral-coefficient-comparison], transposing its shifted defining composite gives $b_{F/E,K[1]}=b_{F/E,K}[1]$. Applying this to the purity square proves its shift compatibility.",
-   "uses": [
-    "lem-pur-adic-projection-shift-coherence",
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "prop-coef-integral-exceptional-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-    "place": "Unit Step 3, shift compatibility of purity and coefficient comparisons"
-   }
+   "text": "Solve the purity square for b as C_X(gamma_E inverse) followed by a and gamma_F C_Y. Whiskering, inverse and composition preserve CommShift, so source scalar shifts and gamma shifts give exceptional scalar shifts. Assemble all eight coherence conjuncts with P into Data.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-coefficient-twists-detailed",
-  "def-exchange-projection",
-  "def-pur-co-smoothness",
-  "def-pur-smooth-purity-map",
-  "def-pur-smooth-trace",
-  "def-weil-derived-complete",
-  "fix-prop-projection-formula",
-  "lem-cbc-extension-zero-projection-formula",
-  "lem-cbc-proetale-extension-zero",
-  "lem-coef-integral-compact-support",
-  "lem-kun-dimension-finite-type",
-  "lem-kun-distinguished-cone-zero",
-  "lem-pur-adic-projection-shift-coherence",
-  "lem-pur-adic-scalar-extension-tor-bound",
-  "lem-pur-adic-scalar-trace-coherence",
-  "lem-pur-compact-support-integral-coefficient-comparison",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-finite-universal-smooth-trace",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-pur-integral-operations-well-defined",
-  "lem-pur-twist-sheaf-locally-free",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-constant-coefficient-objects-constructible",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-integral-ctf-triangulated",
-  "lem-weil-integral-scalar-extension-constructible",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "prop-coef-integral-exceptional-adjoint",
-  "thm-pur-adic-reconstruction",
-  "thm-pur-finite-coefficient-smooth-purity",
-  "thm-pur-finite-reduction-of-purity"
+  "lem-pur-adic-normalized-comparison-construction",
+  "lem-pur-adic-canonical-source-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-  "place": "Steps 2-3; agent construction from a single reconstructed Z_l trace, using the cited finite smooth-trace, projection-formula, and exceptional-adjunction statements as the finite model"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Integral coefficient transport; normalized trace/source construction followed by explicit cancellation through the purity square (R2, 2026-10-25)"
  },
  "mathlib_match": null,
  "status": "split",
@@ -484,93 +241,12 @@
   }
  ],
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-adic-purity-scalar-naturality",
   "worker": "stage1",
-  "summary": "Repair of the returned split, in seventeen proof steps. Two returned auxiliary nodes were removed: the compact-support/exceptional Tor-bound node (Step 1 now cites lem-coef-integral-compact-support and prop-coef-integral-exceptional-adjoint directly) and the adjoint-transpose linearity node (now the elementary calculation of Step 8). Three statement-only prerequisites carry the remaining hidden arguments: ramified scalar-extension Tor preservation (Step 3), scalar coherence of the reconstructed traces (Step 11), and projection/adjunction shift compatibility of trace-valued maps (Steps 16-17). The item statement and hypotheses are unchanged. Maintainer review 2026-10-18: the projection-shift node no longer requires T in degree zero (its use has T=T_E in degree -2d); stale step cross-references corrected.",
-  "blueprint": "Imported thm-pur-rational-and-qbar-purity Proof Step 2: independence of finite field extension; unit sk-thm-purity-transport Steps 2-3: integral construction (Steps 1-9 of the item) followed by coherent coefficient passage (Steps 10-14) and shift compatibility (Steps 15-17). The hidden Tor-domain, trace-coherence and shift arguments are carried by three cited auxiliary nodes.",
-  "tool_uses": [
-   {
-    "node": "fix-prop-projection-formula",
-    "why": "Steps 7, 9, 12 and 13 use invertibility, naturality and coefficient/reduction compatibility of the compact-support projection map with constructible first input and finite-Tor second input; the purity-transport unit does not construct the projection formula."
-   },
-   {
-    "node": "lem-coef-integral-compact-support",
-    "why": "Steps 1 and 6 use constructible preservation, a common output Tor interval and canonical finite-reduction comparison for integral compact support, with a bound for the absolute source dimension; the purity unit has no independent compact-support preservation/reduction theorem."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Steps 3, 5 and 9 use the everywhere-defined exact derived coefficient tensor and its K-flat representatives, including nonflat quotient changes; this is a module-sheaf tool rather than a purity assertion."
-   },
-   {
-    "node": "lem-pur-integral-operations-preserve-constructible",
-    "why": "Step 2 uses constructible preservation and reduction formulas for integral pullback and completed tensor; the purity-transport unit does not establish these underlying operations."
-   },
-   {
-    "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "Step 5 uses the natural pullback/tensor coefficient comparisons and their unit and extension-composition clauses to form a; this is an operation comparison independent of purity."
-   },
-   {
-    "node": "lem-pur-integral-operations-well-defined",
-    "why": "Step 4 uses its specified K-flat strict complex models for pullback and tensor to verify exactness; the purity unit does not construct those models."
-   },
-   {
-    "node": "lem-pur-twist-sheaf-locally-free",
-    "why": "Step 2 uses rank-one local freeness, derived completeness and the specified finite reductions of the Tate twist; these coefficient-sheaf properties precede the purity-transport unit."
-   },
-   {
-    "node": "lem-sf-pullback-tor-amplitude",
-    "why": "Step 2 uses preservation of the same Tor interval at each finite level, with f separated finite type; the purity unit assumes rather than proves the finite-Tor domain of pullback."
-   },
-   {
-    "node": "lem-weil-compact-support-reduction-tower-functor",
-    "why": "Steps 8 and 15 use its exact linear strict-tower lift with evaluations on morphisms; an inverse system merely in the triangulated category would not suffice to prove exactness and linearity of P."
-   },
-   {
-    "node": "lem-weil-constant-coefficient-objects-constructible",
-    "why": "Step 6 uses the completed unit and its free degree-zero reductions to apply adic reconstruction once; this is a coefficient-object construction, absent from the transport unit."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Steps 3 and 5 identify ordinary completed-ring tensor with strict-tower scalar extension and obtain completeness of the result; the unit does not compare these two presentations."
-   },
-   {
-    "node": "lem-weil-integral-ctf-triangulated",
-    "why": "Steps 2 and 9 need closure of the uniform finite-Tor category under shifts and cones; that categorical closure is independent of purity."
-   },
-   {
-    "node": "lem-weil-integral-scalar-extension-constructible",
-    "why": "Step 3 uses constructible preservation for integral scalar extension after the ordinary tensor/strict-tower comparison; no purity argument supplies that preservation."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Steps 4, 8 and 15 use the exact total-derived inverse-limit functor on strict towers and its K-injective computation; choosing cones in a bare triangulated category gives no such functor."
-   },
-   {
-    "node": "prop-coef-integral-exceptional-adjoint",
-    "why": "Steps 1, 6-10, 13, 15 and 17 use the integral constructible right adjoint, uniform Tor bounds, and its finite-reduction unit/counit compatibility; the unit needs this underlying adjunction to transpose the trace."
-   },
-   {
-    "node": "thm-pur-finite-coefficient-smooth-purity",
-    "why": "Step 9 uses invertibility of the prescribed finite purity maps; this is exactly the finite smooth-purity input required by unit Step 2, not a replacement route."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Steps 1 and 6 bound the absolute dimensions of the finite-type schemes X and Y to check the compact-support and exceptional-adjoint uniform Tor domains; this generic dimension fact is not supplied by the purity-transport unit."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Step 16 uses the canonical projection mate shift identity for the separately derived proper direct-image constituent at each finite coefficient ring; this is a generic ringed-topos tool and does not assert smooth purity."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero",
-    "why": "Step 16 needs exact degreewise extension by zero to pass its termwise signed tensor identity to the finite derived open projection map."
-   },
-   {
-    "node": "lem-cbc-extension-zero-projection-formula",
-    "why": "Step 16 identifies its presheaf tensor construction with the canonical derived open projection isomorphism; this open-immersion tool supplies no purity assertion."
-   }
-  ]
+  "summary": "Re-split under the released keep_plan order: three statement-only arguments distribute former Steps 1-5, 6-9, and 10-17. The statement, its dependencies and Lean record are unchanged. The full old proof is retained in report.md, with sources and hypothesis checks. The assembly uses the existing scalar trace coherence separately. Removed the obsolete source-note citation to the forbidden trace route; the proof stays on the diagonal/reconstruction route.",
+  "blueprint": "thm-pur-rational-and-qbar-purity imported Proof Step 2 (Qbar stage); sk-thm-purity-transport Steps 2-3; actual unit sk-thm-sf-compatibility clause (7). Operation domains, reconstructed unit trace, and coefficient mates respectively realize the original arguments.",
+  "tool_uses": []
  },
  "tool_uses": [
   "fix-prop-projection-formula",
@@ -595,19 +271,62 @@
   "lem-cbc-extension-zero-projection-formula"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q105-263efc7f6",
-  "group": "Q105",
+  "reviewer": "NT-cc-Q124-eba8ddc23",
+  "group": "Q124",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-263efc7f6 (reviewer sub-agent of L); spot-checked: Read the item, its 17 steps, the 3 new nodes and the full statement of every cited node against the master sk-thm-purity-transport Steps 1-3, with det-sp-field-extension-towers as same_as. Rechecked by hand: Step 9 (u reduces at levels er to the finite counit composite, and its transpose is gamma_{f,K} by def-pur-co-smoothness clause 2 and def-pur-smooth-purity-map; the cone vanishes) and Step 13 (both transposes equal C(u_E)c^-1). Step 14 checked: b's composition law follows from mate pasting and c's composition law. The Tor-bound node is true: when en>=m the test reduces to K_n tensor N with no flatness needed; checked for e>1. The trace-coherence node is true for any t_0. Fault 1 (E1): the projection-shift node required T to be in degree zero, but Steps 16-17 apply it to T_E=1(d)[2d], which sits in degree -2d. FIXED by allowing any T, which is true because the projection map is a morphism of exact functors in the second variable for every T; the node now also cites fix-prop-projection-formula for the invertibility of the projection map. Fault 2: Steps 7 and 14 pointed to Step 2 instead of Step 5, and the split_report summary and tool_uses step numbers were stale. FIXED in fixes/, and Steps 8 and 17 now state the H_E K = T_E tensor Lf*K identification and its Koszul sign. Batch-5 check: def-pur-co-smoothness and def-pur-smooth-purity-map are definitions and reach lem-pod-integral-pullback-composition, which is generic integral-pullback functoriality. lem-pur-compact-support-integral-coefficient-comparison reaches lem-trf-adjoint-mate, a pure lemma on conjugate adjoints. Neither is given by or part of the trace-formula or Poincare-duality proofs, so all three citations are accepted. All 20 tool_uses accepted. No step uses SGA, but the maintainer-owned source.note of the item still cites SGA 4 XVIII and should be cleaned by the maintainer.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-eba8ddc23 (reviewer sub-agent of L); spot-checked: The re-split order (released 2026-10-22, at least 2 statement-only nodes, assembly at most 3000 chars) is met. There are 3 new nodes of comparable size: operation domains with a/c (old steps 1-5), the unit trace with its reductions and invertibility (old 6-9), and the conditional trace-transpose coefficient calculus (old 10, 12-17). Old step 11 goes to the existing lem-pur-adic-scalar-trace-coherence. The assembly is 1307 chars. The statement, stmt_deps, source and lean are byte-identical to the live node, and no parallel re-split exists. I checked every new statement and found each true: the intervals [r,s+2D_X], [r-2D_X,s+2D_Y] and [r-2d,s-2d]; the ramified Tor bound needs no flatness; the reconstruction is applied once, without uniqueness; the er-level reductions follow from lem-pur-finite-universal-smooth-trace; the cone and completeness argument holds; u-tilde makes the projection identity well-typed; the a and b associator formulas type correctly; b is invertible from the square; the Koszul sign is +1; the zero-trace and d=0 edge cases are fine. None is a duplicate of tower-trace-comparison (it cites the item, so citing it would make a cycle) or of the 2026-10-22 same-day consumers. FIX 1: lem-pur-adic-projection-shift-coherence is Lean-stated, has reviewed_lean pass and was created for this item; it was left with 0 citers while the calculus node restated its conclusion. The calculus node now takes the u and adj(u) shift identities as hypotheses, and item Step 4 supplies them from that node with T=T_E, t=t_E. FIX 2: added the missing notion citations def-kun-topological-krull-dimension (domain node) and def-weil-integral-derived-reduction (unit-trace node). Advisory for the maintainer: the item's 20 top-level tool_uses are stale, and the maintainer-owned source.note still names SGA 4 XVIII although the report says it was replaced (the preflight exempts it because the source is a blueprint document).; 4 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "blueprint_parent": {
   "node": "sk-thm-sf-compatibility",
   "clause": 7,
   "from_unit": "sk-thm-purity-transport",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicPurityScalarNaturality",
+  "declaration": "WeilConjectures.AdicPurityScalarNaturality.adicPurityScalarNaturality",
+  "declarations": [
+   "WeilConjectures.AdicPurityScalarNaturality.adicPurityScalarNaturality"
+  ],
+  "file": "lean/Sheaf/Paper/AdicPurityScalarNaturality.lean",
+  "statement": "theorem adicPurityScalarNaturality : ∃ S : ConstructibleExceptionalCoefficients.System C.l C.Qbar D C.different (f := f), Nonempty (Data D C f d S)",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The original data interface is publicly re-exported from AdicPurityScalarNaturalityData. Its operation properties are inherited from three smaller records retaining every proposition; Coherence is exposed for assembly. The theorem combines normalizedComparisonConstruction and canonicalSourceCoherence by a proved cancellation argument: the purity square transfers source units, associativity and shift compatibility to b. This is a decomposition into two strictly smaller interface-transport statements."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-821c7ae33",
+  "group": "Q111",
+  "result": "pass",
+  "note": "821c7ae3 fixes the 27ff45d2 H3 fault: Data.finiteRightNormalized pins RingSystem.finiteRight as the Hom-transpose mate of S.ring.left (finiteLeftFixed = left + canonical constructibleFiniteImageIso/sfIntrinsicCompactSupportComparison) against Etale.rightDerivedUpperShriekAdjunction via fixedCompactSupportComparisonIso and derivedComparisonAdjunction, the landed FixedComparisonClassAdjunction.homEquiv_normalized pattern. M=G N, v=counit determines finiteRight (bounded constructible objects are of étale origin, ν* fully faithful on D+); satisfiable since no other System field uses finiteRight. The remaining left/adjunction gauge cancels in b≫finiteRight, in γ≫targetRealization and in the purity square, so no Aut(f_n^!) can be absorbed. Old Data fields refactored into named Props with identical text (Coherence = ordered 8-conjunct). Statement verbatim, helpers recorded with docstrings, single sorry, edge cases and universes OK, live node lean null. Advisory: owners of the helper decls not in stmt_deps (transitive); stale tool_uses and SGA source.note are maintainer-owned. No compile (no file changed); worker reports 50.5 s clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-adcfc",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T143842-L-1091556",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs old item module (verbatim apart from the declared Coherence expose, OperationData regrouping and transparency options); the two new sorry statements vs the old item statement (each follows from it, neither restates it); 4 direct importers compiled against the delivered modules"
  }
 }

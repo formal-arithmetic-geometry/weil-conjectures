@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-space-fppf-source-locality-transfer",
+ "kind": "statement",
+ "title": "Transfer of fppf source locality from schemes to algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $P$ be an isomorphism-invariant property of morphisms of $S$-schemes. Suppose $P$ is etale local on source-and-target in the sense explicitly defined in [lem-sfb-space-etale-presentation-property-criterion], and let $P_{\\mathrm{sp}}$ be its extension to morphisms of algebraic spaces [def-trf-algebraic-space] by the equivalent etale presentation conditions of that node. Suppose that for every scheme morphism $f:X\\to Y$ and every fppf covering $\\{q_i:X_i\\to X\\}_{i\\in I}$ [def-pc-fppf-site], one has $P(f)$ if and only if $P(fq_i)$ for every $i$. Then for every morphism of algebraic spaces $g:A\\to B$ and every fppf covering $\\{a_j:A_j\\to A\\}_{j\\in J}$ one has $P_{\\mathrm{sp}}(g)$ if and only if $P_{\\mathrm{sp}}(ga_j)$ for every $j$. Here an fppf covering of algebraic spaces is a set-indexed jointly surjective family of maps flat and locally of finite presentation on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]; jointly surjective means surjective on field-valued point classes [def-trf-algebraic-space-jointly-surjective-family]. The empty family is allowed over the empty space. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06ER (lemma-transfer-from-schemes), specialized to the fppf topology; spaces-topologies.tex Tag 03Y9 (lemma-fppf) supplies covering calculus."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Fix $g:A\\to B$ and the fppf family $\\{a_j:A_j\\to A\\}$. The presentation criterion gives schemes $U,V$, representable etale maps $a:U\\to A$, $b:V\\to B$, and $h:U\\to V$, with $a$ surjective and $ga=bh$. Put $W_j=A_j\\times_A U$. The fibre-product lemma makes $W_j$ an algebraic space and $p_j:W_j\\to A_j$ surjective etale, by pulling back the singleton etale cover $\\{a\\}$. Choose a scheme atlas $e_j:U_j\\to W_j$ surjective etale from the definition of algebraic space. Write $q_j:U_j\\to U$ for the other projection composed with $e_j$.",
+   "uses": [
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06ER (lemma-transfer-from-schemes), first paragraph; use the presentation-existence clause of Tag 03MJ"
+   }
+  },
+  {
+   "text": "The composite $t_j=p_je_j:U_j\\to A_j$ is representable surjective etale. Explicitly, on a scheme $T\\to A_j$ let $D=T\\times_{A_j}W_j$, a scheme surjective etale over $T$. Then $E=D\\times_{W_j}U_j$ is a scheme surjective etale over $D$. On test schemes, compatible pairs identify $E$ with $T\\times_{A_j}U_j$, so the scheme covering-composition lemma makes its projection to $T$ surjective etale. This verifies the representable scheme tests for $t_j$ without treating $A_j$ or $W_j$ as schemes. The pullback relation gives $ga_jt_j=bhq_j$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06ER (lemma-transfer-from-schemes), first and last paragraphs; representable composition expanded on scheme tests"
+   }
+  },
+  {
+   "text": "By covering calculus (2), $\\{W_j\\to U\\}_j$ is fppf. Each singleton $\\{e_j:U_j\\to W_j\\}$ is fppf by (1); composing these covers by (3) gives $\\{q_j:U_j\\to U\\}_j$ fppf as a family of spaces. Clause (4) makes it an fppf covering of schemes, since $U$ and every $U_j$ are schemes. The assumed scheme source locality applied to $h:U\\to V$ and this covering gives $P(h)\\Longleftrightarrow(\\forall j,\\ P(hq_j))$.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06ER (lemma-transfer-from-schemes), second paragraph and middle equivalence; Tag 03Y9 (lemma-fppf), parts (2),(3)"
+   }
+  },
+  {
+   "text": "The presentation $(a,b,h)$ has surjective source map, so the presentation criterion gives $P_{\\mathrm{sp}}(g)\\Longleftrightarrow P(h)$. For every $j$, the diagram $(t_j,b,hq_j)$ is a presentation of $ga_j$ with surjective source map by step 2; the same criterion gives $P(hq_j)\\Longleftrightarrow P_{\\mathrm{sp}}(ga_j)$. Substitution into the equivalence of step 3 proves both directions of the assertion. No surjectivity of $b$ is needed by the criterion. If the covering family is empty, $A$ and hence $U$ are empty; step 3 uses exactly the empty scheme covering allowed in the scheme-locality hypothesis and proves $P(h)$ from the empty conjunction, so the argument still applies.",
+   "uses": [
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06ER (lemma-transfer-from-schemes), final displayed equivalences; Tag 03MJ (lemma-local-source-target), conditions (1),(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-sfb-space-fppf-covering-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06ER (lemma-transfer-from-schemes), proof, with the scheme-test argument for composition made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale local property of scheme morphisms that is fppf local on the source extends to an fppf local property of morphisms of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $ P $ on schemes is Zariski-local at the source if it satisfies the condition of being local at the source with respect to the Zariski precoverage, generated by open immersions for\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsLocalAtSource and its constructors assume source locality in a fixed category; they do not transfer an etale-chart extension from schemes to algebraic spaces. The remaining hits concern schemes or rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transfer source locality from schemes to algebraic spaces using etale presentations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme_toLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": (toScheme Y f).toLocallyRingedSpace = toLocallyRingedSpace Y.1 f\", \"doc\": \"For an open immersion $ f : X \\\\to Y $ where $ Y $ is a scheme, the locally ringed space structure on $ X $ obtained by first endowing $ X $ with the scheme structure via $ f $ and then converting to a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"StandardEtalePresentation.mapEquiv\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(e : S ≃ₐ[R] T) : StandardEtalePresentation R T\", \"doc\": \"Given a standard étale presentation $ P $ of an $ R $-algebra $ S $ and an $ R $-algebra equivalence $ e : S ≃ₐ[R] T $, this function constructs the corresponding standard étale presentation of $ T $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsLocalAtSource and its constructors assume source locality in a fixed category; they do not transfer an etale-chart extension from schemes to algebraic spaces. The remaining hits concern schemes or rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MorphismProperty\", \"IsLocalAtSource\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (P : CategoryTheory.MorphismProperty C) (K : CategoryTheory.Precoverage C) : Prop\", \"doc\": \"A property of morphisms `P` in `C` is local at the source with respect to the precoverage `K` if\\nit respects isomorphisms, and:\\n`P` holds for `f : X ⟶ Y` if and only if it holds for the restrictions o\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.toRespects\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {P : CategoryTheory.MorphismProperty C} (K : CategoryTheory.Precoverage C) [self : P.IsLocalAtSource K] : P.Respects (CategoryTheory.MorphismProperty.isomorphisms C)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.top\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {K : CategoryTheory.Precoverage C} : ⊤.IsLocalAtSource K\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.of_le\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K L : CategoryTheory.Precoverage C} [P.IsLocalAtSource L] (hle : K ≤ L) : P.IsLocalAtSource K\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.inf\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {K : CategoryTheory.Precoverage C} (P Q : CategoryTheory.MorphismProperty C) [P.IsLocalAtSource K] [Q.IsLocalAtSource K] : (P ⊓ Q).IsLocalAtSource K\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.comp\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [self : P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} {R : CategoryTheory.Presieve X} (hR : R ∈ K.coverings X) {U : C} (g : U ⟶ X) (hg : R g) (hf : P f) : P (CategoryTheor\", \"doc\": \"If `P` holds for `f : X ⟶ Y`, it also holds for `𝒰.f i ≫ f` for any `K`-cover `R` of `X`.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.of_forall_comp\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [self : P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} {R : CategoryTheory.Presieve X} (hR : R ∈ K.coverings X) : (∀ ⦃U : C⦄ ⦃g : U ⟶ X⦄, R g → P (CategoryTheory.CategorySt\", \"doc\": \"If `P` holds for `𝒰.f i ≫ f` for all `i`, it holds for `f : X ⟶ Y` for any `K`-cover\\n`R` of X.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.mk_of_iff\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.RespectsIso] (H : ∀ {X Y : C} {f : X ⟶ Y} {R : CategoryTheory.Presieve X}, R ∈ K.coverings X → (P f ↔ ∀ ⦃U : C⦄ ⦃g : U ⟶ X⦄, R g → P (CategoryTheory.CategoryStruct.comp g f)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X) (h : ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) : P f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.iff_of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.IsLocalAtSource K] {X Y : C} {f : X ⟶ Y} (𝒰 : K.ZeroHypercover X) : P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.mk_of_iff_of_zeroHypercover\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [P.RespectsIso] (H : ∀ {X Y : C} (f : X ⟶ Y) (𝒰 : K.ZeroHypercover X), P f ↔ ∀ (i : 𝒰.I₀), P (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)) : P.IsLocalAtSource K\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsLocalAtSource.mk\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Local\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C} {K : CategoryTheory.Precoverage C} [toRespects : P.Respects (CategoryTheory.MorphismProperty.isomorphisms C)] (comp : ∀ {X Y : C} {f : X ⟶ Y} {R : CategoryTheory.Presieve X}, R ∈ K.coverings X → ∀ {U : C} (g : U\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsLocalAtSource and its constructors assume source locality in a fixed category; they do not transfer an etale-chart extension from schemes to algebraic spaces. The remaining hits concern schemes or rings."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|transfer.*[Ll]ocal|[Ll]ocal.*transfer",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Atlas.lean\", \"line\": \"204\", \"text\": \"  -- Since `f` is a local structomorph, it is locally equal to some transferred element `e` of\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"line\": \"53\", \"text\": \"* Build a framework to transfer local definitions to global using partition of unity and use it\"}\n  {\"file\": \"Mathlib/Order/Interval/Finset/Defs.lean\", \"line\": \"897\", \"text\": \"/-! #### Transfer locally finite orders across order isomorphisms -/\"}\n  {\"file\": \"Mathlib/Order/Interval/Finset/Defs.lean\", \"line\": \"901\", \"text\": \"/-- Transfer `LocallyFiniteOrder` across an `OrderIso`. -/\"}\n  {\"file\": \"Mathlib/Order/Interval/Finset/Defs.lean\", \"line\": \"913\", \"text\": \"/-- Transfer `LocallyFiniteOrderTop` across an `OrderIso`. -/\"}\n  {\"file\": \"Mathlib/Order/Interval/Finset/Defs.lean\", \"line\": \"914\", \"text\": \"@[to_dual /-- Transfer `LocallyFiniteOrderBot` across an `OrderIso`. -/]\"}\n  {\"file\": \"Mathlib/Order/Interval/Finset/Defs.lean\", \"line\": \"1126\", \"text\": \"/-- A `LocallyFiniteOrder` can be transferred across an order isomorphism. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsLocalAtSource and its constructors assume source locality in a fixed category; they do not transfer an etale-chart extension from schemes to algebraic spaces. The remaining hits concern schemes or rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a property of algebraic space maps under flat locally finitely presented source coverings from its scheme chart property",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsLocalAtSource and its constructors assume source locality in a fixed category; they do not transfer an etale-chart extension from schemes to algebraic spaces. The remaining hits concern schemes or rings."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|transfer.*[Ll]ocal|[Ll]ocal.*transfer",
+   "results": "[grep] OK 7 hit(s). Mathlib/Geometry/Manifold/PartitionOfUnity.lean; Mathlib/Geometry/Manifold/ContMDiff/Atlas.lean; Mathlib/Order/Interval/Finset/Defs.lean; Mathlib/Order/Interval/Finset/Defs.lean; Mathlib/Order/Interval/Finset/Defs.lean; Mathlib/Order/Interval/Finset/Defs.lean; Mathlib/Order/Interval/Finset/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fppf.*refin|refin.*fppf",
+   "results": "[grep] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refine a flat locally finitely presented covering of an algebraic space by schemes after an etale presentation",
+   "results": "[leansearch] OK 8 hit(s). Algebra.Etale.finitePresentation; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.Scheme.OpenCover.affineRefinement; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; AlgebraicGeometry.Flat.casesOn; AlgebraicGeometry.LocallyOfFinitePresentation.recOn; AlgebraicGeometry.UniversallyOpen.of_flat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MorphismProperty\", \"IsLocalAtSource\"",
+   "results": "[loogle] OK 12 hit(s). CategoryTheory.MorphismProperty.IsLocalAtSource; CategoryTheory.MorphismProperty.IsLocalAtSource.toRespects; CategoryTheory.MorphismProperty.IsLocalAtSource.top; CategoryTheory.MorphismProperty.IsLocalAtSource.of_le; CategoryTheory.MorphismProperty.IsLocalAtSource.inf; CategoryTheory.MorphismProperty.IsLocalAtSource.comp; CategoryTheory.MorphismProperty.IsLocalAtSource.of_forall_comp; CategoryTheory.MorphismProperty.IsLocalAtSource.mk_of_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf covering of algebraic spaces pulled back to a surjective etale scheme chart admits etale scheme atlases whose composites form an fppf covering of that scheme",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.JointlySurjective; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale chart extension of a scheme morphism property transfers locality on the source for fppf covers to algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.IsLocalAtSource; AlgebraicGeometry.IsLocalAtTarget; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsZariskiLocalAtSource; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.universally_isLocalAtSource; RingHom.Etale.propertyIsLocal",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A property of scheme maps local for flat locally finitely presented source covers remains source local after extension by etale charts to algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsLocalAtSource; AlgebraicGeometry.IsZariskiLocalAtSource; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every fppf cover of an algebraic space has a scheme refinement compatible with a fixed etale scheme atlas",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.Cover; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.precoverage; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of morphism properties for fppf source coverings after extension from schemes to algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.HasRingHomProperty.descendsAlong; AlgebraicGeometry.sourceLocalClosure; AlgebraicGeometry.IsLocalAtTarget.descendsAlong; AlgebraicGeometry.Scheme.isJointlySurjectivePreserving; AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact; AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locality and source-local closure do not transfer a chart extension to the category of algebraic spaces; IsLocalAtSource assumes a property in one fixed category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-lft-smooth-fpqc-locality",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Finite-type calculus and representable compatibility for stacks. Input to the present split: The local-finite-type property satisfies the hypotheses of smooth chart comparison; this is algebraic-space descent, not stack finite-type composition. Supporting input: Scheme-to-space transfer used for source locality of locally finite type in Stacks 06FC(3), through 06EW and 06ER.",
+   "via": [
+    "lem-sfb-space-lft-smooth-fpqc-locality",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fppf-source-locality-transfer",
+  "worker": "stage1",
+  "summary": "Split Stacks 06ER into choice of compatible scheme charts, explicit representable source-chart composition, the fppf scheme covering reduction, and the three property equivalences. Added one statement-only node for space fppf covering calculus; kept the statement unchanged.",
+  "blueprint": "The inherited place beneath det-thm-sf-ctf-stability-direct-images (3), through the alteration/moduli route, requests the scheme-to-space source-locality input to 06FC through 06EW and 06ER. Steps 1-2 realize the chart choices, step 3 the fppf refinement, and step 4 the property equivalences of 06ER. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3). ancestor reports null in this existing creation chain, retained explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf fibre products and base change of a singleton surjective etale chart, as used by 06ER; the unit has no competing construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-29f99e5bc",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-29f99e5bc (reviewer sub-agent of L); spot-checked: First split of the item. Live and side-live still have it unsplit with no proof, and the statement and stmt_deps are byte-identical to live. The 4 steps follow every step of Stacks 06ER (spaces-descent lemma-transfer-from-schemes), which I read in full. Step 1: the presentation criterion (03MJ) gives a with a surjective; W_j=A_j×_AU is an algebraic space by the trf fibre-product node, and p_j is representable surjective étale by pasting. Step 2 is correctly marked elementary: E=D×_{W_j}U_j≅T×_{A_j}U_j, and the composite is surjective étale by the Mathlib leaf lem-weil-pbc-etale-covering-composition. The square g a_j t_j = b h q_j commutes. Step 3 uses calculus (2) base change, (1) étale⇒fppf, (3) composition and (4) scheme comparison, then the scheme hypothesis for h. Step 4 applies the criterion to (a,b,h) and to (t_j,b,hq_j); the empty family is handled. New node lem-sfb-space-fppf-covering-calculus: statement only and self-contained, with tags 03Y8/0DFC/03Y9 checked in tags/tags. All four clauses are true; I tested identity, empty-index and empty-member cases. It is not a restatement, since it has no P. rg -L for 03Y9/03Y8/0DFC finds no existing node, and a statement scan finds no space covering-calculus duplicate; lem-trf-fppf-covering-base-change covers schemes only. No cycle. Batch-5 flags: def-trf-algebraic-space, def-trf-algebraic-space-jointly-surjective-family and lem-trf-space-fibre-products-etale-covers are general definitions or the generic fibre-product fact (025Y/03BU/02X2/041F), not steps of the trace formula or Poincaré duality, and all are already in the item's base stmt_deps. Accepted. tool_use lem-trf-space-fibre-products-etale-covers accepted as generic. No SGA. No changes."
+ }
+}

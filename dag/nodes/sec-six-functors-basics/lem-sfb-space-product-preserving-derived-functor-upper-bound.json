@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+ "kind": "statement",
+ "title": "Upper bound for a product-preserving derived functor on an algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ with its small etale structure sheaf [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], quasi-coherence [def-trf-space-quasi-coherent-module], and the ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let $F:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}$ be additive and left exact, and suppose the canonical map $F(\\prod_{n\\in\\mathbf N}M_n)\\to\\prod_{n\\in\\mathbf N}F(M_n)$ is an isomorphism for every countable family of module sheaves. Let $N\\geq1$ be an integer such that $R^pF(M)=0$ for every quasi-coherent module $M$ and every integer $p\\geq N$, with $R^pF$ computed using injective resolutions in all module sheaves. Let $RF:D(\\mathcal O_X)\\to D(\\operatorname{Ab})$ be computed on K-injective resolutions; a complex is K-injective when every map from an acyclic complex into it is null-homotopic. Then for every integer $b$ and every $E\\in D(\\mathcal O_X)$ with quasi-coherent cohomology and $H^q(E)=0$ for $q>b$, one has $H^m(RF(E))=0$ for $m\\geq b+N$. No lower bound on $E$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08F7 (lemma-application-nice-K-injective), part (3), upper-bound clause with lower endpoint minus infinity."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For every integer $n$ write $E_n=\\tau_{\\geq-n}E$. By [lem-sfb-space-qcoh-lower-truncation-reconstruction], $E$ is the derived limit of $(E_n)_{n\\geq0}$, with its canonical maps. Apply [lem-sfb-ringed-site-product-derived-limit] to the small ringed site of $X$ and the given $F$: its product hypothesis is exactly the one assumed here. Then $RF(E)$ is a derived limit of $RF(E_n)$. By [lem-pc-derived-limit-milnor-sequence], for each integer $i$ there is a short exact sequence $0\\to R^1\\varprojlim H^{i-1}(RF(E_n))\\to H^i(RF(E))\\to\\varprojlim H^i(RF(E_n))\\to0$.",
+   "uses": [
+    "lem-sfb-space-qcoh-lower-truncation-reconstruction",
+    "lem-sfb-ringed-site-product-derived-limit",
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F7, label lemma-application-nice-K-injective, proof of (2) and its application to (3)."
+   }
+  },
+  {
+   "text": "For every integer $n$, [lem-pc-derived-lower-truncation-step-triangle] gives $H^{-n}(E)[n]\\to E_n\\to E_{n-1}\\to H^{-n}(E)[n+1]$. The unbounded $RF$ preserves this triangle and commutes with shifts by [lem-pc-right-derived-functor-triangulated]; the required K-injective resolutions exist by [prop-pur-kinjective-resolutions-exist] (also for Ab, viewed as modules over $\\mathbf Z$ on the one-object trivial site). For a module $M$ and $p\\geq0$, an ordinary injective resolution, placed in nonnegative degrees, is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. It therefore computes both $H^p(RF(M[0]))$ and $R^pF(M)$, by their definitions [def-sp-left-exact-additive]. The shift formula [lem-sp-derived-cohomology-shift] identifies $H^j(RF(M[n]))$ with $R^{j+n}F(M)$ whenever $j+n\\geq0$. For $M=H^{-n}(E)$, which is quasi-coherent, and $n\\geq N-i$, the groups at the two ends of $H^i(RF(M[n]))\\to H^i(RF(E_n))\\to H^i(RF(E_{n-1}))\\to H^{i+1}(RF(M[n]))$ vanish, since $i+n,i+n+1\\geq N$. Exactness from [lem-sf-derived-homology-long-exact] makes the middle map an isomorphism. This proves stabilization for all integers $i,n$ with $n\\geq N-i$.",
+   "uses": [
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-cohomology-shift",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F7, label lemma-application-nice-K-injective, proof of (2) and its application to (3)."
+   }
+  },
+  {
+   "text": "Fix $i\\geq b+N$. At the integer index $n_0=-b-1$, $E_{n_0}=\\tau_{\\geq b+1}E=0$: its cohomology is zero in every degree by the truncation formula [def-kun-truncations] and the bound on $E$. The zero complex represents zero, and applying the additive $F$ to it gives zero. Thus $H^i(RF(E_{n_0}))=0$. Induct upwards on the integer $n\\geq n_0$. For the successor transition $E_{n+1}\\to E_n$, one has $n+1\\geq-b\\geq N-i$, so stabilization from step 2 transports the zero group at $n$ to the group at $n+1$. Hence $H^i(RF(E_n))=0$ for every integer $n\\geq-b-1$.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F7, label lemma-application-nice-K-injective, proof of (2) and its application to (3)."
+   }
+  },
+  {
+   "text": "In degree $i-1$, step 2 makes the transition from natural index $n+1$ to $n$ invertible whenever $n\\geq\\max(0,N-i)$, because $n+1\\geq N-(i-1)$. Therefore [lem-pc-derived-limit-eventually-iso] applies to the abelian-group tower $H^{i-1}(RF(E_n))$, and the left endpoint $R^1\\varprojlim H^{i-1}(RF(E_n))$ of the sequence in step 1 is zero.",
+   "uses": [
+    "lem-pc-derived-limit-eventually-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F7, label lemma-application-nice-K-injective, proof of (2) and its application to (3)."
+   }
+  },
+  {
+   "text": "The degree-$i$ tower is eventually zero by step 3. A compatible family in its inverse limit has zero $j$th coordinate: choose a natural number $n\\geq\\max(j,-b-1,0)$ and use compatibility with the transition from the zero term at $n$ to term $j$. Thus $\\varprojlim H^i(RF(E_n))=0$. Both endpoints of the short exact sequence in step 1 are zero, so its middle group $H^i(RF(E))$ is zero. This holds for every $i\\geq b+N$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F7, label lemma-application-nice-K-injective, proof of (2) and its application to (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcoh-lower-truncation-reconstruction",
+  "lem-sfb-ringed-site-product-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-sp-left-exact-additive",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-homology-long-exact",
+  "def-kun-truncations",
+  "lem-pc-derived-limit-eventually-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08F7, label lemma-application-nice-K-injective, proof of (2) and its application to (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor from module sheaves on an algebraic space to abelian groups preserving countable products with finite cohomological dimension on quasi coherent modules has the same upper bound on unbounded quasi coherent complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext Y X i), e = 0) →\\n    CategoryTheory.HasInjectiveDimensionLT X n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, an object $X$ has injective dimension less than $n$ if and only if for every object $Y$ in $\\\\mathcal{C}$ and every integer $i \\\\geq n$, the Ext group $\\\\operatornam\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme affine-limit algebra, underived sheaf functors, or generic cohomological support, not the stated unbounded algebraic-space or ringed-site theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive product preserving functor with bounded higher derived functors on quasi coherent sheaves sends bounded above cohomology to bounded above cohomology without any lower bound",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme affine-limit algebra, underived sheaf functors, or generic cohomological support, not the stated unbounded algebraic-space or ringed-site theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"IsLE\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Category.{v_2, u_2} D} {inst✝² : CategoryTheory.Category.{v_3, u_3} H} (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (W : CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_3} {D : Type u_4} {H : Type u_1} {H' : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_4} D] [CategoryTheory.Category.{v_3, u_1} H] [CategoryTheory.Category.{v_4, u_2} H'] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryT\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no matching theorem; returned general Kan-extension and derived-functor comparison infrastructure does not discharge the ringed-site or quasi-coherent hypotheses in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ii]sLE|cohomological.?bound|cohomological.?dimension",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"line\": \"120\", \"text\": \"    isRightDerivedFunctor_iff_isLeftKanExtension]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"59\", \"text\": \"lemma isRightDerivedFunctor_iff_isLeftKanExtension [L.IsLocalization W] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"60\", \"text\": \"    RF.IsRightDerivedFunctor α W ↔ RF.IsLeftKanExtension α := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"62\", \"text\": \"  · exact fun _ => IsRightDerivedFunctor.isLeftKanExtension RF α W\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"69\", \"text\": \"  simp only [isRightDerivedFunctor_iff_isLeftKanExtension]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"78\", \"text\": \"  have := IsRightDerivedFunctor.isLeftKanExtension RF α W\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"101\", \"text\": \"  have := IsRightDerivedFunctor.isLeftKanExtension F' α W\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration stating the requested cohomological bound or unbounded ringed-site Leray theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper cohomological bound for an unbounded right derived functor preserving countable products on quasi coherent algebraic space complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerived\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] (n : ℕ) : C ⥤ D\", \"doc\": \"Given an additive functor $ F : C \\\\to D $ between abelian categories and a natural number $ n $, the $ n $-th right-derived functor is constructed by first taking injective resolutions in $ C $, apply\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : C ⥤ HomotopyCategory D (ComplexShape.up ℕ)\", \"doc\": \"The right-derived functor associated to an additive functor $ F : C \\to D $, constructed by first taking injective resolutions in the abelian category $ C $ and then applying the induced functor betwee\"}\n  {\"name\": \"CategoryTheory.instCountableAB4StarOfAB4StarOfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic\", \"type\": \"[HasProducts.{0} C] [AB4StarOfSize.{0} C] : CountableAB4Star C\", \"doc\": \"If an abelian category satisfies the AB4* axiom (having all products and that products of epimorphisms are epimorphisms), then it automatically satisfies the countable AB4* axiom (having countable pro\"}\n  {\"name\": \"LightCondensed.instCountableAB4StarLightCondMod\", \"module\": \"Mathlib.Condensed.Light.AB\", \"type\": \": CountableAB4Star (LightCondMod.{u} R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules satisfies the countable AB4* axiom. This means the category has countable products and the product of a family of epimorphisms is itse\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"{X : C} (I : InjectiveResolution X) (F : C ⥤ D) [F.Additive] (n : ℕ) :\\n  (F.rightDerived n).obj X ≅\\n    (HomologicalComplex.homologyFunctor D _ n).obj ((F.mapHomologicalComplex _).obj I.cocomplex)\", \"doc\": \"Given an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this constructs an isomorphism in $\\\\mathcal{D}$ betwe\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) (n : ℤ) [X.IsStrictlyLE n] :\\n  ∃ (X' : CochainComplex C ℤ) (_ : X'.IsStrictlyLE n) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g : X' ⟶ Y),\\n    f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n  {\"name\": \"CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Limits\", \"type\": \"[IsRightAdjoint F] : PreservesLimitsOfSize.{v, u} F\", \"doc\": \"Every right adjoint functor preserves limits of a given size.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.PreservesHomology\", \"type\": \"[F.PreservesHomology] : h.IsPreservedBy F\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserves homology and $ S $ is a short complex in $ \\\\mathcal{C} $ with right homology data $ h $, then $ F $ preserves the right homology data $ h $ o\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give quasi-coherence definitions, underived pushforward, classical right derived functors, or support of complexes, not this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*[Dd]erived[Ll]imit|[Dd]erived[Ll]imit.*trunc|rightDerived.*preserves|rightDerived.*[dD]erived[Ll]imit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent cohomology on an algebraic space implies convergence of the lower truncation tower to the complex as a homotopy limit",
+   "results": "OK 8 hits: CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.quasiIso_πTruncGE_iff, CochainComplex.quasiIso_truncGEMap_iff, HomologicalComplex.instQuasiIsoAtιTruncLEF, HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE', HomologicalComplex.truncLE'.quasiIsoAt_truncLE'ToRestriction, HomologicalComplex.quasiIso_truncLEMap_iff, HomologicalComplex.quasiIso_πTruncGE_iff_isSupported",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"PreservesLimitsOfShape\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from a Grothendieck abelian category to abelian groups preserving countable products has a right derived functor preserving homotopy limits of inverse sequences",
+   "results": "OK 8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.leftDerived, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent complex on an algebraic space is the derived inverse limit of its bounded below canonical truncations",
+   "results": "OK 8 hits: SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|leftComplete|[Ll]eft[Cc]omplete|truncGE.*limit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unbounded right derived functor of an additive countable product preserving functor from a Grothendieck category to Ab preserves derived inverse limits",
+   "results": "OK 8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv, CategoryTheory.rightExactFunctor_le_additiveFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncGE\", \"limit\"",
+   "results": "OK 1 hits: HomologicalComplex.truncGE'.isLimitKernelFork",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derivation of a countable product preserving functor into an AB4 star abelian category commutes with R lim",
+   "results": "OK 8 hits: CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat, CategoryTheory.CountableAB4Star.of_countableAB5Star, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat_and_finite, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Limits.colimitPointwiseProductToProductColimit_app, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.NatTrans.leftDerived_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left completeness for quasi coherent derived categories of algebraic spaces: E is the homotopy inverse limit of tau greater than minus n E",
+   "results": "OK 8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-derived-pushforward-upper-bound",
+  "date": "2026-10-23",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Uniform upper bound for unbounded quasi-coherent space pushforward. Supporting input: 08FA proof of (2): apply 08F7 to the functor Gamma(V times_Y X, -).",
+   "via": [
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+  "worker": "stage1",
+  "summary": "Read 08F7 and its 08F6/08U1 inputs. Retained the statement and its N>=1 convention; split the proof through reconstruction, the Milnor sequence, explicit two-endpoint stabilization, integer induction from the zero truncation, and eventual-isomorphism vanishing. Added only the space reconstruction and ringed-site product/derived-limit inputs; scheme-only analogues cannot be applied to an arbitrary algebraic space.",
+  "blueprint": "Realizes the inherited direct-image prerequisite (det-thm-sf-ctf-stability-direct-images proof (3)): 08FA upper-bound input via 08F7 proof (2)-(3). The ancestry tool returns null because created.item eventually names Sheaf.SixFunctors.CtfStabilityDirectImages, which is not a DAG id; this existing ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "Generic derived-category, K-injective, or inverse-limit tool used in the 08F7 proof; no node of this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-derived-lower-truncation-step-triangle",
+    "why": "Generic derived-category, K-injective, or inverse-limit tool used in the 08F7 proof; no node of this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic derived-category, K-injective, or inverse-limit tool used in the 08F7 proof; no node of this unit supplies its general statement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic derived-category, K-injective, or inverse-limit tool used in the 08F7 proof; no node of this unit supplies its general statement."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic derived-category, K-injective, or inverse-limit tool used in the 08F7 proof; no node of this unit supplies its general statement."
+   },
+   {
+    "node": "lem-sp-derived-cohomology-shift",
+    "why": "Generic derived-category, K-injective, or inverse-limit tool used in the 08F7 proof; no node of this unit supplies its general statement."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic derived-category, K-injective, or inverse-limit tool used in the 08F7 proof; no node of this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-derived-limit-eventually-iso",
+    "why": "Generic derived-category, K-injective, or inverse-limit tool used in the 08F7 proof; no node of this unit supplies its general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-derived-limit-eventually-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-900d73760",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-900d73760 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement, plus Stacks 08F6, 08F7(2)-(3) and 08U1 in full. The item matches 08F7(3) with a=-inf (F left exact and countable-product-preserving, R^pF(qcoh)=0 for p>=N, conclusion H^m RF(E)=0 for m>=b+N). It keeps its inherited N>=1, which is unchanged from the base and is what the parent supplies. The steps follow the source proof. Step 1 combines the 08F6 reconstruction, 08U1 transport and the Milnor sequence. Step 2 is the truncation triangle, shifts and bounded-below injectives being K-injective; the indices i+n and i+n+1 are checked. Step 3 is an explicit induction from tau_{>=b+1}E=0, with n+1>=-b>=N-i. Step 4 gets R^1lim=0 by the eventual-isomorphism lemma (n>=max(0,N-i)). Step 5 is a zero limit. New node lem-sfb-space-qcoh-lower-truncation-reconstruction is 08F6 on X_et. New node lem-sfb-ringed-site-product-derived-limit is 08U1 on small ringed sites into Ab. Both are true and tested on small cases (E=0, M[0], constant towers). Both are statement-only and strictly smaller than the item. Neither is a duplicate: lem-kun-site-truncation-derived-limit (0D6P criterion) and the lem-pc scheme-only analogues are narrower or different, and the Roos/strict-tower nodes concern exact functors or direct images. Batch-5 flag: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, already in the item's base stmt_deps and not part of the trace-formula or Poincare-duality proofs, so they are accepted. The eight declared generic homological-algebra tool_uses are accepted. There is no repair note, no SGA, and no cycle. blueprint.from.node=null is an inherited provenance gap of the item."
+ }
+}

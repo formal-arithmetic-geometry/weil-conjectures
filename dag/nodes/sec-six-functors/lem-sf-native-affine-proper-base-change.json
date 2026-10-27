@@ -1,0 +1,149 @@
+{
+ "id": "lem-sf-native-affine-proper-base-change",
+ "kind": "statement",
+ "title": "Native proper base change with affine bases",
+ "statement": "Let $k$ be an algebraic closure of a finite field $k_0$, and let $l\\ne\\operatorname{char}(k_0)$ be prime. Consider a Cartesian square $v:X'\\to X$, $p':X'\\to Y'$, $p:X\\to Y$, $g:Y'\\to Y$ of $k$-schemes and $k$-maps. Assume $p$ proper [def-weil-proper-morphism], and $Y,Y'$ affine and locally of finite type over $k$ [def-weil-finite-type-morphism]. For every bounded ordinary native adic complex $M$ on $X$ with native constructible cohomology [def-sf-native-weil-derived-framework], the component at $M$ of the specified native derived exchange [def-sf-native-derived-exchange-map] is invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-adjunction-mate",
+  "def-sf-native-derived-exchange-map",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Properness is stable under the given Cartesian square. Since the two base schemes are affine and locally of finite type over k, they are separated and quasi-compact; composition with the proper source maps gives the same properties and local finite type for both source schemes. In particular X is locally Noetherian and compact. The field k has the same positive prime characteristic as the finite field k₀.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  },
+  {
+   "text": "Use nativeModuleConstructibilityComparison and its section-presentation unit isomorphism to carry each native constructible cohomology object to a constant-model-constructible internal condensed module. AdicConstructibilityPredicateComparison identifies this with the bounded-constructible heart predicate. Exactness of E_X preserves the cohomological bounds and identifies homology of the encoded complex with encoding of homology. The encoded complex is bounded constructible.",
+   "uses": [
+    "lem-sf-weil-verdier-module-constructibility-comparison",
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-sf-native-scalar-forgetting-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  },
+  {
+   "text": "Apply the native-to-condensed exchange comparison. Clause (3) of rational proper base change makes the condensed exchange component invertible. The arrow isomorphism transports invertibility to encoding of the native component. The exact derived encoding equivalence reflects isomorphisms, giving the native assertion. Keep both the coefficient and schemes bundled through the exchange argument, and specialize the coefficient equality only after reaching the native isomorphism proposition.",
+   "uses": [
+    "lem-sf-native-derived-exchange-condensed-comparison",
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sf-weil-verdier-module-constructibility-comparison",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "lem-sf-native-derived-exchange-condensed-comparison",
+  "det-thm-sfb-proper-base-change-rational"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for sheaves is compatible with open restriction and with an exact equivalence of coefficient modules",
+   "results": "8 hits: generic sheaf-module restriction and adjunction comparisons; none states compatibility for the native derived adic exchange.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"mate\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adicDerivedBaseChange|nativeDerivedExchange|adicChartSquare",
+   "results": "0 hits in Mathlib. The adopted source contains adicDerivedBaseChangeIso for open base change, but no compatibility theorem for the specified exact-pullback-derived mate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "W3",
+  "item": "Sheaf.WeilSheaf.GeometricProperBaseChange",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps; no exact blueprint match in searches for native derived exchange, affine proper base change, adic cover isomorphism, or adic open base change.",
+   "via": [
+    "lem-sf-geometric-native-proper-base-change",
+    "lem-sf-native-weil-proper-natural-base-change",
+    "lem-sf-native-weil-compact-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeAffineProperBaseChange",
+  "file": "lean/Sheaf/WeilSheaf/NativeAffineProperBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicDerivedBaseChange_isIso_of_affine",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.adicDerivedBaseChange_isIso_of_affine"
+  ],
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-27",
+  "statement": "theorem adicDerivedBaseChange_isIso_of_affine\n    (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k]\n    [IsAlgClosure k₀ k] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]\n    {X' X Y' Y : Scheme.{u}}\n    [X'.Over (Spec (CommRingCat.of k))] [X.Over (Spec (CommRingCat.of k))]\n    [Y'.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))]\n    {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}\n    [v.IsOver (Spec (CommRingCat.of k))] [p'.IsOver (Spec (CommRingCat.of k))]\n    [p.IsOver (Spec (CommRingCat.of k))] [g.IsOver (Spec (CommRingCat.of k))]\n    [IsAffine Y] [IsAffine Y']\n    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k))]\n    [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k))]\n    [IsProper p] (sq : IsPullback v p' p g)\n    (M : DerivedCategory (AdicSheaf l X))\n    (hM : DerivedCategory.TStructure.t.bounded M)\n    (hc : ∀ n : ℤ, IsAdicConstructibleSheaf\n      ((DerivedCategory.homologyFunctor _ n).obj M)) :\n    IsIso ((adicDerivedBaseChange l sq.toCommSq).app M)"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cbdd2",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261027T050651-L-251723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cbdd2",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261027T050651-L-251723",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 7 node files against the clone (sheaf-dag) and their node statements; sole direct importer NativeBaseChangeForgetComparison compiled with the delivered set (all 6 OK)"
+ }
+}

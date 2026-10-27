@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-semisimple-adjoint-kernel-finite",
+ "kind": "statement",
+ "title": "Finite scheme-theoretic adjoint kernel of a semisimple algebraic group",
+ "statement": "Let $k$ be an algebraically closed field and let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Suppose $G$ is semisimple: it has no nontrivial smooth connected solvable closed normal subgroup scheme, where solvable means that the successive commutator subgroups eventually become trivial. Let $\\mathfrak g=T_{G/k,e}$ be its tangent space at the identity [def-sc-scheme-tangent-space]. Write $\\operatorname{GL}(\\mathfrak g)$ for the group scheme whose $R$-points are the invertible $R$-linear maps on $\\mathfrak g\\otimes_k R$. Let $\\operatorname{Ad}_G:G\\to\\operatorname{GL}(\\mathfrak g)$ be the homomorphism induced by differentiating conjugation. The scheme-theoretic kernel $\\ker\\operatorname{Ad}_G=G\\times_{\\operatorname{GL}(\\mathfrak g)}\\operatorname{Spec}k$, with the second map the identity section, is finite over $k$: it is the spectrum of a finite-dimensional $k$-algebra [def-weil-finite-integral-morphism]. This includes every characteristic and the trivial group; the kernel need not be smooth or reduced.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proof of Proposition 6.3.16, printed p.229, first implication: semisimple geometric fibres give finite geometric kernels of the adjoint representation. Proposition 3.3.8, printed p.102, identifies the reductive adjoint kernel with the scheme centre. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this algebraic-group theorem."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-scheme-tangent-space",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-reductive-borel-pair-structure], $G$ is reductive (a semisimple group is reductive) and has a split maximal torus $T\\simeq\\mathbf G_m^r$. Put $X=X^*(T)$ and let $\\Phi\\subset X$ be the roots, i.e. the nonzero $T$-characters occurring in $\\operatorname{Lie}(G)$. The field $k$ is Noetherian (its only ideals are $(0)$ and $(1)$); [lem-weil-pbc-finite-type-noetherian-finite-presentation] applied to the coordinate algebra makes $G$ finitely presented. Apply [lem-sfb-smooth-affine-adjoint-kernel-calculus] with $A=k$ and $J=G$. Its module $L=\\ker(G(k[\\epsilon])\\to G(k))$ is the set of $k$-morphisms $\\operatorname{Spec}k[\\epsilon]\\to G$ lying over the identity point, i.e. the tangent space $\\mathfrak g=T_{G/k,e}$ of the statement, and in both descriptions a tangent vector is $c+\\epsilon d$ with $d$ a derivation at the identity and the linear operations are the pointwise ones on $d$. The homomorphism $\\operatorname{Ad}_G:G\\to\\operatorname{GL}(\\mathfrak g)$ of that node is conjugation on dual-number points, i.e. the differentiated conjugation of the statement, and its scheme-theoretic kernel is $K=\\ker\\operatorname{Ad}_G=G\\times_{\\operatorname{GL}(\\mathfrak g)}\\operatorname{Spec}k$. That node gives that $K$ is a closed normal subgroup scheme of $G$; for a commutative $k$-algebra $R$, $K(R)$ is the set of $g\\in G(R)$ acting as the identity on $R\\otimes_k\\mathfrak g\\simeq\\operatorname{Lie}(G)(R)$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sfb-smooth-affine-adjoint-kernel-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 3.3.8, printed p.102; proof of Proposition 6.3.16, printed p.229. Read online; local archive WANTED."
+   }
+  },
+  {
+   "text": "Conjugation $T\\times G\\to G$ is an action of $T$ by $k$-group automorphisms, so [lem-sfb-relative-tangent-weight-base-change] (over the nonzero Noetherian ring $k$, with $M=\\mathbf Z^r\\simeq X$) gives $\\mathfrak g=\\bigoplus_{m}\\mathfrak g_m$, finitely many nonzero, and for every $R$ the comparison carries $R\\otimes_k\\mathfrak g_m$ onto the $m$-weight summand of the full $T_R$-coaction. Hence $t\\in T(R)$ acts on $R\\otimes_k\\mathfrak g_m$ by the scalar $\\chi_m(t)\\in R^\\times$. The $m\\neq0$ with $\\mathfrak g_m\\neq0$ are exactly the roots, and $\\chi_0=1$. If $\\mathfrak g_m\\ne0$, then $R\\otimes_k\\mathfrak g_m$ is a free $R$-module with a basis vector, so multiplication by $\\chi_m(t)$ is the identity exactly when $\\chi_m(t)=1$ (for $R=0$ both conditions are empty). Therefore, functorially in $R$, $(K\\times_GT)(R)=\\{t\\in T(R):\\alpha(t)=1\\text{ for all }\\alpha\\in\\Phi\\}$, i.e. $K\\times_GT=\\bigcap_{\\alpha\\in\\Phi}\\ker(\\alpha:T\\to\\mathbf G_m)$ as closed subschemes of $T$. By [lem-sfb-reductive-centre-root-quotient] this intersection is the centre $Z(G)$, a closed subgroup scheme of $T$ commuting with all points of $G$ after every algebra extension, and $Z(G)\\simeq D_k(M)=\\operatorname{Spec}k[M]$ with $M=X/L$, $L=\\sum_{\\alpha\\in\\Phi}\\mathbf Z\\alpha$. No smoothness or reducedness is used.",
+   "uses": [
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-reductive-centre-root-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.7 and Proposition 21.8, printed p.427 (centre of a reductive group = kernel of Ad on T = intersection of root kernels, character group X/ZΦ); Corollary 17.62(a),(b), printed p.372; Proposition 12.3 and Remark 12.5, p.232; Theorem 12.9, pp.233--234."
+   }
+  },
+  {
+   "text": "The group $M=X/L$ is a quotient of $X\\simeq\\mathbf Z^r$, hence finitely generated. Apply [lem-sbc-finitely-generated-abelian-group-structure] to $M$. Since its indexing set is finite, this gives $M\\simeq\\mathbf Z^{r'}\\oplus\\bigoplus_{i=1}^s\\mathbf Z/n_i\\mathbf Z$, where each $n_i\\geq1$ (factors of order one are allowed). The group algebra $k[M]$ of step 2 is the one of [lem-sfb-diagonalizable-group-geometric-criteria] (same basis, multiplication and Hopf operations), so that node identifies $Z(G)\\simeq D_k(M)$ as a group scheme with $\\mathbf G_m^{r'}\\times\\prod_i\\mu_{n_i}$.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-sfb-diagonalizable-group-geometric-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.62(a),(b), printed p.372; Proposition 12.3 and Remark 12.5, p.232; Theorem 12.9, pp.233--234."
+   }
+  },
+  {
+   "text": "In this product, $\\mathbf G_m^{r'}\\times\\{1\\}$ is a closed subgroup: in each $\\mu_{n_i}$ factor it is cut out by $t_i-1$. Its image $H\\subseteq Z(G)\\subseteq G$ is central, hence normal in $G$, and commutative, hence solvable. It is a torus, so it is smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus]. The semisimplicity hypothesis on $G$ therefore forces $H=1$. If $r'>0$, the Laurent coordinate $z_1$ in $k[z_1^{\\pm1},\\ldots,z_{r'}^{\\pm1}]$ differs from $1$, so $\\mathbf G_m^{r'}$ is not the trivial group scheme. Consequently $r'=0$.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.62(a),(b), printed p.372; Proposition 12.3 and Remark 12.5, p.232; Theorem 12.9, pp.233--234."
+   }
+  },
+  {
+   "text": "With $r'=0$, the decomposition in step 3 shows that $M$ is a finite group: it is a finite direct sum of the finite cyclic groups $\\mathbf Z/n_i\\mathbf Z$. By the explicit group-algebra description in [lem-sfb-reductive-centre-root-quotient], $k[M]$ has basis $(e_m)_{m\\in M}$, a finite basis, so the coordinate algebra of $K\\times_GT=Z(G)$ is finite-dimensional over $k$. Now $K$ is a closed normal subgroup scheme of the reductive group $G$ (step 1) and $T$ is a split maximal torus, so [lem-sfb-reductive-normal-subgroup-torus-finiteness] with $N=K$, $S=T$ shows that $K$ has finite-dimensional coordinate algebra. $K$ is affine, being closed in the affine $G$, so the definition [def-weil-finite-integral-morphism] says that $K\\to\\operatorname{Spec}k$ is finite. For $G=1$ one has $T=1$, $X=0$, $M=0$, $k[0]=k$ and $K=1$. No step asserted that any $\\mu_{n_i}$ or $K$ was reduced or smooth, so the argument applies also when the characteristic divides $n_i$.",
+   "uses": [
+    "lem-sfb-reductive-centre-root-quotient",
+    "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.7 and Proposition 21.8, printed p.427 (centre of a reductive group = kernel of Ad on T = intersection of root kernels, character group X/ZΦ); Corollary 17.62(a),(b), printed p.372; Proposition 12.3 and Remark 12.5, p.232; Theorem 12.9, pp.233--234."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-smooth-affine-adjoint-kernel-calculus",
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-sfb-reductive-centre-root-quotient",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly following Milne, Propositions 21.7--21.8 (p.427) and Corollary 17.62 (p.372), with the explicit diagonalizable-group finiteness argument of Proposition 12.3; Conrad Proposition 3.3.8 / proof of Proposition 6.3.16 read online but not archived locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the adjoint representation of a connected semisimple algebraic group over an algebraically closed field is finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], (LieAlgebra.ad R L).ker = ⊥\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then the kernel of the adjoint representation $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.IsKilling.ker_killingForm_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L], LinearMap.ker (killingForm R L) = ⊥\", \"doc\": \"The kernel of the Killing form on the Lie algebra $ L $ over the commutative ring $ R $ is the trivial submodule $ \\\\{0\\\\} $, i.e., $ \\\\ker(\\\\mathrm{KillingForm}_{R,L}) = \\\\bot $.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.center_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieModule.IsFaithful R L L], LieAlgebra.center R L = ⊥\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the action of $ L $ on itself is faithful (i.e., the only element acting as zero on all of $ L $ is the zero element itself), then the center \"}\n  {\"name\": \"LieAlgebra.IsKilling.ker_traceForm_eq_bot_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [IsNoetherian R L] [IsArtinian R L] (H : LieSubalgebra R L) [H.IsCartanSubalgebra],\\n  LinearMap.ker (LieModule.traceForm R (↥H) L) = ⊥\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the kernel of the Killing form restricted to $ \\\\mathfrak{h} $ is trivial, i.e., $ \\\\ker(\"}\n  {\"name\": \"LieDerivation.injective_ad_of_center_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Derivation/AdjointAction\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.center R L = ⊥ → Function.Injective ⇑(LieDerivation.ad R L)\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $, if the center of $ L $ is trivial (i.e., equal to the zero submodule $ \\\\{0\\\\} $), then the adjoint action map $ \\\\mathrm{ad} : L \\\\to \\\\mat\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical is a statement about a Lie-algebra homomorphism, not the scheme-theoretic kernel of a semisimple group representation. The group statement allows nonreduced finite kernels in positive characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In arbitrary characteristic a smooth connected affine group with no nontrivial connected solvable normal subgroup has finite scheme theoretic kernel of its action on its tangent space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.instHasKernels\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G], CategoryTheory.Limits.HasKernels (FDRep k G)\", \"doc\": \"For any field $ k $ and monoid $ G $, the category $ \\\\text{FDRep}_k(G) $ of finitely generated $ k $-modules equipped with a $ G $-action has kernels. Specifically, for every morphism $ f: X \\\\to Y $ i\"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : TopologicalSpace G] [inst_5 : IsTopologicalGroup G]\\n  [i\", \"doc\": \"In the context of a Galois category $\\\\mathcal{C}$ with a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$ and a compact topological group $G$ equipped with a multiplicative action on each $F(X)$, this con\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a continuous multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (A : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected A], Finite (CategoryTheory.Aut A)\", \"doc\": \"In a pre-Galois category, the automorphism group of any connected object is a finite group.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], (LieAlgebra.ad R L).ker = ⊥\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then the kernel of the adjoint representation $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical is a statement about a Lie-algebra homomorphism, not the scheme-theoretic kernel of a semisimple group representation. The group statement allows nonreduced finite kernels in positive characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GrpObj, AlgebraicGeometry.IsFinite",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.GrpObj'\n",
+   "date": "2026-10-24",
+   "verdict": "invalid query: Loogle reported an unknown identifier; replaced by the valid query also recorded here"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.ad",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"LieAlgebra.ad\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" (R : Type u) (L : Type v) [CommRing R] [LieRing L] [LieAlgebra R L] : L →ₗ⁅R⁆ Module.End R L\", \"doc\": \"The adjoint action of a Lie algebra on itself.\"}\n  {\"name\": \"LieAlgebra.ad_apply\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" (R : Type u) (L : Type v) [CommRing R] [LieRing L] [LieAlgebra R L] (x y : L) : ((LieAlgebra.ad R L) x) y = ⁅x, y⁆\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.ad_eq_lmul_left_sub_lmul_right\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" {R : Type u} [CommRing R] (A : Type v) [Ring A] [Algebra R A] : ⇑(LieAlgebra.ad R A) = LinearMap.mulLeft R - LinearMap.mulRight R\", \"doc\": \"\"}\n  {\"name\": \"LieModule.toEnd_lie\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" (R : Type u) {L : Type v} {M : Type w} [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] (x y : L) (z : M) : ((LieModule.toEnd R L M) x) ⁅y, z⁆ = ⁅((LieAlgebra.ad R L) x) y, z⁆ + ⁅y, ((LieModule.toEnd R L M) x) z⁆\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.ad_lie\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" (R : Type u) {L : Type v} [CommRing R] [LieRing L] [LieAlgebra R L] (x y z : L) : ((LieAlgebra.ad R L) x) ⁅y, z⁆ = ⁅((LieAlgebra.ad R L) x) y, z⁆ + ⁅y, ((LieAlgebra.ad R L) x) z⁆\", \"doc\": \"\"}\n  {\"name\": \"LieModule.toEnd_pow_lie\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" (R : Type u) {L : Type v} {M : Type w} [CommRing R] [LieRing L] [LieAlgebra R L] [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] (x y : L) (z : M) (n : ℕ) : ((LieModule.toEnd R L M) x ^ n) ⁅y, z⁆ = ∑ ij ∈ Finset.HasAntidiagonal.antidiagonal n, n.choose ij.1 • ⁅((LieAlgebra.ad R \", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.ad_pow_lie\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" (R : Type u) {L : Type v} [CommRing R] [LieRing L] [LieAlgebra R L] (x y z : L) (n : ℕ) : ((LieAlgebra.ad R L) x ^ n) ⁅y, z⁆ = ∑ ij ∈ Finset.HasAntidiagonal.antidiagonal n, n.choose ij.1 • ⁅((LieAlgebra.ad R L) x ^ ij.1) y, ((LieAlgebra.ad R L) x ^ ij.2) z⁆\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.conj_ad_apply\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" {R : Type u_1} {L : Type u_2} {L' : Type u_3} [CommRing R] [LieRing L] [LieAlgebra R L] [LieRing L'] [LieAlgebra R L'] (e : L ≃ₗ⁅R⁆ L') (x : L) : e.toLinearEquiv.conj ((LieAlgebra.ad R L) x) = (LieAlgebra.ad R L') (e x)\", \"doc\": \"Given an equivalence `e` of Lie algebras from `L` to `L'`, and an element `x : L`, the conjugate\\nof the endomorphism `ad(x)` of `L` by `e` is the endomorphism `ad(e x)` of `L'`.\"}\n  {\"name\": \"LieSubalgebra.coe_ad\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" (R : Type u) (L : Type v) [CommRing R] [LieRing L] [LieAlgebra R L] (H : LieSubalgebra R L) (x y : ↥H) : ↑(((LieAlgebra.ad R ↥H) x) y) = ((LieAlgebra.ad R L) ↑x) ↑y\", \"doc\": \"\"}\n  {\"name\": \"LieSubalgebra.ad_comp_incl_eq\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" {R : Type u} {L : Type v} [CommRing R] [LieRing L] [LieAlgebra R L] (K : LieSubalgebra R L) (x : ↥K) : (LieAlgebra.ad R L) ↑x ∘ₗ ↑K.incl = ↑K.incl ∘ₗ (LieAlgebra.ad R ↥K) x\", \"doc\": \"\"}\n  {\"name\": \"LieSubalgebra.coe_ad_pow\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \" (R : Type u) (L : Type v) [CommRing R] [LieRing L] [LieAlgebra R L] (H : LieSubalgebra R L) (x y : ↥H) (n : ℕ) : ↑(((LieAlgebra.ad R ↥H) x ^ n) y) = ((LieAlgebra.ad R L) ↑x ^ n) ↑y\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_self_module_ker\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \" (R : Type u) (L : Type v) [CommRing R] [LieRing L] [LieAlgebra R L] : (LieAlgebra.ad R L).ker = LieModule.ker R L L\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical is a statement about a Lie-algebra homomorphism, not the scheme-theoretic kernel of a semisimple group representation. The group statement allows nonreduced finite kernels in positive characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimple algebraic group finite kernel of the adjoint representation in arbitrary characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[HasTrivialRadical R L] : (ad R L).ker = ⊥\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then the kernel of the adjoint representation $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_self_module_ker\", \"module\": \"Mathlib.Algebra.Lie.Abelian\", \"type\": \": (ad R L).ker = LieModule.ker R L L\", \"doc\": \"The kernel of the adjoint representation of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ coincides with the kernel of its self-module action, i.e., $\\\\ker(\\\\mathrm{ad}) = \\\\ker(\\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieDerivation.ad_ker_eq_center\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \": (ad R L).ker = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, the kernel of the adjoint representation $ \\\\mathrm{ad}: L \\\\to \\\\mathrm{Der}(L) $, defined by $ \\\\mathrm{ad}_x(y) = [x, y] $, coincides with the cen\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n  {\"name\": \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"{x : L} (hx : x ∈ H) : (ad K L x).IsSemisimple\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with non-degenerate Killing form, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $x \\\\in \\\\mathfrak{h}$, then the adjoint end\"}\n  {\"name\": \"LieDerivation.IsKilling.range_ad_eq_top\", \"module\": \"Mathlib.Algebra.Lie.Derivation.Killing\", \"type\": \": 𝕀 = ⊤\", \"doc\": \"For a Lie algebra over a commutative ring with non-degenerate Killing form, the image of the adjoint representation (mapping elements to their adjoint derivations) equals the entire space of derivatio\"}\n  {\"name\": \"LieSubalgebra.isNilpotent_ad_of_isNilpotent_ad\", \"module\": \"Mathlib.Algebra.Lie.Nilpotent\", \"type\": \"{L : Type v} [LieRing L] [LieAlgebra R L] (K : LieSubalgebra R L) {x : K} (h : IsNilpotent (LieAlgebra.ad R L ↑x)) :\\n  IsNilpotent (LieAlgebra.ad R K x)\", \"doc\": \"For any Lie subalgebra $ K $ of a Lie algebra $ L $ over a commutative ring $ R $, if the adjoint representation $ \\\\mathrm{ad}(x) $ of an element $ x \\\\in K $ is nilpotent as an endomorphism of $ L $, \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical is a statement about a Lie-algebra homomorphism, not the scheme-theoretic kernel of a semisimple group representation. The group statement allows nonreduced finite kernels in positive characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emisimple|[Aa]djoint.*[Kk]er|[Kk]er.*[Aa]djoint",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical is a statement about a Lie-algebra homomorphism, not the scheme-theoretic kernel of a semisimple group representation. The group statement allows nonreduced finite kernels in positive characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint|semisimple|reductive",
+   "results": "ok=True; 0 hits; ; subdirectory AlgebraicGeometry/Group; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra adjoint homomorphisms or abstract representations/groups, not the scheme-theoretic group kernel; checked LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical at Mathlib/Algebra/Lie/Semisimple/Basic.lean:334 and LieDerivation.ad_ker_eq_center at Mathlib/Algebra/Lie/AdjointAction/Derivation.lean:66."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semisimple algebraic group has finite scheme theoretic kernel of its adjoint representation",
+   "results": "ok=True; 8 hits; LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical, LieDerivation.ad_ker_eq_center, LieAlgebra.ad_ker_eq_self_module_ker, LieAlgebra.IsSemisimple.instHasTrivialRadical, Group.fintypeOfKerOfCodom, LieAlgebra.IsSemisimple, LieAlgebra.nilpotent_ad_of_nilpotent_algebra, LieAlgebra.IsKilling.ker_killingForm_eq_bot; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra adjoint homomorphisms or abstract representations/groups, not the scheme-theoretic group kernel; checked LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical at Mathlib/Algebra/Lie/Semisimple/Basic.lean:334 and LieDerivation.ad_ker_eq_center at Mathlib/Algebra/Lie/AdjointAction/Derivation.lean:66."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.ad, LinearMap.ker",
+   "results": "ok=True; 1 hits; LieSubalgebra.engel_carrier; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra adjoint homomorphisms or abstract representations/groups, not the scheme-theoretic group kernel; checked LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical at Mathlib/Algebra/Lie/Semisimple/Basic.lean:334 and LieDerivation.ad_ker_eq_center at Mathlib/Algebra/Lie/AdjointAction/Derivation.lean:66."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic kernel of the adjoint representation of a semisimple algebraic group over an algebraically closed field is finite",
+   "results": "ok=True; 8 hits; RootPairing.GeckConstruction.instHasTrivialRadical, FDRep.simple_iff_end_is_rank_one, LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical, FDRep.instHasKernels, LieModule.instIsTriangularizableOfIsAlgClosed, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieAlgebra.IsKilling.instSemisimple, LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra adjoint homomorphisms or abstract representations/groups, not the scheme-theoretic group kernel; checked LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical at Mathlib/Algebra/Lie/Semisimple/Basic.lean:334 and LieDerivation.ad_ker_eq_center at Mathlib/Algebra/Lie/AdjointAction/Derivation.lean:66."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a connected reductive group scheme the adjoint representation has kernel equal to the centre and a semisimple group has finite centre",
+   "results": "ok=True; 8 hits; LieDerivation.ad_ker_eq_center, LieAlgebra.self_module_ker_eq_center, LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical, SpecialLinearGroup.center_eq_bot_of_finrank_le_one, LieAlgebra.isFaithful_self_iff, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, LieDerivation.injective_ad_of_center_eq_bot; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra adjoint homomorphisms or abstract representations/groups, not the scheme-theoretic group kernel; checked LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical at Mathlib/Algebra/Lie/Semisimple/Basic.lean:334 and LieDerivation.ad_ker_eq_center at Mathlib/Algebra/Lie/AdjointAction/Derivation.lean:66."
+  },
+  {
+   "tool": "grep",
+   "query": "ad_ker_eq_bot_of_hasTrivialRadical|ad_ker_eq_center",
+   "results": "ok=True; 6 hits; Mathlib/Algebra/Lie/Derivation/Killing.lean, Mathlib/Algebra/Lie/AdjointAction/Derivation.lean, Mathlib/Algebra/Lie/AdjointAction/Derivation.lean, Mathlib/Algebra/Lie/AdjointAction/Derivation.lean, Mathlib/Algebra/Lie/AdjointAction/Derivation.lean, Mathlib/Algebra/Lie/Semisimple/Basic.lean; subdirectory Algebra/Lie; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra adjoint homomorphisms or abstract representations/groups, not the scheme-theoretic group kernel; checked LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical at Mathlib/Algebra/Lie/Semisimple/Basic.lean:334 and LieDerivation.ad_ker_eq_center at Mathlib/Algebra/Lie/AdjointAction/Derivation.lean:66."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-semisimple-affineness",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group Supporting input: Proof of Proposition 6.3.16, printed p.229: adjoint representation with finite geometric kernels and affineness of quasi-finite homomorphisms of separated flat finite-type groups over a Dedekind base; the argument is independent of the root-cell construction Supporting input: Finite scheme-theoretic adjoint kernel of a semisimple algebraic group.",
+   "via": [
+    "lem-sfb-relative-semisimple-affineness",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-adjoint-kernel-finite",
+  "worker": "stage1",
+  "summary": "Field-level route (maintainer FIX): K=ker Ad is a closed normal subgroup by the smooth-affine adjoint-kernel calculus; its intersection with a split maximal torus T is the intersection of root kernels, which is Z(G)=D_k(X/ZPhi) by the reductive centre-root-quotient node; semisimplicity kills the torus part of X/ZPhi; finiteness of K∩T gives finiteness of K by the normal-subgroup torus-finiteness node. No new nodes and no statement change. The delivered step 1 claim that a reductive group over an algebraically closed field is split reductive in the relative sense of def-sfb-pinned-split-root-realization (conditions on every geometric fibre over every algebraically closed extension) had no cited justification and was removed.",
+  "blueprint": "The inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports. The item serves det-thm-sf-ctf-stability-direct-images proof (3), at the nested classical finite-adjoint-kernel input of Conrad Proposition 6.3.16; the five steps realize that input without changing the route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-3e8307e3f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-3e8307e3f (reviewer sub-agent of L); spot-checked: Read the item, all 12 cited nodes, def-sfb-pinned-split-root-realization, and Milne iAG Prop 21.7-21.8 (p.427), Cor 17.62 (p.372), Prop 12.3 and Thm 17.82. Conrad is not local (WANTED). The statement is correct and unchanged. Small cases: SL_2 in char 2 and SL_p in char p give K=mu_2, mu_p (finite, nonreduced); PGL_2 gives 1; G=1 gives 1; G_m is excluded. FAULT (C4/E1, step 1, inherited by step 2): it asserts that G is split reductive in the relative sense of def-sfb-pinned-split-root-realization. That definition needs G_Omega reductive and connected, T_Omega maximal, and the prescribed roots and coroots on every geometric fibre, for every algebraically closed Omega containing k. lem-sfb-reductive-borel-pair-structure gives reductivity over k only, no node gives this invariance, and the Borel-pair coroots do not pin the canonical coroot (GL_2 counterexample). lem-sfb-arbitrary-base-root-lines-coroots and lem-sfb-adjoint-action-kernel-is-centre were therefore applied with an unchecked hypothesis. FIX (item proof, proof_deps, proof_origin.place, split_report.summary only), using existing same-unit nodes on the base: step 1 = borel-pair + finite presentation + lem-sfb-smooth-affine-adjoint-kernel-calculus (with A=k, L is T_{G/k,e} and K=ker Ad is a closed normal subgroup); step 2 = the tangent-weight decomposition gives K x_G T = intersection of the root kernels, which equals Z(G)=D_k(X/ZPhi) by lem-sfb-reductive-centre-root-quotient; steps 3-4 kept with M=X/ZPhi and r'; step 5 = finite basis, so K x_G T is finite, so K is finite by lem-sfb-reductive-normal-subgroup-torus-finiteness, then def-weil-finite-integral-morphism. The dropped citations are root-lines, adjoint-action-kernel-is-centre, affine-group-centre-base-change, reductive-centre-multiplicative-type and split-torus-subgroups-diagonalizable. No cycle; every step is under 2000 characters; no new nodes. Batch 5: all five flags reach sec-trace-formula only through generic algebra (fppf covering base change, f.g. torsion-free groups are free, smooth fpqc descent, and the shared sfb component containing thm-pd-spreading-out). None is a trace-formula or Poincare-duality step, so they are accepted. The fixed closure's trace-formula and PD nodes are a subset of the delivered closure's (424 of 485, none added). Accepted tool_uses: none.; 1 file(s) fixed by the reviewer"
+ }
+}

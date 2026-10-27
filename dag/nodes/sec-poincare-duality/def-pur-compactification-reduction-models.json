@@ -1,0 +1,150 @@
+{
+ "id": "def-pur-compactification-reduction-models",
+ "kind": "definition",
+ "title": "Normalized compactification reduction models and canonical whole-system maps",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with integers $O$. On every small pro-etale site use the actual $\\ell$-power rings, quotient transitions, ordinary integral and whole-system derived categories, reduction $r_T$, total limit $L_T$ and reduction/limit adjunction of [def-sp-projection-reduction-presentation]. Use the normalized ringed integral operations and open comparisons of [def-sf-integral-system-canonical-bridge], the section-model system tensor calculus of [def-coef-semilinear-derived-calculus], and the varying-ring system pullback, proper image, open extension and their actual adjunctions of [def-sp-varying-ring-operations]. A pullback/reduction presentation consists of the canonical derived isomorphism $r_X f_R^*\\cong f_\\bullet^*r_Y$ and its ordinary scalar-extension comparison, fixed on every quotient generator by the actual inverse-image unit and on every whole cochain complex by the reduction representative/counit square. A system tensor/pullback presentation consists of the derived tensor/pullback isomorphism and its ordinary representative comparison, carrying the inverse-image unit of $x\\otimes y$ to the tensor of the two inverse-image units on every site object. Define $\\mathrm{DescentModels}$ to retain the abelian tower and reduction presentations, the normalized ringed models and open comparisons, the system tensor calculus, the tensor/reduction model of [def-sp-projection-reduction-presentation], these pullback/reduction and system tensor/pullback presentations, and an open/scalar isomorphism whose inverse is exactly the open-adjunction mate of the pullback/scalar comparison. These are presentations of the specified maps, not assertions of existence or invertibility of any projection.\n\nFor a fixed model, write $r_T,L_T$ and $r_T\\dashv L_T$ for its actual reduction, total limit and adjunction, using a normalized-equivalence presentation [det-sp-normalized-equivalence]. The proper/scalar comparison is the adjunction mate of inverse pullback/scalar comparison. The open/limit comparison is the transpose of open/scalar comparison followed by open extension of the reduction/limit counit; the proper/limit comparison is the corresponding transpose of proper/scalar comparison followed by proper image of the counit. For a compactification $c=(j:X\\hookrightarrow Z,p:Z\\to Y)$ of $f$ [def-weil-compactifications-refinements], set $P_c=Rp_{*,R}j_{!,R}$ and $F_c=Rp_{*,\\bullet}j_{!,\\bullet}$. Define $a_{c,N}:P_cN\\to L_YF_cr_XN$ by $P_c$ of the actual unit $N\\to L_Xr_XN$, then proper image of the open/limit comparison, then the proper/limit comparison. Define the pinned reconstruction map $b_{c,N}:r_YP_cN\\to F_cr_XN$ as $r_Y(a_{c,N})$ followed by the actual reconstruction counit. Define the system proper projection by the counit mate of tensor/pullback; define the inverse open projection as the open adjunct of unit tensor identity, using that same tensor/pullback comparison. When this inverse open projection is invertible, define the system compactification projection by the proper projection, proper image of its inverse, and the canonical pullback compositor with the compactification equation. No arbitrary comparison isomorphism, completion, or levelwise detection of a whole-system map is introduced.",
+ "stmt_deps": [
+  "def-sp-projection-reduction-presentation",
+  "def-sf-integral-system-canonical-bridge",
+  "def-coef-semilinear-derived-calculus",
+  "def-sp-varying-ring-operations",
+  "det-sp-normalized-equivalence",
+  "def-weil-compactifications-refinements"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (2)-(3): canonical compactification/limit comparison, actual reconstruction counit, and proper/open projection on entire quotient systems"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical compactification reduction and limit counit comparisons on whole derived coefficient systems",
+   "results": "CategoryTheory.Functor.totalLeftDerivedCounit; CompHausLike.LocallyConstant.counit_app_val; CondensedSet.compactlyGeneratedAdjunctionCounitHomeo; CategoryTheory.Comonad.ComonadicityInternal.counitLimitOfPreservesEqualizer; CompHausLike.LocallyConstant.counit; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction; CondensedSet.compactlyGeneratedAdjunctionCounitIso; Condensed.profiniteSolidCounit",
+   "date": "2026-10-25",
+   "verdict": "No match: generic Kan-extension, condensed and comonadic counits do not give the normalized compactification presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compactification reduction and limit counit comparisons on whole derived coefficient systems",
+   "results": "LightProfinite.lightToProfinite_map_proj_eq; CompHausLike.LocallyConstant.counitAppApp; Condensed.profiniteSolidCounit; InverseSystem.globalEquiv_compatibility; InverseSystem.globalEquiv_naturality; InverseSystem.pEquivOnLim; Profinite.isoindexConeLift; LightProfinite.proj_comp_transitionMap",
+   "date": "2026-10-25",
+   "verdict": "No match: these concern ordinary inverse systems and condensed/profinite counits, not the whole derived coefficient-system interface."
+  },
+  {
+   "tool": "grep",
+   "query": "DescentModels|ShiftedTensorModel|derivedTensorSymmetry|compactificationLimit (Mathlib/CategoryTheory); ShiftedTensorModel|derivedTensorSymmetry|DescentModels (Mathlib/Algebra)",
+   "results": "Both msearch.py grep calls: OK 0 hit(s).",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib definition matches the simultaneous normalized compactification interface or the ringed-site signed resolving tensor presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n DescentModels|ShiftedTensorModel|derivedTensorSymmetry|compactificationLimit lean/WeilConjectures; rg -n ^(structure DescentModels|structure ShiftedTensorModel|def derivedTensorSymmetry|def compactificationLimit) lean/Sheaf",
+   "results": "WeilConjectures: only unrelated finitePresentationDescentModels in NoetherianApproximation/RelativeGluingGlue.lean. Sheaf: CompleteProjectionMateDescent.lean:124 DescentModels, :217 compactificationLimit; ShiftedTensorMorphismCalculus.lean:272 ShiftedTensorModel, :488 derivedTensorSymmetry.",
+   "date": "2026-10-25",
+   "verdict": "Reuse these already published definitions; do not duplicate them."
+  },
+  {
+   "tool": "grep",
+   "query": "Definition-node lean.module ownership scan of dag/nodes for Sheaf.Paper.CompleteProjectionMateDescent and Sheaf.Paper.ShiftedTensorMorphismCalculus; blueprint_refs.py search DescentModels; blueprint_refs.py search ShiftedTensorModel",
+   "results": "No definition node owns either module. Name searches have no blueprint match; broader projection/reduction and tensor/symmetry searches find related theorem nodes and scheme-specific signed shifts.",
+   "date": "2026-10-25",
+   "verdict": "New definition ownership nodes are required by the immutable-head H2 return; the scheme-specific signed shift definition has a different notion and module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compactification-b-projection-reduction",
+  "date": "2026-10-25",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Paragraphs (2)-(3): canonical compactification/limit comparison, actual reconstruction counit, and proper/open projection on entire quotient systems",
+   "via": [
+    "lem-pur-compactification-b-projection-reduction",
+    "lem-pur-tower-purity-realized-transpose",
+    "lem-pur-tower-trace-purity-comparison",
+    "lem-pur-rational-weil-naturality-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "module": "Sheaf.Paper.CompleteProjectionMateDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.DescentModels",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.ordinaryPull",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.PullReductionModel",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.SystemTensorPull",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.DescentModels",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.red",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.lim",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.adj",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.properScalar",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.openLimit",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.properLimit",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.integralImage",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.systemImage",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.compactificationLimit",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.reconstruction",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.systemProperProjection",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.systemOpenInverse",
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.systemProjection"
+  ],
+  "statement": "structure DescentModels",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Definition ownership of existing published declarations, requested by return L on immutable head d57e733e0f90. No Lean declaration is added, moved, renamed or duplicated. This node owns the listed definitions; the theorem in this module remains a separate statement node."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be8a42ff7",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be8a42ff7",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of d57e (RETURN H2). The Lean is unchanged except for 4 added public imports; the signature is byte-identical and lean.statement is verbatim in the file. Statement, proof and proof_deps equal live; only stmt_deps gain 6 nodes: the new existing:true def-pur-compactification-reduction-models (owns DescentModels, red, lim, adj, integralImage, systemImage, compactificationLimit, reconstruction, systemOpenInverse, systemProjection in CompleteProjectionMateDescent; all 17 decls exist and the statement matches the Lean), the new existing:true def-pur-ringed-site-signed-tensor-models (ShiftedTensorModel, shiftedTensorResolving, derivedTensorSymmetry = choose of the proved ∃! signed-swap theorem), and 4 landed def owners (projection-reduction-presentation, integral-ringed-projection-maps, integral-system-canonical-bridge, sp-normalized-towers). This follows the N6 3acf existing:true re-export precedent; no parallel owner. Maths re-read: D, K⊗̂PM, α/α^•, q, s=(1⊗b)τ, the square in diagrammatic order, the conditional inverse and naturality all match the node. b is independent of the free SpNormalizedEquivalence.adjunction (triangle identity). No unramifiedness or extra hypotheses; edge cases f=id, open-only or proper-only compactification, d=0, zero inputs, shifts, e>1 and empty schemes are fine. Advisory: uncited def owners (def-sp-varying-ring-operations, def-pur-integral-compact-support-coefficient-data, def-sfb-proetale-tensor-model, def-coef-semilinear-system-models, def-coef-ringed-sequence-site, def-pc-kflat-complex, def-weil-finite-field-fiber); Stacks 0FPQ is not in the cited-tags list. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-98066",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T180546-L-4003932",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs clone (verbatim relocation of 22 defs with public re-export; item theorem statement byte-identical); projection_reduction_square vs stage-2 conjunct 1 multiplied by targetComparison.hom and node lem-sp-complete-projection-reduction-square; item node proof_deps vs Lean; both direct importers compiled against delivered modules",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.complete_projection_mate_descent"
+  ],
+  "sorry_after": []
+ }
+}

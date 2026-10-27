@@ -1,0 +1,150 @@
+{
+ "id": "lem-cbc-signed-koszul-summand-differential",
+ "kind": "statement",
+ "title": "The Koszul-direction differential on a positive-length pure tensor",
+ "statement": "Let (C,J,O) be a small ringed site with commutative O [def-weil-sheaf-of-modules-category], A a commutative ring, rho:A -> Gamma(O), r,m natural numbers, a:Fin(r+1)->A, K an arbitrary unbounded complex, q an integer, and I a subset of Fin(r+1). Use the actual ordered negative Koszul complex Q of [def-cbc-signed-koszul-completion-model] and the second total differential D2 of K tensor Q [def-pc-tensor-complex-sheaves]. The canonical map s_I=ringedNegativeKoszulSummand satisfies s_I D2 = sum over i in I of rho((-1)^(q+|I|) (-1)^|{j in I:j<i}| a_i^(m+1)) times the equality transport K^(q+|I|) -> K^((q+1)+|I.erase i|), followed by s_(I.erase i) in degree q+1. Each term is conditionally zero if this degree equality fails (it holds for i in I). Parity represents the integer-degree sign in A. This statement has neither a coordinate isomorphism nor the first (coefficient-complex) differential contribution.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul tensors; steps 1 and 2 of lem-cbc-signed-koszul-tensor-coordinates."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof": [
+  {
+   "text": "Reduce the second total differential on the pure tensor inclusion with mapBifunctor.ι_D₂ and mapBifunctor.d₂_eq. The remaining inner basis differential is supplied by the strictly smaller ordered-basis theorem lem-cbc-signed-koszul-basis-differential; the total-tensor sign is the ε₂ sign at coefficient degree q+|I|.",
+   "uses": [
+    "lem-cbc-signed-koszul-basis-differential",
+    "def-pc-tensor-complex-sheaves",
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul tensors"
+   }
+  },
+  {
+   "text": "Transport the scalar action from the rank-one Koszul factor through the tensor with K, use card(I.erase i)+1=card I, and regroup the finite sum into ringedKoszulCoefficientSMul with the displayed parity and earlier-index sign.",
+   "uses": [
+    "lem-cbc-signed-koszul-basis-differential",
+    "def-pur-sheaf-tensor-product",
+    "def-cbc-signed-koszul-completion-model",
+    "lem-cbc-signed-koszul-summand-term-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul tensors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-signed-koszul-completion-model",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "lem-cbc-signed-koszul-basis-differential",
+  "lem-cbc-signed-koszul-summand-term-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, ordered negative Koszul tensor differential; decomposition into the basis differential and the tensor/scalar transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The differential on a pure tensor in an ordered tensor of two term negative Koszul complexes is a signed sum erasing one index",
+   "results": "UNAVAILABLE: HTTP 502; no absence verdict inferred from this service.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite tensor of two term complexes has a direct sum decomposition indexed by subsets, with signed differential",
+   "results": "8 hits: total tensor inclusions, HasTensor, tensorObj, and unit_tensor_d₁.",
+   "date": "2026-10-26",
+   "verdict": "No signed finite-subset erasure formula for the specified basis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor.d_eq\"",
+   "results": "1 hit: HomologicalComplex.mapBifunctor.d_eq.",
+   "date": "2026-10-26",
+   "verdict": "Splits the total differential; does not calculate the Koszul-direction contribution."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.d_eq|mapBifunctor.ι_D₁|mapBifunctor.ι_D₂|isColimit.*Koszul",
+   "results": "9 server hits in Monoidal.lean and BifunctorAssociator.lean. Local rg finds ringedNegativeKoszulLowDegrees, which depends on the present item through SignedKoszulFiniteCoordinates, and exterior-algebra Koszul Leibniz statements for a different complex.",
+   "date": "2026-10-26",
+   "verdict": "Generic formulas are used for the coefficient direction in the parent proof. No noncircular theorem gives the specified Koszul-direction formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedKoszulTensorCoordinates",
+  "date": "2026-10-26",
+  "group": "W4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "The finite free tensor calculation of the completed extension-by-zero comparison, isolated below lem-cbc-signed-koszul-tensor-coordinates: The Koszul-direction differential on a positive-length pure tensor.",
+   "via": [
+    "lem-cbc-signed-koszul-tensor-coordinates",
+    "lem-cbc-signed-koszul-finite-coordinates",
+    "lem-cbc-exact-linear-koszul-fiber"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedKoszulSummandDifferential",
+  "file": "lean/Sheaf/CategoryTheory/SignedKoszulSummandDifferential.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulSummand_D₂_succ",
+  "statement": "theorem ringedNegativeKoszulSummand_D₂_succ\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]\n    (ρ : A →+* RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat))\n    (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) (K : ringedSiteComplex O) (q : ℤ)\n    (I : Finset (Fin (r + 1))) :\n    letI : IsGrothendieckAbelian.{u} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=\n      SheafOfModules.isGrothendieckAbelian _\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.symmetricCategory O\n    letI := Classical.choice (SheafOfModules.tensorClosed O).1\n    letI := Classical.choice (SheafOfModules.tensorClosed O).2.1\n    ringedNegativeKoszulSummand O ρ a m K q I ≫\n      HomologicalComplex.mapBifunctor.D₂ K\n        (ringedNegativeKoszul O (r + 1) (fun i ↦ ⟨(ρ (a i)).val, (ρ (a i)).property⟩) m)\n        (MonoidalCategory.curriedTensor _) (.up ℤ) q (q + 1) =\n      ∑ i ∈ I, if h : q + (I.card : ℤ) = (q + 1) + ((I.erase i).card : ℤ) then\n        ringedKoszulCoefficientSMul O ρ\n          ((if Even (q + (I.card : ℤ)) then (1 : A) else -1) *\n            (-1 : A) ^ (I.filter (fun j ↦ j < i)).card * a i ^ (m + 1))\n          (K.XIsoOfEq h).hom ≫\n            ringedNegativeKoszulSummand O ρ a m K (q + 1) (I.erase i)\n      else 0",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T130720-L-3495738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9fa11",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261026T222733-L-687964",
+  "kind": "interface",
+  "note": "independent cc review: delivered SignedKoszulSummandDifferential + SignedKoszulSummandTermTransport, nodes lem-cbc-signed-koszul-basis-differential / -summand-term-transport and change records against clone 20c80eb, the factor definition (double of scalar^(m+1)), the claims, 3b importer result and a scratch #print axioms compile",
+  "sorry_before": [
+   "CategoryTheory.ringedNegativeKoszulBasis_d_succ"
+  ],
+  "sorry_after": []
+ }
+}

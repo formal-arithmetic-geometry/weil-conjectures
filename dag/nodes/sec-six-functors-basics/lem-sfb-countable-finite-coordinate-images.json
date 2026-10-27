@@ -1,0 +1,556 @@
+{
+ "id": "lem-sfb-countable-finite-coordinate-images",
+ "kind": "statement",
+ "title": "Compact diagonal images of countably many finite coordinates",
+ "statement": "Use [def-weil-size-convention]. Let $S$ be a compact Hausdorff space, let $G$ be a compact Hausdorff topological group, and, for each $n\\in\\mathbf N$, let $A_n$ be a finite discrete space and $B_n$ a finite group with the discrete topology. Suppose $p_n:S\\to A_n$ is continuous and $q_n:G\\to B_n$ is a continuous group homomorphism. No surjectivity of the coordinate maps is assumed. Define\n$$P(s)=(p_n(s))_n,\\qquad Q(g)=(q_n(g))_n,\\qquad S_0=P(S)\\subseteq\\prod_n A_n,\\qquad G_0=Q(G)\\subseteq\\prod_n B_n,$$\nwith product topologies on the ambient products and subspace topologies [def-kun-subspace-topology] on the images. The corestrictions $p:S\\to S_0$ and $q:G\\to G_0$ are continuous surjections. The space $S_0$ is compact Hausdorff, has a basis of clopen subsets, and is metrizable. The image $G_0$ is a subgroup with coordinatewise operations, those operations are continuous, and $q$ is a group homomorphism. The space $G_0$ is compact Hausdorff and metrizable, and the open normal subgroups\n$$K_F=\\{b\\in G_0:b_n=1\\text{ for every }n\\in F\\},\\qquad F\\subseteq\\mathbf N\\text{ finite},$$\nform a neighbourhood basis of its identity. Thus $S_0$ is a metrizable profinite space and $G_0$ a metrizable profinite group. For $s,s'\\in S$ one has $p(s)=p(s')$ if and only if $p_n(s)=p_n(s')$ for every $n$; likewise $q(g)=q(g')$ if and only if $q_n(g)=q_n(g')$ for every $n$. Empty $S$ and empty $A_n$ are allowed whenever the given maps exist.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel expansion: compact diagonal images, profinite group image with finite-coordinate normal kernels, and countably separating coordinates giving metrizability (returned item proof steps 5-7). Agent-formulated topological auxiliary lemma; the blueprint paragraph motivates the application but supplies no topological proof. Exact external literature reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-kun-subspace-topology"
+ ],
+ "proof": [
+  {
+   "text": "For a product of discrete spaces, basic opens prescribe membership in specified subsets at finitely many coordinates. The inverse image under $P$ of such a basic open is a finite intersection of the open sets $p_n^{-1}(U_n)$, hence is open. Thus $P$ is continuous; replacing $p_n$ by $q_n$ proves continuity of $Q$. By [def-kun-subspace-topology], an open of $S_0$ is $S_0\\cap V$ for ambient open $V$; its inverse image under $p$ is $P^{-1}(V)$. Therefore $p$ is continuous, and the identical calculation proves continuity of $q$. Each is surjective because its codomain is its image.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZS, section-limits, opening definition of the product topology; Tag 004E, item-induced-topology. Elementary inverse-image calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-continuous-image-quasi-compact] to $P:S\\to\\prod_n A_n$ and $Q:G\\to\\prod_n B_n$. The domains are compact by hypothesis and both maps are continuous by step 1. Hence their images $S_0$ and $G_0$, with exactly the specified induced topologies, are compact. No claim about surjectivity onto either ambient product is needed.",
+   "uses": [
+    "lem-weil-pbc-continuous-image-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04Z9, lemma-image-quasi-compact, assertion (1)."
+   }
+  },
+  {
+   "text": "Let $T$ be either image and write $D_n=A_n$ or $B_n$ respectively. For $t\\in T$ and finite $F\\subseteq\\mathbf N$, put $C_F(t)=\\{u\\in T:u_n=t_n\\ (n\\in F)\\}$. Each cylinder $C_F(t)$ is open and closed: a singleton and its complement are open in each discrete $D_n$, coordinate projections are continuous by the definition of product topology, and finite intersections preserve both properties. Every open neighbourhood of $t$ in $T$ contains such a cylinder, since in an ambient basic open containing $t$ each of its finitely many coordinate conditions can be shrunk to $\\{t_n\\}$. Thus the cylinders form a clopen basis. Distinct $t,u$ differ in some coordinate $n$, and the disjoint cylinders $C_{\\{n\\}}(t)$ and $C_{\\{n\\}}(u)$ separate them. Both images are therefore Hausdorff. Also a connected subset containing distinct $t,u$ would be separated by that cylinder and its complement, so every connected subset has at most one point.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZS, section-limits, product basis, restricted using the induced topology; Tag 004E, item-Hausdorff. All separation and clopen assertions are proved explicitly from the basis."
+   }
+  },
+  {
+   "text": "Give each $A_n$ and $B_n$ the discrete metric $d(x,y)=0$ when $x=y$ and $1$ otherwise. The triangle inequality follows because if $x\\ne z$, at least one of $x\\ne y$ and $y\\ne z$ holds; balls of radius $1/2$ are singletons, so this metric induces the discrete topology, including on an empty factor. On each compact image, the coordinate projections are continuous by step 3 and separate distinct points because tuples equal in every coordinate are equal. Apply [lem-sfb-compact-countable-separating-metrizable] first with $X=S_0$, $Y_n=A_n$, then with $X=G_0$, $Y_n=B_n$. This proves metrizability for both images, without any completeness or nonemptiness assumption.",
+   "uses": [
+    "lem-sfb-compact-countable-separating-metrizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/MetricSpace/PiNat.lean",
+    "place": "Metric.PiNatEmbed.TopologicalSpace.MetrizableSpace.of_countable_separating, lines 1091-1097; elementary discrete metric supplies its metric target hypotheses."
+   }
+  },
+  {
+   "text": "For $g,h\\in G$, the homomorphism identities in each coordinate give $Q(1)=(1)_n$, $Q(gh)=Q(g)Q(h)$ and $Q(g^{-1})=Q(g)^{-1}$. Hence $G_0$ contains the identity and is closed under coordinatewise multiplication and inverse, and $q$ is a group homomorphism. These operations are continuous directly on cylinders: the inverse image of $\\{b:b_n=a\\}$ under multiplication is $\\bigcup_{uv=a}(\\{b:b_n=u\\}\\times\\{c:c_n=v\\})$, open in $G_0\\times G_0$; under inversion it is $\\{b:b_n=a^{-1}\\}$. Inverse images commute with finite intersections and unions, and the coordinate cylinders generate the topology by step 3. Thus both operations are continuous for the given subspace topology, without putting any new topology on $G_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0B1Z, definition-topological-group; Tag 08ZS, section-limits. Elementary coordinate computation of inverse images establishes the topological group structure."
+   }
+  },
+  {
+   "text": "At the identity, $K_F=C_F(1)$, so each $K_F$ is open by step 3. It is a subgroup because products and inverses of tuples equal to $1$ on $F$ still equal $1$ there. For $b\\in G_0$ and $k\\in K_F$, one has $(bkb^{-1})_n=b_n1b_n^{-1}=1$ for $n\\in F$. Thus conjugation preserves $K_F$; applying this also with $b^{-1}$ gives equality and normality. Every identity neighbourhood contains an open neighbourhood and then some $C_F(1)=K_F$ by step 3. This proves exactly the required neighbourhood basis. The empty finite set gives $K_\\varnothing=G_0$. Together with steps 2--4 this proves that $S_0$ is a metrizable profinite space and $G_0$ a metrizable profinite group.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZS, section-limits, product basis at the identity; Tag 0B1Z, definition-topological-group. Elementary coordinate subgroup and conjugation computations."
+   }
+  },
+  {
+   "text": "Equality in an image subtype is equality of its underlying tuple, and tuple equality is equality in every coordinate. Consequently $p(s)=p(s^\\prime)$ if and only if $p_n(s)=p_n(s^\\prime)$ for every $n$; the same argument gives the assertion for $q$. If $S$ is empty, so is $S_0$, all assertions about its points are vacuous and the compactness and metrizability lemmas above still apply. If some $A_n$ is empty, existence of $p_n$ forces $S$ empty. Finite groups $B_n$ contain their identity, and $Q(1)$ always belongs to $G_0$. No step has assumed a coordinate map surjective. All products and image subsets are formed in the fixed universes of [def-weil-size-convention].",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar tame-kernel auxiliary construction: coordinate equality, empty cases and size convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-sfb-compact-countable-separating-metrizable",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary metrizable quotient construction. Written-out elementary coordinate proof using Stacks Topology Tags 08ZS and 0B1Z for definitions, Tag 04Z9 for compact images, and the existing Mathlib countably separating maps lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(range|image).*(Metrizable|profinite)|(Metrizable|profinite).*(range|image)",
+   "results": {
+    "t": "2026-10-22T06:10:25Z",
+    "tool": "grep",
+    "query": "(range|image).*(Metrizable|profinite)|(Metrizable|profinite).*(range|image)",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/MetricSpace/Pseudo/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean",
+     "Mathlib/Topology/Category/LightProfinite/AsLimit.lean",
+     "Mathlib/Topology/Category/LightProfinite/AsLimit.lean",
+     "Mathlib/Topology/Category/LightProfinite/Basic.lean",
+     "Mathlib/Topology/Category/LightProfinite/Basic.lean"
+    ],
+    "digest": "4e51ee6cfae17ec5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/limit constructors and metrizability of a compact space with separating coordinates supply individual ingredients. None states this diagonal-image construction, its subgroup topology and open normal coordinate-kernel basis together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProfiniteGrp\", \"range\"",
+   "results": {
+    "t": "2026-10-22T06:10:25Z",
+    "tool": "loogle",
+    "query": "\"ProfiniteGrp\", \"range\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.ProfiniteCompletion.denseRange"
+    ],
+    "digest": "00ae4ae6b4cd44fe"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/limit constructors and metrizability of a compact space with separating coordinates supply individual ingredients. None states this diagonal-image construction, its subgroup topology and open normal coordinate-kernel basis together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a compact topological group under a homomorphism into a countable product of finite groups is a metrizable profinite group with a basis of open normal coordinate kernels",
+   "results": {
+    "t": "2026-10-22T06:10:26Z",
+    "tool": "leansearch",
+    "query": "The image of a compact topological group under a homomorphism into a countable product of finite groups is a metrizable profinite group with a basis of open normal coordinate kernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.ofHom",
+     "ProfiniteAddGrp.of",
+     "ProfiniteGrp.of",
+     "ProfiniteGrp.ofFiniteGrp",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "ProfiniteGrp.ofProfinite",
+     "ProfiniteGrp.mk",
+     "ProfiniteAddGrp.noConfusionType"
+    ],
+    "digest": "f28ae622b4ff7693"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/limit constructors and metrizability of a compact space with separating coordinates supply individual ingredients. None states this diagonal-image construction, its subgroup topology and open normal coordinate-kernel basis together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The images of a compact space and a compact topological group in countable products of finite discrete sets and finite discrete groups are metrizable profinite, and the diagonal maps corestrict to continuous surjections",
+   "results": {
+    "t": "2026-10-22T06:10:37Z",
+    "tool": "leanfinder",
+    "query": "The images of a compact space and a compact topological group in countable products of finite discrete sets and finite discrete groups are metrizable profinite, and the diagonal maps corestrict to continuous surjections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.pi",
+     "Profinite.IndexFunctor.surjective_π_app",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.indexFunctor",
+     "LightProfinite.proj_surjective",
+     "Profinite.NobelingProof.iso_map",
+     "Metric.PiNatEmbed.isHomeomorph_toPiNat",
+     "Profinite.isIso_indexCone_lift"
+    ],
+    "digest": "8be2a2fc9a161565"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/limit constructors and metrizability of a compact space with separating coordinates supply individual ingredients. None states this diagonal-image construction, its subgroup topology and open normal coordinate-kernel basis together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact image in a countable product of finite discrete spaces is profinite and metrizable; for continuous homomorphisms to finite groups the diagonal image is a profinite group with open normal coordinate kernels",
+   "results": {
+    "t": "2026-10-22T06:11:22Z",
+    "tool": "leanfinder",
+    "query": "A compact image in a countable product of finite discrete spaces is profinite and metrizable; for continuous homomorphisms to finite groups the diagonal image is a profinite group with open normal coordinate kernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteAddGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemAddSubgroupLimitConePtAux",
+     "ProfiniteGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemSubgroupLimitConePtAux",
+     "ProfiniteGrp.pi",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "ProfiniteAddGrp.limitConePtAux",
+     "ProfiniteGrp.ofFiniteGrp",
+     "ProfiniteGrp.limitConePtAux",
+     "ProfiniteGrp.toLimit"
+    ],
+    "digest": "c282cecd4f4f4f0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/limit constructors and metrizability of a compact space with separating coordinates supply individual ingredients. None states this diagonal-image construction, its subgroup topology and open normal coordinate-kernel basis together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isClosed_range\", \"Continuous\"",
+   "results": {
+    "t": "2026-10-22T06:11:04Z",
+    "tool": "loogle",
+    "query": "\"isClosed_range\", \"Continuous\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ContinuousLinearMap.IsIdempotentElem.isClosed_range",
+     "ContinuousLinearMap.antilipschitzConstant_of_injective_of_isClosed_range",
+     "ContinuousLinearMap.antilipschitz_of_injective_of_isClosed_range",
+     "ContinuousLinearMap.isClosed_range_iff_antilipschitz_of_injective",
+     "ContinuousLinearMap.antilipschitz_antiLipschitzConstant_of_injective_of_isClosed_range",
+     "ContinuousLinearMap.leftInverse_of_injective_of_isClosed_range",
+     "ContinuousAlternatingMap.isClosed_range_toContinuousMultilinearMap",
+     "ZeroAtInftyContinuousMap.isClosed_range_toBCF"
+    ],
+    "digest": "cbf4ed9cb9801aa3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/limit constructors and metrizability of a compact space with separating coordinates supply individual ingredients. None states this diagonal-image construction, its subgroup topology and open normal coordinate-kernel basis together."
+  },
+  {
+   "tool": "grep",
+   "query": "of_countable_separating|ofHom|ofProfinite|def indexFunctor|def obj",
+   "results": {
+    "t": "2026-10-22T06:11:26Z",
+    "tool": "grep",
+    "query": "of_countable_separating|ofHom|ofProfinite|def indexFunctor|def obj",
+    "sub": "Topology/Algebra/Category/ProfiniteGrp",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean"
+    ],
+    "digest": "e6a2351a1bbf9f48"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/limit constructors and metrizability of a compact space with separating coordinates supply individual ingredients. None states this diagonal-image construction, its subgroup topology and open normal coordinate-kernel basis together."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous_pi|continuous_subtype_mk|isCompact_range|Pi.metrizableSpace|Subtype.metrizableSpace",
+   "results": {
+    "t": "2026-10-23T09:50:37Z",
+    "tool": "grep",
+    "query": "continuous_pi|continuous_subtype_mk|isCompact_range|Pi.metrizableSpace|Subtype.metrizableSpace",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/IsClosedRestrict.lean",
+     "Mathlib/Topology/IsClosedRestrict.lean",
+     "Mathlib/Topology/Piecewise.lean",
+     "Mathlib/Topology/Piecewise.lean",
+     "Mathlib/Topology/Maps/Proper/Basic.lean",
+     "Mathlib/Topology/Order/Compact.lean",
+     "Mathlib/Topology/Order/Compact.lean",
+     "Mathlib/Topology/Compactness/CompactlyGeneratedSpace.lean"
+    ],
+    "digest": "9936b750c687d411"
+   },
+   "date": "2026-10-23",
+   "verdict": "ingredient match: isCompact_range at Topology/Compactness/Compact.lean:974 is already represented by lem-weil-pbc-continuous-image-quasi-compact; the other continuity assertions are elementary inverse-image calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal images of a compact Hausdorff space and compact topological group in countable products of finite discrete spaces and groups are metrizable profinite, with open normal finite-coordinate kernels",
+   "results": {
+    "t": "2026-10-23T09:50:38Z",
+    "tool": "leanfinder",
+    "query": "The diagonal images of a compact Hausdorff space and compact topological group in countable products of finite discrete spaces and groups are metrizable profinite, with open normal finite-coordinate kernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.pi",
+     "LightProfinite.of",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ProfiniteGrp.pi",
+     "ProfiniteGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemSubgroupLimitConePtAux",
+     "Profinite.indexFunctor",
+     "ProfiniteAddGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemAddSubgroupLimitConePtAux",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal"
+    ],
+    "digest": "0cde370f65a92d3f"
+   },
+   "date": "2026-10-23",
+   "verdict": "ingredient match: discrete spaces are metrizable (TopologicalSpace.DiscreteTopology.metrizableSpace); the proof writes the discrete metric directly, so no auxiliary node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteTopology.*[Mm]etriz|[Mm]etriz.*DiscreteTopology|of_discreteTopology|ofDiscrete",
+   "results": {
+    "t": "2026-10-23T09:52:30Z",
+    "tool": "grep",
+    "query": "DiscreteTopology.*[Mm]etriz|[Mm]etriz.*DiscreteTopology|of_discreteTopology|ofDiscrete",
+    "sub": "Topology/Metrizable",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Metrizable/Urysohn.lean",
+     "Mathlib/Topology/Metrizable/Basic.lean",
+     "Mathlib/Topology/Metrizable/Basic.lean"
+    ],
+    "digest": "c39607d783bb2d1f"
+   },
+   "date": "2026-10-23",
+   "verdict": "ingredient match: discrete spaces are metrizable (TopologicalSpace.DiscreteTopology.metrizableSpace); the proof writes the discrete metric directly, so no auxiliary node is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A discrete topological space admits a metric inducing its topology",
+   "results": {
+    "t": "2026-10-23T09:52:31Z",
+    "tool": "leansearch",
+    "query": "A discrete topological space admits a metric inducing its topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopologicalSpace.DiscreteTopology.metrizableSpace",
+     "TopologicalSpace.MetrizableSpace",
+     "TopologicalSpace.IsCompletelyMetrizableSpace.discrete",
+     "TopologicalSpace.t2Space_of_metrizableSpace",
+     "TopologicalSpace.metrizableSpaceMetric",
+     "IsDiscrete",
+     "DiscreteUniformity.instDiscreteTopology",
+     "UniformSpace.toTopologicalSpace_top"
+    ],
+    "digest": "7a20ea10becc3a77"
+   },
+   "date": "2026-10-23",
+   "verdict": "ingredient match: discrete spaces are metrizable (TopologicalSpace.DiscreteTopology.metrizableSpace); the proof writes the discrete metric directly, so no auxiliary node is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MetrizableSpace\", \"DiscreteTopology\"",
+   "results": {
+    "t": "2026-10-23T09:52:31Z",
+    "tool": "loogle",
+    "query": "\"MetrizableSpace\", \"DiscreteTopology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "TopologicalSpace.DiscreteTopology.metrizableSpace",
+     "TopologicalSpace.IndiscreteTopology.pseudoMetrizableSpace"
+    ],
+    "digest": "1888038f87b14bd3"
+   },
+   "date": "2026-10-23",
+   "verdict": "ingredient match: discrete spaces are metrizable (TopologicalSpace.DiscreteTopology.metrizableSpace); the proof writes the discrete metric directly, so no auxiliary node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "range|ofHom|ofClosedSubgroup",
+   "results": {
+    "t": "2026-10-23T09:55:28Z",
+    "tool": "grep",
+    "query": "range|ofHom|ofClosedSubgroup",
+    "sub": "Topology/Algebra/Category/ProfiniteGrp",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean"
+    ],
+    "digest": "0cbbba498c471bb3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: individual profinite product and limit constructors do not state the diagonal image, metrizability and specified kernel basis together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal range of a sequence of continuous maps from a compact space to finite discrete spaces is a compact Hausdorff metrizable totally disconnected space",
+   "results": {
+    "t": "2026-10-23T09:55:29Z",
+    "tool": "leansearch",
+    "query": "The diagonal range of a sequence of continuous maps from a compact space to finite discrete spaces is a compact Hausdorff metrizable totally disconnected space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isCompact_diagonal",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "TotallyDisconnectedSpace.mk",
+     "ContinuousMap.instMetrizableSpace",
+     "TotallyDisconnectedSpace.continuousMapEquivOfConnectedSpace",
+     "PiNat.metricSpace",
+     "Profinite"
+    ],
+    "digest": "a84b0c4300bc1603"
+   },
+   "date": "2026-10-23",
+   "verdict": "ingredient match: discrete spaces are metrizable (TopologicalSpace.DiscreteTopology.metrizableSpace); the proof writes the discrete metric directly, so no auxiliary node is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProfiniteGrp\", \"range\"",
+   "results": {
+    "t": "2026-10-23T09:55:29Z",
+    "tool": "loogle",
+    "query": "\"ProfiniteGrp\", \"range\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.ProfiniteCompletion.denseRange"
+    ],
+    "digest": "00ae4ae6b4cd44fe"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: individual profinite product and limit constructors do not state the diagonal image, metrizability and specified kernel basis together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous homomorphisms from a compact group to a sequence of finite discrete groups have a compact metrizable diagonal image whose identity neighborhoods are finite intersections of coordinate kernels",
+   "results": {
+    "t": "2026-10-23T09:55:40Z",
+    "tool": "leanfinder",
+    "query": "Continuous homomorphisms from a compact group to a sequence of finite discrete groups have a compact metrizable diagonal image whose identity neighborhoods are finite intersections of coordinate kernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteAddGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemAddSubgroupLimitConePtAux",
+     "ContinuousMonoidHom.locallyCompactSpace_of_hasBasis",
+     "ContinuousMonoidHom.instCompactSpace",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousAddMonoidHom.instCompactSpace",
+     "ContinuousMonoidHom.locallyCompactSpace_of_equicontinuousAt",
+     "ProfiniteGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemSubgroupLimitConePtAux",
+     "PontryaginDual.instCompactSpaceOfDiscreteTopology"
+    ],
+    "digest": "258a7821649bf86b"
+   },
+   "date": "2026-10-23",
+   "verdict": "ingredient match: discrete spaces are metrizable (TopologicalSpace.DiscreteTopology.metrizableSpace); the proof writes the discrete metric directly, so no auxiliary node is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-metric-function-quotients",
+  "date": "2026-10-22",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), ordinary direct image, scalar tame-kernel auxiliary expansion: the diagonal images in the countable finite quotients used by lem-sfb-profinite-metric-function-quotients; compactness, metrizability, continuous group structure and finite-coordinate normal kernels. The current blueprint paragraph motivates this auxiliary but does not state it.",
+   "via": [
+    "lem-sfb-profinite-metric-function-quotients",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-countable-finite-coordinate-images",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies; wrote a seven-step proof using the existing continuous-image compactness and compact countably-separating metrizability leaves. All cylinder, subgroup, operation-continuity and normal-kernel calculations are explicit elementary steps. No new nodes. Checked empty space/factor and nonsurjective coordinate cases, the latest blueprint paragraph, Stacks topology definitions and pinned Mathlib source.",
+  "blueprint": "Realizes the scalar tame-kernel auxiliary expansion below Paragraph (3) of det-thm-sf-ctf-stability-direct-images, through the existing metrizable-quotient parent. The computed blueprint ancestor is null because the existing created.item chain ends at a module name; retained that ancestry rather than changing maintainer history. Whole-blueprint searches for metrizable and profinite found no equivalent statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-e230ea19d",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-e230ea19d (reviewer sub-agent of L); spot-checked: I read all 7 steps and every cited statement; the split is correct, with no new nodes and no fixes. Statement and stmt_deps are byte-identical to live, where the item is still unsplit with no repair note, so no supersession or re-split order applies. proof_deps equals the union of the step uses. Both non-definition citations are Mathlib leaves, so no tool_uses are needed: lem-weil-pbc-continuous-image-quasi-compact (isCompact_range, Compact.lean:974, Stacks 04Z9(1) at topology.tex:1747) and lem-sfb-compact-countable-separating-metrizable (I read PiNat.lean:1063-1097; it needs only CompactSpace, metric targets, continuity and Pairwise separation, all supplied by steps 2-4). Step 1: preimages of basic opens are finite intersections, so P and p are continuous. Step 3: cylinders are clopen and form a basis; separation and total disconnectedness are correct. Step 4: the discrete metric is written out with its triangle inequality. Step 5: continuity of multiplication via the union of rectangles over uv=a and of inversion via {b_n=a^-1}, checked on the singleton-cylinder subbasis. Step 6: K_F=C_F(1) is open and normal and forms a basis at 1, which matches the parent's definition of profinite group (lem-sfb-profinite-metric-function-quotients step 3). Step 7: fibre equality and the empty cases. Tested S empty, point factors, constant coordinates, trivial G, and Z_l into the product of Z/l^n. No duplicate in the DAG: the open-normal-subgroup-basis, closed-retraction and quotient-functions-dense nodes state different results. No SGA. proof_origin by=agent with WANTED is correct, because blueprint Paragraph (3) gives no topological proof."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.CountableFiniteCoordinateImages",
+  "declaration": "Topology.countable_finite_coordinate_images",
+  "file": "lean/Sheaf/Topology/CountableFiniteCoordinateImages.lean",
+  "statement": "theorem countable_finite_coordinate_images (S : Type uS) [TopologicalSpace S] [CompactSpace S] [T2Space S] (G : Type uG) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] (A : ℕ → Type uA) [∀ n, Finite (A n)] [∀ n, TopologicalSpace (A n)] [∀ n, DiscreteTopology (A n)] (B : ℕ → Type uB) [∀ n, Group (B n)] [∀ n, Finite (B n)] [∀ n, TopologicalSpace (B n)] [∀ n, DiscreteTopology (B n)] (p : ∀ n, S → A n) (hp : ∀ n, Continuous (p n)) (q : ∀ n, G →* B n) (hq : ∀ n, Continuous (q n)) : Continuous (Set.rangeFactorization (fun s n ↦ p n s)) ∧ Function.Surjective (Set.rangeFactorization (fun s n ↦ p n s)) ∧ CompactSpace (Set.range (fun s n ↦ p n s)) ∧ T2Space (Set.range (fun s n ↦ p n s)) ∧ TopologicalSpace.IsTopologicalBasis {U : Set (Set.range (fun s n ↦ p n s)) | IsClopen U} ∧ TopologicalSpace.MetrizableSpace (Set.range (fun s n ↦ p n s)) ∧ TotallyDisconnectedSpace (Set.range (fun s n ↦ p n s)) ∧ Continuous (MonoidHom.pi q).rangeRestrict ∧ Function.Surjective (MonoidHom.pi q).rangeRestrict ∧ IsTopologicalGroup (MonoidHom.pi q).range ∧ CompactSpace (MonoidHom.pi q).range ∧ T2Space (MonoidHom.pi q).range ∧ TopologicalSpace.MetrizableSpace (MonoidHom.pi q).range ∧ TotallyDisconnectedSpace (MonoidHom.pi q).range ∧ (∀ F : Finset ℕ, IsOpen ((Subgroup.pi (F : Set ℕ) (fun n ↦ (⊥ : Subgroup (B n)))).comap (MonoidHom.pi q).range.subtype : Set (MonoidHom.pi q).range) ∧ ((Subgroup.pi (F : Set ℕ) (fun n ↦ (⊥ : Subgroup (B n)))).comap (MonoidHom.pi q).range.subtype).Normal) ∧ (𝓝 (1 : (MonoidHom.pi q).range)).HasBasis (fun _ : Finset ℕ ↦ True) (fun F ↦ ((Subgroup.pi (F : Set ℕ) (fun n ↦ (⊥ : Subgroup (B n)))).comap (MonoidHom.pi q).range.subtype : Set (MonoidHom.pi q).range)) ∧ (∀ s s' : S, Set.rangeFactorization (fun s n ↦ p n s) s = Set.rangeFactorization (fun s n ↦ p n s) s' ↔ ∀ n, p n s = p n s') ∧ (∀ g g' : G, (MonoidHom.pi q).rangeRestrict g = (MonoidHom.pi q).rangeRestrict g' ↔ ∀ n, q n g = q n g')",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb29f6b8b",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Every node clause has a matching Lean clause: compact T2 S and topological group G; finite discrete A_n and B_n; continuous p_n and continuous homs q_n with no surjectivity assumed; image S_0 = Set.range with the subtype-of-product topology; G_0 = (MonoidHom.pi q).range; corestrictions rangeFactorization/rangeRestrict continuous and surjective; compact, T2, clopen basis, metrizable and totally disconnected for S_0; IsTopologicalGroup, compact, T2, metrizable and totally disconnected for G_0; K_F = comap of Subgroup.pi F ⊥ (Finset ℕ), open and normal and a 𝓝 1 basis; fibre equality iff coordinatewise equality. No stronger hypotheses, 4 independent universes, empty cases covered. Statement verbatim in the file; snapshot node differs from live only by the lean record; dep nodes identical to live; docstrings carry the source place, blueprint tag and 7 steps; body is sorry only; no new defs; no duplicate in Sheaf or Mathlib. Not recompiled (worker reports a clean compile; no file changed)."
+ }
+}

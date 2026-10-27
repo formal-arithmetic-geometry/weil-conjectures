@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-dualizing-primitive-open-restriction",
+ "kind": "statement",
+ "title": "Primitive sigma, E and beta under compatible open restriction",
+ "statement": "Fix the finite coefficient datum and specified sigma, E, beta and exceptional compositor of [def-pur-conventions], [lem-pur-finite-etale-dualizing-normalization] and [def-pur-finite-exceptional-composition]. For separated finite-type arrows between finite-type k-schemes, restrict each scheme by a compatible open immersion. The restriction comparison is the composite E_(source open),f inverse, the congruence for the commuting square, the exceptional compositor with the target open, and exceptional pullback of eta_(target open). For a smooth composable pair the actual sigma commutes with these comparisons and the canonical tensor/pullback square. For an etale first arrow followed by a smooth arrow the actual E commutes with these comparisons. For a Cartesian base-change square of smooth arrows and a compatible open cube with a Cartesian restricted square, the actual beta commutes with these comparisons and the canonical pullback square. The four open faces need only commute. This asserts only the three primitive squares; it includes neither the smooth-triple cocycle nor closure under finite-expression operations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+ },
+ "stmt_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-finite-exceptional-composition",
+  "def-pur-co-smoothness",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-etale-morphism",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "First restrict only the target. This is a Cartesian open base change;\napply the sigma tower identity of smoothExceptionalTowerPasting. Its base\npasting and identity clauses handle iterated target restriction. Restriction\nonly at the source is precomposition with the open immersion. Apply the\nnormalized source-etale identity for sigma. For beta, apply that same tower\nidentity with an etale first arrow, postcompose with E on the restricted\narrow, and use E sigma = eta tensor identity and eta base change from finite\netale normalization. Cancel the pulled-back sigma isomorphism. This keeps the\noriginal lower arrow v in the square for the composite. For successive source\nopens a and e substitute E = rho c; compositor associativity rewrites the two\nc factors, naturality moves c past rho_a, and the composition law for rho\nidentifies the remaining factors with rho_ea. Thus successive E comparisons\ncompose with the canonical pullback compositor. A general compatible open\nrestriction factors through the target fibre product followed by the induced\nsource-open inclusion. Apply the target and source identities just proved to\nthese factors, and use rho composition and the canonical tensor/pullback\ncoherence to identify the composite comparison with the explicitly displayed\nrho-c-eta expression. This proves the sigma and E clauses. Apply Cartesian\nexchange pasting followed by the source-beta identity to the corresponding\nfactorization of the open cube to obtain the beta clause; the commuting cube\nfaces identify both factorizations. No arbitrary open square is declared\nCartesian. Identity opens, empty opens, and successive opens satisfy the same\nidentities and require no extra smoothness or separatedness hypotheses.",
+   "uses": [
+    "lem-pur-dualizing-cocycle-source-etale",
+    "lem-pur-smooth-exceptional-tensor-pasting",
+    "lem-pur-finite-etale-dualizing-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-dualizing-cocycle-source-etale",
+  "lem-pur-smooth-exceptional-tensor-pasting",
+  "lem-pur-finite-etale-dualizing-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical dualizing sigma beta E commute with arbitrary compatible open restrictions",
+   "results": "AlgebraicGeometry.morphismRestrict_appLE; Scheme.restrictRestrictComm; ModuleCat.Tilde.toOpen_res; Γ_map_morphismRestrict; Scheme.Modules.restrictAdjunction. These concern ordinary scheme and module restrictions, not the specified dualizing comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match: none supplies the canonical dualizing maps or their coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the canonical dualizing tensor composition is associative and compatible with normalized etale source restriction",
+   "results": "Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Scheme.Hom.toNormalization_normalizationDesc_assoc and other normalization identities. No exceptional dualizing comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_comp",
+   "results": "CategoryTheory.conjugateEquiv_comp in Mathlib.CategoryTheory.Adjunction.Mates gives abstract conjugation functoriality. Read also CompositionIso.lean:60-87; the abstract laws do not give the geometric tensor or open-restriction identities by specialization.",
+   "date": "2026-10-25",
+   "verdict": "no match: a tool for the proof, not the whole statement"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing.*cocycle|sigma.*cocycle|OpenSigma|sourceEtale in Mathlib/CategoryTheory, Mathlib/AlgebraicGeometry, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search dualizing tensor cocycle and normalized open restriction",
+   "results": "No Mathlib match. The Sheaf parent states the full assertion, and FiniteEtaleDualizingNormalization and SmoothExceptionalTensorPasting supply its primitive normalizations and Cartesian identities. No independent statement of either remaining step. Zero blueprint-node matches for both phrases.",
+   "date": "2026-10-25",
+   "verdict": "no match: these are strictly partial steps of the existing parent argument"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DualizingSigmaCocycleLocality",
+  "date": "2026-10-25",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1: coherence of the composition isomorphisms and compatible etale localization",
+   "via": [
+    "lem-pur-dualizing-sigma-cocycle-locality",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DualizingPrimitiveOpenRestriction",
+  "file": "lean/Sheaf/Paper/DualizingPrimitiveOpenRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DualizingLocality.dualizing_primitive_open_restriction",
+  "statement": "theorem dualizing_primitive_open_restriction (P : WeilConjectures.PurityFiniteSetting.{u}) : (∀ {X Y Z X₀ Y₀ Z₀ : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] [X₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X₀ ↘ Spec (.of P.field.k))] [QuasiCompact (X₀ ↘ Spec (.of P.field.k))] [Y₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y₀ ↘ Spec (.of P.field.k))] [QuasiCompact (Y₀ ↘ Spec (.of P.field.k))] [Z₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z₀ ↘ Spec (.of P.field.k))] [QuasiCompact (Z₀ ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (df : ℕ) [SmoothOfRelativeDimension df f] (g : Y ⟶ Z) [g.IsOver (Spec (.of P.field.k))] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (dg : ℕ) [SmoothOfRelativeDimension dg g] (f₀ : X₀ ⟶ Y₀) [f₀.IsOver (Spec (.of P.field.k))] [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀] (df₀ : ℕ) [SmoothOfRelativeDimension df₀ f₀] (g₀ : Y₀ ⟶ Z₀) [g₀.IsOver (Spec (.of P.field.k))] [IsSeparated g₀] [LocallyOfFiniteType g₀] [QuasiCompact g₀] (dg₀ : ℕ) [SmoothOfRelativeDimension dg₀ g₀] (a : X₀ ⟶ X) [a.IsOver (Spec (.of P.field.k))] [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [IsOpenImmersion a] (b : Y₀ ⟶ Y) [b.IsOver (Spec (.of P.field.k))] [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] [IsOpenImmersion b] (c : Z₀ ⟶ Z) [c.IsOver (Spec (.of P.field.k))] [IsSeparated c] [LocallyOfFiniteType c] [QuasiCompact c] [IsOpenImmersion c] (sqf : CommSq a f₀ f b) (sqg : CommSq b g₀ g c), (pull P a).map ((FiniteEtaleNormalization.sigma (ModuleCat.{u + 1} P.Coefficient) f g (cf := compactification P f) (cg := compactification P g) (cfg := compactification P (f ≫ g)) (comp P f g))) ≫ (((sourceEtale P a (f ≫ g)).symm ≪≫ (FiniteEtaleNormalization.congr P (a ≫ (f ≫ g)) ((f₀ ≫ g₀) ≫ c) ((sqf.vert_comp sqg)).w).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (comp P (f₀ ≫ g₀) c).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (exceptional P (f₀ ≫ g₀)).mapIso (eta P c))).hom = (Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} P.Coefficient) a (omega P f) ((pull P f).obj (omega P g))).hom ≫ Etale.derivedTensorHom (ModuleCat.{u + 1} P.Coefficient) (((sourceEtale P a f).symm ≪≫ (FiniteEtaleNormalization.congr P (a ≫ f) (f₀ ≫ b) (sqf).w).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (comp P f₀ b).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (exceptional P f₀).mapIso (eta P b))).hom ((((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) a f (f₀ ≫ b) (sqf).w.symm).symm ≪≫ Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) f₀ b)).hom.app (omega P g) ≫ (pull P f₀).map (((sourceEtale P b g).symm ≪≫ (FiniteEtaleNormalization.congr P (b ≫ g) (g₀ ≫ c) (sqg).w).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (comp P g₀ c).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (exceptional P g₀).mapIso (eta P c))).hom) ≫ (FiniteEtaleNormalization.sigma (ModuleCat.{u + 1} P.Coefficient) f₀ g₀ (cf := compactification P f₀) (cg := compactification P g₀) (cfg := compactification P (f₀ ≫ g₀)) (comp P f₀ g₀))) ∧ (∀ {X Y Z X₀ Y₀ Z₀ : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] [X₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X₀ ↘ Spec (.of P.field.k))] [QuasiCompact (X₀ ↘ Spec (.of P.field.k))] [Y₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y₀ ↘ Spec (.of P.field.k))] [QuasiCompact (Y₀ ↘ Spec (.of P.field.k))] [Z₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z₀ ↘ Spec (.of P.field.k))] [QuasiCompact (Z₀ ↘ Spec (.of P.field.k))] (e : X ⟶ Y) [e.IsOver (Spec (.of P.field.k))] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] [Etale e] (h : Y ⟶ Z) [h.IsOver (Spec (.of P.field.k))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (dh : ℕ) [SmoothOfRelativeDimension dh h] (e₀ : X₀ ⟶ Y₀) [e₀.IsOver (Spec (.of P.field.k))] [IsSeparated e₀] [LocallyOfFiniteType e₀] [QuasiCompact e₀] [Etale e₀] (h₀ : Y₀ ⟶ Z₀) [h₀.IsOver (Spec (.of P.field.k))] [IsSeparated h₀] [LocallyOfFiniteType h₀] [QuasiCompact h₀] (dh₀ : ℕ) [SmoothOfRelativeDimension dh₀ h₀] (a : X₀ ⟶ X) [a.IsOver (Spec (.of P.field.k))] [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [IsOpenImmersion a] (b : Y₀ ⟶ Y) [b.IsOver (Spec (.of P.field.k))] [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] [IsOpenImmersion b] (c : Z₀ ⟶ Z) [c.IsOver (Spec (.of P.field.k))] [IsSeparated c] [LocallyOfFiniteType c] [QuasiCompact c] [IsOpenImmersion c] (sqe : CommSq a e₀ e b) (sqh : CommSq b h₀ h c), (pull P a).map (sourceEtale P e h).hom ≫ (((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) a e (e₀ ≫ b) (sqe).w.symm).symm ≪≫ Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) e₀ b)).hom.app (omega P h) ≫ (pull P e₀).map (((sourceEtale P b h).symm ≪≫ (FiniteEtaleNormalization.congr P (b ≫ h) (h₀ ≫ c) (sqh).w).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (comp P h₀ c).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (exceptional P h₀).mapIso (eta P c))).hom = (((sourceEtale P a (e ≫ h)).symm ≪≫ (FiniteEtaleNormalization.congr P (a ≫ (e ≫ h)) ((e₀ ≫ h₀) ≫ c) ((sqe.vert_comp sqh)).w).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (comp P (e₀ ≫ h₀) c).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (exceptional P (e₀ ≫ h₀)).mapIso (eta P c))).hom ≫ (sourceEtale P e₀ h₀).hom) ∧ (∀ {X Y X₁ Y₁ X₀ Y₀ X₁₀ Y₁₀ : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [X₁.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X₁ ↘ Spec (.of P.field.k))] [QuasiCompact (X₁ ↘ Spec (.of P.field.k))] [Y₁.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y₁ ↘ Spec (.of P.field.k))] [QuasiCompact (Y₁ ↘ Spec (.of P.field.k))] [X₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X₀ ↘ Spec (.of P.field.k))] [QuasiCompact (X₀ ↘ Spec (.of P.field.k))] [Y₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y₀ ↘ Spec (.of P.field.k))] [QuasiCompact (Y₀ ↘ Spec (.of P.field.k))] [X₁₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X₁₀ ↘ Spec (.of P.field.k))] [QuasiCompact (X₁₀ ↘ Spec (.of P.field.k))] [Y₁₀.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y₁₀ ↘ Spec (.of P.field.k))] [QuasiCompact (Y₁₀ ↘ Spec (.of P.field.k))] (h : X ⟶ Y) [h.IsOver (Spec (.of P.field.k))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (dh : ℕ) [SmoothOfRelativeDimension dh h] (h₁ : X₁ ⟶ Y₁) [h₁.IsOver (Spec (.of P.field.k))] [IsSeparated h₁] [LocallyOfFiniteType h₁] [QuasiCompact h₁] (dh₁ : ℕ) [SmoothOfRelativeDimension dh₁ h₁] (v : Y₁ ⟶ Y) [v.IsOver (Spec (.of P.field.k))] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v] (u : X₁ ⟶ X) [u.IsOver (Spec (.of P.field.k))] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] (h₀ : X₀ ⟶ Y₀) [h₀.IsOver (Spec (.of P.field.k))] [IsSeparated h₀] [LocallyOfFiniteType h₀] [QuasiCompact h₀] (dh₀ : ℕ) [SmoothOfRelativeDimension dh₀ h₀] (h₁₀ : X₁₀ ⟶ Y₁₀) [h₁₀.IsOver (Spec (.of P.field.k))] [IsSeparated h₁₀] [LocallyOfFiniteType h₁₀] [QuasiCompact h₁₀] (dh₁₀ : ℕ) [SmoothOfRelativeDimension dh₁₀ h₁₀] (v₀ : Y₁₀ ⟶ Y₀) [v₀.IsOver (Spec (.of P.field.k))] [IsSeparated v₀] [LocallyOfFiniteType v₀] [QuasiCompact v₀] (u₀ : X₁₀ ⟶ X₀) [u₀.IsOver (Spec (.of P.field.k))] [IsSeparated u₀] [LocallyOfFiniteType u₀] [QuasiCompact u₀] (a : X₀ ⟶ X) [a.IsOver (Spec (.of P.field.k))] [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [IsOpenImmersion a] (b : Y₀ ⟶ Y) [b.IsOver (Spec (.of P.field.k))] [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] [IsOpenImmersion b] (a₁ : X₁₀ ⟶ X₁) [a₁.IsOver (Spec (.of P.field.k))] [IsSeparated a₁] [LocallyOfFiniteType a₁] [QuasiCompact a₁] [IsOpenImmersion a₁] (b₁ : Y₁₀ ⟶ Y₁) [b₁.IsOver (Spec (.of P.field.k))] [IsSeparated b₁] [LocallyOfFiniteType b₁] [QuasiCompact b₁] [IsOpenImmersion b₁] (sq : IsPullback u h₁ h v) (sq₀ : IsPullback u₀ h₁₀ h₀ v₀) (sqh : CommSq a h₀ h b) (sqh₁ : CommSq a₁ h₁₀ h₁ b₁) (squ : CommSq a₁ u₀ u a) (_sqv : CommSq b₁ v₀ v b), (pull P a₁).map (beta P h h₁ v u sq) ≫ (((sourceEtale P a₁ h₁).symm ≪≫ (FiniteEtaleNormalization.congr P (a₁ ≫ h₁) (h₁₀ ≫ b₁) (sqh₁).w).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (comp P h₁₀ b₁).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (exceptional P h₁₀).mapIso (eta P b₁))).hom = (((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) a₁ u (u₀ ≫ a) (squ).w.symm).symm ≪≫ Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) u₀ a)).hom.app (omega P h) ≫ (pull P u₀).map (((sourceEtale P a h).symm ≪≫ (FiniteEtaleNormalization.congr P (a ≫ h) (h₀ ≫ b) (sqh).w).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (comp P h₀ b).app (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) _) ≪≫ (exceptional P h₀).mapIso (eta P b))).hom ≫ beta P h₀ h₁₀ v₀ u₀ sq₀)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T122714-L-1798478",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T122714-L-1798478",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

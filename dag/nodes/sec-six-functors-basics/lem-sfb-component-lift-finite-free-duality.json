@@ -1,0 +1,162 @@
+{
+ "id": "lem-sfb-component-lift-finite-free-duality",
+ "kind": "statement",
+ "title": "Finite-free duality for component-lift coefficients",
+ "statement": "For every commutative condensed ring Lambda, every scheme T, and every internal Lambda_T-module L which is pro-etale locally finite free [def-sfb-lisse-coefficient-module], ComponentLiftLisseFacts Lambda T L [def-sfb-component-lift-section-data] holds: there is a locally finite free P with an ordinary ExactPairing L P, both degree-zero complexes are K-flat for the actual module tensor, and their singleFunctor images admit an ExactPairing in the ordinary derived category. No affineness or contractibility hypothesis is needed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Old proof steps 4-6; HRS Definition 3.3, Lemma 4.1, Proposition 4.3(3) and equation (4.2); Stacks Tag 08JJ, sites-cohomology.tex label lemma-dual-perfect-complex, global Hom formula at the coefficient unit. Agent-formulated map normalization for component lifts."
+ },
+ "stmt_deps": [
+  "def-sfb-component-lift-section-data",
+  "def-sfb-lisse-coefficient-module"
+ ],
+ "proof": [
+  {
+   "text": "For the given scheme T and lisse module L, construct P as the internal module Hom from L to the regular coefficient module. On a finite-free trivializing slice P is the finite coordinate dual of L and is therefore lisse. The finite-free tensor-exactness theorem applies to L and P, with the commutative internal coefficient ring Lambda_T. Their tensor functors preserve finite limits and cokernels (the latter by the tensor universal property), so both modules are flat. For every acyclic complex A, exactness gives H^n(A tensor L)=H^n(A) tensor L=0, and likewise for P. The single degree-zero complexes of L and P are therefore K-flat. Their terms, finite tensor products and the coefficient unit are flat; K-flat tensor descent computes their derived tensors by the corresponding ordinary single complexes.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free local calculation; degree-zero K-flatness via exact tensor."
+   }
+  },
+  {
+   "text": "On every finite-free slice, evaluation sends phi tensor x to phi(x), and coevaluation sends 1 to sum_i e_i tensor e_i^*. Under a change of coordinates with mutually inverse matrices A,B, the coefficient of e_i tensor e_k^* in this sum becomes sum_j A_ij B_jk=delta_ik; this also handles rectangular inverse matrices. Hence the local coevaluations agree on overlaps and glue, since the Hom presheaf is a sheaf. The two triangle composites are x↦sum_i e_i e_i^*(x)=x and phi↦sum_i phi(e_i)e_i^*=phi. These equalities are local, so they hold globally, giving ExactPairing L P. The K-flat tensor comparison from the first step transports these maps and identities to the ordinary derived category, giving the required ExactPairing of the singleFunctor images. For rank zero the sums are empty; varying ranks are handled on the respective slices.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free calculation; explicit degree-zero evaluation and coevaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Original component-lift section-comparison proof, factored without changing its route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Connected component relative profinite inverse image is monoidal and gives an equivalence on dualizable derived modules for weakly contractible affine schemes",
+   "results": "Equivalence.inverseMonoidal; Profinite.toCompHausEquivalence; no component-lift coefficient or derived normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free internal modules on a ringed site have locally free duals and their degree zero complexes are K-flat and dualizable",
+   "results": "SheafOfModules.IsFiniteType, IsFinitePresentation and free; no combined internal-module K-flat duality theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "unitHomEquiv, unitHomEquiv_apply_coe, pushforwardSections_unitHomEquiv; these concern sectionwise sheaves, and do not supply the normalized derived internal-module pullback.",
+   "date": "2026-10-26",
+   "verdict": "nearby elementary API, not the stated comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "component.*[Cc]omparison|[Ll]isse.*[Kk][Ff]lat|[Kk][Ff]lat.*[Ll]isse|componentLift|ComponentLift",
+   "results": "Only an unrelated text-linter component-path comparison in Mathlib; no component-lift statement. Local library search finds LisseModuleInverseImage for the separate lisse pullback clause.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match; existing project constructions retained"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ComponentLiftLisseSectionComparison",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, open direct image; Proof (3), open direct image; component-lift section-comparison subargument, Finite-free duality for component-lift coefficients.",
+   "via": [
+    "lem-sfb-component-lift-lisse-section-comparison",
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComponentLiftFiniteFreeDuality",
+  "file": "lean/Sheaf/Paper/ComponentLiftFiniteFreeDuality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_lift_finite_free_duality",
+  "statement": "theorem component_lift_finite_free_duality\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (T : Scheme.{u})\n    (L : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ.X T))\n    (hL : IsLisseCoefficientModule Λ.X L) : ComponentLiftLisseFacts Λ T L",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "worker": "M4",
+  "summary": "A strictly separate part of the existing seven-step proof; no target, coefficient or section-map definition changed.",
+  "blueprint": "Keeps the original component-equivalence route below direct-image stability.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "why": "Generic tool used for the same component-site, duality or derived normalization subargument as in the reviewed parent plan."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic tool used for the same component-site, duality or derived normalization subargument as in the reviewed parent plan."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a4861",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261026T082500-L-2181902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a4861",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261026T082500-L-2181902",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (identical), moved defs vs clone item module (verbatim), 3 new sorried theorems vs their nodes and the original clauses, item node proof/proof_deps vs Lean proof"
+ }
+}

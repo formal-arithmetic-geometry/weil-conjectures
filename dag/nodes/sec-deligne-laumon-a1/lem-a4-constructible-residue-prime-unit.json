@@ -1,0 +1,118 @@
+{
+ "id": "lem-a4-constructible-residue-prime-unit",
+ "kind": "statement",
+ "title": "The coefficient prime is a unit in geometric finite-field residue fields",
+ "statement": "Fix the finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber] and a prime $\\ell\\ne p$. If $Y$ is any scheme over $\\operatorname{Spec} k$ [def-weil-pbc-scheme-conventions], then $\\ell$ is a unit in $\\kappa(y)$ for every $y\\in Y$. No finite-type or nonemptiness assumption on $Y$ is needed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Finite-field coefficient convention; elementary characteristic calculation underlying Remark 6.8.15."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The identity #k0=p^a gives characteristic p by charP_of_card_eq_prime_pow. A prime l distinct from p is nonzero by CharP.cast_ne_zero_of_ne_of_prime, hence a unit in k0. Map this unit along k0→k, the global-section ring map of the structure morphism Y→Spec k, and residue-field evaluation. Ring maps preserve units and natural-number casts.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Elementary argument in the finite-field setting, using the named Mathlib characteristic and ring-map lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A prime different from the characteristic of a finite field is invertible in residue fields of schemes over its algebraic closure",
+   "results": "Eight hits, including Scheme.instFieldCarrierResidueField and several unramified or algebraic residue-field instances; none states this coefficient-prime unit assertion.",
+   "date": "2026-10-25",
+   "verdict": "Use Mathlib characteristic calculation and map units; no separate residue-field theorem needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CharP.cast_ne_zero_of_ne_of_prime",
+   "results": "One exact hit: CharP.cast_ne_zero_of_ne_of_prime in Mathlib.Algebra.CharP.Basic.",
+   "date": "2026-10-25",
+   "verdict": "Used directly."
+  },
+  {
+   "tool": "grep",
+   "query": "charP_of_card_eq_prime_pow|Γevaluation|IsUnit.map",
+   "results": "25 hits, including Scheme.Γevaluation in Mathlib.AlgebraicGeometry.ResidueField and IsUnit.map applications.",
+   "date": "2026-10-25",
+   "verdict": "Use Γevaluation and IsUnit.map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prime different from a finite field characteristic is a unit in each residue field of a scheme over that field",
+   "results": "Eight hits: isUnit_iff_not_dvd_char, isUnit_iff_not_dvd_char_of_ringChar_ne_zero, IsLocalRing.residue_ne_zero_iff_isUnit, CharP.isUnit_natCast_iff, CharP.isUnit_ofNat_iff, StructureSheaf.isUnit_toStalk, ZMod.isUnit_prime_iff_not_dvd, Scheme.residueField.",
+   "date": "2026-10-25",
+   "verdict": "The finite-field/nonzero characteristic results give the elementary first step. The proof then maps the unit through the actual global-section and residue ring maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructiblePullbackTExact",
+  "date": "2026-10-25",
+  "group": "A4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-endpoints",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-a1-constructible-pullback-residue-units",
+   "place": "Construction of the unique coefficient-prime inverse in each residue field",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructiblePullbackTExact",
+  "file": "lean/Sheaf/Paper/ConstructiblePullbackTExact.lean",
+  "declaration": "WeilConjectures.constructiblePullbackResidue_isUnit",
+  "statement": "theorem constructiblePullbackResidue_isUnit\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))] (y : Y) :\n    IsUnit (l : Y.residueField y)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-25bc0",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261025T033830-L-104915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-25bc0",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261025T033830-L-104915",
+  "kind": "interface",
+  "note": "independent cc review: constructiblePullbackResidueUnits abbrev→def via proved char-p lemma constructiblePullbackResidue_isUnit against def-a1-constructible-pullback-residue-units (statement_change + change record) and new node lem-a4-constructible-residue-prime-unit; axioms clean; all 14 direct importers + SfCommonStageDirectImage/WeilCohomology compile"
+ }
+}

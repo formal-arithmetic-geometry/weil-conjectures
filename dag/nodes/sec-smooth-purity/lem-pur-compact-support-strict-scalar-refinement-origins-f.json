@@ -1,0 +1,119 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 09AK--09AL; auxiliary Step 1 of lem-pur-compact-support-strict-scalar-refinement"
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-coefficient-models",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the proved integral_ramification helper of CompletedIntegralFiniteFree: the integer inclusion preserves absolute values, so the nonzero image of the source uniformizer is in the target maximal ideal. Factor it in the target DVR as a unit times the e-th power of the target uniformizer. The exponent is positive, since exponent zero would give a unit. Mapping the source principal ideal, discarding the unit factor, and rewriting the principal ideal of a power gives PurCompactSupport.Ramification for this e. This is a calculation with the existing integer inclusion; no ramification hypothesis is added.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply compactSupportCoefficientModels_scalar with that positive ramification exponent to M and its given finiteTorConstructibleIntegral proof. Its first conclusion says precisely that pbcDerivedExtend along completedCoefficientMap sends M to finiteTorConstructibleIntegral over F.",
+   "uses": [
+    "lem-pur-compact-support-coefficient-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply scalar_refinement_origins_E with its coefficient field instantiated by F, its calculus by S′, and its input by the completed scalar extension of M, using the preceding integral finite-Tor constructibility proof. Its conclusion is definitionally the requested family of ScalarEtaleOrigin witnesses. Thus the single-field finite-origin argument is shared rather than repeated; no uniform lower bound or compatible choices of witnesses are asserted.",
+   "uses": [
+    "lem-pur-compact-support-strict-scalar-refinement-origins-e"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-pur-compact-support-coefficient-models",
+  "lem-pur-compact-support-strict-scalar-refinement-origins-e"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 09AK--09AL; strict scalar refinement auxiliary Step 1, realized by scalar preservation followed by the existing single-field origin theorem. Positive ramification uses the DVR calculation already proved in CompletedIntegralFiniteFree."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "id": "lem-pur-compact-support-strict-scalar-refinement-origins-f",
+ "title": "F-side origins for scalar refinement reductions",
+ "statement": "For the finite-field and coefficient hypotheses of the strict scalar refinement, a coefficient calculus S' and an object M in finiteTorConstructibleIntegral have, independently at every n, a ScalarEtaleOrigin over the F reduction (ev F X n) ((reduction F X S').obj ((pbcDerivedExtend (completedCoefficientMap i X)).obj M)).",
+ "lean": {
+  "module": "Sheaf.Paper.ScalarRefinementOriginsF",
+  "declaration": "WeilConjectures.PurStrictScalar.scalar_refinement_origins_F",
+  "statement": "theorem scalar_refinement_origins_F (S' : CoefficientDerivedSystemCalculus.{u, u} l F X) (M : DerivedCategory (scalarReductionSource l E X)) (_hM : finiteTorConstructibleIntegral l E X M) : ∀ n : ℕ, Nonempty (ScalarEtaleOrigin (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) X ((ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) X n).obj ((reduction l F X S').obj ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M))))",
+  "file": "lean/Sheaf/Paper/ScalarRefinementOriginsF.lean",
+  "branch": "newtargets-dag",
+  "by": "X9",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarRefinement",
+  "date": "2026-10-26",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pur-compact-support-strict-scalar-refinement",
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient constructible pro-etale origin witness",
+   "results": "No direct specialized theorem beyond the recorded constructible origin theorem.",
+   "date": "2026-10-26",
+   "verdict": "use the stated constructible-origin dependency."
+  },
+  {
+   "tool": "loogle",
+   "query": "ScalarEtaleOrigin",
+   "results": "No shorter existing theorem found.",
+   "date": "2026-10-26",
+   "verdict": "no direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRing_constructibleDerived_origin",
+   "results": "Existing finite coefficient origin theorem is the intended source.",
+   "date": "2026-10-26",
+   "verdict": "use the stated dependency."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261026T003238-L-156115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T065217-L-2749521",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

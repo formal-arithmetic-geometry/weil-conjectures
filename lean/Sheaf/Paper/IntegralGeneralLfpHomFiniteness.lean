@@ -5,35 +5,17 @@ Authors: SHEAF group NW
 -/
 module
 
-public import Sheaf.Topology.ProfiniteCondensedRing
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-public import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
-import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
-import Sheaf.Paper.IntegralLfpConstantModelComparison
-import Sheaf.Paper.IntegralCohomologicalAdicCriterion
-import Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison
-import Sheaf.Algebra.Homology.RingedInternalHomDerivedComplete
+import Sheaf.Paper.IntegralHomComparisonNormalization
 import Sheaf.Paper.IntegralHomReduction
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.Paper.FiniteFieldInternalHomFiniteness
-import Sheaf.AlgebraicGeometry.ConstantFieldTorBounds
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.Paper.IntegralAdicInputNormalization
+import Sheaf.Paper.IntegralAdicHomCompleteness
+import Sheaf.Paper.IntegralAdicHomResidueOrigin
 
 public import Sheaf.Paper.IntegralCriterionReductions
 public import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
 public import Sheaf.Paper.AdicStratifiedPerfectData
 public import Sheaf.Paper.IntegralHomReductionComparison
-public import Mathlib.Algebra.Field.ZMod
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 
 /-! # Complete residue witnesses for integral general-lfp internal Hom
 
@@ -90,6 +72,52 @@ def integralGeneralLfpAdicImage :
     Scheme.pbcDerivedRestrict (Scheme.pbcCompletedComparison X
       (Scheme.pbcIntegralDatum l E)).hom
 
+/-- A cohomologically bounded etale complex has a strictly bounded representative with
+its constructible homology. The displayed tensor tests are termwise, so their bounds
+follow from the zero terms of the representative, for every test sheaf. In the application
+the coefficients are a residue field, where these tests compute derived tensor.
+Source: Mathlib's bounded representative theorem and preservation of zero objects. -/
+private theorem boundedEtaleRepresentative
+    (A : Type (u + 1)) [CommRing A]
+    (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+    (a b : ℤ) (_hab : a ≤ b)
+    (hC : ∀ q : ℤ, q < a ∨ b < q → IsZero (C.homology q))
+    (hcons : ∀ q : ℤ, Scheme.IsConstructibleSheaf (C.homology q)) :
+    ∃ D : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ,
+      D.IsStrictlyGE a ∧ D.IsStrictlyLE b ∧
+      (∀ q : ℤ, Scheme.IsConstructibleSheaf (D.homology q)) ∧
+      Nonempty (DerivedCategory.Q.obj C ≅ DerivedCategory.Q.obj D) ∧
+      ∀ (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ),
+        q < a ∨ b < q →
+          IsZero ((Scheme.sfbEtaleTensorDegreeZero X A D N).homology q) := by
+  have : C.IsGE a := (CochainComplex.isGE_iff C a).2 fun q hq ↦
+    (HomologicalComplex.exactAt_iff_isZero_homology C q).2 (hC q (Or.inl hq))
+  have : C.IsLE b := (CochainComplex.isLE_iff C b).2 fun q hq ↦
+    (HomologicalComplex.exactAt_iff_isZero_homology C q).2 (hC q (Or.inr hq))
+  obtain ⟨D, hDa, hDb, ⟨e⟩⟩ :=
+    DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE (DerivedCategory.Q.obj C) a b
+  refine ⟨D, hDa, hDb, ?_, ⟨e⟩, ?_⟩
+  · intro q
+    have : Scheme.IsConstructibleSheaf (C.homology q) := hcons q
+    exact Scheme.IsConstructibleSheaf.of_iso (F := C.homology q)
+      (((DerivedCategory.homologyFunctorFactors _ q).app C).symm ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
+        (DerivedCategory.homologyFunctorFactors _ q).app D)
+  · intro N q hq
+    let := Sheaf.monoidalCategory X.smallEtaleTopology (ModuleCat.{u + 1} A)
+    let F := MonoidalCategory.tensorRight N
+    have hGE : (Scheme.sfbEtaleTensorDegreeZero X A D N).IsStrictlyGE a := by
+      rw [CochainComplex.isStrictlyGE_iff]
+      intro i hi
+      exact F.map_isZero (D.isZero_of_isStrictlyGE a i hi)
+    have hLE : (Scheme.sfbEtaleTensorDegreeZero X A D N).IsStrictlyLE b := by
+      rw [CochainComplex.isStrictlyLE_iff]
+      intro i hi
+      exact F.map_isZero (D.isZero_of_isStrictlyLE b i hi)
+    rcases hq with hq | hq
+    · exact (Scheme.sfbEtaleTensorDegreeZero X A D N).isZero_of_isGE a q hq
+    · exact (Scheme.sfbEtaleTensorDegreeZero X A D N).isZero_of_isLE b q hq
+
 /-- General-lfp bounded constructible integral inputs have complete internal Hom,
 invertible canonical evaluation-transpose reduction, and a bounded constructible
 finite-Tor etale residue witness. The Hom is the ambient ordinary unbounded Hom.
@@ -101,30 +129,21 @@ Stacks Tags 099A and 09AL
 (blueprint: lem-sfb-integral-general-lfp-hom-finiteness).
 
 Proof:
-1. A field is Noetherian, so finite type makes X Noetherian and hence qcqs.
-The valuation ring is a DVR with finite residue field of characteristic l.
-The projection-normalized coefficient comparison identifies B with its positive
-quotient limit; finite discrete coefficients identify the residue with A_X.
-2. Apply integralLfpConstantModelComparison on every cohomology sheaf and then
-integral_cohomological_adic_criterion to K and L. This supplies their completeness
-and bounded constructible finite-Tor etale residue models, including torsion inputs.
-3. moduleObject_ringedSite_derived_comparison identifies the ambient Hom, tensor,
-evaluation and every slice with their ringed-site models. The locally complete
-second argument L makes Hom(K,L) locally complete by
-isLocallyDerivedRingedIdealComplete_derivedInternalHom, with no perfectness of K.
-4. integralHomReduction at exponent one makes the transpose of reduced evaluation
-invertible. The same evaluation-preserving comparison carries this to the displayed
-canonical ringed-site map; no arbitrary isomorphism replaces that map.
-5. Constructible site comparison puts the two residue inputs in the finite constant
-local-model category. finiteField_constantModel_internalHom gives bounded
-constructible cohomology of their Hom. Step 4 gives this for the reduced ambient Hom.
-6. Essential surjectivity of constructibleComparison gives its etale origin D.
-exists_iso_Q_obj_of_isGE_of_isLE chooses an actually bounded representative.
-Constructible finite-type values over the residue field are finite-dimensional.
-7. constant_field_tor_bounds gives a common Tor interval on the pro-etale side;
-finiteTorComparisonNoetherian reflects it to the etale side. In residue-field
-coefficients every module sheaf is flat, so sfbEtaleTensorDegreeZero computes
-precisely the derived tensor with each degree-zero test module sheaf. -/
+1. Apply integralAdicInput_normalization to both inputs. It places the general-lfp
+adic witnesses in the exact fixed section-action and completed coefficient presentation.
+2. Apply integralHomReduction at the positive exponent 0+1, then rewrite its normalized
+comparison by integralHomComparison_normalization. This proves invertibility of the
+specified canonical evaluation-transpose map.
+3. Apply integralAdicHom_complete to the completeness of the second input. No
+perfectness condition on the first input is used.
+4. Apply integralAdicHom_residue_origin to the two adic witnesses and the invertible
+canonical reduction. It gives an etale residue complex with bounded constructible homology.
+5. The private boundedEtaleRepresentative uses the standard derived t-structure to obtain
+a strictly bounded complex D representing that residue origin. Its homology is constructible
+by the homology functor applied to the derived isomorphism. Tensoring D termwise with any
+degree-zero test sheaf preserves its zero terms, hence gives the required common interval.
+Apply the derived comparisonUpperStar functor and its termwise factorization to the
+representative isomorphism, and compose with the residue-origin isomorphism. -/
 theorem integral_general_lfp_hom_finiteness
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
     [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
@@ -161,6 +180,29 @@ theorem integral_general_lfp_hom_finiteness
               (Scheme.pbcIntegralDatum l E).ideal ^ (0 + 1)))) (q : ℤ),
           q < a ∨ b < q → IsZero
             ((Scheme.sfbEtaleTensorDegreeZero X _ D N).homology q) := by
-  sorry
+  have hKadic := integralAdicInput_normalization l E X k K hK
+  have hLadic := integralAdicInput_normalization l E X k L hL
+  have hred : IsIso (WeilConjectures.integralHomReductionComparison
+      (integralGeneralLfpPrimeDatum (ringChar k)) l (Ne.symm (Fact.out : ringChar k ≠ l))
+      E X 0 ((integralSectionDerivedEquivalence l E X).functor.obj K)
+      ((integralSectionDerivedEquivalence l E X).functor.obj L)) := by
+    obtain ⟨a, _, hm⟩ := WeilConjectures.integralHomReduction l E X
+      (integralGeneralLfpPrimeDatum (ringChar k)) (Ne.symm (Fact.out : ringChar k ≠ l))
+    obtain ⟨m, hm⟩ := hm 0
+    rw [WeilConjectures.integralHomComparison_normalization
+      (integralGeneralLfpPrimeDatum (ringChar k)) l
+      (Ne.symm (Fact.out : ringChar k ≠ l)) E X 0 a m]
+    exact (hm _ _).1
+  refine ⟨integralAdicHom_complete l E X K L hLadic.1, hred, ?_⟩
+  obtain ⟨C, ⟨a, b, hab, hbound⟩, hcons, ⟨eC⟩⟩ :=
+    integralAdicHom_residue_origin l E X k (integralGeneralLfpPrimeDatum (ringChar k))
+      (Ne.symm (Fact.out : ringChar k ≠ l)) K L hKadic hLadic hred
+  obtain ⟨D, hDa, hDb, hDcons, ⟨eD⟩, hDtor⟩ :=
+    boundedEtaleRepresentative X _ C a b hab hbound hcons
+  refine ⟨D, ⟨a, b, hab, hDa, hDb⟩, hDcons, ?_, a, b, hab, hDtor⟩
+  let ν := comparisonUpperStar (ModuleCat.{u + 1} (Scheme.PbcIntegralRing l E ⧸
+    (Scheme.pbcIntegralDatum l E).ideal ^ (0 + 1))) X
+  exact ⟨(ν.mapDerivedCategoryFactors.app D).symm ≪≫
+    ν.mapDerivedCategory.mapIso eD.symm ≪≫ ν.mapDerivedCategoryFactors.app C ≪≫ eC⟩
 
 end AlgebraicGeometry.ProEtale

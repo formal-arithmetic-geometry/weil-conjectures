@@ -14,42 +14,18 @@
  ],
  "proof": [
   {
-   "text": "On a perfect-model neighborhood the terms are retracts of finite constant free sheaves, hence finite locally constant. Refine the cover to trivialize the finitely many terms and make their differential matrices constant. Thus the whole bounded model comes from a bounded finite-dimensional module complex by the exact strong-monoidal constant-sheaf functor (source CategoryTheory.monoidalConstantSheaf). On bounded finite-free complexes this functor preserves duals: use the strong-monoidal internal-Hom comparison out of a dualizable object (Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing), and exactness commutes with homology. This route uses coefficient-module sheaves directly, with no ringed SheafOfModules bridge.",
-   "uses": [
-    "lemma-constructible-flc-serre",
-    "lemma-constructible-hom-constant-locally"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-pod-cohomology-of-dual-over-field] to the finite-dimensional module model. Over the field the complex splits into its homology and contractible pairs. Evaluation on homology summands is the ordinary duality identity; contractible pairs have zero homology. Mapping this computation through the exact constant-sheaf functor gives the local sheaf-duality formula. The finite-constant ordinary Hom comparison is the same strong-monoidal duality comparison in degree zero.",
-   "uses": [
-    "lem-pod-cohomology-of-dual-over-field"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Construct the canonical comparison from evaluation on Hom cycles and source cycles: the Hom differential shows its value is a coefficient cycle, and changing either argument by a boundary changes the value by a boundary. It therefore descends through both homology quotients, independently of the chosen local models. Exact restriction and evaluation are natural, so these local canonical maps agree on overlaps and descend. The preceding field computation makes them locally invertible; their local inverses also agree. Alternatively test the resulting canonical morphism on geometric stalks and use conservativity. Zero ranks, zero complexes and empty schemes give the zero-object calculation.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false
+   "text": "Retired auxiliary obligation, not a proof of this historical statement. Its sole Lean and DAG parent, lem-fin-lisse-field-dual, now uses the already fully proved bounded finite-lisse duality and canonical pullback-comparison theorems in WeilConjectures.SixFunctors.Etale.Derived.LisseFieldDual. The replacement parent proof and dependency updates are delivered together. No other current or quarantined parent cites this auxiliary node, and sk-prop-sf-cbc has empty realized statement and step arrays. Consequently the locally bounded site-perfect generalization is unnecessary for the targets, and its Sheaf module is withdrawn. All adopted source declarations remain untouched.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-pod-cohomology-of-dual-over-field",
-  "lemma-constructible-flc-serre",
-  "lemma-constructible-hom-constant-locally",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-inverse-image-modules-exact"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "group": "A7",
-  "date": "2026-10-18",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-lisse-field-dual.proof.md",
-  "place": "Local finite-free dual calculation for prime-field site-perfect complexes."
+  "group": "Q1",
+  "date": "2026-10-23",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-lisse-field-dual.proof.md",
+  "place": "Reuse the adopted bounded finite-lisse coefficient-dual theorems and prune the local-perfect detour."
  },
  "mathlib_searches": [
   {
@@ -100,23 +76,7 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteLisseFieldDualHomology",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLisseFieldDualHomology.lean",
-  "declaration": "AlgebraicGeometry.Etale.sitePerfect_fieldDual_homology",
-  "statement": "theorem sitePerfect_fieldDual_homology\n    (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u})\n    (C : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) T) (hC : DerivedCategory.IsSitePerfect C) :\n    ∀ q : ℤ, Nonempty\n      ((_root_.DerivedCategory.homologyFunctor _ q).obj\n          (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) T).obj (op C)).obj\n            (constantComplex (ULift.{u + 1} (ZMod ℓ)) T)) ≅\n        (ihom ((_root_.DerivedCategory.homologyFunctor _ (-q)).obj C)).obj\n          (𝟙_ (Sheaf T.smallEtaleTopology\n            (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))))",
-  "branch": "sheaf-dag",
-  "by": "A7",
-  "date": "2026-10-18"
- },
- "tool_uses": [
-  "lem-pod-cohomology-of-dual-over-field",
-  "lemma-constructible-flc-serre",
-  "lemma-constructible-hom-constant-locally",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-inverse-image-modules-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -125,17 +85,49 @@
   "result": "pass",
   "landing": "20261018T071133-L-1663245",
   "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer; maintenance 2026-10-22 (O4): replaced the characteristic-zero Poincare-duality citation in step 2 by the existing arbitrary-field splitting, vector-space projectivity and projective Hom/evaluation model. This is the same local field calculation, now applicable to F_ell, without importing geometric orientation conventions."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A7",
-  "result": "pass",
-  "landing": "20261018T071133-L-1663245",
+  "reviewer": "C-6d03c",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261023T170058-L-2063293",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: finiteLisseFieldDual (unchanged signature) proved via adopted LisseFieldDual theorems isFiniteLocallyConstantSheaf_homology_coefficientDual / isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf (coefficientDualComparison = finiteLisseDualPullbackComparison by definition) against node lem-fin-lisse-field-dual; withdrawn hole sitePerfect_fieldDual_homology had only this parent"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fin-lisse-field-dual-homology",
+  "worker": "O4 maintenance",
+  "summary": "Repair step 2 of the existing local finite-free calculation: the old Poincare-duality lemma assumes E/Q_ell and does not apply to F_ell. Reuse the existing arbitrary-field splitting, vector-space projectivity and projective Hom/evaluation model instead. This removes the spurious geometric convention/purity return path to the finite-ring generic-open input. No statement or Lean source changes and no new nodes. Supply the split_report omitted when this auxiliary node landed in stage 3.",
+  "blueprint": "Realizes the local finite-free dual calculation in lem-fin-lisse-field-dual.proof.md: step 1 chooses the local constant bounded model; step 2 computes its field dual and homology via the zero-differential model; step 3 descends the canonical evaluation comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-field-complex-cohomology-splitting",
+    "why": "Generic module linear algebra over any field, specialized to F_ell; no geometric, Weil, orientation or finiteness theorem is imported."
+   },
+   {
+    "node": "lem-weil-pbc-vector-space-projective",
+    "why": "Vector spaces over F_ell are projective, as required by the existing Hom-complex model."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic projective module-complex Hom and signed evaluation calculation, specialized to F_ell and the zero-differential bounded model."
+   }
+  ]
+ }
 }

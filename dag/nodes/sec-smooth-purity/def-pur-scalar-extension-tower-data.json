@@ -1,0 +1,157 @@
+{
+ "id": "def-pur-scalar-extension-tower-data",
+ "kind": "definition",
+ "title": "Strict scalar comparisons and normalized tensor realizations",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, finite extensions $E\\subset L$ [def-weil-l-adic-coefficient-extension], schemes and their coefficient sequence systems [def-coef-ringed-sequence-site]. Use the actual sequence pullbacks, quotient scalar maps, scalar action unitors and successive scalar associators [def-trf-integral-comparison-sequence-systems]. Lift these to integer-indexed cochains. Comparisons records natural isomorphisms $\\sigma:S\\operatorname{Tot}\\simeq\\operatorname{Tot}(S,S)$ and $c:f^*\\operatorname{Tot}\\simeq\\operatorname{Tot}(f^*,f^*)$, normalized on every local homogeneous tensor by $b\\otimes(x\\otimes y)\\mapsto(b\\otimes x)\\otimes(1\\otimes y)$. The chosen comparisons are the uniquely generator-normalized ones. Define leftRoute as scalar/pullback association, then pullback of $\\sigma$, then $c_L$; define rightRoute as scalar image of $c_E$, then $\\sigma$, then tensor of the two scalar/pullback associations. A TensorModel is a realization of the named completed tensor [def-pur-integral-derived-operations] by reduction, system tensor and total limit, normalized on every strict quotient presentation [def-pur-coefficient-reduction-presentation] by the balanced tensor generators and its fixed Roos bridge [def-trf-integral-comparison-realization-models]. Define scalar, pullback and tensor reduction comparisons by applying coherent reduction to the corresponding realization and then its counit [def-coef-derived-system-calculus-data]. DerivedSigmaModel fixes the derived scalar/tensor comparison on flat-term K-flat systems [def-pc-kflat-complex], [def-pc-flat-sheaf-modules]; derivedSigma is the unique comparison with that normalization. modelSection reads a section in the normalized direct quotient model [def-pur-coefficient-extension-reduction-data]. These definitions include no equality of the two routes or completed coherence theorem.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-coef-ringed-sequence-site",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pur-integral-derived-operations",
+  "def-pur-coefficient-reduction-presentation",
+  "def-trf-integral-comparison-realization-models",
+  "def-coef-derived-system-calculus-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-coefficient-extension-reduction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Representative interface for the integral comparison and its finite-reduction/scalar compatibility; Stacks 0941, 07A4, 07A2, 0G7E. Existing definitions in Sheaf.Paper.ScalarExtensionTowerCoherence."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StrictQuotient|ScalarExtensionTower|CoefficientReductionPresentation",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No exact generic library match; reuse the landed Sheaf definitions without copying them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict quotient expression syntax K flat sequence systems scalar association normalized tensor models",
+   "results": "OK 8 hits: term_⧸_, Module.Flat.instTensorProduct, SMulCon.Quotient, SMulCon.instSMulQuotient, PiTensorProduct, ModuleCon.instSMulQuotient, Submodule.Quotient.instIsBoundedSMul, Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-23",
+   "verdict": "No exact generic library match; reuse the landed Sheaf definitions without copying them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient expression syntax K flat sequence systems scalar association normalized tensor models",
+   "results": "OK 8 hits: Quotient.term⟦_⟧, Mathlib.Tactic.Module.NF.term_::ᵣ_, TensorProduct.term⨂[_]^_, TensorProduct.termSym[_]__, MvFunctor.term_⊗'_, TensorProduct.termSym[_]^__, MvFunctor.term_⊗_, TensorProduct.term⨂[_]_,_",
+   "date": "2026-10-23",
+   "verdict": "No exact generic library match; reuse the landed Sheaf definitions without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "Definition-node lean.declaration/declarations containing StrictQuotient.Expression, StrictQuotient.SystemGood, IntegralCoherence, ScalarExtensionTower, CoefficientExtensionSystems, CoefficientReductionPresentation, CoefficientExtensionReductionData; rg in lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search strict quotient and scalar coherence",
+   "results": "No definition-node owner of these declarations. The declarations exist in Sheaf theorem-interface modules; no match in WeilConjectures. Blueprint search strict quotient: three unrelated proper-base-change reconstruction lemmas; scalar coherence: zero.",
+   "date": "2026-10-23",
+   "verdict": "Add existing:true ownership records for existing data only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-completed-comparison-quotient-realization",
+  "date": "2026-10-23",
+  "group": "Q128"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Integral comparison used for coefficient twists: simultaneous quotient representatives, completed substitution and scalar squares.",
+   "via": [
+    "lem-pur-completed-comparison-quotient-realization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "module": "Sheaf.Paper.ScalarExtensionTowerCoherence",
+  "declaration": "WeilConjectures.ScalarExtensionTower.TensorModel",
+  "declarations": [
+   "WeilConjectures.ScalarExtensionTower.tensor",
+   "WeilConjectures.ScalarExtensionTower.Complex",
+   "WeilConjectures.ScalarExtensionTower.scalar",
+   "WeilConjectures.ScalarExtensionTower.pull",
+   "WeilConjectures.ScalarExtensionTower.kappa",
+   "WeilConjectures.ScalarExtensionTower.scalarUnit",
+   "WeilConjectures.ScalarExtensionTower.scalarComp",
+   "WeilConjectures.ScalarExtensionTower.generator",
+   "WeilConjectures.ScalarExtensionTower.pullSection",
+   "WeilConjectures.ScalarExtensionTower.Comparisons",
+   "WeilConjectures.ScalarExtensionTower.comparisons",
+   "WeilConjectures.ScalarExtensionTower.leftRoute",
+   "WeilConjectures.ScalarExtensionTower.rightRoute",
+   "WeilConjectures.ScalarExtensionTower.integralTensorGenerator",
+   "WeilConjectures.ScalarExtensionTower.IsTensorModelNormalized",
+   "WeilConjectures.ScalarExtensionTower.TensorModel",
+   "WeilConjectures.ScalarExtensionTower.pullbackReduction",
+   "WeilConjectures.ScalarExtensionTower.scalarReduction",
+   "WeilConjectures.ScalarExtensionTower.tensorReduction",
+   "WeilConjectures.ScalarExtensionTower.Good",
+   "WeilConjectures.ScalarExtensionTower.DerivedSigmaModel",
+   "WeilConjectures.ScalarExtensionTower.derivedSigma",
+   "WeilConjectures.ScalarExtensionTower.modelSection",
+   "WeilConjectures.ScalarExtensionTower.leftRouteCore",
+   "WeilConjectures.ScalarExtensionTower.rightRouteCore",
+   "WeilConjectures.ScalarExtensionTower.UnitSquare",
+   "WeilConjectures.ScalarExtensionTower.TensorUnitSquare",
+   "WeilConjectures.ScalarExtensionTower.CompositionSquare",
+   "WeilConjectures.ScalarExtensionTower.TensorCompositionSquare",
+   "WeilConjectures.ScalarExtensionTower.FiveStepEquation",
+   "WeilConjectures.ScalarExtensionTower.ScalarFormula",
+   "WeilConjectures.ScalarExtensionTower.PullFormula",
+   "WeilConjectures.ScalarExtensionTower.ComparisonData"
+  ],
+  "statement": "structure TensorModel (W : Scheme.{u})\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E W)\n    (ρ : IntegralComparisonRoosModel.{u, u} l E W)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership only: these are existing data/predicates in a theorem module, not objects constructed by that module's theorem. No Lean source is duplicated. X7 performance repair: generic categorical composite predicates and a generic four-field comparison record specialize to the original conditions. FiveStepEquation uses heterogeneous equality; at the fixed original morphism endpoints it is equivalent to equality by heq_iff_eq. tensor has an explicit functor type and unchanged body."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80763e0dd",
+  "group": "Q128",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80763e0dd",
+  "group": "Q128",
+  "result": "fix",
+  "note": "Re-delivery of 2f0e (review PASS; landing refused: 4 proof_deps not in any step's uses). Lean module byte-identical (sha 3444cc67); the only item-node delta is proof_deps, now exactly the 10-id union of step uses, the same set as live. All 17 pre-existing stmt_dep records byte-identical to side-live; live item still split and unlanded. Independent full reading of the module against the node: quotient representatives, recursive substitution, comparison c and inverse, counit whole-system equation, NaturalComparison, StrictCoherence, the unique structural iso, ScalarGenerated→ScalarGood, ScalarLimitImage (both gamma/alpha composites, left=right as isos, scalarTransport(c_L)=canonical at L); edge cases n=0, empty schemes, L=E, ramified non-flat. Gates OK; only sequencePullback_eq and the main theorem are sorry, with proof docstrings. Finding R1 (H4/H12): new node def-pur-coefficient-extension-reduction-data lists CoefficientReductionModelData, already owned by the live definition node stage3-pur-extension-reduction-data (E6). FIX: fixes/def-pur-coefficient-extension-reduction-data.json drops that declaration (14 remain; the item never names it) and records the owner in lean.note; nothing else changed. Advisories as at 2f0e: strict type_of% scalar identity/composition/association; base-era owners outside stmt_deps; H11 self-check. No compile (JSON-only fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6309c",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T135058-L-3664568",
+  "kind": "interface",
+  "note": "independent cc review: 6309 Lean byte-identical to the 8af9 delivery (reviewed FIX), Rational split withdrawn, 8af9 node fixes taken; 3 delivered modules + 3 direct importers on main compiled OK in /tmp/d2s6309"
+ }
+}

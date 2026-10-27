@@ -1,0 +1,340 @@
+{
+ "id": "lem-pur-etale-support-unbounded-amplitude",
+ "kind": "statement",
+ "title": "Unbounded amplitude and coproducts of finite etale compact supports",
+ "statement": "Let $k$ be an algebraically closed field of characteristic $p>0$, let $\\ell\\ne p$ be prime, and let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes [def-weil-scheme-morphism-properties]. No separatedness of $X$ or $Y$ over $k$ is assumed. Fix a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$ [def-weil-compactifications-refinements]. Let $C$ be a finite commutative ring annihilated by a power of $\\ell$. On the ordinary unbounded etale derived categories $D(T_{\\mathrm{et}},C)$ [def-weil-pbc-derived-categories], put $F=Rr_*j_!$.\n\nThe schemes $X,Y,\\overline X$ are Noetherian, quasi-compact and quasi-separated. There exists $d\\ge0$ bounding the dimensions of all geometric fibres of $f$ [def-weil-geometric-fibre], independently of $C$. The functor $F$ is exact as a triangulated functor and preserves arbitrary set-indexed coproducts [def-weil-triangulated-category]. For every integer $b$, it sends $D^{\\ge b}$ into $D^{\\ge b}$. For every geometric fibre bound $d\\ge0$ and every integer $a$, it sends $D^{\\le a}$ into $D^{\\le a+2d}$, where the bounds are those of [def-sbc-standard-tstructure-derived-category]. In particular $F(D^{[a,b]})\\subset D^{[a,b+2d]}$ for every $a\\le b$. These assertions include the empty source or target, with $d=0$ allowed in that case.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Corollary 2.19, printed p. 12: unbounded amplitude of compact supports; retained item proof steps 1–3 supply the geometric bound, lower bound, and telescope argument."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-weil-geometric-fibre",
+  "def-weil-triangulated-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use finite type over Spec k to obtain local Noetherianity and compactness for X and Y; properness gives these for the compactification ambient. Local Noetherianity gives quasi-separatedness. Apply the geometry lemma to Y over the dimension-zero field point and then to f, obtaining a uniform geometric-fibre dimension bound before choosing coefficients.",
+   "uses": [
+    "lem-cbc-compactification-geometry-fibre-bound",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact extension by zero and the unbounded right-derived pushforward are triangulated. The existing source derivedOpenImmersionLowerShriekUpperStarAdjunction is the derived adjunction of the exact open-extension/restriction pair; the left-adjoint colimit theorem supplies coproduct preservation in every indexing universe. Proper pushforward preserves arbitrary coproducts by the proper coproduct theorem; compose the two functors. Their Grothendieck and K-injective structures are the existing source instances.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-amb-proper-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing isGE_mapDerivedCategory_obj for exact extension by zero, then isGE_rightDerivedFunctor_obj for ordinary etale derived direct image. The latter uses the existing bounded-below representative and K-injective compatibility argument, with no upper bound on the input.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-dplus-injective-representative",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prime l is nonzero in k: otherwise p divides l, forcing p=1 or p=l, both excluded. Map its inverse from k to global sections of Spec k and then to Y, obtaining invertibility of the coefficient exponent. Apply the sharp heart bound and transfer from its chosen compactification to c using the existing rightDerivedLowerShriekOfCompactificationPlusιIso. Combine its upper bound with step 3 and apply bounded_heart_amplitude with the class of all sheaves.",
+   "uses": [
+    "lem-dg-compact-support-amplitude",
+    "lem-amb-etale-compact-comparisons",
+    "lem-pur-bounded-heart-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing source coarse uniform upper bound N. For K≤a set m=min(a,a+2d−N), and apply F to the distinguished triangle τ_{<m}K→K→τ_{≥m}K. The first image lies in D^{≤m−1+N}, hence in D^{≤a+2d}. The third input lies in [m,a], so the bounded-heart bound places its image in D^{≤a+2d}. The extension-closed property of the standard t-structure bounds the middle image. This avoids all sequential homotopy-colimit constructions. Combine with the lower bound for the interval assertion; all arguments include zero objects, empty schemes, d=0, and the zero ring.",
+   "uses": [
+    "lem-pur-etale-compact-support-coarse-upper-bound",
+    "lem-pur-bounded-heart-amplitude",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-amb-proper-coproducts",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-dplus-injective-representative",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-dg-compact-support-amplitude",
+  "lem-amb-etale-compact-comparisons",
+  "lem-pur-bounded-heart-amplitude",
+  "lem-pur-etale-compact-support-coarse-upper-bound"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Corollary 2.19 and Proposition 2.23; unbounded passage uses the already proved Stacks more-etale.tex lemma-derived-lower-shriek-bounded coarse bound and one truncation triangle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite prime-to-characteristic coefficients, compact support on etale sheaves is exact, preserves coproducts and has unbounded cohomological amplitude from 0 to twice the fibre dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"HomologicalComplex.exactAt_of_isSupported\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [K.IsSupported e] (i' : ι'), (∀ (i : ι), e.f i ≠ i') → \", \"doc\": \"If a homological complex $ K $ in a category $ \\\\mathcal{C} $ with zero morphisms is supported by an embedding $ e $ from a complex shape $ c $ to $ c' $, and if an index $ i' \\\\in \\\\iota' $ satisfies $ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"CochainComplex.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n : ℤ), K.IsLE n ↔ ∀ (i : ℤ), n < i → HomologicalComplex.ExactAt K i\", \"doc\": \"For a cochain complex $ K $ and integer $ n $, the predicate $ K $ is supported under the embedding from the downward complex shape on natural numbers to the upward complex shape on integers at positi\"}\n  {\"name\": \"CochainComplex.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n : ℤ), K.IsGE n ↔ ∀ i < n, HomologicalComplex.ExactAt K i\", \"doc\": \"For a cochain complex $ K $, the condition $ K.\\\\text{IsGE}(n) $ holds if and only if $ K $ is exact at every integer index $ i $ satisfying $ i < n $. Exactness means the image of the differential $ d\"}\n  {\"name\": \"HomologicalComplex.IsSupportedOutside.exactAt\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : HomologicalComplex C c'} {e : c.Embedding c'}, K.IsSupportedOutside e → ∀ (i : ι), K.ExactAt (e.f i)\", \"doc\": \"If a homological complex $ K $ in a category with zero morphisms is supported outside the image of an embedding $ e: c \\to c' $ between complex shapes, then $ K $ is exact at every index in the image o\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure predicates and representatives do not assert the unbounded compact-support bound, exactness or coproduct preservation; compact support grep hits concern continuous functions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsLE\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) : Prop\", \"doc\": \"Given `X : DerivedCategory C` and `n : ℤ`, this property means\\nthat `X` is `≤ n` for the canonical t-structure.\"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : C) (n : ℤ) : ((DerivedCategory.singleFunctor C n).obj X).IsLE n\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.isZero_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ) (hi : n < i) [hX : X.IsLE n] : CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) : X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n] : ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n] : (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) : (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n] : ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] : ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.Plus.IsLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Plus\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : DerivedCategory.Plus C) (n : ℤ) : Prop\", \"doc\": \"Given `X : DerivedCategory.Plus C` and `n : ℤ`, this property means\\nthat `X` is `≤ n` for the canonical t-structure.\"}\n  {\"name\": \"DerivedCategory.Plus.instIsLEObjSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Plus\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : C) (n : ℤ) : ((DerivedCategory.Plus.singleFunctor C n).obj X).IsLE n\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.Plus.isZero_homology_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Plus\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (X : DerivedCategory.Plus C) (n : ℤ) [X.IsLE n] (i : ℤ) (hi : n < i) : CategoryTheory.Limits.IsZero ((DerivedCategory.Plus.homologyFunctor C i).obj X)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure predicates and representatives do not assert the unbounded compact-support bound, exactness or coproduct preservation; compact support grep hits concern continuous functions."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(amplitude|dimension)|lowerShriek.*IsLE|cohomologicalAmplitude",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/Analysis/Calculus/BumpFunction/Basic.lean\", \"line\": \"166\", \"text\": \"protected theorem hasCompactSupport [FiniteDimensional ℝ E] : HasCompactSupport f := by\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"line\": \"700\", \"text\": \"theorem HasCompactSupport.eq_zero_or_finiteDimensional {X : Type*} [TopologicalSpace X] [Zero X]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"line\": \"712\", \"text\": \"  HasCompactSupport.eq_zero_or_finiteDimensional 𝕜 (X := Additive X) hf h'f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure predicates and representatives do not assert the unbounded compact-support bound, exactness or coproduct preservation; compact support grep hits concern continuous functions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological dimension bound for unbounded etale compact support derived pushforward",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.isStrictlyGE_of_ge\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(p q : ℤ) (hpq : p ≤ q) [K.IsStrictlyGE q] : K.IsStrictlyGE p\", \"doc\": \"For integers $p$ and $q$ with $p \\\\leq q$, if a cochain complex $K$ is strictly supported in degrees $\\\\geq q$, then it is also strictly supported in degrees $\\\\geq p$.\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_of_iso\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) [K.IsStrictlyGE n] : L.IsStrictlyGE n\", \"doc\": \"If cochain complexes $ K $ and $ L $ are isomorphic and $ K $ is strictly supported in degrees $ \\\\geq n $, then $ L $ is also strictly supported in degrees $ \\\\geq n $.\"}\n  {\"name\": \"Continuous.bounded_above_of_compact_support\", \"module\": \"Mathlib.Analysis.Normed.Group.Bounded\", \"type\": \"(hf : Continuous f) (h : HasCompactSupport f) : ∃ C, ∀ x, ‖f x‖ ≤ C\", \"doc\": \"If $ f $ is a continuous function with compact support, then there exists a real number $ C $ such that $ \\\\|f(x)\\\\| \\\\leq C $ for all $ x $.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CochainComplex.isGE_of_ge\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(p q : ℤ) (hpq : p ≤ q) [K.IsGE q] : K.IsGE p\", \"doc\": \"For integers $ p $ and $ q $ with $ p \\\\leq q $, if the cochain complex $ K $ is supported by an embedding translating indices by $ n $ at $ q $, then $ K $ is also supported by such an embedding at $ \"}\n  {\"name\": \"ofCompactSupport\", \"module\": \"Mathlib.Topology.ContinuousMap.BoundedCompactlySupported\", \"type\": \"(g : α → γ) (hg₁ : Continuous g) (hg₂ : HasCompactSupport g) : α →ᵇ γ\", \"doc\": \"Constructs a bounded continuous function from a continuous function $ g : \\\\alpha \\\\to \\\\gamma $ with compact support, where $\\\\alpha$ is a topological space and $\\\\gamma$ is a non-unital normed ring. The \"}\n  {\"name\": \"CategoryTheory.projectiveDimension_ne_top_iff\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Dimension\", \"type\": \"(X : C) : projectiveDimension X ≠ ⊤ ↔ ∃ n, HasProjectiveDimensionLE X n\", \"doc\": \"The projective dimension of an object $X$ in an abelian category is finite if and only if there exists a natural number $n$ such that $X$ has projective dimension at most $n$.\"}\n  {\"name\": \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \"[G.IsContinuous J K] :\\n  (whiskeringLeft _ _ A).obj G.op ⋙ presheafToSheaf J A ≅ presheafToSheaf K A ⋙ G.sheafPushforwardContinuous A J K\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is a natural isomorphism between the composition of left whiskering wit\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure predicates and representatives do not assert the unbounded compact-support bound, exactness or coproduct preservation; compact support grep hits concern continuous functions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a sheaf cohomological dimension bound to arbitrary bounded above complexes using brutal truncations and homotopy colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.isZero_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ),\\n  i < n → ∀ [hX : X.IsGE n], CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ belongs to the family $\\\\mathcal{G}_n$ of the T-structure (i.e., is isomorphic to a complex strictly supported in \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure predicates and representatives do not assert the unbounded compact-support bound, exactness or coproduct preservation; compact support grep hits concern continuous functions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded etale compact support derived pushforward preserves coproducts and has amplitude bounded by twice the fibre dimension",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.etaleLocus_eq_compl_support, HomologicalComplex.map_isStrictlySupported, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, DerivedCategory.isGE_Q_obj_iff, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: support predicates, representatives, and etale morphism lemmas do not state compact-support amplitude and coproduct preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek.*(IsLE|PreservesColimits)|compactSupport.*amplitude|cohomologicalAmplitude",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: support predicates, representatives, and etale morphism lemmas do not state compact-support amplitude and coproduct preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support etale functor upper cohomological bound from fibre dimension on unbounded complexes",
+   "results": "8 hits: DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.instIsSupportedOfIsStrictlySupported, CochainComplex.isStrictlyLE_of_le, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+   "date": "2026-10-22",
+   "verdict": "no match: support predicates, representatives, and etale morphism lemmas do not state compact-support amplitude and coproduct preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsLE\"",
+   "results": "12 hits: DerivedCategory.IsLE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.isZero_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: support predicates, representatives, and etale morphism lemmas do not state compact-support amplitude and coproduct preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserving countable coproducts extends a uniform cohomology bound from bounded complexes to bounded above complexes by brutal truncations",
+   "results": "8 hits: CochainComplex.isGE_iff, CochainComplex.isLE_iff, CochainComplex.shortComplexTruncLE_shortExact, CochainComplex.exactAt_of_isGE, CochainComplex.exactAt_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-22",
+   "verdict": "no match: support predicates, representatives, and etale morphism lemmas do not state compact-support amplitude and coproduct preservation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-exceptional-constant-tensor",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph beginning \"For Λ in {O_E,E,Qlb}, use respectively derived inverse limits, rationalization, and the common-stage construction ... of the compatible finite-level functors\": the finite-level constant-coefficient tensor comparison needed to compare derived reductions. Work package: Corollary 2.19, printed p. 12: unbounded amplitude of compact supports; retained item proof steps 1–3 supply the geometric bound, lower bound, and telescope argument.",
+   "via": [
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-support-unbounded-amplitude",
+  "worker": "stage1",
+  "summary": "Kept every statement clause and reused existing nodes throughout. Proved geometry, exactness/coproducts, the lower bound, bounded amplitude from the heart bound, and the upper bound for unbounded-below inputs by lower brutal-truncation telescopes. No new nodes. Checked sources, all cited statements, arbitrary finite coefficient rings, nonseparated bases, and empty cases.",
+  "blueprint": "Adic-stage paragraph beginning \"For Λ in {O_E,E,Qlb}, use respectively derived inverse limits, rationalization, and the common-stage construction ... of the compatible finite-level functors\": the finite-level constant-coefficient tensor comparison needed to compare derived reductions. Work package: Corollary 2.19, printed p. 12: unbounded amplitude of compact supports; retained item proof steps 1–3 supply the geometric bound, lower bound, and telescope argument. Steps 1–6 supply the finite-level unbounded compact-support input to that paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-compactification-geometry-fibre-bound",
+    "why": "Generic finite-type geometry and geometric fibre dimension bound used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-amb-proper-coproducts",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-dg-compact-support-amplitude",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-pur-bounded-heart-amplitude",
+    "why": "Generic bounded cohomology devissage used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "def-kun-truncations",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "Generic termwise sequential colimit as a telescope used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-kun-functor-preserves-hocolim",
+    "why": "Generic telescope preservation by exact coproduct-preserving functors used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   },
+   {
+    "node": "lem-sp-long-exact-of-triangle",
+    "why": "Generic ordinary-etale or derived-category tool used with its stated hypotheses; it supplies an ingredient below the finite-level unit route, not a replacement for that route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-amb-proper-coproducts",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-dg-compact-support-amplitude",
+  "lem-amb-etale-compact-comparisons",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-pur-bounded-heart-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-cea487358",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-cea487358 (reviewer sub-agent of L); spot-checked: I read the item, all 6 stmt_deps and 24 proof_deps statements, and Zheng Cor. 2.19 with its proof (p.12) and Prop. 2.23 (p.14). The statement matches Cor. 2.19 for finite ℓ-power-torsion C with F=Rr_*j_! on unbounded ordinary étale D. No new nodes, no SGA, no cycle. Step 1: the cbc fibre-bound lemma, applied to X,Y→Spec k, r and f, gives Noetherian schemes and a geometric-fibre bound d; locally Noetherian gives quasi-separated. Step 2: j_! is exact and a left adjoint, the exact-derived-coproducts lemma lifts coproducts to D, lem-amb-proper-coproducts applies (r proper, Noetherian, C finite), and the composite is triangulated. Step 3: a representative zero below b, the D+ injective representative (K-injective) computing Rr_*, then r_* termwise. Step 4: lem-dg-compact-support-amplitude (exponent of C divides ℓ^s, invertible since ℓ≠p; its f_! is the def-amb candidate, which is our F) with step 3 gives [0,2d] on module sheaves; bounded-heart amplitude with S = all sheaves gives D^{[u,a]}→D^{[u,a+2d]}. Steps 5-6: brutal-truncation telescope (kun complex-colimit hocolim, functor-preserves-hocolim); countable sums are exact and homology commutes with them; the long exact sequence bounds H^i(FK) for i>a+2d. Edge cases checked: d=0, X empty with nonempty boundary, C=0 and Z/ℓ^s, nonseparated bases, unbounded inputs. No duplicate in the DAG. All off-unit citations are declared tool_uses and are generic; I accept them. Batch-5: both lem-amb-proper-coproducts and lem-dg-compact-support-amplitude reach lem-pod-lisse-module-sheaves-as-module-objects only through ordinary proper base change (thm-weil-pbc-bounded-below). That node is generic lisse-sheaf/module-object algebra, not part of the trace formula or Poincaré duality, and the two cited results are cd/coproduct facts outside both assumptions, so I accept both. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportUnboundedAmplitude",
+  "declaration": "AlgebraicGeometry.Etale.compactSupport_unbounded_amplitude",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportUnboundedAmplitude.lean",
+  "statement": "theorem compactSupport_unbounded_amplitude (k : Type u) [Field k] [IsAlgClosed k] (p : ℕ) [CharP k p] (hp : 0 < p) (l : ℕ) [Fact l.Prime] (hlp : l ≠ p) (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : (IsNoetherian X ∧ CompactSpace X ∧ QuasiSeparatedSpace X) ∧ (IsNoetherian Y ∧ CompactSpace Y ∧ QuasiSeparatedSpace Y) ∧ (IsNoetherian c.Z ∧ CompactSpace c.Z ∧ QuasiSeparatedSpace c.Z) ∧ (∃ d : ℕ, ∀ y : Y, topologicalKrullDim (↑(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y))) ≤ (d : WithBot ℕ∞)) ∧ ∀ (C : Type (u + 1)) [CommRing C] [Finite C], (∃ s : ℕ, (l ^ s : ℕ) • (1 : C) = 0) → (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).IsTriangulated ∧ (∀ I : Type w, PreservesColimitsOfShape (Discrete I) (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c)) ∧ (∀ (b : ℤ) (K : DerivedCategoryModule C X), _root_.DerivedCategory.IsGE K b → _root_.DerivedCategory.IsGE ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K) b) ∧ ∀ d : ℕ, (∀ y : Y, topologicalKrullDim (↑(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y))) ≤ (d : WithBot ℕ∞)) → (∀ (a : ℤ) (K : DerivedCategoryModule C X), _root_.DerivedCategory.IsLE K a → _root_.DerivedCategory.IsLE ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K) (a + 2 * (d : ℤ))) ∧ (∀ (a b : ℤ), a ≤ b → ∀ K : DerivedCategoryModule C X, _root_.DerivedCategory.IsGE K a → _root_.DerivedCategory.IsLE K b → _root_.DerivedCategory.IsGE ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K) a ∧ _root_.DerivedCategory.IsLE ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K) (b + 2 * (d : ℤ)))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b7601c26",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read item node (unchanged except new lean record), all 6 stmt_deps and their lean records, Compactification structure (open immersion + proper, no density; matches the node), DerivedCategoryModule (Type (u+1) coefficients = recorded encoding), and rightDerivedLowerShriekOfCompactification = D(i_!) ⋙ R(g_*) on unbounded ordinary étale D = node's Rr_* j_!. Hypotheses: alg. closed k of char p>0, prime l≠p, finite-type k-schemes via Over+LOFT+QC, f separated finite type, fixed compactification, finite C killed by l^s; none stronger, no separatedness over k. Conclusions: Noetherian/qc/qs for X, Y, Z; ∃ d (before ∀ C) bounding topologicalKrullDim of geometric fibres pullback f ȳ exactly as the geometric-fibre record; IsTriangulated; coproducts for every Type w index; IsGE b preserved with no upper bound; ∀ fibre bound d, IsLE a → IsLE a+2d with no lower bound, and [a,b] → [a,b+2d]. Edge cases (empty source/target/fibres, d=0, a=b, zero ring, empty index) not excluded. lean.statement verbatim in file; no definitions or new nodes; sorry only; docstrings carry Zheng Cor 2.19 p.12 / Prop 2.23, the blueprint tag and all 6 proof steps; all 29 imports exist; report sections present. No file changed, so no compile (worker reports clean compile). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261023T102633-L-2939784",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

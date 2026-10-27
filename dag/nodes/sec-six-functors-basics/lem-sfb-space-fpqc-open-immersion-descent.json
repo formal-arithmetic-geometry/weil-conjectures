@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-space-fpqc-open-immersion-descent",
+ "kind": "statement",
+ "title": "Open immersions from spaces descend under fpqc scheme covers",
+ "statement": "Let $S,P$ be schemes [def-pc-scheme], let $Z$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $a:Z\\to P$ be an $S$-morphism. Let $\\{P_i\\to P\\}_{i\\in I}$ be an fpqc covering by schemes [def-weil-pbc-fpqc-covering]. Suppose each $Z_i=Z\\times_PP_i$ is a scheme and the projection $a_i:Z_i\\to P_i$ is an open immersion [def-weil-open-immersion]. Then $a$ identifies $Z$ with an open subscheme of $P$. In particular $Z$ is a scheme and $a$ is an open immersion. No representability or quasi-compactness assumption on $a$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041X (lemma-descending-property-open-immersion), descent implication for algebraic-space source and scheme target; an open subspace of a scheme is a scheme."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For local presentations k_i:h_X_i→Z and q_i:X_i→P_i, the square (k_i,q_i,a,p_i) is cartesian, by transporting the given pullback isomorphism. On a double overlap T with projections b:T→P_i and c:T→P_j, pull back q_i along b. Its universal section of Z and map to P_j lift uniquely through the cartesian presentation X_j. The equality of their composites to P_j shows that the inverse image of the image of q_i is contained in that of q_j. Interchanging i and j gives equality of the opens. This uses only the scheme and presheaf pullback universal properties, rather than a separately stated open-immersion base-change theorem.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X (lemma-descending-property-open-immersion), equality of the two inverse-image opens; scheme base change Tag 01JY"
+   }
+  },
+  {
+   "text": "Apply descent of compatible open subschemes to $\\{P_i\\to P\\}$ and the opens of step 1. Obtain an open subscheme $U\\subset P$ with $P_i\\times_PU=U_i$ for every $i$. Write $j:U\\hookrightarrow P$ for its inclusion. This application uses the full covering-family form of descent, so no reduction to a quasi-compact singleton cover is needed.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X (lemma-descending-property-open-immersion), descent of the image open by Descent Tag 03N0 (lemma-open-fpqc-covering)"
+   }
+  },
+  {
+   "text": "For any $S$-scheme $T$ and $z\\in Z(T)$, let $f=a(z):T\\to P$ and $T_i=T\\times_PP_i$. The family $\\{T_i\\to T\\}$ is fpqc, hence jointly surjective. The section $z|_{T_i}$ together with $T_i\\to P_i$ gives a point of $Z_i(T_i)$, so the latter map factors through $U_i$. Consequently $f(T)\\subset U$: for $t\\in T$ choose a point over $t$ in some $T_i$, whose image in $P_i$ belongs to $U_i=P_i\\times_PU$. Open factorization gives a unique $b_T(z):T\\to U$ with $j b_T(z)=f$. For any $k:T'\\to T$, both $b_T(z)k$ and $b_{T'}(z|_{T'})$ have composite $fk$ with $j$, so uniqueness makes them equal. Thus $b:Z\\to h_U$ is a natural transformation over $h_P$, where $h_U(T)=\\operatorname{Mor}_S(T,U)$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X (lemma-descending-property-open-immersion), final test-scheme factorization argument; Topologies Tag 022D and Schemes Tag 01HI"
+   }
+  },
+  {
+   "text": "First show a is injective on sections: if two sections on T have the same image f:T→P, pull back the fpqc cover by f. The cartesian presentation X_i supplies lifts of both sections with the same map to P_i; monicity of q_i makes these lifts equal. Fpqc sheaf uniqueness for Z gives equality on T. Conversely, for f:T→P whose image lies in the descended open U, pull back the fpqc family to T_i=T×_P P_i. The map T_i→P_i has image in q_i(X_i), since p_i^{-1}(U)=q_i(X_i), and thus factors uniquely through q_i. Composing with k_i gives sections of Z over T_i. Their images under a are f restricted to T_i, so the injectivity just proved makes them agree on every overlap. Apply fpqc sheaf gluing for Z. Naturality of a and the separated fpqc sheaf property of the representable presheaf h_P show that the glued section has image f.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X (lemma-descending-property-open-immersion), fpqc gluing and the final bijection; Tag 04P2 (lemma-fpqc-universal-effective-epimorphisms), Properties of Spaces Tag 0APL, Descent Tag 023Q"
+   }
+  },
+  {
+   "text": "The unique open factorizations from step 3 form a natural transformation b:Z→h_U: restriction commutes with factorization by monicity of U→P. Its component at each T is injective by the first part of step 4, and surjective by applying the second part to the composite of any T→U with U→P. Therefore each component is an isomorphism of types, hence b is a presheaf isomorphism. Its composite with the Yoneda image of the open inclusion is a, by the open-factorization equation.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X (lemma-descending-property-open-immersion), concluding bijection of sheaves with the open subscheme"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041X (lemma-descending-property-open-immersion): invariant open images, Descent Tag 03N0, factorization on test schemes and fpqc sheaf gluing. Direct cartesian lifts prove equality of the local images. Lean proof by D7, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space morphism to a scheme is an open immersion if its base changes along an fpqc covering are open immersions",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget, AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_openCover_source, AlgebraicGeometry.universallyOpen_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic open subspaces are effective for faithfully flat quasi compact descent along scheme covers",
+   "results": "8 hits: AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.Scheme.quasiCompactCover",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion of an algebraic space into a scheme descends along fpqc base change",
+   "results": "8 hits: AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom, AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.isOpenImmersion_eq_inf, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"DescendsAlong\"",
+   "results": "12 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*immersion.*descen|descen.*open.*immersion",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space mapping to a scheme is an open immersion if all pullbacks along an fpqc covering are open immersions",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected FlatDescent.lean:133; it concerns morphisms of schemes, while this item must establish that the algebraic-space source is a scheme; other hits concern scheme opens and not this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*immersion.*descen|descen.*[Oo]penImmersion|AlgebraicSpace",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected FlatDescent.lean:133; it concerns morphisms of schemes, while this item must establish that the algebraic-space source is a scheme; other hits concern scheme opens and not this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"DescendsAlong\"",
+   "results": "12 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected FlatDescent.lean:133; it concerns morphisms of schemes, while this item must establish that the algebraic-space source is a scheme; other hits concern scheme opens and not this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion from an algebraic space into a scheme descends along faithfully flat quasi compact covers",
+   "results": "8 hits: AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion, AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_openCover_source, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom, AlgebraicGeometry.instIsSmoothOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected FlatDescent.lean:133; it concerns morphisms of schemes, while this item must establish that the algebraic-space source is a scheme; other hits concern scheme opens and not this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fpqc local schematic open subspaces of a scheme are represented by one open subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Opens, AlgebraicGeometry.Scheme.Opens.instCoeOut, AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.Scheme.Opens.exists_toScheme, AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_X, AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.reduce_to_affine_global, AlgebraicGeometry.Scheme.affineOpens",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected FlatDescent.lean:133; it concerns morphisms of schemes, while this item must establish that the algebraic-space source is a scheme; other hits concern scheme opens and not this algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "date": "2026-10-23",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3C: descend geometric-fibre ampleness to the residue field, and glue the relatively ample open pieces including schematicity. The existing etale-only node does not cover inseparable field extensions. Supporting input in the proof of 0D3C: the final descent of the canonical map into the scheme relative Proj; its source has not yet been shown to be a scheme.",
+   "via": [
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fpqc-open-immersion-descent",
+  "worker": "stage1",
+  "summary": "Read Stacks 041X and its open-descent and fpqc-sheaf inputs. Retained the statement and wrote the overlap-image argument, descent of the open image, test-scheme factorization, fpqc gluing and uniqueness, and the natural isomorphism identifying the source with the open scheme. Reused every substantive input from the DAG; no new nodes. Mathlib and project source searches give only scheme-source descent results. Added the fibre-product statement dependency.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) route and the recorded 0D3C prerequisite: descent of the canonical algebraic-space map into the scheme relative Proj. Read latest/sk-thm-sf-ctf-stability-direct-images.proof.md; its current paragraph (3) is direct-image preservation through compactification. This supporting input does not replace that route. The item has no blueprint ancestor (ancestor command returns None); its inherited from.place and via are retained. Whole-blueprint open-immersion and fpqc searches found no equivalent blueprint assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Generic descent of compatible opens, needed for the image open in Stacks 041X; the unit contains no such topology lemma."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic fpqc gluing and equality of maps into an algebraic space, required before the source has been proved schematic; no unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-a1-algebraic-space-fpqc-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-082c85f27",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-082c85f27 (reviewer sub-agent of L); spot-checked: I read Stacks spaces-descent 041X in full, plus Descent 03N0 and Spaces-properties 0APL. The five steps follow the source's route: equal pullbacks of the open images U_i on P_ij (elementary Yoneda argument plus open-immersion base change 01JY); descent of the open by 03N0 (lem-weil-pbc-open-subscheme-fpqc-descent, full fpqc-family form); the test-scheme factorization Z→h_U (022D(3) base change of the cover, joint surjectivity, factorization through an open by 01HI); bijectivity (unique lifts, monomorphism on P_ij, gluing and equality from lem-a1-algebraic-space-fpqc-sheaf, a(z)=f from 023Q uniqueness); and natural inverses giving Z≅h_U over P. I opened every cited statement and its hypotheses hold where it is applied. Edge cases checked: empty P and empty cover, non-quasi-compact U and a, identity cover. The citer lem-sfb-space-relative-ampleness-fpqc-descent gets exactly the item's hypotheses. The delivery adds no new nodes. The statement is kept; def-pc-fibre-product was added to stmt_deps, which is harmless; blueprint from/via are kept; there is no SGA. Duplicate search found no node stating the item: the scheme-source, étale and fppf variants are narrower. The DAG is acyclic. Both tool_uses (compatible-open descent, fpqc sheaf of spaces) are accepted as generic inputs. Batch-5 flag: the closure of lem-a1-algebraic-space-fpqc-sheaf reaches only def-trf-algebraic-space (a general definition the statement already cites) and two generic quasi-affine scheme lemmas, none of them part of the trace formula or Poincaré duality, so this is not a RETURN. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFpqcOpenImmersionDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_scheme_openImmersion_of_fpqc_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFpqcOpenImmersionDescent.lean",
+  "statement": "theorem exists_scheme_openImmersion_of_fpqc_cover {S : Scheme.{u}} (P : Over S) (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj P) {I : Type v} (Pᵢ : I → Over S) (p : ∀ i : I, Pᵢ i ⟶ P) (hcover : Presieve.ofArrows (fun i ↦ (Pᵢ i).left) (fun i ↦ (p i).left) ∈ Scheme.fpqcPrecoverage P.left) (hlocal : ∀ i : I, ∃ (Zᵢ : Over S) (q : Zᵢ ⟶ Pᵢ i) (e : Limits.pullback a (yoneda.map (p i)) ≅ yoneda.obj Zᵢ), IsOpenImmersion q.left ∧ Limits.pullback.snd a (yoneda.map (p i)) = e.hom ≫ yoneda.map q) : ∃ (U : Over S) (j : U ⟶ P), IsOpenImmersion j.left ∧ ∃ e : Z.obj.obj ≅ yoneda.obj U, a = e.hom ≫ yoneda.map j",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4f971afe",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Lean theorem exists_scheme_openImmersion_of_fpqc_cover matches the node and Stacks 041X (spaces-descent l.1498) clause by clause: S, P (Over S) schemes, Z : AlgebraicSpace S, a : Z.obj.obj ⟶ yoneda P (no representability), arbitrary-index fpqc family via Scheme.fpqcPrecoverage, local hypothesis = representing iso of the presheaf pullback plus projection equation with an open immersion q, conclusion = open immersion j with Z ≅ h_U and a = e.hom ≫ yoneda.map j. Edge cases (empty I, empty schemes, non-qc, universes u/v) covered. lean.statement is verbatim; only the lean field differs from the live node; no definitions, proof sorry only; docstrings give 041X, the blueprint id and all 5 proof steps; proof imports exist in the live tree; no duplicate declaration. Worker report and second-reading sections present. No changes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T081514-L-1988831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-yoneda-ext-one-functor",
+ "kind": "definition",
+ "title": "Covariant Baer-group functor of degree-one Yoneda extensions",
+ "status": "split",
+ "statement": "Let $\\mathcal B$ be an abelian category [def-sp-abelian], with objects in universe $u$ and morphisms in universe $v$. Use derived $\\operatorname{Ext}$ in universe $\\max(u,v)$, and fix its endpoint-natural normalized comparison $c$ with the Baer groups of actual Yoneda classes [def-pur-yoneda-derived-ext-comparison-data]. For $C,M\\in\\mathcal B$, let $Y_c(C,M)$ be the existing quotient of short exact sequences $0\\to M\\to B\\to C\\to0$ by endpoint-fixed equivalence [def-coef-yoneda-extension-data], with the Baer group of $c$. Define the covariant functor $Y_c(C,-):\\mathcal B\\to\\mathbf{Ab}$ as follows: on objects it is $Y_c(C,M)$; on $f:M\\to N$ it sends $e$ to $c_{N,C}^{-1}(\\operatorname{Ext}^1(C,f)(c_{M,C}(e)))$. Endpoint naturality of $c$ identifies this map with pushout of extensions along $f$. It is additive, sends identities to identities, and sends composites to composites. Its canonical filtered-colimit comparison is the map induced by pushout along the colimit cocone.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-pur-yoneda-derived-ext-comparison-data",
+  "def-coef-yoneda-extension-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XU (lemma-yoneda-extension) and 06XV (lemma-ext-1), endpoint functoriality; literature/stacks-project/homology.tex, Section 010I, Baer sum."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functor of Yoneda Ext one classes by pushout in the second argument",
+   "results": "8 hits; [\"CategoryTheory.Abelian.extFunctor\", \"CategoryTheory.Abelian.extFunctorObj\", \"Ext\", \"CategoryTheory.Functor.PushoutObjObj.ctorIdx\", \"CategoryTheory.Under.pushout\", \"CategoryTheory.Functor.PushoutObjObj.mk\", \"CategoryTheory.Functor.PushoutObjObj.pt\", \"CategoryTheory.Abelian.extFunctor_map_app\"]",
+   "date": "2026-10-23",
+   "verdict": "No bundled functor on the concrete Yoneda quotient. extFunctorObj is the derived Ext functor, used through the existing normalized comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda extension classes pushout covariant functor",
+   "results": "8 hits; [\"CategoryTheory.Presheaf.uniqueExtensionAlongYoneda\", \"CategoryTheory.SmallObject.ιFunctorObj_extension'\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Presheaf.uniqueExtensionAlongULiftYoneda\", \"CategoryTheory.OverPresheafAux.YonedaCollection.map₂\", \"CategoryTheory.Presheaf.instUniqueHomLeftExtensionOppositeOpObjFunctorTypeYonedaMkYonedaMap\", \"CategoryTheory.OverPresheafAux.MakesOverArrow\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap\"]",
+   "date": "2026-10-23",
+   "verdict": "No bundled functor on the concrete Yoneda quotient. extFunctorObj is the derived Ext functor, used through the existing normalized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "YonedaExtension|yonedaExt|Yoneda.*pushout",
+   "results": "2 hits; [\"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"]",
+   "date": "2026-10-23",
+   "verdict": "No bundled functor on the concrete Yoneda quotient. extFunctorObj is the derived Ext functor, used through the existing normalized comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-scalar-constructible-fp2",
+  "date": "2026-10-23",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), Noetherian-heart Hom and Yoneda Ext1 continuity input: the pushout comparison on actual degree-one extension classes.",
+   "via": [
+    "lem-sfb-noetherian-scalar-constructible-fp2",
+    "lem-sfb-finite-complex-heart-filtered-approximation",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.YonedaExtOneFunctor",
+  "declaration": "CategoryTheory.YonedaDerivedExtComparison.yonedaExtOneFunctor",
+  "file": "lean/Sheaf/CategoryTheory/YonedaExtOneFunctor.lean",
+  "statement": "def yonedaExtOneFunctor (c : YonedaDerivedExtComparison A) (C : A) : A ⥤ AddCommGrpCat.{max u v}",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.YonedaDerivedExtComparison.yonedaExtOneGroup",
+   "CategoryTheory.YonedaDerivedExtComparison.yonedaExtOneMap",
+   "CategoryTheory.YonedaDerivedExtComparison.yonedaExtOneMap_id",
+   "CategoryTheory.YonedaDerivedExtComparison.yonedaExtOneMap_comp",
+   "CategoryTheory.YonedaDerivedExtComparison.yonedaExtOneFunctor"
+  ],
+  "note": "Real data are the existing quotient and its normalized Baer comparison. Only the identity and composition laws needed to bundle the action are postponed as named theorems, both stated explicitly in this definition node with complete proof docstrings. The output is the actual Yoneda quotient, not a renamed derived Ext group. No arbitrary map or choice of object from bare existence is used."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dec6d83b8",
+  "group": "NE",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dec6d83b8",
+  "group": "NE",
+  "result": "fix",
+  "note": "Item statement correct clause by clause: six coefficient disjuncts as in the landed sibling FiniteComplexHeartFilteredApproximation (Ω = all continuous functions); IsLocallyNoetherian+CompactSpace; recorded IsConstantModelConstructible; any small filtered I : Type (u+1); IsIso colimit.post for preadditiveCoyoneda and for the Yoneda Ext1 functor. The naturality and baer_sum fields of YonedaDerivedExtComparison force pushout and the Baer group for every c, so ∀ c is harmless and non-vacuous (nonempty theorem). Edge cases checked: X empty, zero ring, C=0, F_ℓ[ε]/ε². The new def-sfb-yoneda-ext-one-functor is a real bundled helper, not a duplicate of the unbundled mapOne. F1 fixed: that new node cited the theorem lem-coef-yoneda-derived-ext-comparison for the plain structure owned by the existing:true def-pur-yoneda-derived-ext-comparison-data (landed before base); fixes/def-sfb-yoneda-ext-one-functor.json swaps the stmt_dep and the statement bracket. No Lean change, no compile; worker reports clean compiles (3.6 s / 6.6 s). Advisory: the item's statement uses the structure directly while its stmt_deps reach the owner only through the new def node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261024T015910-L-2463897",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.YonedaDerivedExtComparison.yonedaExtOneMap_comp",
+   "CategoryTheory.YonedaDerivedExtComparison.yonedaExtOneMap_id"
+  ],
+  "sorry_after": []
+ }
+}

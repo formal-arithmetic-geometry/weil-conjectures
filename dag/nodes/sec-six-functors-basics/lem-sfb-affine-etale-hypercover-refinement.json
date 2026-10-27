@@ -1,0 +1,426 @@
+{
+ "id": "lem-sfb-affine-etale-hypercover-refinement",
+ "kind": "statement",
+ "title": "Affine-component etale hypercovers of arbitrary schemes",
+ "statement": "Let $T$ be an arbitrary scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. There is an augmented simplicial scheme [def-weil-pbc-simplicial-object] $v:V_\\bullet\\to T$ with $V_n=\\coprod_{i\\in I_n}V_{n,i}$ and every $V_{n,i}$ affine. Every structure map sends each specified summand into one specified summand, with the compatible component-index maps, and each $V_n\\to T$ is etale. The matching morphisms $V_n\\to M_n(V_\\bullet/T)$ are surjective etale; here $M_0=T$, and $M_n$ is the finite limit of compatible proper faces in schemes over $T$. For any algebraic space $X\\to T$ [def-trf-algebraic-space], $X\\times_T V_\\bullet\\to X$ is an etale hypercover with the same decompositions pulled back. No quasi-compactness or quasi-separatedness of $T$ is imposed. Given any etale hypercover $H_\\bullet\\to T$ [def-weil-pbc-etale-hypercover], such a $V_\\bullet$ can be chosen with a simplicial refinement $V_\\bullet\\to H_\\bullet$. More precisely, one may choose this refinement split: there are subsets $N_r\\subseteq I_r$ of nondegenerate indices and decompositions $I_n=\\coprod_{[n]\\twoheadrightarrow[r]}N_r$, and the summand labelled by $(\\sigma,i)$ is a copy of $V_{r,i}$ with its map to $H_n$ equal to $V_{r,i}\\to H_r\\xrightarrow{H(\\sigma)}H_n$. Given affine open covers of all $H_r$, the map $V_{r,i}\\to H_r$ for every $i\\in N_r$ can be required to factor through a member of the prescribed degree-$r$ cover. This condition is imposed on nondegenerate summands; the degenerate copies have the displayed forced maps.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 0DAV, lemma-hypercovering-object, with the affine basis of T_et; Tag 0DB2, remark-take-unions-hypercovering-X. Base change: lemma-hypercovering-morphism-sites. Refinement is the same split-skeleton construction, covering the fibre product of the prescribed term with the new matching object by affine opens."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-etale-hypercover",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-space-etale-hypercover",
+  "def-sfb-affine-etale-hypercover-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Work in $\\mathcal C=T_{\\mathrm{et}}$ and its category of formal families. The finite-limits theorem gives matching families $M_n(K)$, computed from the finitely many proper faces even for a truncated $K$. The singleton family associated to a simplicial etale $T$-scheme $H$ has matching family $\\{M_n(H)\\}$: its index diagram consists of singletons and the component limit is the scheme limit. This follows directly from the terminal-object and fibre-product formulas, or the compatible-face description of matching objects. Thus a truncated map $K\\to H$ gives $M_n(K)\\to\\{M_n(H)\\}$. No finiteness of the sets indexing the families is used.",
+   "uses": [
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-semi-representable-finite-limits",
+    "lem-weil-pbc-matching-object-proper-faces",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "01G2 (lemma-coprod-prod-SR); 0DAV (lemma-hypercovering-object), matching families; simplicial.tex 0186 (lemma-formula-limit)"
+   }
+  },
+  {
+   "text": "Fix a target hypercover $H$. In degree zero choose an affine open cover of $H_0$ refining its prescribed cover. Its members form $K_0$, with their maps to $H_0$ and $T$. The affine-basis theorem supplies the refinement by taking affine neighbourhoods inside each prescribed open. Open immersions are etale; composition of covering families shows $K_0\\to T$ is a covering. A degree-zero family is split, since its only degeneracy label is the identity.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "0DAV (lemma-hypercovering-object), degree-zero construction; schemes.tex 01IT (lemma-basis-affine-opens)"
+   }
+  },
+  {
+   "text": "Inductively suppose $K$ is split through degree $n-1$, with affine components, matching coverings and a map to $H$ in the retained degrees. Write $M_n(K)=\\{P_a\\}_a$. Pull back the surjective etale map $H_n\\to M_n(H)$ along $P_a\\to M_n(H)$, obtaining $R_a=P_a\\times_{M_n(H)}H_n\\to P_a$. It is a surjective etale scheme morphism by covering base change. Cover each inverse image in $R_a$ of a prescribed affine open of $H_n$ by affine open neighbourhoods. Together these give an affine family $A_n$ mapping to the relative matching family and covering every $P_a$. The maps into $H_n$ have the prescribed factorization and the boundary equations, because $R_a$ is this fibre product. Composition and the fact that open immersions are etale prove the covering assertion.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "0DAV (lemma-hypercovering-object), equation-choose-covering-B, with the relative matching pullback; topologies.tex 0217 (lemma-etale)"
+   }
+  },
+  {
+   "text": "Apply the attachment-operators theorem to the compatible boundary cone of $A_n$; it gives a simplicial extension with strict old restriction and top family equal to $A_n$ plus one copy of each old nondegenerate component for each proper surjection $[n]\\twoheadrightarrow[r]$. The splitness theorem applies: the operator theorem gives exactly its epi-label and invertibility hypotheses. The new indices are precisely those of $A_n$. The top matching arrow is a covering: the new family already covers each $P_a$, and adjoining extra arrows preserves joint surjectivity. All its components remain affine and etale over $T$.",
+   "uses": [
+    "lem-weil-pbc-site-split-attachment-operators",
+    "lem-weil-pbc-site-split-attachment-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "0DAV (lemma-hypercovering-object), attachment and omitted composition verification, supplied by the cited operator theorem; 0DAU (lemma-split)"
+   }
+  },
+  {
+   "text": "Extend the map to $H$ by the map $A_n\\to H_n$ on new summands and by $H(\\sigma)\\circ f_r$ on the old summand labelled $(\\sigma,i)$, using the inverse normalization isomorphism to the degree-$r$ nondegenerate component. Naturality for faces on new summands is the relative matching equation. On old summands it is naturality of $f$ in retained degrees and $H(\\alpha)H(\\sigma)=H(\\sigma\\alpha)$. For degeneracies it is the same identity with concatenated surjections; these are the precise operators of the attachment theorem. Every ordinal map factors as a surjection followed by an injection, so these equations check all naturality squares. This proves the induction with its map to $H$ and its prescribed new-summand factorizations.",
+   "uses": [
+    "lem-weil-pbc-site-split-attachment-operators",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "0DAV (lemma-hypercovering-object), explicit normalized operators; relative refinement verification"
+   }
+  },
+  {
+   "text": "Choose these extensions recursively. Put $K_q$ equal to the degree-$q$ term of the stage through $q$; define an operator between degrees $q,r$ at the stage through $\\max(q,r)$. Strict restriction makes this independent of any later stage. A composition uses only three degrees, so its equality is the functor law at their maximum. The same argument gives $K\\to H$. Each matching diagram uses only lower degrees, so its matching covering is the one already verified at that stage. Every index set and coproduct lies in the size bound: finite products of chosen sets and countably many recursion stages are sets in the ambient universe. The resulting $K$ is a full formal-family hypercover, with the asserted epi-index splitting.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "0DAV (lemma-hypercovering-object), iteration of strict extensions"
+   }
+  },
+  {
+   "text": "Realize every family by its scheme coproduct, giving $V_q=\\coprod_iK_{q,i}$. The componentwise maps glue uniquely to a simplicial scheme. To compare matching limits, for family maps $U\\to W\\leftarrow Z$ the inverse images of the disjoint open pieces $U_i,W_j,Z_k$ partition the scheme fibre product into the pieces $U_i\\times_{W_j}Z_k$ with matching indices. These pieces cover: each point selects its two source indices, whose target indices must agree. Their universal mapping properties and gluing identify this partition with the formal-family fibre-product formula. The singleton terminal family realizes to $T$. Iterating terminal objects and fibre products therefore identifies every realized finite matching limit with the scheme matching limit, compatibly with projections and matching arrows. Component arrows are etale by cancellation between etale $T$-schemes, and their coproduct arrow is etale by locality on the source. It is surjective because each target component is covered. Thus every $V_n\\to M_n(V/T)$ is surjective etale, and every $V_n\\to T$ is etale. The realized map to $H$ retains the prescribed nondegenerate factorizations.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-semi-representable-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "0DB0 (remark-taking-disjoint-unions), 0DB2 (remark-take-unions-hypercovering-X), hypotheses (a)-(c) verified using disjoint open pieces"
+   }
+  },
+  {
+   "text": "For existence without a target take the constant simplicial $T$-scheme $H$: its matching maps are identities, so it is a hypercover. For an arbitrary algebraic space $X\\to T$, fibre products exist and the cited space theorem preserves surjective etale families by base change. The universal property gives $M_n(X\\times_TV/X)\\cong X\\times_TM_n(V/T)$: both classify the same finite compatible families of maps from any test space over $X$; this includes $n=0$. Thus each new matching arrow is the base change of a surjective etale arrow. The decomposition also pulls back: on every scheme test object its pieces are the inverse images of the disjoint open summands, and are a disjoint open cover, so the coproduct comparison is an isomorphism by gluing; this identifies the space coproduct by its mapping property. Its components need not remain affine or even schemes, and neither is asserted. None of the argument selects finite subcovers or assumes quasi-separatedness.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "0DAY (lemma-hypercovering-morphism-sites), finite-limit argument; spaces-topologies.tex 041F (lemma-etale)(3); spaces.tex 02X2 (lemma-fibre-product-spaces)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-semi-representable-object",
+  "lem-weil-pbc-semi-representable-finite-limits",
+  "lem-weil-pbc-matching-object-proper-faces",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-site-split-attachment-operators",
+  "lem-weil-pbc-site-split-attachment-split",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-size-convention",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "0DAV and 0DAU split-skeleton construction, relative matching variant written out; 0DB0, 0DB2 realization; 0DAY base change, with algebraic-space tests from 041F and 02X2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every scheme has an etale hypercover by disjoint unions of affine schemes whose structure maps send each component into one component and pullback is a hypercover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → AlgebraicGeometry.Scheme.zariskiTopology.OneHypercover D.glued\", \"doc\": \"Given gluing data $ D $ for schemes, this constructs a one-step hypercover of the glued scheme $ D.\\\\text{glued} $ in the Zariski topology. It uses the indexing category $ J $, object diagram $ U $, an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine refinements of hypercovers of schemes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝓤 : X.OpenCover) → 𝓤.affineRefinement.openCover ⟶ 𝓤\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs a morphism from the affine refinement of $\\\\mathcal{U}$ to $\\\\mathcal{U}$ itself. The affine refinement is an open cov\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → AlgebraicGeometry.Scheme.zariskiTopology.OneHypercover D.glued\", \"doc\": \"Given gluing data $ D $ for schemes, this constructs a one-step hypercover of the glued scheme $ D.\\\\text{glued} $ in the Zariski topology. It uses the indexing category $ J $, object diagram $ U $, an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → Type v\", \"doc\": \"Given a morphism property $ P $ on schemes and a scheme $ S $, this type represents the indexing data associated with an affine cover satisfying property $ P $ over $ S $. It is constructed from the a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\", \"Scheme\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instPreservesOneHypercoversOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : (AlgebraicGeometry.Scheme.Hom.opensFunctor f).PreservesOneHypercovers (Opens.grothendieckTopology ↥X) (Opens.grothendieckTopology ↥Y)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.add_toPreZeroHypercover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X Y : AlgebraicGeometry.Scheme} (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X) (f : Y ⟶ X) (hf : P f := by infer_instance) : (𝒰.add f hf).toPreZeroHypercover = 𝒰.add f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOneHypercover\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \" (X : AlgebraicGeometry.Scheme) : AlgebraicGeometry.Scheme.zariskiTopology.OneHypercover X\", \"doc\": \"A Zariski-`1`-hypercover of a scheme where all components are affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOneHypercover_toPreOneHypercover_toPreZeroHypercover\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.affineOneHypercover.toPreZeroHypercover = X.affineCover.toPreZeroHypercover\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"module\": \"Mathlib.AlgebraicGeometry.GluingOneHypercover\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : AlgebraicGeometry.Scheme.zariskiTopology.OneHypercover D.glued\", \"doc\": \"The 1-hypercover of `D.glued` in the big Zariski site that is given by the\\nopen cover `D.U` from the glue data `D`.\\nThe \\\"covering of the intersection of two such open subsets\\\" is the trivial\\ncovering \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover_I₀\", \"module\": \"Mathlib.AlgebraicGeometry.GluingOneHypercover\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : D.oneHypercover.I₀ = D.J\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover_I₁\", \"module\": \"Mathlib.AlgebraicGeometry.GluingOneHypercover\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (x✝ x✝¹ : D.J) : D.oneHypercover.I₁ x✝ x✝¹ = PUnit.{u + 1}\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover_X\", \"module\": \"Mathlib.AlgebraicGeometry.GluingOneHypercover\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (a✝ : D.J) : D.oneHypercover.X a✝ = D.U a✝\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover_f\", \"module\": \"Mathlib.AlgebraicGeometry.GluingOneHypercover\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i : D.J) : D.oneHypercover.f i = D.ι i\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover_Y\", \"module\": \"Mathlib.AlgebraicGeometry.GluingOneHypercover\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i₁ i₂ : D.J) (x✝ : PUnit.{u + 1}) : D.oneHypercover.Y x✝ = D.V (i₁, i₂)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover_p₁\", \"module\": \"Mathlib.AlgebraicGeometry.GluingOneHypercover\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i₁ i₂ : D.J) (x✝ : PUnit.{u + 1}) : D.oneHypercover.p₁ x✝ = D.f i₁ i₂\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover_p₂\", \"module\": \"Mathlib.AlgebraicGeometry.GluingOneHypercover\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i₁ i₂ : D.J) (x✝ : PUnit.{u + 1}) : D.oneHypercover.p₂ x✝ = CategoryTheory.CategoryStruct.comp (D.t i₁ i₂) (D.f i₂ i₁)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]ypercover.*[Aa]ffine|[Aa]ffine.*[Hh]ypercover",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"86\", \"text\": \"instance : Functor.IsOneHypercoverDense.{u} (AffineEtale.Spec S)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"50\", \"text\": \"    · refine T.affineOneHypercover.isSheafFor_of_pullback hzar ?_ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"65\", \"text\": \"        refine V.affineOneHypercover.isSheafFor_of_pullback hzar (fun i ↦ ?_) (fun i j k ↦ ?_)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"92\", \"text\": \"/-- A Zariski-`1`-hypercover of a scheme where all components are affine. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"95\", \"text\": \"def affineOneHypercover (X : Scheme.{u}) : zariskiTopology.OneHypercover X :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"97\", \"text\": \"    (X.affineCover.refineOneHypercover fun i j ↦\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"98\", \"text\": \"      (pullback (X.affineCover.f i) (X.affineCover.f j)).affineCover.toPreZeroHypercover)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"line\": \"181\", \"text\": \"    PreZeroHypercover.pullback₁_X, AffineOpenCover.openCover_X, AffineOpenCover.openCover_f,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"line\": \"298\", \"text\": \"  simp only [affineBasisCover, Precoverage.ZeroHypercover.bind_toPreZeroHypercover, Set.range_comp,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"258\", \"text\": \"  (P.iff_of_zeroHypercover_source (X.affineCover.add i)).mp H .none\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"511\", \"text\": \"      exact P.of_zeroHypercover_target Y.affineCover\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"632\", \"text\": \"      rw [P.iff_of_zeroHypercover_target (S.affineCover.pullback₁ f)]\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every scheme has an etale hypercover by disjoint unions of affine schemes whose structure maps send each component into one component and pullback is a hypercover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : X.AffineOpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \": Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} [self : AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"For a scheme $ S $ and a quasi-compact pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, if $ U $ is an affine open subset of $ S $, then $ U $ is covered by the images of finitely many compact open subse\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) (𝒰 : X.AffineOpenCover) (i : 𝒰.I₀) : IsAffine (𝒰.openCover.X i)\", \"doc\": \"For any scheme $ X $ and an affine open cover $ \\\\mathcal{U} $ of $ X $, each component $ \\\\mathcal{U}_i $ of the cover is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.directedAffineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Directed\", \"type\": \": X.OpenCover\", \"doc\": \"For any scheme $X$, the directed affine cover is the open cover consisting of all affine open subsets of $X$ with inclusion morphisms $X|_U \\to X$. This forms a covering sieve in the precoverage define\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A truncated split simplicial object extends one degree by freely attaching new nondegenerate simplices with prescribed boundary maps and a map to a fixed simplicial object",
+   "results": "OK 8 hits: SimplicialObject.Splitting, SimplicialObject.Splitting.N, SimplicialObject.Split.mk', CategoryTheory.SimplicialObject.Truncated, SimplicialObject.Split.X, SimplicialObject.Splitting.ι, SimplicialObject.Split.s, CategoryTheory.SimplicialObject.Truncated.sk; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"extend\"",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "extension|extend|attach",
+   "results": "OK 12 hits: Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean, Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean, Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean, Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean, Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a truncated split simplicial object with a map into another simplicial object by adjoining nondegenerate simplices with prescribed boundary",
+   "results": "OK 8 hits: CategoryTheory.SimplicialObject.Truncated.cosk, CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion, SSet.skAdj, SimplicialObject.Split.mk, SSet.Truncated.rightExtensionInclusion, CategoryTheory.SimplicialObject.coskAdj, CategoryTheory.SimplicialObject.sk, CategoryTheory.SimplicialObject.skAdj; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every scheme has a simplicial etale hypercover with affine components refining any given etale hypercover",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.OpenCover.affineRefinement; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\", \"Scheme\"",
+   "results": "OK 12 hits: AlgebraicGeometry.Scheme.Hom.instPreservesOneHypercoversOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Cover.add_toPreZeroHypercover, AlgebraicGeometry.Scheme.affineOneHypercover, AlgebraicGeometry.Scheme.affineOneHypercover_toPreOneHypercover_toPreZeroHypercover, AlgebraicGeometry.Scheme.GlueData.oneHypercover, AlgebraicGeometry.Scheme.GlueData.oneHypercover_I₀, AlgebraicGeometry.Scheme.GlueData.oneHypercover_I₁, AlgebraicGeometry.Scheme.GlueData.oneHypercover_X; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]ypercover.*[Aa]ffine|[Aa]ffine.*[Hh]ypercover",
+   "results": "OK 12 hits: Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale hypercover of a scheme admits a split refinement by coproducts of affine schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.directedAffineCover, AlgebraicGeometry.instIsAffineHomDescScheme, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.HasAffineProperty.iff_of_openCover, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split truncated simplicial object with prescribed boundary admits a one degree extension compatible with a map to a target simplicial object using the relative matching object",
+   "results": "OK 8 hits: SimplicialObject.Splitting.φ, SimplicialObject.Split.Hom, SimplicialObject.Splitting, SimplicialObject.Split.mk', SimplicialObject.Splitting.ι, CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion, SimplicialObject.Split.s, SimplexCategory.Truncated.Hom.tr; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full simplicial hypercover refinement by affine etale schemes in all dimensions with split degeneracies",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.GlueData.oneHypercover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.Scheme.AffineCover; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor taking a formal family of schemes over a base to their disjoint union preserves finite limits",
+   "results": "OK 8 hits: AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.instHasFiniteLimitsScheme, AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty, CategoryTheory.PreGaloisCategory.FiberFunctor.instPreservesFiniteLimitsFintypeCat, AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteSpecOfFinite, AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeWalkingCospanCospanForget_1; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"coproduct\", \"pullback\"",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "sigma.*[Pp]ullback|[Pp]ullback.*sigma|[Uu]niversalColimit|[Uu]niversal[Cc]oproduct",
+   "results": "OK 5 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Disjoint unions of arbitrary families of schemes commute with fibre products over a disjoint union",
+   "results": "OK 8 hits: AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.sigmaMk, AlgebraicGeometry.sigmaSpec, AlgebraicGeometry.coprodSpec, AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.instIsIsoSchemeCoprodComparisonOppositeCommRingCatSpec; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine open subsets form a basis of the topology of any scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.isBasis_affineOpens, AlgebraicGeometry.isBasis_affine_open, AlgebraicGeometry.Scheme.affineBasisCover_is_basis, AlgebraicGeometry.isBasis_basicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen, AlgebraicGeometry.Scheme.affineBasisCover, AlgebraicGeometry.Scheme.isAffine_affineBasisCover, AlgebraicGeometry.Scheme.affineOpenCover; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.isBasis_affineOpens",
+   "results": "OK 1 hits: AlgebraicGeometry.Scheme.isBasis_affineOpens; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "isBasis_affineOpens",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every open subset of a scheme is covered by affine open subschemes",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.Opens, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.Scheme.AffineOpenCover.openCover, AlgebraicGeometry.Scheme.AffineOpenCover; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining a new object with a boundary map extends a split truncated simplicial object and a map to a target by one degree",
+   "results": "OK 8 hits: SimplicialObject.Split.mk', SimplicialObject.Split.mk, CategoryTheory.SimplicialObject.augment, SSet.skAdj, CategoryTheory.SimplicialObject.coskAdj, CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion, SSet.coskAdj, CategoryTheory.SimplicialObject.skAdj; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Splitting\", \"Truncated\"",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basis, truncated hypercover, splitting data or Kan-extension definitions; none states the full relative construction. Existing affine-basis and attachment DAG nodes are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-duality",
+  "date": "2026-10-23",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Affine-component etale hypercovers of arbitrary schemes.",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-etale-hypercover-refinement",
+  "worker": "stage1",
+  "summary": "Reused the unrestricted formal split attachment operator and splitness lemmas; constructed relative matching affine covers and the simplicial refinement, verified coproduct realization and algebraic-space base change. Corrected the false all-summand prescribed-cover clause to nondegenerate attachments; report gives an explicit counterexample. No new nodes.",
+  "blueprint": "The existing chain serves det-thm-sf-ctf-stability-direct-images proof (3) via proper-flat algebraic-space duality. Latest blueprint direct-images proof (3) now uses compactification rather than spelling out the older alteration chain; this local hypercover construction remains its existing duality prerequisite. from.node is null in the live item and ancestor tool, retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-matching-object-proper-faces",
+    "why": "Generic formal simplicial attachment or algebraic-space pullback tool used inside the existing hypercover prerequisite; the item unit supplies no such general construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-split-attachment-operators",
+    "why": "Generic formal simplicial attachment or algebraic-space pullback tool used inside the existing hypercover prerequisite; the item unit supplies no such general construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-split-attachment-split",
+    "why": "Generic formal simplicial attachment or algebraic-space pullback tool used inside the existing hypercover prerequisite; the item unit supplies no such general construction."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic formal simplicial attachment or algebraic-space pullback tool used inside the existing hypercover prerequisite; the item unit supplies no such general construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-matching-object-proper-faces",
+  "lem-weil-pbc-site-split-attachment-operators",
+  "lem-weil-pbc-site-split-attachment-split",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-5453b4c81",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-5453b4c81 (reviewer sub-agent of L); spot-checked: Split with no new nodes; 8 steps, each read against the statements it cites. Statement correction checked: the base clause requiring every component to factor through prescribed affine covers is false. Counterexample: T=A^1_C, H constant, degree-n covers {D(t-a_n),D(t-b_n)} over infinitely many disjoint pairs. The open image of a summand V_{0,i} would have to omit infinitely many closed points, which no nonempty open of A^1 does. The corrected clause asks the factorisation only of nondegenerate summands; that is exactly the freedom of Stacks 0DAV (hypercovering.tex l.2580ff, which covers the new matching pieces). The only citer, lem-sfb-proper-flat-space-derived-duality (steps 3 and 5), does not use the clause. The correction is named in the report and split_report. Step checks: step 1 FC finite limits/proper-face matching, singleton matching = {M_n(H)}; step 2 affine basis plus covering composition; step 3 R_a=P_a×_{M_n(H)}H_n, via covering base change, with no affine-intersection assumption; step 4 attachment-operators conclusions = attachment-split hypotheses, with adjoined degenerate arrows étale by cancellation; steps 5-6 routine naturality and strict-restriction assembly; step 7 the fibre product of coproducts is the disjoint union of compatible pieces (gluing), étale by local-on-source; step 8 algebraic-space base change and matching commutation. Edge cases tested: T=Spec k, T empty, n=1, non-qc T. Duplicate search: the qcqs finite-split hypercover nodes are strictly more restrictive and the pro-étale existence node is a different setting, so none is a duplicate. No SGA. tool_uses accepted as generic. Batch-5: lem-trf-space-fibre-products-etale-covers (Stacks 02X2/041F) is a generic algebraic-space fibre-product fact, not part of the proof of the trace formula or Poincaré duality, so accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleHypercoverRefinement",
+  "declaration": "AlgebraicGeometry.exists_split_affine_etale_hypercover_refinement",
+  "declarations": [
+   "AlgebraicGeometry.exists_affine_etale_hypercover",
+   "AlgebraicGeometry.exists_split_affine_etale_hypercover_refinement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleHypercoverRefinement.lean",
+  "statement": "theorem exists_split_affine_etale_hypercover_refinement (T : Scheme.{u}) (H : SimplicialObject T.Etale) (hH : IsEtaleHypercover H) (cover : ∀ r : ℕ, (H.obj (op (SimplexCategory.mk r))).left.AffineOpenCover.{v}) : ∃ (V : AffineEtaleHypercoverPresentation T) (f : V.simplicial ⟶ H), (∀ X : AlgebraicSpace T, AlgebraicSpace.IsSpaceEtaleHypercover X (V.simplicial ⋙ Scheme.Etale.forget T ⋙ AlgebraicSpace.schemeBaseChange X) ∧ ∀ n : SimplexCategoryᵒᵖ, Nonempty (IsColimit (Cofan.mk ((AlgebraicSpace.schemeBaseChange X).obj ((Scheme.Etale.forget T).obj (V.simplicial.obj n))) (fun i ↦ (AlgebraicSpace.schemeBaseChange X).map (V.inclusion n i))))) ∧ (∀ (r : ℕ) (i : (V.components.obj (op (SimplexCategory.mk r))).I), CategoryTheory.FormalSplitAttachment.IsNondegenerate ((SimplicialObject.truncation (C := FormalCoproduct.{u} T.Etale) r).obj V.components) ⟨r, Nat.lt_succ_self r⟩ i → ∃ (j : (cover r).I₀) (g : ((V.components.obj (op (SimplexCategory.mk r))).obj i).left ⟶ (cover r).openCover.X j), g ≫ (cover r).f j = (V.inclusion (op (SimplexCategory.mk r)) i).left ≫ (f.app (op (SimplexCategory.mk r))).left) ∧ ∀ (n r : ℕ) (σ : SimplexCategory.mk n ⟶ SimplexCategory.mk r) (_ : Epi σ) (i : (V.components.obj (op (SimplexCategory.mk r))).I), ∃ e : (V.components.obj (op (SimplexCategory.mk r))).obj i ≅ (V.components.obj (op (SimplexCategory.mk n))).obj ((V.components.map σ.op).f i), e.hom = (V.components.map σ.op).φ i ∧ V.inclusion (op (SimplexCategory.mk n)) ((V.components.map σ.op).f i) ≫ (Scheme.Etale.forget T).map (f.app (op (SimplexCategory.mk n))) = (Scheme.Etale.forget T).map (e.inv) ≫ V.inclusion (op (SimplexCategory.mk r)) i ≫ (Scheme.Etale.forget T).map (f.app (op (SimplexCategory.mk r)) ≫ H.map σ.op)",
+  "branch": "sheaf-dag",
+  "by": "Q154",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb147d70f",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Item record differs from live only in lean and stmt_deps (+2 new def nodes); all three lean.statement fields are verbatim. Every clause is rendered: affine components, existing IsEtaleHypercover, canonical X×h_V base change with an algebraic-space hypercover predicate over the proper-face diagram and pulled-back coproduct cofans, existing IsSplit on every truncation, prescribed AffineOpenCover factorization on nondegenerate indices only. The forced-map clause over all indices follows from splitness (2-of-3 on φ). The new nodes are not duplicates (SplitEtaleHypercover needs qcqs; no algebraic-space hypercover exists) and have correct fields. Edge cases checked: T empty, X empty, n=0,1, non-qc T, universes u/v. No hollow defs, only sorry proofs, docstrings present. Advisory: IsNondegenerate/FormalCoproduct owners are cited only transitively via the presentation node. No file changed, so no compile."
+ }
+}

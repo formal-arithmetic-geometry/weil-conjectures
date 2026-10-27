@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-compatible-pair-quasi-iso",
+ "kind": "statement",
+ "title": "Epimorphic compatible-pair maps detect quasi-isomorphisms",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $P,X$ be integer-indexed cochain complexes, and let $a:P\\to X$ be a chain map [def-weil-abstract-derived-category]. Write $Z^n(K)=\\ker(d_K^n:K^n\\to K^{n+1})$, $z^n:Z^n(P)\\to Z^n(X)$ for the map induced by $a$, and $\\bar d_K^n:K^n\\to Z^{n+1}(K)$ for the differential with codomain restricted to cycles. For each $n\\in\\mathbf Z$ form the pullback\n$$T^n=X^n\\times_{Z^{n+1}(X)}Z^{n+1}(P)$$\nusing $\\bar d_X^n$ and $z^{n+1}$. The chain-map identity defines $e^n=(a^n,\\bar d_P^n):P^n\\to T^n$. Suppose every $e^n$ is an epimorphism. Then every $a^n$ and every $z^n$ is an epimorphism, and every $H^n(a):H^n(P)\\to H^n(X)$ is an isomorphism. Thus $a$ is a degreewise epimorphic quasi-isomorphism. No boundedness, projectivity, or existence of projective covers is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0646, lemma-projective-resolutions-exist (3), compatible-pair verification of the downward projective resolution; general criterion extracted from the returned proof, Steps 1--2. The source states existence; the criterion and its generalized-element proof are the agent-written expansion retained in report.md."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinary composition notation, so $fg=f\\circ g$. Fix $n$. For an object $B$ and maps $y:B\\to X^n$, $x:B\\to Z^{n+1}(P)$ satisfying $\\bar d_X^n y=z^{n+1}x$, the pullback property gives $(y,x):B\\to T^n$. Apply clause (a) of [lem-sp-abelian-refinements] to the epimorphism $e^n$: there are an epimorphism $p:B'\\to B$ and $u:B'\\to P^n$ with $a^n u=yp$ and $\\bar d_P^n u=xp$. This is simultaneous lifting after an epimorphic refinement, not lifting on $\\operatorname{Hom}(B,-)$ itself.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution (1), verification of IH_{n-1}; general compatible-pair criterion extracted from this verification, without boundedness. See also Tag 0646, lemma-projective-resolutions-exist (3)."
+   }
+  },
+  {
+   "text": "Given $y:B\\to Z^n(X)$, compose with the cycle inclusion and use Step 1 with the compatible pair $(y,0)$ in degree $n$. The resulting $u$ satisfies $\\bar d_P^n u=0$, hence factors uniquely through $Z^n(P)$. Its image under $z^n$ equals $yp$, by cancellation of the cycle inclusion of $X$. Clause (a) of [lem-sp-abelian-refinements] now shows that $z^n$ is epic, for every $n$.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution (1), verification of IH_{n-1}; general compatible-pair criterion extracted from this verification, without boundedness. See also Tag 0646, lemma-projective-resolutions-exist (3)."
+   }
+  },
+  {
+   "text": "Given $y:B\\to X^n$, apply clause (a) of [lem-sp-abelian-refinements] to the epic $z^{n+1}$ and $\\bar d_X^n y$. Obtain an epimorphism $p:B'\\to B$ and $x:B'\\to Z^{n+1}(P)$ with $z^{n+1}x=\\bar d_X^n yp$. Step 1 applied to $(yp,x)$ gives a further epimorphism $p':B''\\to B'$ and $u:B''\\to P^n$ with $a^n u=ypp'$. The composite $pp'$ is epic: cancellation first through $p'$ and then through $p$ proves this directly. Clause (a) therefore shows that $a^n$ is epic for every $n$.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution (1), verification of IH_{n-1}; general compatible-pair criterion extracted from this verification, without boundedness. See also Tag 0646, lemma-projective-resolutions-exist (3)."
+   }
+  },
+  {
+   "text": "Write $q_K:Z^n(K)\\to H^n(K)$ for the quotient by $\\operatorname{im}\\bar d_K^{n-1}$, using [def-weil-abstract-derived-category]. This quotient is a cokernel of $\\bar d_K^{n-1}$: a morphism killing $\\bar d_K^{n-1}$ kills its image, and then factors uniquely through the quotient. In particular $q_K$ is epic, since two maps equal after $q_K$ are the same factorization. The chain-map identity and functoriality give $z^n\\bar d_P^{n-1}=\\bar d_X^{n-1}a^{n-1}$ and $H^n(a)q_P=q_Xz^n$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution (1), verification of IH_{n-1}; general compatible-pair criterion extracted from this verification, without boundedness. See also Tag 0646, lemma-projective-resolutions-exist (3)."
+   }
+  },
+  {
+   "text": "Let $k:L\\to Z^n(P)$ be the kernel of $z^n$. The pair $(0,k):L\\to T^{n-1}$ is compatible. Step 1 gives an epimorphism $p:L'\\to L$ and $u:L'\\to P^{n-1}$ with $\\bar d_P^{n-1}u=kp$ and $a^{n-1}u=0$. Thus $q_Pkp=q_P\\bar d_P^{n-1}u=0$; cancellation of $p$ gives $q_Pk=0$. The complex $L\\xrightarrow{k}Z^n(P)\\xrightarrow{z^n}Z^n(X)$ is exact in the middle, since $k$ is the kernel inclusion, whose image is itself. Its second arrow is epic by Step 2. Clause (a) of [lem-weil-pbc-abelian-exact-epi-cokernel] makes $z^n$ a cokernel of $k$. Consequently there is a unique $g:Z^n(X)\\to H^n(P)$ with $gz^n=q_P$.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution (1), verification of IH_{n-1}; general compatible-pair criterion extracted from this verification, without boundedness. See also Tag 0646, lemma-projective-resolutions-exist (3)."
+   }
+  },
+  {
+   "text": "The identities of Steps 4--5 give $g\\bar d_X^{n-1}a^{n-1}=gz^n\\bar d_P^{n-1}=q_P\\bar d_P^{n-1}=0$. Cancel the epic $a^{n-1}$ of Step 3. Since $q_X$ is the cokernel of $\\bar d_X^{n-1}$, obtain $h:H^n(X)\\to H^n(P)$ with $hq_X=g$. Then $hH^n(a)q_P=hq_Xz^n=gz^n=q_P$, so $hH^n(a)=1$ by cancellation of $q_P$. Also $H^n(a)hq_Xz^n=H^n(a)q_P=q_Xz^n$; cancel $z^n$ and $q_X$ to get $H^n(a)h=1$. Thus every $H^n(a)$ is an isomorphism. Together with Step 3 and the definition of quasi-isomorphism in [def-weil-abstract-derived-category], this proves the assertion. No step starts an induction at an upper bound.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution (1), verification of IH_{n-1}; general compatible-pair criterion extracted from this verification, without boundedness. See also Tag 0646, lemma-projective-resolutions-exist (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-abelian-refinements",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-abelian-exact-epi-cokernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05T7, lemma-subcategory-left-resolution (1), verification of IH_{n-1}; general compatible-pair criterion extracted from this verification, without boundedness. See also Tag 0646, lemma-projective-resolutions-exist (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*[Qq]uasi|[Qq]uasi.*pullback|cyclesMap.*[Ee]pi [sub=Algebra/Homology]",
+   "results": "{\"t\": \"2026-10-22T06:43:53Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Qq]uasi|[Qq]uasi.*pullback|cyclesMap.*[Ee]pi\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ShortComplex/Homology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Homology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\"], \"digest\": \"6fcf9ce0a86e64b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi requires an already invertible cycles map; here that map is only epic and the compatible-pair hypotheses must also prove homology injectivity. The general QuasiIso definitions, epi_homologyMap lemmas, and injective-kernel factorization maps do not state this criterion. Read ShortComplex/Homology.lean:1118-1130 and Factorizations/Basic.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, QuasiIso, Epi",
+   "results": "{\"t\": \"2026-10-22T06:43:53Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex, QuasiIso, Epi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Epi'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: query rejected (loogle: unknown identifier 'Epi'); not evidence of absence; valid searches are also recorded."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above morphism of complexes surjecting onto the pullback of target terms and source cycles is a quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:44:04Z\", \"tool\": \"leansearch\", \"query\": \"A bounded above morphism of complexes surjecting onto the pullback of target terms and source cycles is a quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuasiIso\", \"CategoryTheory.ShortComplex.QuasiIso.casesOn\", \"quasiIso_comp\", \"HomologicalComplex.quasiIso\", \"HomologicalComplex.instRespectsIsoQuasiIso\", \"HomotopyCategory.quasiIso\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"quasiIso_iff\"], \"digest\": \"7c48a8bdb04f8489\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi requires an already invertible cycles map; here that map is only epic and the compatible-pair hypotheses must also prove homology injectivity. The general QuasiIso definitions, epi_homologyMap lemmas, and injective-kernel factorization maps do not state this criterion. Read ShortComplex/Homology.lean:1118-1130 and Factorizations/Basic.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain map of bounded above cochain complexes which surjects onto each pullback of a target term and source cycles over target cycles is a degreewise epimorphic quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:44:06Z\", \"tool\": \"leanfinder\", \"query\": \"A chain map of bounded above cochain complexes which surjects onto each pullback of a target term and source cycles over target cycles is a degreewise epimorphic quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.epi_homologyMap_of_epi_of_not_rel\", \"CochainComplex.degreewiseEpiWithInjectiveKernel\", \"DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff\", \"HomologicalComplex.instEpiOpcyclesMapOfF\", \"HomologicalComplex.epi_homologyMap_shortComplexTruncLE_g\", \"DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff\", \"HomologicalComplex.HomologySequence.epi_homologyMap_τ₃\", \"HomologicalComplex.instEpiPOpcycles\"], \"digest\": \"8b6d4c1a7ee47f3c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi requires an already invertible cycles map; here that map is only epic and the compatible-pair hypotheses must also prove homology injectivity. The general QuasiIso definitions, epi_homologyMap lemmas, and injective-kernel factorization maps do not state this criterion. Read ShortComplex/Homology.lean:1118-1130 and Factorizations/Basic.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom bijection from a K-projective object to localization gives unique compatible sections of all quasi-isomorphisms targeting it and an essentially constant denominator pro diagram",
+   "results": "{\"t\": \"2026-10-22T06:44:17Z\", \"tool\": \"leanfinder\", \"query\": \"Hom bijection from a K-projective object to localization gives unique compatible sections of all quasi-isomorphisms targeting it and an essentially constant denominator pro diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CategoryTheory.ProjectiveResolution.isoExt\", \"DerivedCategory.left_fac\", \"CategoryTheory.hasExt_of_enoughProjectives\", \"DerivedCategory.right_fac\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CochainComplex.IsKProjective.leftOrthogonal\"], \"digest\": \"39be37dbcf683b11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi requires an already invertible cycles map; here that map is only epic and the compatible-pair hypotheses must also prove homology injectivity. The general QuasiIso definitions, epi_homologyMap lemmas, and injective-kernel factorization maps do not state this criterion. Read ShortComplex/Homology.lean:1118-1130 and Factorizations/Basic.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epimorphic compatible cycle-pair maps in every degree of bounded above complexes imply surjective cycle maps and an isomorphism on homology",
+   "results": "{\"t\": \"2026-10-22T06:44:17Z\", \"tool\": \"leanfinder\", \"query\": \"Epimorphic compatible cycle-pair maps in every degree of bounded above complexes imply surjective cycle maps and an isomorphism on homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.epi_homologyMap_of_epi_of_not_rel\", \"HomologicalComplex.instEpiOpcyclesMapOfF\", \"HomologicalComplex.HomologySequence.epi_homologyMap_τ₃\", \"HomologicalComplex.instEpiPOpcycles\", \"HomologicalComplex.instEpiHomologyπ\", \"HomologicalComplex.HomologySequence.instEpiMap'ComposableArrows₃OfNatNat\", \"CategoryTheory.ShortComplex.epi_homologyMap_of_epi_cyclesMap'\", \"CategoryTheory.ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi\"], \"digest\": \"1aba01b081d6b9e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi requires an already invertible cycles map; here that map is only epic and the compatible-pair hypotheses must also prove homology injectivity. The general QuasiIso definitions, epi_homologyMap lemmas, and injective-kernel factorization maps do not state this criterion. Read ShortComplex/Homology.lean:1118-1130 and Factorizations/Basic.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cyclesMap\", CategoryTheory.Epi",
+   "results": "{\"t\": \"2026-10-22T06:44:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"cyclesMap\\\", CategoryTheory.Epi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.isIso_opcyclesMap'_of_isIso_of_epi\", \"CategoryTheory.ShortComplex.isIso_opcyclesMap_of_isIso_of_epi\", \"CategoryTheory.ShortComplex.isIso_opcyclesMap_of_isIso_of_epi'\", \"CategoryTheory.ShortComplex.epi_homologyMap_of_epi_cyclesMap\", \"CategoryTheory.ShortComplex.epi_homologyMap_of_epi_cyclesMap'\", \"CategoryTheory.ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi\", \"HomologicalComplex.instEpiOpcyclesMapOfF\"], \"digest\": \"b9c0a74f3248c55c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi requires an already invertible cycles map; here that map is only epic and the compatible-pair hypotheses must also prove homology injectivity. The general QuasiIso definitions, epi_homologyMap lemmas, and injective-kernel factorization maps do not state this criterion. Read ShortComplex/Homology.lean:1118-1130 and Factorizations/Basic.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_iff|isIso_homologyMap|epi_pullback|quasiIso_of [sub=Algebra/Homology]",
+   "results": "{\"t\": \"2026-10-23T04:16:33Z\", \"tool\": \"grep\", \"query\": \"quasiIso_iff|isIso_homologyMap|epi_pullback|quasiIso_of\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\"], \"digest\": \"498736f367b06028\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give general quasi-isomorphism definitions or differently hypothesized comparison results, not the compatible-pair criterion. In particular isIso_homologyMap_of_isIso_cyclesMap_of_epi assumes an isomorphism on cycles, which the item does not."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Epimorphic maps to the compatible cycle pullback in every degree imply a quasi isomorphism of cochain complexes",
+   "results": "{\"t\": \"2026-10-23T04:16:33Z\", \"tool\": \"leansearch\", \"query\": \"Epimorphic maps to the compatible cycle pullback in every degree imply a quasi isomorphism of cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"quasiIso_comp\", \"QuasiIso\", \"quasiIsoAt_comp\", \"quasiIso_of_isIso\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"QuasiIsoAt\", \"HomologicalComplex.epi_of_epi_f\", \"CategoryTheory.ShortComplex.quasiIso_comp\"], \"digest\": \"a66c75d93d401b39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give general quasi-isomorphism definitions or differently hypothesized comparison results, not the compatible-pair criterion. In particular isIso_homologyMap_of_isIso_cyclesMap_of_epi assumes an isomorphism on cycles, which the item does not."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain map of unbounded cochain complexes which is epimorphic onto the pullback of target terms and source cycles induces isomorphisms on homology",
+   "results": "{\"t\": \"2026-10-23T04:16:40Z\", \"tool\": \"leanfinder\", \"query\": \"A chain map of unbounded cochain complexes which is epimorphic onto the pullback of target terms and source cycles induces isomorphisms on homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.ConnectData.homologyIsoPos\", \"ChainComplex.isIso_descOpcycles_iff\", \"HomologicalComplex.HomologySequence.isIso_homologyMap_τ₃\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.ShortComplex.isIso_homologyMap_of_isIso_cyclesMap_of_epi\", \"HomologicalComplex.instEpiOpcyclesMapOfF\", \"HomologicalComplex.epi_homologyMap_of_epi_of_not_rel\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\"], \"digest\": \"f0d740738a72e2a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give general quasi-isomorphism definitions or differently hypothesized comparison results, not the compatible-pair criterion. In particular isIso_homologyMap_of_isIso_cyclesMap_of_epi assumes an isomorphism on cycles, which the item does not."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T04:16:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"quasiIso\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give general quasi-isomorphism definitions or differently hypothesized comparison results, not the compatible-pair criterion. In particular isIso_homologyMap_of_isIso_cyclesMap_of_epi assumes an isomorphism on cycles, which the item does not."
+  },
+  {
+   "tool": "grep",
+   "query": "epi_pullback_of_epi_f|epi_pullback_of_epi_g [sub=CategoryTheory/Abelian]",
+   "results": "{\"t\": \"2026-10-23T04:27:17Z\", \"tool\": \"grep\", \"query\": \"epi_pullback_of_epi_f|epi_pullback_of_epi_g\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\"], \"digest\": \"c37772c046f8df18\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization of a supporting tool only: pullback stability gives local lifting; the existing Mathlib leaf lem-sp-abelian-refinements already states that lifting criterion and is reused. No exact match for the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Epimorphisms are stable under pullbacks in an abelian category",
+   "results": "{\"t\": \"2026-10-23T04:27:18Z\", \"tool\": \"leansearch\", \"query\": \"Epimorphisms are stable under pullbacks in an abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.epi_pullback_of_epi_f\", \"CategoryTheory.Abelian.instIsStableUnderBaseChangeEpimorphisms\", \"CategoryTheory.Abelian.epi_pullback_of_epi_g\", \"CategoryTheory.Abelian.epi_snd_of_isLimit\", \"CategoryTheory.Regular.regularEpiIsStableUnderBaseChange\", \"CategoryTheory.Abelian.epi_fst_of_isLimit\", \"CategoryTheory.Limits.hasPushout_of_epi_comp\", \"CategoryTheory.Abelian.epiDesc\"], \"digest\": \"ae90ada358e8c2da\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization of a supporting tool only: pullback stability gives local lifting; the existing Mathlib leaf lem-sp-abelian-refinements already states that lifting criterion and is reused. No exact match for the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category an epimorphism remains an epimorphism after any pullback",
+   "results": "{\"t\": \"2026-10-23T04:27:27Z\", \"tool\": \"leanfinder\", \"query\": \"In an abelian category an epimorphism remains an epimorphism after any pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.epi_pullback_of_epi_g\", \"CategoryTheory.Abelian.epi_pullback_of_epi_f\", \"CategoryTheory.Abelian.epi_fst_of_factor_thru_epi_mono_factorization\", \"CategoryTheory.Abelian.epi_fst_of_isLimit\", \"CategoryTheory.Abelian.epi_snd_of_isLimit\", \"CategoryTheory.Abelian.instIsStableUnderBaseChangeEpimorphisms\", \"CategoryTheory.ShortComplex.SnakeInput.epi_L₃_g\", \"CategoryTheory.surjective_up_to_refinements_of_epi\"], \"digest\": \"631f599c20cc7de1\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization of a supporting tool only: pullback stability gives local lifting; the existing Mathlib leaf lem-sp-abelian-refinements already states that lifting criterion and is reused. No exact match for the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.epi_pullback_of_epi_f",
+   "results": "{\"t\": \"2026-10-23T04:27:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Abelian.epi_pullback_of_epi_f\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.epi_pullback_of_epi_f\"], \"digest\": \"5bec7d24095fd60b\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization of a supporting tool only: pullback stability gives local lifting; the existing Mathlib leaf lem-sp-abelian-refinements already states that lifting criterion and is reused. No exact match for the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-above-acyclic-derived-computation",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Extracted supporting argument: returned Steps 1--2, compatible-pair epimorphisms and homology verification.",
+   "via": [
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-compatible-pair-quasi-iso",
+  "worker": "stage1",
+  "summary": "Kept the full unbounded statement. Expanded compatible-pair lifting using the existing Mathlib leaf lem-sp-abelian-refinements; derived epimorphy of cycles and terms, then constructed the homology inverse via the existing exact-epi-cokernel leaf. No new nodes, no boundedness or projectivity used. Read all cited statements and tested zero and degree-zero cases.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Extracted supporting argument: returned Steps 1--2, compatible-pair epimorphisms and homology verification.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-dff78b692",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-dff78b692 (reviewer sub-agent of L); spot-checked: Read the item in full, all 6 steps and every cited statement. There are no new nodes; the statement and stmt_deps are unchanged, and no repair note exists, so this is an ordinary split. Source: Stacks derived.tex 05T7 lemma-subcategory-left-resolution (1) chooses P^{n-1} -> K^{n-1} x_{Ker d_K^n} Ker d^n and leaves the IH_{n-1} check to the reader. The item's T^n and e^n are exactly that pullback, and the item writes out the omitted check without needing a bound (proof_origin agent; 0646 cited correctly as the place that refers to it). Steps: (1) lem-sp-abelian-refinements(a), a Mathlib leaf, gives lifts after epic refinement; (2) the pair (y,0) shows z^n is epic, using cancellation of the mono cycle inclusion; (3) lifting d-bar y along the epic z^{n+1} and then the pair (yp,x) shows a^n is epic, the composite refinement being epic; (4) q_K is a cokernel of d-bar^{n-1} (elementary); (5) ker k of z^n with the pair (0,k) in T^{n-1} gives q_P k=0, and lem-weil-pbc-abelian-exact-epi-cokernel(a) (exactness at Z^nP, z^n epic) makes z^n a cokernel of k, giving g; (6) a^{n-1} epic gives h, and two-sided inverse checks by cancelling the epis q_P, z^n, q_X. Checked every hypothesis. The cited nodes are Mathlib leaves or a definition, so there is no route issue and tool_uses=[] is correct; proof_deps equal the union of uses. Small cases: X=0 forces P acyclic; P=0 forces X=0; the identity map; complexes in degree 0. The statement is consistent with its citer lem-trf-bounded-above-acyclic-derived-computation step 1. Duplicate search: the same argument is inline in steps of lem-sfb-subcategory-left-resolution, lem-pc-kflat-bounded-flat-replacement and lem-kun-bounded-flat-replacement, and lem-pc-functorial-cycle-pullback-lifting-stage3 states only the Step-1 lifting; no node states this criterion. No SGA. Missing lean_audit/import_flags is the base state shared with sibling O4 nodes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CompatiblePairQuasiIso",
+  "declaration": "HomologicalComplex.quasiIso_of_epi_compatiblePairMap",
+  "declarations": [
+   "HomologicalComplex.compatiblePair_condition",
+   "HomologicalComplex.compatiblePairMap",
+   "HomologicalComplex.quasiIso_of_epi_compatiblePairMap"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/CompatiblePairQuasiIso.lean",
+  "statement": "theorem quasiIso_of_epi_compatiblePairMap {C : Type u} [Category.{v} C] [Abelian C] {P X : CochainComplex C ℤ} (a : P ⟶ X) (h : ∀ n : ℤ, Epi (compatiblePairMap a n)) : (∀ n : ℤ, Epi (a.f n) ∧ Epi (cyclesMap a n) ∧ IsIso (homologyMap a n)) ∧ QuasiIso a",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43b587647",
+  "group": "O4",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: arbitrary Abelian C with free universes u v, CochainComplex C ℤ, T^n = pullback (X.toCycles n (n+1)) (cyclesMap a (n+1)), e^n = compatiblePairMap (canonical pullback.lift of a.f n and P.toCycles; the sorried compatiblePair_condition is true via a.comm after composing with the mono iCycles). The only hypothesis is ∀ n, Epi e^n; the conclusion is ∀ n, Epi a.f n ∧ Epi cyclesMap ∧ IsIso homologyMap, plus QuasiIso a. No boundedness or projectivity. All six proof steps re-checked. lean.statement matches the file verbatim; stmt_deps are the two Mathlib-leaf definitions; the helpers are the item's own construction and are listed in declarations. Source and blueprint docstrings present, the proof docstring has all six steps, no hollow definitions. The live node has no lean record (not a rebind) and the snapshot differs from live only in lean. No name clash in Mathlib or the project trees. Nothing compiled because nothing was changed; the worker reports a clean compile."
+ }
+}

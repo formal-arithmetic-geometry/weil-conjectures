@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-space-fppf-invertible-locality",
+ "kind": "statement",
+ "title": "Invertibility of quasi-coherent modules is fppf local on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $\\{q_i:X_i\\to X\\}_{i\\in I}$ be a small fppf covering of algebraic spaces [lem-sfb-space-fppf-covering-calculus]: the maps are flat and locally of finite presentation on etale scheme charts and jointly surjective. Let $M$ be a quasi-coherent module on the small etale structure sheaf of $X$ [def-trf-space-quasi-coherent-module], with tensor pullbacks [def-trf-space-etale-module-functors]. If every $q_i^*M$ is a line module, then $M$ is a line module. Here a line module is etale locally isomorphic to the structure sheaf [def-trf-algebraic-space], and on schemes corresponds to an ordinary invertible module [def-sc-invertible-module]. No Noetherianity, separatedness, quasi-compactness or finite-generation hypothesis on $X$ or $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 060X, lemma-finite-locally-free-descends, rank-one case; spaces-topologies.tex Tag 0DFQ, lemma-zariski-etale-smooth-syntomic-fppf-fpqc, for fppf covers. Rank is detected after a faithfully flat residue-field extension on scheme charts."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-fppf-covering-calculus",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $u:U\\to X$ and, for each $i$, a representable surjective etale scheme atlas $e_i:A_i\\to X_i$. Put $B_i=U\\times_X A_i$, with projections $p_i:B_i\\to U$ and $d_i:B_i\\to A_i$. These fibre products are schemes because both factors are schemes mapping to the algebraic space $X$. The family $\\{q_i e_i:A_i\\to X\\}$ is fppf, by the etale-to-fppf comparison and composition, and its base change $\\{p_i:B_i\\to U\\}$ is an fppf covering of schemes. It is therefore an fpqc covering of $U$. All families are small; no quasi-compact atlas or finite subcover of $X$ is chosen.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 060X (lemma-finite-locally-free-descends), etale localization; spaces-topologies.tex Tags 03Y9 and 0DFQ; topologies.tex Tag 022C."
+   }
+  },
+  {
+   "text": "Let $N=u^*M$. This is quasi-coherent by preservation of quasi-coherence under tensor pullback. Set $r_i=e_i d_i:B_i\\to X_i$. Since $d_i$ is the base change of the etale map $u$, it is etale, and composition makes $r_i$ etale. The commutative fibre-product square and the canonical tensor-composition isomorphisms give $p_i^*N\\simeq r_i^*q_i^*M$. Explicitly the composition comparison sends $a\\otimes(b\\otimes m)$ to $a f^\\sharp(b)\\otimes m$ on either composite. Etale pullback is restriction to the localized site. Consequently $r_i^*q_i^*M$ is a line module: restrict the etale local trivializations of the given line module $q_i^*M$ and their structure-sheaf identifications. Thus every $p_i^*N$ is a line module.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-sfb-space-module-tensor-composition",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 060X, reduction to schemes; spaces-properties.tex Tag 03GA (lemma-pullback-quasi-coherent); sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules)."
+   }
+  },
+  {
+   "text": "Apply the scheme Zariski/small-etale equivalence to $N$, obtaining a quasi-coherent ordinary module $F$ on $U$ with $F_{\\mathrm{et}}\\simeq N$. Its pullback comparison for every scheme morphism gives $(p_i^*F)_{\\mathrm{et}}\\simeq p_i^*N$. The equivalence identifies ordinary invertible modules with small-etale line modules, so each ordinary $p_i^*F$ is invertible, hence finite locally free of rank one. Apply clause (2) of scheme fpqc descent to the covering $\\{p_i\\}$ from Step 1, with the specified rank $r=1$. It reflects finite local freeness of that rank, so $F$ is finite locally free of rank one, equivalently invertible. This reflection requires only that $F$ be quasi-coherent; finite generation or presentation is a conclusion, not an extra hypothesis.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-fpqc-descent",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DX (proposition-equivalence-quasi-coherent), 03LC (proposition-equivalence-quasi-coherent-functorial), 05VG (lemma-equivalence-quasi-coherent-properties); lemma-finite-locally-free-descends and fixed-rank fibre calculation."
+   }
+  },
+  {
+   "text": "The same scheme equivalence makes $N\\simeq F_{\\mathrm{et}}$ a line module. Choose an etale covering $\\{V_a\\to U\\}$ trivializing $N$. The composites $V_a\\to U\\to X$ form an etale covering, and restriction there identifies $M$ with the structure sheaf. This is exactly the definition of a line module on $X$. If $X$ is empty, the empty covering already gives this condition; empty members of a nonempty covering cause no restriction. Thus the argument includes empty index sets when allowed and imposes none of the excluded global finiteness or separation hypotheses.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 060X, conclusion by etale localization; spaces.tex Tag 025Y and the definition of a line module on the small etale site."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-sfb-space-module-tensor-composition",
+  "def-trf-algebraic-space",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 060X (lemma-finite-locally-free-descends), rank-one specialization by etale localization to scheme descent; fixed-rank clause of lem-pc-fpqc-descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]nvertible.*(descend|faithfully)|[Ll]ocally[Ff]ree.*(descend|faithfully)|[Rr]ank.*[Oo]ne.*descent",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local freeness on one site and scheme/ring flat descent do not detect etale-local rank one along fppf algebraic-space maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Being a line bundle on an algebraic space is local for faithfully flat covers: rank one finite local freeness descends",
+   "results": "8 hits; top: Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat.toFlat, RingHom.Flat.propertyIsLocal, Module.Flat.of_isLocalizedModule, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage, Module.FaithfullyFlat.of_flat_of_isLocalHom, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local freeness on one site and scheme/ring flat descent do not detect etale-local rank one along fppf algebraic-space maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsLocallyFree\"",
+   "results": "11 hits; top: SheafOfModules.IsLocallyFree, SheafOfModules.LocalGeneratorsData.IsLocallyFreeData, SheafOfModules.LocalGeneratorsData.isLocallyFree, SheafOfModules.IsLocallyFree.exists_isLocallyFreeData, SheafOfModules.IsLocallyFree.mk, SheafOfModules.LocalGeneratorsData.IsLocallyFreeData.shrink, SheafOfModules.instIsQuasicoherentOfIsLocallyFree, SheafOfModules.instIsLocallyFreeFree",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local freeness on one site and scheme/ring flat descent do not detect etale-local rank one along fppf algebraic-space maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module on an algebraic space is invertible if its pullbacks along an fpqc covering are locally free of rank one",
+   "results": "8 hits; top: SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.localGeneratorsData, SheafOfModules.QuasicoherentData.localGeneratorsData_I, SheafOfModules.QuasicoherentData.localGeneratorsData_generators, SheafOfModules.QuasicoherentData.localGeneratorsData_X, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local freeness on one site and scheme/ring flat descent do not detect etale-local rank one along fppf algebraic-space maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free sheaves of constant rank one are detected after faithfully flat base change of algebraic spaces",
+   "results": "8 hits; top: AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local freeness on one site and scheme/ring flat descent do not detect etale-local rank one along fppf algebraic-space maps"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsLocallyFree|def IsLocallyFree|instIsQuasicoherentOfIsLocallyFree",
+   "results": "2 hits; top: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local freeness on one site and scheme/ring flat descent do not detect etale-local rank one along fppf algebraic-space maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module on an algebraic space is invertible if its pullbacks along an fppf covering are line bundles",
+   "results": "8 hits; SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.localGeneratorsData, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.localGeneratorsData_generators, SheafOfModules.QuasicoherentData.localGeneratorsData_X",
+   "date": "2026-10-24",
+   "verdict": "no match: these declarations supply generic sheaf quasi-coherence, local freeness, or scheme etaleness, not fppf detection of line modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent sheaf whose pullbacks to an fppf cover are invertible is invertible on an algebraic space",
+   "results": "8 hits; SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.mk, SheafOfModules.QuasicoherentData.ctorIdx",
+   "date": "2026-10-24",
+   "verdict": "no match: these declarations supply generic sheaf quasi-coherence, local freeness, or scheme etaleness, not fppf detection of line modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free modules of rank one on the small etale site of an algebraic space descend along faithfully flat locally finitely presented covers",
+   "results": "8 hits; Algebra.Etale.finitePresentation, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-24",
+   "verdict": "no match: these declarations supply generic sheaf quasi-coherence, local freeness, or scheme etaleness, not fppf detection of line modules on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rigidified-space-picard",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Invertibility of the quasi-coherent module descended by the existing fppf descent equivalence, for normalized representatives and the universal module.",
+   "via": [
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-fppf-invertible-locality",
+  "worker": "stage1",
+  "summary": "Read 060X and its scheme reduction, 03GA, 03LC and 05VG. Retained the statement. Refined source atlases over a scheme atlas of X, compared the tensor pullbacks with ordinary scheme pullbacks, and applied the existing rank-specific scheme fpqc reflection. Every non-elementary input is already a DAG node; no new node or Mathlib leaf is needed. Checked empty spaces and arbitrary non-quasi-compact covers.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs.py ancestor agrees). This auxiliary input serves the recorded chain from det-thm-sf-ctf-stability-direct-images, proof (3), via rigidified-space-picard: invertibility of a descended quasi-coherent module. Steps 1-4 supply that locality argument without replacing the enclosing unit route. Whole-blueprint searches for invertible and fpqc found only the scheme descent and etale-gluing statements used as inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic scheme fpqc reflection of finite local freeness of specified rank, used after chart reduction; not an alternative proof of the enclosing constructibility unit."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme-site comparison, including arbitrary scheme pullbacks and the rank-one subcategory, needed for chart reduction."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme representability and etale composition/base-change calculus for the refinement."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic comparison of scheme covering topologies to apply scheme fpqc descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-fppf-covering-is-fpqc"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-e1e8baf6b",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-e1e8baf6b (reviewer sub-agent of L); spot-checked: Read in full the item and every cited statement; there are 0 new nodes. Statement and stmt_deps are unchanged against live; the item is still unsplit in live and side-live; no repair note; no SGA reference; no cycle. Source Stacks 060X (spaces-descent lemma-finite-locally-free-descends) proves it 'by étale localization' from the scheme case, and the delivered proof follows exactly that route. Step 1: B_i=U×_X A_i is a scheme (representable-etale-scheme-tests); fppf-covering-calculus (1),(3),(2),(4) make {p_i:B_i→U} an fppf covering of schemes, then fpqc by lem-trf-fppf-covering-is-fpqc; no finite subcover is taken. Step 2: N=u^*M is quasi-coherent (03GA node); d_i and r_i are étale; two γ isomorphisms give p_i^*N≅r_i^*q_i^*M; étale pullback is restriction, so r_i^*q_i^*M is a line module. Step 3: the Zariski/étale equivalence holds for every scheme morphism, so it applies to the non-étale p_i, and p_i^*F is invertible; lem-pc-fpqc-descent (2) reflects finite local freeness of a given rank, so r=1 makes F invertible. Step 4: elementary; the cover V_a→U→X is étale and M restricted there is N restricted there ≅ O. Edge cases hold: empty X, non-quasi-compact or non-Noetherian X. No duplicate found (060X grep hits: algebraic-space-invertible-descent is étale gluing, fpqc-cartier-ideal-reflection is about ideals on schemes). Batch-5: the 5 flagged citations are general definitions or foundations (composition iso, 03GA, 022C, 03DX/05VG, 03EC); their closures contain no trace-formula or Poincaré theorem and no nt-assume node. The 4 split_report tool_uses are accepted as generic."
+ }
+}

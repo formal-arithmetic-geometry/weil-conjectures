@@ -12,21 +12,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
-import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.IntegralProperBaseChange
-import Sheaf.Paper.LocalizingAdmissibleCoefficients
-import Sheaf.Paper.UnboundedBaseChangeExtension
-import Sheaf.Paper.UnboundedLocalizingPullback
-import Sheaf.SixFunctors.ProperImageLocalizingProper
-import Sheaf.Paper.IntegralModels
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import all Sheaf.Paper.UnboundedBaseChangeExtension
+import all Sheaf.Paper.UnboundedLocalizingPullback
+import all Sheaf.SixFunctors.ProperImageLocalizingProper
+import Sheaf.Paper.LocalizingClosureExistence
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.ProperBaseChangeAdmissibleGenerators
 
 /-!
 # Integral proper base change on localizing categories
@@ -46,6 +37,10 @@ amplitude or completeness on the ambient closure.
 
 set_option autoImplicit false
 
+attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
+  CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.Functor.mapDerivedCategory
+  AlgebraicGeometry.ProEtale.CondensedRing.condensedAmbientExchange
+
 universe u
 
 open CategoryTheory CategoryTheory.Limits
@@ -55,6 +50,78 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+open MonoidalCategory MonObj in
+/-- Postcomposition with a topological ring equivalence identifies the continuous-function
+condensed ring objects. Source: the coefficient conventions of the integral localizing
+base-change statement (blueprint: det-thm-sf-pf-adic-base-change). -/
+private noncomputable def coefficientMonIso
+    {A B : Type} [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+    [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
+    (e : A ≃+* B) (he : Continuous e) (hei : Continuous e.symm) :
+    Mon.mk (Profinite.continuousMapRingObj.{u} A) ≅
+      Mon.mk (Profinite.continuousMapRingObj.{u} B) := by
+  let h := Profinite.continuousMapRingSheafMap e.toRingHom he
+  let k := Profinite.continuousMapRingSheafMap e.symm.toRingHom hei
+  let q : Profinite.continuousMapRingSheaf.{u} A ≅
+      Profinite.continuousMapRingSheaf.{u} B :=
+    { hom := h
+      inv := k
+      hom_inv_id := by
+        ext S x
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro t
+        exact e.symm_apply_apply (x.down t)
+      inv_hom_id := by
+        ext S x
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro t
+        exact e.apply_symm_apply (x.down t) }
+  let F := sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat Ab)
+  have _ : IsMonHom (F.mapIso q).hom :=
+    inferInstanceAs (IsMonHom ((sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat Ab)).map h))
+  exact Mon.mkIso' (F.mapIso q)
+
+
+/-- The embedded finite extension and its field range have isometric integer rings.
+Source: the coefficient conventions of the integral localizing base-change statement
+(blueprint: det-thm-sf-pf-adic-base-change). -/
+private theorem integral_coefficient_iso (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    ∃ F : PadicAlgCl.FiniteIntermediateField ℓ,
+      Nonempty (Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ E) ≅
+        Mon.mk (Profinite.padicIntegersRingObj ℓ F)) := by
+  let f := IsScalarTower.toAlgHom ℚ_[ℓ] E (PadicAlgCl ℓ)
+  let F : PadicAlgCl.FiniteIntermediateField ℓ :=
+    ⟨f.fieldRange, f.equivFieldRange.toLinearEquiv.finiteDimensional⟩
+  let e : E ≃ₐ[ℚ_[ℓ]] F := f.equivFieldRange
+  let t : PadicAlgCl.integers ℓ E ≃+* PadicAlgCl.integers ℓ F :=
+    { toFun := fun x ↦ ⟨e x.val, x.property⟩
+      invFun := fun x ↦ ⟨e.symm x.val, by
+        have h := (PadicAlgCl.mem_integers_iff ℓ F x.val).mp x.property
+        change ‖algebraMap E (PadicAlgCl ℓ) (e.symm x.val)‖₊ ≤ 1
+        change ‖(e (e.symm x.val)).val‖₊ ≤ 1
+        simpa only [e.apply_symm_apply, IntermediateField.algebraMap_apply] using h⟩
+      left_inv := fun x ↦ Subtype.ext (e.symm_apply_apply x.val)
+      right_inv := fun x ↦ Subtype.ext (e.apply_symm_apply x.val)
+      map_add' := fun x y ↦ Subtype.ext (e.map_add x.val y.val)
+      map_mul' := fun x y ↦ Subtype.ext (e.map_mul x.val y.val) }
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ F
+  have ht : Isometry t := by
+    apply Isometry.of_dist_eq
+    intro x y
+    rfl
+  have hti : Continuous t.symm :=
+    (show _ ≃ᵢ _ from ⟨t.toEquiv, ht⟩).symm.continuous
+  exact ⟨F, ⟨coefficientMonIso t ht.continuous hti⟩⟩
+
+
+set_option maxHeartbeats 400000 in
+-- Elaborating the inherited derived functors and full-subcategory structures needs this budget.
 /-- Integral proper base change on the localizing closure of bounded constructibles.
 Source: blueprint main-20261015, sk-thm-sf-pf-adic-base-change
 (blueprint: det-thm-sf-pf-adic-base-change).
@@ -117,6 +184,58 @@ theorem integralLocalizing_properBaseChange
         (((upperStar (Profinite.padicIntegersRingObj ℓ E) g').leftDerivedFunctor ⋙
           (lowerStar (Profinite.padicIntegersRingObj ℓ E) p').rightDerivedFunctor).obj K) ∧
       IsIso ((condensedAmbientExchange (Profinite.padicIntegersRingObj ℓ E) sq).app K) := by
-  sorry
+  classical
+  obtain ⟨F, ⟨e⟩⟩ := integral_coefficient_iso.{u} ℓ E
+  let Λ := Profinite.padicIntegersRingObj.{u} ℓ E
+  have hcoeff :
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+      (∃ F : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ F)) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj F))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) :=
+    Or.inr (Or.inr (Or.inl ⟨F, Or.inl ⟨e⟩⟩))
+  have hadm : IsLocalizingAdmissibleCoefficient ℓ Λ :=
+    Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨F, ⟨e⟩⟩))))
+  have hclosure (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] :
+      localizingClosureProEtale Λ T =
+        localizingClosure (constantModelBoundedConstructible Λ T) :=
+    (localizingClosure_ctf_equals_bc ℓ T Λ hcoeff).1.2.2.2.1
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have : CompactSpace X' := QuasiCompact.compactSpace_of_compactSpace (X' ↘ Spec (.of k))
+  have : CompactSpace Y' := QuasiCompact.compactSpace_of_compactSpace (Y' ↘ Spec (.of k))
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated (X ↘ Spec (.of k))
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of k))
+  have : QuasiSeparatedSpace X' := quasiSeparatedSpace_of_quasiSeparated (X' ↘ Spec (.of k))
+  have : QuasiSeparatedSpace Y' :=
+    quasiSeparatedSpace_of_quasiSeparated (Y' ↘ Spec (.of k))
+  have hp'proper : IsProper p' := by
+    rw [← sq.hom_snd]
+    infer_instance
+  have hp : ProperLocalizingHypotheses Λ p :=
+    properHypotheses_coefficientIso e p (properHypotheses_integral ℓ k p F)
+  have hp' : ProperLocalizingHypotheses Λ p' :=
+    properHypotheses_coefficientIso e p' (properHypotheses_integral ℓ k p' F)
+  obtain ⟨hg⟩ := pullback_of_constructible Λ g (pullback_constructible Λ g)
+  obtain ⟨hg'⟩ := pullback_of_constructible Λ g' (pullback_constructible Λ g')
+  have hK' : localizingClosureProEtale Λ X K := (congrFun (hclosure X) K).mpr hK
+  have push := localizingClosure_map _ _ (lowerStar Λ p).rightDerivedFunctor
+    (fun M hM ↦ hp.1 ⟨M, hM⟩) hp.2 K hK'
+  have pull := hg'.localizing ⟨K, hK'⟩
+  refine ⟨(congrFun (hclosure Y') _).mp (hg.localizing ⟨_, push⟩),
+    (congrFun (hclosure Y') _).mp ?_, ?_⟩
+  · exact localizingClosure_map _ _ (lowerStar Λ p').rightDerivedFunctor
+      (fun M hM ↦ hp'.1 ⟨M, hM⟩) hp'.2 _ pull
+  · let := condensedAmbientExchange_isoLocus_triangulated
+      (Profinite.padicIntegersRingObj ℓ E) sq
+    apply extend_iso _ _ _ _
+      (condensedAmbientExchange (Profinite.padicIntegersRingObj ℓ E) sq)
+      (composite_sums (Profinite.padicIntegersRingObj ℓ E) hp hp' hg hg')
+      (fun M hM ↦ properBaseChange_admissible_generators ℓ
+        (Profinite.padicIntegersRingObj ℓ E) hadm k p g sq M hM) K hK'
+    exact (localizingClosure_exists (Profinite.padicIntegersRingObj ℓ E) X
+      (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X ⊓
+        fun M ↦ DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
 
 end AlgebraicGeometry.ProEtale.CondensedRing

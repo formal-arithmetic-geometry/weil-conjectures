@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Put $\\Lambda=\\mathbf Z/n\\mathbf Z$. The finite-type hypotheses imply that $T$ and $Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian (its only ideals are $0$ and the whole ring). Every open subscheme of either source is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Consequently every morphism with either source is quasi-compact: the inverse image of an affine open is such an open subscheme. Apply this both to $g,h$ and to their diagonals (whose sources are again $T,Y$). By the definition of quasi-separatedness this proves that $g$ and $h$ are qcqs, without a separatedness hypothesis. They are $K$-morphisms between finite-type $K$-schemes, so [lem-kun-0f10](1) gives finite relative cohomological dimension for both. Thus [lem-kun-0f11](1) proves that $Rg_*$ and $Rh_*$ preserve set-indexed direct sums on the unbounded $\\Lambda$-module derived categories.",
+   "text": "Put $\\Lambda=\\mathbf Z/n\\mathbf Z$. A field is Noetherian (its ideals are $0,K$), so finite type makes $T,Y$ Noetherian [lem-weil-pbc-finite-type-over-noetherian]. Every open in either is quasi-compact [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The preimage of an affine open under $g,h$, or either diagonal, is such an open. Thus $g,h$ are qcqs by [def-weil-pbc-scheme-conventions]. They are $K$-morphisms between finite-type $K$-schemes, so [lem-kun-0f10](1) gives finite relative cohomological dimension. Now [lem-kun-0f11](1) shows that $Rg_*,Rh_*$ preserve direct sums.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
@@ -37,101 +37,49 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof; with the current blueprint correction placing the flat replacement on E"
    }
   },
   {
-   "text": "For every edge $u$ of the diagram, [prop-weil-pbc-inverse-image-modules-exact] gives an exact additive inverse image on constant-coefficient module sheaves and its adjunction to direct image. On the unbounded derived categories the adjunction $u^{-1}\\dashv Ru_*$ is the one in [def-kun-unbounded-exchange]. Hence $u^{-1}$ preserves direct sums by [lem-weil-pbc-left-adjoint-preserves-colimits], applied to a small discrete indexing category. It is triangulated by [lem-sf-exact-functor-derived-triangulated]; the unbounded K-injective right derived functors $Rg_*,Rh_*$ are triangulated by [lem-pc-right-derived-functor-triangulated]. Derived tensor is triangulated and preserves sums separately by [lem-kun-derived-tensor-triangulated] and [lem-kun-derived-tensor-direct-sums]. Therefore each side of the displayed map is an exact, direct-sum-preserving functor in either $E$ or $F$, with the other fixed. Here sums exist in these derived module categories; [lem-kun-complex-colimit-hocolim] explicitly supplies the coproducts used for the sequential telescopes below.",
+   "text": "Let $\\alpha:A\\to B$ be the actual counit-mate transformation in [lem-kun-tensor-base-change-exact-transformation]. Its statement supplies exactness and shift compatibility in both variables. Each inverse image is a left adjoint on the unbounded derived categories [def-kun-unbounded-exchange], hence preserves countable coproducts [lem-weil-pbc-left-adjoint-preserves-colimits], using a small discrete index category. Combining this with Step 1 and [lem-kun-derived-tensor-direct-sums] proves that $A,B$ preserve countable coproducts separately. These coproducts exist by [lem-kun-complex-colimit-hocolim].",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-kun-tensor-base-change-exact-transformation",
     "def-kun-unbounded-exchange",
     "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-kun-derived-tensor-triangulated",
     "lem-kun-derived-tensor-direct-sums",
     "lem-kun-complex-colimit-hocolim"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof; with the current blueprint correction placing the flat replacement on E"
    }
   },
   {
-   "text": "Denote the two sides by $A(E,F)$ and $B(E,F)$. Specify the canonical transformation $\\alpha_{E,F}:A(E,F)\\to B(E,F)$ as the $h^{-1}\\dashv Rh_*$ adjoint of\n$$h^{-1}A(E,F)\\xrightarrow{\\sim}h^{-1}p^{-1}E\\otimes^L_\\Lambda e^{-1}g^{-1}Rg_*F\\xrightarrow{1\\otimes e^{-1}\\varepsilon_{g,F}}h^{-1}p^{-1}E\\otimes^L_\\Lambda e^{-1}F.$$\nThe first arrow uses the inverse of [lem-kun-inverse-image-monoidal] and the inverse-image composition isomorphism for $f'h=ge$ from [def-kun-unbounded-exchange]. All these maps are natural, so taking the adjoint gives a natural transformation separately in $E$ and $F$. It is compatible with the shift structures of Step 2, as the following direct check shows. Inverse-image composition is degreewise and has no signs; on a total tensor complex the comparison $(P[1])\\otimes Q\\to(P\\otimes Q)[1]$ is the identity on each summand, and $P\\otimes(Q[1])\\to(P\\otimes Q)[1]$ multiplies the summand with first-factor degree $i$ by $(-1)^i$. Every map above preserves the degrees of the two tensor factors, so it commutes with these comparisons. A counit is computed on a K-injective representative by the degreewise sheaf counit; using the shifted representative $I[1]$ computes the shifted right derived functor. Thus its square with the shift comparison commutes degree by degree. The same assertion for the unit follows by taking its adjoint, which is the identity; equivalently both composites have the same adjoint under the shifted Hom bijection. The unit--counit formula for the adjoint defining $\\alpha$ now gives the shift equation for $\\alpha$ in either variable. This checks the last triangle square needed below; mere naturality alone would not check it.",
+   "text": "Apply [lem-kun-bounded-flat-bifunctor-detection] with $U=X$, $V=T$, target $D(X'_{\\Et},\\Lambda)$, and $A,B,\\alpha$ from Step 2. It suffices to check the canonical map for $E=QP^\\bullet$, $F=QR^\\bullet$, with $P^\\bullet$ bounded and flat termwise and $R^\\bullet$ bounded.",
    "uses": [
-    "lem-kun-inverse-image-monoidal",
-    "def-kun-unbounded-exchange",
-    "def-kun-derived-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
-   }
-  },
-  {
-   "text": "Here is the telescope argument, applicable to either variable with the other fixed. Let $C_0\\to C_1\\to\\cdots$ have telescope triangle $D\\xrightarrow{1-s}D\\to H\\to D[1]$, where $D=\\bigoplus_N C_N$ and $s\\iota_N=\\iota_{N+1}u_N$ [def-kun-truncations]. Step 2 and [lem-kun-functor-preserves-hocolim] show that both functors take this to a distinguished telescope triangle. If all $\\alpha_{C_N}$ are invertible, naturality at every $\\iota_N$ identifies $\\alpha_D$, under the coproduct comparisons, with $\\bigoplus_N\\alpha_{C_N}$; its inverse is the map induced by the individual inverses. Naturality at $1-s$ and the next arrow, together with the shift equation checked in Step 3, makes $(\\alpha_D,\\alpha_D,\\alpha_H)$ a morphism of these image triangles. Apply [lem-sf-triangle-two-out-of-three] to this original telescope triangle to conclude that $\\alpha_H$ is invertible. In particular this proves invertibility of the actual component at $H$, without choosing a natural or unique cone comparison.",
-   "uses": [
-    "def-kun-truncations",
-    "lem-kun-functor-preserves-hocolim",
-    "lem-sf-triangle-two-out-of-three"
+    "lem-kun-bounded-flat-bifunctor-detection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof; with the current blueprint correction placing the flat replacement on E"
    }
   },
   {
-   "text": "By [lem-kun-hocolim-truncations], $E\\cong\\operatorname{hocolim}_{N\\ge0}\\tau_{\\le N}E$ and $F\\cong\\operatorname{hocolim}_{M\\ge0}\\tau_{\\le M}F$. The good truncations of [def-kun-truncations] are bounded above. It suffices to prove the assertion for every pair of bounded-above objects: for each $N$, Step 4 applied to the sequence $\\tau_{\\le M}F$ gives the assertion for $(\\tau_{\\le N}E,F)$, and then Step 4 applied to the $E$ sequence gives it for $(E,F)$. For isomorphisms $u:E_0\\xrightarrow{\\sim}E$ and $v:F_0\\xrightarrow{\\sim}F$, naturality gives $\\alpha_{E,F}=B(u,v)\\,\\alpha_{E_0,F_0}\\,A(u,v)^{-1}$. Both outer factors are isomorphisms, so invertibility for the homotopy-colimit objects implies invertibility for the original objects. No common cohomological bound on $E$ and $F$ is used.",
-   "uses": [
-    "lem-kun-hocolim-truncations",
-    "def-kun-truncations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
-   }
-  },
-  {
-   "text": "Now take $E,F$ bounded above. The representative characterization in [def-sbc-standard-tstructure-derived-category] supplies complexes $C^\\bullet,D^\\bullet$ representing them, zero above integers $b,c$, respectively. Apply [lem-kun-bounded-flat-replacement] to $C^\\bullet$, obtaining a quasi-isomorphism $P^\\bullet\\to C^\\bullet$ with $P^i$ flat and $P^i=0$ for $i>b$. Thus $E\\cong QP^\\bullet$ and $F\\cong QD^\\bullet$. It is $E$ that receives the flat replacement, because the Tor-amplitude hypothesis of the bounded lemma is on $E$; no flatness is imposed on $F$.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-kun-bounded-flat-replacement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
-   }
-  },
-  {
-   "text": "Set $P_N^\\bullet=\\sigma_{\\ge-N}P^\\bullet$ and $D_M^\\bullet=\\sigma_{\\ge-M}D^\\bullet$ for $N,M\\ge0$, with the subcomplex inclusions specified by [def-kun-truncations]. In each fixed degree $i$, these sequences eventually equal $P^i$ and $D^i$ with identity transition maps; their termwise colimits are therefore $P^\\bullet,D^\\bullet$, including their differentials. By [lem-kun-complex-colimit-hocolim] this gives $QP^\\bullet\\cong\\operatorname{hocolim}_N QP_N^\\bullet$ and $QD^\\bullet\\cong\\operatorname{hocolim}_M QD_M^\\bullet$. Each $P_N^\\bullet$ is bounded with flat terms and each $D_M^\\bullet$ is bounded. Step 4, first with $N$ fixed and $M$ varying and then with $N$ varying, reduces the assertion to these pairs of bounded complexes. The construction works even when one truncation is zero.",
-   "uses": [
-    "def-kun-truncations",
-    "lem-kun-complex-colimit-hocolim"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
-   }
-  },
-  {
-   "text": "For each such pair, $QP_N^\\bullet$ has Tor amplitude in $[-N,\\max(b,-N)]$ by [lem-kun-flat-bounded-tor-amplitude]. In particular it has Tor amplitude in $[-N,\\infty)$ by the vanishing definition in [def-kun-tor-amplitude]. Both bounded complexes define objects of $D^+$ by [def-weil-pbc-derived-categories]. Step 1 verified the qcqs hypothesis on $g$, and the original hypotheses give the two cartesian squares and the invertibility of $n$ in $K$. We may therefore apply [lem-kun-0f1j] to $QP_N^\\bullet,QD_M^\\bullet$. Its canonical map is exactly the mate in Step 3 (the counit and the square and tensor comparisons agree), so that component is invertible. Steps 7, 6 and 5, using Step 4 at each reduction, prove invertibility of the canonical map for every original $E,F$.",
+   "text": "Choose $a\\le b$ supporting $P^\\bullet$ (any such interval for the zero complex). By [lem-kun-flat-bounded-tor-amplitude] it has Tor amplitude in $[a,b]$, hence in $[a,\\infty)$ [def-kun-tor-amplitude]. Both representatives lie in $D^+$ [def-weil-pbc-derived-categories]. Step 1 gives qcqs for $g$; the given squares are cartesian and $n$ is invertible. Thus [lem-kun-0f1j] applies to $QP^\\bullet,QR^\\bullet$. Its canonical map is exactly the component of $\\alpha$ from Step 2: on $D^+$ its counit is the derived counit $\\varepsilon_g$ of [def-kun-unbounded-exchange], and the square and tensor comparisons agree. So that component is invertible. This is also [lem-kun-tensor-base-change-bounded-below] at the finite ring $\\mathbf Z/n$ of exponent $n$, whose $Lu^*$ is the exact inverse image of [def-kun-unbounded-exchange]. Step 3 therefore proves the assertion for all $E,F$.",
    "uses": [
     "lem-kun-flat-bounded-tor-amplitude",
     "def-kun-tor-amplitude",
     "def-weil-pbc-derived-categories",
-    "lem-kun-0f1j"
+    "lem-kun-0f1j",
+    "lem-kun-tensor-base-change-bounded-below",
+    "def-kun-unbounded-exchange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof; with the current blueprint correction placing the flat replacement on E"
    }
   }
  ],
@@ -141,26 +89,17 @@
   "def-weil-pbc-scheme-conventions",
   "lem-kun-0f10",
   "lem-kun-0f11",
-  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-tensor-base-change-exact-transformation",
   "def-kun-unbounded-exchange",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-kun-derived-tensor-triangulated",
   "lem-kun-derived-tensor-direct-sums",
   "lem-kun-complex-colimit-hocolim",
-  "lem-kun-inverse-image-monoidal",
-  "def-kun-derived-tensor",
-  "def-kun-truncations",
-  "lem-kun-functor-preserves-hocolim",
-  "lem-sf-triangle-two-out-of-three",
-  "lem-kun-hocolim-truncations",
-  "def-sbc-standard-tstructure-derived-category",
-  "lem-kun-bounded-flat-replacement",
+  "lem-kun-bounded-flat-bifunctor-detection",
   "lem-kun-flat-bounded-tor-amplitude",
   "def-kun-tor-amplitude",
   "def-weil-pbc-derived-categories",
-  "lem-kun-0f1j"
+  "lem-kun-0f1j",
+  "lem-kun-tensor-base-change-bounded-below"
  ],
  "proof_origin": {
   "by": "document",
@@ -223,6 +162,41 @@
    "results": "Hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
    "date": "2026-10-17",
    "verdict": "no match: declarations concern presentations and ordinary pullback of free module sheaves; none states a derived etale tensor/base-change comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStar|derivedTensor|[Kk]unneth",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"baseChange\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology unbounded derived tensor base change isomorphism",
+   "results": "Hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp, TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, LinearMap.rTensor_baseChange, IsBaseChange.tensorEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.TensorProduct.cancelBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern algebraic etaleness, ordinary tensor algebra, condensed-module projectivity, or local cohomology; none states the unbounded etale tensor base-change isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded etale cohomology tensor base change over a field for finite type schemes and Z mod n coefficients",
+   "results": "Hits: Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Extension.tensorH1Cotangent, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.instTensorProduct, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern algebraic etaleness, ordinary tensor algebra, condensed-module projectivity, or local cohomology; none states the unbounded etale tensor base-change isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula combined with base change for unbounded derived sheaves of finite torsion modules",
+   "results": "Hits: SheafOfModules.Presentation.map_π_eq, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', localCohomology.diagram, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern algebraic etaleness, ordinary tensor algebra, condensed-module projectivity, or local cohomology; none states the unbounded etale tensor base-change isomorphism"
   }
  ],
  "mathlib_match": null,
@@ -255,7 +229,32 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary",
+     "lines": [
+      432,
+      461
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "blueprint_update": {
@@ -306,20 +305,20 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-kun-0f1n",
   "worker": "stage1",
-  "summary": "Expanded the current blueprint truncation route into eight steps, verifying qcqs and finite relative cohomological dimension, inverse-image and tensor exactness and sums, the canonical mate and its shift compatibility, and invertibility on telescope triangles. Flat replacement remains on E, as the bounded lemma requires. Reused existing nodes throughout; no new nodes.",
-  "blueprint": "The current blueprint_update proof paragraph 1 is realized in Steps 1--3; paragraph 2 (good truncation telescopes) in Steps 4--5; paragraph 3 (bounded-above flat replacement of E and stupid truncations) in Steps 6--7; paragraph 4 (bounded F and application of 0F1J) in Steps 7--8. The unit statement and its cited Kunneth route are retained. The source Stacks 0F1N proof swaps the flat replacement to F; the current blueprint corrects this to E and this split follows that correction.",
+  "summary": "Re-split the reviewed expanded proof under the 2026-10-21 server requirement: extracted actual tensor-base-change exactness and shift compatibility, and generic unbounded bifunctor detection by bounded flat test pairs, into two searched statement-only nodes. The four remaining steps verify qcqs and sums, apply the generic detection theorem, and verify its bounded test pairs using the existing bounded-below result. Preserved the statement, current blueprint route and flat replacement on E.",
+  "blueprint": "Current blueprint paragraph 1: Steps 1-2 and lem-kun-tensor-base-change-exact-transformation (old expanded Steps 2-3). Paragraphs 2-4: lem-kun-bounded-flat-bifunctor-detection (old expanded Steps 4-7) applied in Step 3, followed by the bounded Tor-amplitude application of 0F1J in Step 4. No route change.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q87-29cd42026",
-  "group": "Q87",
+  "reviewer": "NT-cc-Q38-f65a79b2a",
+  "group": "Q38",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-29cd42026 (reviewer sub-agent of L); spot-checked: Read the whole item: its statement, all 8 steps, the blueprint_update proof, the unit record sk-prop-sf-kunneth-ordinary and the statements of all 25 cited nodes. Also read Stacks etale-cohomology.tex 0F1N (lemma-punctual-base-change-upgrade-unbounded, l.20879) and 0F1J (lemma-punctual-base-change-upgrade, l.20706). The statement matches 0F1N and the main-20261015 blueprint_update hypothesis by hypothesis: Z/n constant-coefficient module categories, unbounded E and F, and the arrow defined as the h-adjoint of the counit composite. It is not weakened. The source error is real. 0F1J needs a lower Tor bound on E, but the Stacks proof flat-resolves F instead. I checked the counterexample: over Z/4, Tor_i(Z/2,Z/2)=Z/2 for every i. The split follows the corrected blueprint and puts the flat replacement on E. Step by step: Step 1 gets qcqs for g and h (and their diagonals) from Noetherian sources with no separatedness, then applies 0F10(1) to K-morphisms and 0F11(1) for sums. Step 2 gets exactness and sums from the cited statements (module inverse-image exactness clause 3, the unbounded adjunction, the tensor lemmas, the complex-colimit coproducts). Step 3 is an explicit shift-sign check, which I accept as elementary. Step 4 applies two-out-of-three to the original telescope triangle; the shift hypothesis is supplied by Step 3, and no uniqueness of cone comparisons is used. Step 5 recovers F, then E, from good truncations, transferring by explicit conjugation. Step 6 uses the representative characterization in the t-structure definition and then flat replacement of E for any commutative Lambda. Step 7 uses stupid-truncation subcomplexes and the complex-colimit hocolim, which needs no boundedness. Step 8 uses the Tor amplitude interval [-N,max(b,-N)] and then 0F1J; every hypothesis of 0F1J holds. The bounded-below and unbounded counits agree on D+. On structure: proof_deps equals the union of the step uses, there is no cycle and no SGA citation. The off-unit dependencies are Mathlib leaves, a definition, or slopmaster2-closed nodes (prop-weil-pbc-inverse-image-modules-exact, lem-pc-right-derived-functor-triangulated, lem-sf-triangle-two-out-of-three), so no tool_uses entry is needed and none was accepted. There are no new nodes. The other 0F1N hits (lem-trf-ordinary-kunneth, sk-lem-sf-kunneth-star) are different exterior-product statements, so same_as=[] is correct. Edge cases checked: n=1, zero objects, empty schemes, zero truncations, b<-N, non-separated T, composite n. No fixes were written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-f65a79b2a (reviewer sub-agent of L); spot-checked: Re-split of lem-kun-0f1n: the base proof had 8 steps and 7597 characters. The item now has 4 steps and 2336 characters after my fix. The statement is unchanged against the base (live). Old steps map one to one: step 1 stays as item Step 1. Step 2 is split: sums stay in item Step 2, and exactness moves to lem-kun-tensor-base-change-exact-transformation. Step 3 (definition of alpha and its shift/sign check) moves to the same node. Steps 4-7 (telescope with two-out-of-three, good-truncation hocolim, flat replacement on E, stupid truncations) move to lem-kun-bounded-flat-bifunctor-detection. Step 8 becomes item Step 4. The two nodes are of comparable size and neither restates the item. Both new statements are true for arbitrary schemes and commutative Lambda; I checked zero objects, empty schemes, Lambda=0, shifts m=0 and +-1, b<-N, and different bounds in the two variables. The detection node puts flatness only on the E variable, which is right for 0F1J's Tor hypothesis; Stacks 0F1N flat-resolves F, which fails over Z/4 (Tor_i(Z/2,Z/2)=Z/2 for all i). Neither node duplicates an existing one: tensor-arrow-mate-naturality-shifts assumes the shift equations, ringed-projection-mate-exact has no square, and sk-lem-sf-determination, lem-sc-flat-telescope-sum-models and generating-class-determination are different statements. The hypotheses of 0F1J and of the maintainer-added lem-kun-tensor-base-change-bounded-below (Z/n, exponent n) both hold in Step 4, which cites both. Sources (Stacks l.20879, main-20261015 proof paragraphs 1-4) are correct, proof_deps equals the union of the step uses, and there is no SGA citation or cycle. I made two repairs. (1) Item Step 4 had dropped the old step 8 identification of 0F1J's canonical map with alpha (same counit, square and tensor comparisons); I restored it. (2) The exact-transformation node used the inverse of the inverse-image tensor comparison without citing lem-kun-inverse-image-monoidal for its invertibility; I added that citation to the statement and to stmt_deps. No tool_uses were needed and none were accepted.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

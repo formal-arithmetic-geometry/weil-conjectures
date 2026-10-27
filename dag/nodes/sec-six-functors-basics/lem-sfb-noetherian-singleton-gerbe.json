@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-noetherian-singleton-gerbe",
+ "kind": "statement",
+ "title": "Reduced Noetherian singleton stacks are gerbes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Algebraic stacks and algebraic spaces over $S$ use [def-sfb-algebraic-moduli-stack, def-trf-algebraic-space], with 2-fibre products as in [def-sfb-stable-pointed-moduli-groupoids] and point spaces as in [lem-sfb-stack-point-topology-flat-lfp-open]. Let $\\mathcal X/S$ be reduced and locally Noetherian: it admits a smooth surjective scheme atlas whose local rings have no nonzero nilpotents and which is locally Noetherian [pqf-def-locnoeth]. Suppose $|\\mathcal X|$ has exactly one point. There exist a reduced locally Noetherian algebraic space $Q/S$ with $|Q|$ a singleton and an $S$-morphism $p:\\mathcal X\\to Q$ which is a gerbe. For $Q$, reduced and locally Noetherian mean that these properties hold on an etale scheme atlas. A map $p:\\mathcal X\\to Q$ to an algebraic space is a gerbe if for every scheme $T\\to Q$ its fibre groupoid has objects fppf locally on $T$, and any two objects of that fibre groupoid are isomorphic fppf locally on $T$ [def-pc-fppf-site]. ",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06QK (lemma-noetherian-singleton-stack-gerbe); Tag 06QC (definition-gerbe)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "pqf-def-locnoeth",
+  "def-pc-fppf-site",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-singleton-stack-flat-lfp-field-cover] to $\\mathcal X$: its reduced locally Noetherian atlas and its nonempty singleton point space are exactly the hypotheses. Obtain a field $K$ and a representable surjective flat locally finitely presented map $a:\\operatorname{Spec}K\\to\\mathcal X$.",
+   "uses": [
+    "lem-sfb-singleton-stack-flat-lfp-field-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QK, first sentence, using stacks-properties.tex Tag 06MP (lemma-unique-point-better)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-inertia-locally-finite-type], $r:I_{\\mathcal X/S}\\to\\mathcal X$ is representable and locally of finite type. Form $G=I_{\\mathcal X/S}\\times_{\\mathcal X}\\operatorname{Spec}K$. The base-change calculus [lem-sfb-stack-chartwise-smooth-etale-calculus] gives a locally finite type map $G\\to\\operatorname{Spec}K$. On an arbitrary etale scheme chart $V\\to G$, its composite $V\\to\\operatorname{Spec}K$ is locally of finite type and is flat by [lem-pc-flat-field]. The field spectrum is locally Noetherian: its affine coordinate ring has only the ideals $0$ and $K$, both finitely generated. Thus [pqf-lem-lft-fp-locnoeth] makes this composite locally of finite presentation. Since these properties of a space map to a scheme are tested on etale scheme charts, $G\\to\\operatorname{Spec}K$ is flat and locally of finite presentation.",
+   "uses": [
+    "lem-sfb-inertia-locally-finite-type",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-pc-flat-field",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QK, inertia after field base change; spaces-morphisms.tex Tag 06G4 (lemma-noetherian-finite-type-finite-presentation), chartwise specialization."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-representable-flat-lfp-fppf-descent] with $f=r$ and $g=a$. Step 1 supplies all three covering hypotheses on $a$, step 2 supplies both properties of its pullback, and both maps are representable by algebraic spaces. Hence $r$ is flat and locally of finite presentation on $\\mathcal X$.",
+   "uses": [
+    "lem-sfb-representable-flat-lfp-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QK, descend inertia properties using Tags 06PZ and 06Q8."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-flat-inertia-algebraic-space-quotient]. By step 3 its inertia hypothesis holds, so the fppf sheafification $Q$ of $F(T)=\\operatorname{Ob}(\\mathcal X(T))/\\cong$ is an algebraic space, and the canonical $p:\\mathcal X\\to Q$ is smooth and surjective. To check the gerbe property explicitly, take a scheme $T$ and $q\\in Q(T)$. Local representatives in [lem-weil-pbc-site-sheafification-sections-local] give an fppf cover and classes in $F(T_i)$ representing $q|_{T_i}$; choose objects representing these classes. These are local objects in the fibre over $q$. If two objects lie in that fibre, their classes have the same image in $Q(T)$, so the local-equality clause of the same node makes their classes equal after an fppf cover. Equality of isomorphism classes is the existence of an isomorphism in $\\mathcal X(T_i)$; since $Q$ is set-valued this is also an isomorphism in the fibre over $q$. These are precisely both clauses of the gerbe definition in the item.",
+   "uses": [
+    "lem-sfb-flat-inertia-algebraic-space-quotient",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06QK and 06QJ; the identification of the quotient as a gerbe is the local-representative argument of Tag 06QD (lemma-gerbe-over-iso-classes)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-gerbe-smooth-universal-homeomorphism], the gerbe $p$ induces a homeomorphism $|\\mathcal X|\\to|Q|$ (take the base change by $Q\\to Q$). Therefore $|Q|$ is a singleton. Choose the reduced locally Noetherian smooth surjective scheme atlas $U\\to\\mathcal X$ supplied by the hypothesis. The same node says that its composite $U\\to Q$ is surjective, flat and locally of finite presentation; this composite is a map of algebraic spaces and is consequently representable by algebraic spaces.",
+   "uses": [
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QK, properties of the gerbe base; Tag 06R9 (lemma-gerbe-bijection-points) and Tag 06QI (lemma-gerbe-fppf)."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $W\\to Q$ using [def-trf-algebraic-space]. The fibre product $V=U\\times_Q W$ is a scheme because the diagonal of $Q$ is representable by schemes. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $V\\to U$ is etale and hence smooth, and $v:V\\to W$ is surjective, flat and locally of finite presentation. Since $U$ is reduced and locally Noetherian, [lem-trf-smooth-reduced-dense-pullback] gives both properties for $V$. Apply [lem-sfb-scheme-locnoeth-fppf-descent] to $v$ to conclude that $W$ is locally Noetherian.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lem-sfb-scheme-locnoeth-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QK, final descent of local Noetherianity; stacks-properties.tex Tag 06MP (lemma-unique-point-better), proof of (2) implies (1), written on an etale chart."
+   }
+  },
+  {
+   "text": "For $w\\in W$, choose $z\\in V$ above $w$. By [def-weil-flat-morphism], the map of local rings $\\mathcal O_{W,w}\\to\\mathcal O_{V,z}$ is flat; it is a local homomorphism because $v$ is a scheme morphism. By [lem-weil-pbc-flat-local-hom-faithfully-flat] it is faithfully flat, and by [lem-weil-pbc-faithfully-flat-ideal-contraction] with the zero ideal it is injective. A nilpotent in $\\mathcal O_{W,w}$ maps to zero in the reduced ring $\\mathcal O_{V,z}$, hence is zero. Thus $W$ is reduced by [def-pc-reduced-scheme]. The etale atlas $W\\to Q$ is now both reduced and locally Noetherian, exactly the two properties required of $Q$ in the item. Along with steps 4 and 5 this proves the conclusion.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QK, final reducedness descent; descent.tex Tag 06QM (lemma-descend-reduced), local-ring argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-singleton-stack-flat-lfp-field-cover",
+  "lem-sfb-inertia-locally-finite-type",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-pc-flat-field",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-sfb-representable-flat-lfp-fppf-descent",
+  "lem-sfb-flat-inertia-algebraic-space-quotient",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "def-trf-algebraic-space",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-sfb-scheme-locnoeth-fppf-descent",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06QK (lemma-noetherian-singleton-stack-gerbe), with the sheafification argument of 06QD and final reducedness and Noetherian descent written on an etale atlas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced locally Noetherian algebraic stack with one point is a gerbe over a reduced locally Noetherian algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Subsingleton ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is a subsingleton (i.e., contains at most one point), then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [∀ (x : ↥X), IsReduced ↑(X.presheaf.stalk x)], AlgebraicGeometry.IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Singleton stack is a gerbe over its sheaf of isomorphism classes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, if $\\\\mathcal{F}\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsPrestack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"For a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology, a pseudofunctor from the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $ (considered as a locally discrete bicategory) to the catego\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsPrestack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  (J : CategoryTheory.GrothendieckTopology C) [self : F.IsPrestack J] {S : C} (M N : ↑(F.obj { as := Opposite.op S })),\\n  CategoryTheory.Presheaf.IsSh\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a pseudofunctor $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ satisfying the prestack axioms, the presheaf of hom-sets $\\\\text{Hom}(M,\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S₀ : C}\\n  (S : CategoryTheory.Over S₀) {R : CategoryTheory.Sieve S},\\n  F.IsPrestackFor ((CategoryTheory.Sieve.overEquiv S) R).arrows →\\n    ∀ (M N : ↑\", \"doc\": \"Given a pseudofunctor $ F $ from the opposite category of the over category over an object $ S_0 $ to the category of types, if $ F $ satisfies the prestack condition for a sieve $ R $ on an object $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Gerbe\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|residualGerbe|residual_gerbe|gerbe",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced locally Noetherian singleton algebraic stack is a gerbe",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsLocallyNoetherian X] : X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} [Subsingleton X] [IsReduced X] [JacobsonSpace Y] : IsFinite f ↔ LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[h : IsLocallyArtinian X] : IsLocallyNoetherian X\", \"doc\": \"Every locally Artinian scheme is a locally Noetherian scheme. That is, if every point of a scheme has an open neighborhood whose coordinate ring is Artinian, then the scheme admits an open cover by No\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsLocallyNoetherian X → Sort u} →\\n    (t : AlgebraicGeometry.IsLocallyNoetherian X) →\\n      ((component_noetherian : ∀ (U : ↑X.affineOpens), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))) →\\n          motive ⋯) →\\n        motive t\", \"doc\": \"Given a locally Noetherian scheme $ X $ and a property that holds if every affine open subset of $ X $ has a Noetherian ring, this recursor allows deriving the property for $ X $ based on the conditio\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced locally Noetherian algebraic stack with one point is a gerbe over an algebraic space",
+   "results": "8 hits; AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat, AlgebraicGeometry.IsAffine, AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.Scheme.IsGermInjective",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Gerbe\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|residualGerbe|residual_gerbe|gerbe",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally Noetherian reduced singleton stack has flat finitely presented inertia and a gerbe quotient",
+   "results": "8 hits; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isReduced_of_isReduced_stalk, Module.isLocallyConstant_rankAtStalk, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, RingHom.Flat.propertyIsLocal, Module.Flat.of_isLocalizedModule, AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-singleton-stack-finite-field-homeomorphism",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Reduced locally Noetherian singleton gerbe before imposing local finite type over the ground field.",
+   "via": [
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-singleton-gerbe",
+  "worker": "stage1",
+  "summary": "Followed Stacks 06QK: use the existing field atlas, prove inertia flat and locally finitely presented after that atlas and descend, invoke the existing isomorphism-class quotient, verify both gerbe clauses directly from sheafification, and check singleton/reduced/locally Noetherian conclusions on an etale chart. Two new general supporting statements; reuse the existing scheme-over-field Mathlib leaf. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Reduced locally Noetherian singleton gerbe before imposing local finite type over the ground field. Realized by steps 1--3 (field cover and inertia), 4 (gerbe quotient), 5--7 (base point space and geometric properties).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic Sections and local equality after sheafification on a site used in the chartwise gerbe proof of Stacks 06QK; this is a supporting geometric/descent tool, not a replacement for the constructible direct-image unit route."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic Algebraic spaces and their etale line modules used in the chartwise gerbe proof of Stacks 06QK; this is a supporting geometric/descent tool, not a replacement for the constructible direct-image unit route."
+   },
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Generic Reducedness and generic density under smooth pullback used in the chartwise gerbe proof of Stacks 06QK; this is a supporting geometric/descent tool, not a replacement for the constructible direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-trf-algebraic-space",
+  "lem-trf-smooth-reduced-dense-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-9e333b212",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-9e333b212 (reviewer sub-agent of L); spot-checked: Read Stacks 06QK, 050Q, 06PZ, 06Q8, 06QJ, 06QD and the statements of all 16 cited nodes. Step 1: the field-cover node's hypotheses match the item exactly. Step 2: the new inertia node and the chartwise calculus give G->Spec K lft; lem-pc-flat-field gives flat; K is Noetherian, so pqf-lem-lft-fp-locnoeth gives lfp (06QK+06G4). Step 3: the new descent node with f=r, g=a gives r flat and lfp, exactly the hypothesis of the quotient node. Step 4: the quotient node gives Q an algebraic space; both gerbe clauses follow correctly from the local-representative and local-equality clauses of the sheafification node (06QD); Q is set-valued, so the isos lie in the fibre. Step 5: the gerbe node with base change along id_Q gives |X|≅|Q|, so |Q| is a singleton, and its explicit atlas clause gives U->Q surjective, flat and lfp. Steps 6-7: V=U×_Q W is etale over U, so reduced and locally Noetherian by 034E; W is locally Noetherian by the fppf-descent node; W is reduced by the flat local hom -> faithfully flat -> injective argument (06QM). Every clause of the item is proved. New nodes: inertia lft = 050Q (relative-inertia-second-diagonal node lacks lft, not a duplicate); descent = 06PZ+06Q8 restricted to representable maps (only proper/04XD and space-over-scheme flat/fp analogues exist, not duplicates); both are statement-only, self-contained, stmt_deps match their brackets, and they are not restatements of the item. Batch-5 flags: all are definitions or generic stack/scheme lemmas reaching trf only via def-trf-algebraic-space; trf smooth-reduced pullback is the generic 034E fact. None is a trace-formula or Poincare step; accepted. The 3 tool_uses (generic sheafification, algebraic-space definition, smooth ascent) are accepted. No SGA. Minor: step 5 lists def-trf-algebraic-space in uses without bracketing it in the text, harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianSingletonGerbe",
+  "declaration": "CategoryTheory.exists_noetherian_singleton_gerbe",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianSingletonGerbe.lean",
+  "statement": "theorem exists_noetherian_singleton_gerbe {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (hatlas : ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a ∧ IsReduced U.left ∧ IsLocallyNoetherian U.left) (hsingleton : Nonempty (ModuliPoints F) ∧ Subsingleton (ModuliPoints F)) : ∃ (Q : AlgebraicSpace S) (p : BasedFunctor F (discreteModuli Q.obj.obj)), (∃ (U : Over S) (a : yoneda.obj U ⟶ Q.obj.obj), AlgebraicSpace.IsEtale a ∧ AlgebraicSpace.IsSurjective a ∧ IsReduced U.left ∧ IsLocallyNoetherian U.left) ∧ (Nonempty (AlgebraicSpace.Point Q.obj.obj) ∧ Subsingleton (AlgebraicSpace.Point Q.obj.obj)) ∧ (∀ (T : Over S) (q : yoneda.obj T ⟶ Q.obj.obj), ∃ R : Sieve T, R ∈ (Scheme.fppfTopology.over S) T ∧ ∀ (U : Over S) (g : U ⟶ T), R g → ∃ x : BasedFunctor (discreteModuli (yoneda.obj U)) F, Nonempty (ModuliTwoIso (x.comp p) (discreteModuliMap (yoneda.map g ≫ q)))) ∧ (∀ (T : Over S) (q : yoneda.obj T ⟶ Q.obj.obj) (x y : BasedFunctor (discreteModuli (yoneda.obj T)) F), Nonempty (ModuliTwoIso (x.comp p) (discreteModuliMap q)) → Nonempty (ModuliTwoIso (y.comp p) (discreteModuliMap q)) → ∃ R : Sieve T, R ∈ (Scheme.fppfTopology.over S) T ∧ ∀ (U : Over S) (g : U ⟶ T), R g → Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map g)).comp x) ((discreteModuliMap (yoneda.map g)).comp y)))",
+  "branch": "sheaf-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6501e28a7",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Clause-by-clause check against Stacks 06QK/06QC (lemma-when-gerbe criterion 2): S, algebraic stack F (IsAlgebraicModuliStack), reduced+locally Noetherian smooth surjective atlas (IsSmoothModuliAtlas includes smooth+surjective; Mathlib IsReduced = reduced stalks), |X| singleton via ModuliPoints, ∃ Q : AlgebraicSpace S and BasedFunctor p, Q reduced+loc. Noetherian on one surjective étale scheme atlas, |Q| singleton via AlgebraicSpace.Point, both gerbe clauses with fppf covering sieves; isomorphism compatibility with q is automatic because Q's fibres are discrete. No extra hypotheses or universe restrictions; edge cases (empty stack/base/test schemes, stabilizers) correct. Only the item's lean record changed (JSON diff vs live, previous lean null); statement verbatim; no definitions, sorry only, docstrings with source, blueprint and 7 steps; all imports exist; report sections present. Maintainer note: ModuliPoints and AlgebraicSpace.Point are reached through the theorem stmt_dep lem-sfb-stack-point-topology-flat-lfp-open, which the node names for point spaces; their owner def nodes are not in stmt_deps, which stage 2 cannot add. No compile (no file changed)."
+ }
+}

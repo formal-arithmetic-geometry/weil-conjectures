@@ -1,0 +1,273 @@
+{
+ "id": "lem-route-formal-closed-support-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-formal-closed-support",
+   "via": [],
+   "place": "Adjunction paragraph and fiber-formula paragraph of sk-lem-formal-closed-support.proof.md; detailed proof det-lem-formal-closed-support-adjunction parts (1)--(4), with normalized module and derived adjunction maps"
+  },
+  "same_as": [
+   "det-lem-formal-closed-support-adjunction"
+  ]
+ },
+ "kind": "statement",
+ "title": "Sections with closed support, all four clauses, for arbitrary condensed coefficients.",
+ "statement": "Fix the universe convention [def-weil-size-convention]. Let $\\Lambda$ be any unital condensed ring, without a commutativity hypothesis [sk-def-sfb-condensed-ring]. For each scheme $T$ put $\\Lambda_T=p_T^*\\Lambda$ and $\\mathcal M_T=\\operatorname{Mod}_{\\Lambda_T}(\\operatorname{Sh}(T_{\\mathrm{proet}},\\operatorname{Ab}))$ [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. Let $i:Z\\hookrightarrow X$ be a closed immersion with complementary quasi-compact open immersion $j:V\\hookrightarrow X$ [def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Use the abelian sheaf inverse/direct images [def-weil-proetale-inverse-image], lifted to module actions [sk-def-sfb-transport] and identified with $\\Lambda_T$ using $\\alpha_f:f^{-1}\\Lambda_S\\cong\\Lambda_T$ [def-sfb-alpha, lem-sfb-alpha-iso]. In particular $f^*$ applies abelian inverse image and then restricts scalars along $\\alpha_f^{-1}$, and $f_*$ uses the adjoint coefficient map. Write $\\eta^f:1\\to f_*f^*$ for their specified module adjunction unit.\n\nDefine $N(M)=\\ker(\\eta^j_M)$ in $\\mathcal M_X$, with inclusion $\\kappa_M:N(M)\\to M$ and kernel maps on morphisms [def-weil-sheaf-of-modules-category], and $\\Gamma_Z=i^*N$. Let $\\theta:N\\to i_*\\Gamma_Z$ be the actual closed unit $\\eta^i$ evaluated on $N$. Use ordinary unbounded derived categories $D(\\mathcal M_T)$, assumed to exist in the chosen universes [def-weil-abstract-derived-category], and total right derived functors with their canonical comparison units [def-sfb-right-derived-functor]. A complex is K-injective when every chain map from an acyclic complex into it is chain homotopic to zero. Then:\n\n1. $\\theta$ is invertible and $\\Gamma_Z$ preserves finite limits. There exists a sheaf adjunction $a:i_*\\dashv\\Gamma_Z$ with counit $\\epsilon^a$ satisfying $\\epsilon^a_M\\circ\\theta_M=\\kappa_M$ for every $M$.\n2. For every injective $I\\in\\mathcal M_X$ [def-sp-injective-resolutions], $\\eta^j_I:I\\to j_*j^*I$ is an epimorphism. Termwise $\\Gamma_Z$ preserves K-injective complexes, and its right-derived comparison is invertible on every K-injective complex, not only those with injective terms.\n3. For all complexes $A$ of $\\mathcal M_Z$ and K-injective complexes $I$ of $\\mathcal M_X$, there is an isomorphism of global abelian-group-valued complexes\n$$e:\\operatorname{Hom}^{\\bullet}_X(i_*A,I)\\xrightarrow{\\sim}\\operatorname{Hom}^{\\bullet}_Z(A,\\Gamma_ZI).$$\nHere $\\operatorname{Hom}^n(C,D)=\\prod_{p\\in\\mathbf Z}\\operatorname{Hom}(C^p,D^{p+n})$ with $df=d_Df-(-1)^nf d_C$, and $e(f)_{p,q}=a.\\operatorname{homEquiv}_{A^p,I^q}(f_{p,q})$ whenever $q=p+n$.\n4. The additive functor $i_*$ preserves finite colimits. With this exact structure there are adjunctions $b:D(i_*)\\dashv R\\Gamma_Z$ and $c:D(j^*)\\dashv Rj_*$ obtained by deriving exactly $a$ and the specified $j^*\\dashv j_*$, respectively. There is a natural transformation $\\delta:Rj_*D(j^*)\\to D(i_*)R\\Gamma_Z[1]$ for which\n$$D(i_*)R\\Gamma_ZK\\xrightarrow{\\epsilon^b_K}K\\xrightarrow{\\eta^c_K}Rj_*D(j^*)K\\xrightarrow{\\delta_K}D(i_*)R\\Gamma_ZK[1]$$\nis distinguished for every $K$. For every distinguished triangle $F\\xrightarrow{s}K\\xrightarrow{\\eta^c_K}Rj_*D(j^*)K\\xrightarrow{t}F[1]$, there exists an isomorphism $R\\Gamma_ZK\\cong D(i^*)F$; no cone object or functorial choice of such an isomorphism is stipulated.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/_section.md",
+  "place": "sk-lem-formal-closed-support: the Lean of this node (its declaration uses) reaches AlgebraicGeometry.ProEtale.CondensedRing.formal_closed_support_adjunction, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/FormalClosedSupportAdjunction.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.formal_closed_support_adjunction (module Sheaf.AlgebraicGeometry.FormalClosedSupportAdjunction, lines 148-254, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proetale-inverse-image",
+  "sk-def-sfb-transport",
+  "def-sfb-alpha",
+  "lem-sfb-alpha-iso",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Consolidate the duplicate formal pullback adjunction as an abbreviation of supportPullbackAdjunction from the completed support API. Both scalar equivalence adjunctions have identity underlying counits, and the inserted associator is identity on components, so this preserves the specified unit and counit. The original pullback, kernel, support functor and kernel inclusion are definitionally the completed constructions. The private comparison_eq proves equality of comparisons by simplifying the completed comparison’s identity associator.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
+    "place": "Parts (1)--(4), reusing the completed CondensedClosedSupportAdjunction proofs"
+   }
+  },
+  {
+   "text": "Apply the proved closedSupportKernelComparison_isIso, closedSupport_leftExact and the uniquely counit-normalized closedSupportAdjunction. Its chosen counit is the inverse kernel comparison followed by the inclusion, so composing with the comparison gives the required inclusion. Use closedSupport_injective_unit_epi and closedSupport_globalRHom for the injective-unit and componentwise Hom-complex clauses.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
+    "place": "Parts (1)--(4), reusing the completed CondensedClosedSupportAdjunction proofs"
+   }
+  },
+  {
+   "text": "Use closedSupport_lowerStarExact. The resulting exact left adjoint implies preservation of K-injective complexes by its support right adjoint; the canonical right-derived unit is invertible on K-injectives. The exact-left-adjoint derived adjunction construction supplies exactly b and c, with the stipulated equalities.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
+    "place": "Parts (1)--(4), reusing the completed CondensedClosedSupportAdjunction proofs"
+   }
+  },
+  {
+   "text": "Repeat the proved generic recollement argument of closedSupport_triangle with arbitrary chosen HasDerivedCategory universe w. Lift full faithfulness of closed and open direct image to derived categories. Exact open restriction kills the closed image. The abelian supported-unit assertion gives joint zero detection on cohomology, hence joint zero detection on derived categories. The cone of the closed unit vanishes when open restriction vanishes, identifying the open kernel with the closed essential image. Recollement.existsUnique_distTriang_counit_unit gives the boundary; Recollement.exists_triangleHom gives its naturality.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction",
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-exc-kinjective-derived-fully-faithful",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
+    "place": "Parts (1)--(4), reusing the completed CondensedClosedSupportAdjunction proofs"
+   }
+  },
+  {
+   "text": "Rotate the constructed triangle and any triangle in the fibre clause. The identical open unit gives an isomorphism on their first two rotated vertices. isoTriangleOfIso₁₂ gives a triangle isomorphism, whose third component deshifts to an isomorphism from the closed supported image to F. Apply exact closed inverse image and the invertible derived closed counit to obtain the requested fibre isomorphism.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-exc-kinjective-derived-fully-faithful",
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
+    "place": "Parts (1)--(4), reusing the completed CondensedClosedSupportAdjunction proofs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "def-weil-triangulated-category",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-exc-kinjective-derived-fully-faithful",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.proof.md",
+  "place": "Parts (1)--(4), reusing the completed CondensedClosedSupportAdjunction proofs",
+  "note": "Z7 consolidates the duplicate adjunction as an alias of the completed support API, keeps all other existing definitions verbatim, reuses the sheaf-level proofs and generalizes the derived recollement proof privately to the requested model universe. No new unproved statements. See coord/changes/Z7-formal-support-aliases.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'formal_closed_support_adjunction' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed support functor i inverse image kernel of open restriction unit is right adjoint to exact closed pushforward and gives derived localization triangle for sheaves of modules",
+   "results": "Hits: SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections with closed support on proetale sheaves with condensed coefficients are right adjoint to closed immersion pushforward and form a localization triangle",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.constantSheafΓAdj, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.instIsRightAdjointPushforward, CondensedSet.LocallyConstant.functorFullyFaithful, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CompHausLike.LocallyConstant.adjunction ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CochainComplex.HomComplex",
+   "results": "No hits. ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalClosedSupport|closedSupport|closed_support|sectionsWithSupport",
+   "results": "Hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/Topology/LocallyFinsupp.lean, Mathlib/Topology/LocallyFinsupp.lean, Mathlib/RingTheory/Spectrum/Prime/Module.lean, Mathlib/RingTheory/Spectrum/Prime/Module.lean, Mathlib/MeasureTheory/Measure/ResolventTransform.lean, Mathlib/MeasureTheory/Measure/ResolventTransform.lean ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For exact closed inclusion and open restriction of ringed topoi the kernel of id to open direct image is right adjoint to closed pushforward with derived fibre triangle",
+   "results": "Hits: AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, SheafOfModules.pullbackPushforwardAdjunction ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "sk-lem-formal-closed-support",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-formal-closed-support",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.FormalClosedSupportAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalClosedSupportAdjunction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.formal_closed_support_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.formal_closed_support_adjunction"
+  ],
+  "statement": "theorem formal_closed_support_adjunction\n    {X Z V : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X)\n    [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]\n    (hij : Set.range j = (Set.range i)ᶜ)\n    [HasDerivedCategory.{w} (FormalSupportModules Λ X)]\n    [HasDerivedCategory.{w} (FormalSupportModules Λ Z)]\n    [HasDerivedCategory.{w} (FormalSupportModules Λ V)] :\n    IsIso (formalSupportKernelComparison Λ i j) ∧\n    PreservesFiniteLimits (formalClosedSupport Λ i j) ∧\n    ∃ a : lowerStar Λ i ⊣ formalClosedSupport Λ i j,\n      (∀ M : FormalSupportModules Λ X,\n        (formalSupportKernelComparison Λ i j).app M ≫ a.counit.app M =\n          (formalSupportKernelInclusion Λ j).app M) ∧\n      (∀ (I : FormalSupportModules Λ X) [Injective I],\n        Epi ((formalSupportPullbackAdjunction Λ j).unit.app I)) ∧\n      (∀ (I : CochainComplex (FormalSupportModules Λ X) ℤ) [I.IsKInjective],\n        CochainComplex.IsKInjective\n          (((formalClosedSupport Λ i j).mapHomologicalComplex (ComplexShape.up ℤ)).obj I)) ∧\n      (∀ (I : CochainComplex (FormalSupportModules Λ X) ℤ) [I.IsKInjective],\n        IsIso ((formalClosedSupport Λ i j).rightDerivedFunctorUnit.app\n          ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I))) ∧\n      (∀ (A : CochainComplex (FormalSupportModules Λ Z) ℤ)\n        (I : CochainComplex (FormalSupportModules Λ X) ℤ) [I.IsKInjective],\n        ∃ e : CochainComplex.HomComplex\n            (((lowerStar Λ i).mapHomologicalComplex (ComplexShape.up ℤ)).obj A) I ≅\n          CochainComplex.HomComplex A\n            (((formalClosedSupport Λ i j).mapHomologicalComplex (ComplexShape.up ℤ)).obj I),\n          ∀ (n : ℤ) (f : CochainComplex.HomComplex.Cochain\n            (((lowerStar Λ i).mapHomologicalComplex (ComplexShape.up ℤ)).obj A) I n)\n            (p q : ℤ) (hpq : p + n = q),\n            (((e.hom.f n).hom f).v p q hpq) =\n              a.homEquiv (A.X p) (I.X q) (f.v p q hpq)) ∧\n      Exists fun [hclosed : PreservesFiniteColimits (lowerStar Λ i)] ↦\n        ∃ (b : (lowerStar Λ i).mapDerivedCategory ⊣\n            (formalClosedSupport Λ i j).rightDerivedFunctor)\n          (c : (formalSupportPullback Λ j).mapDerivedCategory ⊣\n            (lowerStar Λ j).rightDerivedFunctor),\n          ∃ δ : (formalSupportPullback Λ j).mapDerivedCategory ⋙\n              (lowerStar Λ j).rightDerivedFunctor ⟶\n            (formalClosedSupport Λ i j).rightDerivedFunctor ⋙\n              (lowerStar Λ i).mapDerivedCategory ⋙\n                shiftFunctor (DerivedCategory (FormalSupportModules Λ X)) (1 : ℤ),\n            b = a.mapDerivedCategoryRightDerivedAdjunction ∧\n            c = (formalSupportPullbackAdjunction Λ j).mapDerivedCategoryRightDerivedAdjunction ∧\n            (∀ K : DerivedCategory (FormalSupportModules Λ X),\n              Triangle.mk (b.counit.app K) (c.unit.app K) (δ.app K) ∈ distTriang _) ∧\n            (∀ (K F : DerivedCategory (FormalSupportModules Λ X)) (s : F ⟶ K)\n              (t : (lowerStar Λ j).rightDerivedFunctor.obj\n                ((formalSupportPullback Λ j).mapDerivedCategory.obj K) ⟶ F⟦(1 : ℤ)⟧),\n              Triangle.mk s (c.unit.app K) t ∈ distTriang _ →\n              Nonempty ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K ≅\n                (formalSupportPullback Λ i).mapDerivedCategory.obj F)) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-formal-closed-support-adjunction",
+  "worker": "stage1",
+  "summary": "Replaced the machine placeholder by a complete natural-language rendering of every conjunct of the attached Lean signature; retained arbitrary, possibly noncommutative condensed rings. Reused the existing K-injective, homotopy-adjunction and triangle tools; one new underived noncommutative ring-sheaf gluing input. The proof constructs the support adjunction, its normalized counit, global Hom chain isomorphism, split open unit on injectives, natural derived triangle and existential comparison to any fibre.",
+  "blueprint": "The ancestor unit adjunction and fiber-formula paragraphs, realized via detailed blueprint det-lem-formal-closed-support-adjunction (1)--(4).",
+  "tool_uses": [
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic Right derived functor on the unbounded derived category used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Generic Injective objects and injective resolutions used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "Generic Triangulated category and exact functor used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Generic Functorial K-injective resolutions with injective terms used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic A morphism of distinguished triangles with two isomorphic components is an isomorphism used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic $\\alpha_f$ is an isomorphism for every $f$ used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic A short exact sequence of complexes gives a distinguished triangle in D(A), functorially used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic A right adjoint of an exact functor preserves K-injective complexes used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Generic A right adjoint preserves limits used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise used only for the explicit statement cited in the proof; it does not replace the unit support-kernel route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-right-derived-functor",
+  "def-weil-triangulated-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NX-1ee418e0b",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-1ee418e0b (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the attached Lean signature and its defs (FormalClosedSupportAdjunction.lean 1-254), det-lem-formal-closed-support-adjunction, sk-lem-formal-closed-support, and Stacks proetale 09AA/09BM/09BN/09AH (j quasi-compact, any X). The item statement renders every Lean conjunct faithfully, with nothing weakened. Steps 2, 3 and 5-9 are correct: the counit normalization eps∘theta=kappa, the Hom-complex differential and sign, the split-epi argument for injective I (m monic by detection, e m=m, j^*e=1, j^* faithful on the image of j_*), the degreewise short exact sequence to the triangle with natural delta via K-injective representatives, and the TR3 fibre iso. Two repairable C4 faults, both from one cause. (1) Step 1: the new node lem-sfb-noncommutative-ringed-open-closed was stated for sectionwise left-module sheaves over a sheaf of rings, but the item and its Lean use internal module objects Mod_{Λ_X}(Sh Ab) over a possibly noncommutative ring object. The internal/sectionwise equivalence is in the DAG only for commutative rings. Fix: the node is restated for an arbitrary ring object B with Mod_B [sk-def-sfb-module-objects, lem-sfb-modobj-abelian] and the operations of def-sf-proetale-ring-sheaf-operations (mapMod / mapModLeft, the Lean presentation), with transport through sk-def-sfb-change-of-scalars; its source now names lem-sf-ring-sheaf-closed-localization (the qcqs version), and step 1 says which operations match. (2) Step 4 cited lem-weil-pbc-ring-sheaves-grothendieck (sectionwise), and lem-sfb-modobj-grothendieck needs a commutative monoid. Fix: added the statement-only unsplit node lem-sfb-sheaf-modobj-grothendieck-any-ring (module objects over any ring object of Sh(C,Ab) are Grothendieck; mathlib_candidate CategoryTheory.Mod.isGrothendieckAbelian, Abelian.lean:235, plus Mathlib GrothendieckAxioms/Sheaf.lean:73). Step 4, proof_deps and split_report tool_uses are updated. Small cases tested on the new nodes: Z, V or X empty, B=0, clopen X=V⊔Z, constant M_2(F_2). Accepted tool_uses: the 12 generic nodes in split_report, minus ring-sheaves-grothendieck. Files are in fixes/dag/nodes/sec-six-functors-basics/ (item, the restated new node, the added Grothendieck node).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7c81e",
+  "group": "Z7",
+  "result": "fix",
+  "landing": "20261025T164953-L-1147476",
+  "kind": "interface",
+  "note": "independent cc review: formal_closed_support_adjunction proof and formalSupportPullbackAdjunction abbrev against node, change record (old body = supportPullbackAdjunction proved in scratch vs published) and the 3 direct importers compiled against the fixed module"
+ }
+}

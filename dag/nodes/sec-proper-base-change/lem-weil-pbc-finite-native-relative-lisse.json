@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-finite-native-relative-lisse",
+ "kind": "statement",
+ "title": "Finite native models give relative finite lissity for any coefficient isomorphism",
+ "statement": "theorem finite_native_models_relative_lisse {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (B : Type (u + 1)) [CommRing B] [Finite B]\n    (F : pbcModules X (adicLisseConstantRing X B))\n    (c : (adicTowerInverseImage g).obj (adicLisseConstantRing X B) ≅\n      adicLisseConstantRing Y B)\n    (h : ∃ T : Sieve (⊤_ Y.ProEt), T ∈ ProEt.topology Y (⊤_ Y.ProEt) ∧\n      ∀ (U : Y.ProEt) (f : U ⟶ ⊤_ Y.ProEt), T f →\n        ∃ V : ModuleCat.{u + 1} B, Finite V ∧\n          Nonempty (((proEtaleRingModulePullback g (adicLisseConstantRing X B)\n            (adicLisseConstantRing Y B) c).obj F).over U ≅\n            ((adicLisseConstantModules Y B).obj V).over U)) :\n    IsRelativelyFiniteLisseModule g B\n      ((proEtaleModuleInverseImage g (adicLisseConstantRing X B)).obj F)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Uniqueness of left adjoints identifies extension along the given coefficient isomorphism with restriction along its inverse. After forgetting coefficients the result is the underlying sheaf of the canonical relative fixed-scalar encoding.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+   }
+  },
+  {
+   "text": "Forget the supplied finite native module models to finite set models. Use the proved finite_lisse_of_underlying_models helper from FiniteCoefficientIntrinsicConstructibility to refine the cover so the finitely many addition and scalar operations are constant.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-intrinsic-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+   }
+  },
+  {
+   "text": "The proved relative_finite_iff helper of ConstructibleCoefficientSerre transports the resulting finite fixed-scalar models back to relative models. This uses its model comparison only, without Noetherianity or constructibility assumptions.",
+   "uses": [
+    "lem-weil-constructible-coefficient-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
+  "lem-weil-constructible-coefficient-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, finite models and nilpotent propagation; sites-modules.tex Tags 03CY and 093U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules over a finite ring with locally constant finite underlying set is a finite locally constant module sheaf",
+   "results": "8 hits; SheafOfModules.IsFiniteType, CompHausLike.LocallyConstantModule.functor, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, CompHausLike.LocallyConstantModule.functor_obj_val, SheafOfModules.IsFiniteType.exists_localGeneratorsData, Condensed.finFree",
+   "date": "2026-10-27",
+   "verdict": "No theorem with this full project statement; use the project comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstantFiniteTypeModules\"",
+   "results": "0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No theorem with this full project statement; use the project comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRelativelyFiniteLisseModule",
+   "results": "0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No theorem with this full project statement; use the project comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedTowerLissePropagation",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-normalized-tower-lisse-propagation",
+   "place": "Coefficient comparison and nilpotent propagation",
+   "via": [
+    "new-lem-weil-pbc-normalized-tower-lisse-propagation"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteNativeRelativeLisse",
+  "file": "lean/Sheaf/Paper/FiniteNativeRelativeLisse.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_native_models_relative_lisse",
+  "statement": "theorem finite_native_models_relative_lisse {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (B : Type (u + 1)) [CommRing B] [Finite B]\n    (F : pbcModules X (adicLisseConstantRing X B))\n    (c : (adicTowerInverseImage g).obj (adicLisseConstantRing X B) ≅\n      adicLisseConstantRing Y B)\n    (h : ∃ T : Sieve (⊤_ Y.ProEt), T ∈ ProEt.topology Y (⊤_ Y.ProEt) ∧\n      ∀ (U : Y.ProEt) (f : U ⟶ ⊤_ Y.ProEt), T f →\n        ∃ V : ModuleCat.{u + 1} B, Finite V ∧\n          Nonempty (((proEtaleRingModulePullback g (adicLisseConstantRing X B)\n            (adicLisseConstantRing Y B) c).obj F).over U ≅\n            ((adicLisseConstantModules Y B).obj V).over U)) :\n    IsRelativelyFiniteLisseModule g B\n      ((proEtaleModuleInverseImage g (adicLisseConstantRing X B)).obj F)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T012947-L-2352163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T012947-L-2352163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

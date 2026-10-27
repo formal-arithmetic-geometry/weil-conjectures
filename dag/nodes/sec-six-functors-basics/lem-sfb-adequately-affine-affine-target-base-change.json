@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-adequately-affine-affine-target-base-change",
+ "kind": "statement",
+ "title": "Adequate affineness survives stack base change over an affine scheme",
+ "statement": "Let $k$ be a field [def-weil-field], let $T$ be an affine $k$-scheme [def-pc-scheme], let $\\mathcal U,\\mathcal V$ be algebraic stacks over $k$ [def-sfb-algebraic-moduli-stack], and let $f:\\mathcal U\\to T$ and $h:\\mathcal V\\to T$ be $k$-morphisms. If $f$ is adequately affine [def-sfb-adequately-affine-morphism], then the projection $\\mathcal U\\times_T\\mathcal V\\to\\mathcal V$ from the $2$-fibre product is adequately affine. There is no flatness or representability hypothesis on $h$ and no hypothesis on the diagonals of $\\mathcal U$ or $\\mathcal V$.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Proposition 4.2.1(6), printed p.21, specialized to an affine-scheme target (its diagonal is affine and hence quasi-affine). Primary Alper arXiv:1005.2398v3 read online; local Alper PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-adequately-affine-morphism",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal P=\\mathcal U\\times_T\\mathcal V$, with projection $p:\\mathcal P\\to\\mathcal V$. The algebraic-stack fibre-product lemma makes $\\mathcal P$ an algebraic stack. For every scheme $W\\to\\mathcal V$, eliminating the redundant $\\mathcal V$-object and its specified isomorphism in a triple gives the canonical equivalence $\\mathcal P\\times_{\\mathcal V}W\\simeq\\mathcal U\\times_TW$, compatible with the projections to $W$ and $\\mathcal U$. This equivalence also identifies the restricted algebras and their section maps.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T2 (lemma-2-fibre-product); explicit reassociation of triples"
+   }
+  },
+  {
+   "text": "By the definition of adequate affineness, $f$ is quasi-compact and quasi-separated. These conditions pass to $p$ directly from the test definitions: for a quasi-compact algebraic stack $\\mathcal Z\\to\\mathcal V$, one has $\\mathcal P\\times_{\\mathcal V}\\mathcal Z\\simeq\\mathcal U\\times_T\\mathcal Z$, which is quasi-compact by the test for $f$. Moreover $\\Delta_p$ is the pullback of $\\Delta_f$ along $\\mathcal P\\times_{\\mathcal V}\\mathcal P\\to\\mathcal U\\times_T\\mathcal U$. Thus every scheme test of $\\Delta_p$ is literally a scheme test of $\\Delta_f$, so is an algebraic space with quasi-compact and quasi-separated projection. This proves the two conditions without any assertion about the absolute diagonal of $\\mathcal V$.",
+   "uses": [
+    "def-sfb-adequately-affine-morphism",
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 050V (lemma-base-change-quasi-compact) and 050F (lemma-base-change-separated), here proved directly from the test definitions"
+   }
+  },
+  {
+   "text": "Fix an arbitrary surjection $\\alpha:\\mathcal A\\twoheadrightarrow\\mathcal B$ of quasi-coherent algebras on $\\mathcal P$. For a smooth scheme test $W\\to\\mathcal V$ and $t\\in\\Gamma(\\mathcal U\\times_TW,\\mathcal B_W)$, cover $W$ by affine open subschemes $W_i=\\operatorname{Spec}S_i$. Write $T=\\operatorname{Spec}R$. The restricted map $\\alpha_i:\\mathcal A_i\\to\\mathcal B_i$ on $\\mathcal U_i=\\mathcal U\\times_TW_i$ is again a surjection of quasi-coherent algebras. Indeed restriction in the big fppf convention is precomposition: over an object on a scheme $Z$ it leaves the section rings and structure-ring action unchanged. A covering on which a section lifts, or on which a module presentation is exact, lifts to the restricted fibred category by pulling back the additional $W_i$-map on $Z$. Hence the original local surjectivity and local presentations remain valid. This argument applies to every $\\alpha$, with no descent-from-$\\mathcal U$ requirement.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06TP, 06TV and 06WG (inherited topology, structure sheaf and quasi-coherent module); direct restriction argument"
+   }
+  },
+  {
+   "text": "The projection $q_i:\\mathcal U_i\\to\\mathcal U$ is affine by the affine-base-change clause of [lem-sfb-stack-affine-algebra-direct-image], applied to $R\\to S_i$. That same lemma sends $\\alpha_i$ to a surjection $q_{i,\\mathrm{QCoh},*}\\mathcal A_i\\twoheadrightarrow q_{i,\\mathrm{QCoh},*}\\mathcal B_i$ of quasi-coherent algebras on $\\mathcal U$. Its natural ring isomorphisms identify $t|_{W_i}$ with a section of the latter algebra on $\\mathcal U$. Since $f$ is adequately affine with affine target, [lem-sfb-affine-target-adequacy-criterion] gives $N_i>0$ and a section of $q_{i,\\mathrm{QCoh},*}\\mathcal A_i$ whose image is that section to the $N_i$-th power. Transfer it back to $s_i\\in\\Gamma(\\mathcal U_i,\\mathcal A_i)$. Compatibility of the ring isomorphisms with $\\alpha_i$ and powers gives exactly $\\alpha_i(s_i)=(t|_{W_i})^{N_i}$.",
+   "uses": [
+    "lem-sfb-stack-affine-algebra-direct-image",
+    "lem-sfb-affine-target-adequacy-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 4.2.1(5), affine case, and Lemma 4.1.8(3); affine pushforward is Stacks Tag 0GQY"
+   }
+  },
+  {
+   "text": "For this arbitrary $\\alpha$ and arbitrary smooth test $W\\to\\mathcal V$, step 4 supplies the required positive-power lifts on the affine open cover $(W_i\\to W)$. Such a cover is an etale cover: locally its ring maps are localizations, which are flat and locally finitely presented, and its diagonal is an isomorphism, hence unramified. The direct-image section formula in [def-sfb-adequately-affine-morphism] and the equivalence of step 1 identify these lifts with sections of $p_*\\mathcal A$ mapping to powers of the given section of $p_*\\mathcal B$. Thus $p_*\\alpha$ is universally adequate in precisely that definition. Together with step 2, this makes $p$ adequately affine. The construction uses arbitrary $h$ and imposes no condition on either absolute diagonal.",
+   "uses": [
+    "def-sfb-adequately-affine-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Definition 3.4.1 and Proposition 4.2.1(6), affine-target specialization; elementary etale-open-cover check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adequately-affine-morphism",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-etale-morphism",
+  "lem-sfb-affine-target-adequacy-criterion",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-stack-affine-algebra-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Proposition 4.2.1(5),(6), specialized and expanded using the affine-target criterion; local PDF absent (WANTED in report), primary PDF read online"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adequately affine morphism of algebraic stacks to an affine scheme stays adequately affine after base change by an arbitrary algebraic stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.RespectsIso] [P'.IsStableUnderComposition]\\n  [P.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {S X : AlgebraicGeometry.Scheme} (f : AlgebraicGeometry.Spec R ⟶ S) (g : X ⟶ S),\\n      P' f → P (CategoryTheory.Limits.pullback.fst\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.RespectsIso fun {R S\", \"doc\": \"If $ Q $ is a ring homomorphism property that is invariant under ring isomorphisms and stable under base change, then the property of a morphism of schemes with affine target being affine and satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso],\\n  (∀ ⦃X Y S : AlgebraicGeometry.Scheme⦄ [inst : AlgebraicGeometry.IsAffine S] [inst_1 : AlgebraicGeometry.IsAffine X]\\n      (f : X ⟶ S) (g : Y ⟶ S), P g → P (CategoryTheory.Limits.pullback.fst f g)) →\\n    P.IsStableUn\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\\\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], Q.IsStableUnderBaseChange → P.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ Q $ with affine target is stable under base change, then any property $ P $ implied by $ Q $ is also stable under base change. Specifically, whenever $ g: Y \\\\to S $ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) →\\n      (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [Comm\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  (AlgebraicGeometry.AffineTargetMorphismProperty.of P).IsStableUnderBaseChange → P.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and its restriction to morphisms with affine targets is stable under base change, then $ P $ is stable under base change for all schemes. Sp\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAffineHom\", \"baseChange\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsAffineHom\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "adequat|Adequately",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate affineness is stable under arbitrary base change when the target has affine diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"{P : MorphismProperty Scheme.{u}} (_ : HasAffineProperty P (affineAnd Q)) (hQi : RingHom.RespectsIso Q)\\n  (hQb : RingHom.IsStableUnderBaseChange Q) : P.IsStableUnderBaseChange\", \"doc\": \"If $ Q $ is a ring homomorphism property that is invariant under ring isomorphisms and stable under base change, then the property of a morphism of schemes with affine target being affine and satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[P'.RespectsIso] [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange]\\n  (H : ∀ {R : CommRingCat.{u}} {S X : Scheme.{u}} (f : Spec R ⟶ S) (g : X ⟶ S), P' f → P (pullback.fst f g) → P g)\\n  {X Y Z T : Scheme.{u}} [IsAffine T] (p : T ⟶ X) (hp : P' p) (f : X ⟶ Z) (g : Y ⟶ Z) (h : P' f)\\n  (hf : P (pu\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"(hQi : RingHom.RespectsIso Q) (hQb : RingHom.IsStableUnderBaseChange Q) : (affineAnd Q).IsStableUnderBaseChange\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) [P.toProperty.RespectsIso]\\n  (H : ∀ ⦃X Y S : Scheme⦄ [IsAffine S] [IsAffine X] (f : X ⟶ S) (g : Y ⟶ S), P g → P (pullback.fst f g)) :\\n  P.IsStableUnderBaseChange\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\\\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(hP' : Q.IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ Q $ with affine target is stable under base change, then any property $ P $ implied by $ Q $ is also stable under base change. Specifically, whenever $ g: Y \\\\to S $ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally adequate pushforward of algebras for base changed algebraic stack with affine scheme target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"Given a morphism property $ P $ for schemes, this constructs a property that assigns to each morphism $ X \\\\to Y $ with affine target $ Y $ the proposition $ P(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.RespectsIso] [P'.IsStableUnderComposition]\\n  [P.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {S X : AlgebraicGeometry.Scheme} (f : AlgebraicGeometry.Spec R ⟶ S) (g : X ⟶ S),\\n      P' f → P (CategoryTheory.Limits.pullback.fst\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.toProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A function that converts a predicate on morphisms of schemes with affine targets into a general morphism property by asserting the existence of a proof that the target is affine, combined with the ori\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) →\\n      (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [Comm\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso],\\n  (∀ ⦃X Y S : AlgebraicGeometry.Scheme⦄ [inst : AlgebraicGeometry.IsAffine S] [inst_1 : AlgebraicGeometry.IsAffine X]\\n      (f : X ⟶ S) (g : Y ⟶ S), P g → P (CategoryTheory.Limits.pullback.fst f g)) →\\n    P.IsStableUn\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\\\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheaves of modules, not adequate affineness or the asserted construction for algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "adequat|Adequately",
+   "results": "9 hits; Mathlib/Algebra/Algebra/StrictPositivity.lean, Mathlib/Geometry/Manifold/Immersion.lean, Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean, Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean, Mathlib/RingTheory/MvPowerSeries/Substitution.lean, Mathlib/RingTheory/MvPowerSeries/Evaluation.lean, Mathlib/RingTheory/MvPowerSeries/Evaluation.lean, Mathlib/RingTheory/ZMod/UnitsCyclic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned hits concern schemes, ring-map property infrastructure or unrelated uses of adequate; no theorem about adequately affine algebraic-stack morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal power lifting for quasi-coherent algebras on algebraic stacks is preserved by base change over an affine scheme",
+   "results": "8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, RingHom.IsStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.affineAnd_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: returned hits concern schemes, ring-map property infrastructure or unrelated uses of adequate; no theorem about adequately affine algebraic-stack morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAffineHom\", \"baseChange\"",
+   "results": "1 hits; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: returned hits concern schemes, ring-map property infrastructure or unrelated uses of adequate; no theorem about adequately affine algebraic-stack morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adequately affine morphism from an algebraic stack to an affine scheme remains adequately affine after arbitrary algebraic stack base change",
+   "results": "8 hits; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd",
+   "date": "2026-10-23",
+   "verdict": "no match: returned hits concern schemes, ring-map property infrastructure or unrelated uses of adequate; no theorem about adequately affine algebraic-stack morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic stacks, power lifting of global sections of every quotient quasi-coherent algebra persists after tensor extension to any algebra over an affine base",
+   "results": "8 hits; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.HasAffineProperty.affineAnd_iff, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.HasRingHomProperty.appTop, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: returned hits concern schemes, ring-map property infrastructure or unrelated uses of adequate; no theorem about adequately affine algebraic-stack morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-product-affinization",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: base change of X to Spec k along X to Spec k",
+   "via": [
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequately-affine-affine-target-base-change",
+  "worker": "stage1",
+  "summary": "Proved arbitrary stack base change by testing on smooth affine schemes, pushing each arbitrary quotient algebra along the affine projection, applying the existing affine-target global power-lifting criterion, and translating back. Algebraicity is an existing node; qcqs and restriction are checked directly from the existing definitions. No new nodes and no statement change. Real Mathlib searches found only scheme-level affine/base-change results.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images paragraph (3), alteration/moduli chain and Q44 product-affinization base-change step; latest blueprint direct-images proof paragraph (3) is the Rj_* preservation route. The inherited creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py prints None), so blueprint.from.node and via are retained unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-6c073cf42",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-6c073cf42 (reviewer sub-agent of L); spot-checked: Read the item and all 7 cited statements in full; no new nodes, statement unchanged, proof_deps equal the union of the step uses, no cycle. Step 1: the fibre-product lemma gives algebraicity, and P×_V W ≃ U×_T W by reassociating triples. Step 2: elementary base change of qcqs; quasi-compactness via the composite Z→V→T, and Δ_p is the base change of Δ_f (Stacks categories.tex lemma-base-change-diagonal, a purely 2-categorical fact; stacks-morphisms lemma-base-change-separated l.490 and lemma-base-change-quasi-compact l.1771). Step 3: restriction is precomposition in def-sfb-stack-quasi-coherent-algebra, and the localized sites at corresponding objects are both Sch/Z_j, so quasi-coherence and surjectivity survive restriction. Step 4: the affine-base-change clause of lem-sfb-stack-affine-algebra-direct-image (any R→S_i) makes q_i affine; q_* preserves surjections and the global-section ring isomorphisms commute with algebra maps and powers; the criterion lem-sfb-affine-target-adequacy-criterion applies because f is qcqs with target Spec R, and gives the power lift. Step 5: an affine open cover is a jointly surjective étale family in Lis-et(V); the exponents may vary with i, as the definition allows. Tested h=id, V empty, nonflat or nilpotent R→R/I, and BG×BH→BH. No duplicate among the adequately-affine nodes; the only citer, product-affinization, uses the item as stated. Batch-5: def-sfb-stack-qcqs-morphism and def-sfb-stack-quasi-coherent-algebra add nothing beyond the existing stmt_dep's closure. lem-sfb-algebraic-stack-fibre-products adds only generic sec-trace-formula algebraic-space and fppf-descent foundations, none of them a trace-formula or Poincaré-duality statement, so the flag does not apply. Alper PDF is absent locally (WANTED in the report); I checked the argument on its own. Maintainer note: blueprint.from.node is null, inherited from Q44's creation; this is a fault of the base node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequatelyAffineAffineTargetBaseChange",
+  "declaration": "CategoryTheory.adequatelyAffine_affineTarget_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequatelyAffineAffineTargetBaseChange.lean",
+  "statement": "theorem adequatelyAffine_affineTarget_baseChange {k : Type u} [Field k] (T : Over (Spec (.of k))) [IsAffine T.left] {U : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))} {V : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))} (hU : IsAlgebraicModuliStack U) (hV : IsAlgebraicModuliStack V) (f : BasedFunctor U (discreteModuli (yoneda.obj T))) (h : BasedFunctor V (discreteModuli (yoneda.obj T))) (hf : ∃ hT : IsAlgebraicModuliStack (discreteModuli (yoneda.obj T)), IsAdequatelyAffineMorphism f hU hT) : ∃ hP : IsAlgebraicModuliStack (moduliTwoFiberProduct f h), IsAdequatelyAffineMorphism (moduliTwoFiberSnd f h) hP hV",
+  "branch": "sheaf-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing actual second comma projection from def-sfb-open-moduli-substack (added landed statement dependency). The algebraicity proof parameters of adequate affineness are existentially bound with the predicate, so product algebraicity is asserted rather than assumed. No change to the mathematical statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69c805bb9",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: field k, T over Spec k with IsAffine T.left, U and V algebraic stacks with independent universes, f and h BasedFunctors into discreteModuli(yoneda T), hf = ∃ hT, IsAdequatelyAffineMorphism f hU hT (proof-irrelevant and always satisfiable, so no extra hypothesis), conclusion = ∃ hP, IsAdequatelyAffineMorphism (moduliTwoFiberSnd f h) hP hV on the actual 2-fibre product over T. No flatness, representability or diagonal hypotheses. Item node diff against live: only lean added and stmt_deps gained the landed def-sfb-open-moduli-substack, which owns moduliTwoFiberSnd (allowed by brief-stage2 l.177). lean.statement verbatim. Only sorry; source and blueprint docstrings present; five proof steps in the docstring. No existing statement found. Edge cases (h identity, empty U/V/T, non-flat h, BG, any characteristic, universes) all covered. Advisories: redundant imports (H9); self-review second reading. No recompile; worker reports clean compiles."
+ }
+}

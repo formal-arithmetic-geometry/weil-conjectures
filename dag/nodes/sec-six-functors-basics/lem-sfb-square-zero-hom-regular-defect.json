@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-square-zero-hom-regular-defect",
+ "kind": "statement",
+ "title": "Regular multiplicativity defect and cochain correction across a square-zero ideal",
+ "statement": "Let $A$ be a commutative ring, $J\\subseteq A$ an ideal with $J^2=0$, $A_0=A/J$, $S=\\operatorname{Spec}A$ and $S_0=\\operatorname{Spec}A_0$ [def-weil-affine-spectrum]. Let $H=\\operatorname{Spec}C$ and $G$ be affine group schemes over $S$, with multiplication, inverse and identity satisfying the group diagrams. Assume that $C$ is flat as an $A$-module (tensoring with $C$ preserves injections), and that $G\\to S$ is smooth [def-sbc-smooth-morphisms]. Put $H_0=H\\times_SS_0$, $G_0=G\\times_SS_0$ [def-pc-base-change], and $C_0=C/JC$. Let $u_0:H_0\\to G_0$ be an $S_0$-group homomorphism and let $f:H\\to G$ be an $S$-scheme morphism reducing to $u_0$; $f$ need not preserve identity or multiplication. Let $P=e_0^*\\Omega^1_{G_0/S_0}$ be the cotangent $A_0$-module at the identity: its homomorphisms to a module $N$ are the $A_0$-derivations of the coordinate ring of $G_0$ to $N$, where that ring acts through its identity augmentation. Set $L=\\operatorname{Hom}_{A_0}(P,A_0)$ and $E=L\\otimes_{A_0}J$ [def-weil-pbc-module-tensor-product]. Conjugation in $G_0$, differentiated at its identity and composed with $u_0$, makes $E$ an $H_0$-module; equivalently it gives an $A_0$-linear coaction $E\\to E\\otimes_{A_0}C_0$ satisfying the coproduct and counit identities.\nFor every flat commutative $A$-algebra $R$, put $R_0=R/JR$. There is an additive-group isomorphism\n$$\\kappa_R:E\\otimes_{A_0}R_0\\xrightarrow{\\sim}\\ker(G(R)\\to G_0(R_0)),$$\nnatural in flat $A$-algebras $R$. On the right the group law is multiplication. Conjugating $\\kappa_R(v)$ by $f(h)$ corresponds to the action of the reduction of $h\\in H(R)$ on $v$ through the displayed $H_0$-coaction.\nFor $n\\geq1$ define the module of regular $n$-cochains by $C^n(H_0,E)=E\\otimes_{A_0}C_0^{\\otimes n}$. Evaluation at $h_1,\\ldots,h_n\\in H_0(B)$ for an $A_0$-algebra $B$ uses their algebra maps $C_0\\to B$ and multiplication in $B$. There is a unique $c_f\\in C^2(H_0,E)$ characterized on the universal pair of $H$-points, over the flat algebra $C\\otimes_A C$, by\n$$\\kappa(c_f(h,k))=f(hk)f(k)^{-1}f(h)^{-1}.$$\nIt satisfies the regular cocycle identity\n$$h\\mathbin{\\cdot}c_f(k,l)-c_f(hk,l)+c_f(h,kl)-c_f(h,k)=0\\quad\\text{in }C^3(H_0,E).$$\nFor every regular $1$-cochain $b\\in E\\otimes_{A_0}C_0$, its image under $\\kappa_C$ defines an $S$-scheme morphism $\\widetilde b:H\\to G$ reducing to the identity section. The morphism $f_b(h)=\\widetilde b(h)f(h)$ reduces to $u_0$ and has defect\n$$c_{f_b}(h,k)=c_f(h,k)-\\bigl(h\\mathbin{\\cdot}b(k)-b(hk)+b(h)\\bigr).$$\nVanishing of $c_f$ is equivalent to the equality of scheme morphisms $f\\circ m_H=m_G\\circ(f\\times f)$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes (2014), Proposition B.2.5, printed pp.286-287, explicit defect and correction formulas; proof of Corollary B.2.6, printed p.287, identification of the square-zero kernel and its adjoint action. Flat test algebras suffice here; no claim identifying the kernel on arbitrary non-flat test algebras is made. Online source read; WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-infinitesimal-regular-cochains"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}B$, with augmentation $\\varepsilon:B\\to A$. The smooth-differentials theorem [lem-ag-smooth-relative-differentials-finite-locally-free] makes $\\Omega^1_{G/S}$ finite locally free. Pulling a local free frame back along $e_0:S_0\\to G$ gives a local free frame of $e_0^*\\Omega^1_{G/S}$, directly from the tensor-pullback definition [def-pc-module-pullback]. By differential base change [lem-weil-pbc-kahler-differentials-base-change] this is $e_0^*\\Omega^1_{G_0/S_0}$. Thus its module of sections is the module $P$ in the statement. Apply [lem-pc-finite-flat-affine-sections-projective] to this finite locally free sheaf on the affine scheme $S_0$, with its entire affine open: $P$ is finitely presented and projective. Neither constant rank nor Noetherianity is needed.",
+   "uses": [
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-pc-finite-flat-affine-sections-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/algebra.tex",
+    "place": "Tag 02G1 (lemma-smooth-omega-finite-locally-free), Tag 00RV (lemma-differentials-base-change); finite projective affine sections as in the cited node."
+   }
+  },
+  {
+   "text": "Choose finite generators of $P$ from its finite presentation. Projectivity [def-weil-pbc-projective-module] splits the resulting surjection $A_0^r\\to P$. Writing the splitting in coordinates gives $p_i\\in P$ and $\\phi_i\\in L$ with $p=\\sum_i\\phi_i(p)p_i$. For any $A_0$-module $N$, the map $L\\otimes N\\to\\operatorname{Hom}(P,N)$, $\\phi\\otimes n\\mapsto(p\\mapsto\\phi(p)n)$, has inverse $t\\mapsto\\sum_i\\phi_i\\otimes t(p_i)$: the two composites are identities by the displayed dual-basis equation, also applied to functionals. These maps commute with every map of coefficient modules, since their formulas do. This is an elementary dual-basis calculation, including $r=0$.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CF (lemma-characterize-projective), splitting of a free surjection; explicit finite dual-basis calculation."
+   }
+  },
+  {
+   "text": "For a flat $A$-algebra $R$, tensoring the injection $J\\hookrightarrow A$ with $R$ is injective, by the stated meaning of flatness (also [lem-trf-flat-tensor-preserves-injection]). Its image is exactly $JR$, so $J\\otimes_A R\\cong JR$. Since $J^2=0$, balancing gives $J\\otimes_A R=J\\otimes_{A_0}R_0$: the maps send $j\\otimes r$ to $j\\otimes\\bar r$ and back, the latter independent of the lift because $J(JR)=0$. In particular $(JR)^2=0$. For $R_n=C^{\\otimes_A n}$, the tensor functor is the composite of $n$ tensor functors with $C$, so it preserves injections and $R_n$ is flat. Sending each tensor factor to its quotient gives $R_n/JR_n\\cong C_0^{\\otimes_{A_0}n}$; an inverse sends a tensor of residue classes to the residue class of the tensor of any lifts, which is well-defined by multilinearity.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-space-square-zero-kernel-module] to $G/S$ and $\\operatorname{Spec}R_0\\hookrightarrow\\operatorname{Spec}R$, whose ideal is $JR$. Its conclusion identifies the kernel, additively, with homomorphisms from the pulled-back cotangent sheaf to $\\widetilde{JR}$. The affine-chart clause of [lem-sfb-space-affine-module-correspondence] identifies these with $\\operatorname{Hom}_{R_0}(R_0\\otimes_{A_0}P,JR)=\\operatorname{Hom}_{A_0}(P,JR)$; the equality sends a map $t$ to $p\\mapsto t(1\\otimes p)$, with inverse $r\\otimes p\\mapsto rt(p)$. Steps 2 and 3 identify this module with $L\\otimes J\\otimes R_0=E\\otimes R_0$. Define $\\kappa_R$ as the resulting inverse kernel identification. To check naturality, use the difference description in [lem-sfb-space-square-zero-lift-linearization]: the corresponding point has coordinate map $\\varepsilon_R+D$, where $D:B\\to JR$ is the derivation associated to $P\\to JR$. A map $R\\to R'$ sends it to $\\varepsilon_{R'}+D'$ by composition. This is exactly the coefficient map in steps 2 and 3, proving the claimed naturality.",
+   "uses": [
+    "lem-sfb-group-space-square-zero-kernel-module",
+    "lem-sfb-space-affine-module-correspondence",
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "Here is the regular adjoint action, with no choice of a lift. Put $B_0=B/JB$. Over $B_0$, take the universal point $g\\in G_0(B_0)$ and the automorphism $x\\mapsto gxg^{-1}$ of $(G_0)_{B_0}$, fixing its identity. Pullback of derivations along its coordinate map induces a $B_0$-linear endomorphism of the cotangent module $B_0\\otimes P$, by the universal property [def-weil-pbc-kahler-differentials]. This is the cotangent transpose of the linear postcomposition map of [lem-sfb-space-square-zero-lift-linearization], applied to the identity lift over a square-zero extension of $B_0$. Its transpose acts on $\\operatorname{Hom}_{A_0}(P,B_0)=L\\otimes B_0$ using step 2. Evaluating on $\\phi\\otimes1$ defines $L\\to L\\otimes B_0$. This is a coaction: evaluating the two iterated maps on the universal pair gives the equality of derivatives of $x\\mapsto g(hxh^{-1})g^{-1}$ and $x\\mapsto(gh)x(gh)^{-1}$; evaluation at the identity gives the identity map. Both equalities hold on every generator $\\mathrm db$ by substitution in the coordinate maps, hence on the entire cotangent module. Tensor this action with $J$, on which the group acts trivially, and substitute $u_0$ in the universal $g$. This defines the asserted $A_0$-linear $H_0$-coaction on $E$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "We check that this action is the actual conjugation action on the kernel. Let $g\\in G(R)$ and let a kernel point have coordinate map $\\varepsilon_R+D$, as in step 4. Write $\\Delta^{(2)}(a)=\\sum a_1\\otimes a_2\\otimes a_3$ for the iterated coproduct of $B$. Substitution in the three factors shows that the difference of the coordinate map of $g\\kappa_R(v)g^{-1}$ from $\\varepsilon_R$ is $$a\\longmapsto\\sum g^*(a_1)D(a_2)(g^{-1})^*(a_3).$$ The terms with $\\varepsilon_R$ in the middle sum to $\\varepsilon_R(a)$ by the group inverse identity. Because each $D(a_2)$ belongs to $JR$ and $(JR)^2=0$, each other factor in this formula may be replaced by its reduction modulo $JR$. Thus this is precisely the derivative of conjugation by $g_0$, as constructed in step 5, acting on the coefficient derivation. Equivalently it is the linear postcomposition map of [lem-sfb-space-square-zero-lift-linearization]. For $g=f(h)$ its reduction is $u_0(h_0)$, which proves the claimed equivariance of $\\kappa_R$.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "By the tensor universal property, algebra maps $C\\otimes_A C\\to R$ are exactly pairs of algebra maps $C\\to R$. The fibre-product universal property [def-pc-fibre-product] and the affine-spectrum correspondence identify $\\operatorname{Spec}(C\\otimes_A C)$ with $H\\times_SH$. Over the flat algebra $R_2=C\\otimes_A C$, let $h,k$ be the two universal $H$-points and set $d(h,k)=f(hk)f(k)^{-1}f(h)^{-1}$. Its reduction is $u_0(h_0k_0)u_0(k_0)^{-1}u_0(h_0)^{-1}=1$, so $d(h,k)$ is in the kernel. Define $c_f=\\kappa_{R_2}^{-1}(d(h,k))$, viewed by step 3 as an element of $E\\otimes C_0\\otimes C_0$. This is the claimed regular cochain, uniquely determined because $\\kappa_{R_2}$ is bijective. Every pair of $H$-points over a flat $A$-algebra comes from a unique algebra map $R_2\\to R$ [def-weil-affine-spectrum]. Naturality of $\\kappa$ therefore gives the displayed defect formula on all such pairs. More generally, substitution of coordinate maps in any $A_0$-algebra is the cochain evaluation specified in the statement; it makes sense without lifting those points.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "Work over $R_3=C\\otimes_A C\\otimes_A C$ with its universal triple. The defining equation is $f(hk)=d(h,k)f(h)f(k)$. Compute $f((hk)l)=f(h(kl))$ using this equation twice on either side, then cancel $f(h)f(k)f(l)$ on the right. The result is $$d(hk,l)d(h,k)=d(h,kl)\\bigl(f(h)d(k,l)f(h)^{-1}\\bigr).$$ All four factors lie in the abelian kernel identified in step 4. Applying its additive identification and the conjugation formula of step 6 gives $c_f(hk,l)+c_f(h,k)=c_f(h,kl)+h\\cdot c_f(k,l)$. Rearranging proves the stated cocycle identity in $E\\otimes C_0^{\\otimes3}$, because the triple is universal. This calculation uses no normalization at the identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "For $b\\in E\\otimes C_0$, the point $\\kappa_C(b)\\in G(C)$ is exactly an $S$-morphism $\\widetilde b:H\\to G$, by the affine-spectrum correspondence [def-weil-affine-spectrum]. Its reduction is the identity morphism $H_0\\to S_0\\to G_0$ because it belongs to the kernel. Multiply it with $f$ using the group-scheme multiplication to obtain $f_b$. Its reduction is $1\\,u_0=u_0$. After pulling back along any of the coordinate maps $C\\to R_n$, naturality in step 4 identifies its value with $\\kappa_{R_n}$ of the corresponding evaluation of $b$. Thus the construction produces scheme morphisms and the required regular evaluations.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "In the universal pair algebra write $\\beta(h)=\\widetilde b(h)$. Expanding the defect of $f_b$ and regrouping adjacent inverse factors gives $$d_b(h,k)=\\beta(hk)d(h,k)\\bigl(f(h)\\beta(k)^{-1}f(h)^{-1}\\bigr)\\beta(h)^{-1}.$$ Each factor on the right is in the abelian kernel. The additive identification of step 4 and equivariance of step 6 therefore give $$c_{f_b}(h,k)=b(hk)+c_f(h,k)-h\\cdot b(k)-b(h).$$ This is the stated formula with its minus sign. Since the pair is universal, it is an equality in the regular cochain module, not merely an identity on some residue-field points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "The equality $c_f=0$ is equivalent through $\\kappa_{R_2}$ to $d(h,k)=1$ at the universal pair, hence by right multiplication to $f(hk)=f(h)f(k)$ there. By [def-weil-affine-spectrum], equality of the coordinate maps $B\\to C\\otimes_A C$ is exactly equality of the two $S$-morphisms $H\\times_SH\\to G$. This proves both implications of the last assertion. It also explains why all preceding universal-point calculations are identities of regular cochains, with no assumption that points over fields detect equality.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287; agent expansion on flat test algebras. WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "def-weil-pbc-projective-module",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-sfb-group-space-square-zero-kernel-module",
+  "lem-sfb-space-affine-module-correspondence",
+  "lem-sfb-space-square-zero-lift-linearization",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition B.2.5 and proof of Corollary B.2.6, printed pp.286-287, read online; agent affine-coordinate expansion using local Stacks inputs. Local Conrad archive unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(cocycle|cochain|[Hh]ochschild).*(GroupScheme|HopfAlgebra)|GroupScheme.*(cocycle|cochain|square.zero)",
+   "results": "{\"t\": \"2026-10-24T04:40:35Z\", \"tool\": \"grep\", \"query\": \"(cocycle|cochain|[Hh]ochschild).*(GroupScheme|HopfAlgebra)|GroupScheme.*(cocycle|cochain|square.zero)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra extensions and ring derivations do not give regular group-scheme cochains, the adjoint kernel identification, or correction of a scheme-map lift. Abstract group cohomology has no regularity or square-zero group-scheme comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"Derivation\"",
+   "results": "{\"t\": \"2026-10-24T04:40:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"Derivation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra extensions and ring derivations do not give regular group-scheme cochains, the adjoint kernel identification, or correction of a scheme-map lift. Abstract group cohomology has no regularity or square-zero group-scheme comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The multiplicativity defect of a square zero lift of a group scheme homomorphism is a regular two cocycle",
+   "results": "{\"t\": \"2026-10-24T04:40:35Z\", \"tool\": \"leansearch\", \"query\": \"The multiplicativity defect of a square zero lift of a group scheme homomorphism is a regular two cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.Extension.twoCocycleOf\", \"derivationToSquareZeroEquivLift\", \"TrivSqZeroExt.lift\", \"derivationToSquareZeroOfLift\", \"LieModule.Cohomology.twoCochain\", \"groupCohomology.isMulCocycle₂_of_mem_cocycles₂\", \"liftOfDerivationToSquareZero\", \"TrivSqZeroExt.liftEquivOfComm\"], \"digest\": \"86865ddcdbcc9537\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra extensions and ring derivations do not give regular group-scheme cochains, the adjoint kernel identification, or correction of a scheme-map lift. Abstract group cohomology has no regularity or square-zero group-scheme comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat affine group scheme a scheme map lifting a homomorphism across a square zero ideal has a regular Lie algebra valued two cocycle defect and multiplying by a one cochain changes it by a coboundary",
+   "results": "{\"t\": \"2026-10-24T04:40:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat affine group scheme a scheme map lifting a homomorphism across a square zero ideal has a regular Lie algebra valued two cocycle defect and multiplying by a one cochain changes it by a coboundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.LieEquiv.ofCoboundary\", \"LieAlgebra.LieEquiv.ofCoboundary_toFun\", \"LieAlgebra.Extension.d₁₂_oneCochainOfTwoSplitting\", \"LieAlgebra.LieEquiv.ofCoboundary_invFun\", \"LieAlgebra.Extension.twoCocycleOf\", \"LieAlgebra.Extension.oneCochainOfTwoSplitting\", \"LieAlgebra.Extension.oneCochainOfTwoSplitting_apply\", \"LieAlgebra.Extension.twoCocycleOf_coe_coe\"], \"digest\": \"b626dec38890d6e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra extensions and ring derivations do not give regular group-scheme cochains, the adjoint kernel identification, or correction of a scheme-map lift. Abstract group cohomology has no regularity or square-zero group-scheme comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal deformation of a morphism of group schemes obstruction to preserving multiplication is an algebraic group cohomology 2 cocycle",
+   "results": "{\"t\": \"2026-10-24T04:40:39Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal deformation of a morphism of group schemes obstruction to preserving multiplication is an algebraic group cohomology 2 cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.d₁₂_apply_mem_cocycles₂\", \"groupCohomology.mem_cocycles₂_of_comp_eq_d₁₂\", \"groupCohomology.cocycles₂\", \"groupCohomology.cocycles₁.d₁₂_apply\", \"groupCohomology.d₀₁_apply_mem_cocycles₁\", \"groupCohomology.mem_cocycles₁_of_comp_eq_d₀₁\", \"groupCohomology.cocyclesMkOfCompEqD\", \"groupCohomology.cocycles₁_map_mul_of_isTrivial\"], \"digest\": \"12c3c0860791db7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra extensions and ring derivations do not give regular group-scheme cochains, the adjoint kernel identification, or correction of a scheme-map lift. Abstract group cohomology has no regularity or square-zero group-scheme comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(cocycle|cochain|[Hh]ochschild).*(GroupScheme|HopfAlgebra)|GroupScheme.*(cocycle|cochain|square.zero)",
+   "results": "{\"t\": \"2026-10-24T05:06:34Z\", \"tool\": \"grep\", \"query\": \"(cocycle|cochain|[Hh]ochschild).*(GroupScheme|HopfAlgebra)|GroupScheme.*(cocycle|cochain|square.zero)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected LieAlgebra.Extension.twoCocycleOf (Mathlib/Algebra/Lie/Extension.lean:396), groupCohomology.IsMulCocycle₂ (Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean:625), and derivationToSquareZeroEquivLift (Mathlib/RingTheory/Derivation/ToSquareZero.lean:116). Lie algebra extensions, arbitrary abstract-group cochains, and ring-map lifts do not state the regular group-scheme cochain comparison or correction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth affine group scheme the multiplicativity defect of a lift modulo a square zero ideal is a regular two cocycle",
+   "results": "{\"t\": \"2026-10-24T05:06:35Z\", \"tool\": \"leansearch\", \"query\": \"For a smooth affine group scheme the multiplicativity defect of a lift modulo a square zero ideal is a regular two cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.Extension.twoCocycleOf\", \"groupCohomology.instFunLikeSubtypeForallProdCarrierVModuleCatMemSubmoduleCocycles₂\", \"groupCohomology.IsMulCocycle₂\", \"LieModule.Cohomology.twoCochain\", \"LieModule.Cohomology.twoCocycle\", \"groupCohomology.cocycles₂\", \"groupCohomology.isMulCocycle₂_of_mem_cocycles₂\", \"groupCohomology.IsMulCocycle₁\"], \"digest\": \"ee864f1f3d38204e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected LieAlgebra.Extension.twoCocycleOf (Mathlib/Algebra/Lie/Extension.lean:396), groupCohomology.IsMulCocycle₂ (Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean:625), and derivationToSquareZeroEquivLift (Mathlib/RingTheory/Derivation/ToSquareZero.lean:116). Lie algebra extensions, arbitrary abstract-group cochains, and ring-map lifts do not state the regular group-scheme cochain comparison or correction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"Derivation\"",
+   "results": "{\"t\": \"2026-10-24T05:06:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"Derivation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected LieAlgebra.Extension.twoCocycleOf (Mathlib/Algebra/Lie/Extension.lean:396), groupCohomology.IsMulCocycle₂ (Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean:625), and derivationToSquareZeroEquivLift (Mathlib/RingTheory/Derivation/ToSquareZero.lean:116). Lie algebra extensions, arbitrary abstract-group cochains, and ring-map lifts do not state the regular group-scheme cochain comparison or correction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat affine group scheme a lift of a group homomorphism modulo a square zero ideal has a regular Lie algebra valued multiplicativity defect satisfying the two cocycle equation and cochain correction formula",
+   "results": "{\"t\": \"2026-10-24T05:06:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat affine group scheme a lift of a group homomorphism modulo a square zero ideal has a regular Lie algebra valued multiplicativity defect satisfying the two cocycle equation and cochain correction formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.Extension.twoCocycleOf\", \"LieAlgebra.LieEquiv.ofCoboundary_toFun\", \"LieAlgebra.Extension.twoCocycleOf_coe_coe\", \"LieAlgebra.Extension.d₁₂_oneCochainOfTwoSplitting\", \"LieAlgebra.LieEquiv.ofCoboundary\", \"Algebra.Extension.homInfinitesimal\", \"LieAlgebra.bracket_ofTwoCocycle\", \"LieAlgebra.LieEquiv.ofCoboundary_invFun\"], \"digest\": \"08f2ef7b4f83367a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected LieAlgebra.Extension.twoCocycleOf (Mathlib/Algebra/Lie/Extension.lean:396), groupCohomology.IsMulCocycle₂ (Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean:625), and derivationToSquareZeroEquivLift (Mathlib/RingTheory/Derivation/ToSquareZero.lean:116). Lie algebra extensions, arbitrary abstract-group cochains, and ring-map lifts do not state the regular group-scheme cochain comparison or correction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal deformation of group scheme homomorphisms regular group cohomology obstruction multiplicativity failure and coboundary",
+   "results": "{\"t\": \"2026-10-24T05:07:53Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal deformation of group scheme homomorphisms regular group cohomology obstruction multiplicativity failure and coboundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.H1Cotangent.δ_map\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"Algebra.H1Cotangent.map\", \"Algebra.Generators.H1Cotangent.δ\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"Algebra.H1Cotangent\", \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"Algebra.Extension.H1Cotangent.map\"], \"digest\": \"cba60f0b69891d21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected LieAlgebra.Extension.twoCocycleOf (Mathlib/Algebra/Lie/Extension.lean:396), groupCohomology.IsMulCocycle₂ (Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean:625), and derivationToSquareZeroEquivLift (Mathlib/RingTheory/Derivation/ToSquareZero.lean:116). Lie algebra extensions, arbitrary abstract-group cochains, and ring-map lifts do not state the regular group-scheme cochain comparison or correction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "def twoCocycleOf|def IsMulCocycle₂|def derivationToSquareZeroEquivLift",
+   "results": "{\"t\": \"2026-10-24T05:16:26Z\", \"tool\": \"grep\", \"query\": \"def twoCocycleOf|def IsMulCocycle₂|def derivationToSquareZeroEquivLift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Loop.lean\", \"Mathlib/Algebra/Lie/Extension.lean\", \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\"], \"digest\": \"72459ca70de5fbb2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected LieAlgebra.Extension.twoCocycleOf (Mathlib/Algebra/Lie/Extension.lean:396), groupCohomology.IsMulCocycle₂ (Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean:625), and derivationToSquareZeroEquivLift (Mathlib/RingTheory/Derivation/ToSquareZero.lean:116). Lie algebra extensions, arbitrary abstract-group cochains, and ring-map lifts do not state the regular group-scheme cochain comparison or correction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-zero-diagonalizable-hom-lift",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field; completion step in the proof of Conrad Proposition 3.1.6, using Corollary B.3.5 for the fixed split source. Supporting input to the complete-local torus lifting proof: Corollary B.2.6 and Remark B.2.4, printed pp.285-287: square-zero homomorphism obstruction and its vanishing for diagonalizable groups. This node records their combined infinitesimal existence consequence, not the complete-local lifting theorem. Supporting input: Corollary B.2.6 proof: identify the infinitesimal kernel, then Proposition B.2.5 defect and correction formulas.",
+   "via": [
+    "lem-sfb-square-zero-diagonalizable-hom-lift",
+    "lem-sfb-complete-local-split-torus-hom-lift",
+    "lem-sfb-split-torus-etale-subgroup-lift",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-square-zero-hom-regular-defect",
+  "worker": "stage1",
+  "summary": "Reused the existing general square-zero group kernel and lift-linearization nodes; proved the smooth cotangent dual comparison, regular adjoint action, universal defect, cocycle, correction, and scheme-morphism vanishing criterion explicitly. No new nodes and no statement change. Verified all cited statements, flat test-algebra hypotheses and correction signs.",
+  "blueprint": "Supports the recorded chain from det-thm-sf-ctf-stability-direct-images, clause (3), through the square-zero diagonalizable homomorphism-lifting input. The current latest blueprint contains the six-functor endpoint but no separate statement of this infinitesimal group-scheme calculation; the inherited blueprint.from.node is null, as confirmed by blueprint_refs.py ancestor. Steps realize Conrad B.2.5 defect and cochain formulas and B.2.6 kernel identification, the exact supporting place already recorded in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic smooth-cotangent finite-local-freeness input, with varying rank; used to prove finite projectivity at the identity. The unit has no separate version for an arbitrary smooth affine group."
+   },
+   {
+    "node": "lem-pc-finite-flat-affine-sections-projective",
+    "why": "Generic affine section theorem for finite locally free modules; supplies finite presentation and projectivity of P. This does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-pc-finite-flat-affine-sections-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-374588db9",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-374588db9 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full and changed nothing; review.md has the step-by-step checks. The delivery is a single commit: the item JSON goes from no proof to 11 proof steps, plus the report. It adds no new nodes, the statement is unchanged and it is not a re-split item. Conrad's book is not in literature/ (WANTED), so I checked the mathematics myself rather than against the source. I re-derived the conjugation formula of step 6. In step 6 the ε part collapses by the antipode identity and (JR)^2=0 lets the outer factors be reduced mod JR. I also re-derived the cocycle identity of step 8, with the stated sign and no use of normalization, and the correction formula of step 10, c_{f_b}=c_f+b(hk)-h·b(k)-b(h), which matches the minus sign in the statement. Flatness is needed exactly in step 3 (J⊗R≅JR) and the report's counterexample A=k[ε], R=k, Ga shows it. Smoothness is used only for finite projectivity of P (step 1); the dual basis of step 2 is correct, including rank 0. Small cases I tested: J=0, Ga with f=x+εq, Gm, and a lift that does not preserve the identity. The hard inputs (square-zero kernel module, affine module correspondence, lift linearization) are existing general nodes of the same unit, and their statements say what steps 4 to 6 take from them. Batch-5 check: lem-trf-flat-tensor-preserves-injection is a general Mathlib flatness leaf. The three sfb nodes reach sec-trace-formula only through the general definition def-trf-algebraic-space. None of these is trace-formula or Poincaré-duality content, so all four citations are accepted. I accept the tool_uses for lem-ag-smooth-relative-differentials-finite-locally-free and lem-pc-finite-flat-affine-sections-projective. Maintainer note: the existing node lem-pc-finite-flat-affine-sections-projective cites def-amb-finite-locally-free-module, which defines constant rank. Its Lean (IsFiniteLocallyFree) is variable rank, so step 1's variable-rank use is sound, but that node should cite def-sc-finite-locally-free-sheaf."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroHomRegularDefect",
+  "declaration": "AlgebraicGeometry.InfinitesimalRegular.squareZeroHom_regularDefect",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroHomRegularDefect.lean",
+  "statement": "theorem squareZeroHom_regularDefect (A D C : Type u) [CommRing A] [CommRing D] [CommRing C] [HopfAlgebra A D] [HopfAlgebra A C] (J : Ideal A) (hJ : J ^ 2 = ⊥) [Module.Flat A C] [Smooth (Spec.map (CommRingCat.ofHom (algebraMap A D)))] (u₀ : Reduced A J D →ₐc[A ⧸ J] Reduced A J C) (f : D →ₐ[A] C) (hf : reduceMap A J f = u₀.toAlgHom) : ∃ (κ : Comparison A J D) (ρ : Coeff A J D →ₗ[A ⧸ J] Coeff A J D ⊗[A ⧸ J] Reduced A J C), IsCoaction ρ ∧ (∀ (R : Type u) [CommRing R] [Algebra A R] [Module.Flat A R] (v w : Coeff A J D ⊗[A ⧸ J] Reduced A J R), (κ R (v + w)).val = (κ R v).val * (κ R w).val) ∧ (∀ (R : Type u) [CommRing R] [Algebra A R] [Module.Flat A R] (φ : Module.Dual (A ⧸ J) (identityCotangent (A ⧸ J) (Reduced A J D))) (j : J) (r : R) (d : D) (a : A), Ideal.Quotient.mk J a = φ (identityDifferential (A ⧸ J) (Reduced A J D) (reduce A J D d)) → ((κ R ((φ ⊗ₜ[A ⧸ J] J.toCotangent j) ⊗ₜ[A ⧸ J] reduce A J R r)).val.ofConv d) = algebraMap A R (counitAlgHom A D d) + algebraMap A R (a * (j : A)) * r) ∧ (∀ (R T : Type u) [CommRing R] [CommRing T] [Algebra A R] [Algebra A T] [Module.Flat A R] [Module.Flat A T] (α : R →ₐ[A] T) (v : Coeff A J D ⊗[A ⧸ J] Reduced A J R), (κ T (TensorProduct.map LinearMap.id (reduceMap A J α).toLinearMap v)).val = toConv (α.comp (κ R v).val.ofConv)) ∧ (∀ (R : Type u) [CommRing R] [Algebra A R] [Module.Flat A R] (h : WithConv (C →ₐ[A] R)) (v : Coeff A J D ⊗[A ⧸ J] Reduced A J R), (κ R (action ρ (reduceMap A J h.ofConv) v)).val = toConv (h.ofConv.comp f) * (κ R v).val * inverse (toConv (h.ofConv.comp f))) ∧ ∃ c : Cochain (K := A ⧸ J) (Reduced A J C) (Coeff A J D) 2, HasDefect A J κ f c ∧ (∀ c', HasDefect A J κ f c' → c' = c) ∧ (∀ (T : Type u) [CommRing T] [Algebra (A ⧸ J) T] (h k l : WithConv (Reduced A J C →ₐ[A ⧸ J] T)), action ρ h.ofConv (eval ![k.ofConv, l.ofConv] c) - eval ![(h * k).ofConv, l.ofConv] c + eval ![h.ofConv, (k * l).ofConv] c - eval ![h.ofConv, k.ofConv] c = 0) ∧ (∀ b : Coeff A J D ⊗[A ⧸ J] Reduced A J C, reduceMap A J (correct A J κ f b) = u₀.toAlgHom ∧ ∃ c_b : Cochain (K := A ⧸ J) (Reduced A J C) (Coeff A J D) 2, HasDefect A J κ (correct A J κ f b) c_b ∧ ∀ (T : Type u) [CommRing T] [Algebra (A ⧸ J) T] (h k : WithConv (Reduced A J C →ₐ[A ⧸ J] T)), eval ![h.ofConv, k.ofConv] c_b = eval ![h.ofConv, k.ofConv] c - (action ρ h.ofConv (TensorProduct.map LinearMap.id k.ofConv.toLinearMap b) - TensorProduct.map LinearMap.id (h * k).ofConv.toLinearMap b + TensorProduct.map LinearMap.id h.ofConv.toLinearMap b)) ∧ (c = 0 ↔ (comulAlgHom A C).comp f = (Algebra.TensorProduct.map f f).comp (comulAlgHom A D))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-016601b38",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Read item, new def node def-sfb-infinitesimal-regular-cochains, all stmt_dep records, both modules, report, and Mathlib Spec.mapMulEquiv (a MulEquiv, so convolution = group law) and AlgHom.convInv. Clause by clause: Hopf A-algebras D,C for G,H; J^2=⊥; Module.Flat A C; Smooth Spec.map; u0 bialgebra map of the base changes; f only an algebra map with reduction u0. κ: bijections E⊗R0 ≃ kernel for flat R, additive into convolution (re-derived (ε+D1)(ε+D2)=ε+D1+D2), fixed by ε_R(d)+a·j·r on spanning pure tensors, natural. Conjugation clause pins ρ via κ_C injective; action is a left action; IsCoaction is coassociative and counital. c: HasDefect on flat tests including the universal C⊗C, plus uniqueness; cocycle and correction signs match the node (f_b=κ_C(b)*f); c=0 ↔ Δ_C∘f=(f⊗f)∘Δ_D. lean.statement verbatim (scripted); defs have real data, docstrings with source and blueprint, proof steps in the docstring; only the theorem is sorry. No name clash or parallel landing. Notes: IsCoaction has the same formula as BorelDistributions.IsCoordinateCoaction, which is stated only for Γ(U,⊤) of a scheme, so it is not a mechanical abbrev; unify later. Tests are in universe u (standard). No file changed, no compile run."
+ }
+}

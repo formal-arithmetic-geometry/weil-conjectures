@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-locally-constant-line-twist",
+ "kind": "definition",
+ "title": "Integer and locally constant tensor powers of an invertible module",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $A$ an invertible $\\mathcal O_X$-module with its dual $A^\\vee$ [def-sc-invertible-module]. For $m\\in\\mathbf Z$, define $A^{\\otimes m}$ by the existing integer tensor-power construction with inverse $A^\\vee$ and evaluation $A\\otimes A^\\vee\\cong\\mathcal O_X$: for $m\\geq0$ it is the $m$-fold tensor power of $A$, and for $m<0$ the $(-m)$-fold tensor power of $A^\\vee$. For a locally constant function $d:|X|\\to\\mathbf Z$, let $X_m=d^{-1}(m)$, with open inclusion $j_m:X_m\\hookrightarrow X$. Define the variable twist $A^{\\otimes d}$ to be the concrete gluing $\\prod_{m\\in\\mathbf Z}(j_m)_*j_m^*(A^{\\otimes m})$ in $\\mathcal O_X$-modules, with pullback as in [def-pc-module-pullback]. The strata are disjoint and cover $X$; this product has sections on an open $U$ equal to the product of the sections of $A^{\\otimes m}$ on $U\\cap X_m$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75, integer line twists; the locally constant generalization uses disjoint-open gluing, Stacks sheaves.tex Tags 00AL and 00AM."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integer tensor powers of a line bundle and locally constant twists",
+   "results": "[leansearch] OK 8 hit(s): LocallyConstant.instPow; LinearEquiv.rTensor_zpow; LinearEquiv.lTensor_zpow; TensorPower; Profinite.NobelingProof.Nobeling_aux; TensorPower.mulEquiv; Profinite.NobelingProof.instIsAddTorsionFreeLocallyConstantInt; TensorPower.gMul_eq_coe_linearMap. None constructs variable powers of a line sheaf.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue integer tensor powers of an invertible sheaf along the clopen fibres of a locally constant integer function",
+   "results": "[leanfinder] OK 8 hit(s): CompHausLike.LocallyConstantModule.functor; Scheme.GlueData.sheafValGluedMk; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor_obj_val; Scheme.GlueData.sheafValGluedMk_val; LightCondensed.instMonoidalLightCondSetLightCondModFree; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; ModuleCat.Tilde.res_const. No line-twist construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*Twist|integerLinePower|lineTensorInverse|TensorInverse.*dual (Mathlib via msearch); integer tensor power, locally constant twist, tensorZPow (WeilConjectures and Sheaf); blueprint_refs.py search locally constant twist; rg in dag/nodes",
+   "results": "[grep] OK 0 hit(s) in Mathlib. Upstream TensorInverse.zpow and Modules.dual exist and are reused. LocallyRankedExteriorComplex glues exterior powers, not line powers. No locally constant line twist in upstream or Sheaf. blueprint_refs: 0 blueprint nodes match locally constant twist. DAG search found the item itself and unrelated coefficient/tensor nodes, no existing definition.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-bundle-picard-classification",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The variable twist O_P(d) in the arbitrary-base Picard decomposition, gluing integer powers across the open degree strata.",
+   "via": [
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyConstantLineTwist",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.locallyConstantLineTwist",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.lineTensorInverse",
+   "AlgebraicGeometry.Scheme.Modules.integerLinePower",
+   "AlgebraicGeometry.Scheme.Modules.lineDegreeOpen",
+   "AlgebraicGeometry.Scheme.Modules.locallyConstantLineTwist"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyConstantLineTwist.lean",
+  "statement": "def locallyConstantLineTwist {X : Scheme.{u}} (A : X.Modules) (hA : A.IsInvertible) (d : LocallyConstant X ℤ) : X.Modules",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3732a9cfa",
+  "group": "Q01",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3732a9cfa",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read node, new def node, 5 base stmt_deps, both modules, report, upstream TautologicalQuotient/IsFiniteLocallyFreeOfRank/IsInvertible/dualEvaluation/TensorInverse.zpow. Every clause rendered (unique LocallyConstant d, N unique up to iso, twist_restrict, local_iff/locally_twist, tensor d+d'/N⊗N', base_change on arbitrary IsPullback with d∘h and h^*N, field ∃! m). Quasi-coherence is a conclusion; r≥2 only; no extra hypotheses; .{u,u,u} not restrictive; ∀ D non-vacuous by quotient-geometry ∃ D. Truth: ℤ-indexed product of direct images restricts to A^m on each stratum; tensor and base-change isos glue over disjoint strata. Edge cases: empty S, infinitely many strata, negative m, r=1 excluded as in node. New node def-sfb-locally-constant-line-twist not duplicated (no ℤ-power or variable twist of Scheme.Modules upstream, in Sheaf or DAG), reuses zpow/dual, real data, §5 fields OK. Item changed only in lean + stmt_deps (adds new node). Statements verbatim, lines ≤100, docstrings with source/blueprint, 9-step proof docstring, sorry only. Not recompiled per instruction. No findings."
+ }
+}

@@ -23,56 +23,56 @@
  ],
  "proof": [
   {
-   "text": "Write $q_u=\\operatorname{PF}_u^{-1}$, $L=L_{gf}$ and $a=(t_f\\otimes1)q_{f;L_f,L_g}$, with unitors understood. By [def-weil-pbc-composite-adjunction], $c_K=\\varepsilon_{g,K}F_g(\\varepsilon_{f,G_gK})$. Put both twists first by symmetry. Apply [lem-pur-tensor-action-trace-contraction] to the supplied counit formulas and action law, using its $\\sigma_K$ to identify the source with $F_gF_f(L\\otimes P_fP_gK)$. It gives\n$$c_K=(t_gF_g(a)\\otimes1_K)q_{g;F_fL,K}F_g(q_{f;L,P_gK}).$$",
+   "text": "Use the native precompositor contraction, with each site's specified braiding and actual operations.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-pur-tensor-action-trace-contraction"
+    "lem-pur-native-precompositor-contraction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Canonical reassociations; assembly from the separate tensor-action contraction lemma. Composite counit: Stacks Tag 0DV0, lemma-compose-counits, equation-compose-counits."
+    "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
    }
   },
   {
-   "text": "Invert the projection/compositor identity assumed in the statement, and multiply by the compositor inverses. At $M=L$ this gives\n$$q_{g;F_fL,K}F_g(q_{f;L,P_gK})\\alpha_{L\\otimes P_fP_gK}^{-1}\n=(\\alpha_L^{-1}\\otimes1_K)q_{gf;L,K}.$$\nIndeed inverting the hypothesis first gives $\\alpha_L\\otimes1_K=\\operatorname{PF}_{gf;L,K}^{-1}\\alpha_{L\\otimes P_fP_gK}F_g(\\operatorname{PF}_{f;L,P_gK})\\operatorname{PF}_{g;F_fL,K}$, and cancellation of its three right-hand invertible factors gives the displayed equality. Precompose Step 1 by $\\alpha_{L\\otimes P_fP_gK}^{-1}$ and use it:\n$$c_K\\alpha^{-1}=(t_gF_g(a)\\alpha_L^{-1}\\otimes1_K)q_{gf;L,K}=(t_{gf}\\otimes1_K)q_{gf;L,K}.$$\nThe last equality expands the definition of $a$, giving exactly the four arrows defining $t_{gf}$ in the statement. Finally insert the source symmetry $P_{gf}K\\otimes L\\cong L\\otimes P_{gf}K$ and the target symmetry $F_{gf}L\\otimes K\\cong K\\otimes F_{gf}L$. Naturality of the latter symmetry changes $t_{gf}\\otimes1_K$ into $1_K\\otimes t_{gf}$, so this is the claimed formula with $\\Pi_{gf;L,K}$.",
+   "text": "Invert the supplied projection_comp equality. Functoriality of inverses gives inverse pullComp, inverse alpha, Fg(qf), and qg equal to qfg followed by inverse alpha tensor identity. Substitute into the precompositor contraction. Tensor bifunctoriality combines the remaining factors into compositeTrace; braiding naturality and braiding_rightUnitor give the stated coefficientCounit.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Last sentence: canonical reassociations of the package; explicit agent calculation for the expanded affine-tower counit argument"
+    "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
    }
   },
   {
-   "text": "Take $K=A_S$. With pullback's unit comparison and the tensor unitors, $q_{gf;L,A_S}$ is the identity. One can check this from the assumed action law alone: specialize it to $N_1=N_2=A_S$ and identify $L\\otimes P_{gf}A_S$ with $L$; it says $q=q^2$. Since $q$ is invertible, cancellation gives $q=1$. Thus Step 2 at the unit is $\\varepsilon^{\\mathrm{comp}}_{A_S}=t_{gf}$ under the same compositor and unit identifications.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Last sentence: canonical reassociations of the package; explicit agent calculation for the expanded affine-tower counit argument"
-   }
-  },
-  {
-   "text": "The counits and compositor are natural. Inverse projection naturality [def-exchange-projection] says: for $h:K\\to K'$ its naturality in the second input gives $(1_{F_{gf}L}\\otimes h)q_{gf;L,K}=q_{gf;L,K'}F_{gf}(1_L\\otimes P_{gf}h)$; composition with $t_{gf}$ and the two symmetries gives the claimed naturality square. The calculation has used only the stated adjunctions, tensor action, naturality and projection/compositor equation. For ordinary etale categories repeat Steps 1--3 with their own functors, adjunctions, compositor and projection maps. The assertion expressly imposes the same identities and closure assumptions on those actual maps, so each displayed substitution has the same type there. Thus the same proof applies site by site.",
+   "text": "Specialize the coefficient formula to the tensor unit. Native inverse-projection unit normalization, right-unitor naturality, and equality of the two unitors at the tensor unit give compositeTrace.",
    "uses": [
-    "def-exchange-projection"
+    "lem-pur-native-integration-projection-laws"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Last sentence: canonical reassociations of the package; explicit agent calculation for the expanded affine-tower counit argument"
+    "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
+   }
+  },
+  {
+   "text": "For each permitted h, use braiding naturality to move P h across the source symmetry, then native inverse-projection naturality. Tensor interchange moves h past the trace and left-unitor naturality gives the requested square. Apply the three-clause assembly at each selected site.",
+   "uses": [
+    "lem-pur-native-integration-projection-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
    }
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "def-weil-pbc-composite-adjunction",
-  "lem-pur-tensor-action-trace-contraction"
+  "lem-pur-native-precompositor-contraction",
+  "lem-pur-native-integration-projection-laws"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-  "place": "Unit model agreement, canonical reassociations; explicit calculation for the parent split expanded affine-tower counit step. Composite adjunction formula checked in Stacks Tag 0DV0."
+  "place": "Expanded Step 6; Lean compositor inversion and assembly from two native-map calculations."
  },
  "mathlib_searches": [
   {
@@ -199,37 +199,6 @@
   "module": "Sheaf.Paper.CompositeIntegrationCounit",
   "declaration": "WeilConjectures.PurityIntegration.compositeIntegrationCounit",
   "declarations": [
-   "WeilConjectures.PurityIntegration.coefficientFinite",
-   "WeilConjectures.PurityIntegration.IntegrationOperations",
-   "WeilConjectures.PurityIntegration.CompositeOperations",
-   "WeilConjectures.PurityIntegration.restrict",
-   "WeilConjectures.PurityIntegration.IntegrationAdjunction",
-   "WeilConjectures.PurityIntegration.epsilon",
-   "WeilConjectures.PurityIntegration.twistUnit",
-   "WeilConjectures.PurityIntegration.trace",
-   "WeilConjectures.PurityIntegration.q",
-   "WeilConjectures.PurityIntegration.coefficientCounit",
-   "WeilConjectures.PurityIntegration.TensorAction",
-   "WeilConjectures.PurityIntegration.compositeTwist",
-   "WeilConjectures.PurityIntegration.compositeTwistIso",
-   "WeilConjectures.PurityIntegration.CompositeIntegrationData",
-   "WeilConjectures.PurityIntegration.CompositeIntegrationData.compositeTrace",
-   "WeilConjectures.PurityIntegration.CompositeIntegrationData.compositeCounit",
-   "WeilConjectures.PurityIntegration.CompositeIntegrationData.CounitFormula",
-   "WeilConjectures.PurityIntegration.etaleMorphOperations_existsUnique",
-   "WeilConjectures.PurityIntegration.etaleMorphOperations",
-   "WeilConjectures.PurityIntegration.proEtaleMorphOperations_existsUnique",
-   "WeilConjectures.PurityIntegration.proEtaleMorphOperations",
-   "WeilConjectures.PurityIntegration.etaleCompositeOperations_existsUnique",
-   "WeilConjectures.PurityIntegration.etaleCompositeOperations",
-   "WeilConjectures.PurityIntegration.proEtaleCompositeOperations_existsUnique",
-   "WeilConjectures.PurityIntegration.proEtaleCompositeOperations",
-   "WeilConjectures.PurityIntegration.nativeBraiding_existsUnique",
-   "WeilConjectures.PurityIntegration.nativeBraiding",
-   "WeilConjectures.PurityIntegration.etaleOperations",
-   "WeilConjectures.PurityIntegration.proEtaleOperations",
-   "WeilConjectures.PurityIntegration.formulaFor",
-   "WeilConjectures.PurityIntegration.integrationCounitAssertion",
    "WeilConjectures.PurityIntegration.compositeIntegrationCounit"
   ],
   "file": "lean/Sheaf/Paper/CompositeIntegrationCounit.lean",
@@ -240,5 +209,26 @@
   "existing": false,
   "note": "The helper interfaces fix every native operation and canonical comparison by equality; their uniqueness specifications determine all chosen data. The main assertion quantifies over the supplied domain/adjunction data for those actual operations, at each of the two sites."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d996e",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T122503-L-1776253",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositeIntegrationOperations vs clone's CompositeIntegrationCounit (verbatim relocation, diff), item proof vs node steps, new sorry statements IntegrationProjectionLaws/PrecompositorContraction vs native projection/compositor laws and Etale.projectionMap_rightUnitality; importers ProjectionPurityAgreement and AffineOrderedIntegrationTransposes compiled against delivered modules (exit 0)"
+ }
 }

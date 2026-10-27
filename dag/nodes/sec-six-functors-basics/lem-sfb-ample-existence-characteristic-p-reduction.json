@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-ample-existence-characteristic-p-reduction",
+ "kind": "statement",
+ "title": "Existence of an ample module lifts from the reduction in characteristic p",
+ "statement": "Let $p$ be a prime number and $X$ a Noetherian scheme [def-pc-scheme], meaning that $X$ has a finite affine open covering by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Assume $p\\mathcal O_X=0$, meaning that $p\\cdot1=0$ in every local ring. Let $X_{\\mathrm{red}}$ be its reduction [def-weil-pbc-scheme-reduction]. If $X_{\\mathrm{red}}$ admits an absolutely ample invertible module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module], then $X$ admits an absolutely ample invertible module. No lift of a specified module is asserted.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD4, proposition-push-down-ample, case (3), applied to the reduction closed immersion; proof uses lemma-Frobenius-gives-norm-for-reduction and lemma-norm-ample."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=X_{\\mathrm{red}}$ and let $i:Y\\to X$ be the reduction immersion. By [def-weil-pbc-scheme-reduction], $i$ is a closed immersion and the identity on underlying points; in particular it is surjective with singleton fibres. It is finite by [lem-weil-pbc-closed-immersion-finite]. Apply [lem-sfb-reduction-frobenius-sheaf-norm] to the given Noetherian $X$ and prime $p$: obtain $e\\geq1$ and maps $\\nu_V$ satisfying all norm conditions, of degree $d=p^e\\geq1$.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-sfb-reduction-frobenius-sheaf-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4(3), proposition-push-down-ample, using Tags 0BDZ and 0BD0 (lemma-norm-ample)."
+   }
+  },
+  {
+   "text": "Choose an ample invertible module $M$ on $Y$ from the hypothesis. Since $i$ is finite surjective and the maps $\\nu_V$ preserve multiplication and $1$, commute with restriction, have the scalar-power property and satisfy residue-field vanishing, [lem-sfb-finite-norm-invertible-sections] gives an invertible module $N$ on $X$. Fix this single $N$; it provides the asserted norm sections for every positive tensor power and every global section of that power of $M$.",
+   "uses": [
+    "lem-sfb-finite-norm-invertible-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4(3), proposition-push-down-ample, using Tags 0BDZ and 0BD0 (lemma-norm-ample)."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and an affine open neighbourhood $V$ of $x$. The fibre $E=i^{-1}(\\{x\\})$ is a singleton and lies in the open $i^{-1}V$. By [lem-sc-ample-finite-principal-affine], applied on $Y$ to $M,E,i^{-1}V$, choose $n>0$ and $s\\in\\Gamma(Y,M^{\\otimes n})$ with $E\\subseteq Y_s\\subseteq i^{-1}V$.",
+   "uses": [
+    "lem-sc-ample-finite-principal-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4(3), proposition-push-down-ample, using Tags 0BDZ and 0BD0 (lemma-norm-ample)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-finite-norm-invertible-sections] there is $t\\in\\Gamma(X,N^{\\otimes n})$ with $X_t=\\{z:i^{-1}(\\{z\\})\\subseteq Y_s\\}$. Thus $x\\in X_t$. If $z\\in X_t$, surjectivity of $i$ gives a point $y$ above $z$, and then $y\\in Y_s\\subseteq i^{-1}V$, whence $z\\in V$. Therefore $X_t\\subseteq V$, and $X_t=V\\cap X_t$ is affine by [lem-sc-affine-cap-section-open], applied to $N,n,t,V$.",
+   "uses": [
+    "lem-sfb-finite-norm-invertible-sections",
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4(3), proposition-push-down-ample, using Tags 0BDZ and 0BD0 (lemma-norm-ample)."
+   }
+  },
+  {
+   "text": "Ampleness of $M$ makes $Y$ quasi-compact by [def-weil-pbc-ample-invertible-module]. Pull any open cover of $X$ back to $Y$, choose a finite subcover, and use surjectivity of $i$ to see that the corresponding finite family covers $X$. Thus $X$ is quasi-compact. The preceding construction supplies at every $x\\in X$ an affine nonvanishing locus of a section of a positive power of $N$ containing $x$. These are exactly the two conditions of [def-weil-pbc-ample-invertible-module], so $N$ is ample. This constructs some ample module, without claiming to lift $M$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4(3), proposition-push-down-ample, using Tags 0BDZ and 0BD0 (lemma-norm-ample)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-sfb-reduction-frobenius-sheaf-norm",
+  "lem-sfb-finite-norm-invertible-sections",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-affine-cap-section-open",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD4(3), proposition-push-down-ample, using Tags 0BDZ and 0BD0 (lemma-norm-ample)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian scheme in characteristic p has an ample invertible module if its reduction has one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [IsReduced ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian and reduced scheme predicates and ring Frobenius/perfection results do not lift existence of an ample module from a reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of ample line bundles lifts from the reduced subscheme in positive characteristic using Frobenius",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.frobenius\", \"module\": \"Mathlib.Algebra.CharP.Frobenius\", \"type\": \"[Algebra R S] : S →ₛₗ[frobenius R p] S\", \"doc\": \"The Frobenius endomorphism on a commutative semiring $ S $ of characteristic $ p $, extended to a semilinear map on an $ R $-algebra $ S $ by raising elements to the $ p $-th power and preserving the \"}\n  {\"name\": \"Perfection.lift\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"(R : Type u₁) [CommSemiring R] [CharP R p] [PerfectRing R p] (S : Type u₂) [CommSemiring S] [CharP S p] :\\n  (R →+* S) ≃ (R →+* Ring.Perfection S p)\", \"doc\": \"For commutative semirings $ R $ and $ S $ of prime characteristic $ p $, where $ R $ is perfect, this establishes a bijection between ring homomorphisms $ R \\to S $ and ring homomorphisms $ R \\to \\text{P\"}\n  {\"name\": \"iterateFrobenius_inj\", \"module\": \"Mathlib.Algebra.CharP.Reduced\", \"type\": \": Function.Injective (iterateFrobenius R p n)\", \"doc\": \"For a ring $ R $ of prime characteristic $ p $, the $ n $-th iterate of the Frobenius endomorphism $ x \\\\mapsto x^{p^n} $ is injective.\"}\n  {\"name\": \"PerfectRing.ofSurjective\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"(R : Type*) (p : ℕ) [CommRing R] [ExpChar R p] [IsReduced R] (h : Surjective <| frobenius R p) : PerfectRing R p\", \"doc\": \"If $ R $ is a commutative ring with exponential characteristic $ p $, $ R $ is reduced (i.e., has no nonzero nilpotent elements), and the Frobenius endomorphism $ x \\\\mapsto x^p $ is surjective, then $\"}\n  {\"name\": \"PerfectRing.lift_apply\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \"(x : L) (n : ℕ) (y : K) (h : i y = x ^ p ^ n) : lift i j p x = (iterateFrobeniusEquiv M p n).symm (j y)\", \"doc\": \"Given commutative rings $K, L, M$ with exponential characteristic $p$, where $M$ is a perfect ring and $i : K \\\\to L$ is $p$-radical, for any $x \\\\in L$, $n \\\\in \\\\mathbb{N}$, $y \\\\in K$ satisfying $i(y) =\"}\n  {\"name\": \"frobenius_inj\", \"module\": \"Mathlib.Algebra.CharP.Reduced\", \"type\": \": Function.Injective (frobenius R p)\", \"doc\": \"The Frobenius endomorphism on a commutative semiring of characteristic $ p $, which maps each element $ x $ to $ x^p $, is injective.\"}\n  {\"name\": \"PerfectRing.ofFiniteOfIsReduced\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"(R : Type*) [CommRing R] [ExpChar R p] [Finite R] [IsReduced R] : PerfectRing R p\", \"doc\": \"Every finite commutative ring $ R $ with exponential characteristic $ p $ that is reduced (i.e., has no nonzero nilpotent elements) is a perfect ring of characteristic $ p $, meaning every element of \"}\n  {\"name\": \"Perfection.lift_apply_apply_coe\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (R : Type u₁) [inst : CommSemiring R] [inst_1 : CharP R p]\\n  [inst_2 : PerfectRing R p] (S : Type u₂) [inst_3 : CommSemiring S] [inst_4 : CharP S p] (f : R →+* S) (r : R) (n : ℕ),\\n  ↑(((Perfection.lift p R S) f) r) n = f ((⇑↑(frobeniusEquiv R p).symm)^[n] r)\", \"doc\": \"For a prime $ p $, commutative semirings $ R $ and $ S $ of characteristic $ p $ with $ R $ perfect, a ring homomorphism $ f : R \\\\to S $, an element $ r \\\\in R $, and $ n \\\\in \\\\mathbb{N} $, the $ n $-th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian and reduced scheme predicates and ring Frobenius/perfection results do not lift existence of an ample module from a reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian and reduced scheme predicates and ring Frobenius/perfection results do not lift existence of an ample module from a reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*reduc|reduc.*ample|Frobenius.*norm",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"18\", \"text\": \"For example, if `X` is irreducible then this will give back the original scheme `X`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian and reduced scheme predicates and ring Frobenius/perfection results do not lift existence of an ample module from a reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*reduc|reduc.*ample|Frobenius.*norm",
+   "results": "OK 1 hits; read results: Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian and reduced scheme predicates and do not prove existence of an ample invertible module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of an ample invertible sheaf descends from the reduced subscheme in positive characteristic",
+   "results": "OK 8 hits; read results: AlgebraicGeometry.IsReduced.recOn, AlgebraicGeometry.IsReduced.casesOn, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.Scheme.nilradical_eq_bot, AlgebraicGeometry.IsReduced.component_reduced, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsReduced.rec",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian and reduced scheme predicates and do not prove existence of an ample invertible module."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "OK 0 hits; read results: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian and reduced scheme predicates and do not prove existence of an ample invertible module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian scheme in prime characteristic has an ample line bundle if its reduction does",
+   "results": "OK 8 hits; read results: AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isNoetherian_iff, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.isReduced_of_isAffine_isReduced",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian and reduced scheme predicates and do not prove existence of an ample invertible module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-group-ample-line",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Positive-characteristic reduction in the second paragraph of the proof of Groupoids Tag 0BF7.",
+   "via": [
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ample-existence-characteristic-p-reduction",
+  "worker": "stage1",
+  "summary": "Kept the statement, checked Stacks 0BD4(3), 0BDZ and 0BD0, isolated the uniform Frobenius sheaf norm as one statement-only node, and reused the existing norm-section and affine-open lemmas. Read every cited statement and checked all norm and ampleness hypotheses. The upstream ample-family theorem is related but does not state this exact item.",
+  "blueprint": "Realizes the characteristic-p reduction prerequisite of the recorded 0BF7 ample-line route supporting direct-image stability (3). Read the current latest direct-images proof; its prerequisite chain is recorded in blueprint.from.place. No unit key statement is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "The general finiteness of a closed immersion supplies finiteness of the reduction immersion."
+   },
+   {
+    "node": "lem-sc-ample-finite-principal-affine",
+    "why": "The general ample-section lemma supplies a section around the singleton fibre inside the inverse image of an affine neighbourhood."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "The general affine-intersection lemma proves that the descended norm section has affine nonvanishing open."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-23d59ad68",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-23d59ad68 (reviewer sub-agent of L); spot-checked: Read Stacks divisors.tex §0BCX (norm conditions 1–2), 0BD0 lemma-norm-ample, 0BDZ lemma-Frobenius-gives-norm-for-reduction and 0BD4 proposition-push-down-ample (3). The item statement is unchanged against live and side-live; both still have the item unsplit, and neither has the new id. Step 1: the reduction immersion is the identity on points, so it is surjective with singleton fibres; it is finite by the Mathlib leaf lem-weil-pbc-closed-immersion-finite; the new node gives e≥1 and d=p^e. Step 2: every hypothesis of lem-sfb-finite-norm-invertible-sections holds, ν goes in the same direction, and one N serves all n and s. Step 3: lem-sc-ample-finite-principal-affine (09NV) applied on Y to E = the singleton fibre and W = i^{-1}V. Step 4: X_t = {z : fibre ⊆ Y_s} contains x, lies in V by surjectivity, and is affine by lem-sc-affine-cap-section-open (01PV, positive tensor powers). Step 5: quasi-compactness by surjectivity plus the definition of ample, rightly marked elementary. This is 0BD0 specialized to this π, with proof_deps equal to the union of the step uses. New node lem-sfb-reduction-frobenius-sheaf-norm: self-contained and statement-only. It is true: p=0 makes ν additive; nilradical^n=0 holds uniformly on a finite Noetherian affine cover, so with p^e≥n the result does not depend on the choice of local lift; local lifts glue; residue fields agree. Tested on X=∅, reduced X, F_p[ε]/(ε^r) with r>p (shows e=1 can fail), p=2, and disconnected X with different nilpotence orders. It fills the 'details omitted' of 0BDZ, so it is a real lemma and does not restate the item. rg -L over the snapshot and the live clones found no duplicate: the normal-integral norm, nilradical-nilpotent and ample-on-reduction nodes do not apply, and there is no general 0BD0 node. Six searches are recorded; via = [item] + the item's via; the null from.node is inherited from the created chain. Tool uses accepted: the Mathlib leaf plus the generic Properties lemmas 09NV and 01PV, exactly as cited by 0BD0. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExistsAmpleOfReductionCharP",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_reduction_charP",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExistsAmpleOfReductionCharP.lean",
+  "statement": "theorem exists_isAmple_of_reduction_charP (p : ℕ) (hp : p.Prime) (X : Scheme.{u}) [IsNoetherian X] (hchar : ∀ x : X, (p : X.presheaf.stalk x) = 0) (hred : ∃ (M : X.nilradical.subscheme.Modules) (_ : M.IsInvertible), IsAmple X.nilradical.subscheme M) : ∃ (L : X.Modules) (_ : L.IsInvertible), IsAmple X L",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0131e19d",
+  "group": "NE",
+  "result": "pass",
+  "note": "Lean statement matches the node and Stacks 0BD4(3) clause by clause: p prime; [IsNoetherian X]; p·1 = 0 in every stalk; X_red = X.nilradical.subscheme; hypothesis ∃ invertible ample M on X_red; conclusion ∃ invertible ample L on X, independent of M. No stronger assumptions; edge cases (empty X, reduced X, p = 2) covered; universe u bound. Not a duplicate: AmpleOnReductionNoetherian (09MS) is the fixed-L iff, not existence; no parallel landing in side-live. Statement verbatim, only the lean field changed, docstrings carry source place and blueprint id, one sorry, no new definitions. Proof-dep imports exist; two redundant public imports are advisory only. No compile run: no FIX, and the worker's report says per-file compile and dry run passed."
+ }
+}

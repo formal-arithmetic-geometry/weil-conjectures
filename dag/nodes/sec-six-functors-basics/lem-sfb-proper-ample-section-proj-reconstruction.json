@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-proper-ample-section-proj-reconstruction",
+ "kind": "statement",
+ "title": "Proper ample section-algebra reconstruction and polarized naturality",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $f:X\\to S$ a proper morphism [def-weil-proper-morphism], and $L$ an invertible module [def-sc-invertible-module] which is relatively ample: $L|_{f^{-1}V}$ is ample [def-weil-pbc-ample-invertible-module] for every affine open $V\\subset S$. The graded sheaf algebra $\\mathcal A=\\bigoplus_{m\\geq0}f_*L^{\\otimes m}$ [def-weil-pbc-graded-sheaf-structures] is quasi-coherent [def-weil-pbc-quasi-coherent-algebra]. Its degree-zero piece is $f_*\\mathcal O_X$, not assumed equal to $\\mathcal O_S$. Evaluation defines a canonical isomorphism over $S$\n$$r_L:X\\xrightarrow{\\sim}\\operatorname{Proj}_S\\mathcal A$$\n[def-nagata-relative-proj, def-sfb-relative-section-algebra-canonical-map]. On $V=\\operatorname{Spec}R\\subset S$, it is the canonical $R$-scheme map\n$$X_V\\xrightarrow{\\sim}\\operatorname{Proj}\\Gamma_*(X_V,L|_{X_V}),$$\nwith tensor-product multiplication in the full section ring [def-sc-invertible-section-ring]. For every positive-degree homogeneous section $s$, its inverse image of $D_+(s)$ is the nonvanishing open $(X_V)_s$, and on degree-zero homogeneous localizations it pulls back $t/s^a$ to the quotient of those sections. These maps and their inverses agree on affine refinements of base overlaps. If $f':X'\\to S$ is proper, $L'$ relatively ample, $h:X'\\xrightarrow{\\sim}X$ is over $S$, and $\\lambda:h^*L\\xrightarrow{\\sim}L'$ is an invertible-module isomorphism [def-pc-module-pullback], pullback of sections followed by the tensor powers of $\\lambda$ gives a graded $\\mathcal O_S$-algebra isomorphism $\\Phi:\\mathcal A\\xrightarrow{\\sim}\\mathcal A'$. Its contravariant Proj isomorphism satisfies $\\operatorname{Proj}(\\Phi)\\circ r_{L'}=r_L\\circ h$. This equality is compatible with identities and composition of $(h,\\lambda)$. No nodality, curve dimension, Noetherian base, finite generation of the full section algebra, or arbitrary-base-change assertion for $f_*L^{\\otimes m}$ is required.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01VJ (lemma-characterize-relatively-ample) and 0C6J (lemma-proper-ample-is-proj); constructions.tex Tag 01MY (lemma-morphism-proj) for the graded-isomorphism chart formula. Agent formulation with naturality, extracting former item steps 11--14."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-sc-invertible-section-ring",
+  "def-pc-module-pullback",
+  "def-nagata-relative-proj",
+  "def-sfb-relative-section-algebra-canonical-map",
+  "def-sfb-relative-proj-iso-of-graded-iso",
+  "def-sc-tensor-pullback-power-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Properness gives finite type, hence quasi-compactness, and separatedness; separatedness gives quasi-separatedness. Apply the qcqs section-algebra evaluation theorem to $(f,L)$. Thus $\\mathcal A=\\bigoplus_{m\\geq0}f_*L^{\\otimes m}$ is quasi-coherent, with its actual tensor multiplication and unit, and agrees with $f_*(\\bigoplus_mL^{\\otimes m})$. The relative-ampleness criterion applies because $f$ is quasi-compact and the stated hypothesis is precisely its condition (1). Its condition (2) gives $U(\\psi)=X$ and the canonical evaluation open immersion $r:X\\to P=\\operatorname{Proj}_S\\mathcal A$. Degree zero in this construction is $f_*L^{\\otimes0}=f_*\\mathcal O_X$; neither theorem replaces it by $\\mathcal O_S$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-trf-qcqs-line-section-algebra-evaluation",
+    "lem-trf-scheme-ample-canonical-proj-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VJ (lemma-characterize-relatively-ample), (1) implies (5); 01W1 (definition-proper)."
+   }
+  },
+  {
+   "text": "Fix an affine $V\\subseteq S$ and put $W=f^{-1}V$, $M=L|_W$, $B=\\Gamma_*(W,M)$. The qcqs evaluation theorem identifies $\\mathcal A(V)$ with $B$, $P|_V$ with $\\operatorname{Proj}(B)$ and $r|_W$ with the ordinary canonical map for the identity of $B$. The ample nonvanishing opens cover $W$. The canonical-map theorem therefore gives, for every $s\\in B_d$, $d>0$, $(r|_W)^{-1}(D_+(s))=W_s$ and the comorphism $B_{(s)}\\to\\Gamma(W_s,\\mathcal O_W)$, $t/s^a\\mapsto t|_{W_s}/s^a|_{W_s}$. In particular these are the tensor section-ring fractions, not fractions in a separately chosen homogeneous coordinate ring.",
+   "uses": [
+    "lem-trf-qcqs-line-section-algebra-evaluation",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-ample-proj-canonical-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PZ (lemma-map-into-proj), clause (1); morphisms.tex Tag 01VJ, affine description in the proof of (3) implies (5)."
+   }
+  },
+  {
+   "text": "The image of $r|_W$ is dense. Indeed $W$ is quasi-compact since $f$ is quasi-compact, and it is quasi-separated since ampleness of $M$ makes $W$ separated, and separated schemes are quasi-separated. Suppose a nonempty basic open $D_+(s)$ misses the image. Step 2 gives $W_s=\\varnothing$. The section-ring localization theorem applied to the fraction map in step 2 identifies $B_{(s)}$ with $\\Gamma(\\varnothing,\\mathcal O)=0$. But $D_+(s)=\\operatorname{Spec}(B_{(s)})$, so it is empty, a contradiction. The basic opens form a basis, proving density. This proves the density argument of 01Q0 directly from the already stated localization theorem; it is not a new lemma node.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-pc-separated-quasi-separated",
+    "lem-sc-section-ring-localization-bijective",
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01Q0 (lemma-map-into-proj-quasi-compact), density argument, and 01PW (lemma-invert-s-sections), localization; the zero-localization argument replaces the equivalent nilpotence argument."
+   }
+  },
+  {
+   "text": "By proper base change, $f_V:W\\to V$ is proper. The scheme $\\operatorname{Proj}(B)$ is separated over $\\operatorname{Spec}\\mathbf Z$; its structural map $q:\\operatorname{Proj}(B)\\to V$ is therefore separated by separated cancellation. Since $q\\circ(r|_W)=f_V$, proper-over-separated makes $r|_W$ proper, hence its image closed. This closed image is dense by step 3 and so equals the entire target. A surjective open immersion is an isomorphism: its defining identification with an open subscheme now identifies it with the whole scheme. Thus every affine-base restriction of $r$ is an isomorphism.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-proj-separated",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-over-separated",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0C6J (lemma-proper-ample-is-proj) and 01W6 (lemma-image-proper-scheme-closed)(2); constructions.tex Tag 01MC (lemma-proj-separated)."
+   }
+  },
+  {
+   "text": "The evaluation theorem's affine restriction identifications respect all further restrictions. On an affine refinement of $V\\cap V'$, both restricted maps are therefore the same canonical map for the restricted section algebra. Their inverses agree as well, since two inverses of the same map are equal. Glue these inverses over the open cover $P|_V$; their two compositions with $r$ are locally identities and hence globally identities. This gives $r_L$. It satisfies the specified canonical-map definition: on an open where $L$ is trivialized, evaluation sends every homogeneous section to its scalar coefficient in the corresponding tensor power of that trivialization. The standard morphism so induced has exactly the inverse-image and fraction formulas in step 2; these determine the same morphism on standard affine charts. This also proves compatibility of both $r_L$ and its inverse on affine refinements of every base overlap, without assuming that an overlap is affine.",
+   "uses": [
+    "lem-trf-qcqs-line-section-algebra-evaluation",
+    "lem-sc-ample-proj-canonical-map",
+    "def-sfb-relative-section-algebra-canonical-map",
+    "def-pc-proj",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, canonical evaluation; constructions.tex Tag 01O9 (lemma-invertible-map-into-relative-proj)(3), affine description; Tag 01N8 (lemma-converse-construction), trivialized chart construction."
+   }
+  },
+  {
+   "text": "For a polarized isomorphism $(h,\\lambda)$ as in the statement, define on every base open the degree-$m$ map $\\Phi_m(s)=\\lambda^{\\otimes m}(h^*s)$, using the canonical comparison $h^*(L^{\\otimes m})\\simeq(h^*L)^{\\otimes m}$. Tensor-pullback compatibility sends $h^*(s\\otimes t)$ to $h^*s\\otimes h^*t$; consequently $\\Phi_{m+n}(st)=\\Phi_m(s)\\Phi_n(t)$. In degree zero this is the structure-sheaf pullback along $h$, preserving $1$ and the $\\mathcal O_S$ action because $h$ lies over $S$. Pullback and $\\lambda$ commute with open restrictions, so these maps define a graded algebra sheaf map. It is invertible: pull back by $h^{-1}$ and use the inverse of the isomorphism obtained by pulling back $\\lambda$; the composition comparison for section pullback makes both composites the identity in every degree. Thus $\\Phi:\\mathcal A\\simeq\\mathcal A'$ is the claimed graded $\\mathcal O_S$-algebra isomorphism.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sc-invertible-section-ring",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CD (lemma-tensor-product-pullback), 01CT (lemma-constructions-invertible); sheaves.tex, pullback of modules and its composition adjunction. Agent sectionwise tensor calculation."
+   }
+  },
+  {
+   "text": "On an affine base open $V$, the local Proj-isomorphism theorem applied to $\\Phi$ gives $D_+(s)\\mapsto D_+(\\Phi(s))$ contravariantly and the comorphism $t/s^a\\mapsto\\Phi(t)/\\Phi(s)^a$. Its affine-restriction compatibility glues these local isomorphisms (and their inverses) to the specified $\\operatorname{Proj}(\\Phi)$. Pullback of a section along an isomorphism, followed by a line-module isomorphism, preserves its nonvanishing locus, by the fibre formula for invertible pullback: $X'_{\\Phi(s)}=h^{-1}(X_s)$. Hence $\\operatorname{Proj}(\\Phi)\\circ r_{L'}$ and $r_L\\circ h$ have the same inverse images of all standard opens. Their comorphisms there coincide, since both send $t/s^a$ to $\\lambda^{\\otimes ad}(h^*t)/(\\lambda^{\\otimes d}(h^*s))^a$ for $s$ of degree $d$ and $t$ of degree $ad$; this is precisely pullback of the scalar quotient $t/s^a$. These fractions exhaust the chart ring. Equality of the affine chart morphisms, then scheme-morphism gluing, gives the stated global naturality equality.",
+   "uses": [
+    "lem-trf-local-proj-isomorphism-compatibility",
+    "def-sfb-relative-proj-iso-of-graded-iso",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pc-proj",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY (lemma-morphism-proj), clause (2); Tag 01NQ (relative Proj gluing); modules.tex Tag 01CD and the fibre formula for invertible pullback. Agent comparison of the two fraction formulas."
+   }
+  },
+  {
+   "text": "For the identity polarized isomorphism, the section map in step 6 is the identity in each degree; its Proj map fixes every fraction. For a second polarized isomorphism $(k,\\mu): (X'',L'')\\to(X',L')$, the composite polarization is $\\mu\\circ k^*\\lambda$ after the pullback comparison. On a homogeneous section $s$ the associated map is $\\mu^{\\otimes m}k^*(\\lambda^{\\otimes m}h^*s)$, exactly the composition of the two section maps by the composition and tensor formulas for pullback. On a fraction the two successive Proj comorphisms therefore give $\\Phi_k\\Phi_h(t)/(\\Phi_k\\Phi_h(s))^a$, the composite section map's fraction. The local Proj uniqueness and gluing identify the two Proj maps, in contravariant order. Substituting the naturality equality of step 7 twice gives the naturality equality for the composite. Identity and composition compatibility follow without choosing any trivializations or identifying the degree-zero algebra with the base.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-local-proj-isomorphism-compatibility",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MZ (lemma-morphism-proj-transitive), specialized to isomorphisms; the displayed fraction and section calculations verify transitivity and the polarization comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-proj",
+  "def-sc-invertible-section-ring",
+  "def-sfb-relative-proj-iso-of-graded-iso",
+  "def-sfb-relative-section-algebra-canonical-map",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-proper-morphism",
+  "lem-pc-proper-base-change",
+  "lem-pc-separated-quasi-separated",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-sc-section-ring-localization-bijective",
+  "lem-trf-local-proj-isomorphism-compatibility",
+  "lem-trf-proj-separated",
+  "lem-trf-qcqs-line-section-algebra-evaluation",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-separated-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01VJ and 0C6J; density via existing 01PW localization instead of a new 01Q0 node; explicit polarized section/fraction naturality from constructions.tex Tags 01MY and 01MZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme over a base with relatively ample invertible sheaf is canonically the relative Proj of its full section algebra naturally under isomorphisms of polarized schemes",
+   "results": "{\"t\": \"2026-10-22T06:23:37Z\", \"tool\": \"leanfinder\", \"query\": \"A proper scheme over a base with relatively ample invertible sheaf is canonically the relative Proj of its full section algebra naturally under isomorphisms of polarized schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.projIsoSpecTopComponent\"], \"digest\": \"8aba7993bac94f60\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections at ProjectiveSpectrum/Basic.lean:443 constructs a map, not this reconstruction; the IsProper instance at ProjectiveSpectrum/Proper.lean:372 proves properness of an existing finite-type Proj, not a canonical isomorphism for the full section algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-22T06:23:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"18c2638d3df5eefa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections at ProjectiveSpectrum/Basic.lean:443 constructs a map, not this reconstruction; the IsProper instance at ProjectiveSpectrum/Proper.lean:372 proves properness of an existing finite-type Proj, not a canonical isomorphism for the full section algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "section.*[Rr]ing|[Rr]elative[Pp]roj|proj.*[Aa]mple",
+   "results": "{\"t\": \"2026-10-22T06:23:44Z\", \"tool\": \"grep\", \"query\": \"section.*[Rr]ing|[Rr]elative[Pp]roj|proj.*[Aa]mple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"7ecccc79a7adf6b4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections at ProjectiveSpectrum/Basic.lean:443 constructs a map, not this reconstruction; the IsProper instance at ProjectiveSpectrum/Proper.lean:372 proves properness of an existing finite-type Proj, not a canonical isomorphism for the full section algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical evaluation map from a proper scheme with an ample line bundle into Proj of its ring of sections is a natural isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:24:17Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical evaluation map from a proper scheme with an ample line bundle into Proj of its ring of sections is a natural isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec\"], \"digest\": \"04343f48b28692fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections at ProjectiveSpectrum/Basic.lean:443 constructs a map, not this reconstruction; the IsProper instance at ProjectiveSpectrum/Proper.lean:372 proves properness of an existing finite-type Proj, not a canonical isomorphism for the full section algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper scheme reconstructed as relative Proj of the section algebra of an ample invertible sheaf",
+   "results": "{\"t\": \"2026-10-22T06:25:05Z\", \"tool\": \"leansearch\", \"query\": \"Proper scheme reconstructed as relative Proj of the section algebra of an ample invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.termProj|_\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\"], \"digest\": \"71adf16a66fa5b79\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections at ProjectiveSpectrum/Basic.lean:443 constructs a map, not this reconstruction; the IsProper instance at ProjectiveSpectrum/Proper.lean:372 proves properness of an existing finite-type Proj, not a canonical isomorphism for the full section algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|IsAmple|RelativeProj",
+   "results": "{\"t\": \"2026-10-22T06:25:05Z\", \"tool\": \"grep\", \"query\": \"fromOfGlobalSections|IsAmple|RelativeProj\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"ce941cfaded12e89\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections at ProjectiveSpectrum/Basic.lean:443 constructs a map, not this reconstruction; the IsProper instance at ProjectiveSpectrum/Proper.lean:372 proves properness of an existing finite-type Proj, not a canonical isomorphism for the full section algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|[Rr]elative[Pp]roj|section.*[Rr]ing|fromOfGlobalSections",
+   "results": "{\"t\": \"2026-10-23T04:29:01Z\", \"tool\": \"grep\", \"query\": \"IsAmple|[Rr]elative[Pp]roj|section.*[Rr]ing|fromOfGlobalSections\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"137858508c35bc4d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Basic.lean:443 constructs Proj.fromOfGlobalSections from a ring map to functions with irrelevant ideal generating 1; it is not ample full-section-ring reconstruction. Proper.lean:372 proves an existing finite-type Proj proper over its degree-zero ring, not the reconstruction or polarized naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-23T04:29:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"18c2638d3df5eefa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Basic.lean:443 constructs Proj.fromOfGlobalSections from a ring map to functions with irrelevant ideal generating 1; it is not ample full-section-ring reconstruction. Proper.lean:372 proves an existing finite-type Proj proper over its degree-zero ring, not the reconstruction or polarized naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme with a relatively ample invertible module is naturally isomorphic to the relative Proj of its full section algebra",
+   "results": "{\"t\": \"2026-10-23T04:29:07Z\", \"tool\": \"leanfinder\", \"query\": \"A proper scheme with a relatively ample invertible module is naturally isomorphic to the relative Proj of its full section algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\"], \"digest\": \"3e6004dbda713ac8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Basic.lean:443 constructs Proj.fromOfGlobalSections from a ring map to functions with irrelevant ideal generating 1; it is not ample full-section-ring reconstruction. Proper.lean:372 proves an existing finite-type Proj proper over its degree-zero ring, not the reconstruction or polarized naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper schemes are canonically reconstructed from their ample line bundle section rings by Proj with functoriality under polarized isomorphisms",
+   "results": "{\"t\": \"2026-10-23T04:29:38Z\", \"tool\": \"leansearch\", \"query\": \"Proper schemes are canonically reconstructed from their ample line bundle section rings by Proj with functoriality under polarized isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.isoSpec\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.fromOfGlobalSections.congr_simp\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Scheme.Γ_def\"], \"digest\": \"f7554a3892c40445\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Basic.lean:443 constructs Proj.fromOfGlobalSections from a ring map to functions with irrelevant ideal generating 1; it is not ample full-section-ring reconstruction. Proper.lean:372 proves an existing finite-type Proj proper over its degree-zero ring, not the reconstruction or polarized naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation morphism from a proper scheme to Proj of all tensor power global sections of an ample line bundle is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T04:29:40Z\", \"tool\": \"leanfinder\", \"query\": \"The evaluation morphism from a proper scheme to Proj of all tensor power global sections of an ample line bundle is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec\"], \"digest\": \"632d1c6f83474575\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Basic.lean:443 constructs Proj.fromOfGlobalSections from a ring map to functions with irrelevant ideal generating 1; it is not ample full-section-ring reconstruction. Proper.lean:372 proves an existing finite-type Proj proper over its degree-zero ring, not the reconstruction or polarized naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-log-canonical-reconstruction",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; extraction of original item steps 11,12,13,14: Proper ample section-algebra reconstruction and polarized naturality",
+   "via": [
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-ample-section-proj-reconstruction",
+  "worker": "stage1",
+  "summary": "Reused existing relative-ampleness, qcqs evaluation, section-localization, properness and Proj chart nodes. Proved density with the zero homogeneous-localization ring, then closedness and surjectivity on each affine base. Wrote polarized graded pullback and quotient calculations, inverse gluing and identity/composition compatibility explicitly. No statement change and no new nodes. No project declaration states all clauses without sorry.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; extraction of original item steps 11,12,13,14: Proper ample section-algebra reconstruction and polarized naturality",
+  "tool_uses": [
+   {
+    "node": "lem-trf-qcqs-line-section-algebra-evaluation",
+    "why": "The generic qcqs evaluation theorem supplies the full graded section algebra and its affine restriction comparisons; this unit has no such general construction theorem."
+   },
+   {
+    "node": "lem-trf-scheme-ample-canonical-proj-criterion",
+    "why": "The generic scheme ampleness criterion supplies the canonical open immersion, without properness or polarized reconstruction; this unit has no such criterion."
+   },
+   {
+    "node": "lem-sc-ample-proj-canonical-map",
+    "why": "The general canonical section-ring map theorem supplies the inverse-image and fraction formulas for an arbitrary invertible module; this unit has no chart theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "The generic theorem that an ample invertible module makes its scheme separated supplies the absolute quasi-separatedness hypothesis of section localization; this unit has no such theorem."
+   },
+   {
+    "node": "lem-sc-section-ring-localization-bijective",
+    "why": "The general qcqs section-localization theorem makes an empty nonvanishing locus have zero homogeneous-localization ring; this unit has no localization theorem."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "The generic stability of proper scheme morphisms under restriction to an affine base is needed to apply proper-over-separated; this unit has no properness base-change theorem."
+   },
+   {
+    "node": "lem-trf-local-proj-isomorphism-compatibility",
+    "why": "The general graded-isomorphism chart theorem supplies canonical Proj maps and restriction compatibility, without line bundles or reconstruction; this unit has no matching chart theorem."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic pullback/tensor, section composition and fibre formulas for invertible modules justify the polarized graded map and quotient identity; no node of this unit states these formulas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-qcqs-line-section-algebra-evaluation",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-sc-section-ring-localization-bijective",
+  "lem-pc-proper-base-change",
+  "lem-trf-local-proj-isomorphism-compatibility",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-e6ebb2a20",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-e6ebb2a20 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is the first split of the statement-only item (no repair note in the snapshot, so not a re-split delivery), with no new nodes; shape A is clean. Mechanically: proof_deps equals the union of the steps' uses, every statement citation is in stmt_deps, there is no cycle, and the item does not mention SGA. I read Stacks 0C6J (closed by 01W6 via 01MC, open immersion by 01VJ, dense by 01Q0) and the 01Q0 density proof, and read the statement of every cited node. Step 1: proper gives quasi-compact and quasi-separated, and the 01VJ criterion (1)=>(2) gives r as an open immersion with U(psi)=X; the evaluation node gives that A is quasi-coherent. Step 2: the affine chart and fraction formulas come from the stated clauses of lem-sc-ample-proj-canonical-map. Step 3: density follows because an empty W_s makes B_(s)=0 by the qcqs localization theorem (W is quasi-separated because ampleness makes it separated), which replaces 01Q0's nilpotence argument correctly. Step 4: restriction to an open of the base keeps W->V proper, Proj B is separated, cancellation and proper-over-separated make r|_W proper, so its image is closed, dense and therefore everything. Steps 5-8: the gluing of inverses, the chart characterization of def-sfb-relative-section-algebra-canonical-map (the trivialization's tensor power is multiplicative), Phi_m = lambda^m h^*, the contravariant Proj(Phi), equality of the chart preimages by the fibre formula, the matching fraction comorphisms, and the identity and composition clauses are all checked. Edge cases checked: empty X, A_0 != O_S, nonreduced X, unit rescaling of lambda, non-Noetherian S. No duplicate: lem-sfb-projective-polarization-section-algebra (projective over a field), lem-sc-ample-proj-open and lem-trf-affine-base-ample-canonical-data (open immersion only) state other things. All 8 declared tool_uses are generic scheme tools and are accepted. Batch 5: lem-trf-proj-separated (01MC Mathlib leaf), lem-trf-qcqs-line-section-algebra-evaluation, lem-trf-scheme-ample-canonical-proj-criterion (01VJ) and lem-trf-local-proj-isomorphism-compatibility (01MY) are generic Proj/ampleness geometry. Their closures reach only generic algebraic-space, descent and Proj-chart trf nodes, with no cohomology, trace or duality, so they are neither trace-formula or Poincare-duality statements nor steps of their proofs; accepted (precedent Q105)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperAmpleSectionProjReconstruction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.proper_ample_section_proj_reconstruction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.HasReconstructionChart",
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.IsProperAmpleReconstruction",
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.IsPolarizedIso",
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.HasPolarizedNaturality",
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.PolarizedCoherence",
+   "AlgebraicGeometry.Scheme.Modules.proper_ample_section_proj_reconstruction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperAmpleSectionProjReconstruction.lean",
+  "statement": "theorem proper_ample_section_proj_reconstruction {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (L : X.Modules) [L.IsInvertible] (hample : ∀ V : S.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (f ⁻¹ᵁ V).ι).obj L).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme ((tensorPullback (f ⁻¹ᵁ V).ι).obj L) h) : ∃ (A : RelativeSectionAlgebra f L) (r : X ≅ A.data.relProj), A.IsProperAmpleReconstruction r ∧ A.HasPolarizedNaturality r ∧ A.PolarizedCoherence",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c2e92206",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Checked clause by clause against the node, Stacks 0C6J/01VJ and every dependency source. Hypotheses (proper f, invertible L, hample in the landed criterion's form) are exact. A is the section-pinned RelativeSectionAlgebra with explicit quasi-coherence and degree 0 = f_*O_X. r is pinned by IsCanonicalMap over S, and each chart q V is determined by r via relProjι. Chart clauses: D_+(s) preimage = nonvanishingLocus, t/s^a formula as multiplication by the generator s^a, hom and inv compatibility on affine refinements W<=V. IsPolarizedIso is built from tensorPullbackSection, boundaryPullbackPowIso and boundaryTensorPowIso (canonical; the adjunction choice is unit-pinned). Naturality r'≫Proj(phi)=h≫r is correctly oriented against contravariant relProjIsoOfIso. Identity and composition coherence are in contravariant order. ∃!(P∧Q) is not a weakening because P alone fixes phi by ext (hom_ext, sectionEquiv, homogeneous decomposition). Edge cases (empty schemes, s=0, a=0, n=0, A_0≠O_S, universes) are covered. Only the item's lean and stmt_deps changed; the added stmt_deps are landed def nodes, which the tool allows; the statement is verbatim. Docstrings and the 8 proof steps are present, the only proof is sorry, nothing is hollow. No compile run since no file was changed. Advisories: boundaryTensorPowIso owner def-sfb-tensor-power-pullback-comparisons is uncited in stmt_deps; Proj/pushforward/IsQuasicoherent owners are uncited; proof-only imports."
+ }
+}

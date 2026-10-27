@@ -19,45 +19,26 @@
  ],
  "proof": [
   {
-   "text": "Identify the actual pulled-back continuous integer ring with the positive quotient limit using the projection-normalized section-ring isomorphism. Compose its restriction with integralDetailedCoefficientComparison to get precisely the module functor displayed in the statement. The identifications commute with restriction to strata and localized sites.",
-   "uses": [
-    "det-prop-integral-criterion-reductions",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A finitely presented module on the condensed point is the cokernel of a finite matrix of scalar sections: use finiteConstantLocalModel_iff_exists_cover and its scalar-matrix clause. Evaluation at the terminal profinite set identifies the scalar ring with the lifted valuation ring. Under the projection-normalized coefficient comparison each scalar retains every quotient residue. Exact section-action transport therefore takes that cokernel to the completed constant realization of the same finitely presented scalar module. In the reverse direction take a finite scalar presentation and its cokernel on the condensed point. This works for torsion, zero modules and zero ranks.",
-   "uses": [
-    "det-def-sfb-constructible-local-model",
-    "lem-sfb-scalar-presentation-cokernel",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the same finite constructible stratification. Cartesian coefficients and the sectionwise localization comparison identify restriction of the transported module and scalar model with their restrictions on the small pro-etale site of each cover member. A scheme cover generates a covering sieve on the terminal object; conversely a covering sieve contains a generating family of pro-etale cover members. The local model isomorphisms pull back to all sieve members. The resulting witnesses are exactly those in IsIntegralStratifiedFinitelyPresented. Since X is Noetherian it is qcqs, so IsConstantModelConstructible is its finite-stratification branch. Reverse the same exact equivalences to obtain the converse. No assertion about completeness of a complex is used.",
+   "text": "On a Noetherian X, compactness and quasi-separatedness select the finite-stratification branch. Keep its same stratification in both directions. Convert a cover to its generated covering sieve. For any member factoring through a cover arrow, pull its point-model isomorphism back and use the existing point-pullback composition comparison. Conversely choose a covering presieve inside a covering sieve, push its arrows to the base scheme through the terminal-object isomorphism, and restrict to a universe-u small subfamily. This gives the original cover convention.",
    "uses": [
     "sk-def-sfb-constructible",
-    "lem-sfb-coefficient-sections-localization",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-integral-stratified-perfect-characterization"
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-integral-section-member-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every sieve member, use the global scalar-model theorem to replace its finitely presented point module P by N and its global completed constant realization. Use local-isomorphism transport to move its actual local isomorphism to the slice, then compose with the restriction of the global model comparison. In the reverse direction choose P for the scalar N, compose with the inverse global model comparison on the slice, reflect the local isomorphism, and cancel the point-pullback comparison. Retain the sieve, finite-presentation proofs, and stratification. These Lean constructions prove both implications.",
+   "uses": [
+    "lem-sfb-integral-section-member-models"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "det-prop-integral-criterion-reductions",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "sk-prop-sfb-cartesian-coefficients",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "det-def-sfb-constructible-local-model",
-  "lem-sfb-scalar-presentation-cokernel",
+  "lem-sfb-integral-section-member-models",
   "sk-def-sfb-constructible",
-  "lem-sfb-coefficient-sections-localization"
+  "sk-def-sfb-module-pushforward-pullback"
  ],
  "proof_origin": {
   "by": "agent",
@@ -134,13 +115,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B5",
+  "group": "H9",
   "result": "pass",
-  "landing": "20261021T155743-L-3435194",
+  "landing": "20261026T001817-L-32651",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

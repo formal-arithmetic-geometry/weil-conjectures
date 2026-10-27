@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-frobenius-signed-power-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Expanded DAG clause 3, existing internal-dual transport argument, extracted unchanged into a generic helper.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Signed-power transport from positive comparisons",
+ "statement": "Let g:X→Y be a scheme isomorphism, R and S commutative ring sheaves and c:g⁻¹R≅S. Let M and N be module sheaves and fix, for each d≥0, P_d:F_g(M^tensor d)≅N^tensor d [def-pur-twist-sheaves, def-pur-sheaf-tensor-product, def-weil-proetale-inverse-image]. For a positive integer d define degree -d by internal Hom from degree d to the coefficient unit. There exists a unique family tau_m:F_g(M(m))≅N(m), for m in Z, agreeing with P at all nonnegative integers and satisfying the evaluation equation on every slice: tau_(-d)(eta phi) evaluated at P_d(eta x) equals P_0(eta(phi(x))), after every site restriction. No local freeness or invertibility-of-l hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tags 03EK, 03EL); expanded DAG def-weil-frobenius-coefficient-twists clauses 2 and 3. The current blueprint natural-Weil-isomorphism sentence is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md."
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The module pullback unit at a scheme isomorphism is invertible and its direct image reflects isomorphisms. The canonical internal Hom comparison is therefore invertible. Its section normalization transports evaluation after arbitrary slice restriction.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "lem-pur-inverse-image-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tags 03EK, 03EL); expanded DAG def-weil-frobenius-coefficient-twists clauses 2 and 3. The current blueprint natural-Weil-isomorphism sentence is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md."
+   }
+  },
+  {
+   "text": "For degree -d compose the internal Hom comparison with precomposition by the inverse P_d and postcomposition by P_0. Inverse cancellation gives the evaluation equation. For uniqueness apply the module adjunction and slice-Hom extensionality; the invertible P_d and unit permit cancellation. Define the family by the disjoint nonnegative/negative integer cases.",
+   "uses": [
+    "lem-pur-inverse-image-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tags 03EK, 03EL); expanded DAG def-weil-frobenius-coefficient-twists clauses 2 and 3. The current blueprint natural-Weil-isomorphism sentence is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-pur-inverse-image-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B9",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tags 03EK, 03EL); expanded DAG def-weil-frobenius-coefficient-twists clauses 2 and 3. The current blueprint natural-Weil-isomorphism sentence is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along an isomorphism of ringed sites extends the canonical inverse limit of roots of unity to integral and finite coefficient Tate lines",
+   "results": "Eight hits, including Scheme.inv_app and stalk isomorphism lemmas; none states the root-limit coefficient comparison. A second query on maps from sheafified tensor powers returns SheafOfModules.GeneratingSections and sheafification maps, which do not establish generation by these root tensors.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.ext",
+   "results": "TensorProduct.ext in Mathlib.LinearAlgebra.TensorProduct.Basic supplies ordinary tensor extensionality. It does not state sheafified root-power generation or normalized inverse-image maps. Earlier SheafOfModules, _ ≅ _ query returned general module isomorphisms only.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|purTwist|scalarTensorPower|rootLineMap",
+   "results": "msearch Mathlib grep: zero hits. Local library search finds the normalized signed-line API and integral tensor transport, but they require local freeness or invertibility of l; the present original theorem assumes only that g is an isomorphism. The canonical ordinary tensor pullback theorem is already proved and is used for power induction. Blueprint searches for root tensor, generator-normalized, internal Hom comparison and 03EL found no identical node.",
+   "date": "2026-10-27",
+   "verdict": "use existing tensor theorem; no duplicate of the remaining root lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusCoefficientTwistsCanonical",
+  "date": "2026-10-27",
+  "group": "B9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusSignedPowerTransport",
+  "file": "lean/Sheaf/Paper/FrobeniusSignedPowerTransport.lean",
+  "declaration": "WeilConjectures.FrobeniusCoefficientTwists.genericSignedProof",
+  "statement": "theorem genericSignedProof {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R ≅ S)\n    (M : proEtaleRingModules Y R) (N : proEtaleRingModules X S)\n    (P : ∀ d : ℕ, (proEtaleRingModulePullback g R S c).obj\n      (coefficientTwistPower Y (R := R) M d) ≅ coefficientTwistPower X (R := S) N d) :\n    ∃! tau : ∀ m : ℤ, (proEtaleRingModulePullback g R S c).obj\n        (coefficientTwistLine Y (R := R) M m) ≅ coefficientTwistLine X (R := S) N m,\n      (∀ d : ℕ, HEq (tau (d : ℤ)) (P d)) ∧\n      ∀ (n : ℕ) (V W : Y.ProEt) (a : W ⟶ V)\n        (phi : (coefficientTwistLine Y (R := R) M (Int.negSucc n)).val.obj (op V))\n        (x : (coefficientTwistPower Y (R := R) M (n + 1)).val.obj (op W)),\n        ((tau (Int.negSucc n)).hom.val.app (op ((proEtaleBaseChange g).obj V))\n          (((proEtaleRingModuleAdjunction g R S c).unit.app _).val.app (op V) phi)).app\n            (op (Over.mk ((proEtaleBaseChange g).map a)))\n              ((P (n + 1)).hom.val.app (op ((proEtaleBaseChange g).obj W))\n                (((proEtaleRingModuleAdjunction g R S c).unit.app _).val.app (op W) x)) =\n          (P 0).hom.val.app (op ((proEtaleBaseChange g).obj W))\n            (((proEtaleRingModuleAdjunction g R S c).unit.app _).val.app (op W)\n              (phi.app (op (Over.mk a)) x))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-weil-frobenius-signed-power-transport",
+  "worker": "stage3",
+  "summary": "A generic tool is used with its canonical unit-section normalization.",
+  "blueprint": "Expanded DAG clause 3, existing internal-dual transport argument, extracted unchanged into a generic helper.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Only the generic normalized module-adjunction comparison for an isomorphism of sites is used."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T222559-L-669977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T222559-L-669977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

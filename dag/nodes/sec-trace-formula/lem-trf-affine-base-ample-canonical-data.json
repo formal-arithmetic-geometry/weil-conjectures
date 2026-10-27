@@ -1,0 +1,269 @@
+{
+ "id": "lem-trf-affine-base-ample-canonical-data",
+ "kind": "statement",
+ "title": "An ample module over an affine base gives separated canonical Proj data",
+ "statement": "Let $f:X\\to T$ be a quasi-compact morphism of schemes with $T$ affine [def-pc-scheme, def-weil-finite-type-morphism], and let $L$ be an ample invertible $\\mathcal O_X$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Then for every affine open $W\\subseteq T$, the restriction $L|_{f^{-1}(W)}$ is ample. Moreover, $f$ is separated and quasi-separated [def-weil-proper-morphism, def-weil-quasi-separated-morphism]. The canonical section algebra $\\mathcal A=\\bigoplus_{d\\geq0}f_*L^{\\otimes d}$ is a quasi-coherent graded $\\mathcal O_T$-algebra [def-weil-pbc-quasi-coherent-algebra, def-weil-pbc-graded-sheaf-structures], where $f_*L^{\\otimes d}(W)=\\Gamma(f^{-1}(W),L^{\\otimes d})$ and tensor powers use [def-pur-sheaf-tensor-product]. Its adjunction evaluation $\\psi:f^*\\mathcal A\\to\\bigoplus_{d\\geq0}L^{\\otimes d}$ uses module pullback [def-pc-module-pullback]. If $U(\\psi)$ is the union, for $d\\geq1$, of the open loci where $\\psi_d$ is surjective, then $U(\\psi)=X$, and the canonical morphism $r_{L,\\psi}:X\\to\\operatorname{Proj}_T(\\mathcal A)$ is an open immersion [lem-trf-space-line-module-proj-map, def-nagata-relative-proj, def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01VJ (lemma-characterize-relatively-ample), affine-base part of (3) implies (5); 01VI (lemma-relatively-ample-separated); 0892 (lemma-pullback-ample-tensor-relatively-ample)(2), affine specialization."
+ },
+ "stmt_deps": [
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-trf-space-line-module-proj-map",
+  "def-sfb-relative-section-algebra-canonical-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $W\\subseteq T$. The inclusion $j:W\\to T$ is affine by lem-weil-pbc-morphism-affine-schemes-affine, since both schemes are affine. Its base change $g:f^{-1}(W)\\to X$ is affine by lem-weil-pbc-affine-morphism-permanence(1). Apply lem-weil-pbc-pullback-ample-invertible to $g$ and the given ample $L$: $g^*L$ is ample. For this open inclusion, the pullback formula $\\mathcal O_{f^{-1}(W)}\\otimes_{g^{-1}\\mathcal O_X}g^{-1}L$ identifies $g^*L$ with $L|_{f^{-1}(W)}$, since $g^{-1}\\mathcal O_X=\\mathcal O_{f^{-1}(W)}$ and the tensor unit acts by multiplication. This proves the restriction clause for every $W$.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample)(2), using its existing affine-pullback specialization; Tag 01SH (lemma-morphism-affines-affine)."
+   }
+  },
+  {
+   "text": "By lem-weil-pbc-ample-scheme-separated the structure map $X\\to\\operatorname{Spec}\\mathbf Z$ is separated. It is the composite of $f$ with the structure map of $T$. Hence lem-weil-pbc-separated-cancellation(b) makes $f$ separated. Then lem-pc-separated-quasi-separated makes $f$ quasi-separated. Thus the assumed quasi-compactness and the just-proved quasi-separatedness are available before constructing the section algebra.",
+   "uses": [
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), affine-base separatedness in (3) implies (5); properties.tex Tag 09MP (lemma-ample-separated)."
+   }
+  },
+  {
+   "text": "Apply lem-trf-qcqs-line-section-algebra-evaluation to $f$ and $L$. It gives the quasi-coherent graded algebra $\\mathcal A=\\bigoplus_{d\\geq0}f_*L^{\\otimes d}$, its evaluation $\\psi$, and its canonical map $r:U(\\psi)\\to P=\\operatorname{Proj}_T(\\mathcal A)$. Take the affine base open $T$ itself in that lemma and put $S=\\Gamma_*(X,L)$. Its specified identifications give $\\mathcal A(T)=S$, $P=\\operatorname{Proj}(S)$, and $U(\\psi)=\\bigcup_{d>0,s\\in\\Gamma(X,L^{\\otimes d})}X_s$. Ampleness says that every $x\\in X$ belongs to an affine $X_s$ of positive degree, so this union is $X$. The same lemma identifies $r$ under $P=\\operatorname{Proj}(S)$ with the usual canonical map for the identity graded map of $S$. The direct-image formula on each affine $W$ is exactly the formula in that lemma.",
+   "uses": [
+    "lem-trf-qcqs-line-section-algebra-evaluation",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), (3) implies (5), section algebra and generation locus; constructions.tex Tag 01O9 (lemma-invertible-map-into-relative-proj)(3)."
+   }
+  },
+  {
+   "text": "Consider all positive-degree sections $s$ for which $X_s$ is affine. They cover $X$ by the definition of ampleness. By lem-sc-ample-proj-local-chart, the canonical map $a:X\\to\\operatorname{Proj}(S)$ satisfies $a^{-1}(D_+(s))=X_s$ for every positive-degree homogeneous $s$, and its restriction $a_s:X_s\\to D_+(s)$ is an isomorphism for every section in this cover. The canonical map here is the identity-section-ring map identified with $r$ in step 3, not an arbitrary open immersion into some Proj. Let $V=\\bigcup_{X_s\\text{ affine}}D_+(s)$. The inverse-image equalities and the cover show that the image of $a$ is exactly $V$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-ample-proj-local-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01PZ (lemma-map-into-proj) and 01Q1 (lemma-ample-immersion-into-proj), standard-chart proof."
+   }
+  },
+  {
+   "text": "The map $a$ is injective: if $a(x)=a(y)$, choose a covering section $s$ with $x\\in X_s$; then $a(x)\\in D_+(s)$, the inverse-image equality forces $y\\in X_s$, and injectivity of $a_s$ gives $x=y$. The inverses $b_s:D_+(s)\\to X_s\\hookrightarrow X$ agree on overlaps. Indeed, over $D_+(s)\\cap D_+(t)$, the equality $a\\circ b_t=\\mathrm{id}$ and $a^{-1}(D_+(s))=X_s$ make $b_t$ factor through $X_s$; it is then the inverse of $a_s$ restricted to this overlap, hence equals $b_s$. By lem-weil-pbc-scheme-morphism-gluing they glue to $b:V\\to X$. The equalities $a b=\\mathrm{id}_V$ and $b a=\\mathrm{id}_X$ hold on the displayed open covers and hence globally by the uniqueness clause of the same lemma. Thus $X\\simeq V$ through $a$. As $V$ is open in $\\operatorname{Proj}(S)$, this is an open immersion by def-weil-open-immersion. Under step 3 it is precisely the required $r:X\\to P$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01Q1 (lemma-ample-immersion-into-proj), final chart-gluing argument, written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-separated-quasi-separated",
+  "lem-sc-ample-proj-local-chart",
+  "lem-trf-qcqs-line-section-algebra-evaluation",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-separated-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (lemma-characterize-relatively-ample), affine-base (3) implies (5), using Properties Tags 09MP, 01PZ and 01Q1; restriction via affine specialization of 0892(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsAmple|ample.*[Pp]roj|canonical.*[Pp]roj",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"23\", \"text\": \"  The canonical isomorphism `Proj A |_ D₊(f) ≅ Spec (A_f)₀`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"132\", \"text\": \"/-- The canonical map `(A_f)₀ ⟶ Γ(Proj A, D₊(f))`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"137\", \"text\": \"/-- The canonical map `Proj A |_ D₊(f) ⟶ Spec (A_f)₀`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"157\", \"text\": \"/-- The canonical isomorphism `Proj A |_ D₊(f) ≅ Spec (A_f)₀`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"172\", \"text\": \"/-- The canonical isomorphism `(A_f)₀ ≅ Γ(Proj A, D₊(f))`\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.awayι is a standard chart inclusion, and Proj.fromOfGlobalSections takes an ordinary ring map to global functions; neither constructs the graded section sheaf or proves this ampleness criterion. Read ProjectiveSpectrum/Basic.lean:435-515. Generic affine-locality results require the locality property already."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact scheme morphism to an affine scheme an ample invertible sheaf gives a canonical open immersion into the relative Proj of its section algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenToSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                ↑(AlgebraicGeometry.Proj.basicOpen 𝒜 f) ⟶\\n                  Algeb\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, this constructs the morphism from the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], AlgebraicGeometry.IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              AlgebraicGeometry.Proj 𝒜 ⟶\\n                AlgebraicGeometry.Spec { carrier := ↥(𝒜 0), comm\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                (AlgebraicGeometry.Proj.toLocallyRingedSpace 𝒜).restrict ⋯ ⟶\\n  \", \"doc\": \"The morphism of locally ringed spaces from the restriction of the projective spectrum $ \\\\text{Proj}(A) $ to the basic open set $ D_+(f) $ (defined by exclusion of the homogeneous element $ f $) to the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.awayι is a standard chart inclusion, and Proj.fromOfGlobalSections takes an ordinary ring map to global functions; neither constructs the graded section sheaf or proves this ampleness criterion. Read ProjectiveSpectrum/Basic.lean:435-515. Generic affine-locality results require the locality property already."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample line bundle over an affine base is ample on inverse images of smaller affine opens and its evaluation map has full generation locus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : AlgebraicGeometry.AffineTargetMorphismProperty} [self : P.IsLocal] {X Y : AlgebraicGeometry.Scheme}\\n  [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y) (s : Finset ↑(Y.presheaf.obj (Opposite.op ⊤))),\\n  Ideal.span ↑s = ⊤ → (∀ (r : ↥s), P (f ∣_ Y.basicOpen ↑r)) → P f\", \"doc\": \"If $ P $ is a property of morphisms with affine target that is local on the target, and for a morphism $ f: X \\to Y $ where $ Y $ is affine, the sections $ s $ generate the unit ideal in $ \\\\mathcal{O}_\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasicOpen_le\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {V : ↑X.affineOpens} (f : ↑(X.presheaf.obj (Opposite.op ↑V))), X.affineBasicOpen f ≤ V\", \"doc\": \"For a scheme $X$, given an affine open subset $V$ of $X$ and a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $V$, the basic open subset $D(f) = \\\\{x \\\\in V \\\\mid f_x \\\\in \\\\mathcal{O}_{X,x}^\\\\time\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.ι_basicOpen_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (r : ↑(X.presheaf.obj (Opposite.op ⊤))),\\n      AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map (X.basicOpen r).ι.base).obj U)\", \"doc\": \"For a scheme $X$ and a global section $r$ of its structure sheaf, the preimage of any open subset $U$ of $X$ under the inclusion of the basic open set defined by $r$ is an affine open subset of the ba\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {V : ↑X.affineOpens} (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  AlgebraicGeometry.Scheme.Hom.opensRange (I.glueDataObjMap ⋯) =\\n    (TopologicalSpace.Opens.map (I.glueDataObjι V).base).obj\\n      ((TopologicalSpace.Opens.map (↑V).ι.base).obj (X.\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, an affine open subset $V \\\\subseteq X$, and a section $f \\\\in \\\\Gamma(V, \\\\mathcal{O}_X)$, the image of the gluing morphism $\\\\mathcal{I}.\\\\text{glueDat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"(X : AlgebraicGeometry.Scheme) → {U : ↑X.affineOpens} → ↑(X.presheaf.obj (Opposite.op ↑U)) → ↑X.affineOpens\", \"doc\": \"For a scheme $ X $, given an affine open subset $ U $ of $ X $ and a section $ f $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, the basic open subset $ D(f) = \\\\{x \\\\in U \\\\mid f_x \\\\in \\\\mathcal{O\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.awayι is a standard chart inclusion, and Proj.fromOfGlobalSections takes an ordinary ring map to global functions; neither constructs the graded section sheaf or proves this ampleness criterion. Read ProjectiveSpectrum/Basic.lean:435-515. Generic affine-locality results require the locality property already."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact morphism to an affine scheme with an ample invertible module has a canonical section algebra open immersion into relative Proj",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": IsOpenImmersion (Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Set ↥Y), IsOpen U → IsCompact U → IsCompact (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' U)) →\\n    AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ of schemes, if for every open subset $ U \\\\subseteq Y $ that is quasi-compact, the preimage $ f^{-1}(U) $ is quasi-compact in $ X $, then $ f $ is a quasi-compact morphi\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": IsSeparated (toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": IsOpenImmersion hU.fromSpec\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, the morphism from $ \\\\operatorname{Spec}(\\\\Gamma(U)) $ to $ X $ constructed by composing the canonical isomorphism $ \\\\operatorname{Spec}(\\\\Gamma(U)) \\\\co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[X.IsQuasiAffine] : IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": Spec (.of <| Away 𝒜 f) ⟶ Proj 𝒜\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"[Algebra.FiniteType (𝒜 0) A] : QuasiCompact (Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.awayι is a standard chart inclusion, and Proj.fromOfGlobalSections takes an ordinary ring map to global functions; neither constructs the graded section sheaf or proves this ampleness criterion. Read ProjectiveSpectrum/Basic.lean:435-515. Generic affine-locality results require the locality property already."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.awayι is a standard chart inclusion, and Proj.fromOfGlobalSections takes an ordinary ring map to global functions; neither constructs the graded section sheaf or proves this ampleness criterion. Read ProjectiveSpectrum/Basic.lean:435-515. Generic affine-locality results require the locality property already."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|ample|sectionAlgebra|sectionRing",
+   "results": "{\"t\": \"2026-10-23T04:28:08Z\", \"tool\": \"grep\", \"query\": \"IsAmple|ample|sectionAlgebra|sectionRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\"], \"digest\": \"bad8891295915f25\"}; Read returned Proj candidates in ProjectiveSpectrum/Basic.lean:435-515: fromOfGlobalSections uses an ordinary ring map into global functions, not tensor-power sections of an arbitrary line bundle; chart inclusions are not this ampleness theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample line bundle defines an open immersion into Proj of its graded section ring",
+   "results": "{\"t\": \"2026-10-23T04:28:09Z\", \"tool\": \"leansearch\", \"query\": \"An ample line bundle defines an open immersion into Proj of its graded section ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.basicOpenToSpec\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.projIsoSpec\"], \"digest\": \"26b255185da4953b\"}; Read returned Proj candidates in ProjectiveSpectrum/Basic.lean:435-515: fromOfGlobalSections uses an ordinary ring map into global functions, not tensor-power sections of an arbitrary line bundle; chart inclusions are not this ampleness theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.IsOpenImmersion",
+   "results": "{\"t\": \"2026-10-23T04:28:09Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, AlgebraicGeometry.IsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.affineOpenCover_f\", \"AlgebraicGeometry.Proj.mapAffineOpenCover_I₀\", \"AlgebraicGeometry.Proj.mapAffineOpenCover_f\"], \"digest\": \"5f9181c00474a918\"}; Read returned Proj candidates in ProjectiveSpectrum/Basic.lean:435-515: fromOfGlobalSections uses an ordinary ring map into global functions, not tensor-power sections of an arbitrary line bundle; chart inclusions are not this ampleness theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf on a quasi compact scheme over an affine base has a quasi coherent section algebra and its canonical map to relative Proj is an open immersion",
+   "results": "{\"t\": \"2026-10-23T04:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"An ample invertible sheaf on a quasi compact scheme over an affine base has a quasi coherent section algebra and its canonical map to relative Proj is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\"], \"digest\": \"8715807fb74307fc\"}; Read returned Proj candidates in ProjectiveSpectrum/Basic.lean:435-515: fromOfGlobalSections uses an ordinary ring map into global functions, not tensor-power sections of an arbitrary line bundle; chart inclusions are not this ampleness theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graded ring of sections of an ample line bundle recovers the scheme as an open subscheme of Proj and ample bundles restrict along affine morphisms",
+   "results": "{\"t\": \"2026-10-23T04:29:04Z\", \"tool\": \"leanfinder\", \"query\": \"The graded ring of sections of an ample line bundle recovers the scheme as an open subscheme of Proj and ample bundles restrict along affine morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.projIsoSpec\"], \"digest\": \"db7532940c8ba7f4\"}; Read returned Proj candidates in ProjectiveSpectrum/Basic.lean:435-515: fromOfGlobalSections uses an ordinary ring map into global functions, not tensor-power sections of an arbitrary line bundle; chart inclusions are not this ampleness theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-relative-ample-affine-cover",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The polarized descent input in the specialization chain below lem-trf-local-term-locality, through lem-trf-algebraic-space-ample-local: its scheme-base-change step invokes Stacks 0893. This node supplies the affine-open-cover criterion 01VJ (3) implies (1) used at the beginning and end of the proof of 0893. Re-split of lem-trf-scheme-relative-ample-affine-cover: old proof steps 1-2, affine-base relative ampleness and local canonical data.",
+   "via": [
+    "lem-trf-scheme-relative-ample-affine-cover",
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-base-ample-canonical-data",
+  "worker": "stage1",
+  "summary": "Proved the affine-base restriction clause by affine pullback, separatedness by absolute ample separatedness and cancellation, and canonical quasi-coherent data by the existing qcqs section-algebra lemma. Identified the specified map with the absolute canonical section-ring map and glued its standard-chart inverses. No statement changes or new nodes; avoided the parent relative criterion to prevent circularity. Read every cited statement and the Stacks proofs; checked empty schemes, non-finite-type schemes, higher section degrees and nontrivial degree-zero section algebra.",
+  "blueprint": "The polarized descent input in the specialization chain below lem-trf-local-term-locality, through lem-trf-algebraic-space-ample-local: its scheme-base-change step invokes Stacks 0893. This node supplies the affine-open-cover criterion 01VJ (3) implies (1) used at the beginning and end of the proof of 0893. Re-split of lem-trf-scheme-relative-ample-affine-cover: old proof steps 1-2, affine-base relative ampleness and local canonical data.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic affine pullback of absolute ampleness used for the open W to affine T after base change; this unit has no independent affine-pullback lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "Generic absolute ample separatedness from Stacks 09MP, explicitly used by the unit-route input 01VJ; it proves the separatedness needed before section-algebra pushforward."
+   },
+   {
+    "node": "lem-sc-ample-proj-local-chart",
+    "why": "Generic absolute canonical section-ring standard-chart theorem, exactly Properties 01PZ/01Q1 invoked in the affine-base proof of 01VJ; it identifies the specified map and its affine chart isomorphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-sc-ample-proj-local-chart"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-187786f5b",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-187786f5b (reviewer sub-agent of L); spot-checked: Pass: I read all 5 steps and every cited statement in full. The delivery creates no new nodes and leaves the statement unchanged. Compared with clones/live, only status/proof/proof_deps/proof_origin/split_report/mathlib_searches changed. The item is still unsplit live, and there is no repair note for it. The proof follows Stacks morphisms 01VJ (3)=>(5), specialized to an affine base, which I read in full. Step 1 shows the restriction clause: W->T is a map of affine schemes, so it is affine (01SH leaf); its base change f^{-1}(W)->X is affine (permanence(1)); the affine-pullback lemma 0892(2) makes g^*L ample; and g^*L=L|_{f^{-1}W} by the formula in def-pc-module-pullback. Step 2: X is separated by 09MP, f is separated by cancellation(b), and f is quasi-separated by the separated-implies-quasi-separated leaf. Step 3: the qcqs section-algebra lemma applies (f qc given, qs from step 2). With V=T it gives A(T)=Gamma_*(X,L), P=Proj(S) and U(psi)=union of the X_s, which ampleness makes all of X. It identifies r with the canonical map of the identity graded map, which is the 01PZ map (as in 01O9(3)). Step 4: lem-sc-ample-proj-local-chart gives a^{-1}(D+(s))=X_s and that X_s->D+(s) is an isomorphism for affine X_s. Step 5 checks the 01Q1 gluing: injectivity, the inverses b_s agree on overlaps, they glue by the gluing leaf, and ab=id and ba=id hold, so r is an open immersion. There is no cycle; the parent-level relative criteria are not cited. Small cases checked: X empty, T empty, identity of an affine scheme, non-finite-type X, A_0 different from O_T, sections in different degrees. I accept tool_uses for pullback-ample-invertible, ample-scheme-separated and ample-proj-local-chart as generic Stacks facts used where 01VJ uses them. review_split.py reports 'no such node' for every citation only because it does not follow the snapshot's symlinked chapter directories; every cited id exists. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseAmpleCanonicalData",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_base_ample_canonical_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseAmpleCanonicalData.lean",
+  "statement": "theorem affine_base_ample_canonical_data {X T : Scheme.{u}} (f : X ⟶ T) [QuasiCompact f] [IsAffine T] (L : X.Modules) [L.IsInvertible] (hL : IsAmple X L) : (∀ W : T.Opens, IsAffineOpen W → ∃ h : ((tensorPullback (f ⁻¹ᵁ W).ι).obj L).IsInvertible, @IsAmple (f ⁻¹ᵁ W).toScheme ((tensorPullback (f ⁻¹ᵁ W).ι).obj L) h) ∧ IsSeparated f ∧ QuasiSeparated f ∧ ∃ A : RelativeSectionAlgebra f L, (∀ x : X, ∃ (V : T.affineOpens) (hx : x ∈ f ⁻¹ᵁ V.1) (n : ℕ), 0 < n ∧ ∃ a : A.data.grading V n, (TopCat.Presheaf.germ (L.tensorPow n).val.presheaf (f ⁻¹ᵁ V.1) x hx) (A.sectionEquiv V n a) ∉ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) • (⊤ : Submodule (X.presheaf.stalk x) ↑(TopCat.Presheaf.stalk (L.tensorPow n).val.presheaf x))) ∧ ∃ r : X ⟶ A.data.relProj, A.IsCanonicalMap r ∧ IsOpenImmersion r",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses RelativeSectionAlgebra from the already landed def-sfb-relative-section-algebra-canonical-map (added to stmt_deps under the landed-node rule). Its data encode quasi-coherence and its sectionEquiv, smul, one, mul and restriction identify the actual canonical graded direct-image algebra. U(evaluation)=X is written out (positive-degree section germs generating the rank-one stalks) instead of RelativeSectionAlgebra.GeneratesEverywhere, which is recorded only by the theorem node lem-trf-scheme-ample-canonical-proj-criterion (reviewer FIX of 70f7a11f); IsCanonicalMap specifies the normalized evaluation chart map, not an arbitrary open immersion. No new definitions or corrected statement.",
+  "fixed_by": "NT-stage2-cc-70f7a11f8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70f7a11f8",
+  "group": "Q62",
+  "result": "fix",
+  "note": "Read the item node, all 14 stmt_dep records, the delivered module, the report (Worker report + Second reading by Q62 present), the live SchemeAmpleCanonicalProjCriterion module and Stacks 01VJ/01VI/0892. Hypotheses: QuasiCompact f, IsAffine T, IsInvertible L, absolute IsAmple; conclusions: ampleness of the tensorPullback restriction to f⁻¹W for every affine W, IsSeparated ∧ QuasiSeparated, ∃ RelativeSectionAlgebra (sections, unit, multiplication, scalars and restrictions fixed) with U(ψ)=X and an IsCanonicalMap r that is an open immersion. All match the node; no extra hypotheses; edge cases (empty X/T/W, degree 0) covered; the added landed stmt_dep is allowed; the §3.7 import-cycle omission is listed in the report. F1 (H2/H4): RelativeSectionAlgebra.GeneratesEverywhere is recorded only by the theorem node lem-trf-scheme-ample-canonical-proj-criterion (not a stmt_dep, and it proof-depends on this item); the cited def node owns only RelativeSectionAlgebra/.evaluate/.IsCanonicalMap. FIX: wrote its literal body (positive-degree section germ outside m_x·L^n_x) into the statement; fixes/AffineBaseAmpleCanonicalData.lean + fixes/lem-trf-affine-base-ample-canonical-data.lean-record.json (verbatim statement, note). Fixed file compiled clean via nt_compile --json (5.3 s, exit 0)."
+ }
+}

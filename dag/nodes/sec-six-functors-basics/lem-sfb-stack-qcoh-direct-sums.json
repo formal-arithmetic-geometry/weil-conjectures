@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-stack-qcoh-direct-sums",
+ "kind": "statement",
+ "title": "Quasi-coherent direct sums and sections on a quasi-compact algebraic stack",
+ "statement": "Use the universes and small indexing sets of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal X$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack]. Quasi-coherent modules are module sheaves [def-weil-sheaf-of-modules-category] on its big fppf site, locally admitting presentations by small sums of the structure sheaf, as in [def-sfb-stack-quasi-coherent-algebra]. For every small set $A$ and family $(F_a)_{a\\in A}$ of quasi-coherent modules, their coproduct $F=\\bigoplus_{a\\in A}F_a$, characterized by $\\operatorname{Hom}(F,G)=\\prod_{a\\in A}\\operatorname{Hom}(F_a,G)$, exists in quasi-coherent modules and agrees with the coproduct in all module sheaves (the sheafification of the presheaf direct sum). For every scheme test $x:T\\to\\mathcal X$, let $F_x$ and $(F_a)_x$ be the quasi-coherent Zariski $\\mathcal O_T$-modules [pqf-def-coherent] attached to $x$ by the scheme-test restriction of [lem-sfb-stack-quasi-coherent-scheme-restriction], with tensor pullback [def-pc-module-pullback]; the summand maps induce a canonical isomorphism $\\bigoplus_{a\\in A}(F_a)_x\\xrightarrow{\\sim}F_x$ of quasi-coherent $\\mathcal O_T$-modules. If $\\mathcal X$ is quasi-compact, meaning that it admits a smooth surjective atlas from a quasi-compact scheme [def-sfb-stack-qcqs-morphism], the canonical map\n$$\\bigoplus_{a\\in A}\\Gamma(\\mathcal X,F_a)\\xrightarrow{\\sim}\\Gamma\\left(\\mathcal X,\\bigoplus_{a\\in A}F_a\\right)$$\nis an isomorphism of $\\Gamma(\\mathcal X,\\mathcal O_{\\mathcal X})$-modules, natural in the family. Global sections have the compatible-family meaning of [def-sfb-stack-quasi-coherent-algebra]. No quasi-separatedness, separation of the diagonal, finiteness of $A$, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WN (lemma-qc-colimits), part (1) and its proof by scheme-test restriction; stacks-properties.tex Tag 04YC (lemma-quasi-compact-stack), parts (2),(3). The global-section assertion is the finite-support descent consequence for a quasi-compact smooth atlas; it needs no quasi-separatedness."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "def-sfb-stack-qcqs-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Form the presheaf of modules $P(x)=\\bigoplus_{a\\in A}F_a(x)$ with componentwise restrictions. By [lem-weil-pbc-module-sheaves-colimits-forgetful], its module sheafification $F=P^\\#$, with the canonical summand maps $\\iota_a:F_a\\to F$, is the coproduct in all module sheaves. The size convention makes the discrete diagram on $A$ small, so that the cited existence statement applies. This construction also applies when $A$ is empty.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits), coproduct construction in its proof"
+   }
+  },
+  {
+   "text": "Fix any scheme test $x:T\\to\\mathcal X$. By [lem-sfb-stack-quasi-coherent-scheme-restriction], write the restriction of $F_a$ to the big fppf slice over $x$ as $A_T((F_a)_x)$, where $A_T(M)(u:T\\prime\\to T)=\\Gamma(T\\prime,u^*M)$. The ambient Zariski coproduct $N_x=\\bigoplus_a(F_a)_x$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-coproduct-closure]. The functor $A_T$ preserves small colimits by [lem-sfb-scheme-big-fppf-quasicoherent-equivalence], and restriction to this slice preserves them by [lem-sfb-fibred-fppf-ringed-inverse-image]. Consequently $F|_x\\simeq\\bigoplus_a A_T((F_a)_x)\\simeq A_T(N_x)$, with each summand map the stated canonical one. In particular $F|_x$ is quasi-coherent. Its local free presentations are presentations of $F$ on the same localized site objects; doing this for every $x$ supplies local presentations at every object of the big site. Thus $F$ is quasi-coherent by the local-presentation definition in [def-sfb-stack-quasi-coherent-algebra]. Apply scheme-test restriction now to $F$. Full faithfulness of $A_T$ identifies $N_x\\xrightarrow{\\sim}F_x$, since their images and summand maps are the preceding coproduct. Uniqueness of this identification makes it natural in the family and compatible with scheme-test pullback. Finally the quasi-coherent category is full in module sheaves, so the ambient coproduct universal property restricts to the asserted Hom bijection for every quasi-coherent $G$.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WN (lemma-qc-colimits)(1), proof via scheme slices; Tag 06WI (lemma-characterize-quasi-coherent); descent.tex Tags 03DX and 06VE"
+   }
+  },
+  {
+   "text": "For each $b\\in A$, the coproduct universal property defines $\\pi_b:F\\to F_b$ by $\\pi_b\\iota_a=1$ if $a=b$ and $0$ otherwise. A global section $s$ of a module $H$ is equivalently a module map $\\mathcal O_{\\mathcal X}\\to H$: its component sends $r$ to $r s_x$, and evaluation at $1$ gives the inverse, by the compatible-family definition in [def-sfb-stack-quasi-coherent-algebra]. The structure module is quasi-coherent, with its rank-one free presentation. In particular every $s\\in\\Gamma(\\mathcal X,F)$ has global coordinates $s_b=\\pi_b(s)$. Applying $\\pi_b$ to a finite sum $\\sum_a\\iota_a(t_a)$ recovers $t_b$. The canonical map from the direct sum of the global sections is therefore injective, without any compactness assumption.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06TV (definition-structure-sheaf); compatible-family global sections and the coproduct universal property"
+   }
+  },
+  {
+   "text": "Assume now that $\\mathcal X$ is quasi-compact. Choose a smooth surjective atlas $u:U\\to\\mathcal X$ with $U$ quasi-compact, as allowed by [def-sfb-stack-qcqs-morphism]. By [lem-weil-pbc-affine-opens-basis] and the finite-subcover definition [def-weil-pbc-quasi-compact-scheme], choose a finite affine open cover $(V_j)$ of $U$. Fix $s\\in\\Gamma(\\mathcal X,F)$. For each test $x_j:V_j\\to\\mathcal X$, step 2 identifies $F_{x_j}$ with the ambient coproduct of $(F_a)_{x_j}$. Its apex and summands are quasi-coherent, so [lem-weil-pbc-quasi-coherent-module-colimit-evaluation] with the small discrete category $A$ identifies its sections on the affine open $V_j$ itself with $\\bigoplus_a\\Gamma(V_j,(F_a)_{x_j})$. Hence $s|_{V_j}$ has finite support $J_j\\subseteq A$. Put $J=\\bigcup_j J_j$, a finite set. The coordinate identities from step 3 give $s|_{V_j}=\\sum_{a\\in J}\\iota_a(s_a)|_{V_j}$ for every $j$. The Zariski sheaf condition on $U$ gives $s|_U=\\sum_{a\\in J}\\iota_a(s_a)|_U$. If $U$ is empty the cover and $J$ may both be empty, and the same equality holds.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-quasi-coherent-module-colimit-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01K2 (section-quasi-compact), and 01ID (lemma-colimit-quasi-coherent); stacks-properties.tex Tag 04YC (lemma-quasi-compact-stack)(3)"
+   }
+  },
+  {
+   "text": "Let $t=s-\\sum_{a\\in J}\\iota_a(s_a)$. By step 4 its section on $U$ is zero. Under the section/map identification of step 3 it gives a quasi-coherent module map $m_t:\\mathcal O_{\\mathcal X}\\to F$. Its restriction to $U_{\\mathrm{et}}$ is zero: on each etale scheme $W\\to U$ the restricted map is multiplication by the pullback of $t|_U=0$, by the natural scheme-test section comparison [lem-sfb-stack-quasi-coherent-scheme-restriction]. The equivalence [lem-sfb-smooth-atlas-module-descent] is given on morphisms by this restriction, hence is faithful. It follows that $m_t=0$, and thus $t=0$. Therefore $s=\\sum_{a\\in J}\\iota_a(s_a)$ is in the image of the canonical section map. This proves surjectivity. This use of the atlas equivalence requires only its faithfulness; its statement allows arbitrary algebraic-space relation spaces, with no quasi-separatedness hypothesis.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-smooth-atlas-module-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), faithfulness of restriction for a smooth presentation; scheme-test formula of Tags 06WI and 06WK"
+   }
+  },
+  {
+   "text": "The section map is $\\Gamma(\\mathcal X,\\mathcal O_{\\mathcal X})$-linear: each $\\iota_a$ is a module map, so $\\iota_a(r t)=r\\iota_a(t)$ objectwise, and finite summation preserves this equality. It is natural because a family of module maps $v_a:F_a\\to G_a$ induces the unique coproduct map $v$ with $v\\iota_a=\\iota_a v_a$; evaluating this equality on global sections gives the naturality square. Injectivity from step 3 and surjectivity from step 5 therefore give the asserted natural module isomorphism. Empty families and zero modules obey the same formulas. Only the finite affine cover of $U$ used compactness; no property of the overlaps or diagonal, or finiteness of $A$, was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WN (lemma-qc-colimits)(1), summand maps; module and global-section definitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "lem-sfb-fibred-fppf-ringed-inverse-image",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-quasi-coherent-module-colimit-evaluation",
+  "lem-sfb-smooth-atlas-module-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WN (lemma-qc-colimits), scheme-slice proof, followed by the explicit finite-support and faithful-atlas argument for global sections; scheme inputs from 01ID and 01IT and atlas descent from 06WT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Arbitrary direct sums of quasi coherent modules on an algebraic stack are quasi coherent and on a quasi compact algebraic stack global sections commute with direct sums",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or global sections, or give colimits of all module sheaves on a scheme. None proves closure of stack quasi-coherent modules under arbitrary sums together with the quasi-compact-stack section comparison. The generic site global-sections functor is a right adjoint, not a coproduct-preservation result; the source was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf of a quasi compact algebraic stack is compact in the category of quasi coherent modules so Hom from the structure sheaf preserves coproducts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.QuasiCompact X.toSpecΓ\", \"doc\": \"For any scheme $X$ that is a compact topological space, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is quasi-compact. This morphism arises as the unit of the \"}\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] (y : ↥Y),\\n  CompactSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a quasi-compact morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is a compact space.\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)]\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [∀ (i : I), QuasiSeparatedSpace ↥(D.obj i)],\\n  \", \"doc\": \"For any diagram of schemes where all morphisms are affine and each scheme is compact and quasi-separated, the right opposite of the global sections functor (mapping schemes to their global sections in\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], CompactSpace ↥X\", \"doc\": \"Every affine scheme is a compact space, meaning its underlying topological space satisfies the finite open cover condition for compactness.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or global sections, or give colimits of all module sheaves on a scheme. None proves closure of stack quasi-coherent modules under arbitrary sums together with the quasi-compact-stack section comparison. The generic site global-sections functor is a right adjoint, not a coproduct-preservation result; the source was read."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*(coproduct|direct.sum)|preserves.*(coproduct|direct.sum).*section|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or global sections, or give colimits of all module sheaves on a scheme. None proves closure of stack quasi-coherent modules under arbitrary sums together with the quasi-compact-stack section comparison. The generic site global-sections functor is a right adjoint, not a coproduct-preservation result; the source was read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of quasi coherent sheaves on a quasi compact algebraic stack commute with arbitrary direct sums",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.Γ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : Sheaf J A ⥤ A\", \"doc\": \"The global sections functor, which is the left adjoint to the constant sheaf functor, assigning to each sheaf its global sections.\"}\n  {\"name\": \"CategoryTheory.HasGlobalSectionsFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₂) → [inst_1 : CategoryTheory.Category.{v₂, u₂} A] → [CategoryTheory.HasWeakSheafify J A] → Prop\", \"doc\": \"The property that the constant sheaf functor has a left adjoint, called the global sections functor, which assigns to each sheaf its global sections.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.termΓ(_,_)\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The notation $\\\\Gamma(A, B)$ denotes the global sections of the sheaf $B$ over the scheme $A$.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Schemeᵒᵖ ⥤ CommRingCat\", \"doc\": \"The functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition of the opposi\"}\n  {\"name\": \"SheafOfModules.sectionsFunctor\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules.{v} R ⥤ Type _\", \"doc\": \"The functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of types, which maps each sheaf of modules to its global sections (families of elements satisfying compa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ = Scheme.forgetToLocallyRingedSpace.op ⋙ LocallyRingedSpace.Γ\", \"doc\": \"The contravariant functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or global sections, or give colimits of all module sheaves on a scheme. None proves closure of stack quasi-coherent modules under arbitrary sums together with the quasi-compact-stack section comparison. The generic site global-sections functor is a right adjoint, not a coproduct-preservation result; the source was read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasicoherent\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) : Prop\", \"doc\": \"A sheaf of modules is quasi-coherent if it is locally the cokernel of a\\nmorphism between coproducts of copies of the sheaf of rings.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) : Type (max (\", \"doc\": \"This structure contains the data of a family of objects `X i` which cover\\nthe terminal object, and of a presentation of `M.over (X i)` for all `i`.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (self : M.Qua\", \"doc\": \"the index type of the covering\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (q : M.Quasic\", \"doc\": \"A (local) presentation of a sheaf of module `M` is a finite presentation\\nif each given presentation of `M.over (X i)` is a finite presentation.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] : CategoryTheory.ObjectProperty (She\", \"doc\": \"A sheaf of modules is quasi-coherent if it is locally the cokernel of a\\nmorphism between coproducts of copies of the sheaf of rings.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) [M.IsFinitePr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (q : M.Quasic\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (q : M.Quasic\", \"doc\": \"If `M` is quasicoherent, it is locally generated by sections.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.shrink\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (q : M.Quasic\", \"doc\": \"Shrink the indexing type of `QuasicoherentData` into the universe of the site.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} {inst✝¹ : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat} {inst✝² : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat} {M : Sheaf\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (self : M.Qua\", \"doc\": \"a family of objects which cover the terminal object\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (nonempty_qua\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or global sections, or give colimits of all module sheaves on a scheme. None proves closure of stack quasi-coherent modules under arbitrary sums together with the quasi-compact-stack section comparison. The generic site global-sections functor is a right adjoint, not a coproduct-preservation result; the source was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arbitrary coproducts of quasi coherent modules on an algebraic stack and finite support of global sections when the stack has a quasi compact smooth atlas",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ambient module colimits and local-presentation predicates do not state the stack coproduct and quasi-compact-stack section comparison. Source inspection confirms the global-sections functor is a right adjoint; the affine-transition limit results have different hypotheses and conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*(coproduct|direct.sum)|AlgebraicStack|preserves.*coproduct.*globalSections",
+   "results": "0 hits. No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ambient module colimits and local-presentation predicates do not state the stack coproduct and quasi-compact-stack section comparison. Source inspection confirms the global-sections functor is a right adjoint; the affine-transition limit results have different hypotheses and conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of quasi coherent modules on a quasi compact algebraic stack commute with arbitrary direct sums",
+   "results": "8 hits. SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, CategoryTheory.HasGlobalSectionsFunctor, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.Scheme.Γ, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.presentation",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ambient module colimits and local-presentation predicates do not state the stack coproduct and quasi-compact-stack section comparison. Source inspection confirms the global-sections functor is a right adjoint; the affine-transition limit results have different hypotheses and conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf is a compact object in quasi coherent modules on a quasi compact algebraic stack so its Hom functor preserves coproducts",
+   "results": "8 hits. AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ambient module colimits and local-presentation predicates do not state the stack coproduct and quasi-compact-stack section comparison. Source inspection confirms the global-sections functor is a right adjoint; the affine-transition limit results have different hypotheses and conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections|HasColimits|IsQuasicoherent",
+   "results": "6 hits. Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean Subdirectory Mathlib/AlgebraicGeometry/Modules.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ambient module colimits and local-presentation predicates do not state the stack coproduct and quasi-compact-stack section comparison. Source inspection confirms the global-sections functor is a right adjoint; the affine-transition limit results have different hypotheses and conclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-polynomial-rees-calculus",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes. Universal invariant closed-image assertion: apply the topology theorem for adequate moduli spaces on each invariant affine chart. Repair of the universal-closed-topology input: Alper Proposition 5.2.9(3), replacing the invalid citation of the downstream topological-images node. Algebra input to the affine-chart calculation: Alper Lemma 5.2.6 and Proposition 3.3.5, the adjunction unit on an arbitrary algebra and its tensor extensions. Supporting input: Alper Lemma 5.2.1, printed p.507, with Proposition 3.3.5 and Remark 3.3.2, printed pp.497--498: algebraic consequence of the ideal-quotient adequate homeomorphism after every scalar extension. Graded-algebra construction in Alper Lemma 5.2.1: polynomial sections, ideal powers, and the degree-one generator presentation used to prove nilpotence of the comparison kernel. Supporting module-theoretic input: arbitrary quasi-coherent direct sums and their global sections, before the polynomial and graded-power constructions.",
+   "via": [
+    "lem-sfb-stack-polynomial-rees-calculus",
+    "lem-sfb-adequate-ideal-quotient-comparison",
+    "lem-sfb-adequate-algebra-unit-power-kernel",
+    "lem-sfb-adequate-base-change-affinization",
+    "lem-sfb-adequate-moduli-universal-closed-topology",
+    "lem-sfb-projective-pgl-invariant-quotient",
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-qcoh-direct-sums",
+  "worker": "stage1",
+  "summary": "Kept the statement and its statement dependencies unchanged. Constructed the ambient sum and proved scheme-test compatibility and quasi-coherence using existing nodes, then proved the section comparison by a finite affine atlas cover, global coordinate projections and faithful atlas restriction. No new nodes; all hypotheses, source tags, empty cases and cited statements were checked. Retained the original Mathlib search evidence and added actual Q71 searches.",
+  "blueprint": "Supporting input to the inherited blueprint.from.place: direct-image stability (3), alteration/moduli/adequacy chain, and polynomial-Rees construction; this split supplies its arbitrary quasi-coherent sums and finite-support global sections. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md (3); this is a local module-theoretic tool below that route. Searches of the whole imported blueprint for quasi-coherent, direct sums, coproduct, and 06WN found no exact blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Ambient module-sheaf coproduct existence and sheafification formula, a generic ringed-site tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Scheme Zariski coproduct closure is the local input to the stack scheme-test proof; no step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-colimit-evaluation",
+    "why": "Affine evaluation of a quasi-coherent module coproduct gives finite support on each affine atlas chart, a generic scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-quasi-coherent-module-colimit-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-aad771165",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-aad771165 (reviewer sub-agent of L); spot-checked: I read the item in full, all six steps and all eleven cited statements. The delivery has no new nodes, keeps the statement and stmt_deps unchanged, and the item had no proof before. Source checks: Stacks 06WN (stacks-sheaves.tex:1897, the proof restricts to the localization X/x = Sch/U) and 04YC (1)<=>(3). The global-section clause is true assuming only quasi-compactness. Steps: (1) the sheafified sectionwise colimit comes from module-sheaves-colimits-forgetful (2). (2) Scheme-restriction, coproduct closure, the A_T colimit sentence of the big-fppf equivalence and the colimit preservation of fibred inverse image give F|_x = A_T(N_x). Quasi-coherence then follows from the local-presentation definition, and full faithfulness gives N_x = F_x. (3) Global sections are maps O -> H, the coordinate projections pi_b exist, and the section map is injective. (4) A finite affine cover of the quasi-compact atlas plus 01ID evaluation gives finite support on each chart. I checked pi_b(s)|_{x_j} = t_{b,j} myself. No overlap of charts is used. (5) The descent equivalence restricts maps to U_et, so it is faithful, and m_t = 0 follows. (6) Linearity and naturality are elementary. Edge cases: empty A and empty stack work. An infinite disjoint union of points shows that compactness is needed. Checked: no duplicate among the 06WN-citing nodes (qcoh-flat-atlas-exactness, lqc-flat-comparison), no cycle, no SGA. I accept the three generic tool_uses (ringed-site colimits, scheme qcoh coproduct closure, affine colimit evaluation). Batch-5: all three flagged paths end in general definitions (def-trf-space-quasi-coherent-module, def-trf-projective-bundle-morphism, def-trf-algebraic-space). None is a step of the trace formula or Poincaré duality proofs, so none requires a RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackQCohDirectSums",
+  "declaration": "CategoryTheory.moduli_qcoh_direct_sums",
+  "declarations": [
+   "CategoryTheory.moduliGlobalScalarEvaluation",
+   "CategoryTheory.moduliSectionValue",
+   "CategoryTheory.moduliSectionsSubmodule",
+   "CategoryTheory.moduliModuleGlobalSections",
+   "CategoryTheory.moduli_qcoh_direct_sums"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackQCohDirectSums.lean",
+  "statement": "theorem moduli_qcoh_direct_sums {S : Scheme.{u}} (C : BasedCategory.{v, w} (Over S)) (hC : IsAlgebraicModuliStack C) (A : Type (max (u + 1) v w)) (F : A → ModuliQCoh C hC.1.1) : ∃ c : Cofan F, Nonempty (IsColimit c) ∧ Nonempty (IsColimit ((SheafOfModules.isQuasicoherent (moduliModuleRings C hC.1.1)).ι.mapCocone c)) ∧ (∀ (r : ModuliSchemeRestriction C hC.1.1) (x : C.obj), Nonempty (IsColimit ((r.restriction x).mapCocone c))) ∧ (IsQuasiCompactModuli C → Nonempty (IsColimit (((SheafOfModules.isQuasicoherent (moduliModuleRings C hC.1.1)).ι ⋙ moduliModuleGlobalSections C hC.1.1).mapCocone c)))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing ModuliQCoh full subcategory and ModuliSchemeRestriction. Colimiting cofans retain the actual summand maps: the same cofan is colimiting in ambient module sheaves, on every scheme test, and after global sections when the stack is quasi-compact. The global section functor is the compatible-family submodule with the pointwise action of the recorded global regular-function ring. These structural helpers have real data; the single theorem proof is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70820d27a",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Only the item lean record and the new StackQCohDirectSums module are delivered; lean.statement is verbatim. Clauses checked: coproduct exists in ModuliQCoh, ι preserves it (ambient sheafified sum), every ModuliSchemeRestriction r.restriction x preserves it (canonical iso via retained legs, qcoh by r.quasicoherent), and under IsQuasiCompactModuli the compatible-family global-sections functor into ModuleCat over moduliGlobalSectionsRing preserves it. A : Type (max (u+1) v w) is small, no finiteness; no quasi-separation or Noetherian hypothesis. Helpers carry real data with docstrings and duplicate nothing (rg). stmt_deps are correct. Edge cases (empty family, empty atlas, infinite A) are fine. Proof is only sorry with a 6-step docstring. No findings."
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-clopen-ordinary-scalar-comparison",
+ "kind": "statement",
+ "title": "Ordinary scalar extension and clopen restriction",
+ "statement": "Let $X,Y$ be schemes and $j:Y\\to X$ an open immersion. Use the small pro-etale sites, module categories, scalar-extension presentations $p$ on $X$ and $q$ on $Y$, and restriction functors of [def-pur-clopen-derived-scalar-comparison-data]. For every morphism $a:R\\to S$ of sheaves of commutative rings, let $a_Y:R|_Y\\to S|_Y$ be its restriction. There is a family of natural $S|_Y$-linear isomorphisms $r_S\\circ E_a\\cong E_{a_Y}\\circ r_R$, where $r_R,r_S$ are the recorded restrictions and $E$ is the ordinary presented sheafified scalar extension. For every module sheaf $M$, every object $U$ of the opposite small pro-etale site of $Y$, and sections $s\\in S|_Y(U)$ and $x\\in r_RM(U)$, the forward map sends the sheafification-unit tensor $s\\otimes x$ of $E_aM$ restricted to $U$ to the same tensor in $E_{a_Y}(r_RM)(U)$. No closedness, partition, flatness or boundedness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; Tags 03CY and 03DH, sheafification of module presheaves. Ordinary part of lem-pur-clopen-scalar-comparison-descent."
+ },
+ "stmt_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Composition with j between the small pro-etale sites is continuous and cocontinuous. Reuse the proved generic restrictionSheafify construction and its isomorphism proof. The sheafification comparison is characterized by the equality of the local unit followed by that comparison and the restricted global unit. Cocontinuity preserves local bijectivity, and the local unit is locally bijective, so the comparison is an isomorphism.",
+   "uses": [
+    "lem-sfb-slice-scalar-hom-chain-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original changeOfRingsPresheaf commutes with this restriction by an identity sectionwise tensor isomorphism. Its naturality follows from changeOfRingsMap_tmul. Sheafify and compose with restrictionSheafify. Naturality of the sheafification unit proves the tensor formula. The sheafification adjunction and generation by pure tensors prove naturality in module morphisms.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport through the prescribed object equalities and map equations of p and q, then invert. Applying the inverse to the backward pure tensor formula and using hom_inv_id proves the forward tensor formula. This uses only universal properties and so applies also to zero rings and empty Y.",
+   "uses": [
+    "def-pur-clopen-derived-scalar-comparison-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-slice-scalar-hom-chain-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL applied to open-site restriction, implemented through the proved generic sheafification comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension sheaf modules commutes with restriction to open site derived comparison localization",
+   "results": "restrictScalars, restrictHomEquivOfIsLocallySurjective, sheafifyMap and pullback free-module lemmas; no normalized scalar/restriction theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use the generic sheafification and existing library APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "Generic localization lifting and component theorems; these address the derived portion only.",
+   "date": "2026-10-25",
+   "verdict": "No ordinary scalar comparison match."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|scalarRawIso|restrictionSheafify",
+   "results": "Sixteen Mathlib change-of-rings imports and scalar notation hits; no full restriction/sheafification comparison. Local rg additionally found the proved private restrictionSheafify and scalarBackIso helpers in SliceScalarHomChainAdjunction.",
+   "date": "2026-10-25",
+   "verdict": "Reuse restrictionSheafify; adapt the explicit tensor argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of sheaves of modules commutes with restriction to a slice site and sends pure tensors to pure tensors",
+   "results": "Eight generic module-category scalar extension and restriction adjunction results; none compare the two sheafified scalar-extension functors.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing library sheafification comparison and prove the original tensor-presheaf bridge."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenScalarComparisonDescent",
+  "date": "2026-10-25",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, via the finite-clopen derived decomposition: ordinary restriction/scalar square in the coefficient comparison.",
+   "via": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-clopen-derived-scalar-compositor",
+    "lem-pur-clopen-scalar-comparison-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenOrdinaryScalarComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenOrdinaryScalarComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_ordinary_scalar_comparison",
+  "statement": "theorem clopen_ordinary_scalar_comparison\n    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]\n    (p : Presentations.{t, u} X) (q : Presentations.{t, u} Y) :\n    ∃ c : ∀ {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S),\n        ext (p a) ⋙ res j S ≅ res j R ⋙ ext (q ((rings j).map a)),\n      ∀ {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S)\n        (M : Mods.{t, u} R) (U : Y.ProEtᵒᵖ)\n        (s : ((rings j).obj S).obj.obj U) (x : ((res j R).obj M).val.obj U),\n        ((c a).hom.app M).val.app U\n          (sectionTensor (p a) M\n            ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op.obj U) s x) =\n          sectionTensor (q ((rings j).map a)) ((res j R).obj M) U s x",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T203634-L-2835969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T203634-L-2835969",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

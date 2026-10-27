@@ -1,0 +1,137 @@
+{
+ "id": "def-pur-clopen-derived-scalar-comparison-data",
+ "kind": "definition",
+ "title": "Clopen derived scalar comparison interfaces",
+ "statement": "The existing module and derived restriction, scalar presentation, normalized unit and comparison structures, and their explicit sections, representative, uniqueness and coherence laws, formerly in [lem-pur-clopen-derived-scalar-compositor]. No definition body or type is changed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, sites-cohomology-lemma-derived-base-change; Tag 0D6D, sites-cohomology-lemma-derived-pullback-composition; sites-modules.tex Tag 05V4, sites-modules-lemma-flat-change-of-rings. Agent restriction/scalar square and compositor calculation: returned item steps 10-11 and the coefficient part of step 12."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-clopen-unbounded-derived-localization",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "P8: explicit assembly of normalization, independently proved units/models, comparison descent and coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between derived functors extends uniquely from flat K-flat complexes and respects composition and identity",
+   "results": "Generic leftDerivedNatTrans and mapDerivedCategoryFactors hits; no theorem states the clopen scalar comparison or its normalized coherence.",
+   "date": "2026-10-24",
+   "verdict": "Use generic universal-derived and localization APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "One exact hit in Mathlib.CategoryTheory.Functor.Derived.LeftDerived.",
+   "date": "2026-10-24",
+   "verdict": "Used for the scalar identity unit; does not itself provide comparison descent or coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyInjective_whisker|liftNatIso|mapHomologicalComplexIdIso",
+   "results": "Mathlib.CategoryTheory.Sites.PreservesLocallyBijective and Mathlib.CategoryTheory.Localization.Predicate contain generic tools.",
+   "date": "2026-10-24",
+   "verdict": "Ordinary sheafification and derived localization tools exist; their application and coherence remain explicit work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism on flat K-flat models descends to derived module sheaves and is compatible with scalar composition",
+   "results": "Generic localization and derived functor search; precise comparison and explicit coherence remain stated separately.",
+   "date": "2026-10-24",
+   "verdict": "No full match for the new assertions; use existing generic tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarCompositor",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-derived-scalar-compositor",
+   "place": "Existing interfaces extracted for acyclic dependencies"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenDerivedScalarData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.sheafify",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.sheafify",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.locallyBijective",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Mods",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.derived",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Presentations",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.rings",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.res",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.resAdditive",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.resLimits",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.resColimits",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.resD",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.computation",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.ext",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.extD",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Units",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Comparison",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Comparison.sections",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Comparison.degree",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Comparison.representative",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Comparison.computed",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Comparison.extended",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Comparison.unique",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.Coherence"
+  ],
+  "statement": "instance sheafify (Z : Scheme.{t}) : HasSheafify (topology Z) AddCommGrpCat.{max u (t + 1)}",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs live (identical); Data module vs the live item's interface declarations (verbatim except blueprint ids); new sorry statements vs their nodes and the pinning laws of Normalization, Units and Comparison; #print axioms of the 6 modules compiled in a sandbox"
+ }
+}

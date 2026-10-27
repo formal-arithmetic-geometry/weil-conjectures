@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-fibre-component-noetherian-affine-chart",
+ "kind": "statement",
+ "title": "Noetherian affine minimal-prime charts at fibre component generic points",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite type [def-weil-finite-type-morphism], let $t\\in S$, and put $T=X_t$ for the scheme-theoretic fibre [def-pc-scheme-fibre]. Let $C\\subseteq T$ be an irreducible component [def-weil-irreducible-components] and $y$ a generic point of $C$ [def-sc-generic-point]. Then $T$ is locally Noetherian [pqf-def-locnoeth]. Moreover there exists an affine open neighbourhood $U\\subseteq T$ of $y$ such that, with $A=\\mathcal O_T(U)$ and $U\\cong\\operatorname{Spec}A$ [def-weil-affine-spectrum], the ring $A$ is Noetherian [def-weil-pbc-noetherian-ring] and the prime ideal $\\mathfrak p_y\\subset A$ corresponding to $y$ under this identification is minimal: no prime ideal of $A$ is strictly contained in $\\mathfrak p_y$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01T6 (lemma-finite-type-noetherian), applied to the fibre over the residue field; Algebra Tag 00ES (lemma-irreducible), closure and minimal-prime description in an affine chart."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=\\kappa(t)$. Every ideal of the field $k$ is either $(0)$ or $(1)$: a nonzero element of an ideal is invertible and hence forces $1$ into the ideal. Thus every ideal is finitely generated, so $k$ is Noetherian. The single affine chart $\\operatorname{Spec}k$ covers itself and has section ring $k$; hence $\\operatorname{Spec}k$ is locally Noetherian.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV (definition-noetherian), applied to the one-chart cover of the spectrum of a field."
+   }
+  },
+  {
+   "text": "By the definition of the fibre, $T=X\\times_S\\operatorname{Spec}k$. Its projection to $\\operatorname{Spec}k$ is locally of finite type by [lem-weil-pbc-lft-base-change]. Apply [pqf-lem-locnoeth-lft] to this projection and the locally Noetherian base from step 1. It follows that $T$ is locally Noetherian. No Noetherianity hypothesis on $S$ is used.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 (lemma-base-change-finite-type) and 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Choose a member $U$ of the Noetherian affine open cover of $T$ containing $y$. By [pqf-def-locnoeth], $A=\\mathcal O_T(U)$ is Noetherian. Write $U\\cong\\operatorname{Spec}B$ using affineness. Taking global sections gives $A\\cong B$, because the section ring of $\\operatorname{Spec}B$ is $B$; applying the contravariant spectrum functor gives $U\\cong\\operatorname{Spec}A$. Denote by $\\mathfrak p_y$ the prime corresponding to $y$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV (definition-noetherian), the affine cover in the definition; the spectrum convention of def-weil-affine-spectrum."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\subseteq\\mathfrak p_y$ be any prime of $A$, and let $z\\in U$ correspond to it. The affine closure formula [lem-weil-pbc-spec-irreducible-closed-subsets-primes] gives $y\\in\\overline{\\{z\\}}^{\\,U}$, hence $y\\in D:=\\overline{\\{z\\}}^{\\,T}$. Since $D$ is closed, it contains $\\overline{\\{y\\}}^{\\,T}=C$. The set $D$ is irreducible: it is nonempty, and if it is covered by two subsets closed in $D$, those subsets are closed in $T$ since $D$ is closed; whichever contains $z$ contains its closure $D$. Maximality of the irreducible component $C$ therefore gives $D=C$. In particular $z\\in C\\cap U=\\overline{\\{y\\}}^{\\,U}$. Here the subspace closure identity follows directly because, for a subset $E\\subseteq U$, the closed subsets of $U$ containing $E$ are the intersections with $U$ of closed subsets of $T$ containing $E$. Applying the same affine closure formula now gives $\\mathfrak p_y\\subseteq\\mathfrak q$. Thus $\\mathfrak q=\\mathfrak p_y$, proving minimality.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), part (1), combined with the definitions of generic point and irreducible component (Topology Tags 004X and 004V); the singleton-closure argument is written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-lem-locnoeth-lft",
+  "def-pc-scheme",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01T4 and 01T6, followed by the affine closure formula of Algebra Tag 00ES; elementary maximality and subspace-closure argument written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of schemes, each generic point of a fibre irreducible component has a Noetherian affine neighbourhood with corresponding prime a minimal prime, and the fibre is locally Noetherian",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.instIsLocallyNoetherianToScheme, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noetherian pullback theorem gives local Noetherianity only; the generic-point Mathlib hits assume an integral scheme and do not identify component generic points on possibly reducible or nonreduced fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A component generic point in a finite type field fibre corresponds to a minimal prime on a Noetherian affine open chart",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.genericPoint_eq_bot_of_affine, Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, AlgebraicGeometry.IsAffineOpen.primeIdealOf_eq_map_closedPoint, genericPoints.ofComponent, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noetherian pullback theorem gives local Noetherianity only; the generic-point Mathlib hits assume an integral scheme and do not identify component generic points on possibly reducible or nonreduced fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme theoretic fibre of a locally finite type morphism is locally Noetherian and a component generic point has a Noetherian affine chart with a minimal prime",
+   "results": "8 hits: AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.mk, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Scheme.mk.noConfusion",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noetherian pullback theorem gives local Noetherianity only; the generic-point Mathlib hits assume an integral scheme and do not identify component generic points on possibly reducible or nonreduced fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsLocallyNoetherian",
+   "results": "5 hits: AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType, AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType, AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType_1",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noetherian pullback theorem gives local Noetherianity only; the generic-point Mathlib hits assume an integral scheme and do not identify component generic points on possibly reducible or nonreduced fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]iber.*[Nn]oetherian|[Nn]oetherian.*[Ff]iber|primeIdealOf_mem_minimalPrimes",
+   "results": "0 hits:  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noetherian pullback theorem gives local Noetherianity only; the generic-point Mathlib hits assume an integral scheme and do not identify component generic points on possibly reducible or nonreduced fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of schemes every fibre is locally Noetherian and a component generic point has a Noetherian affine neighbourhood corresponding to a minimal prime",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.locallyOfFiniteType_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: available results give individual ingredients; the component argument for an arbitrary reducible or nonreduced fibre still requires the proof above."
+  },
+  {
+   "tool": "grep",
+   "query": "primeIdealOf.*minimal|[Ff]iber.*[Nn]oetherian|[Nn]oetherian.*[Ff]iber|isGenericPoint.*irreducibleComponents",
+   "results": "0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: available results give individual ingredients; the component argument for an arbitrary reducible or nonreduced fibre still requires the proof above."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A component generic point of a fibre of a locally finite type scheme morphism corresponds to a minimal prime on a Noetherian affine chart",
+   "results": "8 hits: genericPoints.ofComponent, genericPoints, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.genericPoint_eq_bot_of_affine, genericPoints.isGenericPoint, genericPoints.component",
+   "date": "2026-10-23",
+   "verdict": "no match: available results give individual ingredients; the component argument for an arbitrary reducible or nonreduced fibre still requires the proof above."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsLocallyNoetherian",
+   "results": "5 hits: AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType, AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType, AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType_1",
+   "date": "2026-10-23",
+   "verdict": "no match: available results give individual ingredients; the component argument for an arbitrary reducible or nonreduced fibre still requires the proof above."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyNoetherian|component_noetherian|minimalPrimes|irreducibleComponents",
+   "results": "5 hits: 21, 29, 32, 57, 58; searched Mathlib/AlgebraicGeometry/Noetherian.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: available results give individual ingredients; the component argument for an arbitrary reducible or nonreduced fibre still requires the proof above."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic points of irreducible components remain minimal primes in affine open neighbourhoods of a locally Noetherian scheme",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.genericPoint_eq_bot_of_affine, genericPoints.isGenericPoint_ofComponent, genericPoints.ofComponent, PrimeSpectrum.zeroLocus_minimalPrimes, genericPoints.component_ofComponent, genericPoints.component",
+   "date": "2026-10-23",
+   "verdict": "no match: available results give individual ingredients; the component argument for an arbitrary reducible or nonreduced fibre still requires the proof above."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fibre-component-relative-associated",
+  "group": "Q27",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, specialization-to-the-normal-cone/nearby-cycle branch, component-closure input through the inherited ancestry: first establish local Noetherianity of a locally-finite-type fibre and identify a component generic point on a Noetherian affine chart with a minimal prime (old steps 1--2 of lem-trf-fibre-component-relative-associated).",
+   "via": [
+    "lem-trf-fibre-component-relative-associated",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fibre-component-noetherian-affine-chart",
+  "worker": "stage1",
+  "summary": "Q73 checked the Stacks sources and all cited node statements. Reused the existing base-change, local-Noetherianity, and affine spectrum closure nodes; no new nodes. Proved minimality directly by maximality of the component and the explicit closure argument, without integral or reduced hypotheses. Statement unchanged.",
+  "blueprint": "Realizes the local-Noetherian affine-chart input in the inherited component-closure branch of lem-trf-local-term-locality proof (1)--(2), specialization to the normal cone, through lem-trf-fibre-component-relative-associated. This is a subordinate algebraic-geometric tool and does not replace the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-974ed7bfc",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-974ed7bfc (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement is unchanged and true. Tested on: empty fibre (vacuous); Spec k[e]/e^2, where p_y=(e) is minimal; k[x,y]/(xy), where (x) and (y) are both minimal; an infinite disjoint union of finite-type affines (only local Noetherianity is claimed); a non-Noetherian base S. Steps: (1) a field is Noetherian and Spec k is covered by one chart, which meets pqf-def-locnoeth. (2) def-pc-scheme-fibre gives T=X x_S Spec k(t); lem-weil-pbc-lft-base-change (Stacks 01T4, arbitrary base change) and pqf-lem-locnoeth-lft (01T6) then give T locally Noetherian, with nothing assumed about S. (3) Pick a member of the Noetherian affine cover containing y; global sections identify U with Spec A. (4) For a prime q inside p_y at the point z, the affine closure formula (00ES(1), node lem-weil-pbc-spec-irreducible-closed-subsets-primes) gives y in the closure of z. That closure is irreducible and contains C, so it equals C by maximality. The written subspace-closure identity then puts z in the closure of y in U, so p_y lies in q. The inclusion directions are correct and no reducedness or integrality is used. Every cited statement was read and says what its step takes from it. I checked the Stacks tags and labels in tags/tags, morphisms.tex:2732 and 2765, and algebra.tex:4665. No SGA is cited. Searching all DAG statements for minimal + generic point + component turned up no duplicate. The cited nodes are Mathlib-matched generic leaves, so no tool_uses are needed, and the blueprint ancestry is unchanged. No faults under A-F."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreComponentNoetherianAffineChart",
+  "declaration": "AlgebraicGeometry.exists_noetherian_affine_chart_of_fibre_component_genericPoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreComponentNoetherianAffineChart.lean",
+  "statement": "theorem exists_noetherian_affine_chart_of_fibre_component_genericPoint {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (t : S) (C : Set (f.fiber t)) (_hC : C ∈ irreducibleComponents (f.fiber t)) (y : f.fiber t) (_hy : IsGenericPoint y C) : IsLocallyNoetherian (f.fiber t) ∧ ∃ (U : (f.fiber t).Opens) (hU : IsAffineOpen U) (hyU : y ∈ U), IsNoetherianRing Γ(f.fiber t, U) ∧ ∀ q : Ideal Γ(f.fiber t, U), q.IsPrime → q ≤ (hU.primeIdealOf ⟨y, hyU⟩).asIdeal → q = (hU.primeIdealOf ⟨y, hyU⟩).asIdeal",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4af6e631",
+  "group": "Q54",
+  "result": "pass",
+  "note": "All clauses match the node in the same order: LocallyOfFiniteType f only; f.fiber t; C ∈ irreducibleComponents; IsGenericPoint y C; IsLocallyNoetherian fibre ∧ ∃ affine U ∋ y with IsNoetherianRing Γ(U) and minimality of hU.primeIdealOf (canonical isoSpec, Mathlib AffineScheme.lean:388/775) in the correct direction. All 8 stmt_deps are existing Mathlib declarations used directly. Edge cases (empty, nonreduced, reducible, non-qc fibre, non-Noetherian base) are fine. No new defs or nodes; slopmaster2 primeIdealOf_mem_minimalPrimes is an ingredient, not an exact match. Node unchanged from live except lean; statement verbatim in the file; proof sorry; docstrings carry the source place, blueprint id and 4 proof steps; report sections present. No recompile (no file changed)."
+ }
+}

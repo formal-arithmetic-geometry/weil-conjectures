@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-localized-permitted-hom",
+ "kind": "statement",
+ "title": "Scalar localization of a permitted contravariant bilinear functor",
+ "statement": "Let A be a commutative ring, D an A-linear preadditive category [def-weil-linear-category], p in A, q an object predicate on D^op×D, and B:q.FullSubcategory → D a functor. Suppose its Hom action is A-bilinear: for integral permitted pairs P,Q there is an A-linear-in-each-variable map beta_PQ from Hom(Q_1,P_1) and Hom(P_2,Q_2) to Hom(BP,BQ), equal on (a,b) to B(a^op,b). Let qprime be a predicate on L_p(D)^op×L_p(D), where L_p(D) is the raw scalar localization [def-weil-linear-scalar-localization], such that every qprime-pair has its underlying integral pair in q. Then there exists a unique functor F:qprime.FullSubcategory → L_p(D) with object map given by the localized value of B on that underlying pair and separately A[1/p]-linear Hom actions whose value at (c tensor a,d tensor b) is (cd) tensor B(a^op,b). No converse implication between q and qprime is assumed, and no constructibility or closure condition on qprime is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CV (tensor products), 00CX (universal property), applied to the rational-operation formulas in def-weil-derived-pullback-tensor-hom: Rational internal-Hom paragraph, contravariant arrow formula multiplying coefficients on the full subcategory of pairs with constructible integral Hom"
+ },
+ "stmt_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "Base change the integral bilinear Hom map and compose with the inverse distribution isomorphism for base change of tensor products. Curry to obtain the localized separately linear action. Its value on pure tensors multiplies the two coefficients. Four tensor inductions prove compatibility with composition from the integral functor laws and commutativity of coefficients; identities follow from the pure-tensor formula. This constructs the functor on the permitted full subcategory. Double tensor induction and functor extensionality prove uniqueness. The object restriction is used only to supply the underlying permitted integral pairs.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "Already proved private scalar-localization calculus, extracted unchanged in argument to Sheaf.CategoryTheory.DerivedScalarLocalizationRestrictedHom for predictable per-file compilation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a bilinear functor contravariant in its first argument on a full subcategory of permitted pairs",
+   "results": "CategoryTheory.Localization.lift₂, CategoryTheory.LocalizerMorphism.localizedFunctor, CategoryTheory.Localization.instLifting₂Lift₂, CategoryTheory.Localization.functor_linear_iff, CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor, CategoryTheory.Localization.whiskeringLeftFunctor, CategoryTheory.Localization.lift₂NatTrans, CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prodLift",
+   "date": "2026-10-26",
+   "verdict": "General lift₂ and base-change distribution provide components, but not the restriction to arbitrary permitted pairs with a contravariant first argument and the normalized unique map. Extract the already proved private construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange, TensorProduct.AlgebraTensorModule.distribBaseChange_tmul, TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul, ModuleCat.extendScalars_δ, ModuleCat.extendScalars_μ, Algebra.TensorProduct.distribBaseChange_includeLeftSubRight_apply, Algebra.TensorProduct.distribBaseChange_comp_includeLeftSubRight",
+   "date": "2026-10-26",
+   "verdict": "General lift₂ and base-change distribution provide components, but not the restriction to arbitrary permitted pairs with a contravariant first argument and the normalized unique map. Extract the already proved private construction."
+  },
+  {
+   "tool": "grep",
+   "query": "homLocalization_existsUnique|homLocalizedAction",
+   "results": "No matches",
+   "date": "2026-10-26",
+   "verdict": "General lift₂ and base-change distribution provide components, but not the restriction to arbitrary permitted pairs with a contravariant first argument and the normalized unique map. Extract the already proved private construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Rational internal-Hom paragraph, contravariant arrow formula multiplying coefficients on the full subcategory of pairs with constructible integral Hom",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedScalarLocalizationRestrictedHom",
+  "file": "lean/Sheaf/CategoryTheory/DerivedScalarLocalizationRestrictedHom.lean",
+  "declaration": "WeilConjectures.OperationsScalarLocalization.restrictedHom_existsUnique",
+  "statement": "theorem restrictedHom_existsUnique :\n    ∃! F : q'.FullSubcategory ⥤ ScalarLocalization A D p,\n      (∀ P, F.obj P = ⟨B.obj (⟨(op P.obj.1.unop.obj, P.obj.2.obj), hq' P.obj P.property⟩)⟩) ∧\n      (∀ P Q : q'.FullSubcategory,\n        ∃ b : (Q.obj.1.unop ⟶ P.obj.1.unop) →ₗ[Localization.Away p]\n          (P.obj.2 ⟶ Q.obj.2) →ₗ[Localization.Away p] (F.obj P ⟶ F.obj Q),\n          (∀ a b', F.map (ObjectProperty.homMk (Prod.mkHom a.op b')) = b a b') ∧\n          ∀ (a : Q.obj.1.unop.obj ⟶ P.obj.1.unop.obj) (b' : P.obj.2.obj ⟶ Q.obj.2.obj)\n            (c d : Localization.Away p),\n            HEq (b (c ⊗ₜ[A] a) (d ⊗ₜ[A] b'))\n              ((c * d) ⊗ₜ[A] B.map (ObjectProperty.homMk\n                (X := ⟨(op P.obj.1.unop.obj, P.obj.2.obj), hq' P.obj P.property⟩)\n                (Y := ⟨(op Q.obj.1.unop.obj, Q.obj.2.obj), hq' Q.obj Q.property⟩)\n                (Prod.mkHom a.op b'))))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-21488",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261027T021335-L-2758778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-21488",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261027T021335-L-2758778",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + FiniteRationalDerivedOperations + 4 DerivedScalarLocalization* modules vs clone original (declaration chunks: public defs verbatim, 6 theorem proofs changed); compiled delivered set + the 2 `import all` importers in a sandbox"
+ }
+}

@@ -1,0 +1,169 @@
+{
+ "id": "lem-sp-slice-normalized-scalar-extension-basis",
+ "kind": "statement",
+ "title": "Scalar extension of a prescribed slice basis respects the extension unit",
+ "statement": "On the small pro-etale site of any scheme X [def-weil-pbc-proetale-site], let R and S be commutative internal coefficient rings, p:R -> S a ring morphism, M an internal R-module, and W an object. Write O for restriction to the slice over W [def-pur-localized-ringed-site]. Given an R|W-linear isomorphism i from the regular R|W-module to O(M), there exists an S|W-linear isomorphism b from the regular S|W-module to O(S tensor_R M), where the scalar extension is the actual internal one [def-pur-sheaf-tensor-product]. It obeys O(p) followed by b = i followed by O of the extension unit M -> S tensor_R M. This includes zero rings and empty slices. No roots of unity, towers, or field-transition diagram is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Restrict reconstructed section modules to W. The componentwise tensorator identity for sheaf restriction shows that any internal slice-linear map gives a map of these section modules, and conversely. The regular internal module reconstructs to the coefficient unit by identity maps on sections. Apply these comparisons to the prescribed basis and its inverse.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+   }
+  },
+  {
+   "text": "Take the inverse mate of the sectionwise restriction-of-scalars comparison under the internal and ordinary extension/restriction adjunctions. Since section reconstruction is an equivalence, the mate is invertible. Compose its unit equation with its inverse to identify the image of the actual internal extension unit with the sheafification image of 1 tensor m.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+   }
+  },
+  {
+   "text": "Reuse the proved localTensorBasisIso construction from the unnormalized slice-basis module: tensor the supplied coordinate map with S, then apply S tensor_R R = S. Its formula on 1 tensor m is p applied to the coordinate of m. Restrict global sheafification using its normalized comparison. The local sheafification adjunction unit and counit identities show that the resulting isomorphism retains the same formula on all images of the restricted global sheafification unit.",
+   "uses": [
+    "lem-sp-slice-scalar-extension-basis",
+    "lem-sp-module-slice-sheafification-independent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+   }
+  },
+  {
+   "text": "Compose the section-extension comparison with this normalized coordinate isomorphism and invert it. Transport back to internal S-modules using the componentwise tensorator identity. To check normalization, apply the injective coordinate isomorphism on every slice section: the inverse-basis equation reduces the right side to p(r), exactly the coordinate of the left side. All maps and equations include zero rings and empty slices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sp-slice-scalar-extension-basis",
+  "lem-sp-module-slice-sheafification-independent-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A specified local basis of an internal module induces a basis of extension of scalars on the same slice, compatible with the extension unit",
+   "results": "Eight hits including Module.Basis.baseChange, Basis.ofIsLocalizedModule, and IsBaseChange.basis. These concern ordinary modules and do not identify actual internal sheaf scalar extension on a slice or its unit.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a specified local basis commutes with the adjunction unit for sheaves of modules on a slice site",
+   "results": "Eight hits: sheaf free modules, sheafification-unit formulas, and unitHomEquiv. None gives a normalized basis for actual internal scalar extension on a slice.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.extendUnitHom",
+   "results": "No Mathlib match; extendUnitHom is project infrastructure.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spSlice.*ExtensionBasis|mapMod.*ExtendScalarsIso; scalarExtension_unit; localTensorBasisIso",
+   "results": "The existing spSliceScalarExtensionBasis gives only an unnormalized Nonempty section-module isomorphism. InternalSectionScalarAdjunction has proved mate/unit/generator compatibility, and SiteModuleSliceSheafification has the canonical normalized restriction comparison. No result combines these into the stated prescribed-basis normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SpRationalRootDiagramBasis",
+  "date": "2026-10-27",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "via": [
+    "lem-sp-rational-root-diagram-basis",
+    "lem-sp-qbar-positive-root-basis",
+    "lem-sp-qbar-root-basis",
+    "lem-route-sp-twists-common-cover",
+    "lem-sfb-integral-tate-line-constructible"
+   ],
+   "place": "clause (3), extension of the prescribed integral basis to rational coefficients"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpSliceNormalizedScalarExtensionBasis",
+  "file": "lean/Sheaf/Paper/SpSliceNormalizedScalarExtensionBasis.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spSliceNormalizedScalarExtensionBasis",
+  "statement": "theorem spSliceNormalizedScalarExtensionBasis (X : Scheme.{u})\n    {R S : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}}\n    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]\n    (p : R ⟶ S) [IsMonHom p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) R)\n    (W : X.ProEt)\n    (i : Mod.regular\n        (((Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} W).obj R) ≅\n      ((((Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} W).mapMod R).obj M)) :\n    let O := (Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} W\n    ∃ b : Mod.regular (O.obj S) ≅ (O.mapMod S).obj ((Mod.extendScalars p).obj M),\n      O.map p ≫ b.hom.hom = i.hom.hom ≫ O.map (Mod.extendUnitHom p M)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T012906-L-2344467",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T021338-L-2759285",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

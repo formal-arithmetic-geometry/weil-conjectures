@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-purity-flat-point-descent",
+ "kind": "statement",
+ "title": "Purity along a fibre descends under pointed flat base change",
+ "statement": "Let $f:X\\to S$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], and $F$ a finite type quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent, def-weil-pbc-module-finite-type-presentation]. Let $e:S^{\\prime}\\to S$, $s^{\\prime}\\in S^{\\prime}$, and $s=e(s^{\\prime})$. Suppose $e$ is flat at $s^{\\prime}$, meaning that the map $\\mathcal O_{S,s}\\to\\mathcal O_{S^{\\prime},s^{\\prime}}$ makes the latter a flat module [def-weil-flat-morphism]. Put $Y=X\\times_SS^{\\prime}$ [def-pc-fibre-product] and $F_Y=\\operatorname{pr}_X^*F$ [def-pc-module-pullback]. If $F_Y$ is pure along $Y_{s^{\\prime}}$, then $F$ is pure along $X_s$ [def-sfb-scheme-relative-purity, def-pc-scheme-fibre]. No residue-field isomorphism and no Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05J9 (lemma-flat-descend-pure), statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sfb-scheme-relative-purity",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Argue by contradiction. If $F$ is not pure along $X_s$, the definition gives an impurity $(v:T\\to S,t'\\leadsto t,\\xi)$ with $(T,t)\\to(S,s)$ elementary etale. Thus $v(t)=s$, $\\kappa(s)\\to\\kappa(t)$ is an isomorphism, $\\xi\\in\\operatorname{Ass}_{X_T/T}(F_T)$ lies over $t'$, and $\\overline{\\{\\xi\\}}\\cap(X_T)_t=\\varnothing$. The finite-type base-change lemma and the two pullback lemmas show that $X_T\\to T$ is finite type and $F_T$ is finite type and quasi-coherent; they give the same properties after further base change to $T_1=T\\times_SS'$.",
+   "uses": [
+    "def-sfb-scheme-relative-purity",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05J9, lemma-flat-descend-pure, proof of (1) by lifting an elementary-etale impurity."
+   }
+  },
+  {
+   "text": "Put $K=\\kappa(s')$. The isomorphism $\\kappa(s)\\to\\kappa(t)$ supplies a compatible field map $\\kappa(t)\\to K$. The field-valued-point lemma gives a morphism $\\operatorname{Spec}K\\to T$ over $S$; pair it with the canonical $\\operatorname{Spec}K\\to S'$ to obtain $a:\\operatorname{Spec}K\\to T_1$ by the fibre-product universal property. Its image $t_1$ maps to $t$ and $s'$. The induced maps $K\\to\\kappa(t_1)\\to K$ compose to the identity, because the projection of $a$ is the canonical point of $S'$. The second map is injective, and its image contains $K$, so both maps are inverse isomorphisms. Also $T_1\\to S'$ is etale by etale base change. Hence $(T_1,t_1)\\to(S',s')$ is an elementary etale neighbourhood. Only $\\kappa(t)=\\kappa(s)$ from the chosen neighbourhood was used; no isomorphism $\\kappa(s)\\to\\kappa(s')$ was assumed.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-pc-fibre-product",
+    "def-weil-residue-field",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-sfb-scheme-relative-purity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05J9, lemma-flat-descend-pure, proof of (1) by lifting an elementary-etale impurity."
+   }
+  },
+  {
+   "text": "Write $h:T_1\\to T$ for the other projection. Apply clause (1) of pointwise module-flatness base change to $e:S'\\to S$, the quasi-coherent module $\\mathcal O_{S'}$, the base change $T\\to S$, and the point $t_1$ above $s'$. The hypothesis is exactly the stipulated flatness of $e$ at $s'$. Since, for $b:T_1\\to S\\prime$, $b^*\\mathcal O_{S\\prime}=\\mathcal O_{T_1}\\otimes_{b^{-1}\\mathcal O_{S\\prime}}b^{-1}\\mathcal O_{S\\prime}\\cong\\mathcal O_{T_1}$ by multiplication, its conclusion says $\\mathcal O_{T_1,t_1}$ is flat over $\\mathcal O_{T,t}$. Thus $h$ is flat at $t_1$.",
+   "uses": [
+    "lem-sfb-pointwise-module-flatness-base-change",
+    "def-pc-module-pullback",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05J9, lemma-flat-descend-pure, proof of (1) by lifting an elementary-etale impurity."
+   }
+  },
+  {
+   "text": "Here is the local reduction needed to lift $t'\\leadsto t$, so global flatness of $h$ is unnecessary. Set $A=\\mathcal O_{T,t}$ and $B=\\mathcal O_{T_1,t_1}$. The map $A\\to B$ is local and flat, hence $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is a flat morphism by the affine flatness equivalence. The canonical-local-spectrum lemma supplies a point $p\\in\\operatorname{Spec}A$ mapping to $t'$, since $t'$ generalizes $t$. Every prime of the local ring $A$ generalizes its closed point. Apply flat generalization lifting at the closed point of $\\operatorname{Spec}B$, whose image is the closed point of $\\operatorname{Spec}A$, to obtain $q$ over $p$. The canonical map $\\operatorname{Spec}B\\to T_1$ sends $q$ to $t_1'$ with $t_1'\\leadsto t_1$. The local-spectrum square commutes (both maps on each affine neighbourhood are induced by the germ maps and $A\\to B$), so $h(t_1')=t'$.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05J9, lemma-flat-descend-pure, proof of (1) by lifting an elementary-etale impurity."
+   }
+  },
+  {
+   "text": "The ring $R=\\kappa(t_1')\\otimes_{\\kappa(t')}\\kappa(\\xi)$ is nontrivial, since its two factors are field extensions of $\\kappa(t')$. The maximal-ideal lemma makes $\\operatorname{Spec}R$ nonempty. Choose a point of this spectrum, an irreducible component containing it by the component-cover lemma, and the generic point of that component by scheme sobriety. The fibre-product-points lemma, applied to $X_T\\to T$ and $T_1\\to T$, identifies this point with a point $\\xi_1\\in X_{T_1}$ over both $\\xi$ and $t_1'$. In particular it is generic in an irreducible component of the residual fibre $\\operatorname{Spec}R$.",
+   "uses": [
+    "lem-weil-common-extension-fields-tensor-nontrivial",
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05J9, lemma-flat-descend-pure, proof of (1) by lifting an elementary-etale impurity."
+   }
+  },
+  {
+   "text": "Apply relative-assassin base change to $X_T\\to T$, its quasi-coherent module $F_T$, and $T_1\\to T$. Its locally-finite-type hypothesis follows from step 1, and $\\xi$ is relative associated by the chosen impurity. The residual generic-point condition is precisely step 5. The stated equivalence therefore gives $\\xi_1\\in\\operatorname{Ass}_{X_{T_1}/T_1}(F_{T_1})$. Pullback composition identifies this module with the pullback of $F_Y$ to $Y\\times_{S'}T_1=X_{T_1}$; the identification of the schemes is the unique one commuting with their projections, by the fibre-product universal property.",
+   "uses": [
+    "lem-trf-relative-assassin-base-change",
+    "def-pc-module-pullback",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05J9, lemma-flat-descend-pure, proof of (1) by lifting an elementary-etale impurity."
+   }
+  },
+  {
+   "text": "Let $b:X_{T_1}\\to X_T$ be the projection. Continuity gives $b(\\overline{\\{\\xi_1\\}})\\subseteq\\overline{\\{\\xi\\}}$. If a point $z$ of this closure lay in $(X_{T_1})_{t_1}$, then $b(z)$ would lie in $(X_T)_t$, contradicting step 1. Thus the closure is disjoint from that fibre. Together with step 6, $t_1'\\leadsto t_1$, and the elementary etale neighbourhood of step 2, these are exactly the data of an impurity of $F_Y$ above $s'$. This contradicts the assumed purity along $Y_{s'}$. Therefore $F$ is pure along $X_s$.",
+   "uses": [
+    "def-sfb-scheme-relative-purity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05J9, lemma-flat-descend-pure, proof of (1) by lifting an elementary-etale impurity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-scheme-relative-purity",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-sfb-pointwise-module-flatness-base-change",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-weil-common-extension-fields-tensor-nontrivial",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-trf-relative-assassin-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05J9, lemma-flat-descend-pure, proof of (1) by lifting an elementary-etale impurity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pure.*descen|purity.*flat|flat.*purity",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: flat base change and faithful flatness/going down are ingredients, not descent of fibrewise purity of a sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative purity along a fiber descends under a base change flat at a point over the specified base point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence.IsStableUnderBaseChange\", \"doc\": \"If a morphism of schemes satisfies the valuative criterion for existence, then any base change (pullback) of this morphism also satisfies the valuative criterion for existence. This means the property\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Unramified\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.FormallyUnramified\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally unramified, then the corresponding ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.IsStableUnderBaseChange @RingHom.IsStandardSmooth\", \"doc\": \"The property of a ring homomorphism being standard smooth is stable under base change. That is, if $ f : R \\\\to S $ is standard smooth, then for any commutative rings $ R', S' $ with compatible algebra\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat base change and faithful flatness/going down are ingredients, not descent of fibrewise purity of a sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a sheaf is pure along the fiber after a faithfully flat local extension it was pure along the original fiber",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  (Mₚ : (P : Ideal S) → [P.IsMaximal] → Type u_4) [inst_7 : (P : Ideal S) → [inst : P\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [IsLocalRing A]\\n  [IsLocalRing B] [Module.Flat A B] [IsLocalHom (algebraMap A B)], Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be local rings. If $ A $ is flat as a $ B $-module and the algebra map $ B \\to A $ is a local homomorphism, then $ A $ is faithfully flat over $ B $.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_comap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"If the induced map on prime spectra given by taking preimages under the canonical algebra homomorphism $ A \\\\to B $ is surjective, then $ B $ is a faithfully flat $ A $-module.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_specComap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be commutative rings, and suppose $ B $ is an $ A $-algebra that is flat as an $ A $-module. If the induced map on prime spectra, given by taking preimages under the algebra homomo\"}\n  {\"name\": \"Module.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"(R : Type u) → (M : Type v) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"The property that $ M $ is a faithfully flat module over the commutative ring $ R $, meaning it is flat and the functor $ -\\\\otimes_R M $ is faithful.\"}\n  {\"name\": \"Module.FaithfullyFlat.trans\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (S : Type u_2) [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Module.FaithfullyFlat R S] [Module.FaithfullyFlat S M], Module.FaithfullyFlat R M\", \"doc\": \"If $ M $ is a faithfully flat $ R $-module and $ N $ is a faithfully flat $ M $-module, then $ N $ is a faithfully flat $ R $-module. This expresses the transitivity property of faithful flatness in m\"}\n  {\"name\": \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [Module.FaithfullyFlat A B] (p : Ideal A) [p.IsPrime], ∃ P, P.IsPrime ∧ P.LiesOver p\", \"doc\": \"In a faithfully flat algebra extension $ B $ over $ A $, every prime ideal $ \\\\mathfrak{p} $ of $ A $ has a prime ideal $ \\\\mathfrak{P} $ of $ B $ lying over it, i.e., $ \\\\mathfrak{P} \\\\cap A = \\\\mathfrak{\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat base change and faithful flatness/going down are ingredients, not descent of fibrewise purity of a sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Purity of a finite type quasicoherent sheaf descends under flat base change of pointed schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsStableUnderBaseChange @IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat base change and faithful flatness/going down are ingredients, not descent of fibrewise purity of a sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pure\", \"Flat\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.outerDone_flatMap_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} [Std.Iterator α Id β] [Std.Iterator α₂ Id γ] {f : β → Std.Iter γ} {it₁ : Std.Iter β} (h : it₁.IsPlausibleStep Std.IterStep.done) : (Std.Iter.flatMapAfter f it₁ none).IsPlausibleStep Std.IterStep.done\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.innerDone_flatMap_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} [Std.Iterator α Id β] [Std.Iterator α₂ Id γ] {f : β → Std.Iter γ} {it₁ : Std.Iter β} {it₂ : Std.Iter γ} (h : it₂.IsPlausibleStep Std.IterStep.done) : (Std.Iter.flatMapAfter f it₁ (some it₂)).IsPlausibleStep (Std.IterStep.skip (Std.Iter.flatMapAfter f it₁ none))\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.outerSkip_flatMap_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} [Std.Iterator α Id β] [Std.Iterator α₂ Id γ] {f : β → Std.Iter γ} {it₁ it₁' : Std.Iter β} (h : it₁.IsPlausibleStep (Std.IterStep.skip it₁')) : (Std.Iter.flatMapAfter f it₁ none).IsPlausibleStep (Std.IterStep.skip (Std.Iter.flatMapAfter f it₁' none))\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.outerYield_flatMap_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} [Std.Iterator α Id β] [Std.Iterator α₂ Id γ] {f : β → Std.Iter γ} {it₁ it₁' : Std.Iter β} {b : β} (h : it₁.IsPlausibleStep (Std.IterStep.yield it₁' b)) : (Std.Iter.flatMapAfter f it₁ none).IsPlausibleStep (Std.IterStep.skip (Std.Iter.flatMapAfter f it₁' (some (f b))))\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.innerSkip_flatMap_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} [Std.Iterator α Id β] [Std.Iterator α₂ Id γ] {f : β → Std.Iter γ} {it₁ : Std.Iter β} {it₂ it₂' : Std.Iter γ} (h : it₂.IsPlausibleStep (Std.IterStep.skip it₂')) : (Std.Iter.flatMapAfter f it₁ (some it₂)).IsPlausibleStep (Std.IterStep.skip (Std.Iter.flatMapAfter f it₁ (some it₂'))\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.innerYield_flatMap_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} [Std.Iterator α Id β] [Std.Iterator α₂ Id γ] {f : β → Std.Iter γ} {it₁ : Std.Iter β} {it₂ it₂' : Std.Iter γ} {b : γ} (h : it₂.IsPlausibleStep (Std.IterStep.yield it₂' b)) : (Std.Iter.flatMapAfter f it₁ (some it₂)).IsPlausibleStep (Std.IterStep.yield (Std.Iter.flatMapAfter f it₁ \", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.outerDone_flatMapM_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} {m : Type w → Type w'} [Monad m] [MonadAttach m] [LawfulMonad m] [Std.Iterator α Id β] [Std.Iterator α₂ m γ] {f : β → m (Std.IterM m γ)} {it₁ : Std.Iter β} (h : it₁.IsPlausibleStep Std.IterStep.done) : (Std.Iter.flatMapAfterM f it₁ none).IsPlausibleStep Std.IterStep.done\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.outerSkip_flatMapM_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} {m : Type w → Type w'} [Monad m] [MonadAttach m] [LawfulMonad m] [Std.Iterator α Id β] [Std.Iterator α₂ m γ] {f : β → m (Std.IterM m γ)} {it₁ it₁' : Std.Iter β} (h : it₁.IsPlausibleStep (Std.IterStep.skip it₁')) : (Std.Iter.flatMapAfterM f it₁ none).IsPlausibleStep (Std.IterStep\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.innerDone_flatMapM_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} {m : Type w → Type w'} [Monad m] [MonadAttach m] [LawfulMonad m] [Std.Iterator α Id β] [Std.Iterator α₂ m γ] {f : β → m (Std.IterM m γ)} {it₁ : Std.Iter β} {it₂ : Std.IterM m γ} (h : it₂.IsPlausibleStep Std.IterStep.done) : (Std.Iter.flatMapAfterM f it₁ (some it₂)).IsPlausibleSt\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.innerSkip_flatMapM_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} {m : Type w → Type w'} [Monad m] [MonadAttach m] [LawfulMonad m] [Std.Iterator α Id β] [Std.Iterator α₂ m γ] {f : β → m (Std.IterM m γ)} {it₁ : Std.Iter β} {it₂ it₂' : Std.IterM m γ} (h : it₂.IsPlausibleStep (Std.IterStep.skip it₂')) : (Std.Iter.flatMapAfterM f it₁ (some it₂)).I\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.innerYield_flatMapM_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} {m : Type w → Type w'} [Monad m] [MonadAttach m] [LawfulMonad m] [Std.Iterator α Id β] [Std.Iterator α₂ m γ] {f : β → m (Std.IterM m γ)} {it₁ : Std.Iter β} {it₂ it₂' : Std.IterM m γ} {b : γ} (h : it₂.IsPlausibleStep (Std.IterStep.yield it₂' b)) : (Std.Iter.flatMapAfterM f it₁ (s\", \"doc\": \"\"}\n  {\"name\": \"Std.Iterators.Types.Flatten.IsPlausibleStep.outerYield_flatMapM_pure\", \"module\": \"Init.Data.Iterators.Lemmas.Combinators.FlatMap\", \"type\": \" {α β α₂ γ : Type w} {m : Type w → Type w'} [Monad m] [MonadAttach m] [LawfulMonad m] [WeaklyLawfulMonadAttach m] [Std.Iterator α Id β] [Std.Iterator α₂ m γ] {f : β → m (Std.IterM m γ)} {it₁ it₁' : Std.Iter β} {it₂' : Std.IterM m γ} {b : β} (h : it₁.IsPlausibleStep (Std.IterStep.yield it₁' b)) (h' :\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat base change and faithful flatness/going down are ingredients, not descent of fibrewise purity of a sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Purity along a fibre descends under a pointed flat base change of schemes",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange; AlgebraicGeometry.Flat.generalizingMap; AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Flat.instSndScheme; AlgebraicGeometry.Flat.instFstScheme; AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem about the impurity definition of relative sheaf purity; returned flatness/going-down results are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme purity flat base change descent",
+   "results": "loogle: Unknown identifier `Scheme`",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem about the impurity definition of relative sheaf purity; returned flatness/going-down results are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type quasicoherent sheaf pure along a fibre after flat base change is pure along the original fibre",
+   "results": "IsSMulRegular.of_flat_of_isBaseChange; Module.Flat.isBaseChange; Algebra.QuasiFinite.baseChange; RingHom.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.isStableUnderBaseChange; Algebra.QuasiFiniteAt.baseChange; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem about the impurity definition of relative sheaf purity; returned flatness/going-down results are ingredients only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf purity impurity associated point descends along a flat local base change",
+   "results": "AlgebraicGeometry.Flat.generalizingMap; AlgebraicGeometry.Flat.stalkMap; Algebra.HasGoingDown.of_flat; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.spread_out_of_isGermInjective'; AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem about the impurity definition of relative sheaf purity; returned flatness/going-down results are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat Module.Flat associated prime",
+   "results": "loogle: Application type mismatch: The argument\n  Module.Flat\nhas type\n  (R : Type ?u.4) → (M : Type ?u.3) → [inst : CommSemiring R] → [inst_1 : AddCommMonoid M] → [Module R M] → Prop\nbut is expected to have ",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem about the impurity definition of relative sheaf purity; returned flatness/going-down results are ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "associated.*flat|Flat.*associated|goingDown",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/RingHom/Flat.lean; Mathlib/RingTheory/RingHom/Flat.lean; Mathlib/RingTheory/Ideal/HasGoingUp.lean [subdirectory RingTheory]",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem about the impurity definition of relative sheaf purity; returned flatness/going-down results are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat morphism lifts specializations and preserves associated points after base change",
+   "results": "AlgebraicGeometry.Flat; Module.Flat.isBaseChange; AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.mk; AlgebraicGeometry.Flat.generalizingMap; RingHom.Flat.isStableUnderBaseChange; RingHom.Flat.generalizingMap_comap; AlgebraicGeometry.Flat.stalkMap",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem about the impurity definition of relative sheaf purity; returned flatness/going-down results are ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-fp-purity-open",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). Proof of Tag 05UD, final application of Tag 05UA: flatness at a point is detected at the associated generalizations in its fibre. Subinput of Tag 05UA: Tag 0AT4 (lemma-upstairs-finite-type-injective-into-flat-mod-m). Subinput: Tag 05U7 (lemma-flat-finite-type-local-colimit-free), first assertion, omitting the additional Mittag-Leffler conclusion. Supporting geometric input: Tag 05MF (lemma-flat-finite-type-affine-neighbourhood-projective), over a henselian local base, used in the free-neighbourhood paragraph of Tag 05U7. Supporting input for Tag 05MF: Tag 05ME (lemma-flat-finite-presentation-affine-neighbourhood-projective), applied after the affine-space and finite-presentation reductions. Tag 05ME proof, second paragraph: purity along U_s spreads after shrinking S by lemma-flat-finite-presentation-purity-open. Supporting input in Tag 05MC: 05J9 (lemma-flat-descend-pure). This item makes precise the flat descent of fibrewise purity in Stacks Tag 05J9 (lemma-flat-descend-pure), assertion (1); its proof lifts an elementary-etale impurity through the pointed flat base change.",
+   "via": [
+    "lem-sfb-flat-fp-purity-open",
+    "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+    "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+    "lem-sfb-henselian-flat-finite-module-residue-free-colimit",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-purity-flat-point-descent",
+  "worker": "stage1",
+  "summary": "Checked Tag 05J9 assertion (1) and wrote its contrapositive in seven steps. Reused existing module-flatness, generalization-lifting, residue-tensor and relative-assassin nodes. Expanded the pointwise-to-local-spectrum reduction, the elementary-etale residue-field check, and the existence of a residual generic point. No new nodes and no statement change.",
+  "blueprint": "No blueprint node states this item (whole-blueprint search and latest text inspected); preserve the inherited unit route and realize its existing proper-support/purity prerequisite via Tag 05J9(1).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Quasi-coherent pullback supplies the hypothesis of Tag 05DC after base change; no unit-specific theorem is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Preservation of finite type under module pullback keeps the impurity/purity data in their stated domain; a generic pullback tool, not a replacement of the unit route."
+   },
+   {
+    "node": "def-pc-module-pullback",
+    "why": "Generic tool for the scheme/module base-change construction in Tag 05J9, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Its canonical local spectrum and image-of-generalizations clauses let the globally flat lifting tool apply to the flat stalk map; no node of the unit states these local-spectrum properties."
+   },
+   {
+    "node": "lem-trf-relative-assassin-base-change",
+    "why": "Tag 05DC transports relative associated points along arbitrary base change, exactly as in the proof of Tag 05J9; no node of this unit states this equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-trf-relative-assassin-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-d555da033",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-d555da033 (reviewer sub-agent of L); spot-checked: PASS: the seven steps are a correct, more detailed version of Stacks 05J9(1) (flat.tex, lemma-flat-descend-pure), which I read in full. The statement, stmt_deps and blueprint fields match live; the only change is one added sentence at the end of from.place. No new nodes; live item is still unsplit; no repair note; no SGA. Steps: (1) impurity data and residue-field iso from def-sfb-scheme-relative-purity; finite type and quasi-coherence after base change from 01T4, 01BG and 01B6. (2) Spec kappa(s')->T over S and the fibre-product universal property give t1; K->kappa(t1)->K composes to the identity, so the residue fields are isomorphic; etale base change 02GO; only kappa(t)=kappa(s) is used. (3) Clause (1) of lem-sfb-pointwise-module-flatness-base-change with F=O_S', x=s', x'=t1: the hypothesis is exactly flatness of e at s', and the conclusion is pointwise flatness of h at t1. (4) A->B flat and local; 01U5 makes Spec B->Spec A flat; the canonical local spectrum has image the generalizations of t; 03HV lifts at the closed point; the square commutes via germ maps, which is elementary. (5) The tensor product of field extensions is nontrivial, so it has a maximal ideal, a component (004W) and a generic point (01IS); 01JT gives xi1 over xi and t1'. (6) 05DC node: hypotheses (locally finite type, quasi-coherent) and the residual generic-point condition match; fibre-product associativity and pullback composition identify the scheme and module with the pullback of F_Y. (7) Continuity gives closure disjointness, hence an impurity above s', a contradiction. Edge cases checked: F=0, identity base change, Spec C->Spec R, t'=t. Duplicate search: 05J9 is stated only by the item; 05DC is only in the trf subtree. Batch-5 flag on lem-trf-relative-assassin-base-change: this is Stacks 05DC, general commutative algebra. Its 186-node closure contains only the 05DB/05C2/045M/00R5/00ND algebra nodes and def-trf-relative-assassin (which the item's statement already uses); there is no nt-assume leaf, trace-transport node or batch-4 target. It is not part of the trace formula or Poincare duality, so the flag is generic. All five split_report tool_uses accepted as generic tools. Cosmetic only: S\\prime in step 3, left unchanged."
+ }
+}

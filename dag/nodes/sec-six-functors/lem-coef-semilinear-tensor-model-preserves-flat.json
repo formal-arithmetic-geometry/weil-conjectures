@@ -1,0 +1,120 @@
+{
+ "id": "lem-coef-semilinear-tensor-model-preserves-flat",
+ "kind": "statement",
+ "title": "Normalized tensor comparison models preserve flat modules",
+ "statement": "variable {C₀ C₁ : Type c} [Category.{v} C₀] [Category.{v} C₁]\n  [EssentiallySmall.{max c v r} C₀] [EssentiallySmall.{max c v r} C₁]\n  (J₀ : GrothendieckTopology C₀) (J₁ : GrothendieckTopology C₁)\n  (R₀ : Sheaf J₀ CommRingCat.{max c v r}) (R₁ : Sheaf J₁ CommRingCat.{max c v r})\n\n\ntheorem tensorComparisonModel_preserves_flat\n    (F : Mod.{c, v, max c v r} J₀ R₀ ⥤ Mod.{c, v, max c v r} J₁ R₁)\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (S₀ : Closed.{c, v, r} J₀ R₀) (S₁ : Closed.{c, v, r} J₁ R₁)\n    (T₀ : Models.{c, v, r} J₀ R₀ S₀) (T₁ : Models.{c, v, r} J₁ R₁ S₁)\n    (μ : S₀.tensor ⋙ F.mapDerivedCategory ≅\n      (F.mapDerivedCategory.prod F.mapDerivedCategory) ⋙ S₁.tensor)\n    (t : TensorComparisonModel.{c, v, r} J₀ J₁ R₀ R₁ F S₀ S₁ T₀ T₁ μ)\n    (M : Mod.{c, v, max c v r} J₀ R₀)\n    (hM : SheafOfModules.IsFlatOnSite (J := J₀) (R := R₀) M) :\n    SheafOfModules.IsFlatOnSite (J := J₁) (R := R₁) (F.obj M) ",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 07A4: bounded-above flat complexes and derived tensor products; test model K-flat preservation on a single flat module."
+ },
+ "proof_origin": {
+  "by": "G4",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 07A4: bounded-above flat complexes and derived tensor products; test model K-flat preservation on a single flat module."
+ },
+ "proof": [
+  {
+   "text": "For a flat sheaf module M, take the cochain complex P with M in degree zero and zero elsewhere. Identify its degree-zero term with M and its other terms with zero, so all terms are flat. The bounded-above flat K-flat criterion makes P K-flat, and TensorComparisonModel.kflat makes F(P) K-flat. Transfer this to native categorical K-flatness by RingedDerivedNative.kFlat and HomotopyCategory.kFlat_quotient_obj_iff. The singleMapHomologicalComplex isomorphism identifies F(P) with the complex concentrated in degree zero at F(M). CochainComplex.kFlat_single_obj_iff_flat makes F(M) categorically flat; siteSheafTensorRightIso transfers exactness of its tensor functor to site tensor flatness. This proves the property of the already constructed F(M), without choosing any object from an existence assertion.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 07A4: bounded-above flat complexes and derived tensor products; test model K-flat preservation on a single flat module."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricTensorEvaluation",
+  "date": "2026-10-26",
+  "group": "G4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Normalized tensor localization for fixed ordinary geometric operations. Substep: Ordinary evaluation compatibility descends for normalized tensor models. Flat-term preservation required for composing normalized tensor models.",
+   "via": [
+    "lem-coef-semilinear-geometric-tensor-evaluation",
+    "lem-coef-semilinear-geometric-tensor-localization",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact functor that preserves K-flat flat-term cochain complexes preserves flat modules, using complexes concentrated in degree zero",
+   "results": "Eight results about exact tensor characterizations of flat ModuleCat modules, including Module.Flat.iff_lTensor_preserves_shortComplex_exact.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for an arbitrary sheaf module functor carrying a TensorComparisonModel. Use single complexes and the native K-flat criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.kFlat_single_obj_iff_flat\"",
+   "results": "No indexed hits. The theorem is available in the local Mathlib API through the native K-flat imports.",
+   "date": "2026-10-26",
+   "verdict": "Use the locally available converse criterion directly."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlatOnSite.*map|map.*IsFlatOnSite|kFlat_single_obj_iff_flat",
+   "results": "No indexed Mathlib hits. Local imports expose the native single-complex K-flat criterion and the site/categorical tensor isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "The short single-complex argument combines these existing proved declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorComparisonModelPreservesFlat",
+  "file": "lean/Sheaf/Paper/TensorComparisonModelPreservesFlat.lean",
+  "declaration": "WeilConjectures.SemilinearSections.tensorComparisonModel_preserves_flat",
+  "statement": "theorem tensorComparisonModel_preserves_flat\n    (F : Mod.{c, v, max c v r} J₀ R₀ ⥤ Mod.{c, v, max c v r} J₁ R₁)\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (S₀ : Closed.{c, v, r} J₀ R₀) (S₁ : Closed.{c, v, r} J₁ R₁)\n    (T₀ : Models.{c, v, r} J₀ R₀ S₀) (T₁ : Models.{c, v, r} J₁ R₁ S₁)\n    (μ : S₀.tensor ⋙ F.mapDerivedCategory ≅\n      (F.mapDerivedCategory.prod F.mapDerivedCategory) ⋙ S₁.tensor)\n    (t : TensorComparisonModel.{c, v, r} J₀ J₁ R₀ R₁ F S₀ S₁ T₀ T₁ μ)\n    (M : Mod.{c, v, max c v r} J₀ R₀)\n    (hM : SheafOfModules.IsFlatOnSite (J := J₀) (R := R₀) M) :\n    SheafOfModules.IsFlatOnSite (J := J₁) (R := R₁) (F.obj M) ",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T111846-L-1755297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T111846-L-1755297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

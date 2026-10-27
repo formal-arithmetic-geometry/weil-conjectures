@@ -57,7 +57,9 @@ theorem kummerSquareModuleIso_existsUnique {V W Z N : Scheme.{u}}
     ∃! b : (upperStar A.X θ).obj ((upperStar A.X q).obj L) ≅
       ((upperStarFromPoint Z).mapMod A.X).obj M,
       b.hom = (kummerSquareModuleComposite A θ q π v h L M e).hom := by
-  sorry
+  refine ⟨kummerSquareModuleComposite A θ q π v h L M e, rfl, ?_⟩
+  intro b hb
+  exact Iso.ext hb
 
 /-- The uniquely normalized square comparison, preserving its canonical component.
 Source: direct-image proof (3), exact pullback composition
@@ -110,7 +112,9 @@ theorem kummerSquareDerivedModuleIso_existsUnique {V W Z N Z' : Scheme.{u}}
     (upperStar A.X f).mapDerivedCategory.obj
       ((derivedFromCondensed A.X Z').obj ((DerivedCategory.singleFunctor _ 0).obj M)),
       b.hom = (kummerSquareDerivedModuleComposite A θ q π v h L M e f).hom := by
-  sorry
+  refine ⟨kummerSquareDerivedModuleComposite A θ q π v h L M e f, rfl, ?_⟩
+  intro b hb
+  exact Iso.ext hb
 
 /-- The uniquely component-normalized derived constant-extension comparison.
 Source: direct-image proof (3), exact constant extension
@@ -136,6 +140,12 @@ theorem kummerPuncturedParameter_over {V T W U : Scheme.{u}}
     (h : j ≫ q = v ≫ a) (P : Profinite.{u}) :
     coefficientParameterMap j P ≫ coefficientParameterProjection T P ≫ q =
       coefficientParameterProjection V P ≫ v ≫ a := by
-  sorry
+  calc
+    _ = (coefficientParameterMap j P ≫ coefficientParameterProjection T P) ≫ q :=
+      (Category.assoc _ _ _).symm
+    _ = (coefficientParameterProjection V P ≫ j) ≫ q :=
+      congrArg (fun t ↦ t ≫ q) (coefficientParameterProjectionCommutes j P)
+    _ = coefficientParameterProjection V P ≫ (j ≫ q) := Category.assoc _ _ _
+    _ = _ := congrArg (fun t ↦ coefficientParameterProjection V P ≫ t) h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

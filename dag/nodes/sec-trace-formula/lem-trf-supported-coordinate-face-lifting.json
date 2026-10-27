@@ -1,0 +1,224 @@
+{
+ "id": "lem-trf-supported-coordinate-face-lifting",
+ "kind": "statement",
+ "title": "Uniform supported lifting from coordinate faces",
+ "statement": "Let $n\\ge1$ and let $D\\subseteq\\mathbf N^n$ satisfy $D+\\mathbf N^n=D$ and $\\alpha-\\alpha_p e_p+\\alpha_p e_v\\in D$ for $\\alpha\\in D$ and $p<v$, with $e_j$ the $j$th coordinate vector. List its coordinatewise minimal elements $\\alpha_1,\\ldots,\\alpha_s$ in increasing lexicographic order of $(|\\alpha|,\\alpha_1,\\ldots,\\alpha_n)$. Put $d_i=|\\alpha_i|$, $\\Delta_i=\\{\\beta:\\alpha_i+\\beta\\notin\\bigcup_{h<i}(\\alpha_h+\\mathbf N^n)\\}$, $\\Delta_0=\\mathbf N^n\\setminus D$, $d=\\max(\\{0\\}\\cup\\{d_i\\})$, $M=\\max(1,d)$ and $b=d+n(M-1)+1$. Let $A$ be a commutative ring and $H_i\\in A[Y_1,\\ldots,Y_n]$ be homogeneous of degrees $d_i$ [def-weil-pbc-mv-polynomial-ring]. Write $V_k$ for the homogeneous degree-$k$ submodule and\n$$\\mathcal P_k=\\{Y^\\beta H_i:\\beta\\in\\Delta_i,\\ |\\beta|+d_i=k\\}\\amalg\\{Y^\\gamma:\\gamma\\in\\Delta_0,\\ |\\gamma|=k\\}$$\nas an indexed family [def-trf-supported-homogeneous-division]. For $0\\le r<n$ let $F_r=\\{\\beta:\\beta_1=\\cdots=\\beta_r=0\\}$ and let $\\rho_r$ set $Y_1,\\ldots,Y_r$ to zero. If $k\\ge b$, then $\\beta\\in\\Delta_i\\cap F_r$, $|\\beta|+d_i=k$ implies $\\beta+e_{r+1}\\in\\Delta_i$; likewise $\\gamma\\in\\Delta_0\\cap F_r$, $|\\gamma|=k$ implies $\\gamma+e_{r+1}\\in\\Delta_0$. If additionally $\\mathcal P_k$ spans $V_k$, then $\\rho_r(\\mathcal P_k)$ spans the degree-$k$ polynomials in the remaining variables; generators whose multiplier has a positive coordinate among the first $r$ have zero image. Every homogeneous degree-$(k+1)$ polynomial $P\\in A[Y_{r+1},\\ldots,Y_n]$ divisible by $Y_{r+1}$ admits $Q\\in\\operatorname{Span}_A\\mathcal P_{k+1}$ with $\\rho_r(Q)=P$. The bound $b$ is independent of $A$ and of the $H_i$, and the assertions include empty and full diagrams.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13 for the inherited route; Bierstone--Milman, Invent. Math. 128 (1997), Definition 8.3, Remarks 8.4 and Lemma 8.5, printed pp.274--275: exceptional-degree bound, restricted spanning and coordinate-face lifts; explicit larger bound from lem-trf-monotone-diagram-face-exceptions. Journal PDF read online at https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf. No Stacks tag states this specialized result; BM paper absent from repository literature."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-monotone-diagram-face-exceptions] to this same $D$, vertex order and face $F_r$; its $M$ equals $\\max(1,d)$. If $\\beta\\in\\Delta_i\\cap F_r$ but $\\beta+e_{r+1}\\notin\\Delta_i$, its box bound gives $|\\beta|\\le(n-r)(M-1)\\le n(M-1)$. Thus $|\\beta|+d_i\\le n(M-1)+d=b-1$, contradicting $|\\beta|+d_i=k\\ge b$. For a remainder exponent $\\gamma\\in\\Delta_0\\cap F_r$, the same exceptional-box conclusion gives $|\\gamma|\\le n(M-1)\\le b-1$, again contradicting $|\\gamma|=k\\ge b$. This proves both support-stability assertions.",
+   "uses": [
+    "lem-trf-monotone-diagram-face-exceptions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficientwise assembly following Bierstone--Milman 1997, Definition 8.3, Remarks 8.4 and Lemma 8.5, printed pp.274--275 (journal PDF read online at the URL in source.place; absent from repository literature). The explicit bound is supplied by lem-trf-monotone-diagram-face-exceptions; ILO VIII 2.3.11--2.3.13 records only the inherited resolution route."
+   }
+  },
+  {
+   "text": "By coefficientwise polynomial evaluation [def-weil-pbc-mv-polynomial-ring], $\\rho_r(Y^\\eta)$ is zero if some $\\eta_j>0$ with $j\\le r$, and otherwise is the same monomial in the remaining variables. Consequently $\\rho_r(Y^\\beta H_i)=\\rho_r(Y^\\beta)\\rho_r(H_i)$, so every generator with a multiplier outside $F_r$ vanishes. Evaluation preserves each homogeneous degree: it deletes monomials and leaves the exponents and coefficients of the surviving ones unchanged. Inclusion of the remaining-variable polynomial ring is a section of $\\rho_r$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficientwise assembly following Bierstone--Milman 1997, Definition 8.3, Remarks 8.4 and Lemma 8.5, printed pp.274--275 (journal PDF read online at the URL in source.place; absent from repository literature). The explicit bound is supplied by lem-trf-monotone-diagram-face-exceptions; ILO VIII 2.3.11--2.3.13 records only the inherited resolution route."
+   }
+  },
+  {
+   "text": "Assume now that $\\mathcal P_k$ spans $V_k$ in the sense of [def-trf-supported-homogeneous-division]. Given a degree-$k$ polynomial $T$ in the remaining variables, include it in $V_k$ and express it as a finite $A$-linear combination of the indexed generators. Applying $\\rho_r$ to that equality preserves its coefficients and sums, by [def-weil-pbc-mv-polynomial-ring], and fixes $T$. Step 2 deletes all terms with multipliers outside $F_r$. The surviving images therefore span all degree-$k$ polynomials in the remaining variables.",
+   "uses": [
+    "def-trf-supported-homogeneous-division",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficientwise assembly following Bierstone--Milman 1997, Definition 8.3, Remarks 8.4 and Lemma 8.5, printed pp.274--275 (journal PDF read online at the URL in source.place; absent from repository literature). The explicit bound is supplied by lem-trf-monotone-diagram-face-exceptions; ILO VIII 2.3.11--2.3.13 records only the inherited resolution route."
+   }
+  },
+  {
+   "text": "Let $P$ have degree $k+1$ in the remaining variables and be divisible by $Y_{r+1}$. In the monomial description [def-weil-pbc-mv-polynomial-ring], divisibility forces every nonzero monomial of $P$ to have positive $(r+1)$st exponent: multiplication by that variable shifts every exponent by $e_{r+1}$. Subtract $e_{r+1}$ from each exponent of $P$ to obtain a finite homogeneous degree-$k$ polynomial $T$ with $Y_{r+1}T=P$. Use Step 3 to write $T=\\sum_{\\lambda}c_\\lambda\\rho_r(G_\\lambda)$ with surviving indexed generators $G_\\lambda\\in\\mathcal P_k$. By Step 1, $Y_{r+1}G_\\lambda$ is an indexed generator of $\\mathcal P_{k+1}$: its multiplier becomes $\\beta+e_{r+1}$, or its remainder exponent becomes $\\gamma+e_{r+1}$, and its degree increases by one [def-trf-supported-homogeneous-division]. Set $Q=\\sum_\\lambda c_\\lambda Y_{r+1}G_\\lambda$. Then $Q\\in\\operatorname{Span}_A\\mathcal P_{k+1}$ and $\\rho_r(Q)=Y_{r+1}\\sum_\\lambda c_\\lambda\\rho_r(G_\\lambda)=P$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-trf-supported-homogeneous-division"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficientwise assembly following Bierstone--Milman 1997, Definition 8.3, Remarks 8.4 and Lemma 8.5, printed pp.274--275 (journal PDF read online at the URL in source.place; absent from repository literature). The explicit bound is supplied by lem-trf-monotone-diagram-face-exceptions; ILO VIII 2.3.11--2.3.13 records only the inherited resolution route."
+   }
+  },
+  {
+   "text": "The number $b=d+n(M-1)+1$ uses only the diagram and $n$, hence neither $A$ nor $H_i$. If $D=\\varnothing$, there are no vertex terms, $d=0$, $M=1$, $b=1$, and all monomials are remainder generators. If $D=\\mathbf N^n$, the single vertex is $0$, $\\Delta_1=\\mathbf N^n$ and $\\Delta_0=\\varnothing$; the same argument uses only the assumed spanning and remains valid. For $r=0$ evaluation is the identity, and for $r=n-1$ only one variable remains; both are already covered. The coefficient formulas also hold in the zero ring and with vanishing $H_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coefficientwise assembly following Bierstone--Milman 1997, Definition 8.3, Remarks 8.4 and Lemma 8.5, printed pp.274--275 (journal PDF read online at the URL in source.place; absent from repository literature). The explicit bound is supplied by lem-trf-monotone-diagram-face-exceptions; ILO VIII 2.3.11--2.3.13 records only the inherited resolution route."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-monotone-diagram-face-exceptions",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent coefficientwise assembly following Bierstone--Milman 1997, Definition 8.3, Remarks 8.4 and Lemma 8.5, printed pp.274--275 (journal PDF read online at the URL in source.place; absent from repository literature). The explicit bound is supplied by lem-trf-monotone-diagram-face-exceptions; ILO VIII 2.3.11--2.3.13 records only the inherited resolution route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-coordinate-face-lifting: sufficiently high degree supported homogeneous division generators on a coordinate face lift after multiplication by its first remaining variable",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (p : ℕ),\\n  Nat.Prime p →\\n    (∀ (s : Finset K), LinearIndepOn k id ↑s → LinearIndepOn k (fun x => x ^ p) ↑s) →\\n      ∀ {a : ι → K} {F : MvPolynomial ι k},\\n        (∀ (F' : MvPolynomial ι k), F' \", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ a type of variables, and $ p $ a prime number. If $ F \\\\in R[\\\\sigma] $ is a nonzero multivariate polynomial such that $ F(a) = 0 $ for some assignment $ \"}\n  {\"name\": \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {d : ℕ} (hf : f ∈ 𝒜 d) (ι' : Type u_4) [inst_4 : Fintype ι'] (v : ι' → A),\\n  Algebra.adjoin (↥(𝒜 0)) (Set.range v) = ⊤ →\\n    ∀ (dv : ι' → ℕ) (hxd :\", \"doc\": \"Let $\\\\mathcal{A}$ be a graded algebra over an additive monoid $\\\\iota$, and let $f \\\\in \\\\mathcal{A}_d$ for some degree $d \\\\in \\\\iota$. Suppose $\\\\{v_i\\\\}_{i \\\\in \\\\iota'}$ is a finite set of homogeneous elem\"}\n  {\"name\": \"Polynomial.homogenize_monomial_of_lt\", \"module\": \"Mathlib/Algebra/Polynomial/Homogenize\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {m n : ℕ}, n < m → ∀ (r : R), ((Polynomial.monomial m) r).homogenize n = 0\", \"doc\": \"For any natural numbers $m$ and $n$ with $n < m$, and any element $r$ in the semiring $R$, the homogenization of the monomial $rX^m$ with respect to degree $n$ results in the zero polynomial.\"}\n  {\"name\": \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] {𝒜 : ι → σ}\\n  [inst_5 : GradedRing 𝒜] {f : A} {d : ι} (hf : f ∈ 𝒜 d) {ι' : Type u_4} [inst_6 : Fintype ι'] (v : ι' → A),\\n  A\", \"doc\": \"Let $\\\\mathcal{A}$ be a graded algebra over an additive monoid $\\\\iota$, and let $f \\\\in \\\\mathcal{A}_d$ for some degree $d \\\\in \\\\iota$. Suppose $\\\\{v_i\\\\}_{i \\\\in \\\\iota'}$ is a finite family of elements in $\"}\n  {\"name\": \"MvPolynomial.coeff_toPolynomialAdjoinImageCompl_ne_zero\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] {a : ι → K}\\n  {F : MvPolynomial ι k},\\n  (∀ (F' : MvPolynomial ι k), F' ≠ 0 → (MvPolynomial.aeval a) F' = 0 → F.totalDegree ≤ F'.totalDegree) →\\n    ∀ σ ∈ F.support, ∀ (i : ι), σ i ≠ 0 → (F.toPoly\", \"doc\": \"For a multivariate polynomial $ F $ with support containing a monomial $ \\\\sigma $, if the exponent $ \\\\sigma(i) $ of variable $ i $ is nonzero, then the coefficient of $ X^{\\\\sigma(i)} $ in the polynomi\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousComponent_eq_zero_of_notMem\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] {σ : Type u_3} (w : σ → M) [inst_1 : AddCommMonoid M]\\n  [inst_2 : DecidableEq M] (φ : MvPolynomial σ R),\\n  ∀ i ∉ Finset.image (⇑(Finsupp.weight w)) φ.support, (MvPolynomial.weightedHomogeneousComponent w i) φ = 0\", \"doc\": \"For any multivariate polynomial $\\\\varphi \\\\in R[\\\\sigma]$ and weight function $w : \\\\sigma \\\\to M$, if $i \\\\in M$ is not in the image of $w$ restricted to the support of $\\\\varphi$, then the weighted homoge\"}\n  {\"name\": \"MvPolynomial.pderiv_inr_universalFactorizationMap_X\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (n m k : ℕ) (hn : n = m + k) (i : Fin k) (j : Fin n),\\n  (MvPolynomial.pderiv (Sum.inr i))\\n      ((MvPolynomial.tensorEquivSum R (Fin m) (Fin k) R)\\n        ((MvPolynomial.universalFactorizationMap R n m k hn) (MvPolynomial.X j))) =\\n    if ↑j < ↑i then 0\\n    else i\", \"doc\": \"For variables $i$ and $j$, the partial derivative with respect to $\\\\text{inr}(i)$ of the tensor product equivalence applied to the universal factorization map's variable $X_j$ is: $0$ if $j < i$; $X_{\"}\n  {\"name\": \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommSemiring R] (r : R) (s : σ →₀ ℕ),\\n  (MvPolynomial.monomial s) r ∈ MvPolynomial.homogeneousSubmodule σ R 1 ^ Finsupp.degree s\", \"doc\": \"For any commutative semiring $ R $, type $ \\\\sigma $, coefficient $ r \\\\in R $, and finite support function $ s : \\\\sigma \\\\to_0 \\\\mathbb{N} $, the monomial $ r \\\\cdot \\\\mathbf{X}^s $ belongs to the $ \\\\deg(s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneity, localization and totalDegree results do not give the monotone-support uniform bound and coordinate-face lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"MvPolynomial.IsHomogeneous\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] (φ : MvPolynomial σ R) (n : ℕ) : Prop\", \"doc\": \"A multivariate polynomial `φ` is homogeneous of degree `n`\\nif all monomials occurring in `φ` have degree `n`.\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_X\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} (R : Type u_3) [CommSemiring R] (i : σ) : (MvPolynomial.X i).IsHomogeneous 1\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_of_isEmpty\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] [IsEmpty σ] (f : MvPolynomial σ R) : f.IsHomogeneous 0\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.totalDegree_le\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] {φ : MvPolynomial σ R} {n : ℕ} (hφ : φ.IsHomogeneous n) : φ.totalDegree ≤ n\", \"doc\": \"The homogeneous degree bounds the total degree.\\n\\nSee also `MvPolynomial.IsHomogeneous.totalDegree` when `φ` is non-zero.\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_of_totalDegree_zero\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) {R : Type u_3} [CommSemiring R] {p : MvPolynomial σ R} : p.totalDegree = 0 → p.IsHomogeneous 0\", \"doc\": \"**Alias** of the forward direction of `MvPolynomial.totalDegree_zero_iff_isHomogeneous`.\"}\n  {\"name\": \"MvPolynomial.totalDegree_zero_iff_isHomogeneous\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) {R : Type u_3} [CommSemiring R] {p : MvPolynomial σ R} : p.totalDegree = 0 ↔ p.IsHomogeneous 0\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_one\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] : MvPolynomial.IsHomogeneous 1 0\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_zero\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] (n : ℕ) : MvPolynomial.IsHomogeneous 0 n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.sum\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] {ι : Type u_5} (s : Finset ι) (φ : ι → MvPolynomial σ R) (n : ℕ) (h : ∀ i ∈ s, (φ i).IsHomogeneous n) : (∑ i ∈ s, φ i).IsHomogeneous n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_X_pow\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] (i : σ) (n : ℕ) : (MvPolynomial.X i ^ n).IsHomogeneous n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.totalDegree\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] {φ : MvPolynomial σ R} {n : ℕ} (hφ : φ.IsHomogeneous n) (h : φ ≠ 0) : φ.totalDegree = n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.inj_right\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] {φ : MvPolynomial σ R} {m n : ℕ} (hm : φ.IsHomogeneous m) (hn : φ.IsHomogeneous n) (hφ : φ ≠ 0) : m = n\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneity, localization and totalDegree results do not give the monotone-support uniform bound and coordinate-face lifting."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.?face|face.?lift|monotone.?diagram|quotientSupport",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneity, localization and totalDegree results do not give the monotone-support uniform bound and coordinate-face lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-supported-coordinate-face-lifting: restrict a spanning homogeneous family by setting initial variables to zero then lift a polynomial divisible by the next variable using support stability",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-coordinate-face-lifting: Bierstone Milman stabilization lemma 8.5 homogeneous polynomial restriction supported monomial division",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (p : ℕ),\\n  Nat.Prime p →\\n    (∀ (s : Finset K), LinearIndepOn k id ↑s → LinearIndepOn k (fun x => x ^ p) ↑s) →\\n      ∀ {a : ι → K} {F : MvPolynomial ι k},\\n        (∀ (F' : MvPolynomial ι k), F' \", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ a type of variables, and $ p $ a prime number. If $ F \\\\in R[\\\\sigma] $ is a nonzero multivariate polynomial such that $ F(a) = 0 $ for some assignment $ \"}\n  {\"name\": \"MvPolynomial.support_divMonomial\", \"module\": \"Mathlib/Algebra/MvPolynomial/Division\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : CommSemiring R] (s : σ →₀ ℕ) (x : MvPolynomial σ R),\\n  (x.divMonomial s).support = x.support.preimage (fun x => s + x) ⋯\", \"doc\": \"For any monomial $ s $ and multivariate polynomial $ x $, the support of $ x $ divided by $ s $ is equal to the preimage of the support of $ x $ under the injective addition map $ t \\\\mapsto t + s $. T\"}\n  {\"name\": \"MvPolynomial.indicator_mem_restrictDegree\", \"module\": \"Mathlib/FieldTheory/Finite/Polynomial\", \"type\": \"∀ {K : Type u_1} {σ : Type u_2} [inst : Fintype K] [inst_1 : Fintype σ] [inst_2 : CommRing K] (c : σ → K),\\n  MvPolynomial.indicator c ∈ MvPolynomial.restrictDegree σ K (Fintype.card K - 1)\", \"doc\": \"For any finite type $\\\\sigma$ and commutative ring $K$, the indicator polynomial for a point $c : \\\\sigma \\\\to K$ belongs to the submodule of multivariate polynomials $K[\\\\sigma]$ where each variable's ex\"}\n  {\"name\": \"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"module\": \"Mathlib/Combinatorics/Nullstellensatz\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {σ : Type u_2} [Finite σ] [IsDomain R] (S : σ → Finset R),\\n  (∀ (i : σ), (S i).Nonempty) →\\n    ∀ (f : MvPolynomial σ R),\\n      (∀ (x : σ → R), (∀ (i : σ), x i ∈ S i) → (MvPolynomial.eval x) f = 0) →\\n        ∃ h,\\n          (∀ (i : σ), ((∏ s ∈ S i, (MvPolynomial.X \", \"doc\": \"Let $ R $ be a commutative ring with no zero divisors, $ \\\\sigma $ a type, and $ S_i \\\\subseteq R $ finite non-empty subsets for each $ i \\\\in \\\\sigma $. If a multivariate polynomial $ f \\\\in R[\\\\sigma] $ v\"}\n  {\"name\": \"FirstOrder.Ring.mvPolynomialSupportLEEquiv\", \"module\": \"Mathlib/RingTheory/MvPolynomial/FreeCommRing\", \"type\": \"{ι : Type u_1} →\\n  {κ : Type u_2} →\\n    {R : Type u_3} →\\n      [DecidableEq κ] →\\n        [inst : CommRing R] →\\n          [DecidableEq R] →\\n            (monoms : ι → Finset (κ →₀ ℕ)) → { p // ∀ (i : ι), (p i).support ⊆ monoms i } ≃ ((i : ι) × ↥(monoms i) → R)\", \"doc\": \"An equivalence between the type of families of multivariate polynomials whose supports are contained in specified finite sets of monomials and the type of functions on the union of these monomials. Th\"}\n  {\"name\": \"MvPolynomial.coeff_toPolynomialAdjoinImageCompl_ne_zero\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] {a : ι → K}\\n  {F : MvPolynomial ι k},\\n  (∀ (F' : MvPolynomial ι k), F' ≠ 0 → (MvPolynomial.aeval a) F' = 0 → F.totalDegree ≤ F'.totalDegree) →\\n    ∀ σ ∈ F.support, ∀ (i : ι), σ i ≠ 0 → (F.toPoly\", \"doc\": \"For a multivariate polynomial $ F $ with support containing a monomial $ \\\\sigma $, if the exponent $ \\\\sigma(i) $ of variable $ i $ is nonzero, then the coefficient of $ X^{\\\\sigma(i)} $ in the polynomi\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousComponent_finsupp\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] {σ : Type u_3} [inst_1 : AddCommMonoid M] {w : σ → M}\\n  (φ : MvPolynomial σ R), (Function.support fun m => (MvPolynomial.weightedHomogeneousComponent w m) φ).Finite\", \"doc\": \"For any multivariate polynomial $\\\\varphi$ in the ring $R[\\\\sigma]$, the set of degrees $n \\\\in M$ for which the weighted homogeneous component of $\\\\varphi$ of degree $n$ is non-zero is finite. This mean\"}\n  {\"name\": \"MvPolynomial.mem_restrictDegree\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Basic\", \"type\": \"∀ (σ : Type u) {R : Type v} [inst : CommSemiring R] (p : MvPolynomial σ R) (n : ℕ),\\n  p ∈ MvPolynomial.restrictDegree σ R n ↔ ∀ s ∈ p.support, ∀ (i : σ), s i ≤ n\", \"doc\": \"For a multivariate polynomial $ p $ over a commutative semiring $ R $ with variables indexed by $ \\\\sigma $, and a natural number $ n $, the polynomial $ p $ belongs to the submodule $ \\\\operatorname{re\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneity, localization and totalDegree results do not give the monotone-support uniform bound and coordinate-face lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform supported homogeneous division on coordinate faces of a monotone monomial diagram and lifting after multiplication by the first remaining variable",
+   "results": "{\"t\": \"2026-10-23T14:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform supported homogeneous division on coordinate faces of a monotone monomial diagram and lifting after multiplication by the first remaining variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonomialOrder.div\", \"MvPolynomial.divMonomial\", \"MvPolynomial.mul_X_divMonomial\", \"MvPolynomial.divMonomial_mul_monomial\", \"MonomialOrder.div_single\", \"MvPolynomial.divMonomial_monomial_mul\", \"MonomialOrder.div_set\", \"MvPolynomial.modMonomial\"], \"digest\": \"4ba9f021eb6b3046\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned division, monomial ideal and homogeneity results do not state the monotone-support exceptional bound and uniform coordinate-face lifting; read candidate signatures and Division.lean, Groebner.lean and Homogeneous.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.?face|face.?lift|monotone.?diagram|quotientSupport",
+   "results": "{\"t\": \"2026-10-23T14:11:46Z\", \"tool\": \"grep\", \"query\": \"coordinate.?face|face.?lift|monotone.?diagram|quotientSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned division, monomial ideal and homogeneity results do not state the monotone-support exceptional bound and uniform coordinate-face lifting; read candidate signatures and Division.lean, Groebner.lean and Homogeneous.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported homogeneous polynomial spanning on coordinate faces and lifting multiples of the first surviving variable",
+   "results": "{\"t\": \"2026-10-23T14:11:46Z\", \"tool\": \"leansearch\", \"query\": \"Supported homogeneous polynomial spanning on coordinate faces and lifting multiples of the first surviving variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize\", \"Polynomial.homogenize_X_pow\", \"MvPolynomial.homogeneousSubmodule_one_eq_span_X\", \"MvPolynomial.homogeneousComponent_of_mem\", \"MvPolynomial.homogeneousComponent_isHomogeneous\", \"MvPolynomial.homogeneousComponent\", \"MvPolynomial.sum_homogeneousComponent\", \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\"], \"digest\": \"1fba7429267246f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned division, monomial ideal and homogeneity results do not state the monotone-support exceptional bound and uniform coordinate-face lifting; read candidate signatures and Division.lean, Groebner.lean and Homogeneous.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous",
+   "results": "{\"t\": \"2026-10-23T14:11:47Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.IsHomogeneous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous\", \"MvPolynomial.isHomogeneous_X\", \"MvPolynomial.isHomogeneous_of_isEmpty\", \"MvPolynomial.IsHomogeneous.totalDegree_le\", \"MvPolynomial.isHomogeneous_of_totalDegree_zero\", \"MvPolynomial.totalDegree_zero_iff_isHomogeneous\", \"MvPolynomial.isHomogeneous_one\", \"MvPolynomial.isHomogeneous_zero\"], \"digest\": \"c4288e164db318ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned division, monomial ideal and homogeneity results do not state the monotone-support exceptional bound and uniform coordinate-face lifting; read candidate signatures and Division.lean, Groebner.lean and Homogeneous.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monomial division regions in a Borel monotone ideal are stable in high degree under multiplying by the first surviving coordinate, giving supported lifts from coordinate restrictions",
+   "results": "{\"t\": \"2026-10-23T14:22:18Z\", \"tool\": \"leanfinder\", \"query\": \"Monomial division regions in a Borel monotone ideal are stable in high degree under multiplying by the first surviving coordinate, giving supported lifts from coordinate restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.chevalley_mvPolynomialC\", \"MvPolynomial.mem_ideal_span_monomial_image\", \"MonomialOrder.div_set\", \"ChevalleyThm.chevalley_polynomialC\", \"MvPolynomial.mem_ideal_span_monomial_image_iff_dvd\", \"MvPowerSeries.LinearTopology.basis_le\", \"monomial_mem_adjoin_monomial\", \"Ideal.leadingCoeffNth_mono\"], \"digest\": \"8098ffed6bcaf76c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned division, monomial ideal and homogeneity results do not state the monotone-support exceptional bound and uniform coordinate-face lifting; read candidate signatures and Division.lean, Groebner.lean and Homogeneous.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "^(noncomputable )?(def div|theorem (mul_X_divMonomial|divMonomial_mul_monomial|divMonomial_monomial_mul|div_single|div_set|homogeneousSubmodule_one_eq_span_X|homogeneousComponent_of_mem|homogeneousComponent_isHomogeneous|sum_homogeneousComponent|monomial_mem_homogeneousSubmodule_pow_degree)|protected theorem div)",
+   "results": "{\"t\": \"2026-10-23T14:22:46Z\", \"tool\": \"grep\", \"query\": \"^(noncomputable )?(def div|theorem (mul_X_divMonomial|divMonomial_mul_monomial|divMonomial_monomial_mul|div_single|div_set|homogeneousSubmodule_one_eq_span_X|homogeneousComponent_of_mem|homogeneousComponent_isHomogeneous|sum_homogeneousComponent|monomial_mem_homogeneousSubmodule_pow_degree)|protected theorem div)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/TsumDivisorsAntidiagonal.lean\", \"Mathlib/Topology/MetricSpace/IsometricSMul.lean\", \"Mathlib/Topology/MetricSpace/IsometricSMul.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\"], \"digest\": \"ff6d456c7f5997a0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned division, monomial ideal and homogeneity results do not state the monotone-support exceptional bound and uniform coordinate-face lifting; read candidate signatures and Division.lean, Groebner.lean and Homogeneous.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (div_set|div_single)|def div ",
+   "results": "{\"t\": \"2026-10-23T14:23:14Z\", \"tool\": \"grep\", \"query\": \"theorem (div_set|div_single)|def div \", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\"], \"digest\": \"db15ad8c0125d70e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned division, monomial ideal and homogeneity results do not state the monotone-support exceptional bound and uniform coordinate-face lifting; read candidate signatures and Division.lean, Groebner.lean and Homogeneous.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousSubmodule_one_eq_span_X|homogeneousComponent_of_mem|homogeneousComponent_isHomogeneous|sum_homogeneousComponent|monomial_mem_homogeneousSubmodule_pow_degree",
+   "results": "{\"t\": \"2026-10-23T14:23:14Z\", \"tool\": \"grep\", \"query\": \"homogeneousSubmodule_one_eq_span_X|homogeneousComponent_of_mem|homogeneousComponent_isHomogeneous|sum_homogeneousComponent|monomial_mem_homogeneousSubmodule_pow_degree\", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\"], \"digest\": \"c591e1eb6dde54c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned division, monomial ideal and homogeneity results do not state the monotone-support exceptional bound and uniform coordinate-face lifting; read candidate signatures and Division.lean, Groebner.lean and Homogeneous.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-initial-diagram-stabilization",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical local-invariant branch of lem-trf-local-term-locality via ILO VIII 2.3.11--2.3.13 and the regular Hilbert--Samuel coefficient construction. Exact lower input: BM 1997 section 8, Theorem 8.1 and Lemma 8.5, printed pp.274--275, used in the finite testing paragraph concluding Theorem 9.6, p.282. Subargument: Definition 8.3, Remarks 8.4 and Lemma 8.5, printed pp.274--275: exceptional-degree bound, restricted spanning and coordinate-face lifts; explicit larger bound from lem-trf-monotone-diagram-face-exceptions.",
+   "via": [
+    "lem-trf-initial-diagram-stabilization",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-supported-coordinate-face-lifting",
+  "worker": "stage1",
+  "summary": "Unchanged statement proved in five steps using the existing quantitative exceptional-box node, explicit evaluation of finite monomial sums, and an explicit shifted-generator lift. No new nodes or leaves. Checked source conventions, same vertex ordering, ring-independent bound, indexed family and empty/full cases.",
+  "blueprint": "Keeps the inherited historical local-invariant branch under lem-trf-local-term-locality via lem-trf-initial-diagram-stabilization. Step 1 realizes the high-degree support stability of BM Remarks 8.4 with the existing larger exceptional-box bound; Steps 2--3 realize the coordinate restrictions in the proof of BM Theorem 8.1; Step 4 is BM Lemma 8.5 with its lift written coefficientwise; Step 5 records uniformity and edge cases. The current latest blueprint contracting-correspondence route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-45fb299d5",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-45fb299d5 (reviewer sub-agent of L); spot-checked: I read in full the item, the cited box lemma lem-trf-monotone-diagram-face-exceptions, def-trf-supported-homogeneous-division, def-weil-pbc-mv-polynomial-ring, the parent lem-trf-initial-diagram-stabilization and the sibling lifting criterion. The delivery has no new nodes and an unchanged statement, and there is no re-split note for this item. The statement's data (additive closure, whole-coordinate moves, ascending (|a|,a) vertex order, Δ_i, Δ_0, P_k) matches the box lemma and the def node exactly, and M=max(1,d) is the same. It is also exactly the clause the parent's Step 1 consumes, with the same b. Step 1: the box bound gives |β|≤(n−r)(M−1), so |β|+d_i≤b−1<k, and likewise for Δ_0. It uses only the cited statement. Step 2: ρ_r is evaluation; it kills monomials outside F_r and is multiplicative. Step 3: restricting the spanning combination to the face spans the face. Step 4: divisibility by monic Y_{r+1} shifts the support, so it works over any ring. Step 1 makes Y_{r+1}G a generator of P_{k+1}, and ρ_r(Q)=Y_{r+1}T=P. Step 5: b depends only on the diagram, and D=∅ and D=ℕⁿ (both b=1), r=0, r=n−1, the zero ring and H_i=0 are all correct. Tests: support stability brute-forced on 157 monotone diagrams in dimensions 1–3 with no failure; n=1, D={≥2} and the report's (0,1),(2,0) example checked by hand. rg -L search found no duplicate. No cycle. The route stays inside sk-i-curve-zero and no tool_uses are needed. BM 1997 is absent from the literature, so proof_origin=agent is correct. No SGA. Advisory: 'homogeneous' is not defined in the polynomial-ring def node (the parent defines it inline). No fixes."
+ }
+}

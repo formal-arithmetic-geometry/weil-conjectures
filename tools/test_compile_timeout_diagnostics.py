@@ -1,6 +1,7 @@
 """A later timeout must retain diagnostics already emitted by Lean.
 
 These tests replace only the Lean subprocess, so no build or compile limit changes.
+2026-10-26: Lean runs up to 300 s (SHEAF_FILE_RUN_LIMIT); 60 s stays the acceptance limit.
 """
 import contextlib
 import io
@@ -26,7 +27,9 @@ class TimeoutDiagnostics(unittest.TestCase):
             if value:
                 expected = value.decode(errors="replace") if isinstance(value, bytes) else value
                 self.assertIn(expected, text)
-        self.assertIn("timeout after 60 s", text)
+        self.assertIn("NOT ACCEPTED", text)
+        self.assertIn("timeout after 300 s", text)
+        self.assertIn("60 s", text)
 
     def test_overlay_backend_retains_partial_output_and_releases_slot(self):
         for stdout, stderr in self.outputs:
@@ -45,7 +48,7 @@ class TimeoutDiagnostics(unittest.TestCase):
                     rc, text = nt_lcompile.run(src)
                 self.assertEqual(rc, 124)
                 self.assert_diagnostics(text, stdout, stderr)
-                self.assertEqual(run.call_args.kwargs["timeout"], 60)
+                self.assertEqual(run.call_args.kwargs["timeout"], 300)   # run limit; 60 s stays the acceptance limit
                 unlock.assert_called_once_with(slot, nt_lcompile.fcntl.LOCK_UN)
                 slot.close.assert_called_once()
 
@@ -71,7 +74,7 @@ class TimeoutDiagnostics(unittest.TestCase):
                     nt_compile.main()
                 text = output.getvalue() + str(raised.exception)
                 self.assert_diagnostics(text, stdout, stderr)
-                self.assertEqual(run.call_args.kwargs["timeout"], 60)
+                self.assertEqual(run.call_args.kwargs["timeout"], 300)   # run limit; 60 s stays the acceptance limit
                 self.assertNotEqual(raised.exception.code, 0)
 
 

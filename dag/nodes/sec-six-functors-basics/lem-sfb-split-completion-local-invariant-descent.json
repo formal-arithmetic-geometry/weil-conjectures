@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-split-completion-local-invariant-descent",
+ "kind": "statement",
+ "title": "Reducedness descends from a split completed geometric stalk",
+ "statement": "Let $k$ be a field, $S$ a finitely generated $k$-algebra [def-weil-pbc-finite-type-algebra], $\\mathfrak p\\subset S$ a maximal ideal with $F=S/\\mathfrak p$ finite separable over $k$ [def-weil-pbc-separable-algebraic-extension], and $A=S_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]. Let $K/k$ be any extension field and $\\iota:F\\hookrightarrow K$ a $k$-embedding. Define\n$$\\mathfrak q=\\ker(S\\otimes_kK\\longrightarrow K),\\quad s\\otimes\\lambda\\longmapsto\\iota(\\bar s)\\lambda,\\qquad B=(S\\otimes_kK)_{\\mathfrak q},\\quad\\mathfrak n=\\mathfrak qB,$$\nwhere tensor products use [def-weil-pbc-module-tensor-product], and let $\\widehat B$ be the $\\mathfrak n$-adic completion [def-weil-pbc-adic-completion]. (1) For every field $L$, the ring $L[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series] has no nonzero nilpotent elements; more precisely $h\\mapsto(h(u,0),h(0,v))$ induces an injective ring map $L[[u,v]]/(uv)\\to L[[u]]\\times L[[v]]$. (2) The canonical maps $A\\to B\\to\\widehat B$ are injective. (3) If $\\widehat B$ is isomorphic as a ring, without requiring $K$-linearity, to $K[[u,v]]/(uv)$, then $\\widehat B$, $B$ and $A$ have no nonzero nilpotent elements. Quotient rings and algebra maps use [def-weil-pbc-algebra-hom-quotient]. No algebraic closedness assumption on $K$ and no dimension assumption on $S$ is made.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (3)=>(1): reducedness of the completed quadric and A contained in its completion; Tag 0C4D (lemma-nodal), arbitrary-field paragraph, passage along the faithfully flat map to the geometric stalk."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Write $h=\\sum_{i,j\\geq0}a_{ij}u^iv^j$. Define $E(h)=(\\sum_i a_{i0}u^i,\\sum_j a_{0j}v^j)$. The coefficientwise addition and convolution product of [def-weil-pbc-multivariate-power-series] show that $E$ preserves $1$, addition and multiplication: in the coefficient of $u^n v^0$ of a product, both contributing $v$-exponents must be zero, and similarly on the other axis. Moreover $E(h)=0$ exactly when $a_{i0}=a_{0j}=0$ for every $i,j$. In that case define $g=\\sum_{i,j\\geq0}a_{i+1,j+1}u^iv^j$; coefficientwise $h=uvg$. Conversely $E(uvg)=0$. Thus $\\ker E=(uv)$. By the quotient construction [def-weil-pbc-algebra-hom-quotient], $E$ induces a ring map $\\overline E:L[[u,v]]/(uv)\\to L[[u]]\\times L[[v]]$. If $\\overline E([h])=0$, then $h\\in(uv)$ by the calculation, so $[h]=0$; applying this to a difference proves injectivity.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (3)=>(1), split quadratic case; explicit coefficient calculation supplying the reducedness argument"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-power-series-domain] with the domain $L$ and one variable to obtain that $L[[u]]$ and $L[[v]]$ are domains. If $z^r=0$ in $L[[u,v]]/(uv)$, with $r\\geq1$, both components of $\\overline E(z)$ have $r$th power zero. A domain has no nonzero element with a zero positive power (induct on $r$ using the absence of zero divisors), so both components vanish. Step 1 then gives $z=0$. This proves all of (1).",
+   "uses": [
+    "lem-weil-pbc-power-series-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (3)=>(1), reducedness of the split completed quadric"
+   }
+  },
+  {
+   "text": "The data $k,S,\\mathfrak p,F,K,\\iota$ satisfy every hypothesis of [lem-trf-separable-evaluation-local-base-change]: $S$ is finite type, $F/k$ is finite separable, and $\\iota$ is a $k$-embedding into the extension field $K$. Its $C,\\epsilon,\\mathfrak q,A,B$ are exactly the rings and maps in the statement. It gives that $A,B$ are Noetherian local rings and the canonical $A\\to B$ is faithfully flat. Apply the injectivity clause of [lem-weil-pbc-faithfully-flat-ideal-contraction] to this map to obtain $A\\hookrightarrow B$.",
+   "uses": [
+    "lem-trf-separable-evaluation-local-base-change",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y (lemma-change-fields-flat), (1) and its affine proof; algebra.tex Tag 05CK (lemma-faithfully-flat-universally-injective)"
+   }
+  },
+  {
+   "text": "Step 3 gives that $B$ is Noetherian local, with maximal ideal $\\mathfrak n=\\mathfrak qB$. Apply [lem-weil-pbc-local-completion-faithfully-flat] to $(B,\\mathfrak n)$: its completion is exactly the specified $\\widehat B=\\varprojlim_r B/\\mathfrak n^r$, and the canonical $B\\to\\widehat B$ is faithfully flat. The injectivity clause of [lem-weil-pbc-faithfully-flat-ideal-contraction] therefore gives $B\\hookrightarrow\\widehat B$. Together with step 3 this proves (2).",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MC (lemma-completion-faithfully-flat), final clause; Tag 05CK (lemma-faithfully-flat-universally-injective)"
+   }
+  },
+  {
+   "text": "Assume a ring isomorphism $\\phi:\\widehat B\\xrightarrow{\\sim}K[[u,v]]/(uv)$. If $x^r=0$ in $\\widehat B$, with $r\\geq1$, then $\\phi(x)^r=0$, so step 2 with $L=K$ gives $\\phi(x)=0$, and injectivity of $\\phi$ gives $x=0$. If $b^r=0$ in $B$, its image in $\\widehat B$ is zero by the preceding conclusion, so $b=0$ by step 4. If $a^r=0$ in $A$, its image in $B$ is zero, so $a=0$ by step 3. This proves (3). This argument uses only preservation of multiplication and zero by the ring maps, so $\\phi$ need not respect $K$-scalars.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (3)=>(1), descent through an injective map; Tag 0C4D (lemma-nodal), arbitrary-field reducedness descent paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-power-series-domain",
+  "lem-trf-separable-evaluation-local-base-change",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-local-completion-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C49 (lemma-nodal-algebraic), (3)=>(1), and Tag 0C4D (lemma-nodal), arbitrary-field paragraph; coefficientwise split-model argument and elementary nilpotent descent supplied explicitly by NC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fitting|Fitting|flat.*depth|depth.*flat",
+   "results": "{\"t\": \"2026-10-23T09:45:42Z\", \"tool\": \"grep\", \"query\": \"fitting|Fitting|flat.*depth|depth.*flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"39ce9b936c9e89e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and smooth Jacobian criteria do not give first Fitting and depth descent from a split-node completion; Fitting decomposition concerns endomorphisms, not determinantal ideals"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"KaehlerDifferential\"",
+   "results": "{\"t\": \"2026-10-23T09:45:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fitting\\\", \\\"KaehlerDifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and smooth Jacobian criteria do not give first Fitting and depth descent from a split-node completion; Fitting decomposition concerns endomorphisms, not determinantal ideals"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential first Fitting ideal equals the maximal ideal and completion has depth one if an extension field completion is a binary split node",
+   "results": "{\"t\": \"2026-10-23T09:45:43Z\", \"tool\": \"leansearch\", \"query\": \"Differential first Fitting ideal equals the maximal ideal and completion has depth one if an extension field completion is a binary split node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"DualNumber.maximalIdeal_eq_span_singleton_eps\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"differentIdeal_ne_bot\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_apply\", \"differentialIdeal_le_fractionalIdeal_iff\", \"not_dvd_differentIdeal_of_isCoprime_of_isSeparable\", \"IsAdicComplete.le_jacobson_bot\"], \"digest\": \"bfc2b4c050e8be46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and smooth Jacobian criteria do not give first Fitting and depth descent from a split-node completion; Fitting decomposition concerns endomorphisms, not determinantal ideals"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split nodal completed local ring descends reducedness depth one and the first Fitting ideal of differentials along an arbitrary field extension with separable residue field",
+   "results": "{\"t\": \"2026-10-23T09:45:43Z\", \"tool\": \"leansearch\", \"query\": \"A split nodal completed local ring descends reducedness depth one and the first Fitting ideal of differentials along an arbitrary field extension with separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"differentIdeal_ne_bot\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"instIsSeparableQuotientIdealOfResidueField\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"Algebra.FormallyUnramified.of_isSeparable\", \"Algebra.FormallyUnramified.isSeparable\", \"not_dvd_differentIdeal_of_isCoprime_of_isSeparable\"], \"digest\": \"9c4bd7c93913bd20\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and smooth Jacobian criteria do not give first Fitting and depth descent from a split-node completion; Fitting decomposition concerns endomorphisms, not determinantal ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If after a field extension a finite type local algebra has completion isomorphic to the split node xy zero then it is reduced and its first differential Fitting ideal is the maximal ideal and depth is one",
+   "results": "{\"t\": \"2026-10-23T09:45:52Z\", \"tool\": \"leanfinder\", \"query\": \"If after a field extension a finite type local algebra has completion isomorphic to the split node xy zero then it is reduced and its first differential Fitting ideal is the maximal ideal and depth is one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.Etale\", \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"Algebra.IsUnramifiedAt\"], \"digest\": \"6708caa0902160b9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and smooth Jacobian criteria do not give first Fitting and depth descent from a split-node completion; Fitting decomposition concerns endomorphisms, not determinantal ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of nodal Jacobian minor ideal and depth from a completed local algebra over an extension field",
+   "results": "{\"t\": \"2026-10-23T09:45:53Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat descent of nodal Jacobian minor ideal and depth from a completed local algebra over an extension field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt\", \"RingHom.IsStandardSmooth\", \"Algebra.Smooth.flat\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.smoothLocus\"], \"digest\": \"53f1bdb726a5f3c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal unramifiedness and smooth Jacobian criteria do not give first Fitting and depth descent from a split-node completion; Fitting decomposition concerns endomorphisms, not determinantal ideals"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReduced in Mathlib/RingTheory/PowerSeries, MvPowerSeries, AdicCompletion; FaithfullyFlat injective",
+   "results": "reviewer grep 2026-10-23: no IsReduced hit in RingTheory/PowerSeries, RingTheory/MvPowerSeries or RingTheory/AdicCompletion; FaithfullyFlat/Basic.lean only baseChange_injective (submodules)",
+   "date": "2026-10-23",
+   "verdict": "no match: no reducedness of L[[u,v]]/(uv) and no reducedness descent through a completed geometric stalk"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A two variable formal power series ring over a field modulo the product of the variables is reduced and injects into the product of the power series rings on the coordinate axes",
+   "results": "{\"t\": \"2026-10-23T11:01:08Z\", \"tool\": \"leansearch\", \"query\": \"A two variable formal power series ring over a field modulo the product of the variables is reduced and injects into the product of the power series rings on the coordinate axes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.X_inj\", \"MvPowerSeries.instNoZeroDivisors\", \"MvPolynomial.instIsReduced\", \"PowerSeries.maximalIdeal_eq_span_X\", \"PowerSeries.X_irreducible\", \"MvPowerSeries.instNontrivial\", \"Polynomial.coe_X\", \"MvPolynomial.coeToMvPowerSeries\"], \"digest\": \"80824b50dd5a6702\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: neither the split-axis kernel calculation nor all clauses of the completed geometric-stalk statement are stated by the hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The split nodal ring of formal power series in two variables over any field modulo uv embeds into the product of the two axis power series rings and is reduced; a local algebra injects into its completed geometric stalk",
+   "results": "{\"t\": \"2026-10-23T11:01:12Z\", \"tool\": \"leanfinder\", \"query\": \"The split nodal ring of formal power series in two variables over any field modulo uv embeds into the product of the two axis power series rings and is reduced; a local algebra injects into its completed geometric stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\"], \"digest\": \"bac99e1fcd378ece\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: neither the split-axis kernel calculation nor all clauses of the completed geometric-stalk statement are stated by the hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReduced|span.*mul|ker.*(eval|subst)|quotient.*(axis|axes|node)",
+   "results": "{\"t\": \"2026-10-23T11:01:55Z\", \"tool\": \"grep\", \"query\": \"IsReduced|span.*mul|ker.*(eval|subst)|quotient.*(axis|axes|node)\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: neither the split-axis kernel calculation nor all clauses of the completed geometric-stalk statement are stated by the hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reducedness of the complete local ring of an ordinary double point xy zero descends along the injective maps from a finite type local algebra to a field extension stalk and its completion",
+   "results": "{\"t\": \"2026-10-23T11:01:56Z\", \"tool\": \"leansearch\", \"query\": \"Reducedness of the complete local ring of an ordinary double point xy zero descends along the injective maps from a finite type local algebra to a field extension stalk and its completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"isReduced_localizationPreserves\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.IsGeometricallyReduced.casesOn\", \"isReduced_ofLocalizationMaximal\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\"], \"digest\": \"699e7fbfe10cbb62\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: neither the split-axis kernel calculation nor all clauses of the completed geometric-stalk statement are stated by the hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.Quotient, Function.Injective",
+   "results": "{\"t\": \"2026-10-23T11:01:56Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Ideal.Quotient, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "invalid query: unknown identifier; corrected in the later MvPowerSeries kernel query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of restriction of bivariate formal power series to the two coordinate axes is the principal ideal generated by the product of the variables; its quotient is reduced",
+   "results": "{\"t\": \"2026-10-23T11:02:02Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of restriction of bivariate formal power series to the two coordinate axes is the principal ideal generated by the product of the variables; its quotient is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.HasSubst.ideal\", \"PowerSeries.ker_coeff_eq_max_ideal\", \"PowerSeries.IsWeierstrassDivisorAt\", \"MvPowerSeries.hasSubstIdeal\", \"PowerSeries.IsWeierstrassFactorizationAt\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\"], \"digest\": \"845098e6ca69f7cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: neither the split-axis kernel calculation nor all clauses of the completed geometric-stalk statement are stated by the hits"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|coordinate.axes|split.node|ker.*(subst|eval)|IsReduced.*MvPowerSeries|MvPowerSeries.*IsReduced",
+   "results": "{\"t\": \"2026-10-23T11:02:38Z\", \"tool\": \"grep\", \"query\": \"nodal|coordinate.axes|split.node|ker.*(subst|eval)|IsReduced.*MvPowerSeries|MvPowerSeries.*IsReduced\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/LocalIso.lean\"], \"digest\": \"917a95ce998f1606\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: neither the split-axis kernel calculation nor all clauses of the completed geometric-stalk statement are stated by the hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, \"ker\"",
+   "results": "{\"t\": \"2026-10-23T11:02:38Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPowerSeries.ker_map_of_fg\", \"MvPowerSeries.ker_mapAlgHom_of_fg\"], \"digest\": \"ff6c4497353eb8ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the two kernel hits concern coefficient-ring maps, not restriction to coordinate axes"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_map_of_fg|ker_mapAlgHom_of_fg|instance.*NoZeroDivisors|instance.*IsDomain",
+   "results": "{\"t\": \"2026-10-23T11:03:25Z\", \"tool\": \"grep\", \"query\": \"ker_map_of_fg|ker_mapAlgHom_of_fg|instance.*NoZeroDivisors|instance.*IsDomain\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\"], \"digest\": \"d5e183667e277e66\"}",
+   "date": "2026-10-23",
+   "verdict": "partial match only: the power-series domain instance is already the existing leaf lem-weil-pbc-power-series-domain"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separable-node-quadratic-completion",
+  "date": "2026-10-23",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Quadratic completed local-ring calculation filling the tangent-Proj/normalization comparison omitted in Stacks 0CBT. Reducedness of the split model and its descent along A -> B -> B-hat; old step 9 (old steps 4--8 are carried by the existing lem-trf-geometric-node-fitting-depth, lem-trf-geometric-fitting-depth-descent and lem-trf-depth-fitting-quadratic-lci).",
+   "via": [
+    "lem-sfb-separable-node-quadratic-completion",
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-split-completion-local-invariant-descent",
+  "worker": "stage1",
+  "summary": "Proved the axis-map kernel by coefficients, used the existing power-series domain leaf, and used existing evaluation-local-base-change and completion faithful-flatness statements to prove both canonical injections; reducedness descends by an explicit nilpotent calculation. No statement change and no new nodes.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), through the existing alteration/nodal-branch chain recorded in blueprint.from; realizes the parent local calculation, reducedness of the split model and its descent (old step 9). No blueprint node states this local-algebra assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-separable-evaluation-local-base-change",
+    "why": "Its exact evaluation-localization data give Noetherianity and faithful flatness for the arbitrary extension field in this item; this is a generic commutative algebra tool and does not replace the unit alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-separable-evaluation-local-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-025ad4324",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-025ad4324 (reviewer sub-agent of L); spot-checked: Read the item in full. It has no new nodes and its statement is identical to live, where the node is still unsplit, so no other group has superseded it. The 2026-10-21 re-split note belongs to the parent lem-sfb-separable-node-quadratic-completion; this item is that parent's new leaf, being split for the first time. Step 1: the axis map is a ring map by the convolution product, and its kernel is (uv) via g=Σa_{i+1,j+1}u^iv^j; this is elementary. Step 2: the power-series-domain Mathlib leaf with d=1 makes both factors domains, which proves clause (1) for every field. Step 3: the full statement of lem-trf-separable-evaluation-local-base-change matches the item's data exactly (S, p, F finite separable, any K, ι, ε, q, A, B) and gives A and B Noetherian local with A→B faithfully flat; the I=0 case of the contraction leaf gives injectivity. Step 4: the local-completion faithful-flatness leaf applies to (B, qB), the maximal ideal given by the trf node, so B→B̂ is injective, which proves (2). Step 5: nilpotents pull back along φ and the two injections, with no K-linearity needed, which proves (3); the parent's step 5 uses exactly this clause with K=k̄. Sources: Stacks 0C49, proof of (3)⇒(1) (Â reduced, A⊂Â), and 0C4D, the arbitrary-field flat-descent paragraph, both read at the cited lines. Small cases checked: K=k with k[x,y]/(xy); k[ε]/(ε²), where the hypothesis of (3) fails as it should; characteristic 2. No cycle: the closure has 38 nodes, all commutative algebra. Batch-5: lem-trf-separable-evaluation-local-base-change is a generic commutative-algebra tool. Its closure is only pbc definitions and leaves, it is not a step of the trace-formula or Poincaré proofs, and neither assumption leaf gives Noetherianity or faithful flatness, so I accept it as the declared tool_use. Minor and left unchanged: the report lists worker-side citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SplitCompletionLocalInvariantDescent",
+  "declaration": "SplitCompletion.split_completion_local_invariant_descent",
+  "declarations": [
+   "SplitCompletion.evaluation",
+   "SplitCompletion.evaluationPoint",
+   "SplitCompletion.geometricStalk",
+   "SplitCompletion.completedGeometricStalk",
+   "SplitCompletion.split_node_axes",
+   "SplitCompletion.split_completion_local_invariant_descent"
+  ],
+  "file": "lean/Sheaf/RingTheory/SplitCompletionLocalInvariantDescent.lean",
+  "statement": "theorem split_completion_local_invariant_descent (k : Type u) (S : Type v) (K : Type w) [Field k] [CommRing S] [Field K] [Algebra k S] [Algebra k K] [Algebra.FiniteType k S] (p : Ideal S) [p.IsMaximal] [FiniteDimensional k (S ⧸ p)] [Algebra.IsSeparable k (S ⧸ p)] (ι : (S ⧸ p) →ₐ[k] K) : ∃ f : Localization.AtPrime p →+* geometricStalk p ι, (∀ s : S, f (algebraMap S (Localization.AtPrime p) s) = algebraMap (S ⊗[k] K) (geometricStalk p ι) (s ⊗ₜ[k] (1 : K))) ∧ Function.Injective f ∧ Function.Injective (algebraMap (geometricStalk p ι) (completedGeometricStalk p ι)) ∧ (Nonempty (completedGeometricStalk p ι ≃+* (MvPowerSeries (Fin 2) K ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) K) * MvPowerSeries.X 1})) → IsReduced (completedGeometricStalk p ι) ∧ IsReduced (geometricStalk p ι) ∧ IsReduced (Localization.AtPrime p))",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Clause (1) is SplitCompletion.split_node_axes, independent of the local-algebra data. Clauses (2) and (3) are split_completion_local_invariant_descent. The existential local map is uniquely characterized on S by its displayed generator equation; it is the canonical map, not arbitrary map data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f76a1975",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Node unchanged except new lean record; module matches every clause: (1) split_node_axes universe-polymorphic, IsReduced + injective axis ring hom pinned by coefficient equations; (2) ∃ f A→B fixed by f(s/1)=(s⊗1)/1 (unique by localization UP, exists since ι(s̄)≠0) injective, algebraMap B→AdicCompletion(qB) injective; (3) Nonempty ring iso (no K-linearity) → IsReduced B̂,B,A. Hypotheses FiniteType, p maximal, FiniteDimensional+IsSeparable on S⧸p, arbitrary K, ι k-alg hom; no extra assumptions; universes u,v,w independent. Helpers evaluation/evaluationPoint/geometricStalk/completedGeometricStalk have real data, n=qB literally. Source 0C49 (3)⇒(1) and 0C4D flat-descent paragraph read. lean.statement verbatim (script). Docstrings with source/blueprint and proof steps; sorry only; Mathlib imports. Advisory: parallel helper Algebra.closedPointTensorEvaluation is in theorem-node module lem-trf-separable-closed-point-formal-presentation (would need theorem stmt_dep), so local helper is correct. No compile (no change)."
+ }
+}

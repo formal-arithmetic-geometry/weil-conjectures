@@ -1,0 +1,276 @@
+{
+ "id": "lem-per-formal-completion-reduction-dictionary",
+ "kind": "statement",
+ "title": "Infinitesimal quotients on arbitrary affine charts of a formal completion",
+ "statement": "Let $X$ be a Noetherian scheme, meaning a scheme with a finite affine cover by spectra of Noetherian rings [pqf-def-locnoeth, def-weil-pbc-noetherian-ring], and let $\\mathcal I\\subseteq\\mathcal O_X$ be a coherent ideal [pqf-def-coherent]. Let $X_n$ be the closed subscheme defined by $\\mathcal I^n$, with structure sheaf $\\mathcal O_X/\\mathcal I^n$ [def-weil-closed-immersion]. For an affine $V=\\operatorname{Spec}A\\subseteq X$ put $I=\\mathcal I(V)$ and $C=\\varprojlim_{n\\geq1}A/I^n$ [def-weil-pbc-adic-completion]. The ringed spaces $\\operatorname{Spf}C$ glue to a locally Noetherian adic formal scheme $\\mathfrak X$ with underlying space $|X_1|$. Here $\\operatorname{Spf}C$ has the primes containing $IC$, with the subspace topology from $\\operatorname{Spec}C$ and sheaf $\\varprojlim_n\\mathcal O_{\\operatorname{Spec}(C/(IC)^n)}$. The kernel of the map $\\mathcal O_{\\mathfrak X}\\to\\mathcal O_{X_1}$ is a coherent ideal of definition $\\mathfrak J$; on these charts it is associated to $IC$. For every formal affine open $U=\\operatorname{Spf}R\\subseteq\\mathfrak X$, where $R$ is Noetherian, complete and separated for a finitely generated ideal $K$, there is a finitely generated ideal $J\\subseteq R$ whose associated completed ideal sheaf is $\\mathfrak J|_U$; the powers of $J$ define the same topology as those of $K$, the canonical map $R\\to\\varprojlim_nR/J^n$ is an isomorphism, and $\\operatorname{Spec}(R/J^n)$ is canonically the restriction of $X_n$ to the open subset $|U|\\subseteq|X_n|$ for every $n\\geq1$. These identifications respect the quotient transition maps. No quasi-excellence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/formal-spaces.tex",
+  "place": "Tags 0AHY (section-formal-schemes-EGA, formal spectra and sheaves), 0GXU (definition-completion-subspace), 0GXX (lemma-affine-formal-completion-subspace-types), 0GXY (lemma-formal-completion-subspace-types). Coherent ideal and arbitrary formal affine quotient dictionary: EGA I, §10.8, §10.10 (archival copy WANTED); EGA III.1 §5.1.1 explicitly recalls coherence of completed coherent modules. This supporting statement includes the affine ideal correspondence needed to pass beyond the chosen completion cover."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-adic-completion",
+  "def-per-adic-formal-geometry",
+  "lem-per-noetherian-formal-affine-coherent-modules"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine $V=\\operatorname{Spec}A$. Its ring is Noetherian, and $I=\\mathcal I(V)$ is finite. The affine product-and-quotient dictionary gives $\\mathcal I^n(V)=I^n$ and $X_n|_V=\\operatorname{Spec}(A/I^n)$. The completion $C$ is Noetherian, complete and separated for $IC$, and its projection gives $C/(IC)^n\\cong A/I^n$ for every positive $n$. All these isomorphisms are induced by the projections, so commute with quotient transitions. Apply the completion theorem to the module $A$; its module isomorphisms are ring isomorphisms because the projections preserve multiplication.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA; explicit assembly of completion charts and coherent ideals"
+   }
+  },
+  {
+   "text": "On $Z=|X_1|$ form the ring sheaf $\\mathcal O=\\varprojlim_n\\mathcal O_{X_n}$, with componentwise operations. Limits are sectionwise (the index category is the small category of positive integers). Restriction to $Z\\cap V$ gives the inverse limit of the structure sheaves of $\\operatorname{Spec}(A/I^n)$, hence, by Step 1, precisely $\\operatorname{Spf}C$. This constructs all charts inside one ringed space; their identifications on overlaps are restrictions of the same sheaf, so satisfy the cocycle identity even when $V\\cap V\\prime$ is not affine. The charts from a finite affine cover of $X$ cover $Z$, proving the locally Noetherian adic formal-scheme assertion.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-per-adic-formal-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA; explicit assembly of completion charts and coherent ideals"
+   }
+  },
+  {
+   "text": "Let $\\pi_n:\\mathcal O\\to\\mathcal O_{X_n}$ be the projections. On a completion chart $\\operatorname{Spf}C$, apply the formal affine module equivalence to $0\\to(IC)^n\\to C\\to C/(IC)^n\\to0$. Since this quotient is killed by $(IC)^n$, its completed associated sheaf is its ordinary associated sheaf on $V(IC)$: its quotient system is constant for indices at least $n$. Thus $\\pi_n$ is surjective and its kernel is $((IC)^n)^\\triangle$. In particular $\\mathfrak J=\\ker\\pi_1$ is locally $(IC)^\\triangle$ and coherent. Tensor compatibility and exactness identify its $n$th image power with $((IC)^n)^\\triangle$. Therefore globally $\\ker\\pi_n=\\mathfrak J^n$ and $\\mathcal O/\\mathfrak J^n=\\mathcal O_{X_n}$. On these charts $IC$ is an ideal of definition; this is a local property, so $\\mathfrak J$ is an ideal of definition.",
+   "uses": [
+    "lem-per-noetherian-formal-affine-coherent-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA; explicit assembly of completion charts and coherent ideals"
+   }
+  },
+  {
+   "text": "Now take any formal affine $U=\\operatorname{Spf}(R,K)$. Restrict $\\mathfrak J\\hookrightarrow\\mathcal O$ to $U$ and apply the exact equivalence and its specified global-sections quasi-inverse. It gives an injection of a finite module into $R$, hence a finitely generated ideal $J=\\Gamma(U,\\mathfrak J)\\subseteq R$, and an identification $J^\\triangle=\\mathfrak J|_U$ respecting the inclusion. Images of multiplication maps correspond under the tensor-compatible exact equivalence, so $(J^n)^\\triangle=(\\mathfrak J|_U)^n$. In particular $(R/J^n)^\\triangle=(\\mathcal O/\\mathfrak J^n)|_U$, with their actual quotient maps.",
+   "uses": [
+    "lem-per-noetherian-formal-affine-coherent-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA; explicit assembly of completion charts and coherent ideals"
+   }
+  },
+  {
+   "text": "Let $x\\in U$ have prime $\\mathfrak p_x\\supseteq K$ of $R$ and stalk $\\mathcal O_x$ with maximal ideal $\\mathfrak m_x$. (i) If $f\\in R$, $f\\notin\\mathfrak p_x$, the principal-refinement theorem makes restriction to $D(f)\\cap U$ the map $R\\to R_f\\to R_{\\{f\\}}$, so $f$ is invertible there and $f_x\\notin\\mathfrak m_x$. (ii) If $k\\in K$, then $k_x\\in\\mathfrak m_x$: it maps to $0$ in the nonzero stalk $(R/K)_{\\mathfrak p_x}$ of the first projection $\\mathcal O|_U\\to\\mathcal O_{\\operatorname{Spec}(R/K)}$. By Step 3, $\\mathfrak J_x$ is the kernel of the surjection $\\mathcal O_x\\to\\mathcal O_{X_1,x}$ onto a nonzero local ring; so $\\mathfrak J_x\\subseteq\\mathfrak m_x$, and $\\mathfrak m_x$ maps into the maximal ideal. By (i), each $j\\in J=\\mathfrak J(U)$ lies in every prime containing $K$, so $J\\subseteq\\sqrt K$ by the radical lemma. Conversely, $U$ is covered by its intersections with the completion charts $\\operatorname{Spf}C$, and principal opens $D(t)\\cap\\operatorname{Spf}C$ form a basis there; as $|U|\\cong\\operatorname{Spec}(R/K)$ is quasi-compact, choose finitely many $W_i=D(t_i)\\cap\\operatorname{Spf}C_i\\subseteq U$ covering $U$. By Step 1, $X_1$ over $V_i$ is $\\operatorname{Spec}(C_i/IC_i)$, so $\\Gamma(W_i,\\mathcal O_{X_1})=B_i=(C_i/IC_i)_{t_i}$, whose primes are the points of $W_i$. For $k\\in K$, (ii) puts the image of $k$ in $B_i$ in every prime, so it is nilpotent (radical lemma for the zero ideal): $k^{N_i}|_{W_i}\\in\\ker(\\mathcal O(W_i)\\to\\mathcal O_{X_1}(W_i))=\\mathfrak J(W_i)$. For $N=\\max N_i$ the sheaf property of $\\mathfrak J\\subseteq\\mathcal O$ gives $k^N\\in J$, so $K\\subseteq\\sqrt J$. As $K$ and $J$ are finitely generated, the power lemma gives $a,b\\geq1$ with $K^a\\subseteq J$ and $J^b\\subseteq K$; taking powers gives cofinality of the two filtrations on $R$. Only the ringed-space chart isomorphism of $U$ is used, no topology on $\\mathcal O$.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00E0 (lemma-Zariski-topology) (7) and Lemma Tag 00IM (lemma-Noetherian-power) for radicals and powers; formal-spaces.tex Tag 0AHY (section-formal-schemes-EGA), sections on D(f) and local stalks, for the formal charts"
+   }
+  },
+  {
+   "text": "Cofinality proves $J$-adic completeness directly. For a compatible family $x_n\\in R/J^n$, choose representatives $r_n\\in R$. For $m\\geq n$, $r_m-r_n\\in J^n$. Since $J^{bt}\\subseteq K^t$, these representatives are $K$-Cauchy and have a unique limit $r\\in R$. To check $r\\bmod J^n=x_n$, choose $t$ with $K^t\\subseteq J^n$ (use $K^{an}\\subseteq J^n$); a sufficiently late $r_m$ agrees with $r$ modulo $K^t$ and with $r_n$ modulo $J^n$. Thus $r-r_n\\in J^n$. If $r$ maps to zero, then $r\\in\\bigcap J^n\\subseteq\\bigcap K^t=0$. This proves that the canonical map $R\\to\\varprojlim R/J^n$ is a ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA; explicit assembly of completion charts and coherent ideals"
+   }
+  },
+  {
+   "text": "Because $K^{an}\\subseteq J^n$, the $K$-adic quotient system of $R/J^n$ is eventually constant. Therefore $(R/J^n)^\\triangle$ is the ordinary structure sheaf of $\\operatorname{Spec}(R/J^n)$ on the common space $V(J)=V(K)$. Step 4 and $\\mathcal O/\\mathfrak J^n=\\mathcal O_{X_n}$ identify this ringed space with the restriction of $X_n$ to $|U|$. These are isomorphisms of schemes because they identify the ordinary locally ringed spaces. For $m\\geq n$, both maps to level $n$ are induced by $\\pi_n$ and $R\\twoheadrightarrow R/J^n$: they send a local residue of $r$ at level $m$ to the residue of the same $r$ at level $n$. These residues generate on principal opens, so the maps agree as sheaf maps. No quasi-excellence assumption entered any step.",
+   "uses": [
+    "lem-per-noetherian-formal-affine-coherent-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA; explicit assembly of completion charts and coherent ideals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-per-adic-formal-geometry",
+  "lem-per-noetherian-formal-affine-coherent-modules",
+  "lem-per-formal-affine-principal-refinement",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-fg-ideal-radical-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-spaces.tex",
+  "place": "Tag 0AHY and Tags 0GXU, 0GXX, 0GXY; explicit ringed-space assembly using the separately stated formal-affine coherent-module theorem (EGA I archival text unavailable)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-completion-reduction-dictionary: the coherent ideal of a noetherian scheme defines an ideal of definition on its formal completion and every affine formal open has affine quotient equal to the closed subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → ↑X.affineOpens → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → I.subscheme.AffineOpenCover\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ admits an affine open cover constructed by taking, for each affine open subset \"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The data defining an ideal sheaf on a scheme, which is a sheaf of ideals on the structure sheaf $\\\\mathcal{O}_X$ of the scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op U))], TopologicalSpace.NoetherianSpace ↥↑U\", \"doc\": \"If $ U $ is an affine open subset of a scheme $ X $ and the ring of global sections $ \\\\Gamma(U) $ is Noetherian, then the underlying topological space of $ U $ is a Noetherian topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme ideal sheaves, adic module operations and local-ring instances do not state the formal-scheme or quasi-excellence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Ideal\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AdicCompletion.instSMulQuotientIdealHSMulTopSubmodule\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_3} [AddCommGroup M] [Module R M] : SMul (R ⧸ I • ⊤) (M ⧸ I • ⊤)\", \"doc\": \"Scalar multiplication of `R ⧸ (I • ⊤)` on `M ⧸ (I • ⊤)`. This is used in order to have\\ngood definitional behaviour for the module instance on adic completions\"}\n  {\"name\": \"AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_3} [AddCommGroup M] [Module R M] : Module (R ⧸ I • ⊤) (M ⧸ I • ⊤)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_3} [AddCommGroup M] [Module R M] : IsScalarTower R (R ⧸ I • ⊤) (M ⧸ I • ⊤)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.Ideal.mk_eq_mk\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {m n : ℕ} (hmn : m ≤ n) (r : AdicCompletion.AdicCauchySequence I R) : (Ideal.Quotient.mk (I ^ m)) (↑r n) = (Ideal.Quotient.mk (I ^ m)) (↑r m)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.transitionMap_ideal_mk\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {m n : ℕ} (hmn : m ≤ n) (x : R) : (AdicCompletion.transitionMap I R hmn) ((Ideal.Quotient.mk (I ^ n • ⊤)) x) = (Ideal.Quotient.mk (I ^ m • ⊤)) x\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_2} [AddCommGroup M] [Module R M] {N : Type u_3} [AddCommGroup N] [Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n) : AdicCompletion.transitionMap I N hmn ∘ₗ ↑R ((LinearMap.reduceModIdeal (I ^ n)) f) = ↑R ((LinearMap.reduceModIdeal (I ^ m)) f)\", \"doc\": \"\"}\n  {\"name\": \"instIsPrincipalIdealRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib.NumberTheory.NumberField.Completion.FinitePlace\", \"type\": \" (A : Type u_1) [CommRing A] [IsDedekindDomain A] (K : Type u_2) [Field K] [Algebra A K] [IsFractionRing A K] (v : IsDedekindDomain.HeightOneSpectrum A) : IsPrincipalIdealRing ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instIsLocalRingMaximalIdealOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.LocalRing\", \"type\": \" {R : Type u_1} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal R) R)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instIsAdicCompleteMaximalIdeal\", \"module\": \"Mathlib.RingTheory.AdicCompletion.LocalRing\", \"type\": \" {R : Type u_1} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : IsAdicComplete (IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal R) R)) (AdicCompletion (IsLocalRing.maximalIdeal R) R)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.spanFinrank_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.AdicCompletion.LocalRing\", \"type\": \" {R : Type u_1} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : Submodule.spanFinrank (IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal R) R)) = Submodule.spanFinrank (IsLocalRing.maximalIdeal R)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instIsLocalHomMaximalIdealRingHomAlgebraMapOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.LocalRing\", \"type\": \" {R : Type u_1} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : IsLocalHom (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R))\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.maximalIdeal_eq_map\", \"module\": \"Mathlib.RingTheory.AdicCompletion.LocalRing\", \"type\": \" {R : Type u_1} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal R) R) = Ideal.map (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R)) (IsLocalRing.maximalIdeal R)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme ideal sheaves, adic module operations and local-ring instances do not state the formal-scheme or quasi-excellence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bFormalScheme\\b|\\bSpf\\b|formal.*scheme.*quotient|ideal.of.definition",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme ideal sheaves, adic module operations and local-ring instances do not state the formal-scheme or quasi-excellence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-formal-completion-reduction-dictionary: coherent ideals of definition on noetherian formal schemes correspond to ideals on affine charts with scheme quotient Spec R mod J",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a scheme $X$ with ideal sheaf data and an affine open subset $U$ of $X$, this function returns the ideal in the ring of sections $\\\\mathcal{O}_X(U)$ corresponding to the ideal sheaf data restricted\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.nilradical\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(X : Scheme.{u}) : IdealSheafData X\", \"doc\": \"The nilradical of a scheme $X$ is the ideal sheaf obtained by taking the radical of the trivial ideal sheaf (the bottom element) on $X$. This corresponds to the sheaf of ideals consisting of nilpotent\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) : Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(ideal : ∀ U : X.affineOpens, Ideal Γ(X, U))\\n  (map_ideal_basicOpen :\\n    ∀ (U : X.affineOpens) (f : Γ(X, U)),\\n      (ideal U).map (X.presheaf.map (homOfLE <| X.basicOpen_le f).op).hom = ideal (X.affineBasicOpen f))\\n  (supportSet : Set X)\\n  (supportSet_inter : ∀ U : X.affineOpens, ∀ x ∈ U.1, x ∈ sup\", \"doc\": \"Given a scheme $X$, this constructor defines ideal sheaf data by specifying: (1) a family of ideals $\\\\mathfrak{a}_U \\\\subseteq \\\\Gamma(X, U)$ for each affine open subset $U \\\\subseteq X$; (2) compatibili\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme ideal sheaves, adic module operations and local-ring instances do not state the formal-scheme or quasi-excellence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-completion-reduction-dictionary: infinitesimal neighborhoods X modulo powers of an ideal restrict on any formal affine chart to Spec R modulo powers of an ideal of definition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → ↑X.affineOpens → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → (U : ↑X.affineOpens) → I.glueDataObj U ⟶ ↑↑U\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, this morphism is defined as the composition of the canonical ring homomorphism $\\\\mathcal{O}_X(U) \\\\to \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  CategoryTheory.CategoryStruct.comp (I.glueDataObjι U) (↑U).ι =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U))))\\n      (AlgebraicGeometry.IsAffineOpen\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the composition of the gluing morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal{I}(U)) \\\\to U$ with\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (I : X.IdealSheafData) →\\n    (U : ↑X.affineOpens) →\\n      I.subscheme.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map I.subschemeι.base).obj ↑U)) ≅\\n        { carrier := ↑(X.presheaf.obj (Opposite.op ↑U)) ⧸ I.ideal U, commRing := Ideal.Quotient.commRing (I.id\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the global sections of the subscheme's structure sheaf over the intersection with $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (I : X.IdealSheafData) → {U V : ↑X.affineOpens} → U ≤ V → (I.glueDataObj U ⟶ I.glueDataObj V)\", \"doc\": \"For affine open subsets $U \\\\subseteq V$ of a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, this morphism is induced by the quotient map $\\\\mathcal{O}_X(V)/\\\\mathcal{I}(V) \\\\to \\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.Scheme.Hom.app I.subschemeι ↑U =\\n    CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U))) (I.subschemeObjIso U).inv\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the component of the canonical morphism $ \\\\iota: \\\\text{Subscheme}(\\\\mathcal{I}) \\\\to X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjCarrierIso\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (I : X.IdealSheafData) →\\n    (U : ↑X.affineOpens) →\\n      ↑(I.glueDataObj U).toPresheafedSpace ≅\\n        { carrier := ↑(X.zeroLocus ↑(I.ideal U) ∩ ↑↑U), str := instTopologicalSpaceSubtype }\", \"doc\": \"For any scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, there is a homeomorphism between the topological space underlying the local model $\\\\operatorname{Spec}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → I.subscheme.AffineOpenCover\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ admits an affine open cover constructed by taking, for each affine open subset \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme ideal sheaves, adic module operations and local-ring instances do not state the formal-scheme or quasi-excellence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "formalCompletion|FormalScheme|Spf|ideal.of.definition",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-formal-completion-reduction-dictionary: any affine formal open of a formal completion has quotients equal to the restricted infinitesimal neighborhoods",
+   "results": "Hits read: AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.affineOpensRestrict, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f. Ordinary schemes, algebraic completion or general module facts; none states coherent sheaves on a formal spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Ideal\"",
+   "results": "Hits read: AdicCompletion.instSMulQuotientIdealHSMulTopSubmodule, AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule, AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule, AdicCompletion.Ideal.mk_eq_mk, AdicCompletion.transitionMap_ideal_mk, AdicCompletion.transitionMap_comp_reduceModIdeal, instIsPrincipalIdealRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, AdicCompletion.instIsLocalRingMaximalIdealOfIsNoetherianRing. Ordinary schemes, algebraic completion or general module facts; none states coherent sheaves on a formal spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-completion-reduction-dictionary: infinitesimal quotients of a Noetherian formal completion on arbitrary affine formal opens are Spec R modulo powers of the completed coherent ideal",
+   "results": "Hits read: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AdicCompletion.evalₐ, IsAdicComplete.henselianRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AdicCompletion.flat_of_isNoetherian, AdicCompletion.of_apply, AlgebraicGeometry.Scheme.Hom.liftQuotient, BDeRhamPlus. Ordinary schemes, algebraic completion or general module facts; none states coherent sheaves on a formal spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-completion-reduction-dictionary: gluing adic spectra of completed rings along a coherent ideal and identifying closed subschemes modulo its powers",
+   "results": "Hits read: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjCarrierIso, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.Scheme.GlueData.gluedScheme. Ordinary schemes, algebraic completion or general module facts; none states coherent sheaves on a formal spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-quasi-excellent-formal-affines",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3 via Temkin §2.4.1 closed fibre and §2.4.3 completion: the underlying infinitesimal quotient dictionary, independently of quasi-excellence.",
+   "via": [
+    "lem-per-quasi-excellent-formal-affines",
+    "lem-per-regular-morphism-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-formal-completion-reduction-dictionary",
+  "worker": "stage1",
+  "summary": "Construct the common inverse-limit ring sheaf, identify completion charts, derive the coherent kernel and its powers, then use the general coherent-module correspondence on an arbitrary formal affine; prove cofinality, completeness and transition compatibility explicitly. One new general formal-affine module theorem, no new clause restatements.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3, regular-local-model/purity branch via regular formal completion: supplies the infinitesimal quotient dictionary below the prescribed route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic affine scheme or Noetherian-completion tool; no theorem of the perverse unit supplies this commutative-algebra/formal-chart calculation."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-affine-sections-finite",
+    "why": "Generic affine scheme or Noetherian-completion tool; no theorem of the perverse unit supplies this commutative-algebra/formal-chart calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "why": "Generic affine scheme or Noetherian-completion tool; no theorem of the perverse unit supplies this commutative-algebra/formal-chart calculation."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic affine scheme or Noetherian-completion tool; no theorem of the perverse unit supplies this commutative-algebra/formal-chart calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-ed1280836",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-ed1280836 (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps), the new node lem-per-noetherian-formal-affine-coherent-modules, every cited statement, and the sources Stacks formal-spaces 0AHY section and Algebra 00E0, 00IM, 05GG, 0316. EGA I is absent from literature/ega, so the WANTED is correct. The item statement is identical to the live, still unsplit node. No repair note applies. ONE FAULT, repaired (E1/E5, Step 5): the step used 'charts of the adic formal scheme with its sheaf of topological rings as in Tag 0AHY' to get cofinal powers of J and K. But def-per-adic-formal-geometry and the parent lem-per-quasi-excellent-formal-affines define formal affine opens as ringed-space isomorphisms only, so this adds a hypothesis. The statement is still true because the topology is intrinsic, and the corrected Step 5 proves it from the ringed space alone. (i) If f is not in p_x, f is invertible on D(f)∩U by principal-refinement (R→R_f→R_{f}). (ii) If k is in K, k_x is a non-unit, since it maps to 0 in (R/K)_p. The stalk of 𝔍 at x lies in m_x (kernel of a surjection onto the nonzero O_{X_1,x}), so J⊆√K by lem-weil-pbc-zero-locus-eq-iff-radical-eq. Conversely, take finitely many W_i=D(t_i)∩Spf C_i covering U (basis + quasi-compactness). On W_i the image of k in Γ(W_i,O_{X_1})=(C_i/IC_i)_{t_i} lies in every prime, so it is nilpotent; with the sheaf property this gives K⊆√J. lem-weil-pbc-fg-ideal-radical-power then gives K^a⊆J and J^b⊆K. The new uses are Mathlib-status pbc leaves, so tool_uses does not change; proof_deps is the union of the step uses. The corrected Step 5 is 1881 characters. Steps 1-4, 6 and 7 were checked against the cited statements (completion kernel I^nC=(IC)^n, sectionwise limit on |X_1|, exactness and tensor compatibility for kernel powers, mono-reflection giving J, the Cauchy completeness argument, the eventually constant quotient system) and are correct. The new node is true (EGA I 10.10.2, 10.10.5). Small cases checked: K=0, Z_p, k[[x,y]] with K=(x), zero module, zero ring. It is self-contained and statement-only, has no duplicate in the DAG (the 087W pbc systems are on ordinary schemes), and is not a clause of the item. Fixed file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-formal-completion-reduction-dictionary.json (Step 5 text, uses and source, plus proof_deps). Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
+}

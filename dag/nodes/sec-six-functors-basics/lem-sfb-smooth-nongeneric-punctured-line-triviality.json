@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+ "kind": "statement",
+ "title": "Punctured local line bundles at nongeneric smooth-fibre points",
+ "statement": "Let $S$ and $X$ be schemes [def-pc-scheme], with $S$ locally Noetherian [pqf-def-locnoeth] and normal, meaning that all its local rings are integrally closed domains [def-weil-pbc-normal-ring]. Let $f:X\\to S$ be smooth [def-sbc-smooth-morphisms]. For $s\\in S$ let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-fibre-product, def-weil-residue-field]. Let $x\\in X$ and let $\\bar x\\in X_{f(x)}$ be its corresponding fibre point. Assume $\\dim\\mathcal O_{X,x}\\ge2$ [def-weil-pbc-krull-dimension-ring] and that $\\bar x$ is not the generic point of any irreducible component of $X_{f(x)}$ [def-sc-generic-point, def-weil-irreducible-components]. Put $R=\\mathcal O_{X,x}$, let $\\mathfrak m$ be its maximal ideal, and put $U=\\operatorname{Spec}R\\setminus\\{\\mathfrak m\\}$ [def-weil-affine-spectrum, def-weil-open-immersion]. Every invertible $\\mathcal O_U$-module [def-sc-invertible-module] is isomorphic to $\\mathcal O_U$. Neither closedness of $x$ in its fibre nor finiteness of $\\kappa(x)/\\kappa(f(x))$ is assumed.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4, Proposition 21.14.3(i), FIRST assertion, its punctured-spectrum invertible-module consequence of parafactoriality (definition 21.13.1 and local interpretation 21.13.8). This is not the second, prime-cycle assertion. Read online in the English EGA translation; local EGA IV4 WANTED. No Stacks tag states this smooth parafactoriality theorem.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-closure-fibre-avoidance-neighbourhood] at $x$. It gives $T=\\operatorname{Spec}A$ with $A$ a Noetherian normal domain, an affine smooth finite-presentation neighbourhood $V=\\operatorname{Spec}B$, and $Z=\\overline{\\{x\\}}\\cap V$ avoiding all fibre components and of local codimension at least two on the generic fibre. Work on this $V$; its stalk at $x$ is the original $R$. These are precisely the closed-pair hypotheses of [lem-sfb-normal-arithmetic-closed-pair-approximation]. No excellence of the original base has been inferred.",
+   "uses": [
+    "lem-sfb-smooth-closure-fibre-avoidance-neighbourhood",
+    "lem-sfb-normal-arithmetic-closed-pair-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Proposition 21.14.3, first paragraph of proof of (i), followed by the affine reduction in proof of (ii)."
+   }
+  },
+  {
+   "text": "Let $\\mathcal L$ be any invertible module on $U$. Let $\\mathfrak r\\subset B$ correspond to $x$, so $R=B_{\\mathfrak r}$. The principal affine neighbourhoods $D(t)$, $t\\notin\\mathfrak r$, form a small directed system under reverse inclusion. Put $W_t=D(t)\\setminus Z$. Its limit is $U$: localization gives $\\varinjlim_{t\\notin\\mathfrak r}B_t=B_{\\mathfrak r}$, and the inverse image of $V(\\mathfrak r)$ consists exactly of the maximal prime $\\mathfrak rR$, since a prime contained in $\\mathfrak r$ contains $\\mathfrak r$ only if it equals it. This limit identification is checked on the finite cover by principal opens for a finite generating set of $\\mathfrak r$. Every $W_t$ is a quasi-compact separated open of a Noetherian affine scheme, and the transition maps are restrictions of principal open immersions, hence affine. By [lem-trf-invertible-affine-limit-descent], $\\mathcal L$ descends to an invertible module $\\mathcal L_W$ on some $W_t$. Replace $V$ by $D(t)$ and $Z$ by its intersection. Fibre-component avoidance and the generic-fibre dimension bound persist on an open subset.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-trf-invertible-affine-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Proposition 21.13.10, first implication, descent from punctured local spectra using IV3 8.5.2 and 8.5.5; explicit localization identification."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-arithmetic-closed-pair-approximation] to this affine pair $(V,Z)$ over $A$. Write its arithmetic models as $(V_i,Z_i)$ over $A_i$ and $W_i=V_i\\setminus Z_i$. The node gives a small directed index set, quasi-compact quasi-separated $W_i$, affine transitions and $W=\\varprojlim_iW_i$. Thus [lem-trf-invertible-affine-limit-descent] applies to $\\mathcal L_W$ and produces $i$ and an invertible module $\\mathcal L_i$ on $W_i$ whose pullback is $\\mathcal L_W$. Fix this stage. It is important that the normality of the local completions is asserted for $A_i$, not for $A$.",
+   "uses": [
+    "lem-sfb-normal-arithmetic-closed-pair-approximation",
+    "lem-trf-invertible-affine-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Proposition 21.14.3(ii), normal arithmetic approximation and passage of invertible modules to a finite stage, using IV3 8.5.2 and 8.5.5."
+   }
+  },
+  {
+   "text": "For each $z\\in Z_i$, apply [lem-sfb-smooth-pair-closed-fibre-local-preparation] to $V_i\\to T_i$ and $Z_i$. It supplies a closed specialization $y$ in the same fibre and local rings $A'=\\mathcal O_{T_i,s}$, $B'=\\mathcal O_{V_i,y}$ with a local adically formally smooth map, finite residue extension, $\\dim B'>\\dim A'$, prime $\\mathfrak p=\\mathfrak m_{A'}B'$, and $\\mathfrak q_z\\supsetneq\\mathfrak p$ with $B'_{\\mathfrak q_z}\\cong\\mathcal O_{V_i,z}$ and dimension at least two. The completion of $A'$ is a normal domain by [lem-sfb-normal-arithmetic-closed-pair-approximation]. All hypotheses of [lem-sfb-formally-smooth-ramanujam-samuel-localization] now hold, including $\\mathfrak q_z\\not\\subseteq\\mathfrak p$. It follows that every invertible module on the punctured spectrum of $\\mathcal O_{V_i,z}$ is trivial. Since $V_i$ is locally Noetherian and normal by [lem-sfb-smooth-normal-ascent], [lem-sfb-punctured-picard-local-extension-criterion] extends $\\mathcal L_i$ to an invertible module $\\mathcal M_i$ on $V_i$.",
+   "uses": [
+    "lem-sfb-smooth-pair-closed-fibre-local-preparation",
+    "lem-sfb-normal-arithmetic-closed-pair-approximation",
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-sfb-punctured-picard-local-extension-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Proposition 21.14.3(ii), final paragraph, using Corollary 21.14.2 and Proposition 21.13.10."
+   }
+  },
+  {
+   "text": "Pull $\\mathcal M_i$ back to $V$, obtaining $\\mathcal M$. The tensor formula in [def-pc-module-pullback] shows directly on trivializing opens that this is invertible and that its restriction pulled back to $U$ is $\\mathcal L$. By [def-sc-invertible-module], some open neighbourhood $H$ of $x$ in $V$ trivializes $\\mathcal M$. Every point in the image of $\\operatorname{Spec}R\\to V$ is a generalization of $x$, so lies in $H$; the map factors through this open. Pulling the chosen trivialization back to $U$ gives $\\mathcal L\\cong\\mathcal O_U$. The finite residue extension used in step 4 belongs to $y$ at the arithmetic stage; neither closedness nor a finite residue extension at the original $x$ was used.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "Propositions 21.13.10 and 21.14.3(i), conclusion by pulling an extension back and trivializing at the local point."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-closure-fibre-avoidance-neighbourhood",
+  "lem-sfb-normal-arithmetic-closed-pair-approximation",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-sfb-smooth-pair-closed-fibre-local-preparation",
+  "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-sfb-punctured-picard-local-extension-criterion",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega-iv4.pdf",
+  "place": "Agent assembly following EGA IV4 Proposition 21.14.3, first assertion via (ii), with 21.13.10 and 21.14.2, read in the online English translation. Local EGA IV4 WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism over normal Noetherian base local ring at nongeneric fiber point dimension at least two has trivial Picard group of punctured spectrum",
+   "results": "[leanfinder] OK 8 hit(s). RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.IsStandardSmoothOfRelativeDimension.localization_away; Algebra.IsStandardSmoothOfRelativeDimension; Algebra.IsSmoothAt.exists_notMem_smooth; Algebra.IsStandardSmoothOfRelativeDimension.id; Algebra.smoothLocus Read the hits: smooth-algebra chart and spectrum/structure-sheaf declarations do not assert punctured-spectrum line-bundle triviality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"IsLocalRing\"",
+   "results": "[loogle] OK 0 hit(s). No hits. Read the hits: smooth-algebra chart and spectrum/structure-sheaf declarations do not assert punctured-spectrum line-bundle triviality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|punctured.*[Pp]icard|[Pp]icard.*punctured",
+   "results": "[grep] OK 0 hit(s). No hits. Read the hits: smooth-algebra chart and spectrum/structure-sheaf declarations do not assert punctured-spectrum line-bundle triviality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles on the punctured spectrum of a smooth local algebra over a normal ring are trivial away from generic fiber points",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.structureSheafInType; Algebra.smoothLocus; Algebra.smoothLocus_eq_univ; AlgebraicGeometry.Spec.locallyRingedSpaceObj; AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway; AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen; AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk; AlgebraicGeometry.stalkClosedPointIso Read the hits: smooth-algebra chart and spectrum/structure-sheaf declarations do not assert punctured-spectrum line-bundle triviality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Parafactoriality at points of a smooth scheme that are not generic in their fiber",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk; Algebra.smoothLocus; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk; AlgebraicGeometry.IsSmoothOfRelativeDimension Read the hits: smooth-algebra chart and spectrum/structure-sheaf declarations do not assert punctured-spectrum line-bundle triviality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Parafactoriality at nongeneric points of a smooth morphism over a normal Noetherian scheme",
+   "results": "Hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmooth_iff, Algebra.smoothLocus Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"IsLocalRing\"",
+   "results": "No hits. Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|punctured.*[Pp]icard|[Pp]icard.*punctured",
+   "results": "No hits. Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles on punctured spectra of smooth local rings over normal bases",
+   "results": "Hits: AlgebraicGeometry.structureSheafInType, AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Spec.structureSheaf, AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf', AlgebraicGeometry.LocallyRingedSpace, AlgebraicGeometry.Spec.locallyRingedSpaceObj, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.isLocalization_away_of_isAffine Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ramanujam-samuel-prime-divisor",
+  "date": "2026-10-24",
+  "group": "Q139"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction.",
+   "via": [
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+  "worker": "stage1",
+  "summary": "Q05: statement unchanged. Followed EGA IV4 21.14.3(i), first assertion, via normal arithmetic models of a fibre-avoiding closed pair. Five statement-only inputs expose the neighbourhood, approximation, closed specialization, local Ramanujam--Samuel theorem, and local extension criterion; existing limit descent is reused. Distinguished finite residue extensions at auxiliary closed fibre points from the arbitrary original point. Read all cited statements and checked the degenerate and singular-base cases. No Mathlib leaves or attachment.",
+  "blueprint": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. This split supplies its lower punctured-local invertible-module input by the EGA first-assertion route. The current latest direct-images unit proof (3) is unchanged; no imported ancestor was found by blueprint_refs.py. Inherited null from.node and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-invertible-affine-limit-descent",
+    "why": "Generic inverse-limit descent of invertible modules (Stacks 0B8W), used twice on explicitly small qcqs systems with affine transitions. No node of this unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-invertible-affine-limit-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-5460ad8d5",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-5460ad8d5 (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes, every cited statement and the parent ramanujam-samuel-prime-divisor in full; review in review.md. EGA IV4 is not in literature/ and this reviewer has no network access, so I could not check the EGA place strings against the text; WANTED and proof_origin=agent are correct. Instead each new statement was checked mathematically. Neighbourhood node: Chevalley upper semicontinuity of dim_ζ Z_t gives a closed bad set that misses x; the generic codimension holds because s=η gives dim O_{V,x}>=2 and s≠η gives Z_η empty. Approximation node: a normal domain is the union of normal finitely generated Z-subalgebras, which are excellent, so their completions are normal domains; a constructible bad fibre set with empty preimage vanishes at some stage. Preparation node: κ(y) finite over κ(s), dim B > dim A, m_A B prime because the smooth fibre is regular, q_z strictly contains p, dim >=2. Ramanujam-Samuel node (21.14.1/2): tested on a field, a DVR and the A1-singularity base; the condition q not contained in p is necessary. Extension criterion (21.13.10): proved by depth 2 and Noetherian induction. The item was tested on the A1-singularity base, where the non-Cartier divisor fails at the fibre-generic prime, so the non-generic hypothesis is necessary. Steps 1-5 check hypothesis by hypothesis: the descent-node hypotheses hold for both limit systems, avoidance persists on D(t), and the pullback to the puncture uses (hg)^*=g^*h^*. proof_deps equals the union of uses and there is no cycle. Duplicate searches over parafactorial, Ramanujam and punctured nodes, plus the listed candidates, found no duplicate. No SGA is cited. Batch 5: lem-trf-invertible-affine-limit-descent is generic Stacks 0B8W(2) limit descent. Its dependencies are generic limit and tensor nodes; it is neither the trace-formula nor the Poincaré-duality assumption, nor a step of their proofs, so it is accepted as a declared tool use. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothNongenericPuncturedLineTriviality",
+  "declaration": "AlgebraicGeometry.smooth_nongeneric_punctured_line_triviality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothNongenericPuncturedLineTriviality.lean",
+  "statement": "theorem smooth_nongeneric_punctured_line_triviality {S X : Scheme.{u}} [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (f : X ⟶ S) [Smooth f] (x : X) (hdim : 2 ≤ ringKrullDim (X.presheaf.stalk x)) (hng : ∀ C : Set (f.fiber (f x)), C ∈ irreducibleComponents (f.fiber (f x)) → ¬ IsGenericPoint (f.asFiber x) C) (L : (puncturedSpectrum (X.presheaf.stalk x)).toScheme.Modules) [L.IsInvertible] : Nonempty (L ≅ SheafOfModules.unit _)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3be4ed8db",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Clause-by-clause match: Scheme.{u}; IsLocallyNoetherian S; hS = stalk IsDomain ∧ IsIntegrallyClosed (recorded inline normal form); [Smooth f]; f.fiber (f x) = pullback along fromSpecResidueField; f.asFiber x canonical fibre point; 2 ≤ ringKrullDim stalk; ∀ C ∈ irreducibleComponents, ¬IsGenericPoint; upstream puncturedSpectrum = {closedPoint}ᶜ for any local ring; recorded Scheme.Modules.IsInvertible; Nonempty (L ≅ unit). No extra assumptions (no excellence/regularity/closedness/finite residue extension). Only item lean field changed; 12 stmt_dep records identical to side-live; statement verbatim; plain imports = the 3 proof_deps with lean modules; sorry-only; docstrings carry source place, blueprint id and the 5 proof steps; lines ≤100; worker report and Second reading sections present; no competing landing. No file changed, so no compile. No findings."
+ }
+}

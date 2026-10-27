@@ -1,0 +1,242 @@
+{
+ "id": "lem-trf-free-log-chart-ordinary-parameters",
+ "kind": "statement",
+ "title": "Ordinary regular parameters in a free logarithmic chart",
+ "statement": "Let $(X,M,\\alpha)$ be a locally Noetherian log regular fs log scheme [def-trf-fs-log-blowup, pqf-def-locnoeth], with triviality locus $U\\subseteq X$. Let $e:W\\to X$ be an etale morphism [def-weil-etale-morphism] with $W$ affine and locally Noetherian, and suppose the inverse-image log structure on $W$ admits a chart $\\mathbf N^r\\to M|_W$, for $r\\ge0$. Write $t_1,\\ldots,t_r\\in\\Gamma(W,\\mathcal O_W)$ for its structural functions and $f=\\prod_{i=1}^r t_i$. Then the inverse-image log structure is log regular, $W$ is regular [def-weil-regular-scheme], and $e^{-1}(U)=D(f)$. For every $w\\in W$ and geometric point $\\bar w$ above it [def-weil-geometric-point], put $B=\\mathcal O_{W,w}$, $A=B^{\\mathrm{sh}}$ [def-weil-pbc-strict-henselization-limit], and $J=\\{i:t_i\\notin B^\\times\\}$. The characteristic monoid at $\\bar w$ is canonically $\\mathbf N^J$; the ideal of images of nonunits of the log stalk in $A$ is $(t_j:j\\in J)A$. The indexed list $(t_j)_{j\\in J}$ extends to a regular system of parameters both in $A$ and in $B$ [def-weil-pbc-regular-system-of-parameters]. In particular the ordinary-local assertion concerns the given functions on the actual etale chart. If $J$ is empty, $f$ is a unit in $B$; the empty product is $1$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.2 and 1.6--1.7, printed pp. 69--70; characteristic faces and descent of free chart parameters, extracted from returned proof steps 7--8."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "pqf-def-locnoeth",
+  "def-weil-etale-morphism",
+  "def-weil-regular-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-trf-log-etale-restriction-stalk-comparison",
+  "def-trf-log-regular-pair",
+  "def-trf-free-log-chart-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Apply etale_logRegular_restriction to obtain fine saturation, log regularity of N and equality of its triviality locus with the inverse-image locus.",
+   "uses": [
+    "lem-trf-etale-log-regular-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At every geometric point apply freeLogChart_strict_parameters to obtain the monomial-normalized characteristic isomorphism, transported ideal equality and the strict-coordinate parameter extension.",
+   "uses": [
+    "lem-trf-free-log-chart-strict-parameters"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strictLocal_parameters_descent to the list obtained by mapping the actual coordinate function over nonunitIndices. List.map_map identifies the lists in its hypothesis and conclusion with the strict and ordinary parameter lists of this theorem.",
+   "uses": [
+    "lem-trf-strict-local-parameter-descent",
+    "def-trf-free-log-chart-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each ordinary point choose the geometric point from an algebraic closure of its residue field. The ordinary list extension generates the maximal ideal with dim entries; spanFinrank <= number of distinct entries <= length proves regularity. Therefore W is a regular scheme.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the characteristic isomorphism to prove that the characteristic is subsingleton exactly when every coordinate is a unit. If a nonunit index existed, the constant zero and constant one functions on J would contradict subsingletonness; conversely an empty J makes the function monoid subsingleton. An algebraic-closure point detects the converse at each ordinary point. A ring homomorphism preserves finite products, and a finite product is a unit iff each factor is a unit. Scheme.mem_basicOpen_top now identifies the locus with the indicated basic open. The same product calculation proves the unit implication; r=0 gives an empty product equal to 1.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-log-regular-restriction",
+  "lem-trf-free-log-chart-strict-parameters",
+  "lem-trf-strict-local-parameter-descent",
+  "def-trf-free-log-chart-coordinates",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-basic-open-function"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.1--1.2, 1.6--1.7; original steps 1--6 factored into three intermediate statements. The Lean assembly proves the locus/product consequences and ordinary regularity explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a free monoid chart of a log regular scheme the nonunit chart coordinates extend to regular parameters in each ordinary local ring and the triviality locus is the basic open of their product.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.notMem_prime_iff_unit_in_stalk\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\\n  (x : ↑X.toTopCat),\\n  r ∉ (X.toΓSpecFun x).asIdeal ↔ IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.Γgerm x)) r)\", \"doc\": \"For a locally ringed space $X$, an element $r$ in its global sections $\\\\Gamma(X)$, and a point $x \\\\in X$, the element $r$ is not contained in the prime ideal associated to $x$ (defined as the preimage\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_basicOpen_top\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (f : ↑(X.presheaf.obj (Opposite.op ⊤))) (x : ↥X),\\n  x ∈ X.basicOpen f ↔ IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.germ ⊤ x trivial)) f)\", \"doc\": \"For a scheme $X$, a global section $f \\\\in \\\\Gamma(X, \\\\mathcal{O}_X)$, and a point $x \\\\in X$, the point $x$ lies in the basic open set $X_f$ if and only if the germ $f_x$ is a unit in the stalk $\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↥X) (hx : x ∈ U),\\n  x ∈ X.basicOpen f ↔ IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx)) f)\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, and a section $f$ of the structure sheaf over $U$, a point $x \\\\in U$ belongs to the basic open set $\\\\text{basicOpen}(U, f)$ if and only if the germ of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_basicOpen'\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↥U),\\n  ↑x ∈ X.basicOpen f ↔ IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U ↑x ⋯)) f)\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a point $x \\\\in U$, the point $x$ lies in the basic open set $X.\\\\text{basicOpen}(U,f\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))),\\n  IsUnit ((CategoryTheory.ConcreteCategory.hom (X.toToΓSpecMapBasicOpen r)) r)\", \"doc\": \"For a locally ringed space $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X)$, the restriction of $r$ to the basic open set $X_{D(r)}$ (the preimage of $D(r)$ under the $\\\\Gamma$-Spec ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mem_basicOpen''\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↥X),\\n  x ∈ X.basicOpen f ↔ ∃ (m : x ∈ U), IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x m)) f)\", \"doc\": \"For a scheme $X$, an open subset $U$, a section $f$ of the structure sheaf over $U$, and a point $x$ in $X$, the point $x$ lies in the basic open set $\\\\text{basicOpen}(U, f)$ if and only if the germ o\"}\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Etale",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Etale'\n",
+   "date": "2026-10-22",
+   "verdict": "query error: unknown identifier Etale; valid semantic searches inspected instead"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|logStructure.*chart|chart.*regularSystemOfParameters",
+   "results": "[grep] OK 0 hit(s)\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend a subset of regular parameters from a strict henselization to the original local ring by the cotangent space base change isomorphism.",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A log regular chart by the natural numbers to the r power has free characteristic at every point, indexed by the noninvertible coordinates, and those coordinates are part of a regular system of parameters.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (i : { w // w ≠ NumberField.Units.dirichletUnitTheorem.w₀ }),\\n  NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace\\n      (NumberField.mixedEmbedding.fundamentalCone.completeFamily K ↑i) =\\n    ↑((NumberField.Units.basisUnitLattice\", \"doc\": \"For each infinite place $ i \\neq w_0 $ of a number field $ K $, the logarithmic embedding of the complete family element $ \\\\text{completeFamily}(K, i) $ corresponds to the basis vector $ \\\\text{basisUni\"}\n  {\"name\": \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Subsingleton (Algebra.H1Cotangent R S)] {I : Type u_3}\\n  (b : Module.Basis I S Ω[S⁄R]), Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S) → Algebra.IsStandardSmoot\", \"doc\": \"If $ S $ is finitely presented over $ R $, the first cohomology group $ H^1 $ of the cotangent complex of $ S $ over $ R $ is trivial, and there exists a basis for the module of Kähler differentials $\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Module.Free S Ω[S⁄R]\", \"doc\": \"For a standard smooth algebra $ S $ over a commutative ring $ R $, the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free $ S $-module. This follows from the fact that standard smooth algebras \"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_eq\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K],\\n  NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace\\n      (NumberField.mixedEmbedding.fundamentalCone.completeFamily K NumberField.Units.dirichletUnitTheorem.w₀) =\\n    0\", \"doc\": \"For a number field $ K $ with a fixed infinite place $ w_0 $, the logarithmic embedding of the complete family of functions constructed from multiplicities at infinite places and inverse exponential m\"}\n  {\"name\": \"NumberField.Units.basisOfIsMaxRank_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/Regulator\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]\\n  {u : Fin (NumberField.Units.rank K) → (NumberField.RingOfIntegers K)ˣ} (hu : NumberField.Units.IsMaxRank u)\\n  (i : Fin (NumberField.Units.rank K)),\\n  (NumberField.Units.basisOfIsMaxRank hu) i = (NumberField.Units.logEmbedding K) (Additive.\", \"doc\": \"For a number field $ K $ with ring of integers $ \\\\mathcal{O}_K $, given a family $ u : \\\\mathrm{Fin}(r-1) \\\\to (\\\\mathcal{O}_K)^\\\\times $ of units (where $ r $ is the number of infinite places of $ K $) s\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"NumberField.Units.logEmbedding_fundSystem\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K] (i : Fin (NumberField.Units.rank K)),\\n  (NumberField.Units.logEmbedding K) (Additive.ofMul (NumberField.Units.fundSystem K i)) =\\n    ↑((NumberField.Units.basisUnitLattice K) i)\", \"doc\": \"For a number field $K$, the logarithmic embedding sends each fundamental unit $u_i$ (converted from multiplicative to additive structure) to the corresponding basis vector $v_i$ in the unit lattice $\\\\\"}\n\nInspected the returned types: none states this complete assertion. Monoid generation, ordinary regular-sequence dimension, basic-open and reduced-scheme results supply only individual ingredients, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "12 hits;  Candidates: IsRegularLocalRing, IsRegularLocalRing.toIsLocalRing, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing, IsRegularLocalRing.toIsNoetherian, IsRegularLocalRing.of_ringEquiv, IsRegularLocalRing.spanFinrank_maximalIdeal, IsRegularRing.isRegularLocalRing_localization. Read returned signatures: smooth/standard-etale charts, henselian-ring definitions and ordinary regular-local-ring criteria do not state the complete logarithmic chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|logStructure.*chart|chart.*regularSystemOfParameters",
+   "results": "0 hits;  Candidates: . Read returned signatures: smooth/standard-etale charts, henselian-ring definitions and ordinary regular-local-ring criteria do not state the complete logarithmic chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular parameters of a free logarithmic chart on a log regular scheme descend from the strict henselization to the ordinary local ring.",
+   "results": "8 hits;  Candidates: HenselianLocalRing.TFAE, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, HenselianLocalRing.casesOn, HenselianLocalRing.recOn, AlgebraicGeometry.Scheme.residue_descResidueField, Field.henselian, Algebra.FormallyEtale.of_isLocalization. Read returned signatures: smooth/standard-etale charts, henselian-ring definitions and ordinary regular-local-ring criteria do not state the complete logarithmic chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a free monoid chart on a log regular scheme the noninvertible chart coordinates extend to regular parameters in the ordinary local ring.",
+   "results": "8 hits;  Candidates: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, StandardEtalePair.hasMap_X, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, PowerSeries.IsWeierstrassDivisor.of_map_ne_zero, StandardEtalePresentation.hasMap, Algebra.IsSmoothAt.exists_notMem_smooth, AlgebraicGeometry.LocallyRingedSpace.notMem_prime_iff_unit_in_stalk. Read returned signatures: smooth/standard-etale charts, henselian-ring definitions and ordinary regular-local-ring criteria do not state the complete logarithmic chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A logarithmically regular scheme with a chart by a free commutative monoid has regular local rings and each nonunit chart generator is part of a regular system of parameters.",
+   "results": "8 hits;  Candidates: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.IsStandardSmooth, Algebra.smoothLocus. Read returned signatures: smooth/standard-etale charts, henselian-ring definitions and ordinary regular-local-ring criteria do not state the complete logarithmic chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-free-characteristic-regular-boundary",
+  "date": "2026-10-22",
+  "group": "Q105"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VI, 1.4 and 1.7, printed pp. 69--70; Expose VIII, 3.4.4, printed p. 110, and 4.1.1, printed p. 117. Normal crossings here is the etale-local parameter criterion, not strictness of global components. Auxiliary: Expose VI, 1.2 and 1.6--1.7, printed pp. 69--70; characteristic faces and descent of free chart parameters, extracted from returned proof steps 7--8.",
+   "via": [
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-free-log-chart-ordinary-parameters",
+  "worker": "stage1",
+  "summary": "Expanded the free-chart pushout and nonunit ideal, lifted a stratum parameter system to prove strict-local regularity directly from the log-regular dimension equality, and descended the original indexed functions through the canonical cotangent comparison and Nakayama. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "Realizes the free-chart local algebra in the regular-boundary/desingularization branch beneath lem-trf-local-term-locality, proof (1)--(2), nearby-duality alteration reduction, through the existing ancestry. Checked main-20261015 ancestor text and the item source, Expose VI 1.1--1.2 and 1.6--1.7.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Step 2 identifies the pointed-neighbourhood strict localization of W at the geometric point with the ring-level strict henselization of the ordinary local ring, so that the generic sk-thm-br strict-henselization lemmas apply; no node of sk-i-curve-zero states this comparison."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Step 2 needs Noetherianity of the strict local ring of the chart; this generic commutative algebra fact is not stated by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Step 2 uses the canonical strict-henselization map being local, to reflect nonunits; no local-map construction fact of this unit states it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Step 5 needs reflection of ordinary regularity along strict henselization; it is a generic local-algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-cotangent-dimension",
+    "why": "Step 5 uses the canonical cotangent base-change isomorphism on the specified functions; the unit has no such ordinary-local comparison."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-1249c1d85",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-1249c1d85 (reviewer sub-agent of L); spot-checked: The mathematics is correct; I read all seven steps, every cited statement and ILO VI 1.1-1.2, 1.6-1.7 (pp. 69-70). The statement and stmt_deps are unchanged from the base (checked against clones/live and side-live, where the node is still unsplit). There are no new nodes and no SGA citations. Step 3: the pushout N^r ⊕_{N^K} A^× ≅ N^J ⊕ A^×, the characteristic N^J and I=(t_J) all check. Step 4: lifting a regular system of parameters of A/I gives |J|+s = dim A generators of m_A, so A is regular with the actual t_j. Steps 5-6: the cotangent base change gives independence of the [t_j] over k, and Nakayama extends them to a regular system of parameters of B. Step 7 gives D(f). Edge cases checked: r=0, J empty, dimension 0, and a repeated nonunit coordinate, which the log-regular dimension equality excludes. One C1/C4 fix: A is the pointed-neighbourhood colimit [def-weil-pbc-strict-henselization-limit], but steps 2 and 5 applied the ring-level lemmas lem-sc-strict-henselization-* to it with no bridge. I added lem-exc-affine-strict-local-ring-comparison (reviewed PASS, Q85; its closure does not contain the item, so no cycle) to step 2's text, its uses and proof_deps, and declared it in split_report.tool_uses. The four sk-thm-br tool uses are accepted as generic local algebra. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-free-log-chart-ordinary-parameters.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeLogChartOrdinaryParameters",
+  "declaration": "AlgebraicGeometry.freeLogChart_ordinary_parameters",
+  "declarations": [],
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeLogChartOrdinaryParameters.lean",
+  "statement": "theorem freeLogChart_ordinary_parameters (X : FineSaturatedLogScheme.{u}) (hX : X.IsLogRegular) (W : X.scheme.Etale) [IsAffine W.left] [IsLocallyNoetherian W.left] (N : EtaleLogStructure W.left) (hN : N.toEtalePrelogStructure = X.logStructure.toEtalePrelogStructure.etaleRestrict W) (r : ℕ) (β : Multiplicative (ULift.{u} (Fin r) → ℕ) →* N.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 W.left)))) (hβ : N.IsChart (Scheme.Etale.mk (𝟙 W.left)) β) : (∃ hfs : N.IsFineSaturated, FineSaturatedLogScheme.IsLogRegular ⟨W.left, inferInstance, N, hfs⟩) ∧ IsRegularScheme W.left ∧ W.hom ⁻¹' X.logStructure.trivialityLocus = (W.left.basicOpen (∏ i : ULift.{u} (Fin r), FreeLogChart.coordinate N β i) : Set W.left) ∧ (∀ (w : W.left) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ W.left) (ht : (Scheme.SpecToEquivOfField Ω W.left t).1 = w), (∃ E : N.characteristic t ≃* Multiplicative ({i : ULift.{u} (Fin r) // ¬ IsUnit (FreeLogChart.ordinaryCoordinate N β w i)} → ℕ), ∀ a : Multiplicative (ULift.{u} (Fin r) → ℕ), E (Associates.mk (N.toEtalePrelogStructure.germ t (Scheme.Etale.mk (𝟙 W.left)) (CategoryTheory.Over.homMk t (by simp)) (β a))) = Multiplicative.ofAdd (fun j ↦ a.toAdd j.val)) ∧ (N.nonunitIdeal t).map (strictLocalRingStrictHenselizationIso W.left t).hom.hom = Ideal.span {a | ∃ i : ULift.{u} (Fin r), ¬ IsUnit (FreeLogChart.ordinaryCoordinate N β w i) ∧ a = FreeLogChart.strictCoordinate N β t i} ∧ (∃ (_ : IsLocalRing (Scheme.strictHenselizationRing t)) (_ : IsNoetherianRing (Scheme.strictHenselizationRing t)), (∃ b : List (Scheme.strictHenselizationRing t), IsLocalRing.IsRegularSystemOfParameters (((FreeLogChart.nonunitIndices N β w).map (FreeLogChart.strictCoordinate N β t)) ++ b))) ∧ (∃ b : List (W.left.presheaf.stalk w), IsLocalRing.IsRegularSystemOfParameters (((FreeLogChart.nonunitIndices N β w).map (FreeLogChart.ordinaryCoordinate N β w)) ++ b)) ∧ ((∀ i : ULift.{u} (Fin r), IsUnit (FreeLogChart.ordinaryCoordinate N β w i)) → IsUnit (W.left.presheaf.germ ⊤ w (by trivial) (∏ i : ULift.{u} (Fin r), FreeLogChart.coordinate N β i)))) ∧ (r = 0 → (∏ i : ULift.{u} (Fin r), FreeLogChart.coordinate N β i) = 1)",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2/H7 repair: the canonical slice restriction and strict-local/affine-colimit comparison are moved unchanged to the new definition-owned LogEtaleRestrictionStalkComparison module; the item cites its definition node, not the theorem nodes. Added def-trf-log-regular-pair owns strictLocalRing and strictLocalGerm. The former theorem modules publicly import the definition module. Their private imports are removed from the item, and proof_deps is restored exactly to the base list ending lem-weil-pbc-basic-open-function. The mathematical signature and helper definitions of the item are unchanged from returned head 260b15ceef6c. V2 stage 3: the four unchanged helper definitions are owned by def-trf-free-log-chart-coordinates and publicly re-exported; the theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cd0e4513",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Item node vs main: only lean + stmt_deps changed (added definition nodes def-trf-log-etale-restriction-stalk-comparison, already landed on main, and def-trf-log-regular-pair for strictLocalRing/strictLocalGerm); statement, proof, proof_deps and source identical to base, so H7 (d88f) and H2 (260b) are repaired. lean.statement verbatim in file; proof-only imports all owned by proof_deps nodes. Every clause checked against FineSaturatedLogBlowup/LogRegularPair/IsRegularSystemOfParameters: hN pins the prelog data to the canonical etaleRestrict, fs concluded, E normalized on every chart monomial (unique), nonunit ideal and coordinates carried by the same canonical strict-henselization iso, ordered J-lists of the actual coordinates extended to regular systems of parameters in A and B, J-empty unit and r=0 product clauses present. Edge cases r=0, J empty, dim 0, empty W, J recomputed per point OK. Helpers are real data; sorry only; no compile since nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone + node lean.statement (byte-identical); moved FreeLogChart.* defs vs clone (verbatim, re-exported, 0 importers/users); 3 new sorry statements vs FineSaturatedLogBlowup defs, ILO VI 1.1-1.2/1.6-1.7 and Stacks 06LN/07QM; node stmt_deps vs declaration owners"
+ }
+}

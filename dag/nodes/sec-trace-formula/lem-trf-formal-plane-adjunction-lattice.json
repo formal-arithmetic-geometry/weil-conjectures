@@ -24,86 +24,58 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-power-series-domain], $k[[x,y]]$ is a domain. Thus $f\\ne0$ is a nonzerodivisor, and $f\\in(x,y)$ makes its quotient nonzero; $f$ is a regular sequence of length one by [def-weil-pbc-regular-sequence]. Apply [lem-trf-completed-conormal-determinant-comparison] with $d=1,n=2,c=1$: $k$ is perfect, $S$ has the required reduced lci pure-dimensional hypotheses, its maximal residue field is $k$, and $R=\\widehat A$ is reduced by the given formal presentation. We obtain the specified isomorphism $K_A\\otimes_A R\\cong\\lambda_f=(R\\bar f)^\\vee\\otimes_R\\bigwedge^2(R\\,\\mathrm dx\\oplus R\\,\\mathrm dy)$. Its normalization square applies to $R\\to L=k((t))$: the restriction to $A$ factors through the given smooth generic point of the normalization branch. It identifies the inverse formal determinant map with the given algebraic generic differential map. This is the required completion comparison; base change of $S$ is not being used.",
+   "text": "Put $T=k[[t]]$, $L=k((t))$, $a=f_x(x(t),y(t))$, $b=f_y(x(t),y(t))$. Apply [lem-trf-formal-plane-signed-adjunction-frame] to the given plane presentation. It supplies an $R=\\widehat A$-basis $\\eta$ of $K_A\\otimes_A R$ whose generic image is $e_x/b$ or $-e_y/a$. Use $\\theta:R\\to T\\to L$; its restriction to $A$ is the stated smooth generic branch, and $(a,b)\\ne(0,0)$ by hypothesis. The reduced lci and pure-dimensional hypotheses are those of the item. No inverse in $T$ is required. Since $\\mathfrak n$ lies over $\\mathfrak m$, $A\\to D$ is local. Apply [lem-trf-smooth-branch-completed-differential-pullback] to this map and the specified smooth curve point and parameter: completed regular differentials are $T\\,\\mathrm dt$, $e_x,e_y$ pull back to $x'(t)\\,\\mathrm dt,y'(t)\\,\\mathrm dt$, and $\\Omega^1_{F/k}\\otimes_F L\\to L\\,\\mathrm dt$ is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-power-series-domain",
-    "def-weil-pbc-regular-sequence",
-    "lem-trf-completed-conormal-determinant-comparison"
+    "lem-trf-formal-plane-signed-adjunction-frame",
+    "lem-trf-smooth-branch-completed-differential-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Auxiliary formal comparison for Tag 0E9Z; no source-completion assertion is taken from Tag 0E2Y."
+    "place": "Tag 0E9Z (lemma-fundamental-class-lci), preceding determinant formula, and the extracted formal-completion auxiliary results."
    }
   },
   {
-   "text": "Choose the generator $\\varepsilon=-\\bar f^\\vee\\otimes(\\mathrm dx\\wedge\\mathrm dy)$ of $\\lambda_f$. In $L$ put $a=f_x(x(t),y(t))$ and $b=f_y(x(t),y(t))$. The formal conormal differential sends $\\bar f$ to $a\\,\\mathrm dx+b\\,\\mathrm dy$. The normalized determinant map of [lem-trf-completed-conormal-determinant-comparison] sends $\\mathrm dx$ to $-b\\,\\bar f^\\vee\\otimes(\\mathrm dx\\wedge\\mathrm dy)=b\\varepsilon$, and $\\mathrm dy$ to $a\\,\\bar f^\\vee\\otimes(\\mathrm dx\\wedge\\mathrm dy)=-a\\varepsilon$. Consequently its inverse sends $\\varepsilon$ to $\\mathrm dx/b$ if $b\\ne0$, or to $-\\mathrm dy/a$ if $a\\ne0$. At least one is allowed by hypothesis. These inversions take place in $L$, so no partial derivative is required to be a unit in $k[[t]]$.",
+   "text": "Tensor reassociation [def-weil-module-base-change] gives $(K_A\\otimes_A D)\\otimes_D T=(K_A\\otimes_A R)\\otimes_R T=T\\eta$: send $(u\\otimes d)\\otimes t$ to $u\\otimes d(t)t$ in $K_A\\otimes_A T$, with inverse $u\\otimes t\\mapsto(u\\otimes1)\\otimes t$; use the same maps for $R$. The two computed maps therefore send its basis to $r=x'(t)\\,\\mathrm dt/b$ or $r=-y'(t)\\,\\mathrm dt/a$. The normalized generic comparison in [lem-trf-formal-plane-signed-adjunction-frame] and the rational isomorphism in [lem-trf-smooth-branch-completed-differential-pullback] identify the localized map with the given generic smooth-locus map followed by scalar extension. Thus $r\\ne0$. Multiplication by this nonzero vector embeds $T\\eta$ in $L\\,\\mathrm dt$ with image $Tr$, a free rank-one lattice.",
    "uses": [
-    "lem-trf-completed-conormal-determinant-comparison"
+    "def-weil-module-base-change",
+    "lem-trf-formal-plane-signed-adjunction-frame",
+    "lem-trf-smooth-branch-completed-differential-pullback"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Determinant wedge formula preceding Tag 0E9Z, with the normalization supplied by the separately stated comparison."
+    "place": "Tag 0E9Z (lemma-fundamental-class-lci), preceding determinant formula, and the extracted formal-completion auxiliary results."
    }
   },
   {
-   "text": "Apply [lem-trf-completed-jacobian-differentials] separately to $D$. The assumption that $D$ is the local ring of a smooth curve at a point with residue $k$ supplies a localization of an affine finite-type $k$-algebra at that maximal ideal. The coefficient section is the structural map from $k$, and the chosen presentation is $\\widehat D=k[[t]]$, with one variable and no equations. The lemma therefore identifies $\\Omega^1_{D/k}\\otimes_D k[[t]]$ with $k[[t]]\\,\\mathrm dt$, with the continuous extension of $d_D$ sending $t$ to $\\mathrm dt$. On polynomials it is termwise differentiation by the derivation rule. Continuity and polynomial truncations give $d_D^\\wedge(h(t))=h'(t)\\,\\mathrm dt$ for every power series. The quotient rule $d(a/b)=b^{-1}da-ab^{-2}db$ extends every derivation of $D$ uniquely to $F$ with values in an $F$-module; the universal property therefore gives $\\Omega^1_{D/k}\\otimes_D F=\\Omega^1_{F/k}$. Localizing the completed identification to $L$ now shows that the scalar extension of the rational-differential map $\\Omega^1_{F/k}\\to L\\,\\mathrm dt$ is an isomorphism; thus a nonzero rational differential stays nonzero.",
+   "text": "The Jacobian relation in [lem-trf-smooth-branch-completed-differential-pullback] for $g_1=f$ is $a x'(t)+b y'(t)=0$. If $a,b\\ne0$, divide by $ab$ in $L$ to obtain $x'(t)/b=-y'(t)/a$, proving agreement.",
    "uses": [
-    "lem-trf-completed-jacobian-differentials",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4D, completed-Jacobian comparison applied with one variable and no equations to the smooth branch DVR."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-completed-jacobian-differentials] also to $A$ and its plane presentation. The completed algebraic differential cokernel has coordinate classes $\\widehat d_A(x),\\widehat d_A(y)$. The algebraic differential map for $A\\to D$ commutes with universal derivations by [def-weil-pbc-kahler-differentials]. After completing, the induced derivation on $R$ and the composite $R\\to\\widehat D\\xrightarrow{d_D^\\wedge}k[[t]]\\,\\mathrm dt$ agree on the dense subring $A$. Both are continuous into the separated module $k[[t]]\\,\\mathrm dt$, so they agree on $R$. Hence $\\mathrm dx\\mapsto x'(t)\\,\\mathrm dt$ and $\\mathrm dy\\mapsto y'(t)\\,\\mathrm dt$. By steps 1--2 the completed adjunction generator maps to $x'(t)\\,\\mathrm dt/b$, respectively $-y'(t)\\,\\mathrm dt/a$. Associativity of tensor extension [def-weil-module-base-change] identifies its $k[[t]]$-span with the image of $(K_A\\otimes_A D)\\otimes_D k[[t]]$. This generator is nonzero by step 3 and the generic isomorphism in step 1, so its span is a free rank-one lattice.",
-   "uses": [
-    "lem-trf-completed-jacobian-differentials",
-    "def-weil-pbc-kahler-differentials",
-    "def-weil-module-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E9Z residue calculation following the formal comparison, with explicit continuous pullback of the differential classes."
-   }
-  },
-  {
-   "text": "The relation $f_x\\,\\mathrm dx+f_y\\,\\mathrm dy=0$ in the completed differential cokernel of [lem-trf-completed-jacobian-differentials], mapped as in step 4, gives $a x'(t)+b y'(t)=0$. If $a,b$ are both nonzero, division by $ab$ gives $x'(t)/b=-y'(t)/a$. Thus the two displayed fractions agree.",
-   "uses": [
-    "lem-trf-completed-jacobian-differentials"
+    "lem-trf-smooth-branch-completed-differential-pullback"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "The conormal relation in the determinant calculation of Tag 0E9Z."
+    "place": "Tag 0E9Z (lemma-fundamental-class-lci), preceding determinant formula, and the extracted formal-completion auxiliary results."
    }
   },
   {
-   "text": "For any other algebraic presentation or regular formal presentation of the same $R$, the comparison and generic-normalization identities of [lem-trf-completed-conormal-determinant-comparison] identify the resulting image with the same completed algebraic line inside rational differentials. Thus their lattices agree; we are using formal-presentation compatibility explicitly. For a change $t=t(s)$ of the complete branch parameter, [lem-trf-formal-jacobian-coordinate-chain-rule] in one variable gives the chain rule and the invertibility of $t'(s)$. Substitution sends $\\mathrm dt$ to $t'(s)\\,\\mathrm ds$ and the two residue expressions to the corresponding expressions in $s$. This is an invertible identification of the ambient regular differential modules and of the calculated lattices, proving the stated parameter independence.",
+   "text": "The presentation compatibility in [lem-trf-formal-plane-signed-adjunction-frame] identifies all computed images with the same completed algebraic line under its fixed generic map. Thus the lattice is independent of the algebraic and formal presentation. For a parameter change $t=v(s)$, the semilinear isomorphism $\\nu$ in [lem-trf-smooth-branch-completed-differential-pullback] carries regular differentials onto regular differentials and commutes with the rational map. Its chain rule sends $x_t'(t)\\,\\mathrm dt/b$ to $x_s'(s)\\,\\mathrm ds/b(s)$ and likewise for $-y_t'(t)\\,\\mathrm dt/a$. It therefore carries their spans to the displayed spans for $s$, proving parameter independence.",
    "uses": [
-    "lem-trf-completed-conormal-determinant-comparison",
-    "lem-trf-formal-jacobian-coordinate-chain-rule"
+    "lem-trf-formal-plane-signed-adjunction-frame",
+    "lem-trf-smooth-branch-completed-differential-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4B coordinate changes, together with the formal determinant comparison and its generic normalization."
+    "place": "Tags 0C4B (lemma-fitting-ideal-well-defined) and 0C4D (lemma-nodal); presentation and parameter compatibility are supplied by the two extracted statements."
    }
   }
  ],
  "proof_deps": [
   "def-weil-module-base-change",
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-regular-sequence",
-  "lem-trf-completed-conormal-determinant-comparison",
-  "lem-trf-completed-jacobian-differentials",
-  "lem-trf-formal-jacobian-coordinate-chain-rule",
-  "lem-weil-pbc-power-series-domain"
+  "lem-trf-formal-plane-signed-adjunction-frame",
+  "lem-trf-smooth-branch-completed-differential-pullback"
  ],
  "proof_origin": {
   "by": "agent",
@@ -192,19 +164,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-formal-plane-adjunction-lattice",
   "worker": "stage1",
-  "summary": "Repaired the returned C4/E5 comparison gap by adding one statement-only theorem on completed algebraic and formal conormal complexes and their determinant lines, including the explicit generic-normalization square. The six item steps validate the regular formal presentation, compute its determinant generator with the common sign fixed, apply completed Jacobian differentials to D separately, prove pullback compatibility by continuity, and establish agreement and presentation/parameter independence. Statement and inherited metadata retained; no Lean work.",
-  "blueprint": "Retains the inherited auxiliary stable-modification/nodal-normalization ancestry and supplies its local adjunction calculation before f=uv; no change to the current contracting-correspondence unit route."
+  "summary": "Repair of the 2026-10-22 human re-split return: two comparable statement-only nodes isolate the signed completed conormal/adjunction frame (old steps 1--2) and natural differential pullback to a smooth branch with faithful rational extension (old step 3 and the substantive part of step 4). Both presentation and parameter compatibility are included in the extracted statements, so every substantial original argument is assigned to a new node. The parent only assembles their maps, identifies the tensor span, divides the conormal relation and applies these compatibilities. Every original argument is retained verbatim in the report with its redistribution. Statement and inherited metadata unchanged. Landing-refusal repair: compared the retained returned item with the current DAG (identical inherited content), reread all current cited statements and auxiliary comparison inputs, verified every quote, and reviewed the newly present formal-minimal-presentation-minors overlap explicitly in report.md before rebasing delivery onto the fetched DAG. Final resumed review confirmed single TeX escapes in decoded text and replaced malformed prime commands in all four assembly steps by ordinary derivative notation; statements, dependencies, preserved returned proof and logged searches are unchanged. Current-DAG landing repair renewed 2026-10-23: all current cited statements and source passages reread; step 1 now explicitly specifies the field map R to T to L and checks the nonzero-Jacobian hypothesis required by the signed-frame statement. This makes the specialization precise without changing any statement, extracted argument, citation, or route. The renewed preflight exposed two further current same-tag nodes, algebraic adjunction gluing and augmentation determinant normalization; their complete statements were reread and their different scope documented under Not duplicates. Renewed landing repair on the current shared DAG: explicitly checked locality of A to D from the maximal ideal lying over m, and distinguished the newly present algebraic cofactor smoothness criterion from the completed signed-frame statement. All eight quotes remain verbatim; no statements or logged searches changed.",
+  "blueprint": "Retains the inherited local-term-locality/stable-modification/nodal-normalization ancestry. The two new nodes carry the formal determinant and smooth-branch differential components of the local adjunction calculation before the nodal substitution f=xy. No change to chapter or unit route."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q17-fcee84e86",
-  "group": "Q17",
+  "reviewer": "NT-cc-Q150-deaa09a06",
+  "group": "Q150",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-fcee84e86 (reviewer sub-agent of L); spot-checked: Read the item, new comparison node, every cited statement, unit route, and cited Stacks sources. Verified all six proof steps, hypotheses, determinant signs, formal/base-change compatibility, edge cases, searches, duplicate checks, route constraints, and absence of forbidden SGA or dropped machinery. No repair needed; review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-deaa09a06 (reviewer sub-agent of L); spot-checked: 5th push of this re-split. Both new nodes (signed-adjunction-frame, smooth-branch-completed-differential-pullback) are byte-identical to the PASSed 287c head. The item's statement, deps and lean are unchanged. The only proof change is one added sentence in step 1, 'n lies over m ⇒ A→D local', which is correct: n∩A=m since B is integral over A. Live still holds the old 6-step proof, so the delivery is not superseded. I re-read everything. Sign check against Stacks duality.tex lemma-determinant: (a dx+b dy)∧dx=−b dx∧dy and (a dx+b dy)∧dy=a dx∧dy, so the values are bΦ(η) and −aΦ(η), and γ_L(η⊗1)=e_x/b=−e_y/a. The frame node specialises lem-trf-completed-conormal-determinant-comparison (re-read; it has the presentation and normalization clauses) and adds the signed frame. All branch-node clauses are true in any characteristic, and only δ_F is claimed injective, which matters because z↦t^p kills dz. Parent steps: the frame-node hypotheses hold (n=2, c=1, smooth generic branch, (a,b)≠0); r≠0; ax'+by'=0 gives agreement; ν transports the lattices. Re-split rule: old 1–2 went to the frame node, old 3–4 to the branch node, old 5 stays as an elementary parent step, and old 6 is split between the two compatibility clauses. Nothing was dropped; the nodes are of comparable size and the parent is a ~2.4k assembly. The new same-tag candidate lem-sfb-curve-cofactor-smooth-criterion (Q133) is a polynomial-presentation smoothness criterion with no formal completion or signed frame, so it is not a duplicate. Bracketed ids ⊆ stmt_deps, uses = proof_deps, no SGA, unit sk-i-curve-zero, no tool_uses needed. Small cases: f=y gives dt, f=x gives −dt, xy gives ±dt/t, and the cusp gives t^-2 dt (only the a-formula in char 2). Maintainer note: identical substance on the 5th push; please promote or land rather than re-dispatch."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FormalPlaneAdjunctionLattice",
@@ -233,5 +205,16 @@
   "result": "pass",
   "note": "Read the item node, all 13 statement dependencies (Lean for FlatLCICanonicalAdjunction IsNormalized/IsSmoothComparison, IsCurve, IsPureDimension, IsLocalCompleteIntersection, Mathlib LaurentSeries.derivative), snapshot module, node copy and report. Every hypothesis and conclusion clause matches the node: canonical K_A via J.line global sections, generic comparison q pinned by IsSmoothComparison and nonempty presentation (satisfiable), completion maps alpha/theta/psi/pi with continuity, delta characterised on dz, Phi unique/injective with range span of x'/f_y or -y'/f_x (nonzero), agreement, G generic iso, E for Omega_D tensor k[[t]], parameter transport verified by chain rule. Edge cases (reducible A, char p, non-unit denominators, single universe) are fine. Helper defs have real bodies and source/blueprint docstrings, only sorry is the main theorem, lean.statement matches the file verbatim, stmt_deps unchanged, no pro-etale. nt_compile --json of the snapshot file: clean (4.5-6.5 s); a control run confirms error reporting and axioms [propext, sorryAx, Classical.choice, Quot.sound]. Minor notes: redundant IsLocalRing A and _hm; second reading done by the same worker (not a substance fault)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

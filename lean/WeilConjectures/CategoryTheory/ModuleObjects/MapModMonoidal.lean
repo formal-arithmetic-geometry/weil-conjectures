@@ -47,20 +47,14 @@ built are strong monoidal for `⊗_R`:
 - `Mod.monoidal_extendScalars`: the strong monoidal structure of `Mod.extendScalars φ` along an
   isomorphism `φ`.
 
-## Sorried input
+## Implementation notes
 
-The data (the comparison isomorphisms) is constructed; the following properties are `sorry`ed:
-
-- the balancing conditions `Functor.mapMod_μ_balanced`, `Functor.mapMod_δ_balanced`,
-  `Mod.comap_tensorπ_balanced` and `Mod.tensorπ_comap_balanced` making the comparison maps
-  well defined on the coequalizers;
-- the linearity of the comparison maps (`Functor.mapModTensorIso_linear`,
-  `Mod.comapTensorIso_linear`);
-- the coherence axioms of `Functor.CoreMonoidal` (naturality, associativity and unitality of the
-  comparison isomorphisms) for `Functor.mapModCoreMonoidal` and `Mod.comapCoreMonoidal`.
-
-All of them are checked after precomposition with the projections onto the coequalizers
-(`Mod.tensorObjπ`), where they reduce to the coherences of `μ F` and of the algebra structures.
+The balancing conditions (`Functor.mapMod_μ_balanced`, `Functor.mapMod_δ_balanced`,
+`Mod.comap_tensorπ_balanced`, `Mod.tensorπ_comap_balanced`), the linearity of the comparison maps
+(`Functor.mapModTensorIso_linear`, `Mod.comapTensorIso_linear`) and the coherence axioms of
+`Functor.mapModCoreMonoidal` and `Mod.comapCoreMonoidal` are checked after precomposition with the
+projections onto the coequalizers (`Mod.tensorObjπ`), where they reduce to the coherences of `μ F`
+and of the algebra structures.
 
 -/
 
@@ -343,7 +337,8 @@ noncomputable def mapModCoreMonoidal : (F.mapMod R).CoreMonoidal where
   right_unitality := by
     intro M
     have hπC (Q : Mod C (R)) :
-        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
+        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom =
+          (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
       change Mod.tensorObjπ Q (Mod.regular (R)) ≫
         (Bimod.whiskerLeft ((Mod.toBimod (R)).obj Q)
         (Mod.toBimodRegularIso (R := R)).hom).hom ≫
@@ -381,7 +376,6 @@ noncomputable def mapModCoreMonoidal : (F.mapMod R).CoreMonoidal where
     rw [MonoidalCategory.whiskerLeft_id, Category.id_comp,
       ← F.map_comp, hπC]
     rw [F.map_comp, Functor.LaxBraided.braided_assoc]
-
 
 /-- The transport `F.mapMod` of module objects along a braided functor preserving coequalizers
 is strong monoidal. -/
@@ -424,7 +418,8 @@ lemma tensorπ_comap_balanced (M N : Mod C R) :
 actions of `R`, `ψ` being an isomorphism. -/
 lemma comap_tensorπ_balanced (M N : Mod C R) :
     ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) =
-      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) := by
+      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫
+        tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) := by
   have _ := (inferInstance : IsCommMonObj R)
   rw [← cancel_epi ((M.X ◁ ψ) ▷ N.X)]
   simp only [comp_whiskerRight, Category.assoc]
@@ -574,7 +569,8 @@ noncomputable def comapCoreMonoidal : (comap ψ : Mod C R ⥤ Mod C S).CoreMonoi
   right_unitality := by
     intro M
     have hπC (Q : Mod C (R)) :
-        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
+        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom =
+          (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by
       change Mod.tensorObjπ Q (Mod.regular (R)) ≫
         (Bimod.whiskerLeft ((Mod.toBimod (R)).obj Q)
         (Mod.toBimodRegularIso (R := R)).hom).hom ≫
@@ -587,7 +583,8 @@ noncomputable def comapCoreMonoidal : (comap ψ : Mod C R ⥤ Mod C S).CoreMonoi
         Category.id_comp]
       exact coequalizer.π_desc _ _
     have hπD (Q : Mod C (S)) :
-        Mod.tensorObjπ Q (Mod.regular (S)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (S)).hom ≫ γ[S,Q.X] := by
+        Mod.tensorObjπ Q (Mod.regular (S)) ≫ (ρ_ Q).hom.hom =
+          (β_ Q.X (S)).hom ≫ γ[S,Q.X] := by
       change Mod.tensorObjπ Q (Mod.regular (S)) ≫
         (Bimod.whiskerLeft ((Mod.toBimod (S)).obj Q)
         (Mod.toBimodRegularIso (R := S)).hom).hom ≫
@@ -608,7 +605,6 @@ noncomputable def comapCoreMonoidal : (comap ψ : Mod C R ⥤ Mod C S).CoreMonoi
       M.X ◁ ψ ≫ tensorObjπ M (regular R) ≫ (ρ_ M).hom.hom
     rw [hπC]
     rw [braiding_naturality_right_assoc]
-
 
 /-- Restriction of scalars along an isomorphism of commutative algebra objects is strong
 monoidal. -/

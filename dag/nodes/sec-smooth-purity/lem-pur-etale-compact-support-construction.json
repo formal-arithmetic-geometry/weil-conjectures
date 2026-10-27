@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-etale-compact-support-construction",
+ "kind": "statement",
+ "title": "Coherent open extension on strict etale quotient systems",
+ "statement": "Let $O$ be a commutative ring and $t\\in O$ a non-zero-divisor, and suppose $O$ is complete for the ideal $(t)$. Let $f:X\\to Y$ be a morphism of schemes and $c=(X\\xrightarrow{j}Z\\xrightarrow{g}Y)$ a compactification [def-weil-compactifications-refinements]. There exist a compact-support datum $S$ of [def-per-strict-etale-system-interfaces] and isomorphisms $a_{m,n}:\\operatorname{Res}^{X}_{m,n}\\,j_{!,m}\\cong j_{!,n}\\,\\operatorname{Res}^{Z}_{m,n}$ for $n\\le m$, on the ordinary unbounded derived quotient coefficient levels indexed by exponent $n+1$. The mate of $a_{m,n}$ under the recorded level open adjunctions is the inverse of the recorded restricted inverse-image comparison in $S$. If $o_n:e_n^Z D(j_{!,\\bullet})\\cong j_{!,n}e_n^X$ denotes the open evaluation isomorphism, then $\\tau^Z_{m,n}(D(j_{!,\\bullet})K)\\,\\operatorname{Res}^Z_{m,n}(o_n(K))=o_m(K)\\,j_{!,m}(\\tau^X_{m,n}(K))\\,a_{m,n}(e_n^XK)$ for every derived system $K$. The compact-support datum includes the ordinary and derived functors, actual adjunctions, normalized evaluation comparisons and their representative equations; it asserts no Brown right adjoint.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "section-extension-by-zero, definition-extension-zero and equation-j-p-shriek (03S2); sites-modules.tex lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI/03DJ); Zheng, Constructions 4.1 and 5.15."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-coefficient-system-image-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Obtain proper ordinary and derived images and evaluations PY,PZ from coefficientSystemDerivedComparison. Obtain the ordinary open image IX and evaluation PX by the ordinary-image and coefficient-evaluation theorems; construct its full derived image retaining the ordinary restriction representative formula.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-pur-coefficient-system-ordinary-images",
+    "lem-pur-strict-etale-image-restriction-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ordinary open extension to IX,PX,PZ. Derive its exact system and level functors termwise and localize the adjunctions. The localization unit formula proves their normalized Hom transposes. Localize the ordinary evaluation squares and combine these data to obtain StrictEtaleCompactSupport.",
+   "uses": [
+    "lem-pur-strict-etale-ordinary-open-extension",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-coefficient-system-unbounded-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the ordinary open restriction square. Apply derivedMate_comparison to the inverse-image square, using the retained representative equation and normalized derived Hom transposes. Its inverse mate has the same representative as the localized open restriction square; full faithfulness of localization whiskering identifies them. Finally transition_localization descends the ordinary transition equation using the three square representative formulas and the chosen evaluation transition formulas.",
+   "uses": [
+    "lem-pur-derived-mate-comparison",
+    "lem-pur-strict-etale-image-restriction-construction",
+    "lem-pur-strict-etale-ordinary-open-extension",
+    "lem-pur-coefficient-system-unbounded-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-coefficient-system-ordinary-images",
+  "lem-pur-strict-etale-image-restriction-construction",
+  "lem-pur-strict-etale-ordinary-open-extension",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-coefficient-system-unbounded-comparison",
+  "lem-pur-derived-mate-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "section-extension-by-zero, definition-extension-zero and equation-j-p-shriek (03S2); sites-modules.tex lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI/03DJ); Zheng, Constructions 4.1 and 5.15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for strict systems of module sheaves over quotient rings with exact derived evaluation and coefficient restriction compatibility",
+   "results": "Eight results concerning adic-completion extensions, local-cohomology diagrams and the Noebeling proof; none concerns etale extension by zero on strict coefficient systems.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory, PreservesColimitsOfShape",
+   "results": "loogle: unknown identifier 'Functor.mapDerivedCategory'; zero hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientSystem.*Linear|constantRingModuleRestriction|proper_rightDerivedLowerStar_preservesCoproducts",
+   "results": "Zero hits in the search service. Local rg separately finds constantRingModuleRestriction and the proper fixed-module theorem, but not the requested system construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero on strict systems of constant quotient ring sheaves with derived evaluation and scalar restriction mate compatibility",
+   "results": "Eight hits including Function.ExtendByZero.linearMap (Mathlib.LinearAlgebra.Pi), RingedSpace.res_zero (Mathlib.Geometry.RingedSpace.Basic), and module-sheafification scalar candidates; none supplies etale strict-system extension, its derived evaluations or its normalized mate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleTowerBrownAdjunction",
+  "date": "2026-10-24",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Steps 2–3; the corresponding construction, scalar or finite-level coproduct step of lem-pur-etale-tower-brown-adjunction.",
+   "via": [
+    "lem-pur-etale-tower-brown-adjunction",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleCompactSupportConstruction",
+  "file": "lean/Sheaf/Paper/EtaleCompactSupportConstruction.lean",
+  "declaration": "AlgebraicGeometry.etaleCompactSupport_construction",
+  "statement": "theorem etaleCompactSupport_construction\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    (hregular : ∀ x : O, t * x = 0 → x = 0)\n    [IsAdicComplete (Ideal.span ({t} : Set O)) O]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :\n    ∃ (S : StrictEtaleCompactSupport O t c)\n      (a : ∀ {m n : ℕ} (h : n ≤ m),\n        (S.PX.scalar h).restriction ⋙ S.levelDerivedOpen m ≅\n          S.levelDerivedOpen n ⋙ (S.PZ.scalar h).restriction),\n      (∀ {m n : ℕ} (h : n ≤ m),\n        (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)\n          (.mk _ _ _ _ (a h).hom)).natTrans =\n          (S.openDerived.restrictedInverse h).inv) ∧\n      (∀ {m n : ℕ} (h : n ≤ m)\n        (K : DerivedCategory (strictEtaleCoefficientSystem X O t)),\n        (S.PZ.transition h).app (S.derivedOpen.obj K) ≫\n          (S.PZ.scalar h).restriction.map ((S.openDerivedEvaluation n).hom.app K) =\n        (S.openDerivedEvaluation m).hom.app K ≫\n          (S.levelDerivedOpen m).map ((S.PX.transition h).app K) ≫\n          (a h).hom.app ((S.PX.evaluation n).obj K))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261024T014529-L-2212573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261025T180733-L-4025513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

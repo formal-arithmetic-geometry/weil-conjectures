@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-polynomial-projective-dimension-bound",
+ "kind": "statement",
+ "title": "Projective dimension bound over a finite-variable polynomial ring over a field",
+ "statement": "Let $k$ be a field [def-weil-field], let $m\\geq0$ be an integer, and put $S=k[x_1,\\ldots,x_m]$ [def-weil-pbc-mv-polynomial-ring]. Every $S$-module $N$, without any finite-generation or grading hypothesis, has a projective resolution of length at most $m$ [def-weil-pbc-finite-global-dimension]: there is an exact sequence $0\\to P_m\\to\\cdots\\to P_0\\to N\\to0$ in which each $P_j$ is projective. For $m=0$ this says that every $k$-vector space is projective. No finiteness of the $P_j$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), second sentence: a polynomial algebra in m variables over a field has global dimension m. Only the upper bound is used."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finite-global-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=k[x_1,\\ldots,x_m]$. By [lem-weil-pbc-polynomial-ring-field-regular-ring], $S$ is Noetherian and every prime localization is regular local. For each maximal ideal $\\mathfrak q$, [lem-weil-pbc-polynomial-ring-maximal-localization-dimension] gives $\\dim S_{\\mathfrak q}=m$. Apply [lem-weil-pbc-regular-local-finite-gl-dim] to this regular local ring with $d=m$: every $S_{\\mathfrak q}$-module has a projective resolution of length at most $m$. The bound is the same for every $\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-regular-local-finite-gl-dim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), proof via Tag 00OP (lemma-dim-affine-space) and Tag 00O7 (proposition-regular-finite-gl-dim)."
+   }
+  },
+  {
+   "text": "Let $M$ be a finitely generated $S$-module. For every maximal $\\mathfrak q$, apply Step 1 to the localized module $M_{\\mathfrak q}$. By [lem-weil-pbc-projective-resolution-ext-degree] its bounded resolution implies the Ext-vanishing predicate $\\mathrm{PD}_{\\leq m}(M_{\\mathfrak q})$ used in [lem-weil-pbc-finite-module-pd-local-global]. Since $S$ is commutative Noetherian and $M$ is finitely generated, the reverse implication of that local-to-global statement gives $\\mathrm{PD}_{\\leq m}(M)$. Apply the reverse implication of [lem-weil-pbc-projective-resolution-ext-degree] to obtain an actual projective resolution of $M$ of length at most $m$. Choose a universe containing the rings and modules throughout; the bridge applies in $\\mathrm{ModuleCat}^{\\max(u,v)}$.",
+   "uses": [
+    "lem-weil-pbc-projective-resolution-ext-degree",
+    "lem-weil-pbc-finite-module-pd-local-global"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O9 (lemma-finite-gl-dim-primes), converse proof, using the existing fixed-bound Mathlib local-to-global criterion and Tag 065R (lemma-projective-dimension-ext)."
+   }
+  },
+  {
+   "text": "Step 2 proves condition (2) of [lem-weil-pbc-global-dimension-finite-modules-suffice] for $R=S$ and $n=m$. Its implication (2) to (1) gives a projective resolution of length at most $m$ for every $S$-module $N$, with no finite-generation hypothesis. Unpack [def-weil-pbc-finite-global-dimension] to obtain precisely $0\\to P_m\\to\\cdots\\to P_0\\to N\\to0$ with each $P_j$ projective. Neither the cited implication nor this definition imposes finiteness on these projectives.",
+   "uses": [
+    "lem-weil-pbc-global-dimension-finite-modules-suffice",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O9 (lemma-finite-gl-dim-primes), converse conclusion using Tag 065T (lemma-finite-gl-dim); Tag 00OQ, upper-bound assertion."
+   }
+  },
+  {
+   "text": "When $m=0$, the polynomial-ring definition [def-weil-pbc-mv-polynomial-ring] identifies $S$ with $k$: the only monomial has all exponents zero. The resolution in Step 3 is $0\\to P_0\\to N\\to0$, so its middle map is an isomorphism. A direct-summand presentation of $P_0$ in a free module gives one for $N$ by composing its inclusion with this inverse and its retraction with this isomorphism. Thus $N$ is projective by [def-weil-pbc-projective-module]. This also covers the zero module; no grading was introduced at any step.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), zero-variable case and the definition of a length-zero projective resolution."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "lem-weil-pbc-projective-resolution-ext-degree",
+  "lem-weil-pbc-finite-module-pd-local-global",
+  "lem-weil-pbc-global-dimension-finite-modules-suffice",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), proof via maximal regular local rings of dimension m, with the upper-bound portion of Tag 00OE expanded through Tags 00O9 and 065T. The local-to-global finite-module step is supplied by the existing Mathlib leaf, with Tag 065R bridging Ext and resolutions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every module over a polynomial ring in m variables over a field has a projective resolution of length at most m",
+   "results": "OK 8 hits: CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.HasProjectiveDimensionLE, ModuleCat.projectiveResolution, ModuleCat.enoughProjectives, CategoryTheory.instHasProjectiveDimensionLTOfNatNatOfProjective, CategoryTheory.projectiveDimension_le_iff, CategoryTheory.projectiveDimension_lt_iff, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions. ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert syzygy polynomial ring over field global dimension number of variables",
+   "results": "OK 8 hits: MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, Polynomial.ringKrullDim_of_isNoetherianRing, Polynomial.isNoetherianRing, Polynomial.ringKrullDim_le, MvPolynomial.isNoetherianRing_fin, ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial, MvPolynomial.isNoetherianRing. ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, \"projective\"",
+   "results": "OK 12 hits: WeierstrassCurve.Projective.polynomial, WeierstrassCurve.Projective.polynomialX, WeierstrassCurve.Projective.polynomialY, WeierstrassCurve.Projective.polynomialZ, WeierstrassCurve.Projective.map_polynomial, WeierstrassCurve.Projective.map_polynomialX, WeierstrassCurve.Projective.map_polynomialY, WeierstrassCurve.Projective.map_polynomialZ. ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(globalDimension|projectiveDimension|HasProjectiveDimension).*(MvPolynomial|Polynomial)|(MvPolynomial|Polynomial).*(globalDimension|projectiveDimension)",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every module over a polynomial ring in finitely many variables over a field has projective dimension at most the number of variables",
+   "results": "OK 8 hits: ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial, CategoryTheory.instHasProjectiveDimensionLTOfNatNat, CategoryTheory.instHasProjectiveDimensionLTHAddNat, CategoryTheory.instHasProjectiveDimensionLTHAddNat_1, CategoryTheory.instHasProjectiveDimensionLTSucc, CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.projectiveDimension_le_iff. ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(globalDimension|projectiveDimension|HasProjectiveDimension).*(MvPolynomial|Polynomial)|(MvPolynomial|Polynomial).*(globalDimension|projectiveDimension|HasProjectiveDimension)",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert syzygy theorem global dimension polynomial ring over a field",
+   "results": "OK 8 hits: Polynomial.isNoetherianRing, Polynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_succ_le_ringKrullDim_polynomial, Polynomial.ringKrullDim_le, MvPolynomial.ringKrullDim_of_isNoetherianRing, MvPolynomial.isNoetherianRing_fin, MvPolynomial.isNoetherianRing, ringKrullDim_eq_zero_of_field. ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, CategoryTheory.HasProjectiveDimensionLE",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-graded-hilbert-syzygy",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA/Kodaira prerequisite: graded algebra input for the finite twist resolution; Hilbert syzygy before sheafification. Ungraded upper bound used to stop the graded free-cover construction.",
+   "via": [
+    "lem-sfb-polynomial-graded-hilbert-syzygy",
+    "lem-sfb-projective-coherent-finite-twist-resolution",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-polynomial-projective-dimension-bound",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the Stacks 00OQ upper-bound proof using existing polynomial regularity, maximal-localization dimension, regular-local global bound, finite-module Ext local-to-global, resolution/Ext bridge, and finite-to-all global-dimension criterion. No new nodes; explicitly checked arbitrary modules, the Ext/resolution distinction, and m=0.",
+  "blueprint": "Supports the graded Hilbert-syzygy input to the finite twist resolution, along the recorded ancestry to det-thm-sf-ctf-stability-direct-images proof (3). Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) assembles direct images; this algebra prerequisite is below that unit route. Steps 1–3 realize the ungraded upper bound before sheafification; step 4 records the zero-variable case. blueprint_refs.py ancestor returns None for this inherited created.item chain; its existing null ancestor and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "why": "The dimension m at each maximal localization is the 00OP algebra input to 00OQ; the six-functor unit has no replacement for this commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-finite-gl-dim",
+    "why": "The regular-local bound 00O7 is the algebra tool in the 00OE argument underlying 00OQ; it supplies the uniform local bound without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-resolution-ext-degree",
+    "why": "065R converts explicit resolutions to and from the Ext predicate used by the existing Mathlib local-to-global leaf; the six-functor unit does not supply this generic algebra bridge."
+   },
+   {
+    "node": "lem-weil-pbc-global-dimension-finite-modules-suffice",
+    "why": "065T passes the uniform bound on finite modules to every module, as in the 00O9 converse; no six-functor unit result replaces this generic algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "lem-weil-pbc-projective-resolution-ext-degree",
+  "lem-weil-pbc-global-dimension-finite-modules-suffice"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-47513c649",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-47513c649 (reviewer sub-agent of L); spot-checked: PASS with no changes. The item is lane S1 and was statement-only before this delivery (live and side-live: unsplit, no proof). The delivery splits it into 4 steps with 0 new nodes. Statement, stmt_deps, source and blueprint are identical to live. I found no repair note and no parallel split. Route checked against the source: Stacks 00OQ via 00OP and 00OE, with the 00O9 converse and then 065T. The item asks only for the upper bound ≤m, for all modules, and does not weaken the target. Step 1: the polynomial-ring-field-regular-ring leaf makes S Noetherian with every prime localization regular, maximal-localization-dimension (00OP) gives dim S_q=m, and regular-local-finite-gl-dim (00O7) with d=m bounds every S_q-module; the hypotheses match. Step 2: the ext-degree bridge HasProjectiveResolutionLE↔HasProjectiveDimensionLE and the finite-module-pd-local-global Mathlib leaf (same predicate; hypotheses Noetherian, finitely generated, all maximal ideals) give PD≤m(M) and then an actual resolution. This correctly replaces the 00O9 converse argument. Step 3: finite-modules-suffice (065T) (2)⇒(1) gives the bound for every module, with arbitrary projectives. Step 4 is elementary and correctly marked: empty variable set gives S=k, and a length-0 resolution gives N≅P_0, so N is projective. proof_deps equals the union of the uses lists. The proof_deps closure (83 nodes) does not contain the item, so no cycle. Edge cases checked: m=0, m=1 with k[x]/(x), N=0, infinitely generated modules. Duplicate search (00OQ/00O9/00OE, global dimension, syzygy, finite-global-dimension citers): no node states the item. I accept the 4 declared sk-thm-p1 tool_uses (maximal-localization dimension, regular-local global dimension, resolution/Ext bridge, finite-to-all global dimension) as generic commutative-algebra tools. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialProjectiveDimensionBound",
+  "declaration": "MvPolynomial.hasProjectiveResolutionLE",
+  "file": "lean/Sheaf/RingTheory/PolynomialProjectiveDimensionBound.lean",
+  "statement": "theorem hasProjectiveResolutionLE {k : Type u} [Field k] (m : ℕ) (N : ModuleCat.{max u v} (MvPolynomial (Fin m) k)) : ModuleCat.HasProjectiveResolutionLE N m",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a2a611b7",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Node unchanged except the lean field; lean.statement verbatim in the file. Field k, m:ℕ (includes 0), MvPolynomial (Fin m) k, arbitrary N : ModuleCat.{max u v}; conclusion is the dependency's ModuleCat.HasProjectiveResolutionLE N m (exists a ProjectiveResolution with IsZero terms above m), matching the node's exact sequence 0→P_m→…→P_0→N→0 with no finiteness. The max u v universe matches the cited dependency interfaces and the consumer PolynomialGradedHilbertSyzygy (v:=u). Edge cases m=0, N=0, large free modules and any characteristic covered. No Mathlib or project duplicate; no definitions, proof is sorry, docstrings carry source 00OQ, the blueprint id and all 4 proof steps; report has Worker report and Second reading by Q45. Not recompiled (no change). No findings."
+ }
+}

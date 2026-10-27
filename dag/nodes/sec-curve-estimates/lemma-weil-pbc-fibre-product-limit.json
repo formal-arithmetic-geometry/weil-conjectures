@@ -96,7 +96,30 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.isLimitStrictLocalizationConePullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization",
+     "lines": [
+      279,
+      294
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -157,22 +180,22 @@
   "note": "independent cc review: Withdrawn Sheaf FibreProductNeighbourhoodLimit vs official WeilConjectures twin (signature identical to node lean.statement, axioms clean), retire-items.tsv row 231, zero importers, node diff limited to proof step 1/proof_origin/lean attachment"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "If $f:X\\to S$ is quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions], then\n\n$$\n X\\times_SS_{(\\bar s)}\\xrightarrow{\\sim}\n \\varprojlim_{(V,\\bar v)}X\\times_SV.\n$$",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\bar s$ be a geometric point of a scheme $S$. For every morphism\n$f:X\\to S$, the projections induce an isomorphism\n\n$$\n X\\times_SS_{(\\bar s)}\\xrightarrow{\\sim}\n \\varprojlim_{(V,\\bar v)}X\\times_SV,\n$$\n\nthe limit running over the affine pointed etale neighbourhoods of $\\bar s$\n([def-weil-pbc-strict-henselization-limit]).",
   "proof": [
    {
-    "text": "On affine charts, tensor products commute with filtered colimits, and\nquasi-compactness gives finitely many charts while quasi-separatedness gives\nquasi-compact pairwise intersections; the affine identifications glue to the\ndisplayed identification of\n[def-weil-pbc-strict-henselization-limit].",
+    "text": "By [def-weil-pbc-strict-henselization-limit], $S_{(\\bar s)}$ is the limit of\nthe affine pointed etale neighbourhoods $V$ of $\\bar s$ in the category of\nschemes. The index category is cofiltered, hence connected, and the forgetful\nfunctor from schemes over $S$ to schemes creates connected limits, so\n$S_{(\\bar s)}$ is also their limit in the category of $S$-schemes. Base change\nalong $f$, from $S$-schemes to $X$-schemes, is right adjoint to composition\nwith $f$, so it preserves this limit: $X\\times_SS_{(\\bar s)}$ is the limit of\nthe $X\\times_SV$ in the category of $X$-schemes. Since the index category is\nconnected, the forgetful functor from $X$-schemes to schemes preserves this\nlimit, which gives the displayed isomorphism. No finiteness hypothesis on $f$\nis needed.",
     "uses": [
      "def-weil-pbc-strict-henselization-limit"
     ],
     "elementary": false
-   },
-   {
-    "text": "On affine charts $X_0=\\operatorname{Spec}B$ over\n$S_0=\\operatorname{Spec}A$, the left side has coordinate ring\n$B\\otimes_A\\varinjlim A_V$. Tensor product commutes with filtered colimits,\nso this is $\\varinjlim(B\\otimes_AA_V)$, the coordinate ring of the inverse\nlimit on the right. Quasi-compactness gives finitely many charts and\nquasi-separatedness gives quasi-compact pairwise intersections; the affine\nidentifications therefore glue.",
-    "uses": [],
-    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

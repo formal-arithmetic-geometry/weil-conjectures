@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-ind-etale-quotient-two-base-inverse",
+ "kind": "statement",
+ "title": "Inverse for a residue-compatible ind-etale quotient map over two bases",
+ "statement": "Let $(R,\\mathfrak m_R)$ be a commutative local ring, let $J\\subseteq\\mathfrak m_R$ be an ideal, and put $S=R/J$. Let $C$ be a strictly henselian local ring and $D$ a henselian local ring [def-weil-pbc-henselian-terminology], equipped with local structure maps $R\\to C$ and $S\\to D$. Assume that $C$ is a filtered colimit of etale $R$-algebras and $D$ is a filtered colimit of etale $S$-algebras [def-weil-pbc-ind-etale-algebra]. Let $K$ be a field and fix residue-field identifications $C/\\mathfrak m_C\\cong K$ and $D/\\mathfrak m_D\\cong K$ such that $R\\to C\\to K$ and $R\\to S\\to D\\to K$ agree and have kernel $\\mathfrak m_R$. Suppose $u:C\\to D$ is a local $R$-algebra map, where the $R$-action on $D$ is through $S$, and that its residue map is $\\mathrm{id}_K$. Put $Q=C/JC$, let $q:C\\to Q$ be the quotient map, and equip $Q$ with the $S$-action induced from $R\\to C\\to Q$. Then $Q$ is henselian local with maximal ideal $q(\\mathfrak m_C)$, and the residue map induced by $q$ identifies its residue field with $K$. The unique factored $S$-algebra map $\\bar u:Q\\to D$ satisfying $\\bar u\\circ q=u$ is an isomorphism. More precisely there is a unique local $S$-algebra map $v:D\\to Q$ inducing $\\mathrm{id}_K$, and it satisfies $\\bar u\\circ v=\\mathrm{id}_D$ and $v\\circ u=q$, hence $v\\circ\\bar u=\\mathrm{id}_Q$. Consequently $u$ is surjective and $\\ker(u)=JC$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 08HR (lemma-map-into-henselian-colimit), applied over S twice and R once, following the inverse-composite argument of Tag 08HT (lemma-uniqueness-henselian)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Since $R\\to C$ is local and $J\\subseteq\\mathfrak m_R$, the image of $J$ lies in $\\mathfrak m_C$, and hence $JC\\subseteq\\mathfrak m_C$. Apply [lem-weil-pbc-strictly-henselian-quotient] to $C$ and $JC$. It gives that $Q=C/JC$ is strictly henselian local, with maximal ideal $q(\\mathfrak m_C)$ and residue field canonically $C/\\mathfrak m_C=K$. In particular $Q$ is henselian. The equality $q^{-1}(q(\\mathfrak m_C))=\\mathfrak m_C$ follows from $\\ker q=JC\\subseteq\\mathfrak m_C$, so $q$ is local.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WS (lemma-quotient-strict-henselization), quotient consequence stated in lem-weil-pbc-strictly-henselian-quotient; Tag 04GF (definition-henselian)."
+   }
+  },
+  {
+   "text": "The $R$-action on $D$ kills $J$, so $u$ kills every generator of $JC$ and thus kills $JC$. The quotient universal property gives a unique ring map $\\bar u:Q\\to D$ with $\\bar u q=u$. For $s\\in S$, choose a lift $r\\in R$; $R$-linearity of $u$ gives $\\bar u(s\\cdot1_Q)=s\\cdot1_D$, independently of the lift because $J$ acts by zero. Thus $\\bar u$ is an $S$-algebra map. Writing $\\rho_C,\\rho_Q,\\rho_D$ for reduction to the specified $K$, one has $\\rho_Qq=\\rho_C$ and $\\rho_D\\bar u q=\\rho_Du=\\rho_C$; surjectivity of $q$ gives $\\rho_D\\bar u=\\rho_Q$. Taking kernels shows that $\\bar u$ is local and its residue map is $\\mathrm{id}_K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit); inverse-composite argument of Tag 08HT (lemma-uniqueness-henselian)."
+   }
+  },
+  {
+   "text": "Put $\\mathfrak m_S=\\mathfrak m_R/J$. The residue maps $S\\to D\\to K$ and $S\\to Q\\to K$ agree: their composites with the surjection $R\\to S$ agree by hypothesis and $\\rho_Qq=\\rho_C$. Their kernels are $\\mathfrak m_S$. Therefore $\\mathfrak m_D$ lies over $\\mathfrak m_S$ and $\\mathrm{id}_K:\\kappa(\\mathfrak m_D)\\to Q/\\mathfrak m_Q$, using the specified identifications, is compatible over $\\kappa(\\mathfrak m_S)$. Apply [lem-weil-pbc-map-into-henselian-colimit] with base $S$, source the given ind-etale $S$-algebra $D$, target the henselian ring $Q$, and source prime $\\mathfrak m_D$. It gives exactly one local $S$-algebra map $v:D\\to Q$ with residue map $\\mathrm{id}_K$.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit); inverse-composite argument of Tag 08HT (lemma-uniqueness-henselian)."
+   }
+  },
+  {
+   "text": "Both $\\bar u v$ and $\\mathrm{id}_D$ are $S$-algebra maps $D\\to D$, are local, and induce $\\mathrm{id}_K$. Apply uniqueness in [lem-weil-pbc-map-into-henselian-colimit] with base $S$, source $D$, target the given henselian ring $D$, source prime $\\mathfrak m_D$ over $\\mathfrak m_S$, and prescribed residue map $\\mathrm{id}_K$. Compatibility over $\\kappa(\\mathfrak m_S)$ holds because both residue-field structures come from the same map $S\\to D$. Thus $\\bar u v=\\mathrm{id}_D$.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit); inverse-composite argument of Tag 08HT (lemma-uniqueness-henselian)."
+   }
+  },
+  {
+   "text": "Both $vu$ and $q$ are local $R$-algebra maps $C\\to Q$ inducing $\\mathrm{id}_K$. Apply uniqueness in [lem-weil-pbc-map-into-henselian-colimit] with base $R$, source the given ind-etale $R$-algebra $C$, target $Q$, source prime $\\mathfrak m_C$, and prescribed residue map $\\mathrm{id}_K$. The inverse image of $\\mathfrak m_Q$ in $R$ and that of $\\mathfrak m_C$ in $R$ are $\\mathfrak m_R$; the two maps $\\kappa(\\mathfrak m_R)\\to K$ agree by the original residue compatibility. All hypotheses therefore hold, giving $vu=q$. This application is over $R$, not over $S$; no $S$-algebra structure on $C$ is required.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit); inverse-composite argument of Tag 08HT (lemma-uniqueness-henselian)."
+   }
+  },
+  {
+   "text": "For $x\\in Q$, choose $c\\in C$ with $q(c)=x$. Then $v\\bar u(x)=vu(c)=q(c)=x$. Together with $\\bar u v=\\mathrm{id}_D$ this proves that $\\bar u$ is an isomorphism with inverse $v$. For $d\\in D$, choose $c$ with $q(c)=v(d)$; then $u(c)=\\bar u v(d)=d$, proving surjectivity of $u$. Finally $u(c)=0$ if and only if $q(c)=0$ since $u=\\bar u q$ and $\\bar u$ is injective, so $\\ker(u)=JC$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit); inverse-composite argument of Tag 08HT (lemma-uniqueness-henselian)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 08HR (lemma-map-into-henselian-colimit); inverse-composite argument of Tag 08HT (lemma-uniqueness-henselian)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let A be a local ring I an ideal C an ind etale henselian local A algebra and D an ind etale henselian local A/I algebra with the same residue field. A local residue preserving A algebra map C to D identifies C/IC with D",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; IsLocalRing.ResidueField.algebraMap_residue; Ideal.ResidueField.liftₐ; Ideal.ResidueField.ringHom_ext_iff; Ideal.ResidueField.lift; Ideal.ResidueField.algHom_ext_iff; Ideal.ResidueField.ringHom_ext; Ideal.algebraMap_quotient_residueField_mk",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration gives the two-base henselian quotient inverse"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, RingHom.Surjective",
+   "results": "; loogle: unknown identifier 'RingHom.Surjective'",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration gives the two-base henselian quotient inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]enselian.*[Cc]olimit|[Cc]olimit.*[Hh]enselian|[Hh]ensel.*[Qq]uotient",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration gives the two-base henselian quotient inverse"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ind etale algebra has a unique local map into a henselian ring with prescribed residue map; quotient comparison by constructing inverse over two bases",
+   "results": "StandardEtalePair.homEquiv; RingHom.Etale; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.Etale.recOn; Algebra.Etale; RingHom.FormallyEtale; Algebra.Etale.formallyEtale; Algebra.FormallyEtale.iff_comp_bijective",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration gives the two-base henselian quotient inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue compatible local homomorphism induces an isomorphism between a quotient of a henselian ind etale local algebra and an ind etale local algebra over the quotient base",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; StandardEtalePair.instFormallyEtaleRing; StandardEtalePair.homEquiv; StandardEtalePair.homEquiv_symm_apply; StandardEtalePair.lift; Algebra.FormallyEtale.comp_bijective; StandardEtalePair.homEquiv_apply_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration gives the two-base henselian quotient inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]enselian.*[Cc]olimit|[Cc]olimit.*[Hh]enselian|[Hh]ensel.*[Qq]uotient",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the two-base quotient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ind etale algebra has a unique local map into a henselian local ring inducing a prescribed map of residue fields",
+   "results": "IsLocalRing.ResidueField.map; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; RingHom.Etale; Algebra.Etale.formallyEtale; RingHom.FormallyEtale; Algebra.Etale; Algebra.FormallyEtale.iff_comp_bijective; Algebra.Etale.of_isLocalizationAway",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the two-base quotient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Ideal.Quotient",
+   "results": "; loogle: unknown identifier 'Ideal.Quotient'",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the two-base quotient comparison; query rejected: loogle: unknown identifier 'Ideal.Quotient'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local residue preserving map from a henselian ind etale R algebra C to a henselian ind etale R/J algebra D identifies D with C/JC",
+   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.FormallyEtale.comp_bijective; HenselianLocalRing; HenselianRing; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; StandardEtalePair.homEquiv_symm_apply; HenselianLocalRing.TFAE; Algebra.Extension.homInfinitesimal",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the two-base quotient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue compatible homomorphism of local ind etale algebras over a local ring and its quotient has kernel the extended ideal and is surjective",
+   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.FormallyEtale.comp_bijective; Ideal.surjectiveOnStalks_residueField; StandardEtalePair.lift; Algebra.FormallyUnramified.of_map_maximalIdeal; Algebra.IsEtaleAt; StandardEtalePresentation.lift_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the two-base quotient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-closed-immersion-strict-localization-cartesian",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of (1) and (2), normal-cone specialization: the Orgogozo closed-image reduction, Lemma 3.2.2 proof, the identification 'F \\times_S S(a) = F(a)' of the strict-local tubes through the closed image. Returned proof Step 3: henselian quotient and the three separate mapping-uniqueness applications over R/J, R/J, and R.",
+   "via": [
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-trf-nearby-closed-image",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ind-etale-quotient-two-base-inverse",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Six proof steps use two existing general tool nodes: the strictly henselian quotient and the unique ind-etale map into a henselian target. The three mapping applications explicitly use bases S, S, and R, with their primes and residue compatibilities checked. No new nodes.",
+  "blueprint": "Historical normal-cone specialization / Orgogozo closed-image reduction below lem-trf-local-term-locality: the strict-local tube identification F times_S S(a)=F(a), as recorded in blueprint.from.place. The latest blueprint ancestor is statement-only; this auxiliary algebra argument realizes its existing DAG proof route rather than claiming a new clause of the current ancestor text.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strictly-henselian-quotient",
+    "why": "The generic strictly henselian quotient theorem supplies the local henselian target Q and its residue field; no node in sk-i-curve-zero supplies this ring-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "The generic prescribed-residue unique-map theorem is applied over S twice and R once to construct v and identify the composites; no node in sk-i-curve-zero supplies this ring-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-b92338320",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-b92338320 (reviewer sub-agent of L); spot-checked: Read in full: the item; the cited nodes lem-weil-pbc-strictly-henselian-quotient and lem-weil-pbc-map-into-henselian-colimit; the stmt_deps; Stacks algebra.tex 08HR (l.42880), 08HT (l.42902) and 05WS (l.43703). The statement, stmt_deps, source and blueprint are byte-equal to the base-era copies in the Q149 runs. The item is still unsplit in clones/live and side-live, so it is not superseded. Step 1: JC is contained in m_C because R→C is local; the quotient node then gives Q local and strictly henselian with residue field K. Step 2: elementary factorization ū. It is S-linear by lifting s to R; the residue map is id_K because q is surjective, and ū is local. Step 3: 08HR over S with source D (ind-étale over S) and target Q (henselian). The preimages of m_D and m_Q in S are both m_R/J, since the two maps S→K agree after composing with the surjection R→S. τ=id_K is a κ(m_S)-algebra map. Exact-one gives the unique local v. Step 4: uniqueness over S with target D gives ūv=id_D. Step 5: uniqueness over R with source C and target Q gives vu=q. v is R-linear because R→S→Q equals R→C→Q, and C needs no S-structure. Step 6: surjection cancellation gives vū=id_Q, u surjective, and ker u=JC. Tested on J=0 (08HT), J=m_R, k[[t]]/(t) with C=R and D=k, and Z_(p)^{sh}/p=F̄_p. No duplicate: the sbc strict-henselization-quotient, wf henselization comparison, per pair-henselization and zl closed-lift nodes state different things. No new nodes, no SGA. The two sk-thm-p1 nodes are accepted as generic tool_uses (05WS, 08HR black boxes), with no cycle. Minor: the report misnames the failed Loogle identifier; three search kinds are still recorded. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IndEtaleQuotientTwoBaseInverse",
+  "declaration": "Algebra.ind_etale_quotient_two_base_inverse",
+  "file": "lean/Sheaf/RingTheory/IndEtaleQuotientTwoBaseInverse.lean",
+  "statement": "theorem ind_etale_quotient_two_base_inverse (R : Type u) [CommRing R] [IsLocalRing R] (J : Ideal R) (hJ : J ≤ IsLocalRing.maximalIdeal R) (C : Type v) [CommRing C] [IsStrictlyHenselianLocalRing C] [Algebra R C] [IsLocalHom (algebraMap R C)] (D : Type w) [CommRing D] [HenselianLocalRing D] [Algebra (R ⧸ J) D] [Algebra R D] [IsScalarTower R (R ⧸ J) D] [IsLocalHom (algebraMap (R ⧸ J) D)] (hC : RingHom.IndEtaleAcrossUniverses (algebraMap R C)) (hD : RingHom.IndEtaleAcrossUniverses (algebraMap (R ⧸ J) D)) (K : Type t) [Field K] (eC : IsLocalRing.ResidueField C ≃+* K) (eD : IsLocalRing.ResidueField D ≃+* K) (hbase : (eC.toRingHom.comp (IsLocalRing.residue C)).comp (algebraMap R C) = (eD.toRingHom.comp (IsLocalRing.residue D)).comp (algebraMap R D)) (hker : RingHom.ker ((eC.toRingHom.comp (IsLocalRing.residue C)).comp (algebraMap R C)) = IsLocalRing.maximalIdeal R) (u : C →ₐ[R] D) [IsLocalHom u.toRingHom] (hu : (eD.toRingHom.comp (IsLocalRing.residue D)).comp u.toRingHom = eC.toRingHom.comp (IsLocalRing.residue C)) : ∃ (_ : Algebra (R ⧸ J) (C ⧸ J.map (algebraMap R C))) (_ : HenselianLocalRing (C ⧸ J.map (algebraMap R C))), algebraMap (R ⧸ J) (C ⧸ J.map (algebraMap R C)) = Ideal.quotientMap (J.map (algebraMap R C)) (algebraMap R C) Ideal.le_comap_map ∧ IsLocalRing.maximalIdeal (C ⧸ J.map (algebraMap R C)) = (IsLocalRing.maximalIdeal C).map (Ideal.Quotient.mk (J.map (algebraMap R C))) ∧ ∃ eQ : IsLocalRing.ResidueField (C ⧸ J.map (algebraMap R C)) ≃+* K, (eQ.toRingHom.comp (IsLocalRing.residue (C ⧸ J.map (algebraMap R C)))).comp (Ideal.Quotient.mk (J.map (algebraMap R C))) = eC.toRingHom.comp (IsLocalRing.residue C) ∧ ∃ f : (C ⧸ J.map (algebraMap R C)) →ₐ[R ⧸ J] D, f.toRingHom.comp (Ideal.Quotient.mk (J.map (algebraMap R C))) = u.toRingHom ∧ (∀ f' : (C ⧸ J.map (algebraMap R C)) →ₐ[R ⧸ J] D, f'.toRingHom.comp (Ideal.Quotient.mk (J.map (algebraMap R C))) = u.toRingHom → f' = f) ∧ Function.Bijective f ∧ ∃ v : D →ₐ[R ⧸ J] (C ⧸ J.map (algebraMap R C)), IsLocalHom v.toRingHom ∧ (eQ.toRingHom.comp (IsLocalRing.residue (C ⧸ J.map (algebraMap R C)))).comp v.toRingHom = eD.toRingHom.comp (IsLocalRing.residue D) ∧ (∀ v' : D →ₐ[R ⧸ J] (C ⧸ J.map (algebraMap R C)), IsLocalHom v'.toRingHom → (eQ.toRingHom.comp (IsLocalRing.residue (C ⧸ J.map (algebraMap R C)))).comp v'.toRingHom = eD.toRingHom.comp (IsLocalRing.residue D) → v' = v) ∧ f.comp v = AlgHom.id (R ⧸ J) D ∧ v.toRingHom.comp u.toRingHom = Ideal.Quotient.mk (J.map (algebraMap R C)) ∧ v.comp f = AlgHom.id (R ⧸ J) (C ⧸ J.map (algebraMap R C)) ∧ Function.Surjective u ∧ RingHom.ker u.toRingHom = J.map (algebraMap R C)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7758274c",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Fresh delivery (side-live node split, no lean; only the lean field added). All 9 hypotheses and 7 conclusion clauses match the node: S=R⧸J; R-action on D through S via IsScalarTower; ind-étale via recorded IndEtaleAcrossUniverses; Q's S-algebra pinned to Ideal.quotientMap; HenselianLocalRing Q and max ideal q(m_C); eQ fixed by q; unique f with f∘q=u, bijective; unique local v with residue id_K (uniqueness without inverse equations); f∘v=id, v∘u=q as ring maps, v∘f=id, u surjective, ker u=JC. Universes u,v,w,t independent; J=0 and J=m_R covered. Only sorry is the proof; docstrings cite 08HR/08HT/05WS with the blueprint id and the 6 steps; lean.statement verbatim. Advisory only: hker follows from locality but the node states it; Mathlib's algebraQuotientMapQuotient is the same structure as the pinned existential. No compile run (no file changed)."
+ }
+}

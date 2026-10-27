@@ -1,0 +1,389 @@
+{
+ "id": "lem-trf-affinoid-canonical-reduction-finite-type",
+ "kind": "statement",
+ "title": "Finite generation of the canonical reduction of a strict affinoid",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. A Tate algebra $T_r=K\\langle X_1,\\ldots,X_r\\rangle$ is the restricted-series ring of [def-trf-restricted-series-presentation], with Gauss norm $\\|\\sum a_\\nu X^\\nu\\|_G=\\sup_\\nu|a_\\nu|$. Let $C\\ne0$ be a reduced quotient of such an algebra with its affinoid Banach topology. Define $\\rho(c)=\\sup_\\chi|\\chi(c)|$, where $\\chi:C\\to K$ runs over continuous unital $K$-algebra homomorphisms. Put $V=\\{a\\in K:|a|\\le1\\}$, $\\mathfrak m=\\{a\\in K:|a|<1\\}$, $\\kappa=V/\\mathfrak m$, $C_{\\le1}=\\{c:\\rho(c)\\le1\\}$ and $C_{<1}=\\{c:\\rho(c)<1\\}$. Then $\\widetilde C=C_{\\le1}/C_{<1}$ is a finitely generated $\\kappa$-algebra: there are $t\\ge0$ and $b_1,\\ldots,b_t\\in C_{\\le1}$ such that their classes generate $\\widetilde C$ as a $\\kappa$-algebra. Here generation means that every class is a polynomial in these classes with coefficients in $\\kappa$.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR sections 6.3–6.4, finiteness of the reduction algebra. Confirmed in Fargues, Groupes analytiques rigides p-divisibles, section 1.7.1, printed p.18, paragraph defining A-tilde; read online 2026-10-24. That paper works p-adically; the present arbitrary-characteristic statement is the BGR strict-affinoid input, not an extension of the p-adic theorem by assertion. Archival copy WANTED; not present in this checkout.",
+  "url": "https://webusers.imj-prg.fr/~laurent.fargues/Groupesanalytiques.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-affinoid-spectral-banach-norm], $\\rho$ is a nonarchimedean submultiplicative $K$-algebra norm. Thus $C_{\\le1}$ is a subring and $C_{<1}$ an ideal in it; constants induce the stated $\\kappa$-algebra structure. Apply [lem-trf-tate-normalization-lift] to a presentation $C=T_r/I$; $I$ is proper since $C\\ne0$. Obtain $A=K\\langle U_1,\\ldots,U_d\\rangle$ and a finite injective $K$-algebra map $\\varphi:A\\to C$. The source is reduced: it embeds as the restricted-series subring of the formal power series domain over $K$ (the first nonzero homogeneous terms of a product have nonzero product). This also covers $d=0$, when $A=K$.",
+   "uses": [
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-tate-normalization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR Theorem 6.3.5/1, finite map implies finite reduction map. Independently read in Temkin, A new proof of the Gerritzen-Grauert theorem, introduction printed p.2 and section 2 (definition of reduction); https://math.huji.ac.il/~temkin/papers/Gerritzen_Grauert.pdf. BGR archival copy WANTED; source is not locally present."
+   }
+  },
+  {
+   "text": "Identify $\\widetilde A$ with $\\kappa[U_1,\\ldots,U_d]$. Indeed [lem-trf-affinoid-supremum-seminorm-calculus] gives $\\rho_A=\\|\\cdot\\|_G$. Its maximal-ideal formula equals the continuous-character formula here: the same node makes every maximal residue field finite over the algebraically closed $K$, hence equal to $K$; its quotient-Gauss bound makes each resulting evaluation continuous. Conversely a $K$-character has maximal kernel. Reduction of coefficients of a series of Gauss norm at most one gives a polynomial, since only finitely many coefficients have absolute value one. The coefficients that have absolute value below one have supremum strictly below one: outside a finite set they are below $1/2$, and the remaining such coefficients have finite maximum below one. Hence the kernel is exactly $A_{<1}$. Finite coefficient convolution proves multiplicativity of this reduction map, and lifting the finitely many coefficients of any polynomial proves surjectivity. It therefore induces the asserted isomorphism, preserving constants and variables.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR Theorem 6.3.5/1, finite map implies finite reduction map. Independently read in Temkin, A new proof of the Gerritzen-Grauert theorem, introduction printed p.2 and section 2 (definition of reduction); https://math.huji.ac.il/~temkin/papers/Gerritzen_Grauert.pdf. BGR archival copy WANTED; source is not locally present."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-affinoid-canonical-reduction] to $\\varphi:A\\to C$. Both algebras are nonzero, reduced, and strict affinoids over the given complete algebraically closed nontrivially valued field; finiteness was supplied in step 1. The lemma gives a map $\\widetilde\\varphi:\\widetilde A\\to\\widetilde C$ and finitely many module generators $\\bar e_1,\\ldots,\\bar e_N$ for $\\widetilde C$ over $\\widetilde A$. Choose representatives $e_j\\in C_{\\le1}$. The lemma also gives $\\rho(\\varphi(U_i))\\le1$, so those variable images have representatives in the required unit ball.",
+   "uses": [
+    "lem-trf-finite-affinoid-canonical-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR Theorem 6.3.5/1, finite map implies finite reduction map. Independently read in Temkin, A new proof of the Gerritzen-Grauert theorem, introduction printed p.2 and section 2 (definition of reduction); https://math.huji.ac.il/~temkin/papers/Gerritzen_Grauert.pdf. BGR archival copy WANTED; source is not locally present."
+   }
+  },
+  {
+   "text": "For any $\\bar c\\in\\widetilde C$, module generation gives $\\bar c=\\sum_{j=1}^N\\widetilde\\varphi(P_j)\\bar e_j$ with $P_j\\in\\kappa[U_1,\\ldots,U_d]$, using step 2. Each summand is a polynomial over $\\kappa$ in the classes of $\\varphi(U_1),\\ldots,\\varphi(U_d),e_1,\\ldots,e_N$. Thus these $d+N$ representatives in $C_{\\le1}$ give the requested algebra generators. No assumption that the reduction map is surjective, and no finite generation of the full power-bounded ring over the valuation ring, is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR Theorem 6.3.5/1, finite map implies finite reduction map. Independently read in Temkin, A new proof of the Gerritzen-Grauert theorem, introduction printed p.2 and section 2 (definition of reduction); https://math.huji.ac.il/~temkin/papers/Gerritzen_Grauert.pdf. BGR archival copy WANTED; source is not locally present."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-spectral-banach-norm",
+  "lem-trf-tate-normalization-lift",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-finite-affinoid-canonical-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Noether-normalization argument for BGR Corollary 6.3.4/3 using Theorem 6.3.5/1; reconstructed with the coefficient-reduction and generator arguments written out. BGR absent locally; relative finiteness independently confirmed in Temkin introduction p.2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affinoid|canonical.?reduction|reduction.*FiniteType|FiniteType.*reduction",
+   "results": "{\"t\": \"2026-10-24T08:07:06Z\", \"tool\": \"grep\", \"query\": \"affinoid|canonical.?reduction|reduction.*FiniteType|FiniteType.*reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.QuasiFinite residue-field and finite-fibre declarations concern ordinary ring maps, not the spectral unit ball of a Banach quotient or its reduction; finite residue FIELD results do not prove finite TYPE of this reduction algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical reduction affinoid algebra finite type over residue field",
+   "results": "{\"t\": \"2026-10-24T08:07:06Z\", \"tool\": \"leansearch\", \"query\": \"Canonical reduction affinoid algebra finite type over residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.casesOn\", \"Algebra.QuasiFinite.recOn\", \"IsLocalRing.residue\", \"WeierstrassCurve.reduction\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\"], \"digest\": \"234eb14969b4dc6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.QuasiFinite residue-field and finite-fibre declarations concern ordinary ring maps, not the spectral unit ball of a Banach quotient or its reduction; finite residue FIELD results do not prove finite TYPE of this reduction algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRestricted\", \"FiniteType\"",
+   "results": "{\"t\": \"2026-10-24T08:07:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRestricted\\\", \\\"FiniteType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.QuasiFinite residue-field and finite-fibre declarations concern ordinary ring maps, not the spectral unit ball of a Banach quotient or its reduction; finite residue FIELD results do not prove finite TYPE of this reduction algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonarchimedean Tate algebra quotient the spectral unit ball modulo elements of spectral norm less than one is finite type",
+   "results": "{\"t\": \"2026-10-24T08:07:13Z\", \"tool\": \"leanfinder\", \"query\": \"For a nonarchimedean Tate algebra quotient the spectral unit ball modulo elements of spectral norm less than one is finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteQuotientIdealOfIsMaximal\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"AlgHom.IsArithFrobAt.finite_quotient\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"IsLocalRing.finite_residueField_of_compactSpace\", \"IsLocalRing.isOpen_iff_finite_quotient\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\"], \"digest\": \"07c2ce9d25f992c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.QuasiFinite residue-field and finite-fibre declarations concern ordinary ring maps, not the spectral unit ball of a Banach quotient or its reduction; finite residue FIELD results do not prove finite TYPE of this reduction algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical reduction of a strict affinoid algebra is a finitely generated algebra over the residue field",
+   "results": "{\"t\": \"2026-10-24T08:07:14Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical reduction of a strict affinoid algebra is a finitely generated algebra over the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.instResidueField\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Algebra.QuasiFinite.finite_fiber\", \"IsLocalRing.instFiniteResidueField\", \"instFiniteResidueField\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"RingHom.EssFiniteType.residueFieldMap\"], \"digest\": \"a5531858e17a0c2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.QuasiFinite residue-field and finite-fibre declarations concern ordinary ring maps, not the spectral unit ball of a Banach quotient or its reduction; finite residue FIELD results do not prove finite TYPE of this reduction algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|canonical.?reduction|reduction.*Module.Finite",
+   "results": {
+    "t": "2026-10-24T08:41:20Z",
+    "tool": "grep",
+    "query": "affinoid|TateAlgebra|canonical.?reduction|reduction.*Module.Finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite homomorphism of affinoid algebras induces a finite homomorphism on canonical reductions",
+   "results": {
+    "t": "2026-10-24T08:41:20Z",
+    "tool": "leansearch",
+    "query": "A finite homomorphism of affinoid algebras induces a finite homomorphism on canonical reductions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.QuasiFinite",
+     "AlgHom.Finite",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "RingHom.QuasiFinite.of_finite",
+     "AlgHom.FiniteType"
+    ],
+    "digest": "909bfd837ad100ca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.Finite\", \"ResidueField\"",
+   "results": {
+    "t": "2026-10-24T08:41:21Z",
+    "tool": "loogle",
+    "query": "\"Algebra.Finite\", \"ResidueField\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite homomorphism of affinoid algebras induces a finite homomorphism on canonical reductions",
+   "results": {
+    "t": "2026-10-24T08:41:22Z",
+    "tool": "leanfinder",
+    "query": "A finite homomorphism of affinoid algebras induces a finite homomorphism on canonical reductions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.IsFinite.SpecMap_iff",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "RingHom.Finite.of_comp_finite",
+     "AlgebraicGeometry.Scheme.Hom.finiteType_appLE"
+    ],
+    "digest": "d1591fc8f12ed14c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical reduction of a strict affinoid algebra is finitely generated over the residue field",
+   "results": {
+    "t": "2026-10-24T08:45:42Z",
+    "tool": "leansearch",
+    "query": "The canonical reduction of a strict affinoid algebra is finitely generated over the residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instFiniteResidueField",
+     "Algebra.QuasiFinite.casesOn",
+     "Algebra.instFiniteResidueFieldOfFormallyUnramified",
+     "Algebra.Generators.fg_ker_of_finitePresentation",
+     "Algebra.QuasiFinite.recOn",
+     "Algebra.instFiniteResidueFieldOfQuasiFiniteAt",
+     "Algebra.FormallySmooth.exists_kerProj_comp_eq_id",
+     "IsLocalRing.ResidueField.algebraMap_eq"
+    ],
+    "digest": "dcab1db3607fb2e0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteType\", \"spectralNorm\"",
+   "results": {
+    "t": "2026-10-24T08:45:42Z",
+    "tool": "loogle",
+    "query": "\"FiniteType\", \"spectralNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module finite morphisms of strictly affinoid Banach algebras remain module finite after taking spectral unit balls modulo elements of norm less than one",
+   "results": {
+    "t": "2026-10-24T08:45:48Z",
+    "tool": "leanfinder",
+    "query": "Module finite morphisms of strictly affinoid Banach algebras remain module finite after taking spectral unit balls modulo elements of norm less than one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "module_finite_of_liesOver",
+     "Module.Finite.of_localized_maximal",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "finite_of_algHom_finiteType_of_isJacobsonRing",
+     "Algebra.QuasiFinite",
+     "Submodule.fg_of_isLocalized_maximal",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "finite_of_finite_type_of_isJacobsonRing"
+    ],
+    "digest": "8792f96b70b739a3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectral reduction of a quotient of a Tate algebra is a finite type algebra over the residue field",
+   "results": {
+    "t": "2026-10-24T08:45:49Z",
+    "tool": "leanfinder",
+    "query": "The spectral reduction of a quotient of a Tate algebra is a finite type algebra over the residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.QuasiFinite.instResidueField",
+     "Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField",
+     "instIsAlgebraicQuotientIdealResidueField",
+     "Algebra.instFiniteResidueFieldOfQuasiFiniteAt",
+     "Algebra.QuasiFinite.instFiniteResidueField",
+     "AlgHom.IsArithFrobAt.finite_quotient",
+     "Algebra.QuasiFinite.finite_fiber",
+     "algebra_finiteType_of_liesOver"
+    ],
+    "digest": "5162851b9d02ede8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical reduction of a strict affinoid algebra is a finitely generated algebra over the residue field",
+   "results": {
+    "t": "2026-10-24T08:51:52Z",
+    "tool": "leanfinder",
+    "query": "The canonical reduction of a strict affinoid algebra is a finitely generated algebra over the residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.QuasiFinite.instResidueField",
+     "Algebra.instFiniteResidueFieldOfQuasiFiniteAt",
+     "Algebra.QuasiFinite.instFiniteResidueField",
+     "Algebra.QuasiFinite.finite_fiber",
+     "IsLocalRing.instFiniteResidueField",
+     "instFiniteResidueField",
+     "Algebra.instFiniteResidueFieldOfFormallyUnramified",
+     "RingHom.EssFiniteType.residueFieldMap"
+    ],
+    "digest": "a5531858e17a0c2b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-distinguished-presentation",
+  "date": "2026-10-24",
+  "group": "Q104"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Finite generation of the canonical reduction of a strict affinoid.",
+   "via": [
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-canonical-reduction-finite-type",
+  "worker": "stage1",
+  "summary": "Q86: retained statement; used existing Tate normalization and norm nodes, added only relative finite-map reduction theorem, identified Tate reduction coefficientwise and explicitly assembled algebra generators from finite module generators. No distinguished-presentation dependency or circular use of this item.",
+  "blueprint": "Historical analytic normalization input below lem-trf-local-term-locality, as identified in blueprint.from.place; no change of current sk-i-curve-zero contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-e04421ef0",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-e04421ef0 (reviewer sub-agent of L); spot-checked: Read the item, its 4 steps and the new node lem-trf-finite-affinoid-canonical-reduction in full. The item's statement and stmt_deps are unchanged. Its proof-dependency closure has 50 nodes and does not contain the item, so there is no cycle; the distinguished-presentation parent is not cited. Sources: BGR is not in literature/, so I fetched Temkin's Gerritzen–Grauert PDF. Its p.5 confirms BGR 6.3.4/3 (Ã = A°/A°° is a finitely generated k̃-algebra, with the spectral seminorm and k nontrivially valued), which is the item. Its p.2 confirms BGR 6.3.5/1 (A→B finite iff Ã→B̃ finite); the new node keeps the ⇒ direction under algebraically closed, reduced, nonzero hypotheses. Step 1: the spectral-norm node makes C≤1 a ring and C<1 an ideal; the normalization node gives an injective finite T_d→C because I is proper; d=0 is covered. Step 2: the supremum-calculus node gives ρ = Gauss norm. Over algebraically closed K the residue fields are K, and the quotient-Gauss bound makes evaluations continuous, so the character ρ and the maximal-ideal ρ agree. Coefficient reduction V⟨U⟩→κ[U] is well defined because a null sequence has finitely many unit coefficients, and its kernel is {‖f‖_G<1} because the sup of a null sequence is attained, so Ã≅κ[U]. Steps 3 and 4: apply the new node, then assemble algebra generators from module generators; both correct. Small cases checked: identity, K→K×K, U↦U², the non-injective U↦0, and the excluded non-finite U↦πU. No duplicate among the affinoid nodes (powerbounded-integral, spectral-equation, norm-lifting, distinguished-presentation). D1: the new node is not a restatement; the item derives from it by normalization, the Tate reduction computation and generator assembly, as BGR derives 6.3.4/3. Caution for whoever splits the new node later: BGR's own proof of 6.3.5/1 uses 6.3.4/3, so it must not cite this item. A non-circular route exists through the T_d case (BGR 6.3.4/2) applied to the finite composite T_d→B. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidCanonicalReductionFiniteType",
+  "declaration": "RestrictedSeries.affinoid_canonical_reduction_finite_type",
+  "declarations": [
+   "RestrictedSeries.affinoidCharacterSup",
+   "RestrictedSeries.affinoid_canonical_reduction_finite_type"
+  ],
+  "file": "lean/Sheaf/RingTheory/AffinoidCanonicalReductionFiniteType.lean",
+  "statement": "theorem affinoid_canonical_reduction_finite_type (K : Type u) [NormedField K] [IsUltrametricDist K] [CompleteSpace K] [IsAlgClosed K] (hK : ∃ a : K, a ≠ 0 ∧ ‖a‖ ≠ 1) (C : Type v) [NormedCommRing C] [CompleteSpace C] [Nontrivial C] [IsReduced C] [Algebra K C] (haff : ∃ (r : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* C), Function.Surjective q ∧ q.comp (constants K r) = algebraMap K C ∧ ∀ U : Set C, IsOpen U ↔ ∀ s, q s ∈ U → ∃ ε : ℝ, 0 < ε ∧ ∀ t, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (t.val - s.val) < ε → q t ∈ U) : ∃ (t : ℕ) (b : Fin t → C), (∀ i, affinoidCharacterSup K C (b i) ≤ 1) ∧ ∀ c : C, affinoidCharacterSup K C c ≤ 1 → ∃ p : MvPolynomial (Fin t) K, (∀ ν : Fin t →₀ ℕ, ‖p.coeff ν‖ ≤ 1) ∧ affinoidCharacterSup K C (c - MvPolynomial.eval₂ (algebraMap K C) b p) < 1",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df9a11641",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read the item, both stmt_deps (Field; RestrictedSeries.constants and IsAffinoidQuotient), the module and report, and for context GrauertRemmertPowerbounded and the landed FiniteAffinoidCanonicalReduction. K hypotheses are exact (NormedField + ultrametric + complete + alg closed + hK nontrivial). C is nonzero, reduced, complete, with haff fixing the quotient Gauss topology (same encoding as the landed grauert_remmert_powerbounded); nothing stronger. affinoidCharacterSup is a real sSup over continuous K-algebra characters, same formula as the landed sister module, no other owner. The conclusion (rho(b_i)<=1; every c with rho<=1 is a V-coefficient polynomial in b up to an error with rho<1) is equivalent to the classes generating C_{<=1}/C_{<1} over kappa. Edge cases r=0, t=0, products, any characteristic and universes u, v are covered. Statement verbatim; node changes only lean; docstrings, imports, line lengths and sorry-only proof are fine. Advisory: the sister lemma assumes the exact quotient norm, so stage 3 renorms C; harmless since rho depends only on the topology. No fixes, not recompiled."
+ }
+}

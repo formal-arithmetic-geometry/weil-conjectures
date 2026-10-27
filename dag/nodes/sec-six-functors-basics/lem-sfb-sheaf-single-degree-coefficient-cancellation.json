@@ -1,0 +1,329 @@
+{
+ "id": "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+ "kind": "statement",
+ "title": "Global single-degree cancellation of finite polynomial coefficient obstructions",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $D\\to A$ a homomorphism of commutative rings, and $q:X\\to\\operatorname{Spec}D$ a separated finite type morphism of schemes [def-pc-scheme, def-pc-morphism-conventions]. Fix a finite affine open cover $X=\\bigcup_{j=1}^r T_j$, $T_j=\\operatorname{Spec}S_j$, and surjections $Q_j=D[x_1,\\ldots,x_{s_j}]\\twoheadrightarrow S_j$ with $s_j\\geq0$ [def-weil-pbc-mv-polynomial-ring]. Put $X_A=X\\times_D\\operatorname{Spec}A$, with projection $\\pi:X_A\\to X$ [def-pc-fibre-product]. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X_A})$ [def-pc-derived-category], let $F\\in D(\\mathcal O_X)$ have bounded coherent cohomology [pqf-def-coherent], and let $\\gamma:F\\to R\\pi_*K$ [def-pc-derived-direct-image]. On $T_j$, let $L_j\\in D(S_j)$ and $K_j\\in D(S_j\\otimes_D A)$ be the objects corresponding to $F|_{T_j}$ and $K|_{(T_j)_A}$ under [lem-pc-affine-qcoh-derived-equivalence]. Let $\\gamma_j:L_j\\to\\operatorname{Res}_{S_j}^{S_j\\otimes_D A}K_j$ be the affine restriction of $\\gamma$. Here $\\operatorname{Res}$ denotes termwise restriction of scalars, and the affine derived pushforward is identified with it by [lem-pc-affine-pushforward-resolution-quasi-iso]. Put $Q_{j,A}=A[x_1,\\ldots,x_{s_j}]$. In the module derived category [def-weil-abstract-derived-category] define\n$$C_j=\\operatorname{Cone}\\left(Q_{j,A}\\otimes_{Q_j}^{\\mathbf L}\\operatorname{Res}_{Q_j}^{S_j}L_j\\xrightarrow{1\\otimes\\gamma_j}Q_{j,A}\\otimes_{Q_j}^{\\mathbf L}\\operatorname{Res}_{Q_j}^{S_j\\otimes_D A}K_j\\xrightarrow{\\mu_j}\\operatorname{Res}_{Q_{j,A}}^{S_j\\otimes_D A}K_j\\right).$$\nTensor is computed by K-flat resolutions [def-pc-module-kflat-complex]; $\\mu_j$ is the extension--restriction counit induced by the given $A$-action. Cones have the meaning of [def-weil-triangulated-category]. Suppose $n\\in\\mathbf Z$, $H^i(C_j)=0$ for every $j$ and $i>n$, and $H^n(C_j)$ is a finitely generated $Q_{j,A}$-module for every $j$ [def-weil-finitely-generated-module]. Then there exist a finite type $D$-algebra $D'$, a factorization $D\\to D'\\to A$, and $F'\\in D(\\mathcal O_{X_{D'}})$ with bounded coherent cohomology, together with $\\gamma':F'\\to R\\pi'_*K$, where $\\pi':X_A\\to X_{D'}$. Put $q':X_{D'}\\to\\operatorname{Spec}D'$ and $M'=\\widetilde A[0]$ [lem-weil-pbc-spec-module-tilde-sections]. Define\n$$\\theta':Lq'^*M'\\otimes^{\\mathbf L}F'\\longrightarrow R\\pi'_*K$$\nby adjunction [lem-pc-ringed-spaces-derived-adjoint] from the scalar action and the transpose of $\\gamma'$:\n$$L\\pi'^*(Lq'^*M'\\otimes^{\\mathbf L}F')\\simeq L(q'\\pi')^*M'\\otimes^{\\mathbf L}L\\pi'^*F'\\longrightarrow\\mathcal O_{X_A}\\otimes^{\\mathbf L}K\\simeq K.$$\nDerived pullback and tensor are [def-pc-derived-pullback, def-pc-scheme-derived-tensor-structure]. The cone of $\\theta'$ has quasi-coherent cohomology and $H^i=0$ for every $i\\geq n$. No ring map is assumed flat. No relative pseudo-coherence of $K$, map relating $F$ to $F'$, or conclusion below $n$ is assumed or asserted. The assertion includes the empty scheme and empty cover.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated global one-degree obstruction-cancellation prerequisite for the unnumbered Kiehl assertion after Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. Not a theorem stated in that paragraph. Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, primary descente source WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "def-pc-derived-direct-image",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-weil-triangulated-category",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-affine-pushforward-resolution-quasi-iso"
+ ],
+ "proof": [
+  {
+   "text": "Each $S_j$ is Noetherian, being a finite type algebra over $D$. On $T_j$, coherence and the affine finite-type section criterion imply that the cohomology modules of $L_j$ are finitely generated over $S_j$; their nonzero degrees lie in the fixed finite cohomology interval of $F$. Apply the affine single-degree cancellation node to $(D,A,S_j,Q_j,K_j,L_j,\\gamma_j,n)$. Its polynomial cone is exactly $C_j$ in the hypothesis. Obtain $D\\to E_j\\to A$, with $E_j$ finite type over $D$, and $G_j\\in D(S_j\\otimes_D E_j)$ with bounded finitely generated cohomology and a map $\\delta_j$ to the restriction of $K_j$. The cone of its normalized map $A\\otimes_{E_j}^{\\mathbf L}G_j\\to K_j$ has zero cohomology in all degrees $i\\ge n$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "lem-sfb-single-degree-coefficient-cone-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-formulated one-degree Mayer--Vietoris improvement with a supplied global coherent witness, a prerequisite below the unnumbered Kiehl assertion after Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. The Stacks paragraph does not state this assertion. Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, primary descente proof WANTED."
+   }
+  },
+  {
+   "text": "The rings $E_j$ and $S_j\\otimes_D E_j$ are Noetherian by finite-type permanence. Under the affine derived equivalence, $G_j$ therefore defines a bounded coherent object on $(T_j)_{E_j}$: on a Noetherian affine scheme finite module cohomology corresponds to coherent cohomology. The affine pushforward resolution comparison identifies the target of $\\delta_j$ with the restriction of $R\\pi_{j*}(K|_{(T_j)_A})$, so $\\delta_j$ gives a sheaf-derived map to this target. The affine pullback and tensor comparisons identify $Lq_j^*\\widetilde A\\otimes^{\\mathbf L}\\widetilde{G_j}$ with the sheafification of $A\\otimes_{E_j}^{\\mathbf L}G_j$. To check the map, take a K-flat resolution $P\\to A$ over $E_j$. Both transposes use $P\\to A$ followed by the given scalar multiplication on $K_j$ and the transpose of $\\delta_j$: on pure tensors the action is $a\\otimes k\\mapsto ak$. Thus derived adjunction identifies the sheaf map with the normalized map of step 1. The affine equivalence carries its cone to a quasi-coherent cone with the same cohomology vanishing. This proves $\\mathcal A_n(T_j)$ as defined in the global-witness one-degree patching node.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-sfb-global-witness-one-degree-binary-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-formulated one-degree Mayer--Vietoris improvement with a supplied global coherent witness, a prerequisite below the unnumbered Kiehl assertion after Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. The Stacks paragraph does not state this assertion. Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, primary descente proof WANTED."
+   }
+  },
+  {
+   "text": "Retain the supplied global $F,\\gamma$. Define $\\theta_0:Lq^*\\widetilde A\\otimes^{\\mathbf L}F\\to R\\pi_*K$ by the same adjunction normalization as in the statement, at coefficient stage $D$. On $T_j$ its source is $(S_j\\otimes_D^{\\mathbf L}A)\\otimes_{S_j}^{\\mathbf L}L_j\\simeq A\\otimes_D^{\\mathbf L}L_j$, by the affine pullback/tensor formulas. This, after restriction to $Q_j$, equals $Q_{j,A}\\otimes_{Q_j}^{\\mathbf L}L_j$: $Q_j$ is free over $D$ on monomials. Indeed, a K-flat $Q_j$-resolution $P$ is K-flat over $D$, since for acyclic $N$ the complex $N\\otimes_D Q_j$ is a direct sum of copies of $N$, and $(N\\otimes_D Q_j)\\otimes_{Q_j}P$ is acyclic by K-flatness. The equality $Q_{j,A}\\otimes_{Q_j}P=A\\otimes_D P$ gives the comparison. The same calculation applies to the target action map. Both maps apply $\\gamma_j$ then the augmentation and $A$-multiplication, so adjunction identifies the restricted $\\theta_0$ with the map defining $C_j$, after forgetting scalars to $Q_j$. Thus its cone restricts to the underlying cone $C_j$ on every chart. The affine equivalence gives quasi-coherent cohomology there, and $H^i=0$ for $i>n$; these local statements hold globally. Consequently the original $(D,F,\\gamma)$ is the required global witness at cutoff $n+1$.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-formulated one-degree Mayer--Vietoris improvement with a supplied global coherent witness, a prerequisite below the unnumbered Kiehl assertion after Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. The Stacks paragraph does not state this assertion. Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, primary descente proof WANTED."
+   }
+  },
+  {
+   "text": "Set $W_k=T_1\\cup\\cdots\\cup T_k$. Prove $\\mathcal A_n(W_k)$ by induction, keeping $D,A,K,n$ fixed. Step 2 proves the base $k=1$. For $k>1$ use the two opens $W_{k-1},T_k$ of $W_k$. They are quasi-compact, being finite unions of affine opens; their union is separated finite type over $D$, since the diagonal restricts from that of $X$ and local finite type restricts to opens. Crucially, supply the new patching lemma with $F|_{W_k}$ and the restriction of the original $\\gamma$, at the original coefficient stage $D$. Its normalized cone is quasi-coherent and vanishes for $i\\ge n+1$ by step 3. The affine formulas commute with open restriction; the affine pushforward comparison computes pushforward termwise, and ordinary pushforward commutes with the open restriction. These comparisons preserve the action map by its adjunction description. The induction witness on $W_{k-1}$ and step 2 on $T_k$ supply the two cutoff-$n$ premises. The global-witness one-degree binary patching lemma now gives $\\mathcal A_n(W_k)$. At $k=r$, expand this predicate to obtain precisely the required $D',F',\\gamma',\\theta'$.",
+   "uses": [
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "def-pc-morphism-conventions",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-pc-module-pushforward-open-restriction",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-formulated one-degree Mayer--Vietoris improvement with a supplied global coherent witness, a prerequisite below the unnumbered Kiehl assertion after Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. The Stacks paragraph does not state this assertion. Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, primary descente proof WANTED."
+   }
+  },
+  {
+   "text": "If $r=0$, the stipulated cover forces $X=\\varnothing$. Take $D'=D$, $F'=0$ and $\\gamma'=0$; all structure-module sheaves on the empty scheme vanish, so the source, target and cone of $\\theta'$ vanish. This also covers the empty base ring and empty base changes. For $r>0$ zero or redundant charts do not change the preceding induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-formulated one-degree Mayer--Vietoris improvement with a supplied global coherent witness, a prerequisite below the unnumbered Kiehl assertion after Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. The Stacks paragraph does not state this assertion. Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, primary descente proof WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-sfb-single-degree-coefficient-cone-cancellation",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-sfb-global-witness-one-degree-binary-patching",
+  "def-pc-module-kflat-complex",
+  "def-pc-morphism-conventions",
+  "lem-pc-module-pushforward-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated one-degree Mayer--Vietoris improvement with a supplied global coherent witness, a prerequisite below the unnumbered Kiehl assertion after Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. The Stacks paragraph does not state this assertion. Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, primary descente proof WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded coherent complex over a Noetherian scheme mapping to a target admits a finite coefficient extension killing its highest nonzero derived scalar action cone cohomology, if the polynomial chart top obstructions are finite",
+   "results": "{\"t\": \"2026-10-23T22:15:29Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded coherent complex over a Noetherian scheme mapping to a target admits a finite coefficient extension killing its highest nonzero derived scalar action cone cohomology, if the polynomial chart top obstructions are finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"CochainComplex.isKInjective_of_injective_aux\"], \"digest\": \"ad2f98020ebcb132\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"cone\"",
+   "results": "{\"t\": \"2026-10-23T22:15:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.mappingCocone_triangle_distinguished\", \"DerivedCategory.mappingCone_triangle_distinguished\"], \"digest\": \"fe3c235d59037ed1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*cone|cone.*coefficient|pseudo.?coher",
+   "results": "{\"t\": \"2026-10-23T22:15:30Z\", \"tool\": \"grep\", \"query\": \"coefficient.*cone|cone.*coefficient|pseudo.?coher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Improve a coherent sheaf complex approximation by one cohomological degree after a finite type extension of the coefficient ring without flatness",
+   "results": "{\"t\": \"2026-10-23T22:15:30Z\", \"tool\": \"leansearch\", \"query\": \"Improve a coherent sheaf complex approximation by one cohomological degree after a finite type extension of the coefficient ring without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso\", \"CochainComplex.isGE_shift\", \"CochainComplex.isStrictlyGE_shift\", \"CochainComplex.cm5b\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"CochainComplex.isStrictlyLE_shift\", \"CochainComplex.isKProjective_shift_iff\"], \"digest\": \"b766d28baa489ac9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift finitely many local top cohomology generators of a derived coefficient action defect and their overlap relations to a bounded coherent complex over a finite type coefficient stage",
+   "results": "{\"t\": \"2026-10-23T22:15:34Z\", \"tool\": \"leanfinder\", \"query\": \"Lift finitely many local top cohomology generators of a derived coefficient action defect and their overlap relations to a bounded coherent complex over a finite type coefficient stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"localCohomology.diagram\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"localCohomology.ofDiagram\", \"localCohomology\", \"localCohomology.ofSelfLERadical\"], \"digest\": \"f2757b7aec679dfe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*(cancel|obstruct)|[Cc]one.*pseudo",
+   "results": "{\"t\": \"2026-10-23T23:31:07Z\", \"tool\": \"grep\", \"query\": \"coefficient.*(cancel|obstruct)|[Cc]one.*pseudo\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean\", \"Mathlib/Analysis/Meromorphic/TrailingCoefficient.lean\", \"Mathlib/Analysis/Meromorphic/TrailingCoefficient.lean\", \"Mathlib/Analysis/Meromorphic/TrailingCoefficient.lean\", \"Mathlib/Analysis/Meromorphic/TrailingCoefficient.lean\"], \"digest\": \"e091342551ffe530\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern ordinary sheaf gluing, local presentations, scheme limits or abstract derived complexes, and do not assert nonflat finite-coefficient derived approximation or patching"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Improve a bounded coherent sheaf complex approximation by one degree after finite extension of coefficients using finite polynomial cone obstruction modules",
+   "results": "{\"t\": \"2026-10-23T23:31:07Z\", \"tool\": \"leansearch\", \"query\": \"Improve a bounded coherent sheaf complex approximation by one degree after finite extension of coefficients using finite polynomial cone obstruction modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.liftCochain_fst\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone\", \"CochainComplex.isKInjective_of_injective_aux\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"CategoryTheory.InjectiveResolution.cochainComplex\", \"CochainComplex.cm5b\", \"HomologicalComplex.extend.rightHomologyData.isLimitKernelFork\"], \"digest\": \"de399f938dc173d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern ordinary sheaf gluing, local presentations, scheme limits or abstract derived complexes, and do not assert nonflat finite-coefficient derived approximation or patching"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"cone\"",
+   "results": "{\"t\": \"2026-10-23T23:31:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.mappingCocone_triangle_distinguished\", \"DerivedCategory.mappingCone_triangle_distinguished\"], \"digest\": \"fe3c235d59037ed1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern ordinary sheaf gluing, local presentations, scheme limits or abstract derived complexes, and do not assert nonflat finite-coefficient derived approximation or patching"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancel a finite top cohomology obstruction of a derived scalar action map on a separated finite type scheme after enlarging the coefficient algebra without flatness",
+   "results": "{\"t\": \"2026-10-23T23:31:09Z\", \"tool\": \"leanfinder\", \"query\": \"Cancel a finite top cohomology obstruction of a derived scalar action map on a separated finite type scheme after enlarging the coefficient algebra without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.map\", \"Algebra.Extension.H1Cotangent.map\", \"Algebra.Extension.tensorH1Cotangent\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"35f0a1905330f7dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern ordinary sheaf gluing, local presentations, scheme limits or abstract derived complexes, and do not assert nonflat finite-coefficient derived approximation or patching"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global one degree improvement of a bounded coherent approximation to a quasi coherent derived sheaf complex by finite type extension of a Noetherian coefficient ring when the top cones on polynomial affine charts are finitely generated",
+   "results": "{\"t\": \"2026-10-23T23:31:11Z\", \"tool\": \"leanfinder\", \"query\": \"Global one degree improvement of a bounded coherent approximation to a quasi coherent derived sheaf complex by finite type extension of a Noetherian coefficient ring when the top cones on polynomial affine charts are finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"65fb5a007491d138\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern ordinary sheaf gluing, local presentations, scheme limits or abstract derived complexes, and do not assert nonflat finite-coefficient derived approximation or patching"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-coefficient-window-two-open-locality",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization.",
+   "via": [
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+  "worker": "stage1",
+  "group": "Q03",
+  "summary": "Repair D1/D4: discard arbitrary fixed-cutoff locality, retain the given global F and gamma, identify their normalized cone with the polynomial cones, and combine affine improvements using a binary one-degree lemma requiring this global cutoff-(n+1) witness. The item statement is unchanged.",
+  "blueprint": "Current blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the inherited Kiehl descente prerequisite: affine cancellation followed by one-degree binary improvement relative to the supplied global witness. No all-window locality node is used.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic affine scheme, coherent module, or derived-operation comparison used to convert the given chart data and the affine cancellation output into the stipulated sheaf map. The unit has no replacement for this generic tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic affine scheme, coherent module, or derived-operation comparison used to convert the given chart data and the affine cancellation output into the stipulated sheaf map. The unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-finite-type-generating-sections",
+    "why": "Generic affine scheme, coherent module, or derived-operation comparison used to convert the given chart data and the affine cancellation output into the stipulated sheaf map. The unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine scheme, coherent module, or derived-operation comparison used to convert the given chart data and the affine cancellation output into the stipulated sheaf map. The unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "why": "Generic affine scheme, coherent module, or derived-operation comparison used to convert the given chart data and the affine cancellation output into the stipulated sheaf map. The unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine scheme, coherent module, or derived-operation comparison used to convert the given chart data and the affine cancellation output into the stipulated sheaf map. The unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic affine scheme, coherent module, or derived-operation comparison used to convert the given chart data and the affine cancellation output into the stipulated sheaf map. The unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-module-pushforward-open-restriction",
+    "why": "Ordinary structure-module pushforward commutes with open restriction; together with the already cited affine resolution comparison this restricts the global witness without invoking a coefficient-locality ancestor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-module-pushforward-open-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-6142a136e",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-6142a136e (reviewer sub-agent of L); spot-checked: Third delivery; it repairs the Q03 5e1a D1/D4 return as that return suggested: the new node keeps the global (F,γ). The item statement is byte-identical to the earlier snapshots, the item is still unsplit in live and side-live, and the new id is absent from both, so the delivery is not superseded. The rejected fixed-cutoff node is gone and nothing cites it. Step 1: the item's C_j is exactly θ_Q of the existing affine node lem-sfb-single-degree-coefficient-cone-cancellation, with the same n, the same vanishing above n and the same finite H^n. L_j has finitely generated cohomology by 01XZ, the generating-sections node and Noetherian permanence. Step 2: tilde clauses (2) and (3) give ((S⊗E)⊗^L_E A)⊗^L G ≅ A⊗^L_E G, affine pushforward is restriction of scalars, and both transposes are 'resolve, apply δ, multiply by A'; this proves A_n(T_j). Step 3: a K-flat Q_j-resolution is K-flat over D because N⊗_D Q_j is a direct sum of copies of N. So the restricted θ_0 has the cone C_j, and (D,F,γ) is a global witness at n+1. Step 4: the induction over W_k is explicit; at each step the restricted original F,γ is the witness at n+1, and open restriction is handled by tilde clause (1), the open-restriction pushforward node and adjunction. Step 5: empty case. The new node lem-sfb-global-witness-one-degree-binary-patching is statement-only, self-contained and has five real searches; its via is the item followed by the item's via, and same_as is []. It is true: on each chart, A_n(U) or A_n(V) makes K_T n-pseudo-coherent over Q_A by 064R; then the chart cone of the n+1 witness is n-pseudo-coherent with finite H^n by 064T, the item's hypotheses hold on a refining polynomial cover, and the item gives A_n(Y). A direct proof also works: perfect approximation of G_0[-n] on Noetherian Y, compactness of perfect objects against hocolim E⊗^L F, the octahedral axiom, and a stupid truncation. The node is strictly weaker than the item, and the affine content stays in the existing node. It, together with the parent's bound and zero start, also yields the parent by downward induction; I note this but do not count it as a fault, since the parent was always weaker than the item and the deduction is not one line. Edge cases checked: empty U or V, U=V=Y, K=0, n above the top degree, and the Tor example k[t]→k[t,u_i]/(tu_i). DAG search with rg -L found no duplicate; prescribed-envelope-relative-sheaf-descente is different. Source: Stacks perfect.tex 0CSD and the Kiehl paragraph (agent-formulated, Kiehl WANTED), and section-approximation (lemma-induction-step) as the model. No SGA is cited. I accept all 8 declared tool_uses, which are generic affine and adjunction comparisons. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SheafSingleDegreeCoefficientCancellation",
+  "declaration": "AlgebraicGeometry.sheafSingleDegreeCoefficientCancellation",
+  "declarations": [
+   "AlgebraicGeometry.coefficientCancellationOrdinaryAction",
+   "AlgebraicGeometry.coefficientCancellationSingleMap",
+   "AlgebraicGeometry.coefficientCancellationUnitIso",
+   "AlgebraicGeometry.coefficientCancellationScalar",
+   "AlgebraicGeometry.coefficientCancellationTheta",
+   "AlgebraicGeometry.coefficientCancellationTildeComplex",
+   "AlgebraicGeometry.coefficientCancellationModuleMap",
+   "AlgebraicGeometry.coefficientCancellationTildePullback",
+   "AlgebraicGeometry.coefficientCancellationComplexTranspose",
+   "AlgebraicGeometry.coefficientCancellationAffineTranspose",
+   "AlgebraicGeometry.coefficientCancellationSquare",
+   "AlgebraicGeometry.coefficientCancellationPolynomialCondition",
+   "AlgebraicGeometry.sheafSingleDegreeCoefficientCancellation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafSingleDegreeCoefficientCancellation.lean",
+  "statement": "theorem sheafSingleDegreeCoefficientCancellation (D A : Type u) [CommRing D] [CommRing A] [IsNoetherianRing D] [Algebra D A] (X : Scheme.{u}) (q : X ⟶ Spec (.of D)) [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q] (r : ℕ) (S : Fin r → Type u) [∀ j, CommRing (S j)] [∀ j, Algebra D (S j)] (s : Fin r → ℕ) (Q : ∀ j, MvPolynomial (Fin (s j)) D →ₐ[D] S j) (hQ : ∀ j, Function.Surjective (Q j)) (v : ∀ j, Spec (.of (S j)) ⟶ X) [∀ j, IsOpenImmersion (v j)] (hv : ∀ j, v j ≫ q = Spec.map (CommRingCat.ofHom (algebraMap D (S j)))) (hcover : ∀ x : X, ∃ j : Fin r, ∃ z : Spec (.of (S j)), v j z = x) (K : schemeDerivedQCohCategory.{u, w} (pullback q (Spec.map (CommRingCat.ofHom (algebraMap D A))))) (F : schemeDerivedCategory.{u, w} X) (hFbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj F)) (hFcoherent : ∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj F)) (γ : F ⟶ (schemeDerivedDirectImage (pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap D A))))).obj K.obj) (vA : ∀ j, Spec (.of (S j ⊗[D] A)) ⟶ pullback q (Spec.map (CommRingCat.ofHom (algebraMap D A)))) (hvA : ∀ j, Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : S j →+* S j ⊗[D] A)) ≫ v j = vA j ≫ pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap D A)))) (hvAcoeff : ∀ j, vA j ≫ pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap D A))) = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : A →ₐ[D] S j ⊗[D] A).toRingHom)) (P : ∀ j, CochainComplex (ModuleCat.{u} (S j)) ℤ) (hP : ∀ j, (HomologicalComplex.quasiIso (ModuleCat.{u} (S j)) (.up ℤ)).kFlat (P j)) (N : ∀ j, CochainComplex (ModuleCat.{u} (S j ⊗[D] A)) ℤ) (γj : ∀ j, P j ⟶ ((ModuleCat.restrictScalars (Algebra.TensorProduct.includeLeftRingHom : S j →+* S j ⊗[D] A)).mapHomologicalComplex (.up ℤ)).obj (N j)) (eF : ∀ j, (DerivedCategory.Q.{w} (C := SheafOfModules.{u} (moduleRings (Spec (.of (S j))).toRingedSpace))).obj (coefficientCancellationTildeComplex (P j)) ≅ (derivedPullback.{u, w} (v j)).obj F) (eK : ∀ j, (DerivedCategory.Q.{w} (C := SheafOfModules.{u} (moduleRings (Spec (.of (S j ⊗[D] A))).toRingedSpace))).obj (coefficientCancellationTildeComplex (N j)) ≅ (derivedPullback.{u, w} (vA j)).obj K.obj) (hgamma : ∀ j, coefficientCancellationAffineTranspose (Algebra.TensorProduct.includeLeftRingHom : S j →+* S j ⊗[D] A) (P j) (N j) (γj j) ≫ (eK j).hom = (derivedPullback.{u, w} (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : S j →+* S j ⊗[D] A)))).map (eF j).hom ≫ (coefficientCancellationSquare (pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap D A)))) (v j) (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : S j →+* S j ⊗[D] A))) (vA j) (hvA j)).hom.app F ≫ (derivedPullback.{u, w} (vA j)).map (((schemeHomOriginalPullbackAdjunction (pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap D A))))).homEquiv F K.obj).symm γ)) (n : ℤ) (hcones : ∀ j, coefficientCancellationPolynomialCondition D A (S j) (s j) (Q j) (DerivedCategory.Q.obj (P j)) (DerivedCategory.Q.obj (N j)) (coefficientCancellationModuleMap (Algebra.TensorProduct.includeLeftRingHom : S j →+* S j ⊗[D] A) (γj j)) n) : ∃ (E : Type u) (_ : CommRing E) (_ : Algebra D E) (_ : Algebra E A) (_ : IsScalarTower D E A), Algebra.FiniteType D E ∧ ∃ (π' : pullback q (Spec.map (CommRingCat.ofHom (algebraMap D A))) ⟶ pullback q (Spec.map (CommRingCat.ofHom (algebraMap D E)))) (hπ' : π' ≫ pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap D E))) = pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap D A))) ≫ Spec.map (CommRingCat.ofHom (algebraMap E A))), (π' ≫ pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap D E))) = pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap D A)))) ∧ ∃ (F' : schemeDerivedCategory.{u, w} (pullback q (Spec.map (CommRingCat.ofHom (algebraMap D E))))) (γ' : F' ⟶ (schemeDerivedDirectImage π').obj K.obj), (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (pullback q (Spec.map (CommRingCat.ofHom (algebraMap D E)))).toRingedSpace)) i).obj F')) ∧ (∀ i : ℤ, RingedSpace.IsCoherent (pullback q (Spec.map (CommRingCat.ofHom (algebraMap D E)))).toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (pullback q (Spec.map (CommRingCat.ofHom (algebraMap D E)))).toRingedSpace)) i).obj F')) ∧ ∃ (C' : schemeDerivedQCohCategory.{u, w} (pullback q (Spec.map (CommRingCat.ofHom (algebraMap D E))))) (ι' : (schemeDerivedDirectImage π').obj K.obj ⟶ C'.obj) (δ' : C'.obj ⟶ ((derivedPullback.{u, w} (pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap D E))))).obj ((DerivedCategory.singleFunctor _ 0).obj (tilde ((ModuleCat.restrictScalars (algebraMap E A)).obj (ModuleCat.of A A)))) ⊗ F')⟦(1 : ℤ)⟧), Triangle.mk (coefficientCancellationTheta (algebraMap E A) π' (pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap D E)))) (pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap D A)))) hπ' F' K.obj γ') ι' δ' ∈ distTriang _ ∧ ∀ i : ℤ, n ≤ i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (pullback q (Spec.map (CommRingCat.ofHom (algebraMap D E)))).toRingedSpace)) i).obj C'.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The affine objects and arrow are expressed using termwise-tilde representatives and an equality of actual adjunction transposes. Polynomial base change is the universal IsDerivedBaseChange arrow, with its scalar-action transpose fixed. All sheaf derived categories use an explicitly bound independent morphism universe w; module derived categories use their standard localization. No flatness is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca3bb4549",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause match. The chart cone condition (hcones) is identical to the hypotheses of the existing affine theorem singleDegreeCoefficientConeCancellation. The chart representatives (K-flat P, chain map γj, isomorphisms eF/eK, transpose equation hgamma) always exist and pin γ_j up to isomorphism; hP is not an extra assumption. θ' uses the normalized original-counit derived adjunction and tensor isomorphism, the unit-pinned tensorPullback adjunction and identity-on-elements tilde/Γ comparisons, so it is canonical also for nonflat and identity maps. Conclusion: finite-type E with D→E→A, π' fixed by both projections, bounded coherent F', QCoh cone with H^i=0 for i≥n, nothing below n. Edge cases r=0, s=0, zero rings and any n are covered; w is independent of u. No hollow defs, only the main theorem is sorry, docstrings and blueprint present, lines ≤100, statement verbatim, stmt_deps and dependency nodes unchanged, both report sections present. Advisories: owners of coefficientConeRestrictionSquareIso (lem-sfb-single-degree-coefficient-cone-cancellation), schemeHomOriginal* (lem-pc-global-hom-original-counit-normalization), recordedDerivedPullbackComposition and the tensorPullback helpers are not stmt_deps; the base never had them and stage 2 cannot add them."
+ }
+}

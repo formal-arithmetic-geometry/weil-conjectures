@@ -17,119 +17,70 @@
  ],
  "proof": [
   {
-   "text": "First, representable functors $h_Z$ on the big fppf site are sheaves. Indeed, for any fppf covering and any affine open $A$ in its target, [lem-pc-fppf-affine-refinement] supplies finitely many affine opens of the covering schemes above $A$ whose images cover $A$. Thus the covering satisfies exactly [def-weil-pbc-fpqc-covering]. Apply [lem-weil-pbc-fpqc-representable-descent] to descend compatible maps into $Z$. For maps over $S$, the descended map is over $S$ because its composite to $S$ agrees with the prescribed structural map after the covering, and the uniqueness assertion of the same descent lemma detects this equality. This works for the empty target as well.",
+   "text": "Apply [lem-trf-small-open-coproduct-cover] to restrict the arbitrary index type to a Type-u family with the same sheaf coproduct and an fppf local lifting property. Pass from the given monic sheaf maps to their range subfunctors: subcanonical Yoneda tests prove sectionwise injectivity, hence the range maps are isomorphisms. Transport the sheaf and open-immersion properties across these isomorphisms. The diagonal of each F_i gives relative representability of each scheme test by the standard diagonal criterion. Apply [lem-trf-open-cover-representable-diagonal] to obtain the representable diagonal of F.",
    "uses": [
-    "lem-pc-fppf-affine-refinement",
-    "def-weil-pbc-fpqc-covering",
-    "lem-weil-pbc-fpqc-representable-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; topologies.tex Tag 021P, lemma-fppf-affine"
-   }
-  },
-  {
-   "text": "Put $H=\\coprod_iF_i$ in sheaves and let $P(T)=\\coprod_iF_i(T)$ be the sectionwise presheaf coproduct. The universal property in [def-weil-pbc-sheafification] identifies $P^\\#$ with $H$: a map from either to a sheaf $K$ is exactly a family of maps $F_i\\to K$. Consequently [lem-weil-pbc-site-sheafification-sections-local] says that a section of $H$ is fppf locally represented by a section of one $F_i$, and equality of two such representatives in $H$ holds locally already in $P$. In particular unequal indices can coincide only on the empty scheme: every nonempty scheme admits no empty fppf covering, and restriction in $P$ preserves the index.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-pc-fppf-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WI, lemma-colimit-sheaves, universal property; Tag 00WK, lemma-sections-sheafification"
-   }
-  },
-  {
-   "text": "Fix a scheme $T$ and a map $h_T\\to F$. By the representable-open hypothesis, $h_T\\times_FF_i=h_{V_i}$ for an open subscheme $V_i\\subseteq T$, using [def-trf-algebraic-space] and [def-weil-open-immersion]. The sheaf surjectivity of $H\\to F$ gives fppf local lifts of this map to $H$; refining by Step 2 gives an fppf covering $T_a\\to T$ whose maps to $F$ factor through some $F_{i(a)}$. Each $T_a\\to T$ therefore factors through $V_{i(a)}$ by the fibre-product universal property. The family $T_a\\to T$ is jointly surjective by [def-pc-fppf-site], so $T=\\bigcup_iV_i$. All such tests, including their further pullbacks, give open coverings in this way.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "def-weil-open-immersion",
-    "def-pc-fppf-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WR, lemma-glueing-algebraic-spaces, first paragraph"
-   }
-  },
-  {
-   "text": "Let $E_T=H\\times_Fh_T$. It is a sheaf: matching sections in the two factors glue uniquely, and their equality in $F$ persists by the sheaf uniqueness axiom [def-weil-pbc-sites-and-cohomology]. Form the scheme $C_T=\\coprod_iV_i$ by [lem-weil-pbc-scheme-coproduct-family]. Its coprojections have disjoint open images covering $C_T$. The maps $h_{V_i}\\to E_T$ therefore define a natural map $h_{C_T}\\to E_T$: for $W\\to C_T$, restrict to the inverse images of those disjoint opens and glue the resulting sections of $E_T$. This uses [lem-pc-zariski-coverings-are-fppf]. Every section $(a,t)$ of $E_T(W)$ fppf locally has $a$ in one $F_i$ by Step 2; the equality over $F$ then gives a map to $V_i$, hence to $C_T$. Any two local maps inducing $(a,t)$ agree: by Step 2 their indices agree after a further fppf refinement, and with the same index their maps to $V_i$ agree because $F_i\\to F$ is a subfunctor and $V_i$ is its pullback to $T$. The sheaf property of $h_{C_T}$ from Step 1 glues these maps uniquely. The resulting inverse is natural and proves $h_{C_T}\\simeq E_T$ over $h_T$. Thus $q:H\\to F$ is representable, and its scheme test is $C_T\\to T$, which is surjective by Step 3.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-pc-zariski-coverings-are-fppf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WR, first paragraph: representation of the pullback of the sheaf coproduct by the scheme coproduct"
-   }
-  },
-  {
-   "text": "For schemes $T,T'$ mapping to $F$, set $G=h_T\\times_Fh_{T'}$ and $G_i=G\\times_FF_i$. Write $V_i=T\\times_FF_i$ and $V'_i=T'\\times_FF_i$ as in Step 3. Since $F_i\\subset F$ is monic, the sectionwise pullback equations give $G_i=h_{V_i}\\times_{F_i}h_{V'_i}$. This is represented by a scheme because the diagonal of the algebraic space $F_i$ is representable [def-trf-algebraic-space]. For every $h_W\\to G$, the pullback of $G_i\\to G$ is $h_W\\times_FF_i$, an open subscheme of $W$, and these opens cover $W$ by Step 3. Thus the $G_i$ are representable open subfunctors covering $G$. Moreover $G$ is a Zariski sheaf: its sections are pairs of scheme maps with equal images in the sheaf $F$, and the sheaf condition follows by componentwise gluing, Step 1 and [lem-pc-zariski-coverings-are-fppf]. Apply [lem-pc-schemes-criterion] to obtain a scheme representing $G$. An arbitrary test of $F\\to F\\times F$ is exactly such a pair of maps from a scheme, so this proves representability of the diagonal of $F$.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "lem-pc-zariski-coverings-are-fppf",
-    "lem-pc-schemes-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WR, second paragraph, applying Schemes Tag 01JJ (lemma-glue-functors)"
-   }
-  },
-  {
-   "text": "For every test $h_T\\to F$, Step 4 represents the base change of $q$ by $C_T=\\coprod_iV_i\\to T$. Its restriction to each coproduct summand is the open immersion $V_i\\hookrightarrow T$, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). The summands are an open covering by [lem-weil-pbc-scheme-coproduct-family]. Apply [lem-weil-pbc-etale-local-on-source] to conclude that $C_T\\to T$ is etale. It is surjective by Step 3. Hence $q:H\\to F$ is representable, surjective and etale, in the scheme-test sense of [def-trf-algebraic-space].",
-   "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-etale-local-on-source",
+    "lem-trf-small-open-coproduct-cover",
+    "lem-trf-open-cover-representable-diagonal",
     "def-trf-algebraic-space"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WR, first and last paragraphs; morphisms.tex Tags 02GP and 02GJ"
+    "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
    }
   },
   {
-   "text": "By the hypothesis that $H$ is an algebraic space and [def-trf-algebraic-space], choose a scheme $U$ and a representable surjective etale map $h_U\\to H$. For any $h_T\\to F$, the fibre-product equations identify $h_U\\times_Fh_T$ with $h_U\\times_HE_T$. Step 4 represents $E_T$ by the scheme $C_T$. Therefore $h_U\\times_HE_T$ is a scheme, and its projection to $C_T$ is etale and surjective by the scheme-test definition for the atlas $h_U\\to H$. The map $C_T\\to T$ is etale and surjective by Step 6. Their composite is etale by [lem-weil-pbc-etale-composition-cancellation](2) and surjective by [lem-trf-surjective-morphism-composition]. Thus $h_U\\to F$ is a representable surjective etale scheme atlas. Together with the given fppf sheaf condition and Step 5's representable diagonal, this is precisely the definition of an algebraic space [def-trf-algebraic-space].",
+   "text": "For every scheme test T to F, choose its representing open schemes V_i. Form their small scheme coproduct in Over S explicitly using Sigma.desc and Sigma.ι. This verifies the site-size hypothesis of [lem-trf-open-sheaf-coproduct-base-change], whose unique comparison isomorphism represents the base change of q by this coproduct. Transport its projection equations from uliftYoneda to yoneda via the natural isomorphism.",
+   "uses": [
+    "lem-trf-open-sheaf-coproduct-base-change",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
+   }
+  },
+  {
+   "text": "The projection from the coproduct is etale: its restriction to every summand is the chosen open immersion, hence etale by [lem-weil-pbc-etale-composition-cancellation], and etaleness is local on the source by [lem-weil-pbc-etale-local-on-source]. For surjectivity, use the fppf cover of Step 1. Given a point of T choose its preimage on a covering member and the section lifting to a summand. The cartesian square defining that open gives a morphism from the covering member to V_i. Mapping the lifted point through V_i and its coproduct injection gives a preimage under the projection. Thus q is representable etale and surjective on all scheme tests.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-trf-small-open-coproduct-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
+   }
+  },
+  {
+   "text": "Choose a scheme atlas of H from [def-trf-algebraic-space]. Compose it with q. Paste the representing pullback squares to prove representable surjectivity of the composite, using [lem-trf-surjective-morphism-composition] on the scheme maps. The existing isEtale_comp from [def-trf-algebraic-space] proves representable etaleness. This atlas and Step 1 diagonal give precisely IsAlgebraicSpace F.",
    "uses": [
     "def-trf-algebraic-space",
-    "lem-weil-pbc-etale-composition-cancellation",
     "lem-trf-surjective-morphism-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WR, last paragraph: compose the coproduct atlas with the representable surjective etale map to F"
+    "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-fppf-site",
   "def-trf-algebraic-space",
-  "def-weil-open-immersion",
-  "def-weil-pbc-fpqc-covering",
-  "def-weil-pbc-sheafification",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-pc-fppf-affine-refinement",
-  "lem-pc-schemes-criterion",
-  "lem-pc-zariski-coverings-are-fppf",
+  "lem-trf-open-cover-representable-diagonal",
+  "lem-trf-open-sheaf-coproduct-base-change",
+  "lem-trf-small-open-coproduct-cover",
   "lem-trf-surjective-morphism-composition",
   "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-etale-local-on-source",
-  "lem-weil-pbc-fpqc-representable-descent",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-scheme-coproduct-family"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces.tex",
-  "place": "Tag 02WR, lemma-glueing-algebraic-spaces, all three paragraphs; the composite atlas is checked on scheme tests, using etaleness of the coproduct map."
+  "place": "Tag 02WR; R5 implements the small-index restriction, image-subfunctor adapter, scheme coproduct tests and atlas composition explicitly."
  },
  "mathlib_searches": [
   {
@@ -410,33 +361,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-algebraic-space-open-gluing",
   "worker": "stage1",
-  "summary": "Split Tag 02WR into seven steps, retaining all hypotheses and conclusion. Made fppf descent for scheme maps and the sheaf-coproduct pullback identification explicit using existing DAG nodes; glued the scheme tests of the diagonal by Tag 01JJ and constructed the atlas by composition. No new nodes. Added only definition citations to the statement. Reused arbitrary-source etale locality instead of creating a coproduct lemma.",
-  "blueprint": "Auxiliary Tag 02WR input in the quotient-by-etale-relation branch of lem-trf-local-term-locality, via lem-trf-etale-relation-quotient and the ancestry already recorded in blueprint.from. Steps realize its parent quotient proof final gluing paragraph; no chapter or unit route is replaced.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-fppf-affine-refinement",
-    "why": "Generic finite affine refinement of an fppf covering, used only to check the fpqc-covering definition for representable descent; this trace-formula unit has no covering-refinement statement."
-   },
-   {
-    "node": "lem-pc-schemes-criterion",
-    "why": "Generic representability by schemes from a Zariski covering by representable open subfunctors, exactly the tool required in the diagonal paragraph of Tag 02WR; the curve-zero unit has no representability criterion."
-   }
-  ]
+  "summary": "Repair of the human re-split return: preserve the statement and all seven original arguments. Extract two independent statement-only nodes, one for coproduct scheme-test representation (old steps 1, 2, 4), one for local covers and diagonal representability (old steps 3, 5). The parent assembles them, the existing coproduct-partition lemma and the unchanged etale/atlas arguments (old steps 6, 7). Full old texts and proof-task allocation are in report.md; both new nodes are unsplit and searched.",
+  "blueprint": "Auxiliary Tag 02WR input in the quotient-by-etale-relation branch of lem-trf-local-term-locality, via lem-trf-etale-relation-quotient and the ancestry already recorded in blueprint.from. Steps realize its parent quotient proof final gluing paragraph; no chapter or unit route is replaced. New nodes refine the first two paragraphs of Stacks 02WR in the same recorded quotient branch; all ancestry is retained."
  },
- "tool_uses": [
-  "lem-pc-fppf-affine-refinement",
-  "lem-pc-schemes-criterion"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q44-a7233224c",
-  "group": "Q44",
+  "reviewer": "NT-cc-Q147-bb86d8894",
+  "group": "Q147",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-a7233224c (reviewer sub-agent of L); spot-checked: Read the item and all seven steps against Stacks 02WR and cited statements/sources. Hypotheses, sheaf-coproduct base change, diagonal gluing, and composite atlas check out, including empty and infinite-family cases. No new nodes, duplicates, cycles, or long steps. Accepted both declared generic tool uses. Detailed checks recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-bb86d8894 (reviewer sub-agent of L); spot-checked: I read the base 7-step proof in full (5562 chars), the delivered 4-step proof (2369 chars), both new unsplit nodes, every cited statement, and Stacks spaces.tex 02WR (all three paragraphs). How the old steps were allocated: old steps 3 and 5 (local lifts give T=∪V_i; G_i=V_i×_{F_i}V'_i, Zariski cover, then 01JJ) now form node B, lem-trf-open-cover-representable-diagonal. Old steps 1 and 4 (representables are fppf sheaves; H×_F h_T ≅ h_{∐V_i}) now form node A, lem-trf-open-sheaf-coproduct-base-change. Old step 2 is carried by the existing node lem-trf-fppf-sheaf-coproduct-partition, cited in item step 1 and composed with lem-pc-zariski-coverings-are-fppf and covering axiom (ii). Old steps 6 and 7 are kept verbatim as item steps 3 and 4, and they only assemble cited existing nodes. Nothing was summarised. A and B are of comparable size, neither restates the item, and there is no cycle. Mathematical checks: A is true because sheaf coproducts are disjoint and stable under pullback, and h_{∐V_i} is the sheaf coproduct. B is true: joint surjectivity gives the open cover, monicity of F_i⊂F gives G_i, 01JJ gives G, and the diagonal follows. I tested the empty index set, the empty scheme, repeated opens and infinite families. Duplicate checks against partition-coproduct, algebraic-space-coproduct, pc-schemes-criterion, a1-open-subspace and the sfb stack-diagonal criteria found no duplicates. The search records are present, including one honest 'unavailable'. Advisory only: def-pc-open-subfunctor is the exact definition node for 'representable by open immersions', and the item's tool_uses still lists two tools that only the future proofs of A and B will use. No SGA is used. No fixes written."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceOpenGluing",
@@ -460,5 +398,26 @@
   "result": "pass",
   "note": "Statement, dependencies, source proof steps, edge cases, docstrings, route-pivot constraints, report sections, and compiler evidence checked successfully."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261023T151952-L-428064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

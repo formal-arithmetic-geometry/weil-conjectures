@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-scalar-mate-ordinary-module-route",
+ "kind": "statement",
+ "title": "Ordinary scalar mate and tensor pullback on module sheaves",
+ "statement": "Let $f:Z\\to T$ be a scheme morphism, $a:A\\to B$ a map of commutative ring sheaves on the small pro-etale site of $T$. Put $A_Z=f^{-1}A$, $B_Z=f^{-1}B$, $a_Z=f^{-1}a$. Let $F_A,F_B$ be the fixed module pullbacks, $E_a,E_{a_Z}$ the normalized ordinary scalar extensions, $r_T,r_Z$ scalar restriction, and $b:F_A r_T\\cong r_Z F_B$ the fixed restriction comparison [lem-weil-pbc-ring-sheaf-change-adjunction]. Write $C_a=r_TB$ and $C_{a_Z}=r_ZB_Z$ for the restricted regular modules. Let $o_a:r_TE_a\\cong(-\\otimes_A C_a)$ and $o_{a_Z}$ be the pure-tensor-normalized ordinary comparisons [lem-sfb-scalar-tensor-ordinary-normalization], and $k:F_AC_a\\cong C_{a_Z}$ the fixed coefficient pullback [lem-sfb-derived-scalar-tensor-identification]. Suppose $\\chi:F_BE_a\\cong E_{a_Z}F_A$ satisfies $F_A(\\eta_a(M));b_{E_aM};r_Z(\\chi_M)=\\eta_{a_Z}(F_AM)$ for every module $M$. Then, for every $A$-module sheaf $M$, $b_{E_aM};r_Z(\\chi_M);o_{a_Z}(F_AM)=F_A(o_a(M));\\mu_{M,C_a};(1\\otimes k)$, where $\\mu:F_A(M\\otimes_A N)\\cong F_AM\\otimes_{A_Z}F_AN$ is the canonical ordinary tensor pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. No flatness or derived-category hypothesis occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback). The inverse-image/scalar-mate compatibility is the balanced-map calculation in the proof, expanded here for the selected normalized comparisons."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-scalar-tensor-ordinary-normalization",
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the chosen pullback of the regular B-module by comparison with the standard pullback/pushforward adjunction. Its scalar-section formula follows from the tensor/right-unitor property and uniqueness in proEtaleProjectionUnit_existsUnique. Compose with the ordinary restriction square to obtain the section formula for k.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback). The inverse-image/scalar-mate compatibility is the balanced-map calculation in the proof, expanded here for the selected normalized comparisons."
+   }
+  },
+  {
+   "text": "Use the assumed scalar unit equation and naturality of the geometric inverse-image unit to compute chi on the unit image of 1 tensor m. The restriction mate takes the geometric unit for A to the geometric unit for B. B_Z-linearity of chi and semilinearity of the geometric unit extend the result to every local b tensor m.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback). The inverse-image/scalar-mate compatibility is the balanced-map calculation in the proof, expanded here for the selected normalized comparisons."
+   }
+  },
+  {
+   "text": "Transpose both routes by the geometric inverse-image adjunction and test them on local pure tensors generating the sheafified scalar extension. The ordinary extension/tensor normalization, the preceding chi formula, the pure-section specification of ordinary tensor pullback, and the coefficient formula all give pullback(m) tensor pullback(b). Sheafification and adjunction injectivity give the asserted module equality.",
+   "uses": [
+    "lem-sfb-scalar-tensor-ordinary-normalization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-derived-scalar-tensor-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback). The inverse-image/scalar-mate compatibility is the balanced-map calculation in the proof, expanded here for the selected normalized comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-arrows",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-sfb-scalar-tensor-ordinary-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-derived-scalar-tensor-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback). The inverse-image/scalar-mate compatibility is the balanced-map calculation in the proof, expanded here for the selected normalized comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of ring sheaf scalar extension adjunction mate agrees with tensor pullback",
+   "results": "Eight hits including SheafOfModules.pullbackObjUnitToUnit and pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, which are used to normalize the coefficient map. No scalar/tensor route equality.",
+   "date": "2026-10-27",
+   "verdict": "Use the unit adjunction API and prove the balanced-map equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve hits including unit_mateEquiv, unit_mateEquiv_symm and iterated_mateEquiv_conjugateEquiv_symm. These give abstract mate identities, not the tensor normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use unit_mateEquiv for the restriction comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*pullback|pullback.*changeOfRings",
+   "results": "msearch returned zero hits. Project rg found the ordinary tensor, scalar-unit, restriction-mate and unit-normalization specifications used here.",
+   "date": "2026-10-27",
+   "verdict": "No matching existing route theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarMateOrdinaryTensorRoute",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of sk-thm-sf-ctf-stability, direct-images paragraph (3); the ordinary scalar and inverse-image tensor calculation in step 2 of lem-sfb-scalar-mate-ordinary-tensor-route.",
+   "via": [
+    "lem-sfb-scalar-mate-ordinary-tensor-route",
+    "lem-sfb-derived-scalar-pullback-tensor-normalization",
+    "lem-sfb-derived-scalar-projection-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarMateOrdinaryModuleRoute",
+  "file": "lean/Sheaf/Paper/ScalarMateOrdinaryModuleRoute.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.scalarMate_ordinary_module_route",
+  "statement": "theorem scalarMate_ordinary_module_route {Z T : Scheme.{u}} (f : Z ⟶ T)\n    {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)\n    (χ : proEtaleRingExtension a ⋙\n      proEtaleRingModulePullback f B (inverseRing f B) (Iso.refl _) ≅\n      proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _) ⋙\n        proEtaleRingExtension (inverseMap f a))\n    (hχ : ∀ M, (proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).map\n        ((proEtaleRingExtensionAdjunction a).unit.app M) ≫\n      (proEtaleRingRestrictionPullbackInv f A B (inverseRing f A) (inverseRing f B)\n        a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)).app\n          ((proEtaleRingExtension a).obj M) ≫\n      (restriction (inverseMap f a)).map (χ.hom.app M) =\n      (proEtaleRingExtensionAdjunction (inverseMap f a)).unit.app\n        ((proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).obj M))\n    (M : proEtaleRingModules T A) :\n    (proEtaleRingRestrictionPullbackInv f A B (inverseRing f A) (inverseRing f B)\n      a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)).app\n        ((proEtaleRingExtension a).obj M) ≫\n      (restriction (inverseMap f a)).map (χ.hom.app M) ≫\n      (ordinaryTensorIso (inverseMap f a)).hom.app\n        ((proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).obj M) =\n    (proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).map\n        ((ordinaryTensorIso a).hom.app M) ≫\n      (proEtaleOrdinaryTensorPullback f A (inverseRing f A) (Iso.refl _)\n        M (coefficient a)).hom ≫\n      ((proEtaleOrdinaryTensor Z (inverseRing f A)).obj\n        ((proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).obj M)).map\n          (coefficientPullback f a).hom",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T123517-L-2314334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T123517-L-2314334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,336 @@
+{
+ "id": "lem-trf-relative-differential-sheaf-base-change",
+ "kind": "statement",
+ "title": "Relative differential sheaves: finite type and canonical cartesian base change",
+ "statement": "Let $f:X\\to S$ and $g:S'\\to S$ be arbitrary morphisms of schemes [def-pc-scheme]. Set $X'=X\\times_S S'$, with projections $p:X'\\to X$ and $f':X'\\to S'$ [def-pc-fibre-product]. Let $\\Omega^1_{X/S}$ and $\\Omega^1_{X'/S'}$ be the relative differential sheaves with their universal derivations $d$ [def-sc-relative-differential-sheaf], and use ordinary module pullback [def-pc-module-pullback]. These differential sheaves are quasi-coherent [pqf-def-coherent]. The canonical $\\mathcal O_{X'}$-linear map $c_g:p^*\\Omega^1_{X/S}\\to\\Omega^1_{X'/S'}$ characterized locally by $1\\otimes da\\mapsto d(p^\\sharp a)$ is an isomorphism. For affine opens $U=\\operatorname{Spec}A\\subset X$, $V=\\operatorname{Spec}R\\subset S$, $V'=\\operatorname{Spec}R'\\subset S'$ with $f(U)\\subset V$ and $g(V')\\subset V$, put $A'=R'\\otimes_R A$. On $U\\times_V V'$ the map $c_g$ is the $A'$-linear isomorphism $A'\\otimes_A\\Omega_{A/R}\\to\\Omega_{A'/R'}$, $b\\otimes da\\mapsto b\\,d(1\\otimes a)$, and these identifications agree on overlaps. If $f$ is locally of finite type [def-weil-finite-type-morphism], then $\\Omega^1_{X/S}$ and $\\Omega^1_{X'/S'}$ are of finite type as module sheaves [pqf-def-coherent]. No flatness or finite presentation is required.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01V0 (lemma-base-change-differentials), 01UT (lemma-differentials-affine), and 01V2 (lemma-finite-type-differentials); quasi-coherence explained before lemma-differentials-diagonal"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "pqf-def-coherent",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Construct the global map without gluing: compose the derivation on the second projection with the ring map of the first projection. The cartesian equation makes this a derivation relative to f. The universal property of relative differentials gives a map into the pushforward, and the section-normalized tensor-pullback adjunction transposes it to c. Applying these two bijections again proves the generator equation and uniqueness on every open.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT, 01UV, 01V0 and 01V2"
+   }
+  },
+  {
+   "text": "Use the already proved source-library instance isQuasicoherent_relativeDifferentials for both morphisms. This instance uses the affine differential-sheaf description and local presentations.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT, 01UV, 01V0 and 01V2"
+   }
+  },
+  {
+   "text": "Restrict the cartesian square to the affine triple U,V,V′. Mathlib Scheme.Hom.isPullback_resLE identifies the restricted fibre product with W=p^{-1}U intersect q^{-1}V′. The fibre product of affine schemes is affine. Mathlib isIso_pushoutSection_of_isAffineOpen and isIso_pushoutSection_iff give the pushout of the four section rings with the actual appLE maps.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT, 01UV, 01V0 and 01V2"
+   }
+  },
+  {
+   "text": "Apply the general proved affine tensor-pullback sections theorem to p and the quasi-coherent differential sheaf. Swap its tensor factors and transport from algebraic tensor products to ModuleCat.extendScalars; its second-factor linearity supplies linearity over the section ring of W. Compose with the affine differential-sections equivalence on U to obtain alpha with the specified unit formula. Apply the affine differential-sections theorem on W over V′ to obtain delta. Convert the section-ring pushout to Algebra.IsPushout and use Mathlib KaehlerDifferential.tensorKaehlerEquiv to obtain beta, including its formula on b tensor da.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sc-relative-differentials-affine-sections",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-kahler-differentials",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT, 01UV, 01V0 and 01V2"
+   }
+  },
+  {
+   "text": "Prove c_W composed with alpha equals delta composed with beta. The scalar-extension adjunction and the universal property of ring differentials reduce equality to tensors 1 tensor da. The normalization of alpha, naturality of c, the defining formula for c, and naturality of the target derivation give the equality. Thus all affine comparisons describe the same global morphism, and compatibility on overlaps follows from its naturality.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT, 01UV, 01V0 and 01V2"
+   }
+  },
+  {
+   "text": "For each point of the global fibre product choose an affine base neighbourhood, an affine neighbourhood of its first projection over that base, and one of its second projection over the same base. Their W form a cover, including the empty case. The affine square expresses c_W as delta composed with beta composed with alpha inverse, hence it is bijective. Tensor pullback is quasi-coherent by comparison of left adjoints with ordinary pullback and the proved pullback quasi-coherence theorem. The affine-cover isomorphism criterion makes c an isomorphism.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT, 01UV, 01V0 and 01V2"
+   }
+  },
+  {
+   "text": "For a locally finite type morphism choose an affine-pair cover. Its section ring maps are finite type, so Mathlib KaehlerDifferential.finite makes the ring differential modules finite, including zero rings and zero generators. Transport across relativeDifferentials_affine_sections and apply the affine finite-type criterion. Apply this argument to f and again to its base change q, which is locally finite type by stability under pullback.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-kahler-differentials",
+    "lem-sc-relative-differentials-affine-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT, 01UV, 01V0 and 01V2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-relative-differentials-affine-sections",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01UT, 01UV, 01V0 and 01V2; Q2 formalizes the universal-derivation construction, the affine comparison, and the affine-cover criterion using existing proved library interfaces.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any cartesian square of schemes the canonical pullback map on sheaves of relative Kahler differentials is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T05:59:40Z\", \"tool\": \"leanfinder\", \"query\": \"For any cartesian square of schemes the canonical pullback map on sheaves of relative Kahler differentials is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst\", \"AlgebraicGeometry.pullbackSpecIso_inv_snd_assoc\"], \"digest\": \"54e83b5ec4fda0e5\"}; The returned declarations concern ring-level differentials, generic presheaf differentials or generic ideal-sheaf constructions; none states this scheme-sheaf theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-22T05:59:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"KaehlerDifferential.mapBaseChange\", \"KaehlerDifferential.range_mapBaseChange\", \"KaehlerDifferential.mapBaseChange_surjective\", \"KaehlerDifferential.exact_mapBaseChange_map\", \"KaehlerDifferential.mapBaseChange_tmul\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\"], \"digest\": \"d50fd0e402ea8659\"}; The returned declarations concern ring-level differentials, generic presheaf differentials or generic ideal-sheaf constructions; none states this scheme-sheaf theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "differential.*baseChange|baseChange.*differential|KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-22T05:59:29Z\", \"tool\": \"grep\", \"query\": \"differential.*baseChange|baseChange.*differential|KaehlerDifferential\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"ad2125c327dadfc0\"}; The returned declarations concern ring-level differentials, generic presheaf differentials or generic ideal-sheaf constructions; none states this scheme-sheaf theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative differential sheaf of schemes commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T05:59:29Z\", \"tool\": \"leansearch\", \"query\": \"Relative differential sheaf of schemes commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivBase\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"KaehlerDifferential.mapBaseChange\", \"KaehlerDifferential.mapBaseChange.congr_simp\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.moduleBaseChange'.congr_simp\", \"KaehlerDifferential.range_mapBaseChange\"], \"digest\": \"d9e40e1702ecb7a7\"}; The returned declarations concern ring-level differentials, generic presheaf differentials or generic ideal-sheaf constructions; none states this scheme-sheaf theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Kahler differential module sheaf on a scheme is quasi coherent and finite type for a locally finite type morphism, with pullback isomorphism for cartesian base change",
+   "results": "{\"t\": \"2026-10-22T06:00:12Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Kahler differential module sheaf on a scheme is quasi coherent and finite type for a locally finite type morphism, with pullback isomorphism for cartesian base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.finite\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\"], \"digest\": \"d758db84b13dcaa5\"}; The returned declarations concern ring-level differentials, generic presheaf differentials or generic ideal-sheaf constructions; none states this scheme-sheaf theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|DifferentialsConstruction|tensorKaehlerEquiv",
+   "results": "{\"t\": \"2026-10-22T06:00:01Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials|DifferentialsConstruction|tensorKaehlerEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"d1460c94f5235d9e\"}; The returned declarations concern ring-level differentials, generic presheaf differentials or generic ideal-sheaf constructions; none states this scheme-sheaf theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-23T04:26:28Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials|KaehlerDifferential\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"ad2125c327dadfc0\"}; Read hits: ring-level tensorKaehlerEquiv / finite and generic presheaf relativeDifferentials do not state the scheme-sheaf theorem. Existing DAG ring-base-change leaf reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of differentials of a scheme morphism is quasi coherent and pullback under arbitrary base change is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T04:26:28Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf of differentials of a scheme morphism is quasi coherent and pullback under arbitrary base change is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquiv\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"SheafOfModules.isQuasicoherent\"], \"digest\": \"93b944873596206c\"}; Read hits: ring-level tensorKaehlerEquiv / finite and generic presheaf relativeDifferentials do not state the scheme-sheaf theorem. Existing DAG ring-base-change leaf reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeDifferentials\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T04:26:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"relativeDifferentials\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ring-level tensorKaehlerEquiv / finite and generic presheaf relativeDifferentials do not state the scheme-sheaf theorem. Existing DAG ring-base-change leaf reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of relative Kahler differentials of arbitrary schemes is quasi coherent, commutes with cartesian base change, and is finite type for locally finite type morphisms",
+   "results": "{\"t\": \"2026-10-23T04:26:38Z\", \"tool\": \"leanfinder\", \"query\": \"The sheaf of relative Kahler differentials of arbitrary schemes is quasi coherent, commutes with cartesian base change, and is finite type for locally finite type morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"KaehlerDifferential.finite\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"KaehlerDifferential.ideal_fg\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\"], \"digest\": \"c5390522338e720f\"}; Read hits: ring-level tensorKaehlerEquiv / finite and generic presheaf relativeDifferentials do not state the scheme-sheaf theorem. Existing DAG ring-base-change leaf reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|isQuasicoherent|tensorKaehlerEquiv",
+   "results": "{\"t\": \"2026-10-23T04:28:31Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials|isQuasicoherent|tensorKaehlerEquiv\", \"sub\": \"Algebra/Category/ModuleCat/Differentials\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\"], \"digest\": \"25db6ed86ef33974\"}; Read hits: ring-level tensorKaehlerEquiv / finite and generic presheaf relativeDifferentials do not state the scheme-sheaf theorem. Existing DAG ring-base-change leaf reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism relative differentials form a quasi coherent module, finite type when the morphism is locally finite type; the canonical differential sheaf map for a pullback square is invertible",
+   "results": "{\"t\": \"2026-10-23T04:28:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a scheme morphism relative differentials form a quasi coherent module, finite type when the morphism is locally finite type; the canonical differential sheaf map for a pullback square is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.finite\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\"], \"digest\": \"6c423150246a4d64\"}; Read hits: ring-level tensorKaehlerEquiv / finite and generic presheaf relativeDifferentials do not state the scheme-sheaf theorem. Existing DAG ring-base-change leaf reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquiv|instance finite|theorem finite",
+   "results": "{\"t\": \"2026-10-23T04:29:16Z\", \"tool\": \"grep\", \"query\": \"tensorKaehlerEquiv|instance finite|theorem finite\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\"], \"digest\": \"def1783b4ac34f6f\"}; Read hits: ring-level tensorKaehlerEquiv / finite and generic presheaf relativeDifferentials do not state the scheme-sheaf theorem. Existing DAG ring-base-change leaf reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-family-fitting-singular",
+  "date": "2026-10-22",
+  "group": "N7"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), normal-cone specialization and nearby-duality alteration reduction: the nodal-family first-Fitting formation argument, expanded in lem-trf-nodal-family-fitting-singular proof step 1",
+   "via": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-relative-differential-sheaf-base-change",
+  "worker": "stage1",
+  "summary": "Read Stacks 01UT/01UV/01V0/01V2, expanded affine gluing and overlap compatibility, and proved finite generation by the Leibniz formula. Reused existing DAG tools; no new nodes and no statement changes. Project Lean has the differential sheaf and affine comparisons but no declaration proving the complete item.",
+  "blueprint": "lem-trf-local-term-locality proof (1)--(2), normal-cone and nearby-duality alteration reduction, through nodal-family first-Fitting formation: differential sheaves commute with base change and are finite type.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-associated-module-pullback",
+    "why": "Generic affine module/sheaf or gluing tool for the Stacks differential-sheaf calculation; this trace-formula unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic affine module/sheaf or gluing tool for the Stacks differential-sheaf calculation; this trace-formula unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+    "why": "Generic affine module/sheaf or gluing tool for the Stacks differential-sheaf calculation; this trace-formula unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-sc-relative-differentials-affine-sections",
+    "why": "Generic affine module/sheaf or gluing tool for the Stacks differential-sheaf calculation; this trace-formula unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine module/sheaf or gluing tool for the Stacks differential-sheaf calculation; this trace-formula unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Generic affine module/sheaf or gluing tool for the Stacks differential-sheaf calculation; this trace-formula unit has no replacement for its statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-associated-module-pullback",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+  "lem-sc-relative-differentials-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-module-pullback-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-3d99f4b0a",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-3d99f4b0a (reviewer sub-agent of L); spot-checked: Read the item and all 6 steps, with Stacks morphisms.tex 01V0/01UV/01UT/01V2 (and 00RV, 00RZ, 01PB, 01B6, 01BJ, 04TN). The statement matches 01V0+01UV+01V2: arbitrary f and g, no flatness or finite presentation, and finite type only when f is locally of finite type. It was tested on the empty scheme, identity base change, non-flat R→R/I, n=0 generators and an inseparable base change. No new nodes. No existing DAG node states the item: searched rg -lL for 01V0/01V2 labels and for every node citing def-sc-relative-differential-sheaf; def-a1-relative-differentials-pullback-map is a different map over a fixed base. Steps 1 and 3–6 are correct: the 00RV S'-linear form gives b⊗da↦b d(1⊗a); step 4's overlap check uses localization and the quotient rule with no affine intersections; glue clause (1) and the local-iso lemma apply; step 6 does the monomial Leibniz calculation, then 01PB(c) using quasi-coherence from step 1, then 01B6. The off-unit tool_uses (5 sk-thm-p1 sheaf tools and lem-sc-relative-differentials-affine-sections) are generic and accepted. FIX, C1/C4 in step 2: the openness of W=p^{-1}U∩f'^{-1}V' was taken from the universal property in def-pc-fibre-product alone, and (p^*Ω)|_W≅p_W^*(Ω|_U) was used with no node, although lem-weil-pbc-associated-module-pullback needs it. Step 2 now cites the existing Mathlib leaves lem-weil-pbc-open-fibre-product (01JR) and lem-weil-pbc-open-immersion-module-pullback-restriction, with the composition isomorphism of def-pc-module-pullback, and spells out why these W cover X'. proof_deps were recomputed as the union of uses, and the rest of the file is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDifferentialSheafBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.relativeDifferentialSheaf_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.relativeDifferentialsBaseChangeOpen",
+   "AlgebraicGeometry.Scheme.Hom.relativeDifferentialSheaf_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDifferentialSheafBaseChange.lean",
+  "statement": "theorem relativeDifferentialSheaf_baseChange {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) : f.relativeDifferentials.IsQuasicoherent ∧ (pullback.snd f g).relativeDifferentials.IsQuasicoherent ∧ ∃ c : (Modules.tensorPullback (pullback.fst f g)).obj f.relativeDifferentials ⟶ (pullback.snd f g).relativeDifferentials, (∀ (U : X.Opens) (a : Γ(X, U)), c.app ((pullback.fst f g) ⁻¹ᵁ U) (Modules.tensorPullbackSection (pullback.fst f g) f.relativeDifferentials U (f.relativeDifferentialsDerivation.d (X := op U) a)) = (pullback.snd f g).relativeDifferentialsDerivation.d (X := op ((pullback.fst f g) ⁻¹ᵁ U)) ((pullback.fst f g).app U a)) ∧ (∀ c' : (Modules.tensorPullback (pullback.fst f g)).obj f.relativeDifferentials ⟶ (pullback.snd f g).relativeDifferentials, (∀ (U : X.Opens) (a : Γ(X, U)), c'.app ((pullback.fst f g) ⁻¹ᵁ U) (Modules.tensorPullbackSection (pullback.fst f g) f.relativeDifferentials U (f.relativeDifferentialsDerivation.d (X := op U) a)) = (pullback.snd f g).relativeDifferentialsDerivation.d (X := op ((pullback.fst f g) ⁻¹ᵁ U)) ((pullback.fst f g).app U a)) → c' = c) ∧ IsIso c ∧ (∀ (U : X.affineOpens) (V : S.affineOpens) (V' : T.affineOpens) (hU : U.1 ≤ f ⁻¹ᵁ V.1) (hV' : V'.1 ≤ g ⁻¹ᵁ V.1), IsAffineOpen (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) ∧ IsPushout (f.appLE V.1 U.1 hU) (g.appLE V.1 V'.1 hV') ((pullback.fst f g).appLE U.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_left) ((pullback.snd f g).appLE V'.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_right) ∧ ∃ α : (ModuleCat.extendScalars ((pullback.fst f g).appLE U.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_left).hom).obj (CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hU)) ≃ₗ[ Γ(pullback f g, relativeDifferentialsBaseChangeOpen f g U.1 V'.1)] Γ((Modules.tensorPullback (pullback.fst f g)).obj f.relativeDifferentials, relativeDifferentialsBaseChangeOpen f g U.1 V'.1), ∃ δ : CommRingCat.KaehlerDifferential ((pullback.snd f g).appLE V'.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_right) ≃ₗ[ Γ(pullback f g, relativeDifferentialsBaseChangeOpen f g U.1 V'.1)] Γ((pullback.snd f g).relativeDifferentials, relativeDifferentialsBaseChangeOpen f g U.1 V'.1), ∃ β : (ModuleCat.extendScalars ((pullback.fst f g).appLE U.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_left).hom).obj (CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hU)) ≃ₗ[ Γ(pullback f g, relativeDifferentialsBaseChangeOpen f g U.1 V'.1)] CommRingCat.KaehlerDifferential ((pullback.snd f g).appLE V'.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_right), (∀ a : Γ(X, U.1), α ((1 : Γ(pullback f g, relativeDifferentialsBaseChangeOpen f g U.1 V'.1)) ⊗ₜ[Γ(X, U.1), ((pullback.fst f g).appLE U.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_left).hom] (CommRingCat.KaehlerDifferential.d a)) = ((Modules.tensorPullback (pullback.fst f g)).obj f.relativeDifferentials).presheaf.map (homOfLE inf_le_left).op (Modules.tensorPullbackSection (pullback.fst f g) f.relativeDifferentials U.1 (f.relativeDifferentialsDerivation.d (X := op U.1) a))) ∧ (∀ z : Γ(pullback f g, relativeDifferentialsBaseChangeOpen f g U.1 V'.1), δ (CommRingCat.KaehlerDifferential.d z) = (pullback.snd f g).relativeDifferentialsDerivation.d (X := op (relativeDifferentialsBaseChangeOpen f g U.1 V'.1)) z) ∧ (∀ (b : Γ(pullback f g, relativeDifferentialsBaseChangeOpen f g U.1 V'.1)) (a : Γ(X, U.1)), β (b ⊗ₜ[Γ(X, U.1), ((pullback.fst f g).appLE U.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_left).hom] (CommRingCat.KaehlerDifferential.d a)) = b • CommRingCat.KaehlerDifferential.d ((pullback.fst f g).appLE U.1 (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) inf_le_left a)) ∧ (∀ x, c.app (relativeDifferentialsBaseChangeOpen f g U.1 V'.1) (α x) = δ (β x))) ∧ (LocallyOfFiniteType f → f.relativeDifferentials.IsFiniteType ∧ (pullback.snd f g).relativeDifferentials.IsFiniteType)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf4f5a65d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Read the node, the 6 stmt_dep records (identical to side-live), the delivered module, report.md and the exact declarations (relativeDifferentials/Derivation, tensorPullbackSection, IsQuasicoherent/IsFiniteType, LocallyOfFiniteType). Lean statement verbatim equal to the file. Arbitrary f,g in Scheme.{u}; X'=pullback, p=fst, f'=snd. Quasi-coherence unconditional. c characterized by c(1⊗da)=d(p^♯a) on all opens, with a (true) uniqueness clause and IsIso. Affine triple clause: W=p⁻¹U⊓f'⁻¹V' affine, IsPushout Γ(W)≅R'⊗_R A, α/δ/β pinned on generators, β(b⊗da)=b·d(1⊗a), c.app W∘α=δ∘β; overlaps agree via the single global c. Finite type of both sheaves under LocallyOfFiniteType f only. No flatness, finite-presentation or extra instance. Edge cases (empty schemes, zero rings, f=id, non-flat g, n=0) covered. No duplicate notion: relativeDifferentialsPullbackGenerator is the same section term but belongs to the same-base a1 map. Helper abbrev is real and has source/blueprint docstrings; theorem docstring has the 6 proof steps; only sorry. Note: the 'Second reading by Q04' section is the worker's own reread. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T002155-L-64056",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

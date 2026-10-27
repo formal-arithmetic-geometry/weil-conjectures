@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-space-eventually-surjective-map",
+ "kind": "statement",
+ "title": "Surjectivity descends to a stage of an algebraic-space inverse system",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine source after every affine scheme test. Local finite presentation and local finite type are tested on compatible etale scheme charts [def-sfb-space-morphism-properties]; finite presentation means local finite presentation, quasi-compactness and quasi-separatedness. Let $I$ be a small nonempty directed set, $(B_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated algebraic spaces with affine transitions and limit $B$, and choose $i_0\\in I$. Let $f_0:X_0\\to Y_0$ be a morphism over $B_{i_0}$ with $X_0,Y_0$ quasi-compact and quasi-separated. For $i\\geq i_0$ put $X_i=X_0\\times_{B_{i_0}}B_i$, $Y_i=Y_0\\times_{B_{i_0}}B_i$ and let $f_i:X_i\\to Y_i$ be the base change of $f_0$; let $f:X\\to Y$ be its base change to $B$. If $f_0$ is locally of finite presentation and $|f|$ is surjective, then there is $j\\geq i_0$ such that $|f_i|$ is surjective for every $i\\geq j$. No surjectivity of the transition morphisms $B_j\\to B_i$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SN (lemma-descend-surjective) in Situation 084W (situation-descent-property); persistence under later base change."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine scheme $V_0$ with a surjective etale map $V_0\\to Y_0$ by [lem-sfb-qc-space-affine-etale-atlas]. The affine scheme $V_0$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs], so $W_0=X_0\\times_{Y_0}V_0$ is qcqs by [lem-sfb-qcqs-space-fibre-product]. Choose an affine scheme $U_0$ with a surjective etale map $U_0\\to W_0$ using the same atlas lemma. The scheme morphism $h_0:U_0\\to V_0$ is locally of finite presentation by [lem-sfb-space-local-properties-chart-test], applied to $f_0$ and these two charts. Thus $U_0,V_0$ are qcqs schemes and $h_0$ has exactly the local finite presentation needed for scheme descent.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SN (lemma-descend-surjective), proof in Situation 084W; use the affine target-chart system as the scheme base system."
+   }
+  },
+  {
+   "text": "On the directed tail $i\\geq i_0$, set $V_i=V_0\\times_{B_{i_0}}B_i$ and $U_i=U_0\\times_{B_{i_0}}B_i$, and similarly $V,U$ over $B$. The maps $B_i\\to B_{i_0}$ are affine; the limit projection is affine by [lem-sfb-space-affine-limits-schematic-stages]. Hence $U_i,V_i,U,V$ are affine schemes, and the transition maps are affine, by [lem-sfb-space-affine-locality]. The base-change identity for limits in [lem-sfb-space-affine-limits-schematic-stages] identifies $U=\\varprojlim U_i$ and $V=\\varprojlim V_i$. The sheaf limit universal property, restricted to scheme tests, is also the scheme limit universal property. Pullback associativity identifies $U_i$ with $U_0\\times_{V_0}V_i$ and $U$ with $U_0\\times_{V_0}V$. By [lem-trf-space-fibre-products-etale-covers], $V_i\\to Y_i$ and $U_i\\to X_i\\times_{Y_i}V_i$ are surjective etale, and the analogous statements hold over $B$. These are precisely base changes of the chosen two charts.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SN (lemma-descend-surjective), proof in Situation 084W; use the affine target-chart system as the scheme base system."
+   }
+  },
+  {
+   "text": "Surjectivity of $|f|$ implies surjectivity of $|X\\times_YV|\\to|V|$ by the point-image formula of [lem-a1-space-point-open-calculus]. Since $U\\to X\\times_YV$ is surjective, the composite $h:U\\to V$ is surjective. Apply [lem-weil-pbc-descend-surjective] with scheme bases $S_i=V_i$, distinguished stage $i_0$, stage source $U_0$, stage target $V_0$, and morphism $h_0$. Here $V_{i_0}\\cong V_0$; every base is affine, $U_0,V_0$ are qcqs, the transitions are affine, the scheme limit is $V$, and $h_0$ is locally of finite presentation by step 1. This gives $j\\geq i_0$ for which $h_j:U_j\\to V_j$ is surjective. In particular this application does not assume that the original $B_i$ are schemes.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-descend-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SN (lemma-descend-surjective), proof in Situation 084W; use the affine target-chart system as the scheme base system."
+   }
+  },
+  {
+   "text": "For each point $y\\in|Y_j|$, choose a preimage $v\\in|V_j|$ and then a preimage $u\\in|U_j|$ under $h_j$. The image of $u$ in $|X_j|$ maps to $y$, by commutativity of the chart square. Thus $|f_j|$ is surjective. For every $i\\geq j$, pullback associativity identifies $f_i$ with the base change of $f_j$ along $Y_i\\to Y_j$. The point-image formula of [lem-a1-space-point-open-calculus] gives $\\operatorname{im}|f_i|=|Y_i|$, so all these maps are surjective. No transition map has been assumed surjective.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SN (lemma-descend-surjective), proof in Situation 084W; use the affine target-chart system as the scheme base system."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-affine-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-descend-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SN (lemma-descend-surjective), proof in Situation 084W; use the affine target-chart system as the scheme base system."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an inverse system of qcqs algebraic spaces with affine transitions a locally finitely presented stage morphism whose limit is surjective is eventually surjective",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, LightProfinite.surjective_transitionMap, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, LightProfinite.surjective_transitionMapLE, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Surjective\", \"IsLimit\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]ventually.*[Ss]urjective|[Dd]escend.*[Ss]urjective",
+   "results": "Actual logged search: 10 hits; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of locally finitely presented algebraic space morphisms descends to a stage of a directed inverse limit",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, Profinite.instEpiAppDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceπAsLimitCone, AlgebraicGeometry.Surjective, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, LightProfinite.surjective_transitionMap",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventual surjectivity of a locally finitely presented map over an inverse limit of algebraic spaces",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.pointsPi_surjective, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, LightProfinite.surjective_transitionMap, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|eventually.*surject|descend.*surject",
+   "results": "Actual logged search: 10 hits; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme fpqc descent, scheme properties, profinite transitions or eventual equality of scheme morphisms, not eventual surjectivity for algebraic spaces. Read FlatDescent.lean:160-185, UnderlyingMap.lean:50-64 and AffineTransitionLimit.lean:1040-1061; none supplies the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space map locally of finite presentation which is surjective over a directed limit of qcqs spaces with affine transitions is eventually surjective",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Scheme.Hom.surjective, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, LightProfinite.surjective_transitionMap, AlgebraicGeometry.Surjective, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme fpqc descent, scheme properties, profinite transitions or eventual equality of scheme morphisms, not eventual surjectivity for algebraic spaces. Read FlatDescent.lean:160-185, UnderlyingMap.lean:50-64 and AffineTransitionLimit.lean:1040-1061; none supplies the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Surjective\", \"IsLimit\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme fpqc descent, scheme properties, profinite transitions or eventual equality of scheme morphisms, not eventual surjectivity for algebraic spaces. Read FlatDescent.lean:160-185, UnderlyingMap.lean:50-64 and AffineTransitionLimit.lean:1040-1061; none supplies the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of a locally finitely presented morphism of algebraic spaces descends from an inverse limit to a finite stage",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Surjective, AlgebraicGeometry.instSurjectiveDescI₀SchemeF, AlgebraicGeometry.Surjective.surj",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme fpqc descent, scheme properties, profinite transitions or eventual equality of scheme morphisms, not eventual surjectivity for algebraic spaces. Read FlatDescent.lean:160-185, UnderlyingMap.lean:50-64 and AffineTransitionLimit.lean:1040-1061; none supplies the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Images of finitely presented algebraic space morphisms in affine inverse systems are detected at finite stages",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_eq_top",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme fpqc descent, scheme properties, profinite transitions or eventual equality of scheme morphisms, not eventual surjectivity for algebraic spaces. Read FlatDescent.lean:160-185, UnderlyingMap.lean:50-64 and AffineTransitionLimit.lean:1040-1061; none supplies the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-surjective-affine-space-target",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SN (lemma-descend-surjective) in Situation 084W (situation-descent-property); persistence under later base change.",
+   "via": [
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-eventually-surjective-map",
+  "worker": "stage1",
+  "summary": "Expanded Tag 07SN into affine chart selection, affine chart inverse systems, scheme surjectivity descent over the target-chart system, and pointwise assembly with persistence. Reused all inputs; no new nodes or statement changes. No project attachment or Mathlib match was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SN (lemma-descend-surjective) in Situation 084W (situation-descent-property); persistence under later base change. This split supplies the 07SN prerequisite through its chart proof, without changing the unit route. The inherited nearest blueprint ancestor is null because the creation chain terminates at a module, not an imported DAG node. Latest sk-thm-sf-ctf-stability and its direct-images proof (3) were read.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine scheme qcqs fact used to choose the second affine chart; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-surjective",
+    "why": "Tag 07RR is the explicit scheme input in Tag 07SN, applied over the affine target-chart inverse system."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-image base-change formula transfers surjectivity between the chart and the space and proves persistence."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf pullback and etale covering base-change calculus for the charts in Tag 07SN; this is foundation data, not a trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-descend-surjective",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-2914d31e4",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-2914d31e4 (reviewer sub-agent of L); spot-checked: I read Stacks Situation 084W (spaces-limits.tex l.1449) and Tag 07SN (l.1559) with its proof. The split follows that proof one step for one and leaves the statement unchanged; it adds no new nodes. Step 1: the atlas lemma (03H6) needs only |Y_0| quasi-compact, which holds. 073B(3) applies with X_0, V_0 and Y_0 all qcqs, so W_0 is qcqs. The chart test (0410) holds for every chart pair and gives h_0 lfp. Step 2: by pullback pasting, U_i = U_0 x_{V_0} V_i. Affine base change and the affine limit projection (limits node) make U_i, V_i, U, V affine schemes. The base-change limit clause gives V = lim V_i and U = lim U_i. The stage-0 charts base-change to surjective étale charts by the one-member family clause of 02X2/041F. Step 3: the point-image formula gives |X x_Y V| -> |V| surjective, and the representable-surjectivity clause makes h scheme-surjective. 07RR (lem-weil-pbc-descend-surjective) is then applied with base system S_i = V_i, X_0 = U_0, Y_0 = V_0. All its hypotheses hold, and its base changes are exactly U_i -> V_i, so the B_i need not be schemes. Step 4 is marked elementary. It needs |T| -> |h_T| surjective for a scheme T, which is a two-line consequence of the definitions in def-a1-algebraic-space-point-classes, so the marking is acceptable. It then chases preimages and gets persistence for i >= j from the image formula. Small cases checked: Y_0 empty, B empty with nonempty stages, and a constant system. The delivery adds no cycle and duplicates nothing. I accept the four tool_uses (affine qcqs, 07RR, a1 point calculus, trf fibre products): each is a generic input the 07SN route needs. Batch-5 check: all six flagged citations reach sec-trace-formula only through def-trf-algebraic-space and the general algebraic-space foundations. None states or proves the trace formula or Poincaré duality, so all are outside the assumed statements. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceEventuallySurjectiveMap",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.eventually_surjective_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceEventuallySurjectiveMap.lean",
+  "statement": "theorem eventually_surjective_of_isLimit {S : Scheme.{u}} {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ AlgebraicSpace S) (hqc : ∀ i : Iᵒᵖ, CompactSpace (Point (D.obj i).obj.obj)) (hqs : ∀ i : Iᵒᵖ, IsAbsolutelyQuasiSeparated (D.obj i)) (haff : ∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) (D.map a).hom.hom) (c : Cone D) (hc : IsLimit c) (i₀ : I) (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀) (hXqc : CompactSpace (Point X₀.left.obj.obj)) (hXqs : IsAbsolutelyQuasiSeparated X₀.left) (hYqc : CompactSpace (Point Y₀.left.obj.obj)) (hYqs : IsAbsolutelyQuasiSeparated Y₀.left) (hlfp : MapIsLocallyOfFinitePresentation f₀.left) (hf : Function.Surjective (mapPoint (spaceBaseChangeMap f₀.left.hom.hom Y₀.hom.hom.hom (c.π.app (op i₀)).hom.hom))) : ∃ (j : I) (hj : i₀ ≤ j), ∀ (i : I) (hi : j ≤ i), Function.Surjective (mapPoint (spaceBaseChangeMap f₀.left.hom.hom Y₀.hom.hom.hom (D.map (homOfLE (le_trans hj hi)).op).hom.hom))",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceBaseChangeMap",
+   "AlgebraicGeometry.AlgebraicSpace.eventually_surjective_of_isLimit"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d242adcbd",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 084W/07SN: directed I:Type u, D:Iᵒᵖ⥤AlgebraicSpace S, all-stage CompactSpace+IsAbsolutelyQuasiSeparated, affine transitions via IsRepresentableWith IsAffineHom, IsLimit cone in AlgebraicSpace S (07SF), f₀ in Over B_{i₀} with qcqs source/target and MapIsLocallyOfFinitePresentation, canonical base change spaceBaseChangeMap (Over.pullback map, real data), |f| surjective via mapPoint, ∃ j≥i₀ ∀ i≥j conclusion; no transition surjectivity, sorry-only. New node def-sfb-space-absolute-quasi-separated = Stacks 0AHR(3) ⇔ absolute qs, not a duplicate (only inline copies exist; def-sfb-stack-qcqs-morphism is relative/stack, no Lean). Statements verbatim; item diff = lean + new stmt_dep only. Advisories: node assumes all B_i qcqs (source only B_0); mapPoint reached via transitive stmt_deps; module docstring chapter name should be 'Limits of Algebraic Spaces'. No files changed, no compile."
+ }
+}

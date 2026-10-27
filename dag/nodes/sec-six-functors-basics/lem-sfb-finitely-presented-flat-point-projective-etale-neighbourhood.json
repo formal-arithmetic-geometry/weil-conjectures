@@ -1,0 +1,417 @@
+{
+ "id": "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+ "kind": "statement",
+ "title": "A finitely presented sheaf flat at a point has projective affine sections after an elementary etale base neighbourhood",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation]. Let $\\mathcal G$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent] of finite presentation [def-weil-pbc-module-finite-type-presentation]. Let $x\\in X$, put $s=f(x)$, and suppose that $\\mathcal G_x$ is flat over $\\mathcal O_{S,s}$ [def-pc-scheme-module-flat-over]. There exist an affine scheme $S^{\\prime}$ [def-weil-affine-spectrum], an etale morphism $e:S^{\\prime}\\to S$ [def-weil-etale-morphism], and $s^{\\prime}\\in S^{\\prime}$ with $e(s^{\\prime})=s$ inducing an isomorphism $\\kappa(s)\\to\\kappa(s^{\\prime})$ [def-weil-residue-field], and an affine open [def-weil-open-immersion] $W\\subseteq X\\times_S S^{\\prime}$ [def-pc-fibre-product] containing the unique point over $(x,s^{\\prime})$, such that $\\Gamma(W,(\\operatorname{pr}_X^*\\mathcal G)|_W)$ [def-pc-module-pullback] is a projective $\\Gamma(S^{\\prime},\\mathcal O_{S^{\\prime}})$-module [def-weil-pbc-projective-module]. No finite-generation hypothesis over this base ring is imposed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05ME (lemma-flat-finite-presentation-affine-neighbourhood-projective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-pbc-projective-module",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods $S_0=\\operatorname{Spec}A$ of $s$ and $X_0=\\operatorname{Spec}B\\subset f^{-1}(S_0)$ of $x$ on which $G=\\mathcal G|_{X_0}$ has a finite presentation, as allowed by the hypotheses. The all-affine-pairs theorem gives $A\\to B$ finitely presented. The affine dictionary writes $G=\\widetilde M$ with $M$ finitely presented over $B$; its stalk at a prime $\\mathfrak q$ is $M_{\\mathfrak q}$. At $x$, with base prime $\\mathfrak p$, the assumed $A_{\\mathfrak p}$-flatness implies $A$-flatness by flatness of localization and transitivity. Apply algebraic openness of flatness to $(A,B,M)$ to get an open neighbourhood of $x$ where every $M_{\\mathfrak q}$ is $A$-flat. Such a module is flat over $A_{\\mathfrak q\\cap A}$: for an injection of $A_{\\mathfrak q\\cap A}$-modules, its tensor with $M_{\\mathfrak q}$ is the same as its tensor over $A$, since every inverted scalar already acts invertibly. Choose a smaller affine $X_0$ inside this open. The stalk criterion says $G$ is flat over $S_0$. Restriction preserves the displayed finite presentations and quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-weil-pbc-openness-of-flatness",
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, first paragraph; algebra.tex Tag 00RC (theorem-openness-flatness)."
+   }
+  },
+  {
+   "text": "The affine fibre $(X_0)_s$ is the spectrum of a finite type $\\kappa(s)$-algebra, hence has Noetherian coordinate ring: a field has only the ideals zero and one, and finite type algebras over a Noetherian ring are Noetherian. Pullback of the local finite presentation of $G$ gives a finite presentation of $G_s$. The affine dictionary and finiteness of associated primes of a finite module over a Noetherian ring show that $E=\\operatorname{Ass}_{(X_0)_s}(G_s)$ is finite. For every $a\\in E$ which does not specialize to $x$, remove the closed subset $\\overline{\\{a\\}}$ of $X_0$. None contains $x$, and removing their finite union leaves an open neighbourhood of $x$. Choose a smaller affine $X_0$ therein. On an open subscheme the stalks and their annihilators are unchanged; thus every remaining associated point of $G_s$ specializes to $x$. Finite presentation over $S_0$ still holds by the affine-pairs theorem and the qcqs permanence lemma. No Noetherian hypothesis on $S_0$ was used.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sfb-affine-associated-points-primes",
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "def-trf-relative-assassin",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, first paragraph, shrinking the special-fibre assassin; divisors.tex Tags 02OK and 05AF."
+   }
+  },
+  {
+   "text": "Apply the pointwise projective-chart theorem to $X_0/S_0$, $G$, and $x$. Write its affine elementary base neighbourhood as $(S_1,s_1)\\to(S_0,s)$ and its affine source neighbourhood as $g:(Y,y)\\to(X_0,x)$, with $q:Y\\to S_1$. Put $X_1=X_0\\times_{S_0}S_1$. The induced map $h=(g,q):Y\\to X_1$ is etale: $X_1\\to X_0$ is etale by base change, and its composite with $h$ is the etale $g$, so etale cancellation applies. Its marked point maps to the unique $x_1$ above $(x,s_1)$. Moreover $Y\\to S_1$ is finitely presented: $Y\\to X_0\\to S_0$ is locally finitely presented by composition, $S_1\\to S_0$ is locally of finite type, and finite-presentation cancellation makes $q$ locally finitely presented; $Y,S_1$ affine then give qcqs. Put $F=\\operatorname{pr}_{X_0}^*G$ and $H=h^*F\\cong g^*G$. The chart theorem gives $Q=\\Gamma(Y,H)$ projective over $A_1=\\Gamma(S_1,\\mathcal O)$. Both sheaves remain quasi-coherent and finitely presented, and $F$ remains flat over $S_1$. The specified residue isomorphism identifies the fibre $(X_1)_{s_1}$, its sheaf and its marked point with $(X_0)_s,G_s,x$. Thus all its associated points specialize to $x_1$; this persists under every further elementary pointed base neighbourhood.",
+   "uses": [
+    "lem-sfb-flat-point-projective-etale-source-chart",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, first paragraph, projective etale chart; Tag 05ID supplies a pointwise chart instead of the unused whole-fibre covering of Tag 05KW."
+   }
+  },
+  {
+   "text": "Projectivity of $Q$ makes it $A_1$-flat. The affine-chart flatness criterion then makes $H$ flat over $S_1$. Apply the affine projectivity-purity theorem to $Y/S_1$ and $H$: its hypotheses are finite presentation of the morphism and sheaf, quasi-coherence, and the flatness just checked. It follows that $H$ is universally pure over $S_1$. Since $h$ is etale, its image is open. Choose an affine open $U\\subseteq h(Y)$ containing $x_1$. We will show $F|_U$ is pure along $U_{s_1}$.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-affine-chart-relative-flat-criterion",
+    "def-pc-scheme-module-flat-over",
+    "lem-sfb-affine-flat-fp-projectivity-purity",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, end of first paragraph and beginning of second paragraph; Tags 05K6 and 05MD."
+   }
+  },
+  {
+   "text": "Test purity using its definition. Take an arbitrary elementary etale neighbourhood $(T,t)\\to(S_1,s_1)$, a specialization $t'\\leadsto t$, and $\\xi\\in\\operatorname{Ass}_{U_T/T}(F_T|_{U_T})$ over $t'$. Put $Y_T=Y\\times_{S_1}T$, and let $h_T:Y_T\\to(X_1)_T$ be the base-changed etale map. The restriction $h^{-1}(U)\\to U$ is etale and surjective by the definition of its image; its arbitrary base change to $U_T$ remains surjective by the etale-covering base-change theorem. Choose $\\xi'\\in Y_T$ above $\\xi$. On the $t'$ fibres the schemes are locally Noetherian, being locally of finite type over the field $\\kappa(t')$. Etale invariance of associated points applied to $(h_T)_{t'}$ implies $\\xi'\\in\\operatorname{Ass}_{Y_T/T}(H_T)$. Here association on the open $U_T$ agrees with association in $(X_1)_T$ by the identical local stalks. Universal purity of $H$, with this arbitrary $T\\to S_1$, supplies a specialization of $\\xi'$ to some point of $(Y_T)_t$.",
+   "uses": [
+    "def-sfb-scheme-relative-purity",
+    "lem-a1-etale-open-restriction",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-covering-base-change",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-scheme-etale-assassin-invariance",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, last paragraph: lifting a relative associated point to the etale chart and using its universal purity."
+   }
+  },
+  {
+   "text": "We need the limiting point to be associated. Form $Z=\\overline{\\{\\xi'\\}}\\subset Y_T$ with its reduced induced closed-scheme structure. Its fibre $Z_t$ is nonempty by step 5. Choose an irreducible component $C$ of $Z_t$ and its generic point $y$, using component coverage and sobriety of schemes. Thus $\\xi'\\leadsto y$. The module $H_T$ is flat over $T$ by base change of $H$; it is also quasi-coherent and finitely presented, and $Y_T/T$ is finitely presented, by base change of the data in step 4. Apply the existing relative-associated-specialization theorem (Tag 0GSI) to $Y_T/T$, $H_T$, $\\xi'$, and this component $C$. In particular its required flatness at $y$ holds. Its conclusion gives $y\\in\\operatorname{Ass}_{(Y_T)_t}((H_T)_t)$. The dimension clause of that theorem is not needed.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-trf-flat-relative-associated-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, last paragraph, application of Tag 05L3; its associated-specialization input is more-morphisms.tex Tag 0GSI."
+   }
+  },
+  {
+   "text": "The map $(h_T)_t:(Y_T)_t\\to((X_1)_T)_t$ is etale between locally Noetherian schemes over $\\kappa(t)$. Etale assassin invariance sends the associated point $y$ of step 6 to an associated point $h_T(y)$ of $((F_T)_t)$. Since $\\kappa(t)=\\kappa(s_1)$ through the specified elementary-neighbourhood isomorphism, the fibre identification in step 3 says that $h_T(y)$ specializes to the point $x_t$ above $x_1$. This point lies in $U_T$. Opens contain all generalizations of their points: if an open containing $x_t$ omitted $h_T(y)$, its closed complement would contain its specialization $x_t$. Therefore $h_T(y)\\in(U_T)_t$. Continuity sends $\\xi'\\leadsto y$ to $\\xi\\leadsto h_T(y)$. We have found a specialization in $(U_T)_t$ for every proposed impurity in step 5. By definition, $F|_U$ is pure along $U_{s_1}$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-scheme-etale-assassin-invariance",
+    "def-sfb-scheme-relative-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, final sentences: g(x\\prime) is associated, specializes to x, and hence belongs to U."
+   }
+  },
+  {
+   "text": "The map $U\\to S_1$ is finitely presented: $X_1/S_1$ is locally of finite presentation by base change, restriction to $U$ preserves this local property by composition with the etale open inclusion, and a locally finitely presented map from an affine scheme to the affine $S_1$ is finitely presented by qcqs permanence. The module $F|_U$ is quasi-coherent, finitely presented and flat over $S_1$. By openness of purity, the set of $v\\in S_1$ for which $F|_U$ is pure along $U_v$ is an open neighbourhood of $s_1$. Choose an affine open $V$ inside it containing $s_1$, and put $W=U\\times_{S_1}V$. Since $U\\to S_1$ is a map of affine schemes, it is affine, so $W$ is affine. It is an open subscheme of $X_0\\times_{S_0}V$, contains the unique point above $(x,s_1)$, and its module is pure relative to $V$: every elementary neighbourhood of a point in the open $V$ is also one in $S_1$, with the same relevant fibre and specializations. Finite presentation of $W/V$ and relative flatness of its module survive base change.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sfb-flat-fp-purity-open",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-sfb-scheme-relative-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, second paragraph: shrink S using lemma-flat-finite-presentation-purity-open."
+   }
+  },
+  {
+   "text": "Apply the affine projectivity-purity equivalence to $W/V$: both schemes are affine, the map and module are finitely presented, and the module is relatively flat and pure relative to $V$, by step 8. It gives $\\Gamma(W,F_W)$ projective over $\\Gamma(V,\\mathcal O_V)$. Finally the composite $V\\to S_1\\to S_0\\to S$ is etale: open immersions are etale and etale maps compose. It sends the retained point to $s$ with unchanged residue field. The open $W\\subseteq X_0\\times_{S_0}V$ is also open in $X\\times_SV$, since $X_0\\subset f^{-1}(S_0)$ was an open subscheme. Pullback composition identifies $F_W$ with $(\\operatorname{pr}_X^*\\mathcal G)|_W$. Taking $S'=V$ proves every requested clause, with arbitrary-rank projectivity rather than finite projectivity.",
+   "uses": [
+    "lem-sfb-affine-flat-fp-projectivity-purity",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05ME, second paragraph: proposition-finite-presentation-flat-pure-is-projective and the initial permitted replacements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-openness-of-flatness",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-sfb-affine-associated-points-primes",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "def-trf-relative-assassin",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-flat-point-projective-etale-source-chart",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-sfb-affine-flat-fp-projectivity-purity",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-sfb-scheme-relative-purity",
+  "lem-a1-etale-open-restriction",
+  "lem-weil-pbc-etale-covering-base-change",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-scheme-etale-assassin-invariance",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-trf-flat-relative-associated-specialization",
+  "lem-sfb-flat-fp-purity-open",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05ME (lemma-flat-finite-presentation-affine-neighbourhood-projective), full proof; the Tag 05L3 specialization is expanded using the existing Tag 0GSI node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projective.*neighbou?r|neighbou?r.*projective",
+   "results": "0 hits; ; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the flat finitely presented module theorem requires finite presentation over the base ring; here the sheaf is finitely presented over the source, and projective sections of possibly infinite rank require the etale-neighbourhood theorem. The etale-locus and algebra finite-presentation hits do not state that theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented flat sheaf has an affine neighborhood with projective sections after an elementary etale neighborhood of the base",
+   "results": "8 hits; Module.Flat.projective_of_finitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the flat finitely presented module theorem requires finite presentation over the base ring; here the sheaf is finitely presented over the source, and projective sections of possibly infinite rank require the etale-neighbourhood theorem. The etale-locus and algebra finite-presentation hits do not state that theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"IsFinitePresentation\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the flat finitely presented module theorem requires finite presentation over the base ring; here the sheaf is finitely presented over the source, and projective sections of possibly infinite rank require the etale-neighbourhood theorem. The etale-locus and algebra finite-presentation hits do not state that theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module of finite presentation flat at a point of a locally finitely presented scheme has an affine neighborhood after elementary etale base change whose sections are projective over the base ring",
+   "results": "8 hits; Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the flat finitely presented module theorem requires finite presentation over the base ring; here the sheaf is finitely presented over the source, and projective sections of possibly infinite rank require the etale-neighbourhood theorem. The etale-locus and algebra finite-presentation hits do not state that theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson finite presentation flat module at a point etale affine neighbourhood projective module sections",
+   "results": "8 hits; Algebra.Etale.finitePresentation, Algebra.isOpen_etaleLocus, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus, Algebra.Etale.exists_subalgebra_fg, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the flat finitely presented module theorem requires finite presentation over the base ring; here the sheaf is finitely presented over the source, and projective sections of possibly infinite rank require the etale-neighbourhood theorem. The etale-locus and algebra finite-presentation hits do not state that theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented quasi coherent sheaf flat at a point admits projective affine sections after an elementary etale base neighborhood",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"hits\": [{\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}, {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}, {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.FinitePresentation R M], Module.Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}, {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}, {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}, {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}, {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}, {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}]}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite presentation over the base is not available, and the flat/smooth/etale openness hits supply no affine Zariski neighbourhood with projective sections after an elementary etale base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective affine neighborhood of a flat finitely presented sheaf after etale base change",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"hits\": [{\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}, {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}, {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}, {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}, {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"[Finite n] : LocallyOfFinitePresentation (𝔸(n; S) ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}, {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(𝒰 : Y.OpenCover) [∀ i, IsAffine (𝒰.X i)] : P f ↔ ∀ i, Q (𝒰.pullbackHom f i)\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ such that each $ \\\\mathcal{U}_i $ is affine. Then $ f $ has the affine property if and only if for every in\"}, {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}, {\"name\": \"Module.Flat.of_projective\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Projective R M] : Flat R M\", \"doc\": \"Every projective module over a commutative semiring is flat. Specifically, if $ M $ is a projective module over a commutative semiring $ R $, then $ M $ satisfies the flatness condition, meaning tenso\"}]}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite presentation over the base is not available, and the flat/smooth/etale openness hits supply no affine Zariski neighbourhood with projective sections after an elementary etale base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"IsFinitePresentation\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"hits\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite presentation over the base is not available, and the flat/smooth/etale openness hits supply no affine Zariski neighbourhood with projective sections after an elementary etale base change."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*neighbou?r|neighbou?r.*projective",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"hits\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite presentation over the base is not available, and the flat/smooth/etale openness hits supply no affine Zariski neighbourhood with projective sections after an elementary etale base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson flat at a point projectivity of sections on Zariski open after Nisnevich base change",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"hits\": [{\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}, {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}, {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}, {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}, {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}, {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}, {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.Flat f], AlgebraicGeometry.Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}, {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}]}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite presentation over the base is not available, and the flat/smooth/etale openness hits supply no affine Zariski neighbourhood with projective sections after an elementary etale base change."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). Proof of Tag 05UD, final application of Tag 05UA: flatness at a point is detected at the associated generalizations in its fibre. Subinput of Tag 05UA: Tag 0AT4 (lemma-upstairs-finite-type-injective-into-flat-mod-m). Subinput: Tag 05U7 (lemma-flat-finite-type-local-colimit-free), first assertion, omitting the additional Mittag-Leffler conclusion. Supporting geometric input: Tag 05MF (lemma-flat-finite-type-affine-neighbourhood-projective), over a henselian local base, used in the free-neighbourhood paragraph of Tag 05U7. Supporting input for Tag 05MF: Tag 05ME (lemma-flat-finite-presentation-affine-neighbourhood-projective), applied after the affine-space and finite-presentation reductions.",
+   "via": [
+    "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+    "lem-sfb-henselian-flat-finite-module-residue-free-colimit",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+  "worker": "stage1",
+  "group": "Q31",
+  "summary": "Nine-step split following Tag 05ME. Keeps its purity-transfer argument in the item, reuses existing assassin, localization and base-change nodes, and creates four statement-only purity/projective-chart inputs; uses the pointwise precursor 05ID in place of the unnecessary whole-fibre cover 05KW. Statement and statement dependencies unchanged.",
+  "blueprint": "Inherits blueprint.from.node = null, exactly as blueprint_refs.py ancestor reports. The inherited from.place locates this input below the latest det-thm-sf-ctf-stability-direct-images proof (3), in the coherent-family/flattening branch. Steps 1--3 realize the first paragraph of 05ME using its pointwise projective-chart precursor 05ID, steps 4--7 its universal-purity and special-assassin argument, and steps 8--9 its purity-openness/projectivity conclusion. No unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "Generic algebraic-geometric or module-theoretic input used only for the explicitly indicated localization, pullback, assassin, or topological step in the Stacks 05ME proof; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic algebraic-geometric or module-theoretic input used only for the explicitly indicated localization, pullback, assassin, or topological step in the Stacks 05ME proof; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-pc-relatively-flat-module-pullback",
+    "why": "Generic algebraic-geometric or module-theoretic input used only for the explicitly indicated localization, pullback, assassin, or topological step in the Stacks 05ME proof; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-pc-affine-chart-relative-flat-criterion",
+    "why": "Generic algebraic-geometric or module-theoretic input used only for the explicitly indicated localization, pullback, assassin, or topological step in the Stacks 05ME proof; no step of the constructibility unit is replaced."
+   },
+   {
+    "node": "lem-trf-flat-relative-associated-specialization",
+    "why": "Generic algebraic-geometric or module-theoretic input used only for the explicitly indicated localization, pullback, assassin, or topological step in the Stacks 05ME proof; no step of the constructibility unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-trf-flat-relative-associated-specialization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-288352896",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-288352896 (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full, plus Stacks flat.tex 05ME (statement and proof), 05ID, 05KW, situation-pre-pure/05IY/05J4, 05K6, 05L3, 05MC and 05MD; also the statements of every node cited in the nine steps. The mathematics is correct. Substituting 05ID for 05KW is a sound simplification: the source uses only an affine U inside g(X'). The delivery adds h=(g,q):Y->X_1, étale by cancellation, and the fibre identification (X_1)_{s1} ≅ (X_0)_s from the residue-field isomorphism. Steps 5-7 carry the source's purity-transfer argument in full: étale assassin invariance on locally Noetherian t'/t fibres, universal purity of H, and the 0GSI association at the generic point of a component. Steps 8-9 do 05MC and then 05MD, with affineness of W=U×_{S1}V and openness in X×_S V checked. The new nodes match their tags (05ID, 05MC, 05MD+05K6, 05IY/05J4). None is a duplicate: lem-trf-flat-algebra-etale-projective-neighborhood covers only the structure sheaf, def-sfb-space-universal-relative-purity covers only universal purity for spaces, and lem-trf-local-flat-pure-complete-projective is 05DP. None restates the item. Batch-5 flags: def-trf-relative-assassin is a general definition; 0GSI is a generic associated-point specialization lemma whose 461-node closure contains no trf/PD theorem and no nt-assume or nt-target node; the two sfb assassin nodes reach trf only through that definition and generic layer. All accepted. FIX (3 form faults): (1) item step 5 had \\to decoded as a TAB character, restored (B4); (2) def-sfb-scheme-relative-purity: elementary neighbourhood now requires the induced map κ(s)->κ(t) to be an isomorphism, and a fibre citation was added; (3) the stmt_deps of all four new nodes were missing definitions cited in their own statements, now added.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveAffineEtaleNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_projective_affine_etale_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveAffineEtaleNeighbourhood.lean",
+  "statement": "theorem exists_projective_affine_etale_neighbourhood {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G] [SheafOfModules.IsFinitePresentation.{u} G] (x : X) (hflat : Module.Flat (S.presheaf.stalk (f x)) ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G))) : ∃ (S' : Scheme.{u}) (e : S' ⟶ S) (s' : S'), IsAffine S' ∧ Etale e ∧ e s' = f x ∧ IsIso (e.residueFieldMap s') ∧ ∃ (W : (pullback f e).Opens) (z : ↥(pullback f e)), IsAffineOpen W ∧ (pullback.fst f e) z = x ∧ (pullback.snd f e) z = s' ∧ z ∈ W ∧ @Module.Projective Γ(S', ⊤) _ Γ((Scheme.Modules.tensorPullback (pullback.fst f e)).obj G, W) _ (Module.compHom _ (((pullback.snd f e).appTop ≫ (pullback f e).presheaf.map (homOfLE le_top : W ⟶ ⊤).op).hom))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-399131f05",
+  "group": "NL",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05ME clause by clause: LocallyOfFinitePresentation f; IsQuasicoherent+IsFinitePresentation G (in the pqf-def-coherent / def-weil-pbc-module-finite-type-presentation records); flatness only at x as stalk Module.Flat over O_{S,f x} via restrictScalars along stalkMap (stalk form of def-pc-scheme-module-flat-over; agrees with the theorem-node helper moduleFlatAt, no def-node clash); ∃ affine S', Etale e, e s' = f x, IsIso of induced residueFieldMap; ∃ affine open W of pullback f e and z with fst z = x, snd z = s', z ∈ W (the point is unique since κ(s)≅κ(s')); Module.Projective Γ(S',⊤) on Γ(tensorPullback fst G, W) with scalars via snd.appTop then restriction to W, no finiteness. Same universe u, no extra hypotheses. Statement verbatim in file; item node unchanged apart from lean; no existing 05ME declaration in live Sheaf/WeilConjectures; no new defs; only proof is sorry; docstrings carry source, blueprint and 9 steps; report has Worker report and Second reading by NL. No file changed, so no compile; relied on the delivery's scompile and deliver2 dry-run OK."
+ }
+}

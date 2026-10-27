@@ -1,0 +1,130 @@
+{
+ "id": "def-zl-constant-extension-cyclic-sheet",
+ "kind": "definition",
+ "title": "Canonical cyclic geometric sheets of a constant extension",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], an integer $m\\ge1$, and a separated finite-type $k_0$-scheme $X_0$. Use the constant-extension datum, model $X_{0,m}$, original-base model $X_{(0,m)}$, distinguished sheet $j:X_{0,m}\\times_{k_m}k\\to X_{(0,m)}\\times_{k_0}k$, and canonical geometric-fibre isomorphism $e:X_{0,m}\\times_{k_m}k\\xrightarrow{\\sim}X_0\\times_{k_0}k$ of [def-dl-a1-constant-extension-data]. Put $X=X_0\\times_{k_0}k$, $Y=X_{(0,m)}\\times_{k_0}k$, and let $H:Y\\xrightarrow{\\sim}Y$ be geometric Frobenius for the original $k_0$-model [def-weil-frobenius-detailed]. For every $i\\in\\{0,\\ldots,m-1\\}$ define the canonical cyclic sheet map $h_i:X\\to Y$ by $h_i=H^i\\circ j\\circ e^{-1}$. These are scheme morphisms; no $k$-linearity is imposed.",
+ "stmt_deps": [
+  "def-dl-a1-constant-extension-data",
+  "def-weil-frobenius-detailed",
+  "def-weil-finite-field-fiber"
+ ],
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7) and paragraph after (1.1.10), pp. 150–152: geometric sheets of a finite constant-field extension and their cyclic Frobenius translates."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cyclic translates of the distinguished geometric sheet under Frobenius for a finite constant field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FiniteField.Extension.frob\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Gal(Extension k p n/k)\", \"doc\": \"The Frobenius automorphism of the finite field extension $ L/k $, defined by raising elements to the power of the characteristic $ p $ of the base field $ k $, viewed as an element of the Galois group\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"[Algebra.IsAlgebraic K L] : Gal(L/K)\", \"doc\": \"The Frobenius automorphism of the algebraic field extension $ L/K $, defined by raising elements to the power of the cardinality of the finite field $ K $, viewed as an element of the Galois group $ \\t\"}\n  {\"name\": \"FiniteField.Extension.frob_apply\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"{x : Extension k p n} : frob k p n x = x ^ Nat.card k\", \"doc\": \"For any element $x$ in the finite field extension $L$ of $k$, the Frobenius automorphism $\\\\text{Frob}$ satisfies $\\\\text{Frob}(x) = x^{|k|}$, where $|k|$ denotes the cardinality of the base field $k$.\"}\n  {\"name\": \"FiniteField.instIsCyclicAlgEquivOfFinite\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"(K L) [Finite L] [Field K] [Field L] [Algebra K L] : IsCyclic Gal(L/K)\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ of any finite field extension $L/K$ is a cyclic group. This means that when $L$ is a finite field and $K$ is a subfield of $L$, the group of field automorphisms of $\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra.IsAlgebraic K L],\\n  FiniteField.frobeniusAlgEquivOfAlgebraic K L = FiniteField.frobeniusAlgEquivOfAlgebraic K L\", \"doc\": \"For any finite field $ K $ and algebraic field extension $ L/K $, the Frobenius automorphism defined by raising elements to the power of the cardinality of $ K $ is an algebraic equivalence, and this \"}\n  {\"name\": \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra.IsAlgebraic K L] (a : L), (FiniteField.frobeniusAlgEquivOfAlgebraic K L) a = a ^ Fintype.card K\", \"doc\": \"For a finite field $ K $ and an algebraic field extension $ L/K $, the Frobenius automorphism in the Galois group $ \\\\mathrm{Gal}(L/K) $ is defined by raising elements of $ L $ to the power of the card\"}\n  {\"name\": \"FiniteField.bijective_frobeniusAlgHom_pow\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \": Function.Bijective fun n : Fin (Module.finrank K L) ↦ frobeniusAlgHom K L ^ n.1\", \"doc\": \"The function mapping each natural number $ n $ less than the finite dimension of the field extension $ L/K $ to the $ n $-th power of the Frobenius algebra homomorphism (defined by raising elements to\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquiv\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"(p : ℕ) [ExpChar R p] [PerfectRing R p] : R ≃ₐ[K] R\", \"doc\": \"The algebra equivalence from a $ K $-algebra $ R $ to itself defined by the Frobenius endomorphism raising elements to the power of the cardinality $ \\\\#K $ of the finite field $ K $. This equivalence \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib definition; field Frobenius results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "constantExtensionCyclicSheet",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'constantExtensionCyclicSheet'\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "constantExtensionCyclicSheet|constantExtensionSheet",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n constantExtensionCyclicSheet lean/WeilConjectures",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "No upstream match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n constantExtensionCyclicSheet lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/ConstantExtensionWeilHeartEquivalence.lean:367:def constantExtensionCyclicSheet (i : Fin m) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/ConstantExtensionWeilHeartEquivalence.lean:382:theorem constantExtensionCyclicSheets :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/ConstantExtensionWeilHeartEquivalence.lean:383:    (∀ i : Fin m, IsOpenImmersion (constantExtensionCyclicSheet D m hm X₀ i) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/ConstantExtensionWeilHeartEquivalence.lean:384:      IsClosedImmersion (constantExtensionCyclicSheet D m hm X₀ i)) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/ConstantExtensionWeilHeartEquivalence.lean:387:      (constantExtensionCyclicSheet D m hm X₀))) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/ConstantExtensionWeilHeartEquivalence.lean:491:splits the geometric k_0-scheme into the clopen sheets of constantExtensionCyclicSheets.\n",
+   "date": "2026-10-24",
+   "verdict": "Exact existing definition in Sheaf.Paper.ConstantExtensionWeilHeartEquivalence, reused without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l constantExtensionCyclicSheet|cyclic.*sheet dag/nodes; blueprint_refs.py search cyclic sheet",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-general/lem-zl-constant-extension-weil-heart-equivalence.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-general/lem-zl-constant-extension-pullback-return-residue.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-general/lem-zl-constant-extension-return-local-operators.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-general/lem-zl-constant-extension-sheet-heart-coordinates.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-general/lem-zl-constant-extension-mixed-descent.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-general/lem-zl-cyclic-return-exact-equivalence.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-sp-etale-compactification-bounded-models.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-sp-etale-sum-coefficient-computation.json\n\n0 blueprint nodes match 'cyclic sheet'\n",
+   "date": "2026-10-24",
+   "verdict": "No definition owner for constantExtensionCyclicSheet: only the downstream parent theorem records it, so that theorem cannot be a dependency here."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-constant-extension-sheet-heart-coordinates",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 1 and 5: finite constant extension and the cyclic geometric-sheet coordinates used for its Weil descent.",
+   "via": [
+    "lem-zl-constant-extension-sheet-heart-coordinates",
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantExtensionWeilHeartData",
+  "declaration": "WeilConjectures.constantExtensionCyclicSheet",
+  "statement": "def constantExtensionCyclicSheet (i : Fin m) :\n    (D.geometricFiber X₀).left ⟶\n      (D.geometricFiber (constantExtensionOriginalModel D m hm X₀)).left",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership for the existing canonical composition, as requested by return L/H2 for immutable head 1ba84047da72. The recorded downstream theorem cannot be cited because it has the item in proof_deps. The data of constantExtensionCyclicSheet are the inverse canonical fibre iso, distinguished sheet, and the i-th power of geometric Frobenius; no new construction, theorem choice, or Lean file.",
+  "file": "lean/Sheaf/Paper/ConstantExtensionWeilHeartData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37b78a944",
+  "group": "Q25",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37b78a944",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery after L/H2 return of 1ba84047: Lean module byte-identical (mathematics previously and again checked clause-by-clause: splitting, clopen sheets, successor/return identities, Functor.pi' equivalences at finite/integral/rational/common stages with standard halves, cohomology, reduction and scalar squares, exact heart equivalences, P exact equivalence, r_i equivalence and h_i=j_i r_i, IsoAlgebra Weil coordinates pinned by HEq to zlPullComp comparisons; edge cases m=1, empty X0, n=0). Repair: new existing:true def node def-zl-constant-extension-cyclic-sheet whose lean.statement is verbatim the side-live signature (ConstantExtensionWeilHeartEquivalence:367); its statement h_i=H^i∘j∘e^{-1} matches the Lean composite; stmt_deps def-dl-a1-constant-extension-data/frobenius-detailed/finite-field-fiber own all of its data; H12 fields present. Item stmt_deps add it and def-weil-local-frobenius-trace (owns localPositivePower). Closure script: no cycle, parent theorem not cited, no same-id node on side-live. One sorry; docstrings OK; report sections present. Advisory: integralDerivedPullback unrecorded upstream helper. No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-14961",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261025T202206-L-2690002",
+  "kind": "interface",
+  "note": "independent cc review: delivered ConstantExtensionWeilHeartData/Equivalence/SheetHeartData vs live clone (verbatim relocation, unchanged statements via #check), node lean/proof records vs Lean, axioms, 15 direct importers compiled against sandbox .lbuild"
+ }
+}

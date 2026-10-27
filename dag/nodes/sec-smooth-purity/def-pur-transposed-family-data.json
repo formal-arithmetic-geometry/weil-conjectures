@@ -1,0 +1,101 @@
+{
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorSignedReduction",
+  "date": "2026-10-26",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: derived scalar reduction and tensor/twist compatibility",
+   "via": [
+    "def-pur-finite-signed-reduction-comparisons",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "id": "def-pur-transposed-family-data",
+ "kind": "definition",
+ "title": "Actual adjunction and prescribed values for a transposed family",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 3--5: signed-line comparisons specified by their actual adjoint transposes; Stacks 06YY and 03EM."
+ },
+ "statement": "Given categories C,D, an adjunction F ⊣ G, index set I, families X:I→C and Y:I→D, and a parameter type A, record the actual adjunction, a family of value types V_i in the source hom universe and actual values v:A→Πi,V_i. Pointwise(d,a,i,b) is exactly HEq(d.adjunction.homEquiv(X_i,Y_i,b.hom),d.value(a,i)) for b:F(X_i)≅Y_i. Normalized(d,a,B) is the conjunction of those equations for all i. Pointwise equality determines an isomorphism uniquely by injectivity of the adjunction hom bijection and Iso.ext. No existence of an isomorphism is asserted by this data structure.",
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct the record from the given adjunction and actual values. Define the pointwise equation and its dependent conjunction without changing either side. For pointwise uniqueness, compose the two heterogeneous equalities to get equality of adjoint images, apply injectivity of homEquiv, and then Iso.ext.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": "J2 actual-data interface repair: the existing signed-line normalization, pointwise existence witness and family assembly share one constructed transpose record. The generic uniqueness property is fully proved. No data are supplied by an unproved theorem. This avoids repeated kernel comparison of concrete single-functor and exact-restriction components; no proof is split off here.",
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TransposedFamilyData",
+  "file": "lean/Sheaf/Paper/TransposedFamilyData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.TransposedFamilyData",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.TransposedFamilyData",
+   "WeilConjectures.PurityFiniteSetting.TransposedFamilyData.Pointwise",
+   "WeilConjectures.PurityFiniteSetting.TransposedFamilyData.Normalized",
+   "WeilConjectures.PurityFiniteSetting.TransposedFamilyData.pointwise_unique"
+  ],
+  "statement": "structure TransposedFamilyData\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    {ι : Type uI} (F : C ⥤ D) (G : D ⥤ C) (X : ι → C) (Y : ι → D)\n    (A : Type uA)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A family of uniquely determined isomorphisms specified by an adjunction hom equivalence assembles uniquely into a dependent family.",
+   "results": "8 hits, including Adjunction.homEquiv and adjunction core constructors; no matching typed record interface. Reuse the hom equivalence directly.",
+   "date": "2026-10-26",
+   "verdict": "Use Mathlib homEquiv and prove generic uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv",
+   "results": "0 hits; service does not resolve the unqualified identifier. Local Mathlib Adjunction.Basic contains the API.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing Mathlib hom equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique.*(pi|family)|homEquiv.*injective",
+   "results": "25 hits, including uses of homEquiv.injective in Mathlib CategoryTheory/Adjunction; no concrete finite signed-line interface.",
+   "date": "2026-10-26",
+   "verdict": "Reuse homEquiv.injective; construct actual typed data."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a5681",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T070008-L-3329438",
+  "kind": "interface",
+  "note": "independent cc review: 14 delivered Lean files + 5 change records + 15 node files against clone 3dda50f; FiniteTensorCoreNormalized/LineComparison predicates unfolded against finiteTensorBinaryRepresentativeSquare and old HEq bodies; new sorry against native leftDerivedTensorComparison_app_app_comp_tensorHom and the derivedAdjunction counit; 13 direct importers compiled in a sandbox with the delivery (all pass, max 46 s); #print axioms checked"
+ }
+}

@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-space-naive-cotangent-finite-local-model",
+ "kind": "statement",
+ "title": "Finite two-term etale local models of the naive cotangent complex",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Assume $f$ is locally of finite presentation, meaning locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. There is a jointly surjective family of etale scheme charts $u_i:U_i\\to X$ and, on each small etale site $(U_i)_{\\mathrm{et}}$, a two-term complex $[\\mathcal F_i^{-1}\\xrightarrow{d_i}\\mathcal F_i^0]$ in degrees $-1,0$ with an isomorphism\n$$\\mathrm{NL}_{X/Y}|_{(U_i)_{\\mathrm{et}}}\\simeq[\\mathcal F_i^{-1}\\xrightarrow{d_i}\\mathcal F_i^0]\\quad\\text{in }D(\\mathcal O_{U_i})$$\n[def-sfb-space-naive-cotangent-complex, def-weil-abstract-derived-category]. Both terms are quasi-coherent [def-trf-space-quasi-coherent-module]; $\\mathcal F_i^{-1}$ is of finite type and $\\mathcal F_i^0$ is of finite presentation. For a module sheaf on these sites, finite type means locally admitting an epimorphism $\\mathcal O^{\\oplus n}\\twoheadrightarrow\\mathcal F$ with $n<\\infty$; finite presentation means locally admitting an exact presentation $\\mathcal O^{\\oplus m}\\to\\mathcal O^{\\oplus n}\\to\\mathcal F\\to0$ with $m,n<\\infty$. The displayed complex has zero terms in all other degrees. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D0Z, lemma-netherlander-fp (statement); etale locally quasi-isomorphic interpreted as an isomorphism in the derived category."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-naive-cotangent-complex",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-sfb-space-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas $V\\to Y$ and a surjective etale scheme atlas $W\\to X\\times_YV$. The latter fibre product is an algebraic space by [lem-trf-space-fibre-products-etale-covers], which also gives its surjective etale projection to $X$. Its map to $X$ is representable surjective etale by the base-change definition in [def-trf-algebraic-space]. Thus $W\\to X$ is surjective etale: after testing on any scheme over $X$, it is a composite of scheme etale covers, to which [lem-weil-pbc-etale-covering-composition] applies. The chart assumption [def-sbc-locally-finite-presentation] says that $W\\to V$ is locally of finite presentation. Choose affine opens $U_i=\\operatorname{Spec}B_i\\subset W$ and $V_i=\\operatorname{Spec}R_i\\subset V$ covering $W$, with $U_i\\to V_i$ induced by a finitely presented ring map. Write $B_i=R_i[x_1,\\ldots,x_{n_i}]/(g_1,\\ldots,g_{m_i})$ as allowed by that definition. The maps $U_i\\to X$ form a jointly surjective etale family; open inclusions are etale by [lem-weil-pbc-open-immersion-etale], so restriction to open subschemes is an etale cover refinement, again tested on schemes and composed by the same covering lemma. In the same way each composite $V_i\\subset V\\to Y$ is representable etale, and $U_i\\to V_i\\to Y$ equals $U_i\\to X\\to Y$ because $W\\to V$ is the second projection of $W\\to X\\times_YV$; so $(U_i\\to V_i)\\to(X\\to Y)$ is a commutative square with etale vertical maps.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-covering-composition",
+    "def-sbc-locally-finite-presentation",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0Z, lemma-netherlander-fp, reduction to affine scheme charts."
+   }
+  },
+  {
+   "text": "For each square $(U_i\\to V_i)\\to(X\\to Y)$, both vertical arrows are etale, so [lem-sfb-space-naive-cotangent-etale-localization] identifies $\\mathrm{NL}_{X/Y}|_{U_i}$ with $\\mathrm{NL}_{U_i/V_i}$. Apply [lem-sfb-affine-etale-naive-cotangent-presentation] to $P_i=R_i[x_1,\\ldots,x_{n_i}]\\twoheadrightarrow B_i$ with $I_i=(g_1,\\ldots,g_{m_i})$. Composing the two derived isomorphisms gives the required model with terms $(I_i/I_i^2)^{\\sim}_{\\mathrm{et}}$ and $(B_i\\otimes_{P_i}\\Omega_{P_i/R_i})^{\\sim}_{\\mathrm{et}}$. This uses an isomorphism of complexes in the derived category, not merely separate cohomology identifications.",
+   "uses": [
+    "lem-sfb-space-naive-cotangent-etale-localization",
+    "lem-sfb-affine-etale-naive-cotangent-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0D0W and 0D0X; more-morphisms.tex Tags 0D0I and 0D0K, affine presentation computation."
+   }
+  },
+  {
+   "text": "The classes $[g_1],\\ldots,[g_{m_i}]$ generate $I_i/I_i^2$ over $B_i$: writing $h=\\sum_j a_jg_j$ gives $[h]=\\sum_j\\bar a_j[g_j]$, independent of lifts because products of elements of $I_i$ vanish modulo $I_i^2$. For the degree-zero term use [lem-weil-pbc-kahler-differentials-polynomial-extension] with $R=A=R_i$ and $e=n_i$. Here $\\Omega_{R_i/R_i}=0$, since an $R_i$-derivation of $R_i$ vanishes on every element by [def-weil-pbc-kahler-differentials]. Hence $\\Omega_{P_i/R_i}$ is free on the $\\mathrm dx_j$, and tensoring this explicit basis gives $B_i\\otimes_{P_i}\\Omega_{P_i/R_i}\\cong B_i^{n_i}$. This module has a finite presentation with no relations.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0K, lemma-netherlander-fp, final paragraph; algebra.tex Tag 00RX, lemma-differentials-polynomial-ring."
+   }
+  },
+  {
+   "text": "For both modules the associated Zariski sheaves are quasi-coherent and have those modules as their global sections by [lem-weil-pbc-spec-module-tilde-sections]. The affine finite-type and finite-presentation criteria [lem-weil-pbc-quasi-coherent-finite-type-affine] make the degree $-1$ sheaf of finite type and the degree-zero sheaf of finite presentation. Apply [lem-sfb-scheme-etale-module-exact-finiteness-comparison] to transfer these properties to the small etale sheaves; they are quasi-coherent by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. These are exactly the local epimorphism and finite-presentation conditions in the item. The model has zero terms outside $-1,0$ by construction. Nothing used Noetherianness or finite generation of a kernel of a map between finite modules.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DX, 05VG and 06VE (5), association to the small etale site; finite terms from more-morphisms.tex Tag 0D0K."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sfb-affine-etale-naive-cotangent-presentation",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-sfb-space-naive-cotangent-etale-localization",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D0Z, lemma-netherlander-fp, with the explicit affine proof of more-morphisms.tex Tag 0D0K."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented morphism of algebraic spaces the naive cotangent complex etale locally has a two term quasi coherent model of finite type",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation S Ω[S⁄R]\", \"doc\": \"If an $ R $-algebra $ S $ is finitely presented over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitely presented as an $ S $-module.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ring cotangent and Kahler finiteness do not give a local derived model on an algebraic space; H1 finiteness additionally assumes projective differentials."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebraic space naive cotangent complex is locally represented by a finite presentation module in degree zero and a finite type module in degree minus one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation S Ω[S⁄R]\", \"doc\": \"If an $ R $-algebra $ S $ is finitely presented over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitely presented as an $ S $-module.\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.Extension.Cotangent.finite\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, P.ker.FG → Module.Finite S P.Cotangent\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if the kernel $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $ is finitely generated as an ideal, then t\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (a : P.toExtension.Cotangent)\\n  (a_1 : σ), P.cotangentEquiv a a_1 = P.cotangentComplexAux a a_1\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ring cotangent and Kahler finiteness do not give a local derived model on an algebraic space; H1 finiteness additionally assumes projective differentials."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"H1Cotangent\", \"FinitePresentation\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]] : Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ring cotangent and Kahler finiteness do not give a local derived model on an algebraic space; H1 finiteness additionally assumes projective differentials."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"41\", \"text\": \"  apply (Ideal.cotangent_subsingleton_iff _).mp\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"105\", \"text\": \"  obtain ⟨⟨x, hx⟩, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"107\", \"text\": \"  refine (Ideal.toCotangent_eq_zero _ _).mpr ?_\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ring cotangent and Kahler finiteness do not give a local derived model on an algebraic space; H1 finiteness additionally assumes projective differentials."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naive cotangent complex of a locally finitely presented morphism of algebraic spaces has a finite two term local model",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"[FinitePresentation R S] [Module.Projective S Ω[S⁄R]] : Module.Finite S (H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \": Function.Injective P.toExtension.cotangentComplex\", \"doc\": \"The cotangent complex map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ is injective for a submersive presentation of an $R$-algebra $S$.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[Finite σ] : Function.Surjective P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"Ideal.Cotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Type _\", \"doc\": \"The cotangent module of an ideal $ I $ in a commutative ring $ R $ is the quotient of $ I $ by the submodule $ I^2 $ generated by products of elements of $ I $. This construction generalizes the cotan\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ring cotangent and Kahler finiteness do not give a local derived model on an algebraic space; H1 finiteness additionally assumes projective differentials."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented morphism of algebraic spaces the naive cotangent complex etale locally is a two term complex with finite type degree minus one and finitely presented degree zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring cotangent finiteness is not an algebraic-space local derived model; the H1 finiteness hit also requires projective differentials."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a finite two term quasi coherent local presentation for the truncated cotangent complex of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basis\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] {α : Type u_4} (P : Algebra.Generators R S α) [Finite α]\\n  [Module.Free S P.toExtension.Cotangent],\\n  ∃ P' b,\\n    P'.val ∘ Sum.inr = P.val ∧\\n      ∀ (r : Unit ⊕ Fin (Mo\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ finitely presented over $ R $. Suppose $ \\\\alpha $ is a finite set of generators for $ S $ over $ R $, and the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\ph\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.Extension.Cotangent.finite\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, P.ker.FG → Module.Finite S P.Cotangent\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if the kernel $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $ is finitely generated as an ideal, then t\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation S Ω[S⁄R]\", \"doc\": \"If an $ R $-algebra $ S $ is finitely presented over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitely presented as an $ S $-module.\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (a : P.toExtension.Cotangent)\\n  (a_1 : σ), P.cotangentEquiv a a_1 = P.cotangentComplexAux a a_1\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring cotangent finiteness is not an algebraic-space local derived model; the H1 finiteness hit also requires projective differentials."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"FinitePresentation\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]] : Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring cotangent finiteness is not an algebraic-space local derived model; the H1 finiteness hit also requires projective differentials."
+  },
+  {
+   "tool": "grep",
+   "query": "naive.?cotangent|cotangent.*complex|cotangent.*finite",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring cotangent finiteness is not an algebraic-space local derived model; the H1 finiteness hit also requires projective differentials."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naive cotangent complex of a locally finitely presented morphism of algebraic spaces has a finite two term local model",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.mapCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"(I₁ : Ideal A) (I₂ : Ideal B) (f : A →ₐ[R] B) (h : I₁ ≤ I₂.comap f) : I₁.Cotangent →ₗ[R] I₂.Cotangent\", \"doc\": \"Given commutative rings $ R $, $ A $, and $ B $ with an $ R $-algebra homomorphism $ f : A → B $, and ideals $ I_1 ⊆ A $, $ I_2 ⊆ B $ satisfying $ I_1 ⊆ f^{-1}(I_2) $, this defines the linear map $ I_\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"[FinitePresentation R S] [Module.Projective S Ω[S⁄R]] : Module.Finite S (H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \": Function.Injective P.toExtension.cotangentComplex\", \"doc\": \"The cotangent complex map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ is injective for a submersive presentation of an $R$-algebra $S$.\"}\n  {\"name\": \"Algebra.Extension.Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": Type _\", \"doc\": \"The cotangent module of the kernel ideal $\\\\ker(\\\\phi)$ of the canonical ring homomorphism $\\\\phi: R \\\\to S$ in an $R$-algebra extension, defined as the quotient $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$. This generalize\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[Finite σ] : Function.Surjective P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"Ideal.Cotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Type _\", \"doc\": \"The cotangent module of an ideal $ I $ in a commutative ring $ R $ is the quotient of $ I $ by the submodule $ I^2 $ generated by products of elements of $ I $. This construction generalizes the cotan\"}\n  {\"name\": \"Ideal.instModuleQuotientCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Module (R ⧸ I) I.Cotangent\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, the cotangent module $ I/I^2 $ is equipped with a canonical module structure over the quotient ring $ R/I $, where $ I^2 $ denotes the submodule genera\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring cotangent finiteness is not an algebraic-space local derived model; the H1 finiteness hit also requires projective differentials."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-naive-cotangent-coherent",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Finite two-term etale local models of the naive cotangent complex.",
+   "via": [
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-naive-cotangent-finite-local-model",
+  "worker": "stage1",
+  "summary": "Followed 0D0Z via simultaneous etale localization and arbitrary polynomial-presentation comparison. Proved finite generation from the relation classes and finite freeness from polynomial differentials, retaining these elementary arguments in the item. Reused existing small-etale finiteness comparison. No statement change or Noetherian hypothesis.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), proper/open direct-image input, through the inherited alteration/nodal-moduli tangent-finiteness chain; local-model input in 0D0Z is realized by chart selection, derived affine comparison, and explicit finite terms.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic algebra/sheaf or covering tool used exactly as stated in the proof, for polynomial differentials, affine module finiteness, etale association or composition of covers; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "Generic algebra/sheaf or covering tool used exactly as stated in the proof, for polynomial differentials, affine module finiteness, etale association or composition of covers; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "why": "Generic algebra/sheaf or covering tool used exactly as stated in the proof, for polynomial differentials, affine module finiteness, etale association or composition of covers; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic algebra/sheaf or covering tool used exactly as stated in the proof, for polynomial differentials, affine module finiteness, etale association or composition of covers; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic algebra/sheaf or covering tool used exactly as stated in the proof, for polynomial differentials, affine module finiteness, etale association or composition of covers; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic chart-construction tool: fibre products and etale covers of algebraic spaces, or etaleness of open inclusions, used to construct the simultaneous affine charts of 0D0Z."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic chart-construction tool: fibre products and etale covers of algebraic spaces, or etaleness of open inclusions, used to construct the simultaneous affine charts of 0D0Z."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-001449e28",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-001449e28 (reviewer sub-agent of L); spot-checked: Read the whole delivery and all sources. The item's statement agrees with Stacks 0D0Z (spaces-more-morphisms lemma-netherlander-fp): lfp f, a derived isomorphism étale locally on X to a two-term complex in degrees −1,0, quasi-coherent terms with F^0 of finite presentation and F^-1 of finite type, no Noetherian hypothesis. Steps checked against 0D0Z/0D0W/0D0X, more-morphisms 0D0I/0D0K, algebra 00S1/00RX and descent 03DX/05VG/06VE. Step 1: atlases, fibre product via lem-trf-space-fibre-products-etale-covers, covering composition tested on schemes, affine lfp charts. Step 2: the two new nodes, hypotheses matched (étale p,q, no cartesian square; surjective polynomial presentation). Step 3: elementary and correct (generators [g_j]; Ω_{R/R}=0 from the derivation definition; Ω_{P/R}≅P^n by the polynomial-extension lemma). Step 4: tilde sections, affine finite-type/finite-presentation criteria, the small-étale finiteness comparison and the quasi-coherent equivalence; each cited statement says what the step uses. New node lem-sfb-space-naive-cotangent-etale-localization is exactly 0D0W, true and self-contained. New node lem-sfb-affine-etale-naive-cotangent-presentation combines 0D0X, 0D0I and 00S1 and is true because ε is flat. Small cases tested: B=R gives zero; R[x] with I=0; k[x]/(x²) in char 2 keeps H^-1; infinite T allowed. Neither new node restates the item. Duplicate search over tags 0D0W/0D0X/0D0I/0D0K/00S1 and 85 naive-cotangent nodes (sfb sheaf/scheme cotangent, pbc NL-homotopy and localization, trf lci/presentation nodes) found no duplicate. Mathlib searches are recorded with real output; no match. Seven declared tool_uses are generic foundations and accepted. Batch-5: def-trf-algebraic-space and def-sfb-space-naive-cotangent-complex are general definitions; lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (03DX descent) and lem-trf-space-fibre-products-etale-covers are generic foundations, neither part of the trace formula nor of Poincaré duality nor of their proofs; all accepted. No SGA. Two repairs. (1) B2: the affine new node viewed Spec B and Spec R as algebraic spaces with no base scheme; added 'S a scheme, V→S, U→V a morphism of algebraic spaces over S'. (2) Item step 1 did not justify that V_i→Y is étale or that the square (U_i→V_i)→(X→Y) commutes, both needed by step 2; added one sentence. Corrected files are in fixes/dag/nodes/sec-six-functors-basics/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceNaiveCotangentFiniteLocalModel",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.naiveCotangent_finite_local_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceNaiveCotangentFiniteLocalModel.lean",
+  "statement": "theorem naiveCotangent_finite_local_model {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hfp : MapIsLocallyOfFinitePresentation f) : ∃ (I : Type u) (U : I → Over S) (a : ∀ i : I, schemeSpace (U i) ⟶ X), (∀ i : I, IsEtale (a i).hom.hom) ∧ IsJointlySurjective (fun i : I ↦ (a i).hom.hom) ∧ ∀ (i : I) [HasDerivedCategory.{w} (schemeSpace (U i)).SmallModules], ∃ K : CochainComplex (schemeSpace (U i)).SmallModules ℤ, (∀ n : ℤ, n ≠ -1 → n ≠ 0 → IsZero (K.X n)) ∧ ((schemeSpace (U i)).smallModuleEquivalence.inverse.obj (K.X (-1))).IsQuasicoherent ∧ ((schemeSpace (U i)).smallModuleEquivalence.inverse.obj (K.X 0)).IsQuasicoherent ∧ ((schemeSpace (U i)).smallModuleEquivalence.inverse.obj (K.X (-1))).IsFiniteType ∧ ((schemeSpace (U i)).smallModuleEquivalence.inverse.obj (K.X 0)).IsFinitePresentation ∧ Nonempty ((smallTensorPullbackComplex (a i)).obj (naiveCotangentComplex f) ≅ DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a1044807",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Statement faithful to node and Stacks 0D0Z: lfp f via MapIsLocallyOfFinitePresentation; ∃ I : Type u with étale charts schemeSpace (U i) ⟶ X and IsJointlySurjective; per chart K concentrated in degrees −1,0; IsQuasicoherent/IsFiniteType(−1)/IsFinitePresentation(0) via smallModuleEquivalence.inverse (same predicate as QCoh, matches the node's inline finiteness definitions); Nonempty(smallTensorPullbackComplex (a i) NL ≅ Q K), where étale tensor pullback is exact restriction by the recorded lemmas; w arbitrary. Edge cases checked (empty X, étale f, polynomial algebra, k[x]/x² char 2, non-Noetherian). Added stmt_deps are three landed def nodes, all used; no theorem stmt_dep; lean.statement verbatim; sorry only; docstrings with source and blueprint; both report sections present; first S2 delivery (node diff = 3 stmt_deps + lean record). Advisory: owners of schemeSpace (def-trf-scheme-algebraic-space) and SmallModules/smallModuleEquivalence (def-sfb-space-small-ringed-model) not in stmt_deps. No recompile (no change); worker compile clean 27.4 s."
+ }
+}

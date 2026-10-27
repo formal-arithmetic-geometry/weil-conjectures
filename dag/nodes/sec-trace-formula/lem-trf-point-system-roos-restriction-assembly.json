@@ -1,0 +1,113 @@
+{
+ "id": "lem-trf-point-system-roos-restriction-assembly",
+ "kind": "statement",
+ "title": "Strict point-system Roos restriction assembly",
+ "statement": "For D, l, E and r as in def-trf-point-system-roos-transport-data, let models, products and comparisons satisfy ProductLaws and ComparisonLaws. Then the strict whole-cone restriction square commutes, and every coordinate of the strict transport map is actual restriction of the original section along the rth point power. These are exactly the restriction_cone and restriction_products clauses of TransportLaws, without any derived transport assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Step 1, Global powers: base-change isomorphisms at stage E are rationalizations of the integral ones; prerequisite prop-trf-rational-frobenius-integral-model proof (3), integral maps are derived limits of levelwise composites; extracted old item steps 5-6. Agent-formulated refinement of the explicit inverse-image and point-transport recipes; not a verbatim theorem of the blueprint. Interface extraction and assembly subclaim from the existing whole-Roos argument."
+ },
+ "stmt_deps": [
+  "def-trf-point-system-roos-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "obtain the strict whole-Roos restriction square. Its cone comparisons and the\nspecified products.kappaT and products.kappaF agree after each product projection in\nboth cone coordinates. For sections this follows from the product projection law and\nthe two diagonal equations. For inverse image evaluate at each site object and use\nits product projection law; the coefficient-system identification keeps the same\nsection carriers. Product and biproduct extensionality prove equality of the actual\nchain maps. The sigma_sections law identifies the ambient restriction transformation\ntermwise with the one in that square. Substitute these equalities and cancel the\ninverse sections comparison to obtain restriction_cone. Finally chainTransport has\nits specified restriction components. Its product map has the same components by\nPi.map_π. The section carrier equality of coefficientSequenceRestriction supplies the\nwitness x_n in restriction_products; apply the component HEq to that witness.\nNo equality of derived maps is inferred from levelwise evaluation.",
+   "uses": [
+    "lem-trf-point-restriction-whole-roos-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-restriction-whole-roos-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Existing whole-Roos refinement; coordinate construction, strict restriction, or derived cancellation as stated in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of exact functors commute with total derived inverse limit via the diagonal Roos cone product comparison",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, localCohomology.diagramComp, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc. Generic functor, cone, and localization tools do not state this simultaneous point-system subclaim.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. Generic functor, cone, and localization tools do not state this simultaneous point-system subclaim.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*naturality|roosPmap|rightDerivedNatTrans",
+   "results": "5 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean. Generic functor, cone, and localization tools do not state this simultaneous point-system subclaim.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations of exact functors commute with mapping cone models for derived inverse limits",
+   "results": "8 hits: CategoryTheory.Limits.limit.lift_map, CategoryTheory.Limits.IsLimit.map_π, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Limits.limMap_π, CategoryTheory.Limits.limit.isoLimitCone_inv_π, CochainComplex.mappingCone.mapHomologicalComplexXIso', CategoryTheory.LeftExactFunctor.ofExact_map_hom, CategoryTheory.Limits.limMap_eq. Generic functor, cone, and localization tools do not state this simultaneous point-system subclaim.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemRoosTransport",
+  "date": "2026-10-26",
+  "group": "Q2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: base-change isomorphisms at stage E are rationalizations of the integral ones; prerequisite prop-trf-rational-frobenius-integral-model proof (3), integral maps are derived limits of levelwise composites; extracted old item steps 5-6.",
+   "via": [
+    "lem-trf-point-system-roos-transport",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemRoosRestrictionAssembly",
+  "file": "lean/Sheaf/Paper/PointSystemRoosRestrictionAssembly.lean",
+  "declaration": "WeilConjectures.PointSystemRoos.point_system_roos_restriction_assembly",
+  "statement": "theorem point_system_roos_restriction_assembly (hl : l ≠ D.p) (r : ℕ) (hr : 1 ≤ r)\n    (models : Models D l E) (products : Products D l E r)\n    (comparisons : Comparisons D l E r)\n    (hproducts : ProductLaws D l E r products)\n    (hcomparisons : ComparisonLaws D l E r models products comparisons) :\n  (∀ M : CochainComplex (coefficientSequenceModules l E (Spec (.of D.k))) ℤ,\n        (products.kappaT M).inv ≫ comparisons.sigma.app (roosF.obj ((X D l E).obj M)) ≫\n          ((T D l E).mapHomologicalComplex (.up ℤ)).map (products.kappaF M).hom ≫\n          (products.kappaT (((G D l E r).mapHomologicalComplex (.up ℤ)).obj M)).hom =\n        roosF.map ((PointSystemTransport.chainTransport D l E hl r hr).app M)) ∧\n  -- restriction_products\n  (∀ (M : CochainComplex (coefficientSequenceModules l E (Spec (.of D.k))) ℤ)\n        (i : ℤ) (n : ℕ) (x : (roosP ((Z D l E).obj M)).X i),\n        ∃ xₙ : (M.X i).val.obj (op (n, ProEt.mk (𝟙 (Spec (.of D.k))))),\n          HEq (((Pi.π (fun n : ℕ ↦ ((Z D l E).obj M).asFunctor.obj (op n)) n).f i) x) xₙ ∧\n          HEq (((roosPmap ((PointSystemTransport.chainTransport D l E hl r hr).app M) ≫\n          Pi.π (fun n : ℕ ↦ ((Z' D l E r).obj M).asFunctor.obj (op n)) n).f i) x)\n          ((M.X i).val.map\n            (Prod.mkHom (𝟙 n)\n              (pointRestrictionArrow (PointSystemTransport.pointPower D r).hom)).op\n            xₙ))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ce1da",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T202756-L-2751772",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ce1da",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T202756-L-2751772",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs published item prefix (verbatim modulo blueprint tags); item proof vs node proof/proof_deps; three new sorried statements checked true against ComparisonLaws/ProductLaws/descent by hand"
+ }
+}

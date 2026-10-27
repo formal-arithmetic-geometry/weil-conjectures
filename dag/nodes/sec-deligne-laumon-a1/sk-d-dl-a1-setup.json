@@ -62,7 +62,48 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-d-dl-a1-setup",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsGeometricallyConstant",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsUnramifiedAtInfinity",
+    "AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant",
+    "AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.Defs",
+     "lines": [
+      63,
+      75
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.Defs",
+     "lines": [
+      77,
+      102
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsGeometricallyConstant",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsUnramifiedAtInfinity"
+   ],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "sk-d-dl-a1-setup",
@@ -99,5 +140,15 @@
   "date": "2026-10-18",
   "existing": true,
   "note": "Exact existing predicates introduced by the setup, also recorded by rem-dl-a1-conventions. The first forgets the Weil structure and requires finite sums of the constant adic coefficient sheaf on every connected geometric open; the second requires a lisse Weil extension on exactly U₀ union infinity in the standard projective chart. Finite-field, geometric cohomology/Frobenius, weight, twist, ordinary-image and perverse/inertia conventions reuse the recorded statement dependencies. No duplicate definition or new theorem is introduced. See the worker report for full clause matching and the boundary dependency metadata discrepancy."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix $k_0=\\mathbf F_q$, its algebraic closure $k$, a prime $\\ell\\ne \\operatorname{char}(k_0)$, and $\\iota:\\DLAQ\\simeq\\mathbf C$. Write\n$A_0=\\mathbf A^1_{k_0}$, $A=A_0\\otimes k$, and use a prime to denote the\ndual affine line. All cohomology is geometric, with geometric Frobenius.\nA *Weil sheaf* on a $k_0$-scheme $U_0$, with $U=U_0\\otimes k$, is a constructible\n$\\overline{\\mathbf Q}_{\\ell,U}$-module $F$ on $U_{\\mathrm{proét}}$ with a Weil structure $\\operatorname{Fr}_U^*F\\xrightarrow{\\sim}F$ ([sk-lem-coefficient-heart], [sk-def-sf-weil-complexes]); it is *lisse* if $F$ is locally free of finite rank for the pro-étale topology.\nA lisse Weil sheaf is *pure of weight $w$* if every eigenvalue\n$\\alpha$ at a closed point $x$ satisfies\n$|\\iota\\alpha|=q_x^{w/2}$; replace equality by $\\leq$ for an upper bound.\nThe twist $(-1)$ raises weights by two.\n\nFor a dense open $j:U_0\\hookrightarrow A_0$, $j_*F$ denotes the\n*ordinary* sheaf direct image. Its stalks at missing points are\ninertia invariants; its curve perverse intermediate extension is\n$j_{!*}(F[1])=(j_*F)[1]$. A lisse Weil sheaf $F$ on $U_0$ is *unramified at infinity* if it\nextends to a lisse Weil sheaf on the open $U_0\\cup\\{\\infty\\}$ of\n$\\mathbf P^1_{k_0}$ (with $A_0\\subset\\mathbf P^1_{k_0}$ the standard chart);\nequivalently, inertia\nat $\\infty\\in\\mathbf P^1_k$ acts trivially on the geometric generic fiber.\nA Weil sheaf on $U_0$ is *geometrically constant* if its underlying\n$\\overline{\\mathbf Q}_{\\ell,U}$-module on $U_{\\mathrm{proét}}$ ([sk-lem-coefficient-heart]) is\nconstant on every connected open $V$ of $U=U_0\\otimes k$, that is, isomorphic there to\n$\\overline{\\mathbf Q}_{\\ell,V}\\otimes_{\\Qlb}W=p_V^*\\underline W$ for a finite-dimensional\n$\\Qlb$-vector space $W$; for $U$ connected this means that the geometric fundamental group\nacts trivially, while its Frobenius module may be nontrivial.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

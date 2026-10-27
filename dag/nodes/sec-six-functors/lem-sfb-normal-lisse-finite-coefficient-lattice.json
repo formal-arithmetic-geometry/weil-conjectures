@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-normal-lisse-finite-coefficient-lattice",
+ "kind": "statement",
+ "title": "Embedded finite-coefficient lattices on normal schemes",
+ "statement": "Fix ell prime. Let X be a nonempty connected locally Noetherian quasi-compact scheme with every local ring an integrally closed domain [def-weil-pbc-normal-ring]. For every finite intermediate field E of the fixed p-adic algebraic closure and every lisse module L over the continuous condensed E coefficient ring, HasLattice ell E X L of [def-sfb-lisse-representation-data] holds. In particular the lattice is embedded, lisse and integral, and its adjoint under the recorded extension/restriction adjunction is an isomorphism. No separatedness or invertibility of ell is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+  "place": "Clause (4), Normality; original DAG step 12"
+ },
+ "stmt_deps": [
+  "def-sfb-lisse-representation-data",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Assume now that $X$ is normal. For any lisse $E_X$-module $L$, [lem-sfb-embedded-lattice-coefficient-comparison] identifies embedded integral lattices with continuous-coefficient lattice pairs. By [lem-weil-pbc-lisse-lattice-class-sheaf] their classes give a locally constant, locally nonempty sheaf $F$ of sets on $X_{\\mathrm{proet}}$. The normal, connected, nonempty Noetherian $X$ satisfies every hypothesis of [lem-a1-normal-locally-constant-finite-section], so there is a finite etale surjection $p:Y\\to X$ with $F(Y)$ nonempty. The lattice-class node then supplies an actual lattice pair on $Y$. The underlying space of $X$ is Noetherian by step 1; [lem-weil-pbc-lisse-lattice-finite-etale-descent] gives an integral locally free model on $X$. Its scalar isomorphism embeds it as a lattice by [lem-sfb-embedded-lattice-coefficient-comparison]. This proves (4) for $E$, without imposing separatedness, a characteristic hypothesis, or invertibility of $\\ell$.",
+   "uses": [
+    "lem-sfb-embedded-lattice-coefficient-comparison",
+    "lem-weil-pbc-lisse-lattice-class-sheaf",
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "(4), Normality: lattice sheaf; finite-cover descent replaces the imported strict-local component expansion"
+   }
+  },
+  {
+   "text": "The Noetherian-space hypothesis in finite-etale lattice descent follows from local Noetherianity and quasi-compactness. Transport the resulting pair back along the coefficient comparisons; by the embedded-lattice comparison its inclusion is mono and its scalar-extension adjoint is invertible. This is exactly HasLattice, including rank zero.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-embedded-lattice-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-embedded-lattice-coefficient-comparison",
+  "lem-weil-pbc-lisse-lattice-class-sheaf",
+  "lem-a1-normal-locally-constant-finite-section",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+  "place": "Clause (4), Normality; original DAG step 12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free geometric fibre of a locally constant sheaf of modules at a separably closed point",
+   "results": "Returned free sheaf modules, free loci and locally constant functions; no normalized condensed geometric fibre/correspondence statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match for normal integral lattices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lisse sheaves continuous representations integral lattice normal Noetherian scheme",
+   "results": "Returned invariant integrality and condensed module functors; no matching scheme theorem.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finiteDimensional_forall_mem|lisse_qlbar_representations",
+   "results": "Remote msearch grep returned no hits. Local rg of both Lean roots found the assigned theorem, the existing compact matrix theorem in WeilConjectures.RepresentationTheory.IntegralModel, and the invariant-subspace transport helpers in Sheaf.RepresentationTheory.LAdicSubrepresentation. Read the proof-dependency signatures and relevant Mathlib site/module files. No other declaration supplies the new step in its full normalized interface; matrix descent supplies the entry-field step but not the invariant-subspace and continuity comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use existing declarations as ingredients; a separate step is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseQlbarRepresentations",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-lisse-qlbar-representations",
+   "place": "Clause (4), Normality; original DAG step 12",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalLisseFiniteCoefficientLattice",
+  "file": "lean/Sheaf/Paper/NormalLisseFiniteCoefficientLattice.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.LisseRepresentation.has_lattice_of_normal",
+  "statement": "theorem has_lattice_of_normal\n    (ell : ℕ) [Fact ell.Prime]\n    (X : Scheme.{u}) [Nonempty X] [ConnectedSpace X] [IsLocallyNoetherian X] [CompactSpace X]\n    (hnormal : ∀ z : X, IsDomain (X.presheaf.stalk z) ∧\n      IsIntegrallyClosed (X.presheaf.stalk z))\n    (E : PadicAlgCl.FiniteIntermediateField ell)\n    (L : Modules (Mon.mk (Profinite.continuousMapRingObj E)) X)\n    (hL : IsLisseCoefficientModule (Profinite.continuousMapRingObj E) L) :\n    HasLattice ell E X L",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbfb8",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T023429-L-565479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbfb8",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T023429-L-565479",
+  "kind": "interface",
+  "note": "independent cc review: Defs module vs live item namespace body (verbatim apart from a local irreducible attribute); theorem signature byte-identical; 3 sorry statements vs thm-lisse-qlbar-representations clauses (1)-(4) and GaloisLisseFiniteCorrespondence fields; item node vs live (lean/proof/proof_deps/proof_origin plus an in-order tool_uses subsequence); scratch --all build with #print axioms"
+ }
+}

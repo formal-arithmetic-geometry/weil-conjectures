@@ -1,0 +1,389 @@
+{
+ "id": "lem-pd-open-module-balanced-projection",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "kind": "statement",
+ "title": "Balanced module open projection and normalized underived unit",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$, and separated finite-type $k$-schemes as in [sk-def-sfb-dc-setting]. Let $j:U\\hookrightarrow Z$ be an open immersion, and $\\Lambda$ a commutative condensed ring [sk-def-sfb-condensed-ring]. On small representatives of the pro-étale sites in the module universe [def-weil-pbc-proetale-site], set $\\Lambda_T=p_T^*\\Lambda$ for $T=U,Z$ [sk-def-sfb-pulled-back-coefficients]. Write $\\mathcal M_T=\\operatorname{Mod}_{\\Lambda_T}$ for internal module objects [sk-def-sfb-module-objects], with relative tensor $\\otimes_{\\Lambda_T}$ [def-sfb-modobj-relative-tensor]. Let $E=j_!:\\mathcal M_U\\to\\mathcal M_Z$ be the coefficient-linear extension by zero [def-sfb-module-open-lower-shriek] and $R=j^*:\\mathcal M_Z\\to\\mathcal M_U$ the module pullback [def-sfb-module-upper-star], with their specified adjunction $E\\dashv R$ [def-sfb-module-open-lower-shriek-adjunction], unit $u$ and counit $v$. Use the actual relative tensor comparison $\\nu_{A,B}:RA\\otimes_{\\Lambda_U}RB\\to R(A\\otimes_{\\Lambda_Z}B)$ of module pullback, induced by its abelian pullback structure and scalar extension along $\\alpha_j$: it is the inverse of the ordinary comparison $t_{A,B}$ of [def-sfb-condensed-pullback-tensor-comparison] for $f=j$, under that node's identification of its inverse image with $R$.\nBoth $E$ and $R$ are additive and exact. The unit $u_M:M\\to REM$ is invertible for every $M\\in\\mathcal M_U$; after the coefficient identification $\\alpha_j$, its underlying map is the abelian extension-by-zero adjunction unit, and the inverse underlying map is $\\Lambda_U$-linear.\nFor every $M\\in\\mathcal M_U$, $N\\in\\mathcal M_Z$, the map\n$$\\theta_{M,N}=v_{EM\\otimes_{\\Lambda_Z}N}\\circ E(\\nu_{EM,N})\\circ E(u_M\\otimes1_{RN}):E(M\\otimes_{\\Lambda_U}RN)\\longrightarrow EM\\otimes_{\\Lambda_Z}N$$\nis an isomorphism of $\\Lambda_Z$-modules, natural in both variables. Its transpose is exactly $\\nu_{EM,N}\\circ(u_M\\otimes1)$ for the specified module adjunction. Under the canonical abelian projection isomorphisms for $M,N$ and for the additional coefficient factor, the two arrows of the balanced coequalizer defining the source relative tensor identify, respectively, with the two arrows defining the target relative tensor, using $\\alpha_j:j^{-1}\\Lambda_Z\\cong\\Lambda_U$. The induced map on their coequalizers is $\\theta_{M,N}$. Here the balanced coequalizers and actions are those of [def-sfb-modobj-relative-tensor]; the tensors before taking these coequalizers are abelian-sheaf tensors. No derived or constructibility assertion is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "Open immersions, sheaves: the identity viewed through j^*j_!=id and its adjoint theta; returned proof Steps 1-2, coefficient-linear unit and balanced relative-tensor normalization"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "def-sfb-condensed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=j^{\\Ab}_!$, $S=j^*_{\\Ab}$, $B=\\Lambda_Z$ and $B'=SB$. By [lem-sfb-alpha-iso], $\\alpha_j:B'\\to\\Lambda_U$ is invertible. By [sk-def-sfb-change-of-scalars](5), extension and coextension along $\\alpha_j$ are the same canonical transport as restriction along $\\alpha_j^{-1}$. Thus we may calculate with $B'$-modules, restoring $\\alpha_j$ at the end. The given functors become the linearization of $P$ and transport along $S$. The adjunction of [def-sfb-module-open-lower-shriek-adjunction] is, under these identifications, the restricted abelian Hom bijection: [def-sfb-modobj-linearization-transport-adjunction] says explicitly that a linear map corresponds to its abelian adjunct. In particular its unit and counit forget to those of $P\\dashv S$. The scalar identification here sends a scalar tensor $b\\otimes m$ to $\\alpha_j(b)m$, so uses the canonical scalar adjunction, rather than an arbitrary isomorphism of right adjoints.",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-module-open-lower-shriek-adjunction",
+    "def-sfb-modobj-linearization-transport-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions, sheaves: normalize the specified module adjunction"
+   }
+  },
+  {
+   "text": "The functor $E$ is additive and exact by [def-sfb-module-open-lower-shriek]. To check this for $R$, use its formula [def-sfb-module-upper-star] and the invertible scalar transport of Step 1: its underlying functor is $S$. The functor $S$ is additive and exact by [lem-weil-pbc-site-pullback-abelian-exact], applied to the pro-étale site morphism on the chosen small representatives. Abelian sheaves form abelian categories by [lem-weil-pbc-site-sheaves-enough-injectives]; their tensor is additive and preserves colimits by [sk-def-sfb-sheaf-tensor]. Hence the hypotheses of [det-prop-sfb-module-pullback-exact-lifted] hold for $S$ and its module lift. It gives additivity and exactness of $R$ with the scalar transport restored.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-upper-star",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "sk-def-sfb-sheaf-tensor",
+    "det-prop-sfb-module-pullback-exact-lifted"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Opening paragraph: exactness of the open operations"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-finite-lower-shriek], $P$ is fully faithful. Here is directly why its unit $\\eta_M$ is invertible. Fullness gives $e:SPM\\to M$ with $Pe=\\varepsilon_{PM}$. The first triangle and faithfulness give $e\\eta_M=1$. Naturality of $\\eta$ gives $\\eta_M e=SP(e)\\eta_{SPM}=S(\\varepsilon_{PM})\\eta_{SPM}=1$ by the other triangle. By Step 1 the module unit $u_M$ has this underlying map. Its inverse is linear: from $u\\gamma_M=\\gamma_{REM}(\\Lambda_U\\otimes u)$, compose on the left by $u^{-1}$ and on the right by $\\Lambda_U\\otimes u^{-1}$ to obtain $u^{-1}\\gamma_{REM}=\\gamma_M(\\Lambda_U\\otimes u^{-1})$. Thus it is a module isomorphism with exactly the required underlying normalization.",
+   "uses": [
+    "sk-def-sfb-finite-lower-shriek",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions, sheaves: the specified unit realizes j^*j_!=id"
+   }
+  },
+  {
+   "text": "For the remainder calculate after Step 1's coefficient identification. Suppress underlying-sheaf notation and associators. Let $\\beta_{M,L}:P(M\\otimes SL)\\xrightarrow{\\sim}PM\\otimes L$ be the abelian projection isomorphism, with factors reversed by the symmetric braiding from the order in [lem-sfb-open-projection-formula]. The inverse image respects these symmetries by [lem-sfb-finite-upper-star-braided]. Its abelian transpose is $\\mu_{PM,L}(\\eta_M\\otimes1)$, where $\\mu$ is the strong monoidal structure of $S$. By [def-sfb-adjunction-projection-formula] these projection maps satisfy the unit and associativity equations of [def-sfb-projection-formula]. The $B$-action on $EM=PM$ is exactly $P\\gamma_M$ after the inverse projection isomorphism with coefficient factor $B$, by [def-sfb-module-linear-open-lower-shriek]. These facts supply both the actual maps and their coherence for an additional coefficient factor; objectwise isomorphisms alone would not suffice.",
+   "uses": [
+    "lem-sfb-open-projection-formula",
+    "def-sfb-adjunction-projection-formula",
+    "def-sfb-projection-formula",
+    "def-sfb-module-linear-open-lower-shriek",
+    "lem-sfb-finite-upper-star-braided"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions, sheaves: abelian projection isomorphism with its coefficient-factor coherence"
+   }
+  },
+  {
+   "text": "Write $a=\\gamma_M\\sigma_{M,B'}$ for the right $B'$-action on $M$, with $\\sigma$ denoting the symmetric braiding, and $b=\\gamma_N$ for the left $B$-action on $N$. By [def-sfb-modobj-relative-tensor], the source balancing arrows before $P$ are $d_1=a\\otimes1$ and $d_2=1\\otimes(Sb\\circ\\mu_{B,N})$, from $M\\otimes B'\\otimes SN$ to $M\\otimes SN$. The target arrows are $e_1=a_{EM}\\otimes1$ and $e_2=1\\otimes b$ from $EM\\otimes B\\otimes N$ to $EM\\otimes N$. Put $H_0=\\beta_{M,N}$ and $H_1=\\beta_{M,B\\otimes N}\\circ P(1\\otimes\\mu_{B,N})$. Then $H_0P(d_2)=e_2H_1$ by naturality of $\\beta$ in $N$. Also $H_0P(d_1)=e_1H_1$: substitute $a_{EM}=P(a)\\beta_{M,B}^{-1}$ (the symmetric form of the action in Step 4), and the resulting equality is exactly the associativity equation for the projection formula in [def-sfb-projection-formula], with factors permuted by the symmetric braiding. Thus each arrow, in its original order, corresponds to the correct target arrow. Restoring coefficients replaces the $B'$-actions by their composites with $\\alpha_j$ and changes neither equation.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-projection-formula",
+    "def-sfb-module-linear-open-lower-shriek",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions, sheaves: the two balanced-coequalizer arrows"
+   }
+  },
+  {
+   "text": "Since $P$ is left adjoint to $S$ by [sk-def-sfb-finite-lower-shriek], it preserves the balancing coequalizer by [lem-weil-pbc-left-adjoint-preserves-colimits]; its indexing category is the finite parallel-pair category in the fixed universe. Thus Step 5's isomorphism of parallel-pair diagrams induces an isomorphism $h:P(M\\otimes_{B'}RN)\\to PM\\otimes_BN$. Explicitly, if $q_U,q_Z$ denote the two balanced quotient projections, $hP(q_U)=q_ZH_0$; the inverse is induced by $H_0^{-1},H_1^{-1}$, and their composites are identities by the coequalizer uniqueness property. The quotient actions are the actions through the first factor of [def-sfb-modobj-relative-tensor]. The map $h$ is $B$-linear: precompose its required action equation with $B\\otimes P(q_U)$ and use Step 4's coefficient-factor projection comparison. The equation reduces to the defining action on $PM$, since $q_Z$ is linear. This precomposition detects equality because $B\\otimes-$ preserves colimits by [sk-def-sfb-sheaf-tensor]. The same argument, or multiplying this equation by the inverse of $h$, makes $h^{-1}$ linear.",
+   "uses": [
+    "sk-def-sfb-finite-lower-shriek",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sfb-modobj-relative-tensor",
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-module-linear-open-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions, sheaves: induce the module isomorphism on balanced quotients"
+   }
+  },
+  {
+   "text": "It remains to identify the map, rather than only its invertibility. Let $w=\\nu_{EM,N}(u_M\\otimes1)$ in the module category. By the balanced-generator normalization in [def-sfb-condensed-pullback-tensor-comparison], its underlying map satisfies $wq_U=S(q_Z)\\mu_{PM,N}(\\eta_M\\otimes1)$. On the other hand the abelian transpose $S(h)\\eta_{M\\otimes_{B'}RN}$, precomposed with $q_U$, equals $S(hP(q_U))\\eta_{M\\otimes SN}=S(q_ZH_0)\\eta_{M\\otimes SN}=S(q_Z)\\mu_{PM,N}(\\eta_M\\otimes1)$, by naturality of the unit and the transpose characterization of $H_0$. The quotient projection $q_U$ is epic by its coequalizer property, so the transposes agree. Step 1 identifies this with equality of module transposes. The inverse Hom bijection of [lem-weil-pbc-adjunction-of-natural-bijection] therefore gives $h=v_{EM\\otimes_BN}\\circ E(w)=\\theta_{M,N}$. This proves both the displayed formula and its exact transpose with the specified comparison $\\nu=t^{-1}$.",
+   "uses": [
+    "def-sfb-condensed-pullback-tensor-comparison",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-module-open-lower-shriek-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions, sheaves: theta is the adjoint of the normalized tensor-unit map"
+   }
+  },
+  {
+   "text": "All the equations above are natural in $M$ and $N$: $H_0$ and $H_1$ are natural projection comparisons, the balanced projections are functorial, and the Hom bijection is natural. For maps $f:M\\to M'$ and $g:N\\to N'$, the naturality square for $h$ commutes after precomposition with $P(q_U)$ by the defining equation $hP(q_U)=q_ZH_0$ and naturality of $H_0$; this projection is epic, so the square commutes. Hence the isomorphisms are natural module isomorphisms. The construction uses only ordinary abelian tensors and their balanced coequalizers; no derived category or constructibility statement has entered.",
+   "uses": [
+    "lem-sfb-open-projection-formula",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Final sentence: naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "def-sfb-modobj-linearization-transport-adjunction",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-upper-star",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "sk-def-sfb-sheaf-tensor",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "sk-def-sfb-finite-lower-shriek",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-sfb-open-projection-formula",
+  "def-sfb-adjunction-projection-formula",
+  "def-sfb-projection-formula",
+  "def-sfb-module-linear-open-lower-shriek",
+  "lem-sfb-finite-upper-star-braided",
+  "def-sfb-modobj-relative-tensor",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-condensed-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "Open immersions, sheaves; explicit balanced-coequalizer and specified-adjunction refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|openImmersionLowerShriek|projectionFormula",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free/solid condensed modules or generic monoidal adjunctions, not the specified internal balanced open-unit/projection comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero commutes with relative tensor products of sheaf modules and direct sum total tensor complexes",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, CategoryTheory.Adjunction",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free/solid condensed modules or generic monoidal adjunctions, not the specified internal balanced open-unit/projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of pro etale sites with condensed coefficients the relative module extension by zero projection map totalizes to an isomorphism of unbounded tensor complexes",
+   "results": "{\"n_hits\": 8, \"top\": [\"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"CondensedMod.IsSolid.isIso_solidification_map\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\"], \"note\": \"\", \"digest\": \"b82c4d659f0f3be3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free/solid condensed modules or generic monoidal adjunctions, not the specified internal balanced open-unit/projection comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|coequalizer",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"CategoryTheory/Monoidal/Mod\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free/solid condensed modules or generic monoidal adjunctions, not the specified internal balanced open-unit/projection comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free/solid condensed modules or generic monoidal adjunctions, not the specified internal balanced open-unit/projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint extension by zero on sheaves of modules has a canonical balanced relative projection formula which is an isomorphism of direct sum total complexes",
+   "results": "{\"n_hits\": 8, \"top\": [\"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\"], \"note\": \"\", \"digest\": \"bc621776d02dd300\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free/solid condensed modules or generic monoidal adjunctions, not the specified internal balanced open-unit/projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for sheaves of modules open immersion projection formula balanced tensor product",
+   "results": "{\"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"note\": \"\", \"digest\": \"a196ccadea122ee3\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction/pushforward for structure sheaves, generic coequalizer transport or generic adjunction lemmas do not state the normalized internal-module open projection comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, CategoryTheory.Adjunction",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction/pushforward for structure sheaves, generic coequalizer transport or generic adjunction lemmas do not state the normalized internal-module open projection comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|extensionByZero|openImmersionLowerShriek",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction/pushforward for structure sheaves, generic coequalizer transport or generic adjunction lemmas do not state the normalized internal-module open projection comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion extension by zero sheaf modules relative tensor projection formula",
+   "results": "{\"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrict_map\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrict\"], \"note\": \"\", \"digest\": \"b3a1ff672d8ffc80\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction/pushforward for structure sheaves, generic coequalizer transport or generic adjunction lemmas do not state the normalized internal-module open projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint to a strong monoidal functor satisfying the projection formula induces an isomorphism on balanced coequalizers of internal modules",
+   "results": "{\"n_hits\": 8, \"top\": [\"id_tensor_π_preserves_coequalizer_inv_desc\", \"π_tensor_id_preserves_coequalizer_inv_desc\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"CategoryTheory.Monoidal.Reflective.isIso_tfae\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit\", \"CategoryTheory.IsGrothendieckAbelian.tensorObj\"], \"note\": \"\", \"digest\": \"47d72a0d7b2a02d0\", \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction/pushforward for structure sheaves, generic coequalizer transport or generic adjunction lemmas do not state the normalized internal-module open projection comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_unit_of_fullyFaithful|unit.*isIso|isIso.*unit",
+   "results": "{\"n_hits\": 19, \"top\": [\"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\"], \"note\": \"\", \"digest\": \"6e537890833bdf16\", \"sub\": \"CategoryTheory/Adjunction\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: restriction/pushforward for structure sheaves, generic coequalizer transport or generic adjunction lemmas do not state the normalized internal-module open projection comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-condensed-open-exceptional-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Open immersions, sheaves: the identity viewed through j^*j_!=id and its adjoint theta; returned proof Steps 1-2, coefficient-linear unit and balanced relative-tensor normalization; serves seeded target nt-target-poincare-isiso Step 2 (created.item chain has no imported blueprint ancestor)",
+   "via": [
+    "lem-pd-condensed-open-exceptional-projection-formula",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pd-open-module-balanced-projection",
+  "worker": "stage1",
+  "summary": "Unchanged statement; expanded the ordinary module projection argument into normalization of the specified adjunction, exactness, an explicit inverse-linear unit, two separate balancing-arrow equations, coequalizer descent, and identification with the given mate. Reused existing tools throughout; no new nodes. Read current blueprint and Stacks 03DI/03DJ for the ordinary extension construction.",
+  "blueprint": "Refines current det-lem-int-tensor-projection.proof.md, Open immersions, sheaves, and its opening exactness paragraph. The seeded-target created.item chain has no imported ancestor, as blueprint_refs.py ancestor confirms; existing from.node=null and via retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-upper-star-braided",
+    "why": "Symmetry compatibility for the actual inverse-image tensor maps, needed to reverse the projection factors."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Canonical coefficient isomorphism for arbitrary condensed rings; no change of route."
+   },
+   {
+    "node": "sk-def-sfb-change-of-scalars",
+    "why": "General scalar transport along an isomorphism, needed to interpret the prescribed adjunction."
+   },
+   {
+    "node": "def-sfb-modobj-linearization-transport-adjunction",
+    "why": "General lifted Hom-bijection theorem fixes underlying unit and counit."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "General exactness of inverse image on abelian sheaves, used for the underlying R."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Only abelianity of sheaves on small sites is used."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Colimit preservation of the ordinary abelian-sheaf tensor needed for quotient actions."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "General exactness criterion for a lift commuting with forgetful functors."
+   },
+   {
+    "node": "sk-def-sfb-finite-lower-shriek",
+    "why": "Underlying abelian extension by zero, its full faithfulness and adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Generic formulas for unit, counit, triangles and inverse Hom bijection."
+   },
+   {
+    "node": "lem-sfb-open-projection-formula",
+    "why": "Underlying abelian open projection isomorphism, a tool for balancing the relative module tensor."
+   },
+   {
+    "node": "def-sfb-adjunction-projection-formula",
+    "why": "Canonical projection-map coherence, used without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic preservation of the finite balancing coequalizer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-upper-star-braided",
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-linearization-transport-adjunction",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "sk-def-sfb-sheaf-tensor",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "sk-def-sfb-finite-lower-shriek",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-sfb-open-projection-formula",
+  "def-sfb-adjunction-projection-formula",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-8c2bdc5c5",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-8c2bdc5c5 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the statement of every one of the 20 cited nodes, and the source det-lem-int-tensor-projection.proof.md, paragraph 'Open immersions, sheaves' (latest and main-20261015; they differ only by a tag rename). Shape: one commit with the item and report only, and no new nodes. Statement, stmt_deps and source are identical to live, so no target is weakened. proof_deps equals the union of the step uses, the cited nodes do not depend on the item (no cycle), and there is no SGA citation. Step 1: the composite of Res⊣Coext and j^lin⊣mapMod(S), through Coext≅Ext (change-of-scalars (5), alpha-iso), has the abelian η as underlying unit. Step 2: exactness of R follows from lifted-exactness applied to Res_{α^{-1}}∘mapMod(S). Step 3: I checked the triangle argument, including eη=1 by faithfulness and ηe=S(ε)η_S=1, and the inverse is linear. Steps 4-5: I re-derived both balancing equations; d_2 holds by naturality of β in L, and d_1 by naturality in M plus the associativity axiom with δ=μ^{-1}. Step 6: P(q_U) is a coequalizer because P is a left adjoint, and B-linearity is tested after the epi B⊗P(q_U). Step 7: the balanced-generator equation gives νq'=S(q_Z)μ, so w q_U = S(q_Z)μ(η⊗1) = S(h)η q_U; therefore h = vE(w) = θ, with the direction ν=t^{-1} correct. Step 8: naturality holds by precomposition with an epi. Edge cases j=id, U=∅, M=0, N=0 and Λ=0 are fine. No duplicate: the pc/sp/sfb open-projection nodes are derived, the pur one is abstract, and the abelian one is cited. All 13 tool_uses are generic and accepted. Advisory: the Step 1 phrase 'b⊗m ↦ α(b)m' describes the Res_α action; harmless. Note: NS delivered the same item (f45109f6, PASS) but it has not landed (live still unsplit at the 18:57 fetch), so only one of the two should be landed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.PoincareDuality.OpenModuleBalancedProjection",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openModuleBalancedProjection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModulePullbackUnderlyingIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleTensorComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleBalancedProjectionMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleAbelianProjectionIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleBalanceTargetIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleBalanceSourceIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openModuleBalancedProjection"
+  ],
+  "file": "lean/Sheaf/PoincareDuality/OpenModuleBalancedProjection.lean",
+  "statement": "theorem openModuleBalancedProjection (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {U Z : Scheme.{u}} [U.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] (j : U ⟶ Z) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] : (openImmersionLowerShriek Λ j).Additive ∧ PreservesFiniteLimits (openImmersionLowerShriek Λ j) ∧ PreservesFiniteColimits (openImmersionLowerShriek Λ j) ∧ (upperStar Λ j).Additive ∧ PreservesFiniteLimits (upperStar Λ j) ∧ PreservesFiniteColimits (upperStar Λ j) ∧ (∀ M : supportModules Λ U, ∃ e : M ≅ (upperStar Λ j).obj ((openImmersionLowerShriek Λ j).obj M), e.hom = (openImmersionLowerShriekUpperStarAdjunction Λ j).unit.app M ∧ e.hom.hom ≫ (openModulePullbackUnderlyingIso Λ j ((openImmersionLowerShriek Λ j).obj M)).hom = (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).unit.app M.X ∧ γ[condensedRingObj Λ U,((upperStar Λ j).obj ((openImmersionLowerShriek Λ j).obj M)).X] ≫ e.inv.hom = condensedRingObj Λ U ◁ e.inv.hom ≫ γ[condensedRingObj Λ U,M.X]) ∧ (∀ (M : supportModules Λ U) (N : supportModules Λ Z), IsIso (openModuleBalancedProjectionMap Λ j M N) ∧ (openImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv _ _ (openModuleBalancedProjectionMap Λ j M N) = (openImmersionLowerShriekUpperStarAdjunction Λ j).unit.app M ▷ (upperStar Λ j).obj N ≫ openModuleTensorComparison Λ j ((openImmersionLowerShriek Λ j).obj M) N) ∧ (∀ (M M' : supportModules Λ U) (N N' : supportModules Λ Z) (a : M ⟶ M') (b : N ⟶ N'), (openImmersionLowerShriek Λ j).map (a ⊗ₘ (upperStar Λ j).map b) ≫ openModuleBalancedProjectionMap Λ j M' N' = openModuleBalancedProjectionMap Λ j M N ≫ ((openImmersionLowerShriek Λ j).map a ⊗ₘ b)) ∧ ∀ (M : supportModules Λ U) (N : supportModules Λ Z), (ProEtale.openImmersionLowerShriek Ab.{u + 1} j).map (((β_ M.X (condensedRingObj Λ U)).hom ≫ γ[condensedRingObj Λ U,M.X]) ▷ ((upperStar Λ j).obj N).X) ≫ (openModuleBalanceTargetIso Λ j M N).hom = (openModuleBalanceSourceIso Λ j M N).hom ≫ (((β_ ((openImmersionLowerShriek Λ j).obj M).X (condensedRingObj Λ Z)).hom ≫ γ[condensedRingObj Λ Z,((openImmersionLowerShriek Λ j).obj M).X]) ▷ N.X) ∧ (ProEtale.openImmersionLowerShriek Ab.{u + 1} j).map ((α_ M.X (condensedRingObj Λ U) ((upperStar Λ j).obj N).X).hom ≫ M.X ◁ γ[condensedRingObj Λ U,((upperStar Λ j).obj N).X]) ≫ (openModuleBalanceTargetIso Λ j M N).hom = (openModuleBalanceSourceIso Λ j M N).hom ≫ ((α_ ((openImmersionLowerShriek Λ j).obj M).X (condensedRingObj Λ Z) N.X).hom ≫ ((openImmersionLowerShriek Λ j).obj M).X ◁ γ[condensedRingObj Λ Z,N.X]) ∧ (ProEtale.openImmersionLowerShriek Ab.{u + 1} j).map (Mod.tensorObjπ M ((upperStar Λ j).obj N)) ≫ (openModuleBalancedProjectionMap Λ j M N).hom = (openModuleBalanceTargetIso Λ j M N).hom ≫ Mod.tensorObjπ ((openImmersionLowerShriek Λ j).obj M) N",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The six helper definitions belong to this node: actual coefficient transport to abelian inverse image, the inverse of the recorded normalized tensor comparison on upperStar, the specified adjunction mate, and the canonical abelian projection comparisons H0,H1. The theorem includes all exactness, normalized unit, inverse linearity, specified-mate invertibility/transpose/naturality, separate balancing-arrow equations and induced-coequalizer-map equation. No dependency interface or informal statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dafcb371",
+  "group": "O1",
+  "result": "pass",
+  "note": "Only the item lean record, its module and the report changed; the other 17 node files are byte-identical to side-live; statement verbatim in file, lines under 100 chars, both report sections present, not superseded (live node split with lean null, O1 holds the claim). Clause by clause: setting binders match the project convention with no hypothesis added; unbundled Λ with MonObj/IsCommMonObj, Scheme.{u}/Ab.{u+1} as upstream with no universe equality; E, R and the adjunction are the recorded declarations; ν = supportTensorComparison.inv moved across supportPullbackIsoUpperStar (t⁻¹, direction checked); additivity and exactness for E and R; unit is an iso with hom = unit, underlying = abelian unit after the α identification (true: extendScalarsIsoCoextendScalars and extendScalarsIsoComapInv both come from uniqueness of adjoints against comapEquivalenceOfIsIso), inverse linearity stated; θ has the node's formula, IsIso, transpose under the specified homEquiv, joint naturality; d1/d2 and e1/e2 are exactly the two Mod.tensorObj_X arrows in order; H0/H1 use the same projectionFormula.iso that defines the action of linearOpenImmersionLowerShriek, so both arrow equations hold (associativity, naturality in L); induced map uses tensorObjπ. Edge cases (empty U or Z, j = id, Λ = 0, M = 0 or N = 0) covered. Six helpers are canonical, not hollow, not duplicates; only the theorem is sorry; docstrings give source place, blueprint id and all 8 steps; plain imports are the proof_deps modules. Advisory: statement uses declarations owned by nodes outside stmt_deps (sk-def-sfb-finite-lower-shriek, def-sfb-adjunction-projection-formula, lem-sfb-alpha-iso), which the node text references without citation; stage 2 cannot add them, maintainer note. No compile run (no file changed); worker reports a clean compile in 5.3 s and 7.4 s."
+ }
+}

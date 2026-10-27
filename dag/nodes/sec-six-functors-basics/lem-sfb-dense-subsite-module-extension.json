@@ -1,0 +1,165 @@
+{
+ "id": "lem-sfb-dense-subsite-module-extension",
+ "kind": "statement",
+ "title": "Extend module sheaves from a dense subsite by additive comparison",
+ "statement": "Let C and D be categories with Grothendieck topologies J and K [def-weil-pbc-topos], and let F:C→D exhibit a dense subsite: image objects cover, maps lift locally, equalities are detected locally, and a source sieve covers exactly when its image-generated target sieve covers. Fix a universe u and a sheaf R of rings with section rings in Type u. Suppose restriction of AddCommGrpCat.{u}-valued sheaves along F is an equivalence. Write S for the actual restriction of R. Then restriction of sheaves of R-modules with sections in Type u [def-weil-sheaf-of-modules-category] to sheaves of S-modules, with the identity ring comparison, is an equivalence. No smallness assumption or enlargement of section rings or module carriers is made.",
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D1 (lemma-pushforward-module) and 03D2 (lemma-pullback-module), transporting an action as a product map; sites.tex Tag 03A0 (lemma-equivalence), dense comparison. The explicit injective-product verification is the agent formalization of the module axioms."
+ },
+ "proof": [
+  {
+   "text": "For a module map on the restricted site, use Mathlib Functor.IsCoverDense.restrictHomEquivHom to extend its underlying additive presheaf map into the target additive sheaf. For any scalar and section, compare the two sides of linearity after restriction along every arrow from an image object. Naturality of the extended map, semilinearity of module restrictions, and linearity of the original map give equality on this covering sieve. The target sheaf is separated, so linearity holds globally. The inverse identities for restrictHomEquivHom show that extension and restriction are inverse on morphisms. This proves full faithfulness.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean",
+    "place": "IsCoverDense.restrictHomEquivHom and IsCoverDense.ext"
+   }
+  },
+  {
+   "text": "Let M be a module sheaf on the source site. Apply the inverse of the assumed additive-sheaf restriction equivalence to its underlying additive sheaf, obtaining N and an additive counit isomorphism i from restriction of N to M. On the restriction of the product presheaf R times N define (r,n) to map to i inverse applied to r times i(n). The counit naturality and semilinearity of M prove that this map is natural. Extend it by restrictHomEquivHom into the underlying set sheaf of N. This produces a natural scalar action b on all N sections, whose restriction is the transported action. All products and set sheaves have values in the original universe u.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1 (lemma-pushforward-module) and 03D2 (lemma-pullback-module), action as a map from a product"
+   }
+  },
+  {
+   "text": "For every target object U, map N(U) additively into the product, over every source object V and arrow g:F(V) to U, of M(V), by restricting along g and applying i. Regard each M(V) as an R(U)-module through the restriction ring map. This additive map is injective: i is injective, and the image-object covering sieve detects equality of N sections. Naturality of b and its known restriction show that this embedding commutes with the proposed scalar action. Transfer the module axioms through the injective additive map using Function.Injective.module. The naturality of b makes N into a sheaf of R-modules. This also applies when the covering sieve is empty: separatedness forces N(U) to be a singleton.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Module/Defs.lean",
+    "place": "Function.Injective.module; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean: PresheafOfModules.ofPresheaf"
+   }
+  },
+  {
+   "text": "The additive counit i and its inverse are linear for the transported action on source objects. They are natural and satisfy their inverse identities, so they lift to an isomorphism of module sheaves. Every source module is therefore in the essential image of restriction. Combine essential surjectivity with the proved full faithfulness to obtain IsEquivalence for the actual restriction functor with the identity ring comparison.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+    "place": "PresheafOfModules.isoMk and SheafOfModules.fullyFaithfulForget; CategoryTheory.Functor.IsEquivalence"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y6",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03D1 and 03D2; action transported by dense-subsite morphism comparison, with the sectionwise injective-product argument written by Y6."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extend sheaves of modules along a dense subsite using an equivalence of additive sheaf categories",
+   "results": "8 hits: dense-subsite sheafEquiv and comparison functors; no module-object extension theorem.",
+   "date": "2026-10-26",
+   "verdict": "related APIs reused; no exact module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to a full dense subsite is an equivalence",
+   "results": "8 hits: Functor.IsDenseSubsite.sheafEquiv, its functor and inverse, Equivalence.sheafCongr, sheafInducedTopologyEquivOfIsCoverDense, the additive sheaf restriction IsEquivalence instance, and restrictHomEquivHom; no module comparison.",
+   "date": "2026-10-26",
+   "verdict": "related APIs reused; no exact module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "12 hits: pushforward, pushforwardId, pushforwardComp, pushforwardCongr and over-site adjunctions. No dense-subsite module equivalence.",
+   "date": "2026-10-26",
+   "verdict": "related APIs reused; no exact module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictHomEquivHom|IsCoverDense.*pushforward",
+   "results": "18 hits: dense-subsite morphism comparison and topological-basis uses; no module-object equivalence. Additional local source and DAG searches found no duplicate, and blueprint_refs searches for dense subsite and module restriction found no matching module theorem.",
+   "date": "2026-10-26",
+   "verdict": "related APIs reused; no exact module comparison"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSmallRingedModel",
+  "date": "2026-10-26",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Module restriction equivalence in def-sfb-space-small-ringed-model; the affine-small-model step of the derived module calculus used in the affine adjoint-unit construction.",
+   "via": [
+    "def-sfb-space-small-ringed-model",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DenseSubsiteModuleExtension",
+  "file": "lean/Sheaf/CategoryTheory/DenseSubsiteModuleExtension.lean",
+  "declaration": "SheafOfModules.denseRestriction_isEquivalence",
+  "statement": "theorem denseRestriction_isEquivalence\n    {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D} (F : C ⥤ D)\n    [F.IsDenseSubsite J K]\n    [(F.sheafPushforwardContinuous AddCommGrpCat.{u} J K).IsEquivalence]\n    (R : Sheaf K RingCat.{u}) :\n    (pushforward.{u} (F := F)\n      (𝟙 ((F.sheafPushforwardContinuous RingCat.{u} J K).obj R))).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261026T093055-L-3515595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261026T093055-L-3515595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

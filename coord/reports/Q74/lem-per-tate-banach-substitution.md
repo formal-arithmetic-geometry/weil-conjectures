@@ -1,0 +1,55 @@
+# Worker report: lem-per-tate-banach-substitution
+
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-tate-banach-substitution.json`: statement, now split, six proof steps. Statement and statement dependencies unchanged. Historical searches and provenance retained; newly run searches added with their exact logged query texts.
+- `citations.json`: four entries, covering every step/node citation, with verbatim extracts from the current cited statements.
+- `report.md`: this report.
+
+New DAG nodes: 0. New Mathlib leaves: 0. Existing results reused: `lem-trf-restricted-series-gauss-completion`, `lem-sfb-dense-subspace-contractive-extension`, and definition `def-trf-restricted-series-presentation`.
+
+## Attachments
+
+None. Searches of the project under `lean/WeilConjectures/` by the exact blueprint id, restricted series, Tate algebra, Gauss norm, bounded substitution and contractive extension found no declaration stating this item. Tate modules and Tate differential-graded algebras are unrelated. A Mathlib declaration is not a project attachment.
+
+## WANTED
+
+WANTED: Brian Conrad, *Several approaches to non-archimedean geometry*, Exercise 1.2.8(3), PDF p.7 (printed p.7), for `lem-per-tate-banach-substitution`; local archive `literature/conrad-several-approaches-non-archimedean-geometry.pdf`. The cited archive does not exist in the read clone. I read the exercise online at https://math.stanford.edu/~conrad/papers/aws.pdf, together with Definition 1.1.2 and Exercise 1.1.3(1), on 2026-10-24. No document was downloaded and no literature file was edited.
+
+## What was wrong or missing
+
+The imported item had no proof. Its statement is correct: norm-at-most-one is sufficient for convergence and contractivity in an arbitrary commutative Banach algebra, including algebras with zero divisors; no multiplicativity of the target norm is needed. No statement correction or dispute was necessary. The original source reference correctly locates Exercise 1.2.8(3), whose universal property allows all power-bounded tuples; the item is its norm-at-most-one specialization, with the sharper contraction bound proved explicitly. The exercise supplies no written proof, so this split is honestly marked agent-written.
+
+The current blueprint is `literature/blueprint/latest` -> `main-20261024`, commit ef6f9619fdbffa59e88528fb56483d76c70258c8 in COMMITS.txt. I read the current chapter, unit and ancestor statement, as well as their imported DAG records. The current perverse/Fourier unit and ancestor do not contain an analytic-substitution assertion. The item belongs to the previously created analytic prerequisite chain recorded in its unchanged blueprint.from field, through rational Tate local coordinates and formal algebraization; I do not claim it realizes a new step of the current unit. The split_report explains this provenance. No chapter, unit, target or ancestor was edited.
+
+`lem-trf-restricted-series-gauss-completion` is an off-unit generic analytic tool: its statement supplies exactly the Gauss-norm inequalities and density of polynomial truncations for this restricted-series ring. It is declared in split_report.tool_uses for the maintainer to judge. The existing dense-subspace extension is a Mathlib leaf, and so is exempt from the unit-route restriction.
+
+## Unfinished work
+
+None in this one-level split. The missing local Conrad archive is recorded above. This delivery writes no Lean and performs no compilation, Lake invocation, or build.
+
+## Not duplicates
+
+No new nodes were created, so there are no new/existing-node pairs to distinguish. I searched all DAG statements and the blueprint for restricted series, Gauss norm, contractive extension, summable families and Tate algebras. `blueprint_refs.py search 'Tate algebra'`, `'contractive'` and `'restricted-series'` each returned no blueprint node. The existing field-valued ultrametric summability and nonarchimedean series-substitution nodes would not apply to an arbitrary Banach algebra B; I did not cite them as if they did, nor create another summability node. The more general existing dense-linear-extension leaf removes that need. The existing Gauss-completion node already states every domain property used here.
+
+## Review by Q74
+
+I checked sections B through E of coord/delivery-errors.md against the actual statements and proof, including both copies of those sections in that file. The argument is not a renaming of the conclusion: finite polynomial evaluation, one generic linear extension and explicit norm estimates prove the algebra property and convergence. No clause was delegated to a newly named version of itself. All six steps are below 2000 characters and none hides a standard analytic sublemma: the only analytic extension theorem used is the existing Mathlib leaf, and all subsequent limit passages have explicit estimates.
+
+For the item I read Conrad Exercise 1.2.8(3) online. It states the Banach-algebra universal property for power-bounded tuples, so norm-one elements are allowed; it does not require topological nilpotence. Definition 1.1.2 and Exercise 1.1.3(1) verify that the Gauss topology is the topology intended. For the reused analytic domain node I read its entire statement, norm and truncation proof steps and review record. For the reused extension node I read its full statement and the actual pinned source `lean/.lake/packages/mathlib/Mathlib/Analysis/Normed/Operator/Extend.lean:177-214`: LinearMap.extendOfNorm, extendOfNorm_eq, norm_extendOfNorm_apply_le and extendOfNorm_unique at 190, 194, 201 and 209. These declarations allow a dense linear inclusion and require completeness of the target, not the ambient domain. There are no new nodes with additional sources to check.
+
+Step 1 cites `lem-trf-restricted-series-gauss-completion`. Its statement explicitly supplies a finite, separated ultrametric Gauss norm, the product bound, and convergence of the stated total-degree truncations. This is the same coefficient-defined T_r(F), with the same complete absolute-valued field F and any r >= 0. Scalar homogeneity follows from multiplying every coefficient value by |c|, with c = 0 handled separately. Thus the normed-vector-space and dense-subspace hypotheses needed later really hold. I did not take a multiplication or topology assertion merely from a definition of Tate algebra.
+
+Step 2 has no external theorem citation: it is finite sums, finite products and distributivity in the assumed commutative F-algebra B. Powers and the empty monomial have norm at most one by the target norm axioms. The finite-sum estimate follows by induction. I wrote out the finite double sum establishing multiplicativity; no convergence or rearrangement theorem is silently invoked at this stage.
+
+Step 3 cites `lem-sfb-dense-subspace-contractive-extension`. I checked every variable in its statement: base field F, E = T_r(F), D = the polynomial subspace, target = B, and u the polynomial evaluation. Step 1 gives density and the domain norm; the assumed target ultrametric inequality implies its ordinary triangle inequality; scalar homogeneity, separation and completeness are exactly the item's assumptions. The resulting map is continuous F-linear, agrees with u on polynomials and satisfies the contraction bound, exactly as the cited sentence says. The extra unit and scalar conclusions use agreement with constant polynomials, not an assertion absent from that linear extension theorem.
+
+Step 4 again cites `lem-trf-restricted-series-gauss-completion` for its product bound. I checked the displayed errors separately in T and B. The truncations have norms <= ||f|| and ||g||, which is immediate from their coefficient support. The identity p_N q_N - fg = p_N(q_N-g) + (p_N-f)g gives the first error; the same identity for v(p_N), v(q_N) and the contraction bound gives the second. Both errors tend to zero. Polynomial multiplicativity identifies their common approximants, and the target norm separates their limits. This proves multiplicativity of the linear extension without invoking an uncited dense-algebra-extension theorem or identifying a product-topology completion with a Gauss-norm completion.
+
+Step 5 cites `def-trf-restricted-series-presentation`, whose statement defines restrictedness as convergence of coefficients to zero along the cofinite filter. For every positive epsilon the exceptional set at epsilon/2 is finite. Every finite set containing it has tail norm at most epsilon/2; the factor 1/2 avoids incorrectly inferring a strict bound on a supremum of strictly bounded values. This works for the whole directed set of finite subsets, not just a chosen sequence. Linearity, polynomial agreement and contractivity from earlier steps give the displayed bound for the evaluated net. Thus its limit is precisely the already constructed map.
+
+Step 6 uses only the established polynomial density, continuity and separation. Every competing algebra map agrees with finite polynomial evaluation, and continuity along the truncations gives equal limits. No bound on a competing continuous map is assumed. For r = 0 the multi-index set is a singleton, not empty, and its sole monomial is 1. The net is eventually constant, giving the scalar map. I also checked zero series, constant series, b_i = 0, b_i = 1 (important because it is not topologically nilpotent), finite-support series, norm-one coefficients and a commutative Banach algebra with nilpotents. The zero target algebra is excluded by the item's simultaneous assumptions ||1|| = 1 and norm separation, so no zero-ring exception is smuggled into the proof. Nontriviality and completeness of F are retained even where the argument could use less.
+
+I ran the required msearch commands, read all returned hits and retained the exact machine log in searches.jsonl. Both semantic phrasings found formal-power-series evaluation, which is not this theorem: `MvPowerSeries.HasEval` at Evaluation.lean:67-69 requires each coordinate to be topologically nilpotent, whereas b_i = 1 is permitted here. The formal series use the coefficient/product topology. The generic complete-group summability hit is valid as a smaller tool but not a match for the entire item, and is not needed by this density proof. No recorded query was invented, and all five newly executed queries were successful service calls, not unavailability reports.
+
+For C4 I generated citations.json from verbatim statement extracts and checked each extract was contained in its cited node. For C1 the only non-elementary facts are precisely the domain norm/truncation theorem and the complete-target dense extension theorem, both cited. New-node form, duplicate and Mathlib-leaf rules are vacuous because I create no new nodes. Statement dependencies, imported provenance and historical search records are retained; proof_deps is exactly the union of uses. The cited nodes have no dependency path back to this item. All writes are inside the assigned sandbox, apart from the delivery tool's expressly authorized temporary worktree operations.

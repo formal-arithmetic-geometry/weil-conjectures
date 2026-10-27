@@ -1,0 +1,216 @@
+{
+ "id": "lem-per-graded-power-split-linear-factorization",
+ "kind": "statement",
+ "title": "Uniform linear factorization after adic precision loss for power-split differentials",
+ "statement": "Let $R_0$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $K_0\\subseteq R_0$ an ideal, and $c\\geq0$. For a commutative ring $R$ and ideal $K$, write $\\operatorname{gr}_K(R)=\\bigoplus_{j\\geq0}K^j/K^{j+1}$ with its graded multiplication [def-weil-pbc-associated-graded-ring]. Then there exist integers $e\\geq0$ and $N\\geq2e+1$ such that the following holds for every Noetherian commutative ring $R$, ideal $K\\subseteq R$, and degree-preserving unital ring isomorphism $\\operatorname{gr}_K(R)\\cong\\operatorname{gr}_{K_0}(R_0)$. For any $n\\geq N$, put $R_n=R/K^n$ and $s=n-e$. Let $M$ be a finite $R_n$-module [def-weil-finitely-generated-module], $r\\geq0$, and $d:M\\to R_n^{\\oplus r}$ an $R_n$-linear map. Suppose that for every $a\\in K^c$ there is an $R_n$-linear map $h_a:R_n^{\\oplus r}\\to M$ with $h_a d=\\bar a\\operatorname{id}_M$, where $\\bar a$ is the image of $a$ in $R_n$. For every $R_n$-linear map $u:M\\to K^n/K^{2n}$ there is an $R_n$-linear map $v:R_n^{\\oplus r}\\to K^s/K^{2s}$ with $v d=\\rho u$, where $\\rho:K^n/K^{2n}\\to K^s/K^{2s}$ sends the class of $x\\in K^n$ to its class modulo $K^{2s}$. Both quotient modules have the $R_n$-action induced by multiplication in $R$; in particular $K^nK^s\\subseteq K^{2s}$ since $s\\leq n$. No completeness assumption on $R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0GAC (lemma-factor-hom), with e=(d(S)+2)c and a larger threshold; factor multiplication on M through d and compose the displayed finite sum of Hom maps with the maps h_a. Tag 0GA6 (section-uniform), invariance of d(S), q(S) under graded ring isomorphism. This module formulation avoids the ill-typed Ext subscript in Tag 0GAD (lemma-bound-two-term-complex), discussed in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-graded-near-projective-hom-divisibility] to $(R_0,K_0)$ to obtain $D,q$. Set $e=(D+2)c$ and $N=\\max(q+e,2e+1)$. These constants are independent of $R,K,M,d,u$. For $n\\geq N$, we have $n\\geq c$, $n\\geq q+(D+1)c$, $n\\geq(D+2)c$, and when $D=0$ also $n\\geq q+2c$. Thus every numerical hypothesis of the cited result holds, including its separate zero-dimensional threshold.",
+   "uses": [
+    "lem-per-graded-near-projective-hom-divisibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tags 0GA6 (section-uniform), 0GAC (lemma-factor-hom), and the finite-sum composition in the proof of 0GAD (lemma-bound-two-term-complex); with the larger loss e=(D+2)c."
+   }
+  },
+  {
+   "text": "For every $a\\in K^c$, use $f_a=d$, $g_a=h_a$, and $r_a=r$ in the cited lemma's factorization hypothesis: $g_af_a=h_ad=\\bar a\\operatorname{id}_M$. The finite generating set of $M$ over $R_n$ also generates it over $R$, since every coefficient in $R_n$ lifts to $R$. Thus this is precisely the finite near-projective module condition, with no injectivity assumption on $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tags 0GA6 (section-uniform), 0GAC (lemma-factor-hom), and the finite-sum composition in the proof of 0GAD (lemma-bound-two-term-complex); with the larger loss e=(D+2)c."
+   }
+  },
+  {
+   "text": "Put $t=n-(D+1)c$ and $s=n-e$, so $t=s+c$. By [lem-per-graded-near-projective-hom-divisibility], there are finitely many $a_j\\in K^c$ and $R_n$-linear maps $\\psi_j:M\\to K^s/K^{n+s}$ such that $pu=\\sum_j\\mu_{a_j}\\psi_j$ in $K^t/K^{n+t}$. Define $V=\\sum_j\\psi_j h_{a_j}:R_n^{\\oplus r}\\to K^s/K^{n+s}$. Then $Vd=\\sum_j\\bar a_j\\psi_j$ in $K^s/K^{n+s}$, by linearity and $h_{a_j}d=\\bar a_j\\operatorname{id}_M$.",
+   "uses": [
+    "lem-per-graded-near-projective-hom-divisibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tags 0GA6 (section-uniform), 0GAC (lemma-factor-hom), and the finite-sum composition in the proof of 0GAD (lemma-bound-two-term-complex); with the larger loss e=(D+2)c."
+   }
+  },
+  {
+   "text": "The inclusions $K^t\\subseteq K^s$ and $K^{n+t}\\subseteq K^{n+s}$ define $\\lambda:K^t/K^{n+t}\\to K^s/K^{n+s}$. On representatives, $\\lambda\\mu_a(y)=ay\\bmod K^{n+s}$ and $\\lambda p(x)=x\\bmod K^{n+s}$. Hence $Vd=\\lambda pu$. Since $s\\leq n$, reduction defines $\\beta:K^s/K^{n+s}\\to K^s/K^{2s}$; set $v=\\beta V$. On every $x\\in K^n$, $\\beta\\lambda p(x)=x\\bmod K^{2s}=\\rho(x)$, so $vd=\\rho u$. Each map respects multiplication by $R$ and therefore by $R_n$: $K^nK^s=K^{n+s}$, which is zero in the intermediate quotient and contained in $K^{2s}$ in the final one. This constructs the required $v$ without completing $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tags 0GA6 (section-uniform), 0GAC (lemma-factor-hom), and the finite-sum composition in the proof of 0GAD (lemma-bound-two-term-complex); with the larger loss e=(D+2)c."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-graded-near-projective-hom-divisibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tags 0GA6 (section-uniform), 0GAC (lemma-factor-hom), and the finite-sum composition in the proof of 0GAD (lemma-bound-two-term-complex); with the larger loss e=(D+2)c."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bound_two_term|factor_hom|uniform.*[Ee]xt|[Ee]xt.*[Aa]nn|[Aa]nn.*[Ee]xt",
+   "results": "{\"t\": \"2026-10-24T07:34:01Z\", \"tool\": \"grep\", \"query\": \"bound_two_term|factor_hom|uniform.*[Ee]xt|[Ee]xt.*[Aa]nn|[Aa]nn.*[Ee]xt\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Depth/Rees.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\", \"Mathlib/RingTheory/Depth/Rees.lean\", \"Mathlib/RingTheory/Grassmannian.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\"], \"digest\": \"7b6bada6390f1d10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct completion maps, identify quotient modules, or treat ordinary Ext annihilation; none gives uniform factorization through a power-split differential after decreasing both ideal exponents.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ideal power splitting of a map from a finite module to a finite free module implies uniform vanishing of obstructions in successive ideal power quotients",
+   "results": "{\"t\": \"2026-10-24T07:34:01Z\", \"tool\": \"leansearch\", \"query\": \"An ideal power splitting of a map from a finite module to a finite free module implies uniform vanishing of obstructions in successive ideal power quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientToQuotientRangePowQuotSuccAux\", \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"Ideal.quotientToQuotientRangePowQuotSucc\", \"Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow\", \"Submodule.factorPowSucc\", \"Ideal.Quotient.factorPowSucc\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"Submodule.factorPow.congr_simp\"], \"digest\": \"cd1ac8f996a9dbf4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct completion maps, identify quotient modules, or treat ordinary Ext annihilation; none gives uniform factorization through a power-split differential after decreasing both ideal exponents."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap\", \"coker\"",
+   "results": "{\"t\": \"2026-10-24T07:34:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"LinearMap\\\", \\\"coker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LinearMap.localizedMap_surjective_iff_subsingleton_localized_coker\", \"ContinuousLinearMap.IsFredholm.finite_coker\"], \"digest\": \"c90ee035271a4560\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct completion maps, identify quotient modules, or treat ordinary Ext annihilation; none gives uniform factorization through a power-split differential after decreasing both ideal exponents."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform annihilation of a cokernel of Hom maps for a finite two term module complex after reducing adic precision, controlled by the associated graded ring",
+   "results": "{\"t\": \"2026-10-24T07:34:02Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform annihilation of a cokernel of Hom maps for a finite two term module complex after reducing adic precision, controlled by the associated graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"AdicCompletion.transitionMap\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"localCohomology\", \"AdicCompletion.map_exact\", \"localCohomology.ofDiagram\"], \"digest\": \"d3b52a27683d52f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct completion maps, identify quotient modules, or treat ordinary Ext annihilation; none gives uniform factorization through a power-split differential after decreasing both ideal exponents."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adic power split injection of finite modules makes every linear map into I^n modulo I^(2n) extend after a bounded loss of precision uniformly for isomorphic associated graded rings",
+   "results": "{\"t\": \"2026-10-24T07:34:04Z\", \"tool\": \"leanfinder\", \"query\": \"An adic power split injection of finite modules makes every linear map into I^n modulo I^(2n) extend after a bounded loss of precision uniformly for isomorphic associated graded rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"IsAdicComplete.StrictMono.lift\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"IsAdicComplete.StrictMono.extend_eq\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\"], \"digest\": \"2e8fe0a29b6753d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct completion maps, identify quotient modules, or treat ordinary Ext annihilation; none gives uniform factorization through a power-split differential after decreasing both ideal exponents."
+  },
+  {
+   "tool": "grep",
+   "query": "near.?projective|almost.?projective|factor_hom|uniform.*[Hh]om|[Hh]om.*uniform",
+   "results": "{\"t\": \"2026-10-24T08:07:06Z\", \"tool\": \"grep\", \"query\": \"near.?projective|almost.?projective|factor_hom|uniform.*[Hh]om|[Hh]om.*uniform\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/EisensteinSeries/UniformConvergence.lean\", \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"Mathlib/NumberTheory/Padics/WithVal.lean\", \"Mathlib/NumberTheory/Padics/WithVal.lean\", \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\"], \"digest\": \"12ada9c55c477b66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ideal power split map of finite modules into a free module permits extension of linear maps into quotients of ideal powers with uniform bounded loss",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"leansearch\", \"query\": \"An ideal power split map of finite modules into a free module permits extension of linear maps into quotients of ideal powers with uniform bounded loss\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.extend\", \"Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow\", \"LinearMap.split_surjective_of_localization_maximal\", \"Module.Baer.ExtensionOf.toLinearPMap\", \"LinearMap.reduceModIdeal\", \"Submodule.factorPow\", \"Ideal.powQuotPowSuccEquivMapMkPowSuccPow\", \"Ideal.quotEquivPowQuotPowSucc\"], \"digest\": \"2874efb4417ed1fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap\", \"comp\", \"smul\"",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"LinearMap\\\", \\\"comp\\\", \\\"smul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.CompatibleSMul\", \"LinearMap.CompatibleSMul.intModule\", \"LinearMap.IsScalarTower.compatibleSMul'\", \"LinearMap.CompatibleSMul.units\", \"LinearMap.IsScalarTower.compatibleSMul\", \"LinearMap.CompatibleSMul.map_smul\", \"LinearMap.CompatibleSMul.mk\", \"LinearMap.isLinearMap_of_compatibleSMul\"], \"digest\": \"095d7d3d889ba950\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform adic linear extension through a fixed differential whose compositions split multiplication by an ideal power, with bounded precision loss controlled by the associated graded ring",
+   "results": "{\"t\": \"2026-10-24T08:07:16Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform adic linear extension through a fixed differential whose compositions split multiplication by an ideal power, with bounded precision loss controlled by the associated graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.lift\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"IsAdicComplete.lift\", \"IsAdicComplete.StrictMono.extend_eq\", \"IsAdicComplete.StrictMono.of_lift\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"IsAdicComplete.StrictMono.mk_lift\"], \"digest\": \"67bda6880c646e38\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every map from an ideal power split finite module to I^n divided by I^(2n) extends along the specified splitting map after reducing to I^(n-e) divided by I^(2n-2e)",
+   "results": "{\"t\": \"2026-10-24T08:13:01Z\", \"tool\": \"leanfinder\", \"query\": \"Every map from an ideal power split finite module to I^n divided by I^(2n) extends along the specified splitting map after reducing to I^(n-e) divided by I^(2n-2e)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"AdicCompletion.transitionMap\", \"IsAdicComplete.StrictMono.lift\", \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"Ideal.quotientToQuotientRangePowQuotSucc\"], \"digest\": \"e91fc8c139955bf9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every map from an ideal power split finite module to I^n divided by I^(2n) extends along the specified splitting map after reducing to I^(n-e) divided by I^(2n-2e)",
+   "results": "{\"t\": \"2026-10-24T08:13:01Z\", \"tool\": \"leanfinder\", \"query\": \"Every map from an ideal power split finite module to I^n divided by I^(2n) extends along the specified splitting map after reducing to I^(n-e) divided by I^(2n-2e)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"AdicCompletion.transitionMap\", \"IsAdicComplete.StrictMono.lift\", \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"Ideal.quotientToQuotientRangePowQuotSucc\"], \"digest\": \"e91fc8c139955bf9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: compatible completion lifts and quotient-transition maps do not give extension along the specified differential or a uniform finite precision loss."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-power-split-uniform-adic-map-lifting",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization dependency below ancestor Step 3, through the rig-smooth perturbation branch; precise analytic input to Stacks 0GAQ proof, the linear obstruction bound, here obtained from local-cohomology lemma-factor-hom with a harmless larger loss. The current latest ancestor Step 3 concerns Verdier exchange and does not itself assert this algebraization lemma.",
+   "via": [
+    "lem-per-power-split-uniform-adic-map-lifting",
+    "lem-per-rig-smooth-presentation-perturbation",
+    "lem-per-g-ring-rig-smooth-algebraization",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-graded-power-split-linear-factorization",
+  "worker": "stage1",
+  "summary": "Q94: split using the intrinsic finite-sum Hom divisibility of Stacks 0GAC, with graded-uniform constants from 0GA6. The fixed differential and its chosen scalar splittings carry the final factorization. Every quotient map is checked on representatives; no statement change, completeness, Ext subscript, or additional geometric route is used.",
+  "blueprint": "Inherited formal-algebraization branch below lem-per-artin-gabber-affine-curve Step 3, via the recorded rig-smooth perturbation ancestors. Latest ancestor Step 3 is Verdier exchange, not an assertion of this algebra lemma; this split realizes the already recorded 0GAC linear input to the 0GAQ branch, without changing the unit or chapter."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-807cbde3a",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-807cbde3a (reviewer sub-agent of L); spot-checked: Read the item and the new node in full against Stacks local-cohomology.tex: 0GA6 (section-uniform, d(S) and q(S) depend only on the graded isomorphism class of S), the (A,n,c)-module definition at 4858, 0GAC lemma-factor-hom (statement and proof) and 0GAD (the d>0 composition step). Also read more-algebra 0G92/0G93 and the finite-free refinement lemma at 17737. New node lem-per-graded-near-projective-hom-divisibility is 0GAC with uniform constants. Its exponents match: t=n-(1+D)c with target K^t/K^{n+t}, and w=n-(2+D)c with K^w/K^{n+w}. The thresholds, including the extra D=0 bound, are verbatim. mu_a is well defined because w+c=t. Its finite-free factorization condition is equivalent to (A,n,c)-module for finite M by 0G92 and more-algebra 17737. It is statement-only and self-contained; its three definition deps define what they are cited for; via=[item]+item.via and same_as=[]. Five searches are recorded and none matches. A grep -R over dag/nodes for 0GAC/0GA6/0GAD/near-projective finds no duplicate: the only other hits are the parent and the rig-smooth node, both on the 0GAQ nonlinear lifting. The node is strictly smaller than the item: it has no fixed d and no extension along d. Item statement, stmt_deps and source are unchanged from base. Step 1: e=(D+2)c and N=max(q+e,2e+1) satisfy every hypothesis of the node, including n>=c and the D=0 bound. Step 2: f_a=d, g_a=h_a is a direct instance of the hypothesis. Step 3: V=sum psi_j h_{a_j} gives Vd=sum a_j psi_j, using only the node's statement; this is the 0GAD composition. Step 4: lambda and beta are defined because s<=t and s<=n; checking on representatives gives vd=rho u, and the R_n-actions are valid since K^nK^s=K^{n+s}. Small cases tested: K=R, K=0, n=0, c=0, and R=k[x], K=(x), c=1, n=5, M=k, d(1)=x^4. Same unit, so no tool_uses; no SGA. The inherited 0GAD Ext-subscript source note is correct and is not relied on. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedPowerSplitLinearFactorization",
+  "declaration": "Ideal.exists_graded_power_split_linear_factorization",
+  "file": "lean/Sheaf/RingTheory/GradedPowerSplitLinearFactorization.lean",
+  "statement": "theorem exists_graded_power_split_linear_factorization (R₀ : Type u₀) [CommRing R₀] [IsNoetherianRing R₀] (K₀ : Ideal R₀) (c : ℕ) : ∃ e N : ℕ, 2 * e + 1 ≤ N ∧ ∀ (R : Type u) [CommRing R] [IsNoetherianRing R] (K : Ideal R) (E : associatedGraded K ≃+* associatedGraded K₀), (∀ j : ℕ, E '' Set.range (DirectSum.of (associatedGradedPiece K) j) = Set.range (DirectSum.of (associatedGradedPiece K₀) j)) → ∀ (n : ℕ), N ≤ n → ∀ (M : ModuleCat.{v} (R ⧸ K ^ n)) [Module.Finite (R ⧸ K ^ n) M] (r : ℕ) (d : M →ₗ[R ⧸ K ^ n] (Fin r → R ⧸ K ^ n)), (∀ a : (K ^ c : Ideal R), ∃ h : (Fin r → R ⧸ K ^ n) →ₗ[R ⧸ K ^ n] M, h.comp d = Ideal.Quotient.mk (K ^ n) (a : R) • LinearMap.id) → ∀ u : (ModuleCat.restrictScalars (Ideal.Quotient.mk (K ^ n))).obj M →ₗ[R] (K ^ n).map (Ideal.Quotient.mk (K ^ (2 * n))), ∃ v : (Fin r → R ⧸ K ^ n) →ₗ[R] (K ^ (n - e)).map (Ideal.Quotient.mk (K ^ (2 * (n - e)))), ∀ (x : M) (y : R), Ideal.Quotient.mk (K ^ (2 * n)) y = (u x).val → Ideal.Quotient.mk (K ^ (2 * (n - e))) y = (v (d x)).val",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c5e6f35e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: (e,N) with 2e+1≤N chosen before all varying data; degree-preserving iso as E : gr K ≃+* gr K₀ with degree-j summand images equal; finite M in ModuleCat.{v}, d to Fin r → R⧸K^n; splitting ∀ a∈K^c ∃ h, h∘d = ā•id with the same d; u,v R-linear into image ideals K^n/K^{2n}, K^s/K^{2s} (both killed by K^n, so equal to R_n-linear); vd=ρu on all representatives = canonical ρ. No extra assumptions; universes u₀,u,v independent; edge cases c=0,e=0,r=0,M=0,K=⊥/⊤, zero ring covered, n=0 excluded only via N≥2e+1. lean.statement verbatim (script check); deps, stmt_deps and node unchanged vs live; no new defs; docstrings carry Stacks 0GA6/0GAC/0GAD, the blueprint id and the proof steps; proof is sorry; report has Worker report and Second reading by NJ (same-worker pass, accurate). Not recompiled (no change)."
+ }
+}

@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # Derived restriction to the slice of a ringed site
@@ -79,7 +79,19 @@ with slice restriction. Sectionwise colimits commute with precomposition. -/
 theorem ringedOverFunctor_preservesFiniteColimits (U : C) :
     PreservesFiniteColimits (SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U) := by
-  sorry
+  let R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj O
+  let F := SheafOfModules.overFunctor.{u} R U
+  let H := J.overPullback AddCommGrpCat.{u} U
+  have : PreservesColimitsOfSize.{u, u} H :=
+    ((Over.forget U).sheafAdjunctionCocontinuous AddCommGrpCat.{u}
+      (J.over U) J).leftAdjoint_preservesColimits
+  let T := SheafOfModules.toSheaf (R.over U)
+  have : PreservesFiniteColimits (F ⋙ T) := by
+    change PreservesFiniteColimits (SheafOfModules.toSheaf R ⋙ H)
+    infer_instance
+  have : ReflectsFiniteColimits T :=
+    { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+  exact preservesFiniteColimits_of_reflects_of_preserves F T
 
 attribute [instance] ringedOverFunctor_additive ringedOverFunctor_preservesFiniteLimits
   ringedOverFunctor_preservesFiniteColimits

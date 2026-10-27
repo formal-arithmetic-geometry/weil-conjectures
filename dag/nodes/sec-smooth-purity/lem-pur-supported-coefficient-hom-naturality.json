@@ -1,0 +1,169 @@
+{
+ "id": "lem-pur-supported-coefficient-hom-naturality",
+ "kind": "statement",
+ "title": "Evaluation-normalized supported Hom under coefficient restriction and site change",
+ "statement": "For a finite coefficient ring R and a unital map R → A, choose the evaluation-normalized signed supported-Hom identifications over R and A and on the pro-etale site. On every degree-zero sheaf and coefficient map theta, the actual derived restriction-kernel comparisons for forgetting and restricting coefficients are invertible. The etale/pro-etale transport is compatible with these identifications. A supported coefficient-image equality holds if and only if its realized arrows satisfy precomposition by the supported coefficient unit and postcomposition by the shifted theta unit. This is for full supported classes, including their signed relative lifts, and does not assume restricted injectives injective.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "lem-asd-finite-etale-twist-line",
+  "def-weil-pbc-derived-categories",
+  "lem-amb-closed-support-hom",
+  "lem-pur-divisor-relative-cone",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-geo-cartier-coeff-extension",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-supported-hom-pullback",
+  "def-pur-frame-class",
+  "lem-pur-supported-hom",
+  "def-geo-exact-degree-zero-interface",
+  "def-pc-sheaf-restrict-scalars",
+  "def-asd-finite-etale-tate-twist",
+  "def-pur-supported-hom-cocycle-data",
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Example 9.5 and the Ext proof of Theorem 9.4, pp. 66–67; Stacks Tags 03FD, 093X, 06YY, 07A6 and 099R"
+ },
+ "proof": [
+  {
+   "text": "Construct evaluation-normalized support-Hom identifications from the cokernel presentation of the supported constant. Derive evaluation at one; inclusion of the support kernel in the signed cone fixes the relative lift. This construction applies to the arbitrary coefficient ring R as well as A.",
+   "uses": [
+    "lem-amb-closed-support-hom",
+    "lem-pur-supported-hom-cocycle-normalization",
+    "lem-pur-divisor-relative-cone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the module-to-abelian restriction-kernel comparison on both sites. Restrict an A-injective resolution, compare it with an R-injective resolution by K-injective comparison, and identify both maps with the same kernel map. Factoring coefficient forgetting through restriction and cancelling the two abelian comparisons gives invertibility of the restriction comparison.",
+   "uses": [
+    "lem-pur-module-restriction-kernel-comparison",
+    "lem-sp-kinjective-comparison-principle",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each cocycle, restriction and precomposition by the supported coefficient unit preserve evaluation because 1_R maps to 1_A. Apply the comparison of resolutions to obtain the displayed equivalence of class equalities and realized-arrow equalities. Naturality in theta gives the shifted target unit. The signed cone map acts on both components, so the result precedes forgetting support.",
+   "uses": [
+    "lem-pur-supported-hom-cocycle-normalization",
+    "lem-pur-divisor-relative-cone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use normalized supported-Hom pullback for the etale-origin object B[0] to obtain the site transport and its compatibility.",
+   "uses": [
+    "lem-pur-supported-hom-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-closed-support-hom",
+  "lem-pur-divisor-relative-cone",
+  "lem-pur-supported-hom-cocycle-normalization",
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Example 9.5 and the Ext proof of Theorem 9.4, pp. 66–67; Stacks Tags 03FD, 093X, 06YY, 07A6 and 099R"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived supported cohomology under restriction of coefficient scalars is precomposition by the supported constant coefficient unit",
+   "results": "Group cohomology restriction and ModuleCat restriction compositor results; no supported sheaf result.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusBaseChange\"",
+   "results": "No results.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*coefficient|coefficient.*supported",
+   "results": "Unrelated Hecke, convex space, and ordinal entries.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedRootScalarSiteComparison",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-supported-root-scalar-site-comparison",
+   "place": "Coefficient naturality and scalar endpoint steps of the supported root comparison"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedCoefficientHomNaturality",
+  "file": "lean/Sheaf/Paper/SupportedCoefficientHomNaturality.lean",
+  "declaration": "AlgebraicGeometry.SupportedRootScalar.supportedCoefficientHomNaturality",
+  "statement": "theorem supportedCoefficientHomNaturality\n    (P : WeilConjectures.PurityFiniteSetting.{u})\n    (R : Type (u + 1)) [CommRing R] [Finite R] (phi : R →+* P.Coefficient)\n    (T : Scheme.{u}) {Z : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] :\n    ∃ chiR : (rootScalarSupportPair R i).Identification,\n    ∃ chiA : (etaleSupportHomPair P i).Identification,\n    ∃ chiP : (proEtaleSupportHomPair P i).Identification,\n    ∃ v : siteSupportHomTransport P i,\n      SignedIdentification (rootScalarSupportPair R i) chiR ∧\n      SignedIdentification (etaleSupportHomPair P i) chiA ∧\n      SignedIdentification (proEtaleSupportHomPair P i) chiP ∧\n      ∀ (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R))\n        (B : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))\n        (theta : M ⟶ (Sheaf.restrictScalars T.smallEtaleTopology phi).obj B),\n      IsIso ((derivedCoefficientComparison\n        (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} R))\n        (dB := HasDerivedCategory.ofIsGrothendieckAbelian AddCommGrpCat.{u + 1})\n        T.smallEtaleTopology\n        (forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1})\n          (Etale.supportRestrictionArrow i)).app (singlePlus M)) ∧\n      IsIso ((derivedCoefficientComparison\n        (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} P.Coefficient))\n        (dB := HasDerivedCategory.ofIsGrothendieckAbelian AddCommGrpCat.{u + 1})\n        T.smallEtaleTopology\n        (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1})\n          (Etale.supportRestrictionArrow i)).app (singlePlus B)) ∧\n      IsIso ((derivedCoefficientComparison\n        (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} P.Coefficient))\n        (dB := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} R))\n        T.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} phi)\n          (Etale.supportRestrictionArrow i)).app (singlePlus B)) ∧\n      IsIso ((derivedCoefficientComparison\n        (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} P.Coefficient))\n        (dB := HasDerivedCategory.ofIsGrothendieckAbelian AddCommGrpCat.{u + 1})\n        (Scheme.ProEt.topology T)\n        (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1})\n          (ProEtale.supportRestrictionArrow i)).app\n            ((ProEtale.comparisonUpperStar\n              (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.obj\n              (singlePlus B))) ∧\n      v.Compatible (hB := Scheme.isContinuous_toProEt T) chiA chiP (singlePlus B) 2 ∧\n      ∀ (beta : (rootScalarSupportPair R i).group (singlePlus M) 2)\n        (gamma : (etaleSupportHomPair P i).group (singlePlus B) 2),\n        (coefficientGroupMap\n          (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} P.Coefficient))\n          (dB := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} R))\n          T.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} phi)\n          (Etale.supportRestrictionArrow i) (singlePlus B) 2).hom gamma =\n          ((Sheaf.supportHypercohomologyFunctor T.smallEtaleTopology\n            (ModuleCat.{u + 1} R) (Etale.supportRestrictionArrow i) 2).map\n              (ObjectProperty.homMk\n                (SheafExactDegreeZero.scalarUnit T.smallEtaleTopology phi M B theta))).hom beta\n        ↔ Etale.coefficientUnitDerived phi i ≫\n            (Sheaf.derivedRestrictScalars T.smallEtaleTopology phi).map\n              (realize (etaleSupportHomPair P i) chiA B gamma) =\n          realize (rootScalarSupportPair R i) chiR M beta ≫\n            (SheafExactDegreeZero.scalarUnit T.smallEtaleTopology phi M B theta)⟦(2 : ℤ)⟧' ≫\n              ((Sheaf.derivedRestrictScalars T.smallEtaleTopology phi).commShiftIso\n                (2 : ℤ)).inv.app (SheafExactDegreeZero.obj _ B)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.rootScalarSupportPair",
+   "AlgebraicGeometry.SupportedRootScalar.singlePlus",
+   "AlgebraicGeometry.SupportedRootScalar.kernelComparison",
+   "AlgebraicGeometry.SupportedRootScalar.derivedCoefficientComparison",
+   "AlgebraicGeometry.SupportedRootScalar.coefficientGroupMap",
+   "AlgebraicGeometry.SupportedRootScalar.zeroHom",
+   "AlgebraicGeometry.SupportedRootScalar.fromSingle",
+   "AlgebraicGeometry.SupportedRootScalar.toSingle",
+   "AlgebraicGeometry.SupportedRootScalar.presentationEquiv",
+   "AlgebraicGeometry.SupportedRootScalar.singlePlus_obj",
+   "AlgebraicGeometry.SupportedRootScalar.homPresentation",
+   "AlgebraicGeometry.SupportedRootScalar.realizationEquiv",
+   "AlgebraicGeometry.SupportedRootScalar.realize",
+   "AlgebraicGeometry.SupportedRootScalar.homFromZero",
+   "AlgebraicGeometry.SupportedRootScalar.SignedIdentification",
+   "AlgebraicGeometry.SupportedRootScalar.supportedCoefficientHomNaturality",
+   "AlgebraicGeometry.SupportedRootScalar.homFromZero_realize",
+   "AlgebraicGeometry.SupportedRootScalar.realizationEquiv_apply"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7e4c",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T163537-L-692667",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7e4c",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T163537-L-692667",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to live; new sorry supportedCoefficientHomNaturality read vs node and judged true (normalized χ, Stacks 03FD/093X comparisons, evaluation-at-one iff), not a restatement; moved defs re-exported via public import, 0 importers; node lean records match; #print axioms clean (sorryAx only via new lemma + upstream p1KummerScalarEndpointExistence); adapted P1 module + importer P1KummerDerivedScalar + new module compile"
+ }
+}

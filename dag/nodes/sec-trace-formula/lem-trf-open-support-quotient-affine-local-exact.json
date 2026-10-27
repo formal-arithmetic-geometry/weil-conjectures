@@ -1,0 +1,170 @@
+{
+ "id": "lem-trf-open-support-quotient-affine-local-exact",
+ "kind": "statement",
+ "title": "Affine locality for quotients by supported sections",
+ "statement": "Let Y be a scheme [def-pc-scheme], U an open of Y [def-weil-open-immersion], and H_1 -> H_2 -> H_3 a complex of O_Y-module sheaves [def-weil-sheaf-of-modules-category, def-weil-pbc-exact-sequence]. Put Q_U(M)=coker(ker(M -> j_*j^*M) -> M), where j:U -> Y is the open inclusion; use the canonical maps induced by naturality of the restriction unit. Suppose every point y of Y lies in the range of an open immersion z:Spec R -> Y [def-weil-affine-spectrum], with an element a of R such that z^{-1}U=D(a). Put M_k=z^*H_k using tensor pullback [def-pc-module-pullback], and N_k=Gamma(Spec R,M_k). Assume the three natural counits tilde(N_k) -> M_k are isomorphisms [lem-weil-pbc-affine-tilde-gamma-adjunction]. Let i,j be the maps on these section modules. Suppose the canonical sequence principalSupportQuotient(a,N_1) -> principalSupportQuotient(a,N_2) -> principalSupportQuotient(a,N_3), with maps principalSupportQuotientMap(a,i) and principalSupportQuotientMap(a,j), is short exact [lem-trf-principal-support-quotient-exact]. Then Q_U(H_1) -> Q_U(H_2) -> Q_U(H_3), with its actual induced maps, is short exact. No blowup, universal base-change, finiteness, or regular-element assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Definition 080D (1), definition-strict-transform; Tag 080W, lemma-strict-transform-universally-injective, affine reduction. Local sheaf exactness: literature/stacks-project/modules.tex, Tags 01AF and 01AG, section-kernels and lemma-abelian."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-affine-spectrum",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-trf-principal-support-quotient-exact"
+ ],
+ "proof": [
+  {
+   "text": "For an open immersion z: Spec R -> Y, tensor pullback is canonically isomorphic to open restriction. The latter is exact: its sections on W are the original sections on the image open, its kernels are sectionwise kernels, and locally lifting sections describes its cokernels. On W in Spec R the restriction of the kernel of H -> j_*j^*H consists exactly of sections vanishing on W intersect z^{-1}U. When z^{-1}U=D(a), this is the principal supported-section kernel. Restriction of the global cokernel is therefore the cokernel of this same kernel inclusion. These identifications commute with the actual inclusions and quotient projections.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Definition 080D (1), definition-strict-transform; Tag 080W, lemma-strict-transform-universally-injective, affine reduction. Local sheaf exactness: literature/stacks-project/modules.tex, Tags 01AF and 01AG, section-kernels and lemma-abelian."
+   }
+  },
+  {
+   "text": "For each of the three chart modules, the assumed invertible affine tilde/Gamma counit identifies the module with the associated sheaf of its global sections. Counit naturality identifies the two arrows with tilde of the section maps. Taking kernels and cokernels yields compatible isomorphisms from the restricted global supported-section quotients to the principalSupportQuotient objects of the sections. Their naturality squares are checked after the epimorphic cokernel projections; both composites are induced by the same original section map. Thus the local short exactness hypothesis transfers to restriction of the global quotient sequence, including both maps.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-trf-principal-support-quotient-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Definition 080D (1), definition-strict-transform; Tag 080W, lemma-strict-transform-universally-injective, affine reduction. Local sheaf exactness: literature/stacks-project/modules.tex, Tags 01AF and 01AG, section-kernels and lemma-abelian."
+   }
+  },
+  {
+   "text": "The range of a chosen chart through every point gives an open cover. The composite of the two quotient maps restricts to zero on the cover, and hence is zero globally by sheaf separatedness. If a section maps to zero under the first map, it restricts to zero on each chart, so it is zero. A germ in the middle kernel has a preimage germ from the first term on a chart through its point; representing that germ and shrinking gives a local lift. Every last-term germ similarly has a middle-term preimage on such a chart. Hence the global arrows are respectively mono, exact at the middle, and epi, giving the stated short exact sequence. On the empty scheme there are no points and all sections are zero by the empty-cover sheaf axiom.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Definition 080D (1), definition-strict-transform; Tag 080W, lemma-strict-transform-universally-injective, affine reduction. Local sheaf exactness: literature/stacks-project/modules.tex, Tags 01AF and 01AG, section-kernels and lemma-abelian."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-trf-principal-support-quotient-exact",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Definition 080D (1), definition-strict-transform; Tag 080W, lemma-strict-transform-universally-injective, affine reduction. Local sheaf exactness: literature/stacks-project/modules.tex, Tags 01AF and 01AG, section-kernels and lemma-abelian."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openSupportQuotient|principalSupportQuotient|supportedSectionQuotient",
+   "results": "0 hits: .  No result states affine locality for supported-section quotients; source searches also found principalSupportQuotient_exact and supportedQuotientSaturation, neither supplying this chart/global map comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of sheaf quotient by sections supported outside an open can be checked on affine principal open charts",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine, AlgebraicGeometry.StructureSheaf.to_basicOpen_epi, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.locally_const_basicOpen, AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen, AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_inter, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso.  No result states affine locality for supported-section quotients; source searches also found principalSupportQuotient_exact and supportedQuotientSaturation, neither supplying this chart/global map comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictAdjunction\"",
+   "results": "4 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app.  No result states affine locality for supported-section quotients; source searches also found principalSupportQuotient_exact and supportedQuotientSaturation, neither supplying this chart/global map comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleStrictTransformUniversalExact",
+  "date": "2026-10-26",
+  "group": "C5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The strict-transform exact sequence in the flattening argument supporting the semistable-alteration input of lem-trf-local-term-locality; Stacks 0815 paragraph 3. In its supporting Tag 080W argument, comparison of local principal supported-section quotients and the final sheaf locality step.",
+   "via": [
+    "lem-trf-strict-transform-universal-exact",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenSupportQuotientLocalExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSupportQuotientLocalExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.openSupportQuotient_shortExact_of_affine",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.openSupportQuotient",
+   "AlgebraicGeometry.Scheme.Modules.openSupportQuotientMap",
+   "AlgebraicGeometry.Scheme.Modules.openSupportQuotient_shortExact_of_affine"
+  ],
+  "statement": "theorem openSupportQuotient_shortExact_of_affine\n    {Y : Scheme.{u}} (U : Y.Opens) (H : ShortComplex Y.Modules)\n    (hlocal : ∀ y : Y, ∃ (R : CommRingCat.{u}) (z : Spec R ⟶ Y)\n      (_ : IsOpenImmersion z) (a : R),\n      y ∈ Set.range z ∧ z ⁻¹ᵁ U = PrimeSpectrum.basicOpen a ∧\n      IsIso ((tensorPullback z).obj H.X₁).fromTildeΓ ∧\n      IsIso ((tensorPullback z).obj H.X₂).fromTildeΓ ∧\n      IsIso ((tensorPullback z).obj H.X₃).fromTildeΓ ∧\n      ∃ w : principalSupportQuotientMap a\n          (moduleSpecΓFunctor.map ((tensorPullback z).map H.f)) ≫\n        principalSupportQuotientMap a\n          (moduleSpecΓFunctor.map ((tensorPullback z).map H.g)) = 0,\n        (ShortComplex.mk\n          (principalSupportQuotientMap a\n            (moduleSpecΓFunctor.map ((tensorPullback z).map H.f)))\n          (principalSupportQuotientMap a\n            (moduleSpecΓFunctor.map ((tensorPullback z).map H.g))) w).ShortExact) :\n    ∃ w : openSupportQuotientMap U H.f ≫ openSupportQuotientMap U H.g = 0,\n      (ShortComplex.mk (openSupportQuotientMap U H.f)\n        (openSupportQuotientMap U H.g) w).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261026T091248-L-3327661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261026T091248-L-3327661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

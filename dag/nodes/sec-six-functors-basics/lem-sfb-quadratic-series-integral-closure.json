@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-quadratic-series-integral-closure",
+ "kind": "statement",
+ "title": "Integral closure of a nondegenerate quadratic formal plane curve",
+ "statement": "Let $F$ be a field and $a,b,c\\in F$ satisfy $a\\ne0$ and $b^2-4ac\\ne0$. Put\n$$R=F[[X,Y]]/(aX^2+bXY+cY^2),\\qquad L=F[Z]/(aZ^2+bZ+c),$$\nwrite $z$ for the class of $Z$ in $L$, and write $x,y$ for the classes of $X,Y$ in $R$. Polynomial rings, power series, and algebra quotients are [def-weil-polynomial-ring, def-weil-pbc-multivariate-power-series, def-weil-pbc-algebra-hom-quotient]. The substitution $x\\mapsto zt$, $y\\mapsto t$ defines an injective $F$-algebra map\n$$j:R\\hookrightarrow L[[t]]$$\nwhose image is exactly $F+tL[[t]]$, where $F$ is embedded by constant series. The ring $R$ is reduced (has no nonzero nilpotents); its total ring of fractions $Q(R)$ is the localization obtained by inverting every non-zero-divisor. The ring $L[[t]]$ is finite as an $R$-module [def-weil-finitely-generated-module], and $j$ identifies it with the integral closure of $R$ in $Q(R)$ [def-weil-pbc-integral-closure]. Under this identification the extension of $(x,y)$ is $tL[[t]]$, and $y=t$ is a non-zero-divisor. All identifications respect the displayed map $j$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, Case I and Case II, with X and Y interchanged in Case II; the common presentation using the separable quadratic algebra includes the split product case."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-integral-closure",
+  "def-sfb-quadratic-formal-curve"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-quadratic-homogeneous-substitution] to $F,a,b,c$. It constructs the specified coefficientwise substitution $j$, proves its injectivity and image $A=F+tB$ for $B=L[[t]]$, and gives $x\\mapsto zt$, $y\\mapsto t$. Put $\\beta=b/a$ and $\\gamma=c/a$; multiplying the polynomial relation by $a^{-1}$ identifies the same coefficient algebra with $F[Z]/(Z^2+\\beta Z+\\gamma)$.",
+   "uses": [
+    "lem-sfb-quadratic-homogeneous-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, Case I and Case II, with X and Y interchanged in Case II; the common presentation using the separable quadratic algebra includes the split product case."
+   }
+  },
+  {
+   "text": "Since $\\beta^2-4\\gamma=(b^2-4ac)/a^2\\ne0$, [lem-sfb-quadratic-series-field-factors] applies to this $L$. It gives $B\\cong\\prod_iD_i$ with each $D_i$ an integrally closed domain, reducedness of $B$, two $A$-module generators $1,z$, integrality over $A$ via the stated monic equation, and regularity of $t$. The injection $j$ makes $R$ reduced; its isomorphism onto $A$ transfers the two module generators to the asserted finite $R$-module structure on $B$.",
+   "uses": [
+    "lem-sfb-quadratic-series-field-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, Case I and Case II, with X and Y interchanged in Case II; the common presentation using the separable quadratic algebra includes the split product case."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-regular-conductor-fraction-normalization] to $A\\subseteq B\\cong\\prod_iD_i$ and the element $t$. There are one or two factors, so the product is nonempty. The first step gives $tB\\subseteq A$, hence $t=t\\cdot1\\in A$; the second gives the domain normality, regularity and integrality hypotheses. Its compatible embedding $k(h)=(th)/t$ identifies $B$ with the integral closure of $A$ in $Q(A)$ and identifies $Q(A)$ with $Q(B)$. Explicitly, the isomorphism $j:R\\to A$ sends regular elements to regular elements, so the inverse fraction map sends $r/s\\in Q(A)$ to $j^{-1}(r)/j^{-1}(s)\\in Q(R)$. Composing with $k$ gives $k_R(h)=j^{-1}(th)/y$, since $j(y)=t$. For $h=j(r)$ this is $(yr)/y=r$ in $Q(R)$; transporting a monic equation coefficient by coefficient along $j$ gives the asserted integral-closure equality inside $Q(R)$ with these specified maps.",
+   "uses": [
+    "lem-sfb-regular-conductor-fraction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, Case I and Case II, with X and Y interchanged in Case II; the common presentation using the separable quadratic algebra includes the split product case."
+   }
+  },
+  {
+   "text": "Finally $(x,y)B=(zt,t)B=tB$: both generators lie in $tB$, and the second generates $tB$. Since $j(y)=t$ and multiplication by $t$ is injective on $B$, injectivity of $j$ implies that multiplication by $y$ is injective on $R$. Thus the ideal extension and non-zero-divisor assertion use this same substitution, completing every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, Case I and Case II, with X and Y interchanged in Case II; the common presentation using the separable quadratic algebra includes the split product case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quadratic-homogeneous-substitution",
+  "lem-sfb-quadratic-series-field-factors",
+  "lem-sfb-regular-conductor-fraction-normalization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A, lemma-2-branches-delta-1, proof of (1) implies (2), Case I and Case II, expanding the displayed normalization calculations with X and Y interchanged in Case II"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Nn]ormali.*(quadra|PowerSeries)|integralClosure.*PowerSeries|PowerSeries.*integralClosure",
+   "results": "{\"t\": \"2026-10-22T04:22:05Z\", \"tool\": \"grep\", \"query\": \"[Nn]ormali.*(quadra|PowerSeries)|integralClosure.*PowerSeries|PowerSeries.*integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Order.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\"], \"digest\": \"34fc05c98c2c8441\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general integral-closure declarations, Weierstrass division and normalization monoids do not give this quadratic-series normalization or its wedge image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure of the complete plane curve ring defined by a separable homogeneous quadratic form",
+   "results": "{\"t\": \"2026-10-22T04:22:05Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure of the complete plane curve ring defined by a separable homogeneous quadratic form\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure\", \"integralClosure.AlgebraIsIntegral\", \"IsIntegralClosure.of_isIntegrallyClosed\", \"integralClosure\", \"IsIntegrallyClosed.instIsIntegralClosure\", \"instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure\", \"instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure\", \"integralClosure.isIntegralClosure\"], \"digest\": \"47266540ebbb8075\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general integral-closure declarations, Weierstrass division and normalization monoids do not give this quadratic-series normalization or its wedge image"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"integralClosure\"",
+   "results": "{\"t\": \"2026-10-22T04:22:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries\\\", \\\"integralClosure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general integral-closure declarations, Weierstrass division and normalization monoids do not give this quadratic-series normalization or its wedge image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The wedge subring F plus t L[[t]] for a separable quadratic algebra L has integral closure L[[t]]",
+   "results": "{\"t\": \"2026-10-22T04:22:16Z\", \"tool\": \"leanfinder\", \"query\": \"The wedge subring F plus t L[[t]] for a separable quadratic algebra L has integral closure L[[t]]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial\", \"FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial\", \"NumberField.RingOfIntegers.instIsIntegralClosure\", \"completeIntegralClosure\", \"NumberField.RingOfIntegers.instIsIntegralClosureInt\", \"FunctionField.ringOfIntegers\", \"NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal\", \"NumberField.RingOfIntegers.extension_algebra_isIntegral\"], \"digest\": \"5b1527c7668b3039\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general integral-closure declarations, Weierstrass division and normalization monoids do not give this quadratic-series normalization or its wedge image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field F and a separable monic quadratic polynomial p the normalization of F[[x,y]] modulo the homogenization of p is (F[z]/p)[[y]], by sending x to zy",
+   "results": "{\"t\": \"2026-10-22T04:22:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a field F and a separable monic quadratic polynomial p the normalization of F[[x,y]] modulo the homogenization of p is (F[z]/p)[[y]], by sending x to zy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis\", \"Polynomial.IsDistinguishedAt.map_eq_X_pow\", \"Polynomial.map_normalize\", \"WeierstrassCurve.Affine.CoordinateRing.norm_smul_basis\", \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"WeierstrassCurve.Affine.CoordinateRing.mk\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"Polynomial.instNormalizationMonoid\"], \"digest\": \"b71d430e4d6aa163\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general integral-closure declarations, Weierstrass division and normalization monoids do not give this quadratic-series normalization or its wedge image"
+  },
+  {
+   "tool": "grep",
+   "query": "quadratic.*(PowerSeries|MvPowerSeries)|integralClosure.*PowerSeries|PowerSeries.*integralClosure",
+   "results": "{\"t\": \"2026-10-22T04:39:04Z\", \"tool\": \"grep\", \"query\": \"quadratic.*(PowerSeries|MvPowerSeries)|integralClosure.*PowerSeries|PowerSeries.*integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization monoids and quadratic-field or Weierstrass-division APIs do not state the explicit quadratic-curve normalization, kernel and wedge image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure normalization of a formal plane curve defined by a nondegenerate homogeneous quadratic polynomial",
+   "results": "{\"t\": \"2026-10-22T04:39:05Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure normalization of a formal plane curve defined by a nondegenerate homogeneous quadratic polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instIsIntegrallyClosedNormalClosure\", \"Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure\", \"Ring.instFiniteNormalClosure_1\", \"instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure\", \"integralClosure.isIntegralClosure\", \"Ring.instFiniteNormalClosure\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\"], \"digest\": \"5883620c561634a7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization monoids and quadratic-field or Weierstrass-division APIs do not state the explicit quadratic-curve normalization, kernel and wedge image"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"integralClosure\"",
+   "results": "{\"t\": \"2026-10-22T04:39:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries\\\", \\\"integralClosure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization monoids and quadratic-field or Weierstrass-division APIs do not state the explicit quadratic-curve normalization, kernel and wedge image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a nondegenerate quadratic plane formal curve is the power series ring over its quadratic root algebra, with image F plus t L[[t]]",
+   "results": "{\"t\": \"2026-10-22T04:39:11Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a nondegenerate quadratic plane formal curve is the power series ring over its quadratic root algebra, with image F plus t L[[t]]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.X_eq_normalizeX\", \"WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.toShortNF_spec\", \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"WeierstrassCurve.Affine.CoordinateRing.YClass\", \"WeierstrassCurve.exists_variableChange_isShortNF\", \"WeierstrassCurve.toCharNeTwoNF_spec\"], \"digest\": \"6e6830ebacd42fc6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization monoids and quadratic-field or Weierstrass-division APIs do not state the explicit quadratic-curve normalization, kernel and wedge image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The subring F plus t times the power series ring of a separable quadratic algebra L has normalization L[[t]]",
+   "results": "{\"t\": \"2026-10-22T04:39:15Z\", \"tool\": \"leanfinder\", \"query\": \"The subring F plus t times the power series ring of a separable quadratic algebra L has normalization L[[t]]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.X_eq_normalizeX\", \"PowerSeries.instNormalizationMonoid\", \"Algebra.IsQuadraticExtension.normal\", \"PowerSeries.IsWeierstrassDivision\", \"QuadraticAlgebra.instField\", \"PowerSeries.IsWeierstrassFactorization\", \"LaurentSeries.powerSeries_ext_subring\", \"PowerSeries.IsWeierstrassDivisor\"], \"digest\": \"7203d5c962a797f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization monoids and quadratic-field or Weierstrass-division APIs do not state the explicit quadratic-curve normalization, kernel and wedge image"
+  },
+  {
+   "tool": "grep",
+   "query": "instField|IsWeierstrassDivision|instNormalizationMonoid",
+   "results": "{\"t\": \"2026-10-22T04:39:53Z\", \"tool\": \"grep\", \"query\": \"instField|IsWeierstrassDivision|instNormalizationMonoid\", \"sub\": \"Algebra/QuadraticAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization monoids and quadratic-field or Weierstrass-division APIs do not state the explicit quadratic-curve normalization, kernel and wedge image"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWeierstrassDivision|instNormalizationMonoid",
+   "results": "{\"t\": \"2026-10-22T04:39:53Z\", \"tool\": \"grep\", \"query\": \"IsWeierstrassDivision|instNormalizationMonoid\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\"], \"digest\": \"c0998d263fd44ead\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization monoids and quadratic-field or Weierstrass-division APIs do not state the explicit quadratic-curve normalization, kernel and wedge image"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-local-tangent-normalization",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Quadratic completed local-ring calculation filling the tangent-Proj/normalization comparison omitted in Stacks 0CBT.",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quadratic-series-integral-closure",
+  "worker": "stage1",
+  "summary": "Repair of L's refused side-completion landing, rebased by the delivery tool onto the current server DAG. Recompared the retained returned item with the current read clone (identical), re-read all three assembly citations and their current definition dependencies, and retained the searched statement-only nodes and complete old-proof allocation. Made the fraction-ring transport in assembly step 3 explicit: r/s maps to j^{-1}(r)/j^{-1}(s), and k_R(h)=j^{-1}(th)/y, with k_R(j(r))=r. The statement and maintainer metadata remain unchanged; current same-tag candidates are distinguished in the report. No Lean written or compiled. Rechecked against the current DAG on 2026-10-23; step 3 now explicitly checks the nonempty product and t in A hypotheses of its cited conductor lemma. Retained search records and all source arguments are unchanged.",
+  "blueprint": "Realizes the quadratic completed local-ring calculation in the existing blueprint.from.place (det-thm-sf-ctf-stability-direct-images proof (3), via the recorded nodal-alteration chain); the ancestor command returns None, as already recorded on the base. Steps 1-5 give the local quadratic model, steps 6-9 its normalization. Whole-blueprint searches quadratic and power series found no equivalent normalization node. This repair allocates returned steps 1-4, 5-7, and 8-9 respectively to the three new nodes, preserving the same local normalization route. New blueprint.from.via prepends this item to its existing chain. The ancestor is still None as in the retained node; no equivalent blueprint node was found.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-normal-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-d7cb95389",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-d7cb95389 (reviewer sub-agent of L); spot-checked: Batch-5 re-split re-delivered after a landing return; the repair note was released 2026-10-22. Live and side-live still hold NQ's nine-step item, and none of the three new ids exists there, so the delivery is not superseded. Against live, the item differs only in proof, proof_deps and split_report; statement and stmt_deps are unchanged. Against the previous PASSed Q127 head 535163a0, the three new nodes are byte-identical. The item changes only in assembly step 3, which now checks two hypotheses of the conductor node explicitly: m∈{1,2} gives a nonempty product, and t=t·1 lies in tB⊆A. Both checks are correct. I re-read everything in full. Allocation: old steps 1-4 go to lem-sfb-quadratic-homogeneous-substitution, 5-7 to lem-sfb-quadratic-series-field-factors, and 8-9 to lem-sfb-regular-conductor-fraction-normalization. All nine old steps are kept verbatim in the report. The elementary pieces (R reduced; (x,y)B=tB and y regular) are explicit in the assembly. The nodes are of comparable size, and the assembly is about 1.95k characters in four steps. All three statements are true. Substitution node: H_n=(q/a)Y^{n-2}U_n(X/Y) for n≥2, and n<2 is handled by independence of 1,z. The image is F+tB, with the explicit preimage. The statement also holds for p=Z². Field-factors node: (r−s)²=β²−4γ+4p(r), also in characteristic 2. The conjugate h'=u−βv−zv gives h²+(βv−2u)h+N=0 with exactly the stated signs. K[[t]] is a DVR. Conductor node: A-regular elements are B-regular with nonzero coordinates; ι is injective; k(b)=tb/t is unique and injective; t/(ts) inverts k(s); integral closure is k(B) coordinatewise. Every assembly hypothesis holds: a≠0, disc/a²≠0, m≥1, t∈A, tB⊆A, t regular, D_i normal, B integral over A. proof_deps equals the union of the step uses. Sources: Stacks curves.tex 0C4A, Cases I/II, read; algebra.tex 0BI0; no SGA. Duplicate search with rg -L (conductor, 0C4A/0BI0, quadratic) read the sc conductor nodes, the trf axes, equal-constant, split-node-component and ordinary-point nodes, the sfb completed-model and separable-completion nodes, and the pbc almost-integral and quadratic-ideal nodes: no duplicate. The substitution node overlaps the item's j clause, but it is the full old steps 1-4 as the note requires, so D1 is accepted. Maintainer notes: tool_uses still lists lem-weil-pbc-power-series-normal-domain, which the assembly no longer cites directly; the stage-2 PowerSeriesNormalDomain import may need an H9 recheck; blueprint.from.node null is inherited from the base. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuadraticSeriesIntegralClosure",
+  "declaration": "QuadraticSeries.integral_closure",
+  "declarations": [
+   "QuadraticSeries.integral_closure"
+  ],
+  "file": "lean/Sheaf/RingTheory/QuadraticSeriesIntegralClosure.lean",
+  "statement": "theorem integral_closure (F : Type u) [Field F] (a b c : F)\n    (ha : a ≠ 0) (hdisc : b ^ 2 - 4 * a * c ≠ 0) :\n    ∃ j : CurveRing a b c →ₐ[F] PowerSeries (CoefficientAlgebra a b c),\n      (∀ (H : MvPowerSeries (Fin 2) F) (n : ℕ),\n        PowerSeries.coeff n (j (Ideal.Quotient.mk (Ideal.span {equation a b c}) H)) =\n          ∑ i ∈ Finset.range (n + 1),\n            algebraMap F (CoefficientAlgebra a b c)\n              (MvPowerSeries.coeff (Finsupp.single 0 i + Finsupp.single 1 (n - i)) H) *\n                AdjoinRoot.root (polynomial a b c) ^ i) ∧\n      j (x a b c) = PowerSeries.C (AdjoinRoot.root (polynomial a b c)) * PowerSeries.X ∧\n      j (y a b c) = PowerSeries.X ∧\n      Function.Injective j ∧\n      (∀ h : PowerSeries (CoefficientAlgebra a b c),\n        (∃ r, j r = h) ↔\n          ∃ d : F, ∃ g : PowerSeries (CoefficientAlgebra a b c),\n            h = PowerSeries.C (algebraMap F (CoefficientAlgebra a b c) d) +\n              PowerSeries.X * g) ∧\n      IsReduced (CurveRing a b c) ∧\n      @Module.Finite (CurveRing a b c) (PowerSeries (CoefficientAlgebra a b c)) _ _\n        (@Algebra.toModule _ _ _ _ j.toRingHom.toAlgebra) ∧\n      Ideal.map j.toRingHom (Ideal.span {x a b c, y a b c}) =\n        Ideal.span {PowerSeries.X} ∧\n      y a b c ∈ nonZeroDivisors (CurveRing a b c) ∧\n      PowerSeries.X ∈ nonZeroDivisors (PowerSeries (CoefficientAlgebra a b c)) ∧\n      ∃ k : PowerSeries (CoefficientAlgebra a b c) →+* FractionRing (CurveRing a b c),\n        Function.Injective k ∧\n        k.comp j.toRingHom = algebraMap (CurveRing a b c) (FractionRing (CurveRing a b c)) ∧\n        (∀ w : FractionRing (CurveRing a b c),\n          w ∈ integralClosure (CurveRing a b c) (FractionRing (CurveRing a b c)) ↔\n            ∃ h : PowerSeries (CoefficientAlgebra a b c), k h = w)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Maintainer return H2/H13, d5db8d844923: move the six plain abbreviations to the definition node def-sfb-quadratic-formal-curve and publicly re-export its module. The old record incorrectly made consumers depend on this theorem solely to use those definitions. The theorem signature and sorry proof are unchanged. stmt_deps gains the definition node as explicitly requested by the maintainer."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-maint-20261025",
+  "group": "NB",
+  "result": "fix",
+  "note": "H2/H13 source-preserving extraction. All six abbreviation declarations and the full normalization theorem/docstring match the prior server source byte for byte. Read Stacks 0C4A Cases I/II and 0CBT(1); supplied consumer and item compile separately. Atomic land_set is required because per-module land.sh falsely sees the temporarily duplicated moved names."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

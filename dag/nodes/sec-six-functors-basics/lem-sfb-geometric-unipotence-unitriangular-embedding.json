@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-geometric-unipotence-unitriangular-embedding",
+ "kind": "statement",
+ "title": "Geometric unipotence gives a unitriangular closed embedding over the base field",
+ "statement": "Let $k$ be a field [def-weil-field], and let $G$ be a smooth [def-sbc-smooth-morphisms] affine group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$. Suppose there exist $m\\geq1$ and a homomorphism $\\rho:G\\to\\operatorname{GL}_{m,k}$ [def-sc-general-linear-group] such that $\\rho(R)$ is injective for every commutative $k$-algebra $R$, and such that for every $g\\in G(\\bar k)$ the matrix $\\rho(g)$ is unipotent: $(\\rho(g)-I_m)^N=0$ for some integer $N\\geq1$. Here $\\bar k$ is an algebraic closure of $k$, and $G(R)$ means the morphisms $\\operatorname{Spec}R\\to G$ over $k$. Then for some $n\\geq1$ there is a homomorphism $i:G\\to\\operatorname{GL}_{n,k}$ that is a closed immersion [def-weil-closed-immersion] and factors through the upper unitriangular closed subgroup scheme $\\mathcal U_n$. Explicitly, $\\mathcal U_n(R)$ consists of matrices $(a_{ij})$ with $a_{ii}=1$ and $a_{ij}=0$ for $i>j$, with matrix multiplication; it is represented by the polynomial algebra $k[x_{ij}:1\\leq i<j\\leq n]$. The factor $G\\to\\mathcal U_n$ is a closed immersion over $k$, not merely after field extension. No perfectness or connectedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.12, printed p.283, and Theorem 14.5(a)⇒(b), printed pp.281–282; Corollary 3.35, printed p.75, for faithfulness as trivial scheme-theoretic kernel."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Set $V=k^m$ and $K=\\bar k$. Apply [lem-sfb-geometric-unipotence-faithful-closed-immersion] to $\\rho:G\\to\\operatorname{GL}_{m,k}$. Both groups are affine of finite type, the target by its presentation $k[x_{ij},D^{-1}]/(D D^{-1}-1)$ in [def-sc-general-linear-group]; injectivity for every commutative $k$-algebra is exactly the hypothesis of the item. Thus $\\rho$ is a closed immersion over $k$. We will construct a basis of this same $V$ making $\\rho$ unitriangular; no new faithful representation is required.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-faithful-closed-immersion",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 3.35, printed p.75; the faithful representation in Theorem 14.5(a)⇒(b), printed p.281."
+   }
+  },
+  {
+   "text": "Construct a flag by induction. Suppose $0=F_0\\subset\\cdots\\subset F_r\\subseteq V$ consists of $k$-subspaces with $\\dim F_j=j$ and $g e_j-e_j\\in R\\otimes_k F_{j-1}$ for every $R$, every $g\\in G(R)$, and chosen basis vectors $e_1,\\ldots,e_r$ of $F_r$. Initially $r=0$. If $r<m$, put $W=V/F_r$, of dimension $d=m-r>0$. This is a rational $G$-representation: extend $e_1,\\ldots,e_r$ to a $k$-basis of $V$; the lower-left block of the action matrix is zero for every $R$, so its lower-right block acts on $R\\otimes_k W$, is invertible (apply the same to $g^{-1}$), and respects multiplication and change of $R$. For $g\\in G(K)$ the equality $(\\rho(g)-I)^N=0$ descends to $(g_W-I)^N=0$ on $K\\otimes_k W$, by applying the quotient map to that equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.2, printed p.280, inductive quotient construction; Proposition 14.3, same page, invariant flags."
+   }
+  },
+  {
+   "text": "The image $H$ of $G(K)$ acting on $K\\otimes_k W$ is a subgroup of $\\operatorname{GL}_d(K)$ after choosing a basis of $W$: products and inverses are images of products and inverses in $G(K)$. Every element of $H$ is unipotent by step 2. Since $d>0$, [lem-sfb-unipotent-matrix-group-fixed-vector] gives a nonzero vector fixed by all of $H$, hence by all of $G(K)$. Apply [lem-sfb-geometric-unipotence-invariant-descent] to this rational $G$-action on $W$. The field, smoothness, affineness and finite-type hypotheses are precisely those on $G$ in the item. Its comparison identifies the pointwise fixed subspace with $K\\otimes_k W^G$ and asserts $W^G\\ne0$. Choose $0\\ne w\\in W^G$ over $k$, and lift it to $e_{r+1}\\in V$.",
+   "uses": [
+    "lem-sfb-unipotent-matrix-group-fixed-vector",
+    "lem-sfb-geometric-unipotence-invariant-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1 and Corollary 14.2, printed pp.279--280; Corollary 4.34, printed p.97, and the descent step of Corollary 14.9, printed p.282."
+   }
+  },
+  {
+   "text": "Put $F_{r+1}=F_r+k e_{r+1}$. Since the image $w$ of $e_{r+1}$ in $W$ is nonzero, $\\dim F_{r+1}=r+1$. For every $R$ and $g\\in G(R)$, invariance of $w$ says that $g e_{r+1}-e_{r+1}$ lies in the kernel of $R\\otimes_k V\\to R\\otimes_k W$, which is $R\\otimes_k F_r$: in the chosen basis this map simply discards the first $r$ coordinates. Thus the induction hypotheses hold for $r+1$. Each iteration increases $r$ by one, and at $r=m$ the vectors $e_1,\\ldots,e_m$ form a $k$-basis of $V$. In this basis all action matrices have diagonal entries $1$ and entries below the diagonal $0$, for every commutative $k$-algebra $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.2, printed p.280, continued to a full basis; Proposition 14.3, same page."
+   }
+  },
+  {
+   "text": "Let $P\\in\\operatorname{GL}_m(k)$ have columns $e_j$, and set $i(g)=P^{-1}\\rho(g)P$. Conjugation and its inverse are morphisms over $k$, since their entries are linear combinations of matrix entries and their determinants equal the original determinant. Hence $i$ is a homomorphism and a closed immersion: on coordinate algebras its map is the surjection $\\rho^*$ precomposed with the conjugation automorphism. Write $A=k[x_{ij},D^{-1}]$ and let $J$ be generated by $x_{ii}-1$ and the $x_{ij}$ for $i>j$. In $A/J$ the determinant is $1$, so $A/J=k[x_{ij}:i<j]$. These equations define $\\mathcal U_m$. They are preserved by products and inverses: for strictly upper triangular $T$, $T^m=0$ (a nonzero product requires a strictly increasing chain of indices), and $(I+T)^{-1}=\\sum_{s=0}^{m-1}(-T)^s$. By step 4 the equations vanish on $i_R(g)$ for every $R,g$; in particular take $R=k[G]$ and the universal point $\\operatorname{id}_{k[G]}$ to get $i^*(J)=0$. The induced map $A/J\\to k[G]$ is still surjective, since $A\\to k[G]$ is. By the affine criterion in [def-weil-closed-immersion], this gives a closed immersion $G\\to\\mathcal U_m$ whose composite into $\\operatorname{GL}_{m,k}$ is $i$. Take $n=m\\geq1$. The construction, including its defining surjection, is over $k$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(a)⇒(b), printed p.281; coordinate presentation of U_n on the same page, with the explicit affine factorization written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-geometric-unipotence-faithful-closed-immersion",
+  "def-sc-general-linear-group",
+  "lem-sfb-unipotent-matrix-group-fixed-vector",
+  "lem-sfb-geometric-unipotence-invariant-descent",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.2 and Proposition 14.3, printed p.280; Theorem 14.5(a)⇒(b), printed p.281; Corollary 14.9, printed p.282 (invariant descent); Corollary 3.35, printed p.75. The supplied faithful representation allows the fixed-vector induction directly on its quotients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unipotent|unitriangular",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are Lie-module weight-space results, abstract matrix subgroups or closed-immersion properties; none embeds a smooth affine group scheme from its unipotent geometric points over an arbitrary field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth affine algebraic group with unipotent geometric points admits a closed immersion into upper unitriangular matrices over the base field",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, LieModule.instIsTriangularizableOfIsAlgClosed, Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, Matrix.SpecialLinearGroup.isEmbedding_mapGL, Matrix.SpecialLinearGroup.isEmbedding_toGL, Matrix.specialUnitaryGroup, Matrix.instGroupSubtypeMemSubmonoidSpecialUnitaryGroup, AlgebraicGeometry.FormallyUnramified.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: these are Lie-module weight-space results, abstract matrix subgroups or closed-immersion properties; none embeds a smooth affine group scheme from its unipotent geometric points over an arbitrary field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\", \"IsTriangularizable\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are Lie-module weight-space results, abstract matrix subgroups or closed-immersion properties; none embeds a smooth affine group scheme from its unipotent geometric points over an arbitrary field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful unipotent representation of an algebraic group is triangularizable over its ground field",
+   "results": "OK 8 hit(s): LieModule.instIsTriangularizableOfIsAlgClosed, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall, LieModule.IsTriangularizable, LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieModule.instIsTriangularizableSubtypeEndMemLieSubalgebraRangeToEnd, LieModule.instIsTriangularizableSubtypeMemLieSubmodule_1, LieModule.instIsTriangularizableSubtypeMemLieSubalgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: these are Lie-module weight-space results, abstract matrix subgroups or closed-immersion properties; none embeds a smooth affine group scheme from its unipotent geometric points over an arbitrary field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine algebraic group with unipotent geometric points admits a closed immersion into upper unitriangular matrices over the base field",
+   "results": "OK 8 hit(s): Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue",
+   "date": "2026-10-23",
+   "verdict": "no match: these are Lie-module weight-space results, abstract matrix subgroups or closed-immersion properties; none embeds a smooth affine group scheme from its unipotent geometric points over an arbitrary field"
+  },
+  {
+   "tool": "grep",
+   "query": "unitriangular|unipotent|triangularizable",
+   "results": "OK 14 hit(s): Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean, Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean, Mathlib/LinearAlgebra/Eigenspace/Pi.lean, Mathlib/LinearAlgebra/Eigenspace/Pi.lean, Mathlib/LinearAlgebra/Eigenspace/Pi.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these are Lie-module weight-space results, abstract matrix subgroups or closed-immersion properties; none embeds a smooth affine group scheme from its unipotent geometric points over an arbitrary field"
+  },
+  {
+   "tool": "grep",
+   "query": "unitriangular|Kolchin|IsUnipotent",
+   "results": "OK 0 hit(s): ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularizability and topological embeddings of special linear groups do not provide a scheme-theoretic unitriangular embedding over the ground field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unipotent matrices in a faithful rational representation of an algebraic group admit a common complete flag over the base field",
+   "results": "OK 8 hit(s): Rep.instInjective, LieModule.instIsTriangularizableOfIsAlgClosed, Rep.instProjective, Module.Basis.toFlag, Matrix.mem_unitaryGroup_iff', Representation.IsIrreducible, Representation.isIrreducible_iff, Matrix.UnitaryGroup.ext; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularizability and topological embeddings of special linear groups do not provide a scheme-theoretic unitriangular embedding over the ground field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Mono\"",
+   "results": "OK 4 hit(s): AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono, AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularizability and topological embeddings of special linear groups do not provide a scheme-theoretic unitriangular embedding over the ground field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful representation of a smooth affine group whose geometric points are unipotent is conjugate over the ground field into upper unitriangular matrices",
+   "results": "OK 8 hit(s): LieModule.instIsFaithfulMatrixForall, RootPairing.GeckConstruction.ωConj_mem_of_mem, LieModule.instIsTriangularizableOfIsAlgClosed, Matrix.GeneralLinearGroup.upperRightHom_apply, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall, Matrix.SpecialLinearGroup.mapGL_inj, Matrix.SpecialLinearGroup.mapGL_injective, Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularizability and topological embeddings of special linear groups do not provide a scheme-theoretic unitriangular embedding over the ground field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unipotent affine algebraic group embeds as a closed subgroup of the group of upper triangular matrices with diagonal entries one over any field",
+   "results": "OK 8 hit(s): Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, Matrix.GeneralLinearGroup.upperRightHom_apply, Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt, Matrix.SpecialLinearGroup.isEmbedding_toGL, Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular, Matrix.SpecialLinearGroup.isEmbedding_mapGL, Matrix.SpecialLinearGroup.fin_two_exists_eq_mk_of_apply_zero_one_eq_zero, Matrix.SpecialLinearGroup.instCoeSubtypeGeneralLinearGroupMemSubgroupGLPos; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularizability and topological embeddings of special linear groups do not provide a scheme-theoretic unitriangular embedding over the ground field"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-unipotent-solvable",
+  "date": "2026-10-23",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Smooth unipotent affine algebraic groups are solvable. Structural input to Milne 14.21: 14.12 and 14.5(b), embedding into upper unitriangular matrices over k before intersecting the standard series.",
+   "via": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing abstract unipotent-matrix fixed-vector node, and exposed geometric invariant comparison and the faithful affine-group closed-immersion criterion as two independent statement-only inputs. Wrote the quotient induction, adapted basis, universal-point equations and surjective coordinate factorization explicitly; n can be the supplied m.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting alteration/GIT chain, specifically the unitriangular input to Milne 14.21. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md: its current (3) assembles direct images along compactification, while the intervening DAG nodes record the alteration/GIT expansion. ancestor returns null for this existing created-node chain, retained with its exact inherited place and via list. Steps 1--5 implement faithful embedding, quotient fixed-vector induction, descent to k, full flag, and the closed unitriangular factor. No change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-9b5970407",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-9b5970407 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all five steps in full, against Milne iAG 2017: Thm 3.34/Cor 3.35 p.75; §4.i, 4.31-4.34 pp.96-97; 1.16/1.17, 1.26(b); 14.1-14.5 and 14.9-14.12 pp.279-283. There is no repair note, so this is not a 2026-10-21 re-split. Item statement text unchanged; only def-weil-algebraic-closure added to stmt_deps. It is true: 14.12 plus 14.5(a)⇒(b). Edge cases checked: m=1, constant Z/p, wound groups over an imperfect k, and smoothness required (μ_p). Step 1: GL_m presentation plus the new faithful node (= Milne 3.35, injective on all R-points ⇔ trivial kernel) gives a closed immersion over k. Step 2: block-triangular quotient action, rational and natural in R; unipotence passes to the quotient for each g with its own exponent. Step 3: lem-sfb-unipotent-matrix-group-fixed-vector, any field, d≥1, applied to the subgroup ρ(G(K)); the invariant-descent node then gives W^G≠0 over k. Step 4: kernel of R⊗V→R⊗W is R⊗F_r, so the flag extends to a full unitriangular basis. Step 5: conjugation by P; A/J=k[x_ij:i<j]; universal point gives i*(J)=0; the surjection A/J→k[G] makes G→U_m a closed immersion over k. Invariant-descent node: true by 4.34, then 1.26(b)/1.17 density of G(K) in G_K, then 4.32. Tested on d=0, trivial action, G_a shear, G_m character; μ_p shows smoothness is needed and it is present. Faithful node tested on the identity, μ_p⊂G_m, and Frobenius of G_a (excluded via k[ε]/ε^p). Duplicate scan: lem-sfb-affine-homomorphism-flat-image (3.34) and lem-sfb-algebraic-group-homomorphism-factorization (5.39) factor maps but do not state 3.35, whose proof (faithfully flat + trivial kernel ⇒ iso) is not elementary. No node states 4.31-4.34. lem-sfb-unipotent-rational-representation-fixed-vector only gives existence over an algebraically closed field. No SGA (the one grep hit is the Mathlib name IsGaloisGroup). Cross-unit citations are definitions only, so no tool_uses. Null blueprint ancestor is inherited from the chain."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricUnipotenceUnitriangularEmbedding",
+  "declaration": "AlgebraicGeometry.geometric_unipotence_unitriangular_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricUnipotenceUnitriangularEmbedding.lean",
+  "statement": "theorem geometric_unipotence_unitriangular_embedding {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [Smooth G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (m : ℕ) (hm : 0 < m) (rho : G ⟶ GeneralLinearGroup (ULift.{u} (Fin m)) k) [IsMonHom rho] (hinj : ∀ (R : Type u) [CommRing R] [Algebra k R], Function.Injective (fun x : (Spec (.of R)).asOver (Spec (.of k)) ⟶ G ↦ x ≫ rho)) (hunip : ∀ x : (Spec (.of (AlgebraicClosure k))).asOver (Spec (.of k)) ⟶ G, ∃ N : ℕ, 0 < N ∧ ((GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin m)) k (AlgebraicClosure k) (x ≫ rho)).val - 1) ^ N = 0) : ∃ n : ℕ, 0 < n ∧ ∃ (U : Grp (Over (Spec (.of k)))) (f : G ⟶ U.X) (j : U.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k), IsMonHom f ∧ IsMonHom j ∧ IsClosedImmersion f.left ∧ IsClosedImmersion j.left ∧ IsClosedImmersion (f ≫ j).left ∧ ∃ e : U.X ≅ (Spec (.of (MvPolynomial {p : Fin n × Fin n // p.1 < p.2} k))).asOver (Spec (.of k)), ∀ (R : Type u) [CommRing R] [Algebra k R] (phi : MvPolynomial {p : Fin n × Fin n // p.1 < p.2} k →ₐ[k] R) (a b : Fin n), (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k R ((Spec.map (CommRingCat.ofHom phi.toRingHom)).asOver (Spec (.of k)) ≫ e.inv ≫ j)).val (ULift.up a) (ULift.up b) = if h : a < b then phi (MvPolynomial.X ⟨(a, b), h⟩) else if a = b then 1 else 0",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a9370836",
+  "group": "Q48",
+  "result": "pass",
+  "note": "First delivery for the item; only the lean record was added and the statement is verbatim. Checked every clause against the node and Milne 14.12/14.5/3.35: field; GrpObj over Spec k; Smooth/IsAffine/LOFT+QC; 0<m; IsMonHom rho into upstream GeneralLinearGroup (Q54 record); hinj over all Type-u k-algebras; hunip on AlgebraicClosure points with point-dependent N>0 via homMulEquiv. Conclusion: 0<n, closed-immersion homomorphisms f, j and f≫j over k, with U pinned as U_n by the chart iso to Spec k[x_ab:a<b] and an entry formula for all R and phi (includes the universal point; j is mono and a homomorphism, so the law is matrix multiplication). Edge cases m=n=1, trivial G, imperfect k, nonreduced or zero R, mu_p excluded by smoothness. No definitions, sorry only, docstrings carry source, blueprint and proof plan. def-weil-algebraic-closure has a null record; Mathlib AlgebraicClosure is the canonical choice, as in landed citers. No findings; no compile since no file changed."
+ }
+}

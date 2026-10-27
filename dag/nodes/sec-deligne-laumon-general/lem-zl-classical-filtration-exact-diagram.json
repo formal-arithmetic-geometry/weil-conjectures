@@ -1,0 +1,140 @@
+{
+ "id": "lem-zl-classical-filtration-exact-diagram",
+ "kind": "statement",
+ "title": "Exact finite-stage realization of a prescribed classical Weil filtration",
+ "statement": "Fix a finite-field datum $D$ with finite field $k_0$ of characteristic $p$ and algebraic closure $k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega:\\operatorname{Type}(u+1)$ of $\\mathbf Q_\\ell$, and a separated finite-type $k_0$-scheme $Y_0$; write $Y=Y_0\\times_{k_0}k$. Let $R$ be any normalized classical realization [def-zl-normalized-classical-weil-realization]. Use the classical Weil category, exact classical and finite-stage filtrations, finite point fibres and normalized local operators of [def-zl-classical-weil-filtration-transport-data, def-zl-classical-local-fibre-comparison]. For $r\\in\\mathbb N$ let $F$ be a prescribed classical filtration of length $r$. There exist a finite coefficient field $E\\subset\\Omega$, an exact finite-stage Weil filtration $M$ over $E$, and Weil isomorphisms $a_j:M_j\\otimes_E\\Omega\\simeq R(F_j)$ and $b_j:Q_j\\otimes_E\\Omega\\simeq R(S_j)$. The isomorphisms intertwine the specified inclusion and quotient maps after the actual coefficient inclusion. The initial realized term $R(F_0)$ is zero, and every $R(F_j)\\to R(F_{j+1})\\to R(S_j)$ is short exact in the common-stage Weil heart. This asserts no local-operator comparison or purity. Include $r=0$, zero rank and the empty scheme.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 1: the actual Weil filtration and its local purity; Bhatt--Scholze Section 6.8, especially 6.8.4(1),(4), 6.8.14(2), 6.8.15."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-normalized-classical-weil-realization",
+  "def-zl-classical-weil-filtration-transport-data",
+  "def-zl-classical-local-fibre-comparison"
+ ],
+ "proof": [
+  {
+   "text": "To use the currently small-coefficient two-fibre API, choose an algebraic closure of Q_l in the scheme universe, use its algebraic-closure equivalence with Omega and transport finite subfields and tensor fibre comparisons along it; the finite-level germ/unit formulas are preserved. 1. Use classical_finite_weil_diagram_realization for vertices Fin(r+1) + Fin r and\narrows the prescribed inclusions and quotient maps. Its finite expression equations\ninclude each zero composite. Their classical validity follows from fibre exactness.\nThe normalized stages, inverse Weil maps and equivariance are for the supplied R.",
+   "uses": [
+    "lem-zl-classical-finite-weil-diagram-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. The normalized_two_fibre_comparison identifies the H^0 normalized point fibres\nof each realized arrow with its actual classical adic fibre. Transport injectivity,\nexactness and surjectivity along these natural isomorphisms using F.exact. Transport\nthe zero fibre condition using F.zero. No integral lattice exactness is required.",
+   "uses": [
+    "lem-zl-classical-normalized-two-fibre-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Apply simultaneous_exactness to the resulting finite quiver presentation and\nshort complexes. It supplies one coefficient field and exact finite-stage models,\nincluding inverse Weil maps and the original common-stage Hom classes. The same\nfibre criterion identifies the initial object with zero, in both hearts. Lift this\nidentification to the Weil heart; its unique maps are automatically equivariant.",
+   "uses": [
+    "lem-zl-lisse-short-complex-common-stage-exactness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "4. Compose the diagram's Weil comparisons with the prescribed classical vertex\nisomorphisms. Naturality gives the two displayed arrow equations. Project the heart\nmembership and short exactness fields to the raw finite heart. For r=0 the arrow\nfamily is empty and only the zero vertex remains; empty Y and rank zero use the\nzero lattice, with no choice of a nonzero vector or geometric point.",
+   "uses": [
+    "lem-zl-classical-finite-weil-diagram-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-classical-finite-weil-diagram-realization",
+  "lem-zl-classical-normalized-two-fibre-comparison",
+  "lem-zl-lisse-short-complex-common-stage-exactness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, assembly of the existing normalized realization interfaces for blueprint real-mixed-by-curves paragraph 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Realize the terms and arrows of a classical lisse Weil filtration at a single finite coefficient field with exact sequences in the constructible heart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Field.Emb.Cardinal.iSup_filtration\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [inst_3 : Algebra.IsAlgebraic F E]\\n  {i : WithTop (Module.rank F E).ord.ToType},\\n  Order.IsSuccPrelimit i → ⨆ j, Field.Emb.Cardinal.filtration ↑j = Field.Emb\", \"doc\": \"For any ordinal $i$, the supremum of the filtration over all ordinals $j < i$ is equal to the filtration at $i$, i.e., $\\\\bigvee_{j < i} \\\\text{filtration}(j) = \\\\text{filtration}(i)$. This equality hold\"}\n  {\"name\": \"WittVector.StandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) → [Fact (Nat.Prime p)] → (k : Type u_1) → [CommRing k] → ℤ → Type u_1\", \"doc\": \"The standard one-dimensional isocrystal associated with a prime $ p $ and a field $ k $ of characteristic $ p $, constructed as the field of fractions of the Witt vectors over $ k $.\"}\n  {\"name\": \"Field.Emb.Cardinal.filtration_apply\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [inst_3 : Algebra.IsAlgebraic F E]\\n  (i : WithTop (Module.rank F E).ord.ToType),\\n  Field.Emb.Cardinal.filtration i =\\n    WithTop.recTopCoe ⊤\\n      (fun x =>\\n\", \"doc\": \"For each ordinal $i$ extended with a top element, the filtration at $i$ is defined as the intermediate field generated by all basis elements indexed by ordinals strictly less than $i$. This constructi\"}\n  {\"name\": \"Field.Emb.Cardinal.directed_filtration\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [inst_3 : Algebra.IsAlgebraic F E]\\n  {i : WithTop (Module.rank F E).ord.ToType}, Directed (fun x1 x2 => x1 ≤ x2) fun j => Field.Emb.Cardinal.filtration ↑j\", \"doc\": \"The family of intermediate fields $ (\\\\text{filtration}(j))_{j < i} $, indexed by ordinals less than $ i $, forms a directed set under inclusion. This means that for any two ordinals $ j, k < i $, ther\"}\n  {\"name\": \"Field.Emb.Cardinal.filtration\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"{F : Type u} →\\n  {E : Type v} →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] →\\n            [Algebra.IsAlgebraic F E] → WithTop (Module.rank F E).ord.ToType ↪o IntermediateField F E\", \"doc\": \"An order embedding from the ordinals extended with a top element into the complete lattice of intermediate fields between $ F $ and $ E $, where each ordinal $ i $ maps to the intermediate field gener\"}\n  {\"name\": \"Field.Emb.Cardinal.filtration_succ\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [inst_3 : Algebra.IsAlgebraic F E]\\n  (i : (Module.rank F E).ord.ToType),\\n  IntermediateField.adjoin F\\n      (⇑(Field.Emb.Cardinal.wellOrderedBasis F E) ∘ Fie\", \"doc\": \"For any ordinal $i$, the filtration of the field extension $E$ at the successor ordinal $i^+$ is equal to the field obtained by adjoining the basis element $b(\\\\phi(i))$ to the filtration $E_{<i}$ and \"}\n  {\"name\": \"Field.Emb.Cardinal.embFunctor\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"(F : Type u) →\\n  (E : Type v) →\\n    [inst : Field F] →\\n      [inst_1 : Field E] →\\n        [inst_2 : Algebra F E] →\\n          [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] →\\n            [inst_3 : Algebra.IsAlgebraic F E] →\\n              ⦃i j : WithTop (Module.rank F E).ord.ToType⦄ →\\n         \", \"doc\": \"Given ordinals $i,j$ extended with a top element satisfying $i \\\\leq j$, and an $F$-algebra homomorphism $f:E_{<j} \\\\to \\\\overline{E}$, this constructs the composition of $f$ with the canonical inclusion\"}\n  {\"name\": \"Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [inst_3 : Algebra.IsAlgebraic F E],\\n  InverseSystem (Field.Emb.Cardinal.embFunctor F E)\", \"doc\": \"There exists an inverse system of field embeddings between intermediate fields in the algebraic closure of $ F $ within $ E $, indexed by ordinals extended with a top element. This system is construct\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: hits concern general sheaves, fibres or linear algebra, not the normalized classical/sf comparison required here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize a finite diagram of lisse adic sheaves with exact sequences in the constructible heart over one finite coefficient field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasFiniteLimits A] [HasSheafify J A] [HasColimitsOfShape K A] [HasExactColimitsOfShape K A] :\\n  HasExactColimitsOfShape K (Sheaf J A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite limits, a sheafification functor for a Grothendieck topology $J$, colimits of shape $K$, and exact colimits of shape $K$, then the category of sheaves on $J$ wit\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasFiniteColimits A] [HasLimitsOfShape K A] [HasExactLimitsOfShape K A]\\n  [PreservesFiniteColimits (sheafToPresheaf J A)] : HasExactLimitsOfShape K (Sheaf J A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite colimits, all limits of shape $K$, exact limits of shape $K$, and the inclusion functor from sheaves to presheaves preserves finite colimits, then the category o\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasFiniteLimits\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"[HasFiniteLimits D] : HasFiniteLimits (Sheaf J D)\", \"doc\": \"If a category $\\\\mathcal{D}$ has finite limits, then the category of sheaves on a site $(\\\\mathcal{C}, J)$ with values in $\\\\mathcal{D}$ also has finite limits. This instance asserts that the category of\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondSet.{u})\\n  (h : ∀ S : LightProfinite.{u}, IsColimit <| X.val.mapCocone (coconeRightOpOfCone S.asLimitCone)) :\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n  {\"name\": \"instHasLimitsCondensedSet\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \": HasLimits CondensedSet.{u}\", \"doc\": \"The category of condensed sets admits all limits, meaning that for every diagram indexed by a category of the same size as the category of condensed sets, the limit of the diagram exists within the ca\"}\n  {\"name\": \"instHasLimitsOfShapeCondensed\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A J : Type*} [Category* A] [Category* J] [HasLimitsOfShape J A] : HasLimitsOfShape J (Condensed.{u} A)\", \"doc\": \"For any category $ \\\\mathcal{A} $ and any diagram shape $ \\\\mathcal{J} $, if $ \\\\mathcal{A} $ has all limits of shape $ \\\\mathcal{J} $, then the category of condensed objects over $ \\\\mathcal{A} $, defined\"}\n  {\"name\": \"LightCondensed\", \"module\": \"Mathlib.Condensed.Light.Basic\", \"type\": \"(C : Type w) [Category.{v} C]\", \"doc\": \"The category of sheaves on the category of light profinite spaces equipped with the coherent Grothendieck topology, taking values in the category $ \\\\mathcal{C} $.\"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: hits concern general sheaves, fibres or linear algebra, not the normalized classical/sf comparison required here."
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|Frobenius|ShortExact",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/GaussSum.lean\", \"line\": \"233\", \"text\": \"### Gauss sums and Frobenius\"}\n  {\"file\": \"Mathlib/NumberTheory/GaussSum.lean\", \"line\": \"247\", \"text\": \"  rw [← frobenius_def, gaussSum, gaussSum, map_sum]\"}\n  {\"file\": \"Mathlib/NumberTheory/GaussSum.lean\", \"line\": \"248\", \"text\": \"  simp_rw [pow_apply' χ fp.1.ne_zero, map_mul, frobenius_def]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"line\": \"36\", \"text\": \"  decomposition group of `P` is the cyclic subgroup of `(ℤ/nℤ)ˣ` generated by the Frobenius\"}\n  {\"file\": \"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"line\": \"11\", \"text\": \"# Frobenius Number\"}\n  {\"file\": \"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"line\": \"13\", \"text\": \"In this file we first define a predicate for Frobenius numbers, then solve the 2-variable variant\"}\n  {\"file\": \"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"line\": \"14\", \"text\": \"of this problem. We also show the Frobenius number exists for any set of coprime natural numbers\"}\n  {\"file\": \"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"line\": \"20\", \"text\": \"Given a finite set of relatively prime integers all greater than 1, their Frobenius number is the\"}\n  {\"file\": \"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"line\": \"22\", \"text\": \"integers. Here we show the Frobenius number of two relatively prime integers `m` and `n` greater\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"20\", \"text\": \"  if its absolute Frobenius map `x ↦ xᵖ` is bijective.\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"45\", \"text\": \"  /-- A ring is perfect if the Frobenius map is bijective. -/\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"46\", \"text\": \"  bijective_frobenius : Bijective fun x : R ↦ x ^ p\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"59\", \"text\": \"  ⟨by simp_rw [pow_mul]; exact PerfectRing.bijective_frobenius.comp PerfectRing.bijective_frobenius⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"69\", \"text\": \"  .ofBijective (powMonoidHom p) PerfectRing.bijective_frobenius\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"line\": \"230\", \"text\": \"    ← (bijective_frobeniusAlgEquivOfAlgebraic_pow K K').prod_comp, AlgEquiv.coe_pow,\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"line\": \"231\", \"text\": \"    coe_frobeniusAlgEquivOfAlgebraic, pow_iterate, Finset.prod_pow_eq_pow_sum,\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"line\": \"34\", \"text\": \"-- with a `k`-algebra structure given by the frobenius map.\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"line\": \"41\", \"text\": \"noncomputable instance : Algebra k (AdjoinPthRoots k) := (frobenius k (ringExpChar k)).toAlgebra\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Polynomial.lean\", \"line\": \"30\", \"text\": \"section frobenius\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Polynomial.lean\", \"line\": \"34\", \"text\": \"theorem frobenius_zmod (f : MvPolynomial σ (ZMod p)) : frobenius _ p f = expand p f := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Polynomial.lean\", \"line\": \"36\", \"text\": \"  · intro a; rw [expand_C, frobenius_def, ← C_pow, ZMod.pow_card]\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Polynomial.lean\", \"line\": \"39\", \"text\": \"    intro _ _ hf; rw [hf, frobenius_def]\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Polynomial.lean\", \"line\": \"42\", \"text\": \"  (frobenius_zmod _).symm\"}\n  {\"file\": \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"line\": \"121\", \"text\": \"theorem pNilradical_eq_bot_of_frobenius_inj (R : Type*) [CommSemiring R] (p : ℕ) [ExpChar R p]\"}\n  {\"file\": \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"line\": \"122\", \"text\": \"    (h : Function.Injective (frobenius R p)) : pNilradical R p = ⊥ := bot_unique fun x ↦ by\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: hits concern general sheaves, fibres or linear algebra, not the normalized classical/sf comparison required here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClassicalWeilFiltrationHeartTransport",
+  "date": "2026-10-25",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, \"The actual Weil filtration ... now proves that G is mixed\": Exact finite-stage realization of a prescribed classical Weil filtration",
+   "via": [
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClassicalFiltrationExactDiagram",
+  "file": "lean/Sheaf/Paper/ClassicalFiltrationExactDiagram.lean",
+  "declaration": "WeilConjectures.zl_classical_filtration_exact_diagram",
+  "statement": "theorem zl_classical_filtration_exact_diagram\n    (R : ZlClassicalRealization D l hl Ω Y₀)\n    (r : ℕ) (F : ZlClassicalFiltration D l Ω Y₀ r) :\n    ∃ (E : Padic.FiniteCoefficientFields l Ω)\n      (M : ZlFiniteFiltration D l hl Ω Y₀ r E)\n      (a : ∀ j : Fin (r + 1), sfWeilStageObject D l hl Y₀ Ω E (M.terms j) ≅\n        ((R.weil D l hl Ω Y₀).obj (F.terms j)).obj)\n      (b : ∀ j : Fin r, sfWeilStageObject D l hl Y₀ Ω E (M.quotients j) ≅\n        ((R.weil D l hl Ω Y₀).obj (F.quotients j)).obj),\n      (∀ j : Fin r,\n        (GeneralAlgebraicallyClosedCoefficients.inclusion E).map\n            (M.inclusion j).hom.f ≫ (a j.succ).hom.hom.f =\n          (a j.castSucc).hom.hom.f ≫\n            ((R.weil D l hl Ω Y₀).map (F.inclusion j)).hom.hom.f) ∧\n      (∀ j : Fin r,\n        (GeneralAlgebraicallyClosedCoefficients.inclusion E).map\n            (M.quotient j).hom.f ≫ (b j).hom.hom.f =\n          (a j.succ).hom.hom.f ≫\n            ((R.weil D l hl Ω Y₀).map (F.quotient j)).hom.hom.f) ∧\n      IsZero ((R.weil D l hl Ω Y₀).obj (F.terms 0)) ∧\n      (∀ j : Fin r, ∃ h :\n        (R.weil D l hl Ω Y₀).map (F.inclusion j) ≫\n          (R.weil D l hl Ω Y₀).map (F.quotient j) = 0,\n        (ShortComplex.mk _ _ h).ShortExact)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-113fb",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T101350-L-3687274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-113fb",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T101350-L-3687274",
+  "kind": "interface",
+  "note": "independent cc review: item proof (exact_diagram + diagram_fibres + punctual_purity assembly) and 4 new nodes against node statements; TransportData decls byte-diffed against published module; both direct importers compiled"
+ }
+}

@@ -1,0 +1,599 @@
+{
+ "id": "lem-sfb-section-ideal-proj-expansion",
+ "kind": "statement",
+ "title": "Expansion from the dual ideal of an arbitrary section",
+ "statement": "Let $T$ be any scheme [def-pc-scheme] and $\\pi:X\\to T$ a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism], finitely presented [def-sbc-locally-finite-presentation] family with nonempty connected reduced nodal geometric fibres of pure dimension one [def-trf-nodal-geometric-fibres], of arithmetic genus $g\\geq2$ (meaning $\\dim_\\Omega H^1(X_\\Omega,\\mathcal O)=g$). Let $s_1,\\ldots,s_r$ be disjoint smooth sections and let $\\Delta:T\\to X$ be any further section, not required to be smooth or disjoint. Put $D=\\sum_i s_i(T)$, $\\mathcal J=\\ker(\\mathcal O_X\\to\\Delta_*\\mathcal O_T)$ and $\\mathcal J^\\vee=\\mathcal Hom_{\\mathcal O_X}(\\mathcal J,\\mathcal O_X)$. The Cartier divisor module $\\mathcal O_X(D)$ uses [def-pc-divisor-line-bundle]. Define the quasi-coherent module $\\mathcal K$ by the exact sequence $0\\to\\mathcal O_X\\xrightarrow{u\\mapsto(u,u)}\\mathcal J^\\vee\\oplus\\mathcal O_X(D)\\to\\mathcal K\\to0$, where the first component is multiplication on $\\mathcal J$ and the second is the divisor inclusion. Then $\\mathcal K$ is finitely presented; formation of this sequence, including the dual ideal and the two inclusions, commutes with arbitrary base change on $T$. Set $p:Z=\\operatorname{Proj}_X(\\operatorname{Sym}\\mathcal K)\\to X$, using [def-nagata-relative-proj] and the symmetric algebra of [def-trf-canonical-symmetric-graded-algebra]. The two quotient maps from $\\mathcal K$ to the cokernels of its two summands restrict to invertible quotients on the old sections and on $\\Delta$, respectively. They define unique canonical lifts $t_i:T\\to Z$ of $s_i$ and $t:T\\to Z$ of $\\Delta$. The composite $Z\\to T$ is proper, flat and finitely presented, with connected reduced nodal geometric fibres of pure dimension one and arithmetic genus $g$, and $t_1,\\ldots,t_r,t$ are pairwise disjoint smooth sections. In each geometric fibre, if $\\Delta$ is smooth and distinct from every $s_i$, $p$ is the identity; if $\\Delta=s_i$, $p$ replaces that point by a rational tail carrying $t_i,t$ and its single attachment; if $\\Delta$ is a node, $p$ inserts a rational bridge carrying $t$ and attached at the two branches. In the last two cases the inserted component is $\\mathbf P^1$ and $p$ is an isomorphism off that component. All other markings, components and their special points are unchanged, with a colliding marking or branch replaced on an old component by its attachment to the new component. These constructions and lifts are canonical under arbitrary base change and under isomorphisms preserving the ordered old sections and $\\Delta$.",
+ "source": {
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 2, Lemma 2.2, Definition 2.3 and Theorem 2.4 (printed pp.175--178); corrected local algebra and flatness proof in Knudsen, A closer look at the stacks of stable pointed curves, arXiv:1106.1588, Main Lemma and Sections 3--5. Local PDF WANTED; primary-author scan consulted online.",
+  "url": "https://www.dam.brown.edu/people/mumford/alg_geom/papers/1976b--DetDiv%2BKnudsenSequel-GT.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-nodal-geometric-fibres",
+  "def-pc-divisor-line-bundle",
+  "def-nagata-relative-proj",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-sfb-stable-pointed-curve",
+  "def-weil-pure-dimension",
+  "def-pc-genus",
+  "def-per-projective-bundle-quotient-data"
+ ],
+ "proof": [
+  {
+   "text": "We work locally over $T$ and etale locally on $X$. At a singular point on $\\Delta$, apply [lem-trf-nodal-family-etale-local-model]. Its hypotheses hold: $\\pi$ is flat and locally finitely presented and every geometric fibre is pure one-dimensional with ordinary double points. It gives an etale base neighbourhood and an etale source neighbourhood mapping etale to $\\operatorname{Spec}A[x,y]/(xy-h)$. Pull the source neighbourhood back by $\\Delta$ and use that etale base change as the new base. The tautological point of this pullback lifts $\\Delta$ to the source chart. Evaluating the two coordinates on that lift gives $a,b\\in A$ with $h=ab$. We may take affine neighbourhoods throughout, so that the etale map to the affine nodal chart is separated.",
+   "uses": [
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "The inverse image in the source chart of the section $(x,y)=(a,b)$ of the nodal chart is etale and separated over the new base and contains the chosen section. By [lem-weil-pbc-etale-section-clopen-immersion] that section is an open and closed component of this inverse image. Do this for both the inverse image of the model section and the inverse image of the original section of $X$. Both inverse images are closed, separated etale schemes over the new base, and the same chosen section is clopen in each. Remove both closed complementary components and refine by affines, shrinking the base around the chosen point when necessary. The resulting chart has section ideal exactly $(x-a,y-b)C$, where $R=A[x,y]/(xy-ab)\\to C$ is etale. At a smooth point, [lem-sc-smooth-section-affine-coordinates], with relative dimension one, gives a coordinate $z$ for which the section ideal is $(z)$ and $z$ is a non-zero-divisor. Near a collision use this coordinate for the old section, put $c=\\Delta^*z$, and perform the same removal for the section $z=c$; its ideal is $(z-c)$. These refinements are made only near the point in question. Here the original section is closed by [lem-weil-pbc-section-separated-closed-immersion], using separatedness of $\\pi$; smoothness of $\\pi$ at a smooth fibre point is [lem-trf-smooth-at-point-fibre-criterion].",
+   "uses": [
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-sc-smooth-section-affine-coordinates",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-node-section-dual-presentation] to the nodal charts in Steps 1--2; the flat-extension clause applies to $R\\to C$ by [lem-weil-pbc-etale-algebra-flat]. It identifies $\\mathcal J^\\vee$ with the presented module on generators $\\mathbf1,e$ and relations $a\\mathbf1+(x-a)e=0$, $-y\\mathbf1+(y-b)e=0$. In particular the multiplication map $\\mathcal O_X\\to\\mathcal J^\\vee$ is injective, its quotient is a line on the section, and the dual and multiplication map commute with every coefficient change. On a smooth section the corresponding statements are the direct formulas $\\mathcal J=(z)$, $\\mathcal J^\\vee=z^{-1}\\mathcal O_X$, with quotient $z^{-1}\\mathcal O_X/\\mathcal O_X\\simeq\\mathcal O_T$. Off the section $\\mathcal J=\\mathcal O_X$. Thus $\\Delta^*(\\mathcal J^\\vee/\\mathcal O_X)$ is invertible.",
+   "uses": [
+    "lem-sfb-split-node-section-dual-presentation",
+    "lem-weil-pbc-etale-algebra-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "First descend finite presentation of $\\mathcal J$, before identifying pullbacks of its dual: its pulled ideal is finitely presented in Steps 2--3. On each affine open refine the etale chart covering to a finite affine covering by [new-etale-finite-affine-cech-basis]. The product of its chart algebras is faithfully flat by the first assertion of [lem-sc-etale-standard-cover-cech]; apply [lem-trf-finite-presentation-module-descent-flat-local]. Now a finite presentation of $\\mathcal J$ expresses its Hom into $\\mathcal O_X$ as the kernel of a finite matrix. Flat tensor preserves this kernel, so the chart duals in Step 3 are indeed the pullbacks of $\\mathcal J^\\vee$, which is quasi-coherent by the same matrix calculation on affine localizations. Descend finite presentation of this dual by the same module-descent lemma. Exactness and isomorphisms are reflected by tensor with the faithfully flat product, directly by the complex test in [def-weil-pbc-faithfully-flat-ring-map]. Applying this after any $T'\\to T$, the coefficient-change and flat-extension clauses of Step 3 identify the chart comparisons for the ideal, dual and multiplication map. Their comparison downstairs is therefore an isomorphism too. No flatness of $T'\\to T$ is used.",
+   "uses": [
+    "lem-trf-finite-presentation-module-descent-flat-local",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "new-etale-finite-affine-cech-basis",
+    "lem-sc-etale-standard-cover-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "Properness makes $\\pi$ separated, so [lem-weil-pbc-section-separated-closed-immersion] makes each section a closed immersion. Each old section is, in the centred smooth charts, cut out by a non-zero-divisor coordinate. The disjoint union divisor $D$ therefore has dual ideal $\\mathcal O_X(D)$ as in [def-pc-divisor-line-bundle], with its divisor inclusion; the coordinate stays regular after any change of base because the smooth chart is etale over $A[z]$. Consequently $\\mathcal O_X\\to\\mathcal J^\\vee\\oplus\\mathcal O_X(D)$ is injective, even after any base change. Its cokernel $\\mathcal K$ is quasi-coherent and finitely presented: locally it has the finite presentation for the dual, one extra free generator for the divisor module, and the one diagonal relation. Cokernels commute with tensor products, so Step 4 and these coordinate inclusions prove arbitrary base-change compatibility of the full sequence.",
+   "uses": [
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "Quotienting $\\mathcal K$ by the image of $\\mathcal J^\\vee$ leaves $\\mathcal L_s=\\mathcal O_X(D)/\\mathcal O_X$, and quotienting by the image of $\\mathcal O_X(D)$ leaves $\\mathcal L_\\Delta=\\mathcal J^\\vee/\\mathcal O_X$. On $s_i$, the first quotient is a line: in a local equation $z=0$ for that section it is $z^{-1}\\mathcal O_X/\\mathcal O_X$, and disjointness removes all other divisor factors. On $\\Delta$ the second quotient is a line by Steps 3--4. Right exactness of pullback gives the surjections from $s_i^*\\mathcal K$ and $\\Delta^*\\mathcal K$. Apply [lem-trf-projective-bundle-quotient-geometry] to obtain the unique maps $t_i,t$ classifying these specified invertible quotients. This uniqueness is relative to the quotients, and does not assert that all lifts of the old section are unique.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "The same quotient theorem proves that $\\mathbf P_X(L)\\to X$ is an isomorphism for every invertible module $L$: over any $X$-scheme the surjective map between the two line modules is an isomorphism, leaving just one quotient class. Away from intersections of $\\Delta$ with an old marking or with a singular fibre point, one of the diagonal summands is a unit inclusion, or both divisor modules are invertible with disjoint supports. Eliminating that summand makes $\\mathcal K$ invertible. Thus $p$ is an isomorphism on this open locus; in particular all unchanged markings and fibre components are carried identically there.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "Consider a smooth collision with the old marking $s_i$. Use the coordinate of Step 2, with $s_i:z=0$, $\\Delta:z=c$, and no other old marking in the chart. In bases $(z-c)^{-1}$ and $z^{-1}$ the diagonal map has components $(z-c,z)$, so $\\mathcal K$ has one relation $(z-c)U+zV=0$. By [lem-weil-pbc-symmetric-algebra-universal-property] its symmetric algebra is the polynomial algebra on $U,V$ modulo this homogeneous linear relation. The chart $U\\ne0$, with $v=V/U$ and $w=1+v$, is $A[z,w]/(zw-c)$. The chart $V\\ne0$, with $u=U/V$, has equation $z(u+1)=cu$. Its open $u\\ne0$ is already in the first chart; on $u+1\\ne0$ it is $A[u,(u+1)^{-1}]$, with $z=cu/(u+1)$. These identifications are preserved by the etale base change to the actual source chart.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "In a nodal chart no old marking meets the node, so trivialize the old divisor inclusion as $\\mathcal O\\xrightarrow{1}\\mathcal O$ and eliminate its generator. Then $\\mathcal K\\simeq M$ and the presentation of [lem-sfb-split-node-section-dual-presentation] gives $\\operatorname{Sym}_R M=R[U,V]/(aU+(x-a)V,-yU+(y-b)V)$, with $U$ corresponding to $\\mathbf1$ and $V$ to $e$. This algebra identification follows by assigning the two generators to an arbitrary commutative algebra and imposing the two relations, using [lem-weil-pbc-symmetric-algebra-universal-property]. On $V\\ne0$, put $w=1-U/V$; eliminate $x=aw$ to get $A[y,w]/(yw-b)$. On $U\\ne0$, put $v=V/U$; the equations are $xv=a(v-1)$ and $y(v-1)=bv$. The opens $v\\ne0$ and $v-1\\ne0$ cover this chart; the first is already in $V\\ne0$. On the second put $q=x-a$ and eliminate $y=bv/(v-1)$, obtaining $A[q,v,(v-1)^{-1}]/(qv+a)$.",
+   "uses": [
+    "lem-sfb-split-node-section-dual-presentation",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "For any ring $A$ and $d\\in A$, the algebra $A[r,s]/(rs-d)$ is free over $A$ with basis $1,r,r^2,\\ldots,s,s^2,\\ldots$: repeatedly replace $rs$ by $d$ to get the normal form; a nonzero multiple $(rs-d)F$ has leading monomial divisible by $rs$ (order by total degree and then lexicographically), so no nonzero linear combination of the indicated monomials belongs to the ideal. Hence those charts are flat, as are polynomial charts and their localizations: tensoring a free module is a direct sum of copies of the original injection, and localization preserves injections by the fraction zero test. Steps 8--9 therefore give flatness over $A$ in every model, with no reducedness or Noetherian assumption on $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "The actual chart rings are etale over the models, so their local rings are flat over the model local rings by [lem-weil-pbc-etale-algebra-flat]; compose flat maps by [lem-pc-flat-compose]. At a point of $Z$, choose such a lifted etale chart. Its local ring is faithfully flat over the original local ring by [lem-weil-pbc-flat-local-hom-faithfully-flat]. It is flat over the original base local ring: Step 10 gives flatness over the etale base neighbourhood, whose map to the base is also flat. Apply [lem-weil-pbc-flat-algebra-faithfully-flat-descent] to the tower from the original base local ring to the original source local ring to this chart local ring. Thus $Z\\to T$ is flat everywhere. Off the modified locus it is the given flat family.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-pc-flat-compose",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+    "lem-weil-pbc-flat-local-ring-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "Since $\\mathcal K$ is finite type, $p$ is projective in the projective-bundle sense (use the identity closed embedding in its own projective bundle). Thus [lem-trf-projective-bundle-proper] makes $p$ proper, and [lem-weil-pbc-proper-composition] makes $Z\\to T$ proper. Locally a finite presentation of $\\mathcal K$ realizes $Z$ in a finite projective space by finitely many homogeneous linear relations. On its finitely many standard opens the coordinate algebras have finite presentations over the affine base; hence $p$ is locally finitely presented. Compose affine presentations using [lem-weil-pbc-finite-presentation-base-change-composition], part (2), and use properness for quasi-compactness and quasi-separatedness. This proves finite presentation of $Z\\to T$.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "All fibre computations may now be made after arbitrary algebraically closed base change. If the new point is smooth and distinct from the old markings, Step 7 applies everywhere and $p$ is the identity. At a smooth collision put $c=0$ in Step 8: the equation is $z(U+V)=0$. It is the union of the old branch $U+V=0$ and the projective line $z=0$, meeting once and transversely, at $[U:V]=[1:-1]$. The old quotient is $[0:1]$ and the new quotient is $[1:0]$, both smooth points of the inserted line and distinct from the attachment, also in characteristic two. The local equation at the attachment is $zw=0$, so there is precisely a rational tail, with all other points unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "At a nodal new point put $a=b=0$ in Step 9. The exceptional fibre over $x=y=0$ is the whole $\\mathbf P^1$ with coordinates $[U:V]$. In the $U\\ne0$ chart its two attachment points have $v=0$ and $v=1$: the equations are $xv=0$, $y(v-1)=0$. Near $v=0$, $v-1$ is a unit, so $y=0$ and the completed local equation is $xv=0$; near $v=1$, $v$ is a unit, so $x=0$ and the equation is $y(v-1)=0$. These are the two old branches. The new quotient $M\\to A$ sends $\\mathbf1\\mapsto0$, $e\\mapsto1$, so its point is $[0:1]$, different from both attachments. In the $V\\ne0$ chart this point has $w=1$, where $yw=0$ is smooth along the inserted line. Thus a bridge, with two transverse attachments and no other modification, has been inserted; this also treats the two branches of a self-node on one component.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "The preceding geometric descriptions show that every fibre is reduced and nodal of pure dimension one, is nonempty, and is connected: replacing a point in the connected old fibre by a connected tail or by a bridge joining its two branches cannot disconnect it. The sections are pairwise disjoint on every geometric fibre, by Steps 13--14 and disjointness of the old markings; hence their images are disjoint on $Z$. At each section the fibre is smooth, so [lem-trf-smooth-at-point-fibre-criterion] applies, using flatness from Step 11 and local finite presentation from Step 12. The sections therefore lie in the relative smooth locus.",
+   "uses": [
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "For a geometric fibre, [lem-trf-reduced-curve-normalization-genus] supplies the smooth proper connected normalizations of its irreducible components. Use [lem-trf-nodal-curve-normalization-euler] for both old and new fibres. By [lem-asd-projective-line-genus-zero] the inserted projective line has genus zero. A tail adds one such component and one node. A bridge adds one component of genus zero and replaces one node by two, also adding one node. In either case $v-e-\\sum g_i$ is unchanged; the normalizations of all old components are the same and the new normalization is $\\mathbf P^1$. Thus the Euler characteristic is unchanged. By [lem-sc-global-functions] both structure-sheaf $H^0$ spaces are one-dimensional, and [lem-sc-noetherian-cohomology-above-dimension] gives vanishing above degree one. Consequently $\\dim H^1=1-\\chi$ is unchanged and equals $g$. Here the curves are Noetherian because they are of finite type over a field.",
+   "uses": [
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-trf-nodal-curve-normalization-euler",
+    "lem-sc-global-functions",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-asd-projective-line-genus-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "The old fibre components and markings are fixed on the isomorphism locus of $p$. Steps 13--14 identify the only affected branches: in a collision the old marking is replaced on its component by the one attachment, and at a node its two branches are replaced by the two attachments. No other node or marking changes. Since every inserted component is the projective line fibre of the displayed two-generator Proj, its complement is exactly the locus on which $p$ is an isomorphism, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  },
+  {
+   "text": "Finally [lem-weil-pbc-symmetric-algebra-base-change] and [lemma-nagata-relative-proj-base-change-arbitrary] identify the base change of $Z$ with the same Proj made from the base-changed $\\mathcal K$. The algebra isomorphism respects degree because it sends every degree-one generator to its pulled generator and scalars to scalars. Steps 3--6 identify the pulled quotient maps with the new quotient maps. Naturality and uniqueness in [lem-trf-projective-bundle-quotient-geometry] therefore identify every lifted section. These identifications respect identities and composition, since they agree on the ring and module generators. An isomorphism preserving the ordered old sections and $\\Delta$ identifies their ideal sheaves, the multiplication maps, the divisor inclusion and the cokernel functorially; the same quotient uniqueness gives the asserted compatibility under that isomorphism. Thus all constructions and lifts are canonical in both stated senses.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-base-change",
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+    "place": "Local chart argument for Section 2, Definition 2.3 and Theorem 2.4; Knudsen 1106.1588, Sections 3--5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-asd-projective-line-genus-zero",
+  "lem-pc-flat-compose",
+  "lem-sc-etale-standard-cover-cech",
+  "lem-sc-global-functions",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-sfb-split-node-section-dual-presentation",
+  "lem-trf-finite-presentation-module-descent-flat-local",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "new-etale-finite-affine-cech-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/knudsen-closer-look-stable-pointed-curves-arXiv-1106.1588.pdf",
+  "place": "Explicit split-node and smooth-collision calculation following Knudsen Section 3 and Theorem 5.1; arbitrary-base etale-chart route from Stacks Tag 0CBY replaces Noetherian completion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a section of a nodal curve the Proj of the symmetric algebra of the cokernel of the diagonal into its dual ideal and the divisor of markings inserts a rational bridge or tail",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (P : Fin 3 → R),\\n  W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"A projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$ is nonsingular if and only if any of its affine lifts (representatives) satisfies the curve's homogeneous cubic equation\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x₂ (Polynomial.C y₂) =\\n          WeierstrassCurve.Af\", \"doc\": \"For two distinct points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ that are not symmetric with respect to the curve's group law (i.e., $y_1 \\neq -y_2 - a_1 x_2 - \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [inst : CommRing R] → (W' : WeierstrassCurve.Affine R) → R → W'.CoordinateRing\", \"doc\": \"For each element $ x $ in the base ring $ R $, this defines the equivalence class of the polynomial $ X - x $ in the coordinate ring of an affine Weierstrass curve $ W' $, obtained by quotienting $ R[\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj maps, Weierstrass nonsingular lifts and flat base change do not construct or establish flatness of this section-ideal expansion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Knudsen stabilization by the dual of a section ideal is flat and commutes with arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": IsStableUnderBaseChange FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"RingHom.Flat.stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": StableUnderComposition Flat\", \"doc\": \"If $ f : R \\\\to S $ and $ g : S \\\\to T $ are flat ring homomorphisms between commutative rings, then their composition $ g \\\\circ f : R \\\\to T $ is also a flat ring homomorphism.\"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj maps, Weierstrass nonsingular lifts and flat base change do not construct or establish flatness of this section-ideal expansion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up the stabilizing module of an extra section separates colliding markings and resolves a marked node in a stable curve family",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk_comp\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsReduced X] [inst_1 : Y.IsSeparated] [S.IsSeparated]\\n  [inst_3 : X.Over S] [inst_4 : Y.Over S] (f : X.RationalMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  AlgebraicGeometry.Scheme.PartialMap.IsOver S f.toPartialMap\", \"doc\": \"Given a rational map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, both over a separated base scheme $ S $, the partial map representative of $ f $ is also over $ S $. This instance e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ with injective germ map, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\\\\to Y$ s\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj maps, Weierstrass nonsingular lifts and flat base change do not construct or establish flatness of this section-ideal expansion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stabilization\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj maps, Weierstrass nonsingular lifts and flat base change do not construct or establish flatness of this section-ideal expansion."
+  },
+  {
+   "tool": "grep",
+   "query": "stablyReflexive|stably_reflexive|stabilization|stabilisation|sectionIdeal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj maps, Weierstrass nonsingular lifts and flat base change do not construct or establish flatness of this section-ideal expansion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-22T05:21:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"LinearMap\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.baseChange\", \"LinearMap.baseChange_id\", \"LinearMap.baseChange_tmul\", \"LinearMap.baseChange_one\", \"LinearMap.baseChange_comp\", \"LinearMap.baseChange_zero\", \"LinearMap.baseChangeHom\", \"LinearMap.baseChange_eq_lTensor\"], \"digest\": \"0a6b78a1fb556790\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern finite free dual base change, generic base-change maps, or nonsingular Weierstrass point ideals; none gives this singular section-ideal presentation or its universally exact quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual module of the ideal of a point on the nodal hypersurface xy=ab has a presentation with two generators and commutes with all coefficient ring changes",
+   "results": "{\"t\": \"2026-10-22T05:22:15Z\", \"tool\": \"leansearch\", \"query\": \"The dual module of the ideal of a point on the nodal hypersurface xy=ab has a presentation with two generators and commutes with all coefficient ring changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Dual\", \"FGModuleCat.FGModuleCatDual\", \"IsBaseChange.toDualBaseChange\", \"Module.Basis.dualBasis\", \"IsBaseChange.dual\", \"FractionalIdeal.dual\", \"Module.Basis.toDual_toDual\", \"Module.dual_finite\"], \"digest\": \"8346c991987e2230\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern finite free dual base change, generic base-change maps, or nonsingular Weierstrass point ideals; none gives this singular section-ideal presentation or its universally exact quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute Hom of the section ideal (x-a,y-b) in the ordinary double point xy=ab over an arbitrary ring, with its quotient by multiplication maps isomorphic to the base ring",
+   "results": "{\"t\": \"2026-10-22T05:22:46Z\", \"tool\": \"leanfinder\", \"query\": \"Compute Hom of the section ideal (x-a,y-b) in the ordinary double point xy=ab over an arbitrary ring, with its quotient by multiplication maps isomorphic to the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.YIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\"], \"digest\": \"c02dce5645c9c523\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern finite free dual base change, generic base-change maps, or nonsingular Weierstrass point ideals; none gives this singular section-ideal presentation or its universally exact quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "toDualBaseChange|baseChange.*[Ff]ree|baseChange.*[Ff]inite",
+   "results": "{\"t\": \"2026-10-22T05:22:54Z\", \"tool\": \"grep\", \"query\": \"toDualBaseChange|baseChange.*[Ff]ree|baseChange.*[Ff]inite\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\"], \"digest\": \"c0d6e85c73fb8182\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern finite free dual base change, generic base-change maps, or nonsingular Weierstrass point ideals; none gives this singular section-ideal presentation or its universally exact quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "stably.?reflexive|pointed.?node|dual.*[Xx][Yy].*[Ii]deal|[Nn]odal.*[Dd]ual",
+   "results": "{\"t\": \"2026-10-22T05:22:54Z\", \"tool\": \"grep\", \"query\": \"stably.?reflexive|pointed.?node|dual.*[Xx][Yy].*[Ii]deal|[Nn]odal.*[Dd]ual\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern finite free dual base change, generic base-change maps, or nonsingular Weierstrass point ideals; none gives this singular section-ideal presentation or its universally exact quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.2, Definition 2.3 and Theorem 2.4 (printed pp.175--178); corrected local algebra and flatness proof in Knudsen, A closer look at the stacks of stable pointed curves, arXiv:1106.1588, Main Lemma and Sections 3--5.",
+   "via": [
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-section-ideal-proj-expansion",
+  "worker": "stage1",
+  "summary": "Wrote the quotient lifts and all local Proj charts explicitly; proved arbitrary-base flatness by normal forms and computed tail and bridge fibres, genus, and functoriality. One new statement-only algebra lemma exposes the dual presentation; all other tools reuse the DAG. Item statement unchanged.",
+  "blueprint": "Realizes the section-ideal expansion prerequisite of Knudsen stabilization used by lem-sfb-knudsen-pointed-forgetful-universal-curve in the marked plurinodal reduction of det-thm-sf-ctf-stability-direct-images, proof (3). No different unit route used.",
+  "tool_uses": [
+   {
+    "node": "def-pc-divisor-line-bundle",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "def-weil-pbc-faithfully-flat-ring-map",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-pc-flat-compose",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-sc-etale-standard-cover-cech",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-sc-smooth-section-affine-coordinates",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-trf-finite-presentation-module-descent-flat-local",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-trf-nodal-curve-normalization-euler",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-trf-nodal-family-etale-local-model",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-trf-reduced-curve-normalization-genus",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-trf-smooth-at-point-fibre-criterion",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-flat",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-ring-maps",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-base-change",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-universal-property",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   },
+   {
+    "node": "new-etale-finite-affine-cech-basis",
+    "why": "Generic local algebra, etale geometry, relative Proj or nodal-curve numerical tool used exactly through its stated assertion; this unit has no separate version. It supports the same Knudsen chart construction and does not replace its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-asd-projective-line-genus-zero",
+  "lem-pc-flat-compose",
+  "lem-sc-etale-standard-cover-cech",
+  "lem-sc-global-functions",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-trf-finite-presentation-module-descent-flat-local",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "new-etale-finite-affine-cech-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-7d96f3ed4",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-7d96f3ed4 (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged from base, 18 steps. Read the one new node, lem-sfb-split-node-section-dual-presentation, which is statement-only and unsplit. New node checked by hand: y(x-a)+a(y-b)=xy-ab gives the syzygy; e=(-a,y) is well defined; both kernel relations (a,x-a) and (-y,y-b) vanish on both generators. At a=b=0 the dual is R/(y)+R/(x), and 1,e generate with exactly the stated kernel. R->M is injective over any A by a top-degree argument on the free basis x^i,y^j. I=ker(eps) is an A-direct summand of R, so the matrix-factorization resolution stays exact under any A->A'; the flat-extension clause holds because I is finitely presented. The node is not a duplicate: grep for xy-ab, uv-ab, Knudsen, stably reflexive and Hom_R(I,R) finds only the Knudsen-chain nodes, none of which states this algebra. It is not a clause of the item either. Item steps: recomputed the Step 8 collision charts (zw=c and A[u,(u+1)^-1]) and the Step 9 nodal charts (A[y,w]/(yw-b) and A[q,v,(v-1)^-1]/(qv+a)), with xy=ab automatic in both. Recomputed the tail fibre z(U+V)=0, with points [1:-1], [0:1] and [1:0] distinct also in characteristic 2. Recomputed the bridge attachments v=0 and v=1, with the new point at w=1 where the fibre is smooth. The Step 10 normal-form freeness of A[r,s]/(rs-d) holds over any A. Step 11 flat descent, the Step 12 properness and finite-presentation chain and the Step 16 chi count (v+1, e+1) are correct. Step 2 makes the section ideal exactly (x-a,y-b)C by removing clopen components; Step 4 descends finite presentation and the dual by faithful flatness without any non-flat Hom base change. Stacks labels checked: 0CBY (curves.tex l.5077), 01OB, 01WC, 03C4, 0C1R, 01V9, 024T, 00HR. Knudsen II is absent locally (the item already says WANTED), so the mathematics was verified directly. No SGA source is used. Batch 5: the closure from both targets has 19895 nodes without the item's proof_deps and 19898 with them. The 3 added nodes are the new node, new-etale-finite-affine-cech-basis and lem-sc-etale-standard-cover-cech; no trf or Poincare-duality node is added. Every flagged citation is a generic fact outside both assumptions: lem-sc-smooth-section-affine-coordinates (etale coordinates at a smooth section), lem-trf-finite-presentation-module-descent-flat-local (Stacks 03C4), lem-trf-nodal-curve-normalization-euler (Stacks 0C1R), lem-trf-nodal-family-etale-local-model (Stacks 0CBY), lem-trf-projective-bundle-proper (Stacks 01WC), lem-trf-projective-bundle-quotient-geometry (Stacks 01OB), lem-trf-reduced-curve-normalization-genus (Temkin appendix B.1) and lem-trf-smooth-at-point-fibre-criterion (Stacks 01V9). Accepted. The generic cross-unit tools in split_report.tool_uses are accepted for the maintainer to record. No fixes, no drops."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionIdealProjExpansion",
+  "declaration": "AlgebraicGeometry.SectionIdealExpansion.section_ideal_proj_expansion",
+  "declarations": [
+   "AlgebraicGeometry.SectionIdealExpansion.oldIdeal",
+   "AlgebraicGeometry.SectionIdealExpansion.inclusion",
+   "AlgebraicGeometry.SectionIdealExpansion.diagonal",
+   "AlgebraicGeometry.SectionIdealExpansion.moduleK",
+   "AlgebraicGeometry.SectionIdealExpansion.firstToK",
+   "AlgebraicGeometry.SectionIdealExpansion.secondToK",
+   "AlgebraicGeometry.SectionIdealExpansion.oldQuotient",
+   "AlgebraicGeometry.SectionIdealExpansion.newQuotient",
+   "AlgebraicGeometry.SectionIdealExpansion.FibreConditions",
+   "AlgebraicGeometry.SectionIdealExpansion.schemeZ",
+   "AlgebraicGeometry.SectionIdealExpansion.projection",
+   "AlgebraicGeometry.SectionIdealExpansion.Lifts",
+   "AlgebraicGeometry.SectionIdealExpansion.fibreMap",
+   "AlgebraicGeometry.SectionIdealExpansion.specialPoints",
+   "AlgebraicGeometry.SectionIdealExpansion.UnchangedComponents",
+   "AlgebraicGeometry.SectionIdealExpansion.ExceptionalFibre",
+   "AlgebraicGeometry.SectionIdealExpansion.FibreGeometry",
+   "AlgebraicGeometry.SectionIdealExpansion.unitComparison",
+   "AlgebraicGeometry.SectionIdealExpansion.SequenceComparison",
+   "AlgebraicGeometry.SectionIdealExpansion.Compatible",
+   "AlgebraicGeometry.SectionIdealExpansion.section_ideal_proj_expansion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionIdealProjExpansion.lean",
+  "statement": "theorem section_ideal_proj_expansion (T X : Scheme.{u}) (f : X ⟶ T) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (g : ℕ) (hg : 2 ≤ g) (hfibres : FibreConditions f g) (r : ℕ) (s : Fin r → (T ⟶ X)) (hs : ∀ i : Fin r, s i ≫ f = 𝟙 T) (hdisjoint : Pairwise (fun i j : Fin r ↦ Disjoint (Set.range (s i)) (Set.range (s j)))) (hsmooth : ∀ i : Fin r, Set.range (s i) ⊆ (f.smoothLocus : Set X)) (d : T ⟶ X) (hd : d ≫ f = 𝟙 T) : (oldIdeal s).IsInvertible ∧ Mono (diagonal s d) ∧ (moduleK s d).IsFinitePresentation ∧ ∃ hqc : (moduleK s d).IsQuasicoherent, ∃ hfp : LocallyOfFinitePresentation (projection s d ≫ f), ∃ L : Lifts f s d, IsProper (projection s d ≫ f) ∧ Flat (projection s d ≫ f) ∧ FibreConditions (projection s d ≫ f) g ∧ (∀ i : Fin r, Set.range (L.old i) ⊆ ((projection s d ≫ f).smoothLocus : Set _)) ∧ Set.range L.extra ⊆ ((projection s d ≫ f).smoothLocus : Set _) ∧ FibreGeometry f s hs d hd L ∧ ∀ (T' X' : Scheme.{u}) (f' : X' ⟶ T') (b : T' ⟶ T) (h : X' ⟶ X), IsPullback h f' f b → ∀ (s' : Fin r → (T' ⟶ X')) (d' : T' ⟶ X'), (∀ i : Fin r, s' i ≫ h = b ≫ s i) → d' ≫ h = b ≫ d → (∀ i : Fin r, s' i ≫ f' = 𝟙 T') → d' ≫ f' = 𝟙 T' → ∃ hqc' : (moduleK s' d').IsQuasicoherent, ∃ L' : Lifts f' s' d', ∃! C : SequenceComparison s d s' d' h, ∃! j : schemeZ s' d' ⟶ schemeZ s d, Compatible f s d f' s' d' L L' h b C j",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d3b770d4",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 32789282eead; delta read in full: base-change clause now adds (∀ i, s' i ≫ f' = 𝟙 T') → d' ≫ f' = 𝟙 T' (exactly what Lifts.old_over/old_section, extra_over/extra_section force; real pullback sections satisfy it; T⨿T swap counterexample excluded), and def-per-projective-bundle-quotient-data (owner of TautologicalQuotient/pulledQuotient/Classifies) added to stmt_deps. Node stage-1 fields identical to side-live; live node has no lean, no module/namespace clash. Independent full reading: FibreConditions (HasNodalGeometricFibres incl. connected⇒nonempty, reduced, pure dim 1, arithmeticGenus = finrank H^1(O), 2≤g), sections/disjointness/smoothness, actual K = cokernel of biprod.lift of transposed inclusions, O(D) = dual of ∏ ker (r=0 ⇒ ⊤), relProj of Sym K, chart-pinned tautological quotient, quotient-relative unique lifts, three fibre cases (precedence checked, ExceptionalFibre P1 with 1/2 attachments, UnchangedComponents), ∃! SequenceComparison and ∃! j pinned; isomorphisms = iso cartesian squares. Edge cases r=0, empty T, characteristic, self-nodes, universes OK. 12 stmt_deps live with identical lean records; lean.statement verbatim; 21 declarations listed; docstrings with source + blueprint; sorry-only; report sections present. No fix, so no compile. Advisory only: some upstream notions (tensorPullback, IsInvertible, smoothLocus, normalization) are used without a DAG citation."
+ }
+}

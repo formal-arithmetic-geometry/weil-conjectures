@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-split-local-power-series-section-criterion",
+ "kind": "statement",
+ "title": "Power-series presentation from sections of finite local quotients",
+ "statement": "Let $B,C$ be commutative Noetherian local rings with specified residue field $l$, a field [def-weil-pbc-noetherian-ring, def-weil-field]. Write $\\mathfrak m_B,\\mathfrak m_C$ for their unique maximal ideals, and assume both rings are complete for these ideals [def-weil-pbc-adic-completion]. Let $i:B\\hookrightarrow C$ and $\\rho:C\\to B$ be local ring maps inducing the identity on $l$ and satisfying $\\rho i=\\mathrm{id}_B$, where local means that the inverse image of the maximal ideal is the maximal ideal. Set $I=\\ker\\rho$. Let $r\\geq0$ and $x_1,\\ldots,x_r\\in I$ have images forming an $l$-basis of $I/\\mathfrak m_CI$ (every class is a unique $l$-linear combination of those images). Put $S=B[[X_1,\\ldots,X_r]]$ [def-weil-pbc-multivariate-power-series]. Then $S$ is Noetherian local, complete for $\\mathfrak m_S=(\\mathfrak m_B,X_1,\\ldots,X_r)$, with residue field $l$. There is a unique continuous $B$-algebra map $\\phi:S\\to C$ sending $X_j$ to $x_j$, where $C$ is a $B$-algebra via $i$; continuity is for the respective maximal-ideal-adic topologies. This map is local, induces the identity on $l$, and for every $n\\geq1$ induces a surjective map $\\phi_n:S/\\mathfrak m_S^n\\to C/\\mathfrak m_C^n$ between Artinian local rings with residue field $l$ (Artinian means descending chains of ideals stabilize). If for every sufficiently large $n$ there is a local ring map $\\sigma_n:C/\\mathfrak m_C^n\\to S/\\mathfrak m_S^n$ inducing the identity on $l$ and satisfying $\\phi_n\\sigma_n=\\mathrm{id}_{C/\\mathfrak m_C^n}$, then $\\phi$ is an isomorphism of complete local $B$-algebras. The $\\sigma_n$ need not be $B$-linear or compatible as $n$ varies.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SG, lemma-power-series, statement and proof, including its canonical surjections and cotangent-space decompositions. The inverse hypothesis is stated as the right-inverse equation used in its proof; the printed statement says left inverse. Power-series completeness and Noetherianity are the ambient complete-local construction in this lemma."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-power-series-noetherian], $S$ is Noetherian. Put $J=(X_1,\\ldots,X_r)$ and $\\mathfrak a=\\mathfrak m_BS+J$. The constant-term map followed by $B\\to l$ has kernel $\\mathfrak a$: partition the nonconstant monomials according to their first variable with positive exponent to express every zero-constant series as $\\sum_jX_jF_j$. A series with unit constant term $b$ has inverse $b^{-1}\\sum_{k\\geq0}(-w)^k$, where $F=b(1+w)$ and $w\\in J$; each coefficient involves only finitely many powers. Thus precisely the series outside $\\mathfrak a$ are units, so $S$ is local with maximal ideal $\\mathfrak m_S=\\mathfrak a$ and residue field $l$. Applying [lem-weil-pbc-power-series-complete-over-complete-base] with $\\Lambda=B$ and $J=\\mathfrak m_B$ proves maximal-ideal-adic completeness. Both completeness conventions say that the canonical map to the limit of the power quotients is bijective [def-weil-pbc-adic-completion, def-weil-pbc-adically-complete-ring]; the displayed series calculations use [def-weil-pbc-multivariate-power-series].",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-complete-over-complete-base",
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SG, lemma-power-series: construction of S; background Noetherianity Tag 0306, lemma-Noetherian-power-series; completeness as in Tag 032C, remark-Noetherian-complete-local-ring-universally-catenary"
+   }
+  },
+  {
+   "text": "Since $\\rho$ is local, $I\\subseteq\\mathfrak m_C$. Apply [lem-weil-pbc-power-series-adic-evaluation] with coefficient map $i$ and ideal $\\mathfrak m_C$ to obtain the $B$-algebra map $\\phi$, uniquely characterized by $\\phi(F)\\equiv\\sum_{|\\nu|<N}i(a_\\nu)x^\\nu\\pmod{\\mathfrak m_C^N}$. It sends $\\mathfrak m_B$ and every $X_j$ into $\\mathfrak m_C$, hence sends $\\mathfrak m_S^N$ into $\\mathfrak m_C^N$ and is continuous. Its residue map is the identity, so $\\phi^{-1}(\\mathfrak m_C)=\\mathfrak m_S$. For uniqueness among continuous $B$-maps with these variable values, subtract the degree-below-$N$ polynomial truncation of $F$; the remainder belongs to $J^N\\subseteq\\mathfrak m_S^N$. Continuity and separation of $C$ show that the image is forced by its polynomial truncations. Here completeness and separation have the inverse-limit meaning of [def-weil-pbc-adic-completion].",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SG, lemma-power-series: the map S to R; evaluation universal property used in Tag 07NL, lemma-power-series-ring-over-Cohen-fs"
+   }
+  },
+  {
+   "text": "Every $c\\in C$ decomposes uniquely as $i(\\rho(c))+(c-i(\\rho(c)))$. Therefore $\\mathfrak m_C=i(\\mathfrak m_B)\\oplus I$, and multiplying gives $\\mathfrak m_C^2=i(\\mathfrak m_B^2)\\oplus\\mathfrak m_CI$: the remaining products are exactly $i(\\mathfrak m_B)I+I^2=\\mathfrak m_CI$. Thus $\\mathfrak m_C/\\mathfrak m_C^2\\cong(\\mathfrak m_B/\\mathfrak m_B^2)\\oplus(I/\\mathfrak m_CI)$. For $S$ the same calculation with the constant-term retraction and kernel $J$ gives $\\mathfrak m_S/\\mathfrak m_S^2\\cong(\\mathfrak m_B/\\mathfrak m_B^2)\\oplus l^r$: modulo $\\mathfrak m_SJ=\\mathfrak m_BJ+J^2$ a zero-constant series is exactly its linear coefficients modulo $\\mathfrak m_B$ [def-weil-pbc-multivariate-power-series]. The induced map of cotangent spaces is the identity on the first summand and sends the standard basis of $l^r$ to the specified basis $[x_j]$. It is consequently an $l$-linear isomorphism, also for $r=0$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SG, lemma-power-series, proof: the two cotangent-space decompositions"
+   }
+  },
+  {
+   "text": "Apply the surjectivity clause of [lem-sfb-complete-local-cotangent-graded-rigidity] to $\\phi:S\\to C$: both rings are complete Noetherian local, its residue map is the identity, and step 3 gives cotangent surjectivity. Hence $\\phi$ is surjective. It therefore induces surjective maps $\\phi_n:S/\\mathfrak m_S^n\\to C/\\mathfrak m_C^n$ for every $n\\geq1$. By [lem-weil-pbc-noetherian-local-quotient-artinian-local], applied separately to $S,C$ with $K$ the indicated power, these quotients are Artinian local with nilpotent maximal ideals. Their residue fields are $l$ by the successive quotient maps. For $n\\geq2$, their cotangent spaces are canonically those in step 3, since $\\mathfrak m^n\\subseteq\\mathfrak m^2$. Thus $\\phi_n$ induces an isomorphism on cotangent spaces.",
+   "uses": [
+    "lem-sfb-complete-local-cotangent-graded-rigidity",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tags 06GZ, lemma-surjective-cotangent-space, and 06SG, lemma-power-series, proof: the canonical surjections and n greater than 1"
+   }
+  },
+  {
+   "text": "Fix $n\\geq2$ large enough that a section $\\sigma_n$ exists. Differentiating the equation $\\phi_n\\sigma_n=\\mathrm{id}$ on maximal ideals modulo their squares shows that the cotangent map of $\\sigma_n$ is the inverse of the isomorphism induced by $\\phi_n$; in particular it is surjective. By [lem-weil-pbc-artinian-local-noetherian-nilpotent] both quotient rings are Noetherian. They are complete for their maximal ideals because those ideals are nilpotent: their inverse systems of power quotients are eventually constant [def-weil-pbc-adic-completion]. We can therefore apply the surjectivity clause of [lem-sfb-complete-local-cotangent-graded-rigidity] to the local residue-preserving ring map $\\sigma_n$. It is surjective; it is also injective by $\\phi_n\\sigma_n=\\mathrm{id}$. It follows that $\\phi_n$ is its inverse and is an isomorphism. This application involves only the marked residue field $l$, and requires no $B$-linearity of $\\sigma_n$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "def-weil-pbc-adic-completion",
+    "lem-sfb-complete-local-cotangent-graded-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SG, lemma-power-series, proof: applying Tag 06GZ to h_n; the inverse equation is written explicitly"
+   }
+  },
+  {
+   "text": "If $F\\in\\ker\\phi$, step 5 implies $F\\in\\mathfrak m_S^n$ for every sufficiently large $n$. This implies membership in every power, and separation in [def-weil-pbc-adic-completion] gives $F=0$. Together with the surjectivity from step 4 this proves that $\\phi$ is a $B$-algebra isomorphism. A ring isomorphism between local rings sends their unique maximal ideals onto each other, hence the inverse also preserves all their powers and is continuous. Thus it is an isomorphism of complete local $B$-algebras. The argument uses each section only at its own level and requires no compatibility between levels.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SG, lemma-power-series, final sentence: passage from large finite quotients to complete rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-sfb-complete-local-cotangent-graded-rigidity",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SG, lemma-power-series, proof; construction clauses expanded using the existing power-series lemmas, and Tag 06GZ used in its base-independent form."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split inclusion of complete Noetherian local rings with kernel cotangent basis gives an isomorphism from a power series ring if all Artinian quotients have sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {f : Polynomial A} →\\n        {h : PowerSeries A} →\\n          {I : Ideal A} →\\n            g.IsWeierstrassFactorizationAt f h I →\\n              [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {f}) ≃ₐ[A] PowerSeries A ⧸ Ideal.sp\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (x : PowerSeries A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient.symm x = (Ideal.Quotient.mk (Ideal.span {f})) (⋯.mod' ((\", \"doc\": \"The inverse of the algebra isomorphism between the polynomial quotient ring $ A[X]/(g) $ and the power series quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial. For any element $ x\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : Polynomial A} →\\n      {I : Ideal A} →\\n        g.IsDistinguishedAt I →\\n          [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {g}) ≃ₐ[A] PowerSeries A ⧸ Ideal.span {↑g}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A} (H : g.IsDistinguishedAt I)\\n  [inst_1 : IsAdicComplete I A] (a : PowerSeries A ⧸ Ideal.span {↑g}),\\n  H.algEquivQuotient.symm a = (Ideal.Quotient.mk (Ideal.span {g})) (⋯.mod' a)\", \"doc\": \"For a commutative ring $ A $, a polynomial $ g $ distinguished at an ideal $ I $, and an element $ a $ in the quotient ring $ A⟦X⟧ / (g) $, the inverse of the algebra equivalence $ \\\\phi $ satisfies $ \"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass quotient equivalences, ordinary smoothness/cotangent module results and power-series Noetherianity do not give the split complete-local presentation criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective local homomorphism of Artinian rings inducing a cotangent space isomorphism is an isomorphism if it admits a ring section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] → (P : Algebra.SubmersivePresentation R S ι σ) → P.toExtension.Cotangent ≃ₗ[S] σ → S\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"Algebra.Extension.Cotangent.mk_surjective\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Surjective ⇑Algebra.Extension.Cotangent.mk\", \"doc\": \"The canonical $ R $-linear quotient map from the kernel ideal $ \\\\ker(\\\\phi) $ to its cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ is surjective, meaning every element of the cotangent module is the ima\"}\n  {\"name\": \"retractionKerCotangentToTensorEquivSection\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                [inst_5 : Algebra R S] →\\n                  [inst_6 : IsSc\", \"doc\": \"An equivalence between the set of linear maps retracting the cotangent kernel to tensor product map and the set of algebra homomorphisms satisfying the kernel square lift condition, established via qu\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"IsArtinianRing.localization_surjective\", \"module\": \"Mathlib/RingTheory/Artinian/Ring\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsArtinianRing R] (S : Submonoid R) (L : Type u_2) [inst_2 : CommSemiring L]\\n  [inst_3 : Algebra R L] [IsLocalization S L], Function.Surjective ⇑(algebraMap R L)\", \"doc\": \"For an Artinian commutative semiring $ R $, the canonical algebra homomorphism from $ R $ to its localization $ L $ is surjective, i.e., $ \\\\text{algebraMap}(R, L) $ is a surjective function.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Surjective ⇑P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.CotangentSpace.map P.toInfinitesimal)\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the linear map from the cotangent space of $ P $ to the cotangent space of its infinitesimal extension $ P/I^2 \"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.map_ofComp_surjective\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The linear map between cotangent spaces induced by the algebra extension homomorphism of composed algebra extensions is surjective, i.e., the map $ P.\\text{CotangentSpace} \\to Q.\\text{CotangentSpace} $ a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass quotient equivalences, ordinary smoothness/cotangent module results and power-series Noetherianity do not give the split complete-local presentation criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"bijective\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass quotient equivalences, ordinary smoothness/cotangent module results and power-series Noetherianity do not give the split complete-local presentation criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Power series presentation of a complete local ring split over a subring detected by sections modulo powers of maximal ideals",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsAdicComplete (IsLocalRing.maximalIdeal A) A] (hg : g.map (IsLocalRing.residue A) ≠ 0) :\\n  ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"(hg : g.map (IsLocalRing.residue A) ≠ 0) : ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsAdicComplete I A] : f.IsWeierstrassDivisionAt g (H.div f) (H.mod f) I\", \"doc\": \"Let $ A $ be a commutative ring that is adic complete with respect to an ideal $ I $, and let $ g $ be a power series satisfying the Weierstrass divisor condition at $ I $. For any power series $ f $,\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"(g : A⟦X⟧) (f : A[X]) (h : A⟦X⟧) [IsLocalRing A] : Prop\", \"doc\": \"For a local commutative ring $ A $, this proposition asserts that a power series $ g $ factors as a polynomial $ f $ multiplied by a power series $ h $, where $ h $ is a unit modulo the maximal ideal \"}\n  {\"name\": \"PowerSeries.instIsLocalRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing R⟦X⟧\", \"doc\": \"If $ R $ is a local ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a local ring.\"}\n  {\"name\": \"PowerSeries.maximalIdeal_eq_span_X\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing.maximalIdeal (k⟦X⟧) = Ideal.span { X }\", \"doc\": \"If $ k $ is a local ring, then the maximal ideal of the ring of univariate power series $ k⟦X⟧ $ is equal to the ideal generated by the formal variable $ X $.\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"{g q : A⟦X⟧} {r : A[X]} (hg : g.map (IsLocalRing.residue A) ≠ 0)\\n  (H : (X ^ (g.map (IsLocalRing.residue A)).order.toNat).IsWeierstrassDivision g q r) :\\n  g.IsWeierstrassFactorization (Polynomial.X ^ (g.map (IsLocalRing.residue A)).order.toNat - r)\\n    ↑(H.isUnit_of_map_ne_zero hg).unit⁻¹\", \"doc\": \"Let $ A $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ g $ be a power series over $ A $ whose image in the residue field $ A/\\\\mathfrak{m} $ is nonzero. If there exists a Weierstrass \"}\n  {\"name\": \"PowerSeries.weierstrassDiv.congr_simp\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f f_1 : PowerSeries A),\\n  f = f_1 →\\n    ∀ (g g_1 : PowerSeries A),\\n      g = g_1 →\\n        ∀ [inst_2 : IsPrecomplete (IsLocalRing.maximalIdeal A) A] (a a_1 : Unit →₀ ℕ),\\n          a = a_1 → (f /ʷ g) a = (f_1 /ʷ g_1) a_1\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if $ f = f_1 $ and $ g = g_1 $ as power series in $ A[[X]] $, and $ a = a_1 $ as units in $ A $, then the Weierstrass division\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass quotient equivalences, ordinary smoothness/cotangent module results and power-series Noetherianity do not give the split complete-local presentation criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "(section|rightInverse|leftInverse|cotangent|surjectiv|bijectiv)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"line\": \"40\", \"text\": \"@[expose] public section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"line\": \"42\", \"text\": \"noncomputable section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"line\": \"50\", \"text\": \"section Semiring\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"line\": \"107\", \"text\": \"section CommSemiring\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"line\": \"289\", \"text\": \"section CommRing\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"line\": \"44\", \"text\": \"@[expose] public section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"line\": \"50\", \"text\": \"section Semiring\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"line\": \"179\", \"text\": \"section absoluteValue\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\", \"line\": \"42\", \"text\": \"@[expose] public section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"line\": \"38\", \"text\": \"@[expose] public section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"line\": \"46\", \"text\": \"section Semiring\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"line\": \"73\", \"text\": \"section CommSemiring\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"38\", \"text\": \"public section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"40\", \"text\": \"noncomputable section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"50\", \"text\": \"section Semiring\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"line\": \"22\", \"text\": \"@[expose] public section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"58\", \"text\": \"@[expose] public section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"60\", \"text\": \"noncomputable section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"68\", \"text\": \"section TruncFinset\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"177\", \"text\": \"section TruncLT\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"228\", \"text\": \"section TruncLE\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"line\": \"40\", \"text\": \"@[expose] public section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"line\": \"43\", \"text\": \"noncomputable section\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"line\": \"53\", \"text\": \"section Ring\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"line\": \"147\", \"text\": \"section CommRing\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass quotient equivalences, ordinary smoothness/cotangent module results and power-series Noetherianity do not give the split complete-local presentation criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|[Rr]ightInverse|[Ll]eftInverse|surjectiv|bijectiv|IsAdicComplete|[Ii]sNoetherianRing",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"215\", \"text\": \"variable (S : Type*) [CommRing S] [IsNoetherianRing S]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"217\", \"text\": \"private lemma isNoetherianRing_fin (n : ℕ) : IsNoetherianRing (MvPowerSeries (Fin n) S) := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"220\", \"text\": \"    exact isNoetherianRing_of_ringEquiv S (isEmptyEquiv (Fin 0) S).toRingEquiv.symm\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"222\", \"text\": \"    exact isNoetherianRing_of_ringEquiv (PowerSeries (MvPowerSeries (Fin n) S))\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"225\", \"text\": \"instance isNoetherianRing [Finite σ] : IsNoetherianRing (MvPowerSeries σ S) := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"368\", \"text\": \"theorem C_surjective [IsEmpty σ] : Function.Surjective (C : R → MvPowerSeries σ R) :=\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass quotient equivalences, ordinary smoothness/cotangent module results and power-series Noetherianity do not give the split complete-local presentation criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|[Rr]ightInverse|[Ll]eftInverse",
+   "results": "0 hits; top declarations/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: extension cotangent and Weierstrass results do not state the maximal-ideal section criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local ring map of complete Noetherian local rings is surjective if its map on maximal ideals modulo their squares is surjective",
+   "results": "8 hits; top declarations/files: surjective_of_isLocalization_isMaximal, surjective_of_localized_maximal, IsLocalRing.residue_surjective, surjective_of_mkQ_comp_surjective, RingHom.surjectiveOnStalks_iff_forall_maximal, IsLocalHom.of_comap_surjective, surjective_of_mk_map_comp_surjective, IsLocalRing.map_mkQ_eq_top",
+   "date": "2026-10-23",
+   "verdict": "no match: extension cotangent and Weierstrass results do not state the maximal-ideal section criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsLocalRing, RingHom.Surjective",
+   "results": "Query rejected by Loogle: unknown identifier RingHom.Surjective; zero hits. Replaced by the valid MvPowerSeries, IsLocalRing search.",
+   "date": "2026-10-23",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A retraction of complete local rings splits the maximal ideal cotangent space into the base cotangent space and the kernel modulo maximal ideal times kernel",
+   "results": "8 hits; top declarations/files: retractionKerCotangentToTensorEquivSection, Algebra.Extension.Cotangent.val, Algebra.SubmersivePresentation.sectionCotangent, Algebra.Extension.Cotangent.of, Algebra.Extension.Cotangent.val_mk, Algebra.SubmersivePresentation.cotangentEquiv_apply, Algebra.SubmersivePresentation.cotangentEquiv, Algebra.Extension.Cotangent.val_of",
+   "date": "2026-10-23",
+   "verdict": "no match: extension cotangent and Weierstrass results do not state the maximal-ideal section criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*surject|surject.*cotangent|isIso.*section|section.*isIso",
+   "results": "25 hits; top declarations/files: Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: extension cotangent and Weierstrass results do not state the maximal-ideal section criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsLocalRing",
+   "results": "MvPowerSeries.instIsLocalRing, Mathlib/RingTheory/MvPowerSeries/Inverse.lean:152; read lines 138-159.",
+   "date": "2026-10-23",
+   "verdict": "partial match only: locality of power series, not the section criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_of_mk_map_comp_surjective|surjective_of_mkQ_comp_surjective|isUnit_iff_constantCoeff|instance.*IsLocalRing",
+   "results": "25 hits; top declarations/files: Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Ideal/NatInt.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/MvPowerSeries/Inverse.lean, Mathlib/RingTheory/MvPowerSeries/Inverse.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: extension cotangent and Weierstrass results do not state the maximal-ideal section criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split surjective map on Artinian local quotients with an isomorphism on cotangent spaces is bijective, yielding a power series presentation of a complete local ring",
+   "results": "8 hits; top declarations/files: StandardEtalePresentation.lift_bijective, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient, Polynomial.IsDistinguishedAt.algEquivQuotient, PowerSeries.exists_isWeierstrassDivision, Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective, Algebra.Extension.Cotangent.map_toInfinitesimal_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: extension cotangent and Weierstrass results do not state the maximal-ideal section criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-versal-descended-base-power-series",
+  "date": "2026-10-24",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables. Supporting input: Tag 06T3, lemma-descends-versal; hypotheses written explicitly from Tag 06T2, lemma-smallest-where-descends-versal. Supporting algebra in Tag 06T3: apply Tag 06SG (lemma-power-series) after constructing sections of the Artinian quotient maps; retain the right-inverse equation explicitly.",
+   "via": [
+    "lem-sfb-versal-descended-base-power-series",
+    "lem-sfb-stack-minimal-versal-power-series",
+    "lem-sfb-stack-versal-ring-smooth-span",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-local-power-series-section-criterion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Tag 06SG into six steps: complete local power-series construction, evaluation, explicit split-ideal cotangent calculation, quotient surjectivity, cotangent-surjective sections, and separatedness. Reused every algebra input from the DAG; no new nodes. Checked the non-B-linear, noncompatible section hypothesis directly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables. Supporting input: Tag 06T3, lemma-descends-versal; hypotheses written explicitly from Tag 06T2, lemma-smallest-where-descends-versal. Supporting algebra in Tag 06T3: apply Tag 06SG (lemma-power-series) after constructing sections of the Artinian quotient maps; retain the right-inverse equation explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Generic combined-ideal completeness of a power-series ring, with J the maximal ideal of B; the unit has no separate construction lemma."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic evaluation of finite-variable power series into an adically complete target; used to construct the map of Tag 06SG, not to replace the deformation-theory route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-42988dd8a",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-42988dd8a (reviewer sub-agent of L); spot-checked: I read Stacks 06SG (lemma-power-series) and 06GZ (lemma-surjective-cotangent-space) in formal-defos.tex in full. The item's statement agrees with 06SG hypothesis by hypothesis. The source's 'left inverse' is correctly read as phi_n sigma_n = id, since its proof uses that h_n is injective. Not requiring sigma_n to be B-linear makes the statement stronger, and the proof never uses linearity. Steps: (1) S is Noetherian by the power-series Noetherian leaf, local by the geometric-series inverse, and m_S-complete by complete-over-complete-base with Lambda=B, J=m_B. (2) phi comes from adic-evaluation with alpha=i and ideal m_C; the x_j lie in m_C because rho is local, and continuity and uniqueness are checked. (3) The decompositions m_C=i(m_B)+I and m_C^2=i(m_B^2)+m_C I, and J/(m_B J+J^2)=l^r, give the cotangent isomorphism; this is a correct elementary calculation. (4) The surjectivity clause of graded-rigidity applies, with all hypotheses checked, and the Artinian-quotient lemma with K=m^n, N=n. (5) cot(sigma_n) is the inverse of cot(phi_n); the quotients are Noetherian and complete because their maximal ideals are nilpotent; rigidity makes sigma_n surjective and phi_n sigma_n=id makes it injective, so phi_n is an isomorphism. (6) The kernel of phi lies in the intersection of all m_S^n, which is 0 by separatedness. proof_deps equals the union of uses. Edge cases: r=0, C=B[[t]], and C=l[e]/(e^2), where no section exists at n=3; mixed characteristic is fine. Duplicate search over 06SG and 06GZ found only the item's versal siblings and two field-k nodes; none is a duplicate and there is no cycle. There are no new nodes and no SGA citation. I accept the two declared tool uses (generic sk-thm-p1 power-series completeness and evaluation). Batch-5: the flagged lem-trf-vector-space-quotient-dimension is a generic Mathlib linear-algebra leaf. It is reached only through the isomorphism clause of graded-rigidity, which the item does not use, and it is not part of the trace formula or Poincare duality. Not a RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SplitLocalPowerSeriesSectionCriterion",
+  "declaration": "IsLocalRing.splitLocal_powerSeries_section_criterion",
+  "file": "lean/Sheaf/RingTheory/SplitLocalPowerSeriesSectionCriterion.lean",
+  "statement": "theorem splitLocal_powerSeries_section_criterion (B : Type u) (C : Type v) (l : Type w) [CommRing B] [CommRing C] [Field l] [IsNoetherianRing B] [IsNoetherianRing C] [IsLocalRing B] [IsLocalRing C] [IsAdicComplete (maximalIdeal B) B] [IsAdicComplete (maximalIdeal C) C] [Algebra B C] [IsLocalHom (algebraMap B C)] (eB : ResidueField B ≃+* l) (eC : ResidueField C ≃+* l) (ρ : C →+* B) [IsLocalHom ρ] (hi : Function.Injective (algebraMap B C)) (hsplit : ρ.comp (algebraMap B C) = RingHom.id B) (hires : eC.toRingHom.comp ((residue C).comp (algebraMap B C)) = eB.toRingHom.comp (residue B)) (hρres : eB.toRingHom.comp ((residue B).comp ρ) = eC.toRingHom.comp (residue C)) (r : ℕ) (x : Fin r → RingHom.ker ρ) (b : @Module.Basis (Fin r) l ((RingHom.ker ρ) ⧸ (maximalIdeal C • ⊤ : Submodule C (RingHom.ker ρ))) _ _ (@Module.compHom (C ⧸ maximalIdeal C) l _ _ _ inferInstance _ eC.symm.toRingHom)) (hb : ∀ j : Fin r, b j = Submodule.Quotient.mk (x j)) : IsNoetherianRing (MvPowerSeries (Fin r) B) ∧ IsLocalRing (MvPowerSeries (Fin r) B) ∧ maximalIdeal (MvPowerSeries (Fin r) B) = (maximalIdeal B).map MvPowerSeries.C ⊔ Ideal.span (Set.range MvPowerSeries.X) ∧ IsAdicComplete (maximalIdeal (MvPowerSeries (Fin r) B)) (MvPowerSeries (Fin r) B) ∧ ∃ eS : ResidueField (MvPowerSeries (Fin r) B) ≃+* l, eS.toRingHom.comp (residue (MvPowerSeries (Fin r) B)) = (eB.toRingHom.comp (residue B)).comp MvPowerSeries.constantCoeff ∧ ∃ φ : MvPowerSeries (Fin r) B →ₐ[B] C, (∀ j : Fin r, φ (MvPowerSeries.X j) = (x j : C)) ∧ @Continuous _ C (maximalIdeal (MvPowerSeries (Fin r) B)).adicTopology (maximalIdeal C).adicTopology φ ∧ (∀ ψ : MvPowerSeries (Fin r) B →ₐ[B] C, (∀ j : Fin r, ψ (MvPowerSeries.X j) = (x j : C)) → @Continuous _ C (maximalIdeal (MvPowerSeries (Fin r) B)).adicTopology (maximalIdeal C).adicTopology ψ → ψ = φ) ∧ IsLocalHom φ.toRingHom ∧ (eC.toRingHom.comp (residue C)).comp φ.toRingHom = eS.toRingHom.comp (residue (MvPowerSeries (Fin r) B)) ∧ ∃ (p : ∀ n : ℕ, (MvPowerSeries (Fin r) B ⧸ maximalIdeal (MvPowerSeries (Fin r) B) ^ (n + 1)) →+* (C ⧸ maximalIdeal C ^ (n + 1))) (qS : ∀ n : ℕ, (MvPowerSeries (Fin r) B ⧸ maximalIdeal (MvPowerSeries (Fin r) B) ^ (n + 1)) →+* l) (qC : ∀ n : ℕ, (C ⧸ maximalIdeal C ^ (n + 1)) →+* l), (∀ n : ℕ, IsArtinianRing (MvPowerSeries (Fin r) B ⧸ maximalIdeal (MvPowerSeries (Fin r) B) ^ (n + 1)) ∧ IsLocalRing (MvPowerSeries (Fin r) B ⧸ maximalIdeal (MvPowerSeries (Fin r) B) ^ (n + 1)) ∧ IsArtinianRing (C ⧸ maximalIdeal C ^ (n + 1)) ∧ IsLocalRing (C ⧸ maximalIdeal C ^ (n + 1)) ∧ Function.Surjective (qS n) ∧ Function.Surjective (qC n) ∧ (qS n).comp (Ideal.Quotient.mk (maximalIdeal (MvPowerSeries (Fin r) B) ^ (n + 1))) = eS.toRingHom.comp (residue (MvPowerSeries (Fin r) B)) ∧ (qC n).comp (Ideal.Quotient.mk (maximalIdeal C ^ (n + 1))) = eC.toRingHom.comp (residue C) ∧ (p n).comp (Ideal.Quotient.mk (maximalIdeal (MvPowerSeries (Fin r) B) ^ (n + 1))) = (Ideal.Quotient.mk (maximalIdeal C ^ (n + 1))).comp φ.toRingHom ∧ Function.Surjective (p n) ∧ IsLocalHom (p n) ∧ (qC n).comp (p n) = qS n) ∧ ((∃ N : ℕ, ∀ n : ℕ, N ≤ n → ∃ σ : (C ⧸ maximalIdeal C ^ (n + 1)) →+* (MvPowerSeries (Fin r) B ⧸ maximalIdeal (MvPowerSeries (Fin r) B) ^ (n + 1)), IsLocalHom σ ∧ (qS n).comp σ = qC n ∧ (p n).comp σ = RingHom.id (C ⧸ maximalIdeal C ^ (n + 1))) → ∃ e : MvPowerSeries (Fin r) B ≃ₐ[B] C, e.toAlgHom = φ ∧ @Continuous C _ (maximalIdeal C).adicTopology (maximalIdeal (MvPowerSeries (Fin r) B)).adicTopology e.symm)",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a7e9cc62",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Read node, Stacks 06SG source+proof, module, report (Worker report + Second reading by Q148 present), 4 stmt_dep records (IsNoetherianRing, Field, AdicCompletion/IsAdicComplete, MvPowerSeries). Every hypothesis/conclusion matched: eB/eC markings, local split i/ρ with residue squares, l-basis b of I/(m_C•⊤) via canonical Torsion.Basic Module (R⧸I)(M⧸I•⊤) transported by Module.compHom along eC.symm (binder order verified R,S,M), S Noetherian/local/m_S=(m_B,X)/complete/residue l, unique continuous φ with adicTopology, local+residue identity, p n/qS/qC pinned by projection equations, Artinian local quotients, eventual local residue-preserving right sections ⇒ ≃ₐ[B] equal to φ with continuous inverse; no B-linearity/compatibility, independent universes. Edge cases r=0, exponent 1, field B/C fine. No duplicate (SplitLocalSpecialKernelLifting is a different lemma). Sorry-only, docstrings with source+blueprint+6 steps, proof-dep plain imports (graded rigidity landed 17:39 before S2 start), lines ≤100, lean.statement verbatim. No compile needed (no files changed)."
+ }
+}

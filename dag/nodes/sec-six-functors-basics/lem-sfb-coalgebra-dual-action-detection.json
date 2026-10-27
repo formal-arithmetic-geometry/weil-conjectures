@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-coalgebra-dual-action-detection",
+ "kind": "statement",
+ "title": "Convolution dual action detects subcomodules and comodule maps",
+ "statement": "Let $k$ be a field [def-weil-field] and let $C$ be a $k$-vector space with $k$-linear maps $\\Delta:C\\to C\\otimes_k C$ and $\\epsilon:C\\to k$ satisfying coassociativity and both counit identities. Tensor products have the meaning of [def-weil-pbc-module-tensor-product]. Let $A=\\operatorname{Hom}_k(C,k)$ with its convolution algebra structure [lem-sfb-convolution-linear-map-algebra]: $(f*g)(c)=(f\\otimes g)(\\Delta c)$ and $1_A=\\epsilon$. A right $C$-comodule is a $k$-vector space $M$ with a linear map $\\rho_M:M\\to M\\otimes_k C$ satisfying $(\\rho_M\\otimes1_C)\\rho_M=(1_M\\otimes\\Delta)\\rho_M$ and $(1_M\\otimes\\epsilon)\\rho_M=1_M$, under the canonical tensor identifications. For every such comodule, the operators $T_f^M=(1_M\\otimes f)\\rho_M$, identifying $M\\otimes_k k$ with $M$, define a unital $k$-algebra homomorphism $A\\to\\operatorname{End}_k(M)$; in particular $T_{f*g}^M=T_f^M\\circ T_g^M$ and $T_{a\\epsilon}^M=a\\,1_M$. For every $k$-linear subspace $W\\subseteq M$ with inclusion $i$, $T_f^M(W)\\subseteq W$ for all $f\\in A$ if and only if there is a linear map $\\rho_W:W\\to W\\otimes_k C$ with $(i\\otimes1_C)\\rho_W=\\rho_Mi$; this map is unique and satisfies both comodule identities. For any two right $C$-comodules $M,N$, a $k$-linear map $u:M\\to N$ satisfies $(u\\otimes1_C)\\rho_M=\\rho_Nu$ if and only if $uT_f^M=T_f^Nu$ for every $f\\in A$. No finite-dimensionality or cocommutativity of $C,M,N$ is assumed; zero coalgebras and zero comodules are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 9(d), printed pp.174–175, coalgebra dual algebra and comodule identities; Example 9.36, printed p.178, gives the finite-dimensional duality special case. General contraction-detection formulation supplied by Q09."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-convolution-linear-map-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\rho_M(m)=\\sum_i m_i\\otimes c_i$, with finite sums. Tensor bilinearity makes $f\\mapsto T_f^M$ linear. By coassociativity, $\\sum_i\\rho_M(m_i)\\otimes c_i=\\sum_i m_i\\otimes\\Delta(c_i)$. Applying $1_M\\otimes f\\otimes g$ gives $T_f^M(T_g^M(m))=\\sum_i m_i(f*g)(c_i)=T_{f*g}^M(m)$, in exactly this order. The counit identity gives $T_\\epsilon^M=1_M$; linearity gives $T_{a\\epsilon}^M=a1_M$. Together with the cited convolution algebra, these verify every algebra-homomorphism law.",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 9(d), printed pp.174–175, coalgebra dual and comodule identities; Example 9.36, printed p.178. General detection argument supplied by Q25."
+   }
+  },
+  {
+   "text": "For later use, contractions detect zero in $X\\otimes_k C$ for every vector space $X$: if $(1_X\\otimes f)t=0$ for all $f:C\\to k$, then $t=0$. Indeed, the dual-separation statement says these $f$ detect zero in $C$. Apply the tensor-family statement with its $M=C$, $N=X$, $J=\\operatorname{Hom}_k(C,k)$, $P_f=k$ to the flip of $t$. The flip and $k\\otimes X\\cong X$ come directly from the tensor universal property; on $x\\otimes c$ the resulting map is $f(c)x$. Thus all the hypotheses of that statement hold, without any dimension restriction.",
+   "uses": [
+    "lem-weil-pbc-vector-space-dual-separates",
+    "lem-sfb-vector-space-tensor-family-zero-detection",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 9(d), printed pp.174–175, coalgebra dual and comodule identities; Example 9.36, printed p.178. General detection argument supplied by Q25."
+   }
+  },
+  {
+   "text": "Choose a complement $Q$ to $W$ in $M$. The unique decomposition $m=i(w)+q$ defines a linear projection $p:M\\to W$, $p(i(w)+q)=w$. Its linearity follows by adding decompositions and multiplying them by scalars, then using uniqueness. Thus $pi=1_W$. Put $r=1_M-ip$; then $ri=0$ and $\\ker r=i(W)$. In particular $i\\otimes1_D$ is injective for every vector space $D$, since $p\\otimes1_D$ is a left inverse: the composite sends $w\\otimes d$ to itself, hence is the identity by tensor generation.",
+   "uses": [
+    "lem-trf-vector-subspace-complement",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 9(d), printed pp.174–175, coalgebra dual and comodule identities; Example 9.36, printed p.178. General detection argument supplied by Q25."
+   }
+  },
+  {
+   "text": "Assume all $T_f^M$ preserve $W$. For $w\\in W$, every contraction of $t=(r\\otimes1_C)\\rho_M(iw)$ equals $rT_f^M(iw)=0$, so step 2 gives $t=0$. Define the linear map $\\rho_W=(p\\otimes1_C)\\rho_M i$. Then $(i\\otimes1_C)\\rho_W=\\rho_M i$, since their difference is $(r\\otimes1_C)\\rho_M i=0$. Conversely, any map with this factorization gives $T_f^M i=i(1_W\\otimes f)\\rho_W$, whose image lies in $i(W)$. These equalities follow on pure tensors from the universal property. Finally applying $p\\otimes1_C$ to any such factorization forces the displayed formula for $\\rho_W$, proving uniqueness.",
+   "uses": [
+    "lem-weil-pbc-vector-space-dual-separates",
+    "lem-sfb-vector-space-tensor-family-zero-detection",
+    "lem-trf-vector-subspace-complement",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 9(d), printed pp.174–175, coalgebra dual and comodule identities; Example 9.36, printed p.178. General detection argument supplied by Q25."
+   }
+  },
+  {
+   "text": "The factorization from step 4 implies the counit law: applying $i$ to $(1_W\\otimes\\epsilon)\\rho_W$ gives $(1_M\\otimes\\epsilon)\\rho_M i=i$, and cancel $i$ using $p$. For coassociativity, apply $i\\otimes1_C\\otimes1_C$ to the two maps $(\\rho_W\\otimes1_C)\\rho_W$ and $(1_W\\otimes\\Delta)\\rho_W$. The first becomes $(\\rho_M\\otimes1_C)\\rho_M i$, using the factorization twice; the second becomes $(1_M\\otimes\\Delta)\\rho_M i$, using it once. They agree by coassociativity of $\\rho_M$. Cancel $i\\otimes1_{C\\otimes C}$ using $p\\otimes1_{C\\otimes C}$ as in step 3. All associativity and composition identifications here agree on pure tensors.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 9(d), printed pp.174–175, coalgebra dual and comodule identities; Example 9.36, printed p.178. General detection argument supplied by Q25."
+   }
+  },
+  {
+   "text": "For a linear map $u:M\\to N$, set $d=(u\\otimes1_C)\\rho_M-\\rho_Nu$. Its contraction by $f$ is $uT_f^M-T_f^Nu$, as follows by evaluating on pure tensors. If $d=0$ this gives every intertwining identity. Conversely, if all intertwining identities hold, apply step 2 to $d(m)\\in N\\otimes C$ for each $m\\in M$: all its contractions vanish, so $d(m)=0$. Thus $d=0$, exactly the comodule-map identity. This argument uses the full algebraic dual and therefore also applies to infinite-dimensional $C,M,N$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-dual-separates",
+    "lem-sfb-vector-space-tensor-family-zero-detection",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 9(d), printed pp.174–175, coalgebra dual and comodule identities; Example 9.36, printed p.178. General detection argument supplied by Q25."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-convolution-linear-map-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-vector-space-dual-separates",
+  "lem-sfb-vector-space-tensor-family-zero-detection",
+  "lem-trf-vector-subspace-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 9(d), printed pp.174–175, coalgebra dual and comodule identities; Example 9.36, printed p.178. General detection argument supplied by Q25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|contraction",
+   "results": "{\"t\": \"2026-10-24T13:59:16Z\", \"tool\": \"grep\", \"query\": \"Comodule|comodule|contraction\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat.toComonObj and CoalgCat.comonEquivalence concern coalgebras as comonoid objects, not their comodules or detection by the convolution dual. Convolution supplies the algebra only. No comodule action/detection declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Subspaces of a coalgebra comodule are subcomodules exactly when stable under all contractions by linear functionals on the coalgebra",
+   "results": "{\"t\": \"2026-10-24T13:59:17Z\", \"tool\": \"leansearch\", \"query\": \"Subspaces of a coalgebra comodule are subcomodules exactly when stable under all contractions by linear functionals on the coalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgCat.ofComonObj\", \"Subspace\", \"Coalgebra.counitCoalgHom\", \"Submodule.dualRestrict\", \"Submodule.dualAnnihilator\", \"Pi.comul_coe_finsupp\", \"Pi.counit_comp_finsuppLcoeFun\", \"Submodule.le_dualCoannihilator_dualAnnihilator\"], \"digest\": \"6de5e0b28022e3dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat.toComonObj and CoalgCat.comonEquivalence concern coalgebras as comonoid objects, not their comodules or detection by the convolution dual. Convolution supplies the algebra only. No comodule action/detection declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, LinearMap",
+   "results": "{\"t\": \"2026-10-24T13:59:17Z\", \"tool\": \"loogle\", \"query\": \"Coalgebra, LinearMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Prod.counit_comp_inl\", \"Prod.counit_comp_inr\", \"Coalgebra.sum_counit_smul\", \"Coalgebra.sum_counit_tmul_eq\", \"Coalgebra.sum_tmul_counit_eq\", \"Coalgebra.comm_comp_comul\", \"Coalgebra.IsCocomm.comm_comp_comul\", \"Coalgebra.IsCocomm.mk\"], \"digest\": \"826147f11c422a71\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat.toComonObj and CoalgCat.comonEquivalence concern coalgebras as comonoid objects, not their comodules or detection by the convolution dual. Convolution supplies the algebra only. No comodule action/detection declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any coalgebra a right comodule is a module over its convolution linear dual and subcomodules and comodule maps are detected by this action",
+   "results": "{\"t\": \"2026-10-24T13:59:17Z\", \"tool\": \"leanfinder\", \"query\": \"For any coalgebra a right comodule is a module over its convolution linear dual and subcomodules and comodule maps are detected by this action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgCat.instComonObjModuleCatOfCarrier\", \"CoalgCat.toModuleCat\", \"CoalgCat.moduleCat_of_toModuleCat\", \"CoalgCat.toComonObj_X\", \"CoalgCat.toComonObj\", \"CoalgCat.comonEquivalence\", \"CoalgCat.tensorUnit_isModule\", \"CoalgCat.toComon\"], \"digest\": \"c07be8a85a86b1fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat.toComonObj and CoalgCat.comonEquivalence concern coalgebras as comonoid objects, not their comodules or detection by the convolution dual. Convolution supplies the algebra only. No comodule action/detection declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Convolution dual action detects morphisms of comodules over an infinite dimensional coalgebra",
+   "results": "{\"t\": \"2026-10-24T13:59:19Z\", \"tool\": \"leanfinder\", \"query\": \"Convolution dual action detects morphisms of comodules over an infinite dimensional coalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgCat.instComonObjModuleCatOfCarrier\", \"CoalgCat.comonEquivalence\", \"CoalgCat.MonoidalCategoryAux.comul_tensorObj\", \"CoalgCat.MonoidalCategoryAux.comul_tensorObj_tensorObj_left\", \"LinearMap.convCommRing\", \"CoalgCat.toComonObj\", \"CoalgCat.MonoidalCategoryAux.comul_tensorObj_tensorObj_right\", \"LinearMap.convCommSemiring\"], \"digest\": \"2d13adf656ed2b90\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat.toComonObj and CoalgCat.comonEquivalence concern coalgebras as comonoid objects, not their comodules or detection by the convolution dual. Convolution supplies the algebra only. No comodule action/detection declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*(injective|ext)|(injective|ext).*dual|ext.*(rTensor|lTensor)",
+   "results": "{\"t\": \"2026-10-24T14:35:35Z\", \"tool\": \"grep\", \"query\": \"dual.*(injective|ext)|(injective|ext).*dual|ext.*(rTensor|lTensor)\", \"sub\": \"LinearAlgebra/TensorProduct\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat concerns comonoids, Coalgebra.Repr finite tensor presentations of comultiplication, and dualDistrib/contractions do not state the comodule action or either detection assertion. Tensor-family detection is reused from the existing DAG instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coalgebra right comodule is a left module over its convolution dual algebra and invariant subspaces and intertwining maps are detected by all linear functionals",
+   "results": "{\"t\": \"2026-10-24T14:35:35Z\", \"tool\": \"leansearch\", \"query\": \"A coalgebra right comodule is a left module over its convolution dual algebra and invariant subspaces and intertwining maps are detected by all linear functionals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgCat.instComonObjModuleCatOfCarrier\", \"CoalgCat.ofComonObj\", \"Coalgebra.toCoalgebraStruct\", \"CoalgCat.ofComonObjCoalgebraStruct_comul\", \"CoalgCat.toComonObj\", \"CoalgCat.ofComonObjCoalgebraStruct\", \"CoalgCat.comul_def\", \"Coalgebra.Repr.mk.inj\"], \"digest\": \"13ca8b1da26b4214\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat concerns comonoids, Coalgebra.Repr finite tensor presentations of comultiplication, and dualDistrib/contractions do not state the comodule action or either detection assertion. Tensor-family detection is reused from the existing DAG instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Module.Dual",
+   "results": "{\"t\": \"2026-10-24T14:35:35Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, Module.Dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.dualDistrib\", \"TensorProduct.AlgebraTensorModule.dualDistrib\", \"TensorProduct.dualDistrib_apply\", \"TensorProduct.AlgebraTensorModule.dualDistrib_apply\", \"TensorProduct.dualDistrib_apply_comm\", \"contractLeft\", \"contractRight\", \"dualTensorHom\"], \"digest\": \"c99708f5f556ac96\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat concerns comonoids, Coalgebra.Repr finite tensor presentations of comultiplication, and dualDistrib/contractions do not state the comodule action or either detection assertion. Tensor-family detection is reused from the existing DAG instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor over a field is zero if all contractions against linear functionals on the right factor vanish",
+   "results": "{\"t\": \"2026-10-24T14:35:36Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor over a field is zero if all contractions against linear functionals on the right factor vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.VanishesTrivially\", \"TensorProduct.VanishesTrivially.of_fintype\", \"TensorProduct.sum_tmul_eq_zero_of_vanishesTrivially\", \"TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero_of_rTensor_injective\", \"TensorProduct.vanishesTrivially_iff_sum_tmul_eq_zero_of_rTensor_injective\", \"TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero\", \"TensorProduct.sum_tmul_basis_right_eq_zero\", \"TensorProduct.vanishesTrivially_iff_sum_tmul_eq_zero\"], \"digest\": \"a8ad2bd9477ad2c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat concerns comonoids, Coalgebra.Repr finite tensor presentations of comultiplication, and dualDistrib/contractions do not state the comodule action or either detection assertion. Tensor-family detection is reused from the existing DAG instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right coalgebra comodule carries a representation of the convolution algebra of linear functionals with invariant subspaces precisely subcomodules",
+   "results": "{\"t\": \"2026-10-24T14:39:19Z\", \"tool\": \"leanfinder\", \"query\": \"A right coalgebra comodule carries a representation of the convolution algebra of linear functionals with invariant subspaces precisely subcomodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Coalgebra.Repr.right\", \"Coalgebra.Repr.ι\", \"Coalgebra.Repr\", \"Representation.coindV\", \"Coalgebra.Repr.induced\", \"Representation.mapSubmodule\", \"Coalgebra.Repr.induced_right\", \"CoalgCat.instComonObjModuleCatOfCarrier\"], \"digest\": \"8aa86987fef789a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat concerns comonoids, Coalgebra.Repr finite tensor presentations of comultiplication, and dualDistrib/contractions do not state the comodule action or either detection assertion. Tensor-family detection is reused from the existing DAG instead."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|dualAction|dual_action",
+   "results": "{\"t\": \"2026-10-24T14:39:19Z\", \"tool\": \"grep\", \"query\": \"Comodule|comodule|dualAction|dual_action\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoalgCat concerns comonoids, Coalgebra.Repr finite tensor presentations of comultiplication, and dualDistrib/contractions do not state the comodule action or either detection assertion. Tensor-family detection is reused from the existing DAG instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-endomorphisms-absolute-simplicity",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed p.90. Supporting input: Milne 4.19(b), invoked in 22.4 after establishing End_G(V)=k; general affine-group scalar-extension criterion. Dual-coalgebra action and detection of subcomodules and intertwiners, before the finite double-centralizer application.",
+   "via": [
+    "lem-sfb-scalar-endomorphisms-absolute-simplicity",
+    "lem-sfb-split-simple-absolute-irreducibility",
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-coalgebra-dual-action-detection",
+  "worker": "stage1",
+  "summary": "Q25 expands the convolution action and contraction-detection proof, reusing existing dual separation, tensor-family zero detection and subspace complements; no new nodes and no statement change. Each restricted coaction identity is checked by an explicit split inclusion.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary representation-theoretic route recorded in blueprint.from.place: dual-coalgebra detection before finite double centralizers. Steps 1–2 give the action and separation, steps 3–5 the restricted coaction, step 6 morphisms; no change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-0cd92a450",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-0cd92a450 (reviewer sub-agent of L); spot-checked: Item only: 6 steps, no new nodes, statement and stmt_deps unchanged. The base proof was empty, so there was nothing to compare step by step, and the delivery is not a 2026-10-21 re-split. I checked all 6 steps against the statements of the cited nodes. Step 1: applying 1⊗f⊗g to coassociativity gives T_fT_g = T_{f*g}, in the convolution order of lem-sfb-convolution-linear-map-algebra with R=B=k. That matches Milne iAG p.174 §9(d), where the dual multiplication C∨⊗C∨→(C⊗C)∨→C∨ is (f⊗g)∘Δ. Step 2: contraction detection follows from the flip plus lem-sfb-vector-space-tensor-family-zero-detection (M=C, N=X, J=C∨, P=k), with lem-weil-pbc-vector-space-dual-separates as its hypothesis; no dimension restriction is used. Step 3: a complement gives p with pi=1, so i⊗1 is injective; elementary. Step 4: (1⊗f)(r⊗1)ρi = rT_f i = 0, so ρ_W = (p⊗1)ρi; the converse direction and uniqueness are checked. Step 5: the counit and coassociativity laws transfer through i⊗1 and cancel via p. Step 6: the difference tensor d contracts to uT_f-T_fu. Edge cases checked: W=0, W=M, M=0, N=0, C=0 (forces M=0, A=0), the matrix coalgebra (order of multiplication) and infinite dimensions. Duplicate search over the DAG for comodule, subcomodule and convolution found no node with this statement; the comodule dictionary and coefficient coalgebra nodes are different statements. Every cited node is a mathlib or unsplit leaf, so there is no cycle and no tool_uses are needed. Batch-5 check: lem-trf-vector-subspace-complement is the Mathlib leaf for vector-space complements (Submodule.exists_isCompl). It is general linear algebra, not part of the trace formula, Poincaré duality or their proofs, so I accept it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoalgebraDualActionDetection",
+  "declaration": "Coalgebra.dual_action_detection",
+  "declarations": [
+   "Coalgebra.dualContraction",
+   "Coalgebra.dual_action_detection"
+  ],
+  "file": "lean/Sheaf/RingTheory/CoalgebraDualActionDetection.lean",
+  "statement": "theorem dual_action_detection [Coalgebra k C] (ρM : M →ₗ[k] M ⊗[k] C) (hcoassocM : (_root_.TensorProduct.assoc k M C C).toLinearMap ∘ₗ ρM.rTensor C ∘ₗ ρM = (Coalgebra.comul (R := k) (A := C)).lTensor M ∘ₗ ρM) (hcounitM : (_root_.TensorProduct.rid k M).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := C)).lTensor M ∘ₗ ρM = LinearMap.id) : (∃ T : WithConv (C →ₗ[k] k) →ₐ[k] Module.End k M, ∀ f : WithConv (C →ₗ[k] k), T f = dualContraction ρM f.ofConv) ∧ (∀ f g : WithConv (C →ₗ[k] k), dualContraction ρM (f * g).ofConv = (dualContraction ρM f.ofConv).comp (dualContraction ρM g.ofConv)) ∧ (∀ a : k, dualContraction ρM (a • Coalgebra.counit (R := k) (A := C)) = a • (LinearMap.id : Module.End k M)) ∧ (∀ W : Submodule k M, (∀ (f : C →ₗ[k] k) (m : M), m ∈ W → dualContraction ρM f m ∈ W) ↔ ∃ ρW : W →ₗ[k] W ⊗[k] C, W.subtype.rTensor C ∘ₗ ρW = ρM ∘ₗ W.subtype) ∧ (∀ (W : Submodule k M) (ρW : W →ₗ[k] W ⊗[k] C), W.subtype.rTensor C ∘ₗ ρW = ρM ∘ₗ W.subtype → (∀ ρW' : W →ₗ[k] W ⊗[k] C, W.subtype.rTensor C ∘ₗ ρW' = ρM ∘ₗ W.subtype → ρW' = ρW) ∧ (_root_.TensorProduct.assoc k W C C).toLinearMap ∘ₗ ρW.rTensor C ∘ₗ ρW = (Coalgebra.comul (R := k) (A := C)).lTensor W ∘ₗ ρW ∧ (_root_.TensorProduct.rid k W).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := C)).lTensor W ∘ₗ ρW = LinearMap.id) ∧ (∀ (N : Type z) [AddCommGroup N] [Module k N] (ρN : N →ₗ[k] N ⊗[k] C), (_root_.TensorProduct.assoc k N C C).toLinearMap ∘ₗ ρN.rTensor C ∘ₗ ρN = (Coalgebra.comul (R := k) (A := C)).lTensor N ∘ₗ ρN → (_root_.TensorProduct.rid k N).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := C)).lTensor N ∘ₗ ρN = LinearMap.id → ∀ u : M →ₗ[k] N, u.rTensor C ∘ₗ ρM = ρN ∘ₗ u ↔ ∀ f : C →ₗ[k] k, u ∘ₗ dualContraction ρM f = dualContraction ρN f ∘ₗ u)",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-3046127b8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3046127b8",
+  "group": "Q87",
+  "result": "fix",
+  "note": "H3 weakening: delivered `stable ↔ ∃! ρW, (i⊗1)ρW = ρM i` makes uniqueness conditional on stability; a citer holding a factorization cannot get stability without proving uniqueness (injectivity of i⊗1, step 3). Node says: stable iff ∃, and the map is unique for every W. FIX: conjunct 4 → `stable ↔ ∃ ρW, eq`; conjunct 5 → `∀ W ρW, eq → (∀ ρW', eq → ρW' = ρW) ∧ coassoc ∧ counit`; docstring sentence adjusted. Fixes: fixes/CoalgebraDualActionDetection.lean (complete file) + fixes/lem-sfb-coalgebra-dual-action-detection.lean-record.json (verbatim statement); refit_record gives no errors or warnings. Fixed file compiles clean via nt_compile --json (2.0 s, exit 0). All other clauses match the node: Coalgebra k C, WithConv convolution algebra with Mathlib's order (f*g)(c)=f(c1)g(c2), T_{f*g}=T_f∘T_g checked by hand, T_{aε}=a·1, pinned AlgHom, comodule-map iff over an arbitrary N in universe z (parse checked). dualContraction is a real composite of tensor maps, not hollow. No finiteness or cocommutativity assumed; edge cases C=0, M=0, W=0, W=M, C=k and infinite dimensions fine. No Mathlib or project duplicate (no Comodule in Mathlib). Proof is sorry only; docstrings carry the source place and all 6 proof steps."
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-fix-etale-origin-scalar-pullback-square",
+ "kind": "statement",
+ "title": "Local tensor and pullback normalization for intrinsic etale origins",
+ "statement": "Let A and B be finite commutative rings, φ:A→B a unital homomorphism, p:Z→Y any scheme morphism, and C any object of D(Y_et,A), with no lower bound. Use F_T, the intrinsic coefficient comparison, and q_C=properOriginTensorIso from [def-fix-proper-etale-origin-scalar-data]. Let L_e,L_A be the etale and intrinsic pro-etale geometric pullbacks. Let a:F_Y L_A→L_e F_Z be originPullback, the inverse mate of the ambient fixed site counit mate conjugated by the specified realization/direct-image comparisons; its bounded-below right mate is properOriginMateIso. Write S_T=U_T S^B_T for intrinsic scalar extension followed by restriction. Let s:S_Y L_A→L_A S_Z be originScalarPullback: restriction/pullback comparison followed by the scalar-extension pullback comparison [lem-weil-pbc-ring-sheaf-change-adjunction]. Let t:((- tensor B_Y) L_e)→L_e(- tensor B_Z) be originEtaleTensorPullback, the canonical tensor/pullback comparison followed by the constant-coefficient pullback identification [lem-pur-derived-change-of-rings]. Then L_A(q_C);s_(F_Y C);S_Z(a_C) = a_(C tensor B_Y);F_Z(t_C);q_(L_e C). This is the local left-adjoint normalization square, before taking right mates or evaluating on a right-derived direct image.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0B56, equation-projection-formula-map; Tag 0E48, remark-compatible-with-diagram, left-adjoint tensor compatibility before taking right mates"
+ },
+ "stmt_deps": [
+  "def-fix-etale-origin-scalar-pullback-data",
+  "def-fix-proper-etale-origin-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand the tensor comparison into the inverse scalar/tensor, inverse restriction/realization, and inverse extension/realization comparisons. Naturality moves the extension comparison past restriction/pullback. Apply the extension cube and then the restriction cube.",
+   "uses": [
+    "lem-fix-etale-origin-restriction-pullback-cube",
+    "lem-fix-etale-origin-extension-pullback-cube",
+    "def-fix-etale-origin-scalar-pullback-data",
+    "def-fix-proper-etale-origin-scalar-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0B56, equation-projection-formula-map; Tag 0E48, remark-compatible-with-diagram, left-adjoint tensor compatibility before taking right mates"
+   }
+  },
+  {
+   "text": "Naturality groups the remaining etale scalar-pullback arrows. Apply the proved scalar_tensor_pullback_square, conjugated by inverse scalar/tensor comparisons, and functoriality to finish.",
+   "uses": [
+    "lem-pur-etale-scalar-mate-projection",
+    "def-fix-etale-origin-scalar-pullback-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0B56, equation-projection-formula-map; Tag 0E48, remark-compatible-with-diagram, left-adjoint tensor compatibility before taking right mates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-etale-origin-restriction-pullback-cube",
+  "lem-fix-etale-origin-extension-pullback-cube",
+  "def-fix-etale-origin-scalar-pullback-data",
+  "def-fix-proper-etale-origin-scalar-data",
+  "lem-pur-etale-scalar-mate-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0B56, equation-projection-formula-map; Tag 0E48, remark-compatible-with-diagram, left-adjoint tensor compatibility before taking right mates"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The restriction and extension of scalars comparisons under intrinsic realization commute with geometric pullback on derived categories of sheaves",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, free-module pullback identities, and Scheme.Modules.restrictFunctorIsoPullback. These concern ordinary module pullback or free modules, not the two specified derived realization cubes.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate. Underived pullback composition provides background but does not identify these normalized derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoWhiskerLeft\", \"naturality\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*pullback|pullback.*realization",
+   "results": "0 Mathlib hits. Local rg found etaleProEtale_scalar_pullback_cube and realizationRestriction_directImage_cube; neither states the combined intrinsic cube with properOriginRestrictionIso and originPullback.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; the proved etale scalar/tensor square is reused in the assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleOriginScalarProjectionSquare",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Local tensor and pullback normalization for intrinsic etale origins; a face of the proper-factor coefficient comparison",
+   "via": [
+    "lem-fix-proper-etale-origin-scalar-isomorphism",
+    "lem-fix-etale-origin-scalar-projection-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleOriginScalarPullbackSquare",
+  "file": "lean/Sheaf/Paper/EtaleOriginScalarPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleOriginScalarPullbackSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.etaleOriginScalarPullbackSquare"
+  ],
+  "statement": "theorem etaleOriginScalarPullbackSquare\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)\n    (C : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) Y) :\n    (Scheme.proEtaleConstantRingDerivedPullback A p).map (properOriginTensorIso φ Y C).hom ≫\n      (originScalarPullback φ p).app\n        ((finiteCoefficientIntrinsicDerivedComparison Y A).obj C) ≫\n      (directImageScalarExtension φ Z ⋙ (scalarMateRestriction φ Z).mapDerivedCategory).map\n        ((originPullback A p).app C) =\n    (originPullback A p).app\n        (properOriginEtaleTensor (RingHom.ulift.{u + 1, u + 1, u, u} φ) Y C) ≫\n      (finiteCoefficientIntrinsicDerivedComparison Z A).map\n        ((originEtaleTensorPullback (RingHom.ulift.{u + 1, u + 1, u, u} φ) p).app C) ≫\n      (properOriginTensorIso φ Z\n        ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p).leftDerivedFunctor.obj\n          C)).hom",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T094420-L-223756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T094420-L-223756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

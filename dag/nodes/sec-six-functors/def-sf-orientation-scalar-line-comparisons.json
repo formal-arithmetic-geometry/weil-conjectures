@@ -13,9 +13,42 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-orientation/def-sf-orientation.md",
   "place": "Comparison conventions and clauses 1-4, used by the component interface"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For sfOrientationIntegralComplex_mem, identify the one-term positive root complex with the published signed integral Tate line shifted by 2d, using the single-functor shift isomorphism. The signed line is intrinsically constructible by sfIntegralTwistingObject_mem; integer-shift closure and isomorphism closure give constructibility of this specific complex.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an auxiliary prime p greater than ell and its finite-field datum. This puts no structure on X. Apply integral_residue_tor, whose equality of object predicates upgrades the preceding constructibility to the required uniform finite-Tor constructibility. The auxiliary datum occurs only in the proof. This works for d=0 and the empty scheme.",
+   "uses": [
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For sfOrientationRationalScalarLine_existsUnique, use the object clause of sfRationalScalarExtension_existsUnique and project to the underlying ambient derived object. This identifies the source with the completed integral scalar extension of the specified shifted line. Transport the existing sfOrientationIntegralScalarAmbient isomorphism along that equality and lift it by ObjectProperty.isoMk. Its underlying hom is the prescribed ambient hom by reflexivity after substitution. If another lift has the same underlying hom, full-subcategory hom extensionality and Iso.ext identify it with this lift. All public comparison definitions retain their original constructions.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-coef-integral-residue-tor",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-orientation/def-sf-orientation.md",
+  "place": "Coefficient-line constructibility and scalar comparison conventions",
+  "note": "Written by group V9, 2026-10-22: reuse the published constructible Tate line, triangulated closure and residue-Tor equality; lift the existing normalized scalar isomorphism through the full subcategory using the rational scalar object formula."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -64,10 +97,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors",
@@ -109,5 +146,15 @@
   "group": "Q23",
   "result": "pass",
   "note": "I read all 13 modules (item, the §1(B) SfOrientationDatum repair of def-sf-orientation, and 11 new def-sf-orientation-* nodes) against sk-def-sf-orientation (main-20261015, order 2487) and def-sf-orientation, clauses 1–4. The Lean component T_{X,d} ≅ f^!(T_{Y,0}) is the form the source permits. theta and beta are counit transposes of the datum's own projection and exchange maps, pinned by HEq; I checked directions against the live SixFunctorExchangeData. Base change, composition, the coefficient equation w∘C(γ)=γ'∘t (rationalization, integral→finite for E and every L, stage transitions, common stage), the realization through the derivedComparisonAdjunction unit, and the affine trace (open counit then projectiveLineTrace; HEq types match at X=A¹) all match the source. All coordinates are pinned; the unique-choice definitions are fixed on root tensors; sorry appears only in documented theorems. Records: statements verbatim; def-sf-orientation differs from live only in lean (replacing the lead's existing:true attachment); item stmt_deps add only the new nodes; no collisions. Edge cases covered: d=0, f=id, empty X, m=0 ramified, all r, nonseparated Noetherian Y. Accepted as equivalent: étale-companion presentation of finite geometry; integral normalization via reductions; no finite→finite field because A5 has none. No compile (no change); worker reports 13 clean compiles and dry run OK. Advisory: author-written second reading; the repair uses new-node declarations not in def-sf-orientation stmt_deps (no cycle); the étale family uses f^× without citing def-weil-exceptional-inverse-image."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261022T144342-L-1607524",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

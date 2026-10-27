@@ -1,0 +1,120 @@
+{
+ "id": "lem-z8-etale-diagonal-triangles",
+ "kind": "statement",
+ "title": "Etale Diagonal Triangles",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem supportedDiagonalUnit_first\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj L))\n    (t : (CoordinateTrace.push A f).obj ((CoordinateTrace.pull A f).obj L) ⟶\n      constantComplex A Y)\n    (t₁ : (CoordinateTrace.push A (pullback.fst f f)).obj\n      ((CoordinateTrace.pull A (pullback.snd f f)).obj ((CoordinateTrace.pull A f).obj L)) ⟶\n      constantComplex A X)\n    (he : ∀ M : DerivedCategoryModule A X,\n      (CoordinateTrace.push A f).map (CoordinateTrace.comparison A f L M).hom ≫\n          CoordinateTrace.evaluation A f L t ((CoordinateTrace.push A f).obj M) =\n        (CoordinateTrace.directComparison A f).hom.app _ ≫\n          (CoordinateTrace.push A f).map\n            ((CoordinateTrace.orderedProjectionIso A (pullback.fst f f) M\n              ((CoordinateTrace.pull A (pullback.snd f f)).obj\n                ((CoordinateTrace.pull A f).obj L))).inv ≫\n              ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map t₁ ≫\n                (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X M).hom))\n    (hi : ∀ M : DerivedCategoryModule A X,\n      let a₁ := diagonalFirstPushSection A f\n      a₁.hom.app M ≫\n          (ordinaryFinitePushforward A (pullback.fst f f)).map\n            ((diagonalTensorIso A f).inv.app M ≫\n              ((ordinaryFiniteTensor A (pullback f f)).obj\n                ((ordinaryFinitePullback A (pullback.fst f f)).obj M)).map δ) ≫\n          (CoordinateTrace.orderedProjectionIso A (pullback.fst f f) M\n            ((CoordinateTrace.pull A (pullback.snd f f)).obj\n              ((CoordinateTrace.pull A f).obj L))).inv ≫\n          ((ordinaryFiniteTensor A X).obj M).map t₁ ≫\n          (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X M).hom = 𝟙 M)\n    (M : DerivedCategoryModule A X) :\n    (ordinaryFinitePushforward A f).map\n        (Adjunction.unitComponent (ordinaryFinitePushforward A f) (CoordinateTrace.H A f L)\n          (supportedDiagonalUnit A f L δ) M) ≫\n      CoordinateTrace.evaluation A f L t ((ordinaryFinitePushforward A f).obj M) =\n        𝟙 ((ordinaryFinitePushforward A f).obj M)\n\ntheorem diagonalTensorMap_coordinate\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    (M : DerivedCategoryModule A X)\n    (c : (ordinaryFinitePullback A (pullback.fst f f)).obj M ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj M)\n    (hc : (ordinaryFinitePullback A (pullback.diagonal f)).map c ≫\n      (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) (pullback.diagonal f)\n        (pullback.snd f f) (pullback.diagonal_snd f)).hom.app M =\n      (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) (pullback.diagonal f)\n        (pullback.fst f f) (pullback.diagonal_fst f)).hom.app M) :\n    let q₂ := (CoordinateTrace.orderedProjectionIso A (pullback.diagonal f)\n      ((ordinaryFinitePullback A (pullback.snd f f)).obj M)\n      (ordinaryFiniteUnit A X)).hom ≫\n      (ordinaryFinitePushforward A (pullback.diagonal f)).map\n        (((ordinaryFiniteTensor A X).map\n          ((leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) (pullback.diagonal f)\n            (pullback.snd f f) (pullback.diagonal_snd f)).hom.app M)).app\n              (ordinaryFiniteUnit A X) ≫ (singleUnitor A X).hom.app M)\n    (((ordinaryFiniteTensor A (pullback f f)).map c).app\n        ((ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X))) ≫\n      q₂ = (diagonalTensorIso A f).hom.app M\n\ntheorem supportedDiagonalUnit_second\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj L))\n    (t : (CoordinateTrace.push A f).obj ((CoordinateTrace.pull A f).obj L) ⟶\n      constantComplex A Y)\n    (t₂ : (CoordinateTrace.push A (pullback.snd f f)).obj\n      ((CoordinateTrace.pull A (pullback.snd f f)).obj ((CoordinateTrace.pull A f).obj L)) ⟶\n      constantComplex A X)\n    (he : ∀ K : DerivedCategoryModule A Y,\n      (CoordinateTrace.comparison A f L ((CoordinateTrace.H A f L).obj K)).hom ≫\n          (CoordinateTrace.H A f L).map (CoordinateTrace.evaluation A f L t K) =\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          (((ordinaryFiniteTensor A (pullback f f)).map\n            (CoordinateTrace.coordinateH A f L K).hom).app\n              ((ordinaryFinitePullback A (pullback.snd f f)).obj\n                ((ordinaryFinitePullback A f).obj L))) ≫\n          (CoordinateTrace.orderedProjectionIso A (pullback.snd f f)\n            ((CoordinateTrace.H A f L).obj K)\n            ((ordinaryFinitePullback A (pullback.snd f f)).obj\n              ((ordinaryFinitePullback A f).obj L))).inv ≫\n          ((ordinaryFiniteTensor A X).obj ((CoordinateTrace.H A f L).obj K)).map t₂ ≫\n          (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X\n            ((CoordinateTrace.H A f L).obj K)).hom)\n    (hi : (diagonalPushSection A f).hom.app (ordinaryFiniteUnit A X) ≫\n      (ordinaryFinitePushforward A (pullback.snd f f)).map δ ≫ t₂ ≫\n      (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) X).inv = 𝟙 _) :\n    ∀ K : DerivedCategoryModule A Y,\n      Adjunction.unitComponent (ordinaryFinitePushforward A f) (CoordinateTrace.H A f L)\n          (supportedDiagonalUnit A f L δ) ((CoordinateTrace.H A f L).obj K) ≫\n        (CoordinateTrace.H A f L).map (CoordinateTrace.evaluation A f L t K) = 𝟙 _",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-z8-adjunction-unit-transport",
+  "lem-z8-etale-diagonal-section-coherence",
+  "lem-z8-etale-supported-diagonal-unit"
+ ],
+ "proof": [
+  {
+   "text": "For the first triangle, substitute the first coordinate trace contraction. Naturality of the direct-image coordinate comparison moves the diagonal tensor-class map to the first section. The assumed first tensor section integral cancels it. For the second triangle, restrict coordinate interchange to the diagonal and use the common-base tensor coefficient comparison. Projection naturality identifies its diagonal tensor map with the second section tensor map. Substitute the second trace contraction and cancel using the second tensor section integral. The final first-triangle reassociation is a proved generic section-unit triangle calculation. First identify the original coordinate direct-image comparison with the generic cached comparison by an explicit proved definitional equality; rewrite by that equation before applying section naturality, so the kernel does not repeatedly unfold the composite comparison.",
+   "uses": [
+    "lem-z8-adjunction-unit-transport",
+    "lem-z8-etale-diagonal-section-coherence",
+    "lem-z8-etale-supported-diagonal-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the second triangle, apply the proper-section contraction theorem in its separately compiled module. Its statement and complete proof are unchanged.",
+   "uses": [
+    "lem-z8-etale-proper-section-contraction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-adjunction-unit-transport",
+  "lem-z8-etale-diagonal-section-coherence",
+  "lem-z8-etale-proper-section-contraction",
+  "lem-z8-etale-supported-diagonal-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleDiagonalTriangles",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDiagonalTriangles.lean",
+  "declaration": "AlgebraicGeometry.Etale.supportedDiagonalUnit_second",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedDiagonalUnit_first",
+   "AlgebraicGeometry.Etale.diagonalTensorMap_coordinate",
+   "AlgebraicGeometry.Etale.supportedDiagonalUnit_second"
+  ],
+  "statement": "theorem supportedDiagonalUnit_second\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj L))\n    (t : (CoordinateTrace.push A f).obj ((CoordinateTrace.pull A f).obj L) ⟶\n      constantComplex A Y)\n    (t₂ : (CoordinateTrace.push A (pullback.snd f f)).obj\n      ((CoordinateTrace.pull A (pullback.snd f f)).obj ((CoordinateTrace.pull A f).obj L)) ⟶\n      constantComplex A X)\n    (he : ∀ K : DerivedCategoryModule A Y,\n      (CoordinateTrace.comparison A f L ((CoordinateTrace.H A f L).obj K)).hom ≫\n          (CoordinateTrace.H A f L).map (CoordinateTrace.evaluation A f L t K) =\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          (((ordinaryFiniteTensor A (pullback f f)).map\n            (CoordinateTrace.coordinateH A f L K).hom).app\n              ((ordinaryFinitePullback A (pullback.snd f f)).obj\n                ((ordinaryFinitePullback A f).obj L))) ≫\n          (CoordinateTrace.orderedProjectionIso A (pullback.snd f f)\n            ((CoordinateTrace.H A f L).obj K)\n            ((ordinaryFinitePullback A (pullback.snd f f)).obj\n              ((ordinaryFinitePullback A f).obj L))).inv ≫\n          ((ordinaryFiniteTensor A X).obj ((CoordinateTrace.H A f L).obj K)).map t₂ ≫\n          (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X\n            ((CoordinateTrace.H A f L).obj K)).hom)\n    (hi : (diagonalPushSection A f).hom.app (ordinaryFiniteUnit A X) ≫\n      (ordinaryFinitePushforward A (pullback.snd f f)).map δ ≫ t₂ ≫\n      (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) X).inv = 𝟙 _) :\n    ∀ K : DerivedCategoryModule A Y,\n      Adjunction.unitComponent (ordinaryFinitePushforward A f) (CoordinateTrace.H A f L)\n          (supportedDiagonalUnit A f L δ) ((CoordinateTrace.H A f L).obj K) ≫\n        (CoordinateTrace.H A f L).map (CoordinateTrace.evaluation A f L t K) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

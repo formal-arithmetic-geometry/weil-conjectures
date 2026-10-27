@@ -1,0 +1,284 @@
+{
+ "id": "lem-pur-etale-system-cofinal-mate",
+ "kind": "statement",
+ "title": "Cofinal restriction and the compact-support adjunction mate",
+ "statement": "Let $k=\\overline{\\mathbf F}_q$ have characteristic $p$ and let $\\ell\\ne p$ be prime [def-weil-finite-field-fiber]. Let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes, with no separatedness assumption on $Y$, and fix a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p_f}Y$ [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. For an inverse sequence $C_\\bullet$ of finite commutative rings annihilated by powers of $\\ell$, write $\\mathscr S_C(W)$ for strict systems of $(C_n)_{W_{\\mathrm{et}}}$-module sheaves, with $C_{n+1}$-linear transitions $M_{n+1}\\to\\operatorname{Res}_{C_{n+1}\\to C_n}M_n$ and compatible componentwise morphisms, and use its ordinary unbounded derived category and evaluation $e_n$ [lem-pur-system-level-left-extension]. Set $F_C=Rp_{f,C,*}j_{!,C}$ and $F_{C_n}=Rp_{f,*,C_n}j_!$, where open extension and ordinary etale direct image act termwise before derivation [lem-coef-semilinear-derived-sections]. \nLet $r:\\mathbf Z_{\\ge1}\\to\\mathbf Z_{\\ge1}$ be strictly increasing and unbounded, let $C_r=(C_{r(i)})_i$, and write $U_r^W:D(\\mathscr S_C(W))\\to D(\\mathscr S_{C_r}(W))$ for restriction. Let $L_r^W\\dashv U_r^W$ be derived left extension with $t(m)=\\min\\{i:r(i)\\ge m\\}$ and\n$$e_mL_r^WN=C_m\\otimes^L_{C_{r(t(m))}}N_{t(m)}$$\nwith the selected-level transitions and tensor associators of [lem-pur-system-level-left-extension]. The finite-ring projection maps of [lem-pur-etale-system-coefficient-projection] give a natural isomorphism\n$$h_r:F_CL_r^X\\xrightarrow{\\sim}L_r^YF_{C_r},$$\nwhose level-$m$ component is the inverse of $q$ for $C_{r(t(m))}\\to C_m$. It is a map of actual derived systems, with the specified transition maps.\n\nFix adjunctions $F_C\\dashv G_C$ and $F_{C_r}\\dashv G_{C_r}$ on the unbounded categories. There is a natural isomorphism $\\rho_r:U_r^XG_C\\cong G_{C_r}U_r^Y$ specified by the natural Hom bijection\n$$\\operatorname{Hom}(N,U_r^XG_CM)\\cong\\operatorname{Hom}(L_r^XN,G_CM)\\cong\\operatorname{Hom}(F_CL_r^XN,M)\\cong\\operatorname{Hom}(L_r^YF_{C_r}N,M)\\cong\\operatorname{Hom}(N,G_{C_r}U_r^YM).$$\nIt preserves the counits after restriction, respects map action, and its comparisons for composite subsequences agree under the canonical composed-restriction and left-extension identifications. All maps are independent of resolutions on ordinary derived systems. In particular it applies to $C_m=O'/(v^m)$, $r(n)=en$ for $O'=\\mathcal O_{E'}$ with $E'/\\mathbf Q_\\ell$ finite and a uniformizer $v$: whenever $s\\in O'$ satisfies $sO'=v^eO'$ with $e\\ge1$, the quotient-ring identifications $O'/(v^{en})=O'/(s^n)$ carry the restricted construction, including its maps, to the construction using $O'/(s^n)$ and the same chosen compactification.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and the adjunction argument of Lemma 5.22 (printed pp. 21, 36); agent extraction of returned item step 9 with its formula for t(m), explicit transition compatibility, composed-subsequence Hom calculation and resolution independence."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-system-level-left-extension",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-etale-system-coefficient-projection",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Obtain the normalized geometric support realization, retaining invertibility and the coefficient-projection cocycle.",
+   "uses": [
+    "lem-pur-etale-cofinal-support-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 2,
+   "text": "Apply the normalized geometric subsequence cocycle.",
+   "uses": [
+    "lem-pur-etale-cofinal-support-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 3,
+   "text": "Prove the Hom action and counit equations by composite adjunction uniqueness. Identify each mate with conjugateEquiv. The mate of the inverse left-adjoint compositor is the restriction compositor. The whiskering and composition laws for conjugateEquiv transform the geometric cocycle into rho composition. These are proved generic private lemmas in the item module.",
+   "uses": [
+    "lem-pur-normalized-adjunction-composition",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For $C_m=O'/(v^m)$ these are finite $\\ell$-primary coefficient rings by the local-field coefficient-stage theorem with the identity field extension and uniformizer $v$. If $sO'=v^eO'$, taking $n$th ideal powers gives $s^nO'=v^{en}O'$. The canonical quotient identifications send the class of every $x\\in O'$ to its class and commute with quotient maps because both routes send $x$ to the same class. Since $e\\ge1$, $r(n)=en$ is strictly increasing and unbounded. Transport the systems, tensor functors and their specified units along these ring identifications. The map $x\\mapsto x\\otimes1$ and the quotient transitions are unchanged; the defining transpose for $q$, hence steps 2 and 4 and their counit equations, are unchanged as well. The compactification was fixed throughout. This proves the final specialization on objects and maps, including $e=1$.",
+   "uses": [
+    "lem-pur-local-field-coefficient-stages",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-etale-system-coefficient-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and the levelwise geometric morphism and base-change argument preceding Lemma 4.10, printed p. 23; agent generalization to finite nonempty blocks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-cofinal-support-realization",
+  "lem-pur-etale-cofinal-support-composition",
+  "lem-pur-normalized-adjunction-composition",
+  "det-sp-unique-right-adjoint",
+  "lem-pur-local-field-coefficient-stages",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-etale-system-coefficient-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "C9 formalizes parent steps 4--6 by Mathlib conjugateEquiv and splits geometric steps 1--3 into separate source-based results; local-field proof retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a strictly increasing unbounded subsequence of a finite coefficient tower commutes with the etale compact-support right adjoint using derived left extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R],\\n  (Condensed.profiniteSolid R).IsRightKanExtension (Condensed.profiniteSolidCounit R)\", \"doc\": \"The profinite solid module functor from profinite spaces to condensed $ R $-modules is defined as the right Kan extension of the embedding functor from finite types to profinite spaces along the free \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] (f₁₂ : R₁ →+* R₂)\\n  (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁),\\n  ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M\\n        (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M))\\n  \", \"doc\": \"For commutative rings $ R_1, R_2, R_3 $ with ring homomorphisms $ f_{12} : R_1 → R_2 $ and $ f_{23} : R_2 → R_3 $, the hom-set equivalence induced by the adjunction between extension and restriction o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley for restriction of inverse systems and right adjoints using left Kan extension and tensor projection formula",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"Condensed.isoLocallyConstantOfIsColimit_inv\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))) [inst : CategoryTheory.Limits.PreservesFiniteProducts X]\\n  (hX : (S : Profinite) → CategoryTheory.Limits.IsColimit (X.mapCocone S.asLimitCone.op)),\\n  (Condensed.isoLocallyConstantOfIsColimit X hX).inv = CompHausLike.LocallyConstant.counitApp \", \"doc\": \"Given a functor $ F : \\text{Profinite}^{\\text{op}} \\to \\text{Type} $ that preserves finite products and satisfies the condition that for every profinite space $ S $, the image of the limit cone $ S.asLimi\"}\n  {\"name\": \"LightCondensed.isoLocallyConstantOfIsColimit_inv\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) [inst : CategoryTheory.Limits.PreservesFiniteProducts X]\\n  (hX :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  (LightCondensed.isoLocallyConstantOfI\", \"doc\": \"For a contravariant functor $ F : \\text{LightProfinite}^{\\text{op}} \\to \\text{Type} $ preserving finite products, if every light profinite space $ S $ satisfies the colimit condition for the cocone constr\"}\n  {\"name\": \"Condensed.lanPresheafExt_inv\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F G : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))} (S : Profiniteᵒᵖ)\\n  (i : FintypeCat.toProfinite.op.comp F ≅ FintypeCat.toProfinite.op.comp G),\\n  (Condensed.lanPresheafExt i).inv.app S =\\n    CategoryTheory.Limits.colimMap\\n      ((CategoryTheory.CostructuredArrow.proj FintypeCat.toProfinit\", \"doc\": \"For presheaves $F, G : \\text{Profinite}^\\\\text{op} \\\\to \\\\text{Type}$ and an isomorphism $i : \\\\text{toProfinite}^\\\\text{op} \\\\circ F \\\\cong \\\\text{toProfinite}^\\\\text{op} \\\\circ G$, the inverse of the isomorphi\"}\n  {\"name\": \"Condensed.lanPresheafIso_hom\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {S : Profinite} {F : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))}\\n  (hF : CategoryTheory.Limits.IsColimit (F.mapCocone S.asLimitCone.op)),\\n  (Condensed.lanPresheafIso hF).hom =\\n    CategoryTheory.Limits.colimit.desc\\n      ((CategoryTheory.CostructuredArrow.proj FintypeCat.toProfinite.op (Opp\", \"doc\": \"Under the condition that the cocone formed by mapping the presheaf $ F $ over the diagram of discrete quotients of $ S $ is a colimit, the hom-component of the isomorphism between the left Kan extensi\"}\n  {\"name\": \"Condensed.lanPresheafIso\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{S : Profinite} →\\n  {F : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))} →\\n    CategoryTheory.Limits.IsColimit (F.mapCocone S.asLimitCone.op) →\\n      ((Condensed.lanPresheaf F).obj (Opposite.op S) ≅ F.obj (Opposite.op S))\", \"doc\": \"Given a presheaf $ F $ on profinite spaces and a colimit condition on the mapped cocone of $ F $, the left Kan extension of $ F $ evaluated at an object $ S $ is isomorphic to $ F $ evaluated at $ S $\"}\n  {\"name\": \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R],\\n  (Condensed.profiniteSolid R).IsRightKanExtension (Condensed.profiniteSolidCounit R)\", \"doc\": \"The profinite solid module functor from profinite spaces to condensed $ R $-modules is defined as the right Kan extension of the embedding functor from finite types to profinite spaces along the free \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftKanExtension",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isLeftKanExtensionId\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] (F₀ : CategoryTheory.Functor C H) : F₀.IsLeftKanExtension F₀.leftUnitor.inv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (L : CategoryTheory.Functor C D) (F : CategoryTheory.Functor C H) [L.HasLeftKanExtension F] : (L.leftKanExtension F).IsLeftKanExtension (\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') : Prop\", \"doc\": \"Given `α : F ⟶ L ⋙ F'`, the property `F'.IsLeftKanExtension α` asserts that\\n`(F', α)` is an initial object in the category `LeftExtension L F`, i.e. that `(F', α)`\\nis a left Kan extension of `F` along\"}\n  {\"name\": \"CategoryTheory.Functor.HasLeftKanExtension.mk\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.coconeOfIsLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"Construct a cocone for a left Kan extension `F' : D ⥤ H` of `F : C ⥤ H` along a functor\\n`L : C ⥤ D` given a cocone for `F`.\"}\n  {\"name\": \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] {L : C ≌ D} {F₀ : CategoryTheory.Functor C H} {F₁ : CategoryTheory.Functor D H} (α : F₀ ≅ L.functor.comp F₁) : F₁.IsLeftKanExtension α.ho\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence'\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] {F₀ : CategoryTheory.Functor C H} {F₁ : CategoryTheory.Functor D H} (L : CategoryTheory.Functor C D) (α : F₀ ⟶ L.comp F₁) [L.IsEquivalenc\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"If `F' : D ⥤ H` is a left Kan extension of `F : C ⥤ H` along `L : C ⥤ D`, the colimit over `F'`\\nis isomorphic to the colimit over `F`.\"}\n  {\"name\": \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"If `c` is a colimit cocone for a functor `F : C ⥤ H` and `α : F ⟶ L ⋙ F'` is the unit of any\\nleft Kan extension `F' : D ⥤ H` of `F` along `L : C ⥤ D`, then `coconeOfIsLeftKanExtension α c` is\\na colimi\"}\n  {\"name\": \"CategoryTheory.Functor.coconeOfIsLeftKanExtension_pt\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftKanExtensionUnique\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"Two left Kan extensions are (canonically) isomorphic.\"}\n  {\"name\": \"CategoryTheory.Functor.descOfIsLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \" {C : Type u_1} {H : Type u_3} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_3} H] [CategoryTheory.Category.{v_5, u_5} D] (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H} (α : F ⟶ L.comp F') [F'.IsLeftKanExte\", \"doc\": \"If `(F', α)` is a left Kan extension of `F` along `L` and `β : F ⟶ L ⋙ G` is\\na natural transformation, this is the induced morphism `F' ⟶ G`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftKanExtension|leftKanExtension|cofinal",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"57\", \"text\": \"  isLeftKanExtension (RF α) : RF.IsLeftKanExtension α\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"59\", \"text\": \"lemma isRightDerivedFunctor_iff_isLeftKanExtension [L.IsLocalization W] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"60\", \"text\": \"    RF.IsRightDerivedFunctor α W ↔ RF.IsLeftKanExtension α := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"62\", \"text\": \"  · exact fun _ => IsRightDerivedFunctor.isLeftKanExtension RF α W\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"69\", \"text\": \"  simp only [isRightDerivedFunctor_iff_isLeftKanExtension]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"48\", \"text\": \"  hasColimit' : HasPointwiseLeftKanExtensionAt W.Q F (W.Q.obj X)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"57\", \"text\": \"      HasPointwiseLeftKanExtensionAt L F (L.obj X) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"58\", \"text\": \"  rw [← hasPointwiseLeftKanExtensionAt_iff_of_equivalence W.Q L F\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"65\", \"text\": \"    HasPointwiseLeftKanExtensionAt L F (L.obj X) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"72\", \"text\": \"  exact hasPointwiseLeftKanExtensionAt_iff_of_iso W.Q F (Localization.isoOfHom W.Q W w hw)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"line\": \"308\", \"text\": \"    (Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit F G X)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"line\": \"310\", \"text\": \"      apply (Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit F G₁ X).hom_ext\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"line\": \"313\", \"text\": \"        (Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit F G X) (colimit.isColimit _) T\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"24\", \"text\": \"`F'.IsLeftKanExtension α` for `α : F ⟶ L ⋙ F'` is defined similarly.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"26\", \"text\": \"We also introduce typeclasses `HasRightKanExtension L F` and `HasLeftKanExtension L F`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"28\", \"text\": \"are obtained as `leftKanExtension L F` and `rightKanExtension L F`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"166\", \"text\": \"/-- Given `α : F ⟶ L ⋙ F'`, the property `F'.IsLeftKanExtension α` asserts that\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"169\", \"text\": \"class IsLeftKanExtension : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"line\": \"43\", \"text\": \"variable [∀ (F : C ⥤ H), HasLeftKanExtension L F]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"line\": \"47\", \"text\": \"  obj F := leftKanExtension L F\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"line\": \"48\", \"text\": \"  map {F₁ F₂} φ := descOfIsLeftKanExtension _ (leftKanExtensionUnit L F₁) _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"line\": \"49\", \"text\": \"    (φ ≫ leftKanExtensionUnit L F₂)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"line\": \"54\", \"text\": \"  app F := leftKanExtensionUnit L F\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/DenseAt.lean\", \"line\": \"50\", \"text\": \"  (Functor.LeftExtension.mk (𝟭 D) F.rightUnitor.inv).IsPointwiseLeftKanExtensionAt Y\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/DenseAt.lean\", \"line\": \"63\", \"text\": \"  LeftExtension.isPointwiseLeftKanExtensionAtOfIso' _ hY e\"} Searched Mathlib/CategoryTheory/Functor/",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal subsequence comparison for exceptional adjoints on derived strict coefficient systems",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsCofinal\", \"module\": \"Mathlib.Order.Bounds.Defs\", \"type\": \"(s : Set α) : Prop\", \"doc\": \"A set $ s $ in a partially ordered set $ \\\\alpha $ is called cofinal if for every element $ x \\\\in \\\\alpha $, there exists an element $ y \\\\in s $ such that $ x \\\\leq y $. In symbols, this is expressed as \"}\n  {\"name\": \"IsCofinal.mono\", \"module\": \"Mathlib.Order.Cofinal\", \"type\": \"{s t : Set α} (h : s ⊆ t) (hs : IsCofinal s) : IsCofinal t\", \"doc\": \"If $ s \\\\subseteq t $ and $ s $ is cofinal in $ \\\\alpha $, then $ t $ is cofinal in $ \\\\alpha $.\"}\n  {\"name\": \"IsCofinal.trans\", \"module\": \"Mathlib.Order.Cofinal\", \"type\": \"{s : Set α} {t : Set s} (hs : IsCofinal s) (ht : IsCofinal t) : IsCofinal (Subtype.val '' t)\", \"doc\": \"If $ s $ is a cofinal set in a preorder $ \\\\alpha $, and $ t $ is a cofinal set in $ s $, then $ t $ is also cofinal in $ \\\\alpha $.\"}\n  {\"name\": \"Order.Cofinal\", \"module\": \"Mathlib.Order.Ideal\", \"type\": \"(P : Type u_2) → [Preorder P] → Type u_2\", \"doc\": \"A subset $ S $ of a preordered set $ P $ is cofinal if for every $ p \\\\in P $, there exists an $ s \\\\in S $ such that $ p \\\\le s $.\"}\n  {\"name\": \"Order.sequenceOfCofinals\", \"module\": \"Mathlib.Order.Ideal\", \"type\": \": ℕ → P\", \"doc\": \"A sequence in a preordered set $ P $ defined recursively: starting with an initial element $ p $, each subsequent term is either the previous term or an element from a cofinal subset $ \\\\mathcal{D}(i) \"}\n  {\"name\": \"Order.Cofinal.mk\", \"module\": \"Mathlib.Order.Ideal\", \"type\": \"{P : Type u_2} → [inst : Preorder P] → (carrier : Set P) → IsCofinal carrier → Order.Cofinal P\", \"doc\": \"Constructs a cofinal subset in a preorder $ P $ given a set $ S \\\\subseteq P $ and a proof that $ S $ is cofinal (i.e., for every $ p \\\\in P $, there exists an $ s \\\\in S $ such that $ p \\\\leq s $).\"}\n  {\"name\": \"Order.Cofinal.rec\", \"module\": \"Mathlib.Order.Ideal\", \"type\": \"{P : Type u_2} →\\n  [inst : Preorder P] →\\n    {motive : Order.Cofinal P → Sort u} →\\n      ((carrier : Set P) → (isCofinal : IsCofinal carrier) → motive { carrier := carrier, isCofinal := isCofinal }) →\\n        (t : Order.Cofinal P) → motive t\", \"doc\": \"Given a preorder on a type $P$ and a family of types indexed by cofinal subsets of $P$, if we can define a function for each cofinal subset by specifying its carrier set and cofinality proof, then thi\"}\n  {\"name\": \"Order.Cofinal.casesOn\", \"module\": \"Mathlib.Order.Ideal\", \"type\": \"{P : Type u_2} →\\n  [inst : Preorder P] →\\n    {motive : Order.Cofinal P → Sort u} →\\n      (t : Order.Cofinal P) →\\n        ((carrier : Set P) → (isCofinal : IsCofinal carrier) → motive { carrier := carrier, isCofinal := isCofinal }) →\\n          motive t\", \"doc\": \"Given a preorder on a type $P$ and a family of types indexed by cofinal subsets of $P$, this function allows defining a value for any cofinal subset $t$ by specifying how to construct it from the carr\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "subsequence.*adjoint|adjoint.*subsequence|cofinal.*(derived|adjoint)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module declarations or unrelated hits; none states the specified etale derived-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "subsequence|reindex.*[Dd]erived|[Dd]erived.*reindex",
+   "results": "Read returned hits: . General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of inverse systems of sheaves commutes with restriction to a subsequence",
+   "results": "Read returned hits: ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, CategoryTheory.Sheaf.ΓRes, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, InverseSystem.limit, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Read returned hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of inverse systems of sheaves along an increasing subsequence commutes with unbounded derived direct image of topoi and extension by zero",
+   "results": "Read returned hits: CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend_assoc, CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend, localCohomology.diagramComp, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc, CategoryTheory.RanIsSheafOfIsCocontinuous.fac', CategoryTheory.RanIsSheafOfIsCocontinuous.fac, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskeringLeft",
+   "results": "Read returned hits: CategoryTheory.Functor.whiskeringLeft, CategoryTheory.Functor.whiskeringLeft_obj_id, CategoryTheory.Functor.whiskeringLeft_obj_obj, CategoryTheory.Functor.whiskeringLeftObjIdIso, CategoryTheory.Functor.whiskeringLeft_obj_map, CategoryTheory.Functor.whiskeringLeft_obj_comp, CategoryTheory.Functor.whiskeringLeftObjCompIso, CategoryTheory.Functor.whiskeringLeft_map_app_app. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For inverse sequences of sheaves, repeat each level over a finite interval. This exact repetition functor has exact left and right adjoints given by restriction to first and last interval endpoints, and commutes with derived direct image.",
+   "results": "Read returned hits: CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans, LightCondSet.sequentialAdjunction, CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.Functor.sheafAdjunctionCocontinuous, localCohomology.diagramComp, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "whiskeringLeft.*[Aa]dj|precomp.*[Aa]dj|precomp.*[Ii]njective",
+   "results": "Read returned hits: Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Localization/Bousfield.lean, Mathlib/CategoryTheory/Localization/Bousfield.lean, Mathlib/CategoryTheory/MorphismProperty/LocalEpi.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Repeating the entries of an inverse sequence of sheaves of modules has exact endpoint restriction adjoints and preserves K-injective resolutions",
+   "results": "Read returned hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, SheafOfModules.hasLimit, SheafOfModules.instAbelian, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.sheafificationAdjunction. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "Read returned hits: CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal restriction of coefficient towers and compactly supported etale cohomology commute with the right adjoint by derived left extension and projection formula",
+   "results": "Read returned hits: Condensed.profiniteSolid, CondensedMod.LocallyConstant.adjunction, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, LightCondMod.LocallyConstant.adjunction. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|rightAdjointUniq",
+   "results": "Read returned hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean. General adjunction tools are reused through existing nodes; no hit states the full etale compact-support cofinal-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match for the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-coefficient-system-adjoint",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors before derived inverse limit; Construction 4.1 and the adjunction argument of Lemma 5.22 (printed pp. 21, 36); agent extraction of returned item step 9 with its formula for t(m), explicit transition compatibility, composed-subsequence Hom calculation and resolution independence.",
+   "via": [
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-system-cofinal-mate",
+  "worker": "stage1",
+  "summary": "Constructed h as a derived-system projection after exact block repetition; derived the normalized right-adjoint comparison from composite adjunctions, wrote its counit equation and composed-subsequence Hom calculation, and checked ideal-power transport. One generic repetition lemma extracted, searched and left unsplit. No statement change.",
+  "blueprint": "Adic-stage paragraph of def-weil-exceptional-inverse-image: compatible finite-level exceptional functors and cofinal coefficient indexing before inverse limits.",
+  "tool_uses": [
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Generic strict-system or derived-category calculus used with its stated hypotheses; it does not replace the unit route. The unit contains no duplicate of this general tool."
+   },
+   {
+    "node": "lem-pur-local-field-coefficient-stages",
+    "why": "The identity field extension supplies finite ell-primary quotient rings; this is a generic coefficient-ring tool and does not change the unit route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic ringed-sequence calculus supplies componentwise tensor and coefficient extension for the repetition factorization; the current unit has no duplicate of this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-local-field-coefficient-stages",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-cad820695",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-cad820695 (reviewer sub-agent of L); spot-checked: First split; there is no repair note. Statement and stmt_deps match the base. I read the item, the new node, every cited statement and Zheng arXiv:1006.3810 Construction 4.1 (p.21), Lemma 4.10 with the paragraph before it (p.23) and Lemma 5.22 (p.36). No SGA is cited. Index checks: t(m)=min{i: r(i)≥m} is surjective and nondecreasing, with finite interval fibres whose first endpoint is a_i=r(i-1)+1. D_m=C_{r(t(m))}→C_m is compatible. t_{r∘s}=t_s∘t_r. L_r≅T_vR_t also holds independently, because R_t is left adjoint to last-endpoint restriction and U_r = that restriction composed with U_v. Steps: step 1 (K-flat repetition, selected extension, derived universal property) is correct. Step 2: h_r = q_v^{-1} then κ_t, with level-m projection inverse and both transition cases checked. Steps 4-6: composite adjunctions and the counit-uniqueness equation are type-checked, and the composite order (ρ_s U_r)(U_s ρ_r) is right. Step 7: s^nO'=v^{en}O', so the quotient rings are literally equal; e≥1 makes r strictly increasing. New node lem-pur-system-block-repetition: E_t⊣R_t with the first endpoint verified; both functors exact, so K-injectives are preserved; κ is the identity on K-injectives. It is statement-only, self-contained, searched three ways, and not a duplicate of the lem-pur-system-* subsequence/selected nodes or of lem-weil-pbc-kinjective-exact-square-comparison. FIX (C4): step 3 needs κ_t to intertwine the restriction-of-scalars identifications U_aF≅FU_a, so that the repeated q equals the q of the repeated ring map. The new node did not state this. I added the coefficient-naturality clause κ^B U_b∘β_d R_t = R_t β_b∘U_d κ^{B'} to the new node; it holds by uniqueness of comparisons for absolute derived functors. Step 3 now names the clause. Tool uses lem-pur-local-field-coefficient-stages and lem-coef-semilinear-derived-sections are accepted. The declared tool use of the definition def-weil-l-adic-coefficient-extension is superfluous but harmless.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSystemCofinalMate",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleSystemCofinalMate",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SystemProjection.etaleSystemCofinalMate",
+   "AlgebraicGeometry.Etale.SystemProjection.cofinalQuotientProjection",
+   "AlgebraicGeometry.Etale.SystemProjection.etaleSystemCofinalMate_localField"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleSystemCofinalMate.lean",
+  "statement": "theorem etaleSystemCofinalMate (k : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) (hl : l.Prime) (hlp : l ≠ k.p) (X Y : Over (Spec (CommRingCat.of k.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (c : Compactification f.left) : ∃ t : CofinalSupport c l, (∀ (B : Coefficients.{u} l) (r s : ℕ ↪o ℕ) (N : Derived X.left (cofinalCoefficients B (s.trans r)).rings), (t.projection.support B).F.map ((cofinalExtensionComposition (t.extensionX B r) (t.extensionX (cofinalCoefficients B r) s) (t.extensionX B (s.trans r)) (t.compositionX B r s)).hom.app N) ≫ (t.h B (s.trans r)).hom.app N = (t.h B r).hom.app ((t.extensionX (cofinalCoefficients B r) s).model.derived.obj N) ≫ (t.extensionY B r).model.derived.map ((t.h (cofinalCoefficients B r) s).hom.app N) ≫ (cofinalExtensionComposition (t.extensionY B r) (t.extensionY (cofinalCoefficients B r) s) (t.extensionY B (s.trans r)) (t.compositionY B r s)).hom.app ((t.projection.support (cofinalCoefficients B (s.trans r))).F.obj N)) ∧ (∀ (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) (G : Derived Y.left B.rings ⥤ Derived X.left B.rings) (H : Derived Y.left (cofinalCoefficients B r).rings ⥤ Derived X.left (cofinalCoefficients B r).rings) (a : (t.projection.support B).F ⊣ G) (b : (t.projection.support (cofinalCoefficients B r)).F ⊣ H), (∀ (N : Derived X.left (cofinalCoefficients B r).rings) (M : Derived Y.left B.rings) (z : N ⟶ (cofinalU X.left B r).obj (G.obj M)), z ≫ (t.rho B r a b).hom.app M = b.homEquiv N ((cofinalU Y.left B r).obj M) ((t.extensionY B r).model.adjunction.homEquiv _ M ((t.h B r).inv.app N ≫ (a.homEquiv _ M).symm (((t.extensionX B r).model.adjunction.homEquiv N _).symm z)))) ∧ (∀ M : Derived Y.left B.rings, (t.h B r).hom.app ((cofinalU X.left B r).obj (G.obj M)) ≫ (t.extensionY B r).model.derived.map ((t.projection.support (cofinalCoefficients B r)).F.map ((t.rho B r a b).hom.app M)) ≫ (t.extensionY B r).model.derived.map (b.counit.app ((cofinalU Y.left B r).obj M)) ≫ (t.extensionY B r).model.adjunction.counit.app M = (t.projection.support B).F.map ((t.extensionX B r).model.adjunction.counit.app (G.obj M)) ≫ a.counit.app M)) ∧ (∀ (B : Coefficients.{u} l) (r s : ℕ ↪o ℕ) (G : Derived Y.left B.rings ⥤ Derived X.left B.rings) (H : Derived Y.left (cofinalCoefficients B r).rings ⥤ Derived X.left (cofinalCoefficients B r).rings) (K : Derived Y.left (cofinalCoefficients B (s.trans r)).rings ⥤ Derived X.left (cofinalCoefficients B (s.trans r)).rings) (a : (t.projection.support B).F ⊣ G) (b : (t.projection.support (cofinalCoefficients B r)).F ⊣ H) (d : (t.projection.support (cofinalCoefficients B (s.trans r))).F ⊣ K) (M : Derived Y.left B.rings), (t.compositionX B r s).derived.hom.app (G.obj M) ≫ (t.rho B (s.trans r) a d).hom.app M = (cofinalU X.left (cofinalCoefficients B r) s).map ((t.rho B r a b).hom.app M) ≫ (t.rho (cofinalCoefficients B r) s b d).hom.app ((cofinalU Y.left B r).obj M) ≫ K.map ((t.compositionY B r s).derived.hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Main theorem reduced by a complete formal mate proof to the separate geometric realization and cocycle. The original interfaces are publicly re-exported from EtaleSystemCofinalData without signature or meaning changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b3d45e3a",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Snapshot node = live node plus lean field only; lean.statement verbatim; 40 declarations present; no name clashes. h_r is uniquely fixed by its normalization against the dependency's q, the two unit- and counit-normalized selected-extension/repetition comparisons and kappa (identity-on-sections squares plus blockDerivedComparison); the evaluation clause makes level-m of h the inverse of compactScalarMap (directions checked). rho = rightAdjointUniq of the composite adjunction transported along h; the Hom clause matches the node's chain order, the counit clause is node step 5, and both composition clauses use r∘s with the canonical identifications. Zero-based ℕ↪oℕ encoding is exact; t = systemNextSelected. Local-field theorem: arbitrary uniformizer v, span{s}=span{v}^e with e≥1, equality of whole quotient towers and Coefficients, transport by substitution with the same compactification. All 7 sorries are theorems; docstrings and blueprint tags present; universes and hypotheses as in the dependency. Advisories: blockDerivedComparison comes from proof-only dep lem-pur-system-block-repetition; CofinalEncoding sits beside strictSystemSequenceEquivalence (different ring object); the second reading is self-declared. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6819f",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T060753-L-2371545",
+  "kind": "interface",
+  "note": "independent cc review: EtaleSystemCofinalData vs the clone's old EtaleSystemCofinalMate lines 1-617 (byte-identical); item statement vs the clone (only sorry→proof); two new sorry statements vs their nodes and the published coefficient-projection theorem; both direct importers compiled against the delivered modules"
+ }
+}

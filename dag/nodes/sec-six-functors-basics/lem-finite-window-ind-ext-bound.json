@@ -1,0 +1,128 @@
+{
+ "id": "lem-finite-window-ind-ext-bound",
+ "kind": "statement",
+ "title": "Specified constructible Ext bound on an ind-constructible sheaf",
+ "statement": "Let X be any scheme and let ell be prime. Fix a finite intermediate field E of the p-adic algebraic closure. Let Lambda be the condensed commutative ring object E or Qbar_ell, with its specified multiplication (equality of bundled monoid objects). In Mod(Lambda_X) [sk-def-sfb-module-objects, sk-def-sfb-pulled-back-coefficients], let C be constant-model constructible [sk-def-sfb-constructible], and let d be a specified natural number such that Ext^r(C,N) is zero for every constructible N and every natural r>d [def-pc-ext]. If B is in the small filtered-colimit closure ObjectProperty.ind.{u+1} of the constructible sheaves, then Ext^r(C,B)=0 for every natural r>d. No Noetherian hypothesis is added. This is only the sheaf input in the one-cohomology case of det-finite-window-bounded.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/_section.md",
+  "place": "vanishing clause; sk-cor-ind-heart-ii.proof.md first two sentences; sk-lem-finite-window-bounded.proof.md one-cohomology case"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the ind-property of B to obtain a small filtered category I and a constructible diagram B_i with a specified colimit cocone of vertex B. Regard the diagram as complexes in degree zero, so it has common lower bound zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use clause (1) of the field-coefficient Ext-continuity assertion in the cited blueprint source to identify Ext^r(C,B) with the filtered colimit of Ext^r(C,B_i). Applicability gap retained explicitly: the current Lean declaration and DAG statement [sk-lem-constructible-ext-continuity] impose Noetherian hypotheses absent here. Its unrestricted source formulation, or a proof of the present vanishing conclusion without full continuity, is still needed; the Noetherian declaration is not applied as if it were general.",
+   "uses": [
+    "sk-lem-constructible-ext-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For r>d the given bound makes each stage group Ext^r(C,B_i) zero. A cocone on zero abelian groups has the zero group as colimit, so the comparison from the previous step transports zero to Ext^r(C,B). In particular this handles B=0, constant presentations and d=0 with the first relevant degree r=1.",
+   "uses": [
+    "def-pc-ext"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-constructible-ext-continuity",
+  "def-pc-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii.proof.md",
+  "place": "sheaf-only vanishing argument; explicit record of the source-to-current-Noetherian-formalization applicability gap"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A uniform vanishing bound for Ext from a constructible sheaf to constructible sheaves extends to filtered colimits of constructible sheaves",
+   "results": "{\"t\": \"2026-10-26T12:17:39Z\", \"tool\": \"leanfinder\", \"query\": \"A uniform vanishing bound for Ext from a constructible sheaf to constructible sheaves extends to filtered colimits of constructible sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.hasExactColimitsOfShape\", \"CategoryTheory.Sheaf.ab5ofSize\", \"Condensed.instAB5CondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"Condensed.instAB4CondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\"], \"digest\": \"4f91d445d184a8a0\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: general Grothendieck exactness and colimit lemmas do not establish this constructible-source Ext bound. The local source search found indHeartII_vanishing only with additional Noetherian hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-26T12:17:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ext\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.extendIso\", \"CategoryTheory.Limits.IsColimit.ofExtendIso\", \"CategoryTheory.Limits.IsColimit.extendIsoEquiv\", \"CategoryTheory.Limits.IsColimit.hom_ext\", \"CategoryTheory.Limits.colimit.desc_extend\", \"CategoryTheory.Limits.colimit.hom_ext\", \"CategoryTheory.Limits.colimit.hom_ext_iff\", \"CategoryTheory.Limits.BinaryCofan.IsColimit.hom_ext\"], \"digest\": \"b4511a3056ce8356\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: general Grothendieck exactness and colimit lemmas do not establish this constructible-source Ext bound. The local source search found indHeartII_vanishing only with additional Noetherian hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "eq_zero_of_ind|HomFactorsThroughFilteredColimits|prop_of_bounded_of_degreewise",
+   "results": "{\"t\": \"2026-10-26T12:17:40Z\", \"tool\": \"grep\", \"query\": \"eq_zero_of_ind|HomFactorsThroughFilteredColimits|prop_of_bounded_of_degreewise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: general Grothendieck exactness and colimit lemmas do not establish this constructible-source Ext bound. The local source search found indHeartII_vanishing only with additional Noetherian hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform vanishing of Ext from a constructible sheaf above a fixed degree extends to ind constructible targets",
+   "results": "{\"t\": \"2026-10-26T12:24:30Z\", \"tool\": \"leansearch\", \"query\": \"Uniform vanishing of Ext from a constructible sheaf above a fixed degree extends to ind constructible targets\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: \", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteWindowBounded",
+  "date": "2026-10-26",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-finite-window-bounded",
+   "place": "one-cohomology case: Ext^(-q)(C,H^q(L)) vanishes by sk-cor-ind-heart-ii",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-finite-window",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleIndExtBound",
+  "file": "lean/Sheaf/Paper/ConstructibleIndExtBound.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleInd_extBound",
+  "statement": "theorem constructibleInd_extBound (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (_hΛ : Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj E) ∨ Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ)) (X : Scheme.{u}) (C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (_hC : IsConstantModelConstructible Λ X C) (d : ℕ) (hbound : ∀ N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X), IsConstantModelConstructible Λ X N → ∀ r : ℕ, d < r → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C N r)) (B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hB : ObjectProperty.ind.{u + 1} (IsConstantModelConstructible Λ X) B) (r : ℕ) (hr : d < r) : Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C B r)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T130415-L-3455590",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T130415-L-3455590",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

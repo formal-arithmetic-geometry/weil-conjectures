@@ -1,0 +1,161 @@
+{
+ "id": "def-sfb-flat-lci-adjunction-system",
+ "kind": "definition",
+ "title": "Normalized local complete-intersection adjunction systems",
+ "status": "split",
+ "statement": "Let $p:X\\to S$ be a morphism of schemes [def-pc-scheme], and $d\\geq0$. Work simultaneously over all cartesian base-change records $B$ [def-sfb-flat-lci-base-change]. A polynomial presentation of relative rank $d$ on an open $U\\subset X$ consists of integers $n,c$ with $n=c+d$, an open immersion $P\\to\\mathbb A^n_S$ [def-sbc-affine-space], [def-weil-open-immersion], and a closed immersion $i:U\\to P$ [def-weil-closed-immersion] whose composite is $p|_U$. At every point of $U$, the ideal of $i$ is generated on an ambient affine neighbourhood by $c$ equations which form a regular sequence after localization at every prime containing the ideal [def-weil-pbc-regular-sequence]. Put $A=i^*\\mathcal I_i$ and $V=i^*\\Omega^1_{P/S}$, where module pullback and differentials are [def-pc-module-pullback], [def-weil-pbc-kahler-differentials]. The presentation line is $D(A,V)=(\\bigwedge^c A)^\\vee\\otimes\\bigwedge^n V$, using sheaf exterior powers [def-sc-sheaf-exterior-power]. The conormal differential is characterized on ideal sections by $[s]\\mapsto ds$, and the source differential by $1\\otimes da\\mapsto d(i^\\sharp a)$.\n\nAn adjunction system consists of an invertible module $L_B$ [def-sc-invertible-module] for every $B$, comparisons $D(A_C,V_C)\\simeq L_B|_U$ for every presentation $C$ of $p_B$, and comparisons $g^*L_B\\simeq L_D$ for every cartesian arrow $(g,b):D\\to B$ commuting with the maps to $p$. The identity comparison is the normalized tensor-pullback identity; the comparison for a composite is the normalized tensor-pullback composition followed by the pullback of the first comparison and then the second comparison.\n\nNormalized refinements and pullbacks of presentations carry the actual maps on ideal sections (induced by the ideal inclusions) and on universal differentials (induced by derivation), not arbitrary module maps. On a refinement with two-term maps $f:A\\to B$, $g:V\\to W$ and differentials $d_A,d_B$, the determinant comparison is the kernel-first exact-cone comparison. More explicitly, if $a,b,n,m$ are the four ranks with $a+m=b+n$, choose ordered bases of $A,B,V,W$ and dual conormal orientations taking the basis wedges to $1$. Choose lifts $l_j$ of the basis of $W$ under $(d_B,g):B\\oplus V\\to W$, and let $M$ be the matrix of the ordered columns $(f(a_i),-d_A(a_i))$ followed by $l_j$, in the ordered basis of $B\\oplus V$. A comparison $e:D(A,V)\\simeq D(B,W)$ is normalized when $d_Ag=fd_B$ and $\\det(M)e(\\rho_A\\otimes\\mathrm{vol}_V)=(-1)^{a(b+1)}\\rho_B\\otimes\\mathrm{vol}_W$. This equation is used on every open and every such choice, so it also applies over rings with zero divisors and to rank zero. For pullbacks of presentations, conormal and differential maps are isomorphisms, and the determinant comparison sends each pulled-back dual-conormal tensor volume orientation to the corresponding orientation, with the ranks transported by their specified equalities.\n\nThe predicate IsNormalized requires the unique conormal/source differential maps in every presentation; existence of normalized refinements for every ambient morphism preserving the closed source and structural map; existence of normalized presentation pullbacks for every cartesian closed-source square whose ambient square is cartesian or an open restriction with etale base map [def-weil-etale-morphism]; the displayed exact-cone normalization of every transition between local comparisons; and the displayed pullback-orientation normalization of the local comparison induced by every global base-change map. These are properties of a supplied system, with no existence theorem, no Noetherian hypothesis, and no geometric finiteness assumption on $p$ or on the new bases.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-flat-lci-base-change",
+  "def-sbc-affine-space",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-regular-sequence",
+  "def-pc-module-pullback",
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-sheaf-exterior-power",
+  "def-sc-invertible-module",
+  "def-weil-etale-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0B6V, 0BQZ and 0E2Y, local conormal adjunction and base-change data; determinant normalizations from perfect.tex Tags 0FJX, 0FJY and more-algebra.tex Tag 0FJM. Definition of the supplied system, not its existence assertion."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartesian base change data of a family of schemes and normalized local complete intersection adjunction line with cofactor fundamental class",
+   "results": "{\"t\": \"2026-10-24T01:35:37Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian base change data of a family of schemes and normalized local complete intersection adjunction line with cofactor fundamental class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.cotangentComplexBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"Algebra.SubmersivePresentation.baseChange\", \"IsBaseChange\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\"], \"digest\": \"77cedf6a40dffddc\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the exact already-landed Sheaf definitions, without copying their data or using their existence theorems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized adjunction line system for flat lci curves and fundamental class with Jacobian cofactor formula",
+   "results": "{\"t\": \"2026-10-24T01:35:38Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized adjunction line system for flat lci curves and fundamental class with Jacobian cofactor formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.YClass\", \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope\", \"WeierstrassCurve.Jacobian.polynomial_relation\", \"WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis\", \"WeierstrassCurve.Affine.CoordinateRing.norm_smul_basis\", \"WeierstrassCurve.Jacobian.eval_polynomial_of_Z_ne_zero\", \"WeierstrassCurve.Jacobian.eval_polynomialX_of_Z_ne_zero\"], \"digest\": \"c216d40648d7041f\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the exact already-landed Sheaf definitions, without copying their data or using their existence theorems."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FlatLCIBaseChange, AlgebraicGeometry.FlatLCIAdjunctionSystem, AlgebraicGeometry.FlatLCIAdjunctionSystem.IsCurveFundamentalClass",
+   "results": "{\"t\": \"2026-10-24T01:35:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.FlatLCIBaseChange, AlgebraicGeometry.FlatLCIAdjunctionSystem, AlgebraicGeometry.FlatLCIAdjunctionSystem.IsCurveFundamentalClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.FlatLCIBaseChange'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the exact already-landed Sheaf definitions, without copying their data or using their existence theorems."
+  },
+  {
+   "tool": "grep",
+   "query": "FlatLCIBaseChange|FlatLCIAdjunctionSystem|IsCurveFundamentalClass",
+   "results": "{\"t\": \"2026-10-24T01:35:36Z\", \"tool\": \"grep\", \"query\": \"FlatLCIBaseChange|FlatLCIAdjunctionSystem|IsCurveFundamentalClass\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the exact already-landed Sheaf definitions, without copying their data or using their existence theorems."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FlatLCIBaseChange|FlatLCIAdjunctionSystem|IsCurveFundamentalClass lean/WeilConjectures lean/Sheaf dag/lean_names_upstream.json; rg -l the same pattern dag/nodes",
+   "results": "No upstream declaration. Sheaf/AlgebraicGeometry/FlatLCICanonicalAdjunction.lean declares FlatLCIBaseChange, identity, FlatLCIPresentation and FlatLCIAdjunctionSystem.IsNormalized; LCICurveFundamentalClass.lean declares IsCurveCofactorMap, IsCurveJacobianMap and IsCurveFundamentalClass. DAG matches carry these definitions only under theorem nodes lem-trf-flat-lci-canonical-adjunction and lem-sfb-lci-curve-fundamental-class, not standalone definition nodes.",
+   "date": "2026-10-24",
+   "verdict": "Attach existing:true definition nodes to these exact declarations as required by returned review H2/H3."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'adjunction'; search 'fundamental class'; search 'cofactor'; ancestor lem-sfb-gorenstein-curve-relative-dualizing",
+   "results": "Adjunction/fundamental-class searches return related theorem nodes and etale six-functor nodes. No definition node for the three exact structures/predicates. cofactor: 0 blueprint nodes. Ancestor: None.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate definition node. This packet records definitions already present under theorem-owned modules."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gorenstein-curve-relative-dualizing",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Definition-only normalization interface for the relative dualizing line.",
+   "via": [
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatLCICanonicalAdjunction",
+  "declaration": "AlgebraicGeometry.FlatLCIAdjunctionSystem",
+  "declarations": [
+   "AlgebraicGeometry.FlatLCIPresentation",
+   "AlgebraicGeometry.FlatLCIPresentation.conormal",
+   "AlgebraicGeometry.FlatLCIPresentation.differentials",
+   "AlgebraicGeometry.FlatLCIPresentation.line",
+   "AlgebraicGeometry.FlatLCIPresentation.IsConormalDifferential",
+   "AlgebraicGeometry.flatLCITwoTermLine",
+   "AlgebraicGeometry.IsFlatLCIDeterminantComparison",
+   "AlgebraicGeometry.FlatLCIPresentationRefinement",
+   "AlgebraicGeometry.FlatLCIPresentationRefinement.sourceComparison",
+   "AlgebraicGeometry.FlatLCIPresentationRefinement.conormalMap",
+   "AlgebraicGeometry.FlatLCIPresentationRefinement.differentialsMap",
+   "AlgebraicGeometry.IsFlatLCIPullbackDeterminantComparison",
+   "AlgebraicGeometry.FlatLCIPresentationPullback",
+   "AlgebraicGeometry.FlatLCIPresentationPullback.sourceComparison",
+   "AlgebraicGeometry.FlatLCIPresentationPullback.conormalMap",
+   "AlgebraicGeometry.FlatLCIPresentationPullback.differentialsMap",
+   "AlgebraicGeometry.FlatLCIAdjunctionSystem",
+   "AlgebraicGeometry.FlatLCIAdjunctionSystem.localBaseChange",
+   "AlgebraicGeometry.FlatLCIPresentation.IsSourceDifferentialMap",
+   "AlgebraicGeometry.FlatLCIAdjunctionSystem.IsNormalized"
+  ],
+  "statement": "structure FlatLCIAdjunctionSystem {X S : Scheme.{u}} (p : X ⟶ S) (d : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only attachment to declarations already landed in this module. No declarations are moved, copied, or chosen from the existence theorem."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7d58daa2",
+  "group": "Q65",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7d58daa2",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery after 64d0 RETURN. H2 fixed: theorem stmt_dep lem-trf-flat-lci-canonical-adjunction replaced by three existing:true def nodes (def-sfb-flat-lci-base-change, def-sfb-flat-lci-adjunction-system, def-sfb-lci-curve-fundamental-class). All declarations exist in live FlatLCICanonicalAdjunction/LCICurveFundamentalClass, statements verbatim, stmt_deps exist, no competing owner on live. H3 fixed: new localIso + adjunction_normalization (IsNormalized) + fundamental_normalization (IsCurveFundamentalClass) on the system's own literal. The 64d0 lambda_B rescaling with fixed charts now fails the cofactor equation, and the branchwise smooth-locus twist is excluded; the system is unique up to automorphism of the line, so baseChange is canonical. Advisory: homologyIso omega = H^-1(f^!O) is pinned only up to one global unit per record (transport of the whole structure); accepted because the node only calls base change canonical and no node pins an f^! chart comparison. Signature, hypotheses and the clauses accepted in 64d0 unchanged; only sorry is the theorem; docstrings/blueprint ok; no compile (no FIX)."
+ }
+}

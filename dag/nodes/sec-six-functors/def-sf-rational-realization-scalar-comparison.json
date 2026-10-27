@@ -1,0 +1,135 @@
+{
+ "id": "def-sf-rational-realization-scalar-comparison",
+ "kind": "definition",
+ "title": "Normalized finite scalar comparison of rational realizations",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\ell$ be prime, let $E,F$ be finite extensions of $\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and let $i:E\\to F$ be a $\\mathbf Q_\\ell$-algebra embedding, with arbitrary ramification. Let $X$ be noetherian and finite-dimensional, with $\\ell$ invertible at every stalk, and use the small pro-etale site [def-weil-pbc-proetale-site]. Let $s_E,s_F$ be rational module realization data [def-sf-rational-module-realization-datum], with normalized inclusions $\\alpha_E:B_{E,X}\\to E_X$, $\\alpha_F:B_{F,X}\\to F_X$ and functors $J_E,J_F$. Use sheaf modules [def-weil-sheaf-of-modules-category], derived categories [def-weil-abstract-derived-category], and tensor products [def-pur-sheaf-tensor-product]. The completed integral coefficient map $c:B_{E,X}\\to B_{F,X}$ is the one whose quotient maps are induced by $i$ [def-weil-integral-scalar-extension]. Its actual derived tensor, restricted to the bounded constructible complete integral category [def-weil-pbc-bounded-constructible-complete], is denoted $I_{F/E}$. Let $T_{F/E}$ be its raw rationalization [def-weil-pbc-rational-category], with the well-defined restriction and scalar-localization functor supplied by [prop-weil-pbc-scalar-extension]. Write $\\mu_{r,s}$ for the canonical derived balancing comparison for a composite of coefficient maps, normalized on K-flat representatives by $z\\otimes(y\\otimes x)\\mapsto z\\,s(y)\\otimes x$, with inverse inserting $1$; it is the quotient-reduction normalization of [def-weil-pbc-bounded-constructible-tower].\n\nDefine a rational realization scalar comparison datum for $i,s_E,s_F$ to consist of a ring-sheaf map $\\gamma:E_X\\to F_X$ normalized on every section by $\\gamma(b)(x)=i(b(x))$, the coefficient-square equality $c\\,;\\,\\alpha_F=\\alpha_E\\,;\\,\\gamma$, and a natural isomorphism\n$$\\theta:T_{F/E}\\,;\\,J_F\\xrightarrow{\\sim}J_E\\,;\\,(F_X\\otimes^L_{E_X}-).$$\nFor every integral $K$ require the following exact normalization. The route from $J_F(Q_F I_{F/E}K)$ through $\\theta_{Q_EK}$, extension of the object equality $J_E(Q_EK)=E_X\\otimes^L_{B_{E,X}}K$, and $\\mu_{\\alpha_E,\\gamma}$ equals the route through the object equality $J_F(Q_F I_{F/E}K)=F_X\\otimes^L_{B_{F,X}}I_{F/E}K$ and $\\mu_{c,\\alpha_F}$, with the common target identified by the coefficient-square equality. Thus both routes are the balanced identification through $F_X\\otimes^L_{B_{E,X}}K$ using the actual integral extension. This is a record of the specified data and equation, not a theorem that the record is inhabited; no tower, pullback or pentagon assertion is imposed by this definition.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-sf-rational-module-realization-datum",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Proposition 6.8.14(2), Remark 6.8.15; finite-extension balancing on integral representatives; existing record RationalRealizationScalarComparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Finite field scalar comparison of rational module realization functors normalized by balanced derived tensor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.TensorProduct.instCompatibleSMulRat\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \"{R M N : Type*} [CommSemiring R] [AddCommGroup M] [AddCommGroup N] [Module R M] [Module R N] [Module ℚ M]\\n  [Module ℚ N] : CompatibleSMul R ℚ M N\", \"doc\": \"Given a commutative semiring $ R $, additive commutative groups $ M $ and $ N $ that are modules over both $ R $ and $ \\\\mathbb{Q} $, the scalar multiplications by $ R $ and $ \\\\mathbb{Q} $ commute. Tha\"}\n  {\"name\": \"ratCast_smul_eq\", \"module\": \"Mathlib.Algebra.Module.Rat\", \"type\": \"{E : Type*} (R S : Type*) [AddCommGroup E] [DivisionRing R] [DivisionRing S] [Module R E] [Module S E] (r : ℚ)\\n  (x : E) : (r : R) • x = (r : S) • x\", \"doc\": \"For any additive commutative group $E$ that is a module over division rings $R$ and $S$, and for any rational number $r$ and element $x \\\\in E$, the scalar multiplication of $r$ (via the canonical embe\"}\n  {\"name\": \"FiniteField.instIsScalarTowerZModExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"[Algebra (ZMod p) k] : IsScalarTower (ZMod p) k (Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $ and a natural number $ n $, the scalar actions of $ \\\\mathbb{Z}/p\\\\mathbb{Z} $ on $ k $ and $ k $ on the finite field extension of degree $ n $ over $ \"}\n  {\"name\": \"ModuleCat.restrictScalarsCongr\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] → {f g : R →+* S} → f = g → (ModuleCat.restrictScalars f ≅ ModuleCat.restrictScalars g)\", \"doc\": \"Given rings $ R $ and $ S $, and ring homomorphisms $ f, g : R → S $ satisfying $ f = g $, this constructs a natural isomorphism between the restriction of scalars functors $ \\\\mathrm{restrictScalars}(\"}\n  {\"name\": \"Field.qsmul\", \"module\": \"Mathlib.Algebra.Field.Defs\", \"type\": \"{K : Type u} → [self : Field K] → ℚ → K → K\", \"doc\": \"The function that maps a rational number $ q $ and an element $ k $ of the field $ K $ to the product $ q \\\\cdot k $, where the multiplication is defined via the field's ring structure by interpreting \"}\n  {\"name\": \"nnratCast_smul_eq\", \"module\": \"Mathlib.Algebra.Module.Rat\", \"type\": \"{E : Type*} (R S : Type*) [AddCommMonoid E] [DivisionSemiring R] [DivisionSemiring S] [Module R E] [Module S E]\\n  (r : ℚ≥0) (x : E) : (r : R) • x = (r : S) • x\", \"doc\": \"For any non-negative rational number $ r \\\\in \\\\mathbb{Q}_{\\\\geq 0} $ and any element $ x \\\\in E $, the scalar multiplication $ r \\\\cdot x $ induced by the canonical embedding of $ \\\\mathbb{Q}_{\\\\geq 0} $ in\"}\n  {\"name\": \"IsScalarTower.rat\", \"module\": \"Mathlib.Algebra.Module.Rat\", \"type\": \"{R : Type u} {M : Type v} [Ring R] [AddCommGroup M] [Module R M] [Module ℚ R] [Module ℚ M] : IsScalarTower ℚ R M\", \"doc\": \"Given a ring $ R $, an additive commutative group $ M $, and module structures of $ \\\\mathbb{Q} $ on $ R $ and $ M $, as well as $ R $ on $ M $, the scalar actions of $ \\\\mathbb{Q} $, $ R $, and $ M $ s\"}\n  {\"name\": \"SMulCommClass.rat\", \"module\": \"Mathlib.Algebra.Module.Rat\", \"type\": \"[AddCommGroup M] [DistribSMul α M] [Module ℚ M] : SMulCommClass ℚ α M\", \"doc\": \"For any additive commutative group $M$ equipped with a distributive scalar multiplication by a type $\\\\alpha$ and a module structure over the rational numbers $\\\\mathbb{Q}$, the scalar multiplications o\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib record. Use the existing published project structure, without redeclaration."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Finite field scalar comparison of rational module realization functors normalized by balanced derived tensor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"ratCast_smul_eq\", \"module\": \"Mathlib/Algebra/Module/Rat\", \"type\": \"∀ {E : Type u_3} (R : Type u_4) (S : Type u_5) [inst : AddCommGroup E] [inst_1 : DivisionRing R]\\n  [inst_2 : DivisionRing S] [inst_3 : Module R E] [inst_4 : Module S E] (r : ℚ) (x : E), ↑r • x = ↑r • x\", \"doc\": \"For any additive commutative group $E$ that is a module over division rings $R$ and $S$, and for any rational number $r$ and element $x \\\\in E$, the scalar multiplication of $r$ (via the canonical embe\"}\n  {\"name\": \"subsingleton_rat_module\", \"module\": \"Mathlib/Algebra/Module/Rat\", \"type\": \"∀ (E : Type u_3) [inst : AddCommGroup E], Subsingleton (Module ℚ E)\", \"doc\": \"Every additive commutative group $ E $ admits a canonical module structure over the rational numbers $ \\\\mathbb{Q} $.\"}\n  {\"name\": \"Algebra.TensorProduct.instCompatibleSMulRat\", \"module\": \"Mathlib/RingTheory/TensorProduct/Maps\", \"type\": \"∀ {R : Type u_7} {M : Type u_8} {N : Type u_9} [inst : CommSemiring R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module R M] [inst_4 : Module R N] [inst_5 : Module ℚ M] [inst_6 : Module ℚ N],\\n  TensorProduct.CompatibleSMul R ℚ M N\", \"doc\": \"Given a commutative semiring $ R $, additive commutative groups $ M $ and $ N $ that are modules over both $ R $ and $ \\\\mathbb{Q} $, the scalar multiplications by $ R $ and $ \\\\mathbb{Q} $ commute. Tha\"}\n  {\"name\": \"FGModuleRepr.embed\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/EssentiallySmall\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.Functor (FGModuleRepr R) (FGModuleCat R)\", \"doc\": \"The functor that maps each finitely generated module represented as a quotient module $ R^n/S $ into the category of finitely generated left $ R $-modules by composing the induced functor from the rep\"}\n  {\"name\": \"Mathlib.Tactic.Module.NF.smul_eq_eval\", \"module\": \"Mathlib/Tactic/Module\", \"type\": \"∀ {S : Type u_1} {R : Type u_2} {M : Type u_3} {R₀ : Type u_4} [inst : AddCommMonoid M] [inst_1 : Semiring R]\\n  [inst_2 : Module R M] [inst_3 : Semiring R₀] [inst_4 : Module R₀ M] [inst_5 : Semiring S] [inst_6 : Module S M]\\n  {l : Mathlib.Tactic.Module.NF R M} {l₀ : Mathlib.Tactic.Module.NF R₀ M} {s\", \"doc\": \"Given module elements represented in normal form, if $ x = \\\\text{eval}(l_0) $, $ \\\\text{eval}(l) = \\\\text{eval}(l_0) $, and $ r \\\\cdot x = s \\\\cdot x $, then $ s \\\\cdot x = \\\\text{eval}(r \\\\cdot l) $. This e\"}\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"Field.qsmul_def\", \"module\": \"Mathlib/Algebra/Field/Defs\", \"type\": \"∀ {K : Type u} [self : Field K] (a : ℚ) (x : K), Field.qsmul a x = ↑a * x\", \"doc\": \"For any field $ K $, the rational scalar multiplication of $ a \\\\in \\\\mathbb{Q} $ and $ x \\\\in K $ equals the product of the canonical embedding of $ a $ into $ K $ and $ x $, i.e., $ a \\\\cdot x = \\\\iota(a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib record. Use the existing published project structure, without redeclaration."
+  },
+  {
+   "tool": "grep Mathlib",
+   "query": "RationalModuleRealization|RationalRealizationScalarComparison in Mathlib/CategoryTheory",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration with either structure name."
+  },
+  {
+   "tool": "grep",
+   "query": "rg of RationalModuleRealization|RationalRealizationScalarComparison in lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json; definition-owner scan of dag/nodes",
+   "results": "lean/Sheaf/Paper/RationalRealizationScalarCoherence.lean:73:structure RationalRealizationScalarComparison\nlean/Sheaf/Paper/RationalModuleRealizationFunctor.lean:93:structure RationalModuleRealization (X : Scheme.{u}) [IsNoetherian X]\nNo existing definition node owns either structure.\n",
+   "date": "2026-10-24",
+   "verdict": "The structure exists in the recorded Sheaf module, but no definition node owns it. Bind existing:true; do not create a Lean copy."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "rational module realization; scalar realization; RationalModuleRealization; RationalRealizationScalarComparison",
+   "results": "0 blueprint nodes match 'rational module realization'\n0 blueprint nodes match 'scalar realization'\n0 blueprint nodes match 'RationalModuleRealization'\n0 blueprint nodes match 'RationalRealizationScalarComparison'\n",
+   "date": "2026-10-24",
+   "verdict": "No imported blueprint node gives this normalized data record; ancestor for the item is None."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-finite-realization-cocone",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native finite-realization cocone proof steps 4–5: Normalized finite scalar comparison of rational realizations. The item has no imported blueprint ancestor; the native provenance is the evaluation/biduality clause of thm-coef-qbar-verdier.",
+   "via": [
+    "lem-sf-adic-finite-realization-cocone",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.RationalRealizationScalarCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.RationalRealizationScalarComparison",
+  "statement": "structure RationalRealizationScalarComparison\n    (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing plain data record, not its Nonempty existence theorem. Definition ownership added on L's H2 return of 616951560d9b; the published declaration and its module are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6afe23ef3",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6afe23ef3",
+  "group": "NP",
+  "result": "pass",
+  "note": "H2 repair of 616951560d9b. Lean module byte-identical (sha b66c9f6f…), so the prior full maths reading stands. Item JSON differs only in stmt_deps and lean: the theorem stmt_deps lem-fd-completion-inverse-scalar-coherence, lem-per-rational-module-realization-functor and lem-per-rational-realization-scalar-coherence are replaced by landed def-pur-inverse-scalar-coherence (owns FdCompletionInverseScalarCoherence, identical to side-live) and new existing:true def-sf-rational-module-realization-datum (RationalModuleRealization, verbatim l.93-96) and def-sf-rational-realization-scalar-comparison (RationalRealizationScalarComparison, verbatim l.73-74). Both new node statements match every field of the structures (coefficient isos and normalizations, restriction square, E-action, exactness, cohomology, constructibility, J objects/fractions, models; gamma, square, theta, two-route integral_normalization). All their stmt_deps exist; prop-weil-pbc-scalar-extension is accepted as owner of pbcScalarCoefficientMap/pbcRationalScalarExtension (in its lean.declarations, landed def precedent). No cycle. Advisory: rationalPullScalar is an abbrev in a theorem module but only a field composite. Report has Worker report and Second reading by NP (H11 accepted earlier). No compile: no file changed; worker deliver2 --no-push OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T235841-L-1460788",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarMixedComp"
+  ],
+  "sorry_after": []
+ }
+}

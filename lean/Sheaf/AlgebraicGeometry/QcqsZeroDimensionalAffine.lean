@@ -7,10 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.KrullDimension
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection
+import Sheaf.AlgebraicGeometry.T1FiniteHausdorffAffineCover
+import Sheaf.AlgebraicGeometry.HausdorffChartsQuasiCompactOpenClosed
 import WeilConjectures.AlgebraicGeometry.IsAffineOfFiniteClosedCover
 
 /-!
@@ -53,6 +51,18 @@ Proof:
    including its empty-cover case. `IsAffine X` gives `X.isoSpec : X ≅ Spec Γ(X, ⊤)`. -/
 theorem isAffine_of_qcqs_of_t1 (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparated (terminal.from X)] [T1Space X] : IsAffine X := by
-  sorry
+  obtain ⟨n, U, A, hU, _, hcover, _, hcompact, hhausdorff⟩ :=
+    X.exists_finite_hausdorff_affine_cover
+  let (i : Fin n) : IsAffine (U i).toScheme := hU i
+  let (i : Fin n) : CompactSpace (U i).toScheme := hcompact i
+  have hclosed (i : Fin n) : IsClosedImmersion (U i).ι :=
+    (isClosed_and_isClosedImmersion_of_hausdorff_affine_cover X (Fin n) U hU
+      hhausdorff hcover (U i)).2
+  let (i : Fin n) : IsClosedImmersion (U i).ι := hclosed i
+  apply isAffine_of_finite_closed_cover X n (fun i ↦ (U i).toScheme) (fun i ↦ (U i).ι)
+  intro x
+  have hx : x ∈ ⨆ i, U i := by rw [hcover]; trivial
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+  exact ⟨i, ⟨x, hi⟩, rfl⟩
 
 end AlgebraicGeometry

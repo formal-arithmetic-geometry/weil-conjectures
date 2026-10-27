@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-chevalley-rank-two-straightening",
+ "kind": "statement",
+ "title": "Integral lower-degree commutator of nonopposite Chevalley divided powers",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional split semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra], [def-wf-semisimple-lie-algebra], with splitting Cartan subalgebra $\\mathfrak h$ and reduced crystallographic root system $R\\subset\\mathfrak h^\\vee$. Fix a Chevalley basis: $h_i$ are the simple coroots, the $e_\\gamma$ are nonzero root vectors ($[h,e_\\gamma]=\\gamma(h)e_\\gamma$ for $h\\in\\mathfrak h$), $[e_\\gamma,e_{-\\gamma}]=h_\\gamma$, where $h_\\gamma\\in\\mathfrak h$ is the coroot of $\\gamma$, the element of $[\\mathfrak g_\\gamma,\\mathfrak g_{-\\gamma}]$ with $\\gamma(h_\\gamma)=2$ for the root spaces $\\mathfrak g_{\\pm\\gamma}=\\{x\\in\\mathfrak g:[h,x]=\\pm\\gamma(h)x\\text{ for all }h\\in\\mathfrak h\\}$, and for $\\gamma+\\delta\\in R$ one has $[e_\\gamma,e_\\delta]=\\pm(p_{\\gamma,\\delta}+1)e_{\\gamma+\\delta}$, where $p_{\\gamma,\\delta}=\\max\\{p\\ge0:\\delta-p\\gamma\\in R\\}$; the bracket is zero if the sum is neither a root nor zero. Set $U=T_{\\mathbf Q}(\\mathfrak g)/(x\\otimes y-y\\otimes x-[x,y])$ and $e_\\gamma^{(a)}=e_\\gamma^a/a!$. For distinct roots $\\alpha,\\beta$ with $\\alpha\\ne-\\beta$ and integers $m,n\\ge0$, the difference $$e_\\alpha^{(m)}e_\\beta^{(n)}-e_\\beta^{(n)}e_\\alpha^{(m)}$$ is a finite integer linear combination of words $e_{\\gamma_1}^{(a_1)}\\cdots e_{\\gamma_s}^{(a_s)}$ with $a_j\\ge1$, $\\sum_j a_j<m+n$, and $\\gamma_j\\in R\\cap(\\mathbf Z_{\\ge0}\\alpha+\\mathbf Z_{\\ge0}\\beta)$. Each word can be taken to have weight $\\sum_j a_j\\gamma_j=m\\alpha+n\\beta$. If $m=0$ or $n=0$ the difference is zero.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Theorem 23.71, pp.508--509, supplies the normalization assumed here, but not the divided-power identity. Full source WANTED: Steinberg, Lectures on Chevalley Groups, initial integral-form construction, rank-two divided-power commutation in types A1 x A1, A2, B2 and G2; or Kostant, Groups over Z (1966), divided-power straightening calculations."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "def-sfb-kostant-integral-form"
+ ],
+ "proof": [
+  {
+   "text": "If $m=0$ or $n=0$, the difference is zero because $e_\\gamma^{(0)}=1$, represented by the empty linear combination. Otherwise apply [lem-sfb-chevalley-string-central-parity] to the given pair. Use its ordering $(a,b)$ and put $(M,N)=(m,n)$ if $(a,b)=(\\alpha,\\beta)$, or $(M,N)=(n,m)$ otherwise. The original commutator is respectively the resulting commutator or its negative. The cone, weight and degree requirements are invariant under this interchange. Use the integers $q,c_k,z_d$ and elements $Y_k,C_d$ supplied by that node. Their identities also hold in $U$, since the defining relations give $xy-yx=[x,y]$.",
+   "uses": [
+    "lem-sfb-chevalley-string-central-parity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent coefficient argument for the supporting divided-power identity; Theorem 23.71, pp.508--509, for the assumed bracket normalization. The two non-elementary inputs are separately stated nodes."
+   }
+  },
+  {
+   "text": "Work coefficientwise in $U[[s,t]]$, with central variables. Define $E_\\gamma(w)=\\sum_{j\\geq0}w^j e_\\gamma^j/j!$ when $w$ has zero constant term. The binomial expansion of repeated commutators gives\n$$(\\operatorname{ad}x)^k(y)=\\sum_{i=0}^k(-1)^i\\binom{k}{i}x^{k-i}yx^i.$$\nIndeed apply $[x,-]$ and use Pascal's identity for the inductive step, starting at $k=0$. Thus multiplying the two exponential series gives\n$$E_a(s)e_bE_a(-s)=\\sum_{k=0}^q s^kY_k.$$\nAlso $E_a(s)E_a(-s)=1$, since its coefficient in positive degree $k$ is $e_a^k(1-1)^k/k!$. Conjugation by these inverse series preserves products; expand the exponential in powers of $t$ to obtain\n$$E_a(s)E_b(t)=\\exp\\!\\left(t\\sum_{k=0}^q s^kY_k\\right)E_a(s).$$\nAll operations have finite coefficient sums; no analytic convergence or nilpotence of $e_a$ in $U$ is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent coefficient argument for the supporting divided-power identity; Theorem 23.71, pp.508--509, for the assumed bracket normalization. The two non-elementary inputs are separately stated nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-formal-class-two-exponential] in $A=U$ to $Z_{k+1}=ts^kY_k$ for $0\\leq k\\leq q$. These series have zero constant coefficient, and their triple brackets vanish by [lem-sfb-chevalley-string-central-parity]. Its integers give\n$$E_a(s)E_b(t)=E_b(t)\\left(\\prod_{k=1}^q E_{b+ka}(c_k s^kt)\\right)\\left(\\prod_{\\substack{1\\leq d\\leq2q\\\\2b+da\\in R}}E_{2b+da}(-z_d s^dt^2)\\right)E_a(s).$$\nThe first product is in increasing $k$, the second in increasing $d$. To justify splitting the correction exponential, note that each $[Y_i,Y_j]$ commutes with each $Y_k$; hence it commutes with each product $Y_kY_l$ and so with each $[Y_k,Y_l]$. Thus the $C_d$ commute mutually. Apply the same formal factorization lemma to the correction summands, whose brackets are now zero. Terms with $C_d=0$ contribute one.",
+   "uses": [
+    "lem-sfb-formal-class-two-exponential",
+    "lem-sfb-chevalley-string-central-parity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent coefficient argument for the supporting divided-power identity; Theorem 23.71, pp.508--509, for the assumed bracket normalization. The two non-elementary inputs are separately stated nodes."
+   }
+  },
+  {
+   "text": "Take the coefficient of $s^Mt^N$ in this finite product of formal series. Assign exponent $u$ to the first factor, $v$ to the last, $A_k$ to the $k$th string factor and $B_d$ to the $d$th correction factor. Every coefficient is the corresponding ordered word of divided powers multiplied by the integer $\\prod_k c_k^{A_k}\\prod_d(-z_d)^{B_d}$. Its indices satisfy\n$$M=v+\\sum_k kA_k+\\sum_d dB_d,\\qquad N=u+\\sum_k A_k+2\\sum_d B_d.$$\nThere are finitely many such nonnegative indices. The unique contribution with all $A_k=B_d=0$ is $e_b^{(N)}e_a^{(M)}$; subtract it. For every remaining contribution the divided-power degree $D=u+v+\\sum_k A_k+\\sum_d B_d$ satisfies\n$$M+N-D=\\sum_k kA_k+\\sum_d(d+1)B_d>0.$$\nIts weight is $ub+va+\\sum_k A_k(b+ka)+\\sum_d B_d(2b+da)=Ma+Nb$. All roots used belong to $R\\cap(\\mathbf Z_{\\geq0}a+\\mathbf Z_{\\geq0}b)$. Omit exponent-zero factors, combine identical words by adding integer coefficients, and restore the ordering and sign from step 1. This proves all clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent coefficient argument for the supporting divided-power identity; Theorem 23.71, pp.508--509, for the assumed bracket normalization. The two non-elementary inputs are separately stated nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-string-central-parity",
+  "lem-sfb-formal-class-two-exponential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Formal exponential coefficient proof written by Q146; Milne Theorem 23.71 and Appendix C, pp.621--622 supply bracket normalization and rank-two background, not this proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley root vectors nonopposite roots divided powers integral straightening commutation in universal enveloping algebra rank two",
+   "results": "{\"t\": \"2026-10-23T22:20:19Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley root vectors nonopposite roots divided powers integral straightening commutation in universal enveloping algebra rank two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.lie_h_e\", \"RootPairing.GeckConstruction.lie_e_f_ne\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\"], \"digest\": \"2d9ec8526c6f40d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne and the related root-string relations describe individual matrix brackets, and EmbeddedG2 lists root coordinates. They do not commute arbitrary divided powers in an enveloping algebra. DividedPowers is commutative-ideal theory; ChevalleyThm concerns constructible images of schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "Kostant|straighten|divided.power",
+   "results": "{\"t\": \"2026-10-23T22:20:39Z\", \"tool\": \"grep\", \"query\": \"Kostant|straighten|divided.power\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne and the related root-string relations describe individual matrix brackets, and EmbeddedG2 lists root coordinates. They do not commute arbitrary divided powers in an enveloping algebra. DividedPowers is commutative-ideal theory; ChevalleyThm concerns constructible images of schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chevalley\"",
+   "results": "{\"t\": \"2026-10-23T22:20:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Chevalley\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"ChevalleyThm.MvPolynomialC.numBound_zero\", \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"_private.Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity.0.ChevalleyThm.PolynomialC.InductionObj.val\", \"ChevalleyThm.MvPolynomialC.degBound_zero\"], \"digest\": \"658f1779e0a04d76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne and the related root-string relations describe individual matrix brackets, and EmbeddedG2 lists root coordinates. They do not commute arbitrary divided powers in an enveloping algebra. DividedPowers is commutative-ideal theory; ChevalleyThm concerns constructible images of schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley divided power root vector straightening integrality",
+   "results": "{\"t\": \"2026-10-23T22:21:17Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley divided power root vector straightening integrality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.root_mem_span_int\", \"DividedPowers.RatAlgebra.dividedPowers\", \"PowerBasis.repr_gen_pow_isIntegral\", \"DividedPowers.mk\", \"AdjoinRoot.isIntegral_root\", \"DividedPowers.CharP.dividedPowers\", \"DividedPowers.dpEqualizer\", \"IsIntegral.of_pow\"], \"digest\": \"ff7aa6731aea48b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne and the related root-string relations describe individual matrix brackets, and EmbeddedG2 lists root coordinates. They do not commute arbitrary divided powers in an enveloping algebra. DividedPowers is commutative-ideal theory; ChevalleyThm concerns constructible images of schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral coefficients when commuting factorial divided powers of two Chevalley basis elements in types A2 B2 G2",
+   "results": "{\"t\": \"2026-10-23T22:22:20Z\", \"tool\": \"leanfinder\", \"query\": \"Integral coefficients when commuting factorial divided powers of two Chevalley basis elements in types A2 B2 G2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.EmbeddedG2.allCoeffs\", \"RootPairing.EmbeddedG2.toIsValuedIn\", \"RootPairing.IsG2.toIsValuedIn\", \"RootPairing.IsNotG2.toIsValuedIn\", \"RootPairing.EmbeddedG2.allRoots_eq_map_allCoeffs\", \"RootPairing.IsG2.pairingIn_mem_zero_one_three\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.GeckConstruction.isSl2Triple\"], \"digest\": \"75ae86510f1064af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne and the related root-string relations describe individual matrix brackets, and EmbeddedG2 lists root coordinates. They do not commute arbitrary divided powers in an enveloping algebra. DividedPowers is commutative-ideal theory; ChevalleyThm concerns constructible images of schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley divided powers commutator integer coefficients universal enveloping algebra",
+   "results": "{\"t\": \"2026-10-23T22:57:26Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley divided powers commutator integer coefficients universal enveloping algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra.Rel.lie_compat\", \"UniversalEnvelopingAlgebra.Rel\", \"LieAlgebra.ad_pow_lie\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra\", \"DividedPowers.dpow_comp\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"DividedPowers.RatAlgebra.dpow\"], \"digest\": \"d8754a4ac288d9ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: enveloping-algebra relations, commutative-ideal divided powers, and individual Geck root brackets do not state integral nonopposite divided-power straightening."
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalEnvelopingAlgebra",
+   "results": "{\"t\": \"2026-10-23T22:57:26Z\", \"tool\": \"loogle\", \"query\": \"UniversalEnvelopingAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra\", \"instInhabitedUniversalEnvelopingAlgebra\", \"instRingUniversalEnvelopingAlgebra\", \"instAlgebraUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.lift\", \"UniversalEnvelopingAlgebra.mkAlgHom\", \"UniversalEnvelopingAlgebra.hom_ext\"], \"digest\": \"a8beafc2fe0aadad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: enveloping-algebra relations, commutative-ideal divided powers, and individual Geck root brackets do not state integral nonopposite divided-power straightening."
+  },
+  {
+   "tool": "grep",
+   "query": "divided|Kostant|straighten|exponential",
+   "results": "{\"t\": \"2026-10-23T22:57:26Z\", \"tool\": \"grep\", \"query\": \"divided|Kostant|straighten|exponential\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Derivation/Basic.lean\"], \"digest\": \"01def4b393ae7cd0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: enveloping-algebra relations, commutative-ideal divided powers, and individual Geck root brackets do not state integral nonopposite divided-power straightening."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral straightening of factorial divided powers noncommuting root vectors",
+   "results": "{\"t\": \"2026-10-23T22:57:27Z\", \"tool\": \"leansearch\", \"query\": \"Integral straightening of factorial divided powers noncommuting root vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DividedPowers.OfInvertibleFactorial.dpow\", \"DividedPowers.RatAlgebra.dividedPowers\", \"DividedPowers.OfInvertibleFactorial.dpow_apply\", \"DividedPowers.RatAlgebra.dpow_eq_inv_fact_smul\", \"DividedPowers.OfInvertibleFactorial.dpow.congr_simp\", \"DividedPowers.RatAlgebra.dpow\", \"DividedPowers.factorial_mul_dpow_eq_pow\", \"DividedPowers.OfInvertibleFactorial.dpow_add_of_lt\"], \"digest\": \"94f4f00f76ade0c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: enveloping-algebra relations, commutative-ideal divided powers, and individual Geck root brackets do not state integral nonopposite divided-power straightening."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Factorial powers of Chevalley root elements commute modulo words of strictly lower total degree",
+   "results": "{\"t\": \"2026-10-23T22:57:28Z\", \"tool\": \"leanfinder\", \"query\": \"Factorial powers of Chevalley root elements commute modulo words of strictly lower total degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.lie_e_f_ne\", \"RootPairing.GeckConstruction.lie_h_h\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\"], \"digest\": \"75c30e18aee6391a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: enveloping-algebra relations, commutative-ideal divided powers, and individual Geck root brackets do not state integral nonopposite divided-power straightening."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kostant-integral-pbw",
+  "date": "2026-10-24",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.510, admissible-lattice existence before equation (152), whose enveloping-algebra input is Kostant integral PBW. Full source WANTED: Kostant, Groups over Z (1966), integral enveloping-algebra basis theorem; also Steinberg, Lectures on Chevalley Groups, initial integral-form construction. Supporting calculation: Section 23h, Theorem 23.71, pp.508--509, supplies the normalization assumed here, but not the divided-power identity. Full source WANTED: Steinberg, Lectures on Chevalley Groups, initial integral-form construction, rank-two divided-power commutation in types A1 x A1, A2, B2 and G2; or Kostant, Groups over Z (1966), divided-power straightening calculations.",
+   "via": [
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-rank-two-straightening",
+  "worker": "stage1",
+  "summary": "Preserved the full statement. Split via an oriented root-string centrality/parity lemma and a generic class-two formal exponential identity. Wrote out conjugation, integer coefficient extraction, weight and strict degree loss, including zero exponents and pair interchange. Neither input is integral PBW or a restatement of divided-power straightening.",
+  "blueprint": "Supporting calculation in the existing ancestry to det-thm-sf-ctf-stability-direct-images proof (3), through admissible lattices and Kostant integral PBW. Latest blueprint direct-images proof (3) is read for the route. blueprint_refs.py ancestor returns None for the inherited broken ancestry; preserve that result and the explicit inherited place/via, with same_as=[] after global searches."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-7dc076fbc",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-7dc076fbc (reviewer sub-agent of L); spot-checked: First split; the item statement is unchanged (the base item was created unsplit by Q103 the same day, with no re-split note). Source checked: Milne iAG2017 Thm 23.71 (printed p.508), N_{α,β}=±(p+1), matching the normalization in all three nodes; Appendix C §g, table (180) and the rank-two diagrams (pp.621-622). Neither states the identity; the nodes say they are agent-stated and record WANTED requests. No SGA source, and no blueprint statement exists. Step 1: the m=0/n=0 case and the swap of the pair are correct; the cone, weight and degree conditions are symmetric under the swap. Step 2: binomial ad-formula, E_a(s)e_bE_a(-s)=Σ s^kY_k and E_a(s)E_a(-s)=1, all elementary and coefficientwise. Step 3: Z_{k+1}=ts^kY_k; -½Σ[Z,Z] = -t²Σ s^dC_d, which gives the factors E_{2b+da}(-z_d s^d t²); the C_d commute because they commute with every Y_k, so the second application of the formal lemma has zero brackets. Step 4: the index equations, the degree loss Σ kA_k + Σ(d+1)B_d > 0, the weight, the cone and the integer coefficients all check. New string-central-parity node: |c_k|=C(p+k,k) follows from the unbroken string. By script over all oriented pairs with |a|≤|b| in A1xA1/A2/B2/G2 (8/24/32/84): p+q≤3, 3b+ka is never a root, and each grouped sum is even (only the G2 d=3 group has two terms, magnitudes 1+3), so the node is true. New formal class-two exponential node: true by induction from exp(X+Y)=exp(X)exp(Y)exp(-½[X,Y]); sign checked. Both new nodes are statement-only and self-contained, and neither restates an item clause. Duplicate search over the DAG (Chevalley, root string, exponential, BCH): nonopposite-exponential-commutator and unipotent-polynomial-coordinates assume an admissible lattice (citing them would be circular); log-exp-formal-identities is commutative; nothing else is close. No cycle: kostant-integral-pbw cites the item, and the new nodes have no dependencies. Everything is in unit sk-thm-sf-ctf-stability except definition nodes, so no tool_uses are needed. Advisory: root system and Chevalley basis have no definition node, the same as the unchanged item statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.ChevalleyRankTwoStraightening",
+  "declaration": "LieAlgebra.chevalley_dividedPower_commutator_lower_degree",
+  "file": "lean/Sheaf/Algebra/Lie/ChevalleyRankTwoStraightening.lean",
+  "statement": "theorem chevalley_dividedPower_commutator_lower_degree (L : Type u) [LieRing L] [LieAlgebra ℚ L] [FiniteDimensional ℚ L] [HasTrivialRadical ℚ L] (H : LieSubalgebra ℚ L) [H.IsCartanSubalgebra] [LieModule.IsTriangularizable ℚ H L] (I : Type v) [Finite I] (P : RootPairing I ℚ (Module.Dual ℚ H) H) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (heval : ∀ (f : Module.Dual ℚ H) (h : H), P.toLinearMap f h = f h) (Δ : P.Base) (e : I → L) (he : ∀ i : I, e i ∈ LieModule.weightSpace L (P.root i) ∧ e i ≠ 0) (hopp : ∀ i : I, ⁅e i, e (P.reflectionPerm i i)⁆ = (P.coroot i : L)) (hadd : ∀ i j k : I, P.root i + P.root j = P.root k → ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e i, e j⁆ = ((ε : ℚ) * (P.chainBotCoeff i j + 1)) • e k) (hzero : ∀ i j : I, P.root i + P.root j ∉ Set.range P.root → P.root i + P.root j ≠ 0 → ⁅e i, e j⁆ = 0) (B : Module.Basis (Δ.support ⊕ I) ℚ L) (Bh : ∀ i : Δ.support, B (Sum.inl i) = (P.coroot i : L)) (Be : ∀ i : I, B (Sum.inr i) = e i) (α β : I) (hne : α ≠ β) (hnopp : P.root α ≠ -P.root β) (m n : ℕ) : (∃ (t : ℕ) (c : Fin t → ℤ) (w : Fin t → List (I × ℕ)), (∀ i : Fin t, (∀ d ∈ w i, 1 ≤ d.2 ∧ ∃ p q : ℕ, P.root d.1 = p • P.root α + q • P.root β) ∧ ((w i).map Prod.snd).sum < m + n ∧ ((w i).map (fun d ↦ d.2 • P.root d.1)).sum = m • P.root α + n • P.root β) ∧ Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e α)) m * Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e β)) n - Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e β)) n * Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e α)) m = ∑ i : Fin t, c i • ((w i).map (fun d ↦ Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e d.1)) d.2)).prod) ∧ ((m = 0 ∨ n = 0) → Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e α)) m * Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e β)) n - Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e β)) n * Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e α)) m = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ddd51810",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Statement field matches the file verbatim; the node changes only lean plus one stmt_dep, def-sfb-kostant-integral-form (landed owner of rationalDividedPower, no cycle). Each hypothesis matches the node: semisimple Q-Lie algebra (HasTrivialRadical), splitting Cartan (IsCartanSubalgebra + IsTriangularizable), reduced crystallographic root pairing tied to evaluation by heval, hopp = coroot in [g_γ,g_−γ], hadd uses chainBotCoeff i j = p_{γ,δ} in the node's order (Chain.lean:152), hzero, Chevalley basis via Δ/B/Bh/Be, distinct nonopposite α β, m n : ℕ. Conclusion: finite ℤ-combination of ordered words with exponents ≥ 1, cone roots, degree < m+n, per-word weight mα+nβ, plus the separate m=0 ∨ n=0 clause. Edge cases m=n=0, empty root system and zero L are not excluded; universes are free. No new definitions, sorry only, source and blueprint docstrings present, no SGA, no duplicate notion; both proof deps lack Lean records, so no proof imports. Advisory: the citer kostant-integral-pbw assumes a maximal abelian H instead of Cartan + triangularizable and must derive the item's instances. No files changed and no compile; relied on the worker's compile and dry run."
+ }
+}

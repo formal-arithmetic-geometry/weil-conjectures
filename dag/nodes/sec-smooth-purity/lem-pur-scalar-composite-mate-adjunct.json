@@ -1,0 +1,260 @@
+{
+ "id": "lem-pur-scalar-composite-mate-adjunct",
+ "kind": "statement",
+ "title": "Adjunct of the scalar composite mate transported through direct-image compositors",
+ "statement": "Let $\\varphi:A\\to B$ be a unital map of finite commutative rings, and let $X\\xrightarrow rY\\xrightarrow sZ$ be arbitrary scheme morphisms [def-pc-scheme]. Work in the ordinary unbounded small-etale derived categories $D_R(T)=D(T_{\\mathrm{et}},R)$ [def-weil-pbc-derived-categories]. Write $Q_T=-\\otimes_A^{\\mathbf L}B$ [lem-pur-derived-change-of-rings], $P_{u,R}=u_R^*$ for exact constant-ring inverse image [prop-weil-pbc-inverse-image-modules-exact], and $R_{u,R}=Ru_{*,R}$, with canonical adjunction $P_{u,R}\\dashv R_{u,R}$ and counit $\\varepsilon_{u,R}$ [def-kun-projection-formula-map]. Use the normalized isomorphism $\\lambda_u:P_{u,B}Q_T\\cong Q_WP_{u,A}$ for $u:W\\to T$ [def-pur-etale-scalar-pullback-iso], and write $\\chi_u:Q_TR_{u,A}\\to R_{u,B}Q_W$ for its counit-defined mate [def-pur-etale-scalar-mate]. For $M\\in D_A(X)$ put $U=R_{r,A}M$, $V=R_{s,A}U$. For any $h:Q_ZV\\to R_{s,B}R_{r,B}Q_XM$, define its composite-adjunction adjunct by\n$$\\operatorname{Adj}_B(h)=\\varepsilon_{r,B,Q_XM}\\circ P_{r,B}(\\varepsilon_{s,B,R_{r,B}Q_XM})\\circ P_{r,B}P_{s,B}(h),$$\nusing the composite adjunction [def-weil-pbc-composite-adjunction].\nLet $\\kappa_R:R_{sr,R}\\xrightarrow{\\sim}R_{s,R}R_{r,R}$ be the K-injective-normalized compositor [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Put\n$$F_M=\\kappa_{B,Q_XM}\\circ\\chi_{sr,M}\\circ Q_Z(\\kappa_{A,M}^{-1}):Q_ZV\\longrightarrow R_{s,B}R_{r,B}Q_XM.$$\nThen $\\operatorname{Adj}_B(F_M)=T_M$, where\n$$T_M=Q_X(\\varepsilon_{r,A,M})\\circ Q_X(P_{r,A}(\\varepsilon_{s,A,U}))\\circ\\lambda_{r,P_{s,A}V}\\circ P_{r,B}(\\lambda_{s,V}):P_{r,B}P_{s,B}Q_ZV\\longrightarrow Q_XM.$$\nThe equality uses these specified comparisons and holds without boundedness, properness or coefficient flatness.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E46, label remark-compose-base-change: the outer-rectangle adjunct transported through the specified compositors; explicit coefficient-change specialization of the omitted verification"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-projection-formula-map",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-pur-etale-scalar-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof": [
+  {
+   "text": "Write c_R : P_sr,R ≅ P_r,R P_s,R and E_R,N for the composite counit. The existing exact-adjunction specialization of [lem-sfb-derived-composition-adjunction-normalization], CategoryTheory.Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv, identifies the actual rightDerivedFunctorCompIso' with the conjugate of c_R. Its ordinary conjugacy premise is congrArg Iso.hom of conjugateIsoEquiv_upperStarComp. Applying conjugateEquiv_counit gives P_sr,R(kappa_R,N inverse);epsilon_sr,R,N = c_R,V;E_R,N. Equivalently epsilon_sr,R,N = c_R,W;P_r,R P_s,R(kappa_R,N);E_R,N by naturality and cancellation. This is exactly the required adjunction compatibility of the specified K-injective and exact-pullback compositors, without constructing the full simultaneous monoidal comparison system.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change (omitted verification), using Tags 07A7, 0D6D and 0D6E"
+   }
+  },
+  {
+   "text": "Put $W=R_{sr,A}M$ and $k=\\kappa_{A,M}:W\\xrightarrow{\\sim}V$. Expand $F_M$ and use Step 1 for $B$. Naturality of $c_B^{-1}$ at $\\chi_{sr,M}$, followed by the defining adjunct equation of [def-pur-etale-scalar-mate], gives\n$$\\operatorname{Adj}_B(F_M)=Q_X(\\varepsilon_{sr,A,M})\\circ\\lambda_{sr,W}\\circ c_{B,Q_ZW}^{-1}\\circ P_{r,B}P_{s,B}(Q_Z(k^{-1})).$$\nIndeed Step 1 replaces $E_B\\circ P_{r,B}P_{s,B}(\\kappa_B)$ by $\\varepsilon_{sr,B}\\circ c_B^{-1}$, and the mate definition replaces $\\varepsilon_{sr,B}\\circ P_{sr,B}(\\chi_{sr,M})$ by $Q_X(\\varepsilon_{sr,A,M})\\circ\\lambda_{sr,W}$. Naturality of $c_B^{-1}$ and $\\lambda_{sr}$ at $k^{-1}$ now rewrites this as\n$$Q_X(\\varepsilon_{sr,A,M}\\circ P_{sr,A}(k^{-1}))\\circ\\lambda_{sr,V}\\circ c_{B,Q_ZV}^{-1}.$$ In Lean, first transport the defining mate counit equation along leftDerivedUpperStarIsoMapDerivedCategory using mapDerivedUpperStarLowerStarAdjunction_eq. Naturality of the inverse comparison and cancellation of the A comparison with its inverse give the exact-pullback counit equation.",
+   "uses": [
+    "def-pur-etale-scalar-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change (omitted verification), using Tags 07A7, 0D6D and 0D6E"
+   }
+  },
+  {
+   "text": "Specialize [lem-sf-scalar-pullback-composition] to $j_1=r$, $v=s$, $j_2=sr$, and $N=V$. Its comparisons are precisely these $c_R$: both are the canonical module inverse-image compositors, transported to the derived categories, with the ordinary composition normalization on K-flat representatives. Its $\\lambda$ is the specified scalarPullbackIso. It states\n$$Q_X(c_{A,V})\\circ\\lambda_{sr,V}=\\lambda_{r,P_{s,A}V}\\circ P_{r,B}(\\lambda_{s,V})\\circ c_{B,Q_ZV}.$$\nSet $L=\\lambda_{r,P_{s,A}V}\\circ P_{r,B}(\\lambda_{s,V})$. Cancel the two composition isomorphisms and substitute into Step 2 to obtain\n$$\\operatorname{Adj}_B(F_M)=Q_X(\\varepsilon_{sr,A,M}\\circ P_{sr,A}(k^{-1})\\circ c_{A,V}^{-1})\\circ L.$$",
+   "uses": [
+    "lem-sf-scalar-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change (omitted verification), using Tags 07A7, 0D6D and 0D6E"
+   }
+  },
+  {
+   "text": "Naturality of $c_A$ at $k^{-1}:V\\to W$ gives\n$$c_{A,W}\\circ P_{sr,A}(k^{-1})\\circ c_{A,V}^{-1}=P_{r,A}P_{s,A}(k^{-1}).$$\nInsert the Step-1 formula for $\\varepsilon_{sr,A,M}$. The factor $P_{r,A}P_{s,A}(k)$ cancels $P_{r,A}P_{s,A}(k^{-1})$, so the parenthesized map in Step 3 equals $E_{A,M}$. Therefore $\\operatorname{Adj}_B(F_M)=Q_X(E_{A,M})\\circ L=T_M$ by functoriality of $Q_X$ and the displayed definitions of $E$ and $L$. Only $k,c_A,c_B$ were inverted; no $\\chi$ was inverted and no boundedness or flatness was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change (omitted verification), using Tags 07A7, 0D6D and 0D6E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-pur-etale-scalar-mate",
+  "lem-sf-scalar-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E46, remark-compose-base-change (omitted verification), using Tags 07A7, 0D6D and 0D6E; Lean implementation by P4 uses the existing exact-adjunction composition theorem CompConjugate rather than the full monoidal comparison system"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarMate|scalarPullbackIso|rightDerivedFunctorCompIso",
+   "results": "{\"t\": \"2026-10-22T06:37:22Z\", \"tool\": \"grep\", \"query\": \"scalarMate|scalarPullbackIso|rightDerivedFunctorCompIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunct of iterated scalar extension counit mates for two geometric derived adjunctions equals the expanded scalar composite counit",
+   "results": "{\"t\": \"2026-10-22T06:37:23Z\", \"tool\": \"leansearch\", \"query\": \"Adjunct of iterated scalar extension counit mates for two geometric derived adjunctions equals the expanded scalar composite counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"CategoryTheory.mateEquiv\", \"ModuleCat.RestrictionCoextensionAdj.counit'\"], \"digest\": \"9d7291b44f6e9a65\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-22T06:37:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_inv_app_left\"], \"digest\": \"5c0344c60218e48c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct of a coefficient change mate transported along the canonical derived pushforward composition isomorphism is the scalar extension of the composite counit preceded by the two scalar pullback comparisons",
+   "results": "{\"t\": \"2026-10-22T06:37:30Z\", \"tool\": \"leanfinder\", \"query\": \"The adjunct of a coefficient change mate transported along the canonical derived pushforward composition isomorphism is the scalar extension of the composite counit preceded by the two scalar pullback comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"ModuleCat.homEquiv_extendScalarsComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"60998f41252b167f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|comp_counit_app",
+   "results": "{\"t\": \"2026-10-22T06:37:38Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_hcomp|mateEquiv_vcomp|comp_counit_app\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"f68e2d48236f4896\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "{\"t\": \"2026-10-22T06:37:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp_counit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit_app\"], \"digest\": \"e29c8b5d96b9ac85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transporting the adjunct of a derived scalar change natural transformation through canonical pullback and pushforward compositors gives a pasted counit formula",
+   "results": "{\"t\": \"2026-10-22T06:37:39Z\", \"tool\": \"leansearch\", \"query\": \"Transporting the adjunct of a derived scalar change natural transformation through canonical pullback and pushforward compositors gives a pasted counit formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit_naturality_assoc\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.counit_naturality\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.PullbackShift.adjunction_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\"], \"digest\": \"ff3ee71e5a8eac57\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the counit of a composite adjunction and scalar pullback comparison computes the transpose of two iterated derived scalar coefficient mates",
+   "results": "{\"t\": \"2026-10-22T06:37:48Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the counit of a composite adjunction and scalar pullback comparison computes the transpose of two iterated derived scalar coefficient mates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm\", \"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.Adjunction.ε_comp_map_ε\"], \"digest\": \"5ac8b45a9daf43bc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate/counit, underived module or exponentiable-functor results do not identify the specified unbounded etale coefficient adjunct with this normal form; normalization and counit calculations remain"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|mateEquiv_hcomp|conjugateEquiv_counit",
+   "results": "{\"t\": \"2026-10-22T07:52:43Z\", \"tool\": \"grep\", \"query\": \"comp_counit_app|mateEquiv_hcomp|conjugateEquiv_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"be49246df64d6e0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic counit and mates formulas do not identify the specified K-injective and K-flat derived coefficient comparisons; existing project nodes supply those normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "{\"t\": \"2026-10-22T07:52:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp_counit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit_app\"], \"digest\": \"e29c8b5d96b9ac85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic counit and mates formulas do not identify the specified K-injective and K-flat derived coefficient comparisons; existing project nodes supply those normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport of the counit-defined scalar extension mate through canonical derived pullback and pushforward composition comparisons",
+   "results": "{\"t\": \"2026-10-22T07:52:43Z\", \"tool\": \"leansearch\", \"query\": \"Transport of the counit-defined scalar extension mate through canonical derived pullback and pushforward composition comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp\", \"CategoryTheory.mateEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\"], \"digest\": \"5758535965123ba9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic counit and mates formulas do not identify the specified K-injective and K-flat derived coefficient comparisons; existing project nodes supply those normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct of a coefficient change mate transported along derived pushforward compositors equals scalar extension of the iterated counit preceded by scalar pullback comparisons",
+   "results": "{\"t\": \"2026-10-22T07:52:50Z\", \"tool\": \"leanfinder\", \"query\": \"The adjunct of a coefficient change mate transported along derived pushforward compositors equals scalar extension of the iterated counit preceded by scalar pullback comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"PresheafOfModules.pullbackComp\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"aaa0aaaafebf1bdc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic counit and mates formulas do not identify the specified K-injective and K-flat derived coefficient comparisons; existing project nodes supply those normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackIso|scalarMate|rightDerivedFunctorCompIso",
+   "results": "{\"t\": \"2026-10-22T07:53:12Z\", \"tool\": \"grep\", \"query\": \"scalarPullbackIso|scalarMate|rightDerivedFunctorCompIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic counit and mates formulas do not identify the specified K-injective and K-flat derived coefficient comparisons; existing project nodes supply those normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "{\"t\": \"2026-10-22T07:53:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_hcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\"], \"digest\": \"7deb50fb1122da8a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic counit and mates formulas do not identify the specified K-injective and K-flat derived coefficient comparisons; existing project nodes supply those normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of composite adjunction counits computes the transpose of a scalar coefficient mate after canonical composition isomorphisms",
+   "results": "{\"t\": \"2026-10-22T07:53:23Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of composite adjunction counits computes the transpose of a scalar coefficient mate after canonical composition isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_symm_apply\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.rightAdjointMate_comp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\"], \"digest\": \"97359da5ee864e88\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic counit and mates formulas do not identify the specified K-injective and K-flat derived coefficient comparisons; existing project nodes supply those normalizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-direct-image-scalar-composition",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Proof, paragraph 2: coefficient reduction and composition of adjunctions before transposing; transported composite-mate adjunct (old direct-image scalar-composition steps 1, 2 and 4, using the mate characterization in step 3)",
+   "via": [
+    "lem-pur-etale-direct-image-scalar-composition",
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-scalar-composite-mate-adjunct",
+  "worker": "stage1",
+  "summary": "Kept the statement and supplied an explicit counit/compositor calculation. Reused existing normalized geometric adjunction compatibility and scalar/pullback composition coherence; created no nodes. Checked the cited statements, naturality types, arbitrary unbounded inputs and absence of flatness assumptions.",
+  "blueprint": "cor-pur-vector-bundle-purity proof paragraph 2: coefficient reduction and composition of adjunctions before transposing, via the direct-image scalar-composition subargument.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ordinary unbounded ringed-topos tool supplies compatibility of the specified K-injective compositor with the composite counit; the purity unit has no replacement comparison theorem."
+   },
+   {
+    "node": "lem-sf-scalar-pullback-composition",
+    "why": "Generic constant-coefficient tool gives the normalized scalar/pullback composition square on arbitrary unbounded small-etale inputs; it identifies the two left comparisons without replacing any purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-scalar-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-9c200377f",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-9c200377f (reviewer sub-agent of L); spot-checked: PASS for lem-pur-scalar-composite-mate-adjunct @9c200377: no new nodes, statement unchanged, first delivery, no repair or re-split note. Source: Stacks 0E46 (sites-cohomology.tex remark-compose-base-change, label checked in tags/tags), which ends 'We omit the verification'. The item writes that verification for coefficient change, so proof_origin 'agent' is correct. I recomputed all four steps. Step 1 is the counit clause of lem-sfb-ringed-derived-monoidal-comparisons with f=r, g=s: eps_sr = E∘P_rP_s(kappa)∘c, types correct; the parent already uses it the same way for constant etale rings. Step 2: naturality of c_B^{-1} at chi_sr, then the defining transpose of def-pur-etale-scalar-mate (eps_B∘P(chi) = Q(eps_A)∘lambda), then naturality at k^{-1}; correct. Step 3: the square of lem-sf-scalar-pullback-composition with j1=r, v=s, N=V, solved for lambda_sr∘c_B^{-1}; the identification of the K-flat c with the transported module compositor is a matching of specified normalizations. Step 4: naturality of c_A at k^{-1} plus Step 1 for A cancels P_rP_s(k) against P_rP_s(k^{-1}), giving E_A and hence T_M. Only k, c_A, c_B are inverted, never chi. Edge cases checked: identity r or s, phi=id, M=0, non-flat Z/4→Z/2. No duplicate: the parent and sibling lem-pur-scalar-iterated-mates-adjunct state different equations. No cycle (dependency closure of 1551 nodes). Accepted tool_uses: lem-sfb-ringed-derived-monoidal-comparisons and lem-sf-scalar-pullback-composition, both reviewed generic tools. No SGA. Advisory only: the worker wrote tool_uses themself (C8)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarCompositeMateAdjunct",
+  "declaration": "AlgebraicGeometry.Etale.scalarCompositeMateAdjunct",
+  "file": "lean/Sheaf/Paper/ScalarCompositeMateAdjunct.lean",
+  "statement": "theorem scalarCompositeMateAdjunct {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z) (M : DerivedCategoryModule A X) : (((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) s).comp (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) r)).homEquiv ((scalarExtension φ Z).obj (R(lowerStar (ModuleCat.{u + 1} A) s).obj (R(lowerStar (ModuleCat.{u + 1} A) r).obj M))) ((scalarExtension φ X).obj M)).symm ((scalarExtension φ Z).map ((Functor.rightDerivedFunctorCompIso' (lowerStar (ModuleCat.{u + 1} A) r) (lowerStar (ModuleCat.{u + 1} A) s) (lowerStarComp (ModuleCat.{u + 1} A) r s)).hom.app M) ≫ (scalarMate φ (r ≫ s)).app M ≫ (Functor.rightDerivedFunctorCompIso' (lowerStar (ModuleCat.{u + 1} B) r) (lowerStar (ModuleCat.{u + 1} B) s) (lowerStarComp (ModuleCat.{u + 1} B) r s)).inv.app ((scalarExtension φ X).obj M)) = (upperStar (ModuleCat.{u + 1} B) r).mapDerivedCategory.map ((Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) s).symm ≪≫ scalarPullbackIso φ s ≪≫ Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) s) _).hom.app (R(lowerStar (ModuleCat.{u + 1} A) s).obj (R(lowerStar (ModuleCat.{u + 1} A) r).obj M))) ≫ (Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) r).symm ≪≫ scalarPullbackIso φ r ≪≫ Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) r) _).hom.app ((upperStar (ModuleCat.{u + 1} A) s).mapDerivedCategory.obj (R(lowerStar (ModuleCat.{u + 1} A) s).obj (R(lowerStar (ModuleCat.{u + 1} A) r).obj M))) ≫ (scalarExtension φ X).map ((upperStar (ModuleCat.{u + 1} A) r).mapDerivedCategory.map ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) s).counit.app (R(lowerStar (ModuleCat.{u + 1} A) r).obj M))) ≫ (scalarExtension φ X).map ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) r).counit.app M)",
+  "branch": "sheaf-dag",
+  "by": "Q71",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a33a7656",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Stmt_dep records identical to live; item changed only by its lean field; statement field verbatim in the file. Clause check: Adj_B = homEquiv.symm of (adj_s).comp(adj_r), which unfolds to ε_r∘P_r(ε_s)∘P_rP_s(h) as in the node. κ = rightDerivedFunctorCompIso' (R_r⋙R_s ≅ R_sr), so .hom.app M = κ_A⁻¹ and .inv.app(Q_X M) = κ_B, same as the landed parent. χ = scalarMate φ (r≫s). λ = scalarPullbackIso transported by leftDerivedUpperStarIsoMapDerivedCategory, the same transport as scalarPullback_composition; it is canonical because both derived adjunctions come from the same homotopy adjunction. T_M has the node's four maps in the node's order. Arbitrary r, s, M; no boundedness or flatness assumption; standard universes. Edge cases (identity maps, empty scheme, M=0, non-flat φ) covered. No definitions, proof is sorry, docstrings carry source and blueprint tag plus 4 steps, lines ≤100. Source Stacks 0E46 checked. No duplicate declaration. Not compiled (no file changed); worker compile clean. Advisory: κ is written directly as rightDerivedFunctorCompIso' rather than via the existence record."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261023T135224-L-2853187",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

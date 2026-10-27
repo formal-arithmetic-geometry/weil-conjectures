@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-borel-graded-bialgebra-monomial-basis",
+ "kind": "statement",
+ "title": "Borel monomial basis for finite connected graded commutative bialgebras",
+ "statement": "Let $k$ be a perfect field [def-weil-field], meaning that every element has a $p$th root if $\\operatorname{char}k=p>0$. Let $H=\\bigoplus_{i\\geq0}H^i$ be a finite-dimensional graded unital associative $k$-algebra with $H^0=k\\cdot1$ and $1\\ne0$, and $ab=(-1)^{ij}ba$ for $a\\in H^i,b\\in H^j$. Suppose $\\Delta:H\\to H\\otimes_k H$ is a degree-preserving coassociative unital $k$-algebra map for the signed multiplication $(a\\otimes b)(c\\otimes d)=(-1)^{\\deg b\\deg c}ac\\otimes bd$, and projection $\\varepsilon:H\\to H^0=k$ obeys $(\\varepsilon\\otimes1)\\Delta=(1\\otimes\\varepsilon)\\Delta=\\mathrm{id}_H$. Then there exist an integer $r\\geq0$, positive integers $d_1,\\ldots,d_r$, homogeneous elements $x_j\\in H^{d_j}$, and integers $N_j\\geq2$, such that $x_j^{N_j}=0$ for every $j$, and the ordered monomials $x_1^{a_1}\\cdots x_r^{a_r}$ with $0\\leq a_j<N_j$ form a $k$-basis of $H$. Each such monomial is homogeneous of degree $\\sum_j a_jd_j$. For $r=0$ the family consists of the empty monomial $1$. No bound relating the highest nonzero degree to $\\dim_kH^1$ is assumed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Lemma 12.2, printed p.55, proof, first sentence quoting Borel (1953): generators subject only to anticommutativity and their nilpotence relations. The finite-dimensional homogeneous bounded-monomial formulation, without a top-degree equality assumption."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\bigoplus_{n>0}H^n$ and $Q=I/I^2$. Finite-dimensionality and the direct-sum grading imply that only finitely many components are nonzero; choose $D$ with $H^n=0$ for $n>D$. Thus $I^{D+1}=0$. A homogeneous basis of $Q$ has homogeneous lifts $u_1,\\ldots,u_s$ of positive degrees. These generate $H$: degree induction expresses a homogeneous $h\\in I$ as a linear combination of lifts of its degree modulo $I^2$, and every product in that remainder has factors of strictly smaller positive degrees. In particular $Q=0$ implies $H=k$. Each nonzero positive-degree element is nilpotent. We prove the assertion by strong induction on $\\dim_kH$; dimension one is $H=k$, with $r=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, first sentence of the proof (Borel structure input); agent-written graded invariant-derivation prerequisite, not a lemma stated in Milne."
+   }
+  },
+  {
+   "text": "For any homogeneous lifts of a basis of $Q$, apply [lem-sfb-graded-bialgebra-coordinate-derivations]. Its finite-dimensionality, connectedness, signed multiplication and counit hypotheses are exactly those of $H$. It supplies the coordinate maps $\\partial_i$ with the signed Leibniz identity and $\\partial_i(u_j)=\\delta_{ij}$. In characteristic zero, an even-degree generator cannot exist: if $N\\geq2$ is its least vanishing power, applying its even coordinate derivation to $u_i^N=0$ gives $Nu_i^{N-1}=0$, a contradiction. Every generator is therefore odd, and $2u_i^2=0$ gives $u_i^2=0$. Ordered squarefree monomials span by supercommutation. If there were a relation, choose a monomial of maximal number of factors with nonzero coefficient and differentiate once in precisely its variables, in reverse order. Every other monomial is killed because it misses a chosen variable; the chosen monomial gives its coefficient times a sign, hence a nonzero scalar. This contradicts the relation. Thus these monomials are a basis, with all $N_i=2$.",
+   "uses": [
+    "lem-sfb-graded-bialgebra-coordinate-derivations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, first sentence of the proof (Borel structure input); agent-written graded invariant-derivation prerequisite, not a lemma stated in Milne."
+   }
+  },
+  {
+   "text": "Now let $\\operatorname{char}k=p>0$. For $p=2$, the signed algebra is commutative. For odd $p$, write elements as sums of even and odd parity; every odd element has square zero, and even elements commute with everything. Hence $F(h)=h^p$ is additive, multiplicative, and $p$-semilinear: $F(ch)=c^pF(h)$. (For odd $p$, $F(e+o)=e^p$ and $(o_1o_2)^2=0$ prove multiplicativity.) Since $k$ is perfect, $B=F(H)$ is a unital $k$-subalgebra. It is graded, with $B^{pn}=F(H^n)$ and other degrees zero; for odd $p$ it is concentrated in even degrees. It inherits the coproduct: for a homogeneous $h$, expand $\\Delta(h)$ into homogeneous simple tensors of total degree $\\deg h$. When $p=2$ these summands commute; for odd $p$, if $h$ is even they also commute, and a summand with two odd factors has square zero. Taking $p$th powers therefore gives $\\Delta(h^p)=\\sum a^p\\otimes b^p\\in B\\otimes_kB$. For odd $h$ in odd characteristic $h^p=0$. The counit identities and coassociativity restrict to $B$. The tensor inclusion is injective by extending a vector-space basis of $B$ to one of $H$. If $H\\ne k$ and $n$ is its smallest positive nonzero degree, $B^n=0$ while $H^n\\ne0$; thus $\\dim_kB<\\dim_kH$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, first sentence of the proof (Borel structure input); agent-written graded invariant-derivation prerequisite, not a lemma stated in Milne."
+   }
+  },
+  {
+   "text": "Apply the induction hypothesis to $B$ with its inherited grading and coproduct. Write its generators as $v_1,\\ldots,v_t$, with vanishing powers $v_j^{M_j}=0$ and basis the ordered monomials $v^b$, $0\\leq b_j<M_j$. These generators give a basis of $Q_B=B_+/B_+^2$: their classes span, and a relation between them modulo products would contradict independence of the bounded monomials (products of generators reduce either to zero or to monomials of length at least two). The map $F$ induces a surjective semilinear map $Q\\to Q_B$ since $F(I)=B_+$ and $F(I^2)\\subseteq B_+^2$. Choose homogeneous $y_j$ with $y_j^p=v_j$. Their classes in $Q$ are independent, since applying $F$ to a relation gives a relation between the classes of $v_j$; perfectness lets us extend them to a homogeneous basis by classes $z_l$ in the kernel of $Q\\to Q_B$. This is ordinary basis extension, after twisting scalars by the automorphism $c\\mapsto c^p$; it is performed separately in each degree. For odd $p$, every $y_j$ has even degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, first sentence of the proof (Borel structure input); agent-written graded invariant-derivation prerequisite, not a lemma stated in Milne."
+   }
+  },
+  {
+   "text": "Choose homogeneous representatives of the complementary classes $z_l$. Since $z_l^p\\in B_+^2$, express $z_l^p$ as a homogeneous linear combination of bounded monomials in the $v_j$ of length at least two. Take $p$th roots of the coefficients in $k$ and replace each $v_j$ by $y_j$; the resulting homogeneous polynomial $c_l\\in I^2$ satisfies $c_l^p=z_l^p$. Its degree is $\\deg z_l$. If $p$ is odd and $z_l$ has odd degree, its $p$th power is already zero and choose $c_l=0$. Replace $z_l$ by $z_l-c_l$. Additivity of $F$ gives $z_l^p=0$, and their classes in $Q$ have not changed. Thus the list $w=(y_1,\\ldots,y_t,z_1,\\ldots,z_a)$ is a homogeneous minimal generating list, with $y_j^{pM_j}=0$, $z_l^p=0$, and also $z_l^2=0$ for odd $z_l$ in odd characteristic. All entries have positive degree and are nonzero because their classes in $Q$ form a basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, first sentence of the proof (Borel structure input); agent-written graded invariant-derivation prerequisite, not a lemma stated in Milne."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-graded-bialgebra-coordinate-derivations] to this new list $w$. Each resulting coordinate derivation kills $B$: it kills $p$th powers of even elements by the Leibniz identity, and in odd characteristic all odd $p$th powers vanish. Set $q_i=2$ for odd-degree $w_i$ when $p$ is odd, and $q_i=p$ otherwise. The ordered monomials $w^a$, $0\\leq a_i<q_i$, span $H$ over $B$, by reducing even exponents modulo $p$ and using the squares-zero relations for odd generators. They are independent over $B$. Indeed, in a finite relation $\\sum_a b_aw^a=0$, choose $a$ with $b_a\\ne0$ and maximal $\\sum_i a_i$. Apply $\\partial_s^{a_s}\\cdots\\partial_1^{a_1}$. The coefficient elements are killed by all these derivations, so they pass through with at most signs; every different monomial is killed because one exponent is too small. The selected term gives $\\pm(\\prod_i a_i!)b_a=0$. Each $a_i!$ is nonzero in $k$ because $a_i<p$, a contradiction. This calculation uses only the stated coordinate values and signed Leibniz rule, not commutation of the derivations.",
+   "uses": [
+    "lem-sfb-graded-bialgebra-coordinate-derivations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, first sentence of the proof (Borel structure input); agent-written graded invariant-derivation prerequisite, not a lemma stated in Milne."
+   }
+  },
+  {
+   "text": "Combine this $B$-basis with the $k$-basis $v^b$ of $B$. Since $v_j=y_j^p$, its products with the residue monomials are, up to invertible signs, exactly the ordered monomials in the $y_j,z_l$ with $0\\leq\\deg_{y_j}<pM_j$ and $0\\leq\\deg_{z_l}<q_{t+l}$. The uniqueness of the expression $n=pb+a$ with $0\\leq a<p$ gives each allowed exponent exactly once. Thus they form a $k$-basis. Take heights $pM_j$ for $y_j$ and $q_{t+l}$ for $z_l$; the previous steps proved that the corresponding powers vanish, and all heights are at least two. This completes the dimension induction. In either characteristic the degree of an ordered product is the sum of the degrees of its factors, by repeated use of the graded multiplication law, so the monomial with exponents $a_i$ has degree $\\sum_i a_i d_i$. The empty generating list gives the single element $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, first sentence of the proof (Borel structure input); agent-written graded invariant-derivation prerequisite, not a lemma stated in Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-graded-bialgebra-coordinate-derivations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Lemma 12.2, p.55 quotes Borel without proof. Q08 supplies the coordinate-derivation/Frobenius-image induction, with the graded coordinate-derivation lemma left as a statement-only prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Borel|monogenic|truncated.*polynomial|[Gg]raded.*[Hh]opf|[Hh]opf.*[Gg]raded",
+   "results": "{\"t\": \"2026-10-23T20:14:58Z\", \"tool\": \"grep\", \"query\": \"Borel|monogenic|truncated.*polynomial|[Gg]raded.*[Hh]opf|[Hh]opf.*[Gg]raded\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/LocalRing/Etale.lean\"], \"digest\": \"1357a201be4c4039\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional graded commutative connected bialgebra has homogeneous generators whose bounded ordered monomials form a basis",
+   "results": "{\"t\": \"2026-10-23T20:14:58Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional graded commutative connected bialgebra has homogeneous generators whose bounded ordered monomials form a basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"GradedAlgebra\", \"AddMonoidAlgebra.grade.gradedAlgebra\", \"Module.Basis.symmetricAlgebra\", \"AddMonoidAlgebra.gradeBy.gradedMonoid\", \"MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite\", \"MvPolynomial.HomogeneousSubmodule.gradedMonoid\"], \"digest\": \"d9f998a66def6afb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialgebra\", \"GradedAlgebra\"",
+   "results": "{\"t\": \"2026-10-23T20:14:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bialgebra\\\", \\\"GradedAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel structure theorem finite dimensional connected graded commutative Hopf algebra is tensor product of monogenic truncated polynomial algebras",
+   "results": "{\"t\": \"2026-10-23T20:14:59Z\", \"tool\": \"leanfinder\", \"query\": \"Borel structure theorem finite dimensional connected graded commutative Hopf algebra is tensor product of monogenic truncated polynomial algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.tacticHopf_tensor_induction_With__\", \"HopfAlgCat.tensorObj_instRing\", \"TensorProduct.instHopfAlgebra\", \"HopfAlgCat.tensorObj_carrier\", \"CommSemiring.toHopfAlgebra\", \"LaurentPolynomial.instHopfAlgebra\", \"HopfAlgCat.tensorObj_instHopfAlgebra\", \"LaurentPolynomial.comul_T\"], \"digest\": \"342896f65ac502a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|[Hh]opf|[Bb]ialgebra|monomial.*basis",
+   "results": "{\"t\": \"2026-10-23T20:15:28Z\", \"tool\": \"grep\", \"query\": \"Borel|[Hh]opf|[Bb]ialgebra|monomial.*basis\", \"sub\": \"LinearAlgebra/ExteriorAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded connected graded bialgebra over a perfect field with dimension H1 equal to its degree bound is the exterior algebra on H1",
+   "results": "{\"t\": \"2026-10-23T20:15:29Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded connected graded bialgebra over a perfect field with dimension H1 equal to its degree bound is the exterior algebra on H1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExteriorAlgebra\", \"ExteriorAlgebra.gradedAlgebra\", \"ExteriorAlgebra.GradedAlgebra.ι_sq_zero\", \"ExteriorAlgebra.GradedAlgebra.ι_apply\", \"ExteriorAlgebra.instGradedMonoidNatSubmoduleExteriorPower\", \"ExteriorAlgebra.instNontrivial\", \"ExteriorAlgebra.induction\", \"ExteriorAlgebra.GradedAlgebra.liftι\"], \"digest\": \"290bea22b40347b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"Basis\"",
+   "results": "{\"t\": \"2026-10-23T20:16:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"Basis\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite connected graded commutative Hopf algebra over a perfect field admits homogeneous nilpotent generators with independent ordered monomials below their nilpotence heights",
+   "results": "{\"t\": \"2026-10-23T20:16:36Z\", \"tool\": \"leanfinder\", \"query\": \"A finite connected graded commutative Hopf algebra over a perfect field admits homogeneous nilpotent generators with independent ordered monomials below their nilpotence heights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"linearIndep_groupLikeVal\", \"linearIndepOn_isGroupLikeElem\", \"TensorAlgebra.gradedAlgebra\", \"AddMonoidAlgebra.gradeBy.gradedAlgebra\"], \"digest\": \"00033e15af2fe2ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|[Gg]raded.*[Hh]opf|[Hh]opf.*[Gg]raded|monomial.*basis",
+   "results": "{\"t\": \"2026-10-23T21:30:04Z\", \"tool\": \"grep\", \"query\": \"Borel|[Gg]raded.*[Hh]opf|[Hh]opf.*[Gg]raded|monomial.*basis\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Basic.lean\"], \"digest\": \"4f8d59ef0a5cc514\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give homogeneous generators or bases of polynomial/symmetric algebras, not pure-power relations and independence for an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel structure theorem finite dimensional connected graded commutative Hopf algebra bounded monomial basis",
+   "results": "{\"t\": \"2026-10-23T21:30:05Z\", \"tool\": \"leansearch\", \"query\": \"Borel structure theorem finite dimensional connected graded commutative Hopf algebra bounded monomial basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UpgradedStandardBorel.mk\", \"Module.Basis.symmetricAlgebra\", \"Polynomial.basisMonomials\", \"MvPolynomial.basisMonomials\", \"HopfAlgebraStruct.noConfusionType\", \"HopfAlgCat.instRing\", \"HopfAlgCat.instHopfAlgebra\", \"HopfAlgebraStruct.recOn\"], \"digest\": \"f80faeb20e4d158b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give homogeneous generators or bases of polynomial/symmetric algebras, not pure-power relations and independence for an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bialgebra, GradedAlgebra",
+   "results": "{\"t\": \"2026-10-23T21:30:05Z\", \"tool\": \"loogle\", \"query\": \"Bialgebra, GradedAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give homogeneous generators or bases of polynomial/symmetric algebras, not pure-power relations and independence for an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional connected graded commutative bialgebra has homogeneous generators and a bounded monomial basis over a perfect field",
+   "results": "{\"t\": \"2026-10-23T21:30:08Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional connected graded commutative bialgebra has homogeneous generators and a bounded monomial basis over a perfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"MvPolynomial.gradedAlgebra\", \"HomogeneousLocalization.Away.finiteType\", \"GradedAlgebra\", \"Submodule.galgebra\"], \"digest\": \"c53198d8bde6b09c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give homogeneous generators or bases of polynomial/symmetric algebras, not pure-power relations and independence for an arbitrary finite signed bialgebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded commutative bialgebra over a perfect field has an algebra presentation with only pure power nilpotence relations",
+   "results": "{\"t\": \"2026-10-23T21:31:37Z\", \"tool\": \"leanfinder\", \"query\": \"A graded commutative bialgebra over a perfect field has an algebra presentation with only pure power nilpotence relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"ExteriorAlgebra.gradedAlgebra\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"TensorPower.galgebra\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"TensorAlgebra.gradedAlgebra\", \"GradedAlgebra\", \"AddMonoidAlgebra.grade.gradedAlgebra\"], \"digest\": \"cbe1dfe878dc9c48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give homogeneous generators or bases of polynomial/symmetric algebras, not pure-power relations and independence for an arbitrary finite signed bialgebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-bialgebra-top-degree-exterior",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Auxiliary: The field bialgebra equality case used on geometric fibres before the relative lifting argument. Borel homogeneous-generator and nilpotence structure input, quoted in Milne I Lemma 12.2, proof, first sentence.",
+   "via": [
+    "lem-sfb-bounded-bialgebra-top-degree-exterior",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-graded-bialgebra-monomial-basis",
+  "worker": "stage1",
+  "summary": "Read Milne I Lemma 12.2 p.55 and checked the full signed bialgebra hypotheses. Preserve the statement. Supply a strong dimension induction through the Frobenius image, homogeneous root corrections, and explicit derivative coefficient extraction; isolate only coordinate graded derivations as a new unsplit prerequisite. Handle characteristic zero, characteristic two, odd parity, and the empty list separately.",
+  "blueprint": "Realizes the inherited Borel input in the relative coherent-exterior chain below det-thm-sf-ctf-stability-direct-images. The current blueprint direct-image proof (3) has no Borel statement; the created.item chain has no surviving imported ancestor (ancestor command prints None), so null from.node and the inherited via chain are retained rather than inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-b1ac20d74",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-b1ac20d74 (reviewer sub-agent of L); spot-checked: I checked the item against Milne, Abelian Varieties I Lemma 12.2, printed p.55. The first sentence of its proof quotes Borel 1953 without proof. The item's statement is byte-identical to the live base, and live still shows the item as unsplit, so no other group has superseded it. Step-by-step: (1) Degree support is finite, and lifts of a basis of I/I^2 generate H by degree induction. The strong induction on dim H is properly set up. (2) Characteristic 0, using the new node: for an even generator, d(u^N)=N u^{N-1} contradicts the minimality of N. Odd squares vanish. Differentiating a maximal-length squarefree monomial isolates its coefficient. (3) F(h)=h^p is additive, multiplicative and semilinear. For odd p this rests on odd elements squaring to zero, F(e+o)=e^p and (o1o2)^2=0. Delta(h^p) lies in B⊗B by the sign check of (a⊗b)^p. B misses the smallest positive degree of H, so dim B < dim H. (4) The classes of v_j form a basis of B_+/B_+^2, Q→Q_B is a semilinear surjection, the y_j classes are independent, and the kernel complement is chosen per degree. For odd p the y_j have even degree. (5) The root correction c=Σλ^{1/p}y^b lies in I^2 and has c^p=z^p. (6) The derivations kill B, since d(h^p)=p h^{p-1}dh for central even h. For independence, the derivations ∂_s^{a_s}…∂_1^{a_1} lower one coordinate at a time, which leaves ±∏a_i!·b_a with every a_i<p. (7) Exponents n=pb+a give heights pM_j and q_l. The new node lem-sfb-graded-bialgebra-coordinate-derivations is self-contained and statement-only. I checked independently that it is true over any field: take a counit derivation φ dual to [x_i], form T=(φ⊗id)Δ (signed Leibniz checked), note the matrix (T_i x_j) is graded and congruent to the identity mod I, and invert it by a finite Neumann series. It held on k, k[x]/(x^p), k[x]/(x^4) in characteristic 2, and the exterior algebra. It only gives derivations, so it is strictly smaller than the item. A DAG search (Hopf, bialgebra, derivation, Borel; candidate nodes lem-wf-hopf-augmentation-height, lem-ag-invariant-coefficient-add, lem-sc-connected-finite-order, lem-sfb-affine-group-*) found no duplicate. Mathlib searches cover four tools with no match. The node sits in the same unit, has no tool_uses, cites no SGA and creates no cycle. Its from.node is null, inherited from the item's ancestor chain. Minor: the report mentions a citations.json that is not in the delivery; this is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BorelBialgebraMonomialBasis",
+  "declaration": "GradedAlgebra.borel_bialgebra_monomial_basis",
+  "file": "lean/Sheaf/RingTheory/BorelBialgebraMonomialBasis.lean",
+  "statement": "theorem borel_bialgebra_monomial_basis (k : Type u) [Field k] [PerfectField k] (H : Type v) [Ring H] [Algebra k H] [Nontrivial H] [FiniteDimensional k H] (𝒜 : ℕ → Submodule k H) [GradedAlgebra 𝒜] (hconnected : 𝒜 0 = Submodule.span k {(1 : H)}) (hcomm : ∀ (i j : ℕ) (x : 𝒜 i) (y : 𝒜 j), (x : H) * (y : H) = (-1 : k) ^ (i * j) • ((y : H) * (x : H))) (Δ : H →ₗ[k] H ⊗[k] H) (ε : H →ₗ[k] k) (hdegree : ∀ (n : ℕ) (x : 𝒜 n), Δ x ∈ Submodule.span k {z | ∃ (i j : ℕ) (a : 𝒜 i) (b : 𝒜 j), i + j = n ∧ z = (a : H) ⊗ₜ[k] (b : H)}) (hunit : Δ 1 = (1 : H) ⊗ₜ[k] (1 : H)) (hmul : ∀ x y : H, GradedTensorProduct.of k 𝒜 𝒜 (Δ (x * y)) = GradedTensorProduct.of k 𝒜 𝒜 (Δ x) * GradedTensorProduct.of k 𝒜 𝒜 (Δ y)) (hcoassoc : ∀ x : H, TensorProduct.assoc k H H H (TensorProduct.map Δ LinearMap.id (Δ x)) = TensorProduct.map LinearMap.id Δ (Δ x)) (hprojection : ∀ x : H, algebraMap k H (ε x) = GradedAlgebra.proj 𝒜 0 x) (hcounit : ∀ x : H, TensorProduct.lid k H (TensorProduct.map ε LinearMap.id (Δ x)) = x ∧ TensorProduct.rid k H (TensorProduct.map LinearMap.id ε (Δ x)) = x) : ∃ (r : ℕ) (d : Fin r → ℕ) (x : Fin r → H) (N : Fin r → ℕ), (∀ j : Fin r, 0 < d j ∧ x j ∈ 𝒜 (d j) ∧ 2 ≤ N j ∧ x j ^ N j = 0) ∧ ∃ b : Module.Basis ((j : Fin r) → Fin (N j)) k H, ∀ a : (j : Fin r) → Fin (N j), b a = (List.ofFn fun j : Fin r ↦ x j ^ (a j : ℕ)).prod ∧ b a ∈ 𝒜 (∑ j : Fin r, (a j : ℕ) * d j)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05f40f628",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in lean (live null, no supersession). Hypotheses match node clause by clause and match the landed sibling GradedAlgebra.bounded_bialgebra_exterior verbatim: perfect field, Ring (noncommutative) finite-dimensional Nontrivial H, ℕ-GradedAlgebra, H^0=k·1, sign (-1)^(ij), degree-preserving Δ, signed algebra map via GradedTensorProduct.of (Module ℕ (Additive ℤˣ) gives (-1)^(deg b·deg c)), coassoc, ε pinned to proj 0, both counit laws. Conclusion: r, d_j>0, x_j∈𝒜 d_j, N_j≥2, x_j^N_j=0, Module.Basis on Π Fin(N j) equal to List.ofFn ordered monomials, homogeneity Σ a_j d_j; r=0 gives {1}. Edge cases char 0/2/odd and H=k OK; universes independent; statement true (Borel). Docstrings carry source and blueprint, 7 proof steps; sorry only; lean.statement verbatim; no pro-etale. Advisory: possibly redundant plain imports. No recompile per instruction."
+ }
+}

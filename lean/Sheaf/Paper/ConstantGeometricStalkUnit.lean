@@ -14,27 +14,17 @@ public import Sheaf.Paper.LocalFrobeniusTrace
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison
 public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
-import Sheaf.FieldTheory.UniqueSubfieldOfClosure
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 public import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.SecSmoothPurity.ProEtaleFiniteConstantSections
 public import Sheaf.Paper.FiniteCoefficientPoint
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
-import Sheaf.Paper.IntegralFinitePullbackComposition
 public import Sheaf.Paper.FiniteRegularCoefficientComparisons
 public import Sheaf.SixFunctors.FrobeniusPointTransport
-import Sheaf.Paper.InverseImagePullbackComparisonDerived
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.SixFunctors.FrobeniusPointTransportNatural
-import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.ConstantCoefficientScalarNormalization
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.Paper.IntegralPullbackComparisonRealization
-import Sheaf.Paper.IntegralPointTransportTowerPowers
 public import Sheaf.Paper.SfRationalizationKaroubi
+
+import all Sheaf.Paper.PointSectionsScalarExtension
+import all Sheaf.Paper.CanonicalCoefficientPullbackReduction
+import all Sheaf.Paper.ConstantWeilStructure
+import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 
 /-! # Constant geometric stalks and the coefficient unit
 
@@ -56,6 +46,7 @@ ring sheaf. The maps below retain the actual adjunction units and strict Roos mo
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
@@ -63,6 +54,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures.ConstantGeometricStalkUnit
+
+attribute [-instance] coefficientComplexModuleDerived pointScalarModuleDerived
+  pointCompletedSheafDerived pointScalarAbSheafify pointScalarAbLocallyBijective
+  coefficientComplexIntegralAdditive coefficientComplexIntegralLimits
+  coefficientComplexIntegralColimits coefficientComplexRationalAdditive
+  coefficientComplexRationalLimits coefficientComplexRationalColimits
+  coefficientComplexFieldAdditive coefficientComplexFieldLimits coefficientComplexFieldColimits
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -82,6 +80,114 @@ def finiteUnitHom {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
           (fun {_ _} a ↦ map_one ((integralCoefficientSheaf l E X m).obj.map
             ((proEtaleBaseChange f).op.map a)).hom)))
 
+/-- Transposing multiplication computes it on every adjunction generator.
+Source: reviewed expansion step 2 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
+private theorem finiteUnitHom_generator {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ)
+    (V : Y.ProEt) (a : (integralCoefficientSheaf l E Y m).obj.obj (op V)) :
+    letI := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
+    (finiteUnitHom l E f m).val.app (op ((proEtaleBaseChange f).obj V))
+      (((sfIntrinsicConstantModuleAdjunction f
+        (Padic.coefficientExtensionRing l E (m + 1))).unit.app
+          (SheafOfModules.unit (integralCoefficientSheaf l E Y m))).val.app (op V) a) =
+      ((coefficientProEtaleDirectRingMap.{u, u} f
+        (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1))))).hom.app
+          (op V)) a := by
+  let := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
+  let adj := sfIntrinsicConstantModuleAdjunction f
+    (Padic.coefficientExtensionRing l E (m + 1))
+  have h := (adj.homEquiv
+    (SheafOfModules.unit (integralCoefficientSheaf l E Y m))
+    (SheafOfModules.unit (integralCoefficientSheaf l E X m))).apply_symm_apply
+    ((SheafOfModules.unitHomEquiv
+      ((proEtaleConstantModuleDirectImage f
+        (Padic.coefficientExtensionRing l E (m + 1))).obj
+          (SheafOfModules.unit (integralCoefficientSheaf l E X m)))).symm
+      (PresheafOfModules.sectionsMk (fun U ↦
+        (1 : (integralCoefficientSheaf l E X m).obj.obj
+          ((proEtaleBaseChange f).op.obj U)))
+        (fun {_ _} b ↦ map_one ((integralCoefficientSheaf l E X m).obj.map
+          ((proEtaleBaseChange f).op.map b)).hom)))
+  rw [Adjunction.homEquiv_unit] at h
+  have hv := congrArg (fun z ↦ z.val.app (op V) a) h
+  let b : (integralCoefficientSheaf l E X m).obj.obj (op ((proEtaleBaseChange f).obj V)) :=
+    ((coefficientProEtaleDirectRingMap.{u, u} f
+      (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1))))).hom.app
+        (op V)) a
+  change (finiteUnitHom l E f m).val.app (op ((proEtaleBaseChange f).obj V))
+      ((adj.unit.app (SheafOfModules.unit (integralCoefficientSheaf l E Y m))).val.app
+        (op V) a) =
+    b * (1 : (integralCoefficientSheaf l E X m).obj.obj
+      (op ((proEtaleBaseChange f).obj V))) at hv
+  exact hv.trans (mul_one b)
+
+/-- The adjoint constant-section map is natural in its coefficient ring.
+Source: reviewed expansion step 5 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
+private theorem coefficientDirect_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {A B : CommRingCat.{u + 1}} (a : A ⟶ B) :
+    (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map a ≫
+        coefficientProEtaleDirectRingMap.{u, u} f B =
+      coefficientProEtaleDirectRingMap.{u, u} f A ≫
+        ((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{u + 1}
+          (ProEt.topology Y) (ProEt.topology X)).map
+            ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map a) := by
+  let adj := sheafificationAdjunction (ProEt.topology Y) CommRingCat.{u + 1}
+  apply (adj.homEquiv _ _).injective
+  change adj.homEquiv _ _
+    ((presheafToSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
+      ((Functor.const Y.ProEtᵒᵖ).map a) ≫ _) = _
+  rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+  simp only [coefficientProEtaleDirectRingMap, adj, Equiv.apply_symm_apply]
+  ext U x
+  exact congrArg (fun z ↦ (z.app ((proEtaleBaseChange f).op.obj U)).hom x)
+    (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map a))
+
+private theorem finiteUnitHom_tensor {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
+    letI := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
+    let A := CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1)))
+    let φ : integralCoefficientSheaf l E Y m ⟶
+        ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{u + 1}
+          (ProEt.topology Y) (ProEt.topology X)).obj
+            (integralCoefficientSheaf l E X m) :=
+      ⟨Functor.whiskerRight (coefficientProEtaleDirectRingMap.{u, u} f A).hom
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+    letI : (SheafOfModules.pushforward.{u + 1} φ).IsRightAdjoint :=
+      coefficientProEtaleModuleDirectImage_isRightAdjoint.{u, u} f A
+    (inverseImageFiniteIntrinsicPullbackComparison f
+      (Padic.coefficientExtensionRing l E (m + 1))).hom.app
+        (SheafOfModules.unit (integralCoefficientSheaf l E Y m)) ≫
+          finiteUnitHom l E f m = SheafOfModules.pullbackObjUnitToUnit φ := by
+  let := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
+  let A := CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1)))
+  let φ : integralCoefficientSheaf l E Y m ⟶
+      ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology Y) (ProEt.topology X)).obj
+          (integralCoefficientSheaf l E X m) :=
+    ⟨Functor.whiskerRight (coefficientProEtaleDirectRingMap.{u, u} f A).hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  let : (SheafOfModules.pushforward.{u + 1} φ).IsRightAdjoint :=
+    coefficientProEtaleModuleDirectImage_isRightAdjoint.{u, u} f A
+  let adj₁ := coefficientProEtaleModuleAdjunction.{u, u} f A
+  let adj₂ := sfIntrinsicConstantModuleAdjunction f
+    (Padic.coefficientExtensionRing l E (m + 1))
+  let e := adj₁.leftAdjointUniq adj₂
+  change e.hom.app (SheafOfModules.unit (integralCoefficientSheaf l E Y m)) ≫
+    finiteUnitHom l E f m = SheafOfModules.pullbackObjUnitToUnit φ
+  apply (adj₁.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc,
+    adj₁.unit_leftAdjointUniq_hom_app adj₂]
+  change adj₂.homEquiv _ _ (finiteUnitHom l E f m) = _
+  rw [finiteUnitHom, Equiv.apply_symm_apply]
+  change _ = (SheafOfModules.pullbackPushforwardAdjunction φ).homEquiv _ _
+    (SheafOfModules.pullbackObjUnitToUnit φ)
+  rw [SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit]
+  apply (SheafOfModules.unitHomEquiv _).injective
+  simp only [Equiv.apply_symm_apply]
+  ext U
+  simp only [SheafOfModules.unitHomEquiv_apply_coe]
+  change (1 : (integralCoefficientSheaf l E X m).obj.obj
+    ((proEtaleBaseChange f).op.obj U)) = φ.hom.app U 1
+  exact (map_one _).symm
+
 /-- The finite multiplication is invertible, including the first positive quotient.
 Source: reviewed expansion step 2 (blueprint: lem-zl-constant-geometric-stalk-unit).
 Proof: in tensor coordinates the map is z tensor b ↦ c_f(z)b; its inverse sends b to
@@ -89,7 +195,30 @@ Proof: in tensor coordinates the map is z tensor b ↦ c_f(z)b; its inverse send
 realization and adjunction preserve this unit-normalized map. -/
 theorem finiteUnitHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
     IsIso (finiteUnitHom l E f m) := by
-  sorry
+  let := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
+  let A := CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1)))
+  let φ : integralCoefficientSheaf l E Y m ⟶
+      ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology Y) (ProEt.topology X)).obj
+          (integralCoefficientSheaf l E X m) :=
+    ⟨Functor.whiskerRight (coefficientProEtaleDirectRingMap.{u, u} f A).hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  let : (SheafOfModules.pushforward.{u + 1} φ).IsRightAdjoint :=
+    coefficientProEtaleModuleDirectImage_isRightAdjoint.{u, u} f A
+  let adj₁ := coefficientProEtaleModuleAdjunction.{u, u} f A
+  let adj₂ := sfIntrinsicConstantModuleAdjunction f
+    (Padic.coefficientExtensionRing l E (m + 1))
+  let e := adj₁.leftAdjointUniq adj₂
+  have he : e.hom.app (SheafOfModules.unit (integralCoefficientSheaf l E Y m)) ≫
+      finiteUnitHom l E f m = SheafOfModules.pullbackObjUnitToUnit φ :=
+    finiteUnitHom_tensor l E f m
+  have : IsIso (e.hom.app (SheafOfModules.unit (integralCoefficientSheaf l E Y m)) ≫
+      finiteUnitHom l E f m) := by
+    rw [he]
+    infer_instance
+  exact IsIso.of_isIso_comp_left
+    (e.hom.app (SheafOfModules.unit (integralCoefficientSheaf l E Y m)))
+    (finiteUnitHom l E f m)
 
 /-- The finite derived unit comparison, with its exact single-complex comparison.
 Source: reviewed expansion step 2 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
@@ -102,6 +231,10 @@ def finiteUnit {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
       0).app _ ≪≫
       (DerivedCategory.singleFunctor _ 0).mapIso
         (@asIso _ _ _ _ (finiteUnitHom l E f m) (finiteUnitHom_isIso l E f m))
+
+section
+attribute [local irreducible] unrestrictedIntegralReductionExistence limit
+  chainUnitCandidate pullbackUnitProduct pullbackUnitLevel
 
 /-- The normalized strict unit for arbitrary scheme maps, extending the same owning-node
 construction used for the Weil automorphism.
@@ -130,7 +263,17 @@ theorem integralChainUnit_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (∀ i : ℤ, η.f i ≫
         (CochainComplex.mappingCocone.snd
           (constantWeilPullbackRoosEndomorphism l E f)).v i (i - 1) (by omega) = 0) := by
-  sorry
+  refine ⟨chainUnitCandidate l E f, ⟨?_, ?_⟩, ?_⟩
+  · intro m V
+    exact chainUnitCandidate_generators l E f m V
+  · intro i
+    simp only [chainUnitCandidate, CochainComplex.mappingCocone.lift_f_snd_v,
+      CochainComplex.HomComplex.Cochain.zero_v]
+  · intro η hη
+    exact normalized_chainUnit_unique l E f η hη
+
+
+end
 
 /-- The uniquely specified strict chain map, with real cochain data.
 Source: reviewed expansion step 6 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
@@ -158,6 +301,10 @@ def integralUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 
 
+section
+attribute [local irreducible] coefficientFinitePullIso canonicalCoefficientFiniteKappaComplex
+  canonicalCoefficientFiniteUnit constantSheaf unrestrictedIntegralReductionExistence limit
+
 /-- The intrinsic finite multiplication is exactly c_m composed with lambda_m,
 using the canonical unit-preserving comparison of the two pullback presentations.
 Source: reviewed expansion steps 2 and 3
@@ -174,7 +321,52 @@ theorem finiteUnit_canonicalWeil {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (m :
           ((finiteRegularCoefficientComplex l E Y m).X 0) ≫
         finiteUnitHom l E g m =
       (finiteRegularComparison l E g m).hom.f 0 := by
-  sorry
+  let := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
+  let A := CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1)))
+  let adj₁ := coefficientProEtaleModuleAdjunction.{u, u} g A
+  let adj₂ := sfIntrinsicConstantModuleAdjunction g
+    (Padic.coefficientExtensionRing l E (m + 1))
+  let e := adj₁.leftAdjointUniq adj₂
+  have he : e.hom.app (SheafOfModules.unit (integralCoefficientSheaf l E Y m)) ≫
+      finiteUnitHom l E g m = (finitePullbackRegularIso l E g m).hom :=
+    finiteUnitHom_tensor l E g m
+  have hc : finiteRegularKappa l E g m ≫ (coefficientFinitePullIso l E g m).hom =
+      (finiteRegularComparison l E g m).hom := by
+    rw [finiteRegularKappa, coefficientFiniteKappa_formula]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rfl
+  change (finiteRegularKappa l E g m).f 0 ≫
+    e.hom.app (SheafOfModules.unit (integralCoefficientSheaf l E Y m)) ≫
+      finiteUnitHom l E g m = _
+  rw [he]
+  have hc₀ := congrArg (fun z ↦ z.f 0) hc
+  simp only [coefficientFinitePullIso, Iso.trans_hom, HomologicalComplex.comp_f,
+    Functor.mapIso_hom, Iso.app_hom, CochainComplex.singleFunctor,
+    CochainComplex.singleFunctors, HomologicalComplex.single_map_f_self,
+    HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
+    Category.assoc, Iso.inv_hom_id_assoc] at hc₀
+  change (finiteRegularKappa l E g m).f 0 ≫
+    (integralOperationsLevelPullback l E g m).map
+      (𝟙 (SheafOfModules.unit (integralCoefficientSheaf l E Y m))) ≫
+        (finitePullbackRegularIso l E g m).hom ≫
+          𝟙 (SheafOfModules.unit (integralCoefficientSheaf l E X m)) = _ at hc₀
+  have hmap := (integralOperationsLevelPullback l E g m).map_id
+    (SheafOfModules.unit (integralCoefficientSheaf l E Y m))
+  have h := congrArg (fun z ↦ (finiteRegularKappa l E g m).f 0 ≫
+    z ≫ (finitePullbackRegularIso l E g m).hom) hmap
+  have hc₁ : (finiteRegularKappa l E g m).f 0 ≫
+      (integralOperationsLevelPullback l E g m).map
+        (𝟙 (SheafOfModules.unit (integralCoefficientSheaf l E Y m))) ≫
+          (finitePullbackRegularIso l E g m).hom =
+        (finiteRegularComparison l E g m).hom.f 0 := by
+    simpa only [Category.comp_id] using hc₀
+  exact (congrArg (fun z ↦ (finiteRegularKappa l E g m).f 0 ≫ z)
+    (Category.id_comp (finitePullbackRegularIso l E g m).hom)).symm.trans
+      (h.symm.trans hc₁)
+
+
+
+end
 
 /-- The generalized strict unit agrees with the recorded canonical integral Weil map.
 Source: reviewed expansion steps 6 and 7
@@ -185,7 +377,9 @@ Their good-representative comparisons coincide, and c composed with lambda cance
 the two inverse coefficient comparisons in constantWeilIntegralTheta. -/
 theorem integralUnit_canonicalWeil {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     integralUnit l E g = constantWeilIntegralTheta l E g := by
-  sorry
+  simp only [constantWeilIntegralTheta, constantWeilIntegralLambda, Iso.trans_assoc,
+    Iso.symm_self_id, Iso.trans_refl]
+  rfl
 
 /-- Multiplication respects every finite quotient on every pullback generator.
 Source: reviewed expansion steps 2 and 5
@@ -211,7 +405,14 @@ theorem finiteUnit_reduction {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) (V : Y.P
           (Padic.coefficientExtensionRing l E (m + 1))).unit.app
             (SheafOfModules.unit (integralCoefficientSheaf l E Y m))).val.app (op V)
               ((integralCoefficientSheafTransition l E Y m).hom.app (op V) a)) := by
-  sorry
+  let := Padic.finite_coefficientExtensionRing l E (m + 2) (by omega)
+  let := Padic.finite_coefficientExtensionRing l E (m + 1) (by omega)
+  rw [finiteUnitHom_generator, finiteUnitHom_generator]
+  have h := coefficientDirect_naturality f (CommRingCat.ofHom
+    ((ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).symm.toRingHom.comp
+      ((Padic.coefficientExtensionTransition l E (m + 1)).comp
+        (ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).toRingHom)))
+  exact (congrArg (fun z ↦ (z.hom.app (op V)) a) h).symm
 
 /-- The strict integral unit's actual nth Roos projection on every regular section.
 Source: reviewed expansion steps 5--7 (blueprint: lem-zl-constant-geometric-stalk-unit).
@@ -244,7 +445,22 @@ theorem integralUnit_projection {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) (V : 
             (((unrestrictedIntegralFiniteComplex l E Y m).obj
               (constantWeilIntegralComplex l E Y)).X 0) V
             (constantWeilReducedUnitSection l E Y m V)) := by
-  sorry
+  let U := op ((proEtaleBaseChange f).obj V)
+  let one : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj U := 1
+  let e := HomologicalComplex.singleObjXSelf (V := integralTowerModules l E X) (.up ℤ) 0
+    (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X))
+  let F := (((integralChainUnit l E f).f 0 ≫
+    (CochainComplex.mappingCocone.fst
+      (constantWeilPullbackRoosEndomorphism l E f)).f 0 ≫
+    (Pi.π (fun j ↦ (constantWeilPullbackTower l E f).obj (op j)) m).f 0).val.app U).hom
+  have h := (integralChainUnit_existsUnique l E f).exists.choose_spec.1 m V
+  change F ((e.inv.val.app U).hom one) = _ at h
+  have he : (e.inv.val.app U).hom a = a • (e.inv.val.app U).hom one := by
+    simpa only [one, smul_eq_mul, mul_one] using (e.inv.val.app U).hom.map_smul a one
+  calc
+    F ((e.inv.val.app U).hom a) = F (a • (e.inv.val.app U).hom one) := congrArg F he
+    _ = a • F ((e.inv.val.app U).hom one) := F.map_smul a _
+    _ = _ := congrArg (fun z ↦ a • z) h
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
@@ -292,7 +508,18 @@ sections are lim A_m. Completeness of the coefficient DVR identifies this limit 
 O_E via its actual quotient maps; uniqueness follows from separatedness. -/
 theorem section_isIso :
     (∀ m : ℕ, IsIso (finiteSection l E D m)) ∧ IsIso (integralSection l E D) := by
-  sorry
+  constructor
+  · intro m
+    apply (ConcreteCategory.isIso_iff_bijective _).2
+    exact AlgebraicGeometry.ProEtale.bijective_toSheafify_app_of_iso (Iso.refl _)
+      ((Functor.const (Scheme.ProEt (Spec (.of D.k)))ᵒᵖ).obj
+        (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1)))))
+  · apply (ConcreteCategory.isIso_iff_bijective _).2
+    change Function.Bijective (pointIntegralSectionMap l E D.k)
+    have h := pointCompletedConstant_bijective D.k l E
+    exact h.comp (ULift.ringEquiv : ULift.{u + 1}
+      (Padic.coefficientExtensionIntegers l E) ≃+*
+        Padic.coefficientExtensionIntegers l E).bijective
 
 /-- Finite sections identified with the regular coefficient module in degree zero.
 Source: reviewed expansion step 2 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
@@ -336,7 +563,35 @@ theorem section_reductions (m : ℕ) :
         (op (ProEt.mk (𝟙 (Spec (.of D.k))))) (integralSection l E D a) =
           finiteSection l E D m (ULift.up
             (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (m + 1)) a.down))) := by
-  sorry
+  let U := op (ProEt.mk (𝟙 (Spec (.of D.k))))
+  let : EssentiallySmall.{u + 1} (Scheme.ProEt (Spec (.of D.k))) :=
+    essentiallySmallSelf.{u} _
+  let : HasSheafify (ProEt.topology (Spec (.of D.k))) CommRingCat.{u + 1} :=
+    hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
+  let : (sheafToPresheaf (ProEt.topology (Spec (.of D.k)))
+      CommRingCat.{u + 1}).IsRightAdjoint :=
+    ⟨⟨_, ⟨sheafificationAdjunction _ _⟩⟩⟩
+  constructor
+  · intro a
+    have h := toSheafify_naturality (ProEt.topology (Spec (.of D.k)))
+      ((Functor.const (Scheme.ProEt (Spec (.of D.k)))ᵒᵖ).map
+        (CommRingCat.ofHom
+          ((ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).symm.toRingHom.comp
+            ((Padic.coefficientExtensionTransition l E (m + 1)).comp
+              (ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).toRingHom))))
+    exact congrArg (fun f ↦ (f.app U).hom a) h.symm
+  · intro a
+    have h := limit.lift_π (integralConstantCoefficientCone l E (Spec (.of D.k))) (op m)
+    have h' := congrArg (fun f ↦ (f.hom.app U)
+      (pointConstantSectionMap D.k (Padic.coefficientExtensionIntegers l E) a)) h
+    have hn := toSheafify_naturality (ProEt.topology (Spec (.of D.k)))
+      ((Functor.const (Scheme.ProEt (Spec (.of D.k)))ᵒᵖ).map
+        (CommRingCat.ofHom
+          ((ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).symm.toRingHom.comp
+            ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (m + 1))).comp
+              (ULift.ringEquiv : ULift.{u + 1} _ ≃+* _).toRingHom))))
+    have h'' := congrArg (fun f ↦ (f.app U).hom a) hn.symm
+    exact h'.trans h''
 
 variable (Y₀ : Over (Spec (.of D.k₀)))
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
@@ -476,6 +731,65 @@ def integralOperator (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) (r : 
     (pointFibreIntegralAmbient D l E).map
       ((constructibleIntegralPullback l E x).map (integralWeilIterate l E D hl Y₀ r).hom).hom
 
+/-- Contravariant Spec sends the positive power to the corresponding field power.
+Source: geometric-Frobenius construction (blueprint: def-weil-local-frobenius-trace). -/
+private theorem localPointPower_eq (n : ℕ) :
+    localPositivePower (frobeniusPointIso D).hom n =
+      let := Fintype.ofFinite D.k₀
+      Spec.map (CommRingCat.ofHom
+        (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k ^ (n + 1)).toRingHom) := by
+  let := Fintype.ofFinite D.k₀
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    rw [localPositivePower, ih]
+    change Spec.map _ ≫ Spec.map _ = _
+    rw [← Spec.map_comp]
+    congr 1
+
+/-- Iterating the two Galois-map projections preserves the model projection and
+iterates the coefficient projection.
+Source: geometric-Frobenius construction (blueprint: def-weil-local-frobenius-trace). -/
+private theorem localFrobeniusPower_projections (n : ℕ) :
+    localPositivePower (D.geometricFrobenius Y₀).hom n ≫
+        pullback.fst Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
+      pullback.fst Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ∧
+    localPositivePower (D.geometricFrobenius Y₀).hom n ≫
+        pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
+      pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫
+        localPositivePower (frobeniusPointIso D).hom n := by
+  let := Fintype.ofFinite D.k₀
+  have h := D.galoisMap_projections Y₀.hom
+    (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)
+  change (D.geometricFrobenius Y₀).hom ≫ _ = _ ∧
+    (D.geometricFrobenius Y₀).hom ≫ _ =
+      _ ≫ (frobeniusPointIso D).hom at h
+  induction n with
+  | zero => exact h
+  | succ n ih =>
+    constructor
+    · rw [localPositivePower, Category.assoc, h.1]
+      exact ih.1
+    · rw [localPositivePower, Category.assoc, h.2, ← Category.assoc, ih.2,
+        Category.assoc]
+      rfl
+
+/-- A model map fixed by the point power has the stated semilinear return lift.
+Source: pullback uniqueness in the return construction
+(blueprint: def-weil-local-frobenius-trace). -/
+private theorem localLift_return (n : ℕ) (a : Spec (.of D.k) ⟶ Y₀.left)
+    (c : a ≫ Y₀.hom =
+      (𝟙 (Spec (.of D.k))) ≫ Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+    (ha : localPositivePower (frobeniusPointIso D).hom n ≫ a = a) :
+    pullback.lift a (𝟙 _) c ≫ localPositivePower (D.geometricFrobenius Y₀).hom n =
+      localPositivePower (frobeniusPointIso D).hom n ≫ pullback.lift a (𝟙 _) c := by
+  apply pullback.hom_ext
+  · rw [Category.assoc, (localFrobeniusPower_projections D Y₀ n).1,
+      pullback.lift_fst, Category.assoc, pullback.lift_fst, ha]
+  · rw [Category.assoc, (localFrobeniusPower_projections D Y₀ n).2,
+      ← Category.assoc, pullback.lift_snd, Category.assoc, pullback.lift_snd,
+      Category.id_comp, Category.comp_id]
+
 /-- Compatibility needed to form the lift for any base-field embedding of the
 specified finite extension, rather than only the chosen subfield inclusion.
 Source: reviewed expansion step 1 (blueprint: lem-zl-constant-geometric-stalk-unit).
@@ -486,7 +800,11 @@ theorem embeddingPoint_compatible (n : ℕ) (hn : 1 ≤ n)
     (hι : ι.comp (D.extensionEmbedding n hn) = algebraMap D.k₀ D.k) :
     (Spec.map (CommRingCat.ofHom ι) ≫ x.left) ≫ Y₀.hom =
       (𝟙 (Spec (.of D.k))) ≫ Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)) := by
-  sorry
+  rw [Category.assoc, Over.w x, Category.id_comp]
+  change Spec.map (CommRingCat.ofHom ι) ≫
+    Spec.map (CommRingCat.ofHom (D.extensionEmbedding n hn)) = _
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+  exact congrArg (fun f ↦ Spec.map (CommRingCat.ofHom f)) hι
 
 /-- The actual geometric point from any allowed finite-field embedding.
 Source: reviewed expansion step 1 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
@@ -510,7 +828,26 @@ theorem embeddingPoint_return (n : ℕ) (hn : 1 ≤ n)
         localPositivePower (D.geometricFrobenius Y₀).hom (n - 1) =
       localPositivePower (frobeniusPointIso D).hom (n - 1) ≫
         embeddingPoint D Y₀ n hn x ι hι := by
-  sorry
+  let := Fintype.ofFinite D.k₀
+  have hc : Nat.card (D.extensionSubfield n hn) = D.q ^ n :=
+    (FiniteField.exists_unique_subfield_of_closure D.p D.a D.q D.prime D.exponent_pos
+      D.cardinality_eq D.k₀ D.card_base D.k n hn).choose_spec.2.1
+  have hq : 0 < D.q := by
+    rw [← D.card_base]
+    exact Nat.card_pos
+  have : Finite (D.extensionSubfield n hn) :=
+    (Nat.card_pos_iff.mp (by rw [hc]; exact pow_pos hq n)).2
+  have hc' : Nat.card (D.extensionSubfield n hn) = Fintype.card D.k₀ ^ n := by
+    simpa only [← D.card_base, Nat.card_eq_fintype_card] using hc
+  apply localLift_return D Y₀ (n - 1)
+  rw [← Category.assoc]
+  suffices h : localPositivePower (frobeniusPointIso D).hom (n - 1) ≫
+      Spec.map (CommRingCat.ofHom ι) = Spec.map (CommRingCat.ofHom ι) by rw [h]
+  rw [localPointPower_eq, Nat.sub_add_cancel hn, ← Spec.map_comp]
+  congr 1
+  ext a
+  exact FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq
+    D.k₀ D.k n hc' ι a
 
 /-- The finite local operator is the coefficient identity under the canonical stalk iso.
 Source: reviewed expansion steps 1--5 (blueprint: lem-zl-constant-geometric-stalk-unit).
@@ -615,31 +952,65 @@ theorem rationalStalkUnit_existsUnique
           (DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of E E),
       (pointFibreModuleLift E).mapDerivedCategory.mapIso e =
         rationalStalkUnitLarge l E D hl Y₀ x := by
-  sorry
+  classical
+  let p := DerivedCategory.pointFiniteDimensional E
+  let q := DerivedCategory.pointFiniteDimensional (ULift.{u + 1} E)
+  let J := p.ι ⋙ (pointFibreModuleLift E).mapDerivedCategory
+  let := pointFibreSizeLift_equivalence E
+  let J₀ := pointFibreSizeLift E ⋙ q.ι
+  let eJ : J₀ ≅ J :=
+    q.liftCompιIso (p.ι ⋙ (pointFibreModuleLift E).mapDerivedCategory)
+      (pointFibreModuleLift_mem E)
+  have : J₀.Full := by dsimp only [J₀]; infer_instance
+  have : J₀.Faithful := by dsimp only [J₀]; infer_instance
+  let ff := (Functor.FullyFaithful.ofFullyFaithful J₀).ofIso eJ
+  have : J.Full := ff.full
+  have : J.Faithful := ff.faithful
+  let V := (DerivedCategory.singleFunctor (ModuleCat.{u} E) 0).obj (ModuleCat.of E E)
+  have hV : p V := by
+    refine ⟨⟨{0}, fun i hi ↦ ?_⟩, fun i ↦ ?_⟩
+    · exact DerivedCategory.isZero_homologyFunctor_obj_of_iso_singleFunctor
+        (Iso.refl V) (by simpa only [Finset.mem_singleton] using hi)
+    · by_cases hi : i = 0
+      · subst i
+        let e₀ : (DerivedCategory.homologyFunctor (ModuleCat.{u} E) 0).obj V ≅
+            ModuleCat.of E E :=
+          (DerivedCategory.singleFunctorCompHomologyFunctorIso (ModuleCat.{u} E) 0).app _
+        exact e₀.symm.toLinearEquiv.finiteDimensional
+      · have hz := DerivedCategory.isZero_homologyFunctor_obj_of_iso_singleFunctor
+          (Iso.refl V) hi
+        have := ModuleCat.isZero_iff_subsingleton.mp hz
+        infer_instance
+  let X : p.FullSubcategory := localPointComplex l E D hl Y₀
+    (constantWeilRationalComplex l E D hl Y₀) x
+  let Y : p.FullSubcategory := ⟨V, hV⟩
+  let a : J.obj X ≅ J.obj Y := rationalStalkUnitLarge l E D hl Y₀ x
+  let e : X ≅ Y := J.preimageIso a
+  refine ⟨p.ι.mapIso e, ?_, ?_⟩
+  · change J.mapIso e = a
+    ext
+    exact J.map_preimage a.hom
+  · intro e' he'
+    let b : X ≅ Y := p.ι.preimageIso e'
+    have hb : J.mapIso b = a := by
+      change (pointFibreModuleLift E).mapDerivedCategory.mapIso (p.ι.mapIso b) = a
+      have h : p.ι.mapIso b = e' := by
+        ext
+        exact p.ι.map_preimage (X := X) (Y := Y) e'.hom
+      rw [h]
+      exact he'
+    have he : J.mapIso e = a := by ext; exact J.map_preimage a.hom
+    have hbe : b = e := J.mapIso_injective (hb.trans he.symm)
+    calc
+      e' = p.ι.mapIso b := by
+        ext
+        exact (p.ι.map_preimage (X := X) (Y := Y) e'.hom).symm
+      _ = p.ι.mapIso e := congrArg (fun t ↦ p.ι.mapIso t) hbe
 
 /-- The rational geometric stalk identification with E[0], normalized by integral tensor.
 Source: reviewed expansion step 8 (blueprint: lem-zl-constant-geometric-stalk-unit). -/
 def rationalStalkUnit (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) :=
   (rationalStalkUnit_existsUnique l E D hl Y₀ x).exists.choose
-
-/-- The rational local operator is identity in the same canonical coefficient coordinates.
-Source: reviewed expansion steps 1 and 8 (blueprint: lem-zl-constant-geometric-stalk-unit).
-Proof: theta_E and rational point transport are the images of their integral counterparts
-under exact tensor with E, with the recorded boundary comparisons. The rational pullback
-compositors are the localized integral ones, so all three factors of localFrobeniusOperator
-are the corresponding integral factors after tensor. Apply integralOperator_unit to the
-whole-system identity, tensor it with E, and cancel the specified size equivalence. The
-normalization of rationalStalkUnit makes its coefficient coordinate exactly E[0]. -/
-theorem rationalOperator_unit (n : ℕ) (hn : 1 ≤ n) (x : D.extensionPoints Y₀ n hn)
-    (ι : D.extensionSubfield n hn →+* D.k)
-    (hι : ι.comp (D.extensionEmbedding n hn) = algebraMap D.k₀ D.k) :
-    (localFrobeniusOperator l E D hl Y₀
-        (constantWeilRationalComplex l E D hl Y₀)
-        (embeddingPoint D Y₀ n hn x ι hι) (n - 1)
-        (embeddingPoint_return D Y₀ n hn x ι hι)).hom ≫
-      (rationalStalkUnit l E D hl Y₀ (embeddingPoint D Y₀ n hn x ι hι)).hom =
-        (rationalStalkUnit l E D hl Y₀ (embeddingPoint D Y₀ n hn x ι hι)).hom := by
-  sorry
 
 /-- The actual rational operator is tensor of the actual integral operator, under
 the prescribed rational point comparison, so rationalization respects operator equality.
@@ -661,4 +1032,49 @@ theorem rationalOperator_scalar (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).
               (integralOperator l E D hl Y₀ x r h) := by
   sorry
 
+
+/-- The rational local operator is identity in the same canonical coefficient coordinates.
+Source: reviewed expansion steps 1 and 8 (blueprint: lem-zl-constant-geometric-stalk-unit).
+Proof: theta_E and rational point transport are the images of their integral counterparts
+under exact tensor with E, with the recorded boundary comparisons. The rational pullback
+compositors are the localized integral ones, so all three factors of localFrobeniusOperator
+are the corresponding integral factors after tensor. Apply integralOperator_unit to the
+whole-system identity, tensor it with E, and cancel the specified size equivalence. The
+normalization of rationalStalkUnit makes its coefficient coordinate exactly E[0]. -/
+theorem rationalOperator_unit (n : ℕ) (hn : 1 ≤ n) (x : D.extensionPoints Y₀ n hn)
+    (ι : D.extensionSubfield n hn →+* D.k)
+    (hι : ι.comp (D.extensionEmbedding n hn) = algebraMap D.k₀ D.k) :
+    (localFrobeniusOperator l E D hl Y₀
+        (constantWeilRationalComplex l E D hl Y₀)
+        (embeddingPoint D Y₀ n hn x ι hι) (n - 1)
+        (embeddingPoint_return D Y₀ n hn x ι hι)).hom ≫
+      (rationalStalkUnit l E D hl Y₀ (embeddingPoint D Y₀ n hn x ι hι)).hom =
+        (rationalStalkUnit l E D hl Y₀ (embeddingPoint D Y₀ n hn x ι hι)).hom := by
+  let xbar := embeddingPoint D Y₀ n hn x ι hι
+  let hreturn := embeddingPoint_return D Y₀ n hn x ι hι
+  have hI : integralOperator l E D hl Y₀ xbar (n - 1) hreturn = 𝟙 _ := by
+    apply (cancel_mono (integralStalkUnit l E D Y₀ xbar).hom).mp
+    simpa only [Category.id_comp] using integralOperator_unit l E D hl Y₀ n hn x ι hι
+  let := pointFibreSizeLift_equivalence E
+  have hR : localFrobeniusOperator l E D hl Y₀
+      (constantWeilRationalComplex l E D hl Y₀) xbar (n - 1) hreturn = 𝟙 _ := by
+    apply (pointFibreSizeLift E).map_injective
+    rw [CategoryTheory.Functor.map_id]
+    apply ObjectProperty.hom_ext
+    change (pointFibreModuleLift E).mapDerivedCategory.map
+      (localFrobeniusOperator l E D hl Y₀
+        (constantWeilRationalComplex l E D hl Y₀) xbar (n - 1) hreturn).hom = 𝟙 _
+    apply (cancel_mono (rationalFibreComparison l E D hl Y₀ xbar).hom).mp
+    rw [rationalOperator_scalar, hI]
+    simp only [Category.id_comp]
+    exact (congrArg (fun t ↦ (rationalFibreComparison l E D hl Y₀ xbar).hom ≫ t)
+      ((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+        (pointIntegralToField l E)).mapDerivedCategory.map_id _)).trans (Category.comp_id _)
+  change (localFrobeniusOperator l E D hl Y₀
+    (constantWeilRationalComplex l E D hl Y₀) xbar (n - 1) hreturn).hom ≫ _ = _
+  rw [hR]
+  exact Category.id_comp _
+
+
 end WeilConjectures.ConstantGeometricStalkUnit
+

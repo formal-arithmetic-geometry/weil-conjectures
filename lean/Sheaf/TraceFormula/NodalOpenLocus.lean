@@ -14,20 +14,11 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
-import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
-import Sheaf.RingTheory.PresentationFittingIdeal
-import Sheaf.AlgebraicGeometry.NodalPointLocalCriterion
-import Sheaf.TraceFormula.RelativeDimensionBaseChange
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Kaehler.TensorProduct
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.RingTheory.Jacobson.Ring
 import Sheaf.AlgebraicGeometry.UnramifiedLocusBaseChange
-import Sheaf.TraceFormula.FiniteResiduePointClosedInFibre
-import Sheaf.TraceFormula.LciPointwiseCriterion
 import Sheaf.TraceFormula.SyntomicLocusBaseChange
+import WeilConjectures.RingTheory.AdicCompletionRingEquiv
+import Sheaf.TraceFormula.NodalCandidateGeometricCriterion
 
 /-! # The nodal open locus in a flat family
 
@@ -78,101 +69,187 @@ def HasOnlySmoothOrNodalGeometricFibres {X T : Scheme.{u}} (f : X ⟶ T)
     ∀ x : (pullback (C := Scheme.{u}) f g),
       IsSmoothOrOrdinaryNode (pullback.snd f g) x
 
+private theorem ordinaryNode_openImmersion
+    {Ω : Type u} [Field Ω] {C D : Scheme.{u}} [JacobsonSpace C]
+    (e : D ⟶ C) [IsOpenImmersion e] (y : D) :
+    IsOrdinaryNode Ω D y ↔ IsOrdinaryNode Ω C (e y) := by
+  have hc : y ∈ closedPoints D ↔ e y ∈ closedPoints C := by
+    exact (Set.ext_iff.mp e.isOpenEmbedding.preimage_closedPoints y).symm
+  let r := (asIso (e.stalkMap y)).commRingCatIsoToRingEquiv
+  obtain ⟨E, _⟩ := AdicCompletion.exists_ringEquiv
+    (IsLocalRing.maximalIdeal (C.presheaf.stalk (e y)))
+    (IsLocalRing.maximalIdeal (D.presheaf.stalk y)) r
+    (IsLocalRing.map_ringEquiv_maximalIdeal r).symm
+  exact and_congr hc ⟨fun ⟨q⟩ => ⟨E.trans q⟩, fun ⟨q⟩ => ⟨E.symm.trans q⟩⟩
+
+private theorem smoothOrNode_openImmersion
+    {Ω : Type u} [Field Ω] {C D : Scheme.{u}}
+    (f : C ⟶ Spec (.of Ω)) [LocallyOfFinitePresentation f]
+    (e : D ⟶ C) [IsOpenImmersion e] (y : D) :
+    IsSmoothOrOrdinaryNode (e ≫ f) y ↔ IsSmoothOrOrdinaryNode f (e y) := by
+  have : JacobsonSpace C := LocallyOfFiniteType.jacobsonSpace f
+  have hs : y ∈ (e ≫ f).smoothLocus ↔ e y ∈ f.smoothLocus := by
+    rw [← e.preimage_smoothLocus_eq f]
+    rfl
+  exact or_congr hs (ordinaryNode_openImmersion e y)
+
+private theorem open_fibre_good_iff
+    {Y T : Scheme.{u}} (p : Y ⟶ T) [LocallyOfFinitePresentation p] (U : Y.Opens) :
+    HasOnlySmoothOrNodalGeometricFibres (U.ι ≫ p) ↔
+      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ T),
+        ∀ x : pullback (C := Scheme.{u}) p g, pullback.fst p g x ∈ U →
+          IsSmoothOrOrdinaryNode (pullback.snd p g) x := by
+  constructor
+  · intro h Ω _ _ g x hx
+    let q := pullbackRightPullbackFstIso p g U.ι
+    let e := q.inv ≫ pullback.snd U.ι (pullback.fst p g)
+    have he : e ≫ pullback.snd p g = pullback.snd (U.ι ≫ p) g := by
+      simp [e, q]
+    obtain ⟨z, _, hz⟩ := Scheme.Pullback.exists_preimage_pullback
+      (f := U.ι) (g := pullback.fst p g) (⟨pullback.fst p g x, hx⟩ : U) x rfl
+    have hi := smoothOrNode_openImmersion (pullback.snd p g) e (q.hom z)
+    simp only [he] at hi
+    have hx' : e (q.hom z) = x := by
+      change (q.hom ≫ q.inv ≫ pullback.snd U.ι (pullback.fst p g)) z = x
+      simpa only [Iso.hom_inv_id_assoc] using hz
+    rw [hx'] at hi
+    exact hi.mp (h Ω g (q.hom z))
+  · intro h Ω _ _ g z
+    let q := pullbackRightPullbackFstIso p g U.ι
+    let e := q.inv ≫ pullback.snd U.ι (pullback.fst p g)
+    have he : e ≫ pullback.snd p g = pullback.snd (U.ι ≫ p) g := by
+      simp [e, q]
+    have hy : pullback.fst p g (e z) ∈ U := by
+      have hf : e ≫ pullback.fst p g = pullback.fst (U.ι ≫ p) g ≫ U.ι := by
+        simp [e, q, ← pullback.condition]
+      rw [← Scheme.Hom.comp_apply, hf, Scheme.Hom.comp_apply]
+      exact (pullback.fst (U.ι ≫ p) g z).property
+    have hi := smoothOrNode_openImmersion (pullback.snd p g) e z
+    simp only [he] at hi
+    exact hi.mpr (h Ω g (e z) hy)
+
+private theorem points_detected_by_geometric_pullbacks
+    {Y T : Scheme.{u}} (p : Y ⟶ T) (P : Y → Prop)
+    (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ T),
+      ∀ x : pullback (C := Scheme.{u}) p g, P (pullback.fst p g x)) :
+    ∀ y : Y, P y := by
+  intro y
+  let Ω := AlgebraicClosure (Y.residueField y)
+  let a : Spec (.of Ω) ⟶ Y :=
+    Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫
+      Y.fromSpecResidueField y
+  let z : Spec (.of Ω) ⟶ pullback p (a ≫ p) :=
+    pullback.lift a (𝟙 _) (by simp)
+  have hy : pullback.fst p (a ≫ p) (z default) = y := by
+    change (z ≫ pullback.fst p (a ≫ p)) default = y
+    simp only [z, pullback.lift_fst]
+    exact Scheme.fromSpecResidueField_apply y _
+  simpa only [hy] using h Ω (a ≫ p) (z default)
+
+private theorem greatest_of_geometric_membership
+    {Y T : Scheme.{u}} (p : Y ⟶ T) [LocallyOfFinitePresentation p] (U : Y.Opens)
+    (hm : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ T),
+      ∀ x : pullback (C := Scheme.{u}) p g,
+        pullback.fst p g x ∈ U ↔ IsSmoothOrOrdinaryNode (pullback.snd p g) x) :
+    HasOnlySmoothOrNodalGeometricFibres (U.ι ≫ p) ∧
+      ∀ V : Y.Opens, HasOnlySmoothOrNodalGeometricFibres (V.ι ≫ p) → V ≤ U := by
+  refine ⟨(open_fibre_good_iff p U).mpr (fun Ω _ _ g x hx => (hm Ω g x).mp hx), ?_⟩
+  intro V hV
+  apply points_detected_by_geometric_pullbacks p (fun y => y ∈ V → y ∈ U)
+  intro Ω _ _ g x hx
+  exact (hm Ω g x).mpr ((open_fibre_good_iff p V).mp hV Ω g x hx)
+
+private theorem geometric_membership_baseChange
+    {Y T T' : Scheme.{u}} (p : Y ⟶ T) [LocallyOfFinitePresentation p]
+    (U : Y.Opens)
+    (hm : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ T),
+      ∀ x : pullback (C := Scheme.{u}) p g,
+        pullback.fst p g x ∈ U ↔ IsSmoothOrOrdinaryNode (pullback.snd p g) x)
+    (g : T' ⟶ T) :
+    ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (h : Spec (.of Ω) ⟶ T'),
+      ∀ x : pullback (C := Scheme.{u}) (pullback.snd p g) h,
+        pullback.fst (pullback.snd p g) h x ∈ pullback.fst p g ⁻¹ᵁ U ↔
+          IsSmoothOrOrdinaryNode (pullback.snd (pullback.snd p g) h) x := by
+  intro Ω _ _ h x
+  let q := pullbackLeftPullbackSndIso p g h
+  have hi := smoothOrNode_openImmersion (pullback.snd p (h ≫ g)) q.hom x
+  have hq : q.hom ≫ pullback.snd p (h ≫ g) =
+      pullback.snd (pullback.snd p g) h := by simp [q]
+  simp only [hq] at hi
+  have hm' := hm Ω (h ≫ g) (q.hom x)
+  have hf : pullback.fst p (h ≫ g) (q.hom x) =
+      pullback.fst p g (pullback.fst (pullback.snd p g) h x) := by
+    change (q.hom ≫ pullback.fst p (h ≫ g)) x = _
+    simp [q]
+  rw [hf] at hm'
+  exact hm'.trans hi.symm
+
+private theorem fibre_all_mem_iff_geometric
+    {Y T : Scheme.{u}} (p : Y ⟶ T) (U : Y.Opens) (t : T)
+    (Ω : Type u) [Field Ω] [Algebra (T.residueField t) Ω] :
+    (∀ x : pullback (C := Scheme.{u}) p (T.fromSpecResidueField t),
+      pullback.fst p (T.fromSpecResidueField t) x ∈ U) ↔
+    (∀ x : pullback (C := Scheme.{u}) p
+        (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫
+          T.fromSpecResidueField t),
+      pullback.fst p
+        (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫
+          T.fromSpecResidueField t) x ∈ U) := by
+  let k := Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω))
+  let q := pullbackLeftPullbackSndIso p (T.fromSpecResidueField t) k
+  constructor
+  · intro H x
+    have hx := H (pullback.fst (pullback.snd p (T.fromSpecResidueField t)) k (q.inv x))
+    change (q.inv ≫ pullback.fst _ _ ≫ pullback.fst _ _) x ∈ U at hx
+    simpa only [q, pullbackLeftPullbackSndIso_inv_fst] using hx
+  · intro H x
+    obtain ⟨z, hz⟩ := (pullback.fst
+      (pullback.snd p (T.fromSpecResidueField t)) k).surjective x
+    have hx := H (q.hom z)
+    change (q.hom ≫ pullback.fst _ _) z ∈ U at hx
+    simpa only [q, pullbackLeftPullbackSndIso_hom_fst, Scheme.Hom.comp_apply, hz] using hx
+
+private theorem isOpen_nodalCandidateSet
+    {Y T : Scheme.{u}} (p : Y ⟶ T) [Flat p] [LocallyOfFinitePresentation p] :
+    IsOpen ((Scheme.firstFittingSingularSubscheme p) ''
+      (((Scheme.firstFittingSingularSubscheme p) ⁻¹' p.fiberCompleteIntersectionLocus ∩
+        unramifiedLocus (Scheme.firstFittingSingularSubscheme p ≫ p))ᶜ))ᶜ := by
+  obtain ⟨V, hV, _⟩ := (syntomic_locus_base_change p).2
+    (inferInstance : Flat p) (inferInstance : LocallyOfFinitePresentation p)
+  have hv : IsOpen p.fiberCompleteIntersectionLocus := hV ▸ V.2
+  have hw := (hv.preimage (Scheme.firstFittingSingularSubscheme p).continuous).inter
+    (unramifiedLocus_baseChange (Scheme.firstFittingSingularSubscheme p ≫ p)).1
+  exact ((Scheme.firstFittingSingularSubscheme p).isClosedEmbedding.isClosedMap _
+    hw.isClosed_compl).isOpen_compl
+
+private noncomputable def nodalCandidate
+    {Y T : Scheme.{u}} (p : Y ⟶ T) [Flat p] [LocallyOfFinitePresentation p] : Y.Opens :=
+  ⟨_, isOpen_nodalCandidateSet p⟩
+
 /-- The largest nodal open of a flat, locally finitely presented family with pure
 one-dimensional nonempty geometric fibres, compatible with arbitrary base change.
 
 Source: Stacks Project, `curves.tex`, Tag 0DSC, lemma-locus-where-nodal
 (blueprint: lem-trf-nodal-open-locus).
 
-Proof plan, following the eight steps of the node:
-1. The pure-dimension hypothesis also holds over every algebraically closed field mapping to $T$,
-   not only the chosen algebraic closure of a residue field. For such $\Omega$ over $t$,
-   [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] embeds $\overline{\kappa(t)}$
-   into $\Omega$ over $\kappa(t)$. Associating fibre products identifies $Y_\Omega$ with
-   $(Y_{\overline{\kappa(t)}})_\Omega$. The first fibre is locally of finite presentation, hence
-   locally of finite type, by [lem-weil-pbc-qcqs-morphism-permanence](3). Apply
-   [lem-trf-relative-dimension-base-change] to its structure morphism to the field: its sole
-   nonempty fibre is pure of dimension $1$, so the base-changed scheme is pure of dimension $1$
-   too. Empty fibres stay empty. Thus every geometric fibre of every base change of $p$ has the
-   required dimension, since it is the fibre of $p$ at the composite geometric point.
+Proof: Let Z be the first-Fitting singular closed subscheme, V the fibrewise
+complete-intersection locus, and W the unramified locus of Z over the base.
+Construct U as the complement of the image of Z \ (V ∩ W). The syntomic-locus
+and unramified-locus theorems make V and W open; the closed immersion Z → Y
+sends the complementary closed subset to a closed subset, so U is open.
+The pointwise geometric criterion identifies its inverse image on every
+geometric fibre with the smooth points and ordinary nodes.
 
-2. Let $Z=\operatorname{Sing}(p)\hookrightarrow Y$ as defined in
-   [def-trf-first-fitting-singular-subscheme]. Its formation commutes with arbitrary base change,
-   without a nodality assumption: on affine charts [lem-weil-pbc-fibre-product-affine-spectra]
-   gives $B'=A'\otimes_AB$, and [lem-weil-pbc-kahler-differentials-base-change] gives
-   $\Omega_{B'/A'}\cong B'\otimes_B\Omega_{B/A}$. Apply
-   [lem-trf-fitting-ideal-independence-base-change](2) to the finite $B$-module $\Omega_{B/A}$
-   with $k=1$. It identifies its extended Fitting ideal with
-   $\operatorname{Fit}_1(\Omega_{B'/A'})$. Quotienting by this extended ideal is exactly the base
-   change of the defining closed subscheme; the identifications agree on localizations and glue.
-   Hence $\operatorname{Sing}(p')=Z\times_TT'$ canonically for every base change.
-
-3. Apply [lem-trf-dth-fitting-smooth-locus] with $d=1$ to $p$. Its hypotheses are the given
-   flatness and local finite presentation and the given pure geometric-fibre dimension. It gives
-   the open smooth locus $M=Y\setminus|Z|$. Apply it also to each geometric fibre morphism
-   $Y_\Omega\to\operatorname{Spec}\Omega$: flatness and local finite presentation follow from
-   [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3), and
-   all its geometric fibres have dimension $1$ by Step 1. Together with Step 2 this says
-   $M_\Omega$ is exactly the smooth locus of $Y_\Omega$. In particular every point outside
-   $Z_\Omega$ is smooth, including nonclosed points.
-
-4. Let $V=V_p$ be the open of [lem-trf-syntomic-locus-base-change]. The morphism $h:Z\to T$ is
-   locally of finite type: by [lem-weil-pbc-lft-affine-pairs] a finite-type affine chart $A\to B$
-   for $p$ restricts to $A\to B/I$ for $Z$, and the images of the generators of $B$ generate its
-   quotient. Let $W=W_h$ be its unramified open from [lem-trf-unramified-locus-base-change].
-   Define $U=M\cup(V\cap W)$ as a subset of $Y$. It is open: $W\cap V$ is open in the closed
-   subset $Z$, so $|Z|\setminus(W\cap V)$ is closed in $Y$, and its complement is exactly $U$. We
-   retain the intersection with $V$; unramifiedness of the singular subscheme alone does not
-   impose the complete-intersection condition.
-
-5. Fix an algebraic closure $\Omega$ of $\kappa(t)$ and put $C=Y_\Omega$. Step 2 identifies
-   $Z_\Omega$ with $\operatorname{Sing}(C/\Omega)$. By [lem-trf-syntomic-locus-base-change] and
-   [lem-trf-lci-pointwise-criterion], every point of $V_\Omega$ has an affine open neighbourhood
-   in $C$ which is a local complete intersection over $\Omega$: all fibre local rings there are
-   complete intersections, and the pointwise criterion applies to that open. If $x\in V_\Omega\cap
-   W_\Omega$, [lem-trf-unramified-locus-base-change] gives $\mathcal O_{Z_\Omega,x}=\kappa(x)$
-   with $\kappa(x)/\Omega$ finite separable. The closed immersion preserves this residue field,
-   and [lem-trf-finite-residue-point-closed-in-fibre] applied to $C\to\operatorname{Spec}\Omega$
-   makes $x$ closed in $C$. Now [lem-trf-nodal-point-local-criterion] applies to this pure
-   one-dimensional locally finite-type scheme: its three right-hand conditions have just been
-   verified, so $x$ is an ordinary node. Points of $M_\Omega$ are smooth by Step 3.
-
-6. Conversely, let $x$ be an ordinary node of $C$. Its closedness is part of the definition in the
-   item. Apply [lem-trf-nodal-point-local-criterion]: $x$ has an affine
-   local-complete-intersection neighbourhood, $\mathcal O_{Z_\Omega,x}=\kappa(x)$, and
-   $\kappa(x)/\Omega$ is finite separable. The local-ring implication of
-   [lem-trf-lci-pointwise-criterion] puts $x$ in the fibrewise complete-intersection locus, hence
-   in $V_\Omega$ by [lem-trf-syntomic-locus-base-change]. The pointwise fibre-local-ring
-   characterization in [lem-trf-unramified-locus-base-change] puts $x$ in $W_\Omega$. Every smooth
-   point belongs to $M_\Omega$ by Step 3. Therefore $U_\Omega$ is exactly the union of the smooth
-   points and the ordinary nodes of $C$, proving the precise geometric-fibre assertion. Local
-   rings and their completions do not change on an open neighbourhood, so this also proves that
-   the geometric fibres of $U$ have only the stated points.
-
-7. For arbitrary $g:T'\to T$, the morphism $p'$ is flat and locally of finite presentation by
-   [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). Step 1
-   verifies its geometric-fibre dimension hypothesis. Its singular subscheme is the pullback of
-   $Z$ by Step 2, hence its $M'$ is the inverse image of $M$ by the support formula of
-   [lem-trf-dth-fitting-smooth-locus]. Its $V'$ is the inverse image of $V$ by
-   [lem-trf-syntomic-locus-base-change]. Its $W'$ is the inverse image of $W$ by
-   [lem-trf-unramified-locus-base-change], applied to $h:Z\to T$, whose base change is
-   $Z\times_TT'\to T'$. Taking the inverse image of $M\cup(V\cap W)$ now gives exactly
-   $M'\cup(V'\cap W')$. Thus the open constructed for $p'$ is $U\times_TT'$. Steps 5--6 apply to
-   $p'$ as well.
-
-8. Let $O\subseteq Y$ be any open with smooth or nodal geometric fibres, and fix $C=Y_\Omega$ as
-   above. A smooth point of $O_\Omega$ is smooth in $C$, since its local map is unchanged. A node
-   $x$ is closed in $O_\Omega$; on a finite-type affine neighbourhood its residue field is a
-   finitely generated field extension of $\Omega$, so [lem-weil-pbc-zariski-lemma] makes it
-   finite. Then [lem-trf-finite-residue-point-closed-in-fibre] makes $x$ closed in $C$. Its
-   completed local ring is unchanged, so it is a node of $C$. Step 6 gives $O_\Omega\subseteq
-   U_\Omega$. The projection $C\to Y_t$ is surjective: on each affine fibre chart it is the
-   spectrum of the faithfully flat field-extension base-change map
-   [lem-weil-pbc-field-extension-base-change-faithfully-flat], hence surjective by
-   [lem-weil-pbc-faithfully-flat-surjective-spectrum], using
-   [lem-weil-pbc-fibre-product-affine-spectra]. Thus $O\subseteq U$, proving largestness. The same
-   surjectivity shows $Y_t\subseteq U$ if and only if $U_\Omega=C$; by Step 6 this is precisely
-   that every singular point of $C$ is an ordinary node.
+Open immersions preserve the predicate: smooth loci pull back, closed points
+are preserved between open subschemes of a Jacobson scheme, and stalk
+isomorphisms induce maximal-ideal-adic completion isomorphisms. Associativity
+of pullbacks therefore shows that U has the required fibres. Any other good
+open is contained in U after every geometric pullback; a point lifts through
+the algebraic closure of its residue field, so this containment holds on Y.
+The same argument, using the iterated-pullback isomorphism, proves largestness
+of the inverse image after arbitrary base change. Finally the projection from
+a geometric fibre to the residue-field fibre is surjective, so the entire
+ordinary fibre lies in U exactly when every nonsmooth geometric point is nodal.
 -/
 theorem nodalOpenLocus
     (Y T : Scheme.{u}) (p : Y ⟶ T) [Flat p]
@@ -220,6 +297,33 @@ theorem nodalOpenLocus
                 (pullback p
                   (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫
                     T.fromSpecResidueField t)) x))) := by
-  sorry
+  classical
+  let U := nodalCandidate p
+  have hm : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ T),
+      ∀ x : pullback (C := Scheme.{u}) p g,
+        pullback.fst p g x ∈ U ↔ IsSmoothOrOrdinaryNode (pullback.snd p g) x := by
+    intro Ω _ _ g x
+    exact nodalCandidate_geometric_criterion Y T p hgeom Ω g x
+  obtain ⟨hU, hmax⟩ := greatest_of_geometric_membership p U hm
+  refine ⟨U, hU, hmax, ?_, ?_, ?_⟩
+  · intro T' g
+    exact greatest_of_geometric_membership (pullback.snd p g)
+      (pullback.fst p g ⁻¹ᵁ U) (geometric_membership_baseChange p U hm g)
+  · intro t Ω _ _ _
+    have : IsAlgClosed Ω := IsAlgClosure.isAlgClosed (T.residueField t)
+    exact hm Ω _
+  · intro t Ω _ _ _
+    have : IsAlgClosed Ω := IsAlgClosure.isAlgClosed (T.residueField t)
+    refine (fibre_all_mem_iff_geometric p U t Ω).trans ?_
+    constructor
+    · intro H x hsing
+      exact ((hm Ω _ x).mp (H x)).resolve_left hsing
+    · intro H x
+      apply (hm Ω _ x).mpr
+      by_cases hx : x ∈ (pullback.snd p
+        (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫
+          T.fromSpecResidueField t)).smoothLocus
+      · exact Or.inl hx
+      · exact Or.inr (H x hx)
 
 end AlgebraicGeometry

@@ -102,7 +102,40 @@
   "thm-sp-half-plane-convergence"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.ExactCouple.Hom",
+     "module": "WeilConjectures.Algebra.Homology.ExactCouple.Hom",
+     "lines": [
+      38,
+      49
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.ExactCouple.Hom.spectralSequenceMap",
+     "module": "WeilConjectures.Algebra.Homology.ExactCouple.Hom",
+     "lines": [
+      123,
+      134
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
  "split_report": {
@@ -160,5 +193,25 @@
   "date": "2026-10-11",
   "existing": false
  },
- "lead_note": "2026-10-16 22:05 UTC upstream sync e47efb5a5: declaration coupleMorphism of Sheaf.CategoryTheory.ExactCoupleMorphism no longer elaborates against the source and was taken out; restate it (stage 2). Error: Unknown constant `CategoryTheory.FilteredObject.HomPreservingSteps`"
+ "lead_note": "2026-10-16 22:05 UTC upstream sync e47efb5a5: declaration coupleMorphism of Sheaf.CategoryTheory.ExactCoupleMorphism no longer elaborates against the source and was taken out; restate it (stage 2). Error: Unknown constant `CategoryTheory.FilteredObject.HomPreservingSteps`",
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "A morphism $(t_D,t_E):(D,E,\\alpha,f,g)\\to(D',E',\\alpha',f',g')$ of exact\ncouples [def-sp-exact-couple] (two maps compatible with all structure maps)\ninduces a morphism of the derived couples, hence of all iterated derived\ncouples, and so, for every $r$, a morphism of complexes\n$(E_r,d_r)\\to(E'_r,d'_r)$; these form a morphism of spectral sequences, i.e.\nthey are compatible with the identifications $\\mathcal H(E_r)\\cong E_{r+1}$.\nIf both couples satisfy the hypotheses of [thm-sp-half-plane-convergence],\nthen the map $t_D:D^{0,n}\\to D'^{0,n}$ of their canonical abutments respects\nthe filtrations [def-sp-filtration] constructed there.",
+  "proof": [
+   {
+    "text": "The derived couple construction is functorial in the couple\n([def-sp-exact-couple]): $t_D$ restricts to a map from\n$\\operatorname{im}\\alpha$ to $\\operatorname{im}\\alpha'$ because it commutes\nwith $\\alpha$, and $t_E$ is a morphism of complexes $(E,g\\circ f)\\to(E',g'\\circ\nf')$ because it commutes with $f$ and $g$, so it induces a map on their\ncohomology; these maps between the derived couples commute with the structure\nmaps of the derived couples, since those are defined by restriction and\npassage to subquotients. Iterating gives morphisms of all derived\ncouples, and on each page the map on $E_r$ commutes with $d_r=g_r\\circ f_r$;\nby construction the map on $E_{r+1}$ is the map induced on the cohomology of\n$(E_r,d_r)$. Under the hypotheses of [thm-sp-half-plane-convergence], the\nfiltration of $D^{0,n}$ is $G_qD^{0,n}=\\operatorname{im}(\\alpha^{n-q}:\nD^{n-q,q}\\to D^{0,n})$; since $t_D$ commutes with every power of $\\alpha$, it\nsends $\\operatorname{im}(D^{n-q,q}\\to D^{0,n})$ into\n$\\operatorname{im}(D'^{n-q,q}\\to D'^{0,n})$, so it preserves the filtrations.\nAll these constructions commute with composition of morphisms of couples.",
+    "uses": [
+     "def-sp-exact-couple",
+     "thm-sp-half-plane-convergence"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

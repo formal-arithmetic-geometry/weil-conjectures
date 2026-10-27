@@ -1,0 +1,116 @@
+{
+ "id": "def-sf-integral-verdier-conclusion-predicate",
+ "kind": "definition",
+ "title": "Integral Verdier compatibility predicate",
+ "statement": "Fix a finite-field datum $D$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and a separated finite-type $k$-scheme $X$. Use the coefficient categories, derived tensor and internal Hom, and constructible exceptional functors of [def-fix-six-functor-datum]. Fix a finite extension $E/\\mathbf Q_\\ell$, $R=\\mathcal O_E$, and a coherent dualizing presentation $(\\omega,r)$ of [def-sf-coherent-integral-dualizing-datum]. Define the integral Verdier conclusion predicate for these data by requiring ordinary tensor presentations, signed symmetries and normalized reduction presentations; equality of bounded constructibility with uniform finite Tor amplitude; preservation and exact anti-equivalence for $D_R=R\\mathcal Hom(-,\\omega)$; invertibility of the evaluation-defined finite reduction comparisons; the evaluation, all-adjunction-transpose and transition-evaluation equations; reconstruction by the derived-limit Roos triangle of the restricted finite duals; and the actual evaluation-defined biduality map, natural and invertible and compatible with reduction. Its uniform bound clause quantifies over every $d\\ge0$ with $\\dim X\\le d$, every $a\\le b$, and every constructible $K$ whose reductions have Tor amplitude $[a,b]$: all reductions of $D_RK$ have Tor amplitude $[-b-2d,-a]$. This is a predicate, not its assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "prop-functor-package proof, Sentences of \"For (7), ...\" on the exchange, general finite-stage biduality, boundary exchange, and \"The integral and field anti-equivalences are ...\""
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality finite integral rational algebraic closure coefficient realization data and canonical exchange predicates",
+   "results": "{\"n_hits\": 8, \"top\": [\"mem_algebraicClosure_iff'\", \"algebraicClosure.isIntegralClosure\", \"Rat.intEquiv\", \"Ring.instFiniteNormalClosure_1\", \"IsIntegrallyClosedIn.integralClosure_eq_bot_iff\", \"integralClosure.isIntegralClosure\", \"IsIntegralClosure\", \"IsIntegralClosure.rec\"], \"note\": \"\", \"digest\": \"679a996881cc6999\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.op",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Equivalence.op\", \"CategoryTheory.Equivalence.op_functor\", \"CategoryTheory.Equivalence.op_inverse\", \"CategoryTheory.Equivalence.op_counitIso\", \"CategoryTheory.Equivalence.op_unitIso\", \"CategoryTheory.Equivalence.leftOp_inverse_map\", \"CategoryTheory.Equivalence.leftOp_functor_map\", \"CategoryTheory.Equivalence.rightOp_functor_map\"], \"note\": \"\", \"digest\": \"c04c5a7fe465d41f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteProEtaleVerdierBiduality|IntegralVerdier|RationalVerdier|CoefQbarVerdier|VerdierExchange|HomIdentification|DualizingDatum",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DAG definition records and Lean declarations: WeilConjectures.IntegralVerdier.Conclusion",
+   "results": "No definition-node lean record carries these exact declarations. tools/blueprint_refs.py search Verdier finds the related theorem nodes. rg in lean/WeilConjectures finds only the abstract etale VerdierExchange section; the exact definitions are present in lean/Sheaf/SixFunctors/IntegralVerdier.lean. They are reused with existing:true; no new Lean declaration.",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions; new definition ownership only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-verdier-coefficient-realization",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "For (7): finite-stage biduality, boundary consequence, integral and field anti-equivalences and evaluation-defined exchange; the existing defining interfaces of Sheaf.SixFunctors.IntegralVerdier",
+   "via": [
+    "lem-sf-package-verdier-coefficient-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralVerdierModels",
+  "declaration": "WeilConjectures.IntegralVerdier.Conclusion",
+  "declarations": [
+   "WeilConjectures.IntegralVerdier.Conclusion"
+  ],
+  "statement": "def Conclusion (ω : sfIntegralConstructibleCategory l E X)\n    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅\n      integralDualizingFiniteTerm l E D X n) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Definition moved verbatim into the shared model module and publicly reexported by the original item module. No signature, body, or meaning changes.",
+  "file": "lean/Sheaf/SixFunctors/IntegralVerdierModels.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46fe0e50b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46fe0e50b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery of fc2b4dd0 (H2 RETURN). Lean byte-identical (sha caaaaba5); item delta = stmt_deps (7 theorem stmt_deps replaced by def-sf-verdier-exchange-data + 7 new existing:true def nodes owning exactly FiniteProEtaleVerdierBiduality, IntegralFiniteExtension.DualizingDatum, IntegralVerdier.Conclusion, RationalVerdier.Datum/Conclusion, RationalOperations.structureSystem/HomIdentification/DualizingIdentification, CoefQbarVerdier.Duality/InternalHom/Dualizing, VerdierExchange.Package/Assertion) + lean.note. check_existing and check_new_node clean on all 7; owner modules unchanged side-live vs live; no prior def owner; no id collision; no stmt/proof cycle; new-node TeX matches the Lean bodies. Maths re-read: hypotheses exact, levels n+1, ε pinned to StageData.epsilon via StageConclusion.components, ω identified with Ra^!(unit) at every stage, edge cases empty/d=0/n=1/id covered, sorry only, docstrings fine. Advisories: integralDualizingCompactification (theorem prop-coef-integral-dualizing) uncited; same-module helpers (IntegralVerdier.dual/delta/comparison, RationalVerdier.Extension/units, RationalOperations.coefficientUnit, CoefQbarTensor) and integralDualizingFiniteTerm remain theorem-owned, and def-sf-integral-hom-reduction-models is not cited by the integral/rational new nodes; Second reading by the same worker (H11 advisory). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6b177",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T043424-L-1751131",
+  "kind": "interface",
+  "note": "independent cc review: Item and 6 delivered modules (moved model block diffed against clone 939ea7dd; comparison and integralDerivedReduction body changes checked definitional) with nodes thm-coef-integral-verdier, def-sf-integral-verdier-conclusion-predicate, 5 new nodes (lean.statement = signatures), the two change records and the report; axioms printed; all 18 direct importers compiled against the delivery"
+ }
+}

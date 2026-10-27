@@ -1,0 +1,206 @@
+{
+ "id": "lem-sfb-stack-artinian-smoothness-criterion",
+ "kind": "statement",
+ "title": "Artinian deformation criterion for smoothness of an algebraic stack",
+ "statement": "Schemes and algebraic spaces are as in [def-pc-scheme, def-trf-algebraic-space], with universes as in [def-weil-size-convention]. An algebraic stack is a category fibred in groupoids on schemes, with effective etale descent for objects and sheaf descent for isomorphisms, whose diagonal is representable by algebraic spaces and which has a smooth surjective scheme atlas. Representable means that every scheme-valued 2-base change is an algebraic space. An open substack is a full substack whose pullback by every scheme-valued object is an open subscheme. Smoothness, flatness and local finite presentation of morphisms to schemes are tested after smooth scheme atlases of the source, using [def-sbc-smooth-morphisms, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $(R,\\mathfrak m)$ be a Noetherian local ring with specified residue field $k=R/\\mathfrak m$ [def-weil-pbc-noetherian-ring, def-weil-field], and let $\\mathcal X\\to\\operatorname{Spec}R$ be an algebraic stack locally of finite type. Here local means there is a unique maximal ideal, and locally of finite type means that a smooth scheme atlas has locally finite type composite to $\\operatorname{Spec}R$ [def-weil-finite-type-morphism, def-weil-affine-spectrum]. Fix $x:\\operatorname{Spec}k\\to\\mathcal X$ over the residue map. For an Artinian local $R$-algebra $A$ with specified residue field $k$ and local structure map inducing the fixed identification, let $\\mathcal F_x(A)$ be the groupoid of pairs $(\\xi,\\alpha)$ with $\\xi\\in\\mathcal X(A)$ and $\\alpha:\\xi|_k\\xrightarrow{\\sim}x$; arrows are isomorphisms respecting $\\alpha$. Artinian means descending chains of ideals stabilize. The point $x$ factors through the largest open substack smooth over $\\operatorname{Spec}R$ if and only if, for every surjection $A'\\twoheadrightarrow A$ of these local $R$-algebras inducing the identity on $k$ and every $(\\xi,\\alpha)\\in\\mathcal F_x(A)$, there exists $(\\xi',\\alpha')\\in\\mathcal F_x(A')$ with an isomorphism $(\\xi',\\alpha')|_A\\cong(\\xi,\\alpha)$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-geometry.tex",
+  "place": "Tag 0DZS, lemma-characterize-smoothness, equivalence (1) and (3), with existence of a versal ring from Tag 0DQX, lemma-versal-ring. Situation situation-versal holds over Spec R; Spec k -> Spec R is a finite type closed immersion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-marked-stack-deformations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-stack-versal-ring-existence] to choose a versal ring $C$ at $x$. Its hypotheses hold because $R$ is Noetherian local, $k=R/\\mathfrak m_R$, and $\\mathcal X$ is algebraic and locally of finite type. By [lem-sfb-stack-maximal-smooth-open] the largest smooth open $\\mathcal U_f$ in the conclusion exists.",
+   "uses": [
+    "lem-sfb-stack-versal-ring-existence",
+    "lem-sfb-stack-maximal-smooth-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DZS, lemma-characterize-smoothness, proof"
+   }
+  },
+  {
+   "text": "The right-hand condition is precisely unobstructedness of $\\mathcal F_x$: both require essential surjectivity on objects for every indicated surjection, including the marking. The groupoid $\\mathcal F_x(k)$ is nonempty and has a unique arrow between two marked objects, namely $\\beta^{-1}\\alpha$ for markings $\\alpha,\\beta$. Thus [lem-sfb-versal-unobstructed-adic-criterion] identifies the right-hand condition with adic formal smoothness of $R\\to C$.",
+   "uses": [
+    "lem-sfb-versal-unobstructed-adic-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DZS, lemma-characterize-smoothness, proof"
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas. Apply [lem-sfb-stack-atlas-versal-completion] to obtain an affine chart $V=\\operatorname{Spec}B$, a point $u$ with finite residue field $k_1$ over $k$, a field $l$ finite over both $k$ and $k_1$, and an isomorphism $p(u)|_l\\cong x|_l$. Put $D=\\widehat{\\mathcal O_{U,u}}$, a versal ring at $p(u)$. The same node identifies $x\\in\\mathcal U_f$ with smoothness of $V\\to\\operatorname{Spec}R$ at $u$.",
+   "uses": [
+    "lem-sfb-stack-atlas-versal-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DZS, lemma-characterize-smoothness, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stack-versal-ring-smooth-span] to $C,D$ and the specified isomorphism over $l$. It gives a complete Noetherian local ring $H$ with adically formally smooth local $R$-maps $C\\to H$ and $D\\to H$. Apply [lem-sfb-adic-formal-smoothness-descent] separately to $R\\to C\\to H$ and $R\\to D\\to H$. Consequently $R\\to C$ is adically formally smooth if and only if $R\\to D$ is. All rings required complete in that node are complete; completeness of $R$ is unnecessary.",
+   "uses": [
+    "lem-sfb-stack-versal-ring-smooth-span",
+    "lem-sfb-adic-formal-smoothness-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DZS, lemma-characterize-smoothness, proof"
+   }
+  },
+  {
+   "text": "The chart algebra $B$ is finite type over the Noetherian ring $R$ and $u$ lies over its closed point. Hence [lem-sfb-finite-type-completed-local-smoothness] says that $R\\to D$ is adically formally smooth if and only if $V\\to\\operatorname{Spec}R$ is smooth at $u$. Combine this with steps 2--4 to obtain exactly the claimed equivalence.",
+   "uses": [
+    "lem-sfb-finite-type-completed-local-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DZS, lemma-characterize-smoothness, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-versal-ring-existence",
+  "lem-sfb-stack-maximal-smooth-open",
+  "lem-sfb-versal-unobstructed-adic-criterion",
+  "lem-sfb-stack-atlas-versal-completion",
+  "lem-sfb-stack-versal-ring-smooth-span",
+  "lem-sfb-adic-formal-smoothness-descent",
+  "lem-sfb-finite-type-completed-local-smoothness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-geometry.tex",
+  "place": "Tag 0DZS, lemma-characterize-smoothness, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack locally of finite type over a Noetherian coefficient ring is smooth at a residue field point if and only if all its Artinian deformations lift across surjections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unobstructed deformation groupoids characterize smooth points of algebraic stacks over complete local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack locally of finite type over a Noetherian coefficient ring is smooth at a residue field point if and only if all its Artinian deformations lift across surjections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"(p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"FormallySmooth\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_smooth_of_formallySmooth_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f] (x : ↥X) (H : (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).FormallySmooth) : ∃ U, ∃ (_ : AlgebraicGeometry.IsAffineOpen U), ∃ V, ∃ (_ : AlgebraicGeometry.IsAffineOpen V) (hVU : V ≤ (T\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.formallySmooth_stalkMap_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {x : ↥X} (U : Y.Opens) (hU : AlgebraicGeometry.IsAffineOpen U) (V : X.Opens) (hV : AlgebraicGeometry.IsAffineOpen V) (hVU : V ≤ (TopologicalSpace.Opens.map f.base).obj U) (hx : x ∈ V) : (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Fo\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "unobstructed|versalRing|[Ss]tack.*[Ff]ormal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-smooth-locus-deformation-test",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids.",
+   "via": [
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-artinian-smoothness-criterion",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Followed the versal-ring proof of Tag 0DZS through a common formally smooth extension over a finite common residue field. Six statement-only supporting nodes isolate the formal deformation, atlas comparison and commutative algebra inputs. No assertion is reduced to a restatement of the item.",
+  "blueprint": "Realizes the inherited direct-images proof (3) alteration/moduli smoothness prerequisite through the final smoothness test in Tag 0DZU; current direct-images blueprint read at literature/blueprint/latest. The created.item ancestor chain currently has no surviving blueprint_kind ancestor, so blueprint.from.node remains null as ancestor prints.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-ffdec06ff",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-ffdec06ff (reviewer sub-agent of L); spot-checked: I read the item and all six new nodes in full, together with the Stacks sources: stacks-geometry 0DQV/0DQX/0DQY/0DQZ/0DZS including the whole 0DZS proof, formal-defos 0DZK and the definition of unobstructed, stacks-morphisms 0DZR, and more-algebra 07VH/07ED/07PM/07NT/compose-formally-smooth. This is a first split: there is no repair note, the item is still unsplit live and side-live, and none of the new ids exists live. The item statement is unchanged and agrees with 0DZS (1)<=>(3) with O_{S,s}=R. The five steps follow the 0DZS proof and use only what the cited statements say. Step 2: F_x(k) is contractible (the only arrow is a'^{-1}a), and the test category is C_{R,k}. Step 3: atlas node with k=R/m. Step 4: the smooth-span ring H and the descent node applied twice, with no completeness of R needed. Step 5: B is finite type, u lies over m_R, and D is the completion of B_q. All six new nodes are true and strictly smaller than the item. Small cases: R[[t]] is unobstructed and formally smooth; k[t]/t^2 is obstructed and not formally smooth; purely inseparable l is allowed. Duplicate search (rg -L over tags and keywords, about 14 candidates read): versal-ring-existence specializes the existing lem-sfb-artin-rs-versal-formal-object to algebraic stacks (where RS and a finite tangent space must still be proved), so it is a corollary, not a duplicate; its split should cite that node (advisory). One fault, B3/B7, repaired: versal-ring-existence, atlas-versal-completion and versal-ring-smooth-span defined 'versal ring' by pointing to the condition 'written in [lem-sfb-versal-unobstructed-adic-criterion]' and listed that lemma in stmt_deps. I wrote the marked formal object and the versality lifting condition inline and removed the lemma from their stmt_deps; the corrected whole files are under fixes/dag/nodes/sec-six-functors-basics/, and step 2 is unaffected. Batch 5: def-trf-algebraic-space is the general definition of an algebraic space and the item already cites it on the base; it is neither the trace formula nor Poincare duality nor a step of their proofs, so it is not grounds for RETURN. Advisory: the atlas node, like the item, uses 'the largest smooth open substack' without a stmt_dep on lem-sfb-stack-maximal-smooth-open. No SGA source, no tool_uses accepted, nothing dropped.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackArtinianSmoothnessCriterion",
+  "declaration": "AlgebraicGeometry.StackDeformation.stack_artinian_smoothness_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackArtinianSmoothnessCriterion.lean",
+  "statement": "theorem stack_artinian_smoothness_criterion (R k : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Field k] [Algebra R k] (residueEquiv : IsLocalRing.ResidueField R ≃ₐ[R] k) (F : BasedCategory.{v, w} (Over (Spec (.of R)))) (hF : IsAlgebraicModuliStack F) (hft : ∃ (U : Over (Spec (.of R))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a ∧ LocallyOfFiniteType U.hom) (x : Functor.Fiber F.p (affine (CommAlgCat.of R k))) : (∃ U : OpenModuliSubstack F, IsSmoothModuliStack U.category ∧ (∀ V : OpenModuliSubstack F, IsSmoothModuliStack V.category → V.IsContainedIn U) ∧ U.property x.val) ↔ ∀ (A' A : ArtinDeformation.TestCategory R k) (q : A' ⟶ A), Function.Surjective (ArtinDeformation.map q) → ∀ Y : Marked F x A, ∃ Y' : Marked F x A', PullsBack F x q Y' Y",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed algebraic-stack, open-substack, Artinian-test and marked-deformation definitions, added to stmt_deps. The largest smooth open is specified by its universal property, without choosing data. PullsBack retains the marked restriction isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d5ba5b5d",
+  "group": "O4",
+  "result": "pass",
+  "note": "Item node changed only by the lean record and 4 landed def stmt_deps (algebraic-moduli-stack, open-moduli-substack, artin-deformation-test-category, marked-stack-deformations). Checked clause by clause against Stacks 0DZS (1)<=>(3) with S=Spec R and Lambda=R: local Noetherian R; specified residue field via residueEquiv; IsAlgebraicModuliStack; locally finite type via an atlas with LocallyOfFiniteType U.hom; x in the fibre over Spec k; TestCategory = local Artinian augmented algebras with maximal kernel; Marked = F_x(A) with markings; the largest smooth open is given by its universal property (unique up to predicate, existence is a proof dep, so no arbitrary choice); the right side covers all surjections, and PullsBack keeps marking compatibility. Edge cases OK (empty stack/open, R a field, A=k, automorphisms). Module defines nothing and its only proof is sorry; source/blueprint docstrings and the 5 proof steps present; statement verbatim; no theorem-node decl in the statement; no name collision; proof-only import is the recorded proof-dep module. Not recompiled: no file changed; the worker's compile is the evidence. No findings."
+ }
+}

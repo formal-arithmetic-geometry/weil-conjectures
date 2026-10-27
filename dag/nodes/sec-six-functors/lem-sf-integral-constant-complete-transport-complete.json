@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-integral-constant-complete-transport-complete",
+ "kind": "statement",
+ "title": "Pointwise completeness transport in constant coordinates",
+ "statement": "For one object K of sfIntegralConstructibleCategory l E X, the object H(K) is locally derived complete for the lifted uniformizer ideal on the published small site.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sf-constant-completed-reduction-transport",
+  "def-zl-compact-support-small-site-morphism",
+  "def-pur-adic-site-strict-quotient-interface"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I and proetale.tex Tag 099M, restriction-derived-complete equivalence"
+ },
+ "proof": [
+  {
+   "text": "Identify the positive coefficient quotient tower with the powers of the uniformizer ideal and transport the Roos-unit triangle through the exact small-site module equivalence. The resulting unit criterion is exactly the local IsComplete predicate for H(K), including zero and empty-site cases.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I and proetale.tex Tag 099M"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "first conjunct, specialized to one input",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralConstantCompleteTransportComplete",
+  "file": "lean/Sheaf/SixFunctors/IntegralConstantCompleteTransportComplete.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.integralConstantCompleteTransport_complete",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "statement": "theorem integralConstantCompleteTransport_complete\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})\n    (K : sfIntegralConstructibleCategory l E X) :\n    (sfCbcSite X).IsComplete _ (sfCbcModelIdeal (constantDatum l E))\n      ((H l E X).obj K.obj)",
+  "date": "2026-10-26"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralConstantCompleteTransport",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars along adic completion is fully faithful on derived complete modules",
+   "results": "Eight algebraic adic-completion results, including AdicCompletion.of_bijective and AdicCompletion.module; none for derived module sheaves or the fixed functor H.",
+   "date": "2026-10-26",
+   "verdict": "No matching derived sheaf theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor gives a unique lift of a morphism between its images",
+   "results": "Functor.FullyFaithful.preimage, map_preimage, map_injective and generic full-functor results. These supply the categorical Hom API, but do not establish full faithfulness of H.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical API only."
+  },
+  {
+   "tool": "grep",
+   "query": "FullyFaithful.*homEquiv|map_bijective",
+   "results": "Twenty-five Mathlib hits on generic fully faithful functors and algebraic completion. Local rg found ConstantCompletion.equivalence and sfCbcModelModules_derived, but no identification with the IsSfDerivedComplete locus and H.map.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate fixed-coefficient transport statement."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T001607-L-12266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T001607-L-12266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

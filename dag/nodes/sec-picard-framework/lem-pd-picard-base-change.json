@@ -67,7 +67,62 @@
   "lem-pc-pic-presheaf-functorial"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+     "lines": [
+      317,
+      333
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardFunctorIsoOfIsPullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+     "lines": [
+      275,
+      285
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardFunctorIsoOfIsPullback_hom_app_toPicardFunctor",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+     "lines": [
+      300,
+      313
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+     "lines": [
+      1943,
+      1958
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-jacobian-descent",
  "split_report": {
@@ -99,5 +154,26 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): sorry-free on 7d675a263"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be a morphism of schemes and let $g:S'\\to S$ be a morphism,\nwith base change $f':X_{S'}\\to S'$ of $f$ along\n$g$. Then the restriction of the\nPicard functor\n$\\operatorname{Pic}_{X/S}$ to the slice site\n$(\\mathit{Sch}/S')_{fppf}\\subseteq(\\mathit{Sch}/S)_{fppf}$ of\n[def-pc-fppf-site] is the Picard functor\n$\\operatorname{Pic}_{X_{S'}/S'}$.",
+  "proof": [
+   {
+    "text": "For $T\\in\\mathit{Ob}((\\mathit{Sch}/S')_{fppf})$ the base changes agree:\n$X_T=(X_{S'})_T$ as schemes over $T$, by the transitivity of the fibre product\nin [def-pc-base-change]. Hence the Picard *presheaves*\n$T\\mapsto\\operatorname{Pic}(X_T)$ and $T\\mapsto\\operatorname{Pic}((X_{S'})_T)$\nof [def-pc-picard-presheaf] (functors by [def-pc-picard-presheaf]) are literally the same functor on the slice.\nSheafification of a presheaf on a site is computed by applying the plus\nconstruction to the restriction of the presheaf to the slice categories of the\ncoverings, and the coverings of $(\\mathit{Sch}/S')_{fppf}$ are exactly the\nfppf coverings in $(\\mathit{Sch}/S)_{fppf}$ of [def-pc-fppf-site] whose\nobjects lie over $S'$; since the two presheaves coincide on the whole slice, so\ndo their sheafifications, and the resulting restriction is the Picard functor\n$\\operatorname{Pic}_{X_{S'}/S'}$ of [def-pc-picard-functor].\nThis is the assertion, and it is the remark following Stacks Project,\nDefinition 44.4.1, Tag [0B9K](https://stacks.math.columbia.edu/tag/0B9K).",
+    "uses": [
+     "def-pc-base-change",
+     "def-pc-picard-presheaf",
+     "def-pc-fppf-site",
+     "def-pc-picard-functor"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

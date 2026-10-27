@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-triangular-group-representation-eigenline",
+ "kind": "statement",
+ "title": "An invariant line in a rational representation of a triangular algebraic group",
+ "statement": "Let $k$ be a field [def-weil-field] and $J$ an affine group scheme of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism]. Suppose that for some $n\\geq1$ there is a closed immersion $J\\hookrightarrow B_n$ [def-weil-closed-immersion], where $B_n(A)$ is the group of invertible upper triangular $n$-by-$n$ matrices over each commutative $k$-algebra $A$. Let $V\\neq0$ be a finite-dimensional rational $J$-module: a $k$-vector space with a coaction $c:V\\to V\\otimes_k k[J]$ satisfying $(c\\otimes1)c=(1\\otimes\\Delta)c$ and $(1\\otimes\\varepsilon)c=1_V$, where $\\Delta$ and $\\varepsilon$ are the coordinate maps of multiplication and identity. There exist a one-dimensional subspace $L\\subseteq V$ and a group-scheme character $\\chi:J\\to\\mathbf G_m$, where $\\mathbf G_m(A)=A^\\times$, such that $c(v)=v\\otimes\\chi^*(t)$ for every $v\\in L$; here $t$ is the coordinate of $k[t,t^{-1}]$. In particular $L$ is a rational submodule and its action is by $\\chi$ after every commutative $k$-algebra extension. Neither algebraic closedness of $k$ nor smoothness or connectedness of $J$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 16.1 and Proposition 16.2(c) implies (a), printed pp.324--325; applies over any field, not only characteristic zero."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sfb-rational-representation-coordinate-comodule",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "The diagonal entries give a homomorphism $\\delta:J\\to T=(\\mathbf G_m)^n$: the $i$th diagonal entry of a product of upper triangular matrices is the product of the $i$th diagonal entries. Apply [lem-sfb-affine-homomorphism-flat-image] to factor it as $J\\xrightarrow{q}D\\xrightarrow{j}T$, with $j$ a closed immersion and $k[J]$ faithfully flat over $k[D]$. Put $N=\\ker\\delta$. Since $j$ is injective on all algebra-valued points, $N=\\ker q$. On all such points this is $J\\cap U_n$, where $U_n$ is the unitriangular group. The equations setting the diagonal entries equal to $1$, together with the closed equations for $J\\subset B_n$, exhibit $N$ as a finite-type closed subgroup of $U_n$. It is normal since it is a kernel. No assertion about a section of $q$ is needed.",
+   "uses": [
+    "def-sc-gm-ga",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(c) implies (d), printed p.325; Theorem 3.34, printed p.75."
+   }
+  },
+  {
+   "text": "By [lem-sfb-rational-representation-comodule-dictionary], the given coaction is a homomorphism $r:J\\to\\operatorname{GL}(V)$, and restriction gives an $N$-coaction $c_N:V\\to V\\otimes_k k[N]$. Set $d(v)=c_N(v)-v\\otimes1$ and $W=\\ker d$. Choose a basis of the nonzero finite-dimensional $V$ and apply [lem-sfb-unitriangular-subgroup-rational-fixed-vector] to $N\\hookrightarrow U_n$ and $r|_N$. It gives a nonzero vector fixed over every algebra extension. Evaluating at the universal point of $N$ gives $c_N(v)=v\\otimes1$, so $W\\ne0$.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-unitriangular-subgroup-rational-fixed-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(d) implies (a), printed p.325; Theorem 14.5(b) implies (a), printed pp.281--282; Remark 4.1, printed p.84."
+   }
+  },
+  {
+   "text": "For every commutative $k$-algebra $R$, the vectors in $V_R=V\\otimes_kR$ fixed by $N$ after every further $R$-algebra extension are exactly $\\ker(d\\otimes1_R)$. Indeed the universal point over $R\\otimes_k k[N]$ tests precisely this equation, and evaluation at any point gives the converse. This kernel is $W\\otimes_kR$. To check this without a finiteness assumption on $k[N]$, choose a vector-space complement $E$ of $W$ in $V$. The map $d|_E$ is injective. The singleton-family case of [lem-sfb-vector-space-tensor-family-zero-detection], with right factor the $k$-vector space $R$, makes $(d|_E)\\otimes1_R$ injective. Tensoring the explicit decomposition $V=W\\oplus E$ decomposes every tensor into its two components; $d\\otimes1_R$ kills the first and is injective on the second. Its kernel is therefore exactly the first component.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-vector-space-tensor-family-zero-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.15, printed p.102, using the universal invariant-vector test of Proposition 4.31; its kernel/base-extension justification is written out here."
+   }
+  },
+  {
+   "text": "For $g\\in J(R)$, $w\\in W\\otimes_kR$, any $R$-algebra $R'$ and $u\\in N(R')$, normality gives $g^{-1}ug\\in N(R')$, whence $u(gw)=g((g^{-1}ug)w)=gw$. Step 3 implies $gw\\in W\\otimes_kR$. Applying the same reasoning to $g^{-1}$ shows that this restriction is an automorphism. Restrictions are natural in $R$ and obey the group law because the original action does. The dictionary therefore gives a rational representation $r_W:J\\to\\operatorname{GL}(W)$, and its inclusion in $V$ intertwines the coactions. The restriction of $r_W$ to $N$ is the identity on all algebra-valued points, hence is the trivial group-scheme homomorphism.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.15 and its conjugation formula, printed p.102; Remark 4.1, printed p.84."
+   }
+  },
+  {
+   "text": "The groups $J,D$ are affine and of finite type by hypothesis and Step 1. After choosing a basis of the nonzero $W$, [def-sc-general-linear-group] presents $\\operatorname{GL}(W)$ by the finitely generated algebra $k[x_{ab},z]/(z\\det(x_{ab})-1)$, so it too is affine of finite type. Now $q^*$ is faithfully flat by Step 1, and $\\ker q=N$ acts trivially by Step 4. Apply [lem-sfb-faithfully-flat-group-quotient-universal] to $r_W$ to obtain $s:D\\to\\operatorname{GL}(W)$ with $r_W=sq$. By the dictionary let $b:W\\to W\\otimes_k k[D]$ be its coaction. The coaction on $W$ as a $J$-module is $(1_W\\otimes q^*)b$: evaluating this expression at $x\\in J(R)$ gives $s_R(q_R(x))=r_{W,R}(x)$, and evaluation at the universal point gives equality of coactions.",
+   "uses": [
+    "lem-sfb-faithfully-flat-group-quotient-universal",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(d) implies (a), printed p.325; Theorem 5.13, printed p.101."
+   }
+  },
+  {
+   "text": "Since $j:D\\hookrightarrow T$ is a closed immersion, $k[D]$ is a quotient of $k[t_1^{\\pm1},\\ldots,t_n^{\\pm1}]$ by [def-weil-closed-immersion]. This Laurent algebra represents the functor of $n$ independent units, namely $T$, and is spanned by its Laurent monomials. Each monomial $t^a$ has $\\Delta(t^a)=t^a\\otimes t^a$ and $\\varepsilon(t^a)=1$, by the multiplicative-group formulas and multiplicativity of the coordinate Hopf maps. The quotient map preserves these formulas. Thus its distinct monomial images form a spanning set of group-like elements of $k[D]$. By [lem-sfb-coalgebra-group-like-independent] they are linearly independent, hence a basis $(e_i)_{i\\in I}$. Coincident images are counted only once. Every $e_i$ is a unit: the image of $t^{-a}$ is its inverse.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-gm-ga",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-coalgebra-group-like-independent",
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(c), printed p.234; Proposition 4.23, printed p.93; the basis used in Theorem 12.12(a) implies (b), printed p.235."
+   }
+  },
+  {
+   "text": "Choose $0\\ne w\\in W$ and expand $b(w)=\\sum_i w_i\\otimes e_i$ with finitely many nonzero coefficients in the basis of Step 6. The counit identity gives $w=\\sum_i w_i$, so some $w_i\\ne0$. Coassociativity gives $\\sum_i b(w_i)\\otimes e_i=\\sum_i w_i\\otimes e_i\\otimes e_i$. Applying the coefficient functional of $e_i$ in the last factor yields $b(w_i)=w_i\\otimes e_i$. These are finite expansions, so no infinite tensor sum or coefficient extraction is involved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(a) implies (b), printed p.235, its two displayed comodule identities."
+   }
+  },
+  {
+   "text": "Fix such an $i$. The unit $e_i$ defines a $k$-algebra map $k[t,t^{-1}]\\to k[D]$, $t\\mapsto e_i$. The group-like and counit formulas of Step 6 show that it respects multiplication and identity; the antipode identity in [lem-sfb-affine-group-coordinate-hopf] gives $S(e_i)e_i=1$, so it respects inverse as well. Thus it gives a character $\\psi:D\\to\\mathbf G_m$. Set $\\chi=\\psi q$ and $L=kw_i\\subseteq V$. This line has dimension one since $w_i\\ne0$. Steps 5 and 7 give $c(w_i)=w_i\\otimes q^*(e_i)=w_i\\otimes\\chi^*(t)$, and linearity gives the same equality for every vector in $L$. The dictionary's evaluation formula then gives the scalar $\\chi_R(g)$ on $L\\otimes_kR$ for every $k$-algebra $R$ and $g\\in J(R)$, proving the rational-submodule and extension clauses.",
+   "uses": [
+    "def-sc-gm-ga",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(d) implies (a), printed p.325; Theorem 12.12, printed p.235; Remark 4.1, printed p.84."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-ga",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "def-weil-closed-immersion",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+  "lem-sfb-vector-space-tensor-family-zero-detection",
+  "lem-sfb-faithfully-flat-group-quotient-universal",
+  "def-sc-general-linear-group",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-coalgebra-group-like-independent",
+  "def-weil-laurent-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.2(c) implies (d) implies (a), printed p.325, with Lemma 5.15, Theorem 5.13 and the coefficient proof of Theorem 12.12(a) implies (b) written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nonzero finite dimensional rational representation of a subgroup scheme of the upper triangular matrix group has a one dimensional invariant subspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice\", \"module\": \"Mathlib/RepresentationTheory/Submodule\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {V : Type u_3} [inst : CommSemiring k] [inst_1 : Monoid G] [inst_2 : AddCommMonoid V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) [Nontrivial V], Nontrivial ↥ρ.invtSubmodule\", \"doc\": \"If the module $ V $ is nontrivial, then the sublattice of submodules invariant under the representation $ \\\\rho $ is also nontrivial, containing at least two distinct invariant submodules.\"}\n  {\"name\": \"Rep.toInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [S.Normal] → Rep k G\", \"doc\": \"Given a commutative ring $ k $, group $ G $, $ k $-module $ V $, representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S $ of $ G $, this constructs the representation of $ G $ on \"}\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k]\\n  [NeZero ↑(Fintype.card G)] (V : FDRep k G), CategoryTheory.Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} [inst : CommSemiring k] [inst_1 : Group G] {V : Type u_4} [inst_2 : AddCommMonoid V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) (S : Subgroup G) [inst_4 : S.Normal],\\n  Representation.IsTrivial (MonoidHom.comp (ρ.toInvariants S) S.subtype)\", \"doc\": \"For any commutative semiring $k$, group $G$, $k$-module $V$ with representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, and normal subgroup $S \\\\trianglelefteq G$, the induced representation of $S$ on the inv\"}\n  {\"name\": \"Representation.invtSubmodule.nontrivial_iff\", \"module\": \"Mathlib/RepresentationTheory/Submodule\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {V : Type u_3} [inst : CommSemiring k] [inst_1 : Monoid G] [inst_2 : AddCommMonoid V]\\n  [inst_3 : Module k V] (ρ : Representation k G V), Nontrivial ↥ρ.invtSubmodule ↔ Nontrivial V\", \"doc\": \"The invariant submodule under the representation $\\\\rho$ is non-trivial if and only if the module $V$ is non-trivial, i.e., contains at least two distinct elements.\"}\n  {\"name\": \"Representation.toInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommSemiring k] →\\n      [inst_1 : Group G] →\\n        {V : Type u_4} →\\n          [inst_2 : AddCommMonoid V] →\\n            [inst_3 : Module k V] →\\n              (ρ : Representation k G V) →\\n                (S : Subgroup G) →\\n                  [S.Normal] \", \"doc\": \"Given a commutative semiring $ k $, a group $ G $, a $ k $-module $ V $, a representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S $ of $ G $, this constructs the representation of\"}\n  {\"name\": \"FDRep.instProjectiveOfNeZeroCastCard\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : FDRep k G), CategoryTheory.Projective V\", \"doc\": \"Every finitely generated representation of a finite group $ G $ over a field $ k $ is projective in the category of finitely generated representations, provided that the cardinality of $ G $ (interpre\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra generalized weights and abstract-group invariant submodules do not give an invariant line for a rational group-scheme representation in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trigonalizable affine algebraic groups have only one dimensional simple comodules over every field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k]\\n  [NeZero ↑(Fintype.card G)] (V : FDRep k G), CategoryTheory.Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] [IsAlgClosed k] (V W : FDRep k G) [CategoryTheory.Simple V]\\n  [CategoryTheory.Simple W], Module.finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\", \"module\": \"Mathlib/RepresentationTheory/AlgebraRepresentation/Basic\", \"type\": \"∀ (A : Type u_1) (V : Type u_2) (k : Type u_3) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : Module A V] [IsScalarTower k A V] [IsSimpleModule A V]\\n  [FiniteDimensional k V] [IsAlgClosed k] [IsMulCommutative A], Module.finrank k\", \"doc\": \"If $ A $ is a commutative algebra, then the finite rank of the simple module $ V $ over the field $ k $ is equal to 1, i.e., $\\\\dim_k V = 1$.\"}\n  {\"name\": \"CategoryTheory.finrank_endomorphism_simple_eq_one\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Schur\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (𝕜 : Type u_2)\\n  [inst_2 : Field 𝕜] [IsAlgClosed 𝕜] [inst_4 : CategoryTheory.Linear 𝕜 C] [CategoryTheory.Limits.HasKernels C] (X : C)\\n  [CategoryTheory.Simple X] [FiniteDimensional 𝕜 (X ⟶ X)], Modu\", \"doc\": \"In a preadditive category, if $ X $ is a simple object and the endomorphism ring $ \\\\text{Hom}(X, X) $ is finite-dimensional over a field $ \\\\mathbb{k} $, then its dimension is 1, i.e., $ \\\\text{finrank}\"}\n  {\"name\": \"simple_of_finrank_eq_one\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Simple\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {k : Type u_3} [inst_1 : Field k] [inst_2 : Algebra k R] {V : ModuleCat R},\\n  Module.finrank k ↑V = 1 → CategoryTheory.Simple V\", \"doc\": \"Let $ k $ be a field, $ R $ a $ k $-algebra, and $ V $ a left $ R $-module. If the finite rank of $ V $ as a $ k $-module is 1, then $ V $ is a simple $ R $-module. This means that every nonzero $ R $\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"CategoryTheory.finrank_hom_simple_simple_le_one\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Schur\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (𝕜 : Type u_2)\\n  [inst_2 : Field 𝕜] [IsAlgClosed 𝕜] [inst_4 : CategoryTheory.Linear 𝕜 C] [CategoryTheory.Limits.HasKernels C] (X Y : C)\\n  [FiniteDimensional 𝕜 (X ⟶ X)] [CategoryTheory.Simple X] [Ca\", \"doc\": \"In a preadditive category with finite-dimensional hom-sets over a field $\\\\mathbb{k}$, if $X$ and $Y$ are simple objects, then the finite rank of the hom-set $\\\\text{Hom}(X, Y)$ satisfies $\\\\text{finrank\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra generalized weights and abstract-group invariant submodules do not give an invariant line for a rational group-scheme representation in arbitrary characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine algebraic subgroup of the upper triangular group has a common eigenvector in every nonzero rational representation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieModule.IsTriangularizable.mk\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  (∀ (x : L), ⨆ φ, ((LieModule.toEnd R L M) x).maxGenEigenspace φ = ⊤) → LieMod\", \"doc\": \"If for every element $ x $ in the Lie algebra $ L $, the supremum of the generalized eigenspaces of the endomorphism associated to $ x $ acting on $ M $ equals the entire module $ M $, then $ M $ is t\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(L' : LieSubalgebra R L) [IsTriangularizable R L M] : IsTriangularizable R L' M\", \"doc\": \"If a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is triangularizable, then $ M $ is also triangularizable as a module over any Lie subalgebra $ \\\\mathfrak{g}' $ o\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(I : LieIdeal R L) [IsTriangularizable R L M] : IsTriangularizable R I M\", \"doc\": \"For any commutative ring $ R $, Lie algebra $ L $ over $ R $, Lie ideal $ I $ of $ L $, and $ R $-module $ M $ that is triangularizable as a Lie module over $ L $, the module $ M $ is also triangulari\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule_1\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(N : LieSubmodule K L M) [IsTriangularizable K L M] : IsTriangularizable K L N\", \"doc\": \"Given a field $ K $, a Lie algebra $ L $ over $ K $, and a Lie module $ M $ that is triangularizable (i.e., admits a basis where the action of $ L $ is represented by upper triangular matrices), every\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeEndMemLieSubalgebraRangeToEnd\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsTriangularizable R L M] : IsTriangularizable R (LieModule.toEnd R L M).range M\", \"doc\": \"If an $ R $-module $ M $ is triangularizable as a Lie module over a Lie algebra $ L $, then the image of the Lie algebra homomorphism from $ L $ to the endomorphism ring $ \\\\mathrm{End}_R(M) $ is also \"}\n  {\"name\": \"LieModule.IsTriangularizable.casesOn\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{R : Type u_2} →\\n  {L : Type u_3} →\\n    {M : Type u_4} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"For a triangularizable Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $, the case analysis principle asserts that for every $ x \\\\in \\\\mathfrak{g} $, the maximal generalized eigenspaces of the endom\"}\n  {\"name\": \"LieModule.IsTriangularizable\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] → [inst_4 : Module R M] → [inst_5 : LieRingModule L M] → [LieModule R L M] → Prop\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, the proposition that $ M $ is triangularizable as \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra generalized weights and abstract-group invariant submodules do not give an invariant line for a rational group-scheme representation in arbitrary characteristic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"invariant\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Representation.invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} {V : Type u_3} [CommRing k] [Group G] [AddCommGroup V] [Module k V] (ρ : Representation k G V) : Submodule k V\", \"doc\": \"The subspace of invariants, consisting of the vectors fixed by all elements of `G`.\"}\n  {\"name\": \"Representation.invariants_eq_top\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} {V : Type u_3} [CommRing k] [Group G] [AddCommGroup V] [Module k V] (ρ : Representation k G V) [ρ.IsTrivial] : ρ.invariants = ⊤\", \"doc\": \"\"}\n  {\"name\": \"Representation.averageMap_invariant\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} {V : Type u_3} [CommRing k] [Group G] [AddCommGroup V] [Module k V] (ρ : Representation k G V) [Fintype G] [Invertible ↑(Fintype.card G)] (v : V) : ρ.averageMap v ∈ ρ.invariants\", \"doc\": \"The `averageMap` sends elements of `V` to the subspace of invariants.\"}\n  {\"name\": \"Representation.invariants_eq_inter\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} {V : Type u_3} [CommRing k] [Group G] [AddCommGroup V] [Module k V] (ρ : Representation k G V) : ρ.invariants.carrier = ⋂ g, Function.fixedPoints ⇑(ρ g)\", \"doc\": \"\"}\n  {\"name\": \"Representation.mem_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} {V : Type u_3} [CommRing k] [Group G] [AddCommGroup V] [Module k V] (ρ : Representation k G V) (v : V) : v ∈ ρ.invariants ↔ ∀ (g : G), (ρ g) v = v\", \"doc\": \"\"}\n  {\"name\": \"Representation.mem_invariants_iff_of_forall_mem_zpowers\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} {V : Type u_3} [CommRing k] [Group G] [AddCommGroup V] [Module k V] (ρ : Representation k G V) (g : G) (hg : ∀ (x : G), x ∈ Subgroup.zpowers g) (x : V) : x ∈ ρ.invariants ↔ (ρ g) x = x\", \"doc\": \"\"}\n  {\"name\": \"Representation.mem_linHom_invariants_iff_isIntertwining\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} {V : Type u_3} {W : Type u_4} [CommRing k] [Group G] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W] {ρ : Representation k G V} {σ : Representation k G W} (f : V →ₗ[k] W) : (∀ (g : G), σ g ∘ₗ f ∘ₗ ρ g⁻¹ = f) ↔ ρ.IsIntertwiningMap σ f\", \"doc\": \"\"}\n  {\"name\": \"Representation.le_comap_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} [CommRing k] [Group G] {V : Type u_5} [AddCommGroup V] [Module k V] (ρ : Representation k G V) (S : Subgroup G) [S.Normal] (g : G) : Representation.invariants (MonoidHom.comp ρ S.subtype) ≤ Submodule.comap (ρ g) (Representation.invariants (MonoidHom.comp ρ S.subtype))\", \"doc\": \"\"}\n  {\"name\": \"Representation.toInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} [CommRing k] [Group G] {V : Type u_5} [AddCommGroup V] [Module k V] (ρ : Representation k G V) (S : Subgroup G) [S.Normal] : Representation k G ↥(Representation.invariants (MonoidHom.comp ρ S.subtype))\", \"doc\": \"Given a normal subgroup `S ≤ G`, a `G`-representation `ρ` restricts to a `G`-representation on\\nthe invariants of `ρ|_S`.\"}\n  {\"name\": \"Representation.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} [CommRing k] [Group G] {V : Type u_5} [AddCommGroup V] [Module k V] (ρ : Representation k G V) (S : Subgroup G) [S.Normal] : Representation k (G ⧸ S) ↥(Representation.invariants (MonoidHom.comp ρ S.subtype))\", \"doc\": \"Given a normal subgroup `S ≤ G`, a `G`-representation `ρ` induces a `G ⧸ S`-representation on\\nthe invariants of `ρ|_S`.\"}\n  {\"name\": \"Representation.invariantsEquivIntertwiningMap\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u_1} {G : Type u_2} {V : Type u_3} {W : Type u_4} [CommRing k] [Group G] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W] (ρ : Representation k G V) (σ : Representation k G W) : ↥(ρ.linHom σ).invariants ≃ₗ[k] ρ.IntertwiningMap σ\", \"doc\": \"The invariants of the representation `linHom ρ σ` correspond to intertwining maps\\nfrom `ρ` to `σ`.\"}\n  {\"name\": \"Representation.linHom.invariantsEquivRepHom\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \" {k : Type u} [CommRing k] {G : Type v} [Group G] (X Y : Rep.{w, u, v} k G) : ↥(X.ρ.linHom Y.ρ).invariants ≃ₗ[k] X ⟶ Y\", \"doc\": \"The invariants of the representation `linHom X.ρ Y.ρ` correspond to the representation\\nhomomorphisms from `X` to `Y`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra generalized weights and abstract-group invariant submodules do not give an invariant line for a rational group-scheme representation in arbitrary characteristic"
+  },
+  {
+   "tool": "grep",
+   "query": "trigonaliz|LieKolchin|triangular.*(comodule|algebraic.group)|invariant.*line",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean\", \"line\": \"63\", \"text\": \"/-- An invariant linear map from weight space to coweight space. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean\", \"line\": \"72\", \"text\": \"/-- An invariant linear map from coweight space to weight space. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/RootPositive.lean\", \"line\": \"11\", \"text\": \"# Invariant and root-positive bilinear forms on root pairings\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/RootPositive.lean\", \"line\": \"24\", \"text\": \"* `RootPairing.InvariantForm`: an invariant bilinear form on a root pairing.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/RootPositive.lean\", \"line\": \"49\", \"text\": \"/-- Given a root pairing, this is an invariant symmetric bilinear form. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/RootPositive.lean\", \"line\": \"93\", \"text\": \"/-- Given a root pairing, this is an invariant symmetric bilinear form satisfying a positivity\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Character.lean\", \"line\": \"216\", \"text\": \"  rw [FDRep.average_char_eq_finrank_invariants, ← LinearEquiv.finrank_eq\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Induced.lean\", \"line\": \"81\", \"text\": \"    Coinvariants.map _ _ ⟨(MonoidAlgebra.mapDomainLinearMap k k fun x => x * h⁻¹).rTensor _,\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Induced.lean\", \"line\": \"109\", \"text\": \"  ⟨Representation.Coinvariants.map _ _ ⟨f.hom.toLinearMap.lTensor _, by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"12\", \"text\": \"# Lie algebras with non-degenerate invariant bilinear forms are semisimple\"}\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"16\", \"text\": \"non-degenerate reflexive invariant bilinear form.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"23\", \"text\": \"  we define its orthogonal complement with respect to a non-degenerate invariant bilinear form `Φ`\"}\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"28\", \"text\": \"  a non-degenerate invariant reflexive bilinear form.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"58\", \"text\": \"    Φ.lieInvariant L ↔ Φ ∈ LieModule.maxTrivSubmodule R L (LinearMap.BilinForm R M) := by\"}\n  {\"file\": \"Mathlib/Order/CompleteSublattice.lean\", \"line\": \"17\", \"text\": \"invariant submodules of some module with respect to a linear map.\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"line\": \"55\", \"text\": \"    Coinvariants.ker ρ = LinearMap.range (ρ g - LinearMap.id) := by\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"line\": \"69\", \"text\": \"    ρ.Coinvariants ≃ₗ[k] (_ ⧸ LinearMap.range (ρ g - LinearMap.id)) :=\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Loop.lean\", \"line\": \"39\", \"text\": \"  coefficients attached to a symmetric invariant bilinear form on the base Lie algebra.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Loop.lean\", \"line\": \"154\", \"text\": \"/-- A 2-cochain on a loop algebra given by an invariant bilinear form. When `A = ℤ`, the alternating\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Loop.lean\", \"line\": \"184\", \"text\": \"/-- A 2-cocycle on a loop algebra given by an invariant bilinear form. -/\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean\", \"line\": \"130\", \"text\": \"    range_d₁₀_eq_coinvariantsKer A ▸ LinearMap.mem_range_self _\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"line\": \"61\", \"text\": \"    coinvariantsTensor_hom_ext (LinearMap.ext fun a =>\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Continuous/TopRep.lean\", \"line\": \"243\", \"text\": \"instance {k : Type u} [CommRing k] [TopologicalSpace k] : (invariantsFunctor k G).Linear k where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Continuous/Basic.lean\", \"line\": \"32\", \"text\": \"* `ContIntertwiningMap.mapInvariantsOfRes φ f` is the continuous linear map\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean\", \"line\": \"606\", \"text\": \"    simpa [map_sub, sub_eq_zero, chains₁ToCoinvariantsKer, -LinearMap.sub_apply, d₁₀,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra generalized weights and abstract-group invariant submodules do not give an invariant line for a rational group-scheme representation in arbitrary characteristic"
+  },
+  {
+   "tool": "grep",
+   "query": "trigonaliz|triangulariz|eigenline|[Cc]omodule",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []} (subdirectory/file: RepresentationTheory)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group and Lie-algebra results do not state the rational group-scheme assertion over an arbitrary field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonzero rational representation of a trigonalizable affine group scheme has a one dimensional subrepresentation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instInjective\", \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"Representation.invtSubmodule.nontrivial_iff\", \"Subrepresentation.toSubmodule\", \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule_1\", \"Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice\", \"Rep.trivial_projective_of_subsingleton\", \"Representation.ofQuotient.congr_simp\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group and Lie-algebra results do not state the rational group-scheme assertion over an arbitrary field"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, Module.finrank",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Representation.IsIrreducible.finrank_eq_one_of_isMulCommutative\", \"Representation.IsIrreducible.finrank_intertwiningMap_self\", \"Representation.char_one\", \"Representation.card_inv_mul_sum_char_eq_finrank\", \"Representation.card_inv_mul_sum_char_mul_char_eq_finrank\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group and Lie-algebra results do not state the rational group-scheme assertion over an arbitrary field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of a subgroup scheme of upper triangular matrices over any field has a common eigenline",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.GeneralLinearGroup.parabolicFixedPoint\", \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"Subgroup.mem_strictPeriods_iff\", \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det\", \"Matrix.SpecialLinearGroup.fin_two_exists_eq_mk_of_apply_zero_one_eq_zero\", \"Matrix.isParabolic_iff_of_upperTriangular\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group and Lie-algebra results do not state the rational group-scheme assertion over an arbitrary field"
+  },
+  {
+   "tool": "grep",
+   "query": "trigonaliz|triangulariz|IsTriangularizable|exists.*eigenvector",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\"]} (subdirectory/file: Algebra/Lie)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group and Lie-algebra results do not state the rational group-scheme assertion over an arbitrary field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All simple comodules of a triangular algebraic group have dimension one over any field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_end_is_rank_one\", \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\", \"FDRep.finrank_hom_simple_simple\", \"CategoryTheory.finrank_endomorphism_simple_eq_one\", \"simple_of_finrank_eq_one\", \"CategoryTheory.finrank_hom_simple_simple_le_one\", \"CategoryTheory.finrank_hom_simple_simple_eq_one_iff\", \"CategoryTheory.finrank_hom_simple_simple\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group and Lie-algebra results do not state the rational group-scheme assertion over an arbitrary field"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_eq_one_of_isMulCommutative",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"89\", \"90\"]} (subdirectory/file: RepresentationTheory/Irreducible.lean)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group and Lie-algebra results do not state the rational group-scheme assertion over an arbitrary field"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-cohomology-finite-exact",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Finite rational cohomology and character filtrations for homogeneous bundles. Supporting input to lem-sfb-flag-cohomology-finite-exact: passage from the triangular embedding to a rational eigenline, before induction on the dimension of a Borel module",
+   "via": [
+    "lem-sfb-flag-cohomology-finite-exact",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-triangular-group-representation-eigenline",
+  "worker": "stage1",
+  "summary": "Q77 read Milne Proposition 16.2(c) implies (d) implies (a). Reused existing affine-image, unitriangular fixed-vector, representation/comodule, quotient-universal, tensor zero-detection and coalgebra-independence nodes; explicitly proved base change of invariants, normal stability, the Laurent-monomial basis and extraction of an eigenline. No new nodes or statement changes. No project declaration states the item.",
+  "blueprint": "Realizes the supporting triangular-representation input recorded in blueprint.from.place, before dimension induction on Borel modules in lem-sfb-flag-cohomology-finite-exact. The latest direct-images proof (3) is the ancestor route; blueprint_refs.py ancestor returns None for this created chain. Searches for trigonalizable, diagonalizable, eigenline and eigenvector found no equivalent blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-9e7c30c80",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-9e7c30c80 (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full, plus Milne Algebraic Groups Def 16.1 and Prop 16.2 with proof (pp.324-325), Lemma 5.15 (p.102) and Thm 12.12 (a)=>(b) (pp.234-235). The statement matches 16.2 (c)=>(a) over an arbitrary field with no added hypotheses, and the steps follow Milne's own route, (c)=>(d)=>(a). Step 1: the image factorization applies since J and G_m^n are affine of finite type; ker delta = ker q because j is a monomorphism; N is closed in U_n and normal. Step 2: the unitriangular fixed-vector node applies to N, and the universal point gives W != 0. Step 3: base change of invariants uses the singleton case of tensor zero-detection on a complement E. Step 4: Milne 5.15's conjugation, scheme-theoretic. Step 5: the faithfully flat quotient universal property applies (J, D and GL(W) affine of finite type; N acts trivially as a morphism). Step 6: Laurent monomials map to group-like elements with counit 1, and their independence over any field gives a basis of k[D]. Steps 7-8: Milne 12.12's two comodule identities, then the character t -> e_i via the antipode identity. Every cited statement says what its step uses, there is no cycle, and no SGA is cited. There are no new nodes. The duplicate search (trigonaliz, eigenline, common eigenvector) found only Lie-algebra, alg-closed or embedding nodes, none stating the item. Edge cases checked: n=1, trivial J, mu_p in char p, alpha_p, finite or imperfect k. Batch-5 flag: lem-trf-flat-tensor-preserves-injection is the generic Mathlib flatness leaf Module.Flat.lTensor_preserves_injective_linearMap, reached through the Hopf-subalgebra faithful-flatness node (Milne 3.31). It is not part of the trace formula or Poincare duality or their proofs, so I accept it. No fixes were made and tool_uses is empty."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TriangularRepresentationEigenline",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.triangular_representation_eigenline",
+  "file": "lean/Sheaf/AlgebraicGeometry/TriangularRepresentationEigenline.lean",
+  "statement": "theorem triangular_representation_eigenline {k : Type u} [Field k] (J : Scheme.{u}) [J.Over (Spec (.of k))] [GrpObj (J.asOver (Spec (.of k)))] [IsAffine J] [LocallyOfFiniteType (J ↘ Spec (.of k))] [QuasiCompact (J ↘ Spec (.of k))] (n : ℕ) (hn : 0 < n) (i : J.asOver (Spec (.of k)) ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k) [IsMonHom i] [IsClosedImmersion i.left] (htri : ∀ (R : Type u) [CommRing R] [Algebra k R] (x : points (J.asOver (Spec (.of k))) R) (a b : Fin n), b < a → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k R (x ≫ i)).val ⟨a⟩ ⟨b⟩ = 0) (V : Type u) [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Nontrivial V] (c : CoordinateComodule (k := k) J V) : ∃ (L : Submodule k V) (χ : J.asOver (Spec (.of k)) ⟶ StandardGroupSchemes.multiplicative k), IsMonHom χ ∧ Module.finrank k L = 1 ∧ (∀ v : L, c.val v = (v : V) ⊗ₜ[k] (@id Γ(J, ⊤) (χ.left.appTop ((Scheme.ΓSpecIso (.of (LaurentPolynomial k))).inv (LaurentPolynomial.T 1))))) ∧ ∃ r : NaturalRepresentation (k := k) J V, genericCoaction (k := k) J V r = c.val ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (x : Γ(J, ⊤) →ₐ[k] R) (z : R ⊗[k] L), r.action R (coordinatePoint (k := k) J R x) (L.subtype.baseChange R z) = x (χ.left.appTop ((Scheme.ΓSpecIso (.of (LaurentPolynomial k))).inv (LaurentPolynomial.T 1))) • L.subtype.baseChange R z",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The closed embedding into B_n is expressed equivalently as a closed group-scheme embedding into GL_n with every below-diagonal matrix coefficient zero over every test algebra. CoordinateComodule reuses the landed coassociativity and counitality interface. The conclusion records both the coordinate-character formula and the scalar action on the whole base-changed line for every algebra. Returned H2 repaired: the plain definitions are owned by def-sfb-rational-representation-coordinate-comodule; the dictionary theorem remains only in proof_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3527e2b3",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 29383e6e. The item now cites the new definition node def-sfb-rational-representation-coordinate-comodule (existing:true on the 5 landed plain defs CoordinateComodule/NaturalRepresentation/genericPoint/coordinatePoint/genericCoaction, each read against the node TeX; fields follow the H12 rule; source Milne Ch.4(a) p.83 and (24)/Rem 4.1 p.84). The dictionary theorem appears only in proof_deps. Item diff vs side-live: only lean and stmt_deps (+new node, +def-sc-gm-ga); statement verbatim. Clause check vs Milne Def 16.1/Prop 16.2(c)=>(a): field; affine finite-type J; n>0; closed IsMonHom i into GL_n with below-diagonal entries zero on all R-points (equivalent to a closed embedding into B_n); nonzero finite-dimensional V with coassociative counital coaction; finrank L = 1; IsMonHom chi to G_m; c v = v ⊗ chi*(T) with correct pullback direction; action by x(chi*t) on all of R⊗L via the c-determined NaturalRepresentation. No extra hypotheses. Edge cases n=1, dim V=1, trivial J, mu_p/alpha_p, imperfect k, zero R, common universe u. Proof is sorry only; docstrings carry the source place and the 8 proof steps. Advisory: GL owner def-sc-general-linear-group uncited (it does not list the upstream GeneralLinearGroup/homMulEquiv; same as a landed precedent); the second reading is a self-check (H11 advisory). No files changed, no compile run; the delivery's dry run compiled the identical file."
+ }
+}

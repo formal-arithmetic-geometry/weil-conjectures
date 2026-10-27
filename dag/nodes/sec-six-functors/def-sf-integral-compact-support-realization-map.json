@@ -1,0 +1,127 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Final compatibility sentence, ordinary strict-system realization and coefficient-mate expansion"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-verdier-exchange",
+   "place": "Final compatibility sentence: actual system and coefficient realization data",
+   "via": [
+    "lem-sf-adic-exceptional-compositor-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "id": "def-sf-integral-compact-support-realization-map",
+ "title": "Canonical total-limit realization of one compactification",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] and completed coefficients. For normalized system operations [def-sf-integral-system-operations] and their realization data [def-sf-integral-system-realization-data], a compactification c=(j,p), and an integral constructible object K, define directIdentification from the total limit of the system compact-support word on the reduction of K to the prescribed integral compact-support object. Its factors are the canonical proper/limit conjugate and the open reduction mate of [def-sf-integral-system-canonical-bridge], the inverse reconstruction unit (inverseOrZero on its isomorphism domain), and the prescribed strict-quotient integral realization [def-weil-integral-rational-qbar-compact-support]. This fixes a morphism independently of any composition comparison theorem.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-realization-data",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism for compact support composition on adic coefficient systems normalized by reconstruction counit",
+   "results": "CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso; CategoryTheory.Adjunction.compCoyonedaIso; CategoryTheory.OverPresheafAux.counit; CategoryTheory.Mat_.embeddingLiftIso; CategoryTheory.Cokleisli.Adjunction.toCokleisliCompFromCokleisliIsoSelf; localCohomology.diagramComp; CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-24",
+   "verdict": "Generic categorical constructions only; reuse exact published project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compact support compositor on strict coefficient systems and coefficient compatible left compositors",
+   "results": "FormalMultilinearSeries.compAlongComposition; CompactlySupportedContinuousMap.compLeft; HasCompactSupport.comp_left; HVertexOperator.compHahnSeries; CompactlySupportedContinuousMap.coe_compLeft; FormalMultilinearSeries.comp; FormalMultilinearSeries.compAlongComposition_apply; hasCompactSupport_comp_left",
+   "date": "2026-10-24",
+   "verdict": "No exact sheaf/system notion in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq and its refl, inv_app, hom_counit, unit_leftAdjointUniq_hom, trans, hom_app_counit, unit_leftAdjointUniq_hom_app and assoc variants (12 hits)",
+   "date": "2026-10-24",
+   "verdict": "Use canonical adjunction-uniqueness comparisons rather than free isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftCompositors|supportPresentation|systemLeft|systemRight",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib notion."
+  },
+  {
+   "tool": "rg; grep; blueprint_refs.py",
+   "query": "LeftCompositors|directIdentification|FiniteFreeCompactComposition.support|FiniteFreeCompactComposition.compositor in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search compositor",
+   "results": "Exact definitions in ConstructibleExceptionalCompositor.lean, IntegralCompactificationComparisonBridge.lean, FiniteFreeCompactComposition.lean. No upstream WeilConjectures matches. Definition def-sf-finite-exceptional-compositor-maps owns finiteAlpha and exceptionalIso; no definition owner of LeftCompositors, integralAlpha, directIdentification or system support/compositor. Blueprint search: cor-pur-vector-bundle-purity, det-sp-composition-comparisons, det-sp-composition-factors, lem-trf-trace-map-from-external-duality.",
+   "date": "2026-10-24",
+   "verdict": "Create existing:true definition ownership records only for the uncovered published definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-exceptional-compositor-coefficients",
+  "date": "2026-10-24",
+  "group": "NG"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralCompactificationComparisonData",
+  "declaration": "WeilConjectures.IntegralCompactificationBridge.directIdentification",
+  "declarations": [
+   "WeilConjectures.IntegralCompactificationBridge.directIdentification"
+  ],
+  "statement": "def directIdentification {D : FiniteFieldDatum.{u}}\n    (o : IntegralSystemRealization.Operations l E) (r : Realizations l E D o)\n    (c : Compactification f) (K : sfIntegralConstructibleCategory l E X) :\n    (coefficientSequenceLimit l E Y).obj ((systemWord l E o c).obj\n      ((calculus l E X).reduction.obj K.obj)) ⟶\n        ((sfCompactSupportFiniteIntegralFunctor l k hl c E).obj K).obj",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 ownership repair: these are the existing published definitions, reused verbatim, without using the containing theorem existential conclusion and without duplicating a Lean declaration.",
+  "file": "lean/Sheaf/SixFunctors/IntegralCompactificationComparisonData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc11fa891",
+  "group": "NG",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc11fa891",
+  "group": "NG",
+  "result": "fix",
+  "note": "Re-delivery after ee56 RETURN H2+H3; both repaired. H2: item keeps base 7 stmt_deps plus 4 new def nodes and drops the theorem edge. New existing:true owners def-sf-exceptional-compositor-coefficient-data (LeftCompositors/integralAlpha/integralLeft/LeftCoefficientEquation), def-coef-system-compact-support-compositor (FiniteFreeCompactComposition.*) and def-sf-integral-compact-support-realization-map (directIdentification); before this delivery each was recorded only by a theorem node. H3: OperationNormalization pins U.F/U.G (equal to cartesian.F/G), adj unit/counit (HEq), U.left = cartesian.supportIso ≫ canonical supportPresentation (leftAdjointUniq/rightAdjointUniq), finiteLeft/finiteRight via cartesian.supportEvaluation/exceptionalEvaluation with P.ring.left/finiteImageIso/P.ring.finiteRight, and integralLeft = lim U.left ≫ inverse operationSupportPresentation ≫ inverse reconstruction counit ≫ directIdentification. integralRight is unique by integralCounit. The −α counterexample no longer changes the statement. SystemScalar is pinned by actual_eq/eqToIso/limit_canonical; SystemComparison left/right are determined by leftLimit/rightLimit. Clauses, edge cases (ℕ+, e=1, identities, empty schemes), universes, docstrings and the sorry-only proof are OK; lean.statement is verbatim. FIX H4/H12: new existing:true def-pur-finite-compact-support-realization-map duplicates PurCompactSupport.finiteImageIso, already owned by landed def-pur-finite-compact-support-scalar-data (N6, on base). Fix: drop it, and in fixes/def-sf-adic-exceptional-compositor-realization-data.json repoint its stmt_dep and citation to def-pur-finite-compact-support-scalar-data, adding the direct owners def-weil-exceptional-inverse-image and def-sf-finite-exceptional-compositor-maps with citations. fixes/def-sf-ramified-system-scalar-realization-data.json adds def-pur-finite-compact-support-scalar-data (Ramification/finiteChange). Citations equal stmt_deps; no cycle; the item closure does not grow. No Lean change, no compile. Advisory: H11 self-audit second reading.; dropped duplicate new node(s) def-pur-finite-compact-support-realization-map (--drop-nodes; not merged, the item points at the landed declaration)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fc1fa",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T002638-L-104791",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 4 new modules vs published S8 item (Expr.hash identical for all 14 moved decls), new sorry statements vs node text and RingedProperOpen/RingedOpenComparisons pins; node records vs Lean; importer CompactSupportRealizationFactorNormalization compiled against delivered modules (59.6 s, clean; baseline 61.8–68.8 s)"
+ }
+}

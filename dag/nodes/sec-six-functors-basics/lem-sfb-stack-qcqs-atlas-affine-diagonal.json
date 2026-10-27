@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-stack-qcqs-atlas-affine-diagonal",
+ "kind": "statement",
+ "title": "Quasi-compact atlas composite and affine diagonal imply a qcqs stack morphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\mathcal Z$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack], let $Y$ be an $S$-scheme and let $f:\\mathcal Z\\to Y$ be a morphism. Use the $2$-fibre products of [def-sfb-stable-pointed-moduli-groupoids], and quasi-compact and quasi-separated stack morphisms in the sense of [def-sfb-stack-qcqs-morphism]. Suppose $p:U\\to\\mathcal Z$ is a representable smooth surjective atlas with $U$ a scheme, and the scheme morphism $f\\circ p:U\\to Y$ is quasi-compact: the inverse image of every affine open of $Y$ is a quasi-compact scheme [def-weil-finite-type-morphism]. Suppose the relative diagonal $\\Delta_f:\\mathcal Z\\to\\mathcal Z\\times_Y\\mathcal Z$ is affine, meaning that its pullback along every map from an affine scheme is represented by an affine scheme [pqf-def-affine-morphism, def-trf-algebraic-space]. Then $f$ is quasi-compact and quasi-separated. No finite-type or Noetherian assumption on $S,Y,U$ or $\\mathcal Z$ is imposed; empty schemes and stacks are allowed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050X (lemma-surjection-from-quasi-compact), with Tag 04YW (definition-separated), clause (4); affine diagonal is quasi-compact and separated by morphisms.tex Tag 01S7 (lemma-affine-separated), on scheme base changes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-qcqs-morphism",
+  "def-weil-finite-type-morphism",
+  "pqf-def-affine-morphism",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Let $a:\\mathcal T\\to Y$ be an arbitrary quasi-compact algebraic stack test. Choose a smooth surjective atlas $v:V\\to\\mathcal T$ with $V$ a quasi-compact scheme, as in [def-sfb-stack-qcqs-morphism]. Form $\\mathcal F=\\mathcal Z\\times_Y\\mathcal T$ and $\\mathcal F_V=\\mathcal Z\\times_Y V$, which are algebraic stacks by [lem-sfb-algebraic-stack-fibre-products]. Put $W=U\\times_Y V$, a scheme. Its projection to $V$ is the scheme base change of the quasi-compact morphism $f p:U\\to Y$, so it is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](3). Since $V$ is quasi-compact, part (2) of that node gives that $W$ is quasi-compact.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050X (lemma-surjection-from-quasi-compact), test-stack argument; scheme base change uses Tags 01K5 and 01KU."
+   }
+  },
+  {
+   "text": "The map $W\\to\\mathcal F_V$ is the base change of $p$, and $\\mathcal F_V\\to\\mathcal F$ is the base change of $v$. Indeed the triples defining the $2$-fibre products identify $W$ with $U\\times_{\\mathcal Z}\\mathcal F_V$ and $\\mathcal F_V$ with $V\\times_{\\mathcal T}\\mathcal F$ [def-sfb-stable-pointed-moduli-groupoids]. Both arrows, and hence their composite $W\\to\\mathcal F$, are representable smooth surjective by [lem-sfb-stack-chartwise-smooth-etale-calculus]. This is a smooth surjective scheme atlas with quasi-compact source, so $\\mathcal F$ is quasi-compact by [def-sfb-stack-qcqs-morphism]. Since $\\mathcal T\\to Y$ was arbitrary, that same definition gives quasi-compactness of $f$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050X (lemma-surjection-from-quasi-compact), with Tag 04YC (lemma-quasi-compact-stack) in the smooth-atlas convention, and Tags 04ZT, 04ZU."
+   }
+  },
+  {
+   "text": "For any scheme $T\\to\\mathcal Z\\times_Y\\mathcal Z$, the pullback $d:D\\to T$ of $\\Delta_f$ is an algebraic-space morphism: a test consists of two objects of $\\mathcal Z(T)$ with equal images in the discrete groupoid $Y(T)$, and their isomorphisms over $Y$ are exactly their isomorphisms in $\\mathcal Z$. Thus $D$ is the test pullback of the representable diagonal of $\\mathcal Z$ [def-sfb-algebraic-moduli-stack, def-sfb-stable-pointed-moduli-groupoids]. Every affine scheme test $A\\to T$ has $D\\times_T A$ affine by the hypothesis on $\\Delta_f$. Let $V=\\coprod_jA_j\\to T$ be the disjoint union of an affine open cover of $T$; it is a representable surjective etale map [def-trf-algebraic-space]. Every affine open of $V$ is quasi-compact, hence a finite disjoint union of affine opens of the $A_j$, each an affine scheme test of $T$; so $D\\times_TV\\to V$ is an affine morphism of schemes [pqf-def-affine-morphism]. By the chart criterion of [lem-sfb-space-affine-locality], $d$ is affine; that node gives quasi-compactness and separatedness of $d$, and says that $D$ is a scheme since $T$ is a scheme. In particular its relative diagonal $i:D\\to D\\times_T D$ is a closed immersion of schemes, hence affine by the affine-local description in [def-weil-closed-immersion].",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "pqf-def-affine-morphism",
+    "lem-sfb-space-affine-locality",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YW (definition-separated), clause (4); spaces-morphisms.tex Tag 03WG (lemma-affine-local), with scheme Tag 01S7 (lemma-affine-separated)."
+   }
+  },
+  {
+   "text": "The tests of [def-sfb-stack-qcqs-morphism] are quasi-compact algebraic spaces, not affine schemes, so we check them directly. Let $g$ be $d$ or $i$, with target $B=T$ or $B=D\\times_TD$, and let $C\\to B$ be a morphism from a quasi-compact algebraic space with a surjective etale chart $C'\\to C$, $C'$ a quasi-compact scheme. The base change $g_{C'}$ of $g$ along $C'\\to B$ is affine with scheme source by [lem-sfb-space-affine-locality] (stability under base change, and the scheme clause), hence a quasi-compact morphism of schemes, so its source is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](2). That source maps onto the source of $g_C$ by the base change of $C'\\to C$, which is representable surjective etale [def-trf-algebraic-space]. Hence $g_C$ has quasi-compact source. Taking $g=d$ shows that $d$ is quasi-compact, and taking $g=i$ shows that $d$ is quasi-separated, in the sense of [def-sfb-stack-qcqs-morphism]. The test $T$ was arbitrary, so $\\Delta_f$ is representable by algebraic spaces and quasi-compact and quasi-separated in precisely the sense of that definition. Therefore $f$ is quasi-separated. Together with the previous steps this proves the assertion.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-space-affine-locality",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YW (definition-separated), clause (4), with the quasi-compactness tests of Tag 04YC (lemma-quasi-compact-stack) on a quasi-compact etale scheme chart; spaces-morphisms.tex Tag 03WG (lemma-affine-local)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "pqf-def-affine-morphism",
+  "lem-sfb-space-affine-locality",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050X (lemma-surjection-from-quasi-compact), expanded using smooth scheme atlases; Tag 04YW (definition-separated), clause (4), and affine morphism properties."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic stacks is quasi compact and quasi separated if its diagonal is affine and its composite with a smooth surjective scheme atlas is quasi compact",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.QuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme diagonal/quasi-compactness statements have schemes as source; they do not assert descent of quasi-compactness or quasi-separatedness for an algebraic stack. The affine diagonal hits are scheme-only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness descends along a surjective stack atlas and affine representable diagonal implies quasi separatedness for Artin stacks",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.quasiSeparated_over_affine_iff, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme diagonal/quasi-compactness statements have schemes as source; they do not assert descent of quasi-compactness or quasi-separatedness for an algebraic stack. The affine diagonal hits are scheme-only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"QuasiSeparated\"",
+   "results": "[loogle] OK 7 hit(s); AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme diagonal/quasi-compactness statements have schemes as source; they do not assert descent of quasi-compactness or quasi-separatedness for an algebraic stack. The affine diagonal hits are scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicStack|algebraic_stack|affine.*diagonal|diagonal.*affine",
+   "results": "[grep] OK 15 hit(s); Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme diagonal/quasi-compactness statements have schemes as source; they do not assert descent of quasi-compactness or quasi-separatedness for an algebraic stack. The affine diagonal hits are scheme-only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from an algebraic stack with affine relative diagonal is quasi compact and quasi separated if its composite with a smooth surjective scheme atlas is quasi compact",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiSeparated.mk, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.QuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme diagonal/quasi-compactness statements have schemes as source; they do not assert descent of quasi-compactness or quasi-separatedness for an algebraic stack. The affine diagonal hits are scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicStack|algebraic_stack|affine.*diagonal|diagonal.*affine",
+   "results": "15 hits: Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms only; inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and Affine.lean:298-325; no algebraic-stack atlas assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact smooth atlas composite and an affine diagonal imply a morphism of algebraic stacks is quasi compact and quasi separated",
+   "results": "8 hits: AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.quasiSeparated_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms only; inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and Affine.lean:298-325; no algebraic-stack atlas assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"QuasiSeparated\"",
+   "results": "7 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms only; inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and Affine.lean:298-325; no algebraic-stack atlas assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack morphism with affine relative diagonal and a smooth surjective atlas whose composite is quasi compact is quasi compact and quasi separated",
+   "results": "8 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms only; inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and Affine.lean:298-325; no algebraic-stack atlas assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness of algebraic stacks from a quasi compact smooth scheme atlas and quasi separatedness from an affine representable diagonal",
+   "results": "8 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiCompact.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms only; inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:46-52 and Affine.lean:298-325; no algebraic-stack atlas assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-action-quasicoherent-descent",
+  "date": "2026-10-23",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Power lifting of invariants gives an adequate affine quotient. Supporting descent calculation: arbitrary equivariant algebras on every affine chart of the invariant quotient. Geometric prerequisite: quasi-compactness descends through the smooth action atlas and an affine relative diagonal gives quasi-separatedness.",
+   "via": [
+    "lem-sfb-affine-action-quasicoherent-descent",
+    "lem-sfb-power-lifting-adequate-affine-quotient",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-qcqs-atlas-affine-diagonal",
+  "worker": "stage1",
+  "summary": "Expanded quasi-compactness on every quasi-compact stack test using a quasi-compact smooth atlas and scheme quasi-compact base change. Checked affine diagonal on arbitrary scheme tests and checked quasi-separatedness of the diagonal itself via its closed-immersion diagonal. No new nodes: existing nodes supply every non-elementary fact. Statement unchanged; no finite-type, Noetherian, DM or quasi-compactness assumption on the original atlas is added.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli supporting chain recorded in blueprint.from.place. Steps realize the inherited prerequisite by the Stacks 050X atlas argument and 04YW(4). Whole-blueprint searches for affine diagonal and 050X find no equivalent node; ancestor command returns null, retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme quasi-compact base-change and quasi-compact-source permanence in step 1. The unit does not provide a replacement for these scheme facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-a9f5bd1ea",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-a9f5bd1ea (reviewer sub-agent of L); spot-checked: Read Stacks 050X (lemma-surjection-from-quasi-compact) and 04YW(4); the item statement is true (tested on BG over k, empty Z and infinite atlases), and stmt and stmt_deps are unchanged. Steps 1 and 2 are correct: the 050X atlas argument via lem-sfb-algebraic-stack-fibre-products, lem-weil-pbc-qcqs-morphism-permanence (3) and (2), and lem-sfb-stack-chartwise-smooth-etale-calculus base change and composition. Step 3 had two short gaps (E5). First, it called d affine in the sense of lem-sfb-space-affine-locality without showing that d is representable. Second, it claimed qcqs in the sense of def-sfb-stack-qcqs-morphism, which tests against quasi-compact algebraic spaces, although the cited node gives only affine-scheme tests. FIX: step 3 now proves that d is affine via the chart criterion with V the disjoint union of an affine open cover of T. A new step 4 checks the quasi-compact-space tests for d and for its diagonal i through a quasi-compact etale chart, using lem-weil-pbc (2). proof_deps gains def-trf-algebraic-space (already a stmt_dep). Duplicate search found no node stating the item (lem-sfb-algebraic-stack-qcqs-permanence has different hypotheses). Batch-5: both flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, so they are acceptable. tool_uses lem-weil-pbc-qcqs-morphism-permanence is generic scheme calculus and accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackQcqsAtlasAffineDiagonal",
+  "declaration": "CategoryTheory.stack_qcqs_of_atlas_comp_quasiCompact_of_affine_diagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackQcqsAtlasAffineDiagonal.lean",
+  "statement": "theorem stack_qcqs_of_atlas_comp_quasiCompact_of_affine_diagonal {S : Scheme.{u}} (Z : BasedCategory.{v, w} (Over S)) (Y U : Over S) (f : BasedFunctor Z (discreteModuli (yoneda.obj Y))) (p : BasedFunctor (discreteModuli (yoneda.obj U)) Z) (hZ : IsAlgebraicModuliStack Z) (hp : IsSmoothModuliAtlas Z U p) (hqc : ∃ q : U ⟶ Y, Nonempty (ModuliTwoIso (p.comp f) (discreteModuliMap (yoneda.map q))) ∧ QuasiCompact q.left) (hdiag : ∀ (T : Over S), IsAffine T.left → ∀ t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct f f), ∃ R : Over S, IsAffine R.left ∧ IsRepresentedByScheme (moduliTwoFiberProduct t (moduliRelativeDiagonal f)) R) : IsQuasiCompactAlgebraicModuliMap.{u, v, w, u, u + 1, v₁, w₁} f ∧ IsQuasiSeparatedAlgebraicModuliMap f",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46862d3f4",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read node, 7 stmt_dep records, the dependency Lean (StackQcqsMorphism, AlgebraicModuliStack, StablePointedModuliGroupoids, DmStackMorphismProperties) and Stacks 050X/04YW(4). Clause by clause: hZ algebraic stack; hp IsSmoothModuliAtlas = representable smooth surjective; hqc ∃q with 2-iso to p.comp f (unique by discreteness) ∧ QuasiCompact q.left; hdiag = affine-test pullback of the canonical moduliRelativeDiagonal f, represented by an affine R, same (t,Δ) orientation as the qs predicate; conclusion qc.{u,v,w,u,u+1,v₁,w₁} ∧ qs with test universes free. No extra assumptions; empty cases allowed. lean.statement verbatim; node unchanged except lean; no live lean record; no existing duplicate theorem; sorry only; docstrings with source, blueprint and 4 proof steps; lines ≤100. Notes: inline affine test instead of ModuliSchemeTest @IsAffineHom (owner not a stmt_dep; follows node wording); moduliRelativeDiagonal reached via the def-sfb-stack-qcqs-morphism interface. No compile (no file changed)."
+ }
+}

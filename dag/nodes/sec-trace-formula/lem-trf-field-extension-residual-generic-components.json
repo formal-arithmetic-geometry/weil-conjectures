@@ -1,0 +1,285 @@
+{
+ "id": "lem-trf-field-extension-residual-generic-components",
+ "kind": "statement",
+ "title": "Residual generic points and components under arbitrary field extension",
+ "statement": "Let $k$ be a field and let $L/k$ be any field extension [def-weil-field; def-pc-field-extension]. Let $Z$ be a scheme over $k$ [def-weil-scheme-over-base] and form $p:Z_L=Z\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L\\to Z$ [def-pc-fibre-product]. For any $w\\in Z_L$, put $z=p(w)$. The fibre of $p$ over $z$ is canonically $\\operatorname{Spec}(\\kappa(z)\\otimes_kL)$ [def-pc-scheme-fibre; def-weil-residue-field; def-weil-pbc-module-tensor-product; def-weil-affine-spectrum]. Then $w$ is generic in an irreducible component of $Z_L$ if and only if $z$ is generic in an irreducible component of $Z$ and the point of $w$ in this residual fibre is generic in an irreducible component of that fibre [def-sc-generic-point; def-weil-irreducible-components]. In this case $E=\\overline{\\{w\\}}\\subseteq Z_L$ is an irreducible component; for every closed immersion $j:T\\hookrightarrow Z_L$ [def-weil-closed-immersion] and point $v\\in T$ with $j(v)=w$, one has $j(\\overline{\\{v\\}})=E$, and $v$ is generic in an irreducible component of $T$. No algebraicity, separability, finite type, Noetherianity or reducedness hypotheses are imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSI (lemma-associated-point-specializes), first and second proof paragraphs: component generic points over y and x, and identifying C′ in the base change; residual fibre identification also in divisors.tex, Tag 05DC (lemma-base-change-relative-assassin). The generic-point image assertion is the field-extension case of flat going-down, algebra.tex, Tag 00HS (lemma-flat-going-down)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "We first spell out the elementary topological reduction. For a point $a$ of a scheme $H$ and an open neighbourhood $U$, the closure $D=\\overline{\\{a\\}}$ is an irreducible component of $H$ exactly when $D\\cap U$ is an irreducible component of $U$. Indeed, a larger irreducible closed subset of $U$ has irreducible closure in $H$ containing $D$. Conversely, if an irreducible closed $C$ strictly contains $D$, then $C\\cap U$ strictly contains $D\\cap U$: the nonempty open $C\\cap U$ is dense in $C$, so containment in the closed $D$ would force $C\\subseteq D$. Choose $U=\\operatorname{Spec}R$. Since $\\overline{\\{\\mathfrak r\\}}=V(\\mathfrak r)$ directly from the Zariski closed sets, [lem-weil-pbc-spec-irreducible-components-minimal-primes] identifies component-generic points of $U$ with minimal primes. Moreover $a\\in\\overline{\\{b\\}}$ in $U$ means $\\mathfrak r_b\\subseteq\\mathfrak r_a$. Every generalization $b$ of $a$ lies in $U$ (every open containing $a$ contains $b$). Consequently, in any scheme, $a$ is component generic if and only if it has no proper generalization: $a\\in\\overline{\\{b\\}}$ implies $b=a$. This uses no finiteness assumption.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), parts (1) and (3); the open-locality and generalization arguments are written out here."
+   }
+  },
+  {
+   "text": "The defining fibre product of the fibre $F_z=(Z_L)_z$ is canonically $\\operatorname{Spec}\\kappa(z)\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$. To check this, a map into either scheme is the same pair of maps into $\\operatorname{Spec}\\kappa(z)$ and $\\operatorname{Spec}L$ with equal composites to $\\operatorname{Spec}k$; the map to $Z$ is forced to be the canonical map through $z$. The unique maps supplied by these universal properties are inverse because they preserve both projections. The affine fibre-product lemma therefore identifies $F_z$ with $\\operatorname{Spec}(\\kappa(z)\\otimes_kL)$, with its canonical point corresponding to $w$. The fibre definition also identifies its underlying space homeomorphically with $p^{-1}(z)$ with the subspace topology. Thus for $w'\\in p^{-1}(z)$, the corresponding fibre point generalizes the fibre point of $w$ exactly when $w\\in\\overline{\\{w'\\}}$ in $Z_L$: closure in a subspace is ambient closure intersected with that subspace.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC (lemma-base-change-relative-assassin), proof: displayed residual-fibre identification; universal-property argument without its local-finite-type hypothesis."
+   }
+  },
+  {
+   "text": "For the image assertion choose an affine open $U=\\operatorname{Spec}A$ of $Z$ containing $z$. By the open fibre-product and affine fibre-product lemmas, $p^{-1}(U)=U_L$ is $\\operatorname{Spec}B$, where $B=A\\otimes_kL$, and its map to $U$ is induced by $a\\mapsto a\\otimes1$. The map $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ is flat by [lem-pc-field-extension-flat]; its base change $U_L\\to U$ is flat by [lem-weil-pbc-flat-morphism-base-change]. The affine flatness criterion then says $A\\to B$ is a flat ring map. Write $\\mathfrak q$ for the prime of $w$ in $B$ and $\\mathfrak p=\\mathfrak q\\cap A$ for the prime of $z$ in $A$. These arguments apply to an arbitrary field extension and an arbitrary affine $k$-algebra.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U9 (lemma-base-change-flat), 01U5 (lemma-flat-characterize); affine charts from schemes.tex, Tags 01JR and 01I4."
+   }
+  },
+  {
+   "text": "Suppose $w$ is component generic in $Z_L$. Step 1 makes $\\mathfrak q$ a minimal prime of $B$. If a prime $\\mathfrak p_0\\subsetneq\\mathfrak p$ existed in $A$, flat going-down would give a prime $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to $\\mathfrak p_0$. Minimality forces $\\mathfrak q_0=\\mathfrak q$, contradicting their different contractions. Thus $\\mathfrak p$ is minimal, and step 1 makes $z$ component generic in $Z$. Any generalization of the point of $w$ in $F_z$ gives, by step 2, a generalization of $w$ in $Z_L$, hence is $w$ by step 1. Applying step 1 to the scheme $F_z$ proves that the fibre point is component generic as well.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS (lemma-flat-going-down), applied to the flat affine scalar-extension map in step 3."
+   }
+  },
+  {
+   "text": "Conversely, suppose $z$ and the point of $w$ in $F_z$ are component generic. If $w'$ generalizes $w$ in $Z_L$, continuity of $p$ implies that $p(w')$ generalizes $z$: the inverse image of every open containing $z$ contains $w$ and therefore $w'$. Step 1 gives $p(w')=z$. Step 2 now makes $w'$ a generalization of $w$ inside $F_z$, so step 1 in that fibre gives $w'=w$. Step 1 in $Z_L$ concludes that $w$ is component generic. This proves the equivalence in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Elementary closure and subspace argument using the criteria proved in steps 1 and 2; generic-point definition Tag 004X."
+   }
+  },
+  {
+   "text": "In this case $E=\\overline{\\{w\\}}$ is an irreducible component by the definition of a generic point of a component. A closed immersion $j:T\\hookrightarrow Z_L$ is a homeomorphism onto a closed subspace, so that subspace contains $E$ when it contains $w$. Closure of a singleton in a subspace is its ambient closure intersected with the subspace. Consequently $j(\\overline{\\{v\\}})=E$. Finally, an irreducible subset of $T$ strictly containing $\\overline{\\{v\\}}$ would, under this homeomorphism, be an irreducible subset of $Z_L$ strictly containing $E$, contradicting maximality of the component $E$. Thus $\\overline{\\{v\\}}$ is an irreducible component of $T$ and $v$ its generic point. This argument uses the topology of a closed immersion and imposes no condition on its defining ideal or on nilpotents.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Definition Tag 01IO (closed immersion); elementary closed-subspace closure and maximality argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-sc-flat-going-down",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSI (lemma-associated-point-specializes), component bookkeeping in the first two proof paragraphs; agent supplies the unrestricted-field-extension argument via Algebra Tag 00HS and the residual-fibre universal property used in Divisors Tag 05DC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A point over a component generic point after arbitrary field extension is generic in the base changed scheme exactly when it is generic in the residue field tensor fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f y).base) x =\\n    IsLocalRing.closedPoint ↑(Y.residueField y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $y \\\\in Y$ be a point. Let $\\\\kappa(y)$ be the residue field of $Y$ at $y$. The canonical projection from the fiber $X_y := X \\\\times_Y \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      (t : ↥(CategoryTheory.Limits.pullback f g)) →\\n        (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).tensor ⟶\\n          (CategoryTheory.Limits.pullback f g).residueField t\", \"doc\": \"For any morphisms $f : X \\to S$ and $g : Y \\to S$ of schemes and any point $t$ in the fiber product $X \\times_S Y$, this constructs the canonical morphism from the pushout of residue field maps induced b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) → Y.residueField T.y ⟶ T.tensor\", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, this is the morphism from the residue field of $Y$ at point $T.y$ to the pushout object $T.tensor$ in the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (y : ↥Y) → (AlgebraicGeometry.Scheme.Hom.fiber f y).Over (AlgebraicGeometry.Spec (Y.residueField y))\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ y \\\\in Y $, this constructs the fiber product $ X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y)) $ equipped with its canonical projection morphism to $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → AlgebraicGeometry.Scheme.Pullback.Triplet f g → CommRingCat\", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, this constructs the pushout in the category of commutative rings formed by composing the inverse residue\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) → X.residueField T.x ⟶ T.tensor\", \"doc\": \"Given a pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, this morphism maps the residue field $\\\\kappa(T.x)$ at the $X$-component of the triplet to the pushout ob\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (y : ↥Y) → AlgebraicGeometry.Scheme.Hom.fiber f y ⟶ AlgebraicGeometry.Spec (Y.residueField y)\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ y \\\\in Y $, this is the morphism from the fiber product $ X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y)) $ to $ \\\\operatorname{Spec}(\\\\kappa(y)) $, whic\"}\nAssessment: Minimal-prime localization and quotient results are ingredients in the affine calculation. No returned declaration states the scheme residual-fibre generic-component equivalence or its closed-subscheme compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsGenericPoint",
+   "results": "[loogle] OK 0 hit(s)\nAssessment: Minimal-prime localization and quotient results are ingredients in the affine calculation. No returned declaration states the scheme residual-fibre generic-component equivalence or its closed-subscheme compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(baseChange|tensor|fiber)|minimal.*(tensor|base.change)|isMin.*tensor",
+   "results": "[grep] OK 0 hit(s)\nAssessment: Minimal-prime localization and quotient results are ingredients in the affine calculation. No returned declaration states the scheme residual-fibre generic-component equivalence or its closed-subscheme compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Under field extension irreducible component generic points correspond to generic points of fibres over original generic points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"genericPoints.isGenericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : genericPoints α) : IsGenericPoint x.1 (component x).1\", \"doc\": \"For any generic point $ x $ in a topological space $ \\\\alpha $, the point $ x $ is a generic point of its associated irreducible component $ \\\\overline{\\\\{x\\\\}} $.\"}\n  {\"name\": \"genericPoints.component\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : genericPoints α) : irreducibleComponents α\", \"doc\": \"For a generic point $ x $ in a topological space $ \\\\alpha $, this function returns the irreducible component of $ \\\\alpha $ given by the closure of the singleton set $ \\\\{x\\\\} $. Specifically, it maps $ \"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : genericPoints α\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}\n  {\"name\": \"genericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] [IrreducibleSpace α] : α\", \"doc\": \"In a quasi-sober topological space that is irreducible, this is the unique point $ x $ such that the closure of $ \\\\{x\\\\} $ equals the entire space. This follows from the quasi-sober property ensuring e\"}\n  {\"name\": \"genericPoints.component_surjective\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] : Function.Surjective (component (α := α))\", \"doc\": \"In a quasi-sober topological space, the function mapping each generic point $x$ to its associated irreducible component $\\\\overline{\\\\{x\\\\}}$ is surjective. This means every irreducible component of the \"}\n  {\"name\": \"genericPoints.isGenericPoint_ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : IsGenericPoint (ofComponent x).1 x\", \"doc\": \"In a quasi-sober topological space, for every irreducible component $ C $, the unique point $ x $ mapped by the generic point function satisfies that the closure of $ \\\\{x\\\\} $ is exactly $ C $.\"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [hX : IrreducibleSpace X] [IrreducibleSpace Y] :\\n  f (genericPoint X) = genericPoint Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\nAssessment: Minimal-prime localization and quotient results are ingredients in the affine calculation. No returned declaration states the scheme residual-fibre generic-component equivalence or its closed-subscheme compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of a scalar extended algebra over a field correspond to minimal primes after localization at an original minimal prime and quotient by it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"∀ {R : Type u_5} [inst : CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_6)\\n  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization.AtPrime S p], Subsingleton (PrimeSpectrum S)\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the prime spectrum of $ S $ contains at most one element. In other words,\"}\n  {\"name\": \"IsLocalization.minimalPrimes_comap\", \"module\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (S : Submonoid R) (A : Type u_2) [inst_1 : CommSemiring A]\\n  [inst_2 : Algebra R A] [IsLocalization S A] (J : Ideal A),\\n  (Ideal.comap (algebraMap R A) J).minimalPrimes = Ideal.comap (algebraMap R A) '' J.minimalPrimes\", \"doc\": \"Given a localization $ S $ of a commutative semiring $ R $ at a submonoid, and an ideal $ J \\\\subseteq S $, the minimal prime ideals of the preimage $ (J \\\\cap R) $ under the canonical localization map \"}\n  {\"name\": \"IsLocalization.minimalPrimes_map\", \"module\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (S : Submonoid R) (A : Type u_2) [inst_1 : CommSemiring A]\\n  [inst_2 : Algebra R A] [IsLocalization S A] (J : Ideal R),\\n  (Ideal.map (algebraMap R A) J).minimalPrimes = Ideal.comap (algebraMap R A) ⁻¹' J.minimalPrimes\", \"doc\": \"Let $ R $ be a commutative semiring, $ S \\\\subseteq R $ a submonoid, and $ A $ the localization of $ R $ at $ S $. For any ideal $ J \\\\subseteq R $, the minimal prime ideals of the extended ideal $ J^e \"}\n  {\"name\": \"Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {S : Type u_2} [inst_1 : CommRing S] [inst_2 : Algebra R S] {I p : Ideal R}\\n  {P : Ideal S} [P.IsPrime] [P.LiesOver p],\\n  p ∈ I.minimalPrimes →\\n    ∀ {J : Ideal S},\\n      J ≤ P →\\n        Ideal.map (Ideal.Quotient.mk (Ideal.map (algebraMap R S) p)) P ∈\\n       \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with an algebra homomorphism $ R \\\\to S $. For ideals $ I \\\\subseteq R $, $ J \\\\subseteq S $, and a prime ideal $ P \\\\subseteq S $ lying over $ p = P \\\\cap R $, sup\"}\n  {\"name\": \"Ideal.minimalPrimes_eq_comap\", \"module\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R},\\n  I.minimalPrimes = Ideal.comap (Ideal.Quotient.mk I) '' minimalPrimes (R ⧸ I)\", \"doc\": \"The set of minimal prime ideals containing an ideal $ I $ in a commutative ring $ R $ coincides with the preimage under the canonical quotient homomorphism $ R \\to R/I $ of the set of minimal prime ide\"}\n  {\"name\": \"Ideal.exists_minimalPrimes_comap_eq\", \"module\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] {I : Ideal S} (f : R →+* S),\\n  ∀ p ∈ (Ideal.comap f I).minimalPrimes, ∃ p' ∈ I.minimalPrimes, Ideal.comap f p' = p\", \"doc\": \"For any ideal $I$ in a semiring $S$, a ring homomorphism $f : R \\to S$, and a prime ideal $p$ in the minimal primes of the preimage $f^{-1}(I)$, there exists a prime ideal $p'$ in the minimal primes of\"}\n  {\"name\": \"Ideal.exists_comap_eq_of_mem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] {I : Ideal S} (f : R →+* S),\\n  ∀ p ∈ (Ideal.comap f I).minimalPrimes, ∃ p', p'.IsPrime ∧ I ≤ p' ∧ Ideal.comap f p' = p\", \"doc\": \"Let $ f : R \\\\to S $ be a ring homomorphism between semirings, $ I \\\\subseteq S $ an ideal, and $ p $ a minimal prime ideal in $ R $ containing the preimage $ f^{-1}(I) $. Then there exists a prime idea\"}\n  {\"name\": \"Ideal.isPrime_map_of_isLocalizationAtPrime\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (q : Ideal R) [inst_1 : q.IsPrime] {S : Type u_4} [inst_2 : CommSemiring S]\\n  [inst_3 : Algebra R S] [IsLocalization.AtPrime S q] {p : Ideal R} [p.IsPrime],\\n  p ≤ q → (Ideal.map (algebraMap R S) p).IsPrime\", \"doc\": \"Let $ R $ be a commutative semiring, $ S $ its localization at the complement of a prime ideal $ q $, and $ p $ a prime ideal of $ R $ contained in $ q $. Then the image of $ p $ under the canonical r\"}\nAssessment: Minimal-prime localization and quotient results are ingredients in the affine calculation. No returned declaration states the scheme residual-fibre generic-component equivalence or its closed-subscheme compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme over a field, every generic point after arbitrary field extension maps to a generic point of a component, and the generic points are exactly the generic points of residue field tensor fibres",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField, AlgebraicGeometry.Scheme.instOverSpecResidueField.  Read the returned signatures: these give residue fields, generic points of open immersions, and scalar fibre constructions, not the arbitrary-field-extension generic-component equivalence. digest=f3fa38c175a048b9",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genericPoints.*(image|preimage)|generalizing.*generic|generic.*generalizing",
+   "results": "0 hits: .  Read the returned signatures: these give residue fields, generic points of open immersions, and scalar fibre constructions, not the arbitrary-field-extension generic-component equivalence. digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme over a field and arbitrary extension a point is component generic exactly when its image and its point in the residual tensor fibre are component generic",
+   "results": "8 hits: AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField, AlgebraicGeometry.Scheme.over_def, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl; digest=27640ffde2e29a57. The hits give residue-field constructions, topology definitions, or going-down/localization ingredients; none states all clauses of this scheme result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic points of irreducible components under arbitrary extension of the base field are the generic points of fibres over generic points",
+   "results": "8 hits: genericPoints, genericPoints.isGenericPoint, genericPoints.ofComponent, IsGenericPoint, genericPoints.component, genericPoints.isGenericPoint_ofComponent, IsIrreducible.genericPoint, genericPoint; digest=fd39fbb74123774c. The hits give residue-field constructions, topology definitions, or going-down/localization ingredients; none states all clauses of this scheme result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genericPoints.*(fiber|baseChange)|minimalPrimes.*tensor|IsGenericPoint.*fiber",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, genericPoints",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of a flat algebra are exactly primes minimal in the fibres whose contractions are minimal primes of the base ring",
+   "results": "8 hits: Algebra.HasGoingDown.of_flat, RingHom.Flat.generalizingMap_comap, Ideal.exists_isPrime_liesOver_of_faithfullyFlat, IsLocalization.minimalPrimes_comap, Ideal.exists_minimalPrimes_comap_eq, Ideal.exists_comap_eq_of_mem_minimalPrimes, IsLocalization.minimalPrimes_map, Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes; digest=6d58ef5a1de44f60. The hits give residue-field constructions, topology definitions, or going-down/localization ingredients; none states all clauses of this scheme result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasGoingDown.of_flat|generalizingMap_comap|minimalPrimes_comap",
+   "results": "9 hits: Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/GoingDown.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/Height.lean; digest=f146c33f231db6e2. The hits give residue-field constructions, topology definitions, or going-down/localization ingredients; none states all clauses of this scheme result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-relative-associated-specialization",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. Tag 0GSI (lemma-associated-point-specializes), first and second proof paragraphs: component generic points over y and x, and identifying C′ in the base change; residual fibre identification also in divisors.tex, Tag 05DC (lemma-base-change-relative-assassin).",
+   "via": [
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-field-extension-residual-generic-components",
+  "worker": "stage1",
+  "summary": "Q15 preserves the statement and supplies a six-step proof: open-local minimal-prime/generalization criterion, canonical residual fibre, flat affine scalar extension, going-down for the forward implication, elementary fibre-topology reverse implication, and the closed-immersion conclusion. All non-elementary inputs are existing Mathlib-leaf DAG nodes; no new nodes, finite type, Noetherianity, reducedness or separability assumptions. Exact project attachment and whole-blueprint searches found no match.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. Tag 0GSI (lemma-associated-point-specializes), first and second proof paragraphs: component generic points over y and x, and identifying C′ in the base change; residual fibre identification also in divisors.tex, Tag 05DC (lemma-base-change-relative-assassin).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-5be9857df",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-5be9857df (reviewer sub-agent of L); spot-checked: First delivery for this item; live and side-live both still have it unsplit with no proof, and there is no repair note. The statement, stmt_deps, blueprint and source are unchanged from live. The delivery adds a 6-step proof and creates no new nodes. proof_deps equals the union of the steps' uses. All 9 cited non-definition nodes are Mathlib leaves (tools, not route), so no tool_uses are needed. No SGA is cited. Each cited statement says what its step takes from it. Step 1 (open-local criterion: component generic iff no proper generalization) uses lem-weil-pbc-spec-irreducible-components-minimal-primes, which has no Noetherian hypothesis; both directions of the density argument are written out. Step 2 identifies the residual fibre with Spec(κ(z)⊗_kL) through the fibre-product universal property and the def-pc-scheme-fibre homeomorphism, and does not claim the fibre inclusion is an immersion. Step 3: A→A⊗_kL is flat, via lem-pc-field-extension-flat, flat base change and the Spec flatness iff. Step 4: going-down (lem-sc-flat-going-down) gives minimality of p; the step correctly avoids the false claim that the residual ring is 0-dimensional. Steps 5 and 6 are elementary and correctly marked: continuity for the reverse implication; closed immersion as a homeomorphism onto a closed set for the T clause. Sources checked: Stacks 0GSI (more-morphisms.tex:5167), 05DC (only the residual-fibre identification, not its finite-type statement), 00HS and 00ES, with tags verified. Small cases tested: ℂ/ℝ with two generic points; k(t)⊗k(u), where (t−u) lies over the generic z but is not fibre-generic, so the fibre condition is needed; L=k; purely inseparable L with nilpotents; empty Z. Duplicate search: the parent lem-trf-flat-relative-associated-specialization uses the item consistently; lem-sfb-finite-scalar-extension-generic-points covers only finite extensions and is narrower; lem-trf-base-change-residual-fibre-cm is a different statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldExtensionResidualGenericComponents",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.field_extension_residual_generic_components",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.fieldExtensionResidualRing",
+   "AlgebraicGeometry.Scheme.Hom.fieldExtensionResidualLeft",
+   "AlgebraicGeometry.Scheme.Hom.fieldExtensionResidualRight",
+   "AlgebraicGeometry.Scheme.Hom.field_extension_residual_generic_components"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldExtensionResidualGenericComponents.lean",
+  "statement": "theorem field_extension_residual_generic_components {k L : Type u} [Field k] [Field L] [Algebra k L] (Z : Scheme.{u}) [Z.Over (Spec (.of k))] (w : pullback (C := Scheme.{u}) (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) : (∃! e : (pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))).fiber ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) w) ≅ Spec (fieldExtensionResidualRing (k := k) (L := L) ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) w)), e.hom ≫ Spec.map (fieldExtensionResidualLeft (k := k) (L := L) ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) w)) = ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L))))).fiberToSpecResidueField ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) w) ∧ e.hom ≫ Spec.map (fieldExtensionResidualRight (k := k) (L := L) ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) w)) = ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L))))).fiberι ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) w) ≫ (pullback.snd (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L))))) ∧ (w ∈ genericPoints _ ↔ (pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) w ∈ genericPoints Z ∧ ((pullback.fst (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L))))).asFiber w ∈ genericPoints _) ∧ (w ∈ genericPoints _ → closure {w} ∈ irreducibleComponents _ ∧ ∀ (T : Scheme.{u}) (j : T ⟶ pullback (C := Scheme.{u}) (Z ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L)))) [IsClosedImmersion j] (v : T), j v = w → j '' closure {v} = closure {w} ∧ v ∈ genericPoints T)",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three real-data helpers specialize the existing tensor product and its inclusions to the canonical residue-field algebra. The theorem records the canonical residual-fibre identification by unique projection compatibility, the generic-point equivalence, and the closed-immersion consequence. No statement correction or additional hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7337d2594",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Node differs from live only in lean; lean.statement verbatim in file; single sorry. Helpers are real: κ(z)⊗[k]L via upstream residueFieldAlgebraMap plus Mathlib includeLeft/includeRight, with docstrings. ∃! iso Mathlib fiber ≅ Spec(κ⊗L) compatible with fiberToSpecResidueField and fiberι≫pullback.snd is true and canonical (specMap_residueFieldAlgebraMap makes the square commute; Spec of the tensor is a pullback, giving uniqueness). genericPoints = component-generic; asFiber is the real fibre point; the iff and the closed-immersion clause (all T, j, v) match the node; no extra hypotheses; single universe u as pullbacks require. Edge cases: empty Z, L=k, ℂ⊗ℝℂ, k(t)⊗k(u) with (t−u), inseparable L, nilpotent j. No duplicate declaration found in Sheaf/WeilConjectures. Source 0GSI read. Report has Worker report and Second reading sections. No compile needed (no changes)."
+ }
+}

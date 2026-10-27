@@ -6,8 +6,7 @@ Authors: SHEAF group Q47
 module
 
 public import Sheaf.CategoryTheory.FiniteFilteredDerivedPresentation
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.Algebra.Homology.FilteredTruncationTriangle
+import Sheaf.CategoryTheory.FilteredPresentationTruncation
 
 /-!
 # Graded comparisons for supplied filtered lifts
@@ -92,37 +91,189 @@ noncomputable def composeLift {i j k : I} (F : Lift C D P i j) (G : Lift C D P j
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight F.phi G.ordinary ≪≫
     Functor.associator _ _ _
 
+omit [∀ i : I, IsTriangulated (D i)] in
+private theorem pure_preserved {i j : I} (F : Lift C D P i j) (p : ℤ) (M : D i)
+    (hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M)) :
+    ∀ q : ℤ, q ≠ p → IsZero (((P j).gr q).obj (F.filtered.obj M)) := by
+  have h := F.interval p p M (fun q hq ↦ hM q (by omega))
+  exact fun q hq ↦ h q (by omega)
+
+private theorem span_iso {i j : I} (F : Lift C D P i j) (p : ℤ)
+    (T : (P i).GradedSpan p) (M : D i) :
+    IsIso (((P j).gr p).map (F.filtered.map (T.quotient.app M))) ∧
+      IsIso (((P j).gr p).map (F.filtered.map (T.inclusion.app M))) :=
+  T.map_iso (P j) F.filtered F.interval M
+
+private theorem span_grade_iso {i : I} (p : ℤ) (T : (P i).GradedSpan p) (M : D i) :
+    IsIso (((P i).gr p).map (T.quotient.app M)) ∧
+      IsIso (((P i).gr p).map (T.inclusion.app M)) :=
+  span_iso (identityLift (C := C) (D := D) (P := P) i) p T M
+
+private noncomputable def pureMap {i j : I} (F : Lift C D P i j) (p : ℤ)
+    (M : D i) (hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M)) :
+    ((P j).gr p).obj (F.filtered.obj M) ≅ F.ordinary.obj (((P i).gr p).obj M) :=
+  (P j).pureComparison p _ (pure_preserved F p M hM) ≪≫ F.phi.app M ≪≫
+    F.ordinary.mapIso ((P i).pureComparison p M hM).symm
+
+omit [∀ i : I, IsTriangulated (D i)] in
+private theorem pureMap_naturality {i j : I} (F : Lift C D P i j) (p : ℤ)
+    {M N : D i} (hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M))
+    (hN : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj N)) (f : M ⟶ N) :
+    ((P j).gr p).map (F.filtered.map f) ≫ (pureMap F p N hN).hom =
+      (pureMap F p M hM).hom ≫ F.ordinary.map (((P i).gr p).map f) := by
+  have h : (P i).omega.map f ≫ ((P i).pureComparison p N hN).inv =
+      ((P i).pureComparison p M hM).inv ≫ ((P i).gr p).map f := by
+    apply (cancel_mono ((P i).pureComparison p N hN).hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [(P i).pureNaturality p hM hN f]
+    simp
+  dsimp [pureMap]
+  rw [← Category.assoc, (P j).pureNaturality p (pure_preserved F p M hM) (pure_preserved F p N hN)
+    (F.filtered.map f)]
+  simp only [Category.assoc]
+  have hn := F.phi.hom.naturality f
+  dsimp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn]
+  rw [← F.ordinary.map_comp, h, F.ordinary.map_comp]
+
+private noncomputable def spanComparison {i j : I} (F : Lift C D P i j) (p : ℤ)
+    (T : (P i).GradedSpan p) :
+    F.filtered ⋙ (P j).gr p ≅ (P i).gr p ⋙ F.ordinary := by
+  have hq (M : D i) := (span_iso F p T M).1
+  have hi (M : D i) := (span_iso F p T M).2
+  have hq' (M : D i) := (span_grade_iso p T M).1
+  have hi' (M : D i) := (span_grade_iso p T M).2
+  have : ∀ M, IsIso
+      ((Functor.whiskerRight T.quotient (F.filtered ⋙ (P j).gr p)).app M) := hq
+  have : IsIso (Functor.whiskerRight T.quotient (F.filtered ⋙ (P j).gr p)) :=
+    NatIso.isIso_of_isIso_app _
+  have : ∀ M, IsIso
+      ((Functor.whiskerRight T.inclusion (F.filtered ⋙ (P j).gr p)).app M) := hi
+  have : IsIso (Functor.whiskerRight T.inclusion (F.filtered ⋙ (P j).gr p)) :=
+    NatIso.isIso_of_isIso_app _
+  have : ∀ M, IsIso ((Functor.whiskerRight T.quotient ((P i).gr p)).app M) := hq'
+  have : IsIso (Functor.whiskerRight T.quotient ((P i).gr p)) :=
+    NatIso.isIso_of_isIso_app _
+  have : ∀ M, IsIso ((Functor.whiskerRight T.inclusion ((P i).gr p)).app M) := hi'
+  have : IsIso (Functor.whiskerRight T.inclusion ((P i).gr p)) :=
+    NatIso.isIso_of_isIso_app _
+  let e₁ : F.filtered ⋙ (P j).gr p ≅ T.piece ⋙ F.filtered ⋙ (P j).gr p :=
+    asIso (Functor.whiskerRight T.quotient (F.filtered ⋙ (P j).gr p)) ≪≫
+      (asIso (Functor.whiskerRight T.inclusion (F.filtered ⋙ (P j).gr p))).symm
+  let e₂ : T.piece ⋙ F.filtered ⋙ (P j).gr p ≅ T.piece ⋙ (P i).gr p ⋙ F.ordinary :=
+    NatIso.ofComponents (fun M ↦ pureMap F p _ (T.piece_support M))
+      (fun f ↦ pureMap_naturality F p _ _ (T.piece.map f))
+  let e₃ : (P i).gr p ≅ T.piece ⋙ (P i).gr p :=
+    asIso (Functor.whiskerRight T.quotient ((P i).gr p)) ≪≫
+      (asIso (Functor.whiskerRight T.inclusion ((P i).gr p))).symm
+  exact e₁ ≪≫ e₂ ≪≫ Functor.isoWhiskerRight e₃.symm F.ordinary
+
+private theorem spanComparison_pure {i j : I} (F : Lift C D P i j) (p : ℤ)
+    (T : (P i).GradedSpan p) (M : D i)
+    (hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M)) :
+    (spanComparison F p T).hom.app M = (pureMap F p M hM).hom := by
+  have hq (N : D i) := (span_iso F p T N).1
+  have hi (N : D i) := (span_iso F p T N).2
+  have hq' (N : D i) := (span_grade_iso p T N).1
+  have hi' (N : D i) := (span_grade_iso p T N).2
+  have hc := T.cut_pure M hM
+  have h₁ := pureMap_naturality F p hM hc (T.quotient.app M)
+  have h₂ := pureMap_naturality F p (T.piece_support M) hc (T.inclusion.app M)
+  apply (cancel_mono (F.ordinary.map (((P i).gr p).map (T.quotient.app M)))).1
+  dsimp only [spanComparison, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, asIso_hom, asIso_inv,
+    NatIso.ofComponents_hom_app, Iso.trans_inv, Iso.symm_inv]
+  simp only [NatIso.isIso_inv_app, Functor.whiskerRight_app, Functor.comp_map]
+  simp only [Functor.map_comp, Category.assoc, Functor.map_inv,
+    ]
+  rw [← h₁, ← reassoc_of% h₂]
+  simp
+
+private theorem pure_ext {i j : I} (F G : Lift C D P i j) (p : ℤ)
+    (T : (P i).GradedSpan p)
+    (a b : F.filtered ⋙ (P j).gr p ⟶ (P i).gr p ⋙ G.ordinary)
+    (h : ∀ (M : D i) (_hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M)),
+      a.app M = b.app M) : a = b := by
+  apply NatTrans.ext
+  funext M
+  have hi := (span_iso F p T M).2
+  have hq := (span_grade_iso p T M).1
+  apply (cancel_mono (G.ordinary.map (((P i).gr p).map (T.quotient.app M)))).1
+  change a.app M ≫ ((P i).gr p ⋙ G.ordinary).map (T.quotient.app M) =
+    b.app M ≫ ((P i).gr p ⋙ G.ordinary).map (T.quotient.app M)
+  rw [← a.naturality, ← b.naturality]
+  congr 1
+  apply (cancel_epi (((P j).gr p).map (F.filtered.map (T.inclusion.app M)))).1
+  change (F.filtered ⋙ (P j).gr p).map (T.inclusion.app M) ≫ a.app (T.cut.obj M) =
+    (F.filtered ⋙ (P j).gr p).map (T.inclusion.app M) ≫ b.app (T.cut.obj M)
+  rw [a.naturality, b.naturality, h (T.piece.obj M) (T.piece_support M)]
+
+omit [∀ i : I, IsTriangulated (D i)] in
+private theorem pureMap_transformation {i j : I} (F G : Lift C D P i j)
+    (h : F.ordinary ⟶ G.ordinary) (a : F.filtered ⟶ G.filtered)
+    (ha : LiftsTransformation F G h a) (p : ℤ) (M : D i)
+    (hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M)) :
+    ((P j).gr p).map (a.app M) ≫ (pureMap G p M hM).hom =
+      (pureMap F p M hM).hom ≫ h.app (((P i).gr p).obj M) := by
+  dsimp [pureMap]
+  rw [← Category.assoc, (P j).pureNaturality p (pure_preserved F p M hM) (pure_preserved G p M hM)
+    (a.app M)]
+  simp only [Category.assoc]
+  rw [reassoc_of% (ha M)]
+  rw [← h.naturality ((P i).pureComparison p M hM).inv]
+
+omit [∀ i : I, IsTriangulated (D i)] in
+private theorem pureMap_identity (i : I) (p : ℤ) (M : D i)
+    (hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M)) :
+    (pureMap (identityLift (C := C) (D := D) (P := P) i) p M hM).hom = 𝟙 _ := by
+  simp [pureMap, identityLift]
+
+omit [∀ i : I, IsTriangulated (D i)] in
+private theorem pureMap_compose {i j k : I} (F : Lift C D P i j) (G : Lift C D P j k)
+    (p : ℤ) (M : D i)
+    (hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M)) :
+    (pureMap (composeLift F G) p M hM).hom =
+      (pureMap G p (F.filtered.obj M) (pure_preserved F p M hM)).hom ≫
+        G.ordinary.map (pureMap F p M hM).hom := by
+  simp [pureMap, composeLift, Functor.map_comp, Category.assoc]
+
+omit [∀ i : I, IsTriangulated (D i)] in
+private theorem isIso_of_grades {i : I} {M N : D i} (f : M ⟶ N)
+    (hf : ∀ p : ℤ, IsIso (((P i).gr p).map f)) : IsIso f := by
+  obtain ⟨Z, g, h, hT⟩ := distinguished_cocone_triangle f
+  let T := Triangle.mk f g h
+  have hz : IsZero Z := (Presentation.truncationSpans (P i)).2 Z (fun p ↦ by
+    exact (Triangle.isZero₃_iff_isIso₁ (((P i).gr p).mapTriangle.obj T)
+      (((P i).gr p).map_distinguished T hT)).2 (hf p))
+  exact (Triangle.isZero₃_iff_isIso₁ T hT).1 hz
+
 /-- Graded comparisons, normalized on pure filtration objects, commute with supplied
 transformations and both kinds of composition, and detect lifted isomorphisms.
 Source: Varshavsky 5.1.3(a),(b),(e), Lemma 5.1.4(i)--(iii)
 (blueprint: lem-trf-filtered-functor-graded-comparison).
 
 Proof:
-1. For every supplied lift F and integer r use the universal supported truncation
-   triangle of lem-trf-filtered-truncation-triangle. Exactness and interval preservation
-   identify F(t_ge r M) with t_ge r(F M) and F(t_lt r M) with t_lt r(F M).
-   Postcomposition with the inclusion and precomposition with the quotient are the
-   two universal Hom bijections, so these comparisons are unique and natural.
-2. Put T_p = t_ge p t_lt (p+1). Compose the two comparisons to get
-   kappa : F T_p ≅ T_p F. Apply omega to its inverse and then the supplied phi
-   at T_p M. Since omega T_p = gr p, this defines theta. On pure degree p
-   objects this is the supplied phi through the canonical pure comparisons.
-3. Naturality of a supplied lifted transformation for the inclusion and quotient
-   makes it commute with both truncation comparisons by the same Hom bijections.
-   Therefore it commutes with kappa. Apply omega and the supplied forgetful square
-   at T_p M to obtain the displayed theta square.
-4. If the ordinary transformation is invertible, this square makes every graded
-   component invertible. Each grade of a cone of its filtered component is zero by
-   lem-kun-distinguished-cone-zero. A finite filtered complex representing that cone
-   has all grades acyclic, so its map to zero is a graded quasi-isomorphism. The
-   localization inverts it. The cone-zero criterion makes the filtered component,
-   and hence the whole filtered natural transformation, invertible.
-5. For identities and composition of transformations the theta square conjugates
-   the ordinary transformation; intermediate inverse comparisons cancel. For a
-   composite of filtered functors, uniqueness of the supported truncation maps
-   identifies its kappa with kappa_G composed with G(kappa_F). The specified
-   composite phi gives theta_GF = theta_G followed by G(theta_F). Identity
-   filtered functors have identity truncation comparisons, hence identity theta.
+1. Choose the canonical span M → low(p+1) M ← high(p)(low(p+1) M).
+   Its right-hand object is pure in degree p. After any supplied exact
+   interval-preserving functor, both arrows induce isomorphisms on grade p.
+   This is the cutoff-triangle calculation in Presentation.truncationSpans.
+2. On the pure right-hand object, use the supplied forgetful comparison through
+   the canonical pureComparison isomorphisms. Extend it along the two grade
+   isomorphisms of the span. Naturality of all factors gives a natural isomorphism.
+   On a pure input the pureNaturality equations cancel the span arrows, giving
+   exactly the normalization in the statement.
+3. Two natural transformations between the relevant graded functors agree if
+   they agree on pure objects: apply naturality to the quotient and inclusion,
+   then cancel their invertible graded maps. Thus transformation compatibility,
+   identity functors, and composite functors reduce to the corresponding pure
+   equations. These follow from pureNaturality, the supplied forgetful square,
+   and the definitions of the identity and composite forgetful comparisons.
+4. An invertible ordinary transformation therefore gives invertible maps on every
+   grade. The exact graded functors send a cone triangle to triangles with zero
+   third vertex. Joint detection of zero objects by the grades makes the original
+   cone zero, so the filtered component is invertible by the zero-cone criterion.
+5. The identity-transformation square follows from functoriality. Compose two
+   transformation squares and associate the composites to obtain the last clause.
 -/
 theorem filteredFunctorGradedComparison :
     ∃ theta : ∀ {i j : I} (F : Lift C D P i j) (p : ℤ),
@@ -155,6 +306,72 @@ theorem filteredFunctorGradedComparison :
       ∀ (p : ℤ) (M : D i),
         ((P j).gr p).map ((a ≫ b).app M) ≫ (theta H p).hom.app M =
           (theta F p).hom.app M ≫ (h ≫ k).app (((P i).gr p).obj M)) := by
-  sorry
+  classical
+  let T (i : I) (p : ℤ) := Classical.choice ((Presentation.truncationSpans (P i)).1 p)
+  let theta {i j : I} (F : Lift C D P i j) (p : ℤ) := spanComparison F p (T i p)
+  have hp {i j : I} (F : Lift C D P i j) (p : ℤ) (M : D i)
+      (hM : ∀ q : ℤ, q ≠ p → IsZero (((P i).gr q).obj M)) :
+      (theta F p).hom.app M = (pureMap F p M hM).hom :=
+    spanComparison_pure F p (T i p) M hM
+  have ht {i j : I} (F G : Lift C D P i j) (h : F.ordinary ⟶ G.ordinary)
+      (a : F.filtered ⟶ G.filtered) (ha : LiftsTransformation F G h a) (p : ℤ) :
+      Functor.whiskerRight a ((P j).gr p) ≫ (theta G p).hom =
+        (theta F p).hom ≫ Functor.whiskerLeft ((P i).gr p) h := by
+    apply pure_ext F G p (T i p)
+    intro M hM
+    change ((P j).gr p).map (a.app M) ≫ (theta G p).hom.app M =
+      (theta F p).hom.app M ≫ h.app (((P i).gr p).obj M)
+    rw [hp F p M hM, hp G p M hM]
+    exact pureMap_transformation F G h a ha p M hM
+  refine ⟨theta, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro i j F p M hM hFM
+    exact hp F p M hM
+  · intro i j F G h a ha
+    refine ⟨fun p M ↦ congrArg (fun t ↦ t.app M) (ht F G h a ha p), ?_⟩
+    intro hh
+    have hi (M : D i) : IsIso (a.app M) := by
+      apply isIso_of_grades (P := P) (i := j)
+      intro p
+      have eq := congrArg (fun t ↦ t.app M) (ht F G h a ha p)
+      change ((P j).gr p).map (a.app M) ≫ (theta G p).hom.app M =
+        (theta F p).hom.app M ≫ h.app (((P i).gr p).obj M) at eq
+      have : IsIso (((P j).gr p).map (a.app M) ≫ (theta G p).hom.app M) := by
+        rw [eq]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _ ((theta G p).hom.app M)
+    exact NatIso.isIso_of_isIso_app a
+  · intro i p M
+    have eq : (theta (identityLift (C := C) (D := D) (P := P) i) p).hom =
+        (𝟙 ((P i).gr p)) := by
+      apply pure_ext (identityLift (C := C) (D := D) (P := P) i)
+        (identityLift (C := C) (D := D) (P := P) i) p (T i p)
+      intro N hN
+      rw [hp _ p N hN, pureMap_identity]
+      rfl
+    exact congrArg (fun t ↦ t.app M) eq
+  · intro i j k F G p M
+    have eq : (theta (composeLift F G) p).hom =
+        Functor.whiskerLeft F.filtered (theta G p).hom ≫
+          Functor.whiskerRight (theta F p).hom G.ordinary := by
+      apply pure_ext (composeLift F G) (composeLift F G) p (T i p)
+      intro N hN
+      change (theta (composeLift F G) p).hom.app N =
+        (theta G p).hom.app (F.filtered.obj N) ≫
+          G.ordinary.map ((theta F p).hom.app N)
+      rw [hp _ p N hN, hp F p N hN,
+        hp G p _ (pure_preserved F p N hN)]
+      exact pureMap_compose F G p N hN
+    exact congrArg (fun t ↦ t.app M) eq
+  · intro i j F p M
+    simp
+  · intro i j F G H h k a b ha hb p M
+    have ha' := congrArg (fun t ↦ t.app M) (ht F G h a ha p)
+    have hb' := congrArg (fun t ↦ t.app M) (ht G H k b hb p)
+    change ((P j).gr p).map (a.app M) ≫ (theta G p).hom.app M =
+      (theta F p).hom.app M ≫ h.app (((P i).gr p).obj M) at ha'
+    change ((P j).gr p).map (b.app M) ≫ (theta H p).hom.app M =
+      (theta G p).hom.app M ≫ k.app (((P i).gr p).obj M) at hb'
+    simp only [NatTrans.comp_app, Functor.map_comp, Category.assoc]
+    rw [hb', ← Category.assoc, ha', Category.assoc]
 
 end CategoryTheory.FiniteFilteredDerived

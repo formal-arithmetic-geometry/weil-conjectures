@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-noetherian-space-finite-scheme-cover",
+ "kind": "statement",
+ "title": "Finite separated Noetherian scheme cover of a separated Noetherian algebraic space",
+ "statement": "Let $K$ be a field [def-weil-field], and let $X$ be an algebraic space over $\\operatorname{Spec}K$ [def-trf-algebraic-space, def-weil-affine-spectrum]. Assume $X$ is Noetherian and separated over $K$, meaning its relative diagonal is a closed immersion on scheme tests [def-weil-closed-immersion]. Locally Noetherian means that an etale scheme atlas is locally Noetherian [pqf-def-locnoeth]; Noetherian means locally Noetherian, quasi-compact, and quasi-separated. Quasi-compact means that every open cover has a finite subcover, and quasi-separated means that the diagonal is quasi-compact on scheme tests. There exist a Noetherian scheme $U$, separated over $K$ [def-pc-scheme, def-weil-proper-morphism], and a finite surjective morphism $f:U\\to X$ over $K$. Surjectivity means surjectivity on field-valued point classes [def-a1-space-point-topology]. A morphism of algebraic spaces is finite if every base change by a scheme is represented by a finite morphism of schemes [def-weil-finite-integral-morphism].",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 09YC (proposition-there-is-a-scheme-finite-over), clause (1); the separated Noetherian source follows from Tags 04NZ (spaces-morphisms, lemma-finite-proper) and 04ZK (spaces-morphisms, lemma-locally-finite-type-locally-noetherian)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-a1-space-point-topology",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Because $X$ is Noetherian, it is quasi-compact and quasi-separated over $S=\\operatorname{Spec}K$. It is then also quasi-separated in the absolute sense used by the integral-cover lemma: $\\Delta_{X/\\mathbf Z}$ is $\\Delta_{X/K}$ followed by $X\\times_KX\\to X\\times_{\\mathbf Z}X$, the base change of the diagonal $\\operatorname{Spec}K\\to\\operatorname{Spec}(K\\otimes_{\\mathbf Z}K)$, which is a closed immersion because multiplication $K\\otimes_{\\mathbf Z}K\\to K$ is surjective; closed immersions are quasi-compact and composites of quasi-compact maps are quasi-compact. Apply the integral-cover lemma over $S$ to obtain an $S$-scheme $Y$ and an integral surjection $p:Y\\to X$. No finiteness assertion about $Y$ is being assumed.",
+   "uses": [
+    "lem-sfb-qcqs-space-integral-scheme-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 09YC(1), first input, Tag 09YB(1)"
+   }
+  },
+  {
+   "text": "Apply integral approximation to $p:Y\\to X$. It gives a small nonempty directed inverse system $(Y_i\\to X)$ of finite finitely presented maps, with qcqs stages, affine transitions, and limit $Y$. The preceding step supplies exactly the integral map and qcqs target required by this lemma. This is also a limit over $S$: for compatible $S$-maps $W\\to Y_i$, directedness makes their composites to $X$ equal (compare any two through a common later stage). They therefore form a cone over that single map $W\\to X$, so the limit property over $X$ gives a unique $S$-map $W\\to Y$. For uniqueness, any other such S-map has the same composite to X after composing with one projection (the index set is nonempty), and is therefore the same X-map by the slice limit property.",
+   "uses": [
+    "lem-sfb-integral-space-finite-presentation-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 09YC(1), approximation by Tag 09YA"
+   }
+  },
+  {
+   "text": "The limit $Y$ is a scheme. The schematic-stage lemma therefore gives $i$ for which $U=Y_i$ is a scheme. Let $f:U\\to X$ be its finite finitely presented structure map. It is surjective: for a point class $x$ of $X$, lift it to a field-valued point class $y$ of $Y$ using $p$, and take its image under $p_i:Y\\to Y_i$; its image under $f$ is $x$, since $f\\circ p_i=p$. This argument does not require $p_i$ itself to be surjective.",
+   "uses": [
+    "lem-sfb-affine-space-limit-schematic-stage",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 09YC(1), schematic stage via Tag 07SR; surjectivity from the factorization of p"
+   }
+  },
+  {
+   "text": "The finite-presentation property of $f$ includes local finite presentation on etale charts. Apply the locally-Noetherian conclusion of the space cotangent-coherence lemma to $f$, with locally Noetherian target $X$: $U$ admits a surjective etale cover $\\{T_a\\to U\\}$ by schemes $T_a$ with affine open covers by spectra of Noetherian rings, i.e. locally Noetherian schemes. As $U$ is a scheme, each $T_a\\to U$ is an etale morphism of schemes and the family is a jointly surjective etale covering, so the etale descent lemma for local Noetherianness makes the scheme $U$ locally Noetherian. Only the first conclusion of the cotangent lemma is used; no cotangent-complex identification is needed. Local finite presentation is available from the approximation, without assuming that an arbitrary finite map is finitely presented.",
+   "uses": [
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-trf-etale-local-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04ZK (lemma-locally-finite-type-locally-noetherian); here finite presentation supplies the stronger hypothesis of the existing DAG lemma"
+   }
+  },
+  {
+   "text": "Choose a surjective etale map $T\\to X$ with $T$ a quasi-compact scheme, using the atlas criterion for quasi-compactness. The pullback $V=U\\times_XT$ is a scheme finite over $T$ by the scheme-test definition of finiteness. The affine opens of $T$ form an open cover by the definition of a scheme; quasi-compactness selects finitely many. Their inverse images in $V$ are affine because the finite scheme morphism $V\\to T$ is affine. Each inverse image is quasi-compact by the affine-scheme qcqs lemma. For any open cover of $V$, select finitely many members covering each of these finitely many pieces; their union is a finite subcover of $V$. Thus $V$ is quasi-compact. The covering base-change lemma makes $V\\to U$ surjective etale; applying the same atlas criterion to $U$ proves it quasi-compact.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E4 (lemma-quasi-compact-space), with definition-quasi-compact, for the qc scheme-atlas criterion; finite pullback and finite affine cover argument"
+   }
+  },
+  {
+   "text": "Let $R=U\\times_XU$, a scheme because the diagonal of $X$ is representable. Its projection $R\\to U$ is finite, being a scheme base change of $f$, hence proper and separated by the finite-proper lemma. The relative diagonal $\\delta:U\\to R$ is a section of this projection, so the section lemma makes it a closed immersion. The map $R\\to U\\times_KU$ is the scheme test of $\\Delta_{X/K}$ along $U\\times_KU\\to X\\times_KX$, hence is a closed immersion by the hypothesis that $X$ is separated over $K$. Composing these scheme closed immersions gives $\\Delta_{U/K}$, so $U$ is separated over $K$. Together with local Noetherianness and quasi-compactness already established, $U$ is a Noetherian scheme. (In the algebraic-space convention requiring quasi-separatedness explicitly, it follows here from separatedness over the affine base.) The $K$-morphism $f$ constructed above is finite and surjective, which proves the item.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-closed-immersion-comp",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 04NZ (lemma-finite-proper), 03KP (lemma-section-immersion), 03KQ (lemma-composition-separated), explicit diagonal factorization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qcqs-space-integral-scheme-cover",
+  "lem-sfb-integral-space-finite-presentation-limit",
+  "lem-sfb-affine-space-limit-schematic-stage",
+  "def-a1-space-point-topology",
+  "lem-sfb-space-naive-cotangent-coherent",
+  "lem-trf-etale-local-noetherian-descent",
+  "lem-a1-space-etale-open-image",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-closed-immersion-comp",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 09YC(1), using 09YB, 09YA and 07SR; source Noetherianness by 04ZK and separatedness by the diagonal argument of 03KQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every separated Noetherian algebraic space has a finite surjective cover by a separated Noetherian scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {𝒰 : X.OpenCover} [Finite 𝒰.I₀] [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space admits a finite surjective finitely presented morphism from a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  CompactSpace ↥X ↔ ∃ R f, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A topological space $ X $ is compact if and only if there exists a commutative ring $ R $ and a surjective continuous map from the prime spectrum $ \\\\operatorname{Spec}(R) $ (endowed with the Zariski t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Finite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicSpace|finite.*scheme.*cover|scheme.*finite.*cover",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1124\", \"text\": \"/-- Variant of `Scheme.exists_isOpenCover_and_isAffine_of_finite` in terms of `Scheme.OpenCover`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"304\", \"text\": \"/-- A version of `isNoetherian_iff_of_finite_iSup_eq_top` using `Scheme.OpenCover`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"305\", \"text\": \"theorem isNoetherian_iff_of_finite_affine_openCover {𝒰 : Scheme.OpenCover.{v, u} X}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"line\": \"78\", \"text\": \"/-- Every open cover of a quasi-compact scheme can be refined into a finite subcover.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"line\": \"81\", \"text\": \"def OpenCover.finiteSubcover {X : Scheme.{u}} (𝒰 : OpenCover.{v} X) [H : CompactSpace X] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"171\", \"text\": \"  let 𝒰 := Scheme.Pullback.openCoverOfRight Y.affineCover.finiteSubcover f g\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated Noetherian algebraic space admits a finite surjective cover by a scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{I : Type*} (U : I → X.Opens) (hU : IsOpenCover U) (hU₁ : ∀ i, IsAffineOpen (U i))\\n  (hU₂ : ∀ i j, IsCompact (X := X) (U i ∩ U j)) : QuasiSeparatedSpace X\", \"doc\": \"If a scheme $X$ has an open cover consisting of affine open subsets such that the intersection of any two elements of the cover is quasi-compact, then $X$ is a quasi-separated space.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} [Finite ι] {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) :\\n  IsNoetherian X ↔ ∀ i, IsNoetherianRing Γ(X, S i)\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"NoetherianSpace.to_quasiSeparatedSpace\", \"module\": \"Mathlib.Topology.QuasiSeparated\", \"type\": \"[NoetherianSpace α] : QuasiSeparatedSpace α\", \"doc\": \"Every Noetherian topological space is quasi-separated. That is, in a Noetherian space, the intersection of any two quasi-compact open subsets remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated Noetherian algebraic space admits a finite surjective morphism from a Noetherian separated scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [TopologicalSpace.NoetherianSpace ↥X] (f : X ⟶ Y), AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated algebraic space has a finite scheme cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.inst\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : S.OpenCover), AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"Any open cover of a scheme, defined as a collection of open immersion morphisms whose images form a jointly surjective family, satisfies the quasi-compactness condition for pre-zero hypercovers.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝒰 : X.OpenCover) → [H : CompactSpace ↥X] → Fintype 𝒰.finiteSubcover.I₀\", \"doc\": \"For any compact scheme $ X $ and an open cover $ \\\\mathcal{U} $ of $ X $, the index set $ I_0 $ of the finite subcover is finite. This follows from the compactness of $ X $, which guarantees that any o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ (S : AlgebraicGeometry.Scheme) (𝒰 : CategoryTheory.PreZeroHypercover S),\\n  S.quasiCompactCover 𝒰 ↔ AlgebraicGeometry.QuasiCompactCover 𝒰\", \"doc\": \"For a scheme $ S $ and a pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, the quasi-compact cover property defined by $ S $ is equivalent to the general quasi-compact cover predicate applied to $ \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (CategoryTheory.PreZeroHypercover.singleton f)\", \"doc\": \"A singleton pre-zero hypercover of a scheme $ S $, constructed from a surjective and quasi-compact morphism $ f: X \\to S $, satisfies the quasi-compactness predicate.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite surjective scheme cover of a Noetherian algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"(f : X ⟶ Y) [Surjective f] : Function.Surjective f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.Surjective f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map on topological spaces is surjective, then $ f $ is a surjective morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.mkOfCovers\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    (J : Type u_1) →\\n      (obj : J → AlgebraicGeometry.Scheme) →\\n        (map : (j : J) → obj j ⟶ X) →\\n          (∀ (x : ↥X), ∃ j y, (CategoryTheory.ConcreteCategory.hom (map j).base) y = x) →\\n      \", \"doc\": \"Given a scheme $X$, a morphism property $P$, an index type $J$, a family of schemes $Y_j$ indexed by $J$, and morphisms $f_j: Y_j \\to X$ that are jointly surjective (their images cover $X$) and satisfy\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"(S : AlgebraicGeometry.Scheme) →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    [P.IsStableUnderBaseChange] →\\n      [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X : AlgebraicGeometry.Scheme} →\\n          [X.Over S] → AlgebraicGeometry.Scheme.Cover (Alg\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, the cover of $ X $ is defined by the precoverag\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X : Scheme.{u}} {ι : Type v} [Small.{u} ι] {Y : ι → Scheme.{u}} {f : ∀ i, Y i ⟶ X}\\n  (H : ⋃ i, Set.range (f i) = Set.univ) : Surjective (Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$, an index type $\\\\iota$, and a family of schemes $Y_i$ with morphisms $f_i : Y_i \\\\to X$, if the union of the images of the $f_i$ covers the entire underlying topological space of $X$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.covers\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"[JointlySurjective K] (𝒰 : X.Cover K) (x : X) : x ∈ Set.range (𝒰.f (𝒰.idx x))\", \"doc\": \"For any scheme $X$ equipped with a jointly surjective precoverage $K$ and any cover $\\\\mathcal{U}$ of $X$ defined by $K$, every point $x \\\\in X$ lies in the image of the morphism $\\\\mathcal{U}.f_i$ corre\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separated-space-dimension-one-scheme",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD.",
+   "via": [
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-space-finite-scheme-cover",
+  "worker": "stage1",
+  "summary": "Split Tag 09YC(1) along its integral-cover, finite-approximation and schematic-stage proof. Three smaller general algebraic-space lemmas are stated only, with real Mathlib searches. Reused existing atlas, fibre-product, Noetherian and scheme closed-immersion statements; proved surjectivity from point classes and separatedness by the explicit diagonal factorization. No statement change. Repair of returned head 87445a22aca: rebased via deliver.py against the current DAG, re-read the current cited statements, made absolute quasi-separatedness explicit in the three new inputs, and wrote out passage from the slice limit over X to the limit over S before schematic-stage descent. Updated the atlas source to the exact qc scheme-atlas criterion, Tag 03E4. Renewed repair: the current live item remains unsplit; re-read every current citation, including the newly reviewed fibre-product lemma, and specify explicitly the X-morphism and S-morphism limit universal properties in the two supporting statements. Repair of returned head 11fb57c5791 on 2026-10-23: compared the retained delivery with the still-unsplit live item, reread all current cited statements, and expanded the elementary uniqueness argument for the S-limit and the finite-subcover argument in step 5; the statement and three supporting lemma statements are retained.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route, via the retained full ancestry, needs the finite scheme cover in Tag 0ADD. Steps 1-3 realize Tag 09YC(1); steps 4-6 verify the Noetherian separated source used by that route. The ancestor command returns None in the current imported DAG; retained that existing value and the complete inherited via list.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic qc atlas criterion, needed to transfer quasi-compactness through a finite scheme cover; the unit has no competing atlas result."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and base change of etale covering maps, for the qc atlas argument; does not replace any unit step."
+   },
+   {
+    "node": "lem-trf-etale-local-noetherian-descent",
+    "why": "Generic etale descent of local Noetherianness (Stacks 034C), needed to pass from the algebraic-space local Noetherianness of the scheme U given by the cotangent lemma to local Noetherianness of U as a scheme; the unit has no such descent result. Added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-local-noetherian-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-4d6f3c8cb",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-4d6f3c8cb (reviewer sub-agent of L); spot-checked: This is the 4th delivery. The item is still unsplit in clones/live. All three earlier heads were FIXed and then lost at landing. The three new nodes are byte-identical to 11fb57c5. In the item, the statement is unchanged. Step 2 adds a uniqueness sentence for the limit over S, and step 5 writes out the finite-subcover argument; both are correct. The two earlier fixes are missing a third time. (1) B5: the 09YB node needs absolute quasi-separatedness, and the item only gives it over K. Step 1 regains the sentence: Δ_{X/Z} is Δ_{X/K} followed by the base change of the closed immersion Spec K → Spec(K⊗_Z K). (2) C4/E1: the cotangent lemma gives local Noetherianness of U only in the space sense, an étale cover by locally Noetherian schemes. Step 4 again cites lem-trf-etale-local-noetherian-descent (Stacks 034C) to make the scheme U locally Noetherian. It is added to step-4 uses, proof_deps and tool_uses; its 71-node closure does not contain the item, so there is no cycle. The fix is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-noetherian-space-finite-scheme-cover.json and keeps the worker's new step-2 and step-5 texts. Sources re-read: spaces-limits 084R (l.1033), 07SR (l.1218), 09YA (l.2722) and 09YC (l.3569) with its proof, and decent-spaces 09YB (l.1807). The new nodes state 09YB(1), 09YA (with the affine transitions and qcqs stages its construction gives) and 07SR under 084R, all true. None duplicates an existing node: lem-weil-pbc-integral-morphism-limit-of-finite (09YZ) covers schemes only. None restates the item. Steps 3, 5 and 6 are correct. Batch-5 check: def-trf-algebraic-space, def-a1-space-point-topology, lem-a1-space-etale-open-image, lem-trf-space-fibre-products-etale-covers and the re-added lem-trf-etale-local-noetherian-descent are all generic algebraic-space foundations (025Y, 03BU/03BX/03E4, 02X2/041F, 034C). Their closures contain only space, fppf-descent and quotient foundations. They are neither trace-formula nor Poincaré-duality content, so they are accepted. No SGA is used. Maintainer note: these fixes have been lost three times, and promotion to the live DAG is the blocker.; 1 file(s) fixed by the reviewer"
+ }
+}

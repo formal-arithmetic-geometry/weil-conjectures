@@ -5,9 +5,13 @@ Authors: SHEAF group Q6
 -/
 module
 
-public import Sheaf.SixFunctors.IntegralOpenReductionComparison
+public import Sheaf.SixFunctors.IntegralOpenReductionDefinitions
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Sheaf.Paper.OpenRestrictionAugmentedDescent
+import Sheaf.Paper.OpenRestrictionCounitOnGoodComplexes
 
 /-! # Canonical open restriction on augmented quotient models
 
@@ -33,6 +37,59 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (o : Operations l E j)
   (SU : CoefficientDerivedSystemCalculus l E U)
   (SX : CoefficientDerivedSystemCalculus l E X)
+
+section
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local irreducible] HasDerivedCategory.standard
+
+private theorem eq_of_good_complexes
+    {F G : DerivedCategory (scalarReductionSource l E X) ⥤
+      coefficientSequenceDerived l E U} (a b : F ⟶ G)
+    (h : ∀ (Q : CochainComplex (scalarReductionSource l E X) ℤ),
+      integralOperationsGoodComplex l E X Q →
+        a.app (DerivedCategory.Q.obj Q) = b.app (DerivedCategory.Q.obj Q)) : a = b := by
+  classical
+  ext M
+  let Q₀ := DerivedCategory.Q.objPreimage M
+  obtain ⟨Q, q, hQ, hflat, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients Q₀
+  let : IsIso (DerivedCategory.Q.map q) :=
+    Localization.inverts DerivedCategory.Q (HomologicalComplex.quasiIso _ _) q hq
+  let e : DerivedCategory.Q.obj Q ≅ M :=
+    asIso (DerivedCategory.Q.map q) ≪≫ DerivedCategory.Q.objObjPreimageIso M
+  apply (cancel_epi (F.map e.hom)).1
+  have hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite
+      (J := ProEt.topology X)
+      (R := completedIntegralCommRingSheafUnrestricted l E X) (Q.X i) := fun i ↦
+    (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso.{t+1, t, max u (t+1)}
+        (completedIntegralCommRingSheafUnrestricted l E X) (Q.X i)).symm (hflat i)
+  rw [a.naturality, b.naturality, h Q ⟨hQ, hf⟩]
+
+private theorem eq_mate_of_counit_on_good_complexes
+    (r : shriek l E j o ⋙ SX.reduction ≅ SU.reduction ⋙ J l E j o)
+    (s : star l E j o ⋙ SU.reduction ⟶ SX.reduction ⋙ P l E j o)
+    (h : ∀ (Q : CochainComplex (scalarReductionSource l E X) ℤ),
+      integralOperationsGoodComplex l E X Q →
+        (J l E j o).map (s.app (DerivedCategory.Q.obj Q)) ≫
+          (systemAdjunction l E j o).counit.app
+            (SX.reduction.obj (DerivedCategory.Q.obj Q)) =
+        r.inv.app ((star l E j o).obj (DerivedCategory.Q.obj Q)) ≫
+          SX.reduction.map ((openAdjunction l E j o).counit.app
+            (DerivedCategory.Q.obj Q))) :
+    s = (mateEquiv (openAdjunction l E j o) (systemAdjunction l E j o)
+      (TwoSquare.mk _ _ _ _ r.inv)).natTrans := by
+  apply eq_of_good_complexes l E
+  intro Q hQ
+  apply ((systemAdjunction l E j o).homEquiv _ _).symm.injective
+  change (J l E j o).map _ ≫ (systemAdjunction l E j o).counit.app _ =
+    (J l E j o).map _ ≫ (systemAdjunction l E j o).counit.app _
+  exact (h Q hQ).trans
+    (mateEquiv_counit (openAdjunction l E j o) (systemAdjunction l E j o)
+      (TwoSquare.mk _ _ _ _ r.inv) (DerivedCategory.Q.obj Q)).symm
+
+end
 
 /-- The open-adjunction mate of the inverse extension comparison is invertible and
 has one simultaneous augmented restriction model.
@@ -143,6 +200,10 @@ theorem canonicalOpenRestrictionModel
       ((tensor.ordinary n).inv.app ((restriction l E j o).obj (Q.X i))) ≫
     (finiteRestriction l E j o n).map
       ((scalarReductionExtension l E X n).map
-        ((ordinaryAdjunction l E j o).counit.app (Q.X i)))))) := by sorry
+        ((ordinaryAdjunction l E j o).counit.app (Q.X i)))))) := by
+  obtain ⟨s, hs⟩ := openRestrictionAugmentedDescent l E j o SU SX tensor
+  refine ⟨s, ?_, hs⟩
+  apply eq_mate_of_counit_on_good_complexes l E j o SU SX r s.hom
+  exact openRestrictionCounitOnGoodComplexes l E j o SU SX r tensor hr s.hom hs
 
 end WeilConjectures.CanonicalOpenRestriction

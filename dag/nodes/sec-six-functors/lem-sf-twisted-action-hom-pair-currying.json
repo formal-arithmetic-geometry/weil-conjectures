@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-twisted-action-hom-pair-currying",
+ "kind": "statement",
+ "title": "Invertible conjugate Hom action and equivariant currying",
+ "statement": "Let $(C,J)$ be a small site, $s:C\\simeq C$ with continuous inverse, $R$ a sheaf of commutative rings, and $a:(s^{-1})^*R\\simeq R$. Let $P$ be a RestrictionPresentation [def-sf-twisted-action-presentation-data] and let $T$ be TensorComparisons [lem-sf-twisted-action-tensor-comparisons]. Write $F=\\sigma$, $b$ for T.sigmaTensor, and $\\mathrm{ev}$ for evaluation from the tensor-Hom adjunction [def-pur-sheaf-hom, def-pur-sheaf-tensor-product]. For fixed pairs $M,N$ with invertible structure maps $\\theta_M:FM\\to M$ and $\\theta_N:FN\\to N$, put $H=\\mathcal Hom_R(M,N)$ and $\\gamma=\\operatorname{curry}(b_{M,H}^{-1}F(\\mathrm{ev}_{M,N})):FH\\to\\mathcal Hom_R(FM,FN)$. Define $h=\\gamma\\,\\mathcal Hom_R(\\theta_M^{-1},\\theta_N):FH\\to H$ in diagrammatic order. Then $h$ is invertible. Moreover, for every fixed pair $Q$ and $g:Q\\to H$, writing $c=(1_M\\otimes g)\\mathrm{ev}_{M,N}$, the equality $F(g)h=\\theta_Qg$ holds if and only if $F(c)\\theta_N=b_{M,Q}(\\theta_M\\otimes\\theta_Q)c$. This statement only concerns base-site modules and their fixed pairs; it does not assert the restriction Hom comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-internal-hom-adjoint-tensor; formal conjugate-action calculation of steps 11--12 of the twisted action-site construction, written by D4."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-tensor-comparisons",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved canonical Hom comparison for the translation autoequivalence. It supplies exactly invertibility of the transpose of inverse sigmaTensor followed by translated evaluation.",
+   "uses": [
+    "lem-sf-twisted-action-translation-hom-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The map Hom(theta_M inverse,theta_N) has inverse Hom(theta_M,theta_N inverse), by bifunctoriality. Thus their composite h with the preceding transpose is invertible. Evaluation naturality shows that evaluating F(g)h after the source action equals the inverse tensor comparison followed by F of the untranspose of g, then theta_N. Evaluation of theta_Q g after the source action is exactly the diagonal-action expression. Applying these identities proves one implication; canceling the invertible source action and the tensor comparison, and using injectivity of the tensor-Hom adjunction, proves the converse. No nonzero or nonempty hypothesis enters.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-twisted-action-tensor-comparisons",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-twisted-action-translation-hom-comparison",
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-tensor-comparisons",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-internal-hom-adjoint-tensor; formal conjugate-action calculation of steps 11--12 of the twisted action-site construction, written by D4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Currying in a monoidal closed category commutes with an invertible action of a tensor autoequivalence, with conjugate action on internal Hom",
+   "results": "MonoidalClosed.curry, curryHomEquiv, ofEquiv_curry_def and functor-category Hom equivalences. These provide ordinary adjunction operations but not the displayed fixed-pair equation for the normalized tensor data.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor from equivariant objects of monoidal autoequivalence preserves internal Hom",
+   "results": "Action forgetful monoidal comparisons, Rep.ihom and functor-category closed structures. None has the twisted sigma action and the TensorComparisons interface.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*curr|curr.*equivariant|Hom fixed pair|Hom.*conjugate action",
+   "results": "No existing node states this fixed-pair currying criterion. The parent TwistedActionHomEvaluationComparisons has a private translation-isomorphism proof, and TwistedActionClosedComparisons has private evaluation identities. Their proof methods are reused without importing these consumers. Mathlib Groupoid closed functor categories require a different untwisted functor-category presentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionRestrictionHomComparison",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Substep: Original closed-comparisons proof steps 3--4 and evaluation portion of step 5 (original action-site steps 11--13); sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor. Restriction-only substep: invertibility of the transpose of restricted evaluation; translation preservation and both evaluation equations are proved in the parent.",
+   "via": [
+    "lem-sf-twisted-action-restriction-hom-comparison-iso",
+    "lem-sf-twisted-action-hom-evaluation-comparisons",
+    "lem-sf-twisted-action-closed-comparisons",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionHomPairCurrying",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionHomPairCurrying.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.homPair_currying",
+  "statement": "theorem homPair_currying (P : RestrictionPresentation J s R a)\n    (T : TensorComparisons J s R a P) (M N : Pairs (sigma J s R a)) :\n    let h :=\n      (SheafOfModules.tensorHomEquiv (R := R) _ _ _\n        ((T.sigmaTensor M.obj.a\n          (SheafOfModules.homObj (R := R) M.obj.a N.obj.a)).inv ≫\n            (sigma J s R a).map (evaluationMap M.obj.a N.obj.a))) ≫\n          SheafOfModules.homObjMap (R := R) (pairIso M).inv (pairIso N).hom\n    IsIso h ∧ ∀ (Q : Pairs (sigma J s R a))\n      (g : Q.obj.a ⟶ SheafOfModules.homObj (R := R) M.obj.a N.obj.a),\n      (sigma J s R a).map g ≫ h = Q.obj.str ≫ g ↔\n        (sigma J s R a).map (tensorMap (𝟙 M.obj.a) g ≫\n            evaluationMap M.obj.a N.obj.a) ≫ N.obj.str =\n          (T.sigmaTensor M.obj.a Q.obj.a).hom ≫ tensorMap M.obj.str Q.obj.str ≫\n            tensorMap (𝟙 M.obj.a) g ≫ evaluationMap M.obj.a N.obj.a",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094343-L-217340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094343-L-217340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

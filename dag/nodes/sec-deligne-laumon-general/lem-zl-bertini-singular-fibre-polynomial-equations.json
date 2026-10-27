@@ -1,0 +1,137 @@
+{
+ "id": "lem-zl-bertini-singular-fibre-polynomial-equations",
+ "kind": "statement",
+ "title": "Polynomial value and differential equations on the singular fibre",
+ "statement": "Let k be a field, f:Y -> Spec k smooth, L invertible, and s_i any finite family of sections, indexed by a type I in the scheme universe. Use the universal family and its reduced singular scheme [def-zl-bertini-universal-family]. Fix an open U in Y and z in U, K=kappa_U(z), an open W containing U.ι(z), and any free generator e of L on W [def-sc-local-free-generator]. Let a_i be the actual coefficient of s_i|W in e. There are a commutative K-algebra A, an isomorphism of the singular fibre over z with Spec A, and a surjective K-algebra map q:K[x_i] -> A. For every K-linear functional phi on K plus the actual relative cotangent fibre at z, q(sum_i phi(a_i(z),da_i(z))*x_i)=0, using the jets defined in [lem-zl-bertini-local-first-jets]. The isomorphism followed by the coefficient Spec map with variables q(x_i) and scalars k -> K -> A equals the original coefficient projection of this singular fibre. Fibres are scheme-theoretic [def-pc-scheme-fibre]. There is no generation, immersion, affine-open, or jet-rank hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini, final paragraph; supplemented by Morphisms Tag 02G1 and Algebra Tag 00T7"
+ },
+ "stmt_deps": [
+  "def-zl-bertini-universal-family",
+  "def-sc-local-free-generator",
+  "def-sc-invertible-module",
+  "def-pc-scheme-fibre",
+  "lem-zl-bertini-local-first-jets"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical polynomial coordinate map of the actual singular fibre. It is a closed immersion, hence its source T is affine. Take A=Gamma(T,O_T), the specified K-algebra structure rho composed with C, j=T.isoSpec, and q the actual rho as an algebra homomorphism. Its surjectivity is already proved.",
+   "uses": [
+    "lem-zl-bertini-singular-fibre-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the first-jet tensor vanishing theorem. For any K-linear functional phi, apply TensorProduct.map(id,phi) followed by TensorProduct.rid. Its value on q(x_i) tensor jet_i is phi(jet_i) times q(x_i). Map the finite sum and use q(C a)=algebraMap a to obtain the asserted polynomial equation.",
+   "uses": [
+    "lem-zl-bertini-singular-fibre-jet-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite MvPolynomial.map as eval2Hom and use MvPolynomial.comp_eval₂Hom. The resulting scalar homomorphism is definitionally the chosen K-algebra map composed with k -> K, and the variable images are definitionally q(X i). Naturality of toSpecGamma reconstructs the canonical coordinate map from rho. Its first projection identity is precisely the original coefficient morphism, proving the displayed equality.",
+   "uses": [
+    "lem-zl-bertini-singular-fibre-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-bertini-singular-fibre-coordinates",
+  "lem-zl-bertini-singular-fibre-jet-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6 universal-family diagram and final paragraph; affine construction and tensor contraction proved in Lean by K2; local vanishing isolated as lem-zl-bertini-singular-fibre-jet-tensor; polynomial composition calculation shortened using Mathlib by D2, 2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The fibre of the reduced nonsmooth locus of a universal hypersurface is a closed subscheme of coefficient affine space and its coordinate ring annihilates the value and differential equations",
+   "results": "instIsAffineFiberOfIsAffineHom; Algebra.smoothLocus and its localization theorems; Algebra.unramifiedLocus_eq_compl_support; isReduced_of_isReduced_stalk",
+   "date": "2026-10-26",
+   "verdict": "Only general differential and affine-fibre infrastructure; no theorem about the specified local section coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective immersion given by generating sections has surjective first jet evaluation and singular universal hyperplanes vanish under the value and differential equations",
+   "results": "Proj.fromOfGlobalSections; Proj.instIsOpenImmersionAwayι; Proj; Proj.pullbackAwayιIso; Proj.valuativeCriterion_existence; Proj.instIsSeparated; Proj.fromOfGlobalSections_toSpecZero",
+   "date": "2026-10-26",
+   "verdict": "Projective-space infrastructure only; no local first-jet or singular-fibre equation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"ι\"",
+   "results": "SymmetricAlgebra.lift_ι_apply; SymmetricAlgebra.equivMvPolynomial_ι_apply; SymmetricAlgebra.equivMvPolynomial_symm_X",
+   "date": "2026-10-26",
+   "verdict": "Useful algebraic infrastructure; does not state the geometric conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "homOfGeneratingSections|relativeDifferentialsStalkFibre|bertini|singular.*[Ff]ibre|firstJet (Mathlib/AlgebraicGeometry and Mathlib/LinearAlgebra)",
+   "results": "No matches. Library search found immersiveSystem_source_first_jets, restricted to closed points over an algebraically closed field, and the current unsolved parent. Blueprint search for first jet and singular fibre returned zero matching blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of this arbitrary-residue-field statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniSingularFibreEquations",
+  "date": "2026-10-26",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Smooth Bertini input, Tag 0FD6: Polynomial value and differential equations on the singular fibre",
+   "via": [
+    "lem-zl-bertini-singular-fibre-equations",
+    "lem-zl-bertini-singular-first-order-model",
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-zl-bertini-smooth-member"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniSingularFibrePolynomialEquations",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniSingularFibrePolynomialEquations.lean",
+  "declaration": "AlgebraicGeometry.bertini_singular_fibre_polynomial_equations",
+  "declarations": [
+   "AlgebraicGeometry.bertini_singular_fibre_polynomial_equations"
+  ],
+  "statement": "theorem bertini_singular_fibre_polynomial_equations\n    {k : Type u} [Field k] {Y : Scheme.{u}}\n    (f : Y ⟶ Spec (.of k)) [Smooth f]\n    (L : Y.Modules) [L.IsInvertible]\n    {I : Type u} [Fintype I] (s : I → Γ(L, ⊤))\n    (U : Y.Opens) (z : U) (W : Y.Opens) (hz : U.ι z ∈ W)\n    (e : Γ(L, W)) (he : Scheme.Modules.IsFreeGenerator e) :\n    ∃ (A : Type u) (_ : CommRing A) (_ : Algebra ((U : Scheme).residueField z) A),\n      ∃ (j : (bertiniSingularToSource f L s ∣_ U).fiber z ≅ Spec (.of A))\n        (q : MvPolynomial I ((U : Scheme).residueField z) →ₐ[\n          (U : Scheme).residueField z] A),\n        Function.Surjective q ∧\n        (∀ φ : Module.Dual ((U : Scheme).residueField z)\n            ((U : Scheme).residueField z × bertiniCotangentFibre f U z),\n          q (∑ i, MvPolynomial.C (φ (bertiniLocalFirstJet f U z W hz\n            (he.coeff (L.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op (s i))))) *\n            MvPolynomial.X i) = 0) ∧\n        j.hom ≫ Spec.map (CommRingCat.ofHom (MvPolynomial.eval₂Hom\n          ((algebraMap ((U : Scheme).residueField z) A).comp\n            ((U.ι ≫ f).residueFieldAlgebraMap z))\n          (fun i ↦ q (MvPolynomial.X i)))) =\n            (bertiniSingularToSource f L s ∣_ U).fiberι z ≫\n              ((bertiniSingularToSource f L s) ⁻¹ᵁ U).ι ≫\n              (bertiniSingularIdeal f L s).subschemeι ≫ bertiniUniversalProjection f L s",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261026T092039-L-3397452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T222609-L-672621",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

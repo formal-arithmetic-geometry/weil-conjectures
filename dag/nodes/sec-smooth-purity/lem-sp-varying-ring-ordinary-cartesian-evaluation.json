@@ -1,0 +1,139 @@
+{
+ "id": "lem-sp-varying-ring-ordinary-cartesian-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs: ordinary realization normalization, steps 3 of lem-sp-varying-ring-ordinary-clopen-evaluation.",
+   "via": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary realization of cartesian open base change",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let R_n be arbitrary commutative rings with transitions, n a natural number, and a:V→S, b:V→W, i:S→T, p:W→T a cartesian commutative square, with b and i open immersions. For the explicit ordinary realization and comparisons of [lem-sp-varying-ring-ordinary-evaluation-comparisons], realization carries the specified ordinary cartesian open comparison beta to the strict-tower derived beta: E_W(beta_N); j_b(a^*N); J_b(g_a,N) equals g_p,(i_!N); G_p(j_i,N); beta_(E_S N). No properness, clopen section factor, or pasting identity is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE for open adjunctions, 0F7B for the intrinsic clopen construction. This normalization is an agent-formulated consequence."
+ },
+ "stmt_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-cbc-strict-tower-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Prove the square calculation for pullback comparison families satisfying the existing OrdinaryPullComposition predicate, then instantiate it with ordinaryComparisonNormalization. Combine those component morphism equations with equality elimination along a composite-map equality and the explicit moduleSquareG and StrictTower.squareG hom formulas. A generic morphism compositor-cube calculation, followed by inverse-isomorphism cancellation, yields ordinaryPull_square_inv. Keep the comparison families abstract and every compositor formula argument explicit to avoid large kernel reductions.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-comparison-normalization",
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-cbc-strict-tower-proper-open-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both inverse cartesian beta transformations are inverse mates of their squareG inverse by their defining Hom transposes. Apply mateEquiv_vcomp and naturality under the outside pullback comparisons. The one-open normalization ordinaryOpen_mate identifies the other two mates; the preceding square equation identifies the pasted right-adjoint squares. Injectivity of mateEquiv gives ordinaryBeta_inv. Cancel the invertible beta and realization comparisons to obtain precisely the original forward OrdinarySquareComparison equation.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-open-unit",
+    "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-cbc-strict-tower-proper-open-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-varying-ring-ordinary-comparison-normalization",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "lem-sp-varying-ring-ordinary-open-unit",
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "A4: Construction 4.1 normalization followed by Mathlib mateEquiv_vcomp; explicit square compositor coherence and inverse-isomorphism cancellation, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Component evaluation constant tower degree zero embedding preserves normalized adjunction mates and open base change clopen projection",
+   "results": "msearch.py returned generic constantPresheafAdj, constantSheafAdj and evaluation preserves zero morphisms; none concerns the normalized varying-ring ordinary realization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"; \"mapDerivedCategorySingleFunctor\"",
+   "results": "Generic mateEquiv_hcomp and exact-single functor coherence. Inspected Mathlib CategoryTheory/Adjunction/Mates and the adopted source LeftDerivedFunctor/SingleFunctor. None states the scheme/coefficient realization normalization.",
+   "date": "2026-10-27",
+   "verdict": "generic tools, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSingle.*comp|ordinary.*[Cc]artesian|ordinary.*[Ss]ectionEvaluation|single.*mate",
+   "results": "msearch.py found no Mathlib matches. Local rg found VaryingRingOpenBaseChangeEvaluation and VaryingRingClopenSectionEvaluation, whose conclusions concern derived coefficient evaluation to a single module category. They do not state the present ordinary-system to derived-constant-tower comparisons. The former imports the original item only for its already proved ordinaryModuleEvalG_comp.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate ordinary realization normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryCartesianEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOrdinaryCartesianEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryCartesianEvaluation",
+  "statement": "theorem ordinaryCartesianEvaluation (n : ℕ) {V W S T : Scheme.{u}}\n    (a : V ⟶ S) (b : V ⟶ W) (i : S ⟶ T) (p : W ⟶ T)\n    [IsOpenImmersion b] [IsOpenImmersion i]\n    (h : a ≫ i = b ≫ p) (hsq : IsPullback a b i p) :\n    OrdinarySquareComparison\n      (EA := ordinaryRealization R φ n V) (EB := ordinaryRealization R φ n W)\n      (EC := ordinaryRealization R φ n S) (ED := ordinaryRealization R φ n T)\n      (R₀ := pull R φ a) (P₀ := pull R φ p)\n      (K := extension R φ b) (I := extension R φ i)\n      (r := StrictTower.G (R n) a) (p := StrictTower.G (R n) p)\n      (k := StrictTower.J (R n) b) (i := StrictTower.J (R n) i)\n      (ordinaryPullComparison R φ n V S a) (ordinaryPullComparison R φ n W T p)\n      (ordinaryOpenComparison R φ n V W b) (ordinaryOpenComparison R φ n S T i)\n      (moduleBeta R φ a b i p h hsq).hom\n      (StrictTower.beta (R n) a b i p h hsq).hom",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-77a07",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T054600-L-966087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T094330-L-214849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,11 +9,8 @@ public import Sheaf.Paper.CoefficientTwistsDetailed
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Paper.DerivedCompleteOnSlices
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.CompletedLineTensorCoherence
+import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 
 /-! # Exact line tensor preserves the canonical augmented reduction triangle
 
@@ -67,6 +64,23 @@ theorem integralLineTensor_complete
       ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
         (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E S) L).mapDerivedCategory.obj
           K) := by
-  sorry
+  obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
+  have : Fact p.Prime := ⟨hprime⟩
+  let D : FiniteFieldDatum.{0} :=
+    { p := p
+      a := 1
+      q := p
+      prime := hprime
+      exponent_pos := by decide
+      cardinality_eq := by simp
+      k₀ := ZMod p
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+  have hl : l ≠ D.p := by change l ≠ p; omega
+  have hc : IsDerivedCompleteUnrestricted l E S K :=
+    ⟨D, hl, (sfDerivedComplete_iff_legacy l E S D hl K).mp hK⟩
+  obtain ⟨D', hl', ht⟩ := CompletedLineTensor.complete l E S L 1 K hc
+  apply (sfDerivedComplete_iff_legacy l E S D' hl' _).mpr
+  exact ht
 
 end WeilConjectures

@@ -1,0 +1,195 @@
+{
+ "id": "lem-sfb-open-unit-cover-descent",
+ "kind": "statement",
+ "title": "Derived open units descend along a pro-etale cover",
+ "statement": "Let $X,Y$ be schemes, $U\\subseteq X$ an open subscheme, and $a:Y\\to X$ any morphism. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], with its pulled-back rings $\\Lambda_Z$ [sk-def-sfb-pulled-back-coefficients]. Let $N$ be any internal $\\Lambda_Y$-module [sk-def-sfb-module-objects], and let $\\{b_i:Y_i\\to Y\\}$ be a pro-etale covering [def-weil-pbc-proetale-site]. Put $j:U\\times_XY\\to Y$ and $j_i:U\\times_XY_i\\to Y_i$, formed directly using $b_i\\circ a$. If the specified ordinary unbounded derived open unit [sk-def-sfb-module-derived-pushpull] at $(b_i^*N)[0]$ for $j_i$ is invertible for every $i$, then the specified derived unit at $N[0]$ for $j$ is invertible. No scalar-test hypothesis, affineness or local freeness is imposed. The canonical pullback associator identifies the chart open with the successive base change of $j$. Empty covers are included.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Covering maps are weakly etale. Express internal modules as section-ring module sheaves and identify their pullbacks along these maps with exact slice restriction, preserving the ordinary adjunction units.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  },
+  {
+   "text": "Restrict a K-injective resolution of j^*N[0] to the open over each chart. It remains K-injective by exact extension by zero. For every object V of that chart, both restricted direct-image computations evaluate the resolution on V times_X U. The canonical pullback associator preserves the projections, so the ordinary restriction maps agree as well as their endpoints.",
+   "uses": [
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  },
+  {
+   "text": "The exact/K-flat derived-adjunction comparison preserves the units: the ordinary unit followed by the direct image of the chosen resolution has transpose the identity. Therefore the restricted specified unit is conjugate by canonical isomorphisms to the specified unit of the directly formed pullback along cover.f i composed with a.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-kflat-derived-adjunction-transport-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  },
+  {
+   "text": "The hypothesis makes all chart units invertible. The preceding comparison makes the restrictions of the original unit invertible. Apply joint conservativity of exact derived covering restrictions, which detects all cohomology sheaves, and transport back. Empty covers are included.",
+   "uses": [
+    "lem-zl-condensed-cover-restriction-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-kflat-derived-adjunction-transport-shifts",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived open adjunction unit for a locally free module is detected by scalar restriction on weakly contractible pro etale objects",
+   "results": "8 hits, including Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction and PresheafOfModules.freeAdjunctionUnit. These underived free-module adjunctions do not detect the actual unbounded derived open unit.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules on a ringed site derived restriction along an object commutes with open direct image and preserves its adjunction unit",
+   "results": "8 hits including SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj and AlgebraicGeometry.Scheme.Modules.restrictAdjunction. The section formula is relevant underived input; no comparison with the condensed K-flat/K-injective adjunction or cover criterion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"Adjunction.unit\"",
+   "results": "CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful only. Open restriction is not generally fully faithful.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*[Uu]nit|[Uu]nit.*regular|[Uu]nit.*finiteFree|finiteFree.*[Uu]nit; Open.*BaseChange and OpenUnit module paths",
+   "results": "Read ProEtaleOpenUnitEvaluation (finite constant coefficients, underived), ProEtaleIntrinsicOpenUnit (j_! unit, wrong adjunction), SecSmoothPurity.OpenBaseChangeDerivedUnit (finite coefficients and j_!), DerivedBaseChangeOpenUnit (Zariski O-modules). None gives the required arbitrary condensed-ring Rj_* unit. CondensedCoverRestrictionConservative supplies the general cover conservativity input.",
+   "date": "2026-10-26",
+   "verdict": "no existing theorem with the required signature"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseOpenUnitTestDescent",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Rank-one scalar calculation and covering descent in steps 1--8 of the scalar-to-lisse sublemma, serving direct-images paragraph (3).",
+   "via": [
+    "lem-sfb-lisse-open-unit-test-descent",
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenUnitCoverDescent",
+  "file": "lean/Sheaf/Paper/OpenUnitCoverDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_open_unit_of_cover",
+  "statement": "theorem isIso_open_unit_of_cover\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (U : X.Opens)\n    (Y : Scheme.{u}) (a : Y ⟶ X)\n    (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))\n    (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage Y)\n    (hlocal : ∀ i : 𝒰.I₀,\n      IsIso ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ\n        (pullback.snd U.ι (𝒰.f i ≫ a))).unit.app\n          ((DerivedCategory.singleFunctor _ 0).obj\n            ((CondensedRing.upperStar Λ (𝒰.f i)).obj N)))) :\n    IsIso ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ\n      (pullback.snd U.ι a)).unit.app ((DerivedCategory.singleFunctor _ 0).obj N))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-open-unit-cover-descent",
+  "worker": "B3 stage 3",
+  "summary": "A genuine intermediate statement extracted from the original scalar-to-lisse descent proof; its exact signature compiles and its full argument is recorded in the module docstring.",
+  "blueprint": "Direct-images paragraph (3): descent of the unit along a trivializing cover",
+  "tool_uses": [
+   {
+    "node": "lem-zl-condensed-cover-restriction-conservative",
+    "why": "Generic joint conservativity of derived covering restrictions. It supplies descent, without bypassing any statement or step of the six-functor stability unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T080958-L-1747205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T080958-L-1747205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

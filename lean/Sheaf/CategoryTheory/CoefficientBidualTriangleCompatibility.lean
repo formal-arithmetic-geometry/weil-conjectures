@@ -6,6 +6,7 @@ Authors: SHEAF group NC
 module
 
 public import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+public import Sheaf.CategoryTheory.RingedSiteDualityMaps
 public import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Mathlib.CategoryTheory.Triangulated.Subcategory

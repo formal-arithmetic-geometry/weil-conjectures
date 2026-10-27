@@ -1,0 +1,412 @@
+{
+ "id": "lem-sf-full-subcategory-universe-coproduct-lift",
+ "kind": "statement",
+ "title": "Coproduct inheritance and canonical restriction across indexing universes",
+ "statement": "Fix indexing universes $\\mathcal U\\subseteq\\mathcal V$ [def-weil-size-convention]. Let $\\mathcal C,\\mathcal D$ be categories, and let $P,Q$ be isomorphism-invariant properties of their objects. Write $\\mathcal C_P,\\mathcal D_Q$ for the full subcategories, and $i_P,i_Q$ for their inclusions. Assume that $P$ and $Q$ are closed under every existing ambient coproduct indexed by a type in $\\mathcal V$: whenever all objects of such a family have the property and its coproduct exists, its coproduct object has the property. Coproducts mean colimits of discrete diagrams [def-weil-pbc-category-colimit]. For a type $I$ in $\\mathcal U$, $\\operatorname{ULift}_{\\mathcal V}I$ means a copy of $I$ in $\\mathcal V$, with the canonical bijection to $I$.\n\nThen $P$ and $Q$ are closed under every existing $I$-indexed ambient coproduct, with the same coprojections under reindexing by $I\\simeq\\operatorname{ULift}_{\\mathcal V}I$. For every $I$-indexed diagram in either full subcategory whose ambient coproduct exists, that inclusion creates its coproduct and preserves and reflects its colimit cocones. In particular, if the ambient categories have all $\\mathcal U$-indexed coproducts, so do the two full subcategories.\n\nLet $F:\\mathcal C\\to\\mathcal D$ preserve the $\\mathcal U$-indexed coproducts and suppose $P(C)$ implies $Q(FC)$. Its canonical restriction $\\bar F:\\mathcal C_P\\to\\mathcal D_Q$, sending an object to the same image $FC$ and a morphism to $F$ of that morphism, preserves all these coproducts. Under $i_Q\\bar F=Fi_P$, its comparison map is the ambient comparison for $F$ using the inherited coprojections. If the ambient categories are triangulated and $P,Q$ are full replete triangulated subcategories [def-weil-triangulated-category, def-weil-triangulated-subcategory], and $F$ is exact, this canonical restriction is exact for the inherited triangulations. The empty index type is included. No generator-to-localizing-closure implication is assumed or concluded.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+  "place": "Formal properties and Localizing categories paragraphs: returned steps 2 and 5, ULift/Discrete reindexing, inherited coproducts, and preservation and reflection for the canonical lift."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof": [
+  {
+   "text": "Put $J=\\operatorname{ULift}_{\\mathcal V}I$, with inverse bijections $e:I\\to J$ and $d:J\\to I$. If $(L,(\\iota_i))$ is an ambient coproduct of $(X_i)_{i\\in I}$, it is also a coproduct of $(X_{d(j)})_{j\\in J}$ with legs $\\iota_{d(j)}$: given legs $a_j:X_{d(j)}\\to M$, the unique required arrow is the arrow from $L$ with composites $a_{e(i)}$. The equations $de=1$ and $ed=1$ verify both factorization and uniqueness [def-weil-pbc-category-colimit]. Thus this particular $J$-indexed coproduct exists without assuming all $\\mathcal V$-coproducts exist. The stated closure hypothesis applied to it gives $P(L)$ when all $P(X_i)$ hold. The identical calculation with $Q$ proves its smaller-universe closure, and retains exactly the stated coprojections.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit: universal property, applied to the two inverse indexing bijections; blueprint Formal properties and Localizing categories"
+   }
+  },
+  {
+   "text": "For an $I$-family $X_i$ in $\\mathcal C_P$, let $(L,\\iota_i)$ be any ambient coproduct. Step 1 gives $P(L)$, so $(L,P(L))$ and the same legs form a cocone in the full subcategory. For a cocone to $(M,P(M))$, its unique mediating arrow is the ambient mediating arrow: fullness allows it as a subcategory arrow, and equality of arrows is ambient equality. This proves the subcategory universal property [def-weil-pbc-category-colimit]. It lifts each ambient colimit cocone on this diagram with its actual legs and vertex, hence proves creation in the usual sense of lifting and reflecting colimit cocones (up to the unique colimit isomorphism). The same construction applies to $\\mathcal D_Q$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit; explicit full-subcategory factorization calculation for the blueprint Localizing categories paragraph"
+   }
+  },
+  {
+   "text": "An arbitrary cocone in $\\mathcal C_P$ whose ambient image is colimiting is itself colimiting: restrict the ambient universal property to targets in $\\mathcal C_P$ and use equality of the Hom sets. Conversely, if a subcategory cocone $(N,\\nu_i)$ is colimiting, compare it with the inherited cocone $(L,\\iota_i)$ of step 2. The universal properties give arrows $a:L\\to N$ and $b:N\\to L$ with $a\\iota_i=\\nu_i$ and $b\\nu_i=\\iota_i$; uniqueness gives $ba=1$ and $ab=1$. For any ambient target $M$ and legs $t_i$, its required mediator from $N$ is $h b$, where $h:L\\to M$ is the ambient mediator; uniqueness follows by precomposing with $a$. This proves preservation as well as reflection. Repeat for $Q$. If every ambient $I$-coproduct exists, step 2 supplies every subcategory $I$-coproduct.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit and uniqueness up to unique isomorphism; explicit proof of preservation and reflection"
+   }
+  },
+  {
+   "text": "The condition $P(C)\\Rightarrow Q(FC)$ defines $\\bar F(C,P(C))=(FC,Q(FC))$ and $\\bar F(f)=F(f)$; identities and composition follow from those of $F$. Hence $i_Q\\bar F=Fi_P$ on objects and arrows. Start with any subcategory coproduct cocone on an $I$-family $(X_i)$ whose ambient coproduct exists, as in the statement (for instance when $\\mathcal C$ has all $\\mathcal U$-indexed coproducts). Its image under $i_P$ is colimiting by step 3, and its image under $F$ is colimiting by the assumed preservation. Its image under $\\bar F$ is therefore colimiting by the reflection proved for $i_Q$ in step 3. This proves preservation of these coproducts for every $I$ in $\\mathcal U$ [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "Formal properties: preservation of direct sums; Localizing categories: canonical restriction, using only the objectwise image hypothesis"
+   }
+  },
+  {
+   "text": "Choose the inherited source coproduct $(L,\\iota_i)$ and target coproduct $(M,\\kappa_i)$ of $(FX_i)$. The comparison for $\\bar F$ is the unique arrow $c:M\\to FL$ satisfying $c\\kappa_i=F(\\iota_i)$. Fullness makes this the very same arrow as the ambient comparison for $F$, whose defining equations are identical [def-weil-pbc-category-colimit]. It is an isomorphism because the cocone with vertex $FL$ is colimiting by step 4: the two universal-property arrows are inverse. All arguments in steps 1--5 allow $I=\\varnothing$: the families of equations are empty and the coproduct universal property is exactly initiality, still giving the unique arrows and their uniqueness.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit, including its following paragraph on the empty diagram; comparison-map identification for the blueprint Formal properties paragraph"
+   }
+  },
+  {
+   "text": "Under the additional triangulated hypotheses, apply [lem-weil-pbc-triangulated-functor-restriction] with $\\mathcal S=\\mathcal C_P$ and $\\mathcal S\\prime=\\mathcal D_Q$. Its hypothesis that $F(X)$ belongs to the target subcategory is precisely $P(X)\\Rightarrow Q(FX)$; the full replete subcategories and inherited triangulations are assumed here. The resulting restriction is exactly the functor of step 4 on objects and arrows, with the restricted shift isomorphisms of $F$. It is exact for those inherited triangulations. This uses no assertion about generators or localizing closure.",
+   "uses": [
+    "lem-weil-pbc-triangulated-functor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05QM (definition-triangulated-subcategory), 05QX (lemma-triangulated-subcategory), and 014V (definition-exact-functor-triangulated-categories); existing Mathlib restriction leaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-triangulated-functor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+  "place": "Formal properties and Localizing categories; explicit universal-property details supplied from Stacks Tag 002F and exact restriction from the existing Mathlib leaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A full replete subcategory closed under existing coproducts in a larger universe inherits all smaller coproducts; the inclusion creates and reflects them and a full-subcategory lift preserves them",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.createsColimitsOfShapeFullSubcategoryInclusion",
+     "CategoryTheory.Limits.createsColimitFullSubcategoryInclusionOfClosed",
+     "CategoryTheory.Limits.hasCoproducts_shrink",
+     "CategoryTheory.Limits.hasColimitsOfShape_of_closedUnderColimits",
+     "CategoryTheory.Limits.hasColimit_of_closedUnderColimits",
+     "CategoryTheory.Limits.createsColimitFullSubcategoryInclusion",
+     "CategoryTheory.MorphismProperty.coproducts_of_small",
+     "CategoryTheory.MorphismProperty.coproducts_le"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match as a single declaration or one-line specialization: Mathlib supplies separate equivalence-of-shapes, creation, and reflection lemmas, but not the combined universe-sensitive canonical-restriction statement; component declarations are recorded in report.md"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedUnderColimitsOfShape\", \"Discrete\"",
+   "results": {
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeDiscreteOfIsClosedUnderFiniteCoproductsOfFinite",
+     "CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeDiscretePEmptyOfContainsZeroOfIsClosedUnderIsomorphisms",
+     "CategoryTheory.ObjectProperty.instNonemptyOfIsClosedUnderColimitsOfShapeDiscretePEmptyOfHasInitial",
+     "AlgebraicGeometry.IsZariskiLocalAtSource.isClosedUnderColimitsOfShape_discrete",
+     "CategoryTheory.ObjectProperty.IsGaloisSubcategory.isClosedUnderColimitsOfShape_discrete"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match as a single declaration or one-line specialization: Mathlib supplies separate equivalence-of-shapes, creation, and reflection lemmas, but not the combined universe-sensitive canonical-restriction statement; component declarations are recorded in report.md"
+  },
+  {
+   "tool": "grep",
+   "query": "of_equivalence|createsColimitsOfShapeFullSubcategoryInclusion|preservesColimitsOfShape_of_reflects_of_preserves",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Galois/Examples.lean",
+     "Mathlib/CategoryTheory/Generator/Basic.lean",
+     "Mathlib/CategoryTheory/Generator/Basic.lean",
+     "Mathlib/CategoryTheory/Generator/Basic.lean",
+     "Mathlib/CategoryTheory/Generator/Basic.lean",
+     "Mathlib/CategoryTheory/Generator/Basic.lean",
+     "Mathlib/CategoryTheory/Galois/Basic.lean",
+     "Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match as a single declaration or one-line specialization: Mathlib supplies separate equivalence-of-shapes, creation, and reflection lemmas, but not the combined universe-sensitive canonical-restriction statement; component declarations are recorded in report.md"
+  },
+  {
+   "tool": "grep",
+   "query": "createsColimitsOfShapeFullSubcategoryInclusion|preservesColimitsOfShape_of_reflects_of_preserves",
+   "results": {
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Limits/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Basic.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Basic.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match as a single declaration or one-line specialization: Mathlib supplies separate equivalence-of-shapes, creation, and reflection lemmas, but not the combined universe-sensitive canonical-restriction statement; component declarations are recorded in report.md"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full subcategory closed under existing large universe coproducts inherits smaller indexed coproducts and its canonical functor lift preserves them by reflection",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.hasCoproducts_shrink",
+     "CategoryTheory.Limits.has_smallest_coproducts_of_hasCoproducts",
+     "CategoryTheory.instHasLiftingPropertyMap_1",
+     "CategoryTheory.Limits.reflectsFiniteCoproductsOfReflectsIsomorphisms",
+     "CategoryTheory.Limits.createsLimitFullSubcategoryInclusionOfClosed",
+     "CategoryTheory.Limits.Types.instPreservesLimitsOfSizeUliftFunctor",
+     "CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinset",
+     "CategoryTheory.Limits.createsLimitFullSubcategoryInclusion'"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match as a single declaration or one-line specialization: Mathlib supplies separate equivalence-of-shapes, creation, and reflection lemmas, but not the combined universe-sensitive canonical-restriction statement; component declarations are recorded in report.md"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure under coproducts reindexed by ULift supplies coproducts in a replete full subcategory and preservation by the canonical lift of an ambient coproduct preserving functor",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.hasColimit_of_closedUnderColimits",
+     "CategoryTheory.Limits.createsColimitFullSubcategoryInclusionOfClosed",
+     "CategoryTheory.Limits.hasColimitsOfShape_of_closedUnderColimits",
+     "CategoryTheory.Limits.createsColimitsOfShapeFullSubcategoryInclusion",
+     "CategoryTheory.MorphismProperty.coproducts_eq_self",
+     "CategoryTheory.ObjectProperty.ι_map_top",
+     "CategoryTheory.Limits.hasCoproducts_shrink",
+     "CategoryTheory.MorphismProperty.le_coproducts"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match as a single declaration or one-line specialization: Mathlib supplies separate equivalence-of-shapes, creation, and reflection lemmas, but not the combined universe-sensitive canonical-restriction statement; component declarations are recorded in report.md"
+  },
+  {
+   "tool": "grep",
+   "query": "reflectsColimitsOfShape_of_fullyFaithful|preservesColimitsOfShape_of_reflects_of_preserves|createsColimitFullSubcategoryInclusionOfClosed",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Presentable/Basic.lean",
+     "Mathlib/CategoryTheory/Limits/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/Limits/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/Limits/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Basic.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Basic.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "Component matches only: FullSubcategory.lean:94-113, Preserves/Basic.lean:671 and 806, and Triangulated/Subcategory.lean:742. None by itself or by one-line specialization supplies the combined universe transfer and canonical comparison assertion; explicit elementary assembly recorded in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful functor reflects colimits and detects colimit preservation of a functor composed with it",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.fullyFaithful_reflectsColimits",
+     "CategoryTheory.createsColimitOfFullyFaithfulOfLift'",
+     "CategoryTheory.Limits.reflectsColimit_of_reflectsIsomorphisms",
+     "CategoryTheory.Limits.ReflectsColimits",
+     "CategoryTheory.Limits.ReflectsColimit",
+     "CategoryTheory.Limits.isColimitOfReflects",
+     "CategoryTheory.Limits.IsColimit.ofFaithful",
+     "CategoryTheory.Limits.ReflectsColimit.mk"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "Component matches only: FullSubcategory.lean:94-113, Preserves/Basic.lean:671 and 806, and Triangulated/Subcategory.lean:742. None by itself or by one-line specialization supplies the combined universe transfer and canonical comparison assertion; explicit elementary assembly recorded in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reflectsColimitsOfShape\"",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.ReflectsColimitsOfShape",
+     "CategoryTheory.Limits.reflectsColimitsOfShape_subsingleton",
+     "CategoryTheory.Limits.reflectsColimitsOfShape_of_reflectsColimits",
+     "CategoryTheory.Limits.ReflectsColimitsOfSize.reflectsColimitsOfShape",
+     "CategoryTheory.Limits.reflectsColimit_of_reflectsColimitsOfShape",
+     "CategoryTheory.Limits.ReflectsColimitsOfShape.reflectsColimit",
+     "CategoryTheory.Limits.reflectsColimitsOfShape_of_equiv",
+     "CategoryTheory.Limits.ReflectsColimitsOfShape.mk"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "Component matches only: FullSubcategory.lean:94-113, Preserves/Basic.lean:671 and 806, and Triangulated/Subcategory.lean:742. None by itself or by one-line specialization supplies the combined universe transfer and canonical comparison assertion; explicit elementary assembly recorded in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full subcategory closed under existing coproducts inherits them; canonical restrictions of coproduct preserving exact functors preserve coproducts and triangulated structure",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.essImageDistTriang",
+     "CategoryTheory.Pretriangulated.instHasFiniteCoproducts",
+     "CategoryTheory.Triangulated.Subcategory",
+     "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism",
+     "CategoryTheory.Triangulated.Localization.isTriangulated",
+     "CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₂",
+     "CategoryTheory.Triangulated.Localization.pretriangulated"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "Component matches only: FullSubcategory.lean:94-113, Preserves/Basic.lean:671 and 806, and Triangulated/Subcategory.lean:742. None by itself or by one-line specialization supplies the combined universe transfer and canonical comparison assertion; explicit elementary assembly recorded in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful_reflectsColimits|preservesColimitsOfShape_of_reflects_of_preserves|createsColimitFullSubcategoryInclusionOfClosed|isTriangulated_lift",
+   "results": {
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+     "Mathlib/CategoryTheory/Presentable/Basic.lean",
+     "Mathlib/CategoryTheory/Limits/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/Limits/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/Limits/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Basic.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "Component matches only: FullSubcategory.lean:94-113, Preserves/Basic.lean:671 and 806, and Triangulated/Subcategory.lean:742. None by itself or by one-line specialization supplies the combined universe transfer and canonical comparison assertion; explicit elementary assembly recorded in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindex a coproduct by ULift of its indexing type, create the coproduct in a full replete subcategory closed under that coproduct, and restrict an exact coproduct preserving functor",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.FormalCoproduct.fullyFaithfulIncl",
+     "CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinset",
+     "CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinset_obj_obj",
+     "CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinsetObj_obj",
+     "CategoryTheory.Limits.CreatesFiniteCoproducts",
+     "CategoryTheory.Limits.createsColimitFullSubcategoryInclusionOfClosed",
+     "CategoryTheory.Limits.createsColimitFullSubcategoryInclusion",
+     "CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinsetObj"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "Component matches only: FullSubcategory.lean:94-113, Preserves/Basic.lean:671 and 806, and Triangulated/Subcategory.lean:742. None by itself or by one-line specialization supplies the combined universe transfer and canonical comparison assertion; explicit elementary assembly recorded in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-proper-image-localizing-open",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-open-ctf",
+ "blueprint": {
+  "from": {
+   "node": "det-proper-image-localizing-open",
+   "place": "Formal properties and Localizing categories paragraphs: returned steps 2 and 5, ULift/Discrete reindexing, inherited coproducts, and preservation and reflection for the canonical lift.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-full-subcategory-universe-coproduct-lift",
+  "worker": "stage1",
+  "summary": "Wrote out ULift reindexing, creation, preservation and reflection by the coproduct universal property, canonical restriction, and equality of comparison arrows. Reused the existing Mathlib exact-restriction leaf. No new nodes: each universal-property calculation is elementary and explicit, and no project declaration covers the entire statement. Statement unchanged.",
+  "blueprint": "det-proper-image-localizing-open, Formal properties (direct sums and exactness) and Localizing categories (inherited sums and canonical restriction); this is their generic full-subcategory tool, not a generator-to-closure principle."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-b46e3a9ca",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-b46e3a9ca (reviewer sub-agent of L); spot-checked: I read the item in full: six steps, no new nodes, statement unchanged according to the report (git is blocked here, so not diffed against base), and no re-split note. I also read the statements of all cited nodes: def-weil-pbc-category-colimit, def-weil-size-convention, def-weil-triangulated-category, def-weil-triangulated-subcategory and lem-weil-pbc-triangulated-functor-restriction. The last is a Mathlib leaf (isTriangulated_lift); its hypotheses (triangulated ambients, strictly full triangulated S and S', F triangulated, F(S) in S') match the item's (full replete P and Q, F exact, P(C) implies Q(FC)) exactly. Step 1 (ULift reindexing via de=1 and ed=1, then the V-closure gives P(L)), step 2 (creation through fullness), step 3 (reflection for any cocone; preservation via inverse arrows a and b when the ambient coproduct exists), step 5 (comparison M->FL is the same arrow as the ambient one and an isomorphism) and step 6 (exactness from the leaf) are correct. I checked I empty (closure forces P on the initial object), I a singleton, P always true and P empty. Fault, repaired: step 4 began from 'any subcategory coproduct cocone', but the i_P preservation it takes from step 3 is proved only when the ambient coproduct exists. I restricted step 4 to such families, which is the statement's 'these coproducts'; the citer's ambients D(Mod) have all small sums. The source is the main-20261015 sk-prop-proper-image-localizing-open.proof.md (Formal properties and Localizing categories paragraphs), and there is no SGA citation. A duplicate scan of all DAG nodes found only det-proper-image-localizing-principle (specialised to localizing closures) and lem-weil-pbc-colimit-initial-full-subcategory (cofiltered indices); neither is a duplicate. Mathlib FullSubcategory.lean:94-113 covers only steps 2-3, so mathlib_match null is consistent. The fix is in fixes/dag/nodes/sec-six-functors/lem-sf-full-subcategory-universe-coproduct-lift.json and changes only the step-4 text.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FullSubcategoryUniverseCoproductLift",
+  "declaration": "CategoryTheory.fullSubcategory_universe_coproduct_lift",
+  "declarations": [
+   "CategoryTheory.fullSubcategory_universe_coproduct_inheritance",
+   "CategoryTheory.fullSubcategory_universe_coproduct_lift"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FullSubcategoryUniverseCoproductLift.lean",
+  "statement": "theorem fullSubcategory_universe_coproduct_lift {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (P : ObjectProperty C) (Q : ObjectProperty D) [P.IsClosedUnderIsomorphisms] [Q.IsClosedUnderIsomorphisms] (hP : ∀ (J : Type (max w w')), P.IsClosedUnderColimitsOfShape (Discrete J)) (hQ : ∀ (J : Type (max w w')), Q.IsClosedUnderColimitsOfShape (Discrete J)) (F : C ⥤ D) (hF : ∀ (I : Type w), PreservesColimitsOfShape (Discrete I) F) (hPQ : ∀ (X : C), P X → Q (F.obj X)) : (Q.lift (P.ι ⋙ F) (fun X ↦ hPQ X.obj X.property) ⋙ Q.ι = P.ι ⋙ F) ∧ (∀ (I : Type w) (G : Discrete I ⥤ P.FullSubcategory), HasColimit (G ⋙ P.ι) → PreservesColimit G (Q.lift (P.ι ⋙ F) (fun X ↦ hPQ X.obj X.property))) ∧ (HasCoproducts.{w} C → ∀ (I : Type w), PreservesColimitsOfShape (Discrete I) (Q.lift (P.ι ⋙ F) (fun X ↦ hPQ X.obj X.property))) ∧ (∀ (I : Type w) (G : Discrete I ⥤ P.FullSubcategory), HasColimit (G ⋙ P.ι) → ∀ (c : Cocone G), Nonempty (IsColimit c) → ∀ (d : Cocone (G ⋙ Q.lift (P.ι ⋙ F) (fun X ↦ hPQ X.obj X.property))) (hd : IsColimit d), ∃ (hd' : IsColimit (Q.ι.mapCocone d)), Q.ι.map (hd.desc ((Q.lift (P.ι ⋙ F) (fun X ↦ hPQ X.obj X.property)).mapCocone c)) = hd'.desc (F.mapCocone (P.ι.mapCocone c)) ∧ IsIso (hd.desc ((Q.lift (P.ι ⋙ F) (fun X ↦ hPQ X.obj X.property)).mapCocone c))) ∧ (∀ [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [Preadditive D] [HasZeroObject D] [HasShift D ℤ] [∀ (n : ℤ), (shiftFunctor D n).Additive] [Pretriangulated D] [IsTriangulated D] [P.IsTriangulated] [Q.IsTriangulated] [F.CommShift ℤ] [F.IsTriangulated], (Q.lift (P.ι ⋙ F) (fun X ↦ hPQ X.obj X.property)).IsTriangulated ∧ NatTrans.CommShift (Q.liftCompιIso (P.ι ⋙ F) (fun X ↦ hPQ X.obj X.property)).hom ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-728a30b63",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Clause-by-clause match of both theorems to the node: V-closure is IsClosedUnderColimitsOfShape (Discrete J) over Type (max w w') and requires only existing presentations; I-closure; ULift reindexing iff keeps the vertex and legs; Creates/Preserves/Reflects/HasColimit conditioned on an ambient HasColimit; HasCoproducts transfer; canonical Q.lift (P.ι ⋙ F) with functor equality; preservation per diagram and shape-wide; comparison arrow equals hd'.desc of the ambient image and IsIso; triangulated clause has bound instances, P/Q.IsTriangulated and F exact, giving lift IsTriangulated plus CommShift of liftCompιIso. Empty index and universes are fine. lean.statement is verbatim; node equals side-live apart from lean; not landed elsewhere; no name clash; docstrings carry the source place, blueprint tag and steps 1-6; source paragraphs exist; no definitions, only sorry. Advisory: the exactness and CommShift conjuncts are Mathlib instances, consistent with the node's Mathlib leaf; hQ is unused but assumed by the node; the second reading is a declared self-audit. No compile because no files were changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261023T103208-L-3071895",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.fullSubcategory_universe_coproduct_inheritance",
+   "CategoryTheory.fullSubcategory_universe_coproduct_lift"
+  ],
+  "sorry_after": []
+ }
+}

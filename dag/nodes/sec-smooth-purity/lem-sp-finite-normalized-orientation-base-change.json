@@ -1,0 +1,154 @@
+{
+ "id": "lem-sp-finite-normalized-orientation-base-change",
+ "kind": "statement",
+ "title": "Base change of the normalized finite smooth orientation",
+ "statement": "Fix the global finite-field datum D of characteristic p and a prime ell unequal to p [def-weil-finite-field-fiber]. Let X, Y and Yprime be separated finite-type schemes over D.k, and let f : X to Y be smooth separated of pure relative dimension d [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. For any D.k-morphism v : Yprime to Y, let Xprime be the pullback with projections u : Xprime to X and fprime : Xprime to Yprime [def-pc-base-change]. Assume X, Y and Xprime are noetherian and f has a compactification. Fix n >= 1 and a finite commutative ring A killed by ell^n, with ell^n invertible on X and Xprime. Work in the ordinary etale derived categories of A-modules [def-weil-pbc-derived-categories]. Let omega_f,A and omega_fprime,A be the exceptional pullbacks of the coefficient units, and let e_1 : u*omega_f,A to omega_fprime,A be the canonical unit exceptional base-change map [def-pur-co-smoothness]. Put L_X = A_X(d)[2d] and L_Xprime = A_Xprime(d)[2d], with the specified twist transport [def-pur-finite-smooth-canonical-maps, def-pur-purity-base-change-sources]. Let alpha : omega_f,A isomorphic to L_X and alpha-prime : omega_fprime,A isomorphic to L_Xprime satisfy the specified diagonal/Rees/integration OrientationNormalized equations for supplied diagonal geometry witnesses [def-pur-vector-purity-normalization]. Then u*(alpha inverse) followed by e_1 equals the specified Kummer-normalized line pullback comparison u*L_X isomorphic to L_Xprime followed by alpha-prime inverse. This is only the orientation factor: no tensor-mate or gamma equation is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), finite coefficient orientation factor"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-weil-pbc-derived-categories",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-vector-purity-normalization",
+  "def-pur-purity-base-change-sources",
+  "def-pur-co-smoothness"
+ ],
+ "proof": [
+  {
+   "text": "In ordinary finite A coefficients, use the diagonal cube projection squares, pasting of the specified exceptional unit mates, and section-compositor coherence to prove that pullback of finiteSmoothDiagonalFactor followed by the canonical sectionMap equals the unit exceptional exchange followed by the primed diagonal factor. The proved private cube calculations apply to arbitrary finite A, with the supplied invertible annihilator supplying HasInvertibleExponent. No prime-power scalar transport is needed.",
+   "uses": [
+    "lem-sp-diagonal-exchange-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+   }
+  },
+  {
+   "text": "Unpack each OrientationNormalized equation into its normalized Rees comparison and cone-to-bundle square. Define the integrated specialization as the actual zero specialization followed by inverse normalSectionMap and inverse bundleSectionAdjoint. These maps are invertible by smooth exceptional base change and finite-ring bundle integration. Cancel their composite in the normalization equation to identify alpha.hom with the diagonal factor followed by integrated specialization, and similarly for alpha-prime. Apply arbitrary finite-ring integrated-specialization base change to the Cartesian diagonal pairs.",
+   "uses": [
+    "lem-sp-finite-section-integrated-specialization-base-change",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+   }
+  },
+  {
+   "text": "Compose the diagonal-factor square and the integrated-specialization square, substitute the two normalization identifications, and use pullback functoriality. This gives exceptionalExchange followed by alpha-prime.hom equal to pullback(alpha.hom) followed by the specified Tate comparison. Postcompose with alpha-prime.hom to cancel alpha-prime.inv in the desired equation; functoriality and alpha.inv followed by alpha.hom equal to identity finish. All calculations are ordinary etale, so no site reflection or coefficient-extension comparison is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-diagonal-exchange-cube",
+  "lem-sp-finite-section-integrated-specialization-base-change",
+  "lem-trf-finite-ring-section-deformation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), ordinary finite-ring diagonal and integrated-section squares"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity orientation and tensor counit transpose commute with base change",
+   "date": "2026-10-27",
+   "results": "Only unrelated Kaehler/cotangent matches; no normalized orientation result.",
+   "verdict": "no match: none states compatibility of the specified diagonal/Rees/integration-normalized orientation with exceptional base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothTensorDualityMap\"",
+   "date": "2026-10-27",
+   "results": "No Mathlib match.",
+   "verdict": "no match: none states compatibility of the specified diagonal/Rees/integration-normalized orientation with exceptional base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A diagonal and deformation normalized smooth purity orientation is compatible with base change over a finite coefficient ring",
+   "date": "2026-10-27",
+   "results": "Only smooth ring/scheme base-change permanence, not orientation compatibility.",
+   "verdict": "no match: none states compatibility of the specified diagonal/Rees/integration-normalized orientation with exceptional base change"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothTensorDualityMap|OrientationNormalized|purity.*baseChange",
+   "date": "2026-10-27",
+   "results": "No Mathlib match; local library has the tensor calculation but not this orientation specialization.",
+   "verdict": "no match: none states compatibility of the specified diagonal/Rees/integration-normalized orientation with exceptional base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Q4",
+  "item": "Sheaf.Paper.SmoothPurityBaseChangeFactors",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), finite orientation before the tensor factor",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothOrientationBaseChange",
+  "file": "lean/Sheaf/Paper/FiniteSmoothOrientationBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.finite_orientation_base_change",
+  "statement": "theorem finite_orientation_base_change\n    (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (_hne : ell ≠ D.p)\n    (X Y Y' : Over (Spec (.of D.k)))\n    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    [IsSeparated Y'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]\n    [IsNoetherian X.left] [IsNoetherian Y.left]\n    (f : X ⟶ Y) (v : Y' ⟶ Y) (d : ℕ)\n    [IsSeparated f.left] [QuasiCompact f.left] [HasCompactification f.left]\n    [SmoothOfRelativeDimension d f.left]\n    [IsNoetherian (pullback f.left v.left)]\n    (n : ℕ) (hn : 1 ≤ n) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (hA : ((ell ^ n : ℕ) : A) = 0)\n    (g : Etale.FiniteRingSectionDeformation.Geometry d\n      (pullback.fst f.left f.left) (pullback.diagonal f.left))\n    (g' : Etale.FiniteRingSectionDeformation.Geometry d\n      (pullback.fst (pullback.snd f.left v.left) (pullback.snd f.left v.left))\n      (pullback.diagonal (pullback.snd f.left v.left)))\n    (hX : IsUnit ((ell ^ n : ℕ) : Γ(X.left, ⊤)))\n    (hX' : IsUnit ((ell ^ n : ℕ) : Γ(pullback f.left v.left, ⊤)))\n    (alpha : Etale.dualizingComplex (ModuleCat.{u + 1} A) f.left ≅\n      Etale.FiniteSmoothPurity.line A (ell ^ n) hA X.left d)\n    (alpha' : Etale.dualizingComplex (ModuleCat.{u + 1} A)\n        (pullback.snd f.left v.left) ≅\n      Etale.FiniteSmoothPurity.line A (ell ^ n) hA (pullback f.left v.left) d)\n    (_ha : Etale.FiniteSmoothPurity.OrientationNormalized A (ell ^ n)\n      (pow_pos (Fact.out : ell.Prime).pos n) hA f.left d g hX alpha)\n    (_ha' : Etale.FiniteSmoothPurity.OrientationNormalized A (ell ^ n)\n      (pow_pos (Fact.out : ell.Prime).pos n) hA (pullback.snd f.left v.left)\n      d g' hX' alpha') :\n    (Etale.ordinaryFinitePullback A (pullback.fst f.left v.left)).map alpha.inv ≫\n        Etale.dualizingComplexBaseChangeMap A\n          (IsPullback.of_hasPullback f.left v.left) =\n      (Etale.vectorIntegrationBaseCoefficientPullback A (ell ^ n) hA\n        (PurityFiniteSetting.purityTwistTransport A (ell ^ n)\n          (pow_pos (Fact.out : ell.Prime).pos n) hA)\n        (pullback.fst f.left v.left) hX d).hom ≫ alpha'.inv",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T200819-L-3344167",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T222659-L-681333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

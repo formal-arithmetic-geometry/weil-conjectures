@@ -89,7 +89,18 @@
   "lemma-weil-pbc-projection-formula-totalization"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -130,5 +141,22 @@
   "group": "Q09",
   "result": "pass",
   "note": "Wrote review.md. Audited immutable files, sources, dependencies, canonical arrows, hypotheses, universes, signatures, and edge cases. All three modules passed scompile.py without warnings or errors. No repairs needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $p:\\overline X\\to Y$ be the proper morphism of a chosen compactification\n[def-weil-pbc-projection-compactification] (the argument uses no property of\n$p$). For every $M$ in the derived category of sheaves on $\\overline X_{\\Et}$,\nfor instance $M=j_!E$, and every dualizable object $F$ of the derived category\nof sheaves on $Y_{\\Et}$ (for instance a strict-perfect complex), the\nprojection map\n\n$$\n\\pi_{p,M,F}:(Rp_*M)\\otimes^LF\\longrightarrow Rp_*(M\\otimes^LLp^*F),\n$$\n\nadjoint to\n$Lp^*(Rp_*M\\otimes^LF)\\cong Lp^*Rp_*M\\otimes^LLp^*F\n\\xrightarrow{\\epsilon_M\\otimes1}M\\otimes^LLp^*F$, is an isomorphism.",
+  "proof": [
+   {
+    "text": "Let $F^\\vee$ be a dual of $F$. The functor $Lp^*$ is monoidal, so\n$Lp^*F$ is dualizable with dual $Lp^*F^\\vee$. For every object $T$ on $Y$ we\nget bijections, natural in $T$,\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}(T,(Rp_*M)\\otimes^LF)\n&\\cong\\operatorname{Hom}(T\\otimes^LF^\\vee,Rp_*M)\n\\cong\\operatorname{Hom}(Lp^*T\\otimes^LLp^*F^\\vee,M)\\\\\n&\\cong\\operatorname{Hom}(Lp^*T,M\\otimes^LLp^*F)\n\\cong\\operatorname{Hom}(T,Rp_*(M\\otimes^LLp^*F)),\n\\end{aligned}\n$$\n\nusing duality for $F$, the adjunction $Lp^*\\dashv Rp_*$ with the monoidal\nstructure of $Lp^*$, duality for $Lp^*F$, and the adjunction again. Unwinding\nthe units, counits and evaluation maps, the composite bijection is\ncomposition with $\\pi_{p,M,F}$. By the Yoneda lemma $\\pi_{p,M,F}$ is an\nisomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

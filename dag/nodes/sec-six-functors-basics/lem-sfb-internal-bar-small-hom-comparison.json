@@ -1,0 +1,177 @@
+{
+ "id": "lem-sfb-internal-bar-small-hom-comparison",
+ "kind": "statement",
+ "title": "Generic normalized bar roofs in the small-Hom localization",
+ "statement": "Let A be a commutative condensed ring and G a profinite group. Fix any InternalFunctions F, compatible BarDiagram B, invariant augmentation a, total augmentation t, and equivariant injective resolution I of the trivial regular coefficient. Let R be an exact normalized homogeneous bar resolution and e : P → A[0] a quasi-isomorphic cochain augmentation satisfying augmentationEquation. Then augmentationArrow t I is an isomorphism and there exists one row-zero j satisfying IsUnderivedComparison B I j. For every q, equivariant cochain map Fq : P → P[q], and c : A[-q] → underived B, assume on every generalized generator [x0,...,xq] that the component of e[q]Fq equals c evaluated at the regular unit and the tuple (x0^-1 x1,...,x_(q-1)^-1 xq). Then cocycleArrow j q c = (-1)^(q(q+1)/2) • (inflationPhi A G q (characterRoof R e q Fq) ≫ augmentationArrow t I). This is equality in the u+1 Hom universe of the cup calculus. The lemma covers all homogeneous cocycles and contains no character or cup-product hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-sfb-internal-bar-ordered-cup-core",
+  "lem-sfb-internal-bar-equivariant-character-lifts",
+  "lem-sfb-internal-bar-roof-adjunction",
+  "lem-sfb-internal-bar-character-roof-cup"
+ ],
+ "proof": [
+  {
+   "text": "1. Apply the internal derived invariant bar theorem to obtain a compatible model M\nwith its normalized computation. The evaluation isomorphisms of InternalFunctions\nuniquely identify its internal-Hom functors with F: both represent the same natural\nfunction families on every slice. Their parameter naturality identifies every bar\noperator. The augmentation is uniquely the invariant inclusion and the total\naugmentation has the specified bar-zero coprojections. Thus transport M's computation\nto B, the supplied augmentation a and total augmentation t.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  },
+  {
+   "text": "2. Apply normalized_roofs to M and R. Its augmentation has augmentationEquation.\nThe map e has the same sole degree-zero component, so single-target extensionality\nidentifies the augmentations. Its row equation gives the required row-zero map j\nthrough the transported total. In degree n, cochains.map is B.diagram.map evaluated\nat [n], so the formula is IsUnderivedComparison. Computation.normalization identifies\nthe augmentation isomorphism with augmentationArrow t I.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  },
+  {
+   "text": "3. For Fq, compose with e[q] and the inverse shifted-single isomorphism to get a map\nP to single(-q,A). Its sole component is augmentedRoofComponent. The chain-map equation\ngives f boundary = 0. The homogeneousEquation of normalized_roofs identifies this map\nwith the normalized homogeneous map, by single-target extensionality.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  },
+  {
+   "text": "4. The coordinate hypothesis identifies c with its normalized inhomogeneous cocycle.\nTo check uniqueness on every tuple (g1,...,gq), choose x0=1 and successively\nx_(i+1)=x_i g_(i+1). Then x_i^-1 x_(i+1)=g_(i+1). The coordinate equations agree on\nall slice evaluations. Naturality and linearity extend equality from the unit to\nall sections; evaluation and single-source extensionality give equality of maps.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  },
+  {
+   "text": "5. Substitute these identifications in comparisonEquation. Transport along the\ncanonical equivalence between the two ordinary localizations (Hom universes u+2\nand u+1). The localization and shift comparison equations identify its left side\nwith cocycleArrow and its transpose with inflationPhi of characterRoof. The inverse\nshifted-single maps cancel; no extra sign appears. The surviving scalar is exactly\n(-1)^(q(q+1)/2). Faithfulness reflects the resulting equality of small-Hom arrows.\nNo inverse of j is used; only the normalized derived augmentation is inverted.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-derived-invariant-bar",
+  "lem-sfb-internal-bar-roof-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transporting derived adjunction and bar cocycle comparison between small and large universe localizations",
+   "results": "Lean Finder returns general derived adjunction unit and counit compatibility.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; general APIs only. The project constructions are used rather than replaced."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.uniq",
+   "results": "Localization.uniq, compUniqFunctor, compUniqInverse and isoUniqFunctor give the abstract localization equivalence.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; general APIs only. The project constructions are used rather than replaced."
+  },
+  {
+   "tool": "grep",
+   "query": "uniq.*Equivalence|equivalence.*[Ll]ocalization",
+   "results": "General localization equivalences only, not the normalized bar comparison with these specified arrows.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; general APIs only. The project constructions are used rather than replaced."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The uniqueness equivalence of derived category localizations preserves derived adjunction morphisms and shifts",
+   "results": "Localization.uniq, rightDerived_ext, rightDerivedUnique and derived adjunction unit/counit compatibility; no normalized internal bar comparison. Whole-blueprint searches for small-Hom, cup bracketing and equivariant character lifts return zero matching blueprint nodes; source name searches find no duplicate declaration.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; useful general APIs only."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalBarOrderedCup",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Ordered-cup proof step 3: model transport, coordinate uniqueness and the roof comparison in the small-Hom localization.",
+   "via": [
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalBarSmallHomComparison",
+  "file": "lean/Sheaf/CategoryTheory/InternalBarSmallHomComparison.lean",
+  "declaration": "CategoryTheory.CondensedBar.OrderedCup.small_hom_bar_roof_comparison",
+  "declarations": [
+   "CategoryTheory.CondensedBar.OrderedCup.small_hom_bar_roof_comparison"
+  ],
+  "statement": "theorem small_hom_bar_roof_comparison {F : InternalFunctions A}\n    (B : BarDiagram (G := G) F) (a : Augmentation (invariants A G) B)\n    (t : TotalAugmentation (invariants A G) B a)\n    (I : InjectiveResolution (regularTrivial A G)) (R : Resolution A.toMon G)\n    (e : RoofAugmentation R) [QuasiIso e] (he : augmentationEquation R e) :\n    IsIso (augmentationArrow t I) ∧\n      ∃ j : underived B ⟶ resolved B I, IsUnderivedComparison B I j ∧\n        ∀ (q : ℕ) (Fq : complex R ⟶ (complex R)⟦(q : ℤ)⟧)\n          (c : (HomologicalComplex.single (Modules A) (.up ℤ) (q : ℤ)).obj\n            (Mod.regular A.X) ⟶ extend (underived B)),\n          (∀ (S : Profinite.{u}) (x : Fin (q + 1) → C(S, G)),\n            onSections A.toMon (augmentedRoofComponent R e q Fq).val S\n                (basis A.toMon G (q + 1) (R.objects q) (R.freeIso q) S x) =\n              (F.evaluate (power G q) S (Mod.regular A.X)\n                (onSections A.toMon\n                  (Profinite.CondensedAction.InternalBarCharacter.cocycleComponent B c) S\n                    (regularOne A.toMon S))).val S (𝟙 S)\n                      (tupleMap (fun i ↦ (x i.castSucc)⁻¹ * x i.succ))) →\n          cocycleArrow j q c = (-1 : ℤ) ^ (q * (q + 1) / 2) •\n            (inflationPhi A G q (characterRoof R e q Fq) ≫ augmentationArrow t I)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed92",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T081842-L-2089288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed92",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T081842-L-2089288",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement and 14 moved definitions against clone 9a49814 (identical); three new sorry statements against RoofCup/CharacterLifts/RoofAdjunction definitions; item node proof fields against the Lean proof"
+ }
+}

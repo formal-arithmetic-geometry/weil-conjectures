@@ -1,189 +1,146 @@
-## Worker report
+# Worker report
 
-Repaired the saved packet for returned head `38cd83ca0f1f`. The initial required
-`deliver2.py --no-push` passed at `128171dc8a`; the subsequent mathematical self-check
-found that its proposed HEq repair still failed H3. This delivery replaces those
-heterogeneous equalities by composed, canonically transported isomorphisms. It also
-requires realization of the supplied transitions, and uniqueness of a *global* scheme
-and module isomorphism between realizations. All 17 owning declarations are listed in
-`lean.declarations`. The generic theorem belongs in
-`Sheaf.AlgebraicGeometry.PolarizedSchemeEtaleDescent`; the old TraceFormula module is
-not delivered.
+## Files written
 
-The original natural statement on current main is already the correct descent theorem.
-It specifies the identity, composite lambda cocycle, compatible realizations, and
-unique compatible pair isomorphism. The saved packet's statement_change confused
-faults of its Lean with faults of that prose. I restored the original statement
-verbatim and removed that correction record. No natural statement or proof was
-changed. Three already landed prerequisites were added to stmt_deps for the actual
-tensor pullback, its sectionwise pinned adjunction, and its canonical composition
-comparison. There are no new nodes or dependency-module repairs.
+- `dag/nodes/sec-trace-formula/lem-trf-polarized-scheme-etale-descent.json`: existing statement, re-split into a short six-step assembly; statement, statement dependencies and Lean record unchanged.
+- `dag/nodes/sec-trace-formula/lem-trf-scheme-descent-cocycle-etale-relation.json`: new statement-only lemma, status `unsplit`; no Mathlib match. Constructs the etale equivalence relation from arbitrary scheme descent isomorphisms.
+- `dag/nodes/sec-trace-formula/lem-trf-scheme-descent-quotient-chart-isomorphism.json`: new statement-only lemma, status `unsplit`; no Mathlib match. Identifies each base change of a presented algebraic space with its prescribed scheme chart, including the specified overlap maps.
+- `dag/nodes/sec-trace-formula/lem-trf-etale-scheme-line-morphism-gluing.json`: new statement-only lemma, status `unsplit`; no Mathlib match. Glues arbitrary compatible morphisms of schemes with line modules; it also detects isomorphisms.
 
-Clause-by-clause correspondence (D is the datum, d a candidate pair):
+The sandbox additionally contains `citations.json`, genuine `searches.jsonl`, the complete outputs `search-0.txt` through `search-14.txt`, and the returned proof text in `returned-proof.json`. Only the four node records and this report are delivery content. No Lean was written and no compiler, Lake or build tool was run.
 
-* A scheme S and a family indexed by any set: `(S : Scheme.{u}) (I : Type v)`,
-  with independent, explicitly bound universes u and v. `U`, `uMap`, `X`, `f`, `L`
-  supply exactly the named local schemes, structure maps and modules.
-* Jointly surjective etale covering: `D.isEtale : ∀ i, Etale (uMap i)` and
-  `D.jointlySurjective : ∀ x : S, ∃ i, ∃ y : U i, (uMap i).base y = x`.
-* Invertible local modules: `hL : ∀ i, Scheme.Modules.IsInvertible (L i)`.
-* The specified overlap: `polarizedOverlap` is literally
-  `pullback (f i) (pullback.fst (uMap i) (uMap j))`. `polarizedOverlapX`,
-  `polarizedOverlapUi`, and `polarizedOverlapUj` are its canonical projections.
-  The right-hand local overlap is written with swapped factors, R_ji; this is
-  the canonical symmetry identification of the paper's second pullback over U_ij.
-* Scheme overlap isomorphisms: `D.theta i j : R_ij ≅ R_ji`.
-  `theta_over_left` and `theta_over_right` impose both base-projection equations.
-  `theta_identity` is equality after the explicitly constructed diagonal map.
-  `theta_cocycle` quantifies maps a,b,c,d from a test scheme T and all five
-  compatibility equations. The conclusion `c ≫ (theta i k).hom = d` compares
-  transition directly from i to k with transition through j, including the base maps.
-  Testing schemes in the same universe as X is sufficient: the representing
-  triple overlaps themselves lie there. No smaller independent test universe is used.
-* Line overlap isomorphisms: `D.lambda i j` is an actual isomorphism
-  `P_(theta_ij;p_ji) L_j ≅ P_p_ij L_i`, with P the tensor-formula pullback.
-  The canonical composition comparison identifies this with theta_ij^* of the
-  pullback of L_j, exactly as in the natural statement.
-* Line identity: `lambda_identity` equates the diagonal pullback of lambda_ii
-  with equality transport along `theta_identity`. Both ends are normalized to
-  composite maps by `polarizedPullIso`; after identifying diagonal projection
-  with the identity this is the identity of L_i.
-* Line cocycle: `lambda_cocycle` quantifies a:T→R_ij, b:T→R_jk, c:T→R_ik
-  and equations `hmid`, `hend`, `hstart` identifying their three chart endpoints.
-  The left side is the normalized pullback of lambda_ik. The right side is
-  equality transport, then the pullback of lambda_jk, middle equality transport,
-  then the pullback of lambda_ij, then final equality transport. Thus it is
-  lambda_ij composed with lambda_jk, not equality of those individual transitions.
-  These endpoint equations describe exactly compatible triple-overlap test maps:
-  the theta base equations identify their U_i,U_j,U_k maps. The theta cocycle
-  identifies the last chart endpoint. Conversely such test maps yield that triple.
-* Ampleness on every affine inverse image: `ample_local` quantifies every
-  `V : (U i).Opens` and `IsAffineOpen V`, then applies the recorded
-  `Scheme.Modules.IsAmple` to `(f i ⁻¹ᵁ V).toScheme` and the tensor pullback
-  along its inclusion. Its existential h supplies only the proof of invertibility
-  required by the IsAmple API. It adds no module data or geometric condition:
-  restriction of the given invertible L_i is invertible. Proof irrelevance makes
-  the chosen invertibility proof immaterial.
-* Existence: `∃ d : PolarizedDescentPair ...` supplies `d.Y`, `d.g`, `d.M`,
-  `d.isInvertible`, and charts `pullback d.g (uMap i) ≅ X i`, their over-U_i
-  equations, and actual module comparisons from pulled-back M to pulled-back L_i.
-* Realization of the *given* theta and lambda: the conclusion includes
-  `IsPolarizedDescentRealization D d`. Its theta equation says the two overlap
-  maps to Y agree. Since each chart is Y×_S U_i ≅ X_i over U_i, this says its
-  induced overlap transition is exactly D.theta. Its lambda equation expresses
-  D.lambda as the inverse j-chart trivialization, transport through that same
-  pulled-back global M, and the i-chart trivialization. `polarizedChartLine`
-  is constructed from the stored moduleIso, inverse chart, and canonical tensor
-  composition/identity comparisons; it is not a new arbitrary trivialization.
-* Unique compatible isomorphism: the second candidate d' is quantified with
-  the hypothesis `IsPolarizedDescentRealization D d'`. The conclusion gives an
-  `e : PolarizedDescentPairIso d d'` and `∀ e', e' = e`. This structure contains
-  one `schemeIso`, its over-S equation, one global
-  `moduleIso : P_(schemeIso.hom) d'.M ≅ d.M`, and compatibility with every chart
-  (`chart`) and every local module identification (`line`). Both routes in line
-  are typed from the same global-module pullback to L_i. Uniqueness includes the
-  global module isomorphism, not merely its existence separately on each chart.
+## Attachments
 
-Dependency declarations used:
+None. The upstream `lean/WeilConjectures/` searches for the item id, polarization and the relevant descent concepts found no finished declaration of the item. The project module `lean/Sheaf/AlgebraicGeometry/PolarizedSchemeEtaleDescent.lean` states `AlgebraicGeometry.exists_polarizedScheme_of_etaleDescent` at line 315, with `sorry` at line 323. Its docstring carries exactly the old six arguments, so this is a re-split rather than an attachment. The new concepts likewise have no finished matching declaration in the project searches.
 
-* Mathlib.AlgebraicGeometry.Scheme: `AlgebraicGeometry.Scheme` and its morphisms.
-* Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback: `pullback`,
-  `pullback.fst`, `pullback.snd`, `pullback.lift`, `pullback.diagonal`.
-* Mathlib.AlgebraicGeometry.Sites.Etale and Morphisms.Etale:
-  `Scheme.smallEtaleTopology`, `Scheme.Etale`, `Etale`; the cover conditions
-  are the etale-arrow and pointwise-surjectivity criterion of this site.
-* WeilConjectures.AlgebraicGeometry.Modules.Invertible:
-  `Scheme.Modules.IsInvertible` (its signature and definition were read).
-* WeilConjectures.AlgebraicGeometry.Ample: `Scheme.Modules.IsAmple`, the
-  quasi-compactness and positive tensor-power affine-nonvanishing-locus predicate.
-* WeilConjectures.AlgebraicGeometry.TensorPullback: `Scheme.Modules.tensorPullback`;
-  read the current source through `scompile.py --source`.
-* The recorded sectionwise adjunction `Scheme.Modules.exists_tensorPullbackAdjunction`
-  and `Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso`:
-  `Scheme.Modules.tensorPullbackCompositionIso`; read its current source through
-  `scompile.py --source`. The identity comparison uses the pinned adjunction and
-  `pushforwardId`, not a choice from a bare Nonempty set of natural isomorphisms.
-* Stated proof prerequisites are imported non-publicly: the recorded
-  `Sheaf.AlgebraicGeometry.AlgebraicSpace` and
-  `WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf`.
-  Other proof prerequisites currently have no Lean records and are not imported.
+## WANTED
 
-Every helper has a source/blueprint docstring. The sole postponed theorem has a
-six-step proof docstring matching the node: etale relation, algebraic-space
-quotient, recovery of charts, invertible-module descent, representability by
-local ampleness, and uniqueness by scheme and module full faithfulness. No
-helper theorem or definition contains sorry. `lean.statement` is the verbatim
-main signature. Definitions have explicit data, and all universes/variables
-are bound with autoImplicit disabled.
+None. All source documents used are available under `literature/stacks-project/`.
 
-Searches: the saved searches.jsonl records Mathlib grep
-`polarized|ample.*descent|descent.*ample` (no hit), Loogle
-`Scheme Modules IsAmple Etale descent` (unknown identifier), and LeanFinder
-`effective etale descent polarized schemes compatible ample invertible modules`
-(ordinary etale and affine-transition-limit hits, no matching theorem).
-Repair searches repeated LeanFinder with `Effective descent of schemes with
-relatively ample line bundles and a unique compatible global scheme and module
-isomorphism`: eight affine-transition-limit hits, no match. Loogle for
-`AlgebraicGeometry.Scheme.Modules.tensorPullbackCompositionIso` had no indexed
-identifier; the exact recorded project declaration was found by rg and read
-instead. rg for all eight new helper names and the item id across upstream
-WeilConjectures and shared lean/Sheaf found no duplicate. The canonical tensor
-pullback and composition comparison were reused rather than redefined.
+## Return repaired
 
-Sources read directly in the local Stacks tree: spaces.tex theorem-presentation
-(Tag 02WW), spaces-descent.tex definitions descent-datum-quasi-coherent and
-descent-datum-effective-quasi-coherent and proposition-fpqc-descent-quasi-coherent
-(Tag 04W8), lemma-descending-property-ample (Tag 0D3C), and descent.tex
-lemma-fpqc-universal-effective-epimorphisms (Tag 023Q). Tag labels were checked
-in tags/tags. They support the actual composition diagram, realization, and
-full-faithfulness clauses, not the returned HEq formulation.
+The single substantive return requires spreading the 4,868-character argument across at least two comparable, independently assignable nodes while keeping the item's statement and retaining every argument. I extracted three arguments (old steps 1, 3 and 6). Each new node is self-contained, has `status: unsplit`, empty `proof` and `proof_deps`, null `proof_origin`, three search kinds plus a second semantic phrasing, and no hidden proof sketch in its statement. Their statements are 1,020, 1,211 and 1,086 characters. The original arguments they carry are 1,164, 1,197 and 990 characters, respectively: these are three comparable tasks, rather than one renamed theorem containing the whole proof. Old steps 4 and 5 remain verbatim in the item. Step 2 retains its argument with the relative quotient application made explicit in the latest repair below. The six-step assembly remains below 3,000 characters. The exact extracted arguments are preserved below for those who split the new nodes next; they were not discarded or replaced with vague assertions.
 
-## Second reading by Q98
+The sandbox initially contained only dispatcher marker files; it had no node JSON, report or search log to retain. I copied the current repository item. Its proof agrees with the returned six steps and their character counts, so the current repository record is the returned mathematical starting point. The existing `created`, blueprint ancestry, `reviewed`, Lean and Lean-review metadata were preserved; the delivery tool owns rebasing onto the server's current base. No repository git command was used.
 
-I re-read the unchanged natural statement against the final file, after the
-initial dry run, without launching another agent (the launcher explicitly
-forbids other agents in this session). This is a documented self-check; the
-maintainer's independent review remains separate.
+There is no statement dispute or route change. The source and parent statement require relative ampleness on inverse images of affine base opens, not absolute ampleness of each whole chart. That hypothesis remains intact. Nothing was left unresolved in this repair except the intended future splits of the three new statement-only nodes.
 
-The saved packet still had the exact H3 fault: HEq of the three separately
-pulled transitions. On identity covers of Spec Q with trivial lines, choose
-chart scalars 1, 2, 6. The valid descent transitions have scalars 2, 3, 6 for
-(1,2), (2,3), (1,3). The cocycle is 6 = 3*2, while the saved condition forced
-2 = 3 = 6. The final equation passes this case because its two successive
-isomorphisms are composed. Diagonal transitions are 1; reversing transitions
-gives reciprocal scalars, also as required. This checks that lambda is neither
-unrestricted nor made artificially equal across overlaps.
+## Current landing return repaired (2026-10-22)
 
-The saved conclusion allowed charts with unrelated transitions and compared
-all pairs. I followed each final realization.theta and realization.lambda
-path; both use D and exactly the stored charts. I followed the final global
-pair-isomorphism line equation from P_(chartMap_i;schemeIso) M' to L_i: the
-left route uses the pullback of its single global moduleIso followed by d's
-chartLine, while the right uses equality transport and d's chartLine. There
-is no HEq, no per-chart existential substitute, and uniqueness is for this
-whole compatible structure. For a singleton identity cover, arbitrary scalar
-chart comparisons determine the unique global scalar comparison rather than
-forcing those scalar comparisons themselves to be equal.
+An earlier landing return at branch head `0307e05ec76` approved the mathematics but refused landing because the side completion had not reached the live queue DAG. I retained the existing sandbox, all three new nodes, every preserved proof argument, the citations and the genuine search log. I compared the retained parent against the current read clone: only `proof`, `proof_deps` and `split_report` differed. I rebuilt the sandbox item from that current record and reapplied exactly those owned split fields, retaining its current statement, statement dependencies, blueprint ancestry, Lean attachments and maintainer metadata. The required delivery tool rebases this overlay onto current server `origin/sheaf-dag`; I ran no repository git command.
 
-Empty index set: jointlySurjective forces S to be empty, and Y can be empty;
-uniqueness is then the unique empty-scheme and module comparison. Empty local
-schemes and empty overlaps impose only their canonical equations. Empty affine
-opens use the recorded ampleness predicate on the empty restriction. No
-nonemptiness, finiteness, Noetherian, separatedness or flatness hypothesis was
-added. Independent index universe v permits arbitrary-sized families; test
-schemes use u and include the actual diagonal and triple overlaps. The original
-statement and proof are unchanged; no STATEMENT-DISPUTED issue remains.
+I reread every statement cited in the six assembly steps: the relation-construction node in step 1; `lem-trf-etale-relation-quotient` and `def-trf-algebraic-space` in step 2; chart recovery in step 3; invertible descent in step 4; ample-local representability and invertible descent in step 5; and simultaneous morphism gluing in step 6. All eight citation entries still quote their entire current statement verbatim. Thus no old quotation silently substitutes an earlier interface. In particular, the quotient dependency now has Q104's 2026-10-22 split: its affine-cover and representable-presentation inputs are new, but its conclusion still gives algebraicity, the etale surjective quotient atlas, its kernel pair and etale-local lifting. These are precisely the inputs to our steps 2 and 3; we use none of its internal argument as an uncited claim. I also reread the current invertible-descent and ample-local interfaces: the former explicitly supplies ordinary scheme modules and full faithfulness, and the latter still assumes ampleness on inverse images of affine base opens and concludes representability. No changed hypothesis forces a mathematical alteration of the retained assembly.
 
-Additional returned defects repaired: all 17 helpers/theorem are recorded; the
-missing Uj docstring is supplied; the module has source and main-definition
-lists; the theorem proof docstring gives all six node steps; all lines are at
-most 100 columns; the generic module moved to AlgebraicGeometry; all module
-pullbacks now use tensorPullback; the non-public imports include the available
-proof prerequisites. A direct citer audit found exactly
-`lem-trf-polarized-fine-log-etale-descent` in stmt_deps/proof_deps. Its steps 1
-and 5 need the compatible scheme/line realization and unique global comparison
-provided here, so its use still holds. It was not edited.
+The first repair dry run exited without pushing and found four additional same-tag comparisons in the current DAG. I opened all three existing node files: `lem-sfb-coproduct-model-represents-sheaf` concerns a pro-etale sheaf and an already descended constant-coproduct scheme, not arbitrary compatible scheme and module morphisms; `lem-trf-etale-quotient-affine-open-cover` refines an already given relation by affine open charts, not the relation constructed from a scheme cocycle or recovery of prescribed base charts; `lem-trf-representable-etale-quotient-presentation` proves an already representable quotient map is etale and surjective, not that its base change along a labelled U_i is X_i. The four pairwise distinctions are recorded below. None replaces an extracted task, so three independent new statement-only nodes remain.
 
-Validation: scompile.py compiled the repaired file cleanly both as a sandbox
-file and at its library module path. The final dry run and delivery repeat
-per-file compilation and server preflight after the record and report updates.
+For this repair I reopened Stacks `spaces.tex` Tags 02WW and 02WV, `spaces-descent.tex` Tags 04W8, 060X and 0D3C, `spaces-divisors.tex` Tag 0D36, and `descent.tex` Tag 023Q. They preserve the relation/quotient, module-descent and relative-ampleness route. I checked again the singleton non-monomorphic cover (identity only on the diagonal), empty covers over the empty base, disconnected tests of the coproduct relation, and arbitrary, possibly zero, module maps in morphism gluing. The statement is unchanged, and the complete old steps remain preserved in this report. No new Mathlib question arose; I read all retained search outputs and reused their logged queries without fabricating or rerunning them.
+
+
+## Repair of returned head cb1becc8c7d
+
+The dispatcher returned head `cb1becc8c7d`, with the same live/side-DAG landing refusal. On this retry the initial required dry run passed at `945e788385a`. The first push invocation then explicitly reported that the saved overlay was exactly the content of `cb1becc8c7` and pushed nothing. That result is not a delivery; I continued this repair instead of claiming it was delivered.
+
+I compared all four sandbox nodes with the current read DAG. The three extracted ids are still absent there. For the parent, only the split-owned `proof`, `proof_deps` and `split_report` differed. I rebuilt it from the current parent and reapplied those fields, preserving its current statement, statement dependencies and all maintainer metadata. The required delivery tool constructs the rebased commit on current server main; no git command was run in the read clone.
+
+I reopened all six steps and every cited statement. The current `lem-trf-etale-relation-quotient` takes a scheme and relation over S and defines its sheaf quotient on Sch/S. Its statement supplies both the relative algebraic space and the kernel-pair isomorphism. I adjusted step 2 to apply precisely this relative construction, explicitly writing the representable-sheaf kernel-pair isomorphism; no extra descent assertion about a structure map is left implicit. Steps 3 and 4 then use the prescribed base charts and exact overlap projections, as before. Invertible descent still gives the scheme-site interpretation and full faithfulness; ample-local still requires ampleness on inverse images of affine opens. All eight full-statement quotes in citations.json remain literal parts of the current statements, so no citation repair or new Mathlib search question is needed.
+
+This change retains the approved route, all three independently assignable statement-only tasks and all original argument material. The original step 2 is preserved here:
+
+Apply [lem-trf-etale-relation-quotient] to the relation just constructed. Write $F=V/R$ for its algebraic-space quotient and $q:V\to F$ for the etale surjective atlas. It has $V\times_FV=R$. Since both arrows of $R$ are over $S$, the quotient is an algebraic space over $S$. All subsequent fibre products and line modules on $F$ use [def-trf-algebraic-space].
+
+## Review by Q98
+
+I read the worker contract, the three levels in SETUP, GOAL, the trace-formula chapter and sk-i-curve-zero unit, and the current main-20261015 ancestor. Its local-term theorem is reached through the existing descent ancestry; this repair refines that existing technical input and changes neither the unit nor the chapter route. I read delivery-errors B through E whole, and checked the files against those actual failure cases. In particular, the new nodes are not declarations of the desired polarized descent theorem: the first has neither modules nor a quotient, the second assumes an algebraic-space presentation and has no ampleness or module claim, and the third starts with two already existing schemes and glues arbitrary morphisms without constructing either object.
+
+For the item I read spaces.tex Tag 02WW (`theorem-presentation`) and Tag 02WV (`lemma-when-it-works-it-works`), spaces-descent.tex Tag 04W8 (`proposition-fpqc-descent-quasi-coherent`) and Tag 060X (`lemma-finite-locally-free-descends`), Tag 0D3C (`lemma-descending-property-ample`), and spaces-divisors.tex Tag 0D36 (`lemma-relatively-ample-local`). I also read descent.tex Tag 023Q (`lemma-fpqc-universal-effective-epimorphisms`). The tag-to-label mapping was checked in stacks-project/tags/tags. These give the original route: an algebraic-space quotient, descent of the invertible module, and scheme representability by relative ampleness. No SGA source is used.
+
+For the new relation node I reread the input of 02WW and the old relation argument. This is an agent-extracted preparatory lemma, not a claim that 02WW itself constructs the relation from descent data. Its hypotheses explicitly require the isomorphisms to preserve the two base maps, the identity only along the diagonal, and the triple-overlap cocycle. The conclusion asks for the actual monomorphism into the square and etaleness of both legs. The source/target formulas in its statement preserve the complete argument the old proof must establish: base-changed etaleness, monicity, reflexivity, inverse and composition, including disconnected test schemes. The coproduct existence node was opened and really supplies schemes, open summands, disjointness and the universal property. No quasi-compactness, separatedness or finiteness of the cover is added.
+
+For the new chart node I reread 02WV's presentation base-change computation and 02WW, and opened `lem-trf-etale-relation-quotient` and `lem-weil-pbc-small-etale-representable-presheaf-sheaf`. The latter states gluing of maps to any scheme over the base, not merely the fully faithful part of Yoneda. The new statement introduces all charts, transitions, coproducts, the algebraic space F and the given etale surjective q. It assumes the kernel-pair isomorphism, which the existing quotient theorem actually provides; it does not assume effectiveness of scheme descent. It concludes the labelled chart isomorphisms, exact theta transitions, the projections of each overlap, and the covering property needed for module descent. I corrected an initially unnamed structure map in this new statement to `f_i:X_i→U_i`, since the formula for a_i uses f_i. The proof to be assigned is the explicit lift/transition/sheaf-gluing/injectivity argument preserved below.
+
+For the new morphism node I read 023Q's sheaf-condition statement and proof and 04W8's full-faithfulness statement, and compared the old uniqueness argument. The new theorem is a general gluing result for (b_i, mu_i), even when they are not invertible. One first glues the underlying scheme morphism and checks it is over S by uniqueness; then the identified pullbacks of b^*M and L are line modules on the single scheme X, so module full faithfulness applies on its etale cover. When all local data are invertible, the inverse local scheme maps cover Y, while the inverse module maps on the cover of X give the inverse of mu. This is precisely why simultaneous gluing needs its own argument; a theorem about modules on a fixed space does not itself glue the underlying scheme map. The statement fixes the identity and composition pullback comparisons by their actual definition nodes. It needs neither ampleness nor the item's existence conclusion.
+
+I opened every node used by every step of the revised item and copied literal statements into citations.json. Step 1 uses the new relation node for exactly V, R, s, t, monicity and the etale equivalence relation. Step 2 uses the existing quotient node: its statement explicitly gives algebraicity, the etale surjective q and R as its kernel pair; `def-trf-algebraic-space` specifies the objects on which line modules and etale pullbacks live. Step 3 uses the new chart node with that q and kernel pair; it supplies all chart, transition and cover conclusions stated in the step. Step 4 uses the existing invertible-descent node with exactly that covering and the given lambda maps; their identity and cocycle hypotheses are the parent's hypotheses. Step 5 uses the existing ample-local node with Y=S: each base change is the scheme X_i and the pulled-back line module is L_i, whose affine-open-inverse-image ampleness is precisely assumed. Representability evaluated on S makes F a scheme, and the invertible-descent node explicitly provides the scheme/Zariski interpretation of the line module. Step 6 uses the new morphism-gluing node for the two existing realizations; equality of the theta and lambda transitions is exactly the double-overlap compatibility of the local isomorphisms of pairs. Its existence and uniqueness produce a unique compatible pair isomorphism. Every step is marked non-elementary. None silently takes an assertion from a cited proof rather than its statement.
+
+I checked small cases and hypotheses directly. Empty S and empty covers force all schemes over S empty; the conclusions still hold. Empty individual charts give empty relation summands and do not invalidate the cover. For a singleton cover U→S that is not a monomorphism, R_ii is not X_i: the identity is imposed only along the base diagonal, exactly as stated. For an identity cover the relation, quotient charts and morphism gluing reduce to the original schemes and maps. Disconnected test schemes require local, not globally fixed, coproduct indices; the preserved relation proof explicitly decomposes them. The morphism node includes zero module maps, so its uniqueness cannot accidentally rely on invertibility; only its last conclusion assumes local isomorphisms. No affine-intersection assumption, Noetherian condition or quasi-compactness enters any extraction.
+
+For B1–B7 I checked statement-only records, all introduced objects, definition references, single TeX escapes in the decoded text, exact Stacks labels, and actual recorded queries. No Mathlib leaf is asserted, so no unverified declaration/file/line claim occurs. For C1/C4 the entire non-elementary burden of old steps 1, 3, 6 is assigned to the new statements; old steps 2, 4, 5 use the exact opened existing statements. For D1/D2, the three independent tasks are neither one whole replacement nor clones of the item's existence clause. For E I checked the diagonal, the two base maps, the direction of theta and lambda, the two different scheme covers for inverse maps, and all hypotheses just described. The longest retained proof step has 619 characters, so there is no hidden lemma inside a retained step exceeding 2,000 characters.
+
+## Searches and reuse
+
+Before creating the nodes I searched the whole DAG for the tags 02WW, 02WV, 023Q and 04W8 and for relation/descent, chart/quotient and scheme/line/morphism concepts, then read the candidate statements. I ran blueprint_refs.py ancestor on the item and searched the whole imported blueprint with `equivalence relation`, `descent`, `etale descent datum`, `quotient chart`, `invertible modules`, `etale equivalence`, `scheme and a line`, `descent for pairs` and `quotient of a scheme`. No blueprint statement gives one of these new results. The Picard descent unit and module-descent node concern modules on a fixed scheme; the fpqc representable/morphism descent nodes concern scheme maps only. The existing relation nodes start with an already given relation, or restrict an existing one, and do not construct it from arbitrary scheme descent transitions. The existing atlas-presentation node recovers the quotient from an existing algebraic space, not its prescribed U_i-base charts.
+
+For each new id, searches were made only through msearch.py and recorded exactly as returned: two LeanFinder phrasings, LeanSearch, Loogle, and grep under Mathlib/AlgebraicGeometry. All services answered. Loogle's relation query returned an unknown-identifier response for `AlgebraicGeometry.IsEtale`; I recorded that response as a failed query with no match, not as successful semantic evidence. The two semantic searches and grep supply the independent evidence. No fabricated query or previous nonexistent log was added. The item retains its earlier searches because its statement and search question have not changed.
+
+I read the returned types, including Scheme.GlueData.Rel (a relation for open-immersion gluing), Scheme.Cover.gluedCover and cocycle lemmas (Zariski open covers), Scheme.LocalRepresentability.yonedaIsoSheaf (Zariski local representability), Scheme.Pullback gluing (construction of scheme fibre products), Scheme.Hom.liftQuotient (affine ring-ideal quotients), Scheme.Etale.forgetFullyFaithful (the inclusion of etale schemes in an over-category), and IsZariskiLocalAtTarget.descendsAlong (descent of morphism properties). I opened Gluing.lean's GlueData structure, EffectiveEpi.lean, Sites/Fpqc.lean, Morphisms/Descent.lean, and Sites/Representability.lean to check the tempting generalizations. None constructs the etale descent relation, recovers these algebraic-space base charts, or glues both a moving scheme map and a line-module map in one line. Thus the three nodes remain unsplit rather than incorrectly labelled Mathlib leaves.
+
+## Not duplicates
+
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-a1-fppf-kernel-pair-quotient-descent: the existing node assumes a finite locally free surjective scheme quotient with an identified kernel pair and descends its structure map to S, then identifies its fppf quotient sheaf; the new node glues arbitrary scheme morphisms along an etale cover together with homomorphisms between their pulled-back invertible modules, with no finite quotient hypothesis.
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-sfb-etale-affine-pinching-descent: the existing node proves the pushout property for a finite morphism and closed immersion satisfying an affine exact-sequence criterion, including flat base change; the new node requires neither a pinching diagram nor that exact sequence and descends both a scheme map and a line-module map along an etale cover.
+- lem-trf-scheme-descent-cocycle-etale-relation vs lem-a1-space-invariant-open-quotient: the existing node restricts the kernel pair of an already given algebraic-space atlas to an invariant open and constructs its open quotient; the new node starts with arbitrary schemes and scheme cocycle isomorphisms over a base cover and must construct the initial etale equivalence relation before any quotient or atlas exists.
+- lem-trf-scheme-descent-cocycle-etale-relation vs lem-sfb-etale-local-moduli-gluing: the existing node assumes a field, algebraic stacks, affine uniform categorical morphisms and 2-cartesian moduli overlap squares; the new node constructs a relation from arbitrary scheme descent transitions over an arbitrary base scheme without any stack, moduli, affine or universal-homeomorphism hypotheses, so it is not a specialization of that theorem.
+- lem-trf-scheme-descent-quotient-chart-isomorphism vs lem-a1-space-invariant-open-quotient: the existing node constructs an open subspace by restricting an existing atlas relation to an invariant open; the new node recovers each specified base-change chart F times_S U_i as X_i from a presented descent cocycle, with exactly its given theta transitions, and assumes no invariant open.
+- lem-trf-scheme-descent-quotient-chart-isomorphism vs lem-sfb-etale-local-moduli-gluing: the existing node identifies pairwise overlaps of moduli scheme charts in a quotient under field, stack, affine categorical-map and 2-cartesian hypotheses; the new node identifies F times_S U_i with arbitrary prescribed X_i using scheme cocycle data over any base S, with none of those extra hypotheses.
+
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-sfb-coproduct-model-represents-sheaf: the existing node identifies a pro-etale sheaf with the functor of points of an already descended constant-coproduct scheme and descends its geometric properties; the new node glues arbitrary morphisms between two schemes together with a homomorphism between their pulled-back line modules, without a constant-coproduct or local-representability hypothesis.
+- lem-trf-scheme-descent-cocycle-etale-relation vs lem-trf-etale-quotient-affine-open-cover: the existing node starts with a given etale equivalence relation and refines its quotient by affine open subquotients; the new node constructs that relation and its monomorphism from arbitrary scheme cocycle isomorphisms, before any quotient is given.
+- lem-trf-scheme-descent-quotient-chart-isomorphism vs lem-trf-representable-etale-quotient-presentation: the existing node assumes representability of a quotient map and proves its etale-surjective presentation properties and local lifting; the new node assumes a presentation and proves its labelled base changes F times_S U_i are the original X_i, with exactly the prescribed theta transitions.
+- lem-trf-scheme-descent-quotient-chart-isomorphism vs lem-trf-etale-quotient-affine-open-cover: the existing node covers a quotient by open subquotients of an affine refinement of its atlas; the new node recovers prescribed U_i-base-change charts from a descent cocycle, with their exact overlap projections, and makes no affine-chart restriction.
+- lem-trf-scheme-descent-cocycle-etale-relation vs lem-trf-polarized-scheme-etale-descent: the item constructs a new scheme and an ample descended module, whereas this extracted result has the narrower independent task described above and makes no such existence assertion.
+- lem-trf-scheme-descent-cocycle-etale-relation vs lem-trf-etale-relation-quotient: the existing theorem assumes an etale equivalence relation and constructs its quotient; the new result instead constructs that input from a cocycle or identifies prescribed base charts of an already presented quotient.
+- lem-trf-scheme-descent-cocycle-etale-relation vs def-trf-polarized-scheme-etale-descent-datum: the existing node defines data and compatible realizations only; it proves none of the relation, recovery or simultaneous morphism-gluing conclusions.
+- lem-trf-scheme-descent-cocycle-etale-relation vs lem-trf-polarized-fine-log-etale-descent: the existing theorem constructs fine-log objects with relatively ample line modules and glues log maps only; this result has neither log nor ample hypotheses and is an underlying independent scheme argument.
+- lem-trf-scheme-descent-quotient-chart-isomorphism vs lem-trf-polarized-scheme-etale-descent: the item constructs a new scheme and an ample descended module, whereas this extracted result has the narrower independent task described above and makes no such existence assertion.
+- lem-trf-scheme-descent-quotient-chart-isomorphism vs lem-trf-etale-relation-quotient: the existing theorem assumes an etale equivalence relation and constructs its quotient; the new result instead constructs that input from a cocycle or identifies prescribed base charts of an already presented quotient.
+- lem-trf-scheme-descent-quotient-chart-isomorphism vs def-trf-polarized-scheme-etale-descent-datum: the existing node defines data and compatible realizations only; it proves none of the relation, recovery or simultaneous morphism-gluing conclusions.
+- lem-trf-scheme-descent-quotient-chart-isomorphism vs lem-trf-polarized-fine-log-etale-descent: the existing theorem constructs fine-log objects with relatively ample line modules and glues log maps only; this result has neither log nor ample hypotheses and is an underlying independent scheme argument.
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-trf-etale-relation-finding-opens: the existing theorem identifies the quotient of a restricted relation with an open subspace; this result concerns the cocycle construction or simultaneous gluing of scheme and module maps, not open subquotients.
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-trf-etale-affine-quotient-representable: the existing theorem proves representability for an affine input relation already given; it neither constructs that relation nor glues a moving scheme and its module map.
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-trf-polarized-scheme-etale-descent: the item constructs a new scheme and an ample descended module, whereas this extracted result has the narrower independent task described above and makes no such existence assertion.
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-trf-algebraic-space-invertible-descent: the existing theorem descends line modules and their homomorphisms on one fixed algebraic space; the new theorem simultaneously descends the underlying scheme morphism between two different schemes.
+- lem-trf-etale-scheme-line-morphism-gluing vs def-trf-polarized-scheme-etale-descent-datum: the existing node defines data and compatible realizations only; it proves none of the relation, recovery or simultaneous morphism-gluing conclusions.
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-trf-polarized-fine-log-etale-descent: the existing theorem constructs fine-log objects with relatively ample line modules and glues log maps only; this result has neither log nor ample hypotheses and is an underlying independent scheme argument.
+- lem-trf-etale-scheme-line-morphism-gluing vs lem-weil-pbc-fpqc-representable-descent: the existing theorem glues maps to a fixed scheme; the new theorem also glues the module map whose domain depends on the descended scheme map.
+
+The fpqc scheme-morphism descent and Picard module-descent candidates are distinguished in the source/search discussion above; neither states a construction of the relation nor the labelled quotient-chart recovery.
+
+## Preserved arguments assigned to the new nodes
+
+These are the exact old proof-step texts, moved into this report as the next workers' argument material. They are deliberately absent from the statement-only node records. Old steps 4 and 5 remain verbatim in the parent; the original step 2 is also preserved below after its relative application was made explicit.
+
+### lem-trf-scheme-descent-cocycle-etale-relation — former step 1
+
+Form the schemes $V=\coprod_iX_i$ and $R=\coprod_{i,j}R_{ij}$ using [lem-weil-pbc-scheme-coproduct-family], where $R_{ij}=X_i\times_{U_i}(U_i\times_SU_j)$. Its source is projection to $X_i$; its target is projection to $X_j$ after $\theta_{ij}$. The source on $R_{ij}$ is a base change of $U_j\to S$, and the target is, up to $\theta_{ij}$, a base change of $U_i\to S$. Thus they are etale by [lem-weil-pbc-etale-scheme-base-change]. Their coproducts are etale: the summands are open and cover the source, so the affine-local definition of [def-weil-etale-morphism] checks this on each summand. The map $R\to V\times_SV$ is a monomorphism: two arrows with specified source and target have the same indices locally, the same two base maps to $U_i,U_j$, and the same $X_i$-map, hence the same map to $R_{ij}$ by the fibre-product universal property. The identity along the diagonal gives reflexivity. The cocycle with indices $(i,j,i)$ gives the inverse, and the general cocycle gives composition. These checks apply after decomposing any test scheme into the opens on which the summand indices are fixed. Consequently this is an etale equivalence relation over $S$.
+
+The existing facts to cite when splitting this node are: lem-weil-pbc-scheme-coproduct-family, lem-weil-pbc-etale-scheme-base-change, def-weil-etale-morphism, def-pc-fibre-product.
+
+### lem-trf-scheme-descent-quotient-chart-isomorphism — former step 3
+
+The map $X_i\to F$ and its structure map to $U_i$ give $a_i:h_{X_i}\to F\times_Sh_{U_i}$. To prove $a_i$ invertible, fix a test scheme $T\to U_i$ and a section $z\in F(T)$. By [lem-trf-etale-relation-quotient], $z$ lifts etale locally on $T$ to $V$. Refining by the open summands of $V$, write each lift as $x_j:T_a\to X_j$, and let $u_j:T_a\to U_j$ be its base. Apply $\theta_{ji}$ with the pair $(u_j,u_i)$ to get $y_a:T_a\to X_i$. On $T_a\times_TT_b$, the two lifts form a section of $R=V\times_FV$, so they are related by the specified $\theta_{jk}$. The cocycle gives $\theta_{ki}\theta_{jk}=\theta_{ji}$ and hence equality of the resulting maps to $X_i$. By [lem-weil-pbc-small-etale-representable-presheaf-sheaf], applied on $T_{\mathrm{et}}$ to the scheme $T\times_{U_i}X_i$, these maps glue uniquely to $y:T\to X_i$. Conversely, two maps to $X_i$ with the same $F$-image give an $R_{ii}$-arrow whose two base maps to $U_i$ agree. This arrow restricts along the diagonal, where $\theta_{ii}$ is the identity, so the maps are equal. The construction commutes with restriction of $T$ and is inverse to $a_i$. Thus $F\times_SU_i\simeq X_i$, with overlap identifications exactly $\theta_{ij}$.
+
+The existing facts to cite when splitting this node are: lem-trf-etale-relation-quotient, lem-weil-pbc-small-etale-representable-presheaf-sheaf.
+
+### lem-trf-etale-scheme-line-morphism-gluing — former step 6
+
+Let $(X,L)$ and $(X',L')$ be two pairs with the specified identifications. Over $X\times_SU_i\simeq X_i$ define the map to $X'$ by the prescribed identification with $X'\times_SU_i$, followed by projection. The scheme cocycle says these maps agree on every double overlap. This family is an etale covering of $X$ by [lem-weil-pbc-etale-covering-base-change], so [lem-weil-pbc-small-etale-representable-presheaf-sheaf] gives a unique scheme map $b:X\to X'$. Interchanging the two pairs gives an inverse: each composite restricts to the identity on every member of the cover, hence equals the identity by uniqueness in that same sheaf condition. The prescribed local isomorphisms $b^*L'\simeq L$ agree on the overlaps because both pairs induce $\lambda_{ij}$. Full faithfulness in [lem-trf-algebraic-space-invertible-descent] glues them to a unique module map, and glues their inverses; the composites are identities by faithfulness. Thus there is exactly one compatible isomorphism of pairs.
+
+The existing facts to cite when splitting this node are: lem-weil-pbc-etale-covering-base-change, lem-weil-pbc-small-etale-representable-presheaf-sheaf, lem-trf-algebraic-space-invertible-descent.
+
+## Validation
+
+The initial dry run of this retry passed at `945e788385a`; its unchanged push attempt pushed nothing, as recorded above. The final revised split will receive a new required dry run before the next push.
+
+The previous server-only srvcheck check_dag completed with “check_dag OK: no finding introduced by the sandbox or on its nodes”. The first dry run of this landing repair exited with the four newly present same-tag comparisons; these have now been read and distinguished above. A fresh required server dry run and push follow this repair review.
+
+## Repair of the renewed landing return (2026-10-23)
+
+The initial dry run of this retry exited with duplicate-check diagnostics, before pushing. It found six additional same-tag pairs involving four existing nodes now present in the current DAG. I opened and read their complete statements: finite-flat kernel-pair quotient descent (lem-a1-fppf-kernel-pair-quotient-descent), affine pinching descent (lem-sfb-etale-affine-pinching-descent), invariant-open quotients (lem-a1-space-invariant-open-quotient), and etale-local moduli gluing (lem-sfb-etale-local-moduli-gluing). The six explicit comparisons under “Not duplicates” explain their different hypotheses and conclusions. In particular, the moduli statement has affine categorical charts over a field and cannot supply either of our arbitrary-base scheme-cocycle results by specialization.
+
+I compared all four retained sandbox nodes with the current read DAG again. The three extracted nodes are absent; only proof, proof_deps and split_report differ for the parent. I reconstructed the parent from that current record and reapplied those owned fields, preserving the current statement, all statement dependencies and all maintainer metadata. The delivery command supplies the actual rebase onto current origin/sheaf-dag. This repair changes step 4, rather than merely re-pushing the old overlay: it now explicitly takes the jointly surjective etale cover and both overlap projections from step 3's chart theorem, then checks the direction of lambda, its diagonal identity and its triple cocycle against invertible descent. This removes the earlier redundant assertion about restricting the atlas to open summands. The old step-4 argument remains recorded in returned-proof.json and the prior reports; no mathematical argument was discarded. The item remains a six-step assembly below 3000 characters, with three separate statement-only tasks and no proof step longer than 2000 characters.
+
+For this retry's Review by Q98, I reread every cited statement, not just its status. Step 1 constructs the relation; step 2 applies the current relative quotient theorem on Sch/S, which supplies its atlas and kernel pair; step 3 supplies the labelled base charts, exact transitions and etale cover. Step 4 uses that cover and precisely the given module cocycle. Step 5 applies ample-local with Y=S, using ampleness on inverse images of affine opens, and the scheme-site module interpretation explicitly provided by invertible descent. Step 6 uses compatible local pair isomorphisms between two existing realizations and the morphism-gluing node's existence, uniqueness and isomorphism clauses. I refreshed all eight citations from the opened statements, with verbatim equality. Their interfaces still support all six steps, including the quotient dependency's current split; no altered statement requires a new search question.
+
+I reopened Stacks spaces.tex Tags 02WW/02WV, spaces-descent.tex Tags 04W8/060X/0D3C, spaces-divisors.tex Tag 0D36, and descent.tex Tag 023Q, checked their tag labels, and read the current main-20261015 ancestor and unit route. These retain the relation, quotient, line-module descent and relative-ampleness route. I read the retained actual search outputs and searches.jsonl; they concern the unchanged statements and are reused. The upstream concept/tag search still gives no attachment, and the project's exact theorem still ends in sorry. The singleton non-monomorphic-cover check again requires identity only along the diagonal, not throughout U_i times_S U_i; empty bases and charts, disconnected test schemes, and zero module maps remain allowed. This repair introduces no stronger hypotheses, no source-route change, no Lean writes and no compiler invocation.
+
+Validation for this retry: the first dry run found the six comparisons now repaired above. A fresh required dry run follows these changes, and push is attempted only after that process exits successfully.

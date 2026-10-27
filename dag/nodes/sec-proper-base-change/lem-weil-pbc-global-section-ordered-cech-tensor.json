@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-global-section-ordered-cech-tensor",
+ "kind": "statement",
+ "title": "Ordered localization coordinates identify the scalar-extended tensor Cech complex",
+ "statement": "Let (C,J,O) be a small commutative ringed site, A its global ring and T its explicit scalar extension [def-weil-pbc-global-section-scalar-extension]. Fix r global sections f. Let K be an augmented A-module complex with actual ordered localization coordinates as in [def-weil-pbc-ring-complex-cech-data]: K^0 is A, K^(q+1) is the product of A localized at the product f(t i) over increasing t:Fin(q+1) into Fin r, negative terms are zero, the differential is the alternating sum of A-algebra localization maps (the initial differential is the diagonal localization map), and the augmentation is the degree-zero identification. Then the tensor extended Cech complex [def-weil-pbc-ringed-extended-cech] is isomorphic as an augmented complex to T(K). No replacement complex P, K-flat hypothesis or derived-category comparison is required.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099D(c),(d), 099E, final paragraph; Tag 0996 for the finite tensor localization model"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordered localization coordinates of the actual ring tensor complex. Lift the degree-zero and positive-degree coordinate equivalences composed with the inverse of the supplied equivalences to isomorphisms of one-point module sheaves; lift negative degrees using their zero objects. The supplied face maps equal the ring tensor face maps by uniqueness of algebra maps out of a localization. Substituting the first and later differential equations proves the cochain equations and hence constructs an isomorphism from the ring tensor complex to K.",
+   "uses": [
+    "lem-weil-pbc-ring-tensor-cech-coordinates",
+    "def-weil-pbc-ring-complex-cech-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two degree-zero augmentation equations show that this isomorphism commutes with augmentation after postcomposition with the single-complex degree-zero isomorphism; cancel it. In all nonzero degrees the target is zero. Map this augmented isomorphism through the actual additive global scalar-extension functor. Compose it with the tensor base-change comparison and use functoriality of composition to obtain exactly the displayed augmentation equation.",
+   "uses": [
+    "lem-weil-pbc-global-section-tensor-base-change",
+    "def-weil-pbc-global-section-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-tensor-cech-coordinates",
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-global-section-tensor-base-change",
+  "def-weil-pbc-global-section-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U9",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996, 099D(d), 099E; coordinate reconstruction in Lean and two independent tensor calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars sends an augmented ordered Cech localization complex to the tensor product of two term localization complexes",
+   "results": "HomologicalComplex.ιTensorObj; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.tensorObj; HomologicalComplex.HasTensor; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; CategoryTheory.Tor; CategoryTheory.Tor'",
+   "date": "2026-10-26",
+   "verdict": "No theorem for this explicit global-section extension and ordered coordinate interface; the listed generic tensor/derived lemmas do not state this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Localization.Away",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for this explicit global-section extension and ordered coordinate interface; the listed generic tensor/derived lemmas do not state this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "ringFamilyGlobalExtension|RingComplexHasCechModel",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for this explicit global-section extension and ordered coordinate interface; the listed generic tensor/derived lemmas do not state this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordered Cech localization complex is the tensor product of two term localization complexes",
+   "results": "HomologicalComplex.tensorObj; HomologicalComplex.tensorHom; IsLocalization.tensorProduct_isLocalizedModule; HomologicalComplex.HasTensor; CategoryTheory.Functor.IsLocalization.prod; HomologicalComplex.instHasTensorOfHasTensorX; CategoryTheory.cechNerveTerminalFrom; IsLocalization.instIsLocalizedModuleTensorProductMap",
+   "date": "2026-10-26",
+   "verdict": "Only generic exact-functor, tensor and localization results; no comparison for this explicit global-section functor or ordered localization complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalSectionScalarCechModel",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Original item proof step 2: fraction base change, the finite ordered tensor expansion and the augmentation equation. The current created.item chain stops at the module name Sheaf.Paper.FunctorialRingComplexCechComparison, so tools/blueprint_refs.py ancestor returns None. The inherited blueprint route serves def-weil-pbc-completed-pullback, detailed form: the global augmented Cech comparison.",
+   "via": [
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalSectionOrderedCechTensor",
+  "file": "lean/Sheaf/Paper/GlobalSectionOrderedCechTensor.lean",
+  "declaration": "CategoryTheory.ringFamilyGlobalExtension_ordered_iso",
+  "statement": "theorem ringFamilyGlobalExtension_ordered_iso\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections)\n    (K : CochainComplex (RingSiteModules (ringFamilyGlobalRing O)) ℤ)\n    (a : K ⟶ ringComplexSingle (ringFamilyGlobalRing O))\n    (e₀ : (K.X 0).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[ringFamilyGlobalRing O]\n      ringFamilyGlobalRing O)\n    (e : ∀ q : ℕ, (K.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩)\n      ≃ₗ[ringFamilyGlobalRing O]\n        ((t : Fin (q + 1) ↪o Fin r) →\n          Localization.Away (∏ i, ringFamilyGlobalList O r f (t i))))\n    (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)),\n      Localization.Away (∏ i, ringFamilyGlobalList O r f (t (Fin.succAboveOrderEmb j i)))\n        →ₐ[ringFamilyGlobalRing O]\n          Localization.Away (∏ i, ringFamilyGlobalList O r f (t i)))\n    (hneg : ∀ n : ℤ, n < 0 → CategoryTheory.Limits.IsZero (K.X n))\n    (hd₀ : ∀ (x : (K.X 0).val.obj (op ⟨PUnit.unit⟩)) (t : Fin 1 ↪o Fin r),\n      e 0 ((K.d 0 1).val.app (op ⟨PUnit.unit⟩) x) t =\n        algebraMap (ringFamilyGlobalRing O)\n          (Localization.Away (∏ i, ringFamilyGlobalList O r f (t i))) (e₀ x))\n    (hd : ∀ (q : ℕ) (x : (K.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩))\n      (t : Fin (q + 2) ↪o Fin r),\n      e (q + 1) ((K.d ((q : ℤ) + 1) ((q : ℤ) + 2)).val.app (op ⟨PUnit.unit⟩) x) t =\n        ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n          l q t j (e q x ((Fin.succAboveOrderEmb j).trans t)))\n    (ha : ∀ x : (K.X 0).val.obj (op ⟨PUnit.unit⟩),\n      ringComplexAugmentationValue a x = e₀ x) :\n    ∃ e : (ringedExtendedCech O r f).1 ≅ ringFamilyGlobalExtensionComplex O K,\n      e.hom ≫ ringFamilyGlobalExtensionAugmentation O a = (ringedExtendedCech O r f).2",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022856-L-492967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261026T071316-L-3911986",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

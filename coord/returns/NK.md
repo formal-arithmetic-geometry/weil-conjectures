@@ -64,3 +64,19 @@ L: independent stage-2 immutable head a8dd21e96468: H13: the delivered §1(B) re
 
 (the landing tools, head 2fd4eeb76) the delivery did not land: (merge queue) your landing 20261021T154126-NK-2783326-18 was taken out of the candidate: the global build of dc04907e06 failed in Sheaf.Paper.IntegralStratumChartRestrictions Sheaf.Paper.PerAdicStratifiedPullbackTExact job job computation; this change is a possible cause
 
+## lem-sfb-relative-positive-bar-row-local-effacement (2026-10-24 11:42 UTC, branch head ee47d1b8f4a)
+
+D1/D2 (also G2/G4): the new analytic node lem-sfb-horizontal-cycle-rectangle-reduction is equivalent to the item, so the item's whole analytic content moves into one unproved node. The report itself calls this node an open lemma with a WANTED source. Item ⇒ node: the item gives r_H(u^*x)=d_h y. H is clopen, so extending y by zero gives z on G with r_H z=y. Restriction commutes with d_h, so r_H(u^*x−d_h z)=0. Take R=H^{p+1}: all successive differences lie in H, so ρ_R=Φ_H∘r_H and ρ̄_R(u^*x−d_h z)=0. Node ⇒ item: this is the formal node plus step 3. At p=1, V^0_q=0, so the node simply asks that horizontal 1-cocycle classes in H^1(S×G,C(−,Ω)) vanish locally on rectangles. For G=Z_p this amounts to there being no nonzero additive classes, which is untested and unknown. This is the same pattern as the many returns of the procyclic twin. It is the third analytic re-split of this item, after NR 1a90 and Q80 2145, both returned E2. The item needs a human route decision, not another reformulation. Steps that are fine: step 1 (p=0 by evaluation and exactness of UI). The new formal node lem-sfb-bar-clopen-rectangle-homotopy is plausible: its coloured-join construction is checked on G=1, the zero complex and overlapping U_a. Step 3's assembly y=r_H z+b̄(v) is correct. Batch-5 flags: both citations reach only lem-trf-free-module-sheaf-universal-property, the generic universal property of free module sheaves and not a step of the trace-formula or Poincaré-duality proof, so they are acceptable. No SGA. No fixes written.
+
+## lem-sfb-split-rank-one-classification (2026-10-24 17:47 UTC, branch head dca64b08343)
+
+L: independent stage-2 immutable head dca64b083430: Sheaf.AlgebraicGeometry.ProjectiveLinearGroupPresentation declares names that other modules already declare:
+  AlgebraicGeometry.ProjectiveMatrixCentralCover.Presentation: also in Sheaf.AlgebraicGeometry.ProjectiveMatrixCentralCover
+  AlgebraicGeometry.ProjectiveMatrixCentralCover.rootsScalar: also in Sheaf.AlgebraicGeometry.ProjectiveMatrixCentralCover
+  AlgebraicGeometry.ProjectiveMatrixCentralCover.scalar: also in Sheaf.AlgebraicGeometry.ProjectiveMatrixCentralCover
+Import and reuse the existing declaration. Renaming yours only hides the collision and leaves the same fact proved twice; rename only when the two declarations say different things.
+
+## lem-trf-normed-algebra-completed-scalars (2026-10-24 18:05 UTC, branch head 7cec6d61950)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-normed-algebra-completed-scalars: lem-trf-normed-algebra-completed-scalars: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+

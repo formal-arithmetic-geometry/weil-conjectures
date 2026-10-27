@@ -18,62 +18,30 @@
  ],
  "proof": [
   {
-   "text": "First construct the colimit without using invariants. On the finite-cover profinite site, [lem-weil-pbc-site-filtered-colimit-sections-finite-coverings] computes filtered abelian sheaf colimits on sections; [lem-weil-pbc-module-sheaves-colimits-forgetful] gives the same colimit with its $R$-module structure. Thus put $N(S)=\\operatorname{colim}_i N_i(S)$. For $g\\in C(S,J)$ define $g[m_i]=[gm_i]$. Equivariance of the transition maps makes this well-defined; the action laws, linearity and restriction compatibility follow by applying each equation to a representative. This is an internal action [def-sfb-condensed-action-module]. Its coprojections are equivariant. For an equivariant cocone, the unique underlying module map sends $[m_i]$ to its given image; this formula commutes with $g$ and all restrictions, so is equivariant. Consequently forgetting the action creates this filtered colimit, with the original coprojections.",
+   "text": "Apply [lem-sfb-profinite-action-filtered-colimit-creation] to the given diagram. It constructs the equivariant colimit $L$ on the underlying sheaf colimit, with the original coprojections $\\iota_i$, and so proves the creation clause. Apply [lem-sfb-profinite-action-colimit-cohomology] to this colimit cocone $(L,\\iota_i)$. For $F_i=\\Phi(N_i)$ and $F=\\Phi(L)$ it gives the presheaf isomorphism $\\operatorname{colim}_iP_i\\xrightarrow{\\sim}P$, where $P_i(S)=H^q(tS,(F_i)_{ab})$ and $P(S)=H^q(tS,F_{ab})$. Its $i$-leg is the coefficient map induced by $\\Phi(\\iota_i)$; restriction compatibility is part of the cited statement.",
    "uses": [
-    "lem-weil-pbc-site-filtered-colimit-sections-finite-coverings",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-sfb-condensed-action-module"
+    "lem-sfb-profinite-action-filtered-colimit-creation",
+    "lem-sfb-profinite-action-colimit-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0738 (sites.tex, lemma-directed-colimits-sections) and Tag 03CO (sites-modules.tex, lemma-limits-colimits-abelian-sheaves); induced action checked directly"
+    "place": "Tag 0738 (sites.tex, lemma-directed-colimits-sections) for the colimit; Tag 09YP, lemma-colimit, constant-site specialization for its cohomology. Blueprint main-20261015, direct-images proof paragraph (3), filtered passage."
    }
   },
   {
-   "text": "Apply [lem-sfb-profinite-action-coherent-presentation] to $J$. Use its site $P_J$, ring $\\mathcal R_J$ and exact additive equivalence $\\Phi$. Put $F_i=\\Phi(N_i)$ and $F=\\Phi(N)$. An equivalence transports the colimit universal property: maps out of $\\Phi(N)$ correspond, under its inverse, to maps out of $N$, so the transported coprojections make $F$ the module-sheaf colimit of the $F_i$. By [lem-weil-pbc-module-sheaves-colimits-forgetful], $F_{ab}=\\operatorname{colim}_i(F_i)_{ab}$ in abelian sheaves on $P_J$. All objects and arrows are small by the presentation's universe convention. The objects $tS$ are representables in this finite-limit site, hence coherent by that lemma; all iterated fibre products of finite-cover members are still objects of the same site. This verifies the compactness and intersection requirements of the cohomology-continuity route, including for non-discrete $J$.",
+   "text": "Apply [lem-sfb-profinite-invariants-sheafified-cohomology] to every $N_i$ and to $L$. Its natural isomorphisms identify $P_i^\\#$ with $U(R^q\\Gamma_{R,J}(N_i))$ and $P^\\#$ with $U(R^q\\Gamma_{R,J}(L))$. Its displayed naturality equation for $\\iota_i$ identifies each sheafified coefficient leg with $U(R^q\\Gamma_{R,J}(\\iota_i))$. Thus the comparison retains the original coprojections, rather than merely giving unrelated object isomorphisms.",
    "uses": [
-    "lem-sfb-profinite-action-coherent-presentation",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), coherent profinite action-space realization of the filtered-passage input"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-cohomology-colimit-of-sites] to the constant diagram of sites $P_J$ indexed by $I^{\\mathrm{op}}$, all transition and cocone functors being identities. This meets [lem-weil-pbc-colimit-of-sites]: $I^{\\mathrm{op}}$ is cofiltered, all covers are finite, identity functors preserve covers and covering pullbacks, and the category colimit is $P_J$ (each object and arrow in a constant diagram has exactly its original representative). Use coefficients $(F_i)_{ab}$ and their original transition maps. Fix $i_0\\in I$ and any $T\\in P_J$. The cited theorem gives the comparison over $(i_0\\downarrow I)$. Its colimit is the colimit over $I$, with the same coprojections: a cocone on the forward-arrow category extends at $j$ by choosing arrows $i_0\\to k$ and $j\\to k$ and composing its $k$-leg with the transition from $j$; two choices agree after taking a common target and equalizing the resulting parallel arrows, by filteredness. The same argument gives compatibility with every arrow of $I$ and uniqueness of the extension. Hence\n$$\\operatorname{colim}_i H^q(T,(F_i)_{ab})\\ \\xrightarrow{\\sim}\\ H^q(T,F_{ab}).$$\nThe explicit leg formula in the cited theorem makes the $i$-leg $H^q(T,(F_i)_{ab}\\to F_{ab})$. In particular this holds at $T=tS$, and the maps respect restriction in $S$ because they are induced by the same coefficient maps.",
-   "uses": [
-    "lem-weil-pbc-cohomology-colimit-of-sites",
-    "lem-weil-pbc-colimit-of-sites",
-    "lem-sfb-profinite-action-coherent-presentation"
+    "lem-sfb-profinite-invariants-sheafified-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 09YP (lemma-colimit), constant-site specialization; Tag 0739 (lemma-colim-works-over-collection) is the equivalent fixed-site route"
+    "place": "Tag 072W, lemma-higher-direct-images, injective-resolution sheafification argument, with the agent-formulated normalized action-module and underlying-abelian acyclic comparison. Blueprint main-20261015, direct-images proof paragraph (3), relative comparison needed for filtered internal invariants."
    }
   },
   {
-   "text": "Identify the internal higher invariants, retaining sheafification. Choose an equivariant injective resolution $M\\to Q^\\bullet$ [lem-sfb-condensed-derived-restriction-calculus]. The exact equivalence $\\Phi$ of [lem-sfb-profinite-action-coherent-presentation] sends it to an injective module-sheaf resolution, since the lifting property for monomorphisms transports under the equivalence. Its value on $tS$ is $\\Gamma_{R,J}(Q^\\bullet)(S)$. Module injectives on this ringed site are acyclic for abelian evaluation at every object [lem-sc-injective-module-abelian-acyclic-zariski]. Abelian sheaves on this small site have enough injectives [lem-weil-pbc-site-sheaves-enough-injectives]. The acyclic-resolution criterion [lemma-weil-pbc-leray-acyclicity] and its coefficient naturality [lem-sc-acyclic-comparison-natural] therefore identify\n$$H^q(\\Gamma_{R,J}(Q^\\bullet)(S))=H^q(tS,\\Phi(M)_{ab}).$$\nThese are presheaf identifications: compare the underlying abelian resolution with a single abelian injective resolution by a map of sheaf complexes. Evaluation of that same map at each $tS$ commutes with every restriction; its cohomology gives the displayed comparison. Naturality in $M$ follows from the cited comparison theorem. By exact abelian sheafification [lem-weil-pbc-sheafification-exact], the cohomology sheaf of $\\Gamma_{R,J}(Q^\\bullet)$ is the sheafification of $S\\mapsto H^q(tS,\\Phi(M)_{ab})$. This sheafification is therefore the underlying abelian sheaf of $R^q\\Gamma_{R,J}(M)$, naturally in $M$. This formula does not assert exactness of evaluation on every profinite $S$.",
-   "uses": [
-    "lem-sfb-condensed-derived-restriction-calculus",
-    "lem-sfb-profinite-action-coherent-presentation",
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lem-sc-acyclic-comparison-natural",
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lemma-weil-pbc-leray-acyclicity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 072W (lemma-higher-direct-images), proof by a single injective resolution; Tag 03FD (lemma-cohomology-modules-abelian-agree), acyclic underlying abelian resolutions"
-   }
-  },
-  {
-   "text": "Put $P_i(S)=H^q(tS,(F_i)_{ab})$ and $P(S)=H^q(tS,F_{ab})$. Step 3 says the presheaf map $\\operatorname{colim}_i P_i\\to P$ is an isomorphism. By [lem-weil-pbc-sheafification-exact], sheafification commutes with colimits. Applying it and step 4 gives an isomorphism on underlying abelian sheaves\n$$\\operatorname{colim}_i R^q\\Gamma_{R,J}(N_i)\\ \\longrightarrow\\ R^q\\Gamma_{R,J}(N).$$\nThe underlying abelian sheaf of the module colimit is the abelian sheaf colimit [lem-weil-pbc-module-sheaves-colimits-forgetful]. Each leg is $R^q\\Gamma_{R,J}(N_i\\to N)$: in step 3 it is induced by that coefficient coprojection, and the step-4 comparison is natural in this map. Thus this is the canonical map in the statement. It is $R$-linear because the derived functor takes values in internal $R$-modules [lem-sfb-condensed-derived-restriction-calculus]. Its inverse is linear: $f^{-1}(ry)=rf^{-1}(y)$ follows by applying the injective linear map $f$. Hence it is an internal-module isomorphism. No uniform bound in $q$ was used.",
+   "text": "By [lem-weil-pbc-sheafification-exact], sheafification commutes with colimits. Write $c:\\operatorname{colim}_iP_i\\xrightarrow{\\sim}P$ for step 1. With the natural comparisons of step 2, the resulting abelian-sheaf isomorphism is $\\beta=\\alpha_L^q\\circ c^\\#\\circ(\\operatorname{colim}_i\\alpha_{N_i}^q)^{-1}$. For the coprojection $j_i$ into $\\operatorname{colim}_iU(R^q\\Gamma_{R,J}(N_i))$, the leg identity of $c$ and the naturality equation of $\\alpha$ give $\\beta\\circ j_i=U(R^q\\Gamma_{R,J}(\\iota_i))$. By [lem-weil-pbc-module-sheaves-colimits-forgetful], this source is the underlying abelian sheaf of the internal module colimit. By [lem-sfb-condensed-derived-restriction-calculus], higher invariants take values in internal modules. Their canonical linear comparison $f$ has precisely these legs; the colimit universal property therefore gives $U(f)=\\beta$. Its inverse is linear: applying the injective linear $f$ to $f^{-1}(ry)=rf^{-1}(y)$ gives equality. Thus $f$ is an internal-module isomorphism for every $q\\geq0$, with the original coprojections and no uniform bound in $q$.",
    "uses": [
     "lem-weil-pbc-sheafification-exact",
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
@@ -82,28 +50,22 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0H7B (lemma-higher-direct-image-colimit), sheafification argument with the original coprojection legs"
+    "place": "Tag 0H7B, lemma-higher-direct-image-colimit; normalized action-site specialization, using the two extracted statements."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-filtered-colimit-sections-finite-coverings",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "def-sfb-condensed-action-module",
-  "lem-sfb-profinite-action-coherent-presentation",
-  "lem-weil-pbc-cohomology-colimit-of-sites",
-  "lem-weil-pbc-colimit-of-sites",
-  "lem-sfb-condensed-derived-restriction-calculus",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lem-sc-acyclic-comparison-natural",
+  "lem-sfb-profinite-action-filtered-colimit-creation",
+  "lem-sfb-profinite-action-colimit-cohomology",
+  "lem-sfb-profinite-invariants-sheafified-cohomology",
   "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lemma-weil-pbc-leray-acyclicity"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-condensed-derived-restriction-calculus"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 09YP, 0739, 072W and 0H7B, with the agent-formulated coherent action-space presentation"
+  "place": "Tag 0H7B, lemma-higher-direct-image-colimit; normalized action-site specialization, using the two extracted statements."
  },
  "mathlib_searches": [
   {
@@ -204,36 +166,12 @@
   "date": "2026-10-22",
   "item": "lem-sfb-profinite-invariants-filtered-continuity",
   "worker": "stage1",
-  "summary": "Constructed the equivariant filtered colimit on sections, supplied a finite-cover action-space presentation, reused varying-site cohomology for a constant site, and proved the sheafified injective-resolution comparison with the original coprojection legs. No statement change.",
-  "blueprint": "Paragraph (3) of the current direct-images proof: filtered passage below polynomial-translation acyclicity. The ancestry command returns None; inherited from.node=null is retained.",
+  "summary": "Repair of the human re-split return: extracted two independently queued, statement-only arguments. Reviewer FIX: the equivariant colimit-creation node carries original step 1 and the action-colimit/cohomology node original steps 2–3; the sheafified relative-comparison node carries original step 4. The parent retains the short sheafification assembly (original step 5), with the original statement and coprojection normalization unchanged. The report preserves every original proof paragraph verbatim and assigns it to its successor task. Rebased after the 06:35 UTC landing return: re-read all current dependencies, retained the released re-split plan and both independent tasks, and made the assembly composite and its coprojection equation explicit.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3), filtered passage below polynomial-translation acyclicity. blueprint_refs.py ancestor reports None; inherited null ancestor and the full creation chain are retained.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-site-filtered-colimit-sections-finite-coverings",
-    "why": "Generic finite-cover site computation of filtered sheaf colimits on sections. No node of this unit supplies this generic tool."
-   },
    {
     "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "why": "Generic variable-ring-sheaf module colimits and underlying abelian colimits. No node of this unit supplies this generic tool."
-   },
-   {
-    "node": "lem-weil-pbc-cohomology-colimit-of-sites",
-    "why": "Generic finite-cover site cohomology continuity, specialized to a constant site; no scheme hypothesis. No node of this unit supplies this generic tool."
-   },
-   {
-    "node": "lem-weil-pbc-colimit-of-sites",
-    "why": "Generic finite-cover site-system hypotheses for the constant-site specialization. No node of this unit supplies this generic tool."
-   },
-   {
-    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
-    "why": "Despite its historical suffix, its statement applies to every ringed site and every object. No node of this unit supplies this generic tool."
-   },
-   {
-    "node": "lem-sc-acyclic-comparison-natural",
-    "why": "Generic naturality of acyclic-resolution comparisons in coefficient maps. No node of this unit supplies this generic tool."
-   },
-   {
-    "node": "lemma-weil-pbc-leray-acyclicity",
-    "why": "Generic acyclic-resolution criterion, including the comparison by a map into an injective resolution. It supplies the existence/computation to which the separate naturality lemma applies; no node of this unit replaces it."
    }
   ]
  },
@@ -247,12 +185,12 @@
   "lemma-weil-pbc-leray-acyclicity"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NM-080045c93",
-  "group": "NM",
+  "reviewer": "NT-cc-Q73-23d7c7eee",
+  "group": "Q73",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-080045c93 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-profinite-action-coherent-presentation and every cited statement in full. This is a first split: in live and side-live the item is unsplit, with no repair note and not dropped. The statement and stmt_deps are unchanged against side-live. Steps 1-5 are correct. Step 1 builds the colimit sectionwise with its induced action. Step 2 moves it through the equivalence Φ. Step 3 applies lem-weil-pbc-cohomology-colimit-of-sites to the constant system of sites P_J over I^op, with the cofinality argument for (i0↓I) written out. Step 4 computes derived invariants as the sheafified presheaf cohomology at tS (Stacks 072W), using injective-module abelian acyclicity, the Leray item 2 criterion and the naturality node. Step 5 assembles the result with exact sheafification (Stacks 0H7B), and its legs are the original coprojections. Edge cases checked: q=0, trivial J, finite J, singleton I, zero modules and S=∅. The new node is true: every profinite J-space T is covered by the free cover J×T→T, Φ(N)(tS)=Γ(N)(S) and Φ(N)(J×S)=N(S); compare Bhatt-Scholze arXiv:1309.1198 Def 4.3.1, Lem 4.3.2 and proof of 4.3.6, which I suggest recording for the WANTED reference. It is not a duplicate: internal-action-site-presentation has only free objects and no tS, and field-profinite-galois-site needs a field. It is strictly smaller than the item. Size: the equivalence needs J×S in the skeleton; under def-weil-size-convention J lies in U, as in the sibling nodes, so I accept it. Batch-5: def-trf-coherent-topos is a general definition of coherent objects whose closure is definitions only. It is not part of the trace-formula or Poincaré-duality statement or proof, so I accept it. I accept all 7 declared tool uses, all generic site and homological lemmas. There is no SGA citation. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-23d7c7eee (reviewer sub-agent of L); spot-checked: This is a re-delivery after the landing of f3caa4b4 was refused (side completion not promoted). The previous reading's FIX was lost, so I re-applied it on this head. Against f3caa4b4, both new nodes are byte-identical. In the item only step 3 (an explicit β assembly) and the split_report summary change. The statement, stmt_deps, lean, tool_uses and blueprint fields of the item equal live, and live and side-live still hold NM's 5-step split. I checked the new step 3: β=α_L∘c^#∘(colim α_{N_i})^{-1}, and the leg clause of c with the α naturality gives β∘j_i=U(R^qΓ(ι_i)). U(colim)=colim U by module-sheaves-colimits-forgetful (3), so U(f)=β by uniqueness. The inverse is linear by injectivity. It is correct and it keeps every sentence of old step 5. Math of the nodes: sectionwise colimit (0738); 09YP constant-site specialization on P_J with (i0↓I) cofinality; sheafified node through the exact Φ, module-injective abelian acyclicity, Leray item 2 with lem-sc-acyclic-comparison-natural, and sheafified cohomology. Tested q=0, trivial and finite J, singleton I, S=∅, parallel arrows in I. FIX (D2, re-split 'one big chunk'): the cohomology node carried old steps 1-3 (about 3180 characters, including the whole creation clause) against 1580 for the other node. I re-added the statement-only node lem-sfb-profinite-action-filtered-colimit-creation (old step 1), the same file as the prior fix. The cohomology node now takes an arbitrary colimit cocone in A_J(R), which is not weaker because Φ is an equivalence. Parent step 1 cites both nodes and proof_deps is updated. The parent is 2147 characters in 3 steps. No duplicate of the creation clause exists in the snapshot, live or side-live. The tool use module-sheaves-colimits-forgetful and the batch-5 paths def-trf-coherent-topos and lem-trf-bounded-below-derived-mate-model are generic, and I accept them. No SGA citation.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.ProfiniteInvariantsFilteredContinuity",
@@ -277,5 +215,17 @@
   "group": "NK",
   "result": "pass",
   "note": "All clauses match: CommMon condensed ring A, J with group/topological/compact/T2/totally-disconnected binders, recorded ActionModule (Equivariant), invariants and unbounded derived; higherInvariants = singleFunctor 0 ⋙ derived ⋙ homologyFunctor q (real def, no duplicate found); small filtered I : Type (u+1) per size convention; Nonempty (CreatesColimit N forgetAction) for the creation clause; IsIso (colimit.post N (higherInvariants A J q)) is the canonical map with coprojection legs. lean.statement verbatim; node unchanged vs side-live except lean; docstrings carry source, blueprint id and steps 1-5; imports per convention; sorry-only; no compile needed (no file changed). Advisory: CondensedBar.* and invariants/derived owner def nodes (def-sfb-condensed-equivariant-bar-data, def-sfb-condensed-derived-invariants) are not in the stage-1 stmt_deps; reached via public re-export of lem-sfb-condensed-derived-restriction-calculus."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

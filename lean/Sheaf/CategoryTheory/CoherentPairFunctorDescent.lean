@@ -9,7 +9,9 @@ public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Idempotents.FunctorExtension
 public import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
-import Mathlib.Algebra.Colimit.Module
+import WeilConjectures.CategoryTheory.StageSystem.Preadditive
+import Mathlib.Algebra.Group.TransferInstance
+import Mathlib.Data.Set.Finite.Lattice
 
 /-! # Coherent common-stage pair functor descent
 
@@ -311,6 +313,341 @@ structure DescentSystem (I : Type w) [PartialOrder I] where
         (Idempotents.functorExtension₂ _ _).obj (descend Φ hΦ) ⋙
           (Idempotents.functorExtension₂ _ _).obj (descend Θ hΘ)
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+
+private abbrev stageSystem (A : Diagram.{w, u, v} I) : StageSystem A.C where
+  T := A.U
+  assoc := A.a
+  cocycle := A.pentagon
+
+private instance stage_additive (A : Diagram.{w, u, v} I) (i j : I) (h : i ≤ j) :
+    ((stageSystem A).T h).Additive := A.additive h
+
+private abbrev stageObj {A : Diagram.{w, u, v} I} (X : Pair A) :
+    (stageSystem A).PairCategory := ⟨X.1, X.2⟩
+
+private def repEquiv {A : Diagram.{w, u, v} I} (X Y : Pair A) :
+    Rep A X Y ≃ StageSystem.PairCategory.Rep (stageObj X) (stageObj Y) where
+  toFun r := ⟨r.stage, r.source_le, r.target_le, r.arrow⟩
+  invFun r := ⟨r.k, r.hX, r.hY, r.u⟩
+  left_inv _ := rfl
+  right_inv _ := rfl
+
+private abbrev homEquiv {A : Diagram.{w, u, v} I} [IsDirectedOrder I] (X Y : Pair A) :
+    Hom A X Y ≃ (stageObj X ⟶ stageObj Y) :=
+  Quot.congr (repEquiv X Y) (fun _ _ ↦ Iff.rfl)
+
+private noncomputable abbrev pairStructure (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
+    PairStructure A where
+  group X Y := (homEquiv X Y).addCommGroup
+  id X := (homEquiv X X).symm (𝟙 (stageObj X))
+  comp {X Y Z} f g :=
+    (homEquiv X Z).symm (homEquiv X Y f ≫ homEquiv Y Z g)
+  id_comp {X Y} f := by simp
+  comp_id {X Y} f := by simp
+  assoc {W X Y Z} f g h := by simp [Category.assoc]
+  add_comp {X Y Z} f g h := by
+    change (homEquiv X Z).symm
+      (homEquiv X Y ((homEquiv X Y).symm (homEquiv X Y f + homEquiv X Y g)) ≫
+        homEquiv Y Z h) =
+      (homEquiv X Z).symm (homEquiv X Z ((homEquiv X Z).symm
+        (homEquiv X Y f ≫ homEquiv Y Z h)) +
+        homEquiv X Z ((homEquiv X Z).symm (homEquiv X Y g ≫ homEquiv Y Z h)))
+    simp only [Equiv.apply_symm_apply, Preadditive.add_comp]
+  comp_add {X Y Z} f g h := by
+    change (homEquiv X Z).symm
+      (homEquiv X Y f ≫
+        homEquiv Y Z ((homEquiv Y Z).symm (homEquiv Y Z g + homEquiv Y Z h))) =
+      (homEquiv X Z).symm (homEquiv X Z ((homEquiv X Z).symm
+        (homEquiv X Y f ≫ homEquiv Y Z g)) +
+        homEquiv X Z ((homEquiv X Z).symm (homEquiv X Y f ≫ homEquiv Y Z h)))
+    simp only [Equiv.apply_symm_apply, Preadditive.comp_add]
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] PairStructure.Obj Pair
+
+private noncomputable instance canonicalCategory (A : Diagram.{w, u, v} I)
+    [IsDirectedOrder I] : Category.{max w v} (Pair A) := pairCategory (pairStructure A)
+
+private noncomputable instance canonicalPreadditive (A : Diagram.{w, u, v} I)
+    [IsDirectedOrder I] : Preadditive (Pair A) := pairPreadditive (pairStructure A)
+
+private abbrev compareFunctor (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
+    (pairStructure A).Obj ⥤ (stageSystem A).PairCategory where
+  obj := stageObj
+  map := homEquiv _ _
+  map_id _ := (homEquiv _ _).apply_symm_apply _
+  map_comp _ _ := (homEquiv _ _).apply_symm_apply _
+
+private theorem compare_injective {A : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    {X Y : (pairStructure A).Obj} : Function.Injective ((compareFunctor A).map (X := X) (Y := Y)) :=
+  (homEquiv X Y).injective
+
+private instance compare_additive (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
+    (compareFunctor A).Additive where
+  map_add := by intros; exact (homEquiv _ _).apply_symm_apply _
+
+private theorem compare_repr {A : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    {X Y : (pairStructure A).Obj} (r : Rep A X Y) :
+    (compareFunctor A).map ((pairStructure A).repr r) =
+      StageSystem.PairCategory.mkHom r.stage r.source_le r.target_le r.arrow := rfl
+
+private theorem pairCanonical (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
+    (pairStructure A).IsCanonical where
+  equality r s := by
+    rw [← (homEquiv _ _).injective.eq_iff]
+    exact StageSystem.PairCategory.mkHom_eq_mkHom_iff'
+      (S := stageSystem A) (X := stageObj _) (Y := stageObj _) r.arrow s.arrow
+  identity X := by
+    apply compare_injective
+    exact (StageSystem.PairCategory.id_eq_mkHom (stageObj X) le_rfl)
+  composition r s n hr hs := by
+    apply compare_injective
+    change homEquiv _ _ ((homEquiv _ _).symm
+      (homEquiv _ _ ((pairStructure A).repr r) ≫
+        homEquiv _ _ ((pairStructure A).repr s))) = _
+    simp only [Equiv.apply_symm_apply]
+    exact StageSystem.PairCategory.mkHom_comp_mkHom'
+      (S := stageSystem A) (X := stageObj _) (Y := stageObj _) (Z := stageObj _)
+      r.arrow s.arrow hr hs
+  addition {X Y} r s n hr hs := by
+    apply compare_injective
+    change homEquiv _ _ ((homEquiv _ _).symm
+      (homEquiv _ _ ((pairStructure A).repr r) + homEquiv _ _ ((pairStructure A).repr s))) = _
+    simp only [Equiv.apply_symm_apply]
+    change StageSystem.PairCategory.mkHom r.stage r.source_le r.target_le r.arrow +
+      StageSystem.PairCategory.mkHom s.stage s.source_le s.target_le s.arrow =
+      StageSystem.PairCategory.mkHom (S := stageSystem A)
+        (X := stageObj X) (Y := stageObj Y) n _ _ (transport r hr + transport s hs)
+    rw [← StageSystem.PairCategory.mkHom_tr (S := stageSystem A)
+      (X := stageObj X) (Y := stageObj Y) hr r.arrow,
+      ← StageSystem.PairCategory.mkHom_tr (S := stageSystem A)
+        (X := stageObj X) (Y := stageObj Y) hs s.arrow,
+      StageSystem.PairCategory.mkHom_add (S := stageSystem A)
+        (X := stageObj X) (Y := stageObj Y)]
+    rfl
+  zero n hx hy := by
+    apply compare_injective
+    exact (StageSystem.PairCategory.mkHom_zero
+      (S := stageSystem A) (X := stageObj _) (Y := stageObj _) hx hy).symm
+  negation r := by
+    apply compare_injective
+    exact StageSystem.PairCategory.mkHom_neg
+      (S := stageSystem A) (X := stageObj _) (Y := stageObj _) r.arrow
+
+private noncomputable abbrev inverseFunctor (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
+    (stageSystem A).PairCategory ⥤ (pairStructure A).Obj where
+  obj X := ⟨X.stage, X.obj⟩
+  map {X Y} f := (homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩).symm f
+  map_id _ := rfl
+  map_comp {X Y Z} f g := by
+    change (homEquiv ⟨X.stage, X.obj⟩ ⟨Z.stage, Z.obj⟩).symm (f ≫ g) =
+      (homEquiv ⟨X.stage, X.obj⟩ ⟨Z.stage, Z.obj⟩).symm
+        (homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩
+          ((homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩).symm f) ≫
+        homEquiv ⟨Y.stage, Y.obj⟩ ⟨Z.stage, Z.obj⟩
+          ((homEquiv ⟨Y.stage, Y.obj⟩ ⟨Z.stage, Z.obj⟩).symm g))
+    simp only [Equiv.apply_symm_apply]
+
+private instance inverse_additive (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
+    (inverseFunctor A).Additive where
+  map_add {X Y} f g := by
+    change (homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩).symm (f + g) =
+      (homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩).symm
+        (homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩
+          ((homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩).symm f) +
+        homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩
+          ((homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩).symm g))
+    simp only [Equiv.apply_symm_apply]
+
+private theorem pairBiproducts (A : Diagram.{w, u, v} I) [IsDirectedOrder I] [Nonempty I] :
+    HasFiniteBiproducts (pairStructure A).Obj := by
+  classical
+  constructor
+  intro n
+  constructor
+  intro f
+  obtain ⟨m, hm⟩ := (Set.finite_range (fun j : Fin n ↦ (f j).1)).bddAbove
+  let h (j : Fin n) : (f j).1 ≤ m := hm (Set.mem_range_self j)
+  let g (j : Fin n) := (A.U (h j)).obj (f j).2
+  let F := (stageSystem A).ι m ⋙ inverseFunctor A
+  let b := F.mapBicone (biproduct.bicone g)
+  let e (j : Fin n) : f j ≅ F.obj (g j) :=
+    (inverseFunctor A).mapIso ((stageSystem A).isoToStage (stageObj (f j)) (h j))
+  let c : Bicone f :=
+    { pt := b.pt
+      π j := b.π j ≫ (e j).inv
+      ι j := (e j).hom ≫ b.ι j
+      ι_π j k := by
+        dsimp
+        rw [Category.assoc, ← Category.assoc (b.ι j), b.ι_π]
+        split_ifs with h'
+        · subst k; simp
+        · simp }
+  apply hasBiproduct_of_total c
+  change (∑ j, (b.π j ≫ (e j).inv) ≫ ((e j).hom ≫ b.ι j)) = 𝟙 _
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  exact IsBilimit.total (isBilimitOfPreserves F (biproduct.isBilimit g))
+
+private abbrev stageMorphism {A B : Diagram.{w, u, v} I} (Φ : Family A B)
+    (hΦ : Φ.Coherent) : (stageSystem A).Morphism (stageSystem B) where
+  Φ := Φ.φ
+  β := Φ.b
+  coh h h' X := (hΦ.tower h h' X).symm
+
+private noncomputable abbrev descend {A B : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    (Φ : Family A B) (hΦ : Φ.Coherent) :
+    (pairStructure A).Obj ⥤ (pairStructure B).Obj where
+  obj := Φ.obj
+  map {X Y} f := (homEquiv (Φ.obj X) (Φ.obj Y)).symm
+    ((stageMorphism Φ hΦ).functor.map (homEquiv X Y f))
+  map_id X := by
+    change (homEquiv (Φ.obj X) (Φ.obj X)).symm ((stageMorphism Φ hΦ).functor.map
+      (homEquiv X X ((homEquiv X X).symm (𝟙 _)))) =
+      (homEquiv (Φ.obj X) (Φ.obj X)).symm (𝟙 _)
+    simp only [Equiv.apply_symm_apply, Functor.map_id]
+    rfl
+  map_comp {X Y Z} f g := by
+    change (homEquiv (Φ.obj X) (Φ.obj Z)).symm ((stageMorphism Φ hΦ).functor.map
+      (homEquiv X Z ((homEquiv X Z).symm (homEquiv X Y f ≫ homEquiv Y Z g)))) =
+      (homEquiv (Φ.obj X) (Φ.obj Z)).symm
+        (homEquiv (Φ.obj X) (Φ.obj Y) ((homEquiv (Φ.obj X) (Φ.obj Y)).symm _) ≫
+        homEquiv (Φ.obj Y) (Φ.obj Z) ((homEquiv (Φ.obj Y) (Φ.obj Z)).symm _))
+    simp only [Equiv.apply_symm_apply, Functor.map_comp]
+
+private theorem descend_repr {A B : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    (Φ : Family A B) (hΦ : Φ.Coherent) {X Y : (pairStructure A).Obj}
+    (r : Rep A X Y) :
+    (descend Φ hΦ).map ((pairStructure A).repr r) =
+      (pairStructure B).repr (Φ.rep r) := rfl
+
+private instance descend_additive {A B : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    (Φ : Family A B) (hΦ : Φ.Coherent) : (descend Φ hΦ).Additive where
+  map_add {X Y} f g := by
+    change (homEquiv (Φ.obj X) (Φ.obj Y)).symm
+      ((stageMorphism Φ hΦ).functor.map
+        (homEquiv X Y ((homEquiv X Y).symm (homEquiv X Y f + homEquiv X Y g)))) =
+      (homEquiv (Φ.obj X) (Φ.obj Y)).symm
+        (homEquiv (Φ.obj X) (Φ.obj Y) ((homEquiv (Φ.obj X) (Φ.obj Y)).symm _) +
+        homEquiv (Φ.obj X) (Φ.obj Y) ((homEquiv (Φ.obj X) (Φ.obj Y)).symm _))
+    simp only [Equiv.apply_symm_apply, Functor.map_add]
+
+private def stageTransformation {A B : Diagram.{w, u, v} I} {Φ Ψ : Family A B}
+    (hΦ : Φ.Coherent) (hΨ : Ψ.Coherent) (η : ∀ i, Φ.φ i ⟶ Ψ.φ i)
+    (hη : Compatible η) : (stageMorphism Φ hΦ).Hom (stageMorphism Ψ hΨ) where
+  τ := η
+  comm h X := (hη h X).symm
+
+private noncomputable def transformation {A B : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    {Φ Ψ : Family A B} (hΦ : Φ.Coherent) (hΨ : Ψ.Coherent)
+    (η : ∀ i, Φ.φ i ⟶ Ψ.φ i) (hη : Compatible η) :
+    descend Φ hΦ ⟶ descend Ψ hΨ where
+  app X := (pairStructure B).repr (transformationRep η X)
+  naturality {X Y} f := by
+    apply compare_injective
+    change homEquiv _ _ ((homEquiv _ _).symm
+      (homEquiv _ _ ((descend Φ hΦ).map f) ≫
+        homEquiv _ _ ((pairStructure B).repr (transformationRep η Y)))) =
+      homEquiv _ _ ((homEquiv _ _).symm
+        (homEquiv _ _ ((pairStructure B).repr (transformationRep η X)) ≫
+          homEquiv _ _ ((descend Ψ hΨ).map f)))
+    simp only [Equiv.apply_symm_apply]
+    exact (StageSystem.Morphism.descNatTrans
+      (stageTransformation hΦ hΨ η hη)).naturality (homEquiv X Y f)
+
+private theorem identity_compatible {A B : Diagram.{w, u, v} I} (Φ : Family A B) :
+    Compatible (fun i ↦ 𝟙 (Φ.φ i)) := by
+  intro i j h X
+  simp
+
+private theorem vertical_compatible {A B : Diagram.{w, u, v} I} {Φ Ψ Ω : Family A B}
+    (η : ∀ i, Φ.φ i ⟶ Ψ.φ i) (δ : ∀ i, Ψ.φ i ⟶ Ω.φ i)
+    (hη : Compatible η) (hδ : Compatible δ) : Compatible (fun i ↦ η i ≫ δ i) := by
+  intro i j h X
+  simp only [NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  rw [← Category.assoc, hη h X, Category.assoc, hδ h X]
+
+private theorem identity_coherent (A : Diagram.{w, u, v} I) :
+    (Family.identity A).Coherent where
+  unit i := by
+    ext X
+    simp [Family.identity, A.unit]
+  tower h h' X := by simp [Family.identity]
+
+private theorem composition_coherent {A B C : Diagram.{w, u, v} I}
+    (Φ : Family A B) (Θ : Family B C) (hΦ : Φ.Coherent) (hΘ : Θ.Coherent) :
+    (Φ.comp Θ).Coherent where
+  unit i := by
+    dsimp only [Family.comp]
+    rw [hΦ.unit, hΘ.unit]
+    ext X
+    simp
+  tower h h' X := ((stageMorphism Φ hΦ).comp (stageMorphism Θ hΘ)).coh h h' X |>.symm
+
+private theorem identity_preserved (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
+    descend (Family.identity A) (identity_coherent A) = 𝟭 (pairStructure A).Obj := by
+  apply Functor.hext
+  · intro X; rfl
+  intro X Y f
+  apply heq_of_eq
+  induction f using Quot.ind with
+  | mk r =>
+    change (descend (Family.identity A) _).map ((pairStructure A).repr r) =
+      (pairStructure A).repr r
+    rw [descend_repr]
+    change repr _ = repr r
+    congr 1
+    rcases r with ⟨n, hx, hy, f⟩
+    dsimp [Family.rep, Family.identity]
+    congr 1
+    simp only [Category.comp_id]
+    exact Category.id_comp f
+
+private theorem composition_preserved {A B C : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    (Φ : Family A B) (Θ : Family B C) (hΦ : Φ.Coherent) (hΘ : Θ.Coherent) :
+    descend (Φ.comp Θ) (composition_coherent Φ Θ hΦ hΘ) =
+      descend Φ hΦ ⋙ descend Θ hΘ := by
+  apply Functor.hext
+  · intro X; rfl
+  intro X Y f
+  apply heq_of_eq
+  induction f using Quot.ind with
+  | mk r =>
+    change (descend (Φ.comp Θ) _).map ((pairStructure A).repr r) =
+      (descend Θ hΘ).map ((descend Φ hΦ).map ((pairStructure A).repr r))
+    rw [descend_repr, descend_repr, descend_repr]
+    apply compare_injective
+    exact (StageSystem.Morphism.functor_comp_map
+      (stageMorphism Φ hΦ) (stageMorphism Θ hΘ)
+      (StageSystem.PairCategory.mkHom (S := stageSystem A)
+        (X := stageObj X) (Y := stageObj Y) r.stage r.source_le r.target_le r.arrow))
+
+private theorem transformation_identity {A B : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    (Φ : Family A B) (hΦ : Φ.Coherent) :
+    transformation hΦ hΦ (fun i ↦ 𝟙 (Φ.φ i)) (identity_compatible Φ) = 𝟙 _ := by
+  ext X
+  apply compare_injective
+  change (StageSystem.ι (stageSystem B) X.1).map (𝟙 ((Φ.φ X.1).obj X.2)) =
+    homEquiv (Φ.obj X) (Φ.obj X) ((homEquiv (Φ.obj X) (Φ.obj X)).symm (𝟙 _))
+  rw [Functor.map_id, Equiv.apply_symm_apply]
+  rfl
+
+private theorem transformation_composition {A B : Diagram.{w, u, v} I} [IsDirectedOrder I]
+    {Φ Ψ Ω : Family A B} (hΦ : Φ.Coherent) (hΨ : Ψ.Coherent) (hΩ : Ω.Coherent)
+    (η : ∀ i, Φ.φ i ⟶ Ψ.φ i) (δ : ∀ i, Ψ.φ i ⟶ Ω.φ i)
+    (hη : Compatible η) (hδ : Compatible δ) :
+    transformation hΦ hΩ (fun i ↦ η i ≫ δ i) (vertical_compatible η δ hη hδ) =
+      transformation hΦ hΨ η hη ≫ transformation hΨ hΩ δ hδ := by
+  ext X
+  apply compare_injective
+  change StageSystem.PairCategory.mkHom _ _ _ _ =
+    StageSystem.PairCategory.mkHom _ _ _ _ ≫ StageSystem.PairCategory.mkHom _ _ _ _
+  dsimp only [transformationRep]
+  rw [StageSystem.PairCategory.mkHom_comp_mkHom]
+  simp only [NatTrans.comp_app, Functor.map_comp]
+
 /-- Coherent additive families and compatible transformations descend to common-stage pair
 categories and their Karoubi envelopes.
 
@@ -363,6 +700,67 @@ no additional hypothesis on the stages, their transitions or their functors is i
 theorem coherent_pair_functor_descent (l : ℕ) [Fact l.Prime]
     (K : Type w) [Field K] [Algebra ℚ_[l] K] [IsAlgClosure ℚ_[l] K] :
     Nonempty (DescentSystem.{w, u, v} (Padic.FiniteCoefficientFields l K)) := by
-  sorry
+  let : Nonempty (Padic.FiniteCoefficientFields l K) :=
+    ⟨Padic.finiteCoefficientBase l K⟩
+  let : IsDirectedOrder (Padic.FiniteCoefficientFields l K) := ⟨fun E F ↦
+    ⟨Padic.finiteCoefficientCompositum l K E F,
+      (Padic.finiteCoefficientFields_properties l K).1 E F⟩⟩
+  refine ⟨({
+    pair := fun A ↦ pairStructure A
+    canonical := fun A ↦ pairCanonical A
+    biproducts := fun A ↦ pairBiproducts A
+    descend := by
+      intro A B Φ hΦ
+      exact descend Φ hΦ
+    formula := fun Φ h ↦ ⟨fun _ ↦ rfl, fun r ↦ heq_of_eq (descend_repr Φ h r),
+      inferInstance⟩
+    identity_coherent := identity_coherent
+    composition_coherent := composition_coherent
+    identity_preserved := fun A ↦ identity_preserved A
+    composition_preserved := fun Φ Θ hΦ hΘ ↦ composition_preserved Φ Θ hΦ hΘ
+    transformation := by
+      intro A B Φ Ψ hΦ hΨ η hη
+      exact transformation hΦ hΨ η hη
+    transformation_formula := fun _ _ _ _ _ ↦ HEq.rfl
+    identity_compatible := identity_compatible
+    transformation_identity := transformation_identity
+    vertical_compatible := vertical_compatible
+    transformation_composition := fun hΦ hΨ hΩ η δ hη hδ ↦
+      transformation_composition hΦ hΨ hΩ η δ hη hδ
+    transformation_equations := by
+      intro A B Φ Ψ hΦ hΨ η θ hη hθ h
+      have e : η = θ := funext h
+      subst θ
+      rfl
+    karoubi_additive := ?_
+    karoubi_object := fun _ _ _ ↦ ⟨rfl, HEq.rfl⟩
+    karoubi_arrow := by intros; exact HEq.rfl
+    karoubi_transformation := ?_
+    karoubi_identity := ?_
+    karoubi_composition := ?_ } :
+      DescentSystem.{w, u, v} (Padic.FiniteCoefficientFields l K))⟩
+  · intro A B Φ hΦ
+    constructor
+    intro P Q f g
+    apply Idempotents.Karoubi.hom_ext
+    exact (descend Φ hΦ).map_add (f := f.f) (g := g.f)
+  · intro A B Φ Ψ hΦ hΨ η hη P
+    apply heq_of_eq
+    simp only [Idempotents.functorExtension₂_map_app_f]
+    let F := descend Φ hΦ
+    let G := descend Ψ hΨ
+    let τ := transformation hΦ hΨ η hη
+    change τ.app P.X ≫ G.map P.p = F.map P.p ≫ τ.app P.X ≫ G.map P.p
+    calc
+      τ.app P.X ≫ G.map P.p = F.map P.p ≫ τ.app P.X := (τ.naturality P.p).symm
+      _ = F.map P.p ≫ F.map P.p ≫ τ.app P.X := by
+        rw [← F.map_comp_assoc, P.idem]
+      _ = F.map P.p ≫ τ.app P.X ≫ G.map P.p := by rw [τ.naturality]
+  · intro A
+    rw [identity_preserved]
+    rfl
+  · intro A B C Φ Θ hΦ hΘ
+    rw [composition_preserved]
+    rfl
 
 end CategoryTheory.CommonStage

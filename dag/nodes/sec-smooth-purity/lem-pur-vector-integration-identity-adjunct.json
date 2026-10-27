@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-vector-integration-identity-adjunct",
+ "kind": "statement",
+ "title": "The coefficient-unit adjunct of the compact-support identity comparison",
+ "statement": "For a finite purity setting P [def-pur-conventions] and a Noetherian scheme B separated of finite type over its ground field, let A be its finite coefficient ring. The ordinary exceptional-adjunction transpose of the canonical compact-support identity comparison R(id_B)! A_B → A_B equals the inverse of the canonical exceptional identity comparison [def-weil-exceptional-inverse-image] R(id_B)^! A_B ≅ A_B. This concerns the specified adjunctions and comparisons, and includes the empty scheme.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Rank-zero normalization, using the ordered coefficient-unit transpose and canonical exceptional identity"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-vector-chart-comparison-coordinates",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Cancel coefficient descent against identity-unit pullback, identify the rank-zero ordered counit with the identity, and apply the proved compact-support rank-zero comparison. These equations normalize the trace before applying the adjunction.",
+   "uses": [
+    "lem-pur-vector-integration-identity-unit",
+    "lem-pur-vector-integration-rank-zero-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affineTranspose_unit_coordinates at zero. The HEq specifications of its source map and integration transpose give identities, and its target is the image of the canonical exceptional identity. Both sides are images under exact site comparison. Naturality and invertibility of the comparison-adjunction unit at the exceptional target detect equality; that target is isomorphic to the bounded-below coefficient unit.",
+   "uses": [
+    "lem-pur-affine-unit-transpose-coordinates",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordered integration tower uses the presentation at index level minus one. Reduce the positive coefficient level to a successor inside the proof; the tower ring and the actual finite coefficient ring are then definitionally the same. Export the identity-adjunction equation with the actual finite coefficient ring, so later callers need no such normalization.",
+   "uses": [
+    "def-pur-conventions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-conventions",
+  "lem-pur-affine-unit-transpose-coordinates",
+  "lem-pur-vector-integration-identity-unit",
+  "lem-pur-vector-integration-rank-zero-local",
+  "sk-prop-sf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G5",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Rank-zero normalization, using the ordered coefficient-unit transpose and canonical exceptional identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriekIsoOfIso|unboundedEtaleLowerShriekId",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No matching exceptional identity theorem for this scheme compact-support adjunction; general categorical identities are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-26",
+   "verdict": "No matching exceptional identity theorem for this scheme compact-support adjunction; general categorical identities are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the exceptional pullback along the identity agrees with the right adjoint comparison of the compact support identity functor",
+   "results": "8 hits: PresheafOfModules.pullback_id_comp, CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit, PresheafOfModules.pullback_comp_id, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom",
+   "date": "2026-10-26",
+   "verdict": "No matching exceptional identity theorem for this scheme compact-support adjunction; general categorical identities are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction transpose of compact support for the identity morphism is the inverse canonical exceptional identity comparison",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.adjunction_unit, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, CondensedSet.compactlyGeneratedAdjunctionCounitIso, CompHausLike.LocallyConstant.adjunction_counit, CondensedSet.compactlyGeneratedAdjunction, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit",
+   "date": "2026-10-26",
+   "verdict": "No matching exceptional identity theorem for this scheme compact-support adjunction; general categorical identities are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalDncChartNormalization",
+  "date": "2026-10-26",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Rank-zero clause of the normalized diagonal chart assembly",
+   "via": [
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorIntegrationIdentityAdjunct",
+  "file": "lean/Sheaf/Paper/VectorIntegrationIdentityAdjunct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationChart.identityAdjunct",
+  "statement": "theorem identityAdjunct (P : WeilConjectures.PurityFiniteSetting.{u})\n    (B : Scheme.{u}) [IsNoetherian B] (aB : B ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] :\n    (Etale.rightDerivedUpperShriekAdjunction\n      (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).homEquiv\n        (Etale.ordinaryFiniteUnit P.Coefficient B)\n        (Etale.ordinaryFiniteUnit P.Coefficient B)\n        ((Etale.unboundedEtaleLowerShriekId P.Coefficient B).hom.app\n          (Etale.ordinaryFiniteUnit P.Coefficient B)) =\n      (((Etale.rightDerivedUpperShriekIsoOfIso\n        (ModuleCat.{u + 1} P.Coefficient) (Iso.refl B)) ≪≫\n        Etale.leftDerivedUpperStarId\n          (ModuleCat.{u + 1} P.Coefficient) B).app\n            (Etale.ordinaryFiniteUnit P.Coefficient B)).symm.hom",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe345",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T222700-L-681626",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe345",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T222700-L-681626",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-diagonal-dnc-chart-normalization and new nodes lem-pur-chart-coordinate-difference-neighbourhood / lem-pur-vector-integration-identity-adjunct against the delivered Lean; relocated chartCoordinateDifferences(+_neighbourhood) against the clone (identical, publicly re-exported); 16 direct importers compiled OK against the delivered set; #print axioms (sorryAx only via pre-existing affineTranspose_unit_coordinates)"
+ }
+}

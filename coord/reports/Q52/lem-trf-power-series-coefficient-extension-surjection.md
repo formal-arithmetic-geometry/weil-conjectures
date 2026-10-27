@@ -1,0 +1,45 @@
+## Worker report
+
+Files written: `dag/nodes/sec-trace-formula/lem-trf-power-series-coefficient-extension-surjection.json` (item, split, exact statement retained), `citations.json` (eight step/node quotations), and this report. `searches.jsonl` is the unmodified output log of the prescribed search command. No new nodes or new Mathlib leaves.
+
+Attachments: none. I searched the project source under `lean/WeilConjectures/` for the exact blueprint id and coefficient-extension/surjection terminology, and for power-series presentations. No declaration states this item. The existing evaluation declaration `MvPowerSeries.exists_unique_adic_evaluation` is only the evaluation interface, not this item with its transported relations and quotient square.
+
+WANTED: none.
+
+The imported item had a statement but no proof. The statement agrees with the algebraic portion of Stacks Tag 0C54 (`varieties.tex`, `lemma-base-change-complete-local-ring`), after the geometric inputs have been made explicit as its hypotheses. It does not need flatness: flatness is used by the parent afterward to prove injectivity of theta. I retained the exact statement, its three definition dependencies, and its recorded blueprint ancestry. There is no statement dispute or silent correction. The ancestor's current blueprint text concerns the overarching trace-locality theorem; its historical completion/base-change position is already recorded by the item's creation chain. This delivery refines that algebraic node through its own explicit source, rather than changing any unit route.
+
+I read Stacks 0C54's proof, especially the paragraphs beginning “Let f_i” and “Consider the map”, the surjectivity paragraph, and the displayed quotient square. I also read the last paragraph of Tag 0C52 (`lemma-complete-local-ring-structure-as-algebra`) supporting the existing chosen-coefficient-field generator-presentation node. I read every cited node's statement, including the power-series local-ring and Noetherian leaves, the combined-ideal coefficient criterion, continuous adic evaluation, and the generator-presentation node. The item needs no new generic algebra lemma: the quotient checks are short arguments from representatives and ideal generators.
+
+Mathlib searches: the recorded leanfinder, loogle, grep and leansearch commands were actually run. A second leanfinder phrasing was also run. I read the results: `MvPowerSeries.C_surjective` applies only to an empty variable type; `PowerSeries.map_surjective` requires surjectivity of the coefficient map and says nothing about the target complete local ring; the Weierstrass hits concern distinguished series; evaluation and adic lifting hits supply only portions of the construction. None gives every clause of this item. I read the evaluation file's hypotheses and its project adic-evaluation interface. No new-node search claim is made. The older searches already in the live item were retained; today's queries and their actual logged results were appended.
+
+Before considering new nodes I searched the whole DAG by power-series, complete-local and surjectivity terminology, and read the existing generator-presentation, homogeneous-preimage, Cohen evaluation-square, power-series-adic-evaluation, coefficient criterion and ring-structure nodes. I ran `tools/blueprint_refs.py ancestor` and whole-blueprint searches for power series, complete local, and coefficient terminology. No blueprint node gives this complete compatible presentation square. I therefore added no node and reused the exact existing interfaces.
+
+Unfinished work: none in the one-level split. Existing dependencies retain their own current stage-1 states. No Lean file was written and no compiler or build was run.
+
+## New nodes
+
+None. New Mathlib leaves: zero.
+
+## Not duplicates
+
+No new nodes were created. In particular, the existing `lem-trf-coefficient-field-generator-presentation` supplies existence and surjectivity with a fixed coefficient section; `lem-weil-pbc-power-series-adic-evaluation` supplies uniqueness of continuous evaluation; neither is restated as a new lemma.
+
+## Review by Q52
+
+I checked this split against B through E with the statements and Stacks proof open. In Step 1 the local-ring leaf really states the unit criterion and locality, and the combined-ideal criterion really applies with J=0 and exponent 1. Together they identify the variables ideal with the unique maximal ideal. The inverse image under the surjective phi of m_R is maximal, so it is that ideal; image equality then proves that the chosen variable images generate m_R. Applying h and the hypothesis m_R C=m_C gives exactly the generators needed in Step 2. No assumption that h itself is surjective is used.
+
+Step 2 cites the statement of `lem-trf-coefficient-field-generator-presentation`, not its proof. Its coefficient field is K, its ring is C, its residue-field isomorphism and section are the given identification and tau, and its tuple is b_i. Completeness, Noetherianity and the generator condition are all available. Its statement explicitly grants a continuous surjective K-algebra map with the specified variable and constant images. This is strictly smaller than the item: it does not know F, h, phi, transported relations, alpha, or the quotient square.
+
+Step 3 uses the definition node's finite convolution formula to check that the coefficientwise map j is a ring map; since each variable maps to itself it preserves every power of the variables ideal. Both composites are therefore continuous. The adic-evaluation node states uniqueness among continuous maps with specified constants and variables, exactly what is needed: both composites have constants tau composed with iota, by the explicit equation h sigma=tau iota, and variables b_i. This proves equality on whole series, rather than just on polynomials. That equality is what kills every transported relation in Step 4.
+
+Step 4 is elementary quotient arithmetic: changing a representative changes its image by an element of the relevant kernel. I checked both kernels explicitly, separately: I_K is killed by Psi and I is killed by pi j. Surjectivity and uniqueness are inherited from Psi and phi respectively. Evaluating on phi(g), which covers every element of R, proves theta alpha=h without a further theorem.
+
+Step 5 cites exactly the Noetherian power-series statement, specialized to the field K, and proves the quotient assertion by lifting each ideal and its finite generators. Its local-ring citation supplies invertibility of a representative with nonzero constant coefficient, and its coefficient criterion identifies the zero-constant series with the variables ideal. Thus constant coefficient descends to T with kernel generated by the variable classes, its image is all K, and every class outside the kernel is a unit. This proves locality and the residue-field identification directly; there is no hidden quotient-locality lemma. Although it cites Mathlib leaves, its remaining deductions are elementary and are written out.
+
+Step 6 uses the generator equality already established in Step 1 and the actual formula for alpha from Step 4. Each generator goes to its variable class, proving both locality and m_R T=m_T. Reduction of theta is checked on every constant c in K, not just on the prime field: theta(pi(c))=tau(c), whose residue is c because tau is the specified section. Constants represent every residue class, so this is the identity of K with precisely the identifications of the item.
+
+The two generic off-unit tools are declared in `split_report.tool_uses`: continuous evaluation uniqueness and the power-series coefficient criterion. The other off-unit statement nodes used here are Mathlib leaves. These tools supply general algebra within the existing completion-presentation route; they do not replace a unit step. Definitions used by the statement remain cited and introduce exactly the intended notions.
+
+I tested n=0: phi:F→R is a surjective coefficient section and hence an isomorphism; m_R=0 forces m_C=0, so C=K via tau, all f_a are zero, T=K, and the constructions reduce to iota and the identity of K. I tested s=0: the relation ideals vanish, the same quotient formulas simply use T=P_K, and no injectivity of theta is claimed. As a test against accidentally using flatness, take F=K and h:F[[t]]→F[[t]]/(t²), phi the identity: the asserted theta is surjective but need not be injective, exactly as stated. Redundant and zero relation generators cause no change because Step 4 uses only generation of the kernels. Nonzero rings and the section hypotheses guarantee the residue-field and constant-coefficient arguments are valid in every characteristic.
+
+No step exceeds 2000 characters. Every cited node has a verbatim statement quote in `citations.json`; I checked all eight quotes as literal substrings. There are no new definitions, duplicate nodes, clause-renaming nodes or uncited non-elementary facts. The refinement does not cite SGA. The checks to be reported below are run by the prescribed server tools.

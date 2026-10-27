@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-exact-square-right-derived-unit",
+ "kind": "statement",
+ "title": "Right-derived comparison unit for an exact coefficient square",
+ "statement": "Let $\\mathcal A,\\mathcal A',\\mathcal B,\\mathcal B'$ be abelian categories [def-sp-abelian], with ordinary unbounded derived categories and localization functors $Q$ from their homotopy categories [def-weil-abstract-derived-category]. Assume every complex of $\\mathcal A$ and $\\mathcal A'$ admits a quasi-isomorphism to a K-injective complex, where K-injective means that every map from an acyclic complex is null-homotopic. Let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal A'\\to\\mathcal B'$ be additive functors [def-sp-left-exact-additive], and let $U:\\mathcal A\\to\\mathcal A'$ and $V:\\mathcal B\\to\\mathcal B'$ be exact additive functors. Fix a natural isomorphism $c:VF\\xrightarrow{\\sim}GU$. Use their termwise actions on complexes, exact descents $D(U),D(V)$ [lem-weil-pbc-exact-functor-derived-factorization], and total right derived pairs $(RF,\\eta^F),(RG,\\eta^G)$ [def-sfb-right-derived-functor]. Then $D(V)RF$, with unit $D(V)(\\eta^F)$, is a total right derived functor of $QVF$. There is a unique natural transformation $\\gamma:D(V)RF\\to RG D(U)$ satisfying, for every complex $P$ of $\\mathcal A$,\n$$\\gamma_{QP}\\,D(V)(\\eta^F_P)=\\eta^G_{UP}\\,Q(c_P).$$\nAll expressions use the canonical exact-functor localization identifications. Neither preservation of K-injectives by $U$ nor invertibility of $\\gamma$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070Y (lemma-K-injective-defined), K-injective computation; agent exact-postcomposition and unit-comparison consequence. See also source-library PlusBaseChange.lean, rightDerivedFunctorPlusBaseChange_fac, for the bounded-below version."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=Q_{\\mathcal A}$, $H=D(V)RF$ and $E=Q_{\\mathcal B'}V_KF_K$. The natural localization identification for the exact functor $V$ in [lem-weil-pbc-exact-functor-derived-factorization] identifies $E$ with $D(V)Q_{\\mathcal B}F_K$. Whiskering the supplied unit gives a natural transformation $\\alpha:E\\to HQ$. By the K-injective computation clause of [def-sfb-right-derived-functor], $\\eta^F_I$ is invertible for each K-injective $I$; hence $\\alpha_I=D(V)(\\eta^F_I)$ is invertible. We prove the universal property of $(H,\\alpha)$ directly, retaining the canonical localization identifications throughout.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit agent proof of postcomposition universality and comparison-unit consequence."
+   }
+  },
+  {
+   "text": "By [lem-trf-localization-essentially-surjective], for every $X\\in D(\\mathcal A)$ choose a representative $P_X$ and an isomorphism $X\\cong QP_X$. Choose a K-injective resolution $P_X\\to I_X$ by hypothesis, and let $e_X:X\\xrightarrow{\\sim}QI_X$ be their composite. For every $a:X\\to Y$, [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy-class map $f:I_X\\to I_Y$ such that $Q(f)=e_Y a e_X^{-1}$. This uses K-injectivity of the target $I_Y$ and places no condition on the image under $U$ of any complex.",
+   "uses": [
+    "lem-trf-localization-essentially-surjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit agent proof of postcomposition universality and comparison-unit consequence."
+   }
+  },
+  {
+   "text": "Let $T:D(\\mathcal A)\\to D(\\mathcal B')$ be any functor and $\\tau:E\\to TQ$ any natural transformation. Define\n$$\\beta_X=T(e_X)^{-1}\\tau_{I_X}\\alpha_{I_X}^{-1}H(e_X).$$\nTo check naturality, use the lift $f$ of $a:X\\to Y$ from step 2. Naturality of $\\alpha$ and $\\tau$ gives $\\alpha_{I_Y}^{-1}H(Qf)=E(f)\\alpha_{I_X}^{-1}$ and $\\tau_{I_Y}E(f)=T(Qf)\\tau_{I_X}$. Consequently\n$$\\begin{aligned}\\beta_YH(a)&=T(e_Y)^{-1}\\tau_{I_Y}\\alpha_{I_Y}^{-1}H(Qf)H(e_X)\\\\&=T(e_Y)^{-1}T(Qf)\\tau_{I_X}\\alpha_{I_X}^{-1}H(e_X)\\\\&=T(a)\\beta_X,\\end{aligned}$$\nwhere the last equality uses $Qf=e_Yae_X^{-1}$. Thus $\\beta:H\\to T$ is natural.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit agent proof of postcomposition universality and comparison-unit consequence."
+   }
+  },
+  {
+   "text": "For every complex $P$, the Hom bijection of [lem-weil-pbc-kinjective-hom-derived], now with source $P$ and target $I_{QP}$, lifts $e_{QP}:QP\\to QI_{QP}$ to a homotopy-class map $t:P\\to I_{QP}$ with $Q(t)=e_{QP}$. Naturality gives $H(Qt)\\alpha_P=\\alpha_{I_{QP}}E(t)$ and $\\tau_{I_{QP}}E(t)=T(Qt)\\tau_P$. Substituting into step 3 yields\n$$\\beta_{QP}\\alpha_P=T(e_{QP})^{-1}\\tau_{I_{QP}}E(t)=\\tau_P.$$\nHence composition with $\\alpha$ is surjective on the stated natural-transformation sets.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit agent proof of postcomposition universality and comparison-unit consequence."
+   }
+  },
+  {
+   "text": "If $\\beta':H\\to T$ also satisfies $\\beta'_{QP}\\alpha_P=\\tau_P$ for all $P$, evaluating at $I_X$ gives $\\beta'_{QI_X}=\\tau_{I_X}\\alpha_{I_X}^{-1}$. Naturality at $e_X$ forces\n$$\\beta'_X=T(e_X)^{-1}\\tau_{I_X}\\alpha_{I_X}^{-1}H(e_X)=\\beta_X.$$\nThus composition with $\\alpha$ is injective as well. Steps 3--5 establish its bijectivity for every $T$, exactly the universal property of a total right derived pair. They also show that changing the auxiliary choices gives the same transformation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit agent proof of postcomposition universality and comparison-unit consequence."
+   }
+  },
+  {
+   "text": "Take $T=RG D(U)$. The localization identification for exact $U$ in [lem-weil-pbc-exact-functor-derived-factorization] identifies $TQ$ with $RG Q_{\\mathcal A'}U_K$. Degreewise $c$ and the natural unit of $RG$ from [def-sfb-right-derived-functor] therefore give a natural transformation $\\tau:E\\to TQ$ whose component is $\\tau_P=\\eta^G_{UP}Q(c_P)$. Apply the bijection proved in steps 3--5 to obtain the unique $\\gamma:H\\to RG D(U)$ with $\\gamma_{QP}\\alpha_P=\\tau_P$. Since $\\alpha_P=D(V)(\\eta^F_P)$, this is precisely the required equation for every complex $P$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit agent proof of postcomposition universality and comparison-unit consequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sfb-right-derived-functor",
+  "lem-trf-localization-essentially-surjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit agent proof of postcomposition universality and comparison-unit consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For additive functors F and G and exact functors U and V with V F isomorphic G U the right derived comparison V RF to RG U satisfies the comparison unit equation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rightDerivedDesc/factorization and localizer comparison assume the postcomposed universal pair; the present statement must also establish exact postcomposition from K-injective computation. No one-line specialization gives that assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"baseChange\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rightDerivedDesc/factorization and localizer comparison assume the postcomposed universal pair; the present statement must also establish exact postcomposition from K-injective computation. No one-line specialization gives that assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*rightDerived|rightDerivedFunctorComparison_fac",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rightDerivedDesc/factorization and localizer comparison assume the postcomposed universal pair; the present statement must also establish exact postcomposition from K-injective computation. No one-line specialization gives that assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived base change natural transformation for a commutative square of additive functors with exact vertical functors unit factorization",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.rightDerived_fac\", \"CategoryTheory.TwoSquare.natTrans\", \"CategoryTheory.Functor.rightDerivedNatTrans_app\", \"CategoryTheory.Functor.rightDerivedNatTrans\", \"CategoryTheory.Functor.rightDerivedDesc\", \"CategoryTheory.Functor.rightDerived_fac_app\", \"CategoryTheory.NatTrans.rightDerived\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rightDerivedDesc/factorization and localizer comparison assume the postcomposed universal pair; the present statement must also establish exact postcomposition from K-injective computation. No one-line specialization gives that assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by an exact functor preserves total right derived functors computed using K injective resolutions and yields canonical base change transformation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctorAt_iff_of_isRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctor_iff_of_isRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rightDerivedDesc/factorization and localizer comparison assume the postcomposed universal pair; the present statement must also establish exact postcomposition from K-injective computation. No one-line specialization gives that assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Pp]ostcomp|IsRightDerivedFunctor.*[Pp]ostcomp|isRightDerivedFunctor.*[Pp]ostcomp",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rightDerivedDesc/factorization and localizer comparison assume the postcomposed universal pair; the present statement must also establish exact postcomposition from K-injective computation. No one-line specialization gives that assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison_fac|IsRightDerivedFunctor.*[Cc]omp|isRightDerivedFunctor.*[Cc]omp",
+   "results": "{\"t\": \"2026-10-22T12:08:05Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorComparison_fac|IsRightDerivedFunctor.*[Cc]omp|isRightDerivedFunctor.*[Cc]omp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\"], \"digest\": \"359cb409f307f096\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give exact localization factors, objectwise derived functors, or generic Kan-extension comparison once a postcomposed universal pair is supplied; they do not establish this unbounded postcomposition assertion from the given hypotheses in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total right derived functor postcomposition with exact functor K-injective resolution comparison unit commutative square",
+   "results": "{\"t\": \"2026-10-22T12:08:05Z\", \"tool\": \"leansearch\", \"query\": \"Total right derived functor postcomposition with exact functor K-injective resolution comparison unit commutative square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id\"], \"digest\": \"4ea0a0c3933a9bd1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give exact localization factors, objectwise derived functors, or generic Kan-extension comparison once a postcomposed universal pair is supplied; they do not establish this unbounded postcomposition assertion from the given hypotheses in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\", \"comp\"",
+   "results": "{\"t\": \"2026-10-22T12:08:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightDerivedFunctor\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp\", \"CategoryTheory.Functor.IsRightDerivedFunctor.postcomposeShiftNatTrans\", \"CategoryTheory.Functor.IsRightDerivedFunctor.instCompShiftFunctorPostcomposeShiftNatTrans\", \"CategoryTheory.Functor.IsRightDerivedFunctor.precomposeShiftNatTrans\", \"CategoryTheory.Functor.IsRightDerivedFunctor.instCompShiftFunctorPrecomposeShiftNatTrans\", \"CategoryTheory.Functor.IsRightDerivedFunctor.postcomposeShiftNatTrans_app\", \"CategoryTheory.Functor.IsRightDerivedFunctor.precomposeShiftNatTrans_app\"], \"digest\": \"f2bc3b48fd3e300a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: postcomposition instance assumes a left adjoint, which V is not assumed to be; shift and composition comparison results do not establish the asserted arbitrary-exact-postcomposition universal pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A total right derived functor computed on K-injective complexes remains a total right derived functor after postcomposition by any functor",
+   "results": "{\"t\": \"2026-10-22T12:08:07Z\", \"tool\": \"leanfinder\", \"query\": \"A total right derived functor computed on K-injective complexes remains a total right derived functor after postcomposition by any functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"CategoryTheory.Functor.rightDerived\"], \"digest\": \"06fa2d46be80e582\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give exact localization factors, objectwise derived functors, or generic Kan-extension comparison once a postcomposed universal pair is supplied; they do not establish this unbounded postcomposition assertion from the given hypotheses in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "postcomp|rightDerivedDesc|rightDerived_ext",
+   "results": "{\"t\": \"2026-10-22T12:08:52Z\", \"tool\": \"grep\", \"query\": \"postcomp|rightDerivedDesc|rightDerived_ext\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"fa32b6e1edc481d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give exact localization factors, objectwise derived functors, or generic Kan-extension comparison once a postcomposed universal pair is supplied; they do not establish this unbounded postcomposition assertion from the given hypotheses in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact square of additive functors between abelian categories induces a unique natural transformation between unbounded total right derived functors characterized by compatibility with their units",
+   "results": "{\"t\": \"2026-10-22T12:08:54Z\", \"tool\": \"leanfinder\", \"query\": \"An exact square of additive functors between abelian categories induces a unique natural transformation between unbounded total right derived functors characterized by compatibility with their units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.NatTrans.rightDerived_comp_assoc\"], \"digest\": \"b554de28fff72110\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give exact localization factors, objectwise derived functors, or generic Kan-extension comparison once a postcomposed universal pair is supplied; they do not establish this unbounded postcomposition assertion from the given hypotheses in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint|isLeftAdjoint|postcompose",
+   "results": "{\"t\": \"2026-10-22T12:15:36Z\", \"tool\": \"grep\", \"query\": \"instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint|isLeftAdjoint|postcompose\", \"sub\": \"CategoryTheory/Functor/Derived/RightDerived.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the online Loogle postcomposition instance is absent from the pinned RightDerived.lean; no postcomposition or left-adjoint instance occurs in that file."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cech-coefficient-derived-comparison",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; Normalized derived Cech descent followed by exact inverse image; Returned proof step 8: exact coefficient restriction, comparison into a K-injective replacement and its canonical augmentation square. General exact coefficient square: right-derived comparison unit without preservation of injectives.",
+   "via": [
+    "lem-sfb-cech-coefficient-derived-comparison",
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-exact-square-right-derived-unit",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Established exact postcomposition by an explicit inverse to the map on natural transformations, using K-injective target Hom bijections; proved naturality, factorization on arbitrary complexes and uniqueness. Applied this universal property to the exact square and its given coefficient isomorphism. Reused the existing localization and K-injective leaves; no new nodes.",
+  "blueprint": "Realizes the inherited Paragraph (3), open-direct-image coefficient comparison in main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, through the recorded derived Cech comparison chain: canonical comparison and augmentation-unit square. The ancestor command reports blueprint.from.node = None; the inherited from record and via chain are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-dd550f847",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-dd550f847 (reviewer sub-agent of L); spot-checked: PASS. The statement is unchanged. There are no new nodes. The six steps form a complete direct proof that (D(V)RF, D(V)η^F) is a right derived functor of QVF, which then gives γ. Each step was re-derived by hand: α_I is invertible by the K-injective clause of def-sfb-right-derived-functor. e_X comes from lem-trf-localization-essentially-surjective plus a K-injective resolution. Lifts f and t come from lem-weil-pbc-kinjective-hom-derived; it needs only the target to be K-injective, and the source is arbitrary. Naturality of β, β_{QP}α_P = τ_P and uniqueness all check, and step 6 matches the stated equation. Neither preservation of K-injectives by U nor invertibility of γ is used. Edge cases checked: identity square, F = 0, V = 0, K-injective P, and U not preserving K-injectives. Source checked: Stacks derived.tex 070I (lemma-K-injective, line 9632, clause 3) and 070Y (line 9747). Duplicate candidates are different statements: kinjective-exact-square-comparison assumes K-injective preservation and concludes an iso, and kun-derived-adjoint-square-comparison assumes the postcomposition property and only uses it. Route: the citations are definitions and Mathlib leaves, so tool_uses=[] is fine. Batch-5 check: lem-trf-localization-essentially-surjective is the generic Mathlib leaf CategoryTheory.Localization.essSurj with empty proof_deps. It is not part of the trace formula or Poincaré duality, so the citation is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactSquareRightDerivedUnit",
+  "declaration": "CategoryTheory.Functor.exactSquare_rightDerived_unit",
+  "declarations": [
+   "CategoryTheory.Functor.exactSquareRightDerivedPostcompositionUnit",
+   "CategoryTheory.Functor.exactSquare_rightDerived_unit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactSquareRightDerivedUnit.lean",
+  "statement": "theorem exactSquare_rightDerived_unit (F : A ⥤ B) (G : A' ⥤ B') (U : A ⥤ A') (V : B ⥤ B') [F.Additive] [G.Additive] [U.Additive] [V.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U] [PreservesFiniteLimits V] [PreservesFiniteColimits V] (hA : ∀ P : CochainComplex A ℤ, ∃ (I : CochainComplex A ℤ) (s : P ⟶ I), I.IsKInjective ∧ QuasiIso s) (hA' : ∀ P : CochainComplex A' ℤ, ∃ (I : CochainComplex A' ℤ) (s : P ⟶ I), I.IsKInjective ∧ QuasiIso s) (c : F ⋙ V ≅ U ⋙ G) : (F.rightDerivedFunctorOfQuasiIsoResolutions hA ⋙ V.mapDerivedCategory).IsRightDerivedFunctor (exactSquareRightDerivedPostcompositionUnit F V hA) (HomotopyCategory.quasiIso A (.up ℤ)) ∧ ∃! γ : F.rightDerivedFunctorOfQuasiIsoResolutions hA ⋙ V.mapDerivedCategory ⟶ U.mapDerivedCategory ⋙ G.rightDerivedFunctorOfQuasiIsoResolutions hA', ∀ P : CochainComplex A ℤ, (exactSquareRightDerivedPostcompositionUnit F V hA).app ((HomotopyCategory.quotient A (.up ℤ)).obj P) ≫ γ.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient A (.up ℤ)).obj P)) = DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory c.hom (.up ℤ)).app ((HomotopyCategory.quotient A (.up ℤ)).obj P)) ≫ DerivedCategory.Qh.map ((mapHomotopyCategoryCompIso (Iso.refl (U ⋙ G)) (.up ℤ)).inv.app ((HomotopyCategory.quotient A (.up ℤ)).obj P)) ≫ (G.rightDerivedFunctorOfQuasiIsoResolutionsUnit hA').app ((U.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient A (.up ℤ)).obj P)) ≫ (G.rightDerivedFunctorOfQuasiIsoResolutions hA').map (U.mapDerivedCategoryFactorsh.inv.app ((HomotopyCategory.quotient A (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "Q112",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the recorded arbitrary-quasi-isomorphism K-injective derived pairs. The helper is the canonical transported postcomposition unit, with real data. Both total right-derived universality and the unique comparison equation on every complex are stated; no K-injective preservation hypothesis is imposed on U."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f43f6ec8",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Only the item's lean record changed (diffed against side-live); new module ExactSquareRightDerivedUnit has the helper exactSquareRightDerivedPostcompositionUnit (real data: comp-iso inverse, V Factorsh.inv, whiskerRight of etaF by D(V)) and theorem exactSquare_rightDerived_unit (single sorry). Recorded statement is verbatim in the file. Hypotheses match the node: four abelian categories with 12 independent universes; K-injective resolutions for A and A' only, as arbitrary quasi-isomorphisms (same form as the def-sfb-right-derived-functor module); F and G only Additive; U and V exact = Additive + finite limits + finite colimits, as in the dependency node and Mathlib mapDerivedCategory; c : F⋙V ≅ U⋙G correctly oriented; no K-injective preservation by U. Directions of mapDerivedCategoryFactorsh.inv and mapHomotopyCategoryCompIso.inv checked against Mathlib source. Conjunct 1 is IsRightDerivedFunctor (Kan-extension universal property, standard predicate in the DAG). Conjunct 2 is a unique γ over all complexes P with the equation gamma_QP·D(V)(etaF_P) = etaG_UP·Q(c_P) in diagrammatic order; no IsIso. Docstrings carry Stacks 070I/070Y and the blueprint tag; the theorem docstring has proof steps 1-6; imports fine; no duplicate found in Mathlib or side-live. Edge cases (identity square, zero functors, non-preserving U, universes) checked. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261023T102518-L-2913142",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Functor.exactSquare_rightDerived_unit"
+  ],
+  "sorry_after": []
+ }
+}

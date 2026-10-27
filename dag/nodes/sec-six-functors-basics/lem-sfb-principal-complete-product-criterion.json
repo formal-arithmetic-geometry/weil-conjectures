@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-principal-complete-product-criterion",
+ "kind": "statement",
+ "title": "Principal completeness detected by an invertible product differential",
+ "statement": "Let $T$ be a scheme with its small pro-etale site [def-pc-scheme, def-weil-pbc-proetale-site, def-weil-size-convention]. Let $R$ be a sheaf of commutative rings, and let $a$ be a global section for which multiplication on $R$ is monic. Work in the unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $F$ be any canonical universal principal quotient-completion model with its normalized unit [def-pur-principal-quotient-completion-model]. For every module sheaf $M$, the unit $M[0]\\to F(M[0])$ is invertible if and only if the map $d_M=1-s_a$ on $\\prod_{n\\in\\mathbb N}M$ is invertible, where $\\operatorname{pr}_n s_a=a_M\\operatorname{pr}_{n+1}$ and $a_M$ denotes multiplication by $a$. Products and this differential are the explicit constructions of [lem-sfb-countable-scalar-difference-closure].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.1 and Lemma 3.4.12 (1) iff (2), printed pp.20-23; Proposition 3.1.11, printed p.17"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-limit",
+  "def-pur-principal-quotient-completion-model",
+  "lem-sfb-countable-scalar-difference-closure"
+ ],
+ "proof": [
+  {
+   "text": "Take the natural fibre triangle of [lem-sfb-regular-principal-completion-fiber]. Uniqueness of the left-derived functor identifies its completion model with F. On a K-flat resolution the representative counits are invertible; unit_computes and the normalized Roos coordinates show that the comparison preserves units. Natural K-flat resolution comparisons then give the same assertion for every derived object.",
+   "uses": [
+    "lem-sfb-regular-principal-completion-fiber",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first vertex of a distinguished triangle vanishes exactly when its second arrow is invertible; this follows also from [lem-sf-derived-homology-long-exact] and the derived localization. Thus completeness means vanishing of the localized scalar Roos complex.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact countable products [lem-weil-proetale-countable-products-exact] compute this Roos complex on M[0] directly. Its only terms are the countable powers of M in degrees zero and one, with differential minus d_M, using the formula of [lem-sfb-countable-scalar-difference-closure]. Its two homology objects are kernel and cokernel of d_M. All vanish exactly when d_M is monic and epic, hence invertible in the abelian module category.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sfb-countable-scalar-difference-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-regular-principal-completion-fiber",
+  "lem-pc-kflat-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-sfb-countable-scalar-difference-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-25",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.1 and Lemma 3.4.12 (1) iff (2), printed pp.20-23; Proposition 3.1.11, printed p.17",
+  "note": "The product criterion and exact-functor argument spell out the two-term Roos calculation of the cited source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A module is derived complete for a regular principal ideal if and only if one minus the scalar shift on its countable product is an isomorphism",
+   "results": "8 hits: isAdicComplete_iff, IsAdicComplete.mk, AdicCompletion.of_surjective_iff, AdicCompletion.of_bijective_iff, IsAdicComplete.bot, IsAdicComplete, IsPrecomplete.bot, AdicCompletion.of_bijective",
+   "date": "2026-10-25",
+   "verdict": "no match: classical adic completeness and ambient abelian/Grothendieck structures do not state the derived quotient-completion unit versus scalar Roos differential criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete modules are closed under kernels cokernels images and extensions",
+   "results": "8 hits: instIsGrothendieckAbelianModuleCat, instHasExtModuleCatOfSmall, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.ObjectProperty.IsSerreClass, IsPrecomplete, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.ObjectProperty.instIsSerreClassTop, CategoryTheory.ObjectProperty.isoModSerre",
+   "date": "2026-10-25",
+   "verdict": "no match: classical adic completeness and ambient abelian/Grothendieck structures do not state the derived quotient-completion unit versus scalar Roos differential criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complete|complete.*roos|roos.*complete",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: classical adic completeness and ambient abelian/Grothendieck structures do not state the derived quotient-completion unit versus scalar Roos differential criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrincipalCompleteHeartKernels",
+  "group": "F4",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph (direct-sum preservation): descendant supported scalar heart estimate; the kernel/image completeness input, not an assertion made by the blueprint itself. Computational step: Definition 3.4.1 and Lemma 3.4.12 (1) iff (2), printed pp.20-23; Proposition 3.1.11, printed p.17",
+   "via": [
+    "lem-sfb-principal-complete-heart-kernels",
+    "lem-sfb-supported-image-derived-completeness",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrincipalCompleteProductCriterion",
+  "file": "lean/Sheaf/Paper/PrincipalCompleteProductCriterion.lean",
+  "declaration": "CategoryTheory.PrincipalQuotientCompletion.Model.complete_product_criterion",
+  "statement": "theorem complete_product_criterion\n    (T : AlgebraicGeometry.Scheme.{t})\n    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)})\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients\n        (AlgebraicGeometry.Scheme.ProEt.topology T) R))]\n    (a : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients\n      (AlgebraicGeometry.Scheme.ProEt.topology T) R)).sections)\n    (_ha : Mono (globalSectionMultiplication R a))\n    (F : Model.{t + 1, t, max u (t + 1), w} R a)\n    (M : ringedSiteModules.{max u (t + 1)}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients\n        (AlgebraicGeometry.Scheme.ProEt.topology T) R)) :\n    IsIso (F.unit.app ((DerivedCategory.singleFunctor _ 0).obj M)) ↔\n      IsIso ((CountableScalarDifference.difference\n        (PrincipalCompletionFiber.scalar R a)).app M)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T095220-L-3323299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T095220-L-3323299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

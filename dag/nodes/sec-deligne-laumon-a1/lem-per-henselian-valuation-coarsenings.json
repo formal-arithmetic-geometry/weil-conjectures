@@ -11,9 +11,81 @@
   "def-trf-valuation-ring",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For either valuation subring $A=V,U$, the nonunits form its unique maximal ideal $\\mathfrak m_A$. Indeed, for nonzero nonunits $x,y$, the valuation condition gives $x/y\\in A$ or $y/x\\in A$, so $x+y=y(1+x/y)$ or $x(1+y/x)$ is a nonunit. Zero and additive inverses cause no problem, and a multiple of a nonunit is a nonunit. Thus the nonunits form a proper ideal, while every proper ideal contains only nonunits. This proves locality directly from [def-trf-valuation-ring].",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 04GF (definition-henselian), 04GG (lemma-characterize-henselian); direct agent coefficient-rescaling argument, not a proof attributed to ILO."
+   }
+  },
+  {
+   "text": "We have $\\mathfrak m_U\\subseteq\\mathfrak m_V$ as subsets of $K$: if $0\\ne x\\in\\mathfrak m_U$ were outside $V$, then $x^{-1}\\in V\\subseteq U$, a contradiction; and a unit of $V$ is a unit of $U$. For any $c\\in U$, choose $s_c=1$ if $c\\in V$ and $s_c=c^{-1}$ otherwise. In the second case $c^{-1}\\in V$ and both $c,c^{-1}$ lie in $U$. Hence in both cases $s_c\\in V\\cap U^\\times$ and $s_cc\\in V$. For finitely many $c_i\\in U$, their product $s=\\prod_i s_{c_i}$ lies in $V\\cap U^\\times$ and satisfies $sc_i\\in V$ for every $i$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 04GF (definition-henselian), 04GG (lemma-characterize-henselian); direct agent coefficient-rescaling argument, not a proof attributed to ILO."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-henselian-local-root-lifting], it suffices to lift every simple residue root of every monic $F\\in U[T]$. Let $\\alpha\\in U/\\mathfrak m_U$ be such a root and choose a representative $a\\in U$. Then $F(a)\\in\\mathfrak m_U$ and $d=F'(a)\\in U^\\times$. If $F(a)=0$, the required lift is $a$. Otherwise set $n=\\deg F\\geq1$ and expand\n$$h(X)=d^{-1}F(a+X)=c_0+X+\\sum_{i=2}^n c_iX^i.$$\nAll $c_i$ lie in $U$ and $0\\ne c_0=d^{-1}F(a)\\in\\mathfrak m_U$.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 04GF (definition-henselian), 04GG (lemma-characterize-henselian); direct agent coefficient-rescaling argument, not a proof attributed to ILO."
+   }
+  },
+  {
+   "text": "Choose $s\\in V\\cap U^\\times$ as in Step 2 for the finite list $c_2,\\ldots,c_n$ (take $s=1$ for an empty list). Put $b_0=c_0/s$ and $b_i=c_i s^{i-1}$ for $i\\geq2$. Then $0\\ne b_0\\in\\mathfrak m_U\\subseteq\\mathfrak m_V$, and $b_i=(sc_i)s^{i-2}\\in V$. Thus\n$$g(X)=s^{-1}h(sX)=b_0+X+\\sum_{i=2}^n b_iX^i\\in V[X].$$\nAlthough $g$ need not be monic, the explicit polynomial\n$$Q(Y)=Y^n+Y^{n-1}+\\sum_{i=2}^n b_i b_0^{i-1}Y^{n-i}\\in V[Y]$$\nis monic. Its reduction is $Y^{n-1}(Y+1)$, whose root $-1$ has derivative $(-1)^{n-1}\\ne0$ in every residue characteristic, also for $n=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 04GF (definition-henselian), 04GG (lemma-characterize-henselian); direct agent coefficient-rescaling argument, not a proof attributed to ILO."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselian-local-root-lifting] to the henselian local ring $V$, the monic polynomial $Q$, and the simple residue root $-1$. Obtain $y\\in V$ with $Q(y)=0$ and $y\\equiv-1\\pmod{\\mathfrak m_V}$. In particular $y\\in V^\\times\\subseteq U^\\times$. Set $z=b_0/y\\in\\mathfrak m_U$. The explicit formula of Step 4 gives, inside $K$,\n$$Q(y)=\\frac{y^n}{b_0}\\,g\\!\\left(\\frac{b_0}{y}\\right).$$\nSince $b_0\\ne0$ and $y\\ne0$, this implies $g(z)=0$.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 04GF (definition-henselian), 04GG (lemma-characterize-henselian); direct agent coefficient-rescaling argument, not a proof attributed to ILO."
+   }
+  },
+  {
+   "text": "Now $F(a+sz)=d\\,h(sz)=ds\\,g(z)=0$ and $(a+sz)-a=sz\\in\\mathfrak m_U$. Hence $a+sz\\in U$ lifts the originally specified residue root $\\alpha$. This proves the monic simple-root lifting property for $U$, so [lem-weil-pbc-henselian-local-root-lifting] implies that $U$ is henselian in the required idempotent-lifting sense. If $U=K$, its maximal ideal is zero and the branch $F(a)=0$ already supplies every lift; the same proof includes $V=U$ and $V=K$.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 04GF (definition-henselian), 04GG (lemma-characterize-henselian); direct agent coefficient-rescaling argument, not a proof attributed to ILO."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Direct rescaling and reciprocal-polynomial proof using Tags 00IB (lemma-valuation-ring-x-or-x-inverse), 04GF (definition-henselian), and the existing local-root-lifting comparison node. ILO XX 4.4 is motivation only; the Bourbaki proof is unavailable."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +121,45 @@
    "results": "{\"t\": \"2026-10-18T23:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a henselian valuation domain at a prime ideal preserves Hensel simple root lifting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing.TFAE\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.is_henselian\", \"Field.henselian\", \"Tilt\", \"AlgHom.IsArithFrobAt.isArithFrobAt_localize\"], \"digest\": \"b85461f8bddb5f8b\"}",
    "date": "2026-10-18",
    "verdict": "no match: HenselianLocalRing definitions, Field.henselian and complete-adic instances only; none proves henselianity of arbitrary valuation overrings. Read Henselian.lean and coarsening definitions in ValuationSubring.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every coarsening of a henselian valuation ring is henselian",
+   "results": "{\"t\": \"2026-10-24T11:14:23Z\", \"tool\": \"leanfinder\", \"query\": \"Every coarsening of a henselian valuation ring is henselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHenselianRingMaximalIdeal\", \"Field.henselian\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.TFAE\", \"Tilt\", \"Valuation.instRankOneCompletion\"], \"digest\": \"1fe214e7c341e67c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the reported henselian definitions/TFAE and valuation coarsening definitions; none states permanence of henselianity under arbitrary valuation overrings."
+  },
+  {
+   "tool": "grep",
+   "query": "coarsen|Henselian",
+   "results": "{\"t\": \"2026-10-24T11:15:10Z\", \"tool\": \"grep\", \"query\": \"coarsen|Henselian\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\"], \"digest\": \"aa144c0b6309afda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the reported henselian definitions/TFAE and valuation coarsening definitions; none states permanence of henselianity under arbitrary valuation overrings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A valuation overring of a henselian valuation ring is henselian",
+   "results": "{\"t\": \"2026-10-24T11:15:10Z\", \"tool\": \"leansearch\", \"query\": \"A valuation overring of a henselian valuation ring is henselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.mk\", \"Field.henselian\", \"ValuationSubring.mk.noConfusion\", \"Valuation.integer\", \"ValuationRing.isLocalRing\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\"], \"digest\": \"98e1a4246fdb5485\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the reported henselian definitions/TFAE and valuation coarsening definitions; none states permanence of henselianity under arbitrary valuation overrings."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, ValuationSubring",
+   "results": "{\"t\": \"2026-10-24T11:15:10Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing, ValuationSubring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the reported henselian definitions/TFAE and valuation coarsening definitions; none states permanence of henselianity under arbitrary valuation overrings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a henselian valuation domain at any prime ideal is a henselian local ring",
+   "results": "{\"t\": \"2026-10-24T11:15:13Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a henselian valuation domain at any prime ideal is a henselian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.toIsLocalRing\", \"Field.henselian\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing\", \"ValuationSubring.ofPrime_localization\", \"Tilt\", \"Localization.AtPrime.isLocalRing\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\"], \"digest\": \"705a56003f8aa263\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the reported henselian definitions/TFAE and valuation coarsening definitions; none states permanence of henselianity under arbitrary valuation overrings."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-henselian-finite-extension-topology",
@@ -82,5 +189,40 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-henselian-valuation-coarsenings",
+  "worker": "stage1",
+  "summary": "Reconstructed the reopened interface by a direct six-step polynomial proof, preserving the statement, source, statement dependencies, prior searches and blueprint provenance. The only non-elementary tool is the existing monic local-root-lifting equivalence; finite coefficient clearing and the explicit reciprocal polynomial require no new nodes. No rank, completeness, Noetherian or excellence assumption enters. No exact upstream attachment or Mathlib leaf was found.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks. Dense-field comparison: Algebraic prolongations and finite separable extension topologies of a henselian valuation. Coarsening input for comparing topologically equivalent base valuations. The six steps supply the coarsening input at that preserved historical lower-level place; the current blueprint Step 3 is the higher duality motivation, not a proof of this valuation theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "The general local-ring equivalence between finite-algebra idempotent lifting and monic simple-root lifting is used in Steps 3, 5 and 6; the affine-curve unit supplies no replacement for this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-40773ce27",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-40773ce27 (reviewer sub-agent of L); spot-checked: Read the item, all three cited statements, the report and the existing DAG neighbours in full. The delivery has no new nodes. The statement, source, stmt_deps and blueprint fields are unchanged. ILO XX 4.4 (p.374) is only motivation, and proof_origin.by=agent says so honestly. The statement is true as written: a coarsening of a henselian valuation ring is henselian, with no rank hypothesis. I checked all six steps. Steps 1 and 2 are elementary and correct: both rings are local by the x or x^{-1} condition; m_U is contained in m_V because x in m_U outside V would give x^{-1} in V, so x would be a unit of U; and a finite product of inverses s lies in V and is a unit of U. Step 3 uses the reverse direction of lem-weil-pbc-henselian-local-root-lifting for the local ring U: h=d^{-1}F(a+X) has linear coefficient 1 and c_0 in m_U, and the case F(a)=0 is split off. Step 4: I recomputed (y^n/b_0)g(b_0/y)=Q(y). Q is monic in V[Y] with reduction Y^{n-1}(Y+1), and its derivative at -1 is (-1)^{n-1}, so -1 is a simple root also in characteristic 2 and for n=1. Step 5 uses the forward direction for V and gives y congruent to -1, hence a unit of U, so z=b_0/y is in m_U and g(z)=0. Step 6 gives F(a+sz)=ds g(z)=0, and a+sz lifts the specified U-residue. I tested n=1 explicitly (Q=Y+1, root -e) and the cases V=U, U=K, V=K. No duplicate exists: I searched with rg -L for coarsening, overring and henselian valuation and read the four nearest nodes. This is not a re-split delivery, and no SGA source is used. I accept the tool use of lem-weil-pbc-henselian-local-root-lifting, the generic Hensel criterion for local rings."
+ }
 }

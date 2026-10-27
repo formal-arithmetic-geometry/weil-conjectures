@@ -1,54 +1,20 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NA
+Authors: SHEAF group K9
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-public import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.ProperOpenComparisonSiteNormalization
-import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
-public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Sheaf.Paper.CanonicalOriginCompactSupportComposition
-public import Sheaf.Paper.CompactSupportSiteCoherence
-public import Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars
-public import Sheaf.Paper.ExceptionalCoefficientComparison
-public import Sheaf.Paper.ExchangeProjectionSuppliedDomains
-public import Sheaf.Paper.FiniteCoefficientAdjointComparisons
-public import Sheaf.Paper.FiniteCoefficientDirectImage
-public import Sheaf.Paper.FiniteFreeCoefficientExtension
-public import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.Paper.OpenExtensionFiniteTor
-public import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage
-import Sheaf.Paper.ProperOpenCoefficientRefinement
-public import Sheaf.Paper.PurityFiniteSetting
-public import Sheaf.Paper.RefinementComparisonIsomorphism
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.SfDirectImageCTFNonproper
-import Sheaf.Paper.UnboundedProperOpenInterchange
-import Sheaf.SixFunctors.ComparisonOpenTensorCoherence
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+public import Sheaf.Paper.FiniteFreeCompactSupportData
+import Sheaf.Paper.FiniteFreeCompactSupportSiteSquare
+import Sheaf.Paper.FiniteFreeCompactSupportGeometricSquares
+import Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension
 
-/-! # Finite-free coefficient extension and compact-support composition
+/-! # Finite-free compact-support composition
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-thm-purity-transport,
-proof Steps 1 and 3 (blueprint: lem-pur-finite-free-compact-composition).
-The two Boolean cases are the ordinary small etale site and its pro-etale realization.
-All equations live in the B-linear derived category. The proper and open maps, and
-both geometric comparisons, are the existing normalized constructions.
+The canonical constructions are re-exported unchanged from the data module.
+Source: blueprint sk-thm-purity-transport, Steps 1 and 3
+(blueprint: lem-pur-finite-free-compact-composition).
 -/
 
 @[expose] public noncomputable section
@@ -60,149 +26,147 @@ open scoped CategoryTheory.Functor
 open AlgebraicGeometry
 open WeilConjectures.FiniteFreeCoefficients
 open AlgebraicGeometry.FiniteCoefficientAdjoints
-
 namespace AlgebraicGeometry.FiniteFreeCompactSupport
 
-/-- Realization of an ordinary etale object on the selected site.
-Source: blueprint transport Step 8 (blueprint: lem-pur-finite-free-compact-composition). -/
-def realization (pro : Bool) (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
-    Etale.DerivedCategoryModule A X ⥤ Sites.D pro A X := by
+private theorem coefficientMap_naturality (pro : Bool)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    {K K' : Sites.D pro A X} (v : K ⟶ K') :
+    (Sites.scalar pro φ Y).map ((support pro A c).map v) ≫
+        coefficientMap pro φ c K' =
+      coefficientMap pro φ c K ≫
+        (support pro B c).map ((Sites.scalar pro φ X).map v) := by
   cases pro
-  · exact 𝟭 _
-  · exact Sites.nu A X
+  · let J := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory
+    let R := (Etale.lowerStar (ModuleCat.{u + 1} B) c.g).rightDerivedFunctor
+    change (Etale.scalarExtension φ Y).map
+        ((Etale.lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor.map (J.map v)) ≫
+        (Etale.scalarMate φ c.g).app (J.obj K') ≫
+          R.map ((Etale.ExceptionalCoefficients.openIso φ c.i).hom.app K') =
+      ((Etale.scalarMate φ c.g).app (J.obj K) ≫
+        R.map ((Etale.ExceptionalCoefficients.openIso φ c.i).hom.app K)) ≫
+          R.map ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B)
+            c.i).mapDerivedCategory.map ((Etale.scalarExtension φ X).map v))
+    have hp := (Etale.scalarMate φ c.g).naturality (J.map v)
+    dsimp only [Functor.comp_map] at hp
+    rw [← Category.assoc, hp]
+    simp only [Category.assoc]
+    rw [← R.map_comp, ← R.map_comp]
+    congr 1
+    have hj := (Etale.ExceptionalCoefficients.openIso φ c.i).hom.naturality v
+    dsimp only [Functor.comp_map] at hj
+    exact congrArg R.map hj
+  · let aX := Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ)
+    let aY := Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ)
+    let F := ProEtale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c
+    let G := ProEtale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c
+    let ρ := ProEtale.compactSupportRestrictionIso φ c
+    change (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ).leftAdjoint.map
+        (F.map v) ≫ (aY.homEquiv _ _).symm
+          (F.map (aX.unit.app K') ≫ ρ.hom.app
+            ((Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ).leftAdjoint.obj K')) =
+      (aY.homEquiv _ _).symm (F.map (aX.unit.app K) ≫ ρ.hom.app
+        ((Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ).leftAdjoint.obj K)) ≫
+          G.map ((Sheaf.derivedRestrictScalars
+            (Scheme.ProEt.topology X) φ).leftAdjoint.map v)
+    apply (aY.homEquiv _ _).injective
+    rw [aY.homEquiv_naturality_left, aY.homEquiv_naturality_right]
+    simp only [Functor.id_obj, Equiv.apply_symm_apply]
+    have hu := aX.unit.naturality v
+    have hr := ρ.hom.naturality
+      ((Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ).leftAdjoint.map v)
+    dsimp only [Functor.id_map, Functor.comp_map] at hu hr
+    change F.map v ≫ F.map (aX.unit.app K') ≫ _ = _
+    rw [← Category.assoc, ← F.map_comp, hu, F.map_comp]
+    simp only [Category.assoc]
+    exact congrArg (fun w ↦ F.map (aX.unit.app K) ≫ w) hr
 
-/-- The existing compactification candidate, on either of the two ordinary small sites.
-Source: blueprint transport Steps 2 and 8
-(blueprint: lem-pur-finite-free-compact-composition). -/
-def support (pro : Bool) (A : Type (u + 1)) [CommRing A]
-    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
-    Sites.D pro A X ⥤ Sites.D pro A Y := by
+private theorem scalar_plus {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (X : Scheme.{u}) (K : Sites.D false A X)
+    {a b : ℤ} (ht : Etale.DerivedCategory.hasTorAmplitudeIn A X a b K) :
+    _root_.DerivedCategory.TStructure.t.plus ((Sites.scalar false φ X).obj K) := by
+  refine ⟨a, (_root_.DerivedCategory.isGE_iff _ a).mpr fun q hq ↦ ?_⟩
+  apply Functor.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+    (Sheaf.restrictScalars X.smallEtaleTopology φ)
+  exact (ht (Etale.scalarCoefficientSheaf φ X) q (Or.inl hq)).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+      ((Etale.scalarTensorIso φ X).app K))
+
+private theorem origin (pro : Bool) (A : Type (u + 1)) [CommRing A] [Finite A]
+    (X : Scheme.{u}) (K : Sites.D pro A X) (hK : Sites.Ctf pro A X K) :
+    ∃ L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)),
+      Nonempty ((realization pro A X).obj L.obj ≅ K) := by
   cases pro
-  · exact Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c
-  · exact ProEtale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c
+  · obtain ⟨a, b, _, hz⟩ := hK.1.2
+    have hb : _root_.DerivedCategory.TStructure.t.plus K :=
+      ⟨a, (_root_.DerivedCategory.isGE_iff _ a).mpr fun q hq ↦ hz q (Or.inl hq)⟩
+    exact ⟨⟨K, hb⟩, ⟨Iso.refl _⟩⟩
+  · obtain ⟨L, hL, e⟩ := hK.plusEtaleOrigin
+    exact ⟨⟨L, hL⟩, e⟩
 
-/-- The specified coefficient map: the existing extended-counit proper map followed
-by the balancing open map. In the pro-etale presentation it is the existing universal
-scalar-adjunction formula for precisely those constituents.
-Source: blueprint transport Steps 2 and 8
-(blueprint: lem-pur-finite-free-compact-composition). -/
-def coefficientMap (pro : Bool) {A B : Type (u + 1)}
-    [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)
-    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (K : Sites.D pro A X) :
-    (Sites.scalar pro φ Y).obj ((support pro A c).obj K) ⟶
-      (support pro B c).obj ((Sites.scalar pro φ X).obj K) := by
+private theorem scalar_origin (pro : Bool)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (X : Scheme.{u}) (K : Sites.D pro A X) (hK : Sites.Ctf pro A X K) :
+    ∃ N : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)),
+      Nonempty ((realization pro B X).obj N.obj ≅ (Sites.scalar pro φ X).obj K) := by
   cases pro
-  · exact Etale.ExceptionalCoefficients.compactSupportMap φ c K
-  · exact ((Adjunction.ofIsRightAdjoint
-      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ)).homEquiv _ _).symm
-      ((support true A c).map
-        ((Adjunction.ofIsRightAdjoint
-          (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ)).unit.app K) ≫
-        (ProEtale.compactSupportRestrictionIso φ c).hom.app
-          ((Sites.scalar true φ X).obj K))
+  · obtain ⟨a, b, _, ht⟩ := hK.2
+    exact ⟨⟨(Sites.scalar false φ X).obj K, scalar_plus φ X K ht⟩, ⟨Iso.refl _⟩⟩
+  · obtain ⟨L, _, ⟨e⟩⟩ := hK.plusEtaleOrigin
+    obtain ⟨a, b, ht⟩ := hK.2
+    have htL := (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso e.symm ht
+    have het := (ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff
+      (Λ := A) a b L).mp htL
+    have hp := scalar_plus φ X L
+      (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr het)
+    refine ⟨⟨(Sites.scalar false φ X).obj L, hp⟩, ⟨?_⟩⟩
+    exact (Sites.scalarSite φ X).symm.app L ≪≫ (Sites.scalar true φ X).mapIso e
 
-/-- The canonical etale compositor in the ambient derived categories; only the
-published D-plus compatibility isomorphisms are inserted.
-Source: blueprint transport Steps 4--7
-(blueprint: lem-pur-finite-free-compact-composition). -/
-def etaleComposition (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
-    [QuasiCompact f] [QuasiCompact g]
-    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
-    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
-    (support false A d).obj ((support false A c).obj L.obj) ⟶
-      (support false A e).obj L.obj :=
-  (support false A d).map
-      ((Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
-        (ModuleCat.{u + 1} A) c).inv.app L) ≫
-    (Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
-      (ModuleCat.{u + 1} A) d).inv.app
-        ((Etale.rightDerivedLowerShriekOfCompactificationPlus
-          (ModuleCat.{u + 1} A) c).obj L) ≫
-    DerivedCategory.Plus.ι.map ((ProEtale.coherenceEtaleCompositor A c d e).hom.app L) ≫
-    (Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
-      (ModuleCat.{u + 1} A) e).hom.app L
+private theorem etale_coefficient_isIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Y : Scheme.{u}} [IsNoetherian Y] {f : X ⟶ Y}
+    (c : Compactification f) (K : Sites.D false A X) :
+    IsIso (coefficientMap false φ c K) := by
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have := (Etale.properFiniteCoefficientExtension φ c.g).1
+    ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj K)
+  dsimp only [coefficientMap, Etale.ExceptionalCoefficients.compactSupportMap]
+  infer_instance
 
-/-- The actual canonical composition map at an etale realization.
-Source: blueprint transport Steps 4--8
-(blueprint: lem-pur-finite-free-compact-composition). -/
-def compositionReal (pro : Bool) (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
-    [QuasiCompact f] [QuasiCompact g]
-    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
-    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
-    (support pro A d).obj ((support pro A c).obj ((realization pro A X).obj L.obj)) ⟶
-      (support pro A e).obj ((realization pro A X).obj L.obj) := by
-  cases pro
-  · exact etaleComposition A c d e L
-  · exact ProEtale.coherenceProEtaleCompositor A c d e L
-
-/-- Composition at an arbitrary retained origin witness, by canonical naturality.
-Source: blueprint transport Steps 7--8
-(blueprint: lem-pur-finite-free-compact-composition). -/
-def composition (pro : Bool) (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
-    [QuasiCompact f] [QuasiCompact g]
-    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
-    {K : Sites.D pro A X}
-    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
-    (α : (realization pro A X).obj L.obj ≅ K) :
-    (support pro A d).obj ((support pro A c).obj K) ⟶ (support pro A e).obj K :=
-  (support pro A d).map ((support pro A c).map α.inv) ≫
-    compositionReal pro A c d e L ≫ (support pro A e).map α.hom
-
-/-- The inverse of the recorded etale refinement comparison, in ambient categories.
-Its direction is from the dominating compactification c to d.
-Source: blueprint transport Step 3
-(blueprint: lem-pur-finite-free-compact-composition). -/
-def etaleRefinement (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
-    {c d : Compactification f} (r : c.Refinement d)
-    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
-    (support false A c).obj L.obj ⟶ (support false A d).obj L.obj :=
-  (Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
-      (ModuleCat.{u + 1} A) c).inv.app L ≫
-    DerivedCategory.Plus.ι.map
-      ((Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso A r).inv.app L) ≫
-    (Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
-      (ModuleCat.{u + 1} A) d).hom.app L
-
-/-- The actual proper-refinement arrow on each site, evaluated at a retained witness.
-Source: blueprint transport Steps 3 and 8
-(blueprint: lem-pur-finite-free-compact-composition). -/
-def refinement (pro : Bool) (A : Type (u + 1)) [CommRing A] [Finite A]
-    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
-    {c d : Compactification f} (r : c.Refinement d)
-    {K : Sites.D pro A X}
-    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
-    (α : (realization pro A X).obj L.obj ≅ K) :
-    (support pro A c).obj K ⟶ (support pro A d).obj K :=
-  (support pro A c).map α.inv ≫ (by
-    cases pro
-    · exact etaleRefinement A r L
-    · exact (ProEtale.properTransportRefinement A r L).hom) ≫
-    (support pro A d).map α.hom
-
-/-- The coefficient/site square, with the proper/open site comparisons and the
-scalar/site balancing explicitly inserted. N and gamma merely present the bounded
-scalar extension of L; every possible such presentation is allowed.
-Source: blueprint transport Step 8
-(blueprint: lem-pur-finite-free-compact-composition). -/
-def SiteCompatibility {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    [Finite A] [Finite B] (φ : A →+* B)
-    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
-    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
-    (N : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
-    (γ : N.obj ≅ (Sites.scalar false φ X).obj L.obj) : Prop :=
-  coefficientMap true φ c ((Sites.nu A X).obj L.obj) =
-    (Sites.scalar true φ Y).map
-        ((ProEtale.compactSupportSiteComparison A c).hom.app L) ≫
-      (Sites.scalarSite φ Y).hom.app ((support false A c).obj L.obj) ≫
-      (Sites.nu B Y).map (coefficientMap false φ c L.obj) ≫
-      (Sites.nu B Y).map ((support false B c).map γ.inv) ≫
-      (ProEtale.compactSupportSiteComparison B c).inv.app N ≫
-      (support true B c).map ((Sites.nu B X).map γ.hom) ≫
-      (support true B c).map ((Sites.scalarSite φ X).inv.app L.obj)
+private theorem pro_coefficient_isIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (hφ : letI := φ.toAlgebra; Module.Finite A B ∧ Module.Free A B)
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] {f : X ⟶ Y}
+    (c : Compactification f) (K : Sites.D true A X) (hK : Sites.Ctf true A X K) :
+    IsIso (coefficientMap true φ c K) := by
+  obtain ⟨L, hL, ⟨α⟩⟩ := hK.plusEtaleOrigin
+  obtain ⟨a, b, ht⟩ := hK.2
+  have htL := (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso α.symm ht
+  have het := (ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff
+    (Λ := A) a b L).mp htL
+  have hp := scalar_plus φ X L
+    (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr het)
+  let M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) := ⟨L, hL⟩
+  let N : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :=
+    ⟨(Sites.scalar false φ X).obj L, hp⟩
+  have hs := finiteFree_site_square φ hφ c M N (Iso.refl _)
+  have hi := etale_coefficient_isIso φ c L
+  have hi' : IsIso (coefficientMap true φ c ((Sites.nu A X).obj L)) := by
+    rw [hs]
+    infer_instance
+  have hn := coefficientMap_naturality true φ c α.hom
+  have hh : IsIso (coefficientMap true φ c ((Sites.nu A X).obj L) ≫
+      (support true B c).map ((Sites.scalar true φ X).map α.hom)) := by infer_instance
+  have hh' : IsIso ((Sites.scalar true φ Y).map
+      ((support true A c).map α.hom) ≫ coefficientMap true φ c K) := by
+    exact hn.symm ▸ hh
+  exact IsIso.of_isIso_comp_left
+    ((Sites.scalar true φ Y).map ((support true A c).map α.hom))
+    (coefficientMap true φ c K)
 
 /-- Finite-free extension preserves the specified coefficient maps, refinement and
 composition, as actual B-linear arrows on both sites.
@@ -297,6 +261,19 @@ theorem finite_free_compactSupport_composition
         (Sites.scalar pro a.ringMap Y).map (refinement pro _ r L α) ≫
             coefficientMap pro a.ringMap c K =
           coefficientMap pro a.ringMap c' K ≫ refinement pro t.ring r N β) := by
-  sorry
+  let : IsNoetherian X := finiteTypeNoetherian D.k X
+  let : IsNoetherian Y := finiteTypeNoetherian D.k Y
+  let : IsNoetherian Z := finiteTypeNoetherian D.k Z
+  have hφ := stage_finiteFree a (show (baseStage n).exponent = t.exponent from _level.symm)
+  refine ⟨?_, ?_, ?_, origin pro _ X K _hK, scalar_origin pro a.ringMap X K _hK, ?_⟩
+  · intro L _ N γ
+    exact finiteFree_site_square a.ringMap hφ c L N γ
+  · cases pro
+    · exact etale_coefficient_isIso a.ringMap c K
+    · exact pro_coefficient_isIso a.ringMap hφ c K _hK
+  · intro K' _ v
+    exact coefficientMap_naturality pro a.ringMap c v
+  · intro L α N β
+    exact finiteFree_geometric_squares a.ringMap hφ pro c d e L α N β
 
 end AlgebraicGeometry.FiniteFreeCompactSupport

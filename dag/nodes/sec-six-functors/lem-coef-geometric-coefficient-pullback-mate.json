@@ -1,0 +1,145 @@
+{
+ "id": "lem-coef-geometric-coefficient-pullback-mate",
+ "kind": "statement",
+ "title": "Invertibility of the normalized geometric coefficient mate",
+ "statement": "Given source and target Data and a GeometryOrdinary realization, the left mate of the canonically localized coefficient-restriction/pullback square is an isomorphism for every actual transition n ≤ m. No coefficient flatness or K-injective evaluation hypothesis is assumed.\n\nThe sites, coefficient tower and fixed ordinary realization are as in lem-coef-semilinear-geometric-derived-evaluation. The precise Lean statement, with the ambient parameter context, is:\n\nuniverse c v r\nopen CategoryTheory CategoryTheory.Limits Opposite\nnamespace WeilConjectures.SemilinearSections\nvariable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)variable (A : Data.{c, v, r} J B τ)\n  (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\n  (target : Data.{c, v, r} J' O.coefficients O.coefficientTransition)\ntheorem geometricCoefficientPullbackMate_isIso [PreservesFiniteLimits uInv]\n    {m n : ℕ} (h : n ≤ m) :\n    IsIso ((mateEquiv (A.scalar h).adjunction (target.scalar h).adjunction).symm\n      (TwoSquare.mk _ _ _ _\n        (((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n          Functor.mapDerivedCategoryNatIso (O.restrictionPullback h) ≪≫\n            Functor.mapDerivedCategoryCompIso _ _).hom))).natTrans",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; paragraph before Lemma 4.10, printed p. 23."
+ },
+ "proof": [
+  {
+   "text": "Construct the underlying ring natural transformation using NatTrans.ofOpSequence from the adjacent coefficient compatibility. Its naturality gives the coefficient square for every composite transition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_scalarInverseImageIndependent to the two actual ordinary scalar adjunctions. Transpose the inverse restriction comparison. Faithfulness of the underlying module-sheaf functor, naturality of moduleUnderlying, restrictionPullback_underlying and the supplied scalar unit equation identify the ordinary mate with the inverse of that isomorphism.",
+   "uses": [
+    "lem-per-independent-scalar-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image carries flat-term K-flat complexes to flat-term K-flat complexes: use the existing ringed-topos pullback theorem with the identity structural coefficient map and remove its identity extension using the normalized identity scalar model.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a common K-flat representative, apply the two ScalarData.transpose_model equations and the mate transpose identity. The exact-localization compositor identifies the derived restriction square with its cochain map. The derived mate is consequently conjugate to the ordinary scalar mate by invertible model comparisons.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus",
+    "lem-coef-semilinear-scalar-evaluation-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve an arbitrary cochain complex by a flat-term K-flat complex. Naturality transports invertibility from its localized representative to every derived object.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "lem-coef-semilinear-scalar-evaluation-transpose",
+  "lem-pc-kflat-resolution",
+  "lem-per-independent-scalar-inverse-image",
+  "lem-pur-system-scalar-coherence",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; paragraph before Lemma 4.10, printed p. 23. The unit and iterated-mates shortcut specializes Mathlib.CategoryTheory.Adjunction.Mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars of sheaves of modules commutes with exact geometric inverse image, with the comparison given by the mate of scalar restriction",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, SheafOfModules.restrictScalars, ordinary presheaf scalar restriction and pullback adjunctions.",
+   "date": "2026-10-26",
+   "verdict": "No normalized unbounded comparison for sheaf rings. Reuse the stated ordinary scalar inverse-image comparison and K-flat pullback theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived scalar extension commutes with inverse image using K-flat resolutions and adjunction mates",
+   "results": "8 hits, including ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalarsComp, the scalar-extension associativity identities and preservesFiniteLimits_extendScalars_of_flat.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary module tensor coherence does not give the normalized derived mate for the supplied ScalarData adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso|IsKFlat.*pullback|isKFlat.*[Pp]ullback",
+   "results": "0 Mathlib hits from msearch grep. Local project search finds KFlatRingedToposPullback and ScalarEvaluationTransposeExistence; their existing normalization argument supplies the pointwise comparison used here.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the project K-flat and scalar comparison declarations; prove the mate-normalization and localization glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricDerivedEvaluation",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Derived evaluation and scalar comparisons for fixed ordinary geometric operations.",
+   "via": [
+    "lem-coef-semilinear-geometric-derived-evaluation",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricCoefficientPullback",
+  "file": "lean/Sheaf/Paper/GeometricCoefficientPullback.lean",
+  "declaration": "WeilConjectures.SemilinearSections.geometricCoefficientPullbackMate_isIso",
+  "statement": "theorem geometricCoefficientPullbackMate_isIso [PreservesFiniteLimits uInv]\n    {m n : ℕ} (h : n ≤ m) :\n    IsIso ((mateEquiv (A.scalar h).adjunction (target.scalar h).adjunction).symm\n      (TwoSquare.mk _ _ _ _\n        (((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n          Functor.mapDerivedCategoryNatIso (O.restrictionPullback h) ≪≫\n            Functor.mapDerivedCategoryCompIso _ _).hom))).natTrans",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T100250-L-4166390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T100250-L-4166390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

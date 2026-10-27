@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.Topology.OpenRestrictionAdjunction
-import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Restriction of colimits of sheaves of modules to an open
@@ -35,6 +34,27 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace AlgebraicGeometry
 
 namespace TopologicalSpace.Opens
+
+private theorem sheafification_fac
+    {C : Type u} [Category C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{u}) [HasSheafify J AddCommGrpCat.{u}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {A P : PresheafOfModules.{u} R.obj} {S G : SheafOfModules.{u} R}
+    (i : A ⟶ P) (a : A ⟶ S.val)
+    (e : S ≅ (PresheafOfModules.sheafification (𝟙 R.obj)).obj P)
+    (he : (PresheafOfModules.toPresheaf R.obj).map (a ≫ e.hom.val) =
+      (PresheafOfModules.toPresheaf R.obj).map i ≫ toSheafify J P.presheaf)
+    (k : S ⟶ G) :
+    i ≫ PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj) (e.inv ≫ k) =
+      a ≫ k.val := by
+  apply (PresheafOfModules.toPresheaf R.obj).map_injective
+  rw [Functor.map_comp, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def,
+    ← Category.assoc, ← he, ← Functor.map_comp]
+  congr 1
+  rw [SheafOfModules.comp_val, Category.assoc,
+    ← Category.assoc e.hom.val e.inv.val k.val,
+    ← SheafOfModules.comp_val e.hom e.inv, e.hom_inv_id, SheafOfModules.id_val,
+    Category.id_comp]
 
 /-- Restriction carries any colimit cocone of sheaves of modules to a colimit cocone, and
 its vertex is the sheafification of the sectionwise colimit on the open.
@@ -87,6 +107,36 @@ theorem module_colimit_restriction (X : RingedSpace.{u}) (U : Opens X)
               PresheafOfModules.sheafificationHomEquiv.{u} (𝟙 ((moduleRings X).over U).obj) v =
             (SheafOfModules.forget ((moduleRings X).over U)).map
               ((SheafOfModules.overFunctor.{u} (moduleRings X) U).map (c.ι.app i))) → v = u := by
-  sorry
+  classical
+  let R := (moduleRings X).over U
+  let F := SheafOfModules.overFunctor.{u} (moduleRings X) U
+  let c' := F.mapCocone c
+  have : PreservesColimitsOfSize.{u, u} F :=
+    (SheafOfModules.overPushforwardOverAdj (R := moduleRings X) U).leftAdjoint_preservesColimits
+  have hc' : IsColimit c' := isColimitOfPreserves F hc
+  refine ⟨⟨hc'⟩, ?_⟩
+  obtain ⟨s, ⟨hs⟩, e, he⟩ :=
+    ((moduleSheaves_colimits_forgetful R).2.2.2.2.2 I).2.2.2 (D ⋙ F)
+  let k := hs.coconePointUniqueUpToIso hc'
+  let u := e.inv ≫ k.hom
+  have hu (i : I) :
+      (PresheafOfModules.colimitCocone
+          ((D ⋙ F) ⋙ SheafOfModules.forget R)).ι.app i ≫
+        PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj) u =
+      (SheafOfModules.forget R).map (F.map (c.ι.app i)) := by
+    change _ = (c'.ι.app i).val
+    calc
+      _ = (s.ι.app i).val ≫ k.hom.val :=
+        sheafification_fac R _ (s.ι.app i).val e (he i) k.hom
+      _ = (c'.ι.app i).val := by
+        rw [← SheafOfModules.comp_val]
+        exact congrArg SheafOfModules.Hom.val (hs.comp_coconePointUniqueUpToIso_hom hc' i)
+  refine ⟨u, inferInstance, hu, ?_⟩
+  intro v hv
+  apply (PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).injective
+  apply (PresheafOfModules.isColimitColimitCocone
+    ((D ⋙ F) ⋙ SheafOfModules.forget R)).hom_ext
+  intro i
+  exact (hv i).trans (hu i).symm
 
 end TopologicalSpace.Opens

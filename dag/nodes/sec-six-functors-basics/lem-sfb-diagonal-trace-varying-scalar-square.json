@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-diagonal-trace-varying-scalar-square",
+ "kind": "statement",
+ "title": "Ordinary varying direct image commutes with supplied residue restrictions",
+ "statement": "Fix a prime l, E=ULift Q_l and f:X→S. Given Base b and normalized Geometry g [def-sp-tower-shriek-data], and any Restrictions rS,rX [def-sfb-diagonal-trace-models], there is a natural isomorphism g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f whose map on each section at each level is heterogeneously the identity. There is no assertion of existence of Restrictions, no Chern datum, no coefficient cone and no completed or derived square.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary scalar restrictions before right derivation"
+ },
+ "proof": [
+  {
+   "text": "Use the specified ordinary push evaluation and its identity-on-sections normalization, transported from the generic geometry by g's coordinate equalities. The underlying fields of the supplied restrictions give the common additive section carriers. At level n both Z_l actions are multiplication by the natural-number representative of the residue, so the additive identity and its inverse are linear.",
+   "uses": [
+    "def-sp-tower-shriek-data",
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chart and module-map naturality follow from ordinary evaluation and the restrictions and morphisms fields. For horizontal arrows transpose the supplied generic ordinaryPullTransition through the ordinary system and level adjunctions, using ordinary_unit_evaluation and the adjunction triangle identities. The restrictionPullback_underlying equation identifies this mate with the original horizontal section map. Thus the transitions fields give horizontal naturality. Assemble the level isomorphisms into a natural isomorphism of strict systems, preserving the sectionwise identity.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sfb-diagonal-trace-models",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F8",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary scalar restrictions before right derivation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ring of integers of the p-adic field modulo p to the n is ZMod p to the n",
+   "results": "PadicInt.toZModPow, PadicInt.ker_toZModPow, PadicInt.ext_of_toZModPow and five related residue-map results.",
+   "date": "2026-10-27",
+   "verdict": "Residue-map ingredients, no normalized scalar restriction, coefficient cones or direct-image square for the project presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules commutes with direct image",
+   "results": "SheafOfModules.restrictScalars, its obj_val/map_val equations, PresheafOfModules.pushforward_obj_obj, SheafOfModules.pushforwardSections and generic forgetful comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary ingredients only; no result states the project-specific normalized coefficient cones or the required squares."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*pushforward|pushforward.*restrictScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:90 defines pushforward by pushforward0 followed by restriction. Also inspected ConstantSheaf.lean constantCommuteCompose and PreservesSheafification.lean sheafComposeIso_hom_fac.",
+   "date": "2026-10-27",
+   "verdict": "Use ordinary scalar and sheafification definitions; finite-system assembly and completed structural-map compatibility require a separate argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceOrdinaryScalars",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), ordinary scalar restrictions before right derivation",
+   "via": [
+    "lem-sfb-diagonal-trace-ordinary-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceVaryingScalarSquare",
+  "file": "lean/Sheaf/Paper/DiagonalTraceVaryingScalarSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTraceVaryingScalarSquare",
+  "statement": "theorem diagonalTraceVaryingScalarSquare (l : ℕ) [Fact l.Prime]\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))\n    (g : SpTowerShriek.Geometry l (ULift.{u} (Padic l)) b f)\n    (rS : Restriction l (ULift.{u} (Padic l)) S)\n    (rX : Restriction l (ULift.{u} (Padic l)) X) :\n    ∃ e : g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f,\n      ∀ (M : Systems X (Arings l (ULift.{u} (Padic l)) X)) (n : ℕ) (U : S.ProEtᵒᵖ)\n        (x : (((g.push ⋙ rS.F).obj M).obj (op n)).obj.obj U),\n        HEq (((e.hom.app M).app (op n)).hom.app U x) x",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T034642-L-3670718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T034642-L-3670718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

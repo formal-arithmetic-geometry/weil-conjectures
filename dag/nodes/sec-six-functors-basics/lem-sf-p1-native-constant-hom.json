@@ -1,0 +1,99 @@
+{
+ "id": "lem-sf-p1-native-constant-hom",
+ "kind": "statement",
+ "title": "Reassociation of the native constant inverse-image comparison",
+ "statement": "For a Grothendieck abelian symmetric monoidal closed category B with functorial flat resolutions, f:X -> Y and M:B, singleFunctorCompLeftDerivedUpperStarIso B f.hom at the constant sheaf M followed by single of upperStarConstantSheafIso B f.hom at M equals leftDerivedUpperStarSingleConstantSheafIso B f M.hom.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First-coordinate constant-object and unit comparisons."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Expand the single-degree left-derived comparison to its exact-derived and exact single-degree factors. The native constant comparison is the same three factors with the other parentheses. Associativity proves the equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Reassociation of the native constant inverse-image comparison in the first-coordinate constant-object normalization."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceFalseTail",
+  "date": "2026-10-27",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-p1-projection-trace-transport-false",
+   "place": "The constant-object unit normalization in the first triangle.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-false-tail",
+    "lem-sf-p1-projection-trace-transport-false"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a constant sheaf at the monoidal unit agrees with the monoidal unit comparison",
+   "results": "Eight hits for sheaf-module pullback of units and cartesian-monoidal sheafToPresheaf. No equality for these concrete unbounded etale constant comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the source library and functor laws."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_id",
+   "results": "Found CategoryTheory.Functor.map_id in Mathlib.CategoryTheory.Functor.Basic, plus unrelated monad and module-presheaf lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Generic identity preservation supplies the elementary normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*unit|unit.*constantSheaf",
+   "results": "Nine hits for constantSheafAdj counits and condensed discrete constants; no native derived single-degree comparison formula.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1NativeConstantHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1NativeConstantHom.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.nativeConstant_hom",
+  "statement": "theorem nativeConstant_hom\n    (B : Type uB) [Category.{u + 1} B] [Abelian B]\n    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]\n    [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (M : B) :\n    (singleFunctorCompLeftDerivedUpperStarIso B f).hom.app\n        ((constantSheaf Y.smallEtaleTopology B).obj M) ≫\n      (DerivedCategory.singleFunctor _ 0).map\n        ((Scheme.upperStarConstantSheafIso B f).hom.app M) =\n    (leftDerivedUpperStarSingleConstantSheafIso B f M).hom",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T034715-L-3677373",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T034715-L-3677373",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

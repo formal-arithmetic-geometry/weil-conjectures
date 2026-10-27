@@ -1,0 +1,220 @@
+{
+ "id": "lem-per-torsion-separated-newton-correction",
+ "kind": "statement",
+ "title": "Finite Newton correction from scalar polynomial identities with separated parameter torsion",
+ "statement": "Let $R$ be a commutative ring, let $t\\in R$, and let $c\\geq0$ be an integer such that every $z\\in t^cR$ satisfying $t^mz=0$ for some integer $m\\geq0$ is zero. Let $P=R[x_1,\\ldots,x_d]$ with $d\\geq0$ [def-weil-pbc-mv-polynomial-ring], and let $J\\subseteq P$ be an ideal. Its square $J^2$ consists of finite sums of products of two elements of $J$. Suppose $G\\in P$ and $g_1,\\ldots,g_d\\in J$ satisfy $$Gf-\\sum_{i=1}^d(\\partial f/\\partial x_i)g_i\\in J^2\\qquad(f\\in J),$$ where the partial derivatives are those of [def-weil-pbc-polynomial-partial-derivative]. Let $h,q\\geq0$ be integers with $q>2h$ and $q-h\\geq c$. If $a\\in R^d$ satisfies $G(a)=t^h$ and $f(a)\\in t^qR$ for all $f\\in J$, then there exists $a^+\\in R^d$ such that $a_i^+-a_i\\in t^{q-h}R$ for every $i$ and $f(a^+)\\in t^{2(q-h)}R$ for all $f\\in J$. Polynomial evaluation is substitution of the coordinates of $a$. No Noetherianity, completeness or non-zero-divisor hypothesis is assumed.",
+ "source": {
+  "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+  "place": "Elkik, I, Lemma 1, printed pp.555–558, especially the torsion intersection condition and Taylor-correction argument on pp.556–557; agent adaptation using the scalar conormal identities of Gabber–Ramero (5.4.4), printed pp.148–149. No Stacks tag states this evaluated-scalar torsion variant. Both archival sources WANTED; read online 2026-10-24."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Put $s=q-h$. Then $q=h+s$, $s>h\\geq0$, and $s\\geq c$. Since each $g_i\\in J$, choose $u_i\\in R$ with $g_i(a)=t^qu_i$. Set $v_i=t^su_i$ and $a_i^+=a_i-v_i$. Thus $t^hv_i=g_i(a)$ and $a_i^+-a_i=-v_i\\in t^sR$. These choices depend only on the fixed $g_i$ and $a$, and will be used for every $f\\in J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+    "place": "I, Lemma 1, printed p.557: write the correction as a quotient of an element in t^qR; finite scalar-identity adaptation"
+   }
+  },
+  {
+   "text": "Fix $f\\in J$ and write $D_i=(\\partial f/\\partial x_i)(a)$ and $L_f=f(a)-\\sum_iD_iv_i$. Evaluation is the ring homomorphism of [def-weil-pbc-mv-polynomial-ring]. An element of $J^2$ is a finite sum $\\sum_k b_kc_k$ with $b_k,c_k\\in J$; write $b_k(a)=t^q\\beta_k$ and $c_k(a)=t^q\\gamma_k$. Its evaluation is therefore $t^{2q}\\sum_k\\beta_k\\gamma_k$. Apply this to $Gf-\\sum_i(\\partial f/\\partial x_i)g_i\\in J^2$ and use $G(a)=t^h$ and Step 1. For some $w_f\\in R$ we obtain $$t^hL_f=t^hf(a)-\\sum_iD_ig_i(a)=t^{2q}w_f.$$",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/lorenzo_ramero/releaseLNM.pdf",
+    "place": "(5.4.4), printed p.148: scalar factorization modulo J^2; direct evaluation of the assumed polynomial identities"
+   }
+  },
+  {
+   "text": "Define $z_f=L_f-t^{2q-h}w_f$. Since $h\\leq q$, Step 2 gives $t^hz_f=0$. Also $f(a)\\in t^qR\\subseteq t^sR$ and every $v_i\\in t^sR$, so $L_f\\in t^sR$. As $2q-h\\geq s$, also $t^{2q-h}w_f\\in t^sR$. Hence $z_f\\in t^sR\\subseteq t^cR$. The given torsion hypothesis, applied with $m=h$, forces $z_f=0$. Thus $$L_f=t^{2q-h}w_f\\in t^{2s}R,$$ because $2q-h=2s+h$. This uses the torsion hypothesis on the deep difference $z_f$, rather than cancelling $t^h$ in $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+    "place": "I, Lemma 1, printed p.557, torsion intersection argument following equation (4); explicit deep-difference calculation"
+   }
+  },
+  {
+   "text": "For a monomial $r\\prod_i x_i^{e_i}$, expand $r\\prod_i(a_i-v_i)^{e_i}$ by multiplying its finitely many factors. The term containing no $v_i$ is its value at $a$. The terms containing exactly one $v_i$ sum to $-\\sum_{i:e_i>0} e_i r\\,a_i^{e_i-1}\\prod_{j\\ne i}a_j^{e_j}v_i$, which is $-\\sum_i(\\partial f/\\partial x_i)(a)v_i$ for this monomial, by [def-weil-pbc-polynomial-partial-derivative]. Each remaining term contains at least two $v$ factors and belongs to $t^{2s}R$. Summing over the finite monomial expansion of $f$ [def-weil-pbc-mv-polynomial-ring] yields $f(a^+)-L_f\\in t^{2s}R$. Step 3 now gives $f(a^+)\\in t^{2s}R=t^{2(q-h)}R$ for every $f\\in J$, proving the claim. For $d=0$ the tuple and sums are empty, the remainder is zero, and Steps 2 and 3 still apply.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AK3 (remark-linear-approximation), finite polynomial calculation underlying the displayed Taylor formula; Elkik I, Lemma 1, printed p.556, equation (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+  "place": "Finite scalar-identity adaptation of Elkik I, Lemma 1, pp.556–557, with Gabber–Ramero (5.4.4), p.148; explicit finite Taylor expansion as in Stacks Tag 0AK3. Archival copies of Elkik and Gabber–Ramero WANTED; read online 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "One Newton correction for polynomial equations using an evaluated scalar splitting of the conormal differential and bounded parameter torsion",
+   "results": "{\"t\": \"2026-10-24T08:37:13Z\", \"tool\": \"leanfinder\", \"query\": \"One Newton correction for polynomial equations using an evaluated scalar splitting of the conormal differential and bounded parameter torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.newtonMap\", \"Polynomial.newtonMap_apply\", \"Polynomial.newtonMap_apply_of_isUnit\", \"Polynomial.newtonMap_apply_of_not_isUnit\", \"Polynomial.isFixedPt_newtonMap_of_aeval_eq_zero\", \"Polynomial.aeval_pow_two_pow_dvd_aeval_iterate_newtonMap\", \"Polynomial.isFixedPt_newtonMap_of_isUnit_iff\", \"HenselianRing.is_henselian\"], \"digest\": \"486be4890ccda626\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Newton hits concern a single polynomial with unit derivative or nilpotent error; conormal hits only identify a differential. None gives finite precision improvement from scalar polynomial identities with separated parameter torsion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.pderiv, Ideal",
+   "results": "{\"t\": \"2026-10-24T08:45:45Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.pderiv, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Algebra.Generators.cotangentRestrict_mk\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff\"], \"digest\": \"5d31c366d503a32a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Newton hits concern a single polynomial with unit derivative or nilpotent error; conormal hits only identify a differential. None gives finite precision improvement from scalar polynomial identities with separated parameter torsion."
+  },
+  {
+   "tool": "grep",
+   "query": "newton|conormal|obstruction|pderiv.*eval",
+   "results": "{\"t\": \"2026-10-24T08:40:50Z\", \"tool\": \"grep\", \"query\": \"newton|conormal|obstruction|pderiv.*eval\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/PDeriv.lean\", \"Mathlib/Algebra/MvPolynomial/PDeriv.lean\"], \"digest\": \"c40e3affcc0b5a7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Newton hits concern a single polynomial with unit derivative or nilpotent error; conormal hits only identify a differential. None gives finite precision improvement from scalar polynomial identities with separated parameter torsion.",
+   "subdirectory": "Algebra/MvPolynomial"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial approximate root admits a Newton correction when a scalar splits the conormal differential with bounded parameter torsion",
+   "results": "{\"t\": \"2026-10-24T08:37:52Z\", \"tool\": \"leansearch\", \"query\": \"A polynomial approximate root admits a Newton correction when a scalar splits the conormal differential with bounded parameter torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.newtonMap\", \"Polynomial.newtonMap_apply\", \"Polynomial.newtonMap_apply_of_isUnit\", \"Polynomial.isFixedPt_newtonMap_of_aeval_eq_zero\", \"Polynomial.isFixedPt_newtonMap_of_isUnit_iff\", \"Polynomial.derivative_rootMultiplicity_of_root_of_mem_nonZeroDivisors\", \"Polynomial.exists_root_of_splits'\", \"Polynomial.map_rootOfSplits'\"], \"digest\": \"8bfe5396bbd01557\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Newton hits concern a single polynomial with unit derivative or nilpotent error; conormal hits only identify a differential. None gives finite precision improvement from scalar polynomial identities with separated parameter torsion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial identities g f minus the sum of partial derivatives of f times g_i lie in J squared, with g(a)=t^h, imply Newton improvement of an approximate solution when t torsion is separated",
+   "results": "{\"t\": \"2026-10-24T08:40:50Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial identities g f minus the sum of partial derivatives of f times g_i lie in J squared, with g(a)=t^h, imply Newton improvement of an approximate solution when t torsion is separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.newtonMap\", \"Polynomial.newtonMap_apply\", \"Polynomial.aeval_pow_two_pow_dvd_aeval_iterate_newtonMap\", \"Polynomial.newtonMap_apply_of_isUnit\", \"Polynomial.isNilpotent_iterate_newtonMap_sub_of_isNilpotent\", \"hensels_lemma\", \"Polynomial.isFixedPt_newtonMap_of_aeval_eq_zero\", \"Polynomial.newtonMap_apply_of_not_isUnit\"], \"digest\": \"844559a5b294180c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Newton hits concern a single polynomial with unit derivative or nilpotent error; conormal hits only identify a differential. None gives finite precision improvement from scalar polynomial identities with separated parameter torsion."
+  },
+  {
+   "tool": "grep",
+   "query": "newton|conormal|obstruction|pderiv.*eval",
+   "results": "{\"t\": \"2026-10-24T09:03:07Z\", \"tool\": \"grep\", \"query\": \"newton|conormal|obstruction|pderiv.*eval\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/PDeriv.lean\", \"Mathlib/Algebra/MvPolynomial/PDeriv.lean\"], \"digest\": \"c40e3affcc0b5a7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PDeriv contains derivative/substitution identities; Dynamics/Newton concerns one-variable Newton iteration, not the stated torsion variant.",
+   "subdirectory": "Algebra/MvPolynomial"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Newton improvement of a multivariate polynomial approximate zero from conormal scalar identities without cancelling a zero divisor",
+   "results": "{\"t\": \"2026-10-24T09:03:08Z\", \"tool\": \"leansearch\", \"query\": \"Newton improvement of a multivariate polynomial approximate zero from conormal scalar identities without cancelling a zero divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.newtonMap\", \"Polynomial.newtonMap_apply\", \"instIsAlgebraicMvPolynomialOfNoZeroDivisors\", \"Polynomial.isFixedPt_newtonMap_of_isUnit_iff\", \"MvPolynomial.instIsDomainOfIsCancelAdd\", \"Polynomial.newtonMap_apply_of_isUnit\", \"Polynomial.derivative_rootMultiplicity_of_root_of_mem_nonZeroDivisors\", \"MvPolynomial.noZeroDivisors_fin\"], \"digest\": \"d0c4f0ea20c73f29\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Newton declarations concern one-variable polynomials and unit derivatives, with nilpotent error for improvement; no multivariate scalar-identity correction with separated torsion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.pderiv, Ideal",
+   "results": "{\"t\": \"2026-10-24T09:03:08Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.pderiv, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Algebra.Generators.cotangentRestrict_mk\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff\"], \"digest\": \"5d31c366d503a32a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the four hits describe cotangent differentials or Jacobian matrices, not correction existence with separated parameter torsion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar polynomial identity modulo the square of an ideal gives a Newton correction over a commutative ring with bounded parameter torsion",
+   "results": "{\"t\": \"2026-10-24T09:03:09Z\", \"tool\": \"leanfinder\", \"query\": \"A scalar polynomial identity modulo the square of an ideal gives a Newton correction over a commutative ring with bounded parameter torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.aeval_pow_two_pow_dvd_aeval_iterate_newtonMap\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"Polynomial.newtonMap_apply\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self\"], \"digest\": \"3d22b488951bb443\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Newton and Weierstrass-division hits do not state this multivariate scalar-identity correction under the given torsion hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "newton|hensel|torsion",
+   "results": "{\"t\": \"2026-10-24T09:04:18Z\", \"tool\": \"grep\", \"query\": \"newton|hensel|torsion\", \"sub\": \"Dynamics/Newton.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"11\", \"13\", \"17\", \"21\", \"23\"], \"digest\": \"1669036f179acb4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PDeriv contains derivative/substitution identities; Dynamics/Newton concerns one-variable Newton iteration, not the stated torsion variant.",
+   "subdirectory": "Dynamics/Newton.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given G f minus sum of partial derivatives of f times g_i in J squared and G(a)=t^h, improve vanishing from t^q to t^(2(q-h)) when deep t power torsion vanishes",
+   "results": "{\"t\": \"2026-10-24T09:04:19Z\", \"tool\": \"leanfinder\", \"query\": \"Given G f minus sum of partial derivatives of f times g_i in J squared and G(a)=t^h, improve vanishing from t^q to t^(2(q-h)) when deep t power torsion vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"PowerSeries.exists_isWeierstrassDivision\"], \"digest\": \"6d477ac217884098\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Newton and Weierstrass-division hits do not state this multivariate scalar-identity correction under the given torsion hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-complete-principal-obstruction-lifting",
+  "date": "2026-10-24",
+  "group": "O3"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary formal-resolution branch of ancestor Step 3 via the recorded creation chain; the latest ancestor proof no longer contains this branch. This lemma serves the bounded-section-lifting argument: Lemma 5.4.12, printed p.151, special case U=Spec(B) minus V(IB); cited there as Elkik, Chapter II, Theorem 2 bis; Elkik II Theorem 2 bis, induction step on pp.566–567: apply the complete principal lifting theorem before applying Lemma 4. This split isolates one finite Newton correction from polynomial identities, then handles the torsion bound, obstruction persistence and inverse-limit assembly in the item. Auxiliary input to the complete principal Newton argument: replace cancellation by vanishing of deep parameter torsion.",
+   "via": [
+    "lem-per-complete-principal-obstruction-lifting",
+    "lem-per-elkik-generic-smooth-section-approximation",
+    "lem-per-gabber-ramero-henselian-section-lifting",
+    "lem-per-elkik-smooth-span-lifting",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-torsion-separated-newton-correction",
+  "worker": "stage1",
+  "summary": "Q57: preserved the statement. Four explicit elementary steps construct the correction, evaluate J^2, kill a deep t-power-torsion difference, and expand finitely many monomials for the quadratic Taylor remainder. No completion, finite-generation or regular-parameter lemma is invoked; no new node is needed. Searches and source reading rule out an attachment or Mathlib leaf.",
+  "blueprint": "Inherited auxiliary branch of lem-per-artin-gabber-affine-curve Step 3 via the recorded creation chain, no longer present in the latest ancestor proof. This split realizes precisely the finite Newton-correction subargument used by lem-per-complete-principal-obstruction-lifting: scalar identities, divided increments, separated-torsion cancellation and quadratic error, without changing the inherited unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-8895904b9",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-8895904b9 (reviewer sub-agent of L); spot-checked: I read the item and the delivery in full. The delivery creates no new nodes. Against the O3 base snapshot, the statement, stmt_deps, created, blueprint, chapter and unit are byte-identical; only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. proof_deps is the union of the steps' uses (mv-polynomial-ring, polynomial-partial-derivative), and I read both definition statements. Step 1: s=q-h with s>h>=0 and s>=c; g_i(a)=t^q u_i and v_i=t^s u_i, so t^h v_i=g_i(a). Step 2: evaluation is a ring homomorphism, so J^2 evaluates into t^{2q}R and t^h L_f=G(a)f(a)-sum D_i g_i(a) lies in t^{2q}R. Step 3: z_f=L_f-t^{2q-h}w_f lies in t^sR, which is inside t^cR, and t^h z_f=0, so the torsion hypothesis gives z_f=0 with no cancellation of t; hence L_f lies in t^{2s+h}R. Step 4: the finite monomial expansion gives a linear term matching the explicit derivative formula, with the right sign, and the remaining terms lie in t^{2s}R; this is genuinely elementary and uses no completeness. Stacks 0AK3 label remark-linear-approximation exists at restricted.tex:862. I tested d=0, h=0, J=0, t a unit, t=0, t nilpotent (Z/8, t=2, c=3, h=1, q=4) and the boundary s=c. The parent complete-principal-obstruction-lifting uses the item with exactly these hypotheses and this conclusion. None of improve-precision (needs a non-zero-divisor), tougeron (Noetherian, henselian), principal-adic-homomorphism-lift (complete) or elkik-principal-section-approximation duplicates the item. Elkik and Gabber-Ramero are recorded as WANTED and the proof is agent-written; I checked it independently. There are no SGA citations, no tool_uses and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.MvPolynomial.TorsionSeparatedNewtonCorrection",
+  "declaration": "MvPolynomial.exists_newton_correction_of_torsion_separated",
+  "file": "lean/Sheaf/Algebra/MvPolynomial/TorsionSeparatedNewtonCorrection.lean",
+  "statement": "theorem exists_newton_correction_of_torsion_separated {R : Type u} [CommRing R] (t : R) (c : ℕ) (htorsion : ∀ z : R, t ^ c ∣ z → (∃ m : ℕ, t ^ m * z = 0) → z = 0) (d : ℕ) (J : Ideal (MvPolynomial (Fin d) R)) (G : MvPolynomial (Fin d) R) (g : Fin d → MvPolynomial (Fin d) R) (hg : ∀ i : Fin d, g i ∈ J) (hidentity : ∀ f : MvPolynomial (Fin d) R, f ∈ J → G * f - ∑ i : Fin d, pderiv i f * g i ∈ J ^ 2) (h q : ℕ) (hq : 2 * h < q) (hc : c ≤ q - h) (a : Fin d → R) (hG : aeval a G = t ^ h) (ha : ∀ f : MvPolynomial (Fin d) R, f ∈ J → t ^ q ∣ aeval a f) : ∃ a' : Fin d → R, (∀ i : Fin d, t ^ (q - h) ∣ a' i - a i) ∧ ∀ f : MvPolynomial (Fin d) R, f ∈ J → t ^ (2 * (q - h)) ∣ aeval a' f",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab6995e81",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: htorsion = t^cR torsion separation with any m≥0; MvPolynomial (Fin d) R with d≥0; hg, hidentity (G*f - Σ pderiv i f * g i ∈ J^2, all f∈J); 2h<q, c≤q-h (ℕ-subtraction safe since h<q); aeval a G = t^h; t^q ∣ aeval a f; conclusion one tuple a' with t^(q-h) ∣ a' i - a i and t^(2(q-h)) ∣ aeval a' f. No extra hypotheses, universe u free. Proof re-checked (z=L-t^(2q-h)w ∈ t^cR killed by t^h ⇒ 0); edge cases d=0, J=0, h=0, c=0, t=0/unit, zero ring OK. lean.statement verbatim in file; node otherwise unchanged vs live; no duplicate in Mathlib/project; docstrings with source + blueprint + proof; only sorry; both report sections present. No compile needed (no change)."
+ }
+}

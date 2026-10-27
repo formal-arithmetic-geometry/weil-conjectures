@@ -8,10 +8,12 @@ module
 public import Sheaf.Paper.ConstantModelTorAmplitude
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Mathlib.AlgebraicGeometry.Noetherian
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-!
 # Finite coefficient descent of bounded constructible objects
@@ -107,6 +109,47 @@ private lemma constantModel_eq_of_localFree
   exact and_congr_right fun _ ↦ forall_congr' fun n ↦ hmod _
 
 
+/-- Finite descent of bounded constructible algebraic-closure complexes over a Noetherian
+scheme. The base field of `coefficient_finite_descent_objects` only makes X Noetherian.
+Source: blueprint det-lem-coefficient-finite-descent-objects
+(blueprint: det-lem-coefficient-finite-descent-objects). -/
+theorem coefficient_finite_descent_objects_of_isNoetherian
+    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] :
+    (∀ K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X,
+      ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
+        (K_E : ConstantModelBoundedConstructible (Profinite.continuousMapRingObj E) X),
+        Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K_E.obj ≅ K.obj)) ∧
+    (∀ (K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X)
+      (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
+      (K_E : ConstantModelBoundedConstructible (Profinite.continuousMapRingObj E) X),
+      Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K_E.obj ≅ K.obj) →
+      ∀ (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F),
+        constantModelBoundedConstructible (Profinite.continuousMapRingObj F) X
+          ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ∧
+        Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj
+          ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ≅ K.obj)) := by
+  have hE (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+      constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
+        boundedConstructible (padicSubfieldRingObj X ℓ E) :=
+    constantModel_eq_of_localFree _ (finite_lf ℓ E) X
+  have hΩ : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
+      boundedConstructible (padicAlgClRingObj X ℓ) :=
+    constantModel_eq_of_localFree _ (algcl_lf ℓ) X
+  constructor
+  · intro K
+    let K' : PadicAlgClConstructible X ℓ := ⟨K.obj, (congrFun hΩ K.obj).mp K.property⟩
+    obtain ⟨E, L, ⟨e⟩⟩ := constructibleCocone_essSurjObj X ℓ K'
+    exact ⟨E, ⟨L.obj, (congrFun (hE E) L.obj).mpr L.property⟩,
+      ⟨(boundedConstructible (padicAlgClRingObj X ℓ)).ι.mapIso e⟩⟩
+  · intro K E K_E hK F h
+    constructor
+    · exact (congrFun (hE F) _).mpr
+        (boundedConstructible_derivedExtendScalarsSubfield_obj X ℓ h K_E.obj
+          ((congrFun (hE E) K_E.obj).mp K_E.property))
+    · obtain ⟨e⟩ := hK
+      exact ⟨(derivedExtendScalarsCompIso X ℓ h).app K_E.obj ≪≫ e⟩
+
+
 /-- Every bounded constructible algebraic-closure coefficient complex has a finite-field
 model, and every such model remains a model after any finite enlargement of the field.
 Source: blueprint main-20261015, sk-thm-sfb-qlbar-two-colimit,
@@ -168,25 +211,6 @@ theorem coefficient_finite_descent_objects
     LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
   let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
   let : IsNoetherian X := {}
-  have hE (E : PadicAlgCl.FiniteIntermediateField ℓ) :
-      constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
-        boundedConstructible (padicSubfieldRingObj X ℓ E) :=
-    constantModel_eq_of_localFree _ (finite_lf ℓ E) X
-  have hΩ : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
-      boundedConstructible (padicAlgClRingObj X ℓ) :=
-    constantModel_eq_of_localFree _ (algcl_lf ℓ) X
-  constructor
-  · intro K
-    let K' : PadicAlgClConstructible X ℓ := ⟨K.obj, (congrFun hΩ K.obj).mp K.property⟩
-    obtain ⟨E, L, ⟨e⟩⟩ := constructibleCocone_essSurjObj X ℓ K'
-    exact ⟨E, ⟨L.obj, (congrFun (hE E) L.obj).mpr L.property⟩,
-      ⟨(boundedConstructible (padicAlgClRingObj X ℓ)).ι.mapIso e⟩⟩
-  · intro K E K_E hK F h
-    constructor
-    · exact (congrFun (hE F) _).mpr
-        (boundedConstructible_derivedExtendScalarsSubfield_obj X ℓ h K_E.obj
-          ((congrFun (hE E) K_E.obj).mp K_E.property))
-    · obtain ⟨e⟩ := hK
-      exact ⟨(derivedExtendScalarsCompIso X ℓ h).app K_E.obj ≪≫ e⟩
+  exact coefficient_finite_descent_objects_of_isNoetherian ℓ X
 
 end AlgebraicGeometry.ProEtale

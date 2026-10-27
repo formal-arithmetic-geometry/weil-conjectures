@@ -1,0 +1,139 @@
+{
+ "id": "def-sfb-ringed-path-right-derived-data",
+ "kind": "definition",
+ "title": "Normalized right-derived ringed-edge data and composite path maps",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Use the size convention [def-weil-size-convention], the corner and edge presentations [def-weil-pbc-ringed-tensor-square-presentation], and the unbounded localizations $Q$ and $Q_h$ [def-weil-abstract-derived-category]. For an edge $e:A\\to B$ in inverse-image direction, write $P_e,F_e,L_e,R_e$ for its ordinary pullback, ordinary direct image, derived pullback and specified derived right adjoint. The normalized right-derived datum consists of additivity of $F_e$, a natural transformation $\\eta_e:Q\\circ C(F_e)\\to R_e\\circ Q$ making $R_e$ the total right derived functor of $C(F_e)$ at quasi-isomorphisms, and the following normalization. For all complexes $M$ on $A$, $I$ on $B$, and chain maps $a:C(P_e)M\\to I$, the derived adjunction sends $Q(a)\\circ\\alpha_{e,M}$ to $\\eta_{e,I}\\circ Q(\\operatorname{adj}_e(a))$, where $\\alpha_e:L_eQ\\to QC(P_e)$ is induced by the edge's left-derived comparison and $\\operatorname{adj}_e$ is its ordinary module adjunction on complexes. For composable edges $f:X\\to W$, $g:Y\\to X$, define the right path unit for $F_gF_f$ to be $R_g(\\eta_f)\\circ\\eta_g C(F_f)$, with the functor-composition identifications. Define the left path counit for $L_fL_g$ to be the composite of the two left-derived counits, from $L_fL_gQ_h$ to $Q_hK(P_fP_g)$, with the functor-composition identifications. Finally, given tensor models $a_W,a_X,a_Y$, define the path tensor map at $K,H\\in D(Y)$ by applying $L_f$ to the canonical tensor-pullback map for $g$ and then the canonical tensor-pullback map for $f$ at $(L_gK,L_gH)$. These are data and composites, with no extra coherence assertion or hypothesis on boundedness.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology on Sites",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 07A4 (lemma-pullback-tensor-product), and 0FPI (lemma-adjoints-push-pull-compatibility)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RingedPathRightDerived|ringedPathRightUnit|ringedPathLeftCounit|ringedPathTensorMap",
+   "results": "{\"t\": \"2026-10-24T11:27:04Z\", \"tool\": \"grep\", \"query\": \"RingedPathRightDerived|ringedPathRightUnit|ringedPathLeftCounit|ringedPathTensorMap\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing project definition, not a Mathlib match: the generic derived-adjunction API does not define the ringed-edge normalized right-derived witness or the three composite path maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical right derived comparison unit and normalized derived adjunction of a morphism of ringed topoi",
+   "results": "{\"t\": \"2026-10-24T11:27:05Z\", \"tool\": \"leansearch\", \"query\": \"Canonical right derived comparison unit and normalized derived adjunction of a morphism of ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Adjunction.derived'\"], \"digest\": \"e18e48dfc40ea0e1\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing project definition, not a Mathlib match: the generic derived-adjunction API does not define the ringed-edge normalized right-derived witness or the three composite path maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RingedPathRightDerived\"",
+   "results": "{\"t\": \"2026-10-24T11:27:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"RingedPathRightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing project definition, not a Mathlib match: the generic derived-adjunction API does not define the ringed-edge normalized right-derived witness or the three composite path maps."
+  },
+  {
+   "tool": "rg",
+   "query": "RingedPathRightDerived|ringedPathRightUnit|ringedPathLeftCounit|ringedPathTensorMap in lean/WeilConjectures and lean/Sheaf",
+   "results": "No matches in lean/WeilConjectures. lean/Sheaf/Paper/RingedComparisonTensorAdjunction.lean defines the class and all three ringedPath definitions; consumers also found. Reuse these exact declarations, without moving or copying.",
+   "date": "2026-10-24",
+   "verdict": "existing project definitions; record existing:true"
+  },
+  {
+   "tool": "grep; blueprint_refs.py search",
+   "query": "RingedPathRightDerived and the three ringedPath names in dag/nodes; tools/blueprint_refs.py search RingedPathRightDerived",
+   "results": "No separate definition node. lem-sfb-ringed-comparison-tensor-adjunction records these declarations with its theorem. Blueprint search returned zero nodes; ancestor of consumer is null.",
+   "date": "2026-10-24",
+   "verdict": "add a definition node owning the already existing data interface, as required by returned review F1"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-derived-naive-cup-comparison",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change. Supporting input for this split: Tensor compatibility of the hypercohomology-to-sheaf-cohomology edge. Prerequisite for tensor compatibility: the derived-to-naive cup comparison of Stacks 0FPK. Definition input: the normalized canonical derived adjunction fixes the beta used by the 0FPK comparison; the same existing module also supplies composite path units, counits and tensor maps.",
+   "via": [
+    "lem-sfb-ringed-derived-naive-cup-comparison",
+    "lem-sfb-ringed-hypercohomology-edge-tensor",
+    "lem-sfb-space-affine-relative-cup-sections",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.RingedComparisonTensorAdjunction",
+  "declaration": "CategoryTheory.RingedPathRightDerived",
+  "declarations": [
+   "CategoryTheory.RingedPathRightDerived",
+   "CategoryTheory.ringedPathRightUnit",
+   "CategoryTheory.ringedPathLeftCounit",
+   "CategoryTheory.ringedPathTensorMap"
+  ],
+  "statement": "class RingedPathRightDerived {A B : RingedTensorCorner.{u, w}}\n    (e : RingedTensorEdge A B)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Returned review F1: definition ownership for existing RingedPathRightDerived and ringedPath* composites; no code moved or copied. The comparison theorem is not needed as a statement dependency merely to use this plain class."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9070b444",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9070b444",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery after RETURN c4151ad8 (F1–F3); all three repairs applied, nothing else changed. Item Lean byte-identical apart from importing RingedDerivedTensorAugmentationNaturality instead of the removed companion; statement, proof and proof_deps unchanged. F1: new existing:true def node def-sfb-ringed-path-right-derived-data owns CategoryTheory.RingedPathRightDerived and the ringedPath* defs in Sheaf.Paper.RingedComparisonTensorAdjunction; statement field matches l.47–48; stmt_deps size/tensor-square-presentation/abstract-derived-category; cited instead of lem-sfb-ringed-comparison-tensor-adjunction. F2: NI's live module kept, only public import ProjectionMateExact and the four modelTensorAugmentation* declarations (byte-identical to the reviewed companion) appended; NI record keeps module and primary, declarations a strict superset. F3: def-sfb-ringed-site-global-derived-adjunction (unchanged) added to stmt_deps. Mechanical finding: the theorem stmt_dep lem-sfb-ringed-derived-tensor-augmentation-naturality is genuine, since modelTensorAugmentation = Classical.choose of that node's ∃! theorem (ρ pinned by representative isos and naturality). β = d.eta, uniquely the canonical mate via canonicalAdjunction at M=f_*I, a=counit, so no extra hypothesis. 0FPK square, naive ν, global clause without a final object, and edge cases (f=id, zero, unbounded, ℤ→ℤ/2, empty site) re-confirmed. No file changed, so no compile; the worker's per-file compiles and dry run are reported clean."
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Stacks Tags 03DA, 098K, 09BV and 0F63; canonical localization/coefficient mates and functoriality of the sheafification unit."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Existing project mate-pasting and inverse-unit arguments, extracted without holes after profiling and optimizing the original item; Stacks Tags 03DA, 098K, 09BV and 0F63."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived local Hom sheaves commutes with restriction of scalars and localization of sites",
+   "results": "Eight results concerning SheafOfModules restriction, sheafification Hom equivalences, and module evaluation; none concerns the derived local Hom presheaf or its weakly contractible evaluation.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing exact restriction and derived slice constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"Presheaf\"",
+   "results": "Twelve results about ordinary PresheafOfModules restriction of scalars, limits, colimits and underlying presheaves. No derived local Hom restriction/evaluation.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedLocalFunctor|hom_naturality|restriction_scalars_paste; evaluation.*normalization|normalization.*evaluation",
+   "results": "Project search finds private coefficient pasting in DerivedScalarExtensionLocalSystems and scalar-extension evaluation in DerivedMorphismWeaklyContractibleEvaluation. Both modules reach the assigned item and cannot be imported without a cycle. Generic localization and derived mate pasting remain available in the lower modules.",
+   "date": "2026-10-27",
+   "verdict": "Build the restriction map from the existing derived slice comparisons and prove its evaluation compatibility directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SourceIsomorphismNormalizedPresheafEvaluation",
+  "date": "2026-10-27",
+  "group": "W7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Functoriality of local Hom evaluation under coefficient restriction, in the normalized-presheaf evaluation argument.",
+   "via": [
+    "lem-weil-pbc-source-isomorphism-normalized-presheaf-evaluation",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "def-weil-pbc-slice-comparison-normalization-arrow",
+ "kind": "definition",
+ "title": "Slice comparison normalization arrow",
+ "statement": "Let X be a scheme, q:R→S a commutative ring map, and d:A→Res_q A′ an arrow of etale derived sheaves [def-weil-pbc-derived-normalization-arrows]. For U in X_proet, define the arrow from the slice restriction of comparison(A) to Res_q of the slice restriction of comparison(A′) by applying comparison and slice restriction to d, then the canonical comparison/coefficient isomorphism and inverse slice/coefficient isomorphism [def-weil-pbc-derived-morphism-sheaf-comparison]. This is a concrete composite, not a chosen normalization witness.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-pbc-derived-morphism-sheaf-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Compose the image of d under derived comparison and restriction to U with the two displayed canonical coefficient comparisons. Every arrow is explicitly constructed from the existing exact functors.",
+   "uses": [
+    "def-weil-pbc-derived-normalization-arrows",
+    "def-weil-pbc-derived-morphism-sheaf-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-weil-pbc-derived-normalization-arrows"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleNormalizationSquareTransport",
+  "file": "lean/Sheaf/Paper/ProEtaleNormalizationSquareTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sliceComparisonNormalizationArrow",
+  "statement": "def sliceComparisonNormalizationArrow (φ : B →+* B')\n    {A : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))}\n    {A' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B'))}\n    (d : A ⟶ (normalizationRestrict X.smallEtaleTopology φ).obj A') (U : X.ProEt)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261027T112442-L-1585266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261027T112442-L-1585266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

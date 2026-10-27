@@ -1,0 +1,109 @@
+{
+ "id": "lem-sp-derived-pullback-ext-hom",
+ "kind": "statement",
+ "title": "Exact-functor transport of an Ext class and its derived morphism",
+ "statement": "Let C and D be abelian categories with chosen derived categories and small Ext groups. Let F:C→D be additive and preserve finite limits and finite colimits. For objects M,Q of C, n≥0 and x∈Extⁿ(M,Q), let s be the canonical isomorphism (-)[0] ⋙ D(F) ≅ F ⋙ (-)[0]. Then the derived morphism of the induced class F_*(x) is s_M⁻¹ followed by the shifted morphism D(F)(x.hom) (including the canonical shift comparison) followed by s_Q[n]. This applies in particular to exact etale inverse image.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Base change of the Kummer Chern component: the formal Ext-to-derived-morphism step. The exact formula is Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Abelian.Ext.mapExactFunctor_hom."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This is exactly Mathlib Abelian.Ext.mapExactFunctor_hom, applied to the given exact additive functor and Ext class. No further mathematical step or specialization is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Base change of the Kummer Chern component: the formal Ext-to-derived-morphism step. The exact formula is Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Abelian.Ext.mapExactFunctor_hom."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+  "place": "Abelian.Ext.mapExactFunctor_hom (exact match)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lemma Abelian.Ext.mapExactFunctor_hom",
+   "results": "1 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-26",
+   "verdict": "Exact Mathlib match: CategoryTheory.Abelian.Ext.mapExactFunctor_hom."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping an Ext class by an exact functor corresponds to its derived morphism through the canonical single-object comparison",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExtAddHom_apply",
+   "date": "2026-10-26",
+   "verdict": "Exact Mathlib match: CategoryTheory.Abelian.Ext.mapExactFunctor_hom."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived functor of an exact functor sends the derived morphism representing an Ext class to the morphism of the mapped Ext class",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-26",
+   "verdict": "Exact Mathlib match: CategoryTheory.Abelian.Ext.mapExactFunctor_hom."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+  "how": "exact"
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ChernMapBaseChange",
+  "date": "2026-10-26",
+  "group": "X7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Finite projective-line classes used by the levelwise diagonal check; base change of the positive Kummer Chern component.",
+   "via": [
+    "lem-sp-finite-p1-chern-map-base-change",
+    "lem-sp-finite-p1-chern-adjunct-base-change",
+    "lem-sp-finite-p1-kummer-naturality",
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Algebra.Homology.DerivedCategory.Ext.Map",
+  "declaration": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+  "statement": "lemma Abelian.Ext.mapExactFunctor_hom\n    [HasDerivedCategory.{t} C] [HasDerivedCategory.{t'} D]\n    [HasExt.{w} C] [HasExt.{w'} D] {X Y : C} {n : ℕ} (e : Ext X Y n) :\n    (e.mapExactFunctor F).hom =\n      (F.mapDerivedCategorySingleFunctor 0).inv.app X ≫ e.hom.map F.mapDerivedCategory ≫\n        ((F.mapDerivedCategorySingleFunctor 0).hom.app Y)⟦(n : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-26",
+  "note": "Existing Mathlib theorem; no new Lean declaration or sorry. The abelian categories, exact additive functor and its instances are section variables in the source file."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2cc84",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T142458-L-330646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2cc84",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T142458-L-330646",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 9 adapted unclaimed modules vs published clone, DAG nodes, change record; 10 delivered files + 43 direct importers compiled in sandbox (all OK, max 50.8 s), axioms clean"
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-integral-coefficient-completeness-transport",
+ "kind": "statement",
+ "title": "Completeness under normalized integral coefficient transport",
+ "statement": "Fix a prime l, a finite extension E/Q_l [def-weil-l-adic-coefficient-extension], any scheme T [def-pc-scheme], and a complex K of modules over the detailed completed integral coefficient sheaf. Under the projection-normalized exact derived restriction F=integralDetailedTransport [def-sfb-integral-completed-coefficient-transport], K is derived complete in the intrinsic augmented reduction Roos sense [def-weil-derived-complete] if and only if F(K) is intrinsically complete [def-weil-pbc-intrinsic-completion]. No boundedness, constructibility or geometric finiteness is assumed.",
+ "stmt_deps": [
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-derived-complete",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, convention before Definition 6.5.1; Lemma 4.2.12 and Lemma 6.8.2(1). Coefficient-presentation supplement to Proposition 6.8.11(3)."
+ },
+ "proof": [
+  {
+   "text": "Lift the normalized ring-sheaf isomorphism to commutative ring sheaves by full faithfulness. Restriction along it and its inverse are exact inverse equivalences. Construct both ordinary identity-on-sections round trips and derive them to obtain the coefficient equivalence.",
+   "uses": [
+    "def-sfb-integral-completed-coefficient-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized completion Roos transport to any complex. If it is intrinsically complete, the completion-reflector unit is invertible and transports the Roos triangle to its intrinsic reduction triangle. Conversely compare the rotations of its reduction triangle and the transported completion triangle: identity isomorphisms on the two product vertices extend to an isomorphism on the shifted input vertices. Unshift and reflect through the coefficient equivalence. Intrinsic completeness is invariant under this isomorphism and holds on the image of its reflector.",
+   "uses": [
+    "lem-pur-completed-coefficient-completion-roos-transport",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The intrinsic and legacy slice reduction definitions agree by the existing comparison. Completeness is invariant under an isomorphism of augmented reduction sequences: map the products, the transition and the first triangle vertex. Apply the counit of the coefficient equivalence to give the stated forward-transport iff.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-weil-derived-complete"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-completed-coefficient-transport",
+  "lem-pur-completed-coefficient-completion-roos-transport",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-sf-derived-complete-legacy-comparison",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit comparison of the two normalized coefficient presentations in the detailed-category clause of Proposition 6.8.11(3); the proof is implemented completely in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction along a coefficient ring isomorphism preserves derived completeness and constructible finite reductions",
+   "date": "2026-10-23",
+   "results": "8 hits: instRingRestrictScalars, RingHom.finitePresentation_respectsIso, RingHom.finite_respectsIso, RingHom.QuasiFinite.respectsIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, Module.RestrictScalars.normedSpaceOrig, instCommRingRestrictScalars, RingHom.EssFiniteType.respectsIso",
+   "verdict": "No comparison of these derived coefficient models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction along a coefficient ring isomorphism preserves derived completeness and constructible finite reductions",
+   "date": "2026-10-23",
+   "results": "8 hits: instRingRestrictScalars, RingHom.finitePresentation_respectsIso, RingHom.finite_respectsIso, RingHom.QuasiFinite.respectsIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, Module.RestrictScalars.normedSpaceOrig, instCommRingRestrictScalars, RingHom.EssFiniteType.respectsIso",
+   "verdict": "No exact comparison theorem; reuse project declarations and the indicated general categorical APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along an isomorphism of constant coefficient rings preserves and reflects constructible sheaves and the cohomological interval of finite derived reductions",
+   "date": "2026-10-23",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CategoryTheory.Sheaf.isConstant_of_iso, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.isLE_of_iso, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.ConnectData.restrictionGEIso, CochainComplex.isGE_of_iso",
+   "verdict": "No exact comparison theorem; reuse project declarations and the indicated general categorical APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimitTriangle\"",
+   "date": "2026-10-23",
+   "results": "0 hits: ",
+   "verdict": "No exact comparison theorem; reuse project declarations and the indicated general categorical APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsIntrinsicallyComplete|PbcUniformReductionProfile",
+   "date": "2026-10-23",
+   "results": "0 hits: ",
+   "verdict": "No exact comparison theorem; reuse project declarations and the indicated general categorical APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratifiedPerfectCharacterization",
+  "date": "2026-10-23",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: Choose an integral lattice for K; prerequisite comparison of the integral categories.",
+   "via": [
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCoefficientCompletenessTransport",
+  "file": "lean/Sheaf/Paper/IntegralCoefficientCompletenessTransport.lean",
+  "declaration": "WeilConjectures.purDetailedTransport_complete_iff",
+  "declarations": [
+   "WeilConjectures.purCoefficientIso_existsUnique",
+   "WeilConjectures.purCoefficientIso",
+   "WeilConjectures.purOrdinaryCoefficientModel",
+   "WeilConjectures.purOrdinaryCoefficientModel_additive",
+   "WeilConjectures.purOrdinaryCoefficientModel_limits",
+   "WeilConjectures.purOrdinaryCoefficientModel_colimits",
+   "WeilConjectures.purOrdinaryCoefficientRoundTrip_existsUnique",
+   "WeilConjectures.purOrdinaryCoefficientRoundTrip",
+   "WeilConjectures.purDetailedTransport_isEquivalence",
+   "WeilConjectures.purDerivedCoefficientRoundTrip",
+   "WeilConjectures.purCoefficientModel",
+   "WeilConjectures.purCoefficientModel_predicates",
+   "WeilConjectures.purDetailedTransport_complete_iff"
+  ],
+  "statement": "theorem purDetailedTransport_complete_iff (W : Scheme.{u})\n    (K : DerivedCategory (scalarReductionSource.{u, u} l E W)) :\n    IsSfDerivedComplete l E W K ↔ PbcIsIntrinsicallyComplete W\n      (pbcIntegralDatum l E) ((integralDetailedTransport W l E).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-fd479",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261024T015708-L-2438656",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-fd479",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261024T015708-L-2438656",
+  "kind": "interface",
+  "note": "independent cc review: integralStratifiedPerfectDetailed proof and the two new proved lemmas against the item node step 5 and the new nodes; moved blocks diffed against live (verbatim except one internal proof step); all 6 delivered modules incl. importer CCPT compiled with lcompile --all; axioms checked (sorryAx only via pre-existing Roos-transport hole)"
+ }
+}

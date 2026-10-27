@@ -1,0 +1,279 @@
+{
+ "id": "lem-pod-reconstruction-common-stage-coherence",
+ "kind": "statement",
+ "title": "Coherence of compact-support coefficient comparisons and common-stage morphisms",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, a prime $\\ell\\ne\\operatorname{char}k$, and finite coefficient fields inside a fixed $\\overline{\\mathbf Q}_\\ell$, with valuation rings, uniformizers and finite quotients as in [def-weil-finite-coefficient-point]. For a field $F$ write $R_F=\\widehat{\\mathcal O}_{F,s}=\\lim_n B_{F,n}$ and $B_{F,n}=(\\mathcal O_F/\\varpi_F^n)_s$ [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded derived categories of module sheaves on the small pro-etale site of $s$, with the coefficient universes of [lem-coef-derived-system-evaluation-calculus]. Put $H_F=\\mathcal L_s^F\\mathcal R_s^F$, with actual unit $u^F$ of [lem-coef-derived-system-evaluation-calculus], normalized by [lem-trf-completion-unit-strict-quotient-model]. On the full derived-complete subcategory [def-weil-derived-complete] write $v^F=(u^F)^{-1}$, using [lem-pur-normalized-reconstruction-adjunction-calculus].\n\nFor each finite $E\\subset\\overline{\\mathbf Q}_\\ell$ use the raw rational category $\\mathcal A_E=D^b_c(s,E)$ and the completed coefficient transitions $S_{L/E}$ [def-weil-rationalization-karoubi], with canonical scalar associators $a_{M,L,E}:S_{M/L}S_{L/E}\\xrightarrow{\\sim}S_{M/E}$ [lem-weil-scalar-extension-composition]. Use the rationalized quotient-cone comparisons $\\beta_{L/E}:S_{L/E}H_E^{\\mathrm{rat}}\\xrightarrow{\\sim}H_L^{\\mathrm{rat}}S_{L/E}$ and actual components $v_{E,C}$, $u_{E,C}$ of [lem-pod-reconstruction-raw-rational-naturality]; their integral maps are those of [lem-pod-completion-unit-scalar-intertwining].\n\nThe specified compact-support coefficient comparisons are precisely these $\\beta$, after the strict identity-tower identifications. They satisfy the identity-extension equation (under the canonical scalar unit identifications) and the following equation of natural transformations for all $E\\subseteq L\\subseteq M$:\n$$ H_M^{\\mathrm{rat}}(a_C)\\,\\beta_{M/L,S_{L/E}C}\\,S_{M/L}(\\beta_{L/E,C})=\\beta_{M/E,C}\\,a_{H_E^{\\mathrm{rat}}C}. $$\nIn particular this supplies the comparison between $H_E^{\\mathrm{rat}}(C)$ extended to a common field and $H_F^{\\mathrm{rat}}(S_{F/E}C)$, including its coherence, for the actual compact-support functors.\n\nOn the literal common-stage category $\\mathcal A=D^b_c(s,\\overline{\\mathbf Q}_\\ell)$ of [def-weil-algebraically-closed-coefficients], the formulas\n$$ \\mathcal H(E,C)=(E,H_E^{\\mathrm{rat}}C),\\qquad \\mathcal H[F,h]=[F,\\beta_{F/L,D}^{-1}\\,H_F^{\\mathrm{rat}}(h)\\,\\beta_{F/E,C}] $$\nfor $h:S_{F/E}C\\to S_{F/L}D$ define the identity compact-support functor of [def-weil-integral-rational-qbar-compact-support]. This formula is independent of representatives and common fields, and respects identities and composites. The components $[E,v_{E,C}]:\\mathcal H(E,C)\\to(E,C)$ are a natural isomorphism with inverse $[E,u_{E,C}]$. More explicitly, at any common field $F$ the naturality equation is the transport, by the displayed $\\beta$, of\n$$ v_{F,S_{F/L}D}\\,H_F^{\\mathrm{rat}}(h)=h\\,v_{F,S_{F/E}C}. $$\nIt is preserved by every further coefficient extension. No conservativity of finite projections or choice of a preferred common field is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "First sentence, 'for f=id_s the functor Rf_! is the identity': the scalar-associator equation for the actual compact-support comparisons, and naturality on common-field representatives (old step 9).",
+  "external": [
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 3.5.2-3.5.3, Lemma 3.5.7 and Lemma 6.8.2(1). Agent-formulated comparison and descent calculation extracted from the returned proof, not a verbatim theorem of this source."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-coefficient-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "def-weil-derived-complete",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition",
+  "lem-pod-reconstruction-raw-rational-naturality",
+  "lem-pod-completion-unit-scalar-intertwining",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "Choose each actual integral/raw rational realization by the identity-inclusion instance of reconstructionRawRationalNaturality. Apply reconstruction_identityCompactSupport to each chosen realization. For this fixed family, apply lem-pod-reconstruction-scalar-realizations to obtain the actual quotient-cone integral comparisons, their rationalizations, and both inverse-unit equations.",
+   "uses": [
+    "lem-pod-reconstruction-raw-rational-naturality",
+    "lem-pod-reconstruction-scalar-realizations",
+    "def-pod-reconstruction-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence: actual identity-compact-support comparisons and their normalization."
+   }
+  },
+  {
+   "text": "For $E=L$ let $e:S_{E/E}\\xrightarrow{\\sim}\\mathrm{id}$ be the canonical scalar unit. Naturality of $v_E$ at $e_C$ gives $v_{E,C}H_E(e_C)=e_Cv_{E,S_{E/E}C}$; naturality of $e$ at $v_{E,C}$ gives $e_CS_{E/E}(v_{E,C})=v_{E,C}e_{H_EC}$. Insert Step 1 between these equations and cancel $v_{E,C}$ to obtain $H_E(e_C)\\beta_{E/E,C}=e_{H_EC}$. This is precisely the identity-extension equation under the unit identifications.",
+   "uses": [
+    "lem-pod-reconstruction-raw-rational-naturality",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence: identity-extension coherence."
+   }
+  },
+  {
+   "text": "For $E\\subseteq L\\subseteq M$, abbreviate $T=S_{L/E}$, $U=S_{M/L}$, $V=S_{M/E}$ and $a:UT\\xrightarrow{\\sim}V$. Postcompose the proposed associator equation with $v_{M,VC}$. On its left, naturality of $v_M$ and Step 1 give successively\n$$v_{M,VC}H_M(a_C)\\beta_{M/L,TC}U(\\beta_{L/E,C})=a_Cv_{M,UTC}\\beta_{M/L,TC}U(\\beta_{L/E,C})=a_CUT(v_{E,C}).$$\nOn its right Step 1 and naturality of the specified scalar associator give\n$$v_{M,VC}\\beta_{M/E,C}a_{H_EC}=V(v_{E,C})a_{H_EC}=a_CUT(v_{E,C}).$$\nCancel the isomorphism $v_{M,VC}$. Every equation holds for each $C$ and uses natural transformations, hence proves the asserted equality of natural transformations.",
+   "uses": [
+    "lem-pod-reconstruction-raw-rational-naturality",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence: successive coefficient extensions and scalar-associator equation."
+   }
+  },
+  {
+   "text": "For objects $X=(E,C)$ and $Y=(L,D)$, put $t_{X,F}=S_{F/E}(v_{E,C})$ and $t_{Y,F}=S_{F/L}(v_{L,D})$ at a common field $F$. These are isomorphisms. Step 1 and naturality of $v_F$ at an arbitrary rational arrow $h:S_{F/E}C\\to S_{F/L}D$ give\n$$\\beta_{F/L,D}^{-1}H_F(h)\\beta_{F/E,C}=t_{Y,F}^{-1}v_{F,S_{F/L}D}H_F(h)u_{F,S_{F/E}C}t_{X,F}=t_{Y,F}^{-1}h\\,t_{X,F}.$$\nThe middle equality uses $v_{F,S_{F/L}D}H_F(h)=h v_{F,S_{F/E}C}$ and cancels $v_Fu_F$. In particular this uses naturality on all rational arrows, not only arrows lifted integrally.",
+   "uses": [
+    "lem-pod-reconstruction-raw-rational-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence: common-field representative formula and rational naturality."
+   }
+  },
+  {
+   "text": "For $F\\subseteq G$ let $W=S_{G/F}$ and $a_X:WS_{F/E}C\\xrightarrow{\\sim}S_{G/E}C$ be the scalar associator, and similarly $a_Y$. The transition of a representative is $h_G=a_YW(h)a_X^{-1}$. Use $a_{HX}:WS_{F/E}H_EC\\xrightarrow{\\sim}S_{G/E}H_EC$ for the associator at $H_EC$, and similarly $a_{HY}$. Naturality of the scalar associators at $v_E,v_L$ gives $t_{X,G}a_{HX}=a_XW(t_{X,F})$ and $t_{Y,G}a_{HY}=a_YW(t_{Y,F})$. Therefore\n$$a_{HY}W(t_{Y,F}^{-1}h t_{X,F})a_{HX}^{-1}=t_{Y,G}^{-1}a_YW(h)a_X^{-1}t_{X,G}=t_{Y,G}^{-1}h_Gt_{X,G}.$$\nThis proves compatibility with every transition. Equal representatives agree at a further common field by the definition of the Hom colimit; applying this equality there proves independence of representatives and of the common field. In Lean this is the already proved StageSystem.Morphism.tr_mapAt, after constructing the stage-system morphism with the associator equation of Step 3.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence: independence of common-field representatives under further extension."
+   }
+  },
+  {
+   "text": "Compute identities and composites at one common field, as in the definition of the common-stage category. For an identity the formula of Step 4 is $t_X^{-1}1t_X=1$. For composable $h:X_F\\to Y_F$ and $g:Y_F\\to Z_F$ it gives $(t_Z^{-1}g t_Y)(t_Y^{-1}h t_X)=t_Z^{-1}gh t_X$. Step 5 permits moving any two initial representatives to this field. Thus the stated object and arrow formulas define a functor. Its object at $(E,C)$ is $(E,H_EC)$, exactly the identity compact-support object in the compact-support definition by the identification in Step 1; its arrows are obtained from that finite-stage functor by its specified coefficient comparisons, as required. Use the existing proved StageSystem.Morphism.functor and functor_map_mkHom: no new pair-category construction or existence axiom is needed.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-pod-reconstruction-raw-rational-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence: the actual common-stage identity compact-support functor."
+   }
+  },
+  {
+   "text": "Let $v_X=[E,v_{E,C}]$. Its representative at $F$ is exactly $t_{X,F}$; the analogous component $[E,u_{E,C}]$ extends to $t_{X,F}^{-1}$. Their two composites are identities already over $E$. For any $[F,h]:X\\to Y$, Step 4 gives $t_{Y,F}(\\beta_{F/L,D}^{-1}H_F(h)\\beta_{F/E,C})=h t_{X,F}$, proving naturality of $v$ with the specified formula. Before cancelling the $\\beta$ this is exactly $v_{F,S_{F/L}D}H_F(h)=h v_{F,S_{F/E}C}$. Step 5 proves preservation by every further extension. Hence these components give the stated natural isomorphism and its stated inverse, without selecting a common field globally or detecting maps by finite reductions. Package the inverse-unit and unit families as Morphism.Hom to and from Morphism.id; their compatibility is the inverse-unit equation and its cancellation. The proved descNatIso and functorIdIso produce v with exactly the required inclusion components.",
+   "uses": [
+    "lem-pod-reconstruction-raw-rational-naturality",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "First sentence: naturality and inverse on the literal common-stage category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reconstruction-raw-rational-naturality",
+  "def-pod-reconstruction-common-stage-data",
+  "lem-pod-reconstruction-scalar-realizations",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "First sentence, identity compact support; Step 1 of lem-pod-reconstruction-common-stage-coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completion functor has coherent coefficient change maps which induce a functor on common finite field stages",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n) (x : AdicCompletion I M), (AdicCompletion.transitionMap I M hmn) (↑x n) = ↑x m\", \"doc\": \"For natural numbers $ m \\\\leq n $ and any element $ x $ in the $ I $-adic completion of an $ R $-module $ M $, applying the transition map from $ M/I^nM $ to $ M/I^mM $ to the $ n $-th component of $ x\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"AdicCompletion.map_val_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {n : ℕ} (x : AdicCompletion I M),\\n  ↑((AdicCompletion.map I f) x) n = (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\to N $, the induced linear map between the $ I $-adic completions of $ M $ and $ N $ satisf\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $. This est\"}\n  {\"name\": \"AdicCompletion.map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M →ₗ[R] N) → AdicCompletion I M →ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\\\to N $, this function constructs the induced linear map between the $ I $-adic completio\"}\n  {\"name\": \"AdicCompletion.map_mk\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N)\\n  (a : AdicCompletion.AdicCauchySequence I M),\\n  (AdicCompletion.map I f) ((AdicCompletion.mk I M) a) =\\n \", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f: M \\to N $, the induced linear map on $ I $-adic completions satisfies $ \\text{map}_I(f)(\\text{mk}\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic functor associators and ordinary adic module maps do not prove the actual compact-support coefficient comparison equation and its common-stage normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor.mapIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.NatIso'\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic functor associators and ordinary adic module maps do not prove the actual compact-support coefficient comparison equation and its common-stage normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ommon[Ss]tage|[Cc]ommon_stage|[Cc]ompletion.*[Cc]oeff|[Cc]oeff.*[Cc]ompletion",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"295\", \"text\": \"theorem coeff_toAdicCompletion_val_apply_out {x : σ →₀ ℕ} {p : MvPowerSeries σ R} {n : ℕ}\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"296\", \"text\": \"    (hx : degree x < n) : (Quotient.out (((toAdicCompletion σ R) p).val n)).coeff x =\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"320\", \"text\": \"lemma coeff_toAdicCompletionInv {x : σ →₀ ℕ}\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"322\", \"text\": \"      coeff x (toAdicCompletionInv σ R f) = (f.val (degree x + 1)).out.coeff x := by rfl\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"332\", \"text\": \"  rw [coeff_truncTotal _ h, coeff_toAdicCompletionInv, ← MvPolynomial.coeff_sub]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic functor associators and ordinary adic module maps do not prove the actual compact-support coefficient comparison equation and its common-stage normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality and associator coherence of completion coefficient comparisons on common stage categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Oplax.OplaxTrans.associator\", \"module\": \"Mathlib.CategoryTheory.Bicategory.FunctorBicategory.Oplax\", \"type\": \"(η : F ⟶ G) (θ : G ⟶ H) (ι : H ⟶ I) : (η ≫ θ) ≫ ι ≅ η ≫ θ ≫ ι\", \"doc\": \"For bicategories $\\\\mathcal{B}$ and $\\\\mathcal{C}$, and oplax natural transformations $\\\\eta: F \\\\Rightarrow G$, $\\\\theta: G \\\\Rightarrow H$, $\\\\iota: H \\\\Rightarrow I$ between oplax functors $F,G,H,I: \\\\mathc\"}\n  {\"name\": \"CategoryTheory.Functor.associator\", \"module\": \"Mathlib.CategoryTheory.Functor.Category\", \"type\": \"(F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ E') : (F ⋙ G) ⋙ H ≅ F ⋙ G ⋙ H\", \"doc\": \"The natural isomorphism between the functors $(F \\\\circ G) \\\\circ H$ and $F \\\\circ (G \\\\circ H)$, where each component is the identity natural transformation. This establishes the coherence of associativi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.StrongTrans.associator\", \"module\": \"Mathlib.CategoryTheory.Bicategory.FunctorBicategory.Pseudo\", \"type\": \"(η : F ⟶ G) (θ : G ⟶ H) (ι : H ⟶ I) : (η ≫ θ) ≫ ι ≅ η ≫ θ ≫ ι\", \"doc\": \"For pseudofunctors $F, G, H, I : \\\\mathcal{B} \\\\to \\\\mathcal{C}$ between bicategories and strong natural transformations $\\\\eta : F \\\\Rightarrow G$, $\\\\theta : G \\\\Rightarrow H$, $\\\\iota : H \\\\Rightarrow I$, t\"}\n  {\"name\": \"CategoryTheory.NatTrans.CommShift.associator\", \"module\": \"Mathlib.CategoryTheory.Shift.CommShift\", \"type\": \": CommShift (Functor.associator F₁ G H).hom A\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift operations parameterized by an additive monoid $A$, and natural transformations between functors $F₁,F₂,F₃:\\\\mathcal{C}\\\\to\\\\mathcal{D}$ that c\"}\n  {\"name\": \"CategoryTheory.Sum.associativityFunctorEquivNaturalityFunctorIso\", \"module\": \"Mathlib.CategoryTheory.Sums.Products\", \"type\": \":\\n  ((sum.associativity A A' T).congrLeft.trans <|\\n        (Sum.functorEquiv A (A' ⊕ T) B).trans <| Equivalence.refl.prod <| Sum.functorEquiv _ _ B).functor ≅\\n    (Sum.functorEquiv (A ⊕ A') T B).trans ((Sum.functorEquiv A A' B).prod Equivalence.refl) |>.trans\\n        (prod.associativity _ _ _) |>.fu\", \"doc\": \"A natural isomorphism ensuring coherence between different parenthesizations of coproduct functors, constructed by composing associators and whiskered isomorphisms to establish commutativity in the eq\"}\n  {\"name\": \"Mathlib.Tactic.BicategoryLike.naturality\", \"module\": \"Mathlib.Tactic.CategoryTheory.Coherence.PureCoherence\", \"type\": \"(nm : Name) (p : NormalizedHom) (η : Mor₂Iso) : CoherenceM ρ Expr\", \"doc\": \"A function that constructs an expression enforcing the naturality condition in bicategory coherence proofs, taking a name $ nm $, a normalized homomorphism $ p $, and a 2-isomorphism $ \\\\eta $, and ret\"}\n  {\"name\": \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Categorical.Basic\", \"type\": \"(U : X ⥤ Y) (V : Y ⥤ Z) : (precompose F G).obj (U ⋙ V) ≅ (precompose F G).obj V ⋙ (precompose F G).obj U\", \"doc\": \"Given functors $U : \\\\mathcal{X} \\\\to \\\\mathcal{Y}$ and $V : \\\\mathcal{Y} \\\\to \\\\mathcal{Z}$, this natural isomorphism establishes that precomposing a pullback square with the composition $V \\\\circ U$ is nat\"}\n  {\"name\": \"CategoryTheory.Sum.associativityFunctorEquivNaturalityFunctorIso_hom_app_fst\", \"module\": \"Mathlib.CategoryTheory.Sums.Products\", \"type\": \"∀ {A : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} A] {A' : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} A'] {B : Type u} [inst_2 : CategoryTheory.Category.{v, u} B]\\n  (T : Type u_3) [inst_3 : CategoryTheory.Category.{v_3, u_3} T] (X : CategoryTheory.Functor ((A ⊕ A') ⊕ T) B),\\n \", \"doc\": \"The first component of the natural isomorphism ensuring coherence between different parenthesizations of coproduct functors is naturally isomorphic to a composition of associators and whiskered functo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic functor associators and ordinary adic module maps do not prove the actual compact-support coefficient comparison equation and its common-stage normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient cone completion comparison coherence under nested ramified coefficient extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq'\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] {I : Ideal S} {a : ℕ → ℕ}\\n  (ha : StrictMono a) (f : (n : ℕ) → R →+* S ⧸ I ^ a n),\\n  (∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) →\\n    ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I ⋯).co\", \"doc\": \"For natural numbers $ m $ and $ n $ with $ m \\\\leq n $, the composition of the canonical quotient ring homomorphism $ R/I^m \\\\to R/I^n $ with the homomorphism $ f_n $ equals the homomorphism $ f_m $. Th\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $. This est\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n) (x : AdicCompletion I M), (AdicCompletion.transitionMap I M hmn) (↑x n) = ↑x m\", \"doc\": \"For natural numbers $ m \\\\leq n $ and any element $ x $ in the $ I $-adic completion of an $ R $-module $ M $, applying the transition map from $ M/I^nM $ to $ M/I^mM $ to the $ n $-th component of $ x\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ between modules over a commutative ring $ R $, and for natural numbers $ m \\\\leq n $, the composition of the transition map $ M/I^nM \\\\to M/I^mM $ with the reduc\"}\n  {\"name\": \"IsAdicComplete.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"Let $R$ be a commutative ring, $I$ be an ideal of $R$, and $M, N$ be $R$-modules. Assume that $N$ is $I$-adically complete. Let $(f_n : M \\\\to N/I^n N)_{n \\\\in \\\\mathbb{N}}$ be a compatible family of $R$\"}\n  {\"name\": \"IsAdicComplete.ofAlgEquiv_comp_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m),\\n  (↑(AdicCompletion.ofAlgEquiv I)).comp (IsAdicComple\", \"doc\": \"For a commutative ring $ S $, an ideal $ I $, and an $ I $-adically complete commutative ring $ S $, the composition of the canonical $ S $-algebra equivalence between $ S $ and its $ I $-adic complet\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic functor associators and ordinary adic module maps do not prove the actual compact-support coefficient comparison equation and its common-stage normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.associator",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.associator\", \"module\": \"Mathlib.CategoryTheory.Functor.Category\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {E' : Type u₄} [CategoryTheory.Category.{v₄, u₄} E'] (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor D E) (H : CategoryTheory.Functor\", \"doc\": \"The associator for functors, a natural isomorphism `((F ⋙ G) ⋙ H) ≅ (F ⋙ (G ⋙ H))`.\\n\\n(In fact, `iso.refl _` will work here, but it tends to make Lean slow later,\\nand it's usually best to insert explic\"}\n  {\"name\": \"CategoryTheory.Functor.associator_hom_app\", \"module\": \"Mathlib.CategoryTheory.Functor.Category\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {E' : Type u₄} [CategoryTheory.Category.{v₄, u₄} E'] (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor D E) (H : CategoryTheory.Functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.associator_inv_app\", \"module\": \"Mathlib.CategoryTheory.Functor.Category\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {E' : Type u₄} [CategoryTheory.Category.{v₄, u₄} E'] (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor D E) (H : CategoryTheory.Functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.triangleIso\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {A : Type u₁} [CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [CategoryTheory.Category.{v₂, u₂} B] {C : Type u₃} [CategoryTheory.Category.{v₃, u₃} C] (F : CategoryTheory.Functor A B) (G : CategoryTheory.Functor B C) : F.associator (CategoryTheory.Functor.id B) G ≪≫ F.isoWhiskerLeft G.leftUnitor \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.triangleIso_assoc\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {A : Type u₁} [CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [CategoryTheory.Category.{v₂, u₂} B] {C : Type u₃} [CategoryTheory.Category.{v₃, u₃} C] (F : CategoryTheory.Functor A B) (G : CategoryTheory.Functor B C) {Z : CategoryTheory.Functor A C} (h : F.comp G ≅ Z) : F.associator (CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.triangle\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {A : Type u₁} [CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [CategoryTheory.Category.{v₂, u₂} B] {C : Type u₃} [CategoryTheory.Category.{v₃, u₃} C] (F : CategoryTheory.Functor A B) (G : CategoryTheory.Functor B C) : CategoryTheory.CategoryStruct.comp (F.associator (CategoryTheory.Functor.id B)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerLeft_twice\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] (F : CategoryTheory.Functor B C) (G : CategoryTheory.Functor C D) {H K : CategoryTheory.Functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerRight_twice\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] {H K : CategoryTheory.Functor B C} (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerLeft_right\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] (F : CategoryTheory.Functor B C) {G H : CategoryTheory.Functor C D} (α : G ≅ H) (K : CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerRight_left\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] (F : CategoryTheory.Functor B C) {G H : CategoryTheory.Functor C D} (α : G ≅ H) (K : CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerRight_twice_assoc\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] {H K : CategoryTheory.Functor B C} (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.whiskerLeft_twice\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] (F : CategoryTheory.Functor B C) (G : CategoryTheory.Functor C D) {H K : CategoryTheory.Functor\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic functor associators and ordinary adic module maps do not prove the actual compact-support coefficient comparison equation and its common-stage normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism from each stage endofunctor to the identity determines coherent scalar comparisons and descends by conjugation to a common stage category",
+   "results": "OK 8 hits: CategoryTheory.Abelian.DoldKan.comparisonN, AlgebraicTopology.DoldKan.Compatibility.τ₁, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.w, AlgebraicTopology.DoldKan.Compatibility.τ₀, AlgebraicTopology.DoldKan.Compatibility.υ, CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap, CategoryTheory.Functor.IsEventuallyConstantTo.isoMap, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Dold-Kan, eventual constancy, ordinary module scalar extension or uniform-space completion; none states the actual pro-etale reconstruction comparison with the prescribed unit and common-field morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.associator",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Dold-Kan, eventual constancy, ordinary module scalar extension or uniform-space completion; none states the actual pro-etale reconstruction comparison with the prescribed unit and common-field morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ommon[Ss]tage|[Cc]ommon_stage|reconstruction.*coher|completion.*[Ss]calar",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Dold-Kan, eventual constancy, ordinary module scalar extension or uniform-space completion; none states the actual pro-etale reconstruction comparison with the prescribed unit and common-field morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent comparison maps for derived completion and scalar extension define functors on common coefficient field stages",
+   "results": "OK 8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor, AbstractCompletion.compare, ModuleCat.coextendScalars, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.extendScalars_assoc, ModuleCat.CoextendScalars.obj', ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Dold-Kan, eventual constancy, ordinary module scalar extension or uniform-space completion; none states the actual pro-etale reconstruction comparison with the prescribed unit and common-field morphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-identity-compact-support-normalization",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "First sentence, 'for f=id_s the functor Rf_! is the identity': the scalar-associator equation for the actual compact-support comparisons, and naturality on common-field representatives (old step 9).",
+   "via": [
+    "lem-pod-identity-compact-support-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-reconstruction-common-stage-coherence",
+  "worker": "stage1",
+  "summary": "Proved the actual coefficient associator equation by cancellation against the inverse completion unit, then checked scalar transition, representative independence, functor laws, and naturality explicitly on common-stage arrows. Reused existing intertwining and raw rationalization lemmas; no new nodes and no statement changes.",
+  "blueprint": "Expands the first sentence of lem-pod-point-dualizing-complex.proof.md, 'for f=id_s the functor Rf_! is the identity', specifically its coefficient coherence and common-stage arrow content.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Canonical scalar associators and units, natural in every rational morphism; the same-unit reconstruction lemmas do not construct scalar associators."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-scalar-extension-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-8203bd298",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-8203bd298 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and the statements of every cited node: raw-rational-naturality, completion-unit-scalar-intertwining, scalar-extension-composition, algebraically-closed-coefficients, qbar-compact-support and rationalization-karoubi. The source is the first sentence of lem-pod-point-dualizing-complex.proof.md ('for f=id_s the functor Rf_! is the identity'); proof_origin=agent is correct, and no SGA source is used. There is no repair note for this item, and the item is still unsplit live, so no other group has superseded it. Step 1: β=u_{L,SC}S(v_{E,C}) follows from the raw lemma's equation v_{L,SC}β=S(v_{E,C}), and that β is the Q_L-image of the specified integral β, not an arbitrary one. Step 2: the identity-extension equation H(e_C)β=e_{HC} follows from naturality of v at e_C, naturality of e at v_C, and cancelling v_C; I checked the types. Step 3: postcomposing both sides of the associator equation with v_{M,VC} reduces each to a_C·UT(v_{E,C}), and cancelling the iso v_{M,VC} proves it. Step 4: β^{-1}H(h)β=t_Y^{-1}h t_X for every rational h, with the right endpoints. Step 5: naturality of a gives t_G a_H=a W(t_F), so the formula commutes with the transitions of def-weil-algebraically-closed-coefficients. Steps 6-7: the functor laws hold at one common field, and naturality and the inverse of [E,v] follow from Steps 4-5. All steps are genuinely short naturality and cancellation arguments, and proof_deps equals the union of uses. lem-sbc-coherent-pair-functor-descent is the generic version of steps 4-7, but it needs a strict identity transition S_{E/E}=1 and pentagons, which fail here for the completed functors, so it is not a duplicate and not citing it is justified. The declared tool_use of lem-weil-scalar-extension-composition is on route anyway, because sk-thm-sf-package uses sk-def-sf-operations; I accept it. There are no new nodes and the statement is unchanged. Edge cases checked: E=L=M, zero objects, the identity at stage E where S_{E/E}≠id, representatives at different fields, ramified extensions, and arbitrary rational sums."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodReconstructionCommonStageCoherence",
+  "declaration": "WeilConjectures.PodCommonStageReconstruction.reconstructionCommonStageCoherence",
+  "declarations": [
+   "WeilConjectures.PodCommonStageReconstruction.reconstructionCommonStageCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/PodReconstructionCommonStageCoherence.lean",
+  "statement": "theorem reconstructionCommonStageCoherence (hl : l ≠ D.p) : ∃ (R : ∀ E, Realization D l Ω E (A E)) (b : ∀ (E L : Index l Ω) (h : E ≤ L), (R E).integral ⋙ integralTransition l Ω (point D) E L h ≅ integralTransition l Ω (point D) E L h ⋙ (R L).integral) (β : ∀ (E L : Index l Ω) (h : E ≤ L), (R E).rational ⋙ stageTransition l Ω (point D) E L h ≅ stageTransition l Ω (point D) E L h ⋙ (R L).rational), (∀ E, IdentitySupport D l Ω E (A E) (R E)) ∧ (∀ (E L : Index l Ω) (h : E ≤ L), SameIndexRealization D l Ω A R E L h (b E L h)) ∧ (∀ (E L : Index l Ω) (h : E ≤ L) (C : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) (point D)), (b E L h).hom.app C ≫ (R L).integralUnit.inv.app ((integralTransition l Ω (point D) E L h).obj C) = (integralTransition l Ω (point D) E L h).map ((R E).integralUnit.inv.app C)) ∧ (∀ (E L : Index l Ω) (h : E ≤ L) (C : Stage l Ω (point D) E), HEq ((β E L h).hom.app C) ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) (point D)).map ((b E L h).hom.app C.obj))) ∧ (∀ (E L : Index l Ω) (h : E ≤ L) (C : Stage l Ω (point D) E), (β E L h).hom.app C ≫ (R L).rationalUnit.inv.app ((stageTransition l Ω (point D) E L h).obj C) = (stageTransition l Ω (point D) E L h).map ((R E).rationalUnit.inv.app C)) ∧ Coherence D l Ω A R β",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The unchanged realization definitions and comparison predicates are publicly reexported from PodReconstructionCommonStageData. The proof chooses actual finite-stage realizations, uses the scalar normalization sublemma, proves coherence by cancellation and descends with the proved upstream StageSystem.Morphism API."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6d8fa384",
+  "group": "N6",
+  "result": "pass",
+  "note": "Node unchanged except lean; 12 imports = stmt_dep modules; statement verbatim; one sorry. Realization pins the integral/rational functors and units via the recorded IntegralRealization/RationalRealization; IdentitySupport is verbatim the conclusion of reconstruction_identityCompactSupport; b is pinned by SameIndexRealization (dep's χH⁻¹≫actualSameIndex≫completion.map χ) and by its unit equation, β by HEq Q_L(b) plus the rational unit equation. Identity-extension (scalarUnit = eqToIso≫unitor) and associator (stageSystem.assoc ≍ sfRationalScalarComp) equations match the TeX right-to-left with correct endpoints. object/representative formulas, tr-compatibility, H functor with mkHom pinned, v ≅ 𝟭 with ι-components [E,v]/[E,u], raw and transported naturality all present. Edge cases E=L=M, ramified, zero, no integral lifts OK; HEq types propositionally equal. No hollow defs, no name clash, docstrings carry source/blueprint/7 steps. Advisory: arbitrary-A parameter inherited from the landed raw-rational dependency."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dae34",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T204504-L-2962801",
+  "kind": "interface",
+  "note": "independent cc review: D4 item node, data/scalar new nodes, and three modules matched against the published PodReconstructionCommonStageCoherence; moved defs verbatim, Coherence/object/representative defeq via abbrev stageTransition; sandbox compile exit 0, axioms propext/sorryAx/Classical.choice/Quot.sound"
+ }
+}

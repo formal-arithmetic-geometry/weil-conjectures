@@ -24,188 +24,62 @@
  ],
  "proof": [
   {
-   "text": "First check the candidate right adjoints are functors of the required categories. By [sk-def-sp-tate-twist], $\\mathcal O_{E,T}(r)$ is pro-étale locally free of rank one for every integer $r$. Taking the single stratum $T$ and the local scalar module $\\mathcal O_E$ in [sk-def-sfb-constructible] shows that this sheaf, in degree zero, belongs to $\\Dbc(T,\\mathcal O_E)$. Pullback and tensor preserve $\\Dbc$ by [sk-lem-int-tensor]; shifts preserve boundedness and just reindex the cohomology sheaves in its definition. Thus $g^*(-)(r)[s]$ preserves $\\Dbc$ for every standing morphism $g$ and integers $r,s$. The inverse image is exact by [sk-prop-sfb-cartesian-coefficients], and its derived adjunction to $Rg_*$ is [def-sfb-module-derived-pushpull-adjunction]. It preserves small coproducts by [lem-weil-pbc-left-adjoint-preserves-colimits]. Tensoring with the invertible Tate sheaf is an exact equivalence with inverse the opposite twist, so it also preserves coproducts; shifts do too. Consequently the preimage under $g^*(-)(r)[s]$ of $\\mathcal L$ is a localizing subcategory containing $\\Dbc$, and hence contains $\\mathcal L$ by [sk-def-localizing-closure]. This proves the typing of all candidate functors and already proves clause (3). For the integral coefficients used here, [det-def-localizing-closure-ctf-equals-bc](2) identifies $\\Dctf=\\Dbc$ and their localizing closures. It applies because every standing scheme is qcqs. Thus the notation agrees with [sk-def-localizing-closure], and all later uses of [sk-thm-sf-pf-adic] on $\\Loc(\\Dctf)$ are uses on precisely $\\mathcal L$.",
+   "text": "Apply signed integral Tate-line constructibility to P1_Y and A^d_Y. Transport source bounded constructibility to the constant-model predicate on the standing noetherian quasi-compact schemes. Integral pullback and tensor preserve it, and shifts preserve it. This proves both bounded-constructible assertions.",
    "uses": [
-    "sk-def-sp-tate-twist",
-    "sk-def-sfb-constructible",
+    "lem-sfb-integral-tate-line-constructible",
+    "lem-sfb-adic-constructibility-predicate-comparison",
     "sk-lem-int-tensor",
-    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-dc-ell-adic-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unshifted composite of derived pullback and right tensor is triangulated and a left adjoint. The preimage of the target localizing property is therefore replete, triangulated and closed under small sums. It contains the constructible generators by the preceding step (undo the even shift). Minimality of the localizing closure, followed by shift stability, proves both hq and hp.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "det-proper-base-change-unbounded-pullback",
     "def-sfb-module-derived-pushpull-adjunction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "sk-def-localizing-closure",
-    "det-def-localizing-closure-ctf-equals-bc"
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(3), with the localizing-category typing needed in (1) and (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $P=\\mathbf P^1_Y$, $W=P\\times_YP$, with projections $p_1,p_2$ and diagonal $\\Delta$. The maps $q$ and $p_i$ are proper by [lemma-nagata-projective-space-base-change-proper]. Properness includes separatedness, so $\\Delta$ is closed [def-weil-proper-morphism] and hence proper [lem-weil-pbc-closed-immersion-proper]. These are standing morphisms. For each proper map, [det-prop-int-brown-construction] compares its chosen compactification with the identity-open one, yielding $R(-)_!\\simeq R(-)_*$ compatibly with composition. Thus $Rp_{i*}R\\Delta_*=\\mathrm{id}$ and $Rq_*Rp_{1*}=Rq_*Rp_{2*}$. For $\\Delta$, exactness in [det-lem-formal-closed-support-sheaves](2) gives $R\\Delta_*=\\Delta_*$. Write $R_Z=\\mathcal O_{E,Z}$.",
-   "uses": [
-    "lemma-nagata-projective-space-base-change-proper",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-closed-immersion-proper",
-    "det-prop-int-brown-construction",
-    "det-lem-formal-closed-support-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(1), geometry and proper compactification comparisons"
-   }
-  },
-  {
-   "text": "The integral projection formula [det-thm-sf-pf-adic-projection] for $\\Delta$ gives\n$$a_M:p_1^*M\\otimes^L\\Delta_*R_P\\xrightarrow{\\sim}\\Delta_*M,$$\nusing $\\Delta^*p_1^*=\\mathrm{id}$ from [sk-def-sfb-module-pushforward-pullback]. The class type is [det-prop-diagonal-tower-limit](3); [det-prop-diagonal-tower-coefficients](1) supplies $\\delta:\\Delta_*R_P\\to R_W(1)[2]$ and $t_q:Rq_*R_P(1)[2]\\to R_Y$ from the trace of [det-prop-diagonal-tower-trace]. Put $T=R_P(1)[2]$, $T_W=R_W(1)[2]$, and $G=q^*(-)(1)[2]$. Define\n$$v_M=Rp_{2*}(1\\otimes\\delta)\\circ Rp_{2*}a_M^{-1}:M\\to Rp_{2*}(p_1^*M\\otimes T_W).$$\nLet $b_2:q^*Rq_*\\to Rp_{2*}p_1^*$ and $b_1:q^*Rq_*\\to Rp_{1*}p_2^*$ be the canonical mates [def-weil-pbc-adjunction-mate]. Proper base change [sk-thm-sf-pf-adic] and the projection formula give $B_M:Rp_{2*}(p_1^*M\\otimes T_W)\\simeq GRq_*M$, obtained by moving $T=p_2^*T$ outside and applying $b_2^{-1}\\otimes1$. Put $\\eta_M=B_Mv_M$ and $\\varepsilon_K=(1_K\\otimes t_q)\\pi_{q,K,T}^{-1}:Rq_*GK\\to K$, where $\\pi_{h,L,N}:L\\otimes Rh_*N\\to Rh_*(h^*L\\otimes N)$ is the canonical projection map. These are natural maps in the localizing categories by step 1 and the proper formulas. Pullback coefficients and twists are identified by [sk-prop-sfb-cartesian-coefficients]; pullback/tensor comparisons are [lem-weil-pbc-ringed-topoi-derived-tensor-pullback].",
-   "uses": [
-    "det-thm-sf-pf-adic-projection",
-    "sk-def-sfb-module-pushforward-pullback",
-    "det-prop-diagonal-tower-limit",
-    "det-prop-diagonal-tower-coefficients",
-    "det-prop-diagonal-tower-trace",
-    "def-weil-pbc-adjunction-mate",
-    "sk-thm-sf-pf-adic",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(1), construction of unit and counit"
-   }
-  },
-  {
-   "text": "The first rearrangement lemma [lem-sfb-trace-base-change-first], with $f=q$, $N=M$ and $t=t_q$, gives\n$$\\varepsilon_{Rq_*M}Rq_*(B_M)=Rq_*(1_M\\otimes t_{p_1})Rq_*\\pi_{p_1,M,T_W}^{-1}.$$\nIts base-change trace hypothesis is exactly [det-prop-diagonal-tower-coefficients](3), applied along $q$, and its isomorphism hypotheses are the integral proper formulas [sk-thm-sf-pf-adic]. Now precompose with $Rq_*v_M$. Projection-formula naturality on $\\delta$ moves $Rp_{1*}(1\\otimes\\delta)$ past $\\pi^{-1}$. The section-normalization lemma [lem-sfb-projection-section-normalization], with $r=p_1$, $i=\\Delta$, says $Rp_{1*}a_M\\circ\\pi_{p_1,M,\\Delta_*R_P}=1_M$. Consequently\n$$\\varepsilon_{Rq_*M}Rq_*\\eta_M=Rq_*\\bigl(1_M\\otimes(t_{p_1}Rp_{1*}\\delta)\\bigr)=1_{Rq_*M}.$$\nThe scalar equality is [det-prop-diagonal-tower-trace](2) for $i=1$, extended integrally by [det-prop-diagonal-tower-coefficients](1). This proves the first triangle without presupposing the proposed adjunction.",
-   "uses": [
-    "lem-sfb-trace-base-change-first",
-    "det-prop-diagonal-tower-coefficients",
-    "sk-thm-sf-pf-adic",
-    "lem-sfb-projection-section-normalization",
-    "det-prop-diagonal-tower-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(1), first triangle"
-   }
-  },
-  {
-   "text": "The second rearrangement lemma [lem-sfb-trace-base-change-second], with $f=q$ and $t=t_q$, gives\n$$G\\varepsilon_K\\circ B_{GK}=(1_{GK}\\otimes t_{p_2})\\pi_{p_2,GK,T_W}^{-1}.$$\nIts hypotheses follow from [sk-thm-sf-pf-adic] and trace base change [det-prop-diagonal-tower-coefficients](3). In its right side, $p_1^*GK=p_2^*GK$ by $qp_1=qp_2$, Cartesian twists [sk-prop-sfb-cartesian-coefficients], and pullback/tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Precompose with $v_{GK}$. Projection-formula naturality on $\\delta$ and [lem-sfb-projection-section-normalization] for $r=p_2$, $i=\\Delta$ identify $\\pi_{p_2,GK,T_W}^{-1}v_{GK}=1_{GK}\\otimes Rp_{2*}\\delta$: on the diagonal both $p_i\\Delta$ are the identity, so the $a_{GK}$ used in step 3 is the section projection map for $p_2$ as well. Thus\n$$G\\varepsilon_K\\circ\\eta_{GK}=1_{GK}\\otimes(t_{p_2}Rp_{2*}\\delta)=1_{GK}.$$\nThe scalar equality is [det-prop-diagonal-tower-trace](2) for $i=2$, extended by [det-prop-diagonal-tower-coefficients](1). The shifts are even, so their interchange has sign $(-1)^4=1$.",
-   "uses": [
-    "lem-sfb-trace-base-change-second",
-    "sk-thm-sf-pf-adic",
-    "det-prop-diagonal-tower-coefficients",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-projection-section-normalization",
-    "det-prop-diagonal-tower-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(1), second triangle"
-   }
-  },
-  {
-   "text": "For $F=Rq_*$ and $G=q^*(-)(1)[2]$, the maps $h\\mapsto G(h)\\eta_M$ and $a\\mapsto\\varepsilon_KF(a)$ between $\\operatorname{Hom}(FM,K)$ and $\\operatorname{Hom}(M,GK)$ are inverse: naturality moves $h$ or $a$ past the unit or counit, and steps 4 and 5 reduce the two composites to $h$ and $a$. Hence $F\\dashv G$. For proper $q$, $Rq_!=Rq_*$ by [det-prop-int-brown-construction]. The current [det-prop-int-brown-adjoint] supplies $q^!$ for the chosen-compactification functor on exactly these module-object localizing categories. Transport its Hom bijection along the natural comparison $Rq_!\\simeq Rq_*$ from [det-prop-int-brown-construction]. Both $G$ and $q^!$ are now right adjoints to the same functor $Rq_*$. Apply [det-sp-unique-right-adjoint] to these adjunctions: the component $q^!K\\to GK$ is the transpose of the transported Brown counit $Rq_*q^!K\\to K$, and the inverse is the Brown transpose of the counit $Rq_*GK\\to K$ constructed in step 3. This gives $q^!\\simeq G$, with uniqueness understood as compatibility with these counits. This proves clause (1).",
+   "text": "Use integralLocalizingCompactSupport on the identity-open compactification of the proper projection q. The identity extension-by-zero isomorphism identifies its image with Rq_*, giving hr. Compactification independence identifies every boundary lowerShriek with this restrictedPush; lift that ambient isomorphism through the full inclusions.",
    "uses": [
     "det-prop-int-brown-construction",
-    "det-prop-int-brown-adjoint",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the isolated projective-line adjunction with hq and hr. Its right-adjoint uniqueness and the compactification comparison prove the projective Brown comparison. Apply affine purity induction to each boundary compactification with hp and its given preservation proof. Right-adjoint uniqueness proves the affine Brown comparison. Assemble these with the two constructibility assertions and the three preservation proofs.",
+   "uses": [
+    "lem-sfb-integral-projective-line-adjunction",
+    "lem-sfb-integral-affine-purity-induction",
     "det-sp-unique-right-adjoint"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(1), conclusion from the two triangles"
-   }
-  },
-  {
-   "text": "For any standing $T$, use the standard chart $j:\\mathbf A^1_T\\hookrightarrow\\mathbf P^1_T$ and $u=q_Tj$ of [def-amb-affine-trace-tower]. The chart is quasi-compact: over $\\operatorname{Spec}B\\subset T$, its inverse images of the two projective charts with coordinates $t=x_1/x_0$ and $s=x_0/x_1$ are $\\operatorname{Spec}B[t]$ and $\\operatorname{Spec}B[s,s^{-1}]$, both affine. These charts cover the target. By [det-cor-int-compactness-ii-extension-zero], $j_!$ is exact and preserves $\\mathcal L$; $j^*$ preserves $\\mathcal L$ by step 1. The ambient adjunction $D(j_!)\\dashv D(j^*)$ of [def-sfb-dc-open-lower-shriek-adjunction] therefore restricts to those full subcategories: their Hom sets are the ambient Hom sets. Write $j_!$ for $D(j_!)$. The compactification comparison [det-prop-int-brown-construction] gives $Ru_!\\simeq Rq_{T*}j_!$ for the same chosen left functor used by Brown.",
-   "uses": [
-    "def-amb-affine-trace-tower",
-    "det-cor-int-compactness-ii-extension-zero",
-    "def-sfb-dc-open-lower-shriek-adjunction",
-    "det-prop-int-brown-construction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(2), chart and restriction of the open adjunction"
-   }
-  },
-  {
-   "text": "Apply the composite-adjunction statement [def-weil-pbc-composite-adjunction] to the restricted open adjunction of step 7 and the projective-line adjunction of steps 2–6, for base $T$. Explicitly, for $A\\in\\mathcal L(\\mathbf A^1_T)$ and $K\\in\\mathcal L(T)$,\n$$\\operatorname{Hom}(Ru_!A,K)\\cong\\operatorname{Hom}(j_!A,q_T^*K(1)[2])\\cong\\operatorname{Hom}(A,j^*q_T^*K(1)[2]).$$\nComposition of pullbacks [sk-def-sfb-module-pushforward-pullback], Cartesian twists [sk-prop-sfb-cartesian-coefficients], and their tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify $j^*q_T^*K(1)[2]=u^*K(1)[2]$. Hence $Ru_!\\dashv u^*(-)(1)[2]$. Transport along the comparison of step 7 before comparing with [det-prop-int-brown-adjoint]. The two right adjoints have the same left functor; [det-sp-unique-right-adjoint] gives the counit-compatible isomorphism $u^!\\simeq u^*(-)(1)[2]$. This proves the affine-line case uniformly in the base.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "det-prop-int-brown-adjoint",
-    "det-sp-unique-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(2), affine-line Hom bijections by the existing composite-adjunction leaf"
-   }
-  },
-  {
-   "text": "Induct on $d$ with the claim $Rp_{d!}\\dashv p_d^*(-)(d)[2d]$. For $d=0$, $\\mathbf A^0_Y=Y$, $p_0=\\mathrm{id}$ and the twist and shift are zero. The identity compactification in [det-prop-int-brown-construction] compares $Rp_{0!}$ with the identity functor, so this is the identity adjunction of [def-weil-pbc-composite-adjunction] transported along that comparison. Comparing it with the Brown adjunction by [det-sp-unique-right-adjoint] also proves $p_0^!\\simeq\\mathrm{id}=p_0^*(0)[0]$. For the successor write $X_d=\\mathbf A^d_Y$, $u_d:\\mathbf A^1_{X_d}\\to X_d$ and $p_{d+1}=p_du_d$, using the coordinate tower [def-amb-affine-trace-tower]. The base $X_d$ remains a standing scheme. By [det-prop-int-brown-construction], $Rp_{d+1,!}\\simeq Rp_{d!}Ru_{d!}$. Composing the induction adjunction and the line adjunction of step 8 by [def-weil-pbc-composite-adjunction] gives right adjoint\n$$u_d^*\\bigl(p_d^*(-)(d)[2d]\\bigr)(1)[2]=p_{d+1}^*(-)(d+1)[2d+2].$$\nHere pullbacks compose by [sk-def-sfb-module-pushforward-pullback], pullback of the twist is its twist on $X_{d+1}$ by [sk-prop-sfb-cartesian-coefficients], after the tensor comparison $u_d^*(N\\otimes^{\\mathbf L}R_{X_d}(d))\\simeq u_d^*N\\otimes^{\\mathbf L}u_d^*R_{X_d}(d)$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the tensor powers in [sk-def-sp-tate-twist] give $(d)+(1)=(d+1)$. Exact pullback commutes with shifts, and shifts add; every shift is even. All functors preserve the localizing categories by step 1. Finally the composition and compactification comparisons are compatible by [det-prop-int-brown-construction], so transport the displayed composite adjunction to the chosen $Rp_{d+1,!}$ used in [det-prop-int-brown-adjoint]. Compare its right adjoint with $p_{d+1}^!$ by [det-sp-unique-right-adjoint], using the counit-compatible isomorphism, exactly as in step 6. This proves clause (2) for every $d\\geq0$; clause (3) was proved in step 1.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "def-amb-affine-trace-tower",
-    "det-prop-int-brown-construction",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sp-tate-twist",
-    "det-prop-int-brown-adjoint",
-    "det-sp-unique-right-adjoint",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-    "place": "(2), explicit base case and successor of the affine-space induction"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "sk-def-sp-tate-twist",
-  "sk-def-sfb-constructible",
+  "lem-sfb-integral-tate-line-constructible",
+  "lem-sfb-adic-constructibility-predicate-comparison",
   "sk-lem-int-tensor",
-  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-dc-ell-adic-triangulated",
+  "det-def-localizing-closure-existence",
+  "det-proper-base-change-unbounded-pullback",
   "def-sfb-module-derived-pushpull-adjunction",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "sk-def-localizing-closure",
-  "det-def-localizing-closure-ctf-equals-bc",
-  "lemma-nagata-projective-space-base-change-proper",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-closed-immersion-proper",
   "det-prop-int-brown-construction",
-  "det-lem-formal-closed-support-sheaves",
-  "det-thm-sf-pf-adic-projection",
-  "sk-def-sfb-module-pushforward-pullback",
-  "det-prop-diagonal-tower-limit",
-  "det-prop-diagonal-tower-coefficients",
-  "det-prop-diagonal-tower-trace",
-  "def-weil-pbc-adjunction-mate",
-  "sk-thm-sf-pf-adic",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-trace-base-change-first",
-  "lem-sfb-projection-section-normalization",
-  "lem-sfb-trace-base-change-second",
-  "det-prop-int-brown-adjoint",
-  "det-sp-unique-right-adjoint",
-  "def-amb-affine-trace-tower",
-  "det-cor-int-compactness-ii-extension-zero",
-  "def-sfb-dc-open-lower-shriek-adjunction",
-  "def-weil-pbc-composite-adjunction"
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-sfb-integral-projective-line-adjunction",
+  "lem-sfb-integral-affine-purity-induction",
+  "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-  "place": "(1)–(3), with both triangle calculations expanded from sk-prop-p1-adjunction-rational-triangle.proof.md"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Clauses (1)-(3): fully formal preservation, proper compactification transport and right-adjoint uniqueness; three geometric source arguments isolated as named lemmas."
  },
  "mathlib_searches": [
   {
@@ -327,7 +201,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-0120fef54 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement (unchanged; it matches main-20261015 sk-thm-int-restriction-line.md clauses 1-3 with O_E coefficients on Loc(Dbc) and f^! from det-prop-int-brown-adjoint), all nine steps (each at most 1923 characters, proof_deps equal to the union of uses), the unit route, and the three new nodes. I checked the statements of every cited node that carries weight: diagonal-tower limit(3), trace(1,2) and coefficients(1,3); sf-pf-adic-projection(2); the adjunction-mate and composite-adjunction leaves; Brown construction and Brown adjoint; unique right adjoint; ringed tensor-pullback; extension-zero(3); and the open lower-shriek adjunction. Triangles: in step 4 the first trace lemma with f=q and t=t_q, then projection naturality, then the section lemma with r=p_1, i=Delta, leaves t_{p_1}Rp_{1*}delta, which is 1 by trace(2) with i=1. The section lemma's inverse form needs no extra assumption, because its main identity and the isomorphism a_M force pi to be invertible. Step 5 is the same with p_2, using the second trace lemma and the identification p_1^*GK=p_2^*GK; the shifts are even, so there is no sign. Trace base change is coefficients(3) with g=q, read as the canonical mates b_i. New nodes: the section lemma is the composition law for projection maps pi_{ri}=Rr_*(pi_i)pi_r with ri=id; I checked r=i=id and M=0. For both trace lemmas I checked the sources and targets, a finite-fibre weighted-sum model (both sides agree: w(x')n, respectively w(x)k), and the general Kunneth-symmetry argument; with t=0 they hold trivially, so they cannot carry the item's triangles (no D1 relabelling). I searched the whole DAG for duplicates: lem-sf-composition-projection-mate (finite coefficients, compact supports), ringed-projection-mate-exact, pbc projection base-change naturality, the rational triangle, kun-proj-formula-natural and prop-sf-pf-coherence; none states these. Each new node has statement-only form, created.item set to this item, blueprint.from equal to the item with via [], and five recorded searches of all three kinds. No SGA source is used. I accept the carried-over split_report.tool_uses as generic black boxes. Fixes: (1) item step 6 said the counit was constructed in 'step 2'; after renumbering it is step 3. (2) lem-sfb-projection-section-normalization used the pullback/tensor comparison in its definition of pi without citing it (B3); I wrote it out and added lem-weil-pbc-ringed-topoi-derived-tensor-pullback to stmt_deps. Both files are under fixes/dag/nodes/sec-six-functors-basics/; I dropped no nodes.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "tool_uses": [
   "lemma-nagata-projective-space-base-change-proper",
   "sk-prop-sfb-cartesian-coefficients",
@@ -341,11 +226,6 @@
   "module": "Sheaf.SixFunctors.IntegralRestrictionLine",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralRestrictionLine",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.tateLine",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.pullTwistShift",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.restrictedPull",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.restrictedPush",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.brownComparison",
    "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralRestrictionLine"
   ],
   "file": "lean/Sheaf/SixFunctors/IntegralRestrictionLine.lean",
@@ -354,7 +234,7 @@
   "by": "NF",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The canonical Tate line is transported through the published sectionModuleEquivalence and tensored using the existing internal-module derived tensor. The functors are actual full-subcategory restrictions to the same Loc(Dbc) as the Brown declaration. Since Brown states existence without choosing a functor, brownComparison quantifies over its right adjoints with their defining adjunctions, for every boundary compactification (including the fixed one); no arbitrary functor is substituted for f^!."
+  "note": "The five existing functors are moved verbatim to IntegralRestrictionFunctors and publicly re-exported. The original theorem signature and all definitions are unchanged. The complete assembly uses three strictly smaller geometric lemmas."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -363,5 +243,15 @@
   "group": "NF",
   "result": "pass",
   "note": "nt_compile rc 0 (IntegralRestrictionLine 6.5 s, no non-sorry warnings). Binders match Brown adjoint and sk-def-sfb-dc-setting; P1 = ProjectiveSpace (ULift (Fin 2)) (= upstream ProjectiveLine), A^d = Mathlib AffineSpace; Dbc/Loc are the recorded constantModelBoundedConstructible/IntegralCompactSupport.localizing; tateLine = section-equivalence inverse of published spSignedTwist(spIntegralTwist), pullTwistShift = derived pull, derived tensor with line in deg 0, shift 2d. Clause 1 adjunction on genuine restrictions; brownComparison quantifies over all boundary compactifications and Brown adjoints (true by compactification independence + uniqueness, non-vacuous via brownAdjointAssertions); clauses 2,3 complete; d=0, empty Y, universes ok. Statement verbatim, declarations match file, only lean field changed vs live, docstrings with source/blueprint and 9 steps, sorry only in theorem, no duplicate twist-shift functor on this ambient. Note: tateLine at d=1 is only canonically iso to traceTate's untransported line (stage-3 bookkeeping)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-d6edb",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261024T204607-L-3799780",
+  "kind": "interface",
+  "note": "independent cc review: integralRestrictionLine statement byte-identical to clone; 5 moved defs body-identical (blueprint tag only) and publicly re-exported; 3 new sorry statements vs nodes and source paragraphs (1)-(3); delivered modules + 2 direct importers compiled in /tmp sandbox; axioms propext/sorryAx/Classical.choice/Quot.sound"
  }
 }

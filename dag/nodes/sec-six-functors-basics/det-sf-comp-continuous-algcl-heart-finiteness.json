@@ -54,7 +54,18 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-sf-comp-coherence",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "id": "det-sf-comp-continuous-algcl-heart-finiteness",
  "title": "Constructibility of higher proper images of one full continuous algebraic-closure sheaf",
  "statement": "Let ell be prime, k a field of positive prime characteristic different from ell, and p:X to Y a proper k-morphism of separated finite-type k-schemes. For the condensed coefficient ring of all continuous maps into the topological algebraic closure PadicAlgCl ell, let M be a sheaf of internal modules with finite constant local models on a finite constructible stratification of X. Then every cohomology object of Rp_*(M[0]) has finite constant local models on a finite constructible stratification of Y. No bounded-complex input, cohomological bound, Tor-amplitude, coproduct or compactification assertion is made.",
@@ -64,24 +75,50 @@
  },
  "proof": [
   {
-   "text": "Choose a finite adapted stratification and its finite locally closed extension-by-zero filtration, refining to normal strata. Use continuousAlgCl_lf for local finite freeness. The lisse representations on these strata have compact profinite monodromy. The already proved source-library PadicAlgCl.exists_finiteDimensional_forall_mem (IntegralModel) gives finite coefficient fields. Descend each stratum representation to its finite field and extend it by zero. Apply properHeart_constructible_cohomology at that finite coefficient; its integral-lattice and torsion arguments are already in the library. The integral finiteness and uniform bound give a bounded finite-projective cochain model on each adapted target stratum. Compute the canonical coefficient comparison termwise on that finite model, using the same finite sums, differentials and actions. Invert ell and extend the finite model to the actual full continuous coefficient. The finite sheaf filtration and cohomology long exact sequence give the assertion for M. Negative cohomology vanishes by left t-exactness. All scalar comparisons concern the actual continuous coefficient, not only finite-subextension-valued sections. Empty strata and zero sheaves contribute zero.",
+   "text": "Finite type over a field and quasi-compactness make X and Y Noetherian. Apply the proved generic heart_closure_generic helper in CoefficientHeartClosure, using continuousAlgCl_lf for its local finite-free hypothesis, to get kernel, cokernel and extension closure of the all-continuous finite-constant-model constructible class P on Y. The same module generic helpers and the generic proper-heart zero-model helper give isomorphism closure and zero membership. This uses the coefficient-general proved helpers, not the public coefficientHeart_closure theorem restricted to finite E and finite-subextension-valued Qbar. Therefore homologyProperty P is a replete triangulated object property; pull it back under Rp_*.",
    "uses": [
-    "det-def-sfb-constructible-local-model",
     "det-sf-comp-continuous-algcl-local-free",
-    "lem-proper-heart-constructible-cohomology"
+    "det-lem-coefficient-heart-closure",
+    "lem-proper-heart-constructible-cohomology",
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic proved constantModelConstructible_single helper gives bounded constant-model constructibility of M[0], with M in degree zero and rank-zero models for every other cohomology module. Apply bounded_finiteModel_generation to the inverse-image triangulated class. Its finite sheaf filtration and short-exact-sequence triangles reduce membership to generators (v_! t_* L)[0], for open v, reduced closed t, and L with a finite constant local model on S. No retract or infinite coproduct argument is needed.",
+   "uses": [
+    "lem-proper-heart-constructible-cohomology",
+    "lem-sfb-bounded-finite-model-generation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An immersion into Noetherian X makes S topologically Noetherian. The generic constantModel_lfp helper in CoefficientHeartLisseRestriction turns the finite constant local model of L into local finite presentation. continuousAlgCl_lf and heart_lisse_of_free give IsLisseCoefficientModule B L. Apply continuousAlgCl_proper_lisse_stratum to this generator. The generation theorem now puts M[0] in the inverse-image class. Unpack homologyProperty to get constructibility in every integer degree. Empty strata and zero generators are included by the class closure.",
+   "uses": [
+    "new-det-lem-coefficient-heart-common-stratification-lisse",
+    "det-sf-comp-continuous-algcl-local-free",
+    "det-lem-coefficient-heart-closure",
+    "lem-sfb-continuous-algcl-proper-lisse-stratum",
+    "lem-sfb-bounded-finite-model-generation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "det-def-sfb-constructible-local-model",
+  "det-lem-coefficient-heart-closure",
   "det-sf-comp-continuous-algcl-local-free",
-  "lem-proper-heart-constructible-cohomology"
+  "lem-proper-heart-constructible-cohomology",
+  "lem-sfb-bounded-finite-model-generation",
+  "lem-sfb-continuous-algcl-proper-lisse-stratum",
+  "new-det-lem-coefficient-heart-common-stratification-lisse",
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/_section.md",
-  "place": "Assertion (1), proper preservation of bounded constructible complexes, and the equality Dctf=Dbc used in det-sf-comp-coherence-single proper-image paragraph."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
+  "place": "Proper-image paragraph; finite stratification devissage formalized with bounded_finiteModel_generation and coefficient-general heart closure. Only the single lisse-piece calculation is split off."
  },
  "lean": {
   "existing": false,
@@ -104,12 +141,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261020T051121-L-1566224",
+  "landing": "20261026T182710-L-3577809",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -28,69 +28,51 @@
  ],
  "proof": [
   {
-   "text": "For a list f spanning I, cover the open complement by the principal opens D(f_i). Each ordered intersection is D(product f_i) and is affine; its structure-module sections are the corresponding localization. The restriction maps are the unique algebra maps between those localizations.",
+   "text": "For each generating list construct the actual principal cover and its ordered Cech restriction fibre. The coordinate theorem supplies all localization coordinates, differential formulas, negative vanishing and the degree-zero projection equation for this fixed fibre.",
    "uses": [
-    "def-weil-pbc-ring-complex-godement-construction",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-spec-tilde-free-module"
+    "def-weil-pbc-ring-complex-ordered-cech-construction",
+    "lem-weil-pbc-ring-complex-ordered-cech-coordinates"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099D"
-   }
+   "elementary": false
   },
   {
-   "text": "The specified Godement augmentation is a quasi-isomorphism and its terms are flasque. On each affine intersection the structure module has vanishing positive cohomology, while every Godement term is acyclic for sections. The bounded-below acyclic-resolution comparison therefore makes the section augmentation a quasi-isomorphism.",
+   "text": "The specified Godement augmentation is a quasi-isomorphism and nonnegative; its terms identify with iterated products of stalk skyscrapers and are flasque. The affine-section theorem supplies the section augmentation quasi-isomorphisms. Apply finiteOrderedFlasqueCechComparison to obtain the two quasi-isomorphisms to the ordered double total and their degree-zero augmentation equation.",
    "uses": [
+    "def-weil-pbc-ring-complex-godement-construction",
     "lem-sc-module-cup-godement-model-quasi-iso",
     "lem-sc-module-cup-godement-object-flasque",
-    "pqf-lem-affine-vanishing",
-    "lem-sc-module-cup-flasque-acyclicity",
-    "src-right-derived-functor-plus-acyclic-unit",
-    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+    "lem-weil-pbc-ring-complex-godement-affine-sections",
+    "lem-weil-pbc-finite-ordered-flasque-cech-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 0FKS, 01ET; affine and flasque acyclicity"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the finite ordered flasque-Cech comparison, giving a roof between Godement global sections and the finite localization Cech complex through its double total, with the degree-zero augmentation square. Take mapping fibres of the maps from A[0]. Identity on A and quasi-isomorphism on sections give quasi-isomorphism on fibres by the long exact homology sequence. The localization fibre has the requested coordinates; change the signs of successive positive-degree coordinates to match the inverse-rotation convention. The projection is identity on A. Invert this roof in D(A), retaining the augmentation square. For r=0 the open is empty, the section complexes vanish and the same fibre is A[0]; zero and repeated generators and the zero ring use these same formulas.",
+   "text": "Restriction of scalars is exact. The constant one-point ring-site functor preserves homology, as its faithful evaluation recovers the identity and reflects exactness. Apply these functors to the roof. Equality in degree zero gives equality of the two maps from A[0]. The induced cone maps are quasi-isomorphisms by the two-out-of-three theorem for distinguished triangles after localization, and shifting preserves this property. Inverse rotation gives the projection square. Invert the Godement-side map, compose the roof isomorphisms and retain the augmentation equation. Combine this isomorphism with the fixed fibre coordinates to prove the unchanged predicate.",
    "uses": [
+    "def-weil-abstract-derived-category",
     "def-weil-pbc-ring-complex-cech-data",
-    "def-weil-pbc-ring-complex-godement-construction",
-    "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
-    "def-weil-abstract-derived-category"
+    "def-weil-pbc-ring-complex-ordered-cech-construction",
+    "def-weil-triangulated-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099D"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-ring-complex-ordered-cech-construction",
+  "lem-weil-pbc-ring-complex-ordered-cech-coordinates",
   "def-weil-pbc-ring-complex-godement-construction",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-spec-tilde-free-module",
   "lem-sc-module-cup-godement-model-quasi-iso",
   "lem-sc-module-cup-godement-object-flasque",
-  "pqf-lem-affine-vanishing",
-  "lem-sc-module-cup-flasque-acyclicity",
-  "src-right-derived-functor-plus-acyclic-unit",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives",
-  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-ring-complex-godement-affine-sections",
   "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 099D(d); cohomology.tex Tags 0FKS, 09SZ, 01ET, 01EQ, 01FJ, 01FM"
+  "place": "Tag 099D(d), with the finite flasque Cech roof from cohomology.tex and the derived mapping-cone triangle"
  },
  "mathlib_searches": [
   {
@@ -139,7 +121,18 @@
   "by": "A3",
   "date": "2026-10-18"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "lem-weil-pbc-ring-complex-godement-cech",
@@ -184,12 +177,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261018T091356-L-3252795",
+  "landing": "20261025T144342-L-1231608",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

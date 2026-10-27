@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-etale-system-projection-coherence",
+ "kind": "statement",
+ "title": "Coefficient composition and unit for normalized system mates",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $c$ a compactification, $\\ell\\in\\mathbf N$, and $t:\\operatorname{Theory}(c,\\ell)$ a normalized ordinary system presentation [def-pur-etale-system-projection-data]. For coefficient sequences $B_\\bullet,C_\\bullet,D_\\bullet$ and maps $a:B_\\bullet\\to C_\\bullet$, $b:C_\\bullet\\to D_\\bullet$, the actual natural transformations satisfy $q_{ba}=\\operatorname{path}(a,b)$, where path uses the canonical balanced scalar associators defined in that record. For the identity coefficient map, $q_1$ followed by the source scalar unitor under compact support equals the target scalar unitor. These are equations on the whole ordinary unbounded system categories before evaluation.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; Zheng Constructions 4.1, 5.14-5.15 and Lemma 5.16. Agent elaboration of Original item proof steps 7-8: coefficient cocycle and scalar unit, before evaluation."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary direct-image restriction comparisons and the canonical restriction compositors are identity maps on sections. Extensionality therefore proves their composition and identity equations. Inverse mate pasting transfers these equations to the ordinary inverse-image comparisons.",
+   "uses": [
+    "def-pur-etale-system-projection-data",
+    "def-weil-pbc-system-scalar-coherence",
+    "new-integral-residue-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact derived square composition to the inverse-image squares; the identity equation follows from functoriality of exact localization and its identity comparison. Forward mate pasting transfers these equations to the derived direct-image squares. Apply inverse mate pasting also to the open-extension squares and localize them. Paste the open and proper comparisons; naturality gives the compact-support restriction cocycle and identity.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition",
+    "lem-pur-exact-restriction-composition",
+    "new-integral-residue-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take inverse scalar-adjunction mates of the compact-support restriction equations. The conjugate of the left-adjoint uniqueness comparison is the inverse restriction compositor. The horizontal and vertical mate-pasting equations identify the resulting composite with Theory.path. For the identity, apply the scalar adjunction hom-equivalence: its unit formula and naturality reduce the desired equation to the restriction identity law.",
+   "uses": [
+    "def-weil-pbc-system-scalar-coherence",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-system-scalar-coherence",
+  "new-integral-residue-mate-pasting",
+  "lem-pod-derived-exact-square-composition",
+  "lem-pur-exact-restriction-composition",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6: normalized sectionwise comparisons, exact localization, and adjunction mate pasting; direct categorical proof by F1, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Existence of normalized geometric inverse image direct image extension by zero scalar extension and evaluation on ringed vertical sequence sites of small etale topoi",
+   "results": "['AlgebraicGeometry.Scheme.Hom.normalizationDiagram', 'AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap', 'SheafOfModules.Presentation.map_π_eq', \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\", 'AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap', 'AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor']; 8 hits; search log digest 8044d38267dd27b4",
+   "date": "2026-10-25",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']; 12 hits; search log digest b8ac30fd6644aa85",
+   "date": "2026-10-24",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation_mate|mateEquiv_vcomp|mapDerivedCategorySquareIso_comp",
+   "results": "['Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean']; 11 hits; search log digest 5efc7bd8027581eb",
+   "date": "2026-10-25",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemCoefficientProjection",
+  "date": "2026-10-25",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph of def-weil-exceptional-inverse-image: compatible finite-level functors before derived inverse limits; coefficient projection and scalar-unit/composition normalization for the ordinary etale system compact-support functor. Original item proof steps 7-8: coefficient cocycle and scalar unit, before evaluation.",
+   "via": [
+    "lem-pur-etale-system-coefficient-projection",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSystemProjectionCoherence",
+  "file": "lean/Sheaf/Paper/EtaleSystemProjectionCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleSystemProjection_coherence",
+  "statement": "theorem etaleSystemProjection_coherence\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l) :\n    (∀ (B C D : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (b : C.rings ⟶ D.rings),\n        t.q (a ≫ b) = t.path a b) ∧\n    (∀ (B : Coefficients.{u} l) (M : Derived X B.rings),\n        (t.q (𝟙 B.rings)).app M ≫\n          (t.support B).F.map ((unit X B.rings (t.scalarX (𝟙 B.rings))).hom.app M) =\n        (unit Y B.rings (t.scalarY (𝟙 B.rings))).hom.app ((t.support B).F.obj M))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T033908-L-157017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T112335-L-1573010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

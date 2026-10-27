@@ -1,0 +1,150 @@
+{
+ "id": "def-sfb-adic-perfect-quotient-section-realization",
+ "kind": "definition",
+ "title": "Direct quotient normalization and the concrete sections adjunction",
+ "statement": "For X, A, J and U as in [def-sfb-adic-perfect-module-functors], let q_n be the constant quotient map restricted to U and let L_A and S_A be the constant realization and sections functors of [def-sfb-adic-perfect-slice-sections]. Define quotientRealization_n=L_A followed by change(q_n), and rawRightAdjoint_n=res(q_n) followed by S_A. Construct quotientRealization_n left adjoint rawRightAdjoint_n. Reassociate scalar extension, commute it with restriction to U and apply the completion cone equation to construct an isomorphism from the actual completed quotient realization F_n to quotientRealization_n. Transport the adjunction to obtain a proved Nonempty(F_n left adjoint rawRightAdjoint_n), and select rawAdjunction from this proved theorem. No unproved existence result selects data.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-module-functors",
+  "def-sfb-adic-perfect-slice-sections"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma lemma-sheafification-presheaf-modules, Tag 03CY; section-tensor-product, Tag 03EK; together with proetale.tex, lemma-connected-adic-lisse, Tag 09C6, ordinary constant quotient calculation before total Hom."
+ },
+ "proof": [
+  {
+   "text": "Use localAdjunction and the slice/sections comparison maps already constructed for an arbitrary small site.",
+   "uses": [
+    "def-sfb-adic-perfect-slice-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved scalar/slice comparisons and constantPresentationIso from AdicPerfectModelCompleteReduction. Reassociate the two scalar changes with adicFiniteChangeComp and the completion cone equation coefficientMap followed by projection equals quotient. This yields realizationIso_exists without unproved data. A choice from this proved Nonempty theorem defines a realization isomorphism.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose localAdjunction with the proved ordinary tensor/restriction scalarAdjunction. Transport its left functor across realizationIso to obtain adjunction with the explicit R_n. This is rawAdjunction_exists, a proved Nonempty theorem. Define rawAdjunction by choice from that proved theorem; no reduction of its implementation is required when using its unit and counit.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adic-perfect-slice-sections",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-sfb-adic-finite-reduction-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "The constant-generator adjunction and completion cancellation in steps 1 and 2, and the unit-identity part of step 4, of lem-sfb-adic-perfect-quotient-section-adjunction. Tags 03CY and 03EK; Stacks proetale.tex Tag 09C6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant module sheaf extension of scalars quotient sections adjunction",
+   "results": "constantSheafΓAdj, extendRestrictScalarsAdj and PullbackConstruction.adjunction are constituent adjunctions. None supplies the actual completed realization and its fixed balancing map.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "No hits. LeanFinder on constant sheaf of modules scalar extension adjoint global sections found unitHomEquiv, tensor adjunction and extendScalars, not the completed quotient comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*[Aa]dj|[Aa]dj.*overFunctor|constantModuleHom.*[Aa]dj; quotient.*sections; quotTensorEquivQuotSMul; unit_mateEquiv",
+   "results": "No packaged slice adjunction match. Mathlib has module sheafification and unit_mateEquiv. AdicPerfectModelCompleteReduction has proved private presentation, scalar adjunction and changeOverIso helpers. ConstantRealizationDerivedScalarExtension proves moduleComparison_tensor. The algebraic tensor quotient equivalence does not supply the natural section comparison with successor coherence.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the constituent proofs; no duplicate of the bundled construction or remaining comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPerfectQuotientSectionAdjunction",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The constant-generator adjunction and completion cancellation in steps 1 and 2 of lem-sfb-adic-perfect-quotient-section-adjunction.",
+   "via": [
+    "lem-sfb-adic-perfect-quotient-section-adjunction",
+    "lem-sfb-adic-perfect-unit-hom",
+    "lem-sfb-adic-perfect-module-hom",
+    "lem-sfb-adic-perfect-hom-cochains",
+    "lem-sfb-adic-perfect-model-hom-cohomology",
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectQuotientSectionRealization",
+  "file": "lean/Sheaf/Paper/AdicPerfectQuotientSectionRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicQuotientSections.rawAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.quotientMap",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.quotientRealization",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.rawRightAdjoint",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.quotientAdjunction_exists",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.quotientAdjunction",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.realizationIso_exists",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.realizationIso",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.rawAdjunction_exists",
+   "AlgebraicGeometry.Scheme.AdicQuotientSections.rawAdjunction"
+  ],
+  "statement": "def rawAdjunction : adicPerfectQuotientFunctor X J U n ⊣ rawRightAdjoint X J U n",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T130650-L-3489467",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T130650-L-3489467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

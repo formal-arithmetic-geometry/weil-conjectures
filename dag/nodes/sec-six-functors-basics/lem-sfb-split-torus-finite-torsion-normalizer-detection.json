@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-split-torus-finite-torsion-normalizer-detection",
+ "kind": "statement",
+ "title": "One finite torsion level detects a split-torus normalizer over any ring",
+ "statement": "Let $A$ be any commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-sbc-locally-finite-presentation]. A group scheme is a group object in schemes over $S$ [def-pc-scheme], with multiplication, identity and inverse satisfying the group diagrams. Finite presentation means locally of finite presentation, quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $r\\geq0$ and let $T\\hookrightarrow G$ be a closed subgroup [def-weil-closed-immersion] identified with $\\mathbf G_{m,S}^{r}$, where $\\mathbf G_m(W)=\\Gamma(W,\\mathcal O_W)^\\times$ [def-sfb-relative-torus]. For $n\\geq1$, define $T[n]=\\ker([n]:T\\to T)$; in these coordinates it is $\\operatorname{Spec}A[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]/(t_1^n-1,\\ldots,t_r^n-1)$, with its inherited group law. There exists an integer $n\\geq1$ such that for every $S$-scheme $W$ and every $g\\in G(W)=\\operatorname{Hom}_S(W,G)$ one has $$gT_Wg^{-1}=T_W\\quad\\Longleftrightarrow\\quad gT[n]_Wg^{-1}=T[n]_W.$$ Here $K_W=K\\times_SW$ [def-pc-fibre-product] and equality means equality of subgroup functors on every $W$-scheme. The single integer $n$ works for all $W$, so the equivalence persists under every base change of $S$. No invertibility requirement on $n$ and no Noetherian assumption on $A$ are imposed. The zero ring and $r=0$ are allowed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 2.3.1 proof, printed p.68, first paragraph (torsion-level stabilization); Proposition 2.1.2 proof, printed pp.57-58, finite-presentation reduction to a finitely generated integer subalgebra and universal torsion density. The assertion is the split-torus, affine-base version of that reduction, with the stabilizing level retained after arbitrary base change. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this group-scheme structural assertion."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-torus",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Since $G\\to S$ is affine and $S=\\operatorname{Spec}A$, write $G=\\operatorname{Spec}B$. Applying lem-weil-pbc-lfp-affine-opens-finite-presentation to the full affine opens gives a finite presentation of $B$ over $A$. Write $L=A[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$; by [lem-a1-locally-ringed-space-affine-adjunction] an $S$-morphism $V\\to\\operatorname{Spec}L$ is exactly an $r$-tuple in $\\Gamma(V,\\mathcal O_V)^\\times$, so $\\operatorname{Spec}L$ represents $\\mathbf G_{m,S}^r$ and $T\\cong\\operatorname{Spec}L$. Here $L$ is the ring of finite formal sums indexed by $\\mathbf Z^r$, with $t^ut^v=t^{u+v}$. The closed immersion corresponds to a surjective $A$-algebra map $\\pi:B\\twoheadrightarrow L$; put $I=\\ker\\pi$.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-closed-immersion",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2); affine closed-immersion description in Tag 01QO."
+   }
+  },
+  {
+   "text": "Choose a polynomial surjection $P=A[x_1,\\ldots,x_d]\\twoheadrightarrow B$ using the presentation of $B$. The algebra $L$ is finitely presented over $A$: use variables $t_i,u_i$ and relations $t_iu_i-1$, evaluating $u_i$ at $t_i^{-1}$. The inverse sends negative powers of $t_i$ to powers of $u_i$, so the two maps are inverse on finite monomial sums. Hence the composite surjection $P\\twoheadrightarrow L$ has a finitely generated kernel by lem-weil-pbc-finite-presentation-surjection-kernel-fg. If its generators are $h_1,\\ldots,h_m$, their images $f_1,\\ldots,f_m$ in $B$ generate $I$: lift $b\\in I$ to $p\\in P$; then $p$ belongs to that kernel, and a generator expression for $p$ descends to one for $b$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00R2, lemma-finite-presentation-independent; Tag 00F3, definition-finite-type (2)."
+   }
+  },
+  {
+   "text": "Let $c:G\\times_ST\\to G$ be the morphism $(g,t)\\mapsto gtg^{-1}$, using the given inclusion of $T$. Its coordinate map is $c^*:B\\to B[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$. Indeed, a map from this latter ring to an $A$-algebra $R$ is precisely a map $B\\to R$ together with $r$ units of $R$, and by [lem-a1-locally-ringed-space-affine-adjunction] the same holds with $R$ replaced by $\\Gamma(V,\\mathcal O_V)$ for every scheme $V$, so $\\operatorname{Spec}B[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$ has the fibre-product universal property of $G\\times_ST$. For any $\\gamma:B\\to R$, specialization of $c^*$ along $\\gamma$ is the coordinate map of conjugation by the corresponding $g\\in G(R)$ restricted to $T_R$; this follows by composition of the multiplication and inverse morphisms. Expand $c^*(f_j)=\\sum_{u\\in F_j}b_{ju}t^u$, with each $F_j\\subset\\mathbf Z^r$ finite. This uses only the definition of a Laurent polynomial.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "def-sfb-relative-torus",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.2 proof, printed pp.57-58: universal conjugation and torsion restrictions; agent coordinate expansion in the split case."
+   }
+  },
+  {
+   "text": "Put $F=\\bigcup_jF_j$ and choose $M\\geq0$ bounding all $|u_i|$ for $u\\in F$ and $1\\leq i\\leq r$; use $M=0$ when there are none. Choose $n=2M+2$. If $u,v\\in F$ have the same image in $(\\mathbf Z/n\\mathbf Z)^r$, every $u_i-v_i$ is divisible by $n$ and has absolute value at most $2M<n$, hence is zero. Thus reduction modulo $n$ is injective on $F$. This choice depends only on the finitely many universal polynomials, before any choice of $R$ or $g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 2.1.9, printed p.62: finite Laurent-support version of the torsion-density calculation, with an explicit uniform bound supplied here."
+   }
+  },
+  {
+   "text": "For every commutative ring $R$, apply lem-sfb-subgroup-algebra-coset-presentation with additive group $D=(\\mathbf Z/n\\mathbf Z)^r$, subgroup $0$, no free factors, $r$ cyclic factors of order $n\\geq2$, and their standard generators. It gives the isomorphism $R[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]/(t_i^n-1)_i\\cong R[D]$ sending $t_i$ to $e_{\\bar e_i}$. In the finitely supported group algebra, $e_a$ form an $R$-basis by def-sfb-ring-diagonalizable-group. Therefore the image of $\\sum_ua_ut^u$ has coefficient $\\sum_{u\\bmod n=v}a_u$ at $e_v$. For support contained in $F$, injectivity in step 4 makes each such sum contain at most one coefficient. Consequently vanishing in this quotient forces every $a_u=0$. This holds also for $R=0$ and $r=0$, by the same basis statement.",
+   "uses": [
+    "lem-sfb-subgroup-algebra-coset-presentation",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(b), printed pp.233-234; arbitrary-ring coset presentation in the cited node, applied to a finite product of cyclic groups. Agent finite-support consequence."
+   }
+  },
+  {
+   "text": "Let $R$ be any $A$-algebra and $g\\in G(R)$, with coordinate map $\\gamma:B\\to R$. Suppose $gT[n]_Rg^{-1}=T[n]_R$. In particular $c_g:T[n]_R\\to G_R$ factors through $T_R$. On coordinate rings this says the image of each $f_j$ is zero in $R[t_i^{\\pm1}]/(t_i^n-1)_i$: a homomorphism factors through $B/I$ exactly when it kills $I$. These images are the classes of $\\sum_{u\\in F_j}\\gamma(b_{ju})t^u$. Step 5 forces all $\\gamma(b_{ju})=0$, so $c_g:T_R\\to G_R$ itself kills $I$ and factors through $T_R$. The hypothesis also holds for $g^{-1}$. Apply the same argument, with the same $n$, to $g^{-1}$; thus both conjugations carry $T_R$ into itself. Composing them, which gives the identity, proves $gT_Rg^{-1}=T_R$ as subgroup functors on all $R$-schemes.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.1 proof, printed p.68, first paragraph; agent uniform split-coordinate proof replacing the Noetherian reduction by steps 2-5."
+   }
+  },
+  {
+   "text": "Conversely, if conjugation by $g$ preserves $T_R$, it induces an automorphism of the group functor $T_R$. For any $R$-scheme $V$ and $t\\in T_R(V)$, $(gtg^{-1})^n=gt^ng^{-1}$ by cancellation of adjacent $g^{-1}g$. Thus $t^n=1$ implies $(gtg^{-1})^n=1$, and the same implication for $g^{-1}$ gives equality of the kernels of $[n]$. This proves $gT[n]_Rg^{-1}=T[n]_R$, on every $V$ and not just on $R$-valued points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.1 proof, printed p.68: preservation of torsion under a group-scheme automorphism; group calculation written out."
+   }
+  },
+  {
+   "text": "For a general $S$-scheme $W$, restrict $g\\in G(W)$ to any affine open $U=\\operatorname{Spec}R\\subseteq W$ and apply steps 6-7. These restrictions use the original integer $n$. The local factorizations of $c_g:T_W\\to G_W$ through $T_W$ agree on overlaps: after composition with the subgroup inclusion they equal $c_g$, and a subgroup functor inclusion is injective on every test scheme. The schemes $T_U$ form an open cover of $T_W$, so lem-weil-pbc-scheme-morphism-gluing glues the factors uniquely. Apply this also to $g^{-1}$, and use uniqueness in that lemma to check their composites are identity maps. Thus the subgroup-functor equality holds over $W$. The converse follows directly from the kernel calculation in step 7 on every $W$-scheme. Under a further base change the same morphisms and inverse identities pull back by the fibre-product universal property, so the same $n$ works. For $A=0$ all test schemes are empty. For $r=0$ the torus is the identity subgroup. Both cases are included; one may also take $n=1$ in either. No reducedness or invertibility was used.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ, lemma-glue-functors, proof (gluing morphisms); application to the torsion-level argument of Conrad Theorem 2.3.1, printed p.68."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "def-pc-fibre-product",
+  "def-sfb-relative-torus",
+  "lem-sfb-subgroup-algebra-coset-presentation",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-a1-locally-ringed-space-affine-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Split-coordinate expansion of the torsion-level reduction in Theorem 2.3.1, printed p.68, and Example 2.1.9, printed p.62; uses Stacks 00R2 rather than a Noetherian descent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over any ring a split torus in a finitely presented affine group has its normalizer detected by one finite torsion subgroup after base change",
+   "results": "{\"t\": \"2026-10-24T11:04:17Z\", \"tool\": \"leanfinder\", \"query\": \"Over any ring a split torus in a finitely presented affine group has its normalizer detected by one finite torsion subgroup after base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"normalizerCondition_of_isNilpotent\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Sylow.normalizer_sup_eq_top\", \"MonoidHom.ker_transferSylow_isComplement'\", \"Subgroup.SchurZassenhausInduction.step7\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"IsTorsion.extension_closed\"], \"digest\": \"c859699df2359966\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: groupCohomology.exists_mul_galRestrict_of_norm_eq_one; normalizerCondition_of_isNilpotent; Field.absoluteGaloisGroup.commutator_closure_isNormal; Sylow.normalizer_sup_eq_top; MonoidHom.ker_transferSylow_isComplement'; Subgroup.SchurZassenhausInduction.step7; LieAlgebra.zeroRootSubalgebra_normalizer_eq_self; IsTorsion.extension_closed; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over any ring a split torus in a finitely presented affine group has its normalizer detected by one finite torsion subgroup after base change",
+   "results": "{\"t\": \"2026-10-24T11:04:15Z\", \"tool\": \"leansearch\", \"query\": \"Over any ring a split torus in a finitely presented affine group has its normalizer detected by one finite torsion subgroup after base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormalizerCondition\", \"AddSubgroup.normalizer\", \"AddSubgroup.setNormalizer\", \"Algebra.SubmersivePresentation.baseChange\", \"CommGroup.torsion\", \"AddCommGroup.torsion\", \"normalizerCondition_iff_only_full_group_self_normalizing\", \"AddSubgroup.normal_in_normalizer\"], \"digest\": \"cb46b305f2ee62d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: NormalizerCondition; AddSubgroup.normalizer; AddSubgroup.setNormalizer; Algebra.SubmersivePresentation.baseChange; CommGroup.torsion; AddCommGroup.torsion; normalizerCondition_iff_only_full_group_self_normalizing; AddSubgroup.normal_in_normalizer; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"torsion\"",
+   "results": "{\"t\": \"2026-10-24T11:04:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"torsion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer.*torsion|torsion.*normalizer|schematic.*dens",
+   "results": "{\"t\": \"2026-10-24T11:04:14Z\", \"tool\": \"grep\", \"query\": \"normalizer.*torsion|torsion.*normalizer|schematic.*dens\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion subschemes detect the scheme theoretic normalizer of a torus by Noetherian stabilization",
+   "results": "{\"t\": \"2026-10-24T11:04:20Z\", \"tool\": \"leanfinder\", \"query\": \"Finite torsion subschemes detect the scheme theoretic normalizer of a torus by Noetherian stabilization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\"], \"digest\": \"5aecb65fcdcdd20a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.Hom.normalization.hom_ext; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Hom.normalizationDesc; AlgebraicGeometry.Scheme.Hom.ker_toNormalization; AlgebraicGeometry.Scheme.Hom.ι_toNormalization; AlgebraicGeometry.Scheme.Hom.toNormalization; AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus in an affine finitely presented group scheme has the same normalizer as one finite torsion subgroup over every base change",
+   "results": "{\"t\": \"2026-10-24T11:29:16Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus in an affine finitely presented group scheme has the same normalizer as one finite torsion subgroup over every base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.IsConj\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois\", \"groupCohomology.exists_div_of_norm_eq_one\", \"GroupExtension.normal_inl_range\", \"GroupExtension.IsConj.refl\", \"Sylow.normalizer_sup_eq_top\"], \"digest\": \"e6d8f214cfd9d7e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer.*torsion|torsion.*normalizer|schematic.*dens",
+   "results": "{\"t\": \"2026-10-24T11:30:03Z\", \"tool\": \"grep\", \"query\": \"normalizer.*torsion|torsion.*normalizer|schematic.*dens\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Gg]roup[Aa]lgebra|[Gg]roup[Aa]lgebra.*quotient|quotient.*[Aa]dd[Mm]onoid[Aa]lgebra|[Aa]dd[Mm]onoid[Aa]lgebra.*quotient|mod.*[Bb]asis",
+   "results": "{\"t\": \"2026-10-24T11:30:03Z\", \"tool\": \"grep\", \"query\": \"quotient.*[Gg]roup[Aa]lgebra|[Gg]roup[Aa]lgebra.*quotient|quotient.*[Aa]dd[Mm]onoid[Aa]lgebra|[Aa]dd[Mm]onoid[Aa]lgebra.*quotient|mod.*[Bb]asis\", \"sub\": \"Algebra/MonoidAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MonoidAlgebra/Module.lean\"], \"digest\": \"ec3bdecb88bfca91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a Laurent polynomial ring by t_i^n minus one has basis the monomials with exponents between zero and n minus one",
+   "results": "{\"t\": \"2026-10-24T11:30:03Z\", \"tool\": \"leansearch\", \"query\": \"The quotient of a Laurent polynomial ring by t_i^n minus one has basis the monomials with exponents between zero and n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.powerBasisAux'\", \"Polynomial.degreeLT.basis\", \"Polynomial.basisMonomials\", \"Polynomial.Sequence.basis\", \"IsAdjoinRootMonic.basis\", \"AdjoinRoot.powerBasis'\", \"MvPolynomial.basisMonomials\", \"LaurentPolynomial.single_zero_one_eq_one\"], \"digest\": \"f0cc0e01c45c9661\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-24T11:30:03Z\", \"tool\": \"loogle\", \"query\": \"MonoidAlgebra, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Subgroup.normalizer",
+   "results": "{\"t\": \"2026-10-24T11:30:03Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, Subgroup.normalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a group algebra the quotient by x_i^n minus one has basis indexed by exponent vectors modulo n and quotient coefficients are sums over congruence classes",
+   "results": "{\"t\": \"2026-10-24T11:30:05Z\", \"tool\": \"leanfinder\", \"query\": \"In a group algebra the quotient by x_i^n minus one has basis indexed by exponent vectors modulo n and quotient coefficients are sums over congruence classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModN.basis\", \"ModN.basis_apply_eq_mkQ\", \"AddMonoidAlgebra.modOf\", \"AddMonoidAlgebra.of'_modOf\", \"AddMonoidAlgebra.modOf_apply_add_self\", \"AddMonoidAlgebra.of'_mul_modOf\", \"AddMonoidAlgebra.modOf_apply_self_add\", \"AddMonoidAlgebra.modOf_add_divOf\"], \"digest\": \"8aa5719e229106c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|mapDomain|ker",
+   "results": "{\"t\": \"2026-10-24T11:32:21Z\", \"tool\": \"grep\", \"query\": \"quotient|mapDomain|ker\", \"sub\": \"Algebra/MonoidAlgebra/MapDomain.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"34\", \"37\", \"40\", \"41\"], \"digest\": \"31ef44d07a4d28c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme theoretic normalizer of a split torus is detected by a finite subgroup of roots of unity uniformly under arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T11:32:22Z\", \"tool\": \"leansearch\", \"query\": \"The scheme theoretic normalizer of a split torus is detected by a finite subgroup of roots of unity uniformly under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.normalizer\", \"Subgroup.setNormalizer\", \"AddSubgroup.normalizer\", \"Subgroup.unop_normalizer\", \"NormalizerCondition\", \"Subgroup.subgroupOf_normalizer_eq\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\"], \"digest\": \"9100770db0a1faf4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, RingHom.ker",
+   "results": "{\"t\": \"2026-10-24T11:32:22Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra, RingHom.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract normalizers, monoid-algebra coefficient maps, bases or univariate monic quotients do not give uniform scheme-theoretic normalizer detection; inspected returned types and the monoid-algebra source"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+  "date": "2026-10-24",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2. Supporting input: Theorem 2.3.1 proof, printed p.68, first paragraph (torsion-level stabilization); Proposition 2.1.2 proof, printed pp.57-58, finite-presentation reduction to a finitely generated integer subalgebra and universal torsion density. The assertion is the split-torus, affine-base version of that reduction, with the stabilizing level retained after arbitrary base change.",
+   "via": [
+    "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-finite-torsion-normalizer-detection",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved uniform finite-level detection by finite generation of the torus ideal, universal Laurent supports, and residue-basis separation. Reused the existing arbitrary-ring coset-presentation node rather than creating a duplicate. Checked arbitrary test schemes, nonreduced coefficients, zero ring, and rank zero. No new nodes.",
+  "blueprint": "Realizes the supporting torsion-level prerequisite in blueprint.from.place. There is no imported blueprint ancestor (ancestor returns None). The latest sk-thm-sf-ctf-stability direct-images proof (3) does not state this structural group-scheme fact: retain the inherited supporting route without assigning it a new blueprint identity.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-fd146ad8e",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-fd146ad8e (reviewer sub-agent of L); spot-checked: Read the full item: statement unchanged, eight new steps, no new nodes; read the statement of every cited node. The mathematics is correct. B=O(G) is finitely presented (01TQ leaf). The torus ideal I is finitely generated by Stacks 00R2 (algebra.tex l.566-581, read) applied to P→B→L. The universal conjugation c*: B→B[t^±] has finite Laurent supports; n=2M+2 makes reduction mod n injective on them. The coset-presentation node with M=(Z/n)^r, L=0, d_j=n≥2 gives the residue basis, so T[n]-stability forces every specialized coefficient γ(b_ju)=0. Hence c_g kills I on T_R, and the same holds for g^{-1}. The converse is the functorial identity (gtg^{-1})^n=gt^ng^{-1}. Arbitrary W follows by gluing over affine opens, using that T→G is a monomorphism. I checked the edge cases A=0, r=0, empty support, negative exponents, and nonreduced R or char | n. Duplicate search: torsion-joint-injectivity, prime-to-char torsion density, multiplicative-type transporter, relative-torus-centralizer-normalizer and normal-base torsion frame are all different statements. No SGA, no cycle, tool_uses empty. Conrad's paper is not in literature/ (worker lists it as WANTED), so I checked the argument as a self-contained proof. One citation gap, fixed: steps 1 and 3 treated Spec L as representing G_m^r and Spec B[t^±] as G×_S T, but they checked this only against affine tests. Both steps and proof_deps now cite lem-a1-locally-ringed-space-affine-adjunction (a Mathlib leaf already on the base), and step 3 is now marked non-elementary. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusFiniteTorsionNormalizerDetection",
+  "declaration": "AlgebraicGeometry.split_torus_exists_finite_torsion_normalizer_detection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusFiniteTorsionNormalizerDetection.lean",
+  "statement": "theorem split_torus_exists_finite_torsion_normalizer_detection (A : Type u) [CommRing A] (G T : Over (Spec (.of A))) [GrpObj G] [GrpObj T] [Smooth G.hom] [IsAffineHom G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] [QuasiSeparated G.hom] (r : ℕ) (hT : Nonempty (yonedaGrpObj T ≅ relativeSplitTorusFunctor (Spec (.of A)) r)) (i : T ⟶ G) [IsMonHom i] [IsClosedImmersion i.left] : ∃ n : ℕ, 1 ≤ n ∧ ∀ (W : Over (Spec (.of A))) (g : W ⟶ G), (∀ (V : Over (Spec (.of A))) (f : V ⟶ W), Set.range (fun t : V ⟶ T ↦ (f ≫ g) * (t ≫ i) * (f ≫ g)⁻¹) = Set.range (fun t : V ⟶ T ↦ t ≫ i)) ↔ (∀ (V : Over (Spec (.of A))) (f : V ⟶ W), (fun t : V ⟶ T ↦ (f ≫ g) * (t ≫ i) * (f ≫ g)⁻¹) '' {t | t ^ n = 1} = (fun t : V ⟶ T ↦ t ≫ i) '' {t | t ^ n = 1})",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de17ced2a",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: arbitrary CommRing A, Over (Spec A) with GrpObj G/T; Smooth, IsAffineHom, LFP+QC+QS (f.p. convention); closed subgroup = IsMonHom i + IsClosedImmersion i.left; global splitting hT : Nonempty (yonedaGrpObj T ≅ relativeSplitTorusFunctor S r), the def-sfb-relative-torus owner's real Γ-units product, and Nonempty suffices since the conclusion is choice-independent; ∃ n ≥ 1 before ∀ W g; both subgroup-functor equalities are full Set equalities over every V → W, T[n] = {t | t^n = 1} in T(V), joined by ↔. Edge cases A=0, r=0, char | n, nonreduced/empty V, W covered; single universe u, no extra assumptions. Node identical to side-live apart from lean, no statement_change; lean.statement verbatim in file; stmt_deps are all def/convention nodes (no theorem); no duplicate notion; single sorry; source and blueprint docstrings with 8 proof steps. Not recompiled (no change; worker reports clean 4.7 s compile). Advisory: second reading done in the same worker session."
+ }
+}

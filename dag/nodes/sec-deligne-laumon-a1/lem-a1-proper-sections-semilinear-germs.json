@@ -28,122 +28,45 @@
  ],
  "proof": [
   {
-   "text": "Use the identity compactification throughout. By [lem-pod-proper-coincidence-frobenius](2), the maps $\\kappa_M$ identify $C(M)$ with $V R(M)$ and $\\tau_{c,M}$ with $\\tau_M$, where $R=Ra_{Y*}$ and $V=\\operatorname{Fib}_s$. Naturality of $\\kappa$ identifies also $C(d_{r,M}^{-1})$ with $VR(d_{r,M}^{-1})$. Thus every arrow in the asserted compact-support formula becomes the corresponding ordinary-cohomology arrow. It suffices to prove that formula for $C=VR$ and $\\tau_M=V(E_M)\\iota_{RM}$, where $E_M=\\operatorname{FrEx}_{Y,*}(M)$ [def-weil-frobenius-cohomology-transport]. Properness is used in exactly this reduction; the semilinear maps $g,h$ are still the given scheme automorphisms.",
+   "text": "Use the identity compactification. Write $R=Ra_{Y*}$, $V=\\operatorname{Fib}_s$, $\\iota$ for the point transport of the statement, $\\mathcal E_M=\\operatorname{FrEx}_{Y,*}(M):Q_1RM\\to RP_1M$ for the direct-image exchange, so that $\\tau_M=V(\\mathcal E_M)\\iota_{RM}$ is the ordinary transport of [def-weil-frobenius-cohomology-transport]. By [lem-pod-proper-coincidence-frobenius](2), $\\kappa_M$ identifies $C(M)$ with $VRM$ and $\\tau_{c,M}$ with $\\tau_M$. Naturality of $\\kappa$ also identifies $C(d_{r,M}^{-1})$ with $VR(d_{r,M}^{-1})$. Put $Z_z=Lz^*$, let $\\varepsilon:La_Y^*R\\to\\mathrm{id}$ be the counit of the statement and $u_z:Z_zLa_Y^*\\xrightarrow{\\sim}\\mathrm{id}$ the specified comparison for $a_Yz=\\mathrm{id}_s$. The germ in the statement becomes $V(v_z^M)$, where $v_z^M=Z_z(\\varepsilon_M)u_z(RM)^{-1}:RM\\to Z_zM$. Thus it suffices to prove the ordinary-cohomology identity with these factors. Properness is used here; $g,h$ remain the given semilinear scheme automorphisms.",
    "uses": [
     "lem-pod-proper-coincidence-frobenius",
     "def-weil-frobenius-cohomology-transport"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change (unit-square-counit exchange); Tag 0D6D, lemma-derived-pullback-composition. Agent calculation for the specified completed/rational comparisons; transport convention as Deligne Weil II (1.1.7), (1.1.10)-(1.1.14), printed pp. 150-153."
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), (1.1.10)--(1.1.14), pp. 150--153; agent assembly using the completed germ square and conditional iteration/coefficient-descent lemmas."
    }
   },
   {
-   "text": "First perform the ordinary calculation on an integral representative $M\\in D^b_c(Y,\\mathcal O_E)$; passage to the requested coefficients is in step 8. Put $A=La_Y^*$, $P=Lg^*$ and $Q=Lh^*$, and let $\\varepsilon:AR\\to\\mathrm{id}$ be the counit [fix-prop-adjunctions](1). For a $k$-point $x$, write $Z_x=Lx^*$ and let $u_x:Z_xA\\xrightarrow{\\sim}\\mathrm{id}$ be the specified pullback comparison for $a_Yx=\\mathrm{id}_s$. Define the natural morphism in $D^b_c(s,\\mathcal O_E)$\n$$v_x^M=Z_x(\\varepsilon_M)u_x(RM)^{-1}:RM\\longrightarrow Z_xM.$$\nBy the definition of the germ in the item, its ordinary-cohomology version is $e_x^M=V(v_x^M)$. Naturality follows by applying $Z_x$ to the counit's naturality square and then using naturality of $u_x$. All functors here have the stated bounded constructible domains: $a_Y,x$ are separated finite-type $k$-morphisms, and pullback-composition is [lem-pod-integral-pullback-composition].",
+   "text": "For every finite coefficient field $E$, [lem-a1-integral-semilinear-germ-square] gives naturality of $v_z$ and the identity $v_z^{PM}\\mathcal E_M=b_{1,z,M}Q(v_{z_1}^M)$ for all integral objects and all $k$-points. Its comparisons, counit and exchange are exactly those fixed in the statement, formed on strict coefficient systems before taking derived inverse limit. Its moving-point assertion gives $z_j=g^jzh^{-j}$ as $k$-points with $gz_j=z_{j+1}h$.",
    "uses": [
-    "fix-prop-adjunctions",
-    "lem-pod-integral-pullback-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change (unit-square-counit exchange); Tag 0D6D, lemma-derived-pullback-composition. Agent calculation for the specified completed/rational comparisons; transport convention as Deligne Weil II (1.1.7), (1.1.10)-(1.1.14), printed pp. 150-153."
-   }
-  },
-  {
-   "text": "Let $\\theta:AQ\\xrightarrow{\\sim}PA$ be the pullback comparison for $a_Yg=ha_Y$. The defining exchange mate [def-weil-frobenius-square-exchange](1) satisfies\n$$(*)\\qquad \\varepsilon_{PM}\\,A(E_M)=P(\\varepsilon_M)\\theta_{RM}:A Q RM\\longrightarrow PM.$$\nIndeed, apply [lem-amb-mate-unit-counit] with both adjunctions $A\\dashv R$, $G=Q$, $H=P$, and $\\alpha=\\theta$. For the specified integral exchange, make this calculation on its defining strict coefficient system first: the system adjunction and its actual mate words are supplied by [lem-coef-semilinear-derived-sections]. Apply its specified derived-inverse-limit functor [prop-weil-pbc-rlim-functoriality] and operation comparisons to the system equality. These comparisons preserve units and counits by [lem-fix-operation-reduction], so the resulting equality is exactly $(*)$ for the completed operations, rather than an equality inferred only from separate reductions. This uses only the ordinary adjunction for the vertical $k$-morphism $a_Y$; it does not apply a $k$-linear base-change theorem to $g$ or $h$.",
-   "uses": [
-    "def-weil-frobenius-square-exchange",
-    "lem-amb-mate-unit-counit",
-    "fix-prop-adjunctions",
-    "lem-fix-operation-reduction",
-    "lem-coef-semilinear-derived-sections",
-    "prop-weil-pbc-rlim-functoriality"
+    "lem-a1-integral-semilinear-germ-square"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change (unit-square-counit exchange); Tag 0D6D, lemma-derived-pullback-composition. Agent calculation for the specified completed/rational comparisons; transport convention as Deligne Weil II (1.1.7), (1.1.10)-(1.1.14), printed pp. 150-153."
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), (1.1.10)--(1.1.14), pp. 150--153; agent assembly using the completed germ square and conditional iteration/coefficient-descent lemmas."
    }
   },
   {
-   "text": "Write $x_1=T(x)$ and $b_M=b_{1,x,M}:QZ_{x_1}M\\xrightarrow{\\sim}Z_xPM$. Associativity of the specified comparisons [lem-pod-integral-pullback-composition], applied to $a_Ygx=ha_Yx$ and $gx=x_1h$, gives\n$$Z_x(\\theta_N)u_x(QN)^{-1}=b_{AN}\\,Q(u_{x_1}(N)^{-1}).$$\nBoth sides expand the comparison from $Q=L(h)^*$ to $Z_xPA$: use $a_Yx=a_Yx_1=\\mathrm{id}_s$ and reassociate the three pullbacks; this is the associativity identity of the cited node with the identity factors removed. Apply $Z_x$ to $(*)$ from step 3, precompose with $u_x(QRM)^{-1}$, and use this comparison equality and naturality of $u_x$ and $b$. The resulting calculation is\n$$v_x^{PM}E_M=Z_x(P\\varepsilon_M)b_{ARM}Q(u_{x_1}(RM)^{-1})\n=b_M Q(Z_{x_1}\\varepsilon_M)Q(u_{x_1}(RM)^{-1})\n=b_M Q(v_{x_1}^M).$$\nThis is an equality in the derived category on $s$, before evaluating at the point.",
+   "text": "Apply [lem-a1-semilinear-germ-iteration-descent] to this family of one-step integral identities. Its definitions give the same $d_r$, $b_{r,z,M}$, $\\tau_M^{[r]}$ and $I_N^{[r]}$ as in the question. Its contracted equality, including rational and common-stage coefficients, is $e_z^{P_rM}\\tau_M^{[r]}=V(b_{r,z,M})I_{Z_{z_r}M}^{[r]}e_{z_r}^M$, naturally in $M$. Under step 1 every factor is the required compact-support factor; this proves the stated formula for every $r\\ge1$. Both cited results allow arbitrary constructible $M$ without a Weil structure.",
    "uses": [
-    "lem-pod-integral-pullback-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change (unit-square-counit exchange); Tag 0D6D, lemma-derived-pullback-composition. Agent calculation for the specified completed/rational comparisons; transport convention as Deligne Weil II (1.1.7), (1.1.10)-(1.1.14), printed pp. 150-153."
-   }
-  },
-  {
-   "text": "Apply $V$ to the last equality and precompose with $\\iota_{RM}$. Naturality of the specified point transport [lem-weil-frobenius-point-transport-natural](2), applied to the actual derived arrow $v_{x_1}^M:RM\\to Z_{x_1}M$, says\n$$V(Qv_{x_1}^M)\\iota_{RM}=\\iota_{Z_{x_1}M}V(v_{x_1}^M).$$\nConsequently\n$$(**)\\qquad e_x^{PM}\\tau_M=V(b_{1,x,M})\\iota_{Z_{x_1}M}e_{x_1}^M.$$\nThe arrow $\\iota$ here is the restriction--insertion--pullback map of [def-weil-frobenius-point-transport], not a replacement by an arbitrary isomorphism of vector spaces. Formula $(**)$ holds for every $x$ and every $M$, providing the base case for the iteration.",
-   "uses": [
-    "lem-weil-frobenius-point-transport-natural",
-    "def-weil-frobenius-point-transport"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change (unit-square-counit exchange); Tag 0D6D, lemma-derived-pullback-composition. Agent calculation for the specified completed/rational comparisons; transport convention as Deligne Weil II (1.1.7), (1.1.10)-(1.1.14), printed pp. 150-153."
-   }
-  },
-  {
-   "text": "For the induction keep powers uncontracted: put $S_r=P^r$, $J_r=Q^r$, $x_j=T^j(x)$, and let $\\widehat\\tau_{r,M}$ and $\\widehat I_{r,N}$ be the successive $r$ transports, with no final composition comparison. Put $\\widehat b_{1,x,M}=b_{1,x,M}$ and recursively\n$$\\widehat b_{r+1,x,M}=b_{1,x,S_rM}\\,Q(\\widehat b_{r,x_1,M}):J_{r+1}Z_{x_{r+1}}M\\to Z_x S_{r+1}M.$$\nInduct on $r\\geq1$ to prove\n$$e_x^{S_rM}\\widehat\\tau_{r,M}=V(\\widehat b_{r,x,M})\\widehat I_{r,Z_{x_r}M}e_{x_r}^M.$$\nThe case $r=1$ is $(**)$. For $r+1$, apply $(**)$ to $S_rM$ at $x$, and then substitute the inductive formula at $x_1$ for $e_{x_1}^{S_rM}\\widehat\\tau_{r,M}$. Move $V(\\widehat b_{r,x_1,M})$ past the preceding $\\iota$ using [lem-weil-frobenius-point-transport-natural](2). The remaining factors are, in order, $V(b_{1,x,S_rM}Q\\widehat b_{r,x_1,M})$, $\\iota_{J_r Z_{x_{r+1}}M}\\widehat I_{r,Z_{x_{r+1}}M}$ and $e_{x_{r+1}}^M$. They are precisely the recursively defined right side at $r+1$.",
-   "uses": [
-    "lem-weil-frobenius-point-transport-natural"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change (unit-square-counit exchange); Tag 0D6D, lemma-derived-pullback-composition. Agent calculation for the specified completed/rational comparisons; transport convention as Deligne Weil II (1.1.7), (1.1.10)-(1.1.14), printed pp. 150-153."
-   }
-  },
-  {
-   "text": "Let $d_r:P_r\\xrightarrow{\\sim}S_r$ and $f_r:Q_r\\xrightarrow{\\sim}J_r$ be the specified iterated comparisons. Associativity [lem-pod-integral-pullback-composition] identifies the recursion of step 6 with the comparison for $g^rx=x_rh^r$:\n$$Z_x(d_{r,M}^{-1})\\widehat b_{r,x,M}=b_{r,x,M}f_{r,Z_{x_r}M}^{-1}.$$\nTo check it, expand the recursion into $r$ adjacent squares $gx_j=x_{j+1}h$, then reassociate their pullbacks; both composites are the comparison from $L(g^rx)^*M=L(x_rh^r)^*M$. This is repeated application of the cited associativity identity, starting with equality at $r=1$. By the definitions in the item,\n$$\\tau_M^{[r]}=VR(d_{r,M}^{-1})\\widehat\\tau_{r,M},\\qquad I_N^{[r]}=V(f_{r,N}^{-1})\\widehat I_{r,N}.$$\nNaturality of the germ with respect to $d_{r,M}^{-1}:S_rM\\to P_rM$ gives $e_x^{P_rM}VR(d_{r,M}^{-1})=V(Z_xd_{r,M}^{-1})e_x^{S_rM}$. Substitute these three equalities into step 6 to obtain exactly\n$$e_x^{P_rM}\\tau_M^{[r]}=V(b_{r,x,M})I_{Z_{x_r}M}^{[r]}e_{x_r}^M.$$\nIn this step $\\tau$ denotes ordinary transport; step 1 returns this identity to compact support.",
-   "uses": [
-    "lem-pod-integral-pullback-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change (unit-square-counit exchange); Tag 0D6D, lemma-derived-pullback-composition. Agent calculation for the specified completed/rational comparisons; transport convention as Deligne Weil II (1.1.7), (1.1.10)-(1.1.14), printed pp. 150-153."
-   }
-  },
-  {
-   "text": "For $\\Lambda=E$, take an integral object representative: [def-weil-rationalization-karoubi] has exactly the integral objects and localized Hom groups. Apply the scalar-localization functor to the equality of steps 2--7. The operations, their comparisons, units and counits commute with this passage by [lem-fix-operation-reduction]; the point fiber and point transport are obtained by tensoring the integral fiber and transport with $E$ [def-weil-finite-coefficient-point, def-weil-frobenius-point-transport]. Thus every factor becomes the factor specified in the question, including $b_r,d_r$ and $I^{[r]}$. Naturality holds for localized arrows since the equality is natural in integral arrows and all its factors are $E$-linear. For $\\Lambda=\\Qlb$, represent $M$ and any morphism used to test naturality over one common finite extension as in [def-weil-algebraically-closed-coefficients]. The already proved equality at that stage gives equality of its two common-stage morphism classes. The same operation comparisons and point-transport naturality [lem-weil-frobenius-point-transport-natural](2) identify the factors after any further coefficient extension, so this is the specified common-stage formula, naturally in $M$. No Weil structure or finite-Tor hypothesis has been used.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "lem-fix-operation-reduction",
-    "def-weil-finite-coefficient-point",
-    "def-weil-frobenius-point-transport",
-    "def-weil-algebraically-closed-coefficients",
-    "lem-weil-frobenius-point-transport-natural"
+    "lem-a1-semilinear-germ-iteration-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change (unit-square-counit exchange); Tag 0D6D, lemma-derived-pullback-composition. Agent calculation for the specified completed/rational comparisons; transport convention as Deligne Weil II (1.1.7), (1.1.10)-(1.1.14), printed pp. 150-153."
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), (1.1.10)--(1.1.14), pp. 150--153; agent assembly using the completed germ square and conditional iteration/coefficient-descent lemmas."
    }
   }
  ],
  "proof_deps": [
   "lem-pod-proper-coincidence-frobenius",
   "def-weil-frobenius-cohomology-transport",
-  "fix-prop-adjunctions",
-  "lem-pod-integral-pullback-composition",
-  "def-weil-frobenius-square-exchange",
-  "lem-amb-mate-unit-counit",
-  "lem-fix-operation-reduction",
-  "lem-coef-semilinear-derived-sections",
-  "prop-weil-pbc-rlim-functoriality",
-  "lem-weil-frobenius-point-transport-natural",
-  "def-weil-frobenius-point-transport",
-  "def-weil-rationalization-karoubi",
-  "def-weil-finite-coefficient-point",
-  "def-weil-algebraically-closed-coefficients"
+  "lem-a1-integral-semilinear-germ-square",
+  "lem-a1-semilinear-germ-iteration-descent"
  ],
  "proof_origin": {
   "by": "agent",
@@ -244,39 +167,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-proper-sections-semilinear-germs",
   "worker": "stage1",
-  "summary": "Retained the statement and all imported metadata. Proved the specified derived-germ identity by the existing general mate-counit leaf, pullback-comparison associativity and actual point-transport naturality. Wrote the uncontracted induction and contraction maps explicitly. The completed calculation precedes scalar localization and common finite stages; no new node is necessary. Searched the project for an exact attachment and Mathlib for the item.",
-  "blueprint": "Realizes the evaluation sentence of lem-a1-finite-boundary-weights.proof.md through its child lem-a1-finite-weil-sections-decomposition: steps 2--5 prove the one-step semilinear evaluation square, steps 6--7 prove its specified iterates, steps 1 and 8 handle the proper compact-support and coefficient conventions. This does not reintroduce the erroneous Galois-invariants evaluation formula of the ancestor.",
+  "summary": "Repair of human re-split order: statement unchanged; old steps 2--4 form a completed one-step germ-square node and old steps 5--8 form a conditional iteration/coefficient-descent node, both statement-only and independently claimable. Old step 1 stays in the assembly. All old arguments retained verbatim and mapped in report.md. Actual Mathlib queries and source readings recorded.",
+  "blueprint": "Retains the evaluation sentence route of lem-a1-finite-boundary-weights through lem-a1-finite-weil-sections-decomposition; the two children isolate the same derived transport comparison, without modifying the ancestor weight argument.",
   "tool_uses": [
    {
     "node": "lem-pod-proper-coincidence-frobenius",
     "why": "Generic proper identity-compactification comparison of ordinary and compact Frobenius transports; the affine-line unit has no replacement for this comparison."
-   },
-   {
-    "node": "fix-prop-adjunctions",
-    "why": "Ordinary completed pullback/direct-image adjunction and counit for the structure morphism; a generic six-functor tool, not an affine-line weight argument."
-   },
-   {
-    "node": "lem-pod-integral-pullback-composition",
-    "why": "Generic associative completed-pullback comparisons, required to track the comparisons fixed by the item."
-   },
-   {
-    "node": "lem-fix-operation-reduction",
-    "why": "Preservation of units, counits and operation comparisons under completed and scalar coefficient passage, required by the given rational coefficient conventions."
-   },
-   {
-    "node": "lem-weil-frobenius-point-transport-natural",
-    "why": "Naturality of the particular point transport on derived arrows and under common-stage coefficient extension; no affine-line-specific claim is substituted."
-   },
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "The specified integral exchange is constructed as an actual mate on strict coefficient systems; this generic system-adjunction statement supplies that input, without replacing any affine-line argument."
-   },
-   {
-    "node": "prop-weil-pbc-rlim-functoriality",
-    "why": "The defining derived-inverse-limit functor carries the system mate identity to an integral equality; no equality of derived maps is inferred from finite reductions alone."
    }
   ]
  },
@@ -290,12 +189,12 @@
   "prop-weil-pbc-rlim-functoriality"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q40-4a7d364e1",
-  "group": "Q40",
+  "reviewer": "NT-cc-Q53-0ae331d85",
+  "group": "Q53",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-4a7d364e1 (reviewer sub-agent of L); spot-checked: I read the whole item and all eight steps, and checked every cited statement. There are no new nodes and nothing is fixed. The conventions match the sources: Deligne Weil II (1.1.7) gives geometric Frobenius as the inverse of x↦x^q, so h=Spec γ is the g_s used by def-weil-frobenius-point-transport. Stacks 07A7 and 0D6D are provenance only. I rechecked each step by hand. Step 1: lem-pod-proper-coincidence-frobenius(2) with the identity compactification turns the compact formula into the ordinary one. Step 3: substituting L1=L2=A, R1=R2=R, G=Q, H=P, α=θ into lem-amb-mate-unit-counit (Mathlib mateEquiv_counit) gives exactly (*). This holds on systems via lem-coef-semilinear-derived-sections and carries to the completed setting through prop-weil-pbc-rlim-functoriality and the unit/counit-preserving comparisons of lem-fix-operation-reduction. Step 4: I recomputed the chain and both sides go QN→Z_xPAN, giving v_x^{PM}E_M=b_M Q(v_{x1}^M). Step 5: clause (2) of point-transport naturality covers integral derived arrows. Step 6: the induction is set up correctly, with base r=1, the claim for all x, and its use at x_1 with T^r(x_1)=x_{r+1}. Step 7: the contraction through d_r and f_r matches the item's definitions. Step 8: E is raw localization and Qlb uses common stages. The hypotheses hold: proper implies separated finite type, T(z) is a k-point, and ℓ is invertible. Small cases checked: Y_0=Spec k_0, a degree-2 point, M=0, empty Y. Non-blocking remark: steps 4 and 7 also use the unit normalization L(id_s)^*≅id, which the item statement already fixes through 'a_Y z=id_s and the canonical composition comparisons'; I accept it as standard coherence. Tool uses accepted: lem-pod-proper-coincidence-frobenius (the only off-route node, and already a stmt_dep) and the other generic tools the report declares. No duplicate of this derived germ identity exists in the DAG and no SGA is cited. Batch-5 check: lem-weil-frobenius-point-transport-natural is outside both assumptions. It states naturality of the point transport along Spec(Frob) on Spec k, which neither the trace formula nor Poincaré duality gives. Its closure node lem-weil-isomorphism-derived-pullback-comparison-normalization is a generic pullback-comparison normalization for scheme isomorphisms, not a step of the trace-formula argument. The item already reached both nodes before this delivery through its stmt_dep lem-pod-proper-coincidence-frobenius, and no assumption leaf could replace the citation."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-0ae331d85 (reviewer sub-agent of L); spot-checked: Read in full against the released re-split note (at least 2 nodes, assembly at most 3000 characters, 8 old steps). The item statement and stmt_deps are unchanged from the base, and all 8 old steps appear verbatim in the report. Old step 1 is still the assembly reduction through lem-pod-proper-coincidence-frobenius(2). Old steps 2-4 became clauses of lem-a1-integral-semilinear-germ-square: v-naturality, the mate-counit identity (*) on systems and after Rlim (= lem-amb-mate-unit-counit with alpha=theta), the comparison associativity and the one-step square. Old steps 5-8 became clauses of lem-a1-semilinear-germ-iteration-descent: the base case (**), the uncontracted recursion and induction, the contraction Z_x(d^-1)b^=b f^-1, and E/Qlb descent. The two nodes are 2686 and 3856 characters of statement, statement-only, with 3 kinds of search each. Checked: x1=gxh^-1 is a k-point with gx=x1h; the directions of theta, FrEx (def-weil-frobenius-square-exchange(1)) and b; the induction r->r+1 using iota-naturality (lem-weil-frobenius-point-transport-natural(2)) and the contraction algebra; the cases r=1, Y empty and Y0=Spec k0. Node 2 is conditional on node 1's identity, so there is no cycle. No duplicate: def-a1-proper-sections-germ-and-moving-point is only a definition. No SGA. Deligne (1.1.7)/(1.1.13)-(1.1.14) and Stacks 07A7/0D6D labels verified. Batch 5: lem-weil-frobenius-point-transport-natural was already cited by base steps 5, 6 and 8. The recomputed closure is unchanged apart from the two new nodes (13481 -> 13483). The reached sec-trace-formula node is a generic isomorphism pullback-comparison normalization, outside the trace-formula and Poincare-duality statements and their proofs, so accepted. FIX: assembly step 1 used V, R, E_M, iota, Z_z, epsilon, u_z without defining them (old steps 1-2 had defined them); I rewrote it to define them from the statement data, with uses unchanged, in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-proper-sections-semilinear-germs.json. Accepted tool use: lem-pod-proper-coincidence-frobenius (generic proper comparison).; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ProperSectionsSemilinearGerms",
@@ -338,5 +237,16 @@
   "result": "pass",
   "note": "Re-delivery after the H3 RETURN at d28e179ceca8. The diff is limited to the new helpers realizedPointComparison, realizedTargetComparison and realizedSourceComparison, a new third conjunct, a longer docstring, 3 added stmt_deps and the lean record. The third conjunct says: for all M, L and h : M.stage ≤ L, realizedSourceComparison.inv ≫ qbarLeft M ≫ realizedTargetComparison.hom = stageRealization L (rationalLeft (M.toStage h)). This is option (b) of the return. The source comparison is the live frobeniusCohomologyRealizedComparison (compact=true, ofIsProper). The target comparison uses the tensor tower, pointRationalFibreScalarIso, commonStagePullbackComparison for z and g^(r+1), and operationStageTransitionIso. All are canonical, with no free maps. A probe with rfl/simp/cat_disch on conjunct 3 fails, so the clause is not a map_comp tautology, and Q̄ naturality across stages follows from it. Mechanical theorem-stmt_dep finding: both deps are genuine and PASS on that point. comparisons is the .choose of integralPullbackComparisonRealization (batch-5 generic coherence). The realized comparison and the tower are .choose of the transport-iso ∃! theorems. def-weil-local-frobenius-trace is now cited for the local* helpers. The lean.statement is verbatim, every proof is sorry, the docstrings carry source and blueprint, and the report has both sections. Compile clean in 18.2 s (nt_compile --json, load about 78). Advisories: the second reading is a worker self-check, six imports are proof-only, and the unit comparison is not tied to the compositors."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

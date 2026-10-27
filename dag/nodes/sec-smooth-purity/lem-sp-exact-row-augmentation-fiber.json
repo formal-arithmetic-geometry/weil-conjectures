@@ -1,0 +1,403 @@
+{
+ "id": "lem-sp-exact-row-augmentation-fiber",
+ "kind": "statement",
+ "title": "Natural shifted augmentation fiber of an exact four-term row",
+ "statement": "Let $\\mathcal C$ be a site small relative to the module universe and $S$ a sheaf of commutative rings. Let $A,B,C,D$ be sheaves of $S$-modules [def-weil-sheaf-of-modules-category] and suppose\n$$0\\longrightarrow A\\xrightarrow{a}B\\xrightarrow{d}C\\xrightarrow{q}D\\longrightarrow0$$\nis exact. In the cochain, cone and shift conventions of [def-weil-abstract-derived-category], let $P=[B\\xrightarrow d C]$ in degrees $-1,0$, let $\\epsilon:P\\to D[0]$ have degree-zero component $q$, and put $F=\\operatorname{Cone}(\\epsilon)[-1]$. Then $F$ is canonically the complex $[B\\xrightarrow d C\\xrightarrow{-q}D]$ in degrees $-1,0,1$. The map $i:A[1]\\to F$ with degree $-1$ coordinate $a$ and zero other coordinates is a quasi-isomorphism, hence specifies an isomorphism $A[1]\\xrightarrow{\\sim}F$ in $D(\\operatorname{Mod}(S))$. Given another exact row $0\\to A'\\xrightarrow{a'}B'\\xrightarrow{d'}C'\\xrightarrow{q'}D'\\to0$ and $S$-linear maps $(\\alpha,\\beta,\\gamma,\\delta)$ to the first row with $\\beta a'=a\\alpha$, $\\gamma d'=d\\beta$ and $\\delta q'=q\\gamma$, the square of augmentations induces the shifted cone chain map $r:F'\\to F$ with coordinates $(\\beta,\\gamma,\\delta)$ in degrees $-1,0,1$, and the equality $r\\circ i'=i\\circ\\alpha[1]$ holds as chain maps. These specified isomorphisms are therefore natural for every such commuting exact-row diagram.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First paragraph, truncation fiber of the coefficient tensor and its transition maps; returned proof steps 7–8; explicit agent expansion of the coefficient calculation (not a theorem stated verbatim by Bhatt–Scholze)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-cochain-coefficient-universe-transport"
+ ],
+ "proof": [
+  {
+   "text": "Work in the abelian category $\\operatorname{Mod}(S)$; the smallness hypothesis permits this. Exactness gives $da=0$ and $qd=0$, so $\\epsilon$ is a chain map. The cone formula gives $\\operatorname{Cone}(\\epsilon)^{-2}=B$, $\\operatorname{Cone}(\\epsilon)^{-1}=C$, $\\operatorname{Cone}(\\epsilon)^0=D$, with differentials $-d,q$. The shift $[-1]$ moves these to degrees $-1,0,1$ and negates the differentials. Thus the canonical zero-summand identifications give $F=[B\\xrightarrow d C\\xrightarrow{-q}D]$, as asserted.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, Definition derived-definition-cone; shift from homology.tex, Tag 011G, Definition homology-definition-shift-cochain; direct substitution"
+   }
+  },
+  {
+   "text": "The proposed $i$ is a chain map because $da=0$. Directly from $H^r=\\ker(d^r)/\\operatorname{im}(d^{r-1})$, its only possibly nonzero target cohomology objects are $H^{-1}(F)=\\ker d$, $H^0(F)=\\ker q/\\operatorname{im}d=0$, and $H^1(F)=\\operatorname{coker}q=0$. Changing $q$ to $-q$ changes neither its kernel nor its image. Exactness at $A$ and $B$ makes $a:A\\to\\ker d$ an isomorphism: a section of $\\ker d$ locally lifts to $A$ by exactness, and the local lifts are unique since $a$ is monic, so they glue to a unique preimage. Hence $H^{-1}(i)$ is this isomorphism. In all other degrees source and target cohomology vanish. Thus $i$ is a quasi-isomorphism by definition, and localization sends it to the specified isomorphism $Q(i):A[1]\\xrightarrow{\\sim}F$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0115, Definition homology-definition-quasi-isomorphism-cochain; direct kernel/image calculation in the given exact row; derived localization as in def-weil-abstract-derived-category"
+   }
+  },
+  {
+   "text": "For the given row diagram, let $p:P^{\\prime}\\to P$ have components $\\beta,\\gamma$. Its chain-map equation is $\\gamma d^{\\prime}=d\\beta$; moreover $\\delta\\epsilon^{\\prime}=\\epsilon p$ is precisely $\\delta q^{\\prime}=q\\gamma$. On the cone in degree $k$, take the block diagonal map $\\delta^k\\oplus p^{k+1}$ on $D^{\\prime}[0]^k\\oplus P^{\\prime\\,k+1}$. Multiplying the cone differential matrices on either side gives equal diagonal blocks by the chain-map equations, and equal upper-right blocks by the augmentation equation. It is consequently a cone chain map. Shifting it by $[-1]$ does not change its components, so under step 1 it is $r=(\\beta,\\gamma,\\delta)$. Equivalently its two differential equations are $\\gamma d^{\\prime}=d\\beta$ and $\\delta(-q^{\\prime})=(-q)\\gamma$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, Definition derived-definition-cone, block matrix formula; homology.tex Tag 011G, shifted morphism components; direct calculation for a strictly commuting square"
+   }
+  },
+  {
+   "text": "In degree $-1$, the two composites $ri^{\\prime}$ and $i\\alpha[1]$ are $\\beta a^{\\prime}$ and $a\\alpha$, equal by hypothesis. In every other degree their source is zero, so the components agree. Thus $ri^{\\prime}=i\\alpha[1]$ as chain maps. Applying $Q$ gives $Q(r)Q(i^{\\prime})=Q(i)Q(\\alpha[1])$. The $Q(i)$ are isomorphisms by step 2, so this is exactly their asserted naturality. The coordinate construction of $r$ sends identity row diagrams to identities and composes by coordinate composition; hence it defines the stated natural family for all the row diagrams in the statement.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "First paragraph, left fiber and its transition maps; agent expansion by component equality and functoriality of localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First paragraph, coefficient truncation fiber and transitions, expanded by the explicit cone, shift, cohomology and chain-map definitions (Stacks Tags 014E, 011G, 0115)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence 0 to A to B to C to D to 0 of module sheaves gives a natural quasi-isomorphism A[1] to Cone([B to C] to D[0])[-1], natural for commuting diagrams of exact sequences",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.mappingCone.quasiIso_descShortComplex",
+     "DerivedCategory.triangleOfSESδ",
+     "DerivedCategory.triangleOfSESIso",
+     "CategoryTheory.ShortComplex.ShortExact.singleδ",
+     "DerivedCategory.HomologySequence.exact₁",
+     "DerivedCategory.HomologySequence.exact₃",
+     "HomologicalComplex.HomologySequence.quasiIso_τ₃",
+     "CategoryTheory.ShortComplex.ShortExact.singleTriangleIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.quasiIso_descShortComplex concerns a short exact sequence of complexes and the map from its cone to its quotient; it does not directly state this four-term exact-row comparison with its coordinates and simultaneous naturality. The remaining hits are general homology or cone constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*(kernel|quasiIso)|kernel.*mappingCone",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 4,
+    "hits": [
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.quasiIso_descShortComplex concerns a short exact sequence of complexes and the map from its cone to its quotient; it does not directly state this four-term exact-row comparison with its coordinates and simultaneous naturality. The remaining hits are general homology or cone constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"quasiIso\"",
+   "results": {
+    "subdirectory": "",
+    "count": 1,
+    "hits": [
+     "CochainComplex.mappingCone.quasiIso_descShortComplex"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.quasiIso_descShortComplex concerns a short exact sequence of complexes and the map from its cone to its quotient; it does not directly state this four-term exact-row comparison with its coordinates and simultaneous naturality. The remaining hits are general homology or cone constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural quasi isomorphism of the leftmost kernel shifted to the mapping fiber of an augmented two term complex from an exact four term sequence",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "QuasiIso",
+     "CategoryTheory.ShortComplex.quasiIso_iff_comp_left",
+     "quasiIso_comp",
+     "CategoryTheory.ShortComplex.QuasiIso.casesOn",
+     "CategoryTheory.ShortComplex.quasiIso_comp",
+     "CategoryTheory.ShortComplex.quasiIso_of_isIso",
+     "CategoryTheory.ShortComplex.QuasiIso.mk",
+     "CategoryTheory.ShortComplex.QuasiIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.quasiIso_descShortComplex concerns a short exact sequence of complexes and the map from its cone to its quotient; it does not directly state this four-term exact-row comparison with its coordinates and simultaneous naturality. The remaining hits are general homology or cone constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A three term cochain complex exact except in its lowest degree is quasi isomorphic to its leftmost kernel placed in degree minus one, naturally under a commuting diagram",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "CochainComplex.mappingCone.quasiIso_descShortComplex",
+     "CochainComplex.quasiIsoAt₀_iff",
+     "HomologicalComplex.HomologySequence.quasiIso_τ₃",
+     "CochainComplex.isIso_liftCycles_iff",
+     "CochainComplex.ConnectData.homologyIsoPos",
+     "ChainComplex.quasiIsoAt₀_iff",
+     "CochainComplex.quasiIso_truncGEMap_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.quasiIso_descShortComplex concerns a short exact sequence of complexes and the map from its cone to its quotient; it does not directly state this four-term exact-row comparison with its coordinates and simultaneous naturality. The remaining hits are general homology or cone constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For quotients B_n=R/t^n with exact sequence 0 B_m to B_n to B_n to B_m 0 the augmentation cone fiber is B_m[1] via t^(n-m); coefficient reduction from n2 to n corresponds to t^(n2-n)",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomotopyCategory.spectralObjectMappingCone_δ'_app",
+     "HomotopyCategory.spectralObjectMappingCone_ω₁",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+     "HomotopyCategory.spectralObjectMappingCone",
+     "CochainComplex.mappingCone.decomp_from",
+     "CochainComplex.mappingCone.decomp_to",
+     "CochainComplex.mappingCone.id_X",
+     "HomologicalComplex.homotopyCofiber"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.quasiIso_descShortComplex concerns a short exact sequence of complexes and the map from its cone to its quotient; it does not directly state this four-term exact-row comparison with its coordinates and simultaneous naturality. The remaining hits are general homology or cone constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shifted mapping cone of the quotient two term Koszul augmentation has its canonical kernel comparison quasi-isomorphism and its strict transition is multiplication by the difference power",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc",
+     "CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv",
+     "CochainComplex.mappingConeHomOfDegreewiseSplitIso",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.quasiIso_descShortComplex concerns a short exact sequence of complexes and the map from its cone to its quotient; it does not directly state this four-term exact-row comparison with its coordinates and simultaneous naturality. The remaining hits are general homology or cone constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*(kernel|quasiIso)|kernel.*mappingCone",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 4,
+    "hits": [
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: closest candidate CochainComplex.mappingCone.quasiIso_descShortComplex, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:137, concerns a short exact sequence of complexes and its cone-to-quotient map. This is not a one-line specialization giving the specified shifted four-term fiber and its coordinate naturality; the remaining hits concern general derived triangles or cone functor operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A three term complex exact in degrees zero and one is quasi isomorphic to its kernel in degree minus one",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "quasiIsoAt_iff_exactAt'",
+     "quasiIsoAt_iff_exactAt",
+     "CategoryTheory.ShortComplex.quasiIso_comp",
+     "CategoryTheory.ShortComplex.exact_of_f_is_kernel",
+     "CategoryTheory.ShortComplex.Exact.isIso_imageToKernel",
+     "CategoryTheory.ShortComplex.quasiIso_iff_isIso_descOpcycles",
+     "HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso",
+     "ChainComplex.quasiIsoAt₀_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: quasiIsoAt_iff_exactAt and the image-to-kernel isomorphism are general tools, not the exact four-term augmentation fiber with its explicit signs and strict naturality. The proof here computes all three cohomology objects directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"quasiIso\"",
+   "results": {
+    "subdirectory": "",
+    "count": 1,
+    "hits": [
+     "CochainComplex.mappingCone.quasiIso_descShortComplex"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: closest candidate CochainComplex.mappingCone.quasiIso_descShortComplex, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:137, concerns a short exact sequence of complexes and its cone-to-quotient map. This is not a one-line specialization giving the specified shifted four-term fiber and its coordinate naturality; the remaining hits concern general derived triangles or cone functor operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence 0 to A to B to C to D to 0 gives a natural quasi-isomorphism A[1] to Cone([B to C] to D[0])[-1]",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.mappingCone.quasiIso_descShortComplex",
+     "DerivedCategory.triangleOfSESδ",
+     "DerivedCategory.triangleOfSESIso",
+     "DerivedCategory.triangleOfSES",
+     "CategoryTheory.ShortComplex.ShortExact.singleδ",
+     "CategoryTheory.ShortComplex.ShortExact.singleTriangle",
+     "CategoryTheory.ShortComplex.ShortExact.singleTriangleIso",
+     "CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: closest candidate CochainComplex.mappingCone.quasiIso_descShortComplex, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:137, concerns a short exact sequence of complexes and its cone-to-quotient map. This is not a one-line specialization giving the specified shifted four-term fiber and its coordinate naturality; the remaining hits concern general derived triangles or cone functor operations."
+  },
+  {
+   "tool": "grep",
+   "query": "descShortComplex|quasiIso_descShortComplex|def map|map_fst|map_snd",
+   "results": {
+    "subdirectory": "Algebra/Homology/HomotopyCategory/ShortExact.lean",
+    "count": 5,
+    "hits": [
+     "17",
+     "53",
+     "56",
+     "57",
+     "60"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the command printed the ShortExact.lean definitions at lines 17, 53, 56, 57, 60 (its single-file output parser put line numbers in the file field). These concern descShortComplex for a short complex of complexes, not this exact-row fiber. Full candidate source through quasiIso_descShortComplex at line 137 was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel in the lowest degree of a three term exact augmented cochain complex maps quasi isomorphically to the shifted cone of its augmentation, naturally in commuting row maps",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.mappingCone.quasiIso_descShortComplex",
+     "DerivedCategory.triangleOfSESδ",
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "DerivedCategory.triangleOfSESIso",
+     "CochainComplex.mappingCone.mapTriangleIso",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: closest candidate CochainComplex.mappingCone.quasiIso_descShortComplex, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:137, concerns a short exact sequence of complexes and its cone-to-quotient map. This is not a one-line specialization giving the specified shifted four-term fiber and its coordinate naturality; the remaining hits concern general derived triangles or cone functor operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-ell-coefficient-fiber",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "First paragraph, truncation fiber of the coefficient tensor and its transition maps; returned proof steps 7–8",
+   "via": [
+    "lem-sp-ell-coefficient-fiber"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-exact-row-augmentation-fiber",
+  "worker": "stage1",
+  "summary": "Q65 checked the whole exact row and strict naturality directly in the specified cone and shift conventions. Four elementary steps calculate the cone, compute the induced cohomology map, construct the strict cone map, and prove coordinate naturality. Statement unchanged; no new nodes, since every argument is a short calculation from the existing definition nodes and the exactness hypotheses. Searched project Lean and the whole blueprint; no attachment or duplicate. Re-ran logged Mathlib searches with two phrasings and read the closest cone-of-SES result, which is not this statement.",
+  "blueprint": "sk-lem-sp-tower proof first paragraph: the truncation triangle left term C_m[1] and its transition maps; generic exact-row calculation extracted through lem-sp-ell-coefficient-fiber.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-0c4508688",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-0c4508688 (reviewer sub-agent of L); spot-checked: One commit on base c20fb40 with the item (now split) and its report; no new nodes, no fixes, no tool_uses. There is no repair note for this item and no earlier run of it, so the 2026-10-21 re-split rule does not apply. No SGA is cited. I checked the cone and shift signs against Stacks derived.tex definition-cone (014E, line 2471) and homology.tex definition-shift-cochain (011G, line 3427), and against the conventions stated in def-weil-abstract-derived-category. Step 1: Cone(eps) is B, C, D in degrees -2, -1, 0 with differentials -d and q; after [-1] it is [B -> C -> D] with d and -q, as stated. Step 2: i is a chain map because d a = 0. H^-1(F) = ker d, which a identifies with A by exactness at A and B. H^0 = ker q / im d = 0 and H^1 = coker q = 0. So i is a quasi-isomorphism and Q(i) is an isomorphism. Step 3: I multiplied out the block-diagonal cone map; the diagonal blocks agree by the chain-map equations and the corner block by delta q' = q gamma. The map is strict, with no homotopy needed. Step 4: in degree -1 the two composites are beta a' and a alpha, equal by hypothesis; all other degrees have zero source. The smallness hypothesis is exactly what def-weil-sheaf-of-modules-category needs for Mod(S) to be abelian. Each step uses only what the statements of the two cited definition nodes say, and each is a genuine few-line calculation, so the elementary flags are justified. The only citer, lem-sp-ell-coefficient-fiber, uses the item with (A,B,C,D) = (B_m,B_n,B_n,B_m) and (beta,gamma,delta) = (red,red,1), alpha = l^(n'-n); its displayed complex [B_n -> B_n -> B_m] with differentials l^m and -red matches the item's sign. Its exact row comes from lem-sp-regular-scalar-quotient-exact-row. Edge cases checked: n = m (a = 1, d = 0); A = B = 0 with q the identity on Z (F acyclic, so the -q sign is not a characteristic-2 artifact); and the row Z -2-> Z -> Z/2 + Z/2 -> Z/2. A search of the DAG for four-term and augmentation-fiber statements found no duplicate. Mathlib's mappingCone.quasiIso_descShortComplex is a different statement."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ExactRowAugmentationFiber",
+  "declaration": "CochainComplex.ExactRowAugmentation.exactRowAugmentationFiber",
+  "declarations": [
+   "CochainComplex.ExactRowAugmentation.singles",
+   "CochainComplex.ExactRowAugmentation.augmentation",
+   "CochainComplex.ExactRowAugmentation.fiber",
+   "CochainComplex.ExactRowAugmentation.toB",
+   "CochainComplex.ExactRowAugmentation.toC",
+   "CochainComplex.ExactRowAugmentation.toD",
+   "CochainComplex.ExactRowAugmentation.twoTermMap",
+   "CochainComplex.ExactRowAugmentation.fiberMap",
+   "CochainComplex.ExactRowAugmentation.exactRowAugmentationFiber"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ExactRowAugmentationFiber.lean",
+  "statement": "theorem exactRowAugmentationFiber [HasDerivedCategory.{w} (OriginalModules.{uC, vC, s, max uC vC r} S)] {A B C D : OriginalModules.{uC, vC, s, max uC vC r} S} (a : A ⟶ B) (d : B ⟶ C) (q : C ⟶ D) (had : a ≫ d = 0) (hdq : d ≫ q = 0) [Mono a] [Epi q] (hexB : (ShortComplex.mk a d had).Exact) (hexC : (ShortComplex.mk d q hdq).Exact) : IsIso (toB d q hdq) ∧ IsIso (toC d q hdq) ∧ IsIso (toD d q hdq) ∧ (∀ n : ℤ, n ≠ -1 → n ≠ 0 → n ≠ 1 → IsZero ((fiber d q hdq).X n)) ∧ (fiber d q hdq).d (-1) 0 ≫ toC d q hdq = toB d q hdq ≫ d ∧ (fiber d q hdq).d 0 1 ≫ toD d q hdq = -(toC d q hdq ≫ q) ∧ ∃ (i : ((singleFunctor (OriginalModules.{uC, vC, s, max uC vC r} S) 0).obj A)⟦(1 : ℤ)⟧ ⟶ fiber d q hdq) (e : DerivedCategory.Q.obj (((singleFunctor (OriginalModules.{uC, vC, s, max uC vC r} S) 0).obj A)⟦(1 : ℤ)⟧) ≅ DerivedCategory.Q.obj (fiber d q hdq)), i.f (-1) ≫ toB d q hdq = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A).hom ≫ a ∧ (∀ n : ℤ, n ≠ -1 → i.f n = 0) ∧ QuasiIso i ∧ e.hom = DerivedCategory.Q.map i ∧ ∀ (A' B' C' D' : OriginalModules.{uC, vC, s, max uC vC r} S) (a' : A' ⟶ B') (d' : B' ⟶ C') (q' : C' ⟶ D') (had' : a' ≫ d' = 0) (hdq' : d' ≫ q' = 0), Mono a' → Epi q' → (ShortComplex.mk a' d' had').Exact → (ShortComplex.mk d' q' hdq').Exact → ∃ (i' : ((singleFunctor (OriginalModules.{uC, vC, s, max uC vC r} S) 0).obj A')⟦(1 : ℤ)⟧ ⟶ fiber d' q' hdq') (e' : DerivedCategory.Q.obj (((singleFunctor (OriginalModules.{uC, vC, s, max uC vC r} S) 0).obj A')⟦(1 : ℤ)⟧) ≅ DerivedCategory.Q.obj (fiber d' q' hdq')), i'.f (-1) ≫ toB d' q' hdq' = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 A').hom ≫ a' ∧ (∀ n : ℤ, n ≠ -1 → i'.f n = 0) ∧ QuasiIso i' ∧ e'.hom = DerivedCategory.Q.map i' ∧ ∀ (α : A' ⟶ A) (β : B' ⟶ B) (γ : C' ⟶ C) (δ : D' ⟶ D) (_hαβ : a' ≫ β = α ≫ a) (hβγ : d' ≫ γ = β ≫ d) (hγδ : q' ≫ δ = γ ≫ q), (fiberMap d q hdq d' q' hdq' β γ δ hβγ hγδ).f (-1) ≫ toB d q hdq = toB d' q' hdq' ≫ β ∧ (fiberMap d q hdq d' q' hdq' β γ δ hβγ hγδ).f 0 ≫ toC d q hdq = toC d' q' hdq' ≫ γ ∧ (fiberMap d q hdq d' q' hdq' β γ δ hβγ hγδ).f 1 ≫ toD d q hdq = toD d' q' hdq' ≫ δ ∧ i' ≫ fiberMap d q hdq d' q' hdq' β γ δ hβγ hγδ = ((singleFunctor (OriginalModules.{uC, vC, s, max uC vC r} S) 0).map α)⟦(1 : ℤ)⟧' ≫ i ∧ e'.hom ≫ DerivedCategory.Q.map (fiberMap d q hdq d' q' hdq' β γ δ hβγ hγδ) = DerivedCategory.Q.map (((singleFunctor (OriginalModules.{uC, vC, s, max uC vC r} S) 0).map α)⟦(1 : ℤ)⟧') ≫ e.hom",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded ringedSiteModules and Mathlib DerivedCategory, single complexes, mapping cones, descShortComplex and strict cone maps. Complete coordinate conditions uniquely specify the comparison maps; their localized images are the homs of the displayed derived isomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65a2fbaf8",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Checked every clause against Mathlib homotopyCofiber.d/fstX/sndX, descShortComplex/map_descShortComplex and the cochain shift sign. P=[B→dC] in degrees -1,0; Cone(ε)=B,C,D in degrees -2,-1,0 with -d,q; after ⟦-1⟧ the differentials are d,-q, matching the IsIso toB/toC/toD, IsZero and differential clauses. i is fixed by coordinate a (toB is iso, other components zero) and is a quasi-isomorphism; e.hom=Q.map i. i' and e' are fixed the same way before the diagram is quantified. Commutation hypotheses match βa'=aα, γd'=dβ, δq'=qγ. fiberMap is a strict block-diagonal cone map with coordinates β,γ,δ; the chain and derived naturality equalities are stated and true. Exactness is Mono a, Epi q and exactness at B and C, no stronger than the node. lean.statement matches the file verbatim. The only stmt_dep added is landed def-pur-cochain-coefficient-universe-transport (OriginalModules abbrev); proof_deps unchanged. Helper defs are real data with source and blueprint docstrings; one sorry. No duplicate in side-live lean or Mathlib. Report has the Worker report and Second reading by Q104 sections. Edge cases: zero row, A=B=0 with q=id, a=id with d=0. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261025T143629-L-1066924",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CochainComplex.ExactRowAugmentation.exactRowAugmentationFiber"
+  ],
+  "sorry_after": []
+ }
+}

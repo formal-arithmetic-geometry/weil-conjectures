@@ -3,42 +3,145 @@
  "blueprint": {
   "is": "det-sp-qbar-finite-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite diagrams of $\\overline{\\mathbf Q}_\\ell$-complexes descend to a finite extension",
- "statement": "Let $T$ be a scheme and $E/\\Ql$ finite, and assume that $\\Dbc(T,\\Qlb)$ is the\n$2$-colimit of the categories $\\Dbc(T,F)$ over finite extensions $F\\supset E$\ninside $\\Qlb$, along the extension-of-scalars functors. Then:\n\n1. for $K,L\\in\\Dbc(T,E)$ and $q\\in\\mathbf Z$,\n   $\\varinjlim_{F\\supset E}\\Hom_{\\Dbc(T,F)}(K_F,L_F[q])\\xrightarrow{\\sim}\\Hom_{\\Dbc(T,\\Qlb)}(K_{\\Qlb},L_{\\Qlb}[q])$;\n2. every finite diagram in $\\Dbc(T,\\Qlb)$ (finitely many objects and\n   morphisms) satisfying finitely many relations (equalities of composites) is\n   isomorphic to the extension of scalars of a diagram over some finite\n   $F\\supset E$ satisfying the same relations;\n3. for $f:X\\to Y$ separated of finite type, the functors $Rf_{!,\\Qlb}$ and\n   $f^*_{\\Qlb}$ commute with extension of scalars from each finite $F$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and an algebraic closure $\\Qlb$ of $\\Ql$. All schemes and morphisms below are in the standing setting [sk-def-sfb-dc-setting]: schemes are separated and of finite type over $k$, and morphisms are $k$-morphisms. Fix a finite intermediate field $E\\subset\\Qlb$; finite coefficient fields and their inclusions are [def-weil-finite-subextension-directed-set]. Let $T$ be a scheme of this setting. For a finite $F\\subset\\Qlb$ or $F=\\Qlb$, write $\\Dbc(T,F)$ for the full bounded constructible condensed-module derived category [sk-def-sfb-bounded-constructible], and $K_F$, $K_{\\Qlb}$ for derived coefficient extension [sk-def-sfb-coefficient-change]. The extension-of-scalars cocone is a filtered $2$-colimit in the ordinary-category sense [sk-def-sfb-filtered-two-colimit], by [sk-thm-sfb-qlbar-two-colimit]. Then:\n\n1. For $K,L\\in\\Dbc(T,E)$ and $q\\in\\mathbf Z$, the canonical map\n$$\\varinjlim_{F\\supset E}\\operatorname{Hom}_{\\Dbc(T,F)}(K_F,L_F[q])\\xrightarrow{\\sim}\\operatorname{Hom}_{\\Dbc(T,\\Qlb)}(K_{\\Qlb},L_{\\Qlb}[q])$$\nis a bijection.\n2. Every finite collection of objects and arrows in $\\Dbc(T,\\Qlb)$ satisfying finitely many specified equalities of composites is isomorphic to the extension of scalars of such a collection over one finite $F\\supset E$, satisfying those same equalities. Here the isomorphism consists of object isomorphisms intertwining all the specified arrows; no assertion about infinitely many independent relations is made.\n3. For every separated finite-type $f:X\\to Y$ in the setting, every finite $F\\subset\\Qlb$, $K\\in\\Dbc(X,F)$ and $M\\in\\Dbc(Y,F)$, there are natural isomorphisms\n$$(Rf_{!,F}K)_{\\Qlb}\\simeq Rf_{!,\\Qlb}(K_{\\Qlb}),\\qquad (f_F^*M)_{\\Qlb}\\simeq f_{\\Qlb}^*(M_{\\Qlb}).$$\nHere $Rf_!=R\\bar f_*j_!$ for a compactification $f=\\bar f\\circ j$ in the standing setting.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar-descent.md",
   "place": "node det-sp-qbar-finite-descent, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-finite-subextension-directed-set",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-filtered-two-colimit",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "sk-def-sfb-dc-lower-shriek",
+  "def-sfb-dc-upper-star"
+ ],
  "proof": [
   {
-   "text": "(1) In a filtered $2$-colimit of categories, Hom sets between images of objects\nfrom one stage are the filtered colimits of the Hom sets at later stages; apply\nthis to $K$ and $L[q]$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply finiteCoefficientDescentTwoColimit at p = ringChar k. Its rational predicate equality turns each bounded constructible input K,L into a constant-model bounded constructible input without changing its underlying object. The theorem Hom clause gives exactly the required representative and eventual equality assertions, for every integer shift.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar-descent.proof.md",
+    "place": "Proof, (1)-(3)"
+   }
   },
   {
-   "text": "(2) Each object of the $2$-colimit comes from some stage, and by (1) each\nmorphism between objects coming from a stage $F$ comes from a later stage. With\nfinitely many objects and morphisms, a common finite $F$ suffices (the system\nof finite extensions inside $\\Qlb$ is filtered). Each relation is an equality\nof two morphisms after extension to $\\Qlb$, hence by (1) holds already after\nextension to some finite $F'$; finitely many relations hold over a common\n$F''$.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the filtered two-colimit cocone from the same theorem. Choose a model of every vertex, take an upper bound for their finitely many fields and the prescribed field E, and transport the vertex isomorphisms by the cocone transitivity isomorphisms. Induct over the finite set of generating arrows. Hom surjectivity lifts the next conjugated arrow over a later field; extend every previous arrow along that transition and transport its commutative square by naturality of the cocone isomorphism. The path-category universal construction assembles these arrows into a functor, and induction on paths proves naturality of the vertex isomorphisms. For every specified relation, naturality and its equality in the vertex category imply equality after scalar extension. Faithfulness of derived scalar extension to the closure then implies the relation already over the resulting field. Empty vertices or arrows are covered by the empty finite family and the empty induction. This follows the finite object/arrow/relation descent in the blueprint, using the stronger existing faithfulness interface to avoid further enlargement for relations.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit",
+    "sk-def-sfb-filtered-two-colimit",
+    "def-weil-finite-subextension-directed-set",
+    "def-sfb-constructible-extend-comp-iso",
+    "lem-weil-pbc-condensed-coefficient-derived-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar-descent.proof.md",
+    "place": "Proof, (1)-(3)"
+   }
   },
   {
-   "text": "(3) Extension of scalars from $F$ to $\\Qlb$ commutes with pullback (pullback\nof module sheaves commutes with tensor products with the constant coefficient\nsheaf) and with $j_!$ (exact), and with $R\\bar f_*$ for proper $\\bar f$ on bounded\nconstructible objects (the coefficient comparisons of the six operations,\nproved on integral models by the finite-level projection formula and passage to\nthe limit, then inverting $\\ell$ and passing to the colimit). Hence $Rf_{!,\\Qlb}$\nand $f^*_{\\Qlb}$ commute with extension of scalars.",
-   "uses": [],
-   "elementary": null
+   "text": "For pullback, restrict the published derivedPullIso for the actual finite-subfield inclusion to the full bounded constructible categories; its ambient naturality is the required naturality. For compact support use the very chosen compactification defining boundedConstructibleLowerShriek. Open extension preserves bounded constructibility, hence its input to proper pushforward is bounded below. Apply isIso_derivedPushHom_padicAlgCl_of_boundedBelow to this input and the proper part. Compose the direct-image component isomorphism with the proper pushforward of derivedOpenImmersionShriekIso. Naturality follows by composing the naturality squares of these two transformations. The compatibility isomorphisms of the restricted functors identify both composites with their ambient versions, and full faithfulness of the inclusion restricts this natural isomorphism back to bounded constructible categories. This is precisely the proper/open comparison of blueprint (3), specialized directly to the closure inclusion without the general scalar-six coherence package.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "sk-def-sfb-dc-lower-shriek",
+    "def-sfb-dc-open-lower-shriek",
+    "def-sfb-dc-upper-star",
+    "def-sfb-derived-pull-iso",
+    "def-sfb-derived-open-immersion-shriek-iso",
+    "lem-sfb-qlbar-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar-descent.proof.md",
+    "place": "Proof, (1)-(3)"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-thm-sfb-qlbar-two-colimit",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-filtered-two-colimit",
+  "def-weil-finite-subextension-directed-set",
+  "def-sfb-constructible-extend-comp-iso",
+  "lem-weil-pbc-condensed-coefficient-derived-faithful",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-dc-lower-shriek",
+  "def-sfb-dc-open-lower-shriek",
+  "def-sfb-dc-upper-star",
+  "def-sfb-derived-pull-iso",
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "lem-sfb-qlbar-direct-image-comparison"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar-descent.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar-descent.proof.md",
+  "place": "Proof, (1)-(3)",
+  "note": "A3: direct Lean assembly from the existing two-colimit, faithful closure extension, and finite-to-closure derived comparisons; unit route unchanged."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite diagrams in constructible l-adic derived categories descend to a finite extension of the coefficient field",
+   "results": "CategoryTheory.Limits.hasLimitsOfShape_of_hasFiniteLimits; finiteExts; CategoryTheory.IsGrothendieckAbelian.hasExt; FiniteField.instFiniteExtension_1; CategoryTheory.hasExt_of_hasDerivedCategory; FiniteField.instFiniteExtension; CategoryTheory.Functor.toEventualRanges_finite; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-24",
+   "verdict": "no match: no constructible coefficient-field finite-diagram descent theorem; set-colimit equality is an existing dependency, not the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams and morphisms in bounded constructible l-adic derived categories over the algebraic closure descend to a finite coefficient field",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; localCohomology.diagram; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range; Condensed.profiniteSolid; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-24",
+   "verdict": "no match: no constructible coefficient-field finite-diagram descent theorem; set-colimit equality is an existing dependency, not the item"
+  },
+  {
+   "tool": "grep",
+   "query": "TwoColimit|two.colimit|constructible.*adic",
+   "results": "Mathlib/CategoryTheory/Monoidal/Limits/Cokernels.lean; Mathlib/CategoryTheory/Limits/MonoCoprod.lean; Mathlib/CategoryTheory/Limits/IsLimit.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: no constructible coefficient-field finite-diagram descent theorem; set-colimit equality is an existing dependency, not the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FilteredColimit",
+   "results": "loogle: unknown identifier 'CategoryTheory.FilteredColimit'",
+   "date": "2026-10-24",
+   "verdict": "no match: no constructible coefficient-field finite-diagram descent theorem; set-colimit equality is an existing dependency, not the item"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredColimit.*(Hom|hom)|colimit.*[Hh]om.*[Cc]at|[Hh]om.*2.colim",
+   "results": "Mathlib/CategoryTheory/Preadditive/Basic.lean; Mathlib/CategoryTheory/Preadditive/Basic.lean; Mathlib/CategoryTheory/Presentable/Type.lean; Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean; Mathlib/CategoryTheory/Generator/Indization.lean; Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean; Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: no constructible coefficient-field finite-diagram descent theorem; set-colimit equality is an existing dependency, not the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff",
+   "results": "CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: no constructible coefficient-field finite-diagram descent theorem; set-colimit equality is an existing dependency, not the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a filtered two-colimit of categories every finite list of objects arrows and equations descends to one stage and morphisms are filtered colimits of hom sets",
+   "results": "CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag; CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom; CategoryTheory.Limits.ColimitPresentation.instNonemptyTotalOfIsFiltered; CategoryTheory.IsFiltered.sup; CategoryTheory.IsFiltered.sup_exists; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI; CategoryTheory.instIsFilteredI",
+   "date": "2026-10-24",
+   "verdict": "no match: no constructible coefficient-field finite-diagram descent theorem; set-colimit equality is an existing dependency, not the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -50,5 +153,105 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-sp-qbar",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $T$ be a scheme and $E/\\Ql$ finite. By [sk-thm-sfb-qlbar-two-colimit] the\ncondensed category $\\Dbc(T,\\Qlb)$ is the $2$-colimit of the categories\n$\\Dbc(T,F)$ over finite extensions $F\\supset E$ inside $\\Qlb$, along the\nextension-of-scalars functors; this is a theorem, not a definition. Then:\n\n1. for $K,L\\in\\Dbc(T,E)$ and $q\\in\\mathbf Z$,\n   $\\varinjlim_{F\\supset E}\\Hom_{\\Dbc(T,F)}(K_F,L_F[q])\\xrightarrow{\\sim}\\Hom_{\\Dbc(T,\\Qlb)}(K_{\\Qlb},L_{\\Qlb}[q])$;\n2. every finite diagram in $\\Dbc(T,\\Qlb)$ (finitely many objects and\n   morphisms) satisfying finitely many relations (equalities of composites) is\n   isomorphic to the extension of scalars of a diagram over some finite\n   $F\\supset E$ satisfying the same relations;\n3. for $f:X\\to Y$ separated of finite type, the functors $Rf_{!,\\Qlb}$ and\n   $f^*_{\\Qlb}$ commute with extension of scalars from each finite $F$.",
+  "proof": [
+   {
+    "text": "(1) In a filtered $2$-colimit of categories, Hom sets between images of objects\nfrom one stage are the filtered colimits of the Hom sets at later stages; apply\nthis to $K$ and $L[q]$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(2) Each object of the $2$-colimit comes from some stage, and by (1) each\nmorphism between objects coming from a stage $F$ comes from a later stage. With\nfinitely many objects and morphisms, a common finite $F$ suffices (the system\nof finite extensions inside $\\Qlb$ is filtered). Each relation is an equality\nof two morphisms after extension to $\\Qlb$, hence by (1) holds already after\nextension to some finite $F'$; finitely many relations hold over a common\n$F''$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(3) Extension of scalars from $F$ to $\\Qlb$ commutes with pullback (pullback\nof module sheaves commutes with tensor products with the constant coefficient\nsheaf) and with $j_!$ (exact), and with $R\\bar f_*$ for proper $\\bar f$ on bounded\nconstructible objects (the coefficient comparison for $E\\to\\Qlb$ of\n[sk-prop-scalar-six]). Hence $Rf_{!,\\Qlb}$\nand $f^*_{\\Qlb}$ commute with extension of scalars.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "det-sp-qbar-finite-descent",
+  "worker": "stage1",
+  "summary": "NW: adopted the latest blueprint theorem route; repaired its missing standing-scheme hypothesis; proved finite object, arrow and relation descent with existing interfaces; no new nodes. Coefficients remain actual condensed-module categories.",
+  "blueprint": "Current det-sp-qbar-finite-descent proof (1) is step 1; (2) is steps 2-4; (3) is step 5. This realizes the finite-descent portion of unit sk-thm-sp-qbar step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "why": "Generic filtered-set representative and eventual-equality criterion needed for the finite relation argument; the unit has no separate set-colimit interface."
+   },
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Generic coefficient comparison for inverse image, explicitly invoked by the latest blueprint scalar-six route."
+   },
+   {
+    "node": "det-prop-scalar-six-compact-support",
+    "why": "Generic compact-support coefficient comparison, explicitly invoked by the latest blueprint scalar-six route."
+   },
+   {
+    "node": "det-prop-scalar-six-direct-image",
+    "why": "Naturality in K of the proper direct-image coefficient comparison gamma (clause 2), needed for the naturality asserted in (3); same sk-prop-scalar-six route the latest blueprint invokes."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NW-cb3efe66f",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-cb3efe66f (reviewer sub-agent of L); spot-checked: I read the item in full, with the base version, the main-20261015 and latest (main-20261024) blueprint descent statement and proof, unit sk-thm-sp-qbar, and every cited statement: sk-thm-sfb-qlbar-two-colimit (1)-(4), sk-def-sfb-filtered-two-colimit, sk-def-sfb-dc-setting, def-weil-finite-subextension-directed-set, sk-def-sfb-bounded-constructible, sk-def-sfb-coefficient-change, the constructible-extend nodes (comp-iso, subfield, to-qlbar), lem-weil-pbc-filtered-colimit-sets-elementwise, and det-prop-scalar-six-pullback, -compact-support and -direct-image. The delivery has no new nodes. I accept the scope repair: the item is restricted to standing schemes because the cited theorem only holds for them, the counterexample on a countable disjoint union is sound, and all three citers use the item in the standing setting only. I checked steps 1-5, including colimit transitions, conjugation cancellation, eventual equality at the same stage, edge cases (empty diagram, no relations, empty words, any shift q, F not containing E) and that F to Qbar is a listed map. Three faults are repaired in fixes/dag/nodes/sec-smooth-purity/det-sp-qbar-finite-descent.json: (1) B2: T was never introduced in the statement; (2) steps 3-4 applied the item's own assertion (1), which is stated for the fixed E, at base F0; they now cite clause (2) of the two-colimit theorem directly; (3) C4: clause (3) claims natural isomorphisms, but det-prop-scalar-six-compact-support does not state naturality in K; step 5 now derives it from det-prop-scalar-six-direct-image (2) and det-prop-scalar-six-pullback (2), with direct-image added to uses, proof_deps and the declared tool_uses. Batch 5: adding the item's edges adds 0 nodes to the target closure, and all four flagged nodes were already in the base closure. The flagged paths end in generic results: the Mathlib leaf lem-trf-fully-faithful-ess-surj-equivalence (asEquivalence) and the abstract derived-compositor coherence lem-pod-derived-exact-square-composition. Neither is a step of the trace formula or of Poincare duality, so all four citations are accepted. The graph stays acyclic, no duplicate of the item exists, the tool uses (elementwise leaf and the scalar-six nodes) are accepted, and no SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QbarFiniteDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.qbarFiniteDescent",
+  "file": "lean/Sheaf/Paper/QbarFiniteDescent.lean",
+  "statement": "theorem qbarFiniteDescent (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (T : Scheme.{u}) [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))] (E : PadicAlgCl.FiniteIntermediateField ℓ) : ((∀ (K L : PadicSubfieldConstructible T ℓ E) (q : ℤ), (∀ ψ : (derivedExtendScalarsToPadicAlgCl T ℓ E).obj K.obj ⟶ (derivedExtendScalarsToPadicAlgCl T ℓ E).obj (L.obj⟦q⟧), ∃ (F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (a : (derivedExtendScalarsSubfield T ℓ h).obj K.obj ⟶ (derivedExtendScalarsSubfield T ℓ h).obj (L.obj⟦q⟧)), finiteDescentDerivedHomToAlgCl T ℓ h a = ψ) ∧ (∀ (F G : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (h' : E ≤ G) (a : (derivedExtendScalarsSubfield T ℓ h).obj K.obj ⟶ (derivedExtendScalarsSubfield T ℓ h).obj (L.obj⟦q⟧)) (b : (derivedExtendScalarsSubfield T ℓ h').obj K.obj ⟶ (derivedExtendScalarsSubfield T ℓ h').obj (L.obj⟦q⟧)), finiteDescentDerivedHomToAlgCl T ℓ h a = finiteDescentDerivedHomToAlgCl T ℓ h' b → ∃ (H : PadicAlgCl.FiniteIntermediateField ℓ) (s : F ≤ H) (t : G ≤ H), finiteDescentDerivedHomTransition T ℓ h s a = finiteDescentDerivedHomTransition T ℓ h' t b)) ∧ (∀ (V : Type v) [Quiver.{w} V] [Finite V] [∀ x y : V, Finite (x ⟶ y)] (A : Paths V ⥤ PadicAlgClConstructible T ℓ) (n : ℕ) (s t : Fin n → Paths V) (r r' : ∀ i, s i ⟶ t i), (∀ i, A.map (r i) = A.map (r' i)) → ∃ (F : PadicAlgCl.FiniteIntermediateField ℓ), E ≤ F ∧ ∃ B : Paths V ⥤ PadicSubfieldConstructible T ℓ F, Nonempty (B ⋙ constructibleToPadicAlgCl T ℓ F ≅ A) ∧ ∀ i, B.map (r i) = B.map (r' i))) ∧ (∀ (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (F : PadicAlgCl.FiniteIntermediateField ℓ), Nonempty (CondensedRing.boundedConstructibleLowerShriek (Profinite.continuousMapRingObj F) ℓ f ⋙ constructibleToPadicAlgCl Y.left ℓ F ≅ constructibleToPadicAlgCl X.left ℓ F ⋙ CondensedRing.boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f) ∧ Nonempty (CondensedRing.boundedConstructibleUpperStar (Profinite.continuousMapRingObj F) ℓ f ⋙ constructibleToPadicAlgCl X.left ℓ F ≅ constructibleToPadicAlgCl Y.left ℓ F ⋙ CondensedRing.boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f))",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8979dad40",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 (c3994927). The Lean file is byte-identical, and the earlier full clause-by-clause read (hypotheses, clauses 1-3, edge cases, universes) is re-confirmed. The only node change is that stmt_deps adds sk-def-sfb-dc-lower-shriek (owns boundedConstructibleLowerShriek) and def-sfb-dc-upper-star (owns boundedConstructibleUpperStar). Both are landed, existing:true and on the base, and their statements match the clause (3) functors. Declarations checked in side-live. Report sections present. No definitions; proof is sorry only. No changes, so no compile. Advisory: unused future-proof imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T204347-L-2945768",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

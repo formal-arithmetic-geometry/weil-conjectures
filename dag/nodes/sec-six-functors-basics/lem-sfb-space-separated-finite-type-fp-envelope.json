@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-space-separated-finite-type-fp-envelope",
+ "kind": "statement",
+ "title": "Separated finite-type spaces have separated finite-presentation closed envelopes",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme, and quasi-separated if its diagonal is quasi-compact; a morphism is quasi-compact when its pullback by any affine scheme has quasi-compact source. A morphism is quasi-separated when its diagonal is quasi-compact. A closed immersion is representable and is a closed immersion on every scheme test [def-weil-closed-immersion]; separated means that the diagonal is a closed immersion. Local finite type and local finite presentation are tested on etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite type means quasi-compact and locally of finite type. Finite presentation means quasi-compact, quasi-separated and locally of finite presentation. Let $Y$ be a quasi-compact quasi-separated algebraic space and let $f:X\\to Y$ be separated and of finite type. There exist an algebraic space $Z$, a closed immersion $i:X\\hookrightarrow Z$, and a separated morphism of finite presentation $g:Z\\to Y$ such that $g\\circ i=f$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0873 (proposition-separated-closed-in-finite-presentation)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-quasi-compact-presheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type hypothesis makes $f$ quasi-compact for affine tests and locally of finite type. First compare conventions. Let $a:A\\to B$ be quasi-compact for affine tests and let $C\\to B$ be a map from a quasi-compact space. By [lem-sfb-space-quasicompact-affine-tests], $a$ is quasi-compact for quasi-compact scheme tests. Choose a quasi-compact scheme $U$ with a surjective etale $U\\to C$; then $A_U=A\\times_BU$ is quasi-compact, so choose a quasi-compact scheme $T$ with a surjective etale $T\\to A_U$. By [lem-trf-space-fibre-products-etale-covers], $A_U=(A\\times_BC)\\times_CU\\to A\\times_BC$ is surjective etale, and for every scheme $V\\to A\\times_BC$ the base changes $V_U=V\\times_{A\\times_BC}A_U$ and $V_U\\times_{A_U}T\\cong V\\times_{A\\times_BC}T$ are schemes, surjective etale over $V$ and over $V_U$ respectively. Their composite is surjective etale by [lem-weil-pbc-etale-covering-composition]. So $T\\to A\\times_BC$ is a representable surjective etale map from a quasi-compact scheme, and $A\\times_BC$ is quasi-compact. Conversely an affine scheme is a quasi-compact space through its identity atlas [lem-weil-pbc-affine-scheme-qcqs]. Hence the affine-test convention of the statement agrees with the quasi-compact-space-test convention of the nodes cited below. With $C=Y$ and the identity, $X=X\\times_YY$ is quasi-compact. The diagonal of $f$ is a closed immersion by separatedness; [lem-sfb-space-closed-subspace-proper] makes it proper, hence quasi-compact, so $f$ is quasi-separated. Apply [lem-sfb-space-qcqs-source-products] to $f$ and the quasi-separated space $Y$ (its absolute diagonal is the diagonal of $Y\\to\\operatorname{Spec}\\mathbf Z$) to conclude that $X$ is quasi-separated.",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-covering-composition",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-qcqs-source-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0873 (proposition-separated-closed-in-finite-presentation)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-finite-type-fp-envelope] to the locally finite-type map $f$ between the now verified qcqs spaces $X,Y$. Obtain $j:X\\hookrightarrow W$ and $h:W\\to Y$ with $h$ finitely presented and $hj=f$. By [lem-sfb-space-fp-qcqs-source], $W$ is qcqs. This stage need not be separated over $Y$.",
+   "uses": [
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-fp-qcqs-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0873 (proposition-separated-closed-in-finite-presentation)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-closed-subspace-fp-approximation] to $j$. It gives a small nonempty directed system $W_a\\hookrightarrow W$ of finitely presented closed subspaces, closed immersion transitions, and closed immersions $q_a:X\\hookrightarrow W_a$, with limit $X$ over $W$. It is also the limit over $Y$: a compatible cone has a common composite to $W$ (directedness gives a common later index for any two indices), so its unique factorization over $W$ is its unique factorization over $Y$. Each transition is affine: after an affine scheme test, the closed-immersion characterization [def-weil-closed-immersion] identifies its source with $\\operatorname{Spec}(R/J)$. Each $W_a$ is qcqs by [lem-sfb-space-fp-qcqs-source], applied over $W$. The composite $g_a:W_a\\to W\\to Y$ is finitely presented by [lem-sfb-space-separated-fp-composition]. The compatibility in the approximation gives $g_aq_a=f$.",
+   "uses": [
+    "lem-sfb-space-closed-subspace-fp-approximation",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0873 (proposition-separated-closed-in-finite-presentation)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-fixed-base-eventually-separated] to $(W_a\\to Y)$: the base is quasi-separated, all stages are qcqs, transitions are affine, and its limit map is the given separated $f$. Choose an index $a$ in the resulting tail. Set $Z=W_a$, $i=q_a$, and $g=g_a$. The preceding step supplies the closed immersion, finite presentation and equality $gi=f$, while the chosen tail supplies separatedness of $g$.",
+   "uses": [
+    "lem-sfb-space-fixed-base-eventually-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0873 (proposition-separated-closed-in-finite-presentation)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-finite-type-fp-envelope",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-closed-subspace-fp-approximation",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-fixed-base-eventually-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0873 (proposition-separated-closed-in-finite-presentation)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type morphism of algebraic spaces to a quasi compact quasi separated base factors as a closed immersion into a separated finitely presented algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsClosedImmersion\\n  @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a closed immersion and a separated morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsOpenImmersion g₁ ∧\\n        AlgebraicGeometry.IsClosedImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsClosedImmersion (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If the composition $ f \\\\circ g $ is a closed immersion and $ g $ is a separated morphism of schemes, then $ f $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y S T : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) (i : S ⟶ T) [AlgebraicGeometry.IsSeparated i],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.mapDesc f g i)\", \"doc\": \"If $ i: S \\to T $ is a separated morphism of schemes, then the morphism between the pullbacks induced by $ i $ is a closed immersion. Specifically, given morphisms $ f: X \\to S $ and $ g: Y \\to S $, the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, rings or categorical closedness, not this assertion for algebraic spaces; the scheme-only types of IsProper, IsClosedImmersion and LocallyOfFinitePresentation were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embed a separated algebraic space of finite type as a closed subspace of a finitely presented separated space over the same base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any immersion of schemes is a morphism that is locally of finite type. Specifically, for a morphism $ f: X \\to Y $ between schemes that is an immersion, every point in $ Y $ has an open neighborhood su\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, rings or categorical closedness, not this assertion for algebraic spaces; the scheme-only types of IsProper, IsClosedImmersion and LocallyOfFinitePresentation were read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"LocallyOfFinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, rings or categorical closedness, not this assertion for algebraic spaces; the scheme-only types of IsProper, IsClosedImmersion and LocallyOfFinitePresentation were read"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|separated.*finite.*presentation|closed.*finite.*presentation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, rings or categorical closedness, not this assertion for algebraic spaces; the scheme-only types of IsProper, IsClosedImmersion and LocallyOfFinitePresentation were read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type separated algebraic spaces admit finitely presented separated closed envelopes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [IsFinite (f ≫ g)] [IsSeparated g] : IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[UniversallyClosed (f ≫ g)] [IsSeparated g] : UniversallyClosed f\", \"doc\": \"If the composition of morphisms $ f $ and $ g $ is universally closed and $ g $ is a separated morphism of schemes, then $ f $ is universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"[Finite n] : LocallyOfFinitePresentation (𝔸(n; S) ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, rings or categorical closedness, not this assertion for algebraic spaces; the scheme-only types of IsProper, IsClosedImmersion and LocallyOfFinitePresentation were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type morphism of algebraic spaces over a quasi compact quasi separated base has a closed immersion into a separated finitely presented space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsClosedImmersion\\n  @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a closed immersion and a separated morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.lift (CategoryTheory.CategoryStruct.id X) f ⋯)\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y S T : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) (i : S ⟶ T) [AlgebraicGeometry.IsSeparated i],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.mapDesc f g i)\", \"doc\": \"If $ i: S \\to T $ is a separated morphism of schemes, then the morphism between the pullbacks induced by $ i $ is a closed immersion. Specifically, given morphisms $ f: X \\to S $ and $ g: Y \\to S $, the \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximation of a separated algebraic space of finite type by a separated finite presentation closed envelope",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmooth R S],\\n  ∃ ι σ, ∃ (x : Finite σ), Finite ι ∧ Nonempty (Algebra.SubmersivePresentation R S ι σ)\", \"doc\": \"If $ S $ is a standard smooth algebra over a commutative ring $ R $, then there exist finite sets $ \\\\iota $ and $ \\\\sigma $ such that $ S $ admits a submersive presentation: $ S $ is isomorphic to a qu\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"LocallyOfFinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|separated.*finite.*presentation|closed.*finite.*presentation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated finite type algebraic spaces embed into separated finitely presented algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [IsFinite (f ≫ g)] [IsSeparated g] : IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_of_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(hf : Function.Injective f) : IsSeparated f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is injective, then it is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"IsQuasiSeparated.image_of_isEmbedding\", \"module\": \"Mathlib.Topology.QuasiSeparated\", \"type\": \"{s : Set α} (H : IsQuasiSeparated s) (h : IsEmbedding f) : IsQuasiSeparated (f '' s)\", \"doc\": \"If $ s $ is a quasi-separated set in a topological space and $ f : X \\\\to Y $ is an embedding, then the image $ f(s) $ in $ Y $ is also quasi-separated. A set is quasi-separated if the intersection of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are for schemes, ring maps, or separated presheaves, not this theorem for algebraic spaces; scheme-only types were read in Morphisms/ClosedImmersion.lean:45, Separated.lean:40-46, FinitePresentation.lean:40-45"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-fixed-base-fp-limit",
+  "date": "2026-10-23",
+  "group": "Q119"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope",
+   "via": [
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-separated-finite-type-fp-envelope",
+  "worker": "stage1",
+  "summary": "Split Tag 0873 via its unseparated finite-presentation envelope (0872), existing closed-subspace approximation (0A0U), and fixed-base eventual separatedness (086X). Checked qcqs sources and affine transitions explicitly; reused four existing space lemmas and did not substitute scheme-only approximation declarations. Corrected two harmless ambient-space typos in the source exposition, not the item statement.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), supporting proper direct-image route; inherited alteration/curve-moduli dependency chain reaches 0A0W, whose first sentence invokes precisely 0873. Current blueprint no longer spells out that subsidiary chain; the fixed unit/chapter route is not replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-2d7d4b49f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-2d7d4b49f (reviewer sub-agent of L); spot-checked: Read the full source: Stacks spaces-limits 0873 (l.2874-2908), 0872 (l.2819), 086X (l.1324) and 0A0U (l.2767). The item statement is unchanged and matches 0873. The new node lem-sfb-space-finite-type-fp-envelope is exactly 0872: lft, X and Y qcqs, no separation claimed. The new node lem-sfb-space-fixed-base-eventually-separated is exactly 086X: Y qs, nonempty directed I, qcqs stages, affine transitions, no qc or fp on Y. Both are statement-only, smaller than the item and comparable in size. Neither duplicates an existing node: the Nagata 086X/0872 analogues are scheme-only and 0851 is a different situation. Steps 2-4 check against the cited statements: 06G5, 0A0U including the limit-over-W-equals-limit-over-Y cone argument, affine closed transitions, 03XQ composition and 086X. One fault, C4/E6: step 1 took 'X qc' from the qc-space-test convention of lem-sfb-space-quasicompact-fppf-local, while the item uses affine tests, and never compared the two. FIX: step 1 now proves the comparison via lem-sfb-space-quasicompact-affine-tests, lem-trf-space-fibre-products-etale-covers, the Mathlib leaf lem-weil-pbc-etale-covering-composition and lem-weil-pbc-affine-scheme-qcqs. fppf-local is no longer cited and proof_deps are recomputed. Batch 5: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are generic foundations, already in the item's base stmt_deps. The other listed cites reach trace-formula nodes only through these two and are general space calculus. All accepted. No SGA. No tool_uses needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSeparatedFiniteTypeFPEnvelope",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_separated_finitePresentation_closed_envelope",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSeparatedFiniteTypeFPEnvelope.lean",
+  "statement": "theorem exists_separated_finitePresentation_closed_envelope {X Y : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))} (f : X ⟶ Y) (hYqc : ∃ (U : Over (Spec (.of (ULift.{u} ℤ)))) (a : yoneda.obj U ⟶ Y.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hYqs : IsQuasiCompactPresheafMap (prod.lift (𝟙 Y.obj.obj) (𝟙 Y.obj.obj))) (hsep : MapIsSeparated f) (hqc : IsQuasiCompactPresheafMap f.hom.hom) (hlft : MapIsLocally (@LocallyOfFiniteType) f) : ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : X ⟶ Z) (g : Z ⟶ Y), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsSeparated g ∧ IsQuasiCompactPresheafMap g.hom.hom ∧ IsQuasiCompactPresheafMap (pullback.diagonal g.hom.hom) ∧ MapIsLocallyOfFinitePresentation g ∧ i ≫ g = f",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing algebraic-space chart predicates from def-sfb-space-morphism-properties and the atlas-based affine-test quasi-compactness predicate owned by the landed definition node def-sfb-space-quasi-compact-presheaf-map (existing:true on Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal/IsQuasiCompactPresheafMap). The etale-local theorem is not a statement dependency. The absolute base Spec Z is represented in universe u by Spec (ULift.{u} ℤ). No correction to the accepted statement or proof split."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29cc3853c",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery of 9eb6 RETURN (H2): stmt_deps now cite landed definition node def-sfb-space-quasi-compact-presheaf-map (Q97, existing:true on SpaceQCSeparatedEtaleLocal/IsQuasiCompactPresheafMap, review passed) instead of theorem lem-trf-space-qc-separated-etale-local; Lean byte-identical to 9eb6; node otherwise equals live. Re-checked Tag 0873 clause by clause: Y qc (atlas), Y qs (absolute diagonal via presheaf prod over Spec Z), f MapIsSeparated + affine-test qc + chart lft; ∃ Z i g with i closed-immersion-representable, g separated, qc, qs, lfp, i ≫ g = f. No extra hypotheses, single universe u, edge cases covered, statement verbatim, one sorry, docstrings with source/blueprint/proof steps, no hollow defs. Not compiled (no files changed)."
+ }
+}

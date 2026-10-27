@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-semisimple-centralizer-maximal-tori",
+ "kind": "statement",
+ "title": "Maximal tori of a semisimple Lie centralizer are ambient maximal tori",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and geometric connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $G$ be smooth and geometrically connected. A torus is a group becoming $\\mathbf G_m^r$ over an algebraic closure $\\bar k$ [def-weil-algebraic-closure], where $r\\geq0$ and $\\mathbf G_m(R)=R^\\times$ [def-sfb-tori-multiplicative-type, def-sc-gm-ga]. A maximal torus is maximal among closed torus subgroups [def-sfb-reductive-torus-centralizer-terminology]. For a smooth group $J$ put $\\mathfrak j=\\operatorname{Lie}(J)=T_{J/k,e}$ [def-sc-scheme-tangent-space], with its commutator Lie bracket [def-wf-lie-algebra]. Fix a faithful closed linear representation $i:G\\hookrightarrow\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group, def-weil-closed-immersion]. Call $X\\in\\mathfrak g$ semisimple if $di(X)$ is diagonalizable over $\\bar k$, and noncentral if $[X,Y]\\ne0$ for some $Y\\in\\mathfrak g$. Let $X\\in\\mathfrak g$ be semisimple. Write $K=C_G(X)^\\circ$ for the identity component of the adjoint stabilizer $C_G(X)(R)=\\{g\\in G(R):\\operatorname{Ad}(g)(X\\otimes1)=X\\otimes1\\}$, where $\\operatorname{Ad}$ is the differential of conjugation. Then every maximal $k$-torus of $K$ is a maximal $k$-torus of $G$. This includes central $X$ and $X=0$, and assumes neither reductivity nor perfectness.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.90 and its proof, printed p.381, restricted to the identity component of the adjoint stabilizer; maximal tori lie in that component. The case X=0 is immediate."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-sfb-lie-centralizer",
+  "def-wf-algebraic-components"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=C_G(X)$. By [lem-sfb-semisimple-tangent-stabilizer], $H$ is smooth and closed and $\\operatorname{Lie}(H)=\\{Y:[Y,X]=0\\}$, so $X\\in\\operatorname{Lie}(H)$. By [lem-sfb-finite-type-group-identity-subgroup], $K=H^\\circ$ is an open and closed connected subgroup; it is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. The dual-number point of $X$ has its only underlying point at the identity, hence factors through this open $K$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]. Thus $X\\in\\operatorname{Lie}(K)$. Fix a maximal $k$-torus $T\\subseteq K$ and put $F=\\bar k$. The group $K_F$ is smooth by [lem-pc-proper-base-change] (2), and connected by [lem-sbc-connected-rational-point-geometrically-connected], applied to $K$ with its identity section. By [lem-sfb-maximal-torus-field-extension], $T_F$ is maximal in $K_F$. The natural scalar-extension tangent isomorphisms in [lem-sfb-affine-group-lie-tangent-calculus] give $X_F\\in\\operatorname{Lie}(K_F)$; the base-changed faithful matrix of $X_F$ is diagonalizable by hypothesis. Every $T_F$-point fixes $X_F$, since $T\\subseteq H$ as subgroup schemes.",
+   "uses": [
+    "lem-sfb-semisimple-tangent-stabilizer",
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-pc-proper-base-change",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.90, printed p.381, first sentence; Proposition 17.76, p.377; Proposition 1.34, pp.16–17; Theorem 17.82, p.379. Scalar extension is used only to obtain the Cartan product over the perfect field F."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-neutral-torus-centralizer-cartan-structure] to the smooth connected $F$-group $K_F$ and its maximal torus $T_F$. Write $D=C_{K_F}(T_F)$ and $C=D^\\circ$. This provides smooth connected $C$ and a smooth connected unipotent subgroup $U$ with multiplication $U\\times_F T_F\\simeq C$ an isomorphism of group schemes. We verify $X_F\\in\\operatorname{Lie}(C)$ using whole-torus invariance, not just Lie-algebra invariance. In the notation of [lem-sfb-affine-group-dual-number-calculus], for every $F$-algebra $R$ and $t\\in T_F(R)$ one has\n$$tE_{K_F,R}(X_F\\otimes1)t^{-1}=E_{K_F,R}(\\operatorname{Ad}(t)(X_F\\otimes1))=E_{K_F,R}(X_F\\otimes1).$$\nFor an $F[\\epsilon]/\\epsilon^2$-algebra $R$, specialize the displayed equality along $R[\\delta]/\\delta^2\\to R$, $\\delta\\mapsto\\epsilon_R$. Naturality shows that the image of $E_{K_F,F}(X_F)$ commutes with every $t\\in T_F(R)$. This is exactly membership in $D(F[\\epsilon]/\\epsilon^2)$. Its underlying point is the identity, so it factors through the open $C$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]. Consequently $X_F\\in\\operatorname{Lie}(C)$.",
+   "uses": [
+    "lem-sfb-neutral-torus-centralizer-cartan-structure",
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.90, printed p.381, Cartan subgroup and its tangent vector; Proposition 17.28, p.360; Theorem 16.47 and Corollary 16.48, p.341. The dual-number calculation spells out the fixed-vector assertion."
+   }
+  },
+  {
+   "text": "Let $p:C\\to U$ be the projection from the product in step 2. By [lem-sfb-geometric-unipotence-unitriangular-embedding], choose a closed immersion $j:U\\hookrightarrow\\mathcal U_m\\subseteq\\operatorname{GL}_{m,F}$ into upper unitriangular matrices. Its hypotheses hold: $U$ is smooth and its unipotence is precisely geometric unipotence in a faithful representation, as supplied by the Cartan structure node. The restricted embedding $i_F|_C$ is faithful and closed, and its differential at $X_F$ is the given diagonalizable matrix. Apply the arbitrary-field representation clause of [lem-sfb-algebraic-lie-additive-jordan] to $C$, this embedding, and the representation $j\\circ p$. It says that $A=d(j\\circ p)(X_F)$ is diagonalizable. On the other hand the dual-number formula $I_m+\\epsilon A$ from [lem-sfb-affine-group-lie-tangent-calculus] lies in $\\mathcal U_m(F[\\epsilon]/\\epsilon^2)$, so $A$ is strictly upper triangular. Thus $A^m=0$; in a diagonalizing basis every eigenvalue has $m$th power zero and hence is zero. Therefore $A=0$. Functoriality of differentials and injectivity of $dj$, in the same Lie/Jordan nodes, imply $dp(X_F)=0$. Taking dual-number points in $C\\simeq U\\times_F T_F$ identifies tangent vectors with pairs and $dp$ with their first projection. Its kernel is therefore exactly $\\operatorname{Lie}(T_F)$, proving $X_F\\in\\operatorname{Lie}(T_F)$.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.90, printed p.381, the inference from the unipotent quotient to X in Lie(T), made explicit with the product over F; Example 17.75 and Proposition 17.74, p.377; Theorem 14.5, pp.281–282."
+   }
+  },
+  {
+   "text": "By [lem-sfb-affine-group-lie-tangent-calculus], the inclusion $\\operatorname{Lie}(T)\\subseteq\\mathfrak g$ becomes the inclusion $\\operatorname{Lie}(T_F)\\subseteq\\operatorname{Lie}(G_F)$ after scalar extension. Extend a $k$-basis of the former subspace to a basis of $\\mathfrak g$. The coordinates of $X_F$ outside that subspace are the images in $F$ of the corresponding coordinates of $X$. Step 3 makes all of them zero, and $k\\to F$ is injective. Thus $X\\in\\operatorname{Lie}(T)$.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.90, printed p.381, X in Lie(T); elementary faithful-field descent of subspace membership using tangent scalar extension, Section 10.19, pp.191–192."
+   }
+  },
+  {
+   "text": "Let $S\\subseteq G$ be any $k$-torus containing $T$. It is smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus]. It is commutative: the comultiplication of $\\mathcal O(S)$ and its composite with the swap agree after $-\\otimes_k\\bar k$, since $S_{\\bar k}\\cong\\mathbf G_m^r$ is commutative, and $\\mathcal O(S)\\otimes_k\\mathcal O(S)\\to(\\mathcal O(S)\\otimes_k\\mathcal O(S))\\otimes_k\\bar k$ is injective. Commutativity of $S$ implies that every $s\\in S(R)$ centralizes every infinitesimal point from $\\operatorname{Lie}(S)\\otimes_kR$ after every $k$-algebra extension. Since $X\\in\\operatorname{Lie}(T)\\subseteq\\operatorname{Lie}(S)$, the conjugation identity and subgroup compatibility of [lem-sfb-affine-group-dual-number-calculus] give $\\operatorname{Ad}(s)(X\\otimes1)=X\\otimes1$ for all $R,s$. The defining stabilizer functor therefore gives a homomorphism $S\\to H$ whose composite with $H\\hookrightarrow G$ is the given inclusion. The underlying image of connected $S$ is connected and contains the identity, so lies in $K=H^\\circ$. As $K$ is open, [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a factorization $S\\to K$; the original closed inclusion into $G$ is still a closed inclusion into $K$ (on affine coordinate algebras, its quotient map factors through the quotient defining $K$). Hence $S$ is a torus subgroup of $K$ containing $T$. Maximality of $T$ in $K$ forces $S=T$. This is maximality of $T$ in $G$. No step required $X\\ne0$ or noncentrality.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.90, printed p.381, final two sentences, using an arbitrary containing k-torus instead of first choosing an ambient maximal torus."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimple-tangent-stabilizer",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-pc-proper-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-neutral-torus-centralizer-cartan-structure",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-algebraic-lie-additive-jordan",
+  "lem-sfb-multiplicative-type-largest-subtorus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.90, printed p.381; its unipotent-quotient inference is written using the Cartan product after algebraic closure, Proposition 17.28 and Corollary 16.48, pp.360,341. Descent is explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every maximal torus in the identity component of the centralizer of a semisimple Lie algebra element is maximal in the ambient algebraic group",
+   "results": "{\"t\": \"2026-10-24T09:11:59Z\", \"tool\": \"leanfinder\", \"query\": \"Every maximal torus in the identity component of the centralizer of a semisimple Lie algebra element is maximal in the ambient algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"LieSubalgebra.IsCartanSubalgebra\", \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\"], \"digest\": \"b08930779a0789f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori of a semisimple tangent element stabilizer are maximal tori of the whole group",
+   "results": "{\"t\": \"2026-10-24T09:11:55Z\", \"tool\": \"leansearch\", \"query\": \"Maximal tori of a semisimple tangent element stabilizer are maximal tori of the whole group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.isPreprimitive_stabilizer_subgroup\", \"AddAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"LieModule.maxTrivSubmodule.congr_simp\", \"MulAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"SubAddAction.stabilizer_of_subAdd\", \"MulAction.stabilizer_subgroup\", \"SubMulAction.fixingSubgroup_of_insert\", \"LieModule.maxNilpotentSubmodule_eq_top_of_isNilpotent\"], \"digest\": \"a04918ffb8d01806\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"centralizer\"",
+   "results": "{\"t\": \"2026-10-24T09:11:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\", \\\"centralizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.?torus|[Cc]artan|semisimple.*stabilizer",
+   "results": "{\"t\": \"2026-10-24T09:11:55Z\", \"tool\": \"grep\", \"query\": \"maximal.?torus|[Cc]artan|semisimple.*stabilizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus maximal in a semisimple Lie element centralizer cannot be enlarged in the ambient algebraic group",
+   "results": "{\"t\": \"2026-10-24T09:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"A torus maximal in a semisimple Lie element centralizer cannot be enlarged in the ambient algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.IsCartanSubalgebra\", \"LieSubalgebra.ucs_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\"], \"digest\": \"f9bc003c7386d67a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.?torus|semisimple.*centralizer|centralizer.*semisimple",
+   "results": "{\"t\": \"2026-10-24T09:43:24Z\", \"tool\": \"grep\", \"query\": \"maximal.?torus|semisimple.*centralizer|centralizer.*semisimple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie Cartan subalgebras, abstract group centralizers, manifold Lie algebras, or Geck root-system matrices; none states maximality of algebraic-group tori in a tangent-vector stabilizer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori of a semisimple tangent vector centralizer are maximal tori of the algebraic group",
+   "results": "{\"t\": \"2026-10-24T09:43:24Z\", \"tool\": \"leansearch\", \"query\": \"Maximal tori of a semisimple tangent vector centralizer are maximal tori of the algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupLieAlgebra\", \"Subgroup.centralizer_eq_top_iff_subset\", \"Set.centralizer_subset\", \"Subsemigroup.centralizer_le\", \"AddSubgroup.centralizer_eq_top_iff_subset\", \"LieModule.maxTrivSubmodule.congr_simp\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"Subalgebra.centralizer_eq_top_iff_subset\"], \"digest\": \"421dd39317fc52de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie Cartan subalgebras, abstract group centralizers, manifold Lie algebras, or Geck root-system matrices; none states maximality of algebraic-group tori in a tangent-vector stabilizer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"centralizer\"",
+   "results": "{\"t\": \"2026-10-24T09:43:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\", \\\"centralizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie Cartan subalgebras, abstract group centralizers, manifold Lie algebras, or Geck root-system matrices; none states maximality of algebraic-group tori in a tangent-vector stabilizer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagonalizable tangent matrix in a smooth algebraic group lies in the Lie algebra of each maximal torus of its connected adjoint stabilizer",
+   "results": "{\"t\": \"2026-10-24T09:43:29Z\", \"tool\": \"leanfinder\", \"query\": \"A diagonalizable tangent matrix in a smooth algebraic group lies in the Lie algebra of each maximal torus of its connected adjoint stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.h_mem_lieAlgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.e_mem_lieAlgebra\", \"LieAlgebra.IsRegular\", \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'\"], \"digest\": \"b3340aa81e468ae7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie Cartan subalgebras, abstract group centralizers, manifold Lie algebras, or Geck root-system matrices; none states maximality of algebraic-group tori in a tangent-vector stabilizer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every maximal torus in the identity component of the stabilizer of a semisimple Lie algebra element is maximal in the ambient smooth connected algebraic group",
+   "results": "{\"t\": \"2026-10-24T09:43:30Z\", \"tool\": \"leanfinder\", \"query\": \"Every maximal torus in the identity component of the stabilizer of a semisimple Lie algebra element is maximal in the ambient smooth connected algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieSubalgebra.IsCartanSubalgebra\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.IsSemisimple.sSup_atoms_eq_top\", \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_top\"], \"digest\": \"cc0a152e860a80da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie Cartan subalgebras, abstract group centralizers, manifold Lie algebras, or Geck root-system matrices; none states maximality of algebraic-group tori in a tangent-vector stabilizer."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cartan-subgroups-generate",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a). Milne 17.93(b), proof: apply the dominant finite product of Cartan subgroups in the proof of 17.92, following 17.91. Supporting input: Theorem 17.91, printed p.381 (generation); Corollary 17.83 and its proof, printed p.379 (existence of a maximal torus). Generation is the smallest-closed-subgroup notion introduced in section 2h, printed pp.53-56. Supporting input for Milne 17.91: Proposition 17.90 and its proof, printed p.381, restricted to the identity component of the adjoint stabilizer; maximal tori lie in that component. The case X=0 is immediate.",
+   "via": [
+    "lem-sfb-cartan-subgroups-generate",
+    "lem-sfb-cartan-product-dominance",
+    "lem-sfb-infinite-field-reductive-rational-density",
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-centralizer-maximal-tori",
+  "worker": "stage1",
+  "summary": "Retained the full arbitrary-field statement. Proved the result using existing smooth tangent-stabilizer, maximal-torus scalar-extension, neutral Cartan product, unipotent embedding and additive Jordan nodes. Wrote the whole-torus infinitesimal fixed-point argument and the descent of X in Lie(T) explicitly. No new nodes and no statement dispute.",
+  "blueprint": "Inherited auxiliary route for det-thm-sf-ctf-stability-direct-images proof (3), through the Cartan-generation input to Milne 17.91. Latest direct-image blueprint proof (3) and its unit were read. This auxiliary has no standalone blueprint statement: blueprint_refs.py ancestor returns None; inherited from.node and via retained, and the existing precise from.place is retained. Searches for Cartan and semisimple find no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), stability of scheme smoothness under field base change, is a generic scheme tool; no change to the unit route."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic connectedness after field extension applied to the identity section of K; not a replacement of any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-09e448a6b",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-09e448a6b (reviewer sub-agent of L); spot-checked: I read Milne Prop. 17.90 and its proof (printed p.381) and checked every step against the full statements of the 12 cited nodes. Restricting the item to C_G(X)° is equivalent to Milne's statement, because tori lie in the identity component. Smooth and geometrically connected G matches Milne's connected group variety, and X=0 and central X are allowed, so the target is not weakened. This is the item's first split (not a re-split) and it creates no new nodes. Step 1: tangent-stabilizer gives C_G(X) smooth with Lie(C_G(X))={Y:[Y,X]=0}; then K=H° open and smooth, X in Lie K by the open factorization, K_F smooth and connected, and T_F maximal in K_F by maximal-torus-field-extension. Step 2: the Cartan node over F=k̄ gives U×T_F≅C. I checked the whole-torus infinitesimal argument: specialize R[δ]→R, δ↦ε_R, and use naturality; this gives membership in D(F[ε]) and then in C. Step 3: unitriangular embedding j plus the arbitrary-field clause of additive Jordan make A=d(j∘p)(X_F) both diagonalizable and strictly upper triangular, so A=0; dj injective gives dp(X_F)=0, so X_F is in Lie T_F. Step 4 is an elementary coordinate descent. Step 5 is the overtorus argument. Fault C1 in step 5: it uses that S is connected (and implicitly commutative) with no citation. FIX: cite lem-sfb-multiplicative-type-largest-subtorus ('Every torus is smooth and connected'), and write out the two-line descent of commutativity; the citation is added to uses and proof_deps. Small cases: X=0, tori, unitriangular groups, GL_2, central X in characteristic p, imperfect k. No node restates 17.90, and there is no cycle. Batch-5: all five flagged citations reach only general facts filed in sec-trace-formula (02VL fpqc smoothness descent, 057K open components, the fppf descent-datum definition, flat tensor injectivity), not the trace formula or Poincaré duality, so they are acceptable. I accept the tool_uses lem-pc-proper-base-change(2) and lem-sbc-connected-rational-point-geometrically-connected as general scheme tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SemisimpleCentralizerMaximalTori",
+  "declaration": "AlgebraicGeometry.GrpObj.semisimpleCentralizer_maximalTori",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SemisimpleCentralizerMaximalTori.lean",
+  "statement": "theorem semisimpleCentralizer_maximalTori {k : Type u} [Field k] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [GeometricallyConnected G.X.hom] (n : ℕ) (i : G.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k) [IsMonHom i] [IsClosedImmersion i.left] (X : Lie G.X) (hX : ∃ (P : Matrix.GeneralLinearGroup (ULift.{u} (Fin n)) (AlgebraicClosure k)) (d : ULift.{u} (Fin n) → AlgebraicClosure k), (↑(P⁻¹) : Matrix _ _ _) * (GeneralLinearGroup.RationalHom.differential i X).map (algebraMap k (AlgebraicClosure k)) * (↑P : Matrix _ _ _) = Matrix.diagonal d) (C : Grp (Over (Spec (.of k)))) [IsAffine C.X.left] [LocallyOfFiniteType C.X.hom] [QuasiCompact C.X.hom] (j : C ⟶ G) (hC : IsLieCentralizer j X) (T : Grp (Over (Spec (.of k)))) (t : T ⟶ Grp.mk (identityComponent C.X)) (hT : ReductiveTorusCentralizer.IsMaximalTorus t) : ReductiveTorusCentralizer.IsMaximalTorus (t ≫ (⟨⟨identityComponentι C.X⟩⟩ : Grp.mk (identityComponent C.X) ⟶ C) ≫ j)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-74b32b5e4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74b32b5e4",
+  "group": "Q98",
+  "result": "fix",
+  "note": "Statement matches Milne 17.90 p.381 and the node: G affine finite-type smooth geometrically connected, faithful closed GL_n rep, semisimple X as diagonalizability over the algebraic closure of k of RationalHom.differential i X, C_G(X) as a representing closed subgroup IsLieCentralizer (all k-algebras, commutation with the image of t_X, equivalent to Ad(g)(1⊗X)=1⊗X), K = upstream GrpObj.identityComponent, IsMaximalTorus in K implies IsMaximalTorus of the composite into G; extra C instances are implied; X=0, central X, rank 0, n=0, char p, imperfect k covered. H2 fixed: new node def-sfb-lie-centralizer cited theorem lem-sfb-affine-group-dual-number-calculus only for the plain def dualMap; fixes/LieCentralizer.lean inlines DualNumber.lift (same k-algebra map, same signature), fixes/def-sfb-lie-centralizer.json swaps that stmt_dep for def-sc-dual-numbers and edits the text; fixes/SemisimpleCentralizerMaximalTori.lean adds only a private import of the calculus module for the proof. nt_compile --json clean (8.8 s, 4.1 s). Notes: def-wf-lie-algebra-derivation reached transitively via the new node; the Second reading section is the worker's own pass."
+ }
+}

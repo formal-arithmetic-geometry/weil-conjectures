@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-integral-strict-limit-augmentation-triangle",
+ "kind": "statement",
+ "title": "Natural strict integral augmentation with prime-invertible cone",
+ "statement": "For a prime ell, scheme W, simultaneous integral derived reduction I and total right-derived inverse limit RZ as in [def-sfb-diagonal-system-interface], and any additive coefficient equivalence e from abelian sheaves to modules over the lifted integers, there is a natural transformation from the derived e to I.T followed by RZ followed by the derived e. At every input this map extends to a distinguished triangle whose third object has invertible ell action. No completeness of the second object is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion, Koszul tower proof; principal orthogonality and pro-isomorphism argument in source Complete/Principal.lean"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-source-principal-completion-orthogonal"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual canonical natural augmentation a using the ordinary strict quotient projections, the universal left-derived lift, and localization of the constant/limit adjunction unit. Its normalization on Q(P) after the derived counit is the ordinary quotient augmentation. Whisker by the exact coefficient equivalence e.",
+   "uses": [
+    "lem-sfb-integral-strict-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the resolving class of complexes with monic positive prime-power multiplication. Flat-term K-flat resolutions resolve every complex by this class: nonzero integer multiplication is mono on the constant integer unit, tensoring with a flat term preserves this mono, and the unitor identifies it with integer multiplication on the term. The multiplication/quotient short exact sequences and homology five lemma show that the ordinary tower functor preserves quasi-isomorphisms between these complexes. Apply the generic resolving-class theorem, via its proved cochain version cochainDerivedFullExists in DiagonalDerivedReductionExists, to construct a universal left-derived reduction computed on the entire class. Uniqueness of left-derived functors makes the counit of the arbitrary input I invertible there as well.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On such a regular complex apply the ordinary augmentation reduction calculation. Use the normalization equation and cancel the image under RZ, e, and reduction of the invertible derived counit. This proves that the actual natural augmentation is invertible modulo ell on regular representatives.",
+   "uses": [
+    "lem-sfb-integral-ordinary-augmentation-reduction",
+    "lem-sfb-integral-strict-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve a complex representing any derived object by a flat-term complex. Its positive prime-power multiplications are monic. Naturality conjugates the augmentation at the arbitrary object to the augmentation at this representative, so reduction remains invertible.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Complete the augmentation to a distinguished triangle. The triangulated reduction functor gives a triangle whose first arrow is invertible, so its third vertex is zero. A prime is a nonzerodivisor in the lifted integers. Apply the source principal-reduction criterion to make its action invertible on the original third vertex. Only cone choices are objectwise; the augmentation is already natural.",
+   "uses": [
+    "lem-sfb-source-reduction-detects-invertibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-strict-augmentation",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sfb-integral-ordinary-augmentation-reduction",
+  "lem-sfb-source-reduction-detects-invertibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M: explicit derived natural augmentation and resolution invariance proved in Lean; only the ordinary regular-complex reduction calculation is split off. Source Complete/Reduction.lean finishes the cone criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse limit of prime power reductions is right orthogonal to objects on which the prime is invertible",
+   "results": "Eight hits, including K-injective right orthogonality, none for completion of a strict reduction tower.",
+   "date": "2026-10-26",
+   "verdict": "Use the source principal completion criterion; strict-tower identification remains a proof step."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, Triangle",
+   "results": "No hits; unknown identifier 'IsIso'.",
+   "date": "2026-10-26",
+   "verdict": "No direct match from this search."
+  },
+  {
+   "tool": "grep",
+   "query": "rightOrthogonal_and_exists_smulInvertible_cone",
+   "results": "Search service no hits. Local rg found the source theorem of this name and its of_isHomotopyLimit version in Complete/Principal.lean; StrictRoosDerivation handles ringed-site modules, not the given abelian-sheaf reduction directly.",
+   "date": "2026-10-26",
+   "verdict": "Separate the two necessary strict-model invariants, then use the existing reflector."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "One hit: Mathlib.CategoryTheory.Functor.Derived.LeftDerived, CategoryTheory.Functor.leftDerivedUnique.",
+   "date": "2026-10-26",
+   "verdict": "Usable for derived-functor choice independence; it does not supply the strict-model completeness or augmentation-cone invariant."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse limit of the derived prime power quotient tower is complete and its natural augmentation has a cone on which the prime acts invertibly",
+   "results": "Eight hits for ordinary AdicCompletion, p-adic completeness and profinite limits; none for derived sheaf completion or the augmentation cone.",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. Use the source principal completion criterion and prove the strict-model invariants."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictCompletionComparison",
+  "date": "2026-10-26",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-strict-completion-comparison",
+   "place": "Strict quotient/tensor and total inverse-limit comparison, separated into the completeness and augmentation-cone arguments",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStrictLimitAugmentationTriangle",
+  "file": "lean/Sheaf/Paper/IntegralStrictLimitAugmentationTriangle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_strict_limit_augmentation_triangle",
+  "statement": "theorem integral_strict_limit_augmentation_triangle (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]\n    (I : DiagonalDerivedReduction ℓ (𝟭 (DiagonalAb W)))\n    (RZ : DerivedCategory (ℕᵒᵖ ⥤ DiagonalAb W) ⥤ DerivedCategory (DiagonalAb W))\n    (ηZ : (lim : (ℕᵒᵖ ⥤ DiagonalAb W) ⥤ DiagonalAb W).mapHomologicalComplex (.up ℤ) ⋙\n      DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RZ)\n    (hRZ : RZ.IsRightDerivedFunctor ηZ\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ DiagonalAb W) (.up ℤ)))\n    (e : DiagonalAb W ≌\n      Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))\n    [e.functor.Additive] [e.inverse.Additive] :\n    ∃ η : e.mapDerivedCategory.functor ⟶ (I.T ⋙ RZ) ⋙ e.mapDerivedCategory.functor,\n      ∀ K : DerivedCategory (DiagonalAb W),\n        ∃ (X : DerivedCategory\n            (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))))\n          (g : (((I.T ⋙ RZ) ⋙ e.mapDerivedCategory.functor).obj K) ⟶ X)\n          (h : X ⟶ (e.mapDerivedCategory.functor.obj K)⟦(1 : ℤ)⟧),\n          Triangle.mk (η.app K) g h ∈ distTriang _ ∧\n            DerivedCategory.smulInvertible (Scheme.ProEt.topology W)\n              (ℓ : ULift.{u + 1} ℤ) X",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T183931-L-3797007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T222628-L-675480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

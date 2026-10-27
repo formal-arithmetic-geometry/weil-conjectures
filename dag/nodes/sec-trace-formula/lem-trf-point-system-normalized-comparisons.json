@@ -1,0 +1,134 @@
+{
+ "id": "lem-trf-point-system-normalized-comparisons",
+ "kind": "lemma",
+ "title": "Normalized module and tensor comparisons of whole systems",
+ "statement": "Let k be algebraically closed, h an automorphism of Spec k, l a prime and E a finite extension of Q_l. Use all fixed data and the record Maps of [def-trf-point-system-insertion-data]. Assume CoefficientLaws: the specified ring compositor commutes with the finite and completed coefficient maps, and completed maps commute with every limit projection. There exists P : Maps satisfying SectionLaws, RestrictionCompositionLaws, TensorLaws and TransitionLaws. Thus its natural module, system, scalar-restriction and finite tensor comparisons have precisely the section, tensor-generator and original-transition normalizations. There is no condition here on its strict or derived insertion fields u and I.",
+ "stmt_deps": [
+  "def-trf-point-system-insertion-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+ },
+ "proof": [
+  {
+   "text": "Transport the site-reindexing compositor to modules through the inverse coefficient maps. Coefficient composition gives linearity. Perform the same construction on the actual coefficient sequence site to obtain t. The projection equation identifies the two actions on every completed-restricted finite level, giving b as identity on underlying sections. Naturality retains every original semilinear transition and sectionwise extensionality proves the restriction composition square. Use [lem-weil-proetale-isomorphism-inverse-image], [def-weil-inverse-image-pullback-comparison], [lem-coef-derived-system-evaluation-calculus] and [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  },
+  {
+   "text": "Invert the finite graph/tensor-unit comparison by scalar extension along the coefficient isomorphism, using [lem-weil-sheaf-scalar-extension-ring-iso]. The adjunction-normalized compositor of [lem-pur-proetale-module-pullback-composition] identifies successive unit insertions with direct insertion. Conjugate the original horizontal transition by j and its inverse; cancellation gives the unit rule, and coefficient reduction plus the original semilinearity gives the scalar rule. The unused insertion fields are zero.",
+   "uses": [
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-pur-proetale-module-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-pur-proetale-module-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along a scheme isomorphism has normalized module tensor unit and compositor compatible with coefficient restriction of towers",
+   "results": "Eight scheme pullback carrier tensorCongr and pullbackSpecIso results. These concern scheme pullbacks, not normalized comparisons of quotient-linear module systems. Existing project APIs in IsoSectionwiseInverseImage, InverseImagePullbackComparisonDerived and PointSheafInsertionCalculus were read and reused.",
+   "date": "2026-10-26",
+   "verdict": "no direct Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "Seven hits: pushforwardComp, pushforward_id_comp, pushforward_comp_id, pushforward_assoc and component equations. Read PushforwardContinuous.lean:139–151: these are the ordinary module reindexing compositors, useful ingredients but not the coefficient-system normalization or point insertion assertion.",
+   "date": "2026-10-26",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pointSheafInsertion|mapHomologicalComplexCompIso",
+   "results": "Twenty-five Mathlib hits, including module-sheaf pushforwardComp and presheaf composition. Local rg found the point-specific one-level insertion calculus in Sheaf.AlgebraicGeometry.PointSheafInsertionCalculus; its theorem fixes the coefficient universe to the site universe and has no entire quotient-linear system. No direct theorem for the present independent universes and whole systems.",
+   "date": "2026-10-26",
+   "verdict": "no direct Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized inverse image module compositors and tensor unit comparisons preserve scalar restriction on coefficient towers",
+   "results": "Eight hits including PresheafOfModules.restrictScalarsObj and ModuleCat.restrictScalarsComp'. Their types construct ordinary scalar restriction or its compositor; none gives the simultaneous normalized sheaf, tensor and whole-tower comparisons in this statement.",
+   "date": "2026-10-26",
+   "verdict": "ingredients only; no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemInsertionComposition",
+  "date": "2026-10-26",
+  "group": "R1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-point-system-insertion-composition",
+   "place": "Separation of the existing data and the sheaf-level steps from the coefficient and localization arguments."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemNormalizedComparisons",
+  "file": "lean/Sheaf/Paper/PointSystemNormalizedComparisons.lean",
+  "declaration": "WeilConjectures.PointSystemInsertion.pointSystemNormalizedComparisons",
+  "statement": "theorem pointSystemNormalizedComparisons [IsAlgClosed k]\n    (_hc : CoefficientLaws k h l E) :\n    ∃ P : Maps k h l E,\n      SectionLaws k h l E P ∧ RestrictionCompositionLaws k h l E P ∧\n        TensorLaws k h l E P ∧ TransitionLaws k h l E P",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acb6c",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T070715-L-3644835",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acb6c",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T070715-L-3644835",
+  "kind": "interface",
+  "note": "independent cc review: published PointSystemInsertionComposition.lean vs delivered PointSystemInsertionData.lean (verbatim extraction, only 9 private imports dropped); item proof vs node proof_deps; the two new sorry statements vs the item's existing Section/RestrictionComposition/Tensor/Transition/StrictInsertion conjuncts; sandbox compile of the 4 modules + importer LocalNormalizationStrictRealization + #print axioms"
+ }
+}

@@ -18,67 +18,58 @@
  ],
  "proof": [
   {
-   "text": "If U is empty, take e=1; all assertions are vacuous. Otherwise, by the basis and finite-refinement clauses of [lem-weil-pbc-proj-standard-open-inclusion], and quasi-compactness, choose finitely many positive-degree homogeneous elements f_i with U\\subseteq\\bigcup_iD_+(f_i). Let e be a positive common multiple of their degrees; replacing each f_i by the corresponding power preserves its standard open. The finite-cover conclusion of [lem-trf-proj-common-degree-twist-invertible] then gives U\\subseteq W_e, the invertibility locus used in Step 3.",
+   "text": "Use standardOpenProperties to choose a positive-degree homogeneous basic neighbourhood at each point of V. Compactness gives a finite subcover; take e to be the product of its positive degrees. Every degree divides e, including for an empty cover, where the product is 1. This is finite_positive_cover in the Lean proof.",
    "uses": [
     "lem-weil-pbc-proj-standard-open-inclusion",
-    "def-weil-pbc-quasi-compact-scheme",
-    "lem-trf-proj-common-degree-twist-invertible"
+    "def-weil-pbc-quasi-compact-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MW proof, first paragraph: finite standard-open cover and d=d_1...d_n; Tag 01M4 (basis and finite refinement)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-trf-proj-common-degree-twist-invertible] to this finite homogeneous cover and common degree e. It gives that every O_U(ek) is invertible and that the canonical multiplication map O_U(e)^{\\otimes k} \\to O_U(ek) is an isomorphism for every k>=1.",
+   "text": "Apply commonDegreeTwistInvertible to V, the finite cover, e, and W given by its standard-open union. Obtain V ≤ W, invertibility of every positive multiple twist, and the recursive canonical multiplication maps. Induction on k using the zero and successor formulas identifies their action on twistTensorSection with the product over Fin k.",
    "uses": [
     "lem-trf-proj-common-degree-twist-invertible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MW proof after the finite cover, clauses (1)--(4)."
-   }
+   "elementary": false
   },
   {
-   "text": "Because the chosen e makes U\\subseteq W_e, apply [lem-trf-proj-twist-section-basic-open] with d=e. For every positive-degree homogeneous f, replace f by a positive power so that its degree is a multiple of e; the resulting section of O_U(e r) has nonvanishing locus U\\cap D_+(f). The standard opens form a basis by [lem-weil-pbc-proj-standard-open-inclusion], and the affine-locus clause of [lem-trf-proj-twist-section-basic-open] says that among these nonvanishing loci the affine ones form an affine-open basis of U. Using the multiplication isomorphisms from Step 2, the section may be viewed as a section of O_U(e)^{\\otimes r}.",
+   "text": "The affine twist-section loci form a basis by twistSectionBasicOpen. At each point choose a member of this affine basis and a homogeneous section realizing it. The multiplication isomorphism identifies its twist with a tensor power of O_V(e). Transport the section through the inverse isomorphism; nonvanishingLocus_iso preserves its nonvanishing set. These sections witness IsAmple for O_V(e). Positive tensor powers remain ample and isAmple_iff_of_iso transports ampleness to O_V(ek).",
    "uses": [
     "lem-trf-proj-twist-section-basic-open",
-    "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-trf-proj-common-degree-twist-invertible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MW clauses (5)--(7), using Tag 01MV and the standard-open basis."
-   }
-  },
-  {
-   "text": "Fix k\\geq1. Step 2 makes O_U(ek) invertible and identifies each positive tensor power O_U(ek)^{\\otimes r} with O_U(ekr). Given any basic open from Step 3, replace its defining homogeneous element by its k-th power; its degree is then a multiple of ek, and its nonvanishing locus is unchanged, while the corresponding section is a section of O_U(ekr). Thus the affine nonvanishing loci of positive powers of O_U(ek) form a basis at every point. Together with quasi-compactness of U, this is exactly the definition of an ample invertible module [def-weil-pbc-ample-invertible-module]. The multiplication isomorphisms required in the statement are those supplied by Step 2.",
-   "uses": [
-    "lem-trf-proj-common-degree-twist-invertible",
-    "lem-trf-proj-twist-section-basic-open",
+    "lem-sc-ample-iso",
+    "lem-sc-ample-positive-tensor-power",
     "def-weil-pbc-ample-invertible-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Definition 01PS (definition-ample), together with Constructions Tag 01MW clauses (2),(3)."
-   }
+   "elementary": false
+  },
+  {
+   "text": "For the stated open immersion j, apply the preceding construction to its open image V. The canonical isomorphism h : U ≅ V transports compactness. Restriction along h and restrictCompIso identify the restricted twists with those along j. Restrict tensor powers using openRestrictionTensorPowIso; nonvanishingLocus_restrict and nonvanishingLocus_iso transfer the ample sections, and affine opens pull back to affine opens along h. Conjugate each multiplication map by the composition and tensor-power comparison isomorphisms. powerComparison_sections, proved by induction from the unit and pure tensor restriction formulas, and compTwistIso_value show its local formula is exactly the required pointwise product.",
+   "uses": [
+    "def-sc-tensor-power-open-restriction-comparisons",
+    "lem-sc-nonvanishing-locus-restrict",
+    "lem-sc-ample-iso",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-sc-tensor-power-open-restriction-comparisons",
   "def-weil-pbc-ample-invertible-module",
   "def-weil-pbc-quasi-compact-scheme",
+  "lem-sc-ample-iso",
+  "lem-sc-ample-positive-tensor-power",
+  "lem-sc-nonvanishing-locus-restrict",
   "lem-trf-proj-common-degree-twist-invertible",
   "lem-trf-proj-twist-section-basic-open",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
   "lem-weil-pbc-proj-standard-open-inclusion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01MW (lemma-ample-on-proj), clauses (2),(3),(5)--(7), proof; Properties Tag 01Q2 (lemma-open-in-proj-ample)."
+  "place": "Tag 01MW proof; Properties Definition 01PS and Lemma 01PT; Modules Tag 01CD for the restriction comparisons.",
+  "note": "A8: finite cover, affine nonvanishing basis, positive tensor powers, and explicit transfer along isoOpensRange; all helpers proved privately in the item module."
  },
  "mathlib_searches": [
   {
@@ -229,5 +220,26 @@
   "result": "pass",
   "note": "Re-delivery of the landed Q128 module: the only change is one docstring sentence, plus lean.statement layout and by/date in the record; node statement unchanged. Checked against Stacks 01MW (1)-(7) and 01Q2: ℕ-graded A with Proj 𝒜, an open immersion j with CompactSpace U, ∃ e>0 then ∀ k>0: restricted twist of degree e*k is IsInvertible and IsAmple, and an IsIso μ from tensorPow k of O_U(e) to O_U(e*k) pinned to the product of fractions in Localization.AtPrime via the real recursive twistTensorSection (tmulSection / unitSectionsEquiv, same recursion as tensorPow, same tensor as IsAmple). No extra hypotheses; U=∅ covered; k=0 excluded as in the node; universe u forced by Proj. Statement verbatim in the file; docstrings have source and blueprint; only the theorem has sorry. nt_compile.py on the side copy (differs only by the docstring): rc=0, 3.0 s, no errors or warnings. Observations: redundant docstring sentence, stale reviewed_lean, brief second reading."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261023T151755-L-407308",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

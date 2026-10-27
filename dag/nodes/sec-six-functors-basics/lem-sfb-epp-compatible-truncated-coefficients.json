@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-epp-compatible-truncated-coefficients",
+ "kind": "statement",
+ "title": "Compatible truncated coefficient sections over a perfect residue field",
+ "statement": "Let $p$ be prime and let $f:R\\to S$ be a local homomorphism of nonzero commutative local rings of characteristic $p$, meaning $f^{-1}(\\mathfrak m_S)=\\mathfrak m_R$, with $\\mathfrak m_R^u=0$ and $\\mathfrak m_S^v=0$ for some positive integers $u,v$. A local ring here has one maximal ideal. Put $k=R/\\mathfrak m_R$ and $l=S/\\mathfrak m_S$, and let $\\bar f:k\\hookrightarrow l$ be the induced residue-field map. Assume $k$ is perfect, meaning every element of $k$ is a $p$th power. There are ring homomorphisms $s_R:k\\to R$ and $s_S:l\\to S$ such that their composites with the residue maps are the identities and $f\\circ s_R=s_S\\circ\\bar f$. Fields and field extensions use [def-pc-field-extension].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EZ, lemma-cohen, compatible section assertion, specialized to perfect lower residue field (so the upper residue extension is separable in the general field-extension sense)."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Both residue fields have characteristic $p$. The prime field $\\mathbf F_p$ is perfect: Frobenius fixes every element, since it is a ring map fixing $1$. For each finitely generated intermediate field of $k/\\mathbf F_p$ and of $l/k$, apply [lem-weil-pbc-perfect-field-separating-basis] to the perfect lower field. Each such intermediate extension is separably generated. Thus both $k/\\mathbf F_p$ and $l/k$ are separable in exactly the possibly transcendental sense of [def-weil-pbc-separable-field-extension].",
+   "uses": [
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EZ, lemma-cohen, proof: separable residue fields are formally smooth; nilpotent lifting expanded through powers of the maximal ideal."
+   }
+  },
+  {
+   "text": "Give $R$ and its quotients their prime-field algebra structures. Construct $\\mathbf F_p$-algebra maps $a_n:k\\to R/\\mathfrak m_R^n$ reducing to the identity in $k$, for $1\\le n\\le u$. Set $a_1=\\mathrm{id}_k$. Given $a_n$ with $n<u$, put $D=R/\\mathfrak m_R^{n+1}$ and $J=\\mathfrak m_R^n/\\mathfrak m_R^{n+1}$. The quotient $D/J$ identifies with $R/\\mathfrak m_R^n$: send the class of the class of $r$ to its class modulo $\\mathfrak m_R^n$; this is well-defined and bijective since its kernel is precisely $J$. Moreover $J^2=0$ since $2n\\ge n+1$. Apply [lem-sfb-separable-field-square-zero-lifting] to $k/\\mathbf F_p$, $D,J,a_n$ to obtain $a_{n+1}$ reducing to $a_n$. At $n=u$, $\\mathfrak m_R^u=0$ identifies the target with $R$ and gives $s_R$. Its reduction is $a_1$, so it is a residue section.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-sfb-separable-field-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EZ, lemma-cohen, proof: separable residue fields are formally smooth; nilpotent lifting expanded through powers of the maximal ideal."
+   }
+  },
+  {
+   "text": "Make $S$ a $k$-algebra by $f\\circ s_R$. The quotient $l=S/\\mathfrak m_S$ then has structure map $\\bar f$, because for $a\\in k$ its image is $\\operatorname{res}_S(f(s_R(a)))=\\bar f(\\operatorname{res}_R(s_R(a)))=\\bar f(a)$. Thus the identity $l\\to S/\\mathfrak m_S=l$ is a $k$-algebra map. These are the quotient algebra structures of [def-weil-pbc-algebra-hom-quotient].",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EZ, lemma-cohen, proof: separable residue fields are formally smooth; nilpotent lifting expanded through powers of the maximal ideal."
+   }
+  },
+  {
+   "text": "Construct $k$-algebra maps $b_n:l\\to S/\\mathfrak m_S^n$ for $1\\le n\\le v$, starting with $b_1=\\mathrm{id}_l$. For $n<v$ use $D=S/\\mathfrak m_S^{n+1}$ and $J=\\mathfrak m_S^n/\\mathfrak m_S^{n+1}$; the representative calculation of step 2 identifies $D/J$ with $S/\\mathfrak m_S^n$, and $J^2=0$ again follows from $2n\\ge n+1$. Apply [lem-sfb-separable-field-square-zero-lifting] now to the separable extension $l/k$ and $b_n$, obtaining $b_{n+1}$ as a $k$-algebra map. At $n=v$ obtain $s_S:l\\to S$ because $\\mathfrak m_S^v=0$. Reduction gives $b_1=\\mathrm{id}_l$. Finally, the defining algebra-map equation gives $s_S(\\bar f(a))=f(s_R(a))$ for every $a\\in k$, proving the required compatibility.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-sfb-separable-field-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EZ, lemma-cohen, proof: separable residue fields are formally smooth; nilpotent lifting expanded through powers of the maximal ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-sfb-separable-field-square-zero-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EZ, lemma-cohen, proof: separable residue fields are formally smooth; nilpotent lifting expanded through powers of the maximal ideal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible sections of residue maps for local rings of characteristic p with nilpotent maximal ideals and separable residue field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (IsLocalRing.ResidueFiel\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Ideal.ResidueField.liftₐ\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_3} →\\n    {B : Type u_4} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R B] →\\n                (I : Ideal A) →\\n                  [inst_5 : I.IsPrime] →\\n\", \"doc\": \"Given a prime ideal $ I $ in a commutative ring $ A $, an $ R $-algebra homomorphism $ f : A →ₐ[R] B $, and conditions that $ I $ is contained in the kernel of $ f $ and the complement of $ I $ maps i\"}\n  {\"name\": \"Ideal.ResidueField.lift\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal R) →\\n          [inst_2 : I.IsPrime] →\\n            (f : R →+* S) →\\n              I ≤ RingHom.ker f → I.primeCompl ≤ Submonoid.comap f (IsUnit.submonoid S) → I.ResidueField →+* S\", \"doc\": \"Given a ring homomorphism $ f : R → S $, if a prime ideal $ I $ is contained in the kernel of $ f $ and the complement of $ I $ maps into the units of $ S $, then there exists a unique ring homomorphi\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n  {\"name\": \"IsLocalRing.ResidueField.algebraMap_residue\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [inst_5 : IsLocalHom (algebraMap R S)] (x : R),\\n  (algebraMap (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)) ((IsLocalRing.residue R) x) =\\n\", \"doc\": \"For any element $x$ in a local ring $R$, the algebra map from the residue field of $R$ to the residue field of $S$ applied to the residue class of $x$ in $R$ equals the residue class in $S$ of the alg\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: maps out of a residue field and formally etale algebraic field extensions do not state simultaneous compatible residue sections for these nilpotent local rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen coefficient field sections for a local homomorphism of equicharacteristic Artinian local rings with separable residue extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \":\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (ResidueField R) (ResidueField S) ∧ (maximalIdeal R).map (algebraMap R S) = maximalIdeal S\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"IsLocalRing.ResidueField.map\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"(f : R →+* S) [IsLocalHom f] : ResidueField R →+* ResidueField S\", \"doc\": \"Given a local ring homomorphism $ f : R \\\\to S $ between commutative local rings, this is the induced ring homomorphism from the residue field $ R/\\\\mathfrak{m}_R $ to the residue field $ S/\\\\mathfrak{m}\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.FormallyUnramified.isSeparable\", \"module\": \"Mathlib.RingTheory.Unramified.Field\", \"type\": \": Algebra.IsSeparable K L\", \"doc\": \"If a commutative ring $ A $ is formally unramified over a commutative ring $ R $, then $ A $ is a separable $ R $-algebra.\"}\n  {\"name\": \"IsLocalRing.instCommRingResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → CommRing (IsLocalRing.ResidueField R)\", \"doc\": \"For any commutative ring $ R $ that is a local ring, the residue field of $ R $, defined as the quotient of $ R $ by its unique maximal ideal of non-units, inherits a commutative ring structure from $\"}\n  {\"name\": \"IsLocalRing.ResidueField.lift\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"{R S : Type*} [CommRing R] [IsLocalRing R] [Field S] (f : R →+* S) [IsLocalHom f] : IsLocalRing.ResidueField R →+* S\", \"doc\": \"Given a commutative local ring $ R $, a field $ S $, and a local ring homomorphism $ f : R \\to S $, this constructs the induced ring homomorphism from the residue field of $ R $ (obtained by quotientin\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] [EssFiniteType K L] : FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K L] : FormallyEtale K L ↔ Algebra.IsSeparable K L\", \"doc\": \"For a commutative ring $ K $ and a $ K $-algebra $ L $ of essential finite type, $ L $ is formally étale over $ K $ if and only if $ L $ is separable over $ K $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: maps out of a residue field and formally etale algebraic field extensions do not state simultaneous compatible residue sections for these nilpotent local rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, FormallySmooth",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'FormallySmooth'",
+   "date": "2026-10-24",
+   "verdict": "no match: maps out of a residue field and formally etale algebraic field extensions do not state simultaneous compatible residue sections for these nilpotent local rings."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientField|coefficient_field|Cohen.*section|section.*residue",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/LSeries/SumCoeff.lean\", \"line\": \"167\", \"text\": \"noncomputable section residue\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/LocallyCompact.lean\", \"line\": \"107\", \"text\": \"section FiniteResidueField\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"line\": \"305\", \"text\": \"section ResidueField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"21\", \"text\": \"  the evaluation map from sections over `U` to the residue field at `x`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"234\", \"text\": \"section fromResidueField\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"30\", \"text\": \"section BijectiveResidueField\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: maps out of a residue field and formally etale algebraic field extensions do not state simultaneous compatible residue sections for these nilpotent local rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field embeds as a section of the residue homomorphism of an equicharacteristic local ring with nilpotent maximal ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.ResidueField.lift\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : IsLocalRing R] → [inst_2 : Field S] → (f : R →+* S) → [IsLocalHom f] → IsLocalRing.ResidueField R →+* S\", \"doc\": \"Given a commutative local ring $ R $, a field $ S $, and a local ring homomorphism $ f : R \\to S $, this constructs the induced ring homomorphism from the residue field of $ R $ (obtained by quotientin\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [IsLocalRing S] [IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], IsField (S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal \", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the quotient ring $ S / \\\\mathfrak{m}_R S $ is a field, where $ \\\\mathfrak{m}_R $ denotes the maximal ideal of the local ring $ R $.\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"IsLocalRing.ResidueField.algebraMap_residue\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [inst_5 : IsLocalHom (algebraMap R S)] (x : R),\\n  (algebraMap (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)) ((IsLocalRing.residue R) x) =\\n\", \"doc\": \"For any element $x$ in a local ring $R$, the algebra map from the residue field of $R$ to the residue field of $S$ applied to the residue class of $x$ in $R$ equals the residue class in $S$ of the alg\"}\n  {\"name\": \"IsLocalRing.ResidueField.instAlgebra\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : IsLocalRing R] →\\n        [inst_2 : CommRing S] →\\n          [inst_3 : IsLocalRing S] →\\n            [inst_4 : Algebra R S] →\\n              [IsLocalHom (algebraMap R S)] → Algebra (IsLocalRing.ResidueField R) (IsLocalRing.Res\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (IsLocalRing.ResidueFiel\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: maps out of a residue field and formally etale algebraic field extensions do not state simultaneous compatible residue sections for these nilpotent local rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible coefficient field sections of a local homomorphism between characteristic p local rings with nilpotent maximal ideals and perfect source residue field",
+   "results": "Hits read: PerfectionMap.map, PerfectionMap, PerfectRing.liftAux, PerfectionMap.of, PreTilt, PreTilt.coeff, IsPerfectClosure, PerfectionMap.mk'.",
+   "date": "2026-10-24",
+   "verdict": "no match: none states the simultaneous compatible sections. Formal smoothness of arbitrary extensions of a perfect field is not supplied by the finite-generation instance; the existing DAG square-zero lifting node supplies the needed general case."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*section|lift.*nilpotent|of_perfectField",
+   "results": "Hits read: Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Smooth/Pi.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean. Search directory: Mathlib/RingTheory/Smooth. Basic.lean:125-143 gives nilpotent lifting assuming formal smoothness; Field.lean:53-59 requires EssFiniteType for a perfect lower field.",
+   "date": "2026-10-24",
+   "verdict": "no match: none states the simultaneous compatible sections. Formal smoothness of arbitrary extensions of a perfect field is not supplied by the finite-generation instance; the existing DAG square-zero lifting node supplies the needed general case."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift residue fields into local rings with nilpotent maximal ideal and choose compatible coefficient fields",
+   "results": "Hits read: IsLocalRing.instCommRingResidueField, IsLocalRing.ResidueField, IsLocalRing.residue, IsLocalRing.instInhabitedResidueField, IsLocalRing.ResidueField.lift, IsLocalRing.ResidueField.algebra, IsLocalRing.ResidueField.field, Ideal.ResidueField.liftₐ.",
+   "date": "2026-10-24",
+   "verdict": "no match: none states the simultaneous compatible sections. Formal smoothness of arbitrary extensions of a perfect field is not supplied by the finite-generation instance; the existing DAG square-zero lifting node supplies the needed general case."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsSeparable\"",
+   "results": "Hits read: Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable.",
+   "date": "2026-10-24",
+   "verdict": "no match: none states the simultaneous compatible sections. Formal smoothness of arbitrary extensions of a perfect field is not supplied by the finite-generation instance; the existing DAG square-zero lifting node supplies the needed general case."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure theorem compatible sections of residue homomorphisms through nilpotent ideals using formal smoothness of arbitrary field extensions over perfect fields",
+   "results": "Hits read: Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, PreTilt.untiltFun, Ideal.ResidueField.liftₐ.",
+   "date": "2026-10-24",
+   "verdict": "no match: none states the simultaneous compatible sections. Formal smoothness of arbitrary extensions of a perfect field is not supplied by the finite-generation instance; the existing DAG square-zero lifting node supplies the needed general case."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-artin-schreier-degree-p",
+  "date": "2026-10-24",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09F1, lemma-characteristic-p-case; conclusion used only in its finite separable totally ramified form, not the stronger Galois wording. Tag 09F1 second paragraph: compatible residue sections into A/pi^N and B/pi^N from Tag 09EZ.",
+   "via": [
+    "lem-sfb-epp-artin-schreier-degree-p",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-compatible-truncated-coefficients",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Tag 09EZ using existing perfect-field separating-basis and arbitrary separable-field square-zero lifting nodes. Wrote both finite inductions, quotient identifications and the algebra-structure equation proving compatibility. Statement unchanged; no new nodes, Lean writing or compilation.",
+  "blueprint": "Historical auxiliary algebra for the Epp subargument of the direct-image preservation chain recorded in blueprint.from.place. Read the latest sk-thm-sf-ctf-stability unit and det-thm-sf-ctf-stability-direct-images proof (3); the current proof does not state this auxiliary algebra. The ancestor tool returns None; retained inherited null ancestor and via list. Whole-blueprint searches found no equivalent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-9cca2304b",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-9cca2304b (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra Tag 09EZ (lemma-cohen; tags/tags:11917): sections exist for a local ring killed by p with nilpotent maximal ideal, and a compatible σ' exists when κ'/κ is separable. The item specializes this to a perfect lower residue field (030Z: any extension of a perfect field is separable). The statement is the imported one, unchanged and not weakened. Its only citer, lem-sfb-epp-artin-schreier-degree-p, uses it in this form for A/π^N→B/π^N. Opened every cited statement: perfect-field-separating-basis (Mathlib leaf), def-weil-pbc-separable-field-extension (1)/(2), lem-sfb-separable-field-square-zero-lifting (reviewed pass, same unit, arbitrary separable L/k, no cycle) and def-weil-pbc-algebra-hom-quotient. Step 1: F_p perfect, so the leaf applies to every finitely generated intermediate field of k/F_p and l/k, which gives separability by clause (2). Step 2: the induction a_n is set up with base, step and end; D/J≅R/m^n because the kernel is m^n/m^{n+1}, J²=0 because 2n≥n+1, and m^u=0 gives s_R. Step 3 (elementary): res_S∘f∘s_R=f̄, so l is a k-algebra via f̄. Step 4: the same induction for l/k over the k-structure f∘s_R; the k-algebra equation gives s_S∘f̄=f∘s_R. Edge cases: u=1 or v=1, f=id, transcendental l/k, imperfect l. Searched the DAG for duplicates (09EZ, coefficient field, residue section) and found none. Route is fine (the lifting node is in the same unit; the others are a leaf and definitions); no tool_uses; no SGA. No new nodes, no fixes. Minor: the report mentions a citations.json that was not delivered; it has no effect on the DAG."
+ }
+}

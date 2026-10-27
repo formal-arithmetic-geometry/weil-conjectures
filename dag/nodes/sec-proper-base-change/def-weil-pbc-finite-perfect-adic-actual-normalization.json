@@ -1,0 +1,116 @@
+{
+ "id": "def-weil-pbc-finite-perfect-adic-actual-normalization",
+ "kind": "definition",
+ "title": "Actual quotient descent against the explicit constant diagram",
+ "statement": "Given X,d,M,V,T, use the explicit constant levels and transitions [def-weil-pbc-finite-perfect-adic-constant-normalization]. FinitePerfectAdicActualNormalization comprises etale actual levels K_n with bounded finite lisse cohomology, sourcewise universal coherent consecutive coefficient arrows [def-weil-pbc-etale-universal-normalization], and inhabited geometric stalks of the Isom sheaf from the explicit constant level to K_n. It also supplies scalar-forgetting realization functors on U_proet to completed-ring modules on every W→U, coefficient interchange, actual and model level comparisons, and both consecutive normalization identities with the actual strict and model diagrams [def-weil-pbc-finite-perfect-adic-tower-data]. It has no Isom-presheaf reduction maps and no assertion of boundedness, lisse cohomology, or universality for the constant diagram.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-constant-normalization",
+  "def-weil-pbc-etale-universal-normalization",
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-constructible-finite-locally-constant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal arrows restriction of scalars induce a natural map on presheaves of local isomorphisms",
+   "results": "Eight hits: ModuleCat.restrictScalars, PresheafOfModules.restrictScalars, SheafOfModules.restrictScalars and ordinary restriction pseudofunctors; no derived local Isom normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing scalar restriction and universal-arrow APIs; no direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite perfect complexes from pro-etale to etale with compatible coefficient reduction normalization",
+   "results": "Eight hits about standard etale algebras, smoothness, and ring-theoretic descent; no derived finite quotient normalization presentation.",
+   "date": "2026-10-27",
+   "verdict": "No replacement for the project-specific finite coefficient interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StructuredArrow.IsUniversal\", \"IsIso\"",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "Use desc, fac and hom_ext from StructuredArrow.IsUniversal."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Uu]niversal|finitePerfectAdic.*[Dd]escent; localIsomorphismPresheaf; IsPerfect.finite_homology",
+   "results": "Mathlib has StructuredArrow.IsUniversal and coefficient restriction. The project has NormalizedDerivedIsomorphismTransport universalIso and normalized_square_transport, finite-ring descent, exact constant cohomology comparison, and IsPerfect boundedness and finite_homology. No canonical constant normalization diagram or actual quotient package matching these statements exists. Blueprint search for universal normalization returned zero matches.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved generic tools and state only the remaining finite quotient steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicIsomorphismPresentation",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicActualNormalization",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicActualNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FinitePerfectAdicActualNormalization",
+  "statement": "structure FinitePerfectAdicActualNormalization\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)\n    (T : FinitePerfectAdicAlgebraTower d)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

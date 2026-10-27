@@ -1,0 +1,379 @@
+{
+ "id": "lem-sfb-borel-quotient-proper-geometry",
+ "kind": "statement",
+ "title": "Properness and regular integral geometry of homogeneous Borel quotients",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $H\\subseteq G$ be a smooth connected closed subgroup [def-sc-group-scheme-subgroup]. Let $p:G\\to X$ be a quotient in the sense of [lem-sfb-algebraic-group-homogeneous-quotient]: it is faithfully flat and of finite presentation, two test-scheme points have the same image exactly when their ratio lies in $H$, and all points lift fpqc locally. Then $G$ and $X$ are smooth geometrically integral $F$-schemes and regular Noetherian schemes [def-pc-integral-scheme, def-weil-regular-scheme]; geometrically integral means integral after every extension of $F$, and Noetherian means admitting a finite cover by spectra of Noetherian rings. The morphism $p$ is smooth, and for every point $x\\in X$ and every field extension $L/\\kappa(x)$ the fibre $G\\times_X\\operatorname{Spec}L$ is nonempty and integral. If $H$ is maximal among smooth connected solvable closed subgroups of $G$, then $X$ is proper over $F$ [def-weil-proper-morphism]. Here solvable means that the iterated scheme-theoretic commutator subgroup eventually becomes trivial; the commutator subgroup is the smallest closed subgroup through which the commutator map factors.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollaries 5.26--5.27, printed p.105; Proposition 7.15 (smoothness of the quotient projection), printed pp.142--143; Theorem 17.9(a), printed p.354 (properness). Smooth connected varieties over an algebraically closed field are geometrically integral, as used throughout Chapter 17; Stacks descent.tex Tag 036D (lemma-regular-local-smooth) for regularity. This is a geometric strengthening for an already represented quotient, not its construction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-scheme",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "def-weil-proper-morphism",
+  "def-sfb-borel-subgroup-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Identify the given quotient with the separated finite-type quotient supplied by [lem-sfb-algebraic-group-homogeneous-quotient]. On a test scheme, choose fpqc-local lifts to $G$ for a point of either quotient and send each lift to its image in the other quotient. Two lifts have ratio in $H$, so their images agree. The fpqc descent statement [lem-weil-pbc-fpqc-representable-descent] glues these images uniquely; both composites are the identity on the covers by lifts, hence globally. Thus $X$ is separated and of finite type. The same descent constructs its left $G$-action: $a\\cdot p(b)=p(ab)$, since $(ab)^{-1}(ab')=b^{-1}b'$. The group laws hold on lifts and hence by uniqueness. The coset criterion on every test scheme gives the kernel-pair isomorphism\n$G\\times_FH\\xrightarrow{\\sim}G\\times_XG$, $(b,h)\\mapsto(b,bh)$,\nwith inverse $(b,b')\\mapsto(b,b^{-1}b')$. Membership of the ratio in $H$ gives its unique factorization through the closed subgroup. These formulas are natural in the test scheme, so they give inverse scheme morphisms.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 5.20, Propositions 5.21--5.24, pp.104--105; Stacks descent.tex Tag 023Q, lemma-fpqc-universal-effective-epimorphisms"
+   }
+  },
+  {
+   "text": "Base change $p$ along itself. The preceding isomorphism identifies that base change with $G\\times_FH\\to G$, the base change of the smooth structure morphism of $H$. It is smooth by [lem-pc-proper-base-change]. Since $p$ is flat, surjective and quasi-compact (indeed of finite presentation), [lem-trf-smooth-fpqc-base-descent] descends this smoothness and proves that $p$ is smooth. Independently, $G\\to\\operatorname{Spec}F$ is smooth and factors as $p$ followed by the structure map of $X$. The flat, surjective, locally finitely presented source-descent theorem [lem-sbc-smooth-flat-surjective-source-descent] therefore proves that $X\\to\\operatorname{Spec}F$ is smooth.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 5.26, p.105; Proposition 7.15 and its cartesian square, pp.142--143; Stacks descent.tex Tags 02VL and 05B5"
+   }
+  },
+  {
+   "text": "The continuous surjection $p$ sends the nonempty connected space $G$ onto $X$, so $X$ is nonempty and connected: a decomposition into clopen sets pulls back to such a decomposition of $G$, and surjectivity detects emptiness. Apply [lem-weil-separably-closed-geometrically-connected] to each of $G,H,X$; an algebraically closed field is separably closed. They remain nonempty and connected after every field extension $K/F$. Their structure maps remain smooth by [lem-pc-proper-base-change], so [lem-weil-pbc-smooth-scheme-over-field-regular] makes every such base change regular. Apply [lem-sc-regular-connected-integral] to obtain integrality for every $K$, proving geometric integrality. At $K=F$ this proves regularity too. Finally [lem-weil-pbc-finite-type-over-noetherian] makes $G$ and $X$ Noetherian, since they are finite type over the Noetherian scheme $\\operatorname{Spec}F$ (a field has only the two ideals). Locally Noetherian plus quasi-compact gives the stated finite Noetherian affine cover by choosing affine neighbourhoods and taking a finite subcover. The same argument gives geometric integrality for any smooth connected affine finite-type $F$-group, without using any properness assertion.",
+   "uses": [
+    "lem-weil-separably-closed-geometrically-connected",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0363 (lemma-separably-closed-field-connected-components), 056S (lemma-smooth-regular); properties.tex Tags 0569 and 033N; morphisms.tex Tag 01T6"
+   }
+  },
+  {
+   "text": "Fix $x\\in X$, put $k=\\kappa(x)$, and choose an algebraic closure $\\Omega/k$. The fibre $Y_\\Omega=G\\times_X\\operatorname{Spec}\\Omega$ is nonempty by [lem-weil-pbc-surjective-base-change], and finite type by [lem-sfb-finite-type-composition-base-change], since $p$ is of finite presentation. By the density of closed points [lem-sc-lft-over-field-jacobson-space] and [lem-weil-pbc-closed-point-residue-field-base], it has an $\\Omega$-point $b$. The kernel-pair formulas of step 1 give an isomorphism $H_\\Omega\\to Y_\\Omega$, $h\\mapsto bh$, with inverse $b'\\mapsto b^{-1}b'$. Thus $Y_\\Omega$ is connected by step 3. The algebraically closed extension criterion [lem-weil-geometrically-connected-algebraic-closure] proves that $G_x$ is geometrically connected. This applies to every $x$. Together with smoothness of $p$, [lem-trf-smooth-connected-fibre-normal-integrality] proves that $G\\times_X\\operatorname{Spec}L$ is integral for every extension $L/k$. Its nonemptiness also follows by base changing the surjection $p$. No $L$-rational lift was assumed: the lift was chosen only over $\\Omega$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-trf-smooth-connected-fibre-normal-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.24, p.104, Corollary 5.27, p.105; Stacks varieties.tex algebraically closed extension criterion; more-morphisms.tex Tag 057J, smooth specialization"
+   }
+  },
+  {
+   "text": "Now assume $H$ is maximal smooth connected solvable. Among all smooth connected solvable closed subgroups of $G$, choose $B_0$ of largest dimension $d_0$. This set is nonempty (the identity subgroup), and its dimensions are nonnegative integers bounded by $\\dim G<\\infty$: finiteness is [lem-kun-dimension-finite-type], and for a proper subgroup the bound follows from [lem-wf-affine-dimension-drop], since $G$ is an integral affine variety by step 3. These subgroups are integral by the same argument. Apply [lem-sfb-solvable-subgroup-flag-realization] to $B_0\\subseteq G$. Obtain a faithful representation on $V$ and a complete flag $\\mathcal F_0$ with scheme-theoretic stabilizer exactly $B_0$, as well as the projective finite-type flag scheme $\\operatorname{Fl}(V)$. For every flag $\\mathcal E$ with stabilizer $K$, that node also gives a smooth connected solvable closed subgroup $K_{\\mathrm{red}}^\\circ\\subseteq G$ with $\\dim K_{\\mathrm{red}}^\\circ=\\dim K$. Maximality of $d_0$ therefore implies $\\dim K\\leq d_0$.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-wf-affine-dimension-drop",
+    "lem-sfb-solvable-subgroup-flag-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9 proof, p.354, first paragraph (maximum dimension and flag realization)"
+   }
+  },
+  {
+   "text": "The flag scheme is proper, hence separated, by [lem-pc-projective-proper]. Its $G$-action sends each flag subbundle to its image under the representation matrix; the group laws are the matrix action laws. Let $O_0$ be the reduced orbit of $\\mathcal F_0$ in $\\operatorname{Fl}(V)$. By [lem-sfb-smooth-group-orbit-geometry], it is smooth and locally closed, of dimension $\\dim G-d_0$. The same node and step 5 show that every orbit of an $F$-rational flag has dimension $\\dim G-\\dim K\\geq\\dim G-d_0$. If the boundary $\\overline{O_0}\\setminus O_0$ were nonempty, it would be a nonempty closed subset of the finite-type flag scheme. The Jacobson density lemma and the closed-point residue-field lemma supply an $F$-rational point in it. But its orbit has strictly smaller dimension than $O_0$ by the orbit lemma, contradicting this lower bound. Thus $O_0$ is closed. It is proper and finite type by the closed-reduced-subscheme clause of [lem-sfb-solvable-subgroup-flag-realization]. Finally [lem-sfb-homogeneous-orbit-quotient-geometry] identifies $G/B_0$ with $O_0$, respecting $b\\mapsto b\\mathcal F_0$, and says that every $F$-point lifts to $G(F)$.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-solvable-subgroup-flag-realization",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9 proof, p.354, second paragraph; orbit lemma 1.66 and Propositions 7.11--7.12, pp.141--142"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-solvable-proper-fixed-point] to the left action of $H$ on the nonempty proper finite-type scheme $O_0\\simeq G/B_0$. Write its fixed point as $g\\mathcal F_0$ with $g\\in G(F)$, using step 6. Being scheme-theoretically fixed means, on every $F$-algebra $A$, that $g^{-1}hg$ stabilizes $(\\mathcal F_0)_A$ for every $h\\in H(A)$. Its scheme-theoretic stabilizer is $B_0$, hence $H\\subseteq gB_0g^{-1}$ as subgroup schemes. The latter subgroup is smooth, connected and solvable, since conjugation is a group-scheme isomorphism. Maximality of $H$ makes this inclusion an equality. The formulas\n$aH\\mapsto agB_0$ and $cB_0\\mapsto cg^{-1}H$\ngive inverse quotient maps: replacing $a$ by $ah$ changes $ag$ by right multiplication with $g^{-1}hg\\in B_0$, and replacing $c$ by $cb$ changes $cg^{-1}$ by right multiplication with $gbg^{-1}\\in H$. On fpqc-local lifts these formulas are scheme morphisms and agree on overlaps, so [lem-weil-pbc-fpqc-representable-descent] glues them; their composites are the identity. Quotient uniqueness in step 1 identifies the first quotient with the given $X$. Thus $X\\simeq G/B_0\\simeq O_0$ is proper over $F$.",
+   "uses": [
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9 proof, p.354, final paragraph (fixed point, conjugacy and completeness)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-kun-dimension-finite-type",
+  "lem-wf-affine-dimension-drop",
+  "lem-sfb-solvable-subgroup-flag-realization",
+  "lem-pc-projective-proper",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-solvable-proper-fixed-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 5.24--5.25, Corollaries 5.26--5.27, Proposition 7.15 and Theorem 17.9 proof, pp.104--105,142--143,354; regularity and geometric connectedness supplied by the cited Stacks nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of smooth connected algebraic group by Borel subgroup is smooth integral proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"QuotientGroup.instCompactSpaceQuotientSubgroup\", \"module\": \"Mathlib/Topology/Algebra/Group/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [CompactSpace G] (N : Subgroup G), CompactSpace (G ⧸ N)\", \"doc\": \"For any compact topological group $G$ and its subgroup $N$, the quotient group $G/N$ equipped with the quotient topology is also a compact space.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"QuotientGroup.instLocallyCompactSpace\", \"module\": \"Mathlib/Topology/Algebra/Group/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [ContinuousMul G] [LocallyCompactSpace G]\\n  (N : Subgroup G), LocallyCompactSpace (G ⧸ N)\", \"doc\": \"For any locally compact topological group $ G $ and its subgroup $ N $, the quotient group $ G/N $ equipped with the quotient topology is locally compact.\"}\n  {\"name\": \"QuotientAddGroup.instCompactSpaceQuotientAddSubgroup\", \"module\": \"Mathlib/Topology/Algebra/Group/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : AddGroup G] [CompactSpace G] (N : AddSubgroup G),\\n  CompactSpace (G ⧸ N)\", \"doc\": \"Let $ G $ be a compact topological additive group and $ N $ an additive subgroup of $ G $. Then the quotient group $ G/N $, endowed with the quotient topology, is compact.\"}\n  {\"name\": \"t2Space_quotient_mulAction_of_properSMul\", \"module\": \"Mathlib/Topology/Algebra/ProperAction/Basic\", \"type\": \"∀ {G : Type u_1} {X : Type u_2} [inst : Group G] [inst_1 : MulAction G X] [inst_2 : TopologicalSpace G]\\n  [inst_3 : TopologicalSpace X] [ProperSMul G X], T2Space (Quotient (MulAction.orbitRel G X))\", \"doc\": \"If a topological group $G$ acts properly on a topological space $X$, then the quotient space $X/G$ (the space of orbits under the action) is a Hausdorff space.\"}\n  {\"name\": \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] [CompactSpace G] (U : OpenSubgroup G),\\n  Finite (G ⧸ ↑U)\", \"doc\": \"If $G$ is a compact topological group with continuous multiplication and $U$ is an open subgroup of $G$, then the quotient group $G/U$ is finite.\"}\n  {\"name\": \"QuotientGroup.instT2Space\", \"module\": \"Mathlib/Topology/Algebra/ProperAction/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] {H : Subgroup G} [IsClosed ↑H],\\n  T2Space (G ⧸ H)\", \"doc\": \"If $ G $ is a topological group and $ H $ is a closed subgroup of $ G $, then the quotient group $ G/H $ equipped with the quotient topology is a Hausdorff space.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: topological compactness of an abstract quotient and scheme quasi-compactness do not give proper smooth homogeneous algebraic varieties or Borel subgroups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flag variety of a connected affine algebraic group is complete",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], CompactSpace ↥X\", \"doc\": \"Every affine scheme is a compact space, meaning its underlying topological space satisfies the finite open cover condition for compactness.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], CompactSpace ↥X\", \"doc\": \"Every quasi-affine scheme has an underlying topological space that satisfies the compactness property (every open cover has a finite subcover).\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"AlgebraicGeometry.IsAffine (⊤_ AlgebraicGeometry.Scheme)\", \"doc\": \"The terminal object in the category of schemes is an affine scheme.\"}\n  {\"name\": \"InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ (k : Type u_3) (K : Type u_4) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [IsGalois k K],\\n  CompactSpace Gal(K/k)\", \"doc\": \"The Galois group $\\\\text{Gal}(K/k)$ of a Galois extension $K/k$ is equipped with the Krull topology, making it a compact space.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.IsDominant X.toSpecΓ\", \"doc\": \"For any compact scheme $X$, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is dominant, meaning its image is dense in $\\\\operatorname{Spec}(\\\\Gamma(X))$.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: topological compactness of an abstract quotient and scheme quasi-compactness do not give proper smooth homogeneous algebraic varieties or Borel subgroups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Proper\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: topological compactness of an abstract quotient and scheme quasi-compactness do not give proper smooth homogeneous algebraic varieties or Borel subgroups"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|homogeneous.*quotient",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"335\", \"text\": \"  rw [stalkToFiberRingHom_germ, homogeneousLocalizationToStalk, e x hxV, Quotient.liftOn'_mk'']\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"348\", \"text\": \"  rw [homogeneousLocalizationToStalk, Quotient.liftOn'_mk'',\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: topological compactness of an abstract quotient and scheme quasi-compactness do not give proper smooth homogeneous algebraic varieties or Borel subgroups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel quotient proper smooth connected algebraic group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"QuotientGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [IsTopologicalGroup G] [MeasurableSpace G] [BorelSpace G]\\n  {N : Subgroup G} [N.Normal] [IsClosed (N : Set G)] : BorelSpace (G ⧸ N)\", \"doc\": \"If $ G $ is a Polish topological group and $ N $ is a closed normal subgroup of $ G $, then the quotient group $ G/N $ is equipped with the Borel $ \\\\sigma $-algebra generated by the quotient topology \"}\n  {\"name\": \"t2Space_quotient_mulAction_of_properSMul\", \"module\": \"Mathlib.Topology.Algebra.ProperAction.Basic\", \"type\": \"[ProperSMul G X] : T2Space (Quotient (MulAction.orbitRel G X))\", \"doc\": \"If a topological group $G$ acts properly on a topological space $X$, then the quotient space $X/G$ (the space of orbits under the action) is a Hausdorff space.\"}\n  {\"name\": \"CosetSpace.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [MeasurableSpace G] [BorelSpace G] {N : Subgroup G}\\n  [T2Space (G ⧸ N)] [SecondCountableTopology (G ⧸ N)] : BorelSpace (G ⧸ N)\", \"doc\": \"For a Polish group $G$ and its subgroup $N$, if the quotient space $G/N$ is Hausdorff and second-countable, then $G/N$ is equipped with a Borel $\\\\sigma$-algebra generated by its quotient topology. Thi\"}\n  {\"name\": \"QuotientAddGroup.measurableVAdd\", \"module\": \"Mathlib.MeasureTheory.Measure.Haar.Quotient\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {Γ : AddSubgroup G} [inst_1 : MeasurableSpace G] [inst_2 : TopologicalSpace G]\\n  [IsTopologicalAddGroup G] [BorelSpace G] [BorelSpace (G ⧸ Γ)], MeasurableVAdd G (G ⧸ Γ)\", \"doc\": \"The additive action of a topological additive group $ G $ on its quotient $ G/\\\\Gamma $ is measurable with respect to the Borel $ \\\\sigma $-algebras on $ G $ and $ G/\\\\Gamma $, where $ \\\\Gamma $ is a clos\"}\n  {\"name\": \"AddCosetSpace.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"∀ {G : Type u_3} [inst : TopologicalSpace G] [PolishSpace G] [inst_2 : AddGroup G] [inst_3 : MeasurableSpace G]\\n  [BorelSpace G] {N : AddSubgroup G} [T2Space (G ⧸ N)] [SecondCountableTopology (G ⧸ N)], BorelSpace (G ⧸ N)\", \"doc\": \"Given a Polish additive group $ G $ and a closed additive subgroup $ N $, if the quotient space $ G/N $ is Hausdorff (T2) and second-countable, then $ G/N $ is a Borel space. This means the measurable\"}\n  {\"name\": \"QuotientAddGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"∀ {G : Type u_3} [inst : TopologicalSpace G] [PolishSpace G] [inst_2 : AddGroup G] [IsTopologicalAddGroup G]\\n  [inst_4 : MeasurableSpace G] [BorelSpace G] {N : AddSubgroup G} [N.Normal] [IsClosed ↑N], BorelSpace (G ⧸ N)\", \"doc\": \"Let $ G $ be a Polish space equipped with the structure of an additive group, where the group operations are continuous. Let $ N $ be a closed normal additive subgroup of $ G $. Then the quotient grou\"}\n  {\"name\": \"QuotientGroup.instDiscreteMeasurableSpace\", \"module\": \"Mathlib.MeasureTheory.MeasurableSpace.Constructions\", \"type\": \"{G} [Group G] [MeasurableSpace G] [DiscreteMeasurableSpace G] (S : Subgroup G) : DiscreteMeasurableSpace (G ⧸ S)\", \"doc\": \"Given a group $ G $ equipped with a measurable space and a subgroup $ S $, the quotient group $ G/S $ is equipped with a measurable space where a subset of the quotient is measurable if and only if it\"}\n  {\"name\": \"QuotientGroup.measurableSpace\", \"module\": \"Mathlib.MeasureTheory.MeasurableSpace.Constructions\", \"type\": \"{G} [Group G] [MeasurableSpace G] (S : Subgroup G) : MeasurableSpace (G ⧸ S)\", \"doc\": \"Given a group $ G $ equipped with a measurable space and a subgroup $ S $, the quotient group $ G/S $ is equipped with a measurable space where a subset of the quotient is measurable if and only if it\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: topological compactness of an abstract quotient and scheme quasi-compactness do not give proper smooth homogeneous algebraic varieties or Borel subgroups"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|homogeneous.*quotient|quotient.*homogeneous",
+   "results": "2 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological/group quotients or proper-morphism definitions do not give homogeneous group-scheme geometry and Borel properness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flag variety G B for a Borel subgroup of a smooth connected affine algebraic group is a proper scheme",
+   "results": "8 hits; AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.IsProper.instMorphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological/group quotients or proper-morphism definitions do not give homogeneous group-scheme geometry and Borel properness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected algebraic group quotient by smooth connected subgroup has geometrically integral fibres and Borel quotient is proper",
+   "results": "8 hits; CategoryTheory.PreGaloisCategory.has_decomp_quotients, QuotientGroup.instCompactSpaceQuotientSubgroup, QuotientGroup.instLocallyCompactSpace, Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace, QuotientAddGroup.instCompactSpaceQuotientAddSubgroup, QuotientGroup.isClosedMap_coe, Subgroup.quotient_finite_of_isOpen, isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological/group quotients or proper-morphism definitions do not give homogeneous group-scheme geometry and Borel properness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A maximal connected solvable subgroup of a linear algebraic group has a complete homogeneous space of cosets",
+   "results": "8 hits; solvable_quotient_of_solvable, CategoryTheory.PreGaloisCategory.has_decomp_quotients, isSolvable_of_top_eq_bot, IsSolvable, MulAction.IwasawaStructure.isSimpleGroup, MulAction.IwasawaStructure.commutator_le, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, Field.absoluteGaloisGroup.commutator_closure_isNormal",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological/group quotients or proper-morphism definitions do not give homogeneous group-scheme geometry and Borel properness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-characteristic-picard-sequence",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Characteristic sequence of a Borel quotient. Supporting input: Properness and regular integral geometry of homogeneous Borel quotients.",
+   "via": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-quotient-proper-geometry",
+  "worker": "stage1",
+  "summary": "Q17: seven-step proof using existing quotient, smooth-descent, regularity, connectedness, flag-stabilizer, orbit and Borel fixed-point nodes; no new nodes. Checked citation statements and excluded cycles back to this item. Kept mathematical statement and source metadata unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Characteristic sequence of a Borel quotient. Supporting input: Properness and regular integral geometry of homogeneous Borel quotients.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-trf-smooth-fpqc-base-descent",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-weil-separably-closed-geometrically-connected",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "General scheme-geometric tool used with precisely the hypotheses in its statement; the item unit has no replacement for this foundational quotient-geometry input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-kun-dimension-finite-type",
+  "lem-wf-affine-dimension-drop",
+  "lem-pc-projective-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-895789ddf",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-895789ddf (reviewer sub-agent of L); spot-checked: I read the item and all 22 cited statements in full; there are no new nodes and the statement is unchanged. The proof follows Milne iAG2017 Thm 17.9(a), p.354, which I checked in the local PDF: B0 of maximum dimension, a flag with stabilizer B0, the minimum-dimension orbit closed by 1.66, the flag variety proper, then the Borel fixed point 17.3 gives H<=gB0g^-1 and equality by maximality. Step 1: quotient identification, action and kernel pair by fpqc gluing; elementary and correct. Step 2: p is smooth by 02VL fpqc base descent applied to G x_X G = G x H -> G (p is flat, qc and surjective), and X is smooth by 05B5 source descent. Step 3: 0363, 056S and regular+connected => integral give geometric integrality; finite type over Spec F gives Noetherian. Step 4: an Omega-point via Jacobson density and the residue-field node, Y_Omega = H_Omega, the alg-closure criterion, then 057J-type integrality for every L/kappa(x); no L-point is assumed. Step 5: dimension bounds, and the flag node's K_red° clause handles nonreduced stabilizers in char p. Step 6: boundary F-point contradiction, closed reduced orbit proper, orbit = G/B0. Step 7: fixed point and descent of the coset maps. Edge cases checked: G=H, G=Ga, alpha_p, disconnected H. Not a duplicate of the unsplit general-borel-flag-variety (it lacks the regularity and fibre clauses); no cycle. Batch 5: lem-trf-smooth-fpqc-base-descent (02VL) and lem-trf-smooth-connected-fibre-normal-integrality (057J), plus the lem-trf-fppf-covering-base-change path, are generic scheme lemmas outside the trace-formula and Poincare-duality content, so they are accepted as tool uses. All declared split_report.tool_uses are generic black-box tools and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelQuotientProperGeometry",
+  "declaration": "AlgebraicGeometry.homogeneousQuotient_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientProperGeometry.lean",
+  "statement": "theorem homogeneousQuotient_geometry {F : Type u} [Field F] [IsAlgClosed F] (G H : Over (Spec (.of F))) [GrpObj G] [GrpObj H] [IsAffine G.left] [Smooth G.hom] [ConnectedSpace G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : H ⟶ G) [IsClosedSubgroupScheme i] [Smooth H.hom] [ConnectedSpace H.left] (X : Over (Spec (.of F))) (p : G ⟶ X) [Flat p.left] [Surjective p.left] [LocallyOfFinitePresentation p.left] [QuasiCompact p.left] [QuasiSeparated p.left] (hcoset : ∀ (T : Over (Spec (.of F))) (a b : T ⟶ G), a ≫ p = b ≫ p ↔ a⁻¹ * b ∈ Set.range (fun h : T ⟶ H ↦ h ≫ i)) (hlift : ∀ (T : Over (Spec (.of F))) (x : T ⟶ X), ∃ (I : Type u) (T' : I → Over (Spec (.of F))) (f : ∀ j, T' j ⟶ T), Presieve.ofArrows (fun j ↦ (T' j).left) (fun j ↦ (f j).left) ∈ Scheme.fpqcPrecoverage T.left ∧ ∀ j, ∃ g : T' j ⟶ G, g ≫ p = f j ≫ x) : Smooth G.hom ∧ GeometricallyIntegral G.hom ∧ IsRegularScheme G.left ∧ IsNoetherian G.left ∧ Smooth X.hom ∧ GeometricallyIntegral X.hom ∧ IsRegularScheme X.left ∧ IsNoetherian X.left ∧ Smooth p.left ∧ GeometricallyIntegral p.left ∧ (IsBorelGroupScheme i → IsProper X.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79f2b289b",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion matches the node. The quotient conditions (Flat/Surjective/LFP/QC/QS, hcoset, hlift with I:Type u) are verbatim the conjuncts of exists_homogeneousQuotient, and X is not assumed separated or of finite type. Conclusions: GeometricallyIntegral (Mathlib geometrically IsIntegral, which includes nonemptiness) on G.hom, X.hom and p.left; IsRegularScheme (with local Noetherianity); IsNoetherian; Smooth. IsBorelGroupScheme -> IsProper X.hom, where IsBorelGroupScheme is the landed def-sfb-borel-subgroup-scheme (closed, smooth, connected, scheme-theoretic solvable, maximal by factorization), equivalent to the node's maximality clause. stmt_deps only gains that landed node (allowed by brief-stage2 §5); statement field verbatim; sorry only; source and blueprint docstrings with all 7 proof steps; all 14 imports exist (Regular arrives through IsRegularScheme); lines <=100; no name clash; no pro-etale content. Edge cases H=G, H=1, Ga, char p, empty T, non-closed fibres checked. No file changed, so no compile."
+ }
+}

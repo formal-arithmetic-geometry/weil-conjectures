@@ -1,0 +1,121 @@
+{
+ "id": "lem-asd-presented-projective-line-kernel-adjunction",
+ "kind": "statement",
+ "title": "Kernel adjunction of the constructed projective-line diagonal datum",
+ "statement": "Under the positive finite-coefficient, presentation, splitting base-change and finite diagonal hypotheses of [lem-asd-presented-projective-line-trace-adjunction], a supported class gives the explicitly constructed trace-diagonal datum of [def-sf-p1-integral-transport-data], and its kernel counit is the counit of an adjunction between compact-support direct image and left tensor by the shifted pulled-back Tate line. This asserts the kernel counit equality, before the comparison with the prescribed ordered inverse-projection counit. The compact-support integrals are [lem-asd-presented-projective-line-kernel-integrals]; the lisse-line and kernel triangle inputs are [lem-asd-finite-etale-tate-local-line] and [lem-sf-diagonal-kernel-integral-triangles].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lem-sf-diagonal-kernel-integral-triangles"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a supported class whose constructed datum has both compact-support integrals one.",
+   "uses": [
+    "lem-asd-presented-projective-line-kernel-integrals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the global inverse of N to each stalk. The finite Tate local trivialization gives a lisse rank-one sheaf. Apply the kernel triangle theorem with its shifted pullback comparison, then form the adjunction from the constructed kernel unit and counit and the two triangle equalities.",
+   "uses": [
+    "lem-asd-finite-etale-tate-local-line",
+    "lem-sf-diagonal-kernel-integral-triangles"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-tate-local-line",
+  "lem-asd-presented-projective-line-kernel-integrals",
+  "lem-sf-diagonal-kernel-integral-triangles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport the two projective-line diagonal integrals through an isomorphism over the base while retaining the constructed trace",
+   "results": "Eight hits: scheme diagonal respectsIso and diagonalRestrictIsoDiagonal; elliptic-curve base-change identities; algebraic trace transport. No derived supported-integral comparison.",
+   "date": "2026-10-26",
+   "verdict": "No specialized match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id",
+   "results": "Generic inverse/hom cancellation and a descent-unit specialization.",
+   "date": "2026-10-26",
+   "verdict": "Generic cancellation only; used through the categorical calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "sfP1IntegralTransport|sectionComparison|traceComparison",
+   "results": "No Mathlib hits. Local source rg finds SfP1IntegralSectionComparison and SfP1IntegralTraceComparison, which are used rather than restated.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing section and trace comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A supported diagonal with both trace integrals equal to identity gives a twisted pullback adjunction",
+   "results": "CategoryTheory.MorphismProperty.Over.mapPullbackAdj; CategoryTheory.Limits.pullback.diagonal; CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_fst; CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_fst_assoc; CategoryTheory.Limits.pullback_map_diagonal_isPullback; CategoryTheory.Limits.pullbackDiagonalMapIdIso.congr_simp; CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_snd_assoc; CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceAdjunction",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Both diagonal triangle calculations and the actual inverse-projection counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectiveLinePresentedKernelAdjunction",
+  "file": "lean/Sheaf/SixFunctors/ProjectiveLinePresentedKernelAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_presentedFiniteP1KernelAdjunction",
+  "statement": "theorem exists_presentedFiniteP1KernelAdjunction\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (d : ∀ (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))),\n      ArbitraryBaseFiniteP1Splitting A N hA t T hT)\n    (hbc : ArbitraryBaseFiniteP1BaseChange A N hA t d)\n    {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]\n    (e : X ≅ ProjectiveLine Y) (w : e.hom ≫ (ProjectiveLine Y ↘ Y) = q)\n    (hY : IsUnit (N : Γ(Y, ⊤))) (hdiag : finiteP1DiagonalProperty A N hA t d Y hY) :\n    ∃ κ : Ext\n      ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine Y ↘ Y))).obj\n        (ordinaryFiniteConstant A (ProjectiveLine Y)))\n      (Scheme.finiteEtaleTateLine\n        (pullback (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) N A hA) 2,\n      ∃ adj : rightDerivedLowerShriek (ModuleCat.{u + 1} A) q ⊣\n        CoordinateTrace.pull A q ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj\n          ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧),\n        adj.counit = SfDiagonalKernel.counit A\n          (SfP1Transport.datum A N hA t q e w hY (d Y hY).trace κ)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

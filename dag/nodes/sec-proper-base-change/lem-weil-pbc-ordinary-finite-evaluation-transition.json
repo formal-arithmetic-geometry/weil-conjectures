@@ -1,0 +1,258 @@
+{
+ "id": "lem-weil-pbc-ordinary-finite-evaluation-transition",
+ "kind": "statement",
+ "title": "Uniquely normalized ordinary finite evaluation and quotient transition",
+ "statement": "Let $g:T'\\to T$ be a morphism of schemes. Use the Noetherian adic datum $A,I,P_n=A/I^n$, $S_{W,n}=(P_n)_W$, $B_W=\\varprojlim_n S_{W,n}$, projections $\\pi_{W,n}:B_W\\to S_{W,n}$ and quotient maps $q_{W,b,a}:S_{W,b}\\to S_{W,a}$ of [def-weil-pbc-adic-coefficient-datum], for $W=T,T'$ and positive indices. Use completed-coefficient module pullback $G=g^*$ and its strict-tower version $G^{\\mathrm{Tow}}$ of [def-weil-pbc-completed-pullback], and the fixed finite interfaces of [def-cbc-completed-reduction-finite-interfaces].\n\nWrite $F_n(M)=g_n^*(M\\otimes_{B_T}S_{T,n})$ and $E_n^0(M)=\\operatorname{ev}_nG^{\\mathrm{Tow}}\\mathcal R_T^0(M)$, where $\\mathcal R_T^0$ is the ordinary strict quotient tower. All ordinary tensors are sheafified scalar tensors [def-pur-sheaf-tensor-product]. For a site arrow $f:U\\to g^*V$, let $g_f^{-1}(x)$ denote the local inverse-image section obtained from the module adjunction unit. Put $[s,z,m]_n=s\\otimes g_f^{-1}(z\\otimes m)$ in $F_n(M)(U)$, for $s\\in S_{T',n}(U)$, $z\\in S_{T,n}(V)$ and $m\\in M(V)$.\n\nFor every $n\\geq1$ there is a unique natural isomorphism\n$$E_n:E_n^0\\xrightarrow{\\sim}\\operatorname{Res}_{\\pi_{T',n}}F_n$$\nwhose component, for every $b\\in B_{T'}(U)$ and $m\\in M(V)$, satisfies\n$$E_n(M)\\bigl(b\\otimes g_f^{-1}(1\\otimes m)\\bigr)=[\\pi_{T',n}(b),1,m]_n.$$\nHere the input uses the quotient-unit map $M\\to\\operatorname{Res}_{\\pi_{T,n}}(M\\otimes_{B_T}S_{T,n})$ and then ordinary completed pullback; the displayed value is an equality of sections of $B_{T'}$-modules.\n\nFor every $b\\geq a\\geq1$ there is a unique natural transformation\n$$t^0_{b,a}:F_b\\longrightarrow\\operatorname{Res}_{q_{T',b,a}}F_a$$\nwhose component sends $[s,z,m]_b$ to $[q_{T',b,a}(s),q_{T,b,a}(z),m]_a$. These assertions hold for all $B_T$-module sheaves, with no flatness or finiteness condition on them. The maps are the uniquely normalized ordinary comparison and ordinary transition in the fixed interface (completedReductionOrdinaryComparison and completedReductionOrdinaryTransition); no choice of automorphism of a finite target is allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Paragraph 2, finite coefficient evaluation and quotient transitions; expanded ordinary scalar-adjunction and inverse-image generator normalization, existing Lean completedReductionOrdinaryComparison_exists (line 638) and completedReductionOrdinaryTransition_exists (line 1477). Agent-written interface refinement of Stacks Tag 099N (proetale.tex, lemma-pushforward-Noetherian-case), clause (5); explicit statement and proof in lean/Sheaf/Paper/CompletedPullbackReduction.lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-cbc-completed-reduction-finite-interfaces",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-profinite-coefficient-inverse-image] to the countable tower of finite commutative rings $P_n$. Write $R=g^{-1}B_T$, $C_n=g^{-1}S_{T,n}$ and $p_n=g^{-1}\\pi_{T,n}$. It supplies the canonical ring isomorphisms $c:R\\xrightarrow{\\sim}B_{T'}$ and $c_n:C_n\\xrightarrow{\\sim}S_{T',n}$, satisfying $\\pi_{T',n}c=c_np_n$ and $q_{T',b,a}c_b=c_ag^{-1}q_{T,b,a}$. The datum gives $\\pi_{T,a}=q_{T,b,a}\\pi_{T,b}$. These are the actual coefficient maps defining completed and finite pullback, not arbitrary ring isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules: ringed pullback formula; coefficient identifications from the cited profinite coefficient lemma"
+   }
+  },
+  {
+   "text": "Put $N_n=S_{T,n}\\otimes_{B_T}M$ and $H_n=g^{-1}N_n$. The latter is a $C_n$-module, hence an $S_{T',n}$-module through $c_n^{-1}$, and a $B_{T'}$-module through $\\pi_{T',n}$. By the definitions of strict tower evaluation and module pullback, $E_n^0(M)=B_{T'}\\otimes_R H_n$ and $F_n(M)=S_{T',n}\\otimes_{C_n}H_n$. There are multiplication isomorphisms $u:B_{T'}\\otimes_RH_n\\to H_n$, $u(b\\otimes x)=c^{-1}(b)x$, and $v:S_{T',n}\\otimes_{C_n}H_n\\to H_n$, $v(s\\otimes x)=c_n^{-1}(s)x$. Each inverse sends $x$ to $1\\otimes x$. For example $1\\otimes c^{-1}(b)x=b\\otimes x$ by balancing; the other composite is $x\\mapsto x$. These balanced bilinear maps commute with restrictions and extend uniquely through module sheafification. The equation $\\pi_{T',n}c=c_np_n$ proves that $u$ and $v$ have the same $B_{T'}$ action on $H_n$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: balanced tensors and sheafification; Tag 03D7: tensor-formula module pullback"
+   }
+  },
+  {
+   "text": "Define $E_n(M)=v^{-1}u$. On any generalized inverse-image section $x$ of $N_n$, balancing and the coefficient equation give $E_n(M)(b\\otimes x)=\\pi_{T',n}(b)\\otimes x$. Taking $x=g_f^{-1}(1\\otimes m)$ gives exactly $[\\pi_{T',n}(b),1,m]_n$. A module map $h:M\\to M'$ takes $z\\otimes m$ to $z\\otimes h(m)$, and inverse image takes its unit section to the unit section of that image. Thus both composites in the naturality square send $b\\otimes x$ to $\\pi_{T',n}(b)\\otimes g^{-1}(1\\otimes h)(x)$; the tensor and sheafification universal properties give equality. The component inverses from step 2 therefore assemble to a natural isomorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; inverse-image adjunction-unit naturality in the specified colimit construction"
+   }
+  },
+  {
+   "text": "The projection $B_T\\to S_{T,n}$ is locally surjective on sections. Indeed the coefficient lemma identifies $S_{T,n}$ canonically with the constant ring sheaf $\\underline{P_n}$. By [lem-weil-pbc-site-sheafification-sections-local] applied to the constant presheaf, a section $z$ is locally the image of some $\\bar a\\in P_n$. Choose $a\\in A$ lifting $\\bar a$. On each such object the constant sections $(a\\bmod I^k)_{k\\geq1}$ form a compatible family, hence a section $r$ of $B_T$ by its specified inverse-limit construction; its $n$-th projection is $z$. This only proves the local lifting needed below and does not assume that arbitrary limits commute with inverse image.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK for the subsequent quotient-unit argument; Sites Tag 00WK, lemma-sections-sheafification, for local constant representatives"
+   }
+  },
+  {
+   "text": "Let $E'_n$ have the required normalization. For each $M$, morphisms from the source tensor are determined by their values on $b\\otimes x$, by the presheaf tensor and module sheafification universal properties. In turn, the colimit and sheafification construction of inverse image determines these maps on $x=g_f^{-1}(y)$ for every local section $y$ of $N_n$. Sections of the presheaf tensor are finite sums of $z\\otimes m$; its sheafification universal property reduces equality to these sections. Locally choose $r$ with $z=\\pi_{T,n}(r)$ by step 4. In $N_n$, $z\\otimes m=1\\otimes rm=r(1\\otimes m)$. Hence, on the base-changed covering, $b\\otimes g_f^{-1}(z\\otimes m)=b\\,c(g_f^{-1}r)\\otimes g_f^{-1}(1\\otimes m)$. The prescribed equation for $E'_n$ and $E_n$ agrees on this expression. Additivity and separatedness of the target sheaf, then the two universal properties, give $E'_n(M)=E_n(M)$. This proves uniqueness even among natural maps with that normalization; equality of isomorphisms follows from equality of their forward maps.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: generators and balancing; inverse-image colimit/sheafification construction"
+   }
+  },
+  {
+   "text": "For $b\\geq a$, define $\\theta_{b,a}:N_b\\to\\operatorname{Res}_{q_{T,b,a}}N_a$ by $z\\otimes m\\mapsto q_{T,b,a}(z)\\otimes m$. The relation $\\pi_{T,a}=q_{T,b,a}\\pi_{T,b}$ verifies $\\theta(z\\pi_{T,b}(r)\\otimes m)=q(z)\\pi_{T,a}(r)\\otimes m=q(z)\\otimes rm$; additivity and restriction compatibility are immediate from the quotient ring map. Thus tensor and module sheafification give this map without any exactness assumption. Apply inverse image to its underlying module map. Via the $c_b,c_a$ actions of steps 1-2 it becomes a map $H_b\\to\\operatorname{Res}_{q_{T',b,a}}H_a$, since $q_{T',b,a}c_b=c_ag^{-1}q_{T,b,a}$. Define $t^0_{b,a}=v_a^{-1}\\circ g^{-1}\\theta_{b,a}\\circ v_b$ on the unchanged underlying abelian sheaves. This has precisely the required source and restricted target. Naturality follows because both orders of applying $h:M\\to M'$ and $\\theta$ send $z\\otimes m$ to $q(z)\\otimes h(m)$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-proetale-inverse-image",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: quotient-coefficient balanced section map; Tag 03D7, ringed module inverse image"
+   }
+  },
+  {
+   "text": "For a specified generator, the formula in step 6 gives $v_a^{-1}g^{-1}\\theta\\,v_b(s\\otimes g_f^{-1}(z\\otimes m))=v_a^{-1}(c_b^{-1}(s)\\,g_f^{-1}(q_{T,b,a}(z)\\otimes m))$. Semilinearity and $g^{-1}q_{T,b,a}\\,c_b^{-1}=c_a^{-1}q_{T',b,a}$ turn this into $q_{T',b,a}(s)\\otimes g_f^{-1}(q_{T,b,a}(z)\\otimes m)$, the required generator formula. Any other map satisfying it agrees on all outer scalar tensors and all inverse-image colimit generators of the presheaf tensors defining $N_b$; their universal properties and module sheafification force equality. Unlike step 5, no lifting of $z$ is needed because the formula is prescribed for every $z$. Finally the fixed finite interface specifies its ordinary comparison and transition by exactly these normalizations, so the uniqueness just proved identifies them with the stipulated constructions. Every step uses ordinary tensors; no flatness or finiteness of $M$ has entered.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-proetale-inverse-image",
+    "def-cbc-completed-reduction-finite-interfaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: generator calculation and uniqueness; fixed-interface normalization from the cited definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-pc-sheaf-restrict-scalars",
+  "def-cbc-completed-reduction-finite-interfaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Paragraph 2, finite pullback and quotient transitions; explicit ordinary coefficient-isomorphism cancellation and local-generator argument, using Stacks sites-modules.tex Tags 03EK/03D7 and Sites 00WK. The abstract completed formula of 099N is context, not a proof of these normalizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*restrictScalars|restrictScalars.*pullback",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions, sheafification/pullback and free-sheaf generator formulas do not give the two completed-coefficient quotient maps with these generator normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary finite coefficient sheaf pullback scalar extension quotient natural comparison unique tensor generators",
+   "results": "PresheafOfModules.pullback; TopCat.Sheaf.pullbackIso; PresheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso; SheafOfModules.sheafificationCompPullback; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions, sheafification/pullback and free-sheaf generator formulas do not give the two completed-coefficient quotient maps with these generator normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.restrictScalars",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions, sheafification/pullback and free-sheaf generator formulas do not give the two completed-coefficient quotient maps with these generator normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary finite coefficient sheaf pullback scalar extension quotient natural comparison unique tensor generators",
+   "results": "SheafOfModules.Presentation.mapGenerators; SheafOfModules.Presentation.map_generators_I; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.Presentation.mapRelations_mapGenerators; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions, sheafification/pullback and free-sheaf generator formulas do not give the two completed-coefficient quotient maps with these generator normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationCompPullback|pullbackPushforwardAdjunction",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions, sheafification/pullback and free-sheaf generator formulas do not give the two completed-coefficient quotient maps with these generator normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image sheaf module commutes with extension of scalars quotient ring and normalized adjunction unit",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.map_ιFree_mapFree_hom_assoc; PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions, sheafification/pullback and free-sheaf generator formulas do not give the two completed-coefficient quotient maps with these generator normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with scalar extension quotient and normalized tensor generators",
+   "results": "SheafOfModules.Presentation.mapGenerators; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.Presentation.mapRelations; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.Presentation.map_π_eq; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.mapFree; SheafOfModules.Presentation.map",
+   "date": "2026-10-22",
+   "verdict": "no match: general free-sheaf, scalar-restriction and ordinary module tensor ingredients do not state both uniquely normalized sheaf comparisons for these completed coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient coefficient ring sheaves inverse image restriction of scalars comparison isomorphism uniqueness on pure tensors",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; PresheafOfModules.restrictScalarsCompToPresheaf; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ; ModuleCat.restrictScalarsComp'_inv_app; TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ",
+   "date": "2026-10-22",
+   "verdict": "no match: general free-sheaf, scalar-restriction and ordinary module tensor ingredients do not state both uniquely normalized sheaf comparisons for these completed coefficients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-completed-pullback-reduction",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Paragraph 2, finite coefficient evaluation and quotient transitions; expanded ordinary scalar-adjunction and inverse-image generator normalization, existing Lean completedReductionOrdinaryComparison_exists (line 638) and completedReductionOrdinaryTransition_exists (line 1477).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-ordinary-finite-evaluation-transition",
+  "worker": "stage1",
+  "summary": "Seven explicit steps prove existence and uniqueness of both normalized ordinary maps. Reused the finite/profinite coefficient inverse-image theorem, local sheafification theorem and module/tensor definitions; no new nodes. The comparison is the conjugation between two multiplication isomorphisms on the same inverse-image module. Local coefficient lifting supplies the missing quotient-unit uniqueness argument. No statement correction and no Lean changes.",
+  "blueprint": "Realizes paragraph 2 of lemma-weil-pbc-completed-pullback-reduction.proof.md: finite pullback identification and its coefficient transition compatibility before deriving. Steps 1-5 establish the normalized ordinary evaluation, and steps 6-7 construct and uniquely normalize the ordinary quotient transition."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-ec5b1d2c1",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-ec5b1d2c1 (reviewer sub-agent of L); spot-checked: Read the item's statement and all seven steps in full, plus every cited statement. Zero new nodes. The statement is byte-identical to the Q09 base (field diff against the Q09 run snapshot); only the proof, proof_deps, proof_origin, split_report, status and searches were added. There is no repair note, so the re-split rule does not apply. No SGA is cited. Step 1: the profinite-coefficient-inverse-image hypotheses hold (finite rings P_n, any g). Its c_u is the unique map with the same projections as c_g, and c_{u,n} is the coefficient map of g_n^*. Steps 2-3 cancel scalar extension along a ring isomorphism: u and v are balanced, their inverses are x↦1⊗x, and the B_{T'} actions agree because c_n^{-1}π = p_n c^{-1}. E_n(b⊗x) = π(b)⊗x gives the stated normalization. Step 4: S_{T,n} is the constant sheaf, the 00WK local representatives lift to A, and (a mod I^k)_k is a section of the limit sheaf, so π is locally surjective. Step 5: z⊗m = r(1⊗m) plus R-linearity of g^{-1} gives uniqueness. Steps 6-7: θ is balanced via π_a = qπ_b; the conjugate is q'-semilinear via q'c_b = c_a g^{-1}q; the generator formula checks; uniqueness follows from local generation. Route: sites-sections-local (sk-thm-p1) is in the unit closure, so no tool_uses are needed. Stacks labels 03EK, 03D7 and 00WK were verified. lem-cbc-ordinary-finite-quotient-comparison and the cbc finite-interfaces definition are not duplicates. Edge cases checked: M=0, g=id, a=b, I=A, nonflat M."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackReductionData",
+  "declaration": "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison_exists",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition_exists",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition"
+  ],
+  "statement": "theorem completedReductionOrdinaryComparison_exists (n : ℕ) :\n    ∃! e : completedReductionModuleTowerFunctor Y d ⋙ completedTowerModulePullback g d ⋙\n        (CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj (op n) ≅\n      reductionChange Y (completedReductionProjection Y d n) ⋙\n        completedReductionFiniteModules g d n ⋙\n          SheafOfModules.restrictScalars.{u + 1}\n            ((adicLisseForget X).map (completedReductionProjection X d n)),\n      HasCompletedReductionOrdinaryComparisonNormalization g d n e",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing statements: completedReductionOrdinaryComparison_exists gives the unique natural isomorphism with HasCompletedReductionOrdinaryComparisonNormalization; completedReductionOrdinaryTransition_exists gives the unique quotient transition with HasCompletedReductionOrdinaryTransitionNormalization. The two fixed ordinary maps are exactly the .exists.choose of these respective unique witnesses. Natural index n encodes positive exponent n+1; a <= b includes equal indices. General AdicCoefficientDatum and all completed-coefficient module sheaves, without flatness, finiteness, completeness or boundedness assumptions. No new module and no modification of the reviewed stage-1 split.",
+  "file": "lean/Sheaf/Paper/CompletedPullbackReductionData.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c89a820ad",
+  "group": "ND",
+  "result": "pass",
+  "note": "Records-only existing:true delivery binding lem-weil-pbc-ordinary-finite-evaluation-transition to completedReductionOrdinaryComparison_exists and completedReductionOrdinaryTransition_exists (live CompletedPullbackReduction.lean l.638/1477, both proved, statement verbatim, snapshot module = live). Node otherwise byte-identical to live. Clause check: E_n^0 = tower functor ⋙ completedTowerModulePullback ⋙ ev_n; F_n = reductionChange ⋙ completedReductionFiniteModules ⋙ Res_pi. Normalization over all M,V,U,f,b,m on the inverse-image generator of completedReductionModuleUnit (pinned to m↦1⊗m) gives [pi(b),1,m]_n. Transition ∃! with generator formula for all s,z,m. No flatness/finiteness on M; n = exponent n+1; a=b allowed; universes those of the recorded AdicCoefficientDatum. The fixed maps are .exists.choose. Advisory: the normalization predicates and completedReductionInverseImageGenerator are listed only under the parent node; docstrings name the parent blueprint id. No compile (no Lean changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f62e",
+  "group": "K7",
+  "result": "fix",
+  "landing": "20261026T070212-L-3457743",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; Data module vs old CompletedPullbackReduction (rebuilt PulledModelMap/normalization predicates proved equivalent to the old by scratch rfl/iff); new ArrowIsIso sorry = clause 2 of item; Coherence proved (axioms: sorryAx only from published upstream holes); 16 direct importers compiled against the sandbox build"
+ }
+}

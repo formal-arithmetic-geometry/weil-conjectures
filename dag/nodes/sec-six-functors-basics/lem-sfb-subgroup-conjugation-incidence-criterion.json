@@ -1,0 +1,411 @@
+{
+ "id": "lem-sfb-subgroup-conjugation-incidence-criterion",
+ "kind": "statement",
+ "title": "Conjugation incidence: proper quotient gives closed saturation, finite fixed cosets give density",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $G$ be smooth and connected. Let $H\\subseteq G$ be smooth and connected. Let $X=G/H$ be the separated finite-type quotient with its left $G$-action and $(G/H)(k)=G(k)/H(k)$, as in [lem-sfb-homogeneous-orbit-quotient-geometry]. Put\n$$S_H=\\{ghg^{-1}:g\\in G(k),\\ h\\in H(k)\\}\\subseteq G(k).$$\nIf $X$ is proper over $k$ [def-weil-proper-morphism], there is a Zariski closed subset $Z\\subseteq |G|$ with $S_H=Z(k)$, where $Z(k)$ denotes the rational points of $G$ whose underlying points belong to $Z$. If there exists $h_0\\in H(k)$ for which\n$$\\{x\\in X(k):h_0x=x\\}$$\nis finite, there exists a nonempty Zariski open subscheme $V\\subseteq G$ [def-weil-open-immersion] such that $V(k)\\subseteq S_H$. The second assertion does not require properness of $X$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 17.32(a),(b), printed pp.361--362, including the conjugation incidence subset in (G/H) times G; the statements are expressed on rational points to distinguish them from the underlying scheme points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:G\\to X$. Define the incidence scheme $I\\subseteq X\\times_kG$ by $a\\cdot x=x$: pull back $\\Delta_X:X\\to X\\times_kX$ along $(x,a)\\mapsto(a\\cdot x,x)$. Since $X$ is separated, its diagonal is a closed immersion, and base change preserves closed immersions. Thus $I$ is closed in $X\\times_kG$. Products of finite-type schemes are finite type by base change and composition; a closed immersion is proper, hence finite type. Consequently $I$ is finite type over $k$. Write $p:I\\to G$ and $t:I\\to X$ for its projections. The local finite-type cancellation clause of the same permanence node also makes $p:I\\to G$ locally of finite type, since $I\\to\\operatorname{Spec}k$ is finite type.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32, printed p.361: closed incidence subset S, realized by the diagonal."
+   }
+  },
+  {
+   "text": "By [lem-sfb-homogeneous-orbit-quotient-geometry], $q$ is faithfully flat, hence flat and surjective, $q(gh)=q(g)$, and $(g,h)\\mapsto(g,gh)$ is an isomorphism $G\\times_kH\\simeq G\\times_XG$. Evaluated on $T$-points this says: $q(u)=q(v)$ exactly when $u^{-1}v\\in H(T)$. Since $G\\to\\operatorname{Spec}k$ is of finite type, $q$ is locally of finite type by the cancellation clause (f) of [lem-weil-pbc-proper-fp-permanence]. The field $k$ is a Noetherian ring, so $\\operatorname{Spec}k$ is Noetherian and the finite-type $k$-scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; hence $q$ is locally of finite presentation by [pqf-lem-lft-fp-locnoeth]. There is an isomorphism $G\\times_kH\\simeq I\\times_XG$, sending $(g,h)$ to $((q(g),ghg^{-1}),g)$. Its inverse sends $((x,a),g)$ to $(g,g^{-1}ag)$: $q(g)=x$ and $a x=x$ imply $q(ag)=q(g)$, so $g^{-1}ag\\in H$. The displayed formulas are mutually inverse morphisms on all test schemes by the quotient criterion and fibre-product universal property. Hence $r:G\\times H\\to I$, $(g,h)\\mapsto(q(g),ghg^{-1})$, is a pullback of $q$. The singleton $\\{q\\}$ is an fppf covering of schemes [def-pc-fppf-site], hence fppf in the sense of [lem-sfb-space-fppf-covering-calculus] by its clause (4); by clause (2) its pullback $\\{r\\}$ is fppf, and by (4) again an fppf covering of schemes. Thus $r$ is flat, surjective and locally finitely presented. Moreover $p\\circ r=c$ for the conjugation morphism $c(g,h)=ghg^{-1}$, and $p(|I|)=c(|G\\times H|)$.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-pc-fibre-product",
+    "def-pc-fppf-site",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32, printed p.361: conjugation and quotient maps; expanded incidence pullback."
+   }
+  },
+  {
+   "text": "Connectedness identifies $G$ and $H$ with their identity components, which are geometrically irreducible by the identity-component theorem. The product theorem makes $G\\times H$ irreducible. Surjectivity of $r$ then makes $I$ irreducible: pull back any decomposition into two closed subsets to the irreducible source. Both are nonempty, containing the identity pair or its image. The identity-component theorem also gives integral $G_{\\mathrm{red}}$ and $H_{\\mathrm{red}}$ with the same underlying topologies as $G,H$. They are spectra of the reduced affine coordinate algebras. The finite-type-domain dimension theorem makes $\\dim G$ and $\\dim H$ finite natural numbers. No reducedness of $I$ is asserted.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sc-geometrically-irreducible-product",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32(b), printed pp.361--362: irreducibility and finite dimensions in dim S = dim G."
+   }
+  },
+  {
+   "text": "At $u=(1,1)\\in G\\times H$ put $z=r(u)=(q(1),1)$. The fibre $r^{-1}(z)$ is isomorphic to $H$: the equations are $q(g)=q(1)$ and $ghg^{-1}=1$, equivalent on every test scheme to $g\\in H$ and $h=1$. The inverse morphisms are $g\\mapsto(g,1)$ and first projection. Apply flat composite fibre-dimension additivity to $G\\times H\\xrightarrow r I\\to\\operatorname{Spec}k$ at $u$. Both maps are locally of finite type; $r$ is even locally finitely presented. We get $\\dim_u(G\\times H)=\\dim_1H+\\dim_zI$. For irreducible locally finite-type schemes the cited local topological dimension equals global dimension. Product dimension therefore gives $\\dim G+\\dim H=\\dim H+\\dim I$. Cancelling the finite $\\dim H$ yields $\\dim I=\\dim G$.",
+   "uses": [
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-sfb-scheme-product-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32(b), printed p.362: expand dim S = dim G using flat dimension additivity."
+   }
+  },
+  {
+   "text": "For $a\\in G(k)$, the fibre $I_a=I\\times_G\\operatorname{Spec}k$ along $a$ is also the base change of the closed immersion $I\\to X\\times_kG$ along $X\\simeq X\\times_k\\operatorname{Spec}k\\xrightarrow{1\\times a}X\\times_kG$ [def-pc-fibre-product]. By clauses (b),(c) of [lem-weil-pbc-proper-fp-permanence] it is a closed subscheme of $X$ whose inclusion is proper, hence of finite type, so $I_a$ is finite type over $k$ by composition [lem-sfb-finite-type-composition-base-change](1). Its $k$-points are $I_a(k)=\\{x\\in X(k):a x=x\\}$. If the underlying point of $a$ belongs to $p(|I|)$, the fibre $I_a$ is nonempty. The Jacobson-space theorem makes its closed points dense, and the residue-field theorem makes every closed point $k$-rational. Thus there is $x\\in I_a(k)$. Lift $x$ to $g\\in G(k)$ by the quotient theorem [lem-sfb-homogeneous-orbit-quotient-geometry]. The equality $q(ag)=q(g)$ and the coset criterion of step 2 give $h=g^{-1}ag\\in H(k)$ and $a=ghg^{-1}$. Conversely $ghg^{-1}$ fixes $q(g)$ and therefore lies in the incidence image. This proves $\\{a\\in G(k):|a|\\in p(|I|)\\}=S_H$. Properness is not needed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32(a),(b), printed pp.361--362: incidence image equals saturation, with rational-point lifting explicit."
+   }
+  },
+  {
+   "text": "If $X$ is proper over $k$, its universal closedness says exactly that $X\\times_kG\\to G$ is a closed map. As $I$ is closed in $X\\times_kG$, $Z=p(|I|)$ is closed in $|G|$. Step 5 gives $Z(k)=S_H$, proving the first assertion.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32(a), printed p.361: closed projection from a complete quotient."
+   }
+  },
+  {
+   "text": "Let $h_0\\in H(k)$ have finitely many fixed points in $X(k)$. The finite-type fibre $F=I_{h_0}$ has exactly those rational points, hence $F(k)$ is finite. It is nonempty because $q(1)$ is fixed by $H$. Its closed points are dense by the Jacobson-space theorem and are $k$-rational by the residue-field theorem. They form a finite set of closed points, which is itself closed, so density implies that they exhaust $|F|$. Every point of this finite space is closed; its nonempty irreducible closed subsets are singletons. Thus $\\dim F=0$, in particular its local topological dimension at $(q(1),h_0)$ is zero. This holds even if $F$ is nonreduced.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32(b), printed pp.361--362: finite fixed-point fibre has dimension zero."
+   }
+  },
+  {
+   "text": "Apply the irreducible fibre-dimension lower bound to $p:I\\to G$, with irreducible finite-type source and finite-type target by steps 1 and 3. It gives a natural number $e$ with $\\dim I=\\dim\\overline{p(|I|)}+e$, and every local fibre dimension at least $e$. Step 7 forces $e=0$, and step 4 gives $\\dim\\overline{p(|I|)}=\\dim G$. The identity-component theorem gives an integral affine $G_{\\mathrm{red}}$ with the topology and dimension of $G$. A proper closed subset of this irreducible affine variety has dimension at most $\\dim G-1$ by affine dimension drop. Thus the nonempty closed subset $\\overline{p(|I|)}$ cannot be proper; it equals $|G|$. The incidence image is dense.",
+   "uses": [
+    "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-wf-affine-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32(b), printed p.362: A.72 and dominance of the incidence projection."
+   }
+  },
+  {
+   "text": "For $c:G\\times_kH\\to G$ from step 2, the affine fibre-product theorem writes the source as $\\operatorname{Spec}(A\\otimes_kB)$ when $G=\\operatorname{Spec}A$ and $H=\\operatorname{Spec}B$. This source is finite type by finite-type base change and composition; the target is affine finite type too. Affine Chevalley therefore makes $c(|G\\times H|)=p(|I|)$ constructible. By step 8 it is dense, so the constructible-open theorem supplies a nonempty open subset $V\\subseteq |G|$ contained in it. Give $V$ its open-subscheme structure. For each $a\\in V(k)$, step 5 implies $a\\in S_H$. Therefore $V(k)\\subseteq S_H$. Properness was used only in step 6, so the second assertion is independent of it.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-wf-affine-constructible-open",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.32(b), printed p.362: A.15 and the nonempty open in the constructible image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "def-pc-fppf-site",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sfb-scheme-product-dimension",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-zl-irreducible-fibre-dimension-lower-bound",
+  "lem-wf-affine-dimension-drop",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-wf-affine-constructible-open",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 17.32(a),(b), printed pp.361--362; expanded incidence pullback, dimension equality, and rational image identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conjugatesOfSet|conjugation.*dominant|fixed.*coset|coset.*fixed",
+   "results": "{\"t\": \"2026-10-23T21:48:02Z\", \"tool\": \"grep\", \"query\": \"conjugatesOfSet|conjugation.*dominant|fixed.*coset|coset.*fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\"], \"digest\": \"5938be7c29b57644\"} Read hits: Group.conjugatesOfSet and its membership and monotonicity lemmas (Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575) only express abstract conjugacy saturation. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite abstract subgroup and concerns all subgroup-fixed points; it gives neither incidence geometry nor the closedness/density criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Incidence variety of pairs consisting of a coset and an element fixing it implies closedness of conjugates for complete homogeneous spaces and density from a finite fixed point set",
+   "results": "{\"t\": \"2026-10-23T21:48:03Z\", \"tool\": \"leansearch\", \"query\": \"Incidence variety of pairs consisting of a coset and an element fixing it implies closedness of conjugates for complete homogeneous spaces and density from a finite fixed point set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.fixingSubgroup_isClosed\", \"SubMulAction.fixingSubgroup_smul_eq_fixingSubgroup_map_conj\", \"Group.conj_mem_conjugatesOfSet\", \"Subgroup.quotConjEquiv\", \"MulAction.smul_fixedBy\", \"AddAction.vadd_fixedBy\", \"closedPoints\", \"fixedPointsSubMulOfNormal\"], \"digest\": \"62a21e7a4457f183\"} Read hits: Group.conjugatesOfSet and its membership and monotonicity lemmas (Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575) only express abstract conjugacy saturation. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite abstract subgroup and concerns all subgroup-fixed points; it gives neither incidence geometry nor the closedness/density criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugatesOfSet\"",
+   "results": "{\"t\": \"2026-10-23T21:48:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugatesOfSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddGroup.addConjugatesOfSet\", \"Group.conjugatesOfSet\", \"AddGroup.subset_addConjugatesOfSet\", \"Group.subset_conjugatesOfSet\", \"AddSubgroup.addConjugatesOfSet_subset_normalClosure\", \"Subgroup.conjugatesOfSet_subset_normalClosure\", \"AddGroup.addConjugatesOfSet_mono\", \"Group.conjugatesOfSet_mono\"], \"digest\": \"2eae21e57c35783a\"} Read hits: Group.conjugatesOfSet and its membership and monotonicity lemmas (Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575) only express abstract conjugacy saturation. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite abstract subgroup and concerns all subgroup-fixed points; it gives neither incidence geometry nor the closedness/density criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conjugation saturation of a closed connected subgroup H of an algebraic group G is closed when G/H is proper and contains an open subset if some element has finitely many fixed cosets",
+   "results": "{\"t\": \"2026-10-23T21:48:05Z\", \"tool\": \"leanfinder\", \"query\": \"The conjugation saturation of a closed connected subgroup H of an algebraic group G is closed when G/H is proper and contains an open subset if some element has finitely many fixed cosets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.normalCore_isClosed\", \"instProperSMulSubtypeMemSubgroupOfIsClosedCoe\", \"instProperSMulSubtypeMulOppositeMemSubgroupOpOfIsTopologicalGroupOfIsClosedCoe\", \"IsClosed.rightCoset\", \"QuotientGroup.isClosedMap_coe\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"IsClosed.leftCoset\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\"], \"digest\": \"008c29e718f85938\"} Read hits: Group.conjugatesOfSet and its membership and monotonicity lemmas (Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575) only express abstract conjugacy saturation. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite abstract subgroup and concerns all subgroup-fixed points; it gives neither incidence geometry nor the closedness/density criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroups exist in a smooth connected affine algebraic group and every rational element is conjugate into a prescribed Borel subgroup",
+   "results": "{\"t\": \"2026-10-23T21:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"Borel subgroups exist in a smooth connected affine algebraic group and every rational element is conjugate into a prescribed Borel subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"NonarchimedeanGroup.exists_openSubgroup_separating\", \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Subgroup.Normal.pathComponentOne\", \"ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one\", \"krullTopology_mem_nhds_one_iff_of_normal\", \"krullTopology_mem_nhds_one_iff\"], \"digest\": \"1a976cf262b9414d\"} Read hits: Group.conjugatesOfSet and its membership and monotonicity lemmas (Mathlib/Algebra/Group/Subgroup/Basic.lean:561-575) only express abstract conjugacy saturation. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite abstract subgroup and concerns all subgroup-fixed points; it gives neither incidence geometry nor the closedness/density criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subgroup whose action on its homogeneous quotient has an element with finite fixed points has dense union of conjugates",
+   "results": "{\"t\": \"2026-10-23T21:48:35Z\", \"tool\": \"leanfinder\", \"query\": \"A subgroup whose action on its homogeneous quotient has an element with finite fixed points has dense union of conjugates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"MulAction.IwasawaStructure.T\", \"MulAction.IsQuasiPreprimitive.isPretransitive_of_normal\", \"SubMulAction.ofFixingSubgroup.isMultiplyPretransitive'\", \"MulAction.ofFixingSubgroup.isMultiplyPreprimitive\", \"SubMulAction.ofFixingSubgroup.isMultiplyPretransitive\", \"finite_compl_fixedBy_closure_iff\", \"SubAddAction.ofFixingAddSubgroup.isMultiplyPretransitive'\"], \"digest\": \"db828adae30e946c\"} Read the returned signatures: abstract group action and topological group results, not a theorem on Borel subgroups or algebraic-group incidence geometry.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugatesOfSet|fixedPoints.*[Cc]oset|[Ii]ncidence",
+   "results": "{\"t\": \"2026-10-23T23:01:00Z\", \"tool\": \"grep\", \"query\": \"conjugatesOfSet|fixedPoints.*[Cc]oset|[Ii]ncidence\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures: topological group cosets and proper actions do not give scheme incidence geometry. AlgebraicGeometry finite-fibre and dominant-map results give neither the subgroup dimension calculation nor the two assertions. Group.conjugatesOfSet (Mathlib/Algebra/Group/Subgroup/Basic.lean:561) is an abstract set definition; mem_conjugatesOfSet_iff (:565) is abstract membership. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite subgroup and concerns fixed points of the whole subgroup. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite fixed point fibre on an algebraic homogeneous space implies dominance of the conjugation morphism",
+   "results": "{\"t\": \"2026-10-23T23:01:00Z\", \"tool\": \"leansearch\", \"query\": \"Finite fixed point fibre on an algebraic homogeneous space implies dominance of the conjugation morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.IsDominant.casesOn\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\"], \"digest\": \"e0ff3d3cbeb7f4e3\"} Read returned signatures: topological group cosets and proper actions do not give scheme incidence geometry. AlgebraicGeometry finite-fibre and dominant-map results give neither the subgroup dimension calculation nor the two assertions. Group.conjugatesOfSet (Mathlib/Algebra/Group/Subgroup/Basic.lean:561) is an abstract set definition; mem_conjugatesOfSet_iff (:565) is abstract membership. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite subgroup and concerns fixed points of the whole subgroup. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugatesOfSet\"",
+   "results": "{\"t\": \"2026-10-23T23:01:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugatesOfSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddGroup.addConjugatesOfSet\", \"Group.conjugatesOfSet\", \"AddGroup.subset_addConjugatesOfSet\", \"Group.subset_conjugatesOfSet\", \"AddSubgroup.addConjugatesOfSet_subset_normalClosure\", \"Subgroup.conjugatesOfSet_subset_normalClosure\", \"AddGroup.addConjugatesOfSet_mono\", \"Group.conjugatesOfSet_mono\"], \"digest\": \"2eae21e57c35783a\"} Read returned signatures: topological group cosets and proper actions do not give scheme incidence geometry. AlgebraicGeometry finite-fibre and dominant-map results give neither the subgroup dimension calculation nor the two assertions. Group.conjugatesOfSet (Mathlib/Algebra/Group/Subgroup/Basic.lean:561) is an abstract set definition; mem_conjugatesOfSet_iff (:565) is abstract membership. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite subgroup and concerns fixed points of the whole subgroup. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine algebraic group and connected subgroup the union of conjugates is closed if the quotient is proper and contains a nonempty open if an element has finitely many fixed cosets",
+   "results": "{\"t\": \"2026-10-23T23:01:02Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected affine algebraic group and connected subgroup the union of conjugates is closed if the quotient is proper and contains a nonempty open if an element has finitely many fixed cosets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsClosed.leftCoset\", \"IsClosed.rightCoset\", \"instProperSMulSubtypeMemSubgroupOfIsClosedCoe\", \"finite_compl_fixedBy_closure_iff\", \"Subgroup.normalCore_isClosed\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\"], \"digest\": \"9813c769d579677a\"} Read returned signatures: topological group cosets and proper actions do not give scheme incidence geometry. AlgebraicGeometry finite-fibre and dominant-map results give neither the subgroup dimension calculation nor the two assertions. Group.conjugatesOfSet (Mathlib/Algebra/Group/Subgroup/Basic.lean:561) is an abstract set definition; mem_conjugatesOfSet_iff (:565) is abstract membership. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite subgroup and concerns fixed points of the whole subgroup. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugatesOfSet|fixedPointsMulLeftCosets",
+   "results": "{\"t\": \"2026-10-23T23:01:14Z\", \"tool\": \"grep\", \"query\": \"conjugatesOfSet|fixedPointsMulLeftCosets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/Algebra/Group/Subgroup/Basic.lean\", \"Mathlib/Algebra/Group/Subgroup/Basic.lean\"], \"digest\": \"45f11c39b2307e5f\"} Read returned signatures: topological group cosets and proper actions do not give scheme incidence geometry. AlgebraicGeometry finite-fibre and dominant-map results give neither the subgroup dimension calculation nor the two assertions. Group.conjugatesOfSet (Mathlib/Algebra/Group/Subgroup/Basic.lean:561) is an abstract set definition; mem_conjugatesOfSet_iff (:565) is abstract membership. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite subgroup and concerns fixed points of the whole subgroup. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of the incidence scheme of fixed cosets is closed for a proper homogeneous space and dense when one fibre is finite",
+   "results": "{\"t\": \"2026-10-23T23:01:15Z\", \"tool\": \"leanfinder\", \"query\": \"The image of the incidence scheme of fixed cosets is closed for a proper homogeneous space and dense when one fibre is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instProperSMulSubtypeMemSubgroupOfIsClosedCoe\", \"ProperSMul.isProperMap_smul_pair_set\", \"ProperSMul\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"MulAction.isClosedMap_quotient\", \"QuotientGroup.isClosedMap_coe\", \"IsClosed.leftCoset\", \"IsClosed.rightCoset\"], \"digest\": \"28367606b29944c3\"} Read returned signatures: topological group cosets and proper actions do not give scheme incidence geometry. AlgebraicGeometry finite-fibre and dominant-map results give neither the subgroup dimension calculation nor the two assertions. Group.conjugatesOfSet (Mathlib/Algebra/Group/Subgroup/Basic.lean:561) is an abstract set definition; mem_conjugatesOfSet_iff (:565) is abstract membership. Sylow.fixedPointsMulLeftCosetsEquivQuotient (Mathlib/GroupTheory/Sylow.lean:587) assumes a finite subgroup and concerns fixed points of the whole subgroup. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-conjugation-cover",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Lemma 17.37 and its proof, printed p.363: the assertion actually proved for each c is existence of a common Borel. The parenthetical finite-union assertion is not included (it fails for the trivial torus). Supporting input for Lemma 17.37: Theorem 17.33(b), printed p.362, supplies a c-fixed point on the quotient by any chosen Borel; existence of a Borel is Definition 17.6 and the following sentence, pp.353–354. Supporting input: Lemma 17.32(a),(b), printed pp.361--362, including the conjugation incidence subset in (G/H) times G; the statements are expressed on rational points to distinguish them from the underlying scheme points.",
+   "via": [
+    "lem-sfb-borel-conjugation-cover",
+    "lem-sfb-torus-commuting-point-common-borel",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-subgroup-conjugation-incidence-criterion",
+  "worker": "stage1",
+  "summary": "Followed Milne Lemma 17.32 via closed fixed-coset incidence. Expanded quotient pullback, dimension equality and rational image equality. Separated proper projection from finite-fibre dominance. Reused existing nodes only; preserved the statement and prior searches and added six actual searches.",
+  "blueprint": "Preserves the inherited direct-image/alteration/moduli/group-theory prerequisite chain in blueprint.from.place; proves the Lemma 17.32 input for lem-sfb-borel-conjugation-cover. Latest det-thm-sf-ctf-stability-direct-images proof (3) is the enclosing direct-image route. No same-statement blueprint entry found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Closed immersion base change and finite-type permanence build the closed incidence scheme. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Finite-type products and fibres in the incidence construction; this is a general permanence tool. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-geometrically-irreducible-product",
+    "why": "The product of the geometrically irreducible groups is irreducible. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Finite dimension of the integral affine reductions permits cancellation in the dimension equality. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Flat dimension additivity at the identity computes incidence dimension, as implicit in Milne. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Local topological dimension equals global dimension on irreducible locally algebraic schemes. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Density of closed points supplies rational points in nonempty fibres and zero dimension of the finite fixed fibre. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Closed points of fibres over the algebraically closed field have residue field k. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "why": "Milne A.72: the finite fibre forces equality of incidence and image dimensions. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Equal dimension forces a closed subset of the integral affine reduction to be the whole group. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Affineness of G times H checks the exact hypotheses of affine Chevalley. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-wf-affine-constructible-open",
+    "why": "Chevalley and constructible-open consequence are Milne A.15 in the incidence route. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Mathlib leaf: the finite-type k-scheme X=G/H is Noetherian, needed for local finite presentation of q. No statement in the item unit gives this general fact; it does not replace the unit route."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Mathlib leaf: locally finite type over a locally Noetherian target is locally finitely presented, making {q} an fppf covering. No statement in the item unit gives this general fact; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-zl-irreducible-fibre-dimension-lower-bound",
+  "lem-wf-affine-dimension-drop",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-wf-affine-constructible-open",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-b997ba632",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-b997ba632 (reviewer sub-agent of L); spot-checked: Read all of Milne Lemma 17.32(a),(b) (printed pp.361–362). The item statement matches it hypothesis by hypothesis and is unchanged. The delivery creates no new nodes. I read the statement of every cited node and checked all 9 steps; every step is correct apart from two citation faults, which I repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-subgroup-conjugation-incidence-criterion.json. (1) C3, step 2: it said q is finitely presented, but the statement of lem-sfb-homogeneous-orbit-quotient-geometry only gives q faithfully flat. Finite presentation appears only in that node's proof, and citing lem-sfb-algebraic-group-homogeneous-quotient alongside it does not show the two quotients are the same. Repair: q is locally of finite type by clause (f) of lem-weil-pbc-proper-fp-permanence, X is Noetherian by lem-weil-pbc-finite-type-over-noetherian, so q is locally of finite presentation by pqf-lem-lft-fp-locnoeth. Then {q} is an fppf covering (def-pc-fppf-site), and clauses (4),(2),(4) of lem-sfb-space-fppf-covering-calculus make r flat, surjective and locally finitely presented. The coset criterion now comes from the orbit node's isomorphism G×H≅G×_{G/H}G, so lem-sfb-algebraic-group-homogeneous-quotient is no longer cited. (2) Step 5: it said I_a is of finite type 'by base change', but p was only shown to be locally of finite type. Repair: I_a is the pullback of the closed immersion I→X×G along x↦(x,a), so it is finite type by clauses (b),(c) of the permanence node and clause (1) of the composition node. proof_deps were recomputed; the two new Mathlib leaves are declared in split_report.tool_uses. Other checks: the fibre of r at (q(1),1) is H, giving dim I = dim G; the finite fibre over h0 has dimension 0 even if nonreduced; the A.72 lower bound forces e=0; affine dimension drop and Chevalley/constructible-open finish clause (b). Properness is used only in step 6. Edge cases checked: H=G, trivial H, and a torus in GL2 with a regular element, where the conjugates are dense but not closed because G/T is not proper. The declared off-unit tools are generic scheme and dimension facts; accepted. Batch-5 flags: lem-sfb-algebraic-group-homogeneous-quotient leads to def-trf-scheme-algebraic-space, a general definition. Its closure is already inside that of the existing stmt_dep orbit-quotient node, and after the FIX the item no longer cites it. lem-sfb-space-fppf-covering-calculus leads only to algebraic-space and fppf foundations (18 trf nodes) and to no step of the trace formula or Poincaré duality, so it is kept. No duplicate in the DAG; no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SubgroupConjugationIncidenceCriterion",
+  "declaration": "AlgebraicGeometry.subgroup_conjugation_incidence_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SubgroupConjugationIncidenceCriterion.lean",
+  "statement": "theorem subgroup_conjugation_incidence_criterion {k : Type u} [Field k] [IsAlgClosed k] (G H : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [Smooth H.hom] [ConnectedSpace H.left] (i : H ⟶ G) [IsClosedSubgroupScheme i] (X : Over (Spec (.of k))) [ModObj G X] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (q : G ⟶ X) [Flat q.left] [Surjective q.left] (hcoset : ∀ (T : Over (Spec (.of k))) (a b : T ⟶ G), a ≫ q = b ≫ q ↔ ∃ h : T ⟶ H, b = a * (h ≫ i)) (hequiv : μ[G] ≫ q = lift (fst G G) (snd G G ≫ q) ≫ γ[G,X]) (hlift : Function.Surjective (fun g : 𝟙_ (Over (Spec (.of k))) ⟶ G ↦ g ≫ q)) : (IsProper X.hom → ∃ Z : Set G.left, IsClosed Z ∧ ∀ a : 𝟙_ (Over (Spec (.of k))) ⟶ G, a ∈ Group.conjugatesOfSet (Set.range (fun h : 𝟙_ (Over (Spec (.of k))) ⟶ H ↦ h ≫ i)) ↔ a.left (IsLocalRing.closedPoint k) ∈ Z) ∧ ((∃ h₀ : 𝟙_ (Over (Spec (.of k))) ⟶ H, {x : 𝟙_ (Over (Spec (.of k))) ⟶ X | (h₀ ≫ i) • x = x}.Finite) → ∃ V : G.left.Opens, (V : Set G.left).Nonempty ∧ ∀ a : 𝟙_ (Over (Spec (.of k))) ⟶ G, a.left (IsLocalRing.closedPoint k) ∈ V → a ∈ Group.conjugatesOfSet (Set.range (fun h : 𝟙_ (Over (Spec (.of k))) ⟶ H ↦ h ≫ i)))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Both assertions are separate implications. The homogeneous quotient is presented by its flat surjective projection, all-test-schemes coset criterion, canonical left-action equivariance, and rational-point lifting, as supplied by the recorded quotient dependency. Conjugacy saturation uses Group.conjugatesOfSet; closed and open subsets are subsets of the underlying scheme, tested on rational points."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e467ab3d4",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Read node, Milne 17.32 statement, all stmt_deps, exists_homogeneous_fppf_quotient, Mathlib ModObj hom-set SMul. X is presented by flat surjective q, all-T coset criterion, equivariance hequiv and rational lift; together they pin X to G/H (fppf descent, X Noetherian) and the action, all satisfiable from the dep, so no stronger assumption. S_H = Group.conjugatesOfSet of range(·≫i); (a) IsProper → closed Z with S_H = Z(k); (b) finite fixed rational cosets → nonempty Opens V with V(k) ⊆ S_H, no properness. Node JSON differs from live only in lean; statement verbatim; no new nodes; docstrings with source/blueprint/9-step proof; single sorry; imports exist; report sections present; worker compile + dry run clean. No findings."
+ }
+}

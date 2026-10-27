@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-dm-etale-atlas-calculus",
+ "kind": "statement",
+ "title": "Relative etale scheme atlases for Deligne--Mumford fibre products",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Stacks, Deligne--Mumford stacks, algebraic spaces and 2-fibre products have the conventions of [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. Representable by algebraic spaces means that every scheme base change is equivalent to an algebraic space. Properties of such maps are tested on these algebraic-space base changes. An etale scheme chart is a representable-by-algebraic-spaces etale morphism from a scheme; an atlas is a surjective chart. Etale uses [def-weil-etale-morphism] on scheme charts. Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be Deligne--Mumford stacks over $S$ and let $\\mathcal X\\to\\mathcal Z$, $\\mathcal Y\\to\\mathcal Z$ be morphisms. The stack $\\mathcal X\\times_{\\mathcal Z}\\mathcal Y$ is Deligne--Mumford and has an etale scheme atlas. Representable-by-algebraic-spaces etale maps between these stacks are preserved by base change and composition; if the given maps are surjective then their base changes and compositions are surjective. In any 2-commutative diagram $U\\to V$ above $\\mathcal X\\to\\mathcal Y$, with etale scheme charts $U\\to\\mathcal X$ and $V\\to\\mathcal Y$, the induced map $U\\to\\mathcal X\\times_{\\mathcal Y}V$ is etale, without any surjectivity assumption on the charts.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "algebraic.tex Tag 04T2 (lemma-2-fibre-product); stacks-morphisms.tex Tags 050F (lemma-base-change-separated), 050K (lemma-composition-separated), 050N (lemma-separated-implies-morphism-separated), 06N3 (theorem-DM), 0CIM (lemma-composition-etale), 0CIN (lemma-base-change-etale); representable etale-map permanence: spaces-morphisms.tex Tag 05W3 (lemma-etale-permanence); surjectivity: algebraic.tex Tags 045C (lemma-base-change-representable-transformations-property) and 045B (lemma-composition-representable-transformations-property)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal P=\\mathcal X\\times_{\\mathcal Z}\\mathcal Y$. In the triple description of [def-sfb-stable-pointed-moduli-groupoids], descent data for $(x,y,\\alpha)$ consist of descent data for $x,y$ and compatible local arrows $\\alpha:f(x)\\xrightarrow{\\sim}g(y)$. Descend $x,y$ using their stack conditions; the sheaf condition for isomorphisms in $\\mathcal Z$ glues the local $\\alpha$ uniquely. The same argument glues arrows, so $\\mathcal P$ is a stack. For two triples $a=(x,y,\\alpha)$ and $a'=(x',y',\\alpha')$ over a scheme $T$, their isomorphism sheaf is\n$$\\operatorname{Isom}_{\\mathcal X}(x,x')\\times_{\\operatorname{Isom}_{\\mathcal Z}(f(x),g(y'))}\\operatorname{Isom}_{\\mathcal Y}(y,y'),$$\nwhere the two maps send $u$ to $\\alpha'f(u)$ and $v$ to $g(v)\\alpha$. This follows exactly from the arrow equation in the triple definition. All three Isom sheaves are algebraic spaces by [lem-sfb-dm-isom-space-unramified]; their fibre product is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. For a scheme test $T\\to\\mathcal P\\times_S\\mathcal P$ corresponding to $(a,a')$, an object of the diagonal base change is a triple $c$ together with arrows $i:c\\xrightarrow{\\sim}a$ and $j:c\\xrightarrow{\\sim}a'$. Send it to $ji^{-1}$. Conversely an arrow $k:a\\xrightarrow{\\sim}a'$ gives $(a,\\mathrm{id},k)$; every original triple is uniquely isomorphic to this one by $i$. These assignments commute with restriction, identifying the diagonal base change with the displayed Isom sheaf. Hence the diagonal is representable by algebraic spaces.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-dm-isom-space-unramified",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04TF (lemma-2-fibre-product-general), first two paragraphs of its proof; Tag 045G (lemma-representable-diagonal)."
+   }
+  },
+  {
+   "text": "Choose etale scheme atlases $U\\to\\mathcal X$ and $V\\to\\mathcal Y$, as supplied by [def-sfb-stable-pointed-moduli-groupoids], and form the scheme $T_0=U\\times_SV$ using [def-pc-fibre-product]. Pulling the two chart objects to $T_0$ and mapping them into $\\mathcal Z$ gives objects $z_U,z_V$. By [lem-sfb-dm-isom-space-unramified], $\\operatorname{Isom}_{\\mathcal Z/T_0}(z_U,z_V)$ is an algebraic space $R$. A map $T\\to R$ is precisely a pair $T\\to U,T\\to V$ and an isomorphism between their images in $\\mathcal Z(T)$. Thus $R$ represents $U\\times_{\\mathcal Z}V$ and has a natural map $r:R\\to\\mathcal P$. Explicitly the inverse sends a triple $(u,v,\\alpha)$ over $T$ to the section of the pulled-back Isom sheaf represented by $\\alpha$. Since $U,V$ are schemes viewed as discrete groupoids, an arrow of triples fixes $u,v$ and exists exactly when the two $\\alpha$ agree; it is then unique. These assignments are inverse and commute with arbitrary restrictions in $T$. No scheme representability of $R$ is assumed.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-fibre-product",
+    "lem-sfb-dm-isom-space-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04TF (lemma-2-fibre-product-general), atlas construction; Tag 045G (lemma-representable-diagonal), conditions (2) and (4)."
+   }
+  },
+  {
+   "text": "For every scheme $T\\to\\mathcal P$ with triple $(x,y,\\alpha)$, put $B=U\\times_{\\mathcal X}T$ and $C=V\\times_{\\mathcal Y}T$. Since the chosen maps are atlases, $B,C$ are algebraic spaces etale and surjective over $T$. The triple description gives $R\\times_{\\mathcal P}T\\simeq B\\times_TC$: the two chosen lifts and their isomorphisms to $x,y$ force the compatibility isomorphism to be their composite with $\\alpha$. The fibre product is an algebraic space by [lem-trf-space-fibre-products-etale-covers], and its projection to $T$ is etale and surjective by base change and composition in [lem-trf-space-chartwise-etale-permanence]. Hence $r$ is representable by algebraic spaces, etale and surjective. Choose an etale scheme atlas $W\\to R$ using [def-trf-algebraic-space]. After every scheme test $T\\to\\mathcal P$, its base change is the composite\n$$W\\times_R(B\\times_TC)\\longrightarrow B\\times_TC\\longrightarrow T.$$\nThe same algebraic-space permanence theorem makes both arrows etale and surjective. Thus $W\\to\\mathcal P$ is an etale surjective scheme atlas. Together with step 1 this proves that $\\mathcal P$ is Deligne--Mumford.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04TF (lemma-2-fibre-product-general), atlas construction, with etale atlases; algebraic-space permanence: spaces-properties.tex Tags 03FT, 03FU and spaces-topologies.tex Tag 041F."
+   }
+  },
+  {
+   "text": "For the remaining permanence assertions we may use the algebraic-stack formulation. The etale scheme atlases of a Deligne--Mumford stack are smooth on scheme charts by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. The representable diagonal and smooth surjective atlas therefore satisfy [lem-sfb-etale-smooth-atlas-fppf-descent], giving an fppf algebraic stack with unchanged diagonal and atlas. Apply [lem-sfb-stack-chartwise-smooth-etale-calculus] to the representable-by-algebraic-spaces etale maps: it gives arbitrary base-change and composition stability. Its current statement also identifies field-extension local lifting with the surjectivity chart test: for every scheme $T\\to\\mathcal Y$ and every surjective etale scheme chart $A\\to\\mathcal X\\times_{\\mathcal Y}T$, the scheme map $A\\to T$ is surjective. Thus the surjectivity hypothesis in our chart convention gives field-extension lifting; the cited permanence preserves it, and the same equivalence recovers chart-test surjectivity for the resulting representable maps. The theorem applies to both the original stacks and the fibre products constructed in steps 1--3.",
+   "uses": [
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 045B (lemma-composition-representable-transformations-property) and 045C (lemma-base-change-representable-transformations-property); etale/fppf convention: criteria.tex Tag 076V (lemma-stacks-etale).; surjectivity-convention comparison: stacks-properties.tex Tag 04XI (lemma-characterize-surjective), as stated in the cited stack calculus node."
+   }
+  },
+  {
+   "text": "For the final clause let $E=\\mathcal X\\times_{\\mathcal Y}V$ and let $h:U\\to E$ be the map defined by the given 2-commutative square. The scheme $V$ is itself a Deligne--Mumford stack: by [def-trf-scheme-algebraic-space] $h_V$ is an fppf, hence etale, sheaf, so as a discrete fibred groupoid it is a stack; for $a,b\\in h_V(T)$ the sheaf $\\operatorname{Isom}_T(a,b)$ is the equalizer $h_T\\times_{h_V\\times_Sh_V}h_V$, a scheme by that node's diagonal clause, and the identity of $h_V$ is a surjective etale scheme atlas. Hence steps 1--3, applied to $\\mathcal X\\to\\mathcal Y\\leftarrow V$, show that $E$ is Deligne--Mumford; step 4 makes $q:E\\to\\mathcal X$ representable etale, since it is a base change of $V\\to\\mathcal Y$. For any scheme $t:T\\to E$, the spaces\n$$B=U\\times_{\\mathcal X}T,\\qquad D=E\\times_{\\mathcal X}T$$\nare etale over $T$: their maps to $T$ are base changes of $U\\to\\mathcal X$ and $q$. The map $h$ induces a map $B\\to D$ over $T$, sending $(u,t,\\beta)$ to $(h(u),t,\\beta)$; the stipulated 2-isomorphism identifies $qh$ with the chart map $U\\to\\mathcal X$. Since both spaces are etale over $T$, this induced map is etale by [lem-trf-space-chartwise-etale-permanence]. The map $t$ gives the section $s:T\\to D$, $t_0\\mapsto(t(t_0),t_0,\\mathrm{id})$. Explicitly, a $T$-scheme $T_1$ maps to $B\\times_{D,s}T$ by a lift $u:T_1\\to U$, an isomorphism $\\beta:qh(u)\\xrightarrow{\\sim}qt|_{T_1}$, and an arrow $\\gamma:h(u)\\xrightarrow{\\sim}t|_{T_1}$ whose image under $q$ is $\\beta$. This is precisely the triple giving a map to $U\\times_ET$: forgetting $\\beta$ and recovering it as $q(\\gamma)$ are inverse on objects and arrows and commute with restriction in $T_1$. This fibre product is an algebraic space by [lem-trf-space-fibre-products-etale-covers], and its projection to $T$ is etale by base change of $B\\to D$. Thus every scheme base change of $h$ is algebraic-space etale, proving the assertion. Neither chart was assumed surjective.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W3 (lemma-etale-permanence), applied after scheme base change; spaces-properties.tex Tag 03FU (lemma-base-change-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-dm-isom-space-unramified",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04TF (lemma-2-fibre-product-general), proof with etale atlases; representable property permanence: Tags 045B and 045C; relative-chart cancellation: spaces-morphisms.tex Tag 05W3 (lemma-etale-permanence), scheme-base-change argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two fibre products of Deligne Mumford stacks have etale scheme atlases and representable etale covers compose and base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp'\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"For any scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, every morphism $ f_j $ associated to an element\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOver'\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"For any scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, every morphism $ f_j $ associated to an element\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X W : AlgebraicGeometry.Scheme} →\\n          (𝒰 : AlgebraicGeometry.Scheme.\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, a scheme $ X $ over $ S $ with a $ P $-precoverage cover $ \\\\mathcal{U} $, and \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"comp\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"RingHom.FormallyEtale.comp\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] {T : Type u_3} [CommRing T] {f : R →+* S} {g : S →+* T} (hf : f.FormallyEtale) (hg : g.FormallyEtale) : (g.comp f).FormallyEtale\", \"doc\": \"\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" (R : Type u) (A : Type v) (B : Type u_1) [CommRing R] [CommRing A] [Algebra R A] [CommRing B] [Algebra R B] [Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A] [Algebra.Etale A B] : Algebra.Etale R B\", \"doc\": \"Étale is stable under composition.\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" (R : Type u) (A : Type v) (B : Type u_1) [CommRing R] [CommRing A] [Algebra R A] [CommRing B] [Algebra R B] [Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A] [Algebra.FormallyEtale A B] : Algebra.FormallyEtale R B\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.comp_bijective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" (R : Type u) (A : Type v) {B : Type u_1} [CommRing R] [CommRing A] [Algebra R A] [CommRing B] [Algebra R B] [Algebra.FormallyEtale R A] (I : Ideal B) (hI : I ^ 2 = ⊥) : Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_comp_bijective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] : Algebra.FormallyEtale R A ↔ ∀ ⦃B : Type (max u v)⦄ [inst : CommRing B] [inst_1 : Algebra R B] (I : Ideal B), I ^ 2 = ⊥ → Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"An `R`-algebra `A` is formally etale iff \\\"for every `R`-algebra `B`,\\nevery square-zero ideal `I : Ideal B` and `f : A →ₐ[R] B ⧸ I`, there exists\\na unique lift `A →ₐ[R] B`\\\".\"}\n  {\"name\": \"RingHom.FormallyEtale.of_comp\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] {T : Type u_3} [CommRing T] {f : R →+* S} {g : S →+* T} (hf : f.FormallyUnramified) (h : (g.comp f).FormallyEtale) : g.FormallyEtale\", \"doc\": \"\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} {B : Type u_3} [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [Algebra.IsEtaleAt R p] [Algebra.IsEtaleAt A P] : Algebra.IsEtaleAt R P\", \"doc\": \"\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"\"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \" : RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.Etale @AlgebraicGeometry.Etale\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.etale_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.Etale f] [AlgebraicGeometry.Etale g] : AlgebraicGeometry.Etale (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of étale morphisms is étale.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.Etale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g] [AlgebraicGeometry.FormallyUnramified g] : AlgebraicGeometry.Etale f\", \"doc\": \"If `f ≫ g` is étale and `g` unramified, then `f` is étale.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|AlgebraicStack|etale.*atlas|atlas.*etale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibre product of Deligne Mumford stacks has a scheme etale atlas",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom f] [IsAffine Y] : IsAffine (pullback f g)\", \"doc\": \"Given schemes $X, Y, S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $f$ is an affine morphism and $Y$ is an affine scheme, then the fiber product $X \\times_S Y$ is also an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.v\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"(i j : 𝒰.I₀) : Scheme\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs the pullback scheme of the composition $\\\\mathcal{U}.f(\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible maps between etale stack charts induce etale maps to the relative two fibre product",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, rings, or generic morphism properties; none supplies these Deligne--Mumford stack assertions in one specialization. In particular an ordinary category diagonal theorem does not provide the 2-fibre-product stack geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|AlgebraicStack|etale.*atlas|atlas.*etale",
+   "results": "0 hits; inspected: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only etale and pullback results do not state the DM-stack atlas and relative 2-fibre-product clauses; inspected Etale.of_comp at Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130, whose objects are schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map between etale algebraic spaces over a scheme is etale and two fibre products of Deligne Mumford stacks are Deligne Mumford",
+   "results": "8 hits; inspected: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale.instIsSmooth, RingHom.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instCategoryEtale. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only etale and pullback results do not state the DM-stack atlas and relative 2-fibre-product clauses; inspected Etale.of_comp at Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130, whose objects are schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"of_comp\"",
+   "results": "3 hits; inspected: RingHom.FormallyEtale.of_comp, AlgebraicGeometry.Etale.of_comp, AlgebraicGeometry.WeaklyEtale.of_comp. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only etale and pullback results do not state the DM-stack atlas and relative 2-fibre-product clauses; inspected Etale.of_comp at Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130, whose objects are schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The 2 fibre product of Deligne Mumford stacks has a surjective etale scheme atlas",
+   "results": "8 hits; inspected: AlgebraicGeometry.Surjective.instFstScheme, AlgebraicGeometry.Surjective.instSndScheme, AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective, AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective, AlgebraicGeometry.Scheme.isJointlySurjectivePreserving, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Scheme.instHasPullbacksEtale. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only etale and pullback results do not state the DM-stack atlas and relative 2-fibre-product clauses; inspected Etale.of_comp at Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130, whose objects are schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-proper-locally-quasifinite-composition",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Relative etale scheme atlases for Deligne--Mumford fibre products.",
+   "via": [
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dm-etale-atlas-calculus",
+  "worker": "stage1",
+  "summary": "Q72 repair of the landing return, current base 4bd419e57939af2393201bfa7b980c32a12152e2: re-read the changed stack-chartwise calculus statement and its explicit equivalence of field-extension lifting with scheme-chart surjectivity. Step 4 now applies that equivalence in both directions around permanence. The etale/fppf descent input has since been split and reviewed with unchanged statement; the Isom input gained stage-2 metadata only. Retained the five-step atlas construction and prior inverse identifications, unchanged statement and statement dependencies, logged searches, and sixteen citations; refreshed the step-4 quote to include the surjectivity equivalence. No new nodes or Mathlib leaves.",
+  "blueprint": "Inherited main-20261015 det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli supporting chain: relative etale atlases for DM fibre products. The creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor prints None); preserve its supplied from.node and via. Steps 1--3 construct the needed atlases, step 4 proves permanence, step 5 supplies compatible chart maps. Whole-blueprint searches for Deligne Mumford, etale atlas, 045G, 03FV and 04T2 found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme or algebraic-space atlas/permanence input used on explicit scheme tests; no replacement of the constructible-direct-image unit route, and no equivalent same-unit statement supplies this input."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic scheme or algebraic-space atlas/permanence input used on explicit scheme tests; no replacement of the constructible-direct-image unit route, and no equivalent same-unit statement supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic scheme or algebraic-space atlas/permanence input used on explicit scheme tests; no replacement of the constructible-direct-image unit route, and no equivalent same-unit statement supplies this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-2c0b01b2d",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-2c0b01b2d (reviewer sub-agent of L); spot-checked: This head re-delivers a split with no new nodes. Earlier heads bbab74e3, 3cff903a and e55917ca were reviewed FIX for the same C1 gap in step 5, and that fix was never merged. 144682a7 was reviewed PASS but missed the gap; landing then returned it because lem-sfb-stack-chartwise-smooth-etale-calculus had changed. Compared with the e55917 fix: step 2 now writes out the inverse of R = U x_Z V, which is correct. Step 4 now uses the new surjectivity convention of the calculus node (field-extension lifting, equivalent to the chart test for representable maps), in both directions, which is also correct. Step 5 still lacks the derivation. The statement and stmt_deps are unchanged. I read all ten cited statements in full and Stacks algebraic.tex 04TF (l.1670) and 045G (l.1120), spaces-morphisms 05W3 (l.7843), criteria 076V and stacks-properties 04XI. Step 1: the Isom of triples, Isom_X x_{Isom_Z} Isom_Y via u -> alpha' f(u), v -> g(v) alpha, matches the arrow equation; the diagonal map (c,i,j) -> j i^-1 is right. Step 3: R x_P T = B x_T C is an etale covering, and refining by W gives the atlas. Step 4: the fppf bridge is redundant but harmless. Step 5: B -> D is etale by cancellation, and U x_E T = B x_{D,s} T with beta = q(gamma). Fault C1: steps 1-4 are applied to X -> Y <- V although the scheme V is never shown to be a DM stack (the Isom node needs DM). FIX re-applied: one sentence from def-trf-scheme-algebraic-space (h_V is an fppf, hence etale, sheaf; Isom = h_T x_{h_V x h_V} h_V is a scheme; the identity is an etale atlas). That node is added to step 5's uses and to proof_deps; no cycle; the step is 1946 characters. No duplicate: lem-sfb-algebraic-stack-fibre-products is a different, unsplit statement for algebraic stacks. No SGA. Edge cases checked: empty U, identity charts, schemes, BG. Batch-5: the two lem-trf space nodes are generic algebraic-space foundations, and the three lem-sfb flags reach sec-trace-formula only through the definition def-trf-algebraic-space. def-trf-scheme-algebraic-space is also a definition. None of these is the trace formula, Poincare duality or a step of their proofs, so all are accepted, as is the etale-implies-smooth tool use. Maintainer note: this is the fourth time this FIX has been issued; please make sure it is merged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DMEtaleAtlasCalculus",
+  "declaration": "CategoryTheory.dm_twoFiberProduct",
+  "declarations": [
+   "CategoryTheory.dm_twoFiberProduct",
+   "CategoryTheory.dm_etale_baseChange",
+   "CategoryTheory.dm_etale_comp",
+   "CategoryTheory.dm_relative_etale_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DMEtaleAtlasCalculus.lean",
+  "statement": "theorem dm_twoFiberProduct {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} {Z : BasedCategory.{v₃, w₃} (Over S)} (hX : IsDeligneMumfordModuliStack X) (hY : IsDeligneMumfordModuliStack Y) (hZ : IsDeligneMumfordModuliStack Z) (f : BasedFunctor X Z) (g : BasedFunctor Y Z) : IsDeligneMumfordModuliStack (moduliTwoFiberProduct f g)",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four theorems jointly render all clauses. IsDeligneMumfordModuliStack includes the asserted atlas. Surjectivity uses HasSpaceBaseChange and SpaceMapIsSurjective directly. The existing induced comparison and representable-etale predicate are imported from ModuliChartNormalization, whose owning landed node is added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5146d772e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Four sorried theorems (dm_twoFiberProduct, dm_etale_baseChange, dm_etale_comp, dm_relative_etale_chart) render every node clause. They use the landed IsDeligneMumfordModuliStack, HasSpaceBaseChange, SpaceMapIsEtale, SpaceMapIsSurjective, moduliTwoFiberProduct/Fst (StablePointedModuliGroupoids) and IsEtaleModuliMap, moduliTwoFiberLift (ModuliChartNormalization); the type of e and the lift target X×_Y V check out. Surjectivity is tested over each map's own target, with an existential space presentation (invariant). The last clause has no surjectivity premise and f is arbitrary. Universes are independent; no extra hypotheses. Node vs live: only lean added and stmt_dep def-sfb-moduli-chart-normalization (landed owner, acyclic, no citers yet). Statement verbatim; stage-1 step-5 V-is-DM sentence present. Imports exist; no definitions, no duplicate (stack-chartwise calculus is a different node). Docstrings carry source, blueprint tag and steps 1-5. Report has Worker report and Second reading by NQ. No compile (no FIX)."
+ }
+}

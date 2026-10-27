@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-finite-source-chart-power-transition",
+ "kind": "statement",
+ "title": "Explicit power scalar for a finite purity source chart",
+ "statement": "Let P be a finite purity setting and use the root charts of [def-pur-finite-reduction-root-charts]. Let d,c be natural numbers and let zeta,zeta_prime be primitive P.diagonalExponent-th roots in the base field with zeta = zeta_prime^c. For every base-field scheme X, scheme Y, map f:X→Y and unbounded intrinsic derived coefficient object K on Y, the hom of finiteReductionSourceTrivialization at zeta_prime equals c^d times its hom at zeta. Multiplication is repeated addition of the morphism. No geometric finiteness or boundedness is required.",
+ "stmt_deps": [
+  "def-pur-finite-reduction-root-charts"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: compatibility with invertible twists by tensor associativity; expansion of the specified normalized primitive-root charts."
+ },
+ "proof": [
+  {
+   "text": "Apply the ordinary root-line inverse-chart power relation, then map it through the degree-zero single-complex and shift functors.",
+   "uses": [
+    "lem-pur-finite-root-line-power-transition",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the actual ordered tensor recursion, induct on d. The zero term is independent of the root. At a successor, additivity in both tensor variables multiplies the scalar from the previous term by c, giving c^(d+1). The fixed unit and reassociation factors do not change. Exact comparison inverse image carries this equation to the pro-etale power chart. Tensoring with the arbitrary pulled-back complex, the fixed scalar-unit factors, intrinsic realization and the shift comparison preserve the same natural-number scalar. This gives the displayed hom equation.",
+   "uses": [
+    "def-pur-finite-reduction-root-charts",
+    "def-pur-finite-reduction-chart-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-root-line-power-transition",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-finite-reduction-chart-calculus"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "M4",
+  "date": "2026-10-25",
+  "source": "Explicit normalized root-section calculation and induction on the existing ordered tensor recursion, expanding finite-reduction proof Step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Primitive root power relation rescales the Tate tensor power trivialization",
+   "results": "Eight hits: IsPrimitiveRoot.pow_eq_one, primitiveRootsPowEquivOfCoprime_apply_coe, primitiveRootsPowEquiv_apply_coe, powerBasis.congr_simp, primitiveRootsPowEquivOfCoprime, autToPow_spec, zmodEquivZPowers_symm_apply_zpow and its variant. None states a source-chart scalar equation.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "primitive root chart transition scalar tensor power reduction independence",
+   "results": "The project has exists_finiteReductionSourceChartScalar, which gives an unspecified scalar at one level; it does not give the explicit c^d needed at two levels. IsPrimitiveRoot.eq_pow_of_pow_eq_one supplies the arithmetic exponent. No exact source-chart power formula.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPrimitiveRoot",
+   "results": "Twelve hits for the predicate, orderOf and basic root facts; no sheaf chart formula.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_nsmul|nsmul_comp",
+   "results": "Functor.map_nsmul and Preadditive.nsmul_comp transport scalar equations. Searches for SourceChartScalar and Trivialization with pow or smul find no explicit exponent formula.",
+   "date": "2026-10-25",
+   "verdict": "transport lemmas only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionSourceChartIndependence",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2, compatibility with the invertible twist by tensor associativity; root-coordinate change.",
+   "via": [
+    "lem-pur-finite-reduction-source-chart-independence",
+    "def-pur-finite-reduction-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSourceChartPowerTransition",
+  "file": "lean/Sheaf/Paper/FiniteSourceChartPowerTransition.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionSourceTrivialization_power",
+  "statement": "theorem finiteReductionSourceTrivialization_power (P : PurityFiniteSetting.{u})\n    (d c : ℕ) (ζ ζ' : P.field.k)\n    (hζ : IsPrimitiveRoot ζ P.diagonalExponent)\n    (hζ' : IsPrimitiveRoot ζ' P.diagonalExponent) (hc : ζ = ζ' ^ c)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))]\n    (f : X ⟶ Y) (K : Scheme.proEtaleDerivedCategory Y P.Ring) :\n    (P.finiteReductionSourceTrivialization f d ζ' hζ' K).hom =\n      c ^ d • (P.finiteReductionSourceTrivialization f d ζ hζ K).hom",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T143650-L-1073566",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T143650-L-1073566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

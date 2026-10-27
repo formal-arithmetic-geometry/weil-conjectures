@@ -85,7 +85,7 @@ def traceTensorComparison :
       (((Functor.whiskeringLeft₂ _).obj (tracePull Λ f)).obj (tracePull Λ f)).obj
         (derivedTensor Λ X) :=
   letI : IsIso (moduleObjectDerivedTensorComparison Λ f) :=
-    (existsUnique_moduleObjectDerivedTensorComparison Λ f).exists.choose_spec.2
+    (moduleObjectDerivedTensorComparison_normalized Λ f).2
   asIso (moduleObjectDerivedTensorComparison Λ f)
 
 /-- Left-factor projection from the recorded counit mate and the two signed symmetries.

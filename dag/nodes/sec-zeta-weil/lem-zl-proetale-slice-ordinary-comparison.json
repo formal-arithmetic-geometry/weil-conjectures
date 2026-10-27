@@ -1,0 +1,128 @@
+{
+ "id": "lem-zl-proetale-slice-ordinary-comparison",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Normalized ordinary pro-etale coefficient slice comparison",
+ "statement": "For arbitrary scheme X, object U of its small pro-etale site, commutative ring sheaves O and B, a coefficient isomorphism c and normalized inverse-image restriction comparison delta [def-zl-proetale-slice-comparison-data], actual module pullback is naturally isomorphic to module restriction followed by scalar transport along b inverse. The isomorphism sends every distinguished inverse-image section to the original section. No boundedness, constancy or geometric finiteness assumption is used.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CE, lemma-localize-given-products; sites-modules.tex Tag 03CZ, lemma-adjointness-tensor-restrict. Uniqueness of adjoints and its unit equation."
+ },
+ "stmt_deps": [
+  "def-zl-proetale-slice-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "The normalized coprojection equation for delta identifies its presheaf isomorphism with the canonical left-adjoint-uniqueness isomorphism. Uniqueness of a left adjoint gives the inverse-image adjunction unit after delta. Substitute b=delta inverse followed by c. The unit and counit equations give the two coefficient equations required for the map/pullback adjunction on ringed modules.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply SheafOfModules.pushforwardPushforwardAdj to composition and base change with these coefficient equations. Its left adjoint is restriction followed by scalar transport. Uniqueness against the actual module-pullback adjunction produces the natural isomorphism. Evaluate its unit equation on an original section; naturality along the distinguished index unit reduces the claimed section formula to the map/pullback adjunction triangle identity. This works also for zero rings and empty sites.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CE, lemma-localize-given-products; sites-modules.tex Tag 03CZ, lemma-adjointness-tensor-restrict. Uniqueness of adjoints and its unit equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two left adjoints to the same right adjoint have a natural isomorphism compatible with the adjunction unit",
+   "results": "Adjunction.leftAdjointUniq, unit_leftAdjointUniq_hom_app, homEquiv_leftAdjointUniq_hom_app; eight hits",
+   "date": "2026-10-24",
+   "verdict": "Use leftAdjointUniq and its unit component equation; pointwise naturality and the triangle identity fix the section formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-24",
+   "verdict": "Relevant to the ordinary slice comparison; not the derived tensor or normalized closed mate."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRestriction.*[Ii]so|restrictScalars.*[Ee]quiv",
+   "results": "No remote match for the required derived closed comparison. Local search found the proved scalarRestriction_isEquivalence in RingIsomorphismTensorTransport.",
+   "date": "2026-10-24",
+   "verdict": "Reuse scalar equivalence and prove closed preservation abstractly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of unbounded derived module sheaves to a slice site commutes with internal Hom evaluation and tensor",
+   "results": "sheafHom, sheafHom', over and evaluation; no arbitrary-coefficient derived slice comparison.",
+   "date": "2026-10-24",
+   "verdict": "No matching normalized derived theorem; retain the separate sourced slice result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleCoefficientSliceClosedComparison",
+  "date": "2026-10-24",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Coefficient slice comparison: Normalized monoidal descent to a pro-etale object. Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3, pullback paragraph before (3.1); Definition 3.3 and Lemma 4.5, lisse assertion. Extracted Lemma 4.5 proof, monoidality and commutation with inner homomorphisms; coefficient-action identification and normalized closed comparison extracted from returned locality proof Steps 3 and 4.",
+   "via": [
+    "lem-zl-proetale-coefficient-slice-closed-comparison",
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSliceOrdinaryComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSliceOrdinaryComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleSlice_ordinary_comparison",
+  "statement": "theorem proEtaleSlice_ordinary_comparison {X : Scheme.{u}} (U : X.ProEt)\n    (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage U.hom CommRingCat.{u + 1}).obj O ≅ B)\n    (delta : ProEtaleObjectRestrictionComparison U CommRingCat.{u + 1}) :\n    ∃ i : proEtaleRingModulePullback U.hom O B c ≅\n        proEtaleSliceModuleRestriction U O ⋙\n          ProEtaleCoefficientSliceComparison.e U O B c delta,\n      ∀ (N : proEtaleRingModules X O) (V : U.left.ProEt)\n        (m : N.val.obj\n          (op ((MorphismProperty.Over.map (f := U.hom) ⊤ U.prop).obj V))),\n        (i.hom.app N).val.app (op V)\n          (proEtaleSlicePullbackSection U O B c N V m) = m",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eb4d4",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261024T190843-L-114045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eb4d4",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261024T190843-L-114045",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone node lean.statement (whitespace only); moved decls vs def-zl-proetale-slice-comparison-data declarations (full cover); Normalized old vs TensorNormalized-factored body (defeq by iota); sorry lemmas vs HRS 4.5 / Stacks 03EL, 07A4, 08JB; private helpers vs ScalarHomComparisonTower/RingIsomorphismTensorTransport statements (no word-for-word match)"
+ }
+}

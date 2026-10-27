@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Mathlib.Algebra.MonoidAlgebra.MapDomain
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Mathlib.Algebra.MonoidAlgebra.MapDomain
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import Sheaf.RingTheory.IntegralSupportSaturation
 
 /-!
@@ -16,6 +18,8 @@ Source: Illusie--Laszlo--Orgogozo, Exposé VIII, Lemma 3.2.9, printed p. 104
 We use multiplicative notation, as in `AlgebraicGeometry.FineFan.saturation`.
 Applying the statement to `Multiplicative G` gives its additive formulation.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 
@@ -49,6 +53,14 @@ theorem saturated_monoid_algebra_normal
     (x : MonoidAlgebra k G)
     (hx : (MonoidAlgebra.mapDomainRingHom k Q.subtype).IsIntegralElem x) :
     ∃ y : MonoidAlgebra k Q, MonoidAlgebra.mapDomainRingHom k Q.subtype y = x := by
-  sorry
+  have _ := hcompletion
+  have hsupport : ↑x.coeff.support ⊆ Set.range (Q.subtype : Q → G) := by
+    intro g hg
+    have hgQ : g ∈ Q := by
+      rw [← hsat]
+      exact support_subset_saturation_of_isIntegral Q hfg x hx g hg
+    exact ⟨⟨g, hgQ⟩, rfl⟩
+  refine ⟨comapDomain Q.subtype Subtype.val_injective x, ?_⟩
+  exact mapDomain_comapDomain hsupport Subtype.val_injective
 
 end MonoidAlgebra

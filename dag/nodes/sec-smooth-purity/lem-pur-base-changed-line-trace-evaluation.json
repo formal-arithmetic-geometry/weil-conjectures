@@ -1,0 +1,231 @@
+{
+ "id": "lem-pur-base-changed-line-trace-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of a base-changed affine-line integration through projection",
+ "statement": "Use the finite-coefficient purity conventions [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. All schemes and morphisms below are separated finite type over $k$ [def-weil-scheme-morphism-properties]. Work with the small pro-etale derived categories, derived pullback and tensor [def-weil-derived-pullback-tensor-hom], compact supports [def-compact-support-direct-image-detailed], Tate twists [def-coefficient-twists-detailed], and $D^b_{ctf}$ as in [def-weil-finite-tor-amplitude]. Write $\\otimes=\\otimes_A^L$ and $\\rho$ for the right tensor unitor. Let $f:X\\to Y$, let $a:\\mathbf A^1_Y\\to Y$, and put $P=X\\times_Y\\mathbf A^1_Y=\\mathbf A^1_X$, with projections $q:P\\to X$ and $r:P\\to\\mathbf A^1_Y$ [def-pc-fibre-product, def-sbc-affine-space]. Set $h=fq=ar$, $T=A_{\\mathbf A^1_Y}(1)[2]$, and $U=Ra_!T$. Let $M\\in D^b_{ctf}(X,A)$, and assume $V=Rf_!M$ and $U$ are in $D^b_{ctf}(Y,A)$. Let $t_Y:U\\to A_Y$ and $t_X:Rq_!r^*T\\to A_X$ be the normalized line integrations of [def-pur-affine-line-purity-comparison], with its canonical Tate pullback identification. Write\n$$E=\\operatorname{Ex}_!:Lf^*U\\xrightarrow{\\sim}Rq_!Lr^*T$$\nfor the specified compact-support exchange [def-exchange-projection], and assume the equality $Lf^*t_Y=t_XE$. Put $W=Lq^*M\\otimes Lr^*T$. Use the normalized composition comparison $\\alpha: Rf_!Rq_!\\xrightarrow{\\sim}Rh_!$ [thm-sf-comp-composition], and let $\\Pi^q_M:Rq_!W\\xrightarrow{\\sim}M\\otimes Rq_!Lr^*T$ be the two-symmetry inverse projection map of [def-pur-affine-line-purity-comparison]. The exchange $E$, the projection map $P_U=\\operatorname{PF}_{f,M,U}$ [def-exchange-projection], and $\\Pi^q_M$ are isomorphisms on these inputs. Define\n$$C=Rf_!(1_M\\otimes E^{-1})\\,Rf_!(\\Pi^q_M)\\,\\alpha_W^{-1}:Rh_!W\\to Rf_!(M\\otimes Lf^*U),$$\n$$D=P_U^{-1}C:Rh_!W\\longrightarrow V\\otimes U.$$\nWith $b_{q,M}=\\rho_M(1_M\\otimes t_X)\\Pi^q_M$, the actual maps satisfy\n$$Rf_!(b_{q,M})\\,\\alpha_W^{-1}=\\rho_V(1_V\\otimes t_Y)D.$$\nThe projection transformations here are the specified proper-counit/open-tensor composites, not arbitrary isomorphisms between the displayed objects. No exceptional inverse image, purity isomorphism, or identification of $D$ with a Kunneth map is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration paragraph: iterating the affine-line trace using the projection formula; returned trace-factorization Steps 4--5 and the projection/exchange admissibility in Step 1"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-pc-fibre-product",
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "thm-sf-comp-composition"
+ ],
+ "proof": [
+  {
+   "text": "Choose an ordinary bounded constructible representative Me of M using its given constructibleFiniteTor certificate. Reflect the given Tor interval along the comparison, giving Me finite Tor amplitude. The explicit affine-line sourceWitness supplies its bounded-below ordinary tensor source. Tensor linePullback with Lq*M to identify the literal pulledLine source with this standard source; transfer plusEtaleOrigin along the resulting isomorphism. This supplies the existential witness hW of Evaluation without adding an assumption.",
+   "uses": [
+    "def-pur-affine-line-purity-source",
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix F=Rf_!(cf), S=Lf*, TX=M tensor -, TY=FM tensor -, and u=TX(e_f) followed by rho_M. The naturality square of the actual projection transformation at tY gives TY(tY);PF_1 = PF_U;F(TX(S(tY))). Apply the compared-coefficient right-unit normalization PF_1;F(u)=rho_(FM). Since PF_U is invertible, cancellation gives PF_U^-1;TY(tY);rho_(FM) = F(TX(S(tY));u). No inversion of PF_1 is used.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-pur-compact-support-projection-right-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed TraceCompatible equation and invertibility of E give E^-1;S(tY);e_f=tX. Expand comparisonD, comparisonC and projectionTensorTrace. Substitute the preceding inverse-projection evaluation, combine consecutive functor maps, use tensor functoriality, and substitute the exchange contraction. Both sides become alpha_W^-1 followed by F(Pi_q;TX(tX);rho_M).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-affine-line-purity-source",
+  "lem-exc-comparison-tor-interval",
+  "lem-pur-compact-support-projection-right-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration paragraph: explicit comparison-coordinate evaluation; the unit normalization is isolated as a strictly smaller theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The compact support projection formula commutes with a base changed affine line integration map and its tensor unit evaluation",
+   "results": "CompactlySupportedContinuousMap.integralLinearMap_apply; CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun; CompactlySupportedContinuousMap.compLinearMap; CompactlySupportedContinuousMap.integralLinearMap; curveIntegralFun_restrictScalars; curveIntegral_restrictScalars; CompactlySupportedContinuousMap.integralPositiveLinearMap; Profinite.NobelingProof.Linear_CC'₀ Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pull an etale affine line trace back to X then integrate along f and contract: projection formula naturality identifies this with tensoring the trace",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; Algebra.Extension.tensorCotangentSpace Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, \"rightUnitor_naturality\"",
+   "results": "CategoryTheory.MonoidalCategory.rightUnitor_naturality; CategoryTheory.MonoidalCategory.rightUnitor_naturality_assoc; CategoryTheory.GradedObject.Monoidal.rightUnitor_naturality; CategoryTheory.GradedObject.Monoidal.rightUnitor_naturality_assoc; CategoryTheory.Localization.Monoidal.rightUnitor_naturality; CategoryTheory.MonoidalCategory.DayConvolutionUnit.rightUnitor_naturality; CategoryTheory.MonoidalCategory.DayConvolutionUnit.rightUnitor_naturality_assoc Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(naturality|unit)|affine.*integration|baseChange.*trace",
+   "results": "No hits. Mathlib/AlgebraicGeometry searched. Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula naturality evaluates a pulled back etale compact support affine line trace as tensor product with that trace",
+   "results": "CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose_obj_obj_snd_map; CategoryTheory.Limits.Types.pi_map_π_apply; LinearMap.trace_tensorProduct; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; CategoryTheory.Abelian.LeftResolution.π_naturality; CategoryTheory.Abelian.LeftResolution.π_naturality_assoc Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(naturality|unit)|affine.*integration|baseChange.*trace",
+   "results": "No hits in Mathlib/AlgebraicGeometry. Returned signatures were read; none is this finite-coefficient pro-etale compact-support trace/projection equality. Tensor-unitor naturality is only an elementary categorical ingredient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compact support projection formula evaluates a base changed affine line trace by tensoring with the trace",
+   "results": "LinearMap.trace_baseChange, Algebra.trace_comp_trace_of_basis, Algebra.trace_comp_trace, Algebra.trace, LinearMap.trace_tensorProduct, LinearMap.trace_eq_contract, Algebra.traceForm, Algebra.traceForm_apply. Returned signatures were read; none is this finite-coefficient pro-etale compact-support trace/projection equality. Tensor-unitor naturality is only an elementary categorical ingredient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, \"rightUnitor_naturality\"",
+   "results": "CategoryTheory.MonoidalCategory.rightUnitor_naturality, CategoryTheory.MonoidalCategory.rightUnitor_naturality_assoc, CategoryTheory.GradedObject.Monoidal.rightUnitor_naturality, CategoryTheory.GradedObject.Monoidal.rightUnitor_naturality_assoc, CategoryTheory.Localization.Monoidal.rightUnitor_naturality, CategoryTheory.MonoidalCategory.DayConvolutionUnit.rightUnitor_naturality, CategoryTheory.MonoidalCategory.DayConvolutionUnit.rightUnitor_naturality_assoc. Returned signatures were read; none is this finite-coefficient pro-etale compact-support trace/projection equality. Tensor-unitor naturality is only an elementary categorical ingredient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical compact support projection formula is natural in a morphism from an affine line cohomology complex to the tensor unit",
+   "results": "LightCondensed.ihomPoints_symm_comp, Rep.standardComplex.εToSingle₀_comp_eq, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, CondensedMod.hom_naturality_apply, LightCondensed.ihom_map_val_app, AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono_naturality_assoc, CompHausLike.LocallyConstant.counitApp, CompHausLike.LocallyConstant.counitAppApp. Returned signatures were read; none is this finite-coefficient pro-etale compact-support trace/projection equality. Tensor-unitor naturality is only an elementary categorical ingredient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and unit normalization of the counit defined projection formula imply compatibility of tensor contraction with a pulled back trace",
+   "results": "LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract, LinearMap.trace_tensorProduct, LinearMap.trace_eq_contract', LinearMap.trace_eq_contract_of_basis, LinearMap.trace_tensorProduct', LinearMap.trace_eq_contract_of_basis', contractLeft_assoc_coevaluation'. Returned signatures were read; none is this finite-coefficient pro-etale compact-support trace/projection equality. Tensor-unitor naturality is only an elementary categorical ingredient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-space-trace-factorization",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Integration paragraph: iterating the affine-line trace using the projection formula; returned trace-factorization Steps 4--5 and the projection/exchange admissibility in Step 1",
+   "via": [
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-base-changed-line-trace-evaluation",
+  "worker": "stage1",
+  "summary": "Statement preserved verbatim. Four-step split: naturality of the specified proper/open projection composite, its right-unit normalization, substitution of the assumed trace base change, and cancellation of P_U. All non-elementary facts are existing cited statements; no new node, no Lean, and no build.",
+  "blueprint": "prop-pur-affine-space-composition-law integration paragraph as retained in current sk-prop-an/_section.md: the projection-formula evaluation needed to iterate the normalized affine-line trace. Does not identify D with a product map or use an exceptional adjunction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ordinary ringed-topos counit projection naturality and tensor-unit identity, used for the proper compactification factor; this is a tool, not a replacement of the affine-space integration route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic natural open tensor comparison, its identity restriction, and full faithfulness on ambient derived module categories; these normalize the open compactification factor."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical pullback tensor-unit and composition compatibility identifies the composite unit for p and j with that for f."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NO-c0be6a643",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-c0be6a643 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged from the Q113 base, there are no new nodes and no SGA anywhere. I read all four steps, the cited statements (def-exchange-projection, lem-weil-pbc-ringed-projection-mate-exact, lem-sf-open-tensor-normalization, lem-pur-derived-pullback-tensor-iso, def-pur-affine-line-purity-comparison for Π) and the sk-prop-an Integration paragraph (Tr_{p_j} defined inductively via the projection formula). Step 1: the coefficient naturality of PF^c = Rp_*(γ)∘π comes from π being natural in P and γ being natural in N=Lp^*B, both on ambient categories. Step 2: F(u_M)P_1 = ρ_V follows from the proper unit clause α_{R_Y}=1, plus open full faithfulness with j^*γ the identity; no inverse of P_1 is used. Avoiding the inverse coefficient-coherence lemma, which needs P_1 invertible, is a sound choice. Steps 3 and 4 are elementary substitution of e∘S(t_Y)=t_X∘E and C=P_U D. I checked the order of composition and every source and target. The citer lem-pur-affine-space-trace-factorization applies the item at f=p_m, M=T_m with matching types. Small cases M=0, f=id, n=1 and ℓ=2 are consistent. The duplicate search (rg for PF_f and line trace) finds no node stating the item: lem-kun-proj-formula-natural, lem-pur-tensor-action-trace-contraction, lem-pur-composite-integration-counit and lem-pur-projection-formula-coefficient-coherence all state something different. I accept the three declared tool uses (generic proper/open projection primitives and pullback unit compatibility). Advisory only: the naturality of Lj^*Lp^*≅Lf^* and the composition compatibility of the unit maps are left implicit; both are elementary for constant coefficients. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BaseChangedLineTraceEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.baseChangedLineTraceEvaluation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.D",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.lineCompactification",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.coefficient",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.lineCoordinate",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.linePullback",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.lineImage",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.exchange",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.pulledLine",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.source",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.pulledTrace",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.projectionU",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.originChange",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.composition",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.comparisonC",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.comparisonD",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.TraceCompatible",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.Evaluation",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.trace",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.normalizedPulledTrace",
+   "AlgebraicGeometry.ProEtale.BaseChangedLineTrace.baseChangedLineTraceEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/BaseChangedLineTraceEvaluation.lean",
+  "statement": "theorem baseChangedLineTraceEvaluation (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] [LocallyOfFiniteType (f ≫ aY)] [QuasiCompact (f ≫ aY)] [IsSeparated (f ≫ aY)] (cf : Compactification f) (ch : Compactification ((AffineSpace PUnit.{u + 1} X ↘ X) ≫ f)) (s : ℕ) (hA : ((P.coefficients.l ^ (s + 1) : ℕ) : Ring P) = 0) (M : D (Ring P) X) (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) X M) (hV : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Ring P)) cf).obj M)) (hU : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) Y (lineImage (Ring P) (P.coefficients.l ^ (s + 1)) hA (Y := Y))) [IsIso (exchange (Ring P) (P.coefficients.l ^ (s + 1)) hA f)] [IsIso (projectionU (Ring P) (P.coefficients.l ^ (s + 1)) hA f cf M)] (hq : ProjectionInvertible (Ring P) (lineCompactification f) (pulledLine (Ring P) (P.coefficients.l ^ (s + 1)) hA f) M) (ht : TraceCompatible (Ring P) (P.coefficients.l ^ (s + 1)) hA f (trace P s hA Y aY) (normalizedPulledTrace P f s hA aY)) : Evaluation (Ring P) (P.coefficients.l ^ (s + 1)) hA f cf ch M hq (trace P s hA Y aY) (normalizedPulledTrace P f s hA aY)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-22",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-d536083ef"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d536083ef",
+  "group": "Q56",
+  "result": "fix",
+  "note": "All node clauses match the Lean: D^b_ctf hypotheses via upstream constructibleFiniteTor; normalized traces; native exchange and projection; TraceCompatible with the pullback unit; C, D, b in the node's order, P_U direction checked; the ∃ hW origin witness in the conclusion holds and is harmless; edge cases and universes ok. The §1(B) FiniteTorAmplitudeSites change is one added import and a superset record (ok). Fault: composition (α) used plain coherence* defs of theorem node lem-pur-compact-support-site-coherence (not a stmt_dep) instead of the recorded originComposition of thm-sf-comp-composition. FIX: new helper originChange (upstream rightDerivedLowerShriekOfCompactificationOriginIso at a representative); composition = changes to the chosen compactifications, originComposition at W, change back; CompactSupportSiteCoherence import dropped; signatures and statement unchanged; lean-record adds originChange with the statement pinned; report bullet corrected. nt_compile: fixed item clean in 57.5 s at load ~118 (the delivered file times out at the same load); dep module clean in 6.4 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261025T205018-L-3089704",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

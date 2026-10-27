@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-derived-chow-transform-restriction",
+ "kind": "statement",
+ "title": "Restriction of a derived Chow graph-kernel transform",
+ "statement": "Let $A$ be a commutative ring, let $X\\to\\operatorname{Spec}A$ be separated and of finite presentation, and let $P=\\mathbf P^n_A$ for $n\\geq0$ [def-pc-scheme, def-pc-morphism-conventions, def-pc-projective-space-twist]. Put $T=X\\times_A P$ with projections $p:T\\to X$ and $q:T\\to P$ [def-pc-fibre-product]. Let $h:Z\\hookrightarrow T$ be a closed immersion, put $b=p\\circ h$ and $c=q\\circ h$, and suppose that opens $U\\subseteq X$ and $V\\subseteq P$ satisfy $W=b^{-1}(U)=c^{-1}(V)$, that $b|_W:W\\to U$ is an isomorphism, and that $c|_W:W\\to V$ is a closed immersion [def-weil-closed-immersion]. Suppose $E\\in D(\\mathcal O_T)$ satisfies $E|_{X\\times_A V}\\simeq(h_*\\mathcal O_Z)[0]|_{X\\times_A V}$ [def-pc-derived-category, def-pc-derived-direct-image]. Set $j=(c|_W)\\circ(b|_W)^{-1}:U\\hookrightarrow V$. For every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ there is an isomorphism in $D(\\mathcal O_V)$\n$$\\left(Rq_*(Lp^*K\\otimes^{\\mathbf L}_{\\mathcal O_T}E)\\right)|_V\\simeq Rj_*(K|_U),$$\nwhere derived pullback and tensor are [def-pc-derived-pullback, def-pc-scheme-derived-tensor-structure].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, displayed derived isomorphism and its proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-direct-image",
+  "def-pc-projective-space-twist",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $T_V=X\\times_A V=q^{-1}(V)$, with inclusion $a:T_V\\hookrightarrow T$, and write $q_V:T_V\\to V$, $p_V=p\\circ a$. Since $h^{-1}(T_V)=c^{-1}(V)=W$, its base change is $i:W\\hookrightarrow T_V$. This is a closed immersion by [lem-pc-closed-imm-base-change]. Put $e=b|_W:W\\xrightarrow{\\sim}U$ and $u:U\\hookrightarrow X$; then $p_Vi=ue$ and $q_Vi=je$ as scheme morphisms, by their components and the definition of $j$.",
+   "uses": [
+    "lem-pc-closed-imm-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "The ordinary module pushforwards for $h$ and $i$ preserve homology of short complexes by [lem-pc-closed-module-pushforward-homology]. Thus they carry quasi-isomorphisms to quasi-isomorphisms: homology in each degree is the homology of the three-term complex in that degree. Applying them to a K-injective resolution therefore gives $Rh_*(\\mathcal O_Z[0])\\simeq(h_*\\mathcal O_Z)[0]$ and $Ri_*(\\mathcal O_W[0])\\simeq(i_*\\mathcal O_W)[0]$, using the resolution definition of [def-pc-ringed-spaces-derived-direct-image]. Apply [lem-pc-restrict-derived-direct-image-open] to $h$ and the open $T_V$. Since $\\mathcal O_Z|_W=\\mathcal O_W$, the assumed kernel isomorphism becomes $E|_{T_V}\\simeq Ri_*(\\mathcal O_W[0])$.",
+   "uses": [
+    "lem-pc-closed-module-pushforward-homology",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-restrict-derived-direct-image-open] to $q$ and $V$, and apply [lem-pc-derived-tensor-open-restriction-natural] to the integrand. Restriction is derived pullback along an open immersion: its structural ring map is an isomorphism, so the tensor expression defining [def-pc-derived-pullback] reduces to exact restriction. The composition comparison [lem-pc-ringed-spaces-derived-pullback-composition] identifies $(Lp^*K)|_{T_V}$ with $Lp_V^*K$. With $M=Lp_V^*K$ the left side of the desired formula is consequently $Rq_{V*}(M\\otimes^L Ri_*(\\mathcal O_W[0]))$.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-tensor-open-restriction-natural",
+    "def-pc-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "Check the projection-formula hypotheses. The affine-local conclusion of [lem-pc-derived-pullback-qcoh-component] for $p_V,K$ covers $T_V$, so $M\\in D_{\\mathrm{QCoh}}(\\mathcal O_{T_V})$ by the local definition [pqf-def-coherent]. Also $\\mathcal O_W[0]\\in D_{\\mathrm{QCoh}}(\\mathcal O_W)$: on $\\operatorname{Spec}B$ its only nonzero cohomology is $\\widetilde B$. The affine description in [def-weil-closed-immersion] gives $i^{-1}(\\operatorname{Spec}R)=\\operatorname{Spec}(R/I)$, hence $i$ is quasi-compact. A closed immersion is a monomorphism: its topological embedding determines the map on points, and its surjective structure-sheaf map determines the map on sheaves. Thus its diagonal is an isomorphism and in particular quasi-compact, so $i$ is quasi-separated by [def-weil-quasi-separated-morphism]. These checks need neither quasi-compactness of $V$ nor finite presentation of $i$.",
+   "uses": [
+    "lem-pc-derived-pullback-qcoh-component",
+    "pqf-def-coherent",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-projection-formula] to $i$, $\\mathcal O_W[0]$ and $M$. The tensor symmetry $F\\otimes^LG\\cong G\\otimes^LF$ of [lem-sc-derived-internal-hom-adjunction] and the unit $\\mathcal O_W[0]$ of [def-pc-scheme-derived-tensor-structure] give $M\\otimes^L Ri_*(\\mathcal O_W[0])\\simeq Ri_*(Li^*M)$. Apply $Rq_{V*}$. By [lem-pc-derived-direct-image-composition] and [lem-pc-ringed-spaces-derived-pullback-composition] the result is $R(q_Vi)_*L(p_Vi)^*K\\simeq R(je)_*Le^*(K|_U)$; here the open pullback $Lu^*K=K|_U$ is the restriction computation already given in step 3.",
+   "uses": [
+    "lem-pc-projection-formula",
+    "lem-sc-derived-internal-hom-adjunction",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-derived-direct-image-composition",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "Derived pullback along $e$ is an equivalence: pullback along its inverse is an inverse by the unital composition isomorphisms of [lem-pc-ringed-spaces-derived-pullback-composition]. Its right adjoint $Re_*$ from [lem-pc-ringed-spaces-derived-adjoint] is therefore an inverse, and $Re_*Le^*(K|_U)\\simeq K|_U$. Finally [lem-pc-derived-direct-image-composition] gives $R(je)_*Le^*(K|_U)\\simeq Rj_*Re_*Le^*(K|_U)\\simeq Rj_*(K|_U)$. Composing the preceding derived isomorphisms proves the assertion in $D(\\mathcal O_V)$.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism",
+  "lem-pc-closed-imm-base-change",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-derived-pullback-qcoh-component",
+  "lem-pc-derived-tensor-open-restriction-natural",
+  "lem-pc-projection-formula",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-internal-hom-adjunction",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Mukai transform with a kernel which is the structure sheaf of a graph restricts to the derived pushforward along that graph",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardId, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor integral transform restricted to a graph equals pushforward of the restriction of the input complex",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, PresheafOfModules.pushforward, PresheafOfModules.pushforward_obj_map_apply', HomologicalComplex.restrictionToTruncGE'_f_eq_iso_hom_iso_inv, HomologicalComplex.restriction, ComplexShape.Embedding.homRestrict.f, HomologicalComplex.restriction_d, HomologicalComplex.restrictionMap",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FourierMukai\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Fourier.Mukai|derived.chow|integralTransform",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed graph kernel on a product of schemes identifies its integral transform with derived direct image on an open neighbourhood",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.kerFunctor_map, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.Scheme.kerAdjunction_counit_app, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral transform with structure sheaf of a graph equals derived direct image of the restricted complex",
+   "results": "8 hits: HomologicalComplex.restriction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.StructureSheaf.comapFun, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, CategoryTheory.Sheaf.natTransΓRes_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace, AlgebraicGeometry.Proj.res_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf functors, restriction of complex shapes, and scheme restriction geometry do not state the derived graph-kernel identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor integral transform with a closed graph structure sheaf kernel restricts to pushforward along the graph",
+   "results": "8 hits: SheafOfModules.pushforwardSections, SheafOfModules.pushforwardSections_coe, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf functors, restriction of complex shapes, and scheme restriction geometry do not state the derived graph-kernel identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula for a closed immersion and restriction of direct image to an open subscheme",
+   "results": "8 hits: AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.morphismRestrict_ι, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE, AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrict_map",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf functors, restriction of complex shapes, and scheme restriction geometry do not state the derived graph-kernel identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-tensor-relative-criterion",
+  "date": "2026-10-23",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSL (lemma-characterize-pseudo-coherent). Supporting argument in Tag 0CSL: Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, displayed derived isomorphism and its proof",
+   "via": [
+    "lem-sfb-pseudocoherent-tensor-relative-criterion",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-derived-chow-transform-restriction",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0CSK into six steps using existing open restriction, exact closed pushforward, tensor restriction, qcqs projection formula and derived composition/adjunction nodes. Checked all hypotheses without assuming the arbitrary opens quasi-compact. No new nodes and no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSL (lemma-characterize-pseudo-coherent). Supporting argument in Tag 0CSL: Tag 0CSK, lemma-compute-Fourier-Mukai-for-derived-chow, displayed derived isomorphism and its proof",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: The ideal sheaf of a base-changed closed immersion"
+   },
+   {
+    "node": "lem-pc-closed-module-pushforward-homology",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: Ordinary closed module pushforward preserves homology"
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: Composition of derived direct images"
+   },
+   {
+    "node": "lem-pc-derived-pullback-qcoh-component",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: Affine-local cohomology of derived pullback"
+   },
+   {
+    "node": "lem-pc-derived-tensor-open-restriction-natural",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: Natural derived tensor comparison for independently localized open restriction"
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: The projection formula"
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: Derived direct image commutes with restriction to opens"
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: Derived pullback is left adjoint to derived direct image"
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: Composition of derived pullbacks"
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-adjunction",
+    "why": "Generic scheme-derived tool for the Stacks 0CSK graph-kernel computation; the ctf stability unit has no structural-sheaf derived counterpart. Used for: Symmetry of the derived tensor product on D(O_X) (its 'Moreover' clause), to put R i_*O_W in the first slot of the projection formula"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-imm-base-change",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-derived-pullback-qcoh-component",
+  "lem-pc-derived-tensor-open-restriction-natural",
+  "lem-pc-projection-formula",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-internal-hom-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-350cd6c08",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-350cd6c08 (reviewer sub-agent of L); spot-checked: Read Stacks more-morphisms.tex lemma-derived-chow and 0CSK (statement and proof), plus 08FE, 08EU and 08DW(1); tags 0D5S, 0D5T, 08KS and 01JY checked. The item statement is unchanged and is a faithful generalization of 0CSK: it drops only f.p. of Z, pseudo-coherence of E and the f.p. conclusion on j, none of which the computation uses. The output is in D(O_V), K is in D_QCoh(O_X), and the citer 0CSL gets what it needs. Steps 1-6 check out against the cited statements: closed base change gives i; exact closed pushforward plus the K-injective definition gives Ri_*O_W=i_*O_W; 08FE restriction for h and q; tensor restriction; open pullback is restriction; the D_QCoh/qcqs hypotheses are checked without quasi-compactness of V; the 08EU projection formula; composition; Le* is an equivalence so Re_*Le*≅id. Edge cases checked: empty U/V, K=0, graph case, non-quasi-compact V, unbounded K. No new nodes and no duplicates (rg -L for 0CSK, derived-chow, 08EU). The nine tool_uses are generic picard derived tools and are accepted. FIX (C4): step 5 used tensor symmetry attributed to def-pc-scheme-derived-tensor-structure, which states no symmetry. I now cite lem-sc-derived-internal-hom-adjunction ('Moreover' K⊗^L L≅L⊗^L K) in the step's uses, proof_deps and tool_uses. Maintainer note: lem-pc-projection-formula states the general qcqs D_QCoh formula (60 citers), but its current NL proof proves only the invertible R^q case and says the general clause 'is not claimed'. That node's proof should be restored.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedChowTransformRestriction",
+  "declaration": "AlgebraicGeometry.derivedChow_transform_restriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedChowTransformRestriction.lean",
+  "statement": "theorem derivedChow_transform_restriction (A : Type u) [CommRing A] (n : ℕ) [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (X P T Z : Scheme.{u}) (f : X ⟶ Spec (.of A)) [IsSeparated f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (eP : P ≅ Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (n + 1))) A) (p : T ⟶ X) (q : T ⟶ P) (_hT : IsPullback p q f (eP.hom ≫ Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) (h : Z ⟶ T) [IsClosedImmersion h] (U : X.Opens) (V : P.Opens) (W : Z.Opens) (hWU : W = (h ≫ p) ⁻¹ᵁ U) (hWV : W = (h ≫ q) ⁻¹ᵁ V) [IsIso ((h ≫ p).resLE U W hWU.le)] [IsClosedImmersion ((h ≫ q).resLE V W hWV.le)] (E : schemeDerivedCategory T) (_hE : Nonempty ((schemeOpenRestriction T (q ⁻¹ᵁ V)).mapDerivedCategory.obj E ≅ (schemeOpenRestriction T (q ⁻¹ᵁ V)).mapDerivedCategory.obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward h).obj (SheafOfModules.unit (moduleRings Z.toRingedSpace)))))) (K : schemeDerivedQCohCategory X) : Nonempty ((schemeOpenRestriction P V).mapDerivedCategory.obj ((schemeDerivedDirectImage q).obj ((derivedPullback p).obj K.obj ⊗ E)) ≅ (schemeDerivedDirectImage (inv ((h ≫ p).resLE U W hWU.le) ≫ (h ≫ q).resLE V W hWV.le)).obj ((schemeOpenRestriction X U).mapDerivedCategory.obj K.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "P is identified with the affine Proj construction by eP, and T with the fibre product by IsPullback. The graph map is explicitly inv(b|W) followed by c|W; open restrictions use the existing schemeOpenRestriction and its induced derived functor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a85036df",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: f.p.=LFP+QC+QS plus IsSeparated; P via eP ≅ Proj.projectiveSpaceOverAffine (ULift (Fin (n+1))) A (Proj A[x0..xn]); T via IsPullback; resLE directions checked (W→U iso, W→V closed immersion); j = inv(b|W) ≫ c|W; kernel hypothesis is restriction to q⁻¹V of singleFunctor 0 of h_*O_Z through schemeOpenRestriction.mapDerivedCategory; K in schemeDerivedQCohCategory; conclusion is a derived iso in D(O_V) with the instance tensor. Universes u/w bound; no extra assumptions; edge cases n=0, A=0, empty U/V, non-qc opens, unbounded K/E covered. Only the lean record changed; lean.statement verbatim; docstrings and 6 proof steps present; sorry only; the AlgebraicSpace variant is a different statement, not a duplicate. Not recompiled per instructions; no files changed."
+ }
+}

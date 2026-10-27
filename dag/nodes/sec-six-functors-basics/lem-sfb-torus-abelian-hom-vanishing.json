@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-torus-abelian-hom-vanishing",
+ "kind": "statement",
+ "title": "No homomorphisms between split tori and abelian varieties",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety], and let $T=\\mathbf G_m^r$ for an integer $r\\geq0$ [def-sc-gm-ga]. Every $k$-group-scheme homomorphism $T\\to A$ is the zero homomorphism, and every $k$-group-scheme homomorphism $A\\to T$ is the zero homomorphism [def-sc-group-scheme]. Here the zero homomorphism is the structure map to $\\operatorname{Spec}k$ followed by the identity section of the target. Equivalently both $\\operatorname{Hom}_{k\\text{-grp}}(T,A)$ and $\\operatorname{Hom}_{k\\text{-grp}}(A,T)$ are trivial groups.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.1(b) and Example 8.4, printed p.149, for affine smooth connected images in an abelian variety; §8(e), printed p.151, for the absence of homomorphisms from complete connected group varieties to affine groups. Apply the homomorphism image factorization of Theorem 5.39, printed pp.108–109."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Write $p_X:X\\to\\operatorname{Spec}k$ for a structure map and $e_X$ for a group identity section. By the definition of $\\mathbf G_m$ and repeated use of the affine fibre-product formula, $T=\\operatorname{Spec}k[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$ is an affine finite-type group scheme. It is a torus under the definition in lem-sfb-multiplicative-type-largest-subtorus, whose statement gives smoothness and connectedness. For $r=0$ the coordinate algebra is $k$ and these assertions still hold. Being affine, $T$ is separated over $k$ by lem-weil-pbc-affine-source-morphism-separated. By def-sc-abelian-variety, $A$ is proper, smooth and connected; in particular it is separated and of finite type.",
+   "uses": [
+    "def-sc-gm-ga",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "def-sc-abelian-variety",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.1(b), Example 8.4, printed p.149; Section 8(e), printed p.151; Theorem 5.39, printed p.108."
+   }
+  },
+  {
+   "text": "Let $f:T\\to A$ be a homomorphism. Apply the homomorphism theorem to obtain $T\\xrightarrow{q}I\\xrightarrow{i}A$ with $i$ a closed immersion, $f=i\\circ q$, and $I=T/N$ as an fppf quotient, where $N=\\ker f$ is a closed normal finite-type subgroup. The closed immersion $N\\hookrightarrow T$ is an affine morphism by def-weil-closed-immersion, so $N$ is affine because $T$ is, by lem-weil-pbc-affine-morphism-permanence(2). Thus the affine normal quotient theorem applies to $N\\subseteq T$: its representing quotient is affine and smooth. It is geometrically connected because $k$ is already algebraically closed and $T$ is connected. The two quotient representations are canonically isomorphic compatibly with $q$, so these properties hold for $I$. No assertion that $N$ itself is smooth is used.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.1(b), Example 8.4, printed p.149; Section 8(e), printed p.151; Theorem 5.39, printed p.108."
+   }
+  },
+  {
+   "text": "The closed immersion $i:I\\hookrightarrow A$ makes $I$ proper over $k$ by lem-weil-pbc-closed-immersion-proper(c). Since $I$ is smooth over a field it is reduced by sbc-lem-smooth-geometrically-reduced. The constant-global-sections theorem now applies: $I$ is nonempty (it has its identity section), proper, reduced and connected, and $k$ is algebraically closed. Its set of connected components is a singleton, so the structural map $k\\to\\Gamma(I,\\mathcal O_I)$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.1(b), Example 8.4, printed p.149; Section 8(e), printed p.151; Theorem 5.39, printed p.108."
+   }
+  },
+  {
+   "text": "Because $I$ is affine, apply the affine-target bijection to the maps $1_I$ and $e_I\\circ p_I:I\\to I$. Their maps on global sections agree: the structure map identifies $\\Gamma(I,\\mathcal O_I)$ with $k$, and every $k$-algebra endomorphism of $k$ is the identity. Thus $1_I=e_I\\circ p_I$. Substituting into the factorization gives $f=i\\circ e_I\\circ p_I\\circ q=e_A\\circ p_T$, since $i$ preserves identity sections and $q$ is over $k$. This is equality of scheme morphisms, not just equality on $k$-points.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.1(b), Example 8.4, printed p.149; Section 8(e), printed p.151; Theorem 5.39, printed p.108."
+   }
+  },
+  {
+   "text": "For a homomorphism $g:A\\to T$, smoothness of $A$ gives reducedness by sbc-lem-smooth-geometrically-reduced. Properness, connectedness and the identity section of $A$ give $\\Gamma(A,\\mathcal O_A)=k$ via the constant-global-sections theorem. The affine-target bijection, applied to affine $T$, therefore expresses $g$ as $c\\circ p_A$ for a $k$-point $c:\\operatorname{Spec}k\\to T$: its section map is the composite $\\Gamma(T,\\mathcal O_T)\\xrightarrow{c^\\sharp}k\\to\\Gamma(A,\\mathcal O_A)$. Composing with $e_A$ gives $c=g\\circ e_A=e_T$, because $g$ is a group homomorphism and $p_A\\circ e_A=1$. Hence $g=e_T\\circ p_A$, the zero homomorphism. Both Hom groups therefore contain just their zero element.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.1(b), Example 8.4, printed p.149; Section 8(e), printed p.151; Theorem 5.39, printed p.108."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-ga",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "def-sc-abelian-variety",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-weil-pbc-closed-immersion-proper",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.1(b), Example 8.4, printed p.149; Section 8(e), printed p.151; Theorem 5.39, printed p.108."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism between an abelian variety and an algebraic torus in either direction is trivial",
+   "results": "{\"t\": \"2026-10-23T09:42:35Z\", \"tool\": \"leanfinder\", \"query\": \"Every homomorphism between an abelian variety and an algebraic torus in either direction is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.doubleDualEmb_eq_zero\", \"RootDatum\", \"AddCommGrpCat.enoughInjectives\", \"AddChar.doubleDualEmb_bijective\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"CharacterModule.int\", \"CharacterModule\", \"CharacterModule.instFunLikeAddCircleRatOfNat\"], \"digest\": \"390e689fab6d9f18\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "\\btorus\\b|\\btori\\b|AbelianVariety|abelian.variety|diagonalizable",
+   "results": "{\"t\": \"2026-10-23T09:44:54Z\", \"tool\": \"grep\", \"query\": \"\\\\btorus\\\\b|\\\\btori\\\\b|AbelianVariety|abelian.variety|diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/Algebra/Module/Lattice.lean\", \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\"], \"digest\": \"066bf1747131698c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms between an algebraic torus and an abelian variety vanish in both directions",
+   "results": "{\"t\": \"2026-10-23T09:44:55Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms between an algebraic torus and an abelian variety vanish in both directions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom\", \"AddMonoidHom.toMultiplicative''\", \"WeierstrassCurve.Affine.Point.map_zero\", \"AlgHom.default_apply\", \"AddCommGrpCat.Hom\", \"CategoryTheory.Monad.Algebra.Hom.ext_iff\", \"instInhabitedAddHom\", \"AddCommGrpCat.Hom.hom'\"], \"digest\": \"f59ea1bb154109c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"abelian\"",
+   "results": "{\"t\": \"2026-10-23T09:44:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"abelian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.instIsGrothendieckAbelian\", \"AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology\", \"AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology\", \"AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_affineEtaleTopology\", \"AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instIsGrothendieckAbelianSheafProEtTopologyAb\"], \"digest\": \"4adb3f8f1267e1bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a smooth connected affine algebraic group to an abelian variety is zero and Hom from a proper connected group variety to an affine group is zero",
+   "results": "{\"t\": \"2026-10-23T09:44:57Z\", \"tool\": \"leanfinder\", \"query\": \"Hom from a smooth connected affine algebraic group to an abelian variety is zero and Hom from a proper connected group variety to an affine group is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineHom\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_le_isAffineHom\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"AlgebraicGeometry.AffineTargetMorphismProperty.ext\", \"AlgebraicGeometry.HasRingHomProperty.appTop\"], \"digest\": \"d0b3463d67d46d2a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAbelianVariety\"",
+   "results": "{\"t\": \"2026-10-23T11:37:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsAbelianVariety\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group homomorphisms, character modules, or affine scheme morphisms; none gives vanishing for these group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|\\btorus\\b|\\btori\\b",
+   "results": "{\"t\": \"2026-10-23T11:37:13Z\", \"tool\": \"grep\", \"query\": \"AbelianVariety|\\\\btorus\\\\b|\\\\btori\\\\b\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group homomorphisms, character modules, or affine scheme morphisms; none gives vanishing for these group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism between a split algebraic torus and an abelian variety is zero in both directions",
+   "results": "{\"t\": \"2026-10-23T11:37:16Z\", \"tool\": \"leanfinder\", \"query\": \"Every homomorphism between a split algebraic torus and an abelian variety is zero in both directions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits\", \"CharacterModule.dual_zero\", \"RootDatum\", \"AddChar.doubleDualEmb_eq_zero\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"Field.absoluteGaloisGroupAbelianization\"], \"digest\": \"3007fb65513b9cb6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group homomorphisms, character modules, or affine scheme morphisms; none gives vanishing for these group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic groups from a torus to an abelian variety or from an abelian variety to a torus is trivial",
+   "results": "{\"t\": \"2026-10-23T11:37:16Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of algebraic groups from a torus to an abelian variety or from an abelian variety to a torus is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGrpCat.instZeroHom_1\", \"AddCommGrpCat.mono_iff_ker_eq_bot\", \"AddGrpCat.ker_eq_bot_of_mono\", \"AddGrpCat.mono_iff_ker_eq_bot\", \"GrpCat.mono_iff_ker_eq_bot\", \"MonoidHom.ker_eq_top_iff\", \"CommGrpCat.mono_iff_ker_eq_bot\", \"AddGrpCat.instZeroHom\"], \"digest\": \"06f38d740a3a386f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group homomorphisms, character modules, or affine scheme morphisms; none gives vanishing for these group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a smooth connected affine algebraic group into a complete group variety is trivial and a morphism from a complete connected group variety into an affine group is constant",
+   "results": "{\"t\": \"2026-10-23T11:45:11Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a smooth connected affine algebraic group into a complete group variety is trivial and a morphism from a complete connected group variety into an affine group is constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineHom\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"AlgebraicGeometry.AffineTargetMorphismProperty.ext\"], \"digest\": \"b7a0883bdf5a5f8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group homomorphisms, character modules, or affine scheme morphisms; none gives vanishing for these group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-hom-finite-free",
+  "date": "2026-10-23",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties.",
+   "via": [
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-torus-abelian-hom-vanishing",
+  "worker": "stage1",
+  "summary": "Checked Milne Proposition 8.1(b), Example 8.4 and Section 8(e). Retained the statement. Factored the torus homomorphism through its affine smooth connected image, and proved both vanishings using proper reduced global functions and affine-target adjunction; created only the missing general homomorphism theorem.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Steps 1–4 carry the affine-image argument in Milne 8.4 and step 5 carries Section 8(e). The inherited created.item chain has no blueprint ancestor (blueprint_refs.py ancestor returns None), so the inherited null from.node is retained.",
+  "tool_uses": [
+   {
+    "node": "def-sc-gm-ga",
+    "why": "Defines the multiplicative group used in the split torus."
+   },
+   {
+    "node": "def-sc-abelian-variety",
+    "why": "Supplies properness, smoothness and connectedness of A."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic closed-subscheme properness, not a replacement for the unit alteration route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-over-field reducedness used for I and A."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic proper reduced global functions; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic affine-target universal property used to turn section calculations into scheme morphism equalities."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic formula for finite products of affine spectra, used to exhibit the split torus as an affine finite-type scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-gm-ga",
+  "def-sc-abelian-variety",
+  "lem-weil-pbc-closed-immersion-proper",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-df2b532e9",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-df2b532e9 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement, and checked them against Milne iAG 2017 Thm 5.39 (p.108, the homomorphism theorem with I=G/N), §8(e) (p.151) and 8.1(b)/8.4. New node lem-sfb-algebraic-group-homomorphism-factorization is correct as stated, with all definitions cited. It is not a duplicate: lem-sc-image-subgroup needs a proper source, affine-normal-quotient-geometry has no image identification, abelian-hom-image-dimension has an abelian source, and lem-ag-homomorphism-image-closed is for reduced matrix groups. It is not a restatement of the item. Steps 1-5 check out: T is a torus, so smooth and connected; f factors through I=T/N, which is affine, smooth and connected; I is proper as closed in A, reduced as smooth over a field, so Γ=k by 0BUG; 01I1 gives 1_I=e_I p_I, so f=0; A→T factors through a k-point equal to e_T. Small cases checked: r=0, dim A=0, Frobenius kernel μ_p. Two missing citations fixed in the item: step 1 never said T is separated, which the new theorem needs (added lem-weil-pbc-affine-source-morphism-separated); step 2 never justified N affine (added def-weil-closed-immersion and lem-weil-pbc-affine-morphism-permanence(2)). proof_deps updated. Batch-5 flag lem-weil-pbc-proper-reduced-algclosed-global-sections-product is Stacks 0BUG, general scheme theory; its closure reaches def-trf-schematically-dense-open only as a general definition, not as a trace-formula or Poincaré-duality step, so it is accepted. No SGA is cited and there is no re-split note.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusAbelianHomVanishing",
+  "declaration": "AlgebraicGeometry.torus_abelian_hom_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusAbelianHomVanishing.lean",
+  "statement": "theorem torus_abelian_hom_vanishing (k : Type u) [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (r : ℕ) : (∀ (f : (MultiplicativeType.splitTorus k r).X ⟶ A) [IsMonHom f], f = CartesianMonoidalCategory.toUnit _ ≫ MonObj.one) ∧ (∀ (g : A ⟶ (MultiplicativeType.splitTorus k r).X) [IsMonHom g], g = CartesianMonoidalCategory.toUnit _ ≫ MonObj.one)",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c03e5aeb",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Statement matches node: k [Field][IsAlgClosed]; A : Over (Spec k) [GrpObj][IsAbelianVariety] (proper+smooth+connected, no extras); T = landed MultiplicativeType.splitTorus k r (iterated G_m product, unit at r=0); both conjuncts quantify IsMonHom maps and equate them with toUnit ≫ MonObj.one as Over-morphisms. Edge cases r=0, dim A=0, char p covered; single universe; lean.statement verbatim; only node change adds landed stmt_dep def-sfb-tori-multiplicative-type plus the lean record; other dep records identical to live; private proof-dep imports exist on live; no defs, sorry-only proof, source/blueprint docstrings with the 5 proof steps; not a no-op redelivery. No compile: I changed no file."
+ }
+}
